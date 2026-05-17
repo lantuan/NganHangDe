@@ -1,48 +1,3 @@
-# QUY TẮC CODE LATEX
-
----
-
-# CẤU TRÚC ĐỀ
-Đề gồm 4 phần:
-1. Trắc nghiệm nhiều lựa chọn: 12 câu
-2. Đúng sai: 2 câu
-3. Trả lời ngắn: 4 câu
-4. Tự luận: 3 câu
-
----
-
-# MỨC ĐỘ
-- NB  : Nhận biết
-- TH  : Thông hiểu
-- VD  : Vận dụng
-- VDC : Vận dụng cao
-
----
-
-# PHÂN BỐ MỨC ĐỘ
-
-## Trắc nghiệm (12 câu)
-- NB  : 4 câu (câu 1–4)
-- TH  : 4 câu (câu 5–8)
-- VD  : 3 câu (câu 9–11)
-- VDC : 1 câu (câu 12)
-
-## Đúng sai (2 câu)
-- Mỗi câu gồm 4 ý theo thứ tự:
-  - Ý a) : NB hoặc TH
-  - Ý b) : NB hoặc TH
-  - Ý c) : VD
-  - Ý d) : VDC
-
-## Trả lời ngắn (4 câu)
-- VD  : 3 câu
-- VDC : 1 câu
-
-## Tự luận (3 câu)
-- VD  : 1 câu
-- VDC : 2 câu
-
----
 
 # QUY TẮC CHUNG
 - Dùng UTF-8
@@ -123,7 +78,7 @@ Không được thiếu ý, không được thừa ý.
 ## Quan hệ giữa các ý
 Các ý phải liên kết logic theo cấu trúc:
 - Ý a) : Khởi tạo dữ kiện
-- Ý b) : Khai thác dữ kiện
+- Ý b) : Khai thác dữ kiện hoặc Khởi tạo dữ kiện 2
 - Ý c) : Vận dụng dữ kiện
 - Ý d) : Tổng hợp nâng cao
 
@@ -175,6 +130,7 @@ Cho hàm số $f(x) = 2x + 1$. Tính $f\left( \dfrac{1}{3} \right)$. (Làm tròn
 $f\left( \dfrac{1}{3} \right) = 2 \cdot \dfrac{1}{3} + 1 \approx 1{,}67$
 }
 \end{ex}
+
 ---
 
 # TỰ LUẬN
@@ -184,6 +140,20 @@ $f\left( \dfrac{1}{3} \right) = 2 \cdot \dfrac{1}{3} + 1 \approx 1{,}67$
 ...
 \loigiai{
 ...
+}
+\end{ex}
+
+## Quy tắc đáp án
+Phải chia barem điểm. 
+Mỗi câu tự luận 1 điểm.
+Ý nhỏ nhất 0.25 điểm.
+
+## Ví dụ hoàn chỉnh
+\begin{ex}%[VD]
+Cho hàm số $f(x) = 2x + 1$. Tính $f(0{,}25)$.
+\shortans{$1,5$}
+\loigiai{
+$f(0{,}25) = 2 \cdot 0{,}25 + 1 = 0{,}5 + 1 = 1{,}5$
 }
 \end{ex}
 
