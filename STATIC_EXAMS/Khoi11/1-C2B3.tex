@@ -1,0 +1,798 @@
+\section{Cấp số nhân}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-B15]
+\caulc
+%%%=====Câu 1
+\begin{ex}%[1D2N3-2] 
+Trong các dãy số sau, dãy số nào \textbf{không} phải là một cấp số nhân?
+\choice
+{$2;\, 4;\, 8;\, 16; \ldots$}
+{$1;\,-1;\,1;\,-1; \ldots$}
+{\True $1^2 ;\, 2^2 ;\, 3^2 ;\, 4^2 ; \ldots$}
+{$a;\, a^3;\, a^5;\, a^7; \ldots(a\ne 0)$}
+\loigiai{
+Các dãy $\heva{&2 ;\, 4 ;\, 8 ;\, 16 ; \ldots\\
+&1;\,-1;\,1;\,-1; \ldots\\
+&a;\, a^3;\, a^5;\, a^7;\, \ldots(a\ne 0)}$ đều là các cấp số nhân.\\
+Xét dãy  $1^2 ;\, 2^2 ;\, 3^2 ;\, 4^2 ; \cdots \Rightarrow \dfrac{u_2}{u_1}=4 \neq \dfrac{9}{4}=\dfrac{u_3}{u_2}$ nên không phải là cấp số nhân.
+\begin{itemize}
+	\item 	$2;\, 4;\, 8;\, 16; \ldots$ là cấp số nhân và $u_n=2^n$.
+	\item 	$1;\,-1;\,1;\,-1; \ldots$ là cấp số nhân và $u_n=(-1)^n$.
+	\item Ta có $\dfrac{2^2}{1^2}\neq \dfrac{3^2}{2^2}$ nên dãy số $1^2 ;\, 2^2 ;\, 3^2 ;\, 4^2 ; \ldots$ không phải là cấp số nhân.
+	\item 	$a;\, a^3;\, a^5;\, a^7;\, \ldots(a\ne 0)$ là cấp số nhân và $u_n=a^{2 n-1}=\dfrac{1}{a} \cdot\left(a^2\right)^n$.
+\end{itemize}
+}
+\end{ex}
+
+%%=====Câu 2
+\begin{ex}%[1D2N3-2] 
+Dãy số nào sau đây \textbf{không} phải là cấp số nhân?
+\choice
+{$1 ;\, 2 ;\, 4 ;\, 8 ; \ldots$}
+{$3 ;\, 3^2 ;\, 3^3 ;\, 3^4 ;\, \ldots$}
+{$4 ;\, 2 ;\, \dfrac{1}{2} ;\, \dfrac{1}{4} ; \ldots$}
+{\True $\dfrac{1}{\pi} ;\, \dfrac{1}{\pi^2} ;\, \dfrac{1}{\pi^4} ;\, \dfrac{1}{\pi^6} ; \ldots$}
+\loigiai{
+Xét $1 ;\, 2 ;\, 4 ;\, 8 ; \ldots$ là cấp số nhân công bội là $2$.\\
+Xét $3 ;\, 3^2 ;\, 3^3 ;\, 3^4 ;\, \ldots$ là cấp số nhân công bội là $3$.\\
+Xét $4 ;\, 2 ;\, \dfrac{1}{2} ;\, \dfrac{1}{4} ; \ldots$ là cấp số nhân công bội là $\dfrac{1}{2}$.\\
+Xét $\dfrac{1}{\pi} ;\, \dfrac{1}{\pi^2} ;\, \dfrac{1}{\pi^4} ;\, \dfrac{1}{\pi^6} ; \ldots$ không là cấp số nhân vì $\dfrac{u_2}{u_1}=\dfrac{1}{\pi} \neq \dfrac{1}{\pi^2}=\dfrac{u_3}{u_2}$.\\
+}
+\end{ex}
+
+%%=====Câu 3
+\begin{ex}%[1D2N3-2] 
+Dãy số $1 ;\, 2 ;\, 4 ;\, 8 ;\, 16 ;\, 32 ; \ldots$ là một cấp số nhân với
+\choice
+{Công bội là $3$ và số hạng đầu tiên là $1$}
+{\True Công bội là $2$ và số hạng đầu tiên là $1$}
+{Công bội là $4$ và số hạng đầu tiên là $2$}
+{Công bội là $2$ và số hạng đầu tiên là $2$}
+\loigiai{
+Cấp số nhân $1 ;\, 2 ;\, 4 ;\, 8 ;\, 16 ;\, 32 ; \ldots$ có $\heva{& u_1=1 \\& q=\dfrac{u_2}{u_1}=2}$.
+}
+\end{ex}
+
+%%=====Câu 4
+\begin{ex}%[1D2N3-4] 
+Cho cấp số nhân $\left(u_n\right)$ với $u_1=-2$ và $q=-5$. Viết bốn số hạng đầu tiên của cấp số nhân.
+\choice
+{$-2 ; 10 ; 50 ;-250$}
+{\True $-2 ; 10 ;-50 ; 250$}
+{$-2 ;-10 ;-50 ;-250$}
+{$-2 ; 10 ; 50 ; 250$}
+\loigiai{
+Ta có $\heva{& u_1=-2 \\& q=-5}\Leftrightarrow \heva{&u_1=-2 \\
+	& u_2=u_1 q=10 \\
+	& u_3=u_2 q=-50 \\
+	& u_4=u_3 q=250}$.
+}
+\end{ex}
+%%=====Câu 5
+\begin{ex}%[1D3H2-4]
+Một cấp số nhân có hai số hạng liên tiếp là $16$ và $36$. Số hạng tiếp theo là
+
+\choice
+{$720$}
+{\True $81$}
+{$64$}
+{$56$}
+\loigiai{
+Ta có cấp số nhân $\left(u_n\right)$ có
+$
+\heva{
+	& u_k=16 \\
+	& u_{k+1}=36
+} \Rightarrow q=\dfrac{u_{k+1}}{u_k}=\dfrac{9}{4} \Rightarrow u_{k+2}=u_{k+1} q=81
+$.
+}
+\end{ex}
+
+%%=====Câu 6
+\begin{ex}%[1D2N3-2]
+Trong các dãy số sau đây dãy số nào là cấp số nhân?
+\choice
+{\True Dãy số $-2,\,2,\,-2,\,2, \ldots,-2,2,-2,2, \ldots$}
+{Dãy số $\left(u_n\right)$, xác định bởi công thức $u_n=3^n+1$ với $n \in \mathbb{N^*}$}
+{Dãy số $\left(u_n\right)$, xác định bởi hệ: $\heva{&u_1=1 \\ &u_n=u_{n-1}+2\left(n \in \mathbb{N^*};\, n \geq 2\right)}$}
+{Dãy số các số tự nhiên $1,\, 2,\, 3,\ldots$}
+\loigiai{
+Dãy số $-2,\,2,\,-2,\,2, \ldots,-2,2,-2,2, \ldots$ là cấp số nhân với số hạng đầu $u_1=-2$ , công bội $q=-1$.\\
+Dãy số $\left(u_n\right)$ xác định bởi công thức $u_n=3^n+1$ có $u_1=3^1+1=4$, $u_2=3^2+1=10$, $u_3=3^3+1=28$.\\
+\begin{nx}
+	$\dfrac{u_3}{u_2} \neq \dfrac{u_2}{u_1}$ nên $\left(u_n\right)$ không là cấp số nhân.
+\end{nx}
+Dãy số $\left(u_n\right)$, xác định bởi hệ $\heva{&u_1=1 \\ &u_n=u_{n-1}+2\left(n \in \mathbb{N*};\, n \geq 2\right)}$ có $u_1=1, u_1=3, u_3=5$.\\
+\begin{nx}
+	$\dfrac{u_3}{u_2} \neq \dfrac{u_2}{u_1}$ nên $\left(u_n\right)$ không là cấp số nhân.
+\end{nx}
+Dãy số các số tự nhiên $1,2,3, \ldots$. có $u_1=1, u_1=2, u_3=3$. 
+\begin{nx}
+	$\dfrac{u_3}{u_2} \neq \dfrac{u_2}{u_1}$ nên không là cấp số nhân.
+\end{nx} 
+}
+\end{ex}
+%%=====Câu 7
+\begin{ex}%[1D2H3-4]
+Cho cấp số nhân $\left(u_n\right)$ có số hạng đầu $u_1=\dfrac{1}{2}$ và công bội $q=3$. Tìm $u_5$
+\choice
+{\True $\dfrac{81}{2}$}
+{$\dfrac{163}{2}$}
+{$\dfrac{27}{2}$}
+{$\dfrac{55}{2}$}
+\loigiai{
+Áp dụng công thức số hạng tổng quát $u_n=u_1 q^{n-1}(n \in \mathbb{N},\, n \geq 2)$.\\
+Do đó $u_5=u_1 q^4 \Rightarrow u_5=\dfrac{1}{2} \cdot 3^4=\dfrac{81}{2}$.
+}
+\end{ex}
+
+%%=====Câu 8
+\begin{ex}%[1D2H3-2]
+Cho cấp số nhân $\left(u_n\right)$ thỏa mãn $u_1=3,\, u_5=48$. Công bội của cấp số nhân bằng
+\choice
+{$16$}
+{$-2$}
+{$2$}
+{\True$\pm 2$}
+\loigiai{
+Gọi $q$ là công bội của cấp số nhân $\left(u_n\right)$.\\
+Với $u_1=3$, $u_5=48$ suy ra $\heva{&u_1=3 \\& u_1 \cdot q^4=48} \Leftrightarrow\heva{&u_1=3 \\& q^4=16} \Leftrightarrow\heva{&u_1=3 \\ &q= \pm 2}$.\\
+Vậy công bội của cấp số nhân $\left(u_n\right)$ là $q= \pm 2$.
+}
+\end{ex}
+
+%%=====Câu 9
+\begin{ex}%[1D2H3-4]
+Cho cấp số nhân $\left(u_n\right)$ với $u_1=-4$ và công bội $q=5$. Tính $u_4$.
+\choice
+{$u_4=600$}
+{\True  $u_4=-500$}
+{$u_4=200$}
+{$u_4=800$}
+\loigiai{
+Áp dụng công thức tính số hạng tổng quát của cấp số nhân ta có
+$$
+u_4=u_1 \cdot q^3=(-4)\cdot 5^3=-500.
+$$
+Vậy $u_4=-500$.
+}
+\end{ex}
+
+%%=====Câu 10
+\begin{ex}% [1D2H3-5]
+Cho dãy số $\dfrac{-1}{\sqrt{2}};\, \sqrt{b};\, \sqrt{2}$. Chọn $b$ để dãy số đã cho lập thành cấp số nhân?
+
+\choice
+{ $b=-1$}
+{$b=1$}
+{$b=2$}
+{\True Không có giá trị nào của $b$}
+\loigiai{
+Dãy số đã cho lập thành cấp số nhân khi $\heva{&b \geq 0 \\& b=-\dfrac{1}{\sqrt{2}} \cdot \sqrt{2}=-1}$.\\ 
+Vậy không có giá trị nào của $b$.
+}
+\end{ex}
+
+%%=====Câu 11
+\begin{ex}%[1D2H3-4]
+Giả sử $\dfrac{\sin \alpha}{6},\, \cos \alpha,\, \tan \alpha$ theo thứ tự đó là một cấp số nhân. Tính $\cos 2 \alpha$.
+\choice
+{$-\dfrac{\sqrt{3}}{2}$}
+{$\dfrac{1}{2}$}
+{\True $-\dfrac{1}{2}$}
+{$\dfrac{\sqrt{3}}{2}$}
+\loigiai{
+Điều kiện $\cos \alpha \neq 0 \Leftrightarrow \alpha \neq \dfrac{\pi}{2}+k \pi(k \in \mathbb{Z}$).\\
+Theo tính chất của cấp số nhân, ta có 
+$$\begin{aligned}
+	&\cos ^2 \alpha=\dfrac{\sin \alpha}{6} \cdot \tan \alpha\\
+	&\Leftrightarrow 6 \cos ^2 \alpha=\dfrac{\sin ^2 \alpha}{\cos \alpha}\\
+	&\Leftrightarrow 6 \cos ^3 \alpha-\sin ^2 \alpha=0\\
+	&\Leftrightarrow 6 \cos ^3 \alpha+\cos ^2 \alpha-1=0\\
+	&\Leftrightarrow\cos \alpha=\dfrac{1}{2}.
+\end{aligned}$$
+Ta có $\cos 2 \alpha=2 \cos ^2 \alpha-1=2 \cdot\left(\dfrac{1}{2}\right)^2-1=-\dfrac{1}{2}$.
+}
+\end{ex}
+
+%%=====Câu 12
+\begin{ex}%[1D2H3-6]
+Cho năm số $a,\, b,\, c,\, d,\, e$ tạo thành một cấp số nhân theo thứ tự đó và các số đều khác $0$, biết $\dfrac{1}{a}+\dfrac{1}{b}+\dfrac{1}{c}+\dfrac{1}{d}+\dfrac{1}{e}=10$ và tổng của chúng bằng $40$. Tính giá trị $|S|$ với $S=a b c d e$.
+\choice
+{$|S|=52$}
+{$|S|=42$}
+{$|S|=62$}
+{\True $|S|=32$}
+\loigiai{
+Gọi $q(q \neq 0)$ là công bội của cấp số nhân $a,\, b,\, c,\, d,\, e$. Khi đó $\dfrac{1}{a},\, \dfrac{1}{b},\, \dfrac{1}{c},\, \dfrac{1}{d}$,\, $\dfrac{1}{e}$ là cấp số nhân có công bội $\dfrac{1}{q}$.\\
+Theo đề bài ta có
+$$
+\heva{
+	&a + b + c + d + e = 4 0\\
+	&\dfrac { 1 } { a } + \dfrac { 1 } { b } + \dfrac { 1 } { c } + \dfrac { 1 } { d } + \dfrac { 1 } { e } = 1 0
+} 
+\Leftrightarrow \heva{
+	&a \cdot \dfrac { 1 - q ^ { 5 } } { 1 - q } = 4 0  \\
+ 	&\dfrac { 1 - ( \dfrac { 1 } { q } ) ^ { 5 } } { a } \cdot \dfrac { 1 - \dfrac { 1 } { q } } { 1 } = 1 0
+} 
+\Leftrightarrow \heva{
+	&a \cdot \dfrac{1-q^5}{1-q}=40 \\
+	&\dfrac{1}{a} \cdot \dfrac{q^5-1}{q^4(q-1)}=10
+} 
+\Leftrightarrow a^2 q^4=4.
+$$
+Ta có $S=a b c d e=a \cdot a q \cdot a q^2 \cdot a q^3 \cdot a q^4=a^5 q^{10}$.\\
+Nên $S^2=\left(a^5 q^{10}\right)^2=\left(a^2 q^4\right)^5=4^5$.\\
+Suy ra $|S|=\sqrt{4^5}=32$.\\
+}
+\end{ex}
+
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-B15-DS]
+
+
+
+%%=====Câu 1
+\begin{ex}%[1D2N3-2] 
+Cho các dãy số sau đây  ${u_n=(\sqrt{5})^{2 n-3}}$; ${v_n=\dfrac{2}{n}}$;${w_n=\dfrac{3^{n+1}}{2^n}}$ và dãy số hữu hạn gồm các số hạng ${16 ; 4 ; 1 ; \dfrac{1}{4} ; \dfrac{1}{16} ; \dfrac{1}{64}}$. Khi đó
+\choiceTF
+{\True ${\left(u_n\right)}$ là một cấp số nhân công bội ${q=5}$}
+{\True ${\left(v_n\right)}$ không phải là một cấp số nhân}
+{\True ${\left(w_n\right)}$ là một cấp số nhân có số hạng đầu $w=\dfrac{9}{2}$}
+{Dãy số hữu hạn đã cho theo thứ tự lập thành cấp số nhân có công bội bằng $\dfrac{1}{8}$}
+\loigiai{
+\begin{enumerate}
+	\item Ta có $u_{n+1}={{(\sqrt{5})}^{2(n+1)-3}}={{(\sqrt{5})}^{2n-1}}\Rightarrow \dfrac{{{u}_{n+1}}}{{{u}_{n}}}=\dfrac{{{(\sqrt{5})}^{2n-1}}}{{{(\sqrt{5})}^{2n-3}}}={{(\sqrt{5})}^{2}}=5,\forall n\in \mathbb{N}^{*}$.\\
+	Do đó ${\left(u_n\right)}$ là một cấp số nhân có số hạng đầu ${u_1=\dfrac{1}{\sqrt{5}}}$ với công bội ${q=5}$.
+	\item Ta có ${v_{n+1}=\dfrac{2}{n+1} \Rightarrow \dfrac{v_{n+1}}{v_n}=\dfrac{n}{n+1}}$ (tỉ số này còn phụ thuộc vào ${n}$).\\
+	Do đó ${\left(v_n\right)}$ không phải là một cấp số nhân.
+	\item Ta có $w_{n+1}=\dfrac{3^{n+2}}{2^{n+1}}=\dfrac{3}{2} \cdot \dfrac{3^{n+1}}{2^n} \Rightarrow \dfrac{w_{n+1}}{w_n}=\dfrac{\dfrac{3}{2} \cdot \dfrac{3^{n+1}}{2^n}}{\dfrac{3^{n+1}}{2^n}}=\dfrac{3}{2}, \forall n \in \mathbb{N}^*$.\\
+	Do đó ${\left(w_n\right)}$ là một cấp số nhân có số hạng đầu ${w_1=\dfrac{3^2}{2^1}=\dfrac{9}{2}}$ với công bội ${q=\dfrac{3}{2}}$
+	\item Đặt $u_1=16 ; u_2=4 ; u_3=1 ; u_4=\dfrac{1}{4} ; u_5=\dfrac{1}{16} ; u_6=\dfrac{1}{64}$.\\
+	Ta có ${u_2=u_1 \cdot \dfrac{1}{4};\, u_3=u_2 \cdot \dfrac{1}{4};\, u_4=u_3 \cdot \dfrac{1}{4};\, u_5=u_4 \cdot \dfrac{1}{4};\, u_6=u_5 \cdot \dfrac{1}{4}}$. \\
+	Vì vậy dãy số hữu hạn đã cho theo thứ tự lập thành cấp số nhân có công bội bằng ${\dfrac{1}{4}}$.
+\end{enumerate}
+}
+\end{ex}
+
+%%=====Câu 2
+\begin{ex}%[1D2H3-2] 
+Cho cấp số nhân ${\left(u_n\right)}$ với công bội ${q<0}$ và ${u_2=4, u_4=9}$. Khi đó
+\choiceTF
+{\True Số hạng đầu ${u_1=-\dfrac{8}{3}}$}
+{Số hạng $u_5=\dfrac{27}{2}$}
+{$-\dfrac{2187}{32}$ là số hạng thứ $8$}
+{Cấp số nhân có công bội ${q=-\dfrac{3}{2}}$}
+\loigiai{
+Ta có ${u_2=u_1 q=4,\, u_4=u_1 q^3=9 \Rightarrow \dfrac{u_4}{u_2}=\dfrac{u_1 q^3}{u_1 q} \Rightarrow \dfrac{9}{4}=q^2 \Rightarrow q=-\dfrac{3}{2}(q<0)}$.\\
+Thay ${q=-\dfrac{3}{2}}$ vào ${u_2}$, ta được ${u_1\left(-\dfrac{3}{2}\right)=4 \Rightarrow u_1=-\dfrac{8}{3}}$.\\
+Vậy cấp số nhân đã cho có số hạng đầu ${u_1=-\dfrac{8}{3}}$ và công bội ${q=-\dfrac{3}{2}}$.\\
+Khi đó ${{u}_{n}}=-\dfrac{8}{3}\cdot{{\left( -\dfrac{3}{2} \right)}^{n-1}}$.\\
+Vậy $u_5=-\dfrac{27}{2}$.\\
+Do $-\dfrac{2187}{32}\ne -\dfrac{8}{3}\cdot{{\left( -\dfrac{3}{2} \right)}^{7}}$ nên không phải là số hạng thứ $8$.
+}
+\end{ex}
+
+%%=====Câu 3
+\begin{ex}%[1D2H3-6]
+Cho cấp số nhân ${\left(u_n\right)}$, biết $u_1+u_5=51;\, u_2+u_6=102$. Khi đó
+\choiceTF
+{\True Số hạng $u_1=3$}
+{Số hạng $u_4=48$}
+{Số $12288$ là số hạng thứ $12$ của cấp số nhân ${\left(u_n\right)}$}
+{\True Tổng tám số hạng đầu của cấp số nhân là $765$}
+\loigiai{
+	\begin{enumerate}
+		\item Gọi ${q}$ là công bội của cấp số nhân đã cho.\\ 
+		Ta có
+		$\heva{
+			&u_1+u_5=51  \\
+			&u_2+u_6=102
+		}
+		\Leftrightarrow \heva{
+			&u_1+u_1q^4=51  \\
+			&u_1q+u_1q^5=102
+		}
+		\Leftrightarrow \heva{
+			&u_1\left( 1+q^4 \right)=51& (1)\\
+			&u_1q\left( 1+q^4 \right)=102&(2)}$.
+		\begin{nx}
+			Nếu ${u_1=0}$ hay ${q=0}$ thì $(1)$ và $(2)$ đều không thoả mãn, vì vậy ta có ${u_1 q \neq 0}$. Chia theo vế $(2)$ cho $(1)$, ta được ${q=2}$.\\
+			Thay ${q=2}$ vào $(1)$ suy ra ${u_1=\dfrac{51}{1+2^4}=3}$.\\
+			Công thức số hạng tổng quát của cấp số nhân ${u_n=3 \cdot 2^{n-1}}$.
+		\end{nx}
+		\item $u_4={3\cdot 2}^3=24$.
+		\item Xét ${u_n=12288 \Leftrightarrow 3\cdot 2^{n-1}=12288 \Leftrightarrow 2^{n-1}=2^{12} \Leftrightarrow n=13}$.
+		Vậy $12288$ là số hạng thứ $13$ của cấp số nhân đã cho.
+		\item Tổng tám số hạng đầu của cấp số nhân là $S_8=\dfrac{u_1\left( 1-q^8 \right)}{1-q}=\dfrac{3\cdot \left( 1-2^8 \right)}{1-2}=765$.
+	\end{enumerate}
+}
+\end{ex}
+
+%%=====Câu 4
+\begin{ex}%[1D2H3-6]
+Cho cấp số nhân ${\left(u_n\right)}$ thoả mãn $\heva{&u_4=\dfrac{2}{27} \\ &u_3=243 u_8}$. Khi đó
+\choiceTF
+{Số hạng $u_1=2;\, u_2=\dfrac{2}{3};\, u_3=\dfrac{2}{9};\, u_4=\dfrac{2}{27};\, u_5=\dfrac{2}{81}$}
+{ $u_5-u_3=-\dfrac{16}{81}$}
+{Số ${\dfrac{2}{6561}}$ là số hạng thứ $8$ của cấp số nhân}
+{Tổng chín số hạng đầu của cấp số nhân là số lớn hơn $3$}
+\loigiai{
+\begin{enumerate}
+	\item Gọi $q$ là công bội của cấp số nhân $\left(u_n\right)$.\\
+	Theo giả thiết, ta có $\heva{&u_1 q^3=\dfrac{2}{27} \\ &u_1 q^2=243 \cdot u_1 q^7} \Rightarrow \heva{&u_1 q^3=\dfrac{2}{27} \\ &q^5=\dfrac{1}{243}} \Rightarrow \heva{&q=\dfrac{1}{3} \\ &u_1=2}$.\\
+	Năm số hạng đầu của $\left(u_n\right)$ là $u_1=2;\, u_2=\dfrac{2}{3};\, u_3=\dfrac{2}{9};\, u_4=\dfrac{2}{27};\, u_5=\dfrac{2}{81}$.
+	\setcounter{enumi}{2}
+	\item Số hạng tổng quát của cấp số nhân $u_n=u_1 q^{n-1}=\dfrac{2}{3^{n-1}}$.\\
+	Xét $u_n=\dfrac{2}{6561} \Rightarrow \dfrac{2}{3^{n-1}}=\dfrac{2}{6561}\Rightarrow 3^{n-1}=6561=3^8 \Rightarrow n=9$.\\
+	Vậy $\dfrac{2}{6561}$ là số hạng thứ $9$ của cấp số nhân $\left(u_n\right)$.
+	\item Tổng chín số hạng đầu của cấp số nhân là $$S_9=\dfrac{u_1\left( 1-{{q}^{9}} \right)}{1-q}=\dfrac{2\cdot\left( 1-\left( \dfrac{1}{3} \right)^9 \right)}{1-\dfrac{1}{3}}\approx 2{,}99985<3.$$
+\end{enumerate}
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B15-DS}
+
+\Opensolutionfile{ans}[ans/ans-0-B15-KQ]
+\caukq
+%%=====Câu 1
+\begin{ex}%[1D2H3-4] 
+Cho cấp số nhân ${\left(u_n\right)}$ có tổng ${n}$ số hạng đầu tiên là ${S_n=5^n-1}$. Gọi số hạng đầu ${u_1}$ và công bội ${q}$ của cấp số nhân đó. Tính $u_2$.
+
+\shortans{$20$}
+\loigiai{
+Ta có ${u_1=S_1=5-1=4}$ và ${u_2=S_2-S_1=\left(5^2-1\right)-(5-1)=20}$.\\
+Vậy ${u_1=4,\, q=5}\Rightarrow u_2=u_1q=4\cdot 5=20$.
+}
+\end{ex}
+
+%%=====Câu 2
+\begin{ex}%[1D2H3-6]
+Cho cấp số nhân có các số hạng lần lượt là ${\dfrac{1}{4};\, \dfrac{1}{2};\, 1; \ldots ;\, 128}$. Tính tổng ${S}$ của tất cả các số hạng của cấp số nhân đã cho (kết quả lấy phần nguyên).
+\shortans{$255$}
+\loigiai{
+Cấp số nhân đã cho có $\heva{&u_1=\dfrac{1}{4} \\ &q=2} \Rightarrow 128=2^7=u_1 q^{n-1}=\dfrac{1}{4} \cdot 2^{n-1}=2^{n-3} \Leftrightarrow n=10$.\\
+Khi đó cấp số nhân đã cho có tất cả $10$ số hạng.\\
+Suy ra $S_{10}=u_1 \cdot \dfrac{1-q^{10}}{1-q}=\dfrac{1}{4} \cdot \dfrac{1-2^{10}}{1-2}=\dfrac{1023}{4}= 255{,}75$.\\
+Vậy $\left[S_{10} \right]=255$.
+}
+\end{ex}
+
+%%=====Câu 3
+\begin{ex}%[1D2H3-4] 
+Tìm $u_3$ của cấp số nhân $\left(u_n\right)$, biết $\heva{&u_1+u_5=51 \\ &u_2+u_6=102}$.
+	
+\shortans{$12$}
+\loigiai{
+Áp dụng công thức $u_n=u_1 \cdot q^{n-1}$.\\
+Ta có $\heva{&u_1+u_5=51 \\ &u_2+u_6=102} \Leftrightarrow\heva{u_1+u_1 q^4=51 \\ u_1 q+u_1 q^5=102} \Leftrightarrow\heva{u_1 \cdot\left(1+q^4\right)=51 \\ u_1 q \cdot\left(1+q^4\right)=102} \Leftrightarrow\heva{u_1=\dfrac{51}{1+q^4} \\ \frac{u_1 \cdot\left(1+q^4\right)}{u_1 q \cdot\left(1+q^4\right)}=\dfrac{51}{102}}$.\\
+Suy ra $\dfrac{1}{q}=\dfrac{1}{2} \Leftrightarrow q=2$.\\
+Khi đó $u_1=\dfrac{51}{1+2^4}=3$.\\
+Vậy $u_1=3;\, q=2\Rightarrow u_3=u_1q^2=3\cdot 2^2=12$.
+}
+\end{ex}
+
+%%=====Câu 4
+\begin{ex}% [1D2H3-6] 
+Kết quả bốn chữa số sau cùng của tổng sau $S_n=8+88+888+\ldots+\underbrace{88 \ldots 8}_{n \, \text {chữ số}}$ với $n=9$ bằng
+\shortans{$4312$}
+\loigiai{
+Ta có
+$$
+\begin{aligned}
+	S_n & =\dfrac{8}{9}(9+99+999+\ldots+\underbrace{99 \ldots 9}_{n \, \text {chữ số}})\\
+	& =\dfrac{8}{9}\left(10-1+10^2-1+10^3-1+\ldots+10^n-1\right)\\
+	& =\dfrac{8}{9}\left[\left(10+10^2+10^3+\ldots+10^n\right)-n\right]=\dfrac{8}{9}\left(10 \cdot \dfrac{1-10^n}{1-10}-n\right)=\dfrac{80\left(10^n-1\right)}{81}-\dfrac{8}{9} n.
+\end{aligned}
+$$ 
+Với $n=9$, ta có tổng $80\cdot\dfrac{10^9-1}{81} -\dfrac{8}{9}\cdot 9=987654312$.\\
+Vậy bốn chữ số sau cùng của tổng trên là $4312$.
+}
+\end{ex}
+
+%%=====Câu 5
+\begin{ex}%[1D2V3-4]
+Tổng ba số hạng liên tiếp của một cấp số cộng là $21$. Nếu lấy số thứ hai trừ đi $1$ và số thứ ba cộng thêm $1$ thì ba số đó lập thành một cấp số nhân. Tìm tổng ba số hạng đầu, biết số hạng đầu có giá trị nhỏ hơn $4$.
+\shortans{$21$}
+\loigiai{
+Gọi $\left(u_n\right)$ là cấp số cộng có công sai $d$.\\
+Ta có $u_1+u_2+u_3=21\Rightarrow u_1+\left( u_1+d \right)+\left( u_1+2d \right)=21\Rightarrow u_1+d=7$\hfill{(*)}\\
+Theo giả thiết ${u_1;\, u_2-1;\, u_3+1}$ lập thành cấp số nhân hay $u_1;\, u_1+d-1;\, u_1+2 d+1$ lập thành một cấp số nhân.\\
+Suy ra ${\left(u_1+d-1\right)^2=u_1\left(u_1+2 d+1\right) \Rightarrow\left(u_1+d-1\right)^2=u_1\left[2\left(u_1+d\right)-u_1+1\right]}$.\\
+Kết hợp với $(*)$, ta được 
+$$
+\begin{aligned}
+	&(7-1)^2=u_1\left(2.7-u_1+1\right)\\
+	& \Leftrightarrow 36=u_1\left(15-u_1\right)\\
+	& \Leftrightarrow u_1^2-15u_1+36=0\\
+	&\Leftrightarrow \hoac{
+		&u_1=12>4\quad \text{(loại)}  \\
+		&u_1=3
+	}
+\end{aligned}
+$$
+Với $u_1=3$ thì $d=4\Rightarrow u_2=7;\, u_3=11$.\\
+Vậy $u_1+u_2+u_3=3+7+11=21$.
+}
+\end{ex}
+
+%%=====Câu 6
+\begin{ex}%[1D2V3-5]
+Tìm tổng tất cả các giá trị của tham số $m$ để phương trình sau có ba nghiệm phân biệt lập thành một cấp số nhân $x^3-7 x^2+2\left(m^2+6 m\right) x-8=0$.
+
+\shortans{$-6$}
+\loigiai{
+\begin{itemize}
+\item Điều kiện cần: Giả sử phương trình đã cho có ba nghiệm phân biệt $x_1,\, x_2,\, x_3$ lập thành một cấp số nhân.\\
+Ta có
+$x^3-7 x^2+2\left(m^2+6 m\right) x-8=\left(x-x_1\right)\left(x-x_2\right)\left(x-x_3\right), \forall m \in \mathbb{R} \Rightarrow x_1 x_2 x_3=8
+$.
+Theo tính chất của cấp số nhân $x_1 \cdot x_3=x_2^2$. \\
+Suy ra $x_2^3=8 \Rightarrow x_2=2$.\\
+Thay nghiệm $x=x_2=2$ vào phương trình đã cho, ta có
+$8-28+2\left(m^2+6 m\right) \cdot 2-8=0 
+\Leftrightarrow 4 m^2+24 m-28=0 
+\Leftrightarrow\hoac{
+		&m=1 \\
+		&m=-7}$
+\item Điều kiện đủ: Thử lại với các giá trị ${m}$ tìm được.\\
+Với $m=1$, ta có phương trình $x^3-7 x^2+14x-8=0 \Leftrightarrow \hoac{&x=4 \\ &x=2 \\ &x=1}$ (thoả mãn).\\
+Với $m=-7$, ta có phương trình $x^3-7 x^2+14x-8=0 \Leftrightarrow \hoac{&x=4 \\ &x=2 \\ &x=1}$ (thoả mãn).\\
+Vậy $m=1 ;\, m=-7$ là các giá trị cần tìm, suy ra $1+(-7)=-6$. 
+\end{itemize}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15-KQ}
+
+\subsection{Đề 2}%\section{ĐỀ  SỐ 2}
+\Opensolutionfile{ans}[ans/ans-1-C2B3.D2]
+\caulc
+%
+\begin{ex}%[1D2N3-1]
+	Cho $(u_n)$ là cấp số nhân lùi vô hạn có số hạng đầu và công bội lần lượt là $u_1$ và $q$. Công thức nào sau đây dùng để tính tổng $S$ của cấp số nhân trên?
+	\choice
+	{$S=\dfrac{1-q}{u_1}$}
+	{$S=\dfrac{u_1}{1-q}$}
+	{$S=\dfrac{q-1}{u_1}$}
+	{\True $S=\dfrac{u_1}{1-q}$}
+	\loigiai{
+	Cho $(u_n)$ là cấp số nhân lùi vô hạn có số hạng đầu và công bội lần lượt là $u_1$ và $q$. Công thức dùng để tính tổng $S$ là $S=\dfrac{u_1}{1-q}$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-2]
+	Cho dãy số $(u_n)$ có số hạng tổng quát là $u_n=3\cdot 2^{n+1}\; \left(\forall n\in {{\mathbb{N}}^*}\right)$. Chọn kết luận đúng:
+	\choice
+	{\True Dãy số là cấp số nhân có số hạng đầu $u_1=12$}
+	{Dãy số là cấp số cộng có công sai $d=2$}
+	{Dãy số là cấp số cộng có số hạng đầu $u_1=6$}
+	{Dãy số là cấp số nhân có công bội $q=3$}
+	\loigiai{
+		Dãy số $(u_n)$có số hạng tổng quát là $u_n=3\cdot 2^{n+1}\;\left(\forall n\in \mathbb{N}^*\right)\Rightarrow u_{n+1}=3\cdot 2^{n+2}$.\\
+		Xét thương $\dfrac{u_{n+1}}{u_n}=\dfrac{3\cdot 2^{n+2}}{3\cdot 2^{n+1}}=2=const$ với $\forall n\in {{\mathbb{N}}^*}$ nên dãy số $(u_n)$ là một cấp số nhân có công bội $q=2$ và có số hạng đầu là $u_1=3\cdot 2^{1+1}=12$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-2]
+	Trong các dãy số sau, dãy số nào là một cấp số nhân?
+	\choice
+	{$1,  2,  3,  4,  5,  6,  \ldots$}
+	{$2,  4,  6,  8,  16,  32,\ldots$}
+	{$-2,  -3,  -4,  -5,  -6,  -7,  \ldots$}
+	{\True $1,  2,  4,  8,  16,  32,  \ldots$}
+	\loigiai{
+		Nhận thấy dãy $1,  2,  4,  8,  16,  32,  \ldots$ thỏa mãn: $u_{n+1}=2.u_n\,  \,\forall n\in {{\mathbb{N}}^*}$.\\
+		Vậy dãy số $1,  2,  4,  8,  16,  32,  \ldots$ là cấp số nhân với $u_1=1$ và công bội $q=2$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-2]
+	Trong các dãy số sau, đây số nào là cấp số nhân?
+	\choice
+	{\True $u_n=\dfrac{1}{3^{n-2}}$}
+	{$u_n=\dfrac{1}{3^n}-1$}
+	{$u_n=n+\dfrac{1}{3}$}
+	{$u_n=n^2+\dfrac{1}{3}$}
+	\loigiai{
+		Dãy số $u_n=\dfrac{1}{3^{n-2}}$ là cấp số nhân với số hạng đầu $u_1=3$, công bội $q=\dfrac{1}{3}$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-2]
+	Cho cấp số nhân $(u_n)$ có $u_1=\dfrac{1}{2}$, $u_2=16$. Khi đó công bội $q$ là
+	\choice
+	{$64$}
+	{$8$}
+	{$4$}
+	{\True $32$}
+	\loigiai{
+		Cấp số nhân $(u_n)$ có công bội là $q=\dfrac{u_2}{u_1}=\dfrac{16}{\dfrac{1}{2}}=32$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-5]
+	Ba số $-\sqrt{3}\,;\,x\,;-3\sqrt{3}$ theo thứ tự là ba số hạng liên tiếp của một cấp số nhân. Tìm công bội $q$ của cấp số nhân đó.
+	\choice
+	{$q=\pm 3$}
+	{$q=-\sqrt{3}$}
+	{$q=3$}
+	{\True \True $q=\pm \sqrt{3}$}
+	\loigiai{
+		Do $-\sqrt{3}\,;x\,  ;\,-3\sqrt{3}$ là một cấp số nhân $\Rightarrow x^2=9\Leftrightarrow x=\pm 3$.\\
+		Vậy công bội của cấp số nhân là $q=\dfrac{x}{-\sqrt{3}}=\pm \sqrt{3}$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-6]
+	Tổng vô hạn $S=1+\dfrac{1}{2}+\dfrac{1}{2^2}+\ldots+\dfrac{1}{2^n}+\ldots$ bằng
+	\choice
+	{$4$}
+	{$2^n-1$}
+	{$1$}
+	{\True $2$}
+	\loigiai{
+		Đây là tổng của một cấp số nhân lùi vô hạn, với $u_1=1$; $q=\dfrac{1}{2}$.\\
+		Khi đó $S=\dfrac{u_1}{1-q}$ $=\dfrac{1}{1-\dfrac{1}{2}}$ $=2$.
+	}
+	
+\end{ex}
+\begin{ex}%[1D2H3-5]
+	Xác định $x$ để bộ ba số $2x-1$, $x$, $2x+1$ theo thứ tự lập thành một cấp số nhân.
+	\choice
+	{ \True $x=\pm \dfrac{1}{\sqrt{3}}$}
+	{$x=\pm \sqrt{3}$}
+	{Không có giá trị nào của $x$}
+	{$x=\pm \dfrac{1}{3}$}
+	\loigiai{
+		Bộ ba số $2x-1$, $x$, $2x+1$ theo thứ tự lập thành một cấp số nhân nên ta có $$(2x-1)(2x+1)=x^2 \Leftrightarrow 4x^2-1=x^2\Leftrightarrow x=\pm \dfrac{1}{\sqrt{3}}.$$
+	}
+\end{ex}
+\begin{ex}%[1D2H3-4]
+	Cho cấp số nhân $(u_n)$ có tổng $n$ số hạng đầu tiên là $S_n=5^n-1$. Tìm số hạng thứ 4 của cấp số nhân đã cho.
+	\choice
+	{$u_4=100$}
+	{$u_4=124$}
+	{\True $u_4=500$}
+	{$u_4=624$}
+	\loigiai{
+		Ta có $5^{n-1}-1=S_n=u_1 \cdot \dfrac{1-q^n}{1-q}=\dfrac{u_1}{q-1}\left(q^n-1\right) \Leftrightarrow  \heva{&u_1=q-1  \\ &q=5 }\Leftrightarrow \heva{& u_1=4\\& q=5.}$\\
+		Khi đó
+		$u_4=u_1q^3=4\cdot 5^3=50$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-4]
+	Cho cấp số nhân $(u_n)$ có tổng $n$ số hạng đầu tiên là $S_n=\dfrac{3^n-1}{3^{n-1}}$. Tìm số hạng thứ 5 của cấp số nhân đã cho.
+	\choice
+	{\True $u_5=\dfrac{2}{3^4}$}
+	{$u_5=\dfrac{1}{3^5}$}
+	{$u_5=3^5$}
+	{$u_5=\dfrac{5}{3^5}$}
+	\loigiai{
+		Ta có $\dfrac{3^n-1}{3^{n-1}}=31-\dfrac{1}3^n=S_n=\dfrac{u_1}{1-q}\left(1-q^n\right) \Leftrightarrow \heva{&u_1=3(1-q) \\& q=\dfrac{1}{3}}\Leftrightarrow \heva{&u_1=2 \\& q=\dfrac{1}{3}}.$.\\
+		Khi đó
+		$u_5=u_1q^4=\dfrac{2}{3^4}$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-4]
+	Một cấp số nhân có số hạng thứ bảy bằng $\dfrac{1}{2}$, công bội bằng $\dfrac{1}{4}$. Hỏi số hạng đầu tiên của cấp số nhân bằng bao nhiêu?
+	\choice
+	{$4096$}
+	{\True $2048$}
+	{$1024$}
+	{$\dfrac{1}{512}$}
+	\loigiai{
+		Ta có $\heva{& q=\dfrac{1}{4} \\ & \dfrac{1}{2}=u_7=u_1 q^6=\dfrac{u_1}{4^6}} \Rightarrow u_1=\dfrac{4^6}{2}=2048$.
+	}
+\end{ex}
+\begin{ex}%[1D2H3-2]
+	Cho cấp số nhân $(u_n)$ có $u_2=-6$ và $u_6=-486$. Tìm công bội $q$ của cấp số nhân đã cho, biết rằng $u_3>0$. 
+	\choice
+	{$q=-3$}
+	{$q=-\dfrac{1}{3}$}
+	{$q=\dfrac{1}{3}$}
+	{\True $q=3$}
+	\loigiai{
+		Ta có
+		$$\heva{& -6=u_2=u_1 q \\ & -486=u_6=u_1 q^5=u_1 q \cdot q^4=-6\cdot q^4 }\Rightarrow q^4=81=3^4 \quad q=3.$$
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2B3.D2}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C2B3.D2-DS]
+\begin{ex}%[1D2H3-6]
+	Cho cấp số nhân ${\left(u_n\right)}$ thoả mãn $\heva{&u_4+u_6=-540 \\& u_3+u_5=180}$. Khi đó:
+	\choiceTF
+	{\True Số hạng $u_1=2$}
+	{Gọi $q$ là công bội của cấp số nhân, thì ba số $q;1;3$ tạo thành một cấp số cộng}
+	{Số $-486$ là số hạng thứ $5$ của cấp số nhân }
+	{\True Tổng của $21$ số hạng đầu cấp số nhân đã cho bằng $5230176602$}
+	
+	\loigiai{
+		
+		Gọi ${q}$ là công bội và ${S_{21}}$ là tổng của 21 số hạng đầu của cấp số nhân ${\left(u_n\right)}$.
+		
+		Ta có: \allowdisplaybreaks
+		\begin{eqnarray*}
+			\heva{&u_4+u_6=-540 \\ &u_3+u_5=180} &\Leftrightarrow&\heva{&\left(u_3+u_5\right) q=-540 \\ &u_3+u_5=180}\\ &\Leftrightarrow&\heva{&180 q=-540 \\ &u_3+u_5=180}\\
+			&\Leftrightarrow&\heva{&q=-3 \\&u_1(-3)^2+u_1(-3)^4=180}\\
+			&\Leftrightarrow&\heva{& q = - 3 \\&u _ { 1 } ( 9 + 8 1 ) = 1 8 0 }\\
+			&\Leftrightarrow &\heva{&q=-3 \\&u_1=2.}\\
+		\end{eqnarray*}
+		Số $-486=2\cdot (-3)^5$ nên số $-486$ là số hạng thứ $6$.\\
+		Suy ra ${S_{21}=\dfrac{u_1\left(1-q^{21}\right)}{1-q}=\dfrac{2\left[1-(-3)^{21}\right]}{1-(-3)}=\dfrac{1+3^{21}}{2}}$.
+	}
+	
+\end{ex}
+
+\begin{ex}%[1D2H3-5]
+	Cho tứ giác ${A B C D}$ có bốn góc tạo thành một cấp số nhân có công bội bằng $2$. Khi đó:
+	\choiceTF
+	{\True Số đo góc nhỏ nhất bằng $24^\circ $}
+	{Số đo góc lớn nhất bằng $196^\circ $}
+	{Tổng số đo góc lớn nhất với góc nhỏ nhất bằng $220^\circ $}
+	{\True Số đo góc lớn nhất trừ cho số đo góc nhỏ nhất bằng $168^\circ $}
+	\loigiai{
+		Đặt ${u_1 ; u_2 ; u_3 ; u_4}$ theo thứ tự là số đo bốn góc của tứ giác ${A B C D}$, gọi ${q}$ là công bội của cấp số nhân ${u_1 ; u_2 ; u_3 ; u_4 \Rightarrow q=2}$.\\
+		Ta có: \allowdisplaybreaks
+		\begin{eqnarray*}
+			\heva{&u_1+u_2+u_3+u_4=360^{\circ} \\ &q=2} &\Leftrightarrow&\heva{&u_1 \cdot \dfrac{1-q^4}{1-q}=360^{\circ} \\ &q=2}\\
+			&\Leftrightarrow&\heva{&{ u _ { 1 } \cdot \frac { 1 - 2 ^ { 4 } } { 1 - 2 } = 3 6 0 ^ { \circ } } \\&q = 2}\\
+			& \Leftrightarrow& \heva{&u_1=24^{\circ} \\&q=2.}
+		\end{eqnarray*}
+		Vậy số đo bốn góc của tứ giác ${A B C D}$ là: $24^{\circ} ; 48^{\circ} ; 96^{\circ} ; 192^{\circ}$.
+	}		
+\end{ex}
+
+\begin{ex}%[1D2H3-2]
+	Cho các dãy số ${a_n=n^2+n+1}$;${b_n=(n+2) \cdot 3^n}$; $\heva{&c_1=2 \\& c_{n+1}=\dfrac{6}{c_n}, \forall n \in \mathbb{N}^*}$ \break và ${d_n=(-4)^{2 n+1}}$. Khi đó
+	\choiceTF
+	{\True ${\left(a_n\right)}$ không phải là cấp số nhân}
+	{\True ${\left(b_n\right)}$ không phải là cấp số nhân}
+	{${\left(c_n\right)}$ là một cấp số nhân}
+	{\True ${\left(d_n\right)}$ là một cấp số nhân }
+	\loigiai{
+		
+		\begin{itemchoice}
+			\itemch ${\dfrac{a_{n+1}}{a_n}=\dfrac{n^2+3 n+3}{n^2+n+1}, \forall n \in \mathbb{N}^*}$, không phải là hằng số.\\
+			Vậy ${\left(a_n\right)}$ không phải là cấp số nhân.
+			\itemch ${\dfrac{b_{n+1}}{b_n}=\dfrac{(n+3) \cdot 3^{n+1}}{(n+2) \cdot 3^n}=\dfrac{3(n+3)}{n+2}, \forall n \in \mathbb{N}^*}$, không phải là hằng số. Vậy ${\left(b_n\right)}$ không phải là cấp số nhân.
+			\itemch Từ công thức truy hồi của dãy số, suy ra ${c_1=2 ; c_2=3 ; c_3=2 ; c_4=3 ; \ldots}$.\\
+			Vì ${\dfrac{c_3}{c_2} \neq \dfrac{c_2}{c_1}}$ nên ${\left(c_n\right)}$ không phải là cấp số nhân.
+			\itemch ${\dfrac{d_{n+1}}{d_n}=\dfrac{(-4)^{2(n+1)+1}}{(-4)^{2 n+1}}=16, \forall n \in \mathbb{N}^*}$.\\
+			Vậy ${\left(d_n\right)}$ là một cấp số nhân công bội ${q=16}$.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[1D2H3-6]
+	Cho cấp số nhân ${\left(u_n\right)}$ biết rằng ${u_1+u_2+u_3=168}$ và ${u_4+u_5+u_6=21}$. Khi đó:
+	\choiceTF
+	{Số hạng $u_1=90$}
+	{Công bội của cấp số nhân bằng $2$}
+	{\True Số $24$ là số hạng thứ 3 của cấp số nhân }
+	{\True Tổng của 10 số hạng đầu cấp số nhân đã cho bằng $\dfrac{3069}{16}$}
+	\loigiai{
+		Ta có: \allowdisplaybreaks
+		\begin{eqnarray*}
+			\heva{&u_1+u_2+u_3=168 \\ &u_4+u_5+u_6=21} 
+			&\Leftrightarrow&\heva{&u_1+u_1 \cdot q+u_1 \cdot q^2=168 \\ &u_1 \cdot q^3+u_1 \cdot q^4+u_1 \cdot q^5=21}\\
+			&\Leftrightarrow&\heva{& u_1 ( 1 + q + q^2 ) = 168 \\& u _1 q^3 (1 + q + q^2) = 21} \\
+			&\Leftrightarrow& \heva{&u_1 = \dfrac{ 168 }{ 1 + q + q^ 2} \\&q ^ { 3 } = \dfrac{ 1 } { 8 }}\\
+			& \Leftrightarrow& \heva{&u_1=96 \\&q=\dfrac{1}{2}}
+		\end{eqnarray*}
+		Ta có $24=96\cdot \left( \dfrac{1}{2} \right)^{3-1}$.\\
+		Ta có $S_{10}=\dfrac{u_1\left( 1-q^{10} \right)}{1-q}=\dfrac{96\left[ 1-\left( \dfrac{1}{2}\right) ^{10} \right]}{1-\dfrac{1}{2}}=\dfrac{3069}{16}.$
+	}		
+\end{ex}
+
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-1-C2B3.D2-DS}
+
+\Opensolutionfile{ans}[ans/ans-1-C2B3.D2-KQ]
+\caukq
+
+
+\begin{ex}%[1D2H3-4]
+Cho cấp số nhân $(u_n)$, biết: $\heva{&u_2=6 \\& S_3=43.}$ Tích của các số hạng đầu và công bội bằng 
+	\shortans{$36$}
+	\loigiai{
+		Áp dụng công thức ${u_n=u_1 \cdot q^{n-1}}$ và ${S_n=\dfrac{u_1 \cdot\left(1-q^n\right)}{1-q}}$.\\
+		Ta có
+		$$\begin{aligned}
+			& \heva{&u_2=6 \\&S_3=43}\Leftrightarrow \heva{&u_1q=6 \\&\dfrac{u_1\cdot (1-q^3)}{1-q}=43}\Leftrightarrow \heva{&u_1q=6 \\&u_1(1+q+q^2)=43}\Leftrightarrow \heva{&u_1=\dfrac{6}{q} \\ &\dfrac{q}{1+q+q^2}=\dfrac{6}{43}}\\
+			& \Rightarrow 43q=6.\left(1+q+q^2\right)\Leftrightarrow 6q^2-37q+6=0\Leftrightarrow \hoac{&q=6 \\&q=\dfrac{1}{6}.}
+		\end{aligned}$$
+		Với $q=6$ thì $u_1=\dfrac{6}{6}=1$.\\
+		Với $q=\dfrac{1}{6}$ thì $u_1=\dfrac{6}{\dfrac{1}{6}}=36$.\\
+		Suy ra $\heva{&q=6 \\ &u_1=1}$ hoặc $\heva{&q=\dfrac{1}{6} \\ &u_1=36.}$\\
+Vậy tích các số hạng đầu và công bội bằng $6\cdot 1\cdot \dfrac{1}{6}\cdot 36=36.$
+	}
+\end{ex}
+
+
+
+\begin{ex}%[1D2H3-4]
+	Cho cấp số nhân $(u_n)$, biết: $\heva{&u_5+u_2=36 \\ &u_6-u_4=48.}$. Tính tổng số hạng đầu và công bội của cấp số nhân $(u_n)$.
+	\shortans{$4$}
+	\loigiai{
+		Ta có: $\heva{&u_5+u_2=36 \\ &u_6-u_4=48}\Leftrightarrow\heva{&u_1 \cdot q^4+u_1 \cdot q=36 \\ &u_1 \cdot q^5-u_1 \cdot q^3=48}\Leftrightarrow\heva{&u_1\left(q^4+q\right)=36 \\ &u_1 \cdot\left(q^5-q^3\right)=48}\Leftrightarrow\heva{&u_1=\dfrac{36}{q^4+q} \\& \dfrac{q^4+q}{q^5-q^3}=\dfrac{36}{48}}$
+		$\begin{aligned}
+			& \Rightarrow 4\cdot \left(q^4+q\right)=3\cdot \left(q^5-q^3\right) \\ 
+			& \Leftrightarrow 4q^4+4q=3q^5-3q^3\Leftrightarrow 4q^4+4q-3q^5+3q^3=0 \\ 
+			& \Leftrightarrow q\left(-3q^4+4q^3+3q^2+4q\right)=0\Leftrightarrow -q(q+1)(q-2) \\ 
+			& \Leftrightarrow \hoac{&q=0 \\&q=-1 \\&q=2 \\&3q^2-q+2=0 \\}\\
+			& \Leftrightarrow q=2.\, (\text{do } q\ne 0;q\ne -1) \\ 
+		\end{aligned}$\\
+		Với $q=2$ thì $u_1=\dfrac{36}{2^4+2}=2$
+		$$\Leftrightarrow q\left(-3 q^4+4 q^3+3 q^2+4 q\right)=0 \Leftrightarrow-q(q+1)(q-2)\left(3 q^2-q+2\right)=0.$$
+		Vậy $q=2 ; u_1=2$, suy ra $u_1+q=2+2=4$.
+	}
+\end{ex}
+
+
+\begin{ex}%[1D2H3-6]
+	Cho cấp số nhân $(u_n)$ biết $u_1=5, u_5=405$ và tổng $S_n=u_1+u_2+\ldots+u_n=1820$. Tìm $n$.
+	\shortans{$6$}
+	\loigiai{
+		Ta có: $\heva{&u_1=5 \\& u_5=405} \Leftrightarrow\heva{&u_1=5 \\& u_1 q^4=405} \Leftrightarrow\heva{&u_1=5 \\& q^4=\dfrac{405}{u_1}=81} \Leftrightarrow\heva{&u_1=5 \\& q= \pm 3.}$\\
+		\textbf{Trường hợp 1:} $u_1=5 ; q=3$.
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			&&S_n=u_1+u_2+\ldots .+u_n=1820\left(n \in \mathbb{N}^*\right) \\
+			& \Leftrightarrow& u_1 \dfrac{1-q^n}{1-q}=1820\\
+			&\Leftrightarrow& \dfrac{1-3^n}{1-3}=\dfrac{1820}{5}\\
+			&\Leftrightarrow &3^n=729\\
+			& \Leftrightarrow& n=6.
+		\end{eqnarray*}
+		\textbf{Trường hợp 2:} $u_1=5 ; q=-3$.
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			&& S_n=u_1+u_2+\ldots +u_n=1820\left(n\in \mathbb{N}^*\right)\\
+			&\Leftrightarrow& u_1\dfrac{1-q^n}{1-q}=1820\\
+			&\Leftrightarrow& \dfrac{1-(-3)^n}{1+3}=\dfrac{1820}{5} \\ 
+			& \Leftrightarrow& (-3)^n=-1455\\
+			&\Leftrightarrow& n\in \varnothing ,\forall n\in \mathbb{N}^*.
+		\end{eqnarray*}
+		Vậy $n=6$.  
+	}
+\end{ex}
+\begin{ex}%[1D2V3-6]
+	Viết thêm bốn số vào giữa hai số $160$ và $5$ để được một cấp số nhân gồm sáu số hạng. Tìm tổng tất cả các số hạng của cấp số nhân đó.
+	\shortans{$315$}
+	\loigiai{
+		Gọi $(u_n)$ là cấp số nhân lập được và ${q}$ là công bội của cấp số nhân đó.\\
+		Cấp số nhân cần lập có dạng: $160 ; u_2 ; u_3 ; u_4 ; u_5 ; 5$.\\
+		Ta có : $\heva{&u_1=160 \\ &u_6=5} \Leftrightarrow\heva{&u_1=160 \\ &u_1 q^5=5} \Leftrightarrow\heva{&u_1=160 \\ &160 q^5=5} \Leftrightarrow\heva{&u_1=160 \\& q=\dfrac{1}{2}.}$\\
+		Tổng các số hạng của cấp số nhân là: $S_6=\dfrac{u_1\left(1-q^6\right)}{1-q}=\dfrac{160\left[1-\left(\dfrac{1}{2}\right)^6\right]}{\dfrac{1}{2}}=315$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2V3-6]
+	Tính tổng tất cả các số hạng của một cấp số nhân, biết số hạng đầu bằng $18$, số hạng thứ hai bằng $54$ và số hạng cuối bằng $1458$.
+	\shortans{$2178$}
+	\loigiai{
+		Gọi ${(u_n)}$ là cấp số nhân cần tìm, ${q}$ là công bội của cấp số nhân đó.\\
+		Ta có: ${u_1=18, u_2=54 \Rightarrow q=\dfrac{u_2}{u_1}=\dfrac{54}{18}=3}$.\\
+		Xét số hạng cuối ${u_n=1458}$
+		${\Leftrightarrow u_1 q^{n-1}=39366 \Leftrightarrow 18.3^{n-1}=1458 \Leftrightarrow 3^{n-1}=3^4 \Leftrightarrow n=5.
+		}$\\
+		Vậy tổng tám số hạng của cấp số nhân là: $S_8=\dfrac{u_1\left(1-q^5\right)}{1-q}=18 \cdot \dfrac{1-3^5}{1-3}=2178$.
+	}
+\end{ex}
+\begin{ex}%[1D2C3-4]
+	Cho cấp số nhân $(u_n)$ có $u_1=3$ và $15 u_1-4 u_2+u_3$ đạt giá trị nhỏ nhất. Tìm số hạng thứ $10$ của cấp số nhân đã cho.
+	\shortans{$1536$}
+	\loigiai{
+		Gọi ${q}$ là công bội của cấp số nhân ${(u_n)}$. Ta có: ${u_2=u_1 q=3 q ; u_3=u_1 q^2=3 q^2}$.\\
+		Suy ra $15 u_1-4 u_2+u_3=45-12 q+3 q^2=3(q-2)^2+33 \geq 33, \forall q \in \mathbb{R}$.\\
+		Ta có: $15 u_1-4 u_2+u_3$ đạt giá trị nhỏ nhất (bằng 33) khi và chỉ khi ${q=2}$.\\
+		Khi đó: $u_{10}=u_1 q^{9}=3 \cdot 2^{9}=1536$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2B3.D2-KQ}

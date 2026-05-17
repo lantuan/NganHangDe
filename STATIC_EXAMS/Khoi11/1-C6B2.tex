@@ -1,0 +1,612 @@
+\section{Phép tính lôgarit}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE1-LC]
+\caulc
+%Câu 1
+\begin{ex}%[1D6N2-2]
+	Với $ a$ là số thực khác $0$ tùy ý, $\log_2a^2$ bằng
+	\choice
+	{$a$}
+	{$2\log_2a$}
+	{\True $2\log_2|a|$}
+	{$\dfrac{1}{2}\log_2a$}
+	\loigiai{
+		Ta có $\log_2a^2=2\log_2|a|$ .}
+\end{ex}
+%Câu 2
+\begin{ex}%[1D6N2-3]
+	Cho $ a,b > 0$. Rút gọn biểu thức $\log_a{b^2}+\log_{a^2}{b^4}$ ta được
+	\choice
+	{$ 2\log_ab$}
+	{$ 0$}
+	{$\log_ab$}
+	{\True $ 4\log_ab$}
+	\loigiai{
+		Ta có $\log_a{b^2}+\log_{a^2}{b^4}=2\log_ab+\dfrac{1}{2}\cdot 4\cdot \log_ab=4\log_ab$.}
+\end{ex}
+%Câu 3
+\begin{ex}%[1D6N2-2]
+	Nếu $\log 4=a$ thì $\dfrac{1}{\log_{256}100}$ bằng
+	\choice
+	{$a^4$}
+	{$\dfrac{a}{8}$}
+	{\True $ 2a$}
+	{$ 16a$}
+	\loigiai{
+		Ta có $\dfrac{1}{\log_{256}100}=\log_{100}256=\dfrac{1}{2}\log{4^4}=2a$.}
+\end{ex}
+%Câu 4
+\begin{ex}%[1D6H2-2]
+	Cho $\log_ab=3,\log_ac=-2$. Khi đó $\log_a\left(a^3b^2\sqrt c\right)$ bằng
+	\choice
+	{$ 5$}
+	{\True $ 8$}
+	{$ 10$}
+	{$ 13$}
+	\loigiai{
+		Ta có $\log_a\left(a^3b^2\sqrt c\right)=\log_a{a^3}+\log_a{b^2}+\log_a\sqrt c =3+2\log_ab+\dfrac{1}{2}{\log_a}c=3+2\cdot 3-\dfrac{1}{2}\cdot 2=8$.}
+\end{ex}
+%Câu 5
+\begin{ex}%[1D6H2-2]
+	Cho các số thực dương $ a$, $ b$ thỏa mãn $\log_2a=x$, $\log_2b=y$.\\ Tính $ P=\log_2\left(a^2b^3\right)$.
+	\choice
+	{$ P=x^2y^3$}
+	{$ P=x^2+y^3$}
+	{$ P=6xy$}
+	{\True $ P=2x+3y$}
+	\loigiai{
+		$ P=\log_2\left(a^2b^3\right)=\log_2a^2+\log_2b^3=2\log_2a+3\log_2b=2x+3y$.}
+\end{ex}
+%Câu 6
+\begin{ex}%[1D6H2-2]
+	Với $ a,b$ là các số thực dương tùy ý và ($ a\ne 1$) thì $\log_{a^2}b$ bằng
+	\choice
+	{$ 2\log_ab$}
+	{$\dfrac{1}{2}+\log_ab$}
+	{\True $\dfrac{1}{2}{\log_a}b$}
+	{$ 2+\log_ab$}
+	\loigiai{
+		Ta có $\log_{a^2}b=\dfrac{1}{2}{\log_a}b$.}
+\end{ex}
+%Câu 7
+\begin{ex}%[1D6H2-3]
+	Nếu $\log_2x=5\log_2a+4\log_2b$ ($ a,b > 0$) thì $ x$ bằng
+	\choice
+	{$ 4a+5b$}
+	{\True $a^5b^4$}
+	{$a^4b^5$}
+	{$ 5a+4b$}
+	\loigiai{
+		Ta có $\log_2x=5\log_2a+4\log_2b\Leftrightarrow\log_2x=\log_2a^5b^4\Leftrightarrow x=a^5b^4$.}
+\end{ex}
+%Câu 8
+\begin{ex}%[1D6H2-2]
+	Cho $\log_25=a$. Giá trị của $\log_425$ theo $ a$ bằng
+	\choice
+	{$\dfrac{3}{2}a$}
+	{\True $a$}
+	{$ 3a$}
+	{$ 2a$}
+	\loigiai{
+		$\log_425=\log_{2^2}{5^2}=\dfrac{2}{2}\log_25=a$.}
+\end{ex}
+%%Câu 9
+\begin{ex}%[1D6H2-1]
+	Giá trị của biểu thức $P=4^{\log_2 \sqrt{3}}$ bằng
+	\choice
+	{$\sqrt{3}$}
+	{\True $3$}
+	{$2^{\sqrt{3}}$}
+	{$2\sqrt{3}$}
+	\loigiai{Ta có $P=4^{\log_2 \sqrt{3}}=\left( 2^2\right)^{\log_2 \sqrt{3}} = \left( 2^{\log_2 \sqrt{3}}\right)^{2}=\left(\sqrt{3}\right)^2=3$.}
+\end{ex}
+%Câu 10
+\begin{ex}%[1D6H2-3]
+	Cho $a$, $b$ là các số thực dương ($ a\ne 1$) thỏa mãn $\log_a b=2$. Tính giá trị của biểu thức 
+	$P=\log_{\frac{\sqrt{a}}{b}}\left( a\sqrt[3]{b}\right)$.
+	\choice
+	{$P=\dfrac{2}{15}$}
+	{$P=-\dfrac{2}{9}$}
+	{\True $P=-\dfrac{10}{9}$}
+	{$P=\dfrac{2}{3}$}
+	\loigiai{
+	Ta có 
+	$$P=\log_{\frac{\sqrt{a}}{b}}\left( a\sqrt[3]{b}\right)= \dfrac{\log_a\left(a\sqrt[3]{b}\right)}{\log_a\left(\dfrac{\sqrt{a}}{b}\right)}=\dfrac{\log_a a+\log_a b^{\frac{1}{3}}}{\log_a a^{\frac{1}{2}-\log_a b}}=\dfrac{1+\dfrac{1}{3}\log_a b}{\dfrac{1}{2}-\log_a b}=\dfrac{1+\dfrac{2}{3}}{\dfrac{1}{2}-2}=-\dfrac{10}{9}.$$}
+\end{ex}
+%Câu 11
+\begin{ex}%[1D6H2-3]
+	Cho $a$, $b$ là các số thực dương ($ a\ne 1$) thỏa mãn $\log_{a^3} \dfrac{a^5}{\sqrt[4]{b}}=2$. Tính giá trị của biểu thức $\log_a b$.
+	\choice
+	{$4$}
+	{$\dfrac{1}{4}$}
+	{$-\dfrac{1}{4}$}
+	{\True $-4$}
+	\loigiai{
+	Ta có $2=\log_{a^3} \dfrac{a^5}{\sqrt[4]{b}}=\dfrac{1}{3}\log_{a} \dfrac{a^5}{{b}^{\frac{1}{4}}}=\dfrac{1}{3}\left( \log_a a^5 -\log_a b^{\frac{1}{4}}\right)=\dfrac{1}{3}\left(5-\dfrac{1}{4}\log_a b\right)$.\\
+	Từ đó, suy ra $6=5-\dfrac{1}{4}\log_a b\Rightarrow \dfrac{1}{4}\log_a b=-1\Rightarrow \log_a b =-4$.
+	}
+\end{ex}
+% Câu 12
+\begin{ex}%[1D6H2-3]
+	Cho $a$, $b$ là các số thực dương ($ a\ne 1$) thỏa mãn $\log_2{a}=2$, $ \log_4 b=3$. Tính giá trị của biểu thức $P=\log_a (a^2b)$.
+	\choice
+	{$P=10$}
+	{\True $P=5$}
+	{$P=2$}
+	{$P=1$}
+	\loigiai{
+	Ta có $\heva{& \log_2 a=2\\& \log_4 b=3}\Leftrightarrow \heva{&a=2^2\\&b=4^3}\Leftrightarrow \heva{&a=4\\&b=4^3.}$\\
+	Vậy $P=\log_a(a^2b)=\log_4(4^2\cdot 4^3)=\log_4 4^5=5$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C6B2-DE1-LC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cauds
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE1-DS]
+\begin{ex}%[1D6H2-3]
+	Cho các biểu thức $P=\dfrac{\log_{a}(a^3b^2)-\log_b\left(\dfrac{b^3}{a^2}\right)}{\log_a^2 b+1}$ và $Q=\log_a b^3+\log_{a^2}b^6$ với $a$, $b$ là các số dương và $a\ne 1$.
+	\choiceTF
+	{\True $Q=6\log_{a}b$}
+	{$P= 6 \log_b a$}
+	{$Q=3P$}
+	{\True $Q\cdot P=12$}
+	\loigiai{ Ta có
+		\begin{eqnarray*}
+			P&=& \dfrac{\log_a a^3 +\log_{a} b^2-\left( \log_b b^3 -\log_{b} a^2\right)}{\log_{a}^2b +1}\\
+			&=&\dfrac{3+2\log_{a} b -3 +2\log_b a}{\log_a^2 b +1}\\
+			&=& \dfrac{2\left( \log_a b +\dfrac{1}{\log_a b}\right)}{\log_{a}^2b +1}\\
+			&=&\dfrac{2\left( \dfrac{\log_a^2 b+1}{\log_a b }\right)}{\log_a^2b +1}
+			= \dfrac{2}{\log_a b}=2\log_b a.
+		\end{eqnarray*}
+	 $Q=\log_a b^3+\log_{a^2}b^6=3\log_{a} b+\dfrac{6}{2}\cdot \log_{a} b =6\log_{a} b$.
+		\begin{itemchoice}
+			\itemch Đúng. $Q=6\log_{a} b$.
+			\itemch Sai. $P=2\log_b a$.
+			\itemch Sai. $Q=\dfrac{3}{P}$.
+			\itemch Đúng. $QP= \log_{a} b\cdot 2\log_b a =12$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D6H2-4]
+	Cho biểu thức $B=2\ln \sqrt{\mathrm{e}x}-\ln \dfrac{\mathrm{e}^2}{\sqrt{x}}+\ln 3 \cdot \log_3(\mathrm{e} x^2)$, với $x$ là số thực dương.
+	\choiceTF
+	{$B=\ln x+\dfrac{3}{2}$}
+	{\True Cho $\ln x =4$ thì $B=14$}
+	{Cho $x =e^3$ thì $2B+3=\dfrac{15}{2}$}
+	{\True Cho $x =6$ thì $e^B=216\sqrt{6}$}
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			B&=&2\ln \left( \mathrm{e} x\right)^{\frac{1}{2}}- \left(\ln\mathrm{e}^2-\ln x^{\frac{1}{2}}\right)+\ln 3 \cdot \dfrac{\ln (\mathrm{e}x^2) }{\ln 3}  \\
+			&= &\ln \left( \mathrm{e} x\right)		
+			-\left( 2-\dfrac{1}{2}\ln x\right)+\ln (\mathrm{e}x^2)\\
+			&=&\left( \ln \mathrm{e} +\ln x\right) -2+\dfrac{1}{2}\ln x +\ln e +\ln x^2\\
+			&=&1+\ln x -2+\dfrac{1}{2}\ln x +1+2\ln x\\
+			&=& \dfrac{7}{2}\ln x.
+		\end{eqnarray*}
+	\begin{itemchoice}
+		\itemch Sai. Ta có $B=\dfrac{7}{2}\ln x$.
+		\itemch Đúng. Cho $\ln x =4$ thì $B=14$.
+		\itemch Sai. Cho $x =e^3$ thì $2B+3=2\cdot\dfrac{7}{2}\ln(e^3)+3=2\cdot\dfrac{7}{2}\cdot 3+3=9$.
+		\itemch Đúng. Cho $x =6$ thì $B=\dfrac{7}{2}\ln 6$.\\
+		 $\Rightarrow e^B=e^{\tfrac{7}{2}\ln 6}=\left(e^{\ln 6}\right)^{\tfrac{7}{2}}=6^{\tfrac{7}{2}}=\sqrt{6^7}=6^3\cdot\sqrt{6}=216\sqrt{6}$.
+	\end{itemchoice}		
+	}	
+\end{ex}
+\begin{ex}%[1D6H2-3]
+	Cho biểu thức $A=\left( a^3\sqrt{a}\right)^{\log_a b}+\left( \sqrt[3]{b^2}\right)^{\log_b a}$ với $a, b >0$,  $a\ne 1$, $b\ne 1$ và $B=\log \dfrac{a}{b}+\log \dfrac{b}{c}+\log \dfrac{c}{d}-\log \dfrac{a}{d}$ với $a$, $b$, $c$, $d$ là các số dương. 
+	\choiceTF
+	{$A=\sqrt[3]{a}+\sqrt{b^4}$}
+	{$B=\dfrac{a}{b}$}
+	{\True $A+B\sqrt{a}=\sqrt[3]{a^2}+\sqrt{b^7}$}
+	{$A\sqrt[3]{a}-B\sqrt{b}=2a+\sqrt{b^7}$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Sai. Ta có
+		\begin{eqnarray*}
+			A&=&\left(a^3\cdot a^{\frac{1}{2}}\right)^{\log_a b}+ \left( b^{\frac{2}{3}}\right)^{\log_b a} \\
+			&=&\left( a^{\frac{7}{2}}\right)^{\log_a b}+\left( b^{\frac{2}{3}}\right)^{\log_b a}\\
+			&=&\left(a^{\log_a b}\right)^{\frac{7}{2}} +\left( b^{\log_b{a}}\right)^{\frac{2}{3}}\\
+			&=&b^{\frac{7}{2}}+a^{\frac{2}{3}}=\sqrt[3]{a^2}+\sqrt{b^7}.
+		\end{eqnarray*}
+		\itemch Sai. $B=\log \left( \dfrac{a}{b}\cdot \dfrac{b}{c}\cdot \dfrac{c}{d}\right)-\log\dfrac{a}{d}=\log \left(\dfrac{a}{d}:\dfrac{a}{d}\right)=\log 1=0$.
+		\itemch Đúng. $A+B\sqrt{a}=\sqrt[3]{a^2}+\sqrt{b^7}+0\sqrt{a}=\sqrt[3]{a^2}+\sqrt{b^7}$.
+		\itemch Sai. $A\sqrt[3]{a}-B\sqrt{b}=\sqrt[3]{a}\cdot\sqrt[3]{a^2}+\sqrt[3]{a}\cdot\sqrt{b^7}-0\sqrt{b}=a+\sqrt[3]{a}\cdot\sqrt{b^7}$.
+	\end{itemchoice} }
+\end{ex}
+\begin{ex}%[1D6H2-3]
+	Cho biểu thức $A=\log_2 x^2 +\log_{\frac{1}{2}}x^3+\log_4 x$, với $x$ là số thực dương.
+	\choiceTF
+	{Rút gọn $A= \dfrac{1}{2}\log_2 x$}
+	{\True Khi $\log_2 x =1$ thì $A=-\dfrac{1}{2}$}
+	{\True Khi $x =4$ thì $\ln A$ không tồn tại}
+	{Khi $\log_2 x =-\sqrt{2}$ thì $\log_2 A=\dfrac{\sqrt{2}}{2}$}
+	\loigiai{
+		\begin{eqnarray*}
+			A&=& \log_2 x^2 +\log_{\frac{1}{2}}x^3+\log_4 x\\
+			&=& 2\log_2 x +3\log_{2^{-1}} x+\log_{2^2}x\\
+			&=& 2\log_2 x =3\log_2 x+\dfrac{1}{2}\log_2 x\\
+			&=& -\dfrac{1}{2}\log_2 x.
+		\end{eqnarray*}
+	\begin{itemchoice}
+		\itemch Sai. Ta có $A= -\dfrac{1}{2}\log_2 x$.
+		\itemch Đúng.  Khi $\log_2 x =1$ thì $A=-\dfrac{1}{2}$.
+		\itemch Đúng.  Khi $x =4$ thì $\log_2 x=2$ và $A=-1$. Khi đó $\ln A$ không tồn tại.
+		\itemch Sai. Khi $\log_2 x =-\sqrt{2}$ thì $A=\dfrac{\sqrt{2}}{2}=\dfrac{1}{\sqrt{2}}=2^{-\tfrac{1}{2}}$ và $\log_2 A =\log_2\left(2^{-\tfrac{1}{2}}\right)=-\dfrac{1}{2}$.
+	\end{itemchoice}
+	} 
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C6B2-DE1-DS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE1-KQ]
+\caukq
+%\subsubsection{Trắc nghiệm trả lời ngắn}
+\begin{ex}%[1D6H2-3]
+	Cho $\log_a b =3$ và $\log_a c =4$ với $a$, $b$, $c>0$, $a\ne 1$. Tính giá trị của biểu thức 
+	$$P=\log_a \left( \dfrac{a^2\cdot \sqrt{b}}{c^3}\right).$$
+	\shortans{$-8{,}5$}
+	\loigiai{
+		\begin{eqnarray*}
+			P&=&\log_a \left( \dfrac{a^2\sqrt{b}}{c^3}\right)=\log_a a^2 +\log_b\sqrt{b}-\log_a c^3\\
+			&=&2+\log_a b^{\frac{1}{2}}-3\log_a c\\
+			&=&2+\dfrac{1}{2}\log_a b -3\log_a c\\ &=&2+\dfrac{3}{2}-12=-\dfrac{17}{2}= -8{,}5.
+		\end{eqnarray*}}
+\end{ex}
+\begin{ex}%[1D6H2-1]
+	Tính giá trị biểu thức $A=\log_2\left(2\sin\dfrac{\pi}{12}\right)+\log_2\left(\cos\dfrac{\pi}{12}\right)$.
+	\shortans{$-1$}
+	\loigiai{Ta có \begin{align*}
+			A&\ =\log_2\left(2 \sin\dfrac{\pi}{12}\right)+\log_2\left(\cos\dfrac{\pi}{12}\right)\\
+			&\ =\log_2\left(2 \sin\dfrac{\pi}{12} \cdot\cos\dfrac{\pi}{12}\right)\\
+			&\ =\log_2\left(\sin\dfrac{\pi}{6}\right)\\
+			&\ =\log_2\dfrac{1}{2}=-1.
+		\end{align*}}
+\end{ex}
+\begin{ex}%[1D6H2-3]
+	Cho $ x,\,y$ là các số thực lớn hơn $ 1$ thỏa mãn $x^2+9y^2=6xy$. Tính $$ M=\dfrac{1+\log_{12}x+\log_{12}y}{2\log_{12}\left(x+3y\right)}.$$
+	\shortans{$1$}
+	\loigiai{
+		Ta có $x^2+9y^2=6xy\Leftrightarrow{\left(x-3y\right)^2}=0\Leftrightarrow x=3y$.\\
+		Suy ra $ M=\dfrac{1+\log_{12}x+\log_{12}y}{2\log_{12}\left(x+3y\right)}= \dfrac{\log_{12}12+\log_{12}3y+\log_{12}y}{2\log_{12}\left(3y+3y\right)}=\dfrac{\log_{12}36y^2}{\log_{12}36y^2}=1$.}
+\end{ex}
+\begin{ex}%[1D6V2-6]
+	Để xác định một chất có nồng độ pH, người ta tính theo công thức pH$=\log\dfrac{1}{\left[H^+\right]}$, trong đó $\left[H^+\right]$ là nồng độ ion $H^+$ (đơn vị là M). Một dung dịch có nồng độ ion $H^+$ gấp $17$ lần nồng độ ion $H^+$ của cà phê đen. Tính độ pH của dung dịch đó (kết quả được làm tròn đến hàng phần trăm), biết nồng độ ion $H^+$ của cà phê đen là $10^{-5}$ M.
+	\shortans{$3{,}77$}
+	\loigiai{
+		\begin{itemize}
+			\item Nồng độ ion $H^+$ của dung dịch là $17\cdot 10^{-5}$ M.
+			\item Độ pH của dung dịch đó là $pH=\log\dfrac{1}{\left[H^+\right]}=-\log\left(17\cdot10^{-5}\right)\approx 3{,}77 $.
+		\end{itemize}
+		}
+\end{ex}
+
+\begin{ex}%[1D6V2-1]
+	Số tự nhiên $3^{2023}$ có bao nhiêu chữ số?
+		\shortans{$966$}
+	\loigiai{
+		Đặt $n=3^{2023}\Rightarrow \log_n =2023 \log_3 \approx 965{,}216$.\\
+		Suy ra $965<\log n <966\Rightarrow 10^{965}<n<10^{966}$.\\
+		Ta biết $10^{965}$ có $966$ chữ số, $10^{966}$ có $967$ chữ số mà $n\in \left(10^{965};10^{966}\right)$ nên $n$ có $966$ chữ số.
+	}
+\end{ex}
+\begin{ex}%[1D6C2-6]
+	Cường độ một trận động đất $M$ (độ richter) được cho bởi công thức $M= \log A-\log A_0$, với $A$ là biên độ rung chấn tối đa và $A_0$ là một biên độ chuẩn (hằng số). Đầu thế kỷ $20$, một trận động đất ở San Francisco có cường độ $8$ độ richter. Trong cùng năm đó, trận động đất khác Nam Mỹ có biên độ mạnh hơn gấp $4$ lần. Tính cường độ của trận động đất ở Nam Mỹ (kết quả được làm tròn đến hàng phần chục). 
+	\shortans{$8{,}6$}
+	\loigiai{
+		\begin{itemize}
+			\item Trận động đất ở San Francisco có cường độ $8$ độ richte, áp dụng công thức\\ $$M_1=\log A-\log A_0 \Rightarrow 8=\log A-\log A_0.$$
+			\item Trận động đất ở Nam Mỹ có biên độ là $4A$, khi đó cường độ của trận động đất ở Nam Mỹ là
+			\begin{eqnarray*}
+				M_2&=&\log(4A)-\log A_0\\
+				&=&\log4+\log A-\log A_0\\
+				&=&\log4+8 \approx 8{,}6.
+			\end{eqnarray*}
+		\end{itemize}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C6B2-DE1-KQ}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE2-LC]
+\caulc
+%Câu 1
+	\begin{ex}%[1D6N2-1]
+		Tính giá trị biểu thức $P=\log_{\tfrac{1}{2}} 4+\log_2 8+2$.
+		\choice{$1$}{\True $3$}{$\log_2 3$}{$0$}
+		\loigiai{
+			Ta có 	$P=\log_{\tfrac{1}{2}} 4+\log_2 8+2=\log_{2^{(-1)}} 2^2+\log_2 2^3+2=-2\log_2 2+3\log_2 2+2=3$.
+		}
+	\end{ex}
+%Câu 2
+	\begin{ex}%[1D6N2-2]
+		Với $ a$ là số thực dương tùy ý, $\log_2\left(\dfrac{64}{a^4}\right)$ bằng
+		\choice
+		{\True $ 6-4\log_2a$}
+		{$ 6+4\log_2a$}
+		{$ 5+4\log_2a$}
+		{$ 6+\dfrac{1}{4}\log_2a$}
+		\loigiai{
+			Ta có $\log_2\left(\dfrac{64}{a^4}\right)=\log_264-\log_2a^4=6-4\log_2a$.}
+	\end{ex}
+%Câu 3
+	\begin{ex}%[1D6N2-2]
+		Cho $\log 2=a$ Tính $\log\dfrac{125}{4}$ theo $a$ .
+		\choice
+		{\True $3-5a$}
+		{$6+7a$}
+		{$4\left(1+a\right)$}
+		{$2\left(a+5\right)$}
+		\loigiai{
+			Ta có $\log\dfrac{125}{4}=\log\dfrac{1000}{32}=\log{10^3}-\log{2^5}=3-5a$.}
+	\end{ex}
+%Câu 4
+	\begin{ex}%[1D6N2-2]
+		Cho $\log 5=a$. Tính $\log 50\,000$ theo $ a$.
+		\choice
+		{$ 5a$}
+		{\True $ a+4$}
+		{$ 5a^2$}
+		{$ 2a^2+1$}
+		\loigiai{
+			Ta có $\log 50\,000=\log\left(5\cdot 10^4\right)=\log 5+4\log 10=a+4$.}
+	\end{ex}
+%Câu 5
+	\begin{ex}%[1D6H2-3]
+		Cho các số thực dương $ a,b$ và $ a\ne 1$. Biểu thức $\log_a{a^2}b$ bằng
+		\choice
+		{\True $ 2+\log_ab$}
+		{$ 1+\log_ab$}
+		{$ 2\left(1+\log_ab\right)$}
+		{$ 2\log_ab$}
+		\loigiai{
+			Ta có $\log_a{a^2}b=\log_a{a^2}+\log_ab=2\log_aa+\log_ab=2+\log_ab$.}
+	\end{ex}
+%Câu 6	
+	\begin{ex}%[1D6H2-3]
+		Cho các số thực $ a$, $ b$ thỏa $ 0 < a\ne 1$ và $ b\ne 0$. Rút gọn biểu thức $$ A=\log_a{b^2}+\log_{a^2}{b^4}+\log_{a^6}{b^6}.$$
+		\choice
+		{$ A=5\log_ab$}
+		{$ A=5\log_ba$}
+		{\True $ A=5\log_a\left| b\right|$}
+		{$ A=5$}
+		\loigiai{
+			Ta có $ A=2\log_a\left| b\right|+2\log_a\left| b\right|+\log_a\left| b\right|=5\log_a\left| b\right|$.}
+	\end{ex}
+%Câu 7
+	\begin{ex}%[1D6H2-3]
+		Cho $\log_3 2=a$; $\log_3 5=b$ , khi đó $\log_340$ bằng
+		\choice
+		{$3\rm{a}-b$}
+		{$a-3b$}
+		{\True $3\rm{a}+b$}
+		{$a+3b$}
+		\loigiai{
+			Ta có $\log_ 340=\log_3\left(2^3\cdot 5\right)=3\log_3 2+\log_3 5=3a+b$.}
+	\end{ex}
+%Câu 8
+	\begin{ex}%[1D6H2-3]
+		Cho $\log_62=a$, $\log_65=b$. Tính $ I=\log_35$ theo $ a$, $ b$.
+		\choice
+		{$ I=\dfrac{b}{1+a}$}
+		{\True $ I=\dfrac{b}{1-a}$}
+		{$ I=\dfrac{b}{a-1}$}
+		{$ I=\dfrac{b}{a}$}
+		\loigiai{
+			Ta có $\log_35=\dfrac{\log_65}{\log_63}=\dfrac{\log_65}{\log_66-\log_62}=\dfrac{b}{1-a}$.}
+	\end{ex}
+%Câu 9
+	\begin{ex}%[1D6H2-3]
+		Cho các số thực dương $a$, $b$, $x$ thỏa mãn $\log_3 x=4\log_3 a+7\log_3 b$. Mệnh đề nào dưới đây đúng
+		\choice{$x=4a+7b$}{$x=4a-7b$}{\True $x=a^4b^7$}{$x=a^{\tfrac{1}{4}}b^{\tfrac{1}{7}}$}
+		\loigiai{
+			Ta có \begin{align*}
+				&\ \log_3 x=4\log_3 a+7\log_3 b\\
+				\Leftrightarrow&\ x=3^{4\log_3 a+7\log_3 b}\\
+				\Leftrightarrow&\ x=3^{\log_3 a^4+\log_3 b^7}\\
+				\Leftrightarrow&\ x= 3^{\log_3 a^4}\cdot 3^{\log_3 b^7}\\
+				\Leftrightarrow&\ x=a^4 b^7.
+			\end{align*}
+		}
+	\end{ex}
+%Câu 10
+	\begin{ex}%[1D6V2-3]
+		Cho $a$ là hai số thực dương khác $1$. Đặt $\log_3a=m$. Tính theo $m$ giá trị của biểu thức  $D=\log_{\tfrac{1}{3}} a-\log_{\sqrt{3}} a+\log_a 9$.
+		\choice 
+		{\True $D=\dfrac{2-3m^2}{m}$}
+		{$D=\dfrac{3m^2-2}{m}$}
+		{$D=\dfrac{4-3m^2}{2m}$}
+		{$D=-3m$}
+		\loigiai 
+		{Ta có $\begin{aligned}[t]
+				D&\ =\ \log_{\tfrac{1}{3}} a-\log_{\sqrt{3}} a+\log_a 9\\
+				&\ =\ \log_{3^{-1}} a- \log_{3^{\frac{1}{2}}} a+ \log_a 3^2\\
+				&\ =\ -\log_3 a-2 \log_3 a+2 \log_a 3\\
+				&\ =\ -3 \log_3 a+\dfrac{2}{\log_3 a}\\
+				&\ =\ -3 m+\dfrac{2}{m}\\
+				&\ =\ \dfrac{2-3 m^2}{m}.
+			\end{aligned}$
+		}
+	\end{ex}
+
+%Câu 11	
+	\begin{ex}%[1D6V2-3]
+		Cho $\log_25=a$, $\log_35=b$. Hãy biểu diễn $\log_65$ theo $a$ và $b$.
+		\choice 
+		{$\log_65=\dfrac{1}{a+b}$}
+		{\True $\log_65=\dfrac{a b}{a+b}$}
+		{$\log_65=a+b$}
+		{$\log_65=a^2+b^2$}
+		\loigiai 
+		{Ta có $\log_65=\dfrac{1}{\log_56}=\dfrac{1}{\log_5(2.3)}=\dfrac{1}{\log_52+\log_53}=\dfrac{1}{\dfrac{1}{a}+\dfrac{1}{b}}=\dfrac{a b}{a+b}$.
+		}
+	\end{ex}
+%Câu 12
+	\begin{ex}%[1D6V2-3]
+		Cho $a=\log_{30} 3$ và $b=\log_{30} 5$. Tính $\log_{30} 1350$ theo $a$ và $b$.
+		\choice 
+		{$1+2a-b$}
+		{\True $1+2a+b$}
+		{$1-2a+b$}
+		{$-1+2a+b$}
+		\loigiai 
+		{Ta có $\log_{30} 1350=\log_{30}( 30\cdot 3^2\cdot 5)=1+2\log_{30} 3+\log_{30} 5=1+2a+b$.
+		}
+	\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C6B2-DE2-LC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cauds
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE2-DS]
+\begin{ex}%[1D6H2-1]
+	Cho các biểu thức $P=\log_2 8 +\log_3 27 -\log_5 {5^3}$ và $Q=\ln(2\mathrm{e})-\log 100$.
+	\choiceTF
+	{$P+Q=2\ln 2$}
+	{\True $Q-P=\ln 2-4$}
+	{\True $3Q+P=3\ln 2$}
+	{\True $2Q+P=2\ln 2+1$}
+	\loigiai
+	{Ta có $P=\log_2 8 +\log_3 27 -\log_5 {5^3}=\log_2 2^3 +\log_3 3^3 -\log_5 5^3 =3+3-3=3$.\\
+		$Q= \ln(2\mathrm{e})-\log 100=\ln 2+\ln \mathrm{e} -\log 10^2=\ln 2 +1-2=\ln 2-1$.
+		\begin{itemchoice}
+			\itemch Sai. $P+Q=3+\ln 2 -1=2+\ln 2$
+			\itemch Đúng. $Q-P=\ln 2-1 -3=\ln 2-4$.
+			\itemch Đúng. $3Q+P=3\left(\ln 2 -1 \right)+3=3\ln 2$.
+			\itemch Đúng. $2Q+P=2\left(\ln 2-1\right)+3=2\ln 2+1$.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[1D6N2-1]
+	\choiceTF
+	{\True Biểu thức $A=\log_6(x+5)$ có nghĩa khi  $x\in(-5;+\infty)$}
+	{\True Biểu thức $B=\ln(x-1)^2$ có nghĩa khi $x\ne 1$}
+	{Biểu thức $C=\log^2\dfrac{1}{x-x^2}$ có nghĩa khi  $x\in (1;+\infty)$}
+	{Biểu thức $D=\log_3(2x+1)$ có nghĩa khi $x\in (0;+\infty)$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Đúng. Biểu thức $A=\log_6(x+5)$ có nghĩa khi  $x+5>0\Leftrightarrow x>-5\Leftrightarrow x\in (-5;+\infty)$.
+		\itemch Đúng. Biểu thức $B=\ln(x-1)^2$ có nghĩa khi $(x-1)^2>0\Leftrightarrow x\ne 1$.
+		\itemch Sai. Biểu thức $C$ có nghĩa khi $\dfrac{1}{x-x^2}>0\Leftrightarrow x(1-x)>0\Leftrightarrow 0<x<1$.
+		\itemch Sai. Biểu thức $D$ có nghĩa khi $2x+1>0\Leftrightarrow x>-\dfrac{1}{2}\Leftrightarrow x\in\left(-\dfrac{1}{2};+\infty\right)$.
+	\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[1D6H2-3]
+	Cho biểu thức $Q=2^{\log_{16}{x^4}+\log_2{x^2}}$ với $x$ là số thực khác $0$.
+	\choiceTF
+	{$Q=x^3$}
+	{$Q>0$}
+	{Khi $x=2$ thì $Q=8$}
+	{Khi $x=-2$ thì $\log_2 Q=-3$}
+	\loigiai{
+		Ta có $Q=2^{\log_{16}{x^4}+\log_2{x^2}}=2^{4\cdot \tfrac{1}{4}\log_2|x|+2\log_2|x|}=2^{3\log_2|x|}=\left(2^{\log_2|x|}\right)^3=|x|^3$.
+		\begin{itemchoice}
+			\itemch Sai. Ta có $Q=|x|^3$ với mọi $x\ne 0$.
+			\itemch Đúng. $Q=|x|^3>0$, với mọi $x\ne 0$.
+			\itemch Đúng. Khi $x=2$ thì $Q=8$.
+			\itemch Sai. Khi $x=-2$ thì $\log_2 Q=\log_2 |-2|^3=3$
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[1D6V2-3]
+	Biết $ \log 2=a $, $ \log 3=b $. 
+	\choiceTF
+		{\True $ \log_4 9=\dfrac{b}{a}$}
+		{\True $\log_6 12=\dfrac{2a+b}{a+b}$}
+		{\True $ \log_5 6=\dfrac{a+b}{1-a}$}
+		{$ \log_5 {30}=\dfrac{b-1}{1-a}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Ta có $ \log_4 9=\dfrac{\log 9}{\log 4}=\dfrac{\log 3^2}{\log 2^2}=\dfrac{2\log 3}{2\log 2}=\dfrac{b}{a}$.
+			\itemch Đúng. Ta có $ \log_6 12=\dfrac{\log 12}{\log 6}=\dfrac{\log (2^2\cdot 3)}{\log (2\cdot 3)}=\dfrac{2\log 2+\log 3}{\log 2+\log 3}=\dfrac{2a+b}{a+b}$.
+			\itemch Đúng.  Ta có $ \log_5 6=\dfrac{\log 6}{\log 5}=\dfrac{\log( 2\cdot 3)}{\log (10: 2)}=\dfrac{\log 2+\log 3}{\log 10 -\log 2}=\dfrac{a+b}{1-a}$.
+			\itemch Sai.  Ta có $ \log_5 {30}=\log_5 (6\cdot 5)=\log_5 6 + \log_5 5 =\log_5 6 +1$.\\
+			Lại có $ \log_5 6=\dfrac{\log 6}{\log 5}=\dfrac{\log( 2\cdot 3)}{\log (10: 2)}=\dfrac{\log 2+\log 3}{\log 10 -\log 2}=\dfrac{a+b}{1-a}$.\\
+			Do đó $ \log_5 {30}=\log_5 6 +1=\dfrac{a+b}{1-a}+1=\dfrac{b+1}{1-a}$.
+		\end{itemchoice}
+	}	
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C6B2-DE2-DS}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Opensolutionfile{ans}[ans/ans-11-C6B2-DE2-KQ]
+\caukq
+\begin{ex}%[1D6H2-3]
+	Biết $a$, $b$ là các số thực dương thỏa mãn $\log_3 a^2+\log_3 b=5$. Tính giá trị biểu thức $P=5a^2b$.
+	\shortans{$1215$}
+	\loigiai{
+		Ta có $\log_3 a^2+\log_3 b=5\Leftrightarrow \log_3 \left(a^2\cdot b\right)=5\Leftrightarrow a^2b=243$.\\
+		Vậy $P=5a^2b=5\cdot 243=1215$.
+	}
+\end{ex}
+\begin{ex}%[1D6H2-1]
+	Tính giá trị của biểu thức $A=9^{\log_3 5 +\log_3 2}$.
+	\shortans{$100$}
+	\loigiai
+	{Ta có \begin{align*}
+			A&\ =9^{\log_3 5 +\log_3 2}=3^{2\log_3 5}\cdot 3^{2\log_3 2}\\
+			&\ =3^{\log_3 5^2}\cdot 3^{\log_3 2^2}\\
+			&\ =5^2\cdot 2^2 =100.
+	\end{align*}}
+\end{ex}
+\begin{ex}%[1D6H2-1]
+	Tính giá trị của biểu thức
+	$B=\log\dfrac{1}{1000}+3\cdot \log_{\frac{1}{10}}100-10^{1+\log 2}$.
+	\shortans{$-29$}
+	\loigiai{
+		Ta có \begin{itemize}
+				\item $\log\dfrac{1}{1000}=\log 10^{-3}=-3$.
+				\item $\log_{\frac{1}{10}}100=\log_{10^{-1}}10^2=-2$.
+				\item $10^{1+\log 2}=10^{\log10+\log 2}=10^{\log 20}=20$.
+			\end{itemize}
+		Vậy $B=-3+3(-2)-20=-29$.
+	}
+\end{ex}
+\begin{ex}%[1D6V2-6]
+	Để xác định một chất có nồng độ pH, người ta tính theo công thức pH$=\log\dfrac{1}{\left[H^+\right]}$, trong đó $\left[H^+\right]$ là nồng độ ion $H^+$ (đơn vị là  mol/L).
+	Nước cất có nồng độ  H$^+ $ là $ 10^{-7} $ mol/L. Một dung dịch có nồng độ  H$^+ $ gấp $ 20 $ lần nồng độ  H$^+ $ của nước cất. Tính pH của dung dịch đó (làm tròn đến hàng phần mười). 
+	\shortans{$5{,}7$}
+	\loigiai{
+		Nồng độ $ \text{H}^+ $ của dung dịch là $ 20\cdot 10^{-7} $ mol/L. Độ pH của dung dịch là $$ \text{pH}=\log\dfrac{1}{\left[H^+\right]}=-\log\left(20\cdot 10^{-7}\right)\approx 5{,}7 .$$}
+\end{ex}
+
+\begin{ex}%[1D6V2-6]
+	Trong nông nghiệp bèo hoa dâu được dùng làm phân bón, nó rất tốt cho cây trồng. Mới đây, các nhà khoa học Việt Nam đã phát hiện ra bèo hoa dâu có thể dùng để chiết xuất ra chất có tác dụng kích thích hệ miễn dịch và hỗ trợ điều trị bệnh ung thư. Bèo hoa dâu được thả nuôi trên mặt nước. Một người đã thả một lượng bèo hoa dâu chiếm $4\%$  diện tích mặt hồ. Biết rằng cứ sau đúng một tuần bèo phát triển thành $3$ lần số lượng đã có và giả sử tốc độ phát triển của bèo ở mọi thời điểm như nhau. Hỏi sau ít nhất bao nhiêu ngày bèo sẽ vừa phủ kín mặt hồ?
+	\shortans{$21$}
+	\loigiai{ Số lượng bèo ban đầu chiếm $0{,}04$ diện tích mặt hồ.
+	\begin{itemize}
+		\item Sau $1$ tuần số lượng bèo là $0{,}04\times 3$   diện tích mặt hồ.
+		\item Sau $2$ tuần số lượng bèo là $0{,}04\times 3^2$   diện tích mặt hồ.
+		\item Sau $n$ tuần số lượng bèo là $0{,}04\times 3^n$   diện tích mặt hồ.
+	\end{itemize}	
+	Để bèo phủ kín mặt hồ thì $0{,}04\times 3^n=1\Leftrightarrow3^n=25\Leftrightarrow n=\log_3 25$.\\
+	Số ngày tương ứng là $7n=7\log_3  25\approx 20{,}51$ ngày.\\
+	Vậy sau ít nhất $21$ ngày thì bèo hoa dâu sẽ phủ kín mặt hồ.
+	}
+\end{ex}
+\begin{ex}%[1D6C2-6]
+	Sự tăng trưởng của một loài vi khuẩn được tính theo công thức $f(t) =A\cdot \mathrm{e}^{rt}$, trong đó $A$ là số lượng vi khuẩn ban đầu, $r$ là tỷ lệ tăng trưởng $( r > 0)$ , $t$ (tính theo giờ) là thời gian tăng trưởng. Biết số vi khuẩn ban đầu có $1\,000$ con và sau $10$ giờ là $5\,000$ con. Hỏi sao bao nhiêu giờ thì số lượng vi khuẩn tăng gấp $10$ lần (làm tròn đến hàng phần mười)?
+	\shortans{$14{,}3$}
+	\loigiai{
+		Áp dụng công thức $f(t) =A\cdot \mathrm{e}^{rt}$, ta có
+		$$ 5\,000 =1\,000\cdot \mathrm{e}^{10r}\Leftrightarrow \mathrm{e}^{10r} =5\Leftrightarrow r=\dfrac{\ln 5}{10}.$$
+		Gọi $t$ là thời gian cần tìm để số lượng vi khuẩn tăng gấp $10$ lần.\\
+		Do đó: 
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			&&10\,000=1\,000\mathrm{e}^{rt}\\
+			&\Rightarrow& \mathrm{e}^{rt}= 10 \\
+			&\Rightarrow& rt= \ln10\\
+			&\Rightarrow& t=\dfrac{\ln10}{r}\\
+			&\Rightarrow& t=\dfrac{10\ln10}{\ln5}\\
+			&\Rightarrow& t \approx 14{,}3 \text{ giờ}.
+		\end{eqnarray*}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C6B2-DE2-KQ}

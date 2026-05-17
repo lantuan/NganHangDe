@@ -1,0 +1,998 @@
+\section{Đạo hàm}
+
+\subsection{Đề 1}
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE1-TN]
+\caulc
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=f(x)$ có đạo hàm tại điểm $x_0$. Tìm khẳng định đúng trong các khẳng định sau
+\choice
+{\True $f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}$}
+{$f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)+f\left(x_0\right)}{x-x_0}$}
+{$f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x+x_0}$}
+{$f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)+f\left(x_0\right)}{x+x_0}$}
+\loigiai{
+Theo định nghĩa đạo hàm ta có
+$$
+	f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=f(x)$ có đạo hàm thỏa mãn $f'(6)=2$. Giá trị của biểu thức $\lim\limits_{x \rightarrow 6} \dfrac{f(x)-f(6)}{x-6}$ bằng
+\choice
+{$ 12 $}
+{\True $ 2 $}
+{$\dfrac{1}{3}$}
+{$\dfrac{1}{2}$}
+\loigiai{
+Hàm số $y=f(x)$ có tập xác định là $\mathscr{D}$ và $x_0 \in \mathscr{D}$.
+\\
+Nếu tồn tại giới hạn $\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}$ thì giới hạn gọi là đạo hàm của hàm số tại $x_0$.
+\\
+Vậy kết quả của biểu thức
+$$
+	\lim\limits_{x \rightarrow 6} \dfrac{f(x)-f(6)}{x-6}=f'(6)=2.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\dfrac{3 x}{1+|x|}$. Tính $f'(0)$.
+\choice
+{$f'(0)=0$}
+{$f'(0)=1$}
+{$f'(0)=\dfrac{1}{3}$}
+{\True $f'(0)=3$}
+\loigiai{
+Ta có
+$$
+	f'(0)=\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f(0)}{x}=\lim\limits_{x \rightarrow 0} \dfrac{3}{1+|x|}.
+$$
+Mà
+\begin{align*}
+	&\lim\limits_{x \rightarrow 0^{+}} \dfrac{3}{1+|x|}=\lim\limits_{x \rightarrow 0^{+}} \dfrac{3}{1+x}=3; \\
+	&\lim\limits_{x \rightarrow 0^{-}} \dfrac{3}{1+|x|}=\lim\limits_{x \rightarrow 0^{-}} \dfrac{3}{1-x}=3.
+\end{align*}	
+Suy ra
+$$
+	\lim\limits_{x \rightarrow 0^{+}} \dfrac{3}{1+|x|}
+	=\lim\limits_{x \rightarrow 0^{-}} \dfrac{3}{1+|x|}=3
+	\Rightarrow 
+	f'(0)=\lim\limits_{x \rightarrow 0} \dfrac{3}{1+|x|}=3.
+$$
+Kết luận $f'(0)=3$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=f(x)=\heva{&x^2+1, && x \geq 1 \\ &2 x, && x<1}$. Mệnh đề \textbf{sai} là
+\choice
+{$f'(1)=2$}
+{\True $f$ không có đạo hàm tại $x_0=1$}
+{$f'(0)=2$}
+{$f'(2)=4$}
+\loigiai{
+Ta có
+\begin{align*}
+	&\lim\limits_{x \rightarrow 1^{-}} \dfrac{f(x)-f(1)}{x-1}=\lim\limits_{x \rightarrow 1^{-}} \dfrac{2 x-2}{x-1}=\lim\limits_{x \rightarrow 1^{-}} 2=2; \\
+	&\lim\limits_{x \rightarrow 1^{+}} \dfrac{f(x)-f(1)}{x-1}=\lim\limits_{x \rightarrow 1^{+}} \dfrac{x^2+1-2}{x-1}=\lim\limits_{x \rightarrow 1^{+}}(x+1)=2 .
+\end{align*}
+Suy ra hàm số có đạo hàm tại $x_0=1$ là $f'(1)=2$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&a x^2+b x+1, &&x \geq 0 \\ &a x-b-1, &&x<0}$. Khi hàm số $f(x)$ có đạo hàm tại $x_0=0$. Hãy tính $T=a+2 b$.
+\choice
+{$T=-4$}
+{$T=0$}
+{\True $T=-6$}
+{$T=4$}
+\loigiai{
+Ta có $f(0)=1$.
+\begin{align*}
+	&\lim\limits_{x \rightarrow 0^{+}} f(x)=\lim\limits_{x \rightarrow 0^{+}}\left(a x^2+b x+1\right)=1;\\
+	&\lim\limits_{x \rightarrow 0^{-}} f(x)=\lim\limits_{x \rightarrow 0^{-}}(a x-b-1)=-b-1.
+\end{align*}
+Để hàm số có đạo hàm tại $x_0=0$ thì hàm số phải liên tục tại $x_0=0$ nên $$
+	f(0)=\lim\limits_{x \rightarrow 0^{+}} f(x)=\lim\limits_{x \rightarrow 0^{-}} f(x).
+$$
+Suy ra $-b-1=1 $ hay $ b=-2$.
+\\
+Khi đó $f(x)=\heva{&a x^2-2 x+1, &&x \geq 0 \\ &a x+1, &&x<0}$.
+\\
+Xét
+\begin{align*}
+	&\lim\limits_{x \rightarrow 0^{+}} \dfrac{f(x)-f(0)}{x}=\lim\limits_{x \rightarrow 0^{+}} \dfrac{a x^2-2 x+1-1}{x}=\lim\limits_{x \rightarrow 0^{+}}(a x-2)=-2; \\
+	&\lim\limits_{x \rightarrow 0^{-}} \dfrac{f(x)-f(0)}{x}=\lim\limits_{x \rightarrow 0^{-}} \dfrac{a x+1-1}{x}=\lim\limits_{x \rightarrow 0^{-}}(a)=a
+\end{align*}
+Hàm số có đạo hàm tại $x_0=0$ thì $a=-2$.
+\\
+Vậy với $a=-2$, $b=-2$ thì hàm số có đạo hàm tại $x_0=0$ khi đó $T=a+2b=-6$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số số $y=x(x-1)(x-2) \ldots (x-2021)$ tại điểm $x=0$.
+\choice
+{$f'(0)=0$}
+{$f'(0)=2021!$}
+{$f'(0)=2021$}
+{\True $f'(0)=-2021!$}
+\loigiai{
+Ta có
+\begin{align*}
+	f'(0)&=\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f(0)}{x-0}=\lim\limits_{x \rightarrow 0} \dfrac{x(x-1)(x-2) \ldots(x-2021)}{x}; \\
+	&=\lim\limits_{x \rightarrow 0}(x-1)(x-2) \ldots(x-2021)=(-1) \cdot(-2) \ldots(-2021)=-2021!.
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&(x-1)^2, &&x \geq 0 \\ &-x^2, &&x<0}$. $ f(x) $ có đạo hàm tại điểm $x_0=0$ là
+\choice
+{$f'(0)=0$}
+{$f'(0)=1$}
+{$f'(0)=-2$}
+{\True Không tồn tại}
+\loigiai{
+Ta có
+\begin{align*}
+	&f(0)=1;\\
+	&\lim\limits_{x \rightarrow 0^{+}} f(x)=\lim\limits_{x \rightarrow 0^{+}}(x-1)^2=1;\\
+	&\lim\limits_{x \rightarrow 0^{-}} f(x)=\lim\limits_{x \rightarrow 0^{-}}\left(-x^2\right)=0.
+\end{align*}
+Do $f(0)=\lim\limits_{x \rightarrow 0^{+}} f(x) \neq \lim\limits_{x \rightarrow 0^{-}} f(x)$ nên hàm số không liên tục tại $x_0=0$.
+\\
+Vậy hàm số không có đạo hàm tại $x_0=0$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-2]
+Tỉ số $\dfrac{\Delta y}{\Delta x}$ của hàm số $f ( x )=2 x \cdot ( x -1)$ theo $x$ và $\Delta x$ là
+\choice
+{$4 x+2 \Delta x+2$}
+{$4 x+2(\Delta x)^2+2$}
+{\True $4 x+2 \Delta x-2$}
+{$4 x \cdot \Delta x+2(\Delta x)^2-2 \Delta x$}
+\loigiai{
+\begin{align*}
+	f (x)&=2 x .( x -1)=2 x ^2-2 x \\
+	\Delta y&=f(x+\Delta x)-f(x) \\
+	& =2(x+\Delta x)^2-2 \cdot(x+\Delta x)-\left(2 x^2-2 x\right) \\
+	& =2 x^2+4 x \cdot \Delta x+2(\Delta x)^2-2 x-2 \Delta x-2 x^2+2 x \\
+	& =4 x \cdot \Delta x+2(\Delta x)^2-2 \Delta x.
+\end{align*}
+Lập tỉ số $\dfrac{\Delta y}{\Delta x}=4 x+2 \cdot \Delta x-2$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]]
+Tính đạo hàm của hàm số 
+$$
+	f(x)=\heva{&\dfrac{\sqrt{x^3-2 x^2+x+1}-1}{x-1}, &&x \neq 1 \\ &0, &&x=1}
+$$ tại điểm $x _0=1$.
+\choice
+{$ \dfrac{1}{3} $}
+{$ \dfrac{1}{5} $}
+{\True $ \dfrac{1}{2} $}
+{$ \dfrac{1}{4} $}
+\loigiai{
+Ta có $f(1)=0$ và
+\begin{align*}
+	\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1}
+	&=\lim\limits_{x \rightarrow 1} \dfrac{\sqrt{x^3-2 x^2+x+1}-1}{(x-1)^2} \\
+	& =\lim\limits_{x \rightarrow 1} \dfrac{x^3-2 x^2+x}{(x-1)^2 \cdot\left(\sqrt{x^3-2 x^2+x+1}+1\right)} \\
+	& =\lim\limits_{x \rightarrow 1} \dfrac{x(x-1)^2}{(x-1)^2 \cdot\left(\sqrt{x^3-2 x^2+x+1}+1\right)} \\
+	& =\lim\limits_{x \rightarrow 1} \dfrac{x}{\sqrt{x^3-2 x^2+x+1}+1} \\
+	&=\dfrac{1}{2}.
+\end{align*}
+Vậy $f'(1)=\dfrac{1}{2}$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số $f(x)=\dfrac{x^2+|x+1|}{x}$ tại $x =1$.
+\choice
+{$ 2 $}
+{$ 0 $}
+{$ 3 $}
+{\True Đáp án khác}
+\loigiai{
+Ta có hàm số liên tục tại $x=1$ và
+$$
+f(-1)=-1 ; \dfrac{f(x)-f(-1)}{x+1}=\dfrac{x^2+x+|x+1|}{x(x+1)}.
+$$
+Nên
+\begin{align*}
+	&\lim\limits_{x \rightarrow-1^{+}} \dfrac{f(x)-f(-1)}{x+1}
+	=\lim\limits_{x \rightarrow-1^{+}} \dfrac{x^2+2 x+1}{x(x+1)}
+	=\lim\limits_{x \rightarrow-1^{+}} \dfrac{(x+1)^2}{x(x+1)}
+	=\lim\limits_{x \rightarrow-1^{+}} \dfrac{x+1}{x}
+	=0; \\
+	&\lim\limits_{x \rightarrow 1^{-}} \dfrac{f(x)-f(-1)}{x+1}
+	=\lim\limits_{x \rightarrow 1^{-}} \dfrac{x^2-1}{x(x+1)}
+	=\lim\limits_{x \rightarrow-1^{-}} \dfrac{(x-1) \cdot(x+1)}{x(x+1)}
+	=\lim\limits_{x \rightarrow-1^{-}} \dfrac{x-1}{x}
+	=2.
+\end{align*}
+Do đó $\lim\limits_{x \rightarrow-1^{+}} \dfrac{f(x)-f(-1)}{x+1} \neq \lim\limits_{x \rightarrow-1^{-}} \dfrac{f(x)-f(-1)}{x+1}$.
+\\
+Vậy hàm số không có đạo hàm tại điểm $x =-1$.
+\\
+Nhận xét: Hàm số $y=f(x)$ có đạo hàm tại $x=x_0$ thì phải liên tục tại điểm đó.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-2]
+Cho hàm số $f ( x )= x _2- x$, đạo hàm của hàm số ứng với số gia của đối số $x$ tại $x _0$ là
+\choice
+{$\lim\limits_{\Delta x \rightarrow 0}\left((\Delta x)^2+2 x \Delta x-\Delta x\right)$}
+{\True $\lim\limits_{\Delta x \rightarrow 0}(\Delta x+2 x-1)$}
+{$\lim\limits_{\Delta x \rightarrow 0}(\Delta x+2 x+1)$}
+{$\lim\limits_{\Delta x \rightarrow 0}\left((\Delta x)^2+2 x \Delta x+\Delta x\right)$}
+\loigiai{
+Ta có
+\begin{align*}
+	\Delta y&=\left(x_0+\Delta x\right)^2-\left(x_0+\Delta x\right)-\left(x_0^2-x_0\right) \\
+	& =x_0^2+2 x_0 \Delta x+(\Delta x)^2-x_0-\Delta x-x_0^2+x_0 \\
+	& =(\Delta x)^2+2 x_0 \Delta x-\Delta x.
+\end{align*}
+Nên
+\begin{align*}
+	f'\left(x_0\right)&=\lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x} \\
+	& =\lim\limits_{\Delta x \rightarrow 0} \dfrac{(\Delta x)^2+2 x_0 \Delta x-\Delta x}{\Delta x} \\
+	&=\lim\limits_{\Delta x \rightarrow 0}\left(\Delta x+2 x_0-1\right).
+\end{align*}
+Vậy $f'(x)=\lim\limits_{\Delta x \rightarrow 0}(\Delta x+2 x-1)$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-2]
+Tính số gia của hàm số $y=\sqrt{2 x+1}$ tại $x _0=1$.
+\choice
+{$ \dfrac{2 \Delta x}{\sqrt{3+2 \Delta x}-\sqrt{3}} $}
+{\True $ \dfrac{2 \Delta x}{\sqrt{3+2 \Delta x}+\sqrt{3}} $}
+{$ \dfrac{2 \Delta x}{\sqrt{3-2 \Delta x}+\sqrt{3}} $}
+{Đáp án khác}
+\loigiai{
+Cho $x_0=1$ một số gia $\Delta x$. Khi đó hàm số nhận một số gia tương ứng là
+\begin{align*}
+	\Delta y&=f\left(x_0+\Delta x\right)-f\left(x_0\right) \\
+	& =f(1+\Delta x)-f(1) \\
+	& =\sqrt{2(1+\Delta x)+1}-\sqrt{3} \\
+	& =\sqrt{2 \Delta x+3}-\sqrt{3} \\
+	& =\dfrac{2 \Delta x}{\sqrt{3+2 \Delta x}+\sqrt{3}}.
+\end{align*}
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-K11C7B1-DE1-TN}
+
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE1-DS]
+\begin{ex}%[1D7H1-1]
+Dùng định nghĩa để tính đạo hàm của hàm số $y=f(x)=x^2+2 x$ tại điểm $x_0=1$. Khi đó, các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True $f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1}$}
+{\True $f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{x^2+2 x-3}{x-1}$}
+{$f'(1)=\lim\limits_{x \rightarrow 1}(x+4)$}
+{$f'(1)=a \Rightarrow a>5$}
+\loigiai{
+Ta có
+$$
+	f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1}
+	=\lim\limits_{x \rightarrow 1} \dfrac{x^2+2 x-3}{x-1}
+	=\lim\limits_{x \rightarrow 1} \dfrac{(x-1)(x+3)}{x-1}
+	=\lim\limits_{x \rightarrow 1}(x+3)
+	=4.
+$$
+Vậy $f'(1)=4<5$.
+\\
+Dựa vào biến đổi trên, ta thấy
+\begin{itemchoice}
+	\itemch $ f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1} $.
+	\itemch $ f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{x^2+2 x-3}{x-1} $.
+	\itemch $f'(1)=\lim\limits_{x \rightarrow 1}(x+3)$.
+	\itemch $f'(1)=a \Rightarrow a=4$.
+\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Dùng định nghĩa để tính đạo hàm của hàm số $f(x)=2 x^3$. Khi đó, các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True Với bất kì $x_0 \colon f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}$}
+{$f'(1)=-6$}
+{\True $f'(0)=0$}
+{\True $f'(2)=24$}
+\loigiai{
+Với bất kì $x_0$, ta có
+\begin{align*}
+	f'\left(x_0\right) &=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0} \\
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{2 x^3-2 x_0^3}{x-x_0} \\
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{2\left(x-x_0\right)\left(x^2+x \cdot x_0+x_0^2\right)}{x-x_0} \\
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{2\left(x^2+x \cdot x_0+x_0^2\right)}{1} \\
+	&=6 x_0^2 .
+\end{align*}
+Khi đó $f'(x)=\left(2 x^3\right)'=6 x^2$ trên $\mathbb{R}$.
+\\
+Ta thấy $ f'(1)=6 $, $ f'(0)=0 $ và $ f'(2)=24 $.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $y=f(x)=2 x^3$ có đồ thị $(C)$ và điểm $M$ thuộc $(C)$ có hoành độ $x_0=-1$. Khi đó, các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True Hệ số góc của tiếp tuyến của $(C)$ tại điểm $M$ bằng $ 6 $}
+{\True Phương trình tiếp tuyến của $(C)$ tại $M$ đi qua điểm $A(0 ; 4)$}
+{Tiếp tuyến của $(C)$ tại $M$ cắt đường thẳng $d \colon y=3 x$ tại điểm có hoành độ bằng $ 4 $}
+{\True Tiếp tuyến của $(C)$ tại $M$ vuông góc với đường thẳng $d \colon y=-\dfrac{1}{6} x$}
+\loigiai{
+Ta có $f'(x)=\left(2 x^3\right)'=6 x^2$ nên tiếp tuyến của $(C)$ tại $M$ có hệ số góc là
+$$
+	f'(-1)=6 \cdot (-1)^2=6.
+$$
+Phương trình tiếp tuyến $ \Delta $ của $(C)$ tại $M$ là
+\begin{align*}
+	y-f(-1)&=6(x+1) \\ 
+	y+2&=6(x+1) \\
+	\Delta \colon y&=6 x+4 .
+\end{align*}
+Thay $ x=0 $ vào phương trình $ \Delta \colon y=6 x+4 $, ta được $ y=4 $. Do đó tiếp tuyến $ \Delta  $ đi qua điểm $ A(0;4) $.
+\\
+Xét phương trình hoành độ giao điểm của tiếp tuyến $ \Delta $ và đường thẳng $d \colon y=3 x$
+$$
+	6 x+4=3x
+	\Leftrightarrow
+	x=-\dfrac{4}{3} \ne 4.
+$$
+Xét tiếp tuyến $ \Delta \colon y=6x+4 $ và đường thẳng $d \colon y=-\dfrac{1}{6} x$, ta thấy
+$$
+	k_{\Delta} \cdot k_{d} = 6 \cdot \left(-\dfrac{1}{6}\right) = -1
+$$
+Suy ra $ \Delta \perp d $.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True $y=x^2-x$ tại $x_0=1$ có $f'(1)=1$}
+{$y=\sqrt{x}$ tại $x_0=1$ có $f'(1)=1$}
+{\True $y=\dfrac{1}{x^2+1}$ tại $x_0=0$ có $f'(0)=0$}
+{\True $y=\dfrac{1}{x+1}$ tại $x_0=2$ có $f'(2)=-\dfrac{1}{9}$}
+\loigiai{
+\begin{itemchoice}
+	\itemch $f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}=\lim\limits_{x \rightarrow 1} \dfrac{x^2-x-f(1)}{x-1}=\lim\limits_{x \rightarrow 1} \dfrac{x^2-x}{x-1}=\lim\limits_{x \rightarrow 1} x=1$.
+	\itemch $f'(1)=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}=\lim\limits_{x \rightarrow 1} \dfrac{\sqrt{x}-f(1)}{x-1}=\lim\limits_{x \rightarrow 1} \dfrac{\sqrt{x}-1}{x-1}=\lim\limits_{x \rightarrow 1} \dfrac{1}{\sqrt{x}+1}=\dfrac{1}{2}$.
+	\itemch $f'(0)=\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}=\lim\limits_{x \rightarrow 0} \dfrac{\dfrac{1}{x^2+1}-f(0)}{x}=\lim\limits_{x \rightarrow 0} \dfrac{\dfrac{1}{x^2+1}-1}{x}=\lim\limits_{x \rightarrow 0} \dfrac{-x}{x^2+1}=0$.
+	\itemch $f'(2)=\lim\limits_{x \rightarrow 2} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}=\lim\limits_{x \rightarrow 2} \dfrac{\dfrac{1}{x+1}-f(2)}{x-2}=\lim\limits_{x \rightarrow 2} \dfrac{\dfrac{1}{x+1}-\dfrac{1}{3}}{x-2}=\lim\limits_{x \rightarrow 2} \dfrac{-1}{3(x+1)}=-\dfrac{1}{9}$.
+\end{itemchoice}
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-K11C7B1-DE1-DS}
+
+
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE1-KQ]
+\caukq
+\begin{ex}%[1D7V1-4]
+Một chất điểm chuyển động thẳng xác định bởi phương trình $s(t)=\dfrac{1}{2} t^2$, trong đó $t$ là thời gian tính bằng giây và $s$ là quãng đường đi được trong $t$ giây tính bằng mét. Vận tốc tức thời của chất điểm tại $t=5$ là bao nhiêu m/giây.
+\shortans{$ 5 $}
+\loigiai{
+Vận tốc tức thời của chất điểm tại $t=5$ là
+$$
+	s'(5)=\lim\limits_{t \rightarrow 5} \dfrac{s(t)-s(5)}{t-5}
+	=\lim\limits_{t \rightarrow 5} \dfrac{\dfrac{1}{2} t^2-\dfrac{25}{2}}{t-5}
+	=\lim\limits_{t \rightarrow 5} \dfrac{\dfrac{1}{2}(t-5)(t+5)}{t-5}
+	=\lim\limits_{t \rightarrow 5} \dfrac{1}{2}(t+5)
+	=5.
+$$
+Vậy $v(5)=s'(5)=5$ m/s.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-5]
+Một người gửi tiết kiệm khoản tiền $ 100 $ triệu đồng vào một ngân hàng với lãi suất $7 \% $/năm. Tổng số tiền vốn và lãi (làm tròn đến hàng đơn vị) mà người đó nhận được sau 1 năm là bao nhiêu triệu đồng, nếu tiền lãi được tính theo hình thức lãi kép với kì hạn 6 tháng.
+\shortans{$ 107 $}
+\loigiai{
+Số tiền vốn và lãi người đó nhận được sau một năm theo hình thức lãi kép với kì hạn 6 tháng là
+$$
+	T=A \cdot\left(1+\dfrac{r}{2}\right)^2
+	=100(1+3,5 \%)^2=107.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7V1-4]
+Cho biết điện lượng truyền trong dây dẫn theo thời gian biểu thị bởi hàm số $Q(t)=2 t^2+t$, trong đó $t$ được tính bằng giây và $Q$ được tính theo coulomb. Cường độ dòng điện tại thời điểm $t=4(s)$ là bao nhiêu C/s?
+\shortans{$ 17 $}
+\loigiai{
+Ta có
+$Q'(t)=\left(2 t^2+t\right)'=4 t+1$ nên cường độ dòng điện tại thời điểm $t=4(s)$ là
+$$
+	Q'(4)=4 \cdot 4+1=17\,\text{C/s}.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7V1-3]
+Cho hàm số $y=f(x)=-2 x^3+x$ có đồ thị $(C)$.
+Tính hệ số góc của tiếp tuyến của đồ thị $(C)$ tại điểm có hoành độ bằng $ 1 $.
+\shortans{$ -5 $}
+\loigiai{
+Ta có $f'(x)=\left(-2 x^3+x\right)'=-6 x^2+1$ nên hệ số góc của tiếp tuyến của $(C)$ tại điểm có hoành độ bằng $ 1 $ là $f'(1)=-6 \cdot(1)^2+1=-5$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $y=f(x)=\dfrac{x+1}{3 x}$ có đồ thị $(C)$.
+Phương trình tiếp tuyến của đồ thị hàm số $(C)$ tại giao điểm của $(C)$ với trục hoành có dạng $ y=ax+b $. Khi đó, giá trị của biểu thức $ a+b $ là bao nhiêu? (làm tròn đến hàng phần mười)
+\shortans{$ -0{,}7 $}
+\loigiai{
+Toạ độ giao điểm của $(C)$ với trục hoành là điểm $(-1 ; 0)$.
+Phương trình tiếp tuyến của $(C)$ tại điểm $(-1 ; 0)$ là
+\begin{align*}
+	y-0&=f'(-1)(x+1)\\
+	y&=-\dfrac{1}{3}(x+1)\\
+	y&=-\dfrac{1}{3} x-\dfrac{1}{3}.
+\end{align*}
+Do đó $ a=-\dfrac{1}{3} $ và $ b=-\dfrac{1}{3} $. Suy ra $ a+b = -\dfrac{2}{3} \approx -0{,}7 $.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số $f(x)=2 x^3+1$ tại $x_0=2$.
+\shortans{$ 24 $}
+\loigiai{
+Ta có
+$$
+	\lim\limits_{x \rightarrow 2} \dfrac{f(x)-f(2)}{x-2}
+	=\lim\limits_{x \rightarrow 2} \dfrac{2 x^3-16}{x-2}
+	=\lim\limits_{x \rightarrow 2} 2\left(x^2+2 x+4\right)
+	=24.
+$$
+Vậy $f'(2)=24$.
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-K11C7B1-DE1-KQ}
+
+\subsection{Đề 2}
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE2-TN]
+\caulc
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=f(x)$ xác định trên $\mathbb{R}$ thỏa mãn $\lim\limits_{x \rightarrow 3} \dfrac{f(x)-f(3)}{x-3}=2$. Kết quả đúng là
+\choice
+{$f'(2)=3$}
+{$f'(x)=2$}
+{$f'(x)=3$}
+{\True $f'(3)=2$}
+\loigiai{
+Ta có
+$ \lim\limits_{x \rightarrow 3} \dfrac{f(x)-f(3)}{x-3}=2=f'(3) $.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)$ xác định bởi $f(x)=\heva{&\dfrac{\sqrt{4 x^2+1}-1}{x}, &&x \neq 0 \\ &0, &&x=0}$. Giá trị $f'(0)$ bằng
+\choice
+{\True $ 2 $}
+{$ 0 $}
+{$\dfrac{1}{2}$}
+{Không tồn tại}
+\loigiai{
+Tập xác định $\mathscr{D} = \mathbb{R}$.
+\\
+Ta có
+$$
+	\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f(0)}{x-0}
+	=\lim\limits_{x \rightarrow 0} \dfrac{\sqrt{4 x^2+1}-1}{x^2}
+	=\lim\limits_{x \rightarrow 0} \dfrac{4 x^2}{x^2\left(\sqrt{4 x^2+1}+1\right)}
+	=\lim\limits_{x \rightarrow 0} \dfrac{4}{\sqrt{4 x^2+1}+1}
+	=2.
+$$
+Vậy $f'(0)=2$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&\dfrac{\sqrt{3 x+1}-2 x}{x-1}, &&x \neq 1 \\ &\dfrac{-5}{4} &&x=1}$. Tính $f'(1)$.
+\choice
+{Không tồn tại}
+{$ 0 $}
+{$-\dfrac{7}{50}$}
+{\True $-\dfrac{9}{64}$}
+\loigiai{
+Ta có
+$$
+	\lim\limits_{x \rightarrow 1} f(x)
+	=\lim\limits_{x \rightarrow 1} \dfrac{\sqrt{3 x+1}-2 x}{x-1}
+	=\lim\limits_{x \rightarrow 1} \dfrac{3 x+1-4 x^2}{(x-1)(\sqrt{3 x+1}+2 x)}
+	=\lim\limits_{x \rightarrow 1} \dfrac{-4 x-1}{(\sqrt{3 x+1}+2 x)}
+	=\dfrac{-5}{4}=f(1)
+$$
+Suy ra hàm số liên tục lại $x=1$.
+\\
+Mặt khác
+\begin{align*}
+	f'(1) & =\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{\dfrac{\sqrt{3 x+1}-2 x}{x-1}+\dfrac{5}{4}}{x-1}\\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{4 \sqrt{3 x+1}-3 x-5}{4(x-1)^2} \\
+	& =\lim\limits_{x \rightarrow 1} \dfrac{16(3 x+1)-(3 x+5)^2}{4(x-1)^2(4 \sqrt{3 x+1}+3 x+5)}\\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{-9}{4(4 \sqrt{3 x+1}+3 x+5)}\\
+	&=-\dfrac{9}{64}.
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&a x^2+b x, &&x \geq 1 \\ &2 x-1, &&x<1}$. Để hàm số đã cho có đạo hàm tại $x=1$ thì $2 a+b$ bằng
+\choice
+{\True $ 2 $}
+{$ 5 $}
+{$ -2 $}
+{$ -5 $}
+\loigiai{
+Ta có
+\begin{align*}
+	\lim\limits_{x \rightarrow 1^{-}} \dfrac{f(x)-f(1)}{x-1}
+	=\lim\limits_{x \rightarrow 1^{-}} \dfrac{2 x-1-1}{x-1}=2;
+\end{align*}
+và
+\begin{align*}
+	\lim\limits_{x \rightarrow 1^{+}} \dfrac{f(x)-f(1)}{x-1}
+	&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{a x^2+b x-a-b}{x-1}\\
+	&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{a\left(x^2-1\right)+b(x-1)}{x-1}\\
+	&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{(x-1)[a(x+1)+b]}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1^{+}}[a(x+1)+b]\\
+	&=2 a+b.
+\end{align*}
+Theo yêu cầu bài toán
+\begin{align*}
+	\lim\limits_{x \rightarrow 1^{-}} \dfrac{f(x)-f(1)}{x-1}&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{f(x)-f(1)}{x-1} \\
+	2 a+b&=2.
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&\dfrac{3-\sqrt{4-x}}{4}, &&x \neq 0 \\ &\dfrac{1}{4}, &&x=0}$. Khi đó $f'(0)$ là kết quả nào sau đây?
+\choice
+{$\dfrac{1}{4}$}
+{\True $\dfrac{1}{16}$}
+{$\dfrac{1}{32}$}
+{Không tồn tại}
+\loigiai{
+Với $x \neq 0$ xét
+\begin{align*}
+	\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f(0)}{x-0}
+	&=\lim\limits_{x \rightarrow 0} \dfrac{\dfrac{3-\sqrt{4-x}}{4}-\dfrac{1}{4}}{x} \\
+	&=\lim\limits_{x \rightarrow 0} \dfrac{2-\sqrt{4-x}}{4 x}=\lim\limits_{x \rightarrow 0} \dfrac{4-(4-x)}{4 x(2+\sqrt{4-x})} \\
+	&=\lim\limits_{x \rightarrow 0} \dfrac{1}{4(2+\sqrt{4-x})} \\
+	&=\dfrac{1}{4(2+\sqrt{4-0})} \\
+	&=\dfrac{1}{16}.
+\end{align*}
+Vậy $ f'(0)=\dfrac{1}{16} $
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=f(x)$ có đạo hàm tại điểm $x_0=2$. Tìm $\lim\limits_{x \rightarrow 2} \dfrac{2 f(x)-x f(2)}{x-2}$.
+\choice
+{$ 0 $}
+{$f'(2)$}
+{\True $2 f'(2)-f(2)$}
+{$f(2)-2 f'(2)$}
+\loigiai{
+Do hàm số $y=f(x)$ có đạo hàm tại điểm $x_0=2$ suy ra
+$$
+	\lim\limits_{x \rightarrow 2} \dfrac{f(x)-f(2)}{x-2}=f'(2).
+$$
+Ta có
+\begin{align*}
+	L &=\lim\limits_{x \rightarrow 2} \dfrac{2 f(x)-x f(2)}{x-2} \\
+	&=\lim\limits_{x \rightarrow 2} \dfrac{2 f(x)-2 f(2)+2 f(2)-x f(2)}{x-2} \\
+	&=\lim\limits_{x \rightarrow 2} \dfrac{2(f(x)-f(2))}{x-2}-\lim\limits_{x \rightarrow 2} \dfrac{f(2)(x-2)}{x-2} \\
+	&=2 f'(2)-f(2).
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $y=\heva{&x^2+a x+b, &&x \geq 2 \\ &x^3-x^2-8 x+10, &&x<2}$. Biết hàm số có đạo hàm tại điểm $x=2$. Giá trị của $a^2+b^2$ bằng
+\choice
+{\True $ 20 $}
+{$ 17 $}
+{$ 18 $}
+{$ 25 $}
+\loigiai{
+Ta có 
+$$
+	y=\heva{&x^2+a x+b, &&x \geq 2 \\ &x^3-x^2-8 x+10, &&x<2.}
+$$
+Suy ra
+$$
+	y'= \heva{&2 x+a, &&x \geq 2 \\ &3 x^2-2 x-8 &&x<2.}
+$$
+Hàm số có đạo hàm tại điểm $x=2$ nên 
+$$
+	4+a=0 \quad \text{hay} \quad a=-4
+$$
+Mặt khác hàm số có đạo hàm tại điểm $x=2$ thì hàm số liên tục tại điểm $x=2$. Suy ra
+$$
+	\lim\limits_{x \rightarrow 2^{+}} f(x)
+	=\lim\limits_{x \rightarrow 2^{-}} f(x)=f(2).
+$$
+Do đó
+$$
+	4+2 a+b=-2 \quad \text{hay} \quad b=2.
+$$
+Vậy $a^2+b^2=20$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-2]
+Số gia của hàm số $f(x)=x^3$ ứng với $x_0=2$ và $\Delta x=1$ bằng bao nhiêu?
+\choice
+{$ -19 $}
+{$ 7 $}
+{\True $ 19 $}
+{$ -7 $}
+\loigiai{
+Gọi $\Delta x$ là số gia của đối số và $\Delta y$ là số gia tương ứng của hàm số. Ta có
+\begin{align*}
+	\Delta y & =f\left(x_0+\Delta x\right)-f\left(x_0\right)\\
+	& =\left(x_0+\Delta x\right)^3-2^3 \\
+	& = x_0^3+(\Delta x)^3+3 x_0 \Delta x\left(x_0+\Delta x\right)-8.
+\end{align*}
+Với $x_0=2$ và $\Delta x=1$ thì $\Delta y=19$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-2]
+Số gia của hàm số $f(x)=\dfrac{x^2}{2}$ ứng với số gia $\Delta x$ của đối số $x$ tại $x_0=-1$ là
+\choice
+{\True $\dfrac{1}{2}(\Delta x)^2-\Delta x$}
+{$\dfrac{1}{2}\left[(\Delta x)^2-\Delta x\right]$}
+{$\dfrac{1}{2}\left[(\Delta x)^2+\Delta x\right]$}
+{$\dfrac{1}{2}(\Delta x)^2+\Delta x$}
+\loigiai{
+Với số gia $\Delta x$ của đối số $x$ tại $x_0=-1$, ta có
+\begin{align*}
+	\Delta y&=\dfrac{(-1+\Delta x)^2}{2}-\dfrac{1}{2} \\
+	&=\dfrac{1+(\Delta x)^2-2 \Delta x}{2}-\dfrac{1}{2} \\
+	&=\dfrac{1}{2}(\Delta x)^2-\Delta x.
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Cho hàm số $f(x)=\heva{&\dfrac{x^2}{2}, &&x \leq 1 \\ &a x+b, &&x>1}$. Với giá trị nào sau đây của $a$, $b$ thì hàm số có đạo hàm tại $x =1$?
+\choice
+{\True $a=1 ; b=-\dfrac{1}{2}$}
+{$a=\dfrac{1}{2} ; b=\dfrac{1}{2}$}
+{$a=\dfrac{1}{2} ; b=-\dfrac{1}{2}$}
+{$a=1 ; b=\dfrac{1}{2}$}
+\loigiai{
+Hàm số liên tục tại $x=1$ nên ta có
+\begin{align*}
+	\lim\limits_{x \rightarrow 1^{+}} f(x)&=\lim\limits_{x \rightarrow 1^{-}} f(x) \\
+	\dfrac{1}{2}&=a+b.
+\end{align*}
+Hàm số có đạo hàm tại $x =1$ nên giới hạn 2 bên của $\dfrac{f(x)-f(1)}{x-1}$ bằng nhau
+\begin{align*}
+	\lim\limits_{x \rightarrow 1^{+}} \dfrac{f(x)-f(1)}{x-1}
+	&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{a x+b-(a .1+b)}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1^{+}} \dfrac{a(x-1)}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1^{+}} a \\
+	&=a
+	\qquad\left(\text {Vì } f(1)=\dfrac{1}{2}=a+b\right)
+\end{align*}
+và
+$$
+	\lim\limits_{x \rightarrow 1^{-}} \dfrac{f(x)-f(1)}{x-1}
+	=\lim\limits_{x \rightarrow 1^{-}} \dfrac{\dfrac{x^2}{2}-\dfrac{1}{2}}{x-1}
+	=\lim\limits_{x \rightarrow 1^{-}} \dfrac{(x+1)(x-1)}{2(x-1)}
+	=\lim\limits_{x \rightarrow 1^{-}} \dfrac{(x+1)}{2}=1.
+$$
+Vậy $a=1$ và $b=-\dfrac{1}{2}$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số $y=2 x^2+x+1$ tại điểm $x=2$
+\choice
+{\True $ 9 $}
+{$ 4 $}
+{$ 7 $}
+{$ 6 $}
+\loigiai{
+Cho $x_0=2$ một số gia $\Delta x$.
+Khi đó hàm số nhận một số gia tương ứng
+\begin{align*}
+	\Delta y
+	& =f\left(x_0+\Delta x\right)-f\left(x_0\right) \\
+	& =2(2+\Delta x)^2+(2+\Delta x)+1-\left(2.2^2+2+1\right) \\
+	& =8+8 \Delta x+2(\Delta x)^2+2+\Delta x+1-11 \\
+	& =\Delta x(9+2 \Delta x).
+\end{align*}
+Ta có
+$$
+	f'(2)=\lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta y}{\Delta x}
+	=\lim\limits_{\Delta x \rightarrow 0} \dfrac{\Delta x(9+2 \Delta x)}{\Delta x}
+	=\lim\limits_{\Delta x \rightarrow 0}(9+2 \Delta x)
+	=9.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số $y=\dfrac{2 x-1}{x+1}$ tại $x =3$
+\choice
+{$ \dfrac{1}{6} $}
+{\True $ \dfrac{3}{16} $}
+{$ \dfrac{2}{9} $}
+{$ \dfrac{4}{5} $}
+\loigiai{
+$$
+	\lim\limits_{x \rightarrow 3} \dfrac{f(x)-f(3)}{x-3}
+	=\lim\limits_{x \rightarrow 3} \dfrac{\dfrac{2 x-1}{x+1}-\dfrac{5}{4}}{x-3}
+	=\lim\limits_{x \rightarrow 3} \dfrac{3(x-3)}{(x-3)(x+1) 4}
+	=\lim\limits_{x \rightarrow 3} \dfrac{3}{(x+1) 4}
+	=\dfrac{3}{16}.
+$$
+Vậy hàm số có đạo hàm tại $x=3$ là $f'(3)=\dfrac{3}{16}$.
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-K11C7B1-DE2-TN}
+
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE2-DS]
+\begin{ex}%[1D7H1-1]
+Dùng định nghĩa để tính đạo hàm của hàm số $f(x)=\dfrac{2}{1-x}$ với $x \neq 1$. Khi đó, các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True Với bất kì $x_0 \neq 1$, ta có $f'\left(x_0\right)=\lim\limits_{x \rightarrow x_0} \dfrac{2}{(1-x)\left(1-x_0\right)}$}
+{\True $f'(2)=2$}
+{$f'(3)=\dfrac{1}{3}$}
+{\True $f'(2)+f'(3)=\dfrac{5}{2}$}
+\loigiai{
+Với bất kì $x_0 \neq 1$, ta có:
+\begin{align*}
+	f'\left(x_0\right)
+	=\lim\limits_{x \rightarrow x_0} \dfrac{f(x)-f\left(x_0\right)}{x-x_0}
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{\dfrac{2}{1-x}-\dfrac{2}{1-x_0}}{x-x_0} \\
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{2\left(x-x_0\right)}{(1-x)\left(1-x_0\right)\left(x-x_0\right)} \\
+	&=\lim\limits_{x \rightarrow x_0} \dfrac{2}{(1-x)\left(1-x_0\right)} \\
+	&=\dfrac{2}{\left(1-x_0\right)^2}.
+\end{align*}
+Khi đó $f'(x)=\left(\dfrac{2}{1-x}\right)'=\dfrac{2}{(1-x)^2}$ trên các khoảng $(-\infty ; 1)$ và $(1 ;+\infty)$.
+Suy ra
+$$
+	f'(2)=2;\, f'(3)=\dfrac{1}{2}
+	\Rightarrow
+	f'(2)+f'(3) = \dfrac{5}{2}.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $f(x)=\dfrac{2}{1-x}$ có đồ thị $(C)$ và điểm $M(3 ;-1) \in(C)$. Khi đó, các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True Hệ số góc của tiếp tuyến của $(C)$ tại điểm $M$ bằng $\dfrac{1}{2}$}
+{Phương trình tiếp tuyến của $(C)$ tại $M$ song song với đường thẳng $y=-\dfrac{1}{2} x-\dfrac{5}{2}$}
+{\True Phương trình tiếp tuyến của $(C)$ tại $M$ vuông với đường thẳng $y=-2 x-\dfrac{5}{2}$}
+{\True Phương trình tiếp tuyến của $(C)$ tại $M$ đi qua điểm $A\left(0 ;-\dfrac{5}{2}\right)$}
+\loigiai{
+Ta có $f'(x)=\left(\dfrac{2}{1-x}\right)'=\dfrac{2}{(1-x)^2}$ nên tiếp tuyến của $(C)$ tại $M$ có hệ số góc là
+$$
+	f'(3)=\dfrac{2}{(1-3)^2}=\dfrac{1}{2}.
+$$
+Phương trình tiếp tuyến của $(C)$ tại $M$ là
+\begin{align*}
+	y-(-1)&=\dfrac{1}{2}(x-3) \\
+	y&=\dfrac{1}{2} x-\dfrac{5}{2}.
+\end{align*}
+Thay tọa độ điểm $A\left(0 ;-\dfrac{5}{2}\right)$ vô phương trình tiếp tuyến trên, ta thấy
+$$
+	-\dfrac{5}{2} = \dfrac{1}{2} \cdot 0 -\dfrac{5}{2} \quad \text{đúng}.
+$$
+Vậy tiếp tuyến của $ (C) $ tại $ M $ đi qua điểm $A\left(0 ;-\dfrac{5}{2}\right)$.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $y=x^2+3 x+1$ có đồ thị $(C)$. Viết được phương trình tiếp tuyến của $(C)$ tại giao điểm của $(C)$ với trục tung. Khi đó:
+Các mệnh đề sau đúng hay sai?
+\choiceTF
+%[t]
+{\True Hệ số góc của phương trình tiếp tuyến bằng $ 3 $}
+{Phương trình tiếp tuyến đi qua điểm $A(1 ; 3)$}
+{\True Phương trình tiếp tuyến cắt đường thẳng $y=2 x+1$ tại điểm có hoành độ bằng $ 0 $}
+{\True Phương trình tiếp tuyến vuông góc với đường thẳng $y=-\dfrac{1}{3} x+1$}
+\loigiai{
+Với $x_0=0 \Rightarrow y_0=1$.
+\\
+Ta có 
+$$
+	f'(0)=\lim\limits_{x \rightarrow 0} \dfrac{f(x)-f(0)}{x-0}
+	=\lim\limits_{x \rightarrow 0} \dfrac{x^2+3 x}{x}
+	=\lim\limits_{x \rightarrow 0}(x+3)=3.
+$$
+Vậy phương trình tiếp tuyến là $y=3 x+1$.
+\\
+Xét tiếp tuyến $y=3 x+1$ và đường thẳng $y=-\dfrac{1}{3} x+1$ có tích hệ số góc $ 3 \cdot \dfrac{-1}{3} = -1 $ nên hai đường thẳng này vuông góc với nhau.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Viết được phương trình tiếp tuyến của đồ thị hàm số $y=\dfrac{x+9}{x+1}$ biết tiếp tuyến vuông góc với đường thẳng $d: x-2 y+2=0$. Khi đó
+\choiceTF
+%[t]
+{\True Có $ 2 $ phương trình tiếp tuyến thỏa mãn.}
+{\True Hệ số góc của tiếp tuyến bằng -2}
+{\True Tiếp tuyến đi qua điểm $A(1 ; 5)$}
+{\True Tiếp tuyến đi qua điểm $B(-1 ;-7)$}
+\loigiai{
+Đường thẳng $d: x-2 y+2=0 \Rightarrow y=\dfrac{1}{2} x+1$ nên đường thẳng $d$ có hệ số góc là $k_d=\dfrac{1}{2}$.
+Tiếp tuyến cần tìm có hệ số góc $k$ vuông góc với đường thẳng $d$
+$$
+\Rightarrow k \cdot k_d=-1 \Rightarrow k=-\dfrac{1}{k_d}=-2 \text {. }
+$$
+Hoành độ tiếp điểm là nghiệm của phương trình
+$$
+	y'=k
+	\Rightarrow 
+	\dfrac{-8}{(x+1)^2}=-2 
+	\Rightarrow
+	\heva{&x=1 \\ &x=-3}
+$$
+Với $x=1$, phương trình tiếp tuyến là $d_1 \colon y=-2 x+7$.
+\\
+Với $x=-3$, phương trình tiếp tuyến là $d_2 \colon y=-2 x-9$.
+\\
+Thay $ x=1 $ vào phương trình tiếp tuyến $d_1 \colon y=-2 x+7$, ta được $ y=5 $. Suy ra $ d_1 $ đi qua $ A $.
+\\
+Thay $ x=-1 $ vào phương trình tiếp tuyến $d_2 \colon y=-2 x-9$, ta được $ y=-7 $. Suy ra $ d_2 $ đi qua $ B $.
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-K11C7B1-DE2-DS}
+
+
+\Opensolutionfile{ans}[ans/ans-K11C7B1-DE2-KQ]
+\caukq
+\begin{ex}%[1D7H1-4]
+Một quả bóng được thả rơi tự do từ đài quan sát trên sân thượng của toà nhà Landmark 81 (Thành phố Hồ Chí Minh) cao $461{,}3 m$ xuống mặt đất, với phương trình chuyển động $s(t)=4{,}9 t^2$. Tính vận tốc của quả bóng khi nó chạm đất, bỏ qua sức cản không khí. (Đơn vị m/s, kết quả gần đúng làm tròn đến hàng phần chục)
+\shortans{$95,1$}
+\loigiai{
+Với bất kì $t_0$, ta có
+$$
+	s'\left(t_0\right)
+	=\lim\limits_{t \rightarrow t_0} \dfrac{s(t)-s\left(t_0\right)}{t-t_0}
+	=\lim\limits_{t \rightarrow t_0} \dfrac{4{,}9 t^2-4{,}9 t_0^2}{t-t_0}
+	=\lim\limits_{t \rightarrow t_0} 4{,}9\left(t+t_0\right)=9{,}8 t_0 .
+$$
+Do đó, vận tốc của quả bóng tại thời điểm $t$ là $v(t)=s'(t)=9{,}8 t$.
+\\
+Mặt khác, vì chiều cao của toà tháp là $461{,}3$ m nên quả bóng sẽ chạm đất tại thời điểm $t_1$. Từ đó, ta có
+$$
+	4{,}9 t_1^2=461{,}3 
+	\quad\text{hay}\quad 
+	t_1=\sqrt{\dfrac{461{,}3}{4{,}9}} \, \text{giây}.
+$$
+Vậy vận tốc của quả bóng khi nó chạm đất là
+$$
+	v\left(t_1\right)
+	=9{,}8 t_1
+	=9{,}8 \cdot \sqrt{\dfrac{461{,}3}{4{,}9}} 
+	\approx 95{,}1\, \text {m/s}
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-4]
+Một vật được phóng theo phương thẳng đứng lên trên từ mặt đất, biết độ cao $h$ của nó (tính bằng mét) sau $t$ giây được cho bởi phương trình $h(t)=24{,}5 t-4{,}9 t^2$. Tìm vận tốc của vật khi nó chạm đất. (đơn vị m/s, làm tròn đến hàng phần mười)
+\shortans{$ 24{,}5 $}
+\loigiai{
+Khi vật chạm đất thì
+$$
+	h=0 
+	\Leftrightarrow 24{,}5 t-4{,}9 t^2=0 
+	\Rightarrow t=5.
+$$
+Ta có $v(t)=h'(t)=24{,}5-9{,}8 t$ nên tốc độ của vật tại thời điểm nó chạm đất $t=5$ là
+$$
+	v(5)=\left|h'(5)\right|=|24{,}5-9{,}8.5|=24{,}5 \, \text{m/s}.
+$$
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $y=f(x)=-2 x^3+x$ có đồ thị $(C)$.
+Phương trình tiếp tuyến của đồ thị $(C)$ tại điểm $M(-2 ; 14)$ có dạng $ y=mx+n $. Khi đó, giá trị của $ m+n $ là bao nhiêu?
+\shortans{$ -55 $}
+\loigiai{
+Ta có
+$f'(x)=\left(-2 x^3+x\right)'=-6 x^2+1$
+nên hệ số góc của tiếp tuyến của $(C)$ tại điểm $M(-2 ; 14)$ là
+$f'(-2)=-6 \cdot(-2)^2+1=-23$.
+\\
+Phương trình tiếp tuyến của $(C)$ tại điểm $M$ là:
+$$
+	y-14=-23(x+2) \Leftrightarrow y=-23 x-32.
+$$
+Do đó $ m=-23 $, $ n=-32 $ và $ m+n=-55 $.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Cho hàm số $y=f(x)=\dfrac{x+1}{3 x}$ có đồ thị $(C)$.
+Tìm được bao nhiêu phương trình tiếp tuyến của đồ thị hàm số $(C)$ tại giao điểm của $(C)$ với đường thẳng $y=x+1$?
+\shortans{$2$}
+\loigiai{
+Toạ độ giao điểm của $(C)$ với đường thẳng $y=x+1$ là nghiệm của hệ phương trình
+$$
+	\heva{&y=\dfrac{x+1}{3 x} \\ &y=x+1} 
+	\Leftrightarrow
+	\heva{&\dfrac{x+1}{3 x}=x+1 \\ &y=x+1}
+	\Leftrightarrow
+	\heva{&3 x^2+2 x-1=0 &&(1) \\ &y=x+1. &&(2)}
+$$
+Phương trình $ (1) $ có hai nghiệm là $ x=-1 $ và $ x=\dfrac{1}{3} $.
+\\
+Vậy ta tìm được $ 2 $ tiếp tuyến.
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-1]
+Tính đạo hàm của hàm số $f(x)=\sqrt{x^2+1}$ tại $x_0=-1$. (Làm tròn đến hàng phần mười).
+\shortans{$ 0{,}7 $}
+\loigiai{
+Ta có
+\begin{align*}
+	f'(1)&=\lim\limits_{x \rightarrow 1} \dfrac{f(x)-f(1)}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{\sqrt{x^2+1}-\sqrt{2}}{x-1} \\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{x^2-1}{\left(\sqrt{x^2+1}+\sqrt{2}\right)(x-1)} \\
+	&=\lim\limits_{x \rightarrow 1} \dfrac{x+1}{\left(\sqrt{x^2+1}+\sqrt{2}\right)} \\
+	&=\dfrac{1}{\sqrt{2}} \approx 0{,}7.
+\end{align*}
+}
+\end{ex}
+
+\begin{ex}%[1D7H1-3]
+Tiếp tuyến với đồ thị hàm số $y=x^3+2 x^2-3$. Tại điểm có hoành độ bằng $ -2 $ có hệ số góc là bao nhiêu?
+\shortans{$ 4 $}
+\loigiai{
+Ta có: $x_0=-2 \Rightarrow y_0=(-2)^3+2 \cdot(-2)^2-3=-3$
+$$
+	f'(-2)=\lim\limits_{x \rightarrow-2} \dfrac{f(x)-f(2)}{x+2}
+	=\lim\limits_{x \rightarrow-2} \dfrac{x^3+2 x^2}{x+2}
+	=\lim\limits_{x \rightarrow-2} \dfrac{x^2(x+2)}{x+2}
+	=\lim\limits_{x \rightarrow-2} x^2
+	=4.
+$$
+Vậy hệ số góc của tiếp tuyến cần tìm là $ 4 $.
+}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-K11C7B1-DE2-KQ}

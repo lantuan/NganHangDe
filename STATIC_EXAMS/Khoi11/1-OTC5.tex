@@ -1,0 +1,557 @@
+\section{Ôn tập chương 5 - Giới hạn - Hàm số liên tục}
+\Opensolutionfile{ans}[ans/ans-OTC3-TN]
+\caulc
+\begin{ex}%[1D5N1-2]%Câu 1
+Điều tra về chiều cao của học sinh khối lớp 11, ta được mẫu số liệu sau:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline Chiều cao $(\mathrm{cm})$ & Số học sinh \\
+\hline$[150; 152)$ & $5$ \\
+\hline$[152; 154)$ & $18$ \\
+\hline$[154; 156)$ & $40$ \\
+\hline$[156; 158)$ & $26$ \\
+\hline$[158; 160)$ & $8$ \\
+\hline$[160; 162)$ & $3$ \\
+\hline Tổng & $N=100$ \\
+\hline
+\end{tabular}
+\end{center}
+Mẫu số liệu ghép nhóm đã cho có tất cả bao nhiêu nhóm?
+	\choice
+	{$5$}
+	{\True $6$}
+	{$7$}
+	{$12$}
+	\loigiai{
+Mẫu số liệu ghép nhóm đã cho có tất cả $6$ nhóm.
+}
+\end{ex}
+
+\begin{ex}%[1D5N1-2]%Câu 2
+Cho mẫu số liệu về chiều cao $(\mathrm{cm})$ của các học $\sinh$ nữ trong khối 11 của một trường như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Chiều cao & {$[145; 150)$} & {$[150; 155)$} & {$[155; 160)$} & {$[160; 165)$} & {$[165; 170)$} & {$[170; 175)$} \\
+\hline Số học sinh & $20$ & $45$ & $34$ & $27$ & $15$ & $4$ \\
+\hline
+\end{tabular}
+\end{center}
+Mẫu số liệu trên có bao nhiêu số liệu, bao nhiêu nhóm?
+	\choice
+	{$145$ số liệu; $6$ nhóm}
+	{$30$ số liệu; $5$ nhóm}
+	{\True $6$ số liệu; $145$ nhóm}
+	{$5$ số liệu; $30$ nhóm}
+	\loigiai{
+Mẫu số liệu $(T)$ có
+$$20+45+34+27+15+4=145\text{ (số liệu).}$$
+$6$ nhóm là $[145; 150)$; $[150; 155)$; $[155; 160)$; $[160; 165)$; $[165; 170)$; $[170; 175)$.
+}
+\end{ex}
+
+\begin{ex}%[1D5N1-2]%Câu 3
+Tìm hiểu thời gia xem tivi trong tuần trước (đơn vị: giờ) của một số học sinh thu được kết quả sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (giờ) & {$[0; 5)$} & {$[5; 10)$} & {$[10; 15)$} & {$[15; 20)$} & {$[20; 25)$} \\
+\hline Số học sinh & $8$ & $16$ & $4$ & $2$ & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+Giá trị đại diện của nhóm $[20; 25)$ là
+	\choice
+	{\True $22{,}5$}
+	{$23$}
+	{$20$}
+	{$5$}
+	\loigiai{
+Giá trị đại diện của nhóm $[20; 25)$ là $\dfrac{20+25}{2}=22{,}5$.
+}
+\end{ex}
+
+\begin{ex}%[1D5N1-4]%Câu 4
+Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (phút) & {$[0; 20)$} & {$[20; 40)$} & {$[40; 60)$} & {$[60; 80)$} & {$[80; 100)$} \\
+\hline Số học sinh & $5$ & $9$ & $12$ & $10$ & $6$\\
+\hline
+\end{tabular}
+\end{center}
+Nhóm chứa mốt của mẫu số liệu trên là
+	\choice
+	{\True $[40; 60)$}
+	{$[20; 40)$}
+	{$[60; 80)$}
+	{$[80; 100)$}
+	\loigiai{
+Mốt $M_0$ chứa trong nhóm $[40; 60)$.
+}
+\end{ex}
+
+\begin{ex}%[1D5H2-2]%Câu 5
+Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (phút) & {$[0; 20)$} & {$[20; 40)$} & {$[40; 60)$} & {$[60; 80)$} & {$[80; 100)$} \\
+\hline Số học sinh & $5$ & $9$ & $12$ & $10$ & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+Nhóm chứa trung vị của mẫu số liệu trên là
+	\choice
+	{\True $[40; 60)$}
+	{$[20; 40)$}
+	{$[60; 80)$}
+	{$[80; 100)$}
+	\loigiai{
+Ta có $n=42$.\\
+Nên trung vị của mẫu số liệu trên là $Q_2=\dfrac{x_{21}+x_{22}}{2}$.\\
+Mà $x_{21}, x_{22} \in[40; 60)$ nên nhóm chứa trung vị của mẫu số liệu trên là nhóm $[40; 60)$.
+}
+\end{ex}
+
+\begin{ex}%[1D5H2-3]%Câu 6
+Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (phút) & {$[0; 20)$} & {$[20; 40)$} & {$[40; 60)$} & {$[60; 80)$} & {$[80; 100)$} \\
+\hline Số học sinh & $5$ & $9$ & $12$ & $10$ & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+Nhóm chứa tứ phân vị thứ ba của mẫu số liệu trên là
+	\choice
+	{$[40; 60)$}
+	{$[20; 40)$}
+	{\True $[60; 80)$}
+	{$[80; 100)$}
+	\loigiai{
+Ta có $n=42$.\\
+Nên tứ phân vị thứ nhất của mẫu số liệu trên là $Q_3=x_{33}$.\\
+Mà $x_{33} \in[60; 80)$ nên nhóm chứa tứ phân vị thứ nhất của mẫu số liệu trên là nhóm $[60; 80)$.
+}
+\end{ex}
+
+\begin{ex}%[1D5H1-3]%Câu 7
+Doanh thu bán hàng trong $20$ ngày được lựa chọn ngẫu nhiên của một của hàng được ghi lại ở bảng sau (đơn vị: triệu đồng).
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Doanh thu & {$[5; 7)$} & {$[7; 9)$} & {$[9; 11)$} & {$[11; 13)$} & {$[13; 15)$} \\
+\hline Số ngày & $2$ & $7$ & $7$ & $3$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu trên thuộc khoảng nào trong các khoảng dưới đây?
+	\choice
+	{$[7; 9)$}
+	{\True $[9; 11)$}
+	{$[11; 13)$}
+	{$[13; 15)$}
+	\loigiai{
+Bảng tần số ghép nhóm theo giá trị đại diện là
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Doanh thu & {$[5; 7)$} & {$[7; 9)$} & {$[9; 11)$} & {$[11; 13)$} & {$[13; 15)$} \\
+\hline Giá trị đại diện & $6$ & $8$ & $10$ & $12$ & $14$ \\
+\hline Số ngày & $2$ & $7$ & $7$ & $3$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Số trung bình là $\overline{x}=\dfrac{2\cdot6+7\cdot8+7\cdot10+3\cdot12+1\cdot14}{20}=9{,}4$.
+}
+\end{ex}
+
+\begin{ex}%[1D5V2-2]%Câu 8
+Cho mẫu số liệu ghép nhóm về thống kê điểm số (thang điểm $20$) của 100 học sinh tham dự kỳ thi học sinh giỏi toán, ta có bảng số liệu sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Điểm & {$[8; 10)$} & {$[10; 12)$} & {$[12; 14)$} & {$[14; 16)$} & {$[16; 18)$} & {$[18; 20)$} \\
+\hline Số học sinh & $6$ & $21$ & $30$ & $25$ & $14$ & $4$\\
+\hline
+\end{tabular}
+\end{center}
+Tìm trung vị của mẫu số liệu ghép nhóm trên. (Kết quả làm tròn đến hàng phần trăm).
+	\choice
+	{$12{,}18$}
+	{$12{,}81$}
+	{$13{,}35$}
+	{\True $13{,}53$}
+	\loigiai{
+Cỡ mẫu là $n=6+21+30+25+14+4=100$.\\
+Gọi $x_1; x_2; \ldots; x_{100}$ là số điểm của 100 học sinh và được sắp xếp theo thứ tự tăng dần. Khi đó, trung vị là $\dfrac{x_{50}+x_{51}}{2}$, do hai giá trị $x_{50}, x_{51}$ thuộc nhóm $[12; 14)$ nên nhóm này chứa trung vị.\\
+Ta có $p=3$; $a_3=12$; $m_3=30$; $m_1+m_2=27$; $a_4-a_3=2$ khi đó trung vị của mẫu số liệu là
+$$M_e=12+\dfrac{\dfrac{100}{2}-27}{30}\cdot 2=13{,}53.$$
+}
+\end{ex}
+
+\begin{ex}%[1D5N1-4]%Câu 9
+Cho mẫu số liệu về thời gian (phút) đi từ nhà đến trường của các học sinh trong một lớp 11 của một trường như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Thời gian & {$[0; 5)$} & {$[5; 10)$} & {$[10; 15)$} & {$[15; 20)$} & {$[20; 25)$} & {$[25; 30)$} \\
+\hline Số học sinh & $7$ & $12$ & $7$ & $5$ & $3$ & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+Có bao nhiêu học sinh có thời gian đi từ nhà đến trường là $15$ phút đến $20$ phút?
+	\choice
+	{$20$}
+	{$15$}
+	{\True $5$}
+	{$7$}
+	\loigiai{
+Theo bảng số liệu, có $5$ học sinh có thời gian đi từ nhà đến trường là $15$ phút đến $20$ phút.
+}
+\end{ex}
+
+\begin{ex}%[1D5H1-3]%Câu 10
+Cho mẫu số liệu ghép nhóm về thống kê nhiệt độ tại một địa điểm trong $30$ ngày, ta có bảng số liệu sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline Nhiệt độ $\left({ }^{\circ} \mathrm{C}\right)$ & {$[18; 21)$} & {$[21; 24)$} & {$[24; 27)$} & {$[27; 30)$}\\
+\hline Số ngày & $6$ & $12$ & $9$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Nhiệt độ trung bình trong $30$ ngày trên là
+	\choice
+	{$24^{\circ} \mathrm{C}$}
+	{$25{,}4^{\circ} \mathrm{C}$}
+	{$24{,}3^{\circ} \mathrm{C}$}
+	{\True $23{,}4^{\circ} \mathrm{C}$}
+	\loigiai{
+Giá trị đại diện của mỗi nhóm số liệu là trung bình cộng của hai đầu mút.\\
+Ta có bảng tần số ghép nhóm theo giá trị đại diện của mỗi nhóm:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline Nhóm & {$[18; 21)$} & {$[21; 24)$} & {$[24; 27)$} & {$[27; 30)$}\\
+\hline Giá trị đại diện & $19{,}5$ & $22{,}5$ & $25{,}5$ & $28{,}5$ \\
+\hline Tần số & $6$ & $12$ & $9$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Nhiệt độ trung bình trong 30 ngày trên là
+$$\overline{x}=\dfrac{6 \cdot 19{,}5+12 \cdot 22{,}5+9\cdot25{,}5+3 \cdot 28{,}5}{30}=23{,}4^{\circ} \mathrm{C}.$$
+}
+\end{ex}
+
+\begin{ex}%[1D5N1-4]%Câu 11
+Cho mẫu số liệu về chiều cao $(\mathrm{cm})$ của các học sinh nữ trong khối 11 của một trường như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Chiều cao & {$[145; 150)$} & {$[150; 155)$} & {$[155; 160)$} & {$[160; 165)$} & {$[165; 170)$} & {$[170; 175)$} \\
+\hline Số học sinh & $20$ & $45$ & $34$ & $27$ & $15$ & $4$ \\
+\hline
+\end{tabular}
+\end{center}
+Số học sinh nữ cao từ $150 \mathrm{~cm}$ đến $155 \mathrm{~cm}$ là
+	\choice
+	{$20$}
+	{$65$}
+	{$34$}
+	{\True $45$}
+	\loigiai{
+Theo bảng số liệu trên, số học sinh nữ cao từ $150 \mathrm{~cm}$ đến $155 \mathrm{~cm}$ là $45$ học sinh.
+}
+\end{ex}
+
+\begin{ex}%[1D5V2-2]%Câu 12
+Cho mẫu số liệu ghép nhóm về chiều cao của $25$ cây dừa giống như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Chiều cao $(\mathrm{cm})$ & {$[0; 10)$} & {$[10; 20)$} & {$[20; 30)$} & {$[30; 40)$} & {$[40; 50)$} \\
+\hline Số cây & $4$ & $6$ & $7$ & $5$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Trung vị của mẫu số liệu ghép nhóm này là
+	\choice
+	{$M_e=\dfrac{175}{7}$}
+	{$M_e=\dfrac{165}{5}$}
+	{$M_e=\dfrac{165}{7}$}
+	{\True $M_e=\dfrac{165}{3}$}
+	\loigiai{
+Cỡ mẫu $n=4+6+7+5+3=25$.\\
+$x_1, x_2, \ldots, x_{25}$ là chiều cao của $25$ cây dừa giống được sắp xếp theo thứ tự không giảm. Khi đó, trung vị là $x_{13}$. Do $x_{13}$ thuộc nhóm $[20; 30)$ nên nhóm này chứa trung vị.\\
+ Do đó $p=3$, $a_3=20$, $m_3=7$, $m_1+m_2=10$, $a_4-a_3=10$.\\
+Vậy $M_e=20+\dfrac{\dfrac{25}{2}-10}{7} \cdot 10=\dfrac{165}{7}$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-OTC3-TN}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-OTC3-DS]
+\setcounter{ex}{0}
+\begin{ex}%[1D5H1-4]%Câu 1
+Cho mẫu số liệu điểm môn Toán của một nhóm học sinh như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline Điểm & $[6; 7)$ & $[7; 8)$ & $[8; 9)$ & $[9; 10]$ \\
+\hline Số học sinh & $8$ & $7$ & $10$ & $5$ \\
+\hline
+\end{tabular}
+\end{center}
+Xét tính đúng sai của các mệnh đề sau:
+	\choiceTF
+	{\True Mẫu số liệu đã cho là mẫu số liệu ghép nhóm}
+	{\True Cỡ mẫu của mẫu số liệu là $30$}
+	{\True Điểm trung bình của các học sinh là $7{,}9$}
+	{Mốt của mẫu số liệu là $10$}
+	\loigiai{
+Ta có bảng sau
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline Điểm & {$[6; 7)$} & {$[7; 8)$} & {$[8; 9)$} & {$[9; 10]$} \\
+\hline Giá trị đại diện & $6{,}5$ & $7{,}5$ & $8{,}5$ & $9{,}5$ \\
+\hline Số học sinh & $8$ & $7$ & $10$ & $5$ \\
+\hline
+\end{tabular}
+\end{center}
+	\begin{itemchoice}
+	\itemch Đúng. Vì theo định nghĩa mẫu số liệu ghép nhóm.
+	\itemch Đúng. Vì cỡ mẫu là $8+7+10+5=30$.
+	\itemch Đúng. Vì điểm trung bình của các học sinh là $$\overline{x}=\dfrac{6{,}58+7{,}5 \cdot 7+8{,}5 \cdot 10+9{,}5 \cdot 5}{30}=7{,}9.$$
+	\itemch Sai. Vì nhóm chứa Mốt là $[8; 9)$.\\
+ Mốt của mẫu số liệu là $M_o=8+\dfrac{10-7}{10-7+10-5}(9-8)=8{,}375$.
+	\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D5H2-3]%Câu 2
+Cho mẫu số liệu ghép nhóm về lương của nhân viên trong một công ty như sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Lương (triệu đồng) & {$[9; 12)$} & {$[12; 15)$} & {$[15; 18)$} & {$[18; 21)$} & {$[21; 24)$} \\
+\hline Số nhân viên & $6$ & $12$ & $4$ & $2$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Xét tính đúng sai của các mệnh đề sau:
+	\choiceTF
+	{\True Giá trị đại diện của nhóm $[9; 12)$ là $10{,}5$}
+	{Trung bình lương các nhân viên là $16{,}5$ triệu đồng}
+	{Nhóm chứa trung vị là $[15; 18)$}
+	{\True Tứ phân vị thứ ba là $15{,}56$}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Đúng. Vì giá trị đại diện của nhóm $[9; 12)$ là $\dfrac{9+12}{2}=10{,}5$.
+	\itemch Sai. Vì trung bình lương các nhân viên là $$\overline{x}=\dfrac{1}{25}(6 \cdot 10{,}5+12 \cdot 13{,}5+4\cdot 16{,}5+2\cdot 19{,}5+22{,}5)=14{,}1\text{ triệu đồng.}$$ 
+	\itemch Sai. Vì công ty có $25$ nhân sự. Vì $x_{13}\in[12; 15)$ nên nhóm này chứa trung vị. 
+	\itemch Đúng. Vì $x_{19}\in[15; 18)$ nên ta có $Q_3=15+\dfrac{\dfrac{3 \cdot 25}{4}-18}{4} \cdot 3\approx 15{,}56$.
+	\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D5V2-3]%Câu 3
+Điều tra về chiều cao của học sinh khối lớp 10, ta có kết quả sau:
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline Nhóm & Chiều cao $(\mathrm{cm})$ & Số học sinh \\
+\hline 1 & {$[150; 152)$} & $5$ \\
+\hline 2 & {$[152; 154)$} & $18$ \\
+\hline 3 & {$[154; 156)$} & $40$ \\
+\hline 4 & {$[156; 158)$} & $26$ \\
+\hline 5 & {$[158; 160)$} & $8$ \\
+\hline 6 & {$[160; 162)$} & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+	\choiceTF
+	{\True Tổng số học sinh điều tra bằng $100$}
+	{\True Chiều cao trung bình của các em học sinh trên là $155{,}46$}
+	{Số trung vị của mẫu số liệu trên bằng $156{,}35$}
+	{\True Tứ phân vị thứ nhất của mẫu số liệu trên bằng $154{,}1$}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Đúng. Vì ta có tổng số học sinh là $n=100$.
+	\itemch Đúng. Vì chiều cao trung bình bằng $$\overline{x}=\dfrac{5\cdot 151+18\cdot 153+40\cdot 155+26\cdot 157+8.159+3.161}{100}=155{,}46.$$ 
+	\itemch Sai. Vì $n=100$ nên trung vị là $\dfrac{x_{50}+x_{51}}{2}$, do hai giá trị $x_{50}, x_{51}$ thuộc nhóm 3.\\
+Áp dụng công thức $M_e=154+\dfrac{50-(18+5)}{40} \cdot 2 \approx 155{,}35$.
+	\itemch Đúng. Vì tứ phân vị thứ nhất $Q_3$ là $\dfrac{x_{25}+x_{26}}{2}$ mà $x_{25}, x_{26}$ thuộc nhóm $[154; 156)$.\\
+Do đó, $p=3$, $a_p=154$, $m_p=40$, $m_1+m_2=5+18=23$, $a_{p+1}-a_p=2$ và ta có
+$$Q_1=154+\dfrac{\dfrac{100}{4}-23}{40} \times 2=154{,}1.$$ 
+	\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D5V2-3]%Câu 4
+Kết quả điều tra về số giờ làm thêm trong một tuần của sinh viên một trường đại học $\mathrm{X}$ được cho bởi bảng sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Số giờ làm thêm & {$[2; 4)$} & {$[4; 6)$} & {$[6; 8)$} & {$[8; 10)$} & {$[10; 12)$}\\
+\hline Số sinh viên & $12$ & $20$ & $37$ & $21$ & $10$ \\
+\hline
+\end{tabular}
+\end{center}
+	\choiceTF
+	{\True Số sinh viên được điều tra là $100$}
+	{\True Số giờ làm thêm trung bình của mỗi sinh viên trường đại học $\mathrm{X}$ không ít hơn $6$}
+	{Mốt của mẫu số liệu trên là $7{,}5$}
+	{Tứ phân vị thứ hai của dãy số liệu lớn hơn $6{,}5$}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Đúng. Vì cỡ mẫu $n=100$.
+	\itemch Đúng. Vì từ bảng thống kê ta có
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Số giờ làm thêm & {$[2; 4)$} & {$[4; 6)$} & {$[6; 8)$} & {$[8; 10)$} & {$[10; 12)$} \\
+\hline Số giờ làm thêm đai diện & $3$ & $5$ & $7$ & $9$ & $11$ \\
+\hline Số sinh viên & $12$ & $20$ & $37$ & $21$ & $10$ \\
+\hline
+\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu là
+$$\overline{x}=\dfrac{3\cdot 12+5\cdot 20+7\cdot 37+9\cdot 21+11\cdot 10}{100}=6\cdot 94.$$
+	\itemch Sai. Vì nhóm chứa mốt số liệu trên là nhóm $[6; 8)$.\\
+Do đó $u_m=6$; $n_m=37$, $n_{m-1}=20$; $n_{m+1}=21$; $u_{m+1}=8$.\\
+Vậy mốt của mẫu số liệu ghép nhóm là
+$$M_0=6+\dfrac{37-20}{(37-20)+(37-21)}\cdot(8-6)\approx 7{,}03.$$ 
+	\itemch Sai. Vì $x_1; x_2; \ldots; x_{100}$ là mẫu số liệu theo thứ tự không giảm.\\
+Tứ phân vị thứ hai của dãy số liệu $x_1; x_2; \ldots; x_{100}$ là $\dfrac{1}{2}\left(x_{50}+x_{51}\right)$.\\
+Do $x_{50}$ và $x_{51}$ thuộc nhóm $[6; 8)$ nên $Q_2=6+\dfrac{\dfrac{2 \cdot 100}{4}-32}{37} \cdot(8-6) \approx 6{,}97$.
+	\end{itemchoice}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-OTC3-DS}
+
+\Opensolutionfile{ans}[ans/ans-OTC3-KQ]
+\caukq
+\setcounter{ex}{0}
+\begin{ex}%[1D5H1-3]%Câu 1
+Khi đo cân nặng của học sinh lớp 11D, y tá lập được bảng số liệu ghép nhóm sau đây:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Cân nặng (kg) & {$[40{,}5; 45{,}5)$} & {$[45{,}5; 50{,}5)$} & {$[50{,}5; 55{,}5)$} & {$[55{,}5; 60{,}5)$} & {$[60{,}5; 65{,}5)$} & {$[65{,}5; 70{,}5)$} \\
+\hline Số học sinh & $10$ & $7$ & $16$ & $4$ & $2$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Cân nặng trung bình của học sinh lớp 11D là bao nhiêu? (Kết quả làm tròn đến hàng phần chục)
+\shortans{$51{,}8$}
+	\loigiai{
+Ta có bảng thống kê
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline Cân nặng $(\mathrm{kg})$ & {$[40{,}5; 45{,}5)$} & {$[45{,}5; 50{,}5)$} & {$[50{,}5 ; 55{,}5)$} & {$[55{,}5; 60{,}5)$} & {$[60{,}5; 65{,}5)$} & {$[65{,}5 ; 70{,}5)$} \\
+\hline Giá trị đại diện & $43$ & $48$ & $53$ & $58$ & $63$ & $68$ \\
+\hline Số học sinh & $10$ & $7$ & $16$ & $4$ & $2$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Cân nặng trung bình của học sinh là $$\overline{x}=\dfrac{43\cdot 10+48\cdot 7+53\cdot 16+58\cdot 4+63\cdot 2+68\cdot 3}{42}=51{,}81.$$
+}
+\end{ex}
+
+\begin{ex}%[1D5V1-3]%Câu 2
+Thời gian truy cập internet mỗi buổi trưa của một số học sinh được cho trong bảng sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (phút) & {$[9{,}5; 12{,}5)$} & {$[12{,}5; 15{,}5)$} & {$[15{,}5 ; 18{,}5)$} & {$[18{,}5; 21{,}5)$} & {$[21{,}5; 24{,}5)$} \\
+\hline Số học sinh & $3$ & $12$ & $15$ & $24$ & $2$ \\
+\hline
+\end{tabular}
+\end{center}
+Số trung vị của mẫu số liệu trên là bao nhiêu? (Kết quả làm tròn đến hàng phần chục)
+\shortans{$18{,}1$}
+	\loigiai{
+Cỡ mẫu là $n=3+12+15+24+2=56$.\\
+Gọi $x_1; \ldots; x_{56}$ là thời gian truy cập internet của $56$ học sinh và giả sử dãy này đã được sắp xếp theo thứ tự tăng dần.\\
+Khi đó, số trung vị là $\dfrac{x_{28}+x_{29}}{2}$.\\
+Do hai giá trị $x_{28}; x_{29}$ thuộc nhóm $[15{,}5; 18{,}5)$ nên nhóm này chứa trung vị.\\
+Do đó $p=3$; $a_3=15{,}5$; $m_3=15$; $m_1+m_2=15$; $a_4-a_3=3$.
+$$M_e=15{,}5+\dfrac{\dfrac{56}{2}-15}{15}\cdot 3=18{,}1.$$
+}
+\end{ex}
+
+\begin{ex}%[1D5V2-3]%Câu 3
+Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Thời gian (phút) & {$[0; 20)$} & {$[20; 40)$} & {$[40; 60)$} & {$[60; 80)$} & {$[80; 100)$} \\
+\hline Số học sinh & $5$ & $9$ & $12$ & $10$ & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+Tứ phân vị thứ ba của mẫu số liệu là bao nhiêu? 
+\shortans{$71$}
+	\loigiai{
+Cỡ mẫu là $n=5+9+12+10+6=42$.\\
+Tứ phân vị thứ ba $Q_3$ là $x_{33}$, do nhóm chứa $x_{33}$ là $[60; 80)$, do đó $p=4$; $a_4=60$; $m_1+m_2+m_3=5+9+12=26$; $a_5-a_4=20$.\\
+Ta có $Q_3=a_4+\dfrac{\dfrac{3 n}{4}-\left(m_1+m_2+m_3\right)}{m_4}\left(a_5-a_4\right)=60+\dfrac{\dfrac{3.42}{4}-26}{10} \cdot 20=71$.
+}
+\end{ex}
+
+\begin{ex}%[1D5H1-3]%Câu 4
+Khảo sát chiều cao của học sinh lớp $11 \mathrm{C} 1$, thu được bảng số liệu ghép nhóm như sau
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Khoàng chiều cao $(\mathrm{cm})$ & {$[150; 155)$} & {$[155; 160)$} & {$[160; 165)$} & {$[165; 170)$} & {$[170; 175)$} \\
+\hline Số học sinh & $7$ & $15$ & $12$ & $8$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Chiều cao trung bình của học sinh $11 \mathrm{C} 1$ là bao nhiêu? (Kết quả làm tròn đến hàng đơn vị).
+\shortans{$161$}
+	\loigiai{
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Khoàng chiều cao $(\mathrm{cm})$ & {$[150; 155)$} & {$[155; 160)$} & {$[160; 165)$} & {$[165; 170)$} & {$[170; 175)$} \\
+\hline Giá trị đại diện & $152{,}5$ & $157{,}5$ & $162{,}5$ & $167{,}5$ & $172{,}5$ \\
+\hline Số học sinh & $7$ & $15$ & $12$ & $8$ & $3$ \\
+\hline
+\end{tabular}
+\end{center}
+Chiều cao trung bình của học sinh lớp 11C1 là
+$$\overline{x}=\dfrac{1}{45}(7\cdot 152{,}5+15\cdot 157{,}5+12\cdot 162{,}5+4 \cdot 167{,}5+3\cdot 172{,}5)=160{,}8\approx 161 \mathrm{~cm}.$$
+}
+\end{ex}
+
+\begin{ex}%[1D5H1-3]%Câu 5
+Doanh thu bán hàng trong 20 ngày được lựa chọn ngẫu nhiên của một cửa hàng được ghi lại ở bảng sau (đơn vị: triệu đồng):
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Doanh thu & {$[5; 7)$} & {$[7; 9)$} & {$[9; 11)$} & {$[11; 13)$} & {$[13; 15)$} \\
+\hline Số ngày & $2$ & $7$ & $7$ & $3$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Doanh số trung bình của cửa hàng trên trong $20$ ngày là bao nhiêu? (Kết quả làm tròn đến hàng phần chục)
+\shortans{$9{,}4$}
+	\loigiai{
+Bảng tần số ghép nhóm theo giá trị đại diện là
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Doanh thu & {$[5; 7)$} & {$[7; 9)$} & {$[9; 11)$} & {$[11; 13)$} & {$[13; 15)$} \\
+\hline Giá trị đại diện & $6$ & $8$ & $10$ & $12$ & $14$ \\
+\hline Số ngày & $2$ & $7$ & $7$ & $3$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Số trung bình $\overline{x}=\dfrac{2\cdot 6+7\cdot 8+7\cdot 10+3\cdot 12+1\cdot 14}{20}=9{,}4$.
+}
+\end{ex}
+
+\begin{ex}%[1D5V1-4]%Câu 6
+Một công ty bất động sản Đất Vàng thực hiện cuộc khảo sát khách hàng xem họ có nhu cầu mua nhà ở mức giá nào để tiến hành dự án xây nhà ở Thăng Long group sắp tới. Kết quả khảo sát $500$ khách hàng được ghi lại ở bảng sau:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline Mức giá (triệu đồng) & {$[10; 14)$} & {$[14; 18)$} & {$[18; 22)$} & {$[22; 26)$} & {$[26; 30)$} \\
+\hline Số khách hàng & $75$ & $105$ & $179$ & $96$ & $45$ \\
+\hline
+\end{tabular}
+\end{center}
+Công ty bất động sản Đất Vàng nên xây nhà ở mức giá nào để nhiều người có nhu cầu xây nhà? (Kết quả làm tròn đến hàng phần chục).
+\shortans{$19{,}9$}
+	\loigiai{
+Nhóm chứa mốt của mẫu số liệu trên là $[18; 22)$.\\
+Do đó $u_m=18$; $n_{m-1}=105$; $n_{m+1}=96$; $u_{m+1}-u_m=22-18=4$.\\
+Mốt của mẫu số liệu ghép nhóm là $M_0=18+\dfrac{179-105}{(179-105)+(179-96)} \cdot 4 \approx 19{,}9$.\\
+Dựa vào kết quả trên ta có thể dự đoán rằng nếu công ty bất động sản Đất Vàng xây nhà ở mức giá $19{,}9$ triệu đồng$/\mathrm{m}^2$ thì sẽ có nhiều người mua nhất.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-OTC3-KQ}
+

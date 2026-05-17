@@ -1,0 +1,523 @@
+%\begin{name}
+%	{Biên soạn: Thầy Duong Xuan Loi  \& Phản biện: Thầy B}
+%	{Đề chuẩn hóa}
+%\end{name}
+
+\caulc
+\Opensolutionfile{ans}[ans/ans-cau-TN-1-4]
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]%[1D7H2-3]
+	Viết phương trình tiếp tuyến của đồ thị hàm số $f(x)=x^3-2x^2+3x+1$ tại điểm có hoành độ $x_0=2$.
+	\choice
+	{$y=-x-7$}
+	{$y=7x-14$}
+	{\True $y=7x-7$}
+	{$y=-x+9$}
+	\loigiai{
+		Với $x_0=2$ ta có $y_0=f(x_0)=7$. \\
+		Và $f'(x)=3x^2-4x+3 \Rightarrow f'(2)=7$. \\
+		Vậy phương trình tiếp tuyến cần tìm là $y=f'(2)(x-2)+7\Leftrightarrow y=7x-7$.}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]%[1D7H2-2]
+	Cho hàm số $f(x)=x^4-2x^2+1$. Tìm tất cả các giá trị của $x$ sao cho $f'(x)>0$.
+	\choice
+	{\True $x\in (-1;0)\cup (1;+\infty)$}
+	{$x\in (-1;1)$}
+	{$x\in (-\infty;-1)\cup (0;1)$}
+	{$x\in \mathbb{R}$}
+	\loigiai{
+		Ta có $f'(x)=4x^3-4x=4x(x^2-1)$. \\
+		$f'(x)>0 \Leftrightarrow 4x(x^2-1)>0$. \\
+		Lập bảng xét dấu:
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=false,lgt=2,espcl=2.1]
+				{$x$ /0.7,$4x$ /0.7,$x^2-1$ /0.7,$f'(x)$ /0.7} 
+				{$-\infty$,$-1$,$0$,$1$,$+\infty$}
+				\tkzTabLine{,-,|,-,$0$,+,|,+,}
+				\tkzTabLine{,+,$0$,-,|,-,$0$,+,}
+				\tkzTabLine{,-,$0$,+,$0$,-,$0$,+,}
+			\end{tikzpicture}
+		\end{center}
+		Từ bảng xét dấu suy ra $f'(x)>0 \Leftrightarrow x\in (-1;0)\cup (1;+\infty)$.}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]%[1H8H2-2]
+	Cho hình chóp $S.ABCD$ với đáy $ABCD$ là hình thang vuông tại $A$ và $D$; $AD=CD=a$, $AB=2a$, $SA\perp (ABCD)$, $E$ là trung điểm của $AB$. Khẳng định nào sau đây đúng?
+	\choice
+	{$CE\perp (SDC)$}
+	{$CB\perp (SAB)$}
+	{$\triangle SCD$ vuông ở $C$}
+	{\True $CE\perp (SAB)$}
+	\loigiai{
+		\immini{Xét tứ giác $AECD$ có 
+			$\left\{\begin{aligned}
+				&AE\parallel CD \\
+				&AE=CD=AD=a \\
+				&\widehat{A}=90^{\circ}
+			\end{aligned}\right. $.\\
+			Suy ra $AECD$ là hình vuông. \\
+			Có $\left\{\begin{aligned}
+				&CE\perp AB \\
+				&CE\perp SA
+			\end{aligned}\right. \Rightarrow CE\perp (SAB)$. \\
+			Vậy $CE\perp (SAB)$ là phương án đúng.
+			}{
+			\begin{tikzpicture}[scale=1.2,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\coordinate[label=left:{$A$}] (A) at (0,0);
+				\coordinate[label=below:{$D$}] (D) at (0.5,-1);
+				\coordinate[label=below:{$C$}] (C) at (2,-1);
+				\coordinate[label={$E$}] (E) at ($(A)+(C)-(D)$);
+				\coordinate[label=right:{$B$}] (B) at ($(E)!-1!(A)$);
+				\coordinate[label={$S$}] (S) at ($(A)+(0,2)$);
+				\draw[fill=black] (E) circle (0.6pt);
+				\draw (S)--(A)--(D)--(S)--(B)--(C)--(S) (C)--(D);
+				\draw[dashed] (A)--(B) (C)--(E);
+				\draw pic[draw=black,angle radius=0.2cm] {right angle = D--A--B}
+				pic[draw=black,angle radius=0.2cm] {right angle = S--A--D}
+				pic[draw=black,angle radius=0.2cm] {right angle = C--E--B}; 
+	\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Xét các mệnh đề sau: \\
+	$(1)$ Nếu hàm số $f(x)$ có đạo hàm tại điểm $x=x_0$ thì $f(x)$ liên tục tại điểm đó. \\
+	$(2)$ Nếu hàm số $f(x)$ liên tục tại điểm $x=x_0$ thì $f(x)$ có đạo hàm tại điểm đó. \\
+	$(3)$ Nếu $f(x)$ gián đoạn tại $x=x_0$ thì chắc chắn $f(x)$ không có đạo hàm tại điểm đó. \\
+	$(4)$ $f(x)$ có đạo hàm tại $x_0$ khi và chỉ khi $f(x)$ liên tục tại $x_0$. \\
+	Trong các mệnh đề trên, có bao nhiêu mệnh đề đúng?
+	\choice
+	{\True $2$}
+	{$1$}
+	{$4$}
+	{$3$}
+	\loigiai{
+		Theo định lý $1$ thì $(1)$ và $(3)$ đúng. \\
+		Xét hàm số: $f(x)=\big|x\big|$ ta có: $\lim\limits_{x\to 0^+} f(x)=0$ và $\lim\limits_{x\to 0^-} f(x)=0$ nên hàm số liên tục tại $x=0$. \\
+		Mặt khác: $\lim\limits_{x\to 0^+} \dfrac{f(x)-f(0)}{x-0}=1$ và $\lim\limits_{x\to 0^-} \dfrac{f(x)-f(0)}{x-0}=-1$ nên hàm số không có đạo hàm tại $x=0$. Vậy $(2)$ và $(4)$ sai.}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Tìm tất cả các giá trị của tham số $m$ để phương trình $f'(x)=0$ có nghiệm, biết $f(x)=m\cos x+2\sin x-3x+1$.
+	\choice
+	{$m>0$}
+	{\True $\big|m\big|\ge \sqrt{5}$}
+	{$m<0$}
+	{$-\sqrt{5}<m<\sqrt{5}$}
+	\loigiai{
+		$f'(x)=-m\sin x+2\cos x-3$ \\
+		$f'(x)=0 \Leftrightarrow -m\sin x+2\cos x-3=0 \Leftrightarrow -m\sin x+2\cos x=3.\quad(*)$ \\
+		Phương trình $\left(*\right)$ có nghiệm khi và chỉ khi $(-m)^2+2^2\ge 3^2 \Leftrightarrow m^2\ge 5 \Leftrightarrow \big|m\big|\ge \sqrt{5}$.}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hình chóp $S.ABCD$ có $ABCD$ là hình thoi tâm $O$ và $SA=SC$, $SB=SD$. Trong các khẳng định sau khẳng định nào \textbf{sai}?
+	\choice
+	{\True $AC\perp SA$}
+	{$SA\perp BD$}
+	{$AC\perp BD$}
+	{$SD\perp AC$}
+	\loigiai{
+		\immini{
+			Ta có: $\begin{aligned}
+				&\left\{\begin{aligned}
+					&SO\perp AC \\
+					&SO\perp BD
+				\end{aligned}\right. \\
+				& \Rightarrow SO\perp (ABCD)
+			\end{aligned}$ \\
+			Từ đây ta chứng minh được $AC\perp (SBD) \Rightarrow AC\perp SD$ \\
+			Từ đây ta chứng minh được $BD\perp (SAC) \Rightarrow BD\perp SA$ \\
+			$AC\perp BD$ hiển nhiên vì $ABCD$ là hình thoi.
+			}{
+			\begin{tikzpicture}[scale=0.7,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\def \xa{-3} 
+				\def \xb{-2}
+				\def \y{5}
+				\def \z{5}				
+				\coordinate (A) at (0,0);
+				\coordinate (B) at ($(A)+(\xa,\xb)$);
+				\coordinate (D) at ($(A)+(\y,0)$);
+				\coordinate (C) at ($ (B)+(D)-(A) $);
+				\coordinate (O) at ($ 0.5*(B)+0.5*(D)-0.5*(A) $);
+				\coordinate (S) at ($ (O)+(0,\z) $);
+				\draw [dashed] (B)--(A)--(D) (A)--(S) (A)--(C) (S)--(O) (B)--(D);
+				\draw (S)--(B)--(C)--(D)--(S)--(C);
+				\foreach \p/\q in {S/90,A/160,B/-110,C/-80,D/0,O/-90}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:3.5mm)$) node{$\p$};
+	\end{tikzpicture}}}
+\end{ex}
+
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Viết phương trình tiếp tuyến của đồ thị hàm số $f(x)=x^3-x^2+2$, biết tiếp tuyến song song với đường thẳng $y=5x+5$.
+	\choice
+	{$y=5x-\dfrac{121}{27};y=5x+5$}
+	{$y=5x+\dfrac{121}{27}$}
+	{$y=5x-5$}
+	{\True $y=5x-\dfrac{121}{27}$}
+	\loigiai{
+		\begin{itemize}
+			\item  $f'(x)=3x^2-2x$. Gọi $x_0$ là hoành độ tiếp điểm. \\
+			Vì tiếp tuyến song song với đường thẳng $y=5x+5$ nên $f'(x_0)=5 \Leftrightarrow 3x_0^2-2x_0=5 \Leftrightarrow \left[\begin{aligned}
+				&x_0=-1 \\
+				&x_0=\dfrac{5}{3}
+			\end{aligned}\right. $ \\
+			\item  Với $x_0=-1 \Rightarrow y_0=0$, ta có pttt: $y=5(x+1)=5x+5$ (loại). \\
+			\item  Với $x_0=\dfrac{5}{3} \Rightarrow y_0=\dfrac{104}{27}$, ta có pttt: $y=5\left(x-\dfrac{5}{3}\right)+\dfrac{104}{27}=5x-\dfrac{121}{27}$.
+	\end{itemize}}
+\end{ex}
+\begin{ex}
+	Với $a$ là số thực dương tùy ý, $\log _3\left(\dfrac{3}{a}\right)$ bằng
+	\choice
+	{\True $1 -\log _3a$}
+	{$3 -\log _3a$}
+	{$\dfrac{1}{\log_3a}$}
+	{$1+\log_3a$}
+	\loigiai{ 
+		Ta có $\log_3\left(\dfrac{3}{a}\right)=\log_33-\log_3a=1-\log_3a$.
+	}
+\end{ex}
+\begin{ex}
+	Số giao điểm của đồ thị hàm số $y=\log_2(x^2+3x)$ và đường thẳng $y=2$ là
+	\choice
+	{$0$}
+	{\True $2$}
+	{$1$}
+	{$3$}
+	\loigiai{
+		Phương trình hoành độ giao điểm:
+		$$\log_2(x^2+3x)=2\Leftrightarrow x^2+3x=4 \Leftrightarrow \hoac{&x=1\\&x=-4}.$$
+		Vậy, đồ thị hàm số $y=\log_2(x^2+3x)$ và đường thẳng $y=2$ cắt nhau tại $2$ điểm phân biệt.
+	}
+\end{ex}
+\begin{ex}
+	Tập xác định của hàm số $y=\sqrt{\log_2\dfrac{2x}{1-x^2}}$ có dạng $[a;b)\cup[c;d)$. Tính $a+b+c+d$.
+	\choice
+	{$1$}
+	{\True $-2$}
+	{$3$}
+	{$-4$}
+	\loigiai{
+		Điều kiện: $ \heva{&\dfrac{2x}{1-x^2}>0\\&\log_2\dfrac{2x}{1-x^2}\ge 0}\Leftrightarrow \dfrac{2x}{1-x^2}\ge 1\Leftrightarrow \dfrac{x^2+2x-1}{1-x^2}\ge 0.$\hfill(1) \\ Xét dấu vế trái (1), ta được $ x\in \left[-1-\sqrt{2};-1\right)\cup\left[-1+\sqrt{2};1\right). $\\ Suy ra $ a+b+c+d=-2. $
+	}
+\end{ex}
+\begin{ex}
+	Cho $A$, $B$ là hai biến cố độc lập cùng liên quan tới một phép thử, có $P(A)=0{,}12$ và $P(B)=0{,}2$. Tính $P(A\cup B)$.
+	\choice
+	{$0{,}32$}
+	{$0{,}024$}
+	{$0{,}344$}
+	{\True $0{,}296$}
+	\loigiai{
+		Ta có\\
+		$P(A\cup B)=P(A)+P(B)-P(A\cap B)=P(A)+P(B)-P(A)\cdot P(B)=0{,}12+0{,}2-0{,}12\cdot 0{,}2=0{,}296$.
+	}
+\end{ex}
+\begin{ex}
+	Cho $X=\left\{0,1,2,3,\ldots,15\right\}$. Chọn ngẫu nhiên $3$ số trong tập hợp $X$. Tính xác suất để trong ba số được chọn không có hai số liên tiếp.
+	\choice
+	{$\dfrac{13}{35}$}
+	{$\dfrac{7}{20}$}
+	{$\dfrac{20}{35}$}
+	{\True $\dfrac{13}{20}$}
+	\loigiai{
+		Gọi $\Omega $ là không gian mẫu. Ta có $n\left(\Omega \right)=\mathrm{C}_{16}^3 = 560$.\\
+		Có $14$ cách chọn ba số liên tiếp nhau.\\
+		Có $15$ cách chọn hai số liên tiếp nhau.\\
+		+Nếu hai số đó là $\left\{0,1\right\}$ hoặc $\left\{14,15\right\}$ thì có $13$ cách chọn số thứ ba sao cho trong ba số chỉ có hai số liên tiếp.\\
+		+Nếu hai số đó không phải là $\left\{0,1\right\}$ hoặc $\left\{14,15\right\}$ thì có $12$ cách chọn số thứ ba sao cho trong ba số chỉ có hai số liên tiếp.\\
+		Vậy có $14+2\times 13+13\times 12=196$ cách chọn ba số sao cho ba số đó là liên tiếp hoặc chỉ có hai trong ba số là liên tiếp.\\
+		Vậy có $560-196=364$ cách chọn ba số sao cho trong ba số được chọn không có hai số liên tiếp.\\
+		Do đó xác suất cần tính là $\mathrm{P} = \dfrac{364}{560}=\dfrac{13}{20}$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-cau-TN-1-4}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-cau-DS-1-4]
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hình chóp $S.ABC$ có đáy $ABC$ là tam giác cân tại $B$, cạnh bên $SA$ vuông góc với mặt đáy, $I$ là trung điểm $AC$, $H$ là hình chiếu của $I$ lên $SC$. Xét tính đúng sai của các mệnh đề sau
+	\choiceTF
+	{\True $BI\perp (SAC)$}
+	{\True $(BIH)\perp (SBC)$}	
+	{$(SBC)\perp (ABC)$}
+	{$(SAC)\perp (SBC)$}
+	\loigiai{
+		\immini{
+			Ta có $\left\{\begin{aligned}
+				&BI\perp SA \\
+				&BI\perp AC
+			\end{aligned}\right. \Rightarrow BI\perp (SAC)$.\\
+			Ta lại có $\heva{& SC\perp BI \\ & SC\perp IH} \Rightarrow SC\perp (BIH)\Rightarrow (BIH)\perp (SAC)$.
+			\begin{itemchoice}
+				\itemch Mệnh đề \lq\lq $BI\perp (SAC)$\rq\rq\, đúng.
+				\itemch Mệnh đề \lq\lq $(BIH)\perp (SBC)$\rq\rq\, sai.
+				\itemch Mệnh đề \lq\lq $(SBC)\perp (ABC)$\rq\rq\, sai.
+				\itemch Mệnh đề \lq\lq $(SAC)\perp (SBC)$\rq\rq\, sai.
+			\end{itemchoice}
+		}{
+		\begin{tikzpicture}[scale=1,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\coordinate[label=left:{$A$}] (A) at (0,0);
+				\coordinate[label=below:{$B$}] (B) at (1.5,-1);
+				\coordinate[label=right:{$C$}] (C) at (4,0);
+				\coordinate[label={$S$}] (S) at ($(A)+(0,3)$);
+				\coordinate[label=above:{$I$}] (I) at ($(A)!0.5!(C)$);
+				\coordinate[label={$H$}] (H) at ($(S)!0.7!(C)$);
+				\draw[fill=black] (I) circle (1pt);
+				\draw (S)--(A)--(B)--(S)--(C)--(B);
+				\draw[dashed] (A)--(C) (B)--(I)--(H);
+				\draw pic[draw=black,angle radius=0.2cm] {right angle = C--H--B}
+				pic[draw=black,angle radius=0.2cm] {right angle = S--A--B}
+				pic[draw=black,angle radius=0.2cm] {right angle = B--I--A}; 
+	\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hình chóp $S.ABC$ có $SA\perp (ABC)$ và tam giác $ABC$ không vuông. Gọi $H$, $K$ lần lượt là trực tâm các tam giác $ABC$ và tam giác $SBC$. Xét tính đúng sai của các mệnh đề sau
+	\choiceTF
+	{$AH$, $SK$, $CB$ đồng phẳng}
+	{\True $AH$, $SK$, $CB$ đồng quy}
+	{$HK\perp (SBC)$}
+	{$AH$, $SK$, $CB$ đôi một song song}
+	\loigiai{
+		\immini{
+			Trong $(ABC)$ gọi $M$ là giao điểm $AH$ và $BC$ \\
+			$BC\perp SA(SA\perp ABC)$ và $BC\perp AM$ (Vì $H$ là trực tâm tam giác $ABC$) \\
+			$ \Rightarrow BC\perp (SAM) \Rightarrow BC\perp SM$ \\
+			Mà $BC\perp SK$ suy ra $SK$ đi qua $M$ \\
+			Vậy $AH,SK,CB$ đồng quy.
+			\begin{itemchoice}
+				\itemch Mệnh đề \lq\lq $AH$, $SK$, $CB$ đồng phẳng\rq\rq\, sai.
+				\itemch Mệnh đề \lq\lq $AH$, $SK$, $CB$ đồng quy\rq\rq\, đúng.
+				\itemch Mệnh đề \lq\lq $HK\perp (SBC)$\rq\rq\, sai.
+				\itemch Mệnh đề \lq\lq $AH$, $SK$, $CB$ đôi một song song\rq\rq\, sai.
+			\end{itemchoice}
+			}{
+			\begin{tikzpicture}[scale=0.75,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\def \xa{3} 
+				\def \xb{2}
+				\def \y{5}
+				\def \z{5}
+				\coordinate (A) at (0,0);
+				\coordinate (B) at ($(\xa,-\xb)$);
+				\coordinate (C) at (7,0);
+				\coordinate (S) at ($(A)+(0,\z)$);
+				\coordinate (M) at ($0.4*(B)+0.6*(C)$);
+				\coordinate (H) at ($0.4*(A)+0.6*(M)$);
+				\coordinate (K) at ($0.7*(M)+0.3*(S)$);
+				\draw[dashed]   (A)--(C) (A)--(M) (H)--(K);
+				\draw (S)--(A)--(B)--(C)--(S)--(B) (S)--(M);
+				\foreach \p/\q in {A/180,B/-90,C/0,S/90,K/30,M/-30,H/-90}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:3mm)$) node{$\p$};			
+				\draw pic[draw=black,angle radius=0.2cm] {right angle =S--A--B}
+				pic[draw=black,angle radius=0.2cm] {right angle = S--A--C}
+				pic[draw=black,angle radius=0.2cm] {right angle = S--M--C}
+				pic[draw=black,angle radius=0.2cm] {right angle = A--M--B}; 
+		\end{tikzpicture}}
+	}
+\end{ex}
+\begin{ex}%[2D2B4-2]
+	Cho hàm số $y=f(x)=\ln \dfrac{2024x}{x+1}$. Xét tính đúng sai của các mệnh đề sau
+	\choiceTF
+	{\True Tập xác định của hàm số $\mathscr{D}=(-\infty;-1)\cup(0;+\infty)$}
+	{\True Tập giá trị của hàm số $T=\mathbb{R}$}
+	{Đạo hàm của hàm số là $y'=f'(x)= \dfrac{1}{x} -\dfrac{1}{x+1}$}
+	{\True Tổng $S=f'(1)+f'(2) +\cdots +f'(2024)=\dfrac{2024}{2025}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Hàm số xác định khi $\heva{& x\ne-1 \\ & \dfrac{2024x}{x+1}>0}\Leftrightarrow x\in (-\infty;-1)\cup(0;+\infty)$.\\
+			Mệnh đề \lq\lq Tập xác định của hàm số $\mathscr{D}=(-\infty;-1)\cup(0;+\infty)$\rq\rq\, đúng.
+			\itemch Mệnh đề \lq\lq Tập giá trị của hàm số $T=\mathbb{R}$\rq\rq\, đúng.
+			\itemch Ta có $f'(x)= \dfrac{1}{|x|} -\dfrac{1}{|x+1|}$.\\
+			Mệnh đề \lq\lq Đạo hàm của hàm số là $y'=f'(x)= \dfrac{1}{x} -\dfrac{1}{x+1}$\rq\rq\, sai.			
+			\itemch Ta có  
+			\begin{eqnarray*}
+				S&=&f'(1)+f'(2) +\cdots +f'(2024)\\
+				&= & \left( 1 -\dfrac{1}{2}\right)+ \left( \dfrac{1}{2}- \dfrac{1}{3}\right)+ \cdots + \left( \dfrac{1}{2024}  -\dfrac{1}{2025}\right)\\
+				&= &  1 -\dfrac{1}{2025}\\
+				& = &\dfrac{2024}{2025}.
+			\end{eqnarray*}	
+			Mệnh đề \lq\lq Tổng $S=f'(1)+f'(2) +\cdots +f'(2024)=\dfrac{2024}{2025}$\rq\rq\, đúng.
+		\end{itemchoice}		
+	}
+\end{ex}
+\begin{ex}
+	Một nhóm các em thiếu niên vào công viên tham gia trò chơi \lq\lq Ném vòng vào cổ chai lấy thưởng\rq\rq. Mỗi em được ném $3$ vòng. Xác suất ném vào cổ chai lần đầu là $0{,}75$. Xác suất ném vào cổ chai lần thứ hai là $0{,}6$. Nếu ném trượt cả hai lần ném đầu tiên thì xác suất ném vòng vào cổ chai ở lần thứ ba là $0{,}3$. Xét tính đúng sai của các mệnh đề sau
+	\choiceTF
+	{\True Xác suất \lq\lq Ném được vòng vào cổ chai lần đầu\rq\rq\, là $0{,}75$}
+	{Xác suất \lq\lq Ném được vòng vào cổ chai lần thứ hai\rq\rq\, là $0{,}6$}
+	{\True Xác suất \lq\lq Ném được vòng vào cổ chai lần thứ ba\rq\rq\, là $0{,}03$}
+	{\True Xác suất \lq\lq Ném được vòng vào cổ chai\rq\rq\, là $0{,}93$}
+	\loigiai{
+		Gọi $X$, $A$, $B$, $C$ lần lượt là biến cố \lq\lq Ném được vòng vào cổ chai\rq\rq,  \lq\lq Ném được vòng vào cổ chai lần đầu\rq\rq, \lq\lq Ném được vòng vào cổ chai lần thứ hai\rq\rq, \lq\lq Ném được vòng vào cổ chai lần thứ ba\rq\rq\, thì các biến cố $A$, $B$, $C$ xung khắc. Khi đó $K=A\cup B \cup C$. Áp dụng quy tắc cộng xác suất, ta có 
+			$$\mathrm{P}(X)=\mathrm{P}(A)+\mathrm{P}(B)+\mathrm{P}(C).$$
+		\begin{itemchoice}
+			\itemch Xét biến cố $A$: \lq\lq Ném được vòng vào cổ chai lần đầu\rq\rq. Tức là em đó ném được vòng vào cổ chai ngay lần thứ nhất. \\
+			Do đó $\mathrm{P}(A)=0{,}75$.
+			\itemch Xét biến cố: \lq\lq Ném được vòng vào cổ chai lần thứ hai\rq\rq. Tức là em đó lần đầu ném trượt, lần thứ hai thì ném được vào cổ chai. Do đó $\mathrm{P}(B)=(1-0{,}75)\cdot 0{,}6=0{,}15$.
+			\itemch Xét biến cố: \lq\lq Ném được vòng vào cổ chai lần thứ ba\rq\rq. Tức là lần thứ nhất và lần thứ hai em đó ném trượt, đến lần thứ ba thì ném được vào cổ chai. Do đó $\mathrm{P}(C)=(1-0{,}75)\cdot (1-0{,}6)\cdot 0{,}3=0{,}03$.
+			\itemch Xác suất để em đó ném vòng vào đúng cổ chai là $\mathrm{P}(X)=\mathrm{P}(A)+\mathrm{P}(B)+\mathrm{P}(C)=0{,}93$.
+		\end{itemchoice}		
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-cau-DS-1-4}
+
+\caukq
+\Opensolutionfile{ans}[ans/ans-cau-KQ-1-4]
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hàm số $f(x)=\sqrt{3+x}$. Tính $f(1)+4f'(1)$.
+	\shortans[]{$3$}
+	\loigiai{
+		Ta có $f(x)=\sqrt{3+x} \Rightarrow f'(x)=\dfrac{1}{2\sqrt{3+x}}$. \\
+		Nên $f(1)+4f'(1)=\sqrt{3+1}+\dfrac{4}{2\sqrt{3+1}}=3$.}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho tứ diện $ABCD$ có $AB=CD=a$, $ IJ=\dfrac{a\sqrt{3}}{2}$. Gọi $I$, $J$ lần lượt là trung điểm của $BC$ và $AD$. Tính số đo góc giữa hai đường thẳng $AB$ và $CD$.
+	\shortans[]{$60$}
+	\loigiai{
+		\immini{
+			Gọi $M$ là trung điểm $AC$, $N$ là trung điểm $DB$ \\
+			Ta có $IN\parallel CD\parallel JM,IN=JM=\dfrac{1}{2}CD=\dfrac{a}{2}$ \\
+			$IM\parallel AB\parallel JN,IM=JN=\dfrac{1}{2}AB=\dfrac{a}{2}$ \\
+			$\cos \widehat{MIJ}=\dfrac{MI^2+IJ^2-MJ^2}{2MI.IJ}=\dfrac{\sqrt{3}}{2} \Rightarrow \widehat{MIJ}=30^{\circ}$ \\
+			$ \Rightarrow \widehat{MIN}=2\widehat{MIJ}=60^{\circ}$ ( $MINJ$ là hình thoi) \\
+			$(AB,CD)=(IM,IN)=\widehat{MIN}=60^{\circ}$.
+			}{\begin{tikzpicture}[scale=0.8,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\def \xa{3} 
+				\def \xb{2}
+				\def \y{5}
+				\def \z{6}
+				\coordinate (B) at (0,0);
+				\coordinate (C) at ($(\xa,-\xb)$);
+				\coordinate (D) at (7,0);
+				\coordinate (T) at ($0.4*(B)+0.6*(D)$);
+				\coordinate (A) at ($(T)+(0,\z)$);
+				\coordinate (I) at ($0.5*(B)+0.5*(C)$);
+				\coordinate (N) at ($0.5*(B)+0.5*(D)$);
+				\coordinate (J) at ($0.5*(D)+0.5*(A)$);
+				M\coordinate (M) at ($0.5*(C)+0.5*(A)$);
+				\draw [dashed]  (B)--(D) (I)--(N)--(J)--(I);
+				\draw (A)--(B)--(C)--(D)--(A)--(C) (I)--(M)--(J);
+				\foreach \p/\q in {A/90,B/180,C/-90,D/0,M/180,I/-135,J/0,N/-45}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:3mm)$) node{$\p$};
+	\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hình lăng trụ $ABC.A'B'C'$ có tất cả các cạnh đều bằng $10$. Góc tạo bởi cạnh bên và mặt phẳng đáy bằng $30^{\circ}$. Hình chiếu $H$ của $A'$ lên mặt phẳng $(ABC)$ thuộc đường thẳng $BC$. Tính khoảng cách từ $B$ đến mặt phẳng $(ACC'A')$ (kết quả làm tròn đến hàng phần trăm).
+	\shortans[]{$6,55$}
+	\loigiai{
+		Ta có $\widehat{A'AH}=30^{\circ}$ do đó $AH=10\cos 30^{\circ}=\dfrac{10\sqrt{3}}{2}$ và $A'H=\dfrac{10\sqrt{3}}{2}\cdot \dfrac{1}{\sqrt{3}}=5$.\\
+		\immini{Gọi $K$ là hình chiếu của $H$ lên $AC$ và $I$ là hình chiếu của $H$ lên $A'K$. \\
+			Do tam giác $ABC$ đều cạnh bằng $a$ nên $H$ thuộc đoạn $BC$ và $H$ là trung điểm $BC$. \\
+			$\mathrm{d}(B,(ACC'A'))=2\mathrm{d}(H,(ACC'A'))=2HI$. \\
+			$HK=\dfrac{1}{2}\cdot\dfrac{10\sqrt{3}}{2}=\dfrac{5\sqrt{3}}{2}$ nên\\
+			$2HI=2\dfrac{HA'\cdot HK}{\sqrt{HA'^2+HK^2}}=2\dfrac{5\cdot \dfrac{5\sqrt{3}}{2}}{\sqrt{5^2+\dfrac{75}{4}}}\approx6,55$.
+			}{
+			\begin{tikzpicture}[scale=1,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\coordinate[label=left:{$A$}] (A) at (0,0);
+				\coordinate[label=below:{$C$}] (B) at (0.8,-1);
+				\coordinate[label=right:{$B$}] (C) at (3,0);
+				\coordinate[label=below:{$H$}] (H) at ($(B)!0.5!(C)$);
+				\coordinate[label={$A'$}] (A') at ($(H)+(0,3.5)$);
+				\coordinate[label={$C'$}] (B') at ($(A')+(B)-(A)$);
+				\coordinate[label={$B'$}] (C') at ($(A')+(C)-(A)$);
+				\coordinate[label=left:{$K$}] (K) at ($(A)!3/4!(B)$);
+				\coordinate[label=left:{$I$}] (I) at ($(A')!3/4!(K)$);
+				\draw (B)--(B')--(A')--(A)--(B)--(C)--(C')--(B') (C')--(A')--(K);
+				\draw[dashed] (A')--(H)--(A)--(C) (K)--(H)--(I);
+				\draw pic[draw=black,angle radius=0.14cm] {right angle = A'--H--K}
+				pic[draw=black,angle radius=0.14cm] {right angle = H--K--A}
+				pic[draw=black,angle radius=0.14cm] {right angle = H--I--A'}
+				;
+	\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho hình chóp $S.ABC$ có đáy $ABC$ là tam giác vuông cân tại $A$, $AB=\sqrt{2}$, $SA=SB=SC$. Góc giữa đường thẳng $SA$ và mặt phẳng $(ABC)$ bằng $45^{\circ}$. Tính khoảng cách từ điểm $S$ đến mặt phẳng $(ABC)$.
+	\shortans[]{$1$}
+	\loigiai{
+		Gọi $H$ là hình chiếu vuông góc của $S$ trên $(ABC)$.
+		\immini{$ \Rightarrow SH\perp (ABC) \Rightarrow SH=\mathrm{d}(S;(ABC))$. \\
+			Ta có $\triangle SHA=\triangle SHB=\triangle SHC$ \\
+			$ \Rightarrow HA=HB=HC \Rightarrow H$ là tâm đường tròn ngoại tiếp $\triangle ABC$. \\
+			Mặt khác $\triangle ABC$ vuông tại $A$ nên $H$ là trung điểm của $BC$. \\
+			Do $SH\perp (ABC) \Rightarrow (SA;(ABC))=(SA;AH)=\widehat{SAH}=45^{\circ}$. \\
+			$ \Rightarrow SH=AH=\dfrac{1}{2}BC=\dfrac{\sqrt{2}\cdot\sqrt{2}}{2}=1$.
+			}{
+			\begin{tikzpicture}[scale=1,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\coordinate[label=left:{$A$}] (A) at (0,0);
+				\coordinate[label=below:{$B$}] (B) at (1.5,-1);
+				\coordinate[label=right:{$C$}] (C) at (4,0);
+				\coordinate[label=below:{$H$}] (H) at ($(B)!0.5!(C)$);
+				\coordinate[label={$S$}] (S) at ($(H)+(0,3)$);
+				\draw (B)--(A)--(S)--(B)--(C)--(S)--(H);
+				\draw[dashed] (H)--(A)--(C);
+				\draw pic[draw=black,angle radius=0.2cm] {right angle = B--A--C}
+				pic[draw=black,angle radius=0.2cm] {right angle = S--H--A}
+				pic[draw,angle radius=5mm]{angle=H--A--S}; 
+		\end{tikzpicture}}
+	}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Cho tứ diện đều $ABCD$. Gọi $\varphi $ là góc giữa hai mặt phẳng $(BCD)$ và $(ABC)$. Giá trị $\cos \varphi$ bằng (Kết quả làm tròn đến hàng phần trăm)
+	\shortans[]{$0,33$}
+	\loigiai{
+		\immini{
+			Giả sử tứ diện đều có tất cả các cạnh bằng $x$ \\
+			Gọi $M$ là trung điểm $BC$ \\
+			Do tam giác $ABC,DBC$ đều nên $\left\{\begin{aligned}
+				&AM\perp BC \\
+				&DM\perp BC
+			\end{aligned}\right. $ \\
+			Do đó: $\varphi =(AM;DM)$ \\
+			Xét tam giác $AMD$ có: $AM=DM=\dfrac{x\sqrt{3}}{2}$ \\
+			Nên $\cos \widehat{AMD} =\dfrac{AM^2+MD^2-AD^2}{2\cdot AM\cdot MD}\\=\dfrac{\dfrac{3x^2}{4}+\dfrac{3x^2}{4}-x^2}{2\cdot \dfrac{x\sqrt{3}}{2}\cdot \dfrac{x\sqrt{3}}{2}}=\dfrac{\dfrac{1}{2}x^2}{\dfrac{3x^2}{2}}=\dfrac{1}{3}>0$\\ Nên $\cos \widehat{AMD}=\cos (AM;MD)=\cos \varphi $. \\
+			Vậy $\cos \varphi =\dfrac{1}{3}\approx0,33$.
+			}{
+			\begin{tikzpicture}[scale=0.8,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\def \xa{3} 
+				\def \xb{2}
+				\def \y{5}
+				\def \z{5}
+				\coordinate (B) at (0,0);
+				\coordinate (C) at ($(\xa,-\xb)$);
+				\coordinate (D) at (7,0);
+				\coordinate (M) at ($0.5*(B)+0.5*(C)$);
+				\coordinate (N) at ($0.7*(M)+0.3*(D)$);
+				\coordinate (A) at ($(N)+(0,\z)$);
+				\draw [dashed] (B)--(D)--(M);
+				\draw[](M)--(A)--(B)--(C)--(D)--(A)--(C);
+				\foreach \p/\q in {A/90,B/180,C/-90,D/0,M/-135}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:2.5mm)$) node{$\p$};
+				\draw pic[draw=black,angle radius=0.2cm] {right angle = A--M--B}
+				pic[draw=black,angle radius=0.2cm] {right angle = D--M--C};
+	\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[1-De-chuan-hoa-so-4]%[Duong Xuan Loi]
+	Một viên đạn được bắn lên trời từ một vị trí cách mặt đất $1000$m theo phương thẳng đứng với vận tốc ban đầu $v_0=294$m/s (bỏ qua sức cản của không khí). Hỏi khi viên đạn đạt độ cao lớn nhất và sẽ bắt đầu rơi thì viên đạn cách mặt đất bao nhiêu mét?
+	\shortans[]{$5410$}
+	\loigiai{
+		\immini{
+			Chọn trục $Oy$ theo phương thẳng đứng, chiều dương hướng từ mặt đất lên trời, gốc $O$ ở mặt đất và cách $A$ là vị trí viên đạn được bắn lên, gốc thời gian (tức lúc $t=0$) được tính từ vị trí $A$ như hình bên; khi đó chuyển động của viên đạn là chuyển động biến đổi đều với vận tốc ban đầu $v_0=294$m/s và với gia tốc. (Gia tốc nhận giá trị âm vì véc-tơ gia tốc ngược chiều dương của trục $Oy$. Phương trình chuyển động của viên đạn là: 
+			$y=1000+294t-4{,}9t^2$ \\
+			Ta có $v(t)=y'=294-9{,}8t$ \\
+			Viên đạn đạt độ cao lớn nhất và sẽ bắt đầu rơi \\$v(t)=0 \Leftrightarrow 294-9{,}8t=0 \Leftrightarrow t=30$(s) \\
+			Khi đó viên đạn cách mặt đất là\\ 
+			$y(30)=1000+294.30-4{,}{9.30}^2=5410$(m).
+			}{
+			\begin{tikzpicture}[scale=1,font=\footnotesize,line join=round,line cap=round,>=stealth]
+				\coordinate (O) at (0,0);
+				\coordinate (A) at (0,1);
+				\coordinate (B) at (0,5.41);
+				\coordinate (C) at (-2,0);
+				\coordinate (D) at (2,0);
+				\draw [->] (0,0)--(0,6) node[right]{$y$};
+				\foreach \x in {-2,-1.5,-1,-0.5,0,0.5,1,1.5,2}{
+					\draw[-] (\x-.1,-.2)--(\x,0);}
+				\draw (0,1) node [left]{$1000$} (C)--(D);
+				\draw (0,5.41) node [left]{$5410$};
+				\draw (0.5,5.41) node [right]{$(t=30)$};
+				\draw (0.5,1) node [right]{$(t=0)$};
+				\foreach \p/\q in {A/0,B/0,O/-90}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:3mm)$) node{$\p$};
+		\end{tikzpicture}}		
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-cau-KQ-1-4}

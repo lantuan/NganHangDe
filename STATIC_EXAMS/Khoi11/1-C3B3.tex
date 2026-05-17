@@ -1,0 +1,823 @@
+\section{Hàm số liên tục}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De1-LC]
+\caulc
+\begin{ex}%[1D3H3-4]
+Cho hàm số $f(x)=\heva{&\dfrac{\sqrt{x}-2}{x-4}&\text{khi}\,\,x\ne 4\\&\dfrac{1}{4}&\text{khi}\,\,x=4}$. Khẳng định nào sau đây \textbf{đúng}?
+\choice
+{Hàm số có tập xác định $\mathscr{D}=\mathbb{R}\setminus\{4\}$}
+{Hàm số liên tục tại mọi điểm trên tập xác định nhưng gián đoạn tại $x=4$}
+{Hàm số không liên tục tại $x=4$}
+{\True Hàm số liên tục tại $x=4$}
+\loigiai{
+Tập xác định $\mathscr{D}=[0;+\infty)$.\\
+Ta có $\heva{&f(4)=\dfrac{1}{4}\\&\lim\limits_{x\to 4} f(x)=\lim\limits_{x\to 4} \dfrac{1}{\sqrt{x}+2}=\dfrac{1}{4}.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x=4$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tìm giá trị thực của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{x^3-x^2+2x-2}{x-1}&\text{khi}\,\,x\ne 1\\&3x+m&\text{khi}\,\,x=1\\}$ liên tục tại $x=1$.
+\choice
+{\True $m=0$}
+{$m=2$}
+{$m=4$}
+{$m=6$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Theo giả thiết thì ta phải có 
+\begin{eqnarray*}
+	& & 3+m=f(1)= \lim\limits_{x\to 1} f(x)\\
+	&\Leftrightarrow & 3+m=\lim\limits_{x\to 1}\dfrac{x^3-x^2+2x-2}{x-1}\\
+	&\Leftrightarrow & 3+m=\lim\limits_{x\to 1} \dfrac{\left(x-1\right)\left(x^2+2 \right) }{x-1}\\
+	&\Leftrightarrow &
+	3+m=\lim\limits_{x\to 1} \left(x^2+2 \right)=3\\
+	&\Leftrightarrow&
+	m=0\\
+\end{eqnarray*}
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Biết rằng hàm số $y=f(x)=\heva{&\dfrac{3-x}{\sqrt{x+1}-2}&\text{khi}\,\,x\ne 3\\&m&\text{khi}\,\,x=3\\}$ liên tục tại $x=3$ (với $m$ là tham số). Khẳng định nào dưới đây \textbf{đúng}?
+\choice
+{$m\in (-3;0)$}
+{\True $m\le -3$}
+{$m\in [0;5)$}
+{$m\in [0;+\infty)$}
+\loigiai{
+Tập xác định $\mathscr{D}=\left[-1;+\infty\right)$.\\
+Theo giả thiết thì ta phải có 
+\begin{eqnarray*}
+& & m=f(3)= \lim\limits_{x\to 3} f(x)\\
+&\Leftrightarrow & m=\lim\limits_{x\to 3}\dfrac{3-x}{\sqrt{x+1}-2}\\
+&\Leftrightarrow &
+m=\lim\limits_{x\to 3} \dfrac{\left(3-x\right)\left(\sqrt{x+1}+2\right)}{x-3}\\
+&\Leftrightarrow&
+m=\lim\limits_{x\to 3}\left[- \left(\sqrt{x+1}+2\right)\right]=-4 \\
+\end{eqnarray*}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-3]
+Số điểm gián đoạn của hàm số $f(x)=\heva{&0{,}5&\text{khi}&\,\,x=-1\\
+&\dfrac{x(x+1)}{x^2-1}&\text{khi}&\,\,x\ne-1, x\ne 1\\
+&1&\text{khi}&\,\,x=1}$ là
+\choice
+{$0$}
+{\True $1$}
+{$2$}
+{$3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;-1)$, $(-1;1)$, $(1;+\infty)$.
+\begin{enumerate}[(i)]
+\item Xét tại $x=-1$, ta có
+\begin{eqnarray*}
+\lim\limits_{x\to -1} f(x)
+&=&
+\lim\limits_{x\to -1} \dfrac{x(x+1)}{x^2-1}\\
+&=&
+\lim\limits_{x\to -1} \dfrac{x(x+1)}{(x-1)(x+1)}\\
+&=&
+\lim\limits_{x\to -1}\dfrac{x}{x-1}=\dfrac{1}{2}=f(-1)
+\end{eqnarray*}
+Vậy hàm số $y=f(x)$ liên tục tại $x=-1$.
+\item Xét tại $x=1$, ta có\\
+$\heva{&\lim\limits_{x\to 1^{+}} f(x)=\lim\limits_{x\to 1^{+}}\dfrac{x(x+1)}{x^2-1}=\lim\limits_{x\to 1^{+}}\dfrac{x}{x-1}=+\infty\\&\lim\limits_{x\to 1^{-}} f(x)=\lim\limits_{x\to 1^{-}}\dfrac{x(x+1)}{x^2-1}=\lim\limits_{x\to 1^{-}}\dfrac{x}{x-1}=-\infty}$\\
+Vậy hàm số $y=f(x)$ gián đoạn tại $x=1$.
+\end{enumerate}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Có bao nhiêu giá trị của tham số $a$ để hàm số $f(x)=\heva{&\dfrac{x^2-3x+2}{\left|x-1\right|}&\text{khi}&\,\,x\ne 1\\&a&\text{khi}&\,\,x=1}$ liên tục trên $\mathbb{R}$?
+\choice
+{$1$}
+{$2$}
+{\True $0$}
+{$3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;1)$ và $(1;+\infty)$.\\ Khi đó hàm số đã cho liên tục trên $\mathbb{R}$  khi và chỉ khi nó liên tục tại $x=1$, tức là ta cần có $\lim\limits_{x\to 1}f(x)=f(1)\Leftrightarrow \lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{-}}f(x)=f(1)\quad (\mathrm{I})$\\
+Ta có $f(x)=\heva{&x-2&\text{khi}\,\,&x>1\\&a&\text{khi}\,\,&x=1\\&2-x&\text{khi}\,\,&x<1}$\\
+Nên $\heva{&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}(2-x)=1\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}(x-2)=-1}\Rightarrow (\mathrm{I})$ không thỏa mãn với mọi $x\in \mathbb{R}$.\\
+Không tồn tại giá trị $a$ thỏa yêu cầu.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Xét tính liên tục của hàm số $f(x)=\heva{&\dfrac{x-1}{\sqrt{2-x}-1}&\text{khi}&\,\,x<1\\&-2x&\text{khi}&\,\,x\ge 1}$. Khẳng định nào dưới đây \textbf{đúng}?
+\choice
+{$f(x)$ không liên tục trên khoảng $(-\infty;1)$}
+{$f(x)$ không liên tục trên khoảng $(1;+\infty)$}
+{$f(x)$ gián đoạn tại $x=1$}
+{\True $f(x)$ liên tục trên $\mathbb{R}$}
+\loigiai{
+Tập xác định $\mathscr{D}=(-\infty;2]$.\\
+Xét $x\in (-\infty;1)$, khi đó hàm số $f(x)=\dfrac{x-1}{\sqrt{2-x}-1}$ xác định và liên tục trên khoảng $(-\infty;1)$.\\
+Xét $x\in (1;+\infty)$, khi đó hàm số $f(x)=-2x$ xác định và liên tục trên $(1;+\infty)$.\\
+Ta có $\heva{&f(1)=-2\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}(-2x)=-2\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}\dfrac{x-1}{\sqrt{2-x}-1}=\lim\limits_{x\to 1^{-}}\left[-\left(\sqrt{2-x}+1 \right)\right]=-2.}$\\
+Vậy hàm số $f(x)$ liên trục trên $\mathbb{R}$.
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-3]
+Tìm giá trị lớn nhất của $a$  để hàm số $f(x)=\heva{&\dfrac{\sqrt[3]{3x+2}-2}{x-2}&\text{khi}&\,\,x>2\\&a^2x-\dfrac{7}{4}&\text{khi}&\,\,x\le 2}$  liên tục tại $x=2$.
+\choice
+{$a_{\max}=3$}
+{$a_{\max}=0$}
+{\True $a_{\max}=1$}
+{$a_{\max}=2$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(2)=2a^2-\dfrac{7}{4}\\&\lim\limits_{x\to 2^{+}}f(x)=\lim\limits_{x\to 2^{+}}\dfrac{\sqrt[3]{3x+2}-2}{x-2}=\lim\limits_{x\to 2^{+}}\dfrac{3}{\sqrt[3]{(3x+2)^2}+2\sqrt[3]{(3x+2)}+4}=\dfrac{1}{4}\\&\lim\limits_{x\to 2^{-}}f(x)=\lim\limits_{x\to 2^{-}}\left(a^2x+\dfrac{1}{4}\right)=2a^2-\dfrac{7}{4}.}$\\
+Hàm số liên tục tại $x=2\Leftrightarrow\lim\limits_{x\to 2^{+}}f(x)=\lim\limits_{x\to 2^{-}}f(x)=f(2)\Leftrightarrow 2a^2-\dfrac{7}{4}=\dfrac{1}{4}\Leftrightarrow a=\pm 1$\\
+Vậy $a_{\max}=1$.
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Cho hàm số $f(x)=\heva{&\cos\dfrac{\pi x}{2}&\text{khi}&\,\,\left|x\right|\le 1\\&x-1&\text{khi}&\left|x\right| >1 }$.  Mệnh đề nào sau đây là \textbf{sai}?
+\choice
+{\True Hàm số liên tục tại $x=-1$}
+{Hàm số liên tục trên các khoảng $(-\infty;-1)$; $(1;+\infty)$}
+{Hàm số liên tục tại $x=1$}
+{Hàm số liên tục trên khoảng $(-1;1)$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $f(x)$ liên tục trên các khoảng $(-\infty;-1)$, $(-1;1)$, $(1;+\infty)$.\\
+Mặt khác $\heva{&f(-1)=\cos\left(-\dfrac{\pi}{2}\right)=0\\&\lim\limits_{x\to (-1)^{+}}f(x)=\lim\limits_{x\to (-1)^{+}}(x-1)=-2.}$ \\
+Vậy hàm số $f(x)$ không liên tục tại $x=-1$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Cho hàm số $f(x)=\heva{&x&\text{khi}&\,\,x<1,x\ne 0\\&0&\text{khi}&\,\,x=0\\&\sqrt{x}&\text{khi}&\,\,x\ge 1}$.  Hàm số $f(x)$ liên tục tại:
+\choice
+{\True mọi điểm thuộc $\mathbb{R}$}
+{mọi điểm trừ $x=1$}
+{mọi điểm trừ $x=0$}
+{mọi điểm trừ $x=0$ và $x=1$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số liên tục trên mỗi khoảng $(-\infty;0)$, $(0;1)$ và $(1;+\infty)$.
+\begin{enumerate}[$\bullet$]
+\item Tại $x=0$, ta có $\heva{&f(0)=0\\&\lim\limits_{x\to 0}f(x)=\lim\limits_{x\to 0} x=0.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x=0$.
+\item Tại $x=1$, ta có $\heva{&f(1)=1\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}x=1\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}\sqrt{x}=1.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x=1$.
+\end{enumerate}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-3]
+Số điểm gián đoạn của hàm số $f(x)=\heva{&2x&\text{khi}&\,\,x<0\\&x^2+1&\text{khi}&\,\,0\le x\le 2\\&3x-1&\text{khi}&\,\,x>2}$ là
+\choice
+{\True $1$}
+{$2$}
+{$3$}
+{$0$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số liên tục trên mỗi khoảng $(-\infty;0)$, $(0;2)$ và $(2;+\infty)$.
+\begin{enumerate}[$\bullet$]
+\item Tại $x=0$, ta có $\heva{&f(0)=1\\&\lim\limits_{x\to 0^{-}}f(x)=\lim\limits_{x\to 0^{-}}2x=0.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại $x=0$.
+\item Tại $x=2$, ta có $\heva{&f(2)=5\\&\lim\limits_{x\to 2^{-}}f(x)=\lim\limits_{x\to 2^{-}}(x^2+1)=5\\&\lim\limits_{x\to 2^{+}}f(x)=\lim\limits_{x\to 2^{+}}(3x-1)=5.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x=2$.
+\end{enumerate}
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Cho hàm số $f(x)=\heva{&\dfrac{x^2-1}{x-1}&\text{khi}&\,\,x<3,x\ne 1\\&4&\text{khi}&\,\,x=1\\&\sqrt{x+1}&\text{khi}&\,\,x\ge 3}$ . Hàm số $f(x)$ liên tục tại:
+\choice
+{mọi điểm thuộc $\mathbb{R}$}
+{mọi điểm trừ $x=1$}
+{mọi điểm trừ $x=3$}
+{\True mọi điểm trừ $x=1$ và $x=3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số liên tục trên mỗi khoảng $(-\infty;1)$, $(1;3)$ và $(3;+\infty)$.
+\begin{enumerate}[$\bullet$]
+\item Tại $x=1$, ta có $\heva{&f(1)=4\\&\lim\limits_{x\to 1}f(x)=\lim\limits_{x\to 1}\dfrac{x^2-1}{x-1}=\lim\limits_{x\to 1}(x+1)=2.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại $x=1$.
+\item Tại $x=3$, ta có $\heva{&f(3)=2\\&\lim\limits_{x\to 3^{-}}f(x)=\lim\limits_{x\to 3^{-}}\dfrac{x^2-1}{x-1}=\lim\limits_{x\to 3^{-}}(x+1)=4.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại $x=3$.
+\end{enumerate}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Cho hàm số $f(x)$ liên tục trên đoạn $[-1;4]$ sao cho $f(-1)=2$, $f(4)=7$. Có thể kết luận gì về số nghiệm của phương trình $f(x)=5$ trên đoạn $[-1;4]$.
+\choice
+{Vô nghiệm}
+{\True Có ít nhất một nghiệm}
+{Có đúng một nghiệm}
+{Có đúng hai nghiệm}
+\loigiai{
+Ta có $f(x)=5\Leftrightarrow f(x)-5=0$.\\
+Đặt $g(x)=f(x)-5$. Khi đó $\heva{&g(-1)=f(-1)-5=2-5=-3\\&g(4)=f(4)-5=7-5=2.}$ \\
+$\Rightarrow g(-1)\cdot g(4)=(-3)\cdot 2=-6<0$.\\
+Vậy phương trình $g(x)=0$ có ít nhất một nghiệm thuộc khoảng $(-1;4)$ hay phương trình $f(x)=5$ có ít nhất một nghiệm thuộc khoảng $(-1;4)$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B3-De1-LC}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De1-DS]
+\begin{ex}%[1D3V3-4]
+Cho các hàm số $f(x)=\heva{&\dfrac{x^2-4}{x-2}&\text{khi}&\,\,x\ne 2\\&4{,}5&\text{khi}&\,\,x=2}$ và $g(x)=\dfrac{2}{x-1}$. Khi đó.
+\choiceTF
+{\True Hàm số $g(x)$ liên tục trên khoảng $(-\infty;1)$}
+{\True Giới hạn $\lim\limits_{x\to 2}f(x)=4$}
+{Hàm số $f(x)$ liên tục tại điểm $x_0=2$}
+{Hàm số $\dfrac{f(x)}{g(x)}$ liên tục tại điểm $x_0=2$}
+\loigiai{
+\begin{itemchoice}
+\itemch 
+Xét $x_0\in (-\infty;1)$, ta có $g(x_0)=\lim\limits_{x\to x_0}\dfrac{2}{x-1}=\dfrac{2}{x_0-1}$\\
+Vậy hàm số $g(x)$ liên tục trên khoảng $(-\infty;1)$.
+\itemch Ta có $\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{x^2-4}{x-2}=\lim\limits_{x\to 2}(x+2)=4$.
+\itemch Ta có $\heva{&f(2)=4{,}5\\&\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{x^2-4}{x-2}=\lim\limits_{x\to 2}(x+2)=4.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại điểm $x_0=2$.
+\itemch Do hàm số $f(x)$ gián đoạn tại điểm $x_0=2$ nên hàm số $\dfrac{f(x)}{g(x)}$ cũng gián đoạn tại điểm $x_0=2$. 	
+\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Xét tính liên tục của các hàm số sau trên tập xác định của nó
+\choiceTF
+{\True $f(x)=x^3-x^2+8x$  là hàm số liên tục trên $\mathbb{R}$}
+{$f(x)=\dfrac{x^2}{x^2-3x}$  là hàm số liên tục trên khoảng $(-\infty;+\infty)$}
+{$f(x)=\dfrac{\sin x+1}{x+1}$  là hàm số liên tục trên các khoảng $(-\infty;0)$ và $(0;+\infty)$}
+{\True $f(x)=\sqrt{x-2}$  là hàm số liên tục trên nửa khoảng $[2;+\infty)$}
+\loigiai{
+\begin{itemchoice}
+\itemch Vì $f(x)=x^3-x^2+8x$ là hàm đa thức nên hàm số liên tục trên $\mathbb{R}$.
+\itemch Vì $f(x)=\dfrac{x^2}{x^2-3x}$ là hàm phân thức xác định trên các khoảng $(-\infty;0)$, $(0;3)$, $(3;+\infty)$ nên hàm số liên tục trên các khoảng $(-\infty;0)$, $(0;3)$,$(3;+\infty)$.\\
+Ta có $\heva{&\lim\limits_{x\to 3^{-}}f(x)=\lim\limits_{x\to 3^{-}}\dfrac{x^2}{x^2-3x}=-\infty\\&\lim\limits_{x\to 3^{+}}f(x)=\lim\limits_{x\to 3^{+}}\dfrac{x^2}{x^2-3x}=+\infty.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại điểm $x=3$.
+\itemch Tập xác định $\mathscr{D}=(-\infty;-1)\cup (-1;+\infty)$.\\ 
+Các hàm số $y=\sin x+1$ và $y=x+1$ đều liên tục trên các khoảng $(-\infty;-1)$,$ (-1;+\infty)$.\\
+Nên $f(x)$ liên tục trên các khoảng $(-\infty;-1)$,$ (-1;+\infty)$.
+\itemch Hàm số xác định trên nửa khoảng $[2;+\infty)$ nên liên tục trên khoảng $(2;+\infty)$.\\ 
+Xét $x_0=2$, ta có $\heva{&f(2)=0\\&\lim\limits_{x\to 2^{+}}f(x)=\lim\limits_{x\to 2^{+}}\sqrt{x-2}=0.}$\\
+Vậy hàm số $f(x)$ liên tục tại điểm $x_0=2$.
+\end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Cho các hàm số $f(x)=\heva{&\dfrac{\sqrt{4x-7}-1}{x^2-4}&\text{khi}&\,\,x> 2\\&\dfrac{5x-9}{2}&\text{khi}&\,\,x\le 2}$ và $g(x)=\heva{&\dfrac{\sqrt{x+2}-2}{2-x}&\text{khi}&\,\,x> 2\\&\dfrac{1-x}{4}&\text{khi}&\,\,x\le 2}$. Khi đó
+\choiceTF
+{\True Hàm số $f(x)$ liên tục tại điểm $x_0=2$}
+{Hàm số $g(x)$ không liên tục trên khoảng $(2;+\infty)$}
+{Giới hạn $\lim\limits_{x\to 2^{+}}g(x)=\dfrac{1}{4}$}
+{\True Hàm số $y=\dfrac{f(x)}{g(x)}$ liên tục tại điểm $x_0=2$}
+\loigiai{
+\begin{itemchoice}
+\itemch Ta có Ta có $\heva{&f(2)=\dfrac{1}{2}\\&\lim\limits_{x\to 2^{-}}f(x)=\lim\limits_{x\to 2^{-}}\left(\dfrac{5x-9}{2}\right)=\dfrac{1}{2}\\&\lim\limits_{x\to 2^{+}}f(x)=\lim\limits_{x\to 2^{+}}\dfrac{\sqrt{4x-7}-1}{x^2-4}=\lim\limits_{x\to 2^{+}}\dfrac{4}{(x+2)\left(\sqrt{4x-7}+1 \right) }=\dfrac{1}{2}.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x_0=2$.
+\itemch 
+Xét $x_0\in (2;+\infty)$,
+ta có\\ $g(x_0)=\lim\limits_{x\to x_0}g(x)=\lim\limits_{x\to x_0}\dfrac{\sqrt{x+2}-2}{2-x}=\lim\limits_{x\to x_0}\left( -\dfrac{1}{\sqrt{x+2}+2}\right)=-\dfrac{1}{\sqrt{x_0+2}+2}$. \\
+Vậy hàm số $g(x)$ liên tục trên khoảng $(2;+\infty)$.	
+\itemch Ta có $\lim\limits_{x\to 2^{+}}g(x)=\lim\limits_{x\to 2^{+}}\dfrac{\sqrt{x+2}-2}{2-x}=\lim\limits_{x\to 2^{+}}\left( -\dfrac{1}{\sqrt{x+2}+2}\right) =-\dfrac{1}{4}$.
+\itemch 
+Ta có $g(2)=\lim\limits_{x\to 2^{-}}g(x)=\lim\limits_{x\to 2^{-}}\dfrac{1-x}{4}=-\dfrac{1}{4}$.\\
+Do đó hàm số $g(x)$ liên tục tại $x_0=2$.\\
+Do các hàm số $f(x)$ và $g(x)$ đều liên tục tại điểm $x_0=2$ và $g(2)=-\dfrac{1}{4}\ne 0$ nên hàm số $y=\dfrac{f(x)}{g(x)}$ cũng liên tục tại điểm $x_0=2$.	
+\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Cho hàm số $f(x)=\heva{&\dfrac{1-\sqrt{5x+11}}{2x^2-5x-18}&\text{khi}&\,\,x>-2\\&4-x^2&\text{khi}&\,\,x\le -2}$ và $g(x)=\heva{&\dfrac{x^2-x-6}{x+2}&\text{khi}&\,\,x\ne-2\\&2x+a&\text{khi}&\,\,x=-2}$. Khi đó:
+\choiceTF
+{\True Hàm số $f(x)$ liên tục trên khoảng $(-\infty;-2)$} 
+{Hàm số $f(x)$ liên tục tại điểm $x_0=-2$} 
+{Để hàm số $g(x)$ liên tục tại điểm $x_0=-2$ thì $a=1$}
+{\True Khi $a=-1$ thì hàm số $y=f(x)\cdot g(x)$ gián đoạn tại điểm $x_0=-2$}
+\loigiai{
+\begin{itemchoice}
+\itemch Xét $x_0\in (-\infty;-2)$, ta có $f(x_0)=\lim\limits_{x\to x_0}f(x)=\lim\limits_{x\to x_0}(4-x^2)=4-x_0^2$.\\
+Vậy hàm số $f(x)$ liên tục trên khoảng $(-\infty;-2)$.
+\itemch 
+Ta có $f(-2)=\lim\limits_{x\to {-2}^{-}}f(x)=\lim\limits_{x\to {-2}^{-}}(4-x^2)=0$.\\
+Mặt khác
+\begin{eqnarray*}
+	\lim\limits_{x\to{-2}^{+}}f(x)&=&\lim\limits_{x\to{-2}^{+}}\dfrac{1-\sqrt{5x+11}}{2x^2-5x-18}\\
+	&=&	\lim\limits_{x\to{-2}^{+}}\left[-\dfrac{5}{(2x-9)\left(1+\sqrt{5x+11} \right) } \right]\\
+	&=&\dfrac{5}{26}
+\end{eqnarray*}	
+Vậy hàm số $f(x)$ gián đoạn tại điểm $x_0=-2$.
+\itemch Ta có $\heva{&g(-2)=-4+a\\&\lim\limits_{x\to {-2}}g(x)=\lim\limits_{x\to {-2}}\dfrac{x^2-x-6}{x+2}=\lim\limits_{x\to {-2}}(x-3)=-5.}$\\
+Để hàm số $g(x)$ liên tục tại điểm $x_0=-2\Leftrightarrow -4+a=-5\Leftrightarrow a=-1$.
+\itemch 
+Do hàm số $f(x)$ gián đoạn tại $x_0=-2$ nên hàm số $y=f(x)\cdot g(x)$ cũng gián đoạn tại điểm $x_0=-2$.
+\end{itemchoice}
+}		
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-1-C3B3-De1-DS}
+
+\caukq
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De1-KQ]
+\begin{ex}%[1D3H3-3]
+Tìm giá trị của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{x^2-x-2}{x-2}&\text{nếu}&\,\,x\ne 2\\&m+1&\text{nếu}&\,\,x=2}$ liên tục tại điểm $x_0=2$.
+\shortans[]{2}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f\left(2\right)=m+1\\&\lim\limits_{x\to {2}}f(x)=\lim\limits_{x\to {2}}\dfrac{x^2-x-2}{x-2}=\lim\limits_{x\to {2}}(x+1)=3.}$ \\
+Để hàm số $f(x)$ liên tục tại $x_0=2\Leftrightarrow f(2)=\lim\limits_{x\to 2}f(x) \Leftrightarrow m+1=3\Leftrightarrow m=2$.
+	}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Tìm giá trị của tham số $a$ để hàm số $f(x)=\heva{&x^2+2x+2&\text{khi}&\,\,x\ge 0\\&x^2+a&\text{khi}&\,\,x<0}$  liên tục trên $\mathbb{R}$.
+\shortans[]{2}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;0)$, $(0;+\infty)$.\\
+Ta có $\heva{&f(0)=\lim\limits_{x\to 0^{+}}f(x)=2\\&\lim\limits_{x\to 0^{-}}f(x)=\lim\limits_{x\to 0^{-}}(x^2+a)=a.}$\\
+Hàm số $f(x)$ liên tục trên $\mathbb{R}$ khi và chỉ khi $f(0)=\lim\limits_{x\to 0^{+}}f(x)=\lim\limits_{x\to 0^{-}}f(x)\Leftrightarrow a=2$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Tìm giá trị của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{x^2-16}{x-4}&\text{khi}&\,\,x>4\\&mx+1&\text{khi}&\,\,x\le 4}$  liên tục trên $\mathbb{R}$.
+\shortans[]{$1{,}75$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Xét  $f(x)=\dfrac{x^2-16}{x-4}$ là hàm phân thức nên liên tục trên khoảng $x\in (4;+\infty)$.\\
+$f(x)=mx+1$ là hàm đa thức nên liên tục trên khoảng $x\in (-\infty;4)$.\\
+Vậy $f(x)$ trên $\mathbb{R}$ khi và chỉ khi $f(4)=\lim\limits_{x\to 4^{-}}f(x)=\lim\limits_{x\to 4^{+}}f(x)\quad (1)$\\
+Ta có $\heva{&f(4)=\lim\limits_{x\to 4^{-}}f(x)=4m+1\\&\lim\limits_{x\to 4^{+}}f(x)=\lim\limits_{x\to 4^{+}}\dfrac{x^2-16}{x-4}=\lim\limits_{x\to 4^{+}}(x+4)=8.}$\\
+Hàm số $f(x)$ liên tục trên $\mathbb{R}$ khi và chỉ khi $f(4)=\lim\limits_{x\to 4^{+}}f(x)=\lim\limits_{x\to 4^{-}}f(x)$\\
+$\Leftrightarrow 4m+1=8\Leftrightarrow m=\dfrac{7}{4}=1{,}75$.	
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Cho hàm số $f(x)=\heva{&\dfrac{x^3-5x+2}{2x^2-x-6}&\text{khi}&\,\,x\ne 2\\&\dfrac{4mx-1}{3}&\text{khi}&\,\,x=2}$ .
+Tìm giá trị của tham số $m$  để hàm số liên tục tại $x_0=2$.  
+\shortans[]{$0{,}5$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}\setminus \left\lbrace -\dfrac{3}{2}\right\rbrace $.\\
+Ta có $\heva{&f(2)=\dfrac{8m-1}{3}\\&\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{x^3-5x+2}{2x^2-x-6}=\lim\limits_{x\to 2}\dfrac{(x-2)(x^2+2x-1)}{(x-2)(2x+3)}=\lim\limits_{x\to 2}\dfrac{x^2+2x-1}{2x+3}=1.}$\\
+Để hàm số $f(x)$ liên tục tại $x_0=2\Leftrightarrow f(2)=\lim\limits_{x\to 2}f(x)\Leftrightarrow \dfrac{8m-1}{3}=1\Leftrightarrow m=\dfrac{1}{2}=0{,}5$.		
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Cho hàm số $f(x)=\heva{&\dfrac{x^3-x^2+2x-2}{x-1}&\text{khi}&\,\,x\ne 1\\&3x+m&\text{khi}&\,\,x=1}$.
+Tìm giá trị của tham số $m$  để hàm số liên tục tại $x_0=1$.  
+\shortans[]{$0$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(1)=3+m\\&\lim\limits_{x\to 1}f(x)=\lim\limits_{x\to 1}\dfrac{x^3-x^2+2x-2}{x-1}=\lim\limits_{x\to 1}(x^2+2)=3.}$\\
+Để hàm số $f(x)$ liên tục tại $x_0=1\Leftrightarrow f(1)=\lim\limits_{x\to 1}f(x)\Leftrightarrow 3+m=3\Leftrightarrow m=0$.		
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Tìm giá trị của tham số $m$ để hàm số $f(x)=\heva{&x^2+x&\text{khi}&\,\,x<1\\&2&\text{khi}&\,\,x=1\\&mx+1&\text{khi}&\,\,x>1}$ liên tục trên $\mathbb{R}$.
+\shortans[]{$1$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;1)$, $(1;+\infty)$.\\ 
+Ta có $\heva{&f(1)=2\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}(x^2+x)=2\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}(mx+1)=m+1.}$\\
+Hàm số $f(x)$ liên tục trên $\mathbb{R}$ khi và chỉ khi $f(1)=\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{+}}f(x)$.\\
+$\Leftrightarrow m+1=2\Leftrightarrow m=1$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B3-De1-KQ}
+
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De2-LC]
+\caulc
+\begin{ex}%[1D3H3-3]
+Cho hàm số $f(x)=\dfrac{x^2-1}{x+1}$ thỏa mãn $f(-1)=m^2-5$. Giá trị của tham số $m$ để hàm số $f(x)$ liên tục tại $x=-1$ là
+\choice
+{$\sqrt{3}$}
+{$-\sqrt{3}$}
+{\True $\pm\sqrt{3}$}
+{$\pm3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}\setminus\{-1\}$.\\
+Để hàm số $f(x)$ liên tục tại điểm $x=-1$
+\begin{eqnarray*}
+&\Leftrightarrow& f(-1)=\lim\limits_{x\to -1} f(x)\\
+&\Leftrightarrow& m^2-5=\lim\limits_{x\to -1} \dfrac{x^2-1}{x+1}\\
+&\Leftrightarrow&
+m^2-5=\lim\limits_{x\to -1}(x-1)\\
+&\Leftrightarrow&
+m^2-5=-2\\
+&\Leftrightarrow&
+m=\pm \sqrt{3}
+\end{eqnarray*}
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+	Tìm giá trị thực của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{x^2-x-2}{x-2}&\text{khi}\,\,x\ne 2\\&m&\text{khi}\,\,x=2}$ liên tục tại $x=2$.
+	\choice
+	{$m=0$}
+	{$m=1$}
+	{$m=2$}
+	{\True $m=3$}
+	\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;2)$, $(2;+\infty)$.\\
+Theo giả thiết thì ta phải có 
+\begin{eqnarray*}
+& &m=f(2)= \lim\limits_{x\to 2} f(x)\\	&\Leftrightarrow & m=\lim\limits_{x\to 2}\dfrac{x^2-x-2}{x-2}\\
+&\Leftrightarrow & m=\lim\limits_{x\to 2} \left(x+1 \right)\\
+&\Leftrightarrow &
+m=3
+\end{eqnarray*}
+	}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tìm giá trị thực của tham số $m$ để hàm số $y=f(x)=\heva{&\dfrac{\sqrt{x}-1}{x-1}&\text{khi}\,\,x\ne 1\\&k+1&\text{khi}\,\,x=1\\}$ liên tục tại $x=1$.
+\choice
+{$k=\dfrac{1}{2}$}
+{$k=2$}
+{\True $k=-\dfrac{1}{2}$}
+{$k=0$}
+\loigiai{
+Tập xác định $\mathscr{D}=\left[0;+\infty\right) $.\\
+Theo giả thiết thì ta phải có 
+\begin{eqnarray*}
+& & k+1=f(1)= \lim\limits_{x\to 1} f(x)\\
+&\Leftrightarrow & k+1=\lim\limits_{x\to 1}\dfrac{\sqrt{x}-1}{x-1}\\
+&\Leftrightarrow &
+k+1=\lim\limits_{x\to 1} \dfrac{1}{\sqrt{x}+1}=\dfrac{1}{2}\\
+&\Leftrightarrow&
+k=-\dfrac{1}{2}\\
+\end{eqnarray*}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Hàm số $y=f(x)=\heva{&3&\text{khi}&\,\,x=-1\\
+&\dfrac{x^4+x}{x^2+x}&\text{khi}&\,\,x\ne-1, x\ne 0\\
+&1&\text{khi}&\,\,x=0}$ liên tục tại:
+\choice
+{mọi điểm trừ $x=0$, $x=1$}
+{\True mọi điểm $x\in \mathbb{R}$}
+{mọi điểm trừ $x=-1$}
+{mọi điểm trừ $x=0$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có hàm số liên tục trên mỗi khoảng $(-\infty;-1)$, $(-1;0)$ và $(0;+\infty)$.
+\begin{enumerate}[(i)]
+\item Xét tại $x=-1$, ta có
+\begin{eqnarray*}
+\lim\limits_{x\to -1} f(x)
+&=&
+\lim\limits_{x\to -1} \dfrac{x^4+x}{x^2+x}\\
+&=&
+\lim\limits_{x\to -1} \dfrac{x(x+1)(x^2-x+1)}{x(x+1)}\\
+&=&
+\lim\limits_{x\to -1}(x^2-x+1)=3=f(-1)
+\end{eqnarray*}
+Vậy hàm số $y=f(x)$ liên tục tại $x=-1$.
+\item Xét tại $x=0$, ta có
+\begin{eqnarray*}
+\lim\limits_{x\to 0} f(x)
+&=&
+\lim\limits_{x\to 0} \dfrac{x^4+x}{x^2+x}\\
+&=&
+\lim\limits_{x\to 0} \dfrac{x(x+1)(x^2-x+1)}{x(x+1)}\\
+&=&
+\lim\limits_{x\to 0}(x^2-x+1)=1=f(0)
+\end{eqnarray*}
+Vậy hàm số $y=f(x)$ liên tục tại $x=0$.
+\end{enumerate}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Có bao nhiêu giá trị thực của tham số $m$ để hàm số $f(x)=\heva{&m^2x^2&\text{khi}&\,\,x\le 2\\&(1-m)x&\text{khi}&\,\, x>2}$ liên tục trên $\mathbb{R}$?
+\choice
+{\True $2$}
+{$1$}
+{$0$}
+{$3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có hàm số liên tục trên mỗi khoảng $(-\infty;2)$ và $(2;+\infty)$.\\
+Ta có $\heva{&f(2)=4m^2\\&\lim\limits_{x\to 2^{+}} f(x)=\lim\limits_{x\to 2^{+}}[(1-m)x]=2(1-m)\\&\lim\limits_{x\to 2^{-}} f(x)=\lim\limits_{x\to 2^{-}}m^2x^2=4m^2}$\\
+Hàm số $f(x)$ liên tục trên $\mathbb{R}$ khi và chỉ khi $f(x)$ liên tục tại $x=2$\\
+$\Leftrightarrow\lim\limits_{x\to 2^{+}} f(x)=\lim\limits_{x\to 2^{-}} f(x)=f(2)\Leftrightarrow 4m^2=2(1-m)\Leftrightarrow 2m^2+m-1=0\Leftrightarrow \hoac{&m=-1\\&m=\dfrac{1}{2}.}$
+	}	
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Biết rằng hàm số  $f(x)=\heva{&\sqrt{x}&\text{khi}&\,\,x\in [0;4]\\&1+m&\text{khi}&\,\, x\in (4;6]}$ liên tục trên $[0;6]$. Khẳng định nào sau đây \textbf{đúng}?
+\choice
+{\True $m<2$}
+{$2\le m<3$}
+{$3<m<5$}
+{$m \ge 5$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên mỗi khoảng $(0;4)$ và $(4;6)$.\\ Khi đó hàm số liên tục trên đoạn $[0;6]$ khi và chỉ khi hàm số liên tục tại $x=0$, $x=4$, $x=6$.\\
+Tức là ta cần có $\heva{&\lim\limits_{x\to 0^{+}}f(x)=f(0)\\&\lim\limits_{x\to 6^{-}}f(x)=f(6)\\&\lim\limits_{x\to 4^{-}}f(x)=\lim\limits_{x\to 4^{+}}f(x)=f(4).}\quad (\mathrm{I})$
+\begin{enumerate}[$\bullet$]
+\item $\heva{&\lim\limits_{x\to 0^{+}}f(x)=\lim\limits_{x\to 0^{+}}\sqrt{x}=0\\&f(0)=\sqrt{0}=0}$
+\item $\heva{&\lim\limits_{x\to 6^{-}}f(x)=\lim\limits_{x\to 6^{-}}(1+m)=1+m\\&f(6)=1+m}$
+\item $\heva{&\lim\limits_{x\to 4^{-}}f(x)=\lim\limits_{x\to 4^{-}}\sqrt{x}=2\\&\lim\limits_{x\to 4^{+}}f(x)=\lim\limits_{x\to 4^{+}}(1+m)=1+m\\&f(4)=2}$
+\end{enumerate}
+Khi đó $(\mathrm{I})$ trở thành $1+m=2\Leftrightarrow m=1$.
+}	
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Biết rằng $f(x)=\heva{&\dfrac{x^2-1}{\sqrt{x}-1}&\text{khi}&\,\,x\ne 1\\&a&\text{khi}&\,\,x=1}$ liên tục trên đoạn $[0;1]$ (với $a$ là tham số). Khẳng định nào dưới đây về giá trị $a$ là \textbf{đúng}?
+\choice
+{\True $a$ là một số nguyên}
+{$a$ là một số vô tỉ}
+{$a>5$}
+{$a<0$}
+\loigiai{
+Hàm số xác định và liên tục trên $[0;1)$.\\ 
+Ta có $\heva{&f(1)=a\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}\dfrac{x^2-1}{\sqrt{x}-1}=\lim\limits_{x\to 1^{-}}\left[(x+1)\left(\sqrt{x}+1 \right)\right]=4.}$\\
+Hàm số $f(x)$ liên tục trên $[0;1]$ khi và chỉ khi  $\lim\limits_{x\to 1^{-}}f(x)=f(1)\Leftrightarrow a=4$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tìm giá trị nhỏ nhất của $a$  để hàm số $f(x)=\heva{&\dfrac{x^2-5x+6}{\sqrt{4x-3}-x}&\text{khi}&\,\,x>3\\&1-a^2x&\text{khi}&\,\,x\le 3}$  liên tục tại $x=3$.
+\choice
+{\True $-\dfrac{2}{\sqrt{3}}$}
+{$\dfrac{2}{\sqrt{3}}$}
+{$-\dfrac{4}{3}$}
+{$\dfrac{4}{3}$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(3)=1-3a^2\\&\lim\limits_{x\to 3^{+}}f(x)=\lim\limits_{x\to 3^{+}}\dfrac{x^2-5x+6}{\sqrt{4x-3}-x}=\lim\limits_{x\to 3^{+}}\dfrac{(x-2)\left(\sqrt{4x-3}+x\right)}{1-x}=-3\\&\lim\limits_{x\to 3^{-}}f(x)=\lim\limits_{x\to 3^{-}}\left(1-a^2x\right)=1-3a^2.}$\\
+Hàm số liên tục tại $x=3\Leftrightarrow\lim\limits_{x\to 3^{+}}f(x)=\lim\limits_{x\to 3^{-}}f(x)=f(3)\Leftrightarrow 1-3a^2=-3\Leftrightarrow a=\pm \dfrac{2}{\sqrt{3}}$.\\
+Vậy $a_{\min}=-\dfrac{2}{\sqrt{3}}$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Xét tính liên tục của hàm số $f(x)=\heva{&1-\cos x&\text{khi}&\,\,x\le 0\\&\sqrt{x+1}&\text{khi}&\,\,x>0}$. Khẳng định nào sau đây \textbf{đúng}?
+\choice
+{$f(x)$ liên tục tại $x=0$}
+{$f(x)$ liên tục trên $(-\infty;1)$}
+{\True $f(x)$ không liên tục trên $\mathbb{R}$}
+{$f(x)$ gián đoạn tại $x=1$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $f(x)$ liên tục trên $(-\infty;0)$ và $(0;+\infty)$,\\
+Mặt khác $\heva{&f(0)=0\\&\lim\limits_{x\to 0^{-}}f(x)=\lim\limits_{x\to 0^{-}}(1-\cos x)=0\\&\lim\limits_{x\to 0^{+}}f(x)=\lim\limits_{x\to 0^{+}}\sqrt{x+1}=1}.$\\
+Vậy hàm số $f(x)$ không liên tục tại $x=0$ nên $f(x)$ không liên tục trên $\mathbb{R}$.
+	}
+\end{ex}
+
+\begin{ex}%[1D3N3-2]
+Hàm số $f(x)$ có đồ thị như hình bên dưới không liên tục tại điểm có hoành độ là bao nhiêu?
+\begin{center}
+\begin{tikzpicture}[scale=1,font=\footnotesize,line join=round, line cap=round,>=stealth]
+\draw[->] (-2.1,0)--(5.1,0) node[below left] {$x$};
+\draw[->] (0,-1.1)--(0,5.1) node[below left] {$y$};
+\draw (0,0) node [below left] {$O$};
+\foreach \x/\nx in {1/1,2/2}
+\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+\foreach \y/\ny in {1/1,3/3}
+\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+\draw[dashed,thin](1,0)--(1,3)--(0,3);
+\draw[dashed,thin](2,0)--(2,1)--(0,1);
+\begin{scope}
+\clip (-2,-1) rectangle (5,5);
+\draw[thick,samples=200,domain=1:-2,smooth,variable=\x] plot (\x,{2*(\x)^2+1});
+\draw[thick,samples=200,domain=5:1,smooth,variable=\x] plot (\x,{(\x)-1});
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\choice
+{$x=0$}
+{\True $x=1$}
+{$x=2$}
+{$x=3$}
+\loigiai{
+Dựa vào đồ thị, ta thấy $\heva{&\lim\limits_{x\to 1^{+}}f(x)=0\\&\lim\limits_{x\to 1^{-}}f(x)=3}$ nên hàm số $f(x)$ gián đoạn tại $x=1$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tính tổng $S$ gồm tất cả các giá trị $m$ để hàm số $f(x)=\heva{&x^2+x&\text{khi}&\,\,x<1\\&2&\text{khi}&\,\,x=1\\&m^2x+1&\text{khi}&\,\,x>1}$  liên tục tại $x=1$. 
+\choice
+{$S=-1$}
+{\True $S=0$}
+{$S=1$}
+{$S=2$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(1)=2\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}(x^2+x)=2\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}(m^2x+1)=m^2+1.}$\\
+Hàm số $f(x)$ liên tục tại $x=1$ khi và chỉ khi $\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{-}}f(x)=f(1)$\\
+$\Leftrightarrow m^2+1=2\Leftrightarrow m=\pm 1$.
+}
+\end{ex}
+
+\begin{ex}%[1D3C3-5]
+Có tất cả bao nhiêu giá trị nguyên của tham số $m$ thuộc khoảng $(-10;10)$ để phương trình $x^3-3x^2+(2m+2)x+m-3=0$  có ba nghiệm phân biệt $x_1,x_2,x_3$  thỏa mãn $x_1<-1<x_2<x_3$?
+\choice
+{$19$}
+{$18$}
+{\True $4$}
+{$3$}
+\loigiai{
+Xét hàm số $f(x)=x^3-3x^2+(2m+2)x+m-3$  liên tục trên $\mathbb{R}$.\\
+Giả sử phương trình có ba nghiệm phân biệt $x_1,x_2,x_3$ sao cho $x_1<-1<x_2<x_3$. Khi đó $f(x)=(x-x_1)(x-x_2)(x-x_3)$.\\
+Ta có $f(-1)=(-1-x_1)(-1-x_2)(-1-x_3)>0$ (do $x_1<-1<x_2<x_3$).\\
+Mà $f(-1)=-m-5$ nên suy ra $-m-5>0\Leftrightarrow m<-5$.\\
+Thử lại với $m<-5$, ta có \\
+$\lim\limits_{x\to -\infty}f(x)=-\infty$ nên tồn tại $a<-1$ sao cho $f(a)<0.\quad (1)$\\
+Do $m<-5$ nên $f(-1)=-m-5>0.\quad (2)$\\
+Mặt khác $f(0)=m-3<0\quad (3)$\\
+$\lim\limits_{x\to +\infty}f(x)=+\infty$ nên tồn tại $b>0$ sao cho $f(b)>0.\quad (4)$\\
+Từ $(1)$ và $(2)$, suy ra phương trình có nghiệm thuộc khoảng $(-\infty;-1)$.\\
+Từ $(2)$ và $(3)$, suy ra phương trình có nghiệm thuộc khoảng $(-1;0)$.\\
+Từ $(3)$ và $(4)$, suy ra phương trình có nghiệm thuộc khoảng $(0;+\infty)$.\\ 
+Vậy $m<-5$ thỏa mãn yêu cầu bài toán.\\
+Mà $\heva{&-10<m<10\\&m\in \mathbb{Z}}\Rightarrow m\in \left\lbrace -9;-8;-7;-6 \right\rbrace $. 
+	}
+\end{ex}	
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B3-De2-LC}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De2-DS]
+\begin{ex}%[1D3H3-3]
+Cho hàm số $f(x)=\heva{&\dfrac{x^2-1}{x-1}&\text{khi}&\,\,x\ne 1\\&x+1&\text{khi}&\,\,x=1}$  và $g(x)=4x^2-x+1$. Khi đó:
+\choiceTF
+{\True Ta có $f(1)=2$}
+{\True Hàm số $f(x)$ liên tục tại điểm $x_0=1$ }
+{\True Hàm số $g(x)$ liên tục tại điểm $x_0=2$ }
+{Hàm số $y=f(x)-g(x)$ không liên tục tại điểm $x_0=1$}
+\loigiai{
+\begin{itemchoice}
+\itemch Ta có $f(1)=1+1=2$.	
+\itemch Ta có $\heva{&f(1)=2\\&\lim\limits_{x\to 1}f(x)=\lim\limits_{x\to 1}\dfrac{x^2-1}{x-1}=\lim\limits_{x\to 1}(x+1)=2.}$\\
+Vậy hàm số $f(x)$ liên tục tại điểm $x_0=1$.
+\itemch Ta có $\heva{&g(2)=15\\&\lim\limits_{x\to 2}g(x)=\lim\limits_{x\to 2}(4x^2-x+1)=15.}$\\
+Vậy hàm số $g(x)$ liên tục tại điểm $x_0=2$.
+\itemch 
+Ta có $\heva{&g(1)=4\\&\lim\limits_{x\to 1}g(x)=\lim\limits_{x\to 1}(4x^2-x+1)=4.}$\\
+Vậy hàm số $g(x)$ liên tục tại điểm $x_0=1$.\\
+Do các hàm số $f(x)$ và 	$g(x)$ liên tục tại điểm $x_0=1$ nên hàm số $y=f(x)-g(x)$ cũng liên tục tại điểm $x_0=1$.	
+\end{itemchoice}	
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-3]
+Cho các hàm số  $f(x)=\heva{&-\dfrac{x}{2}&\text{khi}&\,\,x\le 1\\&\dfrac{x^2-3x+2}{x^2-1}&\text{khi}&\,\,x>1}$, $g(x)=x^2-3x+1$ và $h(x)=\sin\dfrac{\pi x}{4}$. Khi đó:
+\choiceTF
+{\True Hàm số $f(x)$ liên tục tại điểm $x_0=1$}
+{\True Hàm số $g(x)$ liên tục tại điểm $x_0=2$}
+{Hàm số $h(x)$ không liên tục tại điểm $x_0=2$}
+{Hàm số $y=f(x)\cdot g(x)$ không liên tục tại điểm $x_0=1$}
+\loigiai{
+\begin{itemchoice}
+\itemch Ta có $\heva{&f(1)=-\dfrac{1}{2}\\&\lim\limits_{x\to 1^{-}}f(x)=\lim\limits_{x\to 1^{-}}\left(-\dfrac{x}{2}\right) =-\dfrac{1}{2}\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}\dfrac{x^2-3x+2}{x^2-1}=\lim\limits_{x\to 1^{+}}\dfrac{x-2}{x+1} =-\dfrac{1}{2}.}$\\
+Vậy hàm số $f(x)$ liên tục tại $x_0=1$.
+\itemch Ta có $\heva{&g(2)=-1\\&\lim\limits_{x\to 2}g(x)=\lim\limits_{x\to 2}\left(x^2-3x+1\right) =-1.}$\\
+Vậy hàm số $g(x)$ liên tục tại $x_0=2$.
+\itemch Ta có $\heva{&h(2)=1\\&\lim\limits_{x\to 2}h(x)=\lim\limits_{x\to 2}\left(\sin\dfrac{\pi x}{4}\right) =1.}$\\
+Vậy hàm số $h(x)$ liên tục tại $x_0=2$.
+\itemch 
+Ta có $\heva{&g(1)=-1\\&\lim\limits_{x\to 1}g(x)=\lim\limits_{x\to 1}\left(x^2-3x+1\right) =-1.}$\\
+Vậy hàm số $g(x)$ liên tục tại $x_0=1$.\\
+Do các hàm số $f(x)$ và $g(x)$ đều liên tục tại $x_0=1$ nên hàm số $y=f(x)\cdot g(x)$ cũng liên tục tại $x_0=1$.
+\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-3]
+Cho hàm số $f(x)=\heva{&\dfrac{\sqrt{x-1}-1}{x^2-3x+2}&\text{khi}&\,\,x\ne 2\\&\dfrac{2a+1}{6}&\text{khi}&\,\,x=2}$ và $g(x)=\sin \dfrac{\pi x}{4}$. Khi đó:
+\choiceTF
+{\True Giới hạn $\lim\limits_{x\to 2}f(x)=\dfrac{1}{2}$}
+{\True Hàm số $g(x)$ liên tục tại điểm $x_0=2$}
+{\True Khi $a=1$ thì hàm số $f(x)$ liên tục tại $x_0=2$}
+{Khi $a=0$ thì hàm số $y=f(x)+g(x)$ liên tục tại $x_0=2$}
+\loigiai{
+\begin{itemchoice}
+\itemch  Ta có $\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{\sqrt{x-1}-1}{x^2-3x+2}=\dfrac{1}{(x-1)\left(\sqrt{x-1}+1 \right)}=\dfrac{1}{2}$
+\itemch  Ta có $\heva{&g(2)=1\\&\lim\limits_{x\to 2}g(x)=\lim\limits_{x\to 2}\sin \dfrac{\pi x}{4}=1.}$\\
+Vậy hàm số $g(x)$ liên tục tại điểm $x_0=2$.
+\itemch Khi $a=1$, ta có $\heva{&f(2)=\dfrac{2\cdot1+1}{6}=\dfrac{1}{2}\\&\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{\sqrt{x-1}-1}{x^2-3x+2}=\lim\limits_{x\to 2}\dfrac{1}{(x-1)\left(\sqrt{x-1}+1 \right)}=\dfrac{1}{2}.}$\\
+Vậy hàm số $f(x)$ liên tục tại điểm $x_0=2$.
+\itemch Khi $a=0$, ta có $\heva{&f(2)=\dfrac{2\cdot0+1}{6}=\dfrac{1}{6}\\&\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{\sqrt{x-1}-1}{x^2-3x+2}=\lim\limits_{x\to 2}\dfrac{1}{(x-1)\left(\sqrt{x-1}+1 \right)}=\dfrac{1}{2}.}$\\
+Vậy hàm số $f(x)$ gián đoạn tại điểm $x_0=2$.\\
+Do đó hàm số $y=f(x)+g(x)$ cũng gián đoạn tại điểm $x_0=2$.
+\end{itemchoice}		
+}
+\end{ex}
+
+\begin{ex}%[1D3V3-4]
+Cho hàm số $f(x)=\heva{&\dfrac{2-\sqrt{x+5}}{x^2-5x-4}&\text{khi}&\,\,x>-1\\&x^2-9x&\text{khi}&\,\,x\le -1}$ và $g(x)=\heva{&\dfrac{x^2-1}{x+1}&\text{khi}&\,\,x\ne-1\\&2a+1&\text{khi}&\,\,x=-1}$. Khi đó:
+\choiceTF
+{\True Ta có $\lim\limits_{x\to {-1}^{+}}f(x)=\dfrac{1}{8}$} 
+{\True Hàm số $f(x)$ liên tục trên khoảng $(-\infty;-1)$} 
+{Hàm số $g(x)$ liên tục tại điểm $x_0=-1$ thì $a=\dfrac{1}{2}$}
+{ Khi $a=-\dfrac{1}{2}$ thì hàm số $y=f(x)-g(x)$ liên tục tại điểm $x_0=-1$}
+\loigiai{
+\begin{itemchoice}
+\itemch Ta có
+\begin{eqnarray*}
+\lim\limits_{x\to{-1}^{+}}f(x)&=&\lim\limits_{x\to{-1}^{+}}\dfrac{2-\sqrt{x+5}}{x^2-5x-4}\\
+&=&	\lim\limits_{x\to{-1}^{+}}\left[-\dfrac{1}{(x-4)\left(2+\sqrt{x+5} \right) } \right]\\
+&=&\dfrac{1}{8}
+\end{eqnarray*}	
+\itemch 
+Xét $x_0\in(-\infty;-1)$, ta có $f(x_0)=\lim\limits_{x\to x_0}f(x)=x_0^2-9x_0$.\\
+Vậy hàm số $f(x)$ liên tục trên khoảng $(-\infty;-1)$.
+\itemch Ta có $\heva{&g(-1)=2a+1\\&\lim\limits_{x\to {-1}}g(x)=\lim\limits_{x\to {-1}}\dfrac{x^2-1}{x-1}=\lim\limits_{x\to {-1}}(x+1)=0.}$\\
+Để hàm số $g(x)$ liên tục tại điểm $x_0=-1\Leftrightarrow 2a+1=0\Leftrightarrow a=-\dfrac{1}{2}$.
+\itemch 
+Ta có $\heva{&f(-1)=\lim\limits_{x\to {-1}^{-}}f(x)=10\\&\lim\limits_{x\to {-1}^{+}}f(x)=\dfrac{1}{8}}$.\\
+Vậy hàm số $f(x)$ gián đoạn tại $x_0=-1$.\\
+Do hàm số $f(x)$ gián đoạn tại $x_0=-1$ nên hàm số $y=f(x)-g(x)$ cũng gián đoạn tại điểm $x_0=-1$.
+\end{itemchoice}
+}		
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-1-C3B3-De2-DS}
+
+\caukq
+\Opensolutionfile{ans}[ans/ans-1-C3B3-De2-KQ]
+\begin{ex}%[1D3H3-3]
+Có bao nhiêu giá trị của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{\sqrt{x}-1}{x^2-1}&\text{nếu}&\,\,x\ne 1\\&m^2x&\text{nếu}&\,\,x=1}$ liên tục tại điểm $x_0=1$?
+\shortans[]{2}
+\loigiai{
+Tập xác định $\mathscr{D}=[0;+\infty)$.\\
+Ta có $\heva{&f\left(1\right)=m^2\\&\lim\limits_{x\to 1}f(x)=\lim\limits_{x\to 1}\dfrac{\sqrt{x}-1}{x^2-1}=\lim\limits_{x\to 1}\dfrac{1}{(x+1)\left(\sqrt{x}+1\right) }=\dfrac{1}{4}.}$ \\
+Để hàm số $f(x)$ liên tục tại $x_0=1\Leftrightarrow f(1)=\lim\limits_{x\to 1}f(x)\Leftrightarrow m^2=\dfrac{1}{4}\Leftrightarrow m=\pm \dfrac{1}{2}$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tìm giá trị của tham số $a$ để hàm số $f(x)=\heva{&\dfrac{\sqrt{x}-1}{x-1}&\text{khi}&\,\,x>1\\&ax-\dfrac{1}{2}&\text{khi}&\,\,x\le 1}$  liên tục tại điểm $x_0=1$.
+\shortans[]{1}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(1)=\lim\limits_{x\to 1^{-}}f(x)=a-\dfrac{1}{2}\\&\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{+}}\dfrac{\sqrt{x}-1}{x-1}=\lim\limits_{x\to 1^{+}}\dfrac{1}{\sqrt{x}+1}=\dfrac{1}{2}.}$\\
+Hàm số $f(x)$ liên tục tại điểm $x_0=1\Leftrightarrow f(1)=\lim\limits_{x\to 1^{+}}f(x)=\lim\limits_{x\to 1^{-}}f(x)$\\
+$\Leftrightarrow a-\dfrac{1}{2}=\dfrac{1}{2}\Leftrightarrow a=1$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-6]
+Một chất điểm chuyển động với tốc độ được cho bởi hàm số\\ $v(t)=\heva{&m+5&\text{khi}&\,\,0\le t\le 5\\&t^2-5t+10&\text{khi}&\,\,t>5}$, 
+trong đó $v(t)$ được tính theo đơn vị $\mathrm{m/s}$ và $t$ được tính theo giây ($m$ là tham số). Tìm giá trị của tham số $m$ để hàm số $v(t)$ liên tục tại $t=5$.
+\shortans[]{$5$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&v(5)=\lim\limits_{x\to 5^{-}}v(t)=m+5\\&\lim\limits_{x\to 5^{+}}v(t)=\lim\limits_{x\to 5^{+}}(t^2-5t+10)=10.}$\\
+Để hàm số $v(t)$ liên tục tại $t=5\Leftrightarrow v(5)=\lim\limits_{t\to 5}v(t)\Leftrightarrow m+5=10\Leftrightarrow m=5$.	
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Cho hàm số $f(x)=\heva{&x^2+x+1&\text{khi}&\,\,x\ne 4\\&2a+1&\text{khi}&\,\,x=4}$ .
+Tìm giá trị của tham số $a$  để hàm số liên tục tại $x_0=4$.  
+\shortans[]{$10$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Ta có $\heva{&f(4)=2a+1\\&\lim\limits_{x\to 4}f(x)=\lim\limits_{x\to 4}(x^2+x+1)=21.}$\\
+Để hàm số $f(x)$ liên tục tại $x_0=4\Leftrightarrow f(4)=\lim\limits_{x\to 4}f(x)\Leftrightarrow 2a+1=21\Leftrightarrow a=10$.		
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-4]
+Tìm giá trị của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{x^2-x-2}{x-2}&\text{khi}&\,\,x\ne 2\\&m&\text{khi}&\,\,x=2}$ liên tục trên $\mathbb{R}$.
+\shortans[]{$3$}
+\loigiai{
+Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+Hàm số $f(x)$ liên tục trên các khoảng $(-\infty;2)$, $(2;+\infty)$.\\
+Ta có $\heva{&f(2)=m\\&\lim\limits_{x\to 2}f(x)=\lim\limits_{x\to 2}\dfrac{x^2-x-2}{x-2}=\lim\limits_{x\to 2}(x+1)=3.}$\\
+Hàm số $f(x)$ liên tục trên $\mathbb{R}$ khi và chỉ khi $f(2)=\lim\limits_{x\to 2}f(x)\Leftrightarrow m=3$.
+}
+\end{ex}
+
+\begin{ex}%[1D3H3-3]
+Tìm giá trị của tham số $m$ để hàm số $f(x)=\heva{&\dfrac{3-x}{\sqrt{x+1}-2}&\text{khi}&\,\,x\ne 3\\&m&\text{khi}&\,\,x=3}$ liên tục tại $x_0=3$.
+\shortans[]{$-4$}
+\loigiai{
+Tập xác định $\mathscr{D}=[-1;+\infty)$.\\
+Ta có $\heva{&f(3)=m\\&\lim\limits_{x\to 3}f(x)=\lim\limits_{x\to 3}\dfrac{3-x}{\sqrt{x+1}-2}=\lim\limits_{x\to 3}\left[ -\left(\sqrt{x+1}+2\right)\right]=-4.}$\\
+Để hàm số $f(x)$ liên tục tại điểm $x_0=3\Leftrightarrow f(3)=\lim\limits_{x\to 3}f(x)\Leftrightarrow m=-4$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B3-De2-KQ}

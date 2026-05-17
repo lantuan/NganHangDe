@@ -1,0 +1,771 @@
+\section{Biến cố giao và quy tắc nhân xác suất}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE1]
+\caulc
+%%%==============EX_1============%%%
+\begin{ex}%[1D9H1-3]
+Một chiếc máy có hai chiếc động cơ I và II chạy độc lập nhau. Xác suất để động cơ I và II chạy tốt lần lượt là $0{,}8$ và $0{,}7$. Xác suất để cả hai động cơ chạy tốt là
+\choice
+		{$0{,}24$}
+		{$0{,}94$}
+		{$0{,}14$}
+		{\True $0{,}56$}
+	\loigiai{
+		Xác suất để cả hai động cơ đều chạy tốt là $0{,}8\cdot 0{,}7=0{,}56$.
+		}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D9N1-1]
+Cho $A$, $B$ là hai biến cố liên quan đến một phép thử có hữu hạn các kết quả đồng khả năng xuất hiện. Nếu $A\cap B=\varnothing$ thì $A$ và $B$ là hai biến cố
+	\choice
+		{độc lập}
+		{giao}
+		{\True xung khắc}
+		{đối nhau}
+	\loigiai{
+		Nếu $A\cap B=\varnothing$ thì $A$ và $B$ là hai biến cố xung khắc.
+		}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D9H1-3]
+Hai học sinh cùng giải $1$ bài tập toán một cách độc lập. Xác suất giải đúng bài tập toán của $2$ học sinh lần lượt là $\dfrac{1}{2}$ và $\dfrac{1}{3}$. Xác suất để cả hai học sinh không giải được bài tập toán bằng
+	\choice
+		{$\dfrac{1}{2}$}
+		{$\dfrac{1}{6}$}
+		{\True $\dfrac{1}{3}$}
+		{$\dfrac{5}{6}$}
+	\loigiai{
+		Xác suất để cả hai học sinh không giải được bài tập toán bằng $\left(1-\dfrac{1}{2} \right)\left(1-\dfrac{1}{3} \right)=\dfrac{1}{3}$.
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D9H1-3]
+Hai xạ thủ mỗi người bắn một viên đạn vào bia một cách độc lập. Xác suất bắn trúng bia của xạ thủ thứ nhất và xạ thủ thứ hai lần lượt là $0{,}9$ và $0{,}7$. Xác suất để người thứ nhất bắn trúng và người thứ hai bắn không trúng bia là
+	\choice
+		{\True $0{,}27$}
+		{$0{,}63$}
+		{$0{,}07$}
+		{$0{,}72$}
+	\loigiai{
+		Xác suất để người thứ nhất bắn trúng và người thứ hai bắn không trúng bia là $0{,}9\cdot 0{,}3=0{,}27$.
+		}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[1D9N1-1]
+	Cho hai biến cố $A$, $B$ độc lập. Mệnh đề nào sau đây \textbf{sai}?
+	\choice
+		{$\overline{A}$, $B$ là độc lập}
+		{$A$, $\overline{B}$ là độc lập}
+		{$\overline{A}$, $\overline{B}$ là độc lập}
+		{\True $A$, $\overline{A}$ là độc lập}
+	\loigiai{
+		Mệnh đề sai là \lq\lq$A$, $\overline{A}$ là độc lập\rq\rq.
+		}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[1D9H1-3]
+Cho $A$ và $B$ là hai biến cố độc lập. Biết $\mathrm{P}(A)=0{,}7$ và $\mathrm{P}(B)=0{,}2$. Xác suất của biến cố $\overline{A}B$ bằng
+	\choice
+		{\True $0{,}06$}
+		{$0{,}9$}
+		{$0{,}14$}
+		{$0{,}24$}
+	\loigiai{
+		Vì $\overline{A}$ là biến cố đối của $A$ nên $\mathrm{P}\left(\overline{A}\right)=1-\mathrm{P}(A)=0{,}3$.\\
+		Do $\overline{A}$ và $B$ độc lập nên $\mathrm{P}\left(\overline{A}B\right)=\mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}(B)=0{,}3\cdot 0{,}2=0{,}06$.
+		}
+\end{ex}
+%%%==============EX_7============%%%
+\begin{ex}%[1D9H1-2]
+Gieo hai con xúc xắc cân đối và đồng chất. Gọi $A$ là biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc bằng $4$\rq\rq, $B$ là biến cố \lq\lq Tích số chấm xuất hiện trên hai con xúc xắc bằng $4$\rq\rq. Tập hợp mô tả biến cố $AB$ là
+	\choice
+		{\True $\left\{(2; 2)\right\}$}
+		{$\left\{(1; 3), (3; 1), (2; 2)\right\}$}
+		{$\left\{(1; 3), (3; 1)\right\}$}
+		{$\left\{(3; 1), (2; 2)\right\}$}
+	\loigiai{
+		Tập hợp mô tả các biến cố $A=\left\{(1; 3), (3; 1), (2; 2)\right\}$, $B=\left\{(1; 4), (4; 1), (2; 2)\right\}$.\\
+		Suy ra $AB=\left\{(2; 2)\right\}$.
+		}
+\end{ex}
+%%%==============EX_8============%%%
+\begin{ex}%[1D9H1-3]
+Hai vận động viên $A$ và $B$ cùng ném bóng vào rổ một cách độc lập với nhau. Xác suất ném bóng trúng vào rổ của hai vận động viên $A$ và $B$ lần lượt là $\dfrac{1}{5}$ và $\dfrac{2}{7}$. Xác suất của biến cố \lq\lq Cả hai cùng ném bóng trúng vào rổ \rq\rq \, bằng
+	\choice
+		{\True $\dfrac{2}{35}$}
+		{$\dfrac{1}{35}$}
+		{$\dfrac{6}{35}$}
+		{$\dfrac{2}{7}$}
+	\loigiai{
+		Do hai người ném bóng vào rổ một cách độc lập với nhau nên xác suất của biến cố \lq\lq Cả hai cùng ném bóng trúng vào rổ\rq\rq \, là 
+		\[
+			\mathrm{P}=\dfrac{1}{5}\cdot \dfrac{2}{7}=\dfrac{2}{35}.
+		\]
+		}
+\end{ex}
+%%%==============EX_9============%%%
+\begin{ex}%[1D9H1-3]
+Một hộp chứa $22$ tấm thẻ cùng loại được đánh số lần lượt từ $1$ đến $22$. Chọn ra ngẫu nhiên $1$ thẻ từ hộp. Gọi $A$ là biến cố \lq\lq Số ghi trên thẻ được chọn chia hết cho $2$\rq\rq, $B$ là biến cố \lq\lq Số ghi trên thẻ được chọn chia hết cho $3$\rq\rq. Xác suất của biến cố $AB$ bằng
+	\choice
+		{\True $\dfrac{3}{22}$}
+		{$\dfrac{7}{22}$}
+		{$\dfrac{1}{2}$}
+		{$\dfrac{7}{44}$}
+	\loigiai{
+		Không gian mẫu $\Omega=\left\{1;\; 2;\; 3;\;...;\; 22\right\}$, suy ra $n\left(\Omega \right)=22$.\\
+		Ta có $A$ là biến cố  \lq\lq Số ghi trên thẻ được chọn chia hết cho $2$\rq\rq \, $\Rightarrow A=\left\{2;\; 4;\; 6;\;...;\; 22\right\}$.\\
+		$B$ là biến cố \lq\lq Số ghi trên thẻ được chọn chia hết cho $3$\rq\rq \, $\Rightarrow B=\left\{3;\; 6;\; 9;\; 12;\; 15;\; 18;\; 21\right\}$.\\
+		Ta cũng có $A\cap B=\left\{6;\; 12;\; 18\right\}$, suy ra $\mathrm{P}(AB)=\dfrac{3}{22}$.
+		}
+\end{ex}
+%%%==============EX_10============%%%
+\begin{ex}%[1D9H1-2]
+Gieo hai con xúc xắc cân đối và đồng chất. Gọi $A$ là biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc bằng $5$\rq\rq, $C$ là biến cố \lq\lq Có ít nhất một con xúc xắc xuất hiện mặt $1$ chấm\rq\rq. Tập hợp mô tả biến cố $AC$ là
+	\choice
+		{$\left\{(1; 4), (2; 3)\right\}$}
+		{\True $\left\{(1; 4), (4; 1)\right\}$}
+		{$\left\{(4; 1), (3; 2)\right\}$}
+		{$\left\{(1; 5), (2; 3)\right\}$}
+	\loigiai{
+		Tập hợp mô tả các biến cố 
+		\[ 
+			A=\left\{(1; 4), \; (4; 1), \; (2; 3), \; (3; 2)\right\};
+		\]
+		và
+		\[
+			C=\left\{(1; 6), \; (6; 1), \; (1; 5), \; (5; 1), \; (1; 4), \; (4; 1), \; (1; 3), \;(3; 1), \; (1; 2), \; (2; 1)), \; (1; 1)\right\}.
+		\]
+		Từ đó suy ra $AC=\left\{(1; 4), \; (4; 1)\right\}$.
+		}
+\end{ex}
+%%%==============EX_11============%%%
+\begin{ex}%[1D9H1-3]
+Hai đối thủ ngang tài nhau, cùng thi đấu với nhau để tranh chức vô địch. Người thắng cuộc là người đầu tiên thắng được $6$ ván đấu. Hết buổi sáng, người I đã thắng $5$ ván, còn người II chỉ mới thắng $3$ ván. Buổi chiều hai người sẽ tiếp tục thi đấu. Xác suất để người I vô địch bằng
+	\choice
+		{$\dfrac{5}{8}$}
+		{$\dfrac{1}{2}$}
+		{$\dfrac{3}{4}$}
+		{\True $\dfrac{7}{8}$}
+	\loigiai{
+		Xét biến cố người I không vô địch xảy ra khi người II thắng liên tiếp ba ván buổi chiều.\\
+		Xác suất là $\dfrac{1}{2}\cdot \dfrac{1}{2}\cdot \dfrac{1}{2}=\dfrac{1}{8}$.\\
+		Vậy xác suất người I vô địch là $1-\dfrac{1}{8}=\dfrac{7}{8}$.
+		}
+\end{ex}
+%%%==============EX_12============%%%
+\begin{ex}%[1D9H1-3]
+Hai chuyến bay $A$ và $B$ hoạt động độc lập với nhau. Xác suất để chuyến bay $A$ và $B$ bay đúng giờ $0{,}6$ và $0{,}7$. Xác suất để trong $2$ chuyến bay có ít nhất $1$ chuyến bay đúng giờ bằng
+	\choice
+		{\True $0{,}88$}
+		{$0{,}42$}
+		{$0{,}9$}
+		{$0{,}46$}
+	\loigiai{
+		Xác suất $A$ và $B$ bay không đúng giờ là $0{,}4$ và $0{,}3$.\\
+		Xác suất cả 2 không đúng giờ là $0{,}4\cdot 0{,}3=0{,}12$.\\
+		Xác suất có ít nhất 1 chuyến bay đúng giờ là $1-0{,}12=0{,}88$.
+		}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B1-DE1}
+%%%================================%%%
+%%%================================%%%
+%\subsubsection{Câu đúng sai}
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE1-DS]
+%%%================================%%%
+%%%================================%%%
+
+%%%==============EX_1============%%%
+\begin{ex}%[1D9H1-3]
+	Cho $A$ và $B$ là hai biến cố độc lập với nhau, biết $\mathrm{P}(A)=0{,}2$, $\mathrm{P}(B)=0{,}3$. Khi đó
+	\choiceTF
+		{\True $\mathrm{P}(AB)=0{,}06$}
+		{$\mathrm{P}(A\overline{B})=0{,}12$}
+		{\True $\mathrm{P}(\overline{A}\overline{B})=0{,}56$}
+		{\True $\mathrm{P}(\overline{A}B)=0{,}24$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Vì  $A$ và $B$ là hai biến cố độc lập nên $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}2\cdot 0{,}3=0{,}06$.
+			\itemch \textbf{Sai.}\\
+			Vì  $A$ và $B$ là hai biến cố độc lập nên $A$, $\overline{B}$ độc lập.\\
+			Suy ra $\mathrm{P}(A\overline{B})=\mathrm{P}(A)\cdot \mathrm{P}(\overline{B})=0{,}2\cdot 0{,}7=0{,}14$.
+			\itemch \textbf{Đúng.}\\
+			Vì  $A$ và $B$ là hai biến cố độc lập nên $\overline{A}$, $\overline{B}$ độc lập.\\
+			Suy ra $\mathrm{P}(\overline{A}\overline{B})=\mathrm{P}(\overline{A})\cdot \mathrm{P}(\overline{B})=0{,}8\cdot 0{,}7=0{,}56$.
+			\itemch \textbf{Đúng.}\\
+			Vì  $A$ và $B$ là hai biến cố độc lập nên $\overline{A}$, $B$ độc lập.\\
+			Suy ra $\mathrm{P}(\overline{A}B)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(B)=0{,}8.0{,}3=0{,}24$.
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D9H1-3]
+	Một người vừa gieo một con xúc xắc để ghi lại số chấm xuất hiện, sau đó người này tiếp tục chọn ngẫu nhiên một lá bài từ bộ bài $52$ lá.
+	\choiceTF
+		{\True Xác suất để số chấm của con xúc xắc lớn nhất bằng $\dfrac{1}{6}$}
+		{\True Xác suất để chọn được một lá bài tây (quân bài có hình người) bằng $\dfrac{3}{13}$}
+		{\True Xác suất để số chấm trên con xúc xắc là lớn nhất và chọn được một lá bài tây bằng $\dfrac{1}{26}$}
+		{Xác suất để số chấm trên con xúc xắc và số của lá bài là giống nhau bằng $\dfrac{1}{16}$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Số chấm của xúc xắc lớn nhất\rq\rq.\\
+		Gọi $B$ là biến cố: \lq\lq Chọn được một lá bài tây\rq\rq.		
+		\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Ta có $A=\{6\} \Rightarrow n(A)=1\Rightarrow \mathrm{P}(A)=\dfrac{1}{6}$.
+			\itemch \textbf{Đúng.}\\
+			Ta biết bộ bài $52$ lá thì có $12$ lá bài tây, nên xác suất chọn được một lá bài tây là $\mathrm{P}(B)=\dfrac{3}{13}$.
+			\itemch \textbf{Đúng.}\\
+			Dễ thấy $A$, $B$ là hai biến cố độc lập.\\
+			Suy ra $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)=\dfrac{1}{6} \cdot \dfrac{3}{13}=\dfrac{1}{26}$.
+			\itemch \textbf{Sai.}\\
+			Để thu được số chấm trên con xúc xắc và số của lá bài giống nhau thì ta có $6$ cách để có được số chấm một con xúc xắc, ứng với mỗi cách đó thì có đúng $4$ cách tìm được lá bài thoả mãn.\\
+			Việc gieo xúc xắc và rút ngẫu nhiên lá bài là độc lập.\\
+			Gọi $X$ là biến cố cần tính xác suất, ta có $\mathrm{P}(X)=\dfrac{6}{6} \cdot \dfrac{4}{52}=\dfrac{1}{13}$.
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D9H1-3]
+	Gieo hai đồng xu $A$ và $B$ một cách độc lập. Đồng xu $A$ được chế tạo cân đối. Đồng xu $B$ được chế tạo \textbf{không} cân đối nên xác suất xuất hiện mặt sấp gấp $3$ lần xác suất xuất hiện mặt ngửa. 
+	\choiceTF
+		{\True Xác suất để đồng xu $A$ xuất hiện mặt ngửa bằng $\dfrac{1}{2}$}
+		{\True Xác suất để đồng xu $B$ xuất hiện mặt ngửa bằng: $\dfrac{1}{4}$}
+		{Xác suất để khi gieo hai đồng xu một lần thì cả hai đều ngửa bằng $\dfrac{1}{12}$}
+		{Xác suất để khi gieo hai đồng xu hai lần thì cả hai đồng xu đều ngửa bằng $\dfrac{1}{32}$}
+	\loigiai{
+		Gọi $X$ là biến cố \lq\lq Đồng xu $A$ xuất hiện mặt ngửa\rq\rq.\\
+		Gọi $Y$ là biến cố \lq\lq Đồng xu $B$ xuất hiện mặt ngửa\rq\rq.
+		\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Vì đồng xu $A$ chế tạo cân đối nên $\mathrm{P}(X)=\dfrac{1}{2}$.
+			\itemch \textbf{Đúng.}\\
+			Vì xác suất xuất hiện mặt sấp của đồng xu $B$ gấp $3$ lần xác suất xuất hiện mặt ngửa của nó nên $\mathrm{P}(Y)=\dfrac{1}{4}$.
+			\itemch \textbf{Sai.}\\
+			Xác suất khi gieo hai đồng xu một lần thì chúng đều ngửa là
+			\[
+				\mathrm{P}(XY)=\mathrm{P}(X)\cdot \mathrm{P}(Y)=\dfrac{1}{2} \cdot \dfrac{1}{4}=\dfrac{1}{8}.
+			\]
+			\itemch \textbf{Sai.}\\
+			Xác suất để trong một lần gieo cả hai đồng xu đều ngửa là $\dfrac{1}{8}$.\\
+		Suy ra xác suất khi gieo hai lần thì cả hai lần đó hai đồng xu đều ngửa là $
+			\dfrac{1}{8} \cdot \dfrac{1}{8}=\dfrac{1}{64}. $
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D9H1-3]
+	Một hộp có chứa $5$ quả cầu trắng và $6$ quả cầu đen cùng kích thước và khối lượng. Lấy ra ngẫu nhiên cùng một lúc $4$ quả cầu. 
+	\choiceTF
+		{\True Xác suất để có hai quả cầu trắng bằng $\dfrac{5}{11}$}
+		{\True Xác suất để có ít nhất $3$ quả cầu đen bằng $\dfrac{23}{66}$}
+		{\True Xác suất để cả $4$ quả cầu trắng bằng $\dfrac{1}{66}$}
+		{Xác suất để không có cầu trắng bằng $\dfrac{65}{66}$}
+	\loigiai{
+		Gọi $A$ biến cố \lq\lq Lấy ra ngẫu nhiên $4$ quả cầu trong đó có $2$ quả cầu trắng\rq\rq.\\
+		Gọi $B$ biến cố \lq\lq Lấy ra ngẫu nhiên $4$ quả cầu trong đó có ít nhất 3 quả cầu đen\rq\rq.\\
+		Gọi $C$ biến cố \lq\lq Lấy ra ngẫu nhiên $4$ quả cầu toàn cầu trắng\rq\rq.\\
+		Gọi $D$ biến cố \lq\lq Lấy ra ngẫu nhiên $4$ quả trong đó không có quả cầu trắng\rq\rq.
+		\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Ta có $\mathrm{P}(A)=\dfrac{\mathrm{C}_5^2 \times \mathrm{C}_6^2}{\mathrm{C}_{11}^4}=\dfrac{5}{11}$.
+			\itemch \textbf{Đúng.}\\
+			Ta có $\mathrm{P}(B)=\dfrac{\mathrm{C}_5^1 \times \mathrm{C}_6^3+\mathrm{C}_6^4}{\mathrm{C}_{11}^4}=\dfrac{23}{66}$.
+			\itemch \textbf{Đúng.}\\
+			Ta có $\mathrm{P}(C)=\dfrac{\mathrm{C}_5^4}{\mathrm{C}_{11}^4}=\dfrac{1}{66}$.
+			\itemch \textbf{Sai.}\\
+			Ta có $\mathrm{P}(D)=\dfrac{\mathrm{C}_6^4}{\mathrm{C}_{11}^4}=\dfrac{1}{22}$.
+		\end{itemchoice}
+			}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C9B1-DE1-DS}
+
+%\subsubsection{Câu trả lời ngắn}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE1-KQ]
+\caukq
+
+%%%==============BT_1==============%%%
+\begin{ex}%[1D9H1-3]
+	Tung đồng thời một đồng xu và một con xúc xắc $12$ mặt (từ $1$ đến $12$). Xác suất để đồng xu xuất hiện mặt ngửa và con xúc xắc xuất hiện mặt là bội của $3$ bằng bao nhiêu? (Làm tròn kết quả đến hàng phần trăm)
+	\shortans[]{$0{,}17$}
+\loigiai{
+	Gọi $A$ là biến cố \lq\lq Đồng xu xuất hiện mặt ngửa\rq\rq. Suy ra $\mathrm{P}(A) = \dfrac{1}{2}$.\\
+	Gọi $C$ là biến cố \lq\lq Con xúc xắc xuất hiện mặt là bội của $3$\rq\rq. Suy ra $\mathrm{P}(C)=\dfrac{4}{12}=\dfrac{1}{3}$.\\
+	Xác suất xuất hiện mặt ngửa và mặt là bội của $3$ là
+	\[
+		\mathrm{P}(AC)=\mathrm{P}(A)\cdot \mathrm{P}(C)=\dfrac{1}{2} \cdot \dfrac{1}{3}=\dfrac{1}{6} \approx 0{,}17.
+	\]
+	}
+\end{ex}
+
+%%%==============BT_2==============%%%
+\begin{ex}%[1D9H1-3]
+	An và Bình không quen biết nhau và học ở hai nơi khác nhau. Xác suất để An và Bình đạt điểm giỏi về môn Toán trong kì thi cuối năm tương ứng là $0{,}92$ và $0{,}88$. Xác suất để cả An và Bình đều đạt điểm giỏi bằng bao nhiêu? (Làm tròn kết quả đến hàng phần trăm).
+	\shortans[]{$0{,}81$}
+\loigiai{
+		Gọi $A$ là biến cố \lq\lq An đạt điểm giỏi về môn Toán\rq\rq.	\\	
+		Gọi $B$ là biến cố \lq\lq Bình đạt điểm giỏi về môn Toán\rq\rq.\\
+		Dễ thấy $A$, $B$ là hai biến cố độc lập, khi đó $AB$ là biến cố \lq\lq Cả An và Bình đều đạt điểm giỏi môn Toán\rq\rq.\\
+		Vậy xác suất để cả An và Bình đều đạt điểm giỏi là
+		\[
+			\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}92\cdot 0{,}88=0{,}8096 \approx 0{,}81.
+		\]
+	}
+\end{ex}
+
+%%%==============BT_3==============%%%
+\begin{ex}%[1D9H1-3]
+	Hai xạ thủ cùng bắn vào bia một cách độc lập với nhau. Xác suất bắn trúng bia của xạ thủ thứ nhất bằng $\dfrac{1}{2}$, xác suất bắn trúng bia của xạ thủ thứ hai bằng $\dfrac{1}{3}$. Xác suất để cả hai xạ thủ đều bắn không trúng bia bằng bao nhiêu? (Làm tròn kết quả đến hàng phần trăm).
+	\shortans[]{$0{,}33$}
+\loigiai{
+		Gọi $A$ là biến cố \lq\lq Xạ thủ thứ nhất bắn trúng bia\rq\rq.\\
+		Gọi $B$ là biến cố \lq\lq Xạ thủ thứ hai bắn trúng bia\rq\rq.\\
+		Khi đó $A$, $B$ là các biến cố độc lập.\\		
+		Ta có $\mathrm{P}(\overline{A})=1-\dfrac{1}{2}=\dfrac{1}{2}, \mathrm{P}(\overline{B})=1-\dfrac{1}{3}=\dfrac{2}{3}$.\\
+		Xác suất của biến cố $\overline{A}\overline{B}$ là $\mathrm{P}(\overline{A}\overline{B})=\mathrm{P}(\overline{A})\cdot \mathrm{P}(\overline{B})=\dfrac{1}{2} \cdot \dfrac{2}{3}=\dfrac{1}{3} \approx 0{,}33$.
+	}
+\end{ex}
+
+%%%==============BT_4==============%%%
+\begin{ex}%[1D9H1-3]
+	Trong một trận đấu bóng đá quan trọng ở vòng đấu loại trực tiếp, khi trận đấu buộc phải giải quyết bằng loạt sút luân lưu $11$ m, huấn luyện viên đội $X$ đưa danh sách lần lượt $5$ cầu thủ có xác suất sút luân lưu $11$ m thành công là $0{,}8$; $0{,}8$; $0{,}76$; $0{,}72$; $0{,}68$. Tìm xác suất để chỉ có cầu thủ cuối cùng sút trượt luân lưu (kết quả được làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}11$}
+\loigiai{
+	Gọi $A_i (1\le i\le 5,i\in \mathbb{N})$ là biến cố  \lq\lq Cầu thủ thứ $i$ của đội $X$ sút luân lưu thành công\rq\rq.
+	Xác suất cần tìm là
+	\begin{eqnarray*}
+	\mathrm{P}\left(A_1 A_2 A_3 A_4 \overline{A_5} \right) & = & \mathrm{P}\left(A_1\right) \cdot \mathrm{P}\left(A_2\right) \cdot \mathrm{P}\left(A_3\right) \cdot  \mathrm{P}\left(A_4\right) \cdot  \mathrm{P}\left(\overline{A_5}\right) \\
+	& = & 0{,}8 \cdot 0{,}8 \cdot 0{,}76 \cdot  0{,}72 \cdot (1-0{,}68)\\
+	& \approx & 0{,}11.
+	\end{eqnarray*}
+	}
+\end{ex}
+
+%%%==============BT_5==============%%%
+\begin{ex}%[1D9H1-3]
+	Jenny, Jim đang trò đang trò chuyện với Merry về việc có nên đi dự tiệc hay không. Xác suất Jenny sẽ tham dự là $0{,}4$ và xác suất Jim sẽ tham dự là $0{,}6$. Nhưng hôm đó Merry có việc bận nên khả năng không tham dự bữa tiệc là $0{,}8$ . Tính xác suất để ba người bạn cùng tham dự. (Làm tròn kết quả đến hàng phần trăm).
+	\shortans[]{$0{,}05$}
+\loigiai{
+	Gọi $A$  là biến cố \lq\lq Jenny tham gia bữa tiệc\rq\rq.\\
+	Gọi $B$ là biến cố \lq\lq Merry tham gia bữa tiệc\rq\rq. \\
+	Gọi $C$ là biến cố \lq\lq Jim tham gia bữa tiệc\rq\rq.\\
+	Các biến cố $A$, $B$, $C$ đôi một độc lập với nhau.\\
+	Xác suất để ba người bạn cùng tham dự là
+	\[
+		\mathrm{P}(ABC) = \mathrm{P}(A)  \cdot \mathrm{P}(B) \cdot \mathrm{P}(C) = 0{,}4 \cdot 0{,}6 \cdot (1- 0{,}8) = 0, 048 \approx 0{,}05.
+	\]
+	}
+\end{ex}
+
+%%%==============BT_6==============%%%
+\begin{ex}%[1D9H1-3]
+Một bệnh truyền nhiễm có xác suất lây bệnh là $0{,}8$ nếu tiếp xúc với người bệnh mà không đeo khẩu trang; là $0{,}1$ nếu tiếp xúc với người bệnh mà có đeo khẩu trang. Chị Hoa có tiếp xúc với người bệnh hai lần, một lần đeo khẩu trang và một lần không đeo khẩu trang. Tính xác suất để chị Hoa bị lây bệnh từ người bệnh truyền nhiễm đó.
+	\shortans[]{$0{,}82$}
+\loigiai{
+	Gọi $A$ là biến cố \lq\lq Chị Hoa bị nhiễm bệnh khi tiếp xúc người bệnh mà không đeo khẩu trang\rq\rq.\\
+	Gọi $B$ là \la\la Chị Hoa bị nhiễm bệnh khi tiếp xúc với người bệnh dù có đeo khẩu trang\rq\rq.\\
+	Dễ thấy $\overline{A},\overline{B}$ là hai biến cố độc lập.\\
+	Xác suất để chị Hoa không nhiễm bệnh trong cả hai lần tiếp xúc với người bệnh là 
+	\[
+		\mathrm{P}(\overline{A}\overline{B})=\mathrm{P}(\overline{A})\cdot \mathrm{P}(\overline{B})=0{,}2\cdot 0{,}9=0{,}18.
+	\]
+	Gọi $\mathrm{P}$ là xác suất để chị Hoa bị lây bệnh khi tiếp xúc người bệnh, ta có
+	\[
+		\mathrm{P}=1-\mathrm{P}(\overline{A}\overline{B})=1-0{,}18=0{,}82.
+	\]
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B1-DE1-KQ}
+\subsection{Đề 2}
+%\subsubsection{Câu trắc nghiệm một lựa chọn}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE2]
+\caulc
+%%%==============EX_1============%%%
+\begin{ex}%[1D9H1-3]
+Một chiếc máy có hai chiếc động cơ I và II chạy độc lập nhau. Xác suất để động cơ I và II chạy tốt lần lượt là $0{,}84$ và $0{,}75$. Xác suất để cả hai động cơ chạy tốt bằng
+	\choice
+		{$0{,}37$}
+		{$0{,}04$}
+		{$0{,}12$}
+		{\True $0{,}63$}
+	\loigiai{
+		Xác suất để cả hai động cơ đều chạy tốt là $0{,}84\cdot 0{,}75=0{,}63$.
+		}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D9N1-1]
+Cho $A$, $B$ là hai biến cố liên quan đến một phép thử có hữu hạn các kết quả đồng khả năng xuất hiện. Xét $A$ và $B$ là hai biến cố độc lập. Mệnh đề nào sau đây \textbf{sai}?
+	\choice
+		{$A$ và $\overline{B}$ là hai biến cố độc lập}
+		{\True $\mathrm{P}\left(\overline{A}B\right)=\mathrm{P}(A)\cdot \mathrm{P}(B)$}
+		{$\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)$}
+		{$\mathrm{P}\left(\overline{A}B\right)=\left(1-\mathrm{P}(A)\right)\cdot \mathrm{P}(B)$}
+	\loigiai{
+		$\mathrm{P}\left(\overline{A}B\right)=\mathrm{P}(A)\cdot \mathrm{P}(B)$ là mệnh đề sai vì $\mathrm{P}\left(\overline{A}B\right)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(B)$.
+		}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D9H1-3]
+Một người có một chùm chìa khóa gồm $9$ chiếc, bề ngoài chúng giống hệt nhau và chỉ có đúng hai chiếc mở được cửa nhà. Người đó thử ngẫu nhiên từng chìa. Xác suất để mở được cửa trong lần mở thứ ba bằng
+	\choice
+		{\True $\dfrac{1}{6}$}
+		{$\dfrac{2}{7}$}
+		{$\dfrac{14}{81}$}
+		{$\dfrac{7}{81}$}
+	\loigiai{
+		Xác suất để mở được cửa trong lần mở thứ ba là 
+		\[
+			\mathrm{P}(A)=\dfrac{7}{9}\cdot \dfrac{6}{8}\cdot \dfrac{2}{7}=\dfrac{1}{6}.
+		\]
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D9N1-3]
+Cho $A$ và $B$ là hai biến cố độc lập với nhau thỏa mãn $\mathrm{P}(A)=0{,}4$, $\mathrm{P}(B)=0{,}3$. Khi đó $\mathrm{P}(AB)$ bằng
+	\choice
+		{$0{,}58$}
+		{$0{,}7$}
+		{$0{,}1$}
+		{\True $0{,}12$}
+	\loigiai{
+		Do $A$ và $B$ là hai biến cố độc lập với nhau nên $\mathrm{P}(AB)=\mathrm{P}(A).\mathrm{P}(B)=0{,}4.0{,}3=0{,}12$.
+		}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[1D9H1-3]
+Một câu trắc nghiệm có $4$ phương án độc lập, trong đó có $1$ phương án đúng. Một học sinh tô ngẫu nhiên $5$ câu trắc nghiệm. Xác suất để học sinh đó tô sai cả $5$ câu bằng
+	\choice
+		{$\dfrac{15}{1024}$}
+		{$\dfrac{3}{4}$}
+		{\True $\dfrac{243}{1024}$}
+		{$\dfrac{1}{1024}$}
+	\loigiai{
+		Xác suất tô sai $1$ câu là $\dfrac{3}{4}$.\\
+		Vậy xác suất để học sinh đó tô sai cả $5$ câu $\left(\dfrac{3}{4} \right)^5=\dfrac{243}{1024}$.
+		}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[1D9H1-2]
+Gieo một con xúc xắc cân đối và đồng chất. Gọi $A$ là biến cố \lq\lq Số chấm xuất hiện trên con xúc xắc là một số chẵn\rq\rq, $B$ là biến cố \lq\lq Số chấm xuất hiện trên con xúc xắc chia hết cho $3$\rq\rq. Tập hợp mô tả biến cố $AB$ là
+	\choice
+		{$\left\{2; 3; 4; 6\right\}$}
+		{$\left\{2; 4; 6\right\}$}
+		{$\left\{3; 6\right\}$}
+		{\True $\{6\}$}
+	\loigiai{
+		Tập hợp mô tả các biến cố $A=\left\{2; 4; 6\right\}$, $B=\left\{3; 6\right\}$.\\
+		Từ đó suy ra $AB=\{6\}$.
+		}
+\end{ex}
+%%%==============EX_7============%%%
+\begin{ex}%[1D9H1-2]
+Xét phép thử  \lq\lq Bạn thứ nhất gieo đồng xu, sau đó bạn thứ hai gieo con xúc xắc\rq\rq. Gọi $A$ là biến cố \lq\lq Đồng xu xuất hiện mặt sấp\rq\rq, $B$ là biến cố \lq\lq Con xúc xắc xuất hiện mặt $6$ chấm''. Tập hợp mô tả biến cố $AB$ là
+	\choice
+		{$\left\{(S, 4),(S, 5),(S, 6)\right\}$}
+		{$\left\{(S, 6),(N, 6)\right\}$}
+		{$\left\{(N, 6)\right\}$}
+		{\True $\left\{(S, 6)\right\}$}
+	\loigiai{
+		Tập hợp mô tả các biến cố $A=\left\{(S, 1),(S, 2),(S, 3),(S, 4),(S, 5),(S, 6)\right\}$, $B=\left\{(S, 6),(N, 6)\right\}$.\\
+		Từ đó suy ra $AB=\left\{(S, 6)\right\}$.
+		}
+\end{ex}
+%%%==============EX_8============%%%
+\begin{ex}%[1D9H1-3]
+Gieo một đồng tiền cân đối và đồng chất liên tiếp $3$ lần. Tính xác suất của biến cố $A$ \lq\lq Ít nhất một lần xuất hiện mặt sấp\rq\rq.
+	\choice
+		{$\mathrm{P}(A)=\dfrac{1}{2}$}
+		{$\mathrm{P}(A)=\dfrac{3}{8}$}
+		{\True $\mathrm{P}(A)=\dfrac{7}{8}$}
+		{$\mathrm{P}(A)=\dfrac{1}{4}$}
+	\loigiai{
+		Ta có $\overline{A}$ \lq\lq Không có lần nào xuất hiện mặt sấp\rq\rq \, hay cả $3$ lần đều mặt ngửa.\\
+		Theo quy tắc nhân xác suất ta có $\mathrm{P}\overline{A})=\dfrac{1}{2}\cdot \dfrac{1}{2}\cdot \dfrac{1}{2}=\dfrac{1}{8}$. \\			Vậy $\mathrm{P}(A)=1-\mathrm{P}\overline{A})=1-\dfrac{1}{8}=\dfrac{7}{8}$.
+		}
+\end{ex}
+%%%==============EX_9============%%%
+\begin{ex}%[1D9V1-3]
+Gieo ngẫu nhiên một con xúc xắc cân đối và đồng chất ba lần liên tiếp. Gọi $A$ là biến cố  \lq\lq Tổng số chấm xuất hiện trên ba con xúc xắc bằng $8$\rq\rq, $B$ là biến cố \lq\lq Tích số chấm xuất hiện trên ba con xúc xắc không vượt quá $30$\rq\rq. Xác suất của biến cố $AB$ bằng
+	\choice
+		{$\dfrac{5}{36}$}
+		{$\dfrac{1}{8}$}
+		{$\dfrac{1}{9}$}
+		{\True $\dfrac{7}{72}$}
+	\loigiai{
+		Gieo ngẫu nhiên một con xúc xắc cân đối và đồng chất ba lần liên tiếp thì không gian mẫu là
+		$\Omega=\left\{\left(i;\; j;\; k\right)\; \left|\; 1\le i;\; j;\; k\le 6\right. \right\}$, suy ra $n\left(\Omega \right)=6^3=216$.\\
+		Gọi $A$ là biến cố \lq\lq Tổng số chấm xuất hiện trên ba con xúc xắc bằng $8$\rq\rq.\\
+		Ta có $8=6+1+1=5+2+1=4+3+1=4+2+2=3+3+2$.\\
+		Với bộ $\left(6;\; 1;\; 1\right)$ ta có $3$ hoán vị, với bộ $\left(5; 2; 1\right)$ ta có $3!$ hoán vị.\\
+		Tương tự với các bộ còn lại.\\
+		Suy ra số kết quả thuận lợi cho biến cố $A$ là $n(A)=3+3!+3!+3+3=21$.\\
+		Xét biến cố $B$ \lq\lq Tích số chấm xuất hiện trên ba con xúc xắc không vượt quá $30$.\\
+		Ta thấy mọi phần tử thuộc $A$ đều thuộc $B$, tức là $A\subset B$ nên $A\cap B=A$.\\
+		Vậy xác suất cần tính là $\mathrm{P}(AB)=\mathrm{P}(A)=\dfrac{21}{216}=\dfrac{7}{72}$.
+		}
+\end{ex}
+%%%==============EX_10============%%%
+\begin{ex}%[1D9H1-3]
+Hai chuyến bay $A$ và $B$ hoạt động độc lập với nhau. Xác suất để chuyến bay $A$ và $B$ bay đúng giờ $0{,}6$ và $0{,}7$. Tính xác suất để trong $2$ chuyến bay có ít nhất $1$ chuyến bay đúng giờ?
+	\choice
+		{\True $0{,}88$}
+		{$0{,}42$}
+		{$0{,}9$}
+		{$0{,}46$}
+	\loigiai{
+		Xác suất $A$ và $B$ bay không đúng giờ là $0{,}4$ và $0{,}3$.\\
+		Xác suất cả hai không đúng giờ là $0{,}4.0{,}3=0{,}12$.\\
+		Xác suất có ít nhất $1$ chuyến bay đúng giờ là $1-0{,}12=0{,}88$.
+		}
+\end{ex}
+%%%==============EX_11============%%%
+\begin{ex}%[1D9V1-3]
+Trong đề kiểm tra $15$ phút môn Toán của lớp 11A có $20$ câu trắc nghiệm. Mỗi câu trắc nghiệm có $4$ phương án trả lời, trong đó chỉ có một phương án trả lời đúng. Nam giải chắc chắn đúng $10$ câu, $10$ câu còn lại lựa chọn ngẫu nhiên đáp án. Tính xác suất để Nam đạt được đúng $8$ điểm. Biết rằng mỗi câu trả lời đúng được $0{,}5$ điểm, trả lời sai không bị trừ điểm.
+	\choice
+		{$\left(\dfrac{1}{4} \right)^6$}
+		{$\left(\dfrac{1}{4} \right)^{16}$}
+		{\True $\mathrm{C}_{10}^6\cdot \left(\dfrac{1}{4} \right)^6\cdot  \left(\dfrac{3}{4} \right)^4$}
+		{$\left(\dfrac{1}{4} \right)^{16} \left(\dfrac{3}{4} \right)^4$}
+	\loigiai{
+		Nam giải chắc chắn đúng $10$ câu nên Nam được chắc chắn $5$ điểm.\\
+		Để Nam đạt được đúng $8$ điểm thì trong $10$ câu còn lại lựa chọn ngẫu nhiên đáp án phải đúng $6$ câu, sai $4$ câu.\\
+		Xác suất khi đánh ngẫu nhiên đúng một câu trắc nghiệm là $\dfrac{1}{4}$.\\
+		Xác suất khi đánh ngẫu nhiên sai một câu trắc nghiệm là $\dfrac{3}{4}$.\\
+		Chọn $6$ câu trắc nghiệm để đáp đúng từ $10$ câu trắc nghiệm có $\mathrm{C}_{10}^6$ (cách).\\
+		Vậy, xác suất để Nam đạt được đúng $8$ điểm là $\mathrm{C}_{10}^6\cdot  \left(\dfrac{1}{4} \right)^6\cdot \left(\dfrac{3}{4} \right)^4$.
+		}
+\end{ex}
+%%%==============EX_12============%%%
+\begin{ex}%[1D9H1-3]
+Xét phép thử \lq\lq Bạn thứ nhất gieo đồng xu, sau đó bạn thứ hai gieo con xúc xắc\rq\rq. Gọi $A$ là biến cố \lq\lq Đồng xu xuất hiện mặt ngửa\rq\rq, $B$ là biến cố \lq\lq Con xúc xắc xuất hiện mặt $4$ chấm\rq\rq. Tính xác suất của biến cố $A\overline{B}$.
+	\choice
+		{$\dfrac{1}{3}$}
+		{$\dfrac{1}{6}$}
+		{$\dfrac{1}{2}$}
+		{\True $\dfrac{5}{12}$}
+	\loigiai{
+		Không gian mẫu của phép thử là
+		\[\Omega=\left\{(S, 1),(S, 2),(S, 3),(S, 4),(S, 5),(S, 6),(N, 1),(N, 2),(N, 3),(N, 4),(N, 5),(N, 6)\right\}.
+		\]
+		Tập hợp mô tả các biến cố 
+		\begin{eqnarray*}
+			A & = & \left\{(N, 1),(N, 2),(N, 3),(N, 4),(N, 5),(N, 6)\right\};\\
+			B & = &\left\{(S, 4),(N, 4)\right\};\\
+			\overline{B} & = & \left\{(S, 1),(S, 2),(S, 3),(S, 5),(S, 6),(N, 1),(N, 2),(N, 3),(N, 5),(N, 6)\right\}.
+		\end{eqnarray*}		
+		Từ đó suy ra $A\overline{B}=\left\{(N, 1),(N, 2),(N, 3),(N, 5),(N, 6)\right\}$.\\
+		Vậy xác suất của biến cố $A\overline{B}$ là $\mathrm{P}\left(A\overline{B}\right)=\dfrac{n\left(A\overline{B}\right)}{n\left(\Omega \right)}=\dfrac{5}{12}$.
+		}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B1-DE2}
+%%%================================%%%
+%%%================================%%%
+%\subsubsection{Câu đúng sai}
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE2-DS]
+%%%================================%%%
+%%%================================%%%
+%%%==============EX_1============%%%
+\begin{ex}%[1D9H1-3]
+	Cho $A,B$ là hai biến cố độc lập và $\mathrm{P}(A)=\dfrac{1}{4}, \mathrm{P}(B)=\dfrac{1}{3}$. Khi đó
+	\choiceTF
+		{$\mathrm{P}(AB)=\dfrac{1}{2}$}
+		{$\mathrm{P}(A\overline{B})=\dfrac{1}{16}$}
+		{\True $\mathrm{P}(\overline{A}\overline{B})=\dfrac{1}{2}$}
+		{\True $\mathrm{P}(\overline{A}B)=\dfrac{1}{4}$}
+	\loigiai{
+		Ta có $\mathrm{P}(\overline{A})=\dfrac{3}{4}, \mathrm{P}(\overline{B})=\dfrac{2}{3}$.\\
+		Vì $A$, $B$ là hai biến cố độc lập nên mỗi cặp biến cố lấy ra từ $A, \overline{B}$;  $\overline{A}, B$ và $\overline{A}, \overline{B}$ đều là cặp biến cố độc lập.
+		\begin{itemchoice}
+			\itemch \textbf{Sai.}\\
+			Ta có $\mathrm{P}(AB)= \mathrm{P}(A) \cdot \mathrm{P}(B) = \dfrac{1}{4} \cdot \dfrac{1}{3}  = \dfrac{1}{12}$.
+			\itemch \textbf{Sai.}\\
+			Ta có $\mathrm{P}(A\overline{B})= \mathrm{P}(A) \cdot \mathrm{P}(\overline{B}) = \dfrac{1}{4} \cdot  \dfrac{2}{3}  = \dfrac{1}{6}$.
+			\itemch \textbf{Đúng.}\\
+			Ta có $\mathrm{P}(\overline{A}\overline{B})= \mathrm{P}(\overline{A}) \cdot \mathrm{P}(\overline{B}) = \dfrac{3}{4} \cdot  \dfrac{2}{3}  = \dfrac{1}{2}$.
+			\itemch \textbf{Đúng.}\\
+			Ta có $\mathrm{P}(\overline{A}B)= \mathrm{P}(\overline{A}) \cdot \mathrm{P}(B) = \dfrac{3}{4} \cdot  \dfrac{1}{3}  = \dfrac{1}{4}$.
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D9V1-3]
+	Trên một bảng quảng cáo, người ta mắc hai hệ thống bóng đèn. Hệ thống I gồm $2$ bóng mắc nối tiếp, hệ thống II gồm $2$ bóng mắc song song. Khả năng bị hỏng của mỗi bóng đèn sau $6$ giờ thắp sáng liên tục là $0{,}15$. Biết tình trạng của mỗi bóng đèn là độc lập. 
+	\choiceTF
+		{\True Xác suất để hệ thống II bị hỏng (không sáng) bằng $0{,}0225$}
+		{\True Xác suất để hệ thống II hoạt động bình thường bằng $0{,}9775$}
+		{Xác suất để hệ thống I bị hỏng (không sáng) bằng $0{,}5775$}
+		{Xác suất để cả hai hệ thống bị hỏng (không sáng) (kết quả được làm tròn đến hàng phần trăm nghìn) bằng $\approx 0{,}02624$}
+	\loigiai{
+	\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Hệ thống II gồm $2$ bóng được mắc song song nên nó chỉ hỏng khi cả hai bóng đều hỏng.\\
+			Gọi $B$ là biến cố \lq\lq Hệ thống II bị hỏng\rq\rq, ta có $\mathrm{P}(B)=0{,}15\cdot 0{,}15=0{,}0225$.
+			\itemch \textbf{Đúng.}\\
+			Xác suất để hệ thống II hoạt động bình thường là $\mathrm{P}\overline{B})=1-0{,}0225=0{,}9775$.
+			\itemch \textbf{Sai.}\\
+			Hệ thống I chỉ hoạt động bình thường khi cả hai bóng bình thường.\\
+			Gọi $A$ là biến cố \lq\lq Hệ thống $I$ bị hỏng\rq\rq. Khi đó xác suất để hệ thống $I$ hoạt động bình thường là $\mathrm{P}\overline{A})=0{,}85\cdot 0{,}85=0{,}7225$.\\
+			Suy ra $\mathrm{P}(A)=1-0{,}7225=0{,}2775$
+			\itemch \textbf{Sai.}\\
+			Xác suất để cả hai hệ thống I, II đều bị hỏng là
+			\[
+			\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}2775\cdot 0{,}0225=\dfrac{999}{160000} \approx 0{,}00624.
+			\]
+		\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D9H1-3]
+	Một hộp có chứa $6$ bút mực xanh và $4$ bút mực đỏ cùng loại, cùng kích thước và khối lượng. Lấy ra ngẫu nhiên đồng thời $3$ bút từ hộp. Gọi $A$ là biến cố \lq\lq Ba bút lấy ra đều là bút mực xanh\rq\rq. $B$ là biến cố \lq\lq Ba bút lấy ra đều là bút mực đỏ\rq\rq. Khi đó:
+	\choiceTF
+		{Có $30$ kết quả thuận lợi cho biến cố $A$}
+		{\True Có $4$ kết quả thuận lợi cho biến cố $B$}
+		{\True Xác suất của biến cố $A$ bằng $\dfrac{1}{6}$}
+		{\True Xác suất của biến cố $B$ bằng $\dfrac{1}{30}$}
+	\loigiai{
+	\begin{itemchoice}
+			\itemch \textbf{Sai.}\\
+			Số kết quả thuận lợi cho biến cố $A$ là $\mathrm{C}_6^3=20$.
+			\itemch \textbf{Đúng.}\\
+			Số kết quả thuận lợi cho biến cố $B$ là $\mathrm{C}_4^3=4$.
+			\itemch \textbf{Đúng.}\\
+			Xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{\mathrm{C}_6^3}{\mathrm{C}_{10}^3}=\dfrac{1}{6}$.
+			\itemch \textbf{Đúng.}\\
+			Xác suất của biến cố $B$ là $\mathrm{P}(B)=\dfrac{\mathrm{C}_4^3}{\mathrm{C}_{10}^3}=\dfrac{1}{30}$.
+		\end{itemchoice}		
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D9H1-3]
+	Một bộ bài tú lơ khơ có $52$ lá, rút ngẫu nhiên lần lượt $3$ lá, mỗi lần rút $1$ lá, sau mỗi lần rút ta đều để lại lá bài đó vào bộ. Khi đó:
+	\choiceTF
+		{\True Xác suất rút là bài thứ nhất là con Át là $\dfrac{4}{52}$}
+		{Xác suất rút là bài thứ hai là con Át là $\dfrac{3}{52}$}
+		{Xác suất rút là bài thứ ba là con $J$ là $\dfrac{1}{52}$}
+		{\True Xác suất để hai lần đầu rút được lá bài Át và lần thứ ba rút được lá bài J là $\dfrac{1}{2197}$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Lần thứ nhất rút được con Át\rq\rq.\\
+		Gọi $B$ là biến cố \lq\lq Lần thứ hai rút được con Át\rq\rq.\\
+		Gọi $C$ là biến cố \lq\lq Lần thứ ba rút được con J\rq\rq.\\
+		$\Rightarrow ABC$ là biến cố \lq\lq Hai lần đầu rút được con Át và lần thứ ba rút được con J\rq\rq.\\
+		Các biến cố $A,B$ và $C$ đôi một độc lập với nhau.
+		\begin{itemchoice}
+			\itemch \textbf{Đúng.}\\
+			Xác suất rút là bài thứ nhất là con Át là $\mathrm{P}(A)=\dfrac{4}{52}$.
+			\itemch \textbf{Sai.}\\
+			Xác suất rút là bài thứ hai là con Át là $\mathrm{P}(B)=\dfrac{4}{52}$.
+			\itemch \textbf{Sai.}\\
+			Xác suất rút là bài thứ ba là con $J$ là $\mathrm{P}(C)=\dfrac{4}{52}$.
+			\itemch \textbf{Đúng.}\\
+			Vậy xác suất cần tính là: $\mathrm{P}(ABC)=\mathrm{P}(A)\cdot \mathrm{P}(B)\cdot \mathrm{P}(C)=\dfrac{4}{52} \cdot \dfrac{4}{52} \cdot \dfrac{4}{52}=\dfrac{1}{2197}$.
+		\end{itemchoice}	
+
+		}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C9B1-DE2-DS}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B1-DE2-KQ]
+\caukq
+
+%%%==============BT_1==============%%%
+\begin{ex}%[1D9H1-3]
+	Hộp $A$ đựng $5$ tấm thẻ được đánh số từ $1$ đến $5$, hộp $B$ đựng $6$ tấm thẻ được đánh số từ $1$ đến $6$, hai thẻ khác nhau ở mỗi hộp đánh hai số khác nhau. Chọn ngẫu nhiên từ hộp $A$ một tấm thẻ và từ hộp $B$ hai tấm thẻ. Xét các biến cố
+	\begin{itemize}
+		\item $X$ là biến cố \lq\lq Chọn được thẻ mang số lẻ từ hộp $A$\rq\rq;
+		\item $Y$ là biến cố \lq\lq Chọn được thẻ mang số chăn từ hộp $A$\rq\rq;
+		\item $Z$ là biến cố \lq\lq Chọn được hai thẻ mang số lẻ từ hộp $B$\rq\rq.
+	\end{itemize}
+	Tính xác suất để tích số được ghi trên ba tấm thẻ thu được là số chẵn.
+	\shortans[]{$0{,}88$}
+\loigiai{
+	Ta có $X=\{1;3;5\}, Y=\{2;4\} \Rightarrow X\cap Y=\varnothing$.\\
+	Vậy $X$, $Y$ là hai biến cố xung khắc.\\
+	Để có được tích ba số ghi trên ba thẻ là số lẻ thì cả ba thẻ thu được đều mang số lẻ.\\
+	Gọi $U$ là biến cố \lq\lq Tích ba số ghi trên ba thẻ là số lẻ\rq\rq. Suy ra $\mathrm{P}\overline{U})$ là xác suất cần tìm.\\
+	Dễ thấy mỗi cặp biến cố $X$ và $Z$; $Y$ và $Z$ là độc lập.\\
+	Ta có $\mathrm{P}(X)=\dfrac{3}{5}, \mathrm{P}(Y)=\dfrac{2}{5}, \mathrm{P}(Z)=\dfrac{\mathrm{C}_3^2}{\mathrm{C}_6^2}=\dfrac{1}{5}$.\\
+	Khi đó $\mathrm{P}(U)=\mathrm{P}(XZ)=\mathrm{P}(X)\cdot \mathrm{P}(Z)=\dfrac{3}{5} \cdot \dfrac{1}{5}=\dfrac{3}{25}$.\\
+	Suy ra $\mathrm{P}(\overline{U})=1-\mathrm{P}(U)=1-\dfrac{3}{25}=\dfrac{22}{25}$.
+	}
+\end{ex}
+
+%%%==============BT_2==============%%%
+\begin{ex}%[1D9H1-3]
+	Một lô hàng có $20$ sản phẩm giống nhau trong đó có $4$ sản phẩm không đạt chất lượng còn lại là sản phẩm đạt chất lượng tốt. Mỗi lần kiểm tra, người ta chọn ra ngẫu nhiên $2$ sản phẩm. Tính xác suất để lấy ra được ít nhất một sản phẩm tốt. (Làm tròn kết quả đến hàng phần mười).
+	\shortans[]{$96{,}8$}
+\loigiai{
+	Gọi $A$ là biến cố \lq\lq Lấy ra $2$ sản phẩm được ít nhất một sản phẩm tốt\rq\rq.\\
+	Biến cố $A$ xảy ra khi lấy ra được $1$ sản phẩm tốt và một sản phẩm không đạt chất lượng hoặc lấy ra được $2$ sản phẩm đều tốt.\\
+	Xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{\mathrm{C}_{16}^1 \times \mathrm{C}_4^1 \times \mathrm{C}_{16}^2}{\mathrm{C}_{20}^2}=\dfrac{92}{95} = \approx 96{,}8$.
+	}
+\end{ex}
+
+%%%==============BT_3==============%%%
+\begin{ex}%[1D9H1-3]
+	Nhà trường muốn chọn một đội văn nghệ có đủ cả nam và nữ gồm $12$ em đi biểu diễn từ một nhóm học sinh gồm $10$ nam sinh và $8$ nữ sinh. Tính xác xuất để đội văn nghệ được chọn có ít nhất 6 bạn nữ. (Làm tròn kết quả đến hàng phần mười).
+	\shortans[]{$43{,}7$}
+\loigiai{
+		Gọi $B$ là biến cố \lq\lq Chọn đội văn nghệ gồm 12 bạn có đủ cả nam và nữ trong đó có ít nhất 6 bạn nữ'\rq\rq.\\
+		Suy ra
+		\[
+			\mathrm{P}(B)=\dfrac{\mathrm{C}_{10}^6 \times \mathrm{C}_8^6+\mathrm{C}_{10}^5 \times \mathrm{C}_8^7+\mathrm{C}_{10}^4 \times \mathrm{C}_8^8}{\mathrm{C}_{18}^{12}}=\dfrac{193}{442} = \approx 43{,}7.
+		\]
+	}
+\end{ex}
+
+%%%==============BT_4==============%%%
+\begin{ex}%[1D9H1-3]
+	Một xạ thủ bắn lần lượt $2$ viên đạn vào một bia. Xác suất trúng đích của viên thứ nhất và viên thứ hai lần lượt là $0{,}8$ và $0{,}7$. Biết rằng kết quả các lần bắn là độc lập với nhau. Tính xác suất  để có ít nhất $1$ lần bắn trúng đích.
+	\shortans[]{$0{,}94$}
+\loigiai{
+	Xác suất để có ít nhất $1$ lần bắn trúng đích là
+	\[
+		0{,}8\times 0{,}3+0{,}2\times 0{,}7+0{,}8\times 0{,}7=0{,}94.
+	\]
+	}
+\end{ex}
+%%%==============BT_5==============%%%
+\begin{ex}%[1D9H1-3]
+	Một bệnh truyền nhiễm có xác suất lây bệnh là $0{,}9$ nếu tiếp xúc với người bệnh mà không đeo khẩu trang; là $0{,}15$ nếu tiếp xúc với người bệnh mà có đeo khẩu trang. Anh Hà tiếp xúc với một người bệnh hai lần, trong đó có một lần đeo khẩu trang và một lần không đeo khẩu trang. Khả năng anh Hà bị lây bệnh từ người bệnh mà anh tiếp xúc đó bằng bao nhiêu phần trăm?
+	\shortans[]{$13{,}5$}
+\loigiai{
+	Gọi $A$ là biến cố \lq\lq Anh Hà bị lây bệnh từ người bệnh nếu tiếp xúc với người bệnh mà không đeo khẩu trang\rq\rq.\\
+	Suy ra  $\mathrm{P}(A)=0{,}9$.\\
+	Gọi $B$ là biến cố \lq\lq Anh Hà bị lây bệnh từ người bệnh nếu tiếp xúc với người bệnh mà có đeo khẩu trang\rq\rq.\\
+	Suy ra $\mathrm{P}(B)=0{,}15$.\\
+	Vì $A$ và $B$ là 2 biến cố độc lập nên xác suất của biến cố "anh Hà bị lây bệnh từ người bệnh mà anh tiếp xúc đó'' là
+	\[ 
+	\mathrm{P}(AB)=0{,}9\times 0{,}15=0{,}135.
+	\]
+	}
+\end{ex}
+
+%%%==============BT_6==============%%%
+\begin{ex}%[1D9H1-3]
+	Một hộp có $10$ quả bóng bàn trong đó có $6$ quả mới. Người ta lấy ra ngẫu nhiên $5$ quả để thi đấu. Biết xác suất của biến cố lấy được ít nhất $2$ quả bóng mới bằng $\dfrac{a}{b}$, với $a$, $b$ là các số tự nhiên và phân số $\dfrac{a}{b}$ tối giản. Giá trị của $a + b$ bằng bao nhiêu?
+	\shortans[]{$83$}
+\loigiai{
+	Gọi $A$ là biến cố \lq\lq Lấy ra ngẫu nhiên $5$ quả trong đó có ít nhất $2$ quả bóng mới\rq\rq.\\
+	Xác suất của biến cố $A$ là 
+	\[
+		\mathrm{P}(A)=\dfrac{\mathrm{C}_6^2 \times \mathrm{C}_4^3 + \mathrm{C}_6^3 \times \mathrm{C}_4^2 + \mathrm{C}_6^4 \times \mathrm{C}_4^1+\mathrm{C}_6^5}{\mathrm{C}_{10}^5}=\dfrac{41}{42}.
+	\]
+	Suy ra $a = 41$, $b =42 \Rightarrow a + b = 83$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B1-DE2-KQ}
+

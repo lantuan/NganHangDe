@@ -1,0 +1,715 @@
+\section{Giới hạn dãy số}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE1-LC]
+\caulc
+%%%==============Cau_EX1==============%%%
+\begin{ex}%[1D3N1-2]
+	Trong các giới hạn sau, giới hạn nào bằng $0$?
+	\choice
+	{$ \lim(n^3-3n+1) $}
+	{\True $ \lim\dfrac{n^2+n}{n^3+1} $}
+	{$ \lim\dfrac{n^2+n+1}{4n+1} $}
+	{$ \lim\dfrac{2^n-3^n}{3^n+2} $}
+	\loigiai{
+		Ta có $ \lim\dfrac{n^2+n}{n^3+1}=\lim\dfrac{\dfrac{1}{n}+\dfrac{1}{n^2}}{1+\dfrac{1}{n^3}}=0. $
+	}
+\end{ex}
+%%%==============HetCau_EX1==============%%%
+%%%==============Cau_EX2==============%%%
+\begin{ex}%[1D3N1-2]
+	Giá trị của giới hạn $\lim \dfrac{-3}{4{n^2}-2n+1}$ là
+	\choice
+		{$-\dfrac{3}{4}$}
+		{$-\infty$}
+		{\True $0$}
+		{$-1$}
+	\loigiai{
+		Ta có $\lim \dfrac{-3}{4{n^2}-2n+1}=\lim \dfrac{\dfrac{-3}{{n^2}}}{4-\dfrac{2}{n}+\dfrac{1}{{n^2}}}=\dfrac{0}{4}=0$.
+		}
+\end{ex}
+%%%==============HetCau_EX2==============%%%
+%%%==============Cau_EX3==============%%%
+\begin{ex}%[1D3N1-2]
+	Cho hai dãy số $\left({u_n} \right)$ và $\left({v_n} \right)$ có ${u_n}=\dfrac{1}{n+1}$ và ${v_n}=\dfrac{1}{n+2}$. Khi đó $\lim \dfrac{{v_n}}{{u_n}}$ có giá trị bằng
+	\choice
+		{\True $1$}
+		{$2$}
+		{$0$}
+		{$3$}
+	\loigiai{
+		Ta có $\lim \dfrac{{v_n}}{{u_n}}=\lim \dfrac{n+1}{n+2}=\lim \dfrac{1+\dfrac{1}{n}}{1+\dfrac{2}{n}}=\dfrac{1}{1}=1$.\\
+		Giải nhanh: Ta sử dụng đánh giá $\dfrac{n+1}{n+2}\sim \dfrac{n}{n}=1$.
+		}
+\end{ex}
+%%%==============HetCau_EX3==============%%%
+%%%==============Cau_EX4==============%%%
+\begin{ex}%[1D3N1-2]
+	Tính giới hạn $L=\lim \dfrac{{n^2}+n+5}{2{n^2}+1}$.
+	\choice
+		{$L=\dfrac{3}{2}$}
+		{\True $L=\dfrac{1}{2}$}
+		{$L=2$}
+		{$L=1$}
+	\loigiai{
+		Ta có
+		\[L=\lim \dfrac{{n^2}+n+5}{2{n^2}+1}=\lim \dfrac{1+\dfrac{1}{n}+\dfrac{5}{{n^2}}}{2+\dfrac{1}{{n^2}}}=\dfrac{1}{2}.\]
+		Giải nhanh: Ta sử dụng đánh giá $\dfrac{{n^2}+n+5}{2{n^2}+1}\sim \dfrac{{n^2}}{2{n^2}}=\dfrac{1}{2}.$
+		}
+\end{ex}
+%%%==============HetCau_EX4==============%%%
+%%%==============Cau_EX5==============%%%
+\begin{ex}%[1D3N1-2]
+	Kết quả của giới hạn $\lim \dfrac{{{\pi}^n}+{3^n}+{2^{2n}}}{3{{\pi}^n}-{3^n}+{2^{2n+2}}}$ là
+	\choice
+		{$1$}
+		{$\dfrac{1}{3}$}
+		{$+\infty$}
+		{\True $\dfrac{1}{4}$}
+	\loigiai{
+	Ta có $$\lim \dfrac{{{\pi}^n}+{3^n}+{2^{2n}}}{3{{\pi}^n}-{3^n}+{2^{2n+2}}}=\lim \dfrac{{{\left(\dfrac{\pi}{4} \right)}^n}+{{\left(\dfrac{3}{4} \right)}^n}+1}{3.{{\left(\dfrac{\pi}{4} \right)}^n}-3.{{\left(\dfrac{3}{4} \right)}^n}+4}=\dfrac{1}{4}.$$
+		Giải nhanh: Ta sử dụng đánh giá $\dfrac{{{\pi}^n}+{3^n}+{2^{2n}}}{3{{\pi}^n}-{3^n}+{2^{2n+2}}}=\dfrac{{{\pi}^n}+{3^n}+{4^n}}{3{{\pi}^n}-{3^n}+{{4.4}^n}}\sim \dfrac{{4^n}}{{{4.4}^n}}=\dfrac{1}{4}$.
+		}
+\end{ex}
+%%%==============HetCau_EX5==============%%%
+%%%==============Cau_EX6==============%%%
+\begin{ex}%[1D3N1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt{{n^2}+2n}-\sqrt{{n^2}-2n} \right)$ là
+	\choice
+		{$1$}
+		{\True $2$}
+		{$4$}
+		{$+\infty$}
+	\loigiai{
+	Vì $\sqrt{{n^2}+2n}-\sqrt{{n^2}-2n}\sim \sqrt{{n^2}}-\sqrt{{n^2}}=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		\[\lim \left(\sqrt{{n^2}+2n}-\sqrt{{n^2}-2n} \right)=\lim \dfrac{4n}{\sqrt{{n^2}+2n}+\sqrt{{n^2}-2n}}=\lim \dfrac{4}{\sqrt{1+\dfrac{2}{n}}+\sqrt{1-\dfrac{2}{n}}}=2.\]
+		Giải nhanh:
+		\[\sqrt{{n^2}+2n}-\sqrt{{n^2}-2n}=\dfrac{4n}{\sqrt{{n^2}+2n}+\sqrt{{n^2}-2n}}\sim \dfrac{4n}{\sqrt{{n^2}}+\sqrt{{n^2}}}=2.\]
+		}
+\end{ex}
+%%%==============HetCau_EX6==============%%%
+%%%==============Cau_EX7==============%%%
+\begin{ex}%[1D3N1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt{2{n^2}-n+1}-\sqrt{2{n^2}-3n+2} \right)$ là
+	\choice
+		{$0$}
+		{\True $\dfrac{\sqrt{2}}{2}$}
+		{$-\infty$}
+		{$+\infty$}
+	\loigiai{
+	Vì $\sqrt{2{n^2}-n+1}-\sqrt{2{n^2}-3n+2}\sim \sqrt{2{n^2}}-\sqrt{2{n^2}}=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		$$\begin{aligned}
+			& \lim \left(\sqrt{2{n^2}-n+1}-\sqrt{2{n^2}-3n+2} \right)=\lim \dfrac{2n-1}{\sqrt{2{n^2}-n+1}+\sqrt{2{n^2}-3n+2}} \\ &=\lim \dfrac{2-\dfrac{1}{n}}{\sqrt{2-\dfrac{1}{n}+\dfrac{1}{{n^2}}}+\sqrt{2-\dfrac{3}{n}+\dfrac{2}{{n^2}}}}=\dfrac{1}{\sqrt{2}}. \end{aligned}$$
+		Giải nhanh:
+		$$\sqrt{2{n^2}-n+1}-\sqrt{2{n^2}-3n+2}=\dfrac{2n-1}{\sqrt{2{n^2}-n+1}+\sqrt{2{n^2}-3n+2}}\sim \dfrac{2n}{\sqrt{2{n^2}}+\sqrt{2{n^2}}}=\dfrac{1}{\sqrt{2}}.$$
+		}
+\end{ex}
+%%%==============HetCau_EX7==============%%%
+%%%==============Cau_EX8==============%%%
+\begin{ex}%[1D3H1-3]
+	Có bao nhiêu giá trị nguyên của $a$ thỏa $\lim \left(\sqrt{{n^2}-8n}-n+{a^2} \right)=0.$
+	\choice
+		{$0$}
+		{\True $2$}
+		{$1$}
+		{Vô số}
+	\loigiai{
+		Vì $\sqrt{{n^2}-8n}-n+{a^2}\sim \sqrt{{n^2}}-n=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		\[\lim \left(\sqrt{{n^2}-8n}-n+{a^2} \right)=\lim \dfrac{\left(2{a^2}-8\right)n}{\sqrt{{n^2}+n}+n}=\lim \dfrac{2{a^2}-8}{\sqrt{1+\dfrac{1}{n}}+1}={a^2}-4=0.\]
+		Do đó $ a=\pm 2$.\\
+		Vậy có $2$ giá trị nguyên của $a$ thỏa mãn yêu cầu bài toán.
+		}
+\end{ex}
+%%%==============HetCau_EX8==============%%%
+%%%==============Cau_EX9==============%%%
+\begin{ex}%[1D3H1-3]
+	Cho dãy số $\left({u_n} \right)$ với ${u_n}=\sqrt{{n^2}+an+5}-\sqrt{{n^2}+1}$, trong đó $a$ là tham số thực. Tìm $a$ để $\lim {u_n}=-1$.
+	\choice
+		{$3$}
+		{$2$}
+		{\True $-2$}
+		{$-3$}
+	\loigiai{
+	Vì $\sqrt{{n^2}+an+5}-\sqrt{{n^2}+1}\sim \sqrt{{n^2}}-\sqrt{{n^2}}=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		\[\begin{aligned}
+			-1&=\lim {u_n}=\lim \left(\sqrt{{n^2}+an+5}-\sqrt{{n^2}+1} \right)=\lim \dfrac{an+4}{\sqrt{{n^2}+an+5}+\sqrt{{n^2}+1}} \\ 
+			&=\lim \dfrac{a+\dfrac{4}{n}}{\sqrt{1+\dfrac{a}{n}+\dfrac{5}{{n^2}}}+\sqrt{1+\dfrac{1}{{n^2}}}}=\dfrac{a}{2}\Leftrightarrow a=-2. \end{aligned}\]
+		Giải nhanh:
+		\[-1\sim \sqrt{{n^2}+an+5}-\sqrt{{n^2}+1}=\dfrac{an+4}{\sqrt{{n^2}+an+5}+\sqrt{{n^2}+1}}\sim \dfrac{an}{\sqrt{{n^2}}+\sqrt{{n^2}}}=\dfrac{a}{2}\Leftrightarrow a=-2.\]
+		}
+\end{ex}
+%%%==============HetCau_EX9==============%%%
+%%%==============Cau_EX10==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt[3]{{n^3}+1}-\sqrt[3]{{n^3}+2} \right)$
+	bằng
+	\choice
+		{$3$}
+		{$2$}
+		{\True $0$}
+		{$1$}
+	\loigiai{
+	Vì $\sqrt[3]{{n^3}+1}-\sqrt[3]{{n^3}+2}\sim \sqrt[3]{{n^3}}-\sqrt[3]{{n^3}}=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		\[\lim \left(\sqrt[3]{{n^3}+1}-\sqrt[3]{{n^3}+2} \right)=\lim \dfrac{-1}{\sqrt[3]{{{\left({n^3}+1\right)}^2}}+\sqrt[3]{{n^3}+1}\cdot\sqrt[3]{{n^3}+2}+\sqrt[3]{\left({n^3}+2\right)}}=0.\]
+		}
+\end{ex}
+%%%==============HetCau_EX10==============%%%
+%%%==============Cau_EX11==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \dfrac{1}{\sqrt[3]{{n^3}+1}-n}$
+	là:
+	\choice
+		{$2$}
+		{\True $0$}
+		{$-\infty$}
+		{$+\infty$}
+	\loigiai{
+	Vì $\sqrt[3]{{n^3}+1}-n\sim \sqrt[3]{{n^3}}-n=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		\[\lim \left(\sqrt[3]{{n^3}+1}-n \right)=\lim \dfrac{1}{\sqrt[3]{{{\left({n^3}+1\right)}^2}}+n\sqrt[3]{{n^3}+1}+{n^2}}=0.\]
+		}
+\end{ex}
+%%%==============HetCau_EX11==============%%%
+%%%==============Cau_EX12==============%%%
+\begin{ex}%[1D3H1-4]
+	Kết quả của giới hạn $\lim \sqrt{{{2\cdot 3}^n}-n+2}$ là
+	\choice
+		{$0$}
+		{$2$}
+		{$3$}
+		{\True $+\infty$}
+	\loigiai{
+		Ta có $\lim \sqrt{{{2\cdot 3}^n}-n+2}=\lim \sqrt{{3^n}}\cdot\sqrt{2-\dfrac{n}{{3^n}}+2\cdot{{\left(\dfrac{1}{3} \right)}^n}}$.\\
+		 Vì
+		$\left\{ \begin{aligned}
+			& \lim \sqrt{{3^n}}=+\infty \\ & 0\le \dfrac{n}{{3^n}}\le \dfrac{n}{C_n^2}=\dfrac{2}{n-1}\to 0\Rightarrow \lim \dfrac{n}{{3^n}}=0\\ & \lim {{\left(\dfrac{1}{3} \right)}^n}=0\\ \end{aligned} \right\}\xrightarrow[{}]{}\left\{\begin{aligned}
+			& \lim \sqrt{{3^n}}=+\infty \\ & \lim \sqrt{2-\dfrac{n}{{3^n}}+2\cdot {{\left(\dfrac{1}{3} \right)}^n}}=\sqrt{2} > 0\\ \end{aligned} \right.$,
+		do đó $\lim \sqrt{{{2\cdot 3}^n}-n+2} = +\infty$.
+		}
+\end{ex}
+%%%==============HetCau_EX12==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C3B1-DE1-LC}
+
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE1-DS]
+\cauds
+%%%==============EX_1============%%%
+\begin{ex}%[1D3H1-2]
+	Biết giới hạn $\lim \dfrac{2n+1}{-3n+2}=a$. Khi đó:
+	\choiceTF
+		{Giá trị $a$ lớn hơn $0$}
+		{Ba số $-\dfrac{5}{3}$; $a$; $\dfrac{1}{3}$ tạo thành một cấp số cộng với công sai bằng $2$}
+		{Trên khoảng $\left(-\pi;\pi \right)$ phương trình lượng giác $\sin x=a$ có $3$ nghiệm}
+		{\True Cho cấp số nhân $\left(u_n \right)$ với công bội $q=3$ và $u_1=a$, thì $u_3=-6$}
+	\loigiai{
+		\begin{itemchoice}
+		\itemch Sai. Ta có $\lim \dfrac{2n+1}{-3n+2}=\lim \dfrac{n\left(2+\dfrac{1}{n} \right)}{n\left(-3+\dfrac{2}{n} \right)}=\lim \dfrac{2+\dfrac{1}{n}}{-3+\dfrac{2}{n}}=\dfrac{-2}{3}$.
+		\itemch Sai. Ba số $-\dfrac{5}{3};-\dfrac{2}{3};\dfrac{1}{3}$ tạo thành một cấp số cộng với công sai bằng $1$.
+		\itemch Sai. Trên khoảng $\left(-\pi;\pi \right)$ phương trình lượng giác $\sin x=a$ có $2$ nghiệm.
+		\itemch Đúng. Cho cấp số nhân $\left(u_n \right)$ với công bội $q=3$ và $u_1=a$, thì $u_3=-6$.
+			\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D3H1-2]
+	Biết giới hạn $\lim \dfrac{2n^2+1}{3n^3-3n+3}=a$ và $\lim \dfrac{n\sqrt{n^2+1}}{\sqrt{4n^4-n^2+3}}=b$. Khi đó:
+	\choiceTF
+		{Giá trị $a$ nhỏ hơn $0$}
+		{\True Giá trị $b$ lớn hơn $0$}
+		{\True Phương trình lượng giác $\cos x=a$ có một nghiệm là $x=\dfrac{\pi}{2}$}
+		{Cho cấp số cộng $\left(u_n \right)$ với công sai $d=b$ và $u_1=a$, thì $u_3=\dfrac{3}{2}$}
+	\loigiai{
+		\begin{itemchoice}
+		\itemch Sai. Ta có $\lim \dfrac{2n^2+1}{3n^3-3n+3}=\lim \dfrac{n^3 \left(\dfrac{2}{n}+\dfrac{1}{n^3} \right)}{n^3 \left(3-\dfrac{3}{n^2}+\dfrac{3}{n^3} \right)}=\lim \dfrac{\dfrac{2}{n}+\dfrac{1}{n^3}}{3-\dfrac{3}{n^2}+\dfrac{3}{n^3}}=\dfrac0{3}=0$.
+		\itemch Đúng. Ta có $\lim \dfrac{n\sqrt{n^2+1}}{\sqrt{4n^4-n^2+3}}=\lim \dfrac{n^2 \sqrt{1+\dfrac{1}{n^2}}}{n^2 \sqrt{4-\dfrac{1}{n^2}+\dfrac{3}{n^4}}}=\lim \dfrac{\sqrt{1+\dfrac{1}{n^2}}}{\sqrt{4-\dfrac{1}{n^2}+\dfrac{3}{n^4}}}=\dfrac{1}{2}$.
+		\itemch Đúng. Phương trình lượng giác $\cos x=0$ có một nghiệm là $x=\dfrac{\pi}{2}$.
+		\itemch Sai. Cho cấp số cộng $\left(u_n \right)$ với công sai $d=\dfrac{1}{2}$ và $u_1=0$, thì $u_3=0+2\cdot\dfrac{1}{2}=1$.
+		\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D3H1-2]
+	Biết giới hạn $\lim \dfrac{-3n^3+1}{2n+5}=a$ và $\lim \dfrac{(-1)^n \cdot 5^n}{2^n+5^{2n}}=b$. Khi đó:
+	\choiceTF
+		{\True $\lim \left(-3n^2+\dfrac{1}{n} \right)=a$}
+		{\True $x=b$ là hoành độ giao điểm của đường thẳng $y=2x$ với trục hoành}
+		{\True $\lim \left(\dfrac{1}{2024} \right)^n=b$}
+		{Cho cấp số cộng $\left(u_n \right)$ với công sai $d=\dfrac{1}{2}$ và $u_1=b$, thì $u_3=2$}
+	\loigiai{
+		Ta có $\lim \dfrac{-3n^3+1}{2n+5}=\lim \dfrac{n\left(-3n^2+\dfrac{1}{n} \right)}{n\left(2+\dfrac{5}{n} \right)}=\lim \dfrac{-3n^2+\dfrac{1}{n}}{2+\dfrac{5}{n}}=-\infty$.\\
+	Vì $\heva{&{\lim \left(-3n^2+\dfrac{1}{n} \right)=-\infty} \\
+	&{\lim \left(2+\dfrac{5}{n} \right)=2}
+	}$
+nên $a=-\infty, b=0$. Do đó:
+\begin{itemchoice}
+		\itemch Đúng. $\lim \left(-3n^2+\dfrac{1}{n} \right)=-\infty= a$.
+		\itemch Đúng. Giao điểm của đường thẳng $y=2x$ với trục hoành có tọa độ $(0,0)$.
+		\itemch Đúng. $\lim \left(\dfrac{1}{2024} \right)^n=0=b$.
+		\itemch Sai. Cấp số cộng $\left(u_n \right)$ với công sai $d=\dfrac{1}{2}$ và $u_1=b=0$, thì $u_3=1$.
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D3H1-4]
+	Xét tính đúng sai của các mệnh đề sau:
+	\choiceTF
+		{$\lim (\sqrt{3})^n=-\infty$}
+		{$\lim \pi^n=0$}
+		{\True $\lim \left(n^3+2n^2-4\right)=+\infty$}
+		{\True $\lim \left(-n^4+5n^3-4n\right)=-\infty$}
+	\loigiai{
+		\begin{itemchoice}
+		\itemch Sai. $\lim (\sqrt{3})^n=+\infty ($ do $\sqrt{3} > 1)$.
+		\itemch Sai. $\lim \pi^n=+\infty ($ do $\pi > 1)$.
+		\itemch Đúng. $\lim \left(n^3+2n^2-4\right)=\lim n^3 \cdot \left(1+\dfrac{2}{n}-\dfrac{4}{n^3} \right)$.\\
+		 Vì $\heva{&{\lim n^3=+\infty} \\
+	&{\lim \left(1+\dfrac{2}{n}-\dfrac{4}{n^3} \right)=1> 0}
+	}$ nên $\lim \left(n^3+2n^2-4\right)=+\infty$.
+		\itemch Đúng. $\lim \left(-n^4+5n^3-4n\right)=\lim n^4 \cdot \left(-1+\dfrac{5}{n}-\dfrac{4}{n^3} \right)$.\\
+		 Vì $\heva{&{\lim n^4=+\infty} \\
+	&{\lim \left(-1+\dfrac{5}{n}-\dfrac{4}{n^3} \right)=-1< 0}
+	}$ nên $\lim \left(-n^4+5n^3-4n\right)=-\infty$.
+		\end{itemchoice}
+			}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C3B1-DE1-DS}
+
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE1-KQ]
+\caukq
+%%%==============EX_1============%%%
+\begin{ex}%[1D3H1-2]
+Tìm giới hạn sau: ${\lim n \sqrt{\dfrac{9n^2}{4n^4-n^2}}}$.
+
+	\shortans{$1{,}5$}
+\loigiai{
+	Ta có ${\lim n \sqrt{\dfrac{9n^2}{4n^4-n^2}}=\lim \dfrac{n^2}{n^2} \sqrt{\dfrac{9}{4-\dfrac{1}{n^2}}}=\lim \sqrt{\dfrac{9}{4-\dfrac{1}{n^2}}}=\dfrac{3}{2}}=1{,}5$.
+	}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D3H1-3]
+Tìm giới hạn sau: ${\lim \left(\sqrt{3n^2+n+2}-\sqrt{3n^2+n+1}\right)}$.
+
+	\shortans{$0$}
+\loigiai{
+	${\begin{aligned} & \lim \left(\sqrt{3n^2+n+2}-\sqrt{3n^2+n+1}\right)=\lim \dfrac{3n^2+n+2-\left(3n^2+n+1\right)}{\sqrt{3n^2+n+2}+\sqrt{3n^2+n+1}} \\ &=\lim \dfrac{1}{\sqrt{3n^2+n+2}+\sqrt{3n^2+n+1}}=0\left(\text{do } \lim \left(\sqrt{3n^2+n+2}+\sqrt{3n^2+n+1}\right)=+\infty\right).\end{aligned}}$
+	}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D3V1-2]
+Tìm giới hạn sau: ${\lim \dfrac{1+2+2^2+\cdots+2^n}{1+3+3^2+\cdots+3^n}}$.
+
+	\shortans{$0$}
+\loigiai{
+Xét ${1+2+2^2+\cdots+2^n}$ là tổng của ${n+1}$ số hạng đầu của một cấp số nhân có số hạng đầu ${u_1=1}$, công bội bằng ${q=2}$ nên
+	$$1+2+2^2+\cdots+2^n=\dfrac{u_1\left(1-q^{n+1}\right)}{1-q}=\dfrac{1\left(1-2^{n+1}\right)}{1-2}=2^{n+1}-1.$$
+	Hoàn toàn tương tự, ta có: ${1+3+3^2+\cdots+3^n=\dfrac{1\left(1-3^{n+1}\right)}{1-3}=\dfrac{3^{n+1}-1}{2}}$.\\
+	Khi đó 
+$$
+\begin{aligned}
+\lim \dfrac{1+2+2^2+\cdots+2^n}{1+3+3^2+\cdots+3^n}&=\lim \dfrac{2^{n+1}-1}{\dfrac{3^{n+1}-1}{2}}=\lim 2 \cdot \dfrac{2 \cdot 2^n-1}{3 \cdot 3^n-1}\\
+& =\lim 2 \cdot \dfrac{2 \cdot\left(\dfrac{2}{3}\right)^n-\dfrac{1}{3^n}}{3-\dfrac{1}{3^n}}=2 \cdot \dfrac0{3}=0.
+\end{aligned}
+$$	
+	}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D3H1-5]
+Tìm tổng sau: ${S=\dfrac{1}{3}-\dfrac{1}{9}+\dfrac{1}{27}-\cdots+\dfrac{(-1)^{n+1}}{3^n}+\cdots}$
+
+	\shortans{$0{,}25$}
+\loigiai{
+	Ta thấy ${S}$ là tổng của cấp số nhân lùi vô hạn với số hạng đầu ${u_1=\dfrac{1}{3}}$, công bội ${q=-\dfrac{1}{3}}$.\\
+	 Vì vậy ${S=\dfrac{u_1}{1-q}=\dfrac{\dfrac{1}{3}}{1+\dfrac{1}{3}}=\dfrac{1}{3} \cdot \dfrac{3}{4}=\dfrac{1}{4}}$.
+	}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[1D3V1-5]
+Viết dạng phân số của số thập phân vô hạn tuần hoàn ${0,271414\ldots}$ có dạng $\dfrac{a}{b}$ (với $a,b\in \mathbb{N}^*;\dfrac{a}{b}$ tối giản). Tính giá trị $4a-b$.
+
+	\shortans{$848$}
+\loigiai{
+	Ta có ${0,271414\ldots=0,27+0,0014+0,000014+\cdots}$\\
+	Xét tổng ${0,0014+0,000014+0,00000014+\cdots}$ Đây là tổng của một cấp số nhân lùi vô hạn có số hạng đầu là ${u_1=0,0014}$ và công bội ${q=\dfrac{1}{100}}$.\\
+	Vì vậy $${0,271414\ldots=0,27+\dfrac{u_1}{1-q}=\dfrac{27}{100}+\dfrac{0,0014}{1-\dfrac{1}{100}}=\dfrac{2687}{9900}}.$$
+	Do đó $a=2687, b=9900$ nên $4a-b=848$.
+	}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[1D3H1-3]
+Tìm giới hạn sau: ${\lim 6\left(\sqrt[3]{n^3-2n^2}-n\right)}$.
+
+	\shortans{$-4$}
+\loigiai{
+	$${\begin{aligned}
+		& \lim \left(\sqrt[3]{n^3-2 n^2}-n\right)=\lim \dfrac{n^3-2 n^2-n^3}{\sqrt[3]{\left(n^3-2 n^2\right)^2}+n \sqrt[3]{n^3-2 n^2}+n^2} \\
+		&=\lim \dfrac{-2 n^2}{\sqrt[3]{\left(n^3-2 n^2\right)^2}+n \sqrt[3]{n^3-2 n^2}+n^2}=\lim \dfrac{-2}{\sqrt[3]{\left(1-\dfrac{2}{n}\right)^2}+\sqrt[3]{1-\dfrac{2}{n}}+1}=-\dfrac{2}{3}
+	\end{aligned}
+	}$$
+	Do đó $\lim 6\left(\sqrt[3]{n^3-2n^2}-n\right)=-4$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C3B1-DE1-KQ}
+
+
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE2-LC]
+\caulc
+%%%==============Cau_EX1==============%%%
+\begin{ex}%[1D3N1-1]
+	Trong các khẳng định dưới đây, khẳng định nào \textbf{sai}?
+	\choice
+	{\True $\lim\limits_{n \to +\infty} q^n=0$}
+	{$\lim\limits_{n \to +\infty} \dfrac{1}{n^k}=0$ với $k$ nguyên dương}
+	{$\lim\limits_{n \to +\infty} \dfrac{1}{n}=0$}
+	{Nếu $u_n=c$ ($c$ là hằng số) thì $\lim\limits_{n \to +\infty} u_n=\lim c=c$}
+	\loigiai{
+		Ta có $\lim\limits_{n \to +\infty} q^n=0$ khi $|q|<1$; $\lim\limits_{n \to +\infty} q^n=+\infty$ khi $q>1$.}
+\end{ex}
+%%%==============HetCau_EX1==============%%%
+%%%==============Cau_EX2==============%%%
+\begin{ex}%[1D3N1-2]
+	Giá trị của giới hạn $\lim \dfrac{3{n^3}-2n+1}{4{n^4}+2n+1}$ là
+	\choice
+		{$+\infty$}
+		{\True $0$}
+		{$\dfrac{2}{7}$}
+		{$\dfrac{3}{4}$}
+	\loigiai{
+		Ta có $\lim \dfrac{3{n^3}-2n+1}{4{n^4}+2n+1}=\lim \dfrac{\dfrac{3}{n}-\dfrac{2}{{n^2}}+\dfrac{1}{{n^4}}}{4+\dfrac{2}{{n^3}}+\dfrac{1}{{n^4}}}=\dfrac0{4}=0$.
+		}
+\end{ex}
+%%%==============HetCau_EX2==============%%%
+%%%==============Cau_EX3==============%%%
+\begin{ex}%[1D3H1-2]
+	Cho dãy số $\left({u_n} \right)$ với ${u_n}=\dfrac{an+4}{5n+3}$
+	trong đó $a$ là tham số thực. Để dãy số $\left({u_n} \right)$ có giới hạn bằng $2$, giá trị của $a$ là
+	\choice
+		{\True $a=10$}
+		{$a=8$}
+		{$a=6$}
+		{$a=4$}
+	\loigiai{
+		Ta có $\lim {u_n}=\lim \dfrac{an+4}{5n+3}=\lim \dfrac{a+\dfrac{4}{n}}{5+\dfrac{3}{n}}=\dfrac{a}{5}$. Khi đó
+		$\lim {u_n}=2\Leftrightarrow \dfrac{a}{5}=2\Leftrightarrow a=10$.
+		}
+\end{ex}
+%%%==============HetCau_EX3==============%%%
+%%%==============Cau_EX4==============%%%
+\begin{ex}%[1D3V1-5]
+Biểu diễn số thập phân vô hạn tuần hoàn $0,(3)$ dưới dạng phân số tối giản dạng $\dfrac{a}{b}$ với $a,b\in \mathbb{N}^*$. Tính $a+b$.
+\choice
+		{$7$}
+		{$6$}
+		{$5$}
+		{\True $4$}
+\loigiai{
+	Ta có $0,(3)=\dfrac{3}{10}+\dfrac{3}{{{10}^2}}+\cdots+\dfrac{3}{{{10}^n}}+\cdots=\dfrac{\dfrac{3}{10}}{1-\dfrac{1}{10}}=\dfrac{1}{3}$.\\
+	Do đó $a=1, b=3$ nên $a+b=4$.
+	}
+\end{ex}
+%%%==============HetCau_EX4==============%%%
+%%%==============Cau_EX5==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt[3]{{n^3}-2{n^2}}-n \right)$ bằng
+	\choice
+		{$\dfrac{1}{3}$}
+		{\True $-\dfrac{2}{3}$}
+		{$0$}
+		{$1$}
+	\loigiai{
+		Sử dụng phương pháp nhân lượng liên hợp:
+		$$
+\begin{aligned}
+\lim\left(\sqrt[3]{{n^3}-2{n^2}}-n\right)&=\lim\dfrac{-2n^2}{\sqrt[3]{\left({n^3}-2{n^2}\right)^2}+n \sqrt[3]{{n^3}-2{n^2}}+n^2 }\\
+&=\lim\dfrac{-2}{\sqrt[3]{\left(1-\dfrac{2}{n} \right)^2 }+\sqrt[3]{1-\dfrac{2}{n}}+1}=-\dfrac{2}{3}.
+\end{aligned}		
+		$$
+		Giải nhanh:
+		\[\sqrt[3]{{n^3}-2{n^2}}-n=\dfrac{-2{n^2}}{\sqrt[3]{{{\left({n^3}-2{n^2} \right)}^2}}+n.\sqrt[3]{{n^3}-2{n^2}}+{n^2}}\sim \dfrac{-2{n^2}}{\sqrt[3]{{n^6}}+n.\sqrt[3]{{n^3}}+{n^2}}=-\dfrac{2}{3}.\]
+		}
+\end{ex}
+%%%==============HetCau_EX5==============%%%
+%%%==============Cau_EX6==============%%%
+\begin{ex}%[1D3H1-3]
+	Có bao nhiêu giá trị của $a$ để $\lim \left(\sqrt{{n^2}+{a^2}n}-\sqrt{{n^2}+\left(a+2\right)n+1} \right)=0$.
+	\choice
+		{$0$}
+		{\True $2$}
+		{$1$}
+		{$3$}
+	\loigiai{
+	Vì $\sqrt{{n^2}+{a^2}n}-\sqrt{{n^2}+\left(a+2\right)n+1}\sim \sqrt{{n^2}}-\sqrt{{n^2}}=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+	$$\begin{aligned}
+	&\lim \left(\sqrt{{n^2}+{a^2}n}-\sqrt{{n^2}+\left(a+2\right)n+1} \right)=\lim \dfrac{\left({a^2}-a-2\right)n-1}{\sqrt{{n^2}+n}+\sqrt{{n^2}+1}}\\
+	&=\lim \dfrac{{a^2}-a-2-\dfrac{1}{n}}{\sqrt{1+\dfrac{1}{n}}+\sqrt{1+\dfrac{1}{{n^2}}}}=\dfrac{{a^2}-a-2}{2}=0\Leftrightarrow \hoac{& a=-1\\
+	& a=2\\
+	}.
+	\end{aligned}$$
+		}
+\end{ex}
+%%%==============HetCau_EX6==============%%%
+%%%==============Cau_EX7==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt{{n^2}+2n-1}-\sqrt{2{n^2}+n} \right)$ là
+	\choice
+		{$-1$}
+		{$1-\sqrt{2}$}
+		{\True $-\infty$}
+		{$+\infty$}
+	\loigiai{
+Ta có $\lim \left(\sqrt{{n^2}+2n-1}-\sqrt{2{n^2}+n} \right)=\lim n.\left(\sqrt{1+\dfrac{2}{n}-\dfrac{1}{{n^2}}}-\sqrt{2+\dfrac{1}{n}} \right)=-\infty$ vì
+		$\lim n=+\infty, \lim \left(\sqrt{1+\dfrac{2}{n}-\dfrac{1}{{n^2}}}-\sqrt{2+\dfrac{1}{n}} \right)=1-\sqrt{2} < 0$.\\
+Giải nhanh: $\sqrt{{n^2}+2n-1}-\sqrt{2{n^2}+n}\sim \sqrt{{n^2}}-\sqrt{2{n^2}}=\left(1-\sqrt{2} \right)n\xrightarrow[{}]{}-\infty$.
+		}
+\end{ex}
+%%%==============HetCau_EX7==============%%%
+%%%==============Cau_EX8==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \left(\sqrt{{n^2}-2n+3}-n \right)$ là
+	\choice
+		{\True $-1$}
+		{$0$}
+		{$1$}
+		{$+\infty$}
+	\loigiai{
+Vì $\sqrt{{n^2}-2n+3}-n\sim \sqrt{{n^2}}-n=0$ nên ta sử dụng phương pháp nhân lượng liên hợp:
+		$$\lim \left(\sqrt{{n^2}-2n+3}-n \right)=\lim \dfrac{-2n+3}{\sqrt{{n^2}-2n+3}+n}=\lim \dfrac{-2+\dfrac{3}{n}}{\sqrt{1-\dfrac{2}{n}+\dfrac{3}{{n^2}}}+1}=-1.$$
+		Giải nhanh: $\sqrt{{n^2}-2n+3}-n=\dfrac{-2n+3}{\sqrt{{n^2}-2n+3}+n}\sim \dfrac{-2n}{\sqrt{{n^2}}+n}=-1$.
+		}
+\end{ex}
+%%%==============HetCau_EX8==============%%%
+%%%==============Cau_EX9==============%%%
+\begin{ex}%[1D3H1-3]
+	Giá trị của giới hạn $\lim \dfrac{\sqrt{9{n^2}-n}-\sqrt{n+2}}{3n-2}$ là
+	\choice
+		{\True $1$}
+		{$0$}
+		{$3$}
+		{$+\infty$}
+	\loigiai{
+	Vì $\sqrt{9{n^2}-n}-\sqrt{n+2}\sim \sqrt{9{n^2}}=3n \ne 0$ nên chia cả tử và mẫu với $n$ ta có
+	$$\lim \dfrac{\sqrt{9{n^2}-n}-\sqrt{n+2}}{3n-2}=\lim \dfrac{\sqrt{9-\dfrac{1}{n}}-\sqrt{\dfrac{1}{n}+\dfrac{2}{{n^2}}}}{3-\dfrac{2}{n}}=\dfrac{\sqrt{9}}{3}=1.$$ Giải nhanh: $\dfrac{\sqrt{9{n^2}-n}-\sqrt{n+2}}{3n-2}\sim \dfrac{\sqrt{9{n^2}}}{3n}=1$.
+		}
+\end{ex}
+%%%==============HetCau_EX9==============%%%
+%%%==============Cau_EX10==============%%%
+\begin{ex}%[1D3H1-2]
+	Kết quả của giới hạn $\lim \dfrac{{2^{n+1}}+3n+10}{3{n^2}-n+2}$
+	là
+	\choice
+		{\True $+\infty$}
+		{$\dfrac{2}{3}$}
+		{$\dfrac{3}{2}$}
+		{$-\infty$}
+	\loigiai{
+		Ta có
+		\[{2^n}=\sum\limits_{k=0}^n{C_n^k}\Rightarrow {2^n}\ge C_n^3=\dfrac{n\left(n-1\right)\left(n-2\right)}{6}\sim \dfrac{{n^3}}{6}\Rightarrow \left\{\begin{aligned}
+			& \dfrac{n}{{2^n}}\to 0\\ & \dfrac{{2^n}}{{n^2}}\to+\infty \\ \end{aligned} \right..\]
+		Khi đó: $\lim \dfrac{{2^{n+1}}+3n+10}{3{n^2}-n+2}=\lim \dfrac{{2^n}}{{n^2}}\cdot\dfrac{2+3\cdot\dfrac{n}{{2^n}}+10\cdot{{\left(\dfrac{1}{2} \right)}^n}}{3-\dfrac{1}{n}+\dfrac{2}{{n^2}}}=+\infty$,\\
+		vì $\left\{\begin{aligned}
+			& \lim \dfrac{{2^n}}{{n^2}}=+\infty \\ & \lim \dfrac{2+3\cdot \dfrac{n}{{2^n}}+10\cdot{{\left(\dfrac{1}{2} \right)}^n}}{3-\dfrac{1}{n}+\dfrac{2}{{n^2}}}=\dfrac{2}{3} > 0\\ \end{aligned} \right.$.
+		}
+\end{ex}
+%%%==============HetCau_EX10==============%%%
+%%%==============Cau_EX11==============%%%
+\begin{ex}%[1D3H1-2]
+	Dãy số $(u_n)$ với $u_n=\dfrac{\sqrt{2n^3+n}+3n-1}{\sqrt{6n^3+2n^2}+n}$ có giới hạn bằng $\sqrt{\dfrac{a}{b}}$, $a>0$, $b>0$ và $\text{ƯCLN}(a,b=1)$. Hãy tính giá trị của $a^2+b^2$.
+	\choice
+	{$5$}
+	{$40$}
+	{$9$}
+	{\True $10$}
+	\loigiai{
+		Ta có $$\lim u_n=\lim \dfrac{\sqrt{2n^3+n}+3n-1}{\sqrt{6n^3+2n^2}+n}=\lim \dfrac{\sqrt{2+\dfrac{1}{n^2}}+\dfrac{3}{\sqrt{n}}-\dfrac{1}{n\sqrt{n}}}{\sqrt{6+\dfrac{2}{n}}+\dfrac{1}{\sqrt{n}}}=\sqrt{\dfrac{1}{3}}.$$
+		Suy ra $a=1$, $b=3 \Rightarrow a^2+b^2=10$.}
+\end{ex}
+%%%==============HetCau_EX11==============%%%
+%%%==============Cau_EX12==============%%%
+\begin{ex}%[1D3V1-2]
+	Tìm tất cả các giá trị thực của tham số $b$ để biểu thức $A=\lim\limits\dfrac{9-b^2n^2}{11n^2+3}<0$.
+	\choice
+	{$b\le 0$}
+	{\True $b\ne 0$}
+	{$b<0$}
+	{$b>0$}
+	\loigiai{Ta có $A=\lim\limits\dfrac{9-b^2n^2}{11n^2+3}=\lim\limits\dfrac{n^2\left(\dfrac{9}{n^2}-b^2\right)}{n^2\left(11+\dfrac{3}{n^2}\right)}=\lim\limits\dfrac{\dfrac{9}{n^2}-b^2}{11+\dfrac{3}{n^2}}=-\dfrac{b^2}{11}$.\\
+		Yêu cầu bài toán xảy ra khi $-\dfrac{b^2}{11}<0\Leftrightarrow b^2>0\Leftrightarrow b\ne0$.}
+\end{ex}
+%%%==============HetCau_EX12==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C3B1-DE2-LC}
+
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE2-DS]
+\cauds
+%%%==============EX_1============%%%
+\begin{ex}%[1D3H1-2]
+	Biết giới hạn $\lim \dfrac{5n^3-2n+1}{n-2n^3}=a$. Khi đó:
+	\choiceTF
+		{\True Giá trị $a$ nhỏ hơn $0$}
+		{\True $x=a$ là trục đối xứng của parabol $(P)\colon y=x^2+5x+2$}
+		{\True Phương trình lượng giác $\sin x=a$ vô nghiệm}
+		{Cho cấp số cộng $\left(u_n \right)$ với công sai $d=3$ và $u_1=a$, thì $u_3=6$}
+	\loigiai{
+		\begin{itemchoice}
+		\itemch Đúng. Ta có $\lim \dfrac{5n^3-2n+1}{n-2n^3}=\lim \dfrac{n^3 \left(5-\dfrac{2}{n^2}+\dfrac{1}{n^3} \right)}{n^3 \left(\dfrac{1}{n^2}-2\right)}=\lim \dfrac{5-\dfrac{2}{n^2}+\dfrac{1}{n^3}}{\dfrac{1}{n^2}-2}=-\dfrac{5}{2}$.
+		\itemch Đúng. Parabol $(P)\colon y=x^2+5x+2$ nhận $x=-\dfrac{5}{2}$ làm trục đối xứng.
+		\itemch Đúng. Phương trình lượng giác $\sin x=-\dfrac{5}{2}$ vô nghiệm.
+		\itemch Sai. Cho cấp số cộng $\left(u_n \right)$ với công sai $d=3$ và $u_1=a$, thì $$u_3=u_1+\left(3-1\right)d=-\dfrac{5}{2}+2\cdot 3=\dfrac{7}{2}.$$
+		\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D3H1-2]
+	Biết giới hạn $\lim \left(-2n^3-5n+9\right)=a$ và $\lim \dfrac{4^n+3}{1+3\cdot 4^{n+1}}=b$. Khi đó:
+	\choiceTF
+		{Tích $a\cdot b=3$}
+		{\True Hàm số $y=\sqrt{1-x}$ có tập xác định là $\mathscr{D}=\left(a;1\right]$}
+		{\True Giá trị $b$ là số lớn hơn $0$}
+		{Phương trình lượng giác $\cos x=b$ vô nghiệm}
+	\loigiai{
+		Ta có $\lim \left(-2n^3-5n+9\right)=\lim n^3 \left(-2-\dfrac{5}{n^2}+\dfrac{9}{n^3} \right)=-\infty$, do $\left\{\begin{array}{l} {\lim n^3=+\infty} \\ {\lim \left(-2-\dfrac{5}{n^2}+\dfrac{9}{n^3} \right)=-2} \end{array}\right.$
+		và \[\lim \dfrac{4^n+3}{1+3\cdot 4^{n+1}}=\lim \dfrac{4^n+3}{1+12\cdot 4^n}=\lim \dfrac{4^n \left(1+\dfrac{3}{4^n} \right)}{4^n \left(\dfrac{1}{4^n}+12\right)}=\lim \dfrac{1+\dfrac{3}{4^n}}{\dfrac{1}{4^n}+12}=\dfrac{1}{12}
+		\]
+	Do đó $a=-\infty, b=\dfrac{1}{12}$
+		\begin{itemchoice}
+		\itemch Sai. Tích $a\cdot b=-\infty$.
+		\itemch Đúng. Hàm số $y=\sqrt{1-x}$ có tập xác định là $\mathscr{D}=\left(-\infty;1\right]$.
+		\itemch Đúng. Giá trị $\dfrac{1}{12}$ là số lớn hơn $0$.
+		\itemch Sai. Phương trình lượng giác $\cos x=\dfrac{1}{12}$ có nghiệm.
+		\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D3V1-5]
+	Viết được các số thập phân vô hạn tuần hoàn dưới dạng phân số tối giản, ta được: $0{,}212121\ldots=\dfrac{a}{b}$; $4{,}333\ldots=\dfrac{c}{d}$. Khi đó:
+	\choiceTF
+		{\True $a+b=40$}
+		{Ba số $a$; $b$; $58$ tạo thành một cấp số cộng}
+		{$c+d=15$}
+		{\True $\lim c=13$}
+	\loigiai{
+		Ta có $0{,}212121\ldots=0{,}21+0{,}0021+0{,}000021+\cdots$\\
+		Đây là tổng của cấp số nhân lùi vô hạn với số hạng đầu $0,21$ và công bội $\dfrac{1}{100}$. Vì vậy $0{,}212121\ldots=0{,}21+0{,}0021+0{,}000021+\cdots=\dfrac{0{,}21}{1-\dfrac{1}{100}}=\dfrac{7}{33}$.\\
+		Do đó $a=7, b=33$.\\
+		Ta có $0{,}333\ldots=0{,}3+0{,}03+0{,}003+\cdots$\\
+		Đây là tổng của cấp số nhân lùi vô hạn với số hạng đầu là $0,3$ và công bội là $\dfrac{1}{10}$.\\
+		Vì vậy $4{,}333\ldots=4+0{,}3+0{,}03+0{,}003+\cdots=4+\dfrac{0{,}3}{1-\dfrac{1}{10}}=\dfrac{13}{3}$.\\
+		Do đó $c=13, d=3$.
+		\begin{itemchoice}
+		\itemch Đúng. $a+b=7+33=40$.
+		\itemch Sai. Ba số $a$; $b$; $58$ không tạo thành một cấp số cộng vì $a+58 \ne 2b$.
+		\itemch Sai. $c+d=16\ne15$.
+		\itemch Đúng. $\lim c=13$ vì $c=13$.
+		\end{itemchoice}
+		}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D3H1-2]
+	Cho $u_n=\dfrac{7^n+2^{2n-1}+3^{n+1}}{7^{n+1}+5^{n-1}}$. Biết $\lim u_n=\dfrac{a}{b}$ (với $a,b\in \mathbb{Z};\dfrac{a}{b}$ tối giản). Khi đó:
+	\choiceTF
+		{\True $a+b=8$}
+		{$a-b=-7$}
+		{\True Bộ ba số $a$; $b$; $13$ tạo thành một cấp số cộng có công sai $d=7$}
+		{\True Bộ ba số $a$; $b$; $49$ tạo thành một cấp số nhân có công bội $q=7$}
+	\loigiai{
+		Ta có $\lim u_n=\lim \dfrac{7^n+2^{2n-1}+3^{n+1}}{7^{n+1}+5^{n-1}}=\lim \dfrac{1+\dfrac{1}{2} \left(\dfrac{4}{7} \right)^n+3\left(\dfrac{3}{7} \right)^n}{7+\dfrac{1}{5} \left(\dfrac{5}{7} \right)^n}=\dfrac{1}{7}$.\\
+		Do đó suy ra $a=1,b=7$.
+		\begin{itemchoice}
+		\itemch Đúng. $a+b=8$.
+		\itemch Sai. $a-b=-6.$
+		\itemch Đúng. Bộ ba số $a$; $b$; $13$ tạo thành một cấp số cộng có công sai $d=7$ vì $a+13=14=2b$.
+		\itemch Đúng. Bộ ba số $a$; $b$; $49$ tạo thành một cấp số nhân có công bội $q=7$ vì $a\cdot 49 = b^2$.
+		\end{itemchoice}
+		}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C3B1-DE2-DS}
+
+\Opensolutionfile{ans}[ans/ans-11-C3B1-DE2-KQ]
+\caukq
+%%%==============EX_1============%%%
+\begin{ex}%[1D3H1-3]
+Tìm giới hạn sau: ${\lim \left(\sqrt{n^2+2n-2}-n\right)}$.
+
+	\shortans{$1$}
+\loigiai{
+$$\begin{aligned}
+&\lim \left(\sqrt{n^2+2n-2}-n\right)=\lim \dfrac{n^2+2n-2-n^2}{\sqrt{n^2+2n-2}+n}=\lim \dfrac{2n-2}{n \sqrt{1+\dfrac{2}{n}-\dfrac{2}{n^2}}+n}\\
+&=\lim \dfrac{n\left(2-\dfrac{2}{n}\right)}{n\left(\sqrt{1+\dfrac{2}{n}-\dfrac{2}{n^2}}+1\right)}=\lim \dfrac{2-\dfrac{2}{n}}{\sqrt{1+\dfrac{2}{n}-\dfrac{2}{n^2}}+1}=\dfrac{2}{\sqrt{1}+1}=1.
+\end{aligned}
+$$
+	}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D3H1-2]
+Tìm giới hạn sau: ${\lim \dfrac{1+2+\cdots+n}{n^2+3n}}$.
+
+	\shortans{$0{,}5$}
+\loigiai{
+${1+2+\cdots+n}$ là tổng của ${n}$ số hạng đầu của một cấp số cộng có số hạng đầu ${u_1=1}$ và công sai ${d=1}$. Vì vậy ${1+2+\cdots+n=\dfrac{(1+n) n}{2}}$.\\	
+	Ta có ${\lim \dfrac{1+2+\cdots+n}{n^2+3n}=\lim \dfrac{n(n+1)}{2\left(n^2+3n\right)}=\lim \dfrac{n^2\left(1+\dfrac{1}{n}\right)}{2n^2\left(1+\dfrac{3}{n}\right)}=\lim \dfrac{1+\dfrac{1}{n}}{2\left(1+\dfrac{3}{n}\right)}=\dfrac{1}{2}}$.
+	}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D3H1-2]
+Tìm giới hạn sau: ${\lim \dfrac{n \cdot \sqrt{1+3+5+\cdots+(2n-1)}}{2n^2+n+1}}$.
+
+	\shortans{$0{,}5$}
+\loigiai{
+	Nhận xét: ${1+3+5+\cdots+(2n-1)}$ là tổng của ${n}$ số hạng đầu tiên của một cấp số cộng có số hạng đầu là ${u_1=1}$ và công sai là ${d=2}$. Vì vậy, ta có
+	$$1+3+5+\cdots+(2 n-1)=\dfrac{\left(u_1+u_n\right) n}{2}=\dfrac{(1+2 n-1) n}{2}=n^2.
+	$$
+	Vì vậy
+	$$
+	\begin{aligned}
+	&\lim \dfrac{n \sqrt{1+3+5+\cdots+(2n-1)}}{2 n^2+n+1}=\lim \dfrac{n \sqrt{n^2}}{2 n^2+n+1}=\lim \dfrac{n^2}{2 n^2+n+1}\\
+	&=\lim \dfrac{n^2}{n^2\left(2+\dfrac{1}{n}+\dfrac{1}{n^2}\right)}=\lim \dfrac{1}{2+\dfrac{1}{n}+\dfrac{1}{n^2}}=\dfrac{1}{2}.
+	\end{aligned}
+	$$
+	}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[1D3V1-1]
+Tìm giới hạn sau: ${\lim \left[\dfrac{1}{1\cdot 3}+\dfrac{1}{3\cdot 5}+\dfrac{1}{5\cdot 7}+\cdots+\dfrac{1}{(2n-1)\cdot(2n+1)}\right]}$.
+
+	\shortans{$0{,}5$}
+\loigiai{
+	${\begin{aligned}
+		& \lim \left[\dfrac{1}{1 \cdot 3}+\dfrac{1}{3 \cdot 5}+\dfrac{1}{5 \cdot 7}+\cdots+\dfrac{1}{(2 n-1)(2 n+1)}\right] \\
+		&=\lim \dfrac{1}{2}\left(1-\dfrac{1}{3}+\dfrac{1}{3}-\dfrac{1}{5}+\cdots+\dfrac{1}{2 n-1}-\dfrac{1}{2 n+1}\right)=\lim \dfrac{1}{2}\left(1-\dfrac{1}{2 n+1}\right)=\dfrac{1}{2}.
+	\end{aligned}}$
+	}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[1D3V1-5]
+Viết dạng phân số của số thập phân vô hạn tuần hoàn ${0{,}511111\ldots}$ có dạng $\dfrac{a}{b}$ (với $a,b\in \mathbb{N}^*;\dfrac{a}{b}$ tối giản). Tính giá trị $a+b$.
+
+	\shortans{$68$}
+\loigiai{
+	Ta có ${0{,}51111\ldots=0{,}5+0{,}01+0{,}001+0{,}0001+\cdots}$\\
+	Xét tổng ${0{,}01+0{,}001+0{,}0001+\cdots}$ Đây là tổng của cấp số nhân lùi vô hạn với số hạng đầu là ${u_1=0{,}01}$ và công bội ${q=\dfrac{1}{10}}$. Vì vậy $$0{,}51111\ldots=0{,}5+0{,}01+0{,}001+0{,}0001+\cdots=0{,}5+\dfrac{u_1}{1-q}=0{,}5+\dfrac{0{,}01}{1-\dfrac{1}{10}}=\dfrac{23}{45}.
+	$$
+	Do đó $a=23, b=45$ nên $a+b=68$.
+	}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[1D3H1-2]
+Tính giới hạn sau ${\lim \left(1+3n-\sqrt{9n^2-n+7}\right)}$ (làm tròn đến hàng phần trăm).
+	\shortans{$1{,}17$}
+\loigiai{
+	$\begin{aligned}
+		& \lim \left(1+3n-\sqrt{9{{n}^2}-n+7} \right)  =\lim \left(1+\dfrac{9{{n}^2}-9{{n}^2}+n-7}{3n+\sqrt{9{{n}^2}-n+7}} \right)\\
+		&=\lim \left(1+\dfrac{n-7}{3n+\sqrt{9{{n}^2}-n+7}} \right)=\lim \left(1+\dfrac{1-\dfrac{7}{n}}{3+\sqrt{9-\dfrac{1}{n}+\dfrac{7}{{{n}^2}}}} \right)=\dfrac{7}{6}.  \end{aligned}$
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C3B1-DE2-KQ}
+
+
+
+
+
+
+
+

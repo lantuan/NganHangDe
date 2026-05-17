@@ -1,0 +1,1447 @@
+\section{Đường thẳng vuông góc với mặt phẳng}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-B1]
+\begin{ex}%[1H8N2-1]
+	Cho điểm $M$ và mặt phẳng $(\alpha)$ có bao nhiêu đường thẳng đi qua điểm $M$ và vuông góc với mặt phẳng $(\alpha)$?
+	\choice
+	{$2$}
+	{Vô số}
+	{$0$}
+	{\True $1$}
+	\loigiai{
+		Theo tính chất qua một điểm cho trước chỉ có duy nhất một đường thẳng vuông góc với một mặt phẳng cho trước.
+	}
+\end{ex}
+\begin{ex}%[1H8N2-2]
+	Cho hình chóp tam giác đều $S. A B C$. Gọi $O$ là trọng tâm của $\triangle A B C$. Đường thẳng $d \perp S O$ $(d \not \subset(A B C))$. Khi đó
+	\choice
+	{\True $d \parallel(A B C)$}
+	{$d \perp(S B C)$}
+	{$S O \parallel A C$}
+	{$S A \parallel O C$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{4}
+				\def\h{4}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(A)!0.5!(B)$) coordinate (M)
+				($(C)!2/3!(M)$) coordinate (O)
+				($(O)+(90:\h)$) coordinate (S)
+				($(S)!2/5!(O)$) coordinate (N)
+				($(N)+(180:\h/8)$) coordinate (P)
+				++(180:\a/4) coordinate (K);
+				\draw[thick] (C)--(A) (C)--(B)
+				(A)--(S)	(B)--(S)	(C)--(S) (P)--(K) node[above]{d};
+				\draw[dashed,thick] (A)--(B) (S)--(O) (C)--(M) (N)--(P);
+				\foreach \x / \goc in {A/180,B/0,C/-135,O/0,S/90}
+				\fill (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+			\end{tikzpicture}
+		\end{center}
+		Ta có: $\heva{&S O \perp(A B C) \\ &d \perp S O} \Rightarrow d \parallel(A B C)$.
+	}
+\end{ex}
+\begin{ex}%[1H8N2-3]
+	Cho hình chóp $S. A B C$ có $S A$ vuông góc với mặt đáy $(A B C)$. Góc tạo bởi giữa hai đường thẳng nào sau đây bằng $90^{\circ}$?
+	\choice
+	{$S A, S B$}
+	{$S B, S C$}
+	{\True $S A, A B$}
+	{$S A, S C$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} %Khai báo cạnh
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(A)+(90:\h)$) coordinate (S)
+				($(A)!0.5!(B)$) coordinate (M);
+				\draw[thick] 	(A)--(C)--(B)
+				(A)--(S)	(B)--(S)	(C)--(S);
+				\draw[dashed,thick] 	(A)--(B);
+				\foreach \x /\goc in {A/180,B/0,C/-135,S/90}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{&S B \perp(A B C) \\&A B \subset(A B C)} \Rightarrow S B \perp A B \Rightarrow(S B, A B)=90^{\circ}$.
+		}
+\end{ex}
+\begin{ex}%[1H8N2-1]
+	Cho điểm $M$ và đường thẳng $a$ có bao nhiêu mặt phẳng đi qua điểm $M$ và vuông góc với đường thẳng $a$?
+	\choice
+	{$2$}
+	{Vô số}
+	{$0$}
+	{\True $1$}
+	\loigiai{
+		Theo tính chất qua một điểm cho trước chỉ có duy nhất một mặt phẳng vuông góc với đường thẳng cho trước.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C$ có $S A$ vuông góc với mặt đáy $(A B C)$. Mệnh đề nào sau đây là đúng?
+	\choice
+	{$S A \perp S B$}
+	{$S A \perp S C$}
+	{\True $S A \perp A B$}
+	{$S B \perp S C$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} %Khai báo cạnh
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(A)+(90:\h)$) coordinate (S)
+				($(A)!0.5!(B)$) coordinate (M);
+				\draw[thick] 	(A)--(C)--(B)
+				(A)--(S)	(B)--(S)	(C)--(S);
+				\draw[dashed,thick] 	(A)--(B);
+				\foreach \x /\goc in {A/180,B/0,C/-135,S/90}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{
+			&S A \perp(A B C) \\
+			&A B \subset(A B C)\\
+		} \Rightarrow S A \perp A B$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-3]
+	Cho hình chóp $S. A B C D$ đáy $A B C D$ là hình bình hành, $S A$ vuông góc với mặt phẳng $(A B C D)$. Góc tạo bởi giữa hai đường thẳng nào sau đây bằng $90^{\circ}$?
+	\choice
+	{$S A, S B$}
+	{$S A, S C$}
+	{\True $S A, B D$}
+	{$S B, A D$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S) (A)--(C) (B)--(D);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+			\end{tikzpicture}
+		\end{center}
+		$
+	\heva{
+				&S A \perp(A B C D) \\
+				&B D \subset(A B C D)\\
+	} \Rightarrow S A \perp B D \Rightarrow(S A, B D)=90^{\circ}.
+		$
+	}
+\end{ex}
+\begin{ex}%[1H8H2-1]
+	Cho tam giác $A B C$ có bao nhiêu mặt phẳng đi qua điểm $A$ và vuông góc với đường thẳng $A B$?
+	\choice
+	{$2$}
+	{Vô số}
+	{$0$}
+	{\True $1$}
+	\loigiai{
+		Theo tính chất qua một điểm cho trước chỉ có duy nhất một mặt phẳng vuông góc với đường thẳng cho trước.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-1]
+	Cho hình bình hành $A B C D$ tâm $O$ có bao nhiêu đường thẳng đi qua điểm $O$ và vuông góc với mặt phẳng $(A B C D)$?
+	\choice
+	{$2$}
+	{\True $1$}
+	{Vô số}
+	{$0$}
+	\loigiai{
+		Theo tính chất qua một điểm cho trước chỉ có duy nhất một đường thẳng vuông góc với một mặt phẳng cho trước.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S.A B C D$ có đáy $A B C D$ là hình chữ nhật và $S B \perp B C$. Mệnh đề nào sau đây là đúng?
+	\choice
+	{$S A \perp(A B C D)$}
+	{$S B \perp(A B C D)$}
+	{$B C \perp(S A C)$}
+	{\True $B C \perp(S A B)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (B)
+				++(0:\a) coordinate (C)
+				++(-130:\a/2) coordinate (D)
+				($(B)+(D)-(C)$) coordinate (A)
+				($(B)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(A)--(B)--(C)	(B)--(S);
+				\draw[thick] 			(A)-- (D)--(C)
+				(A)--(S)	(D)--(S)	(C)--(S);
+				\foreach \x/\g in {B/135,A/-135,D/-45,C/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=C--B--S};
+				\draw pic[draw,angle radius=2mm]{right angle=C--B--A};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{
+			&B C \perp S B, B C \perp A B \\
+			&S B \cap A B=\{B\} \\
+			&S B, A B \subset(S A B)
+		} \Rightarrow B C \perp(S A B)$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-1]
+	Cho hai đường thẳng phân biệt $a, b$ và mặt phẳng $(P)$, trong đó $a\perp(P)$. Mệnh đề nào sau đây là \textbf{sai}?
+	\choice
+	{Nếu $b \perp(P)$ thì $b \parallel a$}
+	{Nếu $b \parallel (P)$ thì $b \perp a$}
+	{Nếu $b \parallel a$ thì $b\perp(P)$}
+	{\True Nếu $b\perp$ thì $b \parallel(P)$}
+	\loigiai{
+		D sai vì đường thẳng $b$ có thể nằm trong mặt phẳng $(P)$.\\
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C$ có $S A \perp(A B C)$ và đáy $A B C$ là tam giác vuông tại $B$. Gọi $I$, $J$ lần lượt là trung điểm của $S C$, $S B$. Khẳng định nào sau đây đúng?
+	\choice
+	{$A B \perp(S B C)$}
+	{$I J \perp(S A C)$}
+	{\True $I J \perp(S A B)$}
+	{Tam giác $S C B$ vuông ở $C$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.5!(C)$) coordinate (I)
+				($(S)!0.5!(B)$) coordinate (J);
+				\draw[thick] 	(A)--(C)--(B)
+				(A)--(S)	(B)--(S)	(C)--(S) (I)--(J);
+				\draw[dashed,thick] 	(A)--(B);
+				\foreach \x /\goc in {A/180,B/0,C/-135,S/90, I/180,J/45}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Ta có: $\heva{&B C \perp A B\,\,(\text {do } \triangle A B C \text { vuông}) \\ &S A \perp B C \,\,(\text{Do } S A \perp(A B C))} \Rightarrow B C \perp(S A B)$.\\
+		Mà $I J \parallel B C$ (Vì $I J$ là đường trung bình của $\triangle S B C$).\\
+		Suy ra: $I J \perp(S A B)$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho tứ diện $O A B C$ có $O A, O B, O C$ đôi một vuông góc với nhau. Kẻ $O H$ vuông góc với mặt phẳng $(A B C)$ tại $H$. Khẳng định nào sau đây là \textbf{sai}?
+	\choice
+	{$B C \perp(A H O)$}
+	{$O A \perp(O B C)$}
+	{$A H \perp B C$}
+	{\True $A H \perp(O B C)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3.5}
+				\def\h{3}
+				\path 	(0:0) coordinate (O)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(O)+(90:\h)$) coordinate (A)
+				($(B)!0.5!(C)$) coordinate (I)
+				($(A)!0.45!(I)$) coordinate (H);
+				\draw[thick] 	(O)--(C)--(B) (A)--(I) 
+				(B)--(A)	(C)--(A)--(O);
+				\draw[dashed,thick] 	(B)--(O) (O)--(H) (O)--(I);
+				\foreach \x /\goc in {O/180,B/0,C/-135,A/90, I/-10, H/-10}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=A--O--B};
+				\draw pic[draw,angle radius=2mm]{right angle=C--O--B};
+				\draw pic[draw,angle radius=2mm]{right angle=A--O--C};
+				\draw pic[draw,angle radius=2mm]{right angle=O--H--I};
+				\draw pic[draw,angle radius=2mm]{right angle=O--I--C};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemize}
+			\item Theo đề bài ta có $\heva{&A \perp O B \\ &O A \perp O C} \Rightarrow O A \perp(O B C) \Rightarrow O A \perp B C \hfill{(1)}$
+			\\Vậy $O A \perp(O B C)$\\
+			Ta lại có $O H \perp(A B C) \Rightarrow O H \perp B C \hfill{(2)}$.
+			\item Từ $(1)$ và $(2)$ suy ra $B C \perp(A H O) \Rightarrow A H \perp B C$.\\ Vậy $B C \perp(A H O)$ và $A H \perp B C$.
+			\item Giả sử $A H \perp(O B C)$ mà $O A \perp(O B C)$ suy ra $A ; H ; O$ thẳng hàng. Điều vô lý.
+		\end{itemize}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1}
+\cauds %4cau
+\Opensolutionfile{ans}[ans/ans-0-B1-DS]
+%ex_1
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có đáy là hình chữ nhật và $S A$ vuông góc với mặt phẳng đáy. Gọi $H, K$ theo thứ tự là hình chiếu của $A$ trên các cạnh $S B, S D$. Khi đó:
+	\choiceTF
+	{\True Tam giác $S B C$ vuông}
+	{\True Tam giác $S C D$ vuông}
+	{\True $S C \perp(A H K)$}
+	{\True $H K \perp S C$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O)
+				($(S)!(A)!(B)$) coordinate (H)
+				($(S)!(A)!(D)$) coordinate (K);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S) (H)--(A)--(K)--(H);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/180,K/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=3mm]{right angle=D--A--S};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có: $\heva{&B C \perp A B \\ &B C \perp S A \,\,(\text {do } S A \perp(A B C D))} \Rightarrow B C \perp(S A B)$\\
+			Vì $\heva{&B C \perp(S A B) \\ &S B \subset(S A B)} \Rightarrow B C \perp S B$ hay $\triangle S B C$ vuông tại $B$.
+			\itemch Đúng. Ta có: $\heva{&C D \perp A D \\ &C D \perp S A \,\,(\text {do } S A \perp(A B C D))} \Rightarrow C D \perp(S A D)$.\\Vì $\heva{&C D \perp(S A D) \\ &S D \subset(S A D)} \Rightarrow C D \perp S D$ hay $\triangle S C D$ vuông tai $D$.
+			\itemch Đúng. Ta có: $\heva{&A H \perp S B \\ &A H \perp B C \,\,(\text {do} \,\, B C \perp(S A B))} \Rightarrow A H \perp(S B C) \Rightarrow A H \perp S C$. \hfill{(1)}\\
+			Tương tự: $\heva{&A K \perp S D \\ &A K \perp C D\,\,(\text {do } C D \perp(S A D))} \Rightarrow A K \perp(S C D) \Rightarrow A K \perp S C$. \hfill{(2)}\\
+			Từ $(1)$ và $(2)$ suy ra $S C \perp(A H K)$
+			\itemch Đúng. Do $H K \subset(A H K)$ nên $H K \perp S C$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_2
+\begin{ex} %[1H8V2-2]
+	Cho tứ diện $O A B C$ có $O A, O B, O C$ đôi một vuông góc với nhau. Gọi $O K$ là đường cao của tam giác $O B C$ và $O H$ là đường cao của tam giác $O A K$. Khi đó:
+	\choiceTF
+	{\True $O A \perp(O B C)$}
+	{\True $O B \perp(O A C)$}
+	{\True Các cạnh đối nhau trong tứ diện $O A B C$ thì vuông góc với nhau}
+	{$O H$ không vuông góc với măt phẳng $(A B C)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\path 	(0:0) coordinate (O)
+				++(0:\a) coordinate (B)
+				++(-120:\a) coordinate (C)
+				($(O)+(90:\a)$) coordinate (A)
+				($(B)!(O)!(C)$) coordinate (K)
+				($(A)!(O)!(K)$) coordinate (H);
+				\draw[dashed,thick] 	(K)--(O)--(B) (O)--(H);
+				\draw[thick] 		(O)--(C)--(B)--(A)--(O) (K)--(A)--(C); 
+				\foreach \x/\g in {A/90,O/180,C/-45,B/0,H/0,K/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--O--A};
+				\draw pic[draw,angle radius=2mm]{right angle=C--O--A};
+				\draw pic[draw,angle radius=2mm]{right angle=C--O--B};
+				\draw pic[draw,angle radius=2mm]{right angle=B--K--O};
+				\draw pic[draw,angle radius=2mm]{right angle=O--H--A};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có \\ $\heva{& OA \perp O B \\&O A \perp O C} \Rightarrow O A \perp(O B C) ; $
+			\itemch Đúng. Ta có \\ $\heva{&O B \perp O A \\&O B \perp O C} \Rightarrow O B \perp(O A C) ;$
+			\itemch Đúng. Vì $O A \perp(O B C)$ mà $B C \subset(O B C) \Rightarrow O A \perp B C$. \\Vì $O B \perp(O A C)$ mà $A C \subset(O A C) \Rightarrow O B \perp A C$.\\Ta có: $\heva{&O C \perp O A \\ &O C \perp O B} \Rightarrow O C \perp(O A B)$, mà $A B \subset(O A B) \Rightarrow O C \perp A B$.\\
+			\itemch Sai. Ta có: $\heva{&B C \perp O K \\ &B C \perp O A \,\,(\text {do } O A \perp(O B C))} \Rightarrow B C \perp(O A K)$; \\Khi đó: $\heva{&O H \perp A K \\ &O H \perp B C \\ &A K \cap B C=K \\ &A K, B C \subset(A B C)} \Rightarrow O H \perp(A B C)$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_3
+\begin{ex}%[1H8H2-2]
+	 Cho hình chóp $S. A B C D$, đáy là hình thoi tâm $O$ và $S A=S C, S B=S D$. Khi đó:
+	\choiceTF
+	{\True $S O \perp A C$}
+	{\True $S O \perp(A B C D)$}
+	{\True $A C \perp(S B D)$}
+	{$(A C, S B)=60^{\circ}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(80:\a)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(D)--(B)--(A)--(D)	(C)--(A)--(S)--(O);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,O/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Tam giác $S A C$ cân tại $S$ (do $S A=S C$), mà $O$ là trung điểm $A C$ nên $S O \perp A C$. \hfill{(1)}
+			\itemch Đúng. Tam giác $S B D$ cân tại $S$ (do $S B=S D$), mà $O$ là trung điểm $B D$ nên $S O \perp B D$. \hfill{(2)}\\
+			Từ $(1)$ và $(2)$ suy ra $S O \perp(A B C D)$.
+			\itemch Đúng. Ta có: $\heva{&A C \perp B D \\ &A C \perp S O \,\,(\text {do } S O \perp(A B C D)) \text { mà } S B \subset(S B D) \text { nên } A C \perp S B}$ \\$\Rightarrow A C \perp(S B D)$.
+			\itemch Sai. Do $A C \perp(S B D)$ nên suy ra $AC \perp SB$
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_4
+\begin{ex} %[1H8V2-2]
+	 Cho hình chóp $S. A B C$ có $S A \perp(A B C)$ và tam giác $A B C$ vuông tại $B$. Gọi $H, K$ là hình chiếu vuông góc của $A$ trên các cạnh $S B, S C$. Khi đó:
+	\choiceTF
+	{Tam giác $S B C$ cân tại $B$}
+	{\True $A H$ vuông góc với mặt phẳng $(S B C)$}
+	{\True $(S C, H K)=90^{\circ}$}
+	{\True Giả sử $H K$ cắt $B C$ tại $D$. Khi đó $(A C, A D)=90^{\circ}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:4*\a/5) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!(A)!(B)$) coordinate (H)
+				($(S)!(A)!(C)$) coordinate (K)
+				(intersection of H--K and B--C) coordinate (D);
+				\draw[thick] 	(K)--(H)--(A) (B)--(C) 
+				(B)--(D)--(A)--(S)	(C)--(S)	(B)--(S) (D)--(H);
+				\draw[dashed,thick] 	(K)--(A)--(C) (A)--(B);
+				\foreach \x /\goc in {A/180,C/0,B/-135,S/90,H/0,K/0,D/-45}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=C--B--A};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}	
+			\itemch Sai. Ta có: $\heva{&B C \perp A B \\ &B C \perp S A \,\,(\text{do} \, S A \perp(A B C))}$ \\\\ $\Rightarrow B C \perp(S A B)$, mà $S B \subset(S A B)$ nên $B C \perp S B$ hay tam giác $S B C$ vuông tại $B$.
+			\itemch Đúng. Ta có: $\heva{& A H \perp S B \\ &A H \perp B C \,\,(\text {do}\, B C \perp(S A B))}$ \\\\ $\Rightarrow A H \perp(S B C)$.
+			\itemch Đúng. Ta có: $\heva{&S C \perp A K \\ &S C \perp A H \,\,(\text{do} \, A H \perp(S B C))}$  \\\\ $\Rightarrow S C \perp(A H K)$, mà $H K \subset(A H K)$ nên $S C \perp H K$ hay $(S C, H K)=90^{\circ}$.
+			\itemch Đúng. Vì $(A H K) \equiv(A D K)$ mà $S C \perp(A H K)$ nên $S C \perp(A D K)\\ \Rightarrow S C \perp A D \hfill{(1)}$.  \\ 
+			Mặt khác $S A \perp A D \,\,(\text{do } S A \perp(A B C), A D \subset(A B C)) \hfill{(1)}$.  \\
+			Từ $(1)$ và $(2)$ suy ra $A D \perp(S A C) \Rightarrow A D \perp A C$ hay $(A C, A D)=\widehat{CAD}=90^{\circ}$
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B1-DS}
+\Opensolutionfile{ans}[ans/ans-0-B1-KQ]
+\caukq %6cau
+%ex_1
+\begin{ex}%[1H8V2-5]
+	Hình chóp $S.A B C D$ có cạnh $S A$ vuông góc với mặt phẳng $(A B C D)$ và đáy $A B C D$ là hình vuông cạnh $2\mathrm{~cm}$, $SA=1 \mathrm{~cm}$. Tính độ dài cạnh $SC$ (đơn vị $\mathrm{cm}$).
+	\shortans{$3$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(C)--(A)--(S);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Do $SA\perp(ABCD) \Rightarrow SA \perp AC \,\,(\text{Do } AC \subset (ABCD))$.\\
+		$\Rightarrow SAC$ vuông tại $A$, theo định lý Pythagores, ta tính được $AC=3 \mathrm{~cm}$.
+	}
+\end{ex}
+%ex_2
+\begin{ex}%[1H8V2-3]
+	Cho hình chóp $S. A B C D$ có cạnh bên $S A \perp(A B C)$ và đáy $A B C$ là tam giác cân ở $B$. Gọi $H$ và $K$ lần lượt là trung điểm của $A C$ và $S C$. Xác định góc của hai đường thẳng $B H, S C$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:4*\a/5) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.5!(C)$) coordinate (K)
+				($(A)!0.5!(C)$) coordinate (H);
+				\draw[thick] 	(A)--(B)--(C)
+				(A)--(S)	(C)--(S)	(B)--(S);
+				\draw[dashed,thick] 	(A)--(C) (B)--(H)--(K);
+				\foreach \x /\goc in {A/180,C/0,B/-135,S/90,H/45,K/20}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Tam giác $A B C$ cân tại $B$ có đường trung tuyến $B H$ nên $B H \perp A C$. \hfill{(1)}\\
+		Mặt khác $B H \perp S A \,\,( \text{do }S A \perp(A B C)$). \hfill{(2)}\\
+		Từ $(1)$ và $(2)$ suy ra $B H \perp(S A C)$, mà $S C \subset(S A C)$ nên $B H \perp S C$.
+	}
+\end{ex}
+%ex_3
+\begin{ex}%[1H8V2-3]
+	Cho hình chóp $S.A B C D$ có đáy $A B C D$ là hình vuông và $S A \perp(A B C D)$. Gọi $I, J, K$ lần lượt là trung điểm của $A B$, $B C$ và $S B$. Xác định góc của hai đường thẳng $K J, B D$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3.5}
+				\def\h{2.5}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O)
+				($(A)!0.5!(B)$) coordinate (I)
+				($(B)!0.5!(C)$) coordinate (J)
+				($(S)!0.5!(B)$) coordinate (K);
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(A)--(S) (A)--(C) (K)--(I)--(J)--(K);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,I/120, J/-90, K/180}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--C};
+			\end{tikzpicture}
+		\end{center}
+		Vì $S A \perp(A B C D)$ nên hình chiếu của $S C$ lên mặt phẳng $(A B C D)$ là $A C$, mà $B D \perp A C$ nên $B D \perp S C$.\\
+		Từ đó, ta có $B D \perp(S A C)$.\\
+		Ta có $I K, I J$ lần lượt là đường trung bình của các tam giác $S A B, A B C$ nên $I K \parallel S A, I J \parallel A C$.\\
+		Suy ra $(I J K) \parallel(S A C)$.\\
+		Khi đó: $\heva{&(I J K) \parallel(S A C) \\ &B D \perp(S A C)} \Rightarrow B D \perp(I J K)$\\
+		mà $K J \subset(I J K)$ nên $K J \perp B D$.
+	}
+\end{ex}
+%ex_5
+\begin{ex}%[1H8V2-3]
+	Cho hình chóp $S. A B C D$ có đáy $A B C D$ là hình vuông. Gọi $H$ là trung điểm của $A B$ và $S H \perp(A B C D)$; gọi $K$ là trung điểm của cạnh $A D$. Xác định góc của hai đường thẳng $A C$ và $S K$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{4}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)!0.5!(B)$) coordinate (H)
+				($(A)!0.5!(D)$) coordinate (K)
+				($(H)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				\draw[dashed,thick] 	(B)--(A)--(D)	(C)--(A)--(S)
+				(S)--(H)--(K)--(S) (B)--(D) ;
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/135, K/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:4mm)+(\x)$) node {$\x$};
+			\end{tikzpicture}
+		\end{center}
+		Vì $H K$ là đường trung bình của tam giác $A B D$ nên $H K \parallel B D$, mà $B D \perp A C \Rightarrow H K \perp A C$. \hfill{(1)} \\
+		Mặt khác $S H \perp A C \,\,( \text{do }S H \perp(A B C D))$.\hfill{(2)}\\
+		Từ $(1)$ và $(2)$ suy ra $A C \perp(S H K)$.\\
+		Ta lai có $S K \subset(S H K)$ nên $A C \perp S K$ hay $(A C, S K)=90^{\circ}$.
+	}
+\end{ex}
+%ex_6
+\begin{ex}%[1H8V2-3]
+	Hình chóp $S.A B C D$ có cạnh $S A$ vuông góc với mặt phẳng $(A B C D)$ và đáy $A B C D$ là hình thang vuông tại $A$ và $D$ với $A D=C D=\dfrac{A B}{2}$. Xác định góc tạo bời hai đường thẳng $SC$ và $BC$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{5}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				($(A)+(-130:\a/2)$) coordinate (D)
+				($(B)+(D)-(A)$) coordinate (Ct)
+				($(D)!1/2!(Ct)$) coordinate (C)
+				($(A)!1/2!(B)$) coordinate (I)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S) (I)--(C)--(A);
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/45,C/-45,D/-135,S/90,I/90}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Do $S A \perp(A B C D) \Rightarrow \triangle S A D, \triangle S A B$ vuông tại $A$.\\
+		Gọi $I$ là trung điểm của $AB$\\
+		Xét $\triangle A C B$ có trung tuyyến $C I=\dfrac{1}{2} A B \Rightarrow \triangle A C B$ vuông tại $C \Rightarrow B C \perp A C$.\\
+		Mặt khác $B C \perp S A \Rightarrow B C \perp(S A C) \Rightarrow B C \perp S C \Rightarrow \triangle S C B$ vuông tại $C \\ \Rightarrow (SC,BC)=90^\circ$.
+	}
+\end{ex}
+%ex_7
+\begin{ex}%[1H8V2-3]
+	Cho hình lăng trụ $A B C .A' B' C'$ có đáy là tam giác đều cạnh $a$, $ A' A \perp(A B C)$ và $A' A=2 a$. Gọi $I$ là trung điểm $B C$. Tính góc giữa hai đường thẳng $A I$ và $B C'$
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{4}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:3*\a/4) coordinate (B)
+				($(A)+(90:\h)$) coordinate (A')
+				($(B)+(90:\h)$) coordinate (B')
+				($(C)+(90:\h)$) coordinate (C')
+				($(B)!0.5!(C)$) coordinate (I)
+				($(C')!0.5!(C)$) coordinate (M);
+				\draw[dashed,thick] 	(I)--(A)--(C) (M)--(A);
+				\draw[thick]	(C)--(C')--(B)--(B')	(A)--(A') (A)--(B)--(C) (M)--(I) (A')--(B')--(C')--cycle;
+				\foreach \x/\g in {A/180,B/-45,C/0,A'/180,B'/-45,C'/0,I/0,M/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:4mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=A'--A--B};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $M$ là trung điểm $C C'$.\\
+		Ta có: $I M \parallel B C' \Rightarrow\left(A I, B C'\right)=(A I, I M)$\\
+		Ta có: $A I=\dfrac{a \sqrt{3}}{2} ; I M=\dfrac{1}{2} B C'=\dfrac{1}{2} \sqrt{a^2+(2 a)^2}=\dfrac{\sqrt{5}}{2} a ; A M=\sqrt{a^2+a^2}=\sqrt{2} a$\\
+		Xét $\triangle A I M$ có: $A M^2=A I^2+I M^2$ nên $\triangle A I M$ vuông tại $I$. Vậy $(A I, B C)=90^{\circ}$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1-KQ}
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-0-B1]
+\caulc
+\begin{ex}%[1H8H2-1]
+	Mệnh đề nào sau đây \textbf{sai}?
+	\choice
+	{Hai đường thẳng phân biệt cùng vuông góc với một mặt phẳng thì song song}
+	{Hai mặt phẳng phân biệt cùng vuông góc với một đường thẳng thì song song}
+	{\True Cho đường thẳng $\Delta$ song song với mặt phẳng $(\alpha)$}
+	{Một đường thẳng và một mặt phẳng (không chứa đường thẳng đã cho) cùng vuông góc với một đường thẳng thì song song nhau}
+	\loigiai{
+		C sai vì đường thẳng vuông góc với $\Delta$ có thể song song với $(\alpha)$ nếu nó nằm trong cùng một mặt phẳng với đường thẳng $\Delta$.\\
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có $S A$ vuông góc với mặt phẳng $(A B C D)$. Mệnh đề nào sau đây là đúng?
+	\choice
+	{$S A \perp S B$}
+	{$S A \perp S C$}
+	{\True $S A \perp A C$}
+	{$S B \perp S D$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(C)--(A)--(S);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{
+			&S A \perp(A B C D) \\
+			&A C \subset(A B C D)
+		} \Rightarrow S A \perp A C$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có $S A$ vuông góc với mặt đáy, tứ giác $A B C D$ là hình vuông. Mệnh đề nào sau đây là đúng?
+	\choice
+	{$S B \perp(A B C D)$}
+	{$S C \perp(A B C D)$}
+	{$B C \perp(S A C)$}
+	{\True $B D \perp(S A C)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D) (A)--(S);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Có: $B D \perp A C \,\,( \text{do }A B C D$ là hình vuông), $S A \perp B D \,\,( \text{do }S A \perp(A B C D)$).\\
+		$\heva{
+			&B D \perp A C, B D \perp S A \\
+			&S A \cap A C=\{A\} \\
+			&S A, A C \subset(S A C)
+		} \Rightarrow B D \perp(S A C)$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-5]
+	Cho hình chóp đều có $S A \perp(A B C D)$ và đáy $A B C D$ là hình vuông tâm $O$. Tìm hình chiếu vuông góc của $S B$ lên $(S A C)$.
+	\choice
+	{$S D$}
+	{$S C$}
+	{\True $S O$}
+	{$B O$}
+	\loigiai{
+		\begin{center}
+			
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(C)--(A)--(S) ;
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90, O/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};%Theo chiều dương	
+			\end{tikzpicture}
+		\end{center}
+		Ta có: $\heva{&B D \perp A C \,\,( \text{do } ABCD \text{ là hình vuông }) \\ &S A \perp B D \,\,( \text{do } S A \perp(A B C D) \supset D B)} \Rightarrow B D \perp(S A C)$ tại $O$.\\
+		Vậy hình chiếu của $S B$ lên $(S A C)$ là $S O$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-5]
+	Cho hình chóp $S. A B C D$ có đáy $A B C D$ là hình chữ nhật, cạnh bên $S A$ vuông góc với đáy. Tính diện tích hình chiếu của tam giác $\triangle S B C$ lên mặt phẳng $(S A C)$ biết $S A=A B=2a ; A D=a$.
+	\choice
+	{$a^2 \sqrt{2}$}
+	{$\dfrac{a^2 \sqrt{5}}{2}$}
+	{$a^2$}
+	{\True $\dfrac{a^2 \sqrt{5}}{5}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (D)
+				($(A)+(90:\h)$) coordinate (S)
+				($(A)!0.7!(C)$) coordinate (H)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(S)--(H)--(B)--(A)--(D)	(C)--(A)--(S);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,D/-135,C/-45,B/45,S/90,H/-160}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=B--H--C};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $H$ là chiếu của $B$ lên $AC$. Khi đó hình chiếu của $\triangle S B C$ lên mặt phẳng $(S A C)$ là $\triangle S H C$.\\
+		Xét $\triangle A B C$ vuông tại $B$. Ta có $A C=\sqrt{A B^2+B C^2}=a \sqrt{5}$.\\
+		Ta có $A H=\dfrac{A B^2}{A C}=\dfrac{4 a \sqrt{5}}{5}$.\\
+		Khi đó: \begin{eqnarray*}
+			S_{\triangle S H C}=S_{\triangle S A C}-S_{\triangle S A H}=\dfrac{1}{2} S A. A C-\dfrac{1}{2} S A. A H=\dfrac{1}{2} \cdot 2a \left(a \sqrt{5}-\dfrac{4a \sqrt{5}}{5}\right)=\dfrac{a^2 \sqrt{5}}{5}.
+		\end{eqnarray*}
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C$ có đáy là tam giác vuông tại $B, S A \perp(A B C)$. Gọi $H, K$ lần lượt là hình chiếu của điểm $A$ trên cạnh $S B$ và $S C$. Chọn mệnh đề \textbf{sai} trong các mệnh đề sau:
+	\choice
+	{$B C \perp(S A B)$}
+	{$A H \perp(S B C)$}
+	{\True $A K \perp(S B C)$}
+	{$S C \perp(A H K)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:4*\a/5) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.65!(B)$) coordinate (H)
+				($(S)!0.5!(C)$) coordinate (K);
+				\draw[thick] 	(A)--(B)--(C)
+				(K)--(H)--(A)--(S)	(B)--(S)	(C)--(S);
+				\draw[dashed,thick] 	(K)--(A)--(C);
+				\foreach \x /\goc in {A/180,B/0,C/-135,S/90,H/0,K/0}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=A--B--C};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{
+			&S A \perp(A B C) \\
+			&B C \subset(A B C)\\
+		} \Rightarrow S A \perp B C, A B \perp B C \Rightarrow B C \perp(S A B)$. \\
+		$\heva{
+			&B C \perp A H \\
+			&S C \perp A H\\
+		} \Rightarrow A H \perp(S B C)$.\\
+		$\heva{& \Rightarrow A H \perp S C \\ &\text{Lại có: }A K \perp S C} \Rightarrow S C \perp(A H K)$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S.A B C D$ có đáy $A B C D$ là hình chữ nhật, cạnh bên $S A$ vuông góc với mặt phẳng đáy. Gọi $A E$, $A F$ lần lượt là đường cao của tam giác $S A B$ và tam giác $S A D$. Khẳng định nào dưới đây là đúng?
+	\choice
+	{$S C \perp(A F B)$}
+	{\True $S C \perp(A E F)$}
+	{$S C \perp(A E C)$}
+	{$S C \perp(A E D)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.65!(B)$) coordinate (E)
+				($(S)!0.5!(D)$) coordinate (F)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(C)--(A)--(S) (F)--(A)--(E)--(F);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,E/180,F/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=B--E--A};
+				\draw pic[draw,angle radius=2mm]{right angle=D--F--A};
+			\end{tikzpicture}
+		\end{center}
+		Vì $S A$ vuông góc với mặt phẳng $(A B C D) \Rightarrow S A \perp B C$.\\
+		Mà $A B \perp B C$ nên suy ra $B C \perp(S A B) \Rightarrow B C \perp A E \subset(S A B)$.\\
+		Tam giác $S A B$ có đường cao $A E$ \\ $\Rightarrow A E \perp S B$ mà $A E \perp B C \Rightarrow A E \perp(S B C) \Rightarrow A E \perp S C$.\\
+		Tương tự, ta chứng minh được $A F \perp S C$. Do đó $S C \perp(A E F)$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có $S A \perp(A B C D)$ và đáy $A B C D$ là hình thoi. Gọi $H, K$ lần lượt là trung điểm của $S B$, $S D$. Mệnh đề nào sau đây \textbf{sai}?
+	\choice
+	{$H K \perp S A$}
+	{$H K \perp A C$}
+	{\True $H K \perp A D$}
+	{$B D \parallel H K$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.5!(B)$) coordinate (H)
+				($(S)!0.5!(D)$) coordinate (K)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(C)--(A)--(S) (H)--(K);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/180,K/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+			\end{tikzpicture}
+		\end{center}
+		$\heva{
+			&S A \perp BD \,\,(\text{do } SA \perp (ABCD)) \\
+			&HK \parallel BD  \,\,( \text{do } HK \text{ là đường trung bình của tam giác }ABD) } \Rightarrow HK \perp SA$. \\
+		$\heva{
+			&AC \perp BD  \,\,( \text{do } ABCD \text{ là hình thoi}) \\
+			&S A \perp BD \,\,( \text{do } SA \perp (ABCD)) \
+		} \Rightarrow AC \perp(S B D) \Rightarrow AC \perp HK$. \\
+		$HK$ là đường trung bình của tam giác $SBD \Rightarrow HK \parallel BD$.
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có đáy $A B C D$ là hình chữ nhât, cạnh bên $S A$ vuông góc với đáy. Gọi $H$, $K$ lần lượt là hình chiếu của $A$ lên $S C, S D$. Khẳng định nào sau đây đúng?
+	\choice
+	{$A H \perp(S C D)$}
+	{$A K \perp(S B D)$}
+	{\True $S C \perp(A H K)$}
+	{$S D \perp(A H K)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.5!(D)$) coordinate (K)
+				($(S)!0.6!(C)$) coordinate (H)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)--(B)	(C)--(A)--(S) (K)--(A)--(H);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/0,K/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=A--H--C};
+				\draw pic[draw,angle radius=2mm]{right angle=A--K--D};
+			\end{tikzpicture}
+		\end{center}
+		Ta có $\heva{&C D \perp S A \\ &C D \perp A D} \Rightarrow C D \perp(S A D) \Rightarrow C D \perp A K$.\\
+		Ta lại có $A K \perp S D$.\\
+		Suy ra $A K \perp(S C D)(*) \Rightarrow A K \perp S C$.\\
+		Mà $A H \perp S C$.\\
+		vậy $S C \perp(A H K)$.\\
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình chóp $S. A B C D$ có đáy là hình vuông cạnh $a$. Tam giác $S A B$ đều và $S C=a \sqrt{2}$. Gọi $H, K$ lần lượt là trung điểm của $A B$ và $C D$. Mệnh đề nào sau đây là \textbf{sai}?
+	\choice
+	{$B C \perp(S A B)$}
+	{$S H \perp(A B C D)$}
+	{\True $A B \perp(S A D)$}
+	{$C D \perp(S H K)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{4}
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)!0.5!(B)$) coordinate (H)
+				($(C)!0.5!(D)$) coordinate (K)
+				($(H)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S)
+				(S)--(H)--(K)	;
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/135,K/0}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:4mm)+(\x)$) node {$\x$};
+			\end{tikzpicture}
+		\end{center}
+		Ta có tam giác $S A B$ đều cạnh $a$ nên $S B=A B=a$.\\
+		Mặt khác tam giác $S B C$ có $S B^2+B C^2=S C^2=2 a^2$.\\
+		Suy ra tam giác $S B C$ vuông cân tại $B$. Hay $B C \perp S B$\\
+		Mà $B C \perp A B$. Suy ra $B C \perp(S A B)$.\\
+		Từ $B C \perp(S A B) \Rightarrow B C \perp S H$.\\
+		Tam giác $S A B$ đều mà $H$ là trung điểm của $A B$ nên $S H \perp A B$.\\
+		Từ và suy ra $S H \perp(A B C D)$. \\
+		Tam giác $S A B$ đều nên $A B$ không vuông góc với mặt phẳng $(S A D)$. \\
+		Ta có $\heva{&A B \perp H K \\ &A B \perp S H} \Rightarrow A B \perp(S H K) \Rightarrow C D \perp(S H K)$. 
+	}
+\end{ex}
+\begin{ex}%[1H8H2-5]
+	Cho hình chóp $S. A B C$ có đáy $A B C$ là tam giác vuông tại $B$, $S A \perp(A B C)$ và $A H$ là đường cao của $\triangle S A B$. Hình chiếu của điểm $A$ trên $(S B C)$ là:
+	\choice
+	{$S$}
+	{$B$}
+	{$C$}
+	{\True $H$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:4*\a/5) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(A)!0.5!(B)$) coordinate (M)
+				($(S)!0.65!(B)$) coordinate (H);
+				\draw[thick] 	(A)--(B)--(C)
+				(H)--(A)--(S)	(B)--(S)	(C)--(S);
+				\draw[dashed,thick] 	(A)--(C);
+				\foreach \x /\goc in {A/180,C/0,B/-135,S/90,H/0}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=C--B--A};
+				\draw pic[draw,angle radius=2mm]{right angle=A--H--B};
+			\end{tikzpicture}
+		\end{center}
+		Theo bài ra ta có $S A \perp(A B C)$ nên suy ra $S A \perp B C$. \hfill{(1)}\\
+		Lại có đáy $A B C$ là tam giác vuông tại $B$ nên $A B \perp B C$.\hfill{(2)}\\
+		Từ $(1)$ và $(2)$ ta có: $B C \perp(S A B) \Rightarrow B C \perp A H$. \hfill{(3)}\\
+		Mặt khác, $A H$ là đường cao của $\triangle S A B$ nên $A H \perp S B$. \hfill{(4)}\\
+		Từ (3) và (4) ta được $A H \perp(S B C)$ hay $H$ là hình chiếu của điểm $A$ trên $(S B C)$.\\
+	}
+\end{ex}
+\begin{ex}%[1H8H2-2]
+	Cho hình lập phương $A B C D.A' B' C' D'$. Đường thẳng $A C'$ vuông góc với mặt phẳng nào sau đây?
+	\choice
+	{$A C' \perp\left(B B' D' D\right)$}
+	{$A C' \perp(A B C D)$}
+	{$A C' \perp\left(A A' D' D\right)$}
+	{\True $A C' \perp\left(A' B D\right)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\a)$) coordinate (A')
+				($(B)+(90:\a)$) coordinate (B')
+				($(C)+(90:\a)$) coordinate (C')
+				($(D)+(90:\a)$) coordinate (D');
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(A');
+				\draw[thick] 	(C)--(C') 	(D)--(D') 	(B)--(B') 	(B)--(C)--(D) (A')--(B')--(C')--(D')--cycle;
+				\foreach \x/\g in {A/180,B/180,C/0,D/0,A'/180,B'/180,C'/0,D'/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:4mm)+(\x)$) node {$\x$};	
+			\end{tikzpicture}
+		\end{center}
+		$\heva{&B D \perp A C \\ &B D \perp A A'} \Rightarrow B D \perp\left(A A' C' C\right) \Rightarrow B D \perp A C'$. \hfill{(1)}\\
+		$\heva{&A D' \perp A' D \,\,(\text{Do } AA' D' D \text{ là hình vuông}) \\ &D' C' \perp \left(A D D' A\right) \Rightarrow D' C' \perp A' D} \Rightarrow A' D \perp\left(A D' C'\right) \Rightarrow A' D \perp A C'$. \hfill{(2)}\\
+		Từ $(1)$ và $(2)$ $\Rightarrow A C' \perp \left(A' B D\right)$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1}
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-B1-DS]
+%ex_5
+\begin{ex} %[1H8H2-2]
+	Cho tứ diện $O A B C$ có $O A, O B, O C$ đôi một vuông góc. Kẻ $O H \perp(A B C)$ tại $H$. Khi đó:
+	\choiceTF
+	{\True $O A \perp B C, O B \perp A C, O C \perp A B$}
+	{\True Tam giác $A B C$ có ba góc nhọn}
+	{$H$ là trọng tâm của tam giác $A B C$}
+	{\True $\dfrac{1}{O H^2}=\dfrac{1}{O A^2}+\dfrac{1}{O B^2}+\dfrac{1}{O C^2}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} %Khai báo cạnh
+				\def\h{3}
+				\path 	(0:0) coordinate (O)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(O)+(90:\h)$) coordinate (A)
+				($(B)!0.5!(C)$) coordinate (K)
+				($(A)!0.6!(K)$) coordinate (H)
+				(intersection of C--H and A--B) coordinate (E);
+				\draw[thick] 	(O)--(C)--(B) (C)--(E)
+				(O)--(A)	(B)--(A)	(C)--(A)--(K);
+				\draw[dashed,thick] 	(H)--(O)--(B) (E)--(O)--(K);
+				\foreach \x /\goc in {O/180,B/0,C/-135,A/90,H/0,K/0,E/20}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--O--A};
+				\draw pic[draw,angle radius=2mm]{right angle=O--K--C};
+				\draw pic[draw,angle radius=2mm]{right angle=O--E--A};
+				\draw pic[draw,angle radius=2mm]{right angle=O--H--K};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có: $\heva{&O A \perp O B \\ &O A \perp O C} \Rightarrow O A \perp(O B C) \Rightarrow O A \perp B C$;\\
+			$\heva{
+				&O B \perp O A \\
+				&O B \perp O C
+			} \Rightarrow O B \perp(O A C) \Rightarrow O B \perp A C$; \\
+			$\heva{
+				&O C \perp O A \\
+				&O C \perp O B
+			} \Rightarrow O C \perp(O A B) \Rightarrow O C \perp A B$.
+			\itemch Đúng. Kẻ đường cao $O K$ của tam giác vuông $O B C$ thì $K$ nằm giữa $B$ và $C$.\\
+			Vì $\heva{
+				&B C \perp O K \\
+				&B C \perp O A
+			} \Rightarrow B C \perp(O A K) \Rightarrow B C \perp A K$.\\
+			Do đó $A K$ là đường cao của tam giác $A B C$, đồng thời $K$ nằm giữa $B$ và $C$ nên các góc $\widehat{ABC}$, $\widehat{ACB}$ là góc nhọn.\\
+			Tương tự, kẻ đường cao $O E$ của tam giác vuông $O A B$ thì $E$ nằm giữa hai điểm $A$ và $B$.\\
+			Ta có: $\heva{&A B \perp O E \\ &A B \perp O C} \Rightarrow A B \perp(O C E) \Rightarrow A B \perp C E$.\\
+			Do đó $C E$ là đường cao tam giác $A B C$, đồng thời $E$ nằm giữa hai điểm $A$ và $B$ nên các góc $\widehat{ABC}$, $\widehat{ACB}$ là góc nhọn.
+			Vậy tam giác $A B C$ có ba góc đều là góc nhọn.
+			\itemch Sai. Ta có: $\heva{&B C \perp O A \\ &B C \perp O H} \Rightarrow B C \perp(O A H) \Rightarrow B C \perp A H$.\hfill{(1)}\\
+			Tương tự $\heva{&A B \perp O C \\ &A B \perp O H} \Rightarrow A B \perp(O C H) \Rightarrow A B \perp C H$.\hfill{(2)}\\
+			Từ $(1)$ và $(2)$ suy ra $H$ là trực tâm của tam giác $A B C$.
+			\itemch Đúng. Tam giác $O B C$ vuông tại $O$ có đường cao $O K$ nên $\dfrac{1}{O K^2}=\dfrac{1}{O B^2}+\dfrac{1}{O C^2}$.\hfill{(3)}\\
+			Tam giác $O A K$ vuông tại $O$ có đường cao $O H$ nên $\dfrac{1}{O H^2}=\dfrac{1}{O A^2}+\dfrac{1}{O K^2}$. \hfill{(4)}\\ Thay (3) vào (4), ta được: $\dfrac{1}{O H^2}=\dfrac{1}{O A^2}+\dfrac{1}{O B^2}+\dfrac{1}{O C^2}$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_6
+\begin{ex} %[1H8V4-4]%[1H8H2-2]
+	Cho hình lăng trụ $A B C A' B' C'$ có đáy là tam giác giác vuông cân tại $A$ với cạnh huyền $B C=2 a$. Biết $A' H \perp(A B C)$ với $H$ là trung điểm $B C$. Khi đó:
+	\choiceTF
+	{\True $B C \perp\left(A A' H\right)$}
+	{\True $B' C' \perp A A'$}
+	{Tìm được hình chiếu của tam giác $A' A B$ trên mặt phẳng $(A B C)$ khi đó, diện tích hình chiếu đó theo $a$ bằng: $\dfrac{a^2}{3}$}
+	{Gọi $I$ là hình chiếu của $A'$ trên mặt phẳng $\left(B C C' B'\right)$. Biết $A' I=\dfrac{a}{2}$. Khi đó độ dài $A' H$ theo $a$ bằng: $\dfrac{a \sqrt{3}}{2}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{4.5}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-135:\a/2) coordinate (B)
+				($(B)!0.5!(C)$) coordinate (H)			
+				($(H)+(90:\h)$) coordinate (A')
+				($(A')+(C)-(A)$) coordinate (C')
+				($(C')+(B)-(C)$) coordinate (B')
+				($(B')!0.5!(C')$) coordinate (K)
+				($(K)!1/4!(H)$) coordinate (I); 
+				\draw[dashed,thick] (A')--(H)--(A)--(C) (I)--(A') (K)--(H);
+				\draw[thick] (C)--(C') 	(B)--(B') 	(A)--(A')--(K) 
+				(A)--(B)--(C) (A')--(B')--(C')--cycle;
+				\foreach \x/\g in {A/180,B/-45,C/0,A'/180,B'/90,C'/0,H/-45,K/0,I/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:4mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=A'--H--C};
+				\draw pic[draw,angle radius=2mm]{right angle=A'--K--C'};
+				\draw pic[draw,angle radius=2mm]{right angle=A'--I--H};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng.$\heva{&B C \perp A' H \,\,( \text{do }A' H \perp(A B C)) \\ &B C \perp A H \,\,( \text{do }\triangle A B C \text { vuông cân tại } A, H \text { là trung điểm của } B C)}$ \\ $\Rightarrow B C \perp(A A' H)$
+			\itemch Đúng. Do $B' C' \parallel B C$ nên $B' C' \perp\left(A A' H\right) \Rightarrow B' C' \perp A A'$.
+			\itemch Sai. Vì $A' H \perp(A B C)$ nên hình chiếu của $A A'$ trên $(A B C)$ là $A H$, hình chiếu của $A' B$ trên $(A B C)$ là $B H$.\\
+			Vậy hình chiếu của tam giác $A' A B$ trên mặt phẳng $(A B C)$ chính là tam giác $A B H$.\\
+			Tam giác $A B C$ vuông cân tại $A$ có $B C=2 a \Rightarrow A B=A C=a \sqrt{2}$.\\
+			Diện tích tam giác $A B H$ là:
+			$S_{\triangle A B H}=\dfrac{1}{2} S_{A B C}=\dfrac{1}{2} \cdot \dfrac{1}{2} A B \cdot A C=\dfrac{1}{4}(a \sqrt{2})^2=\dfrac{a^2}{2}$
+			\itemch Sai. Gọi $K$ là trung điểm $B' C'$. Dễ thấy $\left(A' A H\right) \equiv\left(A H K A'\right)$.
+			Mà $B' C' \perp\left(A A' H\right)$ nên $B' C' \perp\left(A H K A'\right)$.
+			Trong mặt phẳng $\left(A H K A'\right)$, kẻ $A' I \perp H K$ tại $I$. (1)\\
+			Vì $B' C' \perp\left(A H K A'\right), A' I \subset\left(A H K A'\right)$ nên $A' I \perp B' C'$. (2)\\
+			Từ $(1)$ và $(2)$ suy ra $A' I \perp\left(B C C' B'\right)$ hay $I$ là hình chiếu của $A'$ trên mặt phẳng $\left(B C C' B'\right)$.\\
+			Tam giác $A' B' C'$ vuông cân tại $A'$ nên $A' K=\dfrac{B' C'}{2}=a$.\\
+			Tam giác $A' H K$ vuông tại $A'$ có đường cao $A' I$ nên ta có:\\
+			$\dfrac{1}{A' I^2}=\dfrac{1}{A' H^2}+\dfrac{1}{A' K^2} \Rightarrow \dfrac{1}{A' H^2}=\dfrac{1}{\dfrac{a^2}{4}}-\dfrac{1}{a^2}=\dfrac{3}{a^2} \Rightarrow A' H=\dfrac{a \sqrt{3}}{3}$
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_7
+\begin{ex}  %[1H8H2-2] %[1H8V2-5]
+	Cho tứ diện $A B C D$ có $A B=A C, D B=D C$. Gọi $I$ là trung điểm của $B C$. Khi đó:
+	\choiceTF
+	{\True $B C \perp A I$}
+	{\True $B C \perp(A D I)$}
+	{\True $B C \perp A D$}
+	{\True Nếu $A I=A D$, gọi $H$ là trung điểm $I D$. Khi đó $H$ là hình chiếu vuông góc của $A$ trên $(B C D)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\path 	(0:0) coordinate (B)
+				++(0:\a) coordinate (D)
+				++(-120:\a/2) coordinate (C)
+				($(B)+(70:\a)$) coordinate (A)
+				($(B)!0.5!(C)$) coordinate (I);
+				\draw[dashed,thick] 	(B)--(D)--(I);
+				\draw[thick] 			(B)--(A)--(D) (I)--(A)--(C)
+				(B)--(C)--(D);
+				\foreach \x/\g in {A/90,B/180,C/-45,D/0,I/-180}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};
+				%Hình chóp S.ABC có SA vuông góc đáy	
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có $B C \perp A I$ (vì $A B=A C$).
+			\itemch Đúng. Lại có $B C \perp D I$ (vì $B D=C D) \Rightarrow B C \perp(A D I)$.
+			\itemch Đúng. Ta có $\heva{&B C \perp(A D I) \\ &A D \subset(A D I)} \Rightarrow B C \perp A D$.
+			\itemch Đúng. Ta có $A I=A D \Rightarrow A H \perp D I$.\\
+			Mặt khác $A H \perp B C \,\,( \text{do }B C \perp(A D I)) \Rightarrow A H \perp(B C D)$.\\
+			Vậy $H$ là hình chiếu vuông góc của $A$ trên $(B C D)$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ex_8
+\begin{ex} %[1H8V2-2]
+	Cho tam giác $A B C$ vuông tại $C$. Gọi $d$ là đường thẳng vuông góc với $(A B C)$ tại $A$, lấy điểm $S$ nằm trên $d$ không trùng với $A$. Hai điểm $E$ và $F$ lần lượt là hình chiếu của $A$ trên các cạnh $S C$ và $S B$. Khi đó:
+	\choiceTF
+	{\True $B C \perp(S A C)$}
+	{\True $A E \perp B C$}
+	{\True $B D \perp(S A C)$}
+	{\True $S B \perp(A E F)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} %Khai báo cạnh
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (B)
+				++(-150:4*\a/5) coordinate (C)
+				($(A)+(90:\h)$) coordinate (S)
+				($(S)!0.5!(B)$) coordinate (E)
+				($(S)!0.5!(C)$) coordinate (F);
+				\draw[thick] 	(A)--(C)--(B) (A)--(F)--(E)
+				(A)--(S)	(B)--(S)	(C)--(S);
+				\draw[dashed,thick] 	(E)--(A)--(B);
+				\foreach \x /\goc in {A/180,B/0,C/-135,S/90,E/0,F/70}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=A--C--B};
+				\draw pic[draw,angle radius=2mm]{right angle=A--E--B};
+				\draw pic[draw,angle radius=2mm]{right angle=A--F--C};%Theo chiều dương
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có: $\heva{&B C \perp A C \\ &B C \perp S A} \Rightarrow B C \perp(S A C)$.
+			\itemch Đúng. Ta có: $B C \perp(S A C)$
+			Mà $A E \subset(S A C) \Rightarrow B C \perp A E$.
+			\itemch Đúng.
+			$\heva{
+				&A E \perp S C \\
+				&A E \perp B C \,\,( \text{do } B C \perp(S B C))
+			} \Rightarrow AE \perp(S B C)$.
+			\itemch Đúng. Ta có $\heva{
+				&S B \perp A F\\
+				&A E \perp S B \,\,( \text{do } AE \perp(S B C))
+			} \Rightarrow S B \perp(A E F)$.
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B1-DS}
+\Opensolutionfile{ans}[ans/ans-0-B1-KQ]
+\caukq
+%ex_1
+\begin{ex}%[1H8V2-5]
+	Hình chóp $S.A B C $ có cạnh $S A$ vuông góc với mặt phẳng $(A B C)$ và đáy $A B C$ vuông tại $B$. Xác định góc giữa hai đường thẳng $SB$ và $BC$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3} 
+				\def\h{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				++(-150:4*\a/5) coordinate (B)
+				($(A)+(90:\h)$) coordinate (S)
+				($(A)!0.5!(B)$) coordinate (M);
+				\draw[thick] 	(A)--(B)--(C)
+				(A)--(S)	(C)--(S)	(B)--(S);
+				\draw[dashed,thick] 	(A)--(C);
+				\foreach \x /\goc in {A/180,C/0,B/-135,S/90}
+				\fill[black] (\x) circle (1.5pt)
+				($(\x)+(\goc:3mm)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=C--A--S};
+				\draw pic[draw,angle radius=2mm]{right angle=A--B--C};
+			\end{tikzpicture}
+		\end{center}
+		Do $SA\perp(ABC) \Rightarrow SA \perp CC \,\,(\text{Do }BC \subset (ABC))$. \hfill{(1)}\\
+		Mặt khác do tam giác $ABC$ vuông tại $B \Rightarrow AB \perp BC$. \hfill{(2)}\\
+		Từ $(1)$ và $(2)$ suy ra $BC \perp (SAB) \Rightarrow (BC)\perp SB \Rightarrow (BC, SB)=\widehat{SBC}=90^\circ$.
+	}
+\end{ex}
+%ex_2
+\begin{ex}%[1H8V2-5]
+	Cho tứ diện $A B C D$ có $A B=A C$ và $D B=D C$. Xác định góc của hai đường thẳng $B C, A D$ (đơn vị: độ).
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (C)
+				($(A)+(-50:\a)$) coordinate (B)
+				($(B)+(90:1.5*\a)$) coordinate (D)
+				($(B)!0.5!(C)$) coordinate (E);
+				\draw[dashed,thick] 	(E)--(A)--(C);
+				\draw[thick] 			(A)--(D)--(C) (E)--(D)--(B)
+				(A)--(B)--(C);
+				\foreach \x/\g in {D/90,A/180,B/-45,C/0,E/0}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $E$ là trung điểm đoạn $B C$.\\
+		Vì $\triangle A B C$ cân tại $A$ có $A E$ là đường trung tuyến nên $A E \perp B C$. (1)\\
+		Tương tự, $\triangle D B C$ cân tại $D$ có $D E$ là đường trung tuyếm nên $D E \perp B C$. (2)\\
+		Từ $(1)$ và $(2)$ suy ra $B C \perp(A D E)$, mà $A D \subset(A D E)$ nên $B C \perp A D \Rightarrow \left(BC, AD\right)=90^\circ$.
+	}
+\end{ex}
+%ex_3
+\begin{ex}%[1H8V2-5]
+	Hình chóp $S.A B C D$ có cạnh $S A = 2 \mathrm{~cm}$ và vuông góc với mặt phẳng $(A B C D)$ và đáy $A B C D$ là hình thang vuông tại $A$ và $D$ với $A D=C D=\dfrac{A B}{2}=1 \mathrm{~cm}$. Gọi $a$ là tỉ số giữa hai cạnh bên $SC$ và $SD$ ($a>1$). Xác định a (kết quả làm tròn đến hàng phần trăm).
+	\shortans{$1{,}34$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{5}
+				\def\h{3}
+				\path 	(0:0) coordinate (A) 
+				++(0:\a) coordinate (B)
+				($(A)+(-130:\a/2)$) coordinate (D)
+				($(B)+(D)-(A)$) coordinate (Ct)
+				($(D)!1/2!(Ct)$) coordinate (C)
+				($(A)!1/2!(B)$) coordinate (I)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S) (I)--(C)--(A);
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/45,C/-45,D/-135,S/90,I/90}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $I$ là trung điểm của $AB$, khi đó $ADCI$ là hình vuông $\Rightarrow AC= 2\sqrt{2} \mathrm{~cm}$.\\
+		Do $SA \perp (ABCD)\Rightarrow SA \perp AC$ và $SA\perp AD$\\
+		$\Rightarrow \heva{&SC = 3 \mathrm{~cm} \\ &SD = \sqrt{5}\mathrm{~cm}.}$\\
+		Do $a>1$ nên $a= \dfrac{SC}{SC} \approx 1{,}34$.
+	}
+\end{ex}
+%ex_4
+\begin{ex}%[1H8V2-5]
+	Cho hình chóp $S. A B C D$ có đáy $A B C D$ là hình vuông. Gọi $H$ là trung điểm của $A B$ và $S H \perp(A B C D)$; gọi $K$ là trung điểm của cạnh $A D$. Xác định góc của hai đường thẳng $B K$ và $S C$.
+	\shortans{$90$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{4}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)!0.5!(B)$) coordinate (H)
+				($(H)+(90:\h)$) coordinate (S)
+				($(A)!0.5!(D)$) coordinate (K)
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				\draw[dashed,thick] 	(K)--(B)--(A)--(D)	(A)--(S)
+				(S)--(H)--(C)	;
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/135, K/-135}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:4mm)+(\x)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=S--H--A};
+			\end{tikzpicture}
+		\end{center}
+		Xét hai tam giác $BCH, ABK$, ta có: $\widehat{C B H}=\widehat{B A K}=90^{\circ}$, $B C=A B$, $B H=A K$.\\
+		Suy ra $\triangle B C H=\triangle A B K \Rightarrow \widehat{ABK}=\widehat{BCH}$, mà $\widehat{ABK}+\widehat{CBK}=90^{\circ}$ nên $\break \widehat{CBK}_2+\widehat{ABK}=90^{\circ}$,\\
+		suy ra $B K \perp C H$\\
+		Ta có: $\heva{&B K \perp C H \\ &B K \perp S H} \Rightarrow B K \perp(S C H) \Rightarrow B K \perp S C$.
+	}
+\end{ex}
+%ex_5
+\begin{ex}%[1H8V2-5]
+	Cho hình chóp $S.A B C D$ có đáy là hình thang vuông tại $A$ và $D, A B=2 A D=2 C D=2 $. Biết $S A \perp(A B C D), S A=3 $. Tính diện tích hình chiếu vuông góc của tam giác $S B C$ lên mặt phẳng $(S A B)$.
+	\shortans{$1{,}5$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{5}
+				\def\h{3}
+				\path 	(0:0) coordinate (A) 
+				++(0:\a) coordinate (B)
+				($(A)+(-130:\a/2)$) coordinate (D)
+				($(B)+(D)-(A)$) coordinate (Ct)
+				($(D)!1/2!(Ct)$) coordinate (C)
+				($(A)!1/2!(B)$) coordinate (I)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);
+				\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(S) (I)--(C)--(A);
+				\draw[thick] 			(B)--(C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/45,C/-45,D/-135,S/90,I/90}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=B--A--S};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $I$ là trung điểm $A B$.\\
+		Dễ dàng chứng minh $A I C D$ là hình vuông $\Rightarrow C I=\dfrac{1}{2} A B \Rightarrow \triangle A B C$ vuông tại $C$.\\
+		Ta có: $\heva{&B C \perp S A \\ &B C \perp A C} \Rightarrow B C \perp(S A C)$.\\
+		Ta có: $\heva{&C I \perp A B \\ &C I \perp S A} \Rightarrow C I \perp(S A B)$\\
+		Hình chiếu của $\triangle S B C$ trên $(S A B)$ là $\triangle S I B$.\\
+		$S_{\triangle S I B}=\dfrac{1}{2} S_{\triangle S A B}=\dfrac{1}{2} \cdot \dfrac{1}{2} \cdot S A \cdot A B=\dfrac{1}{4} \cdot 3 \cdot 2=\dfrac{3}{2} =1{,}5$.\\
+	}
+\end{ex}
+%ex_6
+\begin{ex}%[1H8V2-5]
+	Cho hình chóp $S.A B C D$ có đáy là hình vuông cạnh $a, S C \perp(A B C D)$ và $ \break S B=2 a$. Tính góc giữa hai đường thẳng $S A$ và $D C$.
+	\shortans{$63{,}4$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{3}
+				\def\h{3}
+				\path 	(0:0) coordinate (C)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (A)
+				($(C)+(A)-(D)$) coordinate (B)
+				($(C)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				\draw[dashed,thick] 	(B)--(C)--(D)	(C)--(S);
+				\draw[thick] 			(B)-- (A)--(D)
+				(B)--(S)	(A)--(S)	(D)--(S);
+				\foreach \x/\g in {C/135,B/-135,A/-45,D/45,S/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+				\draw pic[draw,angle radius=2mm]{right angle=D--C--S};%Theo chiều dương	
+			\end{tikzpicture}
+		\end{center}
+		Ta có: $A B \parallel C D \Rightarrow(S A, C D)=(S A, A B)$\\
+		Ta có: $\heva{&A B \perp C B \\ &A B \perp S C}\Rightarrow A B \perp(S B C) \Rightarrow A B \perp S B$\\
+		Xét tam giác $S A B$ vuông tại $B$ có: $\tan SAB=\dfrac{S B}{A B}=\dfrac{2 a}{a}=2 \Rightarrow S A B \approx 63,4^{\circ}$\\
+		Vậy $(S A, C D) \approx 63{,}4^{\circ}$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1-KQ}

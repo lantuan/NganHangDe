@@ -1,0 +1,566 @@
+\def\thoigian{90}%--Thời gian
+\de{ĐỀ THI HỌC KỲ II NĂM HỌC 2023-2024}{THPT NAM LÝ - HÀ NAM}
+
+
+  
+
+\begin{center}
+	\textbf{PHẦN 1 - TRẮC NGHIỆM}
+\end{center}
+\Opensolutionfile{ans}[ans/ans]
+
+%Câu 1
+\begin{ex}%[1D6N2-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+Cho hai số dương $a$, $b$ ($a\neq 1$). Mệnh đề nào dưới đây {\bf sai}?
+\choice
+{\True $\log_a a=2a$}
+{$a^{\log_a b}=b$}
+{$\log_a 1=0$}
+{$\log_a a^{\alpha}=\alpha$}
+\loigiai{
+Ta có $\log_a a=1$, $a^{\log_a b}=b$, $\log_a 1=0$, $\log_a a^{\alpha}=\alpha$.
+}
+\end{ex}
+%Câu 2
+\begin{ex}%[1H8N2-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+Cho hình chóp $S.ABC$ có $SA$ vuông góc với mặt phẳng đáy $(ABC)$. Khẳng định nào sau đây là {\bf sai}?
+	\choice
+	{$SA\perp BC$}
+	{$SA\perp AC$}
+	{$SA\perp AB$}
+	{\True $SB\perp BC$}
+	\loigiai{
+\immini{
+Vì $SA\perp (ABC)$ nên $\heva{&SA\perp BC\\&SA\perp AC\\&SA\perp BC}$.
+}
+{
+	\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+	\coordinate (A) at (0,0);\coordinate (B) at (2,-1.5);\coordinate (C) at (4,0);
+	\coordinate (S) at ($(A)+(0,3)$);
+	\draw (B)--(S)--(A)--(B)--(C)--(S);
+	\draw[dashed] (A)--(C);
+	\foreach \x/\g in {A/180,B/-90,C/0,S/90} \fill[black](\x) circle (1pt) ($(\x)+(\g:4mm)$) node{$\x$};
+\end{tikzpicture}
+}	
+	}
+\end{ex}
+%Câu 3
+\begin{ex}%[1D6H1-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho $a$ là số thực dương khác $1$. Khi đó $\sqrt[4]{a^{\tfrac{2}{3}}}$ bằng
+	\choice
+	{\True $\sqrt[6]{a}$}
+	{$a^{\tfrac{8}{3}}$}
+	{$\sqrt[3]{a^2}$}
+	{$a^{\tfrac{3}{8}}$}
+	\loigiai{
+Ta có $\sqrt[4]{a^{\tfrac{2}{3}}}=a^{\tfrac{1}{6}}=\sqrt[6]{a}$.
+	}
+\end{ex}
+%Câu 4
+\begin{ex}%[1D6H1-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Rút gọn biểu thức $P=x^{\tfrac{8}{3}}\cdot \sqrt[6]{x}=x^{\tfrac{a}{b}}$ với $x>0$, $\dfrac{a}{b}$ là phân số tối giản. Tính $a+b$.
+	\choice
+	{\True $23$}
+	{$14$}
+	{$15$}
+	{$12$}
+	\loigiai{
+	Ta có $P=x^{\tfrac{8}{3}}\cdot x^{\tfrac{1}{6}}=x^{\tfrac{8}{3}+\tfrac{1}{6}}=x^{\tfrac{17}{6}}$.\\
+	Suy ra $a=17$, $b=6$. Do đó $a+b=23$.
+	}
+\end{ex}
+%Câu 5
+\begin{ex}%[1H8N6-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình thoi, $SA$ vuông góc với mặt phẳng $(ABCD)$. Góc tạo bởi đường thẳng $SB$ và mặt phẳng $(ABCD)$ là góc nào sau đây?
+	\choice
+	{$\widehat{SCA}$}
+	{\True $\widehat{SBA}$}
+	{$\widehat{BSA}$}
+	{$\widehat{SBD}$}
+	\loigiai{
+	\immini{
+	Vì $SA\perp (ABCD)$ nên $AB$ là hình chiếu vuông góc của $SB$ trên $(ABCD)$.\\
+	Khi đó góc tạo bởi đường thẳng $SB$ và mặt phẳng $(ABCD)$ là góc $\widehat{SBA}$.
+	}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (-1.5,-2);
+		\coordinate (D) at (4,0);
+		\coordinate (O) at ($(C)!1/2!(A)$);
+		\coordinate (C) at ($(B)+(D)-(A)$);
+		\coordinate (S) at ($(A)+(0,3)$);
+		\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C);
+		\draw[dashed,thin](C)--(A)--(B) (A)--(D)--(B) (C)--(D) (S)--(A)--(D);
+		\pic[draw,thin,angle radius=2mm] {right angle = S--A--D} pic[draw,thin,angle radius=2mm] {right angle = B--O--C};
+		\foreach \i/\g in {S/90,A/180,B/-90,C/-90,D/0}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+	\end{tikzpicture}
+	}
+	}
+\end{ex}
+%Câu 6
+\begin{ex}%[1H8H2-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình chữ nhật nhưng không phải hình vuông, $SA$ vuông góc đồng thời với $AB$, $AD$. Khẳng định nào sau đây là {\bf sai}?
+	\choice
+	{$CD\perp (SAD)$}
+	{$SA\perp (ABCD)$}
+	{$BC\perp (SAB)$}
+	{\True $BD\perp (SAC)$}
+	\loigiai{
+	\immini{
+	Ta có
+	\begin{itemize}
+	\item $\heva{&SA\perp AB\\&SA\perp AD}\Rightarrow SA\perp (ABCD)$.
+	\item $\heva{&CD\perp AD\\&CD\perp SA}\Rightarrow CD\perp (SAD)$.
+	\item $\heva{&BC\perp AB\\&BC\perp SA}\Rightarrow BC\perp (SAB)$.
+	\item $BD\perp (SAC)$ sai vì nếu  $BD\perp (SAC)$\\
+	$\Rightarrow BD\perp AC$ (vô lí). 
+	\end{itemize}
+	}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (-1.5,-2);
+		\coordinate (D) at (4,0);
+		\coordinate (O) at ($(C)!1/2!(A)$);
+		\coordinate (C) at ($(B)+(D)-(A)$);
+		\coordinate (S) at ($(A)+(0,3)$);
+		\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C);
+		\draw[dashed,thin](C)--(A)--(B) (A)--(D)--(B) (C)--(D) (S)--(A)--(D);
+		\pic[draw,thin,angle radius=2mm] {right angle = S--A--D} pic[draw,thin,angle radius=2mm] {right angle = S--A--B};
+		\foreach \i/\g in {S/90,A/180,B/-90,C/-90,D/0}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+	\end{tikzpicture}	
+	}	
+	}
+\end{ex}
+%Câu 7
+\begin{ex}%[1D9V2-4]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Một máy bay có hai động cơ hoạt động độc lập. Biết xác suất hoạt động bình thường của hai động cơ lần lượt là $0{,}9$ và $0{,}95$. Tính xác suất để có đúng một động cơ của máy bay hoạt động bình thường.
+	\choice
+	{$0{,}855$}
+	{$0{,}995$}
+	{$1{,}85$}
+	{\True $0{,}14$}
+	\loigiai{
+	Gọi $A$, $B$ là biến cố động cơ thứ nhất và động cơ thứ hai hoạt động bình thường.\\
+	Theo giả thiết $\mathrm{P}(A)=0{,}9$, $\mathrm{P}(B)=0{,}95$.\\
+	Suy ra $\mathrm{P}(\overline{A})=0{,}1$, $\mathrm{P}(\overline{B})=0{,}05$.\\
+	Gọi $X$ là biến cố có đúng một động cơ của máy bay hoạt động bình thường.\\
+	Khi đó $X=\overline{A}B\cup A\overline{B}$\\
+	$\Rightarrow \mathrm{P}(X)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(B)+ \mathrm{P}(A)\cdot\mathrm{P}(\overline{B})=0{,}1\cdot 0{,}95+0{,}9\cdot 0{,}05=0{,}14$.
+	}
+\end{ex}
+%Câu 8
+\begin{ex}%[1D9N1-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho phép thử gieo ngẫu nhiên một con xúc xắc đồng chất sáu mặt. Xét các biến cố $A=\{1;3;5\}$, $B=\{2;4;6\}$. Hãy mô tả biến cố giao $AB$.
+	\choice
+	{$\{2;6\}$}
+	{$\{2;4;6\}$}
+	{$\{1;2;3\}$}
+	{\True $\emptyset$}
+	\loigiai{
+	Biến cố $AB=\emptyset$.
+	}
+\end{ex}
+%Câu 9
+\begin{ex}%[1D6N2-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Tính $\log_2\dfrac{1}{64}$.
+	\choice
+	{$-64$}
+	{$6$}
+	{\True $-6$}
+	{$64$}
+	\loigiai{
+	Ta có $\log_2\dfrac{1}{64}=\log_2 2^{-6}=-6$.
+	}
+\end{ex}
+%Câu 10
+\begin{ex}%[1D6N1-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Với $a>0$, $b>0$, $\alpha$, $\beta$ là các số thực bất kì, đẳng thức nào sau đây {\bf sai}?
+	\choice
+	{$\dfrac{a^{\alpha}}{a^{\beta}}=a^{\alpha-\beta}$}
+	{$a^{\alpha}\cdot a^{\beta}=a^{\alpha+\beta}$}
+	{$a^{\alpha}\cdot b^{\alpha}=(ab)^{\alpha}$}
+	{\True $\dfrac{a^{\alpha}}{b^{\beta}}=\left(\dfrac{a}{b}\right)^{\alpha-\beta}$}
+	\loigiai{
+	Ta có $\dfrac{a^{\alpha}}{a^{\beta}}=a^{\alpha-\beta}$, $a^{\alpha}\cdot a^{\beta}=a^{\alpha+\beta}$, $a^{\alpha}\cdot b^{\alpha}=(ab)^{\alpha}$.
+	}
+\end{ex}
+%Câu 11
+\begin{ex}%[1D5H1-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Một công ty xây dựng khảo sát khách hàng xem họ có nhu cầu mua nhà ở mức giá nào. Kết quả khảo sát được ghi lại ở bảng sau:
+	\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		Mức giá\centering{ (triệu đồng/m$^2$)}  &$[10;14)$  &$[14;18)$  &$[18;22)$  &$[22;26)$  &$[26;30)$  \\
+		\hline
+		Số khách hàng& $54$  &$78$  &$120$  &$45$  &$12$  \\
+		\hline
+	\end{tabular}
+	\end{center}
+	Hãy ước lượng mức giá trung bình theo nhu cầu mua nhà của khách hàng.
+	\choice
+	{$20$}
+	{\True $18{,}5$}
+	{$18$}
+	{$21{,}3$}
+	\loigiai{
+	Giá trung bình theo nhu cầu mua nhà là
+	$$\overline{x}=\dfrac{54\cdot 12+78\cdot 16+120\cdot 20+45\cdot 24+12\cdot 28}{309}=18{,}5.$$
+	}
+\end{ex}
+%Câu 12
+\begin{ex}%[1H8H2-5]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông, $SA\perp (ABCD)$. Hình chiếu của $SC$ lên mặt phẳng $(SAB)$ là
+	\choice
+	{\True $SB$}
+	{$AC$}
+	{$BC$}
+	{$SD$}
+	\loigiai{
+	\immini{
+	Ta có $\heva{&CB\perp AB\\&CB\perp SA}\Rightarrow CB\perp (SAB)$.\\
+	Suy ra hình chiếu của $SC$ lên mặt phẳng $(SAB)$ là $SB$.
+	}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (-1.5,-2);
+		\coordinate (D) at (4,0);
+		\coordinate (O) at ($(C)!1/2!(A)$);
+		\coordinate (C) at ($(B)+(D)-(A)$);
+		\coordinate (S) at ($(A)+(0,3)$);
+		\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C);
+		\draw[dashed,thin](C)--(A)--(B) (A)--(D)--(B) (C)--(D) (S)--(A)--(D);
+		\pic[draw,thin,angle radius=2mm] {right angle = S--A--D} pic[draw,thin,angle radius=2mm] {right angle = S--A--B};
+		\foreach \i/\g in {S/90,A/180,B/-90,C/-90,D/0}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+	\end{tikzpicture}	
+	}
+	}
+\end{ex}
+%Câu 13
+\begin{ex}%[1D9V2-4]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Một hộp kín chứa $15$ viên bi màu đỏ, $16$ viên bi màu xanh, $17$ viên bi màu vàng. Lấy ngẫu nhiên $10$ bi từ hộp. Xác suất để $10$ viên bi lấy được có đủ ba màu bằng
+	\choice
+	{$0{,}031$}
+	{$0{,}983$}
+	{$0{,}017$}
+	{\True $0{,}969$}
+	\loigiai{
+	Tổng số viên bi trong hộp là $15+16+17=48$.
+	\begin{itemize}
+	\item Số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}^{10}_{48}$.
+	\item Gọi $A$ là biến cố \lq\lq $10$ viên bi lấy được có đủ ba màu\rq\rq.\\
+	Suy ra $\overline{A}\colon$ \lq\lq $10$ viên bi lấy được không có đủ ba màu\rq\rq
+	\begin{itemize}
+	\item TH1. $10$ viên bi được chọn có một màu.\\
+	Suy ra có $\mathrm{C}^{10}_{15}+\mathrm{C}^{10}_{16}+\mathrm{C}^{10}_{17}=30459$.
+	\item TH2. $10$ viên bi được chọn có hai màu.\\
+	Chọn hai màu đỏ và xanh có $\mathrm{C}^{10}_{31}-\mathrm{C}^{10}_{15}-\mathrm{C}^{10}_{16}=44341154$.\\
+	Chọn hai màu đỏ và vàng có $\mathrm{C}^{10}_{32}-\mathrm{C}^{10}_{15}-\mathrm{C}^{10}_{17}=64489789$.\\
+	Chọn hai màu xanh và vàng có $\mathrm{C}^{10}_{33}-\mathrm{C}^{10}_{16}-\mathrm{C}^{10}_{17}=92533584$.
+	\end{itemize}
+	Khi đó $n(\overline{A})=201394986$.\\
+	Xác suất biến cố $\overline{A}$ là $\mathrm{P}(\overline{A})=\dfrac{n(\overline{A})}{n(\Omega)}=0{,}031$.\\
+	Xác suất biến cố $A$ là $\mathrm{P}(A)=1-\mathrm{P}(\overline{A})=0{,}969$.
+	\end{itemize}
+	}
+\end{ex}
+%Câu 14
+\begin{ex}%[1H8H2-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp $S.ABCD$ có $SA\perp AB$, $SA\perp AD$, $ABCD$ là tứ giác bất kì. Khẳng định nào sau đây là đúng?
+	\choice
+	{\True $SA\perp (ABCD)$}
+	{$BD\perp (SAC)$}
+	{$BC\perp (SAB)$}
+	{$CD\perp (SAD)$}
+	\loigiai{
+	\immini{
+		Ta có	$\heva{&SA\perp AB\\&SA\perp AD}\Rightarrow SA\perp (ABCD)$.
+		}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\coordinate (A) at (0,0);
+			\coordinate (B) at (-1.5,-2);
+			\coordinate (D) at (4,0);
+			\coordinate (O) at ($(C)!1/2!(A)$);
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C);
+			\draw[dashed,thin](C)--(A)--(B) (A)--(D)--(B) (C)--(D) (S)--(A)--(D);
+			\pic[draw,thin,angle radius=2mm] {right angle = S--A--D} pic[draw,thin,angle radius=2mm] {right angle = S--A--B};
+			\foreach \i/\g in {S/90,A/180,B/-90,C/-90,D/0}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+		\end{tikzpicture}	
+	}	
+	}
+\end{ex}
+%Câu 15
+\begin{ex}%[1D9N2-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho $A$ và $B$ là hai biến cố xung khắc. Mệnh đề nào dưới đây đúng?
+	\choice
+	{Hai biến cố $A$ và $B$ đồng thời xảy ra}
+	{$\mathrm{P}(A)+\mathrm{P}(B)=1$}
+	{\True Hai biến cố $A$ và $B$ không đồng thời xảy ra}
+	{$\mathrm{P}(A)+\mathrm{P}(B)<1$}
+	\loigiai{
+	Vì $A$, $B$ nên hai biến cố xung khắc nên $A$ và $B$ không đồng thời xảy ra.
+	}
+\end{ex}
+%Câu 16
+\begin{ex}%[1D6H2-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho $a$ và $b$ là hai số thực dương thỏa mãn $a^2b^3=16$. Giá trị của $4\log_2 a+6\log_2 b$ bằng
+	\choice
+	{$2$}
+	{$16$}
+	{\True $8$}
+	{$4$}
+	\loigiai{
+	Ta có $a^2b^3=16\Rightarrow \log_2(a^2b^3)=\log_2(16)\Leftrightarrow \log_2 a^2+\log_2 b^3=4\Leftrightarrow 2\log_2 a+3\log_2 b=4$.\\
+	Vậy $4\log_2 a+6\log_2 b=8$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\begin{center}
+	\textbf{ĐÁP ÁN}
+	\inputansbox{10}{ans/ans}	
+\end{center}
+
+
+
+\begin{center}
+	\textbf{PHẦN 2 - ĐÚNG SAI}
+\end{center}
+
+\Opensolutionfile{ans}[ans/answer]
+\begin{ex}%[1D6V2-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+Cho $a$, $b$ là các số thực dương khác $1$ và $c$ là số thực dương. Các mệnh đề sau đúng hay sai?
+\choiceTF[1t]
+{\True $\log_a\dfrac{b}{c}=\log_a b-\log_a c$}
+{\True $\ln\left(\dfrac{ab}{\mathrm{e}^4}\right)=\ln a+\ln b-4$}
+{$\log_a b^5=5$}
+{$\log(10a)+\log(10a)^2+\cdots+\log(10a)^{2024}=2025(1012+\log a)$}
+\loigiai{
+\begin{itemchoice}
+\itemch Đúng vì $\log_a\dfrac{b}{c}=\log_a b-\log_a c$.
+\itemch Đúng vì $\ln\left(\dfrac{ab}{\mathrm{e}^4}\right)=\ln(ab)-\ln(\mathrm{e}^4)=\ln a+\ln b-4$.
+\itemch Sai vì $\log_a b^5=5\log_a b$.
+\itemch Sai vì
+\begin{eqnarray*}
+&&\log(10a)+\log(10a)^2+\cdots+\log(10a)^{2024}\\
+&=&\log(10a)+2\log(10a)+\cdots+2024\log(10a)\\
+&=&(1+2+\cdots+2024)\cdot (1+\log a)\\
+&=&\dfrac{2024\cdot 2025}{2}\cdot (1+\log a).\\
+&=&2025\cdot 1012\cdot (1+\log a).
+\end{eqnarray*}
+\end{itemchoice}
+}
+\end{ex}
+\begin{ex}%[1H8C6-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp tứ giác $S.ABCD$, đáy $ABCD$ là hình thang vuông tại $A$ và $D$, biết $AB=2CD=2AD=2a$, $SA\perp (ABCD)$, $SC=a\sqrt{6}$. Các mệnh đề sau đúng hay sai?
+	\choiceTF[1t]
+	{\True Hai đường thẳng $SA$, $CD$ vuông góc với nhau}
+	{Góc giữa đường thẳng $SB$ và $(ABCD)$ bằng $60^\circ$}
+	{Côsin của góc nhị diện $[A,SB,C]$ bằng $-\dfrac{\sqrt{15}}{10}$}
+	{\True Đường thẳng $CD\perp (SAD)$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\coordinate (A) at (0,0);\coordinate (D) at (-1,-2);
+			\coordinate (B) at (6,0);\coordinate (C) at (2,-2);
+			\coordinate (O) at ($(A)!0.5!(C)$);\coordinate (M) at ($(A)!0.5!(B)$);
+			\coordinate (S) at ($(A)+(0,4)$);
+			\coordinate (H) at ($(S)!4/5!(B)$);
+			\coordinate (K) at ($(S)!1/2!(B)$);
+			\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C)--(H);
+			\draw[dashed,thin](C)--(A)--(B) (A)--(D) (S)--(A)--(D) (C)--(M) (M)--(H) (A)--(K);
+			\pic[draw,thin,angle radius=2mm] {right angle = M--H--B} pic[draw,thin,angle radius=2mm] {right angle = B--A--D}
+			pic[draw,thin,angle radius=2mm] {right angle = S--A--B}
+			pic[draw,thin,angle radius=2mm] {right angle = S--K--A}
+			pic[draw,thin,angle radius=2mm] {right angle = A--D--C};
+			\foreach \i/\g in {S/90,A/180,B/0,C/-90,D/-90,M/-60,H/90,K/60}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+		\end{tikzpicture}
+		\end{center}
+		Ta có $AC=\sqrt{AD^2+CD^2}=a\sqrt{2}$ và $SA=\sqrt{SC^2-AC^2}=\sqrt{6a^2-2a^2}=2a$.
+		\begin{itemchoice}
+			\itemch Đúng vì $SA\perp (ABCD)$ nên $SA\perp CD$.
+			\itemch Sai vì $(SB,(ABCD))=(SB,AB)=\widehat{SBA}=45^\circ$ do tam giác $SAB$ vuông cân tại $A$.
+			\itemch Sai.\\
+			Gọi $M$ là trung điểm của $AB\Rightarrow AMCD$ là hình vuông cạnh $a$.\\
+			Gọi $H$, $K$ là hình chiếu vuông góc của $M$, $A$ trên $SB$.\\
+			Ta có $\heva{&CM\perp AB\\&CM\perp SA}\Rightarrow CM\perp (SAB)\Rightarrow CM\perp SB$.\\
+			Mặt khác $MH\perp SB\Rightarrow (CMH)\perp SB$.\\
+			Suy ra $[A,SB,C]=\widehat{MHC}$.\\
+			Vì tam giác $SAB$ vuông cân tại $A$, $SA=AB=2a$ nên $AK=\dfrac{1}{2}SB=a\sqrt{2}\Rightarrow MH=\dfrac{1}{2}AK=\dfrac{a\sqrt{2}}{2}$.\\
+			Xét tam giác $CMH$ vuông tại $M\Rightarrow CH=\sqrt{a^2+\dfrac{a^2}{2}}=\dfrac{a\sqrt{6}}{2}$\\
+			và 
+			$ \cos\widehat{CHM}=\dfrac{MH}{CH}=\dfrac{\dfrac{a\sqrt{2}}{2}}{\dfrac{a\sqrt{6}}{2}}=\dfrac{\sqrt{3}}{3}$.
+			\itemch Đúng vì $\heva{&CD\perp SA\\&CD\perp AD}\Rightarrow CD\perp (SAD)$.
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+%\inputansbox[2]{2}{ans/answer.tex}
+
+
+
+\begin{center}
+	\textbf{PHẦN 3 - TỰ LUẬN}
+\end{center}
+%Câu 1
+\begin{bt}%[1D5H2-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+Khảo sát thời gian tập thể dục của một số học sinh khối 11 thu được mẫu số liệu ghép nhóm sau.
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	Thời gian (phút)& $[0;20)$  & $[20;40)$  &$[40;60)$  &$[60;80)$  & $[80;100)$  \\
+	\hline
+	Số học sinh&$5$  &$9$  &$12$  &$10$  &$6$  \\
+	\hline
+\end{tabular}
+\end{center}
+Tìm trung vị của mẫu số liệu trên. (làm tròn đến hàng phần chục).
+\loigiai{
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		Thời gian (phút)& $[0;20)$  & $[20;40)$  &$[40;60)$  &$[60;80)$  & $[80;100)$  \\
+		\hline
+		Số học sinh&$5$  &$9$  &$12$  &$10$  &$6$  \\
+		\hline
+		Tần số tích lũy&$5$  &$14$  &$26$  &$36$  &$42$  \\
+		\hline
+	\end{tabular}
+\end{center}
+Số học sinh khối $11$ là $5+9+12+10+6=42$.\\
+Trung vị của mẫu số liệu là $M_e=40+\dfrac{\dfrac{42}{2}-14}{12}\cdot 20=51{,}7$.
+}
+\end{bt}
+
+%Câu 2
+	\begin{bt}%[1H8H6-1]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp tam giác $S.ABC$ có hình chiếu của đỉnh $S$ lên mặt phẳng $ABC$ là trung điểm $M$ của cạnh $AB$. Biết tam giác $ABC$ và tam giác $SAB$ là các tam giác đều cạnh $a$. Tính số đo góc tạo bởi $SC$ và mặt phẳng $(ABC)$.	
+	\loigiai{
+	\immini{
+	Vì tam giác $ABC$ và tam giác $SAB$ là các tam giác đều cạnh $a$ nên $SM=CM=\dfrac{a\sqrt{3}}{2}$.\\
+	Suy ra tam giác $SMC$ vuông cân tại $M$.\\
+	Do $SM\perp (ABC)$ nên $MC$ là hình chiếu vuông góc của $SC$ trên $(ABC)$ nên góc tạo bởi $SC$ và mặt phẳng $(ABC)$ là $\widehat{SCM}=45^\circ$.
+	}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate (A) at (0,0);\coordinate (B) at (4,-2);\coordinate (C) at (5,0);
+		\coordinate (M) at ($(A)!1/2!(B)$); 
+		\coordinate (S) at ($(M)+(0,4)$);
+		\draw (B)--(S)--(A)--(B)--(C)--(S)--(M);
+		\draw[dashed] (A)--(C)--(M);
+		\pic[draw,thin,angle radius=2mm] {right angle = S--M--A} pic[draw,thin,angle radius=2mm] {right angle = S--M--C};
+		\foreach \x/\g in {A/180,B/-90,C/0,S/90,M/-90} \fill[black](\x) circle (1pt) ($(\x)+(\g:4mm)$) node{$\x$};
+	\end{tikzpicture}
+	}
+	}
+\end{bt}
+
+%Câu 3
+\begin{bt}%[1D5H2-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Quãng đường (km) các cầu thủ (không tính thủ môn) chạy trong một trận bóng đá tại giải ngoại hạng Anh được cho trong bảng thống kê sau.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Quãng đường& $[2;4)$  & $[4;6)$  &$[6;8)$  &$[8;10)$  & $[10;12)$  \\
+			\hline
+			Số cầu thủ&$2$  &$5$  &$6$  &$9$  &$3$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm tứ phân vị và mốt của mẫu số liệu ghép nhóm trên (làm tròn kết quả đến hàng phần trăm).
+\loigiai{
+		\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Quãng đường& $[2;4)$  & $[4;6)$  &$[6;8)$  &$[8;10)$  & $[10;12)$  \\
+			\hline
+			Số cầu thủ&$2$  &$5$  &$6$  &$9$  &$3$  \\
+			\hline
+			Tần số tích lũy&$2$  &$7$  &$13$  &$22$  &$25$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+\begin{itemize}
+\item Mốt của mẫu số liệu là $M_O=8+\dfrac{9-6}{2\cdot 9-6-3}\cdot 2\approx 8{,}67$.
+\item Tứ phân vị
+\begin{itemize}
+\item $Q_1=4+\dfrac{\dfrac{25}{4}-2}{5}\cdot 2\approx 5{,}7$.
+\item $Q_2=6+\dfrac{\dfrac{25}{2}-7}{6}\cdot 2\approx 7{,}83$.
+\item $Q_3=8+\dfrac{\dfrac{3\cdot 25}{4}-13}{9}\cdot 2\approx 9{,}28$.
+\end{itemize}
+\end{itemize}
+}
+\end{bt}
+%Câu 4
+\begin{bt}%[1D9C1-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Một xạ thủ bắn từ khoảng cách $100$ m có xác suất bắn trúng đích là
+	\begin{itemize}
+	\item Tâm $10$ điểm: $0{,}5$.
+	\item  Vòng $9$ điểm: $0{,}25$.
+	\item Vòng $8$ điểm: $0{,}1$.
+	\item Vòng $7$ điểm: $0{,}1$.
+	\item Ngoài vòng $7$ điểm: $0{,}05$.
+	\end{itemize}
+	Tính xác suất để sau $3$ lần bắn xạ thủ đó được $25$ điểm.
+	\loigiai{
+	Ta có $25=10+10+5=10+9+6=10+8+7=9+9+7=9+8+8$.\\
+	Vậy xác suất để sau ba lần bắn người đó được $25$ điểm là
+	\begin{eqnarray*}
+		P&=&\left(0{,}5\cdot 0{,}5\cdot 0{,}05\right)\cdot 3+\left(0{,}5\cdot 0{,}25\cdot 0{,}05\right)\cdot 6+\left(0{,}5\cdot 0{,}1\cdot 0{,}1\right)\cdot 6\\
+		&&+\left(0{,}25\cdot 0{,}25\cdot 0{,}1\right)\cdot 3+\left(0{,}25\cdot 0{,}1\cdot 0{,}1\right)\cdot 3\\
+		&=&0{,}13125.
+	\end{eqnarray*}
+	}
+\end{bt}
+%Câu 5
+\begin{bt}%[1H8V6-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Trần Văn Hùng]%[THPT Nam Lý-Hà Nam]
+	Cho hình chóp tứ giác $S.ABCD$ có đáy $ABCD$ là hình thoi cạnh $a$, $\widehat{ABC}=60^\circ$. Hình chiếu của $S$ lên mặt phẳng $(ABCD)$ trùng với trọng tâm $G$ của tam giác $ABC$. Biết $SA=\dfrac{2a\sqrt{3}}{3}$.
+	\begin{enumEX}{2}
+	\item Chứng minh $AC\perp (SBD)$.
+	\item Xác định góc nhị diện $[A,SB,C]$.
+	\end{enumEX}
+	\loigiai{
+	\immini{
+	\begin{enumEX}{1}
+	\item Vì $G$ là hình chiếu của $S$ lên mặt phẳng $(ABCD)$ nên $SG\perp (ABCD)$\\
+	$\Rightarrow SG\perp AC$.\\
+	Mà $ABCD$ là hình thoi nên $BD\perp AC$.\\
+	Do đó $AC\perp (SBD)$.
+	\item Kẻ $CH\perp SB$ tại $H$.\\
+	vì $SB\perp AC$ (do $AC\perp (SBD)$) nên\\
+	$SB\perp (HAC)$ hay $[A,SB,C]=\widehat{AHC}$.\\
+	Do $\widehat{ABC}=60^\circ$ và $AB=BC=a$ nên $\triangle ABC$ đều cạnh $a$.
+	\end{enumEX}
+	}
+	{
+		\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (-2,-2);
+		\coordinate (D) at (5,0);
+		\coordinate (C) at ($(B)+(D)-(A)$);
+		\coordinate (O) at ($(A)!0.5!(C)$);
+		\coordinate (G) at ($(B)!2/3!(O)$);
+		\coordinate (S) at ($(G)+(0,4.5)$);
+		\coordinate (H) at ($(S)!1/4!(B)$);
+		\draw(S)--(B) (S)--(C)--(D)--(S) (B)--(C)--(H);
+		\draw[dashed,thin](A)--(B) (C)--(A) (C)--(D) (S)--(A)--(D)--(B) (S)--(G) (A)--(H)--(O)--(S);
+		\pic[draw,thin,angle radius=2mm] {right angle = S--G--D} pic[draw,thin,angle radius=2mm] {right angle = B--O--C}
+		pic[draw,thin,angle radius=2mm] {right angle = C--H--B};
+		\foreach \i/\g in {S/90,A/180,B/-90,C/-90,D/0,O/-90,G/-90,H/120}{\draw[fill=black](\i) circle (1.5pt) ($(\i)+(\g:4mm)$) node[scale=1]{$\i$};}
+	\end{tikzpicture}
+	}
+	\noindent
+	Vì $SG\perp (ABC)$ và $\triangle ABC$ đều nên  $SA=SB=SC=\dfrac{2a\sqrt{3}}{3}$.\\
+	Ta có $\triangle SAB=\triangle SBC$ nên $AH=CH$ hay $\widehat{AHO}=\widehat{CHO}$.\\
+	Vì $\triangle ABC$ đều cạnh $a$ nên $BO=\dfrac{a\sqrt{3}}{2}$ và $BG=\dfrac{2}{3}BO=\dfrac{a\sqrt{3}}{3}$.\\
+	Tam giác $SBG$ vuông tại $G\Rightarrow SG=\sqrt{SB^2-BG^2}=\sqrt{\dfrac{4a^2}{3}-\dfrac{a^2}{3}}=a$.\\
+	Xét tam giác $SBO$ có $S_{\triangle SBO}=\dfrac{1}{2}\cdot BO\cdot SG=\dfrac{1}{2}\cdot SB\cdot OH$\\
+	$\Rightarrow OH=\dfrac{BO\cdot SG}{SB}=\dfrac{\dfrac{a\sqrt{3}}{2}\cdot a}{\dfrac{2a\sqrt{3}}{3}}=\dfrac{3a}{4}$.\\
+	Xét tam giác $OHC$ vuông tại $O\Rightarrow \tan\widehat{OHC}=\dfrac{OC}{OH}=\dfrac{\dfrac{a}{2}}{\dfrac{3a}{4}}=\dfrac{2}{3}\Rightarrow \widehat{OHC}\approx 33{,}69^\circ$.\\
+	Vậy $[A,SB,C]\approx 67{,}38^\circ$.
+	}
+\end{bt}

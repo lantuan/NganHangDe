@@ -1,0 +1,736 @@
+\section{Dãy số}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De1]
+\caulc
+%Phan 1
+
+\begin{ex}%[1D2N1-3]
+	Cho dãy số $(u_{n})$, biết $u_{n}=(-1)^{n+1}\cdot\sqrt{n+1}$. Mệnh đề nào sau đây đúng?
+	\choice
+	{$u_{8}=3$}
+	{\True $u_{8}=-3$}
+	{$u_{8}=\sqrt{8}$}
+	{$u_{8}=-\sqrt{8}$}
+	\loigiai{$u_{8}=(-1)^{8+1}\cdot\sqrt{8+1}=-3$.}
+\end{ex}
+
+\begin{ex}%[1D2N1-3]
+	Cho dãy số $(u_{n})$, biết $u_{n}=4+3n^2$, $n\in \mathbb{N}^*$. Tính $u_{6}$.
+	\choice
+	{\True $112$}
+	{$652$}
+	{$22$}
+	{$503$}
+	\loigiai{$u_{6}=4+3\cdot 6^2=112$.}
+\end{ex}
+
+
+\begin{ex}%[1D2H1-4]
+	Cho dãy số $\left(u_{n}\right)$ biết $u_{n}=\dfrac{n^{2}+3}{2n^{2}-1}$ với $n\in N^{*}$. Tìm số hạng $u_{5}$.
+	\choice
+	{$u_{5}=\dfrac{7}{4}$}
+	{$u_{5}=\dfrac{7}{9}$} 
+	{$u_{5}=\dfrac{24}{51}$}
+	{\True $u_{5}=\dfrac{4}{7}$}
+	\loigiai{
+		$u_{5}=\dfrac{5^{2}+3}{2.5^{2}-1}=\dfrac{28}{49}=\dfrac{4}{7}$.
+	}
+	
+\end{ex}
+
+\begin{ex}%[1D2H1-4]
+	Trong các dãy số $(u_{n})$ sau, dãy số nào là dãy số giảm?
+	\choice
+	{$u_{n}=n^2$}
+	{$u_{n}=2n$}
+	{$u_{n}=n^3-1$}
+	{\True $u_{n}=\dfrac{2n+1}{n-1}$}
+	\loigiai{
+		$\forall n \in \mathbb{N}^*$, ta có:
+		\begin{itemize}
+			\item $n^2<(n+1)^2$ nên A sai.
+			\item $2n< 2(n+1)$ nên B sai.
+			\item $n^3-1<(n+1)^3-1$ nên C sai.
+		\end{itemize}
+		Với $u_{n}=\dfrac{2n+1}{n-1}$ thì $u_{n+1}-u_{n}=\dfrac{-3}{n(n-1)}<0$ nên dãy $u_{n}=\dfrac{2n+1}{n-1}$ là dãy giảm.
+	}
+\end{ex}
+
+\begin{ex}%[1D2H1-3]
+	Trong các dãy số $(u_{n})$ sau, dãy số nào là dãy số tăng?
+	\choice
+	{$u_{n}=3^{-n}+1$}
+	{$u_{n}=\sin n$}
+	{\True $u_{n}=2n-3$}
+	{$u_{n}=\dfrac{n+2}{n+1}$}
+	\loigiai{
+		$\forall n \in \mathbb{N}^*$, ta có $u_{n+1}-u_{n}=[2(n+1)-3]-(2n-3)=2>0$.\\
+		Vậy dãy số $(u_{n})$ với $u_{n}=\dfrac{n+2}{n+1}$ là dãy số tăng.
+	}
+\end{ex}
+
+\begin{ex}%[1D2H1-5]
+	Trong các dãy số $(u_{n})$ sau, dãy số nào là dãy số bị chặn?
+	\choice
+	{\True $u_{n}=\dfrac{2n+1}{n+1}$}
+	{$u_{n} =2n+\sin n$}
+	{$u_{n} =n^{2} $}
+	{$u_{n} =n^{3} -1$}
+	\loigiai{
+		Xét đáp án A, ta có $0<u_{n} =\dfrac{2n+1}{n+1} $$<2, \forall n\in \mathbb{N}$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $(u_{n})$ với $u_{n} =\dfrac{1}{n+2}$. Trong các mệnh đề dưới đây, mệnh đề nào đúng?
+	\choice
+	{\True Dãy số $(u_{n})$ là dãy số giảm và bị chặn}
+	{Dãy số $(u_{n})$ là dãy số tăng và bị chặn trên}
+	{Dãy số $(u_{n})$ là dãy số giảm và không bị chặn dưới}
+	{Dãy số $(u_{n})$ là dãy số tăng và không bị chặn trên}
+	\loigiai{
+		Ta có $u_{n} =\dfrac{1}{n+2} \Rightarrow u_{n+1} =\dfrac{1}{\left(n+1\right)+2} =\dfrac{1}{n+3}$.\\
+		Suy ra $u_{n+1} <u_{n}, \forall n \in \mathbb{N}^{*} $.\\
+		Vậy dãy số $(u_{n})$ là dãy số giảm (loại B, D).\\
+		Với $\forall n \in {\rm N}^{*}\mathbb{N}^{*} $ ta có $u_{n} =\dfrac{1}{n+2} >0$ và $n+2>1 \Rightarrow u_{n} =\dfrac{1}{n+2} <1$.\\
+		Vậy dãy số $(u_{n})$ là dãy số bị chặn.
+	}
+\end{ex}
+
+\begin{ex}%[1D2N1-3]
+	Cho dãy số $(u_{n})$ có số hạng tổng quát $u_{n} =\dfrac{n-1}{n+2},\left(n\in \mathbb{N}^{*} \right)$. Số hạng thứ $100$ của dãy số là
+	\choice
+	{\True $\dfrac{33}{34}$}
+	{$\dfrac{37}{34}$}
+	{$\dfrac{39}{34}$}
+	{$\dfrac{35}{34}$}
+	\loigiai{
+		Ta có $u_{100} =\dfrac{100-1}{100+2} =\dfrac{33}{34}$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2H1-3]
+	Cho dãy số $\heva{&u_{1}=4\\&u_{n+1}=u_{n}+n}$. Năm số hạng đầu của dãy số là
+	\choice
+	{$4$, $5$, $6$, $7$, $8$}
+	{$4$, $16$, $32$, $64$, $128$}
+	{$4$, $6$, $9$, $13$, $18$}
+	{\True $4$, $5$, $7$, $10$, $14$}
+	\loigiai{
+		Ta có
+		$$u_{2}=u_{1}+1=5$$
+		$$u_{3}=u_{2}+2=7$$
+		$$u_{4}=u_{3}+3=10$$
+		$$u_{5}=u_{4}+4=14$$
+	}
+\end{ex}
+
+\begin{ex}%[1D2V1-3]
+	Cho dãy số $(u_{n})$ có $u_{n} =\dfrac{n^{2} +1}{2n+1} $ . Số $\dfrac{37}{13}$ là số hạng thứ bao nhiêu của dãy số?
+	\choice
+	{$8$}
+	{\True $6$}
+	{$5$}
+	{$7$}
+	\loigiai{
+		Giả sử $u_{n} =\dfrac{37}{13}$ $\left(n\in {\rm N}^{*} \right)$.\\
+		Ta có $\dfrac{n^{2} +1}{2n+1} =\dfrac{37}{13} \Leftrightarrow 13n^{2} -74n-24=0 \Leftrightarrow \hoac{&n=6\\&n=-\dfrac{4}{13}}$.\\
+		Do $n\in \mathbb{N}^{*} $ nên $n=6$.\\
+		Vậy $\dfrac{37}{13}$ là số hạng thứ $6$ của dãy số $(u_{n})$}
+\end{ex}
+
+\begin{ex}%[1D2V1-4]
+	Cho dãy số$\left(u_n\right)$ xác định bởi: 
+	$\heva{&u_{1}=2;~u_{2}=3 \\ 
+		&u_{n+2}=3u_{n+1}-2u_{n} \text{ với } n\ge 1\\}$
+	Khẳng định nào sau đây sai?
+	\choice
+	{${{u}_{n}}={{2}^{n-1}}+1$}
+	{$\left( {{u}_{n}} \right)$là dãy số tăng}
+	{Năm số hạng đầu của dãy số là: $2$, $3$, $5$, $9$, $17$}
+	{\True $u_{n}=\dfrac{n^{2}+5}{3}$}
+	\loigiai{		
+		Từ công thức truy hồi ta có: $u_{1}=2$; $u_{2}=3$; $u_{3}=5$; $u_{4}=9$; $u_{5}=17$,... \\
+	Xét: $u_{n+2}=3u_{n+1}-2u_{n}$ 
+	$\Rightarrow u_{n}=\dfrac{3u_{n+1}-u_{n+2}}{2}$. \\
+	Vậy: $u_{1}=2=1+1=2^{0}+1$. \\
+	$u_{2}=3=2+1=2^{1}+1$. \\
+	$u_{3}=5=4+1=2^{2}+1$. \\
+	$u_{4}=9=8+1=2^{3}+1$. \\
+	$u_{5}=17=16+1=2^{4}+1$ \\
+	..... \\
+	Vậy công thức tổng quát của dãy số là: $u_{n}=2^{n-1}+1$.}
+\end{ex}
+
+\begin{ex}%[1D2H1-4]
+	Trong các dãy số $(u_{n})$ sau, dãy số nào là dãy số tăng?
+	\choice
+	{\True $u_{n} =\left(-1\right)^{2n} \left(5^{n} +1\right),\, \forall n\in \mathbb{N}^{*} $}
+	{$u_{n} =\dfrac{1}{\sqrt{n+1} +n} ,\, \forall n\in \mathbb{N}^{*} $}
+	{$u_{n} =\left(-1\right)^{n+1} \sin \dfrac{\pi }{n} ,\, \forall n\in \mathbb{N}^{*} $}
+	{$u_{n} =\dfrac{n}{n^{2} +1} ,\, \forall n\in \mathbb{N}^{*} $}
+	\loigiai{
+		Xét dãy số $u_{n} =\left(-1\right)^{2n} \left(5^{n} +1\right),\, \forall n\in \mathbb{N}^{*}$.\\
+		Có $u_{n} <u_{n+1} \Leftrightarrow 5^{n} +1<5^{n+1} +1\Leftrightarrow 1<5,\forall n\in \mathbb{N}^{*}$.\\
+		Vậy dãy số $(u_{n})$ là dãy số tăng.}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2.B1.De1}
+%----------
+%Phan 2
+\cauds 
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De1-DS]
+\begin{ex}%[1D2V1-2]
+	Cho dãy số $(u_{n})$, biết $\heva{&u_1=-1\\&u_{n+1}=u_{n}+3}$ với $n\geq 1$.\\
+	Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Bốn số hạng đầu tiên của dãy số lần lượt là $-1$; $2$; $5$; $8$}
+	{Số hạng thứ năm của dãy là $13$}
+	{Công thức số hạng tổng quát của dãy số là: $u_{n} = 2n-3$}
+	{\True $101$ là số hạng thứ $35$ của dãy số đã cho}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\
+			Ta có $u_{1}=-1$; $u_{2}=u_{1}+3=2$; $u_{3}=u_{2}+3=5$; $u_{4}=u_{3}+3=8$.
+			\itemch Sai.\\ $u_{5}=u_{4}+3=11$.
+			\itemch Sai.\\ Từ giả thiết, ta có $\heva{&u_1=-1\\&u_{2}=u_{1}+3\\&u_{3}=u_{2}+3\\& \ldots\\& u_{n}=u_{n-1}+3}$.\\
+			Cộng theo vế toàn bộ các đẳng thức trên và triệt tiêu các số hạng giống nhau ở hai vế, ta có $u_{n}=-1+3(n-1)=3n-4$.\\
+			Vậy công thức số hạng tổng quát của dãy số là $u_{n}=3n-4$.    
+			\itemch Đúng.\\ Xét $101=3n-4 \Rightarrow n=35$.\\
+			Vậy $101$ là số hạng thứ $35$ của dãy số đã cho.
+	\end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[1D2V1-2] 
+	Cho dãy số $(u_{n})$ biết $\heva{&u_1=2\\&u_{n+1}=u_{n}+5}$ với $n\geq 1$.\\
+	Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Năm số hạng đầu của dãy số là $u_{1}=2$; $u_{2}=7$; $u_{3}=12$; $u_{4}=17$ và $u_{5}=22$}
+	{\True Số hạng tổng quát của dãy $(u_{n})$ là $u_{n}=5n-3$}
+	{\True Số hạng $u_{50}$ bằng $247$}
+	{$512$ là số hạng thứ $102$ của dãy}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\ Ta có $u_{1}=2$; $u_{2}=u_{1}+5=7$; $u_{3}=u_{2}+5=12$; $u_{4}=u_{3}+5=17$ và $u_{5}=u_{4}+5=22$.
+			\itemch Đúng.\\ Ta có $\heva{&u_1=2\\&u_{2}=u_{1}+5\\&u_{3}=u_{2}+5\\& \ldots\\& u_{n}=u_{n-1}+5}$.\\
+			Cộng theo vế toàn bộ các đẳng thức trên và triệt tiêu các số hạng giống nhau ở hai vế, ta có $u_{n}=2+5(n-1)=5n-3$.\\
+			Vậy công thức số hạng tổng quát của dãy số là $u_{n}=5n-3$. 
+			\itemch Đúng.\\ $u_{50}=5\cdot 50-3=247$.
+			\itemch Sai.\\ Xét $5n-3=512 \Rightarrow n=103$.\\
+			Vậy $512$ là số hạng thứ $103$ của dãy số $(u_{n})$.
+	\end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[1D2V1-2]
+	Cho dãy số $(u_{n})$ biết $\heva{&u_{1}=2023; u_{2}=2024\\&2u_{n+1}=u_{n}+u_{n+2}}$ với $n\geq 1$.\\
+	Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Dãy $(v_{n}): v_{n}=u_{n}-u_{n-1}$ là dãy không đổi}
+	{\True Biểu thị $u_{n}$ qua $u_{n-1}$ ta được $u_{n}=u_{n-1}+1$}
+	{\True $u_{3}=2025$}
+	{$u_{2024}=4044$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\ Ta có $2u_{n+1}=u_{n}+u_{n+2} \Rightarrow u_{n+2}-u_{n+1}=u_{n+1}-u_{n} \Rightarrow v_{n+2}=v_{n+1}$.\\
+			Tương tự, ta chứng minh được $v_{n+1}=\cdots=v_2=1$ hay dãy $(v_{n})$ là dãy không đổi.
+			\itemch Đúng.\\ Ta có $u_{n}-u_{n-1}=1 \Rightarrow u_{n}=u_{n-1}+1$.\\
+			Suy ra
+			\begin{eqnarray*}
+				& u_{n}& =(u_{n}-u_{n-1})+(u_{n-1}-u_{n-2})+ \cdots + (u_{2}-u_{1})+u_{1}\\
+				& &=1+1+\cdots+1+u_{1}\\
+				& &=n-1+2023\\
+				&&=n+2022.
+			\end{eqnarray*}
+			Khi đó $u_{2024}=4046$.
+			\itemch Đúng.
+			\itemch Sai. 
+	\end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[1D2V1-2] 
+	Cho dãy số $(u_{n})$ biết $u_{n}=\dfrac{1}{1\cdot 2}+\dfrac{1}{2\cdot 3}+ \dfrac{1}{3\dot 4}+\cdots+\dfrac{1}{n(n+1)}$.\\
+	Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Số hạng $u_{1}=\dfrac{1}{2}$}
+	{\True Số hạng $u_{3}=\dfrac{3}{4}$}
+	{$\dfrac{10}{11}$ là số hạng thứ $11$ của dãy số}
+	{$u_{2023}+ u_{2024} >2$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\ Ta có\\
+			$$\heva{&\dfrac{1}{1\cdot 2}=\dfrac{1}{1}-\dfrac{1}{2}\\&\dfrac{1}{2\cdot 3}=\dfrac{1}{2}-\dfrac{1}{3}\\&\dfrac{1}{3\cdot 4}=\dfrac{1}{3}-\dfrac{1}{4}\\& \ldots\\& \dfrac{1}{n\cdot (n+1)}=\dfrac{1}{n}-\dfrac{1}{n+1}}.$$\\
+			Suy ra 
+			\begin{eqnarray*}
+				& u_{n}& =\dfrac{1}{1\cdot 2}+\dfrac{1}{2\cdot 3}+ \dfrac{1}{3\dot 4}+\cdots+\dfrac{1}{n(n+1)}\\
+				& &=\dfrac{1}{1}-\dfrac{1}{2} + \dfrac{1}{2}-\dfrac{1}{3} + \dfrac{1}{3}-\dfrac{1}{4} + \cdots -\dfrac{1}{n} + \dfrac{1}{n}-\dfrac{1}{n+1}\\
+				& &=1-\dfrac{1}{n+1}\\
+				&&=\dfrac{n}{n+1}.
+			\end{eqnarray*}
+			Vậy số hạng tổng quát của dãy số là $u_{n}=\dfrac{n}{n+1}$.\\
+			Vậy $u_{1}=\dfrac{1}{2}$.
+			\itemch Đúng.\\ Ta có $u_{n}=\dfrac{n}{n+1}$.\\
+			Vậy $u_{3}=\dfrac{3}{4}$.
+			\itemch Sai.\\ $\dfrac{10}{11}$ là số hạng thứ $10$ của dãy số.
+			\itemch Sai.\\ $u_{2023}+ u_{2024} < 2$.
+	\end{itemchoice}}
+\end{ex}
+
+
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C2.B1.De1-DS}
+%-------
+
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De1-KQ]
+\caukq
+%Phan 3
+\begin{ex}%[1D2V1-4]
+	Cho dãy số $(u_{n})$ với $u_{n}=n-\sqrt{n^2-1}$. Có bao nhiêu giá trị nguyên của $m\in[3;9]$ để $u_m<1$? 
+	\shortans{$7$}
+	\loigiai{
+		Ta có $u_{n}=n-\sqrt{n^2-1}=\dfrac{(n-\sqrt{n^2-1})(n+\sqrt{n^2-1})}{n+\sqrt{n^2-1}}=\dfrac{1}{n+\sqrt{n^2-1}}$.\\
+		Khi đó $u_{n+1}=\dfrac{1}{(n+1)+\sqrt{(n+1)^2-1}} < \dfrac{1}{n+\sqrt{(n+1)^2-1}}$.\\
+		Suy ra $u_{n+1}<u_{n}$.\\
+		Vậy dãy $u_{n}$ là dãy giảm.}
+\end{ex}
+
+\begin{ex}%[1D2H1-3] 
+	Cho dãy số $(u_{n})$ có số hạng tổng quát $u_{n}=\dfrac{2n+1}{n+2}$. Số $\dfrac{167}{84}$ là số hạng thứ mấy của dãy? 
+	\shortans{$250$}
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			& & u_{n} =\dfrac{167}{84}\\
+			&\Leftrightarrow& \dfrac{2n+1}{n+2} = \dfrac{167}{84}\\
+			& \Leftrightarrow& 84\cdot (2n+1)=167(n+2)\\
+			&\Leftrightarrow &n=250.
+		\end{eqnarray*}
+		Vậy $\dfrac{167}{84}$ là số hạng thứ $250$ của dãy số $(u_{n})$.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Dãy số $\heva{&u_{1}=\sqrt{2}\\&u_{n+1}=\sqrt{u_{n}+2}}$ bị chặn trên bởi $a$. Tìm $a$.
+	\shortans{$2$}
+	\loigiai{
+		Ta có $u_{n}>1$.\\
+		Giả sử tồn tại $u_{n} \geq 2 \Rightarrow \sqrt{u_{n+1}+2} \geq 2 \Rightarrow u_{n-1} \geq 2$.\\
+		Nếu tồn tại $u_{n} \geq 2$ thì suy ra $u_{n-1} \geq 2$, từ đó suy ra được $u_{n-2}, u_{n-3}, \ldots, u_{2}, u_{1} \geq 2$  vô lý.\\
+		Do $u_{1}<2$. Nên điều giả sử là sai. Suy ra $u_{n}<2$.\\
+		Xét $u_{n+1}-u_{n}=\sqrt{u_{n}+2}-u_{n}=\dfrac{u_{n}+2-u_{n}^2}{\sqrt{u_{n}+2}+u_{n}}=\dfrac{(2-u_{n})(1+u_{n})}{\sqrt{u_{n}+2}+u_{n}}>0$.\\
+		Suy ra: $u_{n+1}>u_{n}$  nên  $(u_{n})$ là dãy tăng.\\
+		Vậy dãy đã cho tăng và bị chặn trên bởi $2$.}
+\end{ex}
+
+\begin{ex}%[1D2V1-2] 
+	Cho dãy số $(u_{n})$ với $\heva{&u_{1}=3\\&u_{n+1}=u_{n}+2, \forall n \geq 1}$ có số hạng tổng quát $u_{n}=an+b$ với $a,b\in \mathbb{Z}$. Tính $a+b$.
+	\shortans{$1$}
+	\loigiai{
+		$u_{n+1}=u_{n}+2 \Rightarrow u_{n+1}-u_{n}=2, \forall n \geq 1$. Khi đó ta có
+		$u_{2}-u_{1}=2$\\
+		$u_{3}-u_{2}=2$\\
+		$\ldots$\\
+		$u_{n}-u_{n-1}=2$\\
+		Cộng theo vế các đẳng thức trên ta được
+		$$u_{n}-u_{1}=(n-1) \cdot 2 \Leftrightarrow u_{n}=2n-1.$$}
+\end{ex}
+
+\begin{ex}%[1D2V1-2] 
+	Cho dãy số $(u_{n})$ với $\heva{&u_{1}=2\\&u_{n+1}=2u_{n}, \forall n \geq 1}$. Tính $u_{13}$.
+	\shortans{$8192$}
+	\loigiai{
+		$u_{n+1}=2u_{n}, \forall n \geq 1 \Rightarrow \dfrac{u_{n+1}}{u_{n}}=2, \forall n \geq 1$.\\
+		Từ đó ta có $\dfrac{u_{2}}{u_{1}}=2$; $\dfrac{u_{3}}{u_{2}}=2$; $\dfrac{u_{4}}{u_{3}}=2$, $\ldots$; $\dfrac{u_{n}}{u_{n-1}}=2$.\\
+		Nhân theo vế tất cả các đẳng thức trên ta được
+		$$\dfrac{u_{n}}{u_{1}}=2^{n-1} \Leftrightarrow u_{n}=u_{1}\cdot 2^{n-1} \Leftrightarrow u_{n}=2\cdot 2^{n-1} \Leftrightarrow u_{n}=2^{n}.$$
+		Do đó $u_{13}=8192$.}
+\end{ex}
+
+\begin{ex}%[1D2V1-4]
+	Cho dãy số $(u_{n})$ với $\heva{&u_{1}=1; u_2=2\\&u_{n+2}=u_{n+1}+(1-a)u_{n}, \forall n \in \mathbb{N}^*}$.\\
+	Có bao nhiêu giá trị nguyên của $a$ thuộc $\left[1;10\right]$ để dãy số $(u_{n})$ tăng?
+	\shortans{$9$}
+	\loigiai{
+		Xét $u_{n+2}-u_{n+1}=u_{n+1}+(1-a)u_{n} -u_{n+1}=(a-1)(u_{n+1}-u_{n})$.\\
+		Khi đó
+		$$u_{3}-u_{2}=(a-1)(u_{2}-u_{1})=a-1$$
+		$$u_{4}-u_{3}=(a-1)(u_{3}-u_{2})=(a-1)^2$$
+		$$u_{5}-u_{4}=(a-1)(u_{4}-u_{3})=(a-1)^3.$$
+		Suy ra $u_{n+1}-u_{n}=(a-1)^{n-1}$.\\
+		Để dãy số $(u_{n})$ tăng thì $a-1>0 \Leftrightarrow a>1$.\\
+		Vậy $a>1$ thì dãy số $(u_{n})$ tăng.}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2.B1.De1-KQ}
+
+
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De2]
+\caulc
+%Phan 1
+\begin{ex}%[1D2N1-3] 
+	Cho dãy số $\left(u_{n} \right)$ thỏa mãn $u_{n} =\dfrac{2^{n-1} +1}{n} $. Tìm số hạng thứ $10$ của dãy số đã cho.
+	\choice
+	{$51{,}2$}
+	{\True $51{,}3$}
+	{$51{,}1$}
+	{$102{,}3$}
+	\loigiai{
+		Ta có $u_{10} =\dfrac{2^{10-1} +1}{10} =51,3$.}
+\end{ex}
+
+\begin{ex}%[1D2N1-3] 
+	Cho dãy số cho bởi  $\left(u_{n} \right)$ công thức tổng quát $u_{n} =3+4n^{2} ,\, \, n\in \mathbb{N}^{*} $. Khi đó $u_{5} $ bằng
+	\choice
+	{\True $103$}
+	{$23$}
+	{$503$}
+	{$-97$}
+	\loigiai{
+		$u_{n} =3+4n^{2} \Rightarrow u_{5} =3+4.5^{2} =103$.}
+\end{ex}
+
+\begin{ex}%[1D2H1-3] 
+	Cho dãy số $\left(u_{n} \right)$ thỏa mãn $u_{n} =3^{n}$. Tính $u_{n+1}$.
+	\choice
+	{$u_{n+1} =3^{n} +3$}
+	{$u_{n+1} =3.3^{n}$}
+	{$u_{n+1} =3^{n} +1$}
+	{\True $u_{n+1} =3\left(n+1\right)$}
+	\loigiai{
+		Ta có $u_{n+1} =3^{n+1} =3.3^{n}$.}
+\end{ex}
+
+\begin{ex}%[1D2H1-4]
+	Trong các dãy số $\left(u_{n} \right)$ được cho bởi số hạng tổng quát sau đây, dãy số nào là dãy số giảm?
+	\choice
+	{$u_{n} =n^{2} ,\, \forall n\in \mathbb{N}^{*} $}
+	{$u_{n} =\sqrt{n+1} ,\, \forall n\in \mathbb{N}^{*} $}
+	{$u_{n} =\frac{n^{2} +1}{n} ,\, \forall n\in \mathbb{N}^{*}$}
+	{\True $u_{n} =\frac{1}{2^{n} } ,\, \forall n\in \mathbb{N}^{*}$}
+	\loigiai{
+		Xét dãy số $u_{n} =\dfrac{1}{2^{n} } ,\, \forall n\in \mathbb{N}^{*}$.\\
+		Có $u_{n} >u_{n+1} \Leftrightarrow \dfrac{1}{2^{n} } >\dfrac{1}{2^{n+1} } \Leftrightarrow 2>1,\forall n\in \mathbb{N}^{*}$.\\
+		Vậy $u_{n} =\dfrac{1}{2^{n} } ,\, \forall n\in \mathbb{N}^{*}$ là dãy giảm.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $\left(u_{n} \right)$ với $u_{n} =2n-1$. Dãy số $\left(u_{n} \right)$ là dãy số
+	\choice
+	{Bị chặn trên bởi 1}
+	{Giảm}
+	{Bị chặn dưới bởi 2}
+	{\True Tăng}
+	\loigiai{
+		$\forall n\in \mathbb{N}^{*}$, ta có $u_{n+1} -u_{n} =2\left(n+1\right)-1-\left(2n-1\right)=2>0$ nên $u_{n+1} >u_{n}$.\\
+		Vậy dãy số $\left(u_{n} \right)$ là dãy tăng.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $\left(u_{n} \right)$ với $u_{n} =\left(-1\right)^{n} \sqrt{n} $. Mệnh đề nào sau đây đúng?
+	\choice
+	{Dãy số $\left(u_{n} \right)$ là dãy số bị chặn}
+	{Dãy số $\left(u_{n} \right)$ là dãy số giảm}
+	{Dãy số $\left(u_{n} \right)$ là dãy số tăng}
+	{\True Dãy số $\left(u_{n} \right)$ là dãy số không bị chặn}
+	\loigiai{
+		Dãy số $\left(u_{n} \right)$ là dãy số không bị chặn vì $\lim \left|u_{n} \right|=\lim \sqrt{n} =+\infty $.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Xét các câu sau:
+	\begin{itemize}
+		\item[(1)] Dãy $1,2,3,\ldots,n,\ldots$ là dãy bị chặn.
+		\item[(2)] Dãy $1,\dfrac{1}{3}$ , $\dfrac{1}{5}$, $\dfrac{1}{7}$, $\ldots$, $\dfrac{1}{2n-1}$, $\ldots$ là dãy bị chặn trên nhưng không bị chặn dưới.
+	\end{itemize}
+	Mệnh đề nào sau đây là đúng?
+	\choice
+	{Chỉ có $(2)$ đúng}
+	{Chỉ có $(1)$ đúng}
+	{Cả hai câu đều đúng}
+	{\True Cả hai câu đều sai}
+	\loigiai{
+		Dãy $1,2,3,\ldots,n,\ldots$ là dãy bị chặn dưới, không bị chặn trên nên không phải dãy số bị chặn.\\
+		Dãy $1,\dfrac{1}{3}$ , $\dfrac{1}{5}$, $\dfrac{1}{7}$, $\ldots$, $\dfrac{1}{2n-1}$, $\ldots$ là dãy bị chặn trên tại$1$ và bị chặn dưới tại $0$.\\
+		Do đó cả hai câu trên đều sai.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $\left(u_{n} \right)$ có $u_{n} =\dfrac{1}{n\left(n+1\right)}$. Tìm mệnh đề đúng.
+	\choice
+	{Dãy số $\left(u_{n} \right)$ chỉ bị chặn dưới}
+	{Dãy số $\left(u_{n} \right)$ tăng}
+	{\True Dãy số $\left(u_{n} \right)$ bị chặn}
+	{Dãy số $\left(u_{n} \right)$ chỉ bị chặn trên}
+	\loigiai{
+		Xét $\dfrac{u_{n+1} }{u_{n} } =\dfrac{n}{n+2}$.\\
+		Với $\forall n\geq$ ta có $0<u_{n} <1$.\\
+		Vậy dãy $\left(u_{n} \right)$ bị chặn.}
+\end{ex}
+
+\begin{ex}%[1D2H1-3]
+	Cho dãy số $\left(u_{n} \right)$ với $u_{n} =\dfrac{an^{2} }{n+1} $  ($a$ là hằng số). Hỏi $u_{n+1}$ là số hạng nào sau đây?
+	\choice
+	{$u_{n+1} =\dfrac{an^{2} }{n+2} $}
+	{\True $u_{n+1} =\dfrac{a\left(n+1\right)^{2} }{n+2} $}
+	{$u_{n+1} =\dfrac{a\left(n+1\right)^{2} }{n+1} $}
+	{$u_{n+1} =\dfrac{an^{2} +1}{n+1} $}
+	\loigiai{
+		Ta có $u_{n+1} =\dfrac{a\left(n+1\right)^{2} }{\left(n+1\right)+1} =\dfrac{a\left(n+1\right)^{2} }{n+2} $.}
+\end{ex}
+
+\begin{ex}%[1D2V1-3] 
+	Cho dãy số $\left(u_{n} \right)$ xác định bởi $u_{1} =3;\; u_{n+1} =u_{n} +n,\; \forall \, n\in \mathbb{N}^{*} $. Giá trị bằng $u_{1} +u_{2} +u_{3}$ bằng
+	\choice
+	{$18$}
+	{\True $13$}
+	{$15$}
+	{$16$}
+	\loigiai{
+		Ta có $$u_{1} =3$$
+		$$u_{2} =u_{1} +1=3+1=4$$ 
+		$$u_{3} =u_{2} +2=4+2=6.$$ 
+		Suy ra $u_{1} +u_{2} +u_{3} =3+4+6=13$.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $\left(u_{n} \right)$ với $u_{n} =2n-1$. Dãy số $\left(u_{n} \right)$ là dãy số
+	\choice
+	{Bị chặn trên bởi $1$}
+	{Giảm}
+	{Bị chặn dưới bởi $2$}
+	{\True Tăng}
+	\loigiai{
+		$\forall n\in \mathbb{N}^{*} $	ta có $u_{n+1} -u_{n} =2\left(n+1\right)-1-\left(2n-1\right)=2>0$ nên $u_{n+1} >u_{n}$.\\
+		Vậy $\left(u_{n} \right)$ dãy số tăng.}
+\end{ex}
+
+\begin{ex}%[1D2V1-5]
+	Cho dãy số $\left(u_{n} \right)$ với $u_{n} =\dfrac{1}{n^{2} +n} $. Khẳng định nào sau đây là sai?
+	\choice
+	{Năm số hạng đầu của dãy là $\dfrac{1}{2}$, $\dfrac{1}{6} ;\dfrac{1}{12}$, $\dfrac{1}{20} ;\dfrac{1}{30}$}
+	{\True $\left(u_{n} \right)$ là dãy số tăng}
+	{Bị chặn trên bởi số $M=\dfrac{1}{2}$}
+	{Không bị chặn}
+	\loigiai{
+		Ta có 
+		\begin{eqnarray*}
+			& u_{n+1} -u_{n} & =\dfrac{1}{\left(n+1\right)^{2} +\left(n+1\right)} - \dfrac{1}{n^{2} +n}\\
+			& &= \dfrac{1}{\left(n+1\right)\left(n+2\right)} -\dfrac{1}{n\left(n+1\right)}\\
+			&&= \dfrac{-2}{n\left(n+1\right)\left(n+2\right)} <0.
+		\end{eqnarray*}
+		với $n\geq 1$.\\
+		Do đó là dãy giảm.}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2.B1.De2}
+%----------
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De2-DS]
+%Phan 2
+\begin{ex}%[1D2V1-3] 
+	Cho dãy số $\left(u_{n} \right)$, biết $u_{n} =\dfrac{-n}{n+1}$. Khi đó:
+	\choiceTF
+	{\True Năm số hạng đầu tiên của dãy số là $u_{1} =-\dfrac{1}{2}$; $u_{2} =-\dfrac{2}{3}$; $u_{3} =-\dfrac{3}{4}$; $u_{4} =-\dfrac{4}{5}$ và $u_{5} =-\dfrac{5}{6}$}
+	{\True Số hạng $u_{10} ,u_{100} $ lần lượt là $-\dfrac{10}{11} ;-\dfrac{100}{101} $}
+	{$-\dfrac{85}{86} $ là số hạng thứ $86$ của dãy số $\left(u_{n} \right)$ }
+	{$-\dfrac{99}{101} $ là một số hạng của dãy số $\left(u_{n} \right)$ }
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\
+			Ta có $u_{1} =-\dfrac{1}{2}$; $u_{2} =-\dfrac{2}{3}$; $u_{3} =-\dfrac{3}{4}$; $u_{4} =-\dfrac{4}{5}$; $u_{5} =-\dfrac{5}{6}$.
+			\itemch Đúng.\\
+			Ta có $u_{10} =-\dfrac{10}{11}$, $u_{100} =-\dfrac{100}{101} $.
+			\itemch Sai.\\
+			Xét $-\dfrac{85}{86} =\dfrac{-n}{n+1} \Leftrightarrow 85n+85=86n\Leftrightarrow n=85$.\\
+			Vậy $-\dfrac{85}{86}$ là số hạng thứ $85$ của dãy số $\left(u_{n} \right)$.
+			\itemch Sai.\\
+			Xét $-\dfrac{99}{101} =\dfrac{-n}{n+1} \Leftrightarrow 99n+99=101n\Leftrightarrow n=\dfrac{99}{2} \notin \mathbb{N}^{*} $ (loại).\\
+			Vậy $-\dfrac{99}{101}$ không phải là số hạng của dãy số $\left(u_{n} \right)$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D2V1-3] 
+	Cho dãy số $\left(u_{n} \right)$ xác định bởi $u_{n} =\dfrac{1}{1.3} +\dfrac{1}{3.5} +\dfrac{1}{5.7} +\ldots +\dfrac{1}{(2n-1)\cdot (2n+1)} $. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{Số hạng thứ $2021$ là $\dfrac{2021}{4040} $}
+	{Số hạng thứ $2022$ là $\dfrac{2022}{4043} $}
+	{Số hạng thứ $2023$ là $\dfrac{2023}{4047}$}
+	{Số hạng thứ $2021$ là $\dfrac{2024}{4049}$}
+	\loigiai{
+		Với $k$ là số nguyên dương, ta có
+		$$\dfrac{1}{(2k-1)\cdot (2k+1)} =\dfrac{1}{2} \left[\dfrac{(2k+1)-(2k-1)}{(2k-1)\cdot (2k+1)} \right]=\dfrac{1}{2} \left(\dfrac{1}{2k-1} -\dfrac{1}{2k+1} \right).$$
+		Khi đó
+		\begin{eqnarray*}
+			& u_{n} &  =\dfrac{1}{2} \left[\left(\dfrac{1}{1} -\dfrac{1}{3} \right)+\left(\dfrac{1}{3} -\dfrac{1}{5} \right)+\left(\dfrac{1}{5} -\dfrac{1}{7} \right)+\ldots +\left(\dfrac{1}{2n-1} -\dfrac{1}{2n+1} \right)\right]\\
+			& & =\dfrac{1}{2} \left(1-\dfrac{1}{2n+1} \right)\\
+			&&=\dfrac{n}{2n+1}.
+		\end{eqnarray*}
+		Vậy $u_{n} =\dfrac{n}{2n+1}$, với mọi $n\in \mathbb{N}^{*}$.\\
+		Áp dụng công thức số hạng tổng quát ta có
+		$$u_{2021} =\dfrac{2021}{2.2021+1} =\dfrac{2021}{4043}$$ 
+		$$u_{2022} =\dfrac{2022}{2.2022+1} =\dfrac{2022}{4045}$$
+		$$u_{2023} =\dfrac{2023}{2.2023+1} =\dfrac{2023}{4047}$$
+		$$u_{2024} =\dfrac{2024}{2.2024+1} =\dfrac{2024}{4049}.$$}
+\end{ex}
+
+\begin{ex}%[1D2V1-3] 
+	Cho dãy số $\left(u_{n} \right)$ có số hạng tổng quát $u_{n} =\dfrac{2n+1}{n+2} $. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{Số hạng đầu tiên của dãy số là $1$}
+	{Số hạng $u_{2} =\dfrac{5}{4}$, $u_{3} =\dfrac{7}{5} $}
+	{Số hạng $u_{4} =\dfrac{3}{2}$, $u_{5} =\dfrac{11}{7} $}
+	{Số $\dfrac{167}{84} $ là số hạng thứ $252$ của dãy số $\left(u_{n} \right)$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\
+			Ta có $u_{1} =1$; $u_{2} =\dfrac{5}{4} $; $u_{3} =\dfrac{7}{5}$; $u_{4} =\dfrac{3}{2}$; $u_{5} =\dfrac{11}{7} $.
+			\itemch Đúng. 
+			\itemch Đúng.
+			\itemch Sai.\\
+			Xét $\dfrac{2n+1}{n+2} =\dfrac{167}{84} \Leftrightarrow 84(2n+1)=167(n+2)\Leftrightarrow n=250$.\\
+			Vậy $\dfrac{167}{84}$ là số hạng thứ $250$ của dãy số $\left(u_{n} \right)$.
+	\end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[1D2C1-3] 
+	Cho dãy số $(u_{n})$ được xác định $\heva{&u_{1}=2\\&u_{n+1}-u_{n}=2n-1, \forall n \in \mathbb{N}^*}$.\\
+	Xét tính đúng sai của các khẳng định sau:
+	\choiceTF[2]
+	{\True $u_{2} =3$}
+	{\True $u_{4} =11$}
+	{$u_{2024} =4092536$}
+	{$u_{2023} =4088482$}
+\loigiai{
+	\begin{itemchoice}
+		\itemch Đúng.\\
+		Ta có $$u_{n+1} -u_{n} =2n-1\Rightarrow u_{n+1} =u_{n} +2n-1$$
+		$$u_{2} =2+2.1-1=3$$
+		Khi đó
+		$$u_{3} =3+2.2-1=6$$  $$u_{4} =6+2.3-1=11.$$
+		Suy ra $u_{n} =2+(n-1)^{2}$
+		\itemch Đúng.
+		\itemch Sai.\\
+		$u_{2023} =4088486$.  
+		\itemch Sai.\\
+		$u_{2024} =4092531$.
+\end{itemchoice}}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C2.B1.De2-DS}
+%-------
+
+\Opensolutionfile{ans}[ans/ans-1-C2.B1.De2-KQ]
+\caukq
+%Phan 3
+\begin{ex}%[1D2V1-4]
+	Cho dãy số $\left(u_{n}\right)$ với $u_{n} =\dfrac{mn+1}{n+1}$. Có bao nhiêu giá trị nguyên của tham số $m$ thuộc $[0;2024]$ để dãy số $\left(u_{n} \right)$ là dãy số tăng?
+	\shortans{2023}
+	\loigiai{
+		Xét
+		\begin{eqnarray*}
+			& u_{n+1} -u_{n} &=\dfrac{m(n+1)+1}{(n+1)+1} -\frac{mn+1}{n+1}\\
+			&&=\dfrac{mn+m+1}{n+2} -\dfrac{mn+1}{n+1} \\
+			&& =\dfrac{mn^{2} +2mn+m+n+1-\left(mn^{2} +2mn+n+2\right)}{(n+2)(n+1)} \\
+			&& =\dfrac{m-1}{(n+2)(n+1)}.
+		\end{eqnarray*}
+		Dãy số đã cho là dãy tăng $\Leftrightarrow \dfrac{m-1}{(n+2)(n+1)} >0,\forall n\in \mathbb{N}^{*} \Leftrightarrow m>1$ \\(do $(n+2)(n+1)>0$, $\forall n \in \mathbb{N}^{*}$).\\
+		Vậy $m>1$ thỏa mãn đề bài. Do đó có $2023$ giá trị.}
+\end{ex}
+
+\begin{ex}%[1D2V1-6]
+	Vào đầu mỗi tháng, ông An đều gửi vào ngân hàng số tiền cố định $30$ triệu đồng theo hình thức lãi kép với lãi suất   $0{,}6 \%$/tháng. Gọi $A$ (triệu đồng) là số tiền ông An có được sau tháng thứ hai. Tính $A$ (làm tròn đến hàng đơn vị) 
+	\shortans{$61$.}
+	\loigiai{
+		Số tiền ông An có được
+		\begin{itemize}
+			\item Sau tháng thứ nhất là $T_{1} =30+30\cdot \dfrac{0,6}{100} =30\left(1+\dfrac{0,6}{100} \right)=30,18$ (triệu đồng).
+			\item Sau tháng thứ hai là\\
+			$T_{2} =30+30\left(1+\dfrac{0,6}{100} \right)+\left[30+30\left(1+\dfrac{0,6}{100} \right)\right]\cdot\dfrac{0,6}{100} \approx 60{,}54$ (triệu đồng).
+	\end{itemize}}
+\end{ex}
+
+\begin{ex}%[1D2N1-3] 
+	Cho dãy số $(u_{n})$ với $u_{n} =\dfrac{2n+1}{n^{2}}$. Số hạng thứ $6$ của dãy số có dạng $\dfrac{m}{n}$ với $m,n\in\mathbb{Z}$ và $\dfrac{m}{n}$ là phân số tối giản. Tính $m+n$.
+	\shortans{$49$}
+	\loigiai{
+		$u_{6} =\dfrac{2.6+1}{6^{2} } =\dfrac{13}{36}$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2N1-3] 
+	Cho dãy số $(u_{n})$ xác định bởi $\heva{&u_{1}=-1; u_2=3\\&u_{n+1}=u_{n}+u_{n-1}, \forall n \geq 2}$. Tìm số hạng thứ $5$ của dãy.
+	\shortans{9}
+	\loigiai{
+		Ta có $u_{1} =-1$, $u_{2} =3$.\\
+		Từ hệ thức truy hồi ta có 
+		$$u_{3} =u_{2} +2u_{1} =3+2\cdot (-1)=1.$$ 
+		$$u_{4} =u_{3} +2u_{2} =1+2.3=7$$
+		$$u_{5} =u_{4} +2u_{3} =7+2.1=9.$$
+	}
+\end{ex}
+
+\begin{ex}%[1D2V1-2]
+	Cho dãy số $\left(u_{n} \right):-3;-1;1;3;5;\ldots$. Tính số hạng thứ $7$. 
+	\shortans{9}
+	\loigiai{
+		Ta có $u_{1} =-3$, $u_{2} =-1$, $u_{3} =1$, $u_{4} =3$, $u_{5} =5$, $\ldots $\\
+		Suy ra $u_{2} =u_{1} +2$, $u_{3} =u_{2} +2$, $u_{4} =u_{3} +2$, $u_{5} =u_{4} +2$, $\ldots $.\\
+		Vậy hệ thức truy hồi xác định dãy số đã cho là $\heva{&u_{1}=-3\\&u_{n+1}=u_{n}+2, (n \geq 1)}$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2C1-3] 
+	Cho hình vuông $A_{1}B_{1}C_{1}D_{1}$ có cạnh bằng $4$. Với mọi số nguyên dương $n\geq 2$, gọi $A_{n}$, $B_{n}$; $C_{n}$, $D_{n}$ lần lượt là trung điểm của các cạnh $A_{n-1} B_{n-1}$, $B_{n-1} C_{n-1}$, $C_{n-1} D_{n-1}$, $D_{n-1} A_{n-1} $. Gọi $S_{n}$ là diện tích của tứ giác $A_{n} B_{n} C_{n} D_{n}$. Biết $S_{12}=2^m$ với $m\in\mathbb{Z}$. Tính $m$.
+	\shortans{$-15$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1.2]
+				\coordinate (a1) at (0,4);
+				\coordinate (c1) at (4,0);
+				\coordinate (b1) at ($(a1)+(4,0)$);
+				\coordinate (d1) at ($(c1)-(4,0)$);
+				\draw (a1)--(b1)--(c1)--(d1)--cycle;
+				\draw (a1) node[above]{$A_1$} (b1) node[above]{$B_1$}
+				(c1) node[below]{$C_1$} (d1) node[below]{$D_1$};
+				
+				\coordinate (a2) at (2,4);
+				\coordinate (c2) at (2,0);
+				\coordinate (b2) at (4,2);
+				\coordinate (d2) at (0,2);
+				\draw (a2)--(b2)--(c2)--(d2)--cycle;
+				\draw (a2) node[above]{$A_2$} (b2) node[right]{$B_2$}
+				(c2) node[below]{$C_2$} (d2) node[left]{$D_2$};
+				
+				\coordinate (a3) at (3,3);
+				\coordinate (c3) at (1,1);
+				\coordinate (b3) at (3,1);
+				\coordinate (d3) at (1,3);
+				\draw (a3)--(b3)--(c3)--(d3)--cycle;
+				\draw (a3) node[above right]{$A_3$} (b3) node[below right]{$B_3$}
+				(c3) node[below left]{$C_3$} (d3) node[above left]{$D_3$};
+				
+				\coordinate (a4) at (3,2);
+				\coordinate (c4) at (1,2);
+				\coordinate (b4) at (2,1);
+				\coordinate (d4) at (2,3);
+				\draw (a4)--(b4)--(c4)--(d4)--cycle;
+				\draw (a4) node[right]{$A_4$} (b4) node[below]{$B_4$}
+				(c4) node[left]{$C_4$} (d4) node[above]{$D_4$};
+			\end{tikzpicture}
+		\end{center}
+		Ta thấy mỗi tứ giác $A_{n} B_{n} C_{n} D_{n} $ là một hình vuông có cạnh là $A_{n} B_{n} $.\\
+		Ta có
+		$A_{1} B_{1} =4$, $A_{2} B_{2} =\dfrac{1}{\sqrt{2} } A_{1} B_{1} =2\sqrt{2}$, $A_{3} B_{3} =\dfrac{1}{\sqrt{2} } A_{2} B_{2} =\left(\dfrac{1}{\sqrt{2} } \right)^{2} A_{1} B_{1} =2$, $\ldots$\\
+		Tổng quát: $A_{n} B_{n} =\left(\dfrac{1}{\sqrt{2} } \right)^{n-1} A_{1} B_{1} =\left(\dfrac{1}{\sqrt{2} } \right)^{n-1} \cdot 4=\left(\dfrac{1}{\sqrt{2} } \right)^{n+3} $.\\
+		Diện tích hình vuông $A_{n} B_{n} C_{n} D_{n}$ là $S_{n} =\left(A_{n} B_{n} \right)^{2} =\left(\dfrac{1}{2} \right)^{n+3} $,với mọi $n\in \mathbb{N}^{*}$.\\
+		Áp dụng với $n=12$ ta có $S_{12} =\left(\dfrac{1}{2} \right)^{15} =\dfrac{1}{32768}=2^{-15} \Rightarrow m=-15$.}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C2.B1.De2-KQ}

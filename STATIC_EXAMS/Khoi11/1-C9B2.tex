@@ -1,0 +1,709 @@
+\section{Biến cố hợp và quy tắc cộng xác suất}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE1]
+\caulc
+\begin{ex}%[1D9N2-1]
+	Cho $A$, $B$ là hai biến cố xung khắc. Đẳng thức nào sau đây đúng?
+	\choice
+	{\True $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)$}
+	{$\mathrm{P}(A\cup B)=\mathrm{P}(A)\cdot \mathrm{P}(B)$}
+	{$\mathrm{P}(A\cup B)=\mathrm{P}(A)-\mathrm{P}(B)$}
+	{$\mathrm{P}(A\cap B)=\mathrm{P}(A)+\mathrm{P}(B)$}
+	\loigiai{
+	Ta có $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A\cap B)$.\\
+	Vì $A$, $B$ là hai biến cố xung khắc nên $A\cap B=\varnothing $.\\
+	Từ đó suy ra $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-1]
+	Cho hai biến cố $A$ và $B$ có $\mathrm{P}(A)=\dfrac{1}{3}$, $\mathrm{P}(B)=\dfrac{1}{4}$, $\mathrm{P}(A\cup B)=\dfrac{1}{2}$. Khẳng định nào sau đây đúng
+	\choice
+	{Độc lập}
+	{\True Không xung khắc}
+	{Xung khắc}
+	{Không rõ}
+	\loigiai{
+	Ta xét
+	\begin{eqnarray*}
+		& &\mathrm{P}(A\cup B)= \mathrm{P}(A)+P(B)-P(A\cap B)\\
+		&\Leftrightarrow & \dfrac{1}{2}=\dfrac{1}{3}+\dfrac{1}{4}-\mathrm{P}(A\cap B)\\
+		&\Leftrightarrow & \mathrm{P}(A\cap B)=\dfrac{1}{12}\ne 0.
+	\end{eqnarray*}
+	Suy ra hai biến cố $A$ và $B$ là hai biến cố không xung khắc.}
+\end{ex}
+
+\begin{ex}%[1D9H2-5]
+	Cho $A$, $B$ là hai biến cố độc lập. Biết $\mathrm{P}(A)=0{,}5$; $\mathrm{P}(AB)=0{,}2$. Tính $\mathrm{P}(A\cup B)$.
+	\choice
+	{$0{,}4$}
+	{$0{,}9$}
+	{$0{,}6$}
+	{\True $0{,}7$}
+	\loigiai{
+	Vì $A$, $B$ là hai biến cố độc lập nên $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)\Rightarrow \mathrm{P}(B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}=0{,}4$.\\
+	Do đó $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=0{,}7$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Cho $A$, $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(A)=\dfrac{1}{3}$, $\mathrm{P}(B)=\dfrac{1}{4}$. Tính $\mathrm{P}(A\cup B)$.
+	\choice
+	{\True $\dfrac{7}{12}$}
+	{$\dfrac{1}{12}$}
+	{$\dfrac{1}{7}$}
+	{$\dfrac{1}{2}$}
+	\loigiai{
+	$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{7}{12}$.}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Ba xạ thủ cùng bắn vào một bia. Xác suất trúng đích lần lượt là $0{,}5$; $0{,}6$ và $0{,}8$. Xác suất để ít nhất một người bắn trúng bia là
+	\choice
+	{$0{,}24$}
+	{$0{,}16$}
+	{$0{,}82$}
+	{\True $0{,}96$}
+	\loigiai{
+	Xác suất bắn trượt của ba xạ thủ lần lượt là $0{,}5$; $0{,}4$ và $0{,}2$.\\
+	Gọi biến cố $A\colon$ \lq\lq Ít nhất một người bắn trúng bia\rq\rq.\\
+	Suy ra $\overline{A}\colon$ \lq\lq Cả ba người cùng trượt\rq\rq.\\
+	Xác suất cả ba người cùng trượt là $\mathrm{P}(\overline{A})=0{,}5\cdot 0{,}4\cdot 0{,}2=0{,}04$.\\
+	Vậy xác suất để ít nhất một người bắn trúng bia là $\mathrm{P}(A)=1-\mathrm{P}(\overline{A})=0{,}96$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Cho hai biến cố $A$ và $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(A)=\dfrac{1}{4}$, $\mathrm{P}(A\cup B)=\dfrac{1}{2}$. Tính $\mathrm{P}(B)$
+	\choice
+	{$\dfrac{1}{8}$}
+	{\True $\dfrac{1}{4}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{3}{4}$}
+	\loigiai{
+	Vì $A$ và $B$ là các biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)$.\\
+	Suy ra $\mathrm{P}(B)=\mathrm{P}(A\cup B)-\mathrm{P}(A)=\dfrac{1}{2}-\dfrac{1}{4}=\dfrac{1}{4}$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-5]
+	Cho $A$ và $B$ là hai biến cố độc lập. Biết $\mathrm{P}(A)=0{,}4$ và $\mathrm{P}(B)=0{,}5$. Xác suất của biến cố $A\cup B$ là
+	\choice
+	{$0{,}9$}
+	{\True $0{,}7$}
+	{$0{,}5$}
+	{$0{,}2$}
+	\loigiai{
+	Vì $A$ và $B$ là hai biến cố độc lập nên $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}4\cdot0{,}5=0{,}2.$\\
+	Do đó $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=0{,}4+0{,}5-0{,}2=0,7$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Cho $A$, $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(A)=\dfrac{1}{5}$, $\mathrm{P}(A\cup B)=\dfrac{1}{3}$. Tính $\mathrm{P}(B)$.
+	\choice
+	{$\dfrac{3}{5}$}
+	{$\dfrac{8}{15}$}
+	{\True $\dfrac{2}{15}$}
+	{$\dfrac{1}{15}$}
+	\loigiai{
+	$A$, $B$ là hai biến cố xung khắc.\\
+	Suy ra $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)\Rightarrow \mathrm{P}(B)=\mathrm{P}(A\cup B)-\mathrm{P}(A)=\dfrac{1}{3}-\dfrac{1}{5}=\dfrac{2}{15}$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Cho $A$ và $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(A)=\dfrac{1}{3}$, $\mathrm{P}(B)=\dfrac{1}{4}$. Tính $\mathrm{P}(A\cup B)$.
+	\choice
+	{\True $\dfrac{7}{12}$}
+	{$\dfrac{1}{12}$}
+	{$\dfrac{1}{7}$}
+	{$\dfrac{1}{2}$}
+	\loigiai{
+	Do $A$ và $B$ là hai biến cố xung khắc nên
+	$$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{1}{3}+\dfrac{1}{4}=\dfrac{7}{12}.$$}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Cho hai biến cố $A$ và $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(A)=\dfrac{1}{4}$, $\mathrm{P}(A\cup B)=\dfrac{1}{2}$. Tính $\mathrm{P}(B)$
+	\choice
+	{$\dfrac{1}{8}$}
+	{\True $\dfrac{1}{4}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{3}{4}$}
+	\loigiai{
+	Vì $A$ và $B$ là các biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)$.\\
+	Suy ra $\mathrm{P}(B)=\mathrm{P}(A\cup B)-\mathrm{P}(A)=\dfrac{1}{2}-\dfrac{1}{4}=\dfrac{1}{4}$.}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Ba người cùng bắn vào $1$ bia. Xác suất để người thứ nhất, thứ hai,thứ ba bắn trúng đích lần lượt là $0{,}8$; $0{,}6$; $0{,}5$. Xác suất để có đúng $2$ người bắn trúng đích bằng
+	\choice
+	{$0{,}24$}
+	{$0{,}96$}
+	{\True $0{,}46$}
+	{$0{,}92$}
+	\loigiai{
+	Xác suất để người thứ nhất, thứ hai, thứ ba bắn trúng đích lần lượt là $\mathrm{P}(A_1)=0{,}8$; $\mathrm{P}(A_2)=0{,}6$; $\mathrm{P}(A_2)=0{,}5$.\\
+	Xác suất để có đúng hai người bán trúng đích bằng
+	$$\mathrm{P}(A_1)\cdot \mathrm{P}(A_2)\cdot \mathrm{P}(\overline{A_3})+\mathrm{P}(A_1)\cdot \mathrm{P}(\overline{A_2})\cdot \mathrm{P}(A_3)+\mathrm{P}(\overline{A_1})\cdot \mathrm{P}(A_2)\cdot \mathrm{P}(A_3)=0{,}46.$$}
+\end{ex}
+
+\begin{ex}%[1D9H2-3]
+	Lớp có $40$ học sinh gồm $16$ nam và $24$ nữ. Thầy giáo chủ nhiệm cần chọn ngẫu nhiên trong lớp một nhóm gồm $3$ học sinh để tham gia văn nghệ kỉ niệm ngày thành lập trường. Tính xác suất nhóm thầy chọn được có ít nhất $2$ học sinh nữ.
+	\choice
+	{$\dfrac{193}{247}$}
+	{$\dfrac{552}{1235}$}
+	{$\dfrac{253}{1235}$}
+	{\True $\dfrac{161}{247}$}
+	\loigiai{
+	Ta có $n(\Omega)=\mathrm{C}_{40}^3$.\\
+	Xét biến cố $A\colon$ \lq\lq $3$ học sinh để tham gia văn nghệ có ít nhất $2$ học sinh nữ\rq\rq.\\
+	Suy ra $n(A)=\mathrm{C}_{16}^1\cdot\mathrm{C}_{24}^2+\mathrm{C}_{24}^3$.\\
+	Xác suất $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{161}{247}$.}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B2-DE1}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE1-DS]
+\cauds
+
+\begin{ex}%[1D9H2-5]
+	Một hộp đựng $30$ tấm thẻ có đánh số từ $1$ đến $30$, hai tấm thẻ khác nhau đánh hai số khác nhau. Lấy ngẫu nhiên một tấm thẻ từ hộp.
+	\choiceTF
+	{\True Xác suất thẻ đánh số chia hết cho $3$ bằng $\dfrac{1}{3}$}
+	{Xác suất thẻ đánh số chia hết cho $4$ bằng $\dfrac{11}{30}$}
+	{\True Xác suất thẻ đánh số chia hết cho $3$ và chia hết cho $4$ bằng $\dfrac{1}{15}$}
+	{\True Xác suất thẻ đánh số chia hết cho $3$ hoặc $4$ bằng $\dfrac{1}{2}$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Gọi $A$ là biến cố \lq\lq Lấy được thẻ đánh số chia hết cho $3$\rq\rq.\\
+		Suy ra $n(A)=10$ và $\mathrm{P}(A)=\dfrac{10}{30}=\dfrac{1}{3}$.
+		\itemch Gọi $B$ là biến cố \lq\lq Lấy được thẻ đánh số chia hết cho $4$\rq\rq.\\
+		Suy ra $n(B)=7$ và $\mathrm{P}(B)=\dfrac{7}{30}$.
+		\itemch Ta có $A B$ là biến cố \lq\lq Lấy được thẻ đánh số chia hết cho $3$ và chia hết cho $4$\rq\rq.\\
+		Suy ra $A B=\{12;24\}$ hay $n(A B)=2$ và $\mathrm{P}(A B)=\dfrac{2}{30}=\dfrac{1}{15}$.
+		\itemch Xác suất để lấy được thẻ đánh số chia hết cho $3$ hoặc $4$ là\\
+		$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=\dfrac{1}{3}+\dfrac{7}{30}-\dfrac{1}{15}=\dfrac{1}{2}$.
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Ba người cùng bắn vào $1$ bia. Xác suất bắn trúng đích của người thứ nhất, thứ hai, thứ ba lần lượt là $0{,}7$; $0{,}6$; $0{,}8$. Gọi $A$ là biến cố \lq\lq Người thứ nhất bắn trúng đích\rq\rq. Gọi $B$ là biến cố \lq\lq Người thứ hai bắn trúng đích\rq\rq. Gọi $C$ là biến cố \lq\lq Người thứ ba bắn trúng đích\rq\rq.
+	\choiceTF
+	{ $ \mathrm{P}(A)=0{,}7$; $\mathrm{P}(\overline{A})=0{,}7$}
+	{\True  $ \mathrm{P}(B)=0{,}6$; $ \mathrm{P}(\overline{B})=0{,}4$}
+	{\True  $ \mathrm{P}(C)=0{,}8$; $ \mathrm{P}(\overline{C})=0{,}2$}
+	{\True Xác suất để có đúng $2$ người bắn trúng đích $0{,}452$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Gọi $A$ là biến cố \lq\lq Người thứ nhất bắn trúng đích\rq\rq $\Rightarrow \mathrm{P}(A)=0{,}7$; $ \mathrm{P}(\overline{A})=0{,}3$.
+		\itemch Gọi $B$ là biến cố \lq\lq Người thứ hai bắn trúng đích\rq\rq $\Rightarrow \mathrm{P}(B)=0{,}6$; $ \mathrm{P}(\overline{B})=0{,}4$.
+		\itemch Gọi $C$ là biến cố \lq\lq Người thứ ba bắn trúng đích\rq\rq $\Rightarrow \mathrm{P}(C)=0{,}8$; $ \mathrm{P}(\overline{C})=0{,}2$.
+		\itemch	Gọi $X$ là biến cố \lq\lq Có đúng $2$ người bắn trúng đích\rq\rq. Vì $A$, $B$, $C$ là ba biến cố độc lập nên ta có
+		\begin{eqnarray*}
+			\mathrm{P}(X)
+			&-& \mathrm{P}(A B\overline{C})+\mathrm{P}(A\overline{B}C)+(\overline{A}B C)\\
+			&= &0{,}7\cdot  0{,}6\cdot  0{,}2+0{,}7\cdot  0{,}4\cdot  0{,}8+0{,}3\cdot  0{,}6\cdot  0{,}8\\
+			&= & 0{,}452.
+		\end{eqnarray*}
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Túi $X$ chứa ba viên bi trắng và hai viên bi đỏ. Túi $Y$ chứa một bi trắng và ba màu đỏ viên bi. Người ta chọn ngẫu nhiên mỗi hộp một viên bi. Gọi $A$ là biến cố \lq\lq Lấy được viên bi màu trắng từ túi $X$\rq\rq. Gọi $B$ là biến cố \lq\lq Lấy được viên bi màu trắng từ túi $Y$\rq\rq. Gọi $X_1$ là biến cố \lq\lq Lấy được hai viên bi cùng màu đỏ\rq\rq. 
+	\choiceTF
+	{\True  $\mathrm{P}(A)=\dfrac{3}{5}$}
+	{$\mathrm{P}(B)=\dfrac{1}{5}$}
+	{$\mathrm{P}(X_1)=\dfrac{4}{5}$}
+	{\True Xác suất để lấy được hai viên bi cùng màu bằng $\mathrm{P}(X)=\dfrac{7}{15}$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Vì hai túi $X$, $Y$ đọc lập nên ta chỉ cần xét riêng túi $X$.\\
+		Số cách để lấy được $1$ viên bi trắng trong túi $X$ là $3$. Tổng số viên bi của túi $X$ là $5$.\\
+		Suy ra $\mathrm{P}(A)=\dfrac{3}{5}$.
+		\itemch Vì hai túi $X$, $Y$ đọc lập nên ta chỉ cần xét riêng túi $Y$.\\
+		Số cách để lấy được $1$ viên bi trắng trong túi $Y$ là $1$.  Tổng số viên bi của túi $Y$ là $4$.\\
+		Suy ra $\mathrm{P}(B)=\dfrac{1}{4}$.
+		\itemch Vì $A$ và $B$ là hai biến cố độc lập và $X_1=A\cap B$ nên $\mathrm{P}(X_1)=\mathrm{P}(A)\cdot \mathrm{P}(B)=\dfrac{3}{5}\cdot\dfrac{1}{3}=\dfrac{1}{5}$.
+		\itemch Gọi $X_1$ là biến cố \lq\lq Lấy được hai viên bi cùng màu đỏ\rq\rq.\\
+		Vì $\overline{A}$ và $\overline{B}$ là hai biến cố độc lập và $X_1=\overline{A}\cap\overline{B}$ nên $\mathrm{P}(X_1)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(\overline{B})=\dfrac{2}{5}\cdot\dfrac{2}{3}=\dfrac{4}{15}$.\\
+		Biến cố để hai viên bi lấy ra cùng màu là $X=X_1\cup X_2$\\
+		Lại có $X_1$ và $X_2$ là hai biến cố xung khắc, xác suất để hai viên bi lấy ra cùng màu là\\
+		$\mathrm{P}(X)=\mathrm{P}(X_1)+\mathrm{P}(X_2)=\dfrac{4}{15}+\dfrac{1}{5}=\dfrac{7}{15}$.
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H2-5]
+	Trên một giá sách có $15$ quyển sách, trong đó có $5$ quyển văn nghệ. Lấy ngẫu nhiên từ đó ba quyển. Khi đó
+	\choiceTF
+	{\True Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $1$ cuốn văn nghệ là $\dfrac{45}{91}$}
+	{Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $2$ cuốn văn nghệ là $\dfrac{14}{91}$}
+	{\True Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $3$ cuốn văn nghệ là $\dfrac{2}{9}$}
+	{\True Xác suất sao cho có ít nhất một quyển văn nghệ là $\dfrac{67}{91}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=\mathrm{C}_{15}^3$.
+	\begin{itemchoice}
+		\itemch Gọi biến cố $A\colon$ \lq\lq Lấy $3$ quyển trong đó có $1$ cuốn văn nghệ\rq\rq.\\
+		Suy ra $n(A)=\mathrm{C}_5^1\cdot \mathrm{C}_{10}^2$.\\
+		Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $1$ cuốn văn nghệ là $$\mathrm{P}(A)=\dfrac{\mathrm{C}_5^1\cdot \mathrm{C}_{10}^2}{\mathrm{C}_{15}^3}=\dfrac{45}{91}.$$
+		\itemch Gọi biến cố $B\colon$ \lq\lq Lấy $3$ quyển trong đó có $2$ cuốn văn nghệ\rq\rq.\\
+		Suy ra $n(B)=\mathrm{C}_5^2\cdot \mathrm{C}_{10}^1$.\\
+		Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $2$ cuốn văn nghệ là $$\mathrm{P}(B)=\dfrac{\mathrm{C}_5^2\cdot \mathrm{C}_{10}^1}{\mathrm{C}_{15}^3}=\dfrac{20}{91}.$$
+		\itemch Gọi biến cố $C\colon$ \lq\lq Lấy $3$ quyển trong đó có $3$ cuốn văn nghệ\rq\rq.\\
+		Suy ra $n(C)=\mathrm{C}_5^3$.\\
+		Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có $3$ cuốn văn nghệ là $$\mathrm{P}(C)=\dfrac{\mathrm{C}_5^3}{\mathrm{C}_{15}^3}=\dfrac{2}{91}.$$
+		\itemch Xác suất để lấy ngẫu nhiên $3$ quyển trong đó có ít nhất $1$ cuốn văn nghệ là
+		$$\mathrm{P}=\mathrm{P}(A)+\mathrm{P}(B)+\mathrm{P}(C)=\dfrac{2}{91}+\dfrac{45}{91}+\dfrac{20}{91}=\dfrac{67}{91}.$$
+	\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C9B2-DE1-DS}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE1-KQ]
+\caukq
+
+\begin{ex}%[1D9H2-5]
+	Người ta thăm dò một số lượng người hâm mộ bóng đá tại một thành phố, nơi có hai đội bóng đá $X$ và $Y$ cùng thi đấu giải vô địch quốc gia. Biết rằng số lượng người hâm mộ đội bóng đá $X$ là $22\%$, số lượng người hâm mộ đội bóng đá $Y$ là $39\%$, trong số đó có $7\%$ người nói rằng họ hâm mộ cả hai đội bóng trên. Chọn ngẫu nhiên một người hâm mộ trong số những người được hỏi, tính xác suất để chọn được người không hâm mộ đội nào trong hai đội bóng đá $X$ và $Y$.
+	\shortans[]{$0{,}46$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq Chọn được một người hâm mộ đội bóng đá $X$\rq\rq, $B$ là biến cố \lq\lq Chọn được một người hâm mộ đội bóng đá $Y$\rq\rq.\\
+	Khi đó
+	\begin{itemize}
+		\item $\mathrm{P}(A)=\dfrac{22}{100}=0{,}22$;
+		\item $\mathrm{P}(B)=\dfrac{39}{100}=0{,}39$;
+		\item $ \mathrm{P}(A B)=\dfrac{7}{100}=0{,}07$.
+	\end{itemize}
+	Suy ra $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A B)=0{,}22+0{,}39-0{,}07=0{,}54$.\\
+	Xác suất để chọn được người không hâm mộ đội nào trong hai đội bóng đá $X$ và $Y$ là
+	$$\mathrm{P}(\overline{A\cup B})=1-\mathrm{P}(A\cup B)=1-0{,}54=0{,}46.$$}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Một hộp có chứa một số quả cầu gồm bốn màu xanh, vàng, đỏ, trắng (các quả cầu cùng màu thì khác nhau về bán kính). Lấy ngẫu nhiên một quả cầu từ hộp, biết xác suất để lấy được một quả cầu màu xanh bằng $\dfrac{1}{4}$, xác suất để lấy được một quả cầu màu vàng bằng $\dfrac{1}{3}$. Tính xác suất để lấy được một quả cầu xanh hoặc một quả cầu vàng(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}58$}
+	\loigiai{
+	Gọi biến cố $A\colon$ \lq\lq Lấy được một quả cầu màu xanh\rq\rq\, và $B\colon$ \lq\lq Lấy được một quả cầu màu vàng\rq\rq.\\
+	Ta có $A$, $B$ là hai biến cố xung khắc. Suy ra xác suất để lấy được một quả cầu màu xanh hoặc một quả cầu màu vàng là
+	$$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{1}{4}+\dfrac{1}{3}=\dfrac{7}{12}.$$}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Hai bạn Chiến và Công cùng chơi cờ với nhau. Trong một ván cờ, xác suất Chiến thắng Công là $0{,}3$ và xác suất để Công thắng Chiến là $0{,}4$. Hai bạn dừng chơi khi có người thắng, người thua. Tính xác suất để hai bạn dừng chơi sau hai ván cờ.
+	\shortans[]{$0{,}21$}
+	\loigiai{
+	Gọi
+	\begin{itemize}
+		\item $A$ là biến cố \lq\lq Chiến thắng Công trong ván cờ\rq\rq;
+		\item $B$ là biến cố \lq\lq Công thắng Chiến trong ván cờ\rq\rq;
+		\item $C$ là biến cố \lq\lq Công và Chiến hoà nhau trong ván cờ\rq\rq.
+	\end{itemize}
+	Dễ thấy $A$, $B$, $C$ là các biến cố xung khắc.\\
+	Theo giả thiết thì ván đấu thứ nhất hai bạn hoà nhau, ván đấu thứ hai sẽ có thắng thua.
+	\begin{itemize}
+		\item Xét ván thứ nhất: $\mathrm{P}(C)=1-\mathrm{P}(A)-\mathrm{P}(B)=1-0{,}3-0{,}4=0{,}3$.
+		\item Xét ván thứ hai: $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=0{,}3+0{,}4=0{,}7$.
+	\end{itemize}
+	Xác suất để hai bạn dừng chơi sau hai ván đấu là $P=0{,}3\cdot 0{,}7=0{,}21$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-5]
+	Rút ngẫu nhiên $1$ lá bài từ bộ bài tây $52$ lá. Tính xác suất của biến cố \lq\lq Lá bài được chọn có màu đen hoặc lá đó có số chia hết cho $3$\rq\rq(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}62$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=52$.\\
+	Gọi $A$ là biến cố \lq\lq Lá bài được chọn có màu đen\rq\rq\,suy ra $n(A)=26$ hay $\mathrm{P}(A)=\dfrac{26}{52}=\dfrac{1}{2}$.\\
+	$B$ biến cố \lq\lq Lá bài được chọn có số chia hết cho $3$\rq\rq\,suy ra $n(B)=12$ hay $\mathrm{P}(A)=\dfrac{12}{52}=\dfrac{3}{13}$.\\
+	Vì $A$ và $B$ là hai biến cố độc lập nên ta có
+	$$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A B)=\dfrac{1}{2}+\dfrac{1}{13}-\dfrac{1}{2}\cdot\dfrac{1}{13}=\dfrac{8}{13}.$$}
+\end{ex}
+
+\begin{ex}%[1D9N2-5]
+	Chọn ngẫu nhiên $3$ đỉnh trong số $12$ đỉnh của một đa giác đều $12$ cạnh. Tính xác suất của biến cố $A$ \lq\lq $3$ đỉnh được chọn tạo thành một tam giác vuông\rq\rq(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}06$}
+	\loigiai{
+	Số tam giác có thể được tạo ra bằng cách lấy $3$ đỉnh trong $12$ đỉnh của đa giác là $\mathrm{C}_{12}^3$.\\
+	Vì đa giác là đa giác đều nên sẽ có $1$ đường tròn ngoại tiếp đa giác đó.\\
+	Để $3$ đỉnh lấy ra tạo thành một tam giác vuông thì phải có $2$ đỉnh tạo thành đường kính của đường tròn ngoại tiếp. Đa giác đó số đường kính là $6$.\\
+	Số cách chọn ra $3$ đỉnh từ $12$ đỉnh của đa giác để tạo thành tam giác vuông là $n(A)=\mathrm{C}_{10}^1\cdot6$.\\
+	Xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{\mathrm{C}_{10}^1\cdot6}{\mathrm{C}_{12}^3}=\dfrac{5}{77}$.}
+\end{ex}
+
+\begin{ex}%[1D9V1-3]
+	Ở ruồi giấm, tính trạng cánh dài là tính trạng trội hoàn toàn so với tính trạng cánh ngắn. Cho ruồi giấm cái cánh dài thuần chủng giao phối với ruồi giấm đực cánh ngắn thuần chủng thu được $\mathrm{F}1$ toàn ruồi giấm cánh dài. Tiếp tục cho $\mathrm{F}1$ giao phối với nhau và thu được các con ruồi giấm $\mathrm{F}2$. Lần lượt lấy ngẫu nhiên hai con ruồi giấm $\mathrm{F}2$, tính xác suất của biến cố \lq\lq Có đúng một con ruồi giấm cánh dài trong hai con được lấy ra\rq\rq(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}38$}
+	\loigiai{
+	Quy ước kiểu gene ở thế hệ $\mathrm{F}1$ như sau
+	\begin{itemize}
+		\item Gene $A\colon$ ruồi giấm cánh dài;
+		\item Gene $a\colon$ ruồi giấm cánh ngắn.
+	\end{itemize}
+	Ở thế hệ $\mathrm{F}2$, ba kiểu gene $AA\colon Aa\colon aa$ xuất hiện với tỉ lệ $1\colon 2\colon 1$ nên tỉ lệ ruồi giấm cánh dài so với ruồi giấm cánh ngắn là $3: 1$.\\
+	Gọi $X_1$, $X_2$ lần lượt là biến cố \lq\lq Ruồi giấm lấy ra lần thứ nhất là ruồi giấm cánh dài\rq\rq\,và biến cố \lq\lq Ruồi giấm lấy ra lần thứ hai là ruồi giấm cánh dài\rq\rq.\\
+	Ta có $X_1{,} X_2$ là hai biến cố độc lập và $\mathrm{P}(X_1)=\mathrm{P}(X_2)=\dfrac{3}{4}$.\\
+	Xác suất của biến cố \lq\lq Có đúng một con ruồi giấm cánh dài trong hai con được lấy ra\rq\rq\,là
+	\begin{eqnarray*}
+		\mathrm{P}(X_1\overline{X_2}\cup\overline{X_1}X_2)
+		&=& \mathrm{P}(X_1\overline{X_2})+\mathrm{P}(\overline{X_1}X_2)\\
+		&=& \mathrm{P}(X_1) \mathrm{P}(\overline{X_2})+P(\overline{X_1}) P(X_2)\\
+		&=& 2\cdot \dfrac{3}{4}\cdot \dfrac{1}{4}\\
+		&=& \dfrac{3}{8}.
+	\end{eqnarray*}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B2-DE1-KQ}
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE2]
+\caulc
+\begin{ex}%[1D9N2-4]
+	Cho hai biến cố $A$ và $B$ là hai biến cố xung khắc. Biết $\mathrm{P}(B)=\dfrac{2}{5}$, $\mathrm{P}(A\cup B)=\dfrac{1}{2}$. Tính $\mathrm{P}(A)$
+	\choice
+	{$\dfrac{9}{10}$}
+	{\True $\dfrac{1}{10}$}
+	{$\dfrac{1}{5}$}
+	{$\dfrac{3}{4}$}
+	\loigiai{
+	Vì $A$ và $B$ là các biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)$.\\
+	Suy ra $\mathrm{P}(A)=\mathrm{P}(A\cup B)-\mathrm{P}(B)=\dfrac{1}{2}-\dfrac{2}{5}=\dfrac{1}{10}$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Trên kệ sách có $8$ sách Toán và $6$ sách Văn khác nhau được xếp thứ tự. Lấy lần lượt $3$ cuốn sách mà không để lại trên kệ. Xác suất để được ít nhất hai cuốn sách Toán
+	\choice
+	{$\dfrac{8}{14}$}
+	{\True $\dfrac{8}{13}$}
+	{$\dfrac{1}{2}$}
+	{$\dfrac{135}{364}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=\mathrm{A}_{14}^3$
+	\begin{itemize}
+		\item \textit{Trường hợp 1:} Lấy được $3$ cuốn sách Toán $\mathrm{P}_1=\dfrac{\mathrm{A}_8^3}{\mathrm{A}_{14}^3}=\dfrac{2}{13}$.
+		\item \textit{Trường hợp 2:} Lấy được $2$ cuốn sách Toán, $1$ cuốn sách Văn $\mathrm{P}_2=\dfrac{\mathrm{C}_3^2\cdot \mathrm{A}_8^2\cdot \mathrm{A}_6^1}{\mathrm{A}_{14}^3}=\dfrac{6}{13}$.
+	\end{itemize}
+	Vậy xác suất để được ít nhất hai cuốn sách Toán là $\mathrm{P}=\mathrm{P}_1+\mathrm{P}_2=\dfrac{8}{13}$.}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Cho $A$ và $B$ là hai biến cố độc lập. Biết $\mathrm{P}(B)=0{,}5$, $\mathrm{P}(A\cup B)=0{,}7$. Tính $\mathrm{P}(A)$
+	\choice
+	{$0{,}2$}
+	{$0{,}5$}
+	{$0{,}7$}
+	{\True $0{,}4$}
+	\loigiai{
+	Ta có $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)$.\\
+	Vì $A$ và $B$ là các biến cố độc lập nên
+	\begin{eqnarray*}
+		& & \mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A)\cdot \mathrm{P}(B)\\
+		&\Leftrightarrow & 0{,}7=\mathrm{P}(A)+0{,}5-0{,}5\cdot \mathrm{P}(A)\\
+		&\Leftrightarrow & \mathrm{P}(A)=0{,}4.
+	\end{eqnarray*}
+	}
+\end{ex}
+
+\begin{ex}%[1D9N2-5]
+	Một trường có $50$ em học sinh giỏi trong đó có $5$ cặp anh em sinh đôi. Cần chọn ra $3$ học sinh trong số $50$ học sinh để tham gia trại hè. Tính xác suất trong $3$ em ấy không có cặp anh em sinh đôi nào.
+	\choice
+	{$\dfrac{102}{245}$}
+	{$\dfrac{48}{49}$}
+	{$\dfrac{97}{98}$}
+	{\True $\dfrac{242}{245}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=\mathrm{C}_{50}^3$.\\
+	Xét biến cố $A\colon$ \lq\lq Trong $3$ em ấy không có cặp anh em sinh đôi\rq\rq, biến cố đối $\overline{A}\colon$ \lq\lq Trong $3$ em ấy có $1$ cặp anh em sinh đôi\rq\rq.\\
+	Số phần tử của biến cố $\overline{A}$ là $n(\overline{A})=\mathrm{C}_5^1\cdot \mathrm{C}_{48}^1$.\\
+	Xác suất của biến cố $\overline{A}$ là $\mathrm{P}(\overline{A})=\dfrac{\mathrm{C}_5^1\cdot \mathrm{C}_{48}^1}{\mathrm{C}_{50}^3}=\dfrac{3}{245}$.\\
+	Vậy $\mathrm{P}(A)=1-\mathrm{P}(\overline{A})=\dfrac{242}{245}$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Trong ngân hàng câu hỏi kiểm tra có $20$ câu hỏi trắc nghiệm và $10$ câu hỏi tự luận. Thầy giáo cần chọn ngẫu nhiên $5$ câu hỏi để tạo thành một đề kiểm tra. Xác suất để thầy giáo chọn được đề chỉ có $1$ hoặc $2$ câu hỏi tự luận gần nhất với giá trị nào sau đây?
+	\choice
+	{$0{,}5$}
+	{$0{,}6$}
+	{\True $0{,}7$}
+	{$0{,}8$}
+	\loigiai{
+	Ta có $n(\Omega)=\mathrm{C}_{30}^5$.\\
+	Gọi biến cố $A\colon$\lq\lq Đề có $1$ câu hỏi tự luận\rq\rq.\\
+	Suy ra $n(A)=\mathrm{C}_{10}^1\cdot \mathrm{C}_{20}^4$ hay $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}\approx 0{,}34$.\\
+	Gọi biến cố $B\colon$\lq\lq Đề có $2$ câu hỏi tự luận\rq\rq.\\
+	Suy ra $n(B)=\mathrm{C}_{10}^2\cdot \mathrm{C}_{20}^3$ hay  $\mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}\approx 0{,}36$.\\
+	Do $A$ và $B$ là hai biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)\approx 0,7$.}
+\end{ex}
+
+\begin{ex}%[1D9V2-5]
+	Một lớp học có $30$ học sinh, trong đó có $18$ học sinh thích đá bóng, $16$ học sinh thích cầu lông và $7$ học sinh thích chơi cả hai môn thể thao. Chọn ngẫu nhiên một học sinh. Xác suất bạn học sinh được chọn không thích chơi môn thể thao nào là
+	\choice
+	{\True $\dfrac{1}{10}$}
+	{$\dfrac{3}{5}$}
+	{$\dfrac{7}{30}$}
+	{$\dfrac{1}{15}$}
+	\loigiai{
+	Ta có $n(\Omega)=\mathrm{C}_{30}^1$.\\
+	Ta gọi các biến cố
+	\begin{itemize}
+		\item $A\colon$\lq\lq Bạn học sinh được chọn thích chơi đá bóng\rq\rq.\\
+		Suy ra $n(A)=\mathrm{C}_{18}^1$ hay $\mathrm{P}(A)=\dfrac{18}{30}=\dfrac{3}{5}$;
+		\item $\overline{A}\colon$\lq\lq Bạn học sinh được chọn không thích chơi đá bóng\rq\rq.
+		\item $B\colon$\lq\lq Bạn học sinh được chọn thích chơi cầu lông\rq\rq.\\
+		Suy ra $n(B)=\mathrm{C}_{16}^1$ hay $\mathrm{P}(B)=\dfrac{16}{30}=\dfrac{8}{15}$.
+		\item $\overline{B}\colon$\lq\lq Bạn học sinh được chọn không thích chơi cầu lông\rq\rq.
+		\item $A\cap B\colon$\lq\lq Bạn học sinh được chọn thích chơi cả hai môn thể thao\rq\rq.\\
+		Suy ra $n(A\cap B)=\mathrm{C}_7^1$ hay $\mathrm{P}(A\cap B)=\dfrac{7}{30}$.
+		\item $\overline{A}\cap\overline{B}=\overline{A\cup B}\colon$\lq\lq Bạn học sinh được chọn không thích chơi cả $2$ môn thể thao\rq\rq.
+	\end{itemize}
+	Ta có $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A\cap B)=\dfrac{9}{10}$.\\
+	Suy ra $\mathrm{P}(\overline{A\cup B})=1-\mathrm{P}(A\cup B)=\dfrac{1}{10}$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Lớp có $44$ học sinh gồm $24$ học sinh giỏi và $20$ học sinh khá. Thầy giáo chủ nhiệm cần chọn ngẫu nhiên trong lớp một nhóm gồm $3$ học sinh để kiểm tra kiến thức cũ. Tính xác suất trong $3$ bạn thầy chọn số học sinh giỏi nhiều hơn học sinh khá.
+	\choice
+	{$\dfrac{1}{14}$}
+	{\True $\dfrac{1886}{3311}$}
+	{$\dfrac{1380}{3311}$}
+	{$\dfrac{46}{301}$}
+	\loigiai{
+	Ta có $n(\Omega)=\mathrm{C}_{44}^3$.\\
+	Xét biến cố $A$ là biến cố cần tìm.\\
+	Xét các trường hợp sau
+	\begin{itemize}
+		\item \textit{Trường hợp 1:} $3$ học sinh giỏi, $0$ học sinh khá có $\mathrm{C}_{24}^3\cdot \mathrm{C}_{20}^0$ cách.
+		\item \textit{Trường hợp 2:} $2$ học sinh giỏi, $1$ học sinh khá có $\mathrm{C}_{24}^2\cdot \mathrm{C}_{20}^1$ cách.
+	\end{itemize}
+	Suy ra $n(A)=7544$ hay $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{1886}{3311}$.}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Xác suất bắn trúng mục tiêu của một vận động viên khi bắn một viên đạn là $0{,}6$. Người đó bắn hai viên đạn một cách độc lập. Xác suất để một viên trúng mục tiêu và một viên trượt mục tiêu là
+	\choice
+	{$0,4$}
+	{$0,6$}
+	{\True $0,48$}
+	{$0,24$}
+	\loigiai{
+	Gọi $A$ là biến cố viên đạn thứ nhất bắn trúng mục tiêu.\\
+	$B$ là biến cố viên đạn thứ hai bắn trúng mục tiêu.\\
+	$C$ là biến cố có đúng một viên đạn bắn trúng mục tiêu.\\
+	Vì $A$, $B$ là hai biến cố độc lập suy ra $C=A\cdot \overline{B}\cup\overline{A}\cdot B$.\\
+	Suy ra $\mathrm{P}(C)=\mathrm{P}(A)\cdot \mathrm{P}(\overline{B})+\mathrm{P}(\overline{A})\cdot \mathrm{P}(B)$ $=0{,}6\cdot0{,}4+0{,}6\cdot0{,}4=0{,}48$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-1]
+	Gieo $2$ con xúc xắc cân đối và đồng chất. Gọi $A$ là biến cố \lq\lq Tích số chấm xuất hiện là số lẻ\rq\rq. Biến cố nào sau đây xung khắc với biến cố $A$?
+	\choice
+	{\lq\lq Xuất hiện hai mặt có cùng số chấm\rq\rq}
+	{\True \lq\lq Tổng số chấm xuất hiện là số lẻ\rq\rq}
+	{\lq\lq Xuất hiện it nhất một mặt có số chấm là số lẻ\rq\rq}
+	{\lq\lq Xuất hiện hai mặt có số chấm khác nhau\rq\rq}
+	\loigiai{
+	Ta có biến cố \lq\lq Tổng số chấm xuất hiện là số lẻ\rq\rq\,xung khắc với biến cố \lq\lq Tích số chấm xuất hiện là số lẻ\rq\rq.}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Gieo $2$ con xúc xắc cân đối và đồng chất. Xác suất của biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc chia hết cho $5$ \rq\rq\,là
+	\choice
+	{$\dfrac{5}{36}$}
+	{$\dfrac{1}{6}$}
+	{\True $\dfrac{7}{36}$}
+	{$\dfrac{2}{9}$}
+	\loigiai{
+	Kết quả thuận lợi cho biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc là $5$ \rq\rq\,là $4$.\\
+	Kết quả thuận lợi cho biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc là $10$ \rq\rq\,là $3$.\\
+	Kết quả thuận lợi cho biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc chia hết cho $5$ \rq\rq\,là $3+4=7$.\\
+	Xác suất của biến cố \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc chia hết cho $5$ \rq\rq\,là $\dfrac{7}{36}$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Lấy ra ngẫu nhiên $2$ quả bóng từ một hộp chứa $5$ quả bóng xanh và $4$ quả bóng đỏ có kích thước và khối lượng như nhau. Xác suất của biến cố \lq\lq Hai quả bóng lấy ra có cùng màu\rq\rq\,là
+	\choice
+	{$\dfrac{1}{9}$}
+	{$\dfrac{2}{9}$}
+	{\True $\dfrac{4}{9}$}
+	{$\dfrac{5}{9}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=\mathrm{C}_9^2$.\\
+	Ta gọi các biến cố
+	\begin{itemize}
+		\item $A$ là biến cố \lq\lq Hai quả bóng lấy ra đều có màu xanh\rq\rq\,suy ra $\mathrm{P}(A)=\dfrac{\mathrm{C}_5^2}{\mathrm{C}_9^2}$.
+		\item $B$ là biến cố \lq\lq Hai quả bóng lấy ra đều có màu đỏ\rq\rq\,suy ra $\mathrm{P}(B)=\dfrac{\mathrm{C}_4^2}{\mathrm{C}_9^2}$.
+		\item $A\cup B$ là biến cố \lq\lq Hai bóng lấy ra có cùng màu\rq\rq.
+	\end{itemize}
+	Ta thấy $A$ và $B$ xung khắc nên
+	$$\mathrm{P}(A\cup B)=\mathrm{P}(A)+P(B)=\dfrac{4}{9}.$$}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Hộp $A$ có $4$ viên bi trắng, $5$ viên bi đỏ và $6$ viên bi xanh. Hộp $B$ có $7$ viên bi trắng, $6$ viên bi đỏ và $5$ viên bi xanh. Lấy ngẫu nhiên mỗi hộp một viên bi, tính xác suất để hai viên bi được lấy ra có cùng màu.
+	\choice
+	{$\dfrac{91}{135}$}
+	{\True $\dfrac{44}{135}$}
+	{$\dfrac{88}{135}$}
+	{$\dfrac{45}{88}$}
+	\loigiai{
+	Gọi biến cố
+	\begin{itemize}
+		\item $A\colon$\lq\lq Hai viên bi được lấy ra có cùng màu\rq\rq.
+		\item	$\mathrm{A}_1\colon$\lq\lq Hai viên bi lấy ra màu trắng\rq\rq. Lúc đó $\mathrm{P}(\mathrm{A}_1)=\dfrac{4}{15}\cdot \dfrac{7}{18}$.
+		\item $\mathrm{A}_2\colon$\lq\lq Hai viên bi lấy ra màu đỏ\rq\rq. Lúc đó $\mathrm{P}(\mathrm{A}_2)=\dfrac{5}{15}\cdot \dfrac{6}{18}$.
+		\item $\mathrm{A}_3\colon$\lq\lq Hai viên bi lấy ra màu xanh\rq\rq. Lúc đó $\mathrm{P}(\mathrm{A}_3)=\dfrac{6}{15}\cdot \dfrac{5}{18}$.
+	\end{itemize}
+	Lúc đó $A=\mathrm{A}_1\cup{\mathrm{A}_2}\cup{\mathrm{A}_3}$ và $A_1$, $A_2$, $A_3$ là các biến cố xung khắc nên
+	$$\mathrm{P}(A)=\mathrm{P}(\mathrm{A}_1)+\mathrm{P}(\mathrm{A}_2)+\mathrm{P}(\mathrm{A}_3)=\dfrac{44}{135}.$$}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B2-DE2}
+
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE2-DS]
+\cauds
+
+\begin{ex}%[1D9H2-4]
+	Một hộp đựng $10$ tấm thẻ được đánh số từ $1$ đến $10$, hai tấm thẻ khác nhau đánh hai số khác nhau. Rút ngẫu nhiên một tấm thẻ, khi đó
+	\choiceTF
+	{\True Gọi $A$ là biến cố \lq\lq Rút được thẻ đánh số chia hết cho $2$\rq\rq, suy ra $n(A)=5$}
+	{\True Gọi $A$ là biến cố \lq\lq Rút được thẻ đánh số chia hết cho $2$\rq\rq, suy ra $\mathrm{P}(A)=\dfrac{1}{2}$}
+	{Gọi $B$ là biến cố \lq\lq Rút được thẻ đánh số chia hết cho $7$\rq\rq, suy ra $\mathrm{P}(B)=\dfrac{1}{8}$}
+	{Xác suất để rút được thẻ đánh số chia hết cho $2$ hoặc $7$ bằng $\dfrac{3}{7}$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch $A=\{2; 4; 6; 8; 10\}$ suy ra $n(A)=5$.
+		\itemch $\mathrm{P}(A)=\dfrac{5}{10}=\dfrac{1}{2}$.
+		\itemch $B=\{7\}$ và $\mathrm{P}(B)=\dfrac{1}{10}$.
+		\itemch Vì $A$ và $B$ là hai biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{1}{2}+\dfrac{1}{10}=\dfrac{3}{5}$.
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9V2-5]
+	Cả hai xạ thủ cùng bắn vào bia. Xác suất người thứ nhất bắn trúng bia là $0{,}8$; người thứ hai bắn trúng bia là $0{,}7$. Khi đó xác suất để:
+	\choiceTF
+	{Người thứ nhất bắn trúng và người thứ hai bắng không trúng bia bằng $0{,}14$}
+	{\True Người thứ nhất bắn không trúng và người thứ hai bắn trúng bia bằng $0{,}14$}
+	{\True Hai người đều bắn trúng bia bằng $0{,}56$}
+	{\True Có ít nhất một người bắn trúng bia bằng $0{,}94$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq Người thứ nhất bắn trúng bia\rq\rq. Suy ra $\mathrm{P}(A)=0{,}8$, $\mathrm{P}(\overline{A})=0{,}2$.\\
+	Gọi $B$ là biến cố \lq\lq Người thứ hai bắn trúng bia\rq\rq. Suy ra $\mathrm{P}(B)=0{,}7$, $\mathrm{P}(\overline{B})=0{,}3$.
+	\begin{itemchoice}
+		\itemch Biến cố người thứ nhất bắn trúng và người thứ hai bắng không trúng bia là $A\overline{B}$ và $\mathrm{P}(A\overline{B})=\mathrm{P}(A)\cdot \mathrm{P}(\overline{B})=0{,}8\cdot 0{,}3=0{,}24$.
+		\itemch Biến cố người thứ nhất bắn không trúng và người thứ hai bắn trúng bia là $\overline{A}B$ và $\mathrm{P}(\overline{A}B)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(B)=0{,}2\cdot 0{,}7=0{,}14$.
+		\itemch Biến cố cả hai người đều bắn trúng bia là $A B$ và $\mathrm{P}(A B)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}8\cdot 0{,}7=0{,}56$.
+		\itemch Gọi $C$ là biến cố \lq\lq Có ít nhất một người bắn trúng bia\rq\rq.	Xác suất để có ít nhất một người bắn trúng là\\
+		$\mathrm{P}(C)=\mathrm{P}(\overline{A B})+\mathrm{P}(\overline{A}B)+\mathrm{P}(A B)=0{,}24+0{,}14+0{,}56=0{,}94$.
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H2-5]
+	Một lớp học có $40$ học sinh, trong đó có $18$ học sinh tham gia môn bóng đá và $10$ học sinh tham gia môn bóng chuyền, trong đó có $6$ học sinh tham gia cả hai môn bóng đá và bóng chuyền. Thầy giáo chọn ngẫu nhiên một học sinh từ lớp học để làm nhiệm vụ đặc biệt, gọi $A$ là biến cố \lq\lq Chọn được một học sinh tham gia môn bóng đá\rq\rq, $B$ là biến cố \lq\lq Chọn được một học sinh tham gia môn bóng chuyền\rq\rq. Khi đó
+	\choiceTF
+	{\True $\mathrm{P}(A)=\dfrac{9}{20}$}
+	{\True $\mathrm{P}(B)=\dfrac{1}{4}$}
+	{$\mathrm{P}(AB)=\dfrac{7}{20}$}
+	{Xác suất để học sinh được chọn có tham gia ít nhất một trong hai môn thể thao bằng $\dfrac{13}{20}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=40$.
+	\begin{itemchoice}
+		\itemch Có $n(A)=18$ suy ra $\mathrm{P}(A)=\dfrac{18}{40}=\dfrac{9}{20}$.
+		\itemch Có $n(B)=10$ suy ra $\mathrm{P}(B)=\dfrac{10}{40}=\dfrac{1}{4}$.
+		\itemch $AB$ là biến cố chọn được học sinh tham gia cả hai môn. Ta có $n(AB)=6$ suy ra $\mathrm{P}(A B)=\dfrac{6}{40}=\dfrac{3}{20}$.
+		\itemch Xác suất để chọn được một học sinh tham gia ít nhất một trong hai môn bóng đá, bóng chuyền là $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A B)=\dfrac{9}{20}+\dfrac{1}{4}-\dfrac{3}{20}=\dfrac{11}{20}$.
+	\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Một hộp đựng $4$ viên bi màu xanh, $3$ viên bi màu đỏ và $2$ viên bi màu vàng. Chọn ngẫu nhiên $2$ viên bi từ hộp trên. Gọi $A$ là biến cố \lq\lq Chọn được $2$ viên bi màu xanh\rq\rq, $B$ là biến cố \lq\lq Chọn được $2$ viên bi màu đỏ\rq\rq, $C$ là biến cố \lq\lq Chọn được $2$ viên bi màu vàng\rq\rq. Khi đó
+	\choiceTF
+	{$\mathrm{P}(A)=\dfrac{1}{7}$}
+	{$\mathrm{P}(B)=\dfrac{1}{8}$}
+	{\True $\mathrm{P}(C)=\dfrac{1}{36}$}
+	{\True Xác suất để chọn được $2$ viên bi cùng màu bằng $\mathrm{P}(X)=\mathrm{P}(A)+\mathrm{P}(B)+\mathrm{P}(C)=\dfrac{1}{6}+\dfrac{1}{12}+\dfrac{1}{36}=\dfrac{5}{18}$}
+	\loigiai{
+	Số phần tử của không gian mẫu $n(\Omega)=\mathrm{C}_9^2$.
+	Ta có
+	\begin{itemchoice}
+		\itemch $\mathrm{P}(A)=\dfrac{\mathrm{C}_4^2}{\mathrm{C}_9^2}=\dfrac{1}{6}$;
+		\itemch $ \mathrm{P}(B)=\dfrac{\mathrm{C}_3^2}{\mathrm{C}_9^2}=\dfrac{1}{12}$;
+		\itemch $ \mathrm{P}(C)=\dfrac{\mathrm{C}_2^2}{\mathrm{C}_9^2}=\dfrac{1}{36}$.
+		\itemch Ta có $X=A\cup B\cup C$ và các biến cố $A$, $B$, $C$ đôi một xung khắc.\\
+		Do đó, ta có $\mathrm{P}(X)=\mathrm{P}(A)+\mathrm{P}(B)+\mathrm{P}(C)=\dfrac{1}{6}+\dfrac{1}{12}+\dfrac{1}{36}=\dfrac{5}{18}$.
+	\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-1-C9B2-DE2-DS}
+\Opensolutionfile{ans}[ans/ans-1-C9B2-DE2-KQ]
+\caukq
+
+\begin{ex}%[1D9H2-5]
+	Tại một trường trung học phổ thông $X$, có $12\%$ học sinh học giỏi môn Tiếng Anh, $35\%$ học sinh học giỏi môn Toán và $8\%$ học sinh học giỏi cả hai môn Toán, Tiếng Anh. Chọn ngẫu nhiên một học sinh từ trường $X$, tính xác suất để chọn được một học sinh không giỏi môn nào trong hai môn Toán, Tiếng Anh.
+	\shortans[]{$0{,}61$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq Chọn được một học sinh giỏi môn Tiếng Anh\rq\rq, $B$ là biến cố \lq\lq Chọn được một học sinh giỏi môn Toán\rq\rq.\\
+	Xác suất để chọn được một học sinh giỏi Toán hoặc giỏi Anh là
+	\begin{eqnarray*}
+		\mathrm{P}(A\cup B)&=& \mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)\\
+		&=&\dfrac{12}{100}+\dfrac{35}{100}-\dfrac{8}{100}\\
+		&=&0{,}39.
+	\end{eqnarray*}
+	Xác suất để chọn được một em học sinh không giỏi môn nào trong hai môn Toán, Tiếng Anh là
+	$$\mathrm{P}(\overline{A\cup B})=1-\mathrm{P}(A\cup B)=1-0{,}39=0{,}61.$$}
+\end{ex}
+
+\begin{ex}%[1D9H1-3]
+	Ba xạ thủ lần lượt bắn vào một bia. Xác suất để xạ thủ thứ nhất, thứ hai, thứ ba bắn trúng đích lần lượt là $0{,}8$; $ 0{,}6$; $0{,}5$. Tính xác suất để có đúng hai người bắn trúng đích.
+	\shortans[]{$0{,}46$}
+	\loigiai{
+	Gọi $A_i(1\leq i\leq 3, i\in\mathbb{N})$ lần lượt là biến cố \lq\lq Xạ thủ thứ $i$ bắn trúng đích\rq\rq.\\
+	Xác suất để xạ thủ thứ nhất, thứ hai, thứ ba bắn trúng đích lần lượt là $\mathrm{P}(A_1)=0{,}8$; $\mathrm{P}(A_2)=0{,}6$; $P(A_3)=0{,}5$.\\
+	Gọi $X$ là biến cố \lq\lq Có đúng hai xạ thủ bắn trúng đích\rq\rq.\\
+	Ta có
+	\begin{eqnarray*}
+		\mathrm{P}(X)
+		&=& \mathrm{P}(A_1)\cdot \mathrm{P}(A_2)\cdot \mathrm{P}(\overline{A_3})+\mathrm{P}(A_1)\cdot \mathrm{P}(\overline{A_2})\cdot \mathrm{P}(A_3)+\mathrm{P}(\overline{A_1})\cdot \mathrm{P}(A_2)\cdot \mathrm{P}(A_3)\\
+		&=& 0{,}8\cdot 0{,}6\cdot 0{,}5+0{,}8\cdot 0{,}4\cdot 0{,}5+0{,}2\cdot 0{,}6\cdot 0{,}5\\
+		&=& 0{,}46.
+	\end{eqnarray*}
+	}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Một hộp đựng nhiều quả cầu với nhiều màu sắc khác nhau. Người ta lấy ngẫu nhiên một quả cầu từ hộp đó. Biết xác suất để lấy được một quả cầu màu xanh từ hộp bằng $\dfrac{1}{5}$, xác suất để lấy được một quả cầu màu đỏ từ hộp bằng $\dfrac{1}{6}$. Gọi $A$ là biến cố \lq\lq Lấy được một quả cầu màu xanh\rq\rq\,và $B$ là biến cố \lq\lq Lấy được một quả cầu màu đỏ\rq\rq. Tính xác suất để lấy được một quả cầu màu xanh hoặc một quả cầu màu đỏ từ hộp (làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}37$}
+	\loigiai{
+	Mỗi lần lấy thì ta chỉ lấy có một quả cầu, nên nếu lấy được quả cầu màu xanh thì không có quả cầu màu đỏ (và ngược lại), nói cách khác $\mathrm{P}(A B)=0$.\\
+	Vì vậy $A$, $B$ là hai biến cố xung khắc.\\
+	Xác suất để lấy được một quả cầu màu xanh hoặc một quả cầu màu đỏ là
+	$$\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{1}{5}+\dfrac{1}{6}=\dfrac{11}{30}.$$}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Một hộp đựng $9$ tấm thẻ được đánh số từ $1$ tới $9$, hai tấm thẻ khác nhau đánh hai số khác nhau. Rút ngẫu nhiên đồng thời hai tấm thẻ từ hộp. Xét các biến cố sau\\
+	$A\colon$ \lq\lq Cả hai tấm thẻ đều đánh số chẵn\rq\rq, $B\colon$ \lq\lq Chỉ có một tấm thẻ đánh số chẵn\rq\rq, $C\colon$ \lq\lq Tích hai số đánh trên hai tấm thẻ là một số chẵn\rq\rq. Tính xác suất để biến cố $C$ xảy ra (làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}72$}
+	\loigiai{
+	Dễ thấy $A$, $B$ là hai biến cố xung khắc và $\mathrm{P}(A)=\dfrac{\mathrm{C}_4^2}{\mathrm{C}_9^2}=\dfrac{1}{6}$, $\mathrm{P}(B)=\dfrac{\mathrm{C}_4^1\cdot \mathrm{C}_5^1}{\mathrm{C}_9^{2}}=\dfrac{5}{9}$.\\
+	Ta có $\mathrm{P}(C)=\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{1}{6}+\dfrac{5}{9}=\dfrac{13}{18}$.}
+\end{ex}
+
+\begin{ex}%[1D9N2-4]
+	Chọn ngẫu nhiên $2$ đỉnh trong số $20$ đỉnh của một đa giác đều $20$ cạnh. Tính xác suất của biến cố $A$ \lq\lq$2$ đỉnh được chọn là đường chéo của đa giác\rq\rq\,(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}89$}
+	\loigiai{
+	Đường nối $2$ đỉnh bất kỳ của một đa giác đều hoặc là cạnh của đa giác hoặc là đường chéo của đa giác. Số đường chéo của một đa giác đều $20$ cạnh là $\mathrm{C}_{20}^2-20=170$.\\
+	Xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{\mathrm{C}_{20}^2-20}{\mathrm{C}_{20}^2}=\dfrac{17}{19}$.}
+\end{ex}
+
+\begin{ex}%[1D9H2-4]
+	Một đội tình nguyện gồm $6$ học sinh khối $11$, và $8$ học sinh khối $12$. Chọn ra ngẫu nhiên $2$ người trong đội. Tính xác suất của biến cố \lq\lq Cả hai người được chọn học cùng một khối\rq\rq\,(làm tròn đến hàng phần trăm).
+	\shortans[]{$0{,}47$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq Cả hai học sinh được chọn đều thuộc khối $11$\rq\rq. Gọi $B$ là biến cố \lq\lq Cả hai học sinh được chọn đều thuộc khối $12$\rq\rq. Khi đó $A\cup B$ là biến cố \lq\lq Cả hai người được chọn học cùng một khối\rq\rq.\\
+	Do đó $A$ và $B$ là hai biến cố xung khắc nên $\mathrm{P}(A\cup B)=\mathrm{P}(A)+\mathrm{P}(B)=\dfrac{\mathrm{C}_6^2}{\mathrm{C}_{14}^2}+\dfrac{\mathrm{C}_8^2}{\mathrm{C}_{14}^2}=\dfrac{43}{91}$.}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C9B2-DE2-KQ}
+
+

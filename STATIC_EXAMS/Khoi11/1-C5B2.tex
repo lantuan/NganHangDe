@@ -1,0 +1,1414 @@
+\section{Trung vị và tứ phân vị của mẫu số liệu ghép nhóm}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE1-LC]
+\caulc
+%%%==============Cau_EX1==============%%%
+\begin{ex}%[1D5N1-2]
+	Công việc nào sau đây không phụ thuộc vào các công việc của môn thống kê?
+	\choice
+	{Thu thập số liệu}
+	{Trình bày số liệu}
+	{Phân tích và xử lí số liệu}
+	{\True Ra quyết định dựa trên số liệu}
+	\loigiai{
+		Công việc nào sau đây không phụ thuộc vào các công việc của môn thống kê là ra quyết định dựa trên số liệu.
+	}
+\end{ex}
+%%%==============HetCau_EX1==============%%%
+
+%%%==============Cau_EX2==============%%%
+\begin{ex}%[1D5N1-2]
+	Điều tra về chiều cao của học sinh khối lớp $10$, ta có kết quả sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline Nhóm & Chiều cao $(\mathrm{cm})$ & Số học sinh \\
+			\hline 1 & {$[150 ; 152)$} & $5$ \\
+			\hline 2 & {$[152 ; 154)$} & $18$ \\
+			\hline 3 & {$[154 ; 156)$} & $40$ \\
+			\hline 4 & {$[156 ; 158)$} & $26$ \\
+			\hline 5 & {$[158 ; 160)$} & $8$ \\
+			\hline 6 & {$[160 ; 162)$} & $3$ \\
+			\hline \multicolumn{2}{|r|}{} & $N=100$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Giá trị đại diện của nhóm thứ tư là
+	\choice
+	{$156{,}5$}
+	{\True $157$}
+	{$157{,}5$}
+	{$158$}
+	\loigiai{
+		Giá trị đại diện của nhóm thứ tư là $\dfrac{156+158}{2}=157$.
+	}
+\end{ex}
+%%%==============HetCau_EX2==============%%%
+
+%%%==============Cau_EX3==============%%%
+\begin{ex}%[1D5H1-2]
+	Cho bảng phân bố tần số ghép lớp
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline Các lớp giá trị của X & {$[50 ; 52)$} & {$[52 ; 54)$} & {$[54 ; 56)$} & {$[56 ; 58)$} & {$[58 ; 60)$} & Cộng \\
+			\hline Tần số $n_i$ & $15$ & $20$ & $45$ & $15$ & $5$ & $100$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Mệnh đề đúng là
+	\choice
+	{Giá trị trung tâm của lớp $\left[50;52\right)$ là $53$}
+	{Tần số của lớp $\left[58;60\right)$ là $95$}
+	{Tần số của lớp $\left[52;54\right)$ là $35$}
+	{\True Giá trị $50$ không phụ thuộc lớp $\left[54;56\right)$}
+	\loigiai{Vì $50\in \left[54;56\right)$.
+	}
+\end{ex}
+%%%==============HetCau_EX3==============%%%
+
+%%%==============Cau_EX4==============%%%
+\begin{ex}%[1D5H1-2]
+	Cho bảng phân bố tần số, tần suất ghép lớp chiều cao của các học sinh trong một lớp học như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline Lớp & Tần số & Tần suất \\
+			\hline$[150 ; 155)$ & 8 & $20 \%$ \\
+			\hline$[155 ; 160)$ & 5 & $12{,}5 \%$ \\
+			\hline$[160 ; 165)$ & $a$ & $30 \%$ \\
+			\hline$[165 ; 170)$ & $b$ & $c \%$ \\
+			\hline$[170 ; 175]$ & 6 & $15 \%$ \\
+			\hline Tổng & $n$ & $100 \%$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm giá trị của $a+2b+10c$.
+	\choice
+	{$225$}
+	{$158$}
+	{\True $255$}
+	{$202$}
+	\loigiai{
+		Ta có $c=22,5$,
+		vì lớp $\left[155;159\right)$ có tần số là $5$ và tần suất là $12,5\%$ tức là chiếm $\dfrac{1}{8}$ mẫu số liệu nên $n=5\cdot8=40$.\\
+		Suy ra $\dfrac{a\cdot 100}{40}=30\% \Rightarrow a=12$.\\
+		Đồng thời, $\dfrac{b\cdot 100}{40}=22{,}5\% \Rightarrow b=9$.\\
+		Vậy $a+2b+10c=255$.
+	}
+\end{ex}
+%%%==============HetCau_EX4==============%%%
+
+%%%==============Cau_EX5==============%%%
+\begin{ex}%[1D5N1-3]
+	Tìm cân nặng trung bình của học sinh lớp $11$D cho trong bảng sau, làm tròn đến hàng phần trăm.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline Cân nặng & {$[40,5 ; 45,5)$} & {$[45,5 ; 50,5)$} & {$[50,5 ; 55,5)$} & {$[55,5 ; 60,5)$} & {$[60,5 ; 65,5)$} & {$[65,5 ; 70,5)$} \\
+			\hline Số học sinh & $10$ & $7$ & $16$ & $4$ & $2$ & $3$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choice
+	{$51{,}8$}
+	{\True $51{,}81$}
+	{$52$}
+	{$51{,}809$}
+	\loigiai{
+		Trong mỗi khoảng cân nặng, giá trị đại diện là trung bình cộng của giá trị hai đầu mút nên ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline Cân nặng (kg) & $43$ & $48$ & $53$ & $58$ & $63$ & $68$ \\
+				\hline Số học sinh & $10$ & $7$ & $16$ & $4$ & $2$ & $3$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Tổng số học sinh là $n=42$.\\
+		Cân nặng trung bình của học sinh lớp 11D là
+		$$\bar{x}=\dfrac{10\cdot 43+7\cdot 48+16\cdot 53+4\cdot 58+2\cdot 63+3\cdot 68}{42} \approx 51{,}81\,(\text{kg}).$$
+	}
+\end{ex}
+%%%==============HetCau_EX5==============%%%
+
+%%%==============Cau_EX6==============%%%
+\begin{ex}%[1D5N1-3]
+	Tìm hiểu thời gian xem ti vi trong tuần trước của một số học sinh thu được kết quả sau
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline Thời gian (giờ) & {$[0 ; 5)$} & {$[5 ; 10)$} & {$[10 ; 15)$} & {$[15 ; 20)$} & {$[20 ; 25)$} \\
+			\hline Số học sinh & $8$ & $16$ & $4$ & $2$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính thời gian xem ti vi trung bình trong tuần trước của các bạn học sinh này.
+	\choice
+	{\True $8{,}4375$}
+	{$8{,}125$}
+	{$8{,}75$}
+	{$8{,}28125$}
+	\loigiai{
+		Trong mỗi khoảng, giá trị đại diện là trung bình cộng của giá trị hai đầu mút nên ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline Thời gian (giờ) &$[0 ; 5)$ & {$[5 ; 10)$} & {$[10 ; 15)$} & $[15;20)$ & $[20;25)$ \\
+				\hline Số học sinh & $8$ & $16$ & $4$ & $2$ & $2$ \\
+				\hline Giá trị đại diện & $2{,}5$ & $7{,}5$ & $12{,}5$ & $17{,}5$ & $22{,}5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Thời gian xem ti vi trung bình trong tuần trước của các bạn học sinh này là
+		$$\bar{x}=\dfrac{8\cdot 2{,}5+16\cdot 7{,}5+4\cdot 12{,}5+2\cdot 17{,}5+2\cdot 22{,}5}{8+16+4+2+2}=8{,}4375.$$
+	}
+\end{ex}
+%%%==============HetCau_EX6==============%%%
+
+%%%==============Cau_EX7==============%%%
+\begin{ex}%[1D5H1-3]
+	Các bạn học sinh lớp $11$A$1$ trả lời $40$ câu hỏi trong một bải kiểm tra. Kết quả được thống kê ở bảng sau. Hãy ước lượng trung bình số câu trả lời đúng của các học sinh lớp $11$A$1$.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Số câu trả lời đúng & $\left[16;21\right)$ & $\left[21;26\right)$ & $\left[26;31\right)$ & $\left[31;36\right)$ & $\left[36;41\right)$ \\
+			\hline
+			Số học sinh & $4$ & $6$ & $8$ & $18$ & $4$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choice
+	{\True $30$} 
+	{$32$} 
+	{$29$} 
+	{$31$} 
+	\loigiai{
+		Trong mỗi khoảng, giá trị đại diện là trung bình cộng của giá trị hai đầu mút nên ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				Số câu trả lời đúng & $\left[16;21\right)$ & $\left[21;26\right)$ & $\left[26;31\right)$ & $\left[31;36\right)$ & $\left[36;41\right)$ \\
+				\hline
+				Số học sinh & $4$ & $6$ & $8$ & $18$ & $4$ \\
+				\hline
+				Giá trị đại diện & $18{,}5$ & $23{,}5$ & $28{,}5$ & $33{,}5$ & $38{,}5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Trung bình số câu trả lời đúng của các học sinh lớp 11A1 là
+		$$\bar{x}=\dfrac{4\cdot 18{,}5+6\cdot 23{,}5+8\cdot 28{,}5+18\cdot 33{,}5+4\cdot 38{,}5}{4+6+8+18+4}=30.$$
+	}
+\end{ex}
+%%%==============HetCau_EX7==============%%%
+
+%%%==============Cau_EX8==============%%%
+\begin{ex}%[1D5N2-1]
+	Khi độ chênh lệch các số liệu trong mẫu quá lớn thì đại lượng nào thích hợp đại diện cho các số liệu trong mẫu.
+	\choice
+	{Số trung bình}
+	{\True Số trung vị}
+	{Phương sai}
+	{Độ lệch chuẩn}
+	\loigiai{
+		Khi độ chênh lệch các số liệu trong mẫu quá lớn thì Số trung vị là đại lượng thích hợp đại diện cho các số liệu trong mẫu.
+	}
+\end{ex}
+%%%==============HetCau_EX8==============%%%
+
+%%%==============Cau_EX9==============%%%
+\begin{ex}%[1D5H2-2]
+	Điều tra $42$ học sinh của một lớp $11$ về số giờ tự học ở nhà, người ta có bảng sau đây
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Lớp & Tần số & Tần số tích lũy \\
+			\hline
+			$\left[1; 2\right)$ & $8$ & $8$ \\
+			\hline
+			$\left[2; 3\right)$ & $10$ & $18$ \\
+			\hline
+			$\left[3; 4\right)$ & $12$ & $30$ \\
+			\hline
+			$\left[4; 5\right)$ & $9$ & $39$ \\
+			\hline
+			$\left[5; 6\right)$ & $3$ & $42$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Số trung vị của mẫu số liệu là.
+	\choice
+	{$4{,}25$}
+	{$3{,}75$}
+	{$4{,}75$}
+	{\True $3{,}25$}
+	\loigiai{
+		Ta có số phần tử của mẫu là\\
+		$n=42\Rightarrow \dfrac{n}{2}=21$.\\
+		Mà $cf_2=18< 21< cf_3=30$ suy ra nhóm $3$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $21$.\\
+		Xét nhóm $3$ là nhóm $\left[3; 4\right)$ có $r=3$; $d=1$; $n_3=12$ và nhóm $2$ là nhóm $\left[2; 3\right)$ có $cf_2=18$.\\
+		Áp dụng công thức ta có trung vị của mẫu số liệu là\\
+		$$M_e=3+\left(\dfrac{21-18}{12} \right)\cdot 1=3{,}25.$$
+	}
+\end{ex}
+%%%==============HetCau_EX9==============%%%
+
+%%%==============Cau_EX10==============%%%
+\begin{ex}%[1D5N2-2]
+	Thống kê điểm học kì môn toán của các học sinh lớp $11$A của một trường THPT, người ta thu được số liệu sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			$3$ & $5{,}5$ & $5$ & $4$ & $4{,}5$ & $4{,}5$ & $3$ & $5$ & $4$ & $4{,}5$ & $4{,}5$ & $6{,}5$ & $6{,}5$ & $7{,}5$ & $3{,}5$ \\
+			\hline
+			$5$ & $6$ & $7$ & $8$ & $8$ & $7$ & $4{,}5$ & $6$ & $5$ & $7$ & $4$ & $5{,}5$ & $7{,}5$ & $8{,}5$ & $9{,}5$ \\
+			\hline
+			$4$ & $3{,}5$ & $5$ & $8{,}5$ & $6{,}5$ & $4{,}5$ & $7{,}5$ & $7$ & $4{,}5$ & $3$ & $7$ & $5{,}5$ & $5{,}5$ & $6{,}5$ & $9$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm số trung vị của mẫu số liệu khi ta ghép lớp thành các nhóm có độ dài là $1$ như sau
+	\[\left[3; 4\right), \left[4; 5\right),\ldots, \left[9; 10\right)\]
+	\choice
+	{$6{,}7$}
+	{$9{,}3$}
+	{$5{,}8$}
+	{\True $5{,}7$}
+	\loigiai{
+		Ta có bảng tần số ghép lớp, tần số tích lũy sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				Lớp & Tần số & Tần số tích lũy \\
+				\hline
+				$\left[3; 4\right)$ & $5$ & $5$ \\
+				\hline
+				$\left[4; 5\right)$ & $11$ & $16$ \\
+				\hline
+				$\left[5; 6\right)$ & $9$ & $25$ \\
+				\hline
+				$\left[6; 7\right)$ & $6$ & $31$ \\
+				\hline
+				$\left[7; 8\right)$ & $8$ & $39$ \\
+				\hline
+				$\left[8; 9\right)$ & $4$ & $43$ \\
+				\hline
+				$\left[9; 10\right)$ & $2$ & $45$ \\
+				\hline
+				& $n=45$ & \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Ta có số phần tử của mẫu là\\
+		$n=45\Rightarrow \dfrac{n}{2}=22{,}5$.\\
+		Mà $cf_2=16< 22{,}5< cf_3=25$ suy ra nhóm $3$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $22{,}5$.\\
+		Xét nhóm $3$ là nhóm $\left[5; 6\right)$ có $r=5$; $d=1$; $n_3=9$ và nhóm $2$ là nhóm $\left[4; 5\right)$ có $cf_2=16$.\\
+		Áp dụng công thức ta có trung vị của mẫu số liệu là
+		$$M_e=5+\left(\dfrac{22{,}5-16}{9} \right)\cdot 1\approx 5{,}7.$$
+	}
+\end{ex}
+%%%==============HetCau_EX10==============%%%
+
+%%%==============Cau_EX11==============%%%
+\begin{ex}%[1D5N2-3]
+	Điều tra $42$ học sinh của một lớp $11$ về số giờ tự học ở nhà, người ta có bảng sau đây
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Lớp & Tần số & Tần số tích lũy \\
+			\hline
+			$\left[1; 2\right)$ & $8$ & $8$ \\
+			\hline
+			$\left[2; 3\right)$ & $10$ & $18$ \\
+			\hline
+			$\left[3; 4\right)$ & $12$ & $30$ \\
+			\hline
+			$\left[4; 5\right)$ & $9$ & $39$ \\
+			\hline
+			$\left[5; 6\right)$ & $3$ & $42$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tứ phân vị thứ nhất của mẫu số liệu trên là
+	\choice
+	{$2{,}25$}
+	{$3{,}25$}
+	{\True $2{,}5$}
+	{$2{,}75$}
+	\loigiai{
+		Ta có số phần tử của mẫu là\\
+		$n=42\Rightarrow \dfrac{n}{4}=10{,}5$.\\
+		Suy ra nhóm $2$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $10{,}5$.\\
+		Xét nhóm $2$ là nhóm $\left[2; 3\right)$ có $s=2$; $h=1$; $n_2=10$ và nhóm $1$ là nhóm $\left[1; 2\right)$ có $cf_1=8$.\\
+		Áp dụng công thức ta có trung vị của mẫu số liệu là
+		$$Q_1=2+\left(\dfrac{10{,}5-8}{10} \right)\cdot 1=2{,}25.$$
+	}
+\end{ex}
+%%%==============HetCau_EX11==============%%%
+
+%%%==============Cau_EX12==============%%%
+\begin{ex}%[1D5H2-3]
+	Điều tra $42$ học sinh của một lớp $11$ về số giờ tự học ở nhà, người ta có bảng sau đây
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			Lớp & Tần số & Tần số tích lũy \\
+			\hline
+			$\left[1; 2\right)$ & $8$ & $8$ \\
+			\hline
+			$\left[2; 3\right)$ & $10$ & $18$ \\
+			\hline
+			$\left[3; 4\right)$ & $12$ & $30$ \\
+			\hline
+			$\left[4; 5\right)$ & $9$ & $39$ \\
+			\hline
+			$\left[5; 6\right)$ & $3$ & $42$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Nhận xét nào đúng về tứ phân vị của mẫu số liệu trên
+	\choice
+	{Tứ phân vị của mẫu số liệu trên luôn giảm}
+	{\True Tứ phân vị của mẫu số liệu trên luôn tăng}
+	{Tứ phân vị của mẫu số liệu trên luôn cách đều nhau}
+	{Tứ phân vị của mẫu số liệu trên không tăng}
+	\loigiai{
+		\begin{itemize}
+			\item Ta có số phần tử của mẫu là\\
+			$n=42\Rightarrow \dfrac{n}{4}=10{,}5$.\\
+			Suy ra nhóm $2$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $10{,}5$.\\
+			Xét nhóm $2$ là nhóm $\left[2; 3\right)$ có $s=2$; $h=1$; $n_2=10$ và nhóm $1$ là nhóm $\left[1; 2\right)$ có $cf_1=8$.\\
+			Áp dụng công thức tứ phân vị thứ nhất của mẫu số liệu có\\
+			$$Q_1=2+\left(\dfrac{10{,}5-8}{10} \right)\cdot 1=2{,}25.$$
+			\item Ta có số phần tử của mẫu là\\
+			$n=42\Rightarrow \dfrac{n}{2}=21$.\\
+			Mà $cf_2=18< 21< cf_3=30$ suy ra nhóm $3$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $21$.\\
+			Xét nhóm $3$ là nhóm $\left[3; 4\right)$ có $r=3$; $d=1$; $n_3=12$ và nhóm $2$ là nhóm $\left[2; 3\right)$ có $cf_2=18$.\\
+			Áp dụng công thức ta có trung vị của mẫu số liệu là
+			$$M_e=3+\left(\dfrac{21-18}{12} \right)\cdot 1=3{,}25.$$
+			Vậy tứ phân vị thứ $2$ là $Q_2=M_e=3{,}25$.
+			\item Ta có số phần tử của mẫu là\\
+			$\dfrac{3n}{4}=31{,}5$.
+			Suy ra nhóm $4$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $31{,}5$.\\
+			Xét nhóm $4$ là nhóm $\left[4; 5\right)$ có $t=4$; $l=1$; $n_4=9$ và nhóm $3$ là nhóm $\left[3; 4\right)$ có $cf_3=30$.\\
+			Áp dụng công thức tứ phân vị thứ ba của mẫu số liệu có
+			$$Q_3=4+\left(\dfrac{31{,}5-30}{9} \right)\cdot 1=\dfrac{25}{6}.$$
+		\end{itemize}
+		Vậy $Q_1=2{,}25$; $Q_2=3{,}1$; $Q_3=\dfrac{25}{6} \approx 4{,}166$ nên tứ phân vị luôn tăng.
+	}
+\end{ex}
+%%==============HetCau_EX12==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C5B2-DE1-LC}
+\cauds
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE1-DS]
+%%%==============Cau_EX13==============%%%
+\begin{ex}%[1D5H2-3]
+	Dựa vào bảng tần số mẫu số liệu ghép nhóm sau, hãy tìm tứ phân vị của nó.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[30;40)$ & $[40;50)$ & $[50;60)$ & $[60;70)$ & $[70;80)$ & $[80;90)$ \\
+			\hline
+			Tần số & $2$ & $10$ & $16$ & $8$ & $2$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Cỡ mẫu của mẫu số liệu là $n=40$}
+	{\True Tứ phân vị thứ hai của mẫu số liệu ghép nhóm là $Q_2=45$}
+	{Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là $Q_1=48$}
+	{Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là $Q_3=61{,}5$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Cỡ mẫu của mẫu số liệu là $n=40$.
+			\itemch Đúng. Gọi $x_1, x_2, x_3, \ldots, x_{40}$ là mẫu số liệu được xếp theo thứ tự không giảm.\\
+			Trung vị của mẫu số liệu $\dfrac{x_{20}+x_{21}}{2} \in [50;60)$.\\
+			Ta có $n_m=16$; $C_2=2+10=12$; $u_m=50$; $u_{n+1}=60$.\\
+			Tứ phân vị thứ hai của mẫu số liệu ghép nhóm cũng là trung vị của mẫu số liệu đó là
+			$$Q_2=M_e=50+\dfrac{\dfrac{40}{2}-12}{16} (60-50)=55.$$
+			\itemch Sai. Xét nửa mẫu số liệu bên trái $x_1, x_2, x_3, \ldots, x_{20}$ có trung vị $\dfrac{x_{10}+x_{11}}{2} \in [40;50)$.\\
+			Ta có $n_i=10$; $C_1=2$; $u_i=40$; $u_{i+1}=50$.\\
+			Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+			$$Q_1=40+\dfrac{\dfrac{40}{4}-2}{10} (50-40)=48.$$
+			\itemch Sai. Xét nửa mẫu số liệu bên phải $x_{21}, x_{22}, x_{23}, \ldots, x_{40}$ có trung vị $\dfrac{x_{30}+x_{31}}{2} \in [60;70)$.\\
+			Ta có $n_j=8$; $C_3=2+10+16=28$; $u_j=60$; $u_{j+1}=70$.\\
+			Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+			$$Q_3=60+\dfrac{\dfrac{3\cdot 40}{4}-28}{8} (70-60)=62{,}5.$$
+		\end{itemchoice}
+		Vậy tứ phân vị của mẫu số liệu ghép nhóm trên là
+		\[Q_1=48, Q_2=55, Q_3=62{,}5.\]
+	}
+\end{ex}
+%%%==============HetCau_EX13==============%%%
+
+%%%==============Cau_EX14==============%%%
+\begin{ex}%[1D5H2-3]
+	Cân nặng của một số lợn con mới sinh thuộc hai giống $A$ và $B$ được cho ở bảng đây (đơn vị: kg)
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Cân nặng $(kg)$ & $[1{,}0;1{,}1)$ & $[1{,}1;1{,}2)$ & $[1{,}2;1{,}3)$ & $[1{,}3;1{,}4)$ \\
+			\hline
+			Số con giống A & $8$ & $28$ & $32$ & $17$ \\
+			\hline
+			Số con giống B & $13$ & $14$ & $24$ & $14$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Cân nặng trung bình của giống $A$ là $1{,}22$}
+	{\True Cân nặng trung bình của giống $B$ là $1{,}21$}
+	{\True Tứ phân vị thứ nhất của mẫu số liệu lợn con giống $A$ là $Q_{1A}=1{,}15$}
+	{Tứ phân vị thứ nhất của mẫu số liệu lợn con giống $B$ là $Q_{1B}=1{,}62$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Cân nặng trung bình của giống $A$ là
+			\[\dfrac{1{,}05\cdot8+1{,}15\cdot28+1{,}25\cdot32+1{,}35\cdot17}{85}=1{,}22.\]
+			\itemch Đúng. Cân nặng trung bình của giống $B$ là
+			\[\dfrac{1{,}05\cdot13+1{,}15\cdot14+1{,}25\cdot24+1{,}35\cdot14}{65}=1{,}21.\]
+			Vậy theo số trung bình thì cân nặng của lợn con giống $A$ lớn hơn giống $B$.\\
+			Gọi $x_1;x_2;\ldots;x_{85}$ lần lượt là cân nặng của mỗi con lợn giống $A$ theo thứ tự không giảm.\\
+			Do $x_1;\ldots;x_8\in [1{,}0;1{,}1);x_9;x_{10};\ldots;x_{36} \in [1{,}1;1{,}2);x_{37};\ldots;x_{68} \in [1{,}2;1{,}3);x_{69};\ldots;x_{85} \in [1{,}3;1{,}4)$ nên trung vị của mẫu số liệu lợn con giống $A$ là $x_{43} \in [1{,}2;1{,}3)$.
+			\[Q_{2A}=1{,}2+\dfrac{\dfrac{85}{2}-36}{32} (1{,}3-1{,}2)=1{,}22.\]
+			Gọi $y_1;y_2;\ldots;y_{65}$ lần lượt là cân nặng của mỗi con lợn giống $B$ theo thứ tự không giảm.\\
+			Do $y_1;\ldots;y_{13} \in [1{,}0;1{,}1);y_{14};\ldots;y_{27} \in [1{,}1;1{,}2);y_{28};\ldots;y_{51} \in [1{,}2;1{,}3);y_{52};\ldots;y_{65} \in [1{,}3;1{,}4)$ nên trung vị của mẫu số liệu lợn con giống $B$ là $y_{33} \in [1{,}2;1{,}3)$.
+			\[Q_{2A}=1{,}2+\dfrac{\dfrac{65}{2}-27}{24} (1{,}3-1{,}2)=1{,}223.\]
+			Vậy theo số trung vị thì cân nặng trung bình của lợn giống $A$ nhỏ hơn lợn giống $B$.
+			\itemch Đúng. Tứ phân vị thứ nhất của dãy số liệu lợn con giống $A$ là $\dfrac{1}{2} \left(x_{21}+x_{22} \right)\in [1{,}1;1{,}2)$ nên tứ phân vị thứ nhất của mẫu số liệu lợn con giống $A$ là
+			\[Q_{1A}=1{,}1+\dfrac{\dfrac{85}{4}-8}{28} (1{,}2-1{,}1)=1{,}15.\]
+			\itemch Sai. Tứ phân vị thứ nhất của dãy số liệu lợn con giống $B$ là $\dfrac{1}{2} \left(y_{16}+y_{17} \right)\in [1{,}1;1{,}2)$ nên tứ phân vị thứ nhất của mẫu số liệu lợn con giống $B$ là:
+			\[Q_{1B}=1{,}1+\dfrac{\dfrac{65}{4}-13}{14} (1{,}2-1{,}1)=1{,}12.\]
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============HetCau_EX14==============%%%
+
+%%%==============Cau_EX15==============%%%
+\begin{ex}%[1D5H2-3]
+	Hãy tìm các tứ phân vị của mẫu số liệu được cho dưới dạng bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[0;2)$ & $[2;4)$ & $[4;6)$ & $[6;8)$ & $[8;10)$ \\
+			\hline
+			Tần số & $3$ & $8$ & $12$ & $12$ & $4$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{Cỡ mẫu của mẫu số liệu là $n=38$}
+	{\True Tứ phân vị thứ hai của mẫu số liệu ghép nhóm là $Q_2\approx 5{,}42$}
+	{Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là $Q_1\approx 2{,}69$}
+	{\True Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là $Q_3=7{,}04$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Cỡ mẫu của mẫu số liệu là $n=3+8+12+12+4=39$.
+			\itemch Đúng. Gọi $x_1{,} x_2{,} \ldots{,} x_{39}$ là mẫu số liệu được sắp xếp theo thứ tự không giảm.
+			Trung vị của mẫu số liệu này là $x_{20} \in [4;6)$.
+			Ta có $n_m=12$; $C_2=3+8=11$; $u_m=4$; $u_{m+1}=6$.
+			Tứ phân vị thứ hai chính là trung vị của mẫu số liệu ghép nhóm là
+			\[Q_2=M_e=4+\dfrac{\dfrac{39}{2}-11}{12} (6-4)=\dfrac{65}{12} \approx 5{,}42.
+			\]
+			\itemch Sai. Xét nửa mẫu số liệu bên trái $x_1{,} x_2{,} \ldots{,} x_{19}$ có trung vị $x_{10} \in [2;4)$.
+			Ta có $n_i=8$; $C_1=3$; $x_i=2$; $x_{i+1}=4$.\\
+			Suy ra tứ phân vị thứ nhất của mẫu số liệu là $Q_1=2+\dfrac{\dfrac{39}{4}-3}{8} (4-2)=\dfrac{59}{16} \approx 3{,}69$.
+			\itemch Đúng. Xét nửa mẫu số liệu bên phải $x_{21}{,} x_{22}{,} \ldots{,} x_{39}$ có trung vị $x_{30} \in [6;8)$.
+			Ta có $n_j=12$; $C_3=3+8+12=23$; $x_j=6$; $x_j=8$.\\
+			Suy ra tứ phân vị thứ ba của mẫu số liệu là $Q_3=6+\dfrac{\dfrac{3\cdot39}{4}-23}{12} (8-6)=\dfrac{169}{24} \approx 7{,}04$.
+		\end{itemchoice}
+		Vậy các tứ phân vị của mẫu số liệu ghép nhóm là $Q_1\approx 3{,}69$; $Q_2=5{,}42$; $Q_3=7{,}04$.
+	}
+\end{ex}
+%%%==============HetCau_EX15==============%%%
+
+%%%%==============Cau_EX16==============%%%
+\begin{ex}%[1D5H2-3]
+	Người ta đo đường kính của $61$ cây gỗ được trồng sau $12$ năm (đơn vị: centimét), họ thu được bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Đường kính & $[20;25)$ & $[25;30)$ & $[30;35)$ & $[35;40)$ & $[40;45)$ \\
+			\hline
+			Số cây & $4$ & $12$ & $26$ & $13$ & $6$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Cỡ mẫu của mẫu số liệu là $n=61$}
+	{\True Tứ phân vị thứ hai của mẫu số liệu ghép nhóm là $Q_2=32{,}79$}
+	{Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là $Q_1\approx 19{,}69$}
+	{\True Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là $Q_3=36{,}44$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.Cỡ mẫu của mẫu số liệu là $n=61$.
+			\itemch Đúng Gọi $x_1{,} x_2{,} \ldots{,} x_{61}$ là mẫu số liệu được sắp xếp theo thứ tự không giảm.\\
+			Trung vị của mẫu số liệu này là $x_{31} \in [30;35)$.\\
+			Ta có $n_m=26$; $C_1=4+12=16$; $u_m=30$; $u_{m+1}=35$.\\
+			Tứ phân vị thứ hai chính là trung vị của mẫu số liệu ghép nhóm là
+			\[Q_2=M_e=30+\dfrac{\dfrac{61}{2}-16}{26} (35-30)=\dfrac{1705}{52} \approx 32{,}79.
+			\]
+			\itemch Sai. Xét nửa mẫu số liệu bên trái $x_1{,} x_2{,} \ldots{,} x_{30}$ có trung vị $\dfrac{x_{15}+x_{16}}{2} \in [25;30)$.\\
+			Ta có $n_i=12$; $C_1=4$; $x_i=25$; $x_{i+1}=30$.\\
+			Suy ra tứ phân vị thứ nhất của mẫu số liệu là\\ $$Q_1=25+\dfrac{\dfrac{61}{4}-4}{12} (30-25)=\dfrac{475}{16} \approx 29{,}69.$$
+			\itemch Đúng. Xét nửa mẫu số liệu bên trái $x_{32}{,} x_{33}{,} \ldots{,} x_{61}$ có trung vị $\dfrac{x_{46}+x_{47}}{2} \in [35;40)$.\\
+			Ta có $n_j=13$; $C_3=4+12+26=42$; $x_i=35$; $x_{i+1}=40$.\\
+			Suy ra tứ phân vị thứ ba của mẫu số liệu là $$Q_3=35+\dfrac{\dfrac{3\cdot61}{4}-42}{13} (40-35)=\dfrac{1895}{52} \approx 36{,}44.$$
+		\end{itemchoice}
+		Vậy các tứ phân vị của mẫu số liệu ghép nhóm là
+		\[Q_1\approx 29{,}69;Q_2=32{,}79;Q_3=36{,}44.\]
+	}
+\end{ex}
+%%%%==============HetCau_EX16==============%%%
+\Closesolutionfile{ans}
+\indapan{2}{ans/ans-11-C5B2-DE1-DS}
+\caukq
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE1-KQ]
+%%%==============Cau_EX17==============%%%
+\begin{ex}%[1D5N2-2]
+	Kết quả thu thập điểm số môn Toán của $25$ học sinh khi tham gia kì thi học sinh giỏi toán $11$ (thang điểm 20) cho ta bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[0;4)$ & $[4;8)$ & $[8;12)$ & $[12;16)$ & $[16;20)$ \\
+			\hline
+			Số học sinh & $1$ & $7$ & $12$ & $3$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm trên.
+	\shortans[]{$9{,}5$}
+	\loigiai{
+		Cỡ mẫu của mẫu số liệu là $n=25$.\\
+		Gọi $x_1, x_2, x_3, \ldots, x_{25}$ là điểm số của $25$ học sinh trong kì thi đó và dãy này được sắp xếp theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu là $x_{13} \in [8;12)$.\\
+		Ta có $n=25$, $n_m=12$, $C=1+7=8$, $u_m=8$, $u_{m+1}=12$.\\
+		Trung vị mẫu số liệu ghép nhóm là
+		\[M_e=u_m+\dfrac{\dfrac{n}{2}-C}{n_m} \left(u_{m+1}-u_m \right)=8+\dfrac{\dfrac{25}{2}-8}{12} (12-8)=9{,}5.\]
+	}
+\end{ex}
+%%%==============HetCau_EX17==============%%%
+
+%%%%==============Cau_EX18==============%%%
+\begin{ex}%[1D5N2-2]
+	Thời gian (phút) truy cập internet mỗi buổi tối của một số học sinh được cho trong bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[9{,}5;12{,}5)$ & $[12{,}5;15{,}5)$ & $[15{,}5;18{,}5)$ & $[18{,}5;21{,}5)$ & $[21{,}5;24{,}5)$ \\
+			\hline
+			Số học $\sinh$ & $3$ & $12$ & $15$ & $24$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm trên.
+	\shortans[]{$18{,}1$}
+	\loigiai{
+		Cỡ mẫu của mẫu số liệu là $n=3+12+15+24+2=56$.\\
+		Gọi $x_1{,} x_2{,} x_3{,} \ldots{,} x_{56}$ là thời gian truy cập Internet của lần lượt 56 học sinh theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu là $\dfrac{x_{28}+x_{29}}{2} \in [15{,}5;18{,}5)$.\\
+		Ta có $n_m=15$; $C=3+12=15$; $u_m=15{,}5$; $u_{m+1}=18{,}5$.\\
+		Khi đó trung vị của mẫu số liệu phép nhóm là
+		\[M_e=15{,}5+\dfrac{\dfrac{56}{2}-15}{15} (18{,}5-15{,}5)=\dfrac{181}{10}=18{,}1.\]
+	}
+\end{ex}
+%%%%==============HetCau_EX18==============%%%
+
+%%%%==============Cau_EX19==============%%%
+\begin{ex}%[1D5N2-2]
+	Điều tra về số lượng học sinh khối $11$ trong một lớp học, người ta thu được dữ liệu của $100$ lớp học và có bảng phân phối tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[36;38)$ & $[38;40)$ & $[40;42)$ & $[42;44)$ & $[44;46)$ \\
+			\hline
+			Tần số & $9$ & $15$ & $25$ & $30$ & $21$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn đến hàng đơn vị).
+	\shortans[]{$42$}
+	\loigiai{
+		Cỡ mẫu của mẫu số liệu là $n=100$.\\
+		Gọi $x_1, x_2, x_3, \ldots, x_{100}$ là số học sinh trong một lớp học khối 11 được điều tra được sắp xếp theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu là $\dfrac{x_{50}+x_{51}}{2} \in [42;44)$.\\
+		Ta có $n_m=30$; $C=9+15+25=49$; $u_m=42$; $u_{m+1}=44$.\\
+		Trung vị của mẫu số liệu ghép nhóm là
+		\[M_e=42+\dfrac{\dfrac{100}{2}-49}{30} (44-42)=\dfrac{631}{15} \approx 42.\]
+	}
+\end{ex}
+%%%%==============HetCau_EX19==============%%%
+
+%%%%==============Cau_EX20==============%%%
+\begin{ex}%[1D5N2-2]
+	Một mẫu số liệu có bảng tần số ghép nhóm như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm & $[1;5)$ & $[5;9)$ & $[9;13)$ & $[13;17)$ & $[17;21)$ \\
+			\hline
+			Tần số & $4$ & $8$ & $13$ & $6$ & $4$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn đến hàng phần mười).
+	\shortans[]{$10{,}7$}
+	\loigiai{
+		Cỡ mẫu của mẫu số liệu là $n=4+8+13+6+5=35$.\\
+		Gọi $x_1, x_2, \ldots, x_{35}$ là mẫu số liệu được sắp xếp theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu này là $x_{18} \in [9;13)$.\\
+		Ta có $n_m=13$; $C=4+8=12$; $u_m=9$; $u_{m+1}=13$.
+		Trung vị của mẫu số liệu ghép nhóm là $$M_e=9+\dfrac{\dfrac{35}{2}-12}{13} (13-9)=\dfrac{139}{13} \approx 10{,}7.$$
+	}
+\end{ex}
+%%%%==============HetCau_EX20==============%%%
+
+%%%%==============Cau_EX21==============%%%
+\begin{ex}%[1D5N2-2]
+	Một học viện bóng đá điều tra về lứa tuổi của $100$ học viên trẻ đăng kí đầu tiên để tham gia khóa học mới và thu được bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Nhóm tuổi & $[8;9]$ & $[10;11]$ & $[12;13]$ & $[14;15]$ & $[16;17]$ \\
+			\hline
+			Số học viên & $14$ & $20$ & $33$ & $18$ & $15$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn một chữ số sau dấu phẩy).
+	\shortans{$12{,}5$}
+	\loigiai{
+		Vì độ tuổi được điều tra là số nguyên nên ta hiệu chỉnh bảng số liệu trên về bảng tần số ghép nhóm sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				Nhóm tuổi & $[7{,}5;9{,}5)$ & $[9{,}5;11{,}5)$ & $[11{,}5;13{,}5)$ & $[13{,}5;15{,}5)$ & $[15{,}5;17{,}5)$ \\
+				\hline
+				Số học viên & $14$ & $20$ & $33$ & $18$ & $15$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Cỡ mẫu của mẫu số liệu là $n=100$.\\
+		Gọi $x_1, x_2, \ldots, x_{100}$ là mẫu số liệu được sắp xếp theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu này là $\dfrac{x_{50}+x_{51}}{2} \in [11{,}5;13{,}5)$.\\
+		Ta có $n_m=33$; $C=14+20=34$; $u_m=11{,}5$; $u_{m+1}=13{,}5$.
+		Trung vị của mẫu số liệu ghép nhóm là
+		\[M_e=11,5+\dfrac{\dfrac{100}{2}-34}{33} (13{,}5-11{,}5)=\dfrac{823}{66} \approx 12{,}5.\]
+	}
+\end{ex}
+%%%%==============HetCau_EX21==============%%%
+
+%%%%==============Cau_EX22==============%%%
+\begin{ex}%[1D5N2-2]
+	Người ta ghi chép lại trọng lượng (gam) một loại cá rô được nuôi trong ao theo một chế độ đặc biệt sau $6$ tháng, họ có bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Trọng lượng & $[60;70)$ & $[70;80)$ & $[80;90)$ & $[90;100)$ & $[100;110)$ & $[110;120)$ \\
+			\hline
+			Số cá & $13$ & $24$ & $55$ & $61$ & $31$ & $16$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm trung vị của mẫu số liệu ghép nhóm đã cho (Kết quả làm tròn đến hàng phần chục).
+	\shortans[]{$91{,}3$}
+	\loigiai{
+		Cỡ mẫu của mẫu số liệu là $n=13+24+55+61+31+16=200$.\\
+		Gọi $x_1, x_2, \ldots, x_{200}$ là mẫu số liệu được sắp xếp theo thứ tự không giảm.\\
+		Trung vị của mẫu số liệu này là $\dfrac{x_{100}+x_{101}}{2} \in [90;100)$.\\
+		Ta có $n_m=61$; $C=13+24+55=92$; $u_m=90$; $u_{m+1}=100$.\\
+		Trung vị của mẫu số liệu ghép nhóm là
+		\[M_e=90+\dfrac{\dfrac{200}{2}-92}{61} (100-90)=\dfrac{5570}{61} \approx 91{,}3.\]
+	}
+\end{ex}
+%%%%==============HetCau_EX22==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C5B2-DE1-KQ}
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE2-LC]
+\caulc
+%%%==============Cau_EX1==============%%%
+\begin{ex}%[1D5H2-3]
+	Thống kê điểm học kì môn toán của các học sinh lớp $11$A của một trường THPT, người ta thu được số liệu sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			$3$ & $5{,}5$ & $5$ & $4$ & $4{,}5$ & $4{,}5$ & $3$ & $5$ & $4$ & $4{,}5$ & $4{,}5$ & $6{,}5$ & $6{,}5$ & $7{,}5$ & $3{,}5$ \\
+			\hline
+			$5$ & $6$ & $7$ & $8$ & $8$ & $7$ & $4{,}5$ & $6$ & $5$ & $7$ & $4$ & $5{,}5$ & $7{,}5$ & $8{,}5$ & $9{,}5$ \\
+			\hline
+			$4$ & $3{,}5$ & $5$ & $8{,}5$ & $6{,}5$ & $4{,}5$ & $7{,}5$ & $7$ & $4{,}5$ & $3$ & $7$ & $5{,}5$ & $5{,}5$ & $6{,}5$ & $9$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Xác định tứ phân vị của mẫu số liệu khi ta ghép lớp thành các nhóm có độ dài là $1$ như sau
+	\[\left[3; 4\right), \left[4; 5\right),\ldots, \left[9; 10\right).\]
+	\choice
+	{\True $4{,}6; 5{,}7; 7{,}3$}
+	{$4{,}6; 5{,}7; 7{,}4$}
+	{$5{,}6; 6{,}7; 8{,}3$}
+	{$4{,}7; 5{,}7; 7{,}4$}
+	\loigiai{
+		Ta có bảng tần số ghép lớp, tần số tích lũy sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				Lớp & Tần số & Tần số tích lũy \\
+				\hline
+				$\left[3; 4\right)$ & $5$ & $5$ \\
+				\hline
+				$\left[4; 5\right)$ & $11$ & $16$ \\
+				\hline
+				$\left[5; 6\right)$ & $9$ & $25$ \\
+				\hline
+				$\left[6; 7\right)$ & $6$ & $31$ \\
+				\hline
+				$\left[7; 8\right)$ & $8$ & $39$ \\
+				\hline
+				$\left[8; 9\right)$ & $4$ & $43$ \\
+				\hline
+				$\left[9; 10\right)$ & $2$ & $45$ \\
+				\hline
+				& $n=45$ & \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{itemize}
+			\item Ta có số phần tử của mẫu là\\
+			$n=45\Rightarrow \dfrac{n}{4}=11{,}25$.\\
+			Suy ra nhóm $2$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $11{,}25$.\\
+			Xét nhóm $2$ là nhóm $\left[4; 5\right)$ có $s=4$; $h=1$; $n_2=11$ và nhóm $1$ là nhóm $\left[3; 4\right)$ có $cf_1=5$.\\
+			Áp dụng công thức tứ phân vị thứ nhất của mẫu số liệu có
+			\[Q_1=4+\left(\dfrac{11,25-5}{11} \right)\cdot 1\approx 4{,}6.\]
+			\item Ta có số phần tử của mẫu là\\
+			$n=45\Rightarrow \dfrac{n}{2}=22{,}5$.
+			Mà $cf_2=16< 22{,}5< cf_3=25$ suy ra nhóm $3$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $22{,}5$.\\
+			Xét nhóm $3$ là nhóm $\left[5; 6\right)$ có $r=5$; $d=1$; $n_3=9$ và nhóm $2$ là nhóm $\left[4; 5\right)$ có $cf_2=16$.\\
+			Áp dụng công thức ta có trung vị của mẫu số liệu là
+			\[M_e=5+\left(\dfrac{22{,}5-16}{9} \right)\cdot 1\approx 5{,}7.\]
+			Suy ra $Q_2=M_e \approx 5{,}7$.
+			\item Ta có số phần tử của mẫu là\\
+			$n=45\Rightarrow \dfrac{3n}{4}=33{,}75$.
+			Suy ra nhóm $5$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $33{,}75$.\\
+			Xét nhóm $5$ là nhóm $\left[7; 8\right)$ có $t=7$; $l=1$; $n_4=8$ và nhóm $4$ là nhóm $\left[6; 7\right)$ có $cf_4=31$.\\
+			Áp dụng công thức tứ phân vị thứ nhất của mẫu số liệu có
+			\[Q_3=7+\left(\dfrac{33{,}75-31}{8} \right)\cdot 1\approx 7{,}3.\]
+		\end{itemize}
+	}
+\end{ex}
+%%%==============HetCau_EX1==============%%%
+
+%%%==============Cau_EX2==============%%%
+\begin{ex}%[1D5N1-4]
+	Gọi $i$ là nhóm có tần số lớn nhất. Gọi $u,\; g,\; n_i$ lần lượt là đầu mút trái, độ dài và tần số của nhóm $i$; $\; n_{i-1}, \; \; n_{i+1}$ lần lượt là tần số của nhóm $i-1$, nhóm $i+1$. Gọi $M_0$ là Mốt của mẫu số liệu ghép nhóm, mệnh đề nào sau đây đúng?
+	\choice
+	{\True $M_0=u+\left(\dfrac{n_i-n_{i-1}}{2n_i-n_{i-1}-n_{i+1}} \right)\cdot g$}
+	{$M_0=u+\left(\dfrac{n_i.n_{i-1}}{2n_i-n_{i+1}-n_{i-1}} \right)\cdot g$}
+	{$M_0=u.\left(\dfrac{n_i-n_{i-1}}{2n_i-n_{i-1}-n_{i+1}} \right)-g$}
+	{$M_0=u+\left(\dfrac{n_{i+1}-n_{i-1}}{2n_i-n_{i-1}-n_{i+1}} \right)\cdot g$}
+	\loigiai{
+		Theo định nghĩa mốt	$M_0=u+\left(\dfrac{n_i-n_{i-1}}{2n_i-n_{i-1}-n_{i+1}} \right)\cdot g$.}
+\end{ex}
+%%%==============HetCau_EX2==============%%%
+
+%%==============Cau_EX3==============%%%
+\begin{ex}%[1D5N1-4]
+	Điểm kiểm tra $15$ phút của $36$ học sinh lớp 11A được cho bởi bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Nhóm điểm & Tần số \\
+			\hline
+			$\left[1;3\right)$ & $3$ \\
+			\hline
+			$\left[3;5\right)$ & $2$ \\
+			\hline
+			$\left[5;7\right)$ & $10$ \\
+			\hline
+			$\left[7;9\right)$ & $14$ \\
+			\hline
+			$\left[9;11\right)$ & $7$ \\
+			\hline
+			& $n=36$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Mốt của bảng ghép lớp trên là giá trị nào sau?
+	\choice
+	{\True $7{,}73$}
+	{$6{,}12$}
+	{$5{,}09$}
+	{$7{,}03$}
+	\loigiai{
+		Áp dụng công thức tính mốt $M_0=u+\left(\dfrac{n_i-n_{i-1}}{2n_i-n_{i-1}-n_{i+1}} \right)\cdot g$.\\
+		Với $i=4$, $u=7$, $g=2$, $n_4=14$, $n_3=10$, $n_5=7$.\\
+		Ta có
+		\[M_0=7+\left(\dfrac{14-10}{2\cdot 14-10-7} \right)\cdot 2=7{,}73.\]
+	}
+\end{ex}
+%%%==============HetCau_EX3==============%%%
+
+%%%==============Cau_EX4==============%%%
+\begin{ex}%[1D5V1-4]
+	Cho bảng mẫu số liệu ghép nhóm là chiều cao của học sinh lớp $5$ tuổi như sau ($x$ nguyên dương)
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Nhóm chiều cao & Tần số \\
+			\hline
+			$\left[85;90\right)$ & $1$ \\
+			\hline
+			$\left[90;95\right)$ & $x^2+5$ \\
+			\hline
+			$\left[95;100\right)$ & $4x$ \\
+			\hline
+			$\left[100;105\right)$ & $12$ \\
+			\hline
+			$\left[105;110\right)$ & $3$ \\
+			\hline
+			$\left[110;115\right)$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm giá trị $x$, biết mốt của bảng ghép lớp trên phân bố $\left[90;95\right)$ là $\dfrac{283}{3}$?
+	\choice
+	{\True $3$}
+	{$4$}
+	{$5$}
+	{$6$}
+	\loigiai{
+		Ta có, theo công thức tính mốt thì
+		\begin{eqnarray*}
+			& &	\dfrac{283}{3}=90+\left(\dfrac{x^2+5-1}{2\cdot \left(x^2+5\right)-1-4x} \right)\cdot 5\\
+			&\Leftrightarrow& 11x^2-52x+57=0\\
+			&\Leftrightarrow& \hoac{&{x=3} \\
+				&{x=\dfrac{19}{11}}.}
+		\end{eqnarray*}
+		Do $x$ nguyên dương nên suy ra $x=3$.
+	}
+\end{ex}
+%%%==============HetCau_EX4==============%%%
+
+%%%==============Cau_EX5==============%%%
+\begin{ex}%[1D5N1-2]
+	Cho bảng mẫu số liệu ghép nhóm là chiều cao của học sinh lớp $5$ tuổi
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Nhóm chiều cao & Tần số \\
+			\hline
+			$\left[85;90\right)$ & $1$ \\
+			\hline
+			$\left[90;95\right)$ & $4$ \\
+			\hline
+			$\left[95;100\right)$ & $8$ \\
+			\hline
+			$\left[100;105\right)$ & $12$ \\
+			\hline
+			$\left[105;110\right)$ & $3$ \\
+			\hline
+			$\left[110;115\right)$ & $2$ \\
+			\hline
+			& $n=30$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Số liệu và nhóm của bảng trên là
+	\choice
+	{$30$ và $5$}
+	{$115$ và $30$}
+	{$115$ và $6$}
+	{\True $30$ và $6$}
+	\loigiai{
+		Mẫu số liệu đó gồm $30$ số liệu và $6$ nhóm.}
+\end{ex}
+%%%==============HetCau_EX5==============%%%
+
+%%%==============Cau_EX6==============%%%
+\begin{ex}%[1D5H1-2]
+	Cho bảng mẫu số liệu ghép nhóm là chiều cao của học sinh lớp $5$ tuổi
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Nhóm chiều cao & Tần số \\
+			\hline
+			$\left[85;90\right)$ & $1$ \\
+			\hline
+			$\left[90;95\right)$ & $x-4$ \\
+			\hline
+			$\left[95;100\right)$ & $x^2-3x+11$ \\
+			\hline
+			$\left[100;105\right)$ & $12$ \\
+			\hline
+			$\left[105;110\right)$ & $3$ \\
+			\hline
+			$\left[110;115\right)$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm $x$ biết tần số tích lũy của nhóm $3$ là $23$
+	\choice
+	{\True $5$}
+	{$3$}
+	{$8$}
+	{$10$}
+	\loigiai{
+		Tần số tích lũy của nhóm $3$ là $23$ nên ta có\\
+		\begin{eqnarray*}
+			& &23=1+x-4+x^2-3x+11\\
+			&\Leftrightarrow& x^2-2x-15=0\\
+			&\Leftrightarrow& \hoac{&{x=5} \\&{x=-3}.}
+		\end{eqnarray*}
+		Do $x > 0$ nên $x=5$.
+	}
+\end{ex}
+%%%==============HetCau_EX6==============%%%
+
+%%%==============Cau_EX7==============%%%
+\begin{ex}%[1D5H1-3]
+	Điểm trung bình các môn học kì $I$ của bạn An được cho bởi bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline Môn & Toán & Vật Lý & Hóa học & Ngữ văn & Lịch sử & Địa lý & Tin học & Tiếng Anh \\
+			\hline Điểm & $9{,}4$ & $8{,}8$ & $9{,}2$ & $6{,}8$ & $8{,}0$ & $7{,}8$ & $8{,}4$ & 8{,}6 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính điểm trung bình môn học kì $I$ của bạn An.
+	\choice
+	{$8{,}0$}
+	{\True ${8{,}375}$}
+	{${8{,}2}$}
+	{$8{,}5$}
+	\loigiai{
+		Điểm trung bình môn học kì I của bạn An là
+		\[\dfrac{9{,}4+8{,}8+9{,}2+6{,}8+8{,}0+7{,}8+8{,}4+8{,}6}{8}=8{,}375.\]
+	}
+\end{ex}
+%%%==============HetCau_EX7==============%%%
+
+%%%==============Cau_EX8==============%%%
+\begin{ex}%[1D5H1-3]
+	Điều tra về chiều cao của học sinh khối lớp $10$, ta có kết quả sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline Nhóm & Chiều cao (cm) & Số học sinh \\
+			\hline 1 & {$[150 ; 152)$} & $10$ \\
+			\hline 2 & {$[152 ; 154)$} & $12$ \\
+			\hline 3 & {$[154 ; 156)$} & $35$ \\
+			\hline 4 & {$[156 ; 158)$} & $20$ \\
+			\hline 5 & {$[158 ; 160)$} & $10$ \\
+			\hline 6 & {$[160 ; 162)$} & $13$ \\
+			\hline \multicolumn{2}{|c|}{} & $\mathrm{N}=100$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Số trung bình là
+	\choice
+	{$154{,}94$}
+	{$159{,}54$}
+	{$152{,}45$}
+	{\True $155{,}94$}
+	\loigiai{
+		Số trung bình là
+		$$\dfrac{151\cdot 10+153\cdot 12+155\cdot 35+157\cdot 20+159\cdot 10+161\cdot 13}{100}=155{,}94.$$
+	}
+\end{ex}
+%%%==============HetCau_EX8==============%%%
+
+%%%==============Cau_EX9==============%%%
+\begin{ex}%[1D5V1-3]
+	Một của hàng bán $3$ loại hoa quả nhập khẩu: Nho Mỹ, Lê Hàn Quốc và Táo New Zealand. Sau khi giảm giá mỗi loại lần lượt là $x$, $y$, $z$ trên $1kg$ thì số liệu tính toán được ghi lại bởi bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline Loại quả & Nho Mỹ & Lê Hàn Quốc & Táo New Zealand \\
+			\hline Giá bán (nghìn $/ \mathrm{kg}$ ) & $250-x$ & $200-y$ & $180-z$ \\
+			\hline Số lượng bán ( $\mathrm{kg}$ ) & $250+x$ & $200+y$ & $180+z$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Biết rằng $x+y+z=120$. Tính giá trị $x$, $y$, $z$ để lợi nhuận bình quân của $1kg$ hoa quả đạt được cao nhất.
+	\choice
+	{\True $x=y=z=40$}
+	{$x=50$; $y=30$; $z=40$}
+	{$x=30$; $y=50$; $z=40$}
+	{$x=20$; $y=60$; $z=40$}
+	\loigiai{
+		Vì số lượng hoa quả bán được là $250+x+200+y+180+z=750$ là cố định nên bình quân mỗi $kg$ hoa quả có giá cao nhất khi số tiền thu được là cao nhất.\\
+		Gọi $P$ là tổng số tiền thu được.\\
+		Khi đó 
+		\begin{eqnarray*}
+			P&=&\left(250-x\right)(250+x)+(200-y)(200+y)+(180-z)(180+z)\\
+			&=&250^2-x^2+200^2-y^2+180^2-z^2=134900-x^2-y^2-z^2.
+		\end{eqnarray*}
+		Ta có bất đẳng thức $x^2+y^2+z^2\ge \dfrac{1}{3} \left(x+y+z\right)^2=4800$.\\
+		Do đó $P\le 130100$.\\
+		Vậy $P$ lớn nhất $\Leftrightarrow \heva{&{x+y+z=120} \\
+			&{x=y=z}}\Leftrightarrow x=y=z=40$.
+	}
+\end{ex}
+%%%==============HetCau_EX9==============%%%
+
+%%%==============Cau_EX10==============%%%
+\begin{ex}%[1D5N2-2]
+	Cho dãy số liệu thống kê:  $50$, $48$, $34$, $36$, $56$, $35$, $43$, $38$, $55$. Số trung vị là
+	\choice
+	{$38$}
+	{$35$}
+	{\True $43$}
+	{$55$}
+	\loigiai{
+		Dãy số liệu thống kê xếp thành dãy không giảm là  $34$, $35$, $36$, $38$, $43$, $48$, $50$, $55$, $56$.\\
+		Số trung vị là $M_e=43$.
+	}
+\end{ex}
+%%%==============HetCau_EX10==============%%%
+
+%%%==============Cau_EX11==============%%%
+\begin{ex}%[1D5N2-2]
+	Thống kê điểm kiểm tra một tiết môn Toán của lớp 11A của trường THPT Nguyễn Huệ được ghi lại như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline Giá trị $(x)$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+			\hline Tần số $(n)$ & $2$ & $3$ & $7$ & $6$ & $12$ & $4$ & $2$ \\
+			\hline
+		\end{tabular} 
+	\end{center}
+	Số trung vị của mẫu số liệu trên là
+	\choice
+	{$8{,}0$}
+	{\True $7{,}5$}
+	{$7{,}8$}
+	{$8{,}5$}
+	\loigiai{
+		Các số liệu đã được xếp theo thứ tự tăng dần.\\
+		Cỡ mẫu là $n=2+3+7+8+10+4+2=36$.\\
+		Khi đó trung vị là $$M_e=\dfrac{x_{18}+x_{19}}{2}=\dfrac{7+8}{2}=7{,}5.$$}
+\end{ex}
+%%%==============HetCau_EX11==============%%%
+
+%%%==============Cau_EX12==============%%%
+\begin{ex}%[1D5N2-2]
+	Thời gian đọc sách mỗi ngày của một số học sinh được cho trong bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian (phút) & {$[10 ; 15)$} & {$[15 ; 20)$} & {$[20 ; 25)$} & {$[25 ; 30)$} & {$[30 ; 35)$} \\
+			\hline Số học sinh & $3$ & $10$ & $12$ & $15$ & $20$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Xác định trung vị của mẫu số liệu ghép nhóm
+	\choice
+	{$25$}
+	{$26$}
+	{$25{,}56$}
+	{\True $26{,}67$}
+	\loigiai{
+		Cỡ mẫu là $n=3+10+12+15+20=60$.\\
+		Ta có $\dfrac{n}{2}=30$.\\
+		Mà $cf_3=25< 30< cf_4=40$. Suy ra nhóm $4$ là nhóm đầu tiên có tần số tích lũy lớn hơn hoặc bằng $30$.\\
+		Xét nhóm $4$ là nhóm $\left[25;30\right)$ có $r=25$; $d=5$, $n_4=15$; và nhóm $3$ có $cf_3=25$.\\
+		Vậy trung vị của mẫu số liệu là
+		\[M_e=25+\dfrac{30-25}{15}\cdot 5\approx 26{,}67.\]
+	}
+\end{ex}
+%%%==============HetCau_EX12==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C5B2-DE2-LC}
+\cauds
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE2-DS]
+%%%==============Cau_EX13==============%%%
+\begin{ex}%[1D5H2-3]
+	Kiểm tra điện lượng của một số viên pin tiểu do một hãng sản xuất thu được kết quả sau
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		Điện lượng (Nghìn mAh) & $[0{,}9;0{,}95)$ & $[0{,}95;1{,}0)$ & $[1{,}0;1{,}05)$ & $[1{,}05;1{,}1)$ & $[1{,}1;1{,}15)$ \\
+		\hline
+		Số pin & $10$ & $20$ & $35$ & $15$ & $5$ \\
+		\hline
+	\end{tabular}
+	\choiceTF
+	{\True Số trung bình của dãy số liệu là $1{,}016$}
+	{Nhóm chứa mốt của dãy số liệu là $[1{,}05;1{,}1)$}
+	{\True Tứ phân vị thứ nhất của mẫu số liệu nhóm là $Q_1=0{,}98$}
+	{Tứ phân vị thứ ba của mẫu số liệu nhóm là $Q_3=1{,}248$}
+	\loigiai{
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				Điện lượng (Nghìn mAh) & $[0{,}9;0{,}95)$ & $[0{,}95;1{,}0)$ & $[1{,}0;1{,}05)$ & $[1{,}05;1{,}1)$ & $[1{,}1;1{,}15)$ \\
+				\hline
+				Giá trị đại diện & $0{,}925$ & $0{,}975$ & $1{,}025$ & $1{,}075$ & $1{,}125$ \\
+				\hline
+				Số pin & $10$ & $20$ & $35$ & $15$ & $5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Số trung bình của dãy số liệu là
+			\[\dfrac{0{,}925\cdot 10+0{,}975\cdot 20+1{,}025\cdot 35+1{,}075\cdot 15+1{,}125\cdot 5}{85}=1{,}016.\] 
+			\itemch Sai. Nhóm chứa mốt của dãy số liệu là $[1;1{,}05)$
+			\[M_0=1+\dfrac{35-20}{(35-20)+(35-15)} (1{,}05-1)=1{,}02.\]
+			Gọi $x_1; x_2; \ldots; x_{85}$ lần lượt là điện lượng mỗi viên pin xếp theo thứ tự không giảm.\\
+			Do $x_1; x_2; \ldots; x_{10} \in [0{,}9;0{,}95);x_{11};\ldots;x_{30} \in [0{,}95;1{,}0);x_{31};\ldots;x_{65} \in [1{,}0;1{,}05)$; $x_{66};\ldots;x_{80} \in [1{,}05;1{,}1);x_{81};\ldots;x_{85} \in [1{,}1;1{,}15)$ nên trung vị của mẫu số liệu $x_1$; $x_2;\ldots;x_{85}$ là $x_{43} \in [1;1{,}05)$.
+			\itemch Đúng. Tứ phân vị thứ nhất của mẫu số liệu là $\dfrac{1}{2} \left(x_{21}+x_{22} \right)$.
+			Do $x_{21}, x_{22} \in [0{,}95;1)$ nên tứ phân vị thứ nhất của mẫu số liệu nhóm là\\ $Q_1=0{,}95+\dfrac{\dfrac{85}{4}-10}{20} (1-0{,}95)=0{,}98$.
+			\itemch Sai. Tứ phân vị thứ ba của mẫu số liệu là $\dfrac{1}{2} \left(x_{64}+x_{65} \right)$.\\
+			Do $x_{64}, x_{65} \in [1;1,05)$ nên tứ phân vị thứ ba của mẫu số liệu nhóm là\\ $Q_3=1+\dfrac{\dfrac{3\cdot 85}{4}-30}{35} (1{,}05-1)=1{,}048$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============HetCau_EX13==============%%%
+
+%%%%==============Cau_EX14==============%%%
+\begin{ex}%[1D5H2-3]
+	Thống kê điểm trung bình môn Toán của một số học sinh lớp $11$ được cho ở bảng sau
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
+		\hline
+		Khoảng điểm & $[6{,}5;7)$ & $[7;7{,}5)$ & $[7{,}5;8)$ & $[8;8{,}5)$ & $[8{,}5;9)$ & $[9;9{,}5)$ & $[9{,}5;10)$ \\
+		\hline
+		Số học sinh & $8$ & $10$ & $16$ & $24$ & $13$ & $7$ & $4$ \\
+		\hline
+	\end{tabular}
+	\choiceTF
+	{Cỡ mẫu của mẫu số liệu là $n=80$}
+	{\True Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là $Q_1=7{,}58$}
+	{\True Tứ phân vị thứ hai của mẫu số liệu ghép nhóm là $Q_2=8{,}15$}
+	{\True Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là $Q_3=8{,}63$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Cỡ mẫu của mẫu số liệu là \\
+			$n=8+10+16+24+13+7+4=82$.
+			\itemch Đúng. Gọi $x_1;x_2;\ldots;x_{82}$ lần lượt là điểm trung bình môn Toán của các học sinh sắp xếp theo thứ tự không giảm.\\
+			Ta có $x_1;\ldots;x_8\in [6{,}5;7);x_9;\ldots;x_{18} \in [7;7{,}5);x_{19};\ldots;x_{34} \in [8;8{,}5)$; $x_{59};\ldots;x_{71} \in [8{,}5;9);x_{72};\ldots;x_{78} \in [7;7{,}5);x_{79};\ldots;x_{82} \in [9{,}5;10)$.\\
+			Tứ phân vị thứ nhất của mẫu số liệu là $x_{21} \in [7{,}5;8)$.\\
+			Do đó tứ phân vị thứ nhất của mẫu số liệu là\\
+			$Q_1=7{,}5+\dfrac{\dfrac{82}{4}-18}{16} (8-7{,}5)=7{,}58$.
+			\itemch Đúng. Tứ phân vị thứ hai của mẫu số liệu là $\dfrac{1}{2} \left(x_{41}+x_{42} \right)$ mà $x_{41};x_{42} \in [8;8{,}5)$ nên tứ phân vị thứ hai của mẫu số liệu là\\
+			$Q_2=8+\dfrac{\dfrac{82}{2}-34}{24} (8{,}5-8)=8{,}15$.
+			\itemch Đúng. Tứ phân vị thứ ba của mẫu số liệu là $x_{62} \in [8{,}5;9)$.
+			Do đó tứ phân vị thứ ba của mẫu số liệu là\\
+			$Q_3=8{,}5+\dfrac{\dfrac{3.82}{4}-58}{13} (9-8{,}5)=8{,}63$.	
+		\end{itemchoice}
+	}
+\end{ex}
+%%%%==============HetCau_EX14==============%%%
+
+%%%==============Cau_EX15==============%%%
+\begin{ex}%[1D5H2-2]
+	Khi đo mắt cho học sinh khối $10$ ở một trường THPT nhân viên y tế ghi nhận lại ở bảng sau
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		Thời gian & $[0{,}25;0{,}75)$ & $[0{,}75;1{,}25)$ & $[1{,}25;1{,}75)$ & $[1{,}75;2{,}25)$ & $[2{,}25;2{,}75)$ \\
+		\hline
+		Số lần & $25$ & $32$ & $14$ & $12$ & $4$ \\
+		\hline
+	\end{tabular}
+	\choiceTF
+	{\True Số trung bình của mẫu số liệu trên là $1{,}14$}
+	{\True Nhóm chứa mốt của số liệu là $[0{,}75;1{,}25)$}
+	{\True Mốt của mẫu số liệu là $M_0=0{,}89$}
+	{\True Trung vị của mẫu số liệu là $M_e=1{,}039$}
+	\loigiai{
+		\begin{tabular}{|l|l|l|l|l|l|}
+			\hline
+			Thời gian & {$[0{,}25; 0{,}75)$} & {$[0{,}75; 1{,}25)$} & {$[1{,}25; 1{,}75)$} & {$[1{,}75; 2{,}25)$} & {$[2{,}25; 2{,}75)$} \\
+			\hline
+			Giá trị đại diện & $0{,}50$ & $1{,}00$ & $1{,}50$ & $2{,}00$ & $2{,}50$ \\
+			\hline
+			Số lần & $25$ & $32$ & $14$ & $12$ & $4$ \\
+			\hline
+		\end{tabular}
+		\begin{itemchoice}
+			\itemch Đúng. Số trung bình của mẫu số liệu trên là
+			\[\dfrac{0{,}50\cdot 25+1{,}00\cdot 32+1{,}50\cdot 14+2{,}00\cdot 12+2{,}50\cdot 4}{87}=1{,}14.
+			\]
+			\itemch Đúng. Nhóm chứa mốt của số liệu là $[0{,}75;1{,}25)$.
+			\itemch Đúng. Mốt của mẫu số liệu là $$M_0=0{,}75+\dfrac{32-25}{(32-25)+(32-14)} (1{,}25-0{,}75)=0{,}89.$$
+			\itemch Đúng. Gọi $x_1, x_2, \ldots x_{87}$ lần lượt là chỉ số mắt cận của các học sinh sắp xếp theo thứ tự không giảm.\\
+			Ta có $x_1, \ldots, x_{25} \in [0{,}25;0{,}75);x_{26}, \ldots, x_{57} \in [0{,}75;1{,}25)$; nên trung vị của mẫu là $x_{44} \in [0{,}75;1{,}25)$.\\
+			Ta xác định được $n=87$, $n_m=32$, $C=25$, $u_m=0{,}75$; $u_{m+1}=1{,}25$.\\
+			Nên $M_e=0{,}75+\dfrac{\dfrac{87}{2}-25}{32} (1{,}25-0{,}75)=1{,}039$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============HetCau_EX15==============%%%
+
+%%%==============Cau_EX16==============%%%
+\begin{ex}%[1D5H2-3]
+	Cân nặng của một số lợn con mới sinh thuộc hai giống $A$ và $B$ được cho ở bảng đây (đơn vị: kg)
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Cân nặng kg & $[1,0;1,1)$ & $[1,1;1,2)$ & $[1,2;1,3)$ & $[1,3;1,4)$ \\
+			\hline
+			Số con giống $A$ & $8$ & $28$ & $32$ & $17$ \\
+			\hline
+			Số con giống $B$ & $13$ & $14$ & $24$ & $14$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Cân nặng trung bình của giống $A$ là $1{,}22$}
+	{\True Cân nặng trung bình của giống $B$ là $1{,}21$}
+	{\True Tứ phân vị thứ nhất của mẫu số liệu lợn con giống $A$ là $Q_{1A}=1{,}15$}
+	{Tứ phân vị thứ nhất của mẫu số liệu lợn con giống $B$ là $Q_{1B}=1{,}62$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Cân nặng trung bình của giống $A$ là
+			\[\dfrac{1{,}05\cdot 8+1{,}15\cdot 28+1{,}25\cdot 32+1{,}35\cdot 17}{85}=1{,}22.
+			\]
+			\itemch Đúng. Cân nặng trung bình của giống $B$ là
+			\[\dfrac{1{,}05\cdot 13+1{,}15\cdot 14+1{,}25\cdot 24+1{,}35\cdot 14}{65}=1{,}21.
+			\]
+			\itemch Đúng. Gọi $x_1; x_2; \ldots; x_{85}$ lần lượt là cân nặng của mỗi con lợn giống $A$ theo thứ tự không giảm.\\
+			Tứ phân vị thứ nhất của dãy số liệu lợn con giống $A$ là $\dfrac{1}{2} \left(x_{21}+x_{22} \right)\in [1{,}1;1{,}2)$ nên tứ phân vị thứ nhất của mẫu số liệu lợn con giống $A$ là
+			\[Q_{1A}=1{,}1+\dfrac{\dfrac{85}{4}-8}{28} (1{,}2-1{,}1)=1{,}15.
+			\]
+			\itemch Sai. Gọi $y_1;y_2;\ldots;y_{65}$ lần lượt là cân nặng của mỗi con lợn giống $B$ theo thứ tự không giảm.\\
+			Tứ phân vị thứ nhất của dãy số liệu lợn con giống $B$ là $\dfrac{1}{2} \left(y_{16}+y_{17} \right)\in [1{,}1;1{,}2)$ nên tứ phân vị thứ nhất của mẫu số liệu lợn con giống $B$ là
+			\[Q_{1B}=1{,}1+\dfrac{\dfrac{65}{4}-13}{14} (1{,}2-1{,}1)=1{,}12.		\]
+			
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============HetCau_EX16==============%%%
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-11-C5B2-DE2-DS}
+\Opensolutionfile{ans}[ans/ans-11-C5B2-DE2-KQ]
+\caukq
+%%%==============Cau_EX17==============%%%
+\begin{ex}%[1D5N2-2]
+	Nghiên cứu thời gian chạy một vòng sân trường $300$ m của $41$ học sinh lớp 11A trường THPT được giáo viên bộ môn Thể dục ghi lại, có kết quả sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Thời gian &$[40;45)$&$[45;50)$&$[50;55)$&$[55;60)$&$[60;65)$\\
+			\hline
+			Số học sinh & $5$ & $8$ & $13$ & $9$ & $6$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn hàng phần chục).
+	\shortans[]{$52{,}9$}
+	\loigiai{
+		Gọi $x_1; x_2; \ldots; x_{41}$ là thời gian chạy của học sinh lớp 11A được xếp theo thứ tự không giảm.\\
+		Do $x_1;x_2;\ldots;x_5 \in [40;45);x_6;\ldots;x_{13} \in [45;50);x_{14};\ldots;x_{26} \in [50;55)$ nên trung vị của mẫu là $x_{21} \in [50;55)$.\\
+		Ta xác định được $n=41$, $n_m=13$, $C=5+8=13$, $u_m=50$, $u_{m+1}=55$.
+		\[M_e=50+\dfrac{\dfrac{41}{2}-13}{13} (55-50)=52{,}9.\]
+	}
+\end{ex}
+%%%==============HetCau_EX17==============%%%
+
+%%%==============Cau_EX18==============%%%
+\begin{ex}%[1D5N2-2]
+	Kết quả khảo sát hàm lượng vitamin $C$ của một số loại trái cây cho ở bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Hàm lượng vitamin C$(\%)$ & $[6;7)$ &$[7;8)$& $[8;9)$& $[9;10)$& $[10;11)$\\
+			\hline
+			Số lượng & $3$ & $4$ & $5$ & $2$ & $1$ \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên.
+	\shortans[]{$8{,}1$}
+	\loigiai{
+		Gọi $x_1;x_2;\ldots;x_{15}$ là hàm lượng vitamin $C$ của một số loại trái cây xếp theo thứ tự không giảm.\\
+		Do $x_1;x_2;x_3 \in [6;7);x_4;\ldots;x_7 \in [7;8);x_8;\ldots;x_{12} \in [8;9)$ nên trung vị của mẫu là $x_8 \in [8;9)$.\\
+		Ta xác định được $n=15$, $n_m=5$, $C=3+4=7$, $u_m=8$, $u_{m+1}=9$.
+		\[M_e=8+\dfrac{\dfrac{15}{2}-7}{5} (9-8)=8{,}1.\]
+	}
+\end{ex}
+%%%==============HetCau_EX18==============%%%
+
+%%%==============Cau_EX19==============%%%
+\begin{ex}%[1D5N2-2]
+	Chiều cao (đơn vị: m) của $35$ cây bạch đàn được cho ở bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Số đo chiều cao $(m)$&$[6{,}5;7)$&$[7;7{,}5)$&$[7{,}5;8)$&$[8;8{,}5)$&$[8{,}5;9)$\\
+			\hline
+			Số cây & $6$ & $9$ & $15$ & $4$ & $1$ \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn hàng phần trăm).
+	\shortans[]{$7{,}58$}
+	\loigiai{
+		Gọi $x_1;x_2;\ldots;x_{35}$ là chiều cao của các cây bạch đàn xếp theo thứ tự không giảm.\\
+		Do $x_1;\ldots;x_6 \in [6{,}5;7);x_7;\ldots;x_{15} \in [7;7{,}5);x_{16};\ldots;x_{10} \in [7{,}5;8)$ nên trung vị của mẫu là $x_{16} \in [7{,}5;8)$.\\
+		Ta xác định được $n=35$, $n_m=15$, $C=6+9=15$, $u_m=7{,}5$; $u_{m+1}=8$.\\
+		\[M_e=7{,}5+\dfrac{\dfrac{35}{2}-15}{15} (8-7{,}5)=7{,}58.\]
+	}
+\end{ex}
+%%%==============HetCau_EX19==============%%%
+
+%%%==============Cau_EX20==============%%%
+\begin{ex}%[1D5N2-2]
+	Số bài tập của các bộ môn được giáo viên cho học sinh về làm ở khối $11$ ở một nhóm học sinh trường THPT được giao về làm trong 01 tuần được cho như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Số bài tập &$[5;12)$&$[12;19)$&$[19;26)$&$[26;33)$&$[33;40)$\\
+			\hline
+			Số học sinh & $27$ & $58$ & $22$ & $23$ & $10$ \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn hàng phần chục).
+	\shortans[]{$23{,}7$}
+	\loigiai{
+		Gọi $x_1;x_2;\ldots;x_{140}$ là số lượng bài tâp  xếp theo thứ tự không giảm.\\
+		Do $x_1;\ldots;x_{27} \in [5;12);x_{28};\ldots;x_{85} \in [12;19)$ nên trung vị của mẫu là$\dfrac{1}{2} \left(x_{70}+x_{71} \right)\in [12;19)$.\\
+		Ta xác định được $n=140$, $n_m=58$, $C=27$, $u_m=12$, $u_{m+1}=19$.\\
+		\[M_e=12+\dfrac{\dfrac{140}{2}-27}{58} (19-12)=23{,}7.\]
+	}
+\end{ex}
+%%%==============HetCau_EX20==============%%%
+
+%%%==============Cau_EX21==============%%%
+\begin{ex}%[1D5N2-2]
+	Số tiền mà học sinh lớp $11$ chi cho ăn uống sinh hoạt trong một tuần được tổng hợp ở bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Số tiền (nghìn đồng) &$[300;340)$&$[340;380)$&$[380;420)$&$[420;460)$&$[460;500)$\\
+			\hline
+			Số học sinh & $5$ & $9$ & $12$ & $7$ & $6$ \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn đến hàng đơn vị).
+	\shortans[]{$398$}
+	\loigiai{
+		Gọi $x_1;x_2;\ldots;x_3$ là số tiền chi ăn uống sinh hoạt trong tuần của học sinh xếp theo thứ tự không giảm.\\
+		Do $x_1;\ldots;x_5 \in [300;340);x_6;\ldots;x_9 \in [340;380);x_{15};\ldots;x_{26} \in [380;420)$ nên trung vị của mẫu là$x_{19} \in [380;420)$.\\
+		Ta xác định được $n=39$, $n_m=12$, $C=5+9=14$, $u_m=380$, $u_{m+1}=420$.\\
+		\[M_e=380+\dfrac{\dfrac{39}{2}-14}{12} (420-380)\approx 398.\]
+	}
+\end{ex}
+%%%==============HetCau_EX21==============%%%
+
+%%%==============Cau_EX22==============%%%
+\begin{ex}%[1D5N2-2]
+	Trong đợt kiểm tra học kỳ $II$ môn Thể dục ở một trường THPT được giáo viên tổng hợp thời gian chạy của $41$ học sinh ở cự ly$1\,500$ m dưới bảng như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Thời gian (đơn vị phút) &$[7;9)$&$[9;11)$&$[11;13)$&$[13;15)$&$[15;17)$\\
+			\hline
+			Số học sinh & $5$ & $8$ & $13$ & $9$ & $6$ \\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm trung vị của mẫu số liệu ghép nhóm trên (Kết quả làm tròn đến hàng phần mười)
+	\shortans[]{$12{,}2$}
+	\loigiai{
+		Gọi $x_1;x_2;\ldots;x_{41}$là thời gian chạy của học sinh lớp được xếp theo thứ tự không giảm.\\
+		Do $x_1;x_2;\ldots;x_5 \in [7;9);x_6 \ldots x_{13} \in [9;11);x_{14} \ldots x_{26} \in [11;13)$ nên trung vị của mẫu là $x_{21} \in [11;13)$.\\
+		Ta xác định được $n=41$, $n_m=13$, $C=5+8=13$, $u_m=11$, $u_{m+1}=13$.\\
+		\[M_e=11+\dfrac{\dfrac{41}{2}-13}{13} (13-11)\approx12{,}2.\]
+	}
+\end{ex}
+%%%==============HetCau_EX22==============%%%
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-11-C5B2-DE2-KQ}
+
+

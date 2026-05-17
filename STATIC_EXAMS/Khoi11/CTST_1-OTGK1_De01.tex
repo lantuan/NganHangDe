@@ -1,0 +1,610 @@
+\subsection{Đề 1}
+\caulc
+\Opensolutionfile{ans}[ans/ans-CTST_1-OTGK1-De1]
+%%%==============EX_1============%%%
+\begin{ex}%[1D1H1-3]%[Câu 1]
+	\immini[thm]{Trên đường tròn lượng giác, điểm $M$ trong hình vẽ bên dưới biểu diễn góc $\alpha $ có số đo bằng bao nhiêu?
+		\choice
+		{$\dfrac{\pi}{6}$}
+		{\True $\dfrac{\pi}{3}$}
+		{$\dfrac{\pi}{4}$}
+		{$\dfrac{\pi}{2}$}
+		}
+		{\begin{tikzpicture}[scale=0.8, font=\footnotesize,line join=round, line cap=round, >=stealth];		
+			\path (0,0) coordinate (O)
+			(.8,1.27) coordinate (C)
+			(1,0) coordinate (A);	
+			\draw[->] (-2.5,0) -- (2.5,0) node[below] {\scriptsize $x$};
+			\draw[->] (0,-2.5) -- (0,2.5) node[left] {\scriptsize $y$};
+			\draw[line width=0.6pt,green] (O) circle (1.5cm);	
+			\draw (1.7,0) node[below] {$1$} (-1.9,0) node[below] {$-1$} ;
+			\draw (0.1,1.8) node[left] {$1$} (0.1,-1.8) node[left] {$-1$} (-0.3,0) node[below] {$O$};
+			\draw[fill=black]  (-1.5,0) circle (1.2pt) (1.5,0) circle (1.2pt) (.8,1.27) circle (1.2pt)
+			(0,1.5) circle (1.2pt) (0,-1.5) circle (1.2pt);	
+			\coordinate[label=right:$M$] (M) at ($(O)+(60:1.5)$);
+			\draw[dashed] (.8,1.27)--(.8,0) node[scale=0.8,below] {$\dfrac{1}{2}$};
+			\draw[dashed] (.8,1.27)--(0,1.27) node[scale=0.6,left] {$\dfrac{\sqrt{3}}{2}$};
+			\draw[blue] (0,0)--(.8,1.27);
+			\path pic[angle radius=3mm,draw=blue,fill=green,"$\alpha$",angle eccentricity=1.5] {angle = A--O--C};
+	\end{tikzpicture}
+}
+	\loigiai{
+		Ta có $M$ nằm ở góc phần tư thứ $I$ và $\cos \alpha =\dfrac{1}{2}$ nên $M$ biểu diễn góc $\alpha =\dfrac{\pi}{3}$.}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[1D1H2-2]%[Câu 2]
+	Cho $\sin\alpha=-\dfrac{4}{5}$ và $\pi<\alpha<\dfrac{3\pi}{2}$. Giá trị của $\cos\alpha$ là
+	\choice
+	{$\dfrac{3}{5}$}
+	{\True $-\dfrac{3}{5}$}
+	{$-\dfrac{9}{25}$}
+	{$\dfrac{9}{25}$}
+	\loigiai{
+		Ta có $\sin^2\alpha+\cos^2\alpha=1\Rightarrow\cos^2\alpha=1-\sin^2\alpha=1-\left(-\dfrac{4}{5}\right)^2=\dfrac{9}{25}\Leftrightarrow\hoac{&\cos\alpha=\dfrac{3}{5}\\&\cos\alpha=-\dfrac{3}{5}.}$\\
+		Vì $\pi<\alpha<\dfrac{3\pi}{2}$ nên $\cos\alpha<0\Rightarrow\cos\alpha=-\dfrac{3}{5}$.}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[1D1N3-7]%[Câu 3]
+	Trong các công thức sau, công thức nào đúng?
+	\choice
+	{$\cos \left(a-b\right)=\cos a\cdot\cos b-\sin a\cdot\sin b$}
+	{\True $\cos \left(a-b\right)=\cos a\cdot\cos b+\sin a\cdot\sin b$}
+	{$\cos \left(a+b\right)=\cos a\cdot\cos b+\sin a\cdot\sin b$}
+	{$\cos \left(a-b\right)=\sin a\cdot\cos b+\sin b\cdot\cos a$}
+	\loigiai{
+		Công thức $\cos \left(a-b\right)=\cos a\cdot\cos b+\sin a\cdot\sin b$ là đúng.}
+\end{ex}
+
+%%%==============EX_4============%%%
+\begin{ex}%[1D1N4-1]%[Câu 4]
+	Xét bốn mệnh đề sau\\
+	(1) Hàm số $y=\sin x$ có tập xác định là $\mathbb{R}$.\\
+	(2) Hàm số $y=\cos x$ có tập xác định là $\mathbb{R}$.\\
+	(3) Hàm số $y=\tan x$ có tập xác định là $\mathscr{D}=\mathbb{R}\setminus \left\{\dfrac{\pi}{2}+k\pi \left| k\in \mathbb{Z}\right.\right\}$.\\
+	(4) Hàm số $y=\cot x$ có tập xác định là $\mathscr{D}=\mathbb{R}\setminus \left\{k\dfrac{\pi}{2}\left| k\in \mathbb{Z}\right.\right\}$.\\
+	Số mệnh đề đúng là
+	\choice
+	{\True $3$}
+	{$2$}
+	{$1$}
+	{$4$}
+	\loigiai{
+		Hàm số $y=\cot x$ có tập xác định là $\mathscr{D}=\mathbb{R}\setminus \left\{k\pi \left| k\in \mathbb{Z}\right.\right\}$.}
+\end{ex}
+
+%%%==============EX_5============%%%
+\begin{ex}%[1D1H5-3]%[Câu 5]
+	Phương trình $\tan \left(x+\dfrac{\pi}{3}\right)=0$ có nghiệm là
+	\choice
+	{$-\dfrac{\pi}{3}+k2\pi$, $k\in \mathbb{Z}$}
+	{$-\dfrac{\pi}{2}+k\pi$, $k\in \mathbb{Z}$}
+	{$\dfrac{\pi}{3}+k\pi$, $k\in \mathbb{Z}$}
+	{\True $-\dfrac{\pi}{3}+k\pi$, $k\in \mathbb{Z}$}
+	\loigiai{
+		Ta có	$\tan \left(x+\dfrac{\pi}{3}\right)=0\Leftrightarrow x+\dfrac{\pi}{3}=k\pi \Leftrightarrow x=-\dfrac{\pi}{3}+k\pi$, $k\in \mathbb{Z}$.}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[1D2N1-2]%[Câu 6]
+	Cho dãy số $(u_n)$ có công thức số hạng tổng quát $u_n=3^n-10,n\in{\mathbb{N}^{*}}$, tính giá trị $u_3$.
+	\choice
+	{\True $u_3=17$}
+	{$u_3=27$}
+	{$u_3=-1$}
+	{$u_3=-10$}
+	\loigiai{		
+		Ta có $u_3=3^3-10=17$. }
+\end{ex}
+%%%==============EX_7============%%%
+\begin{ex}%[1D2N2-3]%[Câu 7]
+	Cho cấp số cộng $(u_n)$ có số hạng thứ hai $u_2=5$ và số hạng thứ ba là $u_3=8$. Tìm số hạng đầu $u_1$ và công sai $d$ của cấp số cộng đó?
+	\choice
+	{$u_1=1;d=3$}
+	{\True $u_1=2;d=3$}
+	{$u_1=3;d=2$}
+	{$u_1=2;d=-3$}
+	\loigiai{
+		Ta có $d=u_3-u_2=3$; $u_1=u_2-d=2$.}
+\end{ex}
+
+%%%==============EX_8============%%%
+\begin{ex}%[1D2N3-3]%[Câu 8]
+	Cho cấp số nhân $(u_n)$ biết $u_2=2$ và $u_3=5$. Khi đó $u_1$ và $q$ lần lượt bằng
+	\choice
+	{$\dfrac{5}{4}$và $\dfrac{5}{2}$}
+	{$\dfrac{2}{5}$ và $\dfrac{5}{2}$}
+	{\True $\dfrac{4}{5}$ và $\dfrac{5}{2}$}
+	{$\dfrac{4}{5}$ và $2$}
+	\loigiai{
+		Ta có $u_3=u_2\cdot q\Rightarrow q=\dfrac{u_3}{u_2}=\dfrac{5}{2}$.\\
+		$u_2=u_1.q\Rightarrow u_1=\dfrac{u_2}{q}=\dfrac{4}{5}$.}
+\end{ex}
+
+%%%==============EX_9============%%%
+\begin{ex}%[1D4N1-1]%[Câu 9]
+	Các yếu tố nào sau đây xác định một mặt phẳng duy nhất?
+	\choice
+	{Ba điểm phân biệt}
+	{Một điểm và một đường thẳng}
+	{\True Hai đường thẳng cắt nhau}
+	{Bốn điểm phân biệt}
+	\loigiai{
+		Một mặt phẳng hoàn toàn xác định khi cho hai đường thẳng cắt nhau.}
+\end{ex}
+
+%%%==============EX_10============%%%
+\begin{ex}%[1D4H2-1]%[Câu 10]
+	Trong các mệnh đề sau, mệnh đề nào \textbf{sai}?
+	\choice
+	{Trong không gian, hai đường thẳng phân biệt cùng song song với đường thẳng thứ ba thì song song với nhau}
+	{Nếu ba mặt phẳng đôi một cắt nhau theo ba giao tuyến phân biệt thì ba giao tuyến đó đồng quy hoặc dôi một song song với nhau}
+	{Nếu hai mặt phẳng phân biệt lần lượt chứa hai đường thẳng song song với nhau thì giao tuyến của chúng (nếu có) song song với hai đường thẳng đó hoặc trùng với một trong hai đường thẳng đó}
+	{\True Trong không gian, qua một điểm và một đường thẳng cho trước, có đúng một đường thẳng song song với đường thẳng đã cho}
+	\loigiai{
+		Trong không gian, qua một điểm không nằm trên một đường thẳng cho trước, có đúng một đường thẳng song song với đường thẳng đã cho.}
+\end{ex}
+
+%%%==============EX_11============%%%
+\begin{ex}%[1D1V5-5]%[Câu 26]
+	Số nghiệm của phương trình $\sin2x+\cos x=0$ trên $\left[0;2\pi\right]$ là
+	\choice
+	{$3$}
+	{$1$}
+	{$2$}
+	{\True $4$}
+	\loigiai{
+		\begin{eqnarray*}
+			\sin 2x+\cos x=0 &\Leftrightarrow & 2\sin x\cdot \cos x+\cos x=0\\
+			&\Leftrightarrow& \cos x(2\sin x+1)=0\\
+			&\Leftrightarrow& \hoac{& \sin x=-\dfrac{1}{2}\\& \cos x=0} \Leftrightarrow \hoac{& x=-\dfrac{\pi}{6}+k2\pi\\& x=\dfrac{7\pi}{6}+k2\pi \\& x=\dfrac{\pi}{2}+k\pi},\,\,(k\in \mathbb{Z}).			
+		\end{eqnarray*}
+		\begin{itemize}
+			\item TH1: $x=-\dfrac{\pi}{6}+k2\pi,k\in \mathbb{Z}$.\\
+			Do $x\in \left[0;2\pi\right]$ nên $\heva{&0\le -\dfrac{\pi}{6}+k2\pi \le 2\pi\\&k\in \mathbb{Z}}\Leftrightarrow \heva{&\dfrac{1}{12}\le k\le \dfrac{13}{12}\\&k\in \mathbb{Z}}\Leftrightarrow k=1$. \\
+			Nghiệm của phương trình trong trường hợp này là $x=\dfrac{11\pi}{6}$.
+			\item TH2: $x=\dfrac{7\pi}{6}+k2\pi,k\in \mathbb{Z}$.\\
+			Do $x\in \left[0;2\pi\right]$ nên $\heva{&0\le \dfrac{7\pi}{6}+k2\pi \le 2\pi\\&k\in \mathbb{Z}}\Leftrightarrow \heva{&-\dfrac{7}{12}\le k\le \dfrac{5}{12}\\&k\in \mathbb{Z}}\Leftrightarrow k=0$. \\
+			Nghiệm của phương trình trong trường hợp này là $x=\dfrac{7\pi}{6}$.\\
+			\item  TH3: $x=\dfrac{\pi}{2}+k\pi,k\in \mathbb{Z}$.\\
+			Do $x\in \left[0;2\pi\right]$ nên $\heva{&0\le \dfrac{\pi}{2}+k\pi \le 2\pi\\&k\in \mathbb{Z}}\Leftrightarrow \heva{&-\dfrac{1}{2}\le k\le \dfrac{3}{2}\\&k\in \mathbb{Z}}\Leftrightarrow k\in \left\{0;1\right\}$. \\
+			Nghiệm của phương trình trong trường hợp này là $x=\dfrac{\pi}{2},x=\dfrac{3\pi}{2}$.
+		\end{itemize}
+		Vậy các nghiệm thỏa mãn yêu cầu bài toán là $\dfrac{\pi}{2}$; $\dfrac{3\pi}{2}$; $\dfrac{7\pi}{6}$; $\dfrac{11\pi}{6}$.}
+\end{ex}
+%%%==============EX_12============%%%
+\begin{ex}%[1D2V2-5]%[Câu 12]
+	Cho cấp số cộng $(u_n)$ có $u_{2013}+u_6=1000$. Tổng $2018$ số hạng đầu tiên của cấp số cộng đó là
+	\choice
+	{\True $1\,009\,000$}
+	{$100\,800$}
+	{$1\,008\,000$}
+	{$100\,900$}
+	\loigiai{
+		Gọi $d$ là công sai của cấp số cộng.\\
+		Khi đó
+		\begin{eqnarray*}
+			& & u_{2013}+u_6=1\,000\\
+			&\Leftrightarrow & u_1+2012d+u_1+5d=1\,000\\
+			&\Leftrightarrow & 2u_1+2017\cdot d=1\,000
+		\end{eqnarray*}
+		Ta có $S_{2018}=2\,018\cdot u_1+\dfrac{2\,017\cdot 2\,018}{2}\cdot d=1\,009\cdot \left(2u_1+2017\cdot d\right)=1\,009\,000$.}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-CTST_1-OTGK1-De1}
+\cauds
+\Opensolutionfile{ans}[ans/ans-CTST_1-OTGK1-De1-DS]
+%%%%==============EX_13============%%%
+\begin{ex}%[1D2N3-2]
+Cho phương trình lượng giác $2 \sin \left(x-\dfrac{\pi}{12}\right)+\sqrt{3}=0$. Khi đó
+	\choiceTF
+	{Phương trình tương đương $\sin \left(x-\dfrac{\pi}{12}\right)=\sin \left(\dfrac{\pi}{3}\right)$}
+	{Phương trình có nghiệm là: $x=\dfrac{\pi}{4}+k 2 \pi ; x=\dfrac{7 \pi}{12}+k 2 \pi(k \in \mathbb{Z})$}
+	{\True 	Phương trình có nghiệm âm lớn nhất bằng $-\dfrac{\pi}{4}$}
+	{\True 	Số nghiệm của phương trình trong khoảng $(-\pi, \pi)$ là hai nghiệm}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch  Sai. 	Ta có 
+			\begin{eqnarray*}
+				& & 2 \sin \left(x-\frac{\pi}{12}\right)+\sqrt{3}=0\\
+				&\Leftrightarrow & \sin \left(x-\dfrac{\pi}{12}\right)=-\dfrac{\sqrt{3}}{2}\\
+				&\Leftrightarrow & \sin \left(x-\dfrac{\pi}{12}\right)=\sin \left(-\dfrac{\pi}{3}\right)
+			\end{eqnarray*}.
+			\itemch Sai.
+			$
+			\Leftrightarrow\left[\begin{array} { l } 
+				{ x - \dfrac { \pi } { 1 2 } = - \dfrac { \pi } { 3 } + k 2 \pi } \\
+				{ x - \dfrac { \pi } { 1 2 } = \pi - ( - \dfrac { \pi } { 3 } ) + k 2 \pi }
+			\end{array} \quad ( k \in \mathbb { Z } ) \Leftrightarrow \left[\begin{array}{l}
+				x=-\dfrac{\pi}{4}+k 2 \pi \\
+				x=\dfrac{17 \pi}{12}+k 2 \pi
+			\end{array}(k \in \mathbb{Z})\right.\right.
+			$.
+			Vậy phương trình có nghiệm là $x=-\dfrac{\pi}{4}+k 2 \pi$ và $x=\dfrac{17 \pi}{12}+k 2 \pi(k \in \mathbb{Z})$.
+			\itemch Đúng. Phương trình có nghiệm âm lớn nhất bằng $-\dfrac{\pi}{4}$.
+			\itemch Đúng. 	Số nghiệm của phương trình trong khoảng $(-\pi, \pi)$ là hai nghiệm.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_14============%%%
+\begin{ex}%[1D2N3-2]
+Cho góc lượng giác $x$, biết $\tan x=\dfrac{1}{3}$ với $\dfrac{\pi}{2}<x<\pi$. Khi đó
+	\choiceTF
+	{\True  $\cos x<0$}
+	{$\cos x=-\dfrac{\sqrt{10}}{10}$}
+	{\True 	$\sin x=-\dfrac{\sqrt{10}}{10}$}
+	{$\sin x+\cos x=-\dfrac{\sqrt{10}}{5}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch  Đúng. Ta có $\tan x=\frac{1}{3} \Rightarrow \cot x=\dfrac{1}{\tan x}=3$. Vì $\dfrac{\pi}{2}<x<\pi$ nên $\cos x<0$.
+			\itemch Sai. Ta có $\dfrac{1}{\cos ^2 x}=1+\tan ^2 x=1+\dfrac{1}{9}=\dfrac{10}{9} \Rightarrow \cos ^2 x=\dfrac{9}{10} \Rightarrow \cos x=-\dfrac{3 \sqrt{10}}{10}$.
+			\itemch Đúng.  $\sin x=\cos x \cdot\tan x=-\dfrac{3 \sqrt{10}}{10} \cdot \dfrac{1}{3}=-\dfrac{\sqrt{10}}{10}$ .
+			\itemch Sai. $\sin x+\cos x=-\dfrac{2 \sqrt{10}}{5}$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%%%==============EX_15============%%%
+\begin{ex}%[1D2N3-2]
+	 Cho dãy số $\left(u_n\right)$, biết $\heva{&u_1=-1\\&u_{n+1}=u_n+3}$ với $n \ge 1$. Khi đó
+	\choiceTF
+	{\True  Bốn số hạng đầu tiên của dãy số lần lượt là $-1$; $2$; $5$; $8$}
+	{Số hạng thứ năm của dãy là $13$}
+	{Công thức số hạng tổng quát của dãy số là $u_n=2 n-3$}
+	{\True $101$ là số hạng thứ $35$ của dãy số đã cho}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch  Đúng. Ta có $u_1=-1$; $u_2=u_1+3=2$; $u_3=u_2+3=5$; $u_4=u_3+3=8$.
+			\itemch Sai. $u_5=u_4+3=11$.
+			\itemch Sai. Từ giả thiết, ta có $\heva{&u_1=-1\\&u_2=u_1+3\\&u_3=u_2+3\\ &\cdots \cdots \cdots \\ &u_n=u_{n-1}+3}$.\\
+			Cộng theo vế toàn bộ các đẳng thức trên và triệt tiêu các số hạng giống nhau ở hai vế, ta có $u_n=-1+3(n-1)=3 n-4$.\\Vậy công thức số hạng tổng quát của dãy số là $u_n=3 n-4$.
+			\itemch Đúng. Xét $101=3 n-4 \Rightarrow n=35$.\\ Vậy $101$ là số hạng thứ $35$ của dãy số đã cho.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_16============%%%
+\begin{ex}%[1D2N3-2]
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình bình hành, điểm $M$ di động trên cạnh $AD$. Một mặt phẳng $(\alpha)$ qua $M$ và song song với hai đường thẳng $CD$, $SA$, cắt $BC$, $SC$ và $SD$ lần lượt tại $N$, $P$, $Q$. Khi đó
+	\choiceTF
+	{Giao tuyến của mặt phẳng $(\alpha)$ với mặt phẳng $(ABCD)$ là đường thẳng đi qua $M$ và song song với $AD$}
+	{\True  Giao tuyến của mặt phẳng $(\alpha)$ với mặt phẳng $(SAD)$ là đường thẳng đi qua $M$ và song song với $SA$}
+	{\True  Tứ giác $MNPQ$ là hình thang có hai đáy là $MN$ và $P Q$}
+	{Gọi $I=MQ \cap NP$. Khi đó $I$ thuộc đường thẳng đi qua $S$ và song song với $AB$}
+	\loigiai{
+		\begin{center}
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,line join=round, line cap=round, >=stealth]
+			\path
+			(0:0) coordinate (A)
+			(0:5) coordinate (D)
+			(-135:2.8) coordinate (B)
+			+(D) coordinate (C)
+				(80:5) coordinate (S)
+			($(B)!0.6!(C)$) coordinate (N)
+			($(A)!0.6!(D)$) coordinate (M)
+			($(S)!0.6!(D)$) coordinate (Q)
+			($(S)!0.6!(C)$) coordinate (P)
+			%($(N)!2!(P)$) coordinate (T1)
+			%($(M)!2!(Q)$) coordinate (T2)
+			(intersection of N--P and M--Q) coordinate (I)
+			($(S)!2!(I)$) coordinate (T) node[above] {$x$}
+			(intersection of I--P and S--Q) coordinate (T1)
+			($(S)!0.9!(T1)$) coordinate (T2)
+			;
+			\draw[dashed] (B)--(A)--(D) (S)--(A) (N)--(M)--(Q)--(T2);
+			\draw[thick] (S)--(B) (S)--(C) (S)--(T2) (Q)--(D) (C)--(B) (D)--(C) (N)--(P)--(Q) (S)--(T) (Q)--(I)--(P);
+			\foreach \x/\g in {A/135,B/180,C/-30,D/0,S/90,M/-37,N/-90,Q/10,P/180,I/90}\draw[fill=white] (\x) circle (.03) +(\g:.3) node{$\x$};
+		\end{tikzpicture}				
+	\end{center}	
+		\begin{itemchoice}
+			\itemch  Sai. Ta có $\heva{&M N=(\alpha) \cap(A B C D) \\ &C D \parallel(\alpha) \\ &C D \subset(A B C D)} \Rightarrow(\alpha) \cap(A B C D)=M N \parallel C D\quad(1)$ .
+			\itemch Đúng. Ta có $\heva{&M Q=(\alpha) \cap(S A D) \\ &S A \parallel(\alpha) \\ &S A \subset(S A D)} \Rightarrow(\alpha) \cap(SAD)=MQ \parallel SA$.
+			
+			\itemch Đúng. Ta có $
+			\heva{&PQ=(\alpha) \cap(SCD) \\
+				&CD \parallel(\alpha) \\
+				&CD \subset(S C D)} \Rightarrow(\alpha) \cap(S C D)=P Q \parallel C D\quad(2)$.
+			\\Từ (1) và (2) suy ra tứ giác $MNPQ$ là hình thang có hai đáy là $MN$ và $PQ$.
+			\itemch Sai. Xét $(SAD) \cap(SBC)$.
+			
+			Ta có $\heva{&S \in(SAD) \cap(SBC) \\ &AD \parallel BC \\ &AD \subset(SAD), BC \subset(S B C)} \Rightarrow(S A D) \cap(S B C)=S x$
+			(với $S x$ qua $S$ và $S x \parallel AD \parallel BC$ ).\\
+			Vì $\heva{	&I \in N P, N P \subset(S B C) \\
+				&I \in M Q, M Q \subset(S A D)}\Rightarrow I \in(S A D) \cap(S B C)$.
+			
+			Suy ra $I \in S x$ (với $S x$ cố định)..
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-CTST_1-OTGK1-De1-DS}
+\caukq
+\Opensolutionfile{ans}[ans/ans-CTST_1-OTGK1-De1-KQ]
+%%%%==============EX_17============%%%
+\begin{ex}%[1D1V5-6]%[Câu 17]
+	Số giờ có ánh sáng mặt trời của một thành phố A trong ngày thứ $t$ của năm $2017$ được cho bởi một hàm số $y=4\sin \left[\dfrac{\pi}{178}\left(t-60\right)\right]+10$ với $t\in \mathbb{Z}$ và $0<t\le 365$. Vào ngày thứ bao nhiêu trong năm thì thành phố $A$ có nhiều giờ có ánh sáng mặt trời nhất?
+   \shortans{$149$}
+	\loigiai{
+		Vì $\sin \left[\dfrac{\pi}{178}\left(t-60\right)\right]\le 1\Rightarrow y=4\sin \left[\dfrac{\pi}{178}\left(t-60\right)\right]+10\le 14$.\\
+		Ngày có ánh sáng mặt trời nhiều nhất \[\Leftrightarrow y=14\Leftrightarrow \sin \left[\dfrac{\pi}{178}\left(t-60\right)\right]=1
+		\Leftrightarrow \dfrac{\pi}{178}\left(t-60\right)=\dfrac{\pi}{2}+k2\pi \Leftrightarrow t=149+356k.\]
+		Do $0<t\le 365\Rightarrow0<149+356k\le 365\Leftrightarrow -\dfrac{149}{356}<k\le \dfrac{54}{89}\xrightarrow{k\in \mathbb{Z}}k=0$.\\
+		Với $k=0 \Rightarrow t=149$.}
+\end{ex}
+%%%%==============EX_18============%%%
+\begin{ex}%[1D1C5-6]
+	\immini{Giả sử vật giao động điều hòa xung quanh vị trí cân bằng theo phương trình $x=2\cos \left(5t-\dfrac{\pi}{6} \right)$. Ở đây, thời gian $t$ tính bằng giây và quãng đường $x$ tính bằng cm. Hãy cho biết trong khoảng thời gian từ $0$ đến $6$ giây, vật đi qua vị trí cân bằng bao nhiêu lần? (hình ảnh minh họa vị trí cân bằng)}
+	{\definecolor{darkpastelgreen}{rgb}{0.01, 0.75, 0.24}
+		\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+		\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+		\definecolor{eggplant}{rgb}{0.38, 0.25, 0.32}
+		\definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
+		\begin{tikzpicture}[line join=round, line cap=round,scale=.5,transform shape]
+			\clip (-2.5,-2.5) rectangle (4.5,4.2);
+			\tikzset{q_h/.pic={
+					% Tre
+					\draw[fill=darkpastelgreen] (-.05,4)--(.9,-1.8)
+					..controls +(30:.05) and +(-30:.05) ..(1,-1.75)--(.05,4);
+					\draw[fill=darkpastelgreen] (-.1,4)--(.6,-1.4)
+					..controls +(30:.05) and +(-30:.05) ..(.5,-1.4)--(-.2,4)
+					;
+					%----------------------
+					\def\M{ 
+						(-.2,1.76)
+						..controls +(-80:.1) and +(80:.1) ..(-.18,1.6)
+						..controls +(-40:.1) and +(30:.06) ..(-.18,1.5)--(-.17,1.46)--(-.22,1.44)--(-.19,1.43)--(-.2,1.43)
+						..controls +(-80:.1) and +(-12:.05) ..(-.3,1.35)--(-.35,1.28)--(-.55,1.35)
+						..controls +(60:.1) and +(-90:.05) ..(-.45,1.5)
+						..controls +(100:.1) and +(140:.05) ..(-.38,1.55)
+						..controls +(70:.1) and +(-140:.05) ..cycle
+						;
+					}
+					
+					\draw[black]\M;
+					\fill[almond] \M;
+					\draw (-.2,1.76)
+					..controls +(-140:.1) and +(50:.05) ..(-.3,1.6)
+					(-.2,1.76)
+					..controls +(-120:.1) and +(40:.05) ..(-.25,1.6)
+					(-.28,1.578)
+					..controls +(-20:.02) and +(-150:.02) ..(-.22,1.58)
+					(-.25,1.568)--(-.23,1.567);
+					%------------------Áo
+					\def\A3{ 
+						(-.1,.9)
+						..controls +(-30:.05) and +(110:0) ..(.18,1)
+						--(.19,.95)
+						..controls +(-140:.05) and +(30:.05) ..(-.1,.7)--cycle
+						;
+					}
+					\fill[arsenic] \A3;
+					\draw[black]\A3;
+					\def\A2{ 
+						(-.35,1.28)
+						..controls +(-30:.05) and +(110:.05) ..(-.25,1.18)
+						..controls +(-70:.05) and +(90:.02) ..(-.05,.9)
+						..controls +(-90:.02) and +(50:.05) ..(-.05,.4)
+						..controls +(-130:.02) and +(50:.05) ..(.6,-.8)
+						..controls +(-130:.02) and +(50:.05) ..(.9,-1.8)
+						..controls +(-130:.2) and +(30:.3) ..(-.5,-2.3)
+						..controls +(130:.2) and +(-90:.1) ..(-.2,-1.5)
+						..controls +(130:.2) and +(-140:.1) ..cycle
+						;
+					}
+					\fill[arsenic] \A2;
+					\draw[black]\A2;
+					\def\A{ 
+						(-.55,1.35)
+						..controls +(-150:.2) and +(120:.1) ..(-.45,0)
+						..controls +(-60:.1) and +(50:.1) ..(-.3,-1.6)
+						..controls +(-10:.1) and +(-120:.1) ..(-.15,-1.5)
+						..controls +(60:.1) and +(-120:.1) ..(0,-1.45)
+						..controls +(120:.3) and +(-50:.1) ..(-.35,.77)
+						..controls +(-50:.1) and +(130:.1) ..(-.15,.48)
+						..controls +(-50:.1) and +(-130:.1) ..(.43,.93)
+						..controls +(-130:.05) and +(-40:.05) ..(.3,1.05)
+						..controls +(-130:.05) and +(40:.05) ..(-.05,.75)
+						..controls +(-140:.05) and +(-40:.05) ..(-.3,1.15)
+						..controls +(100:.05) and +(-40:.05) ..(-.35,1.28)--cycle
+						;
+					}
+					\fill[eggplant] \A;
+					\draw[black]\A;
+					%-------------------------------
+					%nón
+					\def\N{ 
+						(-.14,1.95)
+						..controls +(-80:.1) and +(80:.1) ..(-.17,1.7)
+						..controls +(110:.02) and +(-40:.02) ..(-.2,1.76)
+						..controls +(-110:.1) and +(50:.4) ..(-.48,1.45)--(-.45,1.35)
+						..controls +(-150:.05) and +(20:.05) ..(-.7,1.32)
+						..controls +(50:.05) and +(-120:.05) ..(-.65,1.45)
+						..controls +(160:.02) and +(-50:.02) ..(-.7,1.48)
+						..controls +(160:.02) and +(-50:.02) ..(-.8,1.6)--(-.75,1.63)
+						..controls +(-20:.06) and +(130:.04) ..(-.6,1.47)
+						..controls +(130:.2) and +(-90:.1) ..(-.7,1.78)
+						..controls +(90:.1) and +(170:.1) ..(-.4,1.9)
+						..controls +(20:.1) and +(160:.1) ..cycle
+						;
+					}
+					\fill[arsenic] \N;
+					\draw[black]\N;
+					\draw (-.14,1.95)
+					..controls +(-100:.05) and +(40:.06) ..(-.2,1.76)
+					(-.5,1.55)
+					..controls +(30:.1) and +(-100:.06) ..(-.3,1.76)
+					(-.6,1.7)
+					..controls +(-55:.1) and +(120:.06) ..(-.55,1.5)
+					;
+					
+					\def\T1{ 
+						(.3,1.03)
+						..controls +(60:.05) and +(-120:.05) ..(.35,1.15)
+						..controls +(60:.05) and +(-140:.05) ..(.45,1.26)
+						..controls +(30:.05) and +(60:.04) ..(.5,1.22)
+						..controls +(30:.03) and +(50:.03) ..(.54,1.18)
+						..controls +(30:.03) and +(50:.03) ..(.56,1.12)
+						..controls +(30:.03) and +(50:.03) ..(.58,1.07)
+						..controls +(160:.03) and +(40:.03) ..(.49,1)
+						..controls +(-140:.03) and +(40:.03) ..(.41,.92)--cycle
+						;
+					}
+					\fill[almond] \T1;
+					\draw[black]\T1;
+					
+					\fill[crimson](-.27,.4)
+					..controls +(-80:.6) and +(-80:.1) ..(-.5,-1.9)--(-.45,-1.85)
+					..controls +(90:.1) and +(-80:1) ..(-.28,.48)--cycle;
+					
+					\fill[crimson](-.27,.4)
+					..controls +(-80:.6) and +(-80:.1) ..(-.2,-1.9)--(-.15,-1.85)
+					..controls +(90:.1) and +(-80:1) ..(-.28,.48)--cycle;
+					
+			}}
+			\tikzset{no/.pic={
+					\draw[crimson] (1.8,-1)
+					..controls +(150:.4) and +(-120:.5) ..(1.7,-1)
+					..controls +(30:.4) and +(-40:.3) ..(1.75,-1)
+					..controls +(-30:.2) and +(40:.2) ..(1.7,-1.4)
+					(1.75,-1)
+					..controls +(-50:.1) and +(20:.1) ..(1.7,-1.2)
+					
+					;
+			}}
+			\draw[thick] (4,-1.25) arc(-60:-120:6cm);
+			\draw[dashed,thick] (4,-1.25)--(1.3,4)--(-2,-1.25) (1.3,4)--(1.3,-2);
+			\node at (1.5,.5) [rotate=90]{\tiny Vị trí cân bằng};
+			\draw[thick,<->] (.35,-2)--(1.3,-2);
+			\node at (.85,-2) [above]{\tiny $x$};
+			\fill (4,-1.25) circle (0.05);
+			\fill (-2,-1.25) circle (0.05);
+			\fill (1.3,4) circle (0.05);
+			\path
+			(0,0)pic[scale=1,rotate=-20]{q_h}(-.88,1.48)pic[scale=1, scale=.7,rotate=-20]{no};
+	\end{tikzpicture}}
+	\shortans{$9$}
+	\loigiai{
+		Khi vật ở vị trí cân bằng thì $x=0$
+		\begin{eqnarray*}
+			&\Leftrightarrow &3\cos \left(5t-\dfrac{\pi}{6} \right)=0\\
+			&\Leftrightarrow &\cos\left(5t-\dfrac{\pi}{6} \right)=0\\
+			&\Leftrightarrow &5t-\dfrac{\pi}{6}=\dfrac{\pi}{2}+k\pi,\, k\in {\bf \mathbb{Z}}\\
+			&\Leftrightarrow &t=\dfrac{2\pi}{15}+\dfrac{k\pi}{5},\, k\in {\bf \mathbb{Z}}.
+		\end{eqnarray*}
+		Mà theo giả thiết 
+		\begin{eqnarray*}
+			0\le t \le 6&\Leftrightarrow& 0\le \dfrac{2\pi}{15}+\dfrac{k\pi}{5} \le 6\\
+			&\Leftrightarrow&-\dfrac{2}{3} \le k \le \dfrac{30}{\pi}-\dfrac{2}{3}\\
+			k\in {\bf \mathbb{Z}}&\Rightarrow& k\in \left\{0;1;2;3;4;5;6;7;8\right\}.
+		\end{eqnarray*}
+	}
+\end{ex}
+%%%%==============EX_19============%%%
+\begin{ex}%[1D2V3-6]%[Câu 19]
+	Ông Sơn trồng cây trên một mãnh đất hình tam giác theo quy luật: ở hàng thứ nhất có $1$ cây, ở hàng thứ hai có $2$ cây, ở hàng thứ ba có $3$ cây,..., ở hàng thứ $n$ có $n$ cây. Biết rằng ông đã trồng hết $11325$ cây. Hỏi số hàng cây được trồng theo cách trên là bao nhiêu?
+	\shortans{$150$}
+	\loigiai{
+		Đặt $u_1=1$, $u_2=2$, $u_3=3$, $\ldots$, $u_n=n$.\\
+		Dãy số $\left(u_n\right)$ là một cấp số cộng với công sai $d=1$.\\
+		Ta có 
+		\begin{eqnarray*}
+			& & S_n=11325\\
+			&\Leftrightarrow & S_n=n u_1+\dfrac{n(n-1)}{2} \cdot d\\
+			&\Leftrightarrow & 11325=n \cdot 1+\dfrac{n(n-1)}{2} \cdot 1\\
+			&\Leftrightarrow & n^2+n-22650=0\\
+			&\Leftrightarrow & \hoac{&n=150\\&n=-151.}
+		\end{eqnarray*}
+		Vậy có $150$ hàng cây.
+	}
+\end{ex}
+
+%%%%==============EX_20============%%%
+\begin{ex}%[1D2V3-8] %[Câu 20]
+	Một loại thuốc được dùng mỗi ngày một lần. Lúc đầu nồng độ thuốc trong máu của bệnh nhân tăng nhanh, nhưng mỗi liều kế tiếp có tác dụng ít hơn liều trước đó. Lượng thuốc trong máu ở ngày thứ nhất là $50 \mathrm{~mg}$ và mỗi ngày sau đó giảm chỉ còn một nửa so với ngày kề trước đó. Tính tổng lượng thuốc (tính bằng $\mathrm{~mg}$) trong máu của bệnh nhân sau khi dùng thuốc $10$ ngày liên tiếp (kết quả làm tròn đến hàng phần chục).
+	\shortans{$99{,}9$}
+	\loigiai{
+		Lượng thuốc trong máu mỗi ngày của bệnh nhân lập thành cấp số nhân với số hạng đầu $u_1=50$ và công bội $q=0{,}5$.\\
+		Tổng lượng thuốc trong máu $10$ ngày liên tiếp chính là tổng $10$ số hạng đầu của cấp số nhân này và bằng
+		$$
+		S_{10}=\dfrac{50\left(1-0{,}5^{10}\right)}{1-0{,}5} \approx 99{,}9\text{~mg}.
+		$$
+	}
+\end{ex}
+%%%%==============EX_21============%%%
+\begin{ex}%[1H4H2-1]%[Câu 21]
+	Cho tứ diện $ABCD$. Điểm $I$ và $J$ theo thứ tự là trung điểm của $AD$ và $AC$, $G$ là trọng tâm tam giác $BCD$. Giao tuyến của hai mặt phẳng $(GIJ)$ và $(BCD)$ cắt $BD$ tại $E$, cắt $BC$ tại $F$. Tính tỉ số $\dfrac{IJ}{EF}$?
+	\shortans{$1{,}5$}
+	\loigiai{
+		\immini{$IJ$ là đường trung bình của $\triangle ACD$ nên $IJ \parallel CD$ và $IJ = \dfrac{1}{2} CD.\qquad(1)$\\
+			Ta có $\heva{&IJ \parallel CD \\ &IJ \subset(GIJ) \\ &CD \subset(BCD) \\ &G \in(IJG) \cap(BCD)} \Rightarrow \heva{&G x=(GIJ) \cap (BCD) \\ &Gx \parallel IJ \parallel CD}.$
+			Suy ra giao tuyến $Gx \equiv EF$.
+			Tứ giác $IJFE$ có $IJ \parallel FE$ nên là hình thang.
+			Vì $G$ là trọng tâm $\triangle BCD$ và $EF \parallel CD$.\\
+			Nên $\dfrac{EF}{CD} = \dfrac{BE}{BD} = \dfrac{BG}{BK} = \dfrac{1}{3}. \qquad(2)$\\
+			Từ $(1)$ và $(2)$, suy ra $\dfrac{IJ}{EF} = \dfrac{\dfrac{1}{2}}{\dfrac{2}{3}} = \dfrac{3}{2} = 1{,}5$.}{	\begin{tikzpicture}[scale=0.7, font=\footnotesize,line join=round, line cap=round, >=stealth]
+				\path
+				(0,0) coordinate (B)
+				++(-45:3) coordinate (C)
+				($(B)+(5,0)$) coordinate (D)
+				($(B)+(1,4)$) coordinate (A)
+				($(A)!0.5!(C)$) coordinate (J)
+				($(A)!0.5!(D)$) coordinate (I)
+				($(B)!2/3!(C)$) coordinate (F)
+				($(B)!2/3!(D)$) coordinate (E)
+				($(E)!0.5!(F)$) coordinate (G)
+				($(C)!0.5!(D)$) coordinate (K)
+				($(E)!1.5!(F)$) coordinate (X) node[above] {$x$}
+				;
+				\foreach \i in {B,C,D}{\draw (A)--(\i);}
+				\draw
+				(B)--(C)--(D)
+				(X)--(F)--(J)--(I)
+				;
+				\draw[dashed,thin]
+				(B)--(D)
+				(F)--(E)--(I)
+				(J)--(G)--(I)
+				(B)--(K)
+				;
+				\foreach \i/\g in {A/90,B/180,C/-90,D/0,I/30,J/-150,E/45,F/-90, G/-90, K/-30}
+				\fill[black] (\i) circle(1pt)+(\g:4mm)node[scale=1]{$\i$};
+		\end{tikzpicture}}
+	}
+\end{ex}
+%%%%==============EX_22============%%%
+\begin{ex}%[1H4V3-1]%[Câu 22]
+	Cho tứ diện $ABCD$. Gọi $M$ là một điểm bất kì trên cạnh $BC$ sao cho $BM=3MC$, $\left(\alpha\right)$ là mặt phẳng qua $M$ và song song với $AB$ và $CD$, cắt các cạnh $BD$, $AD$, $AC$ lần lượt tại $N$, $P$, $Q$. Tính tỷ số $\dfrac{MN}{PQ}$.
+	\shortans{$1$}
+	\loigiai{
+		\immini{	Ta có $
+			\left.\begin{array}{l}
+				A B \parallel (\alpha) \\
+				(A B C) \supset A B \\
+				(A B C) \cap(\alpha)=M Q
+			\end{array}\right\}\Rightarrow M Q \parallel AB\quad(1)
+			$.
+			Tương tự, ta có $NP \parallel AB\quad(2)$.\\
+	Lại có		$\left.\begin{array}{l}
+				C D \parallel (\alpha) \\
+				(A C D) \supset C D \\
+				(A C D) \cap(\alpha)=PQ
+			\end{array}\right\}\Rightarrow PQ \parallel CD\quad(3)$
+			Tương tự, ta có $M N \parallel C D\quad(4)$\\
+			Từ (1) và (2) suy ra $M Q \parallel N P\quad(5)$.\\
+			Từ (3) và (4) suy ra $P Q \parallel M N\quad(6)$.\\
+			Từ (5) và (6) suy ra $MNPQ$ là hình bình hành.\\
+			Suy ra $\dfrac{MN}{PQ}=1$.}{\begin{tikzpicture}[line join = round, line cap = round,font=\footnotesize,>=stealth,scale=1]
+				\path
+				(0:0) coordinate (B)
+				(70:3.5) coordinate (A)
+				(0:5) coordinate (C)
+				(-20:3.5) coordinate (D)
+				($(B)!.6667!(C)$) coordinate (M)
+				($(B)!.6667!(D)$) coordinate (N)
+				($(D)!.3333!(A)$) coordinate (P)
+				($(A)!.6667!(C)$) coordinate (Q)
+				;
+				\draw (A)--(B)--(D)--(C)--cycle (A)--(D) (N)--(P)--(Q);
+				\draw[dashed] (B)--(C) (N)--(M)--(Q);
+				\foreach \x/\g in {A/90,B/180,D/-90,C/30,M/-50,N/-100,P/150,Q/66}\draw[fill=black] (\x) circle (.05)+(\g:.3)node{$\x$};
+		\end{tikzpicture}}	
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-CTST_1-OTGK1-De1-KQ}

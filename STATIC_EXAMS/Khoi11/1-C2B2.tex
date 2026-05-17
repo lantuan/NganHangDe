@@ -1,0 +1,1982 @@
+\section{Cấp số cộng}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-1-C3B2]
+\caulc
+\begin{ex}%[1D2N2-2]
+	Dãy số nào sau đây không phải là cấp số cộng?
+	\choice
+	{$-\dfrac{2}{3};-\dfrac{1}{3};0;\dfrac{1}{3};\dfrac{2}{3};1;\dfrac{4}{3},\ldots$}
+	{$15\sqrt{2};12\sqrt{2};9\sqrt{2};6\sqrt{2};\ldots$}
+	{\True $\dfrac{4}{5};1;\dfrac{7}{5};\dfrac{9}{5};\dfrac{11}{5};\ldots$}
+	{$\dfrac{1}{\sqrt{3}};\dfrac{2\sqrt{3}}{3};\sqrt{3};\dfrac{4\sqrt{3}}{3};\dfrac{5}{\sqrt{3}};\ldots$}
+	\loigiai{
+		Chỉ cần tồn tại hai cặp số hạng liên tiếp của dãy số có hiệu khác nhau: $u_{m+1}-u_m \not=u_{k+1}-u_k$ thì ta kết luận ngay dãy số đó không phải là cấp số cộng.
+		\begin{itemize}
+			\item 	Xét đáp án $-\dfrac{2}{3};-\dfrac{1}{3};0;\dfrac{1}{3};\dfrac{2}{3};1;\dfrac{4}{3};\ldots\mathop{\to}\limits_{} \dfrac{1}{3}=u_2-u_1=u_3-u_2=u_4-u_3=\cdots \mathop{\to}\limits_{}$ loại đáp án này.
+			\item 	Xét đáp án 
+			$15\sqrt{2};12\sqrt{2};9\sqrt{2};6\sqrt{2};\ldots\mathop{\to}\limits_{}-3\sqrt{3}=u_2-u_1=u_3-u_2=u_4-u_3=\cdots \mathop{\to}\limits_{}$ loại đáp án này.
+			\item 	
+			Xét đáp án  $\dfrac{4}{5};1;\dfrac{7}{5};\dfrac{9}{5};\dfrac{11}{5};\ldots\mathop{\to}\limits_{} \dfrac{1}{5}=u_2-u_1 \not=u_3-u_2=\dfrac{2}{5} \mathop{\to}\limits_{}$ chọn đáp án này.
+			\item 	Xét đáp án $\dfrac{1}{\sqrt{3}};\dfrac{2\sqrt{3}}{3};\sqrt{3};\dfrac{4\sqrt{3}}{3};\dfrac{5}{\sqrt{3}};\ldots\mathop{\to}\limits_{} \dfrac{\sqrt{3}}{3}=u_2-u_1=u_3-u_2=u_4-u_3 \mathop{\to}\limits_{}$ loại đáp án này.
+		\end{itemize}		
+		
+	}
+\end{ex}
+\begin{ex}%[1D2N2-2]
+	Viết ba số hạng xen giữa các số $2$ và $22$ để được một cấp số cộng có năm số hạng.
+	\choice
+	{\True $7$; $12$; $17$}
+	{$6$; $10$; $14$}
+	{$8$; $13$; $18$}
+	{$6$; $12$; $18$} 
+	\loigiai{
+		Giữa $2$ và $22$ có thêm ba số hạng nữa lập thành cấp số cộng, xem như ta có một cấp số cộng có $5$ số hạng với  $u_1=2 $; $u_5=22 $; ta cần tìm $u_2$, $u_3$, $u_4 $.\\
+		Ta có $u_5=u_1+4d\Leftrightarrow d=\dfrac{u_5-u_1}{4}=\dfrac{22-2}{4}=5\Rightarrow \heva{&{u_2=u_1+d=7} \\
+			&{u_3=u_1+2d=12} \\
+			&{u_4=u_1+3d=17}
+		}$
+	}
+\end{ex}
+\begin{ex}%[1D2H2-5]
+	Biết các số $C_n^1$; $C_n^2$; $C_n^3$ theo thứ tự lập thành một cấp số cộng với $n > 3$. Tìm $n.$
+	\choice
+	{$n=5$}
+	{\True $n=7$}
+	{$n=9$}
+	{$n=11$}
+	\loigiai{
+		Ba số $C_n^1$; $C_n^2$; $C_n^3$ theo thứ tự $u_1$, $u_2$, $u_3$ lập thành cấp số cộng nên
+		\[u_1+u_3=2u_2 \Leftrightarrow C_n^1+C_n^3=2C_n^2 \left(n\ge 3\right)\Leftrightarrow n+\dfrac{\left(n-2\right)\left(n-1\right)n}{6}=2\cdot\dfrac{\left(n-1\right)n}{2}
+		\]
+		\[\Leftrightarrow 1+\dfrac{n^2-3n+2}{6}=n-1\Leftrightarrow n^2-9n+14\Leftrightarrow \hoac{&{n=2} \\
+			&{n=7}} \Leftrightarrow n=7 \left(n\ge 3\right).
+		\]
+		\textbf{Nhận xét} Nếu $u_{k-1}$, $u_k$, $u_{k+1}$ là ba số hạng liên tiếp của một cấp số cộng thì ta có $u_{k-1}+u_{k+1}=2u_k$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-2]
+	Tìm công sai $d$ của cấp số cộng hữu hạn biết số hạng đầu $u_1=10$ và số hạng cuối $u_{21}=50$.
+	\choice
+	{$d=3$}
+	{\True $d=2$}
+	{$d=4$}
+	{$d=-2$}
+	\loigiai{
+		Ta có $u_{21}=u_1+20d$ $\Rightarrow d=\dfrac{u_{21}-u_1}{20}$ $=\dfrac{50-10}{20}=2$.
+	}
+\end{ex}
+\begin{ex}%[1D2N2-4]
+	Cho cấp số cộng $\left(u_n \right)$ có $u_1=-0{,}1$; $d=0{,}1$. Số hạng thứ $7$ của cấp số cộng này là
+	\choice
+	{$1{,}6$}
+	{$6$}
+	{\True $0{,}5$}
+	{$0{,}6$}
+	\loigiai{
+		\[u_7=-0{,}1+6\cdot0{,}1=0{,}5.\]
+	}
+\end{ex}
+\begin{ex}%[1D2N2-4]
+	Cho cấp số cộng có $u_1=-3$, $d=4$. Chọn khẳng định đúng trong các khẳng định sau
+	\choice
+	{$u_5=15$}
+	{$u_4=8$}
+	{\True $u_3=5$}
+	{$u_2=2$}
+	\loigiai{
+		Ta có $u_n=u_1+\left(n-1\right)d\Rightarrow u_3=u_1+2d=-3+2\cdot4=5$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-4]
+	Cho cấp số cộng $\left(u_n \right)$ có số hạng đầu $u_1=-5$ và công sai $d=3$. Số $100$ là số hạng thứ mấy của cấp số cộng?
+	\choice
+	{$15$}
+	{$20$}
+	{$35$}
+	{\True $36$}
+	\loigiai{
+		Ta có $u_n=u_1+\left(n-1\right)d\Leftrightarrow 100=-5+\left(n-1\right)\cdot3\Leftrightarrow 100=3n-8\Leftrightarrow n=36$.
+	}
+\end{ex}
+
+\begin{ex}%[1D2H2-5]
+	Gọi $S$ là tập hợp tất cả các số tự nhiên $k$ sao cho $\mathrm{C}_{14}^k$, $\mathrm{C}_{14}^{k+1}$, $\mathrm{C}_{14}^{k+2}$ theo thứ tự đó lập thành một cấp số cộng. Tính tổng tất cả các phần tử của $S$.
+	\choice
+	{$8$}
+	{$6$}
+	{$10$}
+	{\True $12$}
+	\loigiai{
+		Ta có 
+		\begin{eqnarray*}
+			\mathrm{C}_{14}^k+\mathrm{C}_{14}^{k+2}=2\mathrm{C}_{14}^{k+1}&\Leftrightarrow & f(x)=g(x)\\
+			&\Leftrightarrow & \dfrac{14!}{k!\left(14-k\right)!}+\dfrac{14!}{\left(k+2\right)!\left(12-k\right)!}=2\dfrac{14!}{\left(k+1\right)!\left(13-k\right)!}\\
+			&\Leftrightarrow & \dfrac{1}{\left(14-k\right)\left(13-k\right)}+\dfrac{1}{\left(k+1\right)\left(k+2\right)}=\dfrac{2}{\left(k+1\right)\left(13-k\right)}\\
+			&\Leftrightarrow& \left(k+1\right)\left(k+2\right)+\left(14-k\right)\left(13-k\right)=2\left(k+2\right)\left(14-k\right)\\
+			&\Leftrightarrow& k^2-12k+32=0 \Leftrightarrow \hoac{&{k=8} \\
+				&{k=4.}}
+		\end{eqnarray*}
+		Vậy $S=\{4;8\}$. Khi đó tổng các giá trị trong $S$ là $4+8=12$.
+	}
+\end{ex}
+%%%==============EX_18============%%%
+\begin{ex}%[1D2H2-5]
+	Phương trình $x^3+ax+b=0$ có ba nghiệm lập thành cấp số cộng khi và chỉ khi
+	\choice
+	{\True $b=0$, $a < 0$}
+	{$b=0$, $a=1$}
+	{$b=1$, $a=-2$}
+	{$b=-2$, $a=1$}
+	\loigiai{
+		Gỉa sử phương trình có ba nghiệm lập thành cấp số cộng khi đó ta có
+		\[x_1+x_3=2x_2, x_1+x_2+x_3=0 \Leftrightarrow x_2=0.
+		\]
+		Thay $x_2=0$ vào phương trình $b=0$. Ta có $b=0$ $\Rightarrow x^3+ax=0$ $\Rightarrow a < 0$.	$\Rightarrow b=0$, $a < 0$ thỏa mãn.
+	}
+\end{ex}
+%%%==============EX_19============%%%
+\begin{ex}%[1D2H2-5]
+	Bốn số  $x$, $-2$, $y$, $6 $  theo thứ tự đó lập thành một cấp số cộng. Khẳng định nào sau đây đúng?
+	\choice
+	{$x=-6 $; $y=3 $}
+	{$ x= -5$; $y= 3$}
+	{\True $x=-6 $; $y=2 $}
+	{$ x= -5$; $y= 2$} 
+	\loigiai{
+		Ta có bốn số $x,-2, y, 6$ theo thứ tự lập thành một cấp số cộng khi và chỉ khi $$\heva{&{x+y=-4} \\
+			&{2y=-2+6}} \Leftrightarrow \heva{&{x=-6} \\
+			&{y=2}.}$$
+	}
+\end{ex}
+\begin{ex}%[1D2H2-3]
+	Cho cấp số cộng $\left(u_n \right)$, $n\in \mathbb{N}^{*}$ có số hạng tổng quát $u_n=1-3n$. Tổng của $10$ số hạng đầu tiên của cấp số cộng bằng
+	\choice
+	{$-59048$}
+	{$-59049$}
+	{\True $-155$}
+	{$-310$}
+	\loigiai{
+		Ta có $u_n=1-3n$ $\Rightarrow$ $\heva{&{u_1=1-3.1=-2} \\
+			&{u_{10}=1-3.10=-29.}}$\\
+		Áp dụng công thức $S=\dfrac{n\left(u_1+u_n \right)}{2}=\dfrac{10\left(u_1+u_{10} \right)}{2}=-155$.
+	}
+\end{ex}
+\begin{ex}%[1D2V2-2]
+	Cho cấp số cộng $\left(u_n \right)$ có $\heva{&{u_2+u_5=42} \\
+		&{u_4+u_9=66}
+	}$. Tổng $346$ số hạng đầu tiên của cấp số cộng trên là
+	\choice
+	{$S_{346}=422554$}
+	{\True $S_{346}=242546$}
+	{$S_{346}=156224$}
+	{$S_{346}=-203558$}
+	\loigiai{
+		Ta có $\heva{&{u_2+u_5=42} \\
+			&{u_4+u_9=66}
+		} \Leftrightarrow \heva{&{2u_1+5d=42} \\
+			&{2u_1+11d=66}
+		} \Leftrightarrow \heva{&{u_1=11} \\
+			&{d=4}.}$\\
+		Và $S_n=nu_1+\dfrac{n\left(n-1\right)d}{2} \Rightarrow S_{346}=346\cdot11+\dfrac{346\cdot345\cdot4}{2}=242546$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B2}
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C3B2-DS]
+
+\begin{ex}%[1D2N2-2]
+	Cho dãy số hữu hạn gồm các số hạng  $-1$; $2$; $5$; $8$; $11$; $14$; $17$ . Khi đó
+	\choiceTF
+	{Dãy số đã cho là không phải cấp số cộng}
+	{\True Số hạng $u_1=-1$}
+	{Nếu dãy số đã cho là một cấp số cộng thì công sai của cấp số cộng là $d=2$}
+	{\True Tổng tất cả số hạng của dãy số bằng $56$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đặt $u_1=-1;u_2=2;u_3=5;u_4=8;u_5=11;u_6=14;u_7=17$.\\	
+			Ta có $u_2-u_1=u_3-u_2=u_4-u_3=u_5-u_4=u_6-u_5=u_7-u_6=3$.\\
+			Vậy dãy số hưu hạn đã cho là một cấp số cộng.
+			\itemch $u_1=-1$.
+			\itemch 	Công sai cấp số cộng là $d=3$.
+			\itemch Với $u_1=-1,n=7,d=3$ thì $S_n=\dfrac{n\left[2u_1+(n-1)d\right]}{2}=\dfrac{7[2(-1)+6\cdot3]}{2}=56$.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[1D2H2-5]
+	Cho cấp số cộng $-2$; $x$; $6$; $y$. Khi đó
+	\choiceTF
+	{\True $x=2$}
+	{$y=8$}
+	{$\; P=y-x=6$}
+	{\True $P=x^2+y^2=104$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch 	Theo tính chất của cấp số cộng, ta có $x=\dfrac{-2+6}{2}=2$ và $6=\dfrac{x+y}{2}$.
+			\itemch Vì $x=2$  nên  $6=\dfrac{2+y}{2} \Rightarrow y=10$.
+			\itemch 	 $\; P=y-x=8$.
+			\itemch 	 $\; P=x^2+y^2=2^2+10^2=104$.
+		\end{itemchoice}				
+	}
+\end{ex}
+\begin{ex}%[1D2H2-6]
+	Cho cấp số cộng $\left(u_n \right)$, biết rằng $u_1=5$ và tổng của $50$ số hạng đầu bằng $5150$, khi đó
+	\choiceTF
+	{Công sai của cấp số cộng bằng $6$}
+	{\True Số hạng $u_{85}=341$}
+	{Số hạng $u_{10}=42$}
+	{\True Tổng của 85 số hạng đầu $S_{85}=14705$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch 	Ta có $S_{50}=\dfrac{50}{2} \left(2u_1+49d\right)=\dfrac{50}{2} (2\cdot 5+49d)=5150\Rightarrow d=4$.
+			\itemch $u_n=u_1+(n-1)d=5+(n-1)4=1+4n$. Suy ra số hạng $u_{85}=341$.
+			\itemch 	$u_n=u_1+(n-1)d=5+(n-1)4=1+4n$. Suy ra số hạng $u_{10}=41$.
+			\itemch 	 $S_{85}=\dfrac{85}{2} \left(2u_1+84d\right)=\dfrac{85}{2} (2\cdot 5+84\cdot 4)=14705$.
+		\end{itemchoice}				
+	}
+\end{ex}
+\begin{ex}%[1D2V2-2]
+	Xác định tính đúng, sai của các khẳng định sau:
+	\choiceTF
+	{\True Dãy số $\left(u_n \right)$ với $\dfrac{-2}{3}$; $\dfrac{-1}{3}$; $0$; $\dfrac{1}{3}$; $\dfrac{2}{3}$; $1$; $\dfrac{4}{3}$ là cấp số cộng với $u_1=\dfrac{-2}{3}$; $d=\dfrac{1}{3}$}
+	{\True Dãy số $\left(u_n \right)$ với $u_n=7-3n$ là cấp số cộng với $u_1=4$; $d=-3$}
+	{Dãy số $\left(u_n \right)$ với $u_n=n^2+n+1$ là cấp số cộng với $u_1=3$; $d=1$}
+	{\True Dãy số $\left(u_n \right)$ với $u_n=(-1)^n+3n$ không là cấp số cộng}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Dãy số $\left(u_n \right)$ với $\dfrac{-2}{3};\dfrac{-1}{3};0;\dfrac{1}{3};\dfrac{2}{3};1;\dfrac{4}{3}$.\\
+			Ta thấy $u_2-u_1=u_3-u_2=u_4-u_3=\ldots=\dfrac{1}{3}$.\\
+			Vậy $\left(u_n \right)$ là cấp số cộng với $u_1=\dfrac{-2}{3};d=\dfrac{1}{3}$.
+			\itemch Dãy số $\left(u_n \right)$ với $u_n=7-3n$.\\
+			Ta có $u_{n+1}-u_n=[7-3(n+1)]-(7-3n)=-3$.\\
+			Vậy $\left(u_n \right)$ là cấp số cộng với $u_1=7-3\cdot1=4$; $d=-3$.
+			\itemch Dãy số $\left(u_n \right)$ với $u_n=n^2+n+1$.\\
+			Ta có $u_{n+1}-u_n=(n+1)^2+(n+1)+1-\left(n^2+n+1\right)=2n+2$ phụ thuộc vào $n$.\\
+			Vậy $\left(u_n \right)$ không là cấp số cộng.
+			\itemch 	Dãy số $\left(u_n \right)$ với $u_n=(-1)^n+3n$.\\
+			Ta có $u_{n+1}-u_n=(-1)^{n+1}+3(n+1)-\left[(-1)^n+3n\right]=-(-1)^n+3-(-1)^n=3-2(-1)^n$ phụ thuộc vào $n$.\\
+			Vậy $\left(u_n \right)$ không là cấp số cộng.
+		\end{itemchoice}	 	
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-1-C3B2-DS}
+
+\Opensolutionfile{ans}[ans/ans-1-C3B2-KQ]
+\caukq
+\begin{bt}%[1D2V2-2]
+	Gọi số hạng đầu $u_1$ và công sai $d$ của cấp số cộng $\left(u_n \right)$ biết rằng $\left\{\begin{array}{l} {u_4=10} \\ {u_4+u_6=26} \end{array}\right.$
+	Tính $u_1\cdot d$.
+	\shortans{$3$}
+	%	Trả lời: số hạng đầu $u_1=1$ công sai $d=3$.
+	\loigiai{
+		Ta có	\[\begin{array}{ll}\heva{&u_4=10 \\
+				&u_4+u_6=26
+			} & \Leftrightarrow \heva{&u_1+3d=10\\
+				&u_1+3d+u_1+5d=26} \\ & \Leftrightarrow \heva{&u_1+3d=10 \\
+				&2u_1+8d=26}\Leftrightarrow \heva{&u_1=1 \\
+				&d=3.}\end{array}\]
+		Vậy cấp số cộng có số hạng đầu $u_1=1$ công sai $d=3$.
+	}
+\end{bt}
+\begin{bt}%[1D2H2-7]
+	Trong một khán phòng có tất cả $30$ dãy ghế, dãy đầu tiên có $15$ ghế, các dãy liền sau nhiều hơn dãy trước đó $4$ ghế, hỏi khán phòng đó có tất cả bao nhiêu ghế?
+	\shortans{$2190$}
+	%	Trả lời: $2190$
+	\loigiai{
+		Gọi $u_1, u_2, \ldots, u_{30}$ lần lượt là số ghế của dãy ghế thứ nhất, dãy ghế thứ hai,..., dãy ghế thứ ba mươi. \\
+		Khi đó, $\left(u_n \right)$ là một cấp số cộng có số hạng đầu $u_1=15$, công sai $d=4$ (trong đó $1\le n\le 30$). \\
+		Gọi $S_{30}$ là tổng số ghế trong khán phòng.\\
+		Ta có $S_{30}=u_1+u_2+\cdots+u_{30}=\dfrac{30}{2} \left[2u_1+(30-1)d\right]=15(2\cdot15+29\cdot4)=2190$.
+	}
+\end{bt}
+\begin{bt}%[1D2H2-5]
+	Cho biết bốn số  $5$; $x$; $15$; $y $  theo thứ tự lập thành một cấp số cộng. Tính giá trị của biểu thức $3x+2y$.
+	\shortans{$70$} 
+	\loigiai{
+		Theo tính chất của cấp số cộng, ta có $\heva{&{x=\dfrac{5+15}{2}} \\
+			&{\dfrac{x+y}{2}=15}}\Leftrightarrow \heva{&{x=10} \\
+			&{y=20}.}$\\
+		Vậy $3x+2y=70$.
+	}
+\end{bt}
+\begin{bt}%[1D2H2-7]
+	Một cơ sở khoan giếng đưa ra định mức giá như sau: Giá của mét khoan đầu tiên là $100$ nghìn đồng và kể từ mét khoan thứ hai, giá của mỗi mét sau tăng thêm $30$ nghìn đồng so với giá của mét khoan ngay trước đó. Một người cần khoan một giếng sâu $20\; m$ để lấy nước dùng cho sinh hoạt của gia đình. Hỏi sau khi hoàn thành việc khoan giếng, gia đình đó phải thanh toán cho cơ sở khoan giếng số tiền bao nhiêu nghìn đồng?
+	\shortans{$7700$}  	
+	%	Trả lời: $7700\;$ (nghìn đồng).
+	\loigiai{
+		Gọi $u_n$ là giá của mét khoan thứ $n$, trong đó $1\le n\le 20$.\\
+		Khi đó, $\left(u_n \right)$ là cấp số cộng có số hạng đầu $u_1=100$ và công sai $d=30$.\\
+		Số tiền mà gia đình phải thanh toán cho cơ sở khoan giếng là\\
+		$S_{20}=u_1+u_2+\cdots+u_{20}=\dfrac{20\left(2u_1+19d\right)}{2}=\dfrac{20(2.100+19.30)}{2}=7700\;$ (nghìn đồng).
+	}
+\end{bt}
+\begin{bt}%[1D2V2-2]
+	Giải phương trình sau $2+7+12+\cdots+x=245$.
+	\shortans{$47$}
+	%	Trả lời: $x=47$
+	\loigiai{
+		Ta có dãy số $2,7,12,\ldots, x$ lập thành cấp số cộng có $\heva{&{u_1=2} \\
+			&{d=5} \\
+			&{u_n=x} \\
+			&{S_n=245}.
+		}$\\
+		Suy ra $S_n=245\Leftrightarrow 245=\dfrac{n}{2} \left[2u_1+(n-1)d\right]\Leftrightarrow 245.2=n[2.2+(n-1)5]\Rightarrow n=10$.\\
+		Vậy $x=u_{10}=u_1+9d=47$.
+	}
+\end{bt}
+
+
+\begin{bt}%[1D2V2-5]
+	Tìm tổng tất cả các giá trị $m$ để phương trình $x^4-2(m+1)x^2+2m+1=0$ có bốn nghiệm phân biệt lập thành cấp số cộng (Kết quả làm tròn đến hàng phần chục).
+	\shortans{$3{,}6$} 	
+	% 	Trả lời: $\left[\begin{array}{ll} {m=4} & {\; \;} \\ {m=-\dfrac{4}{9}} & {\;} \end{array}\right.$
+	\loigiai{
+		Đặt $t=x^2$, $ t\ge 0$.\\
+		Phương trình trở thành $t^2-2(m+1)t+2m+1=0$ \hfill{(2)}\\ 		
+		Phương trình đề bài có bốn nghiệm phân biệt khi và chỉ khi phương trình (2) có hai nghiệm dương phân biệt $t_2 > t_1 > 0\Leftrightarrow \heva{&{\Delta ' > 0} \\
+			&{P> 0} \\
+			&{S> 0}}\Leftrightarrow \heva{&{(m+1)^2-(2m+1) > 0} \\
+			&{2m+1> 0} \\
+			&{2(m+1) > 0}}\Leftrightarrow-\dfrac{1}{2} < m\ne 0$.\\
+		Khi đó phương trình (1) có bốn nghiệm là $-\sqrt{t_2};-\sqrt{t_1};\sqrt{t_1};\sqrt{t_2}$.\\
+		Bốn nghiệm này lập thành cấp số cộng khi $$\heva{&{-\sqrt{t_2}+\sqrt{t_1}=-2\sqrt{t_1}} \\
+			&{-\sqrt{t_1}+\sqrt{t_2}=2\sqrt{t_1}}}\Leftrightarrow \sqrt{t_2}=3\sqrt{t_1} \Leftrightarrow t_2=9t_1.$$		
+		Theo định lý Vi-ét thì
+		\[\heva{&{t_1+t_2=2(m+1)} \\
+			&{t_1t_2=2m+1}}\Rightarrow \heva{&{t_1+9t_2=2(m+1)} \\
+			&{t_1\cdot 9t_2=2m+1}}\Rightarrow  9m^2-32m-16=0\Leftrightarrow \heva{&m=4\, \text{(thỏa mãn)} \\
+			&m=-\dfrac{4}{9} \, \text{(thỏa mãn)}}
+		\]
+		Vậy tổng các giá trị $m$ cần tìm là $4-\dfrac{4}{9}=\dfrac{32}{9}\approx 3{,}6$.
+	}
+\end{bt}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B2-KQ}
+ 
+\subsection{Đề 2}
+ \Opensolutionfile{ans}[ansans-1-C3B2]
+\caulc
+\begin{ex}%[1D2N2-4]
+	Cho cấp số cộng có số hạng đầu $u_1=-\dfrac{1}{2}$, công sai $d=\dfrac{1}{2}$. Năm số hạng liên tiếp đầu tiên của cấp số này là
+	\choice
+	{$-\dfrac{1}{2};0;1;\dfrac{1}{2};1$}
+	{$-\dfrac{1}{2};0;\dfrac{1}{2};0;\dfrac{1}{2}$}
+	{$\dfrac{1}{2};1;\dfrac{3}{2};2;\dfrac{5}{2}$}
+	{\True $-\dfrac{1}{2};0;\dfrac{1}{2};1;\dfrac{3}{2}$}
+	\loigiai{
+		Ta dùng công thức tổng quát $u_n=u_1+\left(n-1\right)d=-\dfrac{1}{2}+\left(n-1\right)\dfrac{1}{2}=-1+\dfrac{n}{2}$, hoặc $u_{n+1}=u_n+d=u_n+\dfrac{1}{2}$ để tính các số hạng của một cấp số cộng.\\	
+		Ta có $u_1=-\dfrac{1}{2}; d=\dfrac{1}{2} \Rightarrow \heva{&{u_1=-\dfrac{1}{2}} \\
+			&{u_2=u_1+d=0} \\
+			&{u_3-u_2+d=\dfrac{1}{2}} \\
+			&{u_4=u_3+d=1} \\
+			&{u_5=u_4+d=\dfrac{3}{2}.}
+		}$
+		\\ \textbf{Nhận xét}: Dùng chức năng "lặp" của MTCT để tính\\
+		\begin{itemize}
+			\item 	Nhập: $X=X+\dfrac{1}{2}$ (nhập $X=X+d$).
+			\item 	Bấm CALC nhập $-\dfrac{1}{2}$ (nhập $u_1$).
+			\item 	Để tính $5$ số hạng đầu ta bấm dấu "=" liên tiếp để ra kết quả $4$ lần nữa!
+		\end{itemize}	
+		
+	}
+\end{ex}
+\begin{ex}%[1D2H2-4]
+	Cho hai số $-3$ và $23$. Xen kẽ giữa hai số đã cho $n$ số hạng để tất cả các số đó tạo thành cấp số cộng có công sai $d=2$. Tìm $n$.
+	\choice
+	{\True $n=12$}
+	{$n=13$}
+	{$n=14$}
+	{$n=15$}
+	\loigiai{
+		Theo giả thiết thì ta được một cấp số cộng có $n+2$ số hạng với $u_1=-3$, $u_{n+2}=23$.\\		
+		Khi đó $u_{n+2}=u_1+\left(n+1\right)d\Leftrightarrow n+1=\dfrac{u_{n+2}-u_1}{d}=\dfrac{23-\left(-3\right)}{2}=13\Leftrightarrow n=12$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-4]
+	Cho cấp số cộng $(u_n)$ có $u_1=4$; $u_2=1$. Giá trị của $u_{10}$ bằng
+	\choice
+	{$u_{10}=-31$}
+	{\True $u_{10}=-23$}
+	{$u_{10}=-20$}
+	{$u_{10}=15$}
+	\loigiai{
+		Ta có $u_2=u_1+d\Rightarrow d=-3$.\\
+		Khi đó $u_{10}=u_1+9d\Leftrightarrow u_{10}=4+9\cdot(-3)\Leftrightarrow u_{10}=-23$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-2]
+	Cho cấp số cộng $\left(u_n \right)$ thỏa mãn $u_1=4$, $u_3=10$. Công sai của cấp số cộng bằng
+	\choice
+	{$6$}
+	{$-6$}
+	{\True $3$}
+	{$-3$}
+	\loigiai{
+		Gọi $d$ là công sai của cấp số cộng $\left(u_n \right)$.\\		
+		Ta có $u_1=4,\; u_3=10$ suy ra $\heva{&{u_1=4} \\
+			&{u_1+2d=10}
+			&} \Leftrightarrow \heva{&{u_1=4} \\
+			&{d=3.}}$\\
+		Vậy công sai của cấp số cộng $\left(u_n \right)$ là $d=3$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-4]
+	Cho cấp số cộng $\left(u_n \right)$ có $u_1=1$, $d=4$. Tìm số hạng $u_{12}$.
+	\choice
+	{$u_{12}=31$}
+	{$u_{12}=13$}
+	{\True $u_{12}=45$}
+	{$u_{12}=17$}
+	\loigiai{
+		Ta có $u_{12}=u_1+11d=45$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-4]
+	Cho cấp số cộng $\left(u_n \right)$ có $u_1=2$, $d=3$. Số hạng thứ $7$ của cấp số cộng này là
+	\choice
+	{\True $20$}
+	{$21$}
+	{$19$}
+	{$23$}
+	\loigiai{
+		Ta có số hạng tổng quát của cấp số cộng là $u_n=u_1+\left(n-1\right)d\Rightarrow u_7=2+6\cdot3=20$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-5]
+	 Cho $a$, $b$, $c$ theo thứ tự này là ba số hạng liên tiếp của một cấp số cộng. Biết $a+b+c=15$. Giá trị của $b$ bằng
+	\choice
+	{$10$}
+	{$8$}
+	{\True $5$}
+	{$6$}
+	\loigiai{
+		$a$, $b$, $c$ theo thứ tự là cấp số cộng và $a+b+c=15\Rightarrow 3b=15\Rightarrow b=5$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-5]
+	Tìm tất cả các số thực $x$ để ba số $x^2$, $x^2+1$, $3x$ theo thứ tự đó lập thành cấp số cộng?
+	\choice
+	{$x=2$}
+	{\True $x\in \left\{1;2\right\}$}
+	{$x=0$}
+	{$x\in \left\{2;3\right\}$}
+	\loigiai{
+		Do ba số $x^2$, $x^2+1$, $3x$ lập thành cấp số cộng nên $$2\left(x^2+1\right)=x^2+3x\Leftrightarrow x^2-3x+2=0\Leftrightarrow \hoac{&{x=1} \\
+			&{x=2}.}$$
+		Vậy $x\in \left\{1;2\right\}$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-5]
+	Cho phương trình $x^3-3x^2-9x+m=0$. Tìm $m$ để phương trình có $3$ nghiệm lập thành cấp số cộng.
+	\choice
+	{$16$}
+	{$13$}
+	{$12$}
+	{\True 11}
+	\loigiai{
+		Giả sử phương trình có $3$ nghiệm lập thành cấp số cộng.\\
+		Khi đó
+		\[x_1+x_3=2x_2; x_1+x_2+x_3=3\Rightarrow x_2=1\Rightarrow m=11.
+		\]
+		Ta có phương trình $x^3-3x^2-9x+11=0\Rightarrow x_1=1-\sqrt{12}$; $x_2=1$; $x_3=1+\sqrt{12}$.\\
+		Ba nghiệm này lập thành cấp số cộng.\\	
+		Vậy $m=11$.
+	}
+\end{ex}
+%%%==============EX_23============%%%
+\begin{ex}%[1D2H2-5]
+	Có tất cả bao nhiêu bộ số nguyên dương $\left(n, k\right)$ biết $n < 20$ và các số $C_n^{k-1}$, $C_n^k$, $C_n^{k+1}$ theo thứ tự đó là số hạng thứ nhất, thứ ba, thứ năm của một cấp số cộng.
+	\choice
+	{\True $4$}
+	{$2$}
+	{$1$}
+	{$z_1=a+5i$}
+	\loigiai{
+		Các số $C_n^{k-1}$, $z_2=b$, $C_n^{k+1}$ theo thứ tự đó là số hạng thứ nhất, thứ ba, thứ năm của một cấp số cộng nên ta có
+		$$C_n^k-C_n^{k-1}=C_n^{k+1}-C_n^k\Leftrightarrow \dfrac{n!}{\left(k+1\right)!(n-k-1)!}+\dfrac{n!}{\left(k-1\right)!(n-k+1)!}=2\dfrac{n!}{k!(n-k)!}$$
+		\[\Leftrightarrow \dfrac{1}{k\left(k+1\right)}+\dfrac{1}{\left(n-k+1\right)\left(n-k\right)}=\dfrac{2}{k\left(n-k\right)} \Leftrightarrow \left(n-2k\right)^2=n+2.
+		\]
+		Do $n < 20\Rightarrow n+2< 22$ mà $n+2$ là số chính phương, $n$, $k$ nguyên dương nên có các trường hợp sau
+		\begin{enumerate}[TH 1.]
+			\item $n+2=4\Rightarrow n=2$; $k=2$.
+			\item $n+2=9\Rightarrow n=7$; $k=2$ hoặc $n=7$; $k=5$.
+			\item $n+2=16\Rightarrow n=14$; $k=5$ hoặc $n=14$; $k=9$.
+		\end{enumerate}
+		Mà $k+1\le n$ nên chỉ có $4$ bộ thỏa mãn.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-6]
+	Cho cấp số cộng $\left(u_n \right)$ với $u_n=3-2n$ thì $S_{60}$ bằng
+	\choice
+	{$-6960$}
+	{$-117$}
+	{\True $-3840$}
+	{$-116$}
+	\loigiai{
+		Ta có $u_{n+1}=1-2n$, Ta có $u_{n+1}-u_n=-2, \forall n\in \mathbb{N}^{*}$, suy ra $\left(u_n \right)$ là cấp số cộng có $u_1=1$ và công sai $d=-2$. \\
+		Vậy $S_{60}=\dfrac{60}{2} \left(2u_1+59d\right)=-3840$.
+	}
+\end{ex}
+\begin{ex}%[1D2H2-6]
+	Cho cấp số cộng $\left(u_n \right)$ có $u_5=-15$, $u_{20}=60$. Tổng $S_{20}$ của $20$ số hạng đầu tiên của cấp số cộng là
+	\choice
+	{$S_{20}=600$}
+	{$S_{20}=60$}
+	{\True $S_{20}=250$}
+	{$S_{20}=500$}
+	\loigiai{
+		Ta có $\heva{&{u_5=-15} \\
+			&{u_{20}=60}
+			&}$$\Leftrightarrow \heva{&{u_1+4d=-15} \\
+			&{u_1+19d=60}
+			&}$$\Leftrightarrow \heva{&{u_1=-35} \\
+			&{d=5.}
+		}$.
+		\[\Rightarrow S_{20}=20u_1+\dfrac{20\cdot19}{2}\cdot d=20\cdot\left(-35\right)+\dfrac{20\cdot19}{2}\cdot5=250.
+		\]
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B2}
+\cauds
+\Opensolutionfile{ans}[ans/ans-1-C3B2-DS]
+
+\begin{ex}%[1D2H2-3]
+	Cho cấp số cộng $\left(u_n \right)$ có số hạng đầu $u_1=\dfrac{3}{2}$, công sai $d=\dfrac{1}{2}$. Khi đó
+	\choiceTF
+	{Công thức cho số hạng tổng quát $u_n=1+\dfrac{n}{3}$}
+	{\True $5$ là số hạng thứ 8 của cấp số cộng đã cho}
+	{$\dfrac{15}{4}$ một số hạng của cấp số cộng đã cho}
+	{Tổng $100$ số hạng đầu của cấp số cộng $\left(u_n \right)$ bằng $2620$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Ta có $u_n=u_1+(n-1)d=\dfrac{3}{2}+(n-1)\cdot \dfrac{1}{2}=1+\dfrac{n}{2}$.
+			\itemch 	Xét $5=1+\dfrac{n}{2} \Rightarrow n=8\in \mathbb{N}^{*}$; suy ra 5 là số hạng thứ 8 của cấp số cộng đã cho.
+			\itemch 	Xét $\dfrac{15}{4}=1+\dfrac{n}{2} \Rightarrow n=\dfrac{11}{2} \notin \mathbb{N}^{*};$ suy ra $\dfrac{15}{4}$ không là một số hạng của cấp số cộng đã cho.
+			\itemch Tổng 100 số hạng đầu của cấp số cộng là
+			\[S_{100}=\dfrac{100\left[2\cdot \dfrac{3}{2}+(100-1)\cdot \dfrac{1}{2} \right]}{2}=2625.
+			\]
+		\end{itemchoice}	
+	}
+\end{ex}
+\begin{ex}%[1D2H2-6]
+	Cho cấp số cộng $\left(u_n \right)$, gọi $S_n$ là tổng $n$ số hạng đầu tiên của nó. Biết $S_7=77$ và $S_{12}=192$. Khi đó
+	\choiceTF
+	{\True Số hạng $u_1=5$}
+	{\True Tổng $u_1+u_3=14$}
+	{Công sai của cấp số cộng bằng $3$}
+	{\True Số hạng $u_{11}=25$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Gọi $d$ là công sai của cấp số cộng, ta có
+			$\heva{&S_7=77\\&S_{12}=192}\Leftrightarrow \heva{&\dfrac{7}{2}\left( 2u_1+6d\right) =77\\&\dfrac{12}{2}\left( 2u_1+11d\right) =192}\Leftrightarrow\heva{&7u_1+21d=77\\&12u_1+66d=192}\Leftrightarrow \heva{&u_1=5\\&d=2.}$
+			\itemch $u_1+u_3=2u_1+2d=14$.
+			\itemch 	$d=2$.
+			\itemch 	$u_{11}=u_1+10d=25$.
+		\end{itemchoice}
+		
+	}
+\end{ex}
+%%%==============EX_9============%%%
+\begin{ex}%[1D2H2-2]
+	Cho cấp số cộng $\left(u_n \right)$ có công sai $d < 0$ thoả mãn $\heva{&{u_1+u_7=26} \\
+		&{u_2^2+u_6^2=466}
+	}$. Khi đó
+	\choiceTF
+	{\True Số hạng $u_1=25$}
+	{Công sai $d=-3$}
+	{\True Số hạng $u_{10}=-11$}
+	{\True Số hạng $u_{2024}=-8067$}
+	\loigiai{Ta có
+		$\heva{&u_1+u_7=26 \\&u_2^2+u_6^2=466}\Leftrightarrow \heva{&2u_1+6d=26 \\
+			&\left(u_1+d\right)^2+\left(u_1+5d\right)^2=466}\Leftrightarrow \heva{u_1=13-3d\qquad \qquad \qquad (1) \\
+			&\left(u_1+d\right)^2+\left(u_1+5d\right)^2=466\qquad (2).}$\\		
+		Thay (1) vào (2), ta được: $(13-2d)^2+(13+2d)^2=466\Leftrightarrow 8d^2+338=466$
+		\[\Leftrightarrow \hoac{&{d=4} \\
+			&{d=-4}}
+		\]			
+		Vì $d < 0$ nên ta nhận $d=-4$, khi đó $u_1=25$.
+		\begin{itemchoice}
+			\itemch $u_1=25$.
+			\itemch $d=-4$.
+			\itemch 	$u_{10}=u_1+9d=-11$.
+			\itemch 	Ta có $u_n=u_1+(n-1)d=25+(n-1)(-4)=29-4n$. Suy ra $u_{2024}=-8067$.
+		\end{itemchoice}					
+	}
+\end{ex}
+%%%==============EX_10============%%%
+\begin{ex}%[1D2H2-2]
+	Cho cấp số cộng $\left(u_n \right)$ có $u_1=5$ và $d=-7$. Khi đó
+	\choiceTF
+	{\True $u_{11}=-65$}
+	{$u_5+u_7=-50$}
+	{\True Số $-849$ là số hạng thứ $123$ của cấp số cộng}
+	{\True Số $-114$ là số hạng thứ $18$ của cấp số cộng}
+	\loigiai{
+		Công thức số hạng tổng quát của cấp số cộng là $u_n=u_1+(n-1)d=5+(n-1)\cdot (-7)=-7n+12$.
+		\begin{itemchoice}
+			\itemch Ta có $u_{11}=-7\cdot11+12=-65$.
+			\itemch $u_5+u_7=-60$.
+			\itemch 	Ta có $-849=-7n+12\Rightarrow n=123$.
+			\itemch 	Ta có $-114=-7n+12\Rightarrow n=18$.
+		\end{itemchoice}			
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-1-C3B2-DS}
+
+\Opensolutionfile{ans}[ans/ans-1-C3B2-KQ]
+\caukq
+\begin{bt}%[1D2H2-2]
+	Gọi số hạng đầu $u_1$ và công sai $d$ của cấp số cộng $\left(u_n \right)$ biết rằng: $u_1+2u_5=0$ và $S_4=14$.
+	Tính $u_1\cdot d$.
+	\shortans{$-63$}
+	%	Trả lời: số hạng đầu $u_1=8$, công sai $d=-3$.
+	\loigiai{
+		Ta có $u_1+2u_5=0\Leftrightarrow u_1+2\left(u_1+4d\right)=0\Leftrightarrow 3u_1+8d=0$. \hfill{(1)}
+		\[S_4=14\Leftrightarrow \dfrac{4\left(2u_1+3d\right)}{2}=14\Leftrightarrow 2u_1+3d=7.\; (2)\;
+		\]
+		Giải hệ gồm hai phương trình (1) và (2), ta được $\heva{&u_1=8\\
+			&d=-3.}$\\ 		
+		Vậy cấp số cộng có số hạng đầu $u_1=8$, công sai $d=-3$.
+	}
+\end{bt}
+
+\begin{bt}%[1D2V2-7]
+	Trong một hội chợ đón xuân, một gian hàng sữa muốn xếp 900 hộp sữa theo quy luật là hàng trên cùng có 1 hộp sữa, mỗi hàng ngay phía dưới lần lượt được xếp nhiều hơn 2 hộp so với hàng trên nó (tham khảo hình vẽ dưới). Hỏi hàng dưới cùng có bao nhiêu hộp sữa?
+	\begin{center}
+		\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}%màu gậy
+		\definecolor{apricot}{rgb}{0.98, 0.81, 0.69}%màu da
+		\definecolor{babypink}{rgb}{0.96, 0.76, 0.76}%màu má hồng
+		\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}%màu môi
+		\definecolor{burntsienna}{rgb}{0.91, 0.45, 0.32}%màu bình
+		\definecolor{citrine}{rgb}{0.89, 0.82, 0.04}%màu áo
+		\definecolor{candypink}{rgb}{0.89, 0.44, 0.48}%màu mũi
+		\definecolor{inchworm}{rgb}{0.7, 0.93, 0.36}%màu lá
+		\definecolor{pinksherbet}{rgb}{0.97, 0.56, 0.65}%màu đào
+		
+		\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}%màu chữ Ông Thọ
+		\definecolor{deepcarminepink}{rgb}{0.94, 0.19, 0.22}%màu hộp sữa
+		\definecolor{melon}{rgb}{0.99, 0.74, 0.71}%màu nhãn sữa
+		\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}%màu chữ Vinamilk,...
+		\definecolor{gainsboro}{rgb}{0.86, 0.86, 0.86}%màu viền đáy hộp 
+		\begin{tikzpicture}[line join=round, line cap=round,scale=.5,transform shape]
+			\clip (-3,-4) rectangle (3,3);
+			
+			\tikzset{ong_tho/.pic={
+					\def\G{ 
+						(-1.02,-2.4)--(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)
+						..controls +(140:.2) and +(40:.2) ..cycle
+						(.05,-2.35)
+						..controls +(60:.15) and +(-140:.02) ..(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..cycle
+						;
+					}
+					\draw \G;
+					\fill[citrine] \G;
+					
+					\def\Vg{ 
+						%viền giày
+						(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)--(-.43,-2.42)
+						..controls +(-110:.2) and +(-100:.25) ..cycle
+						(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..(.05,-2.35)--(-.05,-2.35)
+						..controls +(-40:.3) and +(-120:.3) ..(.6,-2.3)
+						..controls +(130:.05) and +(-30:.05) ..cycle
+						;
+					}
+					\fill[white] \Vg;
+					\draw \Vg;
+					\def\A{ 
+						(-1.3,-.2)
+						..controls +(-140:1) and +(60:1.2) ..(-2,-1.7)
+						..controls +(-70:.4) and +(-140:.35) ..(-1.3,-1.85)%tay áo
+						--(-1.35,-2.45)
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)--(.75,-1.9)
+						..controls +(35:.6) and +(-25:.8) ..(0,-.097)
+						..controls +(150:.25) and +(35:.2) ..cycle
+						;
+					}
+					\draw \A;
+					\fill[citrine] \A;
+					
+					\def\At{ 
+						(-1.95,-1.7)
+						..controls +(-70:.4) and +(-100:.6) ..(-1.25,-1.45)--(-1.2,-1.45)
+						..controls +(-95:.55) and +(-70:.5) ..(-2,-1.7)--cycle
+						(-1.35,-2.45)%viền tà dưới 
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)%
+						..controls +(-70:.4) and +(20:.2) ..(.3,-2.25)
+						..controls +(-160:.2) and +(-20:.3) ..(-.5,-2.42)
+						..controls +(160:.2) and +(30:.4) ..(-1.3,-2.52)--cycle
+						(.53,-.7)--(.55,-.8)
+						..controls +(-30:.2) and +(120:.4) ..(.65,-1.5)
+						..controls +(-60:.2) and +(-40:.4) ..(.43,-1.6)
+						..controls +(140:.2) and +(-100:.1) ..(.4,-1)
+						..controls +(-160:.4) and +(150:.1) ..(.55,-1.8)
+						..controls +(-30:.2) and +(-65:.35) ..(.7,-1.4)
+						..controls +(125:.2) and +(-35:.35) ..cycle
+						;
+					}
+					\fill[white] \At;
+					\draw \At;
+					
+					\def\T{ 
+						(-1.4,.5)
+						..controls +(110:.1) and +(140:.3) ..(-1.5,.3)
+						..controls +(-80:.1) and +(160:.1) ..(-1.35,.1)--cycle
+						(-.1,.8)
+						..controls +(-10:.2) and +(70:.1) ..(-.1,.47)--cycle
+						;
+					}
+					\fill[apricot] \T;
+					\draw \T;
+					
+					\def\D{ 
+						(-1.5,.6)
+						..controls +(103:1.5) and +(83:1.1) ..(-.1,.8)
+						..controls +(-70:.85) and +(-83:1.05) ..cycle
+						;
+					}
+					\fill[apricot] \D;
+					\draw \D;
+					
+					%đai bụng
+					\def\dai{ 
+						(-.6,-1.65)--(-.5,-2.4)--(-.25,-2.5)--(-.05,-2.3)--(-.2,-1.59)
+						..controls +(-170:.2) and +(10:.2) ..cycle;
+					}
+					\fill[citrine] \dai;
+					\draw \dai;
+					\draw (-1.2,-1.55)
+					..controls +(-40:.4) and +(-140:.3) ..(.4,-1.35)
+					(-.9,-1.65)
+					..controls +(120:1) and +(70:.9) ..(.1,-1.49)
+					;
+					
+					\begin{CJK*}{UTF8}{gbsn}
+						\node[rotate=10,right,white,scale=1.7,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.8,-1.4) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.55,-1.85) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.47,-2.2) {寿};
+					\end{CJK*}
+					\def\R{ 
+						(-1,.75)
+						..controls +(170:.5) and +(110:.6) ..(-1.3,-.15)
+						..controls +(-110:.1) and +(120:.1) ..(-1.25,-.55)
+						..controls +(100:.1) and +(-100:.1) ..(-1.22,-.2)
+						..controls +(-35:.2) and +(60:.4) ..(-.6,-1.3)
+						..controls +(30:.35) and +(-100:.4) ..(-.2,-.05)
+						..controls +(-50:.2) and +(100:.2) ..(0,-.45)
+						..controls +(70:.2) and +(-30:.1) ..(-.05,0)
+						..controls +(150:.1) and +(-70:.2) ..(-.1,.5)
+						..controls +(100:.3) and +(30:.3) ..(-.65,.8)--(-.63,.78)
+						..controls +(30:.35) and +(40:.4) ..(-.25,.25)
+						..controls +(130:.2) and +(10:.1) ..(-.65,.35)--(-.64,.33)
+						..controls +(10:.2) and +(120:.1) ..(-.3,.2)
+						..controls +(-140:.1) and +(20:.02) ..(-.5,.1)%cằm
+						..controls +(-160:.05) and +(20:.05) ..(-.75,.05)
+						..controls +(-160:.05) and +(-20:.05) ..(-1.05,.08)
+						..controls +(75:.15) and +(160:.1) ..(-.8,.3)--(-.82,.32)
+						..controls +(160:.15) and +(60:.1) ..(-1.1,.1)
+						..controls +(170:.4) and +(170:.4) ..(-1.05,.72)--cycle
+						;
+					}
+					\fill[white] \R;
+					\draw \R;
+					
+					\def\gay{ 
+						(.35,-2.8)
+						..controls +(-70:.15) and +(-92:1) ..(.47,-2)
+						..controls +(88:.15) and +(-100:.3) ..(.4,.5)--(.42,.9)
+						..controls +(100:.3) and +(-100:.2) ..(.55,1.3)
+						..controls +(80:.7) and +(110:.6) ..(-.15,1.2)
+						..controls +(-40:.4) and +(85:.6) ..(.2,.4)
+						..controls +(-80:.4) and +(95:.2) ..cycle
+						;
+					}
+					\fill[antiquebrass] \gay;
+					\draw \gay;
+					%---------------------------------
+					\def\dao{ 
+						(-1.9,-1.7)
+						..controls +(140:1) and +(-70:.4) ..(-1.9,-.68)
+						..controls +(-5:1) and +(10:1) ..cycle;
+						;
+					}
+					\fill[pinksherbet] \dao;
+					\draw \dao;
+					\draw (-1.8,-1.7)
+					..controls +(160:.5) and +(-70:.6) ..(-1.9,-.7);
+					\def\la{ 
+						(-1.7,-1.7)
+						..controls +(110:.65) and +(150:.5) ..(-.8,-1.15)
+						..controls +(-160:.5) and +(10:.8) ..cycle
+						(-1.8,-1.7)
+						..controls +(110:.65) and +(50:.5) ..(-2.55,-1.3)
+						..controls +(-20:.4) and +(-175:.5) ..cycle
+						;
+					}
+					\fill[inchworm] \la;
+					\draw \la;
+					%-------------------------------------
+					\def\tay{ 
+						(.55,-.8)
+						..controls +(110:.05) and +(-30:.05) ..(.52,-.7)
+						..controls +(110:.05) and +(-30:.05) ..(.5,-.56)
+						..controls +(110:.05) and +(-30:.05) ..(.46,-.46)
+						..controls +(150:.05) and +(30:.05) ..(.2,-.5)
+						..controls +(-150:.05) and +(110:.05) ..(.21,-.6)
+						..controls +(-150:.02) and +(110:.05) ..(.22,-.7)
+						..controls +(-150:.02) and +(110:.05) ..(.25,-.8)
+						..controls +(-150:.02) and +(110:.05) ..(.28,-.9)
+						..controls +(20:.02) and +(110:.05) ..(.45,-.95)
+						..controls +(-70:.05) and +(170:.3) ..(.58,-1.24)
+						..controls +(70:.2) and +(-40:.15) ..cycle
+						(-1.9,-1.76)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.8,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.7,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.6,-1.8)
+						..controls +(-5:.06) and +(-120:.4) ..(-1.25,-1.55)
+						..controls +(-110:.06) and +(-170:.1) ..(-1.5,-1.65)
+						..controls +(95:.06) and +(10:.06) ..(-1.6,-1.55)
+						..controls +(170:.04) and +(10:.04) ..(-1.8,-1.52)
+						..controls +(170:.04) and +(10:.04) ..(-1.9,-1.56)
+						..controls +(-110:.04) and +(160:.04) ..cycle
+						;
+					}
+					\fill[apricot] \tay;
+					\draw \tay;
+					\draw (-1.6,-1.75)
+					..controls +(150:.04) and +(-140:.04) ..(-1.6,-1.55)
+					(-1.7,-1.74)
+					..controls +(150:.04) and +(-140:.04) ..(-1.7,-1.53)
+					(-1.8,-1.73)
+					..controls +(150:.04) and +(-140:.04) ..(-1.8,-1.52);
+					\draw (.52,-.69)
+					..controls +(110:.05) and +(30:.05) ..(.22,-.7)
+					(.5,-.56)
+					..controls +(110:.05) and +(30:.05) ..(.21,-.6)
+					(.55,-.8)
+					..controls +(110:.05) and +(30:.05) ..(.25,-.8)
+					;
+					
+					\def\B{ 
+						(-.1,.52)--(-.05,.44)
+						..controls +(-100:.15) and +(150:.2) ..(.08,.1)
+						..controls +(-88:1.05) and +(-15:1.1) ..(.43,.48)
+						..controls +(150:.15) and +(15:.2) ..(.1,.55)--(0.02,.63)--cycle
+						;
+					}
+					\fill[burntsienna] \B;
+					\draw \B;
+					\draw (.08,.1)
+					..controls +(-15:.2) and +(-150:.1) ..(.4,.15)
+					(.43,.48)
+					..controls +(-65:.15) and +(80:.15) ..(.45,.2)
+					;
+					
+					\draw[fill=burntsienna,rotate=35] (.3,.5) ellipse (.08 and .04);
+					
+					%-----------vẽ mắt mũi miệng
+					\draw (-.98,.6)
+					..controls +(-170:.1) and +(50:.12) ..(-1.17,.52)
+					(-.58,.65)
+					..controls +(40:.1) and +(160:.12) ..(-.35,.65)
+					;
+					\draw (-1.3,.87)
+					..controls +(-30:.3) and +(-130:.3) ..(-.4,1)
+					(-.93,.8)
+					..controls +(-30:.07) and +(-130:.09) ..(-.8,.81)
+					..controls +(50:.07) and +(-110:.12) ..(-.65,.85);
+					\draw (-1.3,-1.85)
+					..controls +(40:.2) and +(-70:.12) ..(-1.02,-1.3);
+					\fill[rotate=10,color=candypink] (-.67,.57) ellipse (.11 and .08);
+					\fill[rotate=10,color=candypink!50] (-.2,.57) ellipse (.12 and .05);
+					\fill[rotate=5,color=candypink!50] (-1.15,.5) ellipse (.11 and .04);
+					\draw[bittersweet] (-.92,.22)
+					..controls +(-40:.1) and +(-120:.2) ..(-.5,.3)
+					..controls +(-110:.2) and +(-60:.1) ..cycle;
+					\draw (.75,-1.9) ..controls +(170:.2) and +(-60:.1) ..(.5,-1.75);
+					\draw (.46,1.15)
+					..controls +(-170:.8) and +(110:.35) ..(.4,1.4);
+			}}
+			
+			\tikzset{hop_sua/.pic={
+					\def\V{ 
+						(-2.15,1.9)
+						..controls +(30:.35) and +(150:.35) ..(2.15,1.9)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)
+						..controls +(150:.05) and +(-150:.05) ..(-2.15,1.9)
+						(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,-3.25)
+						..controls +(-150:.5) and +(-30:.5) ..(-2.15,-3.25)
+						..controls +(150:.05) and +(-150:.05) ..cycle
+						;
+					}
+					\fill[gainsboro] \V;
+					\draw \V;
+					
+					\def\H{ 
+						(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)--(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)--cycle
+						;
+					}
+					\fill[deepcarminepink!80] \H;
+					\draw \H;
+					\def\X{ 
+						(-1.8,1)
+						..controls +(30:.8) and +(150:.8) ..(1.8,1)
+						..controls +(-30:.3) and +(30:.4) ..(1.6,-.1)
+						..controls +(150:.35) and +(30:.35) ..(-1.6,-.1)
+						..controls +(150:.2) and +(-150:.2) ..cycle
+						;
+					}
+					\fill[melon] \X;
+					\draw \X;
+					
+					\node[rotate=10,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (-1.7,.4) 
+					{Ông};
+					\node[rotate=-5,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (0,.6) 
+					{Thọ};
+					\node[right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-1.2,-2.8) 
+					{Sữa đặc có đường};
+					\node[,right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (1.3,-2.25) 
+					{$380$ g};
+					\node[right,azure(colorwheel),scale=.7,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-.5,1.5) 
+					{VINAMILK};
+			}}
+			
+			
+			
+			\path(0,0)pic[scale=1]{hop_sua};
+			%		\path (.4,-1)pic[scale=.58]{ong_tho} ;
+		\end{tikzpicture}
+	\end{center}
+	\begin{center}
+		\definecolor{antiquebrass}{rgb}{0.8, 0.58, 0.46}%màu gậy
+		\definecolor{apricot}{rgb}{0.98, 0.81, 0.69}%màu da
+		\definecolor{babypink}{rgb}{0.96, 0.76, 0.76}%màu má hồng
+		\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}%màu môi
+		\definecolor{burntsienna}{rgb}{0.91, 0.45, 0.32}%màu bình
+		\definecolor{citrine}{rgb}{0.89, 0.82, 0.04}%màu áo
+		\definecolor{candypink}{rgb}{0.89, 0.44, 0.48}%màu mũi
+		\definecolor{inchworm}{rgb}{0.7, 0.93, 0.36}%màu lá
+		\definecolor{pinksherbet}{rgb}{0.97, 0.56, 0.65}%màu đào
+		
+		\definecolor{alizarin}{rgb}{0.82, 0.1, 0.26}%màu chữ Ông Thọ
+		\definecolor{deepcarminepink}{rgb}{0.94, 0.19, 0.22}%màu hộp sữa
+		\definecolor{melon}{rgb}{0.99, 0.74, 0.71}%màu nhãn sữa
+		\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}%màu chữ Vinamilk,...
+		\definecolor{gainsboro}{rgb}{0.86, 0.86, 0.86}%màu viền đáy hộp 
+		\begin{tikzpicture}[line join=round, line cap=round,scale=.5,transform shape]
+			\clip (-3,-4) rectangle (3,3);
+			
+			\tikzset{ong_tho/.pic={
+					\def\G{ 
+						(-1.02,-2.4)--(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)
+						..controls +(140:.2) and +(40:.2) ..cycle
+						(.05,-2.35)
+						..controls +(60:.15) and +(-140:.02) ..(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..cycle
+						;
+					}
+					\draw \G;
+					\fill[citrine] \G;
+					
+					\def\Vg{ 
+						%viền giày
+						(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)--(-.43,-2.42)
+						..controls +(-110:.2) and +(-100:.25) ..cycle
+						(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..(.05,-2.35)--(-.05,-2.35)
+						..controls +(-40:.3) and +(-120:.3) ..(.6,-2.3)
+						..controls +(130:.05) and +(-30:.05) ..cycle
+						;
+					}
+					\fill[white] \Vg;
+					\draw \Vg;
+					\def\A{ 
+						(-1.3,-.2)
+						..controls +(-140:1) and +(60:1.2) ..(-2,-1.7)
+						..controls +(-70:.4) and +(-140:.35) ..(-1.3,-1.85)%tay áo
+						--(-1.35,-2.45)
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)--(.75,-1.9)
+						..controls +(35:.6) and +(-25:.8) ..(0,-.097)
+						..controls +(150:.25) and +(35:.2) ..cycle
+						;
+					}
+					\draw \A;
+					\fill[citrine] \A;
+					
+					\def\At{ 
+						(-1.95,-1.7)
+						..controls +(-70:.4) and +(-100:.6) ..(-1.25,-1.45)--(-1.2,-1.45)
+						..controls +(-95:.55) and +(-70:.5) ..(-2,-1.7)--cycle
+						(-1.35,-2.45)%viền tà dưới 
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)%
+						..controls +(-70:.4) and +(20:.2) ..(.3,-2.25)
+						..controls +(-160:.2) and +(-20:.3) ..(-.5,-2.42)
+						..controls +(160:.2) and +(30:.4) ..(-1.3,-2.52)--cycle
+						(.53,-.7)--(.55,-.8)
+						..controls +(-30:.2) and +(120:.4) ..(.65,-1.5)
+						..controls +(-60:.2) and +(-40:.4) ..(.43,-1.6)
+						..controls +(140:.2) and +(-100:.1) ..(.4,-1)
+						..controls +(-160:.4) and +(150:.1) ..(.55,-1.8)
+						..controls +(-30:.2) and +(-65:.35) ..(.7,-1.4)
+						..controls +(125:.2) and +(-35:.35) ..cycle
+						;
+					}
+					\fill[white] \At;
+					\draw \At;
+					
+					\def\T{ 
+						(-1.4,.5)
+						..controls +(110:.1) and +(140:.3) ..(-1.5,.3)
+						..controls +(-80:.1) and +(160:.1) ..(-1.35,.1)--cycle
+						(-.1,.8)
+						..controls +(-10:.2) and +(70:.1) ..(-.1,.47)--cycle
+						;
+					}
+					\fill[apricot] \T;
+					\draw \T;
+					
+					\def\D{ 
+						(-1.5,.6)
+						..controls +(103:1.5) and +(83:1.1) ..(-.1,.8)
+						..controls +(-70:.85) and +(-83:1.05) ..cycle
+						;
+					}
+					\fill[apricot] \D;
+					\draw \D;
+					
+					%đai bụng
+					\def\dai{ 
+						(-.6,-1.65)--(-.5,-2.4)--(-.25,-2.5)--(-.05,-2.3)--(-.2,-1.59)
+						..controls +(-170:.2) and +(10:.2) ..cycle;
+					}
+					\fill[citrine] \dai;
+					\draw \dai;
+					\draw (-1.2,-1.55)
+					..controls +(-40:.4) and +(-140:.3) ..(.4,-1.35)
+					(-.9,-1.65)
+					..controls +(120:1) and +(70:.9) ..(.1,-1.49)
+					;
+					
+					\begin{CJK*}{UTF8}{gbsn}
+						\node[rotate=10,right,white,scale=1.7,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.8,-1.4) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.55,-1.85) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.47,-2.2) {寿};
+					\end{CJK*}
+					\def\R{ 
+						(-1,.75)
+						..controls +(170:.5) and +(110:.6) ..(-1.3,-.15)
+						..controls +(-110:.1) and +(120:.1) ..(-1.25,-.55)
+						..controls +(100:.1) and +(-100:.1) ..(-1.22,-.2)
+						..controls +(-35:.2) and +(60:.4) ..(-.6,-1.3)
+						..controls +(30:.35) and +(-100:.4) ..(-.2,-.05)
+						..controls +(-50:.2) and +(100:.2) ..(0,-.45)
+						..controls +(70:.2) and +(-30:.1) ..(-.05,0)
+						..controls +(150:.1) and +(-70:.2) ..(-.1,.5)
+						..controls +(100:.3) and +(30:.3) ..(-.65,.8)--(-.63,.78)
+						..controls +(30:.35) and +(40:.4) ..(-.25,.25)
+						..controls +(130:.2) and +(10:.1) ..(-.65,.35)--(-.64,.33)
+						..controls +(10:.2) and +(120:.1) ..(-.3,.2)
+						..controls +(-140:.1) and +(20:.02) ..(-.5,.1)%cằm
+						..controls +(-160:.05) and +(20:.05) ..(-.75,.05)
+						..controls +(-160:.05) and +(-20:.05) ..(-1.05,.08)
+						..controls +(75:.15) and +(160:.1) ..(-.8,.3)--(-.82,.32)
+						..controls +(160:.15) and +(60:.1) ..(-1.1,.1)
+						..controls +(170:.4) and +(170:.4) ..(-1.05,.72)--cycle
+						;
+					}
+					\fill[white] \R;
+					\draw \R;
+					
+					\def\gay{ 
+						(.35,-2.8)
+						..controls +(-70:.15) and +(-92:1) ..(.47,-2)
+						..controls +(88:.15) and +(-100:.3) ..(.4,.5)--(.42,.9)
+						..controls +(100:.3) and +(-100:.2) ..(.55,1.3)
+						..controls +(80:.7) and +(110:.6) ..(-.15,1.2)
+						..controls +(-40:.4) and +(85:.6) ..(.2,.4)
+						..controls +(-80:.4) and +(95:.2) ..cycle
+						;
+					}
+					\fill[antiquebrass] \gay;
+					\draw \gay;
+					%---------------------------------
+					\def\dao{ 
+						(-1.9,-1.7)
+						..controls +(140:1) and +(-70:.4) ..(-1.9,-.68)
+						..controls +(-5:1) and +(10:1) ..cycle;
+						;
+					}
+					\fill[pinksherbet] \dao;
+					\draw \dao;
+					\draw (-1.8,-1.7)
+					..controls +(160:.5) and +(-70:.6) ..(-1.9,-.7);
+					\def\la{ 
+						(-1.7,-1.7)
+						..controls +(110:.65) and +(150:.5) ..(-.8,-1.15)
+						..controls +(-160:.5) and +(10:.8) ..cycle
+						(-1.8,-1.7)
+						..controls +(110:.65) and +(50:.5) ..(-2.55,-1.3)
+						..controls +(-20:.4) and +(-175:.5) ..cycle
+						;
+					}
+					\fill[inchworm] \la;
+					\draw \la;
+					%-------------------------------------
+					\def\tay{ 
+						(.55,-.8)
+						..controls +(110:.05) and +(-30:.05) ..(.52,-.7)
+						..controls +(110:.05) and +(-30:.05) ..(.5,-.56)
+						..controls +(110:.05) and +(-30:.05) ..(.46,-.46)
+						..controls +(150:.05) and +(30:.05) ..(.2,-.5)
+						..controls +(-150:.05) and +(110:.05) ..(.21,-.6)
+						..controls +(-150:.02) and +(110:.05) ..(.22,-.7)
+						..controls +(-150:.02) and +(110:.05) ..(.25,-.8)
+						..controls +(-150:.02) and +(110:.05) ..(.28,-.9)
+						..controls +(20:.02) and +(110:.05) ..(.45,-.95)
+						..controls +(-70:.05) and +(170:.3) ..(.58,-1.24)
+						..controls +(70:.2) and +(-40:.15) ..cycle
+						(-1.9,-1.76)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.8,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.7,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.6,-1.8)
+						..controls +(-5:.06) and +(-120:.4) ..(-1.25,-1.55)
+						..controls +(-110:.06) and +(-170:.1) ..(-1.5,-1.65)
+						..controls +(95:.06) and +(10:.06) ..(-1.6,-1.55)
+						..controls +(170:.04) and +(10:.04) ..(-1.8,-1.52)
+						..controls +(170:.04) and +(10:.04) ..(-1.9,-1.56)
+						..controls +(-110:.04) and +(160:.04) ..cycle
+						;
+					}
+					\fill[apricot] \tay;
+					\draw \tay;
+					\draw (-1.6,-1.75)
+					..controls +(150:.04) and +(-140:.04) ..(-1.6,-1.55)
+					(-1.7,-1.74)
+					..controls +(150:.04) and +(-140:.04) ..(-1.7,-1.53)
+					(-1.8,-1.73)
+					..controls +(150:.04) and +(-140:.04) ..(-1.8,-1.52);
+					\draw (.52,-.69)
+					..controls +(110:.05) and +(30:.05) ..(.22,-.7)
+					(.5,-.56)
+					..controls +(110:.05) and +(30:.05) ..(.21,-.6)
+					(.55,-.8)
+					..controls +(110:.05) and +(30:.05) ..(.25,-.8)
+					;
+					
+					\def\B{ 
+						(-.1,.52)--(-.05,.44)
+						..controls +(-100:.15) and +(150:.2) ..(.08,.1)
+						..controls +(-88:1.05) and +(-15:1.1) ..(.43,.48)
+						..controls +(150:.15) and +(15:.2) ..(.1,.55)--(0.02,.63)--cycle
+						;
+					}
+					\fill[burntsienna] \B;
+					\draw \B;
+					\draw (.08,.1)
+					..controls +(-15:.2) and +(-150:.1) ..(.4,.15)
+					(.43,.48)
+					..controls +(-65:.15) and +(80:.15) ..(.45,.2)
+					;
+					
+					\draw[fill=burntsienna,rotate=35] (.3,.5) ellipse (.08 and .04);
+					
+					%-----------vẽ mắt mũi miệng
+					\draw (-.98,.6)
+					..controls +(-170:.1) and +(50:.12) ..(-1.17,.52)
+					(-.58,.65)
+					..controls +(40:.1) and +(160:.12) ..(-.35,.65)
+					;
+					\draw (-1.3,.87)
+					..controls +(-30:.3) and +(-130:.3) ..(-.4,1)
+					(-.93,.8)
+					..controls +(-30:.07) and +(-130:.09) ..(-.8,.81)
+					..controls +(50:.07) and +(-110:.12) ..(-.65,.85);
+					\draw (-1.3,-1.85)
+					..controls +(40:.2) and +(-70:.12) ..(-1.02,-1.3);
+					\fill[rotate=10,color=candypink] (-.67,.57) ellipse (.11 and .08);
+					\fill[rotate=10,color=candypink!50] (-.2,.57) ellipse (.12 and .05);
+					\fill[rotate=5,color=candypink!50] (-1.15,.5) ellipse (.11 and .04);
+					\draw[bittersweet] (-.92,.22)
+					..controls +(-40:.1) and +(-120:.2) ..(-.5,.3)
+					..controls +(-110:.2) and +(-60:.1) ..cycle;
+					\draw (.75,-1.9) ..controls +(170:.2) and +(-60:.1) ..(.5,-1.75);
+					\draw (.46,1.15)
+					..controls +(-170:.8) and +(110:.35) ..(.4,1.4);
+			}}
+			
+			\tikzset{hop_sua/.pic={
+					\def\V{ 
+						(-2.15,1.9)
+						..controls +(30:.35) and +(150:.35) ..(2.15,1.9)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)
+						..controls +(150:.05) and +(-150:.05) ..(-2.15,1.9)
+						(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,-3.25)
+						..controls +(-150:.5) and +(-30:.5) ..(-2.15,-3.25)
+						..controls +(150:.05) and +(-150:.05) ..cycle
+						;
+					}
+					\fill[gainsboro] \V;
+					\draw \V;
+					
+					\def\H{ 
+						(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)--(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)--cycle
+						;
+					}
+					\fill[deepcarminepink!80] \H;
+					\draw \H;
+					\def\X{ 
+						(-1.8,1)
+						..controls +(30:.8) and +(150:.8) ..(1.8,1)
+						..controls +(-30:.3) and +(30:.4) ..(1.6,-.1)
+						..controls +(150:.35) and +(30:.35) ..(-1.6,-.1)
+						..controls +(150:.2) and +(-150:.2) ..cycle
+						;
+					}
+					\fill[melon] \X;
+					\draw \X;
+					
+					\node[rotate=10,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (-1.7,.4) 
+					{Ông};
+					\node[rotate=-5,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (0,.6) 
+					{Thọ};
+					\node[right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-1.2,-2.8) 
+					{Sữa đặc có đường};
+					\node[,right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (1.3,-2.25) 
+					{$380$ g};
+					\node[right,azure(colorwheel),scale=.7,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-.5,1.5) 
+					{VINAMILK};
+			}}
+			
+			
+			
+			\path(0,0)pic[scale=1]{hop_sua};
+			%		\path (.4,-1)pic[scale=.58]{ong_tho} ;
+		\end{tikzpicture}
+		\hspace*{1cm}
+		\begin{tikzpicture}[line join=round, line cap=round,scale=.5,transform shape]
+			\clip (-3,-4) rectangle (3,3);
+			
+			\tikzset{ong_tho/.pic={
+					\def\G{ 
+						(-1.02,-2.4)--(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)
+						..controls +(140:.2) and +(40:.2) ..cycle
+						(.05,-2.35)
+						..controls +(60:.15) and +(-140:.02) ..(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..cycle
+						;
+					}
+					\draw \G;
+					\fill[citrine] \G;
+					
+					\def\Vg{ 
+						%viền giày
+						(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)--(-.43,-2.42)
+						..controls +(-110:.2) and +(-100:.25) ..cycle
+						(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..(.05,-2.35)--(-.05,-2.35)
+						..controls +(-40:.3) and +(-120:.3) ..(.6,-2.3)
+						..controls +(130:.05) and +(-30:.05) ..cycle
+						;
+					}
+					\fill[white] \Vg;
+					\draw \Vg;
+					\def\A{ 
+						(-1.3,-.2)
+						..controls +(-140:1) and +(60:1.2) ..(-2,-1.7)
+						..controls +(-70:.4) and +(-140:.35) ..(-1.3,-1.85)%tay áo
+						--(-1.35,-2.45)
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)--(.75,-1.9)
+						..controls +(35:.6) and +(-25:.8) ..(0,-.097)
+						..controls +(150:.25) and +(35:.2) ..cycle
+						;
+					}
+					\draw \A;
+					\fill[citrine] \A;
+					
+					\def\At{ 
+						(-1.95,-1.7)
+						..controls +(-70:.4) and +(-100:.6) ..(-1.25,-1.45)--(-1.2,-1.45)
+						..controls +(-95:.55) and +(-70:.5) ..(-2,-1.7)--cycle
+						(-1.35,-2.45)%viền tà dưới 
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)%
+						..controls +(-70:.4) and +(20:.2) ..(.3,-2.25)
+						..controls +(-160:.2) and +(-20:.3) ..(-.5,-2.42)
+						..controls +(160:.2) and +(30:.4) ..(-1.3,-2.52)--cycle
+						(.53,-.7)--(.55,-.8)
+						..controls +(-30:.2) and +(120:.4) ..(.65,-1.5)
+						..controls +(-60:.2) and +(-40:.4) ..(.43,-1.6)
+						..controls +(140:.2) and +(-100:.1) ..(.4,-1)
+						..controls +(-160:.4) and +(150:.1) ..(.55,-1.8)
+						..controls +(-30:.2) and +(-65:.35) ..(.7,-1.4)
+						..controls +(125:.2) and +(-35:.35) ..cycle
+						;
+					}
+					\fill[white] \At;
+					\draw \At;
+					
+					\def\T{ 
+						(-1.4,.5)
+						..controls +(110:.1) and +(140:.3) ..(-1.5,.3)
+						..controls +(-80:.1) and +(160:.1) ..(-1.35,.1)--cycle
+						(-.1,.8)
+						..controls +(-10:.2) and +(70:.1) ..(-.1,.47)--cycle
+						;
+					}
+					\fill[apricot] \T;
+					\draw \T;
+					
+					\def\D{ 
+						(-1.5,.6)
+						..controls +(103:1.5) and +(83:1.1) ..(-.1,.8)
+						..controls +(-70:.85) and +(-83:1.05) ..cycle
+						;
+					}
+					\fill[apricot] \D;
+					\draw \D;
+					
+					%đai bụng
+					\def\dai{ 
+						(-.6,-1.65)--(-.5,-2.4)--(-.25,-2.5)--(-.05,-2.3)--(-.2,-1.59)
+						..controls +(-170:.2) and +(10:.2) ..cycle;
+					}
+					\fill[citrine] \dai;
+					\draw \dai;
+					\draw (-1.2,-1.55)
+					..controls +(-40:.4) and +(-140:.3) ..(.4,-1.35)
+					(-.9,-1.65)
+					..controls +(120:1) and +(70:.9) ..(.1,-1.49)
+					;
+					
+					\begin{CJK*}{UTF8}{gbsn}
+						\node[rotate=10,right,white,scale=1.7,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.8,-1.4) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.55,-1.85) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.47,-2.2) {寿};
+					\end{CJK*}
+					\def\R{ 
+						(-1,.75)
+						..controls +(170:.5) and +(110:.6) ..(-1.3,-.15)
+						..controls +(-110:.1) and +(120:.1) ..(-1.25,-.55)
+						..controls +(100:.1) and +(-100:.1) ..(-1.22,-.2)
+						..controls +(-35:.2) and +(60:.4) ..(-.6,-1.3)
+						..controls +(30:.35) and +(-100:.4) ..(-.2,-.05)
+						..controls +(-50:.2) and +(100:.2) ..(0,-.45)
+						..controls +(70:.2) and +(-30:.1) ..(-.05,0)
+						..controls +(150:.1) and +(-70:.2) ..(-.1,.5)
+						..controls +(100:.3) and +(30:.3) ..(-.65,.8)--(-.63,.78)
+						..controls +(30:.35) and +(40:.4) ..(-.25,.25)
+						..controls +(130:.2) and +(10:.1) ..(-.65,.35)--(-.64,.33)
+						..controls +(10:.2) and +(120:.1) ..(-.3,.2)
+						..controls +(-140:.1) and +(20:.02) ..(-.5,.1)%cằm
+						..controls +(-160:.05) and +(20:.05) ..(-.75,.05)
+						..controls +(-160:.05) and +(-20:.05) ..(-1.05,.08)
+						..controls +(75:.15) and +(160:.1) ..(-.8,.3)--(-.82,.32)
+						..controls +(160:.15) and +(60:.1) ..(-1.1,.1)
+						..controls +(170:.4) and +(170:.4) ..(-1.05,.72)--cycle
+						;
+					}
+					\fill[white] \R;
+					\draw \R;
+					
+					\def\gay{ 
+						(.35,-2.8)
+						..controls +(-70:.15) and +(-92:1) ..(.47,-2)
+						..controls +(88:.15) and +(-100:.3) ..(.4,.5)--(.42,.9)
+						..controls +(100:.3) and +(-100:.2) ..(.55,1.3)
+						..controls +(80:.7) and +(110:.6) ..(-.15,1.2)
+						..controls +(-40:.4) and +(85:.6) ..(.2,.4)
+						..controls +(-80:.4) and +(95:.2) ..cycle
+						;
+					}
+					\fill[antiquebrass] \gay;
+					\draw \gay;
+					%---------------------------------
+					\def\dao{ 
+						(-1.9,-1.7)
+						..controls +(140:1) and +(-70:.4) ..(-1.9,-.68)
+						..controls +(-5:1) and +(10:1) ..cycle;
+						;
+					}
+					\fill[pinksherbet] \dao;
+					\draw \dao;
+					\draw (-1.8,-1.7)
+					..controls +(160:.5) and +(-70:.6) ..(-1.9,-.7);
+					\def\la{ 
+						(-1.7,-1.7)
+						..controls +(110:.65) and +(150:.5) ..(-.8,-1.15)
+						..controls +(-160:.5) and +(10:.8) ..cycle
+						(-1.8,-1.7)
+						..controls +(110:.65) and +(50:.5) ..(-2.55,-1.3)
+						..controls +(-20:.4) and +(-175:.5) ..cycle
+						;
+					}
+					\fill[inchworm] \la;
+					\draw \la;
+					%-------------------------------------
+					\def\tay{ 
+						(.55,-.8)
+						..controls +(110:.05) and +(-30:.05) ..(.52,-.7)
+						..controls +(110:.05) and +(-30:.05) ..(.5,-.56)
+						..controls +(110:.05) and +(-30:.05) ..(.46,-.46)
+						..controls +(150:.05) and +(30:.05) ..(.2,-.5)
+						..controls +(-150:.05) and +(110:.05) ..(.21,-.6)
+						..controls +(-150:.02) and +(110:.05) ..(.22,-.7)
+						..controls +(-150:.02) and +(110:.05) ..(.25,-.8)
+						..controls +(-150:.02) and +(110:.05) ..(.28,-.9)
+						..controls +(20:.02) and +(110:.05) ..(.45,-.95)
+						..controls +(-70:.05) and +(170:.3) ..(.58,-1.24)
+						..controls +(70:.2) and +(-40:.15) ..cycle
+						(-1.9,-1.76)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.8,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.7,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.6,-1.8)
+						..controls +(-5:.06) and +(-120:.4) ..(-1.25,-1.55)
+						..controls +(-110:.06) and +(-170:.1) ..(-1.5,-1.65)
+						..controls +(95:.06) and +(10:.06) ..(-1.6,-1.55)
+						..controls +(170:.04) and +(10:.04) ..(-1.8,-1.52)
+						..controls +(170:.04) and +(10:.04) ..(-1.9,-1.56)
+						..controls +(-110:.04) and +(160:.04) ..cycle
+						;
+					}
+					\fill[apricot] \tay;
+					\draw \tay;
+					\draw (-1.6,-1.75)
+					..controls +(150:.04) and +(-140:.04) ..(-1.6,-1.55)
+					(-1.7,-1.74)
+					..controls +(150:.04) and +(-140:.04) ..(-1.7,-1.53)
+					(-1.8,-1.73)
+					..controls +(150:.04) and +(-140:.04) ..(-1.8,-1.52);
+					\draw (.52,-.69)
+					..controls +(110:.05) and +(30:.05) ..(.22,-.7)
+					(.5,-.56)
+					..controls +(110:.05) and +(30:.05) ..(.21,-.6)
+					(.55,-.8)
+					..controls +(110:.05) and +(30:.05) ..(.25,-.8)
+					;
+					
+					\def\B{ 
+						(-.1,.52)--(-.05,.44)
+						..controls +(-100:.15) and +(150:.2) ..(.08,.1)
+						..controls +(-88:1.05) and +(-15:1.1) ..(.43,.48)
+						..controls +(150:.15) and +(15:.2) ..(.1,.55)--(0.02,.63)--cycle
+						;
+					}
+					\fill[burntsienna] \B;
+					\draw \B;
+					\draw (.08,.1)
+					..controls +(-15:.2) and +(-150:.1) ..(.4,.15)
+					(.43,.48)
+					..controls +(-65:.15) and +(80:.15) ..(.45,.2)
+					;
+					
+					\draw[fill=burntsienna,rotate=35] (.3,.5) ellipse (.08 and .04);
+					
+					%-----------vẽ mắt mũi miệng
+					\draw (-.98,.6)
+					..controls +(-170:.1) and +(50:.12) ..(-1.17,.52)
+					(-.58,.65)
+					..controls +(40:.1) and +(160:.12) ..(-.35,.65)
+					;
+					\draw (-1.3,.87)
+					..controls +(-30:.3) and +(-130:.3) ..(-.4,1)
+					(-.93,.8)
+					..controls +(-30:.07) and +(-130:.09) ..(-.8,.81)
+					..controls +(50:.07) and +(-110:.12) ..(-.65,.85);
+					\draw (-1.3,-1.85)
+					..controls +(40:.2) and +(-70:.12) ..(-1.02,-1.3);
+					\fill[rotate=10,color=candypink] (-.67,.57) ellipse (.11 and .08);
+					\fill[rotate=10,color=candypink!50] (-.2,.57) ellipse (.12 and .05);
+					\fill[rotate=5,color=candypink!50] (-1.15,.5) ellipse (.11 and .04);
+					\draw[bittersweet] (-.92,.22)
+					..controls +(-40:.1) and +(-120:.2) ..(-.5,.3)
+					..controls +(-110:.2) and +(-60:.1) ..cycle;
+					\draw (.75,-1.9) ..controls +(170:.2) and +(-60:.1) ..(.5,-1.75);
+					\draw (.46,1.15)
+					..controls +(-170:.8) and +(110:.35) ..(.4,1.4);
+			}}
+			
+			\tikzset{hop_sua/.pic={
+					\def\V{ 
+						(-2.15,1.9)
+						..controls +(30:.35) and +(150:.35) ..(2.15,1.9)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)
+						..controls +(150:.05) and +(-150:.05) ..(-2.15,1.9)
+						(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,-3.25)
+						..controls +(-150:.5) and +(-30:.5) ..(-2.15,-3.25)
+						..controls +(150:.05) and +(-150:.05) ..cycle
+						;
+					}
+					\fill[gainsboro] \V;
+					\draw \V;
+					
+					\def\H{ 
+						(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)--(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)--cycle
+						;
+					}
+					\fill[deepcarminepink!80] \H;
+					\draw \H;
+					\def\X{ 
+						(-1.8,1)
+						..controls +(30:.8) and +(150:.8) ..(1.8,1)
+						..controls +(-30:.3) and +(30:.4) ..(1.6,-.1)
+						..controls +(150:.35) and +(30:.35) ..(-1.6,-.1)
+						..controls +(150:.2) and +(-150:.2) ..cycle
+						;
+					}
+					\fill[melon] \X;
+					\draw \X;
+					
+					\node[rotate=10,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (-1.7,.4) 
+					{Ông};
+					\node[rotate=-5,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (0,.6) 
+					{Thọ};
+					\node[right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-1.2,-2.8) 
+					{Sữa đặc có đường};
+					\node[,right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (1.3,-2.25) 
+					{$380$ g};
+					\node[right,azure(colorwheel),scale=.7,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-.5,1.5) 
+					{VINAMILK};
+			}}
+			
+			
+			
+			\path(0,0)pic[scale=1]{hop_sua};
+			%		\path (.4,-1)pic[scale=.58]{ong_tho} ;
+		\end{tikzpicture}
+		\hspace*{1cm}
+		\begin{tikzpicture}[line join=round, line cap=round,scale=.5,transform shape]
+			\clip (-3,-4) rectangle (3,3);
+			
+			\tikzset{ong_tho/.pic={
+					\def\G{ 
+						(-1.02,-2.4)--(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)
+						..controls +(140:.2) and +(40:.2) ..cycle
+						(.05,-2.35)
+						..controls +(60:.15) and +(-140:.02) ..(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..cycle
+						;
+					}
+					\draw \G;
+					\fill[citrine] \G;
+					
+					\def\Vg{ 
+						%viền giày
+						(-1.06,-2.5)
+						..controls +(40:.02) and +(-140:.02) ..(-1,-2.45)
+						..controls +(-40:.2) and +(-140:.25) ..(-.52,-2.42)--(-.43,-2.42)
+						..controls +(-110:.2) and +(-100:.25) ..cycle
+						(.5,-2.2)
+						..controls +(-100:.25) and +(-40:.2) ..(.05,-2.35)--(-.05,-2.35)
+						..controls +(-40:.3) and +(-120:.3) ..(.6,-2.3)
+						..controls +(130:.05) and +(-30:.05) ..cycle
+						;
+					}
+					\fill[white] \Vg;
+					\draw \Vg;
+					\def\A{ 
+						(-1.3,-.2)
+						..controls +(-140:1) and +(60:1.2) ..(-2,-1.7)
+						..controls +(-70:.4) and +(-140:.35) ..(-1.3,-1.85)%tay áo
+						--(-1.35,-2.45)
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)--(.75,-1.9)
+						..controls +(35:.6) and +(-25:.8) ..(0,-.097)
+						..controls +(150:.25) and +(35:.2) ..cycle
+						;
+					}
+					\draw \A;
+					\fill[citrine] \A;
+					
+					\def\At{ 
+						(-1.95,-1.7)
+						..controls +(-70:.4) and +(-100:.6) ..(-1.25,-1.45)--(-1.2,-1.45)
+						..controls +(-95:.55) and +(-70:.5) ..(-2,-1.7)--cycle
+						(-1.35,-2.45)%viền tà dưới 
+						..controls +(25:.6) and +(170:.4) ..(-.5,-2.35)
+						..controls +(-10:.6) and +(170:.4) ..(.45,-2.15)
+						..controls +(-10:.2) and +(-120:.1) ..(.8,-2)%
+						..controls +(-70:.4) and +(20:.2) ..(.3,-2.25)
+						..controls +(-160:.2) and +(-20:.3) ..(-.5,-2.42)
+						..controls +(160:.2) and +(30:.4) ..(-1.3,-2.52)--cycle
+						(.53,-.7)--(.55,-.8)
+						..controls +(-30:.2) and +(120:.4) ..(.65,-1.5)
+						..controls +(-60:.2) and +(-40:.4) ..(.43,-1.6)
+						..controls +(140:.2) and +(-100:.1) ..(.4,-1)
+						..controls +(-160:.4) and +(150:.1) ..(.55,-1.8)
+						..controls +(-30:.2) and +(-65:.35) ..(.7,-1.4)
+						..controls +(125:.2) and +(-35:.35) ..cycle
+						;
+					}
+					\fill[white] \At;
+					\draw \At;
+					
+					\def\T{ 
+						(-1.4,.5)
+						..controls +(110:.1) and +(140:.3) ..(-1.5,.3)
+						..controls +(-80:.1) and +(160:.1) ..(-1.35,.1)--cycle
+						(-.1,.8)
+						..controls +(-10:.2) and +(70:.1) ..(-.1,.47)--cycle
+						;
+					}
+					\fill[apricot] \T;
+					\draw \T;
+					
+					\def\D{ 
+						(-1.5,.6)
+						..controls +(103:1.5) and +(83:1.1) ..(-.1,.8)
+						..controls +(-70:.85) and +(-83:1.05) ..cycle
+						;
+					}
+					\fill[apricot] \D;
+					\draw \D;
+					
+					%đai bụng
+					\def\dai{ 
+						(-.6,-1.65)--(-.5,-2.4)--(-.25,-2.5)--(-.05,-2.3)--(-.2,-1.59)
+						..controls +(-170:.2) and +(10:.2) ..cycle;
+					}
+					\fill[citrine] \dai;
+					\draw \dai;
+					\draw (-1.2,-1.55)
+					..controls +(-40:.4) and +(-140:.3) ..(.4,-1.35)
+					(-.9,-1.65)
+					..controls +(120:1) and +(70:.9) ..(.1,-1.49)
+					;
+					
+					\begin{CJK*}{UTF8}{gbsn}
+						\node[rotate=10,right,white,scale=1.7,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.8,-1.4) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.55,-1.85) {寿};
+						\node[rotate=10,right,white,scale=1,inner sep=0,align=left,font=\fontfamily{qag}\selectfont] at (-.47,-2.2) {寿};
+					\end{CJK*}
+					\def\R{ 
+						(-1,.75)
+						..controls +(170:.5) and +(110:.6) ..(-1.3,-.15)
+						..controls +(-110:.1) and +(120:.1) ..(-1.25,-.55)
+						..controls +(100:.1) and +(-100:.1) ..(-1.22,-.2)
+						..controls +(-35:.2) and +(60:.4) ..(-.6,-1.3)
+						..controls +(30:.35) and +(-100:.4) ..(-.2,-.05)
+						..controls +(-50:.2) and +(100:.2) ..(0,-.45)
+						..controls +(70:.2) and +(-30:.1) ..(-.05,0)
+						..controls +(150:.1) and +(-70:.2) ..(-.1,.5)
+						..controls +(100:.3) and +(30:.3) ..(-.65,.8)--(-.63,.78)
+						..controls +(30:.35) and +(40:.4) ..(-.25,.25)
+						..controls +(130:.2) and +(10:.1) ..(-.65,.35)--(-.64,.33)
+						..controls +(10:.2) and +(120:.1) ..(-.3,.2)
+						..controls +(-140:.1) and +(20:.02) ..(-.5,.1)%cằm
+						..controls +(-160:.05) and +(20:.05) ..(-.75,.05)
+						..controls +(-160:.05) and +(-20:.05) ..(-1.05,.08)
+						..controls +(75:.15) and +(160:.1) ..(-.8,.3)--(-.82,.32)
+						..controls +(160:.15) and +(60:.1) ..(-1.1,.1)
+						..controls +(170:.4) and +(170:.4) ..(-1.05,.72)--cycle
+						;
+					}
+					\fill[white] \R;
+					\draw \R;
+					
+					\def\gay{ 
+						(.35,-2.8)
+						..controls +(-70:.15) and +(-92:1) ..(.47,-2)
+						..controls +(88:.15) and +(-100:.3) ..(.4,.5)--(.42,.9)
+						..controls +(100:.3) and +(-100:.2) ..(.55,1.3)
+						..controls +(80:.7) and +(110:.6) ..(-.15,1.2)
+						..controls +(-40:.4) and +(85:.6) ..(.2,.4)
+						..controls +(-80:.4) and +(95:.2) ..cycle
+						;
+					}
+					\fill[antiquebrass] \gay;
+					\draw \gay;
+					%---------------------------------
+					\def\dao{ 
+						(-1.9,-1.7)
+						..controls +(140:1) and +(-70:.4) ..(-1.9,-.68)
+						..controls +(-5:1) and +(10:1) ..cycle;
+						;
+					}
+					\fill[pinksherbet] \dao;
+					\draw \dao;
+					\draw (-1.8,-1.7)
+					..controls +(160:.5) and +(-70:.6) ..(-1.9,-.7);
+					\def\la{ 
+						(-1.7,-1.7)
+						..controls +(110:.65) and +(150:.5) ..(-.8,-1.15)
+						..controls +(-160:.5) and +(10:.8) ..cycle
+						(-1.8,-1.7)
+						..controls +(110:.65) and +(50:.5) ..(-2.55,-1.3)
+						..controls +(-20:.4) and +(-175:.5) ..cycle
+						;
+					}
+					\fill[inchworm] \la;
+					\draw \la;
+					%-------------------------------------
+					\def\tay{ 
+						(.55,-.8)
+						..controls +(110:.05) and +(-30:.05) ..(.52,-.7)
+						..controls +(110:.05) and +(-30:.05) ..(.5,-.56)
+						..controls +(110:.05) and +(-30:.05) ..(.46,-.46)
+						..controls +(150:.05) and +(30:.05) ..(.2,-.5)
+						..controls +(-150:.05) and +(110:.05) ..(.21,-.6)
+						..controls +(-150:.02) and +(110:.05) ..(.22,-.7)
+						..controls +(-150:.02) and +(110:.05) ..(.25,-.8)
+						..controls +(-150:.02) and +(110:.05) ..(.28,-.9)
+						..controls +(20:.02) and +(110:.05) ..(.45,-.95)
+						..controls +(-70:.05) and +(170:.3) ..(.58,-1.24)
+						..controls +(70:.2) and +(-40:.15) ..cycle
+						(-1.9,-1.76)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.8,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.7,-1.79)
+						..controls +(-40:.02) and +(-30:.02) ..(-1.6,-1.8)
+						..controls +(-5:.06) and +(-120:.4) ..(-1.25,-1.55)
+						..controls +(-110:.06) and +(-170:.1) ..(-1.5,-1.65)
+						..controls +(95:.06) and +(10:.06) ..(-1.6,-1.55)
+						..controls +(170:.04) and +(10:.04) ..(-1.8,-1.52)
+						..controls +(170:.04) and +(10:.04) ..(-1.9,-1.56)
+						..controls +(-110:.04) and +(160:.04) ..cycle
+						;
+					}
+					\fill[apricot] \tay;
+					\draw \tay;
+					\draw (-1.6,-1.75)
+					..controls +(150:.04) and +(-140:.04) ..(-1.6,-1.55)
+					(-1.7,-1.74)
+					..controls +(150:.04) and +(-140:.04) ..(-1.7,-1.53)
+					(-1.8,-1.73)
+					..controls +(150:.04) and +(-140:.04) ..(-1.8,-1.52);
+					\draw (.52,-.69)
+					..controls +(110:.05) and +(30:.05) ..(.22,-.7)
+					(.5,-.56)
+					..controls +(110:.05) and +(30:.05) ..(.21,-.6)
+					(.55,-.8)
+					..controls +(110:.05) and +(30:.05) ..(.25,-.8)
+					;
+					
+					\def\B{ 
+						(-.1,.52)--(-.05,.44)
+						..controls +(-100:.15) and +(150:.2) ..(.08,.1)
+						..controls +(-88:1.05) and +(-15:1.1) ..(.43,.48)
+						..controls +(150:.15) and +(15:.2) ..(.1,.55)--(0.02,.63)--cycle
+						;
+					}
+					\fill[burntsienna] \B;
+					\draw \B;
+					\draw (.08,.1)
+					..controls +(-15:.2) and +(-150:.1) ..(.4,.15)
+					(.43,.48)
+					..controls +(-65:.15) and +(80:.15) ..(.45,.2)
+					;
+					
+					\draw[fill=burntsienna,rotate=35] (.3,.5) ellipse (.08 and .04);
+					
+					%-----------vẽ mắt mũi miệng
+					\draw (-.98,.6)
+					..controls +(-170:.1) and +(50:.12) ..(-1.17,.52)
+					(-.58,.65)
+					..controls +(40:.1) and +(160:.12) ..(-.35,.65)
+					;
+					\draw (-1.3,.87)
+					..controls +(-30:.3) and +(-130:.3) ..(-.4,1)
+					(-.93,.8)
+					..controls +(-30:.07) and +(-130:.09) ..(-.8,.81)
+					..controls +(50:.07) and +(-110:.12) ..(-.65,.85);
+					\draw (-1.3,-1.85)
+					..controls +(40:.2) and +(-70:.12) ..(-1.02,-1.3);
+					\fill[rotate=10,color=candypink] (-.67,.57) ellipse (.11 and .08);
+					\fill[rotate=10,color=candypink!50] (-.2,.57) ellipse (.12 and .05);
+					\fill[rotate=5,color=candypink!50] (-1.15,.5) ellipse (.11 and .04);
+					\draw[bittersweet] (-.92,.22)
+					..controls +(-40:.1) and +(-120:.2) ..(-.5,.3)
+					..controls +(-110:.2) and +(-60:.1) ..cycle;
+					\draw (.75,-1.9) ..controls +(170:.2) and +(-60:.1) ..(.5,-1.75);
+					\draw (.46,1.15)
+					..controls +(-170:.8) and +(110:.35) ..(.4,1.4);
+			}}
+			
+			\tikzset{hop_sua/.pic={
+					\def\V{ 
+						(-2.15,1.9)
+						..controls +(30:.35) and +(150:.35) ..(2.15,1.9)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)
+						..controls +(150:.05) and +(-150:.05) ..(-2.15,1.9)
+						(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)
+						..controls +(-30:.05) and +(30:.05) ..(2.15,-3.25)
+						..controls +(-150:.5) and +(-30:.5) ..(-2.15,-3.25)
+						..controls +(150:.05) and +(-150:.05) ..cycle
+						;
+					}
+					\fill[gainsboro] \V;
+					\draw \V;
+					
+					\def\H{ 
+						(2.15,1.8)
+						..controls +(150:.35) and +(30:.35) ..(-2.15,1.8)--(-2.15,-3.15)
+						..controls +(-30:.5) and +(-150:.5) ..(2.15,-3.15)--cycle
+						;
+					}
+					\fill[deepcarminepink!80] \H;
+					\draw \H;
+					\def\X{ 
+						(-1.8,1)
+						..controls +(30:.8) and +(150:.8) ..(1.8,1)
+						..controls +(-30:.3) and +(30:.4) ..(1.6,-.1)
+						..controls +(150:.35) and +(30:.35) ..(-1.6,-.1)
+						..controls +(150:.2) and +(-150:.2) ..cycle
+						;
+					}
+					\fill[melon] \X;
+					\draw \X;
+					
+					\node[rotate=10,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (-1.7,.4) 
+					{Ông};
+					\node[rotate=-5,right,alizarin,scale=2.7,inner sep=0,align=left,
+					font=\fontfamily{phv}\selectfont] at (0,.6) 
+					{Thọ};
+					\node[right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-1.2,-2.8) 
+					{Sữa đặc có đường};
+					\node[,right,white,scale=.8,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (1.3,-2.25) 
+					{$380$ g};
+					\node[right,azure(colorwheel),scale=.7,inner sep=0,align=left,
+					font=\fontfamily{qag}\selectfont] at (-.5,1.5) 
+					{VINAMILK};
+			}}
+			
+			
+			
+			\path(0,0)pic[scale=1]{hop_sua};
+			%		\path (.4,-1)pic[scale=.58]{ong_tho} ;
+		\end{tikzpicture}
+	\end{center}
+	\shortans{$59$} 
+	\loigiai{
+		Xét cấp số cộng với số hạng đầu $u_1=1$, công sai $d=2$.\\
+		Khi đó, tổng của $n$ số hạng đầu cấp số cộng là 
+		$$S_n=\dfrac{n}{2} \left[2u_1+(n-1)d\right]\Leftrightarrow 900=\dfrac{n}{2} [2\cdot 1+(n-1)\cdot 2]\Leftrightarrow 1800=2n^2 \Leftrightarrow n^2=900.$$ \\
+		Suy ra $n=30$.\\ 		
+		Vậy số hộp sữa của dãy cuối cùng là $u_{30}=u_1+29d=1+29\cdot2=59$.
+	}
+\end{bt}
+\begin{bt}%[1D2V2-4]
+	Cho bốn số thực tạo thành một cấp số cộng có tổng bằng $28$ và tổng các bình phương của chúng bằng $276$. Tìm tích của bốn số đó.
+	\shortans{$585$}  	
+	%Trả lời: 585
+	\loigiai{
+		Gọi bốn số cần tìm theo thứ tự cấp số cộng là $a-3r$, $a-r$, $a+r$, $a+3r$.\\
+		Ta có $\heva{&a-3r+a-r+a+r+a+3r=28 \\
+			&(a-3r)^2+(a-r)^2+(a+r)^2+(a+3r)^2=276}$\\
+			$\Leftrightarrow \heva{&4a=28 \\
+			&4a^2+20r^2=276}
+		\Leftrightarrow \heva{&a=7 \\
+			&r^2=4}\Leftrightarrow \heva{&a=7\\
+			&r=\pm 2.}$\\
+		Vậy bốn số cần tìm là  $1$, $5$, $9$, $13$; tích của chúng bằng $585$.
+	}
+\end{bt}
+\begin{bt}%[1D2H2-6]
+	Giải phương trình sau $(2x+1)+(2x+6)+(2x+11)+\cdots+(2x+96)=1010$.
+	\shortans{$1$}
+	%	Trả lời: $x=1$
+	\loigiai{
+		Ta có dãy số $(2x+1)$, $(2x+6)$, $(2x+11)$,$\ldots, (2x+96)$ lập thành cấp số cộng có $\heva{&{u_1=2x+1} \\
+			&{d=5} \\
+			&{u_n=2x+96} \\
+			&{S_n=1010}.
+		}$\\
+		Suy ra $2x+96=2x+1+(n-1)5\Rightarrow n=20$.\\
+		Vậy $S_{20}=1010\Leftrightarrow \dfrac{20}{2} \left(u_1+u_n \right)=1010\Leftrightarrow 10(2x+1+2x+96)=1010\Rightarrow x=1$.
+	}
+\end{bt}
+\begin{bt}%[1D2V2-7]
+	Một rạp xiếc có $35$ dãy ghế, dãy đầu tiên có $18$ ghế. Mỗi dãy sau có hơn dãy trước $4$ ghế. Hỏi rạp xiếc có tất cả bao nhiêu ghế?
+	\shortans{$3010$} 	
+	%	Trả lời: $3010$
+	\loigiai{
+		Số ghế của mỗi dãy (bắt đầu từ dãy đầu tiên) theo thứ tự đó lập thành một cấp số cộng có $35$ số hạng với công sai $d=4$ và $u_1=18$.\\ 		
+		Tổng số ghế là $S_{35}=u_1+u_2+\cdots+u_{35}=\dfrac{35\cdot [2\cdot 18+(35-1)\cdot 4]}{2}=3010$.
+	}
+\end{bt}
+\begin{bt}%[1D2V2-5]
+	Tìm tất cả các giá trị của tham số $m$ để phương trình sau có ba nghiệm phân biệt lập thành một cấp số cộng $x^3-3mx^2+2m(m-4)x+9m^2-m=0$.
+	\shortans{$1$} 	 	
+	%	Trả lời: $m=1$
+	\loigiai{
+		Phương trình $x^3-3mx^2+2m(m-4)x+9m^2-m=0$.\hfill{(*)}\\
+		Giả sử phương trình đã cho có ba nghiệm phân biệt $x_1$, $x_2$, $x_3$ lập thành một cấp số cộng.\\
+		Theo định lý Vi-ét đối với phương trình bậc ba, ta có $x_1+x_2+x_3=3m$.\hfill{(1)}\\
+		Vì $x_1, x_2, x_3$ lập thành một cấp số cộng nên $x_1+x_3=2x_2$.\hfill{(2)}\\
+		Thay (2) vào (1) ta được $3x_2=3m\Leftrightarrow x_2=m$.\\
+		Thay $x_2=m$ vào phương trình $(*)$ ta được
+		\[m^3-3m\cdot m^2+2m(m-4)\cdot m+9m^2-m=0\Leftrightarrow m^2-m=0\Leftrightarrow \hoac{&{m=0} \\
+			&{m=1}.
+		}
+		\]
+		Với $m=0$, ta có $x^3=0\Leftrightarrow x=0$ (loại vì phương trình có một nghiệm duy nhất).\\
+		Với $m=1$, ta có $x^3-3x^2-6x+8=0\Leftrightarrow x=1;x=-2;x=4$ (thỏa mãn).\\
+		Vậy $m=1$ thỏa mãn yêu cầu bài toán.
+	}
+\end{bt}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-1-C3B2-KQ}
