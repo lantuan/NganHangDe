@@ -62,11 +62,11 @@ Mỗi câu hỏi gồm:
 
 ## Đặt tên file output
 Quy tắc đặt tên file sinh ra:
-DYNAMIC_EXAMS/{Khoi}/de_{loai}_{khoi}_{nam}_{variant}.tex
+DYNAMIC_EXAMS/{Khoi}/de_{loai}_{khoi}_{ddmmyy}_{variant}.tex
 
 Ví dụ:
-DYNAMIC_EXAMS/Khoi10/de_15p_Khoi10_2025_v1.tex
-DYNAMIC_EXAMS/Khoi12/de_HK1_Khoi12_2025_v2.tex
+DYNAMIC_EXAMS/Khoi10/de_15p_Khoi10_170526_v1.tex
+DYNAMIC_EXAMS/Khoi12/de_HK1_Khoi12_020626_v2.tex
 
 ---
 
