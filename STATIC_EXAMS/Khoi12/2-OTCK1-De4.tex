@@ -1,0 +1,622 @@
+\subsection{Đề 4}
+\Opensolutionfile{ans}[ans/ans-2-OHK1-De4]
+\caulc
+%%Câu 1
+\begin{ex}%[2D1N1-1]
+	Hàm số $y=-x^3+3x^2+9x$ nghịch biến trên khoảng nào dưới đây?
+	\choice
+	{$(-1;3)$}
+	{\True $(3;+\infty)$}
+	{$(2;4)$}
+	{$(-\infty;1)$}
+	\loigiai{
+		Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+		Ta có $y'=-3x^2+6x+9$.\\
+		$y'=0\Leftrightarrow x=-1$ hoặc $x=3$.\\
+		Bảng biến thiên.
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.5,espcl=2,deltacl=0.5]
+				{$x$/.6, $f'(x)$/.6, $f(x)$/1.5}
+				{$-\infty$,$-1$,$3$,$+\infty$}
+				\tkzTabLine{,-,0,+,0,-,}
+				\draw 
+				(N12) node[below] (A) {$+\infty$}
+				(N23) node[above] (B) {$-5$}
+				(N32) node[below] (C) {$27$}
+				(N43) node[above] (D) {$-\infty$};
+				\draw[-stealth] (A)--(B);
+				\draw[-stealth] (B)--(C);
+				\draw[-stealth] (C)--(D);
+			\end{tikzpicture}
+		\end{center}
+		Vậy hàm số nghịch biến trên các khoảng $(-\infty;-1)$ và $(3;+\infty)$.
+	}
+\end{ex}
+\begin{ex}%[2D1N4-1]
+	Tìm số tiệm cận đứng của đồ thị hàm số $y=\dfrac{x^2-3x-4}{x^2-16}$.
+	\choice
+	{$2$}
+	{$3$}
+	{\True $1$}
+	{$0$}
+	\loigiai{
+		\begin{itemize}
+			\item Ta có $y=\dfrac{x^{2}-3x-4}{x^{2}-16}=\dfrac{(x+1)(x-4)}{(x+4)(x-4)}.$
+			\item Mà $\displaystyle \lim_{x \to -4^+} y = +\infty\Rightarrow x=-4$ là tiệm cận đứng của đồ thị.\\
+			Và $\mathop{\lim}\limits_{x \to 4} y = \dfrac{5}{8}\Rightarrow x=-4$ không là tiệm cận đứng của đồ thị.
+			\item Vậy đồ thị có $1$ tiệm cận đứng.
+		\end{itemize}
+	}
+\end{ex}
+\begin{ex}%[2H2N1-3]
+	Cho hình chóp $S.ABCD$ có $ABCD$ là hình vuông cạnh $ a $. Cạnh bên $ SA $ vuông góc với mặt đáy $ (ABCD) $ và $ SA=a\sqrt{3} $. Tích vô hướng của hai véc-tơ $\overrightarrow{CB} $ và $\overrightarrow{DS}$ bằng
+	\choice
+	{$a^2$}
+	{$2a^2$}
+	{$a^2\sqrt{2}$}
+	{\True$a^2\sqrt{3}$}
+	\loigiai{
+		\immini
+		{
+			Do  $ABCD$ là hình vuông nên  $\overrightarrow{CB} =\overrightarrow{DA}.$\\
+			$\Rightarrow \left (\overrightarrow{CB},\overrightarrow{DS}\right )=\left (\overrightarrow{DA},\overrightarrow{DS}\right )=\widehat{ADS}$.\\
+			Xét $ \triangle ASD $ vuông tại $ A $ có $SA=a\sqrt{3}$, $AD=a$, $SD=2a$.\\
+			$ \tan \widehat{ASD}=\dfrac{SA}{AD}=\sqrt{3} \Rightarrow \widehat{ASD}=60^\circ$.\\
+			Vậy $\overrightarrow{CB}\cdot\overrightarrow{DS}=\overrightarrow{DA}\cdot\overrightarrow{DS}=a\cdot 2a\cdot\cos60^\circ=a^2\sqrt{3}$.
+		}
+		{
+			\begin{tikzpicture}[scale=0.5, font=\normalsize, line join=round, line cap=round, >=stealth]
+				\path 
+				(0,0) coordinate (A)
+				(-2,-2) coordinate (B)
+				(3,-2) coordinate (C)
+				(5,0) coordinate (D)
+				(0,5)coordinate (S)
+				;
+				\begin{scope}
+					\clip (S)--(D)--(A);
+					\draw[fill=magenta!20] (D) circle(0.7cm);
+				\end{scope}
+				
+				\draw (B)--(C)--(D) (S)--(B)(S)--(C)(S)--(D)
+				pic [draw=red,fill=yellow!30,angle radius=3mm] {right angle = S--A--D};
+				\draw[dashed] (A)--(B) (A)--(C) (A)--(D) (S)--(A);
+				
+				\foreach \p/\r in {A/120,B/-120,C/-60,D/0,S/90}
+				\draw[fill=black] (\p) circle (0.7pt) node[shift={(\r:3mm)}]{$\p$};
+			\end{tikzpicture}
+		}
+		
+	}
+\end{ex}
+\begin{ex}%[2H2N2-2]
+	Trong không gian $Oxyz$ cho ba điểm $A\left(1;3;-2 \right)$, $ B\left(-1;1;4 \right)$, $C\left(3;4;1 \right) $. Tìm tọa độ điểm $D$ sao cho $ABCD$ là hình bình hành. 
+	\choice
+	{\True$D\left(5;6;-5\right)$}
+	{$D\left(5;6;5\right)$}
+	{$D\left(-5;6;5\right)$}
+	{$D\left(5;3;2\right)$}
+	\loigiai{
+		Ta có $\overrightarrow{AD}=\left(x_D-1;y_D-3;z_D+2 \right)$, $ \overrightarrow{BC}=\left(4;3;-3 \right)  $.\\
+		Ta có $ABCD$ là hình bình hành khi và chỉ khi
+		$$\overrightarrow{AD}=\overrightarrow{BC}\Leftrightarrow\heva{&x_D-1=4\\&y_D-3=3\\&z_D+2=-3}\Leftrightarrow \heva{&x_D=5\\&y_D=6\\&z_D=-5.}$$ 
+		Vậy $D\left(5;6;-5 \right) $.
+	}
+\end{ex}
+\begin{ex}%[2H2N2-3]
+	Trong không gian $Oxyz$, cho hai điểm $A(1;1;-2)$, $B(2;2;1)$. Vectơ $\overrightarrow{AB}$ có tọa độ là
+	\choice
+	{$(3;3;-1)$}
+	{$(-1;-1;-3)$}
+	{$(3;1;1)$}
+	{\True$(1;1;3)$}
+	\loigiai 
+	{
+		$$\overrightarrow{AB}=(2-1;2-1;1-(-2))=(1;1;3).$$
+	}
+\end{ex}
+
+\begin{ex}%[2H2N2-3]
+	Trong không gian $Oxyz$, cho hai véc-tơ $\overrightarrow{a}=(-4;5;-3)$ và $\overrightarrow{b}=(2;-2;1)$. Tọa độ của véc-tơ $\overrightarrow{a}+2\overrightarrow{b}$ là
+	\choice
+	{$(2;3;-2)$}
+	{\True$(0;1;-1)$}
+	{ $(0;-1;1)$}
+	{$(-8;9;1)$}
+	\loigiai 
+	{
+		Gọi $\overrightarrow{c}=(x;y;z)$ thỏa mãn $\overrightarrow{c}=\overrightarrow{a}+2\overrightarrow{b}$. Khi đó ta có:
+		$$\heva{&x=-4+2\cdot 2\\&y=5+2\cdot(-2)\\&z=-3+2\cdot 1}\Leftrightarrow \heva{&x=0\\&y=1\\&z=-1.} $$
+		Suy ra $\overrightarrow{c}=(0;1;-1)$.
+	}
+\end{ex}
+
+\begin{ex}%[2H2N2-4]%
+	Trong không gian $Oxyz$, tích vô hướng của hai véc-tơ $\overrightarrow{a}=(3;2;1)$ và $\overrightarrow{b}=(-5;2;-4)$ là
+	\choice
+	{$15$}
+	{\True$-15$}
+	{$-10$}
+	{$-7$}
+	\loigiai 
+	{
+		$$\overrightarrow{a}\cdot\overrightarrow{b}=-15+4-4=-15.$$
+	}
+\end{ex}
+\begin{ex}%[2D3N1-2]
+	Một phòng khám thống kê số bệnh nhân đến khám bệnh mỗi ngày trong tháng $ 4 $ năm $ 2024 $ ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline 
+			\textbf{Số bệnh nhân}	& $ \left[1 ; 10 \right]  $ & $ \left[ 11 ; 20\right]  $ & $ \left[ 21 ; 30\right]  $ & $ \left[ 31 ; 40\right]  $ & $ \left[41 ; 50 \right]  $ \\ 
+			\hline 
+			\textbf{Số ngày}	& $ 7 $ & $ 8 $ & $ 7 $ & $ 6 $ & $ 2 $ \\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+	Tìm khoảng biến thiên của mẫu số liệu ghép nhóm?
+	\choice
+	{$50$}
+	{\True $49$}
+	{$10$}
+	{$25$}
+	\loigiai{Khoảng biến thiên của mẫu số liệu ghép nhóm là $50-1=49$ bệnh nhân/ngày.}
+\end{ex}
+%%%Câu 9
+\begin{ex}%[2D3N1-3]
+	Thống kê cân nặng của 40 học sinh lớp 12A trong một trường phổ thông ta thu được bảng tần số ghép nhóm sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline 
+			\textbf{Cân nặng(kg)}	& $ \left[ 30;40\right)  $ & $ \left[ 40;50\right)  $ & $ \left[50;60 \right)  $ & $ \left[ 60;70\right)  $&$ \left[70;80 \right) $&$ \left[80;90 \right) $ \\ 
+			\hline 
+			\textbf{Số học sinh}	& $ 2 $ & $ 10 $ & $ 16 $ & $ 8 $&$2$&$2$ \\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+	Tứ phân vị thứ ba của mẫu số liệu ghép nhóm trên là
+	\choice
+	{ $55$}
+	{$60$}
+	{ $65$}
+	{\True $62{,}5$}
+	\loigiai{
+		Cỡ mẫu $N=40$.\\
+		Tứ phân vị thứ ba của mẫu số liệu trên là  $\dfrac{x_{30}+x_{31}}{2}$
+		đều thuộc nhóm $\left[60;70 \right)$ nên $$Q_3=60+\dfrac{\dfrac{3\cdot40}{4}-28}{8}\cdot\left(70-60\right)=62{,}5$$ 
+	}
+\end{ex}
+
+%%Câu 10
+\begin{ex}%[2D3N2-2]
+	Cho bảng số liệu  sau đây
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline 
+			\textbf{Nhóm} & $[1{,}5; 2{,}5)$ & $ [2{,}5; 3{,}5)$ & $ [3{,}5; 4{,}5)$ & $ [4{,}5; 5{,}5)$ & $ [5{,}5; 6{,}5)$   \\
+			\hline
+			\textbf{Tần số}&$2$ & $3$ & $7$ & $2$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}\noindent
+	Phương sai của mẫu số liệu  là
+	\choice
+	{$ s^2 = \dfrac{82}{15}$}
+	{$ s^2 = \dfrac{233}{75}$}
+	{\True $ s^2 = \dfrac{82}{75}$}
+	{$ s^2 = \dfrac{233}{15}$}
+	\loigiai{
+		Cỡ mẫu: $N= 15$.
+		\begin{center}
+			\begin{tabular}{|l|c|c|c|c|c|}
+				\hline 
+				\textbf{Nhóm} & $[1{,}5; 2{,}5)$ & $ [2{,}5; 3{,}5)$ & $ [3{,}5; 4{,}5)$ & $ [4{,}5; 5{,}5)$ & $ [5{,}5; 6{,}5)$   \\
+				\hline
+				\textbf{Giá trị đại diện } & $2$ & $3$ & $4$ & $5$ & $6$\\
+				\hline
+				\textbf{Tần số}&$2$ & $3$ & $7$ & $2$ & $1$ \\   \hline
+			\end{tabular}
+		\end{center}
+		\noindent
+		Giá trị trung bình $\overline{x}= \dfrac{2 \cdot 2 + 3 \cdot 3 + 4 \cdot 7 + 5 \cdot 2 + 6 \cdot 1}{15}= 3{,}8$.\\
+		Phương sai: $$s^2= \dfrac{2 \cdot (2 - 3{,} 8)^2 + 3 \cdot (3- 3{,}8)^2  + 7 \cdot  (4- 3{,}8)^2+ 2\cdot (5- 3{,}8)^2 + (6- 3{,}8)^2  }{15 }= \dfrac{82}{75}.$$}
+\end{ex}
+%%%%Câu 11
+\begin{ex}%[2D3H1-3]
+	Hằng ngày ông Thắng đều đi xe buýt từ nhà đến cơ quan. Dưới đây là bảng thống kê thời gian của $100$ lần ông Thắng đi xe buýt từ nhà đến cơ quan.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Thời gian (phút) & $[15;18)$ & $[18;21)$ & $[21;24)$ & $[24;27)$ & $[27;30)$ & $[30;33)$ \\
+			\hline
+			Số lượt & $22$ & $38$ & $27$ & $8$ & $4$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm trên là
+	\choice
+	{$\dfrac{693}{38}$}
+	{$\dfrac{68}{3}$}
+	{\True $\dfrac{505}{114}$}
+	{$\dfrac{4663}{114}$}
+	
+	\loigiai{
+		Cỡ mẫu $n=100$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{100}$ là mẫu số liệu gốc gồm thời gian $100$ lần đi xe buýt của ông Thắng.\\
+		Ta có $x_1$, \ldots, $x_{22}\in[15;18)$; $x_{23}$, \ldots, $x_{60}\in[18;21)$; $x_{61}$, \ldots, $x_{87}\in[21;24)$; $x_{88}$, \ldots, $x_{95}\in[24;27)$; $x_{96}$, \ldots, $x_{99}\in[27;30)$; $x_{100}\in[30;33)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{x_{25}+x_{26}}{2}\in[18;21)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+		$$Q_1=18+\dfrac{\dfrac{100}{4}-22}{38}\cdot(21-18)=\dfrac{693}{38}.$$
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{x_{75}+x_{76}}{2}\in[21;24)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+		$$Q_3=21+\dfrac{\dfrac{3\cdot100}{4}-(22+38)}{27}\cdot(24-21)=\dfrac{68}{3}.$$
+		Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là $\Delta_Q=Q_3-Q_1=\dfrac{505}{114}$.
+	}
+\end{ex}
+%%Câu 12
+\begin{ex}%[2D3H2-2]
+	Cho mẫu số liệu ghép nhóm thống kê mức lương của công ty $\mathrm{A}$ (đơn vị: triệu đồng).
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline Nhóm & \begin{tabular}{c} 
+				Giá trị \\
+				đại diện
+			\end{tabular} & Tần số \\
+			\hline$[10 ; 15)$ & 12,5 & 15 \\
+			{$[15 ; 20)$} & 17,5 & 18 \\
+			{$[20 ; 25)$} & 22,5 & 10 \\
+			{$[25 ; 30)$} & 27,5 & 10 \\
+			{$[30 ; 35)$} & 32,5 & 5 \\
+			{$[35 ; 40)$} & 37,5 & 2 \\
+			\hline & & $n=60$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính độ lệch chuẩn của mẫu số liệu ghép nhóm biểu diễn mức lương của công ty $\mathrm{A}$.
+	\choice
+	{$6$}
+	{\True $7$}
+	{$8$}
+	{$9$}
+	\loigiai{
+		\begin{itemize}
+			\item Số trung bình công ty $\mathrm{A}$
+			$$\bar{x}_A=\dfrac{12{,}5\cdot 15+17{,}5\cdot 18+22{,}5\cdot 10+27{,}5\cdot 10+32,5\cdot 5+37{,}5\cdot 2}{60}=\dfrac{62}{3}\approx 20{,}7$$
+			\item Phương sai của mẫu số liệu công ty $\mathrm{A}$
+			$$
+			\begin{aligned}
+				s^2_A  =&\dfrac{1}{60}\left[15\cdot(20{,}7-12{,}5)^2+18\cdot(20{,}7-17{,}5)^2\right. \\
+				& +10\cdot(20{,}7-22{,}5)^2+10\cdot(20{,}7-27{,}5)^2+5\cdot(20{,}7-32{,}5)^2+2\cdot(20{,}7-37{,}5)^2 \left. \right]\\
+				&  \approx 49{,}14.
+			\end{aligned}
+			$$
+			\item Độ lệch chuẩn công ty $\mathrm{A}$ là $s_A\approx 7.$
+		\end{itemize}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OHK1-De4}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-OHK1-De4-DS]
+%ds 1; TH; B4-Khao sat 
+\begin{ex}%[2D1H5-7]
+	Cho hàm số $y = f(x)$ liên tục và có đạo hàm trên từng khoảng xác định của nó và có bảng biến thiên 
+	\begin{center}
+			\begin{tikzpicture}
+					\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.5,deltacl=0.6]
+					{$x$ /0.6,$y'$ /0.6,$y$ /2}
+					{$-\infty$,$-4$,$-2$,$0$,$+\infty$}
+					\tkzTabLine{,+,$0$,-,d,-,$0$,+,}
+					\tkzTabVar{-/$-\infty$,+/$-10$,-D+/$-\infty$/$+\infty$,-/$-2$,+/$+\infty$}
+				\end{tikzpicture}
+		\end{center}
+	Các mệnh đề nào sau đây là đúng hay sai?
+	\choiceTF
+	{\True Hàm số đồng biến trên khoảng $(-\infty; -10)$}
+	{Hàm số đồng biến trên khoảng $(-2;+\infty)$}
+	{Hàm số có giá trị lớn nhất là $-10$}
+	{\True Hàm số có giá trị nhỏ nhất là $-2$ trên khoảng $(-1;+\infty)$}
+	\loigiai{
+			\begin{itemchoice}
+					\itemch Đúng. Hàm số đồng biến trên $(-\infty;-4)$ nên hàm số cũng đồng biến trên $(-\infty;-10)$.
+					\itemch Sai. Trên khoảng $(-2;+\infty)$ vừa có nghịch biến trên $(-2;0)$ vừa có đồng biến trên $(0;+\infty)$.
+					\itemch Sai. Giá trị $-10$ chỉ lớn nhất trên $(-\infty;-2)$.
+					\itemch Đúng. Hàm số có giá trị nhỏ nhất là $-2$ trên khoảng $(-1;+\infty)$.
+				\end{itemchoice}
+		}
+\end{ex}
+%ds 2; TH; Bai 6- Vecto trong khong gian
+\begin{ex}%[2H2H1-3]
+	Cho hình hộp chữ nhật $ABCD.A'B'C'D'$ có $AB = 3a, AD = 4a, AA' = 5a$. Các mệnh đề sau là đúng hay sai?
+	\choiceTF
+	{$\overrightarrow{AB} + \overrightarrow{AD} + \overrightarrow{CC'} = \overrightarrow{C'A} $}
+	{\True Độ dài vec-tơ $\left|\overrightarrow{AC}\right| = 5a$}
+	{\True $\overrightarrow{BC} = \overrightarrow{AC} - \overrightarrow{AB}$}
+	{Tích vô hướng $\overrightarrow{AC'} \cdot \overrightarrow{AA'} = 25 \sqrt{2} a^2$}
+	\loigiai{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,line join=round, line cap=round, >=stealth]
+			\path 
+			(0,0) coordinate (A)
+			++(-130:3) coordinate (B)
+			++(0:6) coordinate (C)
+			($(A)+(C)-(B)$) coordinate (D)
+			($(A)!1/2!(B)$) coordinate (M)
+			($(A)!1/2!(D)$) coordinate (N)
+			;
+			\foreach \i in {A,B,C,D}{
+				\coordinate (\i') at ($(\i)+(0,-4)$);
+			}
+			\path ($(A)!1/3!(A')$) coordinate (P);
+			\draw[->, thick] (A)--(B);
+			\draw[->, thick] (A)--(D);
+			\draw[->, thick] (A)--(C);
+			\draw[->, thick, dashed] (A)--(C');
+			\draw (B)--(C)--(D);
+			\draw (B)--(B')--(C')--(C) (C')--(D')--(D);
+			\draw[dashed,thin](B')--(A')--(D') (A')--(A);
+			\pic["$45^{\circ}$",draw,angle eccentricity=1.8,angle radius=6mm]{angle=A'--A--C'};
+			\foreach \i/\g in {A'/45,B'/-90,C'/-90,D'/0,A/90,B/180,C/-30,D/0}
+			\fill[black] (\i) circle(0pt)+(\g:5mm)node[scale=1]{$\i$};
+			\draw (M) circle(0pt) + (180:6mm) node {$3a$};
+			\draw (N) circle(0pt) + (90:4mm) node {$4a$};
+			\draw (P) circle(0pt) + (180:5mm) node {$5a$};
+		\end{tikzpicture}
+		
+		\begin{itemchoice}
+			\itemch Sai. $\overrightarrow{AB} + \overrightarrow{AD} + \overrightarrow{CC'} = \overrightarrow{AC} + \overrightarrow{CC'} = \overrightarrow{AC'} $.
+			\itemch Đúng. $\left|\overrightarrow{AC}\right| = \sqrt{AB^{2} + BC^{2}} = 5a$.
+			\itemch Đúng. Quy tắc hiệu hai vec-tơ.
+			\itemch Sai.\\
+			Vì $AC = AA' = 5a$ nên $ACC'A'$ là hình vuông.\\
+			Do đó, góc $\widehat{A'AC'} = 45^{\circ}$.\\
+			$\Rightarrow \overrightarrow{AC'} \cdot \overrightarrow{AA'} = \left|AC'\right| \cdot \left|AA'\right| \cos \widehat{A'AC'} = \sqrt{AC^2 + CC'^{2}} \cdot 5a \cdot \cos 45^{\circ} = 25a^{2}$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ds 3; VD; Bai 7- He truc toa do trong khong gian
+\begin{ex}%[2H2V2-6]
+	\immini{
+		Để theo dõi hành trình của một chiếc máy bay, ta có thể lập hệ trục tọa độ $Oxyz$ có gốc tọa độ $O$ trùng với vị trí của trung tâm kiểm soát không lưu, mặt phẳng $Oxy$ trùng với mặt đất (được coi là mặt phẳng) với trục $Ox$ hương về phía tây, trục $Oy$ hướng về phía nam và trục $Oz$ hướng thẳng đứng lên trời. Sau khi cất cánh đạt độ cao nhất định, chiếc máy bay duy trì hướng bay về phái nam với tốc độ không đổi $1200$~km/h trong nửa giờ. Đơn vị đo chiều dài trong không gian $Oxyz$ là km. Các mệnh đề sau đây đúng hay sai?
+	}{
+	
+	}
+	\choiceTF
+	{\True Vec-tơ biểu diễn độ dịch chuyển của máy bay là $\overrightarrow{v} = (0;600;0)$}
+	{\True Lúc máy bay còn trên mặt đất, điểm đặt máy bay có dạng $(x;y;0)$}
+	{Tọa độ của máy bay luôn có độ cao dương}
+	{Nếu chọn trục $Oy$ hướng về phía bắc, thì vec-tơ biểu diễn độ dịch chuyển của máy bay là $(x;1200;z)$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Khoảng cách $1200 \cdot 0{,}5 = 600$ km. Điểm đầu là $(x;y;z)$ điểm cuối $(x;y+600;z)$. Khi đó, vec-tơ biểu diễn dịch chuyển là $(0;600;0)$.
+			\itemch Đúng. Máy bay còn trên mặt đất, lúc đó điểm biểu diễn nằm trên mặt phẳng $Oxy$ nên có dạng $(x;y;0)$.
+			\itemch Sai. Máy bay có thể hạ độ cao xuống vùng trũng thấp hơn mặt đất, nên có thể độ cao âm.
+			\itemch Sai. Nếu chọn $Oy$ hướng bắc thì vec-tơ biểu diễn độ dịch chuyển là $(0;-600;0)$.
+		\end{itemchoice}
+	}
+\end{ex}
+%ds 4; NB; Bai 10-Phuong sai do lech chuan
+\begin{ex}%[2D3N2-2]
+	Trong trang trại ruồi lính đen. Tuổi thọ của $2$ giống ruồi lính đen (đơn vị: tháng) được nuôi ở hai lồng khác nhau.
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline
+			Tuổi thọ (tháng) & $[1;2)$ & $[2;3)$ & $[3;4)$ & $[4;5)$ & $[5;6)$ \\
+			\hline
+			Ruồi lính đen Malaysia & $1$ & $8$ & $60$ & $28$ & $3$ \\
+			\hline
+			Ruồi lính đen Brasil & $2$ & $20$ & $46$ & $28$ & $4$ \\
+			\hline
+		\end{tabular}	
+	\end{center}
+	Các mệnh đề sau đây đúng hay sai?
+	\choiceTF
+	{Tuổi thọ trung bình của ruồi lính đen Malaysia là $3{,}62$}
+	{Sự biến động về tuổi thọ trung bình của ruồi lính đen Malaysia cao hơn ruồi lính đen Brasil}
+	{\True Phương sai mẫu số liệu về tuổi thọ ruồi lính đen Malaysia là $0{,}4624$}
+	{\True Độ lệch chuẩn mẫu số liệu về tuổi thọ ruồi lính đen Brasil là $0{,}84$}
+	\loigiai{
+		\begin{center}
+			\begin{tabular}{|l|c|c|c|c|c|}
+				\hline
+				Tuổi thọ (tháng) đại diện & $1{,}5$ & $2{,}5$ & $3{,}5$ & $4{,}5$ & $5{,}5$ \\
+				\hline
+				Ruồi lính đen Malaysia & $1$ & $8$ & $60$ & $28$ & $3$ \\
+				\hline
+				Ruồi lính đen Brasil & $2$ & $20$ & $46$ & $28$ & $4$ \\
+				\hline
+			\end{tabular}	
+		\end{center}
+		Tổng số ruồi lính đen Malaysia: $n_1 = 1 + 8 + 60 + 28 + 3 = 100$.\\
+		Tổng số ruồi lính đen Brasil: $n_2 = 2 + 20 +46 + 28 + 4  = 100$.\\
+		Tuổi thọ trung bình của ruồi lính đen Malaysia:
+		$$\overline{x}_{1} = \dfrac{1}{100} \left[1 \cdot 1{,}5 + 8 \cdot 2{,}5 + 60 \cdot 3{,}5 + 28 \cdot 4{,}5 + 3 \cdot 5{,}5\right] = 3{,}74.$$
+		Tuổi thọ trung bình của ruồi lính đen Brasil:
+		$$\overline{x}_{2} = \dfrac{1}{100} \left[2 \cdot 1{,}5 + 20 \cdot 2{,}5 + 46 \cdot 3{,}5 + 28 \cdot 4{,}5 + 4 \cdot 5{,}5\right] = 3{,}62.$$
+		Phương sai và độ lệch chuẩn của mẫu số liệu về tuổi thọ ruồi lính đen Malaysia:
+		$$s_{1}^{2} = \dfrac{1}{100}\left[1 \cdot 1{,}5^2 + 8 \cdot 2{,}5^2 + 60 \cdot 3{,}5^2 + 28 \cdot 4{,}5^2 + 3 \cdot 5{,}5^2 \right] - 3{,}74^{2} = 0{,}4624.$$
+		$$\Rightarrow s_1 = \sqrt{0{,}4624} \approx 0{,}68.$$
+		Phương sai và độ lệch chuẩn của mẫu số liệu về tuổi thọ ruồi lính đen Brasil:
+		$$s_{2}^{2} = \dfrac{1}{100}\left[2 \cdot 1{,}5^2 + 20 \cdot 2{,}5^2 + 46 \cdot 3{,}5^2 + 28 \cdot 4{,}5^2 + 4 \cdot 5{,}5^2 \right] - 3{,}62^{2} = 0{,}7056.$$
+		$$\Rightarrow s_2 = \sqrt{0{,}7056} \approx 0{,}84.$$
+		\begin{itemchoice}
+			\itemch Sai. Tuổi thọ trung bình của ruồi lính đen Malaysia là $3{,}74$.
+			\itemch Sai.
+			\itemch Đúng. Sự biến động về tuổi thọ trung bình của ruồi lính đen Malaysia thấp hơn ruồi lính đen Brasil vì độ lệch chuẩn $0{,}68 < 0{,}84$.
+			\itemch Đúng. Độ lệch chuẩn mẫu số liệu về tuổi thọ ruồi lính đen Brasil là $0{,}84$.
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-OHK1-De4-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-OHK1-De4-KQ]
+\caukq
+\begin{ex}%[2H2N1-2]
+	Trong không gian $Oxyz$ cho hai điểm  $A\left(-1;2;3\right)$, $ B\left(2;3;-2 \right)$. Tìm tung độ điểm $M$ thuộc $Oy$ sao cho tam giác $ABM$ cân tại $M$.
+	\shortans{$1{,}5$} 
+	\loigiai{
+		Gọi $m$ là tung độ của điểm $M$ cần tìm. Vì $M\in Oy$ nên $M\left(0;m;0 \right)$.\\ 
+		Tam giác $ABM$ cân tại $M$ khi và chỉ khi 
+		\allowdisplaybreaks
+		\begin{eqnarray*}  
+			MA=MB&\Leftrightarrow& \left(0+1 \right)^2+\left( m-2\right) ^2+\left( 0-3\right)^2=\left(0-2 \right)^2+\left( m-3\right) ^2+\left( 0+2\right)^2\\
+			&\Leftrightarrow&2m=3\Leftrightarrow m=\dfrac{3}{2}.
+		\end{eqnarray*}
+		Vậy $M\left(0;\dfrac{3}{2};0 \right)$.
+	}
+\end{ex}
+\begin{ex}%[2D1H5-1]%
+	Cho hàm số bậc ba $y=f(x)$ có đồ thị như hình vẽ. Tìm giá trị $f(5)$.
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (-1,0)--(4.5,0) node [below]{$x$};
+			\draw[->] (0,-1.5)--(0,4) node [left]{$y$};
+			\path[] (0,0) node [above left=1pt]{$O$};
+			\clip (-1,-1.5) rectangle (4.5,4);
+			\draw[smooth, samples=100, domain=-1:4] plot (\x, {(\x)^3-6*(\x)^2+9*(\x)-1});
+			\draw[dashed] (1,0)|-(0,3) (3,0)|-(0,-1);
+			\fill (1,0) circle (1.5pt)node[below]{$1$} (3,0)node[above]{$3$} circle (1.5pt) (0,3)circle(1.5pt)node[left]{$3$} (0,-1)circle(1.5pt)node[left]{$-1$};
+		\end{tikzpicture}
+	\end{center}
+	\shortans{$19$}
+	\loigiai{
+		Gọi hàm số có dạng $y=ax^3+bx^2+cx+d \Rightarrow y'=3ax^2+2bx+c$.\\
+		Đồ thị hàm số đi qua điểm $(0,-1)$, $(1,3)$, $(3,-1)$ và đạt cực tiểu tại điểm $x=3$.
+		$$\Rightarrow \heva{&d=-1\\
+			&a+b+c+d=3\\
+			&27a+9b+3c+d=-1\\
+			&27a+6b+c=0} \Leftrightarrow \heva{&a=1\\&b=-6\\&c=9\\&d=-1} \Rightarrow y=f(x)=x^3-6x^2+9x-1.$$
+		Vậy $f(5)=5^3-6 \cdot 5^2+9 \cdot 5 -1=19$.
+	}
+\end{ex}
+
+\begin{ex}%[2D3H1-3]
+	Tốc độ của 20 xe hơi khi đi qua một trạm kiểm tra tốc độ (đơn vị km/h) được thống kê lại như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Tốc độ (km/h) &{$[42;46)$} &{$[46;50)$} &{$[50;54)$} &{$[54;58)$} &{$[58;62)$} \\
+			\hline Số xe & $ 3 $ & $ 7 $ & $ 4 $ & $ 3 $ & $ 3 $ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm khoảng tứ phân vị của mẫu số liệu trên (kết quả làm tròn đến hàng phần mười).
+	\shortans{$7{,}4$}
+	\loigiai{
+		\begin{itemize}
+			\item Ta có khoảng biến thiên $ R=62-42=20 $.
+			\item Ta có nhóm chứa trung vị là nhóm  $[46;50)$ từ đó ta có
+			$$ Q_2=46+\dfrac{\dfrac{20}{2}-3}{7}(50-46)=50. $$
+			\item Ta có nhóm chứa tứ phân vị thứ nhất là nhóm  $[46;50)$ từ đó ta có
+			$$ Q_1=46+\dfrac{\dfrac{20}{4}-3}{7}(50-46)=\dfrac{330}{7}. $$
+			\item Ta có nhóm chứa tứ phân vị thứ ba là nhóm  $[54;58)$ từ đó ta có
+			$$ Q_3=54+\dfrac{\dfrac{3\cdot20}{4}-14}{7}(58-54)=\dfrac{382}{7}. $$
+			Từ đó suy ra khoảng tứ phân vị $ \Delta_Q=Q_3-Q_1=\dfrac{52}{7} \approx 7{,}4 $.
+		\end{itemize}
+	}
+\end{ex}
+\begin{ex}%[2D3V2-2]
+	Điều tra chi phí thuê nhà ở hằng tháng của một số nhân viên độc thân, công ty $X$ thu được số liệu dưới đây
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline \begin{tabular}{l} 
+				{\bf Tiền thuê nhà} \\
+				{\bf (trăm nghìn đồng)}
+			\end{tabular} 
+			& {$[3 ; 6)$} & {$[6 ; 9)$} & {$[9 ; 12)$} & {$[12 ; 15)$} & {$[15 ; 18)$} \\
+			\hline {\bf Số nhân viên} & $64$ & $40$ & $84$ & $56$ & $16$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính độ lệch chuẩn chi phí thuê nhà hằng tháng của những nhân viên được điều tra (kết quả làm tròn đến hàng phần chục).
+	\shortans{$14{,}4$}
+	\loigiai{
+		Bổ sung thêm các giá trị đại diện, ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|l|c|c|c|c|c|}
+				\hline \begin{tabular}{l} 
+					{\bf Tiền thuê nhà} \\
+					{\bf (trăm nghìn đồng)}
+				\end{tabular} 
+				& {$[3 ; 6)$} & {$[6 ; 9)$} & {$[9 ; 12)$} & {$[12 ; 15)$} & {$[15 ; 18)$} \\
+				\hline {\bf Giá trị đại diện} & $4{,}5$ & $7{,}5$ & $11{,5}$ & $13{,}5$ & $16{,}5$ \\
+				\hline {\bf Số nhân viên} & $64$ & $40$ & $84$ & $56$ & $16$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Từ mẫu số liệu đã cho, ta tính được số trung bình là
+		$$\overline{x}=\dfrac{4{,}5\cdot 64 + 7{,}5\cdot 40 + 11{,}5\cdot 84 + 13{,}5 \cdot 56 + 16{,}5\cdot 16}{64+40+84+56+16}=9{,}9.$$
+		Và trung bình cộng của các bình phương số liệu thống kê là
+		$$\overline{x^2}=\dfrac{4{,}5^2\cdot 64 + 7{,}5^2\cdot 40 + 11{,}5^2\cdot 84 + 13{,}5^2 \cdot 56 + 16{,}5^2\cdot 16}{64+40+84+56+16}=\dfrac{29217}{260}.$$
+		Từ đó ta có độ lệch chuẩn chi phí thuê nhà hàng tháng của những nhân viên được điều tra là
+		$$s=\sqrt{\overline{x^2}-\left(\overline{x}\right)^2}\approx 14{,}36.$$
+	}
+\end{ex}
+
+\begin{ex}%%[2H2C1-3]
+	Cho hình hộp $A B C DA'B'C'D'$ có tất cả các mặt là hình vuông cạnh $a$. Gọi $M$ là trung điểm $AB$. Tính góc giữa hai véc-tơ $\overrightarrow{A'M}$ và $\overrightarrow{AD'}$ (làm tròn đến độ).
+	\shortans{$51$}
+	\loigiai{
+		\immini{
+			Ta có
+			\begin{eqnarray*}
+				\cos \left(\overrightarrow{A'M}, \overrightarrow{AD'}\right)&=&\dfrac{\overrightarrow{A'M}. \overrightarrow{AD'}}{A'M.AD'} \\
+				&=& \dfrac{\left(\overrightarrow{A'A}+ \overrightarrow{AM}\right).\left(\overrightarrow{AA'}+ \overrightarrow{A'D'}\right)}{A'M.AD'}\\
+				&=&\dfrac{\overrightarrow{AA'}^2}{A'M.AD'}\\
+				&=&\dfrac{a^2}{\dfrac{\sqrt{5}a}{2}.\sqrt{2}a}\\ &=&\dfrac{\sqrt{10}}{5}.
+			\end{eqnarray*}
+		}{
+			\begin{tikzpicture}[line cap=round,line join=round,scale=1.5]
+				\def\h{-2}
+				\path 
+				(0,0) coordinate (B)--+(0,\h) coordinate (B')
+				(-130:1) coordinate (A)--+(0,\h) coordinate (A')
+				(2.5,0) coordinate (C)--+(0,\h) coordinate (C')
+				($(A)+(C)-(B)$) coordinate (D)--+(0,\h) coordinate (D')
+				($(B)!.5!(C)$) 
+				($(A)!.5!(B)$) 
+				($(A)!.5!(A')$) 
+				($(A')!.5!(D')$)
+				($(A)!.5!(B)$) coordinate (M);
+				\draw (A)--(B)--(C)--(D)--cycle (A)--(A')--(D')--(C')--(C) (D')--(D)  (A)--(D')
+				;	
+				\draw[dashed] (A')--(B')--(C') (B)--(B') (A')--(M);
+				\foreach \t/\g in {A'/-90,B'/160,C'/0,D'/-90,A/180,B/90,C/90,D/-40,M/180}{\draw[fill=red,draw=black] (\t) circle (0.5pt) node[shift={(\g:6pt)}]{$\t$};
+				}
+		\end{tikzpicture}}
+		Vì hình hộp $A B C DA'B'C'D'$ có tất cả các mặt là hình vuông nên $\heva{&\overrightarrow{A'A}\cdot \overrightarrow{A'D'}=0\\&\overrightarrow{AM}\cdot \overrightarrow{AA'}=0\\&\overrightarrow{AM}\cdot \overrightarrow{A'D'}=0.}$ \\
+		Suy ra, $\left(\overrightarrow{A'M}, \overrightarrow{AD'}\right)\approx 51^\circ$.\\
+		Vậy $\left(A'M,AD'\right)\approx 51^\circ$.
+	}	
+\end{ex}
+\begin{ex}%%[2H2C2-5]
+	Trong không gian với hệ trục tọa độ $ Oxyz $, cho hình hộp $ ABCD.A'B'C'D' $. Biết $ A(-3;2;1) $, $ C(4;2;0) $, $ B'(-2;1;1) $, $ D'(3;5;4) $. Gọi $G(a;b;c)$ là trọng tâm của $\triangle A'BD$. Tính $a+b+c$.
+	\shortans{$3$}
+	\loigiai{\immini{Gọi $ E $ là trung điểm của $ B'D' $, $ F $ là trung điểm của $ AC $ và $ A'(x;y;z) $.\\
+			Khi đó ta có $ E\left(\dfrac{1}{2};3;\dfrac{5}{2}\right) $ và $ F\left(\dfrac{1}{2};2;\dfrac{1}{2}\right)$\\ $\Rightarrow \overrightarrow{FE}=\left(0;1;2\right)$.\\
+			Ta có $ \overrightarrow{FE}=\overrightarrow{AA'} $ nên $ \heva{&x+3=0\\&y-2=1\\&z-1=2} \Leftrightarrow \heva{&x=-3\\&y=3\\&z=3.} $\\
+			Vậy $ A'(-3;3;3) $.
+		}
+		{\begin{tikzpicture}[scale=0.7, line join = round, line cap = round]
+				\coordinate (A) at (0,0);
+				\coordinate (D) at (5,0);
+				\coordinate (B) at (-2,-2);
+				\coordinate (C) at ($(B)+(5,0)$);
+				\coordinate (A') at ($(A)+(1,4)$);
+				\coordinate (B') at ($(B)+(1,4)$);
+				\coordinate (C') at ($(C)+(1,4)$);
+				\coordinate (D') at ($(D)+(1,4)$);
+				\coordinate (E) at ($(B')!0.5!(D')$);
+				\coordinate (F) at ($(A)!0.5!(C)$);
+				\coordinate (G) at ($(A')!2/3!(F)$);
+				\draw (A')--(B')--(C')--(D')--(D)--(C)--(B)--(B') (A')--(D') (C)--(C') (B')--(D') (A')--(C');
+				\draw[dashed] (D)--(B)--(A)--(A') (A)--(D) (A)--(C) (E)--(F)--(A');
+				\foreach \x/\g in {A'/180,B'/180,C'/0,D'/0,E/90,A/170,B/180,C/-40,D/0,F/-90,G/180}\fill[black] (\x) circle (1pt)+(\g:3mm) node{$ \x $};
+		\end{tikzpicture}}
+		Gọi $G(a;b;c)$ là trọng tâm của $\triangle A'BD$. Vì $A'F$ la trung tuyến của $\triangle A'BD$ nên $\overrightarrow{A'G}=\dfrac{2}{3}\overrightarrow{A'F}$.\\
+		Lại có $\overrightarrow{A'G}=\left(a+3;b-3;c-3\right)$ và $\overrightarrow{A'F}=\left( \dfrac{1}{2}+3;2-3;\dfrac{1}{2}-3\right)=\left(\dfrac{7}{2};-1;-\dfrac{5}{2}\right)$.\\
+		$\overrightarrow{A'G}=\dfrac{2}{3}\overrightarrow{A'F}\Leftrightarrow \heva{&a+3=\dfrac{2}{3}\cdot\dfrac{7}{2}\\&b-3=\dfrac{2}{3}\cdot (-1)\\&c-3=\dfrac{2}{3}\cdot\dfrac{-5}{2}}\Leftrightarrow\heva{&a=-\dfrac{2}{3}\\&b=\dfrac{7}{3}\\&c=\dfrac{4}{3}.}$\\
+		Vậy $a+b+c=\dfrac{-2}{3}+\dfrac{7}{3}+\dfrac{4}{3}=3$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OHK1-De4-KQ}

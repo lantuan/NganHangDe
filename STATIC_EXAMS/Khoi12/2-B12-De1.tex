@@ -1,0 +1,336 @@
+\section{Tích phân}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-2-B12-De1-lc]
+\caulc
+\begin{ex}%[2D4N2-1]
+    Khẳng định nào sau đây \textbf{sai}?
+    \choice 
+        {$\displaystyle\int\limits_a^b[f(x)+g(x)] \mathrm{\,d}x=\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x+\displaystyle\int\limits_a^b g(x) \mathrm{\,d}x$}
+        {$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=\displaystyle\int\limits_c^b f(x) \mathrm{\,d}x+\displaystyle\int\limits_a^c f(x) \mathrm{\,d}x$}
+        {\True $\displaystyle\int\limits_a^b f(x)\mathrm{\,d}x=\displaystyle\int\limits_b^a f(x) \mathrm{\,d}x$}
+        {$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=\displaystyle\int\limits_a^b f(t) \mathrm{\,d}t$}
+    \loigiai{$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=-\displaystyle\int\limits_b^a f(x) \mathrm{\,d}x$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-1]
+     Cho hai số thực $a, b$ tùy ý, $F(x)$ là một nguyên hàm của hàm số $f(x)$ trên tập $\mathbb{R}$. Mệnh đề nào dưới đây là đúng?
+     \choice
+        {$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=f(b)-f(a)$}
+        {\True $\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=F(b)-F(a)$}
+        {$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=F(a)-F(b)$}
+        {$\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=F(b)+F(a)$}
+    \loigiai{Theo định nghĩa, ta có $\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x=F(b)-F(a)$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-1]
+    Cho hàm số $f(x)$ có đạo hàm liên tục trên đoạn $[a ; b]$ và $f(a)=-2, f(b)=-4$. Tính $T=\displaystyle\int\limits_a^b f^{\prime}(x) \mathrm{\,d}x$.
+    \choice 
+        {$T=-6$}
+        {$T=2$}
+        {$T=6$}
+        {\True $T=-2$}
+    \loigiai{Ta có $T=\displaystyle\int\limits_a^b f^{\prime}(x) \mathrm{\,d}x=\left.f(x)\right|_a ^b=f(b)-f(a)=-2$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+    Tính tích phân $I=\displaystyle\int\limits_0^3 \dfrac{\mathrm{\,d}x}{x+2}$.
+    \choice 
+     {$I=\dfrac{4581}{5000}$}
+     {$I=\log \dfrac{5}{2}$}
+     {\True $I=\ln \dfrac{5}{2}$}
+     {$I=-\dfrac{21}{100}$}
+    \loigiai{Ta có $I=\displaystyle\int\limits_0^3 \dfrac{\mathrm{\,d}x}{x+2}=\left.\ln |x+2|\right|_0 ^3=\ln \dfrac{5}{2}$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-3]
+    Tính tích phân $\displaystyle\int\limits_0^\pi \sin 3 x \mathrm{\,d} x$.
+    \choice 
+        {$-\dfrac{1}{3}$}
+        {$\dfrac{1}{3}$}
+        {$-\dfrac{2}{3}$}
+        {\True $\dfrac{2}{3}$}
+    \loigiai{Ta có $\displaystyle\int\limits_0^\pi \sin 3 x \mathrm{\,d} x=-\left.\dfrac{1}{3} \cos 3 x\right|_0 ^\pi=-\dfrac{1}{3}(-1-1)=\dfrac{2}{3}$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+    Tính $I=\displaystyle\int\limits_0^1\left(\dfrac{1}{2 x+1}+3 \sqrt{x}\right) \mathrm{\,d}x$.
+    \choice 
+        {\True $2+\ln \sqrt{3}$}
+        {$4+\ln 3$}
+        {$2+\ln 3$}
+        {$1+\ln \sqrt{3}$}
+    \loigiai{Ta có \\
+    $I=\displaystyle\int\limits_0^1\left(\dfrac{1}{2 x+1}+3 \sqrt{x}\right) \mathrm{\,d}x=\displaystyle\int\limits_0^1 \dfrac{1}{2 x+1} \mathrm{\,d} x+3 \displaystyle\int\limits_0^1 \sqrt{x} \mathrm{\,d} x$\\
+    $
+    =\left.\dfrac{1}{2} \ln |2 x+1|\right|_0 ^1+\left.3 \cdot \dfrac{2}{3} x \sqrt{x}\right|_0 ^1=\dfrac{1}{2} \ln 3+2=\ln \sqrt{3}+2$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+    Số nghiệm nguyên âm của phương trình $x^3-ax+2=0$ với $a=\displaystyle\int\limits_1^{3\mathrm{e}} \dfrac{1}{x} \mathrm{\,d} x$ là
+    \choice
+    {$0$}
+    {\True $1$}
+    {$2$}
+    {$3$}
+    \loigiai{Ta có $a=\displaystyle\int\limits_1^{3 e} \frac{1}{x} \mathrm{\,d} x=\left.(\ln |x|)\right|_1 ^{3 e}=3 \\
+    \Rightarrow x^3-3 x+2=0  \Rightarrow(x-1)^2(x+2)=0 \Rightarrow x=1 \vee x=-2$.
+        }
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+     Cho hàm số $y=f(x)=\heva{&3 x^2  \text { khi } 0 \leq x \leq 1 \\ & 4-x  \text { khi } 1 < x \leq 2}$. Tính tích phân $\displaystyle\int\limits_0^2 f(x) \mathrm{\,d}x$.
+     \choice 
+        {\True $\dfrac{7}{2}$}
+        {$1$}
+        {$\dfrac{5}{2}$}
+        {$\dfrac{3}{2}$}
+    \loigiai{Ta có
+        $$
+        \displaystyle\int\limits_0^2 f(x) \mathrm{\,d}x=\displaystyle\int\limits_0^1 f(x) \mathrm{\,d}x+\displaystyle\int\limits_1^2 f(x) \mathrm{\,d}x=\displaystyle\int\limits_0^1\left(3 x^2\right) \mathrm{\,d}x+\displaystyle\int\limits_1^2(4-x) \mathrm{\,d}x=\left.\dfrac{3 x^3}{3}\right|_1 ^2+\left.\left(4 x-\dfrac{x^2}{2}\right)\right|_1 ^2=\dfrac{7}{2} .
+        $$
+        }
+\end{ex}
+
+\begin{ex}%[2D4N2-4]
+    Tích phân $I=\displaystyle\int\limits_0^{2018} 2^x \mathrm{\,d} x$ bằng
+    \choice 
+        {$2^{2018}-1$}
+        {$\dfrac{2^{2018}-1}{\ln 2}$}
+        {$\dfrac{2^{2018}}{\ln 2}$}
+        {\True $2^{2018}$}
+    \loigiai{$
+      I=\displaystyle\int\limits_0^{2018} 2^x \mathrm{\,d} x=\left.\dfrac{2^x}{\ln 2}\right|_0 ^{2018}=\dfrac{2^{2018}-1}{\ln 2} .
+     $}
+\end{ex}
+
+\begin{ex}%[2D4N2-3]
+    Tích phân $I=\displaystyle\int\limits_{\frac{\pi}{4}}^{\frac{\pi}{3}} \dfrac{\mathrm{\,d} x}{\sin ^2 x}$ bằng
+    \choice
+    {$\cot \dfrac{\pi}{3}-\cot \dfrac{\pi}{4}$}
+    {$\cot \dfrac{\pi}{3}+\cot \dfrac{\pi}{4}$}
+    {\True $-\cot \dfrac{\pi}{3}+\cot \dfrac{\pi}{4}$}
+    {$-\cot \dfrac{\pi}{3}-\cot \dfrac{\pi}{4}$}
+    \loigiai{Ta có 
+    $I=\displaystyle\int\limits_{\frac{\pi}{4}}^{\frac{\pi}{3}} \dfrac{\mathrm{\,d} x}{\sin ^2 x}=-\left.\cot x\right|_{\frac{\pi}{4}} ^{\frac{\pi}{3}}=-\cot \dfrac{\pi}{3}+\cot \dfrac{\pi}{4}$.
+    }
+\end{ex}
+\begin{ex}%[2D4V2-6]
+    Một đám vi trùng tại ngày thứ $t$ có số lượng $N(t)$, biết rằng tốc độ phát triển của vi trùng là $N^{\prime}(t)=\dfrac{7\,000}{t+2}$ và lúc đầu đám vi trùng có $300\,000$ con. Sau $10$ ngày, đám vi trùng có khoảng bao nhiêu con (làm tròn đến chữ số hàng đơn vị)?
+    \choice 
+        {$302\,542$ con}
+        {$322\,542$ con}
+        {\True $312\,542$ con}
+        {$332\,542$ con}
+    \loigiai{Ta có $N(t)=\displaystyle\int\limits N^{\prime}(t) \mathrm{\,d} t=\displaystyle\int\limits \dfrac{7\,000}{t+2} \mathrm{\,d} t=7\,000 \ln |t+2|+C$.\\
+    Do $N(0)=300\,000 \Rightarrow C=300\,000-7\,000 \ln 2$.\\
+    Khi đó $N(10)=7\,000 \ln 12+300\,000-7\,000 \ln 2=312\,542$.
+    }
+\end{ex}
+
+\begin{ex}%[2D4V2-6]
+    Một người lái xe ô tô đang chạy với vận tốc $20$ m/s thì người lái xe phát hiện có hàng rào ngăn đường ở phía trước cách $45$ m (tính từ vị trí đầu xe đến hàng rào) vì vậy, người lái xe đạp phanh. Từ thời điểm đó xe chuyển động chậm dần đều với vận tốc $v(t)=-5 t+20$ m/s, trong đó $t$ là khoảng thời gian tính bằng giây, kể từ lúc bắt đầu đạp phanh. Hỏi từ lúc đạp phanh đến khi dừng hẳn, xe ô tô còn cách hàng rào ngăn cách bao nhiêu mét (tính từ vị trí đầu xe đến hàng rào)?
+    \choice 
+        {\True $5$ m}
+        {$4$ m}
+        {$6$ m} 
+        {$3$ m}
+    \loigiai{Xe đang chạy với vận tốc $v=20$ m/s tương ứng với thời điểm $t=0$ s.\\
+    Khi xe đừng lại $v(t)=0\Rightarrow t=4$ (s).\\
+    Quãng đường xe đã đi là $S=\displaystyle\int\limits_0^4(-5 t+20) \mathrm{\,d} t=\left.\left(-\dfrac{5}{2} t^2+20 t\right)\right|_0 ^4=40$ (m).\\
+    Vậy ô tô cách hàng rào một đoạn $45-40=5$ (m).
+    }
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B12-De1-lc}
+\Opensolutionfile{ans}[ans/ans-2-B12-De1-ds]
+\cauds
+\setcounter{ex}{0}
+\begin{ex}%[2D4N2-2]
+    Tích phân $I=\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d}x$.
+    \choiceTF
+    {$\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1\left(1+x\right) \mathrm{\,d}x$}
+    {\True $\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1\left(1-\dfrac{1}{x+1}\right) \mathrm{\,d} x$}
+    {\True $I=1-\ln 2$}
+    {Biểu thức $\mathrm{e}^{I}=\dfrac{\mathrm{e}}{4}$}
+   \loigiai{
+        \begin{itemchoice}
+            \itemch Sai. $\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1\left(1-\dfrac{1}{x+1}\right) \mathrm{\,d} x$.
+            \itemch Đúng. $\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1 \dfrac{x+1-1}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1\left(1-\dfrac{1}{x+1}\right) \mathrm{\,d} x$.
+            \itemch Đúng. $I=\displaystyle\int\limits_0^1 \dfrac{x}{x+1} \mathrm{\,d} x=\displaystyle\int\limits_0^1\left(1-\dfrac{1}{x+1}\right) \mathrm{\,d} x=\left.(x-\ln |x+1|)\right|_0 ^1=1-\ln 2$.
+            \itemch Sai. Biểu thức $\mathrm{e}^{I}=\mathrm{e}^{1-\ln2}=\dfrac{\mathrm{e}}{2}$.
+        \end{itemchoice}
+        }
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+    Cho tích phân $I=\displaystyle\int\limits_a^b\left(x^2+1\right) \mathrm{\,d} x$.
+    \choiceTF 
+    {\True $I=\displaystyle\int\limits_a^b\left(x^2+1\right) \mathrm{\,d} x=\displaystyle\int\limits_a^b x^2 \mathrm{\,d} x+\displaystyle\int\limits_a^b \mathrm{\,d} x$}
+    {$I=\left.\left(x^3+x\right)\right|_a ^b$}
+    {\True $I=\dfrac{1}{3} b^3+b-\dfrac{1}{3} a^3-a$}
+    {\True Với $a=0, b=1$ thì $I=\dfrac{4}{3}$}
+        \loigiai{     
+        \begin{itemchoice}
+            \itemch Đúng. Do tính chất của tích phân $\displaystyle\int\limits_a^b f(x) +g(x)  \mathrm{\,d}x=\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x+\displaystyle\int\limits_a^b g(x) \mathrm{\,d}x$.
+            \itemch Sai. $I=\displaystyle\int\limits_a^b\left(x^2+1\right) \mathrm{\,d} x=\left.\left(\dfrac{1}{3} x^3+x\right)\right|_a ^b$.
+            \itemch Đúng. $        I=\displaystyle\int\limits_a^b\left(x^2+1\right) \mathrm{\,d} x=\left.\left(\dfrac{1}{3} x^3+x\right)\right|_a ^b=\dfrac{1}{3} b^3+b-\dfrac{1}{3} a^3-a$.
+            \itemch Đúng. $I=\displaystyle\int\limits_0^1\left(x^2+1\right) \mathrm{\,d} x = \left.\left(\dfrac{1}{3} x^3+x\right)\right|_0^1= \dfrac{4}{3}$.
+        \end{itemchoice}}
+\end{ex}
+
+\begin{ex}%[2D4N2-2]
+    Cho hai tích phân $I_1=\displaystyle\int\limits_{-1}^1\left(x^4+2 x^3\right) \mathrm{\,d} x, I_2= \displaystyle\int\limits_{-2}^{-1}\left(x^2+3 x\right) \mathrm{\,d} x$.
+    \choiceTF
+    {$I_1=\dfrac{1}{5}$}
+    {\True $I_2=-\dfrac{13}{6}$} 
+    {$P=\dfrac{I_1}{I_2}=\dfrac{12}{65}$}
+    {\True $5I_1+6I_2=-11$}
+    \loigiai{
+       \begin{itemchoice}
+           \itemch Sai. $I_1=\displaystyle\int\limits_{-1}^1\left(x^4+2 x^3\right) \mathrm{\,d} x=\left.\left(\dfrac{1}{5} x^5+\dfrac{1}{2} x^4\right)\right|_{-1} ^1=\dfrac{2}{5} $.
+            \itemch Đúng. $I_2=\displaystyle\int\limits_{-2}^{-1}\left(x^2+3 x\right) \mathrm{\,d} x=\left.\left(\dfrac{1}{3} x^3+\dfrac{3}{2} x^2\right)\right|_{-2} ^{-1}=-\dfrac{13}{6}$.
+            \itemch Sai. $P=\dfrac{I_1}{I_2}=\dfrac{\frac{2}{5}}{-\frac{13}{6}}=-\dfrac{12}{65}$.
+            \itemch Đúng. $5I_1+6I_2=5\cdot \dfrac{2}{5} -6\cdot \dfrac{13}{6}=-11$.
+       \end{itemchoice}
+        }    
+\end{ex}
+
+\begin{ex}%[2D4V2-2]
+    Cho hàm số $y=f(x)=\heva{&\dfrac{2}{x+1} & \text { khi } & 0 \leq x < 1 \\& 2 x-1 & \text { khi } & 1 \leq x \leq 3.}$
+    \choiceTF
+    {\True Tích phân $\displaystyle\int\limits_0^1 f(x) \mathrm{\,d} x=\displaystyle\int\limits_0^1 \dfrac{2}{x+1} \mathrm{\,d}x $}
+    {Tích phân $\displaystyle\int\limits_2^3 f(x) \mathrm{\,d} x=\displaystyle\int\limits_0^1 \dfrac{2}{x+1} \mathrm{\,d}x $}
+    {\True Tích phân $\displaystyle\int\limits_1^3 f(x) \mathrm{\,d} x =6 $}
+    {\True Tích phân $\displaystyle\int\limits_0^3 f(x) \mathrm{\,d}x = 6+\ln 4$}
+    \loigiai{
+    \begin{itemchoice}
+        \itemch Đúng. Tích phân $\displaystyle\int\limits_0^1 f(x) \mathrm{\,d} x=\displaystyle\int\limits_0^1 \dfrac{2}{x+1} \mathrm{\,d}x $.
+        \itemch Sai. Tích phân $\displaystyle\int\limits_2^3 f(x) \mathrm{\,d} x=\displaystyle\int\limits_2^3 2x-1 \mathrm{\,d}x $.
+        \itemch Đúng. Tích phân $\displaystyle\int\limits_1^3 f(x) \mathrm{\,d} x=\displaystyle\int\limits_1^3 2x-1 \mathrm{\,d}x =6 $.
+        \itemch Đúng. $\displaystyle\int\limits_0^3 f(x) \mathrm{\,d}x=\displaystyle\int\limits_0^1 f(x) \mathrm{\,d}x+\displaystyle\int\limits_1^3 f(x) \mathrm{\,d}x\\=        \displaystyle\int\limits_0^1 \dfrac{2}{x+1} \mathrm{\,d} x+\displaystyle\int\limits_1^3(2 x-1) \mathrm{\,d}x$ $=\left.2 \ln |x+1|\right|_0 ^1+\left.\left(x^2-x\right)\right|_1 ^3=\ln 4+6$.
+    \end{itemchoice}
+    }
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B12-De1-ds}
+\Opensolutionfile{ans}[ans/ans-2-B12-De1-kq]
+\caukq
+\setcounter{ex}{0}
+\begin{ex}%[2D4N2-3]
+    Cho tích phân $\displaystyle\int\limits_0^{\frac{\pi}{2}} \dfrac{\cos 2 x}{1+\sin x} \mathrm{\,d} x=a+b \pi$ với $a, b \in \mathbb{Q}$. Tính $P=1+a^3+b^2$.
+    \shortans{$-25$}
+    \loigiai{$\displaystyle\int\limits_0^{\frac{\pi}{2}} \dfrac{\cos 2 x}{1+\sin x} \mathrm{\,d} x=\displaystyle\int\limits_0^{\frac{\pi}{2}} \dfrac{1-2 \sin ^2 x}{1+\sin x} \mathrm{\,d} x=\displaystyle\int\limits_0^{\frac{\pi}{2}}\left(-2 \sin x+2-\dfrac{1}{1+\sin x}\right) \mathrm{\,d} x$\\
+    $=\displaystyle\int\limits_0^{\frac{\pi}{2}}\left(-2 \sin x+2-\dfrac{1}{1+\cos \left(\frac{\pi}{2}-x\right)}\right) \mathrm{\,d} x=\left.(2 \cos x+2 x)\right|_0 ^{\frac{\pi}{2}}-\int_0^{\frac{\pi}{2}} \dfrac{1}{2 \cos ^2\left(\frac{x}{2}-\frac{\pi}{4}\right)} \mathrm{\,d} x$.\\
+   $=-2+\pi-\left.\dfrac{1}{2} \cdot 2 \tan \left(\dfrac{x}{2}-\dfrac{\pi}{4}\right)\right|_0 ^{\frac{\pi}{2}}=-3+\pi $\\
+    Vậy $a=-3, b=1 \Rightarrow P=1+a^3+b^2=-25 $.
+    }
+\end{ex}
+
+\begin{ex}%[2D4V2-2]
+    Cho $I=\displaystyle\int\limits_0^1 \dfrac{1}{3+2 x-x^2} \mathrm{\,d} x=(a-b) \ln 2+b \ln 3$. Tính $a+b$.
+    \shortans{$0{,}5$}
+    \loigiai{Ta có
+            $I=\displaystyle\int\limits_0^1 \dfrac{1}{3+2 x-x^2} \mathrm{\,d} x =\displaystyle\int\limits_0^1\left(\dfrac{\frac{1}{4}}{x+1}+\dfrac{\frac{1}{4}}{3-x}\right)\mathrm{\,d} x \\
+            =\left.\dfrac{1}{4}(\ln |x+1|-\ln |x-3|)\right|_0 ^1=\dfrac{1}{4} \ln 3 \Rightarrow a=b=\dfrac{1}{4} \Rightarrow a+b=\dfrac{1}{2}.
+            $}
+\end{ex}
+
+\begin{ex}%[2D4V2-2]
+    Tìm số thực dương $m$ để tích phân $\displaystyle\int\limits_0^m\left(x-x^2\right) \mathrm{\,d}x$ có giá trị lớn nhất.
+    \shortans{$1$}
+    \loigiai{$$
+        P=\displaystyle\int\limits_0^m\left(x-x^2\right) \mathrm{\,d}x=\left.\left(\dfrac{x^2}{2}-\dfrac{x^3}{3}\right)\right|_0 ^m=\dfrac{m^2}{2}-\dfrac{m^3}{3} \text {. }
+        $$
+        Đặt $f(m)=\dfrac{m^2}{2}-\dfrac{m^3}{3} \Rightarrow f^{\prime}(m)=m-m^2 \Rightarrow f^{\prime}(m)=0 \Leftrightarrow m=0$ hoặc $m=1$.\\
+        Lập bảng biến thiên
+   \begin{center}
+	\begin{tikzpicture}
+        \tkzTabInit[nocadre=false,lgt=1.5,espcl=2.5,deltacl=1]
+	       {$m$ /0.7,$f'(m)$ /0.7,$f(m)$ /2}
+	       {$0$,$1$,$+\infty$}
+	       \tkzTabLine{,+,$0$,-,}
+            \tkzTabVar{-/$-\infty$,+/$\dfrac{1}{6}$,-/$-\infty$}
+		\end{tikzpicture}
+    \end{center}
+        Vậy $f(m)$ đạt GTLN tại $m=1$.
+        }
+\end{ex}
+
+\begin{ex}%[2D4V2-6]
+    Tại một nơi không có gió, một chiếc khí cầu đang đứng yên ở độ cao 162 (m) so với mặt đất đã được phi công cài đặt cho nó chế độ chuyển động đi xuống. Biết rằng, khí cầu đã chuyển động theo phương thẳng đứng với vận tốc tuân theo quy luật $v(t)=10 t-t^2$, trong đó $t$ (phút) là thời gian tính từ lúc bắt đầu chuyển động, $v(t)$ được tính theo đơn vị mét/phút (m/p). Nếu như vậy thì khi bắt đầu tiếp đất vận tốc $v$ của khí cầu bằng bao nhiêu m/p?
+    \shortans{$9$}
+    \loigiai{
+    Gọi thời điểm khí cầu bắt đầu chuyển động là $t=0$, thời điểm khinh khí cầu bắt đầu tiếp đất là $t_1$.\\
+    Quãng đường khí cầu đi được từ thời điểm $t=0$ đến thời điểm khinh khí cầu bắt đầu tiếp đất $t=t_1$ là
+    $$
+    \begin{aligned}
+    	& \displaystyle\int\limits_0^{t_1}\left(10 t-t^2\right) \mathrm{\,d} t=5 t_1^2-\dfrac{t_1^3}{3}=162 \\
+    	& \Leftrightarrow t \approx-4{,}93 \vee t \approx 10{,}93 \vee t=9.
+    \end{aligned}
+    $$
+    Do vận tốc chuyển động $v(t) \geq 0 \Leftrightarrow 0 \leq t \leq 10$ nên chọn $t_1=9$.\\
+    Vậy khi bắt đầu tiếp đất vận tốc $v$ của khí cầu là $v(9)=10\cdot9-9^2=9$ m/p.	
+    }
+\end{ex}
+
+\begin{ex}%[2D4V2-6]
+    Gọi $h(t)$ cm là mức nước trong bồn chứa sau khi bơm được $t$ giây. Biết rằng tốc độ tăng giảm của mực nước là $h^{\prime}(t)=\dfrac{1}{5} \sqrt[3]{t+8}$ (cm/s) và lúc đầu bồn không có nước. Tìm mức nước ở bồn (đơn vị: cm) sau khi bơm nước được $6$ giây (làm tròn đến chữ số hàng phần trăm).
+    \shortans{$2{,}66$}
+    \loigiai{Hàm $h(t)=\displaystyle\int\limits \dfrac{1}{5} \sqrt[3]{t+8} \mathrm{\,d} t=\dfrac{3}{20}(t+8) \sqrt[3]{t+8}+C$.\\
+        Lúc $t=0$, bồn không chứa nước. Suy ra $h(0)=0 \Rightarrow \dfrac{12}{5}+C=0 \Leftrightarrow C=-\dfrac{12}{5}$.\\
+        Vậy, hàm $h(t)=\dfrac{3}{20}(t+8) \sqrt[3]{t+8}-\dfrac{12}{5}$.\\
+        Mức nước trong bồn sau $6$ giây là $h(6) \simeq 2{,}66$ cm.
+        }
+\end{ex}
+
+\begin{ex}%[2D4C2-6]
+    Một vật chuyển động với vận tốc tăng liên tục được biểu thị bằng đồ thị là đường cong parabol ở hình bên dưới.
+        \begin{center}
+        \begin{tikzpicture}[>=stealth]
+	\draw[->] (-0.5,0) --(0,0) node[below
+	right]{$O$} -- (5,0)
+	node[below]{$t(s)$};
+	\draw[->](0,-0.5)--(0,5)
+	node[right]{$v(m)$};
+	\draw[smooth,blue,line width=1]
+	plot[domain=0:4]
+	(\x,{-(\x)^(2)+4*\x});
+         \draw[dashed] (0,4) node[left]{} -- (2,4) --(2,0);
+        \draw (2,0) node[below] {$10$};
+        \draw (0,4) node[left] {$50$};
+         \end{tikzpicture}
+         \end{center} 
+    Biết rằng sau $10$s thì vật đó đạt đến vận tốc cao nhất và bắt đầu giảm tốc. Hỏi từ lúc bắt đầu đến lúc đạt vận tốc cao nhất thì vật đó đi được quãng đường bao nhiêu mét (làm tròn đến chữ số hàng đơn vị)?
+    \shortans{333}
+         \loigiai{Giả sử vận tốc của vật biểu diển bởi hàm số $(P)\colon v(t)=a t^2+b t+c \quad(a \neq 0)$.\\
+         Dựa vào đồ thị hàm số ta có $(P)$ đi qua $O(0 ; 0)$ và có đỉnh $I(10 ; 50)$.
+        $$
+        \Rightarrow \heva{& 
+         c = 0  \\ &
+        1 0 0 a + 1 0 b = 5 0 \\&
+         - \dfrac { b } { 2 a } = 1 0 }
+         \Rightarrow
+         \heva {&      
+        c = 0  \\&
+        1 0 a + b = 5 \\&
+        2 0 a + b = 0 }
+        \Rightarrow
+       \heva {&
+        c=0 \\&
+        a=-\dfrac{1}{2} \\&
+        b=10}
+        \Rightarrow (P) \colon v(t)=-\dfrac{1}{2} t^2+10 t.$$
+         Lúc bắt đầu: $t=0$ s; lúc đạt vận tốc cao nhất: $t=10$ s.\\
+         Vậy quãng đường vận đó đi được kể từ lúc bắt đầu đến lúc đạt vận tốc cao nhất là
+         $$s=\displaystyle\int\limits_0^{10} v(t) \mathrm{\,d} t=\displaystyle\int\limits_0^{10}\left(-\dfrac{1}{2} t^2+10 t\right) \mathrm{\,d} t=\dfrac{1000}{3}\simeq 333.$$
+        }
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B12-De1-kq}
+
+
+
+
+
+

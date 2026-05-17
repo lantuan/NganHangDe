@@ -1,0 +1,378 @@
+\section{Ôn tập chương 2}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-2-OTC2]
+\caulc
+%%%============EX_6==============%%%
+\begin{ex}%[2H2N1-2]
+Cho tứ diện $ABCD$. Gọi $M$ và $P$ lần lượt là trung điểm của $AB$ và $CD$. Đặt $\overrightarrow{AB}=\overrightarrow{b}$, $\overrightarrow{AC}=\overrightarrow{c}$, $\overrightarrow{AD}=\overrightarrow{d}$. Khẳng định nào sau đây đúng?
+	\choice
+		{$\overrightarrow{MP}=\dfrac{1}{2} \left(\overrightarrow{c}+\overrightarrow{d}+\overrightarrow{b}\right)$}
+		{$\overrightarrow{MP}=\dfrac{1}{2} \left(\overrightarrow{d}+\overrightarrow{c}-\overrightarrow{b}\right)$}
+		{$\overrightarrow{MP}=\dfrac{1}{2} \left(\overrightarrow{c}+\overrightarrow{b}-\overrightarrow{d}\right)$}
+		{\True $\overrightarrow{MP}=\dfrac{1}{2} \left(\overrightarrow{c}+\overrightarrow{d}-\overrightarrow{b}\right)$}
+	\loigiai{\;
+	\begin{center}
+	\begin{tikzpicture}[scale=1,>=stealth,line join=round,line cap=round,font=\footnotesize]
+	\def\a{4}
+	\path 	(0:0) coordinate (B)
+			++(0:\a) coordinate (D)
+			++(-135:\a/2) coordinate (C)
+			($(B)+(70:\a)$) coordinate (A)
+			($(A)!0.5!(B)$) coordinate (M)
+			($(C)!0.5!(D)$) coordinate (P);
+	\draw[dashed,thick] 	(B)--(D)	(M)--(P);
+	\draw[thick] 			(B)--(A)node[midway, left]{$\overrightarrow{b}$}  (A)--(D)node[midway, right]{$\overrightarrow{d}$} (A)--(C)node[midway, right]{$\overrightarrow{c}$}
+					(B)--(C)--(D)	;
+	\foreach \x/\g in {A/90,B/180,C/-45,D/0,M/30,P/0}
+			\fill[black] 	(\x) circle (1pt)
+			($(\g:3mm)+(\x)$) node {$\x$};
+\end{tikzpicture}
+	\end{center}	
+	Ta có $\overrightarrow{MP}=\overrightarrow{AP}-\overrightarrow{AM}=\dfrac{1}{2} \left(\overrightarrow{AC}+\overrightarrow{AD}\right)-\dfrac{1}{2} \overrightarrow{AB}=\dfrac{1}{2} \left(\overrightarrow{c}+\overrightarrow{d}-\overrightarrow{b}\right)$.}
+\end{ex}
+%%%============EX_2==============%%%
+\begin{ex}%[2H2N1-2]
+Cho hình hộp $ABCD.A^\prime B^\prime C^\prime D^\prime $ có tâm $O$. Đặt $\overrightarrow{AB}=\overrightarrow{a}$, $\overrightarrow{BC}=\overrightarrow{b}$. $M$ là điểm xác định bởi $\overrightarrow{OM}=\dfrac{1}{2} \left(\overrightarrow{a}-\overrightarrow{b}\right)$. Khẳng định nào sau đây đúng?
+	\choice
+		{\True $M$ là trung điểm $BB^\prime $}
+		{$M$ là tâm hình bình hành $BCC^\prime B^\prime $}
+		{$M$ là tâm hình bình hành $ABB^\prime A^\prime $}
+		{$M$ là trung điểm $CC^\prime $}
+	\loigiai{\;
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=stealth,line join=round,line cap=round,font=\footnotesize]
+	\def\a{3}
+	\def\b{2}
+	\def\h{3.5}
+	\path 	(0:0) coordinate (A)
+			++(0:\a) coordinate (D)
+			++(-130:\b) coordinate (C)
+			($(A)+(C)-(D)$) coordinate (B)
+			($(A)+(80:\h)$) coordinate (A')
+			($(B)+(80:\h)$) coordinate (B')
+			($(C)+(80:\h)$) coordinate (C')
+			($(D)+(80:\h)$) coordinate (D');
+	\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(A');
+	\draw[thick] 	(C)--(C') 	(D)--(D') 	(B)--(B')	(C)--(C')
+			(B)--(C)--(D) 
+			(A')--(B')--(C')--(D')--cycle;
+	\foreach \x/\g in {A/180,B/180,C/0,D/0,A'/180,B'/180,C'/0,D'/0}
+	\fill[black] 	(\x) circle (1pt)
+	($(\g:4mm)+(\x)$) node {$\x$};	
+\end{tikzpicture}
+\end{center}	
+	Ta có $$\dfrac{1}{2} \left(\overrightarrow{a}-\overrightarrow{b}\right)=\dfrac{1}{2} \left(\overrightarrow{AB}-\overrightarrow{BC}\right)=\dfrac{1}{2} \left(\overrightarrow{AB}+\overrightarrow{CB}\right)=-\dfrac{1}{2} \left(\overrightarrow{BA}+\overrightarrow{BC}\right)=-\dfrac{1}{2} \overrightarrow{BD}=\dfrac{1}{2} \overrightarrow{DB}.$$
+ Mặt khác $\overrightarrow{OM}=\dfrac{1}{2} \left(\overrightarrow{a}-\overrightarrow{b}\right)\Rightarrow \overrightarrow{OM}=\dfrac{1}{2} \overrightarrow{DB}\Rightarrow \left\{\begin{array}{l} {OM\parallel BD} \\ {OM=\dfrac{1}{2} BD} \end{array}\right. $.\\
+ Mà $O$ là trung điểm của $DB^\prime $ suy ra $M$ là trung điểm của $BB^\prime $.}
+\end{ex}
+%%%============EX_3==============%%%
+\begin{ex}%[2H2N1-2]
+Cho lăng trụ tam giác $ABC.A^\prime  B^\prime  C^\prime  $ có $\overrightarrow{AA^\prime  }=\overrightarrow{a}$, $\overrightarrow{AB}=\overrightarrow{b}$, $\overrightarrow{AC}=\overrightarrow{c}$. Hãy phân tích (biểu thị) vectơ $\overrightarrow{BC^\prime  }$ qua các vectơ $\overrightarrow{a}$, $\overrightarrow{b}$, $\overrightarrow{c}$
+	\choice
+		{$\overrightarrow{BC^\prime  }=\overrightarrow{a}+\overrightarrow{b}-\overrightarrow{c}$}
+		{$\overrightarrow{BC^\prime  }=-\overrightarrow{a}+\overrightarrow{b}-\overrightarrow{c}$}
+		{$\overrightarrow{BC^\prime  }=-\overrightarrow{a}-\overrightarrow{b}+\overrightarrow{c}$}
+		{\True $\overrightarrow{BC^\prime  }=\overrightarrow{a}-\overrightarrow{b}+\overrightarrow{c}$}
+	\loigiai{\;
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=stealth,line join=round,line cap=round,font=\footnotesize]
+	\def\a{4}
+	\def\h{4.5}
+	\path 	(0:0) coordinate (A)
+			++(0:\a) coordinate (C)
+			++(-150:3*\a/4) coordinate (B)
+			($(A)+(80:\h)$) coordinate (A')
+			($(B)+(80:\h)$) coordinate (B')
+			($(C)+(80:\h)$) coordinate (C');
+	\draw[dashed,thick] 	(A)--(C)node[midway, above]{$\overrightarrow{c}$};
+	\draw[thick]	(C)--(C') 	(B)--(B')	(A)--(A')node[midway, left]{$\overrightarrow{a}$} (A)--(B)node[midway, left]{$\overrightarrow{b}$}  (B)--(C) (A')--(B')--(C')--cycle;
+	\foreach \x/\g in {A/180,B/-45,C/0,A'/180,B'/-45,C'/0}
+			\fill[black] 	(\x) circle (1pt)
+			($(\g:4mm)+(\x)$) node {$\x$};	
+\end{tikzpicture}
+\end{center}	
+	$\overrightarrow{BC^\prime }=\overrightarrow{BC}+\overrightarrow{CC^\prime }=\overrightarrow{BA}+\overrightarrow{AC}+\overrightarrow{CC^\prime }=\overrightarrow{AA^\prime }-\overrightarrow{AB}+\overrightarrow{AC}=\overrightarrow{a}-\overrightarrow{b}+\overrightarrow{c}$.}
+\end{ex}
+%%%============EX_4==============%%%
+\begin{ex}%[2H2N2-1]
+Trong không gian $Oxyz$, cho $\overrightarrow{a}=(1;-2; 2), \overrightarrow{b}=(-2; 0; 3)$. Khẳng định nào dưới đây là \textbf{sai}?
+	\choice
+		{$\overrightarrow{a}+\overrightarrow{b}=(-1;-2; 5)$}
+		{$\overrightarrow{a}-\overrightarrow{b}=(3;-2;-1)$}
+		{\True $3\overrightarrow{a}=(3;-2; 2)$}
+		{$2\overrightarrow{a}+\overrightarrow{b}=(0;-4; 7)$}
+	\loigiai{
+	Áp dụng quy tắc nhân vec-tơ với một số ta có $3\overrightarrow{a}=(3;-6; 6)$.
+	}
+\end{ex}
+%%%============EX_5==============%%%
+\begin{ex}%[2H2N2-2]
+Cho ba điểm $A(1; 3; 5), B(2; 0; 1), C(0; 9; 0)$. Tọa độ trọng tâm $G$ của tam giác $ABC$ là
+	\choice
+		{$G(3; 12; 6)$}
+		{$G(1; 5; 2)$}
+		{$G(1; 0; 5)$}
+		{\True $G(1; 4; 2)$}
+	\loigiai{
+Áp dụng công thức tính tọa độ trọng tâm tam giác ta có $$G \left(\dfrac{x_A+x_B+x_C}{3};\dfrac{y_A+y_B+y_C}{3};\dfrac{z_A+z_B+z_C}{3} \right)= (1;4;2).$$	
+	}
+\end{ex}
+%%%============EX_6==============%%%
+\begin{ex}%[2H2N2-1]
+Trong không gian với hệ trục tọa độ $Oxyz$ cho ba vectơ $\overrightarrow{a}=(-1; 1; 0), \overrightarrow{b}=(1; 1; 0), \overrightarrow{c}=(1; 1; 1)$. Mệnh đề nào dưới đây \textbf{sai}?
+	\choice
+		{\True $\overrightarrow{b} \perp \overrightarrow{c}$}
+		{$|\overrightarrow{a}|=\sqrt{2}$}
+		{$\overrightarrow{b} \perp \overrightarrow{a}$}
+		{$|\overrightarrow{c}|=\sqrt{3}$}
+	\loigiai{
+Ta có $\overrightarrow{b} \cdot \overrightarrow{c} = 1\cdot 1+1\cdot 1+0\cdot 1 = 2 \ne 0$ nên $\overrightarrow{b} \not\perp \overrightarrow{c}$.	}
+\end{ex}
+%%%============EX_7==============%%%
+\begin{ex}%[2H2N2-3]
+Trong không gian với hệ tọa độ $Oxyz$ cho $\overrightarrow{x}=2\overrightarrow{i}+3\overrightarrow{j}-\overrightarrow{k}$. Tọa độ của $\overrightarrow{x}$ là
+	\choice
+		{$\overrightarrow{x}=(2;-1; 3)$}
+		{$\overrightarrow{x}=(-1; 2; 3)$}
+		{\True $\overrightarrow{x}=(2; 3;-1)$}
+		{$\overrightarrow{x}=(3; 2;-1)$}
+	\loigiai{Theo định nghĩa tọa độ trong không gian ta có
+	$$\overrightarrow{x}=2\overrightarrow{i}+3\overrightarrow{j}-\overrightarrow{k}\Leftrightarrow \overrightarrow{x}=(2; 3;-1).$$}
+\end{ex}
+%%%============EX_8==============%%%
+\begin{ex}%[2H2N2-1]
+Trong không gian $Oxyz$, cho hai điểm $A(2; 1;-1), B(1; 2; 3)$. Độ dài đoạn thẳng $AB$ bằng
+	\choice
+		{\True $3\sqrt{2}$}
+		{$18$}
+		{$\sqrt{3}$}
+		{$\sqrt{22}$}
+	\loigiai{
+Áp dụng công thức tính độ dại vectơ 
+$$AB=\left| \overrightarrow{AB}\right| = \left|(-1;1;4) \right|=\sqrt{18} =3\sqrt{2}.$$}
+\end{ex}
+%%%============EX_9==============%%%
+\begin{ex}%[2H2H2-4]
+Trong không gian $Oxyz$, cho hai vectơ $\overrightarrow{u}$ và $\overrightarrow{v}$ tạo với nhau một góc $120^{\circ}$ và $|\overrightarrow{u}|=2,|\overrightarrow{v}|=5$. Tính $|\overrightarrow{u}+\overrightarrow{v}|$ 
+	\choice
+		{\True $\sqrt{19}$}
+		{$-5$}
+		{$7$}
+		{$\sqrt{39}$}
+	\loigiai{
+	Ta có $|\overrightarrow{u}+\overrightarrow{v}|^2 = |\overrightarrow{u}|^2+2\overrightarrow{u}\cdot\overrightarrow{v}+|\overrightarrow{v}|^2$. Mà $|\overrightarrow{u}|=2,|\overrightarrow{v}|=5$ và $\overrightarrow{u}\cdot\overrightarrow{v} = |\overrightarrow{u}|\cdot|\overrightarrow{v}|\cdot \cos (\overrightarrow{u},\overrightarrow{v}) = 2\cdot 5 \cdot \cos 120^\circ=-5$. Do đó 
+	$$|\overrightarrow{u}+\overrightarrow{v}|^2 = 2^2-2\cdot(-5)+5^2 = 19 \Rightarrow |\overrightarrow{u}+\overrightarrow{v}| =\sqrt{19}.$$}
+\end{ex}
+%%%============EX_10==============%%%
+\begin{ex}%[2H2H2-4]
+Trong không gian với hệ trục tọa độ $Oxyz$, cho hai vectơ $\overrightarrow{u}(2; 3;-1)$ và $\overrightarrow{v}(5;-4; m)$. Tìm $m$ để $\overrightarrow{u} \perp \overrightarrow{v}$.
+	\choice
+		{$m=0$}
+		{$m=2$}
+		{$m=4$}
+		{\True $m=-2$}
+	\loigiai{
+Ta có $$\overrightarrow{u} \perp \overrightarrow{v}\Leftrightarrow \overrightarrow{u} \cdot \overrightarrow{v}=0 \Leftrightarrow  2\cdot 5+3\cdot (-4)+ (-1)\cdot m =0 \Leftrightarrow m=-2.$$}
+\end{ex}
+%%%============EX_11==============%%%
+\begin{ex}%[2H2N2-1]
+Trong không gian với hệ tọa độ $Oxyz$, cho ba vectơ $\overrightarrow{a}=(-1; 1; 0), \overrightarrow{b}=(1; 1; 0), \overrightarrow{c}=(1; 1; 1)$. Trong các mệnh đề sau, mệnh đề nào \textbf{sai}?
+	\choice
+		{$|\overrightarrow{a}|=\sqrt{2}$}
+		{$\overrightarrow{a} \perp \overrightarrow{b}$}
+		{\True $\overrightarrow{b} \perp \overrightarrow{c}$}
+		{$|c|=\sqrt{3}$}
+	\loigiai{
+	Ta có $\overrightarrow{b} \cdot \overrightarrow{c} = 2 \ne 0$ nên $\overrightarrow{b} \not\perp \overrightarrow{c}$.}
+\end{ex}
+%%%============EX_12==============%%%
+\begin{ex}%[2H2H2-2]
+Trong không gian với hệ tọa độ $Oxyz$, cho các điểm $A(3;-4; 0), B(-1; 1; 3), C(3,1,0)$. Tìm tọa độ điểm $D$ trên trục hoành sao cho $A D=BC$.
+	\choice
+		{$D(-2; 1; 0), D(-4; 0; 0)$ }
+		{$D(0; 0; 0), D(-6; 0; 0)$ }
+		{$D(6; 0; 0), D(12; 0; 0)$ }
+		{\True $D(0; 0; 0), D(6; 0; 0)$}
+	\loigiai{
+Gọi $D$ có tọa độ $(x;0;0)$. Ta có $\overrightarrow{AD} = (x-3;4;0)$ và $\overrightarrow{BC}=(4;0;-3)$ nên từ $AD=BC$ ta có
+$$(x-3)^2+4^2+0^2=4^2+0^2+(-3)^2\Leftrightarrow (x-3)^2=9 \Leftrightarrow \hoac{&x=0 \\& x=6}$$
+Vậy $D(0; 0; 0)$ hoặc $D(6; 0; 0)$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC2}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-OTC2-DS]
+%%%============EX_1==============%%%
+\begin{ex}%[2H2N1-2]
+	\immini{
+	Cho hình hộp $ABCD.A_1 B_1 C_1 D_1$. Khi đó
+	\choiceTF
+		{$\overrightarrow{BC}+\overrightarrow{BA}=\overrightarrow{B_1 C_1}+\overrightarrow{B_1 A_1}$}
+		{$\overrightarrow{AD}+\overrightarrow{D_1 C_1}+\overrightarrow{D_1 A_1}=\overrightarrow{DC}$}
+		{$\overrightarrow{BC}+\overrightarrow{BA}+\overrightarrow{BB_1}=\overrightarrow{BD_1}$}
+		{\True $\overrightarrow{BA}+\overrightarrow{DD_1}+\overrightarrow{BD_1}=\overrightarrow{BC}$}
+	}{
+\begin{tikzpicture}[scale=0.7,>=stealth,line join=round,line cap=round,font=\footnotesize]
+	\def\a{3}
+	\def\b{2}
+	\def\h{3.5}
+	\path 	(0:0) coordinate (A)
+			++(0:\a) coordinate (D)
+			++(-130:\b) coordinate (C)
+			($(A)+(C)-(D)$) coordinate (B)
+			($(A)+(80:\h)$) coordinate (A_1)
+			($(B)+(80:\h)$) coordinate (B_1)
+			($(C)+(80:\h)$) coordinate (C_1)
+			($(D)+(80:\h)$) coordinate (D_1);
+	\draw[dashed,thick] 	(B)--(A)--(D)	(A)--(A_1);
+	\draw[thick] 	(C)--(C_1) 	(D)--(D_1) 	(B)--(B_1)	(C)--(C_1)
+			(B)--(C)--(D) 
+			(A_1)--(B_1)--(C_1)--(D_1)--cycle;
+	\foreach \x/\g in {A/180,B/180,C/0,D/0,A_1/180,B_1/180,C_1/0,D_1/0}
+	\fill[black] 	(\x) circle (1pt)
+	($(\g:4mm)+(\x)$) node {$\x$};	
+\end{tikzpicture}}
+	\loigiai{
+\begin{itemchoice}
+\itemch Sai. $\overrightarrow{BC}+\overrightarrow{BA}=\overrightarrow{B_{1} C_{1} }+\overrightarrow{B_{1} A_{1} }$.
+
+\itemch Sai. $\overrightarrow{AD}+\overrightarrow{D_{1} C_{1} }+\overrightarrow{D_{1} A_{1} }=\overrightarrow{AD}+\overrightarrow{DC}+\overrightarrow{DA}=\overrightarrow{DC}$.
+
+\itemch Sai. $\overrightarrow{BC}+\overrightarrow{BA}+\overrightarrow{BB_{1} }=\overrightarrow{BD}+\overrightarrow{BB_{1} }=\overrightarrow{BB_{1} }+\overrightarrow{B_{1} D}_{1} =\overrightarrow{BD_{1} }$.
+
+\itemch Đúng. $\overrightarrow{BA}+\overrightarrow{DD_{1} }+\overrightarrow{BD_{1} }=\overrightarrow{BA}+\overrightarrow{AA_{1} }+\overrightarrow{BD_{1} }=\overrightarrow{BA_{1} }+\overrightarrow{BD_{1} }$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[2H2H2-4]
+	Trong không gian tọa độ $Oxyz$ cho $3$ vectơ $\overrightarrow{a}=\left(1;2;3\right)$; $\overrightarrow{b}=\left(0;-1;1\right)$; $\overrightarrow{c}=\left(1;5;2\right)$. Khi đó
+	\choiceTF
+		{\True Tọa độ của vectơ $\overrightarrow{u}=\overrightarrow{a}+\overrightarrow{b}-\overrightarrow{c}$ là $\left(0;-4;2\right)$}
+		{\True Tọa độ của vectơ $\overrightarrow{v}=2\overrightarrow{a}+3\overrightarrow{b}+\overrightarrow{c}$ là $\left(3;6;11\right)$}
+		{\True Giá trị $\overrightarrow{a}.\overrightarrow{c}$ bằng $17$}
+		{\True Giá trị $\cos \left(\overrightarrow{a};\overrightarrow{b}\right)$ là $\dfrac{1}{2\sqrt{7}}$}
+	\loigiai{
+\begin{itemchoice}
+\itemch Đúng. Ta có $$\overrightarrow{u}=\left(1;2;3\right)+\left(0;-1;1\right)-\left(1;5;2\right)=\left(0;-4;2\right).$$
+\itemch Đúng. Ta có $$\overrightarrow{v}=2\left(1;2;3\right)+3\left(0;-1;1\right)+\left(1;5;2\right)=\left(2;4;6\right)+\left(0;-3;3\right)+\left(1;5;2\right)=\left(3;6;11\right).$$
+\itemch Đúng. Ta có $\overrightarrow{a}. \overrightarrow{c}=1\cdot 1+2\cdot 5 +3\cdot 2=17$.
+\itemch Đúng. Ta có $\cos \left(\overrightarrow{a};\overrightarrow{b}\right)=\dfrac{\overrightarrow{a}. \overrightarrow{b}}{\left|\overrightarrow{a}\right|.\left|\overrightarrow{b}\right|}=\dfrac{1}{\sqrt{1+4+9}.\sqrt{0+1+1}}=\dfrac{1}{2\sqrt{7}}$.
+\end{itemchoice}
+}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[2H2V2-1]
+	Trong không gian tọa độ $Oxyz$ cho 3 điểm $A\left(0;1;-2\right); B\left(2;1;0\right); C\left(1;4;5\right)$. Khi đó
+	\choiceTF
+		{\True Tọa độ trọng tâm tam giác $ABC$ là $G\left(1;2;1\right)$}
+		{Nếu $D$ có tọa độ $\left(-1;4;3\right)$ thì $ABCD$ là hình bình hành}
+		{\True Cosin góc $\widehat{ABC}$ là $\dfrac{-4}{\sqrt{70}}$}
+		{Điểm $M$ thuộc trục $Ox$ sao cho $MB=MC$ có tọa độ $M\left(\dfrac{37}{2};0;0\right)$}
+	\loigiai{
+\begin{itemchoice}
+\itemch Đúng. Gọi $G$ là trọng tâm tam giác ABC ta có $$\left\{\begin{array}{l} {{x}_G=\dfrac{x_A+x_B+x_C}{3}=1} \\ {y_G=\dfrac{y_A+y_B+y_C}{3}=2} \\ {z_G=\dfrac{z_A+z_B+z_C}{3}=1} \end{array}\right. \Rightarrow G\left(1;2;1\right).$$
+\itemch Sai. Để $ABCD$ là hình bình hành thì $$\overrightarrow{AB}=\overrightarrow{DC}\Leftrightarrow \left(2;0;2\right)=\left(1-x_D;4-y_D;5-z_D \right)\Rightarrow D\left(-1;4;3\right).$$
+\itemch Đúng. Ta có $\overrightarrow{BA}=\left(-2;0;-2\right); \overrightarrow{BC}=\left(-1;3;5\right)$.\\
+Suy ra $\cos \widehat{ABC}=\cos \left(\overrightarrow{BA};\overrightarrow{BC}\right)=\dfrac{\overrightarrow{BA}.\overrightarrow{BC}}{BA.BC}=\dfrac{2-10}{\sqrt{4+4}.\sqrt{1+9+25}}=\dfrac{-4}{\sqrt{70}}$.
+\itemch Sai. Do điểm $M\in {Ox}$ nên ta gọi $M\left(x;0;0\right)$ ta có $MB=MC\Leftrightarrow MB^2=MC^2$.
+			\[\Leftrightarrow \left(x-2\right)^2+1^2+0^2=\left(x-1\right)^2+4^2+5^2 \Leftrightarrow x^2-4{x}+5=x^2-2{x}+42\Leftrightarrow x=\dfrac{-37}{2}.
+			\]
+			Vậy $M\left(-\dfrac{37}{2};0;0\right)$.
+\end{itemchoice}
+			}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[2H2V2-1]
+	Trong không gian với hệ tọa độ $Oxyz$, cho các điểm $M\left(-1;1;2\right); N\left(1;4;3\right); P\left(5;10;5\right)$. Khi đó
+	\choiceTF
+		{\True $MN=\sqrt{14}$}
+		{ Các điểm $O$, $N$, $P$ thẳng hàng}
+		{\True Trung điểm của $NP$ là $I\left(3;7;4\right)$}
+		{$M$, $N$, $P$ là ba đỉnh của một tam giác}
+	\loigiai{
+\begin{itemchoice}
+\itemch Đúng. Vì $MN=\left|\overrightarrow{MN} \right|=\left| (2;3;1)\right|=\sqrt{2^2+3^2+1^2}=\sqrt{14}$.
+\itemch Sai. Ta có $\overrightarrow{ON}=(1;4;3)$ và $\overrightarrow{OP} = (5;10;5)$. Vì $\dfrac{1}{5}\ne \dfrac{4}{10}$ nên vectơ $\overrightarrow{ON}$ không cùng phương với vectơ $\overrightarrow{OP}$. Do đó $O,N,P$ không thẳng hàng.
+\itemch Đúng. Áp dụng công thức trung điểm $I\left(\dfrac{1+5}{2};\dfrac{4+10}{2};\dfrac{3+5}{2} \right)=I\left(3;7;4\right)$.
+\itemch Sai. Ta có $\overrightarrow{MN}\left(2;3;1\right); \overrightarrow{MP}\left(6;9;3\right)$ suy ra $\overrightarrow{MP}=3\overrightarrow{MN}$ nên $M, N, P$ thẳng hàng.
+\end{itemchoice}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-OTC2-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-OTC2-KQ]
+\caukq
+%%%============EX_1==============%%%
+\begin{ex}%[2H2H1-2]
+Gọi $M$, $N$ lần lượt là trung điểm của các cạnh $AC$ và $BD$ của tứ diện $ABCD$. Gọi $I$ là trung điểm đoạn $MN$ và $P$ là $1$ điểm bất kỳ trong không gian. Tìm giá trị của $k$ thích hợp điền vào đẳng thức vectơ: $\overrightarrow{PI}=k\left(\overrightarrow{PA}+\overrightarrow{PB}+\overrightarrow{PC}+\overrightarrow{PD}\right)$
+	\shortans{$0,25$}
+	\loigiai{
+	Vì $I$ là trung điểm của $MN$ $\Rightarrow \overrightarrow{IM}+\overrightarrow{IN}=\overrightarrow{0}$.\\
+ Ta có $\overrightarrow{PA}+\overrightarrow{PB}+\overrightarrow{PC}+\overrightarrow{PD}=4\overrightarrow{PI}+\overrightarrow{IA}+\overrightarrow{IB}+IC=4\overrightarrow{PI}+2\overrightarrow{IM}+2\overrightarrow{IN}=4\overrightarrow{PI}$.\\
+ Khi đó $4\overrightarrow{PI}=\overrightarrow{PA}+\overrightarrow{PB}+\overrightarrow{PC}+\overrightarrow{PD}\Leftrightarrow \overrightarrow{PI}=k\left(\overrightarrow{PA}+\overrightarrow{PB}+\overrightarrow{PC}+\overrightarrow{PD}\right)\Rightarrow k=\dfrac{1}{4}$.}
+\end{ex}
+%%%============EX_2==============%%%
+\begin{ex}%[2H2H1-3]
+Cho hình chóp $S.ABC$ có $SA = SB = SC = AB = AC = a$ và $BC=a\sqrt{2} $. Tính góc giữa hai vectơ $\overrightarrow{AB}$ và $\overrightarrow{SC}$.
+	\shortans{$120$}
+	\loigiai{
+	Do $SB = SC = a$; $BC=a\sqrt{2} $ $\Rightarrow $ $\Delta SBC$ vuông cân tại $S$.\\
+ Lấy điểm $S$ làm điểm gốc ta phân tích: $\overrightarrow{AB}=\overrightarrow{SB}-\overrightarrow{SA}$.\\
+ Ta có 
+$$
+\begin{aligned}
+\overrightarrow{AB}\cdot\overrightarrow{SC} &=\left(\overrightarrow{SB}-\overrightarrow{SA}\right)\cdot\overrightarrow{SC}=\overrightarrow{SB}\cdot\overrightarrow{SC}-\overrightarrow{SA}\cdot\overrightarrow{SC}\\
+&=a^{2} .\cos 90^\circ  -a^{2} .\cos 60^\circ  =-\dfrac{a^{2} }{2}
+\end{aligned}
+$$ 
+Do đó $\cos \left(\overrightarrow{AB};\overrightarrow{SC}\right)=\dfrac{\overrightarrow{AB}.\overrightarrow{SC}}{AB.SC} =\dfrac{-\dfrac{a^{2} }{2} }{a.a} =-\dfrac{1}{2} $ nên $\left(\overrightarrow{AB};\overrightarrow{SC}\right)=120^\circ$. }
+\end{ex}
+%%%============EX_3==============%%%
+\begin{ex}%[2H2H2-4]
+Trong không gian cho 2 vectơ $\overrightarrow{a}$ và $\overrightarrow{b}$ tạo với nhau một góc $120^\circ$. Biết rằng $\left|\overrightarrow{a}\right|=3$ và $\left|\overrightarrow{b}\right|=5$. Tính $\left|\overrightarrow{a}-\overrightarrow{b}\right|$.
+	\shortans{$7$}
+	\loigiai{
+Ta có 
+$$
+\begin{aligned}
+\left|\overrightarrow{a}-\overrightarrow{b}\right|^{2}& =\left(\overrightarrow{a}-\overrightarrow{b}\right)^{2} =\overrightarrow{a}^{2} -2\overrightarrow{a}.\overrightarrow{b}+\overrightarrow{b}^{2}\\
+&=\left|\overrightarrow{a}\right|^{2} -2\left|\overrightarrow{a}\right|.\left|\overrightarrow{b}\right|\cos \left(\overrightarrow{a};\overrightarrow{b}\right)+\left|\overrightarrow{b}\right|^2\\
+&=3^{2} -2.3.5.\cos 120^\circ  +5^{2} =49.
+\end{aligned}
+$$
+ Do đó $\left|\overrightarrow{a}-\overrightarrow{b}\right|=7$.}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[2H2H2-3]
+Trong không gian tọa độ $Oxyz$ cho $2$ vectơ $\overrightarrow{u}=\left(x; 2x-3; 2\right)$ và $\overrightarrow{v}=\left(y;-4; 8\right)$. Tìm $x^2+y^2$ biết rằng $\overrightarrow{u}$ và $\overrightarrow{v}$ cùng phương.
+\loigiai{
+\shortans{$17$}
+	Để $\overrightarrow{u}$ và $\overrightarrow{v}$ cùng phương thì $\overrightarrow{u}=k.\overrightarrow{v}$
+	\[\Leftrightarrow \left(x; 2x-3; 2\right)=k\left(y;-4; 8\right)\Leftrightarrow \left\{\begin{array}{l} {x=ky} \\ {2 x-3=-4k} \\ {2=8k} \end{array}\right. \Leftrightarrow \left\{\begin{array}{l} {x=\dfrac{1}{4} y} \\ {2 x-3=-1} \\ {k=\dfrac{1}{4}} \end{array}\right. \Leftrightarrow \left\{\begin{array}{l} {k=\dfrac{1}{4}} \\ {x=1} \\ {y=4} \end{array}\right..
+	\]
+	Vậy $x=1; y=4$. Khi đó $x^2+y^2=17$.
+	}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[2H2H2-2]
+Trong không gian tọa độ $Oxyz$ cho 3 điểm $A\left(2;5;3\right); B\left(3;7;4\right); C\left(x; y; 6\right)$. Tính $x+y$ biết rằng $A$, $B$, $C$ thẳng hàng.
+\shortans{$16$}
+\loigiai{
+	Ta có $\overrightarrow{AB}=\left(1;2;1\right); \overrightarrow{AC}=\left(x-2;y-5;3\right)$.\\
+	Để $A$, $B$, $C$ thẳng hàng thì $\overrightarrow{AC}=k.\overrightarrow{AB}\Leftrightarrow \left\{\begin{array}{l} {x-2=k} \\ {y-5=2k} \\ {3=k} \end{array}\right. \Leftrightarrow \left\{\begin{array}{l} {k=3} \\ {x=5} \\ {y=11} \end{array}\right.$.\\ Vậy ${x}=5; y=11$. Khi đó $x+y=16$.
+	}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[2H2H2-2]
+Trong không gian với hệ tọa độ $Oxyz$, cho ba điểm $A\left(1;-1;3\right), B\left(2;-3;5\right), C\left(-1;-2;6\right)$. Biết điểm $M\left(a;b;c\right)$ thỏa mãn $\overrightarrow{MA}+2\overrightarrow{MB}-2\overrightarrow{MC}=\overrightarrow0$, tính $T=a-b+c$.
+\shortans{$11$}
+\loigiai{
+	Ta có $\overrightarrow{MA}+2\overrightarrow{MB}-2\overrightarrow{MC}=\overrightarrow0\Leftrightarrow \overrightarrow{MA}+2\overrightarrow{CB}=\overrightarrow0\Leftrightarrow \overrightarrow{MA}=2\overrightarrow{BC}=2\left(-3;1;1\right)\Rightarrow M\left(7;-3;1\right)$. Suy ra $T=a-b+c=11$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC2-KQ}

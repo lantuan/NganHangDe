@@ -1,0 +1,498 @@
+\section{Xác suất có điều kiện}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-2-B18]
+\caulc
+\begin{ex}%[2D5N1-2]
+	Cho hai biến cố $A$, $B$ có xác suất $\mathrm{P}(A)=0{,}4$, $\mathrm{P}(B)=0{,}6$, $\mathrm{P}(AB)=0{,}2$. Tính xác suất $\mathrm{P}(A|B)$.
+	\choice
+	{\True$\dfrac{1}{3}$}
+	{$\dfrac{1}{2}$}
+	{$0{,}3$}
+	{$0{,}25$}
+	\loigiai{
+		Theo định nghĩa xác suất có điều kiện, ta có
+		$$\mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}=\dfrac{0{,}2}{0{,}6}=\dfrac{1}{3}.$$	}
+\end{ex}
+
+\begin{ex}%[2D5N1-2]
+	Cho hai biến cố $A$, $B$ có xác suất $\mathrm{P}(A)=0{,}4$, $\mathrm{P}(B)=0{,}3$, $\mathrm{P}(A\mid B)=0{,}25$. Tính xác suất $\mathrm{P}(B\mid A)$.
+	\choice
+	{\True $0{,}1875$}
+	{$0{,}48$}
+	{$0{,}333$}
+	{$0{,}95$}
+	\loigiai{
+		Ta có
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			\mathrm{P}(A \mid B)&=&\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}\\
+			\Rightarrow \mathrm{P}(AB)&=&\mathrm{P}(B)\cdot 	\mathrm{P}(A \mid B)=0{,}3\cdot 0{,}25=0{,}075.
+		\end{eqnarray*}
+		Từ đó suy ra
+		$$\mathrm{P}(B\mid A)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}=\dfrac{0{,}075}{0{,}4}=0{,}1875.$$		
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Cho hai biến độc lập $A,B$ với $\mathrm{P}(A)=0{,}8$, $\mathrm{P}(B)=0{,}25$. Khi đó, $\mathrm{P}(A\mid B)$ bằng
+	\choice
+	{$0{,}2$}
+	{\True $0{,}8$}
+	{$0{,}25$}
+	{$0{,}75$}
+	\loigiai{
+		Vì $A$ và $B$ là hai biến cố độc lập, do đó
+		\[\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A\cap B)}{\mathrm{P}(B)}=\dfrac{\mathrm{P}(A)\cdot\mathrm{P}(B)}{\mathrm{P}(B)}=\mathrm{P}(A)=0{,}8.\]	
+	}
+\end{ex}	
+
+\begin{ex}%[2D5H1-2]
+	Cho một hộp kín có $6$ thẻ ATM của ACB và 4 thẻ ATM của Vietcombank. Lấy ngẫu nhiên lần lượt $2$ thẻ (lấy không hoàn lại). Tìm xác suất để lần thứ hai lấy được thẻ ATM của Vietcombank nếu biết lần thứ nhất đã lấy được thẻ ATM của ACB.
+	\choice
+	{ $\dfrac{1}{3}$}
+	{$\dfrac{2}{3}$}
+	{$\dfrac{2}{9}$}
+	{\True$\dfrac{4}{9}$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq lần thứ hai lấy được thẻ ATM Vietcombank\rq\rq, $B$ là biến cố \lq\lq lần thứ nhất lấy được thẻ ATM của ACB\rq\rq. Ta cần tìm $\mathrm{P}(A\mid B)$.\\	
+		Sau khi lấy lần thứ nhất (biến cố $B$ đã xảy ra) trong hộp còn lại $9$ thẻ (trong đó $4$ thẻ Vietcombank) nên $\mathrm{P}(A\mid B)=\dfrac{4}{9}$.}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một nhóm $50$ học sinh có $23$ bạn biết chơi cầu lông mà không biết chơi bóng đá và $21$ bạn biết chơi bóng đá mà không biết chơi cầu lông. Biết rằng mỗi học sinh trong nhóm này biết chơi bóng đá hoặc cầu lông. Chọn ngẫu nhiên một học sinh trong nhóm. Tính xác suất học sinh này biết chơi bóng đá, biết rằng bạn ấy biết chơi cầu lông. 
+	\choice
+	{$\dfrac{23}{29}$}
+	{\True$\dfrac{6}{29}$}
+	{$\dfrac{21}{29}$}
+	{$\dfrac{6}{23}$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Học sinh được chọn biết chơi bóng đá\rq\rq; $B$ là biến cố \lq\lq Học sinh được chọn biết chơi cầu lông\rq\rq.\\
+		Ta có $n\left(A\cap B\right)=50-(23+21)=6$ và $n(B)=23+6=29$. Do đó 
+		$$\mathrm{P}(A\mid B)=\dfrac{P\left(A B\right)}{\mathrm{P}(B)}=\dfrac{6}{29}.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-2]
+	Một bình đựng $3$ bi xanh và $2$ bi trắng. Lấy ngẫu nhiên lần $1$ một viên bi (không bỏ vào lại), rồi lần $2$ một viên bi. Tính xác suất để lần $1$ lấy một viên bi xanh, lần $2$ lấy một viên bi trắng.
+	\choice
+	{$\dfrac{1}{5}$}
+	{$\dfrac{1}{10}$}
+	{$\dfrac{1}{3}$}
+	{\True $\dfrac{3}{10}$}
+	\loigiai{
+		Gọi $A$ là biến cố lấy một bi xanh lần thứ nhất thì $\mathrm{P}(A)=\dfrac{3}{5}$.\\
+		Gọi $B$ là biến cố lấy một bi trắng lần thứ hai.
+		Gọi $C$ là biến cố lấy lần $1$ lấy một viên bi xanh, lần $2$ lấy một viên bi trắng.
+		Nếu $A$ đã xảy ra thì trong bình chi còn $2$ bi xanh, $2$ bi trằng. Khi đó $\mathrm{P}(B\mid A)=\dfrac{2}{4}$.\\
+		Mà $C=AB$, do đó theo công thức nhân ta có:
+		$$\mathrm{P}(C)=\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)=\dfrac{3}{5} \cdot \dfrac{1}{2}=\dfrac{3}{10}.
+		$$}
+\end{ex}	
+
+\begin{ex}%[2D5H1-2]
+	Một công ty đấu thầu $2$ dự án. Khả năng thắng thầu của các dự án $I$ và $II$ lần lượt là $0{,}4$ và $0{,}5$. Khả năng thắng thầu của hai dự án là $0{,}3$. Gọi $A$, $B$ lần lượt là biến cố thắng thầu dự án $I$ và dự án $II$. Biết công ty thắng thầu dự án $I$, tìm xác suất công ty thắng thầu dự án $II$.
+	\choice
+	{$0{,}25$}
+	{$0{,}5$}
+	{\True$0{,}75$}
+	{$0{,}125$}
+	\loigiai{
+		Gọi $C$ là biến cố công ty thắng dự $II$ biết công ty thắng dự án $I$. Ta có
+		$$\mathrm{P}(C)=\mathrm{P}(B|A)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}=\dfrac{0{,}3}{0{,}4}=0{,}75.$$
+		
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một sinh viên làm $2$ bài tập kế tiếp. Xác suất làm đúng bài thứ nhất là $0{,}7$. Nếu làm đúng bài thứ nhất thì khả năng làm đúng bài thứ $2$ là $0{,}8$, nhưng nếu làm sai bài thứ $1$ thì khả năng làm đúng bài thứ $2$ là $0{,}2$. Tính xác suất sinh viên làm ít nhất một bài.
+	\choice
+	{$ 0{,}903$}
+	{$0{,}737$}
+	{\True $0{,}76$}
+	{$0{,}62$}
+	\loigiai{
+		Gọi $A$, $B$ lần lượt là biến cố sinh viên làm đúng bài $1$, bài $2$.\\ Theo đề bài ta có $\mathrm{P}(A)=0{,}7$; $\mathrm{P}(B\mid A)=0{,}8$	và $\mathrm{P}(B\mid \overline{A})=0{,}2$.\\
+		Suy ra 
+		$$ \mathrm{P}(\overline{B}\mid \overline{A})=1-\mathrm{P}(B\mid \overline{A})=1-0{,}2=0{,}8.$$
+		Ta có
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			\mathrm{P}(A\cup B)&=&1-\mathrm{P}(\overline{A\cup B})\\
+			&=&1-\mathrm{P}(\overline{A}\cdot \overline{B})\\
+			&=&1- \mathrm{P}(\overline{A})\cdot \mathrm{P}(\overline{B}\mid \overline{A})\\
+			&=& 1- 0{,}3 \cdot 0{,}8=0{,}76.
+		\end{eqnarray*}
+		
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một thư viện có $35\%$ tổng số sách là sách khoa học, $14\%$ tổng số sách là sách khoa học tự nhiên. Chọn ngẫu nhiên một quyển sách của thư viện. Tính xác suất để quyển sách được chọn là sách khoa học tự nhiên, biết rằng đó là quyển sách về khoa học.
+	\choice
+	{$0{,}2$}
+	{\True $0{,}4$}
+	{$0,{4}$}
+	{$0{,}8$}
+	\loigiai
+	{Gọi $A$ là biến cố \lq\lq Sách được chọn là sách khoa học tự nhiên\rq\rq.\\
+		Gọi $B$ là biến cố \lq\lq Sách được chọn là sách khoa học\rq\rq.\\
+		Do có $35\%$ tổng số sách là sách khoa học nên $\mathrm{P}(B)=0{,}35$.\\
+		Do có $14\%$ tổng số sách là sách khoa học tự nhiên nên $\mathrm{P}(AB)=0{,}14$.\\
+		Vậy $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{0{,}14}{0{,}35}=0{,}4$.
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-2]
+	Trong một kì thi, thí sinh được phép thi $3$ lần. Xác suất lần đầu vượt qua kì thi là $0{,}9$. Nếu trượt lần đầu thì xác suất vượt qua kì thi lần hai là $0{,}7$. Nếu trượt cả hai lần thì xác suất vượt qua kì thi ở lần thứ ba là $0{,}3$. Tính xác suất để thí sinh thi đậu.
+	\choice
+	{\True $0{,}979$}
+	{$ 0{,97}$ }
+	{$ 0{,79}$ }
+	{$ 0{,797}$ }
+	\loigiai{
+		Gọi $A$, $B$, $C$ lần lượt là biến cố thí sinh thi đậu lần thứ $1$, lần thứ $2$, lần thứ $3$.
+		Gọi $D$ là biến cố để thí sinh thi đậu. Ta có
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			D&=&A\cup (\overline{A}B)\cup (\overline{A}\,\overline{B}C)\\
+			\Rightarrow D&=&\mathrm{P}(A)+P (\overline{A}B)+P (\overline{A}\,\overline{B}C).
+		\end{eqnarray*}
+		Trong đó ta có
+		\begin{itemize}
+			\item $\mathrm{P}(A)=0{,}9$.
+			\item $P (\overline{A}B)=\mathrm{P}(\overline{A})\cdot P (B\mid \overline{A})=0{,}1\cdot 0{,}7=0{,}07$.
+			\item $P (\overline{A}\,\overline{B}C)=\mathrm{P}(\overline{A}\,\overline{B})\cdot \mathrm{P}(C\mid \overline{A}\,\overline{B})=\mathrm{P}(\overline{A})\cdot P (\overline{B}\mid \overline{A}) \cdot \mathrm{P}(C\mid \overline{A}\,\overline{B})=0{,}1\cdot (1-0{,}7)\cdot 0{,}3=0{,}009$.
+		\end{itemize}
+		Vậy $\mathrm{P}(D)=0{,}9+0{,}07+0{,}009=0{,}979$.
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-3]
+	Trong một hộp kín có $7$ chiếc bút bi xanh và $5$ chiếc bút bi đen, các chiếc bút có cùng kích thước và khối lượng. Bạn Sơn lấy ngẫu nhiên một chiếc bút bi từ trong hộp, không trả lại. Sau đó bạn Tùng lấy ngẫu nhiên một trong $11$ chiếc bút còn lại. Tính xác suất để Sơn lấy được bút bi đen và Tùng lấy được bút bi xanh.
+	\choice
+	{$\dfrac{139}{132}$}
+	{\True$\dfrac{35}{132}$}
+	{$\dfrac{25}{132}$}
+	{$\dfrac{49}{132}$}
+	\loigiai{
+		Gọi $A$ là biến cố: \lq\lq Bạn Sơn lấy được bút bi đen\rq\rq ;\\
+		$B$ là biến cố: ``Bạn Tùng lấy được bút bi xanh''.\\
+		Ta cần tính $\mathrm{P}(AB)$.\\
+		Vì $n(A)=5$ nên $\mathrm{P}(A)=\dfrac{5}{12}$.\\
+		Nếu $A$ xảy ra tức là bạn Sơn lấy được bút bi đen thì trong hộp có 11 bút bi với 7 bút bi xanh.\\
+		Vậy $\mathrm{P}(B\mid A)=\dfrac{7}{11}$.\\
+		Theo công thức nhân xác suất: $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)=\dfrac{5}{12}\cdot\dfrac{7}{11}=\dfrac{35}{132}$.\\
+		Một phương pháp mô tả trực quan lời giải trên là dùng sơ đồ hình cây
+		\begin{center}
+			\begin{tikzpicture}[line join = round,line cap = round, >=stealth, thick, font = \small, scale = 1]
+				%			\draw[gray!50,xstep = 1, ystep = 1] (-5,-5) grid (5,5);
+				\path
+				(0,0) coordinate (0) node[above=3mm] {$O$}
+				+(-2,-3) coordinate (11) node[left=3mm] {Đ}
+				+(2,-3) coordinate (12) node[right=3mm] {X}
+				(11)+(-1,-3) coordinate (21) node[below=3mm] {Đ} node[below=9mm] {ĐĐ}
+				+(1,-3) coordinate (22) node[below=3mm] {X} node[below=9mm] {ĐX}
+				(12)+(-1,-3) coordinate (23) node[below=3mm] {Đ} node[below=9mm] {XĐ}
+				+(1,-3) coordinate (24) node[below=3mm] {X} node[below=9mm] {XX}
+				(0)--(11) node[midway,left=3mm] {$\dfrac{5}{12}$}
+				(0)--(12) node[midway,right=3mm] {$\dfrac{7}{12}$}
+				(11)--(21) node[midway,left=2mm] {$\dfrac{4}{11}$}
+				(11)--(22) node[midway,right=2mm] {$\dfrac{7}{11}$}
+				(12)--(23) node[midway,left=2mm] {$\dfrac{5}{11}$}
+				(12)--(24) node[midway,right=2mm] {$\dfrac{6}{11}$}
+				;
+				\draw (11)--(0)--(12)
+				(21)--(11)--(22)
+				(23)--(12)--(24)
+				;
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = yellow!60, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (0) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = black, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (11) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = cyan, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (12) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = black, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (21) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = cyan, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (22) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = black, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (23) {};
+				\node[circle, line width = .2 mm, draw = black, text = black, fill = cyan, anchor = center, outer sep = 0pt, minimum size = .2cm] (c) at (24) {};
+			\end{tikzpicture}
+		\end{center}
+		Trên nhánh OĐ và OX tương ứng ghi xác suất lấy được bút đen và bút xanh.\\
+		Trên nhánh ĐĐ, ĐX tương ứng ghi xác suất lấy được bút đen, bút xanh với điều kiện đã lấy được bút đen.\\
+		Trên nhánh XĐ, XX tương ứng ghi xác suất lấy được bút đen, bút xanh với điều kiện đã lấy được bút xanh.\\
+		Vậy xác suất cần tính là $\dfrac{5}{12}\cdot\dfrac{7}{11}=\dfrac{35}{132}$.
+	}
+	
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một hộp kín đựng $20$ tấm thẻ giống hệt nhau đánh số từ $1$ đến $20$. Một người rút ngẫu nhiên ra một tấm thẻ từ trong hộp. Người đó được thông báo rằng thẻ rút ra mang số chẵn. Tính xác suất để người đó rút được thẻ số $10$.
+	\choice
+	{$0{,}4$}
+	{$0{,}3$}
+	{$0{,}2$}
+	{\True$0{,}1$}
+	\loigiai
+	{	Gọi $A$ là biến cố: \lq\lq Người đó rút được thẻ số 10\rq\rq.\\
+		Gọi $B$ là biến cố: \lq\lq Người đó rút được thẻ mang số chẵn\rq\rq .\\
+		Không gian mẫu mà 20 tấm thẻ đánh số từ 1 đến 20 $\Rightarrow$ $n(\Omega)=20$.\\
+		Ta cần tính $P\left(A\mid B\right)$.\\
+		Ta có, từ 1 đến 20 có 10 số chẵn nên $n(B)=10$.\\
+		Vậy $\mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{10}{20}=\dfrac{1}{2}$.\\
+		Trong số 10 số chẵn có một số 10 nên $n(AB)=1$.\\
+		Vậy $\mathrm{P}(AB)=\dfrac{n(AB)}{n(\Omega)}=\dfrac{1}{20}$.\\
+		Do đó $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{1}{10}= 0{,}1$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B18}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-B18-DS]
+\begin{ex}%[2D5H1-2]
+	Hai xạ thủ An và Bình bắn vào cùng một mục tiêu ở hai thời điểm khác nhau với xác suất bắn trúng mục tiêu lần lượt là $0{,}6$ và $0{,}7$. Xét các biến cố\\ 
+	$A$: \lq\lq Xạ thủ An bắn trúng mục tiêu\rq\rq;\\
+	$B$: \lq\lq Xạ thủ Bình bắn trúng mục tiêu \rq\rq.\\
+	Xét tính đúng sai của các khẳng định sau?
+	\choiceTF
+	{$\mathrm{P}(\overline{A})=0{,}6$;  $\mathrm{P}(\overline{B})=0{,}7$}
+	{\True Hai biến cố $\overline{A}, \overline{B}$ là độc lập}
+	{Xác suất cả hai xạ thủ đều không bắn trúng mục tiêu là $0{,}42$}
+	{Xác suất cả hai xạ thủ đều bắn trúng mục tiêu là $0{,}58$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Do $\mathrm{P}(A)=0{,}6$; $\mathrm{P}(B)=0{,}7$.
+			\itemch Đúng. Vì hai xạ thủ bắn ở hai thời điểm khác nhau nên các cặp biến cố $A$ và $B, \overline{A}$ và $\overline{B}$ là độc lập.
+			\itemch Sai. Vì $\mathrm{P}(\overline{A} \cap \overline{B})=0{,}4 \cdot 0{,}3=0{,}12$.
+			\itemch Sai.  Vì $\mathrm{P}(A \cap B)=0{,}6 \cdot 0{,}7=0{,}42$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một xạ thủ bắn vào bia số $1$ và bia số $2$. Xác suất để xạ thủ đó bắn trúng bia số $1$, bia số $2$ lần lượt là $0{,}8$; $0{,}9$. Xác suất để xạ thủ đó bắn trúng cả hai bia là $0{,}8$. Xét hai biến cố
+	\begin{itemize}
+		\item  $A$: \lq\lq Xạ thủ đó bắn trúng bia số $1$\rq\rq;
+		\item  $B$: \lq\lq Xạ thủ đó bắn trúng bia số $2$\rq\rq.
+	\end{itemize}
+	Xét tính đúng sai của các khẳng định sau?
+	\choiceTF
+	{Hai biến cố $A$ và $B$ có độc lập}
+	{Biết xạ thủ đó bắn trúng bia số $1$ thì xác suất xạ thủ đó bắn trúng bia số $2$ là $0{,}72$}
+	{\True Biết xạ thủ đó không bắn trúng bia số $1$, thì xác suất xạ thủ đó bắn trúng bia số $2$ bằng $0{,}9$}
+	{Biết xạ thủ đó không bắn trúng bia số $1$ thì xác suất xạ thủ đó bắn không trúng bia số $2$ bằng $0{,}9$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. $A$ và $B$ là hai biến cố độc lập.
+			\itemch Sai. Xác suất xạ thủ đó bắn trúng bia số $2$ và bia số $1$ là $$\mathrm{P}(B|A)=\dfrac{\mathrm{P}(B\cap A)}{\mathrm{P}(A)}=\dfrac{\mathrm{P}(B) \cdot \mathrm{P}(A)}{\mathrm{P}(A)}=\mathrm{P}(B)=0{,}9.$$
+			\itemch Đúng. Xác suất xạ thủ đó bắn không bắn trứng bia số $1$ mà trúng bia số $2$ là $$\mathrm{P}(B|\overline{A})=\dfrac{\mathrm{P}(B\cap \overline{A})}{\mathrm{P}(\overline{A})}=\dfrac{\mathrm{P}(B) \cdot \mathrm{P}(\overline{A})}{\mathrm{P}(\overline{A})}=\mathrm{P}(B)=0{,}9.$$
+			\itemch Sai. Xác suất xạ thủ đó bắn không bắn trúng bia số $1$ và không trúng bia số $2$ là
+			$$\mathrm{P}(\overline{B}|\overline{A})=\dfrac{\mathrm{P}(\overline{B}\cap \overline{A})}{\mathrm{P}(\overline{A})}=\dfrac{\mathrm{P}(\overline{B}) \cdot \mathrm{P}(\overline{A})}{\mathrm{P}(\overline{A})}=\mathrm{P}(\overline{B})=1-\mathrm{P}(B)=1-0{,}9=0{,}1.$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một lớp học có $17$ học sinh nam và $24$ học sinh nữ. Cô giáo gọi ngẫu nhiên lần lượt $2$ học sinh (có thứ tự) lên trả lời câu hỏi. Xét các biến cố\\
+	$A$: \lq\lq Lần thứ nhất cô giáo gọi $1$ học sinh nam\rq\rq;\\
+	$B$: \lq\lq Lần thứ hai cô giáo gọi $1$ học sinh nữ\rq\rq.\\
+	Xét tính đúng sai của các khẳng định sau?
+	\choiceTF
+	{$\mathrm{P}(B \mid A)=0{,}575$}
+	{$\mathrm{P}(B \mid \overline{A})=0{,}6$}
+	{\True $\mathrm{P}(\overline{B} \mid A)=0{,}425$}
+	{$\mathrm{P}(\overline{B} \mid \overline{A})=0{,}4$}
+	\loigiai{
+		Nếu lần thứ nhất gọi $1$ học sinh nam thì số học sinh còn lại là $40$ , số học sinh nam còn lại là $16$, số học sinh nữ giữ nguyên; nếu lần thứ nhất gọi $1$ học sinh nữ thì số học sinh còn lại là $40$, số học sinh nam giữ nguyên, số học sinh nữ còn lại là $23$.
+		\begin{itemchoice}
+			\itemch Sai. Vì $\mathrm{P}(B \mid A)=\dfrac{24}{40}=0{,}6$.
+			\itemch	Sai. Vì $\mathrm{P}(B \mid \overline{A})=\dfrac{23}{40}=0{,}575$.
+			\itemch Sai. Vì $\mathrm{P}(\overline{B} \mid A)=\dfrac{16}{40}=0{,}4$.
+			\itemch Sai. Vì $\mathrm{P}(\overline{B} \mid \overline{A})=\dfrac{17}{40}=0{,}425$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Gieo một xúc xắc cân đối và đồng chất $1$ lần. Xét các biến cố:\\
+	$A$: \lq\lq Mặt xuất hiện của xúc xắc ghi số $5$\rq\rq;\\
+	$B$: \lq\lq Mặt xuất hiện của xúc xắc ghi số lẻ\rq\rq.\\
+	Xét tính đúng sai của các khẳng định sau?
+	\choiceTF
+	{$\mathrm{P}(A)=\dfrac{5}{6}$}
+	{\True $\mathrm{P}(A \cap B)=\dfrac{1}{6}$}
+	{\True $\mathrm{P}(B \mid A)=1$}
+	{$\mathrm{P}(A \mid B)=\dfrac{1}{2}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vì $\mathrm{P}(A)=\dfrac{1}{6}$ .
+			\itemch	Đúng. Vì $\mathrm{P}(A \cap B)=\dfrac{1}{6}$ .
+			\itemch Đúng. Vì $\mathrm{P}(B \mid A)=1$.
+			\itemch Sai. Vì $\mathrm{P}(B)=\dfrac{1}{2}$. Khi đó, $\mathrm{P}(A \mid B)=\dfrac{\frac{1}{6}}{\frac{1}{2}}=\dfrac{1}{3}$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-2]
+	Một cửa hàng kinh doanh tổ chức rút thăm trúng thưởng cho hai loại sản phẩm. Tỉ lệ trúng thưởng của các loại sản phẩm I, II lần lượt là $6 \%$; $4 \%$. Trong một hộp kín gồm các thăm cùng loại, người ta để lẫn lộn $200$ chiếc thăm cho sản phẩm loại I và $300$ chiếc thăm cho sản phẩm loại II. Một khách hàng lấy ngẫu nhiên $1$ chiếc thăm từ chiếc hộp đó. Xét tính đúng sai của các khẳng định sau
+	\choiceTF
+	{Xác suất để chiếc thăm được lấy ra là trúng thưởng bằng $10\%$}
+	{Xác suất thăm được lấy ra trúng thưởng là thăm cho sản phẩm loại I bằng $6\%$ }
+	{\True Xác suất thăm được lấy ra trúng thưởng là thăm cho sản phẩm loại II bằng $50\%$}
+	{Khả năng lấy ra được thăm trúng thưởng là thăm sản phẩm loại II cao hơn khả năng lấy ra được thăm trúng thưởng là thăm sản phẩm loại I}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Xét biến cố $A$: \lq\lq Chiếc thăm được lấy ra là trúng thưởng\rq\rq.\\			
+			Khi đó, ta có\\			
+			$\mathrm{P}(A)=\dfrac{6\% \cdot 200 + 4\%  \cdot 300}{200+300}=0{,}048$.		
+			\itemch Sai. Xét biến cố $B$: \lq\lq Chiếc thăm được lấy ra là thăm cho sản phẩm loại I\rq\rq.\\
+			Khi đó, ta có:\\
+			$\mathrm{P}(B|A)=\dfrac{n(B\cap A)}{n(A)}=\dfrac{6\% \cdot 200}{6\% \cdot 200 + 4\%  \cdot 300}=0{,}5$.
+			\itemch	Đúng. Xét biến cố $C$: \lq\lq Chiếc thăm được lấy ra là thăm cho sản phẩm loại II\rq\rq.\\
+			Khi đó, ta có:\\
+			$\mathrm{P}(C|A)=\dfrac{n(C\cap A)}{n(A)}=\dfrac{4\% \cdot 300}{6\% \cdot 200 + 4\%  \cdot 300}=0{,}5$.
+			\itemch Sai. Do $\mathrm{P}(B|A) = \mathrm{P}(C|A)$ nên xác suất hai chiếc thăm lấy được là như nhau.
+		\end{itemchoice}	
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-2]
+	Một phòng nghiên cứu dược học cho $500$ người bị bệnh $H$ dùng hai loại thuốc $X$, $Y$ để điều trị. Một số người được điều trị bằng thuốc $X$ và số người còn lại được điều trị bằng thuốc $Y$. Kết quả nghiên cứu được trình bày ở bảng sau 
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{scope}[xscale=4.4]
+				\path
+				(0,0) foreach \i[count=\k] in {$X$,$Y$} {++(1,0)node(1\k){\i}}
+				(0,-1) node {Khỏi bệnh} foreach \i[count=\k] in {$180$,$190$} {++(1,0)node(2\k){\i}}
+				(0,-2) node{Không khỏi bệnh} foreach \i[count=\k] in {$60$,$70$} {++(1,0)node(3\k){\i}};
+				\draw[shift={(-0.5,.5)}] (0,0) grid (3.,-3)
+				(0,0)--(1.,-1)
+				(0,-1) node[above right]{Tình trạng}
+				(1,0) node[below left]{Loại thuốc}
+				;
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	Chọn ngẫu nhiên một người trong số này. Gọi $A$ là biến cố "Người được chọn khỏi bệnh", $B$ là biến cố "Người được chọn điều trị bằng thuốc $X$", $C$ là biến cố "Người được chọn điều trị bằng thuốc $Y$". \\ Xét tính đúng sai của các khẳng định sau?
+	\choiceTF
+	{Xác suất để một người khỏi bệnh khi điều trị bằng thuốc $Y$ có kí hiệu là $\mathrm{P}(A|B)$ }
+	{\True $\mathrm{P}(A|B)=\dfrac{3}{4}$}
+	{Xác xuất để một người khỏi bênh khi điều trị bằng thuốc $Y$  bằng $\dfrac{7}{26}$}
+	{\True Thuốc $X$ có hiệu quả hơn thuốc $Y$ trong điều trị bệnh}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vì xác suất để một người khỏi bệnh khi điều trị bằng thuốc $X$ có kí hiệu là $\mathrm{P}(A|B)$. 
+			\itemch Đúng. Vì  $\mathrm{P}(A|B)=\dfrac{n\left(AB\right)}{n(B)}=\dfrac{180}{240}=\dfrac{3}{4}$.
+			\itemch Sai. Vì $\mathrm{P}(A|C)=\dfrac{n\left(A C\right)}{n(C)}=\dfrac{190}{260}=\dfrac{19}{26}$.  \\
+			\itemch Đúng. Vì xác suất để một người khỏi bệnh khi được chọn điều trị bằng thuốc $X$ là $\dfrac{3}{4}$ và xác suất để một người khỏi bệnh khi được chọn điều trị bằng thuốc $Y$ là $\dfrac{19}{26}$. Do $\dfrac{3}{4}>\dfrac{19}{26}$ nên loại thuốc $X$ có hiệu quả hơn loại thuốc $Y$ trong việc điều trị bệnh $H$. 
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B18-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B18-KQ]
+\caukq
+\begin{ex}%[2D5N1-2]
+	Cho hai biến cố $A$, $B$ có xác suất $\mathrm{P}(A)=0{,}4$, $\mathrm{P}(B)=0{,}6$; $\mathrm{P}(AB)=0{,}2$. Xác suất $\mathrm{P}(\overline{A}\mid B)=\dfrac{a}{b}$ với $\dfrac{a}{b}$ là phân số tối giản. Tính $M=a^2+b^2$.
+	\shortans{$13$}
+	\loigiai{
+		Theo định nghĩa và tính chất xác suất có điều kiện, ta có
+		$$\mathrm{P}(\overline{A}\mid B)=1-\mathrm{P}(A \mid B)=1-\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}=1-\dfrac{0{,}2}{0{,}6}=1-\dfrac{1}{3}=\dfrac{2}{3}.$$
+		Từ đó ta có $a=2$, $b=3$. Vậy $M=a^2+b^2=2^2+3^2=13$.
+	}
+\end{ex}
+
+\begin{ex}%[2D5H1-2]
+	Một công ty bảo hiểm nhận thấy có $48 \%$ số người mua bảo hiểm ô tô là phụ nữ và có $36 \%$ số người mua bảo hiểm ô tô là phụ nữ trên $45$ tuổi. Biết một người mua bảo hiểm ô tô là phụ nữ, tính xác suất người đó trên $45$ tuổi.
+	\shortans{$0{,}75$}
+	\loigiai
+	{
+		Gọi $A$ là biến cố \lq\lq Người mua bảo hiểm ô tô là phụ nữ\rq\rq, $B$ là biến cố \lq\lq Người mua bảo hiểm ô tô trên 45 tuổi\rq\rq. Ta cần tính $\mathrm{P}(B \mid A)$.\\
+		Do có $48 \%$ người mua bảo hiểm ô tô là phụ nữ nên $\mathrm{P}(A)=0{,}48$.\\
+		Do có $36 \%$ số người mua bảo hiểm ô tô là phụ nữ trên $45$ tuổi nên $\mathrm{P}(A B)=0{,}36$.\\
+		Vậy $\mathrm{P}(B \mid A)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(A)}=\dfrac{0{,}36}{0{,}48}=0{,}75$.  
+	}
+\end{ex}
+\begin{ex}%[2D5V1-2]
+	Một nhóm $5$ học sinh nam và $4$ học sinh nữ tham gia lao động trên sân trường. Cô giáo chọn ngẫu nhiên đồng thời $2$ bạn trong nhóm đi tưới cây. Tính xác suất để hai bạn được chọn có cùng giới tính, biết rằng có ít nhất $1$ bạn nam được chọn.	(Kết quả làm tròn đến hai chữ số thập phân)
+	\shortans{$0{,}67$}
+	\loigiai{
+		Số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}^2_9=36$.\\
+		Gọi A là biến cố \lq\lq Hai bạn được chọn có cùng giới tính\rq\rq.\\
+		B là biến cố \lq\lq Có ít nhất một bạn nam được chọn\rq\rq.\\
+		Ta có $n(B)=\mathrm{C}^2_5+\mathrm{C}^1_5=15$ suy ra $\mathrm{P}(B)=\dfrac{15}{36}$.\\
+		Ta có $n(AB)=\mathrm{C}^2_5=10$ suy ra $\mathrm{P}(AB)=\dfrac{10}{36}$.\\
+		Vậy $\mathrm{P}(A|B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{10}{15}=\dfrac{2}{3}\approx 0{,}67$.
+		
+	} 
+\end{ex}
+\begin{ex}%[2D5V1-2]
+	Kết quả khảo sát những bệnh nhân bị tai nạn xe máy về mối liên hệ giữa việc đội mũ bảo hiểm và khả năng bị chấn thương vùng đầu cho thấy:\\
+	- Tỉ lệ bệnh nhân bị chấn thương vùng đầu khi gặp tai nạn là $80 \%$;\\
+	- Tỉ lệ bệnh nhân đội mũ bảo hiểm đúng cách khi gặp tai nạn là $90 \%$;\\
+	- Tỉ lệ bệnh nhân đội mũ bảo hiểm đúng cách bị chấn thương vùng đầu là $18 \%$.\\
+	Hỏi theo kết quả điều tra trên, việc đội mũ bảo hiểm đúng cách sẽ làm giảm khả năng bị chấn thương vùng đầu bao nhiêu lần? (Kết quả làm tròn đến hàng phần mười).
+	\shortans{$4{,}6$}
+	\loigiai{
+		Gọi A là biến cố: \lq\lq Bệnh nhân bị chấn thương vùng đầu khi gặp tai nạn\rq\rq\, và B là biến cố: \lq\lq Bệnh nhân đội mũ bảo hiểm đúng cách khi gặp tai nạn\rq\rq.\\
+		Theo đề bài ta có $\mathrm{P}(A)=0{,}8, \mathrm{P}(B)=0{,}9, \mathrm{P}(B|A)=0{,}18$.\\
+		Suy ra $\mathrm{P}(B\mid A)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}\Rightarrow \mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)=0{,}8\cdot 0{,}18=0{,}144$.\\
+		Vì $A\bar{B}$ và $AB$ là hai biến cố xung khắc nên $A\overline{B}\cup AB=A$.\\
+		Suy ra $\mathrm{P}(\overline{B}A)=\mathrm{P}(A)-\mathrm{P}(AB)=0{,}8-0{,}144=0{,}656$.\\
+		Ta có  $\mathrm{P}(\overline{B}\mid A)=\dfrac{\mathrm{P}(\overline{B}A)}{\mathrm{P}(A)}=\dfrac{0{,}656}{0{,}8}=0{,}82$.
+		Khi đó  $\dfrac{\mathrm{P}(\overline{B}\mid A)}{\mathrm{P}(B|A)}=\dfrac{0{,}82}{0{,18}}\approx 4{,}6$.\\
+		Như vậy việc đội mũ bảo hiểm đúng cách sẽ làm giảm khả năng chấn thương vùng đầu xuống $4{,}6$ lần.
+	}
+\end{ex} 
+
+\begin{ex}%[2D5H1-2]
+	Một công ty đấu thầu $2$ dự án. Khả năng thắng thầu của các dự án $I$ và $II$ lần lượt là $0{,}4$ và $0{,}5$. Khả năng thắng thầu của hai dự án là $0{,}3$. Gọi $A$, $B$ lần lượt là biến cố thắng thầu dự án $I$ và dự án $II$. Biết công ty không thắng thầu dự án $I$, tìm xác suất công ty thắng thầu dự án $II$.(Kết quả làm tròn đến hai chữ số thập phân)
+	\shortans{$0{,}33$}
+	\loigiai{
+		Gọi $D$ là biến cố công ty thắng dự $II$ khi công ty đã không thắng dự án $I$. Ta có
+		$$\mathrm{P}(D)=\mathrm{P}(B\mid\overline{A})=\dfrac{\mathrm{P}(\overline{A}B)}{\mathrm{P}(\overline{A})}=\dfrac{\mathrm{P}(B)-\mathrm{P}(AB)}{1-\mathrm{P}(\overline{A})}=\dfrac{0{,}5-0{,}3}{1-0{,}4}=\dfrac{1}{3}\approx 0{,}33.$$
+		
+	}
+\end{ex}
+
+\begin{ex}%[2D5V1-3]
+	Hộp thứ nhất có $4$ viên bi xanh và $6$ viên bi đỏ. Hộp thứ hai có $5$ viên bi xanh và $4$ viên bi đỏ. Các viên bi có cùng kích thước và khối lượng. Lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ nhất chuyển sang hộp thứ hai. Sau đó lại lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ hai.
+	Sử dụng sơ đồ hình cây, tính xác suất của biến cố
+	$B\colon$ \lq\lq Hai viên bi lấy ra có cùng màu\rq\rq.
+	\shortans{$0{,}54$}
+	\loigiai{
+		Gọi $X$ là biến cố: \lq\lq Viên bi lấy ra từ hộp thứ nhất có màu xanh\rq\rq.\\
+		$Y$ là biến cố: \lq\lq Viên bi lấy ra từ hộp thứ hai có màu đỏ\rq\rq.\\
+		Ta có
+		$
+		\mathrm{P}(Y|X)=0{,}4$; $\mathrm{P}(Y \mid \overline{X})=0{,}5 $; $\mathrm{P}(X)=0{,}4
+		$.\\
+		Do đó $\mathrm{P}(\overline{X})=1-\mathrm{P}(X)=0{,}6$; $\mathrm{P}(\overline{Y} |X)=1-\mathrm{P}(Y|X)=0{,}6$; \\
+		$\mathrm{P}(\overline{Y} \mid \overline{X})=1-\mathrm{P}(Y \mid \overline{X})=0{,}5$.\\
+		Ta có sơ đồ hình cây như sau
+		\begin{center}
+			\begin{tikzpicture}
+				\def\gocm{20}
+				\def\gocn{10}
+				\def\r{4}
+				\tikzset{s/.style={outer sep=0.5 mm,draw=magenta,rectangle,minimum width=2.75cm,rounded corners=1mm}}
+				\path(0,0)node(O){}++(\gocm:\r)node[s](A1){X}++(\gocn:\r)node[s](A2){$Y$};
+				\path(A1)++({-\gocn}:\r)node[s](a2){$\overline{Y}$};
+				\path(O)++(-\gocm:\r)node[s](B1){$\overline{X}$}++(\gocn:\r)node[s](B2){$Y$};
+				\path(B1)++({-\gocn}:\r)node[s](b2){$\overline{Y}$};
+				\foreach \x/\y in {
+					O/A1,A1/A2,
+					O/B1,B1/B2,
+					A1/a2,
+					B1/b2}
+				\draw[-stealth](\x.east)--(\y.west);
+				\path(O)--(A1.west)node[pos=0.5,above,sloped]{$0{,}4$}(O)--(B1.west)node[pos=0.5,below,sloped]{$0{,}6$}(B1.east)--(B2.west)node[pos=0.5,above,sloped]{$0{,}5$}(A1.east)--(A2.west)node[pos=0.5,above,sloped]{$0{,}4$}
+				(A1.east)--(a2.west)node[pos=0.5,below,sloped]{$0{,}6$}
+				(B1.east)--(b2.west)node[pos=0.5,below,sloped]{$0{,}5$};
+				
+			\end{tikzpicture}
+			
+		\end{center}
+		Khi đó $\mathrm{P}(B)=\mathrm{P}(X\overline{Y})+\mathrm{P}(\overline{X}Y)=0{,}4\cdot 0{,}6+0{,}6\cdot 0{,}5=0{,}54$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B18-KQ}

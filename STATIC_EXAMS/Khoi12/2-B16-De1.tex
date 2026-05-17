@@ -1,0 +1,544 @@
+\section{Công thức tính góc trong không gian}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-2-B16-De1]
+\caulc
+\begin{ex}%[2H5N2-7]
+	Trong hệ tọa độ $Oxyz$, góc giữa đường thẳng $Ox$  và đường thẳng $Oy$ là 
+	\choice
+	{$0^\circ$}
+	{\True $90^\circ$}
+	{$3^\circ$}
+	{ $45^\circ$}
+	\loigiai{
+		Vì $Ox$ vuông góc với $Oy$ nên	$(Ox,Oy)=90^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[2H5N2-7]
+	Trong hệ tọa độ $Oxyz$, góc giữa đường thẳng $Oz$  và mặt phẳng $(Oxy)$ là 
+	\choice
+	{$0^\circ$}
+	{\True $90^\circ$}
+	{$3^\circ$}
+	{ $45^\circ$}
+	\loigiai{
+	Vì $Oz$ vuông góc với $(Oxy)$ nên $(Oz,(Oxy))=90^\circ$.
+	}
+\end{ex}
+
+
+\begin{ex}%[2H5N2-7]
+	Trong không gian với hệ toạ độ $Oxyz$, cho hai đường thẳng $\Delta_1$ và $\Delta_2$ có véc-tơ chỉ phương lần lượt là $\overrightarrow{u}_1=(a_1 ; b_1 ; c_1)$, $\overrightarrow{u}_2=(a_2 ; b_2 ; c_2)$. Khi đó khẳng định nào sau đây \textbf{sai}?
+	\choice
+	{\True $(\Delta_1,\Delta_2)=(\overrightarrow{u}_1,\overrightarrow{u}_2)$}
+	{$\cos \left(\Delta_1, \Delta_2\right)=\dfrac{\left|a_1 a_2+b_1 b_2+c_1 c_2\right|}{\sqrt{a_1^2+b_1^2+c_1^2} \cdot \sqrt{a_2^2+b_2^2+c_2^2}}$}
+	{$\cos \left(\Delta_1, \Delta_2\right)=\dfrac{\left|\overrightarrow{u}_1\cdot \overrightarrow{u}_2 \right| }{\left| \overrightarrow{u}_1\right|\left| \overrightarrow{u}_2 \right| }$}
+	{$(\Delta_1,\Delta_2)=(\overrightarrow{u}_1,\overrightarrow{u}_2)$ hoặc $(\Delta_1,\Delta_2)=180^\circ-(\overrightarrow{u}_1,\overrightarrow{u}_2)$}
+	\loigiai{
+	Vì $(\Delta_1,\Delta_2)=(\overrightarrow{u}_1,\overrightarrow{u}_2)$ hoặc $(\Delta_1,\Delta_2)=180^\circ-(\overrightarrow{u}_1,\overrightarrow{u}_2)$ nên	$(\Delta_1,\Delta_2)=(\overrightarrow{u}_1,\overrightarrow{u}_2)$ là khẳng định sai.
+	}
+\end{ex}
+
+
+\begin{ex}%[2H5N2-7]
+	Trong không gian với hệ toạ độ $Oxyz$, cho đường thẳng
+	$
+	\Delta\colon \dfrac{x}{2}=\dfrac{y}{-1}=\dfrac{z}{2}.
+	$
+	Tính cô-sin của góc giữa đường thẳng $\Delta$ và trục $Ox$.
+	\choice
+	{\True $\dfrac{2}{3}$}
+	{ $-\dfrac{2}{3}$}
+	{ $\dfrac{1}{3}$}
+	{ $0$}
+	\loigiai{
+		Ta có véc-tơ chỉ phương của trục $Ox$ là $\overrightarrow{i}=(1;0;0)$, véc-tơ chỉ phương của đường thẳng $\Delta$ là $\overrightarrow{u}=(2;-1;2)$.\\
+		Côsin góc tạo bởi đường thẳng $\Delta$ và trục $Ox$ là $$\cos\left(\Delta,Ox\right)=\dfrac{\left|\overrightarrow{u} \cdot \overrightarrow{i}\right|}{|\overrightarrow{u}| \cdot\left|\overrightarrow{i}\right|}=\dfrac{|2 \cdot 1-1 \cdot 0+2 \cdot 0|}{\sqrt{2^2+(-1)^2+2^2} \cdot \sqrt{1^2+0^2+0^2}}=\dfrac{2}{3}.$$
+	}
+\end{ex}
+\begin{ex}%[2H5H2-7]
+	Cho hai đường thẳng
+	$$
+	\Delta_1: \dfrac{x-1}{3}=\dfrac{y}{2}=\dfrac{z+1}{1}, \,\Delta_2: \dfrac{x}{-1}=\dfrac{y-2}{2}=\dfrac{z-3}{-1}.
+	$$
+	Góc giữa $\Delta_1$ và $\Delta_2$ bằng
+	
+	\choice
+	{$0^\circ$}
+	{\True $90^\circ$}
+	{$3^\circ$}
+	{ $45^\circ$}
+	\loigiai{
+		Đường thẳng $\Delta_1$ và $\Delta_2$ có véc-tơ chỉ phương lần lượt là $\overrightarrow{u}_1=(3 ; 2 ; 1)$, $\overrightarrow{u}_2=(-1 ; 2 ;-1)$.
+		Ta có $\overrightarrow{u}_1 \cdot \overrightarrow{u}_2=3 \cdot(-1)+2 \cdot 2+1 \cdot(-1)=0$.	Suy ra $\Delta_1 \perp \Delta_2$.\\
+		Vậy $(\Delta_1,\Delta_2)=90^\circ$.}
+\end{ex}
+
+
+
+\begin{ex}%[2H5H2-7]
+	Tính góc tạo bởi đường thẳng
+	$$
+	\ell: \dfrac{x-2}{1}=\dfrac{y-5}{2}=\dfrac{z+1}{-1}
+	$$
+	và mặt phẳng $(\alpha): 2 x+y+z-1=0$.
+	
+	\choice
+	{\True$30^{\circ}$}
+	{ $90^{\circ}$}
+	{ $45^{\circ}$}
+	{ $0^{\circ}$}
+	\loigiai{
+		Đường thẳng $\ell$ có véc-tơ chỉ phương $\overrightarrow{a}=(1 ; 2 ;-1)$. Mặt phẳng $(\alpha)$ có vec-tơ pháp tuyến $\overrightarrow{n}=(2 ; 1 ; 1)$.
+		Gọi $\varphi$ là góc tạo bởi $\ell$ và $(\alpha)$. Ta có
+		$$
+		\sin \varphi=\dfrac{|\overrightarrow{a} \cdot \overrightarrow{n}|}{|\overrightarrow{a}| \cdot|\overrightarrow{n}|}=\dfrac{|1 \cdot 2+2 \cdot 1+(-1) \cdot 1|}{\sqrt{1^2+2^2+(-1)^2} \cdot \sqrt{2^2+1^2+1^2}}=\dfrac{1}{2} .
+		$$
+		Suy ra $\varphi=30^{\circ}$.
+	}
+\end{ex}
+
+\begin{ex}%[2H5H2-7]
+	Cho hai mặt phẳng $(P_1)\colon -\sqrt{3}x+z+5=0$ và $(P_2)\colon \sqrt{3}x+z-2=0$. Tính góc giữa hai mặt phẳng $(P_1)$ và $(P_2)$.
+	\choice
+	{ $70^{\circ}$}
+	{ $45^{\circ}$}
+	{ $30^{\circ}$} 
+	{\True$60^{\circ}$}
+	\loigiai{
+		Do $(P_1)$, $(P_2)$ có hai véc-tơ pháp tuyến lần lượt là 
+		$$\overrightarrow{n}_1=\left(-\sqrt{3};0;1\right),\, \overrightarrow{n}_2=\left(\sqrt{3};0;1\right) $$
+		nên
+		$$\cos\left((P_1),(P_2)\right)=\dfrac{\left|\sqrt{3}\cdot\left(-\sqrt{3}\right)+0\cdot0+1\cdot1\right|}{\sqrt{\left(-\sqrt{3}\right)^2+0^2+1^2}\cdot\sqrt{\left(\sqrt{3}\right)^2+0^2+1^2}}=\dfrac{1}{2}.$$
+		Suy ra $\left((P_1),(P_2)\right)=60^\circ$.
+	}
+\end{ex}
+
+
+\begin{ex}%[2H5H2-7]
+Trong không gian $Oxyz$, mặt phẳng $(P)\colon x-y+2z-1=0$ vuông góc với đường thẳng nào sau đây? 
+\choice
+{$\Delta_1\colon \dfrac{x-1}{2}=\dfrac{y}{-1}=\dfrac{z-1}{4}$}
+{$\Delta_2\colon \heva{&x=t\\&y=1+t\\&z=5+2t}$}
+{$\Delta_3\colon \dfrac{x}{2}=\dfrac{y}{-2}=\dfrac{z-1}{-4}$}
+{\True$\Delta_4\colon \heva{&x=-1+2t\\&y=1-2t\\&z=3+4t}$}
+\loigiai{
+	Ta có $\overrightarrow{n}_{P}=(1;-1;2)$.\\
+Xét $\Delta_4$ có véc-tơ chỉ phương là $\overrightarrow{u}=(2;-2;4)$.\\
+Ta thấy $\overrightarrow{n}_{P}$ và $\overrightarrow{u}$ cùng phương nên $\Delta_4\perp (P)$.
+}
+\end{ex}
+
+
+\begin{ex}%[2H5H2-7]
+Trong không gian $Oxyz$, cho các điểm $A(-2;0;0)$, $B(0;1;0)$, $C(0;0;-3)$ và đường thẳng $d\colon \dfrac{x-2}{2}=\dfrac{y+1}{1}=\dfrac{z-5}{2}$. Tính góc giữa đường thẳng $d$ và mặt phẳng $(ABC)$ (làm tròn đến đến hàng đơn vị của độ).
+\choice
+{\True $ 11^\circ$}
+{$ 10^\circ$}
+{$ 21^\circ$}
+{$ 12^\circ$}
+\loigiai{
+Phương trình mặt phẳng $(ABC)\colon \dfrac{x}{-2}+\dfrac{y}{1}+\dfrac{z}{-3}=1\Leftrightarrow 3x-6y+2z+6=0$.\\
+Khi đó mặt phẳng $(ABC)$ có véc-tơ pháp tuyến là $\overrightarrow{n}_{P}=(3;-6;2)$.\\
+Đường thẳng $d$ có véc-tơ chỉ phương là $\overrightarrow{u}_{d}=(2;1;2)$.\\
+Ta có $\sin (d,(ABC))=\dfrac{|3\cdot 2-6\cdot 1+2\cdot2|}{\sqrt{3^2+(-6)^2+2^2}\cdot\sqrt{2^2+1^2+2^2}}=\dfrac{4}{21}$.\\
+Suy ra $(d,(ABC))\approx 11^\circ$.}
+\end{ex}
+
+\begin{ex}%[2H5H2-7]
+	Trong không gian $Oxyz$, cho các điểm $A(1;1;0)$, $B(2;-1;1)$, $C(1;2;2)$, $D(0;1;2)$. Cô-sin góc giữa hai đường thẳng $AB$ và $CD$.
+	\choice
+	{$-\dfrac{1}{2\sqrt{3}}$}
+	{$1$}
+	{\True $\dfrac{1}{2\sqrt{3}}$}
+	{$\dfrac{1}{12}$}
+	\loigiai{
+		Đường thẳng $AB$ có véc-tơ chỉ phương là $\overrightarrow{AB}=(1;-2;1).$\\
+			Đường thẳng $CD$ có véc-tơ chỉ phương là $\overrightarrow{DC}=(1;1;0).$\\
+			Ta có $\cos (AB,CD)=\dfrac{\left|1\cdot 1-2\cdot 1+1\cdot 0 \right| }{\sqrt{1^2+(-2)^2+1^2}\cdot \sqrt{1^2+1^2+0^2}}=\dfrac{1}{2\sqrt{3}}$.
+	}
+\end{ex}
+
+\begin{ex}%[2H5V2-7]
+Trong không gian $Oxyz$, cho đường thẳng $d_1\colon\heva{&x=1\\&y=2-t\\&z=3+2t}$ và $d_2\colon \heva{&x=4+t\\&y=1+mt\\&z=2-t}$. Tìm $m$ để cô-sin góc giữa hai đường thẳng bằng $\dfrac{\sqrt{5}}{5}$.
+\choice
+{$2$}
+{$\dfrac{1}{2}$ }
+{\True$-\dfrac{1}{2}$ }
+{$-2$}
+\loigiai{
+Đường thẳng $d_1$ và $d_2$ có véc-tơ chỉ phương lần lượt là $\overrightarrow{u}_1=(0;-1;2)$ và $
+\overrightarrow{u}_2=(1;m;-1)$.\\
+Ta có \\$\begin{aligned}
+	\cos (d_1,d_2)=\dfrac{\sqrt{5}}{5}&\Leftrightarrow\dfrac{\left| 0\cdot 1-1\cdot m+2\cdot (-1)\right| }{\sqrt{0^2+(-1)^2+2^2}\sqrt{1^2+m^2+(-1)^2}}=\dfrac{\sqrt{5}}{5}\\&\Leftrightarrow 5|-m-2|=\sqrt{5}\cdot\sqrt{5}\cdot\sqrt{m^2+2}\\
+	&\Leftrightarrow m^2+4m+4=m^2+2\\&\Leftrightarrow m=-\dfrac{1}{2}.
+\end{aligned}$\\
+Vậy $m=-\dfrac{1}{2}$.
+
+}
+\end{ex}
+
+\begin{ex}%[2H5V2-7]
+	Trong không gian với hệ tọa độ $Oxyz$, gọi đường thẳng $d$ đi qua $A(-1 ; 0 ;-1)$ cắt $\Delta_1\colon \dfrac{x-1}{2}=\dfrac{y-2}{1}=\dfrac{z+2}{-1}$, sao cho cô-sin góc giữa $d$ và $\Delta_2\colon \dfrac{x-3}{-1}=\dfrac{y-2}{2}=\dfrac{z+3}{2}$ là nhỏ nhất. Phương trình đường thẳng $d$ là
+	\choice
+	{$\dfrac{x+1}{2}=\dfrac{y}{-1}=\dfrac{z+1}{-1}$}
+	{\True $\dfrac{x+1}{2}=\dfrac{y}{2}=\dfrac{z+1}{-1}$}
+	{$\dfrac{x+1}{2}=\dfrac{y}{2}=\dfrac{z+1}{1}$}
+	{$\dfrac{x+1}{2}=\dfrac{y}{2}=\dfrac{z-1}{-1}$}
+	\loigiai{
+		Đường thẳng $d$ đi qua điểm $(1;2;-2)$, véc-tơ chỉ phương là $\overrightarrow{u}=(2;1;-1)$.
+Do đó phương trình tham số của $d$ là $\heva{&x=1+2t\\&y=-t\\&z=-2-t.}$\\
+	Gọi $M=d\cap\Delta_1$ suy ra $M$ có tọa độ $(1+2 t ; 2+t;-2-t)$.\\
+	Đường thẳng $d$ có vectơ chỉ phương $\overrightarrow{A M}=(2+2 t ; 2+t ;-1-t)$.\\
+	Đường thẳng $\Delta_2$ có vectơ chỉ phương $\overrightarrow{u_2}=(-1 ; 2 ; 2)$.\\
+	Do đó cô-sin góc giữa hai đường thẳng $d$ và $\Delta_2$ là
+	$$
+	\cos\left(d, \Delta_2\right)=\dfrac{|-1(2+2 t)+2(2+t)+2(-1-t)|}{\sqrt{(2+2 t)^2+(2+t)^2+(-1-t)^2} \cdot 3}=\dfrac{|-2 t|}{3 \cdot \sqrt{6 t^2+14 t+9}} \geq 0 \text { với } \forall t.
+	$$
+	Suy ra cô-sin góc giữa hai đường thẳng $d$ và $\Delta_2$ là $0$ khi $t=0$.\\
+	Khi đó $M(1 ; 2 ;-2)$ và $\overrightarrow{A M}=(2 ; 2 ;-1)$.\\
+	Vậy phương trình đường thẳng $d$ là $\dfrac{x+1}{2}=\dfrac{y}{2}=\dfrac{z+1}{-1}$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B16-De1}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-B16-De1-DS]
+\begin{ex}%[2H5H2-7]
+	Trong không gian với hệ tọa độ $Oxyz$, cho mặt phẳng $(P)\colon x-y+2z+1=0$ và đường thẳng $d\colon\dfrac{x-1}{1}=\dfrac{y}{2}=\dfrac{z+1}{-1}$. Xác định tính đúng, sai của mỗi mệnh đề sau
+	\choiceTF
+	{\True $(-1;1; -2)$ là véc-tơ pháp tuyến của $(P)$}
+		{\True Góc giữa $(P)$ và $(d)$ là một góc nhọn}
+	{\True $\left(d,(P)\right)=30^{\circ}$}
+	{Góc giữa trục $Ox$ và $d$ (làm tròn đến hàng đơn vị của độ) bằng $50^\circ$}
+	\loigiai{
+	Ta có 	$\overrightarrow{n}_{(P)}=(1;-1; 2)$ là một véc-tơ pháp tuyến của $(P)$ và $\overrightarrow{u}_d=(1; 2;-1)$ là một véc-tơ chỉ phương của $d$.
+		\begin{itemchoice}
+		\itemch   Ta có $\overrightarrow{n}_{(P)}=(1;-1; 2)$ nên suy ra $(-1;1; -2)$ cũng là một véc-tơ pháp tuyến.
+		\itemch  
+		$\sin\left(d,(P)\right)=\dfrac{\left|\overrightarrow{n}_{(P)}\cdot\overrightarrow{u}_d\right|}{\left|\overrightarrow{n}_{(P)}\right|\cdot\left|\overrightarrow{u}_d\right|} =\dfrac{|1-2-2|}{\sqrt{6}\cdot\sqrt{6}}=\dfrac{1}{2}$.  \\
+		Suy ra 	$0<\sin\left(d,(P)\right)\ne 1$ do đó góc giữa $(P)$ và $(d)$ là một góc nhọn.
+			\itemch  
+			Vậy $\sin\left(d,(P)\right)=\dfrac{\left|\overrightarrow{n}_{(P)}\cdot\overrightarrow{u}_d\right|}{\left|\overrightarrow{n}_{(P)}\right|\cdot\left|\overrightarrow{u}_d\right|} =\dfrac{|1-2-2|}{\sqrt{6}\cdot\sqrt{6}}=\dfrac{1}{2}\Rightarrow \left(d,(P)\right)=30^{\circ}$.
+			\itemch
+			Ta có  $\overrightarrow{u}_{Ox}=\overrightarrow{i}=(1; 0;0)$.\\
+			$\cos\left(d,Ox\right)=\dfrac{\left|\overrightarrow{u}_{d}\cdot\overrightarrow{i}\right|}{\left|\overrightarrow{u}_{d}\right|\cdot\left|\overrightarrow{i}\right|} =\dfrac{|1-0-0|}{\sqrt{6}\cdot\sqrt{1}}=\dfrac{\sqrt{6}}{6}\Rightarrow (d,Ox)\approx 67^{\circ}$.
+			\end{itemchoice}}
+\end{ex}
+	
+\begin{ex}%[2H5H2-7]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hình chóp $S.ABCD$ có đáy là hình vuông $ABCD$ và $SA\perp (ABCD)$. Cho biết $A(0;0;0)$, $B(2;0;0)$, $D(0;2;0)$, $S(0;0;3)$. Xác định tính đúng, sai của mỗi mệnh đề sau
+\choiceTF
+{\True Hai đường thẳng $SC$ và $BD$ vuông góc}
+{Góc giữa hai đường thẳng $AB$ và $SC$ là $60^\circ$}
+{ Góc giữa đường thẳng $SC$ và mặt phẳng $(SBD)$ (làm tròn đến hàng đơn vị của độ) bằng $18^\circ$}
+{\True Cô-sin giữa mặt phẳng $(SBD)$ và mặt đáy bằng $\dfrac{1}{\sqrt{22}}$}
+{ }
+\loigiai{
+\immini{	Ta có $C(2;2;0)$, $\overrightarrow{SC}=(2;2;-3)$, $\overrightarrow{BD}=(-2;2;0)$.\\
+Phương trình mặt phẳng $(SBD)$ theo đoạn chắn là $\dfrac{x}{2}+\dfrac{y}{2}+\dfrac{z}{3}=1$ hay $3x+3y+2z-6=0$. Suy ra véc-tơ pháp tuyến của mặt phẳng $(SBD)$ là $\overrightarrow{n}=(3;3;2)$.}
+{\begin{tikzpicture}[scale=0.6, font=\footnotesize, line join=round, line cap=round, >=stealth]
+	\def\bc{5} % cạnh BC
+	\def\ba{3.5} % cạnh BA
+	\def\h{5} % đường cao
+	\def\gocB{40} % góc B của đáy
+	\coordinate (B) at (0,0);
+	\coordinate (A) at (\gocB:\ba);
+	\coordinate (C) at (\bc,0);
+	\coordinate (D) at ($(C)-(B)+(A)$);
+	\coordinate (O) at ($(A)!.5!(C)$);
+	\coordinate (S) at ($(A)+(90:\h)$);
+	\coordinate (z) at ($(A)+(90:\h+1)$) ;
+	\coordinate (y) at ($(A)!1.2!(D)$);
+	\coordinate (x) at ($(A)!1.3!(B)$);
+	\draw (B)--(C)--(D)--(S)--cycle (S)--(C);
+	\draw[dashed] (A)--(D)--(B) (S)--(A)--(B);
+	\draw [->] (S)--(z) ;
+	\draw [->] (D)--(y);
+	\draw [->] (B)--(x);
+	\foreach \p/\i in {S/180, A/180,B/-60,D/40,C/-90}
+	\fill (\p) circle (1.5pt) node[shift={(\i:3mm)}]{$\p$};
+		\foreach \p/\i in {z/180,y/-90,x/150}\fill (\p) circle (0.1pt)
+ node[shift={(\i:3mm)}]{$\p$};
+\end{tikzpicture}}
+\begin{itemchoice}
+	\itemch
+	Hai đường thẳng $SC$ và $BD$ có các véc-tơ chỉ phương lần lượt là $\overrightarrow{SC}$ và	$\overrightarrow{BD}$.\\
+	Mà $\overrightarrow{SC}\cdot\overrightarrow{BD}=2\cdot (-2)+2\cdot 2+0\cdot (-3)=0$ nên $SC\perp BD$.
+	\itemch 
+	Đường thẳng $AB$ trùng với trục $Ox$ nên có véc-tơ chỉ phương là $\overrightarrow{i}=(1;0;0)$.\\
+	Ta có $\cos(AB,SC)=\dfrac{\left|\overrightarrow{i}\cdot\overrightarrow{SC} \right| }{\left|\overrightarrow{i}\right| \cdot \left| \overrightarrow{SC} \right|}=\dfrac{\left|1\cdot 2+0\cdot 2+0\cdot (-3) \right| }{\sqrt{1^2+0^2+0^2}\cdot \sqrt{2^2+2^2+(-3)^2}}=\dfrac{2\sqrt{17}}{17}$.\\
+	Suy ra $(AB,SC)\approx 61^\circ$.
+	\itemch
+	$\sin (SC,(SBD))=\dfrac{\left|\overrightarrow{SC}\cdot\overrightarrow{n} \right| }{\left|\overrightarrow{SC}\right| \cdot \left| \overrightarrow{n} \right|}=\dfrac{\left|2\cdot 3+2\cdot 3-3\cdot 2 \right| }{\sqrt{2^2+2^2+(-3)^2}\cdot \sqrt{3^2+3^2+2^2}}=\dfrac{\sqrt{354}}{59}$.\\
+	Vậy $ (SC,(SBD))\approx 19^\circ$.
+	\itemch
+	Ta có đáy $ABCD$ nằm trong mặt mặt phẳng $Oxy$ nên có pháp tuyến là $\overrightarrow{k}=(0;0;1)$.\\
+	Ta có $\cos((SBD),(ABCD))=\dfrac{\left| \overrightarrow{n}\cdot \overrightarrow{k}\right| }{\left| \overrightarrow{n}\right|\cdot \left|\overrightarrow{k} \right|}=\dfrac{\left|3\cdot 0+3\cdot 0+2\cdot 1 \right| }{\sqrt{3^2+3^2+2^2}\sqrt{0^2+0^2+1^2}}=\dfrac{1}{\sqrt{22}}$.
+\end{itemchoice}
+}
+\end{ex}
+\begin{ex}%[2H5H2-7]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hình lăng trụ đứng $OAB.O'A'B'$ với $O(0;0;0)$, $A(a;0;0)$, $B(0;2a;0)$, $O'(0;0;3a)$, $a>0$. Xác định tính đúng, sai của mỗi mệnh đề sau
+	\choiceTF
+	{Tọa độ của điểm $B'$ là $(a;0,2a)$}
+	{ \True Phương trình mặt phẳng $(O'AB)$ là $6x+3y+2z-6a=0$}
+	{\True Sin của góc giữa đường thẳng $A'B$ và mặt phẳng $(O'AB)$ bằng $\dfrac{3\sqrt{14}}{49}$}
+	{Góc giữa hai mặt phẳng $(OO'A'A)$ và $(AA'B'B)$  (làm tròn đến hàng đơn vị của độ) bằng $63^\circ$}
+	\loigiai{
+	\begin{center}
+	\begin{tikzpicture}[scale=0.6, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\bc{5} % cạnh BO
+		\def\ba{3.5} % cạnh BA
+		\def\h{5} % đường cao
+		\def\goc{-140} % góc B của đáy
+		\coordinate (O) at (0,0);
+		\coordinate (A) at (\goc:\ba);
+		\coordinate (B) at (\bc,0);
+		\coordinate (O') at ($(O)+(90:\h)$);
+		\coordinate (z) at ($(O)+(90:\h+1)$);
+		\coordinate (y) at ($(O)!1.2!(B)$);
+		\coordinate (x) at ($(O)!1.3!(A)$);
+		\coordinate (A') at ($(A)-(O)+(O')$);
+		\coordinate (B') at ($(B)-(O)+(O')$);
+		\draw (O')--(A')--(A)--(B)--(B')--cycle (A')--(B');
+		\draw[dashed] (B)--(O)--(O')--cycle (O)--(A)--(O');
+		\draw [->] (O')--(z);
+		\draw [->] (B)--(y);
+		\draw [->] (A)--(x);
+		\foreach \p/\i in {O'/180, O/180,A/-60,B/40,A'/180,B'/0}
+		\fill (\p) circle (1.5pt) node[shift={(\i:3mm)}]{$\p$};
+		\foreach \p/\i in {z/180,y/-90,x/150}
+		\fill (\p)  node[shift={(\i:3mm)}]{$\p$};
+	\end{tikzpicture}
+	\end{center}	
+	Ta có $A'(a;0;3a)$; $\overrightarrow{A'B}=(-a;2a;-3a)\Rightarrow \overrightarrow{A'B}=-a\cdot\overrightarrow{u}$, với $\overrightarrow{u}=(1;-2;3)$.
+	\begin{itemchoice}
+		\itemch
+		Tọa độ của điểm $B'$ là $(0;2a,3a)$.
+		\itemch
+		Mặt phẳng $(O'AB)$ đi qua ba điểm $O'(0;0;3a)$, $A(a;0;0)$, $B(0;2a;0)$ nên có phương trình
+		$\dfrac{x}{a}+\dfrac{y}{2a}+\dfrac{z}{3a}=1$ hay $6x+3y+2z-6a=0$.
+		\itemch
+		Véc-tơ  pháp tuyến của mặt phẳng $(O'AB)$ là $\overrightarrow{n}_1=(6;3;2)$.\\
+Đường thẳng $A'B$ có véc-tơ chỉ phương là $\overrightarrow{u}$.\\
+Ta có $\sin (A'B,(O'AB))=\dfrac{\left|\overrightarrow{u}\cdot\overrightarrow{n}_1 \right| }{\left|\overrightarrow{u}\right| \cdot \left| \overrightarrow{n}_1 \right|}=\dfrac{\left|1\cdot 6-2\cdot 3+3\cdot 2 \right| }{\sqrt{1^2+(-2)^2+3^2}\cdot \sqrt{6^2+3^2+2^2}}=\dfrac{3\sqrt{14}}{49}$.
+\itemch
+Mặt phẳng $(OO'A'A)$ trùng với mặt phẳng $Oxz$ nên có véc-tơ pháp tuyến\break $\overrightarrow{j}=(0;1;0)$.\\
+Mặt phẳng $(AA'BB')$ có cặp véc-tơ chỉ phương là $\overrightarrow{AA'}=(0;0;3a)$, $\overrightarrow{AB}=(-a;2a;0)$.\\
+Ta có $[\overrightarrow{AA'},\overrightarrow{AB}]=(-6a^2;-3a^2;0)$ nên suy ra mặt phẳng $(AA'BB')$ có một véc-tơ pháp tuyến là $\overrightarrow{n}_2=(2;1;0)$.\\
+Lại có $$\cos((OO'A'A),(AA'B'B))=\dfrac{\left|\overrightarrow{j}\cdot\overrightarrow{n}_2 \right| }{\left|\overrightarrow{j}\right| \cdot \left| \overrightarrow{n}_2 \right|}=\dfrac{\left|0\cdot 2+1\cdot 1+0\cdot 0 \right| }{\sqrt{1^2+0^2+0^2}\cdot \sqrt{2^2+1^2+0^2}}=\dfrac{\sqrt{5}}{5}.$$
+Vậy $((OO'A'A),(AA'B'B))\approx 63^\circ$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+
+\begin{ex}%[2H5H2-7]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hai đường thẳng $\Delta\colon \heva{&x=1+t\\&y=2t\\&z=-5-2t}$ và $\Delta'\colon \dfrac{x-1}{2}=\dfrac{y-3}{3}=\dfrac{z+2}{-1}$. Xét các véc-tơ $\overrightarrow{u}=(1;2;-5)$,$\overrightarrow{u}'=(4;6;-2)$.
+	Xác định tính đúng, sai của mỗi mệnh đề sau
+\choiceTF
+{ Véc-tơ  $\overrightarrow{u}$ là một véc-tơ chỉ phương của $\Delta$ }
+{\True Véc-tơ  $\overrightarrow{u}'$ là một véc-tơ chỉ phương của $\Delta'$}
+{ $\cos(\overrightarrow{u},\overrightarrow{u}')=\dfrac{26}{\sqrt{105}}$}
+{\True$(\Delta,\Delta')\approx 27^\circ$}
+\loigiai{
+\begin{itemchoice}
+	\itemch Véc-tơ chỉ phương của $\Delta$ là $\overrightarrow{u}_{\Delta}=(1;2;-2)$.
+	\itemch Véc-tơ  $\overrightarrow{u}_{\Delta'}=(2;3;-1)$ là một véc-tơ chỉ phương của $\Delta'$ nên  $\overrightarrow{u}'=(4;6;-2)$ là véc-tơ chỉ phương của $\Delta'$.
+	\itemch 
+	 $\cos(\overrightarrow{u},\overrightarrow{u}')=\dfrac{\left|\overrightarrow{u}\cdot\overrightarrow{u}' \right| }{\left|\overrightarrow{u}\right| \cdot \left| \overrightarrow{u}' \right|}=\dfrac{\left|1\cdot 4+2\cdot 6+(-5)\cdot (-2) \right| }{\sqrt{1^2+2^2+(-5)^2}\cdot \sqrt{4^2+6^2+(-2)^2}}=\dfrac{13}{2\sqrt{105}}$.
+	 \itemch
+	 $\cos(\Delta,\Delta')=\dfrac{\left|\overrightarrow{u}_{\Delta}\cdot\overrightarrow{u}_{\Delta'} \right| }{\left|\overrightarrow{u}_{\Delta}\right| \cdot \left| \overrightarrow{u}_{\Delta'} \right|}=\dfrac{\left|1\cdot 2+2\cdot 3+(-2)\cdot (-1) \right| }{\sqrt{1^2+2^2+(-2)^2}\cdot \sqrt{2^2+3^2+(-1)^2}}=\dfrac{5\sqrt{14}}{21}$.\\
+	 Suy ra $(\Delta,\Delta')\approx 27^\circ$.
+		\end{itemchoice}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B16-De1-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B16-De1-KQ]
+\caukq
+\begin{ex}%[2H5H2-7]
+Tính góc giữa đường thẳng $\Delta$ và mặt phẳng $(P)$ biết $\Delta\colon \dfrac{x}{2}=\dfrac{y+5}{-2}=\dfrac{z+1}{3}$ và $(P)\colon 3x+2y-z-2025=0$ (làm tròn đến hàng đơn vị của độ).
+	\shortans{$4$}
+	\loigiai{
+		Ta có $\overrightarrow{n}_{P}=(3;2;-1)$, $\overrightarrow{u}_{d}=(2;-2;3)$.\\
+	$\sin (d,(P))=\dfrac{\left|\overrightarrow{u}\cdot\overrightarrow{n}_{P} \right| }{\left|\overrightarrow{u}\right| \cdot \left| \overrightarrow{n}_{P} \right|}=\dfrac{\left|3\cdot 2-2\cdot 2-1\cdot 3 \right| }{\sqrt{2^2+(-2)^2+3^2}\cdot \sqrt{3^2+2^2+(-1)^2}}=\dfrac{1}{\sqrt{238}}$.\\
+	Suy ra $(d,(P))\approx 4^\circ$.
+	}
+\end{ex}
+\begin{ex}%[2H5H2-7]
+	Tính góc giữa hai mặt phẳng $(P)$ và $(Q)$ biết $(P)\colon x+y-2z-2024=0$ và $(Q)\colon 5x+3y+4z+2025=0$ (làm tròn đến hàng đơn vị của độ).
+	\shortans{$90$}
+	\loigiai{
+		Ta có $\overrightarrow{n}_{P}=(1;1;-2)$, $\overrightarrow{n}_{Q}=(5;3;4)$.\\
+		$\cos ((P),(Q))=\dfrac{\left|\overrightarrow{n}_{P}\cdot\overrightarrow{n}_{Q} \right| }{\left|\overrightarrow{n}_{P}\right| \cdot \left| \overrightarrow{n}_{Q} \right|}=\dfrac{\left|1\cdot 5+1\cdot 3-2\cdot 4 \right| }{\sqrt{1^2+1^2+(-2)^2}\cdot \sqrt{5^2+3^2+4^2}}=0$.\\
+		Suy ra $((P),(Q))=90^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[2H5V2-7]
+Khi gắn hệ tọa độ $O x y z$ (đơn vị trên mỗi trục tính theo mét) vào một căn nhà sao cho nền nhà thuộc mặt phẳng $(O x y)$, người ta coi mỗi mái nhà là một phần của mặt phẳng và thấy ba vị trí $A$, $B$, $C$ ở mái nhà bên phải lần lượt có tọa độ $(2;0;1)$, $(4;0;2)$ và $(4;5;3)$. Góc giữa mái nhà bên phải và nền nhà bằng bao nhiêu độ (làm tròn kết quả đến hàng đơn vị)?
+		\begin{center}
+		\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=.3,declare function={gx=30;gy=140;gop=atan(6/5);op=sqrt(5^2+6^2);}]
+			\path 
+			(0,0) coordinate (O)
+			(0,9) coordinate (D)
+			(gx:5) coordinate (P1)
+			($(P1)+(0,6)$) coordinate (P)
+			(gx:11) coordinate (A1)
+			($(A1)+(0,9)$) coordinate (A)
+			(gy:14) coordinate (C1)
+			($(C1)+(0,9)$) coordinate (C)
+			($(C)-(D)+(P)$) coordinate (Q)
+			($(Q)-(P)+(A)$) coordinate (B)
+			($(B)-(0,9)$) coordinate (B1)
+			(gx:13) coordinate (x)
+			(gy:17) coordinate (y)
+			(0,20) coordinate (z)
+			;
+			\draw[->,>=stealth] (O)node[below]{$O$}--(x)node[below]{$x$};
+			\draw[->,>=stealth] (O)--(y)node[left]{$y$};
+			\draw[->,>=stealth] (O)--(z)node[right]{$z$};
+			\draw (C1)--(C)--(Q)--(B)node[above]{$C(4;5;3)$}--(A)--(P)--(D)--(C) (A)node[right]{$B(4;0;2)$}--(A1) (Q)--(P)node[shift={(-0.2,-0.4)}]{$A\left(2;0;1\right)$};
+			\draw[dashed] (C1)--(B1)--(A1) (B)--(B1);
+		\end{tikzpicture}
+	\end{center}
+\shortans{$28$}
+\loigiai{
+	Mặt phẳng $(A B C)$ có cặp véc-tơ chỉ phương là $\overrightarrow{AB}=(2;0;1)$, $\overrightarrow{AC}=(2;5;2)$.\\
+	Ta có $[\overrightarrow{AC},\overrightarrow{AB}]= (5;2;-10)$. \\Suy ra mặt phẳng $(A B C)$ có véc-tơ pháp tuyến $\overrightarrow{n}=(5;2;-10)$.\\
+ Mặt phẳng $(O x y)$ có véc-tơ pháp tuyến là  $\overrightarrow{k}=(0 ; 0 ; 1)$.\\
+ Từ đó, góc có $\alpha$ giữa mái nhà bên phải và nền nhà có 
+ 
+ $\cos \alpha=\dfrac{\left|\overrightarrow{n}\cdot\overrightarrow{k} \right| }{\left|\overrightarrow{n}\right| \cdot \left| \overrightarrow{k} \right|}=\dfrac{\left|5\cdot 0+2\cdot 0-10\cdot 1 \right| }{\sqrt{5^2+2^2+(-10)^2}\cdot \sqrt{0^2+0^2+1^2}}=\dfrac{10}{\sqrt{129}}$.\\
+  Suy ra $\alpha \approx 28^{\circ}$.
+}
+\end{ex}
+\begin{ex}%[2H5V2-7]
+	Khi gắn hệ toạ độ $O x y z$ (đơn vị trên mỗi trục tính theo kilômét) vào một sân bay, mặt phẳng $(O x y)$ trùng với mặt sân bay. Một máy bay ở vị trí $A(3 ;-2 ; 3)$ sẽ hạ cánh tới vị trí $B(8 ; 8 ; 0)$. Góc giữa đường bay (một phần của đường thẳng $A B$ ) và sân bay (một phần của mặt phẳng $(O x y)$ ) bằng bao nhiêu độ (làm tròn kết quả đến hàng đơn vị)?
+	\begin{center}
+	\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=.5]
+		\path 
+		(0,0) coordinate (O)
+		(-4,0) coordinate (N)
+		($(O)!1!40:(N)$) coordinate (M)
+		(0,0.9) coordinate (P)
+		($(O)!1.2!(M)$) coordinate (x)
+		(-5,0.8) coordinate (A)
+		(3,-3) coordinate (B)
+		($(A)!2.1cm!(B)$) coordinate (C)
+		(intersection of A--B and O--M) coordinate (B1)
+		;
+		\draw[line width=0.3mm,red] (A)--(C) (B1)--(B);
+		\draw[line width=0.3mm,red,dashed] (C)--(B1);
+		\draw[->,>=stealth,line width=0.3mm,blue] (0,0)--(x) node[right=0.2cm]{$x$};
+		\draw[->,>=stealth,line width=0.3mm,blue] (-5,0)--(-4,0) (0,0) node[above right]{$O$}--(7,0) node[below]{$y$};
+		\draw[line width=0.3mm,blue,dashed] (-4,0)--(0,0);
+		\draw[->,>=stealth,line width=0.3mm,blue] (0,0)--(0,3) node[left]{$z$};
+		\foreach \x/\gm in {A/90,B/90} \fill (\x) circle (1pt) ($(\x)+(\gm:5mm)$)node[blue]{$\x$};	
+	\end{tikzpicture}
+	\end{center}
+	
+	\shortans{$15$}
+	\loigiai{
+		Đường thẳng $A B$ có véc-tơ chỉ phương là $\overrightarrow{u}=(5 ; 10 ;-3)$, mặt phẳng $(O x y)$ có véc-tơ pháp tuyến là $\overrightarrow{k}=(0 ; 0 ; 1)$. \\
+		Gọi $\alpha$ là góc giữa đường bay (một phần của đường thẳng $A B$ ) và sân bay (một phần của mặt phẳng $(O x y)$). Khi đó
+		$\sin \alpha=\dfrac{|\overrightarrow{k} \cdot \overrightarrow{u}|}{|\overrightarrow{k}| \cdot|\overrightarrow{u}|}=\dfrac{3}{\sqrt{134}}$.\\
+		Suy ra $\alpha \approx 15^{\circ}$.
+		
+	}
+\end{ex}
+
+\begin{ex}%[2H5C2-7]
+	Cho hình chóp đều $S.ABCD$ có cạnh bên bằng $a\sqrt{3}$, cạnh đáy bằng $2a$. Góc giữa hai mặt phẳng $(SCD)$ và mặt đáy (làm tròn đến hàng đơn vị của độ) bằng bao nhiêu?
+\shortans{$45$}	\loigiai{
+		\immini{
+		Gọi $O=AC \cap BD$. Vì $S.ABCD$ là hình chóp đều nên $S O \perp(A B C D)$.\\
+		Ta có $AC=BD=AB \sqrt{2}=2 a \sqrt{2}$ và \break $S O=\sqrt{S D^2-O D^2}=\sqrt{3 a^2-2 a^2}=a$.\\
+		Chọn hệ trục $O x y z$ như hình vẽ với $O(0;0;0)$, $C(a \sqrt{2} ; 0 ; 0)$, $D(0 ; a \sqrt{2} ; 0)$ và $S(0 ; 0 ; a)$.\\
+		Ta có mặt phẳng $(A B C D)$  có một véc-tơ pháp tuyến là $\overrightarrow{k}=(0 ; 0 ; 1)$.
+}
+		{
+			\begin{tikzpicture}[scale=0.55, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{5} % cạnh BC
+				\def\ba{3.5} % cạnh BA
+				\def\h{5} % đường cao
+				\def\gocB{40} % góc B của đáy
+				\coordinate (B) at (0,0);
+				\coordinate (A) at (\gocB:\ba);
+				\coordinate (C) at (\bc,0);
+				\coordinate (D) at ($(C)-(B)+(A)$);
+				\coordinate (O) at ($(A)!.5!(C)$);
+				\coordinate (S) at ($(O)+(90:\h)$);
+				\coordinate (z) at ($(O)+(90:\h+1)$)
+				;
+				\coordinate (y) at ($(O)!1.3!(D)$);
+				\coordinate (x) at ($(O)!1.5!(C)$);
+				\draw (B)--(C)--(D)--(S)--cycle (S)--(C);
+				\draw[dashed] (C)--(A)--(D)--(B) (O)--(S)--(A)--(B);
+				\draw [->] (S)--(z);
+				\draw [->] (D)--(y);
+				\draw [->] (C)--(x);
+			
+				\foreach \p/\i in {z/180,y/-90,x/40}
+				\fill (\p)  node[shift={(\i:3mm)}]{$\p$};
+					\foreach \p/\i in {S/180, A/180,B/-60,D/40,C/-120,O/170}
+				\fill (\p) circle (1.5pt) node[shift={(\i:3mm)}]{$\p$};
+		\end{tikzpicture}}
+	\noindent
+	Phương trình mặt phẳng $(SCD)$ dưới dạng đoạn chắn là
+ 	$$ \dfrac{x}{a \sqrt{2}}+\dfrac{y}{a \sqrt{2}}+\dfrac{z}{a}=1\qquad \text{hay } x+y+\sqrt{2} z-a \sqrt{2}=0.$$
+	Khi đó $(SCD)$ có một véc-tơ pháp tuyến là $\overrightarrow{n}=(1 ; 1 ;\sqrt{2})$.\\
+	Suy ra $\cos ((S C D),(A B C D))=\dfrac{\left|\overrightarrow{k} \cdot \overrightarrow{n}\right|}{|\overrightarrow{k}| \cdot|\overrightarrow{n}|}=\dfrac{\sqrt{2}}{2} \Rightarrow((SCD),(ABCD))=45^{\circ}$.
+	}
+\end{ex}
+
+
+\begin{ex}%[2H5C2-7]
+	Cho biết kim tự tháp Memphis tại bang Tennessee (Mỹ) có dạng hình chóp tứ giác đều $S.ABCD$ với chiều cao $98$ m và cạnh đáy $180$ m. Số đo góc giữa hai mặt bên bằng bao nhiêu độ (làm tròn kết quả đến hàng đơn vị)?
+	\shortans{$63$}
+	\loigiai{
+	\immini{
+	Gọi $O=AC \cap BD$. Vì $S.ABCD$ là hình chóp đều nên $S O \perp(A B C D)$.\\
+	Ta có $AC=BD=AB \sqrt{2}=180 \sqrt{2}$.\\
+	Chọn hệ trục $Oxyz$ như hình vẽ với $O(0;0;0)$, $C(90 \sqrt{2} ; 0 ; 0)$, $D(0 ; 90 \sqrt{2} ; 0)$, $B(0;-900\sqrt{2};0)$ và $S(0 ; 0 ; 98)$.
+}
+{
+	\begin{tikzpicture}[scale=0.55, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\bc{5} % cạnh BC
+		\def\ba{3.5} % cạnh BA
+		\def\h{5} % đường cao
+		\def\gocB{40} % góc B của đáy
+		\coordinate (B) at (0,0);
+		\coordinate (A) at (\gocB:\ba);
+		\coordinate (C) at (\bc,0);
+		\coordinate (D) at ($(C)-(B)+(A)$);
+		\coordinate (O) at ($(A)!.5!(C)$);
+		\coordinate (S) at ($(O)+(90:\h)$);
+		\coordinate (z) at ($(O)+(90:\h+1)$);
+		\coordinate (y) at ($(O)!1.25!(D)$);
+		\coordinate (x) at ($(O)!1.5!(C)$);
+		\draw (B)--(C)--(D)--(S)--cycle (S)--(C);
+		\draw[dashed] (C)--(A)--(D)--(B) (O)--(S)--(A)--(B);
+		\draw [->] (S)--(z);
+		\draw [->] (D)--(y);
+		\draw [->] (C)--(x);
+		\foreach \p/\i in {S/180, A/180,B/-60,D/40,C/-120,O/170}
+		\fill (\p) circle (1.5pt) node[shift={(\i:3mm)}]{$\p$};
+		\foreach \p/\i in {z/180,y/-90,x/40}
+		\fill (\p)  node[shift={(\i:3mm)}]{$\p$};
+\end{tikzpicture}}
+\noindent
+	Phương trình mặt phẳng $(SBC)$ dưới dạng đoạn chắn là
+	$$ \dfrac{x}{90\sqrt{2}}+\dfrac{y}{-90 \sqrt{2}}+\dfrac{z}{98}=1\qquad \text{hay } 49x-49y+45\sqrt{2} z-4410 \sqrt{2}=0.$$
+Phương trình mặt phẳng $(SCD)$ dưới dạng đoạn chắn là\\ $ \dfrac{x}{90 \sqrt{2}}+\dfrac{y}{90 \sqrt{2}}+\dfrac{z}{98}=1$ hay $49x+49y+45\sqrt{2} z-a \sqrt{2}=0$.\\
+Khi đó hai mặt phẳng $(SBC)$ và $(SCD)$ có véc-tơ pháp tuyến lần lượt là  $\overrightarrow{n}_1=(49 ; -49 ; 45\sqrt{2})$, $\overrightarrow{n}_2=(49 ; 49 ; 45\sqrt{2})$.\\
+Suy ra $$\cos ((S BC),(SCD))=\dfrac{|\overrightarrow{n}_1 \cdot \overrightarrow{n}_2|}{|\overrightarrow{n}_1| \cdot|\overrightarrow{n}_2|}=\dfrac{\left|49\cdot 49-49\cdot 49+45\sqrt{2}\cdot 45\sqrt{2} \right| }{\sqrt{49^2+(-49)^2+(45\sqrt{2})^2}\cdot \sqrt{49^2+49^2+(45\sqrt{2})^2}}=\dfrac{\sqrt{2025}}{4426}.$$ 
+Do đó $((SBC),(SCD))\approx 63^{\circ}$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B16-De1-KQ}

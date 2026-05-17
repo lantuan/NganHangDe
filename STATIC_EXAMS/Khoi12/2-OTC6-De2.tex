@@ -1,0 +1,597 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-B6-De2-TN]
+\caulc
+%%%%%----------Câu 1
+\begin{ex}%[2D6N1-1]%[Võ Thanh Hiệp]
+Cho hai biến cố $A$ và $B$. Xác suất của biến cố $B$, tính trong điều kiện biết rằng biến cố $A$ đã xảy ra, được gọi là xác suất của $B$ với điều kiện $A$ kí hiệu là 
+	\choice
+	{$\mathrm{P}\left(A\mid B\right)$}
+	{\True $\mathrm{P}\left(B\mid A\right)$}
+	{$\mathrm{P}\left(AB\right)$}
+	{$\mathrm{P}\left(B\right)$}
+	\loigiai{
+	Theo định nghĩa xác suất có điều kiện. Xác suất của $B$ với điều kiện $A$ kí hiệu là $\mathrm{P}\left(B\mid  A\right)$.
+	}	
+\end{ex}
+%%%%%----------Câu 2
+\begin{ex}%[2D6N1-2]%[Võ Thanh Hiệp]
+	Cho hai biến cố $A$ và $B$. Biết rằng xác suất của biến cố $A$ bằng $0{,}6$; xác suất của biến cố biến cố $B$ trong điều kiện biến cố $A$ đã xảy ra bằng $0{,}2$. Tính xác suất của $A$ và $B$ đều xảy ra. 
+	\choice
+	{\True $\dfrac{3}{25}$}
+	{$\dfrac{3}{10}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{2}{3}$}
+	\loigiai{
+	Ta có $\mathrm{P}\left(A\right) = 0{,}6$; $\mathrm{P}\left(B\mid A\right) = 0{,}2$.\\
+	Suy ra 
+	$\mathrm{P}\left(AB\right)=
+	\mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid A\right)=0{,}6\cdot 0{,}2 =
+	 0{,}12 = \dfrac{3}{25} $.\\
+	 Vậy xác suất của $A$ và $B$ đều xảy ra là $\mathrm{P}\left(AB\right)= \dfrac{3}{25}$.
+	}	
+\end{ex}
+%%%%%----------Câu 3
+\begin{ex}%[2D6H1-2]%[Võ Thanh Hiệp]
+Gieo hai con xúc xắc cân đối đồng chất. Tính xác suất để tổng số chấm trên hai con xúc xắc bằng bằng $8$ nếu biết rằng ít nhất có một con xúc xắc xuất hiện mặt $3$ chấm.
+	\choice
+	{$\dfrac{5}{11}$}
+	{$\dfrac{2}{5}$}
+	{$\dfrac{11}{5}$}
+	{\True $\dfrac{2}{11}$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Tổng số chấm trên hai con xúc xắc bằng bằng $8$\rq\rq.\\
+Gọi $B$ là biến cố: \lq\lq Có ít nhất có một con xúc xắc xuất hiện mặt $3$ chấm\rq\rq.\\
+ Gieo hai con xúc xắc cân đối đồng chất, ta có $n\left(\Omega\right)=6\cdot 6 = 36$.\\
+$A=\{(2,6); (6,2); (3,5); (5,3); (4;4)\}$	$\Rightarrow n\left(A\right) = 5
+\Rightarrow \mathrm{P}\left(A\right)= \dfrac{5}{36}$.\\	
+$B=\{(3,1);(3,2); (3,3); (3,4); (3,5); (3,6); (1,3); (2,3); (4,3); (5,3); (6,3)\}$.\\
+$\Rightarrow n\left(B\right) =11 \Rightarrow \mathrm{P}\left(B\right)= \dfrac{11}{36}$.\\
+$AB=\{(3,5); (5,3)\}$
+$\Rightarrow n\left(AB\right) =2\Rightarrow \mathrm{P}\left(AB\right)=\dfrac{2}{36}=\dfrac{1}{18}$.\\
+Xác suất cần tính là 	
+$\mathrm{P}\left(A\mid B\right) =\dfrac{\mathrm{P}\left(AB\right) }{\mathrm{P}\left(B\right)}= \dfrac{2}{11}$.
+	}	
+\end{ex}
+%%%%%----------Câu 4
+\begin{ex}%[2D6H1-1]%[Võ Thanh Hiệp]
+Cho $A$ và $B$ là hai biến cố. Trong các mệnh đề sau, mệnh đề nào {\bf sai}?
+	\choice
+{\True Với $\mathrm{P}\left(B\right)>0$. Khi đó $\mathrm{P}\left(A\mid B\right)=\mathrm{P}\left(B\right)\cdot \mathrm{P}\left(AB\right)$}
+{Nếu $A$ và $B$ là hai biến cố độc lập thì $\mathrm{P}\left(B\right)=\mathrm{P}\left(B \mid  A\right)$}
+{Với $\mathrm{P}\left(B\right)>0$. Khi đó $\mathrm{P}\left(\overline{A}\mid  B\right)= 1-\mathrm{P}\left(A\mid  B\right)$}
+{Nếu $A$ và $B$ là hai biến cố độc lập thì $\mathrm{P}\left(A\mid  B\right)=\mathrm{P}\left(A \mid  \overline{B}\right)$}
+	\loigiai{
+		\begin{itemize}[\color{blue}\checkmark]
+			\item Theo công thức nhân xác suất ta có $\mathrm{P}\left(AB \right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A \mid  B\right)$.\\
+			Vậy $\mathrm{P}\left(A\mid B\right)=\mathrm{P}\left(B\right)\cdot \mathrm{P}\left(AB\right)$ sai.
+			\item Nếu $A$ và $B$ là hai biến cố độc lập thì $\mathrm{P}\left(AB\right) =\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\right)$.\\
+			Suy ra $\mathrm{P}\left(B \mid A\right)=\dfrac{\mathrm{P}\left(BA\right)}{\mathrm{P}\left(A\right) }
+			=	\dfrac{\mathrm{P}\left(B\right) \cdot \mathrm{P}\left(A\right) }{\mathrm{P}\left(A\right) }
+			=\mathrm{P}\left(B\right)$.
+			\item 
+			\immini{Vì $\overline{A}B$ và $AB$ là hai biến cố xung khắc và $\overline{A}B \cup AB = B$ nên\\ $\mathrm{P}\left(\overline{A}B\right)=\mathrm{P}\left(B\right)-\mathrm{P}\left(AB\right)$.\\
+			 Với $\mathrm{P}\left(B\right)>0$.\\
+			 Ta có $\begin{aligned}[t]
+			 	\mathrm{P}\left(\overline{A}\mid  B\right)&=
+			 	\dfrac{\mathrm{P}\left(\overline{A}B\right)}{\mathrm{P}\left(B\right) }\\
+			 	&=\dfrac{\mathrm{P}\left(B\right)-\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right) }\\
+			 	&= 1- \dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right) }\\
+			 	&=
+			 	1-\mathrm{P}\left(A\mid  B\right)
+			 \end{aligned}$.
+			}{
+			\begin{tikzpicture}[scale=1.5,>=stealth, line join=round, line cap=round]
+				\draw[ pattern=north east lines]
+				(0,0) to [bend left=90] (2,2) to [bend left=90] (0,0) (0,-.5) node {$A$} ;
+				\draw[ pattern=north west lines]
+				(1,0) to [bend left=90] (3,2) to [bend left=90] (1,0)
+				(2.5,-.5) node {$B$};
+				\def\miena{(0,-3.5) to [bend left=90] (2,-1.5) to [bend left=90] (0,-3.5)};
+				\def\mienb{(1,-3.5) to [bend left=90] (3,-1.5) to [bend left=90] (1,-3.5)};	
+				\node [circle,draw,fill=white] at (2.7,1.5){$\small \overline{A} B$};
+				\node [circle,draw,fill=white] at (1.6,1.2){$\small AB$};
+			\end{tikzpicture}
+			
+			}
+			\item Nếu $A$ và $B$ là hai biến cố độc lập thì $A$ và $\overline{B}$ cũng là biến cố độc lập. Do đó\\
+			$\mathrm{P}\left(A \mid  B\right)=
+			\dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right) }=
+			\dfrac{\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\right) }{\mathrm{P}\left(B\right) }
+			=\mathrm{P}\left(A\right)$.\\
+			$\mathrm{P}\left(A \mid  \overline{B}\right)=
+			\dfrac{\mathrm{P}\left(A\overline{B}\right)}{\mathrm{P}\left(\overline{B}\right) }=
+			\dfrac{\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(\overline{B}\right) }{\mathrm{P}\left(\overline{B}\right) }
+			=\mathrm{P}\left(A\right)$.\\
+			$\Rightarrow \mathrm{P}\left(A\mid  B\right)=
+			\mathrm{P}\left(A \mid  \overline{B}\right)=\mathrm{P}\left(A\right)$.
+		\end{itemize}
+	}
+\end{ex}
+%%%%%----------Câu 5
+\begin{ex}%[2D6N2-1]%[Võ Thanh Hiệp]
+Cho $A$ và $B$ là hai biến cố. Công thức nào dưới đây là công thức tính xác suất toàn phần?
+	\choice
+	{$\mathrm{P}\left(A\right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid  B\right) + 
+		\mathrm{P}\left(\overline{B}\right)\cdot \mathrm{P}\left(A\mid  B\right)$}
+	{$\mathrm{P}\left(A\right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid  B\right) + 
+		\mathrm{P}\left(\overline{B}\right)\cdot \mathrm{P}\left(\overline{A}\mid \overline{B}\right)$}
+	{$\mathrm{P}\left(A\right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid  B\right) + 
+		\mathrm{P}\left(\overline{B}\right)\cdot \mathrm{P}\left(\overline{A}\mid  B\right)$}
+	{\True $\mathrm{P}\left(A\right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid  B\right) + 
+		\mathrm{P}\left(\overline{B}\right)\cdot \mathrm{P}\left(A\mid \overline{B}\right)$}
+	\loigiai{
+Công thức tính xác suất toàn phần là 	
+	$$\mathrm{P}\left(A\right)= \mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid  B\right) + 
+	\mathrm{P}\left(\overline{B}\right)\cdot \mathrm{P}\left(A\mid  \overline{B}\right).$$
+	}
+\end{ex}
+%%%%%----------Câu 6
+\begin{ex}%[2D6N2-2]%[Võ Thanh Hiệp]
+Cho hai biến cố $A$ và $B$ có $\mathrm{P}\left(A\right) = 0{,}3$; $\mathrm{P}\left(B\right) = 0{,}5$ và
+$\mathrm{P}\left(B\mid  A\right)=0{,}4$. Tính $\mathrm{P}\left(A\mid  B\right)$. 
+	\choice
+	{$0{,}6$}
+	{\True $0{,}24$}
+	{$0{,}15$}
+	{$0{,}5$}
+	\loigiai{
+Áp dụng công thức Bayes	ta có
+\begin{eqnarray*}
+	\mathrm{P}\left(A\mid  B\right)&=&
+	\dfrac{\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\mid  A\right) }{\mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid  A\right)
+		+ \mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}\left(B\mid  \overline{A}\right)}\\
+	&=&  \dfrac{\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\mid  A\right)  }{\mathrm{P}\left(B\right)}\\
+	&=&\dfrac{0{,}3\cdot 0{,}4}{0{,}5}=0{,}24.
+\end{eqnarray*}
+	}
+\end{ex}
+%%%%%----------Câu 7
+\begin{ex}%[2D6N1-2]%[Võ Thanh Hiệp]
+Cho hai biến cố $A$ và $B$ có $\mathrm{P}\left(A\right) = 0{,}7$; $\mathrm{P}\left(B\right) = 0{,}4$ và
+$\mathrm{P}\left(AB\right)=0{,}2$. Tính xác suất biến cố $B$ với điều kiện $A$. 
+	\choice
+	{$\dfrac{1}{2}$}
+	{$\dfrac{4}{7}$}
+	{\True $\dfrac{2}{7}$}
+	{$\dfrac{7}{10}$}
+	\loigiai{
+	Xác suất của biến cố $B$ với điều kiện $A$ là $\mathrm{P}\left(B\mid  A\right)$.\\
+	Ta có $\mathrm{P}\left(B\mid  A\right) 
+	= \dfrac{\mathrm{P}\left(AB\right) }{\mathrm{P}\left(A\right)}
+	=\dfrac{0{,}2}{0{,}7}=\dfrac{2}{7}$.
+	}
+\end{ex}
+%%%%%----------Câu 8
+\begin{ex}%[2D6H1-2]%[Võ Thanh Hiệp]
+	Cho hai biến cố $A$ và $B$ có $\mathrm{P}\left(A\right) = 0{,}6$; $\mathrm{P}\left(B\right) = 0{,}4$ và $\mathrm{P}\left(AB\right)=0{,}3$. Xác suất biến cố $A$ không xảy ra với điều kiện $B$ là 
+	\choice
+	{$\dfrac{7}{10}$}
+	{$\dfrac{3}{4}$}
+	{$\dfrac{1}{2}$}
+	{\True $\dfrac{1}{4}$}
+	\loigiai{
+	Xác suất biến cố $A$ không xảy ra với điều kiện $B$ là 
+	$\mathrm{P}\left(\overline{A}\mid  B\right)$.\\
+	Ta có $\mathrm{P}\left(\overline{A}B\right)= 1- \mathrm{P}\left(A \mid  B\right)
+	=1-\dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right)}=1-\dfrac{0{,}3}{0{,}4}=\dfrac{1}{4}$.
+	}
+\end{ex}
+%%%%%----------Câu 9
+\begin{ex}%[2D6H1-2]%[Võ Thanh Hiệp]
+Trong hộp có $7$ viên bi màu xanh, $5$ viên bi màu đỏ, các viên bi có cùng kích thước và khối lượng. An lấy ngẫu nhiên một viên bi từ hộp không trả lại, sau đó Bình lấy một viên bi trong các bi còn lại. Tính xác suất để An lấy được bi màu xanh và Bình lấy được bi màu đỏ.
+	\choice
+	{\True $\dfrac{35}{132}$}
+	{$\dfrac{35}{144}$}
+	{$\dfrac{1}{11}$}
+	{$\dfrac{3}{132}$}
+	\loigiai{
+	Gọi $A$ là biến cố: \lq\lq An lấy được bi màu xanh\rq\rq.\\
+	$B$ là biến cố: \lq\lq Bình lấy được bi màu đỏ\rq\rq.\\
+	Ta cần tính $\mathrm{P}\left(AB\right)$.\\
+	Ta có $\mathrm{P}\left(A\right) = \dfrac{7}{12}$, 
+	$\mathrm{P}\left(B\mid  A\right) = \dfrac{5}{11}$.\\
+	Theo công thức nhân xác suất
+	 $\mathrm{P}\left(AB\right)= \mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid  A\right)
+	 =\dfrac{7}{12} \cdot \dfrac{5}{11}=\dfrac{35}{132}$.
+	}
+\end{ex}
+%%%%%----------Câu 10
+\begin{ex}%[2D6H1-3]%[Võ Thanh Hiệp]
+\immini{ Cho sơ đồ cây như hình vẽ bên. Khẳng định nào sau đây {\bf sai}?
+	\choice
+	{$\mathrm{P}\left(A\right)= 0{,}3$}
+	{$\mathrm{P}\left(B\right)= 0{,}54$}
+	{\True $\mathrm{P}\left(A\mid B\right)=0{,}6$}
+	{$\mathrm{P}\left(\overline{B}\mid \overline{A}\right)=0{,}2$}
+}{
+\tikzstyle{xs} = [rectangle ,fill=white,draw=black,rounded corners,align=center]
+\tikzstyle{bc} = [circle ,fill=white,draw=black,rounded corners,align=center]
+\begin{tikzpicture}[scale=1,>=stealth, font=\footnotesize, line join=round, line cap=round]
+	\node[bc,text width=2.5mm] (O) at(0,0) { };
+	\node[bc] (A) at ($(O)+(30:3)$) {$A$};
+	\node[bc] (A1) at ($(O)+(-30:3)$){$\overline{A}$};
+	\node[bc] (B) at ($(A)+(20:3)$) {$B$};
+	\node[bc] (B1) at ($(A)+(-20:3)$) {$\overline{B}$};
+	\node[bc] (B2) at ($(A1)+(20:3)$) {$B$};
+	\node[bc] (B3) at ($(A1)+(-20:3)$) {$\overline{B}$};
+	\draw[->] {(O)--node [above,xs,sloped] {$0{,}3$}(A)} ;
+	\draw[->] {(O)--node [below,xs,sloped] {$0{,}7$}(A1)} ;
+	\draw[->] {(A)--node [above,xs,sloped] {$0{,}4$}(B)} ;
+	\draw[->] {(A)--node [below,xs,sloped] {$0{,}6$}(B1)} ;
+	\draw[->] {(A1)--node [above,xs,sloped] {$0{,}8$}(B2)} ;
+	\draw[->] {(A1)--node [below,xs,sloped] {$0{,}2$}(B3)} ;
+	\end{tikzpicture}
+}
+	\loigiai{
+		\begin{center}	
+		\tikzstyle{xs} = [rectangle ,fill=white,draw=black,rounded corners,align=center]
+		\tikzstyle{bc} = [circle ,fill=white,draw=black,rounded corners,align=center]
+		\begin{tikzpicture}[scale=1,>=stealth, font=\footnotesize, line join=round, line cap=round]
+			\node[bc,text width=2.5mm] (O) at(0,0) { };
+			\node[bc] (A) at ($(O)+(32:3)$) {$A$};
+			\node[bc] (A1) at ($(O)+(-32:3)$){$\overline{A}$};
+			\node[bc] (B) at ($(A)+(20:3)$) {$B$};
+			\node[bc] (B1) at ($(A)+(-20:3)$) {$\overline{B}$};
+			\node[bc] (B2) at ($(A1)+(20:3)$) {$B$};
+			\node[bc] (B3) at ($(A1)+(-20:3)$) {$\overline{B}$};
+			\draw[->] {(O)--node [above,xs,sloped] {$0{,}3$}(A)} ;
+			\draw[->] {(O)--node [below,xs,sloped] {$0{,}7$}(A1)} ;
+			\draw[->] {(A)--node [above,xs,sloped] {$0{,}4$}(B)} ;
+			\draw[->] {(A)--node [below,xs,sloped] {$0{,}6$}(B1)} ;
+			\draw[->] {(A1)--node [above,xs,sloped] {$0{,}8$}(B2)} ;
+			\draw[->] {(A1)--node [below,xs,sloped] {$0{,}2$}(B3)} ;
+			\node[bc] (AB) at ($(B)+(0:2)$) {$AB$};
+			\node[bc] (AB1) at ($(B1)+(0:2)$) {$A\overline{B}$};
+			\node[bc] (AB2) at ($(B2)+(0:2)$) {$\overline{A}B$};
+			\node[bc] (AB3) at ($(B3)+(0:2)$) {$\overline{A}\,\overline{B}$};
+		\end{tikzpicture}
+		\end{center}
+	Từ sơ đồ cây suy ra\\
+		$\mathrm{P}\left(A\right)= 0{,}3$; $\mathrm{P}\left(\overline{A}\right)= 0{,}7$;
+		$\mathrm{P}\left(A B\right)= 0{,}12$;\\
+		$\mathrm{P}\left(B\mid A\right)= 0{,}4$; $\mathrm{P}\left(B\mid \overline{A}\right)= 0{,}8$;
+		$\mathrm{P}\left(\overline{B}\mid \overline{A}\right)=0{,}2$.\\
+		Suy ra
+		$\mathrm{P}\left(B\right)= \mathrm{P}\left(A\right)\cdot \mathrm{P}(B\mid A)
+		+ \mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}(B\mid \overline{A})
+		= 0{,}3\cdot 0{,}4 + 0{,}7\cdot 0{,}6 = 0{,}54 $.\\
+		$\mathrm{P}\left(A\mid B\right)= \dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right)}
+			=\dfrac{0{,}12}{0{,}54}=\dfrac{2}{9}$.\\
+		Vậy $\mathrm{P}\left(A\mid B\right)=0{,}6$ sai.
+
+	}
+\end{ex}
+%%%%%----------Câu 11
+\begin{ex}%[2D6H2-3]%[Võ Thanh Hiệp]
+Cho hai biến cố ngẫu nhiên $A$ và $B$. Biết rằng $\mathrm{P}\left(A\mid B\right)= \dfrac{2}{3} \mathrm{P}\left(B\mid A\right)$ và $P\left(AB\right) \ne 0$. Tính tỉ số $\dfrac{\mathrm{P}\left(A\right)}{\mathrm{P}\left(B\right)}$.
+	\choice
+	{$\dfrac{3}{2}$}
+	{\True $\dfrac{2}{3}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{1}{2}$}
+	\loigiai{
+	Theo công thức Bayes ta có\\
+	$\mathrm{P}\left(B\mid A\right)=
+	 \dfrac{\mathrm{P}\left(B\right)\cdot \mathrm{P}\left(A\mid B\right)}{\mathrm{P}\left(A\right)}
+	 \Leftrightarrow 
+	 \dfrac{\mathrm{P}\left(A\mid B\right)}{\mathrm{P}\left(B\mid A\right)}
+	 =\dfrac{\mathrm{P}\left(A\right) }{\mathrm{P}\left(B\right)}=\dfrac{2}{3}$. 
+	}
+\end{ex}
+%%%%%----------Câu 12
+\begin{ex}%[2D6H2-2]%[Võ Thanh Hiệp]
+Cho hai biến cố ngẫu nhiên $A$ và $B$. Biết rằng $\mathrm{P}\left(A\right)= \dfrac{3}{5}$; $\mathrm{P}\left(B\mid A\right)= \dfrac{1}{4}$ và $\mathrm{P}\left(B\mid \overline{A}\right)= \dfrac{1}{3}$. Tính $\mathrm{P}\left(B\overline{A}\right)$.
+	\choice
+	{$\dfrac{43}{180}$}
+	{\True$\dfrac{2}{15}$}
+	{$\dfrac{3}{15}$}
+	{$\dfrac{17}{180}$}
+	\loigiai{
+Ta có $\mathrm{P}\left(A\right)= \dfrac{3}{5}\Rightarrow \mathrm{P}\left(\overline{A}\right)=\dfrac{2}{5}$.\\
+Áp dụng công thức xác suất toàn phần ta có\\
+$\mathrm{P}\left(B\right)=\mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid A\right)
++\mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}\left(B\mid \overline{A}\right)
+=\dfrac{3}{5}\cdot\dfrac{1}{4}+\dfrac{2}{5}\cdot\dfrac{1}{3}=\dfrac{17}{60}$.\\
+Áp dụng công thức nhân xác suất ta có\\
+$\mathrm{P}\left(B\overline{A}\right)=\mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}\left(B\mid \overline{A}\right)
+=\dfrac{2}{5}\cdot\dfrac{1}{3}=\dfrac{2}{15}$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\inputansbox[3]{6}{ans/ans-2-B6-De2-TN}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-B6-De2-DS]
+%%%%%----------Câu 13
+\begin{ex}%[2D6V1-2]%[Nguyễn Khánh Trọng]
+	Một nhà máy thực hiện khảo sát toàn bộ công nhân về sự hài lòng của họ về điều kiện làm việc tại phân xưởng. Kết quả khảo sát như sau:
+	\begin{center}
+		\begin{tabular}{|c|ccll|}
+			\hline
+			\multirow{2}{*}{Khảo sát công nhân} & \multicolumn{4}{c|}{Kết quả khảo sát}                               \\ \cline{2-5} 
+			& \multicolumn{1}{c|}{Hài lòng} & \multicolumn{3}{c|}{Không hài lòng} \\ \hline
+			Số công nhân xưởng I                & \multicolumn{1}{c|}{23}       & \multicolumn{3}{c|}{12}             \\ \hline
+			Số công nhân xưởng II               & \multicolumn{1}{c|}{25}       & \multicolumn{3}{c|}{15}             \\ \hline
+		\end{tabular}
+	\end{center}
+	Gặp ngẫu nhiên một công nhân của nhà máy. Gọi $A$ là biến cố \lq\lq Công nhân đó làm việc tại phân xưởng I\rq\rq \, và $B$ là biến cố \lq\lq Công nhân đó hài lòng với điều kiện làm việc tại phân xưởng\rq\rq. Xét tính đúng sai của các phát biểu sau.
+	\choiceTF
+	{\True Xác suất của biến cố $A$ là $\dfrac{7}{15}$}
+	{Xác suất của biến cố $B$ là $0{,}65$}
+	{\True Xác suất gặp được công nhân không hài lòng với điều kiện làm việc tại phân xưởng biết công nhân đó thuộc xưởng I là $\dfrac{12}{35}$}
+	{Xác suất gặp được công nhân thuộc xưởng II biết công nhân đó hài lòng với điều kiện làm việc tại phân xưởng là $0{,}52$}
+	\loigiai{
+		Gặp ngẫu nhiên một công nhân của nhà máy, ta có $n(\Omega)=23+12+25+15=75$. 
+		\begin{itemchoice}
+			\itemch {\bf Đúng.}\\
+			Ta có $n(A)=23+12=35$.\\
+			Xác suất của biến cố $A$ là 
+			$\mathrm{P}(A)=\dfrac{35}{75}=\dfrac{7}{15}$.
+			\itemch  {\bf Sai.} \\
+			Ta có $n(B)=23+25=48$. \\
+			Xác suất của biến cố $B$ là 
+			$\mathrm{P}(B)=\dfrac{48}{75}=\dfrac{16}{25}$.
+			\itemch Đúng. Ta có $n(\overline{B}A)=12\Rightarrow \mathrm{P}(\overline{B}A)=\dfrac{12}{75}=\dfrac{4}{25}$.\\
+			Do đó
+			$\mathrm{P}(\overline{B}\mid A)=\dfrac{\mathrm{P}(\overline{B}A)}{\mathrm{P}(A)}=\dfrac{\dfrac{4}{25}}{\dfrac{7}{15}}=\dfrac{12}{35}$.
+			\itemch {\bf Sai.}\\
+			 Ta có $n(\overline{A}B)=25\Rightarrow\mathrm{P}(\overline{A}B)
+			 =\dfrac{25}{75}=\dfrac{1}{3}$.\\
+			Do đó
+			$\mathrm{P}(\overline{A}\mid B)=\dfrac{\mathrm{P}(\overline{A}B)}{\mathrm{P}(B)}
+			=\dfrac{\dfrac{1}{3}}{\dfrac{16}{25}}=\dfrac{25}{48}$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%%%----------Câu 14
+\begin{ex}%[2D6H1-2]%[Nguyễn Khánh Trọng]
+	Cho hai biến cố $A$ và $B$ có $P(A) = 0{,}35$; $P(B \mid A)= 0{,}6$ và $P(B \mid \overline{A})= 0{,}2$. Mỗi phát biểu dưới đây đúng hay sai?
+	\choiceTF
+	{\True $\mathrm{P}(\overline{A})=0{,}65$}
+	{$\mathrm{P}(AB)=0{,}2$}
+	{\True $\mathrm{P}(\overline{B}\mid A)=0{,}4$}
+	{\True $\mathrm{P}(B)=0{,}34$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch {\bf Đúng.}\\
+		 Vì $\mathrm{P}(\overline{A})=1-\mathrm{P}(A)=1-0{,}35=0{,}65$.
+		\itemch {\bf Sai.}\\
+		 Vì $\mathrm{P}(AB)=\mathrm{P}(B\mid A)\cdot\mathrm{P}(A)
+		 = 0{,}35\cdot0{,}6=0{,}21$.
+		\itemch {\bf Đúng.}\\
+		 Vì $\mathrm{P}(\overline{B}\mid A)
+		 =1-\mathrm{P}(B\mid A)=1-0{,}6=0{,}4$.
+		\itemch {\bf Đúng.} \\
+		Vì $\mathrm{P}(B)=\mathrm{P}(A)\cdot\mathrm{P}(B\mid A)
+		+\mathrm{P}(\overline{A})\cdot\mathrm{P}(B\mid\overline{A})
+		=0{,}35\cdot 0{,}6+0{,}65\cdot0{,}2=0{,}34$.
+	\end{itemchoice}
+	}
+\end{ex}
+%%%%%----------Câu 15
+\begin{ex}%[2D6H1-3]%[Nguyễn Khánh Trọng]
+	\immini{Cho sơ đồ cây như hình vẽ. Xét tính đúng sai của các phát biểu sau.
+		\choiceTF
+		{\True $ \mathrm{P}\left(A\right)= 0{,}25$}
+		{$\mathrm{P}\left(A\overline{B}\right)=\dfrac{1}{8}$}
+		{$\mathrm{P}\left(B\right)= 0{,}65$}
+		{\True $\mathrm{P}\left(A\mid B\right)=0{,}16$}
+		
+	}{
+		\tikzstyle{xs} = [rectangle ,fill=white,draw=black,rounded corners,align=center]
+		\tikzstyle{bc} = [circle ,fill=white,draw=black,rounded corners,align=center]
+		\begin{tikzpicture}[scale=1.2,>=stealth, font=\footnotesize, line join=round, line cap=round]
+			\node[bc,text width=2.5mm] (O) at(0,0) { };
+			\node[bc] (A) at ($(O)+(30:3)$) {$A$};
+			\node[bc] (A1) at ($(O)+(-30:3)$){$\overline{A}$};
+			\node[bc] (B) at ($(A)+(20:3)$) {$B$};
+			\node[bc] (B1) at ($(A)+(-20:3)$) {$\overline{B}$};
+			\node[bc] (B2) at ($(A1)+(20:3)$) {$B$};
+			\node[bc] (B3) at ($(A1)+(-20:3)$) {$\overline{B}$};
+			\draw[->] {(O)--node [above,xs,sloped] {$?$}(A)} ;
+			\draw[->] {(O)--node [below,xs,sloped] {$\mathrm{P}(\overline{A})=0{,}75$}(A1)} ;
+			\draw[->] {(A)--node [above,xs,sloped] { $\mathrm{P}(B\mid A)=0{,}4$}(B)} ;
+			\draw[->] {(A)--node [below,xs,sloped] {$?$}(B1)} ;
+			\draw[->] {(A1)--node [above,xs,sloped] {$?$}(B2)} ;
+			\draw[->] {(A1)--node [below,xs,sloped] {$\mathrm{P}(\overline{B}\mid \overline{A})=0{,}3$}(B3)} ;
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\begin{center}	
+			\tikzstyle{xs} = [rectangle ,fill=white,draw=black,rounded corners,align=center]
+			\tikzstyle{bc} = [circle ,fill=white,draw=black,rounded corners,align=center]
+			\begin{tikzpicture}[scale=1,>=stealth, font=\footnotesize, line join=round, line cap=round]
+				\node[bc,text width=2.5mm] (O) at(0,0) { };
+				\node[bc] (A) at ($(O)+(32:3)$) {$A$};
+				\node[bc] (A1) at ($(O)+(-32:3)$){$\overline{A}$};
+				\node[bc] (B) at ($(A)+(20:3)$) {$B$};
+				\node[bc] (B1) at ($(A)+(-20:3)$) {$\overline{B}$};
+				\node[bc] (B2) at ($(A1)+(20:3)$) {$B$};
+				\node[bc] (B3) at ($(A1)+(-20:3)$) {$\overline{B}$};
+				\draw[->] {(O)--node [above,xs,sloped] {$0{,}25$}(A)} ;
+				\draw[->] {(O)--node [below,xs,sloped] {$0{,}75$}(A1)} ;
+				\draw[->] {(A)--node [above,xs,sloped] {$0{,}4$}(B)} ;
+				\draw[->] {(A)--node [below,xs,sloped] {$0{,}6$}(B1)} ;
+				\draw[->] {(A1)--node [above,xs,sloped] {$0{,}7$}(B2)} ;
+				\draw[->] {(A1)--node [below,xs,sloped] {$0{,}3$}(B3)} ;
+				\node[bc] (AB) at ($(B)+(0:2)$) {$AB$};
+				\node[bc] (AB1) at ($(B1)+(0:2)$) {$A\overline{B}$};
+				\node[bc] (AB2) at ($(B2)+(0:2)$) {$\overline{A}B$};
+				\node[bc] (AB3) at ($(B3)+(0:2)$) {$\overline{A}\,\overline{B}$};
+			\end{tikzpicture}
+		\end{center}
+		Từ sơ đồ cây suy ra\\
+			\begin{itemchoice}
+			\itemch {\bf Đúng.}\\
+			$\mathrm{P}\left(A\right) = 1 - \mathrm{P}\left(\overline{A}\right) = 1- 0{,}75 = 0{,}25$.
+			\itemch {\bf Sai.}\\
+			 Vì $\mathrm{P}\left(A \overline{B}\right)
+			 =\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(\overline{B}\mid A\right)
+			 = 0{,}25\cdot 0{,}6=0{,}15$.
+			\itemch {\bf Sai.}\\
+			 Ta có $\mathrm{P}\left(B\right)= \mathrm{P}\left(A\right)\cdot \mathrm{P}(B\mid A)
+			 + \mathrm{P}\left(\overline{A}\right)\cdot \mathrm{P}(B\mid \overline{A})
+			 = 0{,}25\cdot 0{,}4 + 0{,}75\cdot 0{,}7 = 0{,}625$.
+			\itemch {\bf Đúng.}\\
+			Ta có $\mathrm{P}\left(A B\right)= \mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid A\right)
+			=0{,}25\cdot0{,}4=0{,}1$.\\
+			Suy ra $\mathrm{P}\left(A\mid B\right)= \dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right)}
+			=\dfrac{0{,}1}{0{,}625}=0{,}16$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%%%----------Câu 16
+\begin{ex}%[2D6V2-2]%[Nguyễn Khánh Trọng]
+	Trong một trường học, tỉ lệ học sinh nữ là $55\%$. Tỉ lệ học sinh nữ và tỉ lệ học sinh nam tham gia câu lạc bộ tiếng anh lần lượt là $20\%$ và $15\%$. Gặp ngẫu nhiên $1$ học sinh của trường. 
+	Gọi $A$ là biến cố \lq\lq Học sinh đó là nữ\rq\rq\, và $B$ là biến cố \lq\lq Học sinh đó tham gia câu lạc bộ tiếng Anh\rq\rq. Xét tính đúng sai của các phát biểu sau.
+	\choiceTF
+	{\True $\mathrm{P}(\overline{A})=0{,}45$}
+	{$\mathrm{P}(B\mid \overline{A}) = 0{,}15$ và $\mathrm{P}(\overline{B}\mid A) = 0{,}2$}
+	{Xác suất để học sinh đó có tham gia câu lạc bộ tiếng Anh là $0{,}1675$}
+	{\True Biết rằng học sinh có tham gia câu lạc bộ tiếng Anh. Xác suất học sinh đó là nam bằng $\dfrac{27}{71}$}
+	\loigiai{
+			\begin{itemchoice}
+			\itemch {\bf Đúng.}\\
+			Do tỉ lệ học sinh nữ là $55\%$ nên
+			$\mathrm{P}(A) = 0{,}55$ và $\mathrm{P}(\overline{A}) = 1 - 0{,}55 = 0{,}45$.
+			\itemch {\bf Sai.}\\
+			Do tỉ lệ học sinh nữ và tỉ lệ học sinh nam tham gia câu lạc bộ tiếng Anh lần lượt là $20\%$ và $15\%$ nên $\mathrm{P}(B\mid A) = 0{,}2$ và $\mathrm{P}(B\mid \overline{A}) = 0{,}15$.\\
+			Suy ra $\mathrm{P}(\overline{B}\mid A) =1-\mathrm{P}(B\mid A)=1-0{,}2=0{,}8$.
+			\itemch {\bf Sai.}\\
+		Xác suất để học sinh đó có tham gia câu lạc bộ tiếng Anh là
+		$$\mathrm{P}(B) = \mathrm{P}(A)\cdot\mathrm{P}(B\mid A) + \mathrm{P}(\overline{A})\cdot\mathrm{P}(B\mid\overline{A}) = 0{,}55 \cdot 0{,}2 + 0{,}45 \cdot 0{,}15 = 0{,}1775.$$
+			\itemch {\bf Đúng.}\\
+			Do học sinh có tham gia câu lạc bộ tiếng Anh nên xác suất học sinh đó là nam là
+			$$\mathrm{P}(\overline{A}\mid B) = \dfrac{\mathrm{P}(\overline{A})\cdot \mathrm{P}(B\mid \overline{A})}{\mathrm{P}(B)}=
+			\dfrac{0{,}45\cdot 0{,}15}{0{,}1775}=\dfrac{27}{71}.$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\inputansbox[3]{2}{ans/ans-2-B6-De2-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B6-De2-TLN]
+\caukq
+%%%%%----------Câu 17
+\begin{ex}%[2D6V1-2]%[Võ Thanh Hiệp]
+Lớp 12A có $40$ học sinh, trong đó có $22$ bạn nữ và $18$ bạn nam. Có $3$ tên Hiền gồm hai bạn nam  và một bạn nữ. Thầy giáo chọn ngẫu nhiên một bạn lên bảng làm bài tập. Tính xác suất để chọn đúng bạn tên Hiền là bạn nam  ({\it kết quả làm tròn đến hàng phần trăm}).
+
+	\shortans{$0{,}25$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Chọn bạn tên Hiền\rq\rq.\\
+Gọi $B$ là biến cố: \lq\lq Chọn bạn nam\rq\rq.\\
+Ta có $\mathrm{P}\left(A\right) = \dfrac{3}{40}$,
+ $\mathrm{P}\left(B\right) = \dfrac{18}{40}=\dfrac{9}{20}$, 
+ $\mathrm{P}\left(AB\right) = \dfrac{2}{18}=\dfrac{1}{9}$.\\
+Xác suất chọn đúng bạn tên Hiền với điều kiện là bạn nam $\mathrm{P}\left(A\mid B\right)$.\\
+Ta có $\mathrm{P}\left(A\mid B\right)=\dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(B\right)}=
+\dfrac{20}{81} \approx 0{,}25$.
+	}
+\end{ex}
+%%%%%----------Câu 18
+\begin{ex}%[2D6V1-2]%[Võ Thanh Hiệp]
+Một hộp đựng $30$ viên bi kích thước, chất liệu như nhau, trong đó có $20$ viên bi xanh và $10$ viên bi trắng. Lấy ngẫu nhiên ra một viên bi không bỏ lại trong hộp, rồi lại lấy ngẫu nhiên ra một viên bi nữa. Tính xác suất để lấy được một viên bi trắng  ở lần thứ nhất và một viên bi xanh ở lần thứ hai ({\it kết quả làm tròn đến hàng phần trăm}).
+	\shortans{$0{,}23$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Lấy được một viên bi trắng  ở lần thứ nhất\rq\rq.\\
+Gọi $B$ là biến cố: \lq\lq Lấy được một viên bi xanh  ở lần thứ hai\rq\rq.\\
+Ta có $P\left(A\right) = \dfrac{10}{30}=\dfrac{1}{3}$.\\
+Nếu $A$ đã xảy ra, tức là một viên bi trắng đã được lấy ra ở lần thứ nhất, thì còn lại trong hộp $29$ viên bi trong đó số viên bi xanh là 20, do đó $P\left(B\mid A\right)=\dfrac{20}{29}$.\\
+Xác suất để lấy được một viên bi trắng  ở lần thứ nhất và một viên bi xanh ở lần thứ hai là $P\left(A B\right)$.\\
+Ta có $P\left(A B\right) = P\left(A\right) \cdot P\left(B\mid A\right)=
+ \dfrac{1}{3} \cdot \dfrac{20}{29}=\dfrac{20}{87}\approx 0{,}23$.
+	}
+\end{ex}
+%%%%%----------Câu 19
+\begin{ex}%[2D6V2-2]%[Võ Thanh Hiệp]
+Khảo sát tỉ lệ người dân trong một xã nghiện thuốc lá là $20\%$; tỉ lệ người bị bệnh phổi trong số người nghiện thuốc lá là $70\%$, trong số người không nghiện thuốc lá là $15\%$. Hỏi khi ta gặp ngẫu nhiên một người dân của của xã đó thì khả năng mà người đó bị bệnh phổi là bao nhiêu $\%$?
+	\shortans{$26$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Người nghiện thuốc lá\rq\rq.\\
+Suy ra $\overline{A}$ là biến cố: \lq\lq Người không nghiện thuốc lá\rq\rq. \\
+Gọi $B$ là biến cố: \lq\lq Người bị bệnh phổi\rq\rq.\\
+Xác suất người nghiện thuốc lá là $\mathrm{P}\left(A\right) = 20\% = 0{,}2$.\\
+Xác suất người không nghiện thuốc lá là  $\mathrm{P}\left(\overline{A}\right) =1- \mathrm{P}\left(A\right) = 0{,}8$.\\
+Xác suất người bị bệnh phổi trong số người nghiện thuốc lá là $70\% \Rightarrow \mathrm{P}\left(B\mid A\right) = 0{,}7$.\\
+Xác suất người bị bệnh phổi không nghiện thuốc lá là $15\% \Rightarrow \mathrm{P}\left(B\mid \overline{A}\right) = 0{,}15$.\\
+Xác suất người bị bệnh phổi là\\
+$\mathrm{P}\left(B\right) = \mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\mid A\right)+
+\mathrm{P}\left(\overline{A}\right) \cdot \mathrm{P}\left(B\mid \overline{A}\right)
+= 0{,}2\cdot 0{,}7+0{,}8\cdot 0{,}15=0{,}26=26\%$.
+	}
+\end{ex}
+%%%%%----------Câu 20
+\begin{ex}%[2D6V2-2]%[Võ Thanh Hiệp]
+Có $2$ xạ thủ loại I và $8$ xạ thủ loại II, xác suất bắn trúng đích của các loại xạ thủ loại I là $0{,}9$ và loại II là $0{,}7$. Chọn ngẫu nhiên ra một xạ thủ và xạ thủ đó bắn một viên đạn. Tìm xác suất để viên đạn đó trúng đích.
+	
+	\shortans{$0{,}74$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Viên đạn bắn trúng đích\rq\rq.\\	
+Gọi $B$ là biến cố: \lq\lq Chọn xạ thủ loại I\rq\rq.\\
+Gọi $C$ là biến cố: \lq\lq Chọn xạ thủ loại II\rq\rq.\\	
+Xác suất biến cố $B$ là $\mathrm{P}\left(B\right)=\dfrac{2}{10}=0{,}2$.
+Xác suất biến cố $C$ là $\mathrm{P}\left(C\right)=\dfrac{8}{10}=0{,}8$.
+Xác suất biến cố viên đạn đó trúng đích với điều kiện là xạ thủ loại I là
+$\mathrm{P}\left(A\mid B\right)= 0{,}9$.\\
+Xác suất biến cố viên đạn đó trúng đích với điều kiện là xạ thủ loại II là
+$\mathrm{P}\left(A\mid C\right)= 0{,}7$.\\
+$\mathrm{P}\left(A\right) = \mathrm{P}\left(B\right) \cdot \mathrm{P}\left(A\mid B\right)+
+\mathrm{P}\left(C\right) \cdot \mathrm{P}\left(A\mid C\right)
+= 0{,}2\cdot 0{,}9+0{,}8\cdot 0{,}7=0{,}74$.
+	}
+\end{ex}
+%%%%%----------Câu 21
+\begin{ex}%[2D6V2-3]%[Võ Thanh Hiệp]
+Khảo sát sự yêu thích môn Toán của hai lớp 12 của một trường. Lớp 12A1 có 40 học sinh và có $80\%$ học sinh thích môn Toán, lớp 12A2 có 32 học sinh và có $75\%$ học sinh thích môn Toán. Chọn ngẫu nhiên một học sinh. Biết rằng bạn đó yêu thích môn Toán, tính xác suất bạn đó học lớp 12A1 ({\it kết quả làm tròn đến hàng phần trăm}).
+	\shortans{$0{,}57$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Học sinh yêu thích môn Toán\rq\rq.\\
+Gọi $B$ là biến cố: \lq\lq Học sinh lớp 12A1\rq\rq.\\
+Gọi $C$ là biến cố: \lq\lq Học sinh lớp 12A2\rq\rq.\\	
+Theo đề bài ta có\\
+$\mathrm{P}\left(B\right) = \dfrac{40}{72} =\dfrac{5}{9}$;
+$\mathrm{P}\left(C\right) = \dfrac{32}{72} =\dfrac{4}{9}$;
+$\mathrm{P}\left(A\mid B\right) = 80\% =\dfrac{4}{5}$;
+ $\mathrm{P}\left(A\mid C\right) = 75\% =\dfrac{3}{4}$.\\ 
+Áp dụng công thức xác suất toàn phần, ta có\\
+$\mathrm{P}\left(A\right) = \mathrm{P}\left(B\right) \cdot \mathrm{P}\left(A\mid B\right)+
+\mathrm{P}\left(C\right) \cdot \mathrm{P}\left(A\mid C\right)
+= \dfrac{5}{9}\cdot \dfrac{4}{5}+ \dfrac{4}{9}\cdot \dfrac{3}{4}=\dfrac{7}{9}$.\\
+Xác suất cần tìm là 
+$\mathrm{P}\left(B\mid A\right)=
+\dfrac{\mathrm{P}\left(A\mid B\right)\cdot \mathrm{P}\left(B\right) }{\mathrm{P}\left(A\right)}=
+\dfrac{\dfrac{4}{5}\cdot\dfrac{5}{9}}{\dfrac{7}{9}}=\dfrac{4}{7}\approx 0{,}57$.
+	}
+\end{ex}
+%%%%%----------Câu 22
+\begin{ex}%[2D6V2-3]%[Võ Thanh Hiệp]
+Hộp thứ nhất có 6 viên bi đỏ và 4 viên bi xanh, hộp thứ hai có 4 viên bi đỏ và 6 viên bi xanh, các viên bi có cùng khối lượng và kích thước. Lấy ngẫu nhiên 1 viên bi từ hộp thứ nhất bỏ sang hộp thứ hai. Sau đó từ hộp thứ hai lấy ngẫu nhiên ra một viên bi. Biết rằng viên bi lấy ra từ hộp hai là viên bi màu đỏ. Tính xác suất viên bi bỏ từ hộp thứ nhất sang hộp thứ hai là màu xanh ({\it kết quả làm tròn đến hàng phần trăm}).
+	
+	\shortans{$0{,}35$}
+	\loigiai{
+Gọi $A$ là biến cố: \lq\lq Bi bỏ từ hộp thứ nhất sang hộp thứ hai là bi màu xanh \rq\rq.\\	
+Suy ra  $\overline{A}$ là biến cố: \lq\lq Bi bỏ từ hộp thứ nhất sang hộp thứ hai là bi màu đỏ \rq\rq.\\
+Gọi $B$ là biến cố: \lq\lq Bi lấy từ hộp thứ hai là bi màu đỏ \rq\rq.\\		
+Theo đề bài ta có\\
+$\mathrm{P}\left(A\right)= \dfrac{4}{10}$;
+$\mathrm{P}\left(\overline{A}\right)= \dfrac{6}{10}$;
+$\mathrm{P}\left(B\mid A\right)=\dfrac{4}{11}$;
+$\mathrm{P}\left(B\mid \overline{A}\right)=\dfrac{5}{11}$.\\
+Áp dụng công thức xác suất toàn phần, ta có\\
+$\mathrm{P}\left(B\right) =\mathrm{P}\left(A\right) \cdot \mathrm{P}\left(B\mid A\right)+
+\mathrm{P}\left(\overline{A}\right) \cdot \mathrm{P}\left(B\mid \overline{A}\right)=
+\dfrac{4}{10}\cdot\dfrac{4}{11}+ \dfrac{6}{10}\cdot\dfrac{5}{11}=\dfrac{23}{55}$.\\
+Xác suất cần tìm là 
+$\mathrm{P}\left(A\mid B\right)=
+\dfrac{\mathrm{P}\left(B\mid A\right)\cdot \mathrm{P}\left(A\right) }{\mathrm{P}\left(B\right)}=
+\dfrac{\dfrac{4}{11}\cdot\dfrac{4}{10}}{\dfrac{23}{55}}=\dfrac{8}{23}\approx 0{,}35$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+
+\inputansbox[3]{3}{ans/ans-2-B6-De2-TLN}
+
+

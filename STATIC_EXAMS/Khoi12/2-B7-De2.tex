@@ -1,0 +1,357 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-B7-De2-lc]
+\caulc
+\begin{ex}%[2H2N2-2]
+	Trong không gian $Oxyz$ cho $\overrightarrow{OM}=2\overrightarrow{j}-\sqrt{3}\overrightarrow{i}+\overrightarrow{k}$. Tọa độ của điểm $M$ là
+	\choice
+	{\True $M(-\sqrt{3};2;1)$}
+	{$M(2;-\sqrt{3};1)$}
+	{$M(2;\sqrt{3};1)$}
+	{$M(\sqrt{3};-2;1)$}
+	\loigiai{
+		Ta có $\overrightarrow{OM}=2\overrightarrow{j}-\sqrt{3}\overrightarrow{i}+\overrightarrow{k} = -\sqrt{3}\overrightarrow{i}+2\overrightarrow{j}+\overrightarrow{k}$. Tọa độ $M\left(-\sqrt{3};2;1\right)$.
+	}
+\end{ex}
+\begin{ex}%[2H2N2-3]
+	Trong không gian với hệ trục tọa độ $ Oxyz $, cho $\overrightarrow a=-2\overrightarrow i+5\overrightarrow j+\overrightarrow k$. Tìm tọa độ của $ \overrightarrow a $.
+	\choice
+	{$\overrightarrow a =( -2\overrightarrow i;5\overrightarrow j;\overrightarrow k)$}
+	{$ \overrightarrow a=(-2;5;0)$}
+	{\True $\overrightarrow a =(-2;5;1) $}
+	{$ \overrightarrow a =(2;-5;-1)$}
+	\loigiai{	
+		$\overrightarrow a=-2\overrightarrow i+5\overrightarrow j+\overrightarrow k\Leftrightarrow \overrightarrow a=(-2;5;1)$.
+	}
+\end{ex}
+\begin{ex}%[2H2N2-3]
+	Trong không gian $Oxyz$, cho hai điểm $A(1;1;-1)$ và $B(2;3;2)$. Véc-tơ $\overrightarrow{AB}$ có tọa độ là
+	\choice
+	{\True $(1;2;3)$}
+	{$(-1;-2;3)$}
+	{$(3;5;1)$}
+	{$(3;4;1)$}
+	\loigiai{
+		$\overrightarrow{AB}=(x_B-x_A;y_B-y_A;z_B-z_A)=(1;2;3)$.}
+\end{ex}
+\begin{ex}%[2H2N2-1]
+	Trong không gian $Oxyz$, cho véc-tơ $ \overrightarrow{u}=(1;2;0)$. Mệnh đề nào sau đây là đúng?
+	\choice
+	{$ \overrightarrow{u}=2\overrightarrow{i}+\overrightarrow{j} $}
+	{\True $ \overrightarrow{u}=\overrightarrow{i}+2\overrightarrow{j} $}
+	{$ \overrightarrow{u}=\overrightarrow{j}+2\overrightarrow{k} $}
+	{$ \overrightarrow{u}=\overrightarrow{i}+2\overrightarrow{k} $}
+	\loigiai{
+		Ta có: $ \overrightarrow{u}=(x;y;z)\Leftrightarrow  \overrightarrow{u}=x\overrightarrow{i}+y\overrightarrow{j}+z\overrightarrow{k}$.\\
+		Suy ra $\overrightarrow{u}=(1;2;0)\Leftrightarrow \overrightarrow{u}=\overrightarrow{i}+2\overrightarrow{j}$.
+	}
+\end{ex}
+\begin{ex}%[2H2H2-2]
+	Trong không gian $Oxyz$, cho tam giác $ABC$ với $A(1; 2;1)$, $B(-3; 0; 3)$, $C(2;4; -1)$. Tìm tọa độ điểm $D$ sao cho tứ giác $ABCD$ là hình bình hành.
+	\choice
+	{$D(6;-6;3)$}
+	{$D(6;6;3)$}
+	{$D(6;-6;-3)$}
+	{\True $D(6;6;-3)$}
+	\loigiai{Gọi $D(x;y;z)$, ta có $\overrightarrow{AB}=(-4;-2;2)$, $\overrightarrow{DC}=(2-x;4-y;-1-z)$. Tứ giác $ABCD$ là hình bình hành suy ra
+	\immini{
+		\[
+		\overrightarrow{AB} =\overrightarrow{DC} \Leftrightarrow \heva{&2-x=-4\\&4-y=-2 \\&-1-z=2}\Leftrightarrow \heva{&x=6\\&y=6\\&z=-3} \Rightarrow D(6;6;-3).
+		\]
+	}{\begin{tikzpicture}[line cap=round,line join=round, >=stealth,scale=0.6]
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (3,0);
+		\coordinate (D) at (2,1);
+		\coordinate (C) at ($(B)+(D)-(A) $);
+		\draw (A)--(B)--(C)--(D)--(A);
+		\draw [->] (A)--(B);\draw [->] (D)--(C);
+		\draw (A)node[left]{$A$} (B)node[below]{$B$} (C)node[right]{$C$} (D)[above]node{$D$};
+		\end{tikzpicture}}}
+\end{ex}
+\begin{ex}%[2H2H2-2]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hình bình hành $ABCD$ với $A(-1;2;3)$, $B(4;0;-1)$, $C(5;-3;6)$ và $D(a;b;c)$. Giá trị của $a+b+c$ bằng
+	\choice
+	{$7$}
+	{\True $9$}
+	{$11$}
+	{$3$}
+	\loigiai{
+		Ta có $\overrightarrow{AB}=(5;-2;-4)$, $\overrightarrow{DC}=(5-a;-3-b;6-c)$.\\
+		$ABCD$ là hình bình hành $\Leftrightarrow \overrightarrow{AB}=\overrightarrow{DC}\Leftrightarrow \heva{&5-a=5\\ &-3-b=-2\\ &6-c=-4}\Leftrightarrow \heva{&a=0\\ &b=-1\\ &c=10.}$\\
+		Vậy $ a+b+c=9$.
+	}
+\end{ex}
+\begin{ex}%[2H2H2-3]
+	Trong không gian với hệ tọa độ $Oxyz$, cho ba véc-tơ 
+	$\vec{a}=2\vec{i}+3\vec{j}-5\vec{k}$, $\vec{b}=-3\vec{j}+4\vec{k}$, $\vec{c}=-\vec{i}-2\vec{j}$.
+	Khẳng định nào sau đây đúng?
+	\choice
+	{$\vec{a}=(2;3;-5 )$, $\vec{b}=(-3;4;0 )$, $\vec{c}=(-1;-2;0 )$}
+	{ $\vec{a}=(2;3;-5 )$, $\vec{b}=(-3;4;0 )$, $\vec{c}=(0;-2;0 )$} 
+	{ \True $\vec{a}=(2;3;-5 )$, $\vec{b}=(0;-3;4 )$, $\vec{c}=(-1;-2;0 )$} 
+	{ $\vec{a}=(2;3;-5 )$, $\vec{b}=(1;-3;4 )$, $\vec{c}=(-1;-2;1 )$}
+	\loigiai
+	{Dựa vào lý thuyết: $\vec{x}=m\vec{i}+n\vec{j}+p\vec{k}$, suy ra $\vec{x}=(m;n;p )$.}
+\end{ex}
+\begin{ex}%[2H2H2-2]
+	Trong không gian ${Oxyz}$, hình chiếu vuông góc của điểm $M(4;-1;3)$ trên mặt phẳng $(Oyz)$ có tọa độ là
+	\choice
+	{$(4;0;0)$ }
+	{\True $(0;-1;3)$ }
+	{$(-1;3;0)$ }
+	{$(0;-1;0)$ }
+	\loigiai
+	{
+		Hình chiếu của $M(x_0;y_0;z_0)$ lên mặt phẳng $(Oyz)$ là điểm có tọa độ $(0;y_0;z_0)$.
+	}
+\end{ex}
+\begin{ex}%[2H2H2-2]
+	Trong không gian $Oxyz$, tìm tọa độ $H$ là hình chiếu của điểm $M\left( 4;\,5;\,6 \right)$ trên trục $Oz$ 
+	\choice
+	{$H\left( 0;\,5;\,6 \right)$}	
+	{$H\left( 4;\,5;\,0 \right)$}	
+	{$H\left( 4;\,0;\,0 \right)$}	
+	{\True $H\left( 0;\,0;\,6 \right)$} 
+	
+	\loigiai{
+		Ta có hình chiếu của điểm $M\left(x_0;\,y_0;\,z_0 \right)$ trên trục $Oz$ là điểm ${M}'\left( 0;\,0;\,{{z}_{o}} \right)$.\\
+		Do đó hình chiếu của điểm $M\left( 4;\,5;\,6 \right)$ trên trục $Oz$ là điểm $H\left( 0;\,0;\,6 \right)$
+	}
+\end{ex}
+\begin{ex}%[2H2H2-2]
+	Trong không gian $Oxyz$, cho điểm $A(1;2;3)$. Hình chiếu vuông góc của điểm $A$ lên mặt phẳng $(Oxy)$ là điểm
+	\choice
+	{\True $N(1;2;0)$}
+	{$M(0;0;3)$}
+	{$P(1;0;0)$}
+	{$Q(0;2;0)$}
+	\loigiai{
+		Hình chiếu vuông góc của điểm $A$ lên mặt phẳng $(Oxy)$ là điểm $N(1;2;0)$.
+	}
+\end{ex}
+\begin{ex}%[2H2V2-3]
+	Trong không gian với hệ trục $Oxyz$, cho hình hộp $ABCD.A'B'C'D'$ có tọa độ các điểm $A(1;2;-1)$, $C(3;-4;1)$, $B'(2;-1;3)$, $D'(0;3;5)$. Giả sử tọa độ điểm $A'(x,y,z)$ thì tổng $x+y+z$ bằng
+	\choice
+	{$5$}
+	{\True $7$} 
+	{$-3$} 
+	{$2$}	
+	\loigiai{
+		\immini{Theo quy tắc hình hộp ta có:
+		\begin{eqnarray*}
+		&&\overrightarrow{A'B'}+\overrightarrow{A'D'}+\overrightarrow{A'A}=\overrightarrow{A'C} \\
+		&\Leftrightarrow    &\heva{&(2-x)+(0-x)+(1-x)=3-x \\&(-1-y)+(3-y)+(2-y)=-4-y\\&(3-z)+(5-z)+(-1-z)=1-z}\\
+		&\Leftrightarrow &\heva{x=0\\ y=4 \\ z=3.}
+				\end{eqnarray*}
+			Suy ra $x+y+z=0+4+3=7$.}		
+		{\begin{tikzpicture}[line cap=round,line join=round, >=stealth,scale=0.6]
+				\def \xa{-3}
+				\def \xb{-2}
+				\def \y{4}
+				\def \z{5}	
+				\coordinate (A) at (0,0);
+				\coordinate (B) at ($(A)+(\xa,\xb)$);
+				\coordinate (D) at ($(A)+(\y,0)$);
+				\coordinate (C) at ($ (B)+(D)-(A) $);
+				\coordinate (A') at ($ (A)+(1,\z) $);
+				\coordinate (B') at ($ (B)+(1,\z) $);
+				\coordinate (C') at ($ (C)+(1,\z) $);
+				\coordinate (D') at ($ (D)+(1,\z) $);
+				\draw [dashed] (B)--(A)--(D) (A)--(A');
+				\draw (A')--(B')--(C')--(D')--(A')--(B');
+				\draw (B')--(B)--(C)--(D)--(D') (C')--(C);
+				\draw (A)node[left]{$A$} (B)node[left]{$B$} (A')node[left]{$A'$} (B')node[left]{$B'$};
+				\draw (C)node[right]{$C$} (D)node[right]{$D$} (C')node[right]{$C'$} (D')node[right]{$D'$};		
+			\end{tikzpicture}}
+	}
+\end{ex}
+\begin{ex}%[2H2V2-3]
+	Trong không gian $Oxyz$, cho bốn điểm $M(2;-3;5)$, $N(4;7;-9)$, $E(3;2;1)$, $F(1;-8;12)$. Bộ ba điểm nào sau đây thẳng hàng?
+	\choice
+	{$M$, $N$, $E$}
+	{$M$, $E$, $F$}
+	{$N$, $E$, $F$}
+	{\True $M$, $N$, $F$}
+	\loigiai{
+		Ta có
+		{\allowdisplaybreaks
+			\begin{align*}
+				& \overrightarrow{MN}=(2;10;-14),
+				\overrightarrow{ME}=(1;5;-4),\overrightarrow{EF}=(-2;-10;11)\\
+				& \overrightarrow{MF}=(-1;-5;7),
+				 \overrightarrow{NE}=(-1;-5;10),
+				 \overrightarrow{NF}=(-3;-15;21).
+		\end{align*}}
+		Từ đó suy ra $\overrightarrow{MN}=-\dfrac{2}{3}\overrightarrow{NF}$ nên hai véc-tơ $\overrightarrow{MN}$ và $\overrightarrow{MF}$ cùng phương, do đó ba điểm $M$, $N$, $F$ thẳng hàng.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B7-De2-lc}
+\Opensolutionfile{ans}[ans/ans-2-B7-De2-ds]
+\cauds
+\setcounter{ex}{0}
+\begin{ex}
+	Trong không gian $Oxyz$ cho hình bình hành $ABCD$. Biết $A(-1;1;2)$, $B(1;0;3)$, $C(0;2;-2)$.
+	\choiceTF
+	{\True $\overrightarrow{BC}=(-1;2;-5)$}
+	{\True $\overrightarrow{AB}=2\overrightarrow{i}-\overrightarrow{j}+\overrightarrow{k}$}
+	{\True $D(-2;3;-3)$}
+	{$\overrightarrow{AD}=-\overrightarrow{i}+2\overrightarrow{j}+5\overrightarrow{k}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch $\overrightarrow{BC}=(-1;2;-5)$.
+			\itemch $\overrightarrow{AB}=2\overrightarrow{i}-\overrightarrow{j}+\overrightarrow{k}$.
+			\itemch $ABCD$ là hình bình hành nên\\ $\overrightarrow{AB}=\overrightarrow{DC}\Rightarrow (2;-1;1)=(-x_D;2-y_D;-2-z_d)\Rightarrow D(-2;3;-3)$.
+			\itemch	$ABCD$ là hình bình hành nên $\overrightarrow{AD}=\overrightarrow{BC}=(-1;2-5)$ nên $\overrightarrow{AD}=-\overrightarrow{i}+2\overrightarrow{j}-5\overrightarrow{k}$.		
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}
+Trong không gian $Oxyz$ cho $M(4;5;6)$. Tìm khẳng định đúng.	
+	\choiceTF
+	{Hình chiếu của $M$ lên $Ox$ là $M'(-4;5;6)$}
+	{\True Hình chiếu của $M$ lên $Oz$ là $M'(0;0;6)$}
+	{\True Hình chiếu của $M$ lên $Oxy$ là $M'(4;5;0)$}
+	{Điểm đối xứng của $M$ qua $Oy$ là $M'(4;-5;6)$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Hình chiếu của $M$ lên $Ox$ là $M'(-4;0;0)$.
+			\itemch Hình chiếu của $M$ lên $Oz$ là $M'(0;0;6)$.
+			\itemch Hình chiếu của $M$ lên $Oxy$ là $M'(4;5;0)$.
+			\itemch Điểm đối xứng của $M$ qua $Oy$ là $M'(-4;5;-6)$.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}
+Chọ hình hộp chữ nhật $OABC.DEFG$ có $OA=a$, $OC=b$, $OD=c$. Chọn hệ trực chuẩn $Oxyz$ sao cho $\overrightarrow{Ox}$, $\overrightarrow{Oy}$, $\overrightarrow{Oz}$ lần lượt là $\overrightarrow{OA}$, $\overrightarrow{OC}$, $\overrightarrow{OD}$. Tìm khẳng định đúng.	
+	\choiceTF
+	{$\overrightarrow{DG}=\overrightarrow{AB}$}
+	{\True $\overrightarrow{OA}=(a,0,0)$}
+	{Tọa độ điểm $D$ là $D(0,b,c)$}
+	{\True $\overrightarrow{EF}=(0,b,0)$}
+	\loigiai{
+		
+	}
+\end{ex}
+\begin{ex}
+	Các mệnh đề sau đúng hay sai?
+	\choiceTF
+	{Trong không gian với hệ tọa độ $Oxyz$, hình chiếu của điểm $M( 1;-3;-5)$ trên mặt phẳng $(Oyz)$ có tọa độ là $(0;-3;0)$}
+	{\True Trong không gian với hệ tọa độ $Oxyz$, cho tam giác $ABC$ có $\overrightarrow{AB}=(-3;0;4)$, $\overrightarrow{AC}=(5;-2;4)$. Tọa độ của $\overrightarrow{AM}$ là $(1;-1;4)$}
+	{\True Trong không gian, cho hai điểm $A(-2;2;-1)$, $B(0;-1;-2)$. Tọa độ điểm $M$ thuộc mặt phẳng $(Oxy)$ sao cho ba điểm $A$, $B$, $M$  thẳng hàng là $M(-4;5;0)$}
+	{Trong không gian với hệ trục toạ độ $Oxyz$, cho các vectơ $\overrightarrow{a}=( 1;2;1)$, $\overrightarrow{b}=(-2;3;4)$, $\overrightarrow{c}=(0;1;2)$ và $\overrightarrow{d}=(4;2;0)$. Biết rằng $\overrightarrow{d}=x\overrightarrow{a}+y\overrightarrow{b}+z\overrightarrow{c}$. Giá trị $x+y+z$ là $1$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Trong không gian với hệ tọa độ $Oxyz$, hình chiếu của điểm $M(1;-3;-5)$ trên mặt phẳng $(Oyz)$ có tọa độ là $(0;-3;-5)$.
+			\itemch $\overrightarrow{AM}=\dfrac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC})=(1;-1;4)$.
+			\itemch $M(-4;5;0)\in (Oxy)$.\\
+			$\overrightarrow{AM}=(-2;3;1)$ $\overrightarrow{AB}=(2;-3;-1)$\\ $\Rightarrow\overrightarrow{AM}=-\overrightarrow{AB}$ hay $A$, $B$, $M$ thẳng hàng.
+			\itemch $\overrightarrow{d}=x\overrightarrow{a}+y\overrightarrow{b}+z\overrightarrow{c} \Leftrightarrow \heva{&x-2y=4\\&2x+3y+z=2\\&x+4y+2z=0}\Leftrightarrow\heva{&x=2\\&y=-1\\&z=1.}$\\
+			Vậy $x+y+z=2$.
+		\end{itemchoice}	
+		
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B7-De2-ds}
+\Opensolutionfile{ans}[ans/ans-2-B7-De2-kq]
+\caukq
+\setcounter{ex}{0}
+\begin{ex}%[2H2H2-3]
+	Trong không gian với hệ trục tọa độ $Oxyz$, cho ba điểm $A(3;2;1)$, $B(1;-1;2)$, $C(1;2;-1)$. Điểm $M(x;y;z)$ thỏa mãn $\overrightarrow{OM}=2\overrightarrow{AB}-\overrightarrow{AC}$. Tính tổng $x+y+z$.
+	\shortans{$-4$}
+	\loigiai{
+		Ta có:
+		\begin{itemize}
+			\item $\overrightarrow{AB}=(-2;-3;1)\Rightarrow 2\overrightarrow{AB}=(-4;-6;2)$.
+			\item $\overrightarrow{AC}=( -2;0;-2)\Rightarrow -\overrightarrow{AC}=(2;0;2)$.
+		\end{itemize}
+		Suy ra $\overrightarrow{OM}=( -2;-6;4)\Rightarrow M( -2;-6;4)$.\\
+		Vậy $x+y+z=-2-6+4=-4$.}
+\end{ex}
+	
+\begin{ex}%[2H2H2-2]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hai điểm $B (1; 2; -3)$ và $C(7; 4; -2)$. Nếu điểm $E(x;y;z)$ thỏa mãn đẳng thức $\overrightarrow{CE} = 2\overrightarrow{EB}$. Tính tổng $P=x+y+z$.
+	\shortans{$3$}
+	\loigiai{Giả sử điểm cần tìm có tọa độ $E(x, y, z)$ khi đó
+	\begin{itemize}
+		\item $\overrightarrow{CE} = \left(x - 7; y - 4; z + 2\right)$.
+		\item $\overrightarrow{EB} = \left(1 - x; 2 - y; -3 - z\right)$.
+	\end{itemize}
+	Theo giả thiết $\overrightarrow{CE} = 2\overrightarrow{EB}$ nên ta có hệ phương trình $$\heva{&x - 7 = 2 - 2x\\&y - 4 = 4 - 4y\\&z + 2 = -6 - 2z}\Leftrightarrow \heva{&x= 3\\&y= \dfrac{8}{3}\\&z= -\dfrac{8}{3}}\Rightarrow E\left( 3; \dfrac{8}{3}; -\dfrac{8}{3}\right).$$
+		Vậy $x+y+z=3+ \dfrac{8}{3}+ \left(-\dfrac{8}{3}\right)=3$.
+	}
+\end{ex}
+
+\begin{ex}%[2H2V2-3]
+	Trong không gian với hệ tọa độ $Oxyz$, cho véc-tơ $\overrightarrow{a}=(1;-2;0)$, $\overrightarrow{b}=(-1;1;2)$, $\overrightarrow{c}=(4;0;6)$ và $\overrightarrow{u}=\left(-2;\dfrac{1}{2};\dfrac{3}{2}\right)$. Giả sử $\overrightarrow{u}=m\overrightarrow{a}+n\overrightarrow{b}+p\overrightarrow{c}$. Tính tổng $A=m+n+p$.
+	\shortans{$1{,}75$}
+	\loigiai{
+		Đặt $\overrightarrow{u}=m\overrightarrow{a}+n\overrightarrow{b}+p\overrightarrow{c}$.\\
+		Ta có hệ phương trình $\heva{&-2=m-n+4p\\&\dfrac{1}{2}=-2m+n\\&\dfrac{3}{2}=2n+6p}\Leftrightarrow\heva{&m=\dfrac{1}{2}\\&n=\dfrac{3}{2}\\&p=-\dfrac{1}{4}.}$\\
+		Vậy $A=m+n+p=\dfrac{7}{4}=1{,}75$.}
+\end{ex}
+\begin{ex}%[2H2V2-3]
+	Trong không gian với hệ trục tọa độ $Oxyz$, cho các điểm $A(0;-2;-1)$ và $B(1;-1;2)$. Giả sử $M(a;b;c)$ thuộc đoạn thẳng $AB$ và thỏa $MA=2MB$. Khi đó giá trị $c$ bằng bao nhiêu?
+	\shortans{$1$}
+	\loigiai{
+	$\overrightarrow{AM}=(a;b+2;c+1)$; $\overrightarrow{MB}=(1-a;-1-b;2-c)$\\
+	Từ giả thiết, ta có $\overrightarrow{AM}=2\overrightarrow{MB}$.\\
+	Suy ra $\heva{&a=2(1-a)\\&b+2=2(-1-b)\\&c+1=2(2-c)}\Leftrightarrow\heva{&a=\dfrac{2}{3}\\&b=-\dfrac{4}{3}\\&c=1.}$
+	} 
+\end{ex}	
+\begin{ex}%[2H2C2-3]
+	Trong không gian $Oxyz$, cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông cạnh bằng $\sqrt{2}$ và chiều cao bằng $3$. Giao điểm hai đường chéo $AC$ và $BD$ trùng với gốc $O$. Các véc-tơ $\overrightarrow{OB}$, $\overrightarrow{OC}$, $\overrightarrow{OS}$ lần lượt cùng hướng với $\overrightarrow{i}$, $\overrightarrow{j}$, $\overrightarrow{k}$. Giả sử $\overrightarrow{AS}=(a;b;c)$. Tính tổng $a+b+c$.
+	\shortans{$3$}
+	\loigiai{
+		\begin{center}
+			
+			\begin{tikzpicture}[scale=0.75]
+			\coordinate (A) at (0,0);
+			\coordinate (B) at (-2,-1);
+			\coordinate (D) at (5,0);
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			\coordinate (O) at ($(B)!1/2!(D)$);
+			\coordinate (S) at ($(O)+(0,6)$);
+			\draw (B)--(C)--(D)  (S)--(B) (S)--(C) (S)--(D);
+			\draw [dashed] (B)--(A)--(C) (B)--(D)--(A) (S)--(O) (S)--(A);
+			\draw[->] (B)--($(O)!3/2!(B)$)node[above]{$i$};
+			\draw[->] (C)--($(O)!2/1!(C)$)node[above]{$j$};
+			\draw[->] (S)--($(O)!5/4!(S)$)node[right]{$k$};
+			\draw (A)node[above left]{$A$} (B)node[above left]{$B$} (C)node[below]{$C$} (D)node[right]{$D$} (O)node[below]{$O$} (S)node[right]{$S$};
+			\end{tikzpicture}			
+		\end{center}
+	Đáy $ABCD$ là hình vuông có cạnh bằng $\sqrt{2}$ và giao điểm hai đường chéo $AC$ và $BD$ trùng với gốc tọa độ $O$. Do đó, tọa độ các điểm sẽ được xác định như sau:
+	\begin{itemize}
+		\item $A(\dfrac{\sqrt{2}}{2}, -\dfrac{\sqrt{2}}{2},0)$.
+		\item $S(0, 0, 3)$.		
+	\end{itemize}
+	Suy ra $\overrightarrow{AS}=\left(0-\dfrac{\sqrt{2}}{2};0+\dfrac{\sqrt{2}}{2}; 3-0\right)=\left(-\dfrac{\sqrt{2}}{2};\dfrac{\sqrt{2}}{2}; 3\right)$.\\	
+	Vậy: $a = -\dfrac{\sqrt{2}}{2}, b = \dfrac{\sqrt{2}}{2}, c = 3$.\\
+	Tổng: $a + b + c = -\dfrac{\sqrt{2}}{2} + \dfrac{\sqrt{2}}{2} + 3 = 3$.	}
+\end{ex}	
+\begin{ex}%[2H2C2-3]
+\immini{Trong không gian $Oxyz$, cho hình vẽ bên. Gọi $H$ là hình chiếu của $M$ lên $(Oxy)$. Cho biết $OM=6$, $(\overrightarrow{i},\overrightarrow{OH})=60^\circ$, $(\overrightarrow{OH},\overrightarrow{OM})=30^\circ$. Giả sử $\overrightarrow{OM}=(a;b;c)$. Tìm $c$.}{
+\begin{tikzpicture}[scale=0.6]
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (-2,-2);
+	\coordinate (B) at (4,0);
+	\coordinate (C) at ($(O)+(0,4)$);
+	\coordinate (H) at ($(A)+(B)-(O)$);
+	\coordinate (M) at ($(C)+(H)-(O)$);
+	\draw [dashed] (C)--(M)--(H) (H)--(A) (H)--(B) (H)--(O);
+	\draw[->] (O)--($(O)!3/2!(A)$)node[right]{$x$};
+	\draw[->] (O)--($(O)!5/4!(B)$)node[above]{$y$};
+	\draw[->] (O)--($(O)!5/4!(C)$)node[right]{$z$};
+	\draw[->] (O)--(M);
+	\draw[->] (O)--($(O)!1/3!(A)$)node[left]{$\overrightarrow{i}$};
+	\draw[->] (O)--($(O)!1/3!(B)$)node[above]{$\overrightarrow{j}$};
+	\draw[->] (O)--($(O)!1/3!(C)$)node[right]{$\overrightarrow{k}$};
+	\draw (O)node[left]{$O$} (A)node[left]{$A$} (B)node[above]{$B$} (C)node[left]{$C$} (H)node[below]{$H$} (M)node[above right]{$M$};
+\end{tikzpicture}	
+}
+	\shortans{$3$}
+	\loigiai{$\triangle OMH$ vuông tại $H$ nên $MH=OM \cdot \sin MOH=6 \cdot \sin 30^\circ =3$ nên $OC=3$ hay $z_M=3$.\\
+	Vậy $c=3$.}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B7-De2-kq}

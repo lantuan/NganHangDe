@@ -1,0 +1,614 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-OTC2]
+\caulc
+%%==========Câu 1
+\begin{ex}%[2H2N1-2]
+	Cho tứ diện $ ABCD $. Lấy $ G $ là trọng tâm của tam giác $ BCD $. Khẳng định nào sau đây là \textbf{sai}?
+	\choice
+	{$ \vec{BG}+\vec{CG}+\vec{DG}=\vec{0} $}
+	{$ \vec{AB}+\vec{AC}+\vec{AD}=3\vec{AG} $}
+	{$ \vec{BC}+\vec{BD}=3\vec{BG} $}
+	{\True $ \vec{GA}+\vec{GB}+\vec{GD}=\vec{0} $}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\ac{4} % cạnh AC
+				\def\ab{2} % cạnh AB
+				\def\h{4} % chiều cao
+				\def\gocA{50} % góc A của đáy
+				\coordinate[label=left:$B$] (A) at (0,0);
+				\coordinate[label=right:$D$] (C) at (\ac,0);
+				\coordinate[label=below left:$C$] (B) at (-\gocA:\ab);
+				\coordinate[label=below right:$M$] (M) at ($(B)!.5!(C)$);
+				\coordinate[label=below:$G$] (G) at ($(A)!2/3!(M)$);
+				\coordinate[label=above:$A$] (S) at ($(G)+(90:\h)$);
+				\draw (A)--(B)--(C)--(S)--cycle (S)--(B);
+				\draw[dashed] (M)--(A)--(C) (G)--(S);
+				\foreach \diem in {A,B,C,S,G,M}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		\end{center}
+		$ \vec{GA}+\vec{GB}+\vec{GD}\ne\vec{0} $. 
+	}
+\end{ex}%[2H2N1-2]
+
+%%==========Câu 2
+\begin{ex}%[2H2N1-2]
+	Cho hình hộp $ ABCD.A'B'C'D' $. Lấy $ M $ là trung điểm của đoạn thẳng $ CC' $. Véc-tơ $ \vec{AM} $ bằng
+	\choice
+	{$ \vec{AB}+\vec{AD}+\vec{AA'} $}
+	{\True $ \vec{AB}+\vec{AD}+\dfrac{1}{2}\vec{AA'} $}
+	{$ \vec{AB}+\dfrac{1}{2}\vec{AD}+\dfrac{1}{2}\vec{AA'} $}
+	{$ \dfrac{1}{2}\vec{AB}+\vec{AD} +\vec{AA'} $}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{2} % cạnh BA
+				\def\h{4} % đường cao
+				\def\gocB{35} % góc B của đáy
+				\coordinate[label=below left:$B$] (B) at (0,0);
+				\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+				\coordinate[label=below:$C$] (C) at (\bc,0);
+				\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+				\coordinate[label=above left:$A'$] (A') at ($(A)+(90:\h)$);
+				\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+				\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+				\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+				\coordinate[label=right:$M$] (M) at ($(C)!0.5!(C')$);
+				\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+				\draw[dashed] (A')--(A)--(D) (M)--(A)--(B);
+				\foreach \diem in {A,B,C,D,A',B',C',D',M}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		\end{center}
+		Ta có $ \vec{AM}=\vec{AC}+\vec{CM} = \vec{AB}+\vec{AD}+\vec{CM}= \vec{AB}+\vec{AD}+\dfrac{1}{2}\vec{AA'}$.
+	}
+\end{ex}
+
+%%==========Câu 3
+\begin{ex}%[2H2N1-2]
+	Cho hình hộp $ ABCD.A'B'C'D' $. Khẳng định nào dưới đây \textbf{sai}?
+	\choice
+	{$ \vec{AB}+\vec{CC'}=\vec{AB'} $}
+	{$ \vec{AB}+\vec{AD}+\vec{AA'}=\vec{AC'} $}
+	{$ \vec{AD}+\vec{BB'}=\vec{AD'} $}
+	{\True $ \vec{AB}+\vec{CC'}=\vec{AC'} $}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{2} % cạnh BA
+				\def\h{4} % đường cao
+				\def\gocB{35} % góc B của đáy
+				\coordinate[label=below left:$B$] (B) at (0,0);
+				\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+				\coordinate[label=below:$C$] (C) at (\bc,0);
+				\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+				\coordinate[label=above left:$A'$] (A') at ($(A)+(90:\h)$);
+				\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+				\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+				\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+				%		\coordinate[label=right:$M$] (M) at ($(C)!0.5!(C')$);
+				\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+				\draw[dashed] (A')--(A)--(D) (A)--(B);
+				\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		\end{center}
+		$ \vec{AB}+\vec{CC'}=\vec{AB}+\vec{BB'}=\vec{AB'} $.
+	}
+\end{ex}
+
+%%==========Câu 4
+\begin{ex}%[2H2N2-2]
+	Cho tứ diện đều $ ABCD $ có độ dài cạnh bằng $ a $, gọi $ M $ là trung điểm của đoạn thẳng $ CD $. Tích vô hướng $ \vec{AB}\cdot\vec{AM} $ bằng
+	\choice
+	{$ \dfrac{a^{2}}{4} $}
+	{\True $ \dfrac{a^{2}}{2} $}
+	{$ \dfrac{a^{2}}{3} $}
+	{$ a^{2} $}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\ac{4} % cạnh AC
+				\def\ab{2} % cạnh AB
+				\def\h{4} % chiều cao
+				\def\gocA{50} % góc A của đáy
+				\coordinate[label=left:$B$] (A) at (0,0);
+				\coordinate[label=right:$D$] (C) at (\ac,0);
+				\coordinate[label=below left:$C$] (B) at (-\gocA:\ab);
+				\coordinate[label=below right:$M$] (M) at ($(B)!.5!(C)$);
+				\coordinate[label=below:$G$] (G) at ($(A)!2/3!(M)$);
+				\coordinate[label=above:$A$] (S) at ($(G)+(90:\h)$);
+				\draw (A)--(B)--(C)--(S)--cycle (S)--(B) (S)--(M) ;
+				\draw[dashed] (M)--(A)--(C) (G)--(S);
+				\foreach \diem in {A,B,C,S,G,M}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		\end{center}
+		Vì tứ diện $ ABCD $ là tứ diện đều nên chân đường cao là trọng tâm của tam giác $ BCD $ suy ra $ AG\perp (BCD) \Rightarrow AG\perp CD$.\\
+		Tam giác $ BCD $ đều có $ M $ là trung điểm $ CD $ nên $ BM\perp CD $.\\
+		Suy ra $ \heva{&CD\perp BM\\&CD\perp AG}\Rightarrow CD\perp (ABM)\Rightarrow CD\perp AB \Rightarrow DM \perp AB \Rightarrow \vec{AB}\cdot \vec{DM} = 0$.\\
+		Ta có $ \vec{AB}\cdot\vec{AM} =\vec{AB}\cdot\left(\vec{AD}+\vec{DM}\right)=\vec{AB}\cdot \vec{AD}+\vec{AB}\cdot \vec{DM} =\vec{AB}\cdot \vec{AD}$.\\
+		$ \vec{AB}\cdot\vec{AD}=\left|\vec{AB}\right|\cdot\left|\vec{AD}\right|\cdot\cos \left(\vec{AB};\vec{AD}\right)=a\cdot a\cdot \cos 60^{\circ}=\dfrac{a^{2}}{2} $.
+	}
+\end{ex}
+
+%%==========Câu 5
+\begin{ex}%[2H2N2-2]
+	Trong không gian $ Oxyz $, cho $ \vec{a}=(1;-2;2) $, $ \vec{b}=(-2;0;3) $. Khẳng định nào dưới đây là \textbf{sai}?
+	\choice
+	{$ \vec{a}+\vec{b}=(-1;-2;5) $}
+	{$ \vec{a}-\vec{b}=(3;-2;-1) $}
+	{\True $ 3\vec{a}=(3;-2;2) $}
+	{$ 2\vec{a}+\vec{b}=(0;-4;7) $}
+	\loigiai{
+		Ta có $ 3\vec{a}=(3;-6;6) $.
+	}
+\end{ex}
+
+%%==========Câu 6
+\begin{ex}%[2H2N2-2]
+	Trong không gian $ Oxyz $, cho hình bình hành $ ABCD $ có $ A(-1;0;3) $, $ B(2;1;-1) $ và $ C(3;2;2) $. Tọa độ điểm $ D $ là
+	\choice
+	{$ (2;-1;0) $}
+	{$ (0;-1;-6) $}
+	{\True $ (0;1;6) $}
+	{$ (-2;1;0) $}
+	\loigiai{
+		Gọi $ D(x;y;z) $.\\
+		Ta có $ \vec{AB}=(3;1;-4) $, $ \vec{DC}=(3-x;2-y;2-z) $.\\
+		Vì $ ABCD $ là hình bình hành nên ta có $ \vec{AB}=\vec{DC} $
+		\begin{center}
+			$ \heva{&3-x=3\\&2-y=1\\&2-z=-4}\Leftrightarrow\heva{&x=0\\&y=1\\&z=6.} $
+		\end{center}
+		Vậy $ D(0;1;6) $.
+	}
+\end{ex}
+
+%%==========Câu 7
+\begin{ex}%[2H2N2-2]
+	Trong không gian $ Oxyz $, cho $ A(1;0;-1) $, $ B(0;-1;2) $ và $ G(2;1;0) $. Biết tam giác $ ABC $ có trọng tâm là điểm $ G $. Tọa độ của điểm $ C $ là
+	\choice
+	{\True $ (5;4;-1) $}
+	{$ (-5;-4;1) $}
+	{$ (1;2;-1) $}
+	{$ (-1;-2;1) $}
+	\loigiai{
+		Gọi $ C(x;y;z) $.\\
+		Vì $ G $ là trọng tâm $ \triangle  ABC $ nên ta có
+		\begin{center}
+			$ \heva{&\dfrac{1+0+x}{3}=2\\&\dfrac{0-1+y}{3}=1\\&\dfrac{-1+2+z}{3}=0}\Leftrightarrow \heva{&x=5\\&y=4\\&z=-1.} $
+		\end{center}
+	}
+\end{ex}
+
+%%==========Câu 8
+\begin{ex}%[2H2H2-4]
+	Trong không gian $ Oxyz $, cho $ \vec{a}=(2;1;-3) $, $ \vec{b}=(-2;-1;2) $. Tích vô hướng $ \vec{a}\cdot\vec{b} $ bằng
+	\choice
+	{$ -2 $}
+	{\True$ -11 $}
+	{$ 11 $}
+	{$ 2 $}
+	\loigiai{
+		Ta có $ \vec{a} \cdot \vec{b}=2\cdot (-2)+1\cdot (-1)+(-3)\cdot 2 =-11$.
+	}
+\end{ex}
+
+%%==========Câu 9
+\begin{ex}%[2H2H2-4]
+	Trong không gian $ Oxyz $, cho $ \vec{a}=(2;1;-2) $, $ \vec{b}=(0;-1;1) $. Góc giữa hai véc-tơ $ \vec{a} $, $ \vec{b} $ bằng
+	\choice
+	{$ 60^{\circ} $}
+	{\True $ 135^{\circ} $}
+	{$ 120^{\circ} $}
+	{\True $ 45^{\circ} $}
+	\loigiai{\\
+		Ta có $ \cos \left(\vec{a};\vec{b}\right)=\dfrac{\vec{a}\cdot\vec{b}}{\left|\vec{a}\right|\cdot \left|\vec{b}\right|}=\dfrac{2\cdot0+1\cdot (-1)+(-2)\cdot1 }{\sqrt{2^{2}+1^{2}+(-2)^{2}}\cdot\sqrt{0^{2}+(-1)^{2}+1^{2}}}=-\dfrac{\sqrt{2}}{2} $.\\
+		Suy ra $ \left(\vec{a};\vec{b}\right)=135^{\circ} $.
+	}
+\end{ex}
+
+%%==========Câu 10
+\begin{ex}%[2H2H2-4]
+	Trong không gian $ Oxyz $, cho $ \vec{a}=(-2;2;2) $, $ \vec{b}=(1;-1;-2) $. Cô-sin của góc giữa hai véc-tơ $ \vec{a} $, $ \vec{b} $ bằng
+	\choice
+	{\True $ \dfrac{-2\sqrt{2}}{3} $}
+	{$ \dfrac{2\sqrt{2}}{3} $}
+	{$ \dfrac{\sqrt{2}}{3} $}
+	{$ \dfrac{-\sqrt{2}}{3} $}
+	\loigiai{
+		$ \cos \left(\vec{a};\vec{b}\right)=\dfrac{\vec{a}\cdot\vec{b}}{\left|\vec{a}\right|\cdot \left|\vec{b}\right|} =\dfrac{(-2)\cdot1 +2\cdot (-1)+2\cdot(-2)}{\sqrt{(-2)^{2}+2^{2}+2^{2}}\cdot\sqrt{1^{2}+(-1)^{2}+(-2)^{2}}}=-\dfrac{2\sqrt{2}}{3}.$
+	}
+\end{ex}
+%%==========Câu 11
+\begin{ex}%[2H2H2-4]
+	Trong không gian $Oxyz$, cho tam giác $ABC$ có $A\left(1;0;1\right)	, B\left(0;2;3\right), C\left(2;1;0\right)$. Độ dài đường trung tuyến $AM$ là 
+	\choice
+	{$\dfrac{1}{2}$}
+	{$\dfrac{\sqrt{11}}{2}$}
+	{$\dfrac{\sqrt{12}}{2}$}
+	{\True$\dfrac{\sqrt{10}}{2}$}	
+	\loigiai{ 
+		Ta có $M$ là trung điểm của đoạn $BC\Rightarrow M\left(1;\dfrac{3}{2};\dfrac{3}{2}\right)$.\\
+		Độ dài đường trung tuyến $AM=\dfrac{\sqrt{10}}{2}$.	
+	}
+\end{ex}
+%%==========Câu 12
+\begin{ex}%[2H2H2-4]
+	Cho ba lực $\overrightarrow{F_1}$, $\overrightarrow{F_2}$, $\overrightarrow{F_3}$ lần lượt có cường độ $2N$, $4N$, $5N$ được đặt vào chất điểm $M$. Biết rằng góc tạo bởi hai lực bất kì trong ba lực đều bằng $60^\circ$. Cường độ của hợp lực tác dụng lên $M$ là  
+	\choice
+	{$45N$}
+	{$\sqrt{45} N$}
+	{\True$\sqrt{83}N$}
+	{$83N$}
+	\loigiai{ 
+		\begin{center}
+			\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\normalsize,scale=0.8]
+				\draw[thin,gray!50,step=1cm] (-5,-5) grid (5,5);
+				%\draw[fill=black]              (0,0) circle (0.1);
+				
+				\draw[fill=black] (0,3) circle (0.05)
+				;\node at (0,3+0.4){$M$};
+				\draw[fill=black] (-3,-2) circle (0.05);\node at (-3-0.4,-2){$A$};
+				\draw[fill=black] (-1,-4) circle (0.05);\node at (-1,-4-0.4){$B$};
+				\draw[fill=black] (4,-2) circle (0.05);\node at (4+0.4,-2){$C$};
+				\draw[fill=black] (-2,-3) circle (0.05);\node at (-2-0.4,-3){$H$};
+				\draw[fill=black] (2,0.5) circle (0.05);\node at (2+0.4,0.5){$K$};
+				\draw[fill=black] (0,-1.2) circle (0.05);\node at (0+0.4,-1.2){$I$};
+				\draw(0,3)  coordinate(M);
+				\draw(-3,-2)coordinate(A);
+				\draw(-1,-4)coordinate(B);
+				\draw(4,-2) coordinate(C);
+				\draw(-2,-3)coordinate(H);
+				\draw(2,0.5)coordinate(K);
+				\draw($(H)!0.5!(K)$) coordinate(I);
+				\draw [->] (M)--(A) (M)--(C) (M)--(B);
+				\draw (H)--(M)--(A)--(B)--(C)--(M)--(B) ;
+				\draw[dashed](A)--(C)--(H)--(K) (M)--(I);
+			\end{tikzpicture}
+		\end{center}
+		Đặt $\overrightarrow{MA}=\overrightarrow{F_1}$, $\overrightarrow{MB}=\overrightarrow{F_2}$, $\overrightarrow{MC}=\overrightarrow{F_3}$.\\
+		Ta có $MA=2$, $MB=4$, $MC=5$, $\widehat{AMB}=\widehat{AMC}=\widehat{BMC}=60^\circ$.\\
+		Gọi $H$, $K$, $I$ lần lượt là trung điểm của các cạnh $AB$, $MC$, $HK$. \\
+		Ta có $\overrightarrow{MA}+\overrightarrow{MB}+\overrightarrow{MC}=2\overrightarrow{MH}+2\overrightarrow{MK}=4\overrightarrow{MI}$.\\
+		$AB=\sqrt{MA^2+MB^2-2\cdot MA\cdot MB\cdot \cos\widehat{AMB}}=2\sqrt{3}$.\\
+		$AC=\sqrt{MA^2+MC^2-2\cdot MA\cdot MC\cdot \cos\widehat{AMC}}=\sqrt{19}$.\\
+		$CB=\sqrt{MC^2+MB^2-2\cdot MC\cdot MB\cdot \cos\widehat{CMB}}=\sqrt{21}$.\\
+		$MH^2=\dfrac{MA^2+MB^2}{2}-\dfrac{AB^2}{4}\Rightarrow MH=	\sqrt{7}$.\\
+		$CH^2=\dfrac{CA^2+CB^2}{2}-\dfrac{AB^2}{4}\Rightarrow CH=	\sqrt{17}$.\\
+		$KH^2=\dfrac{MH^2+CH^2}{2}-\dfrac{MC^2}{4}\Rightarrow MH=\dfrac{	\sqrt{23}}{2}$.\\
+		Suy ra $MI^2=\dfrac{MH^2+MK^2}{2}-\dfrac{HK^2}{4}\Rightarrow MI=\dfrac{	\sqrt{83}}{4}$.\\	
+		Vậy hợp lực của lực tác dụng lên vật là $\sqrt{83}$ N.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC2}
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-OTC2-DS]
+%%%============EX_1==============%%%
+\begin{ex}%[2H2H2-4]
+	Cho tứ diện $ABCD$. Khi đó
+	\choiceTF
+	{$\vec{A B}+\vec{C D}=\vec{A C}+\vec{D B}$}
+	{$\vec{A C}+\vec{B D}=\vec{A B}+\vec{C D}$}
+	{$\vec{A D}+\vec{B C}=\vec{A B}+\vec{D C}$}
+	{\True $\vec{B A}+\vec{C D}=\vec{B D}+\vec{C A}$}
+	\loigiai{
+\begin{itemchoice}
+\itemch Sai. $\vec{A B}+\vec{C D}=\vec{A C}+\vec{D B}\Leftrightarrow\vec{C A}+\vec{A B}+\vec{B D}=\vec{D C}\Leftrightarrow\vec{C D}=\vec{D C}$.
+\itemch Sai. $\vec{A C}+\vec{B D}=\vec{A B}+\vec{C D}\Leftrightarrow\vec{A C}-\vec{A B}=\vec{C D}+\vec{D B}\Leftrightarrow\vec{B C}=\vec{C B}$.
+\itemch Sai. $\vec{A D}+\vec{B C}=\vec{A B}+\vec{D C}\Leftrightarrow\vec{A D}-\vec{A B}=\vec{D C}+\vec{C B}\Leftrightarrow\vec{B D}=\vec{D B}$.
+\itemch Đúng. $\vec{B A}+\vec{C D}=\vec{B D}+\vec{C A}\Leftrightarrow\vec{B A}-\vec{B D}=\vec{D C}+\vec{C A}\Leftrightarrow\vec{D A}=\vec{D A}$.
+		\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_2============%%%
+\begin{ex}%[2H2N2-2]
+	Cho ba điểm $A(2 ; 1 ;-1)$, $B(3 ; 2 ; 0)$ và $C(2 ;-1 ; 3)$.
+		\choiceTF
+		{\True Ba điểm $A$, $B$, $C$ là ba đỉnh của một tam giác} 
+		{\True Chu vi tam giác $A B C$ khoảng $10{,}56$}
+		{Toạ độ $M\left(\dfrac{5}{2};\dfrac{3}{2};-2\right)$ là trung điểm cạnh $AB$ của tam giác $A B C$}
+		{\True Toạ độ $G \left(\dfrac{7}{3};\dfrac{2}{3};\dfrac{2}{3}\right)$ là trọng tâm của tam giác $A B C$}
+
+	\loigiai{
+		\begin{itemchoice}
+				\itemch Đúng. Ta có $\overrightarrow{AB}=(1;1;1)$ và $\overrightarrow{AC}=(0;-2;4)$. \\
+			Không tồn tại số $k$ nào để $\overrightarrow{AB}=k\overrightarrow{AC}$ nên hai véctơ $\overrightarrow{AB}$ và $\overrightarrow{AC}$ không cùng phương. Suy ra ba điểm $A$, $B$, $C$ không thẳng hàng nên $A$, $B$, $C$ là ba đỉnh của một tam giác.
+			\itemch Đúng. Ta có 
+			\begin{itemize}
+				\item $AB=\sqrt{1^2+1^2+1^2}=\sqrt{3}$;
+				\item $AC=\sqrt{0^2+(-2)^2+4^2}=2\sqrt{5}$;
+				\item $BC=\sqrt{(2-3)^2+(-1-2)^2+(3-0)^2}=\sqrt{19}$.
+			\end{itemize}
+			Vậy chu vi của tam giác $ABC$ bằng $\sqrt{3}+2\sqrt{5}+\sqrt{19}\approx 10{,}56$.
+			\itemch Sai. Tọa độ trung điểm $M$ của đoạn thẳng $AB$ là
+			\[ M\left(\dfrac{2+3}{2};\dfrac{1+2}{2};\dfrac{-1+0}{2}\right) \text{ hay } M\left(\dfrac{5}{2};\dfrac{3}{2};-\dfrac{1}{2}\right).\]
+			\itemch Toạ độ trọng tâm $G$ của tam giác $A B C$ là 
+			\[ G\left(\dfrac{2+3+2}{3};\dfrac{1+2+(-1)}{3};\dfrac{-1+0+3}{3}\right) \text{ hay } G \left(\dfrac{7}{3};\dfrac{2}{3};\dfrac{2}{3}\right).\]
+				\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_3============%%%
+\begin{ex}%[2H2H2-4]
+	\immini{Một chiếc đèn tròn được treo song song với mặt phẳng nằm ngang bởi ba sợi dây không dãn xuất phát từ điểm $O$ trên trần nhà lần lượt buộc vào ba điểm $A$, $B$, $C$ trên đèn tròn sao cho tam giác $ABC$ đều (Hình vẽ bên). Độ dài của ba đoạn dây $OA$, $OB$, $OC$ đều bằng $L$. Trọng lượng của chiếc đèn là $24$ N và bán kính của chiếc đèn là $18$ in ($1$ inch $=2{,}54$ cm). Gọi $F$ là độ lớn của các lực căng $\vec{F_1}$, $\vec{F_2}$, $\vec{F_3}$ trên mỗi sợi dây. Khi đó $F=F(L)$ là một hàm số với biến số là $L$.}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\path 
+			(0,0) coordinate (I) node[above left]{$I$}
+			(I)+(0,3) coordinate (O) node[above]{$O$}
+			;
+			\path[yscale=.4] 
+			($(I)+(0:2)$) arc (0:-170:2cm and 1cm) coordinate (A) node[left]{$A$}
+			($(I)+(0:2)$) arc (0:135:2cm and 1cm) coordinate (B) node[above right]{$B$}
+			($(I)+(0:2)$) arc (0:0:2cm and 1cm) coordinate (C) node[right]{$C$}
+			;
+			\draw[dashed] (I)--++(-90:0.4);
+			\draw[->] (I)++(-90:0.4)--node[right]{$\vec{P}$}++(-90:1.6);
+			\draw (O)--(A) (O)--(B) (O)--(C) (O)--(I);
+			\draw[->] (O)--($(O)!0.6!(A)$) node[left]{$\vec{F_1}$};
+			\draw[->] (O)--($(O)!0.6!(B)$) node[right]{$\vec{F_2}$};
+			\draw[->] (O)--($(O)!0.6!(C)$) node[left]{$\vec{F_3}$};
+			\draw ($(O)!0.7!(C)$)--++(30:1) node[right]{$L$};
+			\draw [dashed] (I)--(C);
+			\draw ($(I)!.5!(C)$)--++(30:1) node[right]{$18$ in};
+			\draw (O)+(-180:2)--++(0:2);
+			%	\draw (P) node{\faCamera};
+			\foreach \x in {A,B,C,O,I} \draw[fill=black] (\x) circle (1pt);
+			\draw[yscale=.4] (I) ellipse (2cm and 1cm);
+			\draw[yscale=.4] (C)+(-90:5pt) arc (0:-180:2cm and 1cm);
+		\end{tikzpicture}
+	}
+	\choiceTF
+{\True Công thức tính hàm số $F=F(L)=\dfrac{8L}{\sqrt{L^2-18^2}}$}
+{\True Bảng biến thiên của hàm số $F=F(L)$ là\\
+	\begin{tikzpicture}
+		\tkzTabInit[nocadre=false,lgt=1.2,espcl=2,deltacl=0.6]
+		{$L$ /0.6,$F'$ /0.6,$F$ /2}
+		{$18$,$+\infty$}
+		\tkzTabLine{d,-,}
+		\tkzTabVar{D+/$+\infty$,-/$8$}
+	\end{tikzpicture}}
+{\True Đồ thị hàm số $F=F(L)$ là \\
+	\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\begin{scope}[scale=.1]
+			\draw[->] (-10.1,0)--(40.1,0) node[below left] {$x$};
+			\draw[->] (0,-10.1)--(0,40.1) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\begin{scope}
+				\clip (-10,-10) rectangle (40,40);
+				\draw[samples=200,domain=18.01:40,smooth,variable=\x] plot (\x,{(8*(\x))/(sqrt((\x)^2-18^2))});
+			\end{scope}
+			\draw[dashed] (18,-10)--(18,40);
+			\draw[dashed] (-10,8)--(40,8);
+			\node at (18,0) [below right]{$18$};
+			\node at (0,8) [above right]{$8$};
+		\end{scope}
+	\end{tikzpicture}}
+{\True Biết rằng mỗi sợi dây đó được thiết kế để chịu được lực căng tối đa là $10$ N. Chiều dài tối thiểu của mỗi sợi dây là $30$ inch}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path (0,0) coordinate (A)	(1,-1) coordinate (B) (4,0) coordinate (C) ($(B)!.5!(C)$) coordinate (H) ($(A)!2/3!(H)$) coordinate (G) (G)+(0,3) coordinate (O) ($(A)!2/3!(B)$) coordinate (x);
+				\draw (O)--(A)--(B)--(C)--cycle (O)--(B);
+				\draw[dashed] (A)--(C) (A)--(H) (O)--(G)--(x);
+				\draw[->] (A)--($(G)!1.3!(A)$) node[left]{$x$};
+				\draw[->] (x)--($(G)!1.4!(x)$) node[below]{$y$};
+				\draw[->] (O)--($(G)!1.3!(O)$) node[above]{$z$};
+				\foreach \p/\r in {O/30,A/-135,B/-90,G/-90,C/0,H/-45}
+				\fill (\p) circle (1.5pt) node[shift={(\r:3mm)}]{$\p$};
+			\end{tikzpicture}
+		\end{center}
+	\begin{itemchoice}
+				\itemch Đúng. Vì tam giác $ABC$ là tam giác đều, độ dài ba đoạn dây $OA$, $OB$, $OC$ đều bằng $L>0$. Ta chọn hệ trục như hình vẽ, với $G$ là trọng tâm tam giác $ABC$ và $H$ là trung điểm $BC$.\\
+			Trong đó $A$, $H$ nằm trên trục $Gx$ và $O$ nằm trên trục $Gz$.\\
+			Bán kính của chiếc đèn là $18$ nên $AG=18$ suy ra $AB=18\sqrt{3}$ và $BH=HC=9\sqrt{3}$.\\
+			Do đó, ta có $G(0,0,0)$, $A(18,0,0)$, $B(-9,9\sqrt{3},0)$, $C(-9,-9\sqrt{3},0)$.\\
+			Xét tam giác vuông $AOG$, suy ra $OG=\sqrt{OA^2-AG^2}=\sqrt{L^2-18^2}$ nên $O(0;0;\sqrt{L^2-18^2})$.\\
+			Ta có\\
+			 $\vec{OA}=(18;0;-\sqrt{L^2-18^2})$, $\vec{OB}=(-9;9\sqrt{3};-\sqrt{L^2-18^2})$ và $\vec{OC}=(-9;-9\sqrt{3};-\sqrt{L^2-18^2})$.\\
+			Suy ra $|\vec{OA}|=|\vec{OB}|=|\vec{OC}|=L$ và $|\vec{F_1}|=|\vec{F_2}|=|\vec{F_3}|$.\\
+			Tồn tại hằng số $c\ne 0$ sao cho 
+			$$\vec{F_1}=c\cdot \vec{OA}=(18c;0;-c\sqrt{L^2-18^2});$$
+			$$\vec{F_2}=c\cdot \vec{OB}=(-9c;9c\sqrt{3};-c\sqrt{L^2-18^2});$$
+			$$\vec{F_3}=c\cdot \vec{OC}=(-9c;-9c\sqrt{3};-c\sqrt{L^2-18^2}).$$
+			Suy ra $\vec{P}=\vec{F_1}+\vec{F_2}+\vec{F_3}=(0;0;-3c\sqrt{L^2-18^2})$, trong đó $\vec{P}$ là trọng lực tác dụng lên bóng đèn.\\
+			Mà trọng lượng của bóng đèn là $24$ N nên $$|\vec{P}|=24\Leftrightarrow 9c^2(L^2-18^2)=24^2\Leftrightarrow c=\dfrac{8}{\sqrt{L^2-18^2}},\forall L\in (18;+\infty).$$
+			Vậy $F=|F_1|=|F_2|=|F_3|=\dfrac{8L}{\sqrt{L^2-18^2}}$.
+				\itemch Đúng. Xét hàm số $F=\dfrac{8L}{\sqrt{L^2-18^2}}$ trên $(18;+\infty)$. \\
+			Ta có 
+			$F'=\dfrac{-2592}{(L^2-18^2)\sqrt{L^2-18^2}}<0$, $\forall L\in (18;+\infty)$.\\
+			Ta có bảng biến thiên
+			\begin{center}
+				\begin{tikzpicture}
+					\tkzTabInit[nocadre=false,lgt=1.2,espcl=2,deltacl=0.6]
+					{$L$ /0.6,$F'$ /0.6,$F$ /2}
+					{$18$,$+\infty$}
+					\tkzTabLine{d,-,}
+					\tkzTabVar{D+/$+\infty$,-/$8$}
+				\end{tikzpicture}
+			\end{center}
+			\itemch Đứng. Đồ thị của hàm số
+			\begin{center}
+				\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+					\begin{scope}[scale=.1]
+						\draw[->] (-10.1,0)--(40.1,0) node[below left] {$x$};
+						\draw[->] (0,-10.1)--(0,40.1) node[below left] {$y$};
+						\draw (0,0) node [below left] {$O$};
+						\begin{scope}
+							\clip (-10,-10) rectangle (40,40);
+							\draw[samples=200,domain=18.01:40,smooth,variable=\x] plot (\x,{(8*(\x))/(sqrt((\x)^2-18^2))});
+						\end{scope}
+						\draw[dashed] (18,-10)--(18,40);
+						\draw[dashed] (-10,8)--(40,8);
+						\node at (18,0) [below right]{$18$};
+						\node at (0,8) [above right]{$8$};
+					\end{scope}
+				\end{tikzpicture}
+			\end{center}
+				\itemch Đúng. Mỗi sợi dây được thiết kế để chịu được lực căng tối đa là $10$ N. \\
+			Suy ra $F(L)\le 10\Leftrightarrow F(L)\le F(30)\Leftrightarrow L\ge 30$.\\
+			Vậy chiều dài tối thiểu của mỗi sợi dây bằng $30$ in thỏa mãn yêu cầu bài toán.
+	\end{itemchoice}
+	}
+\end{ex}
+%%%==============EX_4============%%%
+\begin{ex}%[2H2H2-4]
+	Cho hình hộp $ABCD.A'B'C'D'$ có tâm $O$ . Đặt $\vec{AB}=\vec a$, $\vec{BC}=\vec b$. $M$ là điểm xác định bởi  $\vec{OM}=\dfrac{1}{2}\left(\vec a-\vec b\right)$. Khi đó
+	\choiceTF
+	{$M$ là tâm hình bình hành $ABB'A'$}
+	{$M$ là tâm hình bình hành $BCC'B'$}
+	{\True $M$ là trung điểm $BB'$}
+	{$M$ là trung điểm $CC'$}
+	\loigiai{
+		\immini{
+			Quan sát hình vẽ đưa ra câu trả lời.
+		}	
+		{\begin{tikzpicture}[scale=.7]
+				\path 
+				(-2,-2) coordinate (x)
+				(6,0) coordinate (y)
+				(1.5,4.5) coordinate (z)
+				(0,0) coordinate (A)
+				;
+				\coordinate (B) at ($(A)+(x)$);
+				\coordinate (C) at ($(B)+(y)$);
+				\coordinate (D) at ($(C)-(x)$);
+				\coordinate (O) at ($(A)!0.5!(C)$);
+				\coordinate (A') at ($(A)+(z)$);
+				\coordinate (B') at ($(B)+(z)$);
+				\coordinate (C') at ($(C)+(z)$);
+				\coordinate (D') at ($(D)+(z)$);
+				\coordinate (O) at ($(A')!0.5!(C)$);
+				\coordinate (M) at ($(B')!0.5!(B)$);	
+				\foreach \p/\q in {A/-90,B/180,C/-20,D/0,A'/135,B'/180,C'/0,D'/30,O/-90,M/180}
+				\fill[black] (\p) circle (1.0pt) ($(\p)+(\q:3mm)$) node{$\p$};
+				\draw (A')--(B')--(B)--(C)--(D)--(D')--cycle (C)--(C')--(D') (B')--(C');
+				\draw[dashed] (M)--(O) (B)--(A)--(D)--cycle (A)--(A');	
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-OTC2-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-OTC2-KQ]
+\caukq
+\begin{ex}%[2H2H2-4]
+	Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng $a$. Gọi $M$, $N$ lần lượt là trung điểm của các cạnh $AA'$ và $CC'$. Tính góc giữa hai véc-tơ $\vec{MN}$ và $\vec{AD'}$.
+		\shortans{$60$}
+	\loigiai{
+		\immini{Xét hệ trục tọa độ $Oxyz$ gắn với hình lập phương $ABCD.A'B'C'D'$ như hình vẽ, đơn vị của mỗi trục bằng $a$.\\
+			Khi đó $A(0;0;0)$, $B(a;0;0)$, $D(0;a;0)$, \\
+			$C(a;a;0)$, $A'(0;0;a)$, $B'(a;0;a)$, $D'(0;a;a)$, $C'(a;a;a)$.\\
+			Ta có $M$ là trung điểm $AA'$ suy ra tọa độ của $M$ là $\left(0;0;\dfrac{1}{2}a\right)$.\\
+			Mặt khác $N$ là trung điểm $CC'$ suy ra tọa độ của $N$ là $\left(a;a;\dfrac{1}{2}a\right)$.\\
+			Suy ra $\vec{MN}=(a;a;0)$, $\vec{AD'}=(0;a;a)$.
+		}{
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path 
+				(0,0) coordinate (A) node[below right]{$A$} node[above left]{$O$}
+				(-2,-1) coordinate (B) node[left]{$B$}
+				(4,0) coordinate (D) node[below]{$D$}
+				($(B)+(D)-(A)$) coordinate (C) node[below]{$C$}
+				(A)+(0,4) coordinate (A') node[above right]{$A'$}
+				($(A')+(B)-(A)$) coordinate (B') node[above left]{$B'$}
+				($(A')+(D)-(A)$) coordinate (D') node[above]{$D'$}
+				($(B')+(D')-(A')$) coordinate (C') node[above]{$C'$}
+				($(A)!.5!(A')$) coordinate (M) node [above left]{$M$}
+				($(C)!.5!(C')$) coordinate (N) node [right]{$N$}
+				;
+				\draw (B)--(B')--(A')--(D')--(D)--(C)--cycle (C)--(C') (B')--(C')--(D');
+				\draw[dashed] (A)--(A') (B)--(A)--(D) (M)--(N) (A)--(D') ;
+				\draw[->] (A')--($(A)!1.2!(A')$)node[above left]{$z$};
+				\draw[->] (B)--($(A)!1.3!(B)$) node[above left]{$x$};
+				\draw[->] (D)--($(A)!1.2!(D)$) node[below right]{$y$};
+				\foreach \x in{A,B,C,D,A',B',C',D',M,N}\draw[fill=black] (\x) circle (1pt);
+			\end{tikzpicture}
+		}
+		\noindent Khi đó 
+		$$\cos (\vec{MN},\vec{AD'})=\dfrac{\vec{MN}\cdot \vec{AD'}}{|\vec{MN}|\cdot |\vec{AD'}|}=\dfrac{a\cdot 0+a\cdot a+0\cdot a}{\sqrt{a^2+a^2+0^2}\cdot \sqrt{0^2+a^2+a^2}}=\dfrac{1}{2}a.$$
+		Vậy góc giữa hai véc-tơ $\vec{MN}$ và $\vec{AD'}$ bằng $60^\circ$.
+	}
+\end{ex}
+%%%============EX_2==============%%%
+\begin{ex}%[2H2H2-3]
+	Cho $\overrightarrow{u}=(2 ;-5 ; 3)$, $\overrightarrow{v}=(0 ; 2 ;-1)$, $\overrightarrow{w}=(1 ; 7 ; 2)$. Tìm tung độ của véctơ $\overrightarrow{a}=\overrightarrow{u}-4 \overrightarrow{v}-2 \overrightarrow{w}$.
+		\shortans{$-27$}
+	\loigiai{
+		Ta có 
+		\begin{eqnarray*}
+			& \overrightarrow{a} & = \overrightarrow{u}-4 \overrightarrow{v}-2 \overrightarrow{w} \\
+			& & = (2-4\cdot 0 - 2\cdot 1; -5 - 4\cdot 2 - 2 \cdot 7; 3 - 4\cdot (-1) - 2 \cdot 2) \\
+			& & = (0;-27; 3).
+		\end{eqnarray*}
+	}
+\end{ex}
+
+\begin{ex}%[2H2V2-4]
+	Cho ba điểm $A(0 ; 1 ; 2)$, $B(1 ; 2 ; 3)$, $C(1 ;-2 ;-5)$. Gọi $M$ là điểm nằm trên đoạn thẳng $B C$ sao cho $M B=3 M C$. Tính độ dài của $AM^2$.
+	\shortans{$30$}
+	\loigiai{
+		$M$ là điểm nằm trên đoạn thẳng $B C$ sao cho $M B=3 M C$ nên ta có
+		\[ \overrightarrow{BC}=4\overrightarrow{MC}\Leftrightarrow
+		\heva{& 1-1 = 4 \cdot \left(1-x_M\right)\\ & -2-2=4\cdot \left(-2-y_M\right) \\
+			& -5-3=4\cdot \left(-5-z_M\right)} \Leftrightarrow
+		\heva{& x_M = 1 \\ & y_M=-1\\ & z_M = -3.}\]
+		Vậy $M(1;-1;-3)$ và $AM = \sqrt{(1-0)^2 + (-1-1)^2 + (-3-2)^2}=\sqrt{30}$.
+	}
+\end{ex}
+%%%==============EX_5============%%%
+\begin{ex}%[2H2H2-4]
+	Trong không gian $Oxyz$, cho các điểm $A(2;-1;3)$, $B(1;1;-1)$ và $C(-1;0;2)$. Tính $x+y+z$ biết tọa độ điểm $ M(x;y;z) $ thuộc trục $Oz$ sao cho đường thẳng $BM$ vuông góc với đường thẳng $AC$.
+\shortans{$1$}
+	\loigiai{
+	Ta có $ M\in Oz \Rightarrow M(0;0;c)$.
+			$ \vec{BM}=(-1;-1;c+1) $, $ \vec{AC}=(-3;1;-1) $.
+			Vì $ BM\perp AC \Rightarrow \vec{BM}\cdot \vec{AC}=0$ hay
+				$ (-1)\cdot (-3) +(-1)\cdot 1 + (1+c) \cdot (-1)=0\Leftrightarrow c=1$.
+			suy ra $M(0;0;1)$, vậy $x+y+z=1$.	}
+\end{ex}
+%%%==============EX_6============%%%
+\begin{ex}%[2H2H2-4]
+	\immini{Hình minh họa sơ đồ một ngôi nhà trong hệ trục tọa độ $Oxyz$, trong đó nền nhà, bốn bức tường và hai mái nhà đều là hình chữ nhật. Tính góc dốc của mái nhà, tức là tìm số đo của góc nhị diện có cạnh là đường thẳng $FG$, hai mặt lần lượt là $(FGQP)$ và $(FGHE)$ (làm tròn kết quả đến hàng phần mười của độ).
+	}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\path 
+			(0,0) coordinate (O) node[below]{$O(0;0;0)$}
+			(4,0) coordinate (A) node[below]{$A$}
+			(0,3) coordinate (E) node[left]{$E(0;0;3)$}
+			($(A)+(E)-(O)$) coordinate (F)
+			(A)+(1,2) coordinate (B) node[right]{$B(4;5;0)$}
+			($(O)+(B)-(A)$) coordinate (C) node[left]{$C$}
+			($(C)+(E)-(O)$) coordinate (H) node[above left]{$H$}
+			($(H)+(B)-(C)$) coordinate (G) node [right]{$G(4;5;3)$}
+			($(O)!.6!(A)$) coordinate (x)
+			(x)+(0,4.5) coordinate (P) node[right]{$P(2;0;4)$}
+			($(P)+(H)-(E)$) coordinate (Q) node[above]{$Q(2;5;4)$}
+			;
+			\draw[->] (O)--(E)--($(E)+(90:1)$)node[above]{$z$};
+			\draw[->] (O)--(A)--($(A)+(0:1)$) node[below]{$x$};
+			\draw[dashed,->] (O)--(C)--($(O)!1.3!(C)$) node[above]{$y$};
+			\draw (A)--(B)--(G)--(Q)--(H)--(E)--(F)--cycle (E)--(P)--(F) (P)--(Q) (F)--(G);
+			\draw[dashed] (C)--(B) (C)--(H)--(G);
+		\end{tikzpicture}
+	}
+\shortans{$26{,}6$}
+	\loigiai{Để tính góc dốc của mái nhà, ta đi tính số đo góc nhị diện có cạnh là đường thẳng $FG$, hai mặt phẳng lần lượt là $(FGQP)$ và $(FGHE)$. Do mặt phẳng $(Ozx)$ vuông góc với hai mặt phẳng $(FGQP)$ và $(FGHE)$ nên góc $PFE$ là góc phẳng nhị diện ứng với góc nhị diện đó. \\
+			Ta có $\vec{FP}=(-2;0;1)$, $\vec{FE}=(-4;0;0)$.\\
+			Suy ra 
+			\begin{eqnarray*}
+				\cos \widehat{PFE}&=&\cos \left(\vec{FP},\vec{FE}\right)=\dfrac{\vec{FP}\cdot \vec{FE}}{\left|\vec{FP}\right|\cdot \left|\vec{FE}\right|}\\
+				&=&\dfrac{(-2)\cdot (-4)+0\cdot 0+1\cdot 0}{\sqrt{(-2)^2+0^2+1^2}\cdot \sqrt{(-4)^2+0^2+0^2}}=\dfrac{2\sqrt{5}}{5}.
+			\end{eqnarray*}
+			Do đó, $\widehat{PFE}\approx 26{,}^\circ$. Vậy góc dốc của mái nhà khoảng $26{,}6^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[2H2H2-2]
+	Trong không gian $Oxyz$, lực không đổi $\overrightarrow{F}=3\vec{i}+5\vec{j}+10\vec{k}$ làm di chuyển một vật dọc theo đoạn thẳng từ $M\left(1;0;2\right)$ đến $N\left(5;3;8\right)$. Tìm công sinh ra nếu khoảng cách được tính bằng mét và lực được tính bằng newton.	
+	\shortans{$87$}
+	\loigiai{
+		Ta có $\overrightarrow{F}=\left(3;5;10\right),\overrightarrow{MN}=\left(4;3;6\right)$.\\
+		Công sinh ra là $A=\overrightarrow{F}\cdot\overrightarrow{MN}=12+15+60=87  \ (\mathrm{J})$.	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC2-KQ}

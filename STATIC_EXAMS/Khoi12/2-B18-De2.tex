@@ -1,0 +1,392 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-B18]
+\caulc
+\begin{ex}%[2D6N1-2]
+	Cho hai biến cố $A$ và $B$ thỏa $\mathrm{P}(A)=0{,}4$; $\mathrm{P}(B)=0{,}6$; $\mathrm{P}\left(A\cap B\right)=0{,}2$. Tính $\mathrm{P}\left(A|B\right)$.
+	\choice
+	{\True $\dfrac{1}{3}$}
+	{$\dfrac{1}{2}$}
+	{$\dfrac{1}{6}$}
+	{$\dfrac{1}{4}$}
+	\loigiai{
+		Ta có $\mathrm{P}\left(A|B\right)=\dfrac{\mathrm{P}\left(A\cap B\right)}{\mathrm{P}(B)}=\dfrac{0{,}2}{0{,}6}=\dfrac{1}{3}$.
+		}
+\end{ex}	
+
+
+\begin{ex}%[2D6N1-2]
+	Cho hai biến cố $A$, $B$ độc lập với nhau thỏa $\mathrm{P}(A)=0{,}8$; $\mathrm{P}(B)=0{,}25$. Khi đó $\mathrm{P}\left(A|B\right)$ bằng
+	\choice
+	{$0{,}2$}
+	{\True $0{,}8$}
+	{$0{,}25$}
+	{$0{,}75$}
+	\loigiai{
+		Do $A$, $B$ độc lập nên $\mathrm{P}\left(A\cap B\right)=\mathrm{P}(A)\cdot P(B)=0{,}8\cdot 0{,}25=0{,}2$. \\
+		Do đó $\mathrm{P}\left(A|B\right)=\dfrac{\mathrm{P}\left(A\cap B\right)}{\mathrm{P}(B)}=\dfrac{0{,}2}{0{,}25}=\dfrac{4}{5}$.
+	}
+\end{ex}	
+
+
+\begin{ex}%[2D6N1-2]
+	Cho hai biến cố $A$, $B$ độc lập thỏa mãn $\mathrm{P}(A)=0{,}6$; $\mathrm{P}(B)=0{,}8$. Khi đó $\mathrm{P}\left(\overline{B}|A\right)$ bằng
+	\choice
+	{\True $\dfrac{1}{5}$}
+	{$\dfrac{3}{20}$}
+	{$\dfrac{3}{5}$}
+	{$\dfrac{1}{20}$}
+	\loigiai{
+		Do $A$ và $B$ độc lập nên $A$ và $\overline{B}$ cũng độc lập. \\
+		Do đó $\mathrm{P}\left(\overline{B}\cap A\right)=\mathrm{P}(\overline{B})\cdot \mathrm{P}(A)=(1-0{,}8)\cdot 0{,6}=0{,}12$. \\
+		Ta có $\mathrm{P}\left(\overline{B}|A\right)=\dfrac{\mathrm{P}\left(\overline{B}\cap A\right)}{\mathrm{P}(A)}=\dfrac{0{,}12}{0{,}6}=\dfrac{1}{5}$.
+	}
+\end{ex}	
+
+
+
+\begin{ex}%[2D6N1-2]
+		Cho hai biến cố $A$, $B$ xung khắc với nhau thỏa $\mathrm{P}(A)=0{,}2$; $\mathrm{P}(B)=0{,}4$. Khi đó $\mathrm{P}\left(A|B\right)$ bằng
+		\choice
+		{$0{,}5$}
+		{$0{,}2$}
+		{$0{,}4$}
+		{\True $0$}
+		\loigiai{
+			Do $A$, $B$ xung khắc nên $\mathrm{P}\left(A\cap B\right)=0$. \\
+			Vậy $\mathrm{P}\left(A|B\right)=\dfrac{\mathrm{P}\left(A\cap B\right)}{\mathrm{P}(B)}=0$.
+		}
+\end{ex}	
+
+\begin{ex}%[2D6H1-2] 
+	Trong một kì thi học sinh giỏi môn Toán của một tỉnh có $200$ học sinh tham gia, trong đó có $95$ học sinh nữ và $105$ học sinh nam. Kết quả của kì thi cho biết có $50$ học sinh đạt giải (bao gồm nhất, nhì và ba), trong đó có $24$ học sinh nữ và $26$ học sinh nam. Chọn ngẫu nhiên một học sinh trong số $200$ học sinh đó. Tính xác suất để học sinh được chọn có giải, biết rằng học sinh đó là nam.
+	\choice
+	{$\dfrac{8}{35}$}
+	{$\dfrac{24}{95}$}
+	{$\dfrac{26}{95}$}
+	{\True $\dfrac{26}{105}$}
+	\loigiai{
+		Xét các biến cố:\\
+		$A$: "Học sinh được chọn đạt giải."\\
+		$B$: "Học sinh được chọn là nam."\\
+		Ta có: $\mathrm{P}(A\cap B)=\dfrac{26}{200}=0{,}13$ và $\mathrm{P}(B)=\dfrac{105}{200}=0{,}525$.\\
+		Xác xuất để học sinh được chọn đạt giải, biết rằng học sinh đó là nam, là
+		$$\mathrm{P}(A|B)=\dfrac{\mathrm{P}(A\cap B)}{\mathrm{P}(B)}=\dfrac{0{,}13}{0{,}525}=\dfrac{26}{105}.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6H1-2]
+	Trong một lô hàng áo thun trơn gồm $1000$ chiếc của một công ty dệt may có $100$ áo thun có màu đỏ. Các áo thun đỏ đó gồm có các kích thước là $X$, $M$ và $L$, trong đó có $30$ áo kích thước $M$. Chọn ngẫu nhiên một chiếc áo trong lô hàng đó. Giả sử chiếc áo được chọn là màu đỏ, tính xác suất để chiếc áo đó có kích thước $M$.
+	\choice
+	{$0{,}03$}
+	{\True $0{,}3$}
+	{$0{,}01$}
+	{$0{,}3$}
+	\loigiai{
+		Xét các biến cố:\\
+		$A$: "Áo được chọ có kích thước $M$.";\\
+		$B$: "Áo được chọn là màu đỏ."\\
+		Khi đó, xác suất để chiếc áo được chọn có kích thước $M$, biết rằng áo thun đó có màu đỏ, là xác suất có điều kiện $\mathrm{P}(A|B)$, ta có:
+		$$\mathrm{P}(A|B)=\dfrac{n(A\cap B)}{n(B)}=\dfrac{30}{100}=0,3$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6H1-2]
+	Trong một hộp đựng $500$ chiếc thẻ cùng loại có $200$ chiếc thẻ màu vàng. Trên mỗi chiếc thẻ màu vàng có ghi một trong năm số: $1$, $2$, $3$, $4$, $5$. Có $40$ chiếc thẻ màu vàng ghi số $5$. Chọn ra ngẫu nhiên một chiếc thẻ trong hộp đựng thẻ. Giả sử chiếc thẻ chọn ra có màu vàng. Tính xác suất để chiếc thẻ đó ghi số $5$.
+	\choice
+	{\True $0{,}2$}
+	{$\dfrac{2}{15}$}
+	{$0{,}4$}
+	{$\dfrac{4}{15}$}
+	\loigiai{
+		Gọi biến cố $A$: \lq\lq Thẻ được chọn ghi số $5$\rq\rq. \\
+		Gọi biến cố $B$: \lq\lq Thẻ được chọn có màu vàng\rq\rq. \\
+		Có $\mathrm{P}\left(A|B\right)=\dfrac{n\left(A\cap B\right)}{n(B)}=\dfrac{40}{200}=0{,}2$. 
+	}
+\end{ex}	
+
+
+\begin{ex}%[2D6H1-2]
+	Một hộp đựng $8$ viên bi màu đỏ và $5$ viên bi màu vàng (các viên bi có kích thước và khối lượng như nhau). Có $5$ viên bi trong hộp được đánh số, trong đó có $3$ viên bi màu đỏ và $2$ viên bi màu vàng. Lấy ngẫu nhiên một viên bi trong hộp. Tính xác suất để viên bi được lấy ra có màu đỏ, biết rằng viên bi đó được đánh số.
+	\choice
+	{$0{,}4$}
+	{\True $0{,}6$}
+	{$0{,}2$}
+	{$0{,}3$}
+	\loigiai{
+		Gọi biến cố $A$: \lq\lq Viên bi được lấy ra có màu đỏ \rq\rq. \\
+		Gọi biến cố $B$: \lq\lq Viên bi được lấy ra có đánh số \rq\rq. \\
+		Có $\mathrm{P}\left(A|B\right)=\dfrac{n\left(A\cap B\right)}{n(B)}=\dfrac{3}{5}=0{,}6$. 
+	}
+\end{ex}	
+
+
+\begin{ex}%[2D6H1-2]
+	Gieo lần lượt hai con xúc xắc cân đối và đồng chất. Tính xác suất để tổng số chấm xuất hiện trên hai con xúc xắc không nhỏ hơn $6$, biết rằng xúc xắc thứ nhất xuất hiện mặt $4$ chấm.
+	\choice
+	{$\dfrac{5}{24}$}
+	{$\dfrac{5}{12}$}
+	{$\dfrac{5}{36}$}
+	{\True $\dfrac{5}{6}$}
+	\loigiai{
+		Gọi biến cố $A$: \lq\lq Tổng số chấm xuất hiện trên hai con xúc xắc bằng $6$ \rq\rq. \\
+		Gọi biến cố $B$: \lq\lq Xúc xắc thứ nhất xuất hiện mặt $4$ chấm\rq\rq. \\
+		Có $\mathrm{P}\left(A|B\right)=\dfrac{n\left(A\cap B\right)}{n(B)}=\dfrac{5}{6}$. 
+	}
+\end{ex}
+
+\begin{ex}%[2D6H2-2] 
+    Cho hai biến cố $A$ và $B$ thỏa $\mathrm{P}(A)=0{,}4$; $\mathrm{P}(B)=0{,}8$; $\mathrm{P}\left(A| \overline{B}\right)=0{,}5$. Tính $\mathrm{P}(A|B)$.
+    \choice
+    {$0{,}4$}
+    {\True $0{,}375$}
+    {$0{,}5$}
+    {$0{,}625$}
+    \loigiai{
+    Ta có
+    \begin{eqnarray*}
+& & \mathrm{P}\left(A| \overline{B}\right)  = \dfrac{\mathrm{P}(A \overline{B})}{\mathrm{P}(\overline{B})}\\
+&\Leftrightarrow & 0{,}5 = \dfrac{\mathrm{P}(A)-\mathrm{P}(AB)}{1-P(B)}\\
+&\Leftrightarrow & \mathrm{P}(AB)=\mathrm{P}(A) - 0{,}5\cdot[1-P(B)]\\
+&\Leftrightarrow & \mathrm{P}(AB)=0{,}3.
+\end{eqnarray*}
+Khi đó 
+$$\mathrm{P}\left(A|B\right)=\dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}(B)}=0{,}375.$$    }
+\end{ex}
+
+\begin{ex}%[2D6V1-4]
+    Một công ty vừa ra mắt sản phẩm $X$ và tổ chức ngày trải nghiệm sản phẩm. Họ thống kê được trong $200$ người đến tham quan ngày trải nghiệm có $60$ người là nam giới và $140$ người là nữ giới. Trong số những người được thống kê này, có $120$ người mua sản phẩm $X$, gồm $40$ khách hàng nam và $80$ khách hàng nữ, còn lại là không mua sản phẩm $X$. Chọn ngẫu nhiên một người trong số $200$ người được thống kê. Tính xác suất để người này mua sản phẩm $X$, biết rằng người được chọn là nữ giới.
+    \choice
+    {$\dfrac{2}{3}$}
+    {$\dfrac{7}{10}$}
+    {$\dfrac{2}{5}$}
+    {\True $\dfrac{4}{7}$}
+    \loigiai{
+    Xét các biến cố:\\
+    $A$: "Người được chọn mua sản phẩm $X$.";\\
+    $B$: "Người được chọn là nữ giới."\\
+    Khi đó xác suất để người này mua sản phẩm $X$, biết rằng người được chọn là nữ giới là xác suất của $A$ với điều kiện $B$.\\
+    Có $80$ người mua sản phẩm $X$ là nữ giới nên $\mathrm{P}(AB)=\dfrac{80}{200}=0{,}4$.\\
+    Có $140$ người là nữ giới trong số lượng thống kê nên $\mathrm{P}(B)=\dfrac{140}{200}=0{,}7$.\\
+    Vậy $\mathrm{P}(A|B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{4}{7}$.
+    }
+\end{ex}
+
+\begin{ex}%[2D6V2-4] 
+    Theo kết quả từ trạm nghiên cứu khí hậu tại một địa phương, xác suất để một ngày có gió là $0{,}6$. Nếu ngày đó có gió thì xác suất có mưa là $0{,}4$. Tính xác suất để trời có gió nhưng không có mưa ở địa phương đó trong một ngày.
+    \choice
+    {$0{,}6$}
+    {\True $0{,}36$}
+    {$0{,}24$}
+    {$0{,}16$}
+    \loigiai{
+    Xét các biến cố:\\
+    $A$:"Ngày có gió" và $B$: "Ngày có mưa".\\
+    Xác suất để trời có gió nhưng không có mưa ở địa phương đó trong một ngày là $P(A\overline{B})$.\\
+    Theo đề bài, nếu ngày có gió thì xác suất có mưa là $0{,}4$ nên $\mathrm{P}(B|A)=0{,}4$.\\
+    Suy ra $\mathrm{P}(\overline{B}|A)=1-0{,}4=0{,}6$.\\
+    Ta có
+    $$ \mathrm{P}(\overline{B}|A)=\dfrac{\mathrm{P}(A\overline{B})}{\mathrm{P}(A)} \Rightarrow \mathrm{P}(A\overline{B})=\mathrm{P}(A)\cdot \mathrm{P}(\overline{B}|A) = 0{,}6 \cdot 0{,}6 =0{,}36 $$}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B18}
+
+
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-B18-DS]
+
+
+\begin{ex}%[2D6C1-2] 
+	Cho $A$ và $B$ là hai biến cố độc lập với $\mathrm{P}(A)=0{,}7$ và $\mathrm{P}(B)=0{,}4$. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF[4]
+	{$\mathrm{P}(A|B)=0{,}6$}
+	{\True $\mathrm{P}(B|\overline{A})=0{,}4$}
+	{\True $\mathrm{P}(\overline{A}|B)=0{,}3$}
+	{\True $\mathrm{P}(\overline{B}|\overline{A})=0{,}6$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch $A$ và $B$ độc lập nên $\mathrm{P}(A|B)= \dfrac{\mathrm{P}(A)\cdot \mathrm{P}(B)}{\mathrm{P}(B)} =\mathrm{P}(A)=0{,}7$.
+			\itemch $\overline{A}$ và $B$ độc lập nên $\mathrm{P}(B|\overline{A})=\dfrac{\mathrm{P}(B)\cdot \mathrm{P}(\overline{A})}{\mathrm{P}(\overline{A})}=\mathrm{P}(B)=0{,}4$.
+			\itemch  $\overline{A}$ và $B$ độc lập nên $\mathrm{P}(\overline{A}|B)= \dfrac{\mathrm{P}(B)\cdot \mathrm{P}(\overline{A})}{\mathrm{P}(B)}= \mathrm{P}(\overline{A})=1-\mathrm{P}(A)=0{,}3$.
+			\itemch $\overline{A}$ và $\overline{B}$ độc lập nên $\mathrm{P}(\overline{B}|\overline{A})=\dfrac{\mathrm{P}(\overline{B})\cdot \mathrm{P}(\overline{A})}{\mathrm{P}(\overline{A})}=\mathrm{P}(\overline{B})=0{,}6$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6C1-2] 
+	Cho $A$ và $B$ với $\mathrm{P}(\overline{A})=0{,}4$; $\mathrm{P}(B)=0{,}8$ và $\mathrm{P}(AB)=0{,}4$. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True $\mathrm{P}(A|B)=\dfrac{1}{2}$}
+	{$\mathrm{P}(B|A)=\dfrac{1}{2}$}
+	{\True $\mathrm{P}(\overline{B}|A)=\dfrac{1}{3}$}
+	{$\mathrm{P}(\overline{A}B)=\dfrac{3}{5}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch $\mathrm{P}(A|B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{1}{2}$.
+			\itemch $\mathrm{P}(B|A)=\dfrac{P(AB)}{P(A)}=\dfrac{P(AB)}{1-P(\overline{A})}=\dfrac{2}{3}$.
+			\itemch $\mathrm{P}(\overline{B}|A)=\dfrac{\mathrm{P}(A\overline{B})}{\mathrm{P}(A)}=\dfrac{\mathrm{P}(A)-\mathrm{P}(AB)}{\mathrm{P}(A)}=\dfrac{1}{3}$.
+			\itemch $\mathrm{P}(\overline{A}B)=\mathrm{P}(\overline{A}|B) \cdot \mathrm{P}(B)= \dfrac{\mathrm{P}(\overline{A}B)}{\mathrm{P}(B)} \cdot \mathrm{P}(B) = \mathrm{P}(\overline{A}B) = \mathrm{P}P(B)-\mathrm{P}(AB) =\dfrac{2}{5}$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6C1-4] 
+	Một công ty truyền thông đấu thầy $2$ dự án. Khả năng thắng thầu của dự án $1$ là $0{,}5$ và dự án $2$ là $0{,}6$. Khả năng thắng thầu cả $2$ dự án là $0{,}4$. Gọi $A$, $B$ lần lượt là biến cố thắng thầu dự án $1$ và $2$. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{$A$, $B$ là hai biến cố độc lập.}
+	{\True Xác xuất công ty thắng thầu đúng $1$ dự án là $0{,}3$}
+	{\True Biết công ty thắng thầu dự án $1$, xác suất công ty thắng thầu dự án $2$ là $0{,}8$}
+	{Biết công ty không thắng thầu dự án $1$, xác suất công ty thắng thầu dự án $2$ là $0{,}6$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Theo đề bài: $\mathrm{P}(A)=0{,}5$; $\mathrm{P}(B)=0{,}6$ và $\mathrm{P}(AB)=0{,}4$.\\
+			Vì $\mathrm{P}(AB) \ne \mathrm{P}(A)\cdot \mathrm{P}(B)$ nên $A$, $B$ không độc lập.
+			\itemch Gọi biến cố $C$: "Thắng thầu đúng một dự án."\\
+			Khi đó
+			\begin{eqnarray*}
+				& \mathrm{P}(C) & =\mathrm{P}(\overline{A}B)+\mathrm{P}(A\overline{B})\\
+				& & = [\mathrm{P}(B)-\mathrm{P}(AB)] + [ \mathrm{P}(A)-\mathrm{P}(AB) ]\\
+				& & = \mathrm{P}(A) + \mathrm{P}(B) - 2\mathrm{P}(AB)\\
+				&& = 0{,}3.
+			\end{eqnarray*}
+			\itemch Biết công ty thắng thầu dự án $1$, xác suất công ty thắng thầu dự án $2$ là
+			$$\mathrm{P}(B|A)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}=\dfrac{0{,}4}{0{,}5}=0{,}8.$$
+			\itemch Biết công ty không thắng thầu dự án $1$, xác suất công ty thắng thầu dự án $2$ là
+			$$\mathrm{P}(B|\overline{A})=\dfrac{\mathrm{P}(\overline{A}B)}{\mathrm{P}(\overline{A})}=\dfrac{\mathrm{P}(B)-\mathrm{P}(AB)}{\mathrm{P}(\overline{A})}=\dfrac{0{,}6-0{,}4}{0{,}5}=0{,}4.$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6C1-4] 
+	Ở một sân bay, người ta sử dụng một loại máy soi tự động phát hiện hàng cấm trong hành lí kí gửi. Máy phát chuông cảnh báo với $95 \%$ các kiện hành lí có chứa hàng cấm và $2\%$ các kiện hành lí không chứa hàng cấm. Tỉ lệ các kiện hành lí có chứa hàng cấm là $0{,1}\%$. Chọn ngẫu nhiên một kiện hành lí để soi bằng máy trên. Xét tính đúng sai của các mệnh đề sau:
+	\choiceTF
+	{\True Máy không phát chuông cảnh báo với $5\%$ các kiện hành lí có chứa hàng cấm}
+	{\True Máy không phát chuông cảnh báo với $98\%$ các kiện hành lí không chứa hàng cấm}
+	{Xác suất chọn được kiện hành lí có chứa hàng cấm và máy phát chuông cảnh báo là $0{,}0095$}
+	{\True Xác suất chọn được kiện hành lí không chứa hàng cấm và máy phát chuông cảnh báo là $0{,}01998$}
+	\loigiai{
+		Xét các biến cố:\\
+		$A$: "Kiện hành lí có chứa hàng cấm."\\
+		$B$: "Máy phát chuông cảnh báo."\\
+		Theo đề, ta có $\mathrm{P}(B|A)=0{,}95$; $\mathrm{P}(B| \overline{A})=0{,}02$ và $\mathrm{P}(A)=0{,}001$.
+		\begin{itemchoice}
+			\itemch Xác suất máy không phát chuông cảnh báo với các kiện hành lí có chứa hàng cấm là
+			$$P(\overline{B}|A)=1-P(B|A)=0{,}05=5\%.$$
+			\itemch Xác suất máy không phát chuông cảnh báo với các kiện hành lí không chứa hàng cấm là
+			$$\mathrm{P}(\overline{B}|\overline{A})=1-\mathrm{P}(B|\overline{A})=0{,}05=1-0{,}02=98\%.$$
+			\itemch 
+			Xác suất chọn được kiện hành lí có chứa hàng cấm và máy phát chuông cảnh báo là
+			$$ \mathrm{P}(AB)=P(B|A) \cdot \mathrm{P}(A) =0{,}00095 = 0{,}095\% .$$
+			\itemch Ta có
+			\begin{eqnarray*}
+				& & \mathrm{P}(B| \overline{A})=0,{,}02\\
+				&\Leftrightarrow & \dfrac{\mathrm{P}(B)-\mathrm{P}(AB)}{\mathrm{P}(\overline{A})}=0{,}02\\
+				&\Leftrightarrow & \mathrm{P}(B)= 0{,}02 \cdot \mathrm{P}(\overline{A}) + \mathrm{P}(AB)\\
+				&\Leftrightarrow & \mathrm{P}(B)= 0{,}02093.
+			\end{eqnarray*}
+			Ta có $\mathrm{P}(AB)=\mathrm{P}(B|A) \cdot \mathrm{P}(A) =0{,}00095 = 0{,}095\% $.\\
+			Xác suất chọn được kiện hành lí không chứa hàng cấm và máy phát chuông cảnh báo là
+			$$\mathrm{P}(\overline{AB})=\mathrm{P}(B)-\mathrm{P}(AB)= 0{,}02093 - 0{,}00095= 0{,}01998.$$
+	\end{itemchoice}
+}
+\end{ex}
+
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B18-DS}
+
+
+
+\caukq
+\Opensolutionfile{ans}[ans/ans-2-B18-KQ]
+\begin{ex}%[2D6H1-2] 
+	Cho hai biến cố $A$, $B$ có $P(A)=0{,}51$; $P(B)=0{,}2$; $P(A | B)=0{,}8$. Tính $P(B | A)$, làm tròn kết quả đến hàng phần trăm.
+	\shortans{$0{,}31$}
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			&&P(A | B)=0{,}8\Leftrightarrow \dfrac{P(A\cap B)}{P(B)}=0{,}8\\
+			&\Leftrightarrow& P(A \cap B)=0{,}8\cdot P(B)=0{,}8\cdot 0{,}2=0{,}16\\
+			&\Rightarrow& P(B|A)=\dfrac{P(A\cap B)}{P(A)}=\dfrac{0{,}16}{0{,}51} \approx 0{,}31.
+		\end{eqnarray*}
+		}
+\end{ex}
+
+\begin{ex}%[2D6H1-2] 
+	Cho hai biến cố $A$, $B$ có $P(A)=0{,}8$; $P(B)=0{,}5$; $P(A \cap B)=0{,}2$. Tính xác suất biến cố $B$ không xảy ra với điều kiện biến cố $A$ xảy ra.
+	\shortans{$0{,}75$}
+	\loigiai{
+		Xác suất biến cố $B$ không xảy ra với điều kiện biến cố $A$ xảy ra là
+		$$P(\overline{B} |A)=\dfrac{P(A\overline{B})}{P(A)}=\dfrac{P(A)-P(A\cap B)}{P(A)}=\dfrac{3}{4}=0{,}75.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6V1-4] 
+	Gieo một con xúc xắc cân đối và đồng chất hai lần. Tính xác suất để tổng số chấm xuất hiện trong hai lần gieo nhỏ hơn $8$. Biết rằng con lần gieo thứ nhất xuất hiện mặt $4$ chấm.
+	\shortans{$0{,}5$}
+	\loigiai{
+		Xét các biến cố:\\
+		$A$: "Lần thứ nhất xuất hiện mặt 4 chấm."\\
+		$B$: "Tổng số chấm trong hai lần gieo nhỏ hơn $8$."\\
+		Khi đó $$A=\{(4;1), (4;2), (4;3), (4;4), (4;5), (4;6)\};$$
+		$$A\cap B= \{(4;1), (4;2), (4;3)\}.$$
+		Suy ra $n(A)=6$ và $n(A\cap B)=3$.\\
+		Vậy xác suất để tổng số chấm xuất hiện trong hai lần gieo bằng 6, biết rằng con lần gieo thứ nhất xuất hiện mặt 4 chấm là
+		$$P(B|A)=\dfrac{n(A\cap B)}{n(A)}=\dfrac{3}{6}=0{,}5.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6V1-4] 
+	Một công ty bảo hiểm nhận thấy có $56 \%$ số người mua bảo hiểm sức khỏe là phụ nữ và có $42 \%$ số người mua bảo hiểm sức khỏe là phụ nữ trên 50 tuổi. Tính tỉ lệ người trên $50$ tuổi trong số những người phụ nữ mua bảo hiểm sức khỏe.
+	\shortans{ $0{,}75$}
+	\loigiai{
+		Xét các biến cố:\\
+		A: "Người mua bảo hiểm sức khỏe là phụ nữ."\\
+		B: "Người mua bảo hiểm sức khỏe là phụ nữ trên $50$ tuổi."\\
+		Khi đó $P(A)=0{,}56$ và $P(A \cap B)=0{,}42$.\\
+		Xác suất người mua bảo hiểmTỉ lệ người trên $45$ tuổi trong số những người phụ nữ mua bảo hiểm sức khỏe là
+		$$P(B|A)=\dfrac{P(A\cap B)}{P(A)}=\dfrac{0{,}42}{0{,}56}=0{,}75.$$}
+\end{ex}
+
+\begin{ex}%[2D6C1-4] 
+	Tại một khu phố có $100$ căn nhà, trong đó có $40$ căn nhà gắn biển số lẻ. Biết rằng có $25$ căn nhà gắn biển số lẻ và $15$ nhà gắn biển số chẵn có ô tô. Chọn ngẫu nhiên một nhà trong khu phố đó. Tính xác suất nhà được chọn gắn biển số lẻ, biết rằng nhà đó không có ô tô.
+	\shortans{$0{,}25$}
+	\loigiai{
+		Xét các biến cố:\\
+		$A$: "Nhà được chọn gắn số lẻ."\\
+		$B$: "Nhà được chọn có ô tô."\\
+		Khi đó xác suất nhà được chọn gắn biển số lẻ, biết rằng nhà đó không có ô tô, là $P(A | \overline{B})$.\\
+		Số căn nhà gắn số lẻ và không có ô tô là $n(A\cap \overline{B})=40-25=15$.\\
+		Số căn nhà không có ô tô là $n(\overline{B})=100-(25+15)=60$.\\
+		Ta có
+		$$P(A | \overline{B})=\dfrac{n(A\cap \overline{B})}{n(\overline{B})}=0{,}25.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6C1-4] 
+	Kết quả một cuộc khảo sát các vụ tai nạn giao thông ô tô về mối quan hệ giữa việc thắt dây an toàn của người lái xe khi xảy ra tai nạn giao thông và nguy cơ tử vong của người lái xe khi xảy ra tai nạn giao thông cho thấy:
+	\begin{itemize}
+		\item Tỉ lệ người lái xe tử vong khi xảy ra tai nạn giao thông là $0{,4}\%$.
+		\item Tỉ lệ người lái xe không thắt dây an toàn giao thông khi xảy ra tai nạn giao thông là $28 \%$.
+		\item Tỉ lệ người lái xe tử vong khi xảy ra tai nạn giao thông trong trường hợp không thắt dây an toàn là $0{,}3 \%$.
+	\end{itemize}
+	Hỏi theo kết quả khảo sát trên, việc thắt dây an toàn của người lái xe ô tô sẽ làm giảm khả năng tử vong là bao nhiêu lần? (làm tròn đến hàng phần mười).
+	\shortans{$7{,}7$}
+	\loigiai{
+		Chọn ngẫu nhiên một một vụ tai nạn giao thông của cuộc khảo sát trên. Xét các biến cố:\\
+		$A$: "Người lái xe đó tử vong khi xảy ra tai nạn giao thông."\\
+		$B$: "Người lái xe đó không thắt dây an toàn khi xảy ra tai nạn giao thông."\\
+		Ta có $P(A)= 0{,4}\%$; $P(B)= 28\%$; $P(A\cap B)=0{,}3\%$.\\
+		Xác suất người lái xe đó tử vong khi xảy ra tai nạn giao thông trong trường hợp không thắt dây an toàn là
+		$$P(A|B)=\dfrac{P(A\cap B)}{P(B)}=\dfrac{3}{280}.$$
+		Xác suất người lái xe đó có thắt dây an toàn giao thông là $P(\overline{B})=72\%$.\\
+		Xác suất người lái xe đó tử vong khi xảy ra tai nạn giao thông trong trường hợp có thắt dây an toàn là
+		$$P(A|\overline{B})=\dfrac{P(A\cap \overline{B})}{P(\overline{B})}=\dfrac{P(A)-P(A\cap B)}{P(\overline{B}}=\dfrac{1}{720}.$$
+		Ta có
+		$$\dfrac{P(A|B)}{P(A|\overline{B})}=\dfrac{54}{7}\approx7{,}7.$$
+		Vậy theo khảo sát trên, việc thắt dây an toàn của người lái xe ô tô sẽ làm giảm khả năng tử vong khoảng $7{,}7$ lần.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B18-KQ}

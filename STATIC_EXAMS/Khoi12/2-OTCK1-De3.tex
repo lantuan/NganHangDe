@@ -1,0 +1,578 @@
+\subsection{Đề 3}
+\caulc
+\Opensolutionfile{ans}[ans/2-OTHK1-De3]
+\begin{ex}%[2D1B1-1]
+	Hàm số $y=x^{3}-3 x^{2}+5$ đồng biến trên các khoảng
+	\choice
+	{$(0;2)$}
+	{$(0;+\infty)$}
+	{$(-\infty;2)$}
+	{\True $(-\infty;0)$ và $(2;+\infty)$}
+	\loigiai{Tập xác định $\mathscr{D}=\mathbb{R}$.\\
+		Ta có: $y'=3x^2-6x$.\\
+		Cho $y'=0 \Leftrightarrow x^2-2x=0 \Leftrightarrow \hoac{& x = 0 \\& x = 2.}$\\
+		Tại $x=2 \Rightarrow y(2)=1$; Tại $x=0 \Rightarrow y(0)=5$.\\
+		Ta có bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre,lgt=1.2,espcl=2.5,deltacl=0.6]
+				{$x$/0.6,$y'$/0.6,$y$/2}
+				{$-\infty$,$0$,$2$,$+\infty$}
+				\tkzTabLine{,+,0,-,0,+,}
+				\tkzTabVar{-/$-\infty$,+/$5$,-/$1$,+/$+\infty$}
+			\end{tikzpicture}
+		\end{center}
+	}
+\end{ex}
+\begin{ex}%[2D1B4-1] 
+	Tiệm cận ngang của đồ thị hàm số $y=\dfrac{4x+1}{x-1}$ là
+	\choice
+	{$y=1$}
+	{\True $y=4$}
+	{$y=-1$}
+	{$y=-4$}
+	\loigiai{
+		$\lim\limits_{x \to \infty} y=4$ nên đường thẳng $y=4$ là TCN của đồ thị hàm số.
+	}
+\end{ex}
+
+
+\begin{ex}%[2H2B2-2]
+	Trong không gian với hệ tọa độ $O x y z$, cho điểm $M$ thỏa mãn $\vec{OM} = 2  \vec{i} + \vec{j}$. Tìm tọa độ điểm $M$.
+	\choice
+	{$M(0;2;1)$}
+	{$M(1;2;0)$}
+	{$M(2;0;1)$}
+	{\True $M(2;1;0)$}
+	\loigiai{
+		$\vec{OM} = 2  \vec{i} + \vec{j}$ $\Leftrightarrow M(2;1;0)$.
+	}
+\end{ex}
+
+\begin{ex}%[2H2B2-2]
+	Trong không gian với hệ tọa độ $O x y z$, hình chiếu vuông góc của điểm $A(3; 5; 2)$ trên trục $O x$ có tọa độ là
+	\choice
+	{$(0; 5; 2)$}
+	{$(0; 5; 0)$}
+	{\True $(3; 0; 0)$}
+	{$(0; 0; 2)$}
+	\loigiai{
+		Hình chiếu vuông góc của điểm $A(3; 5; 2)$ trên trục $O x$ có tọa độ là $(3; 0; 0)$.	
+	}
+\end{ex}
+
+\begin{ex}
+	Cho hai điểm $M(1;-2; 3)$ và  $N(3;0;-1)$. Tìm tọa độ trung điểm $I$ của đoạn $MN$.
+	\choice
+	{$I(4;-2;2)$}
+	{$I(2;-1;2)$}
+	{$I(4;-2;1)$}
+	{\True $I(2;-1; 1)$}
+	\loigiai{
+		$I$ là trung điểm của đoạn $MN$, ta có
+		$$\heva{& x_I=\dfrac{1+3}{2}=2\\& y_I=\dfrac{-2+0}{2}=-1\\& z_I=\dfrac{3-1}{2}=1} \Rightarrow I=(2;-1;1).$$
+	}
+\end{ex}
+
+\begin{ex}%[2H2B1-3] 
+	Cho hai vectơ $\overrightarrow{a}$ và $\overrightarrow{b}$ thỏa mãn $|\overrightarrow{a}|=3,|\overrightarrow{b}|=2$ và $\overrightarrow{a}\cdot \overrightarrow{b}=-3$. Xác định góc $\alpha$ giữa hai vectơ $\overrightarrow{a}$ và $\overrightarrow{b}$.
+	\choice
+	{$\alpha=30^{\circ}$}
+	{$\alpha=45^{\circ}$}
+	{$\alpha=60^{\circ}$}
+	{\True $\alpha=120^{\circ}$}
+	\loigiai{
+		Ta có {\allowdisplaybreaks
+			\begin{eqnarray*}
+				&&\overrightarrow{a} \cdot \overrightarrow{b}=|\overrightarrow{a}| \cdot|\overrightarrow{b}| \cdot \cos(\overrightarrow{a}, \overrightarrow{b})\\  
+				&\Rightarrow&  \cos(\overrightarrow{a}, \overrightarrow{b})=\dfrac{\overrightarrow{a} \cdot \overrightarrow{b}}{|\overrightarrow{a}| \cdot|\overrightarrow{b}|}=\dfrac{-3}{3 \cdot 2}=-\dfrac{1}{2} \\ &\Rightarrow& (\overrightarrow{a}, \overrightarrow{b})=120^{\circ}.
+		\end{eqnarray*}} 
+	}
+\end{ex}
+
+\begin{ex}%[2H2B1-3] 
+	Cho  $A(1;2; -1)$, $B(2;-1;3)$, $C(-3;5;1)$. Tìm điểm $D$ sao cho $ABCD$ là hình bình hành.
+	\choice
+	{\True $D(-4;8;-3)$}
+	{$D(-2;2;5)$}
+	{$D(-2;8;-3)$}
+	{$D(-4;8;-5)$}
+	\loigiai{
+		Gọi $D(x;y;z)$ là đỉnh của hình bình hành.\\
+		Ta có $\heva{& \vec{AB} = (1;-3;4)\\
+			& \vec{DC} = (-3-x; 5-y; 1-z).}$\\
+		Vì $ABCD$ là hình bình hành nên $\vec{AB}  = \vec{DC}$
+		\[
+		\Leftrightarrow
+		\heva{& 1=-3-x\\
+			& -3 = 5 -y\\
+			&4 = 1-z}
+		\Leftrightarrow
+		\heva{& x=-4\\
+			& y = 8\\
+			&z= -3}
+		\Rightarrow D(-4;8;-3).
+		\]
+	}
+\end{ex}
+
+\begin{ex}%[2D3B1-1]
+	Một vườn thú ghi lại tuổi thọ (đơn vị: năm) của $20$ con hổ và thu được kết quả như sau:
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline Tuổi thọ &{$[14; 15)$} &{$[15; 16)$} &{$[16; 17)$} &{$[17; 18)$} &{$[18; 19)$} \\
+			\hline Số con hổ & 1 & 3 & 8 & 6 & 2 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Nhóm chứa tứ phân vị thứ nhất là
+	\choice
+	{$[14; 15)$}
+	{$[15; 16)$}
+	{\True $[16; 17)$}
+	{$[17; 18)$}
+	\loigiai{
+		Cỡ mẫu là $1+3+8+6+2=20$.\\
+		Gọi $x_1; x_2; \ldots; x_{20}$ là tuổi thọ của 20 con hổ được sắp xếp theo thứ tự tăng dần.\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{x_5+x_6}{2} \in[16; 17)$ nên nhóm chứa tứ phân vị thứ nhất là $[16; 17)$.	
+	}
+\end{ex}
+
+\begin{ex}%[2D3B1-2]
+	Thời gian đi bộ thể dục mỗi ngày trong thời gian gần đây của một học sinh được thống kê lại ở bảng sau: 
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian (phút) &{$[20; 25)$} &{$[25; 30)$} &{$[30; 35)$} &{$[35; 40)$} &{$[40; 45)$} \\
+			\hline Số ngày & 6 & 6 & 4 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng biến thiên của mẫu số liệu ghép nhóm là
+	\choice
+	{\True $25$}
+	{$20$}
+	{$15$}
+	{$30$}
+	\loigiai{
+		Khoảng biến thiên của mẫu số liệu ghép nhóm là: $R=45-20=25$ (phút).	
+	}
+\end{ex}
+
+\begin{ex}%[2D3H1-1]
+	Dũng là học sinh rất giỏi chơi rubik, bạn có thể giải nhiều loại khối rubik khác nhau. Trong một lần tập luyện giải khối rubik $3 \times 3$, bạn Dũng đã tự thống kê lại thời gian giải rubik trong 25 lần giải liên tiếp ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian giải rubik (giây) &{$[8; 10)$} &{$[10; 12)$} &{$[12; 14)$} &{$[14; 16)$} &{$[16; 18)$} \\
+			\hline Số lần & 4 & 6 & 8 & 4 & 3 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Giá trị tứ phân vị thứ nhất của mẫu số liệu trên là
+	\choice
+	{\True $10{,}75$}
+	{$1{,}75$}
+	{$3{,}63$}
+	{$14{,}38$}
+	\loigiai{
+		Cỡ mẫu $n=25$.\\
+		Gọi $x_1; \ldots; x_{25}$ là mẫu số liệu gốc về thời gian giải rubik trong 25 lần giải liên tiếp được xếp theo thứ tự không giảm.\\
+		Ta có: $ x_1; \ldots; x_4 \in[8; 10), x_5; \ldots; x_{10} \in[10; 12), x_{11}; \ldots; x_{18} \in[12; 14),\\ x_{19}; \ldots; x_{22} \in[14; 16), x_{23}; \ldots; x_{25} \in[16; 18).$\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{x_6+x_7}{2} \in[10; 12)$. \\
+		Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là: $$Q_1=10+\dfrac{\dfrac{25}{4}-4}{6}(12-10)=10{,}75.$$	
+	}
+\end{ex}
+
+\begin{ex}%[2D3B2-1]
+	Bảng dưới đây thống kê cự li ném tạ của một vận động viên thức hiện trong $100$ lần ném là
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Cự li (m) &{$[19; 19{,}5)$} &{$[19{,}5; 20)$} &{$[20; 20{,}5)$} &{$[20{,}5; 21)$} &{$[21; 21{,}5)$} \\
+			\hline Tần số & 13 & 45 & 24 & 12 & 6 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Cự li trung bình trong $100$ lần ném tạ của vận động viên đó là bao nhiêu?
+	\choice
+	{\True $20{,}015$}
+	{$22{,}05$}
+	{$25{,}27$}
+	{$30{,}015$}
+	\loigiai{
+		Ta có bảng sau:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline Cự li (m) &{$[19; 19{,}5)$} &{$[19{,}5; 20)$} &{$[20; 20{,}5)$} &{$[20{,}5; 21)$} &{$[21; 21{,}5)$} \\
+				\hline 
+				Giá trị đại diện & 19{,}25 & 19{,}75 & 20{,}25 & 20{,}75 & 21{,}25 \\
+				\hline 
+				Tần số & 13 & 45 & 24 & 12 & 6 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Cỡ mẫu là $n=13+45+24+12+6=100$.\\
+		Cự li trung bình trong $100$ lần ném tạ của vận động viên đó là: $$\bar{x}=\dfrac{13\cdot 19{,}25+45 \cdot 19{,}75+24 \cdot 20{,}25+12 \cdot 20{,}75+6\cdot 21{,}25}{100}=20{,}015.$$	
+	}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+	Trong một cuộc thi \lq\lq Đi bộ vì sức khỏe\rq\rq\ cự li $5000$ (m), thời gian hoàn thành cuộc đua của $100$ vận động viên được thống kê lại như sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian (phút) &{$[30; 32)$} &{$[32; 34)$} &{$[34; 36)$} &{$[36; 38)$} &{$[38; 40)$} \\
+			\hline Số vận động viên & 25 & 38 & 20 & 10 & 7 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Phương sai của mẫu số liệu trên bằng bao nhiêu?
+	\choice
+	{$3{,}4$}
+	{$4{,}5$}
+	{\True $5{,}4$}
+	{$6{,}2$}
+	\loigiai{
+		Ta có bảng sau:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline Thời gian (phút) & {$[30; 32)$} &{$[32; 34)$} &{$[34; 36)$} &{$[36; 38)$} &{$[38; 40)$} \\
+				\hline Giá trị đại diện & $31$ & $33$ & $35$ & $37$ & $39$ \\
+				\hline Số vận động viên & $25$ & $38$ & $20$ & $10$ & $7$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Cỡ mẫu: $n=25+38+20+10+7=100$;\\
+		Thời gian trung bình để hoàn thành cuộc đua là
+		$$\bar{x}=\dfrac{25\cdot 31+38\cdot 33+20.35+10\cdot 37+7\cdot 39}{100}=33{,}72.$$ 
+		Phương sai của mẫu số liệu trên là 
+		$$S^2=\dfrac{1}{100}\left(25\cdot 31^2+38\cdot 33^2+20\cdot 35^2+10\cdot 37^2+7\cdot 39^2\right)-(33{,}72)^2 \approx 5{,}4.$$ 	
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/2-OTHK1-De3}
+\cauds
+\Opensolutionfile{ans}[ans/OTHK1-DE3-DS]
+%Câu 1
+\begin{ex}%[2D3H1-4]
+	\immini{Bảng bên biểu diễn mẫu số liệu ghép nhóm thống kê mức lương của một công ty (đơn vị: triệu đồng).
+		\choiceTF
+		{Khoảng biến thiên của mẫu số liệu này là $R=25$}
+		{\True Tứ phân vị thứ nhất của mẫu số liệu là $Q_1=15$}
+		{Tứ phân vị thứ ba của mẫu số liệu là $Q_3=27$}
+		{Khoảng tứ phân vị của mẫu số liệu là $\Delta Q=12$}
+	}{\begin{tabular}{|c|c|}
+			\hline Nhóm & Tần số \\
+			\hline$[10 ; 15)$ & $15$ \\
+			{$[15 ; 20)$} & $18$ \\
+			{$[20 ; 25)$} & $10$ \\
+			{$[25 ; 30)$} & $10$ \\
+			{$[30 ; 35)$} & $5$ \\
+			{$[35 ; 40)$} & $2$ \\
+			\hline & $n=60$ \\
+			\hline
+	\end{tabular}}
+	\loigiai{
+		\begin{enumerate}
+			\item Sai. Trong mẫu số liệu ghép nhóm ở bảng, ta có đầu mút trái của nhóm $1$ là $a_1=10$, đầu mút phải của nhóm $6$ là $a_7=40$.\\Vậy khoảng biến thiên của mẫu số liệu ghép nhóm đó là $R=a_7-a_1=40-10=30.$
+			\item Đúng. Ta có bảng sau
+			\begin{center}
+				\begin{tabular}{|c|c|c|}
+					\hline Nhóm & Tần số & Tần số tích luỹ\\
+					\hline$[10 ; 15)$ & $15$ & $15$\\
+					{$[15 ; 20)$} & $18$ & $33$\\
+					{$[20 ; 25)$} & $10$ & $43$\\
+					{$[25 ; 30)$} & $10$ & $53$\\
+					{$[30 ; 35)$} & $5$ & $58$\\
+					{$[35 ; 40)$} & $2$ & $60$\\
+					\hline & $n=60$ & \\
+					\hline
+				\end{tabular}
+			\end{center}
+			Số phần tử của mẫu là $n=60$. \\
+			Nhóm $[15;20)$ là nhóm chứa tứ phân vị thứ nhất. 
+			Áp dụng công thức, ta có tứ phân vị thứ nhất là $$Q_1=15+\left(\dfrac{15-15}{18}\right)\cdot 5=15 ~\text{(triệu đồng)}.$$
+			\item Sai. Nhóm $[25;30)$ là nhóm chứa tứ phân vị thứ 3. Áp dụng công thức, ta có tứ phân vị thứ ba là
+			$$Q_3=25+\left(\dfrac{45-43}{10}\right)\cdot5=26 ~\text{(triệu đồng)}.$$
+			\item  Sai. Khoảng tứ phân vị của mẫu số liệu ghép nhóm đã cho là 
+			$$\Delta _Q=Q_3-Q_1=26-15=11 ~\text{(triệu đồng)}.$$
+		\end{enumerate}
+	}
+\end{ex}
+%Câu 2
+\begin{ex}%[2D1H5-3]
+	Cho hàm số $y=f(x)$ có bảng biến thiên dưới. Hãy xét tính đúng sai của các mệnh đề sau
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[nocadre=false,lgt=1.2,espcl=2,deltacl=0.6]
+			{$x$ /0.6, $y'$ /0.6, $y$ /2}
+			{$-\infty$,$-1$,$1$,$+\infty$}
+			\tkzTabLine{,+,$0$,-,$0$,+,}
+			\tkzTabVar{-/$1$,+/$3$,-/$\dfrac{1}{3}$,+/$1$}
+		\end{tikzpicture}
+	\end{center}
+	\choiceTF
+	{Hàm số đồng biến trên khoảng $(-1;3)$}
+	{Hàm số có giá trị nhỏ nhất là $1$}
+	{\True Đồ thị hàm số có đường tiệm cận ngang là $y=1$}
+	{\True Phương trình $2f^2(x)-3f(x)+1=0$ có $3$ nghiệm}
+	\loigiai{
+		\begin{itemchoice} 			
+			\itemch Sai. Từ bảng biến thiên cho thấy hàm số đồng biến trên khoảng $(-\infty;-1)$ và $(1;+\infty)$. 
+			\itemch Sai. Từ bảng biến thiên cho thấy hàm số đạt giá trị nhỏ nhất là $\dfrac{1}{3}$. 
+			\itemch Đúng. Từ bảng biến thiên, ta thấy $\lim\limits_{x\to +\infty}f(x)=\lim\limits_{x\to -\infty}f(x)=1$, do đó $y=1$ là đường tiệm cận ngang của đồ thị hàm số.
+			\itemch Đúng. Ta có $2f^2(x)-3f(x)+1=0\Leftrightarrow\hoac{&f(x)=1 &(1)\\ &f(x)=\dfrac{1}{2}. &(2)}$\\
+			Từ bảng biến thiên, ta thấy đường thẳng $y=1$ cắt đồ thị của hàm số $y=f(x)$ tại duy nhất $1$ điểm nằm trong khoảng $(-1;1)$.\\
+			Suy ra phương trình $(1)$ có $1$ nghiệm.\\
+			Nhìn vào bảng biến thiên ta thấy đường thẳng $y=\dfrac{1}{2}$ cắt đồ thị của hàm số $y=f(x)$ tại $2$ điểm.\\
+			Suy ra phương trình $(2)$ có $2$ nghiệm.\\
+			Vậy phương trình $2f^2(x)-3f(x)+1=0$ có $3$ nghiệm.	
+		\end{itemchoice}
+	}
+\end{ex}
+%Câu 3
+\begin{ex}%[2H2H1-2]
+	\immini{Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng $a$. Xét tính đúng, sai của các khẳng định sau:
+		\choiceTF
+		{\True $\vec{B'B} - \vec{DB} = \vec{B'D}$}
+		{$\vec{BA}+\vec{BC}+\vec{BB'}=\vec{BD}$}
+		{$\big|\vec{BA}+\vec{BC}+\vec{BB'}\big|=a\sqrt{2}$}
+		{\True $\big|\vec{BC}-\vec{BA}+\vec{C'A}\big|=a$}
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize, line join=round, line cap=round]
+			\def\h{4}
+			\foreach \x\y\t in {0/0/A,-1/-1.1/B,2.6/-1.1/C}
+			\coordinate (\t) at (\x,\y);
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (A') at ($(A)+(0,3.2)$);
+			\coordinate (B') at ($(B)+(0,3.2)$);
+			\coordinate (C') at ($(C)+(0,3.2)$);
+			\coordinate (D') at ($(D)+(0,3.2)$);
+			\draw (B')--(A')--(D')--(C')--(B')--(B)--(C)--(D)--(D') (C')--(C);
+			\draw[dashed](B)--(A)--(D) (A)--(A');
+			\foreach \t/\g in {A/170,B/-150,C/-70,D/0,A'/100,B'/170,C'/-20,D'/50}
+			\draw[fill=black] (\t) circle(1pt)
+			node[shift={(\g:7pt)}]{$\t$};
+	\end{tikzpicture}}
+	\loigiai{
+		\immini{\vspace*{-3mm}
+			\begin{listEX}
+				\item Ta có \begin{eqnarray*}
+					\vec{B'B} - \vec{DB} &=& \vec{B'B} + \left( - \vec{DB} \right) \\
+					&=& \vec{B'B} + \vec{BD} \\
+					&=& \vec{B'D}.
+				\end{eqnarray*}
+				\item Áp dụng quy tắc hình hộp ta có $\vec{BA}+\vec{BC}+\vec{BB'}=\vec{BD'}$.\\
+				\item $\big|\vec{BA}+\vec{BC}+\vec{BB'}\big|=\big|\vec{BD'}\big|=BD'=a\sqrt{3}$.
+				\item Ta có $\vec{BC}-\vec{BA}+\vec{C'A}=\vec{AC}+\vec{C'A}=\vec{C'C}$.\\
+				Do đó $\big|\vec{BC}-\vec{BA}+\vec{C'A}\big|=C'C=a$.
+		\end{listEX}}
+		{
+			\begin{tikzpicture}[scale=0.6, font=\footnotesize, line join=round, line cap=round]
+				\def\h{4}
+				\foreach \x\y\t in {0/0/A,-1/-1.1/B,2.6/-1.1/C}
+				\coordinate (\t) at (\x,\y);
+				\coordinate (D) at ($(A)+(C)-(B)$);
+				\coordinate (A') at ($(A)+(0,3.2)$);
+				\coordinate (B') at ($(B)+(0,3.2)$);
+				\coordinate (C') at ($(C)+(0,3.2)$);
+				\coordinate (D') at ($(D)+(0,3.2)$);
+				\draw (B')--(A')--(D')--(C')--(B')--(B)--(C)--(D)--(D') (C')--(C);
+				\draw[dashed](B)--(A)--(D) (A)--(A');
+				\foreach \t/\g in {A/170,B/-150,C/-70,D/0,A'/100,B'/170,C'/-20,D'/50}
+				\draw[fill=black] (\t) circle(1pt)
+				node[shift={(\g:7pt)}]{$\t$};
+		\end{tikzpicture}}
+	}
+\end{ex}
+%Câu 4
+\begin{ex}% [2H2K2-6]
+	\immini{Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình chữ nhật, $AB=1$, $AD=2$, $SA$ vuông góc với mặt đáy và $SA=3$. Với hệ toạ độ $Oxyz$ được thiết lập như sau: Gốc tọa độ $O$ trùng với điểm $A$, các véc tơ $\vec{AB}$, $\vec{AD}$, $\vec{AS}$ lần lượt cùng hướng với $\vec{i}$, $\vec{j}$ và $\vec{k}$. Xét tính đúng sai của các khẳng định sau:
+		\choiceTF
+		{\True Tọa độ $D(0;2;0)$}
+		{Tọa độ $C(1;2;3)$}
+		{\True Tọa độ $S(2;0;0)$}
+		{Tọa độ $I(1;1;0)$}
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(5,0) coordinate (D)
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A)!0.5!(C)$)coordinate (I)
+			($(A)+(0,3)$)coordinate (S)
+			;
+			\draw (C)--(D)--(S)--(C)--(B)--(S);
+			\draw[dashed] (S)--(A)--(D)--(B)--(A)--(C);
+			\pic[draw,thin,angle radius=2mm] {right angle = B--A--D};
+			\foreach \x/\g in {A/180,B/-90,C/-100,D/-80,S/90,I/-90}\draw[fill=black] (\x) circle (.04) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}	}
+	\loigiai{
+		\immini{
+			Với hệ trục đã chọn như hình vẽ thì
+			\begin{enumerate}[a)]
+				\item Điểm $D \in Oy$ và $AD=2$ nên $D(0;2;0)$.
+				\item Điểm $C \in (Oxy)$ và có hình chiếu lên $Ox$, $Oy$ lần lượt là điểm $B$ và $D$.\\
+				Do $AB=1$ và $AD=2$ nên $C(2;2;0)$.
+				\item Điểm $S \in Oz$ và $AS=3$ nên $S(0;0;3)$.
+				\item Điểm $I \in (Oxy)$ và có hình chiếu lên $Ox$, $Oy$ lần lượt là trung điểm của $AB$ và $AD$ nên $I(0{,}5;1;0)$.
+		\end{enumerate}}{
+			\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+				\path
+				(0,0) coordinate (A)
+				(-2,-2) coordinate (B)
+				(5,0) coordinate (D)
+				($(B)+(D)-(A)$)coordinate (C)
+				($(A)!0.5!(C)$)coordinate (I)
+				($(A)+(0,3)$)coordinate (S)
+				;
+				\draw[->] (D)--(7,0) node[below]{$y$};
+				\draw[->] (B)--(-3,-3) node[below]{$x$};
+				\draw[->] (S)--(0,4) node[left]{$z$};
+				\draw (C)--(D)--(S)--(C)--(B)--(S);
+				\draw[dashed] (S)--(A)--(D)--(B)--(A)--(C);
+				\pic[draw,thin,angle radius=2mm] {right angle = B--A--D};
+				\foreach \x/\g in {A/180,B/-90,C/-100,D/-80,S/170,I/-90}\draw[fill=black] (\x) circle (.04) +(\g:.5)node{\footnotesize$\x$};
+		\end{tikzpicture}}		
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/OTHK1-DE3-DS}
+\caukq
+\Opensolutionfile{ans}[ans/2-OTHK1-De3-KQ]
+\begin{ex}%[2D1H5-4] 
+	Cho hàm số $y=\dfrac{x+2}{2x-1}$. Đồ thị của hàm số giao với trục $Oy$ tại điểm có tọa độ $(a;b)$. Khi đó giá trị của $a+b$ bằng bao nhiêu?
+	\shortans[0]{$-2$}
+	\loigiai
+	{
+		Tập xác định $\mathscr{D}=\mathbb{R}\setminus \left\lbrace \dfrac{1}{2}\right\rbrace $.\\
+		Với $x=0$ ta được $y=-2$. Do đó, đồ thị hàm số giao với trục $Oy$ tại $(0;-2)$.\\
+		Vậy $a+b=0-2=-2$.
+	}
+\end{ex}
+\begin{ex}%[2H2B2-3]
+	Trong không gian với hệ tọa độ $O x y z$, cho $\overrightarrow{u}=2 \overrightarrow{i}+3 \overrightarrow{j}-\overrightarrow{k}$, giả sử tọa độ của $\overrightarrow{u}=\left(a;b;c\right)$. Khi đó, giá trị của $a+b+c$ bằng bao nhiêu?
+	\shortans[0]{$4$}
+	\loigiai
+	{
+		Theo định nghĩa ta có $\overrightarrow{i}=(1; 0; 0), \overrightarrow{j}=(0; 1; 0)$ và $\overrightarrow{k}=(0; 0; 1)$.\\
+		Do đó, $\overrightarrow{u}=2 \overrightarrow{i}+3 \overrightarrow{j}-\overrightarrow{k} \Leftrightarrow \overrightarrow{u}=(2; 3;-1)$.\\
+		Vậy $a+b+c=2+3-1=4$.	
+	}
+\end{ex}
+
+\begin{ex}%[2H2C1-3]
+	Cho tứ diện đều $A B C D$ có cạnh bằng $3$ và $M$ là trung điểm của $C D$. Giá trị tích vô hướng của $\overrightarrow{A B} \cdot \overrightarrow{A M}=\dfrac{a}{b}$, khi đó giá trị $a+b$ bằng bao nhiêu? 
+	\shortans[0]{$11$}
+	\loigiai
+	{
+		\begin{center}
+			\begin{tikzpicture}[line join=round, line cap=round,thick]
+				\coordinate (D) at (0,4);
+				\coordinate (A) at (-2,0);
+				\coordinate (B) at (-1,-2);
+				\coordinate (C) at (3,0);
+				\coordinate (M) at ($(D)!0.5!(C)$);
+				\draw(D)--(A) (D)--(B) (D)--(C) (B)--(C) (A)--(B);
+				\draw[dashed,thin] (M)--(A)--(C);
+				\foreach \i/\g in {D/90,A/180,B/-90,C/0,M/30}{\draw[fill=white](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+			\end{tikzpicture}	
+		\end{center}
+		Ta có $\overrightarrow{A B} \cdot \overrightarrow{A C}= \left|\overrightarrow{A B}\right|\cdot \left|\overrightarrow{A C}\right|\cdot \cos 60^{\circ}=\dfrac{9}{2}$. \\
+		Tương tự, $\overrightarrow{A B} \cdot \overrightarrow{A D}=\dfrac{9}{2}$.\\
+		Lại có $\overrightarrow{A M}=\dfrac{1}{2}(\overrightarrow{A C}+\overrightarrow{A D})$, suy ra
+		$$
+		\overrightarrow{A B} \cdot \overrightarrow{A M}=\overrightarrow{A B} \cdot \dfrac{1}{2}(\overrightarrow{A C}+\overrightarrow{A D})=\dfrac{1}{2}(\overrightarrow{A B} \cdot \overrightarrow{A C}+\overrightarrow{A B} \cdot \overrightarrow{A D})=\dfrac{1}{2}\left(\dfrac{9}{2}+\dfrac{9}{2}\right)=\dfrac{9}{2}.
+		$$
+		Vậy $a+b=9+2=11$.
+	}
+\end{ex}
+
+\begin{ex}%[2H2C2-6]
+	Hai chiếc khinh khí cầu cùng bay lên tại một địa điểm. Sau một giờ bay, chiếc khinh khí cầu thứ nhất cách điểm xuất phát về phía Đông $100$ (km) và về phía Nam $80$ (km), đồng thời cách mặt đất $1$ (km). Chiếc khinh khí cầu thứ hai cách điểm xuất phát về phía Bắc $70$ (km) và về phía Tây $60$ (km), đồng thời cách mặt đất $800$ (m). Xác định khoảng cách (km) giữa hai chiếc khinh khí cầu sau một giờ bay. 
+	\shortans[0]{$220$}
+	\loigiai
+	{
+		Chọn hệ trục tọa độ $O x y z$, với gốc đặt tại điểm xuất phát của hai chiếc khinh khí cầu, mặt phẳng $(O x y)$ trùng với mặt đất, trục $O x$ hướng về phía Bắc, trục $O y$ hướng về phía Tây, trục $O z$ hướng thẳng đứng lên trời, đơn vị đo lấy theo kilômét (xem hình vẽ).\\
+		\begin{center}
+			\begin{tikzpicture}
+				\coordinate (O) at (0,0);
+				\coordinate (X) at (-2,-2);
+				\coordinate (Y) at (4,0);
+				\coordinate (Z) at (0,3);
+				\draw[->] (O) -- (X) node[above left] {$x$};
+				\draw[->] (O) -- (Y) node[below right] {$y$};
+				\draw[->] (O) -- (Z) node[above] {$z$};
+				\node[left] at (O) {$O$};
+				\node[above] at (Y) {Tây};
+				\node[below left] at (X) {Bắc};
+			\end{tikzpicture}
+		\end{center}
+		Chiếc khinh khí cầu thứ nhất có tọa độ $(-100;-80; 1)$.\\
+		Chiếc khinh khí cầu thứ hai có tọa độ $(70; 60; 0{,}8)$.\\
+		Khoảng cách giữa chiếc khinh khí cầu thứ nhất và chiếc khinh khí cầu thứ hai là
+		$$\sqrt{(-100-70)^2+(-80-60)^2+(1-0{,}8)^2} \approx 220 \text{ (km)}.$$ 	
+	}
+\end{ex}
+
+\begin{ex}%[2D3V1-3]
+	Bảng số liệu dưới đây thống kê số lần tâng cầu của $25$ học sinh được giáo viên ghi nhận lại:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Số lần tâng cầu & {$[8 ; 10)$} & {$[10 ; 12)$} & {$[12 ; 14)$} & {$[14 ; 16)$} & {$[16 ; 18)$} \\
+			\hline Số học sinh & 4 & 6 & 8 & 4 & 3 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu trên là bao nhiêu?
+	\shortans[0]{$3{,}63$}
+	\loigiai
+	{
+		Cỡ mẫu $n=25$.\\
+		Gọi $x_1; \ldots; x_{25}$ là mẫu số liệu gốc về số lần tâng cầu được xếp theo thứ tự không giảm.
+		Ta có:\\
+		$\begin{aligned}
+			& x_1; \ldots; x_4 \in[8; 10), \\
+			& x_5; \ldots; x_{10} \in[10; 12), \\
+			& x_{11}; \ldots; x_{18} \in[12; 14), \\
+			& x_{19}; \ldots; x_{22} \in[14; 16), \\
+			& x_{23}; \ldots; x_{25} \in[16; 18).
+		\end{aligned}$\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{x_6+x_7}{2} \in[10; 12)$.\\ 
+		Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là: $$Q_1=10+\dfrac{\dfrac{25}{4}-4}{6}(12-10)=10{,}75.$$
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{x_{19}+x_{20}}{2} \in[14; 16)$. \\
+		Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là: $$Q_3=10+\dfrac{\dfrac{3.25}{4}-(4+6+8)}{4}(16-14)=14{,}38.$$
+		Khoảng tứ phân vị của mẫu số liệu ghép nhóm là: $$\Delta_Q=Q_3-Q_1=14{,}38-10{,}75=3{,}63.$$  	
+	}
+\end{ex}
+
+\begin{ex}%[2D3V2-2]
+	Chiều cao của $20$ học sinh trong đội tuyển bóng chuyền của trường THPT A được ghi nhận lại như sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline Chiều cao (cm) &{$[170; 172)$} &{$[172; 174)$} &{$[174; 176)$} &{$[176; 180)$} \\
+			\hline Số học sinh & 3 & 10 & 6 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Độ lệch chuẩn của mẫu số liệu trên là bao nhiêu?
+	\shortans[0]{$1{,}66$}
+	\loigiai
+	{
+		Chọn giá trị đại diện cho mẫu số liệu, ta có:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline Chiều cao (cm)  &{$[170; 172)$} &{$[172; 174)$} &{$[174; 176)$} &{$[176; 180)$} \\
+				\hline Giá trị đại diện & 171 & 173 & 175 & 178 \\
+				\hline Số học sinh & 3 & 10 & 6 & 1 \\
+				\hline
+			\end{tabular}
+		\end{center} 
+		Chiều cao trung bình là $\bar{x}=\dfrac{171\cdot 3+173\cdot 10+175\cdot  6+178\cdot 1 }{20}=173{,}55$.\\
+		Phương sai của mẫu số liệu:
+		$$
+		S^2=\dfrac{1}{20}\left[171^2\cdot 3+173^2\cdot 10+175^2\cdot  6+178^2\cdot 1 \right]-\left(173{,}55\right)^2 \approx 2{,}75.
+		$$
+		Độ lệch chuẩn của mẫu số liệu: $S=\sqrt{S^2}=\sqrt{2{,}75} \approx 1{,}66.$	
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/2-OTHK1-De3-KQ}

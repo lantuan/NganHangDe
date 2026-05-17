@@ -1,0 +1,816 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-B10-De2-LC]
+\caulc
+%%%%%Câu 1
+\begin{ex}%[2D3N2-1]
+	Xét mẫu số liệu ghép nhóm cho bởi bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\textbf{Nhóm} &$\left[u_1; u_2\right)$ &$\left[u_2; u_3\right)$ & $\ldots$ &$\left[u_k; u_{k+1}\right)$ \\
+			\hline \textbf{Giá trị đại diện} & $c_1$ & $c_2$ & $\ldots$ & $c_k$ \\
+			\hline \textbf{Tần số} & $n_1$ & $n_2$ & $\ldots$ & $n_k$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+Chọn khẳng định \textbf{sai}.
+\choice
+{Cỡ mẫu là $ n=n_1+n_2+\cdots+n_k $}
+{Số trung bình của mẫu số liệu ghép nhóm là $ \overline{x}=\dfrac{n_1c_1+n_2c_2+\cdots+n_kc_k}{n} $ }
+{\True Phương sai của mẫu số liệu ghép nhóm là $ S^2=\dfrac{1}{n}\left( n_1c_1^2+n_2c_2^2+\cdots+n_kc_k^2-\overline{x}^2\right) $}
+{Độ lệch chuẩn của mẫu số liệu ghép nhóm là căn bậc hai số học của phương sai}
+\loigiai{
+Theo công thức ta có $ S^2=\dfrac{1}{n}\left( n_1c_1^2+n_2c_2^2+\cdots+n_kc_k^2\right)-\overline{x}^2 $.
+}
+\end{ex}
+%%%%%Câu 2
+\begin{ex}%[2D3N2-1]
+	Xét mẫu số liệu ghép nhóm cho bởi bảng sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Nhóm} &$\left[u_1; u_2\right)$ &$\left[u_2; u_3\right)$ & $\ldots$ &$\left[u_k; u_{k+1}\right)$ \\
+		\hline \textbf{Giá trị đại diện} & $c_1$ & $c_2$ & $\ldots$ & $c_k$ \\
+		\hline \textbf{Tần số} & $n_1$ & $n_2$ & $\ldots$ & $n_k$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Phương sai của mẫu số liệu ghép nhóm, kí hiệu $ S^2 $, được tính bởi công thức
+\choice
+{\True $ S^2=\dfrac{1}{n}\left[n_1(c_1-\overline{x})^2+n_2(c_2-\overline{x})^2+\cdots+n_k(c_k-\overline{x})^2 \right] $}
+{$S^2=\left[n_1(c_1-\overline{x})^2+n_2(c_2-\overline{x})^2+\cdots+n_k(c_k-\overline{x})^2 \right] $}
+{$ S^2=\dfrac{1}{n}\left[(c_1-\overline{x})^2+(c_2-\overline{x})^2+\cdots+(c_k-\overline{x})^2 \right] $}
+{$ S^2=\dfrac{1}{n}\left[n_1(c_1-\overline{x})+n_2(c_2-\overline{x})+\cdots+n_k(c_k-\overline{x}) \right] $}
+\loigiai{Theo công thức ta có $ S^2=\dfrac{1}{n}\left[n_1(c_1-\overline{x})^2+n_2(c_2-\overline{x})^2+\cdots+n_k(c_k-\overline{x})^2 \right] $.}
+\end{ex}
+%%%%%Câu 3
+\begin{ex}%[2D3N2-2]
+	Bạn An sử dụng vòng đeo tay thông minh để ghi lại số bước chân đi mỗi ngày trong một tháng. Kết quả được ghi lại ở bảng sau
+	\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Số bước (đơn vị: nghìn) &{$[3;5)$} &{$[5;7)$} &{$[7;9)$} &{$[9;11)$} &{$[11;13)$} \\
+		\hline Số bước đại diện & $ 4 $ & $ 6 $ & $ 8 $ & $ 10 $ & $ 12 $ \\
+		\hline An & $ 6 $ & $ 7 $ & $ 6 $ & $ 6 $ & $ 5 $ \\
+		\hline
+	\end{tabular}
+\end{center}	
+	Phương sai của mẫu số liệu trên gần nhất với giá trị nào sau đây?
+	\choice
+	{$ 7{,}65 $}
+	{\True $ 7{,}56 $}
+	{$ 7{,}54 $}
+	{$ 7{,}45 $}
+	\loigiai{
+		Cỡ mẫu là $ n_1=6+7+6+6+5=30 $.\\
+		Số trung bình của mẫu số liệu ghép nhóm là\\
+		$$ \overline{x}_1=\dfrac{6\cdot 4+7\cdot6+6\cdot8+6\cdot10+5\cdot12}{30}=7{,}8. $$
+		Phương sai của mẫu số liệu ghép nhóm là
+		$$ S_1^2=\dfrac{1}{30}\left(6\cdot 4^2+7\cdot6^2+6\cdot8^2+6\cdot10^2+5\cdot12^2 \right) -7{,}8^2=7{,}56. $$
+	}	
+\end{ex}
+%%%%%Câu 4
+\begin{ex}%[2D3N2-2]
+	Mẫu số liệu sau cho biết kết quả kiểm tra môn Toán của lớp $12$A năm học 2023 - 2024.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Điểm số & $[3;5)$&$[5;7)$&$[7;9)$&$[9;11)$\\
+			\hline
+			Giá trị đại diện & $4$&$6$&$8$&$10$\\
+			\hline
+			Số học sinh &$5$&$18$&$10$&$7$\\
+			\hline
+		\end{tabular}
+	\end{center}
+Tính phương sai của mẫu số liệu trên (làm tròn đến hàng phần chục).
+\choice
+{\True $ 3{,}4 $}
+{$ 4{,}1 $}
+{$ 3{,}3 $}
+{$ 1{,}8 $}
+	\loigiai{
+			Cỡ mẫu $ n=5+18+10+7=40 $.\\
+			Số trung bình của mẫu số liệu là $ \overline{x}=\dfrac{5\cdot 4+18\cdot 6 +10\cdot 8+7\cdot 10}{40}=6{,}95 $.\\
+			Phương sai của mẫu số liệu là $ S^2=\dfrac{1}{40}\left(5\cdot 4^2+18\cdot 6^2 +10\cdot 8^2+7\cdot 10^2\right) -6{,}95^2=3{,}4$.
+}
+\end{ex}
+%%%%%Câu 5
+\begin{ex}%[2D3H2-2]
+	Hằng ngày ông Thắng đều đi xe buýt từ nhà đến cơ quan. Dưới đây là bảng thống kê thời gian của $100$ lần ông Thắng đi xe buýt từ nhà đến cơ quan.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Thời gian (phút) & $[15;18)$ & $[18;21)$ & $[21;24)$ & $[24;27)$ & $[27;30)$ & $[30;33)$ \\
+			\hline
+			Số lượt & $22$ & $38$ & $27$ & $8$ & $4$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+Độ lệch chuẩn của mẫu số liệu trên gần nhất với giá trị nào sau đây?
+\choice
+{$ 10{,}84 $}
+{$ 2{,}93 $}
+{\True $ 3{,}29 $}
+{$ 6{,}78 $}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Thời gian (phút) & $[15;18)$ & $[18;21)$ & $[21;24)$ & $[24;27)$ & $[27;30)$ & $[30;33)$ \\
+\hline Giá trị đại diện & $16{,}5$ & $19{,}5$ & $22{,}5$ & $25{,}5$ & $28{,}5$ & $31{,}5$ \\
+\hline
+Số lượt & $22$ & $38$ & $27$ & $8$ & $4$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+Sử dụng máy tính bỏ túi ta có độ lệch chuẩn là $ 3{,}29 $.
+}
+\end{ex}
+%%%%%Câu 6
+
+\begin{ex}%[2D3H2-2]
+	Giáo viên chủ nhiệm khảo sát thời gian sử dụng Internet trong một ngày của 40 học sinh, chia thành năm nhóm (đơn vị: phút) và lập bảng tẫn số ghép nhóm như sau. 
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline Nhóm (phút)  &{$[0 ; 60)$}&{$[60 ; 120)$}&{$[120 ; 180)$}&{$[180 ; 240)$}&{$[240 ; 300)$}\\
+			\hline Số học sinh & $6$ & $13$ & $13$ & $6$ & $2$ \\
+			\hline
+		\end{tabular}     
+	\end{center}
+Phương sai của mẫu số liệu đó gần nhất với giá trị nào sau đây?
+\choice
+{\True $ 64{,}72 $}
+{$ 64{,} 70$}
+{$ 62{,}36 $}
+{$ 62{,}74 $}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+	\begin{tabular}{|l|c|c|c|c|c|}
+		\hline Nhóm (phút)  &{$[0 ; 60)$}&{$[60 ; 120)$}&{$[120 ; 180)$}&{$[180 ; 240)$}&{$[240 ; 300)$}\\
+		\hline Giá trị đại diện  &{$30$}&{$90$}&{$150$}&{$210$}&{$270$}\\
+		\hline Số học sinh & $6$ & $13$ & $13$ & $6$ & $2$ \\
+		\hline
+	\end{tabular}     
+\end{center}
+Sử dụng máy tính bỏ túi ta có độ lệch chuẩn của mẫu số liệu là $ S\approx 64{,}72 $.
+}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+	Cho mẫu số liệu ghép nhóm như sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Nhóm & {$[0 ; 2)$} & {$[2 ; 4)$} & {$[4 ; 6)$} & {$[6 ; 8)$} & {$[8 ; 10)$} \\
+		\hline Tần số & $3$ & $8$ & $12$ & $12$ & $4$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Độ lệch chuẩn của mẫu số liệu trên gần nhất với giá trị nào sau đây?
+\choice
+{$ 2{,}02 $}
+{\True $ 2{,}23 $}
+{$ 2{,}35 $}
+{$ 2{,}44 $}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Nhóm & {$[0 ; 2)$} & {$[2 ; 4)$} & {$[4 ; 6)$} & {$[6 ; 8)$} & {$[8 ; 10)$} \\
+		\hline Giá trị đại diện & {$1$} & {$3$} & {$5$} & {$7$} & {$9$} \\
+		\hline Tần số & $3$ & $8$ & $12$ & $12$ & $4$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Sử dụng máy tính bỏ túi ta có độ lệch chuẩn của mẫu số liệu là $ S\approx2{,}23 $.
+}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+	Người ta đo đường kính của $ 61 $ cây gỗ được trồng sau $ 12 $ năm (đơn vị: centimét), họ thu được bảng tần số ghép nhóm sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Đường kính & {$[20 ; 25)$} & {$[25 ; 30)$} & {$[30 ; 35)$} & {$[35 ; 40)$} & {$[40 ; 45)$} \\
+			\hline Số cây & $4$ & $12$ & $26$ & $13$ & $6$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+Phương sai của mẫu số liệu gần nhất với giá trị nào sau đây?
+\choice
+{\True $ 27 $}
+{$ 26{,}5 $}
+{$ 26 $}
+{$ 27{,}5 $}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline Đường kính & {$[20 ; 25)$} & {$[25 ; 30)$} & {$[30 ; 35)$} & {$[35 ; 40)$} & {$[40 ; 45)$} \\
+\hline Giá trị đại diện & {$22{,}5$} & {$27{,}5$} & {$32{,}5$} & {$37{,}5$} & {$42{,}5$} \\
+\hline Số cây & $4$ & $12$ & $26$ & $13$ & $6$ \\
+\hline
+\end{tabular}
+\end{center}
+Sử dụng máy tính ta có phương sai của mẫu số liệu là $ S^2 \approx 27 $.
+}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+	Kiểm tra điện lượng của một số viên pin tiểu do một hãng sản xuất thu được kết quả sau	
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Điện lượng (Nghìn mAh) & {$[0{,}9 ; 0{,}95)$} & {$[0{,}95 ; 1{,}0)$} & {$[1{,}0 ; 1{,}05)$} & {$[1{,}05 ; 1{,}1)$} & {$[1{,}1 ; 1{,}15)$} \\
+		\hline Giá trị đại diện & {$0{,}925$} & {$0{,}975$} & {$1{,}025$} & {$1{,}075 $} & {$1{,}125$} \\
+		\hline Số pin & $10$ & $20$ & $35$ & $15$ & $5$ \\
+		\hline
+	\end{tabular}
+\end{center}
+	Độ lệch chuẩn của mẫu số liệu gần nhất với giá trị nào sau đây?
+	\choice
+	{\True $ 0{,}052 $}
+	{$ 0{,}054 $}
+	{$ 0{,}055 $}
+	{$ 0{,}053 $}
+	\loigiai{Ta có bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Điện lượng (Nghìn mAh) & {$[0{,}9 ; 0{,}95)$} & {$[0{,}95 ; 1{,}0)$} & {$[1{,}0 ; 1{,}05)$} & {$[1{,}05 ; 1{,}1)$} & {$[1{,}1 ; 1{,}15)$} \\
+			\hline Giá trị đại diện & {$0{,}925$} & {$0{,}975$} & {$1{,}025$} & {$1{,}075 $} & {$1{,}125$} \\
+			\hline Số pin & $10$ & $20$ & $35$ & $15$ & $5$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+Sử dụng máy tính bỏ túi ta có độ lệch chuẩn của mẫu số liệu là $ 0{,}052 $.
+	}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+	Kết quả khảo sát năng suất (đơn vị tấn/ha) của một số thửa ruộng được minh họa ở biểu đồ sau
+	\begin{center}
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,xscale=1.5,yscale=1,scale=0.8]
+			\def\a{1}
+			\def\xmax{9}
+			\def\ymax{7}
+			\tikzset{label style/.style={font=\footnotesize}}
+			\draw[->] (0,0)--(\xmax,0) node[below] {\text{Năng suất (tấn/ha)}};
+			\draw[->] (0,0)--(0,\ymax) node[below left] {\text{Số thửa ruộng}};
+			\draw (0,0) node [below left] {$O$};
+			\draw[thin,gray!60]
+			(0,1)--(\xmax,1)
+			(0,2)--(\xmax,2)
+			(0,3)--(\xmax,3)
+			(0,4)--(\xmax,4)
+			(0,5)--(\xmax,5)
+			(0,6)--(\xmax,6)
+			;
+			\foreach \i in {1,2,3,4,5,6}{
+				\draw (0,\i) node[left]{$\i$};
+			}
+			%		\foreach \i/\j in {0.5*\a/3,1.5*\a/4,2.5*\a/6,3.5*\a/5,4.5*\a/5,5.5*\a/2}{
+				%			\draw (\i,\j) node[above]{$\j$};
+				%		}
+			\foreach \i/\j in {1.5*\a/{[5.5,5.7)},2.5*\a/{[5.7,5.9)},3.5*\a/{[5.9,6.1)},4.5*\a/{[6.1,6.3)},5.5*\a/{[6.3,6.5)},6.5*\a/{[6.5,6.7)}}{
+				\draw (\i,-0.5) node[below,rotate=45]{\small $\j$};
+			}
+			\fill[blue!20]
+			(\a,0) rectangle (2*\a,3)
+			(2*\a,0) rectangle (3*\a,4)
+			(3*\a,0) rectangle (4*\a,6)
+			(4*\a,0) rectangle (5*\a,5)
+			(5*\a,0) rectangle (6*\a,5)
+			(6*\a,0) rectangle (7*\a,2)
+			;
+			\begin{scope}
+				\draw 
+				(\a,3)--(2*\a,3) 
+				(2*\a,4)--(3*\a,4)
+				(3*\a,6)--(4*\a,6)
+				(4*\a,5)--(5*\a,5)
+				(5*\a,5)--(6*\a,5)
+				(6*\a,2)--(7*\a,2)
+				(\a,0)--(\a,3)
+				(2*\a,0)--(2*\a,4)
+				(3*\a,0)--(3*\a,6)
+				(4*\a,0)--(4*\a,6)
+				(5*\a,0)--(5*\a,5)
+				(6*\a,0)--(6*\a,5)
+				(7*\a,0)--(7*\a,2)
+				;
+				\draw (3,\ymax+1) node[above]{\textbf{Năng suất lúa của một số thửa ruộng}};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+Độ lệch chuẩn của mẫu số liệu trên gần với giá trị nào nhất?
+\choice
+{\True $ 0{,}294 $}
+{$ 0{,}301 $}
+{$ 0{,}289 $}
+{$ 0{,}086 $}
+\loigiai{
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+	\hline
+	Năng suất (tấn/ha) &$[5{,}5;5{,}7)$  & $[5{,}7;5{,}9)$ & $[5{,}9;6{,}1)$ & $[6{,}1;6{,}3)$ & $[6{,}3;6{,}5)$ & $[6{,}5;6{,}7)$\\
+	\hline
+	Giá trị đại diện	& $5{,}6$ & $5{,}8$ & $6{,}0$ & $6{,}2$ & $6{,}4$ & $6{,}6$\\
+	\hline
+	Số thửa ruộng	& $3$ & $4$ & $6$ & $5$ & $5$ & $2$\\
+	\hline
+\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu là 
+$$\overline{x}=\dfrac{1}{25}\cdot (5{,}6\cdot 3+5{,}8\cdot 4+6\cdot 6+6{,}2\cdot 5+6{,}4\cdot 5+6{,}6\cdot 2)=6{,}088.$$
+Phương sai của mẫu số liệu ghép nhóm là 
+$$S^2=\dfrac{1}{25}\cdot (5{,}6^2\cdot 3+5{,}8^2\cdot 4+6^2\cdot 6+6{,}2^2\cdot 5+6{,}4^2\cdot 5+6{,}6^2\cdot 2)-6{,}088^2=0{,}086656.$$
+Độ lệch chuẩn của mẫu số liệu ghép nhóm là $S=\sqrt{0{,}086656}\approx 0{,}294$.}
+\end{ex}
+\begin{ex}%[2D3H2-3]
+	Biểu đồ sau mô tả kết quả điều tra về điểm trung bình năm học của học sinh hai trường $A$ và $B$.
+	\begin{center}
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,xscale=1,yscale=1,scale=0.8]
+			\def\a{1}
+			\def\xmax{12}
+			\def\ymax{8}
+			\tikzset{label style/.style={font=\footnotesize}}
+			\draw[->] (0,0)--(\xmax,0) node[below] {\text{Điểm trung bình}};
+			\draw[->] (0,0)--(0,\ymax) node[below left] {\text{Số học sinh}};
+			\draw (0,0) node [below left] {$0$};
+			\draw[thin,gray!60]
+			(0,1)--(\xmax,1)
+			(0,2)--(\xmax,2)
+			(0,3)--(\xmax,3)
+			(0,4)--(\xmax,4)
+			(0,5)--(\xmax,5)
+			(0,6)--(\xmax,6)
+			(0,7)--(\xmax,7)
+			;
+			\foreach \i in {1,2,3,4,5,6,7}{
+				\draw (0,\i) node[left]{$\i$};
+			}
+			\foreach \i/\j in {1*\a/[5;6),3*\a/{[6;7)},5*\a/{[7;8)},7*\a/{[8;9)},9*\a/{[9;10)}}{
+				\draw (\i,-.5) node[below]{\small $\j$};
+			}
+			\fill[gray!50]
+			(0,0) rectangle (\a,4)
+			(2*\a,0) rectangle (3*\a,5)
+			(4*\a,0) rectangle (5*\a,3)
+			(6*\a,0) rectangle (7*\a,4)
+			(8*\a,0) rectangle (9*\a,2);
+			\fill[blue!30!]
+			(\a,0) rectangle (2*\a,2)
+			(3*\a,0) rectangle (4*\a,5)
+			(5*\a,0) rectangle (6*\a,4)
+			(7*\a,0) rectangle (8*\a,3)
+			(9*\a,0) rectangle (10*\a,1);
+			\begin{scope}
+				\draw 
+				(0,4)--(\a,4) 
+				(\a,2)--(2*\a,2)
+				(2*\a,5)--(3*\a,5)
+				(3*\a,5)--(4*\a,5)
+				(4*\a,3)--(5*\a,3)
+				(5*\a,4)--(6*\a,4)
+				(6*\a,4)--(7*\a,4)
+				(7*\a,3)--(8*\a,3)
+				(8*\a,2)--(9*\a,2)
+				(9*\a,1)--(10*\a,1)
+				(0,0)--(0,4)
+				(\a,0)--(\a,4)
+				(2*\a,0)--(2*\a,5)
+				(3*\a,0)--(3*\a,5)
+				(4*\a,0)--(4*\a,5)
+				(5*\a,0)--(5*\a,4)
+				(6*\a,0)--(6*\a,4)
+				(7*\a,0)--(7*\a,4)
+				(8*\a,0)--(8*\a,3)
+				(9*\a,0)--(9*\a,2)
+				(10*\a,0)--(10*\a,1);
+				\draw (6,\ymax+1) node[above]{\textbf{Điểm trung bình năm học của học sinh hai trường A và B}};
+			\end{scope}
+			\foreach \col/\t [count=\i from 0] in {gray!50/học sinh trường A, blue!30!/học sinh trường B}\path (10,6-\i) node[right]{\t} node[left,fill=\col]{};
+		\end{tikzpicture}
+	\end{center}
+Gọi $ x_A $, $ x_B $ lần lượt là số trung bình của mẫu số liệu học sinh trường $A$, $ B $. $ S_A $, $ S_B $ lần lượt là độ lệch chuẩn của mẫu số liệu học sinh trường $A$, $ B $. Chọn khẳng định \textbf{sai}.
+\choice
+{$\overline{x}_A=\dfrac{65}{9}$}
+{$ \overline{x}_B=\dfrac{217}{30} $}
+{$ S_B\approx 1{,}123 $}
+{\True Nếu so sánh theo độ lệch chuẩn thì học sinh trường $A$ có điểm trung bình đồng đều hơn trường $ B $}
+\loigiai{
+Ta có bảng thống kê điểm trung bình của học sinh ở hai trường theo giá trị đại diện.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Điểm trung bình & $[5;6)$ &$[6;7)$  & $[7;8)$ & $[8;9)$ & $[9;10)$  \\
+			\hline
+			Giá trị đại diện & $5{,}5$ & $6{,}5$ & $7{,}5$ & $8{,}5$ & $9{,}5$  \\
+			\hline
+			Học sinh trường $A$	& $4$ & $5$ & $3$ & $4$ & $2$ \\
+			\hline
+			Học sinh trường $B$	& $2$ & $5$ & $4$ & $3$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+\begin{itemize}
+	\item Xét mẫu số liệu học sinh trường $A$.\\
+Cỡ mẫu là $n_A=18$.\\
+Số trung bình của mẫu số liệu ghép nhóm là 
+$$\overline{x}_A=\dfrac{1}{18}\left(4\cdot 5{,}5+5\cdot 6{,}5+3\cdot 7{,}5+4\cdot 8{,}5+2\cdot 9{,}5\right)=\dfrac{65}{9}.$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$S^2_A=\dfrac{1}{18}\left(4\cdot 5{,}5^2+5\cdot 6{,}5^2+3\cdot 7{,}5^2+4\cdot 8{,}5^2+2\cdot 9{,}5^2\right)-\left(\dfrac{65}{9}\right)^2=1{,}756.$$
+Độ lệch chuẩn của mẫu số liệu là 
+$$S_A=\sqrt{1{,}756}\approx 1{,}325.$$
+\item Xét mẫu số liệu học sinh trường $B$.\\
+Cỡ mẫu là $n_B=15$.\\
+Số trung bình của mẫu số liệu ghép nhóm là 
+$$\overline{x}_B=\dfrac{1}{15}\left(2\cdot 5{,}5+5\cdot 6{,}5+4\cdot 7{,}5+3\cdot 8{,}5+1\cdot 9{,}5\right)=\dfrac{217}{30}.$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$S^2_B=\dfrac{1}{15}\left(2\cdot 5{,}5^2+5\cdot 6{,}5^2+4\cdot 7{,}5^2+3\cdot 8{,}5^2+1\cdot 9{,}5^2\right)-\left(\dfrac{217}{30}\right)^2=1{,}262.$$
+Độ lệch chuẩn của mẫu số liệu là 
+$$S_B=\sqrt{1{,}262}\approx 1{,}123.$$
+\end{itemize}
+Nếu so sánh theo độ lệch chuẩn thì học sinh trường $B$ có điểm trung bình đồng đều hơn.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B10-De2-LC}
+
+\Opensolutionfile{ans}[ans/ans-2-B10-De2-DS]
+\cauds
+
+\begin{ex}%[2D3H2-2]
+Cân nặng của một số quả mít trong một khu vườn được thống kê ở bảng dưới. Xét tính đúng sai các mệnh đề sau.
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline \begin{tabular}{c}
+			\textbf{Cân nặng (kg)}
+		\end{tabular} &{$[4; 6)$} &{$[6; 8)$} &{$[8; 10)$} &{$[10; 12)$} &{$[12; 14)$} \\
+		\hline \textbf{Số quả mít} & $6$ & $12$ & $19$ & $9$ & $4$ \\
+		\hline
+	\end{tabular}
+\end{center}
+	\choiceTF
+	{\True Cỡ mẫu của mẫu số liệu là $ 50 $}
+	{\True Số trung bình của mẫu số liệu ghép nhóm là $ 8{,}72 $}
+	{Phương sai của mẫu số liệu ghép nhóm là $ 4{,9} $}
+	{Độ lệch chuẩn của mẫu số liệu ghép nhóm là $ 2{,}2 $}
+	\loigiai{
+Ta có bảng thống kê cân nặng của các quả mít theo giá trị đại diện
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline \begin{tabular}{c}
+			\textbf{Cân nặng đại diện (kg)}
+		\end{tabular} &{$5$} &{$7$} &{$9$} &{$11$} &{$13$} \\
+		\hline \textbf{Số quả mít} & $6$ & $12$ & $19$ & $9$ & $4$ \\
+		\hline
+	\end{tabular}
+\end{center}
+\begin{itemchoice}
+	\itemch {\bf Đúng.} Cỡ mẫu $ n=6+12+19+9+4=50 $.
+	\itemch {\bf Đúng.} Số trung bình của mẫu số liệu ghép nhóm là
+	$$ \overline{x}=\dfrac{6\cdot 5+12\cdot7+19\cdot9+9\cdot11+4\cdot13}{50}=8{,}72.$$
+	\itemch {\bf Sai.} Phương sai của mẫu số liệu ghép nhóm là 
+	$$ S^2=\dfrac{1}{50}\left(6\cdot5^2+12\cdot 7^2+19\cdot9^2+9\cdot11^2+4\cdot13^2 \right)-8{,}72^2\approx4{,}80.$$
+	\itemch {\bf Sai.} Độ lệch chuẩn của mẫu số liệu ghép nhóm là 
+	$ S\approx \sqrt{4{,}80}\approx 2{,}19 $.
+\end{itemchoice}	
+}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+Thống kê tổng số giờ nắng trong tháng $9$ tại một trạm quan trắc đặt ở Cà Mau
+trong các năm từ $2002$ đến $2021$ được thống kê như sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline 
+		$ 111{,6} $	& $ 134{,}9 $ & $ 130{,}3 $ & $ 134{,}2 $ & $ 140{,}9 $ & $ 109{,}3 $ & $ 154{,}4 $ & $ 156{,}3 $ & $ 116{,}1 $ & $ 96{,}7 $ \\ 
+		\hline 
+		$ 105{,}2 $	& $ 80{,}8 $ & $ 80{,}8 $& $ 110 $ & $ 109 $ & $ 139 $ & $ 145 $ & $ 161 $ & $ 126 $ & $ 114 $  \\ 
+		\hline 
+	\end{tabular} 
+\end{center}
+	\choiceTF
+	{Cỡ mẫu của mẫu số liệu là $ 30 $}
+	{\True Số trung bình của mẫu số liệu ghép nhóm là $ 124{,}1 $}
+	{Phương sai của mẫu số liệu ghép nhóm là $ 566 $}
+	{\True Độ lệch chuẩn của mẫu số liệu ghép nhóm là $ 23{,}795 $}
+	\loigiai{
+Ta có bảng sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Số giờ nắng &{$[80; 98)$} &{$[98; 116)$} &{$[116; 134)$} &{$[134; 152)$} &{$[152; 170)$} \\
+		\hline Giá trị đại diện & $ 89 $ & $ 107 $ & $ 125 $ & $ 143 $ & $ 161 $ \\
+		\hline Số năm & $ 3 $ & $ 6 $ & $ 3 $ & $ 5 $ & $ 3 $ \\
+		\hline
+	\end{tabular}
+\end{center}
+\begin{itemchoice}
+			\itemch {\bf Sai.} Cỡ mẫu $ n=20 $.
+			\itemch {\bf Đúng.} Số trung bình của mẫu số liệu ghép nhóm là
+			$$ \overline{x}_2=\dfrac{3\cdot 89+6\cdot107+3\cdot125+5\cdot143+3\cdot161}{20}=124{,}1. $$
+			\itemch {\bf Sai.} Phương sai của mẫu số liệu ghép nhóm là
+			$$ S_2^2=\dfrac{1}{20}\left(3\cdot89^2+6\cdot107^2+3\cdot125^2+5\cdot143^2+3\cdot161^2 \right)-124{,}1^2=566{,}19.  $$
+			\itemch {\bf Đúng.} Độ lệch chuẩn của mẫu số liệu ghép nhóm là
+			$$ S_2= \sqrt{566{,}19}\approx23{,}795. $$
+		\end{itemchoice}	
+	}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+	Tốc độ của $20$ xe hơi khi đi qua một trạm kiểm tra tốc độ (đơn vị: km/h) được thống kê lại như sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline 
+		$ 42 $	& $ 43{,}4 $ & $ 43{,}4 $ & $ 46{,}5 $ & $ 46{,}7 $ & $ 46{,}8 $ & $ 47{,}5 $ & $ 47{,}7 $ & $ 48{,}1 $ & $ 48{,}4 $  \\ 
+		\hline 
+		$ 50{,}8 $	& $ 52{,}1 $ & $ 52{,}7 $ & $ 53{,}9 $ & $ 54{,}8 $ & $ 55{,}6 $ & $ 57{,}5 $ & $ 59{,}6 $ & $ 60{,}3 $ & $ 61{,}1 $ \\ 
+		\hline 
+	\end{tabular} 
+\end{center}
+	\choiceTF
+	{\True Cỡ mẫu của mẫu số liệu là $ 20 $}
+	{Khoảng biến thiên của mẫu số liệu ghép nhóm là $ 19 $}
+	{\True Khoảng tứ phân vị của mẫu số liệu ghép nhóm là $ 8{,}45 $}
+	{Độ lệch chuẩn của mẫu số liệu là $ 32{,}2 $}
+	\loigiai{
+Ta có bảng tần số ghép nhóm là
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Tốc độ (km/h) &{$[42;46)$} &{$[46;50)$} &{$[50;54)$} &{$[54;58)$} &{$[58;62)$} \\
+		\hline Số xe & $ 3 $ & $ 7 $ & $ 4 $ & $ 3 $ & $ 3 $ \\
+		\hline
+	\end{tabular}
+\end{center}
+		\begin{itemchoice}
+			\itemch {\bf Đúng.} Cỡ mẫu của mẫu số liệu là $ 20 $.
+			\itemch {\bf Sai.} Khoảng biến thiên của mẫu số liệu ghép nhóm là $ R_1=61{,}1-42=19{,}1 $.
+			\itemch {\bf Đúng.}\\
+			Ta có $ Q_1=\dfrac{46{,}7+46{,}8}{2}=46{,}75 $; $ Q_2=\dfrac{48{,}4+50{,}8}{2}=49{,}6 $; $ Q_3=\dfrac{54{,}8+55{,}6}{2}=55{,}2 $.\\
+			Từ đó suy ra khoảng tứ phân vị $ \Delta_Q=55{,}2-46{,}75=8{,}45 $.
+			\itemch {\bf Sai.} Số trung bình của mẫu số liệu trên là
+			$$ \overline{x}_1=\dfrac{42+43{,}4+\cdots+61{,}1}{20}=50{,}945. $$
+			Phương sai của mẫu số liệu trên là
+			$$ S_1^2=\dfrac{1}{20}\left( 42^2+43{,}4^2+\cdots+61{,}1^2   \right)-50{,}945^2\approx 32{,}2.  $$
+			Độ lệch chuẩn của mẫu số liệu trên là $ S_1\approx \sqrt{32{,}2} $.
+		\end{itemchoice}	
+	}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+	Bảng dưới đây thống kê cự li ném tạ của một vận động viên.
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Cự li (m) &{$[19;19{,}5)$} &{$[19{,}5;20)$} &{$[20;20{,}5)$} &{$[20{,}5;21)$} &{$[21;21{,}5)$} \\
+		\hline Tần số & $ 13 $ & $ 45 $ & $ 24 $ & $ 12 $ & $ 6 $ \\
+		\hline
+	\end{tabular}
+\end{center}
+	\choiceTF
+	{Cỡ mẫu của mẫu số liệu là $ 105 $}
+	{\True Số trung bình của mẫu số liệu ghép nhóm là $ 20{,}015 $}
+	{\True Phương sai của mẫu số liệu ghép nhóm là $ 0{,}277 $}
+	{Độ lệch chuẩn của mẫu số liệu ghép nhóm là $ 0{,}277 $}
+	\loigiai{
+Ta có bảng sau	
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Cự li (m) &{$[19;19{,}5)$} &{$[19{,}5;20)$} &{$[20;20{,}5)$} &{$[20{,}5;21)$} &{$[21;21{,}5)$} \\
+		\hline Cự li đại diện & $ 19{,}25 $ & $ 19{,}75 $ & $ 20{,}25 $ & $ 20{,}75 $ & $ 21{,}25 $ \\
+		\hline Tần số & $ 13 $ & $ 45 $ & $ 24 $ & $ 12 $ & $ 6 $ \\
+		\hline
+	\end{tabular}
+\end{center}
+		\begin{itemchoice}
+			\itemch {\bf Sai.} Cỡ mẫu là $ n=13+45+24+12+6=100 $.
+			\itemch {\bf Đúng} Số trung bình của mẫu số liệu ghép nhóm là
+			$$ \overline{x}=\dfrac{13\cdot19{,}25+45\cdot 19{,}75+24\cdot 20{,}25+12\cdot 20{,}75+6\cdot 21{,}25}{100}=20{,}015. $$
+			\itemch {\bf Đúng.} Phương sai của mẫu số liệu ghép nhóm là
+			$$ S^2=\dfrac{1}{100}\left(13\cdot19{,}25^2+45\cdot 19{,}75^2+24\cdot 20{,}25^2+12\cdot 20{,}75^2+6\cdot 21{,}25^2 \right) -20{,}015^2\approx 0{,}277. $$
+			\itemch {\bf Sai.} Độ lệch chuẩn của mẫu số liệu ghép nhóm là $ S\approx\sqrt{0{,}277} $.
+		\end{itemchoice}	
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B10-De2-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B10-De2-KQ]
+\caukq
+\begin{ex}%[2D3H2-2]
+Một giống cây xà cừ được trồng tại địa điểm $\mathrm{A}$. Người ta thống kê đường kính thân của một số cây xà cừ 5 năm tuổi ở bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Đường kính (cm) & {$[30 ; 32)$} & {$[32 ; 34)$} & {$[34 ; 36)$} & {$[36 ; 38)$} & {$[38 ; 40)$} \\
+	\hline Số cây & $25$ & $38$ & $20$ & $10$ & $7$ \\
+	\hline
+\end{tabular}
+\end{center}
+Tính phương sai của mẫu số liệu ghép nhóm về đường kính của thân cây xà cừ (làm tròn đến hàng phần chục).
+	\shortans[0]{$5{,}4$}
+\loigiai{Ta có bảng sau
+	\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Đường kính (cm) & {$[30 ; 32)$} & {$[32 ; 34)$} & {$[34 ; 36)$} & {$[36 ; 38)$} & {$[38 ; 40)$} \\
+		\hline Giá trị đại diện & $31$ & $33$ & $35$ & $37$ & $39$ \\
+		\hline Số cây & $25$ & $38$ & $20$ & $10$ & $7$ \\
+		\hline
+	\end{tabular}
+	\end{center}	
+Cõ mẫu $n=25+38+20+10+7=100$.\\
+Đường kính trung bình của thân cây xà cừ là
+	$$
+	\overline{x}=\dfrac{25\cdot31+38\cdot33+20\cdot35+10\cdot37+7\cdot39}{100}=33{,}72.
+	$$
+Phương sai của mẫu số liệu ghép nhóm về đường kính của thân cây xà cừ là
+	$$
+	S^2=\dfrac{1}{100}\left(25.31^2+38.33^2+20.35^2+10.37^2+7.39^2\right)-(33{,}72)^2 \approx 5{,}4.
+	$$}
+\end{ex}
+
+
+\begin{ex}%[2D3H2-2]
+Tốc độ của $20$ xe hơi khi đi qua một trạm kiểm tra tốc độ (đơn vị km/h) được thống kê lại như sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Tốc độ $(\mathrm{km} / \mathrm{h})$ & {$[42 ; 46)$} & {$[46 ; 50)$} & {$[50 ; 54)$} & {$[54 ; 58)$} & {$[58 ; 62)$} \\
+	\hline Số xe & $3$ & $7$ & $4$ & $3$ & $3$ \\
+	\hline
+\end{tabular}
+\end{center}
+Tính độ lệch chuẩn của mẫu số liệu trên (làm tròn kết quả đến hàng phần trăm).
+	\shortans[0]{5,15}
+\loigiai{Ta có bảng tần số ghép nhóm như sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Tốc độ (km/h) & {$[42 ; 46)$} & {$[46 ; 50)$} & {$[50 ; 54)$} & {$[54 ; 58)$} & {$[58 ; 62)$} \\
+	\hline Giá trị đại điện & $44$ & $48$ & $52$ & $56$ & $60$ \\
+	\hline Số xe & $3$ & $7$ & $4$ & $3$ & $3$ \\
+	\hline
+\end{tabular}
+\end{center}}
+Số trung bình của mẫu số liệu ghép nhóm là
+$$
+\overline{x}=\dfrac{3\cdot44+7\cdot48+4\cdot52+3\cdot56+3\cdot60}{20}=51{,}2.
+$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$
+S^2=\frac{1}{20}\left[3\cdot44^2+7\cdot48^2+4\cdot52^2+3\cdot56^2+3\cdot60^2+\right]-(51{,}2)^2=26{,}56.
+$$
+Độ lệch chuẩn của mẫu số liệu ghép nhóm là
+$$
+S=\sqrt{S^2}=\sqrt{26,56} \approx 5{,}15.
+$$
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+Kết quả điều tra tổng thu nhập trong năm 2024 của một số hộ gia đình ở thành phố Nha Trang được ghi lại ở bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline 
+		Tống thu nhập (triệu đồng)& {$[200 ; 250)$} & {$[250 ; 300)$} & {$[300 ; 350)$} & {$[350 ; 400)$} & {$[400 ; 450)$} \\
+	\hline Số hộ gia đình & $24$ & $62$ & $34$ & $21$ & $9$ \\
+	\hline
+\end{tabular}
+\end{center}
+Tính phương sai của mẫu số liệu trên (làm tròn kết quả đến hàng đơn vị).
+	\shortans[0]{3043}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+	\hline 
+	Tống thu nhập (triệu đồng)& {$[200 ; 250)$} & {$[250 ; 300)$} & {$[300 ; 350)$} & {$[350 ; 400)$} & {$[400 ; 450)$} \\
+	\hline Giá trị đại diện & $225$ & $275$ & $325$ & $375$ & $425$ \\
+	\hline Số hộ gia đình & $24$ & $62$ & $34$ & $21$ & $9$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu ghép nhóm là
+$$ \overline{x}=\dfrac{24\cdot 225+62\cdot275+34\cdot325+21\cdot375+9\cdot425}{150}=\dfrac{904}{3}.$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$S^2=\dfrac{1}{150}\left[24\cdot 225^2 +62\cdot275^2 +34\cdot325^2 +21\cdot375^2 +9\cdot425^2\right]-\left(\dfrac{904}{3}\right)^2\approx3043.$$
+}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+Mỗi ngày anh $A$ đều đi bộ để rèn luyện sức khỏe. Quãng đường đi bộ mỗi ngày (đơn vị $\mathrm{km}$) của anh A trong 20 ngày được thống kê 1ại ở bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Quãng đường $(\mathrm{km})$ & {$[2{,}7 ; 3{,}0)$} & {$[3{,}0 ; 3{,}3)$} & {$[3{,}3 ; 3{,}6)$} & {$[3{,}6 ; 3{,}9)$} & {$[3{,}9 ; 4{,}2)$} \\
+	\hline Số ngày & 3 & 6 & 5 & 4 & 2 \\
+	\hline
+\end{tabular}
+\end{center}
+Tính phương sai của mẫu số liệu trên (làm tròn kết quả đến hàng phần chục).
+\shortans[0]{0,1}
+\loigiai{Ta có bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+		\hline Quãng đường $(\mathrm{km})$ & {$[2{,}7 ; 3{,}0)$} & {$[3{,}0; 3{,}3)$} & {$[3{,}3 ; 3{,}6)$} & {$[3{,}6 ; 3{,}9)$} & {$[3{,}9 ; 4{,}2)$} \\
+		\hline Giá trị đại diện & $2{,}85$ & $3{,}15$ & $3{,}45$ & $3{,}75$ & $4{,}05$ \\
+		\hline Số ngày & $3$ & $6$ & $5$ & $4$ & $2$ \\
+		\hline
+	\end{tabular}
+	\end{center}
+Số trung bình của mẫu số liệu ghép nhóm là
+	$$
+	\overline{x}=\dfrac{3\cdot2{,}85+6\cdot3{,}15+5\cdot3{,}45+4\cdot3{,}75+2\cdot4{,}05}{20}=3{,}39.
+	$$
+Phương sai của mẫu số liệu ghép nhóm là
+	$$
+	S^2=\dfrac{1}{20}\left[3 \cdot(2{,}85)^2+6 \cdot(3,15)^2+5 \cdot(3{,}45)^2+4 \cdot(3{,}75)^2+2 \cdot(4{,}05)^2\right]-(3{,}39)^2\approx0{,}1.
+	$$
+}
+\end{ex}
+
+\begin{ex}%[2D3H2-2]
+Bạn Tùng rất thích bóng đá hiện đại. Thời gian tập bóng mỗi ngày trong thời gian gần đây của bạn được thống kê lại ở bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Thời gian (phút) & {$[20 ; 25)$} & {$[25 ; 30)$} & {$[30 ; 35)$} & {$[35 ; 40)$} & {$[40 ; 45)$} \\
+	\hline Số ngày & $6$ & $6$ & $4$ & $1$ & $1$ \\
+	\hline
+\end{tabular}
+\end{center}
+Tính phương sai của mẫu số liệu trên (làm tròn đến hàng phần chục).
+	\shortans[0]{31,3}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline Thờ gian (phút) & {$[20 ; 25)$} & {$[25 ; 30)$} & {$[30 ; 35)$} & {$[35 ; 40)$} & {$[40 ; 45)$} \\
+	\hline Giá trị đại diện & $22{,}5$ & $27{,}5$ & $32{,}5$ & $37{,}5$ & $42{,}5$ \\
+	\hline Số ngày & $6$ &$ 6$ & $4$ & $1$ & $1$ \\
+	\hline
+\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu ghép nhóm là
+$$
+\overline{x}=\dfrac{6\cdot22{,}5+6 \cdot 27{,}5+4\cdot32{,}5+1\cdot37{,}5+1\cdot42{,}5}{18}=\dfrac{85}{3} .
+$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$
+S^2=\dfrac{1}{18}\left[6 \cdot(22{,}5)^2+6 \cdot(27{,}5)^2+4 \cdot(32{,}5)^2+1 \cdot(37{,}5)^2+1 \cdot(42{,}5)^2\right]-\left(\dfrac{85}{3}\right)^2=31{,}3.
+$$
+}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+Một bác tài xế thống kê lại độ dài quãng đường (đơn vị km) bác đã lái xe mỗi ngày trong một tháng ở bảng sau
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline \begin{tabular}{c} 
+		Độ dài quãng đường \\
+		$(\mathrm{km})$
+	\end{tabular} & {$[50 ; 100)$} & {$[100 ; 150)$} & {$[150 ; 200)$} & {$[200 ; 250)$} & {$[250 ; 300)$} \\
+	\hline Số ngày & $5$ & $10$ & $9$ & $4$ & $2$ \\
+	\hline
+\end{tabular}
+\end{center}
+Tính độ lệch chuẩn của mẫu số liệu (làm tròn đến hàng phần chục).
+\shortans[0]{55,7}
+\loigiai{
+Ta có bảng sau
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline \begin{tabular}{c} 
+			Độ dài quãng đường \\
+			$(\mathrm{km})$
+		\end{tabular} & {$[50 ; 100)$} & {$[100 ; 150)$} & {$[150 ; 200)$} & {$[200 ; 250)$} & {$[250 ; 300)$} \\
+		\hline Giá trị đại diện & $75$ & $125$ & $175$ & $225$ & $275$ \\
+		\hline Số ngày & $5$ & $10$ & $9$ & $4$ & $2$ \\
+		\hline
+	\end{tabular}
+\end{center}
+Số trung bình của mẫu số liệu ghép nhóm là
+$$
+\overline{x}=\dfrac{5\cdot75+10\cdot125+9\cdot175+4\cdot225+2\cdot275}{30}=155.
+$$
+Phương sai của mẫu số liệu ghép nhóm là
+$$
+S^2=\dfrac{1}{30}\left[5\cdot75^2+10\cdot125^2+9\cdot175^2+4\cdot225^2+2\cdot275^2\right]-155^2=3100.
+$$
+Độ lệch chuẩn của mẫu số liệu ghép nhóm là $S=\sqrt{S^2}=\sqrt{3100} \approx 55{,}7$.
+}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+	Dựa vào bảng tần số mẫu số liệu ghép nhóm sau, tìm phương sai của mẫu số liệu.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline Nhóm & {$[30 ; 40)$} & {$[40 ; 50)$} & {$[50 ; 60)$} & {$[60 ; 70)$} & {$[70 ; 80)$} & {$[80 ; 90)$} \\
+			\hline Tần số & $2$ & $10$ & $16$ & $8$ & $2$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+\shortans[]{$132{,}3$}
+	\loigiai{
+		Ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline Nhóm & {$[30 ; 40)$} & {$[40 ; 50)$} & {$[50 ; 60)$} & {$[60 ; 70)$} & {$[70 ; 80)$} & {$[80 ; 90)$} \\
+				\hline Giá trị đại diện & {$30{,}5$} & {$40{,}5$} & {$50{,}5$} & {$60{,}5$} & {$70{,}5$} & {$80{,}5$} \\
+				\hline Tần số & $2$ & $10$ & $16$ & $8$ & $2$ & $2$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Sử dụng máy tính bỏ túi ta có phương sai $ S^2\approx 132{,}3 $.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B10-De2-KQ}

@@ -1,0 +1,680 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-OTC3-DE2]
+\caulc
+\begin{ex}%[2D3N1-1]
+	Phát biểu nào sau đây \textbf{sai}?
+	\choice
+	{Khoảng biến thiên đặc trưng cho độ phân tán của toàn bộ mẫu số liệu}
+	{Khoảng tứ phân vị đặc trưng cho độ phân tán của một nửa các số liệu, có giá trị thuộc đoạn từ $Q_1$ đến $Q_3$ trong mẫu}
+	{\True Khoảng tứ phân vị bị ảnh hưởng bởi các giá trị rất lớn hoặc rất bé trong mẫu}
+	{Khoảng tứ phân vị được dùng để xác định các giá trị ngoại lệ trong mẫu, đó là các giá trị quá nhỏ hay quá lớn so với đa số các giá trị trong mẫu}
+	\loigiai{}
+\end{ex}
+\begin{ex}%[2D3N1-2]
+	Cho một mẫu dữ liệu đã được sắp xếp theo thứ tự không giảm $x_1 \leq x_2 \leq x_3 \leq \ldots \leq x_n$. Khi đó khoảng biến thiên $R$ của mẫu số liệu bằng
+	\choice
+	{\True $R=x_n-x_1$}
+	{$R=x_1-x_n$}
+	{$R=\dfrac{x_n-x_1}{2}$}
+	{$R=\dfrac{x_1-x_n}{2}$}
+	\loigiai{}
+\end{ex}
+\begin{ex}%[2D3H1-2]
+	Kết quả điều tra tổng thu nhập trong năm $2022$ của một số hộ gia đình trong một địa phương được ghi lại ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Tổng thu nhập (triệu đồng) & $[200;250)$ & $[250;300)$ & $[300;350)$ & $[350;400)$ & $[400;450)$ \\
+			\hline
+			Số hộ gia đình & $24$ & $62$ & $34$ & $21$ & $9$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng biến thiên của mẫu số liệu trên là
+	\choice
+	{\True $250$}
+	{$50$}
+	{$25$}
+	{$150$}
+	\loigiai{
+		Khoảng biến thiên của mẫu số liệu trên là $R=450-200=250$.
+	}
+\end{ex}
+
+\begin{ex}%[2D3H1-3]
+	Thống kê điểm thi đánh giá năng lực của một trường THPT qua thang điểm $100$ được cho ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Điểm & $[0;20)$ & $[20;40)$ & $[40;60)$ & $[60;80)$ & $[80;100)$ \\
+			\hline
+			Số học sinh & $25$ & $35$ & $37$ & $15$ & $8$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Trung vị của mẫu số liệu ghép nhóm thuộc khoảng nào sau đây?
+	\choice
+	{$[0;20)$}
+	{$[20;40)$}
+	{\True $[40;60)$}
+	{$[60;80)$}
+	\loigiai{
+		Sắp xếp giá trị theo thứ tự không giảm $x_1\leq x_2\leq \ldots \leq x_{120}$. \\
+		Trung vị thuộc nhóm chứa $\dfrac{x_{60}+x_{61}}{2} \in [40;60]$.
+	}
+\end{ex}
+\begin{ex}%[2D3H1-3]
+	Đo cân nặng của $1$ lớp gồm $40$ học sinh lớp $12$B được cho ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Khối lượng (kg) & $[40;45)$ & $[45;50)$ & $[50;55)$ & $[55;60)$ & $[60;65)$ & $[65;70)$ & $[70;75)$ & $[75;80)$ \\
+			\hline
+			Số học sinh & $4$ & $13$ & $7$ & $5$ & $6$ & $2$ & $1$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm thuộc khoảng nào sau đây?
+	\choice
+	{$[40;45]$}
+	{\True $[45;50]$}
+	{$[50;55]$}
+	{$[55;60]$}
+	\loigiai{
+		Sắp xếp giá trị theo thứ tự không giảm $x_1\leq x_2\leq \ldots \leq x_{40}$. \\
+		Tứ phân vị thứ nhất thuộc nhóm chứa giá trị $\dfrac{x_{10}+x_{11}}{2} \in [45;50]$.
+	}
+\end{ex}
+\begin{ex}%[2D3H1-1]
+	Một cuộc khảo sát đã tiến hành xác định tuổi (theo năm) của $120$ chiếc ô tô. Kết quả điểu tra được cho trong bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Số tuổi (theo năm) & $[0;4)$ & $[4;8)$ & $[8;12)$ & $[12;16)$ & $[16;20)$ \\
+			\hline
+			Số ô tô & $23$ & $25$ & $37$ & $26$ & $19$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Có bao nhiêu ô tô có độ tuổi từ $12$ đến dưới $16$?
+	\choice
+	{$23$}
+	{$25$}
+	{$37$}
+	{\True $26$}
+	\loigiai{}
+\end{ex}
+\begin{ex}%[2D3H2-2]
+	Anh Ba ghi nhận lại kết quả ném lao của mình ở cự li $30$ lần được ghi ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Cự li (m) & $[69{,}2;70)$ & $[70;70{,}8)$ & $[70{,}8;71{,}6)$ & $[71{,}6;72{,}4)$ & $[72{,}4;73{,}2)$ \\
+			\hline
+			Số lần & $4$ & $2$ & $9$ & $10$ & $5$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Cự li trung bình mỗi lần ném của anh Ba là
+	\choice
+	{$72{,}5$}                  
+	{$70{,}5$}
+	{$69{,}5$}                  
+	{\True $71{,}5$}
+	\loigiai{
+		Ta có bảng số liệu mới sau:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				Cự li (m) & $[69{,}2;70)$ & $[70;70{,}8)$ & $[70{,}8;71{,}6)$ & $[71{,}6;72{,}4)$ & $[72{,}4;73{,}2)$ \\
+				\hline
+				GT đại diện $C_i$ & $69{,}6$ & $70{,}4$ & $71{,}2$ & $72$ & $72{,}8$ \\
+				\hline
+				Số lần & $4$ & $2$ & $9$ & $10$ & $5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Cự ly trung bình $\overline{x}=\dfrac{69{,}6\cdot 4+70{,}4\cdot 2+71{,}2\cdot 9+72\cdot 10+72{,}8\cdot 5}{30}\approx 71{,}5$.
+	}
+\end{ex}
+\begin{ex}%[2D3H1-3]
+	Bảng sau thống kê cân nặng của $50$ quả xoài Thanh Ca được lựa chọn ngẫu nhiên sau khi thu hoạch ở một nông trường
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Cân nặng (g) & $[250;290)$ & $[290;330)$ & $[330;370)$ & $[370;410)$ & $[410;450)$\\
+			\hline
+			Số quả xoài & $3$ & $13$ & $18$ & $11$ & $5$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm trên là
+	\choice
+	{$\dfrac{4149}{13}$}
+	{\True $\dfrac{4150}{13}$}
+	{$\dfrac{4151}{13}$}
+	{$\dfrac{4152}{13}$}
+	\loigiai{
+		Cỡ mẫu $n=50$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{50}$ là mẫu số liệu gốc gồm cân nặng của $50$ quả xoài được xếp theo thứ tự không giảm.\\
+		Ta có $x_1$, $x_2$, $x_3\in[250;290)$; $x_4$, \ldots, $x_{16}\in[290;330)$; $x_{17}$, \ldots, $x_{34}\in[330;370)$; \break$x_{35}$, \ldots, $x_{45}\in[370;410)$; $x_{46}$, \ldots, $x_{50}\in[410;450)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $x_{13}\in[290;330)$.\\
+		Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+		$$Q_1=290+\dfrac{\dfrac{50}{4}-3}{13}\cdot(330-290)=\dfrac{4150}{13}.$$
+	}
+\end{ex}
+\begin{ex}%[TeX hóa SGK CTST 12]%[Lê Đạt]%[2D4H2-2]
+	Cân nặng của một số quả mít trong một khu vườn được thống kê ở bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline \begin{tabular}{c}
+				\textbf{Cân nặng (kg)}
+			\end{tabular} &{$[4; 6)$} &{$[6; 8)$} &{$[8; 10)$} &{$[10; 12)$} &{$[12; 14)$} \\
+			\hline \textbf{Số quả mít} & $6$ & $12$ & $19$ & $9$ & $4$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Độ lệch chuẩn của mẫu số liệu ghép nhóm trên gần với giá trị nào sau đây?
+	\choice
+	{$2{,}51$}
+	{$1{,}12$}
+	{\True $2{,}19$}
+	{$2{,}67$}
+	\loigiai{
+		Ta có bảng thống kê cân nặng của các quả mít theo giá trị đại diện
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline \begin{tabular}{c}
+					\textbf{Cân nặng đại diện (kg)}
+				\end{tabular} &{$5$} &{$7$} &{$9$} &{$11$} &{$13$} \\
+				\hline \textbf{Số quả mít} & $6$ & $12$ & $19$ & $9$ & $4$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Cỡ mẫu $ n=6+12+19+9+4=50 $.\\
+		Cân nặng trung bình của các quả mít là 
+		$$ \overline{x}=\dfrac{6\cdot 5+12\cdot7+19\cdot9+9\cdot11+4\cdot13}{50}=8{,}72. $$
+		Phương sai biểu thị cân nặng của các quả mít là
+		$$ S^2=\dfrac{1}{50}\left(6\cdot5^2+12\cdot 7^2+19\cdot9^2+9\cdot11^2+4\cdot13^2 \right)-8{,}72^2\approx4{,}80.  $$
+		Độ lệch chuẩn biểu thị cân nặng của các quả mít là
+		$ S\approx \sqrt{4{,}80}\approx 2{,}19$.
+	}
+\end{ex}
+\begin{ex}%[2D4H2-2]
+	Biểu đồ dưới đây mô tả kết quả điều tra về mức lương khởi điểm (đơn vị: triệu đồng) của một số công nhân ở hai khu vực $A$ và $ B $.
+	\begin{center}
+		\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=0.85,line width=1pt]
+			\draw[->] (0,0)--(0,9)node[left]{(\text{Số công nhân})};
+			\foreach \y in {1,2,3,4,5,6,7,8}
+			\draw[shift={(0,\y)}] (0,0)--(-2pt,0) node[left]{\scriptsize ${\y}$};
+			\path (6,10.5) node {
+				$\begin{array}{c}
+					\normalsize{\textbf{Mức lương khởi điểm của công nhân ở hai khu vực $A$ và $B$}}
+				\end{array}$
+			};
+			
+			\foreach \y in {1,2,3,4,5,6,7,8}{
+				\draw[dashed,thin,line width=0.01pt] (0,\y)--(13,\y);
+			}
+			\draw[line cap=round,pattern=north east lines] (10,6)--(10,7)--(9,7)--(9,6)--(10,6) node[above right]{\text{Khu vực $ B $}};
+			\draw[line cap=round,pattern=dots] (10,8)--(10,9)--(9,9)--(9,8)--(10,8) node[above right]{\text{Khu vực $ A $}};
+			%% cột
+			%		\draw[fill=cyan,draw=none] (0,0)--(0,0.8)--(1,0.8)node[midway,above]{$ 8 $}--(1,0)--cycle;
+			\draw[line cap=round,pattern=dots] (1,0)--(1,4)--(2,4)node[midway,above]{$  $}--(2,0)--cycle;
+			\draw[line cap=round,pattern=north east lines] (2,0)--(2,3)--(3,3)node[midway,above]{$  $}--(3,0)--cycle;
+			\draw[line cap=round,pattern=dots] (3,0)--(3,5)--(4,5)node[midway,above]{$  $}--(4,0)--cycle;
+			\draw[line cap=round,pattern=north east lines] (4,0)--(4,6)--(5,6)node[midway,above]{$  $}--(5,0)--cycle;
+			\draw[line cap=round,pattern=dots] (5,0)--(5,5)--(6,5)node[midway,above]{$  $}--(6,0)--cycle;
+			\draw[line cap=round,pattern=north east lines] (6,0)--(6,5)--(7,5)node[midway,above]{$  $}--(7,0)--cycle;
+			\draw[line cap=round,pattern=dots] (7,0)--(7,4)--(8,4)node[midway,above]{$  $}--(8,0)--cycle;
+			\draw[line cap=round,pattern=north east lines] (8,0)--(8,5)--(9,5)node[midway,above]{$  $}--(9,0)--cycle;
+			\draw[line cap=round,pattern=dots] (9,0)--(9,2)--(10,2)node[midway,above]{$  $}--(10,0)--cycle;
+			\draw[line cap=round,pattern=north east lines] (10,0)--(10,1)--(11,1)node[midway,above]{$  $}--(11,0)--cycle;
+			%		%% miền
+			\node [below] at (2,0){$ [5;6)$};
+			\node [below] at (4,0){$ [6;7)$};
+			\node [below] at (6,0){$ [7;8)$};
+			\node [below] at (8,0){$ [8;9)$};
+			\node [below] at (10,0){$ [9;10)$};
+			\draw[->] (0,0)node [below left=-2pt]{$ O $}--(13,0)node[below]{(\text{Mức lương})};
+			%		\draw[pattern=horizontal lines,bar width=8mm]plot coordinates{(1,10)};
+		\end{tikzpicture}
+	\end{center}
+	Kết luận nào sau đây là đúng về mức lương khởi điểm nếu so sánh theo độ lệch chuẩn?
+	\choice
+	{Lương khởi điểm hai khu vực đồng đều như nhau}
+	{Lương khởi điểm ở khu vực A đồng đều hơn khu vực B}
+	{\True Lương khởi điểm ở khu vực B đồng đều hơn khu vực A}
+	{Không thể song sánh}
+	\loigiai{
+		Ta có bảng sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline Mức lương &{$[5; 6)$} &{$[6; 7)$} &{$[7; 8)$} &{$[8; 9)$} &{$[9; 10)$} \\
+				\hline Mức lương đại diện & $ 5{,}5 $ & $ 6{,}5 $ & $ 7{,}5 $ & $ 8{,}5 $ & $ 9{,}5 $ \\
+				\hline Khu vực $ A $ & $ 4 $ & $ 5 $ & $ 5 $ & $ 4 $ & $ 2 $ \\
+				\hline Khu vực $ B $ & $ 3 $ & $ 6 $ & $ 5 $ & $ 5 $ & $ 1 $ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{itemize}
+			\item Xét mẫu số liệu của khu vực A\\
+			Cỡ mẫu là $ n_A=4+5+5+4+2=20 $.\\
+			Lương khởi điểm trung trung bình ở khu vực A là
+			$$ \overline{x}_A=\dfrac{4\cdot 5{,}5+5\cdot 6{,}5+5\cdot 7{,}5+4\cdot 8{,}5+2\cdot 9{,}5}{20}=7{,}25. $$
+			Phương sai biểu thị lương khởi điểm ở khu vực A là
+			$$ S_A^2=\dfrac{1}{20}\left( 4\cdot 5{,}5^2+5\cdot 6{,}5^2+5\cdot 7{,}5^2+4\cdot 8{,}5^2+2\cdot 9{,}5^2\right)-7{,}25^2=1{,}5875.  $$
+			Độ lệch chuẩn biểu thị lương khởi điểm ở khu vực A là $ S_A=\sqrt{1{,}5875} $.
+			\item Xét mẫu số liệu của khu vực B\\
+			Cỡ mẫu là $ n_B=3+6+5+5+1=20 $.\\
+			Lương khởi điểm trung trung bình ở khu vực B
+			$$ \overline{x}_B=\dfrac{3\cdot 5{,}5+6\cdot 6{,}5+5\cdot 7{,}5+5\cdot 8{,}5+1\cdot 9{,}5}{20}=7{,}25. $$
+			Phương sai biểu thị lương khởi điểm ở khu vực B là
+			$$ S_B^2=\dfrac{1}{20}\left( 3\cdot 5{,}5^2+6\cdot 6{,}5^2+5\cdot 7{,}5^2+5\cdot 8{,}5^2+1\cdot 9{,}5^2\right)-7{,}25^2=1{,}2875.  $$
+			Độ lệch chuẩn biểu thị lương khởi điểm ở khu vực B là $ S_B=\sqrt{1{,}2875} $.
+		\end{itemize}
+		Do $S_A > S_B$ nên nếu so sánh theo độ lệch chuẩn của mẫu số liệu ghép nhóm thì mức lương khởi điểm của công nhân khu vực $B$ đồng đều hơn của công nhân khu vực $A$.
+		%		\begin{luuy}
+			%			Với các mẫu số liệu ghép nhóm có cùng số trung bình (hoặc xấp xỉ nhau), ta thường sử dụng phương sai và độ lệch chuẩn để so sánh mức độ phân tán của các mẫu số liệu đó.
+			%		\end{luuy}
+	}
+\end{ex}
+\begin{ex}%[2D3H1-3]
+	Kết quả đo chiều cao của $100$ cây keo $3$ năm tuổi tại một nông trường được cho ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Chiều cao (m) & $[8{,}4;8{,}6)$ & $[8{,}6;8{,}8)$ & $[8{,}8;9{,}0)$ & $[9{,}0;9{,}2)$ & $[9{,}2;9{,}4)$ \\
+			\hline
+			Số cây & $5$ & $12$ & $25$ & $44$ & $14$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm trên là
+	\choice
+	{$0{,}280$}
+	{$0{,}282$}
+	{$0{,}284$}
+	{\True $0{,}286$}
+	\loigiai{
+		Ta có cỡ mẫu $n=100$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{100}$ là mẫu số liệu gồm chiều cao của $100$ cây keo.\\
+		Ta có: $x_1$, \ldots, $x_5\in[8{,}4;8{,}6)$; $x_6$, \ldots, $x_{17}\in[8{,}6;8{,}8)$; $x_{18}$, \ldots, $x_{42}\in[8{,}8;9{,}0)$; $x_{43}$, \ldots, $x_{86}\in[9{,}0;9{,}2)$; $x_{87}$, \ldots, $x_{100}\in[9{,}2;9{,}4)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu là $\dfrac{x_{25}+x_{26}}{2}\in[8{,}8;9{,}0)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+		$$Q_1=8{,}8+\dfrac{\dfrac{100}{4}-(5+12)}{25}\cdot(9{,}0-8{,}8)=8{,}864.$$
+		Tứ phân vị thứ ba của mẫu số liệu là $\dfrac{x_{75}+x_{76}}{2}\in[9{,}0;9{,}2)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+		$$Q_3=9{,}0+\dfrac{\dfrac{3\cdot100}{4}-(5+12+25)}{44}\cdot(9{,}2-9{,}0)=9{,}15.$$
+		Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là $\Delta_Q=Q_3-Q_1=0{,}286$.
+	}
+\end{ex}
+\begin{ex}%[2D3H1-3]
+	Biểu đồ dưới đây biểu diễn số lượt khách hàng đặt bàn qua hình thức trực tuyến mỗi ngày trong quý III năm $2022$ của một nhà hàng. Cột thứ nhất biểu diễn số ngày có từ $1$ đến dưới $6$ lượt đặt bàn; cột thứ hai biểu diễn số ngày có từ $6$ đến dưới $11$ lượt đặt bàn;\ldots.
+	\begin{center}
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth,x=0.3cm]
+			\draw[->](0,0)--(0,8)node[left]{\textbf{Số ngày}};
+			\draw[->](0,0)--(35,0)node[below]{\textbf{Số lượt đặt bàn}};
+			\foreach \i in{1,...,7} \pgfmathsetmacro{\gti}{int(5*(\i))}
+			\draw [dotted](0,\i) circle(1pt)node[left]{$\gti$} -- (30,\i);
+			\foreach \i/\a/\b in {1/15/20,2/20/25,3/25/30,4/30/35,5/35/40}
+			\foreach \i/\j in {1/14,6/30,11/25,16/18,21/5}
+			{
+				\draw[fill=blue!60](\i,0)rectangle(\i+5,\j/5);
+				\draw (\i,0) node [below] {$\i$};
+				\draw (\i+2.5,\j/5) node [above] {$\j$};
+			}
+			\draw (26,0) node [below] {$26$};
+		\end{tikzpicture}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm cho bởi biểu đồ trên là
+	\choice
+	{$8{,}4$}
+	{\True $8{,}5$}
+	{$8{,}6$}
+	{$8{,}7$}
+	\loigiai{
+		Dựa vào biểu đồ, ta lập được bảng ghép nhóm như bên dưới.
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				Lượt đặt bàn & $[1;6)$ & $[6;11)$ & $[11;16)$ & $[16;21)$ & $[21;26)$ \\
+				\hline
+				Số ngày & $14$ & $30$ & $25$ & $18$ & $5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Ta có cỡ mẫu $n=92$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{92}$ là mẫu số liệu đã cho.\\
+		Ta có: $x_1$, \ldots, $x_{14}\in[1;6)$; $x_{15}$, \ldots, $x_{44}\in[6;11)$; $x_{45}$, \ldots, $x_{69}\in[11;16)$; $x_{70}$, \ldots, $x_{87}\in[16;21)$; $x_{88}$, \ldots, $x_{92}\in[21;26)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu là $\dfrac{x_{23}+x_{24}}{2}\in[6;11)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu là
+		$$Q_1=6+\dfrac{\dfrac{92}{4}-14}{30}\cdot(11-6)=7{,}5.$$
+		Tứ phân vị thứ ba của mẫu số liệu là $\dfrac{x_{69}+x_{70}}{2}$ với $x_{69}\in[11;16)$ và $x_{70}\in[16;21)$. Do đó, tứ phân vị thứ ba của mẫu số liệu là $Q_3=16$.\\
+		%Đoạn này sách giáo khoa 12 không đề cập, tôi lấy từ kiến thức của sách CTST lớp 11.
+		Vậy khoảng tứ phân vị của mẫu số liệu là $\Delta_Q=Q_3-Q_1=8{,}5$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC3-DE2}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-OTC3-DE2]
+\begin{ex}%[2D3B1-4]%[2D3H1-4]%[2D3V1-4]
+	Thời gian luyện tập trong một ngày (tính theo giờ) của một số vận động viên được ghi lại ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian luyện tập (giờ) & {$[0 ; 2)$} & {$[2 ; 4)$} & {$[4 ; 6)$} & {$[6 ; 8)$} & {$[8 ; 10)$} \\
+			\hline Số vận động viên & 3 & 8 & 12 & 12 & 4 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{Có tất cả $40$ vận động viên được khảo sát}
+	{\True Khoảng biến thiên mẫu mẫu số liệu trên là $R=10$ (giờ)}
+	{\True Tứ phân vị thứ hai của mẫu số liệu trên là $Q_2=\dfrac{65}{12}$}
+	{Khoảng tứ phân vị của mẫu số liệu trên là $\Delta_Q=\dfrac{25}{48}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vì số vận động viên được khảo sát là $n=3+8+12+12+4=39$.
+			\itemch Đúng. Vì khoảng biến thiên $R=10-0=10$ (giờ).
+			\itemch Đúng. Vì tứ phân vị thứ hai của dãy số liệu $x_1 ; x_2 ; \ldots ; x_{39}$ là $x_{20} \in[4 ; 6)$. Do đó tứ phân vị thứ hai của mẫu số liệu ghép nhóm là
+			$$
+			Q_2=4+\dfrac{\dfrac{2\cdot 39}{4}-(3+8)}{12} \cdot(6-4)=\dfrac{65}{12}.
+			$$
+			\itemch Sai. Vì tứ phân vị thứ nhât của dãy số liệu $x_1 ; x_2 ; \ldots ; x_{39}$ là $x_{10} \in[2 ; 4)$. Do đó tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+			$$
+			Q_1=2+\dfrac{\dfrac{1\cdot 39}{4}-3}{8} \cdot(4-2)=\dfrac{59}{16}.
+			$$
+			Tứ phân vị thứ ba của dãy số liệu $x_1 ; x_2 ; \ldots ; x_{39}$ là $x_{30} \in[6 ; 8)$. Do đó tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+			$$
+			Q_3=6+\dfrac{\dfrac{3 \cdot 39}{4}-(3+8+12)}{12} \cdot(8-6)=\frac{169}{24}.
+			$$
+			Vậy khoảng tứ phân vị $\Delta _ Q=Q_3-Q_1=\dfrac{169}{24}-\dfrac{59}{16}=\dfrac{161}{48}$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D3B1-4]%[2D3H1-4]%[2D3V1-4]
+	Bảng tần số ghép nhóm số liệu dưới đây thống kê cân nặng của 40 học sinh lớp 12A trong một trường trung học phổ thông (đơn vị: kilôgam).
+	\begin{center}
+		$\begin{array}{|c|c|c|}
+			\hline \text { Nhóm } & \text { Tần số } & \begin{array}{c}
+				\text { Tần số } \\
+				\text { tích luỹ }
+			\end{array} \\
+			\hline[30 ; 40) & 2 & 2 \\
+			{[40 ; 50)} & 10 & 12 \\
+			{[50 ; 60)} & 16 & 28 \\
+			{[60 ; 70)} & 8 & 36 \\
+			{[70 ; 80)} & 2 & 38 \\
+			{[80 ; 90)} & 2 & 40 \\
+			\hline & n=40 & \\
+			\hline
+		\end{array}$
+	\end{center}
+	\choiceTF
+	{\True Cân nặng trung bình của $40$ học sinh trên là $56$ kg}
+	{Tứ phân vị thứ hai của mẫu số liệu trên là $Q_2=50$ kg}
+	{Khoảng tứ phân vị của mẫu số liệu trên là $\Delta_Q=15$ kg}
+	{\True Trong bảng số liệu trên học sinh có cân nặng khoảng $54$ kg chiếm nhiều nhất}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Vì cân nặng trung bình $$\bar{x}=\dfrac{35\cdot 2+45\cdot 10+55\cdot 16+65\cdot 8+75\cdot 2+85\cdot 2}{40}=56.$$
+			\itemch Sai. Vì tứ phân vị thứ hai của dãy số liệu $x_1 ; x_2 ; \ldots ; x_{40}$ thuộc $[50 ; 60)$. Do đó tứ phân vị thứ hai của mẫu số liệu ghép nhóm là
+			$$
+			Q_2=50+\dfrac{\dfrac{2\cdot 40}{4}-(2+10)}{16} \cdot(60-50)=55.
+			$$
+			\itemch Sai. Vì tứ phân vị thứ nhất $Q_1=48$ (kg) và tứ phân vị thứ ba $Q_3=62{,}5$ (kg). \\
+			Nên $\Delta_Q=62{,}5-48=14{,}5$.
+			\itemch Đúng. Vì theo mẫu số liệu trên ta có mốt 
+			$$M_{\circ}=50+\dfrac{16-10}{(16-10)+(16-8)}(65-50)=54{,}286.$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D3B2-3]%[2D3H2-3]%[2D3V2-3]
+	Thống kê tổng số giờ nắng trong tháng 9 tại một trạm quan trắc đặt ở Cà Mau trong các năm từ 2002 đến 2021 được thống kê như sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Số giờ nắng & {$[80 ; 98)$} & {$[98 ; 116)$} & {$[116 ; 134)$} & {$[134 ; 152)$} & {$[152 ; 170)$} \\
+			\hline Số năm & 3 & 6 & 3 & 5 & 3 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{flushright}
+		(\textit{Nguồn:} Tổng cục Thống kê)
+	\end{flushright}
+	\choiceTF
+	{\True Giá trị đại diện của nhóm thứ ba là $125$ giờ}
+	{\True Số giờ nắng trung bình của mẫu số liệu trên là $124{,}1$ giờ}
+	{Tứ phân vị thứ hai của mẫu số liệu trên là $128$ giờ}
+	{\True Độ lệch chuẩn của mẫu số liệu trên là $S=23{,}795$ giờ.}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Vì giá trị đại diện nhóm 3 bằng $\dfrac{134+116}{2}=125$ giờ.
+			\itemch Đúng. Vì số giờ nắng trung bình của mẫu số liệu ghép nhóm là
+			$$
+			\bar{x}=\dfrac{3 \cdot 89+6 \cdot 107+3 \cdot 125+5 \cdot 143+3 \cdot 161}{20}=124{,}1 \text{ giờ.}
+			$$
+			\itemch Sai. Vì tứ phân vị thứ hai của dãy số liệu $x_1 ; x_2 ; \ldots ; x_{20}$ thuộc $[116 ; 134)$. Do đó tứ phân vị thứ hai của mẫu số liệu ghép nhóm là
+			$$
+			Q_2=116+\dfrac{\dfrac{2 \cdot 20}{4}-(3+6)}{3} \cdot(134-116)=122 \text{ giờ.}
+			$$
+			\itemch Đúng. Vì phương sai của mẫu số liệu ghép nhóm là
+			$$
+			S^2=\dfrac{1}{20}\left(3\cdot 89^2+6\cdot 107^2+3\cdot 125^2+5\cdot 143^2+3\cdot 161^2\right)-124,1^2=566{,}19.
+			$$
+			Độ lệch chuẩn của mẫu số liệu ghép nhóm là
+			$$
+			S=\sqrt{566{,}19} \approx 23{,}795.
+			$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D3B2-3]%[2D3H2-3]%[2D3V2-3]
+	Giá đóng cửa của một cổ phiếu là giá của cổ phiếu đó cuối một phiên giao dịch. Bảng sau thống kê giá đóng cửa (đơn vị: nghìn đồng) của hai mã cổ phiếu $A$ và $B$ trong $50$ ngày giao dịch liên tiếp.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Giá đóng cửa & {$[120 ; 122)$} & {$[122 ; 124)$} & {$[124 ; 126)$} & {$[126 ; 128)$} & {$[128 ; 130)$} \\
+			\hline \begin{tabular}{c} 
+				Số ngày giao dịch \\
+				của cổ phiếu $A$
+			\end{tabular} & 8 & 9 & 12 & 10 & 11 \\
+			\hline \begin{tabular}{c} 
+				Số ngày giao dịch \\
+				của cổ phiếu $B$
+			\end{tabular} & 16 & 4 & 3 & 6 & 21 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Khoảng biến thiên trong mẫu số liệu trên bằng $10$ nghìn đồng}
+	{\True Số trung bình của hai loại cổ phiếu trong mẫu số liệu trên là bằng nhau}
+	{\True Độ lệch chuẩn trong mẫu số liệu của cổ phiếu A là $S_A\approx2{,}743$}
+	{Nếu dùng phương sai và độ lệch chuẩn để so sánh mức độ rủi ro của các loại cổ phiếu có giá trị trung bình gần bằng nhau, cổ phiếu nào có phương sai, độ lệch chuẩn cao hơn thì được coi là có độ rủi ro lớn hơn. Như vậy thì cổ phiếu A sẽ có rủi ro cao hơn}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Vì khoảng biến thiên bằng $130-120=10$. 
+			\itemch Đúng. Vì số trung bình của mẫu số liệu cổ phiếu A là
+			$$
+			\bar{x}_A=\dfrac{8 \cdot 121+9 \cdot 123+12 \cdot 125+10 \cdot 127+11 \cdot 129}{50}=125{,}28 .
+			$$
+			Số trung bình của mẫu số liệu cổ phiếu B là
+			$$
+			\bar{x}_B=\dfrac{16 \cdot 121+4 \cdot 123+3 \cdot 125+6 \cdot 127+21 \cdot 129}{50}=125{,}28 .
+			$$
+			\itemch Đúng. Vì phương sai của mẫu số liệu cổ phiếu A là
+			$$
+			S_A^2=\dfrac{1}{50}\left(8 \cdot 121^2+9 \cdot 123^2+12 \cdot 125^2+10 \cdot 127^2+11 \cdot 129^2\right)-(125{,}28)^2=7{,}5216 .
+			$$
+			Độ lệch chuẩn của mẫu số liệu cổ phiếu A là $S_A=\sqrt{S_A^2}=\sqrt{7{,}5216}\approx 2{,}743$.
+			\itemch Sai. Vì độ lệch chuẩn của mẫu số liệu cổ phiếu B là $S_B=\sqrt{S_2^2}=\sqrt{12{,}4096}>S_A$.\\
+			Vậy nếu đánh giá độ rủi ro theo phương sai và độ lệch chuẩn thì cổ phiếu $A$ có độ rủi ro thấp hơn cổ phiếu $B$.
+		\end{itemchoice}
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-OTC3-DE2}
+
+\Opensolutionfile{ans}[ans/ans-2-OTC3-DE2]
+\caukq
+\begin{ex}%[2D3H1-3]
+	Bảng sau thống kê tổng lượng mưa (đơn vị: mm) đo được vào tháng $7$ từ năm $2002$ đến $2021$ tại một trạm quan trắc đặt ở Cà Mau.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Nhóm lượng mưa (mm) & $[140;240)$ & $[240;340)$ & $[340;440)$ & $[440;540)$ \\
+			\hline
+			Tần số & $3$ & $7$ & $7$ & $3$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{flushright}
+		(Nguồn: Tổng cục Thống kê)
+	\end{flushright}
+	Tìm tứ phân vị thứ nhất của mẫu số liệu trên (kết quả làm tròn đến hàng đơn vị).
+	\shortans{$255$}
+	\loigiai{
+		Cỡ mẫu $n=20$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{20}$ là mẫu số liệu lượng mưa của trạm.\\
+		Tứ phân vị thứ nhất của mẫu số liệu là $Q_1=\dfrac{x_5+x_6}{2}=\dfrac{251{,}4+258{,}4}{2}=255$.
+	}
+\end{ex}
+\begin{ex}%[2D3H1-3]
+	Hằng ngày ông Thắng đều đi xe buýt từ nhà đến cơ quan. Dưới đây là bảng thống kê thời gian của $100$ lần ông Thắng đi xe buýt từ nhà đến cơ quan.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Thời gian (phút) & $[15;18)$ & $[18;21)$ & $[21;24)$ & $[24;27)$ & $[27;30)$ & $[30;33)$ \\
+			\hline
+			Số lượt & $22$ & $38$ & $27$ & $8$ & $4$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Biết khoảng tứ phân vị của mẫu số liệu ghép nhóm trên là $\dfrac{a}{b}$ (tối giản), $a, b\in \mathbb{N}$. Tính giá trị biểu thức $a+b$.
+	\shortans{$619$}
+	\loigiai{
+		Cỡ mẫu $n=100$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{100}$ là mẫu số liệu gốc gồm thời gian $100$ lần đi xe buýt của ông Thắng.\\
+		Ta có $x_1$, \ldots, $x_{22}\in[15;18)$; $x_{23}$, \ldots, $x_{60}\in[18;21)$; $x_{61}$, \ldots, $x_{87}\in[21;24)$; $x_{88}$, \ldots, $x_{95}\in[24;27)$; $x_{96}$, \ldots, $x_{99}\in[27;30)$; $x_{100}\in[30;33)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{x_{25}+x_{26}}{2}\in[18;21)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+		$$Q_1=18+\dfrac{\dfrac{100}{4}-22}{38}\cdot(21-18)=\dfrac{693}{38}.$$
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{x_{75}+x_{76}}{2}\in[21;24)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+		$$Q_3=21+\dfrac{\dfrac{3\cdot100}{4}-(22+38)}{27}\cdot(24-21)=\dfrac{68}{3}.$$
+		Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là $\Delta_Q=Q_3-Q_1=\dfrac{505}{114}$.
+	}
+\end{ex}
+\begin{ex}%[2D3V2-2]
+	Bảng sau biểu diễn mẫu số liệu ghép nhóm về số tiền (đơn vị: nghìn đồng) mà $60$ khách hàng mua sách ở một cửa hàng trong một ngày.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline 
+			Nhóm & $[40; 50)$ & $[50 ; 60)$ & $[60 ; 70)$ & $[70 ; 80)$ & $[80 ; 90)$ \\
+			\hline
+			Tần số & $3$ & $6$ & $19$ & $23$ & $9$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính số tiền trung bình mà khách mua trong một ngày (làm tròn đến chữ số hàng đơn vị).
+	\shortans{$70$}
+	\loigiai{
+		Ta viết lại bảng như sau:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline 
+				Nhóm & $[40; 50)$ & $[50 ; 60)$ & $[60 ; 70)$ & $[70 ; 80)$ & $[80 ; 90)$ \\
+				\hline
+				GT đại diện $C_i$ & $45$ & $55$ & $65$ & $75$ & $85$ \\
+				\hline
+				Tần số & $3$ & $6$ & $19$ & $23$ & $9$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Số tiền trung bình là 
+		$$\overline{x}=\dfrac{45\cdot 3+55\cdot 6+65\cdot 19+75\cdot 23+85\cdot 9}{60}=\dfrac{419}{6}\approx 70.$$
+		Vậy số tiền bình quân mỗi khách mua trong $1$ ngày gần $70$ nghìn đồng.
+	}
+\end{ex}
+\begin{ex}%[2D3V2-2]
+	Thống kê lợi nhuận hàng tháng (đơn vị: triệu đồng) trong $20$ tháng của một nhà đầu tư được cho như sau:
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline Lợi nhuận & {$[10 ; 20)$} & {$[20 ; 30)$} & {$[30 ; 40)$} & {$[40 ; 50)$} & {$[50 ; 60)$} \\
+			\hline Số tháng & $2$ & $4$ & $8$ & $4$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tính độ lệch chuẩn của mẫu số liệu trên (làm tròn đến một chữ số thập phân).
+	\shortans{$11,0$}
+	\loigiai{
+		\begin{itemize}
+			\item Chọn điểm đại diện cho các nhóm số liệu ta tính được các số đặc trưng như sau:
+			\item Lợi nhuận trung bình một tháng của nhà đầu tư là
+			$$\overline{x}=\dfrac{1}{20}(2 \cdot 15+\cdots+2 \cdot 55)=35 \text { (triệu đồng).}$$
+			\item Độ lệch chuẩn của lợi nhuận hàng tháng của hai nhà đầu tư tương ứng là
+			$$
+			s=\sqrt{\dfrac{1}{20}\left(2 \cdot 15^2+\cdots+2 \cdot 55^2\right)-35^2} \approx 11{,}0.
+			$$
+		\end{itemize}
+	}
+\end{ex}
+\begin{ex}%[2D3V2-2]
+	Người ta theo dõi sự thay đổi cân nặng, được tính bằng hiệu cân nặng trước và sau ba tháng áp dụng chế độ ăn kiêng của một số người cho kết quả như sau:
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline 
+			Thay đổi cân nặng (kg) & {$[-1 ; 0)$} & {$[0 ; 1)$} & {$[1 ; 2)$} & {$[2 ; 3)$} & {$[3 ; 4)$} \\
+			\hline 
+			Số người & $2$ & $3$ & $5$ & $3$ & $2$ \\
+			\hline 
+		\end{tabular}
+	\end{center}
+	Tính phương sai của mẫu số liệu trên (làm tròn đến phần trăm).
+	\shortans{$1{,}46$}
+	\loigiai{
+		Chọn giá trị đại diện cho các nhóm số liệu, ta có bảng số liệu sau:
+		\begin{center}
+			\begin{tabular}{|l|c|c|c|c|c|}
+				\hline 
+				Giá trị đại diện & $-0{,}5$ & $0{,}5$ & $1{,}5$ & $2{,}5$ & $3{,}5$ \\
+				\hline 
+				Số nqười & $2$ & $3$ & $5$ & $3$ & $2$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{itemize}
+			\item Tổng số người là $n=2+3+5+3+2=15$ người.
+			\item Cân nặng trung bình là
+			$$
+			\overline{x}=\dfrac{1}{15}[2 \cdot(-0{,}5)+3 \cdot 0{,}5+5 \cdot 1{,}5+3 \cdot 2{,}5+2 \cdot 3{,}5]=1{,}5\ \text{(kg)}.
+			$$
+			\item Phương sai và độ lệch chuẩn của mẫu số liệu về thay đổi cân nặng là
+			$$
+			s^2=\dfrac{1}{15}\left[2 \cdot(-0{,}5)^2+3 \cdot 0{,}5^2+5 \cdot 1{,}5^2+3 \cdot 2{,}5^2+2 \cdot 3{,}5^2\right]-1{,}5^2 \approx 1{{,}}46.$$
+		\end{itemize}
+	}
+\end{ex}
+\begin{ex}%[2D3V1-3]
+	Kết quả điều tra tổng thu nhập trong năm $2022$ của một số hộ gia đình trong một địa phương được ghi lại ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline \begin{tabular}{c} 
+				Tổng thu nhập \\
+				(triệu đồng)
+			\end{tabular} & {$[200 ; 250)$} & {$[250 ; 300)$} & {$[300 ; 350)$} & {$[350 ; 400)$} & {$[400 ; 450)$} \\
+			\hline Số hộ gia đình & $24$ & $62$ & $34$ & $21$ & $9$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm tứ phân vị $Q_3$ (làm tròn đến hàng đơn vị).
+	\shortans{$336$}
+	\loigiai{
+		\begin{itemize}
+			\item Tổng số hộ gia đình là $n=24+62+34+21+9=150$ hộ gia đình.
+			\item Tứ phân vị thứ ba ở vị trí $x_{113}\in [300; 350)$.
+			\item Tứ phân vị $Q_3=300+\dfrac{\dfrac{3\cdot 150}{4}-88}{34}\cdot 50\approx 336$.
+		\end{itemize}
+		
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTC3-DE2}

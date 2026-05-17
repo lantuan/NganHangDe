@@ -1,0 +1,407 @@
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-2-B12-De2]
+\caulc
+\begin{ex}%[2D4N2-4]
+	Tính tích phân $I=\displaystyle \int \limits _0^2 2^{2024x} \mathrm{d}x$.
+	\choice
+	{$I=\dfrac{2^{4048}-1}{2024}$}
+	{\True $I=\dfrac{2^{4048}-1}{2024 \ln 2} $}
+	{$I=\dfrac{2^{4048}-1}{\ln 2}$}
+	{$I=\dfrac{2^{4048}}{2024 \ln2} $}
+	\loigiai{
+		Ta có $I=\displaystyle \int \limits _0^2 2^{2024x} \mathrm{d}x=\dfrac{1}{2024}\displaystyle \int \limits _0^2 2^{2024x} \mathrm{d}(2024x)=\dfrac{2^{2024x}}{2024 \ln 2} \Big|_0^2=\dfrac{2^{4048}-1}{2024 \ln 2}$.}
+\end{ex}
+\begin{ex}%[2D4N2-2]
+	Tích phân $\displaystyle\int\limits_0^2 \left(x^2-2\right)\mathrm{\,d}x$ bằng
+	\choice
+	{$\dfrac{2}{3}$}
+	{$-\dfrac{2}{3}$}
+	{$\dfrac{4}{3}$}
+	{\True $-\dfrac{4}{3}$}
+	\loigiai{
+		Ta có $\displaystyle\int\limits_0^2 \left(x^2-2\right)\mathrm{\,d}x=\left(\dfrac{x^3}{3}-2x\right)\Bigg|_0^2=\dfrac{8}{3}-4=-\dfrac{4}{3}.$
+	}
+\end{ex}
+\begin{ex}%[2D4N2-2]
+	Tính tích phân $I=\displaystyle\int\limits_1^2 \dfrac{x+1}{x} \mathrm{\,d}x$.
+	\choice
+	{$I=2\ln 2$}
+	{\True $I=1+\ln 2$}
+	{$I=1-\ln 2$}
+	{$I=\dfrac{7}{4}$}
+	\loigiai{
+		Ta có $I=\displaystyle\int\limits_1^2 \dfrac{x+1}{x} \mathrm{\,d}x=\displaystyle\int\limits_1^2 \left(1+\dfrac{1}{x}\right) \mathrm{\,d}x=\left(x+\ln\left| x\right|\right)\bigg|_1^2=1+\ln 2$.}
+\end{ex}
+\begin{ex}%[2D4N2-1]
+	Nếu $\displaystyle\int\limits_0^2f(x)\mathrm{\, d}x=3$ và $\displaystyle\int\limits_0^2g(x)\mathrm{\, d}x=-3$ thì $\displaystyle\int\limits_0^2\left[f(x)-2g(x)\right]\mathrm{\, d}x$ bằng
+	\choice
+	{\True $9$}
+	{$-9$}
+	{$-3$}
+	{$3$}
+	\loigiai{
+		$\displaystyle\int\limits_0^2\left[f(x)-2g(x)\right]\mathrm{\, d}x=\displaystyle\int\limits_0^2f(x)\mathrm{\, d}x-2\displaystyle\int\limits_0^2g(x)\mathrm{\, d}x=3-2\cdot \left(-3\right)=9$.}
+\end{ex}
+
+\begin{ex}%[2D4N2-5]
+	Biết $\displaystyle\int\limits_1^2 f(x)\mathrm{\, d}x=1$, tính $\displaystyle\int\limits_1^4 \dfrac{1}{\sqrt{x}} f\left(\sqrt{x}\right)\mathrm{\, d}x$.
+	\choice
+	{\True $I=2$}
+	{$I=1$}
+	{$I=\dfrac{1}{2}$}
+	{$I=4$}
+	\loigiai{
+		Đặt $t=\sqrt{x}\Rightarrow \mathrm{,d}t=\dfrac{\mathrm{\,d}x}{2\sqrt{x}}$.\\
+		Đổi cận: $x=1\Rightarrow t=1,x=4\Rightarrow t=2$.\\
+		Khi đó $I=2\displaystyle\int\limits_1^2 f(t)\mathrm{\,d}t=2$.
+	}
+\end{ex}
+\begin{ex}%[2D4H2-1]
+	Cho hai hàm số $f(x), g(x)$ xác định và liên tục trên đoạn $[0;1]$, thỏa mãn $$\displaystyle\int\limits_0^1\left(2f(x)-3g(x)\right)\mathrm{\,d}x=-9, \displaystyle\int\limits_0^1\left(f(x)+5g(x)\right)\mathrm{\,d}x=2.$$
+	Tính $I=\displaystyle\int\limits_1^0\left(f(x)+g(x)\right)\mathrm{\,d}x$.
+	\choice
+	{$I=1$}
+	{$I=-3$}
+	{\True $I=2$}
+	{$I=-2$}
+	\loigiai{
+		Đặt $u=\displaystyle\int\limits_0^1f(x)\mathrm{\,d}x$ và $v=\displaystyle\int\limits_0^1g(x)\mathrm{\,d}x$.\\
+		Ta có hệ $\heva{&2u-3v=-9\\&u+5v=2}\Leftrightarrow \heva{&u=-3\\&v=1}$.\\
+		Suy ra $I=-\displaystyle\int\limits_0^1f(x)\mathrm{\,d}x-\displaystyle\int\limits_0^1g(x)\mathrm{\,d}x=-u-v=3-1=2$.
+	}
+\end{ex}
+\begin{ex}%[2D4H2-3]
+	Tính tích phân $\displaystyle \int \limits _{0}^{\pi} x^2 \cos 2x \mathrm{\,d}x $ bằng cách đặt $\heva{u&=x^2\\ dv &= \cos 2x \mathrm{\,d}x}$. Mệnh đề nào dưới đây đúng?
+	\choice
+	{$\displaystyle I= \dfrac{1}{2} x^2 \sin 2x \bigg|_0 ^ {\pi} + \displaystyle 2 \int \limits _{0}^{\pi} x \sin 2x \mathrm{\,d}x$}
+	{$\displaystyle I= \dfrac{1}{2} x^2 \sin 2x \bigg|_0 ^ {\pi} + \displaystyle \int \limits _{0}^{\pi} x \sin 2x \mathrm{\,d}x$}
+	{\True $\displaystyle I= \dfrac{1}{2} x^2 \sin 2x \bigg|_0 ^ {\pi} - \displaystyle \int \limits _{0}^{\pi} x \sin 2x \mathrm{\,d}x$}
+	{$\displaystyle I= \dfrac{1}{2} x^2 \sin 2x \bigg|_0 ^ {\pi} - \displaystyle 2 \int \limits _{0}^{\pi} x \sin 2x \mathrm{\,d}x$}
+	\loigiai{
+		Ta có $\heva{u&=x^2\\ dv &= \cos 2x \mathrm{\,d}x} \Rightarrow \heva{\mathrm{\,d}u &= 2x \\ v&= \dfrac{1}{2} \sin 2x}$\\
+		Áp dụng công thức ta có $\displaystyle I= \dfrac{1}{2} x^2 \sin 2x \bigg|_0 ^ {\pi} - \displaystyle \int \limits _{0}^{\pi} x \sin 2x \mathrm{\,d}x$
+	}
+\end{ex}
+\begin{ex}%[2D4H2-2]
+	Cho hàm số $f(x)=\left\{\begin{aligned}& x & \text {khi } &x\ge 1 \\ &1& \text {khi } &x<1  \end{aligned}\right.$. Tính tích phân $I=\displaystyle\int\limits_0^2 {f(x)\mathrm{\,d}x}$.
+	\choice
+	{\True $ I=\dfrac{5}{2} $}
+	{$ I=4 $}
+	{$ I=\dfrac{3}{2} $}
+	{$ I=2 $}
+	\loigiai{
+		Ta có $I=\displaystyle\int\limits_0^2 f(x)\mathrm{\,d}x=\displaystyle\int\limits_{0}^{1}f(x)\mathrm{\,d}x +\displaystyle\int\limits_{1}^{2} f(x)\mathrm{\,d}x=\displaystyle\int\limits_{0}^{1} 1\mathrm{\,d}x+\displaystyle\int\limits_{0}^{1} x \mathrm{\,d}x =\dfrac{5}{2}$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4H2-5]
+	Tích phân $\displaystyle\int\limits_0 ^4 \dfrac{1}{\sqrt{2x+1}}\mathrm{\,d}x$ bằng	
+	\choice
+	{$\sqrt{2}$}
+	{$3$}
+	{ \True $2$}
+	{$\sqrt{5}$}
+	\loigiai{
+		Ta có
+		$\displaystyle\int\limits_0 ^4 \dfrac{1}{\sqrt{2x+1}}\mathrm{\,d}x=\dfrac{1}{2}\displaystyle\int\limits_0 ^4 \left(2x+1 \right)^{-\tfrac{1}{2}}\mathrm{\,d}\left(2x+1 \right)=\dfrac{1}{2}\cdot 2\left(2x+1\right)^{\tfrac{1}{2}}\bigg|_0^4=2$.
+	}
+\end{ex}
+\begin{ex}%[2D4H2-2]
+	Tích phân $I=\displaystyle \int \limits_0^1 \dfrac{(x-1)^2}{x^2+1}\mathrm{\,d}x=a \ln b +c$, trong đó $a;b;c$ là các số nguyên. Tính giá trị của biểu thức $a+b+c$?
+	\choice
+	{\True $2$}
+	{$3$}
+	{$0$}
+	{$1$}
+	\loigiai{
+		$I=\displaystyle \int \limits_0^1 \dfrac{(x-1)^2}{x^2+1}\mathrm{\,d}x=\displaystyle \int \limits_0^1 \left( 1-\dfrac{2x}{x^2+1} \right) \mathrm{\,d}x = \left( x-\ln \left| x^2+1 \right| \right)\bigg|_0^1 = 1-\ln 2$.\\
+		Khi đó $a=-1, b=2, c=1\Rightarrow a+b+c=2$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4V2-2]
+	Biết $\displaystyle\int\limits_1^2{\dfrac{\mathrm{\,d}x}{\left(x+1\right)\sqrt{x}+x\sqrt{x+1}}}=\sqrt{a}-\sqrt{b}-\sqrt{c}$ với $a$, $b$, $c$ là các số nguyên dương. Tính $P=a+b+c$.
+	\choice
+	{$P=42$}
+	{$P=46$}
+	{$P=44$}
+	{\True $P=48$}
+	\loigiai{
+		Ta có  $\dfrac{1}{\left(x+1\right)\sqrt{x}+x\sqrt{x+1}}=\dfrac{\sqrt{x+1}-\sqrt{x}}{\sqrt{x+1}\cdot\sqrt{x}}=\dfrac{1}{\sqrt{x}}-\dfrac{1}{\sqrt{x+1}}\cdot $\\
+		Suy ra $$
+		\begin{aligned}&\displaystyle\int\limits_1^2{\dfrac{\mathrm{\,d}x}{\left(x+1\right)\sqrt{x}+x\sqrt{x+1}}}=\displaystyle\int\limits_1^2{\left(\dfrac{1}{\sqrt{x}}-\dfrac{1}{\sqrt{x+1}}\right)}\mathrm{\,d}x\\
+			=& \displaystyle\int\limits_1^2{\dfrac{2}{2\sqrt{x}}}\mathrm{\,d}x-\displaystyle\int\limits_1^2{\dfrac{2}{2\sqrt{x+1}}}\mathrm{\,d}(x+1)
+			=\left(2\sqrt{x}-2\sqrt{x+1}\right)\Big|_1^2\\
+			=& \left(2\sqrt{2}-2\sqrt{3}\right)-\left(2-2\sqrt{2}\right)=\sqrt{32}-\sqrt{12}-2=\sqrt{32}-\sqrt{12}-\sqrt{4}.\end{aligned}$$
+		Do đó $a=32$, $b=12$, $c=4$. \\
+		Vậy $P=a+b+c=48.$}
+\end{ex}
+
+\begin{ex}%[2D4V2-2]
+	Cho hàm số $f(x) > 0$ liên tục và có đạo hàm trên $[0;1]$ và thỏa mãn \break$1 + 2018\displaystyle \int\limits_{0}^{x}f(t) \mathrm{\, d}t= f^2 (x)$. Tính $\displaystyle \int\limits_{0}^{1}f(x) \mathrm{\, d}x$.
+	\choice
+	{$\dfrac{1017}{2}$}
+	{$\dfrac{2013}{2}$}
+	{$\dfrac{2015}{2}$}
+	{\True $\dfrac{1011}{2}$}
+	\loigiai{
+		\begin{enumerate}
+			\item $1 + 2018\displaystyle \int\limits_{0}^{x}f(t) \mathrm{\, d}t= f^2 (x) \Rightarrow 2018f(x) = 2f(x)f'(x)$. \\ Mà $f(x) > 0$ với mọi $x \in [0;1]$ nên $f'(x)=1009$. Suy ra $f(x)=1009x+C$. 
+			\item  Ta có 
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+			&&1 + 2018\displaystyle \int\limits_{0}^{x} (1009t + C) \mathrm{\, d}t= (1009x+C)^2\\
+			&\Rightarrow & 1 + 2018\left(\dfrac{1009}{2}x^2 + cx\right) = 1009^2x^2+2018Cx + C^2\\
+			&\Rightarrow & C^2 = 1 \Rightarrow C = \pm 1.
+			\end{eqnarray*}			
+			Do $f(x)> 0$ với mọi $x \in [0; 1]$ nên $C = 1$, hay $f(x)= 1009x + 1$. 
+		\end{enumerate}
+		Vậy $\displaystyle \int\limits_{0}^{1}f(x) \mathrm{\, d}x = \dfrac{1011}{2}$.
+	}
+\end{ex}
+
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B12-De2}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-B12-De2-DS]
+% Câu 1
+\begin{ex}%[2D4V2-5]
+Hãy xét tính đúng sai của các mệnh để sau	
+	\choiceTF
+	{\True $I=\displaystyle \int \limits_0^1 \dfrac{4}{2x+1} \mathrm{\,d}x=2\ln3$}
+	{\True Giả sử $\displaystyle\int\limits_{0}^{1} \mathrm{e}^{2x}\mathrm{\,d}x=\dfrac{a\mathrm{e}^2+b}{2}$, với $a$, $b$ là các số nguyên. Khi đó $a+b=0$}
+	{\True 	Cho hàm số $f(x)$ liên tục trên $\mathbb{R}$ thỏa mãn $\displaystyle\int\limits_0^1 f(x)\mathrm{\,d}x=\dfrac{5}{2}$. Khi đó $\displaystyle\int\limits_0^3 f\left(\dfrac{x}{3}\right)\mathrm{d}x=\dfrac{15}{2}$}
+	{Biết rằng $\displaystyle\int\limits_0^\frac{\pi}{2}\dfrac{\cos x \sin2x}{1+\sin x}\mathrm{\,d}x=a+\dfrac{\pi}{b}$, với $a$, $b$ là các số hữu tỉ. Khi đó $a+b=2$.}
+	\loigiai{
+		\begin{itemchoice} 
+			\itemch Đúng. Ta có $I=\displaystyle \int \limits_0^1 \dfrac{4}{2x+1} \mathrm{\,d}x
+			= 2\ln|2x+1|\Big|_0^1 =2\ln3$.   
+			\itemch Đúng. 	Ta có $\displaystyle\int\limits_{0}^{1} \mathrm{e}^{2x}\mathrm{\,d}x=\dfrac{\mathrm{e}^{2x}}{2}\Big|_{0}^{1}=\dfrac{\mathrm{e}^2-1}{2}\Rightarrow\heva{& a=1\\& b=-1}\Rightarrow a+b=0$.
+			\itemch Đúng. Đặt $t=\dfrac{x}{3} \Rightarrow \mathrm{\,d}t=\dfrac{1}{3}\mathrm{\,d}x \Rightarrow \mathrm{\,d}x=3\mathrm{\,d}t$.\\
+			Đổi cận: $x=0 \Rightarrow t=0$; $x=3 \Rightarrow t=1$.\\
+			Khi đó $\displaystyle\int\limits_0^3 f\left(\dfrac{x}{3}\right)\mathrm{d}x=3\displaystyle\int\limits_0^1 f(t)\mathrm{\,d}t=3\displaystyle\int\limits_0^1 f(x)\mathrm{\,d}x=\dfrac{15}{2}$.
+			\itemch Sai. Ta có
+			\begin{align*}
+				\displaystyle\int\limits_0^\frac{\pi}{2}\dfrac{\cos x \sin2x}{1+\sin x}\mathrm{\,d}x &= \displaystyle\int\limits_0^\frac{\pi}{2}\dfrac{2\cos^2 x \sin x}{1+\sin x}\mathrm{\, d}x
+				=\displaystyle\int\limits_0^\frac{\pi}{2}\dfrac{2(1-\sin^2 x)\sin x}{1+\sin x}\mathrm{\, d}x\\
+				& =\displaystyle\int\limits_0^\frac{\pi}{2}2(1-\sin x)\sin x \mathrm{\, d}x
+				= \displaystyle\int\limits_0^\frac{\pi}{2}2\sin x \mathrm{\, d}x- \displaystyle\int\limits_0^\frac{\pi}{2}2\sin^2 x \mathrm{\, d}x\\
+				&=-2\cos x\Bigg|_0^{\frac{\pi}{2}}+\left(\dfrac{1}{2}\sin 2x -x \right)\Bigg|_0^{\frac{\pi}{2}}=2+\dfrac{\pi}{-2}.
+			\end{align*}
+			Suy ra $a=2$, $b=-2$. Vậy $a+b=0$.
+		\end{itemchoice}
+	}
+\end{ex}
+%--------------------------------------
+
+% Câu 2
+\begin{ex}%[2D4V2-5]
+	Xét tính đúng sai của các mệnh để sau
+	\choiceTF
+	{Nếu $\displaystyle \int_{-1}^{4} f(x) \mathrm{d} x=2$ và $\displaystyle \int_{-1}^{4} g(x) \mathrm{d} x=3$ thì $\displaystyle \int_{-1}^{4}[f(x)+g(x)] \mathrm{d} x=6$}
+	{\True Cho $\displaystyle\int\limits_1^4 \dfrac{\sqrt{25-x^2}}{x}\mathrm{\,d}x=a+b\cdot\sqrt{6}+c\cdot\ln \left(\dfrac{5\sqrt{6}+12}{5\sqrt{6}-12}\right)+d\cdot\ln2$ với $a$, $b$, $c$, $d$ là các số hữu tỉ. Khi đó  $a+b+c+d-\dfrac{3}{2}$.}
+	{\True Nếu $\displaystyle\int\limits_0^1 f(2x)\mathrm{\,d}x=8$ thì $\displaystyle\int\limits_0^2[f(x)-2x]\mathrm{\,d}x=12$.}
+	{	Biết $\displaystyle\int\limits_1^5 \dfrac{\sqrt{2x-1}}{2x+3\sqrt{2x-1}+1}\mathrm{\,d}x = a+b\ln2+c\ln3+d\ln5$ với $a$, $b$, $c$, $d$ là các số nguyên. Khi đó $S = a+b+c+d=5$.}
+	\loigiai{
+		\begin{itemchoice} 
+			\itemch Sai. Ta có $\displaystyle\int\limits_{-1}^4{\left[ f\left( x \right)+g\left( x \right) \right]dx}=\displaystyle\int\limits_{-1}^4{f\left( x \right)dx}+\displaystyle\int\limits_{-1}^4{g\left( x \right)dx=2+}3=5$.  
+			\itemch Đúng. Ta có $\displaystyle \int\limits_1^4 \dfrac{\sqrt{25-x^2}}{x}\mathrm{\,d}x=\displaystyle \int\limits_1^4\dfrac{x\sqrt{25-x^2}}{x^2}\mathrm{\,d}x=I$.\\
+			Đặt $t=\sqrt{25-x^2}\Rightarrow \heva{&-t\mathrm{\,d}t=x\mathrm{d}x\\ &x^2=25-t^2}$.\\
+			Đổi cận $x=1\Rightarrow t=2\sqrt{6}$, $x=4\Rightarrow t=3$.
+			 Khi đó, \allowdisplaybreaks
+			 \begin{eqnarray*}
+				I&=& \displaystyle \int\limits_{2\sqrt{6}}^3\dfrac{-t^2\mathrm{\,d}t}{25-t^2}\\
+				&=& \displaystyle \int\limits_{2\sqrt{6}}^3\left[1-\dfrac{25}{25-t^2}\right]\mathrm{\,d}t\\
+				&=& \displaystyle \int\limits_{2\sqrt{6}}^3\left[1-\dfrac{5}{2}\left(\dfrac{1}{5-t}+\dfrac{1}{5+t}\right)\right]\mathrm{\,d}t\\
+				&=&t+\dfrac{5}{2}\ln\left|\dfrac{5-t}{5+t}\right|\Bigg|_{2\sqrt{6}}^3\\
+				&=&3+\dfrac{5}{2}\ln\dfrac{1}{4}-2\sqrt{6}-\dfrac{5}{2}\ln \dfrac{5-2\sqrt{6}}{5+2\sqrt{6}}\\
+				&=&3-5\ln 2-2\sqrt{6}+\dfrac{5}{2}\ln\dfrac{5\sqrt{6}+12}{5\sqrt{6}-12}.
+			\end{eqnarray*}
+			Vậy $a=3$, $b=-2$, $c=\dfrac{5}{2}$, $d=-5$ suy ra $a+b+c+d=-\dfrac{3}{2}$.
+			\itemch Đúng. Đặt $u=2x$ suy ra $\mathrm{\,d}u=2\mathrm{\,d}x$.\\
+			Ta có $\displaystyle\int\limits_0^1 f(2x)\mathrm{\,d}x=\dfrac{1}{2}\displaystyle\int\limits_0^2 f(u)\mathrm{\,d}u=\dfrac{1}{2}\displaystyle\int\limits_0^2 f(x)\mathrm{\,d}x=8\Rightarrow\displaystyle\int\limits_0^2 f (x)\mathrm{\,d}x=16$.\\
+			Suy ra $\displaystyle\int\limits_0^2[f(x)-2x]\mathrm{\,d}x=\displaystyle\int\limits_0^2 f(x)\mathrm{\,d}x-\displaystyle\int\limits_0^2 2 x\mathrm{\,d}x=16-4=12$.
+			\itemch Sai. 	Đặt $t = \sqrt{2x-1}$, suy ra $t^2 = 2x-1 \Leftrightarrow 2x = t^2+1$. Khi đó $\mathrm{d}x = t\mathrm{d}t$.\\
+			Với $x=1$ thì $t=1$, với $x=5$ thì $t=3$.\\
+			Như vậy tích phân đã cho bằng với tích phân sau
+			\begin{eqnarray*}
+				\displaystyle\int\limits_1^3 \dfrac{t^2}{t^2+3t+2} \mathrm{\,d}t &=& \displaystyle\int\limits_1^3 \left( 1 + \dfrac{1}{t+1} - \dfrac{4}{t+2} \right) \mathrm{\,d}x = \left( t + \ln|t+1| - 4\ln|t+2| \right)\bigg|_1^3\\
+				&=& (3 + \ln 4 - 4\ln 5) - (1 + \ln 2 - 4\ln 3) = 2 + \ln 2 + 4\ln 3 - 4\ln 5.
+			\end{eqnarray*}
+			Khi đó $a=2$, $b=1$, $c=4$, $d=-4$. Vậy $S = 2+1+4-4 = 3$.
+		\end{itemchoice}
+	}
+\end{ex}
+%--------------------------------------
+
+% Câu 3
+\begin{ex}%[2D4V2-5]
+Xét tính đúng sai của các mệnh để sau	
+	\choiceTF
+	{\True Nếu $\displaystyle\int\limits_1^5 \dfrac{\mathrm{\,d}x}{2x-1}=\ln c$ với $c \in \mathbb{Q}$ thì  $c=3$}
+	{\True Nếu đặt $x=\sin t$ thì $\displaystyle\int\limits_0^1 \sqrt{1-x^2} \mathrm{\,d}x=\displaystyle\int\limits_0^{\tfrac{\pi}{2}} \cos^2t \mathrm{\,d}t$}
+	{Biết tính phân $\displaystyle\int\limits_0^1 x\sqrt[3]{1-x} \mathrm{\,d}x = \dfrac{M}{N}$ là phân số tối giản. Khi đó $M + N=35$}
+	{\True 	Tích phân $\displaystyle\int\limits_0^{\pi ^2}\left(\sin \sqrt{x}-\cos \sqrt{x} \right)\mathrm{\, d}x=A+B\pi $. Khi đó $A + B=6$}
+	\loigiai{
+		\begin{itemchoice} 
+			\itemch Đúng. 	Vì $\displaystyle\int\limits_1^5 \dfrac{\mathrm{\,d}x}{2x-1}=\dfrac{1}{2}\ln|2x-1|\biggr|_1^5=\ln 3$.\\
+			Vậy $c=3$.
+			\itemch Sai. Đặt $x=\sin t$, $t \in \left[-\dfrac{\pi}{2};\dfrac{\pi}{2}\right]
+			\Rightarrow \mathrm{\,d}x=\cos t \mathrm{\,d}t$.\\
+			Đổi cận: $x=0 \Rightarrow t=0$; $x=1 \Rightarrow t=\dfrac{\pi}{2}$.\\
+			Khi đó $\displaystyle\int\limits_0^1 \sqrt{1-x^2} \mathrm{\,d}x=\displaystyle\int\limits_0^{\tfrac{\pi}{2}} \sqrt{1-\sin^2t} \cdot \cos t \mathrm{\,d}t=\displaystyle\int\limits_0^{\tfrac{\pi}{2}} \cos^2t \mathrm{\,d}t$.
+			\itemch Sai. Đặt $t= \sqrt[3]{1-x}\Rightarrow t^3 = 1 - x \Rightarrow 3t^2 \mathrm{\,d}t = - \mathrm{\,d}x$.\\
+			Ta có $x=0 \Rightarrow t=1$, $x=1 \Rightarrow t = 0$.\\
+			Vậy
+			$\displaystyle\int\limits_0^1 x\sqrt[3]{1-x} \mathrm{\,d}x = 3\displaystyle\int\limits_0^1 \left(1 -t^3 \right)t^3 \mathrm{\,d}t =3\left( \dfrac{t^4}{4} - \dfrac{t^7}{7} \right) \bigg|_0^1 = \dfrac{9}{28}$.\\
+			Do đó $M= 9$, $N=28$. Suy ra $M + N = 37$.			
+			\itemch Đúng. Đặt $t=\sqrt{x}\Rightarrow t^2=x\Rightarrow 2 t \mathrm{\,d} t=\mathrm{\,d} x$.\\
+			Đổi cận $x=0\Rightarrow t=0$; $x=\pi^2\Rightarrow t=\pi$.\\
+			Suy ra $I=2\displaystyle\int\limits_0^{\pi}(\sin t-\cos t)t \mathrm{\,d} t$.\\
+			Đặt  $u=t$; $\mathrm{\,d} v=(\sin t-\cos t)\mathrm{\,d} t\Rightarrow \mathrm{\,d} u=\mathrm{\,d} t ; v=-\cos t-\sin t$.
+			$$I=2\left[t(-\cos t-\sin t)\Big|_0^{\pi}+\displaystyle\int\limits_0^{\pi}(\cos t+\sin t)\mathrm{\,d} t\right]=2\left[\pi+(\sin t-\cos t)\Big|_0^{\pi}\right]=4+2\pi.$$
+			Nên $A=4$; $B=2\Rightarrow A+B=6$. 	
+		\end{itemchoice}
+	}
+\end{ex}
+%--------------------------------------
+% Câu 4
+\begin{ex}%[2D4V2-5]
+Xét tính đúng sai của các mệnh để sau	
+	\choiceTF
+	{Biết $\displaystyle\int\limits_1^2f(x)\mathrm{\,d}x=6$, $\displaystyle\int\limits_2^5f(x)\mathrm{\,d}x=1$, khi đó $I=\displaystyle\int\limits_1^5f(x)\mathrm{\,d}x=8$}
+	{\True Cho $\displaystyle\int\limits_1^2{f(u)\mathrm{\,d}u=4}$ và $\displaystyle\int\limits_1^4{f(v)\mathrm{\,d}v}=18$. Khi đó $I=\displaystyle\int\limits_2^4{\left[f(x) - \dfrac{3}{x}\right]}\mathrm{\,d}x=14 - 3\ln 2$}
+	{\True 	$I = \displaystyle\int\limits_{1}^{\mathrm{e}} x \ln x \mathrm{\,d}x= \dfrac{\mathrm{e}^4 + 1}{4}$}
+	{Cho hàm số $ f $ liên tục, $ f(x)>-1, f(0)=0 $ và thỏa $ f'(x)\sqrt{x^2+1}=2x\sqrt{f(x)+1} $. Khi đó $ f(\sqrt{3})=6 $}
+	\loigiai{
+		\begin{itemchoice} 
+			\itemch Sai. Ta có $I=\displaystyle\int\limits_1^5f(x)\mathrm{\,d}x=\displaystyle\int\limits_1^2f(x)\mathrm{\,d}x+\displaystyle\int\limits_2^5f(x)\mathrm{\,d}x=6+1=7$.   
+			\itemch Đúng. Ta có
+			\begin{eqnarray*}
+				& &I=\displaystyle\int\limits_2^4{\left[f(x) - \dfrac{3}{x}\right]}\mathrm{\,d}x=\displaystyle\int\limits_2^4{f(x)}\mathrm{\,d}x - \displaystyle\int\limits_2^4{\dfrac{3}{x}}\mathrm{\,d}x\\
+				&=&\displaystyle\int\limits_1^4{f(x)}\mathrm{\,d}x - \displaystyle\int\limits_1^2{f(x)}\mathrm{\,d}x - \left. 3\ln x\right|_2^4\\
+				&=& 18 - 4 - 3\left(\ln 4 - \ln 2\right).
+			\end{eqnarray*}
+			Vậy $I=14 - 3\ln 2$.
+			\itemch Đúng. Đặt $\heva{& u = \ln x \\& \mathrm{d}v = x \mathrm{\,d}x} \Rightarrow \heva{& \mathrm{d}u = \dfrac{1}{x} \mathrm{\,d}x \\& v = \dfrac{x^2}{2}.}$\\
+			Khi đó
+			\begin{align*}
+				I = \dfrac{x^2 \ln x}{2} \bigg|_1^{\mathrm{e}} - \dfrac{1}{2} \displaystyle\int\limits_{1}^{\mathrm{e}} x \mathrm{\,d}x = \dfrac{x^2 \ln x}{2} \bigg|_1^{\mathrm{e}} - \dfrac{x^2}{4} \bigg|_1^{\mathrm{e}} = \dfrac{\mathrm{e}^2}{2} - \left( \dfrac{\mathrm{e}^2}{4} - \dfrac{1}{4} \right) = \dfrac{\mathrm{e}^4 + 1}{4}.
+			\end{align*}
+			\itemch Sai. Ta có
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+			&&f'(x) \sqrt{x^2+1}=2 x \sqrt{f(x)+1} \\
+			&\Leftrightarrow& \dfrac{f'(x)}{\sqrt{f(x)+1}}=\dfrac{2 x}{\sqrt{x^2+1}}\\
+			& \Leftrightarrow& \displaystyle\int\limits_{0}^{\sqrt{3}} \dfrac{f'(x)}{\sqrt{f(x)+1}} \mathrm{\,d}x=\int\limits_{0}^{\sqrt{3}} \dfrac{2x}{\sqrt{x^2+1}} \mathrm{\,d}x\\ &\Leftrightarrow& \sqrt{f(x)+1}\Big|_{0} ^{\sqrt{3}}=\sqrt{x^2+1}\Big|_{0}^{\sqrt{3}}\\
+			& \Leftrightarrow& \sqrt{f(x)+1}\Big|_{0} ^{\sqrt{3}}=1 \\
+			& \Leftrightarrow& \sqrt{f(\sqrt{3})+1}-\sqrt{f(0)+1}=1\\
+			& \Leftrightarrow& \sqrt{f(\sqrt{3})+1}=2\\ 
+			&\Leftrightarrow& f(\sqrt{3})=3.
+			\end{eqnarray*}
+		\end{itemchoice}
+	}
+\end{ex}
+%--------------------------------------
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B12-De2-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B12-De2-KQ]
+\caukq
+% Câu 1
+\begin{ex}%[2D4H2-6]
+	Một ô tô đang chạy với tốc độ $10$ m/s thì người lái đạp phanh, từ thời điểm đó ô tô chuyển động chậm dần đều với vận tốc $v(t)=-5t+10$ m/s, trong đó $t$ là khoảng thời gian tính bằng giây, kể từ lúc bắt đầu đạp phanh. Hỏi từ lúc đạp phanh đến khi dừng hẳn, ô tô còn di chuyển bao nhiêu mét?
+	\shortans[]{$10$}
+	\loigiai{
+		Thời điểm ô tô dừng hẳn là $v(t)=-5t+10=0\Leftrightarrow t=2 $ s.\\
+		Từ lúc đạp phanh đến khi dừng hẳn, ô tô còn di chuyển được là
+		\allowdisplaybreaks
+		\begin{eqnarray*}			S=\displaystyle\int\limits_{0}^{2}v(t)\mathrm{\,d}t=\displaystyle\int\limits_{0}^{2}(-5t+10)\mathrm{\,d}t=\left.\left(-\dfrac{5t^2}{2}+10t\right)\right|_{0}^{2}=10\, (\text{m}).
+		\end{eqnarray*}
+	}
+\end{ex}
+
+% Câu 2
+\begin{ex}%[2D4H2-2]
+	Cho hàm số $f(x)$ liên tục trên $\mathbb{R}$ và $\displaystyle \int \limits_2^5 f(x)\mathrm{\,d}x=2025$. Tính $I=\displaystyle \int \limits_0^1{f\left(3x+2\right)\mathrm{\,d}x}$.
+	\shortans[]{$675$}	
+	\loigiai{
+		Đặt $u=3x+2\Rightarrow \mathrm{\,d}u = 3 \mathrm{\,d}x$ .\\
+	\begin{tabular}{l|lll}
+		$x$&$0$&\hspace{1cm}&$1$\\\hline
+		$u$&$2$&&$5$
+	\end{tabular}\\
+	$I=\dfrac{1}{3}\displaystyle \int \limits_2^5 f(u)\mathrm{\,d}u =\dfrac{1}{3} \displaystyle \int \limits_2^5 f(x)\mathrm{\,d}x= \dfrac{2025}{3}=675$.
+	}
+\end{ex}
+%--------------------------------------
+% Câu 3
+\begin{ex}%[2D4V2-5]
+	Cho hàm số $f(x)$ có đạo hàm liên tục trên $[1; 2]$, có $f\left(2\right)=14$ và $\displaystyle\int\limits_1^2{\dfrac{f(x)}{x}\mathrm{\,d}x=6}$. Khi đó $I=\displaystyle\int\limits_1^2{f'(x)}\ln x\mathrm{\,d}x=a\ln b - c$. Tính $T=a+b+c$.
+	\shortans[]{$22$}
+	\loigiai{
+		Đặt $\heva{ & u=\ln x \\   & v'=f'(x) } \Rightarrow \heva{  & u'=\dfrac{1}{x} \\   & v=f(x) } $. \\
+		Khi đó $I=f(x)\ln x\bigg|_1^2 - \displaystyle\int\limits_1^2{\dfrac{f(x)}{x}\mathrm{\,d}x=f\left(2\right)\cdot \ln 2 - 0 - 6=14\ln 2 - 6}$.\\
+		Do đó $a=14$, $b=2$, $c=6$.\\
+		Suy ra $T=a+b+c=22$.
+		}
+\end{ex}
+%Câu 4
+\begin{ex}%[2D4V2-1]
+	Cho hàm số $f\left( x \right)$ liên tục trên $\mathbb{R}$. Gọi $F\left( x \right),G\left( x \right)$ là hai nguyên hàm của $f\left( x \right)$ trên $\mathbb{R}$ thỏa mãn $F\left( 2 \right)+G\left( 2 \right)=2$ và $F\left( 0 \right)+G\left( 0 \right)=-2$. Khi đó $
+	\displaystyle\int\limits_0^8f\left( \dfrac{x}{4} \right)\text{d}x$ bằng
+\shortans[]{$8$}
+	\loigiai{
+		Ta có $G\left( x \right)=F\left( x \right)+C\Rightarrow \left\{ \begin{aligned}
+			& G\left( 2 \right)=F\left( 2 \right)+C \\
+			& G\left( 0 \right)=F\left( 0 \right)+C. \\
+		\end{aligned} \right.$ \\
+		Mà 
+		$\left\{ \begin{aligned}
+			& F\left( 2 \right)+G\left( 2 \right)=2 \\
+			& F(0)+G(0)=-2 \\
+		\end{aligned} \right.\Leftrightarrow \left\{ \begin{aligned}
+			& 2F(2)+C=2 \\
+			& 2F(0)+C=-2 \\
+		\end{aligned} \right.\Leftrightarrow F(2)-F(0)=2.$\\
+		Vậy $\displaystyle\int\limits_0^8f\left(\dfrac{x}{4} \right)\text{d}x=4\displaystyle\int\limits_0^2{f(t)dt=4\left(F(2)-F(0) \right)=8.}$}
+\end{ex}
+% Câu 5
+\begin{ex}%[2D4C2-4]
+Cho hàm số $f(x)$ liên tục trên $\mathbb{R}$ và thỏa mãn $\displaystyle\int\limits_0^{\tfrac{\pi}{4}} \tan x\cdot f(\cos^2 x)\mathrm{\,d}x=2$; $\displaystyle\int\limits_{\mathrm{e}}^{\mathrm{e}^2} \dfrac{f(\ln^2 x)}{x\ln x}\mathrm{\,d}x=2$. Khi đó $\displaystyle\int\limits_{\tfrac{1}{4}}^2 \dfrac{f(2x)}{x}\mathrm{\,d}x$ có giá trị bằng bao nhiêu?
+\shortans{$8$}
+
+	\loigiai{
+	\begin{itemize}
+		\item Ta có $I_1=\displaystyle\int\limits_0^{\tfrac{\pi}{4}} \tan x\cdot f(\cos^2 x)\mathrm{\,d}x=\dfrac{1}{2}\displaystyle\int\limits_0^{\tfrac{\pi}{4}} \dfrac{f(\cos^2 x)}{\cos^2 x}\cdot\sin 2x\mathrm{\,d}x$.\\
+		Đặt $t=\cos^2 x \Rightarrow \sin 2x\mathrm{\,d}x=-\mathrm{\,d}t$.\\
+		Khi đó $I_1=-\dfrac{1}{2}\displaystyle\int\limits_1^{\tfrac{1}{2}} \dfrac{f(t)}{t}\mathrm{\,d}x\Rightarrow \displaystyle\int\limits_{\tfrac{1}{2}}^1 \dfrac{f(t)}{t}\mathrm{\,d}x=4$.
+		\item Lại có $I_2=\displaystyle\int\limits_{\mathrm{e}}^{\mathrm{e}^2} \dfrac{f(\ln^2 x)}{x\ln x}\mathrm{\,d}x=\dfrac{1}{2}\displaystyle\int\limits_{\mathrm{e}}^{\mathrm{e}^2} \dfrac{f(\ln^2 x)}{\ln^2 x}\cdot\dfrac{2\ln x}{x}\mathrm{\,d}x$.\\
+		Đặt $t=\ln^2 x \Rightarrow \dfrac{2\ln x}{x}\mathrm{\,d}x=\mathrm{\,d}t$.\\
+		Khi đó $I_2=\dfrac{1}{2}\displaystyle\int\limits_1^4 \dfrac{f(t)}{t}\cdot\mathrm{\,d}x\Rightarrow \displaystyle\int\limits_1^4 \dfrac{f(t)}{t}\cdot\mathrm{\,d}x=4$.
+		\item Tính $I=\displaystyle\int\limits_{\tfrac{1}{4}}^{2} \dfrac{f(2x)}{x}\mathrm{\,d}x$. \\
+		Đặt $t=2x \Rightarrow \mathrm{\,d}x=\dfrac{1}{2}\mathrm{\,d}t$.\\
+		Vậy $I=\displaystyle\int\limits_{\tfrac{1}{2}}^4 \dfrac{f(t)}{t}\mathrm{\,d}t=\displaystyle\int\limits_{\tfrac{1}{2}}^{1} \dfrac{f(t)}{t}\mathrm{\,d}t+\displaystyle\int\limits_1^4 \dfrac{f(t)}{t}\mathrm{\,d}t=4+4=8$.
+	\end{itemize}		
+	}
+\end{ex}
+%--------------------------------------
+% Câu 6
+\begin{ex}%[2D4C2-3]
+	Cho hàm số $y=f(x)$ xác định trên $\left[0;\dfrac{\pi}{2}\right]$ thoả mãn $\break \displaystyle \int\limits_0^{\tfrac{\pi}{2}} \left[f^2(x)-2\sqrt{2}f(x)\sin\left(x-\dfrac{\pi}{4}\right)\right]\mathrm{\,d}x=\dfrac{2-\pi}{2}$. Tích phân $\displaystyle \int\limits_0^{\tfrac{\pi}{2}} f(x)\mathrm{\,d}x$ bằng
+	\shortans[]{$0$}
+	\loigiai{
+		Ta có $$ \displaystyle \int\limits_0^{\tfrac{\pi}{2}} 2\sin^2\left(x-\dfrac{\pi}{4}\right)\mathrm{\,d}x=\displaystyle \int\limits_0^{\tfrac{\pi}{2}} \left(1-\sin 2x\right)\mathrm{\,d}x=\left(x+\dfrac{\cos 2x}{2}\right)\Big|_0^{\tfrac{\pi}{2}}=\dfrac{\pi-2}{2}. $$
+		Dẫn tới
+		\begin{eqnarray*}
+			& & \displaystyle \int\limits_0^{\tfrac{\pi}{2}} \left[f^2(x)-2\sqrt{2}f(x)\sin\left(x-\dfrac{\pi}{4}\right)+2\sin^2\left(x-\dfrac{\pi}{4}\right)\right]\mathrm{\,d}x=0 \\
+			&\Leftrightarrow& \displaystyle \int\limits_0^{\tfrac{\pi}{2}} \left[f(x)-\sqrt{2}\sin\left(x-\dfrac{\pi}{4}\right)\right]^2\mathrm{\,d}x=0 \\
+			&\Leftrightarrow& \displaystyle \int\limits_0^{\tfrac{\pi}{2}} \left[f(x)-\sqrt{2}\sin\left(x-\dfrac{\pi}{4}\right)\right]\mathrm{\,d}x=0.
+		\end{eqnarray*}
+		Hay ta có $$ \displaystyle \int\limits_0^{\tfrac{\pi}{2}} f(x)\mathrm{\,d}x=\int\limits_0^{\tfrac{\pi}{2}} \sqrt{2}\sin\left(x-\dfrac{\pi}{4}\right)\mathrm{\,d}x=-\sqrt{2}\cos\left(x-\dfrac{\pi}{4}\right)\Big|_0^{\tfrac{\pi}{2}}=0. \vspace{-2em} $$
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B12-De2-KQ}

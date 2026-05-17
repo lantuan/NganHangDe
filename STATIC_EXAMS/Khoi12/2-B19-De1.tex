@@ -1,0 +1,453 @@
+\section{Công thức xác suất toàn phần. Công thức Bayes}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-2-B19]
+\caulc
+\begin{ex}%[2D6N2-1]Câu 1
+Cho hai biến cố $A$ và $B$ với $0<P(B)<1$. Khi đó công thức xác suất toàn phần cho biến cố $A$ là
+	\choice
+	{\True $\mathrm{P}(A)=\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})$}
+	{$\mathrm{P}(A)=\mathrm{P}(A)\mathrm{P}(A|B)+\mathrm{P}(\overline{A})\mathrm{P}(A|\overline{B})$}
+	{$\mathrm{P}(A)=\mathrm{P}(\overline{B})\mathrm{P}(A|B)+\mathrm{P}(B)\mathrm{P}(A|\overline{B})$}
+	{$\mathrm{P}(B)=\mathrm{P}(\overline{B})\mathrm{P}(A|B)+\mathrm{P}(B)\mathrm{P}(B|\overline{B})$}
+	\loigiai{Cho hai biến cố $A$ và $B$ với $0<P(B)<1$. Khi đó 
+		$\mathrm{P}(A)=\mathrm{P}(B)P(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})$ 
+		gọi là {\bf công thức xác suất toàn phần}.
+	}
+\end{ex}	
+\begin{ex}%[2D6H2-1]Câu 2
+Cho hai biến cố $A=A_1+A_2$ và biến cố $B=B_1+B_2$ biểu diễn theo đồ ven như sau
+\begin{center}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+	%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+	%Shape: Rectangle [id:dp41068169978107316] 
+	\draw  [fill={rgb, 255:red, 208; green, 2; blue, 27 }  ,fill opacity=1 ] (94,104) -- (354,104) -- (354,176) -- (94,176) -- cycle ;
+	%Shape: Ellipse [id:dp24667066386593728] 
+	\draw  [fill={rgb, 255:red, 126; green, 211; blue, 33 }  ,fill opacity=1 ] (144,140) .. controls (144,128.95) and (176.24,120) .. (216,120) .. controls (255.76,120) and (288,128.95) .. (288,140) .. controls (288,151.05) and (255.76,160) .. (216,160) .. controls (176.24,160) and (144,151.05) .. (144,140) -- cycle ;
+	%Straight Lines [id:da2324528203840277] 
+	\draw    (192,104) -- (192,176) ;
+	
+	% Text Node
+	\draw (302,115) node [anchor=north west][inner sep=0.75pt]   [align=left] {A\textsubscript{2}};
+	% Text Node
+	\draw (121,114) node [anchor=north west][inner sep=0.75pt]   [align=left] {A\textsubscript{1}};
+	% Text Node
+	\draw (169,131) node [anchor=north west][inner sep=0.75pt]   [align=left] {B\textsubscript{1}};
+	% Text Node
+	\draw (230,130) node [anchor=north west][inner sep=0.75pt]   [align=left] {B\textsubscript{2}};
+\end{tikzpicture}
+\end{center}
+Tính xác xuất của $P(A)$.
+	\choice
+	{$\mathrm{P}(A)=\mathrm{P}(B_1)\mathrm{P}(A_1|B_1)+\mathrm{P}(B_2)\mathrm{P}(A_1|B_2)$}
+	{\True $\mathrm{P}(A)=\mathrm{P}(B_1)\mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)$}
+	{$\mathrm{P}(A)=\mathrm{P}(B)\mathrm{P}(A_1|B_1)+\mathrm{P}(B)\mathrm{P}(A_2|B_2)$}
+	{$\mathrm{P}(A)=\mathrm{P}(A_1)\mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)$}
+	\loigiai{ 
+		Cho hai biến cố $A$ và $B$ với $0<P(B)<1$. Khi đó 
+		$\mathrm{P}(A)=\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})$ 
+		gọi là {\bf công thức xác suất toàn phần}.\\
+		  $\Rightarrow \mathrm{P}(A)=\mathrm{P}(B_1)\mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)$}
+\end{ex}
+%-----------3--------------
+\begin{ex}%[2D6N2-1]Câu 3
+Giả sử hai biến cố $A$ và $B$ ngẫu nhiên thỏa mãn $\mathrm{P}(A)>0$ với $0<\mathrm{P}(B)<1$. Khi đó công thức {\bf Bayes} là
+	\choice
+	{$\mathrm{P}(A|B)=\dfrac{\mathrm{P}(B)\mathrm{P}(A|B)}{\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})}$}
+	{$\mathrm{P}(B|A)=\dfrac{\mathrm{P}(A)P(A|B)}{\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})}$}
+	{\True $\mathrm{P}(B|A)=\dfrac{\mathrm{P}(B)P(A|B)}{\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})}$}
+	{$\mathrm{P}(B|A)=\dfrac{\mathrm{P}(B)\mathrm{P}(B|A)}{\mathrm{P}(B)\mathrm{P}(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})}$}
+	\loigiai{Giả sử hai biến cố $A$ và $B$ ngẫu nhiên thỏa mãn $P(A)>0$ với $0<P(B)<1$. Khi đó\\
+		$\mathrm{P}(B|A)=\dfrac{\mathrm{P}(B)\mathrm{P}(A|B)}{\mathrm{P}(B)P(A|B)+\mathrm{P}(\overline{B})\mathrm{P}(A|\overline{B})}$
+		 gọi là công thức {\bf Bayes}. 
+	}
+\end{ex}
+%-----------4-------------
+\begin{ex}%[2D6V2-2]Câu 4
+	Trên bàn có hai hộp $B_1$ và $B_2$ đều đựng đá cẩm thạch. Hộp $B_1$ chứa 7 viên xanh và 4 viên trắng. Hộp $B_2$ chứa 3 viên xanh và 10 viên vàng. Các hộp được sắp xếp sao cho xác suất chọn hộp $B_1$ là $\dfrac{1}{3}$ và xác suất chọn hộp $B_2$ là $\dfrac{2}{3}$. Kathy bị bịt mắt và dược yêu cầu chọn một viên đá cẩm thạch. Cô ấy sẽ được thưởng một chiếc TV nếu chọn được một viên màu xanh. Xác suất cô ấy được thưởng một chiếc TV màu xanh là bao nhiêu
+	\choice
+	{\True $\dfrac{157}{429}$}
+	{$\dfrac{158}{429}$}
+	{$\dfrac{159}{429}$}
+	{$\dfrac{59}{429}$}
+	\loigiai{Gọi $A$ là biến cố \lq\lq Kathy được thưởng một chiếc TV\rq\rq.\\
+		Gọi $B_j$ là biến cố \lq\lq hộp $B_j$ được chọn\rq\rq, $j=1,2$.\\
+		Xác suất $\mathrm{P}(B_1)=\dfrac{1}{3}, P(B_2)=\dfrac{2}{3}$.\\
+		Xác suất cần tìm là \\ $\mathrm{P}(A)=\mathrm{P}(B_1)\cdot \mathrm{P}(A|B_1)+\mathrm{P}(B_2)\cdot \mathrm{P}(A|B_2)=\dfrac{1}{3}\cdot\dfrac{7}{11}+\dfrac{2}{3}\cdot\dfrac{3}{13}=\dfrac{157}{429}$.
+	}
+	
+\end{ex}
+%-----------5-------------
+\begin{ex}%[2D6V2-2]Câu 5
+Có $0{,}5\%$ dân số mắc bệnh $X$. Có một xét nghiệm để phát hiện bệnh $X$. Đối với những người mắc bệnh $X$, Xác suất xét nghiệm này không dương tính là $2\%$. Đối vơi những người không mắc bệnh $X$, xác suất xét nghiệm này dương tính là $3\%$. Xác suất một người được chọn ngẫu nhiên có kết quả dương tính với xét nghiệm phát hiện bệnh $X$ là bao nhiêu?
+	\choice
+	{$\dfrac{13}{400}$}
+	{\True $\dfrac{139}{4000}$}
+	{$\dfrac{137}{4000}$}
+	{$\dfrac{13}{200}$}
+	\loigiai{ Gọi $A$ là biến cố \lq\lq người được chọn có kết quả dương tính với xét nghiệm phát hiện bệnh $X$ \rq\rq .\\
+		Gọi $B_1$, $B_2$ lần lượt là biến cố \lq\lq người được chọn mắc bệnh $X$\rq\rq. \\
+		Xác suất $\mathrm{P}(B_1)=\dfrac{5}{1000}$, $\mathrm{P}(B_2)=\dfrac{995}{1000}$.\\
+		Xác suất cần tìm là \\ $\mathrm{P}(A)=\mathrm{P}(B_1)\cdot \mathrm{P}(A|B_1)+\mathrm{P}(B_2)\cdot\mathrm{P}(A|B_2)=\dfrac{5}{1000}\cdot\dfrac{98}{1000}+\dfrac{995}{1000}\cdot\dfrac{3}{1000}=\dfrac{139}{4000}$
+	}
+\end{ex}
+%-----------6-------------
+\begin{ex}%[2D6V2-2]Câu 6
+Một cặp sinh đôi có thể do cùng một trứng sinh ra (sinh đôi thật), hoặc do hai trứng
+khác nhau sinh ra (sinh đôi giả). Các cặp sinh đôi thật luôn cùng giới tính. Đối với
+cặp sinh đôi giả thì khả năng cùng giới tính và khác giới tính là như nhau. Thống kê
+cho thấy $34\%$ cặp sinh đôi đều là trai, $30\%$ cặp sinh đôi đều là gái, và $36\%$ cặp sinh đôi có giới tính khác nhau. Tìm xác suất sinh đôi thật?
+	\choice
+	{$0{,}29$}
+	{$0{,}27$}
+	{\True$0{,}28$}
+	{$0{,}3$}
+	\loigiai{Gọi $B_1$, $B_2$, $A$ lần lượt là biến cố \lq\lq cặp sinh đôi là thật\rq\rq,\, \lq\lq cặp sinh đôi là giả\rq\rq,\, \lq\lq cặp sinh đôi cùng giới\rq\rq.
+	\begin{eqnarray*}
+	\mathrm{P}(A)& =& \mathrm{P}(B_1)\cdot \mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)\\
+\Leftrightarrow	\, \, \, 0{,}34+0{,}3	&= & P(B_1)\cdot1+[1-P(B_1)]\cdot0{,}5\\
+	\Rightarrow \quad \quad  P(B_1) &= & 0{,28}
+	\end{eqnarray*}
+	
+	}
+\end{ex}
+%-----------7-------------
+\begin{ex}%[2D6V2-2]Câu 7
+	Một lô hạt giống được chia làm $2$ loại: loại $1$ chiếm $\dfrac{2}{3}$ số hạt của lô, còn lại là loại $2$. Hạt trong loại $1$ có tỉ lệ nảy mầm là $80\%$, loại $2$ có tỉ lệ nảy mầm là $60\%$. Hỏi tỉ lệ nảy mầm chung của lô hạt giống này là bao nhiêu? (Hay nói cách khác: Ta lấy ngẫu nhiên từ lô ra $1$ hạt giống. Tìm xác suất để chọn được hạt nảy mầm).
+	\choice
+	{$\dfrac{11}{16}$}
+	{$\dfrac{11}{14}$}
+	{$\dfrac{11}{11}$}
+	{\True$\dfrac{11}{15}$}
+	\loigiai{ Gọi $A_i$ là biến cố \lq\lq hạt giống được lấy ra từ lô thứ $i$\rq\rq \, (với $i=1,2$).\\
+		Gọi $A$ là biến cố \lq\lq hạt giống được lấy ra là hạt nảy mầm\rq\rq .
+		Dễ thấy rằng $A_1$, $A_2$, $A_3$ tạo thành một hệ đầy đủ các biến cố.\\
+		Theo đề bài: $\mathrm{P}(A_1)=\dfrac{2}{3}$, $\mathrm{P}(A_2)=\dfrac{1}{3}$ và $\mathrm{P}(A|A_1)=0{,}8$, $\mathrm{P}(A|A_2)=0{,}6$.\\
+		Áp dụng công thức xác suất đầy đủ
+		$$\mathrm{P}(A)=\mathrm{P}(A_1)\cdot \mathrm{P}(A|A_1)+\mathrm{P}(A_2)\mathrm{P}(A|A_2)=\dfrac{2}{3}\cdot0{,}8+\dfrac{1}{3}\cdot0{,}6=\dfrac{11}{15}.$$
+		}
+\end{ex}
+%-----------8-------------
+\begin{ex}%[2D6V2-2]Câu 8
+Một trạm cấp cứu có $80\%$ nạn nhân bỏng nóng và $20\%$ bỏng do hóa chất. Loại bỏng do nóng có $30\%$ biến chứng và bỏng do hóa chất có $50\%$ biến chứng. Tìm xác suất của nạn nhân bị biến chứng.
+	\choice
+	{$0{,}35$}
+	{$0{,}36$}
+	{\True $0{,}34$}
+	{$0{,}37$}
+	\loigiai{ Gọi $A$ là biến cố \lq\lq nạn nhân bị biến chứng\rq\rq.
+		Gọi $A_1$ là biến cố \lq\lq nạn nhân bị bỏng do nóng\rq\rq.
+		Gọi $A_2$ là biến cố \lq\lq nạn nhân bị bỏng do hóa chất\rq\rq .
+		Ta thấy rằng $A_1$ và $A_2$ lập thành một hệ đầy đủ.\\
+		Theo đề bài	$\mathrm{P}(A_1)=0{,}8$;\, $\mathrm{P}(A_2)=0{,}2$; \,$\mathrm{P}(A|A_1)=0{,}3$; \,$\mathrm{P}(A|A_2)=0{,}5$.\\
+		Sử dụng công thức xác suất đầy đủ
+		$$\mathrm{P}(A)=\mathrm{P}(A_1)\mathrm{P}(A|A_1)+P(A_2)\mathrm{P}(A|A_2)=0{,}8\cdot0{,}3+0{,}2\cdot0{,}5=0{,}34.$$
+	}
+\end{ex}
+%-----------9-------------
+\begin{ex}%[2D6C2-2]Câu 9
+Chuồng gà thứ nhất có $9$ con mái và $1$ con trống. Chuồng gà thứ hai có $1$ con mái và $5$ con trống. Từ mỗi chuồng gà bắt ra ngẫu nhiên một con. Các con gà còn lại được dồn vào chuồng thứ ba. Bắt ngẫu nhiên một con gà trong chuồng thứ ba. Tính xác suất để bắt được gà trống.
+	\choice
+	{$\dfrac{38}{107}$}
+	{\True$\dfrac{38}{105}$}
+	{$\dfrac{38}{109}$}
+	{$\dfrac{39}{105}$}
+	\loigiai{ 
+		$B_1$ là biến cố $2$ con gà được bắt đều là trống.\\
+		$B_2$ là biến cố $2$ con gà được bắt đều là mái.\\
+		$B_3$ là biến cố $2$ con gà được bắt gồm $1$ trống và $1$ mái.\\
+		$A$ là biến cố bắt được gà trống ở chuồng thứ ba.\\
+		 $B_1$ xảy ra $\Rightarrow$  Chuồng thứ ba gồm: $10$ gà mái và $4$ gà trống.\\
+		 $B_2$ xảy ra $\Rightarrow$  Chuồng thứ ba gồm: $8$ gà mái và $6$ gà trống.\\
+		 $B_3$ xảy ra $\Rightarrow$  Chuồng thứ ba gồm: $9$ gà mái và $5$ gà trống.\\
+		$\mathrm{P}(B_1)=\dfrac{1}{10}\cdot \dfrac{\mathrm{C}_{5}^{1}}{6}=\dfrac{1}{12}$;
+		$\mathrm{P}(B_2)=\dfrac{\mathrm{C}_{9}^{1}}{10}\cdot \dfrac{1}{6}=\dfrac{3}{20}$;
+		$\mathrm{P}(B_3)=1-\mathrm{P}(B_1)-\mathrm{P}(B_2)=\dfrac{23}{30}$.\\
+		Xác suất để bắt được gà trống ở chuồng thứ ba là
+		\begin{eqnarray*}
+		\mathrm{P}(A)&=& \mathrm{P}(B_1)\mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)+\mathrm{P}(B_3)\mathrm{P}(A|B_3)\\
+			&=& \dfrac{1}{12}\cdot\dfrac{4}{14}+\dfrac{3}{20}\cdot\dfrac{6}{14}+\dfrac{23}{30}\cdot\dfrac{5}{14}\\
+			&= & \dfrac{38}{105}.
+		\end{eqnarray*}
+
+		}
+\end{ex}
+%-----------10-------------
+\begin{ex}%[2D6V2-3]Câu 10
+Dây chuyền lắp ráp được các chi tiết do hai máy sản xuất. Trung bình máy thứ nhất cung cấp $60\%$ chi tiết, máy thứ hai cung cấp $40\%$ chi tiết. Khoảng $90\%$ chi tiết do máy thứ nhất sản xuất là đạt tiêu chuẩn, còn $85\%$ chi tiết do máy thứ hai sản xuất là đạt tiêu chuẩn. Lấy ngẫu nhiên từ dây chuyền một sản phẩm, lấy nó đạt tiêu chuẩn. Tìm xác suất để sản phẩm đó do máy thứ nhất sản xuất.
+	\choice
+	{$0{,}713$}
+	{$0{,}715$}
+	{$0{,}814$}
+	{\True$0{,}614$}
+	\loigiai{Gọi $A$ là biến cố \lq\lq Chi tiết lấy từ dây chuyền đạt tiêu chuẩn\rq\rq.\\ $B_1$ là biến cố \lq\lq Chi tiết do máy thứ nhất sản xuất \rq\rq.\\
+	$B_2$ là biến cố \lq\lq Chi tiết do máy thứ 2 sản xuất \rq\rq.\\
+	Ta cần tính xác suất $\mathrm{P}(B_1|A)$.\\
+	Theo điều kiện bài toán $\mathrm{P}(B_1)=0{,}6$; $\mathrm{P}(B_2)=0{,}4$; $\mathrm{P}(A|B_1)=0{,}9$; $\mathrm{P}(A|B_2)=0{,}85$. \\
+	 Theo công thức Bayes
+	 $$\mathrm{P}(B_1|A)=\dfrac{\mathrm{P}(B_1)\mathrm{P}(A|B_1)}{\mathrm{P}(B_1)\mathrm{P}(A|B_1)+\mathrm{P}(B_2)\mathrm{P}(A|B_2)}=\dfrac{0{,}6\cdot0{,9}}{0{,}6\cdot0{,9}+0{,}4\cdot0{,}85}=0{,}614.$$
+	}
+\end{ex}
+%----------11------
+\begin{ex}%[2D6C2-3]Câu 11
+ Tan giờ học buổi chiều một sinh viên có $60\%$ về nhà ngay, nhưng do giờ cao điểm nên có $30\%$ ngày bị tắc đường nên bị về nhà muộn (từ $30$ phút trở lên) còn $20\%$ số ngày sinh viên đó vào quán Internet cạnh trường để chơi game, những ngày này xác suất về nhà muộn là $80\%$. Còn lại những ngày khác sinh viên đó đi chơi với bạn bè có xác suất về muộn là $90\%$. Tính xác suất sinh viên đó đi chơi với bạn và về muộn.
+	\choice
+	{$0{,}275$}
+	{$0{,}575$}
+	{\True $0{,}375$}
+	{$0{,}475$}
+	\loigiai{ 
+		Gọi $B$ là biến cố sinh viên đi học về muộn \\
+		Gọi $\overline{B}$ là biến cố sinh viên đó đi học không về muộn\\
+		$E_1$ là biến cố tan học về nhà ngay $\Rightarrow \mathrm{P}(E_1)=0{,}6$; $\mathrm{P}(B|E_1)=0{,}3$.\\
+     	$E_2$ là biến cố tan học đi chơi game $\Rightarrow \mathrm{P}(E_2)=0{,}2$; $\mathrm{P}(B|E_2)=0{,}8$.\\
+	    $E_3$ là biến cố tan học về đi chơi với bạn $\Rightarrow \mathrm{P}(E_3)=0{,}2$; $\mathrm{P}(B|E_3)=0{,}9$.\\
+	$B$ có thể xảy ra một trong 3 biến cố
+	 \begin{eqnarray*}
+	 	\mathrm{P}(B)&= & \mathrm{P}(E_1)\cdot \mathrm{P}(B|E_1)+\mathrm{P}(E_2)\cdot \mathrm{P}(B|E_2)+\mathrm{P}(E_3)\cdot \mathrm{P}(B|E_3)\\
+	 	&= & 0{,}6\cdot0{,}3+0{,}2\cdot0{,}8+0{,}2\cdot0{,}9\\
+	 	&= & 0{,}52.
+	 \end{eqnarray*}
+	Xác suất để sinh viên đó đi chơi với bạn và về muộn là
+	$\mathrm{P}(E_3|B)=\dfrac{\mathrm{P}(E_3)\cdot \mathrm{P}(B|E_3)}{\mathrm{P}(B)}=0{,}375$.
+	}
+\end{ex}
+%----------12--------
+\begin{ex}%[2D6V2-3]Câu 12
+	Dây chuyền lắp ráp máy vô tuyến điện gồm các linh kiện là sản phẩm từ $2$ nhà máy sản xuất ra. Số linh kiện nhà máy $1$ sản xuất chiếm $55\%$, số linh kiện nhà máy $2$ sản xuất chiếm $45\%$; tỷ lệ sản phẩm đạt tiêu chuẩn của nhà máy $1$ là $90\%$, nhà máy $2$ là $87\%$. Lấy ngẫu nhiên ra $1$ linh kiện từ dây chuyền lắp ráp đó ra kiểm tra thì được kết quả linh kiện đạt chuẩn. Tìm xác suất để linh kiện đó do nhà máy $1$ sản xuất?
+	\choice
+	{$0{,}6683$}
+	{\True$0{,}5583$}
+	{$0{,}7583$}
+	{$0{,}4583$}
+	\loigiai{ Gọi $A_i$ là biến cố \lq\lq linh kiện do nhà máy thứ $i$ sản xuất\rq\rq \,  $i=1,2$.\\
+		Gọi $B$ là biến cố \lq\lq linh kiện đạt chuẩn\rq\rq, ta cần tìm $P(A_1|B)$\\
+		Ta có\\ $\mathrm{P}(B)=\mathrm{P}(A_1)\mathrm{P}(B|A_1)+\mathrm{P}(A_2)\mathrm{P}(B|A_2)=0{,}55\cdot0{,}9+0{,}45\cdot0{,}87=0{,}8865$.\\
+		$\mathrm{P}(A_1|B)=\dfrac{\mathrm{P}(A_1)\mathrm{P}(B|A_1)}{\mathrm{P}(B)}=\dfrac{0{,}55\cdot0{,}9}{0{,}8865}=0{,}5583$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B19}
+
+\cauds%Câu đúng sai
+\Opensolutionfile{ans}[ans/ans-2-B19-DS]
+
+%%%%B19
+\begin{ex}%[2D6H2-2]
+	Người ta khảo sát khả năng chơi nhạc cụ của một nhóm học sinh tại trường X. Nhóm này có $60\%$ học sinh là nam. Kết quả khảo sát cho thấy có $20\%$ học sinh nam và $15\%$ học sinh nữ biết chơi ít nhất một nhạc cụ. Chọn ngẫu nhiên một học sinh trong nhóm này. Gọi $A$ là biến cố \lq\lq Chọn được một học sinh biết chơi ít nhất một nhạc cụ\rq\rq\,và $B$, $\overline{B}$ lần lượt là các biến cố \lq\lq Chọn được một học sinh nam\rq\rq\,và \lq\lq Chọn được một học sinh nữ\rq\rq. 
+	\choiceTF
+	{\True Xác suất $\mathrm{P}(B) = 60\% = 0{,}6$}
+	{$\mathrm{P}(A|B) = 0{,}8$}
+	{\True $\mathrm{P}(A|\overline{B}) = 0{,}15$}
+	{\True Xác suất để chọn được học sinh biết chơi ít nhất một nhạc cụ là $18\%$}
+	\loigiai{
+		Xét phép thử chọn ngẫu nhiên một học sinh trong nhóm.\\
+		Gọi $A$ là biến cố \lq\lq Chọn được một học sinh biết chơi ít nhất một nhạc cụ\rq\rq \,và $B$, $\overline{B}$ lần lượt là các biến cố \lq\lq Chọn được một học sinh nam\rq\rq\,và \lq\lq Chọn được một học sinh nữ\rq\rq.
+		Theo đề bài 
+		\begin{itemchoice}
+			\itemch $\mathrm{P}(B) = 60\% = 0{,}6$.
+			$\mathrm{P}(\overline{B}) = 1-0{,}6 = 0{,}4$.
+			\itemch $\mathrm{P}(A|B) = 20\% = 0{,}2$.
+			\itemch $\mathrm{P}(A|\overline{B}) = 15\% = 0{,}15$. 
+			\itemch Áp dụng công thức xác suất toàn phần, ta có
+			$$\mathrm{P}(A) = \mathrm{P}(B)\cdot \mathrm{P}(A|B) + \mathrm{P}(\overline{B})\cdot \mathrm{P}(A|\overline{B}) = 0{,}6\cdot0{,}2 + 0{,}4\cdot 0{,}15 = 0{,}18.$$
+			Vậy xác suất để chọn được một học sinh biết chơi nhạc cụ là $0{,}18$ hay $18\%$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6H2-4]
+	Kết quả khảo sát tại một xã cho thấy có $20\%$ cư dân hút thuốc lá. Tỉ lệ cư dân thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp trong số những người hút thuốc lá và không hút thuốc lá lần lượt là $70\%$, $15\%$. Giả sử ta gặp một cư dân của xã, gọi $A$ là biến cố \lq\lq Người đó có hút thuốc lá\rq\rq\,và $B$ là biến cố \lq\lq Người đó thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp\rq\rq.
+	\choiceTF
+	{$\mathrm{P}(AB)=0{,}13$}
+	{$\mathrm{P}(\overline{A}B)=0{,}14$}
+	{\True Nếu ta gặp một cư dân của xã thì xác suất người đó thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp là $0{,}26$}
+	{\True Nếu ta gặp một cư dân của xã thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp thì xác suất người đó có hút thuốc lá xấp xỉ $54\%$}
+	\loigiai{
+		Giả sử ta gặp một cư dân của xã, gọi $A$ là biến cố \lq\lq Người đó có hút thuốc lá\rq\rq\,và $B$ là biến cố \lq\lq Người đó thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp\rq\rq.\\
+		Khi đó, ta có $\mathrm{P}(A)=0{,}2$; $\mathrm{P}(\overline{A})=0{,}8$; $\mathrm{P}(B|A)=0{,}7$, $\mathrm{P}(B|\overline{A})=0{,}15$.
+		\begin{itemchoice}
+			\itemch $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B|A)=0{,}2\cdot 0{,}7=0{,}14$.
+			\itemch $\mathrm{P}(\overline{A}B)=\mathrm{P}(\overline{A})\cdot \mathrm{P}(B|\overline{A})=0{,}15\cdot0{,}8=0{,}12$.
+			\itemch	
+			Ta có $\mathrm{P}(B) = \mathrm{P}(A)\cdot \mathrm{P}(B|A) + \mathrm{P}(\overline{A})\cdot \mathrm{P}(B|\overline{A}) = 0{,}14 + 0{,}12 = 0{,}26$.\\
+			Vậy nếu ta gặp một cư dân của xã thì xác suất người đó thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp là $26\%$.
+			\itemch Theo công thức Bayes, ta có $\mathrm{P}(A|B) = \dfrac{\mathrm{P}(A)\mathrm{P}(B|A)}{\mathrm{P}(B)} =\dfrac{ 0{,}2\cdot 0{,}7}{0{,} 26}\approx 0{,}54$.\\
+			Vậy nếu ta gặp một cư dân của xã thường xuyên gặp các vấn đề sức khoẻ về đường hô hấp thì xác suất người đó có hút thuốc lá là khoảng $54\%$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6H2-4]
+	Xác suất để một chuyến bay khởi hành đúng giờ là $\mathrm{P}(D)=0{,}83$; xác suất để nó đến đúng giờ là $\mathrm{P}(A)=0{,}82$; xác suất để nó khởi hành và đến đều đúng giờ là $\mathrm{P}(D \cap A)=0{,}78$. 
+	\choiceTF
+	{\True Xác suất để một máy bay đến đúng giờ biết rằng nó đã khởi hành đúng giờ là $0{,}94$}
+	{Xác suất để một máy bay khởi hành đúng giờ biết rằng nó sẽ đến đúng giờ là $0{,}85$}
+	{\True Xác suất để một máy bay đến đúng giờ biết rằng nó khởi hành không đúng giờ là $0{,}24$}
+	{Xác suất để một máy bay khởi hành đúng giờ biết rằng nó sẽ đến không đúng giờ là $0{,}95$}
+	\loigiai{
+		Ta có $\mathrm{P}(A \cap \overline{D})=\mathrm{P}(A)-\mathrm{P}(A \cap D)=0{,}82-0{,}78=0{,}04$.\\
+		$\mathrm{P}(D \cap \overline{A})=\mathrm{P}(D)-\mathrm{P}(D \cap A)=0{,}83-0{,}78=0{,}05$.
+		\begin{itemchoice}
+			\itemch Xác suất để một máy bay đến đúng giờ biết rằng nó đã khởi hành đúng giờ là
+			$$
+			\mathrm{P}(A \mid D)=\frac{\mathrm{P}(D \cap A)}{\mathrm{P}(D)}=\frac{0{,}78}{0{,}83}=0{,}94.
+			$$
+			\itemch Xác suất để một máy bay khởi hành đúng giờ biết rằng nó đã đến đúng giờ là
+			$$
+			\mathrm{P}(D \mid A)=\frac{\mathrm{P}(D \cap A)}{\mathrm{P}(A)}=\frac{0{,}78}{0{,}82}=0{,}95.
+			$$
+			\itemch Xác suất để máy bay đến đúng giờ khi nó khởi hành không đúng giờ là
+			$$
+			\mathrm{P}(A \mid \overline{D})=\dfrac{\mathrm{P}(A \cap \overline{D})}{\mathrm{P}(\overline{D})}=\dfrac{0{,}82-0{,}78}{0{,}17}=0{,}24.
+			$$
+			\itemch Xác suất để một máy bay khởi hành đúng giờ biết rằng nó sẽ đến đúng giờ là $$
+			\mathrm{P}(D \mid \overline{A})=\dfrac{\mathrm{P}(D \cap \overline{A})}{\mathrm{P}(\overline{A})}=\frac{0{,}83-0{,}78}{1-0{,}82}=0{,}28.
+			$$
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[2D6H2-4]
+	Cho hai biến cố $A$, $B$ sao cho $\mathrm{P}(A)=0{,}6$; $\mathrm{P}(B)=0{,}4$; $\mathrm{P}(A \mid B)=0{,}3$. 
+	\choiceTF
+	{\True $\mathrm{P}(B \mid A)=0{,}2$}
+	{\True $\mathrm{P}(A \mid \overline{B})=0{,}8$}
+	{$\mathrm{P}(B \mid \overline{A})=0{,}8$}
+	{$\mathrm{P}(B \cap A)=0{,}24$}
+	\loigiai{\begin{itemchoice}
+			\itemch	Áp dụng công thức Bayes, ta có
+			$$
+			\mathrm{P}(B \mid A)=\dfrac{\mathrm{P}(B) \cdot \mathrm{P}(A \mid B)}{\mathrm{P}(A)}=\frac{0{,}4 \cdot 0{,}3}{0{,}6}=0{,}2.
+			$$
+			\itemch Ta có
+			$\mathrm{P}(A)=\mathrm{P}(B)\cdot \mathrm{P}(A \mid B) + \mathrm{P}(\overline{B})\cdot \mathrm{P}(A \mid \overline{B})$.\\
+			Suy ra $\mathrm{P}(A \mid \overline{B})=\dfrac{0{,}6-0{,}4\cdot0{,}3}{1-0{,}4}=0{,}8$.
+			
+			\itemch Ta có
+			$\mathrm{P}(B)=\mathrm{P}(A)\cdot \mathrm{P}(B \mid A) + \mathrm{P}(\overline{A})\cdot \mathrm{P}(B \mid \overline{A})$.\\
+			Suy ra $\mathrm{P}(B \mid \overline{A})=\dfrac{0{,}4-0{,}6\cdot0{,}2}{1-0{,}6}=0{,}7$.
+			\itemch Ta có $\mathrm{P}(B \cap A)=\mathrm{P}(A\mid B)\cdot \mathrm{P}(B)=0{,}3\cdot 0{,}4=0{,}12$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-B19-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-B19-KQ]
+
+\caukq
+\begin{ex}%%[2D6V2-3]Câu 1
+Có $7$ hộp bi, trong đó có $4$ hộp loại $1$, $3$ hộp loại $2$. Mỗi hộp loại $1$ có $3$ bi trắng và $5$ bi đỏ, mỗi hộp loại $2$ có $4$ bi trắng và $6$ bi đỏ. Chọn ngẫu nhiên $1$ hộp và từ đó lấy ra $1$ bi thì được bi trắng. Tìm xác suất để bi lấy ra này thuộc hộp loại $2$.  (Làm tròn đến kết quả hàng phần trăm).
+	\shortans{$0{,}44$}
+	\loigiai{ 
+		Gọi $B$ là biến cố  \lq\lq lấy được bi trắng\rq\rq.\\
+		$A_1$ là biến có lấy hộp loại 1.\\
+		$A_2$ là biến có lấy hộp loại 2.\\
+		$\mathrm{P}(A_1)=\dfrac{ \mathrm{C} _{4}^{1}}{ \mathrm{C} _{7}^{1}}=\dfrac{4}{7}$;
+		$\mathrm{P}(A_2)=\dfrac{ \mathrm{C} _{3}^{1}}{ \mathrm{C} _{7}^{1}}=\dfrac{3}{7}$;
+		$\mathrm{P}(B|A_1)=\dfrac{ \mathrm{C} _{3}^{1}}{ \mathrm{C} _{8}^{1}}=\dfrac{3}{8}$;
+		$\mathrm{P}(B|A_2)=\dfrac{ \mathrm{C} _{4}^{1}}{ \mathrm{C} _{10}^{1}}=\dfrac{4}{10}=\dfrac{2}{5}$.\\
+		$\Rightarrow \mathrm{P}(B)=\mathrm{P}(A_1)\mathrm{P}(B|A_1)+\mathrm{P}(A_2)\mathrm{P}(B|A_2)=\dfrac{4}{7}\cdot\dfrac{3}{8}+\dfrac{3}{7}\cdot\dfrac{2}{5}=\dfrac{27}{70}$.\\
+		Xác suất để bi lấy ra này thuộc hộp loại $2$ là\\
+		$\mathrm{P}(A_2|B)=\dfrac{\mathrm{P}(A_2)\mathrm{P}(B|A_2)}{\mathrm{P}(B)}=\dfrac{\dfrac{3}{7}\cdot\dfrac{2}{5}}{\dfrac{27}{70}}=\dfrac{4}{9}\approx 0{,}44$.
+	}
+\end{ex}
+
+\begin{ex}%[2D6V2-2]Câu 2
+Trong $12$ xạ thủ có $5$ người bắn trúng hồng tâm với xác suất $0{,}8$; $7$ người bắn trúng hồng tâm với xác suất $0{,}7$. Chọn ngẫu nhiên $1$ xạ thủ. Tìm xác suất để người này bắn trúng hồng tâm.  (Làm tròn đến kết quả hàng phần trăm).
+	\shortans{$0{,}74$}
+	\loigiai{ Gọi $A$ là biến cố \lq\lq Xạ thủ bắn trúng hồng tâm\rq\rq.\\
+	$A_1$ là biến cố \lq\lq nhóm $5$ người bắn trúng hồng tâm\rq\rq.\\
+	$A_2$ là biến cố \lq\lq nhóm $7$ người bắn trúng hồng tâm\rq\rq.\\
+	$\mathrm{P}(A_1)=\dfrac{5}{12}$; $\mathrm{P}(A_2)=\dfrac{7}{12}$;
+	$\mathrm{P}(A|A_1)=0{,}8$; $P(A|A_2)=0{,}7$.\\
+	Xác suất để người này bắn trúng hồng tâm
+	$$\mathrm{P}(A)=\mathrm{P}(A_1)\mathrm{P}(A|A_1)+\mathrm{P}(A_1)P(A|A_2)=\dfrac{5}{12}\cdot0{,}8+\dfrac{7}{12}\cdot0{,}7=\dfrac{89}{120}\approx 0{,}74.$$
+		}
+\end{ex}
+
+\begin{ex}%[2D6V2-2]Câu 3
+ Có $3$ hộp phấn. Hộp thứ nhất có $7$ viên trắng và $3$ viên vàng; hộp thứ hai có $16$ viên trắng và $4$ viên vàng; hộp thứ $3$ có $22$ viên trắng và $8$ viên vàng. Ta tung đồng thời $3$ đồng xu cân đối và đồng chất: nếu được cả $3$ mặt sấp thì chọn hộp thứ nhất; nếu được $1$ mặt sấp và $2$ mặt ngửa thì chọn hộp thứ hai; trường hợp còn lại thì chọn hộp thứ ba. Từ hộp đã chọn ta lấy ngẫu nhiên ra $1$ viên phấn. Tính xác suất để lấy được viên phấn trắng. (Làm tròn đến kết quả hàng phần trăm).
+	\shortans{$0{,}75$}
+	\loigiai{ 
+		Gọi $A$ là biến cố \lq\lq Lấy được một viên phấn trắng\rq\rq.\\
+		 $A_1$ là biến cố  \lq\lq Chọn hộp 1\rq\rq.\\
+		 $A_2$ là biến cố \lq\lq Chọn hộp 2\rq\rq.\\
+		 $A_3$ là biến cố \lq\lq Chọn hộp 3\rq\rq.\\
+		 $\mathrm{P}(A_1)=\left ( \dfrac{1}{2} \right )^3$.\\ 
+		 $\mathrm{P}(A_2)=3\cdot\dfrac{1}{2}\left ( \dfrac{1}{2} \right )^2=\dfrac{3}{8}$.\\ 
+         $\mathrm{P}(A_3)=1-\dfrac{3}{8}-\dfrac{1}{8}=\dfrac{1}{2}$.\\	 
+	 	  	$\mathrm{P}(A|A_1)=\dfrac{7}{10}$; $\mathrm{P}(A|A_2)=\dfrac{16}{20}=\dfrac{4}{5}$;$\mathrm{P}(A|A_3)=\dfrac{22}{30}=\dfrac{11}{15}$.\\
+	 	  	Xác suất để lấy được viên phấn trắng
+	 	   	\begin{eqnarray*}
+	 	  	P(A)	& =& \mathrm{P}(A_1)\mathrm{P}(A|A_1)+\mathrm{P}(A_2)\mathrm{P}(A|A_2)+\mathrm{P}(A_3)\mathrm{P}(A|A_3)\\
+	 	  		&= & \dfrac{1}{8}\cdot\dfrac{7}{10}+\dfrac{3}{8}\cdot\dfrac{4}{5}+\dfrac{1}{2}\cdot\dfrac{11}{5}\\
+	 	  		& =& \dfrac{181}{240}\\
+	 	  		&\approx &0{,75}.
+	 	  	\end{eqnarray*}
+	}
+\end{ex}
+
+\begin{ex}%%[2D6C2-2]Câu 4
+Một loại linh kiện do $3$ nhà máy số $I$, số $II$, số $III$ cùng sản xuất. Tỷ lệ phế phẩm của các nhà máy lần lượt là $I\colon 0{,}04$; $II\colon 0{,}03$ và $III\colon 0{,}05$. Trong $1$ lô linh kiện để lẫn lộn $80$ sản phẩm của nhà máy số $I$, $120$ của nhà máy số $II$ và $100$ của nhà máy số $III$. Một khách hàng lấy ngẫu nhiên 1 linh kiện từ lô hàng đó. Tính Xác suất để được linh kiện tốt?  (Làm tròn đến kết quả hàng phần trăm).
+	\shortans{$0{,}96$}
+	\loigiai{
+		Gọi $E_1$ là biến cố \lq\lq phế phẩm máy số $I$\rq\rq $\Rightarrow \mathrm{P}(E_1)=0{,}04$; $\mathrm{P}(\overline{E_1})=0{,}96$.\\
+		Gọi $E_2$ là biến cố \lq\lq phế phẩm máy số $II$\rq\rq $\Rightarrow \mathrm{P}(E_2)=0{,}03$; $\mathrm{P}(\overline{E_2})=0{,}97$.\\
+		Gọi $E_3$ là biến cố \lq\lq phế phẩm máy số $III$\rq\rq $\Rightarrow P(E_1)=0{,}05$; $P(\overline{E_3})=0{,}95$.\\
+		Gọi $B$ là biến cố khách hàng lấy được $1$ linh kiện tốt\\
+		$\mathrm{P}(B|\overline{E_1})=\dfrac{\mathrm{C}_{80}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{4}{15}$;
+		$\mathrm{P}(B|\overline{E_2})=\dfrac{\mathrm{C}_{120}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{2}{5}$;
+		$\mathrm{P}(B|\overline{E_3})=\dfrac{\mathrm{C}_{100}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{1}{3}$.\\
+		 Xác suất để khách hàng lấy được linh kiện tốt là
+	\begin{eqnarray*}
+			 	\mathrm{P}(B)	& =& \mathrm{P}(\overline{E_1})\mathrm{P}(B|\overline{E_1})+\mathrm{P}(E_2)\mathrm{P}(B|\overline{E_2})+\mathrm{P}(E_3)P(B|\overline{E_3})\\
+		 	&= & 0{,}96\cdot\dfrac{4}{15}+0{,}97\cdot\dfrac{2}{5}+0{,}95\cdot\dfrac{1}{3}\\
+		 	& =& \dfrac{181}{240}\\
+		 	&\approx &0{,}96.
+		 \end{eqnarray*}
+
+	}
+\end{ex}
+
+
+\begin{ex}%[2D6C2-3]Câu 5
+Một loại linh kiện do $3$ nhà máy số $I$, số $II$, số $III$ cùng sản xuất. Tỷ lệ phế phẩm của các nhà máy lần lượt là: $I$: $0{,}04$; $II$: $0{,}03$ và $III$: $0{,}05$. Trong $1$ lô linh kiện để lẫn lộn $80$ sản phẩm của nhà máy số $I$, $120$ của nhà máy số $II$ và $100$ của nhà máy số $III$. Khách hàng lấy phải một linh kiện loại phế phẩm từ lô hàng đó. Khả năng linh kiện đó do nhà máy nào sản xuất là cao nhất?  (Làm tròn đến kết quả hàng phần trăm).
+\shortans{$3$}
+\loigiai{
+	Gọi $E_1$ là biến cố \lq\lq phế phẩm máy số $I$\rq\rq $\Rightarrow \mathrm{P}(E_1)=0{,}04,\mathrm{P}(\overline{E_1})=0{,}96$.\\
+	Gọi $E_2$ là biến cố \lq\lq phế phẩm máy số $II$\rq\rq $\Rightarrow \mathrm{P}(E_2)=0{,}03,\mathrm{P}(\overline{E_2})=0{,}97$.\\
+	Gọi $E_3$ là biến cố \lq\lq phế phẩm máy số $III$\rq\rq $\Rightarrow \mathrm{P}(E_1)=0{,}05,\mathrm{P}(\overline{E_3})=0{,}95$\\
+	Gọi $B$ là biến cố khách hàng lấy được $1$ linh kiện tốt\\
+	$\mathrm{P}(B|\overline{E_1})=\dfrac{\mathrm{C}_{80}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{4}{15}$;
+	$\mathrm{P}(B|\overline{E_2})=\dfrac{\mathrm{C}_{120}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{2}{5}$;
+	$\mathrm{P}(B|\overline{E_3})=\dfrac{\mathrm{C}_{100}^{1}}{\mathrm{C}_{300}^{1}}=\dfrac{1}{3}$.\\
+	Xác suất để khách hàng lấy được linh kiện tốt là\allowdisplaybreaks
+	\begin{eqnarray*}
+	\mathrm{P}(B)&=&\mathrm{P}(\overline{E_1})\mathrm{P}(B|\overline{E_1})+P(\overline{E_2})\mathrm{P}(B|\overline{E_2})+\mathrm{P}(\overline{E_3})\mathrm{P}(B|\overline{E_3})\\
+	&=&0{,}96\cdot\dfrac{4}{15}+0{,}97\cdot\dfrac{2}{5}+0{,}95\cdot\dfrac{1}{3}\approx 0{,}96.
+	\end{eqnarray*}
+	Gọi $\overline{B}$ là biến cố khách hàng lấy $1$ linh kiện loại không tốt\\
+			 $\mathrm{P}(\overline{B})=1-\mathrm{P}(B)=0{,}04$.\\
+	$\mathrm{P}(E_1|\overline{B})=\dfrac{\mathrm{P}(E_1)P(\overline{B}|E_1)}{\mathrm{P}(\overline{B})}=\dfrac{0{,}04 \cdot \dfrac{\mathrm{C}_{80}^{1}}{\mathrm{C}_{300}^{1}}}{0{,}04}=0{,}26$.\\
+	$\mathrm{P}(E_2|\overline{B})=\dfrac{\mathrm{P}(E_2)\mathrm{P}(\overline{B}|E_2)}{\mathrm{P}(\overline{B})}=\dfrac{0{,}03 \cdot \dfrac{\mathrm{C}_{120}^{1}}{\mathrm{C}_{300}^{1}}}{0{,}04}=0{,}3$.\\
+	$\mathrm{P}(E_3|\overline{B})=\dfrac{\mathrm{P}(E_3)P(\overline{B}|E_3)}{\mathrm{P}(\overline{B})}=\dfrac{0{,}05 \cdot \dfrac{\mathrm{C}_{100}^{1}}{\mathrm{C}_{300}^{1}}}{0{,}04}=0{,}41$.\\
+	Vậy linh kiện đó do máy $III$ là cao nhất.
+	}
+\end{ex}
+
+\begin{ex}%[2D6V2-3]Câu 6
+	Trong $1$ đám đông, số người nam bằng số người nữ. Xác suất mắc cận thị của nam là $0{,}4$ và nữ là $0{,}6$. Chọn ngẫu nhiên $1$ người. Xác suất chọn được nam không cận thị. (Làm tròn đến kết quả hàng phần trăm).
+	\shortans{$0{,}6$}
+	\loigiai{ Goi tiêp $H_1$ là biến cố chọn nam; $H_2$ là biến cố chọn được nữ.\\
+		$C$ là biến cố người được chọn là không cận thị.\\
+		Ta có $\mathrm{P}(H_1)=\mathrm{P}(H_2)=\dfrac{1}{2}$\\
+		 $\mathrm{P}(C)=\mathrm{P}(H_1)\mathrm{P}(C|H_1)+\mathrm{P}(H_2)\mathrm{P}(C|H_2)=\dfrac{1}{2}\cdot0{,}6+\dfrac{1}{2}\cdot0{,}4=0{,}5$.\\
+		Xác suất để chọn ngẫu nhiên ra $1$ người mà người đó là nam không cận thị là\\ (Áp dụng định lý Bayes)\\
+		$\mathrm{P}(H_1|C)=\dfrac{\mathrm{P}(H_1)\mathrm{P}(C|H_1)}{\mathrm{P}(C)}=\dfrac{\dfrac{1}{2}\cdot0{,}6}{0{,}5}=0{,}6$.}
+	\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-B19-KQ}

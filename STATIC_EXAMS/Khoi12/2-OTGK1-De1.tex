@@ -1,0 +1,728 @@
+\section{Ôn tập giữa kỳ 1}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-12-OTGK1-DE1-LC]
+\caulc
+%%%============EX_1==============%%%
+%câu 1
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N1-2]
+	Cho hàm số $y=f(x)$ có bảng biến thiên như sau
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[nocadre=false,lgt=1.5,espcl=2.5,deltacl=0.6]
+			{$x$/0.7,$y'$/0.7,$y$/1.5}{$-\infty$,$0$,$3$,$+\infty$}
+			\tkzTabLine{,-,0,+,0,-,}   
+			\tkzTabVar{+/$+\infty$,-/$-4$,+/$-1$,-/$-\infty$}
+		\end{tikzpicture}
+	\end{center}
+	Hàm số đã cho đồng biến trên khoảng nào dưới đây?
+	\choice
+	{$(-\infty;1)$}
+	{\True $(0;3)$}
+	{$(3;+\infty)$}
+	{$(-4;-1)$}
+	\loigiai
+	{
+		Dựa vào bảng biến thiên ta có hàm số đồng biến trên khoảng $(0;3)$.	
+	}
+\end{ex}
+%%%============EX_2==============%%%
+%câu 2
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N3-1]
+	Giá trị lớn nhất của hàm số $y=x^4-x^2+13$ trên đoạn $[-1; 2]$ bằng
+	\choice
+	{$85$}
+	{\True $\dfrac{51}{4}$}
+	{$13$}
+	{$25$}
+	\loigiai{Ta có $y' = 4x^3-2x$; $y'=0 \Leftrightarrow \hoac{&x=0\in [-1;2]\\&x=\pm \dfrac{\sqrt{2}}{2}\in [-1;2].}$ \\
+		Mặt khác $y(0) = 13$; $y\left (\pm \dfrac{\sqrt{2}}{2}\right ) = \dfrac{51}{4}$; $y(-1) =13$; $y(2) =25$. \\
+		Suy ra  $m=\min \limits_{[-1;2]}y = \dfrac{51}{4}$. }
+\end{ex}
+%%%============EX_3==============%%%
+%câu 3
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N3-1]
+	\immini{
+		Cho hàm số $f(x)$ liên tục trên $[-1;3]$ và có đồ thị như hình vẽ bên. Giá trị lớn nhất của hàm số trên $[-1;3]$ bằng
+		\choice
+		{$0$}
+		{$1$}
+		{$2$}
+		{\True $3$}
+	}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round,>=stealth]
+			\def\a{-1} \def\b{0} \def\c{2} % Hệ số
+			\def\xmin{-2} \def\xmax{4}
+			\def\ymin{-3} \def\ymax{4}
+			\draw[->] (\xmin,0)--(\xmax,0) node [below]{$x$};
+			\draw[->] (0,\ymin)--(0,\ymax) node [left]{$y$};
+			\node at (0,0) [below right]{$O$};
+			\clip (\xmin+0.1,\ymin+0.1) rectangle (\xmax-0.1,\ymax-0.1);
+			\draw[smooth,samples=300] plot[domain=-1:2](\x,{\a*(\x)^2+\b*(\x)+\c})--(3,3);
+			\draw[dashed] (-1,0)node[below]{$-1$}--(-1,1)--(0,1)node[right]{$1$}
+			(2,0)node[above]{$2$}--(2,-2)--(0,-2)node[left]{$-2$}
+			(3,0)node[below]{$3$}--(3,3)--(0,3)node[left]{$3$};
+			\fill (0,2) circle (1.0pt) node[above left]{$2$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Từ đồ thị hàm số ta có $\max\limits_{x \in [-1;3]} f(x)=f(3)=3$.
+	}
+\end{ex}
+%%%============EX_4==============%%%
+%câu 4
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N4-1]
+	Tiệm cận ngang của đồ thị hàm số $y=\dfrac{2024x+1}{x-1}$ là
+	\choice
+	{$y=-2024$}
+	{\True $y=2024$}
+	{$y=\dfrac{1}{2024}$}
+	{$y=-\dfrac{1}{2024}$}
+	\loigiai{
+		Ta có $\lim\limits_{x\to+\infty}y=\lim\limits_{x\to+\infty}\dfrac{2024x+1}{x-1}=2024$ và  $\lim\limits_{x\to-\infty}y=\lim\limits_{x\to-\infty}\dfrac{2024x+1}{x-1}=2024$ nên đồ thị hàm số nhận $y=2024$ làm tiệm cận ngang.
+	}
+\end{ex}
+%%%============EX_5==============%%%
+%câu 5
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N2-2]
+	\immini{Cho hàm số $y=f(x)$ có đồ thị như hình vẽ bên. Mệnh đề nào dưới đây là đúng?
+		\choice
+		{Hàm số $f(x)$ đạt cực tiểu tại $x=-1$}
+		{Hàm số $f(x)$ đạt cực tiểu tại $x=0$}
+		{Hàm số $f(x)$ đạt cực đại tại $x=1$}
+		{\True Hàm số $f(x)$ đạt cực tiểu tại $x=1$}}
+	{\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=0.7]
+			\draw[->] (-2,0)--(2,0) node[right] {$x$};
+			\draw[->] (0,-2)--(0,4.5) node[above] {$y$};
+			\draw [smooth,domain=-1.1:1.8,samples=100]plot(\x,{1.5*(\x)^3-2*(\x)^2-0.5*(\x)+3});
+			\draw[dashed](1,0)--(1,2)--(0,2);
+			\fill (0,0)node[below left]{\footnotesize{$O$}}circle(1.2pt) (1,0)node[below ]{\footnotesize{$1$}}circle(1.2pt) (-1,0)node[above left]{\footnotesize{$-1$}}circle(1.2pt) (0,2)node[left]{\footnotesize{$2$}}circle(1.2pt) (0,3)node[above left]{\footnotesize{$3$}}circle(1.2pt);
+	\end{tikzpicture}}
+	\loigiai{Từ hình vẽ, ta có mệnh đề đúng là ``Hàm số $f(x)$ đạt cực tiểu tại $x=1$''.}
+\end{ex}
+%%%============EX_6==============%%%
+%câu 6
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1N5-4]
+	Đồ thị của hàm số $y=\left(x^2-9\right)(x+3)^2$ cắt trục hoành tại bao nhiêu điểm phân biệt?
+	\choice
+	{\True $2$}
+	{$3$}
+	{$4$}
+	{$1$}
+	\loigiai{
+		Xét phương trình hoành độ giao điểm
+		$$ \left(x^2-9\right)(x+3)^2=0\Leftrightarrow \hoac{&x^2-9=0 \\&x+3=0} \Leftrightarrow \hoac{&x=3 \\&x=-3.}$$
+		Vậy đồ thị hàm số đã cho cắt trục hoành tại hai điểm phân biệt.
+	}
+\end{ex}
+%%%============EX_7==============%%%
+%câu 7
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V3-6]
+	Nhân ngày quốc tế Phụ nữ $8-3$ năm $2019$. Ông $A$ đã mua tặng vợ một món quà và đặt nó trong một chiếc hộp chữ nhật có thể tích là $32$ (đvtt) có đáy là hình vuông và không nắp. Để món quà trở nên đặc biệt và xứng tầm với giá trị của nó, ông quyết định mạ vàng chiếc hộp, biết rằng độ dày của lớp mạ trên mọi điểm của chiếc hộp là không đổi và như nhau. Gọi chiều cao và cạnh đáy của chiếc hộp lần lượt là $h$ và $x$. Để lượng vàng trên hộp là nhỏ nhất thì giá trị của $h$ và $x$ là?
+	\choice
+	{$h=2, x=1$}
+	{\True $h=2, x=4$}
+	{$h=\dfrac{\sqrt{3}}{2}, x=4$}
+	{$h=4, x=2$}
+	\loigiai{
+		Ta có $V=32\Rightarrow h\cdot x^2=32\Rightarrow h=\dfrac{32}{x^2}$.\\
+		Diện tích xung quanh của hộp là $S(x)=4 h x+x^2=\dfrac{128}{x}+x^2$.\\
+		Khi đó $S'(x)=2x-\dfrac{128}{x^2}$, $S'(x)=0\Rightarrow 2x-\dfrac{128}{x^2}=0\Leftrightarrow x=4$,\\
+		Ta có bảng biến thiên
+		\begin{center}
+			% Cần khai báo \usepackage{tkz-tab}
+			\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,yscale=.8]
+				\tikzset{declare function={w=8;h=6;mstep=1;}}
+				\begin{scope}[thick]
+					\draw
+					(-0.5,-0.25)--(w,-.25)
+					(0.5,0.25)--(0.5,-3.25)
+					(-0.5,-.75)--(w,-.75)
+					;
+				\end{scope}
+				\path
+				(0,0)coordinate (a0)node{$x$} +(0:mstep)coordinate (a1)node{$0$} +(0:w-.25)coordinate (an)node{$+\infty$}
+				($(a1)!1/2!(an)$)coordinate (a2)node{$4$}
+				%					($(a1)!2/3!(an)$)coordinate (a3)node{$2$}
+				
+				($(a0)+(-90:.5)$)coordinate (b0)node{$S'(x)$}
+				($(a1)+(-90:.5)$)coordinate (b1)($(an)+(-90:.5)$)coordinate (bn)
+				($(b1)!1/2!(bn)$)coordinate (b2)node{$0$}
+				($(b1)!1/4!(bn)$)coordinate (b11)node{$-$}
+				($(b1)!3/4!(bn)$)coordinate (b21)node{$+$}
+				
+				
+				($(b0)+(-90:1.5)$)node{$S(x)$} ($(b1)+(-90:.5)$)coordinate (c1)node{}($(bn)+(-90:.5)$)coordinate (cn)node{$+\infty$}
+				($(b2)+(-90:2.5)$)coordinate (c2)node{$48$}
+				;
+				\foreach \pointo/\pointt in {c1/c2,c2/cn}{
+					\draw[fill=black,shorten <=.35cm,shorten >=.25cm,->](\pointo)--(\pointt);
+				}
+			\end{tikzpicture}
+		\end{center}
+		Để lượng vàng trên hộp là nhỏ nhất thì diện tích xung quanh của hộp là nhỏ nhất, khi đó $x=4$ và $h=2$.
+	}
+\end{ex}
+%%%============EX_8==============%%%
+%câu 8
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V3-6]
+	Một con cá hồi bơi ngược dòng để vượt qua một khoảng cách là $300$ km. Vận tốc dòng nước là $4$ km/h. Giả sử vận tốc bơi của cá khi nước đứng yên là $v$ km/h thì năng lượng tiêu hao của cá trong $t$ giờ được cho bởi công thức $E(v)=cv^3t$, trong đó $c$ là hằng số cho trước, $E$ tính bằng Jun. Tìm vận tốc bơi của cá khi nước đứng yên để năng lượng tiêu hao ít nhất.
+	\choice
+	{\True $6$ km/h}
+	{$8$ km/h}
+	{$9$ km/h}
+	{$5$ km/h}
+	\loigiai{
+		Vận tốc bơi ngược dòng là $v-4$ km/h. Điều kiện $v>4$.\\
+		Thời gian bơi ngược dòng để vượt $300$ km là $\dfrac{300}{v-4}$ h.\\
+		Suy ra $E(v)=300\cdot c\cdot \dfrac{v^3}{v-4}$.\\
+		Ta có $E'(v)=600\cdot c\cdot \dfrac{v^3-6v^2}{(v-4)^2}$. Cho $E'(v)=0\Leftrightarrow v=6$.\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.5,deltacl=0.6]
+				{$v$ /0.6,$E'(v)$ /0.6,$E(v)$ /2}
+				{$4$,$6$,$+\infty$}
+				\tkzTabLine{,-,$0$,+,}
+				\tkzTabVar{+/$+\infty$, -/,+/$+\infty$}
+			\end{tikzpicture}
+		\end{center}
+		Vậy $v=6$ km/h thỏa yêu cầu bài toán.
+	}
+\end{ex}
+%%%============EX_9==============%%%
+%câu 9
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1H5-4]
+	Biết hai đồ thị hàm số $y=x^3+2x^2-3x+1$ và $y=2x^2-1$ cắt nhau tại hai điểm $A$, $B$. Tính độ dài đoạn $AB$.
+	\choice
+	{\True $3\sqrt{5}$}
+	{$\sqrt{37}$}
+	{$5\sqrt{3}$}
+	{$\sqrt{73}$}
+	\loigiai{
+		Phương trình hoành độ giao điểm: $$x^3+2x^2-3x+1=2x^2-1\Leftrightarrow x^3-3x+2=0\Leftrightarrow \hoac{&x=-2\\&x=1.}$$
+		Suy ra $A(-2;7)$, $B(1;1)$.\\
+		Vậy $AB=\sqrt{3^2+(-6)^2}=3\sqrt{5}$.
+	}
+\end{ex}
+%%%============EX_10==============%%%
+%câu 10
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V3-6]
+	Độ giảm huyết áp của một bệnh nhân được cho bởi công thức $G(x)=0{,}035x^2(15-x)$, trong đó $x$ là liều lượng thuốc được tiêm cho bệnh nhân ($x$ được tính bằng miligam). Liều lượng thuốc cần tiêm (đơn vị miligam) cho bệnh nhân để huyết áp giảm nhiều nhất là
+	\choice
+	{$x=8$}
+	{\True $x=10$}
+	{$x=15$}
+	{$x=7$}
+	\loigiai{
+		Điều kiện $x\in[0;15]$ (vì độ giảm huyết áp không thể là số âm).\\
+		Có $G'(x)=0{,}035\left[2x(15-x)-x^2\right]=0{,}105x(10-x)=0\Leftrightarrow\hoac{&x=0\\&x=10.}$ \\
+		Ta có $G(0)=0$; $G(10)=\dfrac{35}{2}$; $G(15)=0$.\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTab
+				[lgt=1.5,espcl=3]
+				{$x$/0.8, $G'(x)$/0.8, $G(x)$/2.5}
+				{$0$, $10$, $15$}
+				{,+,0,-,}
+				{-/$0$ , +/ $\dfrac{35}{2}$ , -/$0$} %
+			\end{tikzpicture}
+		\end{center}
+		Vậy huyết áp bệnh nhân giảm nhiều nhất khi tiêm cho bệnh nhân liều $x=10$ miligam.}
+\end{ex}
+%%%============EX_11==============%%%
+%câu 11
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V2-2]
+	Cho hàm số $y=f(x)$ liên tục trên $\mathbb{R}$ và có bảng biến thiên như hình vẽ sau
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.5,deltacl=0.6]
+			{$x$ /0.6, $f'(x)$ /0.6, $f(x)$ /2}
+			{$-\infty$,$-3$,$0$,$2$,$4$,$+\infty$}
+			\tkzTabLine{ ,-,z,+,z,-,z,+,z,- }
+			\tkzTabVar{+/$+\infty$,-/$-4$,+/$3$,-/$-2$,+/$2$,-/$-\infty$}
+		\end{tikzpicture}
+	\end{center}
+	Hàm số $h(x)=2f^3(x)-3f^2(x)$ có bao nhiêu điểm cực đại?
+	\choice
+	{\True $7$}
+	{$14$}
+	{$5$}
+	{$6$}
+	\loigiai{
+		Ta có $h(x)=2f^3(x)-3f^2(x)\Rightarrow h'(x)=6f^2(x)f'(x)-6f(x)f'(x)=6f(x)f'(x)(f(x)-1)$.\\
+		$h'(x)=0\Leftrightarrow\hoac{&f'(x)=0\\&f(x)=0\\&f(x)=1.}$
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.8,deltacl=0.6]
+				{$x$ /0.6, $f'(x)$ /0.6, $f(x)$ /3}
+				{$-\infty$,$-3$,$0$,$2$,$4$,$+\infty$}
+				\tkzTabLine{ ,-,z,+,z,-,z,+,z,- }
+				\tkzTabVar{+/$+\infty$,-/$-4$,+/$3$,-/$-2$,+/$2$,-/$-\infty$}
+				\draw[red] (1.4,-2.2)--(15.6,-2.3)node[above left]{$y=1$};
+				\draw[red] (1.4,-3)--(15.6,-3)node[above]{$y=0$};
+			\end{tikzpicture}
+		\end{center}
+		Quan sát bảng biến thiên ta thấy, phương trình
+		\begin{itemize}
+			\item $f'(x)=0$ cho $4$ nghiệm.
+			\item $f(x)=0$ cho $5$ nghiệm.
+			\item $f(x)=1$ cho $5$ nghiệm.
+		\end{itemize}
+		Các nghiệm trên đôi một phân biệt, suy ra phương trình $h'(x)=0$ có $14$ phân biệt. Do đó hàm số $h(x)$ có $14$ điểm cực trị với $7$ điểm cực đại và $7$ điểm cực tiểu.\\
+		Vậy hàm số $h(x)=2f^3(x)-3f^2(x)$ có $7$ điểm cực đại.
+	}
+\end{ex}
+%%%============EX_12==============%%%
+%câu 12
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V4-2]
+	Số các giá trị nguyên của tham số $m$ thuộc $[-2023 ; 2023]$ để đồ thị hàm số $y=\dfrac{2 x+4}{x-m}$ có tiệm cận đứng nằm bên trái trục tung là
+	\choice
+	{$4044$}
+	{\True $2022$}
+	{$2023$}
+	{$4046$}
+	\loigiai{
+		Khi $m=-2$, $y=2$ nên đồ thị hàm số không có tiệm cận đứng. \\
+		Khi $m \ne -2$, ta thấy đường thẳng $y=m$ là tiệm cận đứng của đồ thị hàm số. \\
+		Đường thẳng $y=m$ nằm bên trái trục tung khi và chỉ khi $m<0$. \\
+		Vậy các giá trị nguyên thỏa mãn là $m \in \{ -2023;-2022; \ldots ; -3;-1\}$.\\
+		Vậy có $2022$ số nguyên $m$ thỏa mãn.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-12-OTGK1-DE1-LC}
+
+\Opensolutionfile{ans}[ans/ans-12-OTGK1-DE1-DS]
+\cauds
+%%%============EX_1==============%%%
+\begin{ex}%[2D1N5-1]
+Hàm số $y=f(x)$ xác định, liên tục trên $\mathbb{R}$ và có bảng biến thiên như hình vẽ bên dưới. Khi đó:
+	\begin{center}
+		\begin{tikzpicture}[font=\normalsize, >=stealth]
+			\tkzTabInit[nocadre=true,lgt=1.2,espcl=2.5,deltacl=0.65]
+			{$x$ /0.7, $y'$ /0.75, $y$ /2.25}
+			{$-\infty$, $-1$, $0$, $1$, $+\infty$}
+			\tkzTabLine{,+,0,+,0,-,0,+,}
+			\path (N13) node[above=1pt] (A){$+\infty$}
+			(N22) node[below=26pt](B){$0$}
+			(N32) node[below=1pt](C){$1$}
+			(N43) node[above=1pt](D){$-1$}
+			(N52) node[below=1pt](E){$+\infty$};
+			\foreach \x/\y in {A/B,B/C,C/D,D/E}
+			\draw[->] (\x)--(\y);
+		\end{tikzpicture}
+	\end{center}
+	\choiceTF
+		{\True Trong đoạn $[-1;1]$ hàm số đạt giá trị lớn nhất bằng $1$}
+		{Hàm số có giá trị lớn nhất bằng $1$ và giá trị nhỏ nhất bằng $-1$}
+		{\True Hàm số có đúng hai cực trị}
+		{\True Hàm số đồng biến trong khoảng $(-\infty;0)$}
+	\loigiai{
+\begin{enumerate}
+\item Đúng. Hàm số $f(x)$ đồng biến trên khoảng $(-1;0)$ và nghịch biến trên khoảng $(0,1)$. Do đó $f(x)$ đạt giá trị lớn nhất tại $x=0$ và giá trị lớn nhất đó bằng $1$.
+\item Sai. Hàm số đạt giá trị cực đại bằng $1$ tại $x=0$ và đạt giá trị cực tiểu bằng $-1$ tại $x=1$.
+\item Đúng. Hàm số có hai cực trị là $x=0$ và $x=1$.
+\item Đúng. Vì $f'(x)>0$ với $x\in (-\infty;0)\setminus \{-1\}$ và $f'(-1)=0$.
+\end{enumerate}	
+	}
+\end{ex}
+%%%============EX_2==============%%%
+\begin{ex}%[2D1H5-5]
+Cho hàm số $y=f(x)$ xác định và liên tục trên $\mathbb{R}$ và có đồ thị của đạo hàm $y=f'(x)$ như hình bên dưới. Khi đó:
+	\begin{center}
+		\begin{tikzpicture}[line cap=butt,line join=miter, >=stealth,xscale=0.62,yscale=0.5]
+			\tikzset{declare function={xmin=-5;xmax=4;
+			ymin=-5;ymax=5;
+			a=1/6; b=3/6; c=-10/6; d=-24/6;
+			xm=-3.08; ym=6.04;
+			xh=1.08; yh=-30.04;
+			f(\x)=a*(\x)^3+b*(\x)^2+c*(\x)+d;
+			},
+			smooth,samples=50
+			}
+			\draw[->] (xmin-0.25,0)--(xmax+0.5,0)
+			node[shift={(-100:7pt)},font=\normalsize]{$x$};
+			\draw[->] (0,ymin-0.25)--(0,ymax+0.5)
+			node[shift={(-5:7pt)},font=\normalsize]{$y$};
+			\fill (0,0) node[shift={(-45:9pt)},font=\normalsize]{$O$};
+			\pgfmathsetmacro{\xmin}{int(xmin)}
+			\pgfmathsetmacro{\xmax}{int(xmax)}
+			\pgfmathsetmacro{\ymin}{int(ymin)}
+			\pgfmathsetmacro{\ymax}{int(ymax)}
+			\begin{scope}
+				\clip (xmin,ymin) rectangle (xmax,ymax);
+				\draw[thick] plot[domain=xmin:xmax] (\x, {f(\x)});
+			\end{scope}
+			\foreach \x/\y/\goc in {-4/0/135,-2/0/75,3/0/120} 
+			\fill (\x,\y) circle (2pt)
+			($(\x,\y)+(\goc:6mm)$) node {$\x$};
+			\foreach \x/\y/\goc in {0/-4/180} 
+			\fill (\x,\y) circle (2pt)
+			($(\x,\y)+(\goc:6mm)$) node {$\y$};
+		\end{tikzpicture}
+	\end{center}
+	\choiceTF
+		{Hàm số nghịch biến trên khoảng $(-3; 0)$}
+		{$f(-4) > f(-2)$}
+		{\True $f(0) > f(3)$}
+		{Hàm số $y=f(x)$ có hai điểm cực trị}
+	\loigiai{
+Từ đồ thị hàm $f'(x)$ ta thấy 
+\begin{itemize}
+\item $f'(x)=0$ khi $x=-4$ hoặc $x=-2$ hoặc $x=3$.
+\item $f'(x)<0$ khi $x\in (-\infty;-4)$ hoặc $x\in (-2;3)$.
+\item $f'(x)>0$ khi $x\in (-4;-2)$ hoặc $x\in (3;+\infty)$.
+\end{itemize}
+Do đó từ những điều trên ta thấy
+\begin{itemize}
+\item $f(x)$ đạt cực tiểu tại $x=-4$ và $x=3$ và đạt cực đại tại $x=-2$.
+\item $f(x)$ nghịch biến trên $2$ khoảng $(-\infty;-4)$ và $(-2;3)$.
+\item $f(x)$ đồng biến trên $2$ khoảng $(-4;-2)$ và $(3;+\infty)$.
+\end{itemize}
+\begin{itemchoice}
+\itemch Sai. Trong khoảng $(-3;0)$ hàm số $f(x)$ đồng biến trên khoảng $(-3;-2)$ nhưng nghịch biến trên $(-2;0)$.
+\itemch Sai. Vì $f(x)$ đồng biến trên khoảng $(-4;-2)$, đạt cực tiểu tại $x=-4$ và cực đại tại $x=-2$ nên $f(-4)<f(-2)$.
+\itemch Đúng. Vì $f(x)$ nghịch biến trên khoảng $(-2;3)$ và đạt cực tiểu tại $x=3$ nên $f(0)>f(3)$.
+\itemch Sai. Vì $f(x)$ có $3$ cực trị: $2$ cực tiểu và $1$ cực đại.
+\end{itemchoice}	
+	}
+\end{ex}
+%%%============EX_3==============%%%
+\begin{ex}%[2D1V5-5]
+Cho hàm số $y=f(x)$ có đồ thị của hàm số $y=f'(x)$ như hình vẽ.
+	\begin{center}
+		\begin{tikzpicture}[line cap=butt,line join=miter, >=stealth,xscale=0.83,yscale=0.5,scale=0.8]
+			\tikzset{declare function={xmin=-2;xmax=5;
+			ymin=-9;ymax=5;
+			a=1; b=-4; c=-1; d=4;
+			xm=-0.12; ym=4.06;
+			xh=2.79; yh=-8.21;
+			f(\x)=a*(\x)^3+b*(\x)^2+c*(\x)+d;
+			},
+			smooth,samples=50
+			}
+			\draw[->] (xmin-0.25,0)--(xmax+0.5,0)
+			node[shift={(-100:7pt)},font=\normalsize]{$x$};
+			\draw[->] (0,ymin-0.25)--(0,ymax+0.5)
+			node[shift={(-5:7pt)},font=\normalsize]{$y$};
+			\fill (0,0) node[shift={(-45:9pt)},font=\normalsize]{$O$};
+			\pgfmathsetmacro{\xmin}{int(xmin)}
+			\pgfmathsetmacro{\xmax}{int(xmax)}
+			\pgfmathsetmacro{\ymin}{int(ymin)}
+			\pgfmathsetmacro{\ymax}{int(ymax)}
+			\begin{scope}
+				\clip (xmin,ymin) rectangle (xmax,ymax);
+				\draw[thick] plot[domain=xmin:xmax] (\x, {f(\x)});
+			\end{scope}
+			\foreach \x/\y/\goc in {-1/0/135,1/0/75,4/0/120} 
+			\fill (\x,\y) circle (2pt)
+			($(\x,\y)+(\goc:6mm)$) node {$\x$};
+		\end{tikzpicture}
+	\end{center}
+	Xét hàm số $g(x)=f(|3-x|)$. Khi đó:
+	\choiceTF
+		{\True Hàm số $g(x)$ có $3$ cực tiểu}
+		{Hàm số $g(x)$ đồng biến trên khoảng $(-\infty;-1)$}
+		{Hàm số $g(x)$ có $4$ cực trị}
+		{\True Hàm số $g(x)$ đồng biến trên khoảng $(-1; 2)$}
+	\loigiai{
+Từ 	$g(x)=f(|3-x|)$ ta có $g(x)=\heva{&f(3-x) \text{ nếu } x<3\\& f(x-3)\text{ nếu } x>3\\&f(0) \text{ nếu } x=3}$ suy ra $g'(x) =\heva{-f'(3-x)\text{ nếu } x<3\\f'(x-3)\text{ nếu } x>3}$. \\
+Từ đồ thị ta có $\heva{&f'(x)>0 \text{ khi }-1<x<1 \text{ hoặc }x>4\\& f'(x)<0 \text{ khi }x<-1 \text{ hoặc }1<x<4\\& f'(x)=0 \text{ khi }x=-1 \text{ hoặc }x=1\text{ hoặc }x=4.}
+$\\
+Vì $\heva{&3-x>4 \text{ nếu } x<-1\\&3-x=4 \text{ nếu } x=-1 \\&1<3-x< 4 \text{ nếu } -1<x<2\\&3-x=1 \text{ nếu } x=2\\
+&0<3-x <1 \text{ nếu } 2<x<3\\ &0<x-3<1 \text{ nếu } 3<x<4\\ & x-3=1\text{ nếu } x=4 \\& 1<x-3<4 \text{ nếu } 4<x<7\\& x-3=4 \text{ nếu } x=7\\& x-3>4 \text{ nếu } x>7}$ nên
+$g'(x)=\heva{&-f'(3-x)<0\text{ nếu }x<-1 \\ &-f'(3-x)=0\text{ nếu }x=-1 \\ &-f'(3-x)>0\text{ nếu }-1<x<2\\&-f'(3-x)=0\text{ nếu }x=2 \\ &-f'(3-x)<0\text{ nếu }2<x<3 \\& 	f'(x-3)>0\text{ nếu }3<x<4\\ & f'(x-3)=0\text{ nếu }x=4\\ & f'(x-3)<0\text{ nếu }4<x<7\\ & f'(x-3)=0\text{ nếu }x=7\\ &f'(x-3)>0\text{ nếu }x>7}$\\
+Ta có bảng xét dấu của $g(x)$
+\begin{center}
+		\begin{tikzpicture}[font=\normalsize,t style/.style={style=solid},scale=0.8]
+			\tkzTabInit[lgt=1.5,espcl=3,deltacl=0.65]
+			{$x$ /0.75,$g'(x)$ /0.75}
+			{$-\infty$, $-1$, $2$, $3$, $4$, $7$, $+\infty$}
+			%dòng xét dấu
+			\tkzTabLine{,-,0,+,0,-,,+,0,-,0,+,}
+			\draw[double style,color=red](N41)--(N42);
+		\end{tikzpicture}
+	\end{center}
+Từ bảng xét dấu của $g(x)$ ta thấy
+\begin{itemchoice}
+\itemch Đúng. Hàm số $g(x)$ có $3$ điểm cực tiểu là $x=-1$, $x=3$ và $x=7$.
+\itemch Sai. Vì $g'(x)<0$ nếu $x\in (-\infty,-1)$.
+\itemch Sai. Hàm số $g(x)$ có $5$ điểm cực trị là $x=-1$, $x=2$, $x=3$, $x=4$ và $x=7$.
+\itemch Đúng. Vì $g'(x)>0$ nếu $-1<x<2$.
+\end{itemchoice}
+	}
+\end{ex}
+%%%============EX_4==============%%%
+\begin{ex}%[2D1N3-6]
+Dân số của một quốc gia sau $t$ (năm) kể từ năm $2023$ được ước tính bởi công thức: $N(t)=100 \mathrm{e}^{0{,}012 t}$ (${N}({t})$ được tính bằng triệu người, $0 \leq t \leq 50$). Xem ${N}({t})$ là hàm số của biến số $t$ xác định trên đoạn $[0 ; 50]$. Đạo hàm của hàm số ${N}({t})$ biểu thị tốc độ tăng dân số của quốc gia đó (tính bằng triệu người/ năm).
+\choiceTF
+{\True Vào năm $2054$ dân số nước ta ước tính vào khoảng $145$ triệu người}
+{\True Hàm số $N(t)$ đồng biến trên đoạn $[0 ; 50]$}
+{Tốc độ tăng dân số giảm dần trong giai đoạn sau $40$ đến $50$ năm}
+{\True Vào năm $2047$ nào tốc độ tăng dân số của quốc gia đó xấp xỉ $1{,}6$ triệu người/ năm}
+
+\loigiai{
+Ta có
+$$N(t)=100 \mathrm{e}^{0{,}012 t} \Rightarrow N'(t)=1{,}2 \mathrm{e}^{0{,}012 t} \Rightarrow N''(t) = 0{,}0144 \mathrm{e}^{0{,}012 t}, t\in (0;50).$$
+\begin{itemchoice}
+\itemch Đúng. Năm $2054$ có nghĩa $t=31$. Thay giá trị $t=24$ vào hàm $N(t)$ ta được 
+$$N(31) = 100 \mathrm{e}^{0{,}012 \cdot 31} \approx 145 \text{ (triệu người).}$$
+\itemch Đúng. Vì $N'(t)=1{,}2 \mathrm{e}^{0,012 t}>0$ với mọi $t\in (0;50)$.
+\itemch Sai. Vì $N''(t) = 0{,}0144 \mathrm{e}^{0{,}012 t}>0$  với mọi $t\in (0;50)$ nên tốc độ tăng dân số luôn tăng theo từng năm trong giai đoạn $t\in (0;50)$.
+\itemch Đúng. Năm $2047$ có nghĩa $t=24$. Thay giá trị $t=24$ vào đạo hàm $N' (t)$ ta được 
+$$N'(24) = 1{,}2\mathrm{e}^{0{,}012\cdot 24} \approx 1{,}6 \text{ (triệu người/ năm).}$$
+\end{itemchoice}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-12-OTGK1-DE1-DS}
+
+\Opensolutionfile{ans}[ans/ans-12-OTGK1-DE1-KQ]
+\caukq
+%%%============EX_1==============%%%
+%Câu 1
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1H4-1]
+	Đồ thị hàm số $y = \dfrac{x^2+3x-4}{x^2-3x+2}$ có tổng cộng bao nhiêu đường tiệm cận?
+	\shortans{$2$}
+	\loigiai{
+		Tập xác định của hàm số là $\mathscr{D}= \mathbb{R}\setminus \{1;2\}$.\\
+		Do $\lim\limits_{x\to \pm \infty}y =\lim\limits_{x\to \pm \infty} \dfrac{x^2+3x-4}{x^2-3x+2} = \lim\limits_{x\to \pm \infty}\dfrac{1+\tfrac{3}{x}-\tfrac{4}{x^2}}{1-\tfrac{3}{x}+\tfrac{2}{x^2}}=1$ nên $y=1$ là đường tiệm cận ngang của đồ thị hàm số. \\
+		Ta có $\lim\limits_{x \to 1^\pm}y = \lim\limits_{x \to 1^\pm}\dfrac{x^2+3x-4}{x^2-3x+2}=\lim\limits_{x \to 1^\pm}\dfrac{x+4}{x-2}=-5$ nên $x=1$ không là đường tiệm cận đứng của đồ thị hàm số đã cho.\\
+		Do $\lim\limits_{x \to 2^\pm}y = \lim\limits_{x \to 2^\pm}\dfrac{x^2+3x-4}{x^2-3x+2}=\pm \infty$ nên $x=2$ là đường tiệm cận đứng của đồ thị hàm số đã cho.\\
+		Vậy đồ thị hàm số đã cho có hai đường tiệm cận.
+	}
+\end{ex}
+%%%============EX_2==============%%%
+%Câu 2
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1H5-3]
+	\immini{
+		Cho hàm số $y=f(x)$ có đồ thị như hình vẽ. Số nghiệm của phương trình $f^2(x)-f(x)=2$ là bao nhiêu?
+		\shortans{$5$}
+	}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\draw[->] (-2,0)--(2,0) node[below] {$x$};
+			\draw[->] (0,-1)--(0,3.8) node[left] {$y$};
+			\draw (0,0) node [above left] {$O$};
+			\foreach \x/\nx in {-1/-1,1/1}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+			\foreach \y/\ny in {2/2,3/3}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [below left] {$\ny$};
+			\draw[dashed,thin](1,0)--(1,3)--(-1,3)--(-1,0);
+			\begin{scope}
+				\clip (-2,-1.1) rectangle (2,3.9);
+				\draw[samples=200,domain=-1.7:1.7,smooth,variable=\x] plot (\x,{-1*((\x)^4)+2*((\x)^2)+2});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\immini{
+			Ta có $f^2(x)-f(x)=2\Leftrightarrow \hoac{&f(x)=-1\\&f(x)=2.}$\\
+			Quan sát đồ thị ta thấy, đường thẳng $y=-1$ cắt đồ thị tại $2$ điểm phân biệt và đường thẳng $y=2$ cắt đồ thị tại $3$ điểm phân biệt.\\
+			Vậy phương trình $f^2(x)-f(x)=2$ có $5$ nghiệm phân biệt.
+		}{
+			\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\draw[->] (-2.5,0)--(2.5,0) node[below] {$x$};
+				\draw[->] (0,-1.5)--(0,3.8) node[left] {$y$};
+				\draw (0,0) node [above left] {$O$};
+				\foreach \x/\nx in {-1/-1,1/1}
+				\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+				\foreach \y/\ny in {-1/-1,2/2,3/3}
+				\draw[thin] (1pt,\y)--(-1pt,\y) node [below left] {$\ny$};
+				\draw[dashed,thin](1,0)--(1,3)--(-1,3)--(-1,0);
+				\begin{scope}
+					\clip (-2.5,-1.5) rectangle (2.5,3.9);
+					\draw[samples=200,domain=-2.4:2.4,smooth,variable=\x] plot (\x,{-1*((\x)^4)+2*((\x)^2)+2});
+				\end{scope}
+				\draw(-2,-1)--(2,-1) (-2,2)--(2,2);
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+%%%============EX_3==============%%%
+%Câu 3
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1H1-2]
+	\immini{
+		Cho đồ thị hàm số $y=f(x)$ có đồ thị như hình vẽ bên. Hàm số $y=f(x)$ nghịch biến trên khoảng $(a;b)$. Tính $2\,024a-b$.
+		\shortans{$-2$}
+	}{
+		\begin{tikzpicture}[>=stealth,scale=0.6, line join=round, line cap=round]
+			\def\a{1} \def\b{-3} \def\c{0} \def\d{2} % Hệ số
+			\def\xmin{-1.5} \def\xmax{3.5} \def\ymin{-2.5} \def\ymax{3}
+			\draw[->] (\xmin,0)--(\xmax,0) node [below]{$x$};
+			\draw[->] (0,\ymin)--(0,\ymax) node [left]{$y$};
+			\node at (0,0) [below left]{$O$};
+			\clip (\xmin+0.1,\ymin+0.1) rectangle (\xmax-0.5,\ymax-0.1);
+			\draw[smooth,samples=300] plot(\x,{\a*(\x)^3+\b*(\x)^2+\c*(\x)+\d});
+			\draw[dashed](-1,0)node[above]{$-1$}--(-1,-2)--(0,-2)node[above right]{$-2$};
+			\draw[dashed](2,0)node[above]{$2$}--(2,-2)--(0,-2);
+			\draw (1,0)node[above]{$1$};\draw (0,2)node[above right]{$2$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Dựa vào đồ thị hàm số ta thấy hàm số $y=f(x)$ nghịch biến trên $(0;2)$.\\
+		Suy ra $a=0$, $b=2$.\\
+		Vậy $2\,024a-b=-2$.
+	}
+\end{ex}
+%%%============EX_4==============%%%
+%Câu 4
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V3-1]
+	\immini{Cho hàm số $y=f(x)$ có đạo hàm trên $\mathbb{R}$ và đồ thị như hình vẽ bên. Xét hàm số $g(x)=f\left(x^3+2 x\right)+m$. Giá trị của tham số $m$ để giá trị lớn nhất của hàm số $g(x)$ trên đoạn $[0 ; 1]$ bằng $10$ là bao nhiêu?
+		\shortans{$9$}
+	}
+	{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,scale=0.8]
+			\tikzset{label style/.style={font=\footnotesize}}
+			\def \xmin{-1.5}
+			\def \xmax{3.8}
+			\def \ymin{-3.5}
+			\def \ymax{2}
+			\def \hamso{(\x)^3-3*(\x)^2+1}
+			\draw[->] (\xmin,0)--(\xmax,0) node[below left] {$x$};
+			\draw[->] (0,\ymin)--(0,\ymax) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x in {-1,1,2}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [above] {$\x$};
+			\foreach \xr in {3}
+			\draw[thin] (\xr,1pt)--(\xr,-1pt) node [above right] {$\xr$};
+			\foreach \y in {-1}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\y$};
+			\foreach \ya in {-3,1}
+			\draw[thin] (1pt,\ya)--(-1pt,\ya) node [above left] {$\ya$};
+			\draw[dashed,thin](-1,0)--(-1,-3)--(0,-3)--(2,-3)--(2,0);
+			\draw[dashed,thin] (1,0)--(1,-1)--(0,-1);
+			\draw[dashed,thin] (3,0)--(3,1)--(0,1);
+			\begin{scope}
+				\clip (\xmin+0.01,\ymin+0.01) rectangle (\xmax-0.01,\ymax-0.01);
+				\draw[samples=350,domain=\xmin+0.01:\xmax-0.01,smooth,variable=\x] plot (\x,{\hamso});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		$g'(x)=(3x^2+2)f'(x^3+2x)$;\\
+		$g'(x)=0 \Leftrightarrow \hoac{&3x^2+2=0\\&f'(x^3+2x)=0} \Leftrightarrow \hoac{&x^3+2x=0\\&x^3+2x=2} \Leftrightarrow \hoac{&x=0\\&x=a \in (0;1)}$.\\
+		$g(0)=f(0)+m$; $g(a)=f(a)+m$.\\
+		Dựa vào đồ thị hàm số $f(x)$, ta có $f(a)<f(0)$ nên $g(a)<g(0)$.\\
+		Vậy $\max\limits_{[0;1]}g(x)=10 \Leftrightarrow f(0)+m=10 \Leftrightarrow 1+m=10 \Leftrightarrow m=9$.
+	}
+\end{ex}
+%%%============EX_5==============%%%
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1C1-2]
+	\immini{	Cho đồ thị hàm số $y=f(2-x)$ như hình vẽ. Hàm số $y=f\left(x^2-3\right)$ nghịch biến trên khoảng $(a;b)$. Tính $b-a$.
+		\shortans{$1$}
+	}
+	{
+		\begin{tikzpicture}[scale=0.7,>=stealth, font=\footnotesize, line join=round, line cap=round]
+			\def\a{0.33333} \def\b{-0.5} \def\c{-2} \def\d{2} % Hệ số
+			\def\xmin{-4} \def\xmax{4}
+			\def\ymin{-2} \def\ymax{4}
+			%[color=gray!50,dashed] (\xmin,\ymin) grid (\xmax,\ymax);
+			\draw[->] (\xmin,0)--(\xmax,0) node [below]{$x$};
+			\draw[->] (0,\ymin)--(0,\ymax) node [left]{$y$};
+			\node at (0,0) [below left]{$O$};
+			\node at (3.5,3.5) [below right]{$f(2-x)$};
+			\draw[dashed] (2,0) node[above]{$2$} --(2,-1.33);
+			\draw[dashed] (-1,0) node[below]{$-1$} --(-1,3.166);
+			\clip (\xmin+0.1,\ymin+0.1) rectangle (\xmax-0.5,\ymax-0.1);
+			\draw[smooth,samples=300][domain=-3.7:3.7] plot(\x,{\a*(\x)^3+\b*(\x)^2+\c*(\x)+\d});
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Xét $y=f\left(x^2-3\right)$.\\
+		Có $y'=2x \cdot f'(x^2-3)=0\Leftrightarrow \hoac{&x=0\\&f'(x^2-3)=0.\qquad (*)}$\\
+		Đặt $x^2-3=2-t$, phương trình $(*)$ trở thành
+		$$f'(2-t)=0\Leftrightarrow \hoac{&t=-1\\&t=2.}$$
+		Với $t=-1$, ta có $x^2-3=3 \Leftrightarrow t =\pm \sqrt{6}$.\\
+		Với $t=2$, ta có $x^2-3=0 \Leftrightarrow t =\pm \sqrt{3}$.\\
+		Ta có bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=false,lgt=0.8,espcl=1.8,deltacl=0.6]
+				{$x$ /0.6, $y'$ /0.6, $y$ /2}
+				{$-\infty$,$-\sqrt{6}$,$-\sqrt{3}$,$0$,$\sqrt{3}$,$\sqrt{6}$,$+\infty$}
+				\tkzTabLine{,+,$0$,-,$0$,+,$0$,-,$0$,+,$0$,-,}
+				\tkzTabVar{-/,+/,-/,+/,-/,+/,-/}
+			\end{tikzpicture}
+		\end{center}
+		Dựa vào bảng biến thiên, hàm số nghịch biến trên $\left(0;\sqrt{3}\right)$.\\
+		Mà $(0;1) \subset \left(0;\sqrt{3}\right)$ nên hàm số đã cho nghịch biến trên khoảng $(0;1)$.\\
+		Suy ra $a=0$, $b=1$.\\
+		Vậy $b-a=1$.
+	}
+\end{ex}
+%%%============EX_6==============%%%
+%Câu 6
+\begin{ex}%[Dự án đề ôn tập GK1, Mui Doan]%[2D1V3-6]
+	Có hai xã $A$, $B$ cùng ở một bên bờ sông Lam, khoảng cách từ hai xã đó đến bờ sông lần lượt là $AA'=500$  m, $BB'=600$  m và người ta đo được $A'B'=2\,200$  m. Các kĩ sư muốn xây một trạm cung cấp nước sạch nằm bên bờ sông Lam cho dân hai xã. Để tiết kiệm chi phí, các kĩ sư cần phải chọn vị trí $M$ của trạm cung cấp nước sạch đó trên đoạn $A'B'$ sao cho tổng khoảng cách từ hai xã đến vị trí $M$ là nhỏ nhất. Hãy tìm giá trị nhỏ nhất của tổng khoảng cách đó.
+	\shortans{$2460$}
+	\begin{center}
+		\begin{tikzpicture}
+			\path 
+			(0:0) coordinate (A')
+			(0:6) coordinate (B')
+			(0:2) coordinate (M)
+			($(A')+(90:2.5)$) coordinate (A)
+			($(B')+(90:3)$) coordinate (B)
+			;
+			\fill[cyan!50] (-1.5,-1) rectangle (7.5,0);
+			\draw[thick] (A')--node[left]{$500$ m}(A)--(M)--(B)--node[right]{$600$ m}(B');
+			
+			\foreach \i/\j in{A'/-100,B'/-80,A/100,B/80,M/-90}{\fill [black](\i) circle (1pt) ($(\i)+(\j:3mm)$) node {$\i$};}
+			
+			\draw [dashed,<->]	(0,.6)--(6,.6) node[pos=0.75,sloped,above]{$2\,200$ m}; 			
+		\end{tikzpicture}
+	\end{center}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\path 
+				(0:0) coordinate (A')
+				(0:6) coordinate (B')
+				(0:2) coordinate (M)
+				($(A')+(90:2.5)$) coordinate (A)
+				($(B')+(90:3)$) coordinate (B)
+				;
+				\draw[thick] (A')--node[left]{$500 \text{(m)}$}(A)--(M)--(B)--node[right]{$600 \text{(m)}$}(B') (A')--(B');
+				
+				\foreach \i/\j in{A'/-100,B'/-80,A/100,B/80,M/-90}{\fill [black](\i) circle (1pt) ($(\i)+(\j:3mm)$) node {$\i$};}
+				
+				\draw [dashed,<->]	(0,.6)--(6,.6) node[pos=0.75,sloped,above]{$2\,200\text{(m)}$}; %Tùy chọn sloped,above,below
+				\node at (3,-1.5){\it Hình 37};
+			\end{tikzpicture}
+		\end{center}
+		Đặt $A'M=x$, $(0<x<2200)$,  $B'M=2200-x$.\\
+		Ta có  $AM=\sqrt{x^2+500^2}$, $BM=\sqrt{(2200-x)^2+600^2}$.\\
+		Khi đó tổng khoảng cách từ hai xã đến vị trí $M$ là $AM+BM= \sqrt{x^2+500^2}+\sqrt{(2200-x)^2+600^2} $.\\
+		Xét hàm số $f(x)= \sqrt{x^2+500^2}+\sqrt{(2200-x)^2+600^2}$ trên khoảng $(0<x<2200)$.\\
+		%$f(x)=\sqrt{x^2+500}+\sqrt{x^2-4400x+4840600}$ .\\
+		$f'(x)=\dfrac{x}{\sqrt{x^2+500^2}}-\dfrac{2200-x}{\sqrt{(2200-x)^2+600^2}}$,
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			f'(x)=0&\Leftrightarrow&\dfrac{x}{\sqrt{x^2+500^2}}=\dfrac{2200-x}{\sqrt{(2200-x)^2+600^2}}
+			\\
+			&\Leftrightarrow&\dfrac{x^2}{x^2+500^2}=\dfrac{(2200-x)^2}{(2200-x)^2+600^2}\\
+			&\Leftrightarrow&\dfrac{x^2+500^2}{x^2}=\dfrac{(2200-x)^2+600^2}{(2200-x)^2}\\
+			&\Leftrightarrow& 1+\dfrac{500^2}{x^2}=1+\dfrac{600^2}{(2200-x)^2}
+			\\
+			&\Leftrightarrow& \dfrac{25}{x^2}=\dfrac{36}{(2200-x)^2}
+			\\
+			&\Leftrightarrow& \dfrac{5}{x}=\dfrac{6}{2200-x}
+			\\
+			&\Leftrightarrow& x=1\,000~ \text{vì}~  x>0.			
+		\end{eqnarray*} 
+		Bảng biến thiên hàm số $f(x)$ trên khoảng $( 0;2\,200)$.
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.2,espcl=4.5,deltacl=0.6]
+				{$x$/1,$f'(x)$/1,$f(x)$/3} {$0$,$1000$,$2200$}
+				\tkzTabLine{,-,0,+,}
+				\tkzTabVar{+/$2780$,-/$2460$,+/$2856$}
+			\end{tikzpicture}
+		\end{center}
+		Vậy giá trị nhỏ nhất của tổng khoảng cách từ hai xã đó đến bờ sông  là khoảng $2\,460$  m, tại vị trí $M$ cách điểm $A'$  là $1\,000$  m.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-12-OTGK1-DE1-KQ}

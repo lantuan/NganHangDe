@@ -1,0 +1,344 @@
+\subsection{Đề 3}
+\Opensolutionfile{ans}[ans/ans-2-OTGK2-De3]
+\caulc
+\begin{ex}%[2D4N1-2]
+	Họ nguyên hàm của hàm số $f(x)=\dfrac{1}{x+1}$ là
+	\choice
+	{\True $\ln |2x+2|+C$}
+	{$-\dfrac{1}{2}\ln(x+1)^2+C$}
+	{$-\dfrac{1}{(x+1)^2}+C$}
+	{$-\ln |x+1|+C$}
+	\loigiai{
+		Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int \dfrac{1}{x+1}\mathrm{\,d}x=\displaystyle\int \dfrac{2}{2x+2}\mathrm{\,d}x=\ln |2x+2|+C$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4N1-4]
+	Hàm số $F(x)=\dfrac{x^3}{3}+\mathrm{e}^x$ là một nguyên hàm của hàm số nào dưới đây?
+	\choice
+	{$f(x)=3x^2+\mathrm{e}^x$}
+	{\True $f(x)=x^2+\mathrm{e}^x$}
+	{$f(x)=\dfrac{x^4}{12}+\mathrm{e}^x$}
+	{$f(x)=\dfrac{x^4}{3}+\mathrm{e}^x$}
+	\loigiai
+	{
+		Ta có $f(x)=F'(x)=\left(\dfrac{x^3}{3}+\mathrm{e}^x\right)'=x^2+\mathrm{e}^x$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4N1-1]
+	Cho $\displaystyle\int\limits_1^2f(x)\mathrm{\,d}x=3$ và $\displaystyle\int\limits_1^2g(x)\mathrm{\,d}x=-2$. Khi đó, $\displaystyle\int\limits_1^2\left[f(x)+g(x)\right]\mathrm{\,d}x$ bằng
+	\choice
+	{$5$}
+	{$-5$}
+	{$-1$}
+	{\True $1$}
+	\loigiai{
+		Ta có $\displaystyle\int\limits_1^2\left[f(x)+g(x)\right]\mathrm{\,d}x=\displaystyle\int\limits_1^2f(x)\mathrm{\,d}x+\displaystyle\int\limits_1^2g(x)\mathrm{\,d}x=3-2=1$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4N1-1]
+	Nếu $\displaystyle\int\limits_0^1 f(x) \mathrm{\,d}x=5$ thì $\displaystyle\int\limits_0^1 5f(x) \mathrm{\,d}x$ bằng
+	\choice
+	{$3125$}
+	{$1$}
+	{\True $25$}
+	{$10$}
+	\loigiai{
+		$\displaystyle\int\limits_0^1 5f(x) \mathrm{\,d}x=5\displaystyle\int\limits_0^1 f(x) \mathrm{\,d}x=5\cdot 5=25$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4N3-1]
+	Cho hàm số $y=f(x)$ xác định và liên tục trên đoạn $[a ; b]$. Diện tích hình phẳng giới hạn bởi đồ thị hàm số $y=f(x)$, trục hoành và hai đường thẳng $x=a $; $x=b$ được tính theo công thức
+	\choice
+	{$S=\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x$}
+	{$S=\left|\displaystyle\int\limits_a^b f(x) \mathrm{\,d}x\right|$}
+	{\True $S=\displaystyle\int\limits_a^b \left|f(x)\right| \mathrm{\,d}x$}
+	{$S=\displaystyle\int\limits_b^a \left|f(x)\right| \mathrm{\,d}x$}
+	\loigiai{Diện tích hình phẳng giới hạn bởi đồ thị hàm số $y=f(x)$, trục hoành và hai đường thẳng $x=a $; $x=b$ được tính theo công thức $S=\displaystyle\int\limits_a^b \left|f(x)\right| \mathrm{\,d}x$.}    
+\end{ex}
+
+\begin{ex}%[2D4H3-1]
+	\immini{	Cho đồ thị của hàm số $y=f(x)$ như hình vẽ bên. Biết $\displaystyle\int\limits_{-2}^1f(x)\mathrm{\,d}x=a$, $\displaystyle\int\limits_{1}^2f(x)\mathrm{\,d}x=b$. Tính diện tích $S$ của phần hình phẳng được tô đậm.
+		
+		\choice
+		{$S=-a-b$}
+		{$S=a+b$}
+		{\True $S=b-a$}
+		{$S=a-b$}}{\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=.7]
+			
+			
+			\draw[->] (-2.57,0)--(3,0)node[below]{$x$};
+			\draw[->] (0,-3.57)--(0,1.2)node[right]{$y$};
+			\draw[domain=-2.15:2.75, samples=100] plot (\x,{-0.6*(\x)^3+0.6*(\x)^2+2.4*\x-2.4});
+			\fill[pattern=north east lines] (-2,0) plot[domain=-2:2, samples=100] (\x,{-0.6*(\x)^3+0.6*(\x)^2+2.4*\x-2.4})--(2,0)--cycle;
+			\fill (0,0)circle(0.04)node[scale=0.9,above right]{$O$}
+			(-2,0)circle(0.04)node[scale=0.8,below left]{$-2$}
+			(1,0)circle(0.04)node[scale=0.8,below]{$1$}
+			(2,0)circle(0.04)node[scale=0.8,below ]{$2$}
+			;
+			
+			
+	\end{tikzpicture}}
+	
+	\loigiai{
+		Diện tích hình phẳng bằng
+		\[S=\displaystyle\int\limits_{-2}^2\left| f(x)\right| \mathrm{\,d}x=\displaystyle\int\limits_{-2}^1-f(x)\mathrm{\,d}x+\displaystyle\int\limits_{1}^2f(x)\mathrm{\,d}x=b-a.\]
+	}
+\end{ex}
+
+\begin{ex}%[2H5N1-2]
+	Trong không gian $O x y z$, cho mặt phẳng $(P)\colon 2 x+y-z+3=0$. Véc-tơ nào dưới đây là một véc-tơ pháp tuyến của $(P)$ ?
+	\choice
+	{$\overrightarrow{n}_3=(1;-1;3)$}
+	{$\overrightarrow{n}_4=(2;-1;3)$}
+	{\True $\overrightarrow{n}_2=(2;1;-1)$}
+	{$\overrightarrow{n}_1=(2;1;3)$}
+	\loigiai{
+		Ta thấy 	$\overrightarrow{n}_2=(2;1;-1)$ là một véc-tơ pháp tuyến của của mặt phẳng $ (P) $. 
+	}
+\end{ex}
+
+\begin{ex}%[2H5N1-1]
+	Trong không gian với hệ tọa độ $Oxyz$, cho mặt phẳng $(P)\colon x-2y+z-5=0$. Điểm nào dưới đây thuộc $(P)?$ 
+	\choice
+	{\True $M(1;1;6)$}
+	{$N(-5;0;0)$}
+	{$P(0;0-5)$}
+	{$Q(2;-1;5)$}
+	\loigiai{
+		Ta có $1-2\cdot1+6-5=0$ nên $M(1;1;6)$ thuộc mặt phẳng $(P)$.}
+\end{ex}
+
+\begin{ex}%[2H5H1-3]
+	Trong không gian $Oxyz$, mặt phẳng $(P)$ đi qua $M(2;-5;1)$ và song song với mặt phẳng $(Oxz)$ có phương trình là
+	\choice
+	{$x+y+3=0$}
+	{$x+z-3=0$}
+	{\True $y+5=0$}
+	{$x-2=0$}
+	\loigiai{
+		Do mặt phẳng song song với $(Oxz)\Rightarrow $ phương trình của mặt phẳng có dạng $y+m=0$.\\
+		Thay tọa độ $M(2;-5;1)$ vào phương trình, ta có $-5+m=0\Leftrightarrow m=5\Rightarrow$ phương trình của mặt phẳng là $y+5=0$.
+	}
+\end{ex}
+
+\begin{ex}%[2H5N2-2]
+	Trong không gian với hệ tọa độ $Oxyz$, đường thẳng nào sau đây có véc-tơ chỉ phương là $\overrightarrow{u}=(2;3;-1)$?
+	\choice
+	{\True $\heva{&x=1-4t\\&y=2-6t\\&z=-1+2t}$}
+	{$\heva{&X=1+4t\\&y=2+6t\\&z=-1-4t}$}
+	{$\heva{&x=1-2t\\&y=2-3t\\&z=-1-t}$}
+	{$\heva{&x=1+2t\\&y=2-3t\\&z=-1-t}$}
+	\loigiai{
+		Ta thấy đường thẳng $\heva{&x=1-4t\\&y=2-6t\\&z=-1+2t}$ có một véc-tơ chỉ phương là $(-4;-6;2)$ nên $\vec{u}=(2;3;-1)$ cũng là một véc-tơ chỉ phương của nó.
+	}
+\end{ex}
+
+\begin{ex}%[2H5N2-2]
+	Trong không gian với hệ tọa độ $Oxyz$, cho hai điểm $M(1;0;-2)$ và $N(3;0;-2)$. Véc-tơ nào sau đây là một véc-tơ chỉ phương của đường thẳng $MN$?
+	\choice
+	{$\vec{u_3}=(2;0;-2)$}
+	{$\vec{u_2}=(2;0;-1)$}
+	{\True $\vec{u_1}=(1;0;0)$}
+	{$\vec{u_4}=(0;0;2)$}
+	\loigiai{
+		Ta có $\vec{MN}=(2;0;0)=2\vec{u_1}$.\\
+		Vậy $\vec{u_1}=(1;0;0)$ là một véc-tơ chỉ phương của đường thẳng $MN$.
+	}  
+\end{ex}
+
+\begin{ex}%[2H5H2-3]
+	Trong không gian $Oxyz$, đường thẳng đi qua điểm $M(-2;1;3)$ và nhận véc-tơ $\overrightarrow{u}=(1;-3;5)$ làm véc-tơ chỉ phương có phương trình
+	\choice
+	{$\dfrac{x-1}{-2}=\dfrac{y+3}{1}=\dfrac{z-5}{3}$}
+	{$\dfrac{x-2}{1}=\dfrac{y+1}{-3}=\dfrac{z-3}{5}$}
+	{$\dfrac{x+2}{1}=\dfrac{y-1}{3}=\dfrac{z-3}{5}$}
+	{\True $\dfrac{x+2}{1}=\dfrac{y-1}{-3}=\dfrac{z-3}{5}$}
+	\loigiai{
+		Phương trình đường thẳng đi qua điểm $M(-2;1;3)$ và nhận véc-tơ $\overrightarrow{u}=(1;-3;5)$ làm véc-tơ chỉ phương là
+		$$\dfrac{x+2}{1}=\dfrac{y-1}{-3}=\dfrac{z-3}{5}.$$
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTGK2-De3}
+
+\cauds
+\Opensolutionfile{ans}[ans/ans-2-OTGK2-De3-DS]
+\begin{ex}
+	Cho $f(x)$ là hàm số liên tục trên $\mathbb{R}$.
+	\choiceTF
+	{$\displaystyle \int f(x) \mathrm{\,d} x=f'(x)+C$}
+	{\True $\displaystyle \int f'(x) \mathrm{\,d} x=f(x)+C$}
+	{$\displaystyle \int f'(x) \mathrm{\,d} x=f(x)$}
+	{\True $\displaystyle \int f''(x) \mathrm{\,d} x=f'(x)+C$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. $\displaystyle \int f(x) \mathrm{\,d} x=F(x)+C$.
+			\itemch Đúng. $\displaystyle \int f'(x) \mathrm{\,d} x=f(x)+C$.
+			\itemch Sai. $\displaystyle \int f'(x) \mathrm{\,d} x=f(x)+C$.
+			\itemch Đúng. $\displaystyle \int f''(x) \mathrm{\,d} x=f'(x)+C$.
+		\end{itemchoice}  
+	}
+\end{ex}
+
+\begin{ex}
+Cho vật thể tròn xoay như hình dưới.
+\begin{center}
+	\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=1]
+		\draw[->] (-1,0)--++(0:6.5)node[below right]{$x$};
+		\draw[->] (0,-2)--++(90:4)node[above right]{$y$};
+		\fill[draw,pattern=north east lines] (1,1.5) .. controls +(-10:2) and +(-160:1) .. (4,1)node[midway,sloped,above]{$y=f(x)$}--(4,0)--(1,0)--cycle;
+		\draw[->] (5,0.2) arc(120:420:0.1cm and 0.3 cm);
+		\draw[yscale=-1] (1,1.5) .. controls +(-10:2) and +(-160:1) .. (4,1)--(4,0)--(1,0)--cycle;
+		\draw[dashed] (1,0) ellipse (0.4cm and 1.5cm)
+		(4,0) ellipse (0.4cm and 1cm);
+		\node[below left] at (1,0){$a$}; 
+		\node[below right] at (4,0){$b$};
+		\node[below left] at (0,0){$O$};
+	\end{tikzpicture}
+\end{center}
+	\choiceTF
+	{Vật thể được tạo thành khi cho hình phẳng giới hạn bởi đồ thị hàm số $ y=f(x) $ và hai đường thẳng $ x=a, x=b $ quay quanh trục $ O x $}
+	{\True Vật thể được tạo thành khi cho hình phẳng giới hạn bởi đồ thị hàm số $ y=f(x) $, trục hoành và hai đường thẳng $ x=a, x=b $ quay quanh trục $ O x $}
+	{Thể tích của vật thể được tính theo công thức $ V=\pi \displaystyle\int_{a}^{b} f(x) \mathrm{\,d} x $}
+	{\True Thể tích của vật thể được tính theo công thức $ V=\pi \displaystyle\int_{a}^{b}[f(x)]^{2} \mathrm{~d} x $}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vật thể được tạo thành khi cho hình phẳng giới hạn bởi đồ thị hàm số $ y=f(x) $, trục hoành và hai đường thẳng $ x=a, x=b $ quay quanh trục $ O x $.
+			\itemch Đúng. 
+			\itemch Sai. $ V=\pi \displaystyle\int_{a}^{b}[f(x)]^{2} \mathrm{\,d} x $.
+			\itemch Đúng. 
+		\end{itemchoice}  
+	}
+\end{ex}
+
+\begin{ex}
+	Trong mặt phẳng $Oxyz$, cho mặt phẳng $(P)$ đi qua $M(1;2;-3)$ và có cặp vectơ chỉ phương $\vec{a}=(2;1;2)$, $\vec{b}=(3;2;-1)$. 
+	\choiceTF
+	{\True $\vec{n}=(10;-16;-2)$ là một vectơ pháp tuyến của mặt phẳng $(P)$}
+	{Phương trình mặt phẳng $(P)$ là $5x+8y-z-8=0$}
+	{$(P)$ vuông góc với mặt phẳng $(Q)\colon x+2y-z+3=0$}
+	{\True Khoảng cách từ điểm $A(1;-2;-1)$ đến $(P)$ là $\sqrt{10}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Ta có $\vec{n}_{(P)}=\left[\vec{a},\vec{b}\right]=(-5;8;1)$. Do đó $\vec{n}=(10;-16;-2)$ là một vectơ pháp tuyến của mặt phẳng $(P)$
+			\itemch Sai. $(P)$ đi qua $M(1;2;-3)$, có một vectơ pháp tuyến $\vec{n}=(-5;8;1)$. Phương trình mặt phẳng $(P)$ là $(-5)(x-1)+8(y-2)+z+3=0 $, hay $ -5x+8y+z-8=0.$
+			\itemch Sai. Vì với $\vec{n}_{(P)}=(-5;8;1)$ và $\vec{n}_{(Q)}=(1;2;-1)$ lần lượt là vectơ pháp tuyến của $(P)$ và $(Q)$, ta thấy $\vec{n}_{(P)}\cdot \vec{n}_{(Q)}\neq 0$.
+			\itemch Đúng. Ta có $\mathrm{d}\left(A,(P)\right)=\dfrac{\left|-5\cdot 1+8\cdot (-2)-1-8\right|}{\sqrt{(-5)^2+8^2+1^2}}=\sqrt{10}.$ 
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}
+Trong không gian $ O x y z $, cho hai đường thẳng $$\Delta_{1}\colon \dfrac{x}{1}=\dfrac{y-3}{-1}=\dfrac{z+3}{2}, \,\Delta_{2}\colon \dfrac{x+4}{2}=\dfrac{y+2}{1}=\dfrac{z-4}{-1} .$$
+Xét các vectơ $ \vec{u}_{1}=(1 ;-1 ; 2) $ và $ \vec{u}_{2}=(2 ; 1 ;-1) $. 
+	\choiceTF
+	{\True Đường thẳng $ \Delta_{1} $ đi qua điểm $ M_{1}(0 ; 3 ;-3) $ và có $ \vec{u}_{1}=(1 ;-1 ; 2) $ là một vectơ chỉ phương}
+	{\True Đường thẳng $ \Delta_{2} $ đi qua điểm $ M_{2}(-4 ;-2 ; 4) $ và có $ \vec{u}_{2}=(2 ; 1 ;-1) $ là một vectơ chỉ phương}
+	{$ \left[\vec{u}_{1}, \vec{u}_{2}\right]=(1 ;-5 ;-3) $}
+	{Hai đường thẳng $ \Delta_{1} $ và $ \Delta_{2} $ chéo nhau}
+	\loigiai{ 
+		\begin{itemchoice}
+			\itemch Đúng. Đường thẳng $ \Delta_{1} $ đi qua điểm $ M_{1}(0 ; 3 ;-3) $ và có $ \vec{u}_{1}=(1 ;-1 ; 2) $ là một vectơ chỉ phương. 
+			\itemch Đúng. Đường thẳng $ \Delta_{2} $ đi qua điểm $ M_{2}(-4 ;-2 ; 4) $ và có $ \vec{u}_{2}=(2 ; 1 ;-1) $ là một vectơ chỉ phương.
+			\itemch Sai. Ta có $ \left[\vec{u}_{1}, \vec{u}_{2}\right]=(-1 ; 5 ; 3)$.
+			\itemch Sai. Ta có $ \left[\vec{u}_{1}, \vec{u}_{2}\right]=(-1 ; 5 ; 3)$, $\overrightarrow{M_{1} M_{2}}=(-4 ;-5 ; 7) $ và $ \left[\vec{u}_{1}, \vec{u}_{2}\right] \cdot \overrightarrow{M_{1} M_{2}}=0 $. Suy ra hai đường thẳng $ \Delta_{1} $ và $ \Delta_{2} $ không chéo nhau.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-2-OTGK2-De3-DS}
+
+\Opensolutionfile{ans}[ans/ans-2-OTGK2-De3-KQ]
+\caukq
+\begin{ex}%[2D4N1-2]
+	Họ nguyên hàm của hàm số $f(x)=3x^2+1$ là $ax^3+bx^2+cx+d$. Tính tổng $a+b+c$.
+	\shortans{$2$}
+	\loigiai{
+		Ta có $\displaystyle\int f(x)\mathrm{d}x=
+		\displaystyle\int (3x^2+1)\mathrm{d}x=x^3+x+C$.\\
+		Khi đó $a=1$, $b=0$, $c=1$ suy ra $a+b+c=2$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4H1-2]
+	Biết rằng $\displaystyle\int\limits_1^3\dfrac{x-1}{x}\mathrm{\,d}x=a-\ln b$, với $a$, $b$ là các số nguyên. Giá trị của $a+b$ bằng
+	\shortans{$5$}
+	\loigiai
+	{
+		Ta có $\displaystyle\int\limits_1^3\dfrac{x-1}{x}\mathrm{\,d}x= \displaystyle\int\limits_1^3\left(1-\dfrac{1}{x}\right)\mathrm{\,d}x = (x-\ln x)\big|_1^3 = 3-\ln 3-(1-\ln 1) = 2-\ln 3$.\\
+		Suy ra $a=2$, $b=3$. Do đó $a+b=5$.
+	}
+\end{ex}
+
+\begin{ex}%[2D4C3-1]
+	\immini
+	{
+		Cho hàm số $f(x)=x^3+ax^2+bx+c$ có đồ thị $(C)$. Biết rằng tiếp tuyến $d$ của $(C)$ tại điểm $A$ có hoành độ bằng $-1$ cắt $(C)$ tại điểm $B$ có hoành độ bằng $2$.
+		Diện tích hình phẳng giới hạn bởi $d$ và $(C)$ bằng $\dfrac{m}{n}$ (với $m, n$ nguyên dương và phân số $\dfrac{m}{n}$ tối giản). Giá trị $m+n$ bằng
+		\shortans{$31$}
+	}
+	{
+		\begin{tikzpicture}[scale=.7, font=\footnotesize,line join=round, line cap=round,>=stealth]
+			\path (-1,1) coordinate (A) (2,4) coordinate (B);
+			\draw[->] (-3,0)--(0,0)node[below left]{$ O $}--(3,0)node[below]{$x$};
+			\foreach \x in {-1,2}
+			\draw[fill=black](\x,0)  node[below]{ $\x$} circle (1pt);
+			\draw[->] (0,-1.5)--(0,5)node[right]{$y$};
+			\draw[samples=150,smooth,domain=-1.6:2.1] plot(\x,{(\x)^3-2*(\x)});
+			\draw[samples=150,smooth,domain=-2.5:2.5] plot(\x,{\x+2});
+			\draw[dashed](-1,0)--(-1,1)(2,0)--(2,4);
+			\fill [pattern = north east lines, line width =1pt,draw=none](-1,1) %
+			plot[domain=-1:2](\x, {\x+2}) (2,4) plot[domain=-1:2](\x, {(\x)^3-2*\x});
+			\draw[fill=black] (A) node[above]{$A$} circle (1pt) (B) node[below right]{$B$} circle (1pt) (0,0) circle (1pt);
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Đồ thị $ (C) $ có phương trình $ y=f(x)=x^3+ax^2+bx+c $ và tiếp tuyến $ (d) $ có phương trình là $ y=g(x) $. \\
+		Xét phương trình hoành độ giao điểm $ f(x)=g(x)$. \\
+		Vì $ (C) $ và $ (d) $ tiếp xúc với nhau tại điểm $ x=-1 $ và cắt nhau tại điểm $ x=2 $, nên suy ra $ f(x)-g(x)=(x+1)^2(x-2)$.\\
+		Suy ra diện tích hình phẳng giới hạn bởi $d$ và $(C) $ là
+		\begin{align*}
+			S=\int\limits_{-1}^{2}|f(x)-g(x)|\mathrm{d}x=\int\limits_{-1}^{2}|(x+1)^2(x-2)|\mathrm{d}x=\int\limits_{-1}^{2}(x+1)^2(2-x)\mathrm{d}x=\dfrac{27}{4}.
+		\end{align*}
+		Suy ra $m=27$, $n=4$. Khi đó $m+n=31$.	}
+\end{ex}
+
+\begin{ex}%[2H5H1-3]
+	Cho biết phương trình mặt phẳng $(P)\colon ax +by +cz -13= 0$ đi qua 3 điểm $A\left(1;-1;2\right)$, $B\left(2;1;0\right)$, $C\left(0;1;3\right)$. Khi đó $a +b +c$ bằng
+	\shortans{$11$}
+	
+	\loigiai{
+		Do $\left(P\right)\colon ax +by +cz -13= 0$ đi qua 3 điểm $A\left(1;-1;2\right)$, $B\left(2;1;0\right)$, $C\left(0;1;3\right)$ nên ta có hệ $$\heva{&a- b +2c= 13\\&2a +b= 13\\&b+3c= 13}\Leftrightarrow \heva{&a= 6\\&b= 1\\&c= 4}\Rightarrow a+b +c= 11.$$
+	}
+\end{ex}
+
+\begin{ex}%[2H5N2-2]
+	Trong không gian với hệ tọa độ $Oxyz$, cho đường thẳng $\dfrac{x-1}{-2}=\dfrac{y-2}{1}=\dfrac{z+1}{2}$ nhận véc-tơ $\overrightarrow{u}=(a;2;b)$ làm một véc-tơ chỉ phương. Tính $a-b$.
+	\shortans{$-8$}	
+	\loigiai{
+		Tọa độ véc-tơ chỉ phương của đường thẳng là $ \overrightarrow{v}=(-2;1;2) $, suy ra $ 2\overrightarrow{v}=(-4;2;4) $ cũng là véc-tơ chỉ phương.\\
+		Suy ra $ a=-4 $, $b=4 $ nên $ a-b=-8 $.}
+\end{ex}
+
+\begin{ex}%[2H5C2-6]
+	Trong không gian $Oxyz$, cho đường thẳng $d\colon\heva{&x=1+2t\\&y=1-t\\&z=t}$ và hai điểm $A(1; 0; -1)$, $B(2; 1; 1)$. Gọi điểm $M(a;b;c)$ thuộc đường thẳng $d$ sao cho $MA+MB$ nhỏ nhất. Tính $-a+2b+c$.
+	\shortans{$0$}	
+	\loigiai{
+		Do $M\in d$ nên $M(1+2t; 1-t; t)$.\\
+		$MA+MB$\\
+		$=\sqrt{4t^2+(t-1)^2+(t+1)^2}+\sqrt{(2t-1)^2+t^2+(t-1)^2}$\\ 
+		$=\sqrt{6t^2+2}+\sqrt{6t^2-6t+2}$\\
+		$=\sqrt{6t^2+2}+\sqrt{6\left(t-\dfrac{1}{2}\right)^2+\dfrac{1}{2}}$.\\
+		Chọn $\overrightarrow{u}=\left(\sqrt{6}t; \sqrt{2}\right), \overrightarrow{\mathrm{v}}=\left(\sqrt{6}\left(\dfrac{1}{2}-t\right); \dfrac{1}{\sqrt{2}}\right)\Rightarrow \overrightarrow{u}+\overrightarrow{v}=\left(\dfrac{\sqrt{6}}{2}; \dfrac{3}{\sqrt{2}}\right)$.\\ 
+		Ta có: $MA+MB=\left| \overrightarrow{u} \right|+\left| \overrightarrow{v} \right|\ge \left| \overrightarrow{u}+\overrightarrow{v} \right|=\sqrt{\dfrac{6}{4}+\dfrac{9}{2}}=\sqrt{6}$.\\
+		Đẳng thức xảy ra $\Leftrightarrow$ $\overrightarrow{u}$ và $\overrightarrow{v}$ cùng hướng $\Leftrightarrow \dfrac{\sqrt{6}t}{\sqrt{6}\left(\dfrac{1}{2}-t\right)}=\dfrac{\sqrt{2}}{\dfrac{1}{\sqrt{2}}}\Leftrightarrow 1=1-2t\Leftrightarrow t=\dfrac{1}{3}$.\\
+		Vậy $MA+MB$ nhỏ nhất $\Leftrightarrow M\left(\dfrac{5}{3}; \dfrac{2}{3}; \dfrac{1}{3}\right)$. Khi đó $-a+2b+c=0$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-2-OTGK2-De3-KQ}

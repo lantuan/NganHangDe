@@ -1,0 +1,514 @@
+\section{Ôn tập chương 6}
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-B15]
+\caulc
+%%==========PHẦN 1=============================================
+%%==========Câu 1
+\begin{ex}%[2D6H1-2]
+	Cho $A$, $B$ là các biến cố của một phép thử $T$. Biết rằng $\mathrm{P}(B)>0$, xác suất của biến cố $A$ với điều kiện biến cố $B$ đã xảy ra được tính theo công thức nào sau đây?
+	\choice
+	{$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A)}{\mathrm{P}(B)}$}
+	{$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A)}{\mathrm{P}(A B)}$}
+	{\True $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}$}
+	{$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(A) \cdot \mathrm{P}(B)}$}
+	\loigiai{ Dựa theo công thức tính xác suất biến cố $A$ với điều kiện $B$ thì $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}$ là đáp án đúng.
+	}
+\end{ex}
+%%==========Câu 2
+\begin{ex}%[2D6H1-2]
+	Cho hai biến cố độc lập $A$, $B$ với $\mathrm{P}(A)=0{,}3$; $\mathrm{P}(B)=0{,}4$. Khi đó, $\mathrm{P}(A\mid B)$ bằng
+	\choice{$0{,}7$}
+	{$0{,}12$}
+	{$0{,}4$}
+	{\True $0{,}3$}
+	\loigiai{
+	Vì $A$ và $B$ là $2$ biến cố độc lập nên $\mathrm{P}(A\cap B)=\mathrm{P}(A)\cdot \mathrm{P}(B)=0{,}12$.\\
+	$$\Rightarrow \mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(A\cap B)}{\mathrm{P}(B)}=\mathrm{P}(A)=\dfrac{0{,}12}{0{,}4}=0{,}3.$$
+	}
+\end{ex}
+%%==========Câu 3
+\begin{ex}%[2D6H1-2]
+	Cho hai biến cố xung khắc $A$, $B$ với $\mathrm{P}(A)=0{,}2$; $\mathrm{P}(B)=0{,}4$. Khi đó, $\mathrm{P}(A\mid B)$ bằng
+	\choice{$0{,}5$}
+	{$0{,}2$}
+	{$0{,}4$}
+	{\True $0$}
+	\loigiai{
+	Vì $A$ và $B$ là $2$ biến cố xung khắc nên $\mathrm{P}(A\cap B)=0$.\\
+	$$\Rightarrow \mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A\cap B)}{\mathrm{P}(B)}=\dfrac{0}{0{,}4}=0.$$
+	}
+\end{ex}
+%%==========Câu 4
+\begin{ex}%[2D6H1-2]
+	Cho $\mathrm{P}(A)=\dfrac{2}{5}$; $\mathrm{P}\left( B\mid A\right)=\dfrac{1}{3}$. Giá trị của $\mathrm{P}(AB)$ là 
+	\choice
+	{\True $\dfrac{2}{15} $}
+	{$ \dfrac{3}{16}$}
+	{$ \dfrac{1}{5}$}
+	{$ \dfrac{4}{15}$}
+	\loigiai{
+	Ta có $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}\left( B\mid A\right)=\dfrac{2}{5}\cdot \dfrac{1}{3}=\dfrac{2}{15}$.
+	}
+\end{ex}
+%%==========Câu 5
+\begin{ex}%[2D6H1-2]
+	Cho $\mathrm{P}(A)=\dfrac{2}{5}$; $\mathrm{P}\left(B\mid \overline{A}\right)=\dfrac{1}{4}$. Giá trị của $\mathrm{P}\left(B\overline{A}\right)$ là 
+	\choice
+	{$\dfrac{1}{7} $}
+	{$ \dfrac{4}{19}$}
+	{$ \dfrac{4}{21}$}
+	{\True $ \dfrac{3}{20}$}
+	\loigiai{
+	Ta có $\mathrm{P}\left(B\overline{A}\right)=\mathrm{P}\left( B\mid \overline{A} \right)\cdot \mathrm{P}\left( \overline{A}\right) =\dfrac{1}{4}\cdot \dfrac{3}{5}=\dfrac{3}{20}$.
+	}
+\end{ex}
+%%==========Câu 6
+\begin{ex}%[2D6H1-2]
+	Cho $\mathrm{P}(A)=\dfrac{2}{5}$; $\mathrm{P}\left( B\mid A\right)=\dfrac{1}{3}$; $\mathrm{P}\left(B\mid \overline{A}\right)=\dfrac{1}{4}$. Giá trị của $\mathrm{P}(B)$ là 
+	\choice
+	{$\dfrac{19}{60} $}
+	{\True $ \dfrac{17}{60}$}
+	{$ \dfrac{9}{20}$}
+	{$ \dfrac{7}{30}$}
+	\loigiai{Áp dụng công thức Bayes ta có
+	$$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)}{\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)+\mathrm{P}\left( \overline{A}\right) \cdot \mathrm{P}\left( B\mid \overline{A}\right) }=\dfrac{\dfrac{2}{5}\cdot \dfrac{1}{3}}{\dfrac{2}{5}\cdot \dfrac{1}{3}+\dfrac{3}{5}\cdot \dfrac{1}{4}}=\dfrac{8}{17}.$$
+	Khi đó 
+	$\mathrm{P}(B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A\mid B)}=\dfrac{2}{15}:\dfrac{8}{17}=\dfrac{17}{60}$.
+	}
+\end{ex}
+%%==========Câu 7
+\begin{ex}%[2D6H1-2]
+	An có một túi gồm một số chiếc kẹo cùng loại, chỉ khác màu, trong đó có $6$ chiếc kẹo sô-cô-la đen, còn lại là $4$ chiếc kẹo sô-cô-la trắng. An lấy ngẫu nhiên $1$ chiếc kẹo trong túi để cho Bình, rồi lại lấy ngẫu nhiên tiếp $1$ chiếc kẹo nữa trong túi và cũng đưa cho Bình. Xác suất để Bình nhận được $2$ chiếc kẹo sô-cô-la đen là 
+	\choice
+	{\True $\dfrac{1}{3} $}
+	{$ \dfrac{1}{4}$}
+	{$ \dfrac{2}{5}$}
+	{$ \dfrac{3}{7}$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq An lấy lần $1$ được $1$ chiếc kẹo sô-cô-la đen\rq\rq\, và $B$ là biến cố \lq\lq An lấy lần $2$ được $1$ chiếc kẹo sô-cô-la đen\rq\rq.\\
+	Khi đó $AB$ là biến cố \lq\lq Cả hai lần đều lấy được kẹo sô-cô-la đen\rq\rq.\\
+	Ta có $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{3}{5}$.\\
+	Sau khi lấy $1$ chiếc kẹo sô-cô-la đen thì xác suất để chọn $1$ chiếc kẹo sô-cô-la đen trong hộp đựng $5$ chiếc kẹo sô-cô-la đen, còn lại là $4$ chiếc kẹo sô-cô-la trắng là $\mathrm{P}(B\mid A)=\dfrac{5}{9}$.\\
+	Khi đó $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)=\dfrac{3}{5}\cdot \dfrac{5}{9}=\dfrac{1}{3}$.\\
+	Xác suất để Bình nhận được $2$ chiếc kẹo sô-cô-la đen là $\dfrac{1}{3}$.
+	}
+\end{ex}
+%%==========Câu 8
+\begin{ex}%[0D0H2-9]
+	Người ta nhập hai lô hàng vào kho. Lô thứ nhất chứa $10$ sản phẩm, trong đó có $3$ phế phẩm. Lô thứ hai có $4$ phế phẩm và $8$ sản phẩm tốt. Chọn ngẫu nhiên một sản phẩm. Xác suất chọn được một sản phẩm tốt là
+	\choice
+	{\True $\dfrac{15}{22}$}
+	{$\dfrac{7}{15}$}
+	{$\dfrac{7}{22}$}
+	{$\dfrac{83}{242}$}
+	\loigiai{
+	Gọi $A$ là biến cố “chọn được sản phẩm tốt”, theo đề bầi, kho có $22$ sản phẩm, trong đó có $15$ sản phẩm tốt nên $n(A)=15$, $n(\Omega)=22.$\\
+	Vậy $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{15}{22}$.
+	}
+\end{ex}
+%%==========Câu 9
+\begin{ex}%[2D6V2-2]
+	Cho $A$, $B$ là các biến cố thỏa mãn $\mathrm{P}(\overline{A}\cap \overline{B})=0{,}35$; $\mathrm{P}(A)=0{,}25$; $\mathrm{P}(B)=0{,}6$. Giá trị của $\mathrm{P}(A\mid B)$ bằng
+	\choice
+	{$\dfrac{1}{5}$}
+	{\True$\dfrac{1}{3}$}
+	{$\dfrac{7}{15}$}
+	{$\dfrac{2}{3}$}
+	\loigiai{
+		Ta có $$\mathrm{P}(\overline{A}\cap \overline{B}) = \mathrm{P} \left(\overline A \right) \mathrm{P} \left( \overline B \mid \overline A \right) \Rightarrow \mathrm{P} \left(\overline B \mid \overline A \right) = \dfrac{\mathrm{P}(\overline{A}\cap \overline{B})}{\mathrm{P} \left( \overline A\right)} = \dfrac{0{,}35}{0{,}75} = \dfrac{7}{15}.$$
+	Suy ra $$\mathrm{P} \left(B\mid \overline A\right) = 1 - \dfrac{7}{15} = \dfrac{8}{15}.$$
+	Theo công thức xác suất toàn phần, ta có
+	\begin{eqnarray*}
+	&&	\mathrm{P}\left( B \right) = \mathrm{P}\left(B\mid A\right)\mathrm{P}\left( A \right) + \mathrm{P}\left( B\mid \overline A  \right)\mathrm{P}\left( \overline A \right)\\
+	&\Rightarrow& \mathrm{P}\left( B\mid A \right) = \dfrac{\mathrm{P}\left( B \right) - \mathrm{P} \left( {B\mid \overline A } \right)\mathrm{P}\left( {\overline A } \right)}{\mathrm{P}\left( A \right)} = \dfrac{0{,}6 - \dfrac{8}{{15}} \cdot 0{,}75}{0{,}25} = 0{,}8.	
+	\end{eqnarray*}
+	Theo công thức Bayes, ta được
+	$$\mathrm{P}\left( {A\mid B} \right) = \dfrac{{\mathrm{P}\left( A \right)\mathrm{P}\left( {B\mid A} \right)}}{{\mathrm{P}\left( B \right)}} = \dfrac{{0{,}25 \cdot 0{,}8}}{{0{,}6}} = \dfrac{1}{3}.$$}
+\end{ex}
+%%==========Câu 10
+\begin{ex}%[2D6V1-3]
+	Một bệnh viện có hai phòng khám là phòng A và phòng B với khả năng lựa chọn của bệnh nhân là như nhau. Tỉ lệ bệnh nhân nam có ở phòng A và phòng B lần lượt là $60\%$ và $40\%$. Một người bệnh được chọn ngẫu nhiêu từ hai phòng khám và biết người này là nam, xác suất để người bệnh được chọn đến từ phòng A là
+	\choice
+	{\True $0{,}6$}
+	{$0{,}5$}
+	{$0{,}4$}
+	{$0{,}3$}
+	\loigiai{Một người bệnh được chọn ngẫu nhiên từ hai phòng khám.\\
+	Gọi $X$ là biến cố \lq \lq Người đó đến từ phòng khám A\rq \rq \, và $Y$, $\overline{Y}$ lần lượt là biến cố \lq \lq Người đó là nam\rq \rq \; và \lq \lq Người đó không là nam\rq \rq.\\
+	Ta có sơ đồ hình cây sau\\
+	\begin{tikzpicture}[>=stealth]
+	%Khung 1
+	\draw (-2,-1) rectangle (2.2,0);
+	\draw (0.1,-0.5) node{Bệnh nhân được chọn} ;
+	%Mui ten 1,2
+	\draw [->] (2.2,-0.5)--(3.8,1.6) node[pos=0.5,sloped,above]{$0{,}5$};
+	\draw [->] (2.2,-0.5)--(3.8,-2.6) node[pos=0.5,sloped,below]{$0{,}5$};
+	%Khung 2.1
+	\draw (3.8,1.1) rectangle (5.1,2.1);
+	\draw (8.9/2,1.6) node{$X$} ;
+	%Khung 2.2
+	\draw (3.8,-2.1) rectangle (5.1,-3.1);
+	\draw (8.9/2,-2.6) node{$\overline{X}$} ;
+	%Mui ten 3,4
+	\draw [->] (5.1,1.6)--(6.5,2.6) node[pos=0.5,sloped,above]{$0{,}6$};
+	\draw [->] (5.1,1.6)--(6.5,0.6) node[pos=0.5,sloped,below]{$0{,}4$};
+	%Mui ten 5,6
+	\draw [->] (5.1,-2.6)--(6.5,-1.6) node[pos=0.5,sloped,above]{$0{,}4$};
+	\draw [->] (5.1,-2.6)--(6.5,-3.6) node[pos=0.5,sloped,below]{$0{,}6$};
+	%Khung 3.1
+	\draw (6.5,2.2) rectangle (7.7,3.2);
+	\draw (7.1,5.4/2) node{$Y$} ;
+	%Khung 3.2
+	\draw (6.5,1.2) rectangle (7.7,0.2);
+	\draw (7.1,1.4/2) node{$\overline{Y}$} ;
+	%Khung 3.3
+	\draw (6.5,-1.1) rectangle (7.7,-2.1);
+	\draw (7.1,-3.2/2) node{$Y$} ;
+	%Khung 3.3
+	\draw (6.5,-2.9) rectangle (7.7,-3.9);
+	\draw (7.1,-3.4) node{$\overline{Y}$} ;
+	%Kết quả
+	\draw (9.5,3.7) node{\textbf{Kết quả}};	
+	\draw (9.5,2.7) node{$XY$};
+	\draw (9.5,0.7) node{$X \overline{Y}$};
+	\draw (9.5,-1.6) node{$\overline{X}Y$};
+	\draw (9.5,-3.4) node{$\overline{X}\overline{Y}$};
+	%Xác suất
+	\draw (12.5,3.7) node{\textbf{Xác suất}};	
+	\draw (12.5,2.7) node{$0{,}3$};
+	\draw (12.5,0.7) node{$0{,}2$};
+	\draw (12.5,-1.6) node{$0{,}2$};
+	\draw (12.5,-3.4) node{$0{,}3$};	
+	\end{tikzpicture}
+	\noindent Theo công thức Bayes, ta có $$\mathrm{P}(X\mid Y)=\dfrac{\mathrm{P}(X)\mathrm{P}(Y\mid X)}{\mathrm{P}(X)\mathrm{P}(Y\mid X)+\mathrm{P}(\overline{X})\mathrm{P}(Y\mid \overline{X})}=\dfrac{0{,}3}{0{,}3+0{,}2}=0{,}6.$$
+	Vậy với một người bệnh được chọn ngẫu nhiêu từ hai phòng khám và biết người này là nam, xác suất để người đó đến từ phòng A là $0{,}6$.}
+\end{ex}
+%%==========Câu 11
+\begin{ex}%[2D6V1-3]
+	Ở một địa phương $X$, xác suất để một người lớn trên $40$ tuổi mắc bệnh ung thư là $0{,}05$. Xác suất bác sĩ chẩn đoán đúng một người mắc bệnh ung thư là $0{,}78$ và chẩn đoán sai (không bị ung thư nhưng được chẩn đoán mắc bệnh) là $0{,}06$. Xác suất để một người thật sự mắc bệnh ung thư khi nhận được kết quả chẩn đoán bị ung thư bằng
+	\choice
+	{\True$0{,}40625$}
+	{$0{,}096$}
+	{$0{,}904$}
+	{$0{,}59375$}
+	\loigiai{Một bệnh nhân trên 40 tuổi ở địa phương X đến bác sĩ để khám bệnh ung thư.\\
+	Gọi $A$ là biến cố \lq \lq Người đó mắc bệnh ung thư\rq \rq \, và $B$, $\overline{B}$ lần lượt là biến cố \lq \lq Bác sĩ chẩn đoán người đó bị ung thư\rq \rq \;và \lq \lq Bác sĩ chẩn đoán người đó không bị ung thư\rq \rq.\\
+	Ta xét sơ đồ hình cây như sau\\
+	\begin{tikzpicture}[>=stealth]
+	%Khung 1
+	\draw (-3.5,-1) rectangle (2.2,0);
+	\draw (-1.3/2,-0.5) node{Bệnh nhân được chẩn đoán} ;
+	%Mui ten 1,2
+	\draw [->] (2.2,-0.5)--(3.8,1.6) node[pos=0.5,sloped,above]{$0{,}05$};
+	\draw [->] (2.2,-0.5)--(3.8,-2.6) node[pos=0.5,sloped,below]{$0{,}95$};
+	%Khung 2.1
+	\draw (3.8,1.1) rectangle (5.1,2.1);
+	\draw (8.9/2,1.6) node{$A$} ;
+	%Khung 2.2
+	\draw (3.8,-2.1) rectangle (5.1,-3.1);
+	\draw (8.9/2,-2.6) node{$\overline{A}$} ;
+	%Mui ten 3,4
+	\draw [->] (5.1,1.6)--(6.5,2.6) node[pos=0.5,sloped,above]{$0{,}78$};
+	\draw [->] (5.1,1.6)--(6.5,0.6) node[pos=0.5,sloped,below]{$0{,}22$};
+	%Mui ten 5,6
+	\draw [->] (5.1,-2.6)--(6.5,-1.6) node[pos=0.5,sloped,above]{$0{,}06$};
+	\draw [->] (5.1,-2.6)--(6.5,-3.6) node[pos=0.5,sloped,below]{$0{,}94$};
+	%Khung 3.1
+	\draw (6.5,2.2) rectangle (7.7,3.2);
+	\draw (7.1,5.4/2) node{$B$} ;
+	%Khung 3.2
+	\draw (6.5,1.2) rectangle (7.7,0.2);
+	\draw (7.1,1.4/2) node{$\overline{B}$} ;
+	%Khung 3.3
+	\draw (6.5,-1.1) rectangle (7.7,-2.1);
+	\draw (7.1,-3.2/2) node{$B$} ;
+	%Khung 3.3
+	\draw (6.5,-2.9) rectangle (7.7,-3.9);
+	\draw (7.1,-3.4) node{$\overline{B}$} ;
+	%Kết quả
+	\draw (9.5,3.7) node{\textbf{Kết quả}};	
+	\draw (9.5,2.7) node{$AB$};
+	\draw (9.5,0.7) node{$A\overline{B}$};
+	\draw (9.5,-1.6) node{$\overline{A}B$};
+	\draw (9.5,-3.4) node{$\overline{A}\overline{B}$};
+	%Xác suất
+	\draw (12.5,3.7) node{\textbf{Xác suất}};	
+	\draw (12.5,2.7) node{$0{,}039$};
+	\draw (12.5,0.7) node{$0{,}011$};
+	\draw (12.5,-1.6) node{$0{,}057$};
+	\draw (12.5,-3.4) node{$0{,}893$};
+	\end{tikzpicture}
+	Theo công thức Bayes, ta có $$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A)\mathrm{P}(B\mid A)}{\mathrm{P}(A)\mathrm{P}(B\mid A)+\mathrm{P}(\overline{A})\mathrm{P}(B\mid \overline{A})}=\dfrac{0{,}039}{0{,}039+0{,}057}=0{,}40625.$$	 
+	Vậy xác suất để một người thật sự mắc bệnh ung thư khi nhận được kết quả chẩn đoán bị ung thư bằng $0{,}40625$.}
+\end{ex} 
+%%==========Câu 12
+\begin{ex}%[2D6V2-3]
+	Một loại vaccine được tiêm ở địa phương $X$. Người có bệnh nền thì với xác suất $0{,}35$ có phản ứng phụ sau tiêm, người không có bệnh nền thì chỉ có phản ứng phụ sau tiêm với xác suất $0{,}16$. Chọn ngẫu nhiên một người được tiêm vaccine và người này có phản ứng phụ. Tính xác suất để người này có bệnh nền, biết rằng tỉ lệ người có bệnh nền ở địa phương $X$ là $18\%$.
+	\choice
+	{\True $\dfrac{315}{971}$ }
+	{ $\dfrac{31}{971}$}
+	{$0{,}16$} 
+	{$0{,}063$}
+	\loigiai{
+	Gọi $A$ là biến cố \lq\lq Người được chọn có bệnh nền\rq\rq\, và $B$ là biến cố \lq\lq Người này có phản ứng phụ sau tiêm\rq\rq.\\
+	Ta có $\mathrm{P}(A)=0{,}18$; $\mathrm{P}(\overline{A})=0{,}82$.\\
+	$\mathrm{P}(B\mid A)$ là xác suất để một người bệnh có phản ứng sau tiêm với điều kiện có bệnh nền, suy ra $$\mathrm{P}(B\mid A)=0{,}35.$$
+	$\mathrm{P}(B\mid \overline{A})$ là xác suất để một người bệnh có phản ứng sau tiêm với điều kiện không có bệnh nền, suy ra $$\mathrm{P}(B\mid \overline{A})=0{,}16.$$
+	Theo công thức Bayes, ta được 
+	$$\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)}{\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)+\mathrm{P}(\overline{A})\cdot \mathrm{P}(B\mid \overline{A})}=\dfrac{0{,}18\cdot 0{,}35}{0{,}18\cdot 0{,}35+0{,}82\cdot 0{,}16}=\dfrac{315}{971}.$$
+	}
+\end{ex}
+%==============================================================
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15}
+%%==========HẾT PHẦN 1=========================================
+\Opensolutionfile{ans}[ans/ans-0-B15-DS]
+\cauds
+%%==========Câu 13
+\begin{ex}%[2D6H1-2]
+	Lớp $12A$ có $40$ học sinh, trong đó có $25$ học sinh tham gia câu lạc bộ Tiếng Anh, $16$ học sinh tham gia câu lạc bộ Toán, $12$ học sinh vừa tham gia câu lạc bộ tiếng Anh vừa tham gia câu lạc bộ Toán. Chọn ngẫu nhiên $1$ học sinh. Xét các biến cố sau\\
+	$A\colon$ \lq\lq Học sinh được chọn tham gia câu lạc bộ Tiếng Anh\rq\rq;\\
+	$B\colon$ \lq\lq Học sinh được chọn tham gia câu lạc bộ Toán\rq\rq.\\
+	Xét tính đúng, sai của các khẳng định sau
+	\choiceTF
+	{$\mathrm{P}(A)=0{,}4$}
+	{$\mathrm{P}(B)=0{,}625$}
+	{\True $\mathrm{P}(A | B)=0{,}75$}
+	{\True $\mathrm{P}(B | A)=0{,}48$}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Sai, vì xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{25}{40}=0{,}625$.
+	\itemch Sai, vì xác suất của biến cố $B$ là $\mathrm{P}(B)=\dfrac{16}{40}=0{,}4$.
+	\itemch Đúng, vì số học sinh vừa tham gia câu lạc bộ tiếng Anh vừa tham gia câu lạc bộ Toán là $12$, số học sinh tham gia câu lạc bộ Toán là $16$ nên $\mathrm{P}(A | B)=\dfrac{12}{16}=0{,}75$.
+	\itemch Đúng, vì số học sinh vừa tham gia câu lạc bộ tiếng Anh vừa tham gia câu lạc bộ Toán là $12$, số học sinh tham gia câu lạc bộ Tiếng Anh là $25$ nên $\mathrm{P}(B | A)=\dfrac{12}{25}=0{,}48$.
+	\end{itemchoice}
+	}
+\end{ex}
+%%==========Câu 14
+\begin{ex}%[2D6V1-3]
+	\immini{Cho sơ đồ hình cây như hình bên. Xét tính đúng, sai của các khẳng định sau
+	\choiceTF
+	{$\mathrm{P(AB)}=0{,}48$}
+	{ $\mathrm{P(A| B)}=0{,}5$}
+	{$\mathrm{P(\overline{A}| B)}=0{,}3$}
+	{\True $\dfrac{\mathrm{P}(B) \mathrm{P}(\overline{A} | B)}{\mathrm{P}(\overline{A})}=0{,}6$}}
+	{\begin{tikzpicture}[scale=.2,>=stealth]
+	\tikzstyle{block} = [rectangle, draw, fill=blue!10\text{,} rounded corners, text centered, text width = 10em, minimum height = 2em]
+	\node (c1) {};
+	\node (c2)[above right = 1.5cm of c1] {$A$};
+	\node at (0.5,5){\fbox{$0\text{,}2$}};
+	\node at (0.5,-5){\fbox{$0\text{,}8$}};
+	\node (c3) [below right= 1.5cm of c1]{$\overline{A}$};
+	\node at (12,11.5){\fbox{$0\text{,}7$}};
+	\node (c4) at (21.5, 12){$B$};
+	\node (c5) at (21.5, 2){$\overline{B}$};
+	\node at (12,3){\fbox{$0\text{,}3$}};
+	\node (c6) at (21.5, -4){$B$};
+	\node at (12,-4){\fbox{$0\text{,}6$}};
+	\node (c7) at (21.5, -14){$\overline{B}$};
+	\node at (12,-13){\fbox{$0\text{,}4$}};
+	\draw[->] (c1.east) -- (c2.west);
+	\draw[->] (c1.east) -- (c3.west);
+	\draw[->] (c2.east) -- (c4.west);
+	\draw[->] (c2.east) -- (c5.west);
+	\draw[->] (c3.east) -- (c6.west);
+	\draw[->] (c3.east) -- (c7.west);
+	\end{tikzpicture}}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Sai, vì $\mathrm{P}(B)=0\text{,}2\cdot 0\text{,}7+0\text{,}8\cdot 0\text{,}6=0\text{,}62$, $\mathrm{P}(\overline{A})=0\text{,}8$ và $\mathrm{P}(AB)=0\text{,}2\cdot 0\text{,}7=0\text{,}14$.
+	\itemch Sai, vì $\mathrm{P}(A| B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{0\text{,}14}{0\text{,}62}=\dfrac{7}{31}$.
+	\itemch Sai, vì $\mathrm{P}(\overline{A} | B)=1-\mathrm{P}(A| B)=1-\dfrac{7}{31}=\dfrac{24}{31}$.
+	\itemch Đúng, vì $\dfrac{\mathrm{P}(B) \mathrm{P}(\overline{A} | B)}{\mathrm{P}(\overline{A})}=\dfrac{0\text{,}62\cdot \dfrac{24}{31}}{0\text{,}8}=0\text{,}6$.
+	\end{itemchoice}	
+	}
+\end{ex}
+%%==========Câu 15
+\begin{ex}%[2D6V1-3]
+	Trong một hộp có $18$ quả bóng bàn loại I và $2$ quả bóng bàn loại II, các quả bóng bàn có hình dạng và kích thước như nhau. Một học sinh lấy ngẫu nhiên lần lượt $2$ quả bóng bàn (lấy không hoàn lại) trong hộp.\\ Xét tính đúng, sai của các khẳng định sau
+	\choiceTF
+	{Xác suất để lần thứ nhất lấy được quả bóng bàn loại II là $\dfrac{9}{10}$}
+	{\True Xác suất để lần thứ hai lấy được quả bóng bàn loại II, biết lần thứ nhất lấy được quả bóng bàn loại II, là $\dfrac{1}{19}$}
+	{Xác suất để cả hai lần đều lấy được quả bóng bàn loại II là $\dfrac{9}{190}$}
+	{\True Xác suất để ít nhất $1$ lần lấy được quả bóng bàn loại I là $\dfrac{189}{190}$}
+	\loigiai{
+	Xét các biến cố\\
+	$A\colon$ \lq\lq Lần thứ nhất lấy được quả bóng bàn loại II\rq\rq;\\
+	$B\colon$ \lq\lq Lần thứ hai lấy được quả bóng bàn loại II\rq\rq. 
+	\begin{itemchoice}
+	\itemch Sai, vì Xác suất để lần thứ nhất lấy được quả bóng bàn loại II là $\mathrm{P}(A)=\dfrac{2}{20}=\dfrac{1}{10}$.
+	\itemch Đúng, vì sau khi lấy $1$ quả bóng bàn loại II thì chỉ còn $1$ quả bóng bàn loại II trong hộp.\\ Suy ra xác suất để lần thứ hai lấy được quả bóng bàn loại II, biết lần thứ nhất lấy được quả bóng bàn loại II là $\mathrm{P}(B | A)=\dfrac{1}{19}$.
+	\itemch Sai, vì xác suất để cả hai lần đều lấy được quả bóng bàn loại II là
+	$$
+	\mathrm{P}(C)=\mathrm{P}(A \cap B)=\mathrm{P}(A) \cdot \mathrm{P}(B | A)=\dfrac{1}{10} \cdot \dfrac{1}{19}=\dfrac{1}{190}.
+	$$
+	\itemch Đúng, vì để ít nhất $1$ lần lấy được quả bóng bàn loại I là
+	$$
+	\mathrm{P}(\overline {C})=1-\mathrm{P}(C)=1-\frac{1}{190}=\frac{189}{190} \text {. }
+	$$
+	\end{itemchoice}
+	}
+\end{ex}
+%%==========Câu 16
+\begin{ex}%[2D6V2-3]
+	Một xưởng máy sử dụng một loại linh kiện được sản xuất từ hai cơ sở I và II. Số linh kiện do cơ sở I sản xuất chiếm $61 \%$, số linh kiện do cơ sở II sản xuất chiếm $39 \%$. Tỉ lệ linh kiện đạt tiêu chuẩn của cơ sở I, cơ sở II lần lượt là $93 \%$, $82 \%$. Kiểm tra ngẫu nhiên $1$ linh kiện ở xường máy. Xét các biến cố\\
+	$A_1\colon$ \lq\lq Linh kiện được kiểm tra do cơ sở I sản xuất\rq\rq;\\
+	$A_2\colon$\lq\lq Linh kiện được kiểm tra do cơ sở II sản xuất\rq\rq;\\
+	$B\colon$ \lq\lq Linh kiện được kiểm tra đạt tiêu chuẩn\rq\rq.\\
+	Xét tính đúng, sai của các khẳng định sau
+	\choiceTF
+	{$\mathrm{P}\left(A_1\right)=0{,}39$} 
+	{\True $\mathrm{P}\left(B | A_2\right)=0{,}82$}
+	{$\mathrm{P}(B)=0{,}89$}
+	{\True $\mathrm{P}\left(A_1 | B\right)=0{,}55$}
+	\loigiai{
+	\begin{itemchoice}
+	\itemch Sai, vì $\mathrm{P}\left(A_1\right)=0{,}61$.
+	\itemch Đúng, vì $\mathrm{P}\left(A_2\right)=0{,}39$;~ $\mathrm{P}\left(B | A_1\right)=0{,}93 ;~\mathrm{P}\left(B | A_2\right)=0{,}82$.
+	\itemch Đúng, vì theo công thức xác suất toàn phần, ta có
+	$$
+	\mathrm{P}(B)=\mathrm{P}\left(A_1\right) \cdot \mathrm{P}\left(B | A_1\right)+\mathrm{P}\left(A_2\right) \cdot \mathrm{P}\left(B | A_2\right)=0{,}61\cdot 0{,}93+0{,}39\cdot 0{,}82=0{,}8871.
+	$$
+	\itemch Sai, vì theo công thức Bayes, ta có $$\mathrm{P}\left(A_1 | B\right)=\dfrac{\mathrm{P}\left(A_1\right) \cdot \mathrm{P}\left(B | A_1\right)}{\mathrm{P}(B)}=\dfrac{0{,}61 \cdot 0{,}93}{0{,}8871} \approx 0{,}64.$$
+	\end{itemchoice}
+	}
+\end{ex}
+%==============================================================
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B15-DS}
+%%==========HẾT PHẦN 2=========================================
+\Opensolutionfile{ans}[ans/ans-0-B15-KQ]
+\caukq
+%%==========PHẦN 3=============================================
+%%==========Câu 17
+\begin{ex}%[2D6V2-2]
+	Có hai hộp đựng các viên bi cùng kích thước và khối lượng. Hộp thứ nhất chứa $5$ viên bi đỏ và $5$ viên bi xanh, hộp thứ hai chứa $6$ viên bi đỏ và $4$ viên bi xanh. Lấy ngẫu nhiên một viên bi từ hộp thứ nhất chuyển sang hộp thứ hai, sau đó lấy ra ngẫu nhiên một viên bi từ hộp thứ hai. Tính xác suất để viên bi được lấy ra từ hộp thứ hai là viên bi đỏ (làm tròn đến hàng phần trăm).
+	\shortans{$0{,}59$}
+	\loigiai{
+	Xét phép thử lấy ngẫu nhiên một viên bi từ hộp thứ nhất chuyển sang hộp thứ hai, sau đó lấy ra ngẫu nhiên một viên bi từ hộp thứ hai. Xét các biến cố sau
+	\begin{itemize}
+	\item $A$ là biến cố \lq \lq Viên bi được lấy ra từ hộp thứ hai là bi đỏ \rq \rq;
+	\item $C$ là biến cố \lq \lq Viên bi được lấy ra từ hộp thứ hai là bi của hộp thứ nhất \rq \rq;
+	\item $\overline{C}$ là biến cố \lq \lq Viên bi được lấy ra từ hộp thứ hai là bi của hộp thứ hai\rq \rq.
+	\end{itemize}
+	Sau khi chuyển một viên bi từ hộp thứ nhất sang hộp thứ hai thì hộp thứ hai có $11$ viên bi. Ta có 
+	$$\mathrm{P}(C)=\dfrac{1}{11};\, \mathrm{P}(\overline{C})=\dfrac{10}{11}.$$
+	Xác suất để viên bi được lấy ra từ hộp thứ hai là bi đỏ của hộp thứ nhất 
+	$$\mathrm{P}(A\mid C)=\dfrac{5}{10}=\dfrac{1}{2}.$$
+	Xác suất để viên bi được lấy ra từ hộp thứ hai là bi đỏ của hộp thứ hai 
+	$$\mathrm{P}(A\mid \overline{C})=\dfrac{6}{10}=\dfrac{3}{5}.$$
+	Áp dụng công thức xác suất toàn phần, ta có
+	$$\mathrm{P}(A) = \mathrm{P}(C)\cdot \mathrm{P}(A\mid C) + \mathrm{P}(\overline{C})\cdot P(A\mid \overline{C}) =\dfrac{1}{11}\cdot \dfrac{1}{2}+\dfrac{10}{11}\cdot \dfrac{3}{5}=\dfrac{13}{22}\approx 0{,}59.$$
+	}
+\end{ex}
+%%==========Câu 18
+\begin{ex} %[2D6H1-4]
+	Trong số $40$ học sinh lớp $12$A, có $22$ em đăng kí thi ngành Kinh tế, $25$ em đăng kí thi ngành Luật, $3$ em không đăng kí thi cả hai ngành này. Chọn ngẫu nhiên một học sinh, biết rằng em đó đăng kí thi ngành luật. Tính xác suất để em đó đăng kí thi ngành kinh tế. 	
+	\shortans{$0{,}4$}
+	\loigiai{	Gọi $A$ và $B$ lần lượt là tập hợp các học sinh đăng kí thi ngành kinh tế và ngành luật.
+	Ta có $|A\cup B| =40-3 = 37$.\\
+	Số sinh viên đăng kí cả hai ngành là $ |A\cap B| = |A|+|B|-|A\cup B|=10$.\\
+	Vậy chọn ngẫu nhiên một học sinh, biết rằng em đó đăng kí thi ngành luật thì xác suất để em đó đăng kí thi ngành kinh tế là	 $\dfrac{10}{25}=\dfrac{2}{5}=0{,}4$.
+	}
+\end{ex}
+%%==========Câu 19
+\begin{ex} %[2D6V2-2]
+	Trong một tuần, Sơn chọn ngẫu nhiên ba ngày chạy bộ buổi sáng. Nếu chạy bộ thì xác suất Sơn ăn thêm một quả trứng vào bữa sáng hôm đó là $0{,}7$ . Nếu không chạy bộ thì xác suất Sơn ăn thêm một quả trứng vào bữa sáng hôm đó là $0{,}25$. Chọn ngẫu nhiên một ngày trong tuần của Sơn. Tính xác suất để hôm đó Sơn chạy bộ nếu biết rằng bữa sáng hôm đó Sơn có ăn thêm một quả trứng (làm tròn đến hàng phần trăm).
+	\shortans{$0{,}68$}	
+	\loigiai{
+	Gọi $A$	là biến cố \lq \lq Chọn ngày Sơn ăn trứng \rq \rq .\\
+	Gọi $B_1$ là biến cố \lq \lq Ngày Sơn chạy bộ \rq \rq và $B_2$ là biến cố \lq \lq Ngày Sơn không chạy bộ \rq \rq.\\
+	Ta có $\mathrm{P}(B_1) = \dfrac{3}{7}$ và $\mathrm{P}(B_2)=\dfrac{4}{7}$.\\
+	Xác suất ngày ăn trứng và chạy bộ là
+	$\mathrm{P}(A\mid B_1) = 0{,}7$.\\
+	Xác suất ngày ăn trứng và không chạy bộ là
+	$\mathrm{P}(A\mid B_2) = 0{,}25$.\\
+	Khi đó ta có $\mathrm{P}(A) =\mathrm{P}(B_1)\cdot \mathrm{P}(A\mid B_1)+ \mathrm{P}(B_2)\cdot \mathrm{P}(A\mid B_2) = \dfrac{3}{7}\cdot 0{,}7+ \dfrac{4}{7}\cdot 0{,}25 = \dfrac{31}{70}$.\\
+	Theo công thức Bayes, ta có xác suất hôm chọn Sơn chạy bộ mà trong bữa sáng có ăn một quả trứng là 
+	$$\mathrm{P}(B_1\mid A) = \dfrac{\mathrm{P}(B_1A)}{P(A)} = \dfrac{\mathrm{P}(B_1)\cdot \mathrm{P}(A\mid B_1)}{\mathrm{P}(A)} = \dfrac{\dfrac{3}{7}\cdot 0{,}7}{ \dfrac{31}{70}}=\dfrac{21}{31}\approx 0{,}68.$$	
+	}
+\end{ex}
+%%==========Câu 20
+\begin{ex}%[2D6V2-2]
+	Giả sử có khoảng $40 \%$ thư điện tử (email) gửi đến một địa chỉ là thư rác. Người ta sử dụng một thuật toán để phân loại thư rác, biết rằng thuật toán này có thể phân loại đến $99 \%$ thư rác và tỉ lệ sai sót khi phân loại thư bình thường thành thư rác là $5 \%$. Tính xác suất một thư điện tử là thư bình thường nếu thư này đã được phân loại đúng (làm tròn đến hàng phần trăm).
+	\shortans{$0{,}59$}
+	\loigiai{
+	Ta có công thức
+	$$	\mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(B \mid A) \cdot \mathrm{P}(A)}{\mathrm{P}(B)}$$
+	Trong đó
+	\begin{itemize}
+	\item $A$: Thư điện tử là thư bình thường.
+	\item $B$: Thư đã được phân loại đúng.
+	\item 	$\mathrm{P}(A)$: Xác suất một thư điện tử là thư bình thường ban đầu.\\
+	Vì có $40 \%$ thư rác, nên $\mathrm{P}(A)=$ $1-0{,}4=0{,}6$.
+	\item $\mathrm{P}(B \mid A)$: Xác suất một thư bình thường được phân loại đúng.\\
+	Do tỉ lệ sai sót là $5 \%$, nên $\mathrm{P}(B \mid A)=1-0{,}05=0{,}95$.
+	\item $\mathrm{P}(B)$: Xác suất một thư nào đó được phân loại đúng, tính bằng tổng xác suất một thư rác được phân loại đúng và xác suất một thư bình thường được phân loại đúng
+	\end{itemize}
+	$$\begin{aligned}[t]
+	\mathrm{P}(B)&=\mathrm{P}(B \mid A) \cdot \mathrm{P}(A)+\mathrm{P}(B \mid \overline{A}) \cdot \mathrm{P}(\overline{A}) \\&
+	=0{,}95 \cdot 0{,}6+0{,}99 \cdot 0{,}4=0{,}97.
+	\end{aligned}$$
+	Áp dụng định lý Bayes, ta có
+	$$\mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(B \mid A) \cdot \mathrm{P}(A)}{\mathrm{P}(B)}=\dfrac{0{,}95 \cdot 0{,}6}{0{,}97}=\dfrac{57}{97}\approx0{,}59.$$
+	}
+\end{ex}
+
+\begin{ex}%[2D6V2-1]
+	\immini{Cho sơ đồ hình cây như hình bên. Tính giá trị của biểu thức $\dfrac{\mathrm{P}(B) \mathrm{P}(\overline{A} \mid B)}{\mathrm{P}(\overline{A})}$.
+		\shortans{$0{,}6$
+	}
+	}
+	{\begin{tikzpicture}[scale=.2,>=stealth]
+			\tikzstyle{block} = [rectangle, draw, fill=blue!10\text{,} rounded corners, text centered, text width = 10em, minimum height = 2em]
+			\node (c1) {};
+			\node (c2)[above right = 1.5cm of c1] {$A$};
+			\node at (0.5,5){\fbox{$0\text{,}2$}};
+			\node at (0.5,-5){\fbox{$0\text{,}8$}};
+			\node (c3) [below right= 1.5cm of c1]{$\overline{A}$};
+			\node at (12,11.5){\fbox{$0\text{,}7$}};
+			\node (c4) at (21.5, 12){$B$};
+			\node (c5) at (21.5, 2){$\overline{B}$};
+			\node at (12,3){\fbox{$0\text{,}3$}};
+			\node (c6) at (21.5, -4){$B$};
+			\node at (12,-4){\fbox{$0\text{,}6$}};
+			\node (c7) at (21.5, -14){$\overline{B}$};
+			\node at (12,-13){\fbox{$0\text{,}4$}};
+			\draw[->] (c1.east) -- (c2.west);
+			\draw[->] (c1.east) -- (c3.west);
+			\draw[->] (c2.east) -- (c4.west);
+			\draw[->] (c2.east) -- (c5.west);
+			\draw[->] (c3.east) -- (c6.west);
+			\draw[->] (c3.east) -- (c7.west);
+	\end{tikzpicture}}
+		\loigiai{
+		\begin{itemize}
+			\item Ta có $\mathrm{P}(B)=0{,}2\cdot 0{,}7+0{,}8\cdot 0{,}6=0{,}62$; $\mathrm{P}(\overline{A})=0{,}8$ và $\mathrm{P}(AB)=0{,}2\cdot 0{,}7=0{,}14$.
+			\item $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{0{,}14}{0{,}62}=\dfrac{7}{31}$.
+			\item $\mathrm{P}(\overline{A} \mid B)=1-\mathrm{P}(A\mid B)=1-\dfrac{7}{31}=\dfrac{24}{31}$.
+			\item $\dfrac{\mathrm{P}(B) \mathrm{P}(\overline{A} \mid B)}{\mathrm{P}(\overline{A})}=\dfrac{0{,}62\cdot \dfrac{24}{31}}{0{,}8}=0{,}6$.
+		\end{itemize}	
+	}
+\end{ex}
+
+\begin{ex}%[2D6V2-4]
+	Năm $2001$, Cộng đồng châu Âu có làm một đợt kiểm tra rất rộng rãi các con bò để phát hiện những con bị bệnh bò điên. Không có xét nghiệm nào cho kết quả chính xác $100 \%$. Một loại xét nghiệm, mà ở đây ta gọi là xét nghiệm A cho kết quả như sau: khi con bò bị bệnh bò điên thì xác suất để có phản ứng dương tính trong xét nghiệm A là $70 \%$ còn khi con bò không bị bệnh thì xác suất để có phản ứng dương tính trong xét nghiệm A là $10 \%$. Biết rằng tỉ lệ bò bị mắc bệnh bò điên ở Hà Lan là $13$ con trên $1~000~000$ con \textit{(Nguồn: F. M. Dekking et al., Amodern introduction to probability and statistics Understanding why and how, Springer, $2005$)}. Khi con bò ở Hà Lan có phản ứng dương tính với xét nghiệm A thì xác suất để nó bị mắc bệnh bò điên là  $\mathrm{P}$, tính $1000P$ (lấy gần đúng đến hàng phần trăm).
+	\shortans{$ 0{,}09$}
+	\loigiai{
+		Xét hai biến cố\\			
+		$N$: \lq\lq Con bò được chọn bị nhiễm bệnh\rq\rq.\\			
+		$D$: \lq\lq Con bò được chọn có phản ứng dương tính\rq\rq.\\	
+		Khi đó, ta có\\				
+		\[\mathrm{P}(N)=\dfrac{13}{1 000 000}=0{,}000013; \qquad \mathrm{P}(\overline{N})=1-\mathrm{P}(N)=0{,}999987;\]		
+		\[\mathrm{P}(D|N)=70\%=0{,}7; \qquad \mathrm{P}(D|\overline{N})=10\%=0{,}1.\]
+		Áp dụng công thức Bayes, ta có\\
+		$\mathrm{P}(N|D)=\dfrac{\mathrm{P}(D|N) \cdot \mathrm{P}(N)}{\mathrm{P}(N) \cdot \mathrm{P}(D|N)+\mathrm{P}(\overline{N})\mathrm{P}(D|\overline{N})}=\dfrac{0{,}7 \cdot 0{,}000013}{0{,}7 \cdot 0{,}000013+0{,}1 \cdot 0{,}999987}\approx 0{,}009\%$.\\
+		Do đó $1000\mathrm{P}\approx1000\cdot  0{,}009\%\approx 0{,}09$.
+			}
+\end{ex}
+
+%==============================================================
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15-KQ}
+%%==========HẾT PHẦN 3=========================================
+

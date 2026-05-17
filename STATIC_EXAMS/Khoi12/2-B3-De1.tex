@@ -1,0 +1,377 @@
+ \section{Đường tiệm cận}
+ \subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-B15]
+\caulc%Câu lựa chọn/Câu trắc nghiệm
+\begin{ex}%[2D1N4-1]Câu 1
+	Cho hàm số $y=f(x)$ có $\underset{x\to +\infty }{\mathop{\lim }}\,f(x)=1$ và $\underset{x\to -\infty }{\mathop{\lim }}\,f(x)=-1$. Khẳng định nào sau đây là khẳng định đúng?
+	\choice
+	{Đồ thị hàm số đã cho có hai đường tiệm cận ngang là các đường thẳng $x=1$ và $x=-1$}
+	{Đồ thị hàm số đã cho không có tiệm cận ngang}
+	{Đồ thị hàm số đã cho có đúng một đường tiệm cận ngang}
+	{\True Đồ thị hàm số đã cho có hai đường tiệm cận ngang là các đường thẳng $y=1$ và $y=-1$}
+	\loigiai{
+		Từ lý thuyết đường tiệm cận ta kết luận đồ thị hàm số có 2 đường tiệm cận ngang là $y=1$ và $y=-1$.}
+\end{ex}
+
+\begin{ex}%[2D1N4-1]Câu 2
+	Tiệm cận ngang của đồ thị hàm số $y=\dfrac{x-2}{x+1}$ có phương trình là
+	\choice
+	{$y=-2$}
+	{\True $y=1$}
+	{$x=-1$}
+	{$x=2$}
+	\loigiai{
+	Ta có $\underset{x\to +\infty }{\mathop{\lim }}\,\dfrac{x-2}{x+1}=1$ và $\underset{x\to -\infty }{\mathop{\lim}}\,\dfrac{x-2}{x+1}=1$
+	$\Rightarrow y=1$ là đường tiệm cận ngang của đồ thị hàm số.}
+\end{ex}
+
+\begin{ex}%[2D1N4-1]Câu 3
+	Tiệm cận đứng của đồ thị hàm số $y=\dfrac{2x-1}{2x+4}$ có phương trình là
+	\choice
+	{$y=-2$}
+	{\True $x=-2$}
+	{$x=1$}
+	{$y=1$}
+	\loigiai{
+		Ta có: $\heva{&\underset{x \to -2^-}{\mathop{\lim }}\,\dfrac{2x-1}{2x+4}=+\infty\\&\underset{x \to -2^+ }{\mathop{\lim }}\,\dfrac{2x-1}{2x+4}=-\infty} \Rightarrow x=-2$ là đường tiệm cận đứng của đồ thị hàm số.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 4
+	Cho hàm số $y=f(x)$ có bảng biến thiên như sau\\
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.5,deltacl=0.6]
+			{$x$ /0.6,$y’$ /0.6,$y$ /2}
+			{$-\infty$,$0$,$3$,$+\infty$}
+			\tkzTabLine{,-,d,-,+,}
+			\tkzTabVar{+/$1$,-D+/$-\infty$/$2$,-/$-3$,+/$3$}
+		\end{tikzpicture}\
+	\end{center}
+	Tổng số tiệm cận đứng và tiệm cận ngang của đồ thị hàm số đã cho là
+	\choice
+	{$2$}
+	{\True $3$}
+	{$4$}
+	{$1$}
+	\loigiai{Nhìn bảng biến thiên ta thấy $\underset{x \to 0^-}{\mathop{\lim }}\,f(x)=-\infty \Rightarrow x=0$ là đường tiệm cận đứng của đồ thị hàm số.\\
+		$\bullet \underset{x\to +\infty }{\mathop{\lim }}\,f(x)=3\Rightarrow y=3$ là đường tiệm cận ngang của đồ thị hàm số.\\
+		$\bullet \underset{x\to -\infty }{\mathop{\lim }}\,f(x)=1\Rightarrow y=1$ là đường tiệm cận ngang của đồ thị hàm số.\\
+		Vậy đồ thị hàm số có 3 đường tiệm cận.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 5
+	Cho hàm số $y=f(x)$ có bảng biến thiên như sau\\
+	\begin{center}
+		\begin{tikzpicture}
+		\tkzTabInit[nocadre=false,lgt=1.2,espcl=2.5,deltacl=0.6]
+		{$x$ /0.6,$y’$ /0.6,$y$ /2}
+		{$-\infty$,$2$,$+\infty$}
+		\tkzTabLine{,-,d,-,}
+		\tkzTabVar{+/$3$,-D+/$-\infty$/$+\infty$,-/$3$}
+		\end{tikzpicture}
+	\end{center}
+Tiệm cận đứng của đồ thị hàm số đã cho là đường thẳng có phương trình
+\choice
+{$x=-1$}
+{$y=-1$}
+{$y=-2$}
+{\True $x=-2$}
+\loigiai{Ta thấy $\underset{x \to -2^{+}}{\mathop{\lim}}\,f(x)=+\infty$ và $\underset{x \to -2^{-}}{\mathop{\lim}}\,f(x)=-\infty \Rightarrow x=-2$ là đường tiệm cận đứng của đồ thị hàm số.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 6
+	Trong các hàm số dưới đây, hàm số nào nhận đường thẳng $x=1$ là đường tiệm cận đứng?
+	\choice
+	{\True $y=\dfrac{2x-1}{x-1}$}
+	{$y=\dfrac{x^2+2x-3}{2x-3}$}
+	{$y=x-\sqrt{x^2+2}$}
+	{$y=\dfrac{2}{x^2+x+1}$}
+	\loigiai{Ta xét $\underset{x \to 1^-}{\lim}\,f(x)=-\infty$ hoặc $\underset{x \to 1^+}{\lim}\,f(x)=+\infty$. Chỉ có đồ thị hàm số $y=\dfrac{2x-1}{x-1}$ thỏa mãn yêu cầu bài toán.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 7
+	Hàm số nào sau đây có một đường tiệm cận?
+\choice
+{$y=\dfrac{x+3}{2x-1}$}
+{$y=\dfrac{x^2+3x-2}{x+3}$}
+{\True $y=\dfrac{2x}{x^2+1}$}
+{$y=\dfrac{4}{x-1}$}
+\loigiai{
+Ta xét hàm số $y=\dfrac{x+3}{2x-1}$ có\\
+$\bullet \underset{x \to +\infty}{\lim}\,y=\dfrac{1}{2};\underset{x \to -\infty}{\lim}\,y=\dfrac{1}{2} \Rightarrow y=\dfrac{1}{2}$ là đường tiệm cận ngang của đồ thị hàm số.\\
+$\bullet \underset{x \to \frac{1}{2}^+}{\lim}\,y=+\infty;\underset{x \to \frac{1}{2}^-}{\lim}\,y=-\infty \Rightarrow x=\dfrac{1}{2}$ là đường tiệm cận đứng của đồ thị hàm số.\\
+Ta xét hàm số $y=\dfrac{x^2+3x-2}{x+3}=x-\dfrac{2}{x+3}$ có\\
+$\bullet \underset{x \to -3^+}{\lim}\,y=-\infty;\underset{x \to -3^-}{\lim}\,y=+\infty \Rightarrow x=-3$ là đường tiệm cận đứng của đồ thị hàm số.\\
+$\bullet a_1=\underset{x \to +\infty}{\lim}\,\dfrac{\dfrac{x^2+3x-2}{x+3}}{x}=1 ;a_2=\underset{x \to -\infty}{\lim}\,\dfrac{\dfrac{x^2+3x-2}{x+3}}{x}=1 \Rightarrow a=1$\\
+$\bullet b_1=\underset{x \to +\infty}{\lim}\,\left( \dfrac{x^2+3x-2}{x+3}-x\right)=0 ; b_2=\underset{x \to -\infty}{\lim}\,\left( \dfrac{x^2+3x-2}{x+3}-x\right) =0 \Rightarrow b=0$\\
+$\Rightarrow y=ax+b=x$ là đường tiệm cận xiên của đồ thị hàm số.\\
+$\bullet$Vì bậc của đa thức tử lớn hơn bậc của đa thức mẫu nên đồ thị hàm số không có đường tiệm cận ngang.\\
+Ta xét hàm số $y=\dfrac{2x}{x^2+1}$ có\\
+$\bullet \underset{x \to +\infty}{\lim}\,y=0$ và $\underset{x \to -\infty}{\lim}\,y=0 \Rightarrow y=0$ là đường tiệm cận ngang của đồ thị hàm số.\\
+Vì phương trình của mẫu thức bằng $0$ vô nghiệm nên đồ thị hàm số không có đường tiệm cận đứng.\\
+Ta xét hàm số $y=\dfrac{4}{x-1}$ có\\
+$\bullet \underset{x \to +\infty}{\lim}\,y=0$ và $\underset{x \to -\infty}{\lim}\,y=0 \Rightarrow y=0$ là đường tiệm cận ngang của đồ thị hàm số.\\
+$\bullet \underset{x \to 1^+}{\lim}\,y=+\infty;\underset{x \to 1^-}{\lim}\,y=-\infty \Rightarrow x=1$ là đường tiệm cận đứng của đồ thị hàm số.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 8
+	Cho hàm số $y=f(x)$ có đồ thị như hình vẽ dưới đây
+\begin{center}
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\xmin{-3}\def\xmax{3}\def\ymin{-4}\def\ymax{4}
+		\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below] {\footnotesize $x$};
+		\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right] {\footnotesize $y$};
+		\draw (0,0) node [below right] {\footnotesize $O$};
+		\foreach \x in {1,2}\draw (\x,0.05)--(\x,-0.05) node [below] {\footnotesize $\x$};
+		\foreach \x in {-2,-1}\draw (\x,0.05)--(\x,-0.05) node [above] {\footnotesize $\x$};
+		\foreach \y in {1,2,3}\draw (0.05,\y)--(-0.05,\y) node [left] {\footnotesize $\y$};
+		\foreach \y in {-2,-1}\draw (0.05,\y)--(-0.05,\y) node [right] {\footnotesize $\y$};
+		\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+		\draw[dashed] (-0.0,\ymin)--(-0.0,\ymax);
+		\draw[dashed,domain=\xmin:\xmax] plot (\x,{1.0*(\x)+0.0});
+		\draw[smooth,samples=200,domain=\xmin:-0.1] plot (\x,{(1*((\x)^2)+0*(\x)+1)/(1*(\x)+0)});
+		\draw[smooth,samples=200,domain=0.1:\xmax] plot (\x,{(1*((\x)^2)+0*(\x)+1)/(1*(\x)+0)});
+		\draw[dashed] (-1.0,0)--(-1.0,-2.0)--(0,-2.0);\fill (-1.0,-2.0) circle (1pt);
+		\draw[dashed] (1.0,0)--(1.0,2.0)--(0,2.0);\fill (1.0,2.0) circle (1pt);
+		\draw[dashed] (-1.0,-1.0)--(0,-1.0);
+		\draw[dashed] (1.0,1.0)--(0,1.0);
+	\end{tikzpicture}
+\end{center}
+	Đồ thị hàm số có đường tiệm cận xiên đi qua điểm nào dưới đây?
+\choice
+{$M(1;2)$}
+{$N(-2;1)$}
+{\True $P(2;2)$}
+{$Q(1;-1)$}
+	\loigiai{Đường tiệm cận xiên trong đồ thị hàm số có dạng là một đường thẳng đi qua 3 điểm là $O(0;0), (-1;-1), (1;1)$. Gọi $(C) \colon y=ax+b$ là hàm số biểu diễn đường tiệm cận xiên $\Rightarrow y=x$. Vậy đường tiệm cận xiên của đồ thị hàm số đi qua điểm $P(2;2)$.}
+\end{ex}	
+
+\begin{ex}%[2D1N4-3]Câu 9
+	Cho hàm số $y=f(x)$ có đồ thị như hình vẽ dưới đây
+	\begin{center}
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\xmin{-3.3}\def\xmax{1.8}\def\ymin{-1.5}\def\ymax{3.3}
+			\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below] {\footnotesize $x$};
+			\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right] {\footnotesize $y$};
+			\draw (0,0) node [below left] {\footnotesize $O$};
+			\draw (-1,0) node [above left] {\footnotesize $-1$};
+			\draw (0,1) node [above right] {\footnotesize $1$};
+			\foreach \x in {-3,-2,1}\draw (\x,0.1)--(\x,-0.1) node [below] {\footnotesize $\x$};
+			\foreach \y in {-1,2,3,}\draw (0.05,\y)--(-0.05,\y) node [right] {\footnotesize $\y$};
+			\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+			\draw[dashed] (\xmin,1.0)--(\xmax,1.0);
+			\draw[dashed] (-1.0,\ymin)--(-1.0,\ymax);
+			\draw[smooth,samples=200,domain=\xmin:-1.1] plot (\x,{(2*(\x)+-1)/(2*(\x)+2)});
+			\draw[smooth,samples=200,domain=-0.9:\xmax] plot (\x,{(2*(\x)+-1)/(2*(\x)+2)});
+		\end{tikzpicture}
+	\end{center}
+Khẳng định nào sau đây đúng?
+\choice
+{$x=1$ là đường tiệm cận đứng của hàm số}
+{$y=-1$ là đường tiệm cận đứng của hàm số}
+{$x=-1$ là đường tiệm cận ngang của hàm số}
+{\True $y=1$ là đường tiệm cận ngang của hàm số}
+	\loigiai{Dựa vào đồ thị ta có đường tiệm cận đứng là $x=-1$ và đường tiệm cận ngang là $y=1$.}
+\end{ex}
+
+\begin{ex}%[2D1H4-3]Câu 10
+	Cho hàm số $y=\dfrac{x-1}{x^2-3x+2}$. Xét các mệnh đề sau\\
+	(I). Đồ thị hàm số có tiệm cận ngang $y=0$.\\
+	(II). Đồ thị hàm số có hai tiệm cận đứng $x=1$ và $x=2$.\\
+	(III). Đồ thị hàm số không có tiệm cận xiên.\\
+	Mệnh đề nào sau đây là đúng?
+\choice
+{Chỉ có (III) đúng}
+{Chỉ có (I) và (II) đúng}
+{\True Chỉ có (I) và (III) đúng}
+{Cả 3 mệnh đề đều đúng}
+\loigiai{Ta có $y=\dfrac{x-1}{x^2-3x+2}$. Xét:\\
+$\bullet \underset{x \to \pm \infty}{\lim}\,y=0$. Vậy đồ thị hàm số có tiệm cận ngang là $y=0$. Do đó (I) đúng.\\
+$\bullet \underset{x \to 2}{\lim}\,y=\infty;\underset{x \to 1}{\lim}\,y=\infty$\\
+Vậy đồ thị hàm số chỉ có một tiệm cận đứng là $x=2$. Do đó (II) sai.\\
+Vì bậc tử thức bé hơn bậc mẫu thức nên đồ thị hàm số không có tiệm cận xiên. Do đó (III) đúng.}
+\end{ex}
+
+
+\begin{ex}%[2D1V4-3]Câu 11
+	Với giá trị nào của $m$ thì tiệm cận xiên của đồ thị hàm số $y=x+m+\dfrac{3}{m-x}$ đi qua điểm $M(1;2)$.
+\choice
+{\True $m=1$}
+{$m=0$}
+{$m=2$}
+{$m=3$}
+	\loigiai{Ta có $\underset{x \to \pm \infty}{\lim}\,\dfrac{3}{m-x}=0 \Rightarrow y=x+m$ là tiệm cận xiên của đồ thị hàm số đã cho.\\
+	Để $M(1;2)$ nằm trên tiệm cận xiên thì $2=1+m \Leftrightarrow m=1$.}
+\end{ex}
+
+\begin{ex}%[2D1C4-2]Câu 12
+	Tìm tổng tất cả các giá trị nguyên dương của tham số $m$ sao cho đồ thị hàm số $y=\dfrac{x+2}{x^2-4x+m}$ có 3 đường tiệm cận?
+\choice
+{\True $6$}
+{$2$}
+{$5$}
+{$4$}
+\loigiai{Ta có $\underset{x \to \pm \infty}{\lim}\,y=0$, vậy $y=0$ là tiệm cận ngang của đồ thị hàm số.\\
+Để hàm số có 3 đường tiệm cận thì phương trình $x^2-4x+m=0$ có 2 nghiệm phân biệt với mọi $x \ne -2$.\\$\rightarrow \heva{&\Delta =16-4m>0\\&12+m \ne 0} \Leftrightarrow m \in (-\infty;4)\setminus\left\lbrace-12\right\rbrace.$\\
+Vậy tổng các giá trị nguyên dương của $m$ thỏa là: $3+2+1=6$}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15}
+
+\cauds%Câu đúng sai
+\Opensolutionfile{ans}[ans/ans-0-B15-DS]
+
+\begin{ex}%[2D1H4-3]Câu 1
+	Cho hàm số $y=\dfrac{x^2-2x+2}{x+2}$. Các mệnh đề sau đúng hay sai?
+\choiceTF
+{\True Hàm số có hai đường tiệm cận}
+{\True Giao điểm của hai tiệm cận là $I(-2;-6)$}
+{Khoảng cách từ $O$ đến đường tiệm cận xiên bằng $4\sqrt2$}
+{\True Tiệm cận xiên của hàm số đi qua điểm $M(0;-4)$}
+\loigiai{
+	\begin{itemchoice}
+		\itemch Đúng. Vì $y=\dfrac{x^2-2x+2}{x+2}=x-4+\dfrac{10}{x+2}$, Ta có:\\ $\bullet \underset{x \to -2}{\lim}\,y=\pm\infty$ nên $x=-2$ là tiệm cận đứng của đồ thị hàm số.\\
+		$\bullet \underset{x \to \pm\infty}{\lim}\,\dfrac{10}{x+2}=0$ nên $y=x-4$ là đường tiệm cận xiên của đồ thị hàm số.
+		\itemch Đúng. Vì giao điểm của hai tiệm cận thỏa mãn $\heva{&x=-2\\&y=x-4}\Leftrightarrow \heva{&x=-2\\&y=-6}$
+		\itemch Sai. Gọi $(C) \colon y=x-4$ khoảng cách từ $O$ đến tiệm cận xiên bằng\\ $\mathrm{d}(O;(c))=\dfrac{\left| -4 \right|}{\sqrt{(-1)^2+1^2}}=\dfrac{4}{\sqrt2}.$
+		\itemch Đúng. Vì $M(0;-4) \in (C) \colon y=x-4 \Rightarrow -4=0-4.$
+	\end{itemchoice}
+		}
+\end{ex}
+
+\begin{ex}%[2D1H4-3]Câu 2
+	Cho hàm số $(C) \colon y=\dfrac{x+3}{x-1}$. Các mệnh đề sau đúng hay sai?
+\choiceTF
+{\True Đồ thị hàm số có tiệm cận đứng $x=1$}
+{\True Đồ thị hàm số có tiệm cận ngang $y=1$}
+{\True Tâm đối xứng của đồ thị hàm số $(C)$ có tọa độ là $I(1;1)$}
+{Tiếp tuyến của đồ thị hàm số $(C)$ tại điểm $A(-3;0)$ có phương trình là $y=-\dfrac{1}{4}x-1$}
+	\loigiai{
+	\begin{itemchoice}
+		\itemch Đúng. Vì $\underset{x \to 1^+}{\lim}\,y=+\infty;\underset{x \to 1^-}{\lim}\,y=-\infty$.
+		\itemch Đúng. Vì $\underset{x \to +\infty}{\lim}\,y=1;\underset{x \to -\infty}{\lim}\,y=1$.
+		\itemch Đúng. Vì tâm đối xứng của hàm số $y=\dfrac{x+3}{x-1}$ có tọa độ là $I(1;1)$.
+		\itemch Sai. Ta có: $y'=\dfrac{-4}{(x-1)^2}$. Phương trình tiếp tuyến tại $A(-3;0)$ của $(C)$ là\\
+		$(d) \colon y=\dfrac{-4}{(x_0-1)^2}(x-x_0)+\dfrac{x_0+3}{x_0-1}$ với $x_0=-3, y_0=0 \Rightarrow (d):y=-\dfrac{1}{4}x-\dfrac{3}{4}$.
+	\end{itemchoice}
+		}
+\end{ex}
+
+\begin{ex}%[2D1H4-3]Câu 3
+	Cho đồ thị hàm số $y=f(x)$ như hình bên dưới
+	\begin{center}
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-4.1,0)--(3.1,0) node[below left] {$x$};
+			\draw[->] (0,-3.1)--(0,4.1) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {-1/-1}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below left] {$\nx$};
+			\foreach \y/\ny in {1/1}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [above left] {$\ny$};
+			\draw[dashed,thin] (-0.99,-3)--(-0.99,4);
+			\begin{scope}
+			\clip (-4,-3) rectangle (3,4);
+			\draw[samples=200,domain=-4:-1.01,smooth,variable=\x] plot (\x,{(2*(\x)+-1)/(2*(\x)+2)});
+			\draw[samples=200,domain=-0.99:4,smooth,variable=\x] plot (\x,{(2*(\x)+-1)/(2*(\x)+2)});
+			\draw[dashed,thin] (-4,1)--(4,1);
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+	Các mệnh đề sau đúng hay sai?
+\choiceTF
+{\True Đồ thị hàm số có hai đường tiệm cận}
+{Tâm đối xứng của đồ thị hàm số là điểm $A(1;1)$}
+{\True Hàm số $y=f(x)$ có đạo hàm $y'>0,\forall x \ne -1$}
+{Hàm số nghịch biến trên tập xác định}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Đồ thị hàm số có hai đường tiệm cận là $x=-1$ và $y=1$.
+			\itemch Sai. Tâm đối xứng của đồ thị hàm số có tọa độ là $(-1;1)$.
+			\itemch Đúng. Đồ thị hàm số đồng biến với $x \ne -1 \Rightarrow y'>0,\forall x \ne -1$.
+			\itemch Sai. Vì hàm số đồng biến trên các khoảng $(-\infty;-1)$ và $(-1;+\infty)$.
+		\end{itemchoice}
+	}
+\end{ex}	
+
+\begin{ex}%[2D1H4-3]Câu 4
+	Cho hàm số $y=\dfrac{5\sqrt{x^2+6}+x-12}{4x^3-3x-1}$ có đồ thị $(C)$. Các mệnh đề sau đúng hay sai?
+\choiceTF
+{Đồ thị $(C)$ của hàm số không có tiệm cận}
+{Đồ thị $(C)$ của hàm số chỉ có một đường tiệm cận ngang $y=0$}
+{Đồ thị $(C)$ của hàm số có một đường tiệm cận ngang $y=0$ và hai đường tiệm cận đứng $x=1; x=-\dfrac{1}{2}$}
+{\True Đồ thị $(C)$ của hàm số chỉ có một đường tiệm cận ngang $y=0$ và một đường tiệm cận đứng $x=1$}
+	\loigiai{
+		Tập xác định: $\mathscr{D}=\mathbb{R}\backslash \left\{ 1;-\dfrac{1}{2} \right\}$\\
+		$\bullet \underset{x \to 1^+}{\lim}\,y=+\infty ; \underset{x \to 1^-}{\lim}\,y=-\infty \Rightarrow$ Đồ thị hàm số có một đường tiệm cận đứng là $x=1$.\\
+		$\bullet \underset{x \to
+		-\frac{1}{2}^+}{\lim}\,y=0 ; \underset{x \to -\frac{1}{2}^-}{\lim}\,y=0 \Rightarrow x=-\dfrac{1}{2}$ không phải là đường tiệm cận đứng.\\
+		$\bullet \underset{x \to +\infty}{\lim}\,y=0; \underset{x \to -\infty}{\lim}\,y=0 \Rightarrow$ Đồ thị hàm số có một đường tiệm cận ngang là $y=0$.
+		\begin{itemchoice}
+			\itemch Sai.
+			\itemch Sai.
+			\itemch Sai.
+			\itemch Đúng.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B15-DS}
+
+\Opensolutionfile{ans}[ans/ans-0-B15-KQ]
+
+\caukq%Câu kết quả
+\begin{ex}%[2D1N4-1]Câu 1
+	Cho hàm số $y=\dfrac{2x-1}{x+3}$. Gọi $x=m$ và $y=n$ lần lượt là đường tiệm cận đứng và tiệm cận ngang của đồ thị hàm số. Tính giá trị của biểu thức $P=\dfrac{2m-1}{n+3}$.
+	\shortans{$-1{,}4$}
+	\loigiai{Ta có:\\
+	$\bullet \underset{x \to -3}{\lim}\,y=\infty \Rightarrow x=-3$ là đường tiệm cận đứng.\\
+	$\bullet \underset{x \to +\infty}{\lim}\,y=2$ và $\underset{x \to -\infty}{\lim}\,y=2 \Rightarrow y=2$ là đường tiệm cận ngang.\\
+	Vậy $m=-3; n=2 \Rightarrow P=\dfrac{2\cdot(-3)-1}{2+3}=\dfrac{-7}{5}=-1{,}4$.}
+\end{ex}
+
+\begin{ex}%[2D1N4-1]Câu 2
+	Cho hàm số $y=\dfrac{-x-3}{4x+1}$. Tọa độ tâm đối xứng của đồ thị hàm số có dạng $A(m;n)$. Tính $m+n$
+	\shortans{$-0{,}5$}
+	\loigiai{Ta xét:\\
+		$\bullet \underset{x \to +\infty}{\lim}\,y=-\dfrac{1}{4};\underset{x \to +\infty}{\lim}\,y=-\dfrac{1}{4} \Rightarrow y=-\dfrac{1}{4}$  là đường tiệm cận ngang.\\
+		$\bullet \underset{x \to -\frac{1}{4}^+}{\lim}\,y=-\infty;\underset{x \to -\frac{1}{4}^-}{\lim}\,y=+\infty \Rightarrow x=-\dfrac{1}{4}$ là đường tiệm cận đứng.\\
+		Vậy tổng giá trị của hai đường tiệm cận là $-0{,}5$.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 3
+	Cho hàm số $y=x-\sqrt{x^2+x-4}$. Có một đường tiệm cận ngang là $y=\dfrac{m}{n}$ hãy tìm đường tiệm cận đó
+	\shortans{$-0{,}5$}
+	\loigiai{Ta xét:\\
+		$\bullet \underset{x \to +\infty}{\lim}\,y=-\dfrac{1}{2};\underset{x \to -\infty}{\lim}\,y=-\infty \Rightarrow y=-\dfrac{1}{2}$ là đường tiệm cận ngang.}
+\end{ex}
+
+\begin{ex}%[2D1H4-1]Câu 4
+	Cho hàm số $y=\dfrac{x^2+2x-3}{x-2}$, đồ thị hàm số có đường tiệm cận xiên có dạng $(C) \colon y=ax+b$. Tính giá trị của biểu thức $P=\dfrac{a}{b}$.
+	\shortans{$0{,}25$}
+	\loigiai{Ta xét $y=\dfrac{x^2+2x-3}{x-2}=x+4+\dfrac{5}{x-2} \Rightarrow (C) \colon y=x+4$ là đường tiệm cận xiên của đồ thị hàm số. Vậy $P=\dfrac{1}{4}$.}
+\end{ex}
+
+\begin{ex}%[2D1C4-2]Câu 5
+	Cho hàm số $y=\dfrac{x-1}{x^2-(2m+1)x+m^2-3}$. Tổng các giá trị của tham số $m$ để đồ thị hàm số có đúng hai đường tiệm cận bằng bao nhiêu? (kết quả làm tròn đến hàng phần chục)
+	\shortans{$-1{,}3$}
+	\loigiai{Vì đa thức tử có bậc nhỏ hơn đa thức mẫu $\Rightarrow y=0$ là đường tiệm cận ngang của đồ thị hàm số.\\
+	Để hàm số có đúng hai đường tiệm cận thì đồ thị hàm số cần có một đường tiệm cận đứng.\\
+	$\Rightarrow$ Phương trình $x^2-(2m+1)x+m^2-3=0$ có nghiệm kép hoặc phương trình\\ $x^2-(2m+1)x+m^2-3=0$ có hai nghiệm phân biệt trong đó có một nghiệm bằng 1.\\
+	$\Rightarrow \hoac{&\Delta=0\\&\heva{&\Delta>0\\&1-(2m+1)+m^2-3=0}} \Leftrightarrow \hoac{&(2m+1)^2-4(m^2-3)=0\\&\heva{&(2m+1)^2-4(m^2-3)>0\\&m^2-2m-3=0}}\Leftrightarrow \hoac{&m=-\dfrac{13}{4}\\&m=3\\&m=-1}.$\\
+	Vậy tổng tất cả các giá trị của tham số $m$ là $-\dfrac{5}{4}$.}
+\end{ex}
+
+\begin{ex}%[2D1C4-3]Câu 6
+	Cho hàm số $y=\dfrac{x-2}{x^2-3mx+m}$ tìm $m$ để đồ thị hàm số có đúng một tiệm cận đứng. Biết tổng các giá trị của tham số $m$ có dạng phân số $\dfrac{a}{b}$, tính tổng $S=a+b$
+	\shortans{$101$}
+	\loigiai{Dễ thấy tử thức có một nghiệm là $x=2$ do đó để đồ thị hàm số có đúng một tiệm cận đứng thì phương trình $x^2-3mx+m=0$ có nghiệm kép hoặc có hai nghiệm phân biệt trong đó có một nghiệm bằng $2$.\\
+	$\Rightarrow \hoac{&\Delta=0\\&\heva{&\Delta>0\\&4-3\cdot2m+m=0}} \Leftrightarrow \hoac{&9m^2-4m=0\\&\heva{&9m^2-4m>0\\&4-3\cdot2m+m=0}} \Leftrightarrow \hoac{&m=0\\&m=\dfrac{4}{9}\\&\heva{&\hoac{&m<0\\&m>\dfrac{4}{9}}\\&m=\dfrac{4}{5}}} \Leftrightarrow \hoac{&m=0\\&m=\dfrac{4}{9}\\&m=\dfrac{4}{5}}$\\
+	Vậy tổng các giá trị của tham số $m$ bằng $\dfrac{56}{45} \Rightarrow S=101$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B15-KQ}
