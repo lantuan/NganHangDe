@@ -1,0 +1,501 @@
+# Grade 10
+
+## Sets and Logical Statements
+
+Students are expected to:
+- Formulate mathematical statements.
+- Determine negation, converse, and equivalent statements.
+- Use symbols:
+  - $\forall$
+  - $\exists$
+- Recognize necessary and sufficient conditions.
+- Determine truth values of statements.
+- Recognize:
+  - subsets
+  - equality of sets
+  - empty sets
+- Perform set operations:
+  - union
+  - intersection
+  - difference
+  - complement
+- Use Venn diagrams.
+- Solve practical problems involving sets.
+
+---
+
+## First-degree Inequalities in Two Variables
+
+Students are expected to:
+- Recognize first-degree inequalities and systems.
+- Represent solution regions on the coordinate plane.
+- Solve practical optimization problems.
+
+---
+
+## Functions and Graphs
+
+Students are expected to:
+- Recognize real-world models leading to functions.
+- Describe:
+  - domain
+  - range
+  - increasing/decreasing functions
+  - graphs
+- Apply functions to practical situations.
+
+---
+
+## Quadratic Functions
+
+Students are expected to:
+- Construct tables of values.
+- Draw parabolas.
+- Determine:
+  - vertex
+  - axis of symmetry
+- Analyze quadratic graphs.
+- Apply quadratic functions to practical problems.
+
+---
+
+## Quadratic Inequalities
+
+Students are expected to:
+- Explain the sign of quadratic trinomials.
+- Solve quadratic inequalities.
+- Apply inequalities to practical problems.
+
+---
+
+## Equations Reducible to Quadratics
+
+Students are expected to:
+- Solve radical equations reducible to quadratic equations.
+
+---
+
+## Combinatorics
+
+Students are expected to:
+- Apply:
+  - Addition Rule
+  - Multiplication Rule
+- Use tree diagrams.
+- Calculate:
+  - permutations
+  - arrangements
+  - combinations
+- Use calculators for combinatorial calculations.
+
+---
+
+## Newton’s Binomial Theorem
+
+Students are expected to:
+- Expand:
+  - $(a+b)^4$
+  - $(a+b)^5$
+- Apply combinations in expansions.
+
+---
+
+## Trigonometric Relations in Triangles
+
+Students are expected to:
+- Calculate trigonometric values.
+- Apply:
+  - Law of Cosines
+  - Law of Sines
+  - area formulas
+- Solve triangles.
+- Solve practical measurement problems.
+
+---
+
+## Vectors
+
+Students are expected to:
+- Recognize vectors and vector operations.
+- Perform:
+  - vector addition
+  - subtraction
+  - scalar multiplication
+  - dot product
+- Apply vectors in geometry and Physics.
+
+---
+
+## Coordinate Geometry in the Plane
+
+Students are expected to:
+- Use vector coordinates.
+- Determine line equations.
+- Calculate:
+  - distances
+  - angles
+- Determine circle equations.
+- Recognize conics:
+  - ellipse
+  - parabola
+  - hyperbola
+
+---
+
+## Statistics
+
+Students are expected to:
+- Work with approximate numbers and errors.
+- Detect inaccurate data.
+- Calculate:
+  - mean
+  - median
+  - quartiles
+  - mode
+  - range
+  - variance
+  - standard deviation
+- Interpret statistical measures.
+
+---
+
+## Probability
+
+Students are expected to:
+- Recognize:
+  - sample space
+  - events
+  - probability
+- Calculate probabilities using:
+  - combinatorics
+  - tree diagrams
+- Apply probability rules.
+
+---
+
+# Grade 11
+
+## Trigonometric Functions and Equations
+
+Students are expected to:
+- Recognize trigonometric angles and unit circle concepts.
+- Use trigonometric identities.
+- Apply:
+  - addition formulas
+  - double-angle formulas
+  - product-sum transformations
+- Solve practical trigonometric problems.
+
+---
+
+## Graphs of Trigonometric Functions
+
+Students are expected to:
+- Recognize:
+  - even functions
+  - odd functions
+  - periodic functions
+- Draw graphs of:
+  - $\sin x$
+  - $\cos x$
+  - $\tan x$
+  - $\cot x$
+- Determine:
+  - domain
+  - range
+  - periods
+  - intervals of increase/decrease
+
+---
+
+## Sequences
+
+Students are expected to:
+- Recognize finite and infinite sequences.
+- Define sequences using:
+  - formulas
+  - recurrence relations
+- Determine monotonicity and boundedness.
+
+---
+
+## Arithmetic Progressions
+
+Students are expected to:
+- Recognize arithmetic progressions.
+- Determine general terms.
+- Calculate sums of terms.
+- Apply arithmetic progressions in practice.
+
+---
+
+## Geometric Progressions
+
+Students are expected to:
+- Recognize geometric progressions.
+- Determine general terms.
+- Calculate sums of terms.
+- Apply geometric progressions in practice.
+
+---
+
+## Limits of Sequences
+
+Students are expected to:
+- Recognize sequence limits.
+- Calculate simple limits.
+- Calculate sums of infinite geometric series.
+
+---
+
+## Limits of Functions
+
+Students are expected to:
+- Recognize:
+  - finite limits
+  - one-sided limits
+  - infinite limits
+- Calculate limits using operations on limits.
+
+---
+
+## Continuous Functions
+
+Students are expected to:
+- Recognize continuity of functions.
+- Recognize continuity of elementary functions.
+
+---
+
+## Exponential Functions
+
+Students are expected to:
+- Use exponent rules.
+- Simplify exponential expressions.
+- Solve practical growth and finance problems.
+
+---
+
+## Logarithmic Functions
+
+Students are expected to:
+- Use logarithm properties.
+- Simplify logarithmic expressions.
+- Apply logarithms in practical problems.
+
+---
+
+## Exponential and Logarithmic Equations
+
+Students are expected to:
+- Solve exponential equations.
+- Solve logarithmic equations.
+- Apply them to scientific and practical contexts.
+
+---
+
+## Derivatives
+
+Students are expected to:
+- Recognize derivatives from real-world situations.
+- Calculate derivatives by definition.
+- Interpret geometric meaning of derivatives.
+- Determine tangent equations.
+
+---
+
+## Derivative Rules
+
+Students are expected to:
+- Differentiate:
+  - polynomial functions
+  - trigonometric functions
+  - exponential functions
+  - logarithmic functions
+- Use:
+  - product rule
+  - quotient rule
+  - chain rule
+
+---
+
+## Second-order Derivatives
+
+Students are expected to:
+- Calculate second derivatives.
+- Apply derivatives in motion problems.
+
+---
+
+## Spatial Geometry
+
+Students are expected to:
+- Recognize:
+  - lines
+  - planes
+  - pyramids
+  - prisms
+- Determine:
+  - intersections
+  - parallelism
+  - perpendicularity
+- Calculate:
+  - distances
+  - angles
+  - volumes
+
+---
+
+## Statistics
+
+Students are expected to:
+- Calculate characteristic numbers for grouped data.
+- Interpret statistical measures.
+
+---
+
+## Probability
+
+Students are expected to:
+- Recognize:
+  - union
+  - intersection
+  - independent events
+- Calculate probabilities using:
+  - addition rule
+  - multiplication rule
+  - combinatorics
+  - tree diagrams
+
+---
+
+# Grade 12
+
+## Monotonicity of Functions
+
+Students are expected to:
+- Determine increasing/decreasing intervals using derivatives.
+- Use variation tables.
+- Recognize extrema from graphs.
+
+---
+
+## Maximum and Minimum Values
+
+Students are expected to:
+- Determine maximum and minimum values using derivatives.
+
+---
+
+## Survey and Graph Functions
+
+Students are expected to:
+- Determine:
+  - domain
+  - extrema
+  - asymptotes
+- Draw graphs of:
+  - cubic functions
+  - rational functions
+- Recognize graph symmetry.
+
+---
+
+## Applications of Derivatives
+
+Students are expected to:
+- Solve optimization and practical problems using derivatives.
+
+---
+
+## Antiderivatives
+
+Students are expected to:
+- Recognize antiderivatives.
+- Calculate antiderivatives of elementary functions.
+
+---
+
+## Integrals
+
+Students are expected to:
+- Recognize definitions and properties of integrals.
+- Calculate simple integrals.
+- Use integrals to calculate:
+  - areas
+  - volumes
+
+---
+
+## Coordinate Geometry in Space
+
+Students are expected to:
+- Use vector coordinates in space.
+- Perform vector operations.
+- Apply vectors in practical problems.
+
+---
+
+## Equations of Planes
+
+Students are expected to:
+- Determine equations of planes.
+- Recognize:
+  - parallel planes
+  - perpendicular planes
+- Calculate distances from points to planes.
+
+---
+
+## Equations of Lines in Space
+
+Students are expected to:
+- Determine line equations.
+- Recognize:
+  - skew lines
+  - parallel lines
+  - perpendicular lines
+- Calculate angles between:
+  - lines
+  - planes
+
+---
+
+## Equations of Spheres
+
+Students are expected to:
+- Determine sphere equations.
+- Determine centers and radii.
+- Apply sphere equations in practice.
+
+---
+
+## Statistics
+
+Students are expected to:
+- Calculate:
+  - range
+  - variance
+  - standard deviation
+- Interpret statistical measures.
+
+---
+
+## Conditional Probability
+
+Students are expected to:
+- Recognize conditional probability.
+- Interpret conditional probability in practical situations.
+
+---
+
+## Bayes’ Formula and Total Probability
+
+Students are expected to:
+- Apply:
+  - total probability formula
+  - Bayes’ formula
+- Use:
+  - statistical tables
+  - tree diagrams
+- Solve practical probability problems.
