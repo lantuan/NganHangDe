@@ -149,13 +149,42 @@ Mỗi câu tự luận 1 điểm.
 Ý nhỏ nhất 0.25 điểm.
 
 ## Ví dụ hoàn chỉnh
-\begin{ex}%[VD]
-Cho hàm số $f(x) = 2x + 1$. Tính $f(0{,}25)$.
-\shortans{$1,5$}
-\loigiai{
-$f(0{,}25) = 2 \cdot 0{,}25 + 1 = 0{,}5 + 1 = 1{,}5$
-}
+
+\begin{ex}%[TH]
+    Trong mặt phẳng tọa độ $Oxy$, cho parabol $(P)$ có phương trình chính tắc là $y^2 = 16x$. Với $M(x_M; y_M)$ là điểm thuộc parabol $(P)$. Tính độ dài đoạn thẳng $MF$, với $x_M = 1$. 
+    \loigiai{
+    Parabol $(P)$ có dạng $y^2 = 2px$ nên $2p = 16 \Rightarrow p = 8$. \dotfill 0.25 điểm
+
+    Suy ra: Tiêu điểm $F\left(\dfrac{p}{2};0\right) = (4;0)$. Đường chuẩn $\Delta: x = -\dfrac{p}{2} = -4$. \dotfill 0.25 điểm
+
+    Với $M \in (P)$ thì $MF = d(M,\Delta)$. \dotfill 0.25 điểm
+
+    Do $x_M = 1$ nên:
+    $$
+    MF = d(M,\Delta) = |1 - (-4)| = 5.
+    $$
+
+    Vậy $MF = 5$. \dotfill 0.25 điểm\\
+
+    \textbf{Cách 2.} Parabol $(P)$ có dạng $y^2 = 2px$ nên $2p = 16 \Rightarrow p = 8$. \dotfill 0.25 điểm
+
+    Suy ra tiêu điểm $F\left(\dfrac{p}{2};0\right) = (4;0)$. \dotfill 0.25 điểm
+
+    Với $x_M = 1$, ta có:
+    $$y_M^2 = 16 \Rightarrow y_M = \pm 4.$$
+
+    Do đó $M(1;\pm 4)$. \dotfill 0.25 điểm
+
+    Khi đó:
+    $$
+    MF = \sqrt{(1 - 4)^2 + (\pm 4)^2}
+    = \sqrt{9 + 16} = 5.
+    $$
+
+    Vậy $MF = 5$. \dotfill 0.25 điểm
+    }
 \end{ex}
+
 
 ---
 
@@ -164,6 +193,8 @@ $f(0{,}25) = 2 \cdot 0{,}25 + 1 = 0{,}5 + 1 = 1{,}5$
 ## Hệ phương trình
 Dùng:
 \heva{
+  & phương trình 1 \\
+  & phương trình 2 \\
 ...
 }
 
@@ -173,6 +204,8 @@ Không dùng:
 ## Tuyển
 Dùng:
 \hoac{
+  & phương trình 1 \\
+  & phương trình 2 \\
 ...
 }
 
@@ -197,6 +230,7 @@ Ví dụ: \sqrt{2}, \sqrt[3]{x}
 ---
 
 # LIỆT KÊ
+## Liệt kê bài tập ý a), b), ...
 Dùng:
 \begin{enumerate}[a)]
 ...
@@ -204,6 +238,17 @@ Dùng:
 
 Không dùng:
 \begin{itemize}
+
+## Liệt kê các ý nhỏ
+Dùng:
+\begin{itemize}
+...
+\end{itemize}
+
+Không dùng:
+- ... \\
+- ...
+- 
 
 ---
 
