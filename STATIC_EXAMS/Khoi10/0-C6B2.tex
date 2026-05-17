@@ -1,0 +1,879 @@
+\section{Hàm số bậc hai}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-B1]
+\caulc
+\begin{ex}%[0D3N2-1]
+	\immini{Hàm số nào sau đây có đồ thị như hình dưới đây?
+		\choice
+		{$y=x^2-3x+1$}
+		{$y=-x^2+3x-1$}
+		{$y=-2x^2+3x-1$}
+		{\True$y=2x^2-3x+1$}
+	}
+	{\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-1.1,0)--(2.5,0) node[below left] {$x$};
+			\draw[->] (0,-1.1)--(0,3.1) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {1/1}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+			\foreach \y/\ny in {1/1}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+			\begin{scope}
+				\clip (-1,-1) rectangle (4,3);
+				\draw[samples=200,domain=-1:2,smooth,variable=\x] plot (\x,{2*(\x)^2+-3*(\x)+1});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Bề lõm của parabol hướng lên trên suy ra $a>0$, nên loại đáp án $y=-x^2+3x-1$ và $y=-2x^2+3x-1$. Đồ thị đi qua điểm $(1; 0)$ nên chọn $y=2x^2-3x+1$.
+	}
+\end{ex}
+
+\begin{ex}%[0D3N2-1]
+	Cho hàm số $y=x^2-2x-3$. Khẳng định nào sau đây là đúng?
+	\choice
+	{Đồ thị hàm số là một đường thẳng}
+	{\True Đồ thị hàm số là một Parabol}
+	{Hàm số đồng biến trên $\mathbb{R}$}
+	{Hàm số nghịch biến trên $\mathbb{R}$}
+	\loigiai{
+		Do hàm số $y=x^2-2x-3$ là hàm số bậc hai nên đồ thị hàm số là một Parabol.
+	}
+\end{ex}	
+\begin{ex}%[0D3H2-2]
+	\immini{
+		Hàm số nào có bảng biến thiên như hình đưới đây?
+		\choice
+		{$y=-x^2+4x-3$}
+		{$y=2x^2-8x+7$}
+		{\True$y=x^2-4x+5$}
+		{$y=\dfrac{1}{2}x^2-2x+1$}
+	}{
+		\begin{tikzpicture}
+			\tkzTabInit[espcl=2.5,lgt=1.5]
+			{$x$/0.7,$y$/2.1}
+			{$-\infty$,$2$,$+\infty$}
+			\tkzTabVar{+/$+\infty$,-/$1$,+/$+\infty$}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Từ bảng biến thiên ta loại $y=-x^2+4x-3$.\\
+		Gọi $A\left(x_A ; y_A\right)$ là đỉnh của parabol, ta có:
+		$\heva{&x_A=2\\&y_A=1}$.\\
+		Suy ra ta loại $y=2 x^2-8 x+7$ và $y=\dfrac{1}{2}x^2-2x+1$.
+	}
+\end{ex}	
+\begin{ex}%[0D3H2-2]
+	Hàm số $y=x^2-4x+11$ đồng biến trên khoảng nào trong các khoảng sau đây?
+	\choice
+	{$(-2;+\infty)$}
+	{$(-\infty;+\infty)$}
+	{\True$(2;+\infty)$}
+	{$(-\infty;2)$}
+	\loigiai{
+		Ta có bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[espcl=2.5,lgt=1.5]
+				{$x$/0.7,$y$/2.1}
+				{$-\infty$,$2$,$+\infty$}
+				\tkzTabVar{+/$+\infty$,-/$7$,+/$+\infty$}
+			\end{tikzpicture}
+		\end{center}
+		Từ bảng biến thiên ta thấy, hàm số đồng biến trên khoảng $(2;+\infty)$.
+	}
+\end{ex}
+\begin{ex}%[0D3H2-1]
+	Xác định parabol $(P)\colon y=2x^2+bx+c$, biết $(P)$ qua điểm $M(0;4)$ và có trục đối xứng $x=1$.
+	\choice
+	{\True $y=2x^2-4x+4$}
+	{$y=2x^2+4x-3$}
+	{$y=2x^2-3x+4$}
+	{$y=2x^2+x+4$}
+	\loigiai{
+		Từ giả thiết ta có hệ phương trình $\heva{&4=c\\&\dfrac{-b}{4}=1}\Leftrightarrow\heva{&b=-4\\&c=4}\Rightarrow(P)\colon y=2x^2-4x+4$.
+	}
+\end{ex}
+\begin{ex}%[0D3H1-1]
+	Biết rằng $(P)\colon y=ax^2-4x+c$ có hoành độ đỉnh bằng $-3$ và đi qua điểm $M(-2;1)$. Tính tổng $S=a+c$.
+	\choice
+	{$S=5$}
+	{\True $S=-5$}
+	{$S=4$}
+	{$S=1$}
+	\loigiai{
+		Ta có:
+		$\dfrac{-b}{2a}=-3\Leftrightarrow\dfrac{2}{a}=-3\Leftrightarrow a=-\dfrac{2}{3}$ và $4a+8+c=1 \Leftrightarrow c=-\dfrac{13}{3}$.\\
+		Vậy $S=a+c=-5$.
+	}
+\end{ex}
+\begin{ex}%[0D3H2-1]
+	Biết Parabol $y=ax^2+bx-4$ có đỉnh $I(-1;-5)$. Tìm $a$ và $b$.
+	\choice
+	{$a=1;b=-2$}
+	{$a=1;b=2$}
+	{$a=0;b=-3$}
+	{$a=-1;b=2$}
+	\loigiai{
+		Ta có $(P)$ nhận đường thẳng $x=-1$ làm trục đối xứng nên $-\dfrac{b}{2a}=-1\Rightarrow b=2 a$.\\
+		$(P)$ đi qua điểm $I(-1;-5)$ nên $a-b-4=-5 \Rightarrow a-b=-1$.\\
+		Giải hệ phương trình $\heva{&b=2a\\&a-b=-1}\Leftrightarrow\heva{&a=1\\&b=2.}$
+	}
+\end{ex}
+
+\begin{ex}%[0D3V2-4]
+	Tìm tất cả các giá trị của tham số $m$ để đồ thị hàm số $y=x^2+2 m x+m^2-3 m+1$ cắt trục hoành tại hai điểm phân biệt.
+	\choice
+	{$m<\dfrac{1}{3}$}
+	{$m=-1$}
+	{$m<0$}
+	{\True $m>\dfrac{1}{3}$}
+	\loigiai{
+		Đồ thị hàm số $y=x^2+2 m x+m^2-3 m+1$ cắt trục hoành tại hai điểm phân biệt
+		$\Leftrightarrow x^2+2 m x+m^2-3 m+1=0$ có hai nghiệm phân biệt
+		$\Leftrightarrow \Delta^{\prime}=3 m-1>0 \Leftrightarrow m>\dfrac{1}{3}$.
+	}
+\end{ex}
+\begin{ex}%[0D3H2-6]
+	Khi quả bóng được đá lên, nó đạt độ cao nào đó rồi rơi xuống đất. Biết rằng quỹ đạo của quả bóng là một cung parabol trong mặt phẳng với hệ tọa độ $Oth$, trong đó $t$ là thời gian (tính bằng giây), kể từ khi quả bóng được đá lên; $h$ là độ cao (tính bằng mét) của quả bóng. Giả thiết rằng quả bóng được đá lên từ độ cao $1{,}2$m. Sau $1$ giây nó đạt độ cao $8{,}5$m và sau $2$ giây sau khi đá lên nó đạt độ cao $6$m. Hãy tìm hàm số bậc hai biểu thị độ cao $h$ theo thời gian $t$ có phần đồ thị trùng với quỹ đạo của quả bóng trong tình huống trên.
+	\choice
+	{$y=4{,}9t^2+12{,}2t+1{,}2$}
+	{$y=-4{,}9t^2-12{,}2t+1{,}2$}
+	{$y=-4{,}9t^2+12{,}2t-1{,}2$}
+	{\True $y=-4{,}9t^2+12{,}2t+1{,}2$}
+	\loigiai{
+		Gọi phương trình parabol có dạng: $y=at^2+bt+c,(a\neq0)$. Do quỹ đạo quả bóng đi qua các điểm $(0;1{,}2)$,$(1;8{,}5)$,$(2;6)$ nên ta có hệ phương trình: $\heva{&c=1{,}2\\&a+b+c=8{,}5\\&4 a+2 b+c=6}\Leftrightarrow \heva{&a=-4{,}9\\&b=12{,}2\\&c=1{,}2.}$
+		Vậy $y=-4{,}9 t^2+12{,}2t + 1{,}2.$
+	}
+\end{ex}
+\begin{ex}%[0D3H2-6]
+	\immini{
+		Một chiếc cổng hình parapol dạng $y=-x^2$ có chiều rộng $d=8$m. Hãy tính chiều cao $h$ của cổng.
+		\choice
+		{$h=9$m}
+		{$h=8$m}
+		{\True $h=16$m}
+		{$h=5$m}
+	}{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick, scale=0.8]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-3.1,0)--(3.1,0) node[below left] {$x$};
+			\draw[->] (0,-4.1)--(0,1.1) node[below left] {$y$};
+			\draw[dashed] (-2,-4) -- (2,-4) node[above left] {$d=8$m};
+			\draw (0,-1) node[above left] {h};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {-2/-2,-1/-1,1/1,2/2}
+			\draw[thin] (\x,1pt)--(\x,-1pt) ;
+			\foreach \y/\ny in {-1/-1,-2/-2,-3/-3,-4/-4}
+			\draw[thin] (1pt,\y)--(-1pt,\y) ;
+			\begin{scope}
+				\clip (-3,-4) rectangle (3,1);
+				\draw[samples=200,domain=-3:3,smooth,variable=\x] plot (\x,{-1*(\x)^2+0*(\x)+0});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Dựa vào hệ trục tọa độ hình minh họa $d=8$m suy ra đồ thị hàm số đi qua điểm có tọa độ $(4; h)$ Suy ra $h=-4^2=-16$. Mà thực tế $h$ là chiều cao cổng nên $h=16$m.	
+	}
+\end{ex}
+\begin{ex}%[0D3H2-1]
+	Cho parabol $y=a x^2+b x+4$ có trục đối xứng là đường thẳng $x=\dfrac{1}{3}$ và đi qua điểm $A(1 ; 3)$. Tổng giá trị $a+2 b$ là
+	\choice
+	{$-\dfrac{1}{2}$}
+	{$\dfrac{1}{2}$}
+	{$-1$}
+	{\True $1$}
+	\loigiai{
+		Ta có $\heva{&-\dfrac{b}{2 a}=\dfrac{1}{3}\\&A(1 ; 3) \in(P)}\Leftrightarrow \heva{&2 a+3 b=0\\&a+b+4=3}\Leftrightarrow\heva{&2 a+3 b=0\\&a+b=-1}\Leftrightarrow\heva{&a=-3\\&b=2.}$\\
+		Vậy $a+2 b=-3+2 \cdot 2=1$.
+	}
+\end{ex}
+\begin{ex}%[0D3H2-2]
+	Xác định parabol $(P)\colon y=a x^2+b x+c$ biết $(P)$ có giá trị lớn nhất bằng $3$ tại $x=2$ và cắt trục $O x$ tại điểm có hoành độ bằng $1$.
+	\choice
+	{$y=-x^2+4x-3$}
+	{$y=x^2-4x+7$}
+	{$y=2x^2-12x+20$}
+	{\True $y=-3x^2+12x-9$}
+	\loigiai{
+		Vì $(P)$ có giá trị lớn nhất bằng $3$ tại $x=2$ nên $(2 ; 3)$ là tọa độ đỉnh của parabol và $a<0$.\\
+		Do đó $\heva{&\dfrac{-b}{2 a}=2\\&4 a+2b+c=3}$.\\
+		Vì $(P)$ cắt trục $O x$ tại điểm có hoành độ bằng $1$ nên $a+b+c=0$.
+		Do đó $a=-3$, $b=12$, $c=-9$.
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1}
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-B1-DS]
+\begin{ex}%[0D3H2-3]
+	\immini{
+		Cho đồ thị hàm số bậc hai $y=f(x)$ có dạng như hình sau	
+		\choiceTF
+		{Trục đối xứng của đồ thị là đường thẳng $x=-2$}
+		{\True Đỉnh $I$ của đồ thị hàm số có tọa độ là $(2 ;-2)$}
+		{\True Đồ thị hàm số đi qua điểm $A(0 ; 6)$}
+		{Hàm số đã cho là $y=2 x^2-2 x+6$}
+	}{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick, scale=0.8]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-1.1,0)--(5.1,0) node[below left] {$x$};
+			\draw[->] (0,-2.3)--(0,6.5) node[below right] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {-1/-1,1/1,2/2,3/3,4/4}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+			\foreach \y/\ny in {-2/-2,-1/-1,1/1,2/2,3/3,4/4,5/5,6/6}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+			\draw[dashed,thin](2,0)--(2,-2)--(0,-2);
+			\draw (2,-2) node [below] {$I$};
+			\begin{scope}
+				\clip (-1,-2.5) rectangle (5,6.5);
+				\draw[samples=200,domain=-1:5,smooth,variable=\x] plot (\x,{2*(\x)^2+-8*(\x)+6});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Trục đối xứng của đồ thị là đường thẳng $x=2$. 
+			\itemch Đúng. Đỉnh $I$ của đồ thị hàm số có tọa độ là $(2 ;-2)$.
+			\itemch Đúng. Đồ thị hàm số đi qua điểm $A(0 ; 6)$.
+			\itemch Sai. Do đồ thị hàm số đi qua điểm $A(0 ; 6)$ nên $a \cdot 0^2+b \cdot 0+c=6 \Rightarrow c=6$.\\
+			Mặt khác, đồ thị có tọa độ đỉnh là $I(2 ;-2)$ nên ta có
+			$$\heva{&-\dfrac { b } { 2 a } = 2\\&a \cdot 2 ^ { 2 } + b \cdot 2 + 6 = - 2}\Leftrightarrow \heva{&4 a + b = 0\\&4 a + 2 b = - 8}\Leftrightarrow \heva{&a=2\\&b=-8.}$$
+			Vậy hàm số đã cho là $y=2 x^2-8 x+6$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3V2-3]
+	\immini{
+		Quan sát đồ thị hàm số bậc hai $y=f(x)$ ở hình bên. Khi đó
+		\choiceTF
+		{\True $a>0$}
+		{\True Toạ độ đỉnh $I(2 ;-1)$, trục đối xứng $x=2$}
+		{Đồng biến trên khoảng $(-\infty ; 2)$; Nghịch biến trên khoảng $(2 ;+\infty)$}
+		{\True $x$ thuộc các khoảng $(-\infty ; 1)$ và $(3 ;+\infty)$ thì $f(x)>0$}
+	}{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-1.1,0)--(5,0) node[below left] {$x$};
+			\draw[->] (0,-1.6)--(0,4.1) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {1/1,2/2,3/3}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+			\foreach \y/\ny in {-1/-1,3/3}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+			\draw[dashed,thin](2,0)--(2,-1)--(0,-1);
+			\begin{scope}
+				\clip (-1,-1.5) rectangle (5,4);
+				\draw[samples=200,domain=-1:5,smooth,variable=\x] plot (\x,{1*(\x)^2+-4*(\x)+3});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Bề lõm quay lên nên $a>0$.
+			\itemch Đúng. Toạ độ đỉnh $I(2 ;-1)$, trục đối xứng $x=2$.
+			\itemch Sai. Đồng biến trên khoảng $(2 ;+\infty)$; Nghịch biến trên khoảng $(-\infty ; 2)$.
+			\itemch Đúng. Vì $x$ thuộc các khoảng $(-\infty ; 1)$ và $(3 ;+\infty)$ thì $f(x)>0$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0D3V2-4]
+	Cho hàm số $y=-x^2+6x-5$. Khi đó
+	\choiceTF
+	{\True $y>0$ khi $x \in(1 ; 5)$}
+	{\True $y<0$ khi $x \in(-\infty ; 1) \cup(5 ;+\infty)$}
+	{Giá trị lớn nhất của hàm số bằng $3$}
+	{\True Đường thẳng $d\colon y=4 x-m$ cắt đồ thị $(P)$ tại $2$ điểm phân biệt khi $m>4$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. $y>0 \Rightarrow-x^2+6 x-5>0$ khi $x \in(1 ; 5)$.
+			\itemch Đúng. $y<0 \Rightarrow-x^2+6 x-5<0$ khi $x \in(-\infty ; 1) \cup(5 ;+\infty)$.
+			\itemch Sai. Xét hàm số $y=f(x)=-x^2+6 x-5$, có $a<0$ nên giá trị lớn nhất của hàm số $y=-x^2+6 x-5$ là $y=f\left(-\dfrac{b}{2 a}\right)=f(3)=4$.
+			\itemch Đúng. Xét phương trình hoành độ giao điểm của đường thẳng $d$ và đồ thị $(P)$ là
+			$$
+			-x^2+6 x-5=4 x-m \Leftrightarrow x^2-2 x+5=m .
+			$$
+			Xét vế trái $y=f(x)=x^2-2 x+5$, có $a>0$ suy ra $y=f\left(-\dfrac{b}{2 a}\right)=f(1)=4$ là giá trị nhỏ nhất. \\
+			Vậy đường thẳng $d\colon y=4 x-m$ cắt đồ thị $(P)$ tại $2$ điểm phân biệt khi $m>4$.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[0D3V2-2]
+	Cho hàm số $y=-x^2+2 x-5$. Khi đó	
+	\choiceTF
+	{\True Tập xác định $D=\mathbb{R}$}
+	{\True Tọa độ đỉnh $I$ của parabol là $I(1 ;-4)$}
+	{\True Hàm số đã cho đồng biến trên khoảng $(-\infty; 1)$ và nghịch biến trên khoảng $(1 ;+\infty)$}
+	{Giá trị lớn nhất của hàm số là $y_{\max }=-4$, khi $x=2$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Tập xác định của hàm số là $D=\mathbb{R}$.
+			\itemch Đúng. Tọa độ đỉnh $I$ của parabol
+			$x_I=-\dfrac{b}{2 a}=1$, $y_I=-1^2+2.1-5=-4$ hay $I(1;-4)$.
+			\itemch Đúng. Bảng biến thiên
+			\begin{center}
+				\begin{tikzpicture}
+					\tkzTabInit[espcl=2.5,lgt=1.5]
+					{$x$/0.7,$y$/2.1}
+					{$-\infty$,$1$,$+\infty$}
+					\tkzTabVar{-/$-\infty$,+/$-4$,-/$-\infty$}
+				\end{tikzpicture}
+			\end{center}
+			Kết luận:
+			Hàm số đã cho đồng biến trên khoảng $(-\infty ; 1)$ và nghịch biến trên khoảng $(1 ;+\infty)$.
+			\itemch Sai. Giá trị lớn nhất của hàm số là $y_{\max }=-4$, khi $x=1$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B1-DS}
+
+\Opensolutionfile{ans}[ans/ans-0-B1-KQ]
+\caukq
+\begin{ex}%[0D3V2-1]
+	Cho hàm số bậc hai có đồ thị là parabol $(P)\colon y=a x^2-4 x+c$ có đỉnh là $I(-2 ;-1)$. Tính $a+c$.
+	\shortans{$-6$}
+	\loigiai{
+		Do $(P)$ có đỉnh $I(-2 ;-1)$ nên 
+		$$\heva{&\dfrac{4}{2 a}=-2\\&a \cdot(-2)^2-4(-2)+c=-1}\Leftrightarrow \heva{&a=-1\\&c=-5.}$$
+		Vậy hàm số bậc hai được xác định là $y=-x^2-4 x-5$. \\
+		Do đó $a+b = -6$.
+	}
+\end{ex}
+
+\begin{ex}%[0D3H2-6]
+	Một cửa hàng kinh doanh giày và giá để nhập một đôi giày là $40$ đô la. Theo nghiên cứu của bộ phận kinh doanh thì nếu cửa hàng bán mỗi đôi giày với giá $x$ đô la thì mỗi tháng sẽ bán được $120-x$ đôi giày. Hỏi cửa hàng bán giá bao nhiêu cho một đôi giày để có thể thu lãi cao nhất trong tháng.
+	
+	\shortans{$1600$}
+	\loigiai{
+		Gọi $x$ (đô la) là giá mỗi đôi giày bán ra thì số tiền lãi tương ứng là $x-40$ (đô la) Số tiền lãi thu được mỗi tháng là $f(x)=(x-40)(120-x)=-x^2+160 x-4800$.\\
+		Đây là hàm số bậc hai với $a=-1$, $b=160$, $c=-4800 \Rightarrow-\dfrac{b}{2 a}=80$.\\
+		Vì $a=-1<0$ nên hàm số đạt giá trị lớn nhất bằng $f(80)=-80^2+160\cdot80-4800=1600$, ứng với $x=80$.\\
+		Vậy, để tối ưu hóa lợi nhuận, cửa hàng cần đưa ra giá bán 80 đô la mỗi đôi giày, khi đó lợi nhuận tối đa trong tháng là 1600 đô la.
+	}
+\end{ex}
+\begin{ex}%[0D3V2-1]
+	Cho $(\mathrm{P})\colon y=a x^2+b x+c$. Biết đồ thị thỏa đi qua $A(0 ; 1), B(1 ; 2), C(3 ;-1)$. Tính $S = a + b + c$.
+	\shortans{$2$}
+	\loigiai{
+		Theo yêu cầu bài toán ta có hệ phương trình:
+		$$\heva{&0 ^ { 2 } \cdot a + 0 \cdot b + c = 1\\& 1 ^ { 2 } \cdot a + 1 \cdot b + c = 2\\&3 ^ { 2 } \cdot a + 3 \cdot b + c = - 1}\Leftrightarrow \heva{&c = 1\\&a + b + c = 2\\&9 a + 3 b + c = - 1}\Leftrightarrow \heva{&a=-\frac{5}{6}\\&b=\frac{11}{6}\\&c=1.}$$
+		Vậy $S = a + b + c = 2$.
+	}
+\end{ex}
+\begin{ex}%[0D3V2-4]
+	Cho parabol $(P): y=x^2-2x+m-1$. Biết tất cả các giá trị thực của $m$ để parabol cắt $Ox$ tại hai điểm phân biệt có hoành độ dương có dạng $a<m<b$. Tính $10^{ab}$.
+	\shortans{$100$}
+	\loigiai{
+		Phương trình hoành độ giao điểm của $(P)$ và trục $O x$ là
+		$x^2-2 x+m-1=0$ $(1)$.\\ 
+		Để parabol cắt $Ox$ tại hai điểm phân biệt có hoành độ dương khi và
+		chỉ khi (1) có hai nghiệm phân biệt dương khi và chỉ khi
+		$$\heva{&\Delta^{\prime}=2-m>0\\&S=2>0\\&p=m-1>0}\Leftrightarrow\heva{&m<2\\&m>1}\Leftrightarrow 1<m<2.$$
+		Vậy $10^{ab} = 10^2 = 100$.
+	}
+\end{ex}
+\begin{ex}%[0D3V2-1]
+	\immini{
+		Biết phương trình của hàm số bậc hai có đồ thị hình bên. Tính $a+100b+c$.
+	}{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-1.1,0)--(4.6,0) node[below left] {$x$};
+			\draw[->] (0,-0.6)--(0,4.6) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\foreach \x/\nx in {1/1,2/2,3/3,4/4}
+			\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+			\foreach \y/\ny in {1/1,2/2,3/3,4/4}
+			\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+			\draw[dashed,thin](2,0)--(2,4)--(0,4);
+			\begin{scope}
+				\clip (-1,-0.5) rectangle (4.5,4.5);
+				\draw[samples=200,domain=-1:4.5,smooth,variable=\x] plot (\x,{-1*(\x)^2+4*(\x)+0});
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\shortans{$399$}
+	\loigiai{
+		Đồ thị là một parabol nên hàm số có dạng $y=a x^2+b x+c$. Ta thấy đồ thị đi qua các điểm $(0; 0),(2 ; 4)$ và $(4 ; 0)$ nên ta có
+		$$\heva{&c = 0\\&4 a + 2 b + c = 4\\&1 6 a + 4 b + c = 0}\Leftrightarrow\heva{&a=-1\\&b=4\\&c=0.}$$
+		Vậy $a+100b+c = -1 + 100\cdot 4+0=399$.
+	}
+\end{ex}
+\begin{ex}%[0D3V2-4]
+	Cho hàm số $y=2 x^2-5 x+2$ có đồ thị là parabol $(P)$. Tính tổng tất cả các hoành độ của giao điểm của đồ thị với trục tung và trục hoành.
+	
+	
+	\shortans{$2{,}5$}
+	\loigiai{
+		Từ đề ta có: $a=2, b=-5, c=2$.\\
+		Hoành độ của đỉnh $I$ là: $x_0=\dfrac{-b}{2 a}=\dfrac{-(-5)}{2.2}=\dfrac{5}{4}\Rightarrow y_0=2\left(\dfrac{5}{4}\right)^2-5 \cdot \dfrac{5}{4}+2=-\dfrac{9}{8}$ suy ra đỉnh $I\left(\dfrac{5}{4} ;-\dfrac{9}{8}\right)$.\\
+		Giao điểm của $(P)$ và trục $Oy$: Cho $x=0 \Rightarrow y=2$ nên $(P)$ cắt trục $O y$ tại điểm $A(0 ; 2)$. Giao điểm của $(P)$ và trục $Ox$: Xét phương trình $2 x^2-5 x+2=0 \Leftrightarrow\left[\begin{array}{l}x=2 \\ x=\dfrac{1}{2}\end{array}\right.$ nên $(P)$ cắt trục $O x$ tại hai điểm $B(2 ; 0)$ và $C\left(\dfrac{1}{2} ; 0\right)$.\\
+		Vậy $0+2+\dfrac{1}{2}=2{,}5$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1-KQ}
+\newpage
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-0-B1]
+\caulc
+\begin{ex}%[0D3N2-3]
+	Đồ thị hàm số $y=x^2-2 x-3$ đi qua điểm nào sau đây?
+	\choice
+	{$N(1; 2)$ }
+	{$P(0; 2)$}
+	{$M(1; 1)$ }
+	{\True $Q(3; 0)$}
+	\loigiai{
+		Đồ thị hàm số đi qua điểm $Q(3; 0)$, vì khi thay $x=3$ ta có $y=3^2-2 \cdot 0-3=0$.}
+\end{ex}
+
+
+\begin{ex}%[0D3N2-2]
+	Hàm số $y=x^2-8x+12$ nghịch biến trên khoảng
+	\choice
+	{$(8;+\infty)$}
+	{$(-\infty;8)$}
+	{\True $(-\infty;4)$}
+	{$(4;+\infty)$}
+	\loigiai{
+		Hàm số $y=x^2-8x+12$ có hệ số $a=1>0$ nên hàm số nghịch biến trên khoảng $\left(-\infty;-\dfrac{b}{2a}\right)$.\\
+		Vì vậy hàm số đã cho nghịch biến trên $(-\infty;4)$.}
+\end{ex}
+
+
+\begin{ex}%[0D3H2-2]
+	Cho parabol $(P)\colon y=3x^2-2x+1$. Điểm nào sau đây là đỉnh của $(P)$?
+	\choice
+	{\True $I\left(\dfrac{1}{3};\dfrac{2}{3}\right)$}
+	{$I(0;1)$}
+	{$I\left(-\dfrac{1}{3};\dfrac{2}{3}\right)$}
+	{$I\left(\dfrac{1}{3};-\dfrac{2}{3}\right)$}
+	\loigiai{
+		Xét $(P)\colon y=3x^2-2x+1$, ta có $a=3$; $b=-2$; $c=1$.\\
+		Suy ra $x=-\dfrac{b}{2a}=\dfrac{1}{3}\Rightarrow y=\dfrac{2}{3}$.\\
+		Vậy đỉnh của $(P)$ là $I\left(\dfrac{1}{3};\dfrac{2}{3}\right)$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3N2-1]
+	Tọa độ đỉnh $S$ của parabol $\left(P\right)\colon y=-3x^2+2x+1$ là
+	\choice
+	{$S\left( -\dfrac{2}{3}; -\dfrac{5}{3} \right)$}
+	{$S\left( \dfrac{2}{3}; 1 \right)$}
+	{\True $S\left( \dfrac{1}{3}; \dfrac{4}{3} \right)$}
+	{$S\left( -\dfrac{1}{3}; 0 \right)$}
+	\loigiai{
+		Parabol có tọa độ đỉnh là $S\left( -\dfrac{b}{2a}; -\dfrac{\Delta }{4a} \right)\Rightarrow S\left( \dfrac{1}{3}; \dfrac{4}{3} \right)$.
+	}
+	
+\end{ex}
+
+
+\begin{ex}%[0D3N2-3]
+	Parabol $\left(P\right)\colon y=2x^2-4x+3$ có trục đối xứng là đường thẳng có phương trình là
+	\choice
+	{$x=2$}
+	{$x=-1$}
+	{\True $x=1$}
+	{$x=-2$}
+	\loigiai{
+		Ta có $a=2$, $b=-4$, (P) có trục đối xứng là đường thẳng có phương trình $x=-\dfrac{b}{2a}=1$.}
+\end{ex}
+
+
+\begin{ex}%[0D3N2-3]
+	Trục đối xứng của Parabol $(P)\colon y=2x^2+6x+3$ là đường thẳng nào sau đây?
+	\choice
+	{$x=\dfrac{3}{2} $}
+	{$y=\dfrac{3}{2} $}
+	{$y=-\dfrac{3}{2} $}
+	{\True $x=-\dfrac{3}{2} $}
+	\loigiai{
+		Trục đối xứng của Parabol là $x=-\dfrac{b}{2a}=-\dfrac{3}{2}$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3H2-3]
+	Nếu hàm số $y=ax^2+bx+c$ có $a>0$; $ b>0$ và $c<0$ thì đồ thị hàm số của nó có dạng
+	\choice
+	{\True \begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\tikzset{declare function={xmin=-2;xmax=1;ymin=-1.5;ymax=2;
+					f(\x)=1.81*(\x)^2+1.94*(\x)-0.5;
+				},
+				smooth,samples=450
+			}
+			\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+			\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+			\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+			\clip (xmin,ymin) rectangle (xmax,ymax);
+			\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+	\end{tikzpicture}}
+	{\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\tikzset{declare function={xmin=-1.5;xmax=1;ymin=-2.5;ymax=1;
+					f(\x)=-2.47*(\x)^2-2.52*(\x)-0.64;
+				},
+				smooth,samples=450
+			}
+			\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+			\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+			\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+			\clip (xmin,ymin) rectangle (xmax,ymax);
+			\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+	\end{tikzpicture}}
+	{\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\tikzset{declare function={xmin=-1.5;xmax=2.5;ymin=-2;ymax=2.5;
+					f(\x)=-1.3*(\x)^2+1.3*(\x)+1.6;
+				},
+				smooth,samples=450
+			}
+			\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+			\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+			\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+			\clip (xmin,ymin) rectangle (xmax,ymax);
+			\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+	\end{tikzpicture}}
+	{\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\tikzset{declare function={xmin=-1;xmax=2;ymin=-1;ymax=3;
+					f(\x)=1.99*(\x)^2-2.03*(\x)+1.19;
+				},
+				smooth,samples=450
+			}
+			\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+			\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+			\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+			\clip (xmin,ymin) rectangle (xmax,ymax);
+			\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+	\end{tikzpicture}}
+	\loigiai{
+		Đồ thị hàm số	$a>0$ nên bề lõm đồ thị quay lên và $c<0$ nên đồ thị cắt trục $Oy$ phía dưới $Ox $ nên ta chọn
+		\begin{center}
+			\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\tikzset{declare function={xmin=-2;xmax=1;ymin=-1.5;ymax=2;
+						f(\x)=1.81*(\x)^2+1.94*(\x)-0.5;
+					},
+					smooth,samples=450
+				}
+				\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+				\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+				\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+				\clip (xmin,ymin) rectangle (xmax,ymax);
+				\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+			\end{tikzpicture}
+		\end{center}
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3N2-3]
+	\immini{Cho hàm số bậc hai $y=f(x)$ có đồ thị như hình vẽ. Tập nghiệm của bất phương trình $f(x)>0$ là
+		\choice
+		{$(0;3)$}
+		{$[-1;3]$}
+		{$(-\infty;-1)\cup(3;+\infty)$}
+		{\True $(-1;3)$}
+	}{
+		\begin{tikzpicture}[line join=round,line cap=round, font=\footnotesize,scale=0.6,>=stealth]
+			\draw[-stealth](-1.5,0)--(4,0)node[above]{$x$};
+			\draw[-stealth](0,-2)--(0,4.5)node[right]{$y$};
+			\draw[smooth,samples=100,domain=-1.3:3.3] plot(\x,{-(\x+1)*(\x-3)});
+			\fill (0,0) circle(1pt)node[below left]{$O$};
+			\foreach \x/\g in {-1/140,3/50}\fill[black] (\x,0) circle (1pt)+(\g:.4)node{$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Nhìn đồ thị ta thấy phần đồ thị nằm trên trục hoành $f(x)>0$ khi $x\in(-1;3)$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3H2-3]
+	\immini{Cho hàm số $y=a{x^2}+bx+c$ có đồ thị như bên.
+		Khẳng định nào dưới đây là đúng?
+		\choice
+		{$a > 0,b > 0,c < 0$}
+		{$a < 0,b < 0,c > 0$}
+		{$a > 0,b < 0,c > 0$}
+		{\True $a > 0,b < 0,c < 0$}
+	}{\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick,scale=0.7]
+			\tikzset{every node/.style={scale=0.9}}
+			\draw[->] (-2.1,0)--(4.1,0) node[below left] {$x$};
+			\draw[->] (0,-5.1)--(0,3.1) node[below left] {$y$};
+			\draw (0,0) node [below left] {$O$};
+			\begin{scope}
+				\clip (-2,-5) rectangle (4,3);
+				\draw[samples=200,domain=-2:4,smooth,variable=\x] plot (\x,{1*(\x)^2+-2*(\x)+-3});
+			\end{scope}
+	\end{tikzpicture}}
+	\loigiai{
+		Đồ thị cắt trục tung tại điểm có tung độ âm nên $c < 0$.\\
+		Đồ thị hướng bề lõm lên trên nên $a > 0$, hoành độ đỉnh dương nên $\dfrac{-b}{2a}> 0, \,a > 0\Rightarrow b < 0$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3H2-1]
+	Cho Parabol $P \colon y=x^2+mx+n$ ($m,\,n$ tham số). Xác định $m,\,n$ để $(P)$ nhận đỉnh $I\left(2;\,-1\right)$ .
+	\choice
+	{\True $m=-4,\,n=3$}
+	{$m=4,\,n=3$}
+	{$m=4,\,n=-3$}
+	{$m=-4,\,n=-3$}
+	\loigiai{
+		Parabol $(P)\colon y=x^2+mx+n$ nhận $I\left(2;-1\right)$ là đỉnh, khi đó ta có
+		\[\heva{&4+2m+n=-1\\&-\dfrac{m}{2}=2}
+		\Leftrightarrow \heva{&2m+n=-5\\&m=-4}
+		\Leftrightarrow \heva{&n=3\\&m=-4.}\]
+		Vậy $m=-4,\,n=3$ .}
+\end{ex}
+
+
+\begin{ex}%[0D3H2-3]
+	Đồ thị hình bên dưới là đồ thị của hàm số nào?
+	\immini{
+		\choice
+		{$y=2x^2-4x-2$}
+		{$y=-x^2-2x+3$}
+		{\True$y=x^2-2x-1$}
+		{$y=x^2+2x-2$}
+	}{
+		\begin{tikzpicture}[line cap=round, line join=round, font=\footnotesize, >=stealth, scale=0.7]
+			\tikzset{label style/.style={font=\footnotesize}}
+			%---------------------- Vẽ hệ trục tọa độ
+			\draw[->] (-1.5,0)--(3.25,0) node[below right] {$x$};
+			\draw[->] (0,-2.25)--(0,3.25) node[right] {$y$};
+			\node (0,0) [above right]{$ O $};
+			%----------------------- Vẽ đoạn chắn trên trục
+			\foreach \x in {-1,1,2,3}
+			\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+			\node at (.75,-0.4) {$1$};
+			\node at (1.75,-0.4) {$2$};
+			\foreach \y in {-2,-1,1,2,3}
+			\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt);
+			\node at (-0.5,1.25) {$1$};
+			\node at (-0.5,-2) {$-2$};
+			\draw[dashed](1,0)--(1,-2)--(0,-2);
+			%---------------------- Vẽ (P)
+			\draw [ domain=-1.1:3.1, samples=100] plot (\x, {(\x)*(\x)-2*(\x) - 1});
+	\end{tikzpicture}}
+	\loigiai{
+		Đồ thị cắt trục $Oy$ tại điểm có tung độ bằng $-1\Rightarrow c=-1$. Suy ra $y=ax^2+bx-1$.\\
+		Đồ thị nhận $I\left(1;-2\right)$ làm đỉnh nên $\heva{&\dfrac{-b}{2a}=1\\ &-2=a\cdot 1^2+b\cdot 1-1}\Leftrightarrow\heva{&2a+b=0\\ &a+b=-1}\Leftrightarrow\heva{&a=1\\ &b=-2.}$\\
+		Vậy $y=x^2-2x-1$.
+	}
+\end{ex}
+
+
+\begin{ex}%[Đề kiểm tra HK2 môn Toán 10 trường THPT Trương Vĩnh Ký (Bến Tre)]%[Nguyễn Kiều Nhã Tú, 10EX-HK2-2223]%[0D3H2-3]%
+	Tọa độ đỉnh của parabol $y=-3x^2+6x-1$ là
+	\choice
+	{$ I(-1;-10) $}
+	{$ I(2;-1) $}
+	{\True $ I(1;2) $}
+	{$ I(-2;-25) $}
+	\loigiai{
+		Tọa độ đỉnh của parabol $y=ax^2+bx+c$ $(a\neq 0)$ là $I\left(-\dfrac{b}{2a};-\dfrac{b^2-4ac}{4a}\right)$ nên tọa độ đỉnh của parabol đã cho là $I(1;2)$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1}
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-B1-DS]
+\begin{ex}%[0D3N2-3]
+	Cho hàm số $y=-x^2+2x+3$. Các mệnh đề sau đúng hay sai?
+	\choiceTF
+	{\True Tập xác định của hàm số là $\mathscr{D}=\mathbb{R}$}
+	{Tọa độ đỉnh $I(1;2)$}
+	{Đồ thị hàm số có trục đối xứng là đường thẳng $x=2$}
+	{\True Đồ thị hàm số là Parabol có bề lõm hướng xuống dưới}
+	\loigiai{
+		Hàm số $y=-x^2+2x+3$ có $a=-1$, $b=2$, $c=3$.
+		\begin{itemchoice}
+			\itemch Tập xác định của hàm số là $\mathscr{D}=\mathbb{R}$.
+			\itemch Tọa độ đỉnh $x_I=-\dfrac{b}{2a}=1$; $y_I=-1^2+2\cdot 1+3=4\Rightarrow I(1;4)$.
+			\itemch Đồ thị hàm số có trục đối xứng là đường thẳng $x=1$.
+			\itemch Vì $a=-1<0$ nên đồ thị hàm số là Parabol có bề lõm hướng xuống dưới.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0D3H2-3]
+	Cho hàm số $f(x)=-3x^2+x+2$. Các mệnh đề sau đúng hay sai?
+	\choiceTF
+	{Hàm số luôn nghịch biến trên $\mathbb{R}$}
+	{\True Đồ thị hàm số đi qua điểm $A(2;-8)$}
+	{Hàm số đồng biến trên khoảng $(0;2)$}
+	{\True Giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Hàm số bậc hai không thể đồng biến hoặc nghịch biến trên $\mathbb{R}$ nên mệnh đề ``Hàm số luôn nghịch biến trên $\mathbb{R}$'' sai.
+			\itemch Vì $f(2)=-3\cdot 2^2+2+2=-8$ nên mệnh đề ``Đồ thị hàm số đi qua điểm $A(2;-8)$'' đúng.
+			\itemch Hàm số $f(x)=-3x^2+x+2$ đồng biến trên khoảng $\left(-\infty;\dfrac{1}{6}\right)$ mà $(0;2) \not\subset\left(-\infty;\dfrac{1}{6}\right)$.\\
+			Vậy mệnh đề ``Hàm số đồng biến trên khoảng $(0;2)$'' sai.
+			\itemch Hàm số $f(x)=-3x^2+x+2$ đạt giá trị lớn nhất tại $x=\dfrac{1}{6}$ và $f\left(\dfrac{1}{6}\right)=-3\cdot \left(\dfrac{1}{6}\right)^2+\dfrac{1}{6}+2=\dfrac{25}{12}$ nên giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$.\\
+			Vậy mệnh đề ``Giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$'' đúng.
+		\end{itemchoice}
+	}
+\end{ex}
+\begin{ex}%[0D3H2-1]
+	\immini{
+		Cho hàm số bậc hai $y=ax^2+bx+c$ có đồ thị như hình vẽ sau. Các mệnh đề sau đúng hay sai?
+		\choiceTF
+		{\True $a>0$}
+		{$c>0$}
+		{\True $a-2b+c=7$}
+		{$a-b^2+c^3=10$}
+	}{
+		\begin{tikzpicture}[scale=0.9, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\a{2} % Hệ số a phải khác 0
+			\def\b{-3}
+			\def\c{-1}
+			\draw[->] (-1,0) -- (3,0) node[below] {$x$};
+			\draw[->] (0,-3) -- (0,2) node[left] {$y$};
+			\draw[fill=black] (0,0)circle(1pt) node[below right]{$O$};
+			\clip (-1,-3)rectangle(3,2);
+			\draw[samples=150,smooth,domain=-1:2.2] plot(\x,{\a*(\x)^2+(\b)*(\x)+(\c)});
+			\draw[dashed] (0,1)-|(2,0) (1,0)|-(0,-2);
+			\foreach \i/\g in {1/90,2/-90} \draw[fill=black] (\i,0) circle(1pt) ++(\g:0.3) node{$\i$};
+			\foreach \j/\g in {-1/180,-2/180,1/180} \draw[fill=black] (0,\j) circle(1pt) ++(\g:0.3) node{$\j$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Khi $x=1$ thì $y=-2\Rightarrow a+b+c=-2$.\\
+		Khi $x=2$ thì $y=1\Rightarrow 4a+2b+c=1$.\\
+		Đồ thị cắt trục tung tại điểm có tung độ bằng $-1$ nên $c=-1$.\\
+		Ta có hệ phương trình $\heva{&c=-1\\&a+b+c=-2\\&4a+2b+c=1} \Leftrightarrow\heva{&a=2\\&b=-3\\&c=-1.}$
+		\begin{itemchoice}
+			\itemch Vì bề lõm của parabol quay lên nên $a>0$.
+			Vậy mệnh đề ``$a>0$'' đúng.
+			\itemch Ta có $c=-1<0$ nên mệnh đề ``$c>0$'' sai.
+			\itemch Ta có $a-2b+c=7$ nên mệnh đề ``$a-2b+c=7$'' đúng.
+			\itemch Ta có $a-b^2+c^3=-8$ nên mệnh đề ``$a-b^2+c^3=10$'' sai.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0D3H2-2]
+	Cho hàm số $y=-x^2+2mx+1$. Các mệnh đề sau đúng hay sai?
+	\choiceTF
+	{\True Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$}
+	{Với $m=-2$ hàm số nghịch biến trên khoảng $(-\infty;-2)$}
+	{Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $m=3$}
+	{Có $4$ giá trị nguyên dương của $m$ để hàm số nghịch biến $(5;+\infty)$}
+	\loigiai{
+		Ta có $a=-1<0$; $-\dfrac{b}{2a}=m$ nên hàm số đã cho đồng biến trên khoảng $(-\infty;m)$, nghịch biến trên khoảng $(m;+\infty)$.
+		\begin{itemchoice}
+			\itemch Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$ nên mệnh đề ``Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$'' đúng.
+			\itemch Với $m=-2$ hàm số đồng biến trên khoảng $(-\infty;-2)$ nên mệnh đề ``Với $m=-2$ hàm số nghịch biến trên khoảng $(-\infty;-2)$'' sai.
+			\itemch Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $(-\infty;3) \subset(-\infty;m) \Leftrightarrow m \geq 3$ nên mệnh đề ``Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $m=3$'' sai.
+			\itemch Hàm số nghịch biến $(5;+\infty)$ khi và chỉ khi $(5;+\infty) \subset(m;+\infty) \Leftrightarrow m \leq 5$ mà do $m$ nguyên dương nên $m \in\{1; 2; 3; 4; 5\}$ nên có $5$ giá trị $m$ thỏa mãn nên mệnh đề ``Có $4$ giá trị nguyên dương của $m$ để hàm số nghịch biến $(5;+\infty)$'' sai.
+		\end{itemchoice}
+	}
+\end{ex}
+\Opensolutionfile{ans}[ans/ans-0-B1-KQ]
+\caukq
+\begin{ex}%[0D3H2-3]
+	Biết đồ thị hàm số $y=ax^2+bx+c$, ($a, b,c \in\mathbb{R}; a\neq 0$) đi qua điểm $A(2;1)$ và có đỉnh $I(1;-1)$. Tính giá trị biểu thức $\mathrm{T}=a^3+b^2-2c$.
+	\shortans{$22$}
+	\loigiai{
+		$(P)\colon y=ax^2+bx+c$.\\
+		$(P)$ qua $A(2;1)\Leftrightarrow 4a+2b+c=1$. \qquad (1)\\
+		$(P)$ có đỉnh $I(1;-1)\Rightarrow \heva{&a+b+c=-1\\&-\dfrac{b}{2a}=1}\Leftrightarrow\heva{&a+b+c=-1&\qquad(2)\\&2a+b=0.&\qquad(3)}$\\
+		Từ $(1)$, $(2)$, $(3)$ suy ra $\heva{&a=2\\&b=-4\\&c=1.}$\\
+		Vậy $T=a^3+b^2-2c=2^3+(-4)^2-2\cdot 1=22$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3V2-3] 
+	Biết parabol $(P)\colon y = ax^2 + bx + c$ đi qua hai điểm $A(2;1)$ và $B(-3;5)$. Tính giá trị của biểu thức $S=44a-8b+6c+3$.
+	\shortans[]{$25$}
+	\loigiai{
+		Vì $(P)$ đi qua hai điểm $A, B$ nên ta có $\heva{&4a+2b+c=1\\&9a-3b+c=5}\Leftrightarrow \heva{&8a+4b+2c=2\\&36a-12b+4c=20.}$\\
+		Cộng vế theo vế ta được $44a-8b+6c=22$ suy ra $S=25$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3V2-4]
+	Cho hàm số $f(x)=ax^2+bx+c$ $(a, b, c\in\mathbb{R})$ thỏa mãn $f(0)=1$ có bảng biến thiên như sau
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[nocadre=false, lgt=1.2, espcl=2.5, deltacl=0.6]
+			{$x$/0.5, $f(x)$ /2}%
+			{$-\infty$, $1$, $+\infty$}%
+			\tkzTabVar %
+			{+/$+\infty$,-/$-1$,+/$+\infty$
+			}
+		\end{tikzpicture}
+	\end{center}
+	Có bao nhiêu giá trị nguyên của tham số $m$ để phương trình $f\left(f(x)+m\right)=1$ có đúng hai nghiệm phân biệt?	
+	\shortans[]{$1$}
+	\loigiai{
+		Vì $f(x)$ là đồ thị của một parabol có trục đối xứng là $x=1$ nên $f(0)=1$ thì $f(2)=1$. Suy ra
+		\[f\left(f(x)+m\right)=1\Leftrightarrow \hoac{&f(x)+m=0\\&f(x)+m=2}\Leftrightarrow \hoac{&f(x)=-m\\&f(x)=2-m.}
+		\]
+		Để phương trình đã cho có đúng hai nghiệm phân biệt thì $\heva{&2-m >-1\\&-m <-1}\Leftrightarrow 1 < m < 3$.\\
+		Vậy có $1$ giá trị nguyên của $m$ để phương trình đã cho có đúng hai nghiệm phân biệt.
+	}
+\end{ex}
+\begin{ex}%[0D3V2-1]
+	Một quả bóng được đá lên từ độ cao $1{,}5$ mét so với mặt đất. Biết quỹ đạo của quả bóng là một đường parabol trong mặt phẳng tọa độ $Oxy$ có phương trình là $h=a t^2+b t+c~(a < 0)$ trong đó $t$ là thời gian (tính bằng giây) kể từ khi quả bóng được đá lên và $h$ là độ cao (tính bằng mét) của quả bóng. Biết rằng sau 2 giây thì nó đạt độ cao $5 \mathrm{~m}$; sau 4 giây nó đạt độ cao $4{,}5$ m. Hỏi sau $5{,}5$ giây quả bóng đạt độ cao bao nhiêu mét so với mặt đất?
+	\loigiai{
+		Chọn hệ trục tọa độ $Oxy$ với trục $Ox$ là trục thời gian.\\
+		Theo đề bài ta có hệ phương trình sau $\heva{&c=1{,}5\\&4a+2b+c=5\\&16a+4b+c=4{,5}}\Leftrightarrow \heva{&a=-\dfrac{1}{2}\\&b=\dfrac{11}{4}\\&c=\dfrac{3}{2}.}$\\
+		Do đó phương trình quỹ đạo của quả bóng là $y=-\dfrac{1}{2}t^2+\dfrac{11}{4}t+\dfrac{3}{2}$.\\
+		Vậy sau $5{,}5$ giây quả bóng đạt độ cao $h=y(5{,}5)=1{,}5$ m.
+		\shortans{1,5}}
+	%<MyLT1>
+\end{ex}
+
+
+\begin{ex}%[0D3V2-6]
+	Một trận bóng đá được tổ chức ở một sân vận động có sức chứa $15000$ người. Với giá vé $14 \$$ thì trung bình các trận đấu gần đây có $9500$ khán giả. Theo một khảo sát thị trường đã chỉ ra rằng cứ giảm $1 \$$ mỗi vé thì trung bình số khán giả tăng lên $1000$ người. Giá vé bằng bao nhiêu thì thu được nhiều lợi nhuận nhất (đơn vị: $\$$)?
+	\shortans{$11{,}8$}
+	\loigiai{
+		Gọi $x>0$ là số tiền cần giảm $\Rightarrow$ giá vé được bán là $(14 - x) \$$.\\
+		Khi đó số người mua vé là $9500+1000x$, $(x \leq 5,5)$.\\
+		$\Rightarrow$ Số tiền bán vé là $(14-x)\cdot (9500+1000x)=-1000 x^2+4500 x+133000$.\\
+		Để thu được nhiều lợi nhuận nhất thì biểu thức $f(x)=-1000 x^2+4500 x+133000$ phải có giá trị lớn nhất.\\
+		Ta có bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}[>=stealth]
+				\tkzTabInit[nocadre=false,lgt=1.3,espcl=2.5,deltacl=.5]
+				{$x$/.7,$f(x)$/2.5}
+				{$0$,$2{,}25$,$5{,}5$}
+				\tkzTabVar{-/$ $,+/$f(x)_{\max}$,-/$ $}
+			\end{tikzpicture}
+		\end{center}
+		Ta có $f(x)_{\max} \Leftrightarrow x=\dfrac{-b}{2a}=\dfrac{-4500}{2 \cdot (-1000)}=2{,}25$.\\		
+		Vậy giá vé là $14- 2{,}25 \approx 11{,}8 \$$.
+	}
+\end{ex}
+
+
+\begin{ex}%[0D3V2-6]
+	Khi nuôi cá thí nghiệm trong hồ, một nhà sinh học tìm được quy luật rằng: Nếu trên mỗi đơn vị diện tích của mặt hồ có $n$ con cá thì trung bình mỗi con cá sau một vụ cân nặng $P(n)=360-10n$ (đơn vị khối lượng). Hỏi người nuôi phải thả bao nhiêu con cá trên một đơn vị diện tích để trọng lượng cá sau mỗi vụ thu được là nhiều nhất?
+	\shortans{$18$}
+	\loigiai{
+		Tổng trọng lượng cá thu được sau một vụ là $T(n)=n(360-10n)=360n-10n^2$.\\
+		Đây là một tam thức bậc hai với ẩn là $n$ có hệ số $a=-10<0$ và $b=360$ suy ra 
+		$\dfrac{-b}{2a}=\dfrac{-360}{2 \cdot(-10)}=18$.\\		
+		Khi đó $T(18)=3240$.\\
+		Vậy người nuôi cần thả $18$ con cá trên một đơn vị diện tích để đạt tổng trọng lượng cá lớn nhất là $3240$ (đơn vị khối lượng).
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1-KQ}

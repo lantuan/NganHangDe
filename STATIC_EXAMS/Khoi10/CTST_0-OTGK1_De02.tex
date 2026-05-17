@@ -1,0 +1,604 @@
+\subsection{Đề 02}
+\caulc
+\Opensolutionfile{ans}[ans/ans-CTST_0-OTGK1_De02-LC]
+\setcounter{ex}{0}
+\begin{ex}%[0D3H2-3]
+    \immini[thm]{
+    Hàm số nào có đồ thị như hình vẽ bên dưới?
+    \choice
+    {\True $y=-x^2+4x-3$}
+    {$y=-x^2-4x-3$}
+    {$y=-2x^2-x-3$}
+    {$y=x^2-4x-3$}
+    }{
+    \begin{tikzpicture}[>=stealth,x=1.0cm,y=1.0cm,scale=0.8]
+        \draw[->] (-1,0) -- (4,0) node[below] {\scriptsize $x$}; 
+        \draw[->] (0,-2.5) -- (0,2) node[right] {\scriptsize $y$}; 
+        \draw[dashed,thin] (0,1)--(2,1)--(2,0); 
+        \draw (0,1) node[left]{\scriptsize $1$}  
+        (0,0) node[below left]{\scriptsize O}  
+        (2,0) node[below]{\scriptsize $2$}; 
+        \draw[domain=0.2:3.8,samples=150] plot (\x,{-(\x)^2+4*(\x)-3}); 
+    \end{tikzpicture}
+    } 
+    \loigiai{
+    Đồ thị có bề lõm quay xuống dưới nên $a<0$. Trục đối xứng $x=2$.\\
+    Vậy đồ thị đã cho là đồ thị hàm số $y=-x^2+4x-3$.
+    }
+\end{ex}
+\begin{ex}%[0D3H2-2] 
+    Hàm số $y=2x^2+4x-2023$
+    \choice
+    {Đồng biến trên khoảng $(-\infty;-2)$ và nghịch biến trên khoảng $(-2;+\infty)$}
+    {Nghịch biến trên khoảng $(-\infty;-2)$ và đồng biến trên khoảng $(-2;+\infty)$}
+    {Đồng biến trên khoảng $(-\infty;-1)$ và nghịch biến trên khoảng $(-1;+\infty)$}
+    {\True Nghịch biến trên khoảng $(-\infty;-1)$ và đồng biến trên khoảng $(-1;+\infty)$}
+    \loigiai{
+    Hàm số $y=ax^2+bx+c$ với $a>0$ đồng biến trên khoảng $\left(-\dfrac{b}{2a};+\infty\right)$, nghịch biến trên khoảng $\left(-\infty;-\dfrac{b}{2a}\right)$.\\
+    Áp dụng: Ta có $-\dfrac{b}{2a}=-1$.\\ 
+    Do đó hàm số nghịch biến trên khoảng $(-\infty;-1)$ và đồng biến trên khoảng $(-1;+\infty)$.
+    }
+\end{ex}
+
+\begin{ex}%[0H5N1-2]
+    Cho hình bình hành $ABCD$. Véctơ nào sau đây cùng phương với $\overrightarrow{AB}$?
+    \choice
+    {\True $\overrightarrow{BA}$, $\overrightarrow{CD}$, $\overrightarrow{DC}$}
+    {$\overrightarrow{BC}$, $\overrightarrow{CD}$, $\overrightarrow{DA}$}
+    {$\overrightarrow{AD}$, $\overrightarrow{CD}$, $\overrightarrow{DC}$}
+    {$\overrightarrow{BA}$, $\overrightarrow{CD}$, $\overrightarrow{CB}$}
+    \loigiai{
+        \immini{Vectơ cùng phương với $\overrightarrow{AB}$ là $\overrightarrow{BA}$, $\overrightarrow{CD}$, $\overrightarrow{DC}$.
+        }{\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+            \def\canhBC{4};\def\canhAB{2};\def\gocABC{50};
+            %Định nghĩa điểm.
+            \coordinate (B) at (0,0);
+            \coordinate (A) at ($(B)+(\gocABC:\canhAB)$);
+            \coordinate (C) at ($(B)+(0:\canhBC)$);
+            \coordinate (D) at ($(A)+(0:\canhBC)$);
+            %Vẽ hình bình hành ABCD.
+            \draw (A)--(B)--(C)--(D)--cycle;
+            %Hiển thị các điểm.
+            \foreach \x/\y in {A/90,B/-90,C/-90,D/90}{\fill (\x) circle(1pt) ($(\x)+(\y:0.3cm)$) node{$\x$};}
+        \end{tikzpicture}
+        }
+    }
+\end{ex}
+\begin{ex}%[0H5H2-1]
+    Cho $4$ điểm $A$, $B$, $C$, $D$ phân biệt và vectơ $\overrightarrow{u}  =\overrightarrow{AD}+\overrightarrow{CD}-\overrightarrow{CB}-\overrightarrow{BD}$. Khẳng định nào sau đây đúng?
+    \choice
+    {$\overrightarrow{u} =\overrightarrow{0}$}
+    {\True $\overrightarrow{u}=\overrightarrow{AD}$}
+    {$\overrightarrow{u}=\overrightarrow{CD}$}
+    {$\overrightarrow{u}=\overrightarrow{AC}$}
+    \loigiai{
+        Ta có $\overrightarrow{u}=\overrightarrow{AD}+\overrightarrow{CD}  -\overrightarrow{CB}-\overrightarrow{BD}=\left({\overrightarrow {AD}+\overrightarrow{DB}}\right)+\left({\overrightarrow{CD}- \overrightarrow {CB}}\right)=\overrightarrow{AB}+\overrightarrow {BD}=\overrightarrow{AD}$.
+    }
+\end{ex}
+\begin{ex}%[0H5H3-1] 
+    Cho $\Delta ABC$ với trung tuyến $AM$ và trọng tâm $G$. Khẳng định nào sau đây là đúng?
+    \choice
+    {$\overrightarrow{AG}=\dfrac{1}{2}\overrightarrow{GM}$}
+    {$\overrightarrow{AG}=-\dfrac{1}{3}\overrightarrow{AM}$}
+    {\True $\overrightarrow{AG}=\dfrac{2}{3}\overrightarrow{AM}$}
+    {$\overrightarrow{AG}=-\dfrac{2}{3}\overrightarrow{AM}$}
+    \loigiai{
+    \immini{
+    Ta có $\overrightarrow{AG}=\dfrac{2}{3}\overrightarrow{AM}$.
+    }{
+    \begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+        \path   (0:0) coordinate (C)
+        ++(0:-4) coordinate (B)
+        ++(80:2) coordinate (A);
+        \coordinate (M) at ($(B)!0.5!(C)$);
+        \coordinate (G) at ($(A)!2/3!(M)$);
+        \draw[]     (A)--(B)--(C)--(A) (M)--(A);
+        \foreach \x/\g in {A/90,B/-90,C/-90,M/-90,G/45}
+        \fill[black]    (\x) circle (1pt)
+        ($(\g:3mm)+(\x)$) node {$\x$};  
+    \end{tikzpicture}
+    }
+    }
+\end{ex}
+\begin{ex}%[0H5H4-1]
+    Cho tam giác $ABC$ đều cạnh bằng $4$. Khi đó, tính $\overrightarrow{AB}\cdot\overrightarrow{AC}$ ta được
+    \choice
+    {\True $8$}
+    {$-8$}
+    {$-6$}
+    {$6$}
+    \loigiai{
+        Ta có $\overrightarrow{AB}\cdot\overrightarrow{AC}=AB\cdot AC\cos \widehat{BAC}=AB^2\cdot\cos 60^{\circ} =\dfrac{1}{2}AB^2=\dfrac{1}{2}\cdot 4^2=8$.
+        }
+\end{ex}
+\begin{ex}%[0H9N2-1]
+    Trong mặt phẳng tọa độ, cho vectơ $\overrightarrow{a}=(5;2)$ và $\overrightarrow{b}=(1;-2)$. Khi đó $\overrightarrow{a}\cdot\overrightarrow{b}$ bằng
+    \choice
+    {$9$}
+    {\True $1$}
+    {$-8$}
+    {$8$}
+    \loigiai{
+    Ta có $\overrightarrow{a}\cdot\overrightarrow{b}=5\cdot 1+1\cdot (-2)=1$. 
+    }
+\end{ex}    
+\begin{ex}%[0D6N1-1]
+    Cho giá trị gần đúng của $\dfrac{8}{17}$ là $0{,}47$. Sai số tuyệt đối của số $0{,}47$  là
+    \choice
+    {\True $0{,}001$}
+    {$0{,}002$}
+    {$0{,}003$}
+    {$0{,}004$}
+    \loigiai{
+    Ta có $\dfrac{8}{17}=0{,}470588235294\ldots$ nên sai số tuyệt đối của $ 0{,}47$  là
+    $$\Delta=\left|0{,}47-\dfrac{8}{17}\right|<\left|0{,}47-4{,}471\right| =0{,}001.$$
+    }
+\end{ex}
+\begin{ex}%[0D6H3-2]
+    Cho mẫu số liệu
+    $$23 \quad 41 \quad 71 \quad 29 \quad 48 \quad 45 \quad 72 \quad 41$$
+    Số trung bình của mẫu số liệu là
+    \choice 
+    {$43{,}89$} 
+    {\True $46{,}25$} 
+    {$47{,}36$} 
+    {$40{,}53$}
+    \loigiai{
+    Số trung bình $\overline{x}=\dfrac{23+41+71+29+48+45+72+41}{8}=46{,}25$.
+    } 
+\end{ex}
+\begin{ex}%[0D6H3-4]
+    Cho mẫu số liệu
+    $$5 \quad 13 \quad 5 \quad 7 \quad 10 \quad 2 \quad 3$$
+    Tứ phân vị thứ ba của mẫu số liệu là
+    \choice 
+    {\True $10$} 
+    {$5$} 
+    {$3$} 
+    {$2$}
+    \loigiai{
+        Sắp xếp số liệu theo thứ tự không giảm $2$; $3$; $5$; $5$; $7$; $10$; $13$.\\
+        Dãy trên có giá trị chính giữa bằng $5$ nên $Q_2=5$.\\
+        Tứ phân vị thứ ba là trung vị của mẫu là $7$; $10$; $13$.\\
+        Do đó, $Q_3=10$.
+    }
+\end{ex}
+\begin{ex}%[0D6H3-5]
+    Thời gian tự học (đơn vị phút) của một số học sinh lớp $12$ được cho như sau 
+    $$ 30 \quad 60 \quad 45 \quad 120 \quad 45 \quad 150 \quad 180 \quad 60 \quad 30 \quad 30 $$
+    Tìm mốt cho mẫu số liệu này.
+    \choice 
+    {$60$} 
+    {\True $30$} 
+    {$45$} 
+    {$120$} 
+    \loigiai{
+        Sắp xếp lại mẫu số liệu ta có bảng sau
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                Thời gian tự học (đơn vị phút)& 30 & 45 &60  &120  &150  &180  \\
+                \hline
+                Tần số & 3 & 2 & 2 & 1 & 1 &1  \\
+                \hline
+            \end{tabular}
+        \end{center}    
+        Dựa vào bảng ta thấy giá trị mốt là $ 30$.
+    }
+\end{ex}
+\begin{ex}%[0D6H4-2]
+    Số sản phẩm sản xuất mỗi ngày của một phân xưởng trong $9$ ngày liên tiếp được ghi lại như sau
+    $$ 27\quad  26\quad 21\quad 28\quad 25\quad 30\quad 26\quad 23\quad 26 $$
+    Khoảng biến thiên của mẫu số liệu này là
+    \choice
+    {$8$}
+    {$5$}
+    {$6$}
+    {\True $9$}
+    \loigiai{   
+    Số sản phẩm sản xuất thấp nhất và cao nhất lần lượt là $30$ và $21$.\\ 
+    Vậy khoảng biến thiên của mẫu số liệu này là $9$. 
+    }
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-CTST_0-OTGK1_De02-LC}
+\cauds
+\Opensolutionfile{ans}[ans/ans-CTST_0-OTGK1_De02-ds]
+\setcounter{ex}{0}
+\begin{ex}%[0D3H2-2]
+    Xét đồ thị của hàm số $y=2x^2+4x+1$. Khi đó
+    \choiceTF
+    {\True Có tọa độ đỉnh $I(-1;-1)$}
+    {Trục đối xứng là $x=1$}
+    {\True Giao điểm của đồ thị với trục tung là $M(0;1)$}
+    {Đồ thị đi qua các điểm $Q(1;6)$ và $P(-3;6)$}
+    \loigiai{
+        \begin{itemchoice}
+            \itemch Đúng. Hàm số $y=2 x^{2}+4 x+1$ có hoành độ đỉnh $x_I=-\dfrac{b}{2a}=-\dfrac{4}{2\cdot 1}=-1$ và tung độ đỉnh $y_I=2(-1)^2+4\cdot (-1)+1=-1$. Vậy đỉnh $I(-1;-1)$.
+            \itemch Sai. Trục đối xứng $x=-1$.
+            \itemch Đúng. Với $x=0$, ta có $y=2\cdot0^2+4\cdot0+1=1$. Vậy giao điểm của đồ thị với trục tung là $M(0;1)$.
+            \itemch Sai. Với $x=1$, ta có $y=2\cdot (1)^2+4\cdot 1+1=7$ nên đồ thị không đi qua $Q(1;6)$.\\
+            Với $x=-3$, ta có $y=2\cdot (-3)^2+4\cdot (-3)+1=7$ nên đồ thị không đi qua $P(-3;6)$.
+        \end{itemchoice}
+    }
+\end{ex}
+\begin{ex}%[0H5H1-5] 
+    Cho hình thoi $ABCD$ có tâm $O$, cạnh bằng $a$ và $\widehat{ABC}=60^\circ$. Khi đó
+    \choiceTF
+    {$\overrightarrow{OA}=\overrightarrow{OC}$}
+    {\True $\left|\overrightarrow{AB}\right|=\left|\overrightarrow{CD} \right|$}
+    {$\overrightarrow{DA}=\overrightarrow{BC}$}
+    {\True $\left|\overrightarrow{BD}\right|=a\sqrt{3}$}
+    \loigiai{
+    \begin{center}
+        \begin{tikzpicture}[scale=0.8, font=\footnotesize,>=stealth]%<DTools>
+            \def\canhAI{2};\def\canhIB{3};
+            \pgfmathsetmacro\canhAB{sqrt((\canhAI)^2+(\canhIB)^2)};
+            \pgfmathsetmacro\gocIAB{atan((\canhIB)/(\canhAI))-90};
+            %Định nghĩa điểm.
+            \coordinate (O) at (0,0);
+            \coordinate (A) at ($(O)+(90:\canhAI)$);
+            \coordinate (B) at ($(O)+(180:\canhIB)$);
+            \coordinate (C) at ($(O)+(-90:\canhAI)$);
+            \coordinate (D) at ($(O)+(0:\canhIB)$);
+            %Vẽ hình thoi ABCD.
+            \draw (A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D);
+            \draw pic[draw, angle radius=2mm, angle eccentricity=1.5]{right angle = A--O--B};
+            %Hiển thị các điểm.
+            \foreach \x/\y in {A/90,B/180,C/-90,D/0,O/225}{\fill (\x) circle(1pt) ($(\x)+(\y:0.3cm)$) node{$\x$};}
+        \end{tikzpicture}
+    \end{center}
+    \begin{itemchoice}
+        \itemch Sai. Vì $\overrightarrow{OA}=\overrightarrow{CO} \ne \overrightarrow{OC}$.
+        \itemch Đúng. Vì $\left|\overrightarrow{AB}\right|=\left| \overrightarrow{CD}\right|=a$.
+        \itemch Sai. Vì $\overrightarrow{DA}=\overrightarrow{CB} \ne \overrightarrow{BC}$.
+        \itemch Đúng. Vì $\triangle ABC$ có $BA=BC$ (do $ABCD$ là hình thoi) nên là tam giác cân.\\
+        Mặt khác $\widehat{ABC}=60^\circ \Rightarrow \triangle ABC$ là tam giác đều $\Rightarrow AC=a$.\\
+        Suy ra $OC=\dfrac{a}{2}$.\\
+        Khi đó $\left|\overrightarrow{BD}\right|=BD=2BO=2\sqrt{BC^2-OC^2}= 2\sqrt{a^2-\left(\dfrac{a}{2}\right)^2}=a\sqrt{3}$.
+    \end{itemchoice}
+    }
+\end{ex}
+
+\begin{ex}%[0H5H3-2]
+    Cho hình bình hành $ABCD$. Gọi $I$, $K$ lần lượt là trung điểm của $BC$ và $CD$. Khi đó
+    \choiceTF
+    {\True $\overrightarrow{BC}=\overrightarrow{AC}-\overrightarrow{AB}$}
+    {$\overrightarrow{AB}=\overrightarrow{AC}+\overrightarrow{CD}$}
+    {\True $2\overrightarrow{AI}=\overrightarrow{AB}+\overrightarrow{AC}$}
+    {\True $\overrightarrow{AI}+\overrightarrow{AK}=\dfrac{3}{2}\overrightarrow{AC}$}
+    \loigiai{
+    \begin{center}
+        \begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+            \path   (0:0) coordinate (A)
+            ++(0:4.5) coordinate (B)
+            ++(-130:4) coordinate (C);
+            \coordinate (O) at ($(A)!0.5!(C)$);
+            \coordinate (D) at ($(B)!2!(O)$);
+            \coordinate (I) at ($(B)!0.5!(C)$);
+            \coordinate (K) at ($(D)!0.5!(C)$);
+            \coordinate (M) at ($(I)!0.5!(K)$);
+            \draw   (C)--(A)--(B)--(C)--(D)--(A) (B)--(D) (I)--(K);
+            \foreach \x/\g in {A/90,B/90,C/-90,D/-90,O/-100,K/-90,I/-45,M/-105}
+            \fill[black]    (\x) circle (1pt)
+            ($(\g:3mm)+(\x)$) node {$\x$};  
+        \end{tikzpicture}
+    \end{center}
+    \begin{itemchoice}
+        \itemch Đúng. Theo quy tắc ta có $\overrightarrow{BC}=\overrightarrow{AC}-\overrightarrow{AB}$.
+        \itemch Sai. Vì $\overrightarrow{AC}+\overrightarrow{CD}=\overrightarrow{AD}$.
+        \itemch Đúng. Theo tính chất trung điểm ta có $2\overrightarrow{AI}=\overrightarrow{AB}+\overrightarrow{AC}$.
+        \itemch Đúng. Gọi $M$, $O$lần lượt là giao điểm của $AC$ với $IK$, $BD$ khi đó $M$ là trung điểm của $IK$ và $OC$. $O$ là tâm của hình bình hành $ABCD$.\\
+        Khi đó ta có $\overrightarrow{AI}+\overrightarrow{AK}=2\overrightarrow{AM}=2\cdot\dfrac{3}{4}\overrightarrow{AC}=\dfrac{3}{2}\overrightarrow{AC}$.
+    \end{itemchoice}
+    }
+\end{ex}
+\begin{ex}%[0D6H3-5]
+    Cho mẫu số liệu thống kê về sản lượng chè thu được trong một năm (kg/sào) của $10$ hộ gia đình.
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            $112$ & $111$ & $112$ & $113$ & $114$ & $116$ & $115$ & $114$ & $115$ & $114$ \\
+            \hline
+        \end{tabular}
+    \end{center}
+     \choiceTF
+    {\True Sản lượng chè trung bình thu được trong một năm của mỗi gia đình là $113{,}6$}
+    {\True Khoảng biến thiên của mẫu số liệu là $5$}
+    {Số trung vị là $113$}
+    {\True $114$ là mốt của mẫu số liệu đã cho}
+    \loigiai{
+        Ta viết lại mẫu số liệu trên theo thứ tự không giảm
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+                \hline
+                $111$ & $112$ & $112$ & $113$ & $114$ & $114$ & $114$ & $115$ & $115$ & $116$ \\
+                \hline
+            \end{tabular}
+        \end{center}
+        \begin{itemchoice}
+            \itemch Đúng. Sản lượng chè trung bình thu được trong một năm của mỗi gia đình là 
+            $$\overline{x}=\dfrac{111+112+113+113+114+114+114+115+115+116}{10}= 113{,}6.$$
+            \itemch Đúng. Khoảng biến thiên của mẫu số liệu là $116-111=5$.
+            \itemch Sai. Số trung vị là $Q_2=\dfrac{114+114}{2}=114$.
+            \itemch Đúng. Giá trị $114$ xuất hiện nhiều nhất là $3$ lần nên $114$ là mốt của mẫu số liệu đã cho.
+        \end{itemchoice}
+    }   
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{4}{ans/ans-CTST_0-OTGK1_De02-ds}
+\caukq
+\Opensolutionfile{ans}[ans/ans-CTST_0-OTGK1_De02-KQ]
+\setcounter{ex}{0}
+\begin{ex}%[0D3V2-6]
+    Khi một quả bóng được đá lên, nó sẽ đạt đến độ cao nào đó rồi rơi xuống. Biết rằng quỹ đạo của quả bóng là một cung parabol trong mặt phẳng với hệ tọa độ $Oth$, trong đó $t$ là thời gian (tính bằng giây) kể từ khi quả bóng được đá lên; $h$ là độ cao (tính bằng mét) của quả bóng. Giả thiết rằng quả bóng được đá lên từ độ cao $1{,}2$m. Sau đó $1$ giây, nó đạt độ cao $8{,}5$m và $2$ giây sau khi đá lên, nó đạt độ cao $6$m. Hỏi sau bao lâu thì quả bóng sẽ chạm đất kể từ khi được đá lên (tính chính xác đến hàng phần trăm)?
+    \shortans[]{$2{,}58$}
+    \loigiai{
+    Gọi phương trình của parabol quỹ đạo là $h=at^2+bt+c$.\\
+    Từ giả thiết suy ra parabol đi qua các điểm $(0;1{,}2)$, $(1;8{,}5)$ và $(2;6)$.
+    \begin{center}
+        \begin{tikzpicture}[>=stealth,x=1.0cm,y=1.0cm,scale=0.6]
+            \draw[->] (-1,0) -- (5,0) node[below] {\scriptsize $x$};
+            \draw[->] (0,-1) -- (0,9.5) node[right] {\scriptsize $y$};
+            \draw[dashed,thin] (2,0)--(2,6)--(0,6)
+            [dashed,thin] (1,0)--(1,8.5)--(0,8.5);
+            \draw  (0,0) node[below left]{\scriptsize O} 
+            (0,1.2) node[left]{\scriptsize $1,2$}
+            (0,6) node[left]{\scriptsize $6$}
+            (0,8.5) node[left]{\scriptsize $8,5$}
+            (2,0) node[above]{\scriptsize $2$}
+            (1,0) node[left]{\scriptsize $1$};
+            \draw[domain=0:2.58,samples=150, red] plot (\x,{-4.9*(\x)^2+12.2*(\x)+1.2});
+        \end{tikzpicture}
+    \end{center}
+    Từ đó ta có
+    $$\left\{\begin{gathered}
+        c=1{,}2\hfill\\
+    a+b+c=8{,}5\hfill\\
+    4a+2b+c=6\hfill\\ 
+    \end{gathered}\right.\Leftrightarrow\left\{\begin{gathered}
+    a=-4{,}9\hfill\\
+    b=12{,}2\hfill\\
+    c=1{,}2.\hfill\\ 
+    \end{gathered}\right.$$
+    Vậy phương trình của parabol quỹ đạo là $h=-4{,}9t^2+12{,}2t+1{,}2$.\\
+    Giải phương trình $ h=0\Leftrightarrow-4{,}9t^2+12{,}2t+1{,}2=0$ ta tìm được một nghiệm dương là $t\approx 2{,}58$.
+    }
+\end{ex}
+\begin{ex}%[0H4V3-2]
+    \immini[thm]{
+    Từ vị trí $A$ người ta quan sát một cây cao (hình vẽ). Biết $AH=4$ m, $HB=20$ m, $\widehat{BAC}=45^\circ$. Tính chiều cao $BC$ của cây đó. (Kết quả làm tròn đến hàng phần chục)
+    \shortans[]{$17,3$}
+    }{
+        \begin{tikzpicture}[line join=round, line cap=round,scale=1,transform shape,x=1.5cm,y=1.5cm]
+            \tikzset{
+                ex_markstyle/.style={},
+                ex_mark/.style  n args={1}{decoration={ markings, %
+                        mark= at position 0.5 with
+                        with{
+                            \ifnum#1=1
+                            \draw[ex_markstyle] (0pt,-2pt) -- (0pt,2pt);
+                            \fi
+                            \ifnum#1=2
+                            \draw[ex_markstyle] (-1pt,-2pt) -- (-1pt,2pt);
+                            \draw[ex_markstyle] (1pt,-2pt) -- (1pt,2pt);
+                            \fi
+                            \ifnum#1=3
+                            \draw[ex_markstyle] (-2pt,-2pt) -- (-2pt,2pt);
+                            \draw[ex_markstyle] (0pt,-2pt) -- (0pt,2pt);
+                            \draw[ex_markstyle] (2pt,-2pt) -- (2pt,2pt);
+                            \fi
+                            \ifnum#1=4
+                            \draw[ex_markstyle] (-1pt,-1pt) -- (1pt,1pt);
+                            \draw[ex_markstyle] (-1pt,1pt) -- (1pt,-1pt);
+                            \fi
+                    } },
+                    pic actions/.append code=\tikzset{postaction=decorate}},
+            }
+            \clip (-3,-1.5) rectangle (3,1.7);
+            
+            \tikzset{cay/.pic={
+                    \def\T{ %Thân
+                        (-.33,0)%trái
+                        ..controls +(-50:.25) and +(40:.45) ..  (-.57,-1.45)
+                        ..controls +(20:.1) and +(-160:.15) ..  (-.1,-1.3)
+                        ..controls +(-120:.1) and +(60:.15) ..  (-.2,-1.6)
+                        ..controls +(-30:.1) and +(-140:.15) ..  (.15,-1.3)
+                        ..controls +(-20:.1) and +(-160:.15) ..  (.57,-1.4)
+                        ..controls +(170:.4) and +(-160:.1) ..  (.35,0)
+                        ..controls +(110:.5) and +(80:.5) ..  (-.33,0)
+                        ;}
+                    %\draw \T;
+                    \fill[gray] \T;
+                    \def\C{ 
+                        (0,.3)
+                        ..controls +(-100:.25) and +(-60:.2) ..  (-.3,.1)
+                        ..controls +(-100:.25) and +(-60:.2) ..  (-.6,0)
+                        ..controls +(-120:.45) and +(-110:.35) ..  (-1,.2)
+                        ..controls +(-150:.5) and +(-140:.35) ..  (-1.15,.7)%nút giao
+                        ..controls +(-170:.4) and +(-170:.35) ..  (-1,1.15)
+                        ..controls +(140:.35) and +(110:.4) ..  (-.37,1.35)
+                        ..controls +(110:.25) and +(80:.3) ..  (-.15,1.35)
+                        ..controls +(80:.3) and +(95:.8) ..  (.55,1.1)
+                        ..controls +(80:.2) and +(95:.2) ..  (.8,1.1)
+                        ..controls +(20:.1) and +(95:.1) ..  (.95,1)
+                        ..controls +(-20:.4) and +(35:.25) ..  (1,.47)
+                        ..controls +(-30:.3) and +(-20:.3) ..  (.75,0.05)%nút giao
+                        ..controls +(-120:.3) and +(-60:.2) ..  (.35,0)
+                        ..controls +(175:.2) and +(-160:.1) ..  (.2,0.2)
+                        ..controls +(-160:.1) and +(-70:.1) ..  (0,.3)
+                        ;}
+                    \draw \C;
+                    \fill[green] \C;
+                    \def\C1{ 
+                        (-1.15,.7)%nút giao
+                        ..controls +(-170:.4) and +(-170:.35) ..  (-1,1.15)
+                        ..controls +(140:.35) and +(110:.4) ..  (-.37,1.35)
+                        ..controls +(110:.25) and +(80:.3) ..  (-.15,1.35)
+                        ..controls +(80:.3) and +(95:.8) ..  (.55,1.1)
+                        ..controls +(80:.2) and +(95:.2) ..  (.8,1.1)
+                        ..controls +(20:.1) and +(95:.1) ..  (.95,1)
+                        ..controls +(-20:.4) and +(35:.25) ..  (1,.47)
+                        ..controls +(-50:.5) and +(-85:.6) ..  (.65,.55)% gần nút giao
+                        ..controls +(-160:.4) and +(-120:.4) ..  (0,.7)
+                        ..controls +(-150:.2) and +(-80:.4) ..  (-.63,.6)
+                        ..controls +(-140:.5) and +(-130:.4) ..  (-1.15,.7)
+                        ;}
+                    %\draw \C1;
+                    \fill[green] \C1;
+                    \def\G{ %Gân
+                        (-.8,.2)
+                        ..controls +(-35:.1) and +(130:.35) ..  
+                        (-.32,0)%nút giao
+                        ..controls +(-40:.1) and +(45:.35) ..  (-.42,-1.25)
+                        (-.32,0)%nút giao
+                        ..controls +(120:.1) and +(-45:.35) ..  (-.58,.45)
+                        (-.32,0)%nút giao
+                        ..controls +(80:.1) and +(-170:.35) ..  (-.05,.45)
+                        (-.28,.3)
+                        ..controls +(80:.1) and +(-60:.05) ..  (-.35,.55)
+                        %Gân phải
+                        (.45,-1.3)
+                        ..controls +(130:.6) and +(-160:.3) ..  (.6,0.35)
+                        (.37,0)
+                        ..controls +(35:.2) and +(-150:.1) ..  (.66,0.15)
+                        (.37,0)
+                        ..controls +(80:.2) and +(-40:.1) ..  (.18,0.4)
+                        (.31,0.25)
+                        ..controls +(80:.1) and +(-150:.1) ..  (.38,0.5)
+                        (.25,-0.15)
+                        ..controls +(-110:.05) and +(110:.05) ..  (.2,-0.5)%gân dọc
+                        (.2,-0.25)
+                        ..controls +(-110:.05) and +(110:.05) ..  (.17,-0.45)
+                        (-.2,-0.15)
+                        ..controls +(-70:.1) and +(110:.05) ..  (-.18,-0.5)
+                        (-.15,-0.15)
+                        ..controls +(-70:.1) and +(110:.05) ..  (-.15,-0.7)
+                        (-.05,-0.8)
+                        ..controls +(-80:.15) and +(-10:.15) ..  (-.3,-1.28)
+                        (-.1,-0.9)
+                        ..controls +(-110:.1) and +(20:.05) ..  (-.2,-1.1)
+                        (.1,-1)
+                        ..controls +(-50:.05) and +(120:.05) ..  (.15,-1.2)
+                        (.1,-1.15)
+                        ..controls +(-50:.05) and +(120:.05) ..  (.12,-1.2)
+                        (.15,-.75)
+                        ..controls +(-120:.1) and +(-140:.1) ..  (.22,-.9)
+                        ..controls +(70:.12) and +(120:.05) ..  (.18,-.9)
+                        ;}
+                    
+                    \draw \G;
+                    
+            }}
+            
+            \path
+            (2,0)pic[scale=.8]{cay}
+            ;
+            \path   (2,-1.1) coordinate (B)
+            (-2,-1.1) coordinate (H)
+            (-2,-.5) coordinate (A)
+            (2,1.25) coordinate (C)
+            ;
+            \node at (B) [below]{$B$};
+            \node at (H) [below]{$H$};
+            \node at (A) [left]{$A$};
+            \node at (C) [above]{$C$};
+            \node at (-2,-.8) [left]{$4$ m};
+            \node at (0,-1.1) [below]{$20$ m};
+            \draw (B)--(H)--(A)--(C) (A)--(B);
+            \draw    pic["$45^\circ$", draw=black, angle eccentricity=2.5, ex_mark=1,angle radius=.6cm, color=blue]
+            {angle=B--A--C};
+            \draw    pic[draw=black, angle radius=.2cm]
+            {right angle=A--H--B}; 
+            %           \node at (0,-1.5)[below]{Hình 27};  
+        \end{tikzpicture}
+    }
+    \loigiai{
+    Độ dài $AB=\sqrt{4^2+20^2}=4\sqrt{26}$.\\
+    Xét tam giác vuông $AHB$, ta có $\tan\widehat{ABH}=\dfrac{AH}{BH}=\dfrac{4}{20}=\dfrac{1}{5}$.\\
+    Ta có $\widehat{CBA}=90^\circ-\widehat{ABH}=78^\circ 41' \Rightarrow \widehat{ACB}=180^\circ-45^\circ-CBA=56^\circ 18'$.\\
+    Áp dụng định lí sin trong tam giác $ABC$, ta có\\ $\dfrac{BC}{\sin45^\circ}=\dfrac{AB}{\sin\widehat{ACB}} \Rightarrow BC=\dfrac{AB\sin45^\circ}{\sin\widehat{ACB}}=\dfrac{52}{3} \approx 17{,}3$.
+    }
+\end{ex}
+\begin{ex}%[0H5H3-6]
+    Cho hình vuông $ABCD$ có cạnh là $4$. Gọi $O$ là giao điểm của hai đường chéo. Tính $\left|\overrightarrow{OA}-\overrightarrow{CB}\right|$. (Kết quả làm tròn đến hàng phần trăm)
+    \shortans[]{$2{,}83$}
+    \loigiai{
+        \immini{
+        $\left|\overrightarrow{OA}-\overrightarrow{CB}\right|=\left|\overrightarrow{OA}+\overrightarrow{BC}\right|=\left|\overrightarrow{OA}+\overrightarrow{AD}\right|=\left|\overrightarrow{OD}\right|=\dfrac{BD}{2}=\dfrac{4\sqrt{2}}{2}=2\sqrt2 \approx 2{,}83$.
+        }{
+            \begin{tikzpicture}[scale=1]
+                \coordinate [label=left:$A$](A) at (0,0);
+                \coordinate [label=right:$C$](C) at (3,3);
+                \coordinate [label= left:$O$](O) at ($(A)! .5 ! (C)$);
+                \coordinate [label=above:$B$](B) at (0,3);
+                \coordinate [label=below:$D$](D) at (3,0);
+                \foreach \diem in {A,B,C,O,D}   \fill (\diem)circle(1pt);       
+                \draw[smooth](A)--(B)--(C)--(D)--(A)--(C) (D)--(B);
+                \draw (-0.2,1.5) node [above] {\footnotesize $a$};
+            \end{tikzpicture}
+        }
+    }
+\end{ex}
+\begin{ex}%[0H5H3-5] 
+    Cho hình bình hành $ABCD$. Gọi $M$, $N$ lần lượt là hai điểm nằm trên hai cạnh $AB$ và $CD$ sao cho $AB=3AM$, $CD=2CN$ và $G$ là trọng tâm tam giác $MNB$. Biết $\overrightarrow{AG}=m\overrightarrow{AB}+n\overrightarrow{AC}$, khi đó tính $m+n$. (Kết quả làm tròn đến hàng phần trăm)
+    \shortans[]{$0{,}61$} 
+    \loigiai{
+    Do $G$ là trọng tâm tam giác $MNB$ nên ta có
+    $$3\overrightarrow{AG}=\overrightarrow{AM}+\overrightarrow{AB}+\overrightarrow{AN}=\dfrac{1}{3}\overrightarrow{AB}+\overrightarrow{AB}+\overrightarrow{AC}+\overrightarrow{CN}=\dfrac{4}{3}\overrightarrow{AB}+\overrightarrow{AC}-\dfrac{1}{2}\overrightarrow{AB}=\dfrac{5}{6}\overrightarrow{AB}+\overrightarrow{AC}$$
+    Suy ra $\overrightarrow{AG}=\dfrac{5}{18}\overrightarrow{AB}+\dfrac{1}{3}\overrightarrow{AC}$ và $m=\dfrac{5}{18},n=\dfrac{1}{3} \Rightarrow m+n=\dfrac{11}{18} \approx 0{,}61$. 
+    }
+\end{ex}
+\begin{ex}%[0D6H4-3]
+    Trong $7$ tháng đầu năm, số sản phẩm sản xuất mỗi tháng của công ty X đều tăng trưởng khoảng $5\%$ so với tháng trước đó. Biết rằng, trong bảng dưới đây, số sản phẩm sản xuất của một tháng bị nhập sai. Hãy tìm tháng đó.
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline Tháng & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+            \hline Số sản phẩm sản xuất
+             & 500 & 525 & 551 & 569 & 606 & 636 & 668 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \shortans[]{$4$}
+    \loigiai{
+    Tỉ lệ phần trăm tăng thêm của số sản phẩm bán ra mỗi tháng được tính ở bảng dưới đây
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline Tháng & 2 & 3 & 4 & 5 & 6 & 7 \\
+            \hline Tỉ lệ \% tăng thêm so với tháng trước
+            & $5 \%$ & $4{,}95 \%$ & $3{,}4 \%$ & $6{,}5 \%$ & $4{,}95 \%$ & $5{,}03 \%$ \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Ta thấy tỉ lệ tăng của tháng $4$ và tháng $5$ đều khác xa $5$\%.\\
+    Do đó trong bảng số liệu đã cho, số sản phẩm của tháng $4$ là không chính xác.
+    }
+\end{ex}
+
+\begin{ex}%[0D6H2-3]
+    Bảng sau thống kê số lớp và số học sinh theo từng khối ở một trường Trung học phổ thông.
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline Khối & 10 & 11 & 12 \\
+            \hline Số lớp & 14 & 13 & 15 \\
+            \hline Số học sinh & 555 & 519 & 615 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    Hiệu trưởng trường đó cho biết sĩ số mỗi lớp trong trường đều không vượt quá $40$ học sinh. Biết rằng trong bảng trên có một khối lớp bị thống kê sai, hãy tìm khối lớp đó.
+    \shortans[]{$12$}
+    \loigiai{
+    Theo bảng thống kê đã cho, sĩ số tối đa của mỗi lớp theo từng khối cho ở bảng sau:
+        \begin{center}
+            \begin{tabular}{|c|c|c|c|}
+                \hline Khối & 10 & 11 & 12 \\
+                \hline Sĩ số tối đa mỗi khối & 560 & 520 & 600 \\
+                \hline
+            \end{tabular}
+        \end{center}
+        Vì Hiệu trưởng trường đó cho biết sĩ số mỗi lớp trong trường đều không vượt quá $40$ học sinh nhưng khi thống kê thì sĩ số khối $12$ vượt quá số học sinh tối đa ($600$ học sinh).\\
+        Theo thông tin hiệu trưởng cung cấp thì thông tin Khối $12$ đã bị thống kê sai. 
+    }
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-CTST_0-OTGK1_De02-KQ}

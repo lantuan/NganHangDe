@@ -1,0 +1,128 @@
+%\documentclass[12pt,a4paper,oneside]{book}
+%\usepackage[utf8]{vietnam}
+%\usepackage{amsmath,amssymb}
+%\usepackage{tikz}
+%\usepackage{pgfornament}
+%\usetikzlibrary{calc,snakes}
+%\usetikzlibrary{shapes}
+%\usetikzlibrary{shadings,fadings}
+%\begin{document}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[overlay,remember picture,transform shape]
+	%================================
+	\coordinate (A) at (current page.north west);
+	\coordinate (B) at (current page.north east);
+	\coordinate (C) at (current page.south east);
+	\coordinate (D) at (current page.south west);
+	\coordinate (AB) at (current page.north);
+	\coordinate (CD) at (current page.south);
+	\coordinate (AD) at (current page.west);
+	\coordinate (BC) at (current page.east);
+	\coordinate (G) at (current page.center);
+	%================================
+	\clip (A) rectangle (C);
+	%======================== PHỦ CẢ TRANG
+	\def\maunen{yellow!15} %màu nền cả trang
+	\def\mauchinh{red} %màu chính	
+	\fill[color=\maunen] (A) rectangle (C); %phủ cả trang
+	%--trang trí
+
+	%======================== DƯỚI
+	\begin{scope}
+		%-------Dưới 4
+		\fill[cyan] 
+			(C)--([yshift=9cm]C)
+			.. controls +(160:10) and +(-55:14.5) .. ([yshift=6.5cm]D)--(D)
+			--cycle
+			;
+		%-------Dưới 4
+		\fill[cyan!50] 
+			(C)--([yshift=9cm]C)
+			.. controls +(-177:10) and +(-52:10.5) .. ([yshift=4cm]D)--(D)
+			--cycle
+			;
+		%-------Dưới 3
+		\fill[cyan!20] 
+			(C)--([yshift=9cm]C)
+			.. controls +(-175:10) and +(-45:9.35) .. ([yshift=2.75cm]D)--(D)
+			--cycle
+			;
+		%-------Dưới 2
+		\fill[green!20] 
+			(C)--([yshift=9cm]C)
+			.. controls +(170:7.5) and +(25:10) .. ([xshift=-6.25cm]CD)
+			--cycle
+			;
+		%-------Dưới 1
+		\fill[green!50] 
+			(C)--([yshift=9cm]C)
+			.. controls +(-180:5.5) and +(35:10) .. ([xshift=-3cm]CD)
+			--cycle
+			;
+
+		\clip 
+			(C)--([yshift=9cm]C)
+			.. controls +(-180:5.5) and +(35:10) .. ([xshift=-3cm]CD)
+			--cycle
+			;
+		\fill[\mauchinh!30!black] (D) rectangle ([yshift=1.5cm]C);
+		\draw ([xshift=-2.5cm, yshift=0.75cm]C) node[\maunen,left]{\fontfamily{qag}\fontsize{14pt}{1pt}\selectfont\bfseries TÀI LIỆU LƯU HÀNH NỘI BỘ};
+	\end{scope}	
+	%======================== TRÊN
+	\begin{scope}
+		\fill[violet, draw=\maunen, line width =8pt] ([xshift=-1cm,yshift=1cm]A) rectangle ([yshift=-3cm,xshift=1cm]B);
+		\fill[cyan, draw=\maunen, rounded corners=10mm, line width=8pt] ([xshift=-1cm,yshift=1cm]A)--++(0,-4)--++(11,0)--++(45:3)--++(10,0)--([xshift=1cm,yshift=1cm]B)--cycle;
+		\draw ([xshift=-1.5cm, yshift=-2cm]B) node[\maunen,left]{\fontfamily{qag}\fontsize{15pt}{1pt}\selectfont\bfseries PHẠM LÊ DUY};
+%		
+		\draw ([xshift=1.5cm, yshift=-1.5 cm]A) node[red,right,scale=1.5]{\fontfamily{qag}\fontsize{13 pt}{1pt}\selectfont\bfseries TRƯỜNG THPT CHU VĂN AN};
+	\end{scope}
+	%============================= 
+	\coordinate (GGG) at ([xshift=2.1cm,yshift=-6cm]A); % điểm đặt chữ
+%	\draw ([xshift=0cm, yshift=0 cm]GGG) node[right,xscale=1.6]{\pgfornament[height=2cm,color=gray!5]{71}};
+	\def\n{0.05} %độ dày của bóng
+	\def\x{2.3}\def\y{2.3} %co-giãn chữ
+	\def\mauchu{\maunen} %màu chữ
+	\def\maubong{black}
+	\foreach \i in {0,0.05,...,\n}{
+		\foreach \j in {0,5,...,360}{
+			\node[text=\maubong,xscale=\x,yscale=\y, right] at ($(GGG)+(\j:\i)$){\fontfamily{qag}\fontsize{20}{0}\selectfont\bfseries BỘ ĐỀ ÔN TẬP};
+		}
+	}
+	\node[text=\mauchu,xscale=\x,yscale=\y, right] at (GGG) {\fontfamily{qag}\fontsize{20}{0}\selectfont\bfseries BỘ ĐỀ ÔN TẬP};
+	%----------
+	\node[text=blue,xscale=1.65,yscale=2.3, right] at ([yshift=-2.5cm]GGG) {\fontfamily{qag}\fontsize{20}{0}\selectfont\bfseries LỚP 10};
+	%=============================
+	%=============================MÔN TOÁN HỌC
+	\coordinate (GG) at ([xshift=-4.5cm,yshift=5.25cm]G); % điểm đặt chữ
+	\def\n{1} %độ dày của bóng
+	\def\gocnghieng{45} %nghiêng của bóng
+	\def\x{7.85}\def\y{7.5} %co-giãn chữ
+	\def\mauchu{red} %màu chữ
+	\def\maubong{black}
+	\foreach \i in {0,0.01,...,\n}{
+		\pgfmathsetmacro\rr{\n-\i}
+		\pgfmathsetmacro\domo{100*\i/\n}
+		\node[text=\maubong!\domo!white,xscale=\x,yscale=\y,right] at ($(GG)+(\gocnghieng:\rr)$){\fontfamily{qag}\fontsize{20}{0}\selectfont\bfseries Toán};
+	}
+	\node[text=\mauchu,xscale=\x,yscale=\y,right] at (GG) {\fontfamily{qag}\fontsize{20}{0}\selectfont\bfseries Toán};
+	%---------
+	\node[text=black,xscale=2.85,yscale=2,right] at ([xshift=0.65cm,yshift=-3.35cm]GG) {\fontfamily{qag}\fontsize{13}{0}\selectfont\bfseries THEO CẤU TRÚC MỚI};
+	%========================
+	%======================== CHỦ ĐỀ
+	\coordinate (diem) at ($([yshift=-0.5 cm,xshift=3cm]G)$);
+	\def\rr{2} %rộng khung
+	\def\dd{12.5} %dài khung
+	\def\vienNXB{blue} %màu viền
+	\def\nenNXB{green!30} %màu nền
+	\def\mauchuchinhNXB{red}
+	\def\mauchubongNXB{black}
+	\fill[\nenNXB] ($(diem)+(-0.5*\dd,-0.5*\rr)$) rectangle +(\dd,\rr);
+	\draw[draw=\vienNXB, line width =3pt] ($(diem)+(-0.5*\dd,0.5*\rr)$)--++(\dd,0);
+	\draw[draw=\vienNXB, line width =3pt] ($(diem)+(-0.5*\dd,-0.5*\rr)$)--++(\dd,0);
+	\foreach \i in {0,0.1,...,1}{
+		\draw ($(diem)+(\i pt,\i pt)$) node[ text=\mauchubongNXB,xscale=1.5,yscale=1.5]{\fontfamily{put}\fontsize{20}{0}\selectfont\bfseries  Năm Học: 2024 - 2025};
+	}
+	\draw (diem) node[text=\mauchuchinhNXB,xscale=1.5,yscale=1.5]{\fontfamily{put}\fontsize{20}{0}\selectfont\bfseries Năm Học: 2024 - 2025};
+
+	\end{tikzpicture}
+%\end{document}

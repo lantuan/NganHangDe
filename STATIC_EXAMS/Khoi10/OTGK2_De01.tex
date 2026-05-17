@@ -1,0 +1,122 @@
+\begin{bt}%[0D7H3-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    Giải phương trình
+    \begin{enumerate}
+        \item $\sqrt{-2 x^2+5 x-2}=\sqrt{x^2-5 x+6}$.
+        \item $\sqrt{3 x^2-10 x+1}+3 x-1=0$.
+    \end{enumerate}
+    \loigiai{
+        \begin{enumerate}
+            \item
+            Bình phương hai vế phương trình đã cho ta có
+            $$-2 x^2+5 x-2=x^2-5 x+6\Leftrightarrow3 x^2-10 x+8=0\Leftrightarrow \hoac{ & x=2 \\ & x=\dfrac{4}{3}.}$$
+            Thay vào phương trình ban đầu kiểm tra, ta thấy $x=2$ và $x=\dfrac{4}{3}$ thỏa mãn. \\
+            Vậy phương trình $\sqrt{-2 x^2+5 x-2}=\sqrt{x^2-5 x+6}$ có $2$ nghiệm $x=2$ và $x=\dfrac{4}{3}$.
+            \item
+            Bình phương hai vế phương trình đã cho ta có
+            $$3 x^2-10 x+1=1-6x+9x^2\Leftrightarrow 6 x^2-3x=0 \Leftrightarrow \hoac{ & x=0 \\ & x=\dfrac{1}{2}.}$$
+            Thay vào phương trình ban đầu kiểm tra, ta thấy $x=0$ thỏa mãn. \\
+            Vậy phương trình $\sqrt{3 x^2-10 x+1}+3 x-1=0$ có nghiệm $x=0$.
+        \end{enumerate}
+    }
+\end{bt}
+
+\begin{bt}%[0D7V1-2]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    Tìm tất cả các giá trị của tham số $m$ đề bất phương trình $-3 x^2-2(2 m+1) x+m(2 m+1)<0$ có nghiệm thỏa $\forall x \in \mathbb{R}$.
+    \loigiai{
+        Bất phương trình $-3 x^2-2(2 m+1) x+m(2 m+1)<0$ có nghiệm thỏa $\forall x \in \mathbb{R}$ khi và chỉ khi
+        \allowdisplaybreaks
+        \begin{eqnarray*}
+            \heva{& a<0 \\ & \Delta'<0 }
+            \Leftrightarrow \heva{& -1<0 \\ &(2 m+1)^2+3m(2m+1)<0 }\\
+           &\Leftrightarrow& 10m^2+7m+1<0\Leftrightarrow -\dfrac{1}{2}<m<-\dfrac{1}{5}.
+        \end{eqnarray*}
+        Vậy bất phương trình $-3 x^2-2(2 m+1) x+m(2 m+1)<0$ có nghiệm thỏa $\forall x \in \mathbb{R}$ khi $-\dfrac{1}{2}<m<-\dfrac{1}{5}$.
+    }
+\end{bt}
+
+
+
+\begin{bt}%[0D8V2-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    \begin{enumerate}
+        \item Từ các chữ số $0$, $2$, $3$, $5$, $6$, $7$, $8$, $9$ có thể lập được bao nhiêu số tự nhiên có $4$ chữ số khác nhau?
+        \item Từ các chữ số $0$, $1$, $2$, $4$, $5$, $9$ có thể lập được bao nhiêu số tự nhiên lẻ có bốn chữ số đôi một khác nhau và phải có mặt chữ số $5$.
+    \end{enumerate}
+    \loigiai{
+        \begin{enumerate}
+            \item Số có $ 4 $ chữ số có dạng $ \overline{abcd} $, trong đó $a$, $ b $, $ c $, $ d $ thuộc tập hợp $ \{0;2;3;5;6;7;8;9\} $ và $ a\ne 0 $.\\	
+            Chọn $ a $ có $ 7 $ cách chọn.\\
+            Chọn $ b $, $ c $, $ d $ từ $ 7$ số còn lại có $ \mathrm{A}^3_{7} $ cách.\\
+            Vậy tổng cộng có $7\cdot\mathrm{A}^3_{7}=1470$ số tự nhiên thỏa đề bài.
+            \item 
+            \begin{itemize}
+                \item Gọi $x=\overline{abcd}$ là số tự nhiên lẻ có bốn chữ số đôi một khác nhau từ các chữ số $0,1,2,4,5,9$.\\
+                $d \in \{1,5,9\}$ có $3$ cách chọn; $a (a\ne 0,a\ne d)$ có $4$ cách chọn và $b,c$ có $\mathrm{A}^2_4$ cách chọn.\\
+                Do đó $x$ có $3\cdot 4\cdot \mathrm{A}^2_4=144$ số thỏa yêu cầu.
+                \item Gọi $y=\overline{abcd}$ là số tự nhiên lẻ có bốn chữ số đôi một khác nhau từ các chữ số $0,1,2,4,9$.\\
+                 $d \in \{1,9\}$ có $2$ cách chọn; $a (a\ne 0,a\ne d)$ có $3$ cách chọn và $b,c$ có $\mathrm{A}^2_3$ cách chọn.\\
+                Suy ra $y$ có $2\cdot 3\cdot \mathrm{A}^2_3=36$ số thỏa yêu cầu.
+            \end{itemize}
+          Do đó có $144-36=108$ số tự nhiên lẻ có bốn chữ số đôi một khác nhau và phải có mặt chữ số $5$. 
+        \end{enumerate}
+    }
+\end{bt}
+
+\begin{bt}%[0H9H3-4]%[0H9H3-5]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    Trong mặt phẳng tọa độ $Oxy$ cho điểm $A(1 ;-2)$ và đường thẳng $d\colon 12 x+5 y-10=0$.
+\begin{enumerate}
+    \item Tính khoảng cách từ điểm $A$ đến đường thẳng $d$.
+    \item Tính góc giữa 2 đường thẳng $d_1\colon 3 x-4 y-12=0$ và $d_2\colon 4 x-3 y-11=0$
+\end{enumerate}
+    \loigiai{
+        \begin{enumerate}
+            \item Khoảng cách từ điểm $A(1 ;-2)$ đến đường thẳng $d\colon 12 x+5 y-10=0$ là
+            $$\mathrm{d}(A;d)=\dfrac{\left| 12\cdot 1+5 \cdot (-2)-10 \right|}{\sqrt{{12^2}+{5 ^2}}}=\dfrac{8}{13}.$$
+            \item Ta có $\cos(d_1,d_2)=\dfrac{| 3\cdot 4+(-4).(-3)|}{\sqrt{3^2+(-4)^2}\cdot\sqrt{4^2+(-3)^2}}=\dfrac{24}{25}$.
+            Suy ra $(d_1,d_2)\approx 16^\circ 15'$.
+        \end{enumerate}
+    }
+\end{bt}
+
+
+\begin{bt}%[0H9V4-2]%[0H9V3-6]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    Trong mặt phẳng tọa độ $Oxy$ cho $A(-5 ; 1)$ và $B(4 ;-3)$.
+    \begin{enumerate}
+        \item Viết phương trình đường tròn $(C)$ có tâm $A$ và tiếp xúc đường thẳng $\Delta\colon 2 x-3 y-1=0$.
+        \item Viết phương trình đường trung trực của đoạn $AB$.
+        \item Tìm điểm $M$ thuộc đường thẳng $d\colon \heva{&x=-1+4 t  \\ &y=2-5 t }$ sao cho $M$ cách đều hai đường thẳng $d_1\colon 2 x+5 y-5=0$ và
+        $d_2\colon 5 x-2 y-3=0$.
+    \end{enumerate}
+    \loigiai{
+        \begin{enumerate}
+            \item $(C )$ có bán kính $R=\mathrm{d}(A,\Delta )=\dfrac{| 2\cdot (-5)-3\cdot 1-1|}{\sqrt{2^2+(-3 )^2}}=\dfrac{14\sqrt{13}}{13}$.\\
+            Do đó, $(C)$ có phương trình $(x+5)^2+(y-1)^2=\dfrac{196}{13}$.
+            \item Gọi $I$ là trung điểm của $AB$. Suy ra $I\left(-\dfrac{1}{2};-1\right)$.\\
+            Phương trình đường trung trực của đoạn $AB$ đi qua $I$ nhận $\vec{AB}=(9;-4)$ làm véc-tơ pháp tuyến là
+                  $$9\left(x+\dfrac{1}{2}\right)-4(y+1)=0\Leftrightarrow 18x-8y+1=0.$$
+                  \item Vì $M\in d$ nên tọa độ $M$ có dạng $M\left( -1+4t;2-5t \right)$.\\
+                  Khoảng cách từ $M$ đến $d_1$ bằng khoảng cách từ $M$ đến $d_2$ nên ta có
+                  \begin{eqnarray*}
+                      \mathrm{d}\left( M,d_1 \right)=\mathrm{d}\left( M;d_2 \right)&\Leftrightarrow& \dfrac{\left| 2( -1+4t)+5(2-5t )-5 \right|}{\sqrt{29}}=\dfrac{\left|  5( -1+4t)-2(2-5t )-3 \right|}{\sqrt{29}}\\
+                      &\Leftrightarrow&
+                      \hoac{&-17t+3=\left( 30t-12\right) \\ &-17t+3=-\left( 30t-12\right)} \\
+                      &\Leftrightarrow &
+                      \hoac{&t=\dfrac{15}{47} \\&t=\dfrac{9}{13}}\Rightarrow \hoac{&M\left( \dfrac{13}{47};\dfrac{19}{47} \right)\\&M\left( \dfrac{23}{13};-\dfrac{19}{13}  \right).}
+                  \end{eqnarray*}
+        \end{enumerate}
+    }
+\end{bt}
+
+\begin{bt}%[0H9V4-3]%[Dự án đề kiểm tra Toán 11 GHKII NH23-24- Hieu Phan]%[THPT Bà Điểm - Tp HCM]
+    Viết phương trình tiếp tuyến của đường tròn $(C)\colon x^2+y^2-6 x+3 y-4=0$ biết tiếp tuyến song song với đường thẳng $d\colon 5 x-2 y+11=0$.
+    \loigiai{
+        Đường tròn $(C)\colon\heva{&\text{tâm }I\left(3;-\dfrac{3}{2}\right)\\&\text{bán kính }R=\sqrt{3^2+\left(-\dfrac{3}{2}\right)^2+4}=\dfrac{\sqrt{61}}{2}.}$\\
+        Gọi $\Delta$ là phương trình tiếp tuyến cần tìm.\\
+        Do $\Delta \parallel d$ nên phương trình $\left(\Delta  \right)$ có dạng $5x-2y+c=0,~\left(c\ne 11 \right)$.\\
+        Do $\Delta$ tiếp xúc với $\left(C \right)$ nên
+        \begin{eqnarray*}
+            \mathrm{d}(I,d) =R &\Leftrightarrow& \dfrac{\left| 3\cdot5-2\cdot\left(-\dfrac{3}{2}\right)+c \right|}{\sqrt{29}}=\dfrac{\sqrt{61}}{2} \\
+        & \Leftrightarrow &| 18+c |=\dfrac{\sqrt{1769}}{2} \Leftrightarrow \hoac{&18+c=\dfrac{\sqrt{1769}}{2} \\&18+c=-\dfrac{\sqrt{1769}}{2}}\Leftrightarrow\hoac{&c=\dfrac{\sqrt{1769}}{2}-18\\&c=-\dfrac{\sqrt{1769}}{2}-18.}
+      \end{eqnarray*} 
+        Vậy phương trình tiếp tuyến là $5x-2y+\dfrac{\sqrt{1769}}{2}-18=0$ và $5x-2y-\dfrac{\sqrt{1769}}{2}-18=0$.
+    }
+\end{bt}

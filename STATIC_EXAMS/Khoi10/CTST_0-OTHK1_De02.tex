@@ -1,0 +1,611 @@
+\subsection{Đề 02}
+\caulc
+\Opensolutionfile{ans}[ans/ans-OTHKI-DE2-LC]
+\begin{ex}%[0D3N2-4]
+\immini{Cho đồ thị hàm số bậc hai như hình vẽ bên.
+	Tập nghiệm của bất phương trình $f(x)\geq 0$ là
+	\choice
+	{\True $(-\infty;1]\cup [3;+\infty)$}
+	{$[1;3]$}
+	{$(1;3)$}
+	{$(-\infty;1)\cup (3;+\infty)$}
+}{\begin{tikzpicture}[line cap=butt,line join=miter,>=stealth]
+		\tikzset{declare function={xmin=-1;xmax=5;ymin=-1.5;ymax=4;
+				f(\x)=1*(\x)^2-4*(\x)+3;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(-3:9pt)},font=\normalsize]{$ y $};
+		\draw (1,0)node[below left]{$1$} (3,0)node[below right]{$3$} ;
+		\fill (0,0) node[shift={(225:13pt)},font=\normalsize]{$ O $};
+		\node[left] at (4,4) {$f(x)$};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}}
+\loigiai{
+	Theo đồ thị ta có $f(x)\geq 0\Leftrightarrow x\in (-\infty;1]\cup [3;+\infty)$.
+}
+\end{ex}
+%Câu 2
+\begin{ex}%[0D3N2-2]
+Bảng biến thiên của hàm số $y=-2x^2+4x+1$ là bảng nào sau đây?
+\choice[2]
+{\begin{tikzpicture}
+		\tkzTabInit[nocadre=true,lgt=1.2,espcl=2.5,deltacl=0.6]
+		{$x$/0.6,$y$/2}
+		{$-\infty$,$1$,$+\infty$}
+		\tkzTabVar{+/$+\infty$,-/$3$,+/$+\infty$}
+	\end{tikzpicture}
+}
+{\True \begin{tikzpicture}
+		\tkzTabInit[nocadre=true,lgt=1.2,espcl=2.5,deltacl=0.6]
+		{$x$/0.6,$y$/2}
+		{$-\infty$,$1$,$+\infty$}
+		\tkzTabVar{-/$-\infty$,+/$3$,-/$-\infty$}
+\end{tikzpicture}}
+{\begin{tikzpicture}
+		\tkzTabInit[nocadre=true,lgt=1.2,espcl=2.5,deltacl=0.6]
+		{$x$/0.6,$y$/2}
+		{$-\infty$,$2$,$+\infty$}
+		\tkzTabVar{-/$-\infty$,+/$1$,-/$-\infty$}
+\end{tikzpicture}}
+{\begin{tikzpicture}
+		\tkzTabInit[nocadre=true,lgt=1.2,espcl=2.5,deltacl=0.6]
+		{$x$/0.6,$y$/2}
+		{$-\infty$,$2$,$+\infty$}
+		\tkzTabVar{+/$+\infty$,-/$1$,+/$+\infty$}
+\end{tikzpicture}}
+\loigiai{
+	Parabol $y=-2x^2+4x+1$ có toạ độ đỉnh $I(1;3)$ và có $a=-2<0$ nên hướng bề lõm quay xuống dưới.
+}
+\end{ex}
+%Câu 3
+\begin{ex}%[0H5N1-1]
+Cho tam giác $ABC$.  Có bao nhiêu vectơ khác vectơ-không có điểm đầu và điểm cuối là các đỉnh $A$, $B$, $C$?
+\choice
+{$3$} 
+{\True $6$} 
+{$4$} 
+{$9$} 
+\loigiai{
+Các vectơ khác vectơ-không có điểm đầu và điểm cuối là các đỉnh $A$, $B$, $C$ là $\vv{AB}$, $\vv{BA}$, $\vv{AC}$, $\vv{CA}$, $\vv{BC}$, $\vv{CB}$.\\
+Vậy có $6$ vectơ thỏa yêu cầu đề bài.
+}
+\end{ex}
+%Câu 4
+\begin{ex}%[0H5N2-2]
+Cho ba điểm phân biệt $A$, $B$, $C$.  Mệnh đề nào sau đây \textbf{đúng}?
+\choice
+{$AB+BC=AC$}
+{\True $\vv{AB}+\vv{BC}+\vv{CA}=\vv{0}$}
+{$\vv{AB}+\vv{AC}=\vv{BC}$}
+{$\vv{AB}-\vv{BC}=\vv{AC}$}
+\loigiai{
+Ta có $\vv{AB}+\vv{BC}+\vv{CA}=\vv{AC}+\vv{CA}=\vv{AA}=\vv{0}$.
+}
+\end{ex}
+%Câu 5
+\begin{ex}%[0H5N3-1]
+Cho hình bình hành $ABCD$. Véc-tơ nào bằng với $\vec{AB}$?
+\choice
+{$\vec{CD}$}
+{\True $\overrightarrow{DA}$}
+{$\overrightarrow{DC}$}
+{$\vec{AC}$}
+\loigiai{
+	\immini{Ta có $\vec{AB}=\vec{DA}$.}
+	{\begin{tikzpicture} 
+			\foreach \x/\y/\t in {0/0/A,3/0/B,4/1/C}{
+			\path (\x,\y) coordinate (\t);
+		}
+		\path 
+		
+		($(A)+(C)-(B)$) coordinate (D);
+		\draw (A)--(B)--(C)--(D)--cycle;
+		\foreach \t/\g in {A/180,B/0,C/0,D/180}{
+			\draw[fill=black] (\t) circle (1pt) node[shift={(\g:7pt)},font=\scriptsize]{$ \t $};
+		}
+	\end{tikzpicture}}
+}
+\end{ex}
+%Câu 6
+\begin{ex}%[0H5N4-4]
+Cho ba điểm $A$, $B$, $C$ phân biệt. Khẳng định nào sau đây đúng?
+\choice
+{\True $\overrightarrow{AB}+\overrightarrow{CA}=\overrightarrow{CB}$}
+{$\vec{AB}+\vec{AC}=\vec{BC}$}
+{$\overrightarrow{CA}-\overrightarrow{BA}=\overrightarrow{BC}$}
+{$\overrightarrow{AB}-\overrightarrow{BC}=\overrightarrow{CA}$}
+\loigiai{
+	Ta có $\overrightarrow{AB}+\overrightarrow{CA}=\overrightarrow{CA}+\overrightarrow{AB}=\overrightarrow{CB}$.
+}
+\end{ex}
+%Câu 7 
+\begin{ex}%[0H5H4-1]
+Cho tam giác $ABC$ vuông tại $A$ có $\widehat{B}=45^\circ$, $AC=4$.  Gọi $M$ là trung điểm của $BC$. Giá trị của biểu thức $P=\vv{AM}\cdot \vv{AC}$ bằng
+\choice
+{$32\sqrt{2}$} 
+{ $32$} 
+{$16\sqrt{2}$} 
+{\True $16$} 
+\loigiai{
+\begin{center}
+	\begin{tikzpicture}[declare function={r= 3;}]
+		\path
+		(0,r) coordinate (A)
+		(-r,0) coordinate (B)
+		(r,0) coordinate (C)
+		($(B)!0.5!(C)$) coordinate (M)
+		;
+		
+		\path pic[draw,angle radius=5pt]{right angle= B--A--C};
+		\pic["$45^\circ$",draw,angle radius=5mm,angle eccentricity=1.6]{angle=C--B--A};
+		\foreach \x/\y in {A/B,A/C}{
+			\path (\x)--(\y) node[midway,sloped]{\tikz{\draw (-90:1pt)--(90:1pt);}};
+		}
+		
+		\draw (A)--(B)--(C)--cycle (A)--(M);
+		
+		\foreach \t/\g in {A/90,B/-90,C/-90,M/-90}{
+			\draw[fill=black] (\t) circle (1pt) node[shift={(\g:7pt)},font=\scriptsize]{$ \t $};
+		}
+	\end{tikzpicture}
+\end{center}
+Xét tam giác $ABC$ vuông tại $A$ có $\widehat{B}=45^\circ\Rightarrow \widehat{C}=45^\circ$.\\
+Mặt khác $M$ là trung điểm của $BC$ nên $AM=MC=\dfrac{BC}{2}$ và $AM\perp BC $.\\
+Do đó tam giác $MAC$ vuông cân tại $M$ và  $MA=MC=AC\sqrt{2}=4\sqrt{2}$.\\
+Khi đó 
+\begin{align*}
+P=\vv{AM}\cdot \vv{AC}
+&=\left|\vv{AM} \right|\cdot \left|\vv{AC}\right|\cdot \cos \left(\vv{AM},\vv{AC}\right)\\
+&=4\sqrt{2}\cdot 4\cdot \cos 45^\circ=16.
+\end{align*}
+}
+\end{ex}
+%Câu 8
+\begin{ex}%[0D6N1-3]
+Khi sử dụng máy tính bỏ túi với $10$ chữ số thập phân ta được $\sqrt{10}=3{,}162277660$. Giá trị gần đúng của $\sqrt{10}$ chính xác đến hàng phần trăm là
+\choice
+{$3{,}17$}
+{\True $3{,}16$}
+{$3{,}15$}
+{$3{,}10$}
+\loigiai{
+Giá trị gần đúng của $\sqrt{10}=3{,}162277660$ chính xác đến hàng phần trăm là $3{,}16$.
+}
+\end{ex}
+%Câu 9
+\begin{ex}%[0D6N2-3]
+Tâm ghi lại số liệu từ trang web của Tổng cục thống kê bảng lượng mưa trung bình các tháng trong năm $2020$ tại một trạm quan trắc đặt ở thành phố Đà Nẵng.
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+	Tháng&$1$&$2$&$3$&$4$&$5$&$6$&$7$&$8$&$9$&$10$&$11$&$12$\\
+	\hline
+	Lượng mưa (mm)&$50$&$40$&$55$&$60$&$120$&$180$&$90$&$150$&$170$&$200$&$210$&$45$\\
+	\hline
+\end{longtable}
+Bạn Tâm đã ghi nhầm lượng mưa của một tháng trong bảng bên. Theo em, bạn Tâm đã ghi nhầm số liệu của tháng mấy?
+\choice
+{Tháng $11$}
+{\True Tháng $7$}
+{Tháng $12$}
+{Tháng $1$}
+\loigiai{
+Tháng $7$ có lượng mưa $90$ mm, thấp bất thường so với các tháng khác trong mùa mưa (từ tháng $6$ đến tháng $11$). Khả năng cao Tâm đã ghi nhầm lượng mưa tháng $7$. Đáp án đúng là tháng $7$.
+}
+\end{ex}
+%Câu 10
+\begin{ex}%[0D6N3-3]
+Cho dãy số liệu thống kê $33, 22, 25, 27, 28, 31, 20$. Khi đó trung vị là
+\choice
+{\True $27$}
+{$22$}
+{$28$}
+{$25$}
+\loigiai{
+Mẫu số liệu sắp xếp theo thứ tự không giảm $20, 22, 25, 27, 28, 31, 33$.\\
+Cỡ mẫu $n=7$ nên trung vị của mẫu số liệu là $M_e=x_4=27$.
+}
+\end{ex}
+%Câu 11
+\begin{ex}%[0D6N4-4]
+Theo kết quả thống kê điểm thi giữa kỳ $2$ môn vật lý khối $11$ của một trường THPT, người ta tính được phương sai của bảng thống kê đó là $S_x^2 = 0{,}804$. Độ lệch chuẩn của bảng thống kê đó bằng
+\choice
+{\True $0{,}897$}
+{$0{,}789$}
+{$0{,}857$}
+{$0{,}899$}
+\loigiai{
+Độ lệch chuẩn $S_x=\sqrt{S_x^2}=\sqrt{0{,}804}\approx 0{,}897$.
+}
+\end{ex}
+%Câu 12
+\begin{ex}%[0D6H4-4]
+Bảng số liệu sau cho biết thời gian làm bài tính bằng phút của $30$ học sinh.
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline
+	Thời gian&$2$&$4$&$6$&$8$&$10$&$12$&$14$&$16$&$18$&\\
+	\hline
+	Số học sinh&$1$&$2$&$3$&$4$&$5$&$6$&$4$&$3$&$2$&$N=30$\\
+	\hline
+\end{longtable}
+Phương sai của mẫu số liệu thống kê trên bằng
+\choice
+{$12{,}64$}
+{$14{,}28$}
+{\True $17{,}02$}
+{$11{,}48$}
+\loigiai{
+Thời gian làm bài trung bình của $30$ học sinh
+$$\overline{x}=\dfrac{1}{30}(2\cdot 1+4\cdot 2+6\cdot 3+8\cdot 4+10\cdot 5+12\cdot 6+14\cdot 4+16\cdot 3+18\cdot 2)=10{,}7333.$$
+Phương sai của mẫu số liệu \\$S^2=\dfrac{1\cdot 2^2+2\cdot4^2+3\cdot6^2+4\cdot8^2+5\cdot10^2+6\cdot 12^2+4\cdot 14^2+3\cdot16^2+2\cdot18^2}{30}-10{,}7333^2$\\$\approx 17{,}02$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-OTHKI-DE2-LC}
+\Opensolutionfile{ans}[ans/ans-OTHKI-DE2-DS]
+\cauds
+%Câu 1
+\begin{ex}%[0H5N1-3]
+Cho tam giác $ABC$. Gọi $D$, $E$, $F$ lần lượt là trung điểm của các cạnh $AB$, $BC$ và $CA$. Khi đó
+\choiceTF
+{\True $EF$ là đường trung bình của tam giác $ABC$}
+{\True $\vv{FE}$, $\vv{DB}$ cùng hướng với vectơ $\vv{AD}$}
+{$\vv{BE}=\vv{FD}$}
+{\True $\vv{DE}$ có các vectơ đối là $\vv{ED}$, $\vv{CF}$, $\vv{FA}$}
+\loigiai{
+\begin{center}
+\begin{tikzpicture}[scale=1,line join=round,font=\footnotesize ,line cap=round,thick]
+\coordinate (A) at (0,3);
+\coordinate (B) at (-2,0);
+\coordinate (C) at (3,0);
+\path ($(B)!0.5!(C)$) coordinate (E) ;
+\path ($(A)!0.5!(C)$) coordinate (F) ;
+\path ($(A)!0.5!(B)$) coordinate (D) ;
+\draw(A)--(B)--(C)--cycle (E)--(F)--(D)--cycle;
+\foreach \i/\g in {A/90,B/-90,C/-90,E/-90,F/45,D/120}{\draw[fill=black](\i) circle (1pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+\begin{itemchoice}
+\itemch{\bf Đúng.}\\
+Ta có $E$, $F$ lần lượt là trung điểm của $BC$, $AC$ nên $EF$ là đường trung bình của tam giác $ABC$.
+\itemch{\bf Đúng.}\\
+Ta có $FE\parallel DB\parallel AD$ và ba vectơ này cùng chiều nên $\vv{FE}$, $\vv{DB}$ cùng hướng với vectơ $\vv{AD}$.
+\itemch{\bf Sai.}\\
+Do $\vv{BE}$ và $\vv{FD}$ ngược hướng.\\
+Do đó $\vv{BE}=-\vv{FD}$.
+\itemch{\bf Đúng.}\\
+$\vv{DE}$ có các vectơ đối là $\vv{ED}$, $\vv{CF}$, $\vv{FA}$.
+\end{itemchoice}
+\end{center}
+}
+\end{ex}
+%Câu 2
+\begin{ex}%[0D3H2-2]
+Cho hàm số $y=x^2-4x+1$ có đồ thị $(P)$. Khi đó
+\choiceTF
+{\True Tọa độ đỉnh của $(P)$ là $I(2;-3)$}
+{Bề lõm của $(P)$ hướng xuống}
+{Hàm số đã cho đồng biến trên khoảng $(-\infty;2)$ và nghịch biến trên khoảng $(2;+\infty)$}
+{\True Giá trị nhỏ nhất của hàm số $y_{\min}=3$ khi $x=2$}
+\loigiai{
+\begin{itemchoice}
+\itemch{\bf Đúng}.\\
+Hoành độ đỉnh $x=-\dfrac{b}{2a}=-\dfrac{-4}{2}=2\Rightarrow y=2^2-4\cdot 2+1=-3$.\\
+Tọa độ đỉnh $I(2;-3)$.
+\itemch{\bf Sai}.\\
+Do $a=1>0$ nên bề lõm  của $(P)$ hướng lên.
+\itemch{\bf Sai}.\\
+Ta có bảng biến thiên
+\begin{center}
+	\begin{tikzpicture}
+		\tkzTabInit[espcl=2.5,lgt=1.5]
+		{$x$/0.7,$y$/2.1}
+		{$-\infty$,$2$,$+\infty$}
+		\tkzTabVar{+/$+\infty$,-/$3$,+/$+\infty$}
+	\end{tikzpicture}
+\end{center}
+Từ bảng biên thiên ta thấy\\
+Hàm số đã cho đồng biến trên khoảng $(2;+\infty)$ và nghịch biến trên khoảng $(-\infty;2)$
+\itemch{\bf Đúng}.\\
+Ta có bảng biến thiên
+\begin{center}
+		\begin{tikzpicture}
+			\tkzTabInit[espcl=2.5,lgt=1.5]
+			{$x$/0.7,$y$/2.1}
+			{$-\infty$,$2$,$+\infty$}
+			\tkzTabVar{+/$+\infty$,-/$3$,+/$+\infty$}
+		\end{tikzpicture}
+	\end{center}
+Từ bảng biên thiên ta thấy $y_{\min}=3$ khi $x=2$.
+\end{itemchoice}
+}
+\end{ex}
+%Câu 3
+\begin{ex}%[0H5H3-2]
+Cho tam giác $ABC$ có trọng tâm $G$. Gọi $M$, $N$ lần lượt là trung điểm của $AB$ và $AC$. Khi đó
+\choiceTF
+{$\vv{GN}=\dfrac{1}{2}\vv{GB}$}
+{\True $\vv{GM}=-\dfrac{1}{2}\vv{GC}$}
+{$\vv{GA}=\vv{GM}+\vv{GN}$}
+{$\vv{AB}+\vv{AC}=\vv{GM}+\vv{GN}$}
+\loigiai{
+\begin{center}
+		\begin{tikzpicture}[declare function={a = 5; goc = 65; b = 0.65*a;},line join=round,font=\footnotesize ,line cap=round]
+			\path
+			(goc:b) coordinate (A)
+			(0,0) coordinate (B)
+			(a,0) coordinate (C)
+			($(A)!0.5!(B)$) coordinate (M)
+			($(A)!0.5!(C)$) coordinate (N)
+			(intersection of B--N and C--M) coordinate (G)
+			;			
+			\draw (A)--(B)--(C)--cycle (B)--(N) (C)--(M);			
+			\foreach \t/\g in {A/90,B/-90,C/-90,M/180,N/0,G/-90}{
+				\draw[fill=black] (\t) circle (1pt) node[shift={(\g:7pt)},font=\scriptsize]{$ \t $};
+			}
+		\end{tikzpicture}
+\end{center}
+\begin{itemchoice}
+	\itemch {\bf Sai}.\\
+	Ta có $\vv{GN}=-\dfrac{1}{2}\vv{GB}$.
+	\itemch {\bf Đúng}.\\
+	Ta có $\vv{GM}=-\dfrac{1}{2}\vv{GC}$
+\itemch {\bf Sai}.\\
+Ta có $\vv{GM}+\vv{GN}=-\dfrac{1}{2}\vv{GC}-\dfrac{1}{2}\vv{GB}=-\dfrac{1}{2}\left(\vv{GB}+\vv{GC}\right)=-\dfrac{1}{2}\left(-\vv{GA}\right)=\dfrac{1}{2}\vv{GA}$.
+\itemch {\bf Sai.}\\
+Ta có
+\allowdisplaybreaks
+\begin{eqnarray*}
+	\vv{AB}+\vv{AC}&=&\vv{AG}+\vv{GB}+\vv{AG}+\vv{GC}
+	\\
+	&=&2\vv{AG}+\vv{GB}+\vv{GC}
+	\\
+	&=&2\vv{AG}-\vv{GA}
+	\\
+	&=&3\vv{AG}	
+\end{eqnarray*}
+Mà $\vv{GM}+\vv{GN}=-\dfrac{1}{2}\vv{GC}-\dfrac{1}{2}\vv{GB}=-\dfrac{1}{2}\left(\vv{GB}+\vv{GC}\right)=-\dfrac{1}{2}\left(-\vv{GA}\right)=-\dfrac{1}{2}\vv{AG}$.\\
+Suy ra $\vv{AB}+\vv{AC}= -\dfrac{3}{2}\left(\vv{GM}+\vv{GN}\right)$.
+\end{itemchoice}
+}
+\end{ex}
+
+\begin{ex}%[0D6H4-4]
+Mẫu số liệu dưới đây thống kê số giờ học thêm của $10$ học sinh trong một tuần:
+  $2, 3, 4, 4, 5, 6, 6, 7, 8, 15$. Khi đó
+\choiceTF
+{\True Số giờ học thêm trung bình của $10$ học sinh trên là  $6$ giờ}
+{Mốt của mẫu số liệu trên bằng $15$}
+{\True Giá trị ngoại lệ của mẫu số liệu trên là $15$}
+{\True Độ lệch chuẩn về số giờ học thêm của $10$ học sinh trên là 2{,}5 giờ}
+\loigiai{
+\begin{itemchoice}
+\itemch{\bf Đúng}.\\
+Số giờ học thêm trung bình của $10$ học sinh là \[\overline{x}=\dfrac{2+3+4+4+5+6+6+7+8+15}{10}=6\,(\text{giờ}).\]
+\itemch{\bf Sai}.\\
+Mốt là giá trị xuất hiện nhiều nhất trong tập dữ liệu. Trong mẫu số liệu này, giá trị $4$ và  $6$ đều xuất hiện hai lần. Mốt không phải là $15$, nên khẳng định này là sai.
+\itemch{\bf Đúng.}\\
+Sắp xếp mẫu số liệu theo thứ tự không giảm $2, 3, 4, 4, 5, 6, 6, 7, 8, 15$.\\
+Cỡ mẫu $n=10$.\\
+Tứ phân vị thứ nhất là $Q_1=x_3=4$.\\
+Tứ phân vị thứ ba là $Q_3=x_8=7$.\\
+Khoảng tứ phân vị $\Delta Q=Q_3-Q_1=7-4=3$.\\
+Ta có $\Delta Q-1{,}5\cdot Q_1=3-1{,}5\cdot 4=-3$ và $\Delta Q+1{,}5\cdot Q_3=3+1{,}5\cdot 7=13{,}5$.\\
+Ta thấy $15>13{,}5$ nên $15$ là giá trị ngoại lệ.
+\itemch{\bf Đúng.}\\
+Phương sai $S^2=\dfrac{2^2+3^2+4^2+4^2+5^2+6^2+6^2+7^2+8^2+15^2}{10}-6^2=12$.\\
+Độ lệch chuẩn $S=\sqrt{S^2}=\sqrt{12}\approx 3{,}46$.
+\end{itemchoice}
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-OTHKI-DE2-DS}
+\Opensolutionfile{ans}[ans/ans-OTHKI-DE2-KQ]
+\caukq
+\begin{ex}%[0D3V2-6]
+\immini{Một viên bi được ném xiên từ vị trí $A$  cách mặt đất $3$ m theo quỹ đạo dạng parabol như hình vẽ bên. Tìm khoảng cách từ vị trí $E$ đến vị trí $F$, biết vị trí $E$ là nơi viên bi rơi xuống chạm mặt đất (kết quả làm tròn đến số thập phân thứ hai).}
+{
+\begin{tikzpicture}[scale=1,line join=round,font=\footnotesize,line cap=round,>=stealth,yscale=0.7]
+\draw[->] (0,0)--(3,0) node[below] {$x$};
+\draw[->] (0,0)--(0,8) node[left] {$y$};
+\draw (0,0) node [below left] {$O$};
+\foreach \x/\nx in {1/1}
+\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+\foreach \y/\ny in {2/2,3/3,4/4,5/5,6/6,7/7}
+\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+\draw[dashed,thin](1,0)--(1,7)--(0,7);
+\begin{scope}
+\clip (-1,-1) rectangle (3,8);
+\draw[samples=200,domain=0:2.32,smooth,variable=\x] plot (\x,{-4*(\x)^2+8*(\x)+3});
+\path (0,3)node[right]{$A$};
+\path (1,7)node[above]{$C$};
+\path(2.32,0)node[below]{$E$};
+\path(0,0)node[above right]{$F$};
+\fill  (0,0)circle (1.5pt) (1,7)circle (1.5pt) (0,3)circle (1.5pt) (2.32,0)circle (1.5pt);
+\end{scope}
+\end{tikzpicture}
+}
+\shortans[6]{$2{,}32$}
+\loigiai{
+Đặt hệ trục tọa độ $Oxy$ sao cho điểm $F$ trùng với gốc tọa độ $O$ và điểm $A$ thuộc tia $Oy$, điểm $E$ thuộc tia $Ox$.\\
+Gọi parabol có dạng $(P)\colon y=ax^2+bx+c\,(a\ne 0)$.\\
+Ta có $A(0;3)\in (P)\Rightarrow c=3$.\\
+Hoành độ đỉnh $x=-\dfrac{b}{2a}=1\Rightarrow 2a+b=0.\,(1)$\\
+$C(1,7)\in (P)\Rightarrow a+b+c=7\Rightarrow a+b=4.\,(2)$\\
+Từ $(1)$ và $(2)\Rightarrow a=-4, b=8$.\\
+Vậy $(P)\colon y=-4x^2+8x+3$.\\
+Ta có $E(x,0)\in (P)\Rightarrow -4x^2+8x+3=0\Rightarrow \hoac{&x=\dfrac{2+\sqrt{7}}{2}\\&x=\dfrac{2-\sqrt{7}}{2}.}$\\
+Do $E$ thuộc tia $Ox$ nên $x>0\Rightarrow x=\dfrac{2+\sqrt{7}}{2}\approx 2{,}32$.\\
+Vậy $EF\approx 2{,}32$.
+}
+\end{ex}
+%Câu 2
+\begin{ex}%[0H4V3-2]
+\immini{Hai tàu hỏa cùng rời ga cùng một lúc. Một chiếc tàu chạy với vận tốc $90$ km/h theo hướng lệch về phía Đông $20^\circ$ so với hướng Bắc. Chiếc tàu còn lại chạy với vận tốc $120$ km/h theo hướng lệch về phía Đông $40^\circ$ so với hướng Nam. Hỏi hai tàu cách nhau bao xa sau $2$ giờ chạy? (kết quả làm tròn đến hàng đơn vị).
+}{\begin{tikzpicture}[declare function={r = 2;}]
+		\coordinate[label=above:Bắc] (B) at (0,r);
+		\coordinate[label=below:Nam] (N) at (0,-r);
+		\coordinate[label=right:Đông] (D) at (r,0);
+		\coordinate[label=left:Tây] (T) at (-r,0);
+		\coordinate[label=below left:$O$] (O) at (0,0);
+		\coordinate (M) at ($(O)!0.5!20:(D)$);
+		\coordinate (Q) at ($(O)!0.8!-40:(D)$);
+		\draw[thick,<->] (N)--(B);
+		\draw[thick,<->] (D)--(T);
+		\draw[thick,->] (O)--(M)node[above right]{$90$\,km/h};
+		\draw[thick,->] (O)--(Q) node[shift={(-0.2,0)},below]{$120$\,km/h};
+	\end{tikzpicture}
+}
+\shortans[6]{$216$}
+\loigiai{
+	Tàu $1$:
+	\begin{itemize}
+		\item  Tàu $1$ lệch về phía Đông $20^\circ$ so với hướng Bắc.
+		\item Tàu $2$ lệch về phía Đông $40^\circ$ so với hướng Nam.
+		\item Góc giữa hai hướng chuyển động của hai tàu là $\alpha=180^\circ-(20^\circ+40^\circ)=120^\circ$.
+		\item Quãng đường tàu $1$ đi được $ s_1=90\cdot 2=180$ km.
+		\item Quãng đường tàu $2$ đi được $ s_2=120\cdot 2=240$ km.
+	\end{itemize}
+	\immini{
+		Dựa vào dữ kiện bài toán, ta có $OM=180$, $OQ=240$ và $\widehat{MOQ}=20^\circ +40^\circ=60^\circ$.\\
+		Áp dụng định lí côsin cho tam giác $MOQ$, ta có
+		\begin{eqnarray*}
+			MQ	&=	& \sqrt{OM^2+OQ^2-2\cdot OM\cdot OQ\cdot\cos \widehat{MOQ}} \\
+			&=	& \sqrt{180^2+240^2-2\cdot 180\cdot 240\cdot\cos 60^\circ}\approx 216.
+		\end{eqnarray*}
+		Vậy sau $2$ giờ bay, hai tàu cách nhau khoảng $216$\,km.
+	}{\begin{tikzpicture}[>=stealth]
+			\coordinate (B) at (0,3);
+			\coordinate (N) at (0,-1);
+			\coordinate (D) at (3,0);
+			\coordinate (T) at (-3,0);
+			\coordinate[label=below left:$O$] (O) at (0,0);
+			\coordinate[label=above:$M$] (M) at ($(O)!0.5!20:(D)$);
+			\coordinate[label=below:$Q$] (Q) at ($(O)!0.8!-40:(D)$);
+			\draw[dashed] (N)--(B);
+			\draw[dashed] (D)--(T);
+			\draw[thick,->] (O)--(M);
+			\draw[thick,->] (O)--(Q);
+			\draw (M)--(Q);
+			\begin{scope}[font=\scriptsize]
+				\draw pic["$20^{\circ}$", angle eccentricity=1.8, angle radius=0.5cm,draw]{angle=D--O--M};
+				\draw pic["$40^{\circ}$", angle eccentricity=1.6, angle radius=0.6cm,draw,double]{angle=Q--O--D};
+			\end{scope}
+		\end{tikzpicture}
+	}
+}
+\end{ex}
+% Câu 3
+\begin{ex}%[0H5V2-6]
+Một chiếc thuyền đang di chuyển trên một dòng sông từ phía Tây sang phía Đông với vận tốc $20$ km/h so với dòng nước. Dòng sông chảy từ Bắc xuống Nam với vận tốc $5$ km/h. Tìm vận tốc của thuyền so với bờ (làm tròn kết quả đến chữ số thập phân thứ nhất).
+\shortans[6]{$20{,}6$}
+\loigiai{
+\begin{center}
+\begin{tikzpicture}[scale=1,line join=round,font=\footnotesize,line cap=round,thick,>=stealth]
+\coordinate (A) at (0,3);
+\coordinate (B) at (5,3);
+\coordinate (D) at (0,0);
+\coordinate (C) at ($(B)+(D)-(A)$);
+\path ($(A)!0.5!(B)$) node [above]{$\vv{v}_1$};
+\path ($(B)!0.5!(C)$) node [right]{$\vv{v}_2$};
+\path ($(A)!0.5!(C)$) node [above,rotate=-30]{$\vv{v}=\vv{v}_1+\vv{v}_2$};
+\draw[->](A)--(B) ;
+\draw[->](B)--(C);
+\draw[->](A)--(C);
+\draw[dashed](A)--(D)--(C);
+\foreach \i/\g in {A/90,B/90,C/-90,D/-90}{\draw[fill=white](\i) circle (0pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+\end{center}
+Giả sử thuyền di chuyển từ Tây sang Đông theo hướng từ $A$ sang $B$, khi đó vận tốc của thuyền so với dòng nước là $\vv{v}_1=\vv{AB}$ có độ lớn $\left|\vv{v}_1\right|= 20$ km/h.\\
+Vận tốc dòng chảy từ Bắc sang Nam theo hướng từ $B$ sang $C$ được biểu thị bởi $\vv{v}_2=\vv{BC}$ có độ lớn $\left|\vv{v}_2\right|= 5$ km/h.\\
+Khi đó vận tốc của thuyền so với bờ sông được biểu thị bởi \[\vv{v}=\vv{v}_1+\vv{v}_2=\vv{AB}+\vv{BC}=\vv{AC}.\]
+Do đó $\left|\vv{v}\right|=\left|\vv{AC} \right|=\sqrt{20^2+5^2}=5\sqrt{17}\approx 20{,}6$ km/h.
+}
+\end{ex}
+%Câu 4
+\begin{ex}%[0H5V3-9]
+Một vật đang ở vị trí $O$ chịu hai lực tác dụng ngược chiều nhau là $\vv{F_1}$ và $\vv{F_2}$, trong đó độ lớn lực $\vv{F_2}$ lớn gấp ba lần độ lớn lực $\vv{F_1}$. Để giữ vật đứng yên, người ta cần tác dụng thêm hai lực $\vv{F_3}$ và $\vv{F_4}$ mỗi lực có độ lớn bằng $30$ N và hợp với $\vv{F_1}$ một góc $30^\circ$.  Tính tổng độ lớn của hai lực $\vv{F_1}$ và $\vv{F_2}$. (làm tròn kết quả đến hàng phần mười). 
+\begin{center}
+\begin{tikzpicture}[line join=round, line cap=round,thick,>=stealth,font=\footnotesize,scale=0.7]
+\coordinate (O) at (0,0);
+\coordinate (B) at (4,0);
+\coordinate (C) at (1.5,1);
+\coordinate (D) at (1.5,-1);
+\fill[gray!30] (O) circle(1.2);
+\path (O)node[above left]{$O$};
+\draw[->](O)--(4,0)node[above ]{$\vv{F}_1$};
+\draw[->](O)--(-12,0)node[above ]{$\vv{F}_2$};
+\draw[->](O)--(-8,0)node[above ]{$\vv{F}_{12}$};
+\draw[dashed,->](O)--(1.5,1)node[above left ]{$\vv{F}_3$};
+\draw[dashed,->](O)--(1.5,-1)node[below left ]{$\vv{F}_4$};
+\draw[dashed](1.5,1)--(3,0);
+\draw[dashed](1.5,-1)--(3,0);
+\draw[dashed,->](O)--(3,0)node[above]{$\vv{F}_{34}$};
+\draw (O) circle(1.2);
+\pic["$30^\circ$",draw,angle radius=5mm,angle eccentricity=1.6]{angle=B--O--C};
+\pic["$30^\circ$",draw,angle radius=5.5mm,angle eccentricity=1.7]{angle=D--O--B};
+\end{tikzpicture}
+\end{center}
+\shortans[6]{$104$}
+\loigiai{
+Ta có $\left|\vv{F}_2 \right|=3\left|\vv{F}_1 \right|$ và $\vv{F}_1$, $\vv{F}_2$ ngược hướng.\\
+Đặt $\vv{F}_{12}=\vv{F}_1+\vv{F}_2\Rightarrow \left|\vv{F}_{12} \right|= \left|\vv{F}_2 \right|-\left|\vv{F}_1 \right|=2\left|\vv{F}_1 \right|$.\\
+Đặt $\vv{F}_{34}=\vv{F}_3+\vv{F}_4$.\\
+Do $\vv{F}_3$ và $\vv{F}_4$ có phương hợp với lực $\vv{F_1}$ các góc $30^\circ$ 
+và $\left|\vv{F}_3\right|=\left|\vv{F}_4\right|=30\mathrm{\,N} $ nên $\triangle OF_3F_4$ là tam giác đều.\\
+Do đó $\left|\vv{F}_{34}\right|=\sqrt{3}\left|\vv{F}_3\right|=30\sqrt{3}\mathrm{\,N}$.\\
+Để vật đứng yên thì $\vv{F}_{12}=-\vv{F}_{34}\Rightarrow \left|\vv{F}_{12}\right|=\left|\vv{F}_{34}\right|\Leftrightarrow \left| \vv{F}_1\right|=15\sqrt{3}\mathrm{\,N}$.\\
+Vậy $\left| \vv{F}_1\right|+\left| \vv{F}_2\right|=60\sqrt{3}\mathrm{\,N}\approx 104\mathrm{\,N}$. 
+}
+\end{ex}
+% Câu 5
+\begin{ex}%[0D6V3-5]
+Cho bảng phân bố tần số như sau
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|}
+\hline
+Giá trị&$x_1$&$x_2$&$x_3$&$x_4$&$x_5$&$x_6$&$x_7$&$x_8$\\
+\hline
+Tần số&$18$&$2n+2$&$15$&$n^2-10n+13$&$20$&$11$&$17$&$19$\\
+\hline
+\end{longtable}
+Tìm $n$ để $M_0^{(1)}=x_2$; $M_0^{(2)}=x_4$ là hai mốt của bảng số liệu trên.
+\shortans[6]{$11$}
+\loigiai{
+Ta có $M_0^{(1)}$ và $M_0^{(2)}$ là hai mốt của bảng số liệu trên nên $M_0^{(1)}=M_0^{(2)}\Rightarrow x_2=x_4$\\
+$\Leftrightarrow \heva{&2n+2>20\\&2n+2=n^2-10n+13}\Leftrightarrow \heva{&n>9\\&\hoac{&n=11\\&n=1}}\Rightarrow n=11$.
+}
+\end{ex}
+% Câu 6
+\begin{ex}%[0D6V4-4]
+Bài thi Tiếng Anh gồm có $100$ câu trắc nghiệm, mỗi đáp án chọn đúng được $1$ điểm, chọn sai $0$ điểm. Kết quả kiểm tra của lớp 10A được thống kê như sau 
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+75&80&60&55&70&65&90&85&50&95\\
+\hline
+70&65&55&60&80&75&70&85&90&95\\
+\hline
+\end{longtable}
+Gọi $Q_1$, $Q_3$, $S$ lần lượt là tứ phân vị thứ nhất, tứ phân vị thứ ba và phương sai của mẫu số liệu trên. Tính giá trị của biểu thức $P=Q_1+Q_3+S$ (làm tròn kết quả đến hàng đơn vị).
+\shortans[6]{$814$}
+\loigiai{
+Mẫu số liệu được sắp xếp theo thứ tự không giảm
+		\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			50 & 55 & 55 & 60 & 60 & 65 & 65 & 70 & 70 & 70 \\
+			\hline
+			75 & 75 & 80 & 80 & 85 & 85 & 90 & 90 & 95 & 95 \\
+			\hline
+		\end{longtable}
+Cỡ mẫu $n=20$.\\
+Tứ phân vị thứ nhất $Q_1=\dfrac{x_5+x_6}{2}=\dfrac{60+65}{2}=62{,}5$.\\
+Tứ phân vị thứ ba $Q_3=\dfrac{x_{15}+x_{16}}{2}=\dfrac{85+85}{2}=85$.\\
+Điểm trung bình \[\overline{x}=\dfrac{50+2\cdot 55+2\cdot 60+2\cdot 65+3\cdot 70+2\cdot 75+2\cdot 80+2\cdot 85+2\cdot 90+2\cdot 95}{20}=\dfrac{135}{2}.\]
+Phương sai \[S=\dfrac{50^2+2\cdot 55^2+2\cdot 60^2+2\cdot 65^2+3\cdot 70^2+2\cdot 75^2+2\cdot 80^2+2\cdot 85^2+2\cdot 90^2+2\cdot 95^2}{20}-\left(\dfrac{135}{2} \right)^2\]
+suy ra \[S=\dfrac{2\,665}{4}.\]
+Vậy $P=Q_1+Q_3+S=62{,}5+85+\dfrac{2\,665}{4}\approx 814$.
+}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-OTHKI-DE2-KQ}
+

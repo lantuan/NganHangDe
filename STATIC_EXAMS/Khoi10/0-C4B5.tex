@@ -1,0 +1,1134 @@
+\section{Tích vô hướng của hai véc-tơ}
+
+\subsection{Đề 1}
+\Opensolutionfile{ans}[ans/ans-0-C4B5]
+\caulc
+\begin{ex}%[Câu 1]%[0H5H4-1]
+	Cho tam giác $ABC$ vuông cân tại $A$, $AB=1$. Khẳng định nào sau đây \textbf{sai}?
+	\choice
+	{$\overrightarrow{AB} \cdot \overrightarrow{BC}=-1$}
+	{$\overrightarrow{CA} \cdot \overrightarrow{CB}=1$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AC}=0$}
+	{\True $\overrightarrow{AB} \cdot \overrightarrow{CB}=-1$}
+	\loigiai{
+		\immini{
+			Dựng $\overrightarrow{AD}=\overrightarrow{CB}$.\\
+			Ta có $\overrightarrow{AB} \cdot \overrightarrow{CB}=\overrightarrow{AB} \cdot \overrightarrow{AD}=AB\cdot AD\cdot \cos{45^\circ}=\sqrt 2\cdot \dfrac{\sqrt 2} 2=1$.}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale = 0.5] 
+				\def\a{3} 
+				\coordinate[label = left:$A$] (A) at (0,0); 
+				\coordinate[label = right:$C$] (C) at (\a,0); 
+				\coordinate[label = above:$B$] (B) at (0,\a);  
+				\coordinate[label = above:$D$] (D) at (-\a,\a); 
+				\foreach \x/\y in {A/C,A/B}{
+					\path (\x)--(\y) node[midway,sloped]{\tikz{\draw (-90:2pt)--(90:2pt);}};
+					\draw (\x)--(\y) node[midway,sloped] {};
+				} 
+				\draw[fill = gray!50] ($(A)!8pt!(B)$)--($(A)!8pt!(B)+(A)!8pt!(C)-(A)$)--($(A)!8pt!(C)$)--(A)--cycle ;  
+				\draw (A)--(C)--(B)--(D)--(A)--cycle; 
+				\foreach \x in {A,B,C} \fill[black] (\x) circle (1.5pt); 
+			\end{tikzpicture} 
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 2]%[0H5N4-1]
+	Cho tam giác đều $ABC$ có cạnh bằng $a$. Tính $\overrightarrow{AB} \cdot \overrightarrow{AC}$.
+	\choice
+	{$\overrightarrow{AB} \cdot \overrightarrow{AC}=\dfrac{\sqrt 3} {2}a^2$}
+	{\True $\overrightarrow{AB} \cdot \overrightarrow{AC}=\dfrac{1}{2}a^2$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AC}=-\dfrac{1}{2}a^2$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AC}=a^2$}
+	\loigiai{
+		Ta có $\overrightarrow{AB} \cdot \overrightarrow{AC}$ $=AB \cdot AC \cdot \cos \widehat{BAC}$ $=a \cdot a \cdot \cos 60^\circ $ $=\dfrac{a^2}{2}$.
+	}
+\end{ex}
+
+\begin{ex}%[Câu 3]%[0H5N4-1]
+	Cho hình vuông $ABCD$ có độ dài cạnh bằng $2$. Tính $\overrightarrow{AB} \cdot \overrightarrow{AD}$.
+	\choice
+	{\True $\overrightarrow{AB} \cdot \overrightarrow{AD}=0$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AD}=4$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AD}=\overrightarrow 0$}
+	{$\overrightarrow{AB} \cdot \overrightarrow{AD}=-4$}
+	\loigiai{
+		Vì $ABCD$ là hình vuông nên $AB\bot AD$. Do đó, $\overrightarrow{AB} \cdot \overrightarrow{AD}=0$.
+	}
+\end{ex}
+
+\begin{ex}%[Câu 4]%[0H5H4-1]
+	Cho tam giác $ABC$ vuông tại $A$ có $\widehat{B}=30^\circ,AC=2.$ Gọi $M$ là trung điểm của $BC.$ Tính giá trị của biểu thức $P=\overrightarrow{AM} \cdot \overrightarrow{BM}.$
+	\choice
+	{\True $P=-2$}
+	{$P=2\sqrt 3$}
+	{$P=2$}
+	{$P=-2\sqrt 3$}
+	\loigiai{
+		\immini{
+			Tam giác $ABC$ vuông tại $A$ nên
+			\[AB=\dfrac{AC}{\tan B}=\dfrac 2{\tan 30^\circ}=2\sqrt 3.\]
+			Suy ra $BC=\sqrt{AB^2+AC^2}=\sqrt{\left( 2\sqrt 3 \right)^2+2^2}=4.$
+			Khi đó \begin{eqnarray*}
+				P&=&\overrightarrow{AM} \cdot \overrightarrow{BM}=\dfrac{1}{2}\left( \overrightarrow{AB}+\overrightarrow{AC} \right)\cdot \dfrac{1}{2}\overrightarrow{BC}\\
+				&=&\dfrac{1}{4}\left( \overrightarrow{AB} \cdot \overrightarrow{BC}+\overrightarrow{AC} \cdot \overrightarrow{BC} \right)\\
+				&=&\dfrac{1}{4}\left( -AB\cdot BC\cdot \cos B+AC\cdot BC\cdot \cos C \right)\\
+				&=&\dfrac{1}{4}\left( -2\sqrt 3\cdot 4\cdot \cos 30^\circ+2\cdot 4\cdot \cos 60^\circ \right)=-2.
+			\end{eqnarray*}
+		}{
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path
+				(-2,0)coordinate(B)
+				(2,0)coordinate(C)
+				(60:2)coordinate(A) 
+				($(B)!0.5!(C)$)coordinate(M) ;
+				;
+				%		\coordinate[label = above:$D$] (D) at (-\a,\a); 
+				\draw(A)--(B)--(C)--(A)--(M);
+				
+				\draw pic[draw,angle eccentricity=1.4,pic text=$30^\circ $,angle radius=0.75cm]{angle=C--B--A};
+				\draw pic[draw, angle radius = 6pt]{right angle = B--A--C};
+				\foreach \p/\q in {A/90, B/-90, C/-90,M/-90} \fill[black] (\p) circle (1pt) ($(\p)+(\q:2.5mm)$) node{$\p$};
+			\end{tikzpicture}
+	}}
+\end{ex}
+
+\begin{ex}%[Câu 5]%[0H5N4-1]
+	Cho tam giác $\Delta ABC$ đều cạnh $a$. Tích vô hướng $\overrightarrow{AB} \cdot \overrightarrow{BC}$ bằng
+	\choice
+	{$a^2$}
+	{$\dfrac{a^2\sqrt 3} 2$}
+	{\True $-\dfrac{a^2}{2}$}
+	{$\dfrac{a^2}{2}$}
+	\loigiai{
+		\immini{
+			Dựng $\overrightarrow{BD}=\overrightarrow{AB}$.\\ 
+			Ta có $\left( \overrightarrow{AB},\overrightarrow{BC} \right)=\left( \overrightarrow{BC},\overrightarrow{BD} \right)=\widehat{CBD}=120^\circ$\\
+			Vậy $\overrightarrow{AB} \cdot \overrightarrow{BC}=AB \cdot BC\cdot \cos120^\circ=-\dfrac{a^2}{2}$.}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=1] 
+				\def \a{2}; 
+				\coordinate (B) at (0,0); 
+				\coordinate (C) at ($(B)+(\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (A) at (B); 
+				\coordinate (D) at ($(A)!2!(B)$); 
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=D--B--C};
+				\draw (A)--(B)--(C)--cycle; 
+				\draw[->, arrows={-latex}] (B)--(D);
+				\draw[->, arrows={-latex}] (A)--(B);
+				\draw[->, arrows={-latex}] (B)--(C); 
+				\foreach \x/\y in {A/C,A/B,B/C}{
+					\path (\x)--(\y) node[midway,sloped]{\tikz{\draw (-90:2pt)--(90:2pt);}};
+					\draw (\x)--(\y) node[midway,sloped] {};
+				} 
+				\foreach \x/\y in {A/90,B/180,C/0,D/-180}
+				\draw[fill=black] (\x) circle (0.5pt) + (\y:0.5cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 6]%[0H5N4-1]
+	Cho tam giác $ABC$ có $\widehat{A}=90^\circ,\widehat{B}=60^\circ$ và $AB=a$. Khi đó $\overrightarrow{AC} \cdot \overrightarrow{CB}$ bằng
+	\choice
+	{$-2a^2$}
+	{$2a^2$}
+	{$3a^2$}
+	{\True $-3a^2$}
+	\loigiai{
+		\immini{
+			Dựng $\overrightarrow{CA'}=\overrightarrow{AC}$.\\ 
+			Ta có $\left( \overrightarrow{AC},\overrightarrow{CB} \right)=\left( \overrightarrow{CA'},\overrightarrow{CB} \right)=\widehat{BCA'}=150^\circ$\\
+			Vậy \begin{eqnarray*}
+				\overrightarrow{AC} \cdot \overrightarrow{CB}&=&CA\cdot CB\cdot \cos \widehat{BCA'}\\
+				&=&\sqrt 3a\cdot 2a\cdot \left(-\dfrac{\sqrt 3} 2\right)\\
+				&=&-3a^2.
+			\end{eqnarray*}
+		}{
+			\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path
+				(-2,0)coordinate(B)
+				(2,0)coordinate(C)
+				(120:2)coordinate(A) 
+				;
+				\coordinate (A') at ($(C)+(C)-(A)$); 
+				
+				\draw(A)--(B)--(C)--(A) (C)--(A');
+				%			\draw[->, arrows={-latex}] (A)--(C);
+				%			\draw[->, arrows={-latex}] (B)--(C);
+				
+				\node at ($(B)+(0.15,0.35)$) [right]{$30^\circ$};
+				\draw pic[draw,angle eccentricity=0.6,pic text=$  $,angle radius=0.25cm]{angle=C--B--A};
+				
+				\draw pic[draw,angle eccentricity=1.2,pic text=$ $,angle radius=0.25cm]{angle=B--C--A'};
+				\node at ($(C)+(-0.85,-0.55)$) [right]{$120^\circ$};
+				
+				\draw pic[draw, angle radius = 6pt]{right angle = B--A--C};
+				\foreach \p/\q in {A/90, B/-90, C/30,A'/0} \fill[black] (\p) circle (1pt) ($(\p)+(\q:2.5mm)$) node{$\p$};
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+%Câu 11:
+\begin{ex}%[Câu 7]%[0H5N4-1]
+	Trong các khẳng định sau, khẳng định nào đúng với mọi $\overrightarrow a$ và $\overrightarrow b$?
+	\choice
+	{\True $\left| \overrightarrow a\cdot \overrightarrow b \right|=\left| \overrightarrow a \right|\left| \overrightarrow b \right|\left| \cos\left( \overrightarrow a,\overrightarrow b \right) \right|$}
+	{$\overrightarrow a\cdot \overrightarrow b=-\left| \overrightarrow a \right|\left| \overrightarrow b \right|$}
+	{$\overrightarrow a\cdot \overrightarrow b=\left| \overrightarrow a \right|\left| \overrightarrow b \right|$}
+	{$\left| \overrightarrow a\cdot \overrightarrow b \right|=\left| \overrightarrow a \right|\left| \overrightarrow b \right|$}
+	\loigiai{
+		Theo định nghĩa tích vô hướng hai vec-tơ, ta có \[\overrightarrow a\cdot \overrightarrow b=\left| \overrightarrow a \right|\left| \overrightarrow b \right|\cos\left( \overrightarrow a,\overrightarrow b \right)\Rightarrow \left| \overrightarrow a \cdot \overrightarrow b \right|=\left| \overrightarrow a \right|\left| \overrightarrow b \right|\left| \cos\left( \overrightarrow a,\overrightarrow b \right) \right|.\]
+	}
+\end{ex}
+
+\begin{ex}%[Câu 8]%[0H5H4-1]
+	Cho tam giác $ABC$ đều có trọng tâm $G$ và $H$ là trung điểm của $BC$. Xác định $\cos \left( \overrightarrow{GB},\overrightarrow{GH} \right)$.
+	\choice
+	{\True $\dfrac{1}{2}$}
+	{$-\dfrac{1}{2}$}
+	{$-\dfrac{\sqrt 3} 2$}
+	{$\dfrac{\sqrt 3} 2$}
+	\loigiai{
+		\immini{
+			Do tam giác $ABC$ đều nên $AH\bot BC$ và $\widehat{GBH}=30^\circ $. \\
+			Suy ra $\left( \overrightarrow{GB},\overrightarrow{GH} \right)=\widehat{BGH}=60^\circ $.\\
+			Vậy $\cos \left( \overrightarrow{GB},\overrightarrow{GH} \right)=\cos 60^\circ =\dfrac{1}{2}$.}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=1] 
+				\def \a{3}; 
+				\coordinate (B) at (0,0); 
+				\coordinate (C) at ($(B)+(\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (A) at (B); 
+				\coordinate (H) at ($(C)!0.5!(B)$); 
+				\coordinate (G) at ($(A)!2/3!(H)$);  
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=B--G--H};
+				\draw (A)--(B)--(C)--cycle (B)--(G) (A)--(H); 
+				\draw[->, arrows={-latex}] (G)--(B);
+				\draw[->, arrows={-latex}] (A)--(H); 
+				
+				\foreach \x/\y in {A/C,A/B,B/C}{
+					\path (\x)--(\y) node[midway,sloped]{\tikz{\draw (-90:2pt)--(90:2pt);}};
+					\draw (\x)--(\y) node[midway,sloped] {};
+				} 
+				\foreach \x/\y in {A/90,B/180,C/0,H/-90,G/30}
+				\draw[fill=black] (\x) circle (0.7pt) + (\y:0.25cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 9]%[0H5H4-2]
+	Cho tam giác $ABC$ đều, tâm $O$, $M$ là trung điểm của $BC$. Góc $\left( \overrightarrow{OM}\,,\overrightarrow{AB} \right)$ bằng
+	\choice
+	{$150^\circ $}
+	{\True $30^\circ $}
+	{$120^\circ $}
+	{$60^\circ $}
+	\loigiai{
+		\immini{
+			Gọi $N$ là trung điểm của $AO$ $\Rightarrow $ $AN=OM$ (tính chất trọng tâm của tâm của tam giác).\\
+			Mà $\overrightarrow{AN}$ và $\overrightarrow{OM}$ là hai vec-tơ cùng hướng nên $\overrightarrow{AN}=\overrightarrow{OM}$.\\
+			Khi đó, $\left( \overrightarrow{OM}, \overrightarrow{AB} \right)$ = $\left(\overrightarrow{AN}, \overrightarrow{AB} \right)$ = $\widehat{NAB}$ = $\widehat{MAB}$ = $30^\circ$.}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=1] 
+				\def \a{3}; 
+				\coordinate (B) at (0,0); 
+				\coordinate (C) at ($(B)+(\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (A) at (B); 
+				\coordinate (M) at ($(C)!0.5!(B)$); 
+				\coordinate (O) at ($(A)!2/3!(M)$); 
+				\coordinate (N) at ($(A)!1/2!(O)$); 
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=B--A--M};
+				\draw (C)--(A)--(B)--(C)--cycle (B)--(O) (A)--(M) ; 
+				\draw[->, arrows={-latex}] (A)--(B);
+				\draw[->, arrows={-latex}] (A)--(M);  
+				\foreach \x/\y in {A/90,B/180,C/0,M/-90,O/0,N/0}
+				\draw[fill=black] (\x) circle (0.7pt) + (\y:0.25cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 10]%[0H5H4-2]
+	Cho tam giác $ABC$, tính $\left( \overrightarrow{AB},\,\overrightarrow{BC} \right)+\left( \overrightarrow{BC},\,\overrightarrow{CA} \right)+\left( \overrightarrow{CA},\,\overrightarrow{AB} \right)$.
+	\choice
+	{$90^\circ $}
+	{$180^\circ $}
+	{$270^\circ $}
+	{\True $360^\circ $}
+	\loigiai{
+		\immini{
+			Dựng điểm $D$ sao cho $\overrightarrow{AB}=\overrightarrow{BD}$. \\
+			Khi đó, $\left( \overrightarrow{AB},\,\overrightarrow{BC} \right)=\left( \overrightarrow{BD},\,\overrightarrow{BC} \right)=\widehat{DBC}=180^\circ -\widehat{ABC}$.\\
+			Tương tự, $\left( \overrightarrow{BC},\,\overrightarrow{CA} \right)=180^\circ -\widehat{BCA}$ và $\left( \overrightarrow{CA},\,\overrightarrow{AB} \right)=180^\circ -\widehat{CAB}$.\\
+			Vậy \begin{eqnarray*}
+				& &\left( \overrightarrow{AB},\,\overrightarrow{BC} \right)+\left( \overrightarrow{BC},\,\overrightarrow{CA} \right)+\left( \overrightarrow{CA},\,\overrightarrow{AB} \right)\\
+				&=&540^\circ -\left( \widehat{ABC}+\widehat{BCA}+\widehat{CAB} \right)\\
+				&=&540^\circ -180^\circ =360^\circ. 
+			\end{eqnarray*}
+		}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=0.5] 
+				\def \a{3}; 
+				\coordinate (A) at (0,0); 
+				\coordinate (B) at ($(B)+(2/3*\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (C) at (A);  
+				\coordinate (D) at ($(B)+(B)-(A)$);  
+				\draw (C)--(A)--(B)--(C)--cycle (D)--(B); 
+				\foreach \x/\y in {A/-90,B/-90,C/90,D/-90}
+				\draw[fill=black] (\x) circle (1.1pt) + (\y:0.55cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 11]%[0H5H4-1]
+	Cho tam giác $ABC$ đều. Giá trị $\sin \left( \overrightarrow{BC},\overrightarrow{AC} \right)$ là
+	\choice
+	{$\dfrac{1}{2}$}
+	{$-\dfrac{1}{2}$}
+	{$-\dfrac{\sqrt 3} 2$}
+	{\True $\dfrac{\sqrt 3} 2$}
+	\loigiai{ 
+		\immini{
+			Ta có $\left( \overrightarrow{BC},\overrightarrow{AC} \right)$ $=\left( \overrightarrow{CB'},\overrightarrow{CA'} \right)$ $=\widehat{A'CB}$ $=60^\circ$.\\
+			Vậy $ \sin \left( \overrightarrow{BC},\overrightarrow{AC} \right)$ $=\sin 60^\circ $ $=\dfrac{\sqrt 3} 2$.}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=1] 
+				\def \a{2}; 
+				\coordinate (A) at (0,0); 
+				\coordinate (C) at ($(A)+(\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (B) at (A); 
+				\coordinate (B') at ($(C)+(C)-(B)$); 
+				\coordinate (A') at ($(C)+(C)-(A)$); 
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=B'--C--A'};
+				\draw (A)--(B)--(C)--cycle  ; 
+				\draw[->, arrows={-latex}] (C)--(A');
+				\draw[->, arrows={-latex}] (C)--(B'); 
+				\foreach \x/\y in {A/180,B/90,C/30,B'/-90,A'/0}
+				\draw[fill=black] (\x) circle (0.7pt) + (\y:0.5cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 12]%[0H5H4-2]
+	Cho tam giác $ABC$ với $\widehat{A}=60^\circ $. Tính tổng $\left( \overrightarrow{AB},\,\overrightarrow{BC} \right)+\left( \overrightarrow{BC},\,\overrightarrow{CA} \right)$.
+	\choice
+	{$120^\circ $}
+	{$360^\circ $}
+	{$270^\circ $}
+	{\True $240^\circ $}
+	\loigiai{
+		\immini{
+			Vẽ các vec-tơ $\overrightarrow{BD}=\overrightarrow{AB}$, $\overrightarrow{CE}=\overrightarrow{BC}$.\\
+			Ta có 
+			\begin{eqnarray*}
+				\left( \overrightarrow{AB},\,\overrightarrow{BC} \right)+\left( \overrightarrow{BC},\,\overrightarrow{CA} \right)
+				&=&\left( \overrightarrow{BD},\,\overrightarrow{BC} \right)+\left( \overrightarrow{CE},\,\overrightarrow{CA} \right) \\
+				&=&\widehat{CBD}+\widehat{ACE}\\
+				&=&180^\circ -\widehat{ABC}+180^\circ -\widehat{ACB}\\ &=&360^\circ -\left( \widehat{ABC}+\widehat{ACB} \right)\\ &=&360^\circ -\left( 180^\circ -\widehat{A\,} \right)\\
+				&=&360^\circ -120^\circ =240^\circ. 
+		\end{eqnarray*}}{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=1] 
+				\def \a{2}; 
+				\coordinate (A) at (0,0); 
+				\coordinate (C) at ($(A)+(\a,0)$); 
+				\coordinate[shift=(60:\a cm)] (B) at (A); 
+				\coordinate (E) at ($(C)+(C)-(B)$);  
+				\coordinate (D) at ($(B)+(B)-(A)$);  
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=C--B--D};
+				\draw pic[draw,angle eccentricity=1.4,pic text=$ $,angle radius=0.35cm]{angle=A--C--E};
+				\draw (A)--(B)--(C)--cycle  ;  
+				\draw[->, arrows={-latex}] (C)--(B'); 
+				\draw[->, arrows={-latex}] (B)--(D); 
+				\foreach \x/\y in {A/180,B/90,C/30,E/-90,D/90}
+				\draw[fill=black] (\x) circle (0.7pt) + (\y:0.5cm) node{$\x$};
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-C4B5}
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-C4B5-DS]
+
+\begin{ex}%[Câu 13]%[0H5H4-1]
+	\immini{
+		Cho hình chữ nhật $ABCD, AB=4 a, AD=3 a$. Gọi $M$ là trung điểm của $AB$, $G$ là trọng tâm tam giác $ACM$ (xem hình bên). Xét tính đúng sai của các mệnh đề sau.
+		\choiceTF
+		{$\overrightarrow{CM}=\dfrac{1}{2}\overrightarrow{BA}-3\overrightarrow{BC}$}
+		{$\overrightarrow{BG}=\dfrac{3}{2}\overrightarrow{BA}+\dfrac{1}{3}\overrightarrow{BC}$}
+		{\True $\overrightarrow{BC}\cdot \overrightarrow{BA}=0$}
+		{$\overrightarrow{BG}\cdot \overrightarrow{CM}=-a^2$}}{
+		\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=1]
+			\coordinate (D) at ($(0,0)$); 
+			\coordinate (C) at ($(D)+(5,0)$);
+			\coordinate (A) at ($(D)+(0,3)$);
+			\coordinate (B) at ($(A)+(C)-(D)$);
+			\coordinate (M) at ($(A)!0.5!(B)$); 
+			\coordinate (N) at ($(A)!0.5!(M)$); 
+			\coordinate (G) at ($(C)!2/3!(N)$);
+			\draw (A)--(B)--(C)--(D)--(A)--(C)--(M) (G)--(B)--(D); 
+			\foreach \x/\y in {A/90,B/90,D/-90,C/-90,M/90,G/90}
+			\draw[fill=black] (\x) circle (1.1pt) + (\y:0.25cm) node{$\x$};
+		\end{tikzpicture}
+	} 
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. $\overrightarrow{CM}=\overrightarrow{BM}-\overrightarrow{B C}=\dfrac{1}{2} \overrightarrow{BA}-\overrightarrow{BC}$.
+			\itemch Sai. Vì $G$ là trọng tâm của tam giác ${ACM}$ nên\\
+			$3 \overrightarrow{B G}=\overrightarrow{B A}+\overrightarrow{B M}+\overrightarrow{B C}=\overrightarrow{B A}+\dfrac{1}{2} \overrightarrow{B A}+\overrightarrow{B C}=\dfrac{3}{2} \overrightarrow{B A}+\overrightarrow{B C} \Rightarrow \overrightarrow{B G}=\dfrac{1}{2} \overrightarrow{B A}+\dfrac{1}{3} \overrightarrow{B C}$.
+			\itemch Đúng. Vì $ABCD$ là hình chữ nhật nên $BC \perp BA, \overrightarrow{B C} \cdot \overrightarrow{B A}=0$.
+			\itemch Sai. Vì \begin{eqnarray*}
+				\overrightarrow{B G} \cdot \overrightarrow{C M}
+				&=&\left(\dfrac{1}{2} \overrightarrow{B A}+\dfrac{1}{3} \overrightarrow{B C}\right) \cdot\left(\dfrac{1}{2} \overrightarrow{B A}-\overrightarrow{B C}\right)\\
+				&=&\dfrac{1}{4} \overrightarrow{B A}^2-\dfrac{1}{3} \overrightarrow{B A} \cdot \overrightarrow{B C}-\dfrac{1}{3} \overrightarrow{B C}^2\\
+				&=&\dfrac{1}{4}{{(4a)}^2}-\dfrac{1}{3}\cdot 4a\cdot 3a-\dfrac{1}{3}{{(3a)}^2}\\
+				&=&-3a^2. 
+			\end{eqnarray*}
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 14]%[0H5H4-1]
+	\immini{Cho hình vuông $A B C D$ cạnh $ a$. Lấy $E$ là trung điểm của ${B C}$, điểm $F$ thoả mãn $\overrightarrow{B F}=\dfrac{3}{4} \overrightarrow{B D}$. Xét tính đúng sai của các mệnh đề sau.
+		\choiceTF
+		{\True $\overrightarrow{AE}=\overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AD}$}
+		{$\overrightarrow{AF}=\dfrac{1}{4}\overrightarrow{AB}+\dfrac{5}{4}\overrightarrow{AD}$}
+		{\True $\overrightarrow{EF}=\dfrac{-3} 4\overrightarrow{AB}+\dfrac{1}{4}\overrightarrow{AD}$}
+		{\True Tam giác $A E F$ vuông cân}}{
+		
+		\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=1]
+			\coordinate (A) at ($(0,0)$);
+			%		\tkzDefPoints{0/0/D}
+			\coordinate (B) at ($(A)+(3,0)$);
+			\coordinate (D) at ($(A)+(0,3)$);
+			\coordinate (C) at ($(A)+(B)+(D)$);
+			\coordinate (E) at ($(B)!0.5!(C)$); 
+			\coordinate (F) at ($(B)!3/4!(D)$); 
+			\coordinate (G) at ($(C)!2/3!(N)$);
+			\draw (A)--(B)--(C)--(D)--(A)--(E)--(F)--(A) (B)--(D); 
+			\foreach \x/\y in {A/-90,B/-90,D/90,C/90,E/0,F/90}
+			\draw[fill=black] (\x) circle (1.1pt) + (\y:0.25cm) node{$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng. Vì  $\overrightarrow{A E}=\overrightarrow{A B}+\overrightarrow{B E}=\overrightarrow{A B}+\dfrac{1}{2} \overrightarrow{B C}=\overrightarrow{A B}+\dfrac{1}{2} \overrightarrow{A D}$.
+			\itemch Sai. Vì  $\overrightarrow{AF}=\overrightarrow{AB}+\overrightarrow{BF}=\overrightarrow{AB}+\dfrac{3}{4}\overrightarrow{BD}=\overrightarrow{AB}+\dfrac{3}{4}\left(\overrightarrow{AD}-\overrightarrow{AB}\right)=\dfrac{1}{4}\overrightarrow{AB}+\dfrac{3}{4}\overrightarrow{AD}$.
+			\itemch Đúng. Vì  $\overrightarrow{EF}=\overrightarrow{AF}-\overrightarrow{AE}=\left( \dfrac{1}{4}\overrightarrow{AB}+\dfrac{3}{4}\overrightarrow{AD} \right)-\left( \overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AD} \right)=\dfrac{-3} 4\overrightarrow{AB}+\dfrac{1}{4}\overrightarrow{AD}.$
+			\itemch Đúng. Ta có
+			\begin{eqnarray*}
+				\overrightarrow{A F} \cdot \overrightarrow{E F}
+				&=&\left(\dfrac{1}{4} \overrightarrow{A B}+\dfrac{3}{4} \overrightarrow{A D}\right) \cdot\left(\dfrac{-3} 4 \overrightarrow{A B}+\dfrac{1}{4} \overrightarrow{A D}\right)\\
+				&=&\dfrac{-3}{16}{{\overrightarrow{AB}}^2}-\dfrac{1}{2}\overrightarrow{AB}\cdot \overrightarrow{AD}+\dfrac 3{16}{{\overrightarrow{AD}}^2}\\
+				&=&0.
+			\end{eqnarray*}
+			Vậy $ AF\bot EF$. \\
+			Ta có \begin{eqnarray*}
+				\overrightarrow{A F}^2&=&\left(\dfrac{1}{4} \overrightarrow{A B}+\dfrac{3}{4} \overrightarrow{A D}\right)^2=\dfrac 1{16} \overrightarrow{A B}^2+\dfrac{3}{8} \overrightarrow{A B} \cdot \overrightarrow{A D}+\dfrac 9{16} \overrightarrow{A D}^2=\dfrac{5}{8} \overrightarrow{A B}^2.\\
+				\overrightarrow{EF}^2&=&{{\left( \dfrac{-3} 4\overrightarrow{AB}+\dfrac{1}{4}\overrightarrow{AD} \right)}^2}=\dfrac 9{16}{{\overrightarrow{AB}}^2}-\dfrac{3}{8}\overrightarrow{AB}\cdot \overrightarrow{AD}+\dfrac 1{16}{{\overrightarrow{AD}}^2}=\dfrac{5}{8}{\overrightarrow{AB}}^2.
+			\end{eqnarray*}
+			Do đó, $A F^2=E F^2=\dfrac{5}{8} \overrightarrow{A B}^2 \Rightarrow A F=E F$. Vậy tam giác ${A E F}$ vuông cân tại ${F}$.\\
+			Chú ý: Ta có thể chứng minh tam giác ${A E F}$ vuông bằng định lí Pythagore.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 15]%[0H5V4-4]
+	\immini{Cho tam giác $ABC$ có $AB=4 \sqrt 2$, $A C=6$, $\widehat{B A C}=45^\circ$. Gọi $D$ là trung điểm của đoạn thẳng $BC$. Điểm $E$ thoả mãn $\overrightarrow{A E}=k \overrightarrow{AC}\,(k \in \mathbb{R})$ (Xem hình vẽ bên). Xét tính đúng sai của các mệnh đề sau.
+		\choiceTF
+		{$\overrightarrow{AB}\cdot \overrightarrow{AC}=20$}
+		{\True $\overrightarrow{AD}=\dfrac{1}{2}\overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AC}$}
+		{$BC=3\sqrt 5$}
+		{\True ${A D \perp B E}$ khi $k=\dfrac{14}{15}$}}{
+		\begin{tikzpicture}[line join = round, line cap = round,scale=.5] 
+			\coordinate (B) at (0,0); 
+			\coordinate (C) at ($(B)+(6,0)$); 
+			\coordinate[ shift=(90:4cm)] (A) at (B); 
+			\coordinate (D) at ($(B)!0.5!(C)$);
+			\coordinate(E) at ($(A)!2/3!(C)$);
+			
+			\draw (D)--(A)--(B)--(C)--(A) (B)--(E); 
+			\foreach \x/\y in {A/90,B/180,D/45,C/0,E/30}
+			\draw[fill=black] (\x) circle (1.1pt) + (\y:0.45cm) node{$\x$};
+		\end{tikzpicture} 
+		
+	}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vì $\overrightarrow{A B} \cdot \overrightarrow{A C}=A B \cdot A C \cdot \cos A=4 \sqrt 2 \cdot 6 \cdot \cos 45^\circ=24$.
+			\itemch Đúng. Vì $\overrightarrow{A D}=\dfrac{1}{2} \overrightarrow{A B}+\dfrac{1}{2} \overrightarrow{A C}$.
+			\itemch Sai. Vì $\overrightarrow{B C}=\overrightarrow{A C}-\overrightarrow{A B}$. Khi đó
+			\begin{eqnarray*}
+				\overrightarrow{BC}^2 &=&\left(\overrightarrow{AC}-\overrightarrow{AB}\right)^2\\
+				&=&\overrightarrow{AC}^2-2\overrightarrow{AC}\cdot \overrightarrow{AB}+\overrightarrow{AB}^2\\
+				&=&6^2-2\cdot 24+\left(4\sqrt 2\right)^2\\
+				&=&20.
+			\end{eqnarray*}
+			Suy ra $BC=2\sqrt 5$.
+			\itemch Đúng. Ta có $\overrightarrow{B E}=\overrightarrow{A E}-\overrightarrow{A B}=k \overrightarrow{A C}-\overrightarrow{A B}$. Từ đó, ta có
+			\begin{eqnarray*}
+				\overrightarrow{A D} \cdot \overrightarrow{B E}&=&\dfrac{1}{2}\left(\overrightarrow{A B}+\overrightarrow{A C}\right) \cdot(k \overrightarrow{A C}-\overrightarrow{A B})\\
+				&=&\dfrac{1}{2}\left( k\overrightarrow{AB}\cdot \overrightarrow{AC}+k\overrightarrow{AC}^2-\overrightarrow{AB}^2-\overrightarrow{AB}\cdot \overrightarrow{AC} \right)\\
+				&=&\dfrac{1}{2}\left[ 24k+{ 6^2}\cdot k-{{(4\sqrt 2)}^2}-24 \right]\\ 
+				&=&30k-28.
+			\end{eqnarray*}  
+			Khi đó ${A D \perp B E \Leftrightarrow \overrightarrow{A D} \cdot \overrightarrow{B E}=0 \Leftrightarrow 30 k-28=0 \Leftrightarrow k=\dfrac{14}{15}}$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 16]%[0H5H4-1]
+	Cho tam giác $A B C$ đều, đường cao $A H$. Xét tính đúng sai của các mệnh đề sau.
+	\choiceTF
+	{$\left(\overrightarrow{AB},\overrightarrow{AC}\right)=30^\circ $}
+	{\True $\left(\overrightarrow{A H}, \overrightarrow{C B}\right))=90^{\circ}$}
+	{\True $\left(\overrightarrow{CA},\overrightarrow{BC}\right)=120^\circ $}
+	{$\left(\overrightarrow{AH},\overrightarrow{BA}\right)=130^\circ $}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Sai. Vì ${(\overrightarrow{A B}, \overrightarrow{A C})=\widehat{B A C}=60^{\circ}}$.
+			\itemch Đúng. Vì ${(\overrightarrow{A H}, \overrightarrow{C B})=90^{\circ}}$ do ${A H \perp B C}$.
+			\itemch Đúng. Vì $\left(\overrightarrow{C A}, \overrightarrow{B C}\right)=180^{\circ}-(\overrightarrow{C A}, \overrightarrow{C B})=180^{\circ}-\widehat{A C B}=180^{\circ}-60^{\circ}=120^{\circ}$
+			\itemch Sai. Vì $\left(\overrightarrow{A H}, \overrightarrow{B A}\right)=180^{\circ}-\left(\overrightarrow{A H}, \overrightarrow{A B}\right)=180^{\circ}-\widehat{B A H}=180^{\circ}-30^{\circ}=150^{\circ}$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-C4B5-DS}
+
+\Opensolutionfile{ans}[ans/ans-0-C4B5-KQ]
+\caukq 
+
+\begin{ex}%[Câu 17]%[0H5H4-1]
+	Cho hình thang vuông $A B C D$ có đáy lớn $A B=8 a$, đáy nhỏ $C D=4 a$, đường cao $A D=6 a$, $I$ là trung điểm của $A D$. Tính giá trị  $\left(\overrightarrow{I A}+\overrightarrow{I B}\right) \cdot \overrightarrow{I D}$ có dạng $ka^2$. Khi đó $k$ bằng bao nhiêu?
+	\shortans{$-18$}
+	\loigiai{
+		\immini{
+			\begin{eqnarray*} 
+				& & \overrightarrow{IA}\cdot \overrightarrow{ID}+\overrightarrow{IB}\cdot \overrightarrow{ID} \\ 
+				&=&-{\overrightarrow{IA}}^2+IB\cdot ID\cdot \cos \widehat{BID} \\ 
+				&=&-IA^2-IB\cdot ID\cdot \cos \widehat{BIA} \\ 
+				&=&-IA^2-IB\cdot ID\cdot \dfrac{IA}{IB} \\ 
+				& =&-IA^2-IA^2=-2IA^2=-2\cdot \left(3a\right)^2=-18a^2. 
+			\end{eqnarray*}
+		}{
+			\begin{tikzpicture}[scale=0.6, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\a{1} %độ dài cạnh AD
+				\coordinate[label=below:$A$] (A) at (0,0);
+				\coordinate[label=above:$D$] (D) at (0,6*\a);
+				\coordinate[label=below:$B$] (B) at (8*\a,0);
+				\coordinate[label=above:$C$] (C) at (4*\a,6*\a); 
+				\coordinate[label=above:$I$] (I) at ($(C)!0.5!(D)$);
+				\node at (4*\a,0) [below]{$8a$};
+				\node at (0.5*\a,3.5*\a) [below]{$6a$};
+				\node at (3*\a,6*\a) [below]{$6a$};
+				\draw[->, arrows={-latex}] (I)--(A);
+				\draw[->, arrows={-latex}] (I)--(B);
+				\draw[->, arrows={-latex}] (I)--(D);
+				\draw (A)--(B)--(C)--(D)--cycle;
+				\foreach \diem in {A,B,C,D,I}	\fill (\diem)circle(1.2pt);
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 18]%[0H5H4-1]
+	Cho tam giác $A B C$ vuông tại $A$ có $A B=a, A C=2 \sqrt 3 a$ và $A M$ là trung tuyến. Tính tích vô hướng $\overrightarrow{BA} \cdot \overrightarrow{AM}$ có dạng $\dfrac{m}{n}a^2,\, \dfrac{m}{n}$ là phân số tối giản và $m \in \mathbb{Z}, n \in \mathbb{N}$. Khi đó $m^2+n^2$ bằng bao nhiêu?
+	\shortans{5}
+	\loigiai{
+		Tam giác $A M B$ có $A M=B M=A B$ nên là tam giác đều. Suy ra $\widehat{M A B}=60^\circ$.\\
+		Khi đó $\overrightarrow{B A} \cdot \overrightarrow{A M}=-\overrightarrow{A B} \cdot \overrightarrow{A M}=-\left|\overrightarrow{A B}\right| \cdot\left|\overrightarrow{A M}\right| \cdot \cos \left(\overrightarrow{A B}, \overrightarrow{A M}\right)=-a \cdot a \cdot \cos 60^\circ=\dfrac{-a^2} 2$.
+		Vậy $m^2+n^2=\left(-1\right)^2+2^2=5$.
+	}
+\end{ex}
+
+\begin{ex}%[Câu 19]%[0H5H4-1]
+	Cho tam giác $A B C$ cân tại $A$, $M$ là trung điểm của $B C$, $H$ là hình chiếu của $M$ trên $A C$, $E$ là trung điểm của $M H$. Tính $\overrightarrow{AE} \cdot \overrightarrow{BH}$.
+	\shortans{0}
+	\loigiai{
+		\immini{ 
+			Ta có biến đổi tích vô hướng như sau
+			\begin{eqnarray*}
+				2 \overrightarrow{A E} \cdot \overrightarrow{B H}&=&(\overrightarrow{A M}+\overrightarrow{A H}) \cdot\left(\overrightarrow{B M}+\overrightarrow{M H}\right)\\
+				&=&\overrightarrow{A M} \cdot \overrightarrow{M H}+\overrightarrow{A H} \cdot \overrightarrow{B M}\\
+				&=&\overrightarrow{A M} \cdot \overrightarrow{M H}+\left(\overrightarrow{A M}+\overrightarrow{M H}\right) \cdot \overrightarrow{B M}\\
+				&=&\overrightarrow{A M} \cdot \overrightarrow{M H}+\overrightarrow{M H} \cdot \overrightarrow{M C}\\
+				&=&\overrightarrow{H M} \cdot \overrightarrow{M H}+\overrightarrow{M H} \cdot \overrightarrow{M H}\\
+				&=&-\overrightarrow{M H}^2+\overrightarrow{M H}^2=0. 
+			\end{eqnarray*}
+			Suy ra $\overrightarrow{AE} \cdot \overrightarrow{BH}=0$. }{
+			\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=.9]
+				
+				\coordinate (B) at ($(0,0)$);
+				\coordinate (C) at ($(B)+(4,0)$);
+				\coordinate (M) at ($(B)!0.5!(C)$);
+				\coordinate (A) at ($(M)+(0,4)$); 
+				\coordinate (H) at ($(C)!(M)!(A)$);
+				\coordinate (E) at ($(M)!0.5!(H)$);
+				\draw (A)--(B)--(C)--(A)--(M) (B)--(H)--(M) (A)--(E);
+				\foreach \x/\y in {A/180,B/-180,C/30,M/-90,H/0,E/-90}
+				\draw[fill=black] (\x) circle (1.1pt) + (\y:0.25cm) node{$\x$};
+				\path pic[draw,angle radius=6]{right angle=M--H--C};
+				\path pic[draw,angle radius=6]{right angle=A--M--B};
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+
+%Câu 7
+\begin{ex}%[Câu 20]%[0H5H4-3]
+	Cho tam giác $A B C$ có $B C=a$, $C A=b$, $A B=c$. Biết $M$ là trung điểm của $B C$. Tính $\overrightarrow{A M}^2=\dfrac{m\left(b^2+c^2\right)+n\cdot a^2} {4}$. Khi đó $m-n$ bằng bao nhiêu?
+	\shortans{3}
+	\loigiai{ 
+		\immini{
+			Vì $M$ là trung điểm của $B C$ nên
+			$\overrightarrow{A M}=\dfrac{1}{2}\left(\overrightarrow{A B}+\overrightarrow{A C}\right)$.\\
+			Khi đó $\overrightarrow{A M}^2=\dfrac{1}{4}\left(\overrightarrow{A B}+\overrightarrow{A C}\right)^2=\dfrac{1}{4}\left(\overrightarrow{A B}^2+2 \overrightarrow{A B} \cdot \overrightarrow{A C}+\overrightarrow{A C}^2\right)$.\\
+			Mà $\overrightarrow{A B} \cdot \overrightarrow{A C}=\dfrac{b^2+c^2-a^2} 2$.\\
+			Suy ra $\overrightarrow{A M}^2=\dfrac{1}{4}\left(c^2+2 \cdot \dfrac{b^2+c^2-a^2} 2+b^2\right)=\dfrac{2\left(b^2+c^2\right)-a^2} 4$.\\
+			Vậy $m-n=2-\left(-1\right)=3$.\\
+			(Đây cũng là công thức để tính độ dài đường trung tuyến tam giác). }{
+			\begin{tikzpicture}[line join = round, line cap = round, scale=0.3] 
+				\def \a{3}; 
+				\coordinate (B) at (0,0); 
+				\coordinate (C) at ($(B)+(3*\a,0)$); 
+				\coordinate[shift=(60:(\a/2) cm)] (A) at (B); 
+				\coordinate (M) at ($(C)!0.5!(B)$); 
+				\draw (C)--(A)--(B)--(C)--cycle (A)--(M) ; 
+				\draw[->, arrows={-latex}] (A)--(B);
+				\draw[->, arrows={-latex}] (A)--(M);  
+				\draw[->, arrows={-latex}] (A)--(C);  
+				\foreach \x/\y in {A/90,B/-90,C/-90,M/-90}
+				\draw[fill=black] (\x) circle (1.5pt) + (\y:0.75cm) node{$\x$};
+				\foreach \x/\y in {B/M,M/C}{
+					\path (\x)--(\y) node[midway,sloped]{\tikz{\draw (-90:2pt)--(90:2pt);}};
+					\draw (\x)--(\y) node[midway,sloped] {};
+				}
+				
+			\end{tikzpicture}  
+		}
+	}
+\end{ex}
+
+%Câu 14
+\begin{ex}%[Câu 21]%[0H5H4-4]
+	Cho tứ giác lồi $ABCD$, hai đường chéo $AC$ và $BD$ cắt nhau tại $O$. Gọi $H$ và $K$ lần lượt là trực tâm các tam giác $ABO$ và $CDO$. Gọi $I$, $J$ lần lượt là trung điểm $AD$ và $BC$. Tính $\overrightarrow{HK}\cdot \overrightarrow{IJ}$.
+	\shortans{$0$}
+	\loigiai{
+		\immini{
+			Ta có $\heva{& \overrightarrow{IJ}=\overrightarrow{IA}+\overrightarrow{AC}+\overrightarrow{CJ} \\
+				&\overrightarrow{IJ}=\overrightarrow{ID}+\overrightarrow{DB}+\overrightarrow{BJ}}$
+			$ \Rightarrow 2 \overrightarrow{IJ}=\overrightarrow{AC}+\overrightarrow{DB}$.\\
+			Suy ra \begin{eqnarray*}
+				\overrightarrow{HK} \cdot 2 \overrightarrow{IJ}&=&\overrightarrow{HK}\left(\overrightarrow{AC}+\overrightarrow{DB}\right)\\
+				&=&\overrightarrow{HK} \cdot \overrightarrow{AC}+\overrightarrow{HK} \cdot \overrightarrow{DB}.\\
+				&=&\left(\overrightarrow{HB}+\overrightarrow{BD}+\overrightarrow{DK}\right)\cdot  \overrightarrow{AC}+\left(\overrightarrow{HA}+\overrightarrow{AC}+\overrightarrow{CK}\right) \cdot \overrightarrow{DB}\\
+				&=&\overrightarrow{AC}\cdot \left(\overrightarrow{BD}+\overrightarrow{DB}\right)\\
+				&=&\overrightarrow{AC} \cdot \overrightarrow 0=0.
+			\end{eqnarray*}
+			Vậy $\overrightarrow{HK} \cdot \overrightarrow{IJ}=0$.}{
+			\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=.5] 
+				\coordinate (D) at ($(0,0)$); 
+				\coordinate (A) at ($(D)+(9,0)$);
+				\coordinate (B) at ($(D)+(7,6)$);
+				\coordinate (C) at ($(D)+(1,5)$); 
+				\coordinate (I) at ($(D)!0.5!(A)$); 
+				\coordinate (J) at ($(B)!0.5!(C)$); 
+				\coordinate (O) at (intersection of A--C and B--D);		
+				\coordinate (H1) at ($(A)!(B)!(O)$); 
+				\coordinate (H2) at ($(A)!(O)!(B)$); 
+				\coordinate (H) at (intersection of B--H1 and O--H2); 
+				\coordinate (K1) at ($(O)!(D)!(C)$); 
+				\coordinate (K2) at ($(O)!(C)!(D)$); 
+				\coordinate (K) at (intersection of D--K1 and C--K2);
+				\draw (D)--(A)--(B)--(C)--(D)--(B) (A)--(C) (B)--(H1) (O)--(H2) (D)--(K1) (C)--(K2) (I)--(J); 
+				\path pic[draw,angle radius=6]{right angle=A--H1--B};
+				\path pic[draw,angle radius=6]{right angle=O--H2--A};
+				\path pic[draw,angle radius=6]{right angle=D--K1--C};
+				\path pic[draw,angle radius=6]{right angle=C--K2--D};
+				\foreach \x/\y in {A/-90,B/90,C/90,D/-90,O/90,H/-30,K/180,I/-90,J/90}
+				\draw[fill=black] (\x) circle (1.1pt) + (\y:0.5cm) node{$\x$};
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+
+\begin{ex}%[Câu 22]%[0H5V4-6]
+	Cho đoạn $AB=20$. Tồn tại điểm $M$ sao cho $T=3 MA^2+2 MB^2$ đạt giá trị bé nhất $T_{\min}$. Tính giá trị $T_{\min }$.
+	\shortans{$480$}
+	\loigiai{
+		Gọi điểm $I$ thỏa mãn $3 \overrightarrow{IA}+2 \overrightarrow{IB}=\overrightarrow 0$. Khi đó\\
+		\[3\overrightarrow{IA}+2\left(\overrightarrow{IA}+\overrightarrow{AB}\right)=\vec 0\Leftrightarrow 5\overrightarrow{IA}+2\overrightarrow{AB}=\vec 0\Leftrightarrow \overrightarrow{AI}=\dfrac{2}{5}\overrightarrow{AB}.\]
+		Suy ra điểm $I$ thuộc đoạn $AB$ và $IA=\dfrac{2}{5} \cdot AB=\dfrac{2}{5} \cdot 20=8, IB=12$.\\
+		Ta có 
+		\begin{eqnarray*}
+			T&=&3 MA^2+2 MB^2\\
+			&=&3 \overrightarrow{MA}^2+2 \overrightarrow{MB}^2\\
+			&=&3(\overrightarrow{MI}+\overrightarrow{IA})^2+2\left(\overrightarrow{MI}+\overrightarrow{IB}\right)^2\\
+			&=&3{{\overrightarrow{MI}}^2}+6\overrightarrow{MI}\cdot \overrightarrow{IA}+3{{\overrightarrow{IA}}^2}+2{{\overrightarrow{MI}}^2}+4\overrightarrow{MI}\cdot \overrightarrow{IB}+2{{\overrightarrow{IB}}^2} \\
+			&=&5MI^2+3Ia^2+2IB^2+2\overrightarrow{MI}\left(\underbrace{3\overrightarrow{IA}+2\overrightarrow{IB}}_{\vec 0}\right)\\
+			&=&5MI^2+3IA^2+2IB^2.
+		\end{eqnarray*}
+		Ta có $\left(3 IA^2+2 IB^2\right)$ là hằng số do ba điểm $A$, $B$, $I$ cố định.\\
+		Do đó $T$ đạt giá trị nhỏ nhất $\Leftrightarrow 5 MI^2$ nhỏ nhất $\Leftrightarrow MI$ bé nhất $\Leftrightarrow$ Điểm $M$ trùng với điểm $I$.\\
+		Khi đó giá trị $T$ nhỏ nhất là $T_{\min}=3 IA^2+2 IB^2=3 \cdot 8^2+2 \cdot 12^2=480$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-C4B5-KQ}
+\newpage 
+\subsection{Đề 2}
+\Opensolutionfile{ans}[ans/ans-0-B1]
+\caulc
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ vuông tại $A$ có $AB=a$, $AC=a\sqrt{3}$ và $AM$ là trung tuyến. Tính tích vô hướng $\overrightarrow{BA}\cdot \overrightarrow{AM}$.
+	\choice
+	{$-a^2$}
+	{$a^2$}
+	{\True $-\dfrac{a^2}{2}$}
+	{$\dfrac{a^2}{2}$}
+	\loigiai{
+		\immini{Ta có $BC=\sqrt{AB^2+AC^2}=2a$ và $AM=\dfrac{1}{2}BC=a$.\\
+			Khi đó \begin{align*}
+				\overrightarrow{BA}\cdot\overrightarrow{AM}&=-\overrightarrow{AB}\cdot\overrightarrow{AM}\\
+				&=-\dfrac{1}{2}\left(AB^2+AM^2-BM^2\right)\\
+				&=-\dfrac{a^2}{2}.
+		\end{align*}}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B)++(3,0) coordinate (C) ($(B)!0.5!(C)$) coordinate (M) ($(M)!1!-60:(B)$) coordinate (A);
+				\draw (A)--(B)--(C)--cycle (A)--(M);
+				\foreach \p/\g in {A/90,C/-30,B/210,M/-90} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\draw pic[draw, angle radius=0.2cm]{right angle=B--A--C};
+	\end{tikzpicture}}}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác đều $ABC$ có $AB=a$. Tính tích vô hướng $\overrightarrow{AB}\cdot \overrightarrow{CA}$.
+	\choice
+	{$\overrightarrow{AB}\cdot\overrightarrow{CA}=-\dfrac{\sqrt{3}}{2}a^2$}
+	{$\overrightarrow{AB}\cdot\overrightarrow{CA}=\dfrac{\sqrt{3}}{2}a^2$}
+	{\True $\overrightarrow{AB}\cdot\overrightarrow{CA}=-\dfrac{1}{2}a^2$}
+	{$\overrightarrow{AB}\cdot\overrightarrow{CA}=\dfrac{1}{2}a^2$}
+	\loigiai{
+		Ta có $\overrightarrow{AB}\cdot\overrightarrow{CA}=-\overrightarrow{AB}\cdot\overrightarrow{AC}=-\dfrac{1}{2}\left(AB^2+AC^2-BC^2\right)=-\dfrac{1}{2}a^2$.}
+\end{ex}
+
+\begin{ex}%[0H5V4-3]
+	Cho $\left|\overrightarrow{a}+\overrightarrow{b}\right|=4$, $\left|\overrightarrow{a}\right|=2$, $\left|\overrightarrow{b}\right|=3$. Tính $\left|\overrightarrow{a}-\overrightarrow{b}\right|$.
+	\choice
+	{$3$}
+	{\True $\sqrt{10}$}
+	{$\sqrt{12}$}
+	{$2$}
+	\loigiai{
+		Ta có \begin{align*}
+			\overrightarrow{a}\overrightarrow{b}&=\dfrac{1}{2}\left[\left(\overrightarrow{a}+\overrightarrow{b}\right)^2-\overrightarrow{a}^2-\overrightarrow{b}^2\right]=\dfrac{1}{2}\left(\left|\overrightarrow{a}+\overrightarrow{b}\right|^2-\left|\overrightarrow{a}\right|^2-\left|\overrightarrow{b}\right|^2\right)\\
+			&=\dfrac{1}{2}\left(4^2-2^2-3^2\right)=\dfrac{3}{2}.
+		\end{align*} 
+		Khi đó, \begin{align*}
+			\left|\overrightarrow{a}-\overrightarrow{b}\right|^2&=\left(\overrightarrow{a}-\overrightarrow{b}\right)^2=\overrightarrow{a}^2-2\overrightarrow{a}\overrightarrow{b}+\overrightarrow{b}^2\\
+			&=\left|\overrightarrow{a}\right|^2-2\overrightarrow{a}\overrightarrow{b}+\left|\overrightarrow{b}\right|^2=2^2-3+3^2=10.
+		\end{align*}
+		Vậy $\left|\overrightarrow{a}-\overrightarrow{b}\right|=\sqrt{10}$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5V4-3]
+	Cho $\left|\overrightarrow{a}\right|=2$, $\left|\overrightarrow{b}\right|=3$, $\left|\overrightarrow{a}+2\overrightarrow{b}\right|=5$. Tìm $\left|3\overrightarrow{a}-\overrightarrow{b}\right|$.
+	\choice
+	{$135$}
+	{$11$}
+	{\True  $\dfrac{3 \sqrt{30}}{2}$}
+	{$45$}
+	\loigiai{
+		Ta có $\left|\overrightarrow{a}+2\overrightarrow{b}\right|^2=\left(\overrightarrow{a}+2\overrightarrow{b}\right)^2=\overrightarrow{a}^2+4\overrightarrow{a}\overrightarrow{b}+4\overrightarrow{b}^2=\left|\overrightarrow{a}\right|^2+4\overrightarrow{a}\overrightarrow{b}+4\left|\overrightarrow{b}\right|^2$. Suy ra \begin{align*}
+			\overrightarrow{a}\overrightarrow{b}=\dfrac{1}{4}\left(\left|\overrightarrow{a}+2\overrightarrow{b}\right|^2-\left|\overrightarrow{a}\right|^2-4\left|\overrightarrow{b}\right|^2\right)=\dfrac{1}{4}\left(5^2-2^2-4\cdot 3^2\right)=-\dfrac{15}{4}.
+		\end{align*} 
+		Khi đó, \begin{align*}
+			\left|3\overrightarrow{a}-\overrightarrow{b}\right|^2&=\left(3\overrightarrow{a}-\overrightarrow{b}\right)^2=9\overrightarrow{a}^2-6\overrightarrow{a}\overrightarrow{b}+\overrightarrow{b}^2\\
+			&=9\left|\overrightarrow{a}\right|^2-6\overrightarrow{a}\overrightarrow{b}+\left|\overrightarrow{b}\right|^2=9\cdot 2^2+\dfrac{45}{2}+3^2=\dfrac{135}{2}.
+		\end{align*}
+		Vậy $\left|3\overrightarrow{a}-\overrightarrow{b}\right|=\dfrac{3\sqrt{10}}{2}$.}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ đều cạnh bằng $a$, trọng tâm $G$. Tích vô hướng của hai véc-tơ $\overrightarrow{BC}\cdot \overrightarrow{CG}$ bằng
+	\choice
+	{$\dfrac{a^2}{\sqrt{2}}$}
+	{$-\dfrac{a^2}{\sqrt{2}}$}
+	{$\dfrac{a^2}{2}$}
+	{\True $-\dfrac{a^2}{2}$}
+	\loigiai{
+		\immini{Ta có \begin{align*}
+				\left(\overrightarrow{BC},\overrightarrow{CG}\right)&=\left(-\overrightarrow{CB},\overrightarrow{CG}\right)=180^\circ-\left(\overrightarrow{CB},\overrightarrow{CG}\right)\\
+				&=180^\circ-30^\circ=150^\circ
+			\end{align*}
+			và $\left|\overrightarrow{CG}\right|=CG=\dfrac{2}{3}\cdot\dfrac{a\sqrt{3}}{2}=\dfrac{a\sqrt{3}}{3}$.}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B)++(3,0) coordinate (C) ($(B)!1!60:(C)$) coordinate (A) (barycentric cs:A=1,B=1,C=1) coordinate (G) (barycentric cs:B=1,A=1) coordinate (M);
+				\draw (A)--(B)--(C)--cycle (C)--(M);
+				\foreach \p/\g in {A/90,B/-150,C/-30,G/45,M/135} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\draw pic[draw, angle radius=0.2cm]{right angle=B--M--C};
+		\end{tikzpicture}}
+		\noindent\\
+		Vậy $\overrightarrow{BC}\cdot\overrightarrow{CG}=\left|\overrightarrow{BC}\right|\cdot\left|\overrightarrow{CG}\right|\cdot\cos\left(\overrightarrow{BC},\overrightarrow{CG}\right)=a\cdot\dfrac{a\sqrt{3}}{3}\cdot\left(-\dfrac{\sqrt{3}}{2}\right)=-\dfrac{a^2}{2}$. }
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ vuông ở $A$ có góc $\widehat{ABC}=60^{\circ}$. Số đo góc giữa hai véc-tơ $\overrightarrow{AC}$ và $\overrightarrow{CB}$ bằng
+	\choice
+	{$30^{\circ}$}
+	{$60^{\circ}$}
+	{$120^{\circ}$}
+	{\True $150^{\circ}$}
+	\loigiai{
+		Ta có $\widehat{ACB}=180^\circ-90^\circ-60^\circ=30^\circ$.\\
+		Khi đó,  $\left(\overrightarrow{AC},\overrightarrow{CB}\right)=\left(-\overrightarrow{CA},\overrightarrow{CB}\right)=180^\circ-\left(\overrightarrow{CA},\overrightarrow{CB}\right)=180^\circ-\widehat{ACB}=150^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác đều $ABC$. Tính $\left(\overrightarrow{BA}, \overrightarrow{CB}\right)$.
+	\choice
+	{$60^{\circ}$}
+	{\True $120^{\circ}$}
+	{$90^{\circ}$}
+	{$180^{\circ}$}
+	\loigiai{
+		Ta có $\left(\overrightarrow{BA};\overrightarrow{CB}\right)=\left(\overrightarrow{BA};-\overrightarrow{BC}\right)=180^\circ-\left(\overrightarrow{BA},\overrightarrow{BC}\right)=180^{\circ}-\widehat{ABC}=180^\circ-60^\circ=120^\circ$.}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho hình vuông $ABCD$ tâm $O$. Số đo góc $\left(\overrightarrow{CO}, \overrightarrow{BA}\right)$ bằng
+	\choice
+	{\True $45^{\circ}$}
+	{$145^{\circ}$}
+	{$135^{\circ}$}
+	{$30^{\circ}$}
+	\loigiai{
+		\immini{Hình vuông $ABCD$ có tâm $O$ nên
+			$$
+			\left(\overrightarrow{CO}, \overrightarrow{BA}\right)=\left(\overrightarrow{CO}, \overrightarrow{CD}\right)=\widehat{DCO}=45^{\circ}.
+			$$}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B) (2,0) coordinate (C) ($(B)!1!90:(C)$) coordinate (A) ($(A)+(C)-(B)$) coordinate (D) ($(A)!0.5!(C)$) coordinate (O);
+				\draw (A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D);
+				\foreach \p/\g in {A/120,B/-150,C/-30,D/60,O/-90} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+	\end{tikzpicture}}}
+\end{ex}
+
+\begin{ex}%[0H5V4-1]
+	Cho tam giác $ABC$ vuông tại $A$, biết $\widehat{B}=50^{\circ}$. Kẻ đường cao $AH$ $(H \in BC)$, đường phân giác trong của góc $C$ là $CK$ $(K \in AB)$. Xác định góc giữa hai véc-tơ $\overrightarrow{AH}$ và $\overrightarrow{CK}$.
+	\choice
+	{\True $110^{\circ}$}
+	{$120^{\circ}$}
+	{$100^{\circ}$}
+	{$90^{\circ}$}
+	\loigiai{
+		\immini{Gọi $D$ là giao điểm của $AH$ và $CK$.\\
+			Ta có $\overrightarrow{AH}$ cùng hướng với $\overrightarrow{DH}$ và $\overrightarrow{CK}$ cùng hướng với $\overrightarrow{DK}$ nên \[\left(\overrightarrow{AH},\overrightarrow{CK}\right)=\left(\overrightarrow{DH},\overrightarrow{DK}\right)=\widehat{HDK}.\]
+			Sử dụng tính chất góc ngoài tam giác ta có $$\widehat{BKC}=\widehat{KAC}+\widehat{ACK}=90^\circ+20^\circ=110^\circ.$$}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\def\r{2};
+				\path (0,0)coordinate (O)++(0:{\r}) coordinate (C) ($(C)!2!(O)$) coordinate (B) ($(B)!1!50:(C)$) coordinate (b) ($(C)!1!-40:(B)$) coordinate (c) (intersection of B--b and C--c) coordinate (A) ($(C)!1!-20:(B)$) coordinate (k) (intersection of B--A and C--k) coordinate (K) ($(B)!(A)!(C)$) coordinate (H) (intersection of A--H and C--K) coordinate (D);
+				\draw (A)--(B)--(C)--cycle (C)--(K) (A)--(H);
+				\foreach \p/\g in {A/90,B/-150,C/-30,K/150,H/-90,D/45} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\foreach \x/\y/\z in {C/A/B,A/H/C} \draw pic[draw, angle radius=0.2cm]{right angle=\x--\y--\z};
+		\end{tikzpicture}}\noindent\\
+		Vậy $\widehat{HDK}=360^\circ-\widehat{DHB}-\widehat{HBK}-\widehat{BKD}=360^\circ-90^\circ-50^\circ-110^\circ=110^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho hình chữ nhật $ABCD$ có $AB=a, AC=2 a$. Tính góc giữa hai véc-tơ $\overrightarrow{CA}$ và $\overrightarrow{DC}$.
+	\choice
+	{$60^{\circ}$}
+	{$45^{\circ}$}
+	{$150^{\circ}$}
+	{\True $120^{\circ}$}
+	\loigiai{
+		\immini{Ta có \begin{align*}
+				\left(\overrightarrow{CA},\overrightarrow{DC}\right)&=\left(\overrightarrow{CA},-\overrightarrow{CD}\right)\\
+				&=180^\circ-\left(\overrightarrow{CA},\overrightarrow{CD}\right)=180^\circ-\widehat{DCA}.
+			\end{align*}
+		}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (b)++(3,0) coordinate (C)++(0,1.5) coordinate (D) ($(b)+(D)-(C)$) coordinate (a) ($(C)!1!-30:(b)$) coordinate (c) (intersection of D--a and C--c) coordinate (A) ($(b)!(A)!(C)$) coordinate (B);
+				\draw (A)--(B)--(C)--(D)--cycle (A)--(C);
+				\foreach \p/\g in {A/120,B/-150,C/-30,D/60} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\foreach \x/\y/\z in {D/A/B,A/B/C,B/C/D,C/D/A} \draw pic[draw, angle radius=0.2cm]{right angle=\x--\y--\z};
+		\end{tikzpicture}}\noindent\\
+		Tam giác $ACD$ vuông tại $D$ nên $\cos\widehat{DCA}=\dfrac{CD}{CA}=\dfrac{a}{2a}=\dfrac{1}{2}\Rightarrow\widehat{DCA}=60^\circ$.\\
+		Vậy $\left(\overrightarrow{CA},\overrightarrow{DC}\right)=180^\circ-60^\circ=120^\circ$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ có $AB=2$ cm, $BC=4$ cm, $CA=5$ cm. Tính $\overrightarrow{CA}\cdot\overrightarrow{CB}$.
+	\choice
+	{$\overrightarrow{CA}\cdot\overrightarrow{CB}=37$}
+	{\True $\overrightarrow{CA}\cdot \overrightarrow{CB}=\dfrac{37}{2}$}
+	{ $\overrightarrow{CA}\cdot \overrightarrow{CB}=\dfrac{37}{20}$}
+	{$\overrightarrow{CA}\cdot \overrightarrow{CB}=-\dfrac{37}{2}$}
+	\loigiai{
+		Ta có $\overrightarrow{CA}\cdot\overrightarrow{CB}=\dfrac{1}{2}\left(CA^2+CB^2-AB^2\right)=\dfrac{1}{2}\left(5^2+4^2-2^2\right)=\dfrac{37}{2}$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ với $\widehat{A}=60^{\circ}$. Tính tổng $\left(\overrightarrow{AB}, \overrightarrow{BC}\right)+\left(\overrightarrow{BC}, \overrightarrow{CA}\right)$.
+	\choice
+	{$120^{\circ}$}
+	{$360^{\circ}$}
+	{$270^{\circ}$}
+	{\True $240^{\circ}$}
+	\loigiai{
+		Ta có \begin{align*}
+			\left(\overrightarrow{AB}, \overrightarrow{BC}\right)+\left(\overrightarrow{BC}, \overrightarrow{CA}\right)&=\left(-\overrightarrow{BA}, \overrightarrow{BC}\right)+\left(-\overrightarrow{CB}, \overrightarrow{CA}\right)\\
+			&=180^\circ -\left(\overrightarrow{BA}, \overrightarrow{BC}\right)+180^\circ-\left(\overrightarrow{CB}, \overrightarrow{CA}\right)\\
+			&=360^\circ-\left(\widehat{ABC}+\widehat{ACB}\right)\\
+			&=360^\circ-\left(180^\circ-\widehat{BAC}\right)\\
+			&=360^\circ-\left(180^\circ-60^\circ\right)\\
+			&=240^\circ.
+		\end{align*}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1}
+\cauds
+\Opensolutionfile{ans}[ans/ans-0-B1-DS]
+
+\begin{ex}%[0H5V4-1]
+	Cho tam giác $ABC$ vuông tại $A$ có $AB=a, BC=2 a$. Xét tính đúng sai của các mệnh đề sau.
+	\choiceTF
+	{\True $\widehat{ACB}=60^{\circ}$}
+	{\True $\overrightarrow{BA}\cdot \overrightarrow{BC}=a^2$}
+	{$\overrightarrow{BC}\cdot \overrightarrow{CA}=3 a^2$}
+	{\True $\overrightarrow{AB}\cdot \overrightarrow{BC}+\overrightarrow{BC}\cdot \overrightarrow{CA}+\overrightarrow{CA}\cdot \overrightarrow{AB}=-4 a^2$}
+	\loigiai{\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (A)++(3,0) coordinate (C) (A)++(0,2) coordinate (B);
+				\draw (A)--(B)--(C)--cycle;
+				\foreach \p/\g in {A/210,B/90,C/-30} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có $\sin\widehat{ACB}=\dfrac{AB}{BC}=\dfrac{1}{2}\Rightarrow\widehat{ACB}=60^\circ$.
+			\itemch Đúng. Ta có $AC=\sqrt{BC^2-AB^2}=a\sqrt{3}$. Khi đó, \[\overrightarrow{BA}\cdot\overrightarrow{BC}=\dfrac{1}{2}\left(BA^2+BC^2-AC^2\right)=\dfrac{1}{2}\left(a^2+4a^2-3a^2\right)=a^2.\]
+			\itemch Sai. Ta có \begin{align*}
+				\overrightarrow{BC}\cdot \overrightarrow{CA}=-\overrightarrow{CB}\cdot\overrightarrow{CA}=-CB\cdot CA\cdot\cos\widehat{ACB}=-2a\cdot a\cdot \dfrac{1}{2}=-a^2.
+			\end{align*}
+			\itemch Đúng. Ta có \begin{eqnarray*}
+				&&\overrightarrow{AB}\cdot \overrightarrow{BC}+\overrightarrow{BC}\cdot \overrightarrow{CA}+\overrightarrow{CA}\cdot \overrightarrow{AB}\\
+				&=&-\overrightarrow{BA}\cdot \overrightarrow{BC}-\overrightarrow{CB}\cdot \overrightarrow{CA}-\overrightarrow{AC}\cdot \overrightarrow{AB}\\
+				&=&-\dfrac{1}{2}\left(BA^2+BC^2-AC^2\right)-\dfrac{1}{2}\left(CB^2+CA^2-AB^2\right)-\dfrac{1}{2}\left(AC^2+AB^2-BC^2\right)\\
+				&=&-\dfrac{1}{2}\left(AB^2+BC^2+CA^2\right)\\
+				&=&-\dfrac{1}{2}\left(a^2+4a^2+3a^2\right)\\
+				&=&-4a^2.
+			\end{eqnarray*}
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0H5V4-1]
+	Cho hình vuông $ABCD$ tâm $O$, có cạnh $a$. Biết $M$ là trung điểm của $AB, G$ là trọng tâm tam giác $ADM$. Xét tính đúng sai của các mệnh đề sau.
+	\choiceTF 
+	{$\overrightarrow{AB}\cdot \overrightarrow{CA}=a^2$}
+	{$\overrightarrow{AM}\cdot \overrightarrow{AC}=\dfrac{a^2}{3}$}
+	{\True $\overrightarrow{AD}\cdot \overrightarrow{BD}+\overrightarrow{O M}\cdot \overrightarrow{AC}=\dfrac{a^2}{2}$}
+	{\True $\left(\overrightarrow{AB}+\overrightarrow{AD}\right)\left(\overrightarrow{BD}+\overrightarrow{BC}\right)=a^2$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B) (3,0) coordinate (C) ($(B)!1!90:(C)$) coordinate (A) ($(A)+(C)-(B)$) coordinate (D) ($(A)!0.5!(C)$) coordinate (O) (barycentric cs:A=1,B=1) coordinate (M) (barycentric cs:A=1,D=1,M=1) coordinate (G);
+				\draw (A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D)--(M);
+				\foreach \p/\g in {A/120,B/-150,C/-30,D/60,M/180,G/0,O/-90} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Sai. Ta có \begin{align*}
+				\overrightarrow{AB}\cdot \overrightarrow{CA}&=-\overrightarrow{CD}\cdot\overrightarrow{CA}\\
+				&=-CD\cdot CA\cdot\cos\widehat{ACD}\\
+				&=-a\sqrt{2}\cdot a\cdot\cos45^\circ=-a^2.
+			\end{align*}
+			\itemch Sai. Ta có $\overrightarrow{AM}\cdot \overrightarrow{AC}=AM\cdot AC\cos\widehat{MAC}=\dfrac{a}{2}\cdot a\sqrt{2}\cdot\cos 45^\circ=\dfrac{a^2}{2}$.
+			\itemch Đúng. Ta có \begin{align*}
+				\overrightarrow{AD}\cdot \overrightarrow{BD}+\overrightarrow{O M}\cdot \overrightarrow{AC}&=\overrightarrow{DA}\cdot\overrightarrow{DB}-\dfrac{1}{2}\cdot\overrightarrow{AD}\cdot\overrightarrow{AC}\\
+				&=a\cdot a\sqrt{2}\cos 45^\circ -\dfrac{1}{2}\cdot a\cdot a\sqrt{2}\cdot\cos 45^\circ=\dfrac{a^2}{2}.
+			\end{align*} 
+			\itemch Đúng. Ta có \begin{align*}
+				\left(\overrightarrow{AB}+\overrightarrow{AD}\right)\left(\overrightarrow{BD}+\overrightarrow{BC}\right)&=\overrightarrow{AC}\left(\overrightarrow{BD}+\overrightarrow{BC}\right)\\
+				&=\overrightarrow{AC}\cdot\overrightarrow{BD}+\overrightarrow{AC}\cdot\overrightarrow{BC}\\
+				&=0+\overrightarrow{CA}\cdot\overrightarrow{CB}\\
+				&=a\sqrt{2}\cdot a\cdot\cos 45^\circ=a^2.
+			\end{align*}
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác đều $ABC$ có đường cao $AH$. Xét tính đúng sai của các mệnh đề sau.
+	\choiceTF 
+	{\True $\left(\overrightarrow{AB}, \overrightarrow{AC}\right)=60^{\circ}$}
+	{\True $\left(\overrightarrow{AB}, \overrightarrow{BC}\right)=120^{\circ}$}
+	{\True $\left(\overrightarrow{AH}, \overrightarrow{BC}\right)=90^{\circ}$}
+	{$\left(\overrightarrow{HA}, \overrightarrow{AB}\right)=120^{\circ}$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B)++(3,0) coordinate (C) ($(B)!1!60:(C)$) coordinate (A) ($(B)!0.5!(C)$) coordinate (H);
+				\draw (A)--(B)--(C)--cycle (A)--(H);
+				\foreach \p/\g in {A/90,B/-150,C/-30,H/-90} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\draw pic[draw, angle radius=0.2cm]{right angle=A--H--C};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Đúng. Ta có $\left(\overrightarrow{AB}, \overrightarrow{AC}\right)=\widehat{BAC}=60^{\circ}$.
+			\itemch Đúng. Ta có \begin{align*}
+				\left(\overrightarrow{AB}, \overrightarrow{BC}\right)&=\left(-\overrightarrow{BA}, \overrightarrow{BC}\right)=180^\circ-\left(\overrightarrow{BA}, \overrightarrow{BC}\right)\\
+				&=180^\circ-\widehat{ABC}=180^\circ-60^\circ=120^{\circ}.
+			\end{align*} 
+			\itemch Đúng. Ta có $AH\perp BC$ nên $\left(\overrightarrow{AH}, \overrightarrow{BC}\right)=90^{\circ}$.
+			\itemch Sai. Ta có \begin{align*}
+				\left(\overrightarrow{HA}, \overrightarrow{AB}\right)&=\left(-\overrightarrow{AH}, \overrightarrow{AB}\right)=180^\circ-\left(\overrightarrow{AH}, \overrightarrow{AB}\right)\\
+				&=180^\circ-\widehat{HAB}=180^\circ-30^\circ=150^{\circ}.
+			\end{align*} 
+		\end{itemchoice}
+	}
+\end{ex}
+
+\begin{ex}%[0H5V4-4]
+	Cho tam giác $ABC$ có $AB=2 a, AC=3 a, \widehat{BAC}=60^{\circ}$. Gọi $I$ là trung điểm đoạn thẳng $BC$. Điểm $J$ thuộc đoạn $AC$ thỏa mãn: $12 A J=7 AC$. Xét tính đúng sai của các mệnh đề sau.
+	\choiceTF 
+	{$\overrightarrow{AB}\cdot \overrightarrow{AC}=4 a^2$}
+	{$\overrightarrow{A I}=\dfrac{3}{2}\overrightarrow{AB}+\dfrac{3}{2}\overrightarrow{AC}$}
+	{\True $\overrightarrow{B J}=-\overrightarrow{AB}+\dfrac{7}{12}\overrightarrow{AC}$}
+	{\True $A I \perp B J$}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (A)++(3,0) coordinate (B) ($(A)!1.5!60:(B)$) coordinate (C) ($(B)!0.5!(C)$) coordinate (I) ($(A)!7/12!(C)$) coordinate (J);
+				\draw (A)--(B)--(C)--cycle (A)--(I) (B)--(J);
+				\foreach \p/\g in {A/210,B/-30,C/90,I/30,J/135} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Sai. Ta có $\overrightarrow{AB}\cdot \overrightarrow{AC}=AB\cdot AC\cdot\cos\widehat{BAC}=2a\cdot 3a\cdot\cos 60^\circ=3a^2$.
+			\itemch Sai. Do $I$ là trung điểm của $BC$ nên $\overrightarrow{AI}=\dfrac{1}{2}\overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AC}$.
+			\itemch Sai. Ta có $\overrightarrow{BJ}=\overrightarrow{AJ}-\overrightarrow{AB}=\dfrac{7}{12}\overrightarrow{AC}-\overrightarrow{AB}=-\overrightarrow{AB}+\dfrac{7}{12}\overrightarrow{AC}$.
+			\itemch Đúng. Ta có \begin{align*}
+				\overrightarrow{AI}\cdot\overrightarrow{BJ}&=\dfrac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC})\left(-\overrightarrow{AB}+\dfrac{7}{12}\overrightarrow{AC}\right)\\
+				&=\dfrac{1}{2}\left(-\overrightarrow{AB}^2+\dfrac{7}{12}\overrightarrow{AB}\cdot\overrightarrow{AC}-\overrightarrow{AB}\cdot\overrightarrow{AC}+\dfrac{7}{12}\overrightarrow{AC}^2\right)\\
+				&=\dfrac{1}{2}\left(-4a^2+\dfrac{7}{12}\cdot3a^2-3a^2+\dfrac{7}{12}\cdot9a^2\right)=0
+			\end{align*}
+			Vậy $AI\perp BJ$.
+		\end{itemchoice}
+	}
+\end{ex}
+
+\Closesolutionfile{ans}
+\indapan{3}{ans/ans-0-B1-DS}
+
+\Opensolutionfile{ans}[ans/ans-0-B1-KQ]
+\caukq
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ vuông tại $A$ có cạnh $AC=7$ cm và $BC=14$ cm. Tính cô-sin của góc giữa hai véc-tơ $\overrightarrow{AC}$ và $\overrightarrow{CB}$.
+	\shortans{$-0{,}5$}
+	\loigiai{
+		\immini{Ta có $\left(\overrightarrow{AC}, \overrightarrow{CB}\right)=180^{\circ}-\left(\overrightarrow{CA}, \overrightarrow{CB}\right)=180^{\circ}-\widehat{ACB}$.\\
+			Mà $\cos \widehat{ACB}=\dfrac{AC}{BC}=\dfrac{1}{2}$ nên $\widehat{ACB}=60^{\circ}$.\\
+			Do đó $\left(\overrightarrow{AC}, \overrightarrow{CB}\right)=180^{\circ}-60^{\circ}=120^{\circ}$.\\
+			Vậy $\cos (\overrightarrow{AC}, \overrightarrow{CB})=\cos 120^{\circ}=-\dfrac{1}{2}=-0{,}5$.}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (A)++(1.5,0) coordinate (C) ($(C)!1!-60:(A)$) coordinate (c) (A)++(0,1) coordinate (a) (intersection of A--a and C--c) coordinate (B);
+				\draw (A)--(B)--(C)--cycle;
+				\foreach \p/\g in {A/210,B/90,C/-30} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\draw pic[draw, angle radius=0.2cm]{right angle=B--A--C};
+	\end{tikzpicture}}}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho tam giác $ABC$ vuông tại $A$, trên hai cạnh $AB$ và $AC$ lần lượt lấy hai điểm $B'$ và $C'$ sao cho $AB \cdot AB'=AC \cdot AC'$. Gọi $M$ là trung điểm của $BC$. Tính $\overrightarrow{AM}\cdot \overrightarrow{B'C'}$
+	\shortans{$0$}
+	\loigiai{
+		\immini{Vì $M$ là trung điểm của $BC$ nên $\overrightarrow{AM}=\dfrac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC})$.\\
+			Do đó, \begin{align*}
+				2\overrightarrow{AM}\cdot\overrightarrow{B'C'}&=\left(\overrightarrow{AB}+\overrightarrow{AC}\right)\left(\overrightarrow{AC'}-\overrightarrow{AB'}\right)\\
+				&=\overrightarrow{AB}\cdot\overrightarrow{AC'}+\overrightarrow{AC}\cdot\overrightarrow{AC'}-\overrightarrow{AB}\cdot\overrightarrow{AB'}-\overrightarrow{AC}\cdot\overrightarrow{AB'}\\
+				&=0-AB\cdot AB'+AC\cdot AC'=0.
+		\end{align*} }{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (A)++(3,0) coordinate (C) (A)++(0,2) coordinate (B) ($(B)!0.5!(C)$) coordinate (M);
+				\draw (A)--(B)--(C)--cycle;
+				\foreach \p/\g in {A/210,B/90,C/-30,M/45} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\draw pic[draw, angle radius=0.2cm]{right angle=B--A--C};
+		\end{tikzpicture}}
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-3]
+	Cho hai véc-tơ $\overrightarrow{a}$ và $\overrightarrow{b}$. Biết $\left|\overrightarrow{a}\right|=2,\left|\overrightarrow{b}\right|=\sqrt{3}$ và $\left(\overrightarrow{a}, \overrightarrow{b}\right)=120^{\circ}$. Tính $\left|\overrightarrow{a}+\overrightarrow{b}\right|$ (làm tròn kết quả đến hàng phần trăm).
+	\shortans{$1{,}88$}
+	\loigiai{
+		Ta có \begin{align*}
+			\left|\overrightarrow{a}+\overrightarrow{b}\right|&=\sqrt{\left(\overrightarrow{a}+\overrightarrow{b}\right)^2}=\sqrt{\overrightarrow{a}^2+\overrightarrow{b}^2+2 \overrightarrow{a}\overrightarrow{b}}\\
+			&=\sqrt{\left|\overrightarrow{a}\right|^2+\left|\overrightarrow{b}\right|^2+2\left|\overrightarrow{a}\right| \cdot\left|\overrightarrow{b}\right| \cdot \cos \left(\overrightarrow{a}, \overrightarrow{b}\right)}=\sqrt{7-2 \sqrt{3}}\\
+			&\approx 1{,}88.
+	\end{align*}}
+\end{ex}
+
+\begin{ex}%[0H5H4-5]
+	Cho $\triangle ABC$ đều có cạnh bằng $3$. Điểm $M$ thỏa mãn $MA^2+MB^2+MC^2=15$, khi đó tập hợp điểm $M$ thuộc đường tròn có bán kính bằng bao nhiêu (làm tròn kết quả đến hàng phần trăm)?
+	\shortans{$1{,}41$}
+	\loigiai{
+		Gọi $G$ là trọng tâm tam giác $ABC$, ta có $GA=GB=GC=\sqrt{3}$ và $\overrightarrow{GA}+\overrightarrow{GB}+\overrightarrow{GC}=\overrightarrow{0}$.\\
+		Khi đó, \begin{align*}
+			MA^2+MB^2+MC^2&=\left(\overrightarrow{MG}+\overrightarrow{GA}\right)^2+\left(\overrightarrow{MG}+\overrightarrow{GB}\right)^2+\left(\overrightarrow{MG}+\overrightarrow{GC}\right)^2\\
+			&=3MG^2+GA^2+GB^2+GC^2\\
+			&=3MG^2+9.
+		\end{align*}
+		Suy ra $15=3MG^2+9\Leftrightarrow MG^2=2\Leftrightarrow MG=\sqrt{2}$.\\
+		Vậy tập hợp các điểm $M$ là đường tròn tâm $G$ bán kính $R=\sqrt{2}\approx 1{,}41$.
+	}
+\end{ex}
+
+\begin{ex}%[0H5H4-1]
+	Cho hình thoi $ABCD$ tâm $O$ có cạnh bằng $4$ và $\widehat{ABD}=60^{\circ}$. Gọi $I$ là điểm thỏa mãn $2 \overrightarrow{I C}+\overrightarrow{I D}=\overrightarrow{0}$. Tính tích vô hướng $\overrightarrow{AO}\cdot \overrightarrow{BI}$.
+	\shortans{$8$}
+	\loigiai{
+		\immini{Do $ABCD$ là hình thoi có cạnh bằng $4$ và $\widehat{ABD}=60^{\circ}$ nên $ABD$ và $BCD$ là các tam giác đều cạnh $4$.\\
+			Ta có \begin{align*}
+				\overrightarrow{AO}\cdot\overrightarrow{BI}&=\overrightarrow{AO}\cdot(\overrightarrow{BD}+\overrightarrow{DI})=\overrightarrow{AO}\cdot\overrightarrow{DI}\\
+				&=\overrightarrow{AO}\cdot\left(\dfrac{2}{3}\overrightarrow{DC}\right)=\dfrac{2}{3}\overrightarrow{AO}\cdot\overrightarrow{AB}\\
+				&=\dfrac{2}{3}\cdot\dfrac{4\sqrt{3}}{2}\cdot 4\cdot\cos 30^{\circ}=8.
+		\end{align*}}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (A)++(4,0) coordinate (C) ($(A)!0.5!(C)$) coordinate (O) ($(A)!1!30:(C)$) coordinate (a) (O)++(0,1) coordinate (o) (intersection of A--a and O--o) coordinate (B) ($(A)+(C)-(B)$) coordinate (D) ($(C)!1/3!(D)$) coordinate (I);
+				\draw (A)--(B)--(C)--(D)--cycle (A)--(C) (I)--(B)--(D);
+				\foreach \p/\g in {A/180,B/90,C/0,D/-90,I/-45,O/225} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+		\end{tikzpicture}}
+	}
+\end{ex}
+
+\begin{ex}%[0H5C4-1]
+	Cho tam giác $ABC$ có $M$ là trung điểm $BC$ và $H$ là trực tâm. Biết $\overrightarrow{MH}\cdot \overrightarrow{MA}=k BC^2$. Tìm $k$.
+	\shortans{$0{,}25$}
+	\loigiai{\immini{Vì $M$ là trung điểm $BC$ nên $\overrightarrow{AM}=\dfrac{1}{2}\left(\overrightarrow{AB}+\overrightarrow{AC}\right)$ và $\overrightarrow{H M}=\dfrac{1}{2}\left(\overrightarrow{HB}+\overrightarrow{HC}\right)$.\\
+			Ta có 
+			\begin{align*}
+				\overrightarrow{MH}\cdot \overrightarrow{MA}&=\overrightarrow{AM}\cdot \overrightarrow{H M}\\
+				&=\dfrac{1}{4}\left(\overrightarrow{AB}+\overrightarrow{AC}\right) \cdot\left(\overrightarrow{HB}+\overrightarrow{HC}\right)\\
+				&=\dfrac{1}{4}\left(\overrightarrow{AB}\cdot \overrightarrow{HB}+\overrightarrow{AB}\cdot \overrightarrow{HC}+\overrightarrow{AC}\cdot \overrightarrow{HB}+\overrightarrow{AC}\cdot \overrightarrow{HC}\right) \\
+				& =\dfrac{1}{4}\left(\overrightarrow{AB}\cdot \overrightarrow{HB}+\overrightarrow{AC}\cdot \overrightarrow{HC}\right)\\
+				&=\dfrac{1}{4}\left[\overrightarrow{AB}\left(\overrightarrow{HC}+\overrightarrow{CB}\right)+\overrightarrow{AC}\left(\overrightarrow{HB}+\overrightarrow{BC}\right)\right] \\
+				& =\dfrac{1}{4}\left(\overrightarrow{AB}\cdot \overrightarrow{HC}+\overrightarrow{AB}\cdot \overrightarrow{CB}+\overrightarrow{AC}\cdot \overrightarrow{HB}+\overrightarrow{AC}\cdot \overrightarrow{BC}\right)\\
+				&=\dfrac{1}{4}\left(\overrightarrow{AB}\cdot \overrightarrow{CB}+\overrightarrow{AC}\cdot \overrightarrow{BC}\right) \\
+				& =\dfrac{1}{4}\left(\overrightarrow{AB}\cdot \overrightarrow{CB}-\overrightarrow{AC}\cdot \overrightarrow{CB}\right)\\
+				&=\dfrac{1}{4}\overrightarrow{CB}\left(\overrightarrow{AB}-\overrightarrow{AC}\right)\\
+				&=\dfrac{1}{4}\overrightarrow{CB}^2=\dfrac{1}{4}BC^2.
+			\end{align*}
+		}{\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\path (0,0)coordinate (B) (5,0) coordinate (C) (1.5,3) coordinate (A) ($(B)!(C)!(A)$) coordinate (D) ($(A)!(B)!(C)$) coordinate (E) (intersection of C--D and B--E) coordinate (H) ($(B)!0.5!(C)$) coordinate (M);
+				\draw (A)--(B)--(C)--cycle (C)--(D) (B)--(E) (A)--(M)--(H);
+				\foreach \p/\g in {A/90,B/-150,C/-30,D/180,E/30,H/90,M/-90} \fill[black] (\p) circle(1pt)+(\g:0.3) node{$\p$};
+				\foreach \x/\y/\z in {B/D/C,B/E/C} \draw pic[draw, angle radius=0.2cm]{right angle=\x--\y--\z};
+		\end{tikzpicture}}\noindent\\
+		Vậy $k=\dfrac{1}{4}=0{,}25$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\indapan{6}{ans/ans-0-B1-KQ}
