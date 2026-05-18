@@ -1486,3 +1486,311 @@ c) Sai. $a^2=b^2+c^2-2bc\cos A=7^2+5^2-2\cdot7\cdot 5\cdot\dfrac{3}{5}=32\Righta
 
 d) Sai. $\dfrac{a}{\sin A}=2R\Rightarrow R=\dfrac{a}{2\cdot\sin A}=\dfrac{5\sqrt 2}{2}$; $p=\dfrac{a+b+c}{2}=6+2\sqrt 2 $
 $$S=pr\Rightarrow r=\dfrac{S}{p}=\dfrac{14}{6+2\sqrt 2}=3-\sqrt 2 .$$
+
+---
+id: 036
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Xác định tính đúng sai của các hệ thức toán học
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - hệ thức lượng
+  - định lí côsin
+  - diện tích tam giác
+---
+
+# Đề bài
+
+Cho $\Delta ABC$ có $AB=3$, $AC=4$, diện tích $S=3\sqrt{3}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $BC^2=AB^2+AC^2-2AB\cdot AC\cdot\cos A$
+
+b) Đúng/Sai: $\sin A=-\dfrac{\sqrt{3}}{2}$
+
+c) Đúng/Sai: $\cos A=\dfrac{1}{2}$
+
+d) Đúng/Sai: $\cos A=-\dfrac{1}{2}$
+
+# Lời giải
+
+- **Mệnh đề a) Đúng:** Theo định lí côsin ta có $BC^2=AB^2+AC^2-2AB\cdot AC\cdot\cos A$.
+- **Mệnh đề b) Sai:** Ta có $S=\dfrac{1}{2}AB\cdot AC\cdot\sin A\Rightarrow\sin A=\dfrac{2S}{AB\cdot AC}=\dfrac{2\cdot 3\sqrt{3}}{3\cdot 4}=\dfrac{\sqrt{3}}{2}$.
+- **Mệnh đề c) Đúng:** $\cos^2A=1-\sin^2A=1-\dfrac{3}{4}=\dfrac{1}{4}\Rightarrow\hoac{&\cos A=\dfrac{1}{2}\\&\cos A=-\dfrac{1}{2}.}$
+- **Mệnh đề d) Đúng:** $\cos^2A=1-\sin^2A=1-\dfrac{3}{4}=\dfrac{1}{4}\Rightarrow\hoac{&\cos A=\dfrac{1}{2}\\&\cos A=-\dfrac{1}{2}.}$
+
+---
+id: 037
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Biến đổi hệ thức lượng trong tam giác
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - hệ thức lượng
+  - định lí sin
+  - định lí côsin
+---
+
+# Đề bài
+
+Cho tam giác $ABC$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $a=b\cos C+c\cos B$
+
+b) Đúng/Sai: $\sin A=\sin B\cos C+\sin C\cos B$
+
+c) Đúng/Sai: $h_a=2R\sin B\sin C$
+
+d) Đúng/Sai: $b^2-c^2=a(b\cos C-c\cos B)$
+
+# Lời giải
+
+- **Mệnh đề a) Đúng:** Ta có $b\cos C+c\cos B=\dfrac{a^2+b^2-c^2}{2a}+\dfrac{a^2+c^2-b^2}{2a}=\dfrac{2a^2}{2a}=a$.
+- **Mệnh đề b) Đúng:** Theo định lí sin ta có $\sin B=\dfrac{b}{2R}$; $\sin C=\dfrac{c}{2R}$. Khi đó $\sin B\cos C+\sin C\cos B=\dfrac{b}{2R}\cdot\cos C+\dfrac{c}{2R}\cdot\cos B=\dfrac{1}{2R}(b\cos C+c\cos B)=\dfrac{1}{2R}\cdot a = \sin A$.
+- **Mệnh đề c) Đúng:** $S=\dfrac{1}{2}a\cdot{h_a}=\dfrac{1}{2}bc\sin A \Rightarrow{h_a}=\dfrac{bc\sin A}{a}=\dfrac{2R\sin B\cdot 2R\sin C\cdot\sin A}{2R\sin A}=2R\sin B\sin C$.
+- **Mệnh đề d) Đúng:** $a(b\cos C-c\cos B)=ab\cdot\cos C-ac\cdot\cos B=ab\cdot\dfrac{a^2+b^2-c^2}{2ab}-ac\cdot\dfrac{a^2+c^2-b^2}{2ac} =\dfrac{a^2+b^2-c^2}{2}-\dfrac{a^2+c^2-b^2}{2}=\dfrac{a^2+b^2-c^2-a^2-c^2+b^2}{2}=b^2-c^2$.
+
+---
+id: 038
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính các đại lượng trong tam giác
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - định lí côsin
+  - diện tích tam giác
+  - bán kính đường tròn ngoại tiếp
+---
+
+# Đề bài
+
+Cho $\triangle ABC$ có $BC=\sqrt{6}$, $CA=2$, $AB=1+\sqrt{3}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\widehat A=30^\circ$
+
+b) Đúng/Sai: $\widehat{B}=35^\circ$
+
+c) Đúng/Sai: $S=\dfrac{3+\sqrt{3}}{2}$
+
+d) Đúng/Sai: $R=\sqrt{2}$
+
+# Lời giải
+
+- **Mệnh đề a) Sai:** $\cos A=\dfrac{b^2+c^2-a^2}{2bc}=\dfrac{1}{2}\Rightarrow\widehat A=60^\circ$.
+- **Mệnh đề b) Sai:** $\cos B=\dfrac{a^2+c^2-b^2}{2ac}=\dfrac{\sqrt{2}}{2}\Rightarrow\widehat{B}=45^\circ$.
+- **Mệnh đề c) Đúng:** $S=\dfrac{1}{2}bc\sin A=\dfrac{3+\sqrt{3}}{2}$.
+- **Mệnh đề d) Đúng:** $S=\dfrac{1}{2}BC\cdot\ AH\Rightarrow AH=\dfrac{2S}{BC}$; $S=\dfrac{abc}{4R}\Rightarrow R=\dfrac{abc}{4S}=\sqrt{2}$.
+
+---
+id: 039
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính độ dài đoạn thẳng trong tam giác
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 0.53
+tags:
+  - định lí côsin
+  - tam giác cân
+---
+
+# Đề bài
+
+Cho tam giác cân $ABC$ có $\widehat A=120^\circ$ và $AB=AC=1$. Lấy điểm $M$ trên cạnh $BC$ sao cho $BM=\dfrac{2BC}{5}$. Độ dài $AM$ bằng bao nhiêu? (Làm tròn đến 2 chữ số thập phân).
+
+\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+	\def\a{3}
+	\path
+	(0:0) coordinate (A)
+	(0:\a) coordinate (B)
+	(120:\a) coordinate (C)
+	($(B)!2/5!(C)$) coordinate (M)
+	;
+	\draw 
+	(A)--(B)--(C)--(A)--(M)
+	;
+	\foreach \p/\g in {A/190, B/0, C/90, M/40}
+	\draw[fill=black] (\p) circle (1pt) node[shift=(\g:3mm)] {$\p$};
+\end{tikzpicture}
+
+# Lời giải
+
+Ta có
+$$BC = \sqrt{AB^2+AC^2-2AB\cdot AC\cos{120^\circ}} = \sqrt{1^2+1^2-2\cdot1\cdot 1\cdot\left(-\dfrac{1}{2}\right)} = \sqrt{3}$$
+$$\Rightarrow BM = \dfrac{2\sqrt{3}}{5}$$
+Áp dụng định lí côsin trong tam giác $ABM$ với $\widehat{B} = 30^\circ$:
+$$AM = \sqrt{AB^2+BM^2-2AB\cdot BM\cdot\cos{30^\circ}} = \sqrt{1^2+\left(\dfrac{2\sqrt{3}}{5}\right)^2-2\cdot1\cdot\dfrac{2\sqrt{3}}{5}\cdot\dfrac{\sqrt{3}}{2}} = \dfrac{\sqrt{7}}{5}\approx 0{,}53$$
+
+---
+id: 040
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính độ dài đoạn thẳng trong tam giác
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 7.4
+tags:
+  - định lí côsin
+---
+
+# Đề bài
+
+Cho tam giác $ABC$, có $AB=8$, $AC=9$, $BC=10$. Một điểm $M$ nằm trên cạnh $BC$ sao cho $BM=7$. Tính độ dài đoạn thẳng $AM$. (Làm tròn đến 1 chữ số thập phân).
+
+\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+	\path
+	(0,0) coordinate (B)
+	(2,2) coordinate (A)
+	(4,0) coordinate (C)
+	($(B)!3/5!(C)$) coordinate (M)
+	;
+	\draw 
+	(A)--(B)--(C)--(A)--(M)
+	;
+	\foreach \p/\g in {A/90, B/180, C/0, M/-90}
+	\draw[fill=black] (\p) circle (1pt) node[shift=(\g:3mm)] {$\p$};
+\end{tikzpicture}
+
+# Lời giải
+
+Xét $\triangle ABC$ có 
+$$\cos B=\dfrac{c^2+a^2-b^2}{2ca}=\dfrac{8^2+10^2-9^2}{2\cdot8\cdot10}=\dfrac{83}{160}$$
+$$AM^2=AB^2+BM^2-2AB\cdot BM\cdot\cos B = 8^2+7^2-2\cdot8\cdot7\cdot\dfrac{83}{160}=\dfrac{549}{10}$$
+$$\Rightarrow AM=\dfrac{3\sqrt{610}}{10}\approx 7{,}4$$
+
+---
+id: 041
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính chiều cao trong tam giác
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 4.95
+tags:
+  - diện tích tam giác
+  - chiều cao
+  - định lí côsin
+---
+
+# Đề bài
+
+Cho $\triangle ABC$ có $AB=8$, $AC=5$, $\widehat{BAC}=60^\circ$. Tính chiều cao $AH$ của $\triangle ABC$. (Làm tròn đến 2 chữ số thập phân).
+
+# Lời giải
+
+Ta có:
+$$BC=\sqrt{A{B^2}+A{C^2}-2AB\cdot AC\cdot\cos{60^\circ}}=7$$
+$${S_{\Delta ABC}}=\dfrac{1}{2}AB\cdot AC\cdot\sin\widehat{BAC}=10\sqrt{3}$$
+Mặt khác:
+$$S_{\triangle ABC}=\dfrac{1}{2}AH\cdot BC \Leftrightarrow 10\sqrt{3}=\dfrac{1}{2}\cdot 7\cdot AH \Leftrightarrow AH=\dfrac{20\sqrt{3}}{7}\approx 4{,}95$$
+
+---
+id: 042
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Bài toán cực trị trong tam giác
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 90
+tags:
+  - diện tích tam giác
+  - giá trị lớn nhất
+---
+
+# Đề bài
+
+Cho $\triangle ABC$ có $BC=a$, $AC=b$. Tam giác $ABC$ có diện tích lớn nhất khi góc $\widehat{C}$ bằng bao nhiêu độ?
+
+# Lời giải
+
+Ta có công thức diện tích:
+$$S_{ABC}=\dfrac{1}{2}\cdot AC\cdot BC\cdot\sin C=\dfrac{1}{2}\cdot a\cdot b\cdot\sin C$$
+Diện tích tam giác $ABC$ lớn nhất khi $\sin C$ lớn nhất, tức là $\sin C=1 \Leftrightarrow C=90^\circ$.
+
+---
+id: 043
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính bán kính đường tròn ngoại tiếp R
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2.08
+tags:
+  - bán kính ngoại tiếp
+  - định lí sin
+  - diện tích tam giác
+---
+
+# Đề bài
+
+Cho tam giác nhọn $ABC$ có $a=3, b=4$ và diện tích $S=3\sqrt{3}$. Tính bán kính $R$ của đường tròn ngoại tiếp tam giác đó. (Làm tròn đến 2 chữ số thập phân).
+
+# Lời giải
+
+Ta có:
+$$S=\dfrac{1}{2}ab\sin C \Rightarrow \sin C=\dfrac{2S}{ab}=\dfrac{2\cdot 3\sqrt{3}}{3\cdot 4}=\dfrac{\sqrt{3}}{2} \Rightarrow \widehat{C}=60^\circ$$
+$$c=\sqrt{a^2+b^2-2ab\cos C}=\sqrt{3^2+4^2-2\cdot3\cdot4\cdot\dfrac{1}{2}}=\sqrt{13}$$
+Theo định lí sin:
+$$\dfrac{c}{\sin C}=2R \Rightarrow R=\dfrac{c}{2\sin C}=\dfrac{\sqrt{13}}{2\sin{60^\circ}}=\dfrac{\sqrt{39}}{3}\approx 2{,}08$$
+
+---
+id: 044
+lop: 10
+chu_de: Hệ thức lượng trong tam giác
+dang: Tính tỉ số bán kính đường tròn ngoại tiếp và nội tiếp
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2.41
+tags:
+  - bán kính nội tiếp
+  - bán kính ngoại tiếp
+  - tam giác vuông cân
+---
+
+# Đề bài
+
+Tam giác $ABC$ vuông cân tại $A$ và nội tiếp trong đường tròn tâm $O$ bán kính $R$. Gọi $r$ là bán kính đường tròn nội tiếp tam giác $ABC$. Tính tỉ số $\dfrac{R}{r}$ (Làm tròn đến 2 chữ số thập phân).
+
+# Lời giải
+
+Giả sử $AB=AC=a \Rightarrow BC=a\sqrt{2} \Rightarrow R=\dfrac{a\sqrt{2}}{2}$.
+Mặt khác, diện tích tam giác được tính theo công thức:
+$$S=pr \Leftrightarrow \dfrac{2a+a\sqrt{2}}{2}r=\dfrac{a^2}{2} \Leftrightarrow r=\dfrac{a}{2+\sqrt{2}}$$
+Suy ra tỉ số:
+$$\dfrac{R}{r}=\dfrac{\dfrac{a\sqrt{2}}{2}}{\dfrac{a}{2+\sqrt{2}}} = 1+\sqrt{2} \approx 2{,}41$$
+
