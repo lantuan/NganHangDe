@@ -1,0 +1,2126 @@
+---
+id: thongke_023
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương sai
+  - tần số
+  - bảng số liệu
+---
+
+# Đề bài
+
+Điểm thi của lớp 10C của một trường Trung học Phổ Thông được trình bày ở bảng phân bố tần số sau
+
+| Điểm thi | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Tần số | $7$ | $5$ | $10$ | $12$ | $4$ | $2$ | $n=40$ |
+
+Phương sai của bảng phân bố tần số đã cho là 
+
+A. $0{,}94$
+
+B. $3{,}94$
+
+C. $2{,}94$
+
+D. $1{,}94$
+
+# Lời giải
+
+Trong dãy số liệu về điểm thi của lớp 10C ta có
+$$
+\overline{x} = \dfrac{1}{n}\left( n_1x_1+n_2x_2+ \cdots + n_6x_6\right) =\dfrac{1}{40}\left(7\cdot 5+5\cdot 6+10\cdot 7+12\cdot 8+4\cdot 9+2\cdot 10\right)=7{,}175.
+$$
+Suy ra phương sai là
+$$
+\begin{align*}
+s^2 &= \dfrac{1}{n}\left[ n_1\left(x_1-\overline{x}\right)^2 + n_2\left(x_2-\overline{x}\right)^2 + \cdots + n_6\left(x_6-\overline{x}\right)^2\right] 
+\\ &=  \dfrac{1}{40}\left[ 7\left(5-7{,}175\right)^2 + 5\left(6-7{,}175\right)^2 + 10\left(7-7{,}175\right)^2 + 12\left(8-7{,}175\right)^2 \right.
+\\ & \quad \left. + 4\left(9-7{,}175\right)^2 + 2\left(10-7{,}175\right)^2 \right] 
+\\ & \approx 1{,}94.
+\end{align*}
+$$
+
+---
+id: thongke_024
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương sai
+  - tần số
+  - thời gian
+---
+
+# Đề bài
+
+Theo dõi thời gian làm một bài toán (tính bằng phút) của $40$ học sinh, giáo viên lập được bảng sau
+
+| Thời gian $(x)$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Tần số $(n)$ | $6$ | $3$ | $4$ | $2$ | $7$ | $5$ | $5$ | $7$ | $1$ | $N=40$ |
+
+Phương sai của mẫu số liệu trên gần với số nào nhất? 
+
+A. $6$
+
+B. $12$
+
+C. $40$
+
+D. $9$
+
+# Lời giải
+
+Ta có giá trị trung bình của mẫu số liệu là
+$$
+\overline{x} = \dfrac{1}{N}\left( n_1x_1+n_2x_2+ \cdots + n_kx_k\right) =\dfrac{317}{40}.
+$$
+Suy ra phương sai của mẫu số liệu là
+$$
+s^2 = \dfrac{1}{N}\left[ n_1\left(x_1-\overline{x}\right)^2 + n_2\left(x_2-\overline{x}\right)^2 + \cdots + n_k\left(x_k-\overline{x}\right)^2\right]  \approx 6.
+$$
+
+---
+id: thongke_025
+lop: 10
+chu_de: Thống kê
+dang: Khoảng biến thiên và khoảng tứ phân vị
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - khoảng biến thiên
+  - giờ nắng
+  - số trung bình
+---
+
+# Đề bài
+
+Khoảng biến thiên tổng số giờ nắng trong năm của một tỉnh thành được thống kê từ năm 2006 đến 2019 được cho như sau
+
+| | | | | | | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| $1 \, 884$ | $1\, 600$ | $1\, 645$ | $2\, 049{,}9$ | $1\, 913{,}8$ | $1\, 664{,}1$ | $1\, 846{,}5$ |
+| $1\, 964{,}8$ | $1\, 951$ | $2\, 023{,}6$ | $1\, 996{,}2$ | $1\, 699{,}1$ | $1\, 845$ | $2\, 190{,}4$ |
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Số giờ nắng trung bình trong năm là $1\, 826{,}67$ giờ
+
+b) Đúng/Sai: Số giờ nắng nhỏ nhất $1\, 600$ giờ
+
+c) Đúng/Sai: Số giờ nắng lớn nhất là $2\, 190{,}4$ giờ
+
+d) Đúng/Sai: Khoảng biến thiên là $520{,}4$
+
+# Lời giải
+
+a) Sai. Số giờ nắng trung bình là 
+$$
+\overline{x}=\dfrac{x_1+x_2+\cdots+x_{14}}{14}=1\, 876{,}67 \text{ giờ}.
+$$
+
+b) Đúng. Từ bảng số liệu ta có số giờ nắng nhỏ nhất là $1\, 600$ giờ. 
+
+c) Đúng. Từ bảng số liệu ta có số giờ nắng lớn nhất $2\, 190{,}4$ giờ.
+
+d) Sai. Khoảng biến thiên là 
+$$
+2\, 190{,}4-1\, 600=590{,}4.
+$$
+
+---
+id: thongke_026
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - tỉ lệ tốt nghiệp
+  - phương sai
+  - độ lệch chuẩn
+---
+
+# Đề bài
+
+Số liệu thống kê tỉ lệ $(\%)$ tốt nghiệp THPT của một địa phương từ năm học 2001 - 2002 đến năm học 2016 - 2017 được cho như sau
+
+| | | | | | | | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| $98{,}82$ | $97{,}46$ | $99{,}19$ | $98{,}90$ | $98{,}65$ | $79{,}51$ | $85{,}06$ | $86{,}18$ |
+| $98{,}68$ | $99{,}23$ | $99{,}93$ | $99{,}34$ | $99{,}74$ | $93{,}08$ | $97{,}34$ | $97{,}82$ |
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Tỉ lệ tốt nghiệm trung bình $95{,}56 \%$
+
+b) Đúng/Sai: $99{,}19$ là tỉ lệ $(\%)$ tốt nghiệp THPT cao nhất
+
+c) Đúng/Sai: Phương sai $s^2\approx 36{,}03$
+
+d) Đúng/Sai: Độ lệch chuẩn $s \approx 6{,}09$
+
+# Lời giải
+
+a) Đúng. Tỉ lệ tốt nghiệp trung bình là 
+$$
+\overline{x}=\dfrac{x_1+x_2+\cdots+x_{16}}{16}=95{,}56 \%.
+$$
+
+b) Sai. Tỉ lệ tốt nghiệp THPT cao nhất là $99{,}74 \%$.
+
+c) Sai. Phương sai là 
+$$
+s^2=\dfrac{1}{16}\left[ \left(x_1-\overline{x}\right)^2+ \left(x_2-\overline{x}\right)^2+\cdots +  \left(x_{16}-\overline{x}\right)^2\right]\approx 37{,}03.
+$$
+
+d) Đúng. Độ lệch chuẩn là 
+$$
+s=\sqrt{s^2}\approx 6{,}09.
+$$
+
+---
+id: thongke_027
+lop: 10
+chu_de: Thống kê
+dang: Các số đặc trưng đo xu thế trung tâm và mức độ phân tán
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - cỡ mẫu
+  - trung vị
+  - khoảng tứ phân vị
+---
+
+# Đề bài
+
+Cho mẫu số liệu $15$; $20$; $1$; $2$; $4$; $3$; $7$; $5$.
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Cỡ mẫu là $8$
+
+b) Đúng/Sai: Khoảng biến thiên của mẫu số liệu là $10$
+
+c) Đúng/Sai: Mẫu số liệu có giá trị trung vị là $4{,}5$
+
+d) Đúng/Sai: Khoảng tứ phân vị của mẫu là $8$
+
+# Lời giải
+
+Sắp xếp mẫu số liệu theo thứ tự không giảm ta được
+$$
+1;2;3;4;5;7;15;20.
+$$
+
+a) Đúng. Từ mẫu số liệu ta có cỡ mẫu là $8$.
+
+b) Sai. Khoảng biến thiên là 
+$$
+20-1=19.
+$$
+
+c) Đúng. Cỡ mẫu $n=8$ là số chẵn nên trung vị là 
+$$
+M_e=\dfrac{1}{2}(4+5)=4{,}5.
+$$
+
+d) Sai. Tứ phân vị thứ nhất và thứ ba của mẫu lần lượt là
+$$
+Q_1=\dfrac{1}{2}(2+3)=2{,}5 ; Q_3=\dfrac{1}{2}(7+15)=11.
+$$
+Suy ra khoảng tứ phân vị của mẫu là 
+$$
+D_Q=Q_3-Q_1=8{,}5.
+$$
+
+---
+id: thongke_028
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - mốt
+  - số trung bình
+  - phương sai
+---
+
+# Đề bài
+
+Điều tra thu nhập của $40$ hộ gia đình ở một bản được số liệu như sau
+
+| Thu nhập (triệu đồng/năm) | $4$ | $4{,}5$ | $5$ | $5{,}5$ | $6$ | $6{,}5$ | $7$ | $7{,}5$ | $8$ |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Số hộ gia đình | $1$ | $3$ | $4$ | $6$ | $8$ | $7$ | $6$ | $3$ | $2$ |
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Cỡ mẫu là $40$
+
+b) Đúng/Sai: Mốt của mẫu số liệu là $8$
+
+c) Đúng/Sai: Số trung bình của mẫu số liệu trên là $6{,}1125$
+
+d) Đúng/Sai: Phương sai của mẫu số liệu trên là $1{,}9561$
+
+# Lời giải
+
+a) Đúng. Từ giả thiết ta có cỡ mẫu là $40$.
+
+b) Sai. Có $8$ hộ gia đình thu nhập $6$ triệu đồng/năm nên mốt là $6$.
+
+c) Đúng. Số trung bình của mẫu số liệu trên là 
+$$
+\overline{x}=\dfrac{4\cdot 1+4{,}5\cdot 3+5\cdot 4+5{,}5\cdot 6+6\cdot 8+6{,}5\cdot 7+7\cdot 6+7{,}5\cdot 3 +8\cdot 2}{40}=6{,}1125.
+$$
+
+d) Sai. Phương sai của mẫu số liệu trên là 
+$$
+\begin{align*}
+s^2 &= \dfrac{1}{40}\left(4^2\cdot 1+4{,}5^2\cdot 3+5^2\cdot 4+5{,}5^2\cdot 6+6^2\cdot 8+6{,}5^2\cdot 7+7^2\cdot 6+7{,}5^2\cdot 3 +8^2\cdot 2\right)-6{,}1125^2
+\\ &\approx 0{,}9561.
+\end{align*}
+$$
+
+---
+id: thongke_029
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2.58
+tags:
+  - độ lệch chuẩn
+  - mẫu số liệu
+---
+
+# Đề bài
+
+Cho mẫu số liệu thống kê $\{1;2;3;4;5;6;7;8;9\}$. Tính độ lệch chuẩn của mẫu số liệu trên (làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+Ta có giá trị trung bình của mẫu số liệu là 
+$$
+\overline{x}=\dfrac{1+2+3+4+5+6+7+8+9}{9}=5.
+$$
+Suy ra độ lệch chuẩn là 
+$$
+s=\sqrt{\dfrac{1}{9}\left(1^2+2^2+3^2+4^2+5^2+6^2+7^2+8^2+9^2\right)-5^2}\approx 2{,}58.
+$$
+
+---
+id: thongke_030
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1.54
+tags:
+  - phương sai
+  - sản lượng
+---
+
+# Đề bài
+
+Sản lượng lúa (đơn vị là tạ) của $40$ thửa ruộng thí nghiệm có cùng diện tích được trình bày trong bảng số liệu sau
+
+| Sản lượng | $20$ | $21$ | $22$ | $23$ | $24$ | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Tần số | $5$ | $8$ | $11$ | $10$ | $6$ | $N=40$ |
+
+Tìm phương sai của mẫu số liệu trên (làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+Ta có giá trị trung bình của mẫu số liệu là 
+$$
+\overline{x}=\dfrac{20\cdot 5+21\cdot 8+22\cdot 11+23\cdot 10+24\cdot 6}{40}=22{,}1.
+$$
+Suy ra phương sai là 
+$$
+s^2=\dfrac{1}{40}\left(20^2\cdot 5+21^2\cdot 8+22^2\cdot 11+23^2\cdot 10+24^2\cdot 6\right)-22{,}1^2\approx 1{,}54.
+$$
+
+---
+id: thongke_031
+lop: 10
+chu_de: Thống kê
+dang: Giá trị ngoại lệ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 60
+tags:
+  - giá trị ngoại lệ
+  - tứ phân vị
+---
+
+# Đề bài
+
+Cho mẫu số liệu thống kê sau
+
+$$
+-3 \quad 5 \quad 10 \quad 12 \quad 14 \quad 18 \quad 24 \quad 26 \quad 49 \quad 60
+$$
+
+Trong các giá trị của mẫu số liệu trên, hãy tìm giá trị ngoại lệ của mẫu số liệu.
+
+# Lời giải
+
+Từ bảng số liệu ta tìm được số trung vị $Q_2=\dfrac{14+18}{2}=16$, tứ phân vị thứ nhất $Q_1=10$, tứ phân vị thứ ba $Q_3=26$ và khoảng tứ phân vị $\Delta_Q=26-10=16$. Ta có 
+$$
+\left[ Q_1-1{,}5\Delta_Q;Q_3+1{,}5\Delta_Q\right]=\left[ -14;50\right].
+$$
+Từ đó ta có $60$ là số liệu ngoại lệ duy nhất của mẫu số liệu.
+
+---
+id: thongke_032
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - phương sai
+  - so sánh
+---
+
+# Đề bài
+
+Trong $5$ lần nhảy xa, hai bạn Hùng và Trung có kết quả (đơn vị mét) lần lượt là
+
+| Hùng | $2{,}4$ | $2{,}6$ | $2{,}4$ | $2{,}5$ | $2{,}6$ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Trung | $2{,}4$ | $2{,}5$ | $2{,}5$ | $2{,}5$ | $2{,}6$ |
+
+Hỏi phương sai mẫu số liệu của Hùng gấp của Trung bao nhiêu lần?
+
+# Lời giải
+
+Phương sai của mẫu số liệu là
+* Hùng $s^2=\dfrac{1}{5}\left(2{,}4^2+2{,}6^2+2{,}4^2+2{,}5^2+2{,}6^2\right)-2{,}5^2\approx 0{,}008$.
+* Trung $s^2=\dfrac{1}{5}\left(2{,}4^2+2{,}5^2+2{,}5^2+2{,}5^2+2{,}6^2\right)-2{,}5^2\approx 0{,}004$.
+
+Vậy phương sai mẫu số liệu của Hùng gấp của Trung $2$ lần.
+
+---
+id: thongke_033
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3.12
+tags:
+  - độ lệch chuẩn
+  - nhiệt độ
+---
+
+# Đề bài
+
+Bảng số liệu sau thống kê nhiệt độ tại Thành phố Hồ Chí Minh trong một lần đo vào một ngày của năm 2021 như sau
+
+| Giờ đo | $1$h | $4$h | $7$h | $10$h | $13$h | $16$h | $19$h | $22$h |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Nhiệt độ ($^\circ \mathrm{C}$) | $27$ | $26$ | $28$ | $32$ | $34$ | $35$ | $30$ | $28$ |
+
+Tìm độ lệch chuẩn của mẫu số liệu đã cho (làm tròn kết quả đến hàng phần trăm).
+
+# Lời giải
+
+Ta có số trung bình là 
+$$
+\overline{x}=\dfrac{27+26+28+32+34+35+30+28}{8}=30^\circ \mathrm{C}.
+$$
+Suy ra độ lệch chuẩn là 
+$$
+s=\sqrt{\dfrac{1}{8}\left[ (27-30)^2+(26-30)^2+(28-30)^2+\cdots+(28-30)^2\right] }\approx 3{,}12.
+$$
+
+---
+id: thongke_034
+lop: 10
+chu_de: Thống kê
+dang: Phương sai và độ lệch chuẩn
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 5.93
+tags:
+  - độ lệch chuẩn
+  - chiều cao cây
+---
+
+# Đề bài
+
+Để biết cây đậu phát triển như thế nào sau khi gieo hạt, bạn Châu gieo $5$ hạt đậu vào $5$ chậu riêng biệt và cung cấp cho chúng lượng nước, ánh sáng như nhau. Sau $2$ tuần, $5$ hạt đậu đã nảy mầm và phát triển thành $5$ cây con. Bạn Châu đo chiều cao từ rễ đến ngọn của mỗi cây (đơn vị mm) và ghi kết quả là mẫu số liệu sau
+
+$$
+112 \quad 102 \quad 106 \quad 94 \quad 101
+$$
+
+Tìm độ lệch chuẩn của mẫu số liệu trên (kết quả làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+Từ bảng số liệu ta có số trung bình là 
+$$
+\overline{x}=\dfrac{112+102+106+94+101}{5}=103.
+$$
+Suy ra ta tính được phương sai và độ lệch chuẩn lần lượt là 
+$$
+s^2=35{,}2 \text{ và } s\approx 5{,}93.
+$$
+
+---
+id: sxlk_001
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, mốt, trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung bình
+  - số trung vị
+  - mốt
+---
+
+# Đề bài
+
+Một cửa hàng trà sữa vừa khai trương, thống kê lượng khách tới quán trong $7$ ngày đầu và thu được mẫu số liệu sau:
+
+| Ngày $1$ | Ngày $2$ | Ngày $3$ | Ngày $4$ | Ngày $5$ | Ngày $6$ | Ngày $7$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $575$ | $454$ | $400$ | $325$ | $351$ | $333$ | $412$ |
+
+Mệnh đề nào sau đây là đúng?
+
+A. Số trung vị là $263$
+
+B. Số trung bình làm tròn đến hàng phần trăm là $407{,}14$
+
+C. Dấu hiệu điều tra ở đây là doanh thu của quán trà sữa
+
+D. Ngày $2$ là mốt của mẫu số liệu này
+
+# Lời giải
+
+Ta có $\overline x=\dfrac{575+454+400+325+351+333+412}{7}=407{,}14$.
+
+---
+id: sxlk_002
+lop: 12
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Điểm trung bình thi học kỳ II môn Toán của một nhóm gồm $N$ học sinh lớp 12A6 là $8{,}1$ . Biết rằng tổng điểm môn toán của nhóm này là $72{,}9$ . Tìm số học sinh của nhóm.
+
+A. $20$
+
+B. $9$
+
+C. $8$
+
+D. $15$
+
+# Lời giải
+
+Ta có giá giá trị $N=\dfrac{72{,}9}{8{,}1}=9$ (học sinh).
+
+---
+id: sxlk_003
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Tuổi đời của $16$ công nhân trong xưởng sản xuất được thống kê trong bảng sau
+
+| Tuổi | $25$ | $26$ | $27$ | $29$ | $30$ | $33$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số người | $2$ & $3$ | $4$ | $3$ | $3$ | $1$ | $16$ |
+
+Tìm số trung bình $\overline x $ của mẫu số liệu trên
+
+A. $ 28$
+
+B. $ 27{,}75$
+
+C. $ 27{,}875$
+
+D. $ 27$
+
+# Lời giải
+
+Mẫu số liệu có số trung bình là 
+$$
+\overline x =\dfrac{25\cdot 2+26\cdot 3+27\cdot 4+29\cdot 3+30\cdot 3+33\cdot 1}{16}= 27{,}875.
+$$
+
+---
+id: sxlk_004
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Kết quả điểm kiểm tra môn Toán trong một kì thi của $ 200$ em học sinh được trình bày ở bảng sau:
+
+| Điềm | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $10$ | $35$ | $38$ | $63$ | $42$ | $12$ | $200$ |
+
+Số trung vị của bản phân bố tần số nói trên là
+
+A. $8$
+
+B. $ 7$
+
+C. $ 6$
+
+D. Đáp án khác
+
+# Lời giải
+
+Số trung vị của bản phân bố tần số nói trên là $8$.
+
+---
+id: sxlk_005
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Cho bảng số liệu điểm bài kiểm tra môn toán của $ 20$ học sinh.
+
+| Điểm | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số học sinh | $1$ | $2$ | $3$ | $4$ | $5$ | $4$ | $1$ | $20$ |
+
+Tìm số trung vị của bảng số liệu trên.
+
+A. $ 8$
+
+B. $ 7$
+
+C. $ 7{,}3$
+
+D. $ 7{,}5$
+
+# Lời giải
+
+Số trung vị của bảng số liệu có $20$ số là trung bình cộng của số thứ $10$ và số thứ $11$.
+Ta có số thứ $10$ là $7$ ; Số thứ $11$ là $8$.
+Do đó $M_e=\dfrac{7+8}{2}=7{,}5$.
+
+---
+id: sxlk_006
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Cho dãy số liệu thống kê: $48$ , $36$ , $33$ , $38$ , $32$ , $48$ , $42$ , $33$ , $39$. Khi đó số trung vị là
+
+A. $32$
+
+B. $36$
+
+C. $38$
+
+D. $40$
+
+# Lời giải
+
+Dãy số liệu thống kê được xếp thành dãy không giảm là $ 32$, $ 33$, $ 33$, $ 36$, $ 38$, $ 39$, $ 42$, $ 48$, $ 48$.
+Ta có số trung vị là $M_e=38$.
+
+---
+id: sxlk_007
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Cho mẫu thống kê $\left\{28,\,16,\,13,\,18,\,12,\,28,\,13,\,19\right\}$ . Trung vị của mẫu số liệu trên là bao nhiêu?
+
+A. $ 14$
+
+B. $ 17$
+
+C. $ 18$
+
+D. $ 20$
+
+# Lời giải
+
+Mẫu thống kê trên có $ 8$ số liệu được sắp xếp theo thứ tự không giảm là $12,\,13,\,13,\,16,\,18,\,19,\,28,\,28$, nên trung vị của mẫu số liệu trên là $M_e=\dfrac{16+18}{2}=17$.
+
+---
+id: sxlk_008
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Cho bảng số liệu ghi lại điểm của $ 40$ học sinh trong bài kiểm tra $ 1$ tiết môn Toán.
+
+| Điểm | $ 3$ | $ 4$ | $ 5$ | $ 6$ | $ 7$ | $ 8$ | $ 9$ | $ 10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số học sinh | $ 2$ | $ 3$ | $ 7$ | $18$ | $ 3$ | $ 2$ | $ 4$ | $ 1$ | $ 40$ |
+
+Số trung vị là
+
+A. $ 5$
+
+B. $ 6$
+
+C. $ 6{,}5$
+
+D. $ 7$
+
+# Lời giải
+
+Số trung vị là $M_e=\dfrac{x_{20}+x_{21}}{2}=\dfrac{6+6}{2}=6$.
+
+---
+id: sxlk_009
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Số điểm kiểm tra $11$ môn của một nhóm gồm $11$ học sinh được cho trong bảng sau:
+
+| Điểm | $4$ | $5$ | $7$ | $8$ | $9$ | $10$ | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $2$ | $1$ | $2$ | $3$ | $1$ | $2$ | N=$11$ |
+
+Số trung vị của mẫu số liệu trên là
+
+A. $7$
+
+B. $7{,}5$
+
+C. $8$
+
+D. $8{,}5$
+
+# Lời giải
+
+Số trung vị là $M_e=\dfrac{7+8}{2}=7{,}5$.
+
+---
+id: sxlk_010
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Cho mẫu số liêu thống kê $\{6,5,5,2,9,10,8\}$. Mốt của mẫu số liêu trên bằng bao nhiêu?
+
+A. $5$
+
+B. $10$
+
+C. $2$
+
+D. $6$
+
+# Lời giải
+
+Mốt của mẫu số liêu trên là $M_O=5$.
+
+---
+id: sxlk_011
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Cho bảng số liệu thống kê chiều cao của một nhóm học sinh như sau:
+
+| $150$ | $153$ | $153$ | $154$ | $154$ | $155$ | $160$ | $160$ | $162$ | $162$ | $163$ | $163$ | $163$ | $165$ | $165$ | $167$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+
+Số trung vị của bảng số liệu nói trên là
+
+A. $ 161$
+
+B. $ 153$
+
+C. $ 163$
+
+D. $ 156$
+
+# Lời giải
+
+Ta có trong bảng số liệu thống kê có tất cả $ 16$ giá trị. Do đó số trung vị bằng trung bình cộng của hai số đứng thứ $ 8$ và $ 9$ trong bảng số liệu thống kê.
+Ta có $M_e=\dfrac{160+162}{2}=161.$
+
+---
+id: sxlk_012
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Cho bảng số liệu nghi lại điểm của $ 40$ học sinh trong bài kiểm tra $ 1$ tiết môn Toán.
+
+| Điểm | $ 3$ | $ 4$ | $ 5$ | $ 6$ | $ 7$ | $ 8$ | $ 9$ | $ 10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số học sinh | $ 2$ | $ 3$ | $ 7$ | 18 | $ 3$ | $ 2$ | $ 4$ | $ 1$ | $ 40$ |
+
+Mốt của dấu hiệu
+
+A. $M_0=40$
+
+B. $M_0=18$
+
+C. $M_0=6$
+
+D. Không phải các số trên
+
+# Lời giải
+
+Điểm $ 6$ xuất hiện nhiều nhất nên $M_0=6$.
+
+---
+id: sxlk_013
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, số trung vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - số trung bình
+  - số trung vị
+---
+
+# Đề bài
+
+Tập đoàn $X$ có $24$ công ty. Thống kê cuối năm cho biết doanh thu (đơn vị triệu đồng) của $24$ công ty con như sau:
+
+| | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $35\,432$ | $14\,215$ | $24\,436$ | $13\,978$ | $45\,713$ | $16\,323$ | $37\,488$ | $13\,458$ |
+| $57\,754$ | $53\,345$ & $80\,234$ | $117\,245$ | $74\,506$ | $86\,851$ | $47\,678$ | $611\,298$ |
+| $19\,397$ | $48\,644$ | $8\,324$ | $9\,599$ | $94\,338$ | $45\,390$ | $37\,492$ | $811\,854$ |
+
+Xét tính đúng sai của các mệnh đề sau
+
+a) Đúng/Sai: Doanh thu thấp nhất là $9\,599$
+
+b) Đúng/Sai: Doanh thu lớn nhất là $811\,854$
+
+c) Đúng/Sai: Số trung bình của mẫu số liệu trên khoảng $100\,208$
+
+d) Đúng/Sai: Số trung vị là $45\,551{,}5$
+
+# Lời giải
+
+Sắp xếp lại mẫu số liệu trên theo thứ tự tăng dần từ trái qua phải, từ trên xuống
+
+| | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $8\,324$ | $9\,599$ | $13\,458$ | $13\,978$ | $14\,215$ | $16\,323$ | $19\,397$ | $24\,436$ |
+| $35\,432$ | $37\,488$ | $37\,492$ | $45\,390$ | $45\,713$ | $47\,678$ | $48\,644$ | $53\,345$ |
+| $57\,754$ | $74\,506$ | $80\,234$ | $86\,851$ | $94\,338$ | $117\,245$ | $611\,298$ | $811\,854$ |
+
+Số trung bình của mẫu số liệu trên khoảng $100\,208.$
+Số trung vị là $45\,551{,}5$ .
+Vì giá trị trung bình lớn hơn giá trị trung vị rất nhiều, điều đó thể hiện mẫu có một số giá trị bất thường. Vì vậy, số trung vị làm đại diện mẫu sẽ tốt hơn.
+
+a) Sai.
+b) Đúng.
+c) Đúng.
+d) Đúng.
+
+---
+id: sxlk_014
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Tứ phân vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - tứ phân vị
+---
+
+# Đề bài
+
+Thống kê chiều cao (đơn vị cm) của nhóm $15$ bạn nam lớp $10$ cho kết quả như sau:
+
+| | | | | | | | | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $162$ | $157$ | $170$ | $165$ | $166$ | $157$ | $159$ | $164$ | $172$ | $155$ | $156$ | $156$ | $180$ | $165$ | $155$ |
+
+Xét tính đúng sai của mệnh đề
+
+a) Đúng/Sai: Chiều cao thấp nhất là $156$
+
+b) Đúng/Sai: $Q_2=162$
+
+c) Đúng/Sai: $Q_1=157$
+
+d) Đúng/Sai: $Q_3=170$
+
+# Lời giải
+
+Sắp xếp số liệu theo thứ tự tăng dần ta được:
+
+| | | | | | | | | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $155$ | $155$ | $156$ | $156$ | $157$ | $157$ | $159$ | $162$ | $164$ | $165$ | $165$ | $166$ | $170$ | $172$ | $180$ |
+
+Vì có $15$ giá trị nên số trung vị là số ở vị trí thứ $8$: $ {Q_2}=162$ .
+Nửa số liệu bên trái $Q_2$ là
+
+| | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $155$ | $155$ | $156$ | $156$ | $157$ | $157$ | $159$ |
+
+Ta tìm được trung vị $Q_1=156$ .
+Nửa số liệu bên phải $Q_2$ là
+
+| | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $164$ | $165$ | $165$ | $166$ | $170$ | $172$ | $180$ |
+
+Ta tìm được trung vị $Q_3=166$ .
+
+a) Sai.
+b) Đúng.
+c) Sai.
+d) Sai.
+
+---
+id: sxlk_015
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, số trung vị, tứ phân vị
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - số trung bình
+  - số trung vị
+  - tứ phân vị
+---
+
+# Đề bài
+
+Thống kê số bao xi măng được bán ra tại một cửa hàng vật liệu xây dựng trong $24$ tháng cho kết quả như sau:
+
+| | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $72$ | $89$ | $88$ | $73$ | $63$ | $265$ | $69$ | $65$ |
+| $94$ | $80$ | $81$ | $98$ | $66$ | $71$ | $84$ | $73$ |
+| $93$ | $59$ | $60$ | $61$ | $83$ | $72$ | $85$ | $66$ |
+
+Xét tính đúng sai của các mệnh để sau
+
+a) Đúng/Sai: Mỗi tháng cửa hàng bán trung bình $83{,}75$ bao
+
+b) Đúng/Sai: Số trung vị là $72$
+
+c) Đúng/Sai: Sai khác giữa số trung bình và số trung vị là $10{,}75$
+
+d) Đúng/Sai: Khoảng cách từ $Q_1$ đến $Q_2$ là $8$
+
+# Lời giải
+
+Sắp xếp lại mẫu dữ liệu theo thứ tự tăng dần ta được:
+
+| | | | | | | | |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $59$ | $60$ | $61$ | $63$ | $65$ | $66$ | $66$ | $69$ |
+| $71$ | $72$ | $72$ | $73$ | $73$ | $80$ | $81$ | $83$ |
+| $84$ | $85$ | $88$ | $89$ | $93$ | $94$ | $98$ | $265$ |
+
+Mỗi tháng cửa hàng bán trung bình $83{,}75$ bao.
+Số trung vị là $73$ .
+Sai khác giữa số trung bình và số trung vị là $10{,}75$ . Điều này nói lên rằng trong mẫu có một số giá trị bất thường.
+Ta có số trung vị $Q_2=73$ .
+Số trung vị của nửa bên trái $Q_2$ là $Q_1=66$ .
+Số trung vị nửa bên phải $Q_2$ là $Q_3=\dfrac{85+88}{2}=86{,}5$ .
+Khoảng cách từ $Q_1$ đến $Q_2$ là $7$ , từ $Q_2$ đến $Q_3$ là $13{,}5$ .
+Điều này nói lên rằng mẫu số liệu tập trung với mật độ cao ở bên trái của $Q_2$.
+
+a) Đúng.
+b) Sai.
+c) Đúng.
+d) Sai.
+
+---
+id: sxlk_016
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, mốt, trung vị
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - số trung bình
+  - số trung vị
+  - mốt
+---
+
+# Đề bài
+
+Cho mẫu số liệu thống kê về sản lượng chè thu được trong $1$ năm (kg/sào) của $10$ hộ gia đình:
+
+| $112$ | $111$ | $112$ | $113$ | $114$ | $116$ | $115$ | $114$ | $115$ | $114$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+
+Xét tính đúng sai của các mệnh đề sau
+
+a) Đúng/Sai: Sản lượng chè trung bình thu được trong một năm của mỗi gia đình là $\approx 113{,}6$ (kg/sào)
+
+b) Đúng/Sai: Ta viết lại mẫu số liệu trên theo thứ tự không giảm là $111$, $112$, $112$, $113$, $114$, $114$, $114$, $115$, $115$, $116$
+
+c) Đúng/Sai: Số trung vị là $113$
+
+d) Đúng/Sai: $114$ là mốt của mẫu số liệu đã cho
+
+# Lời giải
+
+Sản lượng chè trung bình thu được trong một năm của mỗi gia đình là $\overline x=\dfrac{112+111+112+113+114+116+115+114+115+114}{10}\approx 113{,}6$ (kg/sào).
+Ta viết lại mẫu số liệu trên theo thứ tự không giảm:
+$$
+\begin{array}{*{20}{l}}
+111&112&112&113&114&114&114&115&115&116
+\end{array}
+$$
+Vì số giá trị của mẫu $n=10$ (chẵn) nên trung bình cộng hai số chính giữa mẫu chính là trung vị, vậy trung vị là $\dfrac{114+114}{2}=114$.
+
+a) Đúng.
+b) Sai.
+c) Đúng.
+d) Đúng.
+
+---
+id: sxlk_017
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 61.1
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Một nhóm $11$ học sinh tham gia một kì thi. Số điểm thi của $11$ học sinh đó được sắp xếp từ thấp đến cao theo thang điểm $100$ như sau: $ 0;0;63;65;69;70;72;78;81;85;89$. Tìm điểm số trung bình của nhóm $11$ học sinh này?
+
+# Lời giải
+
+Điểm trung bình là $\overline x=\dfrac{0+0+63+\cdots+85+89}{11}=\dfrac{672}{11}\approx 61{,}1$.
+
+---
+id: sxlk_018
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 269
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Một cửa hàng bán $6$ loại quạt điện với giá tiền là $100, 150, 300, 350, 400, 500$ (nghìn đồng). Số quạt điện mà cửa hàng bán ra trong mùa hè vừa qua được thống kê trong bảng tần số sau:
+
+| Giá tiền | $100$ | $150$ | $300$ | $350$ | $400$ | $500$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số quạt bán được | $15$ | $25$ | $31$ | $26$ | $12$ | $4$ |
+
+Tìm số tiền trung bình mà cửa hàng thu được khi bán mỗi chiếc quạt?
+
+# Lời giải
+
+$\overline x=\dfrac{100\cdot 15+150\cdot 25+300\cdot 31+350\cdot 26+400\cdot 12+500\cdot 4}{15+25+31+26+12+4}\approx 269$ (nghìn).
+
+---
+id: sxlk_019
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Nhận diện số liệu sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 4
+tags:
+  - phân tích số liệu
+---
+
+# Đề bài
+
+Trong $7$ tháng đầu năm, số sản phẩm sản xuất mỗi tháng của công ty X đều tăng trưởng khoảng $ 5\% $ so với tháng trước đó. Biết rằng, trong bảng dưới đây, số sản phẩm sản xuất của một tháng bị nhập sai, Hãy tìm tháng đó.
+
+| Tháng | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số sản phẩm sản xuất | $500$ | $525$ | $551$ | $569$ | $606$ | $636$ | $668$ |
+
+# Lời giải
+
+Tỉ lệ phần trăm tăng thêm của số sản phẩm bán ra mỗi tháng được tính ở bảng dưới đây.
+
+| Tháng | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tỉ lệ phần trăm tăng thêm so với tháng trước | $ 5\% $ | $ 4{,}95\% $ | $ 3{,}4\% $ | $ 6{,}5\% $ | $ 4{,}95\% $ | $ 5{,}03\% $ |
+
+Ta thấy tỉ lệ tăng của tháng $4$ và tháng $5$ đều khác xa $ 5\% $.
+Do đó trong bảng số liệu đã cho, số sản phẩm của tháng $4$ là không chính xác.
+
+---
+id: sxlk_020
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Tứ phân vị
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 11.5
+tags:
+  - tứ phân vị
+---
+
+# Đề bài
+
+Hãy tìm các tứ phân vị của mẫu số liệu sau: ${2;\, 3; \, 7; \, 4; \, 5; \, 3; \, 4; \, 4}$. Khi đó $Q_1+Q_2+Q_3$ có giá trị bằng bao nhiêu?
+
+# Lời giải
+
+Sắp xếp mẫu: ${2;\, 3; \, 7; \, 4; \, 5; \, 3; \, 4; \, 4}$. Kích thước mẫu là $8$ (chẵn).
+Khi đó trung vị của mẫu là trung bình cộng của giá trị thứ $4$ và $5$ là ${M_e=\dfrac{1}{2}(4+4)=4}$.
+Tứ phân vị thứ nhất là ${Q_1=\dfrac{1}{2}(3+3)=3}$.
+Tứ phân vị thứ hai là ${Q_2=M_e=4}$.
+Tứ phân vị thứ ba là ${Q_3=\dfrac{1}{2}(4+5)=4,5}$.
+Vậy $Q_1+Q_2+Q_3=11{,}5$.
+
+---
+id: sxlk_021
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Nhận diện số liệu sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 12
+tags:
+  - phân tích số liệu
+---
+
+# Đề bài
+
+Bảng sau thống kê số lớp và số học sinh theo từng khối ở một trường Trung học phổ thông.
+
+| Khối | $10$ | $11$ | $12$ |
+| :---: | :---: | :---: | :---: |
+| Số lớp | $14$ | $13$ | $15$ |
+| Số học sinh | $555$ | $519$ | $615$ |
+
+Hiệu trưởng trường đó cho biết sĩ số mỗi lớp trong trường đều không vượt quá $40$ học sinh. Biết rằng trong bảng trên có một khối lớp bị thống kê sai, hãy tìm khối lớp đó.
+
+# Lời giải
+
+Theo bảng thống kê đã cho, sĩ số tối đa của mỗi lớp theo từng khối cho ở bản sau:
+
+| Khối | $10$ | $11$ | $12$ |
+| :---: | :---: | :---: | :---: |
+| Sĩ số tối đa mỗi khối | $560$ | $520$ | $600$ |
+
+Theo thông tin hiệu trưởng cung cấp thì thông tin Khối $12$ đã bị thống kê sai vì Hiệu trưởng trường đó cho biết sĩ số mỗi lớp trong trường đều không vượt quá $40$ học sinh nhưng khi thống kê thì sĩ số khối $12$ vượt quá số học sinh tối đa ($600$ học sinh).
+
+---
+id: sxlk_022
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Nhận diện số liệu sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - phân tích số liệu
+---
+
+# Đề bài
+
+Trong giờ học Toán lớp $7$, giáo viên giao nhiệm vụ cho mỗi nhóm đo các góc của một tam giác. Kết quả được ghi lại trong bảng sau:
+
+| Nhóm | Nhóm $1$ | Nhóm $2$ | Nhóm $3$ | Nhóm $4$ |
+| :---: | :---: | :---: | :---: | :---: |
+| Góc thứ nhất | $35^\circ$ | $61^\circ$ | $33^\circ$ | $100^\circ$ |
+| Góc thứ hai | $77^\circ$ | $74^\circ$ | $102^\circ$ | $37^\circ$ |
+| Góc thứ ba | $68^\circ$ | $45^\circ$ | $47^\circ$ | $43^\circ$ |
+
+Trong bảng trên có nhóm ghi kết quả sai. Hãy tìm nhóm nào sai?
+
+# Lời giải
+
+Do tổng ba góc trong một tam giác bằng $180^\circ$ nên ta lập bảng sau:
+
+| Nhóm | Nhóm $1$ | Nhóm $2$ | Nhóm $3$ | Nhóm $4$ |
+| :---: | :---: | :---: | :---: | :---: |
+| Góc thứ nhất | $35^\circ$ | $61^\circ$ | $33^\circ$ | $100^\circ$ |
+| Góc thứ hai | $77^\circ$ | $74^\circ$ | $102^\circ$ | $37^\circ$ |
+| Góc thứ ba | $68^\circ$ | $45^\circ$ | $47^\circ$ | $43^\circ$ |
+| Tổng ba góc | $180^\circ$ | $180^\circ$ | $182^\circ$ | $180^\circ$ |
+
+Vậy nhóm $3$ đo sai vì tổng số đo của ba góc khác $180^\circ$ .
+
+---
+id: sxlk_023
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Tiền thưởng (triệu đồng) của cán bộ và nhân viên trong một công ty được cho ở bảng dưới đây:
+
+| Tiền thưởng | $12$ | $13$ | $14$ | $15$ | $16$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $25$ | $15$ | $11$ | $16$ | $17$ | $84$ |
+
+Tính mốt $M_o$.
+
+A. $M_o=15$
+
+B. $M_o=12$
+
+C. $M_o=10$
+
+D. $M_o=16$
+
+# Lời giải
+
+Vì tần số bằng $25$ là lớn nhất và ứng với số tiền thưởng (triệu đồng) của cán bộ và nhân viên trong một công ty là $12$ nên $M_o=12$.
+
+---
+id: sxlk_024
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Cho bảng phân bố tần số tiền thưởng (triệu đồng) cho cán bộ và nhân viên trong một công ty
+
+| Tiền thưởng | $2$ | $3$ | $4$ | $5$ | $6$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $5$ | $15$ | $10$ | $6$ | $7$ | $43$ |
+
+Mốt của bảng phân bố tần số đã cho là
+
+A. $3$ triệu đồng
+
+B. $2$ triệu đồng
+
+C. $6$ triệu đồng
+
+D. $5$ triệu đồng
+
+# Lời giải
+
+Mốt của bảng phân bố tần số là giá trị (xi) có tần số (ni) lớn nhất và được kí hiệu là $M_o$
+
+---
+id: sxlk_025
+lop: 11
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Kết quả thi môn Toán giữa kì 11 của lớp $10A_3$ trường THPT Ba Vì được thống kê như sau:
+
+| Điểm thi | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $5$ | $7$ | $8$ | $12$ | $8$ | $5$ | $45$ |
+
+Giá trị mốt $M_o$ của bảng phân bố tần số trên bằng
+
+A. $5$
+
+B. $7$
+
+C. $8$
+
+D. $12$
+
+# Lời giải
+
+Mốt của bảng phân bố tần suất là giá trị có tần số lớn nhất nên ta có $M_o=8$.
+
+---
+id: sxlk_026
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt định nghĩa
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Mốt của một bảng phân bố tần số là
+
+A. tần số lớn nhất trong bảng phân bố tần số
+
+B. giá trị có tần số lớn nhất trong bảng phân bố tần số
+
+C. giá trị có tần số nhỏ nhất trong bảng phân bố tần số
+
+D. tần số nhỏ nhất trong bảng phân bố tần số
+
+# Lời giải
+
+Mốt của một bảng phân bố tần số là giá trị có tần số lớn nhất.
+
+---
+id: sxlk_027
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Điểm số của $100$ học sinh tham dự kỳ thi học sinh giỏi toán ở tỉnh $A$ (thang điểm là $20$) được thống kê theo bảng sau:
+
+| Điểm $(x)$ | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số $(n)$ | 1 | 1 | 3 | 5 | 8 | 13 | 19 | 24 | 14 | 10 | 2 |
+
+Trung bình cộng của bảng số liệu trên là
+
+A. $15$
+
+B. $15{,}50$
+
+C. $16$
+
+D. $15{,}23$
+
+# Lời giải
+
+Trung bình cộng của bảng số liệu trên là
+$$
+\dfrac{9\cdot 1+10\cdot 1+11\cdot 3+12\cdot 5+13\cdot 8+14\cdot 13+15\cdot 19+16\cdot 24+17\cdot 14+18\cdot 10+19\cdot 2}{100}=15{,}23.
+$$
+
+---
+id: sxlk_028
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình nhóm
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Điều tra về số tiền mua đồ dùng học tập trong một tháng của 40 học sinh, ta có mẫu số liệu như sau (đơn vị: nghìn đồng):
+
+| Giá trị $(x)$ | $[10 ; 15)$ | $[15 ; 20)$ | $[20 ; 25)$ | $[25 ; 30)$ | $[30 ; 35)$ | $[35 ; 40)$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số $(n)$ | $2$ | $5$ | $15$ | $8$ | $9$ | $1$ | $\mathrm{~N}=40$ |
+
+Số trung bình của mẫu số liệu là
+
+A. $22{,}5$
+
+B. $25$
+
+C. $25{,}5$
+
+D. $27$
+
+# Lời giải
+
+Số trung bình cộng của mẫu số liệu là
+$$
+\overline x=\dfrac{12{,}5\cdot 2+17{,}5\cdot 5+22{,}5\cdot 15+27{,}5\cdot 8+32{,}5\cdot 9+37{,}5\cdot 1}{40}=25.
+$$
+
+---
+id: sxlk_029
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Tuổi đời của $16$ công nhân trong xưởng sản xuất được thống kê trong bảng sau
+
+| Tuổi | $25$ | $26$ | $27$ | $29$ | $30$ | $31$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số người | $2$ | $3$ | $4$ | $3$ | $3$ | $1$ | $16$ |
+
+Số trung bình $\overline x $ của mẫu số liệu trên là
+
+A. $28$
+
+B. $27{,}75$
+
+C. $27{,}875$
+
+D. $27$
+
+# Lời giải
+
+Số trung bình $\overline x $ của mẫu số liệu trên là
+$$
+\dfrac{25\cdot 2+26\cdot 3+27\cdot 4+29\cdot 3+30\cdot 3+31\cdot 1}{16}=27{,}75.
+$$
+
+---
+id: sxlk_030
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình gộp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Ba nhóm học sinh gồm $10$ người, $15$ người, $25$ người. Cân nặng trung bình của mỗi nhóm lần lượt là $50$ kg, $38$ kg, $40$ kg. Khối lượng trung bình của ba nhóm học sinh đó là
+
+A. $26$ kg
+
+B. $41{,}4$ kg
+
+C. $42{,}4$ kg
+
+D. $37$ kg
+
+# Lời giải
+
+Khối lượng trung bình của ba nhóm học sinh là
+$$
+\dfrac{1}{10+15+25}\cdot \left(10\cdot 50+15\cdot 38+25\cdot 40\right)=41{,}4\, \text{kg}.
+$$
+
+---
+id: sxlk_031
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Kết quả điểm kiểm tra 45 phút môn Hóa Học của 100 em học sinh được trình bày ở bảng sau:
+
+| Điểm | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | Cộng |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $3$ | $5$ | $14$ | $14$ | $30$ | $22$ | $7$ | $5$ | $100$ |
+
+Số trung bình cộng của bảng phân bố tần số nói trên là
+
+A. $6{,}82$
+
+B. $4$
+
+C. $6{,}5$
+
+D. $7{,}22$
+
+# Lời giải
+
+Số trung bình cộng của bảng phân bố tần số nói trên là
+$$
+\overline x=\dfrac{3\cdot 3+4\cdot 5+5\cdot 14+6\cdot 14+7\cdot 30+8\cdot 22+9\cdot 7+10\cdot 5}{100}=6{,}82.
+$$
+
+---
+id: sxlk_032
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Cho bảng phân bố tần số sau: khối lượng $20$ học sinh lớp $10A$
+
+| Khối lượng (kg) | Tần số |
+| :---: | :---: |
+| $50$ | $4$ |
+| $51$ | $5$ |
+| $52$ | $6$ |
+| $55$ | $3$ |
+| $56$ | $2$ |
+
+Số trung bình cộng $\overline x $ của bảng số liệu đã cho là
+
+A. $\overline x=53$
+
+B. $\overline x=52{,}8$
+
+C. $\overline x=52{,}2$
+
+D. $\overline x=52$
+
+# Lời giải
+
+Giá trị trung bình $\overline x=\dfrac{50\cdot 4+51\cdot 5+52\cdot 6+55\cdot 3+56\cdot 2}{20}=52{,}2$.
+
+---
+id: sxlk_033
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, số trung vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số trung bình
+  - số trung vị
+---
+
+# Đề bài
+
+Điểm thi học kì của một học sinh như sau: $4;\,6;\,2;\,7;\,3;\,5;\,9;\,8;\,7;\,10;\,9$. Số trung bình và số trung vị lần lượt là
+
+A. $6{,}22$ và $7$
+
+B. $7$ và $6$
+
+C. $6{,}36$ và $7$
+
+D. $6$ và $6$
+
+# Lời giải
+
+Mẫu thống kê trên có $11$ số liệu được sắp xếp theo thứ tự không giảm là $2;\,3;\,4;\,5;\,6;\,7;\,7;\,8;\,9;\,9;\,10$.
+Số trung bình là $\overline x=\dfrac{2+3+4+5+6+2\cdot 7+8+2\cdot 9+10}{11} =\dfrac{70}{11}\approx 6{,}36$.
+Trung vị của mẫu số liệu trên là $M_e=7$.
+
+---
+id: sxlk_034
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Mốt có tham số
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - mốt
+---
+
+# Đề bài
+
+Cho bảng phân bố tần số như sau:
+
+| Giá trị | $x_1$ | $x_2$ | $x_3$ | $x_4$ | $x_5$ | $x_6$ | $x_7$ | $x_8$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số | $15$ | $9 n-1$ | $12$ | $n^2+7$ | $14$ | $10$ | $9 n-20$ | $17$ |
+
+Tìm $n$ để $M_{_o}^{(1)}=x_2\,;\,M_{_o}^{(2)}=x_4$ là hai mốt của bảng số liệu trên.
+
+A. $n=1\,;\,n=8$
+
+B. $n=8$
+
+C. $n=1$
+
+D. $n=9$
+
+# Lời giải
+
+Ta có $M_{_o}^{(1)}=x_2\,;\,M_{_o}^{(2)}=x_4$ là hai mốt của bảng phân bố tần số nên 
+$$
+\heva{&n^2+7=9n-1\\ &9n-1 > 17} \Leftrightarrow\heva{&n^2-9n+8=0\\ &n > 2}\Leftrightarrow\heva{&\hoac{&n=1\,(\text{loại})\\ &n=8\,(\text{thỏa mãn})}\\ &n > 2}\Rightarrow n=8.
+$$
+
+---
+id: sxlk_035
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, số trung vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - số trung bình
+  - số trung vị
+---
+
+# Đề bài
+
+Bảng số liệu sau cho biết mức lương hàng năm của các cán bộ và nhân viên trong một công ty (đơn vị: nghìn đồng).
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| $20910$ | $76000$ | $20350$ | $20060$ |
+| $21410$ | $20110$ | $21410$ | $21360$ |
+| $20350$ | $21130$ | $20960$ | $125000$ |
+
+Xét tính đúng sai của các mệnh đề sau
+
+a) Đúng/Sai: Mức lương trung bình các cán bộ nhân viên là $\overline x=34087{,}5$ (nghìn đồng)
+
+b) Đúng/Sai: Mức lương lớn nhất là $ 76000$
+
+c) Đúng/Sai: Số trung vị là $ 21045$ (nghìn đồng)
+
+d) Đúng/Sai: Có thể lấy mức lương bình quân làm giá trị đại diện
+
+# Lời giải
+
+Mức lương trung bình các cán bộ nhân viên là
+$\overline x=\dfrac{20910+76000+\ldots+125000}{12}=\dfrac{68175}{2}=34087{,}5$ (nghìn đồng).
+Sắp theo thứ tự không giảm bảng lương ta được: $20060\;\;20110\;\;20350$ $ 20350\,\,\,20910\,\,\,20960\,\,\,21130\,\,\,21360\,\,\,21410\,\,\,21410\,\,\,76000\,\,\,125000;\quad (n=12)$.
+Số trung vị là $\dfrac{20960+21130}{2}=21045$ (nghìn đồng).
+Ý nghĩa: Số trung vị đại diện cho mức lương trung bình của cán bộ nhân viên của công ty, vì trong trường hợp này chênh lệch giữa các số liệu quá lớn nên không thể lấy mức lương bình quân làm giá trị đại diện.
+
+a) Đúng.
+b) Sai.
+c) Đúng.
+d) Sai.
+
+---
+id: sxlk_036
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Tứ phân vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - tứ phân vị
+---
+
+# Đề bài
+
+Điểm số của một nhóm $14$ em học sinh sau khi tham gia lớp phụ đạo môn toán được cho ở mẫu sau: $3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 10.$ Xét tính đúng sai của mệnh đề
+
+a) Đúng/Sai: $ n=14$
+
+b) Đúng/Sai: $Q_2=5{,}5$
+
+c) Đúng/Sai: $Q_1=5$
+
+d) Đúng/Sai: $Q_3=7$
+
+# Lời giải
+
+Xét mẫu đã cho: $ 3\,\,\,3\,\,\,4\,\,\,4\,\,\,5\,\,\,5\,\,\,5\,\,\,6\,\,\,6\,\,\,6\,\,\,7\,\,\,7\,\,\,8\,\,\,10\,\left(n=14\right)$.
+Tứ phân vị thứ hai là $Q_2=\dfrac{5+6}{2}=5{,}5$.
+Xét nửa mẫu bên trái: $ 3\,\,\,3\,\,\,4\,\,\,4\,\,\,5\,\,\,5\,\,\,5$.
+Tứ phân vị thứ nhất là $Q_1=4$
+Xét nửa mẫu bên phải: $6, 6, 6, 7, 7, 8, 10$.
+Tứ phân vị thứ ba là $Q_3=7$.
+Vậy tứ phân vị của mẫu gồm: $Q_1=4$, $Q_2=5{,}5$, $Q_3=7$.
+
+a) Đúng.
+b) Đúng.
+c) Sai.
+d) Đúng.
+
+---
+id: sxlk_037
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, mốt, trung vị, tứ phân vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - số trung bình
+  - mốt
+  - tứ phân vị
+---
+
+# Đề bài
+
+Cho mẫu số liệu sau: $4$; $5$; $6$; $7$; $8$; $4$; $9$; $4$; $3$. Xét tính đúng sai của mệnh đề
+
+a) Đúng/Sai: Số trung bình: $\overline x=5{,}5$
+
+b) Đúng/Sai: Mốt: $M_o=3$
+
+c) Đúng/Sai: Trung vị là $M_e=4$
+
+d) Đúng/Sai: Tứ phân vị thứ ba là $Q_3=7$
+
+# Lời giải
+
+Số trung bình: $\overline x=\dfrac{55}{10}=5{,}5$. Sắp xếp mẫu: $ 3;4;4;4;5;5;6;7;8;9$. Kích thước mẫu là 10 (chẵn) nên trung vị là $M_e=\dfrac{1}{2}(5+5)=5$. Tứ phân vị thứ nhất là $Q_1=4$. Tứ phân vị thứ hai là $Q_2=M_e=5$. Tứ phân vị thứ ba là $Q_3=7$.
+Mốt $M_o=4$.
+
+a) Đúng.
+b) Sai.
+c) Sai.
+d) Đúng.
+
+---
+id: sxlk_038
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình, mốt, trung vị, tứ phân vị
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - số trung bình
+  - mốt
+  - tứ phân vị
+---
+
+# Đề bài
+
+Cho mẫu số liệu sau: $6$; $5$; $6$; $7$; $8$; $4$; $6$; $5$; $4$. Xét tính đúng sai của mệnh đề
+
+a) Đúng/Sai: Số trung bình: $\overline x\approx 5{,}67$
+
+b) Đúng/Sai: Trung vị là $M_e=6$
+
+c) Đúng/Sai: Tứ phân vị thứ nhất là $Q_1=4$
+
+d) Đúng/Sai: Mốt: $M_o=5$
+
+# Lời giải
+
+Số trung bình: $\overline x=\dfrac{51}{9}\approx 5{,}67$.
+Sắp xếp mẫu: $4$; $4$; $5$; $5$; $6$; $6$; $6$; $7$; $8$.
+Kích thước mẫu là $9$ (lẻ) nên trung vị là $M_e=6$.
+Tứ phân vị thứ nhất là $Q_1=\dfrac{1}{2}(4+5)=4{,}5$.
+Tứ phân vị thứ hai là $Q_2=M_e=6$.
+Tứ phân vị thứ ba là $Q_3=\dfrac{1}{2}(6+7)=6{,}5$.
+Mốt: $M_o=6$.
+
+a) Đúng.
+b) Đúng.
+c) Sai.
+d) Sai.
+
+---
+id: sxlk_039
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 439
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Một công ty vận chuyển $A$ dự kiến thưởng cho nhân viên giao hàng $B$ vào cuối năm dựa vào số đơn hàng giao được trong năm. Số đơn hàng của nhân viên $B$ giao được trong các tháng được cho trong dãy sau:
+$$
+\begin{array}{llllllllllll}
+1002 & 510 & 430 & 395 & 400 & 401 & 396 & 299 & 450 & 450 & 560 & 611.
+\end{array}
+$$
+Tính số đơn hàng trung bình giao được trong $1$ tháng của nhân viên $B$
+
+# Lời giải
+
+Số đơn hàng trung bình giao được trong $1$ tháng của nhân viên $B$ :
+$$
+\bar{x} =\dfrac{1002+510+430+395+400+401+396+299+450+450+560+611}{12}=439 \text{(đơn hàng)}.
+$$
+
+---
+id: sxlk_040
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung vị
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 52
+tags:
+  - số trung vị
+---
+
+# Đề bài
+
+Chiều dài (đơn vị feet) của $7$ con cá voi trưởng thành được cho như sau:
+$$
+\begin{array}{lllllll}
+48 & 53 & 51 & 31 & 53 & 112 & 52.
+\end{array}
+$$
+Tìm trung vị của mẫu số liệu trên.
+
+# Lời giải
+
+Sắp xếp lại mẫu số liệu không giảm như sau:
+$$
+\begin{array}{lllllll}
+31 & 48 & 51 & 52 & 53 & 53 & 112
+\end{array}
+$$
+Do đó trung vị của mẫu là ${M_e=52}$.
+
+---
+id: sxlk_041
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Số trung bình theo tần suất
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 5.75
+tags:
+  - số trung bình
+---
+
+# Đề bài
+
+Cho mẫu số liệu có bảng tần suất như sau:
+
+| Giá trị $x_i$ | $4$ | $5$ | $6$ | $7$ | $8$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Tần số tương đối $f_i$ | $0{,}1$ | $0{,}45$ | $0{,}2$ | $0{,}1$ | $0{,}15$ |
+
+Ta có số trung bình của mẫu số liệu là
+
+# Lời giải
+
+Ta có số trung bình của mẫu số liệu là
+$$
+\overline   x=4\cdot 0{,}1+5\cdot 0{,}45+6\cdot 0{,}2+7\cdot 0{,}1+8\cdot 0{,}15=5{,}75.
+$$
+
+---
+id: sxlk_042
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Tứ phân vị
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 7.5
+tags:
+  - tứ phân vị
+---
+
+# Đề bài
+
+Hãy tìm các tứ phân vị của mẫu số liệu sau: $2$; $3$; $7$; $4$; $5$; $3$; $4$; $4$. Khi đó $Q_1+Q_3$ có giá trị bằng bao nhiêu?
+
+# Lời giải
+
+Sắp xếp mẫu: $2$; $3$; $3$; $4$; $4$; $4$; $5$; $7$. Kích thước mẫu là $8$ (chẵn).
+Khi đó trung vị của mẫu là trung bình cộng của giá trị thứ $4$ và $5$ là $M_e=\dfrac{1}{2}(4+4)=4$.
+Tứ phân vị thứ nhất là $Q_1=\dfrac{1}{2}(3+3)=3$.
+Tứ phân vị thứ hai là $Q_2=M_e=4$.
+Tứ phân vị thứ ba là $Q_3=\dfrac{1}{2}(4+5)=4{,}5$.
+Vậy $Q_{1}+Q_{3}=7{,}5$.
+
+---
+id: sxlk_043
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Nhận diện số liệu sai
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - phân tích số liệu
+---
+
+# Đề bài
+
+Trong $6$ tháng đầu năm, số sản phẩm bán ra mỗi tháng của một cửa hàng đều tăng khoảng $25\% $ so với tháng trước đó. Biết rằng, trong bảng dưới đây, số sản phẩm bán ra của một tháng bị nhập sai. Hãy tìm tháng đó.
+
+| Tháng | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số sản phẩm bán ra | $145$ | $180$ | $225$ | $279$ | $390$ | $435$ |
+
+# Lời giải
+
+Tỉ lệ phần trăm tăng thêm của số sản phẩm bán ra mỗi tháng được tính ở bảng dưới đây
+
+| Tháng | $2$ | $3$ | $4$ | $5$ | $6$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| Tỉ lệ phần trăm tăng thêm so với tháng trước | $24{,}1\% $ | $25\% $ | $24\% $ | $39{,}8\% $ | $11{,}5\% $ |
+
+Tỉ lệ tăng của tháng $5$ và tháng $6$ đều rất khác so với $25\% $, do đó số liệu trong tháng 5 là dữ liệu đã nhập sai.
+
+---
+id: sxlk_044
+lop: 10
+chu_de: Các số đặc trưng đo xu thế trung tâm
+dang: Tứ phân vị
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 9
+tags:
+  - tứ phân vị
+---
+
+# Đề bài
+
+Bảng sau đây cho biết số lần học tiếng Anh trên internet trong một tuần của một học sinh lớp $10$:
+
+| Số lần | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Số học sinh | $2$ | $4$ | $6$ | $12$ | $8$ | $3$ |
+
+Hãy tìm các tứ phân vị cho mẫu số liệu này. Tính $T=Q_{1}+Q_{2}+Q_{3}$.
+
+# Lời giải
+
+Cỡ mẫu: $n=2+4+6+12+8+3=35$.
+Vì cỡ mẫu là $n=35$, là số lẻ, nên giá trị của tứ phân vị thứ hai là $Q_2=x_{18}=3$.
+Tứ phân vị thứ nhất là trung vị của mẫu: $x_1 ; x_2 ; \ldots ; x_{17}$. Do đó: $Q_1=x_9=2$.
+Tứ phân vị thứ ba là trung vị của mẫu: $x_{19} ; x_{20} ; \ldots ; x_{35}$. Do đó: $Q_3=x_{27}=4$.
+Vậy $T=Q_{1}+Q_{2}+Q_{3}=9$.
