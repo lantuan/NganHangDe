@@ -1,0 +1,1544 @@
+---
+id: xacsuat_001
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Khái niệm phép thử và biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phép thử
+  - biến cố
+---
+
+# Đề bài
+
+Phép thử ngẫu nhiên (gọi tắt là phép thử) là gì?
+
+A. Hoạt động mà ta không thể biết trước được kết quả của nó
+
+B. Hoạt động mà ta có thể biết trước được kết quả của nó
+
+C. Hoạt động mà ta gieo xúc xắc
+
+D. Cả 3 phương án trên đều sai
+
+# Lời giải
+
+Phép thử ngẫu nhiên (gọi tắt là phép thử) là một hoạt động mà ta không thể biết trước được kết quả của nó.
+
+---
+
+---
+id: xacsuat_002
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Khái niệm phép thử và biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - không gian mẫu
+  - biến cố
+---
+
+# Đề bài
+
+Gọi $A$ là biến cố của không gian mẫu. Phát biểu nào sau đây đúng?
+
+A. $A\in \Omega$
+
+B. $A \subset \Omega$
+
+C. $\Omega \in A$
+
+D. $\Omega \subset A$
+
+# Lời giải
+
+Biến cố là tập con của không gian mẫu nên $A \subset \Omega$.
+
+---
+
+---
+id: xacsuat_003
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định phần tử của biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - đồng tiền
+  - biến cố
+---
+
+# Đề bài
+
+Gieo hai đồng tiền một lần. Kí hiệu $S$, $N$ lần lượt để chỉ đồng tiền lật sấp, lật ngửa. Xác định biến cố $M$: "Hai đồng tiền xuất hiện hai mặt không giống nhau".
+
+A. $M = \left\{NN; SS\right\}$
+
+B. $M = \left\{NS; SN\right\}$
+
+C. $M = \left\{NS; NN\right\}$
+
+D. $M = \left\{SS; SN\right\}$
+
+# Lời giải
+
+Biến cố $M$: "Hai đồng tiền xuất hiện hai mặt không giống nhau" là $M = \left\{NS; SN\right\}$.
+
+---
+
+---
+id: xacsuat_004
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - xúc xắc
+  - không gian mẫu
+---
+
+# Đề bài
+
+Gieo ngẫu nhiên một con xúc sắc cân đối và đồng chất $3$ lần. Khi đó số phần tử của không gian mẫu là
+
+A. $6\cdot 5\cdot 4$
+
+B. $36$
+
+C. $6\cdot 6\cdot 6$
+
+D. $6\cdot 6\cdot 5$
+
+# Lời giải
+
+Vì mỗi con xúc sắc có sáu mặt và gieo ba lần nên ta có không gian mẫu $n(\Omega) = 6\cdot 6\cdot 6$.
+
+---
+
+---
+id: xacsuat_005
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định phần tử của biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - xúc xắc
+  - biến cố
+---
+
+# Đề bài
+
+Gieo con súc sắc hai lần. Biến cố $A$ là biến cố để sau hai lần gieo có ít nhất một mặt $6$ chấm xuất hiện là
+
+A. $A=\{(1;6),(2;6),(3;6),(4;6),(5;6)\}$
+
+B. $A=\{(1;6),(2;6),(3;6),(4;6),(5;6),(6;6)\}$
+
+C. $A=\{(1;6),(2;6),(3;6),(4;6),(5;6),(6;6),(6;1),(6;2),(6;3),(6;4),(6;5)\}$
+
+D. $A=\{(1;6),(2;6),(3;6),(4;6),(5;6),(6;1),(6;2),(6;3),(6;4),(6;5)\}$
+
+# Lời giải
+
+Gieo con súc sắc hai lần. Biến cố $A$ là biến cố để sau hai lần gieo có ít nhất một mặt $6$ chấm xuất hiện là $A=\{(1;6),(2;6),(3;6),(4;6),(5;6),(6;6),(6;1),(6;2),(6;3),(6;4),(6;5)\}$.
+
+---
+
+---
+id: xacsuat_006
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - rút thẻ
+  - không gian mẫu
+---
+
+# Đề bài
+
+Có một hộp đựng $12$ thẻ ghi số từ $1$ đến $12$. Xét phép thử: "Rút ngẫu nhiên một thẻ rồi rút tiếp một thẻ nữa". Tính số phần tử của không gian mẫu.
+
+A. $132$
+
+B. $144$
+
+C. $66$
+
+D. $23$
+
+# Lời giải
+
+Số phần tử của không gian mẫu là $n(\Omega)=12\cdot 11=132$.
+
+---
+
+---
+id: xacsuat_007
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chọn quả
+  - không gian mẫu
+---
+
+# Đề bài
+
+Trên bàn có $3$ quả táo và $4$ quả cam. Xác định số phần tử không gian mẫu của phép thử lấy $2$ quả ở trên bàn sau đó bỏ ra ngoài rồi lấy tiếp $1$ quả nữa.
+
+A. $7$ phần tử
+
+B. $5$ phần tử
+
+C. $105$ phần tử
+
+D. $21$ phần tử
+
+# Lời giải
+
+Lấy $2$ quả trong $7$ quả ở trên bàn và không tính thứ tự nên số cách là $\mathrm{C}_{7}^2 = 21$ (cách).
+Sau khi bỏ $2$ quả ra ngoài còn lại $5$ quả. Lấy $1$ quả trong $5$ quả trên bàn có $5$ cách.
+Vậy số phần tử không gian mẫu là: $21\cdot 5=105$.
+
+---
+
+---
+id: xacsuat_008
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - rút thẻ
+  - biến cố
+---
+
+# Đề bài
+
+Một hộp đựng $10$ thẻ, đánh số từ $1$ đến $10$. Chọn ngẫu nhiên $3$ thẻ. Gọi $A$ là biến cố để tổng số của $3$ thẻ được chọn không vượt quá $8$. Số phần tử của biến cố $A$ là
+
+A. $3$
+
+B. $4$
+
+C. $5$
+
+D. $6$
+
+# Lời giải
+
+Dùng cách liệt kê ta có $A = \{ (1; 2; 3), (1; 2; 4), (1; 2; 5), (1; 3; 4) \}$.
+Vậy số phần tử của biến cố $A$ là $4$.
+
+---
+
+---
+id: xacsuat_009
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đồng tiền
+  - biến cố
+---
+
+# Đề bài
+
+Gieo đồng tiền $2$ lần. Số phần tử của biến cố để mặt ngửa xuất hiện ít nhất $1$ lần là
+
+A. $6$
+
+B. $5$
+
+C. $3$
+
+D. $4$
+
+# Lời giải
+
+Không gian mẫu $\Omega=\{NN,NS,SN,SS\}$.
+Gọi $A$ là biến cố mặt ngửa xuất hiện ít nhất $1$ lần. Khi đó $A=\{NN,NS,SN\}$.
+Vậy $n\left(A\right) = 3$.
+
+---
+
+---
+id: xacsuat_010
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - chọn người
+  - biến cố
+---
+
+# Đề bài
+
+Một nhóm có $3$ bạn nam và $2$ bạn nữ. Chọn ngẫu nhiên cùng lúc $2$ bạn đi làm vệ sinh lớp. Số kết quả thuận lợi cho biến cố "Chọn được $1$ bạn nam và 1 bạn nữ" là
+
+A. $5$
+
+B. $4$
+
+C. $3$
+
+D. $6$
+
+# Lời giải
+
+Chọn $1$ bạn nữ từ $2$ bạn nữ có $2$ cách chọn;
+Chọn $1$ bạn nam từ $3$ bạn nam có $3$ cách chọn.
+Theo quy tắc nhân có tất cả $2 \cdot 3=6$ cách chọn ra $1$ bạn nam và $1$ bạn nữ từ nhóm bạn.
+
+---
+
+---
+id: xacsuat_011
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - chọn học sinh
+  - biến cố đối
+---
+
+# Đề bài
+
+Khối lớp 10 của một trường THPT có $10$ học sinh nữ và $7$ học sinh nam đạt danh hiệu Học sinh Xuất sắc. Trường chọn ngẫu nhiên $4$ học sinh tham dự trại hè. Gọi biến cố $A$: "Chọn được ít nhất một học sinh nam". Số phần tử của $A$ là
+
+A. $2170$
+
+B. $2710$
+
+C. $210$
+
+D. $35$
+
+# Lời giải
+
+Chọn $4$ học sinh trong $17$ học sinh. Số phần tử không gian mẫu là $n\left(\Omega\right) = \mathrm{C}_{17}^{4} = 2380$.
+Gọi biến cố $A$: "chọn được ít nhất một học sinh nam".
+Biến cố đối $\overline{A}$: "chọn được $4$ học sinh nữ".
+Chọn $4$ bạn nữ từ $10$ học sinh nữ có $\mathrm{C}_{10}^{4}$ cách, suy ra $n\left(\overline{A}\right)=\mathrm{C}_{10}^{4} = 210$.
+Vì vậy $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 2170$.
+
+---
+
+---
+id: xacsuat_012
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chọn sách
+  - biến cố đối
+---
+
+# Đề bài
+
+Trên giá sách có $4$ quyển sách toán, $5$ quyển sách lý, $6$ quyển sách hóa. Lấy ngẫu nhiên $3$ quyển sách. Số kết quả thuận lợi để $3$ quyển sách được lấy ra có ít nhất một quyển sách là toán.
+
+A. $620$
+
+B. $165$
+
+C. $290$
+
+D. $455$
+
+# Lời giải
+
+Chọn $3$ quyển sách trong $15$ quyển sách. Số phần tử không gian mẫu là $n\left(\Omega\right) = \mathrm{C}_{15}^{3} = 455$.
+Gọi $A$ là biến cố: "$3$ quyển sách được lấy ra có ít nhất một quyển sách toán".
+Biến cố đối $\overline{A}$: "$3$ quyển sách được lấy ra không có quyển sách toán".
+Chọn $3$ quyển sách trong $5$ quyển sách lý và $6$ quyển sách hóa có $\mathrm{C}_{11}^{3}$, suy ra $n\left(\overline{A}\right) = \mathrm{C}_{11}^{3} = 165$.
+Vì vậy $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 290$.
+
+---
+
+---
+id: xacsuat_013
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - số nguyên dương
+  - số chính phương
+  - số chẵn
+  - số lẻ
+---
+
+# Đề bài
+
+Chọn ngẫu nhiên một số nguyên dương không lớn hơn $10$. Các mệnh đề sau đúng hay sai?
+
+a) Không gian mẫu có $10$ kết quả
+
+b) Gọi $A$ là biến cố: "Chọn được một số chính phương", khi đó $n\left(A\right) = 2$
+
+c) Gọi $B$ là biến cố: "Chọn được một số chẵn", khi đó $n\left(B\right) = 5$
+
+d) Gọi $C$ là biến cố: "Chọn được một số lẻ", khi đó $n\left(C\right) = 6$
+
+# Lời giải
+
+a) Đúng. Vì $\Omega = \left\{ 1; 2; 3; 4; 5; 6; 7; 8; 9; 10\right\}$. Có $10$ phần tử.
+
+b) Sai. Vì $A = \left\{ 1; 4; 9\right\}$. Có $3$ phần tử nên $n\left(A\right) = 3$.
+
+c) Đúng. Vì $B = \left\{ 2; 4; 6; 8; 10\right\}$. Có $5$ phần tử nên $n\left(B\right) = 5$.
+
+d) Sai. Vì $C = \left\{ 1; 3; 5; 7; 9\right\}$. Có $5$ phần tử nên $n\left(C\right) = 5$.
+
+---
+
+---
+id: xacsuat_014
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - đồng xu
+  - mặt sấp
+  - biến cố đối
+---
+
+# Đề bài
+
+Xét phép thử là gieo một đồng xu gồm hai mặt sấp, ngửa $3$ lần liên tiếp. Các mệnh đề sau đúng hay sai?
+
+a) $n\left(\Omega\right) = 8$
+
+b) Gọi $A$ là biến cố: "Gieo được mặt sấp", khi đó $n\left(\overline{A}\right) = 1$
+
+c) Gọi $B$ là biến cố: "Gieo được mặt sấp", khi đó $n\left(B\right) = 1$
+
+d) Gọi $C$ là biến cố: "Kết quả của lần gieo thứ hai và thứ ba khác nhau", khi đó $n\left(C\right) = 4$
+
+# Lời giải
+
+a) Đúng. Vì ta có không gian mẫu $\Omega = \left\{SSS; SSN; SNS; NSS; SNN; NSN, NNS, NNN\right\}$. Có $8$ phần tử. Vậy $n\left(\Omega\right) = 8$.
+
+b) Đúng. Vì ta có biến cố $A = \left\{SSS; SSN; SNS; NSS; SNN; NSN; NNS\right\}$. Có $7$ phần tử. Vậy $n\left(A\right) = 7$. Suy ra $n\left(\overline{A}\right) = 8 - 7 = 1$.
+
+c) Sai. Vì ta có biến cố $B = \left\{SSS; SSN; SNS; NSS; SNN, NSN; NNS\right\}$. Có $7$ phần tử. Vậy $n\left(B\right) = 7$.
+
+d) Đúng. Vì ta có biến cố $C = \left\{SSN; SNS; NSN; NNS\right\}$. Có $4$ phần tử. Vậy $n\left(C\right) = 4$.
+
+---
+
+---
+id: xacsuat_015
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - xúc xắc
+  - số chấm chẵn
+  - số chấm lẻ
+---
+
+# Đề bài
+
+Xét phép thử là gieo một con súc sắc một lần. Các mệnh đề sau đúng hay sai?
+
+a) $n\left(\Omega\right) = 6$
+
+b) Số kết quả thuận lợi của biến cố: "Thu thu được mặt có số chấm chia hết cho $2$" bằng $3$
+
+c) Số kết quả thuận lợi của biến cố: "Thu thu được mặt có số chấm nhỏ hơn $5$" bằng $4$
+
+d) Số kết quả thuận lợi của biến cố: "Thu thu được mặt có số chấm là số lẻ" bằng $3$
+
+# Lời giải
+
+a) Đúng. Ta có $\Omega = \left\{1; 2; 3; 4; 5; 6\right\}$. Vậy $n\left(\Omega\right) = 6$.
+
+b) Đúng. Ta có kết quả thuận lợi của biến cố là $\left\{2; 4; 6\right\}$. Vậy có $3$ kết quả thuận lợi.
+
+c) Đúng. Ta có kết quả thuận lợi của biến cố là $\left\{1; 2; 3; 4\right\}$. Vậy có $4$ kết quả thuận lợi. (Ghi chú: Lời giải gốc ghi "Sai" nhưng kết luận có 4 kết quả thuận lợi trùng với đề bài, khớp trạng thái Đúng).
+
+d) Đúng. Ta có kết quả thuận lợi của biến cố là $\left\{1; 3; 5\right\}$. Vậy có $3$ kết quả thuận lợi.
+
+---
+
+---
+id: xacsuat_016
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - chọn bi
+  - biến cố đối
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trong hộp có $3$ bi xanh, $4$ bi đỏ và $5$ bi vàng có kích thước và khối lượng như nhau. Lấy ngẫu nhiên từ trong hộp $4$ viên bi. Các mệnh đề sau đúng hay sai?
+
+a) Số phần tử của không gian mẫu là $495$
+
+b) Số kết quả thuận lợi của biến cố: "Trong $4$ viên bi được chọn có ít nhất $1$ bi xanh" bằng $369$
+
+c) Số kết quả thuận lợi của biến cố: "Trong $4$ viên bi được chọn có đúng $1$ viên bi đỏ" bằng $220$
+
+d) Số kết quả thuận lợi của biến cố: "Trong $4$ viên bi được chọn có ít nhất $2$ bi đỏ" bằng $199$
+
+# Lời giải
+
+a) Đúng. Lấy $4$ bi trong $3 + 4 + 5 = 12$ bi từ hộp là tổ hợp chập $4$ của $12$ phần tử. Vậy số phần tử của không gian mẫu là $\mathrm{C}_{12}^{4} = 495$.
+
+b) Đúng. Biến cố $A:$ " $4$ viên bi được chọn có ít nhất $1$ bi xanh" có biến cố đối $\overline{A}:$ " $4$ viên bi được chọn không có bi xanh". Số cách chọn biến cố $\overline{A}$ là $\mathrm{C}_{9}^{4} = 126$. Suy ra số cách chọn biến cố $A$ là $\mathrm{C}_{12}^{4} - \mathrm{C}_{9}^{4} = 369$. Vậy có $369$ kết quả thuận lợi.
+
+c) Sai. Số cách chọn $4$ viên bi được chọn có đúng $1$ viên bi đỏ là $\mathrm{C}_{4}^{1} \cdot \mathrm{C}_{8}^{3} = 224$. Vậy có $224$ kết quả thuận lợi.
+
+d) Sai. 
+* Trường hợp $4$ viên bi được chọn có $2$ viên bi đỏ. Số cách chọn là $\mathrm{C}_{4}^{2} \cdot \mathrmmathrm{C}_{8}^{2} = 168$ cách.
+* Trường hợp $4$ viên bi được chọn có $3$ viên bi đỏ. Số cách chọn là $\mathrm{C}_{4}^{3} \cdot \mathrm{C}_{8}^{1} = 32$ cách.
+* Trường hợp $4$ viên bi được chọn có $4$ viên bi đỏ. Số cách chọn là $\mathrm{C}_{4}^{4} \cdot \mathrm{C}_{8}^{0} = 1$ cách.
+
+Theo quy tắc cộng có $ 168 + 32+ 1 = 201$ cách. Vậy có $201$ kết quả thuận lợi.
+
+---
+
+---
+id: xacsuat_017
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - lập số
+  - tổng chữ số
+---
+
+# Đề bài
+
+Cho tập $Q = \left\{1; 2; 3; 4; 5; 6\right\}$. Từ tập $Q$ có thể lập được bao nhiêu số tự nhiên có $3$ chữ số khác nhau. Tính số phần tử của biến cố sao cho tổng $3$ chữ số bằng $9$.
+
+# Lời giải
+
+Gọi $A$ là biến cố: "Số tự nhiên có tổng $3$ chữ số bằng $9$".
+Ta có $1 + 2 + 6 = 9$; $1 + 3 + 5 = 9$; $2 + 3 + 4 = 9$.
+Suy ra số các số tự nhiên có $3$ chữ số khác nhau có tổng bằng $9$ là $3! + 3! + 3! = 18$.
+Do đó $n\left(A\right) = 18$.
+
+---
+
+---
+id: xacsuat_018
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 12
+tags:
+  - sắp xếp vị trí
+  - ngồi cạnh nhau
+---
+
+# Đề bài
+
+Một nhóm bạn có $4$ bạn gồm $2$ bạn nam Mạnh, Dũng và $2$ nữ là Hoa, Lan được xếp ngẫu nhiên trên một ghế dài. Kí hiệu MDHL là cách sắp xếp theo thứ tự: Mạnh, Dũng, Hoa, Lan.
+Tính số phần tử của biến cố $A$: "Xếp hai nam ngồi cạnh nhau".
+
+# Lời giải
+
+Biến cố $A$: "Xếp hai nam ngồi cạnh nhau".
+Đánh số ghế theo thứ tự $1$, $2$, $3$ , $4$. Xếp hai bạn nam ngồi cạnh nhau ở các vị trí $(1; 2)$ hoặc $(2; 3)$ hoặc $(3; 4)$. Sau đó xếp hai bạn nữ vào hai vị trí còn lại.
+Hai bạn nam đổi chỗ nhau và hai bạn nữ đổi chỗ nhau. Do đó số cách xếp là $3\cdot 2!\cdot 2! = 12$. Vậy $n\left(A\right) = 12$.
+
+---
+
+---
+id: xacsuat_019
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 120
+tags:
+  - rút thẻ
+  - số chẵn
+---
+
+# Đề bài
+
+Có $20$ tấm thẻ được đánh số từ $1$ đến $20$. Lấy ngẫu nhiên $3$ thẻ. Tính số phần tử của biến cố $A$: "Số ghi trên các tấm thẻ được chọn là số chẵn".
+
+# Lời giải
+
+Biến cố $A:$ "Số ghi trên các tấm thẻ được chọn là số chẵn".
+Trong $20$ tấm thẻ thì có $10$ tấm thẻ là số chẵn và $10$ tấm thẻ là số lẻ.
+Chọn $3$ thẻ có số ghi trên thẻ là số chẵn có $\mathrm{C}_{10}^{3} = 120$ cách. Vậy $n\left(A\right) = 120$.
+
+---
+
+---
+id: xacsuat_020
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - chọn bóng
+  - tổng số ghi
+  - biến cố đối
+---
+
+# Đề bài
+
+Hộp thứ nhất chứa $6$ quả bóng được đánh số từ $1$ đến $6$. Hộp thứ hai chứa $4$ quả bóng được đánh số từ $1$ đến $4$. Chọn ngẫu nhiên mỗi hộp $1$ quả bóng. Có bao nhiêu kết quả thuận lợi cho biến cố "Tổng các số ghi trên hai quả bóng không nhỏ hơn $5$".
+
+# Lời giải
+
+Gọi biến cố $A$: "Tổng các số ghi trên hai quả bóng không nhỏ hơn $5$".
+Biến cố đối $\overline{A}$: "Tổng các số ghi trên hai quả bóng nhỏ hơn $5$".
+Số cách chọn ngẫu nhiên mỗi hộp $1$ quả bóng là $n\left(\Omega\right) = 6\cdot 4 = 24$ cách.
+Ta có $\overline{A} = \left\{ (1; 1), (1; 2), (2; 1), (1; 3), (3;1)\right\}$. Suy ra $n\left(\overline{A}\right) = 6$.
+Do đó $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 24 - 6 = 18$.
+
+---
+
+---
+id: xacsuat_021
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1215
+tags:
+  - xúc xắc
+  - tích số chấm
+  - biến cố đối
+---
+
+# Đề bài
+
+Gieo bốn con xúc xắc cân đối đồng chất. Có bao nhiêu kết quả thuận lợi cho biên cố "Tích số chấm xuất hiện trên bốn con xúc xắc là một số chẵn".
+
+# Lời giải
+
+Gọi biến cố $A$: "Tích số chấm xuất hiện trên bốn con xúc xắc là một số chẵn".
+Biến cố đối $\overline{A}$: "Tích số chấm xuất hiện trên bốn con xúc xắc là một số lẻ".
+Số kết quả gieo bốn con xúc xắc cân đối đồng chất là $n\left(\Omega\right) = 6^4 = 1296$.
+Vì mỗi xúc xắc có $3$ mặt là số lẻ và tích của các số lẻ là một số lẻ. Suy ra $n\left(\overline{A}\right) = 3^4 = 81$.
+Suy ra $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 1296 - 81 = 1215$.
+
+---
+
+---
+id: xacsuat_022
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 645
+tags:
+  - chọn bi
+  - màu sắc bi
+  - biến cố đối
+---
+
+# Đề bài
+
+Một hộp đựng $15$ viên bi khác nhau gồm $4$ bi đỏ, $5$ bi trắng và $6$ bi vàng. Chọn ngẫu nhiên $4$ bi từ hộp. Tính số phần tử của biến cố $X$: "Chọn $4$ viên bi không có đủ $3$ màu".
+
+# Lời giải
+
+Gọi biến cố $A$: "Chọn $4$ viên bi không có đủ $3$ màu".
+Biến cố đối $\overline{A}$: "Chọn $4$ viên bi có đủ cả $3$ màu".
+Số cách ngẫu nhiên $4$ bi từ hộp $n\left(\Omega\right) = \mathrm{C}_{15}^{4} = 1365$.
+Chọn $4$ viên bi có đủ cả $3$ màu:
+* Trường hợp chọn $2$ bi đỏ, $1$ bi xanh, $1$ bi vàng có $\mathrm{C}_{4}^{2} \cdot \mathrm{C}_{5}^{1} \cdot \mathrm{C}_{6}^{1} = 180$ cách.
+* Trường hợp chọn $1$ bi đỏ, $2$ bi xanh, $1$ bi vàng có $\mathrm{C}_{4}^{1} \cdot \mathrm{C}_{5}^{2} \cdot \mathrm{C}_{6}^{1} = 240$ cách.
+* Trường hợp chọn $1$ bi đỏ, $1$ bi xanh, $2$ bi vàng có $\mathrm{C}_{4}^{1} \cdot \mathrm{C}_{5}^{1} \cdot \mathrm{C}_{6}^{2} = 300$ cách.
+
+Suy ra $n\left(\overline{A}\right) = 180 + 240 + 300 = 720$.
+Vậy $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 1365 - 720 = 645$.
+
+---
+
+---
+id: xacsuat_023
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Khái niệm phép thử và biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - biến cố chắc chắn
+---
+
+# Đề bài
+
+Biến cố chắc chắn kí hiệu là
+
+A. $A$
+
+B. $\Omega$
+
+C. $\varnothing$
+
+D. $n\left(\Omega\right)$
+
+# Lời giải
+
+Biến cố chắc chắn là biến cố luôn xảy ra, kí hiệu là $\Omega$.
+
+---
+
+---
+id: xacsuat_024
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - chọn người
+  - không gian mẫu
+---
+
+# Đề bài
+
+Một nhóm có $3$ bạn nam và $2$ bạn nữ. Chọn ngẫu nhiên cùng lúc $2$ bạn đi làm vệ sinh lớp. Số phần tử của không gian mẫu của phép thử là
+
+A. $10$
+
+B. $5$
+
+C. $15$
+
+D. $2$
+
+# Lời giải
+
+Do ta chọn $2$ bạn khác nhau từ $5$ bạn trong nhóm và không tính thứ tự nên số phần tử của không gian mẫu là $n\left(\Omega\right) = \mathrm{C}_{5}^{2} = 10$.
+
+---
+
+---
+id: xacsuat_025
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Khái niệm phép thử và biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phép thử ngẫu nhiên
+---
+
+# Đề bài
+
+Trong các thí nghiệm sau thí nghiệm nào không phải là phép thử ngẫu nhiên.
+
+A. Gieo đồng tiền xem xuất hiện mặt ngửa hay mặt sấp
+
+B. Gieo 3 đồng tiền và xem có mấy đồng tiền lật ngửa
+
+C. Gieo một con xúc xắc và xem nó xuất hiện mặt mấy chấm
+
+D. Bỏ hai viên bi xanh và ba viên bi đỏ trong một chiếc hộp, sau đó lấy từng viên một để đếm xem có tất cả bao nhiêu viên bi
+
+# Lời giải
+
+Phép thử ngẫu nhiên (gọi tắt là phép thử) là một hoạt động mà ta không thể biết trước được kết quả của nó.
+Phương án D không phải là phép thử vì ta biết chắc chắn kết quả chỉ có thể là một số cụ thể số bi xanh và số bi đỏ.
+
+---
+
+---
+id: xacsuat_026
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chọn bi
+  - không gian mẫu
+---
+
+# Đề bài
+
+Trong một hộp có 
+$2$ viên bi trắng được đánh số từ $1$ đến $2$;
+$3$ viên bi xanh được đánh số từ $3$ đến $5$;
+$2$ viên bi đỏ được đánh số từ $6$ đến $7$.
+Lấy ngẫu nhiên hai viên bi, mô tả không gian mẫu nào dưới đây là đúng?
+
+A. $\Omega = \left\{\left(m, n\right)\mid 1 \le m \le 7, 1 \le n \le 7\right\}$
+
+B. $\Omega = \left\{\left(m, n\right)\mid 1 \le m \le 5, 6 \le n \le 7\right\}$
+
+C. $\Omega = \left\{\left(m, n\right)\mid 1 \le m \le 7, 1 \le n \le 7, m \ne n\right\}$
+
+D. $\Omega = \left\{\left(m, n\right)\mid 1 \le m \le 3, 4 \le n \le 4\right\}$
+
+# Lời giải
+
+Mỗi viên bi đánh một số, nên $2$ viên bi lấy ra sẽ có số khác nhau.
+$\Omega = \left\{\left(m, n\right)\mid 1 \le m \le 7, 1 \le n \le 7, m \ne n\right\}$.
+
+---
+
+---
+id: xacsuat_027
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử không gian mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đồng tiền
+  - không gian mẫu
+---
+
+# Đề bài
+
+Gieo hai đồng tiền một lần. Kí hiệu $S$, $N$ lần lượt để chỉ đồng tiền xuất hiện mặt sấp, đồng tiền xuất hiện mặt ngửa. Mô tả không gian mẫu nào dưới đây là đúng?
+
+A. $\Omega=\{S; N\}$
+
+B. $\Omega=\{NN; SS\}$
+
+C. $\Omega=\{SN; NS\}$
+
+D. $\Omega=\{SN; NS; SS; NN\}$
+
+# Lời giải
+
+Không gian mẫu $\Omega=\{SN; NS; SS; NN\}$.
+
+---
+
+---
+id: xacsuat_028
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định phần tử của biến cố
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - xúc xắc
+  - biến cố dạng mệnh đề
+---
+
+# Đề bài
+
+Gieo một con súc sắc cân đối và đồng chất hai lần. Hãy phát biểu biến cố $ A=\{(6, 1); (6, 2); (6, 3); (6,4); (6, 5); (6, 6)\} $ dưới dạng mệnh đề.
+
+A. $ A\colon$ "Tổng số chấm xuất hiện lớn hơn $ 6 $"
+
+B. $ A\colon$ "Mặt $ 6 $ chấm xuất hiện"
+
+C. $ A\colon$ "Lần đầu xuất hiện mặt $ 6 $ chấm"
+
+D. $ A\colon$ "Tổng số chấm không nhỏ hơn $ 7 $"
+
+# Lời giải
+
+Biến cố $ A $ được phát biểu dưới dạng mệnh đề là "Lần đầu xuất hiện mặt $ 6 $ chấm".
+
+---
+
+---
+id: xacsuat_029
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Mối quan hệ giữa các biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - xạ thủ bắn bia
+  - biến cố đối
+  - biến cố hợp
+---
+
+# Đề bài
+
+Hai xạ thủ cùng bắn vào bia. Xét các biến cố sau:
+$A$: "Không ai bắn trúng";
+$B$: "Cả hai đều bắn trúng";
+$C$: "Có đúng nhất một người bắn trúng";
+$D$: "Có ít nhất một người bắn trúng".
+Chọn phát biểu sai.
+
+A. $A=\overline{D}$
+
+B. $B\cup C=\Omega$
+
+C. $D=\overline{A}$
+
+D. $B\cap C=\varnothing$
+
+# Lời giải
+
+Kí hiệu $T$; $K$ lần lượt là xạ thủ bắn trúng và bắn không trúng bia.
+Ta có:
+$\Omega = \{TT; TK; KT; KK\}$.
+$A = \{KK\}$.
+$B = \{TT\}$.
+$C = \{TK; KT\}$.
+$D = \{TK; KT; TT \}$
+Do đó $B \cup C = \{TK; KT; TT \}$.
+Vậy $B\cup C=\Omega$ là phát biểu sai.
+
+---
+
+---
+id: xacsuat_030
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xúc xắc
+  - kết quả như nhau
+---
+
+# Đề bài
+
+Gieo một con súc sắc liên tiếp hai lần. Gọi $A$ là biến cố "kết quả hai lần gieo như nhau". Tính số phần tử của biến cố $A$.
+
+A. $n(A)=6$
+
+B. $n(A)=12$
+
+C. $n(A)=1$
+
+D. $n(A)=8$
+
+# Lời giải
+
+Ta có $A=\left\{(1;1),(2;2),(3;3),(4;4),(5;5),(6;6)\right\}\Rightarrow n(A)=6$.
+
+---
+
+---
+id: xacsuat_031
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số kết quả thuận lợi
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - lập số
+  - hoán vị
+---
+
+# Đề bài
+
+Từ các chữ số $1, 3, 5, 7, 9$ lập được bao nhiêu số tự nhiên có $5$ chữ số khác nhau mà chữ số đầu tiên là chữ số $3$?
+
+A. $4$ số
+
+B. $6$ số
+
+C. $24$ số
+
+D. $12$ số
+
+# Lời giải
+
+Số cần lập có dạng $\overline{abcde}$.
+Chữ số đầu tiên là chữ số $3$ nên $a=3$.
+Số cách lập $\overline{bcde}$ là $4!=24$.
+Vậy lập được tất cả là $1\cdot 24=24$ số.
+
+---
+
+---
+id: xacsuat_032
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số kết quả thuận lợi
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - chọn bi
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một hộp đựng bi gồm $5$ bi màu xanh và $6$ bi màu đỏ. Lấy 3 viên bi từ hộp. Có bao nhiêu kết quả thuận lợi để có đúng $1$ bi màu xanh?
+
+A. $5$
+
+B. $20$
+
+C. $15$
+
+D. $75$
+
+# Lời giải
+
+Để lấy được $ 3 $ bi **có đúng** $ 1 $ bi xanh ta thực hiện như sau:
+* Lấy $1$ bi màu xanh, số cách lấy là $\mathrm{C}^1_5=5$.
+* Lấy tiếp thêm $ 2 $ bi màu đỏ, số cách lấy là $\mathrm{C}^2_6=15$.
+
+Vậy số kết quả thuận lợi lấy $1$ bi màu xanh và $2$ bi màu đỏ là $5 \cdot 15 = 75$.
+
+---
+
+---
+id: xacsuat_033
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số kết quả thuận lợi
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chọn quả cầu
+  - biến cố đối
+---
+
+# Đề bài
+
+Một hộp chứa $11$ quả cầu gồm $5$ quả cầu màu xanh và $6$ quả cầu màu đỏ. Chọn ngẫu nhiên đồng thời $3$ quả cầu từ hộp đó. Số kết quả thuận lợi để $3$ quả cầu chọn ra không cùng màu là
+
+A. $153$
+
+B. $165$
+
+C. $135$
+
+D. $156$
+
+# Lời giải
+
+Để lấy $3$ trái cầu từ hộp ta có $\mathrm{C}_{11}^3$ cách.
+Vậy số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}_{11}^3 = 165$.
+Đặt biến cố $\mathrm{A}$: "$3$ quả cầu chọn ra không cùng màu".
+Biến cố đối $\mathrm{\overline{A}}$: "$3$ quả cầu chọn ra cùng màu".
+Số cách chọn $3$ quả cầu chọn ra cùng màu là $\mathrm{C}_5^3 + \mathrm{C}_6^3$, suy ra $n(\mathrm{\overline{A}})=\mathrm{C}_5^3 + \mathrm{C}_6^3 = 30$.
+Vì vậy $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 165 - 30 = 135$.
+
+---
+
+---
+id: xacsuat_034
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số kết quả thuận lợi
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - chọn quả cầu
+  - màu sắc khác nhau
+---
+
+# Đề bài
+
+Từ một hộp chứa $16$ quả cầu gồm $7$ quả màu đỏ và $9$ quả màu xanh, lấy ngẫu nhiên đồng thời hai quả. Số kết quả thuận lợi để lấy được hai quả có màu khác nhau bằng
+
+A. $57$
+
+B. $63$
+
+C. $120$
+
+D. $55$
+
+# Lời giải
+
+Lấy ngẫu nhiên đồng thời hai quả cầu trong 16 quả cầu ta có $\mathrm{C}_{16}^2$ cách.
+Vậy số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}_{16}^2 = 120$.
+Gọi biến cố $A$ là "lấy được hai quả có màu khác nhau".
+Số cách chọn $2$ quả cầu chọn ra cùng màu là $\mathrm{C}_7^2 + \mathrm{C}_9^2 = 57$.
+Vì vậy $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 120 - 57 = 63$.
+
+---
+
+---
+id: xacsuat_035
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - xúc xắc
+  - số chấm chẵn
+  - số chấm lẻ
+---
+
+# Đề bài
+
+Gieo đồng thời hai con xúc xắc $6$ mặt cân đối và đồng chất. Các mệnh đề sau đúng hay sai?
+
+a) $n\left(\Omega\right) = 12$
+
+b) Gọi $A$ là biến cố: "Số chấm xuất hiện trên mỗi viên xúc xắc là một số chẵn", khi đó $n\left(A\right) = 9$
+
+c) Gọi $B$ là biến cố: "Số chấm xuất hiện trên mỗi viên xúc xắc là một số lẻ", khi đó $n\left(B\right) = 9$
+
+d) Gọi $C$ là biến cố: "Số chấm xuất hiện trên mỗi viên xúc xắc là bằng nhau", khi đó $n\left(C\right) = 1$
+
+# Lời giải
+
+a) Sai. Vì gieo lần thứ nhất số chấm xuất hiện trên viên xúc xắc có $6$ trường hợp, tiếp theo gieo lần thứ hai số chấm xuất hiện trên viên xúc xắc có $6$ trường hợp. Theo quy tắc nhân ta có $6 \cdot 6 = 36$ trường hợp. Vậy $n\left(\Omega\right) = 36$.
+
+b) Đúng. Vì gieo lần thứ nhất số chấm xuất hiện trên viên xúc xắc là số chẵn có $3$ trường hợp là $\{2; 4 ; 6\}$, tiếp theo gieo lần thứ hai số chấm xuất hiện trên viên xúc xắc là số chẵn có $3$ trường hợp là $\{2; 4 ; 6\}$. Theo quy tắc nhân ta có $3 \cdot 3 = 9$ trường hợp. Vậy $n\left(A\right) = 9$.
+
+c) Đúng. Vì gieo lần thứ nhất số chấm xuất hiện trên viên xúc xắc là số lẻ có $3$ trường hợp là $\{1; 3; 5\}$, tiếp theo gieo lần thứ hai số chấm xuất hiện trên viên xúc xắc là số lẻ có $3$ trường hợp là $\{1; 3; 5\}$. Theo quy tắc nhân ta có $3 \cdot 3 = 9$ trường hợp. Vậy $n\left(B\right) = 9$.
+
+d) Sai. Vì số chấm xuất hiện trên mỗi con xúc xắc là bằng nhau có $6$ trường hợp là $C = \left\{(1;1),(2;2), (3;3), (4;4), (5;5),(6;6)\right\}$. Vậy $n\left(C\right) = 6$.
+
+---
+
+---
+id: xacsuat_036
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - tập hợp số
+  - số chữ số khác nhau
+  - chia hết cho 5
+  - số chẵn
+---
+
+# Đề bài
+
+Gọi $S$ là tập hợp các số tự nhiên có ba chữ số. Chọn ngẫu nhiên một số từ tập $S$. Các mệnh đề sau đúng hay sai?
+
+a) $n\left(\Omega\right) = 1000$
+
+b) Gọi $A$ là biến cố: "Chọn được số tự nhiên có các chữ số đôi một khác nhau", khi đó $n\left(A\right) = 648$
+
+c) Gọi $B$ là biến cố: "Chọn được số tự nhiên chia hết cho $5$", khi đó $n\left(B\right) = 180$
+
+d) Gọi $C$ là biến cố: "Chọn được số tự nhiên chẵn", khi đó $n\left(C\right) = 500$
+
+# Lời giải
+
+a) Sai. Xét số tự nhiên có ba chữ số dạng $\overline{abc}$, với $a$, $b$, $c$ thuộc tập hợp $\left\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\right\}$ và $a \ne 0$. Chọn chữ số $a$ có $9$ cách chọn. Chọn chữ số $b$ có $10$ cách chọn. Chọn chữ số $c$ có $10$ cách chọn. Theo quy tắc nhân ta có $9 \cdot 10 \cdot 10 = 900$. Vậy $n\left(\Omega\right) = 900$.
+
+b) Đúng. Xét số tự nhiên có ba chữ số dạng $\overline{abc}$, với $a$, $b$, $c$ đôi một khác nhau và thuộc tập hợp $\left\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\right\}$, $a \ne 0$. Chọn chữ số $a$ có $9$ cách chọn. Chọn chữ số $b$ có $9$ cách chọn trong các chữ số còn lại sau khi chọn $a$. Chọn chữ số $c$ có $8$ cách chọn trong các chữ số còn lại sau khi chọn $a$ và $b$. Theo quy tắc nhân ta có $9 \cdot 9\cdot 8 = 648$. Vậy $n\left(A\right) = 648$. (Đính chính lỗi đánh máy trong đề gốc từ $\overline{A}$ thành $A$).
+
+c) Đúng. Xét số tự nhiên có ba chữ số dạng $\overline{abc}$, với $a$, $b$, $c$ thuộc tập hợp $\left\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\right\}$, $a \ne 0$, $c$ thuộc tập hợp $\left\{0; 5\right\}$. Chọn chữ số $c$ có $2$ cách chọn. Chọn chữ số $a$ có $9$ cách chọn. Chọn chữ số $b$ có $10$ cách chọn. Theo quy tắc nhân ta có $2 \cdot 9\cdot 10 = 180$. Vậy $n\left(B\right) = 180$.
+
+d) Sai. Xét số tự nhiên có ba chữ số dạng $\overline{abc}$, với $a$, $b$, $c$ thuộc tập hợp $\left\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\right\}$, $a \ne 0$, $c$ thuộc tập hợp $\left\{0; 2; 4; 6; 8\right\}$. Chọn chữ số $c$ có $5$ cách chọn. Chọn chữ số $a$ có $9$ cách chọn. Chọn chữ số $b$ có $10$ cách chọn. Theo quy tắc nhân ta có $5 \cdot 9\cdot 10 = 450$. Vậy $n\left(C\right) = 450$.
+
+---
+
+---
+id: xacsuat_037
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - chọn người
+  - tổ hợp
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Một nhóm có $6$ bạn nam và $5$ bạn nữ. Chọn ngẫu nhiên cùng một lúc ra $4$ bạn đi làm công tác tình nguyện. Các mệnh đề sau đúng hay sai?
+
+a) Số phần tử của không gian mẫu là $7920$
+
+b) Số kết quả thuận lợi của biến cố: "Trong $4$ bạn được chọn có $2$ bạn nam và $2$ bạn nữ" bằng $150$
+
+c) Số kết quả thuận lợi của biến cố: "Trong $4$ bạn được chọn có ít nhất $2$ bạn nữ" bằng $225$
+
+d) Số kết quả thuận lợi của biến cố: "Trong $4$ bạn được chọn có nhiều nhất $2$ bạn nữ" bằng $260$
+
+# Lời giải
+
+a) Sai. Chọn $4$ bạn trong $6 + 5 = 11$ bạn không tính đến thứ tự là tổ hợp chập $4$ của $11$ phần tử. Vậy số phần tử của không gian mẫu là $\mathrm{C}_{11}^{4} = 330$.
+
+b) Đúng. Chọn $4$ bạn được chọn có $2$ bạn nam và $2$ bạn nữ, số các chọn là $\mathrm{C}_{6}^{2}\cdot \mathrm{C}_{5}^{2} = 150$. Vậy có $150$ kết quả thuận lợi.
+
+c) Sai. 
+* Trường hợp $4$ bạn được chọn có $2$ bạn nam và $2$ bạn nữ. Số cách chọn là $\mathrm{C}_{6}^{2}\cdot \mathrm{C}_{5}^{2} = 150$ cách.
+* Trường hợp $4$ bạn được chọn có $1$ bạn nam và $3$ bạn nữ. Số cách chọn là $\mathrm{C}_{6}^{1}\cdot \mathrm{C}_{5}^{3} = 60$ cách.
+* Trường hợp $4$ bạn được chọn là $4$ bạn nữ. Số cách chọn là $\mathrm{C}_{5}^{4} = 5$ cách.
+
+Theo quy tắc cộng có $ 150 + 60 + 5 = 215$ cách. Vậy có $215$ kết quả thuận lợi.
+
+d) Sai. 
+* Trường hợp $4$ bạn được chọn có $2$ bạn nam và $2$ bạn nữ. Số cách chọn là $\mathrm{C}_{6}^{2}\cdot \mathrm{C}_{5}^{2} = 150$ cách.
+* Trường hợp $4$ bạn được chọn có $3$ bạn nam và $1$ bạn nữ. Số cách chọn là $\mathrm{C}_{6}^{3}\cdot \mathrm{C}_{5}^{1} = 100$ cách.
+* Trường hợp $4$ bạn được chọn là $4$ bạn nam. Số cách chọn là $\mathrm{C}_{6}^{4} = 15$ cách.
+
+Theo quy tắc cộng có $ 150 + 100 + 15 = 265$ cách. Vậy có $265$ kết quả thuận lợi.
+
+---
+
+---
+id: xacsuat_038
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Xác định số kết quả thuận lợi
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - chọn quả cầu
+  - liên tiếp
+  - biến cố rỗng
+---
+
+# Đề bài
+
+Từ một hộp chứa năm quả cầu được đánh số $1, 2, 3, 4, 5$ lấy ngẫu nhiên liên tiếp hai lần mỗi lần một quả và xếp theo thứ tự từ trái sang phải. Các mệnh đề sau đúng hay sai?
+
+a) $n\left(\Omega\right) = 25$
+
+b) Gọi $A$ là biến cố: "Chữ số sau lớn hơn chữ số trước", khi đó $n\left(A\right) = 10$
+
+c) Gọi $B$ là biến cố: "Chữ số trước gấp đôi chữ số sau", khi đó $n\left(B\right) = 2$
+
+d) Gọi $C$ là biến cố: "Hai chữ số bằng nhau", khi đó $C = \varnothing$
+
+# Lời giải
+
+a) Sai. Lần thứ nhất chọn một quả cầu có $5$ cách chọn. Lần thứ hai chọn một quả cầu trong $4$ quả cầu còn lại có $4$ cách chọn. Theo quy tắc nhân ta có $5 \cdot 4 = 20$ cách chọn. Vậy $n\left(\Omega\right) = 20$.
+
+b) Đúng. 
+* Chữ số sau là chữ số $5$, khi đó chữ số trước là một trong các số $1; 2; 3; 4$. Có $4$ cách chọn.
+* Chữ số sau là chữ số $4$, khi đó chữ số trước là một trong các số $1; 2; 3$. Có $3$ cách chọn.
+* Chữ số sau là chữ số $3$, khi đó chữ số trước là một trong các số $1; 2$. Có $2$ cách chọn.
+* Chữ số sau là chữ số $2$, khi đó chữ số trước là số $1$. Có $1$ cách chọn.
+
+Theo quy tắc cộng ta có $4 + 3 + 2 + 1 = 10$ cách chọn. Vậy $n\left(A\right) = 10$.
+
+c) Đúng. $B$ là biến cố: "Chữ số trước gấp đôi chữ số sau", khi đó $B = \{ (2;1), (4; 2)\}$. Vậy $n\left(B\right) = 2$.
+
+d) Đúng. Vì nếu lần thứ nhất chọn một trong các quả cầu có đánh số $1, 2, 3, 4, 5$ thì lần thứ hai sẽ chọn được một quả cầu khác với quả cầu được chọn lần thứ nhất. Vậy $C$ là biến cố: "Hai chữ số bằng nhau", khi đó $C = \varnothing$.
+
+---
+
+---
+id: xacsuat_039
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 50
+tags:
+  - lập số
+  - so sánh số
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Cho tập $Q = \left\{1; 2; 3; 4; 5; 6\right\}$. Từ tập $Q$ có thể lập được bao nhiêu số tự nhiên có $3$ chữ số khác nhau. Tính số phần tử của biến cố sao cho số được chọn nhỏ hơn $345$.
+
+# Lời giải
+
+Gọi $A$ là biến cố: "Số được chọn nhỏ hơn $345$".
+Số tự nhiên có ba chữ số thuộc $A$ là $\overline{abc}$, với $a$, $b$, $c$ thuộc $Q = \left\{1; 2; 3; 4; 5; 6\right\}$ và đôi một khác nhau.
+* Trường hợp $a = 3$.
+  * Nếu $b = 4$ thì $c \in \{1; 2\}$. Có $2$ số tự nhiên thỏa mãn.
+  * Nếu $b \in \{1; 2\}$ thì $b$ có $2$ cách chọn và $c$ có $4$ cách chọn. Có $2 \cdot 4 = 8$ số tự nhiên thỏa mãn.
+  Trường hợp này có $2 + 8 = 10$ số thỏa mãn.
+* Trường hợp $a \in \{1; 2\}$.
+  Khi đó $a$ có $2$ cách chọn, $b$ có $5$ cách chọn và $c$ có $4$ cách chọn. Vậy có $2\cdot 5\cdot 4 = 40$ số tự nhiên thỏa mãn.
+
+Theo quy tắc cộng ta có $ 10 + 40 = 50$ số tự nhiên thỏa mãn. Do đó $n\left(A\right) = 50$.
+
+---
+
+---
+id: xacsuat_040
+lop: 10
+chu_de: Biến cố và xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 8
+tags:
+  - sắp xếp vị trí
+  - vị trí xen kẽ
+---
+
+# Đề bài
+
+Một nhóm bạn có $4$ bạn gồm $2$ bạn nam Mạnh, Dũng và $2$ nữ là Hoa, Lan được xếp ngẫu nhiên trên một ghế dài. Kí hiệu MDHL là cách sắp xếp theo thứ tự: Mạnh, Dũng, Hoa, Lan.
+Tính số phần tử của biến cố $A$: "Xếp nam và nữ ngồi xen kẽ nhau".
+
+# Lời giải
+
+Biến cố $A$: "Xếp nam và nữ ngồi xen kẽ nhau".
+Đánh số ghế theo thứ tự $1$, $2$, $3$ , $4$. Xếp hai bạn nam ngồi xen kẽ ở các vị trí $(1; 3)$ hoặc $(2; 4)$. Sau đó xếp hai bạn nữ vào hai vị trí còn lại.
+Hai bạn nam đổi chỗ nhau và hai bạn nữ đổi chỗ nhau. Do đó số cách xếp là $2\cdot 2!\cdot 2! = 8$. Vậy $n\left(A\right) = 8$.
+
+---
+id: xacsuat_037
+lop: 10
+chu_de: Tổ hợp xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 580
+tags:
+  - biến cố
+  - tổ hợp
+---
+
+# Đề bài
+
+Có $20$ tấm thẻ được đánh số từ $1$ đến $20$. Lấy ngẫu nhiên $3$ thẻ.Tính số phần tử của biến cố $A$: "Có ít nhất một số ghi trên thẻ được chọn chia hết cho $5$".
+
+# Lời giải
+
+Biến cố $A$: "Có ít nhất một số ghi trên thẻ được chọn chia hết cho $5$".
+Biến cố đối $\overline{A}$: "Không có một số nào ghi trên thẻ được chọn chia hết cho $5$".
+Trong $20$ tấm thẻ thì có $4$ tấm thẻ là số chia hết cho $5$ và $16$ tấm thẻ là số không chia hết cho $5$.
+Chọn $3$ thẻ trong $20$ thẻ có $\mathrm{C}_{20}^{3}$ cách.
+Chọn $3$ thẻ có số ghi trên thẻ là số không chia hết cho $5$ có $\mathrm{C}_{16}^{3}$ cách, nên $n\left(\overline{A}\right) = \mathrm{C}_{16}^{3}$.
+Suy ra chọn $5$ thẻ có ít nhất một số ghi trên thẻ được chọn chia hết cho $5$ có $\mathrm{C}_{20}^{3}  - \mathrm{C}_{16}^{3}= 1580$. Vậy $n\left(A\right) = 580$.
+
+---
+id: xacsuat_038
+lop: 10
+chu_de: Tổ hợp xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 48
+tags:
+  - biến cố
+  - quy tắc đếm
+---
+
+# Đề bài
+
+Một hộp chứa $10$ quả bóng được đánh số từ $1$ đến $10$. Bình và An mỗi người lấy ra ngẫu nhiên $1$ quả bóng từ hộp. Có bao nhiêu kết quả thuận lợi cho biến cố "Tích hai số ghi trên hai quả bóng chia hết cho $3$".
+
+# Lời giải
+
+Gọi biến cố $A$: "Tích hai số ghi trên hai quả bóng chia hết cho $3$".
+Biến cố đối $\overline{A}$: "Tích hai số ghi trên hai quả bóng không chia hết cho $3$".
+Số cách  Bình và An mỗi người lấy ra ngẫu nhiên $1$ quả bóng từ hộp $n\left(\Omega\right) = 10\cdot 9 = 90$.
+Trong các số từ $1$ đến $10$ có $7$ số không chia hết cho $3$. Suy  ra $n\left(\overline{A}\right) = 7 \cdot  6 = 42$.
+Suy ra $n\left(A\right) = n\left(\Omega\right) - n\left(\overline{A}\right) = 90 - 42 = 48$.
+
+---
+id: xacsuat_039
+lop: 10
+chu_de: Tổ hợp xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 31
+tags:
+  - biến cố
+  - số học
+---
+
+# Đề bài
+
+Chọn ngẫu nhiên một số nguyên lớn hơn $3$ và nhỏ hơn $99$. Gọi $B$  là biến cố "Số được chọn chia hết cho $3$". Hãy tính số các kết quả thuận lợi cho  $B$.
+
+# Lời giải
+
+Gọi $B$  là biến cố "Số được chọn chia hết cho $3$".
+Suy ra $B = \left\{3k\mid k\in \mathbb{N}, 1 < k <33\right\}$.
+Do đó $n\left(B\right) = 31$.
+
+---
+id: xacsuat_040
+lop: 10
+chu_de: Tổ hợp xác suất
+dang: Tính số phần tử của biến cố
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 64
+tags:
+  - biến cố
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Có ba chiếc hộp, hộp thứ nhất chứa $6$ bi xanh được đánh số từ $1$ đến $6$, hộp thứ hai chứa $5$ bi đỏ được đánh số từ $1$ đến $5$, hộp thứ ba chứa $4$ bi vàng được đánh số từ $1$ đến $4$. Lấy ngẫu nhiên ba viên bi. Tính số phần tử của biến cố  $A$: "Ba bi được chọn vừa khác màu vừa khác số".
+
+# Lời giải
+
+Biến cố  $A$: "Ba bi được chọn vừa khác màu vừa khác số".
+Vì ba bi được chọn vừa khác màu nên ta phải chọn mỗi hộp $1$ viên.
+
+* Chọn từ hộp thứ ba $1$ viên bi vàng có $4$ cách chọn.
+* Chọn từ hộp thứ hai $1$ viên bi đỏ có số khác với viên bi đã chọn từ hộp ba có $4$ cách chọn.
+* Chọn từ hộp thứ nhất $1$ viên bi xanh có số khác với số của hai viên đã chọn từ hộp một và hai có $4$ cách chọn.
+
+Vậy có $4^3 = 64$ cách chọn. Suy ra $n\left(A\right) = 64$.
