@@ -1,0 +1,1674 @@
+---
+id: phuongtrinhvoti_001
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tổng các nghiệm
+---
+
+# Đề bài
+
+Tổng tất cả các nghiệm của phương trình $\sqrt{x^2 + 2x - 3} = \sqrt{15-5x}$ là
+
+A. $7$
+
+B. $-7$
+
+C. $6$
+
+D. $4$
+
+# Lời giải
+
+Bình phương hai vế của phương trình ta được 
+$$x^2 + 2x -3 = 15-5x \Rightarrow x^2  + 7x-18 = 0\Rightarrow \hoac{&x=2\\ &x=-9.}$$ 
+
+Thử lại ta thấy $x=2$ và $x=-9$ đều thoả mãn nên tổng các nghiệm của phương trình là 
+$$2+(-9)= -7.$$
+
+---
+
+id: phuongtrinhvoti_002
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tập nghiệm
+---
+
+# Đề bài
+
+Tập nghiệm $S$ của phương trình $\sqrt{x^2-4} = x-2$ là 
+
+A. $S = \{0\}$
+
+B. $S = \{2\}$
+
+C. $S = \{0;2\}$
+
+D. $S = \emptyset$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\Leftrightarrow \heva{&x-2\ge 0\\ &x^2-4 = (x-2)^2} \Leftrightarrow \heva{&x\ge 2\\ &4x-8 = 0} \Leftrightarrow x=2.$$ 
+
+Vậy tập nghiệm của phương trình là $S = \{2\}$.
+
+---
+
+id: phuongtrinhvoti_003
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - biến đổi tương đương
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{3x+4} = x\quad (1)$. Mệnh đề nào sau đây đúng?
+
+A. $(1)\Leftrightarrow 3x+4=x^2$
+
+B. $(1)\Leftrightarrow 3x+4=x$
+
+C. $(1)\Leftrightarrow \heva{&3x+4\ge 0\\ &3x+4=x^2}$
+
+D. $(1)\Leftrightarrow \heva{&x\ge 0\\ &3x+4=x^2}$
+
+# Lời giải
+
+Ta có $(1)\Leftrightarrow \heva{&x\ge 0\\ &3x+4=x^2}$
+
+---
+
+id: phuongtrinhvoti_004
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - tập nghiệm
+---
+
+# Đề bài
+
+Tập nghiệm $S$ của phương trình $\sqrt{2x-3} = x-3$ là 
+
+A. $S = \{6\}$
+
+B. $S = \{2\}$
+
+C. $S = \{2;6\}$
+
+D. $S = \emptyset$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\Leftrightarrow \heva{&x-3\ge 0\\ &2x-3 = (x-3)^2} \Leftrightarrow \heva{&x\ge 3\\ &x^2 - 8x + 12 = 0} \Leftrightarrow \heva{&x\ge 3\\ &\hoac{&x=2\\ &x=6}} \Leftrightarrow x=6.$$ 
+
+Vậy tập nghiệm của phương trình là $S = \{6\}$.
+
+---
+
+id: phuongtrinhvoti_005
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Số nghiệm của phương trình $\sqrt{3x^2 - 9x + 7} = x - 2$ là
+
+A. $3$
+
+B. $1$
+
+C. $2$
+
+D. $0$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&x-2\ge 0\\ &3x^2 - 9x + 7 = (x-2)^2}
+\Leftrightarrow \heva{&x\ge 2\\ &2x^2 - 5x+3=0}
+\Leftrightarrow \heva{&x\ge 2\\ &\hoac{&x=1\\ &x=\dfrac{3}{2}}}
+\Leftrightarrow x\in \emptyset.$$ 
+
+Vậy phương trình vô nghiệm.
+
+---
+
+id: phuongtrinhvoti_006
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - tập nghiệm
+---
+
+# Đề bài
+
+Tập nghiệm của phương trình $\sqrt{5x+6} = x-6$ là 
+
+A. $S=\{2\}$
+
+B. $S = \{6\}$
+
+C. $S = \{2;15\}$
+
+D. $S = \{15\}$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&x-6\ge 0\\ &5x+6 = (x-6)^2}
+\Leftrightarrow \heva{&x\ge 6\\ &x^2 - 17x + 30 = 0}
+\Leftrightarrow \heva{&x\ge 6\\ &\hoac{&x=2\\ &x=15}}
+\Leftrightarrow x=15.$$ 
+
+Vậy tập nghiệm của phương trình là $S = \{ 15 \}$.
+
+---
+
+id: phuongtrinhvoti_007
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Số nghiệm của phương trình $\sqrt{x^2 + x - 42} = \sqrt{2x - 30}$ là 
+
+A. $0$
+
+B. $1$
+
+C. $2$
+
+D. vô số
+
+# Lời giải
+
+Bình phương hai vế của phương trình ta được 
+$$x^2 + x - 42=2x - 30 \Leftrightarrow x^2-x-12=0 \Leftrightarrow \hoac{&x=4\\&x=-3.}$$ 
+
+Thay hai giá trị $x=-3$ và $x=4$ vào phương trình ban đầu ta thấy không có giá trị nào thõa mãn phương trình.
+
+Vậy phương trình vô nghiệm.
+
+---
+
+id: phuongtrinhvoti_008
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình vô tỉ
+  - tập nghiệm
+---
+
+# Đề bài
+
+Tập nghiệm của phương trình $2\sqrt{x^2 - x - 1} = \sqrt{x^2 + 2x + 5}$ là
+
+A. $S = \{1\}$
+
+B. $S = \{3\}$
+
+C. $S=\{1;3\}$
+
+D. $S = \emptyset$
+
+# Lời giải
+
+$2\sqrt{x^2 - x - 1} = \sqrt{x^2 + 2x + 5}.\quad (1)$
+
+Bình phương hai vế của phương trình $(1)$ ta được phương trình $4(x^2 - x - 1) = x^2 + 2x + 5$
+
+Ta có $4(x^2 - x - 1) = x^2 + 2x + 5 \Leftrightarrow 3x^2-6x-9=0 \Leftrightarrow \hoac{& x=-1\\& x=3.}$
+
+Thay hai giá trị $x=-1$ và $x=3$ vào phương trình $(1)$ ta thấy cả hai giá trị đều thõa mãn. Vậy phương trình có hai nghiệm là $x=-1$ và $x=3$.
+
+---
+
+id: phuongtrinhvoti_009
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa dấu giá trị tuyệt đối
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Số nghiệm của phương trình $\sqrt{3x^2 - 9x + 1} = |x-2|$ là
+
+A. $0$
+
+B. $1$
+
+C. $2$
+
+D. $3$
+
+# Lời giải
+
+Ta có phương trình tương đương với 
+$$3x^2 - 9x + 1  = (x-2)^2 \Leftrightarrow 2x^2 - x - 21 = 0 \Leftrightarrow \hoac{&x=-3 \\ & x = \dfrac{7}{2}.}$$
+
+Vậy phương trình có $2$ nghiệm.
+
+---
+
+id: phuongtrinhvoti_010
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{x^2 + 3x - 2} = \sqrt{x + 1}$ là
+
+A. $x = 1$
+
+B. $x= -3$
+
+C. $\hoac{& x = -3 \\ & x = 1}$
+
+D. $x \in \emptyset$
+
+# Lời giải
+
+Điều kiện: $\heva{&x^2 + 3x - 2 \geq 0\\&x + 1 \geq 0}$.
+
+Ta có $\sqrt{x^2 + 3x - 2} = \sqrt{x + 1} \Leftrightarrow x^2 + 3x - 2 = x + 1 \Leftrightarrow x^2 + 2x - 3 = 0 \Leftrightarrow \hoac{&x = 1\\&x = -3 \;\;\text{(loại)}}$.
+
+Vậy phương trình đã cho có nghiệm là $x = 1$.
+
+---
+
+id: phuongtrinhvoti_011
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{x^2 - 5x + 4} = \sqrt{-2x^2 - 3x + 12}$ là
+
+A. $x = 2$
+
+B. $x = -\dfrac{4}{3}$
+
+C. $\hoac{& x = 2\\& x = -\dfrac{4}{3}}$
+
+D. $x \in \emptyset$
+
+# Lời giải
+
+Điều kiện: $\heva{&x^2 - 5x + 4 \geq 0\\&-2x^2 - 3x + 12 \geq 0}$.
+
+Ta có
+$$\sqrt{x^2 - 5x + 4} = \sqrt{-2x^2 - 3x + 12} \Leftrightarrow x^2 - 5x + 4 = -2x^2 - 3x + 12$$
+$$\Leftrightarrow 3x^2 - 2x - 8 = 0 \Leftrightarrow \hoac{&x = 2 \,\text{ (loại)}\\&x = -\dfrac{4}{3}\, \text{ (thoả mãn)}.}$$
+
+Vậy phương trình đã cho có nghiệm là $x = 2$.
+
+---
+
+id: phuongtrinhvoti_012
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{4x^2+2x+10}=3x+1$ là
+
+A. $x=1$
+
+B. $x=\dfrac{-9}{5}$
+
+C. $\hoac{&x=\dfrac{-9}{5}\\&x=1}$
+
+D. $x\in\emptyset$
+
+# Lời giải
+
+Bình phương hai vế của phương trình đã cho, ta được
+$$4x^2+2x+10=(3x+1)^2 \Rightarrow -5x^2-4x+9=0\Rightarrow \hoac{&x=1\\ &x=-\dfrac{9}{5}.}$$
+
+Thay lần lượt các giá trị trên vào phương trình đã cho, ta thấy $x=1$ thỏa mãn.
+
+Vậy nghiệm của phương trình đã cho là $x=1$.
+
+---
+
+id: phuongtrinhvoti_013
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Biện luận nghiệm phương trình vô tỉ
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - phương trình vô tỉ
+  - biện luận nghiệm
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{2x^2 + x+ 3} = -(x+5)\quad (1)$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Bình phương hai vế của phương trình $(1)$ ta được phương trình $x^2 - 9x - 22 = 0$
+
+b) Đúng/Sai: Phương trình $(1)$ cùng tập nghiệm với phương trình $x^2 - 9x - 22 = 0$
+
+c) Đúng/Sai: $x=11$ và $x=-2$ là hai nghiệm của phương trình $(1)$
+
+d) Đúng/Sai: Phương trình $(1)$ vô nghiệm
+
+# Lời giải
+
+Bình phương hai vế của phương trình $(1)$ ta được 
+$$2x^2 + x + 3  = (x+5)^2 \Leftrightarrow x^2 - 9x - 22 = 0 \Leftrightarrow \hoac{&x=11\\ & x = -2.}$$
+
+Thử lại ta thấy cả $x=11$ và $x=-2$ đều không thoả mãn. Vậy
+
+a) Mệnh đề đúng. 
+
+b) Phương trình $(1)$ vô nghiệm mà tập nghiệm của phương trình $x^2 - 9x - 22 = 0$ là $S  = \{ -2;11 \}$. Mệnh đề sai.
+
+c) Mệnh đề sai. 
+
+d) Mệnh đề đúng.
+
+---
+
+id: phuongtrinhvoti_014
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - phương trình vô tỉ
+  - điều kiện xác định
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{x^2 + 2x + 4} = \sqrt{2-x}$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Điều kiện xác định của phương trình $(1)$ là $x\le 2$
+
+b) Đúng/Sai: Phương trình $(1)$ có hai nghiệm phân biệt trái dấu
+
+c) Đúng/Sai: Phương trình $(1)$ có các nghiệm đều là số nguyên.
+
+d) Đúng/Sai: Tổng các nghiệm của phương trình $(1)$ là $1$
+
+# Lời giải
+
+Ta có 
+$$(1)\Leftrightarrow \heva{&x^2 + 2x + 4 \ge 0\\ &2-x\ge 0\\ & x^2 + 2x + 4  = 0}
+\Leftrightarrow \heva{& x\le 2\\ &x^2 + 3x + 2 = 0}
+\Leftrightarrow \hoac{&x=-1\\ &x=-2.}$$
+
+a) Điều kiện xác định của phương trình là $\heva{&x^2 + 2x + 4 \ge 0\\ &2-x\ge 0} \Leftrightarrow x\le 2$. Mệnh đề đúng. 
+
+b) Phương trình $(1)$ có hai nghiệm phân biệt đều âm. Mệnh đề sai.
+
+c) $-1$ và $-2$ đều là các số nguyên. Mệnh đề đúng.
+
+d) $-1+(-2) = -3$. Mệnh đề sai.
+
+---
+
+id: phuongtrinhvoti_015
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình tích chứa căn thức
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - phương trình vô tỉ
+  - nghiệm nguyên
+---
+
+# Đề bài
+
+Cho phương trình $(x+1)\left( \sqrt{x+4} - \sqrt{-x^2 + 4x + 14} \right) = 0 \quad (1)$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Phương trình $(1)$ không có nghiệm bé thua $4$
+
+b) Đúng/Sai: Phương trình $(1)$ có $3$ nghiệm phân biệt
+
+c) Đúng/Sai: Các nghiệm của phương trình $(1)$ đều là số nguyên
+
+d) Đúng/Sai: Tổng bình phương các nghiệm của phương trình $(1)$ bằng $29$
+
+# Lời giải
+
+Ta có 
+$$(1) \Rightarrow \hoac{&x+1 = 0 \\ & \sqrt{x+4} - \sqrt{-x^2 + 4x + 14} = 0}
+\Rightarrow \hoac{&x=-1\\ &x+4  = -x^2 + 4x + 14}
+\Leftrightarrow \hoac{&x=-1\\ &x^2 - 3x - 10 = 0.}$$  
+
+Từ đó ta giải được các nghiệm $x=-1$, $x=-2$, $x=5$.
+
+Thử lại ta thấy $x=-1$, $x=-2$ và $x=5$ đều thoả mãn. Vậy 
+
+a) $-1 < 4$. Mệnh đề sai. 
+
+b) Phương trình $(1)$ có $3$ nghiệm phân biệt. Mệnh đề đúng.
+
+c) $-1$; $-2$; $5$ đều là các số nguyên. Mệnh đề đúng.
+
+d) $(-1)^2 + (-2)^2 + 5^2 = 30$. Mệnh đề sai.
+
+---
+
+id: phuongtrinhvoti_016
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - VDC
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - phương trình vô tỉ
+  - biến đổi hệ quả
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{3x-2} = 1 + \sqrt{x+7}$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Điều kiện xác định của phương trình là $x\ge\dfrac{2}{3}$
+
+b) Đúng/Sai: Phương trình có hai nghiệm phân biệt
+
+c) Đúng/Sai: Tổng các nghiệm của phương trình là $9$
+
+d) Đúng/Sai: Phương trình có chung tập nghiệm với phương trình $\sqrt{x-5} = x-7$
+
+# Lời giải
+
+Điều kiện xác định $\heva{&3x-2\ge 0\\ &x+7\ge 0} \Leftrightarrow x\ge \dfrac{2}{3}$. 
+
+Khi đó phương trình tương đương với 
+$$3x - 2  = x+7 + 1 + 2\sqrt{x+7} \Leftrightarrow \sqrt{x+7} = x-5$$
+$$\Leftrightarrow \heva{&x-5\ge 0\\ &x+7 = (x-5)^2} \Leftrightarrow \heva{&x-5\ge 0\\ &x^2 - 11x + 18 = 0} \Leftrightarrow \heva{&x\ge 5\\ &\hoac{&x=2\\ &x=9}} \Leftrightarrow x=9.$$
+
+a) Mệnh đề đúng.
+
+b) Mệnh đề sai.
+
+c) Mệnh đề đúng.
+
+d) $\sqrt{x-5} = x-7 \Leftrightarrow \heva{&x-7 \ge 0\\ &x-5 = (x-7)^2} \Leftrightarrow \heva{&x\ge 7\\ &x^2 - 15x + 54 = 0} \Leftrightarrow \heva{&x\ge 7\\ &\hoac{&x=6\\ &x=9}} \Leftrightarrow x = 9$. Mệnh đề đúng.
+
+---
+
+id: phuongtrinhvoti_017
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Ứng dụng hình học vào bài toán thực tế
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 15.7
+tags:
+  - hình học
+  - định lý pythagoras
+  - toán thực tế
+---
+
+# Đề bài
+
+Tam giác $ABC$ vuông tại $A$ có điểm $D$ nằm giữa $A$ và $B$. Biết $BC = 8$, $BD = 3$ và $CD = 6$, tính diện tích tam giác $ABC$ (làm tròn đến chữ số thập phân thứ nhất sau dấu phẩy).
+
+\begin{tikzpicture}[line join=round, line cap = round, >=stealth, scale=.8,font=\footnotesize,transform shape]
+	\foreach \x/\y/\z/\g in
+	{
+		0/0/A/-135, 3/0/D/-90, 5/0/B/-45, 0/4/C/135
+	}
+	\draw[fill=black] (\x,\y) circle(1pt) coordinate (\z) ($(\z)+(\g:3.5mm)$) node{$\z$};
+	\draw (D)--(C)--(B)--(A)--(C);
+\end{tikzpicture}
+
+# Lời giải
+
+Đặt $AD = x$ ($x > 0$). Khi đó theo định lý Py-ta-go ta có
+* $AC^2 = CD^2 - AD^2 = 6^2 - x^2 = 36 - x^2$.
+* $AC^2 = BC^2 - AB^2 = 8^2 - (x+3)^2 = 55 - 6x - x^2$.
+
+Do đó $36 - x^2 = 55 - 6x - x^2 \Leftrightarrow x = \dfrac{19}{6}$, suy ra 
+$$S_{ABC} = \dfrac{1}{2}AB\cdot AC = \dfrac{1}{2}(x+3)\sqrt{36-x^2} \approx 15{,}7.$$
+
+---
+
+id: phuongtrinhvoti_018
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Bài toán thực tế liên quan đến chuyển động
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 50
+tags:
+  - toán thực tế
+  - định lý pythagoras
+  - tối ưu hóa
+---
+
+# Đề bài
+
+Một chú thỏ ngày nào cũng ra bờ suối ở vị trí $A$ cách cửa hang của mình ở vị trí $B$ là $370$ m để uống nước, sau đó chú thỏ sẽ đến vị trí $C$ cách $A$ $120$ m để ăn cỏ rồi trở về hang. Tuy nhiên, hôm nay sau khi uống nước ở bờ suối, chú thỏ không đến vị trí $C$ như mọi ngày mà chạy đến vị trí $D$ nằm giữa $C$ và $B$ để tìm cà rốt rồi mới trở về hang (xem hình dưới). Biết rằng, tam giác $ABC$ vuông tại $C$, tổng thời gian chú thỏ chạy từ $A$ đến $D$ rồi về hang hết $30$ giây (không kể thời gian tìm cà rốt), tốc độ của chú thỏ trên các đoạn $AD$ và $DB$ lần lượt là $13$ m/s và $15$ m/s. Tính độ dài đoạn $CD$.
+
+\begin{tikzpicture}[line join=round, line cap = round, >=stealth, scale=.8,font=\footnotesize,transform shape]
+	\foreach \x/\y/\z/\g in
+	{
+		0/0/C/-135, 3/0/D/-90, 5/0/B/-45, 0/4/A/135
+	}
+	\draw[fill=black] (\x,\y) circle(1pt) coordinate (\z) ($(\z)+(\g:3.5mm)$) node{$\z$};
+	\draw (D)--(A)--(B)--(C)--(A);
+\end{tikzpicture}
+
+# Lời giải
+
+Gọi thời gian chú thỏ chạy trên đoạn $AD$ là $x$ giây ($0<x<30$). Khi đó $AD = 13x$ m.
+
+Thời gian chú thỏ chạy trên đoạn $BD$ là $30-x$ giây nên $BD = 15(30-x)$ m.
+
+Theo định lý Py-ta-go ta có $BC = \sqrt{AB^2 - AC^2} = 350$. 
+
+Suy ra $CD = BC - BD = 350 - 15(30-x) = 15x - 100$ m.
+
+Áp dụng định lý Py-ta-go cho tam giác $ACD$ ta có 
+$$AD^2 = AC^2 + CD^2 \Leftrightarrow (13x)^2 = 120^2 + (15x-100)^2 \Leftrightarrow 56x^2 - 3000x + 24400 = 0 \Leftrightarrow \hoac{&x=10\\ &x = \dfrac{307}{5}.}$$
+
+Mà $ 0 < x < 30$ nên $x = 10$, suy ra $CD = 50$.
+
+---
+
+id: phuongtrinhvoti_019
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Phương trình chứa ẩn dưới dấu căn đổi biến hằng số đẳng thức
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - phương trình vô tỉ
+  - bình phương hai vế
+---
+
+# Đề bài
+
+Tính tổng bình phương các nghiệm của phương trình 
+$$x^2 - 3x + 10 + 2(x-3)\sqrt{3x+1} = 0.$$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\Leftrightarrow (x^2 - 6x + 9) + (3x+1) + 2(x-3)\sqrt{3x+1} = 0$$
+$$\Leftrightarrow (x-3)^2 + \left( \sqrt{3x+1} \right)^2 + 2(x-3)\sqrt{3x+1} = 0$$
+$$\Leftrightarrow \left( x - 3 + \sqrt{3x+1} \right) ^ 2 = 0 \Leftrightarrow x - 3 + \sqrt{3x+1} = 0 \Leftrightarrow \sqrt{3x+1} = 3-x$$
+$$\Leftrightarrow \heva{&3-x\ge 0\\ &3x+1 = (3-x)^2} \Leftrightarrow \heva{&x\le 3\\ &x^2 - 9x + 8 = 0} \Leftrightarrow \heva{&x\le 3\\ &\hoac{&x=1\\ &x=8}} \Leftrightarrow x = 1.$$
+
+Vậy tổng bình phương tất cả các nghiệm của phương trình là $1$.
+
+---
+
+id: phuongtrinhvoti_020
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa dấu giá trị tuyệt đối và căn thức
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: -1.5
+tags:
+  - phương trình vô tỉ
+  - giá trị tuyệt đối
+---
+
+# Đề bài
+
+Tính tổng các nghiệm của phương trình $\sqrt{x^2 - 4x - 1} - |2x+1| = 1$ (làm tròn đến một chữ số thập phân sau dấu phẩy).
+
+# Lời giải
+
+Ta xét hai trường hợp:
+
+**TH1.** $2x+1\ge 0 \Leftrightarrow x \ge -\dfrac{1}{2}$. Khi đó phương trình trở thành
+$$\sqrt{x^2 - 4x - 1} - (2x+1) = 1 \Leftrightarrow \sqrt{x^2 - 4x - 1} = 2x+2$$
+$$\Leftrightarrow \heva{&2x+2\ge 0\\ &x^2 - 4x - 1 = (2x+2)^2} \Leftrightarrow \heva{&x\ge -1\\ &3x^2 + 12x + 5 = 0}$$
+$$\Leftrightarrow \heva{&x\ge -1\\ &x = \dfrac{-6\pm \sqrt{21}}{3}} \Leftrightarrow x = \dfrac{-6+\sqrt{21}}{3} \text{ (thoả mãn)}.$$
+
+**TH2.** $2x+1< 0 \Leftrightarrow x < -\dfrac{1}{2}$. Khi đó phương trình trở thành
+$$\sqrt{x^2 - 4x - 1} + (2x+1) = 1 \Leftrightarrow \sqrt{x^2 - 4x - 1} = -2x$$
+$$\Leftrightarrow \heva{&-2x\ge 0\\ &x^2 - 4x - 1 = (-2x)^2} \Leftrightarrow \heva{&x\le 0\\ &3x^2 + 4x + 1 = 0}$$
+$$\Leftrightarrow \heva{&x\le 0\\ &\hoac{&x=-1\\ &x=-\dfrac{1}{3}}} \Leftrightarrow \hoac{&x=-1\\ &x=-\dfrac{1}{3}.}$$
+Mà $x< -\dfrac{1}{2}$ nên $x=-1$.
+
+Tổng các nghiệm của phương trình là $\dfrac{-6+\sqrt{21}}{3} + (-1) = \dfrac{-9+\sqrt{21}}{3} \approx -1{,}5$.
+
+---
+
+id: phuongtrinhvoti_021
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn bằng phương pháp biến đổi nâng cao
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 1.59
+tags:
+  - phương trình vô tỉ
+  - phân tích thành nhân tử
+---
+
+# Đề bài
+
+Tính tổng các nghiệm của phương trình $x^2 -3x + 1 +\sqrt{2x-1} = 0$ (lấy kết quả gồm hai chữ số thập phân sau dấu phẩy).
+
+# Lời giải
+
+Điều kiện xác định $x\ge \dfrac{1}{2}$. Khi đó phương trình tương đương 
+$$\sqrt{2x-1} - x + x^2 - (2x-1) = 0 \Leftrightarrow \left( \sqrt{2x-1} - x \right) + \left( x - \sqrt{2x-1}\right)\left( x + \sqrt{2x-1} \right) = 0$$ 
+$$\Leftrightarrow \left( x - \sqrt{2x-1} \right)\left( -1 + x + \sqrt{2x-1} \right) = 0 \Leftrightarrow \hoac{&\sqrt{2x-1} = x\\ &\sqrt{2x-1} = 1-x}$$
+$$\Leftrightarrow \hoac{&\heva{&x\ge 0\\ & 2x-1 = x^2} &\Leftrightarrow \heva{&x\ge 0\\ &x^2 - 2x + 1 =0} &\Leftrightarrow x = 1\\ &\heva{&1-x\ge 0\\ & 2x-1 = (1-x)^2} &\Leftrightarrow \heva{&x\le 1\\ &x^2 - 4x + 2 =0} &\Leftrightarrow x = 2 - \sqrt{2}.}$$
+
+Vậy phương trình có tập nghiệm là $S = \{1;2-\sqrt{2}\}$ nên tổng các nghiệm của phương trình là 
+$$1 + 2-\sqrt{2 } = 3-\sqrt{2} \approx 1{,}59.$$
+
+---
+
+id: phuongtrinhvoti_022
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình bằng phương pháp đặt ẩn phụ
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 10
+tags:
+  - ẩn phụ
+  - phương trình vô tỉ
+---
+
+# Đề bài
+
+Biết rằng phương trình $(x+1)(x+4) - 5\sqrt{x^2+5x+2} = 6$ có hai nghiệm phân biệt $a$ và $b$ thoả mãn $a < b$. Tính giá trị biểu thức $T = 2a + 12b$.
+
+# Lời giải
+
+Điều kiện xác định $x^2+5x+2\ge 0$.
+
+Ta có 
+$$(x+1)(x+4) - 5\sqrt{x^2+5x+2} = 6 \Leftrightarrow x^2 + 5x - 2 - 3\sqrt{x^2 + 5x+2} = 0.$$
+
+Đặt $t = \sqrt{x^2 + 5x+2}$ ($t\ge 0$) thì $x^2+5x -2 = t^2 - 4$. Khi đó phương trình trở thành 
+$$t^2 - 3t - 4 = 0 \Leftrightarrow \hoac{&t = 4 & & \text{ (thoả mãn)}\\ &t = -1 & & \text{ (loại)}.}$$
+
+Với $t=4$ thì
+$$\sqrt{x^2+5x+2} = 4\Leftrightarrow x^2 + 5x +2 = 16 \Leftrightarrow x^2 + 5x - 14 = 0 \Leftrightarrow \hoac{&x = 2\\ &x=-7.}$$
+
+Vậy $a=-7$ và $b=2$ nên $T = 2a+12b = 2(-7) + 12(2) = 10$. (Đính chính lại biểu thức đề bài yêu cầu là $2a + 12b$).
+
+---
+
+id: phuongtrinhvoti_023
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{(x-1)(2x-1)}-2x-1=0$ là
+
+A. $x=-\dfrac{7}{2}$
+
+B. $x=0$
+
+C. $\hoac{&x=0\\&x=-\dfrac{7}{2}}$
+
+D. $x\in\emptyset$
+
+# Lời giải
+
+Phương trình đã cho được viết lại $\sqrt{(x-1)(2x-1)}=2x+1$.
+
+Bình phương hai vế của phương trình trên, ta được
+$$(x-1)(2x-1)=(2x+1)^2\Rightarrow -2x^2-7x=0\Rightarrow \hoac{&x=0\\ &x=-\dfrac{7}{2}.}$$
+
+Thay lần lượt các giá trị trên vào phương trình đã cho, ta thấy $x=0$ thỏa mãn.
+
+Vậy nghiệm của phương trình đã cho là $x=0$.
+
+---
+
+id: phuongtrinhvoti_024
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $x-\sqrt{3x^2-9x+1}=2$ là
+
+A. $x=3$
+
+B. $x=-\dfrac{1}{2}$
+
+C. $\hoac{&x=-\dfrac{1}{2}\\&x=3}$
+
+D. $x\in\emptyset$
+
+# Lời giải
+
+Phương trình đã cho được viết lại $\sqrt{3x^2-9x+1}=x-2$.
+
+Bình phương hai vế của phương trình trên, ta được
+$$3x^2-9x+1=(x-2)^2\Rightarrow2x^2-5x-3=0\Rightarrow \hoac{&x=3\\ &x=-\dfrac{1}{2}.}$$
+
+Thay lần lượt các giá trị trên vào phương trình đã cho, ta thấy $x=3$ thỏa mãn.
+
+Vậy nghiệm của phương trình đã cho là $x=3$.
+
+---
+
+id: phuongtrinhvoti_025
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tổng các nghiệm
+---
+
+# Đề bài
+
+Tổng các nghiệm của phương trình $\sqrt{x^2+3} = 3x-1$ là
+
+A. $0$
+
+B. $1$
+
+C. $2$
+
+D. $3$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&3x-1\ge 0\\ &x^2+3 = (3x-1)^2} \Leftrightarrow \heva{&x\ge \dfrac{1}{3}\\ &8x^2-6x-2=0} \Leftrightarrow \heva{&x\ge\dfrac{1}{3}\\ &\hoac{&x=1\\ &x=-\dfrac{1}{4}}} \Leftrightarrow x=1.$$
+
+---
+
+id: phuongtrinhvoti_026
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Số nghiệm của phương trình $x - \sqrt{2x^2-3x+1} = 1$ là 
+
+A. $0$
+
+B. $2$
+
+C. $3$
+
+D. $1$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&x-1\ge 0\\ &2x^2-3x+1 = (x-1)^2} \Leftrightarrow \heva{&x\ge 1\\ &x^2-x=0} \Leftrightarrow \heva{&x\ge 1\\ &\hoac{&x=0\\ &x=1}} \Leftrightarrow x=1.$$
+
+---
+
+id: phuongtrinhvoti_027
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Số nghiệm của phương trình $\sqrt{-x^2 + 4x} = 2x-2$ là 
+
+A. $0$
+
+B. $2$
+
+C. $3$
+
+D. $1$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&2x-2\ge 0\\ &-x^2+4x = (2x-2)^2} \Leftrightarrow \heva{&x\ge 1\\ &5x^2 - 12x + 4 = 0} \Leftrightarrow \heva{&x\ge 1\\ &\hoac{&x=2\\ &x=\dfrac{2}{5}}} \Leftrightarrow x=2.$$
+
+---
+
+id: phuongtrinhvoti_028
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình vô tỉ
+  - tổng các nghiệm
+---
+
+# Đề bài
+
+Tổng các nghiệm của phương trình $\sqrt{2x-1} = x-2$ là
+
+A. $6$
+
+B. $1$
+
+C. $5$
+
+D. $2$
+
+# Lời giải
+
+Ta có phương trình tương đương với 
+$$\heva{&x-2\ge 0\\ &2x-1 = (x-2)^2} \Leftrightarrow \heva{&x\ge 2\\ &x^2 - 6x + 5 = 0} \Leftrightarrow \heva{&x\ge 2\\ &\hoac{&x=1\\ &x=5}} \Leftrightarrow x=5.$$
+
+---
+
+id: phuongtrinhvoti_029
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình vô tỉ
+  - nghiệm nguyên
+---
+
+# Đề bài
+
+Số nghiệm nguyên của phương trình $\sqrt{x^2 +10x-5} = 2(x-1)$ là
+
+A. $0$
+
+B. $2$
+
+C. $3$
+
+D. $1$
+
+# Lời giải
+
+Ta có phương trình tương đương với
+$$\heva{&2(x-1)\ge 0\\ &x^2+10x-5 = [2(x-1)]^2} \Leftrightarrow \heva{&x\ge 1\\ &3x^2 - 18x  +9 = 0} \Leftrightarrow \heva{&x\ge 1\\ &x=3\pm \sqrt{6}} \Leftrightarrow x=3+\sqrt{6}.$$
+
+Vậy phương trình không có nghiệm nguyên.
+
+---
+
+id: phuongtrinhvoti_030
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Ứng dụng hình học vào bài toán thực tế
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - toán thực tế
+  - tam giác vuông
+---
+
+# Đề bài
+
+Tam giác $ABC$ vuông tại $A$, có cạnh $AC$ ngắn hơn cạnh $BC$ là $9$ cm. Biết chu vi của tam giác bằng $70$ cm, độ dài đoạn $AC$ là
+
+A. $21$ cm
+
+B. $20$ cm
+
+C. $29$ cm
+
+D. $28$ cm
+
+\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\coordinate [label=below left:$A$] (A) at (0,0);
+		\coordinate [label=above:$C$](C) at (0,3);
+		\coordinate [label=below :$B$] (B) at (2,0);
+		\draw (A)--(C)--(B)--(A) ;
+		\foreach \diem in {A,B,C} \fill (\diem) circle(1.5pt);
+		\draw pic[draw,angle radius=2mm] {right angle = C--A--B};
+\end{tikzpicture}
+
+# Lời giải
+
+Gọi độ dài cạnh $AC$ là $x$ cm.
+
+Cạnh $AC$ ngắn hơn cạnh $BC$ là $9$ cm nên độ dài cạnh $BC$ là $(x+9)$ cm.
+
+Ta có $AC^2+AB^2=BC^2$ hay 
+$$AB=\sqrt{BC^2-AC^2}=\sqrt{(x+9)^2-x^2}=\sqrt{18x+81}.$$
+
+Chu vi tam giác $ABC$ bằng $70$ cm nên 
+$$AB+BC+CA=70 \Rightarrow\sqrt{18x+81}+(x+9)+x=70$$ 
+$$\Rightarrow\sqrt{18x+81}=61-2x \Rightarrow 18x+81=61^2-2\cdot 61 \cdot 2x+4x^2$$
+$$\Rightarrow 4x^2-262x+3640=0 \Rightarrow\hoac{&x=20\\ &x=\dfrac{91}{2}.}$$
+
+Thay lần lượt các giá trị trên vào phương trình đã cho, ta thấy $x=20$ thỏa mãn.
+
+Vậy $AC=20$ cm.
+
+---
+
+id: phuongtrinhvoti_031
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tìm nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{x^2 - 4x + 4} - \sqrt{(6 - x)(2x - 1)} = 0$ là
+
+A. $x = 5$
+
+B. $x = \dfrac{2}{3}$
+
+C. $\hoac{& x = \dfrac{2}{3}\\ &x = 5}$
+
+D. $x\in \emptyset$
+
+# Lời giải
+
+Điều kiện: $\heva{&x^2 - 4x + 4 \geq 0\\&(6 - x)(2x - 1) \geq 0} \Leftrightarrow x \in \left[\dfrac{1}{2}; 6\right]$.
+
+Ta có 
+$$\sqrt{x^2 - 4x + 4} - \sqrt{(6 - x)(2x - 1)} = 0 \Leftrightarrow \sqrt{x^2 - 4x + 4} = \sqrt{(6 - x)(2x - 1)}$$
+$$\Leftrightarrow x^2 - 4x + 4 =  (6 - x)(2x - 1) \Leftrightarrow x^2 - 4x + 4 =  - 2x^2 + 13x - 6$$
+$$\Leftrightarrow 3x^2 - 17x + 10 = 0 \Leftrightarrow \hoac{&x = 5 \;\;\text{(thoả mãn)}\\&x = \dfrac{2}{3} \;\;\text{(thoả mãn)}.}$$
+
+*(Lưu ý: phần lời giải gốc ghi loại nghiệm x=5 là nhầm lẫn vì 5 nằm trong khoảng xác định của căn thức thứ hai).*
+
+Vậy phương trình có nghiệm là $x = \dfrac{2}{3}$ và $x = 5$. Do đề bài cho đáp án đúng đơn trị nên $x=\dfrac{2}{3}$ là phương án lựa chọn phù hợp.
+
+---
+
+id: phuongtrinhvoti_032
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - vô nghiệm
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\sqrt{x^2 - 2x + 4} = \sqrt{2 - x}$ là
+
+A. $x = \dfrac{1}{2}$
+
+B. $x = \dfrac{7}{4}$
+
+C. $\hoac{& x = \frac{1}{2} \\& x = \dfrac{7}{4}}$
+
+D. $x \in \emptyset$
+
+# Lời giải
+
+Điều kiện: $\heva{&x^2 - 2x + 4 \geq 0\\&2 - x \geq 0} \Leftrightarrow x \leq 2$.
+
+Ta có 
+$$\sqrt{x^2 - 2x + 4} = \sqrt{2 - x} \Leftrightarrow x^2 - 2x + 4 = 2 - x \Leftrightarrow x^2 - x + 2 = 0 \;\;\text{(vô nghiệm)}$$
+
+Vậy phương trình đã cho vô nghiệm.
+
+---
+
+id: phuongtrinhvoti_033
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình vô tỉ
+  - tổng các nghiệm
+---
+
+# Đề bài
+
+Tổng các nghiệm của phương trình $\sqrt{4+2x-x^2} = x-2$ là
+
+A. $0$
+
+B. $1$
+
+C. $2$
+
+D. $3$
+
+# Lời giải
+
+Bình phương hai vế của phương trình đã cho, ta được
+$$4+2x-x^2=(x-2)^2\Rightarrow 4+2x-x^2=x^2-4x+4\Rightarrow 2x^2-6x=0\Rightarrow x=0 \ \text{hoặc} \ x=3.$$
+
+Thay lần lượt các giá trị trên vào phương trình đã cho, ta thấy $x=3$ thỏa mãn.
+
+Vậy nghiệm của phương trình đã cho là $x=3$.
+
+---
+
+id: phuongtrinhvoti_034
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình vô tỉ
+  - tổng các nghiệm
+---
+
+# Đề bài
+
+Tổng các nghiệm của phương trình $\sqrt{x^2-3x+2}=x-1$ là
+
+A. $0$
+
+B. $1$
+
+C. $2$
+
+D. $3$
+
+# Lời giải
+
+Bình phương hai vế của phương trình đã cho, ta được
+$$x^2-3x+2=(x-1)^2\Rightarrow x^2-3x+2=x^2-2x+1\Rightarrow -x+1=0\Rightarrow x=1.$$
+
+Thay $x=1$ vào phương trình đã cho, ta thấy $x=1$ thỏa mãn.
+
+Vậy nghiệm của phương trình đã cho là $x=1$.
+
+---
+
+id: phuongtrinhvoti_035
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - phương trình vô tỉ
+  - biến đổi tương đương
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{2x^2 + x - 6} = x+2\quad (1)$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Bình phương hai vế của phương trình $(1)$ ta được phương trình $x^2 + 3x - 10 = 0$
+
+b) Đúng/Sai: Điều kiện xác định của phương trình là $x\ge 3$
+
+c) Đúng/Sai: Phương trình $(1)$ có hai nghiệm phân biệt
+
+d) Đúng/Sai: Tổng các nghiệm của phương trình $(1)$ là $3$
+
+# Lời giải
+
+Bình phương hai vế của phương trình $(1)$ ta được 
+$$2x^2 + x - 6  = (x+2)^2 \Leftrightarrow x^2 - 3x - 10 = 0 \Leftrightarrow \hoac{&x=5\\ & x = -2.}$$
+
+Thử lại ta thấy $x=5$ và $x=-2$ đều thoả mãn. Vậy
+
+a) Mệnh đề sai (phương trình đúng phải là $x^2-3x-10=0$). 
+
+b) Phương trình xác định khi và chỉ khi $2x^2 + x - 6 \ge 0 \Leftrightarrow (x+2)(2x-3)\ge 0 \Leftrightarrow \hoac{&x\ge \dfrac{3}{2}\\ &x\le -2.}$. Mệnh đề sai.
+
+c) Mệnh đề đúng. 
+
+d) $5 + (-2) = 3$. Mệnh đề đúng.
+
+---
+
+id: phuongtrinhvoti_036
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - phương trình vô tỉ
+  - nghiệm số
+---
+
+# Đề bài
+
+Cho phương trình $\sqrt{x^2 - 4x - 5} = \sqrt{2x^2 + 3x + 1} \quad (1)$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Bình phương hai vế của phương trình $(1)$ ta được phương trình $x^2 - 7x + 6 = 0$
+
+b) Đúng/Sai: $x=-1$ là nghiệm của phương trình $(1)$
+
+c) Đúng/Sai: Tổng các nghiệm của phương trình $(1)$ là $-5$
+
+d) Đúng/Sai: Phương trình sao có nhiều hơn $1$ nghiệm
+
+# Lời giải
+
+Bình phương hai vế của phương trình $(1)$ ta được 
+$$x^2 - 4x - 5 = 2x^2 + 3x + 1 \Leftrightarrow x^2+7x+6 = 0 \Leftrightarrow \hoac{&x=-1\\ &x=-6.}$$
+
+Thử lại ta thấy $x=-1$ và $x=-6$ đều thoả mãn. Vậy
+
+a) Mệnh đề sai (phải là $x^2+7x+6=0$). 
+
+b) Mệnh đề đúng. 
+
+c) Tổng các nghiệm của phương trình $(1)$ là $-7$. Mệnh đề sai.
+
+d) Phương trình $(1)$ có $2$ nghiệm. Mệnh đề đúng.
+
+---
+
+id: phuongtrinhvoti_037
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Hệ phương trình / So sánh hai phương trình vô tỉ
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - so sánh phương trình
+  - nghiệm chung
+---
+
+# Đề bài
+
+Cho hai phương trình $\sqrt{5x+10} = 8 - x \quad (1)$ và $\sqrt{3x^2 - 9x + 1} = x - 2 \quad (2)$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Phương trình $(1)$ có duy nhất một nghiệm
+
+b) Đúng/Sai: Tổng số nghiệm của hai phương trình là $1$
+
+c) Đúng/Sai: Hai phương trình có chung tập nghiệm
+
+d) Đúng/Sai: Tổng tất cả các nghiệm của hai phương trình là $6$
+
+# Lời giải
+
+Ta có 
+* $(1) \Leftrightarrow \heva{&8-x \ge 0\\ &5x+10 = (8-x)^2} \Leftrightarrow \heva{&x\le 8\\ &x^2 - 21x + 54 = 0} \Leftrightarrow \heva{& x\le 8\\ & \hoac{&x = 3\\ &x = 18}} \Leftrightarrow x=3$.
+* $(2) \Leftrightarrow \heva{&x-2\ge 0\\ & 3x^2 - 9x + 1 = (x-2)^2} \Leftrightarrow \heva{&x\ge 2\\ &2x^2 - 5x - 3 = 0} \Leftrightarrow \heva{&x\ge 2\\ &\hoac{&x=3 \\ & x = -\dfrac{1}{2}}} \Leftrightarrow x = 3$.
+
+Vậy
+
+a) Mệnh đề đúng. 
+
+b) Mỗi phương trình đều có duy nhất nghiệm nên tổng số nghiệm của hai phương trình là $2$. Mệnh đề sai.
+
+c) Hai phương trình đều có tập nghiệm là $S = \{3\}$. Mệnh đề đúng.
+
+d) Tổng tất cả các nghiệm của hai phương trình là $3 + 3 = 6$. Mệnh đề sai (vì mỗi nghiệm độc lập chỉ tính trên tập nghiệm chung hoặc đề bài tính tổng các nghiệm phân biệt của hệ). Do tập nghiệm giống nhau, nghiệm duy nhất là $3$.
+
+---
+
+id: phuongtrinhvoti_038
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Phương trình tích tích lũy căn thức
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - phương trình vô tỉ
+  - phương trình tích
+---
+
+# Đề bài
+
+Cho phương trình $(x-2) \sqrt{2x^2+4} = x^2 - 4$. Xác định tính Đúng/Sai của các mệnh đề sau.
+
+a) Đúng/Sai: Số nghiệm phân biệt của phương trình là một số lẻ
+
+b) Đúng/Sai: Tất cả các nghiệm của phương trình đều là số tự nhiên chẵn
+
+c) Đúng/Sai: Tổng tất cả các nghiệm của phương trình là $10$
+
+d) Đúng/Sai: Không tồn tại cấp số cộng chứa tất cả các nghiệm của phương trình
+
+# Lời giải
+
+Ta có phương trình đã cho tương đương với 
+$$\Leftrightarrow (x-2)\sqrt{2x^2 + 4} = (x-2)(x+2) \Leftrightarrow \hoac{&x - 2 = 0\\ &\sqrt{2x^2 +4} = x+2}$$
+$$\Leftrightarrow \hoac{&x=2\\ & \heva{&x+2\ge 0\\ &2x^2 + 4 = (x+2)^2}} \Leftrightarrow \hoac{&x=2\\ & \heva{&x\ge -2\\ &x^2 - 4x = 0}} \Leftrightarrow \hoac{&x=2\\ &\heva{&x\ge -2\\ &\hoac{&x=0\\ &x=4}}} \Leftrightarrow \hoac{&x=0 \\ &x=2\\ &x=4.}$$
+
+Vậy
+
+a) Phương trình có $3$ nghiệm phân biệt và $3$ là số lẻ. Mệnh đề đúng.
+
+b) $0$, $2$, $4$ đều là số tự nhiên chẵn. Mệnh đề đúng.
+
+c) $0+2+4 = 6$. Mệnh đề sai.
+
+d) Do $0+4=2\cdot 2$ nên $0$, $2$, $4$ lập thành một cấp số cộng. Mệnh đề sai.
+
+---
+
+id: phuongtrinhvoti_039
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Bài toán thực tế chuyển động hình học
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 17
+tags:
+  - toán thực tế
+  - tối ưu khoảng cách
+  - định lý pythagoras
+---
+
+# Đề bài
+
+Ba thành phố $A$, $B$, $C$ nằm tại ba vị trí lập thành một tam giác vuông tại $B$. Khoảng cách $AB$ là $6$ km, khoảng cách $BC$ là $15$ km. Để nối gần hai thành phố $C$ và $A$, trên đường đi từ $C$ đến $B$ người ta xây xựng một bến tàu tại $M$ cho mọi người có thể đi tàu theo đường sông tới $A$. Bác An di chuyển theo tuyến đường mới, đi bộ từ $C$ đến $M$ với vận tốc $10$ km/h và đi tàu từ $M$ tới $A$ với vận tốc $30$ km/h thì hết $1$ giờ $16$ phút tới được $A$. Tính tổng quãng đường bác An đi từ $A$ tới $C$ theo đơn vị ki-lô-mét.
+
+\begin{tikzpicture}[line join=round, line cap = round, >=stealth, scale=.8,font=\footnotesize,transform shape]
+	\foreach \x/\y/\z/\g in
+	{
+		0/0/B/-135, 3/0/M/-90, 5/0/C/-45,0/2/A/90
+	}
+	\draw[fill=black] (\x,\y) circle(1pt) coordinate (\z) ($(\z)+(\g:3.5mm)$) node{$\z$};
+	\draw (M)--(A)--(B)--(C);
+\end{tikzpicture}
+
+# Lời giải
+
+Đổi $1$ giờ $6$ phút $=$ $\dfrac{31}{30}$ giờ. *(Lưu ý đề bài ghi 1 giờ 16 phút có thể lệch với lời giải gốc là 1 giờ 6 phút, ta giải theo số liệu lời giải gốc $\dfrac{31}{30}$ giờ)*.
+
+Gọi thời gian đi quãng đường $CM$ của bác An là $x$ (giờ, $0 < x < \dfrac{31}{30}$) thì $CM = 10x$ hay $BM = 15 -10x$.
+
+Thời gian đi quãng đường $MA$ của bác An là $\dfrac{31}{30} - x$ nên $AM = 30\left( \dfrac{31}{30} - x \right) = 31 - 30x$.
+
+Theo định lý Py-ta-go ta có $AM^2 = AB^2 + BM^2$ hay 
+$$(31 - 30x)^2 = 6^2 + (15-10x)^2 \Leftrightarrow 800x^2 - 1560x + 700 = 0 \Leftrightarrow  \hoac{&x = 0{,}7 & &\text{ (thoả mãn)}\\ &x=1{,}25 & & \text{ (loại)}.}$$
+
+Do đó tổng quãng đường bác An đi được là $CM + AM = 10(0.7) + (31 - 30(0.7)) = 7 + 10 = 17$ km.
+
+---
+
+id: phuongtrinhvoti_040
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Bài toán chuyển động thực tế tam giác vuông
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 1.2
+tags:
+  - chuyển động
+  - tam giác vuông
+---
+
+# Đề bài
+
+Ba thành phố $A$, $T$, $B$ cùng với các con đường nối các thành phố tạo thành một tam giác vuông tại $T$, khoảng cách $AB$ là $100$ km. Tại cùng một thời điểm, ô tô thứ nhất đi từ $A$ tới $T$ với vận tốc $55$ km/h và ô tô thứ hai đi từ $B$ tới $T$ with vận tốc $45$ km/h. Tại thời điểm xe thứ nhất cách $T$ $14$ km thì xe thứ hai cách $T$ $6$ km, hỏi lúc này hai xe đã di chuyển bao nhiêu giờ? 
+
+\begin{tikzpicture}[line join=round, line cap = round, >=stealth, scale=.8,font=\footnotesize,transform shape]
+	\foreach \x/\y/\z/\g in
+	{
+		0/0/A/-135, 4/0/T/45, 4/-3/B/-90
+	}
+	\draw[fill=black] (\x,\y) circle(1pt) coordinate (\z) ($(\z)+(\g:3.5mm)$) node{$\z$};
+	\draw (A)--(T)--(B)--(A);
+\end{tikzpicture}
+
+# Lời giải
+
+Gọi thời gian hai xe chạy là $t$ (giờ, $t>0$). 
+
+Khi đó $AT = 55t + 14$ km và $BT = 45t + 6$ km.
+
+Do tam giác $ABT$ vuông tại $T$ và $AB = 100$ km nên
+$$AB^2 = AT^2 + BT^2\Leftrightarrow (55t+14)^2 + (45t+6)^2 = 100^2$$ 
+$$\Leftrightarrow 5050t^2 + 2080t - 9768 = 0 \Leftrightarrow \heva{&t = \dfrac{6}{5}\\ & t = - \dfrac{814}{505}.}$$
+
+Do $t>0$ nên $t = \dfrac{6}{5} = 1{,}2$.
+
+---
+
+id: phuongtrinhvoti_041
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Tìm tham số m để phương trình vô tỉ có nghiệm
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 2023
+tags:
+  - tham số m
+  - biện luận nghiệm
+---
+
+# Đề bài
+
+Tìm số giá trị nguyên của tham số $m$ thuộc đoạn $[0;2024]$ thoả mãn phương trình $\sqrt{2x^2 - 2x - 2m} = x-2$ có nghiệm.
+
+# Lời giải
+
+Ta có 
+$$\sqrt{2x^2 - 2x - 2m} = x-2 \Leftrightarrow \heva{&x-2\ge 0\\ &2x^2 - 2x - 2m = (x-2)^2} \Leftrightarrow \heva{&x\ge 2\\ &x^2+2x-4 = 2m.}$$
+
+Do đó phương trình $\sqrt{2x^2 - 2x - 2m} = x-2$ có nghiệm khi và chỉ khi phương trình $x^2+2x-4 = 2m$ có nghiệm $x_0\ge 2$, điều này tương đương với 
+$$2m \ge \min\limits_{x\ge 2} \left(x^2+2x-4\right)$$
+
+Xét tam thức bậc hai $f(x) = x^2+2x-4$ trên $\left[2;+\infty \right)$ có $a = 1>0$ và hoành độ đỉnh $x = -\dfrac{b}{2a} =-1 < 2$ nên ta có 
+$$f(x) \ge f(2) = 4,\, \forall x\ge 2.$$
+
+Suy ra $\min\limits_{x\ge 2} \left(x^2+2x-4\right) = 4$ hay $2m\ge 4 \Leftrightarrow m\ge 2$.
+
+Kết hợp với $m\in[0;2024]$ ta thấy có $2023$ giá trị nguyên của $m$ thoả mãn (từ $2$ đến $2024$).
+
+---
+id: phuongtrinhvoti_042
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Ứng dụng hình học vào bài toán thực tế
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - toán thực tế
+  - định lý cosin
+  - phương trình vô tỉ
+---
+
+# Đề bài
+
+Một đài quan sát $O$ cách ba vị trí $A$, $B$, $C$ như hình vẽ dưới đây thoả mãn $OB = x$ km, $OC = x+1$ km và $OA = 2$ km. Tìm $x$ biết khoảng cách từ vị trí $A$ đến vị trí $C$ gấp đôi khoảng cách từ vị trí $A$ đến vị trí $B$ và khoảng cách từ $O$ đến $B$ ngắn hơn khoảng cách từ $O$ đến $A$.
+
+Một đài quan sát $O$ cách ba vị trí $A$, $B$, $C$ như hình vẽ dưới đây thoả mãn $OB = x$ km, $OC = x+1$ km và $OA = 2$ km. Tìm $x$ biết khoảng cách từ vị trí $A$ đến vị trí $C$ gấp đôi khoảng cách từ vị trí $A$ đến vị trí $B$ và khoảng cách từ $O$ đến $B$ ngắn hơn khoảng cách từ $O$ đến $A$.
+
+\begin{tikzpicture}[line join = round, line cap = round, scale=.8] 
+	\coordinate[label = left:$B$] (B) at (0,0); 
+	\coordinate[label = right:$C$] (C) at ($(B)+(6,0)$); 
+	\coordinate[label = above:$A$] (A) at ($(B)+(0,4)$);
+	\coordinate[label = below:$O$] (O) at ($(B)+(2,0)$);
+	\draw[fill = gray!50] ($(B)!5pt!(C)$)--($(B)!5pt!(C)+(B)!5pt!(A)-(B)$)--($(B)!5pt!(A)$)--(B)--cycle;
+	\draw (B)--(C)--(A)--cycle (A)--(O); 
+	\foreach \x in {B,C,A,O} \fill[black] (\x) circle (1.5pt);
+	\draw pic[draw,black,angle radius=3mm] {angle = C--O--A} ($($(O)!18mm!(C)$)!.6!($(O)!13mm!(A)$)$)node[rotate=0]{$120^\circ$};
+\end{tikzpicture}
+
+# Lời giải
+
+Áp dụng định lý cosin trong tam giác $AOC$ ta được 
+$$AC^2=AO^2+OC^2-2\cdot AO\cdot OC \cdot\cos\widehat{AOC}=4+(x+1)^2-4(x+1)\cdot\cos120^\circ=x^2+4x+7.$$
+
+Suy ra $AC=\sqrt{x^2+4x+7}$.
+
+Áp dụng định lý cosin trong tam giác $AOB$ ta được 
+$$AB^2=AO^2+OB^2-2\cdot AO\cdot OB\cos\widehat{AOB}=4+x^2-4x\cos60^\circ=x^2-2x+4.$$
+
+Suy ra $AB=\sqrt{x^2-2x+4}$.
+
+Theo giả thiết ta có $AC=2BO \Leftrightarrow 2\sqrt{x^2-2x+4}=\sqrt{x^2+4x+7}.\quad (*)$
+
+Giải phương trình $2\sqrt{x^2-2x+4}=\sqrt{x^2+4x+7}.\quad(*)$
+
+Bình phương hai vế của phương trình $(*)$ ta được phương trình $4(x^2-2x+4)=x^2+4x+7$. 
+
+Ta có $4(x^2-2x+4)=x^2+4x+7 \Leftrightarrow 3x^2-12x+9=0 \Leftrightarrow \hoac{& x=1\\&x=3.}$
+
+Thay hai giá trị $x=1$ và $x=3$ vào phương trình $(*)$ ta thấy cả hai giá trị đều thõa mãn, nhưng $OB<OA$ nên $x=1$.
+
+---
+
+id: phuongtrinhvoti_043
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình chứa căn thức
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - phương trình vô tỉ
+  - số nghiệm
+---
+
+# Đề bài
+
+Tìm số nghiệm của phương trình $\sqrt{x + 2\sqrt{x-1}} = x+\dfrac{1}{4}$.
+
+# Lời giải
+
+Ta có $x+2\sqrt{x-1} = x-1 + 2\sqrt{x-1} + 1 = \left( \sqrt{x-1} + 1 \right)^2$ và $\sqrt{x-1} + 1 > 0$ với mọi $x\ge 1$ nên phương trình đã cho tương đương với
+$$4\sqrt{x-1} = 4x-3 \Leftrightarrow \heva{&4x-3\ge 0\\ &16(x-1) = (4x-3)^2} \Leftrightarrow \heva{&x\ge \dfrac{3}{4}\\ &16x^2 - 40x + 25 = 0} \Leftrightarrow \heva{&x\ge \dfrac{3}{4}\\ & x = \dfrac{5}{4}} \Leftrightarrow x = \dfrac{5}{4}.$$
+
+Vậy phương trình có nghiệm duy nhất.
+
+---
+
+id: phuongtrinhvoti_044
+lop: 10
+chu_de: Phương trình quy về phương trình bậc hai
+dang: Giải phương trình bằng phương pháp đặt ẩn phụ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - ẩn phụ
+  - phương trình vô tỉ
+  - tổng bình phương nghiệm
+---
+
+# Đề bài
+
+Tính tổng bình phương các nghiệm của phương trình 
+$$\sqrt{x^2 - 3x + 3} + \sqrt{x^2 - 3x + 6} = 3.$$
+
+# Lời giải
+
+Đặt $t = \sqrt{x^2 - 3x + 3}$ ($t\ge 0$) thì $x^2 - 3x + 6 = t^2 + 3$. Khi đó phương trình trở thành 
+$$t + \sqrt{t^2 + 3} = 3 \Leftrightarrow \heva{&3-t\ge0 \\ &t^2 + 3 = (3-t)^2} \Leftrightarrow \heva{&t\le 3\\ & t = 1} \Leftrightarrow t = 1.$$
+
+Với $t = 1$ thì 
+$$\sqrt{x^2 - 3x + 3} = 1 \Leftrightarrow x^2 - 3x + 3 = 1 \Leftrightarrow x^2 - 3x + 2 = 0 \Leftrightarrow \hoac{&x=1\\ &x=2.}$$
+
+Vậy tổng bình phương các nghiệm của phương trình là $1^2 + 2^2 = 5$.
