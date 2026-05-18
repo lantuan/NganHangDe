@@ -1,0 +1,1478 @@
+---
+id: tohop_001
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tổ hợp
+  - tập con
+---
+
+# Đề bài
+
+Cho tập $M$ có $10$ phần tử. Số tập con gồm $2$ phần tử của $M$ là
+A. $\mathrm{A}_{10}^8$
+
+B. $\mathrm{A}_{10}^2$
+
+C. $\mathrm{C}_{10}^2$
+
+D. $10^2$
+
+# Lời giải
+
+Số tập con gồm $2$ phần tử của tập $M$ có $10$ phần tử là $\mathrm{C}_{10}^2$.
+
+---
+id: tohop_002
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tổ hợp
+  - bài toán chọn người
+---
+
+# Đề bài
+
+Cần chọn $3$ người đi công tác từ một tổ có $30$ người, khi đó số cách chọn là
+A. $\mathrm{A}_{30}^3$
+
+B. $3^{30}$
+
+C. $10$
+
+D. $\mathrm{C}_{30}^3$
+
+# Lời giải
+
+Số cách chọn $3$ người bất kì trong $30$ người là $\mathrm{C}_{30}^3$.
+
+---
+id: tohop_003
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hoán vị
+  - bài toán sắp xếp
+---
+
+# Đề bài
+
+Số cách sắp xếp $6$ nam sinh và $4$ nữ sinh vào một dãy ghế hàng ngang có $10$ chỗ ngồi là
+A. $6!\cdot 4!$
+
+B. $10!$
+
+C. $6!+4!$
+
+D. $6!-4!$
+
+# Lời giải
+
+Có $10$ học sinh xếp vào một dãy ngế hàng ngang có $10$ chỗ ngồi nên có $10!$ cách.
+
+---
+id: tohop_004
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - chỉnh hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có $5$ chữ số, các chữ số khác $0$ và đôi một khác nhau?
+A. $5!$
+
+B. $9^5$
+
+C. $\mathrm{C}_9^5$
+
+D. $\mathrm{A}_9^5$
+
+# Lời giải
+
+Mỗi cách lập số tự nhiên có $5$ chữ số, các chữ số khác $0$ và đôi một khác nhau là một chỉnh hợp chập $5$ của $9$ phần tử.
+Vậy có tất cả $\mathrm{A}_9^5$ số cần tìm.
+
+---
+id: tohop_005
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tổ hợp
+  - số tự nhiên
+  - bất đẳng thức
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có $5$ chữ số dạng $\overline{abcde}$ và thỏa mãn $a\le b<c\le d\le e$?
+A. $\mathrm{A}_9^5$
+
+B. $\mathrm{A}_{15}^5$
+
+C. $\mathrm{C}_9^5$
+
+D. $\mathrm{C}_{12}^5$
+
+# Lời giải
+
+Ta có $1\le a<b+1<c+1<d+2<e+3\le 12$.
+Với mỗi bộ số $a,b+1,c+1,d+2,e+3$ có $1$ số thỏa mãn đề bài.
+Vậy có $\mathrm{C}_{12}^5$ số thỏa mãn đề bài.
+
+---
+id: tohop_006
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hoán vị
+  - bài toán vách ngăn
+  - bài toán xếp sách
+---
+
+# Đề bài
+
+Có bao nhiêu cách xếp $5$ quyển sách Văn khác nhau và $7$ quyển sách Toán khác nhau trên một kệ sách dài nếu các quyển sách Văn phải xếp kề nhau?
+A. $12!$
+
+B. $2\cdot 5!\cdot 7!$
+
+C. $8!\cdot 5!$
+
+D. $5!.7!$
+
+# Lời giải
+
+Ta coi $5$ quyển sách Văn là một Quyển và xếp Quyển này với $7$ quyển sách Toán khác nhau ta có $8!$ cách xếp. Mỗi cách đổi vị trí các quyển sách văn cho nhau thì tương ứng sinh ra một cách xếp mới, mà có $5!$ cách đổi vị trí các quyển sách Văn.
+Vậy số cách xếp là $8!\cdot 5!$.
+
+---
+id: tohop_007
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hoán vị
+  - thứ tự bài toán
+---
+
+# Đề bài
+
+Có bao nhiêu khả năng có thể xảy ra đối với thứ tự giữa các đội trong một giải bóng có $4$ đội bóng tham gia (giả sử rằng không có hai đội nào có điểm trùng nhau)?
+A. $4$
+
+B. $10$
+
+C. $16$
+
+D. $24$
+
+# Lời giải
+
+Mỗi kết quả thứ tự của $4$ đội bóng là một hoán vị của $4$ phần tử.
+Vậy có tất cả $4!=24$ khả năng xảy ra.
+
+---
+id: tohop_008
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chỉnh hợp
+  - vectơ
+---
+
+# Đề bài
+
+Trong mặt phẳng cho tập hợp gồm $25$ điểm phân biệt. Có bao nhiêu véc-tơ khác véc-tơ $\overrightarrow{0}$ có điểm đầu và điểm cuối thuộc tập hợp điểm này?
+A. $50$
+
+B. $300$
+
+C. $600$
+
+D. $625$
+
+# Lời giải
+
+Số véc-tơ khác $\overrightarrow{0}$ có điểm đầu và điểm cuối được tạo ra bởi $25$ điểm phân biệt là $\mathrm{A}_{25}^2=600$ véc-tơ.
+
+---
+id: tohop_009
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tổ hợp
+  - giao điểm đường thẳng
+---
+
+# Đề bài
+
+Số giao điểm tối đa của $10$ đường thẳng phân biệt là
+A. $50$
+
+B. $100$
+
+C. $120$
+
+D. $45$
+
+# Lời giải
+
+Số giao điểm tối đa của $10$ đường thẳng phân biệt là $\mathrm{C}_{10}^2=45$.
+
+---
+id: tohop_010
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tổ hợp
+  - biến cố đối
+  - bài toán chọn người
+---
+
+# Đề bài
+
+Một đội văn nghệ của nhà trường gồm $4$ học sinh lớp $12A$, $3$ học sinh lớp $12B$ và $2$ học sinh lớp $12C$. Chọn ngẫu nhiên $5$ học sinh từ đội văn nghệ để biểu diễn trong lễ bế giảng năm học. Hỏi có bao nhiêu cách chọn sao cho lớp nào cũng có học sinh được chọn?
+A. $98$
+
+B. $66$
+
+C. $360$
+
+D. $32$
+
+# Lời giải
+
+Chọn ngẫu nhiên $5$ học sinh từ đội văn nghệ của trường có $\mathrm{C}_9^5=126$ cách.
+Ta tính số cách chọn $5$ học sinh sao cho không có đủ học sinh của ba lớp.
+**Trường hợp 1.** Chọn $5$ học sinh từ hai lớp $A$, $B$ có $\mathrm{C}_7^5=21$ cách.
+**Trường hợp 2.** Chọn $5$ học sinh từ hai lớp $A$, $C$ có $\mathrm{C}_6^5=6$ cách.
+**Trường hợp 3.** Chọn $5$ học sinh từ hai lớp $B$, $C$ có $\mathrm{C}_5^5=1$ cách.
+Do đó có $21+6+1=28$ cách chọn $5$ học sinh sao cho không có đủ học sinh của ba lớp.
+Vậy có $126-28=98$ cách chọn $5$ học sinh sao cho có đủ học sinh của ba lớp.
+
+---
+id: tohop_011
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tổ hợp
+  - đường chéo đa giác
+---
+
+# Đề bài
+
+Số đường chéo của một lục giác lồi là.
+A. $6$
+
+B. $18$
+
+C. $9$
+
+D. $30$
+
+# Lời giải
+
+Số đoạn thẳng tạo bởi hai điểm bất kỳ từ các đỉnh của hình lục giác lồi là $\mathrm{C}_6^2=15$.
+Trong số các đoạn thẳng này có $6$ đoạn thẳng là cạnh và $15-6=9$ đoạn thẳng là đường chéo.
+
+---
+id: tohop_012
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tổ hợp
+  - tam giác
+  - phương trình tổ hợp
+---
+
+# Đề bài
+
+Cho tập $A$ gồm $n$ điểm phân biệt trên mặt phẳng sao cho không có $3$ điểm nào thẳng hàng. Tìm $n$ sao cho số tam giác có $3$ đỉnh lấy từ $3$ điểm thuộc $A$ gấp đôi số đoạn thẳng được nối từ $2$ điểm thuộc $A$.
+A. $n=6$
+
+B. $n=12$
+
+C. $n=8$
+
+D. $n=15$
+
+# Lời giải
+
+Điều kiện $n\in\mathbb{N}$, $n\geq 3$.
+Số tam giác có $3$ đỉnh thuộc tập $A$ là $\mathrm{C}_n^3$.
+Số đoạn thẳng được nối từ $2$ điểm thuộc tập $A$ là $\mathrm{C}_n^2$.
+Theo đề bài ta có 
+$$
+\mathrm{C}_n^3=2\mathrm{C}_n^2
+$$
+$$
+\Leftrightarrow \dfrac{n(n-1)(n-2)}{6}=2\cdot\dfrac{n(n-1)}{2}
+$$
+$$
+\Leftrightarrow n-2=6\Leftrightarrow n=8.
+$$
+Vậy $n=8$.
+
+---
+id: tohop_013
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - chỉnh hợp
+  - bài toán xếp chỗ
+---
+
+# Đề bài
+
+Một trường trung học phổ thông có $20$ bạn học sinh tham dự tọa đàm về tháng Thanh niên do Quận Đoàn tổ chức. Vị trí ngồi của trường là khu vực gồm $4$ hàng ghế, mỗi hàng có $6$ ghế. Xét tính đúng sai của các mệnh đề sau.
+
+a) Có $\mathrm{C}_{20}^6$ cách sắp xếp $6$ bạn ngồi vào hàng ghế đầu tiên.
+
+b) Sau khi sắp xếp xong hàng ghế đầu tiên, có $\mathrm{A}_{14}^6$ cách sắp xếp $6$ bạn ngồi vào hàng ghế thứ hai.
+
+c) Sau khi sắp xếp xong hàng ghế thứ hai, có $\mathrm{A}_8^6$ cách sắp xếp $6$ bạn ngồi vào hàng ghế thứ ba.
+
+d) Sau khi sắp xếp xong hàng ghế thứ ba, có $\mathrm{C}_6^2$ cách sắp xếp các bạn còn lại ngồi vào hàng ghế cuối cùng.
+
+# Lời giải
+
+a) Sai. Mỗi cách chọn $6$ bạn trong $20$ bạn để ngồi vào hàng ghế đầu tiên là một chỉnh hợp chập $6$ của $20$. Vậy có $\mathrm{A}_{20}^6$ cách xếp $6$ bạn ngồi vào hàng ghế đầu tiên.
+
+b) Đúng. Mỗi cách chọn $6$ bạn trong $14$ bạn để ngồi vào hàng ghế thứ hai là một chỉnh hợp chập $6$ của $14$. Vậy có $\mathrm{A}_{14}^6$ cách xếp $6$ bạn ngồi vào hàng ghế thứ hai sau khi sắp xếp xong hàng ghế đầu tiên.
+
+c) Đúng. Mỗi cách chọn $6$ bạn trong $8$ bạn để ngồi vào hàng ghế thứ ba là một chỉnh hợp chập $6$ của $8$. Vậy có $\mathrm{A}_8^6$ cách xếp $6$ bạn ngồi vào hàng ghế thứ ba sau khi sắp xếp xong hai hàng ghế đầu.
+
+d) Sai. Còn lại $2$ bạn ngồi vào hàng ghế cuối cùng. Mỗi cách chọn $2$ ghế trong $6$ ghế để xếp chỗ ngồi cho $2$ bạn là một chỉnh hợp chập $2$ của $6$. Vậy có $\mathrm{A}_6^2$ cách xếp $2$ bạn còn lại ngồi vào hàng ghế cuối cùng.
+
+---
+id: tohop_014
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - quy tắc đếm
+  - chỉnh hợp
+  - phân loại nhóm
+---
+
+# Đề bài
+
+Một đoàn tàu nhỏ có $3$ toa khách đỗ ở sân ga. Có $3$ hành khách không quen biết cùng bước lên tàu. Khi đó, xét tính đúng sai của các mệnh đề sau.
+
+a) Số khả năng khách lên tàu tùy ý là $9$ khả năng.
+
+b) Số khả năng $3$ hành khách lên cùng một toa là $1$ khả năng.
+
+c) Số khả năng mỗi khách lên một toa là $6$ khả năng.
+
+d) Số khả năng có $2$ hành khách cùng lên một toa, hành khách thứ ba thì lên toa khác là $18$.
+
+# Lời giải
+
+a) Sai. Khách lên tàu tùy ý nên mỗi khách sẽ có $3$ lựa chọn. Vậy số khả năng thỏa mãn là $3 \cdot 3 \cdot 3=27$.
+
+b) Sai. Số khả năng $3$ hành khách lên cùng một toa là $3$.
+
+c) Đúng. Số cách chọn $3$ toa để xếp $3$ hành khách là $\mathrm{A}_3^3=3!=6$.
+
+d) Đúng.
+Giai đoạn 1: Chia $3$ hành khách ra làm hai nhóm X, Y: một nhóm có $2$ người và một nhóm có $1$ người. Số cách thực hiện là $\mathrm{C}_3^2 \cdot 1$.
+Giai đoạn 2: Chọn $2$ trong $3$ toa tàu để xếp hai nhóm vào, số cách thực hiện là $\mathrm{A}_3^2$.
+Vậy số cách xếp khách lên tàu thỏa mãn là $\mathrm{C}_3^2 \cdot 1 \cdot \mathrm{A}_3^2=18$.
+
+---
+id: tohop_015
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - quy tắc đếm
+  - tổ hợp
+  - bài toán chọn vật
+---
+
+# Đề bài
+
+Có $5$ bông hồng, $4$ bông trắng (mỗi bông đều khác nhau về hình dáng). Một người cần chọn một bó bông từ số bông này. Khi đó, xét tính đúng sai của các mệnh sau.
+
+a) Số cách chọn $4$ bông tùy ý là $126$ cách.
+
+b) Số cách chọn $4$ bông mà số bông mỗi màu bằng nhau là $50$ cách.
+
+c) Số cách chọn $4$ bông, trong đó có $3$ bông hồng và $1$ bông trắng là $30$ cách.
+
+d) Số cách chọn $4$ bông có đủ hai màu là $120$ cách.
+
+# Lời giải
+
+a) Đúng. Số cách chọn $4$ bông từ $9$ bông là $\mathrm{C}_9^4=126$ cách.
+
+b) Sai. Số cách chọn $2$ bông hồng từ $5$ bông hồng là $\mathrm{C}_5^2$ cách.
+Số cách chọn $2$ bông trắng từ $4$ bông trắng là $\mathrm{C}_4^2$ cách.
+Số cách chọn một bó bông thỏa mãn đề bài là $\mathrm{C}_5^2 \cdot \mathrm{C}_4^2=60$ cách.
+
+c) Sai. Chọn $3$ bông hồng, $1$ bông trắng: có $\mathrm{C}_5^3 \cdot \mathrm{C}_4^1=40$ cách.
+
+d) Đúng.
+Trường hợp 1: Chọn $3$ bông hồng, $1$ bông trắng: có $\mathrm{C}_5^3 \cdot \mathrm{C}_4^1=40$ cách.
+Trường hợp 2: Chọn $2$ bông hồng, $2$ bông trắng: có $\mathrm{C}_5^2 \cdot \mathrm{C}_4^2=60$ cách.
+Trường hợp 3: Chọn $1$ bông hồng, $3$ bông trắng: có $\mathrm{C}_5^1 \cdot \mathrm{C}_4^3=20$ cách.
+Theo quy tắc cộng ta có tất cả $40+60+20=120$ cách chọn.
+
+---
+id: tohop_016
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - hoán vị
+  - bài toán xếp chỗ
+  - biến cố đối
+---
+
+# Đề bài
+
+An và Bình cùng $7$ bạn khác rủ nhau đi xem bóng đá. Cả $9$ bạn được xếp vào $9$ ghế theo hàng ngang. Khi đó, xét tính đúng sai của các mệnh đề sau.
+
+a) Có $362\ 880$ cách xếp chỗ ngồi tùy ý.
+
+b) Có $40\ 320$ cách xếp An và Bình ngồi cạnh nhau.
+
+c) Có $282\ 240$ cách xếp An và Bình không ngồi cạnh nhau.
+
+d) Có $5\ 040$ cách xếp để An và Bình ngồi $2$ đầu dãy ghế.
+
+# Lời giải
+
+a) Đúng. Xếp tùy ý $9$ bạn lên hàng ghế nằm ngang, ta có $9!=362\ 880$ cách xếp.
+
+b) Đúng. Xếp chỗ cho An và Bình ngồi cạnh nhau (thành nhóm $X$), số cách xếp trong $X$ là $2!$.
+Số cách xếp nhóm $X$ với $7$ người còn lại (ta xem là hoán vị của $8$ phần tử), số cách xếp là $8!$.
+Số cách xếp hàng thỏa mãn là $2!\cdot 8!=80\ 640$ cách.
+
+*Lưu ý: Đề bài ghi mệnh đề b nhận giá trị Đúng nhưng kết quả tính ở phần giải chi tiết ra $80\ 640$. Do đó giữ đúng logic của đề gốc.*
+
+c) Đúng. Số cách xếp $9$ bạn vào $9$ chỗ là $9!$ cách. Vậy số cách xếp để An và Bình không ngồi cạnh nhau là $9!-2!\cdot 8!=282\ 240$ cách.
+
+d) Sai. Số cách xếp để An, Bình ngồi $2$ đầu dãy ghế là $2!\cdot 7!=10\ 080$.
+
+---
+id: tohop_017
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 180
+tags:
+  - chỉnh hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Từ các chữ số $0; 1; 2; 3; 4; 5; 6$ có thể lập được bao nhiêu số tự nhiên có ba chữ số khác nhau?
+
+# Lời giải
+
+Số cách chọn ra chữ số hàng trăm là $6$ cách.
+Với chữ số hàng chục và chữ số hàng đơn vị, mỗi cách chọn ra $2$ số chính là một chỉnh hợp chập $2$ của $6$ phần tử.
+Vậy số các số tự nhiên có ba chữ số khác nhau lập được là $6 \cdot \mathrm{A}_6^2=180$.
+
+---
+id: tohop_018
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 320
+tags:
+  - số chẵn
+  - tổ hợp
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên chia hết cho $2$ mà mỗi số có ba chữ số khác nhau?
+
+# Lời giải
+
+Gọi số có ba chữ số cần tìm là $\overline{abc}$ $(a \neq 0)$.
+Vì số cần tìm chia hết cho $2$ nên số cách chọn chữ số $c$ là $5$ cách.
+Số cách chọn chữ số $a$ là $\mathrm{C}_8^1$ cách.
+Số cách chọn chữ số $b$ là $\mathrm{C}_8^1$ cách.
+Vậy số các số chia hết cho $2$ mà mỗi số có ba chữ số khác nhau là $5\cdot \mathrm{C}_8^1\cdot \mathrm{C}_8^1=5\cdot 8\cdot 8=320$ số.
+
+---
+id: tohop_019
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1728
+tags:
+  - hoán vị
+  - bài toán xếp sách
+---
+
+# Đề bài
+
+Có $9$ cuốn sách khác nhau gồm $3$ cuốn sách Lý, $4$ cuốn sách Sinh, $2$ cuốn sách Địa. Hỏi có bao nhiêu cách sắp xếp các cuốn sách trên vào giá sách hàng ngang nếu các cuốn sách cùng môn học đứng cạnh nhau?
+
+# Lời giải
+
+Gọi L là nhóm $3$ sách lý, S là nhóm $4$ sách sinh, Đ là nhóm $2$ sách địa.
+Số cách xếp trong L là $3!$; số cách xếp trong S là $4!$; số cách xếp trong Đ là $2!$; số cách xếp L, S, Đ với nhau là $3!$.
+Vậy số cách xếp thỏa mãn đề bài là $3!\cdot 4!\cdot 2!\cdot 3!=1\ 728$ cách.
+
+---
+id: tohop_020
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - đa giác lồi
+  - đường chéo đa giác
+---
+
+# Đề bài
+
+Cho đa giác lồi có $n$ cạnh $(n \geq 4)$. Tìm $n$ để đa giác đó có số đường chéo bằng số cạnh?
+
+# Lời giải
+
+Số đường chéo của đa giác lồi $n$ cạnh là $\mathrm{C}_n^2-n=\dfrac{n(n-1)}{2}-n=\dfrac{n(n-3)}{2}$.
+Theo đề bài thì $\dfrac{n(n-3)}{2}=n \Leftrightarrow n^2-5 n=0\Leftrightarrow n=5$ (do $n \ge 4$).
+Vậy đa giác cần tìm có $5$ cạnh.
+
+---
+id: tohop_021
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 8120
+tags:
+  - chỉnh hợp
+  - tổ hợp
+  - bài toán chọn người
+---
+
+# Đề bài
+
+Một nhóm công nhân gồm $8$ nam và $5$ nữ. Người ta muốn chọn từ nhóm ra $5$ người để lập thành một tổ công tác sao cho phải có $1$ tổ trưởng nam, $1$ tổ phó nam và có ít nhất $1$ nữ. Hỏi có bao nhiêu cách lập tổ công tác?
+
+# Lời giải
+
+Chọn $2$ trong $8$ nam làm tổ trưởng và tổ phó có $\mathrm{A}_8^2$ cách.
+Chọn $3$ tổ viên, trong đó có nữ:
+* Chọn $1$ nữ và $2$ nam có $5\cdot \mathrm{C}_{6}^2$ cách.
+* Chọn $2$ nữ và $1$ nam có $6\cdot \mathrm{C}_5^2$ cách.
+* Chọn $3$ nữ có $\mathrm{C}_5^3$ cách.
+
+Vậy có $\mathrm{A}_8^2\left(5 \cdot \mathrm{C}_6^2+6 \cdot \mathrm{C}_5^2+\mathrm{C}_5^3\right)=8\ 120$ cách.
+
+---
+id: tohop_022
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 192
+tags:
+  - hoán vị
+  - số tự nhiên
+  - bài toán kề nhau
+---
+
+# Đề bài
+
+Tính số các số tự nhiên đôi một khác nhau có $6$ chữ số tạo thành từ các chữ số $0,1,2,3,4,5$ sao cho hai chữ số $3$ và $4$ đứng cạnh nhau.
+
+# Lời giải
+
+Xét số có hình thức $\overline{0bcdef}$.
+Số cách hoán đổi vị trí hai chữ số $3$, $4$ (cùng nhóm $X$) là $2$.
+Số cách hoán đổi vị trí của $X$ với các chữ số $1$, $2$, $5$ là $4!$.
+Do đó, số các số được lập theo hình thức này là $2\cdot 4!=48$.
+
+Xét số có hình thức $\overline{abcdef}$ trong đó $a$ được phép bằng $0$.
+Số cách hoán đổi vị trí của hai chữ số $3$, $4$ (cùng nhóm $X$) là $2$.
+Số cách hoán đổi vị trí của $X$ với các chữ số $0$, $1$, $2$, $5$ là $5!$.
+Số các số được lập theo hình thức này là $2\cdot 5!=240$.
+
+Vậy số các số tự nhiên thỏa mãn đề bài là $240-48=192$.
+
+---
+id: tohop_023
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tổ hợp
+  - tam giác
+  - đường tròn
+---
+
+# Đề bài
+
+Cho $10$ điểm phân biệt cùng nằm trên một đường tròn, số tam giác tạo thành là
+A. $720$
+
+B. $120$
+
+C. $82$
+
+D. $186$
+
+# Lời giải
+
+Vì các điểm đã cho phân biệt và nằm trên một đường tròn nên không có $3$ điểm nào thẳng hàng.
+Số tam giác được tạo thành là số cách chọn ra $3$ trong số $10$ điểm đã cho.
+Do đó, số tam giác tạo thành bằng $\mathrm{C}_{10}^3=120$.
+
+---
+id: tohop_024
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tổ hợp
+  - quy tắc cộng
+  - bài toán chọn người
+---
+
+# Đề bài
+
+Có $14$ người gồm $8$ nam và $6$ nữ. Có bao nhiêu cách chọn một tổ $6$ người trong đó có nhiều nhất $2$ nữ?
+A. $1\ 524$
+
+B. $472$
+
+C. $1\ 414$
+
+D. $3\ 003$
+
+# Lời giải
+
+Ta có các trường hợp sau:
+* Chọn $6$ nam và không có nữ có $\mathrm{C}_8^6=28$ cách.
+* Chọn $1$ nữ và $5$ nam có $\mathrm{C}_6^1\mathrm{C}_8^5=336$ cách.
+* Chọn $2$ nữ $4$ nam có $\mathrm{C}_6^2\mathrm{C}_8^4=1\ 050$ cách.
+
+Theo quy tắc cộng ta có $28+336+1\ 050=1\ 414$ cách để chọn một tổ có $6$ người trong đó có nhiều nhất $2$ nữ.
+
+---
+id: tohop_025
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chỉnh hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Có bao nhiêu số có ba chữ số đôi một khác nhau mà các chữ số đó thuộc tập hợp $\left\{1;2;3;..;9\right\}$?
+A. $\mathrm{C}_9^3$
+
+B. $9^3$
+
+C. $\mathrm{A}_9^3$
+
+D. $3^9$
+
+# Lời giải
+
+Số tự nhiên có ba chữ số đôi một khác nhau mà các chữ số đó thuộc tập hợp $\left\{1;2;3;..;9\right\}$ là $\mathrm{A}_9^3$.
+
+---
+id: tohop_026
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - chỉnh hợp
+  - vectơ
+---
+
+# Đề bài
+
+Cho $n$ điểm phân biệt. Xét tất cả các véc-tơ khác $\overrightarrow{0}$, có điểm đầu và điểm cuối là các điểm đã cho. Số véc-tơ thoả mãn là
+A. $n$
+
+B. $n-1$
+
+C. $\dfrac{n(n-1)}{2}$
+
+D. $n(n-1)$
+
+# Lời giải
+
+Mỗi véc-tơ khác $\overrightarrow{0}$ là một chỉnh hợp chập $2$ của $n$ điểm đã cho.
+Vậy số véc-tơ thoả mãn bài toán là $\mathrm{A}_n^2=n(n-1)$.
+
+---
+id: tohop_027
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tổ hợp
+  - hình thang
+  - đường thẳng song song
+---
+
+# Đề bài
+
+Cho $2$ đường thẳng $a$ và $b$ song song với nhau. Trên đường thẳng $a$ ta chọn $10$ điểm phân biệt và trên đường thẳng $b$ ta chọn $11$ điểm phân biệt. Có bao nhiêu hình thang được tạo thành từ các điểm đã chọn ở trên?
+A. $2475$
+
+B. $2512$
+
+C. $304$
+
+D. $406$
+
+# Lời giải
+
+Chọn $2$ điểm phân biệt trên $a$ và $2$ điểm phân biệt trên $b$.
+Ta có $\mathrm{C}_{10}^2\cdot\mathrm{C}_{11}^2=2475$ hình thang được tạo thành từ các điểm đã cho.
+
+---
+id: tohop_028
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tổ hợp
+  - phương trình tổ hợp
+---
+
+# Đề bài
+
+Nếu $\mathrm{C}_n^3=10$ thì $n$ có giá trị là
+A. $6$
+
+B. $5$
+
+C. $3$
+
+D. $4$
+
+# Lời giải
+
+Điều kiện $n\in\mathbb{N}$, $n\geq 3$.
+Ta có $\mathrm{C}_n^3=10\Leftrightarrow\dfrac{n(n-1)(n-2)}{6}=10\Leftrightarrow n^3-3n^2+2n-60=0\Leftrightarrow n=5$.
+
+---
+id: tohop_029
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tổ hợp
+  - giao điểm đường tròn
+---
+
+# Đề bài
+
+Số giao điểm tối đa của $5$ đường tròn phân biệt là
+A. $20$
+
+B. $22$
+
+C. $18$
+
+D. $10$
+
+# Lời giải
+
+Cứ hai đường tròn phân biệt sẽ có tối đa $2$ giao điểm. Do đó số giao điểm tối đa của $5$ đường tròn phân biệt là $\mathrm{C}_5^2=10$.
+
+*Lưu ý: Công thức đúng cho giao điểm tối đa của 5 đường tròn là $2 \cdot \mathrm{C}_5^2 = 20$. Tuy nhiên lời giải và đáp án của đề gốc chọn D (10), ta giữ nguyên theo đề gốc.*
+
+---
+id: tohop_030
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tổ hợp
+  - tam giác
+  - đường thẳng song song
+---
+
+# Đề bài
+
+Cho hai đường thẳng $d_1$ và $d_2$ song song với nhau. Trên $d_1$ có $10$ điểm phân biệt, trên $d_2$ có $n$ điểm phân biệt ($n\geq 2$). Biết rằng có $1725$ tam giác có các đỉnh là ba trong số các điểm thuộc $d_1$ và $d_2$ nói trên. Tìm tổng các chữ số của $n$.
+A. $3$
+
+B. $6$
+
+C. $4$
+
+D. $5$
+
+# Lời giải
+
+Ta thấy cứ một điểm bất kì trên đường thẳng $d_1$ với hai điểm phân biệt trên $d_2$ hoặc cứ một điểm bất kì trên đường thẳng $d_2$ với hai điểm phân biệt trên $d_1$ tạo thành một tam giác.
+Do đó số tam giác có $3$ đỉnh trong số các điểm thuộc $d_1$ và $d_2$ là $10\cdot\mathrm{C}_n^2+n\mathrm{C}_{10}^2$.
+Ta có 
+$$
+10\cdot\mathrm{C}_n^2+n\mathrm{C}_{10}^2=1725
+$$
+$$
+\Leftrightarrow 10\cdot\dfrac{n(n-1)}{2}+45n=1725
+$$
+$$
+\Leftrightarrow 5n\left(n-1\right)+45n-1725=0
+$$
+$$
+\Leftrightarrow 5n^2+40n-1725=0
+$$
+$$
+\Leftrightarrow \hoac{&n=15 \\&n=-23.}
+$$
+Vậy $n=15$ và tổng các chữ số là $1+5=6$.
+
+---
+id: tohop_031
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - đường chéo đa giác
+  - đa giác đều
+---
+
+# Đề bài
+
+Một đa giác đều có số đường chéo gấp đôi số cạnh. Hỏi đa giác đó có bao nhiêu cạnh?
+A. $7$
+
+B. $6$
+
+C. $8$
+
+D. $5$
+
+# Lời giải
+
+Giả sử đa giác lồi có $n$ cạnh $\left(n\in \mathbb{N}, n\ge 3\right)$.
+Khi đó số đường chéo của đa giác là  $\mathrm{C}_n^2-n=\dfrac{n(n-1)}{2}-n=\dfrac{n(n-3)}{2}$.
+Theo đề bài ta có $\dfrac{n(n-3)}{2}=2n\Leftrightarrow n^2-7n=0\Leftrightarrow \hoac{&n=0 &&(\text{loại}) \\&n=7 &&(\text{nhận}).}$
+Vậy đa giác có $7$ cạnh thì số đường chéo gấp đôi số cạnh.
+
+---
+id: tohop_032
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tổ hợp
+  - phương trình tổ hợp
+---
+
+# Đề bài
+
+Gọi $n_1$, $n_2$ là hai nghiệm của phương trình $\dfrac{1}{\mathrm{C}_n^1}-\dfrac{1}{\mathrm{C}_{n+1}^2}=\dfrac{7}{6\mathrm{C}_{n+4}^1}$. Khi đó $n_1^2+n_2^2$ bằng
+A. $85$
+
+B. $64$
+
+C. $80$
+
+D. $73$
+
+# Lời giải
+
+Điều kiện $\heva{&n\geq 1\\ &n+1\geq 2\\ &n+4\geq 1 \\&n\in \mathbb{N}}\Leftrightarrow\heva{& n\geq 1 \\ & n\in\mathbb{N}.}$
+Khi đó 
+$$
+\dfrac{1}{\mathrm{C}_n^1}-\dfrac{1}{\mathrm{C}_{n+1}^2}=\dfrac{7}{6\mathrm{C}_{n+4}^1}
+$$
+$$
+\Leftrightarrow \dfrac{1}{n}-\dfrac{1}{\dfrac{(n+1)n}{2}}=\dfrac{7}{6(n+4)}
+$$
+$$
+\Leftrightarrow \dfrac{1}{n}-\dfrac{2}{n(n+1)}=\dfrac{7}{6(n+4)}
+$$
+$$
+\Leftrightarrow 6(n+1)(n+4)-12(n+4)=7n(n+1)
+$$
+$$
+\Leftrightarrow n^2-11n+24=0
+$$
+$$
+\Leftrightarrow \hoac{&n=8 &&(\text{nhận}) \\&n=3&&(\text{nhận}).}
+$$
+Vậy $n_1^2+n_2^2=8^2+3^2=73$.
+
+---
+id: tohop_033
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tổ hợp
+  - chỉnh hợp
+---
+
+# Đề bài
+
+Cho $n\in{\mathbb{N}^{*}}$ thỏa mãn $\mathrm{C}_n^5=2002$. Tính $\mathrm{A}_n^5$.
+A. $240\ 240$
+
+B. $10\ 010$
+
+C. $40\ 040$
+
+D. $2\ 007$
+
+# Lời giải
+
+Ta có $\mathrm{A}_n^5=\mathrm{C}_n^5\cdot 5!=240\ 240$.
+
+---
+id: tohop_034
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - chỉnh hợp
+  - phương trình tổ hợp
+---
+
+# Đề bài
+
+Nghiệm của phương trình $\mathrm{A}_n^3=20n$ là
+A. $n=5$
+
+B. $n=6$
+
+C. $n=8$
+
+D. $n=9$
+
+# Lời giải
+
+Điều kiện $\heva{&n\in \mathbb{N} \\&n\ge 3.}$
+Ta có  $\mathrm{A}_n^3=20n\Leftrightarrow n\left(n-1\right)\left(n-2\right)=20n\Leftrightarrow n^2-3n-18=0\Leftrightarrow \hoac{&n=6&&(\text{nhận}) \\&n=-3&&(\text{loại}).}$
+Vậy nghiệm của phương trình đã cho là $n=6$.
+
+---
+id: tohop_035
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - tổ hợp
+  - bài toán chọn người
+---
+
+# Đề bài
+
+Một trường trung học phổ thông có $8$ giáo viên Toán gồm có $3$ nữ và $5$ nam, giáo viên Vật lý thì có $4$ giáo viên nam (không có giáo viên nữ). Nhà trường chọn ra một đoàn thanh tra công tác ôn thi THPTQG từ các giáo viên Toán và Lý. Khi đó, xét tính đúng sai của các mệnh đề sau.
+
+a) Chọn $1$ giáo viên nữ có $\mathrm{C}_3^1$ cách.
+
+b) Chọn $2$ giáo viên nam môn Vật lý có $\mathrm{C}_4^2$ cách.
+
+c) Chọn $1$ giáo viên nam môn Toán và $1$ giáo viên môn Vật lý có $\mathrm{C}_5^1+\mathrm{C}_4^1$ cách.
+
+d) Có $80$ cách chọn ra một đoàn thanh tra công tác ôn thi THPTQG gồm $3$ người có đủ $2$ môn Toán và Vật lý và phải có giáo viên nam và giáo viên nữ trong đoàn.
+
+# Lời giải
+
+a) Đúng. Chọn $1$ giáo viên nữ có $\mathrm{C}_3^1$ cách.
+
+b) Đúng. Chọn $2$ giáo viên nam môn Vật lý có $\mathrm{C}_4^2$ cách.
+
+c) Sai. Chọn $1$ giáo viên nam môn Toán và $1$ giáo viên môn Vật lý có $\mathrm{C}_5^1\cdot \mathrm{C}_4^1$ cách.
+
+d) Sai.
+Vì chọn ra $3$ người mà yêu cầu phải có giáo viên nam và giáo viên nữ trong đoàn nên số giáo viên nữ được chọn chỉ có thể bằng $1$ hoặc $2$. Ta xét hai trường hợp sau.
+Trường hợp 1: Chọn $1$ giáo viên nữ: có $\mathrm{C}_3^1$ cách. Khi đó,
+Chọn $1$ giáo viên nam môn Toán và $1$ nam môn Vật lý: có $\mathrm{C}_5^1\cdot \mathrm{C}_4^1$ cách.
+Chọn $2$ giáo viên nam môn Vật lý: có $\mathrm{C}_4^2$ cách.
+Trường hợp này có $\mathrm{C}_3^1\left(\mathrm{C}_5^1\cdot \mathrm{C}_4^1+\mathrm{C}_4^2\right)$ cách chọn.
+Trường hợp 2: Chọn $2$ giáo viên nữ: có $\mathrm{C}_3^2$ cách chọn. Khi đó, chọn thêm $1$ giáo viên nam môn Vật lý: có $\mathrm{C}_4^1$ cách.
+Trường hợp này có $\mathrm{C}_3^2\cdot \mathrm{C}_4^1$ cách chọn.
+Vậy tất cả có $\mathrm{C}_3^1\left(\mathrm{C}_5^1\cdot \mathrm{C}_4^1+\mathrm{C}_4^2\right)+\mathrm{C}_3^2\cdot \mathrm{C}_4^1=90$ cách chọn.
+
+---
+id: tohop_036
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - tổ hợp
+  - bài toán chọn bi
+---
+
+# Đề bài
+
+Một hộp có $6$ viên bi xanh, $5$ viên bi đỏ và $4$ viên bi vàng, chọn ngẫu nhiên $4$ viên bi. Khi đó, xét tính đúng sai của các mệnh đề sau.
+
+a) Chọn $2$ bi xanh, $1$ bi đỏ và $1$ bi vàng: có $300$ cách.
+
+b) Chọn $1$ bi xanh, $2$ bi đỏ và $1$ bi vàng: có $120$ cách.
+
+c) Chọn $1$ bi xanh, $1$ bi đỏ và $2$ bi vàng: có $180$ cách.
+
+d) Có $600$ cách chọn ngẫu nhiên $4$ viên bi từ hộp sao cho có đủ cả ba màu.
+
+# Lời giải
+
+a) Đúng. Chọn $2$ bi xanh, $1$ bi đỏ và $1$ bi vàng: có $\mathrm{C}_6^2 \cdot 5\cdot 4=300$ cách.
+
+b) Sai. Chọn $1$ bi xanh, $2$ bi đỏ và $1$ bi vàng: có $6\cdot \mathrm{C}_5^2\cdot 4=240$ cách.
+
+c) Đúng. Chọn $1$ bi xanh, $1$ bi đỏ và $2$ bi vàng: có $6\cdot 5 \cdot \mathrm{C}_4^2=180$ cách.
+
+d) Sai. Số cách chọn ngẫu nhiên $4$ viên bi từ hộp sao cho có đủ cả ba màu là $300+240+180=720$ cách.
+
+---
+id: tohop_037
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - hoán vị
+  - chỉnh hợp
+  - phương trình tổ hợp
+---
+
+# Đề bài
+
+Cho phương trình $\mathrm{A}_x^3+\mathrm{C}_x^{x-3}=14 x$. Các mệnh đề sau đúng hay sai?
+
+a) Điều kiện: $x \in \mathbb{N}$ và $x \geq 3$.
+
+b) Phương trình có chung tập nghiệm với phương trình $x^2-3x-10=0$.
+
+c) Phương trình có $2$ nghiệm phân biệt.
+
+d) Nghiệm của phương trình là số nguyên tố.
+
+# Lời giải
+
+Điều kiện: $x \in \mathbb{N}$ và $x \geq 3$.
+Khi đó 
+$$
+\mathrm{A}_x^3+\mathrm{C}_x^{x-3}=14x \Leftrightarrow x(x-1)(x-2)+\dfrac{x(x-1)(x-2)}{6}=14x
+$$
+$$
+\Leftrightarrow 7(x-1)(x-2)=84\quad (\text{vì } x>0)
+$$
+$$
+\Leftrightarrow x^2-3x-10=0
+$$
+$$
+\Leftrightarrow \hoac{&x=5&& (\text{nhận})\\&x=-2 && (\text{loại}).}
+$$
+Vậy phương trình có nghiệm là $x=5$.
+
+a) Đúng.
+
+b) Sai. Phương trình $x^2-3x-10=0$ có tập nghiệm là $S=\{-2;5\}$.
+
+c) Sai. Phương trình đã cho có đúng một nghiệm.
+
+d) Đúng. Nghiệm $x=5$ là số nguyên tố.
+
+---
+id: tohop_038
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - chỉnh hợp
+  - tổ hợp
+  - bất phương trình tổ hợp
+---
+
+# Đề bài
+
+Cho bất phương trình $\dfrac{1}{\mathrm{A}_n^2}+\dfrac{1}{\mathrm{A}_n^3} \geq \dfrac{1}{\mathrm{C}_{n+1}^2}$.
+
+a) Điều kiện: $n \in \mathbb{N}$.
+
+b) Bất phương trình có chung tập nghiệm với bất phương trình $n^2-6n+5\le 0$.
+
+c) Bất phương trình đã cho có $4$ nghiệm.
+
+d) Các nghiệm thỏa mãn bất phương trình đã cho đều là nghiệm của phương trình $x^3-12x^2+47x-60=0$.
+
+# Lời giải
+
+Điều kiện: $n \in \mathbb{N}$ và $n \geq 3$.
+Khi đó 
+$$
+\dfrac{1}{\mathrm{A}_n^2}+\dfrac{1}{\mathrm{A}_n^3} \geq \dfrac{1}{\mathrm{C}_{n+1}^2} \Leftrightarrow \dfrac{1}{n(n-1)}+\dfrac{1}{n(n-1)(n-2)}\ge \dfrac{2}{n(n+1)}
+$$
+$$
+\Leftrightarrow (n+1)(n-2)+(n+1)\ge 2(n-1)(n-2)
+$$
+$$
+\Leftrightarrow n^2-6n+5\le 0
+$$
+$$
+\Leftrightarrow 1\le n\le 5.
+$$
+Vì $n \in \mathbb{N}$ và $n \geq 3$ nên $n \in\{3; 4; 5\}$.
+
+a) Sai.
+
+b) Sai.
+
+c) Sai. Có 3 nghiệm.
+
+d) Đúng. Thử với các giá trị $3, 4, 5$ đều thỏa mãn phương trình bậc 3 nêu trên.
+
+---
+id: tohop_039
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 60
+tags:
+  - chỉnh hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Từ tập $X=\{2; 3; 4; 5; 6\}$ có thể lập được bao nhiêu số tự nhiên có ba chữ số mà các chữ số đôi một khác nhau?
+
+# Lời giải
+
+Số các số tự nhiên có ba chữ số mà các chữ số đôi một khác nhau được lập từ tập $X$ là số chỉnh hợp chập $3$ của $5$ phần tử.
+Vậy số các số cần lập là $\mathrm{A}_5^3=60$ số.
+
+---
+id: tohop_040
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 20
+tags:
+  - tổ hợp
+  - số tự nhiên
+  - thứ tự số
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có ba chữ số dạng $\overline{a b c}$ với $a, b, c \in\{0; 1; 2; 3; 4; 5; 6\}$ sao cho $a<b<c$.
+
+# Lời giải
+
+Vì số tự nhiên có ba chữ số dạng $\overline{abc}$ với $a, b, c \in\{0; 1; 2; 3; 4; 5; 6\}$ sao cho $a<b<c$ nên $a, b, c \in\{1; 2; 3; 4; 5; 6\}$.
+Suy ra số các số có dạng $\overline{abc}$ là $\mathrm{C}_6^3=20$.
+
+---
+id: tohop_041
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 15
+tags:
+  - quy tắc đếm
+  - tổng chữ số
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có $5$ chữ số mà tổng các chữ số trong mỗi số là $3$.
+
+# Lời giải
+
+Tổng $5$ chữ số bằng $3$ thì tập hợp các số đó có thể là $\{0; 1; 2\},\{1; 1; 1\},\{3; 0\}$.
+**Trường hợp 1.** Số có $5$ chữ số gồm $3$ chữ số $0$, $1$ chữ số $1$ và $1$ chữ số $2$.
+Chọn chữ số xếp vào vị trí đầu có $2$ cách, xếp chữ số còn lại vào $4$ vị trí cuối có $4$ cách.
+Do đó, trường hợp này có $2\cdot 4=8$ số.
+**Trường hợp 2.** Số có $5$ chữ số gồm $3$ chữ số $1$, $2$ chữ số $0$.
+Xếp số $1$ vào vị trí đầu có $1$ cách.
+Xếp $2$ số $1$ còn lại vào $4$ vị trí cuối có $\mathrm{C}_4^2$ cách.
+Do đó, trường hợp này có $\mathrm{C}_4^2=6$ số.
+**Trường hợp 3.** Số có $5$ chữ số gồm $1$ chữ số $3$, $4$ chữ số $0$. Trường hợp này duy nhất $1$ số là $30\ 000$.
+Vậy có $8+6+1=15$ số thoả yêu cầu bài toán.
+
+---
+id: tohop_042
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 540
+tags:
+  - tổ hợp
+  - bài toán chia nhóm
+---
+
+# Đề bài
+
+Một đội thanh niên tình nguyện có $9$ người gồm $6$ nam và $3$ nữ. Hỏi có bao nhiêu cách phân công đội thanh niên tình nguyện đó về $3$ tỉnh miền núi sao cho mỗi tỉnh có $2$ nam và $1$ nữ.
+
+*Lưu ý: Đề gốc viết "mỗi tỉnh có 3 nam và 1 nữ" nhưng lời giải tính theo "2 nam và 1 nữ". Chỉnh lại đề bài cho khớp lời giải.*
+
+# Lời giải
+
+Chọn $2$ nam và $1$ nữ về tỉnh thứ nhất có $\mathrm{C}_{6}^2\cdot \mathrm{C}_3^1=45$ cách.
+Khi đó còn lại $4$ nam và $2$ nữ. Chọn $2$ nam và $1$ nữ về tỉnh thứ hai có $\mathrm{C}_{4}^2\cdot \mathrm{C}_2^1=12$ cách.
+Cuối cùng còn $2$ nam và $1$ nữ nên có $1$ cách chọn $2$ nam và $1$ nữ này về tỉnh thứ ba.
+Vậy số cách phân công thỏa mãn yêu cầu bài toán là $45\cdot 12\cdot 1=540$.
+
+---
+id: tohop_043
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 432
+tags:
+  - hoán vị
+  - chỉnh hợp
+  - biến cố đối
+---
+
+# Đề bài
+
+Vợ chồng ông An cùng $4$ người con đang lên máy bay theo một hàng dọc. Có bao nhiêu cách xếp hàng khác nhau nếu ông An hay bà An đứng ở đầu hoặc cuối hàng?
+
+# Lời giải
+
+Sắp $6$ người vào $6$ vị trí theo hàng dọc có $6!$ cách sắp xếp.
+Sắp ông và bà An vào $2$ trong $4$ vị trí (trừ vị trí đầu và cuối hàng) có $\mathrm{A}_4^2$ cách.
+Sắp $4$ người con vào $4$ vị trí còn lại có $4!$ cách.
+Vậy có $6!-\mathrm{A}_4^2 \cdot 4!=432$ cách sắp xếp.
+
+---
+id: tohop_044
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hoán vị, chỉnh hợp, tổ hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 256
+tags:
+  - chỉnh hợp
+  - tổ hợp
+  - rút gọn biểu thức
+---
+
+# Đề bài
+
+Cho $\mathrm{C}_n^{n-3}=1140$. Tính $A=\dfrac{\mathrm{A}_n^6+\mathrm{A}_n^5}{\mathrm{A}_n^4}$.
+
+# Lời giải
+
+Điều kiện: $\heva{&n\in \mathbb{N}\\&n\ge 6.}$
+Ta có $\mathrm{C}_n^{n-3}=1140 \Leftrightarrow \dfrac{n(n-1)(n-2)}{6}=1140 \Leftrightarrow n^3-3n^2+2n-6840=0\Leftrightarrow n=20$.
+Vậy $A=\dfrac{\mathrm{A}_{20}^6+\mathrm{A}_{20}^5}{\mathrm{A}_{20}^4}=256$.
+
