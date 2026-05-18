@@ -1,0 +1,1663 @@
+---
+id: vec_001
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tọa độ véc-tơ
+  - véc-tơ trong mặt phẳng
+---
+
+# Đề bài
+
+Cho hai véc-tơ $\overrightarrow{a}=(1;2)$; $\overrightarrow{b}=(3;4)$. Tọa độ $\overrightarrow{c}=4\overrightarrow{a}-\overrightarrow{b}$
+
+A. $(1;4)$
+
+B. $(-1;4)$
+
+C. $(4;1)$
+
+D. $(-1;-4)$
+
+# Lời giải
+
+Ta có $4\overrightarrow{a}=(4;8)$ nên $\vec{c}=4\vec{a}-\overrightarrow{b}=(4-3;8-4)=(1;4)$.
+
+---
+id: vec_002
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - trung điểm
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Cho tam giác $ABC$ với $A(1;4)$, $B(-2;2)$, $C(4;0)$. Tìm tọa độ véc-tơ $\overrightarrow{AM}$ với $M$ là trung điểm $BC$.
+
+A. $\overrightarrow{AM}=(-3;0)$
+
+B. $\overrightarrow{AM}=(0;3)$
+
+C. $\overrightarrow{AM}=(0;-3)$
+
+D. $\overrightarrow{AM}=(3;0)$
+
+# Lời giải
+
+Vì $M$ là trung điểm $BC$ nên $\heva{&x_M=\dfrac{x_C+x_B}{2} \\&y_M=\dfrac{y_C+y_B}{2}}\Leftrightarrow \heva{&x_M=1 \\&y_M=1}$. Suy ra $\overrightarrow{AM}=(0;-3)$.
+
+---
+id: vec_003
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Hai véc-tơ cùng phương, cùng hướng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - véc-tơ cùng phương
+  - điều kiện cùng phương
+---
+
+# Đề bài
+
+Giá trị của $m$ sao cho $\overrightarrow{a}=(2m-1;3m)$ cùng phương $\overrightarrow{b}=(1;1)$ là
+
+A. $-2$
+
+B. $1$
+
+C. $-3$
+
+D. $-1$
+
+# Lời giải
+
+$\overrightarrow{a}=(2m-1;3m)$ cùng phương $\overrightarrow{b}=(1;1)$ khi và chỉ khi $$\dfrac{2m-1}{1}=\dfrac{3m}{1}\Leftrightarrow 2m-1=3m\Leftrightarrow m=-1.$$
+
+---
+id: vec_004
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - trung điểm
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng với hệ tọa độ $Oxy$, cho hai điểm $A(2;-5)$ và $B(4;1)$. Tọa độ trung điểm $I$ của đoạn thẳng $AB$ là
+
+A. $I(3;-2)$
+
+B. $I(3;2)$
+
+C. $I(1;3)$
+
+D. $I(-1;-3)$
+
+# Lời giải
+
+Tọa độ trung điểm $I$ của đoạn thẳng $AB$ là $\heva{&x_I=\dfrac{x_A+x_B}{2} \\&y_I=\dfrac{y_A+y_B}{2}}\Leftrightarrow \heva{&x_I=3 \\&y_I=-2}\Rightarrow I(3;-2)$.
+
+---
+id: vec_005
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - trọng tâm
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng $Oxy$, cho ba điểm $A(2;0)$, $B(-1;-2)$, $C(5;-7)$. Tọa độ trọng tâm của $\Delta ABC$ là
+
+A. $(2;3)$
+
+B. $(2;-3)$
+
+C. $(3;2)$
+
+D. $(-3;2)$
+
+# Lời giải
+
+Giả sử $G$ là trọng tâm của $\Delta ABC$, ta có $\heva{&x_G=\dfrac{x_A+x_B+x_C}{3}=2 \\&y_G=\dfrac{y_A+y_B+y_C}{3}=-3}\Rightarrow G(2;-3)$.
+
+---
+id: vec_006
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Biểu diễn véc-tơ qua hai véc-tơ đơn vị
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - véc-tơ đơn vị
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong hệ trục $\left(O;\overrightarrow{i};\overrightarrow{j}\right)$, cho véc-tơ $\overrightarrow{OM}=3\left(\overrightarrow{i}+4\overrightarrow{j}\right)+5\overrightarrow{j}-2\overrightarrow{i}$. Tọa độ điểm $M$ là
+
+A. $(-1;-9)$
+
+B. $(1;17)$
+
+C. $(-1;-17)$
+
+D. $(1;9)$
+
+# Lời giải
+
+$\overrightarrow{OM}=3\left(\overrightarrow{i}+4\overrightarrow{j}\right)+5\overrightarrow{j}-2\overrightarrow{i}=\overrightarrow{i}+17\overrightarrow{j}$. Suy ra $M(1;17)$.
+
+---
+id: vec_007
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Ba điểm thẳng hàng
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - thẳng hàng
+  - trục tung
+---
+
+# Đề bài
+
+Cho $A(1;2)$, $B(-2;6)$. Tìm tọa độ điểm $M$ thuộc trục $Oy$ sao cho ba điểm $A$, $B$, $M$ thẳng hàng?
+
+A. $M(0;3)$
+
+B. $M\left(0;\dfrac{10}{3}\right)$
+
+C. $M\left(\dfrac{5}{2};0\right)$
+
+D. $M\left(0;\dfrac{5}{2}\right)$
+
+# Lời giải
+
+Vì $M$ thuộc trục $Oy$ nên $M(0;y)$.
+Suy ra $\overrightarrow{AB}=(-3;4)$, $\overrightarrow{AM}=(-1;y-2)$.
+Để ba điểm $A$, $B$, $M$ thẳng hàng thì $\dfrac{-1}{-3}=\dfrac{y-2}{4} \Leftrightarrow 4=3y-6 \Leftrightarrow y=\dfrac{10}{3}$.
+Vậy $M\left(0;\dfrac{10}{3}\right)$.
+
+---
+id: vec_008
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hình bình hành
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho ba điểm $A(1;1)$, $B(3;2)$, $C(6;5)$. Tìm tọa độ điểm $D$ để tứ giác $ABCD$ là hình bình hành.
+
+A. $D(4;3)$
+
+B. $D(3;4)$
+
+C. $D(4;4)$
+
+D. $D(8;6)$
+
+# Lời giải
+
+Gọi $D(x;y)$. Ta có $\heva{&\overrightarrow{AB}=(2;1) \\&\overrightarrow{DC}=(6-x;5-y).}$
+Tứ giác $ABCD$ là hình bình hành $\Leftrightarrow \overrightarrow{AB}=\overrightarrow{DC} \Leftrightarrow \heva{&2=6-x \\&1=5-y}\Leftrightarrow \heva{&x=4 \\&y=4}\Rightarrow D(4;4)$.
+
+---
+id: vec_009
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - đẳng thức véc-tơ
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng $Oxy$, cho các điểm $A(-2;1)$, $B(4;0)$, $C(2;3)$. Tìm điểm $M$ biết rằng $\overrightarrow{CM}+3\overrightarrow{AC}=2\overrightarrow{AB}$.
+
+A. $M(2;-5)$
+
+B. $M(5;-2)$
+
+C. $M(-5;2)$
+
+D. $M(2;5)$
+
+# Lời giải
+
+Gọi điểm $M(x;y)$. Khi đó ta có: $\overrightarrow{CM}=(x-2;y-3)$, $\overrightarrow{AC}=(4;2)$, $\overrightarrow{AB}=(6;-1)$.
+Theo giả thiết ta có $\overrightarrow{CM}+3\overrightarrow{AC}=2\overrightarrow{AB}\Leftrightarrow \heva{&x-2+3\cdot 4=2\cdot 6 \\&y-3+3\cdot 2=2\cdot (-1)}\Leftrightarrow \heva{&x=2 \\&y=-5.}$
+Vậy $M(2;-5)$.
+
+---
+id: vec_010
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Bài toán cực trị hình học
+muc_do:
+  - VDC
+loai: trac_nghiem
+dap_an: A
+tags:
+  - chu vi tam giác
+  - cực trị hình học
+  - đối xứng
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho hai điểm $A(2;-3)$, $B(3;-4)$. Biết $M(x;y)$ trên trục hoành sao cho chu vi tam giác $AMB$ nhỏ nhất. Giá trị của $x$ nằm trong khoảng nào sau đây?
+
+A. $(2;3)$
+
+B. $(3;4)$
+
+C. $(1;2)$
+
+D. $(0;1)$
+
+# Lời giải
+
+Nhận xét: $A$, $B$ nằm cùng phía đối với trục hoành.
+Gọi $M(x;0)$ là điểm cần tìm và $A'(2;3)$ đối xứng với $A$ qua trục hoành.
+$\bullet$ $ \overrightarrow{A'B}=(1;-7)$.
+Ta có $P=AM+MB+AB=MB+MA'+AB\Rightarrow P\ge A'B+AB\Rightarrow P_{\min}=A'B+AB \Leftrightarrow A'$, $M$, $B$ thẳng hàng.
+$\bullet$ $\overrightarrow{A'M}=(x-2;-3)$.
+Ba điểm $A'$, $M$, $B$ thẳng hàng $\Leftrightarrow \overrightarrow{AM}$ cùng phương $\overrightarrow{A'B}$ $\Leftrightarrow-7(x-2)=-3\cdot 1\Leftrightarrow -7x+14=-3\Leftrightarrow x=\dfrac{17}{7}$.
+Vậy $M\left(\dfrac{17}{7};0\right)$ thỏa yêu cầu bài toán.
+
+---
+id: vec_011
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Hai véc-tơ cùng phương, cùng hướng
+muc_do:
+  - VDC
+loai: trac_nghiem
+dap_an: C
+tags:
+  - cùng phương
+  - phân tích véc-tơ
+---
+
+# Đề bài
+
+Biết rằng hai véc-tơ $\overrightarrow{a}$ và $\overrightarrow{b}$ không cùng phương nhưng hai véc-tơ $2\overrightarrow{a}-3\overrightarrow{b}$ và $\overrightarrow{a}+(x-1)\overrightarrow{b}$ cùng phương. Khi đó giá trị của $x$ là
+
+A. $\dfrac{1}{2}$
+
+B. $-\dfrac{3}{2}$
+
+C. $-\dfrac{1}{2}$
+
+D. $\dfrac{3}{2}$
+
+# Lời giải
+
+Do hai véc-tơ $2\overrightarrow{a}-3\overrightarrow{b}$ và $\overrightarrow{a}+(x-1)\overrightarrow{b}$ cùng phương.
+Suy ra $2\overrightarrow{a}-3\overrightarrow{b}=k\left[\overrightarrow{a}+(x-1)\overrightarrow{b}\right]\,\left(k\ne 0, k\in \mathbb{R}\right)$
+$\Rightarrow 2\overrightarrow{a}-3\overrightarrow{b}=k\overrightarrow{a}+k(x-1)\overrightarrow{b}\Rightarrow (k-2)\overrightarrow{a}+\left[k(x-1)+3\right]\overrightarrow{b}=\overrightarrow{0}$.\quad $(1)$
+Theo đầu bài hai véc-tơ $\overrightarrow{a}$ và $\overrightarrow{b}$ không cùng phương.
+$$(1)\Rightarrow \heva{&k=2 \\&k(x-1)=-3}\Leftrightarrow \heva{&k=2 \\&x-1=-\dfrac{3}{2}}\Leftrightarrow \heva{&k=2 \\&x=-\dfrac{1}{2}.}$$
+Vậy $x=-\dfrac{1}{2}$.
+
+---
+id: vec_012
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Bài toán cực trị hình học
+muc_do:
+  - VDC
+loai: trac_nghiem
+dap_an: C
+tags:
+  - độ dài véc-tơ
+  - cực trị hình học
+  - trục hoành
+---
+
+# Đề bài
+
+Cho ba điểm $A(1;0)$, $B(0;3)$, $C(-3;-5)$. Điểm $M$ thuộc $Ox$ sao cho $\left| 2\overrightarrow{MA}-3\overrightarrow{MB}+2\overrightarrow{MC}\right|$ bé nhất. Khi đó tọa độ $M$ là
+
+A. $(-3;0)$
+
+B. $(3;0)$
+
+C. $(-4;0)$
+
+D. $(4;0)$
+
+# Lời giải
+
+$M\in Ox\Rightarrow M(x;0)$.
+Ta có $2\overrightarrow{MA}=(2-2x;0)$, $3\overrightarrow{MB}=(-3x;9)$, $2\overrightarrow{MC}=(-6-2x;-10)$.
+Suy ra $2\overrightarrow{MA}-3\overrightarrow{MB}+2\overrightarrow{MC}=(-x-4;-19)$
+$\Rightarrow \left| 2\overrightarrow{MA}-3\overrightarrow{MB}+2\overrightarrow{MC}\right|=\sqrt{(x+4)^2+19^2}\ge 19$.
+Giá trị nhỏ nhất của $\left| 2\overrightarrow{MA}-3\overrightarrow{MB}+2\overrightarrow{MC}\right|$ bằng $19$, dấu $=$ xảy ra khi $x=-4$.
+Vậy $M(-4;0)$.
+
+---
+id: vec_013
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - tọa độ véc-tơ
+  - véc-tơ cùng phương
+  - phân tích véc-tơ
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho các véc-tơ $\vec{a}=(2;-2)$, $\vec{b}=(4; 1)$ và $\vec{c}=(0;-1)$. Khi đó:
+
+a) Đúng/Sai: $2\vec{a}-\vec{b}-3\vec{c}=(0;-2)$
+
+b) Đúng/Sai: véc-tơ $\vec{e}=(1;-1)$ cùng phương, cùng hướng với véc-tơ $\vec{a}$
+
+c) Đúng/Sai: véc-tơ $\vec{f}=\left(-1;-\dfrac{1}{4}\right)$ cùng phương, cùng hướng với véc-tơ $\overrightarrow{b}$
+
+d) Đúng/Sai: $\vec{a}=\dfrac{1}{2} \vec{b}+\dfrac{5}{2} \vec{c}$
+
+# Lời giải
+
+a) Đúng. Ta có $\heva{&2 \vec{a}=(4;-4) \\&-\vec{b}=(-4;-1) \\&-3 \vec{c}=(0; 3)} \Rightarrow \vec{d}=2 \vec{a}-\vec{b}-3 \vec{c}=(0;-2)$.
+
+b) Đúng. Ta $\vec{a}=(2;-2)=2 \vec{e}$ nên $\vec{a}$, $\vec{e}$ là hai véc-tơ cùng phương với nhau, hơn nữa chúng cùng hướng với nhau vì $\vec{a}=k \vec{e}$, $k=2>0$.
+
+c) Sai. Tương tự: $\vec{b}=(4; 1)=-4 \vec{f}$, tức là $\vec{b}=k \vec{f}$, $k=-4<0$ nên $\vec{b}$ và $\vec{f}$ là hai véc-tơ cùng phương, ngược hướng với nhau.
+
+d) Đúng. Gọi $m$, $n$ là các số thỏa mãn $\vec{a}=m \vec{b}+n \vec{c}$ ($\vec{b}$, $\vec{c}$ không cùng phương).
+Khi đó $\heva{&2=m \cdot 4+n \cdot 0 \\&-2=m \cdot 1+n \cdot(-1)} \Leftrightarrow\heva{&m=\dfrac{1}{2} \\&n=\dfrac{5}{2}}$. Vậy $\vec{a}=\dfrac{1}{2} \vec{b}+\dfrac{5}{2} \vec{c}$.
+
+---
+id: vec_014
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - trọng tâm
+  - thẳng hàng
+  - tọa độ véc-tơ
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho các điểm $A(-4; 1)$, $B(2; 4)$, $C(2;-2)$. Khi đó:
+
+a) Đúng/Sai: Tọa độ điểm $D$ sao cho $C$ là trọng tâm tam giác $ABD$ là $D(8;11)$
+
+b) Đúng/Sai: Tọa độ điểm $E$ thuộc trục hoành sao cho $A$, $B$, $E$ thẳng hàng là $E(-6; 0)$
+
+c) Đúng/Sai: $\overrightarrow{BC}=(0;-6)$, $\overrightarrow{AC}=(6;-3)$
+
+d) Đúng/Sai: Tọa độ $F$ thỏa mãn $\overrightarrow{A F}=\overrightarrow{B C}-2 \overrightarrow{A C}+2 \overrightarrow{C F}$ là $F(20;5)$
+
+# Lời giải
+
+a) Sai. $C$ là trọng tâm tam giác $ABD$
+$\Leftrightarrow \heva{&x_C=\dfrac{x_A+x_B+x_D}{3}\\&y_C=\dfrac{y_A+y_B+y_D}{3}}\Leftrightarrow \heva{&2=\dfrac{-4+2+x_D}{3}\\&-2=\dfrac{1+4+y_D}{3}}\Leftrightarrow \heva{&x_D=8\\&y_D=-11}$.
+Vậy $D(8;-11)$.
+
+b) Đúng. Gọi $E(x; 0) \in Ox \Rightarrow \overrightarrow{A E}=(x+4;-1)$, $\overrightarrow{A B}=(6; 3)$.
+Ba điểm $A$, $B$, $E$ thẳng hàng $\Leftrightarrow \overrightarrow{A E}$ cùng phương $\overrightarrow{A B} \Leftrightarrow \dfrac{x+4}{6}=\dfrac{-1}{3}$ $\Leftrightarrow x+4=-2 \Leftrightarrow x=-6$. Vậy $E(-6; 0)$.
+
+c) Đúng. Ta có $\overrightarrow{B C}=(0;-6)$, $\overrightarrow{A C}=(6;-3)$.
+
+d) Sai. Gọi $F(x; y)$. Ta có $\overrightarrow{A F}=(x+4; y-1)$, $2\overrightarrow{CF}=(2x-4;2y+4)$.
+Suy ra $\overrightarrow{B C}-2 \overrightarrow{A C}+2 \overrightarrow{C F}=(2 x-16; 2 y+4)$.
+Ta có $\overrightarrow{A F}=\overrightarrow{B C}-2 \overrightarrow{A C}+2 \overrightarrow{C F} \Leftrightarrow\heva{&x+4=2 x-16 \\&y-1=2 y+4} \Leftrightarrow\heva{&x=20 \\&y=-5}$. Vậy $F(20;-5)$.
+
+---
+id: vec_015
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - hình bình hành
+  - diện tích tam giác
+  - tam giác vuông
+  - điểm cách đều
+---
+
+# Đề bài
+
+Cho ba điểm $A(-1; 1)$, $B(2; 1)$, $C(-1;-3)$. Khi đó:
+
+a) Đúng/Sai: $A$, $B$, $C$ là ba đỉnh của một tam giác
+
+b) Đúng/Sai: $S_{\Delta ABC}=12$
+
+c) Đúng/Sai: Tứ giác $ABCD$ là hình bình hành khi $D(-4;-3)$
+
+d) Đúng/Sai: Điểm $N$ thuộc trục $Oy$ sao cho $N$ cách đều $B$, $C$ có tung độ bằng $-\dfrac{5}{8}$
+
+# Lời giải
+
+a) Đúng. Ta có $\overrightarrow{A B}=(3; 0)$, $\overrightarrow{A C}=(0;-4)$. Xét số thực $k$ thỏa mãn $\overrightarrow{A B}=k \overrightarrow{A C} \Rightarrow \heva{&3=k\cdot 0 \\& 0=k(-4)}$ (vô lí). Do vậy không tồn tại số $k$ thỏa mãn $\overrightarrow{A B}=k \overrightarrow{A C}$ hay hai véc-tơ $\overrightarrow{A B}$, $\overrightarrow{A C}$ không cùng phương; suy ra ba điểm $A$, $B$, $C$ không thẳng hàng. Vậy $A$, $B$, $C$ là ba đỉnh của một tam giác.
+
+b) Sai. Ta có $A B=\sqrt{3^2+0^2}=3$, $A C=\sqrt{0^2+(-4)^2}=4$, $\overrightarrow{B C}=(-3;-4)$, $B C=\sqrt{3^2+4^2}=5$.
+Dễ thấy $A B^2+A C^2=B C^2$ nên $\Delta ABC$ vuông tại $A$.
+Chu vi tam giác $ABC$ là: $2 p=A B+A C+B C=3+4+5=12$.
+Diện tích tam giác là: $S_{\Delta ABC}=\dfrac{1}{2} AB \cdot AC=\dfrac{1}{2} \cdot 3 \cdot 4=6$.
+
+c) Đúng. Gọi $D(x; y) \Rightarrow \overrightarrow{D C}=(-1-x;-3-y)$, $\overrightarrow{A B}=(3; 0)$.
+$ABCD$ là hình bình hành $\Leftrightarrow \overrightarrow{A B}=\overrightarrow{D C} \Leftrightarrow\heva{&-1-x=3 \\&-3-y=0} \Leftrightarrow\heva{&x=-4 \\&y=-3.}$
+Suy ra $D(-4;-3)$.
+
+d) Đúng. Gọi $N(0; y) \Rightarrow \heva{&B N^2=(0-2)^2+(y-1)^2 \\& CN^2=(0+1)^2+(y+3)^2.}$
+$N$ cách đều $B$ và $C \Leftrightarrow BN=CN \Leftrightarrow BN^2=CN^2\Leftrightarrow 2^2+(y-1)^2=1^2+(y+3)^2 \Leftrightarrow y^2-2 y+5=y^2+6 y+10 \Leftrightarrow y=-\dfrac{5}{8}\Rightarrow N\left(0;-\dfrac{5}{8}\right)$.
+
+---
+id: vec_016
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tích vô hướng của hai véc-tơ
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - véc-tơ vuông góc
+  - véc-tơ cùng phương
+  - tích vô hướng
+---
+
+# Đề bài
+
+Cho $\vec{a}=(1,3), \vec{b}=(6,-2), \vec{c}=(x, 1)$. Khi đó:
+
+a) Đúng/Sai: $\vec{a} \perp \vec{b}$
+
+b) Đúng/Sai: Khi $\vec{a} \perp \vec{c} \Leftrightarrow a_1 c_1+a_2 c_2=0 \Leftrightarrow 1\cdot x+3\cdot 1=0 \Leftrightarrow x=-3$ thì $\vec{a} \perp \vec{c}$
+
+c) Đúng/Sai: Khi $\vec{c} \Leftrightarrow \dfrac{c_1}{a_1}=\dfrac{c_2}{a_2} \Leftrightarrow \dfrac{x}{1}=\dfrac{1}{3} \Leftrightarrow x=\dfrac{1}{3}$ thì $\vec{a}$ cùng phương $\vec{c}$
+
+d) Đúng/Sai: $\heva{&\vec{a} \perp \vec{d} \\& \vec{b} \cdot \vec{d}=20}$ thì $\Rightarrow \vec{d}=(3;-1)$
+
+# Lời giải
+
+a) Đúng. $\vec{a} \cdot \vec{b}=1 \cdot 6+3 \cdot(-2)=0 \Rightarrow \vec{a} \perp \vec{b}$.
+
+b) Đúng. Ta có $\vec{a} \perp \vec{c} \Leftrightarrow a_1 c_1+a_2 c_2=0 \Leftrightarrow 1\cdot x+3\cdot 1=0 \Leftrightarrow x=-3$.
+
+c) Đúng. $\vec{a}$ cùng phương $\vec{c} \Leftrightarrow \dfrac{c_1}{a_1}=\dfrac{c_2}{a_2} \Leftrightarrow \dfrac{x}{1}=\dfrac{1}{3} \Leftrightarrow x=\dfrac{1}{3}$.
+
+d) Đúng. $\heva{&\vec{a} \perp \vec{d} \\&\vec{b} \cdot \vec{d}=20} \Leftrightarrow\heva{&\vec{a} \cdot \vec{d}=0 \\&\vec{b} \cdot \vec{d}=20} \Leftrightarrow\heva{&a_1 d_1+a_2 d_2=0 \\&b_1 d_1+b_2 d_2=20} \Leftrightarrow\heva{&d_1+3 d_2=0 \\&6 d_1-2 d_2=20} \Leftrightarrow\heva{&d_1=3 \\&d_2=-1}\Rightarrow \vec{d}=(3;-1)$.
+
+---
+id: vec_017
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Hai véc-tơ cùng phương, cùng hướng
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - cùng phương
+  - véc-tơ chứa tham số
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hai véc-tơ $\vec{a}=(3 m; 4 m-1)$ và $\vec{b}=(\sqrt{2}; \sqrt{2})$ (với $m$ là tham số). Tìm $m$ để hai véc-tơ $\vec{a}$ và $\vec{b}$ cùng phương.
+
+# Lời giải
+
+Ta có $\vec{a}$ và $\vec{b}$ cùng phương khi và chỉ khi $3m=4m-1\Leftrightarrow m=1$.
+
+---
+id: vec_018
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 7
+tags:
+  - hình thang cân
+  - tọa độ đỉnh
+---
+
+# Đề bài
+
+Đỉnh $D(a;b)$ của hình thang cân $ABCD$ với $A(2; 0)$, $B(0; 2)$, $C(0; 7)$. Giá trị nhỏ nhất của $a+b$ là bao nhiêu?
+
+# Lời giải
+
+Gọi $D(x; y)$ suy ra $\overrightarrow{CD}=(x;y-7)$, $\overrightarrow{AD}=(x-2;y)$.
+$\overrightarrow{AB}=(-2;2)\Rightarrow AB=2\sqrt{2}$, $\overrightarrow{BC}=(0;5)\Rightarrow BC=5$.
+
+\begin{tikzpicture}[>=stealth,x=1cm,y=1cm,scale=0.4]
+	\def\a{-2}
+	\def\b{3}
+	\draw[color=gray,dash pattern=on 1pt off 1pt,xstep=1.0cm,ystep=1.0cm] (-1.2,-1.2) grid (8.2,10.2);
+	\draw[->] (-1,0) -- (8,0) node[below] {\scriptsize $x$};
+	\draw[->] (0,-1) -- (0,10) node[left] {\scriptsize $y$};
+	\coordinate[label=below:\scriptsize $A$] (A) at (2,0);
+	\coordinate[label=left:\scriptsize $B$] (B) at (0,2);
+	\coordinate[label=left:\scriptsize $C$] (C) at (0,7);
+	\coordinate[label=below:\scriptsize $D$] (D) at (7,0);
+	\coordinate[label=above:\scriptsize $D'$] (D') at (2,9);
+	\draw (A)--(B)--(C)--(D)--(A) (A)--(B)--(C)--(D')--(A) ;
+	\foreach \diem in {A,B,C,D,D'}	\fill (\diem)circle(1.5pt);
+\end{tikzpicture}
+
+Trường hợp 1: Hình thang có hai đáy $AB$, $CD$.
+Ta có $\heva{&\overrightarrow{AB},\overrightarrow{CD}\text{ cùng phương}\\&AD=BC}\Leftrightarrow\heva{&\dfrac{x}{-2}=\dfrac{y-7}{2} \\&\sqrt{(x-2)^2+y^2}=5} \Leftrightarrow\heva{&x=-y+7 \\&(-y+7-2)^2+y^2=25}$
+$\Leftrightarrow\heva{&x=-y+7 \\&2 y^2-10 y+25=25} \Leftrightarrow\heva{&x=7 \\&y=0} \vee\heva{&x=2 \\&y=5.}$
+Với $\heva{&x=7 \\&y=0}$ thì $CD=\sqrt{7^2+(0-7)^2}=7 \sqrt{2} \neq AB$ nên $D(7; 0)$ thỏa mãn.
+Với $\heva{&x=2 \\&y=5}$ thì $CD=\sqrt{2^2+(5-7)^2}=2 \sqrt{2}=AB$ (loại).
+Trường hợp 2: Hình thang có hai đáy $BC$, $AD$. Làm tương tự, ta có được điểm $D(2; 9)$.
+Giá trị nhỏ nhất của $a+b$ là $7+0=7$.
+
+---
+id: vec_019
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -0.3
+tags:
+  - diện tích tam giác
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Cho $\Delta ABC$ có $A(5; 6)$, $B(4;-1)$, $C(-4; 3)$. Tọa độ điểm $M(a;b)$ thuộc đoạn $BC$ sao cho $S_{\Delta MAB}=5 S_{\Delta MAC}$. Khi đó $a+b$ gần bằng bao nhiêu (làm tròn đến một chữ số thập phân)?
+
+# Lời giải
+
+\begin{center}
+	\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\a{4}
+		\coordinate[label=left:\scriptsize $B$] (B) at (0,0);
+		\coordinate[label=right:\scriptsize $C$] (C) at (\a,0);
+		\coordinate[label=above:\scriptsize $A$] (A) at ($(B)+(65:.75*\a)$);
+		\coordinate[label=below:\scriptsize $H$] (H) at ($(B)!(A)!(C)$);
+		\coordinate[label=below:\scriptsize $M$] (M) at ($(C)!1/6!(B)$);
+		\draw (M)--(A)--(B)--(C)--(A)--(H) ;
+		\foreach \diem in {A,B,C,M,H}	\fill (\diem)circle(1.5pt);
+		\newcommand{\gocv}[4][black]{\draw[#1] ($(#3)!5pt!(#2)$)--($(#3)!2!($($(#3)!5pt!(#2)$)!.5!($(#3)!5pt!(#4)$)$)$)--($(#3)!5pt!(#4)$);}
+		\gocv{A}{H}{C}
+	\end{tikzpicture}
+\end{center}
+
+Kẻ $AH \perp BC$. $S_{\Delta MAB}=5 S_{\Delta MAC}\Leftrightarrow \dfrac{1}{2}AH\cdot MB=5\cdot \dfrac{1}{2}AH\cdot MC\Leftrightarrow MB=5MC$. 
+Mà $\overrightarrow{MB}$ và $\overrightarrow{MC}$ ngược hướng $\Rightarrow \overrightarrow{MB}=-5 \overrightarrow{MC}$ 
+$\Leftrightarrow \heva{&x_B-x_M=-5(x_C-x_M)\\&y_B-y_M=-5(y_C-y_M)}\Leftrightarrow\heva{& 4-x_M=-5(-4-x_M)\\&-1-y_M=-5(3-y_M)}\Rightarrow M\left(-\dfrac{8}{3};\dfrac{7}{3}\right)$.
+Suy ra $a+b=-\dfrac{1}{3}\approx-0.3$.
+
+---
+id: vec_020
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Hai véc-tơ cùng phương, cùng hướng
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -2.5
+tags:
+  - cùng phương
+  - tích nghiệm
+---
+
+# Đề bài
+
+Cho $\vec{u}=(2 x-1; 3)$, $\vec{v}=(1; x+2)$. Có hai giá trị của $x$ để $\vec{u}$ cùng phương với $\vec{v}$. Tính tích hai giá trị đó.
+
+# Lời giải
+
+Với $x=-2$: Ta có $\vec{u}=(-5; 3); \vec{v}=(1; 0)$.
+Vì $\dfrac{1}{-5} \neq \dfrac{0}{3}$ nên hai véc-tơ $\vec{u}; \vec{v}$ không cùng phương.
+Với $x \neq-2$, ta có $\vec{u}; \vec{v}$ cùng phương khi và chỉ khi $$\dfrac{2 x-1}{1}=\dfrac{3}{x+2}\Leftrightarrow(2 x-1)(x+2)=3 \Leftrightarrow 2 x^2+3 x-5=0 \Leftrightarrow\hoac{&x=1 \\& x=-\dfrac{5}{2}.}$$
+Vậy tích của chúng là $1 \cdot\left(-\dfrac{5}{2}\right)=-2.5$.
+
+---
+id: vec_021
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Bài toán cực trị hình học
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 4.33
+tags:
+  - giá trị lớn nhất
+  - trục hoành
+---
+
+# Đề bài
+
+Cho ba điểm $A(-1; 4)$, $B(1; 1)$, $C(3;-1)$. Điểm $N(a;0)$ thuộc trục hoành sao cho $|NA-NC|$ lớn nhất. Giá trị $a$ gần bằng bao nhiêu (làm tròn đến hai chữ số thập phân)?
+
+# Lời giải
+
+Ta thấy $y_A \cdot y_C=4 \cdot(-1)<0$ nên $A$, $C$ nằm khác phía so với trục $Ox$.
+Lấy điểm $C'$ đối xứng với $C$ qua $Ox$. Suy ra $C'(3;1)$ và $C'$, $A$ cùng phía so với $Ox$.
+Ta có $N\in Ox\Rightarrow NC=NC'$. Vì vậy $\left| NA-NC\right|=\left| NA-NC'\right|\le AC'$.
+Suy ra $\left| NA-NC\right|_{\max}=AC'$; giá trị lớn nhất này đạt được khi $A$, $C'$, $N$ thẳng hàng ($N$ nằm ngoài $A$, $C'$).
+Gọi $N(a;0)\in Ox\Rightarrow \overrightarrow{AN}=(a+1;-4)$, $\overrightarrow{AC'}=(4;-3)$.
+Vì $\overrightarrow{AN}$, $\overrightarrow{AC'}$ cùng phương nên $\dfrac{a+1}{4}=\dfrac{-4}{-3} \Leftrightarrow-3 a-3=-16 \Leftrightarrow a=\dfrac{13}{3}\approx 4.33$.
+
+---
+id: vec_022
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 11
+tags:
+  - hình bình hành
+  - trọng tâm
+  - hoành độ
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho hình bình hành $ABCD$ có $A(4;3)$, $C(8;1)$. Gọi $M$ là trung điểm của cạnh $BC$, $N$ là giao điểm của $BD$ và $AM$. Tính tổng hoành độ của các đỉnh còn lại của hình bình hành $ABCD$, biết $N\left(\dfrac{13}{3};2\right)$.
+
+# Lời giải
+
+\begin{center}
+	\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\a{6}
+		\coordinate[label=left:\scriptsize $B$] (B) at (0,0);
+		\coordinate[label=right:\scriptsize $C$] (C) at (\a,0);
+		\coordinate[label=above:\scriptsize $A$] (A) at ($(B)+(55:.45*\a)$);
+		\coordinate[label=above:\scriptsize $D$] (D) at ($(C)-(B)+(A)$);
+		\coordinate[label=above:\scriptsize $I$] (I) at ($(C)!.5!(A)$);
+		\coordinate[label=below:\scriptsize $M$] (M) at ($(C)!.5!(B)$);
+		\coordinate[label=above:\scriptsize $N$] (N) at ($(M)!1/3!(A)$);
+		\draw (M)--(A)--(B)--(C)--(D)--(A)--(C) (D)--(B);
+		\foreach \diem in {A,B,C,D,M,N,I}	\fill (\diem)circle(1.5pt);
+	\end{tikzpicture}
+\end{center}
+
+Vì $I$ là tâm của hình bình hành $ABCD$.
+Nên $I$ là trung điểm của $AC$ suy ra $\heva{&x_I=\dfrac{4+8}{2}=6\\&y_I=\dfrac{3+1}{2}=2}\Rightarrow I\left(6;2\right)$.
+Xét tam giác $ABC$ thì $BI$, $AM$ là hai đường trung tuyến nên $N$ là trọng tâm tam giác $ABC$.
+Do đó $\heva{&\dfrac{13}{3}=\dfrac{4+x_B+8}{3}\\&2=\dfrac{3+y_B+1}{3}}\Leftrightarrow\heva{&x_B=1\\&y_B=2}\Rightarrow B(1;2)$.
+Gọi $D(x_D;y_D)$. Do $I$ trung điểm của $BD\Rightarrow\heva{&1+x_D=12\\&2+y_D=4}\Leftrightarrow\heva{&x_D=11\\&y_D=2}$ nên $D(11;2)$.
+Vậy tổng hoành độ của các đỉnh còn lại ($B$ và $D$) là $1 + 11 = 11$.
+
+---
+id: vec_023
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ của véc-tơ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tọa độ véc-tơ
+---
+
+# Đề bài
+
+Trong mặt phẳng $Oxy$, cho $A(5 ; 2)$, $B(10 ; 8)$. Toạ độ của $\overrightarrow{AB}$ là
+
+A. $(2 ; 4)$
+
+B. $(5 ; 6)$
+
+C. $(50 ; 16)$
+
+D. $(15 ; 10)$
+
+# Lời giải
+
+Ta có $A(5 ; 2)$, $B(10 ; 8)$ nên $\overrightarrow{AB} = (10-5 ; 8-2) = (5 ; 6)$.
+
+---
+id: vec_024
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Biểu diễn véc-tơ qua hai véc-tơ đơn vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - véc-tơ đơn vị
+  - tọa độ véc-tơ
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho $\vec{u}=\dfrac{1}{2} \vec{i}-5 \vec{j}$. Tọa độ vectơ $\vec{u}$ là
+
+A. $\vec{u}=\left(\dfrac{1}{2} ; 5\right)$
+
+B. $\vec{u}=\left(\dfrac{1}{2} ;-5\right)$
+
+C. $\vec{u}=(-1 ; 10)$
+
+D. $\vec{u}=(1 ;-10)$
+
+# Lời giải
+
+Ta thấy $\vec{u}=\dfrac{1}{2} \vec{i}-5 \vec{j} \Rightarrow \vec{u}=\left(\dfrac{1}{2} ;-5\right)$.
+
+---
+id: vec_025
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Hai véc-tơ cùng phương, cùng hướng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - cùng phương
+  - tọa độ véc-tơ
+---
+
+# Đề bài
+
+Trong mặt phẳng với hệ trục tọa độ $Oxy$, cho vecto $\vec{a}=(1 ;-2)$. Trong các vectơ dưới đây, vectơ nào cùng phương với $\vec{a}$.
+
+A. $\vec{b}=(1 ; 2)$
+
+B. $\vec{c}=(-1 ;-2)$
+
+C. $\vec{d}=(-2 ; 4)$
+
+D. $\vec{e}=(2 ; 1)$
+
+# Lời giải
+
+Ta có $\vec{d}=(-2 ; 4)=-2(1 ;-2)=-2 \vec{a}$. Do đó, $\vec{d}$ cùng phương với $\vec{a}$.
+
+---
+id: vec_026
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - trung điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A(1 ;-3)$, $B(3 ; 1)$. Toạ độ trung điểm $I$ của đoạn thẳng $AB$ là
+
+A. $I(-1 ;-2)$
+
+B. $I(2 ;-1)$
+
+C. $I(1 ;-2)$
+
+D. $I(2 ; 1)$
+
+# Lời giải
+
+Toạ độ trung điểm $I$ của đoạn thẳng $AB$ là
+$$
+	\heva{&x_I = \dfrac{x_A+x_B}{2}=2 \\ &y_I = \dfrac{y_A+y_B}{2}=-1}
+$$
+Vậy $I(2 ;-1)$.
+
+---
+id: vec_027
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đối xứng
+  - trung điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng $Oxy$ cho $A(-2 ; 0)$, $B(5 ;-4)$. Tọa độ điểm $E$ đối xứng với $A$ qua $B$ là
+
+A. $E(-9 ; 4)$
+
+B. $E(12 ; 8)$
+
+C. $E(12 ;-8)$
+
+D. $E(-8 ; 12)$
+
+# Lời giải
+
+Điểm $E$ đối xứng với $A$ qua $B$ nên $B$ là trung điểm của đoạn $AE$.
+Do đó
+$$
+	\heva{&x_E=2 x_B-x_A=2 \cdot 5-(-2)=12 \\ &y_E=2 y_B-y_A=2 \cdot (-4)-0=-8.}
+$$
+Vậy $E(12 ;-8)$.
+
+---
+id: vec_028
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hình bình hành
+  - trung điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng $Oxy$, cho hình bình hành $ABCD$ biết $A(2 ; 1)$, $B(2 ;-1)$, $C(-2 ;-3)$. Tọa độ giao điểm hai đường chéo của hình bình hành $ABCD$ là
+
+A. $(2 ; 0)$
+
+B. $(2 ; 2)$
+
+C. $(0 ;-2)$
+
+D. $(0 ;-1)$
+
+# Lời giải
+
+Giao điểm hai đường chéo $I$ là trung điểm của $AC$.
+$$
+	\heva{&x_I = \dfrac{x_A+x_C}{2}=0 \\ &y_I = \dfrac{y_A+y_C}{2}=-1.}
+$$
+Vậy tọa độ giao điểm hai đường chéo là $I(0 ;-1)$.
+
+---
+id: vec_029
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - trọng tâm
+---
+
+# Đề bài
+
+Trong hệ trục tọa độ $Oxy$, cho $A(-4 ; 1)$, $B(2 ; 4)$, $C(2 ;-2)$. Tọa độ trọng tâm $G$ của tam giác $ABC$ là
+
+A. $G\left(0 ; \dfrac{3}{2}\right)$
+
+B. $G(0 ; 1)$
+
+C. $G(0 ; 3)$
+
+D. $G\left(\dfrac{3}{2} ; 0\right)$
+
+# Lời giải
+
+$G$ là trọng tâm của tam giác $ABC$ nên ta có
+$$	
+	\heva{&x_G=\dfrac{-4+2+2}{3}=0 \\ &y_G=\dfrac{1+4-2}{3}=1.}
+$$
+Vậy $G(0 ; 1)$.
+
+---
+id: vec_030
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Biểu diễn véc-tơ qua hai véc-tơ đơn vị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - véc-tơ đơn vị
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng với hệ trục tọa độ $(O ; \vec{i} ; \vec{j})$ cho điểm $M$ thỏa mãn $\overrightarrow{OM}=-2 \vec{i}+3 \vec{j}$. Tọa độ của điểm $M$ là
+
+A. $(-2 ; 3)$
+
+B. $(2 ;-3)$
+
+C. $(3 ;-2)$
+
+D. $(-3 ; 2)$
+
+# Lời giải
+
+$\overrightarrow{OM}=-2 \vec{i}+3 \vec{j}$ nên tọa độ điểm $M$ là $(-2 ; 3)$.
+
+---
+id: vec_031
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - trọng tâm
+  - tìm tọa độ đỉnh
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho tam giác $ABC$ có $A(6 ; 1)$, $B(-3 ; 5)$ và trọng tâm $G(-1 ; 1)$. Tìm tọa độ đỉnh $C$?
+
+A. $C(6 ;-3)$
+
+B. $C(-6 ; 3)$
+
+C. $C(-6 ;-3)$
+
+D. $C(-3 ; 6)$
+
+# Lời giải
+
+Gọi $C(x ; y)$. Vì $G$ là trọng tâm tam giác $ABC$ nên 
+$$
+	\heva{&\dfrac{6+(-3)+x}{3}=-1 \\ &\dfrac{1+5+y}{3}=1}
+	\Leftrightarrow
+	\heva{&x=-6 \\ &y=-3.}
+$$
+
+---
+id: vec_032
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tọa độ trung điểm và trọng tâm
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - trọng tâm
+  - trung điểm
+  - hoành độ
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho tam giác $ABC$ có $C(-2 ;-4)$, trọng tâm $G(0 ; 4)$ và trung điểm cạnh $BC$ là $M(2 ; 0)$. Tổng hoành độ của điểm $A$ và $B$ là
+
+A. $-2$
+
+B. $2$
+
+C. $4$
+
+D. $8$
+
+# Lời giải
+
+Vì $M$ là trung điểm $BC$ nên 
+$$
+	\heva{&x_B=2 x_M-x_C=2\cdot 2-(-2)=6 \\ &y_B=2 y_M-y_C=2\cdot 0-(-4)=4}
+	\Rightarrow B(6 ; 4).
+$$
+Vì $G$ là trọng tâm tam giác $ABC$ nên 
+$$
+	\heva{&x_A=3 x_G-x_B-x_C=3\cdot 0 - 6 - (-2) = -4 \\ &y_A=3 y_G-y_B-y_C=3\cdot 4 - 4 - (-4) = 12}
+	\Rightarrow A(-4 ; 12).
+$$
+Suy ra $x_A+x_B = -4 + 6 = 2$.
+
+---
+id: vec_033
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đẳng thức véc-tơ
+  - tìm điểm
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho $A(1 ; 3)$, $B(4 ; 0)$, $C(2 ;-5)$. Tìm tọa độ điểm $M$ thỏa mãn hệ thức $\overrightarrow{MA}+\overrightarrow{MB}-3 \overrightarrow{MC}=\overrightarrow{0}$?
+
+A. $M(1 ; 18)$
+
+B. $M(-1 ; 18)$
+
+C. $M(1 ;-18)$
+
+D. $M(-18 ; 1)$
+
+# Lời giải
+
+Gọi tọa độ $M(x ; y)$.
+Suy ra $\overrightarrow{MA}=(1-x ; 3-y)$, $\overrightarrow{MB}=(4-x ;-y)$, $\overrightarrow{MC}=(2-x ;-5-y)$.
+Ta có 
+$$
+	\overrightarrow{MA}+\overrightarrow{MB}-3 \overrightarrow{MC}=\overrightarrow{0} 
+	\Leftrightarrow
+	\heva{&(1-x)+(4-x)-3(2-x)=0 \\ &3-y-y-3(-5-y)=0}
+	\Leftrightarrow
+	\heva{&x=1 \\ &y=-18.}
+$$
+
+---
+id: vec_034
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Phân tích véc-tơ, đường trung bình
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - đường trung bình
+  - tọa độ véc-tơ
+---
+
+# Đề bài
+
+Trong hệ tọa độ $Oxy$, cho tam giác $ABC$ có $B(9 ; 7)$, $C(11 ;-1)$. Gọi $M, N$ lần lượt là trung điểm của $AB$, $AC$. Tìm tọa độ vectơ $\overrightarrow{MN}$?
+
+A. $\overrightarrow{MN}=(2 ;-8)$
+
+B. $\overrightarrow{MN}=(1 ;-4)$
+
+C. $\overrightarrow{MN}=(10 ; 6)$
+
+D. $\overrightarrow{MN}=(5 ; 3)$
+
+# Lời giải
+
+Dễ thấy $MN$ là đường trung bình của tam giác $ABC$ mà
+$$
+	\overrightarrow{BC}=(11-9 ;-1-7)=(2 ;-8) \quad \text{nên} \quad
+	\overrightarrow{MN}=\dfrac{1}{2} \overrightarrow{BC}=(1 ;-4)
+$$
+
+---
+id: vec_035
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - VD
+  - VD
+  - VD
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - thẳng hàng
+  - trọng tâm
+  - hình bình hành
+  - góc giữa hai véc-tơ
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho $A(-2 ; 5)$, $B(-4 ;-2)$, $C(1 ; 5)$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Ba điểm $A, B, C$ không thẳng hàng
+
+b) Đúng/Sai: $G\left(-\dfrac{5}{3} ; \dfrac{8}{3}\right)$ là tọa độ trọng tâm của tam giác $ABC$
+
+c) Đúng/Sai: Tứ giác $ABCD$ là hình bình hành khi đó tọa độ điểm $D$ là $D(3 ; 10)$
+
+d) Đúng/Sai: $\widehat{ACB}=45^{\circ}$
+
+# Lời giải
+
+a) Đúng. Ta có $\overrightarrow{AB}=(-2 ;-7)$, $\overrightarrow{AC}=(3 ; 0)$.
+Do $\dfrac{3}{-2} \neq \dfrac{0}{-7}$ nên $\overrightarrow{AB}$, $\overrightarrow{AC}$ không cùng phương. Vì vậy ba điểm $A, B, C$ không thẳng hàng.
+	
+b) Đúng. Do $G$ là trọng tâm của tam giác $ABC$ nên tọa độ $G$ là
+$$
+	\heva{&x_G = \dfrac{x_A+x_B+x_C}{3} = -\dfrac{5}{3} \\ &y_G = \dfrac{y_A+y_B+y_C}{3} = \dfrac{8}{3}}
+$$
+Vậy $G\left(-\dfrac{5}{3} ; \dfrac{8}{3}\right)$.
+	
+c) Sai. Giả sử $D(x ; y)$. Ta có $\overrightarrow{AB}=(-2 ;-7)$, $\overrightarrow{DC}=(1-x ; 5-y)$.
+Tứ giác $ABCD$ là hình bình hành nếu 
+$$
+	\overrightarrow{AB}=\overrightarrow{DC}
+	\Leftrightarrow
+	\heva{&-2=1-x \\ &-7=5-y} 
+	\Leftrightarrow
+	\heva{&x=3 \\ &y=12}
+$$ 
+Vậy $D(3 ; 12)$.
+	
+d) Sai. Ta có
+\begin{align*}
+	&AB=\sqrt{(-2)^2+(-7)^2}=\sqrt{53}, \\
+	&AC=\sqrt{[1-(-2)]^2+(5-5)^2}=3, \\
+	&BC=\sqrt{[1-(-4)]^2+[5-(-2)]^2}=\sqrt{74}.
+\end{align*}
+Ta có $\overrightarrow{CA} \cdot \overrightarrow{CB}=(-3) \cdot (-5) + 0 \cdot (-7)=15$.
+Suy ra
+$$
+	\cos \widehat{ACB}=\cos (\overrightarrow{CA} , \overrightarrow{CB})
+	=\dfrac{\overrightarrow{CA} \cdot \overrightarrow{CB}}{|\overrightarrow{CA}| \cdot|\overrightarrow{CB}|}
+	=\dfrac{15}{3 \cdot \sqrt{74}}
+	=\dfrac{5}{\sqrt{74}}.
+$$
+nên $\widehat{ACB} \approx 54^{\circ}$.
+
+---
+id: vec_036
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - VD
+  - VD
+  - VD
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - véc-tơ đơn vị
+  - cộng trừ véc-tơ
+---
+
+# Đề bài
+
+Cho $\vec{a}=3 \vec{i}+\vec{j}$, $\vec{b}=-2 \vec{j}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\vec{a}=(-3 ; 1)$
+
+b) Đúng/Sai: $\vec{b}=(0 ;-2)$
+
+c) Đúng/Sai: $\vec{a}+\vec{b}=(3 ; 1)$
+
+d) Đúng/Sai: $\vec{a}-\vec{b}=(3 ;-3)$
+
+# Lời giải
+
+a) Sai. Ta có $\vec{a}=(3 ; 1)$.
+	
+b) Đúng. Ta có $\vec{b}=(0 ;-2)$.
+	
+c) Sai. Ta có $\vec{a}+\vec{b}=(3 ; 1)+(0 ;-2)=(3 ;-1)$.
+	
+d) Sai. Ta có $\vec{a}-\vec{b}=(3 ; 1)-(0 ;-2)=(3 ; 3)$.
+
+---
+id: vec_037
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - VD
+  - VD
+  - VD
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - véc-tơ đơn vị
+  - cộng trừ véc-tơ
+---
+
+# Đề bài
+
+Cho $\vec{a}=\dfrac{1}{2} \vec{i}+2 \vec{j}$, $\vec{b}=\vec{i}-\dfrac{1}{2} \vec{j}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\vec{a}=\left(\dfrac{1}{2} ;-2\right)$
+
+b) Đúng/Sai: $\vec{b}=\left(1 ;-\dfrac{1}{2}\right)$
+
+c) Đúng/Sai: $2\vec{a}+3\vec{b}=\left(4 ; \dfrac{5}{2}\right)$
+
+d) Đúng/Sai: $\vec{a}-2\vec{b}=\left(-\dfrac{3}{2} ; 3\right)$
+
+# Lời giải
+
+a) Sai. Ta có $\vec{a}=\left(\dfrac{1}{2} ; 2\right)$.
+	
+b) Đúng. Ta có $\vec{b}=\left(1 ;-\dfrac{1}{2}\right)$.
+	
+c) Đúng. Ta có
+$$
+	\heva{&2 \vec{a}=(1 ; 4) \\
+		&3 \vec{b}=\left(3 ;-\dfrac{3}{2}\right)}
+	\Rightarrow 
+	2 \vec{a}+3 \vec{b}=\left(4 ; \dfrac{5}{2}\right)
+$$
+	
+d) Đúng. Ta có
+$$
+	\heva{&\vec{a}=\left(\dfrac{1}{2} ; 2\right) \\
+		&-2 \vec{b}=(-2 ; 1)}
+	 \Rightarrow
+	 \vec{a}-2 \vec{b}=\left(-\dfrac{3}{2} ; 3\right).
+$$
+
+---
+id: vec_038
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Xác định điểm thỏa mãn tính chất hình học
+muc_do:
+  - VD
+  - VD
+  - VD
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - trung điểm
+  - trọng tâm
+  - hình bình hành
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho tam giác $ABC$ có các đỉnh thỏa mãn $\overrightarrow{OA}=2 \vec{i}-\vec{j}$, $\overrightarrow{OB}=\vec{i}+\vec{j}$, $\overrightarrow{OC}=4 \vec{i}+\vec{j}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $A(2 ;-1)$, $B(1 ; 1)$, $C(4 ; 1)$
+
+b) Đúng/Sai: $E$ là trung điểm $AB$ nên $E\left(\dfrac{3}{2} ; 0\right)$
+
+c) Đúng/Sai: $G$ là trọng tâm $\triangle ABC$ nên $G\left(\dfrac{2}{3} ; \dfrac{1}{3}\right)$
+
+d) Đúng/Sai: Điểm $D$ sao cho $ABCD$ là hình bình hành nên $D(2 ;-1)$
+
+# Lời giải
+
+a) Đúng. Ta có
+\begin{align*}
+	&\overrightarrow{OA}=2 \vec{i}-\vec{j} \Rightarrow A(2 ;-1), \\
+	&\overrightarrow{OB}=\vec{i}+\vec{j} \Rightarrow B(1 ; 1), \\
+	&\overrightarrow{OC}=4 \vec{i}+\vec{j} \Rightarrow C(4 ; 1).
+\end{align*}
+	
+b) Đúng. $E$ là trung điểm $AB$ nên 
+$$
+	\heva{&x_E=\dfrac{x_A+x_B}{2}=\dfrac{2+1}{2}=\dfrac{3}{2}, \\
+	&y_E=\dfrac{y_A+y_B}{2}=\dfrac{-1+1}{2}=0}
+$$ 
+hay $E \left(\dfrac{3}{2} ; 0\right)$.
+	
+c) Sai. $G$ là trọng tâm $\triangle ABC$ nên
+$$
+	\heva{&x_G=\dfrac{x_A+x_B+x_C}{3}=\dfrac{2+1+4}{3}=\dfrac{7}{3}\\
+	&y_G=\dfrac{y_A+y_B+y_C}{3}=\dfrac{-1+1+1}{3}=\dfrac{1}{3}.}
+$$
+hay $G\left(\dfrac{7}{3} ; \dfrac{1}{3}\right)$.
+	
+d) Sai. Do $ABCD$ là hình bình hành nên
+$$
+	\overrightarrow{AD}=\overrightarrow{BC} 
+	\Leftrightarrow
+	\heva{&x_D - x_A = x_C - x_B \\ &y_D - y_A = y_C - y_B}
+	\Leftrightarrow 
+	\heva{&x_D - 2 = 4 - 1 \\ &y_D + 1 = 1 - 1}
+	\Leftrightarrow 
+	\heva{&x_D=5 \\ &y_D=-1.}
+$$
+Vậy $D(5 ;-1)$.
+
+---
+id: vec_039
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Ba điểm thẳng hàng
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 17
+tags:
+  - thẳng hàng
+  - trục hoành
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho hai điểm $M(5 ; 3), N(-3 ; 5)$. Điểm $P$ nằm trên trục hoành sao cho ba điểm $M, N, P$ thẳng hàng. Hoành độ điểm $P$ là bao nhiêu?
+
+# Lời giải
+
+$P$ là điểm nằm trên trục hoành nên $P(x; 0)$.
+Ta có $\overrightarrow{MN}=(-8 ; 2) ; \overrightarrow{MP}=(x-5 ;-3)$.
+Ba điểm $M, N, P$ thẳng hàng khi
+$$
+	\overrightarrow{MP}=k \overrightarrow{MN} 
+	\Leftrightarrow
+	\heva{&x-5=k \cdot(-8) \\ &-3=k \cdot 2}
+	\Leftrightarrow
+	\heva{&x=17 \\ &k=-\dfrac{3}{2}.}
+$$ 
+Vậy $x_P=17$.
+
+---
+id: vec_040
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 6
+tags:
+  - cộng véc-tơ
+  - hệ phương trình
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho $\vec{a}=(m ; 2)$, $\vec{b}=(-3 ; n)$ và $\vec{c}=(-2 m ; 7)$. Tìm $m+n$ biết $\vec{c}=\vec{a}+\vec{b}$.
+
+# Lời giải
+
+Ta có
+$$
+	\vec{c}=\vec{a}+\vec{b} 
+	\Leftrightarrow
+	\heva{&-2 m=m-3 \\ &7=2+n}
+	\Leftrightarrow
+	\heva{&m=1 \\ &n=5.}
+$$
+Vậy $m+n=6$.
+
+---
+id: vec_041
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Các phép toán véc-tơ
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -66
+tags:
+  - biểu diễn véc-tơ
+  - tích tọa độ
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho $A(2 ; 2)$, $B(1 ;-3)$, $C(-3 ; 0)$. Điểm $E$ thoả mãn $\overrightarrow{AE}=-2 \overrightarrow{AB}+3 \overrightarrow{AC}$. Khi đó giá trị của $x_E \cdot y_E$ là bao nhiêu?
+
+# Lời giải
+
+Giả sử $E(x ; y)$.
+Ta có $\overrightarrow{AE}=(x-2 ; y-2)$, $\overrightarrow{AB}=(-1 ;-5)$, $\overrightarrow{AC}=(-5 ;-2)$.
+Suy ra $-2 \overrightarrow{AB}+3 \overrightarrow{AC}=(2-15; 10-6) = (-13; 4)$.
+Do đó
+$$
+	\overrightarrow{AE}=-2 \overrightarrow{AB}+3 \overrightarrow{AC} 
+	\Leftrightarrow
+	\heva{&x-2=-13 \\ &y-2=4}
+	\Leftrightarrow
+	\heva{&x=-11 \\ &y=6.}
+$$
+Vậy $x_E \cdot y_E = (-11) \cdot 6 = -66$.
+
+---
+id: vec_042
+lop: 10
+chu_de: Véc-tơ trong mặt phẳng tọa độ
+dang: Tích vô hướng của hai véc-tơ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - véc-tơ vuông góc
+  - trục hoành
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A(1 ; 5)$, $B(9 ; 3)$. Điểm $M$ thuộc trục hoành sao cho $\widehat{AMB}=90^{\circ}$. Có bao nhiêu điểm $M$ thỏa mãn yêu cầu bài toán?
+
+# Lời giải
+
+Điểm $M$ thuộc trục hoành nên giả sử $M(m ; 0)$.
+Ta có $\overrightarrow{MA}=(1-m ; 5)$, $\overrightarrow{MB}=(9-m ; 3)$.
+Theo đề bài
+$$
+	\widehat{AMB}=90^{\circ} 
+	\Leftrightarrow 
+	\overrightarrow{MA} \cdot \overrightarrow{MB}=0 
+	\Leftrightarrow(1-m)(9-m)+5 \cdot 3=0
+	\Leftrightarrow m^2-10 m+24=0 
+	\Leftrightarrow
+	\hoac{&m=6 \\ &m=4.}
+$$
+Vậy có 2 điểm $M$ thoả mãn bài toán là: $M(4 ; 0)$ và $M(6 ; 0)$.
+
+---
+id: vec_042
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điểm thỏa mãn điều kiện hình học
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - trục hoành
+  - tích vô hướng
+  - tọa độ
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A(1 ; 5)$, $B(9 ; 3)$. Điểm $M$ thuộc trục hoành sao cho $\widehat{A M B}=90^{\circ}$. Có bao nhiêu điểm $ M $ thỏa mãn yêu cầu bài toán?
+
+# Lời giải
+
+Điểm $M$ thuộc trục hoành nên giả sử $M(m ; 0)$.
+
+Ta có
+$$
+	\vv{M A}=(1-m ; 5), \quad
+	\vv{M B}=(9-m ; 3).
+$$
+Theo đề bài
+$$
+	\widehat{A M B}=90^{\circ} 
+	\Leftrightarrow 
+	\vv{M A} \cdot \vv{M B}=0 
+	\Leftrightarrow(1-m)(9-m)+5 \cdot 3=0
+	\Leftrightarrow m^2-10 m+24=0 
+	\Leftrightarrow
+	\hoac{&m=6 \\ &m=4.}
+$$
+Vậy có $ 2 $ trường hợp điểm $M$ thoả mãn bài toán là: $M(4 ; 0)$ và $M(6 ; 0)$.
+
+---
+id: vec_043
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Bài toán cực trị hình học
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - trục tung
+  - độ dài vectơ
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A(4 ;-2)$ và $B(10 ; 4)$. Điểm $M$ trên trục tung sao cho $|\vv{M A}+\vv{M B}|$ đạt giá trị nhỏ nhất. Tung độ của điểm $ M $ có giá trị bao nhiêu?
+
+# Lời giải
+
+Điểm $M$ thuộc trục tung nên giả sử $M(0 ; m)$.
+Ta có
+$$
+	\vv{M A}=(4 ;-2-m), \quad
+	\vv{M B}=(10 ; 4-m).
+$$
+Suy ra 
+$$
+	\vv{M A}+\vv{M B}=(14 ; 2-2 m)
+$$
+Do đó
+$$
+	|\vv{M A}+\vv{M B}|
+	=\sqrt{14^2+(2-2 m)^2} \geq 14.
+$$
+Dấu bằng xảy ra khi $m=1$.
+
+Vậy $|\vv{M A}+\vv{M B}|$ đạt giá trị nhỏ nhất bằng $ 14 $ khi $M$ có toạ độ là $(0 ; 1)$.
+
+---
+id: vec_044
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vectơ cùng phương và độ dài vectơ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - cùng phương
+  - độ dài vectơ
+  - số thực
+---
+
+# Đề bài
+
+Cho các vectơ $\vec{a}=(1 ;-2)$, $\vec{b}=(-2 ;-6)$, $\vec{c}=(m+n ;-m-4 n)$.
+Tồn tại hai số thực $m, n$ sao cho $\vec{c}$ cùng phương $\vec{a}$ và $|\vec{c}|=3 \sqrt{5}$. Khi đó giá trị của biểu thức $ |m+n| $ là bao nhiêu?
+
+# Lời giải
+
+$ \vec{c} $ cùng phương $ \vec{a} $ và $ |\vec{c}|=3 \sqrt{5} $ nên
+\begin{align*}
+	\heva{&\dfrac{m+n}{1}=\dfrac{-m-4 n}{-2} \\ &\sqrt{(m+n)^2+(-m-4 n)^2}=3 \sqrt{5}}
+	&\Leftrightarrow
+	\heva{&- 2 m - 2 n = - m - 4 n \\ &( m + n ) ^ { 2 } + ( m + 4 n ) ^ { 2 } = 4 5} \\
+	&\Leftrightarrow
+	\heva{&m = 2 n \\ &( 3 n ) ^ { 2 } + ( 6 n ) ^ { 2 } = 4 5} \\
+	&\Leftrightarrow
+	\heva{&m=2 n \\ &4 5 n ^ { 2 } = 4 5} \\
+	&\Leftrightarrow
+	\heva{&m=2 \\ &n=1} \vee \heva{&m=-2 \\ &n=-1.}
+\end{align*}
+Trong cả hai trường hợp, ta đều thấy $ |m+n| = 3 $.
