@@ -1,0 +1,1616 @@
+---
+id: quy_tac_cong_001
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên chia hết cho 9
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - quy tắc đếm
+  - số tự nhiên
+  - chia hết
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên lẻ có $6$ chữ số và chia hết cho $9$?
+
+A. $30\,000$
+
+B. $40\,000$
+
+C. $50\,000$
+
+D. $60\,000$
+
+# Lời giải
+
+**Cách 1:**
+Gọi số có $6$ chữ số và chia hết cho $9$ là $\overline{a b c d e f}$.
+Số tự nhiên lẻ nên $f$ có số cách chọn là $5$ cách.
+Số cách chọn $b$, $c$, $d$, $e$ là $10^4$ cách.
+Gọi $r$ là số dư khi tổng $\left(b+c+d+e+f\right)$ chia cho $9$.
+Để $\overline{a b c d e f}$ chia hết cho $9$ thì $r+a\,\vdots\, 9$. Mà $0<r+a<18 \Rightarrow r+a=9 \Rightarrow a=9-r \Rightarrow a$ có $1$ cách chọn.
+Vậy số các số tự nhiên lẻ có $6$ chữ số và chia hết cho $9$ là $5\cdot10^4\cdot1=50\,000$ (số).
+
+**Cách 2:**
+Số lẻ nhỏ nhất có $6$ chữ số và chia hết cho $9$ là $100\,017$.
+Số lẻ lớn nhất có $6$ chữ số và chia hết cho $9$ là $999\,999$.
+Hai số liên tiếp là số lẻ có $6$ chữ số và chia hết cho $9$, cách nhau $18$ đơn vị.
+Vậy số các số tự nhiên lẻ có $6$ chữ số và chia hết cho $9$ là $\dfrac{999\,999-100\,017}{18}+1=50\,000$ (số).
+
+---
+
+---
+id: quy_tac_cong_002
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số lượng số tự nhiên
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc đếm
+  - số tự nhiên
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có bốn chữ số?
+
+A. $9\,000$
+
+B. $4\,536$
+
+C. $5\,040$
+
+D. $10\,000$
+
+# Lời giải
+
+Gọi số tự nhiên cần tìm là $n=\overline{a b c d}$, trong đó $a$, $b$, $c$, $d\in\left\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\right\}$ và $a\ne 0$.
+Ta có $a$ có $9$ cách chọn; $b$, $c$, $d$ mỗi số có $10$ cách chọn.
+Vậy có cả thảy $9\cdot 10^3=9\,000$ số cần tìm.
+
+---
+
+---
+id: quy_tac_cong_003
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên có tổng chữ số cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - quy tắc đếm
+  - số tự nhiên
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên gồm $3$ chữ số đôi một khác nhau và khác $0$, biết rằng tổng của ba chữ số này bằng $8$?
+
+A. $24$
+
+B. $12$
+
+C. $6$
+
+D. $18$
+
+# Lời giải
+
+Gọi số cần tìm là $\overline{a b c}$ với $a$, $b$, $c\in\{ 1;2;3;\ldots ;9\}$ và đôi một khác nhau.
+Do tổng của ba chữ số này bằng $8$ nên $a$, $b$, $c\in\{1; 2; 5\}$ hoặc $a$, $b$, $c\in\{ 1; 3; 4\}$.
+Do đó có $3!+3!=12$ số cần tìm.
+
+---
+
+---
+id: quy_tac_cong_004
+lop: 10
+chu_de: Quy tắc đếm
+dang: Quy tắc nhân thực tế
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - quy tắc nhân
+  - phối hợp đồ
+---
+
+# Đề bài
+
+Có $3$ kiểu mặt đồng hồ đeo tay (vuông, tròn, elip) và $4$ kiểu dây (kim loại, da, vải và nhựa). Hỏi có bao nhiêu cách chọn một chiếc đồng hồ gồm một mặt và một dây?
+
+A. $7$
+
+B. $4$
+
+C. $12$
+
+D. $16$
+
+# Lời giải
+
+Chọn $1$ kiểu mặt từ $3$ kiểu mặt có $3$ cách.
+Chọn $1$ kiểu dây từ $4$ kiểu dây có $4$ cách.
+Vậy theo quy tắc nhân có $12$ cách chọn $1$ chiếc đồng hồ gồm một mặt và một dây.
+
+---
+
+---
+id: quy_tac_cong_005
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số đối xứng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - quy tắc nhân
+  - số đối xứng
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có $5$ chữ số và các chữ số cách đều chữ số chính giữa là giống nhau?
+
+A. $9000$
+
+B. $900$
+
+C. $90000$
+
+D. $500$
+
+# Lời giải
+
+Gọi số tự nhiên cần tìm là $\overline{abcba}$ trong đó $a$, $b$, $c\in\mathbb{N},\,a\ne 0$.
+Ta có 
+* $a$ có $9$ cách chọn khác $0$.
+* $b$ có $10$ cách chọn.
+* $c$ có $10$ cách chọn.
+
+Vậy có tất cả là $9\cdot 10\cdot 10\cdot  1\cdot  1=900$ số.
+
+---
+
+---
+id: quy_tac_cong_006
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn sách khác môn
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - quy tắc cộng
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Trên giá sách có $10$ quyển sách Toán khác nhau, $8$ quyển sách Tiếng Anh khác nhau và $6$ quyển sách Lý khác nhau. Hỏi có bao nhiêu cách chọn hai quyển sách không cùng thuộc một môn?
+
+A. $480$
+
+B. $80$
+
+C. $60$
+
+D. $188$
+
+# Lời giải
+
+Số cách chọn $2$ quyển sách khác nhau gồm $1$ Toán và $1$ Tiếng Anh: $10\cdot8=80$.
+Số cách chọn $2$ quyển sách khác nhau gồm $1$ Toán và $1$ Lý: $10\cdot6=60$.
+Số cách chọn $2$ quyển sách khác nhau gồm $1$ Tiếng Anh và $1$ Lý: $8\cdot6=48$.
+Theo quy tắc cộng, số cách chọn thỏa yêu cầu bài toán: $80+60+48=188$ (cách).
+
+---
+
+---
+id: quy_tac_cong_007
+lop: 10
+chu_de: Quy tắc đếm
+dang: Lập số lẻ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc đếm
+  - số lẻ
+---
+
+# Đề bài
+
+Từ các chữ số $2$, $4$, $6$, $7$ người ta lập thành các số, mỗi số gồm $3$ chữ số. Số các số lẻ lập được là
+
+A. $16$
+
+B. $24$
+
+C. $6$
+
+D. $27$
+
+# Lời giải
+
+Có $1$ cách chọn chữ số lẻ là chữ số $7$. Các chữ số còn lại có $4\cdot 4=16$ cách chọn.
+Vậy có $1\cdot16=16$ số lẻ tạo thành.
+
+---
+
+---
+id: quy_tac_cong_008
+lop: 10
+chu_de: Quy tắc đếm
+dang: Đếm vectơ giữa hai đường thẳng song song
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hình học
+  - vectơ
+---
+
+# Đề bài
+
+Cho hai đường thẳng song song $d$ và $d'$. Trên đường thẳng $d$ lấy $5$ điểm khác nhau, trên đường thẳng $d'$ lấy $8$ điểm khác nhau. Hỏi có thể vẽ được bao nhiêu vectơ mà các điểm đầu và điểm cuối không cùng nằm trên một đường thẳng.
+
+A. $32$
+
+B. $13$
+
+C. $80$
+
+D. $40$
+
+# Lời giải
+
+* Chọn điểm đầu trên $d_1$ và điểm cuối trên $d_2$ thì số vectơ có được là $5\cdot8=40$.
+* Chọn điểm đầu trên $d_2$ và điểm cuối trên $d_1$ thì số vectơ có được là $5\cdot8=40$.
+
+Vậy số vectơ có được là $40+40=80$.
+
+---
+
+---
+id: quy_tac_cong_009
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn số chẵn lẻ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc nhân
+  - chẵn lẻ
+---
+
+# Đề bài
+
+Có bao nhiêu cách chọn $2$ số tự nhiên nhỏ hơn $7$, trong đó có $1$ số lẻ và $1$ số chẵn?
+
+A. $12$
+
+B. $20$
+
+C. $9$
+
+D. $6$
+
+# Lời giải
+
+Tập các số tự nhiên nhỏ hơn $7$ là $\{0, 1, 2, 3, 4, 5, 6\}$.
+* Chọn $1$ số lẻ trong $3$ số lẻ: có $3$ cách.
+* Chọn $1$ số chẵn trong $4$ số chẵn: có $4$ cách.
+
+Áp dụng quy tắc nhân, có $3\cdot 4=12$ cách.
+
+---
+
+---
+id: quy_tac_cong_010
+lop: 10
+chu_de: Quy tắc đếm
+dang: Bài toán đếm phân loại sản phẩm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tổ hợp
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trong kho đèn trang trí đang còn $5$ bóng đèn loại $I$, $7$ bóng đèn loại $II$, các bóng đèn đều khác nhau về màu sắc và hình dáng. Lấy ra $5$ bóng đèn bất kỳ. Hỏi có bao nhiêu khả năng xảy ra số bóng đèn loại $I$ nhiều hơn số bóng đèn loại $II$?
+
+A. $246$
+
+B. $3360$
+
+C. $3480$
+
+D. $245$
+
+# Lời giải
+
+Có $3$ trường hợp xảy ra:
+1. Lấy được $5$ bóng đèn loại $I$: có $1$ cách.
+2. Lấy được $4$ bóng đèn loại $I$, $1$ bóng đèn loại $II$: có $\mathrm{C}_5^4\cdot \mathrm{C}_7^1$ cách.
+3. Lấy được $3$ bóng đèn loại $I$, $2$ bóng đèn loại $II$: có $\mathrm{C}_5^3\cdot \mathrm{C}_7^2$ cách.
+
+Theo quy tắc cộng, có $1+\mathrm{C}_5^4\cdot \mathrm{C}_7^1+\mathrm{C}_5^3\cdot \mathrm{C}_7^2=246$ cách.
+
+---
+
+---
+id: quy_tac_cong_011
+lop: 10
+chu_de: Quy tắc đếm
+dang: Lập số chia hết cho 5
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - quy tắc đếm
+  - chia hết cho 5
+---
+
+# Đề bài
+
+Cho tập $E=\left\{0;1;2;3;4;5;6\right\}$. Hỏi có thể lập được bao nhiêu số tự nhiên gồm $4$ chữ số khác nhau chọn từ tập $E$ sao cho mỗi số chia hết cho $5$?
+
+A. $240$
+
+B. $1200$
+
+C. $100$
+
+D. $220$
+
+# Lời giải
+
+Ref số tự nhiên $4$ chữ số khác nhau là $\overline{a b c d}$.
+1. $d=5$, chọn $a$, $b$, $c$ lần lượt có $5$, $5$, $4$ cách. Do đó $5\cdot5\cdot4=100$ số.
+2. $d=0$, chọn $a$, $b$, $c$ lần lượt có $6$, $5$, $4$ cách. Do đó $6\cdot5\cdot4=120$ số.
+
+Vậy, theo quy tắc cộng có $100+120=220$ số.
+
+---
+
+---
+id: quy_tac_cong_012
+lop: 10
+chu_de: Quy tắc đếm
+dang: Đếm đường đi sơ đồ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc nhân
+  - sơ đồ hình cây
+---
+
+# Đề bài
+
+Từ thành phố $A$ tới thành phố $B$ có $3$ con đường, từ thành phố $B$ tới thành phố $C$ có $4$ con đường. Hỏi có bao nhiêu cách đi từ $A$ tới $C$ qua $B$?
+
+A. $12$
+
+B. $24$
+
+C. $6$
+
+D. $7$
+
+# Lời giải
+
+Từ $A$ đến $B$ có $3$ cách chọn đường đi, từ $B$ đến $C$ có $4$ cách chọn đường đi.
+Vậy số cách chọn đường đi từ $A$ đến $C$ phải đi qua $B$ là  $3\cdot 4=12$ cách.
+
+---
+
+---
+id: quy_tac_cong_013
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn đề tài thực tế
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trong một cuộc thi tìm hiểu về đất nước Việt Nam, ban tổ chức công bố danh sách các đề tài bao gồm: $6$ đề tài về lịch sử, $5$ đề tài về thiên nhiên, $4$ đề tài về con người và $3$ đề tài về văn hóa. Mỗi thí sinh được quyền chọn một đề tài. Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Chọn một đề tài thiên nhiên có $5$ cách
+
+b) Đúng/Sai: Mỗi thí sinh có $360$ khả năng lựa chọn đề tài
+
+c) Đúng/Sai: Chọn một đề tài văn hóa có $3$ cách
+
+d) Đúng/Sai: Chọn một đề tài lịch sử có $720$ cách
+
+# Lời giải
+
+a) **Đúng**. Chọn một đề tài thiên nhiên có $5$ cách.
+
+b) **Sai**. Theo quy tắc cộng, số cách chọn một đề tài là  $6+5+4+3=18$ cách.
+
+c) **Đúng**. Chọn một đề tài văn hóa có $3$ cách.
+
+d) **Sai**. Chọn một đề tài lịch sử có $6$ cách.
+
+---
+
+---
+id: quy_tac_cong_014
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên chẵn lẻ phân biệt
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - quy tắc đếm
+  - số tự nhiên
+---
+
+# Đề bài
+
+Cho số tự nhiên $\overline{a b c d e}$ với $a$, $b$, $c$, $d$, $e$ là các số lấy từ tập $\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\}$. Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Có $13\,776$ số mà các chữ số $a$, $b$, $c$, $d$, $e$ đôi một khác nhau và số tự nhiên đó chẵn
+
+b) Đúng/Sai: Có $13\,440$ số mà các chữ số $a$, $b$, $c$, $d$, $e$ đôi một khác nhau và số tự nhiên đó là số lẻ
+
+c) Đúng/Sai: Có $27\,216$ số mà các chữ số $a$, $b$, $c$, $d$, $e$ đôi một khác nhau
+
+d) Đúng/Sai: Có $100\,000$ số thỏa mãn
+
+# Lời giải
+
+a) **Đúng**.
+**Cách 1:**
+* Trường hợp 1: $e=0$.
+Chọn $a \neq 0$ (tức là $a$ cũng khác $e$): có $9$ cách chọn.
+Mỗi chữ số $b$, $c$, $d$ lần lượt có $8$, $7$, $6$ cách chọn. Khi đó, ta có được: $1\cdot9\cdot8\cdot7\cdot6=3\,024$ (số).
+* Trường hợp 2: $e\in\left\{2 ; 4 ; 6 ; 8\right\}$. Chọn $e$: có $4$ cách chọn.
+Chọn $a$ với $a\neq 0$, $a\neq e$, ta có $8$ cách chọn.
+Mỗi chữ số $b$, $c$, $d$ lần lượt có $8$, $7$, $6$ cách chọn. Khi đó ta có được: $4\cdot8\cdot8\cdot7\cdot6=10\,752$ (số).
+Vậy số các số tự nhiên thỏa mãn: $3\,024+10\,752=13\,776$ (số).
+
+**Cách 2:**
+Số các số tự nhiên gồm $5$ chữ số phân biệt là $27\,216$ (số).
+Số các số tự nhiên lẻ gồm $5$ chữ số phân biệt là $13\,440$ (số).
+Theo quy tắc loại trừ, ta có số các số tự nhiên chẵn gồm $5$ chữ số phân biệt: $27\,216-13\,440=13\,776$ (số).
+
+b) **Đúng**.
+Gọi số tự nhiên cần tìm: $\overline{a b c d e}$.
+* Chọn $e\in\{1; 3; 5; 7; 9\}$. Suy ra có $5$ cách chọn $e$.
+* Chọn $a$ với $a\neq 0, a\neq e$. Suy ra có $8$ cách chọn $a$.
+
+Mỗi chữ số $b$, $c$, $d$ lần lượt có $8$, $7$, $6$ cách chọn.
+Vậy số các số tự nhiên thỏa mãn là $5\cdot8\cdot8\cdot7\cdot6=13\,440$ (số).
+
+c) **Đúng**.
+Gọi số tự nhiên cần tìm: $\overline{a b c d e}$.
+* Chọn $a\colon a\neq 0\Rightarrow$ Có $9$ cách chọn $a$.
+* Chọn $b\colon b\neq a\Rightarrow$ Có $9$ cách chọn $b$.
+
+Theo quy luật trên thì số cách chọn $c$, $d$, $e$ lần lượt là $8$, $7$, $6$. Vậy số các số tự nhiên thỏa mãn: $9\cdot9\cdot8\cdot7\cdot6 =27216$ (số).
+
+d) **Sai**.
+Gọi số tự nhiên cần tìm: $\overline{a b c d e}$ với $a$, $b$, $c$, $d$, $e$ là các số lấy từ tập $\left\{0; 1; 2; 3; 4; 5; 6; 7; 8; 9\right\}$.
+Vì các số được chọn là tùy ý nên số cách chọn mỗi chữ số $a$, $b$, $c$, $d$, $e$ đều là $10$ (cách).
+Vậy số các số tự nhiên thỏa mãn: $9\cdot 10^4=90000$ (số).
+
+---
+
+---
+id: quy_tac_cong_015
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn sách phân loại môn
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - quy tắc cộng
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Trên giá sách có $5$ quyển sách Tiếng Anh khác nhau, $6$ quyển sách Toán khác nhau và $ 8$ quyển sách Tiếng Việt khác nhau. Xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Số cách chọn ba quyển sách khác môn là $240$ (cách)
+
+b) Đúng/Sai: Số cách chọn hai quyển gồm Tiếng Anh và Toán là $11$ (cách)
+
+c) Đúng/Sai: Số cách chọn ra một quyển sách từ số sách đã cho là $19$ (cách)
+
+d) Đúng/Sai: Số cách chọn hai quyển sách khác môn là $118$ (cách)
+
+# Lời giải
+
+a) **Đúng**.
+* Chọn một quyển sách Tiếng Anh: có $5$ (cách).
+* Chọn một quyển sách Toán: có $6$ (cách).
+* Chọn một quyển sách Tiếng Việt: có $8$ (cách).
+
+Số cách chọn ba quyển sách khác môn là  $5\cdot6\cdot 8=240$ (cách).
+
+b) **Sai**. Chọn được hai quyển gồm Tiếng Anh và Toán.
+Số cách chọn là $5\cdot 6=30$ (cách).
+
+c) **Đúng**.
+Số cách chọn ra một quyển sách từ số sách đã cho: $5+6+8=19$ (cách).
+
+d) **Đúng**.
+* Trường hợp 1: Chọn được hai quyển gồm Tiếng Anh và Toán. Số cách chọn là $5\cdot6=30$ (cách).
+* Trường hợp 2: Chọn được hai quyển gồm Tiếng Anh và Tiếng Việt. Số cách chọn là $5\cdot 8=40$ (cách).
+* Trường hợp 3: Chọn được hai quyển gồm Toán và Tiếng Việt. Số cách chọn là $6\cdot 8=48$ (cách).
+
+Số cách chọn hai quyển sách khác môn là  $30+40+48=118$ (cách).
+
+---
+
+---
+id: quy_tac_cong_016
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn bút thực tế
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - quy tắc cộng
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Trong hộp bút của Lan có $4$ chiếc bút chì, $5$ chiếc bút bi và $2$ chiếc bút máy (tất cả đều khác nhau). Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Số cách chọn $1$ chiếc bút chì và $1$ chiếc bút bi là $20$ (cách)
+
+b) Đúng/Sai: Số cách chọn $1$ chiếc bút chì và $1$ chiếc bút máy là $4$ (cách)
+
+c) Đúng/Sai: Số cách chọn $1$ chiếc bút bi và $1$ chiếc bút máy là $7$ (cách)
+
+d) Đúng/Sai: Số cách chọn $2$ chiếc bút khác loại với nhau từ hộp bút của Lan là $38$ (cách)
+
+# Lời giải
+
+a) **Đúng**. Chọn $1$ chiếc bút chì và $1$ chiếc bút bi có $4\cdot 5=20$ (cách).
+
+b) **Sai**. Chọn $1$ chiếc bút chì và $1$ chiếc bút máy có $4\cdot 2=8$ (cách).
+
+c) **Sai**. Chọn $1$ chiếc bút bi và $1$ chiếc bút máy có $5\cdot 2=10$ (cách).
+
+d) **Đúng**. Áp dụng quy tắc cộng, ta có số cách chọn $2$ chiếc bút khác loại với nhau từ hộp bút của Lan là  $20+8+10=38$ (cách).
+
+---
+
+---
+id: quy_tac_cong_017
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn đề tài thực tế
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 31
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trong một cuộc thi tìm hiểu về đất nước Việt Nam, ban tổ chức công bố danh sách các đề tài bao gồm: $8$ đề tài về lịch sử, $7$ đề tài về thiên nhiên, $10$ đề tài về con người và $6$ đề tài về văn hóa. Mỗi thí sinh được quyền chọn một đề tài. Hỏi mỗi thí sinh có bao nhiêu khả năng lựa chọn đề tài?
+
+# Lời giải
+
+Phương án 1: Nếu chọn đề tài về lịch sử có $8$ cách.
+Phương án 2: Nếu chọn đề tài về thiên nhiên có $7$ cách.
+Phương án 3: Nếu chọn đề tài về con người có $10$ cách.
+Phương án 4: Nếu chọn đề tài về văn hóa có $6$ cách.
+
+Theo quy tắc cộng, ta có $8+7+10+6=31$ cách chọn.
+
+---
+
+---
+id: quy_tac_cong_018
+lop: 10
+chu_de: Quy tắc đếm
+dang: Xếp hàng dọc vị trí cố định
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 24
+tags:
+  - hoán vị
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một nhóm gồm $5$ em học sinh (trong đó có một bạn tên Tùng) đang đứng xếp thành một hàng dọc, hỏi có bao nhiêu cách xếp sao cho Bạn Tùng đứng đầu hàng?
+
+# Lời giải
+
+Giai đoạn 1: Xếp bạn Tùng đứng ở đầu hàng: có $1$ cách.
+Giai đoạn 2: Chọn một học sinh đứng vị trí tiếp theo: có $4$ cách.
+Giai đoạn 3: Chọn một học sinh đứng vị trí tiếp theo: có $3$ cách.
+Giai đoạn 4: Chọn một học sinh đứng vị trí tiếp theo: có $2$ cách.
+Giai đoạn 5: Chọn một học sinh đứng cuối hàng: có $1$ cách.
+Số cách xếp một hàng thỏa mãn là $1\cdot 4\cdot 3\cdot 2\cdot 1=24$ (cách).
+
+---
+
+---
+id: quy_tac_cong_019
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên có điều kiện giới hạn giá trị
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 689
+tags:
+  - quy tắc đếm
+  - số tự nhiên chẵn
+---
+
+# Đề bài
+
+Từ các chữ số $0$, $1$, $2$, $3$, $4$, $5$, $6$, $7$, $8$ có thể lập được bao nhiêu số tự nhiên chẵn có $4$ chữ số khác nhau đôi một và không lớn hơn $4\,568$?
+
+# Lời giải
+
+Gọi số cần tìm có dạng: $\overline{a b c d}$. Xảy ra các trường hợp sau:
+* Trường hợp 1: $a<4$. Chọn $a\in\left\{1,2,3\right\}$ xảy ra hai tình huống:
+  * $a\in\left\{1,3\right\}$. Chọn $a$ có $2$ cách. Chọn $d\in\{0,2,4,6,8\}$ có $5$ cách. Chọn $b\neq a, d$ có $7$ cách. Chọn $c\neq a, b, d$ có $6$ cách.
+  * $a=2$. Chọn $d\in\{0,4,6,8\}$ có $4$ cách. Chọn $b\neq a, d$ có $ 7$ cách. Chọn $c\neq a, b, d$ có $6$ cách.
+  Vậy số kết quả trong trường hợp này là  $2\cdot 5\cdot7 \cdot6+4\cdot7 \cdot6=588$ (số).
+* Trường hợp 2: $a=4, b<5$. Chọn $b\in\{0,1,2,3\}$ xảy ra hai tình huống:
+  * $b\in\{1,3\}$. Chọn $b$ có $2$ cách. Chọn $d\in\{0,2,6,8\}$ có $4$ cách. Chọn $c\neq a, b, d$ có $6$ cách.
+  * $b\in\{0,2\}$. Chọn $b$ có $2$ cách. Chọn $d\in\left\{0,2,6,8\right\}\setminus \left\{b\right\}$ có $3$ cách. Chọn $c\neq a, b, d$ có $6$ cách.
+  Vậy số kết quả trong trường hợp này là  $2\cdot 4\cdot6+2\cdot3 \cdot6=84$ (số).
+* Trường hợp 3: $a=4, b=5, c<6$. Chọn $c\in\left\{0,1,2,3\right\}$ xảy ra hai tình huống:
+  $c\in\{1,3\}$. Chọn $c$ có $2$ cách. Chọn $d\in\{0,2,6,8\}$ có $4$ cách.
+  $c\in\{0,2\}$. Chọn $c$ có $2$ cách. Chọn $d\in\left\{0,2,6,8\right\}\setminus \left\{b\right\}$ có $3$ cách.
+  Vậy số kết quả trong trường hợp này là $2\cdot4+2\cdot3=14$ (số).
+* Trường hợp 4: $a=4$, $b=5$, $c=6$, $d\leq 8$. Chọn $d\in\left\{0{,}2{,}8\right\}$ có $3$ cách.
+  Vậy số kết quả trong trường hợp này là  $3$ (số).
+
+Kết quả cần tìm là  $588+84+14+3=689$ (số).
+
+---
+
+---
+id: quy_tac_cong_020
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên không chia hết cho 5
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 100
+tags:
+  - quy tắc loại trừ
+  - chia hết cho 5
+---
+
+# Đề bài
+
+Từ $6$ chữ số $1$, $2$, $3$, $4$, $5$, $6$ có thể lập được bao nhiêu số các số gồm $3$ chữ số đôi một khác nhau không chia hết cho $5$?
+
+# Lời giải
+
+Gọi số có dạng $\overline{a b c}$ là số có ba chữ số đôi một khác nhau và chia hết cho $5$ với $a$, $b$, $c\in\{1; 2; 3; 4; 5; 6\}$ thì số cần tìm có dạng $ \overline{a b 5}$.
+Chọn $c$ có $1$ cách chọn ($c=5$);
+Khi đó chọn $a$ có $5$ cách chọn (khác $d$), chọn $b$ có $4$ cách chọn.
+Vậy có tất cả $1\cdot5\cdot4=20$ số chia hết cho $5$ được lấy từ $\{1 ; 2 ; 3 ; 4 ; 5 ; 6\}$.
+Có $6\cdot 5\cdot 4=120$ số có ba chữ số khác nhau được lấy từ $\{1; 2; 3; 4; 5; 6\}$. 
+Vậy có $120-20=100$ số cần tìm.
+
+---
+
+---
+id: quy_tac_cong_021
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên chia hết cho 9
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 4
+tags:
+  - quy tắc đếm
+  - dấu hiệu chia hết
+---
+
+# Đề bài
+
+Từ 6 chữ số $1$, $2$, $3$, $4$, $5$, $6$ có thể lập được bao nhiêu số có $2$ chữ số khác nhau và chia hết cho $9$?
+
+# Lời giải
+
+Số có hai chữ số chia hết cho $9$ nếu tổng của chúng chia hết cho $9$, trong $6$ chữ số chỉ có $2$ cặp số $\{4,5\}$ và $\{3,6\}$. Do đó ta có $4$ số thỏa mãn yêu cầu là  $45$, $54$, $36$, $63$.
+
+---
+
+---
+id: quy_tac_cong_022
+lop: 10
+chu_de: Quy tắc đếm
+dang: Bài toán xếp sách xen kẽ
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - hoán vị
+  - xen kẽ
+---
+
+# Đề bài
+
+Xét biến cố "Xếp $6$ quyển sách Toán và $6$ quyển sách Tiếng Anh (các quyển sách là khác nhau) vào một hàng ngang của giá sách sao cho các quyển sách Toán và sách Tiếng Anh ở vị trí xen kẽ nhau". Tổng các chữ số tạo thành kết quả bằng bao nhiêu?
+
+# Lời giải
+
+Giả sử trên hàng ngang của giá sách có đánh số từ $1$ đến $12$.
+Nếu $6$ quyển sách Toán được xếp vào vị trí lẻ thì $6$ quyển sách Tiếng Anh xếp vào các vị trí còn lại nên có $6!$ cách xếp quyển sách Toán và $6!$ cách xếp quyển sách Tiếng Anh. Suy ra có $(6!)^2=518\,400$ cách xếp.
+Nếu $6$ quyển sách Toán được xếp vào vị trí chẵn thì $6$ quyển sách Tiếng Anh xếp vào các vị trí còn lại nên có $6!$ cách xếp quyển sách Toán và $6!$ cách xếp quyển sách Tiếng Anh. Suy ra có $(6!)^2=518\,400$ cách xếp.
+Vậy có tất cả $2\cdot 518\,400=1\,036\,800$ cách sắp xếp sao cho các quyển sách Toán và sách Tiếng Anh ở vị trí xen kẽ nhau.
+Tổng các chữ số tạo thành kết quả là: $1 + 0 + 3 + 6 + 8 + 0 + 0 = 18$.
+
+---
+
+---
+id: quy_tac_cong_023
+lop: 10
+chu_de: Quy tắc đếm
+dang: Lập số chia hết cho 5
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - quy tắc đếm
+  - chia hết cho 5
+---
+
+# Đề bài
+
+Có bao nhiêu số tự nhiên có $3$ chữ số đôi một phân biệt và chia hết cho $5$?
+
+A. $256$
+
+B. $1458$
+
+C. $128$
+
+D. $136$
+
+# Lời giải
+
+Gọi $x=\overline{a b c}$ (với $a\ne b,\,\,b\ne c,\,\,c\ne a$) là số tự nhiên có $3$ chữ số đôi một phân biệt và chia hết cho $5$. Vì $x \,\vdots\, 5$ nên $c\in\left\{0;5\right\}$.
+* Trường hợp 1: $c=0$.
+  Chọn $c$: có $1$ cách.
+  Chọn $a$: có $9$ cách ($a\ne 0$).
+  Chọn $b$: có $8$ cách ($b\ne 0, b\ne a$).
+  $\Rightarrow $ có $1\cdot9\cdot8=72$ số.
+* Trường hợp 2: $c=5$.
+  Chọn $c$: có $1$ cách.
+  Chọn $a$: có $8$ cách ($a\ne 5, a\ne 0$).
+  Chọn $b$: có $8$ cách ($b\ne 5, b\ne a$).
+  $\Rightarrow $ có $1\cdot8\cdot8=64$ số.
+
+Theo quy tắc cộng, ta có tất cả: $72+64=136$ số thỏa mãn yêu cầu bài toán.
+
+---
+
+---
+id: quy_tac_cong_024
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên có chữ số khác nhau
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hoán vị
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Cho các số $1$, $5$, $6$, $7$ có thể lập được bao nhiêu số tự nhiên có $4$ chữ số và các chữ số khác nhau?
+
+A. $12$
+
+B. $64$
+
+C. $24$
+
+D. $256$
+
+# Lời giải
+
+Số cần tìm có dạng $\overline{abcd}$ với $a,b,c,d\in\{1,5,6,7\}$. Khi đó:
+* $a$ có $4$ cách chọn.
+* $b$ có $3$ cách chọn.
+* $c$ có $2$ cách chọn.
+* $d$ có $1$ cách chọn.
+
+Vậy có $4\cdot3\cdot2\cdot1=24$ số thỏa mãn yêu cầu của đề bài.
+
+---
+
+---
+id: quy_tac_cong_025
+lop: 10
+chu_de: Quy tắc đếm
+dang: Đếm số dựa trên bài toán hình học tam giác
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tam giác cân
+  - quy tắc đếm
+---
+
+# Đề bài
+
+Có tất cả bao nhiêu số tự nhiên có ba chữ số $\overline{a b c}$ sao cho $a$, $b$, $c$ là độ dài ba cạnh của một tam giác cân.
+
+A. $45$
+
+B. $165$
+
+C. $81$
+
+D. $216$
+
+# Lời giải
+
+Không mất tính tổng quát, giả sử $a=b$ $\Rightarrow c<2a$ (Bất đẳng thức tam giác).
+* $a=b=1 \Rightarrow c<2\Rightarrow c=1$.
+* $a=b=2 \Rightarrow c<4\Rightarrow c\in\{1;2;3\}$.
+* $a=b=3 \Rightarrow c<6\Rightarrow c\in\{1;2;3;4;5\}$.
+* $a=b=4 \Rightarrow c<8\Rightarrow c\in\{1;2;3;4;5;\ldots;7\}$.
+* $a=b\in\{ 5;6;7;8;9\} \Rightarrow c\in\{ 1;2;3;\ldots;9\}$.
+
+Do đó có tất cả $1+3+5+7+9\cdot5=61$ bộ số thỏa mãn bài toán trong đó có $9$ bộ số là độ dài ba cạnh của một tam giác đều và $52$ bộ số là độ dài của ba cạnh tam giác cân không đều.
+Với mỗi bộ ba số $a$, $b$, $c$ là độ dài ba cạnh của tam giác cân, ta có $3$ cách sắp xếp để tạo thành một số có ba chữ số.
+Vậy số các số cần tìm là  $9+52\cdot3=165$.
+
+---
+
+---
+id: quy_tac_cong_026
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn thực đơn thực tế
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một người vào cửa hàng ăn, người đó chọn thực đơn gồm $1$ món ăn trong $5$ món ăn, $1$ loại quả tráng miệng trong $4$ loại quả tráng miệng và $1$ loại nước uống trong $3$ loại nước uống. Hỏi có bao nhiêu cách chọn thực đơn?
+
+A. $3$
+
+B. $12$
+
+C. $60$
+
+D. $75$
+
+# Lời giải
+
+Có $5$ cách chọn $1$ món ăn trong $5$ món ăn, $4$ cách chọn $1$ loại quả tráng miệng trong $4$ loại quả tráng miệng và $3$ cách chọn $1$ loại nước uống trong $3$ loại nước uống.
+Theo quy tắc nhân có $5\cdot 4\cdot3=60$ cách chọn thực đơn.
+
+---
+
+---
+id: quy_tac_cong_027
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn bi đủ màu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc nhân
+  - chọn bi
+---
+
+# Đề bài
+
+Một hộp đựng $5$ bi đỏ và $4$ bi xanh. Có bao nhiêu cách lấy $2$ bi có đủ cả $2$ màu?
+
+A. $20$
+
+B. $9$
+
+C. $36$
+
+D. $16$
+
+# Lời giải
+
+Lấy $1$ bi đỏ có $5$ cách.
+Lấy $1$ bi xanh có $4$ cách.
+Theo quy tắc nhân, số cách lấy $2$ bi có đủ cả $2$ màu là $5\cdot 4=20$ cách.
+
+---
+
+---
+id: quy_tac_cong_028
+lop: 10
+chu_de: Quy tắc đếm
+dang: Bài toán thực tế chọn nam nữ không là vợ chồng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - quy tắc nhân
+  - loại trừ
+---
+
+# Đề bài
+
+Có $10$ cặp vợ chồng đi dự tiệc. Tính số cách chọn một người đàn ông và một người đàn bà trong bữa tiệc phát biểu ý kiến sao cho hai người đó không là vợ chồng.
+
+A. $19$
+
+B. $90$
+
+C. $100$
+
+D. $20 \ \ \ \ $
+
+# Lời giải
+
+Chọn $1$ người đàn ông phát biểu có $10$ cách.
+Chọn $1$ người đàn bà phát biểu có $10$ cách.
+Số cách chọn một người đàn ông và một người đàn bà trong bữa tiệc phát biểu ý kiến sao cho hai người đó không là vợ chồng là $10\cdot10-10=90$.
+
+---
+
+---
+id: quy_tac_cong_029
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn bút chì hai hộp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc cộng
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Có hai hộp bút chì màu. Hộp thứ nhất có $5$ bút chì màu đỏ khác nhau và $7$ bút chì màu xanh khác nhau. Hộp thứ hai có $8$ bút chì màu đỏ khác nhau và $4$ bút chì màu xanh khác nhau. Chọn ngẫu nhiên hai cây bút chì. Số cách để có $1$ cây bút chì màu đỏ và $1$ cây bút chì màu xanh là
+
+A. $143$
+
+B. $35$
+
+C. $32$
+
+D. $24$
+
+# Lời giải
+
+* Số cách để chọn được $1$ cây bút chì màu đỏ là $5+8=13$ cách.
+* Số cách để chọn được $1$ cây bút chì màu xanh là $7+4=11$ cách.
+
+Vậy có $13\cdot11=143$ cách.
+
+---
+
+---
+id: quy_tac_cong_030
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số chẵn có chữ số đôi một khác nhau
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số chẵn
+  - chữ số khác nhau
+---
+
+# Đề bài
+
+Từ các chữ số $0$, $1$, $2$, $3$, $4$, $5$ có thể lập được bao nhiêu số chẵn có $4$ chữ số đôi một khác nhau?
+
+A. $156$
+
+B. $240$
+
+C. $160$
+
+D. $752$
+
+# Lời giải
+
+Gọi số cần tìm là $\overline{a b c d}$, trong đó $a\neq 0$ và $a$, $b$, $c$, $d$ đôi một khác nhau.
+Vì $\overline{a b c d}$ là số chẵn nên $d\in\left\{0,\text2,\text4\right\}$.
+* Trường hợp 1: Nếu $d=0$
+  * $d$ có $1$ cách chọn.
+  * $a$ có $5$ cách chọn.
+  * $b$ có $4$ cách chọn.
+  * $c$ có $3$ cách chọn.
+  Suy ra có $1\cdot5\cdot4\cdot3=60$ cách chọn.
+* Trường hợp 2: Nếu $d\ne 0$
+  * $d$ có $2$ cách chọn.
+  * $a$ có $4$ cách chọn.
+  * $b$ có $4$ cách chọn.
+  * $c$ có $3$ cách chọn.
+  Suy ra có $2\cdot4\cdot4\cdot3=96$ cách chọn.
+
+Vậy có $60+96=156$ số chẵn có $4$ chữ số khác nhau.
+
+---
+
+---
+id: quy_tac_cong_031
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn đồ vật thực tế
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Có $10$ cái bút khác nhau và $8$ quyển sách giáo khoa khác nhau. Một bạn học sinh cần chọn $1$ cái bút và $1$ quyển sách. Hỏi bạn học sinh đó có bao nhiêu cách chọn?
+
+A. $80$
+
+B. $70$
+
+C. $60$
+
+D. $90$
+
+# Lời giải
+
+Số cách chọn $1$ cái bút có $10$ cách, số cách chọn $1$ quyển sách có $8$ cách.
+Vậy theo quy tắc nhân, số cách chọn $1$ cái bút và $1$ quyển sách là  $10\cdot 8=80$ cách.
+
+---
+
+---
+id: quy_tac_cong_032
+lop: 10
+chu_de: Quy tắc đếm
+dang: Phối bộ đồ có điều kiện ràng buộc
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc cộng
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một người có $5$ cái áo khác nhau trong đó $3$ áo màu trắng và $2$ áo màu xanh, có $3$ cái cà vạt khác nhau trong đó có $1$ cà vạt màu đỏ và $2$ cà vạt màu vàng. Hỏi người đó có bao nhiêu cách phối một bộ đồ biết nếu chọn áo xanh thì không cà vạt màu đỏ.
+
+A. $15$
+
+B. $5$
+
+C. $10$
+
+D. $13$
+
+# Lời giải
+
+* Trường hợp 1: Chọn áo màu trắng có $3$ cách.
+  Chọn cà vạt có $3$ cách
+  Vậy có: $3\cdot3=9$ cách phối một bộ đồ.
+* Trường hợp 2: Chọn áo màu xanh có $2$ cách.
+  Chọn cà vạt màu vàng có $3$ cách.
+  Vậy có: $3\cdot2=6$ cách phối một bộ đồ.
+
+Theo qui tắc cộng ta có cách phối một bộ đồ thỏa mãn yêu cầu là  $6+9=15$ (cách).
+
+---
+
+---
+id: quy_tac_cong_033
+lop: 10
+chu_de: Quy tắc đếm
+dang: Bài toán đi qua các cửa tham quan
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một khu di tích nọ có bốn cửa Đông, Tây, Nam, Bắc. Một người đi vào tham quan rồi đi ra, khi vào và ra phải đi hai cửa khác nhau. Tất cả các cách đi vào và đi ra của người đó là.
+
+A. $8$
+
+B. $4$
+
+C. $12$
+
+D. $16$
+
+# Lời giải
+
+Cứ mỗi cách đi vào sẽ có $3$ cách để đi ra.
+Người đó có $4$ lựa chọn để đi vào.
+Do đó có $4\cdot 3=12$ cách để đi vào và đi ra thỏa mãn yêu cầu bài toán.
+
+---
+
+---
+id: quy_tac_cong_034
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn học sinh nam nữ đi văn nghệ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tắc nhân
+---
+
+# Đề bài
+
+Một tổ có $6$ học sinh nam và $5$ học sinh nữ. Có bao nhiêu cách chọn một học sinh nam và một học sinh nữ để đi tập văn nghệ?
+
+A. $30$
+
+B. $C_{11}^2$
+
+C. $11$
+
+D. $A_{11}^2$
+
+# Lời giải
+
+Có $6$ cách chọn $1$ học sinh nam từ $6$ học sinh nam.
+Ứng với mỗi cách chọn $1$ học sinh nam có $5$ cách chọn $1$ học sinh nữ từ $5$ học sinh nữ.
+Theo quy tắc nhân có $6\cdot 5=30$ cách chọn một học sinh nam và một học sinh nữ để đi tập văn nghệ.
+
+---
+
+---
+id: quy_tac_cong_035
+lop: 10
+chu_de: Quy tắc đếm
+dang: Bài toán xếp hàng nam nữ
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - hoán vị
+  - xếp hàng
+---
+
+# Đề bài
+
+Có $3$ học sinh nữ và $4$ học sinh nam cùng xếp theo một hàng ngang. Khi đó, xét tính đúng sai của ác mệnh đề sau:
+
+a) Đúng/Sai: Có $5\,040$ cách xếp hàng tùy ý $7$ học sinh
+
+b) Đúng/Sai: Có $208$ cách xếp hàng để học sinh cùng giới đứng cạnh nhau
+
+c) Đúng/Sai: Có $144$ cách xếp hàng để học sinh nam và nữ xếp xen kẽ
+
+d) Đúng/Sai: Có $700$ cách xếp hàng để học sinh nữ đứng cạnh nhau
+
+# Lời giải
+
+a) **Đúng**.
+* Xếp một học sinh vào vị trí thứ nhất: có $7$ cách.
+* Xếp một học sinh vào vị trí thứ hai: có $6$ cách.
+* Các vị trí tiếp theo lần lượt có số cách tương ứng là $5,4,3,2,1$ (cách).
+
+Vậy số cách xếp hàng tùy ý $7$ học sinh trên là  $7\cdot 6\cdot 5\cdot 4\cdot 3\cdot 2\cdot 1=5\,040$.
+
+b) **Sai**.
+* Xếp các em nữ trong một hàng $3$ người, ta có: $3\cdot 2\cdot 1=6$ (cách).
+* Xếp các em nam trong một hàng $4$ người, ta có: $4\cdot 3\cdot 2\cdot 1=24$ (cách).
+* Số cách hoán đổi vị trí của hai nhóm trên là $2$.
+
+Vậy số cách xếp học sinh thỏa mãn là  $6\cdot 24\cdot 2=288$ (cách).
+
+c) **Đúng**.
+Hàng được xếp phải thỏa mãn: Nam-Nữ-Nam-Nữ-Nam-Nữ-Nam.
+* Chọn một nam sinh cho vị trí thứ nhất: có $4$ cách.
+* Chọn một nữ sinh cho vị trí thứ hai: có $3$ cách.
+* Số cách chọn học sinh cho các vị trí tiếp theo lần lượt là  $3$, $2$, $2$, $1$.
+
+Vậy số cách xếp thỏa mãn là  $4\cdot 3\cdot 3\cdot 2\cdot 2\cdot 1=144$ (cách).
+
+d) **Sai**.
+Gọi $X$ là nhóm gồm $3$ học sinh nữ.
+Số cách xếp $3$ học sinh trong $X$ là  $3\cdot 2\cdot 1=6$ (cách).
+Lúc này ta có $5$ phần tử để đưa vào hàng gồm có $X$ cùng với $4$ nam sinh ($X$ được tính là $1$ phần tử).
+Chọn $1$ phần tử cho vị trí thứ nhất: có $5$ (cách).
+Số cách chọn phần tử cho các vị trí tiếp theo lần lượt là $4$, $3$, $2$, $1$.
+Vậy số cách xếp hàng thỏa mãn là  $6\cdot 5\cdot 4\cdot 3\cdot 2\cdot 1=720$ (cách).
+
+---
+
+---
+id: quy_tac_cong_036
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn bi phân loại màu sắc
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - quy tắc nhân
+  - chọn bi
+---
+
+# Đề bài
+
+Một túi có $20$ viên bi khác nhau trong đó có $7$ bi đỏ, $8$ bi xanh và $5$ bi vàng. Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Số cách chọn ba bi khác màu là $280$ (cách)
+
+b) Đúng/Sai: Số cách chọn hai viên khác màu bi đỏ và bi vàng $40$ (cách)
+
+c) Đúng/Sai: Số cách chọn hai viên khác màu bi đỏ và bi xanh là $56$ (cách)
+
+d) Đúng/Sai: Số cách chọn hai bi khác màu là  $96$ (cách)
+
+# Lời giải
+
+a) **Đúng**.
+Việc chọn ba viên bi khác màu phải tiến hành ba giai đoạn liên tiếp:
+1. Chọn một viên bi đỏ: có $7$ cách.
+2. Chọn một viên bi xanh: có $8$ cách.
+3. Chọn một viên bi vàng: có $5$ cách.
+
+Số cách chọn ba bi khác màu là $7\cdot 8\cdot 5=280$ (cách).
+
+b) **Sai**.
+Hai viên khác màu là bi đỏ và bi vàng. Ta có số cách chọn là  $7\cdot 5=35$ (cách).
+
+c) **Đúng**.
+Hai viên khác màu là bi đỏ và bi xanh.
+1. Chọn một viên bi đỏ: có $7$ cách.
+2. Chọn một viên bi xanh: có $8$ cách.
+
+Số cách chọn trường hợp này là $7\cdot 8=56$ (cách).
+
+d) **Sai**.
+Hai viên khác màu là bi xanh và bi vàng. Ta có số cách chọn là  $8\cdot 5=40$ (cách).
+Vậy số cách chọn hai bi khác màu là  $56+35+40=131$ (cách).
+
+---
+
+---
+id: quy_tac_cong_037
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn đồ vật dụng cụ học tập
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trên bàn có $8$ chiếc bút chì khác nhau, $6$ chiếc bút bi khác nhau và $10$ cuốn tập khác nhau. Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Có $480$ cách chọn một đồ vật duy nhất hoặc một cây bút chì hoặc một cây bút bi hoặc một cuốn tập
+
+b) Đúng/Sai: Nếu chọn một cây bút chì thì có $8$ cách
+
+c) Đúng/Sai: Nếu chọn một cuốn tập thì có $10$ cách
+
+d) Đúng/Sai: Nếu chọn một cây bút bi thì có $6$ cách
+
+# Lời giải
+
+a) **Sai**. Theo quy tắc cộng, ta có $8+6+10=24$ cách chọn.
+
+b) **Đúng**. Nếu chọn một cây bút chì: có $8$ cách.
+
+c) **Đúng**. Nếu chọn một cuốn tập thì có $10$ cách.
+
+d) **Đúng**. Nếu chọn một cây bút bi thì có $6$ cách.
+
+---
+
+---
+id: quy_tac_cong_038
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn hoa mua hàng thực tế
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Một cửa hàng có $7$ bó hoa ly, $15$ bó hoa hồng và $6$ bó hoa lan. Bạn Nam muốn mua một bó hoa từ cửa hàng đó. Khi đó, xét tính đúng sai của các mệnh đề sau:
+
+a) Đúng/Sai: Nếu chọn hoa ly thì có $7$ cách chọn một bó hoa
+
+b) Đúng/Sai: Nếu chọn hoa hồng thì có $15$ cách chọn một bó hoa
+
+c) Đúng/Sai: Nếu chọn hoa lan thì có $6$ cách chọn một bó hoa
+
+d) Đúng/Sai: Bạn Nam có $630$ cách chọn mua một bó hoa từ cửa hàng
+
+# Lời giải
+
+a) **Đúng**. Nếu chọn hoa ly thì có $7$ cách chọn một bó hoa.
+
+b) **Đúng**. Nếu chọn hoa hồng thì có $15$ cách chọn một bó hoa.
+
+c) **Đúng**. Nếu chọn hoa lan thì có $6$ cách chọn một bó hoa.
+
+d) **Sai**. Vậy bạn Nam có $7+15+6=28$ cách chọn mua một bó hoa từ cửa hàng.
+
+---
+
+---
+id: quy_tac_cong_039
+lop: 10
+chu_de: Quy tắc đếm
+dang: Chọn học sinh khối học thực tế
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 605
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Trong một trường THPT, khối $11$ có $280$ học sinh nam và $325$ học sinh nữ. Nhà trường cần chọn một học sinh ở khối $11$ đi dự dạ hội của học sinh thành phố. Hỏi nhà trường có bao nhiêu cách chọn?
+
+# Lời giải
+
+Phương án $1$: Nếu chọn một học sinh nam có $280$ cách.
+Phương án $2$: Nếu chọn một học sinh nữ có $325$ cách.
+Theo quy tắc cộng, ta có $280+325=605$ cách chọn.
+
+---
+
+---
+id: quy_tac_cong_040
+lop: 10
+chu_de: Quy tắc đếm
+dang: Số tự nhiên lẻ không chia hết cho 5
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 9
+tags:
+  - quy tắc nhân
+  - số tự nhiên
+---
+
+# Đề bài
+
+Cho tập hợp $A=\{1;2;3;4;5;6;7;8\}$. Từ tập hợp $A$ có thể lập được bao nhiêu số gồm $8$ chữ số đôi một khác nhau sao cho các số này lẻ và không chia hết cho $5$. Khi đó, tổng các chữ số của kết quả bằng bao nhiêu?
+
+# Lời giải
+
+* Chữ số cuối có $3$ cách chọn là $\{1;3;7\}$. 
+* Số cách chọn các chữ số còn lại là $7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 5040$ cách.
+* Số lượng số cần tìm là: $3 \cdot 5040 = 15120$ số.
+
+Kết quả số tạo thành là $15120$. Tổng các chữ số của kết quả bằng: $1 + 5 + 1 + 2 + 0 = 9$.
+
+---
+id: quy_tac_cong_041
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Quy tắc đếm
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 81
+tags:
+  - quy tắc nhân
+  - bài toán sắp xếp
+---
+
+# Đề bài
+
+Có bao nhiêu cách xếp $4$ người $A$, $B$, $C$, $D$ lên $3$ hàng ghế trên một toa tàu được đánh thứ tự $1$, $2$, $3$. Biết mỗi hàng ghế có thể chứa tối đa $4$ người?
+
+# Lời giải
+
+Xếp $A$ lên một trong $3$ hàng ghế: có $3$ cách.
+Xếp $B$ lên một trong $3$ hàng ghế: có $3$ cách.
+Tương tự, số cách xếp $C$ và $D$ cũng là $3$ cách.
+Với mỗi cách xếp $A$ ta có $3$ cách xếp $B$ lên hàng ghế.
+Vậy số cách xếp thỏa mãn là $3\cdot 3\cdot 3\cdot 3=81$ (cách).
+
+---
+id: quy_tac_cong_042
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Quy tắc đếm
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 42
+tags:
+  - quy tắc cộng
+---
+
+# Đề bài
+
+Một trường THPT được cử một học sinh đi dự trại hè toàn quốc. Nhà trường quyết định chọn một học sinh giỏi lớp $11A$ hoặc lớp $12A$. Hỏi nhà trường có bao nhiêu cách chọn, nếu biết rằng lớp $11A$ có $20$ học sinh giỏi và lớp $12A$ có $22$ học sinh giỏi?
+
+# Lời giải
+
+Nhà trường có hai phương án để thực hiện là
+1. Chọn một học sinh giỏi từ lớp $11A$: có $20$ cách.
+2. Chọn một học sinh giỏi từ lớp $12A$: có $22$ cách.
+
+Theo quy tắc cộng, nhà trường sẽ có $20+22=42$ cách chọn thỏa mãn.
+
+---
+id: quy_tac_cong_043
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Lập số tự nhiên
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 72
+tags:
+  - quy tắc đếm
+  - số chia hết
+---
+
+# Đề bài
+
+Từ các chữ số $0$, $1$, $2$, $3$, $4$, $5$ có thể lập được bao nhiêu số tự nhiên gồm bốn chữ số phân biệt và chia hết cho $4$?
+
+# Lời giải
+
+Gọi số tự nhiên cần tìm: $\overline{a b c d}$.
+Nhận xét: Một số tụ nhiên (gồm nhiều chũ số) chia hết cho $4$ khi hai chũ số cuối của nó hình thành một số tư nhiên chia hết cho $4$.
+Theo đề, ta có $\overline{c d}\in\{04,12,20,24,32,40,52\}$.
+1. $\overline{c d}\in\{04,20,40\}$, có $3$ cách chọn $\overline{cd}$.
+Chọn $a$: có $4$ cách; chọn $b: 3$ cách.
+Vậy số các số thỏa mãn là $3\cdot4\cdot3=36$ (số).
+2. $\overline{c d}\in\{12,24,32,52\}$, có $4$ cách chọn.
+Chọn $a$: có $3$ cách; chọn $b$: có $3$ cách. Số các số thỏa mãn là $4\cdot3\cdot 3=36$ (số).
+
+Vậy số các số tự nhiên thỏa đề bài là $36+36=72$ (số).
+
+---
+id: quy_tac_cong_044
+lop: 10
+chu_de: Đại số tổ hợp
+dang: Hình học tổ hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 45
+tags:
+  - giao điểm
+  - đường thẳng
+---
+
+# Đề bài
+
+Tính số giao điểm tối đa của $10$ đường thẳng phân biệt khi không có ba đường nào đồng quy và hai đường nào song song?
+
+# Lời giải
+
+* Đường thẳng thứ nhất giao với $9$ đường còn lại nên có $9$ giao điểm.
+* Đường thẳng thứ hai giao với $8$ đường còn lại nên có thêm $8$ giao điểm (đã tính giao điểm với đường thẳng thứ nhất ở trên).
+* Đường thẳng thứ $9$ giao với $1$ đường còn lại nên có thêm $1$ giao điểm.
+
+Vậy có $9+8+7+6+5+4+3+2+1=45$ giao điểm.
