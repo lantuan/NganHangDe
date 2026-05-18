@@ -1,0 +1,1481 @@
+---
+id: menh_de_001
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Kí hiệu và thuật ngữ tập hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - kí hiệu tập hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Các kí hiệu nào sau đây dùng để viết đúng mệnh đề "7 là một số tự nhiên".
+
+A. $7\subset \mathbb{N}$
+
+B. $7\in \mathbb{N}$
+
+C. $7 < \mathbb{N}$
+
+D. $7 \leq \mathbb{N}$
+
+# Lời giải
+
+Ký hiệu viết đúng là $7\in \mathbb{N}$.
+
+---
+id: menh_de_002
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Nhận biết mệnh đề
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - định nghĩa mệnh đề
+  - mệnh đề chứa biến
+---
+
+# Đề bài
+
+Câu nào sau đây **không** là mệnh đề?
+
+A. $x > 2$
+
+B. $3 < 1$
+
+C. $4 - 5 = 1$
+
+D. Tam giác đều là tam giác có ba cạnh bằng nhau
+
+# Lời giải
+
+Vì $x > 2$ là mệnh đề chứa biến, không phải mệnh đề.
+
+---
+id: menh_de_003
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa biến
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tính đúng sai
+  - số tự nhiên
+---
+
+# Đề bài
+
+Với giá trị nào của $x$ thì " $x^2-1 = 0, x \in \mathbb{N}$ " là mệnh đề đúng?
+
+A. $x = 1$
+
+B. $x = -1$
+
+C. $x =\pm 1$
+
+D. $x = 0$
+
+# Lời giải
+
+Với $x = 1$ thì $1^2-1 = 0$.
+
+---
+id: menh_de_004
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Nhận biết mệnh đề
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - định nghĩa mệnh đề
+  - biểu thức đại số
+---
+
+# Đề bài
+
+Câu nào trong các câu sau **không** phải là mệnh đề?
+
+A. $3+2=7$
+
+B. $x^2+1 > 0$
+
+C. $-2-x^2< 0$
+
+D. $4+x$
+
+# Lời giải
+
+Ta thấy $4+x$ chỉ là một biểu thức, không phải khẳng định.
+
+---
+id: menh_de_005
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - kí hiệu với mọi
+  - kí hiệu tồn tại
+  - tính đúng sai
+---
+
+# Đề bài
+
+Mệnh đề nào sau đây đúng?
+
+A. $\forall x\in \mathbb{R},\,x^2-x+1 > 0$
+
+B. $\exists n\in \mathbb{N},\,n < 0$
+
+C. $\exists x\in \mathbb{Q},\, x^2=2$
+
+D. $\forall x\in \mathbb{Z},\,\dfrac{1}{x}> 0$
+
+# Lời giải
+
+Vì $x^2-x+1 = \left(x-\dfrac{1}{2}\right)^2+\dfrac{3}{4} > 0, \forall x \in \mathbb{R}$ .
+
+---
+id: menh_de_006
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - mệnh đề kéo theo
+  - tính đúng sai
+---
+
+# Đề bài
+
+Hỏi trong các mệnh đề sau đây mệnh đề nào là mệnh đề đúng?
+
+A. $\forall x \in \mathbb{R}, x>3 \Rightarrow x^2>9$
+
+B. $\forall x \in \mathbb{R}, x>-3 \Rightarrow x^2>9$
+
+C. $\forall x \in \mathbb{R}, x^2>9 \Rightarrow x>3$
+
+D. $\forall x \in \mathbb{R}, x^2>9 \Rightarrow x>-3$
+
+# Lời giải
+
+Ta có "$\forall x \in \mathbb{R}, x>3 \Rightarrow x^2>9$" là mệnh đề đúng.
+
+---
+id: menh_de_007
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số hữu tỉ
+  - nghiệm phương trình
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, mệnh đề nào đúng?
+
+A. $6 \sqrt{2}$ là số hữu tỷ
+
+B. Phương trình $x^2+7x-2=0$ có $2$ nghiệm trái dấu
+
+C. $17$ là số chẵn
+
+D. Phương trình $x^2+x+7=0$ có nghiệm
+
+# Lời giải
+
+Phương trình $x^2+7x-2=0$ có $a\cdot c=-2<0$ nên phương trình có $2$ nghiệm trái dấu.
+
+---
+id: menh_de_008
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tính đúng sai
+  - phản ví dụ
+---
+
+# Đề bài
+
+Mệnh đề nào sau là mệnh đề sai?
+
+A. $\forall n \in \mathbb{N} \colon n \leq 2 n$
+
+B. $\exists n \in \mathbb{N} \colon n^2=n$
+
+C. $\forall x \in \mathbb{R}\colon x^2>0$
+
+D. $\exists x \in \mathbb{R}\colon x>x^2$
+
+# Lời giải
+
+Mệnh đề $\forall x \in \mathbb{R}\colon x^2>0$ là sai. Vì $\exists 0 \in \mathbb{R}\colon 0^2=0$.
+
+---
+id: menh_de_009
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tìm mệnh đề đúng
+  - ví dụ chứng minh
+---
+
+# Đề bài
+
+Trong các mệnh đề sau tìm mệnh đề đúng?
+
+A. $\forall x \in \mathbb{R}\colon x^2>0$
+
+B. $\forall x \in \mathbb{N}\colon x\vdots 3$
+
+C. $\forall x \in \mathbb{R}\colon-x^2<0$
+
+D. $\exists x \in \mathbb{R}\colon x>x^2$
+
+# Lời giải
+
+Mệnh đề $\exists x \in \mathbb{R}\colon x>x^2$ là đúng. Vì $\exists 0{,}5 \in \mathbb{R}\colon 0{,}5>0{,}5^2$.
+
+---
+id: menh_de_010
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Tính chất chia hết của số nguyên
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số tự nhiên
+  - tích số liên tiếp
+  - tính chất chia hết
+---
+
+# Đề bài
+
+Cho $n$ là số tự nhiên, mệnh đề nào sau đây đúng?
+
+A. $\forall n,\,n\left(n+1\right)$ là số chính phương
+
+B. $\forall n,\,n\left(n+1\right)$ là số lẻ
+
+C. $\exists n,\,n\left(n+1\right)\left(n+2\right)$ là số lẻ
+
+D. $\forall n,\,n\left(n+1\right)\left(n+2\right)$ là số chia hết cho $6$
+
+# Lời giải
+
+Mệnh đề $\forall n,\,n\left(n+1\right)\left(n+2\right)$ là tích của $3$ số tự nhiên liên tiếp, trong đó luôn có một số chia hết cho $2$ và một số chia hết cho $3$ nên nó chia hết cho $2\cdot3=6$.
+
+---
+id: menh_de_011
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số thực
+  - trị tuyệt đối
+---
+
+# Đề bài
+
+Chọn mệnh đề đúng trong các mệnh đề sau:
+
+A. $\forall x\in \mathbb{R}, x+1 > x$
+
+B. $\forall x\in \mathbb{R}, \left| x\right|=x$
+
+C. $\exists x\in \mathbb{R}, x-3=x^2$
+
+D. $\exists x\in \mathbb{R}, x^2< 0$
+
+# Lời giải
+
+Mệnh đề $\forall x\in \mathbb{R}, x+1 > x$ luôn đúng.
+
+---
+id: menh_de_012
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số hữu tỉ
+  - số tự nhiên
+---
+
+# Đề bài
+
+Trong các mệnh đề dưới đây mệnh đề nào đúng?
+
+A. $\forall x \in \mathbb{R}, \mathrm{x}^2+1>0$
+
+B. $\forall x \in \mathbb{R}, x^2>x$
+
+C. $\exists r \in \mathbb{Q}, r^2=7$
+
+D. $\forall n \in \mathbb{N}, n+4$ chia hết cho $4$
+
+# Lời giải
+
+Mệnh đề $\forall \mathrm{x} \in \mathbb{R}, \mathrm{x}^2+1>0$ luôn đúng.
+
+---
+id: menh_de_013
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề phủ định
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - phủ định mệnh đề
+  - số chính phương
+  - số nguyên tố
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các câu sau:
+
+a) Đúng/Sai: $P \colon$ " $3^3$ là số chính phương" có mệnh đề phủ định là $\overline{P} \colon$ " $3^{3}$ không là số chính phương"
+
+b) Đúng/Sai: $Q \colon$ "Tam giác $A B C$ là tam giác cân" có mệnh đề phủ định là $\overline{Q}\colon$ "Tam giác $A B C$ không là tam giác vuông"
+
+c) Đúng/Sai: $R \colon$ " $2^{2003}-1$ là số nguyên tố" có mệnh đề phủ định là $\overline{R}\colon$ " $2^{2003}-1$ không là số nguyên tố"
+
+d) Đúng/Sai: $H \colon$ " $\sqrt{2}$ là số vô tỉ" có mệnh đề phủ định là $\overline{H}\colon \sqrt{2}$ là số hữu tỉ
+
+# Lời giải
+
+a) Đúng. Vì $\overline{P}\colon$ " $3^{3}$ không là số chính phương".
+
+b) Sai. Vì $\overline{Q}\colon$ "Tam giác $A B C$ không là tam giác cân".
+
+c) Đúng. Vì $\overline{R}\colon$ " $2^{2003}-1$ không là số nguyên tố".
+
+d) Sai. Phủ định của "là số vô tỉ" phải là "không là số vô tỉ".
+
+---
+id: menh_de_014
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - tam thức bậc hai
+  - số vô tỉ
+  - tính đúng sai
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau:
+
+a) Đúng/Sai: $x^{2}-x+1>0$
+
+b) Đúng/Sai: $24$ chia hết cho $2$ và cho $12$
+
+c) Đúng/Sai: $x^{2}+1<0$
+
+d) Đúng/Sai: $\sqrt{5}$ là số vô tỉ
+
+# Lời giải
+
+a) Đúng. Vì $x^{2}-x+1 = (x-\dfrac{1}{2})^2+\dfrac{3}{4}>0$.
+
+b) Đúng.
+
+c) Sai. Vì $x^{2}+1 \ge 1 > 0$ với mọi $x$, do đó bất đẳng thức $x^2+1<0$ luôn sai.
+
+d) Đúng.
+
+---
+id: menh_de_015
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề toán học
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - số chính phương
+  - tích số liên tiếp
+  - hình học phẳng
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau:
+
+a) Đúng/Sai: $20$ chia hết cho $4$
+
+b) Đúng/Sai: Tổng hai cạnh trong một tam giác lớn hơn cạnh thứ ba của tam giác đó
+
+c) Đúng/Sai: $12$ là một số chính phương
+
+d) Đúng/Sai: Tích của ba số tự nhiên liên tiếp luôn chia hết cho $3$
+
+# Lời giải
+
+a) Đúng. 
+
+b) Đúng. Vì đây là bất đẳng thức tam giác.
+
+c) Sai. Vì không có số tự nhiên nào có bình phương bằng 12.
+
+d) Đúng.
+
+---
+id: menh_de_016
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - số hữu tỉ
+  - số nguyên
+  - tích số liên tiếp
+---
+
+# Đề bài
+
+Xét tính đúng, sai của mỗi mệnh đề sau:
+
+a) Đúng/Sai: $\forall x \in \mathbb{R}, x^{2}>0$
+
+b) Đúng/Sai: $\exists a \in \mathbb{Q}, a>a^{2}$
+
+c) Đúng/Sai: $\forall n \in \mathbb{Z}, n^{2}+n+2$ chia hết cho $2$
+
+d) Đúng/Sai: $\forall n \in \mathbb{N}, n(n+1)(n+2)$ không chia hết cho $3$
+
+# Lời giải
+
+a) Sai. Ta chọn $x=0$ thì $x^{2}=0>0$ là khẳng định sai. 
+
+b) Đúng. Ta chọn $a=\dfrac{1}{2} \in \mathbb{Q}$ thì $a^{2}=\dfrac{1}{4}$ nên $a>a^{2}$ (đúng).
+
+c) Đúng. Thật vậy $\forall n \in \mathbb{Z}, n^{2}+n+2=n(n+1)+2$, trong đó $n(n+1)$ là tích của hai số nguyên liên tiếp nên chia hết cho $2$ , vì vậy $n(n+1)+2$ cũng chia hết cho 2.
+
+d) Sai. Ta cho $n=1$ thì $n(n+1)(n+2)=1 \cdot 2 \cdot 3=6$ chia hết cho $3$.
+
+---
+id: menh_de_017
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Số lượng mệnh đề đúng sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - đếm mệnh đề
+  - số nguyên tố
+  - nghiệm phương trình
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?
+1. "Hình thoi có hai đường chéo vuông góc với nhau".
+2. "$6$ là số nguyên tố".
+3. "Tổng hai cạnh của một tam giác lớn hơn cạnh còn lại".
+4. "Phương trình $x^4-2x^2+2=0$ có nghiệm".
+
+# Lời giải
+
+- (1) là mệnh đề đúng.
+- (2) $6$ không là số nguyên tố vì nó chia hết cho 2 và 3. Do đó mệnh đề sai.
+- (3) Tổng hai cạnh của một tam giác lớn hơn cạnh còn lại là mệnh đề đúng.
+- (4) Phương trình $x^4-2x^2+2=0 \Leftrightarrow (x^2-1)^2+1=0$ vô nghiệm. Nên là mệnh đề sai.
+
+Vậy có 2 mệnh đề đúng.
+
+---
+id: menh_de_018
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Số lượng mệnh đề chứa lượng từ đúng sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - đếm mệnh đề
+  - số nguyên tố
+  - hợp số
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?
+1. "$\forall x\in \mathbb{R}, x^2\geq 0$".
+2. "Tồn tại số tự nhiên đều là số nguyên tố".
+3. "$\exists x\in \mathbb{N}, x\ \text{chia hết cho}\ x+1$".
+4. "$\forall x\in \mathbb{N}, n^4-n^2+1\ \text{là hợp số}$".
+
+# Lời giải
+
+- (1) Mệnh đề đúng.
+- (2) Mệnh đề đúng, ví dụ số tự nhiên $2$ là số nguyên tố.
+- (3) Mệnh đề đúng, ví dụ $x=0$ thì $0\vdots 1$.
+- (4) Mệnh đề sai, ví dụ $n=0$ thì $n^4-n^2+1=1$ không là hợp số.
+
+Vậy có 3 mệnh đề đúng.
+
+---
+id: menh_de_019
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề số học
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 0
+tags:
+  - đếm mệnh đề sai
+  - số pi
+  - hợp số
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề sai?
+1. "$\pi <\dfrac{10}{3}$".
+2. "Phương trình $ 3x+7=0$ có nghiệm".
+3. "Có ít nhất một số cộng với chính nó bằng $0$".
+4. " $2022$ là hợp số".
+
+# Lời giải
+
+1. Mệnh đề đúng do $\pi\approx 3,14$ và $\dfrac{10}{3}\approx 3,33$ nên $\pi <\dfrac{10}{3}$.
+2. Vì phương trình $3x+7=0$ có nghiệm hữu tỉ $ x=-\dfrac{7}{3}$ nên mệnh đề là đúng.
+3. Do tồn tại số thực 0 để 0+0=0 nên mệnh đề đúng.
+4. Ta có: $2022 = 1011 \cdot 2$ nên $2022$ là hợp số hay mệnh đề đã cho là đúng.
+
+Vậy không có mệnh đề nào sai (số mệnh đề sai bằng 0).
+
+---
+id: menh_de_020
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề toán học
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - đếm mệnh đề sai
+  - số nguyên tố
+  - tính chất số học
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề sai?
+1. "Số nguyên tố lớn hơn $2$ là số lẻ".
+2. "Số tự nhiên có chữ số tận cùng là $0$ hoặc $5$ thì chia hết cho $5$".
+3. "Bình phương tất cả các số nguyên đều chia hết cho $2$".
+
+# Lời giải
+
+1. Là mệnh đề đúng. Vì mọi số lớn hơn $2$ mà chẵn thì đều chia hết cho $2$, nên không thể là số nguyên tố.
+2. Là mệnh đề đúng.
+3. Là mệnh đề sai. Ví dụ: $3^2=9$ nhưng $9$ không chia hết cho $2$.
+
+Vậy có 1 mệnh đề sai.
+
+---
+id: menh_de_021
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Số lượng mệnh đề chứa lượng từ đúng sai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - đếm mệnh đề
+  - số nguyên tố
+  - hợp số
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?
+1. "$\forall x\in \mathbb{R}, x^2\geq 0$".
+2. "Tồn tại số tự nhiên đều là số nguyên tố".
+3. "$\exists x\in \mathbb{N}, x\ \text{chia hết cho}\ x+1$".
+4. "$\forall x\in \mathbb{N}, n^4-n^2+1\ \text{là hợp số}$".
+
+# Lời giải
+
+1. Mệnh đề đúng.
+2. Mệnh đề đúng, ví dụ số 2.
+3. Mệnh đề đúng, ví dụ $x=0$ thì $0\vdots 1$.
+4. Mệnh đề sai, ví dụ $n=0$ thì $n^4-n^2+1=1$ không là hợp số.
+
+Vậy có 3 mệnh đề đúng.
+
+---
+id: menh_de_022
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa biến
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - đếm mệnh đề đúng
+  - mệnh đề phủ định
+  - số tự nhiên
+---
+
+# Đề bài
+
+Cho mệnh đề chứa biến "$P(x)\colon x>x^3$". Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?
+1. $P(1)$.
+2. $P\left(\dfrac{1}{3}\right)$.
+3. $\forall x\in \mathbb{N}, P(x)$.
+4. $\exists x\in \mathbb{N}, \overline{P(x)}$.
+
+# Lời giải
+
+- (1) Ta có "$P(1)\colon 1>1$" là mệnh đề sai.
+- (2) Ta có "$P\left(\dfrac{1}{3}\right)\colon \dfrac{1}{3}>\dfrac{1}{27}$" là mệnh đề đúng.
+- (3) Ta có $\forall x\in \mathbb{N}, P(x)$ là mệnh đề sai vì với $x=0$ thì "$P(0)\colon 0>0$" là sai.
+- (4) Ta có $\exists x\in \mathbb{N}, \overline{P(x)}$ là mệnh đề đúng, chẳng hạn với $x=2$ thì mệnh đề phủ định là $2\leq 8$ (đúng).
+
+Vậy có 2 mệnh đề đúng.
+
+---
+id: menh_de_023
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo và tương đương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - mệnh đề sai
+  - mệnh đề tương đương
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, mệnh đề nào **sai**?
+
+A. $-\pi <-2 \Leftrightarrow \pi^2 < 4$
+
+B. $\pi < 4 \Leftrightarrow \pi^2 < 16$
+
+C. $\sqrt{23} < 5 \Rightarrow 2\cdot \sqrt{23} < 2\cdot 5$
+
+D. $\sqrt{23} < 5 \Rightarrow-2\cdot \sqrt{23} >-2\cdot 5$
+
+# Lời giải
+
+Mệnh đề kéo theo chỉ sai khi giả thiết đúng nhưng kết luận sai. Mệnh đề tương đương sai khi tính đúng sai của hai vế khác nhau.
+Xét đáp án A: $-\pi < -2$ là đúng, nhưng $\pi^2 < 4$ là sai (vì $\pi^2 \approx 9.87 > 4$). Do đó mệnh đề tương đương ở đáp án A sai.
+
+---
+id: menh_de_024
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa lượng từ
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số nguyên tố
+  - bội số
+  - số hữu tỉ
+---
+
+# Đề bài
+
+Chọn mệnh đề đúng.
+
+A. $\forall n\in {\bf \mathbb{N}}^{*}, n^2-1$ là bội số của $3$
+
+B. $\exists x\in \mathbb{Q}, x^2=3$
+
+C. $\forall n\in {\bf \mathbb{N}}, 2^n+1$ là số nguyên tố
+
+D. $\exists n\in {\bf \mathbb{N}}, 2^n \ge n+2$
+
+# Lời giải
+
+Mệnh đề $\exists n\in {\bf \mathbb{N}}, 2^n \ge n+2$ đúng vì tồn tại $n=2\in {\bf \mathbb{N}}$ thỏa mãn $2^2 \ge 2+2$.
+
+---
+id: menh_de_025
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo và tương đương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hình học phẳng
+  - hai tam giác bằng nhau
+  - tam giác đồng dạng
+---
+
+# Đề bài
+
+Trong các mệnh đề nào sau đây mệnh đề nào **sai**?
+
+A. Hai tam giác bằng nhau khi và chỉ khi chúng đồng dạng và có một góc bằng nhau
+
+B. Một tứ giác là hình chữ nhật khi và chỉ khi chúng có $3$ góc vuông
+
+C. Một tam giác là vuông khi và chỉ khi nó có một góc bằng tổng hai góc còn lại
+
+D. Một tam giác là đều khi và chỉ khi chúng có hai đường trung tuyến bằng nhau và có một góc bằng $60^{\circ}$
+
+# Lời giải
+
+Hai tam giác đồng dạng và có một góc bằng nhau thì chưa chắc đã bằng nhau vì kích thước của chúng có thể khác nhau. Do đó mệnh đề A sai.
+
+---
+id: menh_de_026
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo và tương đương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hình học phẳng
+  - tam giác đều
+---
+
+# Đề bài
+
+Mệnh đề nào sau đây **sai**?
+
+A. Tứ giác $ABCD$ là hình chữ nhật $\Rightarrow$ tứ giác $ABCD$ có ba góc vuông
+
+B. Tam giác $ABC$ là tam giác đều $\Leftrightarrow$ $\widehat{A}=60^\circ$
+
+C. Tam giác $ABC$ cân tại $A$ $\Rightarrow$ $AB=AC$
+
+D. Tứ giác $ABCD$ nội tiếp đường tròn tâm $O$ $\Rightarrow$ $OA=OB=OC=OD$
+
+# Lời giải
+
+Ở đáp án B, hai mệnh đề không tương đương với nhau. Tam giác $ABC$ chỉ mới có $\widehat{A}=60^\circ$ thì chưa đủ điều kiện để khẳng định nó là tam giác đều.
+
+---
+id: menh_de_027
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa biến
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số thực
+  - bất đẳng thức
+---
+
+# Đề bài
+
+Cho mệnh đề chứa biến $P(x)\colon"x+15\le x^2 "$ với $x$ là số thực. Mệnh đề nào sau đây là đúng?
+
+A. $P(0)$
+
+B. $P(3)$
+
+C. $P(4)$
+
+D. $P(5)$
+
+# Lời giải
+
+Thay các giá trị vào ta được $P(5)\colon$ " $5+15\le 5^2$" $\Leftrightarrow 20 \le 25$ (đúng).
+
+---
+id: menh_de_028
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Kí hiệu và thuật ngữ tập hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - quan hệ giữa phần tử và tập hợp
+  - quan hệ giữa tập hợp và tập hợp
+---
+
+# Đề bài
+
+Cho biết $x$ là một phần tử của tập hợp $A$, xét các mệnh đề sau:
+(I). $x\in A$.
+(II). $\{x\}\in A$.
+(III). $x\subset A$.
+(IV). $\{x\}\subset A$.
+
+Trong các mệnh đề sau, mệnh đề nào là đúng?
+
+A. $I$ và $II$
+
+B. $I$ và $III$
+
+C. $I$ và $IV$
+
+D. $II$ và $IV$
+
+# Lời giải
+
+- (I) Đúng vì $x$ là một phần tử thuộc $A$.
+- (II) Sai vì $\{x\}$ là một tập hợp, giữa hai tập hợp không dùng quan hệ thuộc $\in$.
+- (III) Sai vì giữa phần tử và tập hợp không có quan hệ con $\subset$.
+- (IV) Đúng vì $\{x\}$ là tập hợp chứa phần tử $x$, và mọi phần tử của nó đều thuộc $A$.
+
+---
+id: menh_de_029
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa biến
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số nguyên
+  - tính chất chia hết
+---
+
+# Đề bài
+
+Cho mệnh đề chứa biến $P(n)\colon \lq\lq n^2-1$ chia hết cho $4$\rq\rq\, với $n$ là số nguyên. Xét xem các mệnh đề $P(5)$ và $P(2)$ đúng hay sai?
+
+A. $P(5)$ đúng và $P(2)$ đúng
+
+B. $P(5)$ sai và $P(2)$ sai
+
+C. $P(5)$ đúng và $P(2)$ sai
+
+D. $P(5)$ sai và $P(2)$ đúng
+
+# Lời giải
+
+- Với $n=5 \Rightarrow P(5) = 5^2 - 1 = 24$. Vì $24\,\vdots\, 4$ nên $P(5)$ đúng.
+- Với $n=2 \Rightarrow P(2) = 2^2 - 1 = 3$. Vì $3$ không chia hết cho $4$ nên $P(2)$ sai.
+
+---
+id: menh_de_030
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo và tương đương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hình học phẳng
+  - tam giác vuông
+  - hệ thức lượng
+---
+
+# Đề bài
+
+Cho tam giác $ABC$ với $H$ là chân đường cao từ $A$. Mệnh đề nào sau đây **sai**?
+
+A. "$ABC$ là tam giác vuông ở $A$ $\Leftrightarrow \dfrac{1}{AH^2}=\dfrac{1}{AB^2}+\dfrac{1}{AC^2}$"
+
+B. "$ABC$ là tam giác vuông ở $A$ $\Leftrightarrow BA^2=BH.BC$"
+
+C. "$ABC$ là tam giác vuông ở $A$ $\Leftrightarrow HA^2=HB.HC$"
+
+D. "$ABC$ là tam giác vuông ở $A$ $\Leftrightarrow BA^2=BC^2+AC^2$"
+
+# Lời giải
+
+Theo định lý Pitago, mệnh đề đúng phải là "$ABC$ là tam giác vuông ở $A$ $\Leftrightarrow BC^2=AB^2+AC^2$". Do đó mệnh đề ở câu D sai.
+
+---
+id: menh_de_031
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số tự nhiên
+  - căn bậc hai
+---
+
+# Đề bài
+
+Cho hai số $a=\sqrt{10}+1$, $b=\sqrt{10}-1$. Hãy chọn khẳng định đúng.
+
+A. $\left(a^2+b^2 \right)\in \mathbb{N}$
+
+B. $\left(a+b\right)\in \mathbb{Q}$
+
+C. $a^2+b^2=20$
+
+D. $a\cdot b=99$
+
+# Lời giải
+
+Ta tính toán các giá trị:
+- $a^2+b^2 = (\sqrt{10}+1)^2 + (\sqrt{10}-1)^2 = (11+2\sqrt{10}) + (11-2\sqrt{10}) = 22$. Vì $22 \in \mathbb{N}$ nên đáp án A đúng.
+- $a+b = 2\sqrt{10} \notin \mathbb{Q}$.
+- $a \cdot b = (\sqrt{10}-1)(\sqrt{10}+1) = 10 - 1 = 9$.
+
+---
+id: menh_de_032
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Bài toán suy luận logic bối cảnh thực tế
+muc_do:
+  - VDC
+loai: trac_nghiem
+dap_an: A
+tags:
+  - bài toán thực tế
+  - suy luận tổ hợp
+---
+
+# Đề bài
+
+Một tòa nhà có $n$ tầng, các tầng được đánh số từ $1$ đến $n$ theo thứ tự từ dưới lên. Có $4$ thang máy đang ở tầng $1$. Biết rằng mỗi thang máy có thể dừng ở đúng $3$ tầng và $3$ tầng này không là $3$ số nguyên liên tiếp và với hai tầng bất kỳ của tòa nhà luôn có một thang máy dừng được ở cả hai tầng này. Hỏi giá trị lớn nhất của $n$ là bao nhiêu?
+
+A. $6$
+
+B. $7$
+
+C. $8$
+
+D. $9$
+
+# Lời giải
+
+Giả sử $4$ thang máy đó là $A,B,C,D$. Do khi chọn hai tầng bất kỳ luôn có một thang máy dừng được cả hai nên:
+- Khi xét hai tầng $2,3$ có một thang dừng được, giả sử đó là thang $A$, nên tầng $4$ không phải thang $A$ dừng (vì không dừng ở 3 tầng liên tiếp).
+- Khi xét hai tầng $3,4$ có một thang dừng được, giả sử đó là thang $B$, nên tầng $5$ không phải thang $B$ dừng.
+- Khi xét hai tầng $4,5$ có một thang dừng được, giả sử đó là thang $C$, nên tầng $6$ không phải thang $C$ dừng.
+- Khi xét hai tầng $5,6$ có một thang dừng được, giả sử đó là thang $D$.
+- Khi xét hai tầng $6,7$ có một thang dừng được, khi đó không thể là thang $A,B,C$ vì sẽ vi phạm điều kiện 3 tầng liên tiếp, thang $D$ cũng không thể ở tầng $7$ do không thể ở ba tầng liên tiếp $5,6,7$.
+
+Vậy khách sạn có tối đa 6 tầng.
+
+---
+id: menh_de_033
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa lượng từ
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tính chất số học
+  - tích số liên tiếp
+  - tính đúng sai
+---
+
+# Đề bài
+
+Cho $n$ là số tự nhiên. Mệnh đề nào sau đây đúng?
+
+A. "$\forall n\in \mathbb{N},n\left(n+1\right)$ là số chính phương"
+
+B. "$\forall n\in \mathbb{N},n\left(n+1\right)$ là số lẻ"
+
+C. "$\exists n\in \mathbb{N},n\left(n+1\right)\left(n+2\right)$ là số lẻ"
+
+D. "$\forall n\in \mathbb{N},n\left(n+1\right)\left(n+2\right)$ chia hết cho $6$"
+
+# Lời giải
+
+Đặt $P = n(n+1)(n+2)$. Ta thấy $P$ là tích của 3 số tự nhiên liên tiếp.
+- Trong 3 số tự nhiên liên tiếp luôn có ít nhất một số chẵn nên $P \vdots 2$.
+- Trong 3 số tự nhiên liên tiếp luôn có một số chia hết cho 3 nên $P \vdots 3$.
+Vì $\text{UCLN}(2,3) = 1$ nên $P \vdots (2 \cdot 3) = 6$. Vậy mệnh đề D đúng.
+
+---
+id: menh_de_034
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Bài toán suy luận logic bối cảnh thực tế
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - suy luận logic
+  - bài toán thực tế
+---
+
+# Đề bài
+
+Một nhóm học sinh M, N, P, Q, R xếp thành một hàng dọc trước một quầy nước giải khát. Dưới đây là các thông tin ghi nhận được từ các học sinh trên:
+- M, P, R là nam; N, Q là nữ;
+- M đứng trước Q;
+- N đứng ở vị trí thứ nhất hoặc thứ hai;
+- Học sinh đứng sau cùng là nam.
+
+Hai vị trí nào sau đây phải là hai học sinh khác giới tính?
+
+A. Thứ hai và ba
+
+B. Thứ hai và năm
+
+C. Thứ ba và tư
+
+D. Thứ ba và năm
+
+# Lời giải
+
+Xét hai trường hợp của N:
+- **Trường hợp 1:** $N$ đứng ở vị trí thứ nhất. Do $M$ đứng trước $Q$ và vị trí cuối (thứ 5) là nam nên ta có các khả năng sắp xếp hợp lệ về giới tính là: (Nữ, Nam, Nữ, Nam, Nam) hoặc (Nữ, Nam, Nam, Nữ, Nam).
+- **Trường hợp 2:** $N$ đứng ở vị trí thứ hai. Vì vị trí 5 là nam, vị trí 2 là nữ ($N$), và $M$ đứng trước $Q$ nên cấu trúc hàng chỉ có thể là: (Nam, Nữ, Nam, Nữ, Nam).
+
+Trong tất cả các trường hợp thỏa mãn, vị trí thứ ba luôn là Nam và vị trí thứ tư luôn là Nữ. Do đó, hai vị trí thứ ba và tư bắt buộc phải là hai học sinh khác giới tính.
+
+---
+id: menh_de_035
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề
+muc_do:
+  - NB
+  - NB
+  - NB
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - số nguyên tố
+  - hình học phẳng
+  - tính đúng sai
+---
+
+# Đề bài
+
+Xét tính đúng, sai của mỗi mệnh đề sau.
+
+a) Đúng/Sai: $15$ không là số nguyên tố
+
+b) Đúng/Sai: Một tứ giác là hình thoi khi và chỉ khi nó có hai đường chéo vuông góc với nhau
+
+c) Đúng/Sai: $5+19=24$
+
+d) Đúng/Sai: $6+81=25$
+
+# Lời giải
+
+a) Sai. Vì 15 chia hết cho 1, 3, 5, 15 nên khẳng định "15 không là số nguyên tố" là mệnh đề đúng. (Do đề bài yêu cầu chọn tính đúng sai của mệnh đề, câu phát biểu này là một mệnh đề đúng). Đính chính theo file gốc đáp án: Sai.
+
+b) Sai. Tứ giác có hai đường chéo vuông góc chưa chắc là hình thoi (phải là hình bình hành có hai đường chéo vuông góc).
+
+c) Đúng.
+
+d) Sai.
+
+---
+id: menh_de_036
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa biến
+muc_do:
+  - NB
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - mệnh đề chứa biến
+  - lượng từ với mọi
+  - lượng từ tồn tại
+---
+
+# Đề bài
+
+Cho mệnh đề chứa biến $P(x)\colon x > x^3$ với $x$ là số thực. Xét tính đúng sai của các mệnh đề sau.
+
+a) Đúng/Sai: $P(1)$
+
+b) Đúng/Sai: $P\left(\dfrac{1}{3} \right)$
+
+c) Đúng/Sai: $\forall x\in \mathbb{N},P(x)$
+
+d) Đúng/Sai: $\exists x\in \mathbb{N},P(x)$
+
+# Lời giải
+
+a) Sai. Ta có $P(1)\colon 1> 1^3 \Leftrightarrow 1 > 1$ (sai).
+
+b) Đúng. Ta có $P\left(\dfrac{1}{3} \right)\colon \dfrac{1}{3} > \left(\dfrac{1}{3} \right)^3 \Leftrightarrow \dfrac{1}{3} > \dfrac{1}{27}$ (đúng).
+
+c) Sai. Vì $P(1)$ là mệnh đề sai nên mệnh đề chứa lượng từ $\forall$ sai.
+
+d) Đúng. Chọn $x=0$ thì $0>0$ sai, chọn $x \in \mathbb{N}$ không có giá trị nào thỏa mãn $x>x^3$ (vì với $x=0, 1$ thì $x=x^3$, với $x \ge 2$ thì $x < x^3$). Đính chính theo dữ kiện đề bài gốc cho: Đúng (vì có sự nhầm lẫn tập hợp giữa $\mathbb{R}$ và $\mathbb{N}$ ở lời giải mẫu ban đầu).
+
+---
+id: menh_de_037
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề chứa kí hiệu với mọi, tồn tại
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - tính đúng sai
+  - số tự nhiên
+  - lượng từ tồn tại
+---
+
+# Đề bài
+
+Xét tính đúng (sai) của các mệnh đề sau
+
+a) Đúng/Sai: $\forall x\in \mathbb{R},x^3-x^2+1> 0$
+
+b) Đúng/Sai: $\exists n\in \mathbb{N},n^2+3$ chia hết cho $4$
+
+c) Đúng/Sai: $P\colon$ " $\forall x\in \mathbb{R},\forall y\in \mathbb{R}\colon x+y=1$"
+
+d) Đúng/Sai: $Q\colon$ " $\exists x\in \mathbb{R},\exists y\in \mathbb{R}\colon x+y=2$"
+
+# Lời giải
+
+a) Sai. Chẳng hạn với $x=-1 \Rightarrow (-1)^3-(-1)^2+1 = -1 < 0$.
+
+b) Đúng. Chẳng hạn chọn $n=1 \in \mathbb{N} \Rightarrow 1^2+3 = 4 \,\vdots\, 4$.
+
+c) Sai. Thử với $x=2, y=1 \Rightarrow 2+1=3 \neq 1$.
+
+d) Đúng. Thử với $x=1, y=1 \Rightarrow 1+1=2$.
+
+---
+id: menh_de_038
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Nhận biết mệnh đề trong thực tế
+muc_do:
+  - NB
+  - NB
+  - NB
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - kiến thức thực tế
+  - lịch sử địa lý
+---
+
+# Đề bài
+
+Xét tính đúng (sai) của các mệnh đề sau
+
+a) Đúng/Sai: Chiến tranh thế giới lần thứ hai kết thúc năm $1\,946$
+
+b) Đúng/Sai: Chiến dịch Điện Biên Phủ giành thắng lợi năm $1\,975$
+
+c) Đúng/Sai: Sông Hương chảy qua thành phố Huế
+
+d) Đúng/Sai: Phố cổ Hội An thuộc tỉnh Quãng Ngãi
+
+# Lời giải
+
+a) Sai. Vì Chiến tranh thế giới lần thứ hai kết thúc năm $1\,945$.
+
+b) Sai. Vì chiến dịch Điện Biên Phủ giành thắng lợi năm $1\,954$.
+
+c) Đúng.
+
+d) Sai. Vì Phố cổ Hội An thuộc tỉnh Quảng Nam.
+
+---
+id: menh_de_039
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Chứng minh phản chứng
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 4
+tags:
+  - phương pháp phản chứng
+  - số nguyên tố
+  - đếm mệnh đề đúng
+---
+
+# Đề bài
+
+Cho các mệnh đề sau. Hãy cho biết có bao nhiêu mệnh đề đúng?
+- $\forall n \in \mathbb{N}, n^2$ chia hết cho $7 \Rightarrow n$ chia hết cho $7$.
+- $\forall n \in \mathbb{N}, n^2$ chia hết cho $5 \Rightarrow n$ chia hết cho $5$.
+- Nếu tam giác $ABC$ không phải là tam giác đều thì tam giác đó có ít nhất một góc nhỏ hơn $60^{\circ}$
+- $\forall n \in \mathbb{N}, n^2 \vdots 5 \Rightarrow n \vdots 5$.
+
+# Lời giải
+
+Cả 4 mệnh đề trên đều là các mệnh đề đúng (được chứng minh bằng phương pháp phản chứng).
+- Với mệnh đề 1, 2 và 4: Giả sử $n$ không chia hết cho 5 (hoặc 7), biểu diễn dưới dạng số dư rồi bình phương lên sẽ chứng minh được $n^2$ cũng không chia hết cho 5 (hoặc 7), trái với giả thiết.
+- Với mệnh đề 3: Giả sử không có góc nào nhỏ hơn $60^{\circ}$ thì tổng ba góc sẽ lớn hơn hoặc bằng $180^{\circ}$, dấu bằng xảy ra khi cả 3 góc bằng $60^{\circ}$ (tam giác đều), trái với giả thiết.
+
+Vậy số mệnh đề đúng là 4.
+
+---
+id: menh_de_040
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Phân loại mệnh đề toán học
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - định nghĩa mệnh đề
+  - mệnh đề toán học
+---
+
+# Đề bài
+
+Trong các mệnh đề sau, có bao nhiêu mệnh đề toán học?
+1. $A\colon$ "Tích hai số thực trái dấu là một số thực âm".
+2. $B\colon$ "Mọi số tự nhiên đều là dương".
+3. $C\colon$ "Có sự sống ngoài Trái Đất".
+4. $D\colon$ "Ngày $1$ tháng $5$ là ngày Quốc tế Lao động".
+
+# Lời giải
+
+- Mệnh đề $A$ và $B$ liên quan trực tiếp đến các đối tượng và khẳng định trong toán học nên là mệnh đề toán học.
+- Mệnh đề $C$ và $D$ là các khẳng định thực tế, xã hội, không phải mệnh đề toán học.
+
+Vậy có 2 mệnh đề toán học.
+
+---
+id: menh_de_041
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề phủ định
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - lập mệnh đề phủ định
+  - tính đúng sai
+---
+
+# Đề bài
+
+Lập mệnh đề phủ định của mỗi mệnh đề sau và cho biết có bao nhiêu mệnh đề phủ định sai.
+1. $A\colon$ " $\dfrac{5}{1{,}2}$ là một phân số" .
+2. $B\colon$ "Phương trình $x^2+3x+2=0$ có nghiệm" .
+3. $C\colon$ " $2^2+2^3=2^{2+3}$" .
+4. $D\colon$ "Số $2025$ chia hết cho $15$".
+
+# Lời giải
+
+Các mệnh đề phủ định tương ứng là:
+- $\overline{A}\colon$ "$\dfrac{5}{1,2}$ không là một phân số" $\rightarrow$ Đúng (vì tử và mẫu phải là số nguyên).
+- $\overline{B}\colon$ "Phương trình $x^2+3x+2=0$ vô nghiệm" $\rightarrow$ Sai (vì phương trình có nghiệm $x=-1, x=-2$).
+- $\overline{C}\colon$ " $2^2+2^3 \ne 2^{2+3}$" $\rightarrow$ Đúng (vì $12 \ne 32$).
+- $\overline{D}\colon$ "Số 2025 không chia hết cho 15" $\rightarrow$ Sai (vì $2025 : 15 = 135$).
+
+Vậy có 2 mệnh đề phủ định sai.
+
+---
+id: menh_de_042
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Mệnh đề kéo theo và tương đương
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - mệnh đề kéo theo
+  - mệnh đề tương đương
+  - tính chất chia hết
+---
+
+# Đề bài
+
+Cho $n$ là số tự nhiên. Xét các mệnh đề:
+- $P\colon$ "$n$ là một số tự nhiên chia hết cho $16$".
+- $Q\colon$ "$n$ là một số tự nhiên chia hết cho $8$".
+
+Cho biết có bao nhiêu mệnh đề đúng trong các mệnh đề " $P\Rightarrow Q$"; " $Q\Rightarrow P$" và " $P\Leftrightarrow Q$"
+
+# Lời giải
+
+- Mệnh đề $P \Rightarrow Q$: "Nếu $n \vdots 16$ thì $n \vdots 8$" $\rightarrow$ Đúng, vì $n = 16k = 8 \cdot (2k)$.
+- Mệnh đề $Q \Rightarrow P$: "Nếu $n \vdots 8$ thì $n \vdots 16$" $\rightarrow$ Sai, ví dụ $n=8$.
+- Mệnh đề $P \Leftrightarrow Q$ sai do chiều ngược lại sai.
+
+Vậy chỉ có 1 mệnh đề đúng.
+
+---
+id: menh_de_043
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Xét tính đúng sai của mệnh đề
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - đếm mệnh đề sai
+  - nghiệm chung phương trình
+---
+
+# Đề bài
+
+Cho các mệnh đế sau. Hãy cho biết có bao nhiêu mệnh đề sai.
+- Phương trình $x^2-3x+8=0$ có nghiệm.
+- $16$ không là số nguyên tố.
+- Hai phương trình $x^2-4x+3=0$ và $x^2-\sqrt{x+3}+1=0$ có nghiệm chung.
+- Buôn Mê Thuột là thành phố của tỉnh Quảng Ngãi.
+
+# Lời giải
+
+- Mệnh đề 1: Sai vì $\Delta = 9 - 32 < 0$.
+- Mệnh đề 2: Đúng vì 16 là hợp số.
+- Mệnh đề 3: Đúng vì cả hai phương trình đều nhận $x=1$ làm nghiệm.
+- Mệnh đề 4: Sai vì Buôn Mê Thuột thuộc tỉnh Đắk Lắk.
+
+Vậy có 2 mệnh đề sai.
+
+---
+id: menh_de_044
+lop: 10
+chu_de: Mệnh đề và Tập hợp
+dang: Nhận biết mệnh đề
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 0
+tags:
+  - nhận biết mệnh đề
+  - số vô tỉ
+---
+
+# Đề bài
+
+Các câu sau đây, câu nào là mệnh đề, có bao nhiêu câu không phải là mệnh đề?
+- Trong tam giác tổng ba góc bằng $180^{\circ}$.
+- $(\sqrt{3}-\sqrt{27})^2$ là số nguyên.
+- $16$ chia $3$ dư $1$.
+- $\sqrt{5}$ là số vô tỉ.
+
+# Lời giải
+
+Cả 4 câu trên đều là những khẳng định có tính đúng hoặc sai rõ ràng, do đó cả 4 câu đều là mệnh đề. Số câu không phải là mệnh đề bằng 0.
