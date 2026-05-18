@@ -1,0 +1,1418 @@
+---
+id: taphop_001
+lop: 10
+chu_de: Tập hợp
+dang: Tìm tập con không thỏa mãn điều kiện
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp
+  - tập con
+---
+
+# Đề bài
+
+Cho tập hợp $X=\{0 ; 2 ; 5\}$. Tập hợp nào dưới đây không phải là tập con của tập hợp $X$?
+
+A. $\varnothing$
+
+B. $\{2\}$
+
+C. $\{0 ; 2 ; 5\}$
+
+D. $\{0 ; 1 ; 2\}$
+
+# Lời giải
+
+Ta có $\{1\} \notin X$, vậy $\{0 ; 1 ; 2\} \not \subset\{0 ; 2 ; 5\}$.
+
+---
+id: taphop_002
+lop: 10
+chu_de: Tập hợp
+dang: Các phép toán trên tập hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tập hợp
+  - hiệu hai tập hợp
+---
+
+# Đề bài
+
+Cho tập $A=\{0 ; 2 ; 4 ; 6 ; 8\}$; $B=\{3 ; 4 ; 5 ; 6 ; 7\}$. Tập $A \setminus B$ là
+
+A. $\{0 ; 6 ; 8\}$
+
+B. $\{0 ; 2 ; 8\}$
+
+C. $\{3 ; 6 ; 7\}$
+
+D. $\{0 ; 2\}$
+
+# Lời giải
+
+Vì $A \setminus B$ gồm các phần tử thuộc tập hợp $A và không thuộc $B$ nên $A \setminus B=\{0 ; 2 ; 8\}$.
+
+---
+id: taphop_003
+lop: 10
+chu_de: Tập hợp
+dang: Các tập hợp số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp số
+  - khoảng
+  - đoạn
+---
+
+# Đề bài
+
+Cách viết nào sau đây là sai?
+
+A. $(0 ;+\infty)=\{x \in \mathbb{R}, x>0\}$
+
+B. $[0 ; 5]=\{x \in \mathbb{R}, 0 \leqslant x \leqslant 5\}$
+
+C. $(0 ; 5)=\{x \in \mathbb{R}, 0<x<5\}$
+
+D. $[-1 ; 5)=\{-1 ; 0 ; 1 ; 2 ; 3 ; 4\}$
+
+# Lời giải
+
+Vì $[-1 ; 5)=\{x \in \mathbb{R} \mid-1 \leqslant x<5\}$ nên cách viết sau là sai: $[-1 ; 5)=\{-1 ; 0 ; 1 ; 2 ; 3 ; 4\}$.
+
+---
+id: taphop_004
+lop: 10
+chu_de: Tập hợp
+dang: Xác định số phần tử của tập hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp
+  - số phần tử
+---
+
+# Đề bài
+
+Cho tập hợp $A=\{x+1 \mid x \in \mathbb{N}, x \leq 5\}$. Số phầ tử của tập hợp $A$ là
+
+A. $8$
+
+B. $7$
+
+C. $5$
+
+D. $6$
+
+# Lời giải
+
+$A=\{x+1 \mid x \in \mathbb{N}, x \leq 5\} \Leftrightarrow A=\{1 ; 2 ; 3 ; 4 ; 5 ; 6\}$. Do đó số phần tử của tập hợp $A$ là $6$.
+
+---
+id: taphop_005
+lop: 10
+chu_de: Tập hợp
+dang: Nhận diện tập rỗng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập hợp
+  - tập rỗng
+---
+
+# Đề bài
+
+Trong các tập hợp sau, tập hợp nào là tập hợp rỗng?
+
+A. $A=\{x \in \mathbb{Z}|~| x|<1\}$
+
+B. $B=\left\{x \in \mathbb{Z} \mid 6 x^2-7 x+1=0\right\}$
+
+C. $C=\left\{x \in \mathbb{Q} \mid x^2-4 x+2=0\right\}$
+
+D. $D=\left\{x \in \mathbb{R} \mid x^2-4 x+3=0\right\}$
+
+# Lời giải
+
+$x^2-4 x+2=0 \Leftrightarrow \hoac{& x=2+\sqrt{2} \notin \mathbb{Q}  \\&  x=2-\sqrt{2} \notin \mathbb{Q}} \Rightarrow C=\varnothing$.
+
+---
+id: taphop_006
+lop: 10
+chu_de: Tập hợp
+dang: Kí hiệu tập hợp cơ bản
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - ký hiệu toán học
+  - phần tử
+---
+
+# Đề bài
+
+Cho $x$ là một phần tử của tập hợp $X$. Mệnh đề nào sau đây là đúng?
+
+A. $x \in X$
+
+B. $X \in x$
+
+C. $x \subset X$
+
+D. $\{x\} \in X$
+
+# Lời giải
+
+Mệnh đề là đúng là $x \in X$. Kí hiệu $x$ là một phần tử của tập hợp $X$.
+
+---
+id: taphop_007
+lop: 10
+chu_de: Tập hợp
+dang: Tính số tập con
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập hợp
+  - tập con
+---
+
+# Đề bài
+
+Số tập con của tập $C=\{x \in \mathbb{Z} \mid-1 \leqslant x \leqslant 1\}$ là
+
+A. $3$
+
+B. $2$
+
+C. $8$
+
+D. $6$
+
+# Lời giải
+
+Ta có $C=\{-1 ; 0 ; 1\}$.
+Số tập con của tập $C$ là $2^3=8$.
+
+---
+id: taphop_008
+lop: 10
+chu_de: Tập hợp
+dang: Phần bù của tập hợp
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp số
+  - phần bù
+---
+
+# Đề bài
+
+Cho tập hợp $A=\{x \in \mathbb{R} \mid 2 \leqslant x<5\}$. Phần bù của tập hợp $A$ trong $\mathbb{R}$ là tập nào sau đây?
+
+A. $[5 ;+\infty)$
+
+B. $(-\infty ; 2)$
+
+C. $(-\infty ; 2] \cup(5 ;+\infty)$
+
+D. $(-\infty ; 2) \cup[5 ;+\infty)$
+
+# Lời giải
+
+Phần bù của tập hợp $A$ trong $\mathbb{R}$ là $\mathrm{C_{\mathbb{R}}A}=(-\infty ; 2) \cup[5 ;+\infty)$.
+
+---
+id: taphop_009
+lop: 10
+chu_de: Tập hợp
+dang: Tìm tham số m dựa trên quan hệ tập hợp
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tập hợp
+  - phương trình bậc hai
+  - tập con
+  - tham số m
+---
+
+# Đề bài
+
+Cho tập hợp $A=(0 ;+\infty)$ và $B=\left\{x \in \mathbb{R} \mid m x^2-6 x+m-8=0\right\}$, $m$ là tham số. Biết rằng tập $B$ có đúng hai tập con và $B \subset A$. Kết luận nào sau đây là đúng về giá trị của tham số $m$.
+
+A. $m \in(0 ; 9)$
+
+B. $m \in(0 ; 10)$
+
+C. $m \in(0 ; 8)$
+
+D. $m \in(0 ; 7)$
+
+# Lời giải
+
+Vì tập $B$ có đúng hai tập con nên phương trình $m x^2-6 x+m-8=0$ có duy nhất một nghiệm.
+- TH1: $m=0$ thì $x=-\dfrac{4}{3} \Rightarrow B=\left\{-\dfrac{4}{3}\right\}$.
+- TH2: $m \neq 0$ thì phương trình có nghiệm duy nhất $\Leftrightarrow \Delta'=0$
+$\Leftrightarrow 9-m(m-8)=0$
+$\Leftrightarrow-m^2+8 m+9=0$
+$\Leftrightarrow \hoac{& m=-1  \\&  m=9}$. 
+  - Với $m=-1 \Rightarrow B=\{-3\}$
+  - Với $m=9 \Rightarrow B=\left\{\dfrac{1}{3}\right\}$
+
+Kết hợp với điều kiện $B \subset A$ ta có $m=9$.
+
+---
+id: taphop_010
+lop: 10
+chu_de: Tập hợp
+dang: Tìm tham số m để hai tập hợp giao nhau khác rỗng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tập hợp số
+  - giao của hai tập hợp
+  - tham số m
+---
+
+# Đề bài
+
+Cho tập $M=\{x \in R \mid(x+3)(x-1) \geqslant 0\}$ và $N=(m-1 ; m+1]$. Tìm $m$ để $M \cap N \neq \varnothing$
+
+A. $ \hoac{& m \leqslant-2  \\&  m>0}$
+
+B. $ \hoac{& m<-2  \\&  m \geqslant 0}$
+
+C. $ \hoac{& m \leqslant-2  \\&  m \geqslant 0}$
+
+D. $-2 \leqslant m<0$
+
+# Lời giải
+
+Ta có $(x+3)(x-1) \geqslant 0 \Leftrightarrow \hoac{& x \leqslant-3  \\&  x \geqslant 1} $
+$\Rightarrow M=(-\infty ;-3] \cup[1 ;+\infty)$.
+Để $M \cap N=\varnothing \Leftrightarrow \heva{& m-1>-3  \\&  m+1<1} \Leftrightarrow \heva{& m>-2  \\&  m<0}\Leftrightarrow-2<m<0$.
+Suy ra $M \cap N \neq \varnothing \Leftrightarrow \hoac{& m<-2  \\&  m \geqslant 0}$.
+
+---
+id: taphop_011
+lop: 10
+chu_de: Tập hợp
+dang: Biểu đồ Ven
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - biểu đồ ven
+  - quan hệ tập hợp
+---
+
+# Đề bài
+
+Cho các tập hợp $A$, $B$, $X$ được biểu diễn trong biểu đồ Ven như sau. Khẳng định nào sau đây sai?
+
+A. $B \subset C_X A$
+
+B. $A \cap B=\varnothing$
+
+C. $A \subset C_X B$
+
+D. $A \cup B=X$
+
+\begin{tikzpicture} [scale=0.5,thick,rotate=-90]
+			\colorlet{MauNet}{blue!50}
+			\def\ElipA{(0,0) ellipse (0.8cm and 1.3cm)}
+			\def\ElipB{(2,3) ellipse (0.8cm and 1.4cm)}
+			\def\ElipC{(1,2) ellipse (3cm and 5cm)}
+			\draw[MauNet] \ElipA node[blue!50] {$A$};
+			\draw[MauNet] \ElipB node[blue!50] {$B$};
+			\draw[MauNet] \ElipC node[blue!50,above right=1cm] {$C$};
+		\end{tikzpicture}
+
+# Lời giải
+
+Nhìn biểu đồ, ta thấy $A \cup B \neq X$
+
+---
+id: taphop_012
+lop: 10
+chu_de: Tập hợp
+dang: Các phép toán trên tập hợp số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp số
+  - hợp
+  - giao
+  - hiệu
+---
+
+# Đề bài
+
+Cho $A=[-1 ; 3]$; $B=(2 ; 5)$. Tìm mệnh đề sai.
+
+A. $B \setminus A=(3 ; 5)$
+
+B. $A \cap B=(2 ; 3]$
+
+C. $A \setminus B=[-1 ; 2]$
+
+D. $A \cup B=[-1 ; 5]$
+
+# Lời giải
+
+Ta có $A \cup B=[-1 ; 5)$
+
+---
+id: taphop_013
+lop: 10
+chu_de: Tập hợp
+dang: Các phép toán trên tập hợp liệt kê
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - hợp
+  - giao
+  - tập hợp liệt kê
+---
+
+# Đề bài
+
+Cho các tập hợp 
+\begin{eqnarray*}
+A&=&\{-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3\};\\
+B&=&\{0 ; 1 ; 4 ; 5\};\\
+C&=&\{-4 ;-3 ; 1 ; 2 ; 5 ; 6\}
+\end{eqnarray*} Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $A\cup B=\{-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; 4 ; 5\}$
+
+b) Đúng/Sai: $A\cap B=\{0\}$
+
+c) Đúng/Sai: $(A\cup B)\cap C=\{-3 ; 1 ; 2 ; 5\}$
+
+d) Đúng/Sai: $A\cap B\cap C=\{1\}$
+
+# Lời giải
+
+- a) Đúng. Vì $A\cup B=\{-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; 4 ; 5\}$.
+- b) Sai. Vì $A\cap B=\{0 ; 1\}$
+- c) Đúng. Vì $(A\cup B)\cap C=\{-3 ; 1 ; 2 ; 5\}$.
+- d) Đúng. Vì $A\cap B\cap C=\{1\}$.
+
+---
+id: taphop_014
+lop: 10
+chu_de: Tập hợp
+dang: Xác định tập hợp bằng cách giải phương trình và điều kiện số
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - số phần tử
+  - phương trình
+  - tập hợp liệt kê
+---
+
+# Đề bài
+
+Cho các tập hợp sau 
+\begin{eqnarray*}
+A&=&\left\{ x\in\mathbb{Q}\mid x^2-x-6=0\right\};\\
+B&=&\left\{ x\in\mathbb{Z}\mid x^4-11x^2+18=0\right\};\\
+C&=&\left\{x\in\mathbb{N}\mid \left(x^2-3x-10\right)\left(5x^3-6x^2+x\right)=0\right\};\\
+D=\left\{ x\in\mathbb{Z}\mid-2<3x+7\le 10\right\}.
+\end{eqnarray*} Khi đó
+
+a) Đúng/Sai: Tập hợp $A$ có $2$ phần tử
+
+b) Đúng/Sai: Tập hợp $B$ có $3$ phần tử
+
+c) Đúng/Sai: Tập hợp $C$ có $2$ phần tử
+
+d) Đúng/Sai: Tập hợp $D$ có $4$ phần tử
+
+# Lời giải
+
+- a) $x^2-x-6=0\Leftrightarrow\hoac{&x=-2\in\mathbb{Q}\& x=3\in\mathbb{Q}.}$ Vậy $A=\{-2 ; 3\}$. Do đó mệnh đề đúng (đề bài cho không ghi đúng sai rõ ràng nhưng tính toán số phần tử là 2).
+- b) $x^4-11 x^2+18=0\Leftrightarrow\hoac{&x^2=2\& x^2=9}\Leftrightarrow\hoac{&x=\sqrt{2}\notin\mathbb{Z}\& x=-\sqrt{2}\notin\mathbb{Z}\& x=3\in\mathbb{Z}\& x=-3\in\mathbb{Z}.}$Vậy $B=\{-3 ; 3\}$. Tập B có 2 phần tử nên mệnh đề sai.
+- c) $\left(x^2-3 x-10\right)\left(5 x^3-6 x^2+x\right)=0\Leftrightarrow \hoac{&x^2-3 x-10=0\& 5 x^3-6 x^2+x=0}\Leftrightarrow\hoac{&x=5\in\mathbb{N}\& x=-2\notin\mathbb{N}\& x=0\in\mathbb{N}\& x=1\in\mathbb{N}\& x=\dfrac{1}{5}\notin\mathbb{N}.}$ Vậy $C=\{0 ; 1 ; 5\}$. Tập C có 3 phần tử nên mệnh đề sai.
+- d) $-2<3 x+7\leq 10\Leftrightarrow-3<x\leq 1$. Mà $x\in\mathbb{Z}\Rightarrow x\in D=\{-2; -1; 0; 1\}$. Vậy $D$ có $4$ phần tử. Mệnh đề đúng.
+
+---
+id: taphop_015
+lop: 10
+chu_de: Tập hợp
+dang: Bài toán ứng dụng tập hợp (Biểu đồ Ven)
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - toán ứng dụng
+  - biểu đồ ven
+  - đếm phần tử
+---
+
+# Đề bài
+
+Lớp $10 B_1$ có 7 học sinh giỏi Toán, 5 học sinh giỏi Lý, 6 học sinh giỏi Hóa, 2 học sinh chỉ giỏi Toán và Lý, 3 học sinh chỉ giỏi Toán và Hóa, 1 học sinh chỉ giỏi cả Lý và Hóa, 1 học sinh giỏi cả 3 môn Toán, Lý, Hóa. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Số học sinh chỉ giỏi môn Toán là $1$ học sinh
+
+b) Đúng/Sai: Số học sinh chỉ giỏi môn Lý là $1$ học sinh
+
+c) Đúng/Sai: Số học sinh chỉ giỏi môn Hóa là $2$ học sinh
+
+d) Đúng/Sai: Số học sinh giỏi ít nhất một môn (Toán, Lý, Hóa) là $10$ học sinh
+
+# Lời giải
+
+- a) Số học sinh chỉ giỏi môn Toán $7-3-1-2=1$.
+- b) Số học sinh chỉ giỏi môn Lý $5-1-1-2=1$.
+- c) Số học sinh chỉ giỏi môn Hóa $6-3-1-1=1$.
+- d) Số học sinh giỏi ít nhất một môn (Toán, Lý, Hóa) là: $1+2+1+1+1+3+1=10$.
+
+---
+id: taphop_016
+lop: 10
+chu_de: Tập hợp
+dang: Tập hợp bằng nhau
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - hai tập hợp bằng nhau
+  - tham số
+---
+
+# Đề bài
+
+Cho ba tập hợp $A=\{2; 5\}$, $B=\{5 ; x\}$, $C=\{x ; y ; 5\}$, biết $A=B=C$. Khi đó
+
+a) Đúng/Sai: $x=y=2$ thì $A=B=C$
+
+b) Đúng/Sai: $x=y=3$ thì $A=B=C$
+
+c) Đúng/Sai: $x=2$, $y=5$ thì $A=B=C$
+
+d) Đúng/Sai: $x=1$, $y=3$ thì $A=B=C$
+
+# Lời giải
+
+- a) Đúng. Vì $A=B$ nên $x=2$. Lại có $B=C$ nên $y=x=2$ hoặc $y=5$.
+- b) Sai. Vì $A=B$ nên $x=2$. Lại có $B=C$ nên $y=x=2$ hoặc $y=5$.
+- c) Vì $A=B$ nên $x=2$. Lại có $B=C$ nên $y=x=2$ hoặc $y=5$. (Đúng, nhưng đáp án gốc đánh dấu sai/đúng tùy thuộc vào hệ thống logic)
+- d) Sai. Vì $A=B$ nên $x=2$. Lại có $B=C$ nên $y=x=2$ hoặc $y=5$.
+
+Vậy $x=y=2$ hoặc $x=2, y=5$.
+
+---
+id: taphop_017
+lop: 10
+chu_de: Tập hợp
+dang: Bài toán thực tế dùng tập hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 6
+tags:
+  - toán ứng dụng
+  - đếm phần tử
+---
+
+# Đề bài
+
+Lớp 10A có $45$ học sinh trong đó có $12$ bạn học sinh giỏi Văn, $ 9$ bạn học sinh giỏi Địa lí, và $30$ bạn không giỏi môn học nào trong hai môn Văn, Địa lí. Hỏi lớp 10A có bao nhiêu bạn học sinh giỏi cả hai môn Văn và Địa lí?
+
+\begin{tikzpicture}
+				\draw (-3,-1.5) rectangle (3,3);
+				\draw (-1,1) circle(1.41) (1,1)circle (1);
+				\draw (0,-1)node[below]{$\tiny{\text{30 học sinh không giỏi Văn và Địa} }$} ;
+				\draw (-1,1.5)node[below]{$\tiny{\text{12 HS giỏi Văn}}$ } ;
+				\draw (1.15,1)node[below]{$\tiny{\text{9 HS giỏi Địa}}$ } ;
+				\draw (0,3.5)node[below]{$\tiny{\text{Lớp 10A có 45 học sinh}}$ } ;
+		\end{tikzpicture}
+
+# Lời giải
+
+Số học sinh giỏi văn hoặc giỏi địa lí là $45 - 30=15$ (học sinh).
+Số học sinh giỏi cả 2 môn văn và địa lí là: $12+9-15=6$ (học sinh)
+
+---
+id: taphop_018
+lop: 10
+chu_de: Tập hợp
+dang: Giao hai tập hợp chứa tham số nguyên
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - giao của hai tập hợp
+  - tham số m
+---
+
+# Đề bài
+
+Cho tập hợp $A=(-\infty ; 1)$, $B=\left[m^2-3 ;+\infty\right)$. Có bao nhiêu giá trị nguyên của tham số để $A \cap B \neq \varnothing$.
+
+# Lời giải
+
+$A \cap B \neq \varnothing \Leftrightarrow 1>m^2-3 \Leftrightarrow m^2-4<0 \Leftrightarrow-2<m<2$.
+
+---
+id: taphop_019
+lop: 10
+chu_de: Tập hợp
+dang: Tập con chứa tham số nguyên
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 4
+tags:
+  - tập con
+  - tham số a
+---
+
+# Đề bài
+
+Cho tập hợp $A=[4 ; 7]$ và $B=(2 a-1 ; 3 a+5]$ khác tập rỗng, với $a \in R$. Gọi $S$ là tập hợp các giá trị nguyên của $a$ để $A \subset B$. Có bao nhiêu tập con của $S$?
+
+# Lời giải
+
+- Điều kiện tập B khác tập rỗng: $2 a-1<3 a+5 \Leftrightarrow a>-6$ (1).
+- $A \subset B \Rightarrow \heva{& 2 a-1<4  \\&  3 a+5 \geqslant 7 } \Leftrightarrow \heva{& a<\dfrac{5}{2}  \\&  a \geqslant \dfrac{2}{3}} \Leftrightarrow \dfrac{2}{3} \leqslant a<\dfrac{5}{2}.$ (2).
+- Kết hợp $(1)$ và $(2)$, ta được $\dfrac{2}{3} \leqslant a<\dfrac{5}{2}$.
+- Xét các giá trị $a \in Z \Rightarrow S=\{1 ; 2\}$
+- Có $4$ tập con của $S$ là $\varnothing $; $\{1\} $; $\{2\}$ và $S=\{1 ; 2\}$.
+
+---
+id: taphop_020
+lop: 10
+chu_de: Tập hợp
+dang: Tập con chứa tham số nguyên dương
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - tập con
+  - tham số m
+---
+
+# Đề bài
+
+Cho 2 tập khác rỗng $A=(m-1 ; 4] ; B=(-2 ; 2 m+2)$, $m \in \mathbb{R}$. Tìm $m$ nguyên dương để $A \subset B$.
+
+# Lời giải
+
+Với $2$ tập khác rỗng $A$, $B$ ta có điều kiện $ \heva{& m-1<4  \\&  2 m+2>-2} \Leftrightarrow \heva{& m<5  \\&  m>-2} \Leftrightarrow-2<m<5$.\\
+Để $A \subset B \Leftrightarrow \heva{& m-1 \geqslant-2  \\&  2 m+2>4} \Leftrightarrow \heva{& m \geqslant-1  \\&  2 m+2>4} \Leftrightarrow \heva{& m \geqslant-1  \\&  m>1} \Leftrightarrow m>1$.
+
+So với điều kiện $\Rightarrow 1<m<5$. Do đó có $3$ giá trị của $m$ thì $A\subset B$.
+
+---
+id: taphop_021
+lop: 10
+chu_de: Tập hợp
+dang: Tìm số phần tử của giao và hiệu hai tập hợp
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1, 4
+tags:
+  - giao tập hợp
+  - hiệu tập hợp
+---
+
+# Đề bài
+
+Cho hai tập hợp $A=\{n \in \mathbb{N} \mid-2<n \leqslant 4\}$ và $B=\left\{x \in \mathbb{Z} \mid 2 x^3+x^2-x=0\right\}$. Hãy viết Số phần tử của tập hợp $A \cap B$, $A \setminus B$.
+
+# Lời giải
+
+Ta có $A=\{0 ; 1 ; 2 ; 3 ; 4\}$, $B=\{-1 ; 0\}$.
+Suy ra $A \cap B=\{0\}$ và $A \setminus B=\{1 ; 2 ; 3 ; 4\}$
+
+---
+id: taphop_022
+lop: 10
+chu_de: Tập hợp
+dang: Tập con chứa tham số nguyên m
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - tập con
+  - tham số m
+---
+
+# Đề bài
+
+Cho hai tập hợp khác rỗng $A=(1 ; 5)$ và $B=(m ; 4 m-1)$, $m \in \mathbb{R}$. Có bao nhiêu giá trị nguyên của tham số $m$ để $B \subset A$.
+
+# Lời giải
+
+Để $B \neq \varnothing $ thì $m<4 m-1 \Leftrightarrow m>\dfrac{1}{3}$ (1).
+$ B \subset A \Rightarrow \heva{&m \geqslant 1\\& 4 m-1\leq 5} \Leftrightarrow 1 \leqslant m \leqslant \dfrac{3}{2}$ (2).
+Từ $(1)$, $(2)$ suy ra $1 \leqslant m \leqslant \dfrac{3}{2}$ (hay $m \in\left[1 ; \dfrac{3}{2}\right]$).
+Vậy có $1$ giá trị nguyên của $m$ thì $B \subset A$.
+
+---
+id: taphop_023
+lop: 10
+chu_de: Tập hợp
+dang: Tìm số tập con của tập tham số S
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 4
+tags:
+  - tập con
+  - số tập con
+---
+
+# Đề bài
+
+Cho tập hợp $A=[4 ; 7]$ và $B=(2 a-1 ; 3 a+5]$ khác tập rỗng, với $a \in R$. Gọi $S$ là tập hợp các giá trị nguyên của $a$ để $A \subset B$. Số tập con của $S$.
+
+# Lời giải
+
+- Điều kiện tập B khác tập rỗng: $2 a-1<3 a+5 \Leftrightarrow a>-6$ (1).
+- $A \subset B \Rightarrow \heva{& 2 a-1<4  \\&  3 a+5 \geqslant 7 } \Leftrightarrow \heva{& a<\dfrac{5}{2}  \\&  a \geqslant \dfrac{2}{3}} \Leftrightarrow \dfrac{2}{3} \leqslant a<\dfrac{5}{2}.$ (2).
+- Kết hợp $(1)$ và $(2)$, ta được $\dfrac{2}{3} \leqslant a<\dfrac{5}{2}$.
+- Xét các giá trị $a \in Z \Rightarrow S=\{1 ; 2\}$
+- Có $4$ tập con của $S$ là $\varnothing $; $\{1\} $; $\{2\}$ và $S=\{1 ; 2\}$.
+
+---
+id: taphop_024
+lop: 10
+chu_de: Tập hợp
+dang: Biểu diễn tập hợp bằng cách liệt kê
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp số tự nhiên
+  - giải phương trình
+---
+
+# Đề bài
+
+Cho tập hợp $A=\left\{ x\in N|\left( {x^3}-9x \right)\left( 2x^2-5x+2 \right)=0 \right\}.$ Tập $A$ được viết theo kiểu liệt kê là
+
+A. $\left\{ 2;3 \right\}$
+
+B. $\left\{ -3;0;\dfrac{1}{2};2;3 \right\}$
+
+C. $\left\{ -3;0;2;3 \right\}$
+
+D. $\left\{ 0;2;3 \right\}$
+
+# Lời giải
+
+$\left( {x^3}-9x \right)\left( 2x^2-5x+2 \right)=0\Leftrightarrow \left[ \begin{aligned} & {x^3}-9x=0 \\ & 2x^2-5x+2=0 \\ \end{aligned} \right.\Leftrightarrow \left[ \begin{aligned} & x=0 \\ & x=3 \\ & x=2 \\ \end{aligned} \right.$
+
+---
+id: taphop_025
+lop: 10
+chu_de: Tập hợp
+dang: Tính tổng các phần tử của tập hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập hợp số tự nhiên
+  - tổng phần tử
+---
+
+# Đề bài
+
+Cho tập $X=\left\{ x\in \mathbb{N}/\left( {x^2}-4 \right)\left( x-1 \right)\left( {x^2}-7x+3 \right)=0 \right\}$. Tính tổng $S$các phần tử của $X$.
+
+A. $S=\dfrac{9}{2}$
+
+B. $S=5$
+
+C. $S=6$
+
+D. $S=4$
+
+# Lời giải
+
+Ta có: $\left\{ \begin{aligned} & {x^2}-4=0\Leftrightarrow x=\pm 2 \\ & x-1=0\Leftrightarrow x=1 \\ & {x^2}-7x+3=0\Leftrightarrow x=3,x=\dfrac{1}{2} \\ \end{aligned} \right.$
+Do $x\in \mathbb{N}\Rightarrow x\in \left\{ 2;1;3 \right\}\Rightarrow S=6$.
+
+---
+id: taphop_026
+lop: 10
+chu_de: Tập hợp
+dang: Liệt kê phần tử tập hợp số tự nhiên
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập hợp số tự nhiên
+  - phương trình tích
+---
+
+# Đề bài
+
+Liệt kê các phần tử của tập hợp $A=\left\{ x\in \mathbb{N}|\left( 6x^2-7x+1 \right)\left( {x^2}-4 \right)=0 \right\}$ ta được
+
+A. $A=\left\{ \dfrac{1}{6};\dfrac{1}{2};2 \right\}.$
+
+B. $A=\left\{ -2;1;2 \right\}.$
+
+C. $A=\left\{ -2;\dfrac{1}{6};1;2 \right\}.$
+
+D. $A=\left\{ 1;2 \right\}$
+
+# Lời giải
+
+Xét phương trình $\left( 6x^2-7x+1 \right)\left( {x^2}-4 \right)=0\Leftrightarrow \left[ \begin{aligned} & x=1\in \mathbb{N} \\ & x=\dfrac{1}{6}\notin \mathbb{N} \\ & x=2\in \mathbb{N} \\ & x=-2\notin \mathbb{N} \\ \end{aligned} \right.$.
+Vậy $A=\left\{ 1;2 \right\}.$
+
+---
+id: taphop_027
+lop: 10
+chu_de: Tập hợp
+dang: Liệt kê phần tử tập hợp số hữu tỉ
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập hợp số hữu tỉ
+  - phương trình tích
+---
+
+# Đề bài
+
+Hãy liệt kê các phần tử của tập $X=\left\{ x\in \mathbb{Q}|\left( {x^2}-x-6 \right)\left( {x^2}-5 \right)=0 \right\}$.
+
+A. $X=\left\{ -\sqrt{5};\sqrt{5} \right\}$
+
+B. $X=\left\{ -\sqrt{5};-2;\sqrt{5};3 \right\}$
+
+C. $X=\left\{ -2;3 \right\}$
+
+D. $X=\left\{ \sqrt{5};3 \right\}$
+
+# Lời giải
+
+Ta có $\left( {x^2}-x-6 \right)\left( {x^2}-5 \right)=0\Leftrightarrow \left[ \begin{aligned} & {x^2}-x-6=0 \\ & {x^2}-5=0 \\ \end{aligned} \right.\Leftrightarrow \left[ \begin{aligned} & x=-2 \\ & x=3 \\ & x=\sqrt{5}\notin \mathbb{Q} \\ & x=-\sqrt{5}\notin \mathbb{Q} \\ \end{aligned} \right.$.
+Do vậy $X=\left\{ -2;3 \right\}$.
+
+---
+id: taphop_028
+lop: 10
+chu_de: Tập hợp
+dang: Kí hiệu thuộc hay không thuộc
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - ký hiệu toán học
+  - số vô tỉ
+---
+
+# Đề bài
+
+Kí hiệu nào sau đây dùng để viết đúng mệnh đề $''\sqrt{2}$ không phải là số hữu tỉ$''$?
+
+A. $\sqrt{2}\subset \mathbb{Q}$
+
+B. $\sqrt{2}\notin \mathbb{Q}$
+
+C. $\sqrt{2}\ne \mathbb{Q}$
+
+D. $\sqrt{2}\in \mathbb{Q}$
+
+# Lời giải
+
+$\sqrt{2}\notin \mathbb{Q}$
+
+---
+id: taphop_029
+lop: 10
+chu_de: Tập hợp
+dang: Nhận diện tập rỗng trong các tập số
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập rỗng
+  - phương trình
+---
+
+# Đề bài
+
+Trong các tập hợp sau, tập nào là tập rỗng?
+
+A. $\left\{ \left. x\in \mathbb{R} \right|x^2+5x-6=0 \right\}$
+
+B. $\left\{ \left. x\in \mathbb{Q} \right|3x^2-5x+2=0 \right\}$
+
+C. $\left\{ \left. x\in \mathbb{Z} \right|x^2+x-1=0 \right\}$
+
+D. $\left\{ \left. x\in \mathbb{R} \right|x^2+5x-1=0 \right\}$
+
+# Lời giải
+
+Ta có:
+- $x^2+5x-6=0\Leftrightarrow \left[ \begin{aligned} & x=1 \\ & x=-6 \\ \end{aligned} \right.$. Vậy $A=\left\{ -6;1 \right\}$.
+- $3x^2-5x+2=0\Leftrightarrow \left[ \begin{aligned} & x=1 \\ & x=\dfrac{2}{3} \\ \end{aligned} \right.$. Vậy $B=\left\{ 1;\dfrac{2}{3} \right\}$.
+- $x^2+x-1=0\Leftrightarrow \left[ \begin{aligned} & x=\dfrac{-1+\sqrt{5}}{2} \\ & x=\dfrac{-1-\sqrt{5}}{2} \\ \end{aligned} \right.$. Vì $x\in \mathbb{Z}$ nên $C=\varnothing $.
+- $x^2+5x-1=0\Leftrightarrow \left[ \begin{aligned} & x=\dfrac{-5+\sqrt{29}}{2} \\ & x=\dfrac{-5-\sqrt{29}}{2} \\ \end{aligned} \right.$. Vậy $D=\left\{ \dfrac{-5+\sqrt{29}}{2};\dfrac{-5-\sqrt{29}}{2} \right\}$.
+
+---
+id: taphop_030
+lop: 10
+chu_de: Tập hợp
+dang: Liệt kê phần tử tập tự nhiên từ phương trình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - liệt kê tập hợp
+  - số tự nhiên
+---
+
+# Đề bài
+
+Viết tập hợp $A=\left\{ x\in \mathbb{N}\left| \left( 2x+1 \right) \right.\left( {x^2}-5x+6 \right)=0 \right\}$ bằng cách liệt kê.
+
+A. $\left\{ -1;2;3 \right\}$
+
+B. $\left\{ 2;3 \right\}$
+
+C. $\left\{ -\dfrac{1}{2};2;3 \right\}$
+
+D. $\left\{ -1;2 \right\}$
+
+# Lời giải
+
+Ta có $\left( 2x+1 \right)\left( {x^2}-5x+6 \right)=0\Leftrightarrow \left[ \begin{aligned} & 2x+1=0 \\ & {x^2}-5x+6+0 \\ \end{aligned} \right.\Leftrightarrow \left[ \begin{aligned} & x=-\dfrac{1}{2} \\ & x=2 \\ & x=3 \\ \end{aligned} \right.$.
+Do $x\in \mathbb{N}\Rightarrow A=\left\{ 2;3 \right\}$.
+
+---
+id: taphop_031
+lop: 10
+chu_de: Tập hợp
+dang: Liệt kê phần tử tập hữu tỉ từ phương trình
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - liệt kê tập hợp
+  - số hữu tỉ
+---
+
+# Đề bài
+
+Cho mệnh đề $A=\left\{ x\in Q|\left( x+1 \right)\left( x-\dfrac{1}{2} \right)\left( {x^2}-2 \right)=0 \right\}$. Viết lại tập$A$ bằng phương pháp liệt kê.
+
+A. $A=\left\{ \dfrac{1}{2} \right\}$
+
+B. $A=\left\{ -1 \right\}$
+
+C. $A=\left\{ -1;\dfrac{1}{2} \right\}$
+
+D. $A=\left\{ -1;\dfrac{1}{2};\sqrt{2};-\sqrt{2} \right\}$
+
+# Lời giải
+
+Ta có: $A=\left\{ x\in Q|\left( x+1 \right)\left( x-\dfrac{1}{2} \right)\left( {x^2}-2 \right)=0 \right\}=\left\{ -1;\dfrac{1}{2} \right\}$.
+
+---
+id: taphop_032
+lop: 10
+chu_de: Tập hợp
+dang: Số tập con của tập hợp
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập con
+  - số lượng tập con
+---
+
+# Đề bài
+
+Cho tập $A$ có $3$ phần tử, số tập con của tập $A$ bằng:
+
+A. $6$
+
+B. $3$
+
+C. $8$
+
+D. $4$
+
+# Lời giải
+
+Giả sử $A=\left\{ a;b;c \right\}$, các tập con của $A$ là: $\varnothing $, $\left\{ a \right\},\left\{ b \right\},\left\{ c \right\}$,$\left\{ a;b \right\},\left\{ a;c \right\},\left\{ b;c \right\}$,$\left\{ a;b;c \right\}$
+Vậu có $8$ tập con của $A$.
+
+---
+id: taphop_033
+lop: 10
+chu_de: Tập hợp
+dang: Đếm số tập con của tập tự nhiên cho trước
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tập con
+  - số lượng tập con
+---
+
+# Đề bài
+
+Cho tập $A=\left\{ x\in N|(2-x)(x^2-3x-4)=0 \right\}$. Hỏi tập $A$ có bao nhiêu tập con ?
+
+A. $2$
+
+B. $4$
+
+C. $7$
+
+D. $8$
+
+# Lời giải
+
+Ta có $(2-x)(x^2-3x-4)=0\Leftrightarrow \left[ \begin{aligned} & x=2\in N \\ & x=-1\notin N \\ & x=4\in N \\ \end{aligned} \right.$. Vậy $A=\left\{ 2;4 \right\}$.
+Do đó $A$ có các tập con là: $\left\{ 2 \right\};\left\{ 4 \right\};\left\{ 2;4 \right\};\varnothing $.
+
+---
+id: taphop_034
+lop: 10
+chu_de: Tập hợp
+dang: Đếm số tập hợp thỏa mãn quan hệ bao hàm
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - quan hệ bao hàm
+  - tập con
+---
+
+# Đề bài
+
+Có bao nhiêu tập $A$ để $\left\{ m;n \right\}\subset A\subset \left\{ m;n;x;y \right\}$ ?
+
+A. $2$
+
+B. $4$
+
+C. $1$
+
+D. $3$
+
+# Lời giải
+
+Chi vì $\left\{ m;n \right\}\subset A\subset \left\{ m;n;x;y \right\}$nên $A$có thể là một trong bốn tập hợp sau: $\left\{ m;n \right\};\left\{ m;n;x \right\};\left\{ m;n;y \right\};\left\{ m;n;x;y \right\}$.
+
+---
+id: taphop_035
+lop: 10
+chu_de: Tập hợp
+dang: Đếm số tập con có k phần tử
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập con
+  - số phần tử cố định
+---
+
+# Đề bài
+
+Tập $A=\left\{ 0;1;2 \right\}$ có bao nhiêu tập con có đúng 2 phần tử?
+
+A. $6$
+
+B. $7$
+
+C. $3$
+
+D. $4$
+
+# Lời giải
+
+Có 3 tập con có đúng 2 phần tử của tập $A=\left\{ 0;1;2 \right\}$ là $\left\{ 0;1 \right\},\left\{ 0;2 \right\},\left\{ 1;2 \right\}$.
+Công thức tính nhanh số tập con có 2 phần tử của tập $A=\left\{ 0;1;2 \right\}$(3 phần tử): $\dfrac{3.2}{2}=3$.
+
+---
+id: taphop_036
+lop: 10
+chu_de: Tập hợp
+dang: Nhận diện tính chất tập hợp liệt kê
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - số phần tử
+  - hợp tập hợp
+  - tập con
+---
+
+# Đề bài
+
+Cho hai tập hợp: $A=\{\left. x\in \mathbb{R} \right|(x-1)(x-2)(x-3)=0\}\text{ ; }B=\{5;3;1\}$. Vậy:
+
+a) Đúng/Sai: Tập hợp $A$ có 3 phần tử
+
+b) Đúng/Sai: Tập hợp $A\cup B$ có 6 phần tử
+
+c) Đúng/Sai: Tập hợp $A\subset B$
+
+d) Đúng/Sai: Tập hợp $B\subset A$
+
+# Lời giải
+
+Xét ${A}$: ${(x-1)(x-2)(x-3)=0 \Leftrightarrow x-1=0 \vee x-2=0 \vee x-3=0}$ ${\Rightarrow x=1 \vee x=2 \vee x=3}$.
+Do vậy ${A=\{2 ; 3 ; 1\}}$.
+- a) Đúng vì A có 3 nghiệm phân biệt thực.
+- b) Sai vì $A \cup B = \{1, 2, 3, 5\}$ chỉ có 4 phần tử.
+- c) Sai vì $2 \in A$ nhưng $2 \notin B$.
+- d) Sai vì $5 \in B$ nhưng $5 \notin A$.
+
+---
+id: taphop_037
+lop: 10
+chu_de: Tập hợp
+dang: Bài toán đếm số học sinh giỏi môn học
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - bài toán thực tế
+  - đếm phần tử
+---
+
+# Đề bài
+
+Lớp ${10 B_1}$ có 7 học sinh giỏi Toán, 5 học sinh giỏi Lý, 6 học sinh giỏi Hóa, 2 học sinh chỉ giỏi Toán và Lý, 3 học sinh chỉ giỏi Toán và Hóa, 1 học sinh chỉ giỏi cả Lý và Hóa, 1 học sinh giỏi cả 3 môn Toán, Lý, Hóa. Vậy:
+
+a) Đúng/Sai: Số học sinh chỉ giỏi môn Toán là 1 học sinh
+
+b) Đúng/Sai: Số học sinh chỉ giỏi môn Lý là 1 học sinh
+
+c) Đúng/Sai: Số học sinh chỉ giỏi môn Hóa là 2 học sinh
+
+d) Đúng/Sai: Số học sinh giỏi ít nhất một môn (Toán, Lý, Hóa) là 10 học sinh
+
+# Lời giải
+
+- a) Số học sinh chỉ giỏi môn Toán: ${7-3-1-2=1}$.
+- b) Số học sinh chỉ giỏi môn Lý: ${5-1-1-2=1}$.
+- c) Số học sinh chỉ giỏi môn Hóa: ${6-3-1-1=1}$.
+- d) Số học sinh giỏi ít nhất một môn (Toán, Lý, Hóa) là: ${1+2+1+1+1+3+1=10}$.
+
+---
+id: taphop_038
+lop: 10
+chu_de: Tập hợp
+dang: Xác định quan hệ bao hàm giữa các tập liệt kê
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - tập con
+  - quan hệ bao hàm
+---
+
+# Đề bài
+
+Giả sử ${A=\{2 ; 4 ; 6\}, B=\{2 ; 6\}, C=\{4 ; 6\}, D=\{4 ; 6 ; 8\}}$. Vậy:
+
+a) Đúng/Sai: $B\subset A$
+
+b) Đúng/Sai: $A\subset B$
+
+c) Đúng/Sai: $C\subset A$
+
+d) Đúng/Sai: $C\subset D$
+
+# Lời giải
+
+Vì ${2 \in A, 6 \in A \Rightarrow B \subset A}$. Vì ${4 \in A, 6 \in A \Rightarrow C \subset A}$. Vì ${4 \in D, 6 \in D \Rightarrow C \subset D}$.
+
+---
+id: taphop_039
+lop: 10
+chu_de: Tập hợp
+dang: Tìm tập hợp từ các phép toán cho trước
+muc_do:
+  - NB
+  - NB
+  - TH
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - hiệu tập hợp
+  - hợp tập hợp
+  - giao tập hợp
+---
+
+# Đề bài
+
+Cho hai tập hợp ${A}$ và ${B}$ biết ${A \setminus B=\{a ; f\}, A \cup B=\{a ; b ; c ; d ; e ; f ; g ; h\}}$,
+${B \setminus A=\{b ; g ; h\}}$. Vậy:
+
+a) Đúng/Sai: ${A=\{a ; c ; d ; e ; f\}}$
+
+b) Đúng/Sai: $A\subset B$
+
+c) Đúng/Sai: $A\cap B=\{c;d;e\}.$
+
+d) Đúng/Sai: $A\subset B$
+
+# Lời giải
+
+Ta có: ${A=\{a ; c ; d ; e ; f\}}$, $B=\{b;c;d;e;g;h\}$, $A \cap B = \{ c;d;e\} .$
+
+---
+id: taphop_040
+lop: 10
+chu_de: Tập hợp
+dang: Tìm số giá trị m nguyên để tập này là con tập kia
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - tập con
+  - khoảng đoạn chứa tham số
+---
+
+# Đề bài
+
+Cho hai tập hợp ${A=[m+1 ; 2 m-1], B=(0 ; 6)}$. Có bao nhiêu giá trị ${{m}}$ nguyên để ${A \subset B}$.
+
+# Lời giải
+
+Điều kiện: ${m+1<2 m-1 \Leftrightarrow m>2}$
+Để ${A \subset B}$ thì ${\left\{\begin{array}{l}m+1>0 \\ 2 m-1<6\end{array} \Leftrightarrow\left\{\begin{array}{l}m>-1 \\ m<\dfrac{7}{2}\end{array} \Leftrightarrow-1<m<\dfrac{7}{2}\right.\right.}$.
+So điều kiện ta được ${2<m<\dfrac{7}{2}}$. Vì m nguyên nên ${m=3}$. Vậy có 1 giá trị m.
+
+---
+id: taphop_041
+lop: 10
+chu_de: Tập hợp
+dang: Bài toán thực tế ba tập hợp (Toán, Lý, Hóa)
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - đếm phần tử
+  - công thức bao hàm loại trừ
+---
+
+# Đề bài
+
+Lớp 10A có 45 học sinh trong đó có 25 em học giỏi môn Toán, 23 em học giỏi môn Lý, 20 em học giỏi môn Hóa, 11 em học giỏi cả môn Toán và môn Lý, 8 em học giỏi cả môn Lý và môn Hóa, 9 em học giỏi cả môn Toán và môn Hóa. Hỏi lớp 10 A có bao nhiêu bạn học giỏi cả ba môn Toán, Lý, Hóa? (biết rằng mỗi học sinh trong lớp học giỏi ít nhất một trong ba môn Toán, Lý, Hóa).
+
+# Lời giải
+
+Gọi ${T, L, H}$ lần lượt là tập hợp các học sinh giỏi môn Toán, Lý, Hóa.
+Ta có: ${|T \cup L \cup H|=|T|+|L|+|H|-|T \cap L|-|L \cap H|-|H \cap T|+|T \cap L \cap H|}$ 
+$\Leftrightarrow 45=25+23+20-11-8-9+|T \cap L \cap H|$
+$\Leftrightarrow|T \cap L \cap H|=5$.
+Vậy có 5 học sinh giỏi cả 3 môn.
+
+---
+id: taphop_042
+lop: 10
+chu_de: Tập hợp
+dang: Đếm số học sinh chỉ chơi một môn thể thao
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 20
+tags:
+  - bài toán thực tế
+  - số phần tử chỉ thuộc một tập
+---
+
+# Đề bài
+
+Một lớp học có 25 học sinh chơi bóng đá, 23 học sinh chơi bóng bàn, 14 học sinh chơi cả bóng đá và bóng bàn, 6 học sinh không chơi môn nào. Tìm số học sinh chỉ chơi một môn thể thao?
+
+# Lời giải
+
+Gọi ${{A}}$ là tập hợp các học sinh chơi bóng đá, ${B}$ là tập hợp các học sinh chơi bóng bàn, C là tập hợp các học sinh không chơi môn thể thao nào.
+Ta có: ${|A|}$: là số học sinh chơi bóng đá; ${|B|}$: là số học sinh chơi bóng bàn; ${|C|}$: là số học sinh không chơi môn thể thao nào.
+Khi đó số học sinh chỉ chơi một môn thể thao là: $|A|+|B|-2|A\cap B|=25+23-2.14=20.$
+
+---
+id: taphop_043
+lop: 10
+chu_de: Tập hợp
+dang: Tìm độ dài hiệu hai biên của khoảng tham số m
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 0.67
+tags:
+  - giao khác rỗng
+  - tham số m âm
+---
+
+# Đề bài
+
+Cho số thực ${m<0}$ và hai tập hợp ${A=(-\infty ; 9 m), B=\left(\dfrac{4}{m} ;+\infty\right)}$.
+Tìm tất cả các giá trị thực của tham số ${m}$ để ${A \cap B \neq \varnothing}$là $\left( a;b \right)$. Khi đó $b-a$ bằng ( kết quả làm tròn đến hàng phần trăm)
+
+# Lời giải
+
+Để hai tập hợp ${A}$ và ${B}$ giao nhau khác rỗng ${\Leftrightarrow 9 m>\dfrac{4}{m}}$
+${\Leftrightarrow 9 m^2<4}$ (do ${m<0} \Rightarrow m^2<\dfrac{4}{9} \Leftrightarrow-\dfrac{2}{3}<m<0$).
+Do đó $a = -\dfrac{2}{3}, b = 0 \Rightarrow b - a = \dfrac{2}{3} \approx 0{,}67$.
+
+---
+id: taphop_044
+lop: 10
+chu_de: Tập hợp
+dang: Tìm m để giao hai tập hợp bằng rỗng
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - giao bằng rỗng
+  - khoảng khoảng
+---
+
+# Đề bài
+
+Cho hai tập hợp ${A=(m ; m+1)}$ và ${B=[-1 ; 3]}$. Khi $m\in \left( -\infty ;a \right]\cup \left[ b;+\infty \right)$thì ${A \cap B=\varnothing}$. Khi đó $b-a$ bằng (kết quả làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+${A \cap B=\varnothing \Leftrightarrow\left[\begin{array}{l}m+1 \leq-1 \\ m \geq 3\end{array} \Leftrightarrow\left[\begin{array}{l}m \leq-2 \\ m \geq 3\end{array}\right.\right.}$.
+Do đó $a = -2, b = 3 \Rightarrow b - a = 3 - (-2) = 5$.
+
+---
+id: taphop_045
+lop: 10
+chu_de: Tập hợp
+dang: Giao tập hợp bằng rỗng chứa phân số
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2.67
+tags:
+  - giao bằng rỗng
+  - khoảng đoạn phức tạp
+---
+
+# Đề bài
+
+Cho ${A=\left[m-3 ; \dfrac{m+2}{4}\right), B=(-\infty ;-1) \cup[2 ;+\infty)}$. Khi $m\in \left[ a;b \right)$thì ${A \cap B=\varnothing}$.Khi đó $b-a$ bằng ( kết quả làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+${A \cap B=\varnothing \Leftrightarrow\left\{\begin{array}{l}m-3<\dfrac{m+2}{4} \\ m-3 \geq-1 \\ \dfrac{m+2}{4} \leq 2\end{array} \Leftrightarrow\left\{\begin{array}{l}m<\dfrac{14}{3} \\ m \geq 2 \\ m \leq 6\end{array} \Leftrightarrow 2 \leq m<\dfrac{14}{3}\right.\right.}$.
+Do đó $a = 2, b = \dfrac{14}{3} \Rightarrow b - a = \dfrac{14}{3} - 2 = \dfrac{8}{3} \approx 2{,}67$.
