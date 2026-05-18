@@ -1,0 +1,1754 @@
+---
+id: tamthuc_001
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Nhận biết tam thức bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - định nghĩa
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Tìm khẳng định đúng trong các khẳng định sau?
+
+A. $f(x)=3x^2+2x-5$ là tam thức bậc hai
+
+B. $f(x)=2x-4$ là tam thức bậc hai
+
+C. $f(x)=3x^3+2x-1$ là tam thức bậc hai
+
+D. $f(x)=x^4-x^2+1$ là tam thức bậc hai
+
+# Lời giải
+
+Theo định nghĩa tam thức bậc hai thì $f(x)=3x^2+2x-5$ là tam thức bậc hai.
+
+---
+id: tamthuc_002
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Điều kiện tam thức không đổi dấu trên R
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - định lý dấu tam thức
+  - hằng số
+---
+
+# Đề bài
+
+Cho $f(x)=ax^2+bx+c$, $\left(a\ne 0\right)$ và $\Delta=b^2-4ac$. Xác định dấu của $\Delta$ khi $f(x)$ luôn cùng dấu với hệ số $a$ với mọi $x\in \mathbb{R}$.
+
+A. $\Delta < 0$
+
+B. $\Delta=0$
+
+C. $\Delta > 0$
+
+D. $\Delta \ge 0$
+
+# Lời giải
+
+Theo định lý về dấu của tam thức bậc hai thì $f(x)$ luôn cùng dấu với hệ số $a$ với mọi $x\in \mathbb{R}$ khi $\Delta < 0$.
+
+---
+id: tamthuc_003
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu tam thức bậc hai cụ thể
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xét dấu
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Cho $f(x)=x^2+4$. Khẳng định nào sau đây là đúng?
+
+A. $f(x) > 0,\forall x\in \mathbb{R}$
+
+B. $f(x) < 0,\forall x\in \mathbb{R}$
+
+C. $f(x)=0,\forall x\in \mathbb{R}$
+
+D. $f(x) < 0,\forall x\in \left(-\infty;-2\right)\cup \left(2;+\infty \right)$
+
+# Lời giải
+
+- **Cách 1.** Ta có: $x^2 \ge 0,\forall x\in \mathbb{R}\Rightarrow x^2+4> 0,\forall x\in \mathbb{R}$.
+- **Cách 2.** $f(x)=x^2+4$ là tam thức bậc hai có $a=1$, $\Delta=-16< 0$.
+Do đó $f(x) > 0,\forall x\in \mathbb{R}$.
+
+---
+id: tamthuc_004
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Tìm tham số để biểu thức là tam thức bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - điều kiện hệ số a
+  - tham số m
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị của tham số $m$ để biểu thức $f(x)=(m-2)x^2+2x-3$ là một tam thức bậc hai. 
+
+A. $m\in \mathbb{R}$
+
+B. $m\ne 2$
+
+C. $m > 2$
+
+D. $m < 2$
+
+# Lời giải
+
+$f(x)=(m-2)x^2+2x-3$ là một tam thức bậc hai khi và chỉ khi: $m-2\ne 0\Leftrightarrow m\ne 2$. 
+
+---
+id: tamthuc_005
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Biểu thức luôn dương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - giá trị dương
+  - xét dấu
+---
+
+# Đề bài
+
+Với số thực $a$ bất kỳ, biểu thức nào sau đây luôn nhận giá trị dương?
+
+A. $a^2+2a-1$
+
+B. $a^2-2a+1$
+
+C. $a^2+a+1$
+
+D. $a^2+2a+1$
+
+# Lời giải
+
+Tam thức $a^2+a+1=\left(a+\dfrac{1}{2}\right)^2+\dfrac{3}{4}>0,\,\forall x$ nên $a^2+a+1$ luôn dương với mọi $a$.
+
+---
+id: tamthuc_006
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu tam thức bậc hai có nghiệm kép
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - nghiệm kép
+  - mệnh đề đúng
+---
+
+# Đề bài
+
+Cho $f(x)=x^2-4x+4$. Mệnh đề nào sau đây là đúng?
+
+A. $f(x) > 0,\forall x\in \mathbb{R}$
+
+B. $f(x) > 0,\forall x\ne 2$
+
+C. $f(x) > 0,\forall x\ne 4$
+
+D. $f(x) < 0,\forall x\in \mathbb{R}$
+
+# Lời giải
+
+Ta có $f(x)=\left(x-2\right)^2 > 0,\forall x\ne 2$.
+
+---
+id: tamthuc_007
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Tìm nghiệm tam thức bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - nghiệm tam thức
+  - phương trình bậc hai
+---
+
+# Đề bài
+
+Nghiệm của tam thức bậc hai $f(x)=x^2-9$ là
+
+A. $x=-3$
+
+B. $x=3$
+
+C. $\hoac{&{x=3} \\ &{x=-3} &}$
+
+D. $\hoac{&{x=0} \\ &{x=9} &}$
+
+# Lời giải
+
+Ta có $f(x)=0\Leftrightarrow x=\pm 3$.
+
+---
+id: tamthuc_008
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu tam thức bậc hai có hai nghiệm phân biệt
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - bảng xét dấu
+  - khoảng nghiệm
+---
+
+# Đề bài
+
+Cho tam thức bậc hai $f(x)=x^2-2x$. Chọn khẳng định đúng.
+
+A. $f(x) < 0,\forall x\in \left(0;2\right)$
+
+B. $f(x) < 0,\forall x\in \mathbb{R}$
+
+C. $f(x) > 0,\forall x\in \mathbb{R}$
+
+D. $f(x) > 0,\forall x\in \left(1;+\infty \right)$
+
+# Lời giải
+
+$f(x)=0\Leftrightarrow \hoac{&{x=0} \\ &{x=2} &}$ và $a=1> 0$.\\
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $0$ , $2$ , $+\infty$}
+		\tkzTabLine{ , + , $0$ , - , $0$ , + , }
+	\end{tikzpicture}
+\end{center}
+Do đó $f(x) < 0,\forall x\in \left(0;2\right)$.
+
+---
+id: tamthuc_009
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Nhận diện tam thức từ bảng xét dấu
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - bảng xét dấu
+  - đồ thị
+---
+
+# Đề bài
+
+Bảng xét dấu sau là của tam thức bậc hai nào?
+
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $1$ , $2$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , + , $0$ , - , }
+	\end{tikzpicture}
+\end{center}
+
+A. $f(x)=-x^2-3x+2$
+
+B. $f(x)=\left(x-1\right)\left(-x+2\right)$
+
+C. $f(x)=x^2+3x+2$
+
+D. $f(x)=x^2-3x+2$
+
+# Lời giải
+
+Dựa vào bảng xét dấu, ta có
+- $f(x)$ có nghiệm là $1$ và $2$ nên loại $f(x)=-x^2-3x+2$ và $f(x)=x^2+3x+2$;
+- $\forall x\in \left(1; 2\right),f(x) > 0$ nên $a < 0$. Do đó đáp án $f(x)=x^2-3x+2$ sai;
+- Đáp án $f(x)=\left(x-1\right)\left(-x+2\right)$ đúng.
+
+---
+id: tamthuc_010
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Giải bất phương trình bậc hai f(x) >= 0
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - bất phương trình
+  - tập nghiệm
+---
+
+# Đề bài
+
+Cho tam thức bậc hai $f(x)=-x^2-4x+5$. Tìm tất cả giá trị của $x$ để $f(x)\ge 0$.
+
+A. $x\in \left(-\infty;-1\right]\cup \left[5;+\infty \right)$
+
+B. $x\in \left[-1; 5\right]$
+
+C. $x\in \left[-5; 1\right]$
+
+D. $x\in \left(-5; 1\right)$
+
+# Lời giải
+
+Xét tam thức $f(x)=-x^2-4x+5$. Ta có
+- $a=-1< 0$;
+- $\Delta=36> 0$ nên  tam thức $f(x)$ có hai nghiệm $x=1$ và $x=-5$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-5$ , $1$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , + , $0$ , - , }
+	\end{tikzpicture}
+\end{center}
+Suy ra $f(x)\ge 0$ khi $-5\le x\le 1$.
+
+---
+id: tamthuc_011
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xác định mệnh đề xét dấu tam thức bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - mệnh đề xét dấu
+  - bảng xét dấu
+---
+
+# Đề bài
+
+Dấu của tam thức bậc hai $f(x)=-x^2+5x-6$ được xác định như sau
+
+A. $f(x) < 0$ với $2< x < 3$ và $f(x) > 0$ với $x < 2$ hoặc $x > 3$
+
+B. $f(x) < 0$ với $-3< x <-2$ và $f(x) > 0$ với $x <-3$ hoặc $x >-2$
+
+C. $f(x) > 0$ với $2< x < 3$ và $f(x) < 0$ với $x < 2$ hoặc $x > 3$
+
+D. $f(x) > 0$ với $-3< x <-2$ và $f(x) < 0$ với $x <-3$ hoặc $x >-2$
+
+# Lời giải
+
+Xét tam thức $f(x)=-x^2+5x-6$.\\
+Ta có $\Delta=1> 0$ với hệ số $a=-1< 0$ có hai nghiệm là $x=3$ và $x=2$.\\
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $2$ , $3$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , + , $0$ , - , }
+	\end{tikzpicture}
+\end{center}
+Suy ra $f(x)> 0$ khi $2< x<3$ và $f(x)<0$ khi $x<2$ hoặc $x>3$.
+
+---
+id: tamthuc_012
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Tìm tham số để biểu thức là tam thức bậc hai (lặp)
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - điều kiện hệ số a
+  - tham số m
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị của tham số $m$ để biểu thức $f(x)=\left(m-2\right)x^2+2x-3$ là một tam thức bậc hai.
+
+A. $m\in \mathbb{R}$
+
+B. $m\ne 2$
+
+C. $m > 2$
+
+D. $m < 2$
+
+# Lời giải
+
+Biểu thức $f(x)=\left(m-2\right)x^2+2x-3$ là một tam thức bậc hai khi $m-2\ne 0\Leftrightarrow m\ne 2$.
+
+---
+id: tamthuc_013
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Nhận biết tam thức bậc hai dạng Đúng Sai
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - định nghĩa
+  - đa thức bậc hai
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $3x+7$ là tam thức bậc hai
+
+b) Đúng/Sai: $-x^2+3$ là tam thức bậc hai
+
+c) Đúng/Sai: $3x(x-1)$ là tam thức bậc hai
+
+d) Đúng/Sai: $(x-1)(x+1)-x^2$ là tam thức bậc hai
+
+# Lời giải
+
+- a) Sai. Vì $3x+7$ không có dạng $ax^2+bx+c$.
+- b) Đúng. Vì $-x^2+3$ nó có dạng $ax^2+bx+c$.
+- c) Đúng. Vì $3x(x-1)=3x^2-3x$ là tam thức bậc hai.
+- d) Sai. Vì $(x-1)(x+1)-x^2=x^2-1-x^2=1$.
+
+---
+id: tamthuc_014
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Khẳng định tính đúng sai về xét dấu tam thức
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - xét dấu
+  - bảng xét dấu
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các khẳng định sau:
+
+a) Đúng/Sai: $f(x)=x^2-x-2$ có $f(x) < 0$ với mọi $x\in (-1;2)$
+
+b) Đúng/Sai: $f(x)=-x^2+2x-5$ có $f(x) > 0$ với mọi $x\in \mathbb{R}$
+
+c) Đúng/Sai: $f(x)=-4x^2+16x-16$ có bảng xét dấu là\\
+\begin{tikzpicture}[>=stealth]
+	\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+	{$-\infty$ , $2$ , $+\infty$}
+	\tkzTabLine{ , - , $0$ , - , }
+\end{tikzpicture}
+
+d) Đúng/Sai: $f(x)=-4x^2+3x-5$ có bảng xét dấu là\\
+\begin{tikzpicture}[>=stealth]
+	\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+	{$-\infty$ ,  $+\infty$}
+	\tkzTabLine{ , + , }
+\end{tikzpicture}
+
+# Lời giải
+
+- a) Đúng. Xét $f(x)=x^2-x-2$ có $a=1> 0$ và có hai nghiệm $x_1=-1;x_2=2$.\\
+Do đó, ta có bảng xét dấu sau
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-1$ , $2$ , $+\infty$}
+		\tkzTabLine{ , + , $0$ , - , $0$ , + , }
+	\end{tikzpicture}
+\end{center}
+Vậy $f(x) < 0$ với mọi $x\in (-1;2)$.
+- b) Đúng. Xét $f(x)=-x^2+2x-5$ có $\heva{&a=1> 0\\&\Delta'=-4< 0}$ nên $f(x) > 0$ với mọi $x\in \mathbb{R}$.
+- c) Đúng. Ta có $-4x^2+16x-16=0\Leftrightarrow x=2$.\\
+Do đó, ta có bảng xét dấu sau
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $2$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , - , }
+	\end{tikzpicture}
+\end{center}
+- d) Sai. Ta có $-4x^2+3x-5=0$ vô nghiệm. Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ ,$+\infty$}
+		\tkzTabLine{ , - , }
+	\end{tikzpicture}
+\end{center}
+
+---
+id: tamthuc_015
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Đọc đồ thị và bảng xét dấu hàm số bậc hai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - đồ thị
+  - giao điểm trục hoành
+---
+
+# Đề bài
+
+Cho đồ thị hàm số bậc hai $y=f(x)$ và $y=g(x)$.
+
+\begin{center}
+	\begin{tikzpicture}[line cap=butt,line join=miter,>=stealth,font=\footnotesize,scale=.7]
+		\tikzset{declare function={xmin=-3;xmax=3;ymin=-5;ymax=1;
+				f(\x)=1*(\x)^2-4;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)}]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)}]{$ y $};
+		\fill (0,0) node[shift={(225:9pt)}]{$ O $};
+		\draw[fill=white] (0,0) circle (1.5pt) 
+		(-2,0)node[shift={(-140:9pt)}]{$-2$} circle (1.5pt)
+		(2,0)node[shift={(-40:9pt)}]{$2$} circle (1.5pt)
+		(0,-4)node[shift={(-140:9pt)}]{$-4$} circle (1.5pt);
+		\node[rotate=-70] at (-1.3,-1.5){$y=f(x)$};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+	\end{tikzpicture}\hspace{2cm}
+\begin{tikzpicture}[line cap=butt,line join=miter,>=stealth,font=\footnotesize,scale=.7]
+	\tikzset{declare function={xmin=-1;xmax=6;ymin=-3;ymax=1;
+			f(\x)=-1*(\x)^2+7*(\x)-12;
+		},
+		smooth,samples=450
+	}
+	\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)}]{$ x $};
+	\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)}]{$ y $};
+	\fill (0,0) node[shift={(225:9pt)}]{$ O $};
+	\draw[fill=white] (0,0) circle (1.5pt) 
+	(3,0)node[shift={(140:7pt)}]{$3$} circle (1.5pt)
+	(4,0)node[shift={(40:7pt)}]{$4$} circle (1.5pt);
+	\node[rotate=69] at (1.8,-1.8){$y=g(x)$};
+	\clip (xmin,ymin) rectangle (xmax,ymax);
+	\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}
+\end{center}
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Đồ thị hàm số $y=f(x)$ cắt trục hoành tại hai điểm $(-2;0)$ và $(2;0)$
+
+b) Đúng/Sai: Đồ thị hàm số $y=g(x)$ cắt trục hoành tại hai điểm $(3;0)$ và $(4;0)$
+
+c) Đúng/Sai: Tam thức bậc hai $f(x)$ có bảng xét dấu\\\begin{tikzpicture}[>=stealth]
+			\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+			{$-\infty$,$-2$, $2$ ,$+\infty$}
+			\tkzTabLine{ , - ,$0$, + ,$0$, - ,}
+		\end{tikzpicture}
+
+d) Đúng/Sai: Tam thức bậc hai $g(x)$ có bảng xét dấu \\\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$g(x)$/.7}
+		{$-\infty$,$3$, $4$ ,$+\infty$}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,}
+\end{tikzpicture}
+
+# Lời giải
+
+- a) Đúng. Đồ thị hàm số $y=f(x)$ cắt trục hoành tại hai điểm $(-2;0)$ và $(2;0)$.
+- b) Đúng. Đồ thị hàm số $y=g(x)$ cắt trục hoành tại hai điểm $(3;0)$ và $(4;0)$.
+- c) Sai. Đồ thị hàm số $y=f(x)$ cắt trục hoành tại hai điểm $(-2;0)$ và $(2;0)$ nên tam thức bậc hai $f(x)$ có hai nghiệm là $x_1=-2,x_2=2$. Đồ thị có bề lõm quay lên nên hệ số $a > 0$. Do đó, ta có bảng xét dấu sau
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$g(x)$/.7}
+		{$-\infty$,$-2$, $2$ ,$+\infty$}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,}
+	\end{tikzpicture}
+\end{center}
+- d) Sai. Quan sát đồ thị hàm số $y=g(x)$, ta thấy $(3;0)$ và $(4;0)$ nên tam thức bậc hai $g(x)$ có hai nghiệm là $x_1=3,x_2=4$.
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$g(x)$/.7}
+		{$-\infty$,$3$, $4$ ,$+\infty$}
+		\tkzTabLine{ , - ,$0$, + ,$0$, - ,}
+	\end{tikzpicture}
+\end{center}
+
+---
+id: tamthuc_016
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu biểu thức phân thức thức chứa tích thương
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - phân thức
+  - bảng xét dấu phức tạp
+---
+
+# Đề bài
+
+Cho biểu thức $f(x)=\dfrac{x-3}{x^2+7x+6}$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $f(x)=0\Leftrightarrow \hoac{&{x=-1} \\ &{x=-6} &}$
+
+b) Đúng/Sai: với $x\in (-\infty;-6)\cup (-1;3)$ thì $f(x) > 0$
+
+c) Đúng/Sai: với $x\in (-6;-1)\cup (3;+\infty)$ thì $f(x) < 0$
+
+d) Đúng/Sai: Bảng xét dấu của biểu thức là\\
+\begin{tikzpicture}[>=stealth]
+	\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$x-3$/.7,$x^2+7x+6$/.7,$f(x)$/.7}
+	{$-\infty$,$-6$, $-1$ ,$3$ ,$+\infty$}
+	\tkzTabLine{ , - ,t, - ,t, - ,$0$, + ,}
+	\tkzTabLine{ , + ,$0$, - ,$0$, + ,t, + ,}
+	\tkzTabLine{ , - ,d, + ,d, - ,$0$, + ,}
+\end{tikzpicture}
+
+# Lời giải
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$x-3$/.7,$x^2+7x+6$/.7,$f(x)$/.7}
+		{$-\infty$,$-6$, $-1$ ,$3$ ,$+\infty$}
+		\tkzTabLine{ , - ,t, - ,t, - ,$0$, + ,}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,t, + ,}
+		\tkzTabLine{ , - ,d, + ,d, - ,$0$, + ,}
+	\end{tikzpicture}
+\end{center}
+- a) Sai. Ta có $f(x)=0\Rightarrow x-3=0\Leftrightarrow x=3$ thỏa điều kiện $x^2+7x+6\neq 0$.
+- b) Sai. Dựa vào bảng xét dấu, ta có $f(x)>0$ khi $x\in(-6;-1)\cup(3;+\infty)$.
+- c) Sai. Dựa vào bảng xét dấu, ta có $f(x)<0$ khi $x\in(-\infty;-6)\cup(-1;3)$.
+- d) Đúng. 
+
+---
+id: tamthuc_017
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Tìm điều kiện tham số m để f(x) < 0 với mọi x thuộc R
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: -1
+tags:
+  - số nguyên âm lớn nhất
+  - định lý dấu tam thức
+---
+
+# Đề bài
+
+Tìm số nguyên âm $m$ lớn nhất  sao cho $-x^2+2(m+1)x-m^2+m < 0$ với mọi $x\in \mathbb{R}$.
+
+# Lời giải
+
+Xét tam thức bậc hai $f(x)=-x^2+2(m+1)x-m^2+m$ có \[\Delta '=\left(m+1\right)^2-\left(-1\right).\left(-m^2+m\right)=3m+1\text{ và }a=-1< 0.\]
+Để $f(x) < 0$ với mọi $x\in \mathbb{R}$ thì $\Delta '=3m+1< 0$ suy ra $m < \dfrac{-1}{3}$.
+
+Do $m$ là số nguyên âm lớn nhất nên $m = -1$.
+
+---
+id: tamthuc_018
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Giải bất phương trình dạng tích và tính giá trị biểu thức
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 10
+tags:
+  - tập nghiệm
+  - bảng xét dấu tích
+---
+
+# Đề bài
+
+Giải bất phương trình $\left(x^2-3x+2\right)\left(-x^2+5x-6\right)\ge 0$ ta được tập nghiệm $S=[a;b]$. Tính giá trị của biểu thức $a+3b$.
+
+# Lời giải
+
+Tam thức bậc hai $f(x)=x^2-3x+2$ có $a=1> 0$ và có hai nghiệm $x_1=1;x_2=2$.\\
+Tam thức bậc hai $g(x)=-x^2+5x-6$ có $a=-1< 0$ và có hai nghiệm $x_1=2;x_2=3$
+Ta có bảng xét dấu sau	
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$x^2-3x+2$/.7,$-x^2+5x-6$/.7,$f(x)$/.7}
+		{$-\infty$,$1$, $2$ ,$3$ ,$+\infty$}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,t, + ,}
+		\tkzTabLine{ , - ,t, - ,$0$, + ,$0$, - ,}
+		\tkzTabLine{ , - ,$0$, + ,$0$, + ,$0$, - ,}
+	\end{tikzpicture}
+\end{center}	
+Suy ra $f(x)\cdot g(x)\ge 0$ khi $x\in [1;3]$.
+Vậy  giá trị của biểu thức $a+3b=1+3\cdot 3=10$.
+
+---
+id: tamthuc_019
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Đếm giá trị nguyên tham số m để bpt đúng trên khoảng cho trước
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 20
+tags:
+  - khoảng nghiệm
+  - so sánh nghiệm với một số
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên của tham số $m$ thuộc đoạn $\left[-20;30\right]$ để bất phương trình $x^2+2mx+m-2< 0$ nghiệm đúng với mọi $x\in (1;2)$?
+
+# Lời giải
+
+Tam thức bậc hai $f(x)=x^2+2mx+m-2$ có \[\Delta'=m^2-m+2=\left(m-\dfrac{1}{2} \right)^2+\dfrac{7}{4} \ge \dfrac{7}{4} > 0,\,\forall m\in \mathbb{R}.\]
+Do đó $f(x)$ có hai nghiệm phân biệt $x_1, x_2\,\left(x_1 < x_2 \right)$ với mọi $m\in \mathbb{R}$.\\
+Để $f(x) < 0$ với mọi $x\in (1;2)$ thì $x_1 \le 1< 2\le x_2$ \[\Leftrightarrow \heva{&f(1)\leq 0\\&f(2)\leq 0}\Leftrightarrow\heva{&3m-2\leq 0\\&5m+2\leq 0}\Rightarrow m\leq -\dfrac{2}{5}.\]
+Vì $m \in \mathbb{Z}$ và $m \in [-20; 30]$ nên $m \in \{-20; -19; ...; -1\}$.
+Vậy có $20$ giá trị nguyên của tham số $m$ thuộc đoạn $\left[-20;30\right]$ thỏa mãn yêu cầu bài toán.
+
+---
+id: tamthuc_020
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Biện luận nghiệm phương trình bậc hai bằng biệt thức Delta
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 13
+tags:
+  - hai nghiệm phân biệt
+  - số nguyên tham số
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên của tham số $m$ thuộc đoạn $\left[-10;5\right]$ để phương trình $x^2-(m+1)x+3m-5=0$ có hai nghiệm phân biệt?
+
+# Lời giải
+
+Ta có $\Delta=[-(m+1)]^2-4\cdot 1\cdot (3m-5)=m^2-10m+21$.\\
+Để phương trình $x^2-(m+1)x+3m-5=0$ có hai nghiệm phân biệt thì \[\Delta > 0\text{ hay } m^2-10m+21> 0.\]
+Tam thức bậc hai $m^2-10m+21$ có $a=1> 0$ và có hai nghiệm $m_1=3,m_2=7$.\\
+Do đó, $m^2-10m+21> 0$ khi $m\in (-\infty;3)\cup (7;+\infty)$.\\
+Mà $m\in \mathbb{Z}$ và $m\in \left[-10;5\right]$ nên $m \in \{-10, -9, ..., 2, 3\}$ loại $3$ còn $\{-10, ..., 2\}$. Số lượng giá trị nguyên là $2 - (-10) + 1 = 13$ giá trị nguyên của tham số $m$ thỏa mãn.
+
+---
+id: tamthuc_021
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Bài toán thực tế ứng dụng bất phương trình bậc hai
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - thực tế
+  - chuyển động
+---
+
+# Đề bài
+
+Một chú thỏ đen chạy đuổi theo một chú thỏ trắng ở vị trí cách nó $100$~(m). Biết rằng, quãng đường chú thỏ đen chạy được biểu thị bởi công thức $s(t)=8t+5t^2$~(m), trong đó $t$ (giây) là thời gian tính từ thời điểm chú thỏ đen bắt đầu chạy, và chú thỏ trắng chạy với vận tốc không đổi là $3$~(m/s). Hỏi bắt đầu từ giá trị nguyên $t$ nào thì chú thỏ đen chạy trước chú thỏ trắng?
+
+# Lời giải
+
+Giả sử vị trí ban đầu của chú thỏ đen là $s=0$~(m) và thời điểm ban đầu là $t=0$ (giây).\\
+Quãng đường của chú thỏ trắng chạy được tại thời điểm $t$ là $f(t)=100+3t$~(m).\\
+Để chú thỏ đen chạy trước chú thỏ trắng thì \[s(t) > f(t)\text{ hay }8t+5t^2 > 100+3t\Leftrightarrow 5t^2+5t-100> 0\Rightarrow t\in (4;+\infty) (\text{vì }t>0).\]
+Do $t$ nguyên nên $t$ bắt đầu từ $5$.
+Vậy bắt đầu giây thứ $5$ thì chú thỏ đen chạy trước chú thỏ trắng.
+
+---
+id: tamthuc_022
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Tìm m để hàm số chứa căn xác định trên R
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 0
+tags:
+  - tập xác định R
+  - biểu thức dưới căn
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên của tham số $m$, hàm số $y=\sqrt{x^2-2mx+m-1}$ có tập xác định là $\mathbb{R}$?
+
+# Lời giải
+
+Để hàm số $y=\sqrt{x^2-2mx+m-1}$ có tập xác định là $\mathbb{R}$ thì \[x^2-2mx+m-1\ge 0,\,\forall x\in \mathbb{R}\Leftrightarrow\heva{&{a > 0} \\ &{\Delta \le 0}&}\Leftrightarrow\heva{&1>0\\&m^2-m+1\leq 0\;(*)}.\]
+Vì $\left(m-\dfrac{1}{2}\right)^2+\dfrac{3}{4}>0,\,\forall x$ nên (*) vô nghiệm.\\
+Vậy không tồn tại giá trị nào của tham số $m$ để thoả mãn yêu cầu bài toán (có 0 giá trị).
+
+---
+id: tamthuc_023
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu tam thức bậc hai nhận giá trị không âm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - bảng xét dấu
+  - tập hợp nghiệm
+---
+
+# Đề bài
+
+Tam thức bậc hai $f(x)=x^2-12x-13$ nhận giá trị không âm khi và chỉ khi
+
+A. $x\in \left(-1;13\right)$
+
+B. $x\in \left(\mathbb{R}\setminus \left[-1;13\right]\right)$
+
+C. $x\in \left[-1;13\right]$
+
+D. $x\in \left(-\infty;-1\right]\cup \left[13;+\infty \right)$
+
+# Lời giải
+
+$f(x)=0\Leftrightarrow x^2-12x-13=0\Leftrightarrow \hoac{&{x=-1} \\ &{x=13.} &}$\\
+Bảng xét dấu của $f(x)$
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-1$ , $13$ , $+\infty$}
+		\tkzTabLine{ , + , $0$ , - , $0$ , + , }
+	\end{tikzpicture}
+\end{center}		
+Vậy $f(x)\ge 0\Leftrightarrow x\in \left(-\infty;-1\right]\cup \left[13;+\infty \right)$.
+
+---
+id: tamthuc_024
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Điều kiện lý thuyết tam thức bậc hai luôn không dương
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - lý thuyết
+  - hệ số và biệt thức
+---
+
+# Đề bài
+
+Cho tam thức $f(x)=ax^2+bx+c\left(a\ne 0\right)$, $\Delta=b^2-4ac$. Ta có $f(x)\le 0$ khi và chỉ khi
+
+A. $\heva{&{a < 0} \\ &{\Delta \le 0} &}$
+
+B. $\heva{&{a < 0} \\ &{\Delta \ge 0} &}$
+
+C. $\heva{&{a\le 0} \\ &{\Delta < 0} &}$
+
+D. $\heva{&{a > 0} \\ &{\Delta \le 0} &}$
+
+# Lời giải
+
+Ta có $f(x)\le 0$ khi và chỉ khi $\heva{&{a < 0} \\ &{\Delta \le 0.} &}$
+
+---
+id: tamthuc_025
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Tìm m để tam thức có hai nghiệm phân biệt
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - nghiệm phân biệt
+  - điều kiện biệt thức
+---
+
+# Đề bài
+
+Các giá trị của $m$ để tam thức $f(x)=x^2-\left(m+2\right)x+8m+1$ có hai nghiệm phân biệt là
+
+A. $m > 0$
+
+B. $m\le 0$ hay $m\ge 28$
+
+C. $m < 0$ hay $m > 28$
+
+D. $0< m < 28$
+
+# Lời giải
+
+Để tam thức $f(x)$ có hai nghiệm phân biệt thì
+\[\Leftrightarrow \Delta > 0\Leftrightarrow \left(m+2\right)^2-4\cdot\left(8m+1\right) > 0\Leftrightarrow m^2-28m > 0\Leftrightarrow m < 0 \text{ hay } m > 28.
+\]
+
+---
+id: tamthuc_026
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu tam thức bậc hai hệ số a âm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - xét dấu
+  - không âm
+---
+
+# Đề bài
+
+Tam thức bậc hai $f(x)=-x^2+3x-2$ nhận giá trị không âm khi và chỉ khi
+
+A. $x\in \left(-\infty;1\right]\cup \left[2;+\infty \right)$
+
+B. $x\in \left[1;2\right]$
+
+C. $x\in \left(1;2\right)$
+
+D. $x\in \left(-\infty;1\right)\cup \left(2;+\infty \right)$
+
+# Lời giải
+
+\[f(x)=0\Leftrightarrow-x^2+3x-2=0\Leftrightarrow \hoac{&{x=1} \\ &{x=2.} &}
+\]
+Bảng xét dấu $f(x)$
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $1$ , $2$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , + , $0$ , - , }
+	\end{tikzpicture}
+\end{center}	
+Vậy $f(x)\ge 0\Leftrightarrow x\in \left[1;2\right]$.
+
+---
+id: tamthuc_027
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Nhận diện tam thức từ bảng xét dấu dạng 2
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - bảng xét dấu
+  - hệ số âm
+---
+
+# Đề bài
+
+Bảng xét dấu sau là của biểu thức nào?
+
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-2$ , $-1$ , $+\infty$}
+		\tkzTabLine{ , - , $0$ , + , $0$ , - , }
+	\end{tikzpicture}
+\end{center}
+
+A. $f(x)=(x-1)(x+2)$
+
+B. $f(x)=(x+1)(x+2)$
+
+C. $f(x)=x^2-3x+2$
+
+D. $f(x)=-x^2-3x-2$
+
+# Lời giải
+
+Dựa vào bảng xét dấu, ta thấy
+- $f(x)=0$ có hai nghiệm $x=-1$ và $x=-2$.
+- Trong khoảng nghiệm mang dấu dương, ngoài khoảng mang dấu âm nên hệ số $a<0$.
+
+Do đó bảng xét dấu trên là của tam thức $f(x)=-x^2-3x-2$.
+
+---
+id: tamthuc_028
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Hoàn thiện bảng xét dấu điền ký tự
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xét dấu
+  - dấu chấm hỏi
+---
+
+# Đề bài
+
+Cho biểu thức $f(x)=x^2 \left(x^2-4\right)$ có bảng xét dấu như sau
+
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-2$ , $0$, $2$ , $+\infty$}
+		\tkzTabLine{ , ? , $0$ , ? , $0$ , ? ,$0$ , ? , }
+	\end{tikzpicture}
+\end{center}
+
+Dấu trong các dấu chấm hỏi theo thứ tự từ trái sang phải là
+
+A. $+,-,-,+$
+
+B. $+,-,+,-$
+
+C. $-,+,-,+$
+
+D. $+,+,-,+$
+
+# Lời giải
+
+Ta có $f(x)=0\Leftrightarrow \hoac{&{x=0} \\ &{x=\pm 2.} &}$\\
+ Ta có bảng xét dấu $f(x)=x^2\left(x^2-4\right)$ như sau
+ \begin{center}
+ 	\begin{tikzpicture}[>=stealth]
+ 		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+ 		{$-\infty$ , $-2$ , $0$, $2$ , $+\infty$}
+ 		\tkzTabLine{ , + , $0$ , - , $0$ , - ,$0$ , + , }
+ 	\end{tikzpicture}
+ \end{center}
+Do đó các dấu chấm hỏi theo thứ tự từ trái sang phải là $+,-,-,+$.
+
+---
+id: tamthuc_029
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xác định dấu các hệ số của tam thức bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hệ số a b c
+  - định lý vi-et
+---
+
+# Đề bài
+
+Cho $f(x)=ax^2+b x+c\, \left(a\ne 0\right)$ có bảng xét dấu dưới đây
+
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $x_1$, $x_2$ , $+\infty$}
+		\tkzTabLine{ , + , $0$ , - , $0$ , + , }
+		\path ($(L1)!.5!(L2)$)node{$0$};
+	\end{tikzpicture}
+\end{center}
+
+Hỏi mệnh đề nào dưới đây đúng?
+
+A. $a > 0,b < 0,c > 0$
+
+B. $a < 0,b < 0,c > 0$
+
+C. $a > 0,b > 0,c > 0$
+
+D. $a > 0,b < 0,c < 0$
+
+# Lời giải
+
+- Tại $x=0$ thì $f(0)=c > 0$ vì số 0 nằm bên trái $x_1$.
+- Trong khoảng hai nghiệm $\left(x_1;x_2 \right)$, $f(x)$ mang dấu "$-$" nên $a > 0$.
+- Phương trình $f(x)=0$ có hai nghiệm $x_1, x_2$ thỏa mãn $0< x_1 < x_2 \Rightarrow x_1+x_2 > 0$.
+- Theo định lý Vi-ét $x_1+x_2=\dfrac{-b}{a}$ nên $\dfrac{-b}{a} > 0\Rightarrow b < 0$.
+
+---
+id: tamthuc_030
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu phân thức đa thức tích trong một khoảng
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xét dấu khoảng
+  - biểu thức tích thương
+---
+
+# Đề bài
+
+Cho biểu thức $f(x)=\dfrac{\left(x^2-4x+4\right)\left(x+3\right)}{5x}$. Trong khoảng $\left(0;2\right)$, $f(x)$ mang dấu gì?
+
+A. dương
+
+B. âm
+
+C. không dương
+
+D. không âm
+
+# Lời giải
+
+Ta có 
+- $x^2-4x+4=0\Leftrightarrow x=2$.
+- $x+3=0\Leftrightarrow x=-3$.
+- $5x=0\Leftrightarrow x=0$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$x^2-4x+4$/.7,$x+3$/.7,$5x$/.7,$f(x)$/.7}
+		{$-\infty$,$-3$, $0$ ,$2$ ,$+\infty$}
+		\tkzTabLine{ , + ,t, + ,t, + ,$0$, + ,}
+		\tkzTabLine{ , - ,$0$, + ,t, + ,t, + ,}
+		\tkzTabLine{ , - ,t, - ,$0$, + ,t, + ,}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,$0$, +,}
+	\end{tikzpicture}
+\end{center}
+Từ bảng xét dấu, ta thấy trong khoảng $\left(0;2\right)$, $f(x)$ mang dấu dương.
+
+---
+id: tamthuc_031
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Khoảng tam thức nhận giá trị âm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - xét dấu âm
+  - phương trình bậc hai
+---
+
+# Đề bài
+
+Tam thức bậc hai $f(x)=x^2-3x-4$ âm khi
+
+A. $x\in \left(-\infty;-1\right]\cup \left[4;+\infty \right)$
+
+B. $x\in \left[-4;2\right]$
+
+C. $x\in \left(-1;4\right)$
+
+D. $x\in \left(-\infty;-4\right]\cup \left[1;+\infty \right)$
+
+# Lời giải
+
+Ta có $x^2-3x-4< 0\Leftrightarrow-1< x < 4$. Do đó biểu thức âm khi $x \in (-1; 4)$.
+
+---
+id: tamthuc_032
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Biểu thức luôn nhận giá trị dương (lặp)
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - giá trị dương
+  - biệt thức âm
+---
+
+# Đề bài
+
+Với số thực $x$ bất kì, biểu thức nào sau đây luôn nhận giá trị dương?
+
+A. $x^2-2x+1$
+
+B. $x^2+2x+1$
+
+C. $x^2+x+1$
+
+D. $x^2+x-1$
+
+# Lời giải
+
+Xét biểu thức $f(x)=x^2+x+1$ có $\heva{&{a=1> 0} \\ &{\Delta=1^2-4\cdot 1=-3< 0} &}$ $\Rightarrow f(x) > 0$, $\forall x\in \mathbb{R}$.
+
+---
+id: tamthuc_033
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Nhận diện tam thức từ bảng xét dấu dạng 3
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - bảng xét dấu
+  - hệ số âm
+---
+
+# Đề bài
+
+Bảng xét dấu sau của tam thức bậc hai nào?
+
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $-3$ , $2$ , $+\infty$}
+		\tkzTabLine{ ,- , $0$ , + ,$0$ , - , }
+	\end{tikzpicture}
+\end{center}
+
+A. $f(x)=x^2-x-6$
+
+B. $f(x)=-x^2-x+6$
+
+C. $f(x)=-x^2+x+6$
+
+D. $f(x)=x^2+x-6$
+
+# Lời giải
+
+Từ bảng xét dấu ta thấy hệ số của $x^2$ âm và $f(x)=0$ có 2 nghiệm $x=-3$, $x=2$. Đối chiếu tổng tích, phương trình nhận biểu thức $-x^2-x+6 = 0$.
+
+---
+id: tamthuc_034
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Tập nghiệm bpt khi biệt thức âm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập nghiệm R
+  - biệt thức âm
+---
+
+# Đề bài
+
+Cho bất phương trình $x^2+bx+c > 0$. Tìm tập nghiệm $S$ của bất phương trình đó biết rằng $b^2-4c < 0$.
+
+A. $S=\left\{-\dfrac{b}{2} \right\}$
+
+B. $S={\bf \mathbb{R}}\setminus \left\{-\dfrac{b}{2} \right\}$
+
+C. $S={\bf \mathbb{R}}$
+
+D. $S=\varnothing$
+
+# Lời giải
+
+Ta có $b^2-4c < 0\Rightarrow \heva{&{a=1> 0} \\ &{\Delta < 0}}\Rightarrow x^2+bx+c > 0$, $\forall x\in {\bf \mathbb{R}}\Rightarrow S={\bf \mathbb{R}}$.
+
+---
+id: tamthuc_035
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Khẳng định tính đúng sai tập nghiệm dạng Đúng Sai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - xét dấu
+  - khoảng tập hợp
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $f(x)=3x^2-2x-1$ có $f(x) > 0,\forall x\in \left(-\infty;-\dfrac{1}{3} \right)\cup (1;+\infty)$
+
+b) Đúng/Sai: $f(x)=-x^2+2x-1$ có $f(x) < 0,\forall x\in \mathbb{R}$
+
+c) Đúng/Sai: $f(x)=-4x^2+12x-5$ có $f(x) > 0,\forall x\in \left(\dfrac{1}{2};\dfrac{5}{2} \right)$
+
+d) Đúng/Sai: $f(x)=3x^2-2x+8$ có $f(x) < 0,\forall x\in \mathbb{R}\setminus \{1\}$
+
+# Lời giải
+
+- a) Đúng. $f(x)=0\Leftrightarrow x=1,x=-\dfrac{1}{3}$. Bảng xét dấu chứng minh khoảng dương nằm ở hai vô cùng.
+- b) Sai. $f(x)=-(x-1)^2 \le 0$, tại $x=1$ thì $f(1)=0$ nên khẳng định với mọi $x \in \mathbb{R}$ là sai.
+- c) Đúng. Tam thức có hai nghiệm $x=1/2$ và $x=5/2$, hệ số $a$ âm nên trong khoảng hai nghiệm biểu thức nhận giá trị dương.
+- d) Sai. Tam thức $f(x)$ có $a=3>0$ và $\Delta'=-23<0 \Rightarrow f(x)>0,\,\forall x$, không thể nhỏ hơn 0.
+
+---
+id: tamthuc_036
+lop: 10
+chu_de: Bất phương trình bậc hai
+dang: Xác định tính đúng sai của tập nghiệm bpt bậc hai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - tập nghiệm bất phương trình
+  - xét dấu nhanh
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $7x^2-4x-3< 0\Leftrightarrow x\in \left(-\infty;-\dfrac{3}{7} \right)\cup \left(1;+\infty \right)$
+
+b) Đúng/Sai: $-x^2+6x-9\ge 0\Leftrightarrow x\in \mathbb{R}$
+
+c) Đúng/Sai: $-5x^2+4x+12< 0\Leftrightarrow x\in \left(-\infty;-\dfrac{6}{5} \right)\cup (2;+\infty)$
+
+d) Đúng/Sai: $3x^2-4x+4\ge 0\Leftrightarrow x\in \mathbb{R}$
+
+# Lời giải
+
+- a) Sai. Vì hệ số $a = 7 > 0$, tam thức nhỏ hơn 0 trong khoảng hai nghiệm $S = \left(-\dfrac{3}{7};1\right)$.
+- b) Sai. Vế trái có nghiệm kép $x=3$ và hệ số $a<0$ nên biểu thức luôn $\le 0$. Do đó bất phương trình chỉ có một nghiệm duy nhất $x=3$.
+- c) Đúng. Tam thức có hệ số $a=-5<0$ và nghiệm là $-6/5$ và $2$. Do đó biểu thức âm bên ngoài khoảng hai nghiệm.
+- d) Đúng. Tam thức $3x^2-4x+4$ có $\heva{&a=3>0\\&\Delta'=-8<0}\Rightarrow 3x^2-4x+4\geq 0,\,\forall x\in\mathbb{R}$.
+
+---
+id: tamthuc_037
+lop: 10
+chu_de: Dấu tam thức bậc hai
+dang: Xét dấu biểu thức tích chứa tam thức bậc hai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - biểu thức tích
+  - nghiệm phương trình tích
+---
+
+# Đề bài
+
+Cho $f(x)=\left(-x^2+3x\right)\left(2x^2+1\right)$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $f(x)=0\Leftrightarrow x=0\vee x=3$
+
+b) Đúng/Sai: $2x^2+1> 0,\forall x\in \mathbb{R}$
+
+c) Đúng/Sai: $f(x) > 0,\forall x\in (-\infty;0)\cup (3;+\infty)$
+
+d) Đúng/Sai: $f(x) < 0,\forall x\in (0;3)$
+
+# Lời giải
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$-x^2+3x$/.7,$2x^2+1$/.7,$f(x)$/.7}
+		{$-\infty$,$0$ ,$3$ ,$+\infty$}
+		\tkzTabLine{ , - ,$0$, + ,$0$, - ,}
+		\tkzTabLine{ , + ,t, + ,t, + ,}
+		\tkzTabLine{ , - ,$0$, + ,$0$, - ,}
+	\end{tikzpicture}
+\end{center}
+- a) Đúng. Xét $f(x)=0 \Leftrightarrow -x^2+3x=0$ (do $2x^2+1 > 0$) $\Leftrightarrow x=0 \lor x=3$.
+- b) Đúng. Do $x^2 \ge 0 \Rightarrow 2x^2+1 \ge 1 > 0$.
+- c) Sai. Dựa trên bảng xét dấu, $f(x) > 0$ trên khoảng $(0;3)$.
+- d) Sai. Trong khoảng $(0;3)$ thì $f(x) > 0$.
+
+---
+id: tamthuc_038
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Xét dấu tam thức bậc hai và bất phương trình
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - bất phương trình
+  - xét dấu
+  - hệ bất phương trình
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\left(1-2x\right)\left(x^2+x-30\right) < 0$ có tập nghiệm $S=\left(-6;\dfrac{1}{2} \right)\cup (5;+\infty)$
+
+b) Đúng/Sai: $\dfrac{4x^2+3x-1}{x^2+5x+7} \ge 0$ có tập nghiệm $S=(-\infty;-1]$
+
+c) Đúng/Sai: $\dfrac{\left(2-x^2 \right)\left(x^2-2x+1\right)}{-x^2+3x+4} > 0$ có tập nghiệm $S=\left(1;\sqrt{2}\right)\cup \left(4;+\infty\right)$
+
+d) Đúng/Sai: $\dfrac{x-1}{x}-\dfrac{x+1}{x-1} \le 2$ có tập nghiệm $S=(-\infty;-1]\cup \left(0;\dfrac{1}{2} \right]\cup (1;+\infty)$
+
+# Lời giải
+
+a) Đúng. Xét $f(x)=0\Leftrightarrow \hoac{&1-2x=0\\ &x^2+x-30=0}\Leftrightarrow \hoac{&x=\dfrac{1}{2} \\&x=-6\text{ hoặc }x=5.}$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$1-2x$/.7,$x^2+x-30$/.7,$f(x)$/.7}
+		{$-\infty$,$-6$ ,$\tfrac{1}{2}$,$5$ ,$+\infty$}
+		\tkzTabLine{ , + ,t, + ,$0$, -  ,t, - ,}
+		\tkzTabLine{ , + ,$0$, - ,t, -,$0$,+,}
+		\tkzTabLine{ , + ,$0$, - ,$0$, +,$0$, - ,}
+	\end{tikzpicture}
+\end{center}
+
+Ta có $(1-2x)\left(x^2+x-30\right) < 0\Leftrightarrow f(x) < 0\Leftrightarrow x\in \left(-6;\dfrac{1}{2} \right)\cup \left(5;+\infty\right)$.
+
+Tập nghiệm bất phương trình là $S=\left(-6;\dfrac{1}{2} \right)\cup (5;+\infty)$.
+
+b) Sai. Đặt $f(x)=\dfrac{4x^2+3x-1}{x^2+5x+7}$.
+
+Điều kiện $x^2+5x+7\ne 0\Leftrightarrow \left(x+\dfrac{5}{2} \right)^2+\dfrac{3}{4} \ne 0$ (luôn đúng).
+
+Xét $f(x)=0\Rightarrow 4x^2+3x-1=0\Rightarrow x=-1$ hoặc $x=\dfrac{1}{4}$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=3]{$x$/.7 ,$4x^2+3x-1$/.7,$x^2+5x+7$/.7,$f(x)$/.7}
+		{$-\infty$,$-1$ ,$\tfrac{1}{4}$,$+\infty$}
+		\tkzTabLine{ , + ,$0$, - ,$0$, + ,}
+		\tkzTabLine{ , + ,t, + ,t, +,}
+		\tkzTabLine{ , + ,$0$, - ,$0$, +,}
+	\end{tikzpicture}
+\end{center}
+
+Ta có $f(x)\ge 0\Leftrightarrow x\in (-\infty;-1]\cup \left[\dfrac{1}{4};+\infty \right)$.
+
+Tập nghiệm của bất phương trình là $S=(-\infty;-1]\cup \left[\dfrac{1}{4};+\infty \right)$.
+
+c) Sai. Đặt $f(x)=\dfrac{\left(2-x^2\right)\left(x^2-2x+1\right)}{-x^2+3x+4}$.
+
+Điều kiện $-x^2+3x+4\ne 0\Leftrightarrow \heva{&x\ne-1\\ &x\ne 4.}$
+
+Xét $f(x)=0\Rightarrow \left(2-x^2\right)\left(x^2-2x+1\right)=0\Rightarrow \hoac{&2-x^2=0\\ &x^2-2x+1=0}\Rightarrow \hoac{&x=\pm \sqrt{2}\\ &x=1.}$
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,espcl=1.5,lgt=2.5]{$x$/.7 ,$2-x^2$/.7,$x^2-2x+1$/.7,$-x^2+3x+4$/.7,$f(x)$/.7}
+		{$-\infty$,$-\sqrt{2}$ ,$-1$,$1$,$\sqrt{2}$,$4$,$+\infty$}
+		\tkzTabLine{ , - ,$0$, + ,t, + ,t,+,$0$,-,t,-,}
+		\tkzTabLine{ , + ,t, + ,t, + ,$0$,+,t,+,t,+,}
+		\tkzTabLine{ , - ,t, - ,$0$, + ,t,+,t,+,$0$,-,}
+		\tkzTabLine{ , + ,$0$, - ,d, + ,$0$,+,$0$,-,d,+,}
+	\end{tikzpicture}
+\end{center}
+
+Ta có $f(x) > 0\Leftrightarrow x\in (-1;1)\cup \left(1;\sqrt{2}\right)\cup \left(4;+\infty\right)$.
+
+Vậy tập nghiệm bất phương trình là $S=(-1;1)\cup \left(1;\sqrt{2}\right)\cup \left(4;+\infty\right)$.
+
+d) Đúng.
+$$
+\dfrac{x-1}{x}-\dfrac{x+1}{x-1} \le 2\Leftrightarrow \dfrac{(x-1)^2-x(x+1)}{x(x-1)}-\dfrac{2x(x-1)}{x(x-1)} \le 0
+$$
+$$
+\Leftrightarrow \dfrac{-2x^2-x+1}{x^2-x} \le 0. 
+$$
+
+Xét $f(x)=\dfrac{-2x^2-x+1}{x^2-x}$. Điều kiện $x^2-x\ne 0\Leftrightarrow \heva{&x\ne 0 \\ &x\ne 1.}$
+
+Xét $f(x)=0\Rightarrow-2x^2-x+1=0\Leftrightarrow x=-1$ hoặc $x=\dfrac{1}{2}$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,espcl=1.5,lgt=3]{$x$/.7 ,$-2x^2-x+1$/.7,$x^2-x$/.7,$f(x)$/.7}
+		{$-\infty$,$-1$ ,$0$,$\tfrac{1}{2}$,$1$,$+\infty$}
+		\tkzTabLine{ , - ,$0$, + ,t, + ,$0$,- ,t,-,}
+		\tkzTabLine{ , + ,t, + ,$0$, - ,t,- ,$0$,+,}
+		\tkzTabLine{ , - ,$0$, + ,d, - ,$0$,+ ,d,-,}
+	\end{tikzpicture}
+\end{center}
+
+Ta có $\dfrac{-2x^2-x+1}{x^2-x} \le 0\Leftrightarrow f(x)\le 0\Leftrightarrow x\in (-\infty;-1]\cup \left(0;\dfrac{1}{2} \right]\cup \left(1;+\infty\right)$.
+
+Tập nghiệm của bất phương trình là $S=(-\infty;-1]\cup \left(0;\dfrac{1}{2} \right]\cup (1;+\infty)$.
+
+---
+id: tamthuc_039
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Tìm tham số m để tam thức bậc hai không đổi dấu
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 11
+tags:
+  - tham số m
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị nguyên của tham số $m$ thuộc đoạn $\left[-9;10\right]$ để $f(x)=x^2+2(m-1)x+m^2-m+1$ không âm với mọi $x\in \mathbb{R}$.
+
+# Lời giải
+
+Ta có $a=1,b=2(m-1),c=m^2-m+1,b^{{'}}=\dfrac{b}{2}=m-1$.
+
+Theo giả thiết $f(x)\ge 0,\forall x\in \mathbb{R}\Leftrightarrow \heva{&{a > 0} \\ &{\Delta'\le 0}}\Leftrightarrow \heva{&{a=1> 0\text{ (luôn đúng)}} \\ &{(m-1)^2-\left(m^2-m+1\right)\le 0}}$
+
+$\Leftrightarrow m^2-2m+1-m^2+m-1\le 0\Leftrightarrow m\ge 0$.
+
+Mà $m\in\left[-9;10\right]$ nên $m\in\{0;1;\ldots;10\}$.
+
+Vậy có $11$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu bài toán.
+
+---
+id: tamthuc_040
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Tìm tham số m để tam thức bậc hai không đổi dấu
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - tham số m
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên dương của tham số $m$ để $f(x)=(m-1)x^2+2(m-1)x+m-3$ không dương với mọi $x\in \mathbb{R}$.
+
+# Lời giải
+
+Ta có $a=m-1$, $b=2(m-1)$, $b'=m-1$, $c=m-3$.
+
+Theo giả thiết $(m-1)x^2+2(m-1)x+m-3\le 0,\forall x\in \mathbb{R}$. (*)
+
+**TH1.** $a=m-1=0\Rightarrow m=1$.
+
+Thay vào (*) ta được $1-3\le 0,\forall x\in \mathbb{R}$ (đúng).
+Suy ra $m=1$ thỏa mãn.
+
+**TH2.** $a=m-1\ne 0\Rightarrow m\ne 1$.
+$$
+(*)\Leftrightarrow \heva{&a < 0 \\ &\Delta' \le 0}\Leftrightarrow \heva{&m-1< 0 \\ &(m-1)^2-(m-1)(m-3)\le 0}
+$$
+$$
+\Leftrightarrow \heva{&m < 1 \\ &m^2-2m+1-(m^2-4m+3)\le 0}\Leftrightarrow \heva{&m < 1 \\ &2m-2\le 0}\Leftrightarrow \heva{&m < 1 \\ &m\le 1}\Leftrightarrow m < 1.
+$$
+
+Hợp hai kết quả trên, ta được $m\le 1$ thỏa mãn đề bài.
+
+Vậy có $1$ giá trị nguyên dương của $m$ thỏa mãn yêu cầu bài toán.
+
+---
+id: tamthuc_041
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Ứng dụng tam thức bậc hai vào bài toán thực tế
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 58
+tags:
+  - toán thực tế
+  - tam thức bậc hai
+---
+
+# Đề bài
+
+Một công ty du lịch thông báo giá tiền cho chuyến đi tham quan của một nhóm khách như sau: $50$ khách đầu tiên có giá $300\,000$ đồng/người. Nếu có nhiều hơn $50$ người đăng kí thì cứ có thêm một người, giá vé sẽ giảm 5000 đồng/người cho toàn bộ hành khách. Biết chi phí thực sự của chuyến đi là $15\,080\,000$ đồng. Số người của nhóm khách du lịch nhiều nhất là bao nhiêu để công ty không bị lỗ?
+
+# Lời giải
+
+Với số lượng khách là $(50+x)$ người thì mỗi khách sẽ trả một khoản tiền 
+$$
+(300\,000-5\,000x)\text{ (đồng).}
+$$
+
+Vậy tổng số tiền công ty thu được trong chuyến du lịch đó là 
+$$
+T(x)=(50+x)(300\,000-5\,000x)=-5\,000x^2+50\,000x+15\,000\,000\text{ (đồng).}
+$$
+
+Xét tam thức bậc hai 
+$$
+f(x)=T(x)-15\,080\,000 = -5\,000x^2+50\,000x-80\,000
+$$
+$$
+f(x)=0\Leftrightarrow x=2; x=8.
+$$
+
+Bảng xét dấu $f(x)$
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $2$ , $8$ , $+\infty$}
+		\tkzTabLine{ ,- , $0$ , + ,$0$ , - , }
+	\end{tikzpicture}
+\end{center}
+
+Vậy $f(x)\ge 0$ khi $x\in [2;8]$. Vậy nếu số khách tối đa là $58$ người $(x=8)$ thì công ty sẽ không lỗ khi tổ chức chuyến du lịch này.
+
+---
+id: tamthuc_042
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Ứng dụng tam thức bậc hai vào chuyển động
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - toán thực tế
+  - chuyển động
+  - hàm số bậc hai
+---
+
+# Đề bài
+
+Một quả bóng được đá lên từ mặt đất, biết rằng chiều cao $y$ (mét) của quả bóng so với mặt đất được biểu diễn bởi một hàm số bậc hai theo thời gian $t$ (giây). Sau 3 giây kể từ lúc được đá lên, quả bóng đạt chiều cao tối đa là $21$ m và bắt đầu rơi xuống. Hỏi thời điểm $t$ lớn nhất là bao nhiêu ($t$ nguyên) để quả bóng vẫn đang ở độ cao trên $10$ m so với mặt đất?
+
+# Lời giải
+
+Xét hàm số bậc hai $y=at^2+bt+c\;(a\ne 0)$.
+
+Theo giả thiết, ta có $\heva{&c=0\\&-\dfrac{b}{2a}=3\\&9a+3b+c=21}\Leftrightarrow\heva{&c=0\\&6a+b=0\\&3a+b=7}\Leftrightarrow\heva{&a=-\dfrac{7}{3}\\&b=14\\&c=0.}$
+
+Vì vậy $y=-\dfrac{7}{3} t^2+14t$.
+
+Ta cần xét $y=-\dfrac{7}{3} t^2+14t > 10$ hay $-\dfrac{7}{3} t^2+14t-10> 0$.
+
+Đặt $f(t)=-\dfrac{7}{3} t^2+14t-10;$ cho $f(t)=0\Rightarrow t_1=\dfrac{21-\sqrt{231}}{7}, t_2=\dfrac{21+\sqrt{231}}{7}$.
+
+Bảng xét dấu $f(t)$
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $t_1$ , $t_2$ , $+\infty$}
+		\tkzTabLine{ ,- , $0$ , + ,$0$ , - , }
+	\end{tikzpicture}
+\end{center}
+
+Kết luận $f(t) > 0$ khi $t_1 < t < t_2$ hay $\dfrac{21-\sqrt{231}}{7} \approx 0{,}83 < t < \dfrac{21+\sqrt{231}}{7} \approx 5{,}17$.
+
+Vì $t$ nguyên nên $t\in [1;5]$. Do vậy giá trị $t=5$ thỏa mãn đề bài.
+
+---
+id: tamthuc_043
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Biện luận nghiệm phương trình bậc hai
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 70
+tags:
+  - tham số m
+  - phương trình bậc hai
+  - phân biệt
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên của tham số $m$ thuộc khoảng $\left(-50;50\right)$ để phương trình $x^2+(m-2)x-8m+1=0$ có hai nghiệm phân biệt?
+
+# Lời giải
+
+Ta có $a=1\ne 0,b=m-2,c=-8m+1$.
+
+Phương trình có hai nghiệm phân biệt khi và chỉ khi 
+$$
+\Delta=(m-2)^2-4(-8m+1) > 0\Leftrightarrow m^2+28m > 0.
+$$
+
+Xét $m^2+28m=0\Leftrightarrow m=0$ hoặc $m=-28$.
+
+Bảng xét dấu
+\begin{center}
+	\begin{tikzpicture}[>=stealth]
+		\tkzTabInit[nocadre=false,lgt=1.5,espcl=2,deltacl=0.6]{$x$/.7 ,$f(x)$/.7}
+		{$-\infty$ , $0$ , $28$ , $+\infty$}
+		\tkzTabLine{ ,+ , $0$ , - ,$0$ , + , }
+	\end{tikzpicture}
+\end{center}
+
+Ta có $m^2+28m > 0\Leftrightarrow m\in (-\infty;-28)\cup (0;+\infty)$.
+
+Mà $m$ nguyên thuộc khoảng $\left(-50;50\right)$ nên $m\in\{-49;-48;\ldots;-29\}\cup\{1;2;3;\ldots;49\}$.
+
+Vậy có $70$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu bài toán.
+
+---
+id: tamthuc_044
+lop: 10
+chu_de: Tam thức bậc hai
+dang: Tìm tham số m để bất phương trình vô nghiệm
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - vô nghiệm
+  - bất phương trình bậc hai
+---
+
+# Đề bài
+
+Tìm giá trị nguyên dương nhỏ nhất của tham số $m$ để bất phương trình $x^2+6x+m+7\le 0$ vô nghiệm.
+
+# Lời giải
+
+Ta có $x^2+6x+m+7\le 0$ vô nghiệm 
+$$
+\Leftrightarrow x^2+6x+m+7> 0,\forall x\in \mathbb{R}\Leftrightarrow \heva{&{a > 0} \\&{\Delta'< 0}&}\Leftrightarrow \heva{&1> 0\text{ (luôn đúng)}\\&{3^2-(m+7) < 0}}\Leftrightarrow m > 2.
+$$
+
+Vậy với $m > 2$ thì bất phương trình $x^2+6x+m+7\le 0$ vô nghiệm.
