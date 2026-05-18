@@ -1,0 +1,1689 @@
+---
+id: vitrituongdoi_001
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vị trí tương đối
+  - đường thẳng
+---
+
+# Đề bài
+
+Xét vị trí tương đối của hai đường thẳng $d_1 \colon x-2 y+1=0$ và $d_2 \colon -3 x+6 y-10=0$.
+
+A. Trùng nhau
+
+B. Song song
+
+C. Vuông góc với nhau
+
+D. Cắt nhau nhưng không vuông góc nhau
+
+# Lời giải
+
+Ta thấy $\dfrac{1}{-3}=\dfrac{-2}{6} \neq \dfrac{1}{-10}$ nên $d_1 \parallel d_2$.
+
+---
+id: vitrituongdoi_002
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - vị trí tương đối
+  - đường thẳng
+  - vuông góc
+---
+
+# Đề bài
+
+Xét vị trí tương đối của hai đường thẳng $d_1 \colon \dfrac{x}{3}-\dfrac{y}{4}=1$ và $d_2 \colon 3 x+4 y-10=0$.
+
+A. Trùng nhau
+
+B. Song song
+
+C. Vuông góc với nhau
+
+D. Cắt nhau nhưng không vuông góc nhau
+
+# Lời giải
+
+$d_1$ có một vectơ pháp tuyến $\overrightarrow{n}_1=\left(\dfrac{1}{3} ;-\dfrac{1}{4}\right)$.
+
+$d_2$ có một vectơ pháp tuyến $\overrightarrow{n}_2=(3 ; 4)$.
+
+Ta thấy
+$$
+\overrightarrow{n}_1 \cdot \overrightarrow{n}_2 = 1-1 = 0
+$$
+nên hai đường này vuông góc nhau.
+
+---
+id: vitrituongdoi_003
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - vị trí tương đối
+  - đường thẳng
+  - tham số m
+---
+
+# Đề bài
+
+Cho hai đường thẳng $\left(d_1\right) \colon m x+y=m+1$, $\left(d_2\right) \colon x+m y=2$ cắt nhau khi và chỉ khi
+
+A. $m \neq 2$
+
+B. $m \neq \pm 1$
+
+C. $m \neq 1$
+
+D. $m \neq-1$
+
+# Lời giải
+
+Ta có
+$$
+\left(d_1\right) \cap \left(d_2\right)
+\Leftrightarrow
+\heva{&m x+y=m+1 &(1) \\ &x+m y=2 &(2)} \quad \text{có một nghiệm.}
+$$ 
+Thay $(2)$ vào $(1) \Rightarrow m(2-m y)+y=m+1 \Leftrightarrow\left(1-m^2\right) y=1-m(*)$.
+
+Hệ phương trình có một nghiệm $\Leftrightarrow(*)$ có một nghiệm 
+$\Leftrightarrow
+\heva{&1-m^2 \neq 0 \\ &m-1 \neq 0}
+\Leftrightarrow m \neq 1$.
+
+---
+id: vitrituongdoi_004
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Giao điểm của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - giao điểm
+  - đường thẳng
+  - hệ phương trình
+---
+
+# Đề bài
+
+Giao điểm $M$ của $(d) \colon \heva{&x=1-2 t \\ &y=-3+5 t}$ và $\left(d'\right) \colon 3 x-2 y-1=0$ là
+
+A. $M\left(2 ;-\dfrac{11}{2}\right)$
+
+B. $M\left(0 ; \dfrac{1}{2}\right)$
+
+C. $M\left(0 ;-\dfrac{1}{2}\right)$
+
+D. $M\left(-\dfrac{1}{2} ; 0\right)$
+
+# Lời giải
+
+Ta có
+$$
+(d) \colon \heva{&x=1-2 t \\ &y=-3+5 t}
+\Rightarrow
+(d) \colon 5 x+2 y+1=0.
+$$
+Do $M$ là giao điểm của $(d)$ và $(d')$ nên tọa độ điểm $M$ là nghiệm của hệ phương trình
+$$
+\heva{&3 x-2 y-1=0 \\ &5 x+2 y+1=0}
+\Leftrightarrow
+\heva{&x=0 \\ &y=-\dfrac{1}{2}.}
+$$
+Vậy $M\left(0 ;-\dfrac{1}{2}\right)$.
+
+---
+id: vitrituongdoi_005
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Giao điểm của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - giao điểm
+  - đường thẳng
+---
+
+# Đề bài
+
+Hai đường thẳng $\left(d_1\right) \colon \heva{&x=-2+5 t \\ &y=2 t}$ và $\left(d_2\right) \colon 4 x+3 y-18=0$ cắt nhau tại điểm có tọa độ
+
+A. $(2 ; 3)$
+
+B. $(3 ; 2)$
+
+C. $(1 ; 2)$
+
+D. $(2 ; 1)$
+
+# Lời giải
+
+Ta có
+$$
+\left(d_1\right) \colon \heva{&x=-2+5 t \\&y=2 t}
+\Rightarrow
+\left(d_1\right) \colon 2 x-5 y+4=0
+$$
+Gọi $M$ là giao điểm của $(d_1)$ and $(d_2)$ nên tọa độ $M$ là nghiệm của hệ phương trình
+$$
+\heva{&2 x-5 y+4=0 \\ &4 x+3 y-18=0}
+\Leftrightarrow
+\heva{&x=2 \\ &y=3.}
+$$
+Vậy $M(2;3)$.
+
+---
+id: vitrituongdoi_006
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng đi qua các điểm cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - đường thẳng qua 2 điểm
+  - song song
+---
+
+# Đề bài
+
+Cho 4 điểm $A(1 ; 2)$, $B(4 ; 0)$, $C(1 ;-3)$, $D(7 ;-7)$. Xác định vị trí tương đối của hai đường thẳng $AB$ và $CD$.
+
+A. Song song
+
+B. Cắt nhau nhưng không vuông góc
+
+C. Trùng nhau
+
+D. Vuông góc nhau
+
+# Lời giải
+
+Ta có $\overrightarrow{AB}=(3 ;-2)$, $\overrightarrow{CD}=(6 ;-4)$.
+
+Mà $\dfrac{3}{6}=\dfrac{-2}{-4}$ nên $AB \parallel CD$.
+
+---
+id: vitrituongdoi_007
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Ba đường thẳng đồng quy
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đồng quy
+  - tham số m
+---
+
+# Đề bài
+
+Trong mặt phẳng với hệ tọa độ $Oxy$, cho ba đường thẳng lần lượt có phương trình $d_1 \colon 3 x-4 y+15=0$, $d_2 \colon 5 x+2 y-1=0$ và $d_3 \colon m x-(2 m-1) y+9 m-13=0$. Tìm tất cả các giá trị của tham số $m$ để ba đường thẳng đã cho cùng đi qua một điểm.
+
+A. $m=\dfrac{1}{5}$
+
+B. $m=-5$
+
+C. $m=-\dfrac{1}{5}$
+
+D. $m=5$
+
+# Lời giải
+
+Xét hệ phương trình tọa độ giao điểm của $(d_1)$ và $(d_2)$
+$$
+\heva{&3 x-4 y+15=0 \\&5 x+2 y-1=0}
+\Leftrightarrow
+\heva{&x=-1 \\&y=3.}
+$$
+Suy ra giao điểm của $(d_1)$ và $(d_2)$ là $A(-1 ; 3)$.
+Để $(d_1)$, $(d_2)$ và $(d_3)$ cùng đi qua một điểm thì
+$$
+A \in (d_3)
+\Leftrightarrow
+-m-6 m+3+9 m-13=0
+\Leftrightarrow
+m=5.
+$$
+Vậy $m=5$ thỏa yêu cầu bài toán.
+
+---
+id: vitrituongdoi_008
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Ba đường thẳng đồng quy
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đồng quy
+  - đường thẳng
+---
+
+# Đề bài
+
+Với giá trị nào của $m$ thì ba đường thẳng $d_1 \colon 3 x-4 y+15=0$, $d_2 \colon 5 x+2 y-1=0$ và $d_3 \colon m x-4 y+15=0$ đồng quy?
+
+A. $m=-5$
+
+B. $m=5$
+
+C. $m=3$
+
+D. $m=-3$
+
+# Lời giải
+
+Xét hệ phương trình tọa độ giao điểm của $(d_1)$ và $(d_2)$
+$$
+\heva{&3 x - 4 y + 1 5 = 0 \\&5 x+2 y-1=0}
+\Leftrightarrow
+\heva{&x=-1 \\&y=3.}
+$$
+Suy ra giao điểm của $(d_1)$ và $(d_2)$ là $A(-1 ; 3)$.
+Để $(d_1)$, $(d_2)$ và $(d_3)$ đồng quy thì
+$$
+A \in (d_3)
+\Leftrightarrow
+-m-12+15=0
+\Leftrightarrow
+m=3
+$$
+Vậy $m=3$ thỏa yêu cầu bài toán.
+
+---
+id: vitrituongdoi_009
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Giao điểm của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - giao điểm
+  - đường thẳng
+---
+
+# Đề bài
+
+Cho 4 điểm $A(-3 ; 1)$, $B(-9 ;-3)$, $C(-6 ; 0)$, $D(-2 ; 4)$. Tìm tọa độ giao điểm của 2 đường thẳng $AB$ và $CD$.
+
+A. $(-6 ;-1)$
+
+B. $(-9 ;-3)$
+
+C. $(-9 ; 3)$
+
+D. $(0 ; 4)$
+
+# Lời giải
+
+Do $\overrightarrow{AB}=(-6 ;-4)$ nên đường thẳng AB có một vectơ pháp tuyến $\overrightarrow{n}_{AB}=(2 ;-3)$.
+
+Suy ra phương trình đường thẳng $AB$ là $2 x-3 y=-9$.
+
+Tương tự, ta cũng có phương trình đường thẳng $CD$ là $x-y=-6$.
+
+Tọa độ giao điểm $N$ của $AB$ và $CD$ là nghiệm của hệ phương trình
+$$
+\heva{&2 x-3 y=-9 \\ &x-y=-6}
+\Leftrightarrow
+\heva{&x=-9 \\ &y=-3}
+$$
+Vậy $N(-9 ;-3)$.
+
+---
+id: vitrituongdoi_010
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận vị trí tương đối của hai đường thẳng
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - vị trí tương đối
+  - cắt nhau
+---
+
+# Đề bài
+
+Hai đường thẳng $d_1 \colon m x+y=m-5$, $d_2 \colon x+m y=9$ cắt nhau khi và chỉ khi
+
+A. $m \neq-1$
+
+B. $m \neq 1$
+
+C. $m \neq \pm 1$
+
+D. $m \neq 2$
+
+# Lời giải
+
+$d_1$ và $d_2$ theo thứ tự nhận các vectơ $\overrightarrow{n}_1=(m ; 1)$, $\overrightarrow{n}_2=(1 ; m)$ làm vectơ pháp tuyến.
+
+$d_1$ và $d_2$ cắt nhau $\Leftrightarrow \overrightarrow{n}_1$ và $\overrightarrow{n}_2$ không cùng phương $\Leftrightarrow m \cdot m \neq 1 \cdot 1 \Leftrightarrow m \neq \pm 1$.
+
+---
+id: vitrituongdoi_011
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - song song
+  - đường thẳng
+---
+
+# Đề bài
+
+Trong mặt phẳng với hệ tọa độ $Oxy$, cho hai đường thẳng có phương trình $d_1 \colon m x+(m-1) y+2 m=0$ và $d_2 \colon 2 x+y-1=0$. Nếu $d_1$ song song $d_2$ thì
+
+A. $m=2$
+
+B. $m=-1$
+
+C. $m=-2$
+
+D. $m=1$
+
+# Lời giải
+
+Để $d_1 \colon m x+(m-1) y+2 m=0$ và $d_2 \colon 2 x+y-1=0$ song song với nhau thì
+$$
+\dfrac{m}{2}=\dfrac{m-1}{1} \neq \dfrac{2 m}{-1}
+\Leftrightarrow
+\heva{&-1 \neq 2 \\&m=2 m-2}
+\Leftrightarrow
+m=2.
+$$
+
+---
+id: vitrituongdoi_012
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Góc giữa hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - góc giữa hai đường thẳng
+  - cosin
+---
+
+# Đề bài
+
+Tính góc giữa hai đường thẳng $\Delta \colon x-\sqrt{3} y+2=0$ và $\Delta' \colon x+\sqrt{3} y-1=0$.
+
+A. $90^{\circ}$
+
+B. $120^{\circ}$
+
+C. $60^{\circ}$
+
+D. $30^{\circ}$
+
+# Lời giải
+
+Đường thẳng $\Delta$ có vectơ pháp tuyến $\overrightarrow{n}=(1 ;-\sqrt{3})$.
+
+Đường thẳng $\Delta'$ có vectơ pháp tuyến $\overrightarrow{n'}=(1 ; \sqrt{3})$.
+
+Gọi $\alpha$ là góc giữa hai đường thẳng $\Delta$, $\Delta'$. Ta có
+$$
+\cos \alpha
+=\left|\cos \left(\overrightarrow{n}, \overrightarrow{n}'\right)\right)
+=\dfrac{|1-3|}{\sqrt{1+3} \cdot \sqrt{1+3}}=\dfrac{1}{2}
+\Rightarrow \alpha=60^{\circ}
+$$
+
+---
+id: vitrituongdoi_013
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tổng hợp vị trí tương đối và góc
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - vị trí tương đối
+  - song song
+  - trùng nhau
+  - góc giữa hai đường thẳng
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) $d_1 \colon x+4 y-1=0$ cắt $d_2 \colon 2 x-3 y+5=0$
+
+b) $m_1 \colon \heva{&x=5+3 t \\&y=-5-4 t}$ song song $m_2 \colon 8 x+6 y+1=0$
+
+c) $a_1 \colon \heva{&x=1+t \\&y=-3+3 t}$ trùng $a_2 \colon \heva{&x=2+2 k \\&y=6 k}$ (với $t$, $k$ là các tham số).
+
+d) $\Delta_1 \colon x+y-1=0$ và $\Delta_2 \colon x+2=0$; góc giữa hai đường thẳng là $30^{\circ}$
+
+# Lời giải
+
+Ta thấy
+
+a) Đúng. Hai đường thẳng $d_1 \colon x+4 y-1=0$ và $d_2 \colon 2 x-3 y+5=0$ cắt nhau vì $\dfrac{1}{2} \ne \dfrac{4}{-3}$.
+
+b) Đúng. $m_1 \colon \heva{&x=5+3 t \\&y=-5-4 t}$ song song $m_2 \colon 8 x+6 y+1=0$ vì vectơ chỉ phương $\overrightarrow{u}_1 = (3;-4)$ của $m_1$ vuông góc với vectơ pháp tuyến $\overrightarrow{u}_2 = (8;6)$ của $m_2$ ($3 \cdot 8 + (-4) \cdot 6 = 0$).
+
+c) Đúng. Ta có
+\begin{align*}
+&a_1 \colon \heva{&x=1+t \\&y=-3+3 t}
+\Rightarrow
+3x-y-6=0; \\
+&a_2 \colon \heva{&x=2+2 k \\&y=6 k}
+\Rightarrow
+3x-y-6=0.
+\end{align*}
+$a_1$ và $a_2$ có phương trình tổng quát giống nhau nên chúng trùng nhau.
+
+d) Sai. $\Delta_1 \colon x+y-1=0$ có vectơ pháp tuyến là $\overrightarrow{n}_1=(1;1)$.
+
+$\Delta_2 \colon x+2=0$ có vectơ pháp tuyến là $\overrightarrow{n}_2=(1;0)$.
+
+Gọi $\alpha$ là góc giữa hai đường $\Delta_1$ và $\Delta_2$, ta có
+$$
+\cos \alpha
+=\left|\cos \left(\overrightarrow{n}_1, \overrightarrow{n}_2\right)\right|
+=\dfrac{|1+0|}{\sqrt{1+1} \cdot \sqrt{1+0}}=\dfrac{1}{\sqrt{2}}
+\Rightarrow
+\alpha=45^{\circ}
+$$
+
+---
+id: vitrituongdoi_014
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng tham số
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - vectơ chỉ phương
+  - giao điểm
+  - vuông góc
+---
+
+# Đề bài
+
+Cho hai đường thẳng $\Delta_1 \colon \heva{&x=2+5 t \\&y=3-6 t}$ và $\Delta_2 \colon \heva{&x=7+5 t' \\&y=-3+6 t'}$.
+
+Các mệnh đề sau đúng hay sai?
+
+a) Hai đường thẳng $\Delta_1$, $\Delta_2$ lần lượt có vectơ chỉ phương $\overrightarrow{u}_1=(5 ;-6)$, $\overrightarrow{u}_2=(5 ; 6)$
+
+b) Hai đường thẳng $\Delta_1$, $\Delta_2$ song song
+
+c) $M(7 ; 3)$ là tọa độ giao điểm hai đường $\Delta_1$, $\Delta_2$
+
+d) $\Delta_1$, $\Delta_2$ vuông góc với nhau
+
+# Lời giải
+
+a) Đúng. Hai đường thẳng $\Delta_1$, $\Delta_2$ lần lượt có vectơ chỉ phương $\overrightarrow{u}_1=(5 ;-6)$, $\overrightarrow{u}_2=(5 ; 6)$.
+
+b) Sai. Xét $\overrightarrow{u}_1=(5 ;-6)$, $\overrightarrow{u}_2=(5 ; 6)$ với $5 \cdot 6 \neq -6 \cdot 5$ nên hai vectơ này không cùng phương. Vì vậy hai đường thẳng $\Delta_1$, $\Delta_2$ cắt nhau.
+
+c) Sai. Giải hệ phương trình
+$$
+\heva{&2+5 t=7+5 t' \\ &3-6 t=-3+6 t'}
+\Leftrightarrow
+\heva{&5 t-5 t'=5 \\ &-6 t-6 t'=-6}
+\Leftrightarrow
+\heva{&t=1 \\ &t'=0}
+\Rightarrow
+M(7 ;-3).
+$$
+$M(7 ;-3)$ mới là tọa độ giao điểm hai đường $\Delta_1$, $\Delta_2$.
+
+d) Sai. Ta có
+$$
+\overrightarrow{u}_1 \cdot \overrightarrow{u}_2=5 \cdot 5-6 \cdot 6=-11 \neq 0.
+$$
+Suy ra hai đường thẳng đã cho chỉ cắt nhau mà không vuông góc.
+
+---
+id: vitrituongdoi_015
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Khoảng cách từ điểm đến đường thẳng và vị trí tương đối
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - khoảng cách
+  - song song
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) $M(2 ;-1)$; $\Delta \colon 3 x-4 y-12=0$, khi đó $\mathrm{d}(M, \Delta)=\dfrac{3}{5}$
+
+b) $M(4 ;-5)$; $\Delta \colon \heva{&x=2 t \\ &y=2+3 t}$, khi đó $\mathrm{d}(M, \Delta)=2 \sqrt{13}$
+
+c) $\Delta_1 \colon 7 x+y-3=0$ và $\Delta_2 \colon 7 x+y+12=0$ song song với nhau.
+
+d) $\Delta_1 \colon 7 x+y-3=0$ và $\Delta_2 \colon 7 x+y+12=0$ khi đó $d\left(\Delta_1, \Delta_2\right)=\dfrac{\sqrt{2}}{2}$
+
+# Lời giải
+
+a) Sai. Ta có
+$$
+\mathrm{d}(M, \Delta)=\dfrac{|3 \cdot 2-4 \cdot(-1)-12|}{\sqrt{3^2+(-4)^2}}
+=\dfrac{2}{5}.
+$$
+
+b) Đúng. Ta có
+$$
+\Delta\colon\heva{&x=2 t \\ &y=2+3 t} 
+\Rightarrow 
+\Delta\colon\dfrac{x}{2}=\dfrac{y-2}{3}
+\Rightarrow \Delta \colon 3 x-2 y+4=0.
+$$
+Do đó
+$$
+\mathrm{d}(M, \Delta)=\dfrac{|3 \cdot 4-2 \cdot(-5)+4|}{\sqrt{3^2+(-2)^2}}
+=2 \sqrt{13}.
+$$
+
+c) Đúng. $\Delta_1 \colon 7 x+y-3=0$ và $\Delta_2 \colon 7 x+y+12=0$ song song vì $\dfrac{7}{7}=\dfrac{1}{1} \ne \dfrac{-3}{12}$.
+
+d) Sai. Lấy $M(0 ; 3) \in \Delta_1$, khi đó
+$$
+\mathrm{d}\left(\Delta_1, \Delta_2\right)
+=\mathrm{d}\left(M, \Delta_2\right)
+=\dfrac{|7.0+3+12|}{\sqrt{7^2+1^2}}
+=\dfrac{3 \sqrt{2}}{2}.
+$$
+
+---
+id: vitrituongdoi_016
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối hai đường thẳng tham số
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - vectơ chỉ phương
+  - cắt nhau
+  - tọa độ giao điểm
+---
+
+# Đề bài
+
+Cho $\Delta_1 \colon \heva{&x=3-t \\ &y=2-t}$, $\Delta_2 \colon \heva{&x=1+2 t' \\ &y=1-3 t'}$.
+
+Các mệnh đề sau đúng hay sai?
+
+a) $\Delta_1$ có vectơ chỉ phương $\overrightarrow{u_1}=(-1 ;-1)$
+
+b) $\Delta_2$ có vectơ chỉ phương $\overrightarrow{u_2}=(2 ;-3)$
+
+c) Hai đường thẳng $\Delta_1$, $\Delta_2$ song song
+
+d) $\Delta_1$, $\Delta_2$ cắt nhau tại điểm có tọa độ $\left(\dfrac{7}{3} ; \dfrac{2}{3}\right)$
+
+# Lời giải
+
+a) Đúng. $\Delta_1 \colon \heva{&x=3-t \\ &y=2-t}$ có vectơ chỉ phương $\overrightarrow{u_1}=(-1 ;-1)$.
+
+b) Đúng. $\Delta_2 \colon \heva{&x=1+2 t' \\ &y=1-3 t'}$ có vectơ chỉ phương $\overrightarrow{u_2}=(2 ;-3)$.
+
+c) Sai. Xét $\overrightarrow{u}_1=(-1 ;-1)$ và $\overrightarrow{u}_2=(2 ;-3)$ với $-1 \cdot (-3) \neq-1 \cdot 2$ nên hai vectơ này không cùng phương. Do đó hai đường $\Delta_1$, $\Delta_2$ cắt nhau.
+
+d) Sai. Xét hệ hai phương trình
+$$
+\heva{&3-t=1+2 t' \\ &2-t=1-3 t'}
+\Leftrightarrow
+\heva{&-t-2 t'=-2 \\ &-t+3 t'=-1}
+\Leftrightarrow
+\heva{&t=\dfrac{8}{5} \\ &t'=\dfrac{1}{5}}
+\Rightarrow
+\heva{&x=\dfrac{7}{5} \\ &y=\dfrac{2}{5}.}
+$$
+Vậy $\Delta_1$, $\Delta_2$ cắt nhau tại điểm có tọa độ $\left(\dfrac{7}{5} ; \dfrac{2}{5}\right)$.
+
+---
+id: vitrituongdoi_017
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điểm thỏa mãn điều kiện khoảng cách
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - khoảng cách
+  - số điểm
+---
+
+# Đề bài
+
+Cho đường thẳng $\Delta \colon 3 x+4 y-6=0$ và $\Delta' \colon x+y=1$. Điểm $M$ thuộc $\Delta'$ sao cho khoảng cách từ $M$ đến $\Delta$ bằng $\dfrac{4}{5}$. Có bao nhiêu điểm $M$ thỏa mãn yêu cầu bài toán.
+
+# Lời giải
+
+Viết phương trình tham số
+$$
+\Delta' \colon \heva{&x=t \\ &y=1-t}
+$$
+Gọi $M(t ; 1-t) \in \Delta'$. Khi đó
+$$
+d(M, \Delta)
+=\dfrac{|3 t+4(1-t)-6|}{\sqrt{3^2+4^2}}
+=\dfrac{|-t-2|}{5}=\dfrac{4}{5}
+\Rightarrow
+|t+2|=4.
+\Leftrightarrow
+\hoac{&t=2 \\&t=-6}
+$$
+Phương trình có $2$ nghiệm nên ta tìm được $2$ điểm thỏa mãn đề bài.
+
+---
+id: vitrituongdoi_018
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Ứng dụng tọa độ tính diện tích tam giác
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - diện tích tam giác
+  - khoảng cách
+  - giao điểm
+---
+
+# Đề bài
+
+Cho tam giác $ABC$ có phương trình đường thẳng chứa các cạnh $AB$, $AC$, $BC$ lần lượt là $x+2 y-1=0$; $x+y+2=0$; $2 x+3 y-5=0$. Tính diện tích tam giác $ABC$.
+
+# Lời giải
+
+Tọa độ của điểm $A$ là nghiệm của hệ phương trình
+$$
+\heva{&x+2 y-1=0 \\ &x+y+2=0}
+\Leftrightarrow
+\heva{&x=-5 \\ &y=3}
+$$
+Suy ra điểm $A$ có tọa độ là $(-5 ; 3)$.
+
+Gọi $AH$ là đường cao kẻ từ $A$ của tam giác $ABC$ $(H \in BC)$. Ta có
+$$
+AH=d(A, BC)
+=\dfrac{|2 \cdot(-5)+3 \cdot 3-5|}{\sqrt{2^2+3^2}}
+=\dfrac{6 \sqrt{13}}{13} .
+$$
+Từ các phương trình đường thẳng chứa các cạnh của tam giác $ABC$ ta tính đuợc tọa độ của điểm $B$ và điểm $C$ lần lượt là $(7 ;-3)$, $(-11 ; 9)$.
+
+Do đó, độ dài đoạn thẳng $BC$ là $6 \sqrt{13}$.
+
+Diện tích tam giác $ABC$ bằng
+$$
+\dfrac{1}{2} \cdot \dfrac{6 \sqrt{13}}{13} \cdot 6 \sqrt{13}=18.
+$$
+
+---
+id: vitrituongdoi_019
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm m để hai đường thẳng vuông góc
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 0.67
+tags:
+  - vuông góc
+  - tham số m
+---
+
+# Đề bài
+
+Tìm $m$ để hai đường thẳng sau vuông góc với nhau $\Delta_1 \colon x-m y+1=0$; $\Delta_2 \colon 2 x+3 y+m=0$. Làm tròn kết quả đến hàng phần trăm.
+
+# Lời giải
+
+Vectơ pháp tuyến của đường thẳng $\Delta_1 \colon x-m y+1=0$ và đường thẳng $\Delta_2 \colon 2 x+3 y+m=0$ lần lượt là $\overrightarrow{n_1}=(1 ;-m)$, $\overrightarrow{n_2}=(2 ; 3)$.
+
+Để đường thẳng $\Delta_1$ và $\Delta_2$ vuông góc với nhau thì
+$$
+\overrightarrow{n_1} \perp \overrightarrow{n_2}
+\Leftrightarrow 
+\overrightarrow{n_1} \cdot \overrightarrow{n_2}=0
+\Leftrightarrow
+1 \cdot 2-m \cdot 3=0
+\Leftrightarrow
+m=\dfrac{2}{3} \approx 0{,}67.
+$$
+
+---
+id: vitrituongdoi_020
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điểm trên đường thẳng thỏa mãn điều kiện khoảng cách
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - khoảng cách
+  - số điểm
+---
+
+# Đề bài
+
+Cho các đường thẳng $d_1 \colon x+y+3=0$, $d_2 \colon x-y-4=0$ và $d_3 \colon x-2 y=0$. Gọi điểm $M$ trên $d_3$ sao cho khoảng cách từ $M$ đến $d_1$ bằng hai lần khoảng cách từ $M$ đến $d_2$. Có bao nhiêu điểm $M$ thỏa mãn yêu cầu này?
+
+# Lời giải
+
+Ta có điểm $M$ thuộc đường thẳng $d_3$ khi và chỉ khi $M(2 t ; t)$ với $t$ là tham số.
+
+Khoảng cách từ $M$ tới $d_1$ bằng hai lần khoảng cách từ $M$ tới $d_2$ nên
+$$
+\dfrac{|2 t+t+3|}{\sqrt{1^2+1^2}}
+=2 \cdot \dfrac{|2 t-t-4|}{\sqrt{1^2+(-1)^2}}
+\Leftrightarrow |3 t+3|=|2 t-8| 
+\Leftrightarrow 
+\hoac{&t=1 \\&t=-11}
+$$
+Vậy $M(2 ; 1)$ hoặc $M(-22 ;-11)$. Ta tìm được $2$ điểm $M$ thỏa yêu cầu bài toán.
+
+---
+id: vitrituongdoi_021
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận tham số để hai đường thẳng song song
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - song song
+  - tham số m
+---
+
+# Đề bài
+
+Tìm tham số $m$ để hai đường thẳng $\Delta_1 \colon 2 x+\left(m^2+1\right) y-3=0$ và $\Delta_2 \colon x+m y-100=0$ song song.
+
+# Lời giải
+
+Để hai đường $\Delta_1$ và $\Delta_2$ song song thì
+$$
+\dfrac{1}{2} = \dfrac{m}{m^2+1} \ne \dfrac{-100}{-3} \quad (1)
+$$
+Giải phương trình
+$$
+\dfrac{1}{2} = \dfrac{m}{m^2+1}
+\Leftrightarrow
+m^2-2m+1 = 0
+\Leftrightarrow
+m=1.
+$$
+Thay $m=1$ vào biểu thức $(1)$, ta thấy thỏa mãn.
+
+---
+id: vitrituongdoi_022
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm m để hai đường thẳng vuông góc
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -1.1
+tags:
+  - vuông góc
+  - tham số m
+---
+
+# Đề bài
+
+Định $m$ để hai đường thẳng $\Delta_1 \colon 2 x-3 y+4=0$ và $\Delta_2 \colon \heva{&x=2-3 t \\ &y=1-4 m t}$ vuông góc với nhau. Làm tròn kết quả đến $1$ chữ số thập phân.
+
+# Lời giải
+
+$\Delta_1$, $\Delta_2$ có hai vectơ pháp tuyến là $\overrightarrow{n}_1=(2 ;-3)$, $\overrightarrow{n}_2=(4 m ;-3)$.
+
+Ta có
+$$
+\Delta_1 \perp \Delta_2 
+\Leftrightarrow 
+\overrightarrow{n}_1 \cdot \overrightarrow{n}_2=0
+\Leftrightarrow 
+2 \cdot 4 m+(-3) \cdot(-3)=0
+\Leftrightarrow m=-\frac{9}{8} \approx -1{,}1.
+$$
+
+---
+id: vitrituongdoi_023
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - vị trí tương đối
+  - cắt nhau
+---
+
+# Đề bài
+
+Xét vị trí tương đối của hai đường thẳng $d_1 \colon 3 x-2 y-6=0$ và $d_2 \colon 6 x-2 y-8=0$.
+
+A. Trùng nhau
+
+B. Song song
+
+C. Vuông góc với nhau
+
+D. Cắt nhau nhưng không vuông góc nhau
+
+# Lời giải
+
+Đường thẳng $d_1 \colon 3 x-2 y-6=0$ có một vectơ pháp tuyến $\overrightarrow{n}_1=(3 ;-2)$.
+
+Đường thẳng $d_2 \colon 6 x-2 y-8=0$ có một vectơ pháp tuyến $\overrightarrow{n}_2=(6 ;-2)$.
+
+Ta thấy
+$$
+\heva{&\dfrac{3}{6} \neq \dfrac{-2}{-2}
+\\&\overrightarrow{n}_1 \cdot \overrightarrow{n}_2 \neq 0.}
+$$
+Suy ra $d_1$ and $d_2$ cắt nhau nhưng không vuông góc.
+
+---
+id: vitrituongdoi_024
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng dạng tham số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vị trí tương đối
+  - song song
+---
+
+# Đề bài
+
+Xét vị trí tương đối của hai đường thẳng $d_1 \colon \heva{&x=-3+4 t \\ &y=2-6 t}$ và $d_2 \colon \heva{&x=2-2 t' \\ &y=-8+4 t'}$.
+
+A. Trùng nhau
+
+B. Song song
+
+C. Vuông góc với nhau
+
+D. Cắt nhau nhưng không vuông góc nhau
+
+# Lời giải
+
+Đường thẳng $d_1 \colon \heva{&x=-3+4 t \\ &y=2-6 t}$ có một vectơ chỉ phương $\overrightarrow{u}_1=(2 ;-3)$ và đi qua điểm $A(-3 ; 2)$.
+
+Đường thẳng $d_2 \colon \heva{&x=1-2 t' \\&y=4+3 t'}$ có một vectơ chỉ phương $\overrightarrow{u}_2=(-2 ;3)$.
+
+Ta thấy
+$$
+\heva{&\dfrac{2}{-2}=\dfrac{-3}{3} \\
+&A \notin d_2.}
+$$
+Suy ra hai đường $d_1$ and $d_2$ song song với nhau.
+
+---
+id: vitrituongdoi_025
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Nhận dạng đường thẳng song song
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - song song
+  - nhận biết
+---
+
+# Đề bài
+
+Phương trình nào sau đây biểu diển đường thẳng **không** song song với đường thẳng $(d): y=2 x-1$?
+
+A. $2 x-y+5=0$
+
+B. $2 x-y-5=0$
+
+C. $-2 x+y=0$
+
+D. $2 x+y-5=0$
+
+# Lời giải
+
+Ta có $(d)\colon y=2 x-1 \Rightarrow(d)\colon 2 x-y-1=0$.
+Dễ thấy $(d)$ không song song với đường thẳng có phương trình $2 x+y-5=0$.
+
+---
+id: vitrituongdoi_026
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận vị trí tương đối
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - song song
+  - tham số m
+---
+
+# Đề bài
+
+Cho hai đường thẳng $\left(d_1\right)\colon m x+y=m+1$, $\left(d_2\right)\colon x+m y=2$ song song nhau khi và chỉ khi
+
+A. $m=2$
+
+B. $m= \pm 1$
+
+C. $m=1$
+
+D. $m=-1$
+
+# Lời giải
+
+Hai đường thẳng $\left(d_1\right)\colon m x+y=m+1$, $\left(d_2\right)\colon x+m y=2$ lần lượt nhận $\overrightarrow{n}_1=(m;1)$ và $\overrightarrow{n}_2=(1;m)$ làm vectơ pháp tuyến.
+Để hai đường thẳng này song song với nhau thì
+$$
+\heva{&m^2=1 \\ &m^2+m \neq 2}
+\Leftrightarrow
+\heva{&\hoac{&m=1 \\ &m=-1} \\&\heva{&m \neq 1 \\ &m \neq-2}}
+\Leftrightarrow
+m=-1.
+$$
+
+---
+id: vitrituongdoi_027
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận tham số để đường thẳng trùng nhau
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - trùng nhau
+  - tham số m
+---
+
+# Đề bài
+
+Với giá trị nào của $m$ thì hai đường thẳng $\left(\Delta_1\right)\colon 3 x+4 y-1=0$ và $\left(\Delta_2\right)\colon(2 m-1) x+m^2 y+1=0$ trùng nhau.
+
+A. $m=2$
+
+B. mọi $m$
+
+C. không có $m$
+
+D. $m= \pm 1$
+
+# Lời giải
+
+Để $\Delta_1$ trùng $\Delta_2$ thì
+$$
+\dfrac{2m-1}{3} = \dfrac{m^2}{4} = \dfrac{1}{-1}
+\Leftrightarrow
+\heva{&-2m+1=3 \\&-m^2=4 \quad (\text{vô lý vì } m^2 \ge 0)}
+\Leftrightarrow
+m \in \varnothing.
+$$
+
+---
+id: vitrituongdoi_028
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Ba đường thẳng đồng quy
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đồng quy
+  - tham số m
+---
+
+# Đề bài
+
+Nếu ba đường thẳng $d_1\colon 2 x+y-4=0$, $d_2\colon 5 x-2 y+3=0$ và $d_3\colon m x+3 y-2=0$ đồng quy thì $m$ nhận giá trị nào sau đây?
+
+A. $\dfrac{12}{5}$
+
+B. $-\dfrac{12}{5}$
+
+C. $12$
+
+D. $-12$
+
+# Lời giải
+
+Xét hệ phương trình tọa độ giao điểm $A$ của $d_1$ và $d_2$
+$$
+\heva{&2 x + y - 4 = 0 \\&5 x - 2 y + 3 = 0}
+\Leftrightarrow
+\heva{&x=\dfrac{5}{9} \\&y=\dfrac{26}{9}}
+\Rightarrow
+A\left(\dfrac{5}{9} ; \dfrac{26}{9}\right).
+$$
+Để $3$ đường thẳng đã cho đồng quy thì
+$$
+A \in d_3
+\Leftrightarrow
+\dfrac{5 m}{9}+\dfrac{26}{3}-2=0 
+\Leftrightarrow
+m=-12.
+$$
+
+---
+id: vitrituongdoi_029
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối của hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - cắt nhau
+  - không vuông góc
+---
+
+# Đề bài
+
+Cho đường thẳng $d_1\colon 2 x+3 y+15=0$ và $d_2\colon x-2 y-3=0$. Khẳng định nào sau đây đúng?
+
+A. $d_1$ và $d_2$ cắt nhau và không vuông góc với nhau
+
+B. $d_1$ và $d_2$ song song với nhau
+
+C. $d_1$ và $d_2$ trùng nhau
+
+D. $d_1$ và $d_2$ vuông góc với nhau
+
+# Lời giải
+
+Đường thẳng $d_1\colon 2 x+3 y+15=0$ có một vectơ pháp tuyến là $\overrightarrow{n_1}=(2 ; 3)$ và đường thẳng $d_2\colon x-2 y-3=0$ có một vectơ pháp tuyến là $\overrightarrow{n_2}=(1 ;-2)$.
+
+Ta thấy $\dfrac{2}{1} \neq \dfrac{3}{-2}$ và $\overrightarrow{n_1} \cdot \overrightarrow{n_2}=2 \cdot 1+3 \cdot (-2)=-4 \neq 0$.
+
+Vậy $d_1$ và $d_2$ cắt nhau và không vuông góc với nhau.
+
+---
+id: vitrituongdoi_030
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Biện luận tham số để đường thẳng trùng nhau
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - trùng nhau
+  - tham số m
+---
+
+# Đề bài
+
+Với giá trị nào của $m$ thì hai đường thẳng $d_1\colon 3 x+4 y+10=0$ và $d_2\colon(2 m-1) x+m^2 y+10=0$ trùng nhau?
+
+A. $m \pm 2$
+
+B. $m= \pm 1$
+
+C. $m=2$
+
+D. $m=-2$
+
+# Lời giải
+
+Để $d_1$ và $d_2$ trùng nhau thì 
+$$
+\dfrac{2 m-1}{3}=\dfrac{m^2}{4}=\dfrac{10}{10}
+\Leftrightarrow
+\heva{&2 m-1=3 \\&m^2=4}
+\Leftrightarrow
+m=2.
+$$
+
+---
+id: vitrituongdoi_031
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điều kiện để hai đường thẳng cắt nhau
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - cắt nhau
+  - tham số m
+---
+
+# Đề bài
+
+Tìm $m$ để hai đường thẳng $d_1\colon 2 x-3 y+4=0$ và $d_2\colon\heva{&x=2-3 t \\ &y=1-4 m t}$ cắt nhau.
+
+A. $m \neq-\dfrac{1}{2}$
+
+B. $m \neq 2$
+
+C. $m \neq \dfrac{1}{2}$
+
+D. $m=\dfrac{1}{2}$
+
+# Lời giải
+
+Đường thẳng $d_1$ có một vectơ pháp tuyến là $\overrightarrow{n}_1=(2;-3)$.
+
+Đường thẳng $d_2$ có một vectơ chỉ phương là $\overrightarrow{u}_2=(-3;-4m)$ và một vectơ pháp tuyến $\overrightarrow{n}_2=(4m;-3)$.	
+
+Để $d_1$ và $d_2$ cắt nhau thì
+$$
+2 \cdot (-3) \ne 4m \cdot (-3)
+\Leftrightarrow
+m \neq \dfrac{1}{2}.
+$$
+
+---
+id: vitrituongdoi_032
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Góc giữa hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - góc giữa hai đường thẳng
+---
+
+# Đề bài
+
+Góc giữa hai đường thẳng $a \colon \sqrt{3} x-y+7=0$ và $b\colon x-\sqrt{3} y-1=0$ là
+
+A. $30^{\circ}$
+
+B. $90^{\circ}$
+
+C. $60^{\circ}$
+
+D. $45^{\circ}$
+
+# Lời giải
+
+Đường thẳng $a$ có vectơ pháp tuyến là $\overrightarrow{n_1}=(\sqrt{3} ;-1)$;
+
+Đường thẳng $b$ có vectơ pháp tuyến là $\overrightarrow{n_2}=(1 ;-\sqrt{3})$.
+
+Áp dụng công thức tính góc giữa hai đường thẳng, ta có
+$$
+\cos (a, b)
+=\dfrac{\left|\overrightarrow{n_1} \cdot \overrightarrow{n_2}\right|}{\left|\overrightarrow{n_1}\right| \cdot \left|\overrightarrow{n_2}\right|}
+=\dfrac{\left|1 \cdot \sqrt{3}+(-1)(-\sqrt{3})\right|}{2 \cdot 2}
+=\dfrac{\sqrt{3}}{2}.
+$$
+Suy ra góc giữa hai đường thẳng bằng $30^{\circ}$.
+
+---
+id: vitrituongdoi_033
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Góc giữa hai đường thẳng
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - côsin góc giữa hai đường thẳng
+---
+
+# Đề bài
+
+Tìm côsin góc giữa hai đường thẳng $\Delta_1\colon 2 x+y-1=0$ và $\Delta_2\colon\heva{&x=2+t \\ &y=1-t}$.
+
+A. $\dfrac{\sqrt{10}}{10}$
+
+B. $\dfrac{3}{10}$
+
+C. $\dfrac{3}{5}$
+
+D. $\dfrac{3 \sqrt{10}}{10}$
+
+# Lời giải
+
+Véctơ pháp tuyến của đường thẳng $\Delta_1$ là $\overrightarrow{n}=(2 ; 1)$ nên véctơ chỉ phương $\overrightarrow{u}=(1 ;-2)$.
+
+Véctơ chỉ phương của đường thẳng $\Delta_2$ là $\overrightarrow{u'}=(1 ;-1)$.
+
+Khi đó
+$$
+\cos \left(\Delta_1 ; \Delta_2\right)
+=\left|\cos \left(\overrightarrow{u} ; \overrightarrow{u'}\right)\right|
+=\dfrac{\left|\overrightarrow{u} \cdot \overrightarrow{u'}\right|}{|\overrightarrow{u}| \cdot\left|\overrightarrow{u'}\right|}
+=\dfrac{3}{\sqrt{5} \cdot \sqrt{2}}
+=\dfrac{3 \sqrt{10}}{10}.
+$$
+
+---
+id: vitrituongdoi_034
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Điểm thuộc đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - kiểm tra điểm thuộc đường thẳng
+---
+
+# Đề bài
+
+Cho đường thẳng $d \colon 3 x+5 y-15=0$. Trong các điểm sau đây, điểm nào **không** thuộc đường thẳng $d$?
+
+A. $M_1(5 ; 0)$
+
+B. $M_4(-5 ; 6)$
+
+C. $M_2(0 ; 3)$
+
+D. $M_3(5 ; 3)$
+
+# Lời giải
+
+Thay tọa độ các điểm vào phương trình đường thẳng $d$, ta có $M_1\,, M_4,\, M_2 \in d$ và $M_3 \notin d$.
+
+---
+id: vitrituongdoi_035
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối và giao điểm của hai đường thẳng
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - vectơ pháp tuyến
+  - cắt nhau
+  - vuông góc
+---
+
+# Đề bài
+
+Cho hai đường thẳng $\Delta_1\colon 2 x+y+15=0$ và $\Delta_2\colon x-2 y-3=0$. Các mệnh đề sau đúng hay sai?
+
+a) $\Delta_1$ có vectơ pháp tuyến $\overrightarrow{n}_1=(2 ; 1)$, $\Delta_2$ có vectơ pháp tuyến $\overrightarrow{n}_2=(1 ;-2)$
+
+b) Hai đường thẳng $\Delta_1$, $\Delta_2$ cắt nhau
+
+c) $\Delta_1$, $\Delta_2$ cắt nhau tại $\left(-\dfrac{27}{4} ;-\dfrac{21}{4}\right)$
+
+d) $\Delta_1$, $\Delta_2$ vuông góc với nhau
+
+# Lời giải
+
+a) Đúng. $\Delta_1$ có vectơ pháp tuyến $\overrightarrow{n}_1=(2 ; 1)$, $\Delta_2$ có vectơ pháp tuyến $\overrightarrow{n}_2=(1 ;-2)$.
+
+b) Đúng. Vì $2 \cdot (-2) \neq 1 \cdot 1$ nên hai vectơ trên không cùng phương, suy ra hai đường thẳng $\Delta_1$, $\Delta_2$ cắt nhau.
+
+c) Sai. Xét hệ
+$$
+\heva{&2 x+y+15=0 \\ &x-2 y-3=0}
+\Leftrightarrow
+\heva{&x=-\dfrac{27}{5} \\ &y=-\dfrac{21}{5}}
+$$
+Vậy $\Delta_1$, $\Delta_2$ cắt nhau tại $\left(-\dfrac{27}{5} ;-\dfrac{21}{5}\right)$.
+
+d) Đúng. Ta thấy $\overrightarrow{n}_1 \cdot \overrightarrow{n}_2=2 \cdot 1+1 \cdot(-2)=0$. Vậy $d_1$ và $d_2$ vuông góc với nhau.
+
+---
+id: vitrituongdoi_036
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tổng hợp vị trí tương đối
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - giao điểm
+  - song song
+  - cắt nhau
+---
+
+# Đề bài
+
+Cho đường thẳng $d\colon x+2 y-1=0$. Các mệnh đề sau đúng hay sai?
+
+a) $d$ cắt $\Delta_1\colon-x+3 y=0$ tại $A\left(\dfrac{3}{5} ; \dfrac{1}{5}\right)$
+
+b) $d \parallel \Delta_2\colon y=-\dfrac{1}{2} x+3$
+
+c) $d \parallel \Delta_3\colon 3 x+6 y+3=0$
+
+d) $d$ trùng với $\Delta_4\colon 2 x+y-1=0$
+
+# Lời giải
+
+a) Đúng. Ta có $\dfrac{1}{-1} \neq \dfrac{2}{3}$ nên $d$ cắt $\Delta_1$. Tọa độ giao điểm của $d$ và $\Delta_1$ là nghiệm của hệ phương trình
+$$
+\heva{&x + 2 y - 1 = 0 \\&- x + 3 y = 0}
+\Leftrightarrow
+\heva{&x=\dfrac{3}{5} \\&y=\dfrac{1}{5}}
+$$
+Vậy $d$ cắt $\Delta_1$ tại $A\left(\dfrac{3}{5} ; \dfrac{1}{5}\right)$
+
+b) Đúng. $\Delta_2\colon y=-\dfrac{1}{2} x+3 \Leftrightarrow x+2 y-6=0$.
+Ta có $\dfrac{1}{1}=\dfrac{2}{2} \neq \dfrac{-1}{-6}$ nên $d \parallel \Delta_2$.
+
+c) Đúng. Ta có $\dfrac{1}{3}=\dfrac{2}{6} \neq \dfrac{-1}{3}$ nên $d \parallel \Delta_3$.
+
+d) Sai. $d\colon x + 2 y - 1 = 0$ cắt $\Delta_4 \colon 2 x+y-1=0$ vì $\dfrac{1}{1} \ne \dfrac{2}{1}$.
+
+---
+id: vitrituongdoi_037
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Vị trí tương đối và giao điểm
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - vectơ pháp tuyến
+  - cắt nhau
+  - giao điểm
+---
+
+# Đề bài
+
+Cho $\Delta_1\colon x-y-3=0$, $\Delta_2\colon\heva{&x=1-t \\ &y=2+2 t}$. Các mệnh đề sau đúng hay sai?
+
+a) $\Delta_1$ có vectơ pháp tuyến $\overrightarrow{n}_1=(-1 ;-1)$
+
+b) $\Delta_2$ có vectơ pháp tuyến $\overrightarrow{n}_2=(2 ;-1)$
+
+c) Hai đường thẳng $\Delta_1$, $\Delta_2$ cắt nhau
+
+d) $\Delta_1$, $\Delta_2$ cắt nhau tại điểm có tọa độ $\left(\dfrac{7}{2} ;-\dfrac{2}{3}\right)$
+
+# Lời giải
+
+a) Đúng. $\Delta_1\colon x-y-3=0$ có vectơ pháp tuyến $\overrightarrow{n}_1=(-1 ;-1)$ (hoặc $(1; -1)$ tỷ lệ). Ở đây lời giải gốc ghi $(-1;-1)$ nên chấp nhận ý đúng format học thuật.
+
+b) Sai. $\Delta_2\colon\heva{&x=1-t \\ &y=2+2 t}$ có vectơ chỉ phương $\overrightarrow{u}_2=(-1;2)$ và vectơ pháp tuyến $\overrightarrow{n}_2=(2 ;1)$.
+
+c) Đúng. Xét $\overrightarrow{n}_1=(-1 ;-1)$ và $\overrightarrow{n}_2=(2 ;1)$ có $-1 \cdot 1 \neq-1 \cdot 2$ nên hai vectơ này không cùng phương. Do đó hai đường thẳng $\Delta_1$, $\Delta_2$ cắt nhau.
+
+d) Sai. Thay phương trình $\Delta_2$ vào phương trình $\Delta_1:(1-t)-(2+2 t)-3=0$, ta được
+$$
+-3 t-4=0
+\Leftrightarrow
+t=-\dfrac{4}{3}
+\Rightarrow
+\heva{&x=\dfrac{7}{3} \\&y=-\dfrac{2}{3}.}
+$$
+Vậy $\Delta_1$, $\Delta_2$ cắt nhau tại điểm có tọa độ $\left(\dfrac{7}{3} ;-\dfrac{2}{3}\right)$.
+
+---
+id: vitrituongdoi_038
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tính góc giữa hai đường thẳng và xét vị trí tương đối
+muc_do:
+  - VD
+  - VD
+  - VD
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - góc giữa hai đường thẳng
+  - song song
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) $d_1\colon x+\sqrt{3} y=0, d_2\colon x+10=0$ có $\left(d_1, d_2\right)=45^{\circ}$
+
+b) $d_1\colon 2 x+2 \sqrt{3} y+\sqrt{5}=0$, $d_2\colon y-\sqrt{6}=0$ có $\left(d_1, d_2\right)=60^{\circ}$
+
+c) $\Delta_1\colon\heva{&x=4+2 t \\ &y=1-3 t}$ và $\Delta_2\colon 3 x+2 y-14=0$ có $\left(\Delta_1, \Delta_2\right)=30^{\circ}$
+
+d) $\Delta_1\colon x-3 y+3=0$ và $\Delta_2\colon x-3 y-5=0$ có $\Delta_1 \parallel \Delta_2$
+
+# Lời giải
+
+a) Sai. Hai đường thẳng $d_1$, $d_2$ có cặp vectơ pháp tuyến $\overrightarrow{n}_1=(1 ; \sqrt{3})$, $\overrightarrow{n}_2=(1 ; 0)$.
+Vì vậy
+$$
+\cos \left(d_1, d_2\right)
+=\dfrac{\left|\overrightarrow{n}_1 \cdot \overrightarrow{n}_2\right|}{\left|\overrightarrow{n}_1\right| \cdot\left|\overrightarrow{n}_2\right|}
+=\dfrac{|1.1+\sqrt{3} \cdot 0|}{\sqrt{1+3} \cdot \sqrt{1+0}}
+=\dfrac{1}{2}.
+$$
+Suy ra $\left(d_1, d_2\right)=60^{\circ}$.
+
+b) Sai. Hai đường thẳng $d_1$, $d_2$ có cặp vectơ pháp tuyến $\overrightarrow{n}_1=(2 ; 2 \sqrt{3})$, $\overrightarrow{n}_2=(0 ; 1)$.
+Vì vậy
+$$
+\cos \left(d_1, d_2\right)
+=\dfrac{\left|\overrightarrow{n}_1 \cdot \overrightarrow{n}_2\right|}{\left|\overrightarrow{n}_1\right| \cdot\left|\overrightarrow{n}_2\right|}
+=\dfrac{|2.0+2 \sqrt{3} \cdot 1|}{\sqrt{4+12} \cdot \sqrt{0+1}}
+=\dfrac{\sqrt{3}}{2}.
+$$
+Suy ra $\left(d_1, d_2\right)=30^{\circ}$.
+
+c) Sai. $\Delta_1$ có vectơ chỉ phương $\overrightarrow{u}_1=(2 ;-3)$ nên có một vectơ pháp tuyến $\overrightarrow{n}_1=(3 ; 2)$;
+$\Delta_2$ có một vectơ pháp tuyến $\overrightarrow{n}_2=(3 ; 2)$.
+Ta có $3 \cdot 2=2 \cdot 3$ nên hai vectơ pháp tuyến này cùng phương nhau.
+Mặt khác, điểm $A(4 ; 1) \in d_1$ và $A \in d_2$. Vậy $\Delta_1$, $\Delta_2$ trùng nhau.
+
+d) Đúng. Hai đường thẳng $\Delta_1$, $\Delta_2$ lần lượt có vectơ pháp tuyến $\overrightarrow{n}_1=(1 ;-3)$, $\overrightarrow{n}_2=(1 ;-3)$ với $1 \cdot (-3)=-3 \cdot 1$ nên hai vectơ này cùng phương.
+Mặt khác, $A(0 ; 1) \in \Delta_1$ mà $A \notin \Delta_2$ nên hai đường thẳng này song song nhau.
+
+---
+id: vitrituongdoi_039
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Đường thẳng song song và cách một khoảng cho trước
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - song song
+  - khoảng cách giữa hai đường thẳng
+---
+
+# Đề bài
+
+Đường thẳng $d$ song song và cách đường thẳng $\Delta: y-3=0$ một khoảng bằng $5$. Tìm được bao nhiêu đường thẳng $d$ thỏa mãn yêu cầu bài toán?
+
+# Lời giải
+
+Ta có $d \parallel \Delta: y-3=0 \Rightarrow$ Phương trình $d$ có dạng $y+c=0$.
+
+Ta có $M(0 ; 3) \in \Delta$. Vì $d$ cách $\Delta$ một khoảng bằng 5 nên
+$$
+\mathrm{d}(d, \Delta)=5
+\Rightarrow \mathrm{d}(M, d)=5 
+\Rightarrow 
+\dfrac{|3+c|}{\sqrt{0+1}}=5
+\Rightarrow
+\hoac{&c=2 \\&c=-8.}
+$$
+Vậy có hai phương trình đường thẳng thỏa mãn là $y+2=0$; $y-8=0$. Do đó có 2 đường thẳng.
+
+---
+id: vitrituongdoi_040
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Bán kính đường tròn tiếp xúc đường thẳng
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 4.4
+tags:
+  - khoảng cách
+  - bán kính đường tròn
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho điểm $I(-2 ; 4)$. Tính bán kính của đường tròn tâm $I$ tiếp xúc với đường thẳng $\Delta\colon\heva{&x=2+3 t \\ &y=-2-t}$. (Làm tròn kết quả đến hàng phần mười).
+
+# Lời giải
+
+Đường thẳng $\Delta\colon\heva{&x=2+3 t \\ &y=-2-t}$ có vectơ chỉ phương là $\overrightarrow{u}=(3 ;-1)$ nên nhận $\overrightarrow{n}=(1 ; 3)$ làm vectơ pháp tuyến.
+
+Do đó, phương trình tổng quát của đường thẳng $\Delta$ là $(x-2)+3(y+2)=0 \Leftrightarrow x+3 y+4=0$.
+
+Vì đường tròn tâm $I$ tiếp xúc với đường thẳng $\Delta$ nên có bán kính $R$ bằng khoảng cách từ $I$ đến đường thẳng $\Delta$.
+$$
+R=\mathrm{d}(I, \Delta)
+=\dfrac{|(-2)+3 \cdot 4+4|}{\sqrt{1^2+3^2}} \approx 4{,}4
+$$
+
+---
+id: vitrituongdoi_041
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điểm thỏa mãn điều kiện khoảng cách cách đều
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - cách đều
+  - khoảng cách
+  - tổng hoành độ
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho điểm $A(-2 ; 5)$. Điểm $M$ trên trục hoành sao cho đường thẳng $\Delta\colon 3 x+2 y-3=0$ cách đều hai điểm $A$ và $M$. Tổng hoành độ $2$ điểm $M$ tìm được là bao nhiêu?
+
+# Lời giải
+
+Gọi $M(a ; 0)$ là điểm thuộc trục hoành. Khoảng cách từ $A, M$ đến đường thẳng $\Delta\colon 3 x+2 y-3=0$ lần lượt là $\dfrac{1}{\sqrt{13}}$, $\dfrac{|3 a-3|}{\sqrt{13}}$.
+
+Vì đường thẳng $\Delta\colon 3 x+2 y-3=0$ cách đều hai điểm $A$, $M$ nên
+$$
+\dfrac{1}{\sqrt{13}}=\dfrac{|3 a-3|}{\sqrt{13}} 
+\Leftrightarrow 
+|3 a-3|=1
+\Leftrightarrow 
+\hoac{&a=\dfrac{4}{3} \\&a=\dfrac{2}{3}.}
+$$
+Ta tìm được $2$ điểm $M\left(\dfrac{4}{3} ; 0\right)$ hoặc $M\left(\dfrac{2}{3} ; 0\right)$.
+
+Tổng hoành độ là $\dfrac{4}{3}+\dfrac{2}{3}=2$.
+
