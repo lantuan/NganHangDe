@@ -1,0 +1,1533 @@
+---
+id: ham_so_001
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tính giá trị của hàm số cho bởi nhiều công thức
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hàm số
+  - tính giá trị
+---
+
+# Đề bài
+
+Cho hàm số $y=f(x)=\heva{&\dfrac{2}{x-1}, &x\in(-\infty;2]\\ &x^2-1, &x\in(2;5]}$. Tính $f(3)$.
+
+A. $8$
+
+B. $1$
+
+C. $7$
+
+D. $2$
+
+# Lời giải
+
+Với $x=3$ thì hàm số có dạng $f(x)=x^2-1$.
+Khi đó $f(3)=3^2-1=8$.
+
+---
+
+---
+id: ham_so_002
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tính giá trị của hàm số
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hàm số
+  - tính giá trị
+---
+
+# Đề bài
+
+Cho hàm số $f(x)$ xác định trên $\mathbb{R}$, biết $f(x)=\sqrt{x^2}$. Giá trị $f(0)$ bằng
+
+A. $0$
+
+B. $2$
+
+C. $1$
+
+D. không tồn tại
+
+# Lời giải
+
+Ta có $f(0)=\sqrt{0^2}=0$.
+
+---
+
+---
+id: ham_so_003
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tính giá trị của hàm số cho bởi nhiều công thức
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hàm số
+  - tính giá trị
+---
+
+# Đề bài
+
+Hàm số $f(x)=\heva{&\dfrac{2\sqrt{x-2}-3}{x-1} &khi \, x\ge 2\\ &x^2+2 &khi \, x < 2}$. Tính $P=f(2)+f(-2)$.
+
+A. $P=3$
+
+B. $P=\dfrac{7}{3}$
+
+C. $P=6$
+
+D. $P=2$
+
+# Lời giải
+
+Khi $x=2$ thì $f(x)=\dfrac{2\sqrt{x-2}-3}{x-1}$.
+Khi $x=-2$ thì $f(x)=x^2+2$.
+Từ đó ta có $P=f(2)+f(-2)=\dfrac{2\sqrt{2-2}-3}{2-1}+((-2)^2+2)=3$.
+
+---
+
+---
+id: ham_so_004
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm số chứa ẩn ở mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tập xác định
+  - hàm số phân thức
+---
+
+# Đề bài
+
+Tìm tập xác định của hàm số $y=\dfrac{x-2}{x-1}$.
+
+A. $\mathscr{D}=\mathbb{R} \setminus \{1\}$
+
+B. $\mathscr{D}=\mathbb{R} \setminus \{1;2\}$
+
+C. $\mathscr{D}=\mathbb{R}$
+
+D. $\mathscr{D}=\mathbb{R} \setminus \{2\}$
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $x-1\ne 0\Leftrightarrow x\ne 1$.
+Vậy $\mathscr{D}=\mathbb{R} \setminus\{ 1\}$.
+
+---
+
+---
+id: ham_so_005
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm số chứa ẩn ở mẫu
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tập xác định
+  - hàm số phân thức
+---
+
+# Đề bài
+
+Tìm tập xác định $\mathscr{D}$ của hàm số $y=\dfrac{x}{x+2}$.
+
+A. $\mathscr{D}=\mathbb{R} \setminus \{-2\}$
+
+B. $\mathscr{D}=(-2;+\infty)$
+
+C. $\mathscr{D}=\mathbb{R} \setminus \{2\}$
+
+D. $\mathscr{D}=(-\infty;-2)$
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $x+2\ne 0\Leftrightarrow x\ne-2$.
+Vậy tập xác định của hàm số là $\mathscr{D}=\mathbb{R} \setminus \{-2\}$.
+
+---
+
+---
+id: ham_so_006
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm số có mẫu là tam thức bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập xác định
+  - hàm số phân thức
+---
+
+# Đề bài
+
+Tìm tập xác định $D$ của hàm số $y=\dfrac{3x-1}{2x^2-3x-5}$ .
+
+A. $\mathscr{D}=\left[-1;\dfrac{5}{2}\right]$
+
+B. $\mathscr{D}=\mathbb{R} \setminus \{-1\}$
+
+C. $\mathscr{D}=\mathbb{R} \setminus \left\{-1;\dfrac{5}{2}\right\}$
+
+D. $\mathscr{D}=\left(-1;\dfrac{5}{2}\right)$
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $2x^2-3x-5\ne 0\Leftrightarrow \heva{&x\ne-1\\ &x\ne\dfrac{5}{2}.}$
+Vậy tập xác định của hàm số là $\mathscr{D}=\mathbb{R} \setminus \left\{-1;\dfrac{5}{2}\right\}$.
+
+---
+
+---
+id: ham_so_007
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm số chứa căn thức
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tập xác định
+  - hàm số chứa căn
+---
+
+# Đề bài
+
+Tìm tập xác định $D$ của hàm số $y=\sqrt{x+2}-\sqrt{x+3}$.
+
+A. $\mathscr{D}=[-3;+\infty)$
+
+B. $\mathscr{D}=[-2;+\infty)$
+
+C. $\mathscr{D}=\mathbb{R}$
+
+D. $\mathscr{D}=[2;+\infty)$
+
+# Lời giải
+
+Hàm số xác định khi và chỉ khi $\heva{&x+2\ge 0\\ &	x+3\ge 0} \Leftrightarrow x\ge-2.$
+Vậy $\mathscr{D}=[-2;+\infty)$.
+
+---
+
+---
+id: ham_so_008
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Nhận diện hàm số bậc nhất
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hàm số bậc nhất
+---
+
+# Đề bài
+
+Trong các hàm số sau, hàm số nào là hàm số bậc nhất?
+
+A. $y=(-4m+2)x+7$
+
+B. $y=2x+3x^2$
+
+C. $y=10x+5$
+
+D. $y=9$
+
+# Lời giải
+
+Hàm số bậc nhất là hàm số có dạng $y=ax+b$ với $a\ne 0$.
+Vậy hàm số $y=10x+5$ là hàm số bậc nhất.
+
+---
+
+---
+id: ham_so_009
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xét tính đơn điệu của hàm số bậc nhất
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hàm số bậc nhất
+  - đồng biến
+  - nghịch biến
+---
+
+# Đề bài
+
+Hàm số $y=(2m+1)x+m-3$ đồng biến trên $\mathbb{R}$ khi
+
+A. $m >-\dfrac{1}{2}$
+
+B. $m\ge-\dfrac{1}{2}$
+
+C. $m <-\dfrac{1}{2}$
+
+D. $m >\dfrac{1}{2}$
+
+# Lời giải
+
+Hàm số đã cho đồng biến trên $\mathbb{R} \Leftrightarrow 2m+1 > 0\Leftrightarrow m >-\dfrac{1}{2}$.
+
+---
+
+---
+id: ham_so_010
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định đường thẳng thoả mãn điều kiện cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - đường thẳng
+  - song song
+---
+
+# Đề bài
+
+Tìm $a$ và $b$ biết rằng đường thẳng $y=ax+b$ đi qua $M(1;-1)$ và song song với đường $y=2x+3$.
+
+A. $\heva{&a=-1\\ &b=2}$
+
+B. $\heva{&a=2\\ &b=-3}$
+
+C. $\heva{&a=2\\ &b=4}$
+
+D. $\heva{&a=2\\ &b=3}$
+
+# Lời giải
+
+Đường thẳng $y=ax+b$ đi qua $M(1;-1)$ và song song với đường $y=2x+3$ nên ta có
+$$\heva{&a+b=-1\\ &a=2\\ &b\ne 3} \Leftrightarrow \heva{&a=2\\ &b=-3.}$$
+
+---
+
+---
+id: ham_so_011
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định đường thẳng đi qua hai điểm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đường thẳng
+  - hệ phương trình
+---
+
+# Đề bài
+
+Cho đường thẳng có phương trình $y=ax+b$ đường thẳng đi qua hai điểm $M(1;3)$, $N(2;-4)$. Giá trị của $a$ và $b$ là
+
+A. $a=-7$; $b=-10$
+
+B. $a=7$; $b=10$
+
+C. $a=7$; $b=-10$
+
+D. $a=-7$; $b=10$
+
+# Lời giải
+
+Đường thẳng đã cho đi qua $M(1;3)$, $N(2;-4)$ nên ta có hệ phương trình
+$$\heva{&a+b=3\\ &2a+b=-4} \Leftrightarrow \heva{&a=-7\\ &b=10.}$$
+
+---
+
+---
+id: ham_so_012
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định đường thẳng song song và đi qua một điểm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - đường thẳng
+  - tính giá trị biểu thức
+---
+
+# Đề bài
+
+Cho hàm số bậc nhất $y=ax+b$ có đồ thị là đường thẳng đi qua điểm $A(0;-1)$ và song song với đường thẳng $y=3-2x$. Tính tổng $S=2a+b$.
+
+A. $-5$
+
+B. $4$
+
+C. $6$
+
+D. $-3$
+
+# Lời giải
+
+Vì $\mathrm{d} \colon y=ax+b$ song song với đường thẳng $y=3-2x$ nên $a=-2$ và $b\ne 3$.
+Suy ra $d \colon y=-2x+b \qquad(b\ne 3)$.
+Vì $\mathrm{d} \colon y=-2x+b$ đi qua $A(0;-1)$ nên $-1=-2 \cdot 0+b \Rightarrow b=-1$.
+Vậy $S=2a+b=2 \cdot (-2)+(-1)=-5$.
+
+---
+
+---
+id: ham_so_013
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của các hàm số cơ bản
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - tập xác định
+  - hàm số chứa căn
+  - hàm số phân thức
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các khẳng định sau
+
+a) Tập xác định của hàm số $y=\dfrac{x^2-2x+3}{x+7}$ là $\mathscr{D}=\mathbb{R}\setminus\{-7\}$
+
+b) Tập xác định của hàm số $y=\sqrt{x-6}$ là $\mathscr{D}=\mathbb{R}$
+
+c) Tập xác định của hàm số $y=3x^2$ là $\mathscr{D}=\mathbb{R}$
+
+d) Tập xác định của hàm số $y=\sqrt{1-x^2}$ là $\mathscr{D}=(-1;1)$
+
+# Lời giải
+
+a) Đúng. Hàm số $y=\dfrac{x^2-2x+3}{x+7}$ xác định khi $x+7\ne 0 \Leftrightarrow x\ne-7$.
+Vậy tập xác định của hàm số $y=\dfrac{x^2-2x+3}{x+7}$ là $\mathscr{D}=\mathbb{R}\setminus\{-7\}$.
+
+b) Sai. Hàm số $y=\sqrt{x-6}$ xác định khi $x-6\ge 0\Leftrightarrow x\ge 6$.
+Vậy tập xác định của hàm số $y=\sqrt{x-6}$ là $\mathscr{D}=[6;+\infty)$.
+
+c) Đúng. Tập xác định của hàm số $y=3x^2$ là $\mathscr{D}=\mathbb{R}$.
+
+d) Sai. Hàm số $y=\sqrt{1-x^2}$ xác định khi $1-x^2\ge 0\Leftrightarrow-1\le x\le 1$.
+Vậy tập xác định của hàm số $y=\sqrt{1-x^2}$ là $\mathscr{D}=[-1;1]$.
+
+---
+
+---
+id: ham_so_014
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Điểm thuộc đồ thị hàm số
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - đồ thị hàm số
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Cho hàm số $y=-2x^2+x$. Khi đó:
+
+a) Điểm $(0;0)$ và $(2;-5)$ thuộc đồ thị hàm số đã cho
+
+b) Điểm $(1;-1)$ không thuộc đồ thị hàm số đã cho
+
+c) Điểm thuộc đồ thị hàm số có hoành độ $-1$ là $(-1;-3)$
+
+d) Những điểm thuộc đồ thị hàm số có tung độ bằng 0 là $(0;0)$ và $\left(\dfrac{1}{2};0\right)$
+
+# Lời giải
+
+a) Sai. Điểm $(0;0)$ thuộc đồ thị hàm số vì $0=-2 \cdot 0^2+0$ (đúng).
+Điểm $(2;-5)$ không thuộc đồ thị hàm số vì $-5=-2.2^2+2$ (sai).
+
+b) Sai. Điểm $(1;-1)$ thuộc đồ thị hàm số vì $-1=-2\cdot{1^2}+1$ (đúng).
+
+c) Đúng. Với $x=-1$ thì $y=-2 \cdot 1^2-1=-3$, ta có điểm $(-1;-3)$ thuộc đồ thị.
+
+d) Đúng. Với $y=0$ thì $0=-2x^2+x\Leftrightarrow x(-2x+1)=0 \Leftrightarrow \hoac{&x=0\\ &-2x+1=0} \Leftrightarrow \hoac{&x=0\\ &x=\dfrac{1}{2}.}$
+Vậy có hai điểm thuộc đồ thị có tung độ bằng $0$ là $(0;0)$ và $\left(\dfrac{1}{2};0\right)$.
+
+---
+
+---
+id: ham_so_015
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm số chứa dấu giá trị tuyệt đối và phân thức
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - tập xác định
+  - giá trị tuyệt đối
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các khẳng định sau:
+
+a) Hàm số $y=\dfrac{x^2-x+6}{x^2+3x-4}$ có tập xác định là $\mathscr{D}=\mathbb{R}\setminus \{1;4\}$
+
+b) Hàm số $y=\dfrac{x+1}{(x+2)\left(x^2-3\right)}$ có tập xác định là $\mathscr{D}=\mathbb{R}\setminus\{-2\}$
+
+c) Hàm số $y=\dfrac{|x|+1}{x^2+2}$ có tập xác định là $\mathscr{D}=\mathbb{R}$
+
+d) Hàm số $y=\left(x^2+1\right)|x-1|$ có tập xác định là $\mathscr{D}=\mathbb{R}$
+
+# Lời giải
+
+a) Sai. Hàm số xác định khi và chỉ khi $x^2+3x-4\ne 0 \Leftrightarrow \heva{&x\ne 1\\ &x\ne-4.}$
+Tập xác định hàm số là $\mathscr{D}=\mathbb{R} \setminus\{-4;1\}$.
+
+b) Sai. Hàm số xác định khi và chỉ khi $(x+2)\left(x^2-3\right) \Leftrightarrow \heva{&x+2\ne 0\\ &x^2-3\ne 0} \Leftrightarrow \heva{&x\ne-2\\ &x\ne\pm\sqrt 3.}$
+Tập xác định hàm số là $\mathscr{D}=\mathbb{R}\setminus\{-2;\pm \sqrt{3}\}$.
+
+c) Đúng. Hàm số xác định khi và chỉ khi $x^2+2 \ne 0 \Leftrightarrow x \in \mathbb{R}$.
+Tập xác định hàm số là $\mathscr{D}=\mathbb{R}$.
+
+d) Đúng. Tập xác định hàm số là $\mathscr{D}=\mathbb{R}$.
+
+---
+
+---
+id: ham_so_016
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Khảo sát hàm số cho bởi nhiều công thức và giải phương trình liên quan
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - tập xác định
+  - tập nghiệm
+---
+
+# Đề bài
+
+Cho hàm số $f(x)=\heva{&1 &khi \, x=2\\ &\dfrac{1}{x-2} &khi \, x\ne 2}$. Khi đó:
+
+a) Tập xác định hàm số là $\mathbb{R}\setminus\{ 2\}$
+
+b) $f(0)=\dfrac{1}{2}$
+
+c) $f(2)=1$, $f(3)=1$
+
+d) Phương trình $f(x)=\dfrac{x+1}{x-2}$ có tập nghiệm là $S=\{ 0\}$
+
+# Lời giải
+
+a) Sai. Khi $x=2$ thì $f(x)=1$ luôn xác định. Khi $x\ne 2$ thì $f(x)=\dfrac{1}{x-2}$ luôn xác định.
+Wait tập xác định hàm số là $\mathscr{D}=\{ 2\}\cup (\mathbb{R}\setminus\{ 2\})=\mathbb{R}$.
+
+b) Sai. Ta có $f(0)=\dfrac{1}{0-2}=-\dfrac{1}{2}$.
+
+c) Đúng. $f(2)=1$, $f(3)=\dfrac{1}{3-2}=1$.
+
+d) Đúng. Xét phương trình $f(x)=\dfrac{x+1}{x-2}$. Điều kiện $x\ne 2$, khi đó $f(x)=\dfrac{1}{x-2}$.
+Ta có phương trình $\dfrac{1}{x-2}=\dfrac{x+1}{x-2} \Leftrightarrow x+1=1(x\ne 2)\Leftrightarrow x=0$.
+Vậy tập nghiệm phương trình $S=\{ 0\}$.
+
+---
+
+---
+id: ham_so_017
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tham số để hàm số thỏa mãn giá trị cho trước
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -2
+tags:
+  - tham số m
+  - tính giá trị
+---
+
+# Đề bài
+
+Cho hàm số $y=f(x)=m{x^3}-2(m^2+1){x^2}+2m^2-m$ với $m$ là tham số. Tìm tổng tất cả các giá trị của $m$ sao cho $f(-1)=2$.
+
+# Lời giải
+
+Ta có $f(-1)=2 \Leftrightarrow 2=-m-2(m^2+1)+2m^2-m \Leftrightarrow m=-2$.
+Vậy tổng tất cả các giá trị của $m$ bằng $-2$.
+
+---
+
+---
+id: ham_so_018
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của hàm hỗn hợp căn bậc hai và căn bậc ba
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - tập xác định
+  - căn thức
+---
+
+# Đề bài
+
+Tập xác định của hàm số $y=\sqrt{\dfrac{3-x}{x+2}}+\sqrt[3]{x-1}$ có dạng $(a;b]$. Khi đó $a+b$ bằng
+
+# Lời giải
+
+Hàm số xác định khi và chỉ khi $\dfrac{3-x}{x+2}\ge 0 \Leftrightarrow \hoac{\heva{&3-x\ge 0\\ &x+2 > 0}\\\heva{&3-x\le 0\\ &x+2 < 0}} \Leftrightarrow \hoac{\heva{&x\le 3\\ &x >-2}\\\heva{&x\ge 3\\ &x <-2}} \Leftrightarrow-2 < x\le 3$.
+Tập xác định hàm số là $\mathscr{D}=(-2;3]$.
+Vậy $a+b=-2+3=1$.
+
+---
+
+---
+id: ham_so_019
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tham số để hàm số có tập xác định cho trước
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1.33
+tags:
+  - tập xác định
+  - tham số m
+---
+
+# Đề bài
+
+Cho hàm số $y=\sqrt{2x-3m+4}+\dfrac{x}{x+m-1}$ với $m$ là tham số. Tìm tổng các giá trị của $m$ để hàm số có tập xác định là $[0;+\infty)$ (kết quả dưới dạng số thập phân làm tròn đến hàng phần trăm).
+
+# Lời giải
+
+Hàm số xác định khi và chỉ khi $\heva{&2x-3m+4\ge 0\\ &x+m-1\ne 0} \Leftrightarrow \heva{&x\ge\dfrac{3m-4}{2}\\ &x\ne 1-m.}$
+* Trường hợp 1: $1-m\ge\dfrac{3m-4}{2}\Leftrightarrow m\le\dfrac{6}{5}$, khi đó tập xác định của hàm số là $D=\left[\dfrac{3m-4}{2};+\infty\right)\setminus\{ 1-m\}$.
+Tập xác định này không thể bằng $[0;+\infty)$ theo đề bài.
+Do đó $m\le\dfrac{6}{5}$ không thỏa mãn.
+* Trường hợp 2: $1-m <\dfrac{3m-4}{2}\Leftrightarrow m >\dfrac{6}{5}$, khi đó tập xác định của hàm số là $D=\left[\dfrac{3m-4}{2};+\infty\right)$.
+Do đó, hàm số có tập xác định là $[0;+\infty)\Leftrightarrow\dfrac{3m-4}{2}=0\Leftrightarrow m=\dfrac{4}{3}$ (thỏa mãn).
+Vậy $m=\dfrac{4}{3}\approx 1{,}33$ là giá trị cần tìm.
+
+---
+
+---
+id: ham_so_020
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Giải phương trình chứa hàm số cho bởi nhiều công thức
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - phương trình
+  - tham số m
+---
+
+# Đề bài
+
+Cho $f(x)=\heva{&x-4 &khi \, x\ge 0\\ &x^2-4x+1 &khi \, x < 0}$. Có bao nhiêu giá trị của tham số $m$ để $f(m^2)+f(-2)=18$.
+
+# Lời giải
+
+Với $x=m^2\ge 0$, ta có $f(m^2)=m^2-4$.
+Với $x=-2 < 0$, ta có $f(-2)=(-2)^2-4(-2)+1=13$.
+Khi đó $f(m^2)+f(-2)=18 \Leftrightarrow (m^2-4)+13=18 \Leftrightarrow m=\pm 3$.
+Vậy có $2$ giá trị của $m$ thỏa mãn yêu cầu bài toán.
+
+---
+
+---
+id: ham_so_021
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm điều kiện để hàm số bậc nhất đơn điệu trên R
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -4
+tags:
+  - hàm số bậc nhất
+  - đồng biến
+---
+
+# Đề bài
+
+Với điều kiện nào của $m$ thì hàm số $f(x)=(2m-1)x+m+3$ đồng biến trên $\mathbb{R}$? Biết kết quả có dạng $m >\dfrac{a}{b}$ (tối giản). Khi đó $2a-3b$ bằng
+
+# Lời giải
+
+Điều kiện để hàm số đồng biến trên $\mathbb{R}$ là $2m-1 > 0 \Rightarrow m >\dfrac{1}{2}$.
+Khi đó $2a-3b=-4$.
+
+---
+
+---
+id: ham_so_022
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Ứng dụng thực tế của hàm số bậc nhất
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 9
+tags:
+  - toán thực tế
+  - hàm số bậc nhất
+---
+
+# Đề bài
+
+Một cửa hàng nhân dịp Noel đã đồng loạt giảm giá các sản phẩm. Trong đó có chương trình nếu mua một gói kẹo thứ hai trở đi sẽ được giảm $10\%$ so với giá ban đầu. Biết giá gói đầu là $60\,000$ đồng. Bạn An có $500\,000$ đồng. Hỏi bạn An có thể mua tối đa bao nhiêu gói kẹo?
+
+# Lời giải
+
+Giả sử bạn An mua được $x$ gói kẹo ($x$ nguyên dương).
+Khi đó gói thứ nhất bạn An phải trả $60\,000$ đồng.
+Số gói kẹo còn lại là $x-1$ và bạn An chỉ phải trả
+$$60\,000-10\% \cdot 60\,000=54\,000 \text{ đồng (mỗi gói).}$$
+Vậy số tiền phải trả khi mua kẹo được tính theo công thức
+$$y=60\,000+(x-1)\cdot 54\,000=54\,000x+6\,000.$$
+Số tiền bạn An dùng mua kẹo phải không quá $500\,000$ đồng, suy ra
+$$54\,000x+6\,000\le 500\,000 \Rightarrow x\le\dfrac{247}{27}\approx 9{,}148.$$
+Vậy với số tiền hiện có, bạn An chỉ có thể mua được tối đa $9$ gói kẹo.
+
+---
+
+---
+id: ham_so_023
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tọa độ giao điểm của hai đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - giao điểm
+  - đường thẳng
+---
+
+# Đề bài
+
+Tọa độ giao điểm của hai đường thẳng $y=\dfrac{1-3x}{4}$ và $y=-\left(\dfrac{x}{3}+1\right)$ là
+
+A. $(0;-1)$
+
+B. $(2;-3)$
+
+C. $(0;\dfrac{1}{4})$
+
+D. $(3;-2)$
+
+# Lời giải
+
+Phương trình hoành độ giao điểm của hai đường thẳng $$\dfrac{1-3x}{4}=-\left(\dfrac{x}{3}+1\right)\Leftrightarrow x=3 \Rightarrow y=-2.$$
+Vậy tọa độ giao điểm của hai đường thẳng là $(3;-2)$.
+
+---
+
+---
+id: ham_so_024
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tọa độ giao điểm của hai đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - giao điểm
+  - đường thẳng
+---
+
+# Đề bài
+
+Tọa độ giao điểm của hai đường thẳng $y=x+2$ và $y=-\dfrac{3}{4}x+3$ là
+
+A. $\left(-\dfrac{4}{7};-\dfrac{18}{7}\right)$
+
+B. $\left(\dfrac{4}{7};-\dfrac{18}{7}\right)$
+
+C. $\left(-\dfrac{4}{7};\dfrac{18}{7}\right)$
+
+D. $\left(\dfrac{4}{7};\dfrac{18}{7}\right)$
+
+# Lời giải
+
+Phương trình hoành độ giao điểm của hai đường thẳng là $x+2=-\dfrac{3}{4}x+3\Leftrightarrow x=\dfrac{4}{7}$.
+Suy ra $y=\dfrac{4}{7}+2=\dfrac{18}{7}$.
+Vậy tọa độ giao điểm của hai đường thẳng là $\left(\dfrac{4}{7};\dfrac{18}{7}\right)$.
+
+---
+
+---
+id: ham_so_025
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tính diện tích hình phẳng giới hạn bởi đường thẳng và hai trục tọa độ
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - diện tích tam giác
+  - trục tọa độ
+---
+
+# Đề bài
+
+Đường thẳng $y=2-x$ tạo với hai trục tọa độ một tam giác có diện tích bằng
+
+A. $1$
+
+B. $2{,}5$
+
+C. $4$
+
+D. $2$
+
+# Lời giải
+
+Giao với trục $Ox$ tại điểm $A(2;0)$.
+Giao với trục $Oy$ tại điểm $B(0;2)$.
+Khi đó độ dài các cạnh $OA=2$, $OB=2$.
+Ta có tam giác $OAB$ vuông tại $O$ nên $S_{OAB}=\dfrac{1}{2}OA.OB=2$.
+
+---
+
+---
+id: ham_so_026
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Ba đường thẳng đồng quy
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - đồng quy
+  - đường thẳng
+---
+
+# Đề bài
+
+Cho ba đường thẳng $d_1\colon y=x+7$, $d_2 \colon y=ax-4$, $d_3 \colon y=2x+8$. Biết rằng $d_1$, $d_2$, $d_3$ đồng qui tại điểm $M(b;c)$. Tính tổng $S=a+b+c$.
+
+A. $-1$
+
+B. $-5$
+
+C. $-10$
+
+D. $6$
+
+# Lời giải
+
+Phương trình hoành độ giao điểm của $d_1$, $d_3$ là $x+7=2x+8 \Leftrightarrow x=-1$.
+Thay $x=-1$ vào $d_1 \colon y=x+7$, ta được $y=6$.
+Vậy tọa độ giao điểm của $d_1$, $d_3$ là $M(-1;6)$.
+Vì $d_1$, $d_2$, $d_3$ đồng qui tại điểm $M(-1;6)$ nên $d_2$ đi qua $M(-1;6)$.
+Khi đó $6=a(-1)-4\Rightarrow a=-10$.
+Vậy $S=a+b+c=-10+(-1)+6=-5$.
+
+---
+
+---
+id: ham_so_027
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Biện luận số giao điểm của hai đường thẳng chứa tham số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - giao điểm
+  - tham số m
+---
+
+# Đề bài
+
+Cho hai hàm số $y=(m+1)^2x-2$ và $y=(3m+7)x+m$. Tìm tất cả các giá trị thực của tham số $m$ để đồ thị hai hàm số đã cho cắt nhau.
+
+A. $m\ne-2$
+
+B. $m\ne-3$
+
+C. $m\ne-2$, $m\ne 3$
+
+D. $m=-2$, $m=3$
+
+# Lời giải
+
+Hoành độ giao điểm của đồ thị hai hàm số đã cho là nghiệm của phương trình
+$$(3m+7)x+m=(m+1)^2x-2 \Leftrightarrow (m^2-m-6)x=m+2. \qquad(*)$$
+Đồ thị hai hàm số đã cho cắt nhau khi và chỉ khi (*) có $1$ nghiệm $\Leftrightarrow m^2-m-6\ne 0 \Leftrightarrow \heva{&m\ne 3\\ &m\ne-2.}$$
+
+---
+
+---
+id: ham_so_028
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Ba đường thẳng đồng quy chứa tham số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - đồng quy
+  - tham số m
+---
+
+# Đề bài
+
+Giá trị của tham số $m$ để ba đường thẳng $y=x+1$, $y=-x+m$, $y=3x$ đồng quy tại một điểm là
+
+A. $m=1$
+
+B. $m=2$
+
+C. $m=\dfrac{-1}{2}$
+
+D. $m=\dfrac{1}{2}$
+
+# Lời giải
+
+Giả sử $d_1 \colon y=x+1$, $d_2 \colon y=-x+m$, $d_3 \colon y=3x$.
+Gọi $A$ là giao điểm của $d_1$ và $d_3$.
+Phương trình hoành độ giao điểm của $d_1$ và $d_3$ là
+$$x+1=3x \Leftrightarrow x=\dfrac{1}{2} \Rightarrow y=\dfrac{3}{2}.$$
+Suy ra $A\left(\dfrac{1}{2};\dfrac{3}{2}\right)$.
+Ba đường thẳng $d_1$, $d_2$, $d_3$ đồng quy $\Leftrightarrow A\in{d_2} \Leftrightarrow\dfrac{3}{2}=-\dfrac{1}{2}+m \Leftrightarrow m=2$.
+Vậy ba đường thẳng đã cho đồng quy khi $m=2$.
+
+---
+
+---
+id: ham_so_029
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tham số để hàm số xác định trên một khoảng cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tập xác định
+  - tham số m
+  - khoảng xác định
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị thực của tham số $m$ để hàm số $y=\dfrac{x^2+2m+2}{x-m}$ xác định trên khoảng $(-1;0)$.
+
+A. $\hoac{&m > 0\\ &m <-1}$
+
+B. $m\le-1$
+
+C. $\hoac{&m\ge 0\\ &m\le-1}$
+
+D. $m\ge 0$
+
+# Lời giải
+
+Hàm số đã cho xác định khi và chỉ khi $x\ne m$.
+Khi đó tập xác định của hàm số là $\mathscr{D}=(-\infty;m)\cup(m;+\infty)$.
+Yêu cầu bài toán $\Leftrightarrow(-1;0)\subset D \Leftrightarrow \hoac{&m\ge 0\\ &m\le-1.}$
+
+---
+
+---
+id: ham_so_030
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tham số để hàm số xác định trên một nửa khoảng cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tập xác định
+  - tham số m
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị của tham số $m$ để hàm số $y=\dfrac{x+1}{x-2m+1}$ xác định trên $[0;1)$.
+
+A. $m <\dfrac{1}{2}$
+
+B. $m\ge 1$
+
+C. $m\ge 2$ hoặc $m < 1$
+
+D. $m <\dfrac{1}{2}$ hoặc $m\ge 1$
+
+# Lời giải
+
+Tập xác định của hàm số $\mathscr{D}=\mathbb{R}\setminus\{{2m-1}\}$.
+Hàm số xác định trên $[0;1)$ khi và chỉ khi
+$$2m-1\notin[0;1) \Leftrightarrow \hoac{&2m-1 < 0\\ &2m-1\ge 1} \Leftrightarrow \hoac{&m <\dfrac{1}{2}\\ &m\ge 1.}$$
+
+---
+
+---
+id: ham_so_031
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định hàm số khi biết điểm thuộc đồ thị và hệ số góc
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hệ số góc
+  - đường thẳng
+---
+
+# Đề bài
+
+Biết rằng đồ thị hàm số $y=ax+b$ đi qua điểm $A(-3;1)$ và có hệ số góc bằng $-2$. Tính tích $P=ab$.
+
+A. $P=-10$
+
+B. $P=10$
+
+C. $P=-7$
+
+D. $P=7$
+
+# Lời giải
+
+Do đồ thị hàm số $y=ax+b$ đi qua điểm $A(-3;1)$ và có hệ số góc bằng $-2$ ta có hệ phương trình
+$$\heva{&a=-2\\ &1=-3a+b} \Leftrightarrow \heva{&a=-2\\ &b=-5} \Rightarrow P=(-2) \cdot (-5)=10.$$
+
+---
+
+---
+id: ham_so_032
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định đường thẳng song song với một đường thẳng đi qua hai điểm cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đường thẳng
+  - song song
+---
+
+# Đề bài
+
+Cho phương trình đường thẳng $y=ax+b$ có đồ thị đi qua điểm $E(2;-1)$ và song song với đường thẳng $ON$ với $O$ là gốc tọa độ và $N(1;3)$. Tính giá trị biểu thức $S=a^2+b^2$.
+
+A. $S=-4$
+
+B. $S=-40$
+
+C. $S=-58$
+
+D. $S=58$
+
+# Lời giải
+
+Phương trình đường thẳng $ON$ với $O$ là gốc tọa độ và $N(1;3)$ có dạng $y=3x$.
+Đường thẳng $y=ax+b$ đi qua điểm $E(2;-1) \Leftrightarrow 2a+b=-1$. $\qquad(1)$
+Đường thẳng $y=ax+b$ song song với đường thẳng $ON \Rightarrow \heva{&a=3\\ &b\ne 0.}$ $\qquad(2)$
+Từ $(1)$ và $(2)$ suy ra $\heva{&a=3\\ &b=-7.}$
+Vậy $S=a^2+b^2=58$.
+
+---
+
+---
+id: ham_so_033
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Xác định hàm số bậc nhất khi biết điểm đi qua và giao điểm với trục hoành
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đường thẳng
+  - giao điểm trục hoành
+---
+
+# Đề bài
+
+Cho hàm số bậc nhất $y=ax+b$. Tìm $a$ và $b$, biết rằng đồ thị hàm số đi qua điểm $M(-1;1)$ và cắt trục hoành tại điểm có hoành độ là $5$.
+
+A. $a=\dfrac{1}{6}$; $b=\dfrac{5}{6}$
+
+B. $a=-\dfrac{1}{6}$; $b=-\dfrac{5}{6}$
+
+C. $a=\dfrac{1}{6}$; $b=-\dfrac{5}{6}$
+
+D. $a=-\dfrac{1}{6}$; $b=\dfrac{5}{6}$
+
+# Lời giải
+
+Theo đề ta có $\heva{&1=-a+b\\ &0=5a+b} \Leftrightarrow \heva{&a=-\dfrac{1}{6}\\ &b=\dfrac{5}{6}.}$
+
+---
+
+---
+id: ham_so_034
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Bài toán diện tích tam giác giới hạn bởi hai đường thẳng và trục hoành
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - diện tích tam giác
+  - tham số m
+  - số nguyên dương
+---
+
+# Đề bài
+
+Cho hai đường thẳng $d_1 \colon y=mx-4$ and $d_2 \colon y=-mx-4$. Gọi $S$ là tập hợp các giá trị nguyên dương của $m$ để tam giác tạo thành bởi $d_1$, $d_2$ và trục hoành có diện tích lớn hơn $8$. Số phần tử của tập $S$ là
+
+A. $1$
+
+B. $3$
+
+C. $2$
+
+D. $4$
+
+# Lời giải
+
+Ta có $d_1 \colon y=mx-4$, $d_2 \colon y=-mx-4$ cắt nhau và cùng cắt trục $Ox$ khi $m\ne 0$.
+Gọi $A\left(\dfrac{4}{m}; 0\right)$, $B\left(-\dfrac{4}{m}; 0\right)$ lần lượt là giao điểm của $d_1$, $d_2$ với trục hoành.
+Phương trình hoành độ giao điểm của $d_1$, $d_2$ là $mx-4=-mx-4 \Leftrightarrow x=0$.
+Gọi $C$ là giao điểm của $d_1;\,d_2$ thì $C(0;-4)$.
+Ta có $S_{\Delta ABC}=\dfrac{1}{2} \mathrm{d}(C,Ox) \cdot AB=\dfrac{1}{2}|y_C| \cdot |x_A-x_B|=\dfrac{1}{2} \cdot 4 \cdot \dfrac{8}{|m|}=\dfrac{16}{|m|}$.
+Có $S_{\Delta ABC}> 8 \Leftrightarrow\dfrac{16}{|m|}> 8\Leftrightarrow|m| < 2,\,m\in{N^*} \Leftrightarrow m=1$.
+Vậy $S=\{ 1\}$.
+
+---
+
+---
+id: ham_so_035
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của một số hàm số cơ bản
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - tập xác định
+  - hàm số chứa căn
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các khẳng định sau:
+
+a) Hàm số $y=-x^3-|x|+1$ có tập xác định $\mathscr{D}=\mathbb{R}$
+
+b) Hàm số $y=\dfrac{3x-2}{x^2-x}$ có tập xác định $\mathscr{D}=\mathbb{R} \setminus \{1\}$
+
+c) Hàm số $y=\sqrt{x+2}+\sqrt{x-1}$ có tập xác định $\mathscr{D}=[1;+\infty)$
+
+d) Hàm số $y=\dfrac{1}{\sqrt{2-|x|}}$ có tập xác định $\mathscr{D}=[-2;2]$
+
+# Lời giải
+
+a) Đúng. Hàm số xác định với mọi $x$ thuộc $\mathbb{R}$.
+Tập xác định hàm số là $\mathscr{D}=\mathbb{R}$.
+
+b) Sai. Hàm số xác định $\Leftrightarrow x^2-x\ne 0 \Leftrightarrow \heva{&x\ne 0\\ &x\ne 1.}$
+Tập xác định hàm số là $\mathscr{D}=\mathbb{R} \setminus \{0; 1\}$.
+
+c) Đúng. Hàm số xác định $\Leftrightarrow \heva{&x+2\ge 0\\& x-1\ge 0} \Leftrightarrow \heva{&x\ge-2\\ &x\ge 1} \Leftrightarrow x\ge 1$.
+Tập xác định hàm số là $\mathscr{D}=[1;+\infty)$.
+
+d) Sai. Hàm số xác định $\Leftrightarrow 2-|x| > 0 \Leftrightarrow |x| < 2 \Leftrightarrow -2<x<2$.
+Tập xác định hàm số là $\mathscr{D}=(-2;2)$.
+
+---
+
+---
+id: ham_so_036
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Đọc đồ thị đường gấp khúc để xét tính chất hàm số
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - đọc đồ thị
+  - đồng biến
+  - nghịch biến
+---
+
+# Đề bài
+
+Cho hàm số $y=f(x)$ có đồ thị là đường gấp khúc như hình dưới.
+
+\begin{center}
+	\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\def\xmin{-4}
+		\def\xmax{7}
+		\def\ymin{0}
+		\def\ymax{5}
+		\draw[->] (\xmin-1,0)--(\xmax+1,0) node[below] { $x$};
+		\draw[->] (0,\ymin-1)--(0,\ymax+1) node[left] {$y$};
+		\draw (0,0) node [below left] {$O$};
+		\foreach \x in {-4,-3,-2,-1,1,2,3,4,5,6,7} \draw (\x,0.1)--(\x,-0.1) node [below] { $\x$};
+		\foreach \y in {1,5} \draw (0.1,\y)--(-0.1,\y) node [left] { $\y$};
+		\clip (\xmin-0.1,\ymin) rectangle (\xmax+0.1,\ymax);
+		\draw (-4,2)--(-3,0)--(-1,3)--(0,5)--(2,2)--(4,1)--(5,2)--(7,3);
+		\draw[dashed] (-4,0)|-(0,2) (-1,0)|-(0,3) (2,0)|-(0,2) (4,0)|-(0,1) (5,0)|-(0,2) (7,0)|-(0,3);
+		\node[above left] at (0,2) {$2$};
+		\node[above left] at (0,3) {$3$};
+	\end{tikzpicture}
+\end{center}
+
+Khi đó:
+
+a) Tập giá trị hàm số $T=[-4;7]$
+
+b) Ta thấy điểm $(-4;2)$, $(4;1)$ thuộc đồ thị hàm số, điểm $(2;3)$ không thuộc đồ thị hàm số
+
+c) Ta có $f(-1)=3$, $f(5)=2$
+
+d) Hàm số đã cho đồng biến trên các khoảng $(-3;0)$, $(4;7)$; hàm số nghịch biến trên các khoảng $(-4;-3)$, $(0;4)$
+
+# Lời giải
+
+a) Sai. Tập xác định hàm số là $\mathscr{D}=[-4;7]$.
+Tập giá trị hàm số là $T=[0;5]$.
+
+b) Đúng. Ta thấy điểm $(-4;2)$, $(4;1)$ thuộc đồ thị hàm số, điểm $(2;3)$ không thuộc đồ thị hàm số.
+
+c) Đúng. Ta có $f(-1)=3$, $f(5)=2$.
+
+d) Đúng. Hàm số đã cho đồng biến trên các khoảng $(-3;0)$, $(4;7)$; hàm số nghịch biến trên các khoảng $(-4;-3)$, $(0;4)$.
+
+---
+
+---
+id: ham_so_037
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Bài toán thực tế về mô hình hàm số bậc nhất cho từng giai đoạn
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - toán thực tế
+  - hàm số bậc nhất
+---
+
+# Đề bài
+
+Một công ty dịch vụ cho thuê xe hơi vào dịp tết với giá thuê mỗi chiếc xe hơi như sau: khách thuê tối thiểu phải thuê trọn ba ngày tết (mùng $1$, $2$, $3$) với giá $1\,000\,000$ đồng/ngày; những ngày còn lại (nếu khách còn thuê) sẽ được tính giá thuê là $700\,000$ đồng/ngày. Giả sử $T$ là tổng số tiền mà khách phải trả khi thuê một chiếc xe hơi của công ty và $x$ là số ngày thuê của khách. Khi đó:
+
+a) Hàm số $T$ theo $x$ là $T=900\,000+700\,000x$
+
+b) Điều kiện của $x$ là $x \in \mathbb{N}$
+
+c) Một khách hàng thuê một chiếc xe hơi công ty trong $7$ ngày tết thì sẽ trả khoản tiền thuê là $5\,800\,000$ (đồng)
+
+d) Anh Bình định dành ra một khoản tối đa là $10$ triệu đồng cho phí thuê xe đi chơi trong dịp tết, khi đó anh Bình có thể thuê xe của công ty trên tối đa $12$ ngày
+
+# Lời giải
+
+a) Đúng. Ta có $T=3\,000\,000+700\,000(x-3)=900\,000+700\,000x$.
+
+b) Sai. Với $x \ge 3$, $x \in \mathbb{N}$.
+
+c) Đúng. Với $x=7$ thì $T=900\,000+700\,000 \cdot 7=5\,800\,000$ (đồng).
+
+d) Sai. Xét bất phương trình
+\begin{eqnarray*}
+	900\,000+700\,000x\le 10\,000\,000\Leftrightarrow 9+7x\le 100\Leftrightarrow x\le\dfrac{81}{7}\approx 11{,}57.
+\end{eqnarray*}
+Vậy với khoản tiền $10$ triệu đồng, anh Bình chỉ có thể thuê một chiếc xe tối đa $11$ ngày.
+
+---
+
+---
+id: ham_so_038
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tập xác định của một số hàm số cơ bản
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - tập xác định
+  - hàm số chứa căn
+  - hàm số phân thức
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các khẳng định sau:
+
+a) Hàm số $y=\sqrt{3x+9}$ có tập xác định là $\mathscr{D}=[9;+\infty)$
+
+b) Hàm số $y=\dfrac{1}{\sqrt{5-2x}}$ có tập xác định là $\mathscr{D}=\left(-\infty;\dfrac{5}{2}\right)$
+
+c) Hàm số $y=\sqrt{4-x}+\sqrt{x-2}$ có tập xác định là $\mathscr{D}=(2;4)$
+
+d) Hàm số $y=\dfrac{3}{x-1}+\sqrt{x+1}$ có tập xác định là $\mathscr{D}=[-1;1)\cup (1;+\infty)$
+
+# Lời giải
+
+a) Sai. Điều kiện xác định của hàm số là $3x+9\ge 0\Leftrightarrow x\ge-3$.
+Vậy tập xác định của hàm số là $\mathscr{D}=[-3;+\infty)$.
+
+b) Đúng. Điều kiện xác định của hàm số là $5-2x > 0\Leftrightarrow x <\dfrac{5}{2}$.
+Vậy tập xác định của hàm số là $\mathscr{D}=\left(-\infty;\dfrac{5}{2}\right)$.
+
+c) Sai. Điều kiện xác định của hàm số là $\heva{&4-x\ge 0\\ &x-2\ge 0} \Leftrightarrow \heva{&x\le 4\\ &x\ge 2.}$
+Vậy tập xác định của hàm số là $\mathscr{D}=[2;4]$.
+
+d) Đúng. Điều kiện xác định của hàm số là $\heva{&x+1\ge 0\\ &x-1\ne 0} \Leftrightarrow \heva{&x\ge-1\\ &x\ne 1.}$
+Vậy tập xác định của hàm số là $\mathscr{D}=[-1;1)\cup (1;+\infty)$.
+
+---
+
+---
+id: ham_so_039
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tham số để đồ thị hàm số bậc hai đi qua điểm cho trước
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - tham số m
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Cho hàm số $y=f(x)=-3x^2+m^2x+m+1$ (với $m$ là tham số). Có bao nhiêu giá trị của $m$ để đồ thị của hàm số $y=f(x)$ đi qua điểm $A(1;0)$.
+
+# Lời giải
+
+Đồ thị của hàm số $y=f(x)$ đi qua điểm $A(1;0)$ khi và chỉ khi
+$$0=-3+m^2+m+1 \Leftrightarrow m^2+m-2=0 \Leftrightarrow \hoac{&m=1\\ &m=-2.}$$
+Vậy có $2$ giá trị của tham số $m$ thỏa mãn yêu cầu bài toán.
+
+---
+
+---
+id: ham_so_040
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm số giá trị nguyên của tham số để hàm số xác định trên khoảng cho trước
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 6
+tags:
+  - tập xác định
+  - giá trị nguyên
+  - tham số m
+---
+
+# Đề bài
+
+Có bao nhiêu giá trị nguyên của tham số $m$ thuộc khoảng $(-2;5)$ để hàm số $y=\dfrac{x+2m+2}{x-m}$ xác định trên $(-1;0)$.
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $x\ne m$.
+Để hàm số xác định trên $(-1;0) \Leftrightarrow m\notin (-1;0) \Leftrightarrow\hoac{&m\ge 0\\ &m\le-1.}$
+Với $m$ thuộc khoảng $(-2;5)$ ta có $m=\{-1;0;1;2;3;4\}$.
+Vậy có $6$ giá trị của $m$.
+
+---
+
+---
+id: ham_so_041
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm số giá trị nguyên của tham số để hàm số chứa căn xác định trên tập cho trước
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 3
+tags:
+  - tập xác định
+  - giá trị nguyên
+  - tham số m
+---
+
+# Đề bài
+
+Có bao nhiêu số nguyên $m$ thuộc đoạn $[1;8]$ để hàm số $y=\sqrt{3x-m}$, (với $m$ là tham số) xác định trên tập $(1;+\infty)$.
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $3x-m\ge 0 \Leftrightarrow x\ge\dfrac{m}{3}$.
+Suy ra $\mathscr{D}=\left[\dfrac{m}{3};+\infty\right)$.
+Để hàm số xác định trên $(1;+\infty)$ thì $$(1;+\infty)\subset\left[\dfrac{m}{3};+\infty\right) \Leftrightarrow\dfrac{m}{3}\le 1 \Leftrightarrow m\le 3.$$
+Với $m$ thuộc đoạn $[1;8]$ nên ta có $m=\{1;2;3\}$.
+Vậy có $3$ số nguyên $m$ thỏa mãn yêu cầu.
+
+---
+
+---
+id: ham_so_042
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tổng các số nguyên của tham số để hàm số có tập xác định là R
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -3
+tags:
+  - tập xác định R
+  - tam thức bậc hai
+  - giá trị nguyên
+---
+
+# Đề bài
+
+Tổng các số nguyên $m$ thuộc khoảng $(-3;3)$ để hàm số $y=\dfrac{2x+\sqrt 2}{x^2-2x+1-m}$, ($m$ là tham số) có tập xác định là $\mathbb{R}$.
+
+# Lời giải
+
+Để hàm số $y=\dfrac{2x+\sqrt 2}{x^2-2x+1-m}$ có tập xác định là $\mathbb{R}$ khi và chỉ khi phương trình $x^2-2x+1-m=0$ vô nghiệm hay $\Delta'=1-(1-m) < 0 \Leftrightarrow m < 0$.
+Với $m$ thuộc khoảng $(-3;3)$ ta có $m=\{-2;-1\}$.
+Vậy tổng các số $m$ là $-3$.
+
+---
+
+---
+id: ham_so_043
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tích các số nguyên để hàm số có tập xác định cho trước
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 60
+tags:
+  - tập xác định
+  - giá trị nguyên
+  - tích các giá trị
+---
+
+# Đề bài
+
+Tích các số nguyên $m$ thuộc khoảng $(0;6)$ để hàm số $y=\sqrt{6-x}+\sqrt{2m-x}$ có tập xác định là $(-\infty;6]$.
+
+# Lời giải
+
+Điều kiện xác định của hàm số là $\heva{&6-x\ge 0\\ &2m-x\ge 0} \Leftrightarrow \heva{&x\le 6\\ &x\le 2m.}$
+Để hàm số có tập xác định là $(-\infty;6]$ khi và chỉ khi $6\le 2m\Leftrightarrow m\ge 3$.\\
+Với $m$ thuộc khoảng $(0;6)$ ta có $m=\{3;4;5\}$.
+Vậy tích các giá trị của $m$ bằng $3 \cdot 4 \cdot 5=60$.
+
+---
+
+---
+id: ham_so_044
+lop: 10
+chu_de: Hàm số và đồ thị
+dang: Tìm tổng các giá trị nguyên của tham số để hàm số nghịch biến trên khoảng
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - nghịch biến
+  - tham số m
+  - giá trị nguyên
+---
+
+# Đề bài
+
+Tổng các giá trị của tham số $m$ thuộc khoảng $(-2;7)$ để hàm số $y=-x^2+(m-1)x+2$ nghịch biến trên khoảng $(1;2)$.
+
+# Lời giải
+
+Với mọi $x_1$, $x_2 \in (1;2)$, $x_1\ne x_2$, ta có $\dfrac{f(x_1)-f(x_2)}{x_1-x_2}=(m-1)-(x_1+x_2)$.
+Để hàm số $y=-x^2+(m-1)x+2$ nghịch biến trên khoảng $(1;2)$ thì
+$$(m-1)-\left(x_1+x_2\right) < 0 \text{ với mọi } x_1, x_2\in (1;2).$$
+Vì $x_1$, $x_2\in (1;2)$ nên $2 <x_1+x_2< 4$.
+Ta suy ra $(m-1)-(x_1+x_2) < m-3$.
+Do đó, $m-3\le 0 \Leftrightarrow m\le 3$ thỏa mãn yêu cầu bài toán.
+Với $m$ thuộc khoảng $(-2;7)$ ta có $m=\{-1;0;1;2;3\}$.
+Vậy tổng các giá trị của $m$ là $5$.
