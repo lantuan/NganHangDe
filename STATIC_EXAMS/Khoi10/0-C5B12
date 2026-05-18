@@ -1,0 +1,1397 @@
+---
+id: sogn_001
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Giá trị gần đúng và quy tròn số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Khi sử dụng máy tính bỏ túi với $10$ chữ số thập phân ta được $\sqrt{8}=2,828427125$. Giá trị gần đúng của $\sqrt{8}$ chính xác đến hàng phần trăm là
+
+A. $2{,}81$
+
+B. $2{,}83$
+
+C. $2{,}82$
+
+D. $2{,}80$
+
+# Lời giải
+
+$2,828427125 \approx 2{,}83$.
+
+---
+id: sogn_002
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Giá trị gần đúng và quy tròn số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Số quy tròn của của $20 \, 182 \, 020$ đến hàng trăm là
+
+A. $20\, 182 \, 000$
+
+B. $20 \, 180 \, 000$
+
+C. $20\, 182 \, 100$
+
+D. $20\, 182\, 020$
+
+# Lời giải
+
+$20 \, 182 \, 020 \approx 20\, 182 \, 000$. 
+
+---
+id: sogn_003
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số gần đúng
+  - độ chính xác
+---
+
+# Đề bài
+
+Cho số gần đúng $a=8\,141\,378$ với độ chính xác $d=300$. Hãy viết quy tròn số $a$.
+
+A. $8\,141\,400$
+
+B. $8\,142\,400$
+
+C. $8\,141\,000$
+
+D. $8\,141\,300$
+
+# Lời giải
+
+$d=300$ nên $a$ quy tròn đến hàng nghìn. Khi đó $a=8\,141\,378 \approx 8\,141\,000$.
+
+---
+id: sogn_004
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - độ chính xác
+---
+
+# Đề bài
+
+Số quy tròn của số gần đúng $a=35{,}675$ với độ chính xác $0{,}02$ là
+
+A. $35{,}6$
+
+B. $35{,}67$
+
+C. $36$
+
+D. $35{,}7$
+
+# Lời giải
+
+Với độ chính xác $0{,}02$ thì $a$ quy tròn đến phần chục. Khi đó $a=35{,}675 \approx 35{,}7$.
+
+---
+id: sogn_005
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - thực tế
+---
+
+# Đề bài
+
+Trong một cuộc điều tra dân số, người ta báo dân số của tỉnh A là $1\, 279 \, 425\pm 300$ người. Hãy viết số quy tròn số dân trên.
+
+A. $1\, 270\, 000$ người
+
+B. $1\, 279\, 400$ người
+
+C. $1\, 280\, 000$ người
+
+D. $1\, 279\, 000$ người
+
+# Lời giải
+
+$d=300$ nên dân số tỉnh A quy tròn đến hàng nghìn. Khi đó $1\, 279\, 425\pm 300 \approx 1\, 279\, 000$.
+
+---
+id: sogn_006
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Giá trị gần đúng và quy tròn số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Số quy tròn đến hàng phần nghìn của số $a=0{,}1234$ là
+
+A. $0{,}124$
+
+B. $0{,}12$
+
+C. $0{,}123$
+
+D. $0{,}13$
+
+# Lời giải
+
+$a=0{,}1234 \approx 0{,}123$.
+
+---
+id: sogn_007
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - độ chính xác
+---
+
+# Đề bài
+
+Cho giá trị gần đúng của $\pi$ là $a=3,141592653589$ với độ chính xác $10^{-10}$. Hãy viết số quy tròn của số $a$.
+
+A. $a=3{,}1415926535$
+
+B. $a=3{,}1415926536$
+
+C. $a=3{,}141592653$
+
+D. $a=3{,}141592654$
+
+# Lời giải
+
+Với độ chính xác $10^{-10}$ thì $a$ quy tròn đến vị trí số thứ $10^{-9}$. Khi đó $a=3,141592653589 \approx a=3{,}141592654$.
+
+---
+id: sogn_008
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số gần đúng
+  - thực tế
+---
+
+# Đề bài
+
+Theo thống kê, dân số Việt Nam năm $2002$ là $79\, 715 \, 675$ người. Giả sử sai số tuyệt đối của số liệu thống kê này nhỏ hơn $10\, 000$ người. Hãy viết số quy tròn của số trên.
+
+A. $79\, 710\, 000$ người
+
+B. $79\, 716\, 000$ người
+
+C. $79\, 720\, 000$ người
+
+D. $79\, 000\, 000$ người
+
+# Lời giải
+
+Do sai số tuyệt đối của thống kê này nhỏ hơn $10\, 000$ người nên ta quy tròn số trên đến hàng chục nghìn. Vậy số quy tròn của số $79 \, 715 \, 675$ là $79\, 720\, 000$.
+
+---
+id: sogn_009
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - thực tế
+---
+
+# Đề bài
+
+Đo độ cao một ngọn cây là $h=17{,}14\,\text{m}\pm 0{,}3\,\text{m}$. Hãy viết số quy tròn của số $17{,}14$?
+
+A. $17{,}1$
+
+B. $17{,}15$
+
+C. $17{,}2$
+
+D. $17$
+
+# Lời giải
+
+Do độ chính xác là $0{,}3$ nên $h$ quy tròn đến hàng đơn vị, do đó $h=17{,}14 \approx 17$.
+
+---
+id: sogn_010
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - độ chính xác
+---
+
+# Đề bài
+
+Cho số $\overline{a}=4{,}1356\pm 0{,}001$. Số quy tròn của số gần đúng $4{,}1356$ là
+
+A. $4{,}135$
+
+B. $4{,}13$
+
+C. $4{,}136$
+
+D. $4{,}14$
+
+# Lời giải
+
+Vì độ chính xác đến hàng phần nghìn (độ chính xác là $0{,}001$) nên ta quy tròn số $4{,}1356$ đến hàng phần phần trăm theo quy tắc làm tròn. Vậy số quy tròn của số $4{,}1356$ là $4{,}14$.
+
+---
+id: sogn_011
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Khái niệm sai số và độ chính xác
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - độ chính xác
+  - thực tế
+---
+
+# Đề bài
+
+Độ cao của một ngọn núi được ghi lại như sau $\overline{h}=1372{,}5\,\text{m}\pm 0{,}2\,\text{m}$. Độ chính xác $d$ của phép đo trên là
+
+A. $d=0{,}1\,\text{m}$
+
+B. $d=1\,\text{m}$
+
+C. $d=0{,}2\,\text{m}$
+
+D. $d=2\,\text{m}$
+
+# Lời giải
+
+Độ chính xác $d=0{,}2\,\text{m}$.
+
+---
+id: sogn_012
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Khái niệm sai số và độ chính xác
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - độ chính xác
+  - thực tế
+---
+
+# Đề bài
+
+Chiều cao của một ngọn đồi là $\overline{h}=347{,}13\pm 0,2$ m. Độ chính xác $d$ của phép đo trên là
+
+A. $d=347{,}13$ m
+
+B. $347{,}33$ m
+
+C. $d=0{,}2$ m
+
+D. $d=346{,}93$ m
+
+# Lời giải
+
+Ta có $a$ là số gần đúng của $\overline{a}$ với độ chính xác $d$ qui ước viết gọn là $\overline{a}=a\pm d$. Vậy độ chính xác của phép đo là $d=0{,}2$ m.
+
+---
+id: sogn_013
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Ý nghĩa số gần đúng và độ chính xác
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - số đúng
+  - số gần đúng
+  - thực tế
+---
+
+# Đề bài
+
+Một công ty sử dụng dây chuyền A để đóng gạo vào bao với khối lượng mong muốn $5$ kg. Trên bao bì ghi thông tin khối lượng $5\pm 0,2$ kg. Gọi $\bar{a}$ là khối lượng thực tế của một bao gạo do dây chuyền $A$ đóng gói. Khi đó
+
+a) Đúng/Sai: Số đúng $\bar{a}$
+
+b) Đúng/Sai: $5{,}2$ là số gần đúng của $\bar{a}$
+
+c) Đúng/Sai: Độ chính xác là $d=5$ kg
+
+d) Đúng/Sai: Giá trị của $\bar{a}$ nằm trong đoạn $[4,8;5,2]$
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Vì Số đúng $\bar{a}$, cũng là khối lượng thực tế của bao gạo (chưa biết chính xác $\bar{a}$). 
+- Mệnh đề b) Sai. Vì Khối lượng mong muốn là $5$ kg nên số $5$ là số gần đúng của $\bar{a}$. 
+- Mệnh đề c) Sai. Vì Độ chính xác là $d=0,2$ kg.
+- Mệnh đề d) Đúng. Vì Giá trị $\bar{a}$ nằm trong đoạn $[5-0,2 ; 5+0,2]=[4,8 ; 5,2]$.
+
+---
+id: sogn_014
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - sai số tương đối
+  - so sánh độ chính xác
+---
+
+# Đề bài
+
+Kết quả đo chiều dài của một cây cầu được ghi $152$ m $\pm$ $0{,}2$ m; kết quả đo chiều cao của một ngôi nhà được ghi là $15{,}2$ m $\pm 0{,}1$ m. Khi đó
+
+a) Đúng/Sai: Sai số tương đối trong cách ghi thứ nhất (đo chiều dài của một cây cầu) là $\delta_1\leqslant\dfrac{d_1}{\left|a_1\right|}=\dfrac{0{,}2}{152}\approx 0,13\%$
+
+b) Đúng/Sai: Sai số tương đối trong cách ghi thứ hai (đo chiều cao của một ngôi nhà) là $\delta_2\leqslant\dfrac{d_2}{\left|a_2\right|}=\dfrac{0{,}1}{15{,}2}\approx 0,66\%$
+
+c) Đúng/Sai: Sai số tương đối trong cách ghi thứ hai (đo chiều cao của một ngôi nhà) lớn hơn $0{,}66\%$
+
+d) Đúng/Sai: Cách ghi thứ nhất (đo chiều dài cây cầu) có độ chính xác thấp hơn cách ghi thứ hai (đo chiều cao ngôi nhà)
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Vì Sai số tương đối trong cách ghi thứ nhất là $\delta_1\leqslant\dfrac{d_1}{\left|a_1\right|}=\dfrac{0{,}2}{152}\approx 0{,}13\%$ (hay sai số tương đối không vượt quá $0{,}13\%)$. 
+- Mệnh đề b) Đúng. Vì Sai số tương đối trong cách ghi thứ hai là $\delta_2\leqslant\dfrac{d_2}{\left|a_2\right|}=\dfrac{0{,}1}{15{,}2}\approx 0{,}66\%$ (hay sai số tương đối không vượt quá $0{,}66\%$).
+- Mệnh đề c) Sai. Vì Qua đánh giá sai số tương đối trong hai cách ghi, ta thấy $0{,}13\%<0{,}66\%$ nên cách ghi thứ nhất (đo chiều dài cây cầu) có độ chính xác cao hơn cách ghi thứ hai (đo chiều cao ngôi nhà).
+- Mệnh đề d) Sai. Vì Qua đánh giá sai số tương đối trong hai cách ghi, ta thấy $0{,}13\%<0{,}66\%$ nên cách ghi thứ nhất (đo chiều dài cây cầu) có độ chính xác cao hơn cách ghi thứ hai (đo chiều cao ngôi nhà).
+
+---
+id: sogn_015
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - sai số tương đối
+  - thực tế
+---
+
+# Đề bài
+
+Kết quả đo chiều dài của một thửa đất là $75{,}4$ m $\pm$ $0{,}5$ m và đo chiều dài của một cây cầu là $466{,}2$ m $\pm$ $0{,}5$ m. Khi đó
+
+a) Đúng/Sai: Đối với phép đo thửa đất, sai số tương đối không vượt quá $0{,}663\%$
+
+b) Đúng/Sai: Đối với phép đo thửa đất, có sai số tương đối là $\dfrac{d}{|a|}=\dfrac{0{,}5}{75{,}4}=\dfrac{5}{754}$
+
+c) Đúng/Sai: Đối với phép đo chiều dài cây cầu, có sai số tương đối lớn hơn $\dfrac{5}{4662}\approx 0{,}107\%$
+
+d) Đúng/Sai: Phép đo cây cầu có độ chính xác cao hơn phép đo chiều dài của một thửa đất
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Vì Đối với phép đo thửa đất, tỉ số $\dfrac{d}{|a|}=\dfrac{0{,}5}{75{,}4}=\dfrac{5}{754}$ (tức là sai số tương đối không vượt quá $\dfrac{5}{754}\approx 0{,}663\%$). 
+- Mệnh đề b) Đúng. Vì Đối với phép đo thửa đất, tỉ số $\dfrac{d}{|a|}=\dfrac{0{,}5}{75{,}4}=\dfrac{5}{754}$ (tức là sai số tương đối không vượt quá $\dfrac{5}{754}\approx 0{,}663\%$).
+- Mệnh đề c) Sai. Vì đối với phép đo chiều dài cây cầu, tỉ số $\dfrac{d}{|a|}=\dfrac{0{,}5}{466{,}2}=\dfrac{5}{4662}$ (nghĩa là sai số tương đối không vượt quá $\dfrac{5}{4662}\approx 0{,}107\%$).
+- Mệnh đề d) Đúng. Vì ta có $\dfrac{5}{754}>\dfrac{5}{4662}$ nên phép đo cây cầu có độ chính xác cao hơn.
+
+---
+id: sogn_016
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - quy tròn
+  - số gần đúng
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: Cho số gần đúng $a=2022$ với độ chính xác $d=20$. Số quy tròn của $a$ là $2020$
+
+b) Đúng/Sai: Cho số gần đúng $a=1{,}04527$ với độ chính xác $d=0{,}004$. Số quy tròn của $a$ là $1{,}05$
+
+c) Đúng/Sai: Cho $\bar{a}=14{,}6543\pm 0{,}03$. Số quy tròn của $a$ là $14{,}65$
+
+d) Đúng/Sai: Cho số gần đúng $a=301335$ với độ chính xác $d=234$. Số quy tròn của $a$ là $301000$
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Vì hàng lớn nhất của $d$ là hàng chục nên ta quy tròn $a$ đến hàng trăm. Vậy số quy tròn của $a$ là $2000$. 
+- Mệnh đề b) Đúng. Vì hàng lớn nhất của $d$ là hàng phần nghìn nên ta quy tròn $a$ đến hàng phần trăm. Vậy số quy tròn của $a$ là $1{,}05$.
+- Mệnh đề c) Sai. Vì hàng lớn nhất của $d$ là hàng phần trăm nên ta quy tròn $a$ đến hàng phần mười. Vậy số quy tròn của $a$ là $14{,}7$.
+- Mệnh đề d) Sai. Vì cho số gần đúng $a=301335$ với độ chính xác $d=234$. Kết quả là $301000$.
+
+---
+id: sogn_017
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Xác định số gần đúng trong thực tế
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 15.3
+tags:
+  - đo đạc
+  - số gần đúng
+---
+
+# Đề bài
+
+Bạn Nam thực hiện việc đo đường kính của một ống đồng bằng thước kẹp. Kết quả của Nam là $15{,}3$ mm. Hỏi số số gần đúng của phép đo là bao nhiêu?
+
+# Lời giải
+
+Số $15{,}3$ là số gần đúng của phép đo trong thực tế.
+
+---
+id: sogn_018
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - sai số tương đối
+  - thực tế
+---
+
+# Đề bài
+
+Trên bao bì của một sản phẩm có ghi "khối lượng tịnh $200\pm 2$ g". Hãy đánh giá sai số tương đối của số gần đúng này.
+
+# Lời giải
+
+Khối lượng đúng của bao sản phẩm $\bar{a}$ (tính theo gam) thuộc đoạn $[198; 202]$. 
+
+Sai số tương đối là $\delta_a\leq\dfrac{2}{200}=1\%$.
+
+---
+id: sogn_019
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 0.44
+tags:
+  - làm tròn
+  - sai số tuyệt đối
+---
+
+# Đề bài
+
+Làm tròn số $2315{,}56$ đến hàng đơn vị. Tính sai số tuyệt đối của chúng.
+
+# Lời giải
+
+Số $2315{,}56$ được làm tròn đến hàng đơn vị là $2316$ và sai số tuyệt đối là:
+$$
+\Delta=|2315{,}56-2316|=0{,}44
+$$
+
+---
+id: sogn_020
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 0.3
+tags:
+  - chu vi
+  - sai số tuyệt đối
+---
+
+# Đề bài
+
+Bạn Ngân có một mảnh nhựa với bề mặt hình tròn bán kính $1$ dm. Bạn ấy thực hiện đo chu vi của mép mảnh nhựa đó bằng cách sử dụng một sợi dây dài không dãn như sau: Cố định một đầu sợi dây trên mép mảnh nhựa, rồi quấn sợi dây quanh mép mảnh nhựa một vòng cho đến khi đầu dây cố định chạm vào thân sợi dây lần đầu tiên, sau đó đo độ dài phần dây chạm vào mép mảnh nhựa và được kết quả là $6$ dm. Khi đó sai số tuyệt đối trong phép đo không vượt quá bao nhiêu dm.
+
+# Lời giải
+
+Chu vi của mép mảnh nhựa là: $\bar{a}=2\pi \cdot 1=2\pi$ (dm).
+
+Gọi chu vi của mép mảnh nhựa mà bạn Ngân đo được là $a$, suy ra $a=6$ (dm). Vì $3<\pi<3{,}15$ nên $6<2\pi<6{,}3 \Rightarrow 6<\bar{a}<6{,}3 \Rightarrow \Delta_a=|\bar{a}-6|<6{,}3-6=0,3$. Suy ra sai số tuyệt đối trong phép đo không vượt quá $0{,}3$ dm.
+
+---
+id: sogn_021
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 5
+tags:
+  - sai số tương đối
+  - thực tế
+---
+
+# Đề bài
+
+Bạn Ngân có một mảnh nhựa với bề mặt hình tròn bán kính $1$ dm. Bạn ấy thực hiện đo chu vi của mép mảnh nhựa đó bằng cách sử dụng một sợi dây dài không dãn như sau: Cố định một đầu sợi dây trên mép mảnh nhựa, rồi quấn sợi dây quanh mép mảnh nhựa một vòng cho đến khi đầu dây cố định chạm vào thân sợi dây lần đầu tiên, sau đó đo độ dài phần dây chạm vào mép mảnh nhựa và được kết quả là $6$ dm. Khi đó sai số tương đối trong phép đo không vượt quá bao nhiêu $\%$.
+
+# Lời giải
+
+Ta có $\Delta_a<0{,}3$ nên $\dfrac{\Delta_a}{|a|}<\dfrac{0{,}3}{6}=0{,}05=5\%$. Suy ra sai số tương đối trong phép đo không vượt quá $5\%$.
+
+---
+id: sogn_022
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 0.01
+tags:
+  - phân số gần đúng
+  - sai số tuyệt đối
+---
+
+# Đề bài
+
+Dùng phân số $\dfrac{33}{19}$ để làm số gần đúng cho $\sqrt{3}$. Hãy đánh giá sai số tuyệt đối mắc phải là bao nhiêu?
+
+# Lời giải
+
+Sử dụng máy tính cầm tay, ta có $\sqrt{3}=1{,}732050808\ldots ;\dfrac{33}{19}=1{,}736842105\ldots$
+
+Sai số tuyệt đối của số gần đúng là:
+$$
+\begin{aligned}
+\left|\sqrt{3}-\dfrac{33}{19}\right| &=|1,732050808\ldots-1{,}736842105\ldots |\\ 
+&=1{,}736842105\ldots-1{,}732050808\ldots <1{,}74-1{,}73=0{,}01.
+\end{aligned}
+$$
+
+---
+id: sogn_023
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - quy tròn
+  - độ chính xác
+---
+
+# Đề bài
+
+Cho giá trị gần đúng của $\pi$ là $a=3,141\,592\,653\,589$ với độ chính xác $10^{-10}$ ($10$ chữ số thập phân). Số quy tròn của $a$ là
+
+A. $a=3{,}141592654$
+
+B. $a=3{,}1415926536$
+
+C. $a=3{,}141592653$
+
+D. $a=3{,}1415926535$
+
+# Lời giải
+
+Ta có $10^{-11}<10^{-10}<10^{-9}$ nên hàng cao nhất mà $d$ nhỏ hơn một đơn vị của hàng đó là hàng phần tỷ. Do đó ta phải quy tròn số $a=3,141\,592\,653\,589$ đến hàng phần tỷ.
+
+Vậy, số quy tròn là $a= 3{,}141\,592\,654$.
+
+---
+id: sogn_024
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Cho số $\overline{a}=17\,658\pm 16$. Số quy tròn của số gần đúng $17\,658$ là
+
+A. $18\,000$
+
+B. $17\,800$
+
+C. $17\,600$
+
+D. $17\,700$
+
+# Lời giải
+
+Ta có $10<16<100$ nên hàng cao nhất mà $d$ nhỏ hơn một đơn vị của hàng đó là hàng trăm. Do đó ta phải quy tròn số $176\,38$ đến hàng trăm.
+
+Vậy số quy tròn là $17\,700$ (hay viết $\overline{a}\approx 17\,700$).
+
+---
+id: sogn_025
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Cho $\overline{a}=31\,462\,689\pm 150$. Số quy tròn của số $31\,462\,689$ là
+
+A. $31\,462\,000$
+
+B. $31\,463\,700$
+
+C. $31\,463\,600$
+
+D. $31\,463\,000$
+
+# Lời giải
+
+Độ chính xác đến hàng trăm $(d=150)$ nên ta quy tròn đến hàng nghìn. Vậy số quy tròn của số $31\,462\,689$ là $31\,463\,000$.
+
+---
+id: sogn_026
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - số dân
+  - thực tế
+---
+
+# Đề bài
+
+Theo thống kê, dân số Việt Nam năm $2016$ được ghi lại như sau $\overline{S}=94\,444\,200\pm 3000$ (người). Số quy tròn của số gần đúng $94\,444\,200$ là
+
+A. $94\,440\,000$
+
+B. $94\,450\,000$
+
+C. $94\,444\,000$
+
+D. $94\,400\,000$
+
+# Lời giải
+
+Vì $1000<3000<10000$ nên hàng cao nhất mà $d$ nhỏ hơn một đơn vị của hàng đó là hàng chục nghìn. Nên ta phải quy tròn số $94\,444\,200$ đến hàng chục nghìn. Vậy số quy tròn là $94\,440\,000$.
+
+---
+id: sogn_027
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - số gần đúng
+  - quy tròn
+---
+
+# Đề bài
+
+Cho số $a=367\,653\,964\pm 213$. Số quy tròn của số gần đúng $367\,653\,964$ là
+
+A. $367\,653\,960$
+
+B. $36\,7653\,000$
+
+C. $367\,654\,000$
+
+D. $367\,653\,970$
+
+# Lời giải
+
+Vì độ chính xác đến hàng trăm $d=213$ nên số quy tròn của số gần đúng $367\,653\,964$ là $36\,7654\,000$.
+
+---
+id: sogn_028
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - thực tế
+  - dân số
+---
+
+# Đề bài
+
+Theo thống kê, dân số Việt Nam năm $2002$ là $79\,715\,675$ người. Giả sử sai số tuyệt đối của số liệu thống kê này nhỏ hơn $10\,000$ người. Hãy viết số quy tròn của số trên
+
+A. $79\,710\,000$ người
+
+B. $79\,716\,000$ người
+
+C. $79\,720\,000$ người
+
+D. $79\,700\,000$ người
+
+# Lời giải
+
+Vì sai số tuyệt đối của số liệu thống kê này nhỏ hơn $10\,000$ người nên độ chính xác đến hàng nghìn nên ta quy tròn đến hàng chục nghìn.
+
+Vậy số quy tròn cùa số trên là $79\,720\,000$ người.
+
+---
+id: sogn_029
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số của số dự toán (chu vi, diện tích)
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hình chữ nhật
+  - diện tích gần đúng
+---
+
+# Đề bài
+
+Độ dài các cạnh của một đám vườn hình chữ nhật là $x=7{,}8$ $\pm 2$ cm và $y=25{,}6$ m $\pm 4$ cm. Cách viết chuẩn của diện tích (sau khi quy tròn) là
+
+A. $200\mathrm{~m}^2\pm 0{,}9\mathrm{~m}^2$
+
+B. $199\mathrm{~m}^2\pm 0{,}8\mathrm{~m}^2$
+
+C. $199\mathrm{~m}^2\pm 1\mathrm{~m}^2$
+
+D. $200\mathrm{~m}^2\pm 1\mathrm{~m}^2$
+
+# Lời giải
+
+Ta có 
+$$
+\begin{aligned}
+x=7{,}8 \text{ m} \pm 2 \text{ cm} &\Rightarrow 7{,}78 \text{ m}\leq x\leq 7{,}82 \text{ m}.\\
+y=25{,}6 \text{ m} \pm 4 \text{ cm} &\Rightarrow 25{,}56 \text{ m} \leq y\leq 25{,}64 \text{ m}.
+\end{aligned}
+$$
+Do đó diện tích của hình chữ nhật thỏa mãn $198{,}8568\mathrm{~m}^2\leq xy\leq 200{,}5048\mathrm{~m}^2$.
+
+Vậy, cách viết chuẩn của diện tích sau khi quy tròn là $200$ m$^2\pm 1$ m$^2$.
+
+---
+id: sogn_030
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - thực tế
+  - quy tròn số
+---
+
+# Đề bài
+
+Chiều dài gần đúng của một cái bàn học là $a=1{,}238$ m với độ chính xác $d=0{,}01$ m. Hãy viết số quy tròn của số $a$?
+
+A. Số quy tròn của $a$ là $1{,}2$ m
+
+B. Số quy tròn của $a$ là $1{,}23$ m
+
+C. Số quy tròn của $a$ là $1{,}24$ m
+
+D. Số quy tròn của $a$ là $1{,}248$ m
+
+# Lời giải
+
+Vì độ chính xác $d=0{,}01$ đến hàng phần trăm nên ta quy tròn số gần đúng $a$ đến hàng phần chục.
+
+Vậy, số quy tròn của $a$ là $1{,}2$ m.
+
+---
+id: sogn_031
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - thực tế
+  - tài chính
+---
+
+# Đề bài
+
+Số tiền quỹ lớp $10$A còn lại là $a=1\,647\,500$ (đồng) với độ chính xác $d=500$ (đồng). Hãy viết số quy tròn của số $a$?
+
+A. Số quy tròn của $a$ là $1\,648\,000$ (đồng)
+
+B. Số quy tròn của $a$ là $1\,647\,000$ (đồng)
+
+C. Số quy tròn của $a$ là $1\,649\,000$ (đồng)
+
+D. Số quy tròn của $a$ là $1\,650\,000$ (đồng)
+
+# Lời giải
+
+Vì độ chính xác $d=500$ đến hàng trăm nên ta quy tròn số gần đúng $a$ đến hàng nghìn.
+
+Vậy, số quy tròn của $a$ là $1\,648\,000$ (đồng).
+
+---
+id: sogn_032
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - số gần đúng
+  - quy tròn số
+---
+
+# Đề bài
+
+Cho số $\overline{a}=4{,}1356 \pm 0{,}001$. Số quy tròn của số gần đúng $4{,}1356$ là
+
+A. $4{,}135$
+
+B. $4{,}13$
+
+C. $4{,}136$
+
+D. $4{,}14$
+
+# Lời giải
+
+Vì độ chính xác đến hàng phần nghìn (độ chính xác là $0{,}001$) nên ta quy tròn số $4{,}1356$ đến hàng phần phần trăm theo quy tắc làm tròn. Vậy số quy tròn của số $4{,}1356$ là $4{,}14$.
+
+---
+id: sogn_033
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phân số gần đúng
+  - sai số tuyệt đối
+---
+
+# Đề bài
+
+Cho giá trị gần đúng của $\dfrac{8}{17}$ là $0{,}47$. Sai số tuyệt đối của $0{,}47$ là
+
+A. $0{,}001$
+
+B. $0{,}002$
+
+C. $0{,}003$
+
+D. $0{,}004$
+
+# Lời giải
+
+Ta có $\dfrac{8}{17}=0{,}470588235294 \ldots$.
+
+Sai số tuyệt đối của $0{,}47$ là $\left|0{,}47-\dfrac{8}{17}\right|<|0{,}47-0{,}471|=0{,}001$.
+
+---
+id: sogn_034
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: B
+tags:
+  - sai số tuyệt đối
+  - thực tế
+---
+
+# Đề bài
+
+Đo chiều dài của một cây thước, ta được kết quả $\overline{a}=45 \pm 0{,}3$ cm. Khi đó sai số tuyệt đối của phép đo được ước lượng là
+
+A. $\Delta_{45}=0{,}3$
+
+B. $\Delta_{45} \leq 0{,}3$
+
+C. $\Delta_{45} \leq -0{,}3$
+
+D. $\Delta_{45} = 0{,}3$
+
+# Lời giải
+
+Ta có độ dài dài gần đúng của cây thước là $a=45$ với độ chính xác $d=0{,}3$.
+
+Nên sai số tuyệt đối $\Delta_{45} \leq d=0{,}3$.
+
+---
+id: sogn_035
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VDC
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - quy tròn số
+  - căn thức
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Cho số gần đúng $a=581\,268$ với độ chính xác $d=200$. Có số quy tròn là $581\,200$
+
+b) Đúng/Sai: Cho số gần đúng của $\pi$ là $a=3{,}141592653589$, độ chính xác là $10^{-10}$. Số quy tròn của $a$ là $3{,}141592654$
+
+c) Đúng/Sai: Chiều dài một cái cầu đo được là $l=1745{,}25$ $\pm 0{,}01$ m. Có số quy tròn là $1745{,}3$ m
+
+d) Đúng/Sai: Số gần đúng $\sqrt{5}$ với độ chính xác $0{,}005$ là $\approx 2{,}24$
+
+# Lời giải
+
+- Mệnh đề a) Sai. Vì độ chính xác được cho đến hàng trăm $(d=200)$ nên ta cần quy tròn số gần đúng đến hàng nghìn. Do đó ta thu được số quy tròn là $581\,000$. 
+- Mệnh đề b) Đúng. Vì độ chính xác của số gần đúng đến $10^{-10}$ ($10$ chữ số thập phân sau dấu phẩy) nên ta quy tròn số đó đến $10^{-9}$ ($9$ chữ số thập phân sau dấu phẩy). Vậy số quy tròn của $a$ là $3{,}141 592654$.
+- Mệnh đề c) Đúng. Ta có $l=1745{,}25$ m $\pm 0,01$ m có độ chính xác đến hàng phần trăm (độ chính xác là $0{,}01$) nên ta quy tròn số gần đúng đến hàng phần chục. Vậy số quy tròn của $1745{,}25$ m đến hàng phần chục là $1745{,}3$ m.
+- Mệnh đề d) Đúng. Số gần đúng $\sqrt{5}$ với độ chính xác $0{,}005$ là $\approx 2{,}24$.
+
+---
+id: sogn_036
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - quy tròn
+  - sai số
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: $230\,592\pm 300$ có số quy tròn là $231\,000$
+
+b) Đúng/Sai: $1{,}62516248\pm 0{,}001$ có số quy tròn là $1{,}635$
+
+c) Đúng/Sai: $6\,491\,258\pm 1000$ có số quy tròn là $6\,490\,000$
+
+d) Đúng/Sai: $564{,}65449\pm 0{,}003$ có số quy tròn là $564{,}65$
+
+# Lời giải
+
+- Mệnh đề a) Đúng. $231\,000$. 
+- Mệnh đề b) Sai. $1{,}63$.
+- Mệnh đề c) Đúng. $6\,490\,000$.
+- Mệnh đề d) Đúng. $564{,}65$.
+
+---
+id: sogn_037
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VDC
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - quy tròn
+  - căn thức
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: Cho $\overline{a}=\sqrt{7}=2{,}645751$. Số gần đúng của $\overline{a}$ với độ chính xác $d=0{,}004$ là $2{,}6$
+
+b) Đúng/Sai: Cho $\overline{a}=\dfrac{\sqrt[3]{2}}{4}=0{,}314980\ldots$ Số gần đúng của $\overline{a}$ với độ chính xác $d=0{,}01$ là $0{,}315$
+
+c) Đúng/Sai: Cho số gần đúng $a=1\,624\,192$ with độ chính xác $d=300$. Số quy tròn của $a$ là $1\,624\,000$
+
+d) Đúng/Sai: Viết quy tròn số gần đúng $a=3{,}26356$ biết $\overline{a}=3{,}26356\pm 0{,}001$ là $3{,}26$
+
+# Lời giải
+
+- Mệnh đề a) Sai. Kết quả là $2{,}65$. 
+- Mệnh đề b) Sai. Kết quả là $0{,}3$.
+- Mệnh đề c) Đúng. Số quy tròn của $a$ là $1\,624\,000$.
+- Mệnh đề d) Đúng. $\overline{a}=3{,}26356\pm 0{,}001 \Rightarrow$ Độ chính xác đến hàng phần nghìn (độ chính xác là $d=0{,}001$). Ta quy tròn đến hàng phần trăm. Vậy số quy tròn của $a$ là $3{,}26$.
+
+---
+id: sogn_038
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VDC
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - sai số tuyệt đối
+  - đánh giá sai số
+---
+
+# Đề bài
+
+Cho ba giá trị gần đúng của $\dfrac{3}{7}$ là $0{,}429$; $0{,}4$ và $0{,}42$. Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: Công thức đánh giá sai số tuyệt đối là $\Delta=|\overline{a} - a|$
+
+b) Đúng/Sai: Xét số gần đúng $0{,}429$ ta có $\Delta_1=\left|\dfrac{3}{7} - 0{,}429\right|<0{,}0005$
+
+c) Đúng/Sai: Xét số gần đúng $0{,}42$ ta có $\Delta_2=\left|\dfrac{3}{7} - 0{,}4\right|<0{,}03$
+
+d) Đúng/Sai: Xét số gần đúng $0{,}42$ ta có $\Delta_2=\left|\dfrac{3}{7} - 0{,}42\right|<0{,}009$
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Ta sử dụng công thức đánh giá sai số tuyệt đối là $\Delta=|\overline{a} - a|$.
+- Mệnh đề b) Đúng. Xét số gần đúng $0{,}429$ ta có $\Delta_1=\left|\dfrac{3}{7} - 0{,}429\right|<0{,}0005$.
+- Mệnh đề c) Đúng. Xét số gần đúng $0{,}4$ ta có $\Delta_2=\left|\dfrac{3}{7} - 0{,}4\right|<0{,}03$.
+- Mệnh đề d) Đúng. Xét số gần đúng $0{,}42$ ta có $\Delta_2=\left|\dfrac{3}{7} - 0{,}42\right|<0{,}009$.
+
+---
+id: sogn_039
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VDC
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - quy tròn
+  - căn thức
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: Số quy tròn của $31416{,}1$ đến hàng chục là $31\,420$
+
+b) Đúng/Sai: Số quy tròn của $31{,}135$ đến hàng phần trăm là $31{,}14$
+
+c) Đúng/Sai: Số quy tròn của $110{,}32344$ đến hàng phần nghìn là $110{,}323$
+
+d) Đúng/Sai: Giá trị gần đúng của số $\sqrt[3]{2}$ chính xác đến hàng phần trăm là $1{,}26$
+
+# Lời giải
+
+- Mệnh đề a) Đúng. Số quy tròn của $31416{,}1$ đến hàng chục là $31\,420$. 
+- Mệnh đề b) Đúng. Số quy tròn của $31{,}135$ đến hàng phần trăm là $31{,}14$.
+- Mệnh đề c) Đúng. Số quy tròn của $110{,}32344$ đến hàng phần nghìn là $110{,}323$.
+- Mệnh đề d) Đúng. Quy tròn số đã cho chính xác đến hàng phần trăm là $1{,}26$.
+
+---
+id: sogn_040
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1.4
+tags:
+  - sai số tương đối
+  - thực tế
+---
+
+# Đề bài
+
+Trong một cuộc điều tra dân số, người ta viết dân số của một tỉnh là $3\,574\,625 \pm 50\,000$ (người). Hãy đánh giá sai số tương đối của số gần đúng này?
+
+# Lời giải
+
+Ta có $a=3\,574\,625$ và $d=50\,000$ nên sai số tương đối:
+$$
+\delta_{a} \leqslant \dfrac{d}{|a|}=\dfrac{50\,000}{3\,574\,625} \approx 1{,}4 \%
+$$
+
+---
+id: sogn_041
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số của số dự toán (chu vi, diện tích)
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1.91
+tags:
+  - hình tròn
+  - diện tích gần đúng
+---
+
+# Đề bài
+
+Bạn Lan tính diện tích hình tròn bán kính $r=3$ cm bằng công thức $S=3{,}14 \cdot 3^{2}=28{,}26$ cm$^2$. Biết rằng $3{,}1<\pi<3{,}2$, hãy ước lượng sai số tương đối của $S$.
+
+# Lời giải
+
+Diện tích đúng kí hiệu là $\overline{S}$ thỏa mãn:
+$$
+3{,}1\cdot 3^{2}<\overline{S}<3{,}2\cdot 3^{2} \Leftrightarrow 27{,}9<\overline{S}<28{,}8
+$$
+Do đó:
+$$
+27{,}9-28{,}26<\overline{S}-S<28{,}8-28{,}26 \Leftrightarrow -0{,}36<\overline{S}-S<0{,}54
+$$
+Suy ra $|\overline{S}-S|<0{,}54$.
+
+Vậy sai số tương đối không vượt quá $\dfrac{0{,}54}{28{,}26} \approx 1{,}91 \%$.
+
+---
+id: sogn_042
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số tuyệt đối và sai số tương đối
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 0.03
+tags:
+  - số pi
+  - sai số tương đối
+---
+
+# Đề bài
+
+Một giá trị gần đúng của $\pi$ là $3{,}142$. Hãy ước lượng sai số tuyệt đối và sai số tương đối của giá trị gần đúng trên biết rằng $3{,}141<\pi<3{,}143$.
+
+# Lời giải
+
+Ta có:
+$$
+3{,}141 - 3{,}142<\pi - 3{,}142<3{,}143 - 3{,}142 \Leftrightarrow - 0{,}001<\pi - 3{,}142<0{,}001
+$$
+Suy ra $|\pi - 3{,}142|<0{,}001$.
+
+Do đó sai số tuyệt đối là $0{,}001$.
+
+Sai số tương đối không vượt quá $\dfrac{0,001}{|3,142|}<\dfrac{0,001}{3,142}\approx 0,0318\%$.
+
+---
+id: sogn_043
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số của số dự toán (chu vi, diện tích)
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 0.7
+tags:
+  - quy tròn
+  - sai số tương đối
+---
+
+# Đề bài
+
+Hãy quy tròn số $\overline{a}=\dfrac{5}{7}=0{,}714285$ đến hàng phần trăm và ước lượng sai số tương đối.
+
+# Lời giải
+
+Kết quả quy tròn số $\overline{a}=\dfrac{5}{7}=0{,}714285$ đến hàng phần trăm là $0{,}71$.
+
+Sai số tương đối không vượt quá $\dfrac{0{,}005}{0{,}71}\approx 0{,}70\%$.
+
+---
+id: sogn_044
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Quy tròn số với độ chính xác cho trước
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 23.1
+tags:
+  - quy tròn
+  - sai số tương đối
+---
+
+# Đề bài
+
+Cho số gần đúng $a=2\,362$ với độ chính xác $d=100$. Hãy viết số quy tròn của số $a$ và ước lượng sai số tương đối của số quy tròn đó.
+
+# Lời giải
+
+Số quy tròn của $a$ là $2\,000$.
+
+Ta có:
+$$
+a-d \leq \overline{a} \leq a+d \Leftrightarrow 2262 \leq \overline{a} \leq 2462
+$$
+$$
+262 \leq \overline{a}-2000 \leq 462 \Leftrightarrow \Delta_{2000}=|\overline{a}-2000| \leq 462
+$$
+Sai số tương đối của $2000$ là $\delta_{2000}=\dfrac{\Delta_{2000}}{|2000|} \leq \dfrac{462}{2000}=23{,}1 \%$.
+
+---
+id: sogn_045
+lop: 10
+chu_de: Số gần đúng và sai số
+dang: Sai số của số dự toán (chu vi, diện tích)
+muc_do:
+  - VDC
+loai: tra_loi_ngan
+dap_an: 200
+tags:
+  - hình chữ nhật
+  - diện tích gần đúng
+---
+
+# Đề bài
+
+Độ dài các cạnh của mảnh vườn hình chữ nhật là $x=7{,}8$ m $\pm 2$ cm và $y=25{,}6$ m $\pm 4$ cm. Tìm diện tích (sau khi quy tròn) của mảnh vườn.
+
+# Lời giải
+
+Ta có:
+$$
+\begin{cases}7{,}78\leq x\leq 7{,}82\\25{,}56\leq y\leq 25{,}64\end{cases} \Rightarrow 198{,}8568\leq \overline{S}=xy\leq 200{,}5048
+$$
+Diện tích gần đúng là $S=7{,}8\cdot 25{,}6=199{,}68$.
+
+Suy ra $-0{,}8232\leq \overline{S} - S\leq 0{,}8248 \Rightarrow \Delta_S=|\overline{S} - S|\leq 0{,}8248$.
+
+Suy ra diện tích gần đúng là $S=199{,}68$ m$^2$ với độ chính xác $d=0{,}8248$.
+
+Nên số quy tròn của $S$ là $200$ m$^2$.
