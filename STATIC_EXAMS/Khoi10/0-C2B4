@@ -1,0 +1,1067 @@
+---
+id: hebpt_001
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định điểm thuộc miền nghiệm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hệ bất phương trình
+  - miền nghiệm
+---
+
+# Đề bài
+
+Trong các điểm sau đây, điểm nào thuộc miền nghiệm của hệ bất phương trình $\heva{&x+3y-2 \ge 0\\&2x+y+1 \le 0}$.		
+
+A. $\left(0; 1\right)$
+
+B. $\left(-1; 1\right)$
+
+C. $\left(1; 3\right)$
+
+D. $\left(-1; 0\right)$
+
+# Lời giải
+
+* Thay $(0; 1)$ vào hệ ta được $\heva{&0+3-2>0\\&0+1+1>0}$. Do đó điểm $(0;1)$ không thoả mãn.
+* Thay $(-1; 1)$ vào hệ ta được $\heva{&-1+3-2=0\\&-2+1+1=0}$. Do đó điểm $(0;1)$  thoả mãn.
+* Thay $(1; 3)$ vào hệ ta được $\heva{&1+9-2>0\\&2+1+1>0}$. Do đó điểm $(1;3)$ không thoả mãn.
+* Thay $(-1; 0)$ vào hệ ta được $\heva{&-1+0-2<0\\&-2+1+1=0}$. Do đó điểm $(0;1)$ không thoả mãn.
+
+---
+id: hebpt_002
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định hệ bất phương trình từ miền nghiệm cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hệ bất phương trình
+  - đồ thị
+  - miền nghiệm
+---
+
+# Đề bài
+
+Cho miền gạch chéo như hình vẽ dưới đây
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{2.5}\def\ymin{-2}\def\ymax{4}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[above left]{$O$};
+	\foreach \x in {-1}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {3}\draw (0.1,\y)--(-0.1,\y) node[right]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-2*(\x)+1});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	\path
+	(-1.5,3.3) node[above left]{$d_1$}
+	(2,2) node[above left]{$d_2$}
+	(-2,-1) node[below]{$d_3$};
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{0.5*(\x)+1});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{3*(\x)+6});
+	\draw[dashed] (0,3) -- (-1,3) -- (-1,0);
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:-1] (\x,{3*(\x)+6})
+	-- plot[domain=-1:-2] (\x,{0.5*(\x)+1})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-1:0] (\x,{-2*(\x)+1})
+	-- plot[domain=0:-1] (\x,{0.5*(\x)+1})
+	-- cycle;			
+\end{tikzpicture}
+
+Miền trên đây biểu diễn tập nghiệm của hệ bất phương trình nào?
+
+A. $\heva{&2x+y>1\\&-x+2y<2\\&3x-y>6}$
+
+B. $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$
+
+C. $\heva{&2x+y<1\\&-x+2y>2\\&3x-y>-6}$
+
+D. $\heva{&2x+y>1\\&x-2y<2\\&3x-y>6}$
+
+# Lời giải
+
+Lấy điểm $B\left(-1 ; 1\right)$ thuộc miền gạch chéo.
+* Thay $(-1,1)$ vào hệ $\heva{&2x+y>1\\&-x+2y<2\\&3x-y>6}$ ta được $\heva{&-2+1<1\\&1+2>2\\&-3-1<6}$ không thoả mãn. Do đó $\heva{&2x+y>1\\&-x+2y<2\\&3x-y>6}$ không thoả mãn.
+* Thay $(-1,1)$ vào hệ $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$ ta được $\heva{&-2+1<1\\&1+2>2\\&-3-1<-6}$. Do đó $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$ không thoả mãn.
+* Thay $(-1,1)$ vào hệ $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$ ta được $\heva{&-2+1<1\\&1+2>2\\&-3-1>-6}$. Do đó $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$ không thoả mãn.
+* Thay $(-1,1)$ vào hệ $\heva{&2x+y<1\\&-x+2y>2\\&3x-y>-6}$ ta được $\heva{&-2+1<1\\&1+2>2\\&-3-1>-6}$. Do đó $\heva{&2x+y<1\\&-x+2y<2\\&3x-y>-6}$ thoả mãn.
+* Thay $(-1,1)$ vào hệ $\heva{&2x+y>1\\&-x+2y<2\\&3x-y>6}$ ta được $\heva{&-2+1<1\\&1+2>2\\&-3-1<6}$. Do đó $\heva{&2x+y>1\\&-x+2y<2\\&3x-y>6}$ không thoả mãn.
+
+---
+id: hebpt_003
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định điểm thuộc miền nghiệm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hệ bất phương trình
+  - miền nghiệm
+---
+
+# Đề bài
+
+Miền nghiệm của hệ bất phương trình $\heva{&x-y>0\\&x-3y \le -3\\&x+y>5}$ **không chứa** điểm nào sau đây?
+
+A. $A\left(3; 2\right)$
+
+B. $B\left(6; 3\right)$
+
+C. $C\left(6; 4\right)$
+
+D. $D\left(5; 4\right)$
+
+# Lời giải
+
+Xét điểm $A \left(3; 2\right)$ ta có $\heva{&3-2>0\\&3-3\cdot 2 \le -3\\&3+2>5}$ không thỏa mãn. Do đó mền nghiệm của hệ bất phương trình $\heva{&x-y>0\\&x-3y \le -3\\&x+y>5}$ **không chứa** điểm $A\left(3; 2\right)$.
+
+---
+id: hebpt_004
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định điểm thuộc miền nghiệm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hệ bất phương trình
+  - miền nghiệm
+---
+
+# Đề bài
+
+Miền nghiệm của hệ bất phương trình $\heva{&3-y < 0\\&2x-3y+1 > 0}$ chứa điểm nào sau đây?
+
+A. $\left(3; 4\right)$
+
+B. $\left(4; 3\right)$
+
+C. $\left(7; 4\right)$
+
+D. $\left(4; 4\right)$
+
+# Lời giải
+
+Trước hết, ta vẽ hai đường thẳng:
+$\left(d_1\right): 3-y=0$
+$\left(d_2\right): 2 x-3 y+1=0$
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-1}\def\xmax{9}\def\ymin{-1}\def\ymax{6}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below right]{$O$};
+	\foreach \x in {4}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {3}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{0*(\x)+3});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(2/3)*(\x)+(1/3)});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-1:9] (\x,{0*(\x)+3})
+	-- plot[domain=9:-1] (\x,{0*(\x)-1})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-1:9] (\x,{0*(\x)+6})
+	-- plot[domain=9:-1] (\x,{(2/3)*(\x)+(1/3)})
+	-- cycle;
+	
+	\path
+	(8,4) node[above left]{$d_1$}
+	(8,3) node[above left]{$d_1$};
+\end{tikzpicture}
+
+Ta thấy $\left(6 ; 4\right)$ là nghiệm của hai bất phương trình. Điều đó có nghĩa điểm $\left(6 ; 4\right)$ thuộc cả hai miền nghiệm của hai bất phương trình. Sau khi gạch bỏ các miền không thích hợp, miền không bị gạch là miền nghiệm của hệ.
+
+---
+id: hebpt_005
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hệ bất phương trình
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Giá trị nhỏ nhất của biết thức $F=y-x$ trên miền xác định bởi hệ: $\heva{&y-2x \le 2 \\ & 2y-x \ge 4 \\ & x+5 \le 5}$ là:
+
+A. $\min F=1$ khi $x=2, y=3$
+
+B. $\min F=2 k h i x=0, y=2$
+
+C. $\min F=3$ khi $x=1, y=4$
+
+D. Không tồn tại giá trị nhỏ nhất của $F$
+
+# Lời giải
+
+Ta tìm giao điểm của các cặp đường thẳng trong miền xác định của hệ $\heva{& y-2x \le 2 \\ &2y-x \ge 4 \\ &x+y \le 5}$
+
+$\heva{& -2x+y=2 \\ & -x+2y=4} \Leftrightarrow \heva{& x=0 \\ &y=2} \Rightarrow A\left(0;2\right)$
+
+$\heva{& -2x+y=2 \\ & x+y=5} \Leftrightarrow \heva{& x=\dfrac{3}{2} \\ &y=\dfrac{7}{2}} \Rightarrow B\left(\dfrac{3}{2};\dfrac{7}{2}\right)$
+
+$\heva{& x+y=5 \\ & -x+2y=4} \Leftrightarrow \heva{& x=2  &y=3} \Rightarrow C\left(2;3\right)$
+
+Ta tính giá trị của $F=y-x$ tại các giao điểm:
+
+Tại $A\left(0 ; 2\right) \Rightarrow F=2-0=2$.
+
+Tại $B\left(\dfrac{3}{2} ; \dfrac{7}{2}\right) \Rightarrow F=\dfrac{7}{2}-\dfrac{3}{2}=2$.
+
+Tại $C\left(2 ; 3\right) \Rightarrow F=3-2=1$.
+
+Vậy $\min F=1$ khi $x=2, y=3$
+
+---
+id: hebpt_006
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hệ bất phương trình
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Biểu thức $F=y-x$ đạt giá trị nhỏ nhất với điều kiện $\heva{&-2x+y \le -2 \\ &x-2y \le 2 \\ &x+y \le 5 \\ &x \ge 0}$ tại điểm $S\left(x; y\right)$ có toạ độ là
+
+A. $\left(4; 1\right)$
+
+B. $\left(3; 1\right)$
+
+C. $\left(2; 1\right)$
+
+D. $\left(1; 1\right)$
+
+# Lời giải
+
+**Cách 1: Thử máy tính.** Ta dùng máy tính lần lượt kiểm tra các đáp án để xem đáp án nào thỏa hệ bất phương trình trên loại được đáp án $D$.
+
+Ta lần lượt tính hiệu $F=y-x$ và $\min F=-3$ tại $x=4, y=1$.
+
+**Cách 2: Tự luận:**
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{8}\def\ymin{-3}\def\ymax{6}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{2*(\x)-2});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(1/2)*(\x)-1});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-1*(\x)+5});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:8] (\x,{0*(\x)+6})
+	-- plot[domain=8:-3] (\x,{2*(\x)-2})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:8] (\x,{(1/2)*(\x)-1})
+	-- plot[domain=8:-3] (\x,{0*(\x)-3})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:8] (\x,{0*(\x)+6})
+	-- plot[domain=8:-3] (\x,{-1*(\x)+5})
+	-- cycle;
+	
+	\path
+	(7/3,8/3) node[below]{$A$}
+	(2/3,-2/3) node[below right]{$B$}
+	(4,1) node[above]{$C$};
+	
+\end{tikzpicture}
+
+Tọa độ $A\left(\dfrac{7}{3}; \dfrac{8}{3}\right), B\left(\dfrac{2}{3};-\dfrac{2}{3}\right), C\left(4; 1\right)$. Giá trị $F$ lần lượt tại toạ độ các điểm $B, C, A$ là $-\dfrac{4}{3},-3; \dfrac{1}{3}$. 
+
+Suy ra $\min F=-3$ tại $\left(4; 1\right)$.
+
+---
+id: hebpt_007
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - hệ bất phương trình
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Giá trị nhỏ nhất của biều thức $F=y-x$ trên miền xác định bởi hệ $\heva{&y-2x \le 2 \\ &2y-x \ge 4 \\ &x+5 \le 5}$ là
+
+A. $\min F=1$ khi $x=2, y=3$
+
+B. $\min F=2$ khi $x=0, y=2$
+
+C. $\min F=3$ khi $x=1, y=4$
+
+D. $\min F=0$ khi $x=0, y=0$
+
+# Lời giải
+
+Miền nghiệm của hệ $\heva{&y-2x \le 2 \\ &2y-x \ge 4 \\ &x+5 \le 5}$ là miền trong của tam giác $ABC$ kể cả biên (như hình).
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{5}\def\ymin{-2}\def\ymax{6}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{2*(\x)+2});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(1/2)*(\x)+2});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-1*(\x)+5});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:6] (\x,{0*(\x)+6})
+	-- plot[domain=6:-3] (\x,{2*(\x)+2})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:6] (\x,{(1/2)*(\x)+2})
+	-- plot[domain=6:-2] (\x,{0*(\x)-3})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:8] (\x,{0*(\x)+6})
+	-- plot[domain=8:-3] (\x,{-1*(\x)+5})
+	-- cycle;
+	
+	\path
+	(0,2) node[below right]{$A$}
+	(1,4) node[right]{$B$}
+	(2,3) node[below]{$C$};
+	
+\end{tikzpicture}
+
+Ta thấy $F=y-x$ đạt giá trị nhỏ nhất chỉ có thể tại các điểm $A, B, C$.
+
+Tại $A\left(0; 2\right)$ thì $F=2$.
+
+Tại $B\left(1; 4\right)$ thì $F=3$
+
+Tại $A\left(2; 3\right)$ thì $F=1$.
+
+Vậy $\min F=1$ khi $x=2, y=3$.
+
+---
+id: hebpt_008
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hệ bất phương trình
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Giá trị nhỏ nhất của biết thức $F=y-x$ trên miền xác định bởi hệ $\heva{&2x+y \le 2 \\ &x-y \le 2 \\ &5x+y \ge -4}$ là
+
+A. $\min F=-3$ khi $x=1, y=-2$
+
+B. $\min F=0$ khi $x=0, y=0$
+
+C. $\min F=-2$ khi $x=\dfrac{4}{3}, y=-\dfrac{2}{3}$
+
+D. $\min F=8$ khi $x=-2, y=6$
+
+# Lời giải
+
+Biểu diễn miền nghiệm của hệ bất phương trình $\heva{&2x+y \le 2 \\ &x-y \le 2 \\ &5x+y \ge -4}$ trên hệ trục tọa độ như dưới đây:
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-4}\def\xmax{5}\def\ymin{-4}\def\ymax{7}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-2*(\x)+2});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{1*(\x)-2});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-5*(\x)-4});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:5] (\x,{0*(\x)+7})
+	-- plot[domain=5:-4] (\x,{-2*(\x)+2})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:5] (\x,{1*(\x)-2})
+	-- plot[domain=5:-4] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:5] (\x,{-5*(\x)-4})
+	-- plot[domain=5:-4] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\path
+	(-2,6) node[below right]{$A$}
+	(4/3,-2/3) node[right]{$B$}
+	(-1/3,-7/3) node[left]{$C$};
+	
+\end{tikzpicture}
+
+Giá trị nhỏ nhất của biết thức $F=y-x$ chỉ đạt được tại các điểm
+
+$A\left(-2;6\right), C\left(\dfrac{4}{3};-\dfrac{2}{3}\right), B\left(-\dfrac{1}{3};-\dfrac{7}{3}\right)$
+	
+Ta có: $F\left(A\right)=8; F\left(B\right)=-2; F\left(C\right)=-2$.
+	
+Vậy $\min F=-2$ khi $x=\dfrac{4}{3}, y=-\dfrac{2}{3}$
+
+---
+id: hebpt_009
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hệ bất phương trình
+  - tính chất miền nghiệm
+---
+
+# Đề bài
+
+Cho hệ bất phương trình $\heva{&x-y \le 2 \\ &3x+5y \le 15 \\ &x \ge 0 \\ &y \ge 0}$. Khẳng định nào sau đây là khẳng định sai?
+
+A. Trên mặt phẳng tọa độ $Ox y$, biểu diễn miền nghiệm của hệ bất phương trình đã cho là miền tứ giác $ABCO$ kể cả các cạnh với $A\left(0; 3\right), B\left(\dfrac{25}{8}; \dfrac{9}{8}\right), C\left(2; 0\right)$ và $O\left(0; 0\right)$
+
+B. Đường thẳng $\Delta: x+y=m$ có giao điểm với tứ giác $ABCO$ kể cả khi $-1 \leq m \leq \dfrac{17}{4}$
+
+C. Giá trị lớn nhất của biểu thức $x+y$, với $x$ và $y$ thỏa mãn hệ bất phương trình đã cho là $\dfrac{17}{4}$
+
+D. Giá trị nhỏ nhất của biểu thức $x+y$, với $x$ và $y$ thỏa mãn hệ bất phương trình đã cho là 0
+
+# Lời giải
+
+Trước hết, ta vẽ bốn đường thẳng:
+
+$\left(d_{1}: x-y=2\right)$
+
+$\left(d_{2}: 3x+5y=15\right)$
+
+$\left(d_{3}: x=0\right)$
+
+$\left(d_{4}: y=0\right)$
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{5}\def\ymin{-3}\def\ymax{5}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{1*(\x)-2});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(-3/5)*(\x)+3});
+	
+	%\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-5*(\x)-4});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:5] (\x,{1*(\x)-2})
+	-- plot[domain=5:-4] (\x,{0*(\x)-3})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:5] (\x,{0*(\x)+7})
+	-- plot[domain=5:-4] (\x,{(-3/5)*(\x)+3})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:0] (\x,{0*(\x)+7})
+	-- plot[domain=0:-4] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=0:5] (\x,{0*(\x)+0})
+	-- plot[domain=5:0] (\x,{0*(\x)-4})
+	-- cycle;
+	
+\end{tikzpicture}
+
+Miền nghiệm là phần không bị gạch, kể cả biên.
+
+---
+id: hebpt_010
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hệ bất phương trình
+  - giá trị lớn nhất
+---
+
+# Đề bài
+
+Giá trị lớn nhất của biết thức $F(x; y)=x+2 y$ với điều kiện $\heva{&0 \le y \le 4 \\ &x \ge 0 \\ &x-y-1 \le 0 \\ &x+2y-10 \le 0}$ là
+
+A. $6$
+
+B. $8$
+
+C. $10$
+
+D. $12$
+
+# Lời giải
+
+Vẽ đường thẳng $d_{1}: x-y-1=0$, đường thẳng $d_{1}$ qua hai điểm $\left(0;-1\right)$ và $\left(1; 0\right)$.
+Vẽ đường thẳng $d_{2}: x+2 y-10=0$, đường thẳng $d_{2}$ qua hai điểm $\left(0; 5\right)$ và $\left(2; 4\right)$.
+Vẽ đường thẳng $d_{3}: y=4$.
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-2}\def\xmax{6}\def\ymin{-2}\def\ymax{7}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{1*(\x)-1});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(-1/2)*(\x)+5});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{0*(\x)+4});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:7] (\x,{1*(\x)-1})
+	-- plot[domain=7:-4] (\x,{0*(\x)-3})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:7] (\x,{0*(\x)+7})
+	-- plot[domain=7:-4] (\x,{(-1/2)*(\x)+5})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:7] (\x,{0*(\x)+7})
+	-- plot[domain=7:-2] (\x,{0*(\x)+4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:7] (\x,{0*(\x)+0})
+	-- plot[domain=7:-2] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:0] (\x,{0*(\x)+6})
+	-- plot[domain=0:-2] (\x,{0*(\x)-2})
+	-- cycle;
+	
+	\path
+	(4,3) node[right]{$A$}
+	(2,4) node[below]{$B$}
+	(0,4) node[below right]{$C$}
+	(1,0) node[above]{$F$}
+	;
+\end{tikzpicture}
+
+Miền nghiệm là ngũ giác $ABCOE$ với $A\left(4; 3\right), B\left(2; 4\right), C\left(0; 4\right), E\left(1; 0\right)$.
+Ta có: $F\left(4; 3\right)=10, F\left(2; 4\right)=10, F\left(0; 4\right)=8, F\left(1; 0\right)=1, F\left(0; 0\right)=0$.
+Vậy giá trị lớn nhất của biết thức $F\ (x; y)=x+2 y$ bằng $10$.
+
+---
+id: hebpt_011
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Giá trị lớn nhất và nhỏ nhất của biểu thức
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hệ bất phương trình
+  - giá trị lớn nhất
+  - giá trị nhỏ nhất
+---
+
+# Đề bài
+
+Biểu thức $L=y-x$, với $x$ và $y$ thỏa mãn hệ bất phương trình $\heva{&2x+3y-6 \le 0 \\ &x \ge 0 \\ &2x-3y-1 \le 0}$, đạt giá trị lớn nhất là $a$ và đạt giá trị nhỏ nhất là $b$. Hãy chọn kết quả đúng trong các kết quả sau
+
+A. $a=\dfrac{25}{8}$ và $b=-2$
+
+B. $a=2$ và $b=-\dfrac{11}{12}$
+
+C. $a=3$ và $b=0$
+
+D. $a=3$ và $b=\dfrac{-9}{8}$
+
+# Lời giải
+
+Trước hết, ta vẽ ba đường thẳng:
+$\left(d_{1}\right): 2 x+3 y-6=0$.
+$\left(d_{2}\right): x=0$.
+$\left(d_{3}\right): 2 x-3 y-1=0$
+
+\begin{tikzpicture}[scale=1, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-2}\def\xmax{3}\def\ymin{-2}\def\ymax{4}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(-2/3)*(\x)+2});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(2/3)*(\x)-(1/3)});
+	
+	%\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{0*(\x)+4});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:7] (\x,{0*(\x)+5})
+	-- plot[domain=7:-4] (\x,{(-2/3)*(\x)+2})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-4:7] (\x,{(2/3)*(\x)-(1/3)})
+	-- plot[domain=7:-4] (\x,{0*(\x)-5})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:7] (\x,{0*(\x)+7})
+	-- plot[domain=7:-2] (\x,{0*(\x)+4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:7] (\x,{0*(\x)+0})
+	-- plot[domain=7:-2] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-2:0] (\x,{0*(\x)+6})
+	-- plot[domain=0:-2] (\x,{0*(\x)-2})
+	-- cycle;
+	
+	\path
+	(0,2) node[right]{$A$}
+	(7/4,5/6) node[below]{$B$}
+	(0,-1/3) node[below right]{$C$}
+	;
+\end{tikzpicture}
+
+Ta thấy $\left(0; 0\right)$ là nghiệm của cả ba bất phương trình. Điều đó có nghĩa gốc tọa độ thuộc cả ba miền nghiệm của cả ba bất phương trình. Sau khi gạch bỏ các miền không thích hợp, miền không bị gạch là miền nghiệm của hệ (kể cả biên).
+Miền nghiệm là hình tam giác $ABC$ (kể cả biên), với $A\left(0; 2\right), B\left(\dfrac{7}{4}; \dfrac{5}{6}\right), C\left(0;-\dfrac{1}{3}\right)$.
+Vậy ta có $a=2-0=2, b=\dfrac{5}{6}-\dfrac{7}{4}=-\dfrac{11}{12}$.
+
+---
+id: hebpt_012
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Bài toán thực tế, quy hoạch tuyến tính
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: C
+tags:
+  - hệ bất phương trình
+  - bài toán thực tế
+  - giá trị lớn nhất
+---
+
+# Đề bài
+
+Trong một cuộc thi pha chế, hai đội $ A$, $B $ được sử dụng tối đa $24$ g hương liệu, $9$ lít nước và $210$ g đường để pha chế nước cam và nước táo. Để pha chế $1$ lít nước cam cần $30$ g đường, $1$ lít nước và $1$ g hương liệu; pha chế $1$ lít nước táo cần $10$ g đường, $1$ lít nước và $4$ g hương liệu. Mỗi lít nước cam nhận được $60$ điểm thưởng, mỗi lít nước táo nhận được $80$ điểm thưởng. Đội $ A $ pha chế được $a$ lít nước cam và $b$ lít nước táo và dành được điểm thưởng cao nhất. Hiệu số $a-b$ là
+
+A. $1$
+
+B. $3$
+
+C. $-1$
+
+D. $-6$
+
+# Lời giải
+
+Gọi $x$, $y$ lần lượt là số lít nước cam và nước táo mà mỗi đội cần pha chế $\left(x \geq 0; y \geq 0\right)$.
+Để pha chế $x$ lít nước cam cần $30 x $ g đường, $x$ lít nước và $x$ g hương liệu.
+Để pha chế $y$ lít nước táo cần $10 y$ g đường, $y$ lít nước và $4 y$ g hương liệu.
+Theo bài ra ta có hệ bất phương trình
+$$\heva{&30x+10y \le 210 \\ &x+y \le 9  (*) \\ &x+4y \le 24 \\ &x \ge 0;y \ge 0   }$$ 
+Số điểm đạt được khi pha $x$ lít nước cam và $y$ lít nước táo là $M\left(x, y\right)=60 x+80 y$. Bài toán trở thành tìm $x$, $y$ để $M\left(x, y\right)$ đạt giá trị lớn nhất.
+Ta biểu diễn miền nghiệm của hệ (*) trên mặt phẳng tọa độ như sau
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-2}\def\xmax{10}\def\ymin{-2}\def\ymax{10}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-1*(\x)+9});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(-1/4)*(\x)+6});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-3*(\x)+21});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:10] (\x,{0*(\x)+10})
+	-- plot[domain=10:-3] (\x,{-1*(\x)+9})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:10] (\x,{0*(\x)+10})
+	-- plot[domain=10:-3] (\x,{(-1/4)*(\x)+6})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:10] (\x,{0*(\x)+10})
+	-- plot[domain=10:-3] (\x,{-3*(\x)+21})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:10] (\x,{0*(\x)+0})
+	-- plot[domain=10:-3] (\x,{0*(\x)-4})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:0] (\x,{0*(\x)+10})
+	-- plot[domain=0:-3] (\x,{0*(\x)-2})
+	-- cycle;
+	
+	\path
+	(4,5) node[below left]{$A$}
+	(6,3) node[below left]{$B$}
+	(7,0) node[below left]{$C$}
+	(0,0) node[below right]{$D$}
+	(0,6) node[below right]{$E$}
+	;
+\end{tikzpicture}
+
+Miền nghiệm là ngũ giác $A B C D E$.
+Tọa độ các điểm: $A\left(4 ; 5\right)$, $B\left(6 ; 3\right)$, $C\left(7 ; 0\right)$, $D\left(0 ; 0\right)$, $E\left(0 ; 6\right)$.
+$M(x,y)$ sẽ đạt giá trị lớn nhất, giá trị nhỏ nhất tại các đỉnh của miền nghiệm nên thay tọa độ các điểm vào biểu thức $M\left(x, y\right)$ ta được
+$M\left(4 ; 5\right)=640$; $M\left(6 ; 3\right)=600$; $M\left(7 ; 0\right)=420$; $M\left(0 ; 0\right)=0$; $M\left(0 ; 6\right)=480$.
+
+Vậy giá trị lớn nhất của $M\left(x ; y\right)$ bằng $640$ khi $x=4$; $y=5 \Rightarrow a=4$; $b=5 \Rightarrow a-b=-1$.
+
+---
+id: hebpt_013
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Nhận biết hệ bất phương trình bậc nhất hai ẩn
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - hệ bất phương trình
+  - định nghĩa
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau
+
+a) Đúng/Sai: $\heva{&x+\sqrt{y} > 3 \\ &x^{2}-y \ge -2}$ là hệ bất phương trình bậc nhất hai ẩn
+
+b) Đúng/Sai: $\heva{&x > 5 \\ &y <-2 \\ & x+y \ge 100}$ là hệ bất phương trình bậc nhất hai ẩn
+
+c) Đúng/Sai: $\heva{&3^{5}x-\sqrt{20}y > 7 \\ &x+y \le 100}$ là hệ bất phương trình bậc nhất hai ẩn
+
+d) Đúng/Sai: $\heva{&x+y+z < 10 \\ &x+y < 5 \\& 2x+3y \ge 20}$ là hệ bất phương trình bậc nhất hai ẩn
+
+# Lời giải
+
+a) Sai. Vì $\heva{&x+\sqrt{y} > 3 \\ &x^{2}-y \ge -2}$ chứa $\sqrt{x}$, $x^2$ nên không phải là hệ bất phương trình bậc nhất hai ẩn.
+
+b) Đúng. Vì $\heva{&x > 5 \\ &y <-2 \\ & x+y \ge 100}$ là hệ bất phương trình bậc nhất hai ẩn.
+
+c) Đúng. Vì $\heva{&3^{5}x-\sqrt{20}y > 7 \\ &x+y \le 100}$ là hệ bất phương trình bậc nhất hai ẩn
+
+d) Sai. Vì $\heva{&x+y+z < 10 \\ &x+y < 5 \\& 2x+3y \ge 20}$ chứa $z$ nên là hệ bất phương trình bậc nhất bai ẩn.
+
+---
+id: hebpt_014
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định điểm thuộc miền nghiệm
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - hệ bất phương trình
+  - miền nghiệm
+---
+
+# Đề bài
+
+Xét tính đúng, sai của các mệnh đề sau?
+
+a) Đúng/Sai: $\left(3;-1\right)$ là một nghiệm của hệ bất phương trình $\heva{&x+5y < 5 \\ &-3x-y \le 7}$
+
+b) Đúng/Sai: $\left(3;-1\right)$ không là một nghiệm của hệ bất phương trình $\heva{&x > 5 \\ & y < 4 \\ &x+y \le 10}$
+
+c) Đúng/Sai: $\left(3;-1\right)$ không là một nghiệm của hệ bất phương trình $\heva{&-x+5y > 1 \\ &3x+y > 5}$
+
+d) Đúng/Sai: $\left(0;0\right)$ là một nghiệm của hệ bất phương trình $\heva{&2x+y > 3 \\ &-x+3y \le 5 \\ &3x-y \ge 7}$
+
+# Lời giải
+
+a) Đúng. Vì thay $\left(3;-1\right)$ vào hệ bất phương trình $\heva{&x+5y < 5 \\ &-3x-y \le 7}$ ta được $\heva{&3+5\left(-1\right)<5 \\ &-3 \cdot 3 -\left(-1\right) \le -7}$ thoả mãn.
+
+b) Đúng. Vì thay $\left(3;-1\right)$ vào hệ bất phương trình $\heva{&x > 5 \\ & y < 4 \\ &x+y \le 10}$ ta được $\heva{&3 > 5 \\ & -1 < 4 \\ &3-1 \le 10}$ (vô lí).
+
+c) Đúng. Vì miền nghiệm của hệ bất phương trình $\heva{&-x+5y > 1 \\ &3x+y > 5}$ là miền không bị gạch ở hình sau (không kể bờ $d_{1}, d_{2}$)
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{7}\def\ymin{-3}\def\ymax{7}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {-2,2,4,6}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {-2,4,6}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-3*(\x)+5});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(1/5)*(\x)+1});
+	
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:4] (\x,{-3*(\x)+5})
+	-- plot[domain=4:-3] (\x,{0*(\x)-10})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:11] (\x,{(1/5)*(\x)+1})
+	-- plot[domain=11:-3] (\x,{0*(\x)-6})
+	-- cycle;
+	
+\end{tikzpicture}
+
+d) Sai. Vì miền nghiệm của hệ bất phương trình $\heva{&2x+y > 3 \\ &-x+3y \le 5 \\ &3x-y \ge 7}$ là miền không bị gạch ở hình sau (không kể bờ $d_{1}$).
+
+\begin{tikzpicture}[scale=0.7, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-3}\def\xmax{7}\def\ymin{-3}\def\ymax{7}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {-2,2,4,6}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {-2,4,6}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{3*(\x)-7});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(1/3)*(\x)+(5/3)});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-2*(\x)+3});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-5:6] (\x,{0*(\x)+7})
+	-- plot[domain=6:-5] (\x,{3*(\x)-7})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:11] (\x,{0*(\x)+8})
+	-- plot[domain=11:-3] (\x,{(1/3)*(\x)+(5/3)})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-3:11] (\x,{-2*(\x)+3})
+	-- plot[domain=11:-3] (\x,{0*(\x)-5})
+	-- cycle;
+\end{tikzpicture}
+
+---
+id: hebpt_015
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Bài toán thực tế, quy hoạch tuyến tính
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - hệ bất phương trình
+  - bài toán thực tế
+  - miền nghiệm
+---
+
+# Đề bài
+
+Bác Minh có kế hoạch đầu tư không quá $240$ triệu đồng vào hai khoản $X$ và khoản $Y$. Để đạt được lợi nhuận thì khoản $Y$ phài đầu tư it nhất 40 triệu đồng và số tiền đầu tư cho khoản $X$ phài it nhất gấp ba lần số tiền cho khoản $Y$. Khi đó:
+
+a) Đúng/Sai: Gọi $x$, $y$ (đơn vị: triệu đồng) tiền bác Minh đầu tư vào kho ta có hệ bất phương trình $\heva{&x+y \le 240 \\ &y \ge 40 \\ &x \ge 3y}$
+
+b) Đúng/Sai: Miền nghiệm của hệ bất phương trình tiền bác Minh đầu tư vào kho là một tứ giác
+
+c) Đúng/Sai: Điểm $C\left(200; 40\right)$ không thuộc miền nghiệm của hệ bất phương trình tiền bác Minh đầu tư vào kho
+
+d) Đúng/Sai: Điểm $A\left(180; 60\right)$ là điểm có tung độ lớn nhất thuộc miền nghiệm của hệ bất phương trình tiền bác Minh đầu tư vào kho
+
+# Lời giải
+
+a) Đúng. Vì gọi $x, y$ (đơn vị: triệu đồng) tiền bác Minh đầu tư vào kho Ta có hệ bất phương trình:$\heva{&x+y \le 240 \\ &y \ge 40 \\ &x \ge 3y}$.	
+
+b) Sai. Vì miền nghiệm của hệ trên là miền tam giác $A B C$ với $A(180 ; 60)$, $B(120 ; 40)$, $C(200 ; 40)$ ở Hình. 
+
+\begin{tikzpicture}[scale=0.03, line join=round, line cap=round, >=stealth]
+	\tikzset{every node/.style={scale=1}}
+	\def\xmin{-20}\def\xmax{300}\def\ymin{-20}\def\ymax{300}
+	\draw[->] (\xmin-0.2,0)--(\xmax+0.2,0) node[below]{$x$};
+	\draw[->] (0,\ymin-0.2)--(0,\ymax+0.2) node[right]{$y$};
+	\draw (0,0) node[below left]{$O$};
+	\foreach \x in {120,200,240}\draw (\x,0.1)--(\x,-0.1) node[below]{$\x$};
+	\foreach \y in {40,80,240,280}\draw (0.1,\y)--(-0.1,\y) node[above left]{$\y$};
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{(1/3)*(\x)});
+	\clip (\xmin,\ymin) rectangle (\xmax,\ymax);
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{-1*(\x)+240});
+	
+	\draw[thick,smooth,samples=200,domain=\xmin:\xmax] plot (\x,{0*(\x)+40});
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-40:300] (\x,{0*(\x)+300})
+	-- plot[domain=300:-40] (\x,{(1/3)*(\x)})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-40:300] (\x,{0*(\x)+300})
+	-- plot[domain=300:-40] (\x,{-1*(\x)+240})
+	-- cycle;
+	
+	\fill[pattern=north east lines,smooth]
+	plot[domain=-40:300] (\x,{0*(\x)+40})
+	-- plot[domain=300:-40] (\x,{0*(\x)-40})
+	-- cycle;
+	
+	\path
+	(180,60) node[below left]{$A$}
+	(120,40) node[below left]{$B$}
+	(200,40) node[below left]{$C$}
+	;
+\end{tikzpicture}
+
+c) Sai. Vì điểm $C\left(200 ; 40\right)$ thuộc miền nghiệm của hệ bất phương trình tiền bác Minh đầu tư vào kho.
+
+d) Đúng. Vì điểm $A\left(180 ; 60\right)$ là điểm có tung độ lớn nhất thuộc miền nghiệm của hệ bất phương trình tiền bác Minh đầu tư vào kho
+
+---
+id: hebpt_016
+lop: 10
+chu_de: Hệ bất phương trình bậc nhất hai ẩn
+dang: Xác định miền nghiệm và điểm thuộc miền nghiệm
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+tags:
+  - hệ bất phương trình
+  - miền nghiệm
+---
+
+# Đề bài
+
+Cho hệ bất phương trình: $\heva{&3x+2y \ge 9 \\ &x-2y \le 3 \\ &x+y \le 6 \\ &x \ge 1}$ (I). Khi đó:
+
+a) Đúng/Sai: Miền nghiệm của hệ bất phương trình là miền tam giác
+
+b) Đúng/Sai: $\left(3; 2\right)$ là một nghiệm của hệ (I)
