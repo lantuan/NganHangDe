@@ -1,0 +1,1537 @@
+---
+id: phuong_trinh_duong_thang_001
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ chỉ phương của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vectơ chỉ phương
+  - phương trình tham số
+---
+
+# Đề bài
+
+Một véc-tơ chỉ phương của đường thẳng $\heva{&{x=2+3t} \\&{y=-3-t}}$ là
+A. $\overrightarrow{u_1}=\left(2;-3\right)$
+
+B. $\overrightarrow{u_2}=\left(3;-1\right)$
+
+C. $\overrightarrow{u_3}=\left(3; \; 1\right)$
+
+D. $\overrightarrow{u_4}=\left(3;-3\right)$
+
+# Lời giải
+
+Từ phương trình tham số của đường thẳng ta có một véc-tơ chỉ phương của đường thẳng là $\overrightarrow{u_2}=\left(3;-1\right)$.
+
+---
+id: phuong_trinh_duong_thang_002
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ pháp tuyến của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - vectơ pháp tuyến
+  - phương trình tổng quát
+---
+
+# Đề bài
+
+Một véc-tơ pháp tuyến của đường thẳng $2x-3y+6=0$ là
+A. $\overrightarrow{n_4}=\left(2;-3\right)$
+
+B. $\overrightarrow{n_2}=\left(2; 3\right)$
+
+C. $\overrightarrow{n_3}=\left(3; 2\right)$
+
+D. $\overrightarrow{n_1}=\left(-3; 2\right)$
+
+# Lời giải
+
+Từ phương trình tổng quát ta thấy một véc-tơ pháp tuyến của đường thẳng là $\overrightarrow{n_4}=\left(2;-3\right)$.
+
+---
+id: phuong_trinh_duong_thang_003
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ chỉ phương của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vectơ chỉ phương
+  - phương trình đoạn chắn
+---
+
+# Đề bài
+
+Véc-tơ chỉ phương của đường thẳng $\dfrac{x}{3}+\dfrac{y}{2}=1$ là
+A. $\overrightarrow{u}_4=\left(-2; 3\right)$
+
+B. $\overrightarrow{u}_2=\left(3;-2\right)$
+
+C. $\overrightarrow{u}_3=\left(3; 2\right)$
+
+D. $\overrightarrow{u}_1=\left(2; 3\right)$
+
+# Lời giải
+
+Ta có $\dfrac{x}{3}+\dfrac{y}{2}=1\Leftrightarrow 2x+3y-6=0$ nên đường thẳng có véc-tơ pháp tuyến là $\overrightarrow{n}=\left(2; 3\right)$.
+Suy ra véc-tơ chỉ phương là $\overrightarrow{u}=\left(3;-2\right)$.
+
+---
+id: phuong_trinh_duong_thang_004
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Vectơ chỉ phương của đường thẳng đi qua hai điểm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vectơ chỉ phương
+  - đường thẳng đi qua hai điểm
+---
+
+# Đề bài
+
+Véc-tơ nào dưới đây là một véc-tơ chỉ phương của đường thẳng đi qua hai điểm $A\left(-3;2\right)$ và $B\left(1;4\right)$?
+A. $\overrightarrow{u_1}=\left(-1;2\right)$
+
+B. $\overrightarrow{u_2}=\left(2;1\right)$
+
+C. $\overrightarrow{u_3}=\left(-2;6\right)$
+
+D. $\overrightarrow{u_4}=\left(1;1\right)$
+
+# Lời giải
+
+Ta có $\overrightarrow{AB}=\left(4;2\right)$ một véc-tơ chỉ phương của đường thẳng $AB$ cùng phương với $\overrightarrow{AB}=\left(4;2\right)$.
+Ta thấy $\overrightarrow{u_2}=\left(2;1\right)=\dfrac{1}{2} \overrightarrow{AB}$.
+Vậy $\overrightarrow{u_2}=\left(2;1\right)$ là một véc-tơ chỉ phương của $AB$.
+
+---
+id: phuong_trinh_duong_thang_005
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Vectơ pháp tuyến của đường thẳng đi qua hai điểm
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - vectơ pháp tuyến
+  - đường thẳng đi qua hai điểm
+---
+
+# Đề bài
+
+Véc-tơ nào dưới đây là một véc-tơ pháp tuyến của đường thẳng đi qua hai điểm $A\left(2;3\right)$ và $B\left(4;1\right)$?
+A. $\overrightarrow{n_1}=\left(2;-2\right)$
+
+B. $\overrightarrow{n_2}=\left(2;-1\right)$
+
+C. $\overrightarrow{n_3}=\left(1;1\right)$
+
+D. $\overrightarrow{n_4}=\left(1;-2\right)$
+
+# Lời giải
+
+Ta có $\overrightarrow{AB}=\left(2;-2\right)$ một véc-tơ pháp tuyến $\overrightarrow{n}$ của đường thẳng $AB$ thì vuông góc với $AB$.
+Suy ra $\overrightarrow{n}\cdot \overrightarrow{AB}=0\Leftrightarrow x\cdot 2+y\cdot \left(-2\right)=0$.
+Chọn $x=1,y=1\Rightarrow \overrightarrow{n}=\left(1;1\right)$.
+
+---
+id: phuong_trinh_duong_thang_006
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lý thuyết về phương trình đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình tổng quát
+  - điểm thuộc đường thẳng
+---
+
+# Đề bài
+
+Cho phương trình $ax+by+c=0\; (1)$ với $a^2+b^2> 0$. Mệnh đề nào sau đây sai?
+A. $(1)$ là phương trình tổng quát của đường thẳng có véc-tơ pháp tuyến là $\overrightarrow{n}=\left(a;b\right)$
+
+B. $a=0$ $(1)$ là phương trình đường thẳng song song hoặc trùng với trục $Ox$
+
+C. $b=0$ $(1)$ là phương trình đường thẳng song song hoặc trùng với trục $Oy$
+
+D. Điểm $M_0 \left(x_0;y_0 \right)$ thuộc đường thẳng $(1)$ khi và chỉ khi $ax_0+by_0+c\ne 0$
+
+# Lời giải
+
+Ta có điểm $M_0 \left(x_0;y_0 \right)$ thuộc đường thẳng $(1)$ khi và chỉ khi $ax_0+by_0+c=0$.
+
+---
+id: phuong_trinh_duong_thang_007
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lý thuyết về đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xác định đường thẳng
+---
+
+# Đề bài
+
+Mệnh đề nào sau đây sai? Đường thẳng $(d)$ được xác định khi biết.
+A. Một véc-tơ pháp tuyến hoặc một véc-tơ chỉ phương
+
+B. Hệ số góc và một điểm thuộc đường thẳng
+
+C. Một điểm thuộc $(d)$ và biết $(d)$ song song với một đường thẳng cho trước
+
+D. Hai điểm phân biệt thuộc $(d)$
+
+# Lời giải
+
+If chỉ có véc-tơ pháp tuyến hoặc một véc-tơ chỉ phương thì thiếu điểm đi qua để viết đường thẳng.
+
+---
+id: phuong_trinh_duong_thang_008
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Mối liên hệ giữa các vectơ và hệ số góc
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - vectơ pháp tuyến
+  - vectơ chỉ phương
+  - hệ số góc
+---
+
+# Đề bài
+
+Đường thẳng $(d)$ có  véc-tơ  pháp tuyến $\overrightarrow{n}=\left(a;b\right)$. Mệnh đề nào sau đây sai?
+A. $\overrightarrow{u}_1=\left(b;-a\right)$ là véc-tơ chỉ phương của $(d)$
+
+B. $\overrightarrow{u}_2=\left(-b;a\right)$ là véc-tơ chỉ phương của $(d)$
+
+C. $\overrightarrow{n'}=\left(ka;kb\right) k\in R$ là véc-tơ pháp tuyến của $(d)$
+
+D. $(d)$ có hệ số góc $k=\dfrac{-b}{a} \left(b\ne 0\right)$
+
+# Lời giải
+
+Phương trình đường thẳng có véc-tơ pháp tuyến $\overrightarrow{n}=\left(a;b\right)$ là $ax+by+c=0\Leftrightarrow y=-\dfrac{a}{b} x-\dfrac{c}{b} \left(b\ne 0\right)$.
+Suy ra hệ số góc $k=-\dfrac{a}{b}$.
+
+---
+id: phuong_trinh_duong_thang_009
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ pháp tuyến của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - vectơ pháp tuyến
+---
+
+# Đề bài
+
+Cho đường thẳng $(d)\colon 2x+3y-4=0$. Véc-tơ nào sau đây là véc-tơ pháp tuyến của $(d)$?
+A. $\overrightarrow{n_1}=\left(3;2\right)$
+
+B. $\overrightarrow{n_2}=\left(-4;-6\right)$
+
+C. $\overrightarrow{n_3}=\left(2;-3\right)$
+
+D. $\overrightarrow{n_4}=\left(-2;3\right)$
+
+# Lời giải
+
+Ta có $(d)\colon 2x+3y-4=0\Rightarrow$ véc-tơ pháp tuyến $\overrightarrow{n}=\left(2;3\right)=\left(-4;-6\right)$.
+
+---
+id: phuong_trinh_duong_thang_010
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Nhận biết tính chất của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hệ số góc
+  - điểm thuộc đường thẳng
+---
+
+# Đề bài
+
+Cho đường thẳng $(d)\colon 3x-7y+15=0$. Mệnh đề nào sau đây sai?
+A. $\overrightarrow{u}=\left(7;3\right)$ là véc-tơ chỉ phương của $(d)$
+
+B. $(d)$ có hệ số góc $k=\dfrac{3}{7}$
+
+C. $(d)$ không đi qua góc tọa độ
+
+D. $(d)$ đi qua hai điểm $M\left(-\dfrac{1}{3};2\right)$ và $N\left(5;0\right)$
+
+# Lời giải
+
+Giả sử $N\left(5;0\right)\in d\colon 3x-7y+15=0\Rightarrow 3\cdot 5-7\cdot 0+15=0$ (vô lí).
+
+---
+id: phuong_trinh_duong_thang_011
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Điểm thuộc đường thẳng tham số
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình tham số
+  - điểm thuộc đường thẳng
+---
+
+# Đề bài
+
+Cho đường thẳng $(d)\colon \heva{&{x=2-3t} \\&{y=-1+2t}}$ và điểm $A\left(\dfrac{7}{2};-2\right)$. Điểm $A\in (d)$ ứng với giá trị nào
+A. $t=\dfrac{3}{2}$
+
+B. $t=\dfrac{1}{2}$
+
+C. $t=-\dfrac{1}{2}$
+
+D. $t=2$
+
+# Lời giải
+
+Ta có $A\left(\dfrac{7}{2};-2\right)\in (d)\Rightarrow \heva{&{\dfrac{7}{2}=2-3t} \\
+	&{-2=-1+2t}
+} \Rightarrow \heva{&{t=-\dfrac{1}{2}} \\
+	&{t=-\dfrac{1}{2}}
+} \Rightarrow t=-\dfrac{1}{2}$.
+
+---
+id: phuong_trinh_duong_thang_012
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Điểm không thuộc đường thẳng tham số
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình tham số
+  - điểm thuộc đường thẳng
+---
+
+# Đề bài
+
+Cho $(d)\colon \heva{&{x=2+3t} \\&{y=5-4t}}$. Điểm nào sau đây không thuộc $(d)$
+A. $A(5;3)$
+
+B. $B(2;5)$
+
+C. $C(-1 ; 9)$
+
+D. $D(8 ;-3)$
+
+# Lời giải
+
+Thay $B\left(2;5\right)\Rightarrow \heva{&{2=2+3t} \\&{5=5-4t}} \Rightarrow \heva{&{t=0} \\&{t=0}} \Rightarrow t=0$.
+
+---
+id: phuong_trinh_duong_thang_013
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Bài toán chuyển động thẳng đều
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - chuyển động thẳng đều
+  - phương trình đường thẳng
+  - quãng đường
+---
+
+# Đề bài
+
+Chuyển động của vật thể $M$ được thể hiện trên mặt phẳng toạ độ $Oxy$. Vật thể $M$ khởi hành từ điểm $A(5; 3)$ và chuyển động thẳng đều với véc-tơ vận tốc là $\overrightarrow{v}(1; 2)$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Véc-tơ chỉ phương của đường thẳng biểu diễn chuyển động của vật thể là $\overrightarrow{v}(1; 2)$.
+
+b) Đúng/Sai: Vật thể $M$ chuyển động trên đường thẳng $2x-3y-1=0$.
+
+c) Đúng/Sai: Toạ độ của vật thể $M$ tại thời điểm $t(t > 0)$ tính từ khi khởi hành là $\heva{&x=5+t \\&y=3+2t.}$
+
+d) Đúng/Sai: Khi $t=5$ thì vật thể $M$ chuyển động được quãng đường dài bằng $5\sqrt{5}$
+
+# Lời giải
+
+a) Véc-tơ chỉ phương của đường thẳng biểu diễn chuyển động của vật thể là $\overrightarrow{v}(1; 2)$, do đó đường thẳng này có Véc-tơ pháp tuyến là $\overrightarrow{n}(2;-1)$.
+
+b) Mặt khác, đường thẳng này đi qua điểm $A(5; 3)$ nên có phương trình là: $2(x-5)-(y-3)=0\Leftrightarrow 2x-y-7=0$.
+
+c) Vật thể khởi hành từ điểm $A(5; 3)$ và chuyển động thẳng đều với véc-tơ vận tốc là $\overrightarrow{v}(1; 2)$ nên vị trí của vật thể tại thời điểm $t(t > 0)$ có toạ độ là $\heva{&x=5+t \\&y=3+2t.}$
+
+d) Gọi $B$ là vị trí của vật thể tại thời điểm $t=5$. Do đó, toạ độ của điểm $B$ là
+$$
+\heva{&x_B=5+5=10\\&y_B=3+2\cdot 5=13.}
+$$
+Khi đó quãng đường vật thể đi được là $AB=\sqrt{25+100}=5\sqrt{5}$.
+
+---
+id: phuong_trinh_duong_thang_014
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Xác định các yếu tố trong tam giác
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - đường trung trực
+  - đường trung tuyến
+  - tam giác
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho tam giác $ABC$ có $A(3; 4)$, đường trung trực cạnh $BC$ có phương trình $3x-y+1=0$, đường trung tuyến kẻ từ $C$ có phương trình $2x-y+5=0$. Xét tính đúng sai các mệnh đề sau
+
+a) Đúng/Sai: Gọi $M$ là trung điểm cạnh $BC$. Khi đó $M(9; 39)$
+
+b) Đúng/Sai: Phương trình đường thẳng $BC$ là $x+3y-63=0$
+
+c) Đúng/Sai: Tọa độ đỉnh $C$ là $C(-1; 3)$
+
+d) Đúng/Sai: Tọa độ đỉnh $B$ là $B\left(\dfrac{15}{7}; \dfrac{142}{7}\right)$
+
+# Lời giải
+
+a) Gọi $M$ là trung điểm cạnh $BC$. Vì $M$ nằm trên đường trung trực cạnh $BC$ nên giả sử $M\ (t; 3t+1)$.
+Gọi $G$ là trọng tâm tam giác $ABC$. Vì $G$ nằm trên đường trung tuyền kẻ từ $C$ nên giả sử $G\ (s; 2s+5)$.
+Ta có $\heva{& \overrightarrow{A M}=(t-3; 3 t-3)\\&\overrightarrow{A G}=(s-3; 2 s+1).}$
+Khi đó
+$$
+\begin{aligned}
+&\overrightarrow{A M}=\dfrac{3}{2} \overrightarrow{A G}\\ 
+&\Leftrightarrow\heva{&t-3=\dfrac{3}{2}(s-3)\\&3t-3=\dfrac{3}{2}(2s+1)}\\
+&\Leftrightarrow \heva{&{2t-3s=-3} \\&{6t-6s=9}}\\
+&\Leftrightarrow \heva{&t=\dfrac{15}{2} \\ &s=6.}
+\end{aligned}
+$$
+Suy ra $M\left(\dfrac{9}{2}; \dfrac{39}{2}\right)$.
+
+b) Đường thẳng $BC$ đi qua $M\left(\dfrac{9}{2}; \dfrac{39}{2}\right)$ và vuông góc với đường thẳng $3x-y+1=0$ nên ta có phương trình đường thẳng $BC$ là $1\cdot\left(x-\dfrac{9}{2}\right)+3\cdot\left(y-\dfrac{39}{2}\right)=0\Leftrightarrow x+3y-63=0$.
+
+c) Toạ độ đỉnh $C$ là nghiệm của hệ phương trình $\heva{&x+3y-63=0\\&2x-y+5=0} \Leftrightarrow\heva{&x=\dfrac{48}{7} \\&y=\dfrac{131}{7}.}$
+
+d) Suy ra $C\left(\dfrac{48}{7}; \dfrac{131}{7}\right)$.Vì $M$ là trung điểm $BC$ nên $B\left(\dfrac{15}{7}; \dfrac{142}{7}\right)$.
+
+---
+id: phuong_trinh_duong_thang_015
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Bài toán hình chữ nhật
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - hình chữ nhật
+  - đối xứng
+  - vuông góc
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho hình chữ nhật $ABCD$ có tâm $I(6;2)$ và các điểm $M(1;5)$, $N(3;4)$ lần lượt thuộc các đường thẳng $AB$, $BC$. Biết rằng trung điểm $E$ cùa cạnh $CD$ thuộc đường thẳng $\Delta\colon x+y-5=0$ và hoành độ của điểm $E$ nhỏ hơn $7$. Khi đó
+
+a) Đúng/Sai: Phương trình $BC$ là $x-3=0$
+
+b) Đúng/Sai: Phương trình $AB$ là $x+y-6=0$
+
+c) Đúng/Sai: Tọa độ điểm là $A(9; 5)$
+
+d) Đúng/Sai: Tọa độ điểm là $B(3; 3)$
+
+\begin{tikzpicture}
+	\coordinate (A) at (0,3);
+	\coordinate (B) at (5,3);
+	\coordinate (D) at (0,0);
+	\coordinate (C) at ($(B)+(D)-(A)$);
+	\coordinate [label=above:$M$](M) at ($(A)!2/3!(B)$);
+	\coordinate [label=below:$E$](E) at ($(D)!0.5!(C)$);
+	\coordinate [label=below:$P$](P) at ($(D)!1/3!(C)$);
+	\coordinate [label=right:$N$](N) at ($(B)!1/3!(C)$);
+	\coordinate (O) at (intersection of A--C and B--D);
+	\draw(A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D) (M)--(P);
+	\foreach \i/\g in {A/90,B/90,C/-90,D/-90,O/-80}{\draw[fill=white](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+
+# Lời giải
+
+a) Gọi $P$ đối xứng với $M(1 ; 5)$ qua $I(6 ; 2)$ suy ra $P(11 ;-1)$ and $P$ thuộc đường thẳng $C D$.
+Ta có $E$ thuộc $\Delta$ nên giả sử $E(t ; 5-t)$. Khi đó $\overrightarrow{IE}=(t-6;3-t), \overrightarrow{PE}=(t-11;6-t)$.
+Vì $E$ là trung điểm $CD$ nên $I E \perp PE$.
+Do đó ta có
+$$
+\begin{aligned}
+&\overrightarrow{IE} \cdot \overrightarrow{PE}=0\\ 
+&\Leftrightarrow(t-6)(t-11)+(3-t)(6-t)=0\\
+&\Leftrightarrow t^2-13 t+42=0.
+\end{aligned}
+$$
+Suy ra $t=6$ hoặc $t=7$.
+Vì hoành độ của $E$ nhỏ hơn $7$ nên $E(6 ;-1)$.
+Phương trình đường thẳng $BC$ đi qua $N(3;4)$ và vuông góc với $CD$ nên phương trình $BC$ là $x-3=0$.
+
+b) Phương trình đường thẳng $AB$ đi qua $M(1;5)$ và song song với $CD$ nên phương trình $AB$ là $y-5=0$.
+
+c) Từ phương trình các cạnh tìm được ta có $A(9 ; 5)$.
+
+d) Từ phương trình các cạnh tìm được ta có $B(3 ; 5), C(3 ;-1), D(9 ;-1)$.
+
+---
+id: phuong_trinh_duong_thang_016
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình đường thẳng cơ bản
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Sai
+tags:
+  - phương trình tổng quát
+  - đường trung trực
+  - đường cao
+---
+
+# Đề bài
+
+Xác định tính đúng, sai của các khẳng định sau
+
+a) Đúng/Sai: $\Delta$ qua $A(1;0)$ có véc-tơ pháp tuyến $\overrightarrow{n}=(3;-2)$, khi đó phương trình tổng quát của $\Delta$ là $3x-2y-3=0$
+
+b) Đúng/Sai: $\Delta$ qua $A(-1; 0)$ và vuông góc với đường thẳng $AB$ biết $B(1; 4)$, khi đó phương trình tổng quát của $\Delta$ là $x+2y+1=0$
+
+c) Đúng/Sai: $\Delta$ là đường trung trực của đoạn thẳng $MN$ với $M(0;-3), N(2; 5)$, khi đó phương trình tổng quát của $\Delta$ là $x+4y-3=0$
+
+d) Đúng/Sai: $\triangle$ là đường cao xuất phát từ điểm $A$ trong tam giác $ABC$ biết rằng $A(1;-1), B(1; 2), C(3;-3)$, khi đó phương trình tổng quát của $\Delta$ là $2x-3y-5=0$
+
+# Lời giải
+
+a) Phương trình tổng quát của $\Delta$ là $3(x-1)-2(y-0)=0$ hay $3x-2y-3=0$.
+
+b) $\Delta$ vuông góc với $AB$ nên có véc-tơ pháp tuyến $\overrightarrow{n}=\overrightarrow{AB}=(2; 4)$.
+Phương trình tổng quát của $\Delta$ là $2(x+1)+4(y-0)=0$ hay $x+2y+1=0$.
+
+c) $\Delta$ đi qua trung điểm $I(1; 1)$ của đoạn $MN$ và có véc-tơ pháp tuyến $\overrightarrow{MN}=(2; 8)$ nên có phương trình tổng quát $2(x-1)+8(y-1)=0$ hay $x+4y-5=0$.
+
+d) $\Delta$ qua $A(1;-1)$ và có véc-tơ pháp tuyến $\overrightarrow{n}=\overrightarrow{BC}=(2;-5)$ nên phương trình tổng quát là $2(x-1)-5(y+1)=0$ hay $2x-5y-7=0$.
+
+---
+id: phuong_trinh_duong_thang_017
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Diện tích hình vuông nội tiếp các đường thẳng
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 12
+tags:
+  - hình vuông
+  - khoảng cách
+  - diện tích
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hình vuông $ABCD$ và các điểm $M(0;2)$, $N(5;-3),P(-2;-2),Q(2;-4)$ lần lượt thuộc các đường thẳng chứa các cạnh $AB,BC,CD,DA$. Tính tổng diện tích hình vuông $ABCD$ thỏa điều kiện trên.
+
+\begin{tikzpicture}
+	\def\canh{4}
+	\coordinate (A) at (0,\canh);
+	\coordinate (B) at (\canh,\canh);
+	\coordinate (D) at (0,0);
+	\coordinate (C) at ($(B)+(D)-(A)$);
+	\coordinate [label=above:$M$](M) at ($(A)!0.5!(B)$);
+	\coordinate [label=right:$N$](N) at ($(C)!0.5!(B)$);
+	\coordinate [label=below:$P$](P) at ($(C)!0.5!(D)$);
+	\coordinate [label=left:$Q$](Q) at ($(A)!0.5!(D)$);
+	\draw(A)--(B)--(C)--(D)--cycle (M)--(N)--(P)--(Q)--(M);
+	\foreach \i/\g in {A/90,B/90,C/-90,D/-90}{\draw[fill=white](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+
+# Lời giải
+
+Gọi $\overrightarrow{n}_{AB}=(a;b)\left(a^2+b^2> 0\right)$ là véc-tơ pháp tuyến của đường thẳng $AB$.
+Đường thẳng $AB$ đi qua $M(0;2)$ nên có phương trình dạng 
+$$
+a(x-0)+b(y-2)=0\Leftrightarrow ax+by-2b=0.
+$$
+Đường thẳng $BC$ vuông góc với $AB$ nên ta có thể chọn $\overrightarrow{n}_{BC}=(b;-a)$ làm véc-tơ pháp tuyến của đường thẳng $BC$. Đường thẳng $BC$ đi qua $N(5;-3)$ nên có phương trình dạng
+$$
+b(x-5)-a(y+3)=0\Leftrightarrow bx-ay-5b-3a=0.
+$$
+Tứ giác $ABCD$ là hình vuông nên $\mathrm{d}(P,AB)=\mathrm{d}(Q,BC)$. Do đó, ta có 
+$$
+\dfrac{|-2a-2b-2b|}{\sqrt{a^2+b^2}}=\dfrac{|2b+4a-5b-3a|}{\sqrt{b^2+a^2}} \Leftrightarrow|2a+4b|=|a-3b|.
+$$
+Suy ra $a=-7b$ hoặc $3a=-b$
+* Với $a=-7b$ ta chọn $b=1,a=-7$. Suy ra phương trình đường thẳng $AB$ là $-7x+y-2=0$ và $\mathrm{d}(P,AB)=\sqrt{2}$.
+Vậy diện tích hình vuông $ABCD$ bằng $(\sqrt{2})^2=2$.
+* Với $3a=-b$ ta chọn $a=1,b=-3$. Suy ra phương trình đường thẳng $AB$ là $x-3y+6=0$ và $\mathrm{d}(P,AB)=\sqrt{10}$.
+Vậy diện tích hình vuông $ABCD$ bằng $(\sqrt{10})^2=10$.
+
+Tổng diện tích hai trường hợp là $10+2=12$.
+
+---
+id: phuong_trinh_duong_thang_018
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Bài toán hình thoi
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: -3
+tags:
+  - hình thoi
+  - giao điểm đường chéo
+  - tích vô hướng
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hình thoi $ABCD$ có $A(0;2),B(4;3)$, giao điểm hai đường chéo nằm trên đường thẳng $\Delta:x-3y=0$. Biết tọa độ đỉnh $D(x_0;y_0)$ có $x_0<0$. Tính $x_0+y_0$.
+
+\begin{tikzpicture}
+	\def\canh{4}
+	\coordinate (A) at (0,0);
+	\coordinate (B) at ($(A)+(-65:\canh)$);
+	\coordinate (D) at ($(A)+(-115:\canh)$);
+	\coordinate (C) at ($(B)+(D)-(A)$);
+	\draw(A)--(B)--(C)--(D)--cycle (A)--(C) (B)--(D);
+	\coordinate (I) at (intersection of A--C and B--D);
+	\foreach \i/\g in {A/90,B/0,C/-90,D/180,I/45}{\draw[fill=white](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+
+# Lời giải
+
+Salmon giao điểm của hai đường chéo là $I$. Vì $I$ thuộc $\Delta$ nên giả sử $I(3t;t)$.
+Khi đó $\overrightarrow{IA}=(-3t;2-t),\overrightarrow{IB}=(4-3t;3-t)$.
+Vì tứ giác $ABCD$ là hình thoi nên $\overrightarrow{IA}\cdot \overrightarrow{IB}=0\Leftrightarrow (-3t)(4-3t)+(2-t)(3-t)=0\Leftrightarrow 10t^2-17t+6=0$.
+Suy ra $t=\dfrac{1}{2}$ hoặc $t=\dfrac{6}{5}$.
+* Với $t=\dfrac{1}{2}$ ta có: $I\left(\dfrac{3}{2};\dfrac{1}{2} \right)\Rightarrow C(3;-1),D(-1;-2)$ (nhận).
+Suy ra, $x_0+y_0=-1-2=-3$.
+* Với $t=\dfrac{6}{5}$ ta có: $I\left(\dfrac{18}{5};\dfrac{6}{5} \right)\Rightarrow C\left(\dfrac{36}{5};\dfrac{2}{5} \right),D\left(\dfrac{16}{5};-\dfrac{3}{5} \right)$ (loại).
+
+---
+id: phuong_trinh_duong_thang_019
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình đường thẳng song song
+muc_do:
+  - NB
+loai: tra_loi_ngan
+dap_an: 12
+tags:
+  - song song
+  - đi qua một điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho đường thẳng $d:4x-y+11=0$. Phương trình đường thẳng $d_1\colon ax+by+c=0$ đi qua $M(-2;1)$ và song song với $d$. Tính $a+b+c$.
+
+# Lời giải
+
+Vì $d_1$ song song với $d$ nên phương trình của $d_1$ có dạng $4x-y+c=0\,(c\ne 11)$.
+Vì $M$ thuộc $d_1$ nên $4\cdot (-2)-1+c=0\Leftrightarrow c=9$.
+Vậy phương trình đường thẳng $d_1$ là $4x-y+9=0$.
+Suy ra, $a+b+c=4+(-1)+9=12$.
+
+---
+id: phuong_trinh_duong_thang_020
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Diện tích tam giác và trọng tâm
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 23
+tags:
+  - trọng tâm
+  - khoảng cách
+  - diện tích tam giác
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho tam giác $ABC$ có $A(1;1),B(5;-2)$, đỉnh $C$ thuộc đường thẳng $y-4=0$, trọng tâm $G$ thuộc đường thẳng $3x-2y+6=0$. Biết diện tích tam giác $ABC$ có dạng $\dfrac{a}{b}$ (với $\dfrac{a}{b}$ là phân số tối giản). Tính $a+b$.
+
+# Lời giải
+
+Đỉnh $C$ nằm trên đường thẳng $y-4=0$ nên giả sử $C(c;4)$.
+Giả sử $G(a;b)$. Vì $G$ là trọng tâm tam giác nên $a=\dfrac{6+c}{3}, b=1$.
+Do $G$ nằm trên đường thẳng $3x-2y+6=0$ nên $3\left(\dfrac{6+c}{3} \right)-2+6=0\Leftrightarrow c=-10$.
+Suy ra $G\left(-\dfrac{4}{3};1\right)$.
+Ta có $\overrightarrow{AB}=(4;-3)$.
+Suy ra $AB=5$ và phương trình đường thẳng $AB$ là $\dfrac{x-1}{4}=\dfrac{y-1}{-3} \Leftrightarrow 3x+4y-7=0$.
+Ta lại có $C(-10; 4)$.
+Khoảng cách từ $C$ đến đường thẳng $AB$ là $\mathrm{d}(C,AB)=\dfrac{|3\cdot (-10)+4\cdot 4-7|}{\sqrt{3^2+4^2}}=\dfrac{21}{5}$.
+Diện tích tam giác $ABC$ là $S=\dfrac{1}{2}\cdot AB\cdot \mathrm{d}(C,AB)=\dfrac{1}{2} \cdot 5\cdot \dfrac{21}{5}=\dfrac{21}{2}$.
+Suy ra $a+b=21+2=23$.
+
+---
+id: phuong_trinh_duong_thang_021
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Bài toán hình bình hành
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: -13
+tags:
+  - hình bình hành
+  - diện tích
+  - trung điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho hình bình hành $ABCD$ có diện tích bằng $2$. Biết $A(0;2),B(3;0)$ và giao điểm $I$ của hai đường chéo hình bình hành nằm trên đường thẳng $y=-x$. Tìm hoành độ đỉnh $D$, biết $x_D>-14$.
+
+# Lời giải
+
+Phương trình đường thẳng $AB$ là $\dfrac{x}{3}+\dfrac{y}{2}=1\Leftrightarrow 2x+3y-6=0$.
+Điểm $I$ nằm trên đường thẳng $y=-x$ nên giả sử $I(t;-t)$.
+Vì $I$ là trung điểm của $AC$ nên $C(2t;-2t-2),I$ là trung điểm của $BD$ nên $D(2t-3;-2t)$.
+Ta có $AB=\sqrt{(3-0)^2+(0-2)^2}=\sqrt{13}$.
+Suy ra $\mathrm{d}(C,AB)=\dfrac{2}{\sqrt{13}}$.
+Khi đó $\dfrac{|2\cdot 2t+3(-2t-2)-6|}{\sqrt{2^2+3^2}}=\dfrac{2}{\sqrt{13}} \Leftrightarrow|-2t-12|=2$.
+Suy ra $t=-5$ hoặc $t=-7$.
+* Với $t=-5$, ta có $C(-10;8),D(-13;10)$ nhận vì $x_D=-13>-14$.
+* Với $t=-7$, ta có $C(-14;12),D(-17;14)$ loại vì $x_D=-17<-14$.
+
+---
+id: phuong_trinh_duong_thang_022
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm khoảng cách từ một điểm đến một đường thẳng
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - trung điểm
+  - phương trình đường thẳng
+  - khoảng cách
+---
+
+# Đề bài
+
+Trong mặt phẳng toạ độ $Oxy$, cho các đường thẳng $d_1\colon x+2y+3=0$, $d_2\colon 3x-y+5=0$ và điểm $P(-2;1)$. Đường thẳng $\Delta$ đi qua $P$ và cắt $d_1, d_2$ lần lượt tại $A$, $B$ sao cho $P$ là trung điểm của $AB$. Biết khoảng cách từ $M(3;-2)$ đến đường thẳng $\Delta$ có dạng $a\sqrt{b}$. Tính $a^2+b$.
+
+# Lời giải
+
+Vì $A\in d_1, B\in d_2$ nên giả sử $A(-2t-3;t),B\ (s;3s+5)$.
+Ta có $P(-2;1)$ là trung điểm $AB$ nên 
+$$
+\heva{&{\dfrac{-2t-3+s}{2}=-2}\\&{\dfrac{t+3s+5}{2}=1}}\Leftrightarrow \heva{&{-2t+s=-1} \\&{t+3s=-3}}\Leftrightarrow \heva{&{t=0} \\&{s=-1}.}
+$$
+Suy ra $A(-3;0),B(-1;2)$.
+Phương trình đường thẳng $\Delta$ đi qua hai điểm $A,B$ là 
+$$
+\dfrac{x+3}{2}=\dfrac{y}{2} \Leftrightarrow x-y+3=0.
+$$
+Vậy khoảng cách từ $M$ đến đường thẳng $\Delta$ là 
+$$
+\mathrm{d}(M,d)=\dfrac{|3-(-2)+3|}{\sqrt{1^2+(-1)^2}}=\dfrac{8}{\sqrt{2}}=4\sqrt{2}.
+$$
+Suy ra, $a=4$ và $b=2$ nên $a^2+b=4^2+2=18$.
+
+---
+id: phuong_trinh_duong_thang_023
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lý thuyết về các vectơ của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Một đường thẳng có bao nhiêu véc-tơ chỉ phương?
+A. $1$
+
+B. $2$
+
+C. $3$
+
+D. Vô số
+
+# Lời giải
+
+Một đường thẳng có vô số vectơ chỉ phương.
+
+---
+id: phuong_trinh_duong_thang_024
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lý thuyết về các vectơ của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - vectơ pháp tuyến
+---
+
+# Đề bài
+
+Một đường thẳng có bao nhiêu véc-tơ pháp tuyến?
+A. $1$
+
+B. $2$
+
+C. $3$
+
+D. Vô số
+
+# Lời giải
+
+Một đường thẳng có vô số vectơ pháp tuyến.
+
+---
+id: phuong_trinh_duong_thang_025
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ chỉ phương của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình tham số
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Véc-tơ nào dưới đây là một véc-tơ chỉ phương của đường thẳng $d\colon \heva{&{x=2} \\	&{y=-1+6t}}$?
+A. $\overrightarrow{u_1}=\left(6;0\right)$
+
+B. $\overrightarrow{u_2}=\left(-6;0\right)$
+
+C. $\overrightarrow{u_3}=\left(2;6\right)$
+
+D. $\overrightarrow{u_4}=\left(0;1\right)$
+
+# Lời giải
+
+Từ phương trình tham số ta thấy một véc-tơ chỉ phương của $d$ là $\overrightarrow{u}=\left(0;6\right)=6\left(0;1\right)$ nên ta có thể chọn một véc-tơ chỉ phương là $\overrightarrow{u_4}=\left(0;1\right)$.
+
+---
+id: phuong_trinh_duong_thang_026
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ chỉ phương của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình tham số
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Véc-tơ nào dưới đây là một véc-tơ chỉ phương của đường thẳng $\Delta\colon \heva{&{x=5-\dfrac{1}{2} t} \\	&{y=-3+3t}}$?
+A. $\overrightarrow{u_1}=\left(-1;3\right)$
+
+B. $\overrightarrow{u_2}=\left(\dfrac{1}{2};3\right)$
+
+C. $\overrightarrow{u_3}=\left(5;-3\right)$
+
+D. $\overrightarrow{u_4}=\left(1;-6\right)$
+
+# Lời giải
+
+Từ phương trình tham số ta thấy một véc-tơ chỉ phương của $\Delta\colon \heva{&{x=5-\dfrac{1}{2} t} \\&{y=-3+3t}}$ là $\overrightarrow{u}=\left(-\dfrac{1}{2};3\right)$ nên ta có thể chọn một véc-tơ chỉ phương là $\overrightarrow{u_4}=\left(1;-6\right)$.
+
+---
+id: phuong_trinh_duong_thang_027
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ chỉ phương từ phương trình tổng quát
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: A
+tags:
+  - phương trình tổng quát
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Cho đường thẳng $\Delta$ có phường trình tổng quát $-2x+3y-1=0$. Véc-tơ nào sau đây là véc-tơ chỉ phương của đường thẳng $\Delta$.
+A. $(3; 2)$
+
+B. $(2; 3)$
+
+C. $(-3; 2)$
+
+D. $(2;-3)$
+
+# Lời giải
+
+Từ phương trình tổng quát ta thấy một véc-tơ pháp tuyến của $\Delta$ là $\overrightarrow{n}=(-2; 3)$ suy ra một véc-tơ chỉ phương là $\overrightarrow{u}=(3;2)$.
+
+---
+id: phuong_trinh_duong_thang_028
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Tìm vectơ không là vectơ chỉ phương
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình tổng quát
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Cho đường thẳng $\Delta$ có phương trình tổng quát $-2x+3y-1=0$. Véc-tơ nào sau đây không là véc-tơ chỉ phướng của $\Delta$.
+A. $\left(1; \dfrac{2}{3}\right)$
+
+B. $(3; 2)$
+
+C. $(2; 3)$
+
+D. $(-3;-2)$
+
+# Lời giải
+
+Từ phương trình tổng quát ta thấy một véc-tơ pháp tuyến là $\overrightarrow{n}=(-2;3)$ suy ra một véc-tơ chỉ phương của đường thẳng là $\overrightarrow{u}=(3;2)=-1(-3;-2)=3\left(1; \dfrac{2}{3}\right)$.
+Vậy véc-tơ có tọa độ $(2;3)$ không phải là véc-tơ chỉ phương của $\Delta$.
+
+---
+id: phuong_trinh_duong_thang_029
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Diện tích tam giác tạo bởi đường thẳng và hai trục tọa độ
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - giao điểm trục tọa độ
+  - diện tích tam giác
+---
+
+# Đề bài
+
+Đường thẳng $\Delta\colon 5x+3y=15$ tạo với các trục tọa độ một tam giác có diện tích bằng bao nhiêu?
+A. $7,5$
+
+B. $5$
+
+C. $15$
+
+D. $3$
+
+# Lời giải
+
+Ta có $\heva{&\Delta \cap Ox=A\left(3;0\right)\\&\Delta \cap Oy=B\left(0;5\right)}$.
+Vậy $S_{\triangle OAB}=\dfrac{1}{2} OA\cdot OB=\dfrac{15}{2}=7,5$.
+
+---
+id: phuong_trinh_duong_thang_030
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình tham số của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình tham số
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Viết phương trình tham số của đường thẳng đi qua $A\left(3;4\right)$ và có véc-tơ chỉ phương $\overrightarrow{u}=\left(3;-2\right)$
+A. $\heva{&{x=3+3t} \\&{y=-2+4t}.}$
+
+B. $\heva{&{x=3-6t} \\&{y=-2+4t}.}$
+
+C. $\heva{&{x=3+2t} \\&{y=4+3t}.}$
+
+D. $\heva{&{x=3+3t} \\&{y=4-2t}.}$
+
+# Lời giải
+
+Phương trình tham số của đường thẳng đi qua $A\left(3;4\right)$ và có véc-tơ chỉ phương $\overrightarrow{u}=\left(3;-2\right)$ có dạng $\heva{&{x=3+3t} \\&{y=4-2t}.}$
+
+---
+id: phuong_trinh_duong_thang_031
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Viết phương trình đường thẳng qua hai điểm
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - phương trình tham số
+  - qua hai điểm
+---
+
+# Đề bài
+
+Phương trình tham số của đường thẳng qua $M\left(1;-1\right)$, $N\left(4;3\right)$ là
+A. $\heva{&{x=3+t} \\	&{y=4-t}.}$
+
+B. $\heva{&{x=1+3t} \\&{y=1+4t}.}$
+
+C. $\heva{&{x=3-3t} \\&{y=4-3t}.}$
+
+D. $\heva{&{x=1+3t} \\&{y=-1+4t}.}$
+
+# Lời giải
+
+Đường thẳng đi qua hai điểm $M\left(1;-1\right)$, $N\left(4;3\right)$ có một véc-tơ chỉ phương $\overrightarrow{MN}=\left(3;\; 4\right)$.
+Phương trình tham số của đường thẳng qua $M\left(1;-1\right)$, $N\left(4;3\right)$ là $\heva{&{x=1+3t} \\&{y=-1+4t}.}$
+
+---
+id: phuong_trinh_duong_thang_032
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình tổng quát của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình tổng quát
+  - vectơ pháp tuyến
+---
+
+# Đề bài
+
+Phương trình tổng quát của đường thẳng đi qua $A\left(1;\;-2\right)$ và nhận $\overrightarrow{n}=\left(-1;\; 2\right)$ làm véc-tơ pháp tuyến có phương trình là
+A. $-x+2y=0$
+
+B. $x+2y+4=0$
+
+C. $x-2y-5=0$
+
+D. $x-2y+4=0$
+
+# Lời giải
+
+Phương trình đường thẳng là $-1\left(x-1\right)+2\left(y+2\right)=0$ hay $x-2y-5=0$.
+
+---
+id: phuong_trinh_duong_thang_033
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình tổng quát của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - phương trình tổng quát
+  - vectơ pháp tuyến
+---
+
+# Đề bài
+
+Đường thẳng đi qua điểm $A\left(1;-2\right)$ và nhận $\overrightarrow{n}=\left(-2;4\right)$ làm véc-tơ pháp tuyến có phương trình
+A. $x+2 y+4=0$
+
+B. $x-2 y+4=0$
+
+C. $x-2 y-5=0$
+
+D. $-2 x+4 y=0$
+
+# Lời giải
+
+Đường thẳng đi qua điểm $A\left(1;-2\right)$ và nhận $\overrightarrow{n}=\left(-2;4\right)$ làm véc-tơ pháp tuyến có phương trình là $-2\left(x-1\right)+4\left(y+2\right)=0$ $\Leftrightarrow-2x+4y+10=0$ $\Leftrightarrow x-2y-5=0$.
+
+---
+id: phuong_trinh_duong_thang_034
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình tham số của đường thẳng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - phương trình tham số
+  - vectơ chỉ phương
+---
+
+# Đề bài
+
+Đường thẳng $d$ qua $A(1; 1)$ và có véctơ chỉ phương $\overrightarrow{u}=(2; 3)$ có phương trình tham số là
+A. $\heva{&x=1-t \\	&y=3-t.}$
+
+B. $\heva{&x=1+2t \\&y=1+3t.}$
+
+C. $\heva{&x=2+t \\&y=3+t.}$
+
+D. $\heva{&x=2t \\&y=3t.}$
+
+# Lời giải
+
+Đường thẳng $d$ qua $A(1; 1)$ và có véc-tơ chỉ phương $\overrightarrow{u}=(2; 3)$ có phương trình tham số là
+$$
+\heva{&x=1+2t \\&y=1+3t.}
+$$
+
+---
+id: phuong_trinh_duong_thang_035
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Kiểm tra phương trình tổng quát đường thẳng
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Đúng
+tags:
+  - phương trình tổng quát
+  - vectơ pháp tuyến
+  - vectơ chỉ phương
+  - song song trục tọa độ
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\Delta$ qua điểm $A(-2;1)$ và có véc-tơ pháp tuyến $\overrightarrow{n}=(3;5)$, khi đó phương trình tổng quát của $\Delta$ là $3x+5y+1=0$
+
+b) Đúng/Sai: $\Delta$ qua điểm $M(4;3)$ và có véc-tơ chỉ phương $\overrightarrow{u>(6;1)}$, khi đó phương trình tổng quát của $\Delta$ là $-x+6y-14=0$
+
+c) Đúng/Sai: $\Delta$ qua điểm $H(2;-2)$ và $K(-5;-1)$, khi đó phương trình tổng quát của $\Delta$ là $x+7y+12=0$
+
+d) Đúng/Sai: $\Delta$ qua $M(-2,-3)$ và $\Delta \parallel Oy$, khi đó phương trình tổng quát của $\Delta$ là $x+2=0$
+
+# Lời giải
+
+a) $\Delta$ qua $A(-2;1)$ và véc-tơ pháp tuyến $\overrightarrow{n}=(3;5)$.
+$$
+\Rightarrow \Delta\colon 3(x+2)+5(y-1)=0\Leftrightarrow \Delta:3x+5y+1=0.
+$$
+
+b) Vì $\Delta$ có véc-tơ chỉ phương $\overrightarrow{u}=(6;1)$ nên véc-tơ pháp tuyến của $\Delta$ là $\overrightarrow{n}=(-1;6)$.
+$\Delta$ qua $M(4;3)$ và véc-tơ pháp tuyến $\overrightarrow{n}=(-1;6)$.
+$$
+\Rightarrow \Delta\colon -1(x-4)+6(y-3)=0\Leftrightarrow \Delta:-x+6y-14=0.
+$$
+
+c) Vì $\Delta$ có véc-tơ chỉ phương $\overrightarrow{HK}=(-7;1)$ nên véc-tơ pháp tuyến của $\Delta$ là $\overrightarrow{n}=(1;7)$. $\Delta$ qua $H(2;-2)$ và véc-tơ pháp tuyến $\overrightarrow{n}=(1;7)$.
+$$
+\Rightarrow \Delta\colon 1(x-2)+7(y+2)=0\Leftrightarrow \Delta\colon x+7y+12=0.
+$$
+
+d) Qua $M(-2,-3)$ và $\Delta \parallel Oy$ $M(-2,-3)\in \Delta$. Vì $\Delta \parallel Oy\Rightarrow$ véc-tơ pháp tuyến của $\Delta$ là $\overrightarrow{n_{\Delta}}=\overrightarrow{i}=(1,0)$.
+Phương trình tổng quát của $\Delta\colon 1(x+2)+0(y+3)=0\Leftrightarrow x+2=0$.
+
+---
+id: phuong_trinh_duong_thang_036
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Kiểm tra phương trình tham số và tổng quát
+muc_do:
+  - NB
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - hệ số góc
+  - vuông góc
+  - phương trình tham số
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $\Delta$ đi qua $B(3;-2)$ và vuông góc với đường thẳng $MN$ biết $M(0;2),N(1;-3)$, khi đó phương trình tổng quát của $\Delta$ là $x-5y-13=0$
+
+b) Đúng/Sai: $d$ qua điểm $M(3;-3)$ và có hệ số góc $k=5$, khi đó phương trình tổng quát của $d$ là $y=5x-18$
+
+c) Đúng/Sai: $d$ có phương trình tham số $\heva{&{x=2-t} \\	&{y=t}}$, khi đó phương trình tổng quát của $d$ là $x+y+2=0$
+
+d) Đúng/Sai: $\Delta$ qua $A(3;-1)$ và có véc-tơ chỉ phương $\overrightarrow{u}=(-2;3)$, khi đó phương trình tham số của $\Delta$ là $\heva{&{x=3-2t} \\	&{y=-1+3t}}$
+
+# Lời giải
+
+a) Đường thẳng $\Delta$ có một véc-tơ pháp tuyến là $\overrightarrow{n}=\overrightarrow{MN}=(1;-5)$.
+Phương trình tổng quát $\Delta$ là $1(x-3)-5(y+2)=0$ hay $x-5y-13=0$.
+
+b) Phương trình tổng quát của $d$ là $y=5(x-3)-3$ hay $y=5x-18$.
+
+c) Đường thẳng $d$ qua điểm $A(2;0)$, có véc-tơ chỉ phương $\overrightarrow{u}=(-1;1)$ nên nhận $\overrightarrow{n}=(1;1)$ làm véc-tơ pháp tuyến.
+Vậy phương trình tổng quát của $d$ là $1(x-2)+1(y-0)=0$ hay $x+y-2=0$.
+
+d) Đường thẳng $\Delta$ có phương trình tham số là $\heva{&{x=3-2t} \\	&{y=-1+3t}.}$
+
+---
+id: phuong_trinh_duong_thang_037
+
+lop: 10
+chu_de: Phương trình đường thẳng
+dang: Lập phương trình đường thẳng qua các yếu tố hình học
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - qua hai điểm
+  - đường trung trực
+  - phương trình tổng quát
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Phương trình tham số của đường thẳng $AB$ biết $A(3;1),B(-1;3)$ là $\heva{&{x=3+t} \\	&{y=1-2t}}$
+
+b) Đúng/Sai: Phương trình tham số của đường thẳng $\Delta$ qua $M(-1;7)$ và song song với trục $Ox$ là $\heva{&{x=-1} \\	&{y=7+t}}$
+
+c) Đúng/Sai: $\Delta$ là đường trung trực của đoạn thẳng $AB$ với $A(3;1),B(-3;5)$, khi đó phương trình tham số của đường thẳng $\Delta$ là $\heva{&{x=2t} \\&{y=3+3t}}$
+
+d) Đúng/Sai: Phương trình tổng quát của $\Delta\colon \heva{&{x=-3} \\&{y=6-2t}}(t\in \mathbb{R})$ là $x+3=0$
+
+# Lời giải
+
+a) Ta có $\overrightarrow{AB}=(-4;2)=-2\overrightarrow{u}$ với $\overrightarrow{u}=(2;-1)$ là một véc-tơ chỉ phương của đường thẳng $AB$.
+Phương trình tham số $AB\colon \heva{&{x=3+2t} \\&{y=1-t}.}$
+
+b) Vì $\Delta$ song song với trục hoành $Ox$ nên $\Delta$ nhận véc-tơ $\overrightarrow{i}=(1;0)$ làm véc-tơ chỉ phương.
+Vậy phương trình tham số của $\Delta$ là $\heva{&{x=-1+t} \\ &{y=7}.}$
+
+c) Đường thẳng $\Delta$ qua trung điểm $I(0;3)$ của đoạn $AB$, đồng thời nhận $\overrightarrow{AB}(-6;4)$ làm véc-tơ pháp tuyến, vì vậy $\Delta$ nhận $\overrightarrow{u}=(2;3)$ làm véc-tơ chỉ phương.
+Vậy phương trình tham số của $\Delta$ là $\heva{&{x=2t} \\ &{y=3+3t}.}$
+
+d) $\Delta\colon \heva{&{x=-3} \\&{y=6-2t}} (t\in \mathbb{R})$ có $\heva{&M(-3;6)\in \Delta\\&\overrightarrow{u_{\Delta}}=(0;-2).}$
+Suy ra, véc-tơ pháp tuyến của $\Delta$ là $\overrightarrow{n_{\Delta}}=(2;0)$. Vậy phương trình tổng quát $\Delta\colon 2(x+3)+0(y-6)=0\Leftrightarrow x+3=0$.
+
+---
+id: phuong_trinh_duong_thang_038
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Phương trình đường thẳng
+muc_do:
+  - TH
+  - TH
+  - TH
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Đúng
+tags:
+  - phương trình tổng quát
+  - phương trình tham số
+  - hệ số góc
+  - đường thẳng song song
+  - đường thẳng vuông góc
+---
+
+# Đề bài
+
+Các mệnh đề sau đúng hay sai?
+
+a) $\Delta$ qua $A(-2;4)$ và song song với đường thẳng $d\colon 3x-1=0$, khi đó phương trình tổng quát của $\Delta$ là $x+2=0$
+
+b) $\Delta$ qua $B(3;3)$ và vuông góc đường thẳng $d\colon x-2y+2=0$, khi đó phương trình tham số của $\Delta$ là $\Delta\colon \heva{&{x=3-2t} \\ &{y=3+t}}$
+
+c) $\Delta$ đi qua điểm $E(-1;2)$ và có hệ số góc $k=\dfrac{1}{2}$, khi đó phương trình tổng quát của $\Delta$ là $\dfrac{1}{2} x-y+\dfrac{5}{2}=0$
+
+d) $\Delta$ qua $A(-1;2)$ và song song với đường thẳng $5x+1=0$, khi đó phương trình tham số của $\Delta$ là $\heva{&{x=-1} \\&{y=2-5t}}$
+
+# Lời giải
+
+a) Đúng. $\Delta$ song song với đường thẳng $d\colon 3x-1=0$ nên có một véc-tơ pháp tuyến là $\overrightarrow{n}=(3;0)$, một véc-tơ chỉ phương là $\overrightarrow{u}=(0;3)$.
+Phương trình tổng quát $\Delta\colon 3(x+2)+0(y-4)=0$ hay $x+2=0$.
+
+b) Sai. $\Delta$ vuông góc với đường thẳng $d\colon x-2y+2=0$ nên $\Delta$ có một véc-tơ chỉ phương $\overrightarrow{u}=(1;-2)$ và một véc-tơ pháp tuyến $\overrightarrow{n}=(2;1)$.
+Phương trình tham số $\Delta\colon \heva{&{x=3+t} \\&{y=3-2t}.}$
+
+c) Đúng. $\Delta$ đi qua điểm $E(-1;2)$ và có hệ số góc $k=\dfrac{1}{2}$
+$$
+\Rightarrow \Delta\colon y=\dfrac{1}{2} (x+1)+2\Leftrightarrow \Delta\colon \dfrac{1}{2} x-y+\dfrac{5}{2}=0.
+$$
+
+d) Đúng. Vì $\Delta$ song song với đường thẳng $5x+1=0$ nên véc-tơ chỉ phương của $\Delta$ là $\overrightarrow{u}=(0;-5)$.
+$\Delta$ qua $A(-1;2)$ và véc-tơ chỉ phương $\overrightarrow{u}=(0;-5)$.
+$$
+\Rightarrow \Delta\colon \heva{&{x=-1} \\	&{y=2-5t}.}
+$$
+
+---
+id: phuong_trinh_duong_thang_039
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Xác định điểm liên quan đến tam giác
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -1
+tags:
+  - tam giác
+  - trọng tâm
+  - giao điểm
+  - tọa độ điểm
+---
+
+# Đề bài
+
+Cho $\triangle ABC$ có trọng tâm $G(-2;-1)$; $AB\colon 4x+y+15=0$; $AC\colon 2x+5y+3=0$. Gọi $C(x_0;y_0)$, khi đó $x_0+2y_0$ bằng bao nhiêu?
+
+# Lời giải
+
+Tọa độ điểm $A=AB\cap AC$ là nghiệm của hệ $\heva{&{4x+y+15=0} \\&{2x+5y+3=0}}\Leftrightarrow \heva{&{x=-4} \\	&{y=1}}\Rightarrow A(-4;1).$
+Ta có
+* $B\in AB\colon y=-4x-15\Rightarrow B\left(x_B;-4x_B-15\right)$.
+* $C\in AC:y=\dfrac{-2x-3}{5} \Rightarrow C\left(x_C;\dfrac{-2x_C-3}{5} \right)$.
+
+Vì $G$ là trọng tâm $\triangle ABC\Leftrightarrow \heva{&{x_A+x_B+x_C=3x_G} \\ &{y_A+y_B+y_C=3y_G}}\Leftrightarrow \heva{&{-4+x_B+x_C=3(-2)} \\ &{-1-4x_B-15+\dfrac{-2x_C-3}{5}=-3}}\\\Leftrightarrow \heva{&{x_B=-3} \\&{x_C=1}}\Rightarrow B(-3;-3),C(1;-1)$.
+Suy ra, $x_0=1$ và $y_0=-1$ do đó, $x_0+2y_0=1-2=-1$.
+
+---
+id: phuong_trinh_duong_thang_040
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tính diện tích tam giác
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 10
+tags:
+  - diện tích tam giác
+  - trung điểm
+  - tọa độ điểm
+  - véc-tơ
+---
+
+# Đề bài
+
+Cho $\triangle ABC$ có trung điểm cạnh $BC$ là $M(-1,-1)$; $AB\colon x+y-2=0$; $AC\colon 2x+6y+3=0$. Tính diện tích $ABC$.
+
+# Lời giải
+
+Tọa độ điểm $A=AB\cap AC$ là nghiệm của hệ $\left\{\begin{array}{l} {x+y-2=0} \\ {2x+6y+3=0} \end{array}\Leftrightarrow \left\{\begin{array}{l} {x=\dfrac{15}{4}} \\ {y=\dfrac{-7}{4}} \end{array}\Rightarrow A\left(\dfrac{15}{4};\dfrac{-7}{4} \right).\right. \right.$ 
+Ta có
+* $B\in AB\colon y=-x+2\Rightarrow B\left(x_B;-x_B+2\right)$.
+* $C\in AC\colon y=\dfrac{-2x-3}{6} \Rightarrow C\left(x_c;\dfrac{-2x_c-3}{6} \right)$.
+
+Vì $M$ là trung điểm của $BC\Leftrightarrow \left\{\begin{array}{l} {x_B+x_C=2x_M} \\ {y_B+y_C=2y_M} \end{array}\Leftrightarrow \left\{\begin{array}{l} {x_B+x_C=-2} \\ {-x_B+2+\dfrac{-2x_C-3}{6}=-2} \end{array}\right. \right.$
+$$
+\Leftrightarrow \left\{\begin{array}{l} {\begin{array}{l} {x_B+x_C=-26} \\ {x_B-2x_C=-21} \end{array}} \end{array}\Leftrightarrow \left\{\begin{array}{l} {\begin{array}{l} {x_B=\dfrac{25}{4}} \\ {x_C=\dfrac{-33}{4}} \end{array}} \end{array}\Rightarrow B\left(\dfrac{25}{4};\dfrac{-17}{4} \right),C\left(\dfrac{-33}{4};\dfrac{9}{4} \right).\right. \right.
+$$
+Ta có $\overrightarrow{AB}=\left(\dfrac{5}{2};-\dfrac{5}{2}\right)$ và $\overrightarrow{AC}=\left(-12;4\right)$.
+Khi đó, diện tích $ABC$ là $S_{ABC}=\dfrac{1}{2}\cdot \left|\dfrac{5}{2}\cdot 4-\left(-\dfrac{5}{2}\right)\cdot (-12)\right|=10$.
+
+---
+id: phuong_trinh_duong_thang_041
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Viết phương trình đường cao
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -3
+tags:
+  - đường cao
+  - phương trình tổng quát
+  - véc-tơ pháp tuyến
+  - tam giác
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho $\triangle ABC$ có $A(1;1),B(0;-2),C(4;2)$. Phương trình tổng quát của đường cao $AH$ có dạng $x+by+c=0$. Khi đó $b+2c$ bằng bao nhiêu?
+
+# Lời giải
+
+Đường thẳng $AH$ qua $A(1;1)$ và véc-tơ pháp tuyến $\vec{n}=\dfrac{1}{4} \overrightarrow{BC}=(1;1)$
+$$
+\Rightarrow AH\colon 1(x-1)+1(y-1)=0\Leftrightarrow AH\colon x+y-2=0.
+$$
+Vậy $b=1$ và $c=-2$ nên $b+2c=1-4=-3$.
+
+---
+id: phuong_trinh_duong_thang_042
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Viết phương trình đường trung trực
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - đường trung trực
+  - đường trung bình
+  - véc-tơ pháp tuyến
+  - hệ số góc
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho tam giác $ABC$ biết trung điểm các cạnh $AB,BC$, $CA$ lần lượt là $M(-1;-1),N(1;9),P(9;1)$. Phương trình tổng quát của đường trung trực của đoạn thẳng $AB$ có dạng $y=kx+b$. Khi đó $k$ bằng bao nhiêu?
+
+# Lời giải
+
+\begin{tikzpicture}
+	\coordinate (A) at (0,3);
+	\coordinate (B) at (-2,0);
+	\coordinate (C) at (3,0);
+	\coordinate [label=left:$M$](M) at ($(A)!0.5!(B)$);
+	\coordinate [label=below:$N$](N) at ($(C)!0.5!(B)$);
+	\coordinate [label=right:$P$](P) at ($(A)!0.5!(C)$);
+	\draw(A)--(B)--(C)--cycle (M)--(N)--(P)--(M);
+	\foreach \i/\g in {A/90,B/-90,C/-90}{\draw[fill=white](\i) circle (1.5pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+\end{tikzpicture}
+
+Vì $d$ là đường trung trực cạnh $AB$ nên $d$ vuông góc với $NP$
+$\Rightarrow$ véc-tơ pháp tuyến của $d$ là $\overrightarrow{u}=\dfrac{1}{8} \overrightarrow{NP}=(1;-1)$.
+Ta có $d$ qua $M(-1;-1)$ và có véc-tơ pháp tuyến $\overrightarrow{u}=(1;-1)$.
+$$
+\Rightarrow d\colon 1(x+1)-1(y+1)=0\Leftrightarrow d\colon x-y=0.
+$$
+Khi đó, $y=x$ suy ra $k=1$.
+
+---
+id: phuong_trinh_duong_thang_043
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Tìm điểm đối xứng qua đường thẳng
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: -4
+tags:
+  - điểm đối xứng
+  - hình chiếu vuông góc
+  - trung điểm
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho đường thẳng $d\colon \heva{&{x=-2-2t} \\ &{y=1+2t}}$ và điểm $M(3;1)$. Xác định tung độ $M'$ đối xứng với $M$ qua đường thẳng $d$
+
+# Lời giải
+
+Ta có $d\colon\heva{&{x=-2-2t} \\&{y=1+2t}}\Rightarrow d\colon x+y+1=0$.
+Phương trình đường thẳng $MI$ là $x-y-2=0$.
+Toạ độ toạ hình chiếu $I$ của điểm $M$ là nghiệm hệ phương trình
+$$
+\left\{\begin{array}{l} {x+y=-1} \\ {x-y=2} \end{array}\Leftrightarrow \left\{\begin{array}{l} {x=\dfrac{1}{2}} \\ {y=-\dfrac{3}{2}} \end{array}\Rightarrow I\left(\dfrac{1}{2};-\dfrac{3}{2} \right).\right. \right.
+$$
+Vì $M'$ đối xứng với $M$ qua đường thẳng $d$ nên $I$ là trung điểm của $MM'$
+$$
+\Rightarrow \left\{\begin{array}{l} {x_{M'}=2x_I-x_M=-2} \\ {y_{M'}=2y_I-y_M=-4} \end{array}\Rightarrow M'(-2;-4)\right..
+$$
+Suy ra tung độ $M'$ là $-4$.
+
+---
+id: phuong_trinh_duong_thang_044
+lop: 10
+chu_de: Phương pháp tọa độ trong mặt phẳng
+dang: Viết phương trình đường thẳng theo góc
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - góc giữa hai đường thẳng
+  - véc-tơ pháp tuyến
+  - số phương trình
+---
+
+# Đề bài
+
+Trong mặt phẳng tọa độ $Oxy$, cho đường thẳng $(d)$ có phương trình $x-2y+5=0$. Gọi $\Delta$ là phương trình đường thẳng qua $M(2;1)$ và tạo với $(d)$ một góc $45^{\circ}$. Số phương trình $\Delta$ thỏa điều kiện là
+
+# Lời giải
+
+Gọi $\Delta$ là đường thẳng cần tìm; $\overrightarrow{n}=(A,B)$ là véc-tơ pháp tuyến của $\Delta \left(A^2+B^2\ne 0\right)$.
+Để $\Delta$ tạo với $(d)$ một góc $45^{\circ}$ thì
+$$
+\cos 45^{\circ}=\dfrac{|A-2B|}{\sqrt{A^2+B^2} \cdot \sqrt{5}}=\dfrac{1}{\sqrt{2}} \Leftrightarrow 2(A-2B)^2=5\left(A^2+B^2\right)\Leftrightarrow \left[\begin{array}{l} {A=-3B} \\ {B=3A} .\end{array}\right.
+$$
+* Với $A=-3B$, chọn $B=-1\Rightarrow A=3$.
+Khi đó $\Delta$ qua $M(2;1)$ và véc-tơ pháp tuyến $\overrightarrow{n}=(3;-1)$.
+$$
+\Rightarrow \Delta\colon 3(x-2)-1(y-1)=0\Leftrightarrow \Delta\colon 3x-y-5=0.
+$$
+* Với $B=3A$, chọn $A=1\Rightarrow B=3$.
+Khi đó $\Delta$ qua $M(2;1)$ và véc-tơ pháp tuyến $\overrightarrow{n}=(1;3)$.
+$$
+\Rightarrow \Delta\colon 1(x-2)+3(y-1)=0\Leftrightarrow \Delta\colon x+3y-5=0.
+$$
