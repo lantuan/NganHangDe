@@ -1,0 +1,1620 @@
+---
+id: hamsobachai_001
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Nhận dạng đồ thị hàm số bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đồ thị
+  - hàm số bậc hai
+---
+
+# Đề bài
+
+Hàm số nào sau đây có đồ thị như hình dưới đây?
+
+A. $y=x^2-3x+1$
+
+B. $y=-x^2+3x-1$
+
+C. $y=-2x^2+3x-1$
+
+D. $y=2x^2-3x+1$
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-1.1,0)--(2.5,0) node[below left] {$x$};
+	\draw[->] (0,-1.1)--(0,3.1) node[below left] {$y$};
+	\draw (0,0) node [below left] {$O$};
+	\foreach \x/\nx in {1/1}
+	\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+	\foreach \y/\ny in {1/1}
+	\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+	\begin{scope}
+		\clip (-1,-1) rectangle (4,3);
+		\draw[samples=200,domain=-1:2,smooth,variable=\x] plot (\x,{2*(\x)^2+-3*(\x)+1});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+Bề lõm của parabol hướng lên trên suy ra $a>0$, nên loại đáp án $y=-x^2+3x-1$ và $y=-2x^2+3x-1$. Đồ thị đi qua điểm $(1; 0)$ nên chọn $y=2x^2-3x+1$.
+
+---
+id: hamsobachai_002
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Định nghĩa và tính chất hàm số bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: B
+tags:
+  - parabol
+  - hàm số bậc hai
+---
+
+# Đề bài
+
+Cho hàm số $y=x^2-2x-3$. Khẳng định nào sau đây là đúng?
+
+A. Đồ thị hàm số là một đường thẳng
+
+B. Đồ thị hàm số là một Parabol
+
+C. Hàm số đồng biến trên $\mathbb{R}$
+
+D. Hàm số nghịch biến trên $\mathbb{R}$
+
+# Lời giải
+
+Do hàm số $y=x^2-2x-3$ là hàm số bậc hai nên đồ thị hàm số là một Parabol.
+
+---
+id: hamsobachai_003
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Nhận dạng bảng biến thiên hàm số bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - bảng biến thiên
+  - đỉnh parabol
+---
+
+# Đề bài
+
+Hàm số nào có bảng biến thiên như hình đưới đây?
+
+A. $y=-x^2+4x-3$
+
+B. $y=2x^2-8x+7$
+
+C. $y=x^2-4x+5$
+
+D. $y=\dfrac{1}{2}x^2-2x+1$
+
+\begin{tikzpicture}
+	\tkzTabInit[espcl=2.5,lgt=1.5]
+	{$x$/0.7,$y$/2.1}
+	{$-\infty$,$2$,$+\infty$}
+	\tkzTabVar{+/$+\infty$,-/$1$,+/$+\infty$}
+\end{tikzpicture}
+
+# Lời giải
+
+Từ bảng biến thiên ta loại $y=-x^2+4x-3$.
+Gọi $A\left(x_A ; y_A\right)$ là đỉnh của parabol, ta có:
+$\heva{&x_A=2\\&y_A=1}$.
+Suy ra ta loại $y=2 x^2-8 x+7$ và $y=\dfrac{1}{2}x^2-2x+1$.
+
+---
+id: hamsobachai_004
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Sự biến thiên của hàm số bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đồng biến
+  - bảng biến thiên
+---
+
+# Đề bài
+
+Hàm số $y=x^2-4x+11$ đồng biến trên khoảng nào trong các khoảng sau đây?
+
+A. $(-2;+\infty)$
+
+B. $(-\infty;+\infty)$
+
+C. $(2;+\infty)$
+
+D. $(-\infty;2)$
+
+# Lời giải
+
+Ta có bảng biến thiên
+\begin{tikzpicture}
+	\tkzTabInit[espcl=2.5,lgt=1.5]
+	{$x$/0.7,$y$/2.1}
+	{$-\infty$,$2$,$+\infty$}
+	\tkzTabVar{+/$+\infty$,-/$7$,+/$+\infty$}
+\end{tikzpicture}
+Từ bảng biến thiên ta thấy, hàm số đồng biến trên khoảng $(2;+\infty)$.
+
+---
+id: hamsobachai_005
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết trục đối xứng và điểm đi qua
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - xác định hệ số
+  - trục đối xứng
+---
+
+# Đề bài
+
+Xác định parabol $(P)\colon y=2x^2+bx+c$, biết $(P)$ qua điểm $M(0;4)$ và có trục đối xứng $x=1$.
+
+A. $y=2x^2-4x+4$
+
+B. $y=2x^2+4x-3$
+
+C. $y=2x^2-3x+4$
+
+D. $y=2x^2+x+4$
+
+# Lời giải
+
+Từ giả thiết ta có hệ phương trình $\heva{&4=c\\&\dfrac{-b}{4}=1}\Leftrightarrow\heva{&b=-4\\&c=4}\Rightarrow(P)\colon y=2x^2-4x+4$.
+
+---
+id: hamsobachai_006
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết đỉnh và điểm đi qua
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - hoành độ đỉnh
+  - điểm thuộc đồ thị
+---
+
+# Đề bài
+
+Biết rằng $(P)\colon y=ax^2-4x+c$ có hoành độ đỉnh bằng $-3$ và đi qua điểm $M(-2;1)$. Tính tổng $S=a+c$.
+
+A. $S=5$
+
+B. $S=-5$
+
+C. $S=4$
+
+D. $S=1$
+
+# Lời giải
+
+Ta có:
+$\dfrac{-b}{2a}=-3\Leftrightarrow\dfrac{2}{a}=-3\Leftrightarrow a=-\dfrac{2}{3}$ và $4a+8+c=1 \Leftrightarrow c=-\dfrac{13}{3}$.
+Vậy $S=a+c=-5$.
+
+---
+id: hamsobachai_007
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết tọa độ đỉnh
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: B
+tags:
+  - tọa độ đỉnh
+  - hệ phương trình
+---
+
+# Đề bài
+
+Biết Parabol $y=ax^2+bx-4$ có đỉnh $I(-1;-5)$. Tìm $a$ và $b$.
+
+A. $a=1;b=-2$
+
+B. $a=1;b=2$
+
+C. $a=0;b=-3$
+
+D. $a=-1;b=2$
+
+# Lời giải
+
+Ta có $(P)$ nhận đường thẳng $x=-1$ làm trục đối xứng nên $-\dfrac{b}{2a}=-1\Rightarrow b=2 a$.
+$(P)$ đi qua điểm $I(-1;-5)$ nên $a-b-4=-5 \Rightarrow a-b=-1$.
+Giải hệ phương trình $\heva{&b=2a\\&a-b=-1}\Leftrightarrow\heva{&a=1\\&b=2.}$
+
+---
+id: hamsobachai_008
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Bài toán tương giao liên quan đến tham số m
+muc_do:
+  - VD
+loai: trac_nghiem
+dap_an: D
+tags:
+  - tương giao
+  - trục hoành
+  - hai điểm phân biệt
+---
+
+# Đề bài
+
+Tìm tất cả các giá trị của tham số $m$ để đồ thị hàm số $y=x^2+2 m x+m^2-3 m+1$ cắt trục hoành tại hai điểm phân biệt.
+
+A. $m<\dfrac{1}{3}$
+
+B. $m=-1$
+
+C. $m<0$
+
+D. $m>\dfrac{1}{3}$
+
+# Lời giải
+
+Đồ thị hàm số $y=x^2+2 m x+m^2-3 m+1$ cắt trục hoành tại hai điểm phân biệt
+$\Leftrightarrow x^2+2 m x+m^2-3 m+1=0$ có hai nghiệm phân biệt
+$\Leftrightarrow \Delta^{\prime}=3 m-1>0 \Leftrightarrow m>\dfrac{1}{3}$.
+
+---
+id: hamsobachai_009
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng thực tế của hàm số bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - ứng dụng thực tế
+  - quỹ đạo parabol
+---
+
+# Đề bài
+
+Khi quả bóng được đá lên, nó đạt độ cao nào đó rồi rơi xuống đất. Biết rằng quỹ đạo của quả bóng là một cung parabol trong mặt phẳng với hệ tọa độ $Oth$, trong đó $t$ là thời gian (tính bằng giây), kể từ khi quả bóng được đá lên; $h$ là độ cao (tính bằng mét) của quả bóng. Giả thiết rằng quả bóng được đá lên từ độ cao $1{,}2$m. Sau $1$ giây nó đạt độ cao $8{,}5$m và sau $2$ giây sau khi đá lên nó đạt độ cao $6$m. Hãy tìm hàm số bậc hai biểu thị độ cao $h$ theo thời gian $t$ có phần đồ thị trùng với quỹ đạo của quả bóng trong tình huống trên.
+
+A. $y=4{,}9t^2+12{,}2t+1{,}2$
+
+B. $y=-4{,}9t^2-12{,}2t+1{,}2$
+
+C. $y=-4{,}9t^2+12{,}2t-1{,}2$
+
+D. $y=-4{,}9t^2+12{,}2t+1{,}2$
+
+# Lời giải
+
+Graphic: Không có hình vẽ đính kèm trong \immini ban đầu.
+Gọi phương trình parabol có dạng: $y=at^2+bt+c,(a\neq0)$. Do quỹ đạo quả bóng đi qua các điểm $(0;1{,}2)$,$(1;8{,}5)$,$(2;6)$ nên ta có hệ phương trình: $\heva{&c=1{,}2\\&a+b+c=8{,}5\\&4 a+2 b+c=6}\Leftrightarrow \heva{&a=-4{,}9\\&b=12{,}2\\&c=1{,}2.}$
+Vậy $y=-4{,}9 t^2+12{,}2t + 1{,}2.$
+
+---
+id: hamsobachai_010
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng thực tế của hàm số bậc hai
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - chiều cao cổng
+  - ứng dụng thực tế
+---
+
+# Đề bài
+
+Một chiếc cổng hình parapol dạng $y=-x^2$ có chiều rộng $d=8$m. Hãy tính chiều cao $h$ của cổng.
+
+A. $h=9$m
+
+B. $h=8$m
+
+C. $h=16$m
+
+D. $h=5$m
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick, scale=0.8]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-3.1,0)--(3.1,0) node[below left] {$x$};
+	\draw[->] (0,-4.1)--(0,1.1) node[below left] {$y$};
+	\draw[dashed] (-2,-4) -- (2,-4) node[above left] {$d=8$m};
+	\draw (0,-1) node[above left] {h};
+	\draw (0,0) node [below left] {$O$};
+	\foreach \x/\nx in {-2/-2,-1/-1,1/1,2/2}
+	\draw[thin] (\x,1pt)--(\x,-1pt) ;
+	\foreach \y/\ny in {-1/-1,-2/-2,-3/-3,-4/-4}
+	\draw[thin] (1pt,\y)--(-1pt,\y) ;
+	\begin{scope}
+		\clip (-3,-4) rectangle (3,1);
+		\draw[samples=200,domain=-3:3,smooth,variable=\x] plot (\x,{-1*(\x)^2+0*(\x)+0});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+Dựa vào hệ trục tọa độ hình minh họa $d=8$m suy ra đồ thị hàm số đi qua điểm có tọa độ $(4; h)$ Suy ra $h=-4^2=-16$. Mà thực tế $h$ là chiều cao cổng nên $h=16$m.
+
+---
+id: hamsobachai_011
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai dựa trên trục đối xứng và điểm thuộc đồ thị
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - hệ phương trình
+  - trục đối xứng
+---
+
+# Đề bài
+
+Cho parabol $y=a x^2+b x+4$ có trục đối xứng là đường thẳng $x=\dfrac{1}{3}$ và đi qua điểm $A(1 ; 3)$. Tổng giá trị $a+2 b$ là
+
+A. $-\dfrac{1}{2}$
+
+B. $\dfrac{1}{2}$
+
+C. $-1$
+
+D. $1$
+
+# Lời giải
+
+Ta có $\heva{&-\dfrac{b}{2 a}=\dfrac{1}{3}\\&A(1 ; 3) \in(P)}\Leftrightarrow \heva{&2 a+3 b=0\\&a+b+4=3}\Leftrightarrow\heva{&2 a+3 b=0\\&a+b=-1}\Leftrightarrow\heva{&a=-3\\&b=2.}$
+Vậy $a+2 b=-3+2 \cdot 2=1$.
+
+---
+id: hamsobachai_012
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết giá trị lớn nhất/nhỏ nhất
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - giá trị lớn nhất
+  - tọa độ đỉnh
+---
+
+# Đề bài
+
+Xác định parabol $(P)\colon y=a x^2+b x+c$ biết $(P)$ có giá trị lớn nhất bằng $3$ tại $x=2$ và cắt trục $O x$ tại điểm có hoành độ bằng $1$.
+
+A. $y=-x^2+4x-3$
+
+B. $y=x^2-4x+7$
+
+C. $y=2x^2-12x+20$
+
+D. $y=-3x^2+12x-9$
+
+# Lời giải
+
+Vì $(P)$ có giá trị lớn nhất bằng $3$ tại $x=2$ nên $(2 ; 3)$ là tọa độ đỉnh của parabol và $a<0$.
+Do đó $\heva{&\dfrac{-b}{2 a}=2\\&4 a+2b+c=3}$.
+Vì $(P)$ cắt trục $O x$ tại điểm có hoành độ bằng $1$ nên $a+b+c=0$.
+Do đó $a=-3$, $b=12$, $c=-9$.
+
+---
+id: hamsobachai_013
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Đọc hiểu đồ thị hàm số bậc hai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - đồ thị
+  - trục đối xứng
+  - đỉnh parabol
+---
+
+# Đề bài
+
+Cho đồ thị hàm số bậc hai $y=f(x)$ có dạng như hình sau
+
+a) Đúng/Sai: Trục đối xứng của đồ thị là đường thẳng $x=-2$
+
+b) Đúng/Sai: Đỉnh $I$ của đồ thị hàm số có tọa độ là $(2 ;-2)$
+
+c) Đúng/Sai: Đồ thị hàm số đi qua điểm $A(0 ; 6)$
+
+d) Đúng/Sai: Hàm số đã cho là $y=2 x^2-2 x+6$
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick, scale=0.8]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-1.1,0)--(5.1,0) node[below left] {$x$};
+	\draw[->] (0,-2.3)--(0,6.5) node[below right] {$y$};
+	\draw (0,0) node [below left] {$O$};
+	\foreach \x/\nx in {-1/-1,1/1,2/2,3/3,4/4}
+	\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+	\foreach \y/\ny in {-2/-2,-1/-1,1/1,2/2,3/3,4/4,5/5,6/6}
+	\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+	\draw[dashed,thin](2,0)--(2,-2)--(0,-2);
+	\draw (2,-2) node [below] {$I$};
+	\begin{scope}
+		\clip (-1,-2.5) rectangle (5,6.5);
+		\draw[samples=200,domain=-1:5,smooth,variable=\x] plot (\x,{2*(\x)^2+-8*(\x)+6});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+a) Sai. Trục đối xứng của đồ thị là đường thẳng $x=2$. 
+
+b) Đúng. Đỉnh $I$ của đồ thị hàm số có tọa độ là $(2 ;-2)$.
+
+c) Đúng. Đồ thị hàm số đi qua điểm $A(0 ; 6)$.
+
+d) Sai. Do đồ thị hàm số đi qua điểm $A(0 ; 6)$ nên $a \cdot 0^2+b \cdot 0+c=6 \Rightarrow c=6$.
+Mặt khác, đồ thị có tọa độ đỉnh là $I(2 ;-2)$ nên ta có
+$$\heva{&-\dfrac { b } { 2 a } = 2\\&a \cdot 2 ^ { 2 } + b \cdot 2 + 6 = - 2}\Leftrightarrow \heva{&4 a + b = 0\\&4 a + 2 b = - 8}\Leftrightarrow \heva{&a=2\\&b=-8.}$$
+Vậy hàm số đã cho là $y=2 x^2-8 x+6$.
+
+---
+id: hamsobachai_014
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Nhận xét dấu các hệ số và tính chất đồ thị hàm số bậc hai
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - đọc đồ thị
+  - dấu hệ số
+  - xét dấu f(x)
+---
+
+# Đề bài
+
+Quan sát đồ thị hàm số bậc hai $y=f(x)$ ở hình bên. Khi đó
+
+a) Đúng/Sai: $a>0$
+
+b) Đúng/Sai: Toạ độ đỉnh $I(2 ;-1)$, trục đối xứng $x=2$
+
+c) Đúng/Sai: Đồng biến trên khoảng $(-\infty ; 2)$; Nghịch biến trên khoảng $(2 ;+\infty)$
+
+d) Đúng/Sai: $x$ thuộc các khoảng $(-\infty ; 1)$ và $(3 ;+\infty)$ thì $f(x)>0$
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-1.1,0)--(5,0) node[below left] {$x$};
+	\draw[->] (0,-1.6)--(0,4.1) node[below left] {$y$};
+	\draw (0,0) node [below left] {$O$};
+	\foreach \x/\nx in {1/1,2/2,3/3}
+	\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+	\foreach \y/\ny in {-1/-1,3/3}
+	\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+	\draw[dashed,thin](2,0)--(2,-1)--(0,-1);
+	\begin{scope}
+		\clip (-1,-1.5) rectangle (5,4);
+		\draw[samples=200,domain=-1:5,smooth,variable=\x] plot (\x,{1*(\x)^2+-4*(\x)+3});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+a) Đúng. Bề lõm quay lên nên $a>0$.
+
+b) Đúng. Toạ độ đỉnh $I(2 ;-1)$, trục đối xứng $x=2$.
+
+c) Sai. Đồng biến trên khoảng $(2 ;+\infty)$; Nghịch biến trên khoảng $(-\infty ; 2)$.
+
+d) Đúng. Vì $x$ thuộc các khoảng $(-\infty ; 1)$ và $(3 ;+\infty)$ thì $f(x)>0$.
+
+---
+id: hamsobachai_015
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xét dấu hàm số và bài toán tương giao chứa tham số m
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - xét dấu
+  - giá trị lớn nhất
+  - tương giao
+---
+
+# Đề bài
+
+Cho hàm số $y=-x^2+6x-5$. Khi đó
+
+a) Đúng/Sai: $y>0$ khi $x \in(1 ; 5)$
+
+b) Đúng/Sai: $y<0$ khi $x \in(-\infty ; 1) \cup(5 ;+\infty)$
+
+c) Đúng/Sai: Giá trị lớn nhất của hàm số bằng $3$
+
+d) Đúng/Sai: Đường thẳng $d\colon y=4 x-m$ cắt đồ thị $(P)$ tại $2$ điểm phân biệt khi $m>4$
+
+# Lời giải
+
+a) Đúng. $y>0 \Rightarrow-x^2+6 x-5>0$ khi $x \in(1 ; 5)$.
+
+b) Đúng. $y<0 \Rightarrow-x^2+6 x-5<0$ khi $x \in(-\infty ; 1) \cup(5 ;+\infty)$.
+
+c) Sai. Xét hàm số $y=f(x)=-x^2+6 x-5$, có $a<0$ nên giá trị lớn nhất của hàm số $y=-x^2+6 x-5$ là $y=f\left(-\dfrac{b}{2 a}\right)=f(3)=4$.
+
+d) Đúng. Xét phương trình hoành độ giao điểm của đường thẳng $d$ và đồ thị $(P)$ là
+$$
+-x^2+6 x-5=4 x-m \Leftrightarrow x^2-2 x+5=m .
+$$
+Xét vế trái $y=f(x)=x^2-2 x+5$, có $a>0$ suy ra $y=f\left(-\dfrac{b}{2 a}\right)=f(1)=4$ là giá trị nhỏ nhất.
+Vậy đường thẳng $d\colon y=4 x-m$ cắt đồ thị $(P)$ tại $2$ điểm phân biệt khi $m>4$.
+
+---
+id: hamsobachai_016
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Khảo sát sự biến thiên và các tính chất cơ bản
+muc_do:
+  - VD
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Đúng
+  - Đúng
+  - Sai
+tags:
+  - đỉnh parabol
+  - bảng biến thiên
+  - sự biến thiên
+---
+
+# Đề bài
+
+Cho hàm số $y=-x^2+2 x-5$. Khi đó
+
+a) Đúng/Sai: Tập xác định $D=\mathbb{R}$
+
+b) Đúng/Sai: Tọa độ đỉnh $I$ của parabol là $I(1 ;-4)$
+
+c) Đúng/Sai: Hàm số đã cho đồng biến trên khoảng $(-\infty; 1)$ và nghịch biến trên khoảng $(1 ;+\infty)$
+
+d) Đúng/Sai: Giá trị lớn nhất của hàm số là $y_{\max }=-4$, khi $x=2$
+
+# Lời giải
+
+a) Đúng. Tập xác định của hàm số là $D=\mathbb{R}$.
+
+b) Đúng. Tọa độ đỉnh $I$ của parabol
+$x_I=-\dfrac{b}{2 a}=1$, $y_I=-1^2+2.1-5=-4$ hay $I(1;-4)$.
+
+c) Đúng. Bảng biến thiên
+\begin{tikzpicture}
+	\tkzTabInit[espcl=2.5,lgt=1.5]
+	{$x$/0.7,$y$/2.1}
+	{$-\infty$,$1$,$+\infty$}
+	\tkzTabVar{-/$-\infty$,+/$-4$,-/$-\infty$}
+\end{tikzpicture}
+Kết luận:
+Hàm số đã cho đồng biến trên khoảng $(-\infty ; 1)$ và nghịch biến trên khoảng $(1 ;+\infty)$.
+
+d) Sai. Giá trị lớn nhất của hàm số là $y_{\max }=-4$, khi $x=1$.
+
+---
+id: hamsobachai_017
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết tọa độ đỉnh
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: -6
+tags:
+  - đỉnh parabol
+  - hệ số hàm số
+---
+
+# Đề bài
+
+Cho hàm số bậc hai có đồ thị là parabol $(P)\colon y=a x^2-4 x+c$ có đỉnh là $I(-2 ;-1)$. Tính $a+c$.
+
+# Lời giải
+
+Do $(P)$ có đỉnh $I(-2 ;-1)$ nên 
+$$\text{Ta có: }\heva{&\dfrac{4}{2 a}=-2\\&a \cdot(-2)^2-4(-2)+c=-1}\Leftrightarrow \heva{&a=-1\\&c=-5.}$$
+Vậy hàm số bậc hai được xác định là $y=-x^2-4 x-5$.
+Do đó $a+c = -6$.
+
+---
+id: hamsobachai_018
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng thực tế tìm cực trị của hàm số bậc hai
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 1600
+tags:
+  - toán kinh tế
+  - lợi nhuận lớn nhất
+---
+
+# Đề bài
+
+Một cửa hàng kinh doanh giày và giá để nhập một đôi giày là $40$ đô la. Theo nghiên cứu của bộ phận kinh doanh thì nếu cửa hàng bán mỗi đôi giày với giá $x$ đô la thì mỗi tháng sẽ bán được $120-x$ đôi giày. Hỏi cửa hàng bán giá bao nhiêu cho một đôi giày để có thể thu lãi cao nhất trong tháng.
+
+# Lời giải
+
+Gọi $x$ (đô la) là giá mỗi đôi giày bán ra thì số tiền lãi tương ứng là $x-40$ (đô la) Số tiền lãi thu được mỗi tháng là $f(x)=(x-40)(120-x)=-x^2+160 x-4800$.
+Đây là hàm số bậc hai với $a=-1$, $b=160$, $c=-4800 \Rightarrow-\dfrac{b}{2 a}=80$.
+Vì $a=-1<0$ nên hàm số đạt giá trị lớn nhất bằng $f(80)=-80^2+160\cdot80-4800=1600$, ứng với $x=80$.
+Vậy, để tối ưu hóa lợi nhuận, cửa hàng cần đưa ra giá bán 80 đô la mỗi đôi giày, khi đó lợi nhuận tối đa trong tháng là 1600 đô la.
+
+---
+id: hamsobachai_019
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định parabol đi qua 3 điểm
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2
+tags:
+  - đi qua 3 điểm
+  - hệ ba phương trình
+---
+
+# Đề bài
+
+Cho $(\mathrm{P})\colon y=a x^2+b x+c$. Biết đồ thị thỏa đi qua $A(0 ; 1), B(1 ; 2), C(3 ;-1)$. Tính $S = a + b + c$.
+
+# Lời giải
+
+Theo yêu cầu bài toán ta có hệ phương trình:
+$$\heva{&0 ^ { 2 } \cdot a + 0 \cdot b + c = 1\\& 1 ^ { 2 } \cdot a + 1 \cdot b + c = 2\\&3 ^ { 2 } \cdot a + 3 \cdot b + c = - 1}\Leftrightarrow \heva{&c = 1\\&a + b + c = 2\\&9 a + 3 b + c = - 1}\Leftrightarrow \heva{&a=-\frac{5}{6}\\&b=\frac{11}{6}\\&c=1.}$$
+Vậy $S = a + b + c = 2$.
+
+---
+id: hamsobachai_020
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Biện luận nghiệm phương trình giao điểm có điều kiện hoành độ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 100
+tags:
+  - nghiệm dương
+  - hệ thức vi-ét
+  - tương giao
+---
+
+# Đề bài
+
+Cho parabol $(P): y=x^2-2x+m-1$. Biết tất cả các giá trị thực của $m$ để parabol cắt $Ox$ tại hai điểm phân biệt có hoành độ dương có dạng $a<m<b$. Tính $10^{ab}$.
+
+# Lời giải
+
+Phương trình hoành độ giao điểm của $(P)$ và trục $O x$ là
+$x^2-2 x+m-1=0$ $(1)$.
+Để parabol cắt $Ox$ tại hai điểm phân biệt có hoành độ dương khi và chỉ khi (1) có hai nghiệm phân biệt dương khi và chỉ khi
+$$\heva{&\Delta^{\prime}=2-m>0\\&S=2>0\\&p=m-1>0}\Leftrightarrow\heva{&m<2\\&m>1}\Leftrightarrow 1<m<2.$$
+So sánh với dạng $a < m < b$, ta được $a = 1, b = 2$.
+Vậy $10^{ab} = 10^{1 \cdot 2} = 10^2 = 100$.
+
+---
+id: hamsobachai_021
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định đồ thị hàm số bậc hai từ hình vẽ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 399
+tags:
+  - đọc đồ thị
+  - xác định parabol
+---
+
+# Đề bài
+
+Biết phương trình của hàm số bậc hai có đồ thị hình bên. Tính $a+100b+c$.
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-1.1,0)--(4.6,0) node[below left] {$x$};
+	\draw[->] (0,-0.6)--(0,4.6) node[below left] {$y$};
+	\draw (0,0) node [below left] {$O$};
+	\foreach \x/\nx in {1/1,2/2,3/3,4/4}
+	\draw[thin] (\x,1pt)--(\x,-1pt) node [below] {$\nx$};
+	\foreach \y/\ny in {1/1,2/2,3/3,4/4}
+	\draw[thin] (1pt,\y)--(-1pt,\y) node [left] {$\ny$};
+	\draw[dashed,thin](2,0)--(2,4)--(0,4);
+	\begin{scope}
+		\clip (-1,-0.5) rectangle (4.5,4.5);
+		\draw[samples=200,domain=-1:4.5,smooth,variable=\x] plot (\x,{-1*(\x)^2+4*(\x)+0});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+Đồ thị là một parabol nên hàm số có dạng $y=a x^2+b x+c$. Ta thấy đồ thị đi qua các điểm $(0; 0),(2 ; 4)$ và $(4 ; 0)$ nên ta có
+$$\heva{&c = 0\\&4 a + 2 b + c = 4\\&1 6 a + 4 b + c = 0}\Leftrightarrow\heva{&a=-1\\&b=4\\&c=0.}$$
+Vậy $a+100b+c = -1 + 100\cdot 4+0=399$.
+
+---
+id: hamsobachai_022
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm hoành độ các giao điểm của đồ thị với hai trục tọa độ
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 2.5
+tags:
+  - giao điểm trục tung
+  - giao điểm trục hoành
+  - hoành độ giao điểm
+---
+
+# Đề bài
+
+Cho hàm số $y=2 x^2-5 x+2$ có đồ thị là parabol $(P)$. Tính tổng tất cả các hoành độ của giao điểm của đồ thị với trục tung và trục hoành.
+
+# Lời giải
+
+Từ đề ta có: $a=2, b=-5, c=2$.
+Hoành độ của đỉnh $I$ là: $x_0=\dfrac{-b}{2 a}=\dfrac{-(-5)}{2.2}=\dfrac{5}{4}\Rightarrow y_0=2\left(\dfrac{5}{4}\right)^2-5 \cdot \dfrac{5}{4}+2=-\dfrac{9}{8}$ suy ra đỉnh $I\left(\dfrac{5}{4} ;-\dfrac{9}{8}\right)$.
+Giao điểm của $(P)$ và trục $Oy$: Cho $x=0 \Rightarrow y=2$ nên $(P)$ cắt trục $O y$ tại điểm $A(0 ; 2)$, hoành độ giao điểm này bằng $0$.
+Giao điểm của $(P)$ và trục $Ox$: Xét phương trình $2 x^2-5 x+2=0 \Leftrightarrow\left[\begin{array}{l}x=2 \\ x=\dfrac{1}{2}\end{array}\right.$ nên $(P)$ cắt trục $O x$ tại hai điểm $B(2 ; 0)$ và $C\left(\dfrac{1}{2} ; 0\right)$, hoành độ các giao điểm này lần lượt là $2$ và $\dfrac{1}{2}$.
+Vậy tổng các hoành độ giao điểm là: $0+2+\dfrac{1}{2}=2{,}5$.
+
+---
+id: hamsobachai_023
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Kiểm tra điểm thuộc đồ thị hàm số bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - thuộc đồ thị
+  - thế tọa độ điểm
+---
+
+# Đề bài
+
+Đồ thị hàm số $y=x^2-2 x-3$ đi qua điểm nào sau đây?
+
+A. $N(1; 2)$
+
+B. $P(0; 2)$
+
+C. $M(1; 1)$
+
+D. $Q(3; 0)$
+
+# Lời giải
+
+Đồ thị hàm số đi qua điểm $Q(3; 0)$, vì khi thay $x=3$ ta có $y=3^2-2 \cdot 3-3=0$.
+
+---
+id: hamsobachai_024
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Sự biến thiên của hàm số bậc hai
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - nghịch biến
+  - khoảng biến thiên
+---
+
+# Đề bài
+
+Hàm số $y=x^2-8x+12$ nghịch biến trên khoảng
+
+A. $(8;+\infty)$
+
+B. $(-\infty;8)$
+
+C. $(-\infty;4)$
+
+D. $(4;+\infty)$
+
+# Lời giải
+
+Hàm số $y=x^2-8x+12$ có hệ số $a=1>0$ nên hàm số nghịch biến trên khoảng $\left(-\infty;-\dfrac{b}{2a}\right)$.
+Vì vậy hàm số đã cho nghịch biến trên $(-\infty;4)$.
+
+---
+id: hamsobachai_025
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm tọa độ đỉnh của Parabol
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - tọa độ đỉnh
+  - công thức đỉnh
+---
+
+# Đề bài
+
+Cho parabol $(P)\colon y=3x^2-2x+1$. Điểm nào sau đây là đỉnh của $(P)$?
+
+A. $I\left(\dfrac{1}{3};\dfrac{2}{3}\right)$
+
+B. $I(0;1)$
+
+C. $I\left(-\dfrac{1}{3};\dfrac{2}{3}\right)$
+
+D. $I\left(\dfrac{1}{3};-\dfrac{2}{3}\right)$
+
+# Lời giải
+
+Xét $(P)\colon y=3x^2-2x+1$, ta có $a=3$; $b=-2$; $c=1$.
+Suy ra $x=-\dfrac{b}{2a}=\dfrac{1}{3}\Rightarrow y=3\cdot\left(\dfrac{1}{3}\right)^2-2\cdot\left(\dfrac{1}{3}\right)+1=\dfrac{2}{3}$.
+Vậy đỉnh của $(P)$ là $I\left(\dfrac{1}{3};\dfrac{2}{3}\right)$.
+
+---
+id: hamsobachai_026
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm tọa độ đỉnh của Parabol
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tọa độ đỉnh
+---
+
+# Đề bài
+
+Tọa độ đỉnh $S$ của parabol $\left(P\right)\colon y=-3x^2+2x+1$ là
+
+A. $S\left( -\dfrac{2}{3}; -\dfrac{5}{3} \right)$
+
+B. $S\left( \dfrac{2}{3}; 1 \right)$
+
+C. $S\left( \dfrac{1}{3}; \dfrac{4}{3} \right)$
+
+D. $S\left( -\dfrac{1}{3}; 0 \right)$
+
+# Lời giải
+
+Parabol có tọa độ đỉnh là $S\left( -\dfrac{b}{2a}; -\dfrac{\Delta }{4a} \right)\Rightarrow S\left( \dfrac{1}{3}; \dfrac{4}{3} \right)$.
+
+---
+id: hamsobachai_027
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định phương trình trục đối xứng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: C
+tags:
+  - trục đối xứng
+---
+
+# Đề bài
+
+Parabol $\left(P\right)\colon y=2x^2-4x+3$ có trục đối xứng là đường thẳng có phương trình là
+
+A. $x=2$
+
+B. $x=-1$
+
+C. $x=1$
+
+D. $x=-2$
+
+# Lời giải
+
+Ta có $a=2$, $b=-4$, (P) có trục đối xứng là đường thẳng có phương trình $x=-\dfrac{b}{2a}=1$.
+
+---
+id: hamsobachai_028
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định phương trình trục đối xứng
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - trục đối xứng
+---
+
+# Đề bài
+
+Trục đối xứng của Parabol $(P)\colon y=2x^2+6x+3$ là đường thẳng nào sau đây?
+
+A. $x=\dfrac{3}{2} $
+
+B. $y=\dfrac{3}{2} $
+
+C. $y=-\dfrac{3}{2} $
+
+D. $x=-\dfrac{3}{2} $
+
+# Lời giải
+
+Trục đối xứng của Parabol là $x=-\dfrac{b}{2a}=-\dfrac{3}{2}$.
+
+---
+id: hamsobachai_029
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Nhận dạng hình dáng đồ thị theo dấu hệ số
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - dáng điệu đồ thị
+  - dấu hệ số
+---
+
+# Đề bài
+
+Nếu hàm số $y=ax^2+bx+c$ có $a>0$; $ b>0$ và $c<0$ thì đồ thị hàm số của nó có dạng
+
+A. \begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\tikzset{declare function={xmin=-2;xmax=1;ymin=-1.5;ymax=2;
+				f(\x)=1.81*(\x)^2+1.94*(\x)-0.5;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+		\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}
+
+B. \begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\tikzset{declare function={xmin=-1.5;xmax=1;ymin=-2.5;ymax=1;
+				f(\x)=-2.47*(\x)^2-2.52*(\x)-0.64;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+		\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}
+
+C. \begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\tikzset{declare function={xmin=-1.5;xmax=2.5;ymin=-2;ymax=2.5;
+				f(\x)=-1.3*(\x)^2+1.3*(\x)+1.6;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+		\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}
+
+D. \begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+		\tikzset{declare function={xmin=-1;xmax=2;ymin=-1;ymax=3;
+				f(\x)=1.99*(\x)^2-2.03*(\x)+1.19;
+			},
+			smooth,samples=450
+		}
+		\draw[->] (xmin,0)--(xmax,0) node[shift={(-100:7pt)},font=\normalsize]{$ x $};
+		\draw[->] (0,ymin)--(0,ymax) node[shift={(190:7pt)},font=\normalsize]{$ y $};
+		\fill (0,0) node[shift={(135:7pt)},font=\normalsize]{$ O $};
+		\clip (xmin,ymin) rectangle (xmax,ymax);
+		\draw  plot[domain=xmin:xmax] (\x, {f(\x)});
+\end{tikzpicture}
+
+# Lời giải
+
+Đồ thị hàm số $a>0$ nên bề lõm đồ thị quay lên và $c<0$ nên đồ thị cắt trục $Oy$ phía dưới $Ox $ nên ta chọn hình ở đáp án A.
+
+---
+id: hamsobachai_030
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm nghiệm bất phương trình bậc hai từ đồ thị
+muc_do:
+  - NB
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đọc đồ thị
+  - nghiệm bất phương trình
+---
+
+# Đề bài
+
+Cho hàm số bậc hai $y=f(x)$ có đồ thị như hình vẽ. Tập nghiệm của bất phương trình $f(x)>0$ là
+
+A. $(0;3)$
+
+B. $[-1;3]$
+
+C. $(-\infty;-1)\cup(3;+\infty)$
+
+D. $(-1;3)$
+
+\begin{tikzpicture}[line join=round,line cap=round, font=\footnotesize,scale=0.6,>=stealth]
+	\draw[-stealth](-1.5,0)--(4,0)node[above]{$x$};
+	\draw[-stealth](0,-2)--(0,4.5)node[right]{$y$};
+	\draw[smooth,samples=100,domain=-1.3:3.3] plot(\x,{-(\x+1)*(\x-3)});
+	\fill (0,0) circle(1pt)node[below left]{$O$};
+	\foreach \x/\g in {-1/140,3/50}\fill[black] (\x,0) circle (1pt)+(\g:.4)node{$\x$};
+\end{tikzpicture}
+
+# Lời giải
+
+Nhìn đồ thị ta thấy phần đồ thị nằm trên trục hoành $f(x)>0$ khi $x\in(-1;3)$.
+
+---
+id: hamsobachai_031
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xét dấu các hệ số a, b, c dựa vào đồ thị
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: D
+tags:
+  - đọc đồ thị
+  - xét dấu hệ số
+---
+
+# Đề bài
+
+Cho hàm số $y=a{x^2}+bx+c$ có đồ thị như bên. Khẳng định nào dưới đây là đúng?
+
+A. $a > 0,b > 0,c < 0$
+
+B. $a < 0,b < 0,c > 0$
+
+C. $a > 0,b < 0,c > 0$
+
+D. $a > 0,b < 0,c < 0$
+
+\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick,scale=0.7]
+	\tikzset{every node/.style={scale=0.9}}
+	\draw[->] (-2.1,0)--(4.1,0) node[below left] {$x$};
+	\draw[->] (0,-5.1)--(0,3.1) node[below left] {$y$};
+	\draw (0,0) node [below left] {$O$};
+	\begin{scope}
+		\clip (-2,-5) rectangle (4,3);
+		\draw[samples=200,domain=-2:4,smooth,variable=\x] plot (\x,{1*(\x)^2+-2*(\x)+-3});
+	\end{scope}
+\end{tikzpicture}
+
+# Lời giải
+
+Đồ thị cắt trục tung tại điểm có tung độ âm nên $c < 0$.
+Đồ thị hướng bề lõm lên trên nên $a > 0$, hoành độ đỉnh dương nên $\dfrac{-b}{2a}> 0, \,a > 0\Rightarrow b < 0$.
+
+---
+id: hamsobachai_032
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai khi biết đỉnh
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: A
+tags:
+  - đỉnh parabol
+  - xác định hệ số
+---
+
+# Đề bài
+
+Cho Parabol $P \colon y=x^2+mx+n$ ($m,\,n$ tham số). Xác định $m,\,n$ để $(P)$ nhận đỉnh $I\left(2;\,-1\right)$ .
+
+A. $m=-4,\,n=3$
+
+B. $m=4,\,n=3$
+
+C. $m=4,\,n=-3$
+
+D. $m=-4,\,n=-3$
+
+# Lời giải
+
+Parabol $(P)\colon y=x^2+mx+n$ nhận $I\left(2;-1\right)$ là đỉnh, khi đó ta có
+\[\heva{&4+2m+n=-1\\&-\dfrac{m}{2}=2}
+\Leftrightarrow \heva{&2m+n=-5\\&m=-4}
+\Leftrightarrow \heva{&n=3\\&m=-4.}\]
+Vậy $m=-4,\,n=3$ .
+
+---
+id: hamsobachai_033
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định phương trình parabol dựa vào đồ thị cho trước
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - đọc đồ thị
+  - tìm parabol
+---
+
+# Đề bài
+
+Đồ thị hình bên dưới là đồ thị của hàm số nào?
+
+A. $y=2x^2-4x-2$
+
+B. $y=-x^2-2x+3$
+
+C. $y=x^2-2x-1$
+
+D. $y=x^2+2x-2$
+
+\begin{tikzpicture}[line cap=round, line join=round, font=\footnotesize, >=stealth, scale=0.7]
+	\tikzset{label style/.style={font=\footnotesize}}
+	\draw[->] (-1.5,0)--(3.25,0) node[below right] {$x$};
+	\draw[->] (0,-2.25)--(0,3.25) node[right] {$y$};
+	\node (0,0) [above right]{$ O $};
+	\foreach \x in {-1,1,2,3}
+	\draw[shift={(\x,0)},color=black] (0pt,2pt) -- (0pt,-2pt);
+	\node at (.75,-0.4) {$1$};
+	\node at (1.75,-0.4) {$2$};
+	\foreach \y in {-2,-1,1,2,3}
+	\draw[shift={(0,\y)},color=black] (2pt,0pt) -- (-2pt,0pt);
+	\node at (-0.5,1.25) {$1$};
+	\node at (-0.5,-2) {$-2$};
+	\draw[dashed](1,0)--(1,-2)--(0,-2);
+	\draw [ domain=-1.1:3.1, samples=100] plot (\x, {(\x)*(\x)-2*(\x) - 1});
+\end{tikzpicture}
+
+# Lời giải
+
+Đồ thị cắt trục $Oy$ tại điểm có tung độ bằng $-1\Rightarrow c=-1$. Suy ra $y=ax^2+bx-1$.
+Đồ thị nhận $I\left(1;-2\right)$ làm đỉnh nên $\heva{&\dfrac{-b}{2a}=1\\ &-2=a\cdot 1^2+b\cdot 1-1}\Leftrightarrow\heva{&2a+b=0\\ &a+b=-1}\Leftrightarrow\heva{&a=1\\ &b=-2.}$
+Vậy $y=x^2-2x-1$.
+
+---
+id: hamsobachai_034
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm tọa độ đỉnh của Parabol
+muc_do:
+  - TH
+loai: trac_nghiem
+dap_an: C
+tags:
+  - tọa độ đỉnh
+---
+
+# Đề bài
+
+Tọa độ đỉnh của parabol $y=-3x^2+6x-1$ là
+
+A. $ I(-1;-10) $
+
+B. $ I(2;-1) $
+
+C. $ I(1;2) $
+
+D. $ I(-2;-25) $
+
+# Lời giải
+
+Tọa độ đỉnh của parabol $y=ax^2+bx+c$ $(a\neq 0)$ là $I\left(-\dfrac{b}{2a};-\dfrac{b^2-4ac}{4a}\right)$ nên tọa độ đỉnh của parabol đã cho là $I(1;2)$.
+
+---
+id: hamsobachai_035
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định các yếu tố cơ bản của Parabol
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Đúng
+tags:
+  - tính chất parabol
+  - trục đối xứng
+  - đỉnh parabol
+---
+
+# Đề bài
+
+Cho hàm số $y=-x^2+2x+3$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Tập xác định của hàm số là $\mathscr{D}=\mathbb{R}$
+
+b) Đúng/Sai: Tọa độ đỉnh $I(1;2)$
+
+c) Đúng/Sai: Đồ thị hàm số có trục đối xứng là đường thẳng $x=2$
+
+d) Đúng/Sai: Đồ thị hàm số là Parabol có bề lõm hướng xuống dưới
+
+# Lời giải
+
+Hàm số $y=-x^2+2x+3$ có $a=-1$, $b=2$, $c=3$.
+- Tập xác định của hàm số là $\mathscr{D}=\mathbb{R}$.
+- Tọa độ đỉnh $x_I=-\dfrac{b}{2a}=1$; $y_I=-1^2+2\cdot 1+3=4\Rightarrow I(1;4)$.
+- Đồ thị hàm số có trục đối xứng là đường thẳng $x=1$.
+- Vì $a=-1<0$ nên đồ thị hàm số là Parabol có bề lõm hướng xuống dưới.
+
+---
+id: hamsobachai_036
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Khảo sát các tính chất của hàm số bậc hai
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Sai
+  - Đúng
+  - Sai
+  - Đúng
+tags:
+  - sự biến thiên
+  - thuộc đồ thị
+  - giá trị lớn nhất
+---
+
+# Đề bài
+
+Cho hàm số $f(x)=-3x^2+x+2$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Hàm số luôn nghịch biến trên $\mathbb{R}$
+
+b) Đúng/Sai: Đồ thị hàm số đi qua điểm $A(2;-8)$
+
+c) Đúng/Sai: Hàm số đồng biến trên khoảng $(0;2)$
+
+d) Đúng/Sai: Giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$
+
+# Lời giải
+
+- Hàm số bậc hai không thể đồng biến hoặc nghịch biến trên $\mathbb{R}$ nên mệnh đề ``Hàm số luôn nghịch biến trên $\mathbb{R}$'' sai.
+- Vì $f(2)=-3\cdot 2^2+2+2=-8$ nên mệnh đề ``Đồ thị hàm số đi qua điểm $A(2;-8)$'' đúng.
+- Hàm số $f(x)=-3x^2+x+2$ đồng biến trên khoảng $\left(-\infty;\dfrac{1}{6}\right)$ mà $(0;2) \not\subset\left(-\infty;\dfrac{1}{6}\right)$. Vậy mệnh đề ``Hàm số đồng biến trên khoảng $(0;2)$'' sai.
+- Hàm số $f(x)=-3x^2+x+2$ đạt giá trị lớn nhất tại $x=\dfrac{1}{6}$ và $f\left(\dfrac{1}{6}\right)=-3\cdot \left(\dfrac{1}{6}\right)^2+\dfrac{1}{6}+2=\dfrac{25}{12}$ nên giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$. Vậy mệnh đề ``Giá trị lớn nhất của hàm số bằng $\dfrac{25}{12}$'' đúng.
+
+---
+id: hamsobachai_037
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tìm hệ số hàm số bậc hai từ đồ thị và tính giá trị biểu thức
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Đúng
+  - Sai
+tags:
+  - đọc đồ thị
+  - tìm hệ số
+  - tính biểu thức
+---
+
+# Đề bài
+
+Cho hàm số bậc hai $y=ax^2+bx+c$ có đồ thị như hình vẽ sau. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: $a>0$
+
+b) Đúng/Sai: $c>0$
+
+c) Đúng/Sai: $a-2b+c=7$
+
+d) Đúng/Sai: $a-b^2+c^3=10$
+
+\begin{tikzpicture}[scale=0.9, font=\footnotesize, line join=round, line cap=round, >=stealth]
+	\def\a{2} 
+	\def\b{-3}
+	\def\c{-1}
+	\draw[->] (-1,0) -- (3,0) node[below] {$x$};
+	\draw[->] (0,-3) -- (0,2) node[left] {$y$};
+	\draw[fill=black] (0,0)circle(1pt) node[below right]{$O$};
+	\clip (-1,-3)rectangle(3,2);
+	\draw[samples=150,smooth,domain=-1:2.2] plot(\x,{\a*(\x)^2+(\b)*(\x)+(\c)});
+	\draw[dashed] (0,1)-|(2,0) (1,0)|-(0,-2);
+	\foreach \i/\g in {1/90,2/-90} \draw[fill=black] (\i,0) circle(1pt) ++(\g:0.3) node{$\i$};
+	\foreach \j/\g in {-1/180,-2/180,1/180} \draw[fill=black] (0,\j) circle(1pt) ++(\g:0.3) node{$\j$};
+\end{tikzpicture}
+
+# Lời giải
+
+Khi $x=1$ thì $y=-2\Rightarrow a+b+c=-2$.
+Khi $x=2$ thì $y=1\Rightarrow 4a+2b+c=1$.
+Đồ thị cắt trục tung tại điểm có tung độ bằng $-1$ nên $c=-1$.
+Ta có hệ phương trình $\heva{&c=-1\\&a+b+c=-2\\&4a+2b+c=1} \Leftrightarrow\heva{&a=2\\&b=-3\\&c=-1.}$
+- Vì bề lõm của parabol quay lên nên $a>0$. Vậy mệnh đề ``$a>0$'' đúng.
+- Ta có $c=-1<0$ nên mệnh đề ``$c>0$'' sai.
+- Ta có $a-2b+c=2-2(-3)-1=7$ nên mệnh đề ``$a-2b+c=7$'' đúng.
+- Ta có $a-b^2+c^3=2-(-3)^2+(-1)^3=2-9-1=-8$ nên mệnh đề ``$a-b^2+c^3=10$'' sai.
+
+---
+id: hamsobachai_038
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Biến thiên của hàm số chứa tham số m
+muc_do:
+  - TH
+loai: dung_sai
+dap_an:
+  - Đúng
+  - Sai
+  - Sai
+  - Sai
+tags:
+  - sự biến thiên
+  - tham số m
+  - đồng biến nghịch biến
+---
+
+# Đề bài
+
+Cho hàm số $y=-x^2+2mx+1$. Các mệnh đề sau đúng hay sai?
+
+a) Đúng/Sai: Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$
+
+b) Đúng/Sai: Với $m=-2$ hàm số nghịch biến trên khoảng $(-\infty;-2)$
+
+c) Đúng/Sai: Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $m=3$
+
+d) Đúng/Sai: Có $4$ giá trị nguyên dương của $m` để hàm số nghịch biến $(5;+\infty)$
+
+# Lời giải
+
+Ta có $a=-1<0$; $-\dfrac{b}{2a}=m$ nên hàm số đã cho đồng biến trên khoảng $(-\infty;m)$, nghịch biến trên khoảng $(m;+\infty)$.
+- Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$ nên mệnh đề ``Với $m=1$ hàm số đồng biến trên khoảng $(-\infty;1)$'' đúng.
+- Với $m=-2$ hàm số đồng biến trên khoảng $(-\infty;-2)$ nên mệnh đề ``Với $m=-2$ hàm số nghịch biến trên khoảng $(-\infty;-2)$'' sai.
+- Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $(-\infty;3) \subset(-\infty;m) \Leftrightarrow m \geq 3$ nên mệnh đề ``Hàm số đồng biến trên $(-\infty;3)$ khi và chỉ khi $m=3$'' sai.
+- Hàm số nghịch biến $(5;+\infty)$ khi và chỉ khi $(5;+\infty) \subset(m;+\infty) \Leftrightarrow m \leq 5$ mà do $m$ nguyên dương nên $m \in\{1; 2; 3; 4; 5\}$ nên có $5$ giá trị $m$ thỏa mãn nên mệnh đề ``Có $4$ giá trị nguyên dương của $m$ để hàm số nghịch biến $(5;+\infty)$'' sai.
+
+---
+id: hamsobachai_039
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Xác định hàm số bậc hai từ các điều kiện đỉnh và điểm thuộc đồ thị
+muc_do:
+  - TH
+loai: tra_loi_ngan
+dap_an: 22
+tags:
+  - đỉnh parabol
+  - hệ phương trình
+---
+
+# Đề bài
+
+Biết đồ thị hàm số $y=ax^2+bx+c$, ($a, b,c \in\mathbb{R}; a\neq 0$) đi qua điểm $A(2;1)$ và có đỉnh $I(1;-1)$. Tính giá trị biểu thức $\mathrm{T}=a^3+b^2-2c$.
+
+# Lời giải
+
+$(P)\colon y=ax^2+bx+c$.
+$(P)$ qua $A(2;1)\Leftrightarrow 4a+2b+c=1$. (1)
+$(P)$ có đỉnh $I(1;-1)\Rightarrow \heva{&a+b+c=-1\\&-\dfrac{b}{2a}=1}\Leftrightarrow\heva{&a+b+c=-1&\qquad(2)\\&2a+b=0.&\qquad(3)}$
+Từ $(1)$, $(2)$, $(3)$ suy ra $\heva{&a=2\\&b=-4\\&c=1.}$
+Vậy $T=a^3+b^2-2c=2^3+(-4)^2-2\cdot 1=8+16-2=22$.
+
+---
+id: hamsobachai_040
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Tính giá trị biểu thức liên hệ các hệ số của Parabol
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 25
+tags:
+  - đi qua điểm
+  - tính chất đại số
+---
+
+# Đề bài
+
+Biết parabol $(P)\colon y = ax^2 + bx + c$ đi qua hai điểm $A(2;1)$ và $B(-3;5)$. Tính giá trị của biểu thức $S=44a-8b+6c+3$.
+
+# Lời giải
+
+Vì $(P)$ đi qua hai điểm $A, B$ nên ta có:
+$\heva{&4a+2b+c=1\\&9a-3b+c=5}\Leftrightarrow \heva{&8a+4b+2c=2\\&36a-12b+4c=20.}$
+Cộng vế theo vế hai phương trình của hệ trên, ta được:
+$44a-8b+6c=22$
+Suy ra $S=22+3=25$.
+
+---
+id: hamsobachai_041
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Phương trình quy về phương trình bậc hai chứa tham số
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1
+tags:
+  - hàm số bậc hai
+  - phương trình hợp
+  - bảng biến thiên
+---
+
+# Đề bài
+
+Cho hàm số $f(x)=ax^2+bx+c$ $(a, b, c\in\mathbb{R})$ thỏa mãn $f(0)=1$ có bảng biến thiên như sau
+
+\begin{tikzpicture}
+	\tkzTabInit[nocadre=false, lgt=1.2, espcl=2.5, deltacl=0.6]
+	{$x$/0.5, $f(x)$ /2}%
+	{$-\infty$, $1$, $+\infty$}%
+	\tkzTabVar %
+	{+/$+\infty$,-/$-1$,+/$+\infty$
+	}
+\end{tikzpicture}
+
+Có bao nhiêu giá trị nguyên của tham số $m$ để phương trình $f\left(f(x)+m\right)=1$ có đúng hai nghiệm phân biệt?
+
+# Lời giải
+
+Vì $f(x)$ là đồ thị của một parabol có trục đối xứng là $x=1$ nên $f(0)=1$ thì $f(2)=1$. Suy ra
+$$
+f\left(f(x)+m\right)=1\Leftrightarrow \hoac{&f(x)+m=0\\&f(x)+m=2}\Leftrightarrow \hoac{&f(x)=-m\\&f(x)=2-m.}
+$$
+Để phương trình đã cho có đúng hai nghiệm phân biệt thì $\heva{&2-m >-1\\&-m <-1}\Leftrightarrow 1 < m < 3$.
+
+Vậy có $1$ giá trị nguyên của $m$ để phương trình đã cho có đúng hai nghiệm phân biệt.
+
+---
+
+---
+id: hamsobachai_042
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng thực tế hàm số bậc hai
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 1,5
+tags:
+  - hàm số bậc hai
+  - chuyển động parabol
+  - bài toán thực tế
+---
+
+# Đề bài
+
+Một quả bóng được đá lên từ độ cao $1{,}5$ mét so với mặt đất. Biết quỹ đạo của quả bóng là một đường parabol trong mặt phẳng tọa độ $Oxy$ có phương trình là $h=a t^2+b t+c~(a < 0)$ trong đó $t$ là thời gian (tính bằng giây) kể từ khi quả bóng được đá lên và $h$ là độ cao (tính bằng mét) của quả bóng. Biết rằng sau 2 giây thì nó đạt độ cao $5 \mathrm{~m}$; sau 4 giây nó đạt độ cao $4{,}5$ m. Hỏi sau $5{,}5$ giây quả bóng đạt độ cao bao nhiêu mét so với mặt đất?
+
+# Lời giải
+
+Chọn hệ trục tọa độ $Oxy$ với trục $Ox$ là trục thời gian.
+
+Theo đề bài ta có hệ phương trình sau $\heva{&c=1{,}5\\&4a+2b+c=5\\&16a+4b+c=4{,5}}\Leftrightarrow \heva{&a=-\dfrac{1}{2}\\&b=\dfrac{11}{4}\\&c=\dfrac{3}{2}.}$
+
+Do đó phương trình quỹ đạo của quả bóng là $y=-\dfrac{1}{2}t^2+\dfrac{11}{4}t+\dfrac{3}{2}$.
+
+Vậy sau $5{,}5$ giây quả bóng đạt độ cao $h=y(5{,}5)=1{,}5$ m.
+
+---
+
+---
+id: hamsobachai_043
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng tối ưu hóa kinh tế
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 11,8
+tags:
+  - hàm số bậc hai
+  - cực trị
+  - bài toán kinh tế
+---
+
+# Đề bài
+
+Một trận bóng đá được tổ chức ở một sân vận động có sức chứa $15000$ người. Với giá vé $14 \$$ thì trung bình các trận đấu gần đây có $9500$ khán giả. Theo một khảo sát thị trường đã chỉ ra rằng cứ giảm $1 \$$ mỗi vé thì trung bình số khán giả tăng lên $1000$ người. Giá vé bằng bao nhiêu thì thu được nhiều lợi nhuận nhất (đơn vị: $\$$)?
+
+# Lời giải
+
+Gọi $x>0$ là số tiền cần giảm $\Rightarrow$ giá vé được bán là $(14 - x) \$$.
+
+Khi đó số người mua vé là $9500+1000x$, $(x \leq 5,5)$.
+
+$\Rightarrow$ Số tiền bán vé là $(14-x)\cdot (9500+1000x)=-1000 x^2+4500 x+133000$.
+
+Để thu được nhiều lợi nhuận nhất thì biểu thức $f(x)=-1000 x^2+4500 x+133000$ phải có giá trị lớn nhất.
+
+Ta có bảng biến thiên
+
+\begin{tikzpicture}[>=stealth]
+	\tkzTabInit[nocadre=false,lgt=1.3,espcl=2.5,deltacl=.5]
+	{$x$/.7,$f(x)$/2.5}
+	{$0$,$2{,}25$,$5{,}5$}
+	\tkzTabVar{-/$ $,+/$f(x)_{\max}$,-/$ $}
+\end{tikzpicture}
+
+Ta có $f(x)_{\max} \Leftrightarrow x=\dfrac{-b}{2a}=\dfrac{-4500}{2 \cdot (-1000)}=2{,}25$.
+
+Vậy giá vé là $14- 2{,}25 \approx 11{,}8 \$$.
+
+---
+
+---
+id: hamsobachai_044
+lop: 10
+chu_de: Hàm số bậc hai
+dang: Ứng dụng tối ưu hóa thực tế
+muc_do:
+  - VD
+loai: tra_loi_ngan
+dap_an: 18
+tags:
+  - hàm số bậc hai
+  - giá trị lớn nhất
+  - sinh học
+---
+
+# Đề bài
+
+Khi nuôi cá thí nghiệm trong hồ, một nhà sinh học tìm được quy luật rằng: Nếu trên mỗi đơn vị diện tích của mặt hồ có $n$ con cá thì trung bình mỗi con cá sau một vụ cân nặng $P(n)=360-10n$ (đơn vị khối lượng). Hỏi người nuôi phải thả bao nhiêu con cá trên một đơn vị diện tích để trọng lượng cá sau mỗi vụ thu được là nhiều nhất?
+
+# Lời giải
+
+Tổng trọng lượng cá thu được sau một vụ là $T(n)=n(360-10n)=360n-10n^2$.
+
+Đây là một tam thức bậc hai với ẩn là $n$ có hệ số $a=-10<0$ và $b=360$ suy ra $\dfrac{-b}{2a}=\dfrac{-360}{2 \cdot(-10)}=18$.
+
+Khi đó $T(18)=3240$.
+
+Vậy người nuôi cần thả $18$ con cá trên một đơn vị diện tích để đạt tổng trọng lượng cá lớn nhất là $3240$ (đơn vị khối lượng).
