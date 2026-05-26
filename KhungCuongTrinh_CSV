@@ -1,0 +1,173 @@
+id,lop,chuong,chu_de,yeu_cau_can_dat,muc_do_goi_y,tags
+K10_C1_001,10,Chapter 1,Sets and Logical Statements,Formulate mathematical statements,NB,"statement,logic"
+K10_C1_002,10,Chapter 1,Sets and Logical Statements,Determine negation converse and equivalent statements,TH,"negation,logic"
+K10_C1_003,10,Chapter 1,Sets and Logical Statements,Use symbols forall and exists,NB,"quantifier"
+K10_C1_004,10,Chapter 1,Sets and Logical Statements,Recognize necessary and sufficient conditions,TH,"condition"
+K10_C1_005,10,Chapter 1,Sets and Logical Statements,Determine truth values of statements,TH,"truth-value"
+K10_C1_006,10,Chapter 1,Sets and Logical Statements,Recognize subsets equality of sets and empty sets,NB,"set"
+K10_C1_007,10,Chapter 1,Sets and Logical Statements,Perform set operations union intersection difference complement,TH,"set-operation"
+K10_C1_008,10,Chapter 1,Sets and Logical Statements,Use Venn diagrams,TH,"venn"
+K10_C1_009,10,Chapter 1,Sets and Logical Statements,Solve practical problems involving sets,VD,"practical,set"
+
+K10_C2_001,10,Chapter 2,First-degree Inequalities in Two Variables,Recognize first-degree inequalities and systems,NB,"inequality"
+K10_C2_002,10,Chapter 2,First-degree Inequalities in Two Variables,Represent solution regions on the coordinate plane,TH,"graph"
+K10_C2_003,10,Chapter 2,First-degree Inequalities in Two Variables,Solve practical optimization problems,VD,"optimization"
+
+K10_C3_001,10,Chapter 3,Functions and Graphs,Recognize real-world models leading to functions,NB,"function,model"
+K10_C3_002,10,Chapter 3,Functions and Graphs,Describe domain range increasing decreasing functions and graphs,TH,"domain,range"
+K10_C3_003,10,Chapter 3,Functions and Graphs,Apply functions to practical situations,VD,"application"
+
+K10_C4_001,10,Chapter 4,Quadratic Functions,Construct tables of values,NB,"quadratic"
+K10_C4_002,10,Chapter 4,Quadratic Functions,Draw parabolas,TH,"parabola"
+K10_C4_003,10,Chapter 4,Quadratic Functions,Determine vertex and axis of symmetry,TH,"vertex"
+K10_C4_004,10,Chapter 4,Quadratic Functions,Analyze quadratic graphs,TH,"graph-analysis"
+K10_C4_005,10,Chapter 4,Quadratic Functions,Apply quadratic functions to practical problems,VD,"practical"
+
+K10_C5_001,10,Chapter 5,Quadratic Inequalities,Explain the sign of quadratic trinomials,TH,"sign"
+K10_C5_002,10,Chapter 5,Quadratic Inequalities,Solve quadratic inequalities,VD,"inequality"
+K10_C5_003,10,Chapter 5,Quadratic Inequalities,Apply inequalities to practical problems,VD,"practical"
+
+K10_C6_001,10,Chapter 6,Equations Reducible to Quadratics,Solve radical equations reducible to quadratic equations,VD,"radical"
+
+K10_C7_001,10,Chapter 7,Combinatorics,Apply Addition Rule and Multiplication Rule,TH,"counting"
+K10_C7_002,10,Chapter 7,Combinatorics,Use tree diagrams,TH,"tree-diagram"
+K10_C7_003,10,Chapter 7,Combinatorics,Calculate permutations arrangements and combinations,VD,"permutation,combination"
+K10_C7_004,10,Chapter 7,Combinatorics,Use calculators for combinatorial calculations,NB,"calculator"
+
+K10_C8_001,10,Chapter 8,Newtons Binomial Theorem,Expand (a+b)^4 and (a+b)^5,TH,"binomial"
+K10_C8_002,10,Chapter 8,Newtons Binomial Theorem,Apply combinations in expansions,VD,"combination"
+
+K10_C9_001,10,Chapter 9,Trigonometric Relations in Triangles,Calculate trigonometric values,TH,"trigonometry"
+K10_C9_002,10,Chapter 9,Trigonometric Relations in Triangles,Apply Law of Cosines Law of Sines and area formulas,VD,"triangle"
+K10_C9_003,10,Chapter 9,Trigonometric Relations in Triangles,Solve triangles,VD,"triangle"
+K10_C9_004,10,Chapter 9,Trigonometric Relations in Triangles,Solve practical measurement problems,VD,"measurement"
+
+K10_C10_001,10,Chapter 10,Vectors,Recognize vectors and vector operations,NB,"vector"
+K10_C10_002,10,Chapter 10,Vectors,Perform vector addition subtraction scalar multiplication and dot product,TH,"vector-operation"
+K10_C10_003,10,Chapter 10,Vectors,Apply vectors in geometry and Physics,VD,"application"
+
+K10_C11_001,10,Chapter 11,Coordinate Geometry in the Plane,Use vector coordinates,TH,"coordinate"
+K10_C11_002,10,Chapter 11,Coordinate Geometry in the Plane,Determine line equations,TH,"line"
+K10_C11_003,10,Chapter 11,Coordinate Geometry in the Plane,Calculate distances and angles,VD,"distance,angle"
+K10_C11_004,10,Chapter 11,Coordinate Geometry in the Plane,Determine circle equations,TH,"circle"
+K10_C11_005,10,Chapter 11,Coordinate Geometry in the Plane,Recognize conics ellipse parabola hyperbola,NB,"conic"
+
+K10_C12_001,10,Chapter 12,Statistics,Work with approximate numbers and errors,TH,"error"
+K10_C12_002,10,Chapter 12,Statistics,Detect inaccurate data,TH,"data"
+K10_C12_003,10,Chapter 12,Statistics,Calculate mean median quartiles mode range variance and standard deviation,VD,"statistics"
+K10_C12_004,10,Chapter 12,Statistics,Interpret statistical measures,VD,"interpretation"
+
+K10_C13_001,10,Chapter 13,Probability,Recognize sample space events and probability,NB,"probability"
+K10_C13_002,10,Chapter 13,Probability,Calculate probabilities using combinatorics and tree diagrams,VD,"probability"
+K10_C13_003,10,Chapter 13,Probability,Apply probability rules,VD,"rule"
+
+K11_C1_001,11,Chapter 1,Trigonometric Functions and Equations,Recognize trigonometric angles and unit circle concepts,NB,"unit-circle"
+K11_C1_002,11,Chapter 1,Trigonometric Functions and Equations,Use trigonometric identities,TH,"identity"
+K11_C1_003,11,Chapter 1,Trigonometric Functions and Equations,Apply addition formulas double-angle formulas and product-sum transformations,VD,"formula"
+K11_C1_004,11,Chapter 1,Trigonometric Functions and Equations,Solve practical trigonometric problems,VD,"practical"
+
+K11_C2_001,11,Chapter 2,Graphs of Trigonometric Functions,Recognize even odd and periodic functions,NB,"periodic"
+K11_C2_002,11,Chapter 2,Graphs of Trigonometric Functions,Draw graphs of sin cos tan cot,TH,"graph"
+K11_C2_003,11,Chapter 2,Graphs of Trigonometric Functions,Determine domain range periods and intervals of increase decrease,TH,"domain,range"
+
+K11_C3_001,11,Chapter 3,Sequences,Recognize finite and infinite sequences,NB,"sequence"
+K11_C3_002,11,Chapter 3,Sequences,Define sequences using formulas and recurrence relations,TH,"recurrence"
+K11_C3_003,11,Chapter 3,Sequences,Determine monotonicity and boundedness,TH,"bounded"
+
+K11_C4_001,11,Chapter 4,Arithmetic Progressions,Recognize arithmetic progressions,NB,"progression"
+K11_C4_002,11,Chapter 4,Arithmetic Progressions,Determine general terms,TH,"general-term"
+K11_C4_003,11,Chapter 4,Arithmetic Progressions,Calculate sums of terms,TH,"sum"
+K11_C4_004,11,Chapter 4,Arithmetic Progressions,Apply arithmetic progressions in practice,VD,"application"
+
+K11_C5_001,11,Chapter 5,Geometric Progressions,Recognize geometric progressions,NB,"progression"
+K11_C5_002,11,Chapter 5,Geometric Progressions,Determine general terms,TH,"general-term"
+K11_C5_003,11,Chapter 5,Geometric Progressions,Calculate sums of terms,TH,"sum"
+K11_C5_004,11,Chapter 5,Geometric Progressions,Apply geometric progressions in practice,VD,"application"
+
+K11_C6_001,11,Chapter 6,Limits of Sequences,Recognize sequence limits,NB,"limit"
+K11_C6_002,11,Chapter 6,Limits of Sequences,Calculate simple limits,TH,"limit"
+K11_C6_003,11,Chapter 6,Limits of Sequences,Calculate sums of infinite geometric series,VD,"series"
+
+K11_C7_001,11,Chapter 7,Limits of Functions,Recognize finite one-sided and infinite limits,NB,"limit"
+K11_C7_002,11,Chapter 7,Limits of Functions,Calculate limits using operations on limits,TH,"limit"
+
+K11_C8_001,11,Chapter 8,Continuous Functions,Recognize continuity of functions,NB,"continuity"
+K11_C8_002,11,Chapter 8,Continuous Functions,Recognize continuity of elementary functions,NB,"elementary"
+
+K11_C9_001,11,Chapter 9,Exponential Functions,Use exponent rules,TH,"exponent"
+K11_C9_002,11,Chapter 9,Exponential Functions,Simplify exponential expressions,TH,"simplify"
+K11_C9_003,11,Chapter 9,Exponential Functions,Solve practical growth and finance problems,VD,"finance"
+
+K11_C10_001,11,Chapter 10,Logarithmic Functions,Use logarithm properties,TH,"logarithm"
+K11_C10_002,11,Chapter 10,Logarithmic Functions,Simplify logarithmic expressions,TH,"simplify"
+K11_C10_003,11,Chapter 10,Logarithmic Functions,Apply logarithms in practical problems,VD,"application"
+
+K11_C11_001,11,Chapter 11,Exponential and Logarithmic Equations,Solve exponential equations,VD,"equation"
+K11_C11_002,11,Chapter 11,Exponential and Logarithmic Equations,Solve logarithmic equations,VD,"equation"
+K11_C11_003,11,Chapter 11,Exponential and Logarithmic Equations,Apply them to scientific and practical contexts,VD,"science"
+
+K11_C12_001,11,Chapter 12,Derivatives,Recognize derivatives from real-world situations,NB,"derivative"
+K11_C12_002,11,Chapter 12,Derivatives,Calculate derivatives by definition,TH,"definition"
+K11_C12_003,11,Chapter 12,Derivatives,Interpret geometric meaning of derivatives,TH,"geometry"
+K11_C12_004,11,Chapter 12,Derivatives,Determine tangent equations,VD,"tangent"
+
+K11_C13_001,11,Chapter 13,Derivative Rules,Differentiate polynomial trigonometric exponential and logarithmic functions,VD,"differentiation"
+K11_C13_002,11,Chapter 13,Derivative Rules,Use product quotient and chain rule,VD,"rule"
+
+K11_C14_001,11,Chapter 14,Second-order Derivatives,Calculate second derivatives,TH,"second-derivative"
+K11_C14_002,11,Chapter 14,Second-order Derivatives,Apply derivatives in motion problems,VD,"motion"
+
+K11_C15_001,11,Chapter 15,Spatial Geometry,Recognize lines planes pyramids and prisms,NB,"spatial"
+K11_C15_002,11,Chapter 15,Spatial Geometry,Determine intersections parallelism and perpendicularity,TH,"geometry"
+K11_C15_003,11,Chapter 15,Spatial Geometry,Calculate distances angles and volumes,VD,"volume"
+
+K11_C16_001,11,Chapter 16,Statistics,Calculate characteristic numbers for grouped data,VD,"grouped-data"
+K11_C16_002,11,Chapter 16,Statistics,Interpret statistical measures,VD,"interpretation"
+
+K11_C17_001,11,Chapter 17,Probability,Recognize union intersection and independent events,NB,"event"
+K11_C17_002,11,Chapter 17,Probability,Calculate probabilities using addition rule multiplication rule combinatorics and tree diagrams,VD,"probability"
+
+K12_C1_001,12,Chapter 1,Monotonicity of Functions,Determine increasing decreasing intervals using derivatives,VD,"monotonicity"
+K12_C1_002,12,Chapter 1,Monotonicity of Functions,Use variation tables,TH,"variation-table"
+K12_C1_003,12,Chapter 1,Monotonicity of Functions,Recognize extrema from graphs,TH,"extrema"
+
+K12_C2_001,12,Chapter 2,Maximum and Minimum Values,Determine maximum and minimum values using derivatives,VD,"optimization"
+
+K12_C3_001,12,Chapter 3,Survey and Graph Functions,Determine domain extrema and asymptotes,VD,"asymptote"
+K12_C3_002,12,Chapter 3,Survey and Graph Functions,Draw graphs of cubic and rational functions,VD,"graph"
+K12_C3_003,12,Chapter 3,Survey and Graph Functions,Recognize graph symmetry,TH,"symmetry"
+
+K12_C4_001,12,Chapter 4,Applications of Derivatives,Solve optimization and practical problems using derivatives,VDC,"optimization"
+
+K12_C5_001,12,Chapter 5,Antiderivatives,Recognize antiderivatives,NB,"antiderivative"
+K12_C5_002,12,Chapter 5,Antiderivatives,Calculate antiderivatives of elementary functions,TH,"calculation"
+
+K12_C6_001,12,Chapter 6,Integrals,Recognize definitions and properties of integrals,NB,"integral"
+K12_C6_002,12,Chapter 6,Integrals,Calculate simple integrals,TH,"integral"
+K12_C6_003,12,Chapter 6,Integrals,Use integrals to calculate areas and volumes,VD,"area,volume"
+
+K12_C7_001,12,Chapter 7,Coordinate Geometry in Space,Use vector coordinates in space,TH,"vector"
+K12_C7_002,12,Chapter 7,Coordinate Geometry in Space,Perform vector operations,TH,"operation"
+K12_C7_003,12,Chapter 7,Coordinate Geometry in Space,Apply vectors in practical problems,VD,"application"
+
+K12_C8_001,12,Chapter 8,Equations of Planes,Determine equations of planes,TH,"plane"
+K12_C8_002,12,Chapter 8,Equations of Planes,Recognize parallel planes and perpendicular planes,TH,"parallel"
+K12_C8_003,12,Chapter 8,Equations of Planes,Calculate distances from points to planes,VD,"distance"
+
+K12_C9_001,12,Chapter 9,Equations of Lines in Space,Determine line equations,TH,"line"
+K12_C9_002,12,Chapter 9,Equations of Lines in Space,Recognize skew lines parallel lines and perpendicular lines,TH,"geometry"
+K12_C9_003,12,Chapter 9,Equations of Lines in Space,Calculate angles between lines and planes,VD,"angle"
+
+K12_C10_001,12,Chapter 10,Equations of Spheres,Determine sphere equations,TH,"sphere"
+K12_C10_002,12,Chapter 10,Equations of Spheres,Determine centers and radii,TH,"radius"
+K12_C10_003,12,Chapter 10,Equations of Spheres,Apply sphere equations in practice,VD,"application"
+
+K12_C11_001,12,Chapter 11,Statistics,Calculate range variance and standard deviation,VD,"statistics"
+K12_C11_002,12,Chapter 11,Statistics,Interpret statistical measures,VD,"interpretation"
+
+K12_C12_001,12,Chapter 12,Conditional Probability,Recognize conditional probability,NB,"conditional"
+K12_C12_002,12,Chapter 12,Conditional Probability,Interpret conditional probability in practical situations,VD,"practical"
+
+K12_C13_001,12,Chapter 13,Bayes Formula and Total Probability,Apply total probability formula and Bayes formula,VDC,"bayes"
+K12_C13_002,12,Chapter 13,Bayes Formula and Total Probability,Use statistical tables and tree diagrams,TH,"tree-diagram"
+K12_C13_003,12,Chapter 13,Bayes Formula and Total Probability,Solve practical probability problems,VDC,"probability"
