@@ -806,7 +806,7 @@
 "examples": [
 "lim_{x -> x_0} x = x_0",
 "lim_{x -> x_0} c = c",
-"lim_{x -> \pm oo} 1/x = 0"
+"lim_{x -> pm oo} 1/x = 0"
 ],
 "scope": null,
 "tags": ["gioi_han_ham_so", "gioi_han_co_ban"],
