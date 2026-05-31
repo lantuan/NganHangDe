@@ -1,8 +1,3 @@
-Dưới đây là cấu trúc toàn bộ dữ liệu chuẩn hóa của chương trình **Toán lớp 12** (theo Chương trình Giáo dục Phổ thông 2018) được thiết kế theo định dạng JSON tương tự như cấu trúc lớp 11 bạn đã có.
-
-Dữ liệu bao gồm đầy đủ các phân môn: **Giải tích** (Ứng dụng đạo hàm, Hàm số luỹ thừa-mũ-logarit nâng cao/nguyên hàm, Nguyên hàm - Tích phân), **Hình học** (Phương pháp tọa độ trong không gian Oxyz), **Thống kê & Xác suất** (Tính xác suất có điều kiện, các số đặc trưng mẫu số liệu), và **Hoạt động thực hành trải nghiệm**.
-
-```json
 [
   {
     "id": "L12_UDDH_001",
@@ -667,5 +662,3 @@ Dữ liệu bao gồm đầy đủ các phân môn: **Giải tích** (Ứng dụ
     "difficulty_rank": 3
   }
 ]
-
-```
