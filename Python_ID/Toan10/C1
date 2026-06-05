@@ -1,0 +1,1666 @@
+# Import các hàm và lớp từ thư viện sympy để giải phương trình và thực hiện các phép tính toán khác.
+from sympy import Symbol, solve, sqrt, factor, cancel, Poly, Eq, Function, exp, Abs, And
+from sympy.abc import x, y, z, a, b
+from sympy import init_printing, nroots
+import numpy.random as np
+import numpy
+import random
+import io
+import os
+
+import math
+import DefChung as dc
+from math_type import *
+
+# ==========================================
+# CHƯƠNG 1: MỆNH ĐỀ - TẬP HỢP
+# ==========================================
+
+import numpy as np
+import random
+import re
+
+import numpy as np
+import random
+import re
+
+import numpy as np
+import random
+import re
+
+
+def K10_C1_B1_PhuDinhMenhDe_MC_NB(socau, dang):
+    # ==========================================
+    # HÀM PHỤ BỎ VÀO TRONG (NESTED FUNCTION)
+    # AI Agent bốc hàm chính đi đâu, hàm phụ đi theo đó
+    # ==========================================
+    def kiem_tra_nguyen_to(n):
+        n = int(n)  # Ép kiểu chặn lỗi xung đột dữ liệu từ SymPy
+        if n < 2:
+            return False
+        for i in range(2, int(float(n) ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    # ==========================================
+    # LOGIC XỬ LÝ CHÍNH CỦA HÀM
+    # ==========================================
+    gt = []
+    dem = 0
+    da_dung_k = set()
+
+    while dem < socau:
+        k = random.randint(2000, 9999)
+        if k in da_dung_k:
+            continue
+
+        # Gọi hàm phụ nằm bên trong nội bộ
+        if kiem_tra_nguyen_to(k):
+            c1_dung, c1_sai = 'số nguyên tố', 'hợp số'
+        else:
+            c1_dung, c1_sai = 'hợp số', 'số nguyên tố'
+
+        if k % 2 == 0:
+            c2_dung, c2_sai = 'số chẵn', 'số lẻ'
+        else:
+            c2_dung, c2_sai = 'số lẻ', 'số chẵn'
+
+        tc = random.choice([c1_dung, c2_dung])
+
+        dsnhieu = [f'${k}$ là {c1_sai}', f'${k}$ là {c2_sai}']
+        thuoc_tinh_dung_con_lai = c2_dung if tc == c1_dung else c1_dung
+        dsnhieu.append(f'${k}$ không phải là {thuoc_tinh_dung_con_lai}')
+
+        dsnhieu = random.sample(dsnhieu, 3)
+
+        da_dung_k.add(k)
+        gt.append([k, tc, dsnhieu])
+        dem += 1
+
+    cauTN = ''
+    for v in gt:
+        k, tc, dsnhieu = v[0], v[1], v[2]
+
+        dapso = f'${k}$ không phải là {tc}'
+        debai = f"""Mệnh đề nào sau đây là mệnh đề phủ định của mệnh đề: ``${k}$ là {tc}''."""
+        giai = f"""Mệnh đề phủ định của mệnh đề "$P$" là mệnh đề "Không phải $P$". Do đó phủ định của mệnh đề ``${k}$ là {tc}'' là ``${k}$ không phải là {tc}''."""
+
+        # Gọi hàm framework chuẩn từ file math_type.py
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    # Chuẩn hóa hệ thống chuỗi LaTeX bằng Regex an toàn
+    cauTN = cauTN.replace("--", "+").replace("-+", "-").replace("+-", "-")
+    cauTN = re.sub(r'(?<=\d)\.(?=\d)', ',', cauTN)
+
+    return cauTN
+# print(K10_C1_B1_PhuDinhMenhDe_MC_NB(10,1))
+
+def K10_C1_B1_MenhDeDao_MC_NB(socau, dang):
+    # Khống chế số câu tối đa để tránh vòng lặp vô hạn (vì không gian mẫu chỉ có 6 bộ)
+    if socau > 6:
+        socau = 6
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        goc1 = np.random.choice(['A', 'M', 'H'])
+        if goc1 == 'A':
+            goc2 = 'B'
+        elif goc1 == 'M':
+            goc2 = 'N'
+        else:
+            goc2 = 'K'
+        goc = [goc1, goc2]
+
+        tc1 = np.random.choice(['bù', 'phụ'])
+        TC = []
+        TC_sai = []
+        if tc1 == 'bù':
+            tc2 = '180'
+            TC.append(tc1)
+            TC.append(tc2)
+            TC_sai.append('phụ')
+            TC_sai.append('90')
+        else:
+            tc2 = '90'
+            TC.append(tc1)
+            TC.append(tc2)
+            TC_sai.append('bù')
+            TC_sai.append('180')
+
+        v = [goc, TC, TC_sai]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        goc, TC, TC_sai = v[0], v[1], v[2]
+
+        # Đã thêm dấu $ vào trước và sau ký hiệu độ
+        dapso = f'Nếu tổng hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ bằng ${TC[1]}^{{\\circ}}$ thì hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ {TC[0]} nhau'
+
+        debai = f"""Hãy phát biểu mệnh đề đảo của mệnh đề: ``Nếu hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ {TC[0]} nhau thì tổng hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ bằng ${TC[1]}^{{\\circ}}$''."""
+
+        giai = f"""Mệnh đề đảo của mệnh đề $P \\Rightarrow Q$ là mệnh đề $Q \\Rightarrow P$."""
+
+        dsnhieu = [
+            f'Nếu hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ không {TC[0]} nhau thì tổng hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ khác ${TC[1]}^{{\\circ}}$',
+            f'Nếu tổng hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ khác ${TC[1]}^{{\\circ}}$ thì hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ không {TC[0]} nhau',
+            f'Nếu hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ {TC_sai[0]} nhau thì tổng hai góc $\\widehat{{{goc[0]}}}$ và $\\widehat{{{goc[1]}}}$ bằng ${TC_sai[1]}^{{\\circ}}$'
+        ]
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    cauTN = cauTN.replace("--", "+").replace("-+", "-").replace("+-", "-").replace(".0", ",0").replace(".1",
+                                                                                                       ",1").replace(
+        ".2", ",2").replace(".3", ",3").replace(".4", ",4").replace(".5", ",5").replace(".6", ",6").replace(".7",
+                                                                                                            ",7").replace(
+        ".8", ",8").replace(".9", ",9")
+    return cauTN
+# print(K10_C1_B1_MenhDeDao_MC_NB(10,1))
+
+def K10_C1_B1_PhatBieuMenhDe_MC_NB(socau, dang):
+    # Khống chế số câu tối đa bằng kích thước không gian mẫu để tránh vòng lặp vô hạn
+    if socau > 6:
+        socau = 6
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        k = np.random.randint(0, 6)
+        if k == 0:
+            P = r'$\forall x\in \mathbb{R}, x^2>0$'
+            p = 'Mọi số thực đều có bình phương dương'
+            p1 = 'Tồn tại số thực mà bình phương của nó dương'
+            p2 = 'Mọi số thực đều có bình phương không dương'
+            p3 = 'Tồn tại số thực mà bình phương của nó không dương'
+        elif k == 1:
+            P = r'$\forall n \in \mathbb{N}, n^2>n$'
+            p = 'Mọi số tự nhiên đều có bình phương lớn hơn chính nó'
+            p1 = 'Mọi số tự nhiên đều có bình phương nhỏ hơn hoặc bằng chính nó'
+            p2 = 'Tồn tại số tự nhiên mà bình phương của nó lớn hơn chính nó'
+            p3 = 'Tồn tại số tự nhiên mà bình phương của nó nhỏ hơn hoặc bằng chính nó'
+        elif k == 2:
+            P = r'$\exists x\in \mathbb{R}, \dfrac{1}{x}=x$'
+            p = 'Tồn tại số thực mà nghịch đảo của nó bằng với nó'
+            p1 = 'Tồn tại số thực mà nghịch đảo của nó khác nó'
+            p2 = 'Mọi số thực đều có nghịch đảo của nó bằng với nó'
+            p3 = 'Mọi số thực đều có nghịch đảo của nó khác nó'
+        elif k == 3:
+            P = r'$\exists n\in \mathbb{N}, \dfrac{1}{n}\in \mathbb{N}$'
+            p = 'Tồn tại số tự nhiên mà nghịch đảo của nó thuộc tập số tự nhiên'
+            p1 = 'Tồn tại số tự nhiên mà nghịch đảo của nó không thuộc tập số tự nhiên'
+            p2 = 'Mọi số tự nhiên đều có nghịch đảo thuộc tập số tự nhiên'
+            p3 = 'Mọi số tự nhiên đều có nghịch đảo không thuộc tập số tự nhiên'
+        elif k == 4:
+            P = r'$\forall x\in \mathbb{R}, |x| < 0$'
+            p = 'Mọi số thực đều có trị tuyệt đối âm'
+            p1 = 'Mọi số thực đều có trị tuyệt đối không âm'
+            p2 = 'Tồn tại số thực mà trị tuyệt đối của nó âm'
+            p3 = 'Tồn tại số thực mà trị tuyệt đối của nó không âm'
+        elif k == 5:
+            P = r'$\exists x\in \mathbb{Z}, x^2 \leq 0$'
+            p = 'Tồn tại số nguyên mà bình phương của nó nhỏ hơn hoặc bằng $0$'
+            p1 = 'Tồn tại số nguyên mà bình phương của nó lớn hơn $0$'
+            p2 = 'Mọi số nguyên đều có bình phương nhỏ hơn hoặc bằng $0$'
+            p3 = 'Mọi số nguyên đều có bình phương lớn hơn $0$'
+
+        v = [P, p, p1, p2, p3]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        P, p, p1, p2, p3 = v[0], v[1], v[2], v[3], v[4]
+        dapso = f'{p}'
+        debai = f"""Phát biểu bằng lời mệnh đề: ``{P}''."""
+        giai = f"""Kí hiệu $\\forall$ phát biểu là "với mọi" hoặc "mọi", kí hiệu $\\exists$ phát biểu là "tồn tại" hoặc "có một"."""
+        dsnhieu = [f'{p1}', f'{p2}', f'{p3}']
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    # Giữ nguyên phần replace theo cấu trúc hệ thống của bạn
+    cauTN = cauTN.replace("--", "+").replace("-+", "-").replace("+-", "-").replace(".0", ",0").replace(".1",
+                                                                                                       ",1").replace(
+        ".2", ",2").replace(".3", ",3").replace(".4", ",4").replace(".5", ",5").replace(".6", ",6").replace(".7",
+                                                                                                            ",7").replace(
+        ".8", ",8").replace(".9", ",9")
+    return cauTN
+# print(K10_C1_B1_PhatBieuMenhDe_MC_NB(10,1))
+
+
+def K10_C1_B1_PhuDinhVoiMoiTonTai_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+
+    while dem < socau:
+        # Sinh dữ liệu ngẫu nhiên
+        m = np.random.randint(-9, 9)
+        while m == 0:
+            m = np.random.randint(-9, 9)
+        n = np.random.randint(-9, 9)
+
+        fx = x ** 2 - m * x + n
+        gx = m * x - n
+        ham = np.random.choice([fx, gx])
+
+        dk1 = random.choice(['\\exists', '\\forall'])
+        dk2 = random.choice(['>', '<', '\\le', '\\ge', '=', '\\ne'])
+
+        KiHieu = ['\\exists', '\\forall', '>', '<', '\\le', '\\ge', '=', '\\ne']
+        PhuDinh = ['\\forall', '\\exists', '\\le', '\\ge', '>', '<', '\\ne', '=']
+        PhuDinhList = list(zip(KiHieu, PhuDinh))
+        PhuDinhDict = dict(PhuDinhList)
+
+        if dk2 == '>':
+            PhuDinhSai = '<'
+        elif dk2 == '<':
+            PhuDinhSai = '>'
+        elif dk2 == '\\le':
+            PhuDinhSai = '\\ge'
+        elif dk2 == '\\ge':
+            PhuDinhSai = '\\le'
+        else:
+            PhuDinhSai = dk2
+
+        # Chống trùng
+        v = [latex(ham), dk1, dk2, PhuDinhSai]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        # Tách biến đặc trưng từ list gt
+        ham_latex, dk1, dk2, PhuDinhSai = v[0], v[1], v[2], v[3]
+
+        KiHieu = ['\\exists', '\\forall', '>', '<', '\\le', '\\ge', '=', '\\ne']
+        PhuDinh = ['\\forall', '\\exists', '\\le', '\\ge', '>', '<', '\\ne', '=']
+        PhuDinhDict = dict(list(zip(KiHieu, PhuDinh)))
+
+        debai = f"""Mệnh đề nào sau đây là mệnh đề phủ định của mệnh đề: ``${dk1} x \\in \\mathbb{{R}}, {ham_latex} {dk2} 0$''?"""
+
+        # Sửa đổi: Bỏ dấu $ ở đầu và cuối chuỗi vì truyền vào MC_SA_answer_const
+        dapso = f"""{PhuDinhDict[dk1]} x \\in \\mathbb{{R}}, {ham_latex} {PhuDinhDict[dk2]} 0"""
+
+        nhieu1 = f"""{dk1} x \\in \\mathbb{{R}}, {ham_latex} {PhuDinhDict[dk2]} 0"""
+        nhieu2 = f"""{dk1} x \\in \\mathbb{{R}}, {ham_latex} {PhuDinhSai} 0"""
+        nhieu3 = f"""{PhuDinhDict[dk1]} x \\in \\mathbb{{R}}, {ham_latex} {PhuDinhSai} 0"""
+        dsnhieu = [nhieu1, nhieu2, nhieu3]
+
+        giai = f"""Phủ định của mệnh đề chứa kí hiệu $\\forall$ là $\\exists$ và ngược lại, đồng thời phủ định mệnh đề tính chất phía sau."""
+
+        # Đã sửa đổi gọi hàm sang MC_SA_answer_const theo đúng yêu cầu bài toán công thức
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    # Làm sạch chuỗi hiển thị biểu thức LaTeX
+    cauTN = cauTN.replace("--", "+").replace("-+", "-").replace("+-", "-")
+    cauTN = cauTN.replace(".0", ",0").replace(".1", ",1").replace(".2", ",2").replace(".3", ",3").replace(".4",
+                                                                                                          ",4").replace(
+        ".5", ",5").replace(".6", ",6").replace(".7", ",7").replace(".8", ",8").replace(".9", ",9")
+
+    return cauTN
+
+
+
+def K10_C1_B1_MenhDeTuongDuong_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        loai_bai = np.random.randint(0, 3)
+        if loai_bai == 0:
+            k = np.random.randint(0, 4)
+            if k == 0:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $2$', 'Số tự nhiên $n$ có chữ số tận cùng là số chẵn'
+                p, q = 'số tự nhiên $n$ chia hết cho $2$', 'số tự nhiên $n$ có chữ số tận cùng là số chẵn'
+            elif k == 1:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $3$', 'Số tự nhiên $n$ có tổng các chữ số bằng $3$'
+                p, q = 'số tự nhiên $n$ chia hết cho $3$', 'số tự nhiên $n$ có tổng các chữ số bằng $3$'
+            elif k == 2:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $5$', 'Số tự nhiên $n$ có chữ số tận cùng bằng $0$ hoặc bằng $5$'
+                p, q = 'số tự nhiên $n$ chia hết cho $5$', 'số tự nhiên $n$ có chữ số tận cùng bằng $0$ hoặc bằng $5$'
+            else:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $10$', 'Số tự nhiên $n$ có chữ số tận cùng bằng $0$'
+                p, q = 'số tự nhiên $n$ chia hết cho $10$', 'số tự nhiên $n$ có chữ số tận cùng bằng $0$'
+        elif loai_bai == 1:
+            k = np.random.randint(0, 5)
+            if k == 0:
+                P, Q = 'Tam giác $ABC$ là tam giác vuông', 'Tam giác $ABC$ có một góc bằng $90^{\\circ}$'
+                p, q = 'tam giác $ABC$ là tam giác vuông', 'tam giác $ABC$ có một góc bằng $90^{\\circ}$'
+            elif k == 1:
+                P, Q = 'Tam giác $ABC$ là tam giác cân', 'Tam giác $ABC$ có hai cạnh bằng nhau'
+                p, q = 'tam giác $ABC$ là tam giác cân', 'tam giác $ABC$ có hai cạnh bằng nhau'
+            elif k == 2:
+                P, Q = 'Tam giác $ABC$ là tam giác đều', 'Tam giác $ABC$ có ba cạnh bằng nhau'
+                p, q = 'tam giác $ABC$ là tam giác đều', 'tam giác $ABC$ có ba cạnh bằng nhau'
+            elif k == 3:
+                P, Q = 'Tam giác $ABC$ là tam giác đều', 'Tam giác $ABC$ là tam giác cân'
+                p, q = 'tam giác $ABC$ là tam giác đều', 'tam giác $ABC$ là tam giác cân'
+            else:
+                P, Q = 'Tam giác $ABC$ là tam giác đều', 'Tam giác $ABC$ có ba góc bằng $60^{\\circ}$'
+                p, q = 'tam giác $ABC$ là tam giác đều', 'tam giác $ABC$ có ba góc bằng $60^{\\circ}$'
+        else:
+            k = np.random.randint(0, 5)
+            if k == 0:
+                P, Q = 'Tứ giác $ABCD$ có hai đường chéo vuông góc', 'Tứ giác $ABCD$ là hình vuông'
+                p, q = 'tứ giác $ABCD$ có hai đường chéo vuông góc', 'tứ giác $ABCD$ là hình vuông'
+            elif k == 1:
+                P, Q = 'Tứ giác $ABCD$ có hai cạnh đối diện song song', 'Tứ giác $ABCD$ là hình thang'
+                p, q = 'tứ giác $ABCD$ có hai cạnh đối diện song song', 'tứ giác $ABCD$ là hình thang'
+            elif k == 2:
+                P, Q = 'Tứ giác $ABCD$ là hình thang có hai cạnh bên bằng nhau', 'Tứ giác $ABCD$ là hình thang cân'
+                p, q = 'tứ giác $ABCD$ là hình thang có hai cạnh bên bằng nhau', 'tứ giác $ABCD$ là hình thang cân'
+            elif k == 3:
+                P, Q = 'Tứ giác $ABCD$ là hình vuông', 'Tứ giác $ABCD$ là hình thoi có một góc vuông'
+                p, q = 'tứ giác $ABCD$ là hình vuông', 'tứ giác $ABCD$ là hình thoi có một góc vuông'
+            else:
+                P, Q = 'Tứ giác $ABCD$ là hình vuông', 'Tứ giác $ABCD$ là hình chữ nhật có hai cạnh kề bằng nhau'
+                p, q = 'tứ giác $ABCD$ là hình vuông', 'tứ giác $ABCD$ là hình chữ nhật có hai cạnh kề bằng nhau'
+
+        v = [P, Q, p, q]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        P, Q, p, q = v[0], v[1], v[2], v[3]
+
+        debai = f"""Cho hai mệnh đề sau:\\\\ $P \\colon$ ``{P}'';\\\\ $Q \\colon$ ``{Q}''.\\\\ Hãy phát biểu mệnh đề $P \\Leftrightarrow Q$."""
+        dapso = f"""{P} nếu và chỉ nếu {q}"""
+        dsnhieu = [
+            f"""Nếu {p} thì {q}""",
+            f"""Vì {p} nên {q}""",
+            f"""Nếu {q} thì {p}"""
+        ]
+
+        giai = f"""Mệnh đề tương đương $P \\Leftrightarrow Q$ được phát biểu dưới dạng ``$P$ nếu và chỉ nếu $Q$''."""
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B1_DieuKienCanDu_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        loai_bai = np.random.randint(0, 3)
+        if loai_bai == 0:
+            k = np.random.randint(0, 4)
+            if k == 0:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $6$', 'Số tự nhiên $n$ chia hết cho $2$'
+                p, q = 'số tự nhiên $n$ chia hết cho $6$', 'số tự nhiên $n$ chia hết cho $2$'
+            elif k == 1:
+                P, Q = 'Số tự nhiên $n$ có tổng các chữ số chia hết cho $3$', 'Số tự nhiên $n$ chia hết cho $3$'
+                p, q = 'số tự nhiên $n$ có tổng các chữ số chia hết cho $3$', 'số tự nhiên $n$ chia hết cho $3$'
+            elif k == 2:
+                P, Q = 'Số tự nhiên $n$ có chữ số tận cùng bằng $0$', 'Số tự nhiên $n$ chia hết cho $5$'
+                p, q = 'số tự nhiên $n$ có chữ số tận cùng bằng $0$', 'số tự nhiên $n$ chia hết cho $5$'
+            else:
+                P, Q = 'Số tự nhiên $n$ chia hết cho $10$', 'Số tự nhiên $n$ có chữ số tận cùng là số chẵn'
+                p, q = 'số tự nhiên $n$ chia hết cho $10$', 'số tự nhiên $n$ có chữ số tận cùng là số chẵn'
+        elif loai_bai == 1:
+            k = np.random.randint(0, 4)
+            if k == 0:
+                P, Q = 'Tam giác $ABC$ là tam giác đều', 'Tam giác $ABC$ là tam giác cân'
+                p, q = 'tam giác $ABC$ là tam giác đều', 'tam giác $ABC$ là tam giác cân'
+            elif k == 1:
+                P, Q = 'Tam giác $ABC$ là tam giác đều', 'Tam giác $ABC$ có hai góc bằng nhau'
+                p, q = 'tam giác $ABC$ là tam giác đều', 'tam giác $ABC$ có hai góc bằng nhau'
+            elif k == 2:
+                P, Q = 'Tam giác $ABC$ có một góc bằng $90^{\\circ}$', 'Tam giác $ABC$ là tam giác vuông'
+                p, q = 'tam giác $ABC$ có một góc bằng $90^{\\circ}$', 'tam giác $ABC$ là tam giác vuông'
+            else:
+                P, Q = 'Tam giác $ABC$ là tam giác cân và có một góc bằng $60^{\\circ}$', 'Tam giác $ABC$ là tam giác đều'
+                p, q = 'tam giác $ABC$ là tam giác cân và có một góc bằng $60^{\\circ}$', 'tam giác $ABC$ là tam giác đều'
+        else:
+            k = np.random.randint(0, 4)
+            if k == 0:
+                P, Q = 'Tứ giác $ABCD$ là hình thoi', 'Tứ giác $ABCD$ có hai đường chéo vuông góc'
+                p, q = 'tứ giác $ABCD$ là hình thoi', 'tứ giác $ABCD$ có hai đường chéo vuông góc'
+            elif k == 1:
+                P, Q = 'Tứ giác $ABCD$ là hình chữ nhật', 'Tứ giác $ABCD$ là hình thang'
+                p, q = 'tứ giác $ABCD$ là hình chữ nhật', 'tứ giác $ABCD$ là hình thang'
+            elif k == 2:
+                P, Q = 'Tứ giác $ABCD$ là hình vuông', 'Tứ giác $ABCD$ là hình thoi có một góc vuông'
+                p, q = 'tứ giác $ABCD$ là hình vuông', 'tứ giác $ABCD$ là hình thoi có một góc vuông'
+            else:
+                P, Q = 'Tứ giác $ABCD$ là hình vuông', 'Tứ giác $ABCD$ là hình chữ nhật có hai cạnh kề bằng nhau'
+                p, q = 'tứ giác $ABCD$ là hình vuông', 'tứ giác $ABCD$ là hình chữ nhật có hai cạnh kề bằng nhau'
+
+        # Sinh ngẫu nhiên kiểu hỏi: 0 là hỏi điều kiện cần, 1 là hỏi điều kiện đủ
+        kieu_hoi = np.random.randint(0, 2)
+
+        v = [P, Q, p, q, kieu_hoi]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        P, Q, p, q, kieu_hoi = v[0], v[1], v[2], v[3], v[4]
+
+        # Đã chuẩn hóa dấu ngoặc kép thành loại hiển thị chuẩn của LaTeX ``...''
+        debai = f"""Cho hai mệnh đề sau:\\\\ $P \\colon$ ``{P}'';\\\\ $Q \\colon$ ``{Q}''.\\\\ Hãy phát biểu mệnh đề kéo theo $P \\Rightarrow Q$ dưới dạng thuật ngữ """
+
+        if kieu_hoi == 0:
+            debai += """điều kiện cần."""
+            dapso = f"""{Q} là điều kiện cần để có {p}"""
+            dsnhieu = [
+                f"""{P} là điều kiện cần để có {q}""",
+                f"""{P} là điều kiện cần và đủ để có {q}""",
+                f"""{Q} là điều kiện đủ để có {p}"""
+            ]
+            giai = f"""Mệnh đề kéo theo $P \\Rightarrow Q$ (là mệnh đề đúng) có thể phát biểu là: ``$Q$ là điều kiện cần để có $P$''."""
+        else:
+            debai += """điều kiện đủ."""
+            dapso = f"""{P} là điều kiện đủ để có {q}"""
+            dsnhieu = [
+                f"""{Q} là điều kiện đủ để có {p}""",
+                f"""{P} là điều kiện cần và đủ để có {q}""",
+                f"""{Q} là điều kiện cần để có {p}"""
+            ]
+            giai = f"""Mệnh đề kéo theo $P \\Rightarrow Q$ (là mệnh đề đúng) có thể phát biểu là: ``$P$ là điều kiện đủ để có $Q$''."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+def K10_C4_B8_XetTinhDungSaiVecto_MC_TH(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+
+    while dem < socau:
+        # Sinh ngẫu nhiên nhóm kiến thức (0: Khái niệm mở đầu, 1: Phép cộng, 2: Phép trừ, 3: Quy tắc hình học)
+        loai_kienthuc = np.random.randint(0, 4)
+
+        if loai_kienthuc == 0:
+            dapso = """Hai vectơ cùng phương với một vectơ thứ ba khác vectơ $\\vec{0}$ thì cùng phương với nhau."""
+            dsnhieu = [
+                """Tổng của hai vectơ khác $\\vec{0}$ luôn là một vectơ khác $\\vec{0}$.""",
+                """Hai vectơ không bằng nhau thì có độ dài bắt buộc không bằng nhau.""",
+                """Vectơ-không $\\vec{0}$ có độ dài tùy ý và không có hướng cố định."""
+            ]
+            giai = """Theo tính chất bắc cầu của quan hệ cùng phương: Nếu $\\vec{a} \\parallel \\vec{c}$ và $\\vec{b} \\parallel \\vec{c}$ (với $\\vec{c} \\neq \\vec{0}$) thì $\\vec{a} \\parallel \\vec{b}$."""
+
+        elif loai_kienthuc == 1:
+            dapso = """Vectơ đối của vectơ-không $\\vec{0}$ là chính nó"""
+            dsnhieu = [
+                """Tổng của hai vectơ có độ dài bằng nhau luôn là vectơ $\\vec{0}$""",
+                """Nếu $\\vec{a} + \\vec{b} = \\vec{0}$ thì hai vectơ $\\vec{a}$ và $\\vec{b}$ phải cùng hướng với nhau""",
+                """Độ dài của tổng hai vectơ luôn bằng tổng độ dài của từng vectơ"""
+            ]
+            giai = """Theo định nghĩa, vectơ đối của $\\vec{0}$ là $\\vec{0}$ vì $\\vec{0} + \\vec{0} = \\vec{0}$."""
+
+        elif loai_kienthuc == 2:
+            dapso = """Hiệu của hai vectơ bằng nhau là vectơ-không $\\vec{0}$."""
+            dsnhieu = [
+                """Vectơ đối của vectơ $\\vec{a}$ là vectơ cùng hướng và cùng độ dài với $\\vec{a}$.""",
+                """Hiệu của hai vectơ $\\vec{a} - \\vec{b}$ là vectơ ngược hướng với vectơ $\\vec{b} - \\vec{a}$ nhưng có độ dài nhỏ hơn.""",
+                """Với ba điểm bất kì $A, B, C$, ta luôn có $\\vec{AB} - \\vec{AC} = \\vec{BC}$."""
+            ]
+            giai = """Nếu hai vectơ bằng nhau $\\vec{a} = \\vec{b}$ thì $\\vec{a} - \\vec{b} = \\vec{a} + (-\\vec{a}) = \\vec{0}$."""
+
+        else:
+            dapso = """Với ba điểm bất kì $A, B, C$, ta luôn có $\\vec{AB} + \\vec{BC} = \\vec{AC}$."""
+            dsnhieu = [
+                """Với ba điểm bất kì $A, B, C$, ta luôn có $\\vec{AB} + \\vec{AC} = \\vec{BC}$.""",
+                """Nếu $I$ là trung điểm của đoạn thẳng $AB$ thì $\\vec{IA} + \\vec{IB} = \\vec{AB}$.""",
+                """Nếu $G$ là trọng tâm của tam giác $ABC$ thì $\\vec{GA} + \\vec{GB} = \\vec{GC}$."""
+            ]
+            giai = """Đây là hệ thức đúng theo quy tắc ba điểm (quy tắc tam giác) đối với phép cộng vectơ."""
+
+        v = [loai_kienthuc, dapso]
+        if v not in gt:
+            gt.append([loai_kienthuc, dapso, dsnhieu, giai])
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        loai_kienthuc, dapso, dsnhieu, giai = v[0], v[1], v[2], v[3]
+        debai = """Khẳng định nào sau đây là khẳng định ``đúng''?"""
+
+        # Gọi hàm xử lý văn bản toán học trắc nghiệm đơn thuần
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B1_MenhDeKeoTheo_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+
+    while dem < socau:
+        # Sinh ngẫu nhiên bối cảnh quy luật khoa học khách quan và sự kiện lịch sử/kinh tế (tổng cộng 20 bối cảnh)
+        loai_boi_canh = np.random.randint(0, 20)
+
+        if loai_boi_canh == 0:
+            P_text = "Căng thẳng địa chính trị xảy ra nghiêm trọng trên thế giới"
+            Q_text = "Giá vàng có xu hướng tăng nhanh trong ngắn hạn"
+            p_text = "căng thẳng địa chính trị xảy ra nghiêm trọng trên thế giới"
+            q_text = "giá vàng có xu hướng tăng nhanh trong ngắn hạn"
+        elif loai_boi_canh == 1:
+            P_text = "James Watt phát minh ra máy hơi nước vào thế kỷ XVIII"
+            Q_text = "Cuộc cách mạng công nghiệp được mở đầu tại Anh"
+            p_text = "James Watt phát minh ra máy hơi nước vào thế kỷ XVIII"
+            q_text = "cuộc cách mạng công nghiệp được mở đầu tại Anh"
+        elif loai_boi_canh == 2:
+            P_text = "Hiệp định Genève năm 1954 về Đông Dương được ký kết"
+            Q_text = "Hòa bình được lập lại ở miền Bắc Việt Nam"
+            p_text = "Hiệp định Genève năm 1954 về Đông Dương được ký kết"
+            q_text = "hòa bình được lập lại ở miền Bắc Việt Nam"
+        elif loai_boi_canh == 3:
+            P_text = "Trái Đất tự quay quanh trục từ Tây sang Đông"
+            Q_text = "Hiện tượng ngày và đêm luân phiên diễn ra trên Trái Đất"
+            p_text = "Trái Đất tự quay quanh trục từ Tây sang Đông"
+            q_text = "hiện tượng ngày và đêm luân phiên diễn ra trên Trái Đất"
+        elif loai_boi_canh == 4:
+            P_text = "Thanh kim loại bị đốt nóng ở nhiệt độ cao"
+            Q_text = "Chiều dài của thanh kim loại đó tăng lên so với ban đầu"
+            p_text = "thanh kim loại bị đốt nóng ở nhiệt độ cao"
+            q_text = "chiều dài của thanh kim loại đó tăng lên so với ban đầu"
+        elif loai_boi_canh == 5:
+            P_text = "Đốt cháy hoàn toàn một lượng than củi trong khí ô-xi"
+            Q_text = "Khí cac-bo-nic được sinh ra từ phản ứng hóa học"
+            p_text = "đốt cháy hoàn toàn một lượng than củi trong khí ô-xi"
+            q_text = "khí cac-bo-nic được sinh ra từ phản ứng hóa học"
+        elif loai_boi_canh == 6:
+            P_text = "Nguồn cung dầu mỏ toàn cầu bị cắt giảm đột ngột"
+            Q_text = "Giá xăng dầu trong nước và quốc tế đồng loạt tăng vọt"
+            p_text = "nguồn cung dầu mỏ toàn cầu bị cắt giảm đột ngột"
+            q_text = "giá xăng dầu trong nước và quốc tế đồng loạt tăng vọt"
+        elif loai_boi_canh == 7:
+            P_text = "Tia sáng truyền xiên góc từ môi trường không khí vào nước"
+            Q_text = "Tia sáng bị gãy khúc tại mặt phân cách giữa hai môi trường"
+            p_text = "tia sáng truyền xiên góc từ môi trường không khí vào nước"
+            q_text = "tia sáng bị gãy khúc tại mặt phân cách giữa hai môi trường"
+        elif loai_boi_canh == 8:
+            P_text = "Dòng điện xoay chiều chạy qua một cuộn dây dẫn"
+            Q_text = "Từ trường biến thiên được hình thành xung quanh cuộn dây"
+            p_text = "dòng điện xoay chiều chạy qua một cuộn dây dẫn"
+            q_text = "từ trường biến thiên được hình thành xung quanh cuộn dây"
+        elif loai_boi_canh == 9:
+            P_text = "Thả một mẩu đá vôi vào dung dịch acid clohydric"
+            Q_text = "Hiện tượng sủi bọt khí xuất hiện trong ống nghiệm"
+            p_text = "thả một mẩu đá vôi vào dung dịch acid clohydric"
+            q_text = "hiện tượng sủi bọt khí xuất hiện trong ống nghiệm"
+        elif loai_boi_canh == 10:
+            P_text = "Cây xanh thực hiện quá trình quang hợp dưới ánh sáng mặt trời"
+            Q_text = "Khí ô-xi được giải phóng ra môi trường khí quyển"
+            p_text = "cây xanh thực hiện quá trình quang hợp dưới ánh sáng mặt trời"
+            q_text = "khí ô-xi được giải phóng ra môi trường khí quyển"
+        elif loai_boi_canh == 11:
+            P_text = "Mặt Trăng đi vào vùng bóng tối của Trái Đất"
+            Q_text = "Hiện tượng nguyệt thực xảy ra đối với người quan sát"
+            p_text = "Mặt Trăng đi vào vùng bóng tối của Trái Đất"
+            q_text = "hiện tượng nguyệt thực xảy ra đối với người quan sát"
+        elif loai_boi_canh == 12:
+            P_text = "Không khí chứa hơi nước bị đẩy lên cao gặp lạnh"
+            Q_text = "Quá trình ngưng tụ tạo thành mây và gây mưa diễn ra"
+            p_text = "không khí chứa hơi nước bị đẩy lên cao gặp lạnh"
+            q_text = "quá trình ngưng tụ tạo thành mây và gây mưa diễn ra"
+        elif loai_boi_canh == 13:
+            P_text = "Quân dân nhà Trần giành thắng lợi lớn tại trận Bạch Đằng năm 1288"
+            Q_text = "Cuộc xâm lược lần thứ ba của quân Nguyên Mông hoàn toàn tan rã"
+            p_text = "quân dân nhà Trần giành thắng lợi lớn tại trận Bạch Đằng năm 1288"
+            q_text = "cuộc xâm lược lần thứ ba của quân Nguyên Mông hoàn toàn tan rã"
+        elif loai_boi_canh == 14:
+            P_text = "Triều đình nhà Nguyễn ký kết Hiệp ước Nhâm Tuất năm 1862"
+            Q_text = "Ba tỉnh miền Đông Nam Kỳ bị cắt nhượng cho thực dân Pháp"
+            p_text = "Triều đình nhà Nguyễn ký kết Hiệp ước Nhâm Tuất năm 1862"
+            q_text = "ba tỉnh miền Đông Nam Kỳ bị cắt nhượng cho thực dân Pháp"
+        elif loai_boi_canh == 15:
+            P_text = "Cuộc Cách mạng tháng Mười Nga năm 1917 giành được thắng lợi"
+            Q_text = "Nhà nước xã hội chủ nghĩa đầu tiên trên thế giới được thành lập"
+            p_text = "cuộc Cách mạng tháng Mười Nga năm 1917 giành được thắng lợi"
+            q_text = "nhà nước xã hội chủ nghĩa đầu tiên trên thế giới được thành lập"
+        elif loai_boi_canh == 16:
+            P_text = "Nhu cầu mua một loại nông sản xuất khẩu tăng mạnh"
+            Q_text = "Thương lái đẩy mạnh thu mua làm giá nông sản đó tăng theo"
+            p_text = "nhu cầu mua một loại nông sản xuất khẩu tăng mạnh"
+            q_text = "thương lái đẩy mạnh thu mua làm giá nông sản đó tăng theo"
+        elif loai_boi_canh == 17:
+            P_text = "Một quốc gia rơi vào tình trạng siêu lạm phát kéo dài"
+            Q_text = "Sức mua tiêu dùng của đồng nội tệ bị suy giảm nghiêm trọng"
+            p_text = "một quốc gia rơi vào tình trạng siêu lạm phát kéo dài"
+            q_text = "sức mua tiêu dùng của đồng nội tệ bị suy giảm nghiêm trọng"
+        elif loai_boi_canh == 18:
+            P_text = "Dòng sông mang theo lượng phù sa lớn đổ về cửa biển"
+            Q_text = "Đồng bằng châu thổ tại vùng cửa sông được mở rộng dần"
+            p_text = "dòng sông mang theo lượng phù sa lớn đổ về cửa biển"
+            q_text = "đồng bằng châu thổ tại vùng cửa sông được mở rộng dần"
+        else:
+            P_text = "Vùng địa chất xảy ra sự đứt gãy mạnh trong lòng đất"
+            Q_text = "Các trận động đất và chấn động lan truyền trên bề mặt"
+            p_text = "vùng địa chất xảy ra sự đứt gãy mạnh trong lòng đất"
+            q_text = "các trận động đất và chấn động lan truyền trên bề mặt"
+
+        v = [loai_boi_canh, P_text, Q_text]
+        if v not in gt:
+            gt.append([loai_boi_canh, P_text, Q_text, p_text, q_text])
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        loai_boi_canh, P_text, Q_text, p_text, q_text = v[0], v[1], v[2], v[3], v[4]
+
+        debai = f"""Cho hai mệnh đề khoa học khách quan sau:\\\\ $P \\colon$ ``{P_text}'';\\\\ $Q \\colon$ ``{Q_text}''.\\\\ Hãy phát biểu mệnh đề kéo theo $P \\Rightarrow Q$."""
+
+        dapso = f"""Nếu {p_text} thì {q_text}"""
+        dsnhieu = [
+            f"""Nếu {q_text} thì {p_text}""",
+            f"""{P_text} khi và chỉ khi {q_text}""",
+            f"""Nếu {p_text} thì không có chuyện {q_text}"""
+        ]
+
+        giai = f"""Mệnh đề kéo theo $P \\Rightarrow Q$ được phát biểu dưới dạng cấu trúc khoa học chuẩn mực: ``Nếu $P$ thì $Q$''. Do đó phương án phát biểu đúng là: ``Nếu {p_text} thì {q_text}''."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+import numpy as np
+from sympy import Symbol
+
+
+def K10_C1_B1_PhuDinhMenhDeLogic_MC_TH(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        k = np.random.randint(0, 10)
+
+        # LOẠI BỎ TOÀN BỘ DẤU TỰ BỌC $ Ở ĐÂY ĐỂ TRÁNH LỖI NHÂN ĐÔI DẤU ĐÔ-LA
+        if k == 0:
+            P = r"\forall x\in \mathbb{Z}, x^3 > x"
+            p = r"\exists x\in \mathbb{Z}, x^3 \le x"
+            p1 = r"\forall x\in \mathbb{Z}, x^3 \le x"
+            p2 = r"\forall x \not\in \mathbb{Z}, x^3 \le x"
+            p3 = r"\exists x \not\in \mathbb{Z}, x^3 \le x"
+        elif k == 1:
+            P = r"\forall n\in \mathbb{N}, n^2 > n"
+            p = r"\exists n\in \mathbb{N}, n^2 \le n"
+            p1 = r"\forall n\in \mathbb{N}, n^2 \le n"
+            p2 = r"\exists n\not\in \mathbb{N}, n^2 \le n"
+            p3 = r"\forall n\not\in \mathbb{N}, n^2 \le n"
+        elif k == 2:
+            P = r"\exists x\in \mathbb{R}, \dfrac{1}{x} = x"
+            p = r"\forall x\in \mathbb{R}, \dfrac{1}{x} \ne x"
+            p1 = r"\exists x\in \mathbb{R}, \dfrac{1}{x} \ne x"
+            p2 = r"\forall x\in \mathbb{R}, \dfrac{1}{x} = -x"
+            p3 = r"\exists x\in \mathbb{R}, \dfrac{1}{x} = -x"
+        elif k == 3:
+            P = r"\exists n\in \mathbb{N}, \dfrac{1}{n}\in \mathbb{N}"
+            p = r"\forall n\in \mathbb{N}, \dfrac{1}{n}\not\in \mathbb{N}"
+            p1 = r"\exists n\in \mathbb{N}, \dfrac{1}{n}\not\in \mathbb{N}"
+            p2 = r"\forall n\in \mathbb{N}, \dfrac{1}{n} \in \mathbb{Z}"
+            p3 = r"\exists n\in \mathbb{N}, \dfrac{1}{n} \in \mathbb{Z}"
+        elif k == 4:
+            P = r"\forall x\in \mathbb{R}, |x| < 0"
+            p = r"\exists x\in \mathbb{R}, |x| \ge 0"
+            p1 = r"\forall x\in \mathbb{R}, |x| \ge 0"
+            p2 = r"\exists x\in \mathbb{R}, |x| > 0"
+            p3 = r"\forall x\in \mathbb{R}, |x| > 0"
+        elif k == 5:
+            P = r"\exists x\in \mathbb{Z}, x^2 \le 0"
+            p = r"\forall x\in \mathbb{Z}, x^2 > 0"
+            p1 = r"\exists x\in \mathbb{Z}, x^2 > 0"
+            p2 = r"\forall x\in \mathbb{Z}, x^2 \ge 0"
+            p3 = r"\exists x\in \mathbb{Z}, x^2 \ge 0"
+        elif k == 6:
+            P = r"\forall x\in \mathbb{R}, x^2 - x + 7 > 0"
+            p = r"\exists x\in \mathbb{R}, x^2 - x + 7 \le 0"
+            p1 = r"\forall x\in \mathbb{R}, x^2 - x + 7 \le 0"
+            p2 = r"\exists x\in \mathbb{R}, x^2 - x + 7 < 0"
+            p3 = r"\forall x\in \mathbb{R}, x^2 - x + 7 < 0"
+        elif k == 7:
+            P = r"\exists x\in \mathbb{Q}, x^2 = 2"
+            p = r"\forall x\in \mathbb{Q}, x^2 \ne 2"
+            p1 = r"\exists x\in \mathbb{Q}, x^2 \ne 2"
+            p2 = r"\forall x\not\in \mathbb{Q}, x^2 = 2"
+            p3 = r"\exists x\not\in \mathbb{Q}, x^2 \ne 2"
+        elif k == 8:
+            P = r"\forall n\in \mathbb{N}, 2^n \ge n + 2"
+            p = r"\exists n\in \mathbb{N}, 2^n < n + 2"
+            p1 = r"\forall n\in \mathbb{N}, 2^n < n + 2"
+            p2 = r"\exists n\in \mathbb{N}, 2^n \le n + 2"
+            p3 = r"\forall n\in \mathbb{N}, 2^n \le n + 2"
+        else:
+            P = r"\exists x\in \mathbb{R}, x^2 + 1 = 0"
+            p = r"\forall x\in \mathbb{R}, x^2 + 1 \ne 0"
+            p1 = r"\exists x\in \mathbb{R}, x^2 + 1 \ne 0"
+            p2 = r"\forall x\in \mathbb{R}, x^2 + 1 > 0"
+            p3 = r"\forall x\in \mathbb{R}, x^2 + 1 < 0"
+
+        v = [P, p, p1, p2, p3]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        P, p, p1, p2, p3 = v[0], v[1], v[2], v[3], v[4]
+
+        # CHỦ ĐỘNG BỌC 1 CẶP DẤU DOLLAR DUY NHẤT Ở ĐỀ BÀI VÀ CÁC PHƯƠNG ÁN CHỌN KHÔNG BỊ LỖI TEXT
+        debai = f"""Tìm mệnh đề phủ định của mệnh đề: ``${P}$''."""
+
+        dapso = f"""${p}$"""
+        dsnhieu = [f"""${p1}$""", f"""${p2}$""", f"""${p3}$"""]
+
+        giai = f"""Phủ định của mệnh đề chứa lượng từ được xác định bằng cách đảo ngược ký hiệu lượng từ và phủ định tính chất của vị từ:\\\\
+        - Lượng từ $\\forall$ chuyển thành $\\exists$ (và ngược lại).\\\\
+        - Các dấu so sánh, tính chất thuộc tập hợp biến đổi thành phủ định tương ứng ($>$ thành $\\le$, $=$ thành $\\ne$, $\\in$ thành $\\not\\in$,...).\\\\
+        Do đó, phủ định của mệnh đề ``${P}$'' là ``${p}$''."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B2_TapConSo_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        A_list = []
+        k = np.random.randint(3, 5)  # Tập hợp gồm 3 hoặc 4 phần tử
+        for i in range(0, k):
+            a_val = np.random.randint(-9, 10)
+            while a_val in A_list:
+                a_val = np.random.randint(-9, 10)
+            A_list.append(a_val)
+
+        # Sắp xếp lại danh sách phần tử tăng dần để hiển thị tập hợp đẹp và chuẩn toán học
+        A_list.sort()
+
+        v = [A_list]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        A_list = v[0]
+
+        # Chọn ngẫu nhiên một phần tử thuộc tập A để làm đáp án (vì phần tử không phải là tập con)
+        idx_choice = np.random.randint(0, len(A_list))
+        pt_thuoc = A_list[idx_choice]
+
+        # Tạo phương án nhiễu 2: Tập một phần tử khác với phần tử đã chọn ở đáp án
+        idx_diff = np.random.randint(0, len(A_list))
+        while idx_diff == idx_choice:
+            idx_diff = np.random.randint(0, len(A_list))
+        pt_nhieu = A_list[idx_diff]
+
+        # Tạo phương án nhiễu 3: Tập gồm 2 phần tử đầu tiên của tập A
+        tập_nhiều_hai_pt = f"\\left\\{{ {A_list[0]}, {A_list[1]} \\right\\}}"
+
+        # Định dạng chuỗi hiển thị cho tập hợp A theo chuẩn LaTeX
+        A_latex = f"\\left\\{{ " + ", ".join(map(str, A_list)) + " \\right\\}}"
+
+        debai = f"""Trong các phương án sau, phương án nào \\textbf{{không}} phải là tập con của tập hợp $A = {A_latex}$?"""
+
+        # BỌC TOÀN BỘ PHƯƠNG ÁN CHỌN TRONG DẤU $ ĐỂ TRÁNH LỖI HIỂN THỊ TEXT TRONG ĐỒNG BỘ MATH_TYPE
+        dapso = f"""${pt_thuoc}$"""
+        dsnhieu = [
+            f"""$\\varnothing$""",
+            f"""$\\left\\{{ {pt_nhieu} \\right\\}}$""",
+            f"""${tập_nhiều_hai_pt}$"""
+        ]
+
+        giai = f"""Ký hiệu tập hợp con phải được đặt trong dấu ngoặc nhọn hoặc ký hiệu tập rỗng $\\varnothing$.\\\\
+        Vì ${pt_thuoc}$ là một phần tử thuộc tập hợp $A$, nên ta chỉ có quan hệ thuộc: ${pt_thuoc} \\in A$.\\\\
+        Do đó, phương án ${pt_thuoc}$ \\textbf{{không}} phải là tập con của tập hợp $A$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+def K10_C1_B2_TapConChu_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    # Bảng chữ cái tiếng Anh dùng để sinh tập hợp ngẫu nhiên
+    bang_chu_cai = ['a', 'b', 'c', 'd', 'e', 'm', 'n', 'p', 'q', 'x', 'y', 'z', 'u', 'v', 't']
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh ngẫu nhiên số lượng phần tử của tập hợp (2 hoặc 3 phần tử)
+        k = np.random.randint(2, 4)
+
+        # Chọn ngẫu nhiên k chữ cái không trùng nhau từ bảng chữ cái
+        A_list = list(np.random.choice(bang_chu_cai, size=k, replace=False))
+        A_list.sort()  # Sắp xếp để hiển thị theo thứ tự bảng chữ cái cho đẹp
+
+        v = [A_list]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        A_list = v[0]
+
+        # Chọn ngẫu nhiên 1 phần tử nằm trong tập A để làm bẫy cho đáp án đúng
+        # Vì phần tử đơn lẻ x thuộc A ký hiệu là x \in A, chứ không phải tập con (phải bọc trong dấu nhọn)
+        idx_choice = np.random.randint(0, len(A_list))
+        pt_thuoc = A_list[idx_choice]
+
+        # Chọn ngẫu nhiên 1 phần tử khác trong tập A để làm nhiễu tập con đơn tử
+        idx_diff = np.random.randint(0, len(A_list))
+        while idx_diff == idx_choice and len(A_list) > 1:
+            idx_diff = np.random.randint(0, len(A_list))
+        pt_nhieu = A_list[idx_diff]
+
+        # Tạo chuỗi hiển thị danh sách các phần tử cho tập A, ngăn cách bởi dấu chấm phẩy ;
+        A_elements_str = "; ".join(A_list)
+        A_latex = f"\\left\\{{ {A_elements_str} \\right\\}}"
+
+        debai = f"""Trong các phương án sau, phương án nào \\textbf{{không}} phải là tập con của tập hợp $A = {A_latex}$?"""
+
+        # CHỦ ĐỘNG BỌC ĐỒNG BỘ CẶP DẤU DOLLAR DUY NHẤT CHO CÁC PHƯƠNG ÁN CHỌN ĐỂ TRÁNH LỖI TEXT
+        dapso = f"""${pt_thuoc}$"""
+
+        # Các phương án nhiễu đều là tập con hợp pháp (Tập rỗng, tập chứa chính nó, tập chứa 1 phần tử)
+        dsnhieu = [
+            f"""$\\varnothing$""",
+            f"""$\\left\\{{ {A_elements_str} \\right\\}}$""",
+            f"""$\\left\\{{ {pt_nhieu} \\right\\}}$"""
+        ]
+
+        giai = f"""Mỗi phần tử ${pt_thuoc}$ thuộc tập hợp $A$ thì được biểu diễn bởi quan hệ thuộc: ${pt_thuoc} \\in A$.\\\\
+        Để biểu diễn một tập hợp con, ta phải sử dụng ký hiệu tập hợp bọc trong dấu ngoặc nhọn, ví dụ $\\left\\{{ {pt_thuoc} \\right\\}} \\subset A$ hoặc tập rỗng $\\varnothing \\subset A$.\\\\
+        Do đó, phương án ${pt_thuoc}$ \\textbf{{không}} phải là tập con của tập hợp $A$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B2_TapConKhoang_MC_NB(socau, dang):
+    x = Symbol('x')
+    y = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh tập gốc A = [a_val; b_val) với độ dài khoảng đủ lớn để chứa các tập con
+        a_val = np.random.randint(-9, 5)
+        b_val = np.random.randint(a_val + 5, a_val + 15)  # Đảm bảo b_val luôn lớn hơn a_val ít nhất 5 đơn vị
+
+        # Sinh đáp án đúng (a0; b0) nằm hoàn toàn bên trong [a_val; b_val)
+        a0 = np.random.randint(a_val + 1, b_val - 2)
+        b0 = np.random.randint(a0 + 1, b_val)
+
+        # Sinh nhiễu 1: [a1; b1) vi phạm ở đầu mút trái (a1 < a_val)
+        a1 = np.random.randint(a_val - 5, a_val)
+        b1 = np.random.randint(a_val + 1, b_val)  # Bảo đảm b1 > a_val > a1 để tập không bị rỗng
+
+        # Sinh nhiễu 2: (-\infty; b2) chắc chắn vươn về âm vô cùng nên không thể là tập con của A
+        b2 = np.random.randint(a_val + 1, b_val)
+
+        # Sinh nhiễu 3: (a3; b_val] vi phạm ở đầu mút phải vì chứa phần tử b_val, trong khi A không chứa b_val
+        a3 = np.random.randint(a_val + 1, b_val)
+
+        v = [a_val, b_val, a0, b0, a1, b1, b2, a3]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a_val, b_val, a0, b0, a1, b1, b2, a3 = v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7]
+
+        debai = f"""Cho tập hợp $A = [{a_val}; {b_val})$. Trong các tập hợp sau, tập hợp nào là tập con của tập hợp $A$?"""
+
+        # ĐỒNG BỘ BỌC TOÀN BỘ PHƯƠNG ÁN CHỌN TRONG CẶP DẤU $ DUY NHẤT
+        dapso = f"""$({a0}; {b0})$"""
+        dsnhieu = [
+            f"""$[{a1}; {b1})$""",
+            f"""$(-\\infty; {b2})$""",
+            f"""$({a3}; {b_val}]$"""
+        ]
+
+        giai = f"""Điều kiện để một tập số $X$ là tập con của $A = [{a_val}; {b_val})$ là mọi phần tử của $X$ phải thuộc $A$.\\\\
+        - Xét phương án $({a0}; {b0})$: Do ${a_val} < {a0} < {b0} < {b_val}$, nên toàn bộ khoảng $({a0}; {b0})$ đều nằm trọn bên trong nửa khoảng $[{a_val}; {b_val})$. Do đó $({a0}; {b0}) \\subset A$.\\\\
+        - Các phương án còn lại đều chứa các phần tử không thuộc $A$ (ví dụ: $[{a1}; {b1})$ chứa phần tử nhỏ hơn ${a_val}$, $(-\\infty; {b2})$ chứa các số âm vô cùng, $({a3}; {b_val}]$ chứa phần tử ${b_val}$ mà $A$ không có)."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+
+def K10_C1_B2_QuanHeThuocTapCon_MC_NB(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    # Danh sách các chữ cái hoa đặt tên cho tập hợp và chữ thường đặt tên cho phần tử
+    chu_hoa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'M', 'N', 'P', 'Q', 'S', 'T', 'V', 'X', 'Y', 'Z']
+    chu_thuong = ['a', 'b', 'c', 'd', 'e', 'g', 'h', 'k', 'm', 'n', 'p', 'q', 't', 'u', 'v', 'x', 'y', 'z']
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Lấy ngẫu nhiên 2 chữ cái viết hoa khác nhau làm tên tập hợp
+        taps = np.random.choice(chu_hoa, size=2, replace=False)
+        Tap_Con = taps[0]
+        Tap_Me = taps[1]
+
+        # Lấy ngẫu nhiên 1 chữ cái viết thường làm tên phần tử
+        Phan_Tu = np.random.choice(chu_thuong)
+
+        v = [Tap_Con, Tap_Me, Phan_Tu]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        Tap_Con, Tap_Me, Phan_Tu = v[0], v[1], v[2]
+
+        debai = f"""Cho hai tập hợp ${Tap_Con}$, ${Tap_Me}$ thỏa mãn ${Tap_Con} \\subset {Tap_Me}$ và một phần tử ${Phan_Tu} \\in {Tap_Con}$. Tìm khẳng định đúng trong các khẳng định sau."""
+
+        dapso = f"""${Phan_Tu} \\in {Tap_Me}$"""
+        dsnhieu = [
+            f"""${Phan_Tu} \\subset {Tap_Me}$""",
+            f"""${Phan_Tu} \\notin {Tap_Me}$""",
+            f"""$\\left\\{{ {Phan_Tu} \\right\\}} \\in {Tap_Con}$"""
+        ]
+
+        giai = f"""Vì phần tử ${Phan_Tu}$ thuộc tập hợp ${Tap_Con}$ (ký hiệu ${Phan_Tu} \\in {Tap_Con}$) và mọi phần tử của tập hợp ${Tap_Con}$ đều phải thuộc tập hợp ${Tap_Me}$ (do quan hệ tập con ${Tap_Con} \\subset {Tap_Me}$), nên chắc chắn phần tử ${Phan_Tu}$ phải thuộc tập hợp ${Tap_Me}$. Ký hiệu toán học đúng là ${Phan_Tu} \\in {Tap_Me}$.\\\\
+        - Phương án ${Phan_Tu} \\subset {Tap_Me}$ sai vì giữa phần tử và tập hợp chỉ có quan hệ thuộc ($\\in$), không dùng ký hiệu chứa ($\\subset$).\\\\
+        - Phương án $\\left\\{{ {Phan_Tu} \\right\\}} \\in {Tap_Con}$ sai vì tập hợp chứa phần tử ${Phan_Tu}$ thì phải dùng quan hệ chứa $\\left\\{{ {Phan_Tu} \\right\\}} \\subset {Tap_Con}$ chứ không phải thuộc."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B2_PhepToanTapHopSo_MC_TH(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Mở rộng dải số nguyên từ -15 đến 15 nhằm hạn chế tối đa việc lặp vô hạn khi socau lớn
+        nums = list(np.random.choice(range(-15, 16), size=4, replace=False))
+        nums.sort()
+
+        # Tạo cấu trúc đan xen cố định để luôn đảm bảo tập hợp A và B có giao nhau khác rỗng:
+        # A = (nums[0]; nums[2]), B = [nums[1]; nums[3]]
+        # Với nums đã được sắp xếp, ta luôn có: nums[0] < nums[1] < nums[2] < nums[3]
+        a1, a2, b1, b2 = nums[0], nums[1], nums[2], nums[3]
+
+        # Chọn ngẫu nhiên phép toán: 0: Giao (\cap), 1: Hợp (\cup), 2: Hiệu A \setminus B, 3: Hiệu B \setminus A
+        phep_toan = np.random.randint(0, 4)
+
+        v = [a1, a2, b1, b2, phep_toan]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a1, a2, b1, b2 = v[0], v[1], v[2], v[3]
+        phep_toan = v[4]
+
+        # Định dạng hiển thị chuỗi tập hợp số thực theo chuẩn Việt Nam (dấu ngăn cách chấm phẩy `;`)
+        A_str = f"({a1}; {b1})"
+        B_str = f"[{a2}; {b2}]"
+
+        # Xác định chính xác kết quả của từng phép toán theo lý thuyết tập hợp số thực
+        giao_taps = f"[{a2}; {b1})"
+        hop_taps = f"({a1}; {b2}]"
+        hieu_A_B = f"({a1}; {a2})"
+        hieu_B_A = f"[{b1}; {b2}]"
+
+        if phep_toan == 0:
+            debai = f"""Cho hai tập hợp $A = {A_str}$, $B = {B_str}$. Tìm tập hợp $A \\cap B$."""
+            dapso = f"""${giao_taps}$"""
+            dsnhieu = [f"""${hop_taps}$""", f"""${hieu_A_B}$""", f"""${hieu_B_A}$"""]
+            giai = f"""Theo định nghĩa, phép toán giao của hai tập hợp $A \\cap B$ chứa các phần tử vừa thuộc $A$ vừa thuộc $B$.\\\\
+            Biểu diễn trên trục số, phần giao nhau giữa khoảng $A = {A_str}$ và đoạn $B = {B_str}$ bắt đầu từ ${a2}$ đến ${b1}$.\\\\
+            - Tại vị trí ${a2}$: Do ${a2} \\in B$ và ${a2} \\in A$ nên lấy dấu ngoặc vuông $[$.\\\\
+            - Tại vị trí ${b1}$: Do ${b1} \\notin A$ nên lấy dấu ngoặc tròn $)$.\\\\
+            Vậy $A \\cap B = {giao_taps}$."""
+
+        elif phep_toan == 1:
+            debai = f"""Cho hai tập hợp $A = {A_str}$, $B = {B_str}$. Tìm tập hợp $A \\cup B$."""
+            dapso = f"""${hop_taps}$"""
+            dsnhieu = [f"""${giao_taps}$""", f"""${hieu_A_B}$""", f"""${hieu_B_A}$"""]
+            giai = f"""Theo định nghĩa, phép toán hợp của hai tập hợp $A \\cup B$ chứa các phần tử thuộc $A$ hoặc thuộc $B$.\\\\
+            Biểu diễn và hợp nhất hai khoảng trên trục số, ta lấy toàn bộ phạm vi từ phần tử nhỏ nhất ${a1}$ đến phần tử lớn nhất ${b2}$.\\\\
+            Vậy $A \\cup B = {hop_taps}$."""
+
+        elif phep_toan == 2:
+            debai = f"""Cho hai tập hợp $A = {A_str}$, $B = {B_str}$. Tìm tập hợp $A \\setminus B$."""
+            dapso = f"""${hieu_A_B}$"""
+            dsnhieu = [f"""${giao_taps}$""", f"""${hop_taps}$""", f"""${hieu_B_A}$"""]
+            giai = f"""Theo định nghĩa, hiệu của hai tập hợp $A \\setminus B$ gồm các phần tử thuộc $A$ nhưng không thuộc $B$.\\\\
+            Ta loại bỏ phần giao của $B$ ra khỏi khoảng $A$. Vì điểm mút ${a2} \\in B$, nên khi loại bỏ $B$, điểm mút ${a2}$ sẽ không còn thuộc hiệu (sử dụng dấu ngoặc tròn tại ${a2}$).\\\\
+            Vậy $A \\setminus B = {hieu_A_B}$."""
+
+        else:
+            debai = f"""Cho hai tập hợp $A = {A_str}$, $B = {B_str}$. Tìm tập hợp $B \\setminus A$."""
+            dapso = f"""${hieu_B_A}$"""
+            dsnhieu = [f"""${giao_taps}$""", f"""${hop_taps}$""", f"""${hieu_A_B}$"""]
+            giai = f"""Theo định nghĩa, hiệu của hai tập hợp $B \\setminus A$ gồm các phần tử thuộc $B$ nhưng không thuộc $A$.\\\\
+            Ta loại bỏ phần giao của $A$ ra khỏi đoạn $B$. Vì điểm mút ${b1} \\notin A$, nên khi loại bỏ $A$, điểm mút ${b1}$ vẫn được giữ lại trong hiệu (sử dụng dấu ngoặc vuông tại ${b1}$).\\\\
+            Vậy $B \\setminus A = {hieu_B_A}$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+import numpy as np
+from sympy import Symbol
+
+
+def K10_C1_B2_TinhChatHieuTapHop_MC_TH(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    # Danh sách các chữ cái hoa đặt tên cho tập hợp để làm phong phú đề
+    chu_hoa = ['A', 'B', 'X', 'Y', 'M', 'N', 'E', 'F']
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Lấy ngẫu nhiên một chữ cái hoa làm tên tập hợp
+        T_Hop = np.random.choice(chu_hoa)
+
+        # Chọn ngẫu nhiên loại bối cảnh tính chất:
+        # 0: Hiệu với chính nó, 1: Hiệu với tập rỗng, 2: Giao với rỗng, 3: Hợp với rỗng
+        k = np.random.randint(0, 4)
+
+        v = [T_Hop, k]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        T_Hop, k = v[0], v[1]
+
+        debai = f"""Cho tập hợp ${T_Hop} \\ne \\varnothing$. Mệnh đề nào sau đây \\textbf{{đúng}}?"""
+
+        if k == 0:
+            dapso = f"""${T_Hop} \\setminus {T_Hop} = \\varnothing$"""
+            dsnhieu = [
+                f"""${T_Hop} \\setminus \\varnothing = \\varnothing$""",
+                f"""$\\varnothing \\setminus {T_Hop} = {T_Hop}$""",
+                f"""$\\varnothing \\setminus \\varnothing = {T_Hop}$"""
+            ]
+            giai = f"""Hiệu của hai tập hợp ${T_Hop} \\setminus {T_Hop}$ là tập hợp gồm các phần tử thuộc ${T_Hop}$ nhưng không thuộc ${T_Hop}$. Do đó, hiệu của một tập hợp với chính nó luôn luôn bằng tập rỗng $\\varnothing$."""
+
+        elif k == 1:
+            dapso = f"""${T_Hop} \\setminus \\varnothing = {T_Hop}$"""
+            dsnhieu = [
+                f"""${T_Hop} \\setminus {T_Hop} = {T_Hop}$""",
+                f"""$\\varnothing \\setminus {T_Hop} = {T_Hop}$""",
+                f"""${T_Hop} \\setminus \\varnothing = \\varnothing$"""
+            ]
+            giai = f"""Hiệu của tập hợp ${T_Hop}$ với tập rỗng (${T_Hop} \\setminus \\varnothing$) là tập hợp gồm các phần tử thuộc ${T_Hop}$ nhưng không thuộc $\\varnothing$. Vì tập rỗng không có phần tử nào, nên tập hợp thu được chính là tập ${T_Hop}$."""
+
+        elif k == 2:
+            dapso = f"""${T_Hop} \\cap \\varnothing = \\varnothing$"""
+            dsnhieu = [
+                f"""${T_Hop} \\cap \\varnothing = {T_Hop}$""",
+                f"""${T_Hop} \\cap {T_Hop} = \\varnothing$""",
+                f"""$\\varnothing \\cap \\varnothing = {T_Hop}$"""
+            ]
+            giai = f"""Phép giao ${T_Hop} \\cap \\varnothing$ lấy các phần tử chung giữa tập ${T_Hop}$ và tập rỗng $\\varnothing$. Vì tập rỗng không chứa phần tử nào nên phần chung giữa chúng chắc chắn bằng tập rỗng $\\varnothing$."""
+
+        else:
+            dapso = f"""${T_Hop} \\cup \\varnothing = {T_Hop}$"""
+            # ĐÃ SỬA: Thay mệnh đề đúng (\varnothing \cup \varnothing = \varnothing) thành mệnh đề sai để không bị trùng đáp án
+            dsnhieu = [
+                f"""${T_Hop} \\cup \\varnothing = \\varnothing$""",
+                f"""${T_Hop} \\cup {T_Hop} = \\varnothing$""",
+                f"""$\\varnothing \\cup \\varnothing = {T_Hop}$"""
+            ]
+            giai = f"""Phép hợp ${T_Hop} \\cup \\varnothing$ gộp tất cả các phần tử thuộc ${T_Hop}$ hoặc thuộc $\\varnothing$. Vì tập rỗng không đóng góp thêm phần tử nào, nên tập hợp kết quả giữ nguyên là ${T_Hop}$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def K10_C1_B2_DemPhanTuPhepToan_MC_TH(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh ngẫu nhiên số lượng phần tử cho mỗi tập hợp (từ 4 đến 6 phần tử)
+        a_len = np.random.randint(4, 7)
+        b_len = np.random.randint(4, 7)
+
+        # Bốc ngẫu nhiên các phần tử số nguyên không trùng nhau từ khoảng [0, 12] để tạo tập hợp phong phú
+        A_set = set(np.random.choice(range(0, 13), size=a_len, replace=False))
+        B_set = set(np.random.choice(range(0, 13), size=b_len, replace=False))
+
+        # Chọn ngẫu nhiên phép toán tập hợp
+        pheptoan_code = np.random.randint(0, 4)
+        # 0: A \setminus B, 1: B \setminus A, 2: A \cap B, 3: A \cup B
+
+        # Đảm bảo phần giao hoặc phần hiệu không bị rỗng để bài toán sinh động
+        if len(A_set & B_set) == 0 or len(A_set - B_set) == 0 or len(B_set - A_set) == 0:
+            continue
+
+        v = [tuple(sorted(list(A_set))), tuple(sorted(list(B_set))), pheptoan_code]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        A_list, B_list, pheptoan_code = v[0], v[1], v[2]
+        A_set = set(A_list)
+        B_set = set(B_list)
+
+        # Tính toán số lượng phần tử của từng kết quả phép toán
+        len_hieu_AB = len(A_set - B_set)
+        len_hieu_BA = len(B_set - A_set)
+        len_giao = len(A_set & B_set)
+        len_hop = len(A_set | B_set)
+
+        # Thiết lập nội dung đề bài và đáp án đúng dựa vào mã phép toán
+        if pheptoan_code == 0:
+            pheptoan_tex = "A \\setminus B"
+            z_ans = len_hieu_AB
+            tap_kq_list = sorted(list(A_set - B_set))
+            giai_chi_tiet = f"Tập hợp $A \\setminus B$ gồm các phần tử thuộc $A$ nhưng không thuộc $B$. Ta có $A \\setminus B = \\left\\{{ " + ", ".join(
+                map(str, tap_kq_list)) + " \\right\\}$."
+        elif pheptoan_code == 1:
+            pheptoan_tex = "B \\setminus A"
+            z_ans = len_hieu_BA
+            tap_kq_list = sorted(list(B_set - A_set))
+            giai_chi_tiet = f"Tập hợp $B \\setminus A$ gồm các phần tử thuộc $B$ nhưng không thuộc $A$. Ta có $B \\setminus A = \\left\\{{ " + ", ".join(
+                map(str, tap_kq_list)) + " \\right\\}$."
+        elif pheptoan_code == 2:
+            pheptoan_tex = "A \\cap B"
+            z_ans = len_giao
+            tap_kq_list = sorted(list(A_set & B_set))
+            giai_chi_tiet = f"Tập hợp $A \\cap B$ gồm các phần tử vừa thuộc $A$ vừa thuộc $B$. Ta có $A \\cap B = \\left\\{{ " + ", ".join(
+                map(str, tap_kq_list)) + " \\right\\}$."
+        else:
+            pheptoan_tex = "A \\cup B"
+            z_ans = len_hop
+            tap_kq_list = sorted(list(A_set | B_set))
+            giai_chi_tiet = f"Tập hợp $A \\cup B$ gồm các phần tử thuộc $A$ hoặc thuộc $B$. Ta có $A \\cup B = \\left\\{{ " + ", ".join(
+                map(str, tap_kq_list)) + " \\right\\}$."
+
+        # Biểu diễn tập hợp A và B theo chuẩn ngăn cách dấu phẩy của LaTeX
+        A_tex = "\\left\\{" + ", ".join(map(str, A_list)) + "\\right\\}"
+        B_tex = "\\left\\{" + ", ".join(map(str, B_list)) + "\\right\\}"
+
+        debai = f"""Cho hai tập hợp $A = {A_tex}$ và $B = {B_tex}$. Tập hợp ${pheptoan_tex}$ có bao nhiêu phần tử?"""
+
+        # CHỦ ĐỘNG BỌC ĐỒNG BỘ CẶP DẤU DOLLAR DUY NHẤT CHO CÁC PHƯƠNG ÁN CHỌN SỐ NGUYÊN
+        dapso = f"""${z_ans}$"""
+
+        # Tự động tạo ra các phương án nhiễu số nguyên xung quanh đáp án đúng và đảm bảo không trùng nhau
+        ds_nhieu_so = []
+        sai_so = [-2, -1, 1, 2, 3]
+        for delta in sai_so:
+            val_nhieu = z_ans + delta
+            if val_nhieu >= 0 and val_nhieu != z_ans and val_nhieu not in ds_nhieu_so:
+                ds_nhieu_so.append(val_nhieu)
+
+        # Chọn lấy đúng 3 giá trị nhiễu khác biệt
+        nhieu_chon = list(np.random.choice(ds_nhieu_so, size=3, replace=False))
+
+        dsnhieu = [
+            f"""${nhieu_chon[0]}$""",
+            f"""${nhieu_chon[1]}$""",
+            f"""${nhieu_chon[2]}$"""
+        ]
+
+        giai = f"""{giai_chi_tiet}\\\\
+        Đếm số lượng phần tử của tập hợp vừa tìm được, ta thấy tập hợp này có tất cả ${z_ans}$ phần tử."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+
+def K10_C1_B2_PhanBuTapHop_MC_NB(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh ngẫu nhiên hai đầu mút số nguyên khác nhau trong đoạn [-10, 10]
+        A_arr = list(np.random.choice(range(-10, 11), size=2, replace=False))
+        A_arr.sort()
+        a, b = A_arr[0], A_arr[1]
+
+        # Chọn ngẫu nhiên 1 trong 4 loại khoảng/đoạn của tập hợp A
+        # 0: [a; b], 1: [a; b), 2: (a; b], 3: (a; b)
+        loai_ngoac = np.random.randint(0, 4)
+
+        v = [a, b, loai_ngoac]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a, b, loai_ngoac = v[0], v[1], v[2]
+
+        # Xử lý tường minh từng trường hợp để tránh lỗi đảo ngoặc và lỗi remove danh sách
+        if loai_ngoac == 0:
+            A_str = f"[{a}; {b}]"
+            dap_so_str = f"(-\\infty; {a}) \\cup ({b}; +\\infty)"
+            nhieu1 = f"(-\\infty; {a}] \\cup [{b}; +\\infty)"
+            nhieu2 = f"({a}; {b})"
+            nhieu3 = f"[{a}; {b})"
+        elif loai_ngoac == 1:
+            A_str = f"[{a}; {b})"
+            dap_so_str = f"(-\\infty; {a}) \\cup [{b}; +\\infty)"
+            nhieu1 = f"(-\\infty; {a}] \\cup ({b}; +\\infty)"
+            nhieu2 = f"({a}; {b}]"
+            nhieu3 = f"({a}; {b})"
+        elif loai_ngoac == 2:
+            A_str = f"({a}; {b}]"
+            dap_so_str = f"(-\\infty; {a}] \\cup ({b}; +\\infty)"
+            nhieu1 = f"(-\\infty; {a}) \\cup [{b}; +\\infty)"
+            nhieu2 = f"[{a}; {b})"
+            nhieu3 = f"[{a}; {b}]"
+        else:
+            A_str = f"({a}; {b})"
+            dap_so_str = f"(-\\infty; {a}] \\cup [{b}; +\\infty)"
+            nhieu1 = f"(-\\infty; {a}) \\cup ({b}; +\\infty)"
+            nhieu2 = f"[{a}; {b}]"
+            nhieu3 = f"[{a}; {b})"
+
+        debai = f"""Cho tập hợp $A = {A_str}$. Tìm tập hợp phần bù $C_{{\\mathbb{{R}}}}^A$."""
+
+        # CHỦ ĐỘNG BỌC TOÀN BỘ PHƯƠNG ÁN CHỌN TRONG CẶP DẤU $ DUY NHẤT ĐỂ TRÁNH LỖI TEXT
+        dapso = f"""${dap_so_str}$"""
+        dsnhieu = [f"""${nhieu1}$""", f"""${nhieu2}$""", f"""${nhieu3}$"""]
+
+        giai = f"""Theo định nghĩa, phần bù của tập hợp $A$ trong $\\mathbb{{R}}$ là ký hiệu hiệu của tập số thực với tập $A$, tức là $C_{{\\mathbb{{R}}}}^A = \\mathbb{{R}} \\setminus A$.\\\\
+        Đây là tập hợp gồm tất cả các số thực thuộc $\\mathbb{{R}}$ nhưng không thuộc tập hợp $A$.\\\\
+        - Tập hợp $A = {A_str}$ chiếm phần lõi giữa hai điểm mút ${a}$ và ${b}$.\\\\
+        - Do đó, phần bù sẽ gồm hai nhánh vô hạn nằm bên ngoài khoảng giữa, được liên kết với nhau bằng phép hợp ($\\cup$).\\\\
+        - Quy tắc đảo dấu ngoặc tại mút: Ngoặc vuông $[$ hoặc $]$ (lấy phần tử) thuộc $A$ thì phần bù không lấy phần tử đó (chuyển thành ngoặc tròn). Ngược lại, ngoặc tròn $($ hoặc $)$ không thuộc $A$ thì phần bù sẽ lấy phần tử đó (chuyển thành ngoặc vuông).\\\\
+        Vậy kết quả đúng là $C_{{\\mathbb{{R}}}}^A = {dap_so_str}$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+import numpy as np
+from sympy import Symbol
+
+
+def K10_C1_B2_TimThamSoTapHop_MC_VD(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Mở rộng dải số nguyên để đa dạng bài toán và tránh lặp vô hạn
+        a_val = np.random.randint(-15, 5)
+        b_val = np.random.randint(a_val + 5, 16)  # Đảm bảo tập A luôn rộng
+
+        # Sinh n_val nằm hoàn toàn bên trong khoảng của tập A
+        n_val = np.random.randint(a_val + 1, b_val)
+
+        # Số lượng giá trị nguyên m thỏa mãn n_val < m <= b_val là (b_val - n_val)
+        z_ans = b_val - n_val
+
+        # Chỉ chấp nhận bộ dữ liệu nếu số lượng giá trị nguyên m lớn hơn 0
+        if z_ans <= 0:
+            continue
+
+        v = [a_val, b_val, n_val, z_ans]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a_val, b_val, n_val, z_ans = v[0], v[1], v[2], v[3]
+
+        debai = f"""Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$. Có tất cả bao nhiêu giá trị nguyên của tham số $m$ để $A \\cup B = A$?"""
+
+        dapso = f"""${z_ans}$"""
+
+        # Tự động sinh danh sách nhiễu số nguyên xung quanh đáp án, đảm bảo không trùng và không âm
+        ds_nhieu_so = []
+        sai_so = [-2, -1, 1, 2, 3, 4]
+        for delta in sai_so:
+            val_nhieu = z_ans + delta
+            if val_nhieu >= 0 and val_nhieu != z_ans and val_nhieu not in ds_nhieu_so:
+                ds_nhieu_so.append(val_nhieu)
+
+        # Bốc chính xác 3 giá trị nhiễu phân biệt
+        nhieu_chon = list(np.random.choice(ds_nhieu_so, size=3, replace=False))
+
+        dsnhieu = [
+            f"""${nhieu_chon[0]}$""",
+            f"""${nhieu_chon[1]}$""",
+            f"""${nhieu_chon[2]}$"""
+        ]
+
+        # ĐÃ SỬA LỖI: Sửa } thành }} ở cuối câu lệnh \text{...} để f-string biên dịch chính xác
+        giai = f"""- Để tập hợp $B = \\left( {n_val}; m \\right]$ tồn tại và không rỗng, điều kiện cần là: $m > {n_val}$.\\\\
+        - Theo lý thuyết tập hợp, ta có phép toán hợp: $A \\cup B = A \\Leftrightarrow B \\subset A$.\\\\
+        - Để tập hợp $B = \\left( {n_val}; m \\right]$ là tập con của đoạn $A = \\left[ {a_val}; {b_val} \\right]$, điểm mút của $B$ phải nằm trọn trong phạm vi của $A$, tức là:\\\\
+        $\\begin{{cases}} {n_val} \\ge {a_val} \\text{{ (luôn đúng do cách chọn)}} \\\\ m \\le {b_val} \\end{{cases}}$\\\\
+        - Kết hợp hai điều kiện trên, ta tìm được tập giá trị của tham số $m$ là: ${n_val} < m \\le {b_val}$.\\\\
+        - Vì $m \\in \\mathbb{{Z}}$, số lượng các giá trị nguyên của $m$ thỏa mãn là: ${b_val} - {n_val} = {z_ans}$ giá trị.\\\\
+        Vậy có tất cả ${z_ans}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+def K10_C1_B2_BieuDoVen_MC_TH(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    # Sinh mảng cấu hình ngẫu nhiên theo số lượng câu hỏi để tránh lặp vô hạn
+    gt = list(np.random.randint(0, 4, size=socau))
+
+    cauTN = ''
+    for loai_vung in gt:
+        # Khởi tạo khung TikZ nền và vị trí 3 đường tròn cố định
+        tikz_base = r"""\begin{tikzpicture}[scale=0.5, font=\footnotesize, baseline=(current bounding box.center)]
+    \def\circleA{(0,0.5) circle (1.5)}
+    \def\circleB{(2,0.5) circle (1.5)}
+    \def\circleC{(1,-0.7) circle (1.5)}"""
+
+        tikz_footer = r"""    \draw \circleA; \draw \circleB; \draw \circleC;
+    \node at (-1.3,2) {$A$};
+    \node at (3.3,2) {$B$};
+    \node at (1,-2.4) {$C$};
+\end{tikzpicture}"""
+
+        if loai_vung == 0:
+            # Trường hợp 0: (A giao B) \ C
+            # Giải pháp chuẩn: Clip lấy giao A và B, sau đó Clip loại bỏ C bằng đảo vùng chọn [remember picture]
+            shading_code = r"""    \begin{scope}
+        \clip \circleA;
+        \clip \circleB;
+        \begin{scope}
+            \clip (1,-0.7) circle (1.505) (-3,-4) rectangle (5,4);
+            \fill[pattern=north west lines, pattern color=black!70] (-2,-3) rectangle (4,3);
+        \end{scope}
+    \end{scope}"""
+
+            tikz_full = f"{tikz_base}\n{shading_code}\n{tikz_footer}"
+
+            debai = f"""\\immini{{Cho các tập hợp $A$, $B$, $C$ được biểu diễn bằng biểu đồ Ven như hình vẽ bên. Biết phần gạch sọc biểu diễn cho vùng không gian thuộc cả $A$ và $B$ nhưng nằm hoàn toàn bên ngoài tập hợp $C$. Phần gạch sọc đó minh họa cho tập hợp nào sau đây?}}{{{tikz_full}}}"""
+            dapso = """$(A \\cap B) \\setminus C$"""
+            dsnhieu = ["""$A \\setminus (B \\cap C)$""", """$(B \\cap C) \\setminus A$""",
+                       """$B \\setminus (A \\cap C)$"""]
+            giai = """Phần gạch sọc thuộc về vùng chung của hai tập hợp $A$ và $B$, tức là thuộc vào tập hợp giao $A \\cap B$. Đồng thời, phần không gian này nằm ngoài phạm vi bao phủ của tập hợp $C$. Do đó, theo định nghĩa phép toán hiệu của hai tập hợp, phần gạch sọc biểu diễn cho tập hợp $(A \\cap B) \\setminus C$."""
+
+        elif loai_vung == 1:
+            # Trường hợp 1: (B giao C) \ A
+            shading_code = r"""    \begin{scope}
+        \clip \circleB;
+        \clip \circleC;
+        \begin{scope}
+            \clip (0,0.5) circle (1.505) (-3,-4) rectangle (5,4);
+            \fill[pattern=north west lines, pattern color=black!70] (-2,-3) rectangle (4,3);
+        \end{scope}
+    \end{scope}"""
+
+            tikz_full = f"{tikz_base}\n{shading_code}\n{tikz_footer}"
+
+            debai = f"""\\immini{{Cho các tập hợp $A$, $B$, $C$ được biểu diễn bằng biểu đồ Ven như hình vẽ bên. Biết phần gạch sọc biểu diễn cho vùng không gian thuộc cả $B$ và $C$ nhưng nằm hoàn toàn bên ngoài tập hợp $A$. Phần gạch sọc đó minh họa cho tập hợp nào sau đây?}}{{{tikz_full}}}"""
+            dapso = """$(B \\cap C) \\setminus A$"""
+            dsnhieu = ["""$B \\setminus (A \\cap C)$""", """$(A \\cap B) \\setminus C$""",
+                       """$C \\setminus (A \\cap B)$"""]
+            giai = """Phần gạch sọc thuộc về vùng chung của hai tập hợp $B$ và $C$, tức là thuộc vào tập hợp giao $B \\cap C$. Đồng thời, phần không gian này nằm ngoài phạm vi bao phủ của tập hợp $A$. Do đó, theo định nghĩa phép toán hiệu của hai tập hợp, phần gạch sọc biểu diễn cho tập hợp $(B \\cap C) \\setminus A$."""
+
+        elif loai_vung == 2:
+            # Trường hợp 2: (A giao C) \ B
+            shading_code = r"""    \begin{scope}
+        \clip \circleA;
+        \clip \circleC;
+        \begin{scope}
+            \clip (2,0.5) circle (1.505) (-3,-4) rectangle (5,4);
+            \fill[pattern=north west lines, pattern color=black!70] (-2,-3) rectangle (4,3);
+        \end{scope}
+    \end{scope}"""
+
+            tikz_full = f"{tikz_base}\n{shading_code}\n{tikz_footer}"
+
+            debai = f"""\\immini{{Cho các tập hợp $A$, $B$, $C$ được biểu diễn bằng biểu đồ Ven như hình vẽ bên. Biết phần gạch sọc biểu diễn cho vùng không gian thuộc cả $A$ và $C$ nhưng nằm hoàn toàn bên ngoài tập hợp $B$. Phần gạch sọc đó minh họa cho tập hợp nào sau đây?}}{{{tikz_full}}}"""
+            dapso = """$(A \\cap C) \\setminus B$"""
+            dsnhieu = ["""$A \\setminus (B \\cap C)$""", """$(A \\cap B) \\setminus C$""",
+                       """$C \\setminus (A \\cap B)$"""]
+            giai = """Phần gạch sọc thuộc về vùng chung của hai tập hợp $A$ và $C$, tức là thuộc vào tập hợp giao $A \\cap C$. Đồng thời, phần không gian này nằm ngoài phạm vi bao phủ của tập hợp $B$. Do đó, theo định nghĩa phép toán hiệu của hai tập hợp, phần gạch sọc biểu diễn cho tập hợp $(A \\cap C) \\setminus B$."""
+
+        else:
+            # Trường hợp 3: A \ (B hợp C)
+            # Chỉ lấy phần riêng của A, loại bỏ bất cứ phần nào chạm vào đường tròn B hoặc C
+            shading_code = r"""    \begin{scope}
+        \clip \circleA;
+        \begin{scope}
+            \clip (2,0.5) circle (1.505) (-3,-4) rectangle (5,4);
+            \clip (1,-0.7) circle (1.505) (-3,-4) rectangle (5,4);
+            \fill[pattern=north west lines, pattern color=black!70] (-2,-3) rectangle (4,3);
+        \end{scope}
+    \end{scope}"""
+
+            tikz_full = f"{tikz_base}\n{shading_code}\n{tikz_footer}"
+
+            debai = f"""\\immini{{Cho các tập hợp $A$, $B$, $C$ được biểu diễn bằng biểu đồ Ven như hình vẽ bên. Biết phần gạch sọc chỉ nằm trong tập hợp $A$ và hoàn toàn không giao với hai tập hợp $B, C$. Phần gạch sọc đó minh họa cho tập hợp nào sau đây?}}{{{tikz_full}}}"""
+            dapso = """$A \\setminus (B \\cup C)$"""
+            dsnhieu = ["""$A \\setminus (B \\cap C)$""", """$(A \\setminus B) \\cap C$""",
+                       """$(A \\cap B) \\setminus C$"""]
+            giai = """Phần gạch sọc thuộc vào phạm vi của tập hợp $A$, nhưng loại bỏ hoàn toàn tất cả các phần tử thuộc về tập hợp $B$ hoặc thuộc về tập hợp $C$. Do tập hợp gồm các phần tử thuộc $B$ hoặc thuộc $C$ là tập hợp hợp $B \\cup C$, nên phần gạch sọc minh họa cho phép hiệu $A \\setminus (B \\cup C)$."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+    return cauTN
+
+def K10_C1_B2_BaiToanThucTeTapHop_MC_VD(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        lop = int(np.random.choice([35, 40, 42, 45, 50]))
+        a_val = np.random.randint(18, 28)
+        b_val = np.random.randint(12, 22)
+        ab = np.random.randint(4, 10)
+
+        if ab >= a_val or ab >= b_val:
+            continue
+
+        tong_tham_gia = a_val + b_val - ab
+        if tong_tham_gia >= lop:
+            continue
+
+        z_ans = lop - tong_tham_gia
+
+        v = [lop, a_val, b_val, ab, z_ans]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        lop, a_val, b_val, ab, z_ans = v[0], v[1], v[2], v[3], v[4]
+
+        debai = f"""Lớp 10A tham gia hai tiết mục văn nghệ để chào mừng ngày Nhà giáo Việt Nam 20/11. Tiết mục thứ nhất có ${a_val}$ bạn tham gia, tiết mục thứ hai có ${b_val}$ bạn tham gia, trong đó có ${ab}$ bạn tham gia vào cả hai tiết mục. Biết rằng tổng số học sinh của lớp 10A là ${lop}$ học sinh. Hỏi lớp 10A có tất cả bao nhiêu bạn không tham gia tiết mục văn nghệ nào?"""
+        dapso = f"""${z_ans}$"""
+
+        ds_nhieu_so = []
+        sai_so = [-3, -2, -1, 1, 2, 3, 4, 5]
+        for delta in sai_so:
+            val_nhieu = z_ans + delta
+            if val_nhieu >= 0 and val_nhieu != z_ans and val_nhieu not in ds_nhieu_so:
+                ds_nhieu_so.append(val_nhieu)
+
+        nhieu_chon = list(np.random.choice(ds_nhieu_so, size=3, replace=False))
+
+        dsnhieu = [
+            f"""${nhieu_chon[0]}$""",
+            f"""${nhieu_chon[1]}$""",
+            f"""${nhieu_chon[2]}$"""
+        ]
+
+        tong_tg = a_val + b_val - ab
+        giai = f"""Gọi $A$ là tập hợp các học sinh tham gia tiết mục thứ nhất, $B$ là tập hợp các học sinh tham gia tiết mục thứ hai.\\\\
+        Theo giả thiết đề bài, ta có:\\\\
+        - Số phần tử của tập hợp $A$ là: $n(A) = {a_val}$.\\\\
+        - Số phần tử của tập hợp $B$ là: $n(B) = {b_val}$.\\\\
+        - Số phần tử thuộc phần giao của hai tập hợp (tham gia cả hai tiết mục) là: $n(A \\cap B) = {ab}$.\\\\
+        Áp dụng công thức bao hàm - loại trừ, tổng số học sinh tham gia ít nhất một trong hai tiết mục văn nghệ là:\\\\
+        $n(A \\cup B) = n(A) + n(B) - n(A \\cap B) = {a_val} + {b_val} - {ab} = {tong_tg}$ (học sinh).\\\\
+        Số học sinh của lớp 10A không tham gia tiết mục văn nghệ nào là hiệu giữa tổng số học sinh cả lớp và số học sinh có tham gia văn nghệ:\\\\
+        ${lop} - {tong_tg} = {z_ans}$ (học sinh).\\\\
+        Vậy lớp 10A có tất cả ${z_ans}$ học sinh không tham gia văn nghệ."""
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+import numpy as np
+from sympy import Symbol
+
+
+def K10_C1_B1_DungSaiVaMenhDeDao_TL_TH(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # ĐÃ SỬA: Mở rộng dải số từ 1 đến 15 để tránh trùng lặp gây vòng lặp vô hạn khi số câu lớn
+        a_val = np.random.randint(1, 16)
+        v = [a_val]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a_val = v[0]
+        debai = f"""Xác định tính đúng sai của mệnh đề $P \\colon \\forall x \\in \\mathbb{{R}}: |x| > {a_val} \\Rightarrow x > {a_val}$ và tìm mệnh đề đảo của nó."""
+
+        # Tính toán giá trị phản ví dụ cụ thể để đưa vào phần lời giải chi tiết
+        phan_vi_du = -a_val - 1
+        gtdt_pvd = abs(phan_vi_du)
+
+        # Cấu trúc ds_abcd: [ [tiêu đề ý, đáp án ngắn, lời giải chi tiết] ]
+        # ĐÃ SỬA: Thay thế ký hiệu phủ định \overline{P} bằng văn bản chuẩn xác cho mệnh đề đảo
+        ds_abcd = [
+            [
+                "Xét tính đúng sai",
+                "$Sai$",
+                f"Mệnh đề $P$ là mệnh đề **sai**. Phản ví dụ: Lấy $x = {phan_vi_du} \\in \\mathbb{{R}}$, ta có $|x| = |{phan_vi_du}| = {gtdt_pvd} > {a_val}$ (tiền đề đúng) nhưng $x = {phan_vi_du} < {a_val}$ (hệ quả sai)."
+            ],
+            [
+                "Mệnh đề đảo",
+                f"$\\forall x \\in \\mathbb{{R}}: x > {a_val} \\Rightarrow |x| > {a_val}$",
+                f"Mệnh đề đảo của mệnh đề $P$ là: \"$\\forall x \\in \\mathbb{{R}}: x > {a_val} \\Rightarrow |x| > {a_val}$\"."
+            ]
+        ]
+
+        # Hàm sinh tự luận TL_answer_const nhận cấu hình truyền vào từ hệ thống
+        cauTN += TL_answer_const(debai, ds_abcd, 0, 0, dang)
+
+    return cauTN
+
+
+
+
+def K10_C1_B1_PhatBieuMenhDeDao_MC_NB(socau, dang):
+    x_sym = Symbol('x')
+    y_sym = Symbol('y')
+
+    cac_cap_goc = [('A', 'B'), ('X', 'Y'), ('M', 'N'), ('P', 'Q'), ('C', 'D'), ('E', 'F'), ('H', 'K')]
+
+    # ĐÃ SỬA: Sinh thẳng cấu hình ngẫu nhiên theo số lượng câu hỏi, bỏ qua vòng lặp check trùng gây treo máy
+    gt = []
+    for _ in range(socau):
+        goc_cap = random.choice(cac_cap_goc)
+        loai_tinh_chat = np.random.randint(0, 2)
+        gt.append([goc_cap[0], goc_cap[1], loai_tinh_chat])
+
+    cauTN = ''
+    for v in gt:
+        goc1, goc2, loai_tinh_chat = v[0], v[1], v[2]
+
+        # Thiết lập cụm từ tiếng Việt chuẩn xác theo từng loại tính chất hình học
+        if loai_tinh_chat == 0:
+            P_text = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ phụ nhau"
+            Q_text = f"tổng số đo của chúng bằng $90^\\circ$"
+
+            P_phu_dinh = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ không phụ nhau"
+            Q_phu_dinh = f"tổng số đo của chúng khác $90^\\circ$"
+            P_sai_tinh_chat = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ bù nhau"
+            Q_sai_tinh_chat = f"tổng số đo của chúng bằng $180^\\circ$"
+        else:
+            P_text = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ bù nhau"
+            Q_text = f"tổng số đo của chúng bằng $180^\\circ$"
+
+            P_phu_dinh = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ không bù nhau"
+            Q_phu_dinh = f"tổng số đo của chúng khác $180^\\circ$"
+            P_sai_tinh_chat = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ phụ nhau"
+            Q_sai_tinh_chat = f"tổng số đo của chúng bằng $90^\\circ$"
+
+        debai = f"""Hãy phát biểu mệnh đề đảo của mệnh đề: ``Nếu {P_text} thì {Q_text}''."""
+
+        # Mệnh đề đảo chuẩn mực: Nếu Q thì P
+        dapso = f"""Nếu {Q_text} thì {P_text}."""
+
+        # Sinh các phương án nhiễu logic
+        dsnhieu = [
+            f"""Nếu {P_phu_dinh} thì {Q_phu_dinh}.""",
+            f"""Nếu {Q_phu_dinh} thì {P_phu_dinh}.""",
+            f"""Nếu {Q_sai_tinh_chat} thì {P_sai_tinh_chat}."""
+        ]
+
+        giai = f"""Xét mệnh đề kéo theo đã cho có cấu trúc: ``Nếu $P$ thì $Q$'' (ký hiệu là $P \\Rightarrow Q$), trong đó:\\\\
+        - $P$: ``{P_text}''\\\\
+        - $Q$: ``{Q_text}''\\\\
+        Theo định nghĩa toán học, mệnh đề đảo của mệnh đề $P \\Rightarrow Q$ là mệnh đề $Q \\Rightarrow P$, phát biểu dưới dạng ngôn ngữ là: ``Nếu $Q$ thì $P$''.\\\\
+        Do đó, mệnh đề đảo của mệnh đề trên là: ``Nếu {Q_text} thì {P_text}''. """
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
