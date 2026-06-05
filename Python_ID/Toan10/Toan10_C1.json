@@ -262,5 +262,17 @@
     "loai": "MC",
     "muc_do": "NB",
     "dang": 1
+  },
+  {
+    "id_ham": "K10_C1_B2_TongHopMenhDeTapHop_TF_VD",
+    "ppct_id": "L10_C1_B2",
+    "competency_id": "L10_THTH_004",
+    "lop": 10,
+    "chuong_so": 1,
+    "bai_so": 2,
+    "ma_dang": "TongHopMenhDeTapHop",
+    "loai": "TF",
+    "muc_do": "VD",
+    "dang": 1
   }
 ]
