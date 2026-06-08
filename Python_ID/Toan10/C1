@@ -7,6 +7,8 @@ import numpy
 import random
 import io
 import os
+import datetime  # Thư viện để lấy thời gian thực
+
 
 import math
 import DefChung as dc
@@ -29,7 +31,7 @@ import random
 import re
 
 
-def K10_C1_B1_PhuDinhMenhDe_MC_NB(socau, dang):
+def L10_C1_B1_005_MC_01(socau, dang):
     # ==========================================
     # HÀM PHỤ BỎ VÀO TRONG (NESTED FUNCTION)
     # AI Agent bốc hàm chính đi đâu, hàm phụ đi theo đó
@@ -96,7 +98,7 @@ def K10_C1_B1_PhuDinhMenhDe_MC_NB(socau, dang):
     return cauTN
 # print(K10_C1_B1_PhuDinhMenhDe_MC_NB(10,1))
 
-def K10_C1_B1_MenhDeDao_MC_NB(socau, dang):
+def L10_C1_B1_009_MC_01(socau, dang):
     # Khống chế số câu tối đa để tránh vòng lặp vô hạn (vì không gian mẫu chỉ có 6 bộ)
     if socau > 6:
         socau = 6
@@ -161,7 +163,7 @@ def K10_C1_B1_MenhDeDao_MC_NB(socau, dang):
     return cauTN
 # print(K10_C1_B1_MenhDeDao_MC_NB(10,1))
 
-def K10_C1_B1_PhatBieuMenhDe_MC_NB(socau, dang):
+def L10_C1_B1_013_MC_01(socau, dang):
     # Khống chế số câu tối đa bằng kích thước không gian mẫu để tránh vòng lặp vô hạn
     if socau > 6:
         socau = 6
@@ -231,7 +233,7 @@ def K10_C1_B1_PhatBieuMenhDe_MC_NB(socau, dang):
 # print(K10_C1_B1_PhatBieuMenhDe_MC_NB(10,1))
 
 
-def K10_C1_B1_PhuDinhVoiMoiTonTai_MC_NB(socau, dang):
+def L10_C1_B1_005_MC_02(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -308,7 +310,7 @@ def K10_C1_B1_PhuDinhVoiMoiTonTai_MC_NB(socau, dang):
 
 
 
-def K10_C1_B1_MenhDeTuongDuong_MC_NB(socau, dang):
+def L10_C1_B1_011_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -388,7 +390,7 @@ def K10_C1_B1_MenhDeTuongDuong_MC_NB(socau, dang):
     return cauTN
 
 
-def K10_C1_B1_DieuKienCanDu_MC_NB(socau, dang):
+def L10_C1_B1_015_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -477,7 +479,7 @@ def K10_C1_B1_DieuKienCanDu_MC_NB(socau, dang):
 
     return cauTN
 
-def K10_C4_B8_XetTinhDungSaiVecto_MC_TH(socau, dang):
+def L10_C4_B8_049_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -540,7 +542,7 @@ def K10_C4_B8_XetTinhDungSaiVecto_MC_TH(socau, dang):
     return cauTN
 
 
-def K10_C1_B1_MenhDeKeoTheo_MC_NB(socau, dang):
+def L10_C1_B1_008_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -677,11 +679,8 @@ def K10_C1_B1_MenhDeKeoTheo_MC_NB(socau, dang):
     return cauTN
 
 
-import numpy as np
-from sympy import Symbol
 
-
-def K10_C1_B1_PhuDinhMenhDeLogic_MC_TH(socau, dang):
+def L10_C1_B1_006_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -777,7 +776,7 @@ def K10_C1_B1_PhuDinhMenhDeLogic_MC_TH(socau, dang):
     return cauTN
 
 
-def K10_C1_B2_TapConSo_MC_NB(socau, dang):
+def L10_C1_B2_017_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -838,7 +837,7 @@ def K10_C1_B2_TapConSo_MC_NB(socau, dang):
 
     return cauTN
 
-def K10_C1_B2_TapConChu_MC_NB(socau, dang):
+def L10_C1_B2_017_MC_02(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -900,7 +899,7 @@ def K10_C1_B2_TapConChu_MC_NB(socau, dang):
     return cauTN
 
 
-def K10_C1_B2_TapConKhoang_MC_NB(socau, dang):
+def L10_C1_B2_021_MC_01(socau, dang):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -954,7 +953,7 @@ def K10_C1_B2_TapConKhoang_MC_NB(socau, dang):
 
 
 
-def K10_C1_B2_QuanHeThuocTapCon_MC_NB(socau, dang):
+def L10_C1_B2_017_MC_03(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1000,7 +999,7 @@ def K10_C1_B2_QuanHeThuocTapCon_MC_NB(socau, dang):
     return cauTN
 
 
-def K10_C1_B2_PhepToanTapHopSo_MC_TH(socau, dang):
+def L10_C1_B2_021_MC_02(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1078,11 +1077,7 @@ def K10_C1_B2_PhepToanTapHopSo_MC_TH(socau, dang):
     return cauTN
 
 
-import numpy as np
-from sympy import Symbol
-
-
-def K10_C1_B2_TinhChatHieuTapHop_MC_TH(socau, dang):
+def L10_C1_B2_018_MC_01(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1152,7 +1147,7 @@ def K10_C1_B2_TinhChatHieuTapHop_MC_TH(socau, dang):
     return cauTN
 
 
-def K10_C1_B2_DemPhanTuPhepToan_MC_TH(socau, dang):
+def L10_C1_B2_018_MC_02(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1253,7 +1248,7 @@ def K10_C1_B2_DemPhanTuPhepToan_MC_TH(socau, dang):
 
 
 
-def K10_C1_B2_PhanBuTapHop_MC_NB(socau, dang):
+def L10_C1_B2_018_MC_03(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1321,12 +1316,7 @@ def K10_C1_B2_PhanBuTapHop_MC_NB(socau, dang):
 
     return cauTN
 
-
-import numpy as np
-from sympy import Symbol
-
-
-def K10_C1_B2_TimThamSoTapHop_MC_VD(socau, dang):
+def L10_C1_B2_020_MC_01(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1390,7 +1380,7 @@ def K10_C1_B2_TimThamSoTapHop_MC_VD(socau, dang):
 
     return cauTN
 
-def K10_C1_B2_BieuDoVen_MC_TH(socau, dang):
+def L10_C1_B2_019_MC_01(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1492,7 +1482,7 @@ def K10_C1_B2_BieuDoVen_MC_TH(socau, dang):
         cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
     return cauTN
 
-def K10_C1_B2_BaiToanThucTeTapHop_MC_VD(socau, dang):
+def L10_C1_B2_020_MC_02(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1557,11 +1547,7 @@ def K10_C1_B2_BaiToanThucTeTapHop_MC_VD(socau, dang):
     return cauTN
 
 
-import numpy as np
-from sympy import Symbol
-
-
-def K10_C1_B1_DungSaiVaMenhDeDao_TL_TH(socau, dang):
+def L10_C1_B1_003_TL_01(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1607,7 +1593,7 @@ def K10_C1_B1_DungSaiVaMenhDeDao_TL_TH(socau, dang):
 
 
 
-def K10_C1_B1_PhatBieuMenhDeDao_MC_NB(socau, dang):
+def L10_C1_B1_010_MC_01(socau, dang):
     x_sym = Symbol('x')
     y_sym = Symbol('y')
 
@@ -1664,3 +1650,569 @@ def K10_C1_B1_PhatBieuMenhDeDao_MC_NB(socau, dang):
 
     return cauTN
 
+
+
+
+def L10_C1_B2_020_TF_01(socau, socot):
+    x_sym = Symbol('x')
+
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # 1. Sinh tập A = (left_A; right_A]
+        left_A = np.random.randint(-10, -2)
+        right_A = np.random.randint(6, 16)
+
+        # 2. Sinh tập B gồm 2 phần tử nguyên {b1; b2}
+        b1 = np.random.randint(left_A - 4, left_A)
+        b2 = np.random.randint(2, right_A)
+
+        # 3. Thiết lập phương trình bậc hai cho tập C: (x - x1)(x - k*m) = 0
+        x1 = np.random.randint(-3, 0)
+        k_coef = int(np.random.choice([2, 3, 4, 5]))
+
+        # 4. Sinh các giá trị m khác nhau để làm phong phú ý C
+        m_duong = np.random.randint(1, 4)
+        m_am = np.random.randint(-4, 0)
+
+        # 5. Chọn ngẫu nhiên phép toán tập hợp cho ý D: giao, hợp, A trừ B, B trừ A
+        phep_toan_D = np.random.choice(['giao', 'hop', 'A_tru_B', 'B_tru_A'])
+
+        v = [left_A, right_A, b1, b2, x1, k_coef, m_duong, m_am, phep_toan_D]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTF = ''
+    for v in gt:
+        left_A, right_A, b1, b2, x1, k_coef, m_duong, m_am, phep_toan_D = v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[
+            7], v[8]
+
+        abs_x1 = abs(x1)
+        debai_pt = f"x^2 + ({abs_x1} - {k_coef}m)x - {abs_x1 * k_coef}m = 0"
+
+        debai = f"""Cho ba tập hợp:\\\\ $A = ({left_A}; {right_A}]$,\\\\ $B = \\{{ {b1}; {b2} \\}}$,\\\\ $C = \\{{x \\in \\mathbb{{N}} \\mid {debai_pt} \\}}$ với $m$ là tham số nguyên."""
+
+        # Tính toán các dữ kiện bổ trợ
+        hieu_cuoi_dau_A_sai = right_A - left_A
+        hieu_cuoi_dau_A_dung = right_A - left_A + 1
+        hieu_cuoi_dau_B_sai = b2 - b1
+        hieu_cuoi_dau_B_dung = b2 - b1 + 1
+
+        nghiem_dung_C = k_coef * m_duong
+
+        # Xác định tập đích và phần tử nguyên đích để so sánh cho ý D
+        # C luôn có nghiệm tự nhiên duy nhất là x = k_coef * m (khi m >= 0)
+        if phep_toan_D == 'giao':
+            chuoi_phep_toan = "A \\cap B"
+            chuoi_giai_thich_tap_dich = f"Ta có $A \\cap B = \\{{ {b2} \\}}$."
+            # Điều kiện x thuộc giao: x = b2
+            ds_target = [b2]
+        elif phep_toan_D == 'hop':
+            chuoi_phep_toan = "A \\cup B"
+            chuoi_giai_thich_tap_dich = f"Ta có $A \\cup B = ({left_A}; {right_A}] \\cup \\{{ {b1} \\}}$."
+            # Nghiệm tự nhiên x nằm trong tập hợp hợp (số tự nhiên thuộc A hoặc bằng b1)
+            # Tập số thực A chứa các số tự nhiên từ max(0, left_A+1) đến right_A
+            start_N = max(0, left_A + 1)
+            ds_target = [x for x in range(start_N, right_A + 1)]
+            if b1 >= 0:
+                ds_target.append(b1)
+            ds_target = list(set(ds_target))
+        elif phep_toan_D == 'A_tru_B':
+            chuoi_phep_toan = "A \\setminus B"
+            chuoi_giai_thich_tap_dich = f"Ta có $A \\setminus B = ({left_A}; {right_A}] \\setminus \\{{ {b2} \\}}$."
+            # Số tự nhiên thuộc A nhưng bỏ đi b2
+            start_N = max(0, left_A + 1)
+            ds_target = [x for x in range(start_N, right_A + 1) if x != b2]
+        else:  # B_tru_A
+            chuoi_phep_toan = "B \\setminus A"
+            chuoi_giai_thich_tap_dich = f"Ta có $B \\setminus A = \\{{ {b1} \\}}$."
+            # Chỉ chứa b1 (nếu b1 >= 0 thì mới có cơ hội có nghiệm tự nhiên m)
+            ds_target = [b1] if b1 >= 0 else []
+
+        # Đếm xem có bao nhiêu giá trị m nguyên dương/bằng 0 thỏa mãn k_coef * m nằm trong ds_target
+        m_nguyen_thoa_man = []
+        # Xét m từ 0 đến max của ds_target // k_coef + 1 để quét toàn bộ nghiệm nguyên dương và 0
+        max_val = max(ds_target) if len(ds_target) > 0 else 0
+        for m_check in range(0, (max_val // k_coef) + 2):
+            if (k_coef * m_check) in ds_target:
+                m_nguyen_thoa_man.append(m_check)
+
+        so_luong_m_khong_am = len(m_nguyen_thoa_man)
+
+        # Lời giải chi tiết động cho ý D
+        loi_giai_bo_sung_D = f"{chuoi_giai_thich_tap_dich} Nghiệm tự nhiên duy nhất của tập $C$ (khi $m \\ge 0$) là $x = {k_coef}m$. "
+        if phep_toan_D == 'hop' or phep_toan_D == 'A_tru_B':
+            loi_giai_bo_sung_D += f"Để $C \\subset ({chuoi_phep_toan})$ thì $k \\cdot m$ phải thuộc tập hợp đích, dẫn tới bài toán có {so_luong_m_khong_am} giá trị nguyên không âm của $m$ thỏa mãn. Ngoài ra, khi $m < 0 \\Rightarrow C = \\varnothing  \\subset ({chuoi_phep_toan})$ (luôn đúng), dẫn đến có vô số giá trị nguyên âm của $m$ thỏa mãn."
+        else:  # giao hoặc B_tru_A (chỉ có tối đa 1 phần tử đích)
+            if so_luong_m_khong_am > 0:
+                loi_giai_bo_sung_D += f"Để $C \\subset ({chuoi_phep_toan}) \\Rightarrow C = \\{{ {ds_target[0]} \\}} \\Rightarrow {k_coef}m = {ds_target[0]} \\Rightarrow m = {m_nguyen_thoa_man[0]}$ (thỏa mãn). Kết hợp với vô số giá trị nguyên âm $m < 0$ (khi đó $C = \\varnothing $), ta có vô số giá trị nguyên của $m$."
+            else:
+                loi_giai_bo_sung_D += f"Để $C \\subset ({chuoi_phep_toan})$ thì không có giá trị $m$ nguyên không âm nào thỏa mãn do nghiệm không nguyên hoặc âm. Tuy nhiên với mọi $m < 0 \\Rightarrow C = \\varnothing  \\subset ({chuoi_phep_toan})$, do đó vẫn có vô số giá trị nguyên âm thỏa mãn."
+
+        phuong_an_sai_so_nghiem_D = f"Có tất cả đúng {so_luong_m_khong_am + 1} giá trị nguyên của tham số $m$ để $C \\subset ({chuoi_phep_toan})$"
+        giai_thich_sai_so_nghiem_D = f"Sai. Vì ngoài các giá trị nguyên không âm thỏa mãn, bài toán luôn có vô số giá trị nguyên âm $m < 0$ khiến cho tập $C = \\varnothing $, mà tập rỗng là tập con của mọi tập hợp nên tổng số giá trị nguyên của $m$ phải là vô số."
+
+        ds_abcd = (
+            # ==================== Ý A: KHẢO SÁT VỀ MỆNH ĐỀ TOÁN HỌC ====================
+            [
+                (f"""{{\\True Phát biểu ``Tập $A$ có {hieu_cuoi_dau_A_sai} phần tử'' là một mệnh đề toán học}}""",
+                 f"""Đúng. Khẳng định trên mang tính chất đúng sai rõ ràng (cụ thể đây là một mệnh đề toán học mang giá trị sai vì tập số thực $A$ có vô số phần tử)."""),
+
+                (f"""{{\\True Phát biểu ``Tập $B$ có $2$ phần tử'' là một mệnh đề toán học}}""",
+                 f"""Đúng. Khẳng định ``Tập $B$ có $2$ phần tử'' là một khẳng định hoàn toàn chính xác (mệnh đề đúng), do đó nó là một mệnh đề toán học."""),
+
+                (f"""{{Phát biểu ``Tập $A$ có {hieu_cuoi_dau_A_sai} phần tử'' không phải là một mệnh đề toán học}}""",
+                 f"""Sai. Mặc dù khẳng định trên sai về mặt giá trị toán học (do tập số thực $A$ có vô số phần tử), nhưng nó có tính chất đúng sai rõ ràng, vì vậy theo định nghĩa nó bắt buộc phải là một mệnh đề toán học."""),
+
+                (f"""{{Phát biểu ``Tập $B$ có $2$ phần tử'' không phải là một mệnh đề toán học}}""",
+                 f"""Sai. Khẳng định trên là một khẳng định toán học có tính đúng sai rõ ràng (mệnh đề đúng), do đó nó là một mệnh đề toán học."""),
+
+                (f"""{{\\True Phát biểu ``Tập $A$ có {hieu_cuoi_dau_A_dung} phần tử'' là một mệnh đề toán học}}""",
+                 f"""Đúng. Đây là một khẳng định toán học có tính đúng sai rõ ràng nên theo định nghĩa nó là một mệnh đề toán học."""),
+
+                (f"""{{Phát biểu ``Tập $A$ có {hieu_cuoi_dau_A_dung} phần tử'' không phải là một mệnh đề toán học}}""",
+                 f"""Sai. Phát biểu trên có tính đúng sai rõ ràng nên bắt buộc nó phải là một mệnh đề toán học."""),
+
+                (f"""{{\\True Phát biểu ``Tập $B$ có ${hieu_cuoi_dau_B_dung}$ phần tử'' là một mệnh đề toán học}}""",
+                 f"""Đúng. Khẳng định trên mang tính đúng sai rõ ràng nên theo định nghĩa nó là một mệnh đề toán học."""),
+
+                (f"""{{Phát biểu ``Tập $B$ có ${hieu_cuoi_dau_B_dung}$ phần tử'' không phải là một mệnh đề toán học}}""",
+                 f"""Sai. Vì nó có tính đúng sai rõ ràng nên bắt buộc là một mệnh đề toán học."""),
+
+                (f"""{{\\True Phát biểu ``Tập $B$ có ${hieu_cuoi_dau_B_sai}$ phần tử'' là một mệnh đề toán học}}""",
+                 f"""Đúng. Khẳng định trên mang tính đúng sai rõ ràng nên theo định nghĩa nó là một mệnh đề toán học."""),
+
+                (f"""{{Phát biểu ``Tập $B$ có ${hieu_cuoi_dau_B_sai}$ phần tử'' không phải là một mệnh đề toán học}}""",
+                 f"""Sai. Do nó là một khẳng định toán học mang tính đúng sai rõ ràng.""")
+            ],
+
+            # ==================== Ý B: CÁC PHÉP TOÁN TOÁN HỌC THUẦN TÚY ====================
+            [
+                (f"""{{\\True $A \\cap B = \\{{ {b2} \\}}$}}""",
+                 f"""Đúng. Phần tử ${b1} < {left_A}$ nên ${b1} \\notin A$. Phần tử ${b2}$ nằm trong khoảng $({left_A}; {right_A}]$ nên ${b2} \\in A$. Do đó giao của hai tập hợp chỉ gồm phần tử ${b2}$."""),
+
+                (f"""{{\\True $n(A \\cap B) = 1$}}""",
+                 f"""Đúng. Tập hợp giao $A \\cap B$ có duy nhất đúng $1$ phần tử."""),
+
+                (f"""{{\\True $B \\setminus A = \\{{ {b1} \\}}$}}""",
+                 f"""Đúng. Phần tử ${b1} \\notin A$ và ${b2} \\in A$ nên khi thực hiện phép hiệu lấy tập $B$ trừ đi tập $A$, ta loại bỏ phần tử ${b2}$ và giữ lại phần tử ${b1}$."""),
+
+                (f"""{{$A \\cup B = A$}}""",
+                 f"""Sai. Vì phần tử ${b1} < {left_A}$ nên ${b1} \\notin A$, do đó phép hợp $A \\cup B$ phải chứa thêm phần tử ${b1}$, tức là $A \\cup B \\neq A$."""),
+
+                (f"""{{$A \\cap B = \\{{ {b1}; {b2} \\}}$}}""",
+                 f"""Sai. Phần tử ${b1} < {left_A}$ nên ${b1}$ không thuộc tập hợp $A$, dẫn đến phần tử này không thể nằm trong tập hợp giao $A \\cap B$."""),
+
+                (f"""{{$A \\cap B = ( {left_A}; {b2} ]$}}""",
+                 f"""Sai. Giao của một tập số thực và một tập rời rạc phải là một tập rời rạc (tập hữu hạn phần tử) chứ không thể là một khoảng hay nửa khoảng liên tục."""),
+
+                (f"""{{$A \\cap B = \\{{ {b1} \\}}$}}""",
+                 f"""Sai. Do phần tử ${b1} \\notin A$ và ${b2} \\in A$, vì thế tập hợp giao đúng phải có $1$ phần tử là phần tử nằm trong tập $A$."""),
+
+                (f"""{{$A \\cup B = \\{{ {b1}; {right_A} \\}}$}}""",
+                 f"""Sai. Vì tập hợp $A$ là tập hợp số thực chứa vô số phần tử nên phép hợp $A \\cup B$ là một tập vô hạn chứ không thể chỉ có hai phần tử cô lập."""),
+
+                (f"""{{$B \\setminus A = \\{{ {b2} \\}}$}}""",
+                 f"""Sai. Phần tử ${b2}$ thuộc tập $A$ nên bị loại bỏ khi thực hiện phép hiệu $B \\setminus A$, phần tử được giữ lại phải là phần tử không thuộc $A$."""),
+
+                (f"""{{$B \\setminus A = \\varnothing $}}""",
+                 f"""Sai. Vì phần tử ${b1} \\in B$ nhưng ${b1} \\notin A$ nên tập hiệu $B \\setminus A \\neq \\varnothing $."""),
+
+                (f"""{{$A \\setminus B = A$}}""",
+                 f"""Sai. Do tập hợp $A$ chứa phần tử ${b2} \\in B$ nên khi lấy hiệu $A \\setminus B$, tập hợp $A$ bị mất đi phần tử đó.""")
+            ],
+
+            # ==================== Ý C: KHẢO SÁT CHỈ DỰA VÀO SỐ LƯỢNG PHẦN TỬ ====================
+            [
+                (f"""{{\\True Với $m = {m_duong}$ tập hợp $C$ có đúng $1$ phần tử}}""",
+                 f"""Đúng. Với $m = {m_duong}$, phương trình có hai nghiệm, trong đó có một nghiệm âm (loại) và một nghiệm dương (thỏa mãn). Do điều kiện $x \\in \\mathbb{{N}}$ nên tập hợp $C$ có đúng $1$ phần tử."""),
+
+                (f"""{{Với $m = {m_duong}$ tập hợp $C$ có đúng $2$ phần tử}}""",
+                 f"""Sai. Vì phương trình luôn có một nghiệm nguyên âm, nghiệm này không thỏa mãn điều kiện là số tự nhiên ($x \\in \\mathbb{{N}}$) nên bị loại, dẫn đến tập $C$ không thể có $2$ phần tử."""),
+
+                (f"""{{\\True Với $m = {m_am}$ tập hợp $C$ là tập rỗng}}""",
+                 f"""Đúng. Khi $m = {m_am} < 0$, cả hai nghiệm của phương trình đều nhận giá trị âm, do đó chúng không thuộc tập số tự nhiên $\\mathbb{{N}}$. Vậy tập hợp $C$ là tập rỗng."""),
+
+                (f"""{{Với $m = {m_am}$ tập hợp $C$ có đúng $1$ phần tử}}""",
+                 f"""Sai. Khi $m < 0$, tất cả các nghiệm của phương trình đều âm nên đều bị loại bởi điều kiện $x \\in \\mathbb{{N}}$, dẫn đến tập $C$ không có phần tử nào (tập rỗng)."""),
+
+                (f"""{{\\True Với $m = 0$ tập hợp $C$ có đúng $1$ phần tử}}""",
+                 f"""Đúng. Khi $m = 0$, phương trình có một nghiệm âm bị loại và một nghiệm bằng $0$ thỏa mãn điều kiện $x \\in \\mathbb{{N}}$. Vậy tập $C$ có đúng $1$ phần tử."""),
+
+                (f"""{{Với $m = 0$ tập hợp $C$ là tập rỗng}}""",
+                 f"""Sai. Khi $m = 0$, phương trình vẫn cho một nghiệm tự nhiên thỏa mãn điều kiện, do đó tập $C$ không phải là tập rỗng.""")
+            ],
+
+            # ==================== Ý D: XÈT TẬP CON ĐA PHÉP TOÁN (MỚI) ====================
+            [
+                # --- Các phương án ĐÚNG (Có dấu \True) ---
+                (f"""{{\\True Có vô số giá trị nguyên của tham số $m$ để $C \\subset ({chuoi_phep_toan})$}}""",
+                 f"""Đúng. {loi_giai_bo_sung_D}"""),
+                
+                # --- Các phương án SAI (Không có dấu \True) ---
+                (f"""{{{phuong_an_sai_so_nghiem_D}}}""",
+                 f"""{giai_thich_sai_so_nghiem_D}"""),
+
+                (f"""{{Không có giá trị nguyên nào của tham số $m$ để $C \\subset ({chuoi_phep_toan})$}}""",
+                 f"""Sai. Với mọi giá trị nguyên âm $m < 0$ thì $C = \\varnothing  \\subset ({chuoi_phep_toan})$ luôn thỏa mãn yêu cầu, do đó bài toán có vô số giá trị nguyên thỏa mãn.""")
+            ]
+        )
+
+        cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
+
+    return cauTF
+
+def L10_C1_B1_014_01(socau, socot=1):
+    import numpy as np
+    gt = []
+    dem = 0
+    while dem < socau:
+        huong_tich = np.random.choice([1, 2])
+        nhom_C     = np.random.choice([1, 2, 3])
+        bien_the_D = np.random.choice([1, 2])
+        v = [int(huong_tich), int(nhom_C), int(bien_the_D)]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTF = ''
+    for v in gt:
+        huong_tich, nhom_C, bien_the_D = v
+        debai = r"""Với $n \in \mathbb{N}$."""
+
+        list_A = [
+            (r"""{\True Mệnh đề ``$n$ là một số không âm'' là một mệnh đề đúng}""",
+             r"""Đúng. $\mathbb{N} = \{0;1;2;\dots\}$ nên mọi $n \in \mathbb{N}$ đều thỏa $n \geq 0$."""),
+            (r"""{Mệnh đề ``$n$ là một số dương'' là một mệnh đề đúng}""",
+             r"""Sai. Tại $n = 0$: số $0$ là số tự nhiên nhưng không phải số dương."""),
+            (r"""{Mệnh đề ``$n$ là một số âm'' là một mệnh đề đúng}""",
+             r"""Sai. Không tồn tại số tự nhiên nào nhận giá trị âm."""),
+            (r"""{Mệnh đề ``$n$ là một số không dương'' là một mệnh đề đúng}""",
+             r"""Sai. Chỉ có $n = 0$ không dương; mọi $n \geq 1$ đều là số dương.""")
+        ]
+
+        if huong_tich == 1:
+            list_B = [
+                (r"""{\True Mệnh đề ``$\forall n \in \mathbb{N},\, 2 \mid n(n+1)$'' là mệnh đề đúng}""",
+                 r"""Đúng. $n$ và $n+1$ liên tiếp nên $2 \mid n(n+1)$."""),
+                (r"""{Mệnh đề ``$\forall n \in \mathbb{N},\, n(n+1)$ là số lẻ'' là mệnh đề đúng}""",
+                 r"""Sai. Tích hai số nguyên liên tiếp luôn chẵn.""")
+            ]
+            tich = r"n(n+1)"
+            vd_nguyen_to = r"$n=1$: $1\cdot2=2$"
+            vd_hop_so    = r"$n=2$: $2\cdot3=6$"
+            vd_cp_dung   = r"$n=0$: $0\cdot1=0=0^2$"
+            vd_cp_sai    = r"$n=1$: $1\cdot2=2$"
+            ly_giai_nt   = r"$\forall n \geq 2$: cả $n$ và $n+1$ đều $\geq 2$ nên tích là hợp số."
+        else:
+            list_B = [
+                (r"""{\True Mệnh đề ``$\forall n \in \mathbb{N},\, 2 \mid (n-1)n$'' là mệnh đề đúng}""",
+                 r"""Đúng. $n=0$: $0$ chẵn; $n \geq 1$: $(n-1)$ và $n$ liên tiếp nên $2 \mid (n-1)n$."""),
+                (r"""{Mệnh đề ``$\forall n \in \mathbb{N},\, (n-1)n$ là số lẻ'' là mệnh đề đúng}""",
+                 r"""Sai. Tích hai số nguyên liên tiếp luôn chẵn.""")
+            ]
+            tich = r"(n-1)n"
+            vd_nguyen_to = r"$n=2$: $1\cdot2=2$"
+            vd_hop_so    = r"$n=3$: $2\cdot3=6$"
+            vd_cp_dung   = r"$n=1$: $0\cdot1=0=0^2$"
+            vd_cp_sai    = r"$n=2$: $1\cdot2=2$"
+            ly_giai_nt   = r"$\forall n \geq 3$: cả $n-1$ và $n$ đều $\geq 2$ nên tích là hợp số."
+
+        if nhom_C == 1:
+            list_C = [
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ là số chính phương'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_cp_dung} là số chính phương."""),
+                (rf"""{{Mệnh đề ``$\forall n \in \mathbb{{N}},\, {tich}$ là số chính phương'' là mệnh đề đúng}}""",
+                 rf"""Sai. {vd_cp_sai} không phải số chính phương."""),
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ không phải số chính phương'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_cp_sai} không phải số chính phương.""")
+            ]
+        elif nhom_C == 2:
+            list_C = [
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ là số nguyên tố'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_nguyen_to} nguyên tố. ({ly_giai_nt})"""),
+                (rf"""{{Mệnh đề ``$\forall n \in \mathbb{{N}},\, {tich}$ là số nguyên tố'' là mệnh đề đúng}}""",
+                 rf"""Sai. {vd_hop_so} là hợp số."""),
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ không phải số nguyên tố'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_hop_so} là hợp số.""")
+            ]
+        else:
+            list_C = [
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ là hợp số'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_hop_so} là hợp số."""),
+                (rf"""{{Mệnh đề ``$\forall n \in \mathbb{{N}},\, {tich}$ là hợp số'' là mệnh đề đúng}}""",
+                 rf"""Sai. {vd_nguyen_to} là số nguyên tố."""),
+                (rf"""{{\True Mệnh đề ``$\exists n \in \mathbb{{N}}$ sao cho ${tich}$ không phải hợp số'' là mệnh đề đúng}}""",
+                 rf"""Đúng. {vd_nguyen_to} là số nguyên tố.""")
+            ]
+
+        if bien_the_D == 1:
+            list_D = [
+                (r"""{\True Mệnh đề ``$\forall n \in \mathbb{N},\, 6 \mid (n^3 - n)$'' là mệnh đề đúng}""",
+                 r"""Đúng. $n^3-n=(n-1)n(n+1)$: tích 3 số nguyên liên tiếp, $\vdots\,2$ và $\vdots\,3$, nên $\vdots\,6$."""),
+                (r"""{Mệnh đề ``$\forall n \in \mathbb{N},\, 9 \mid (n^3 - n)$'' là mệnh đề đúng}""",
+                 r"""Sai. $n=2$: $n^3-n=6$, $6 \not\vdots\, 9$.""")
+            ]
+        else:
+            list_D = [
+                (r"""{\True Mệnh đề ``$\forall n \in \mathbb{N},\, 3 \mid (n^3 + 2n)$'' là mệnh đề đúng}""",
+                 r"""Đúng. $n^3+2n=n(n^2+2)$. Xét $n \bmod 3$: $n\equiv0\Rightarrow 3\mid n$; $n\equiv1\Rightarrow n^2+2\equiv3$; $n\equiv2\Rightarrow n^2+2\equiv6$. Vậy $3\mid n(n^2+2)$."""),
+                (r"""{Mệnh đề ``$\forall n \in \mathbb{N},\, 6 \mid (n^3 + 2n)$'' là mệnh đề đúng}""",
+                 r"""Sai. $n=1$: $n^3+2n=3$, $3 \not\vdots\, 6$.""")
+            ]
+
+        ds_abcd = (list_A, list_B, list_C, list_D)
+        cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
+
+    return cauTF
+
+
+def L10_C1_B1_004_SA_01(socau, dang):
+    gt = []
+    dem = 0
+    current_year = datetime.datetime.now().year
+    k_min_val = -current_year
+    k_max_val = current_year + 1
+
+    while dem < socau:
+        a = int(np.random.randint(1, 40))
+        dau = np.random.choice(['<', '>', r'\geq', r'\leq'])
+        i_left = np.random.choice(['(', '['])
+        i_right = np.random.choice([')', ']'])
+
+        v = [a, dau, i_left, i_right]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a, dau, i_left, i_right = v
+
+        # Xác định cận thực tế của k dựa trên ký hiệu khoảng/đoạn
+        # Cận dưới (k_lower): nếu là '[' thì k >= k_min_val, nếu '(' thì k >= k_min_val + 1
+        k_lower = k_min_val if i_left == '[' else k_min_val + 1
+        # Cận trên (k_upper): nếu là ']' thì k <= k_max_val, nếu ')' thì k <= k_max_val - 1
+        k_upper = k_max_val if i_right == ']' else k_max_val - 1
+
+        # Điều kiện cần để P(x) đúng với mọi x (dựa vào biến dau)
+        if dau == r'\geq':
+            # Cần k >= a^2
+            # Giao của [k_lower, k_upper] và [a^2, +inf)
+            start_k = max(k_lower, a ** 2)
+            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
+
+            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k \geq 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} \geq 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k \geq {a ** 2}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
+
+        elif dau == '>':
+            # Cần k > a^2 => k >= a^2 + 1
+            start_k = max(k_lower, a ** 2 + 1)
+            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
+
+            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k > 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} > 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k > {a ** 2}$, tức $k \geq {a ** 2 + 1}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
+        else:
+            dapso_val = 0
+            giai = rf"Ta có $P(n) = (n-{a})^2 + k - {a ** 2} {dau} 0$. Vì $(n-{a})^2 \geq 0$ nên biểu thức tiến tới $+\infty$. Không tồn tại $k$ để biểu thức luôn ${dau} 0$ với mọi $x$. Số giá trị là 0."
+
+        dapso = str(dapso_val)
+        debai = rf"Cho mệnh đề chứa biến $P(n): n^2 - {2 * a}n + k {dau} 0$ với $n \in \mathbb{{R}}$. Có tất cả bao nhiêu giá trị nguyên của tham số $k$ thuộc tập {i_left}{k_min_val}; {k_max_val}{i_right} để mệnh đề $P(n)$ đúng với mọi $n \in \mathbb{{R}}$?"
+
+        # FIX QUAN TRỌNG: Đảm bảo danh sách nhiễu luôn có 3 phần tử duy nhất
+        # Sử dụng set để lọc trùng, sau đó đảm bảo đủ 3 phần tử bằng cách thêm giá trị dự phòng
+        base_nhieu = [str(max(0, dapso_val + 1)), str(max(0, dapso_val - 1)), str(max(0, dapso_val + 2)), "0", "1", "5", "10"]
+        dsnhieu = random.sample([x for x in list(set(base_nhieu)) if x != dapso], 3)
+
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def L10_C1_B1_004_SA_01(socau, dang=2):
+    """
+    Thông hiểu: Mệnh đề chứa biến P(x): x [dau] x^n.
+    Sử dụng SymPy để kiểm tra chân trị cho mỗi cặp tham số ngẫu nhiên.
+    """
+    gt = []
+    dem = 0
+    while dem < socau:
+        n = random.randint(2, 4)
+        a = random.randint(1, 3)
+        p, q = 1, random.randint(2, 5)
+        # Định nghĩa các dấu toán học
+        dau_dict = {'>': '>', '<': '<', r'\ge': '>=', r'\le': '<='}
+        dau_tex = random.choice(list(dau_dict.keys()))
+        dau_py = dau_dict[dau_tex]
+
+        v = [n, a, p, q, dau_tex, dau_py]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        n, a, p, q, dau_tex, dau_py = v
+
+        # Hàm kiểm tra chân trị
+        def check(x_val):
+            # Biểu thức: x dau x^n
+            expr = f"{x_val} {dau_py} {x_val}**{n}"
+            return bool(sympify(expr))
+
+        # Tính chân trị các ý
+        p1 = check(a)
+        p2 = check(p / q)
+        # Ý 3: ∀x∈ℕ, P(x) - Kiểm tra với vài giá trị mẫu
+        p3 = all(check(x) for x in range(5))
+        # Ý 4: ∃x∈ℕ, ‾P(x) - Tương đương với NOT (∀x∈ℕ, P(x)) nếu tập xác định hữu hạn,
+        # ở đây dùng logic phủ định đơn giản: có ít nhất 1 giá trị x sao cho P(x) sai
+        p4 = any(not check(x) for x in range(5))
+
+        so_menh_de_dung = sum([p1, p2, p3, p4])
+
+        frac_str = f"\\dfrac{{{p}}}{{{q}}}"
+        debai = (
+            f"Cho mệnh đề chứa biến $P(x)\\colon x {dau_tex} x^{{{n}}}$. Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?\n"
+            f"\\begin{{enumerate}}\n"
+            f"\\item $P({a})$.\n"
+            f"\\item $P\\left({frac_str}\\right)$.\n"
+            f"\\item $\\forall x\\in \\mathbb{{N}}, P(x)$.\n"
+            f"\\item $\\exists x\\in \\mathbb{{N}}, \\overline{{P(x)}}$.\n"
+            f"\\end{{enumerate}}"
+        )
+
+        dapso = f"${so_menh_de_dung}$"
+        dsnhieu = [f"${i}$" for i in range(5) if i != so_menh_de_dung]
+
+        giai = (
+            f"Xét mệnh đề $P(x)\\colon x {dau_tex} x^{{{n}}}$.\n"
+            f"- $P({a})$ là {'Đúng' if p1 else 'Sai'}.\n"
+            f"- $P\\left({frac_str}\\right)$ là {'Đúng' if p2 else 'Sai'}.\n"
+            f"- $\\forall x\\in \\mathbb{{N}}, P(x)$ là {'Đúng' if p3 else 'Sai'}.\n"
+            f"- $\\exists x\\in \\mathbb{{N}}, \\overline{{P(x)}}$ là {'Đúng' if p4 else 'Sai'}.\n"
+            f"Tổng cộng có $\\mathbf{{{so_menh_de_dung}}}$ mệnh đề đúng."
+        )
+
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+def L10_C1_B2_005_TL_01(socau, dong=1):
+    """
+    Sinh bài toán tự luận về tập hợp với điều kiện:
+    Số người không chọn sản phẩm nào >= 10.
+    """
+    gt = []
+    dem = 0
+    while dem < socau:
+        tong = 100
+        # Để đảm bảo (tong - n_AUB) >= 10, thì n_AUB <= 90
+        # n_AUB = n_A + n_B - n_AB <= 90
+        n_A = random.randint(50, 70)
+        n_B = random.randint(50, 70)
+        # Đảm bảo n_AB đủ lớn để n_AUB không vượt quá 90
+        # n_AB >= n_A + n_B - 90
+        min_n_AB = max(20, n_A + n_B - 90)
+        n_AB = random.randint(min_n_AB, min(n_A, n_B) - 5)
+
+        v = [tong, n_A, n_B, n_AB]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTL = ''
+    for v in gt:
+        tong, n_A, n_B, n_AB = v
+
+        n_AUB = n_A + n_B - n_AB
+        n_none = tong - n_AUB
+
+        debai = (
+            f"Tại một sự kiện có {tong} người tham gia khảo sát về hai sản phẩm A và B. "
+            f"Biết có {n_A} người chọn sản phẩm A, {n_B} người chọn sản phẩm B và {n_AB} người chọn cả hai sản phẩm. "
+            f"Tính:"
+        )
+
+        ds_abcd = [
+            (
+                "Số người đã chọn ít nhất một sản phẩm?",
+                n_AUB,
+                f"Theo nguyên lý bù trừ, số người chọn ít nhất một sản phẩm là: {n_A} + {n_B} - {n_AB} = {n_AUB} (người)."
+            ),
+            (
+                "Số người không chọn sản phẩm nào?",
+                n_none,
+                f"Số người không chọn sản phẩm nào là: {tong} - {n_AUB} = {n_none} (người)."
+            )
+        ]
+
+        cauTL += TL_answer_const(debai, ds_abcd, 0, 0, dong)
+
+    return cauTL
+
+
+import numpy as np
+from math_type import TL_answer_text
+
+
+def L10_C1_B2_018_01(socau, dong=1):
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Giả lập các số học sinh
+        x = np.random.randint(25, 35)  # Bóng đá
+        y = np.random.randint(20, 30)  # Bóng bàn
+        z = np.random.randint(15, 25)  # Cầu lông
+        abc = np.random.randint(3, 8)
+        ab = np.random.randint(abc + 5, abc + 12)
+        bc = np.random.randint(abc + 3, abc + 8)
+        ac = np.random.randint(abc + 3, abc + 8)
+
+        # Số học sinh chỉ thích 1 môn
+        m = x - (ab - abc) - (ac - abc) - abc
+        n = y - (ab - abc) - (bc - abc) - abc
+        p = z - (ac - abc) - (bc - abc) - abc
+
+        if ab < x and ab < y and bc < y and bc < z and ac < x and ac < z and m > 0 and n > 0 and p > 0:
+            v = (x, y, z, ab, bc, ac, abc, m, n, p)
+            if v not in gt:
+                gt.append(v)
+                dem += 1
+
+    cauTL = ''
+    for v in gt:
+        x, y, z, ab, bc, ac, abc, m, n, p = v
+
+        debai = f"Câu lạc bộ thể thao có {x} học sinh yêu thích bóng đá, {y} học sinh yêu thích bóng bàn, {z} học sinh yêu thích cầu lông. Có {ab} học sinh thích cả bóng đá và bóng bàn, {bc} học sinh thích cả bóng bàn và cầu lông, {ac} học sinh thích cả bóng đá và cầu lông, và {abc} học sinh thích cả ba môn."
+
+        # Code TikZ cho biểu đồ Venn 3 tập hợp
+        tikz_venn = f"""
+        \\begin{{tikzpicture}}
+            \\def\\firstcircle{{(0,0) circle (1.5cm)}}
+            \\def\\secondcircle{{(60:2cm) circle (1.5cm)}}
+            \\def\\thirdcircle{{(0:2cm) circle (1.5cm)}}
+            \\draw \\firstcircle node[below left] {{BĐ}};
+            \\draw \\secondcircle node[above] {{BB}};
+            \\draw \\thirdcircle node[below right] {{CL}};
+            \\node at (1,0.6) {{{abc}}}; 
+            \\node at (-0.3,0.3) {{{m}}};
+            \\node at (2.3,0.3) {{{p}}};
+            \\node at (1,1.5) {{{n}}};
+        \\end{{tikzpicture}}"""
+
+        hoi_a = f"Vẽ biểu đồ Venn biểu diễn các tập hợp trên."
+        giai_a = f"Biểu đồ Venn được vẽ bằng TikZ như sau: \\n {tikz_venn}"
+
+        hoi_b = f"Tính tổng số học sinh chỉ thích duy nhất một môn."
+        dap_b = m + n + p
+        giai_b = f"Tổng số học sinh chỉ thích một môn là: $S = {m} + {n} + {p} = {dap_b}$."
+
+        ds_abcd = [
+            (hoi_a, "\\text{Hình vẽ}", giai_a),
+            (hoi_b, dap_b, giai_b)
+        ]
+
+        cauTL += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+
+    return cauTL
