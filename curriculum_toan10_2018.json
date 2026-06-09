@@ -17,23 +17,6 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C1_B1_002",
-    "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
-    "chuong": "Mệnh đề và Tập hợp",
-    "chuong_so": "1",
-    "bai": "Mệnh đề",
-    "bai_so": "1",
-    "subsection": null,
-    "MucDo": "TH",
-    "verb": "Thể hiện được",
-    "content": "Thể hiện được các mệnh đề logic (mệnh đề).",
-    "examples": [],
-    "scope": null,
-    "tags": ["menh_de", "menh_de_logic"],
-    "difficulty_rank": 2
-  },
-  {
     "id": "L10_C1_B1_003",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
