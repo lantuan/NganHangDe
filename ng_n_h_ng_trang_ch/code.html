@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ngân Hàng Đề - Nâng Tầm Tư Duy Toán Học Với AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#dae1ff",
+                      "on-primary-container": "#f8f7ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-surface": "#0b1c30",
+                      "surface-container-highest": "#d3e4fe",
+                      "inverse-surface": "#213145",
+                      "on-surface-variant": "#424656",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "tertiary-container": "#008259",
+                      "on-secondary-fixed-variant": "#404751",
+                      "on-background": "#0b1c30",
+                      "tertiary": "#006645",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container-high": "#dce9ff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#151c25",
+                      "surface-container-low": "#eff4ff",
+                      "surface-tint": "#0054d6",
+                      "surface-dim": "#cbdbf5",
+                      "on-primary-fixed": "#001849",
+                      "on-error": "#ffffff",
+                      "primary-container": "#0066ff",
+                      "on-tertiary-container": "#e1ffec",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface-container": "#e5eeff",
+                      "background": "#f8f9ff",
+                      "inverse-primary": "#b3c5ff",
+                      "on-primary-fixed-variant": "#003fa4",
+                      "secondary-fixed-dim": "#c0c7d3",
+                      "primary": "#0050cb",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c2c6d8",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed": "#dce3f0",
+                      "on-secondary-container": "#5e6570",
+                      "outline": "#727687",
+                      "surface-bright": "#f8f9ff",
+                      "primary-fixed-dim": "#b3c5ff",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "secondary-container": "#dce3f0",
+                      "surface-variant": "#d3e4fe",
+                      "surface": "#f8f9ff",
+                      "secondary": "#585f6a",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "unit": "4px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "16px",
+                      "stack-sm": "8px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "display": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 80% 20%, rgba(219, 234, 254, 0.4) 0%, transparent 50%);
+        }
+        .math-pattern {
+            background-image: radial-gradient(#0066ff 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed">
+<!-- 1. Navigation Bar (TopNavBar Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm h-20">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">functions</span>
+<span class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</span>
+</div>
+<div class="hidden md:flex items-center gap-stack-lg">
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary py-1 transition-colors duration-200" href="#">Tính năng</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Giải pháp</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Bảng giá</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Tài liệu</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="scale-95 active:scale-90 transition-transform bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label-md text-label-md font-bold shadow-md">
+                    Đăng ký
+                </button>
+<button class="md:hidden">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- 2. Hero Section -->
+<section class="relative overflow-hidden hero-gradient py-stack-lg md:py-24">
+<div class="absolute inset-0 math-pattern pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center gap-12 relative z-10">
+<div class="w-full md:w-1/2 space-y-stack-md">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>Đột phá cùng AI thế hệ mới</span>
+</div>
+<h1 class="font-display text-display leading-tight text-on-surface">
+                        Nâng Tầm Tư Duy Toán Học Với <span class="text-primary-container">Sức Mạnh AI</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        Nền tảng ngân hàng đề thông minh giúp học sinh THPT chinh phục mọi kỳ thi với lộ trình cá nhân hóa từ trí tuệ nhân tạo.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-label-md text-label-md font-bold shadow-lg hover:shadow-xl transition-all scale-100 hover:scale-[1.02] active:scale-95">
+                            Bắt đầu học ngay
+                        </button>
+<button class="bg-surface-container-high text-primary px-8 py-4 rounded-xl font-label-md text-label-md font-bold border border-outline-variant/30 hover:bg-surface-container-highest transition-all scale-100 hover:scale-[1.02] active:scale-95">
+                            Xem bản dùng thử
+                        </button>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center">
+<div class="relative w-full max-w-md aspect-square">
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+<img alt="AI Robot assisting with math" class="relative z-10 w-full h-full object-contain transform hover:rotate-2 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj5uDEEioYh6xUVU-rfHdBetamENQkwcaI3nfApCB6K1ksOMp4XHGTQEVj6QpZ9Km6th-DwLJetarPAACdH9NtafdbtnN9PoA3IsQP2R5hIl2dtpny7Row4CQ4HtS6-EV6332meiPLaz0AILL77kiXDNfvd8WFEpu6IiBD0FI6UzulctDpOVhp9IK3XDODiJeyNQaWJtIJENB6UZ9HtmmpFBG7Mnlp--jpKanTe846XisNs38rEXQpiOay3IshuA8EWfHaK1ql0dE"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Statistics Section -->
+<section class="py-stack-lg bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="p-stack-lg text-center rounded-2xl bg-surface-container-low border border-outline-variant/20">
+<div class="font-display text-display text-primary mb-1">1M+</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Câu hỏi trắc nghiệm &amp; tự luận</div>
+</div>
+<div class="p-stack-lg text-center rounded-2xl bg-surface-container-low border border-outline-variant/20">
+<div class="font-display text-display text-primary mb-1">500K+</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Học sinh đang sử dụng hàng ngày</div>
+</div>
+<div class="p-stack-lg text-center rounded-2xl bg-surface-container-low border border-outline-variant/20">
+<div class="font-display text-display text-primary mb-1">98%</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Cải thiện điểm số sau 2 tháng</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Features Section -->
+<section class="py-24">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Tại sao chọn Ngân Hàng Đề?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Chúng tôi kết hợp phương pháp giáo dục truyền thống với công nghệ AI tiên tiến nhất để mang lại hiệu quả tối ưu.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="glass-card p-8 rounded-[32px] hover:shadow-2xl transition-all duration-300 group">
+<div class="w-14 h-14 bg-primary-container/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary text-3xl">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Giải toán tức thì với AI</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Chụp ảnh đề bài, AI sẽ phân tích và đưa ra lời giải chi tiết, kèm theo các phương pháp giải khác nhau chỉ trong 3 giây.</p>
+</div>
+<!-- Feature 2 -->
+<div class="glass-card p-8 rounded-[32px] hover:shadow-2xl transition-all duration-300 group">
+<div class="w-14 h-14 bg-tertiary-container/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-tertiary-container transition-colors duration-300">
+<span class="material-symbols-outlined text-tertiary group-hover:text-on-tertiary text-3xl">library_books</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Đề thi đa dạng từ trường chuyên</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Truy cập kho đề thi phong phú từ các trường THPT Chuyên hàng đầu cả nước, được cập nhật liên tục theo cấu trúc của Bộ GD&amp;ĐT.</p>
+</div>
+<!-- Feature 3 -->
+<div class="glass-card p-8 rounded-[32px] hover:shadow-2xl transition-all duration-300 group">
+<div class="w-14 h-14 bg-error-container/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-error transition-colors duration-300">
+<span class="material-symbols-outlined text-error group-hover:text-on-error text-3xl">analytics</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3">Phân tích hổng kiến thức</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Hệ thống tự động phát hiện những mảng kiến thức bạn còn yếu và đề xuất lộ trình ôn tập tập trung để bứt phá điểm số.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. How It Works Section -->
+<section class="py-24 bg-surface-container-low/50">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">3 Bước Chinh Phục Điểm 10</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="flex-1 space-y-12">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl">1</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Upload ảnh đề bài</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Chụp ảnh hoặc tải lên file PDF đề thi bạn đang cần giải quyết.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl">2</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">AI phân tích dữ liệu</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Hệ thống quét dữ liệu, nhận diện ký hiệu toán học phức tạp và tìm lời giải tối ưu nhất.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl">3</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Nhận lời giải &amp; lộ trình</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Xem đáp án chi tiết và nhận các bài tập tương tự để củng cố kiến thức ngay lập tức.</p>
+</div>
+</div>
+</div>
+<div class="flex-1">
+<div class="rounded-[40px] overflow-hidden shadow-2xl border-8 border-surface-container-highest">
+<img class="w-full aspect-video object-cover" data-alt="A clean, modern user interface of a mobile math learning app showing an AI scanning a calculus problem on a piece of paper. The UI features soft blue accents, clear typography, and a futuristic scanning animation overlay. The lighting is bright and professional, suggesting a high-quality educational tool." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjcj1uxbEGyCHPVmPd9-i0WDLmfBSHx4AbcC8PIaEsDoXzwHoViuFGGE2_DFcxqCxv28N_3u1M6LTbSUlbNoJ9JPJTymC9bTOS_UrMBV9hrGJEBK0IlwMjo_B6f6604ljzgksvyaPc6LCk7gKOLoCpbpKoIF20ggY8BsugREnX_jJzupk696Vh-8VEixNwBjZtJj3NtUK_tdWRfZEmJWFTRX9yZCsy8J4YHhE39AwR6VWQNNIwHywOvxo7gFVpGpWPTGop6VshaIc"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Testimonials Section -->
+<section class="py-24">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Cảm nhận từ học sinh và giáo viên</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/30 italic relative">
+<span class="material-symbols-outlined absolute top-4 right-6 text-primary/20 text-6xl">format_quote</span>
+<p class="font-body-md text-body-md text-on-surface mb-6 relative z-10">"Nhờ Ngân Hàng Đề mà mình không còn sợ môn Toán nữa. AI giải thích rất dễ hiểu, giúp mình tự học hiệu quả hơn nhiều so với việc đi học thêm."</p>
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a smiling Vietnamese high school student, male, looking confident with glasses, wearing a white school uniform. The background is a blurred library with soft, warm sunlight filtering through. High-quality professional photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtIyuxniO6NiUDjthmzo4UGEhmmWWOsPRUeH_3kSJ1pTtFiExbr9vFxDRPAemdqRRDGsEuJvV_cEtZErFOOsdRDDqsMEiSb3zx8XWGNtWULTe5BfcBuwDoBRBwZiib9la23OiOJVeuOvCFL5o0zLO6WRMDE6XklF1Aim7jNJQlyLd4q8nwlVIlIqRaBenvUqJ3xtTyLPPP21D4EQtoTmTI-iCVZnkzSi6peqgJq7tYb4vOsuv1WVfNoLA-MOsVCKoLFYUL6o8TW_c"/>
+<div>
+<div class="font-label-md text-label-md font-bold">Lê Minh Quân</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Học sinh lớp 12 - THPT Chuyên KHTN</div>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/30 italic relative">
+<span class="material-symbols-outlined absolute top-4 right-6 text-primary/20 text-6xl">format_quote</span>
+<p class="font-body-md text-body-md text-on-surface mb-6 relative z-10">"Công cụ này hỗ trợ giáo viên rất nhiều trong việc soạn đề và phân loại trình độ học sinh. Hệ thống báo cáo điểm hổng kiến thức thực sự rất chuẩn xác."</p>
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a professional Vietnamese woman in her 40s, a math teacher, wearing a modern áo dài. She is standing in front of a modern whiteboard with mathematical formulas. The atmosphere is professional, intelligent, and friendly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClskpcPWwNZz7YJXC-_S5jVK4x_r1uQYxTOmCrIvyGa_0EjaZOxSu-ruYLbBNDH2AOvBrc-a4CFvGq1nPJLwcdyYQvgPrEV6W47qZEfLV16gtAMpRgiGD5t7MtRADMm52L1voDeMOV4U5OEoDkAk9vQj7xA3t8IwYQlFrmGHXMVmsPgHjUwIoMrGqFTOQP227xb5Jc-bn5Vxia_pCxbFnmHyZtBeokAcA_MQoc-z3Z5E_jiKR-uckcYuvagxXcSw-oTnCOkwPziP8"/>
+<div>
+<div class="font-label-md text-label-md font-bold">Cô Nguyễn Thu Hà</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Giáo viên Toán - Hà Nội</div>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/30 italic relative">
+<span class="material-symbols-outlined absolute top-4 right-6 text-primary/20 text-6xl">format_quote</span>
+<p class="font-body-md text-body-md text-on-surface mb-6 relative z-10">"Giao diện cực kỳ mượt mà, cảm giác dùng rất 'sướng' như các app của Apple. Đây chắc chắn là nền tảng học toán tốt nhất Việt Nam hiện nay."</p>
+<div class="flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a teenage Vietnamese girl, female student, happy and holding a tablet showing a math app. She has a bright smile, wearing a casual blue sweater. Bright, light-mode aesthetic with clean minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtYo2OS4Rx0nJJmBDTU9aALCvHWbAkUScF-CmLiV3XkG0Elxky9i6nAyQNoHZlfe12aG7JxkGQvWupdTKyx6O3hyIlLiJeq9O5ItV5__p7gCK7vZm4kQIJzCTIcU5xu4hj0xb6Frji1-5YF87O2aXrr87-uZT0nWARa-i4ek2cG3_egEDZ8KeUjJTo7DkLayeg1YwvThsoN1DVr1PgvcnDU0vjxY3baDtpffeveRLk_PacduT0bWJa_fa-U7_n60IBkpedMvZevXI"/>
+<div>
+<div class="font-label-md text-label-md font-bold">Trần Bảo Vy</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Học sinh lớp 11 - THPT Chuyên Lê Hồng Phong</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. FAQ Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Câu hỏi thường gặp</h2>
+</div>
+<div class="space-y-4">
+<details class="group bg-surface-container-low rounded-2xl border border-outline-variant/30">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+<span class="font-label-md text-label-md font-bold text-on-surface">AI có thể giải được các bài toán khó như thi HSG không?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                            Có, mô hình AI của chúng tôi được huấn luyện trên hàng triệu đề thi, bao gồm cả các đề thi Học sinh giỏi quốc gia và quốc tế (IMO). AI không chỉ đưa ra đáp án mà còn giải thích các bước tư duy logic phức tạp.
+                        </div>
+</details>
+<details class="group bg-surface-container-low rounded-2xl border border-outline-variant/30">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+<span class="font-label-md text-label-md font-bold text-on-surface">Tôi có thể học trên điện thoại không?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                            Hoàn toàn được. Ngân Hàng Đề có ứng dụng di động mượt mà trên cả iOS và Android, đồng thời phiên bản web cũng được tối ưu hóa cho trình duyệt di động.
+                        </div>
+</details>
+<details class="group bg-surface-container-low rounded-2xl border border-outline-variant/30">
+<summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+<span class="font-label-md text-label-md font-bold text-on-surface">Chương trình học có cập nhật theo SGK mới không?</span>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span>
+</summary>
+<div class="px-6 pb-6 font-body-md text-body-md text-on-surface-variant">
+                            Chúng tôi luôn cập nhật nội dung bám sát Chương trình Giáo dục phổ thông 2018 và các bộ sách giáo khoa mới như Kết nối tri thức, Chân trời sáng tạo và Cánh diều.
+                        </div>
+</details>
+</div>
+</div>
+</section>
+<!-- CTA Final Section -->
+<section class="py-24 px-margin-mobile">
+<div class="max-w-container-max mx-auto bg-primary text-on-primary rounded-[40px] p-12 md:p-24 text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 math-pattern"></div>
+<div class="relative z-10 space-y-stack-lg">
+<h2 class="font-display text-display leading-tight">Sẵn sàng bứt phá điểm số ngay hôm nay?</h2>
+<p class="font-body-lg text-body-lg max-w-xl mx-auto opacity-90">Tham gia cùng hơn 500,000 học sinh khác và bắt đầu hành trình chinh phục môn Toán cùng trí tuệ nhân tạo.</p>
+<div class="flex justify-center gap-4">
+<button class="bg-surface-container-lowest text-primary px-10 py-5 rounded-2xl font-label-md text-label-md font-bold shadow-xl hover:bg-surface-bright transition-all">
+                            Đăng ký hoàn toàn miễn phí
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- 8. Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter max-w-container-max mx-auto py-stack-lg px-margin-mobile md:px-margin-desktop">
+<div class="col-span-2 md:col-span-1 space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">functions</span>
+<span class="font-headline-sm text-headline-sm text-primary">Ngân Hàng Đề</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Nền tảng toán học AI hàng đầu Việt Nam.</p>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold mb-4">Sản phẩm</h5>
+<ul class="space-y-2 font-label-sm text-label-sm text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Ngân hàng đề thi</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Giải toán AI</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Luyện thi THPT QG</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold mb-4">Công ty</h5>
+<ul class="space-y-2 font-label-sm text-label-sm text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Về chúng tôi</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Tuyển dụng</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Blog giáo dục</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold mb-4">Pháp lý</h5>
+<ul class="space-y-2 font-label-sm text-label-sm text-on-surface-variant">
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Điều khoản dịch vụ</a></li>
+<li><a class="hover:underline hover:text-primary transition-all" href="#">Chính sách bảo mật</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-6 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-80">© 2024 Ngân Hàng Đề. Nền tảng toán học AI hàng đầu Việt Nam.</span>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for button hover effects
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseover', () => {
+                button.style.filter = 'brightness(1.05)';
+            });
+            button.addEventListener('mouseout', () => {
+                button.style.filter = 'brightness(1)';
+            });
+        });
+
+        // Simple scroll reveal
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.glass-card');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize state for details/accordion
+        document.querySelectorAll('details').forEach((detail) => {
+            detail.addEventListener('toggle', (e) => {
+                if (detail.open) {
+                    document.querySelectorAll('details').forEach((other) => {
+                        if (other !== detail) other.removeAttribute('open');
+                    });
+                }
+            });
+        });
+    </script>
+</body></html>
