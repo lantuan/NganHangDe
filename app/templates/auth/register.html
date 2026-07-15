@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng ký - Ngân Hàng Đề</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c2c6d8",
+                    "on-surface-variant": "#424656",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-fixed": "#dce3f0",
+                    "surface-container-highest": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-fixed": "#002113",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container": "#e5eeff",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#008259",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-bright": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed": "#6ffbbe",
+                    "secondary-fixed-dim": "#c0c7d3",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#0066ff",
+                    "on-primary-container": "#f8f7ff",
+                    "on-secondary-container": "#5e6570",
+                    "secondary-container": "#dce3f0",
+                    "tertiary": "#006645",
+                    "primary": "#0050cb",
+                    "on-surface": "#0b1c30",
+                    "on-secondary-fixed-variant": "#404751",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-dim": "#cbdbf5",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#0054d6",
+                    "secondary": "#585f6a",
+                    "on-error-container": "#93000a",
+                    "on-background": "#0b1c30",
+                    "inverse-primary": "#b3c5ff",
+                    "surface-variant": "#d3e4fe",
+                    "background": "#f8f9ff",
+                    "on-secondary-fixed": "#151c25",
+                    "on-tertiary-container": "#e1ffec",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "outline": "#727687",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-fixed": "#001849",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "32px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "display": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .active-account-card {
+            border: 2px solid #0066ff !important;
+            background-color: #f1f7ff !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden text-on-background bg-background">
+<!-- Auth Layout Wrapper -->
+<main class="flex min-h-screen w-full">
+<!-- Left Side: Illustration & Branding (Visible on MD+) -->
+<section class="hidden md:flex flex-col justify-between w-1/2 lg:w-[55%] bg-surface-container-low p-margin-desktop relative overflow-hidden">
+<!-- Background Decorative Elements -->
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-[100px]"></div>
+<nav class="relative z-10">
+<div class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</div>
+</nav>
+<div class="relative z-10 flex flex-col items-center justify-center space-y-stack-lg max-w-xl mx-auto text-center">
+<div class="w-full aspect-square max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] duration-500">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-fidelity 3D digital illustration of a cheerful young Vietnamese teacher and a student collaborating over a glowing holographic mathematical geometry projection. The scene is set in a modern, sun-drenched minimalist classroom with soft-focus white furniture. The lighting is bright and ethereal with a primary color palette of deep sapphire blue and pristine white. Floating AI interfaces and abstract mathematical symbols like integrals and geometric shapes orbit the characters in a clean, tech-focused style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMCN5Yr-rywJ9vpODqfHS1W1D1L5n6N4MUvt2B6S4LNcHi-FVSQDrpKEb0do8PZiPPqr2aPnjYo2Six3WicKrQ3w5OL7zoe_olUnyh9WzDur99Z828SehxztpOaT13UArWFsE8ikRGl21VyNpVHFKNCru2cqH6Swixze1SA8_Rv_uaom66F4wI035nnJFPkjePV2aMbyUs9jcwx1MdaxqDyqlaXdLOzThYNZZ_bCOfWLYE2jnARsb_8E9pK3woWHSmUNFMh6Wn3bE"/>
+</div>
+<div class="space-y-stack-sm px-stack-md">
+<h2 class="font-headline-lg text-headline-lg text-primary">Nâng tầm trí tuệ với AI</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Nền tảng toán học thông minh hàng đầu giúp giáo viên tiết kiệm thời gian và học sinh bứt phá điểm số.
+                    </p>
+</div>
+</div>
+<footer class="relative z-10 flex gap-stack-md opacity-60">
+<span class="font-label-sm text-label-sm">© 2024 Ngân Hàng Đề</span>
+<span class="font-label-sm text-label-sm">•</span>
+<span class="font-label-sm text-label-sm">Nền tảng giáo dục thông minh</span>
+</footer>
+</section>
+<!-- Right Side: Registration Form -->
+<section class="w-full md:w-1/2 lg:w-[45%] flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface">
+<div class="w-full max-w-[480px] space-y-stack-lg">
+<!-- Branding for Mobile -->
+<div class="md:hidden flex justify-center mb-stack-lg">
+<span class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</span>
+</div>
+<div class="space-y-stack-sm text-center md:text-left">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Tạo tài khoản mới</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Bắt đầu hành trình chinh phục toán học ngay hôm nay.</p>
+</div>
+<!-- Step Indicator -->
+<div class="flex items-center space-x-unit">
+<div class="h-1.5 flex-1 rounded-full bg-primary transition-all duration-300" id="step-indicator-1"></div>
+<div class="h-1.5 flex-1 rounded-full bg-secondary-container transition-all duration-300" id="step-indicator-2"></div>
+</div>
+<!-- Registration Form Wrapper -->
+<div class="relative min-h-[420px] overflow-hidden">
+<!-- STEP 1: Account Type -->
+<div class="step-transition w-full space-y-stack-lg" id="step-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+<!-- Student Card -->
+<button
+    class="flex flex-col items-center p-stack-lg border border-outline-variant bg-surface-container-lowest rounded-[16px] hover:border-primary/50 hover:bg-surface-container-low transition-all text-center group"
+    id="role-student"
+    type="button"
+    onclick="window.location.href='/register/student'">
+
+    <div class="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-[32px]">school</span>
+    </div>
+
+    <span class="font-headline-sm text-headline-sm text-on-surface">
+        Học sinh
+    </span>
+
+    <p class="font-label-sm text-label-sm text-on-surface-variant mt-2">
+        Luyện đề, học tập, theo dõi lộ trình
+    </p>
+
+</button>
+<!-- Teacher Card -->
+<button
+    class="flex flex-col items-center p-stack-lg border border-outline-variant bg-surface-container-lowest rounded-[16px] hover:border-primary/50 hover:bg-surface-container-low transition-all text-center group"
+    id="role-teacher"
+    type="button"
+    onclick="window.location.href='/register/teacher'">
+
+    <div class="w-16 h-16 rounded-full bg-tertiary-container/10 text-tertiary-container flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-[32px]">co_present</span>
+    </div>
+
+    <span class="font-headline-sm text-headline-sm text-on-surface">
+        Giáo viên
+    </span>
+
+    <p class="font-label-sm text-label-sm text-on-surface-variant mt-2">
+        Tạo đề, quản lý lớp, chấm bài AI
+    </p>
+
+</button>
+</div>
+<button class="w-full h-14 rounded-[16px] bg-primary text-on-primary font-label-md text-headline-sm shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none" disabled="" id="next-btn" onclick="nextStep()">
+                            Tiếp tục
+                        </button>
+</div>
+<!-- STEP 2: Details Form -->
+<div class="step-transition w-full space-y-stack-md absolute top-0 left-full invisible opacity-0" id="step-2">
+<button class="flex items-center text-primary font-label-md hover:underline mb-stack-sm" onclick="prevStep()">
+<span class="material-symbols-outlined mr-1">arrow_back</span>
+                            Quay lại
+                        </button>
+<div class="space-y-stack-md">
+<div class="space-y-stack-sm">
+<label class="font-label-md text-label-md text-on-surface-variant px-1">Họ và tên</label>
+<input class="w-full h-14 px-stack-md rounded-[16px] border-none bg-secondary-container/50 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-md outline-none" placeholder="Nguyễn Văn An" type="text"/>
+</div>
+<div class="space-y-stack-sm">
+<label class="font-label-md text-label-md text-on-surface-variant px-1">Email</label>
+<input class="w-full h-14 px-stack-md rounded-[16px] border-none bg-secondary-container/50 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-md outline-none" placeholder="example@email.com" type="email"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div class="space-y-stack-sm">
+<label class="font-label-md text-label-md text-on-surface-variant px-1">Mật khẩu</label>
+<input class="w-full h-14 px-stack-md rounded-[16px] border-none bg-secondary-container/50 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-md outline-none" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-stack-sm">
+<label class="font-label-md text-label-md text-on-surface-variant px-1">Xác nhận</label>
+<input class="w-full h-14 px-stack-md rounded-[16px] border-none bg-secondary-container/50 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-md outline-none" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<div class="flex items-start space-x-stack-sm pt-stack-sm">
+<input class="mt-1 rounded-sm border-outline text-primary focus:ring-primary" id="terms" type="checkbox"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant leading-tight" for="terms">
+                                Tôi đồng ý với các <a class="text-primary hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-primary hover:underline" href="#">Chính sách bảo mật</a> của Ngân Hàng Đề.
+                            </label>
+</div>
+<button class="w-full h-14 rounded-[16px] bg-primary-container text-on-primary-container font-headline-sm shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all mt-stack-md">
+                            Đăng ký tài khoản
+                        </button>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="pt-stack-lg border-t border-outline-variant/30 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Đã có tài khoản? 
+                        <a class="text-primary font-bold hover:underline" href="#">Đăng nhập</a>
+</p>
+</div>
+</div>
+</section>
+</main>
+<script>
+        let selectedRole = null;
+
+        function selectRole(role) {
+            selectedRole = role;
+            
+            // UI Updates
+            document.getElementById('role-student').classList.remove('active-account-card');
+            document.getElementById('role-teacher').classList.remove('active-account-card');
+            
+            const targetCard = document.getElementById(`role-${role}`);
+            targetCard.classList.add('active-account-card');
+            
+            // Enable next button
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = false;
+        }
+
+        function nextStep() {
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const indicator2 = document.getElementById('step-indicator-2');
+
+            step1.classList.add('-translate-x-full', 'opacity-0', 'invisible');
+            step1.classList.remove('relative');
+            step1.classList.add('absolute');
+
+            step2.classList.remove('left-full', 'opacity-0', 'invisible');
+            step2.classList.add('left-0', 'opacity-100', 'visible', 'relative');
+            step2.classList.remove('absolute');
+
+            indicator2.classList.replace('bg-secondary-container', 'bg-primary');
+        }
+
+        function prevStep() {
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const indicator2 = document.getElementById('step-indicator-2');
+
+            step1.classList.remove('-translate-x-full', 'opacity-0', 'invisible', 'absolute');
+            step1.classList.add('relative', 'opacity-100', 'visible');
+
+            step2.classList.add('left-full', 'opacity-0', 'invisible', 'absolute');
+            step2.classList.remove('left-0', 'opacity-100', 'visible', 'relative');
+
+            indicator2.classList.replace('bg-primary', 'bg-secondary-container');
+        }
+    </script>
+</body></html>
