@@ -41,5 +41,5 @@ build/
 # Generated PDFs
 output/
 
-# Node
+# Node  
 node_modules/

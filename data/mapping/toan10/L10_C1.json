@@ -1,0 +1,182 @@
+[
+    {
+    "id": "L10_C1_B1_NB001_MC_A",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề bất kỳ"
+  },
+  {
+    "id": "L10_C1_B1_TH003_MC_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề toán học"
+  },
+  {
+    "id": "L10_C1_B1_NB005_MC_A",
+    "content": "Nhận biết được mệnh đề phủ định.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phủ định số"
+  },
+  {
+    "id": "L10_C1_B1_NB005_MC_B",
+    "content": "Nhận biết được mệnh đề phủ định.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phủ định thực tế"
+  },
+  {
+    "id": "L10_C1_B1_NB005_MC_C",
+    "content": "Nhận biết được mệnh đề phủ định.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phủ định có chứa dấu với mọi, tồn print"
+  },
+  {
+    "id": "L10_C1_B1_NB007_MC_A",
+    "content": "Nhận biết được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo toán"
+  },
+  {
+    "id": "L10_C1_B1_NB007_MC_B",
+    "content": "Nhận biết được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo thực tế"
+  },
+  {
+    "id": "L10_C1_B1_NB008_MC_A",
+    "content": "Phát biểu được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo toán"
+  },
+  {
+    "id": "L10_C1_B1_NB008_MC_B",
+    "content": "Phát biểu được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo thực tế"
+  },
+  {
+    "id": "L10_C1_B1_NB010_MC_A",
+    "content": "Phát biểu được mệnh đề đảo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo toan"
+  },
+  {
+    "id": "L10_C1_B1_NB011_MC_A",
+    "content": "Nhận biết được mệnh đề tương đương.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề tương đương"
+  },
+  {
+    "id": "L10_C1_B1_NB013_MC_A",
+    "content": "Phát biểu được mệnh đề có chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "kí hiệu sang lời"
+  },
+  {
+    "id": "L10_C1_B1_NB013_MC_B",
+    "content": "Phát biểu được mệnh đề có chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "lời sang kí hiệu"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "kí hiệu tồn tại, với mọi"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề chưa biến"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề chưa biến"
+  },
+  {
+    "id": "L10_C1_B1_TH015_MC_A",
+    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phát biểu điều kiện cần, đủ, điều kiện cần và đủ"
+  },
+  {
+    "id": "L10_C1_B1_TH015_MC_B",
+    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm giả thiết, kết luận"
+  },
+  {
+    "id": "L10_C1_B2_NB017A_MC_A",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_B",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "phân biệt thuộc/tập con"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_C",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê"
+  },
+  {
+    "id": "L10_C1_B2_TH018_MC_A",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "phép toán tâp hợp với rỗng"
+  },
+  {
+    "id": "L10_C1_B2_TH018_MC_B",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "phép toán tâp hợp dạng liệt kê"
+  },
+  {
+    "id": "L10_C1_B2_TH019_MC_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "A,B,C giao/hợp/hiệu"
+  },
+  {
+    "id": "L10_C1_B2_VD020_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "tập hợp thực tế"
+  },
+  {
+    "id": "L10_C1_B2_VD020_TL_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
+    "Loai": "Tự luận",
+    "Dang": "tập hợp thực tế"
+  },
+  {
+    "id": "L10_C1_B2_TH021_MC_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép toán tập hợp"
+  },
+  {
+    "id": "L10_C1_B2_VD021_MC_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép toán tập hợp tham "
+  },
+  {
+    "id": "L10_C1_TF_A",
+    "content": "Tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "trên tập số thực"
+  },
+  {
+    "id": "L10_C1_TF_B",
+    "content": "Mệnh đề",
+    "Loai": "Đúng sai",
+    "Dang": "kí hiệu với mọi, tồn tại"
+  }
+]
