@@ -4,29 +4,23 @@ Version: 1.0
 
 Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Chuẩn hóa toàn bộ quá trình triển khai hệ thống.
-
-Mọi môi trường (Local, VPS, Production) phải có cùng kiến trúc.
+Triển khai toàn bộ hệ thống Ngân Hàng Đề AI lên VPS.
 
 ---
 
 # Kiến trúc triển khai
 
-Developer
+Internet
 
 ↓
 
-GitHub
-
-↓
-
-VPS
+Nginx
 
 ↓
 
@@ -38,7 +32,11 @@ n8n
 
 ↓
 
-Python
+Python Generator
+
+↓
+
+LaTeX Engine
 
 ↓
 
@@ -46,301 +44,103 @@ Supabase
 
 ---
 
-# Repository
+# Thành phần
 
-GitHub
-
-↓
-
-main
-
-↓
-
-Production
-
----
-
-# Branch
-
-main
-
-Production
-
----
-
-dev
-
-Phát triển
-
-(TODO)
-
----
-
-# Local
-
-Máy phát triển.
-
-Sử dụng
-
-- VS Code
-- Python
-- Git
-- Browser
-
----
-
-# GitHub
-
-Lưu
-
-- Source Code
-- JSON
-- Python Generator
-- Docs
-- Templates
-
-Không lưu
-
-- PDF
-- File tạm
-- Cache
-- Upload
-
----
-
-# VPS
+## VPS
 
 Chạy
 
 - FastAPI
 - n8n
 - Python
-- TeX Live
-- Nginx
+- LaTeX
 
 ---
 
-# FastAPI
+## FastAPI
 
-Port
-
-8000
-
----
-
-# n8n
-
-Port
-
-5678
+- Cung cấp API.
+- Giao tiếp với Frontend.
+- Giao tiếp với n8n.
 
 ---
 
-# Supabase
+## n8n
 
-Cloud Database.
+Chạy toàn bộ Workflow.
+
+- WF000_Gateway
+- WF001_GenerateExam
+- WF002_GenerateExamByAbility
+- WF003_StudentAnalysis
+- WF004_DownloadFile
+- WF005_Help
+- WF006_Reject
 
 ---
 
-# Python
+## Python Generator
 
-Virtual Environment
+Sinh Question Object.
+
+---
+
+## LaTeX Engine
+
+Sinh
+
+- .tex
+- .pdf
+
+---
+
+## Supabase
+
+Lưu
+
+- User
+- Class
+- Learning History
+- Exam History
+- Metadata
+
+---
+
+# Thư mục dự án
 
 ```
-.venv
+/root/NganHangDe
 ```
 
 ---
 
-# TeX Live
+# Dữ liệu
 
-Sinh PDF.
-
----
-
-# systemd
-
-Quản lý
-
-FastAPI.
+```
+data/
+```
 
 ---
 
-# Nginx
+# Kết quả sinh
 
-Reverse Proxy.
-
-(TODO)
-
----
-
-# Domain
-
-(TODO)
+```
+output/
+```
 
 ---
 
-# SSL
+# Log
 
-Let's Encrypt.
-
-(TODO)
-
----
-
-# Environment
-
-.env
-
-Không đưa lên GitHub.
-
----
-
-# Upload
-
-uploads/
-
-Không đưa lên GitHub.
-
----
-
-# Export
-
-exports/
-
-Không đưa lên GitHub.
-
----
-
-# Temp
-
-temp/
-
-Không đưa lên GitHub.
-
----
-
-# Logging
-
+```
 logs/
+```
 
 ---
 
-# Quy trình Deploy
+# Khởi động hệ thống
 
-Developer
-
-↓
-
-Git Commit
-
-↓
-
-Git Push
-
-↓
-
-GitHub
-
-↓
-
-VPS
-
-↓
-
-Git Pull
-
-↓
-
-Restart Service
-
-↓
-
-Kiểm tra
-
-↓
-
-Hoàn thành
-
----
-
-# Quy trình Update
-
-Developer
-
-↓
-
-Sửa Code
-
-↓
-
-Commit
-
-↓
-
-Push
-
-↓
-
-GitHub
-
-↓
-
-VPS Pull
-
-↓
-
-Restart
-
-↓
-
-Test
-
----
-
-# Backup
-
-Database
-
-(TODO)
-
----
-
-# Restore
-
-(TODO)
-
----
-
-# Monitoring
-
-FastAPI
-
-systemd
-
-n8n
-
-(TODO)
-
----
-
-# Error Log
-
-FastAPI
-
-↓
-
-systemctl
-
-↓
-
-journalctl
-
----
-
-# Cấu trúc Production
-
-GitHub
+Nginx
 
 ↓
 
@@ -354,98 +154,68 @@ n8n
 
 Python
 
+---
+
+# Luồng hoạt động
+
+User
+
 ↓
 
-TeX Live
+Frontend
 
 ↓
 
-Supabase
+FastAPI
+
+↓
+
+WF000_Gateway
+
+↓
+
+Workflow
+
+↓
+
+Python
+
+↓
+
+LaTeX
+
+↓
+
+Response
 
 ---
 
-# Danh sách Service
+# Backup
 
-## FastAPI
+Backup
 
-nganhangde.service
-
----
-
-## n8n
-
-n8n.service
-
-(TODO)
+- Source Code
+- Database
+- data/
+- output/
 
 ---
 
-## Nginx
+# Không triển khai
 
-nginx.service
-
-(TODO)
-
----
-
-# Kiểm tra sau Deploy
-
-□ FastAPI chạy.
-
-□ n8n chạy.
-
-□ API hoạt động.
-
-□ Chat AI hoạt động.
-
-□ Sinh đề hoạt động.
-
-□ Python Generator hoạt động.
-
-□ LaTeX hoạt động.
-
-□ PDF sinh thành công.
-
-□ Database kết nối.
-
-□ Upload hoạt động.
-
-□ Download hoạt động.
+- Python riêng lẻ.
+- n8n riêng lẻ.
+- Frontend gọi trực tiếp n8n.
+- Frontend gọi trực tiếp Python.
 
 ---
 
-# Không Deploy
+# Quy tắc
 
-- File tạm.
-- Cache.
-- Upload.
-- PDF.
-- Log cũ.
-
----
-
-# TODO
-
-Docker.
-
-Docker Compose.
-
-CI/CD.
-
-GitHub Actions.
-
-Auto Deploy.
-
-Auto Backup.
-
-Multi Server.
-
-Load Balancer.
-
-Redis.
-
-Celery.
-
-Object Storage.
-
-CDN.
+- Mọi yêu cầu đi qua FastAPI.
+- Mọi Workflow chạy trong n8n.
+- Python chỉ sinh Question Object.
+- LaTeX chỉ sinh PDF.
+- Database chỉ lưu dữ liệu.
+- Source Code quản lý bằng GitHub.
+- Máy chủ triển khai trên VPS.

@@ -4,136 +4,49 @@ Version: 1.0
 
 Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Chuẩn hóa toàn bộ Database của hệ thống.
+Database lưu trữ toàn bộ dữ liệu của hệ thống.
 
-Database là nơi lưu dữ liệu.
+Không lưu dữ liệu tạm.
 
-Không xử lý Business Logic.
+Không lưu dữ liệu sinh trong Python.
 
 ---
 
 # Database
 
-Supabase (PostgreSQL)
-
----
-
-# Nguyên tắc
-
-- Không lưu dữ liệu trùng.
-- Không lưu dữ liệu sinh ra từ Python.
-- Không lưu dữ liệu tạm.
-- Chỉ lưu dữ liệu cần sử dụng lâu dài.
-
----
-
-# Kiến trúc
-
-Frontend
-
-↓
-
-FastAPI
-
-↓
-
 Supabase
 
-↓
-
-PostgreSQL
+(PostgreSQL)
 
 ---
 
-# Nhóm bảng
-
-## Authentication
-
-auth.users
+# Danh sách bảng
 
 profiles
-
----
-
-## Người dùng
-
-profiles
-
-teachers
-
-students
 
 classes
 
-class_members
+students
 
----
+teachers
 
-## Đề thi
-
-exam_templates
-
-exam_blueprints
-
-exam_versions
+student_classes
 
 exam_history
 
----
+exam_files
 
-## Thi Online
+learning_history
 
-online_exams
+chat_history
 
-online_attempts
-
-attempt_answers
-
----
-
-## AI
-
-chat_sessions
-
-chat_messages
-
-ai_logs
-
----
-
-## Ngân hàng câu hỏi
-
-question_history
-
-favorite_questions
-
-question_statistics
-
----
-
-## Thống kê
-
-student_statistics
-
-teacher_statistics
-
-dashboard_cache
-
----
-
-## Hệ thống
-
-settings
-
-logs
-
-jobs
+system_logs
 
 ---
 
@@ -143,27 +56,27 @@ Lưu thông tin người dùng.
 
 ---
 
-# teachers
+# classes
 
-Thông tin giáo viên.
+Lưu thông tin lớp học.
 
 ---
 
 # students
 
-Thông tin học sinh.
+Lưu thông tin học sinh.
 
 ---
 
-# classes
+# teachers
 
-Danh sách lớp.
+Lưu thông tin giáo viên.
 
 ---
 
-# class_members
+# student_classes
 
-Quan hệ
+Liên kết
 
 Học sinh
 
@@ -173,190 +86,97 @@ Lớp
 
 ---
 
-# exam_templates
-
-Lưu mẫu đề.
-
-Không lưu PDF.
-
----
-
-# exam_blueprints
-
-Lưu Blueprint AI sinh.
-
----
-
-# exam_versions
-
-Lưu các phiên bản đề.
-
-Ví dụ
-
-A
-
-B
-
-C
-
-D
-
----
-
 # exam_history
 
 Lưu lịch sử sinh đề.
 
----
+Thông tin
 
-# online_exams
-
-Thông tin bài thi Online.
-
----
-
-# online_attempts
-
-Thông tin mỗi lần làm bài.
+- user_id
+- exam_id
+- blueprint
+- created_at
 
 ---
 
-# attempt_answers
+# exam_files
 
-Chi tiết từng câu trả lời.
+Lưu thông tin file.
 
----
+Ví dụ
 
-# chat_sessions
+- PDF
+- LaTeX
+- JSON
 
-Một cuộc trò chuyện.
+Không lưu nội dung file.
 
----
-
-# chat_messages
-
-Từng tin nhắn.
+Chỉ lưu đường dẫn.
 
 ---
 
-# ai_logs
+# learning_history
 
-Log AI.
+Lưu lịch sử học tập.
 
----
+Ví dụ
 
-# question_history
-
-Lưu ID Python đã sử dụng.
-
-Không lưu câu hỏi.
-
----
-
-# favorite_questions
-
-TODO
+- điểm
+- thời gian làm bài
+- kết quả
+- thống kê
 
 ---
 
-# question_statistics
+# chat_history
 
-Thống kê số lần xuất hiện.
-
----
-
-# student_statistics
-
-Dashboard học sinh.
+Lưu lịch sử hội thoại AI.
 
 ---
 
-# teacher_statistics
+# system_logs
 
-Dashboard giáo viên.
-
----
-
-# dashboard_cache
-
-Cache Dashboard.
-
----
-
-# settings
-
-Thiết lập hệ thống.
-
----
-
-# logs
-
-Log hệ thống.
-
----
-
-# jobs
-
-Background Jobs.
-
----
-
-# Không lưu
-
-Không lưu
-
-PPCT
-
-Curriculum
-
-Mapping
-
-Python
-
-Các file JSON
-
-LaTeX
-
-PDF
-
-Các dữ liệu này đọc trực tiếp từ Repository.
+Lưu log hệ thống.
 
 ---
 
 # Quan hệ
 
-Frontend
+Teacher
 
 ↓
 
-FastAPI
+Class
 
 ↓
 
-Supabase
+Student
 
 ↓
 
-Database
+Exam History
+
+↓
+
+Learning History
 
 ---
 
-# TODO
+# Không lưu
 
-Thiết kế ERD.
+- PPCT
+- Curriculum
+- Mapping
+- Python Bank
 
-Thiết kế Index.
+Các dữ liệu này lưu dưới dạng file JSON trong thư mục data.
 
-Thiết kế Foreign Key.
+---
 
-Thiết kế RLS.
+# Quy tắc
 
-Thiết kế Backup.
-
-Thiết kế Migration.
-
-Thiết kế Cache.
-
-Thiết kế Audit Log.
-
-
+- Mỗi bảng chỉ lưu một loại dữ liệu.
+- Không lưu file PDF trong Database.
+- Không lưu file LaTeX trong Database.
+- Database chỉ lưu metadata và đường dẫn.
+- Dữ liệu chương trình học không đưa vào Database.

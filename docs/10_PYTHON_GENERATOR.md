@@ -4,356 +4,150 @@ Version: 1.0
 
 Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Python là thành phần duy nhất được phép sinh câu hỏi.
+Python Generator chịu trách nhiệm sinh Question Object.
 
-AI không sinh câu hỏi.
+Không sinh PDF.
 
----
+Không sinh Web Test.
 
-# Vai trò
-
-Python chịu trách nhiệm
-
-- Sinh câu hỏi
-- Sinh đáp án
-- Sinh lời giải
-- Sinh LaTeX
-- Sinh dữ liệu Web Test
+Không sinh JSON.
 
 ---
 
-# Kiến trúc
+# Cấu trúc
 
-Code Node
-
-↓
-
-Import Python
+python_bank/
 
 ↓
 
-Gọi Function
-
-↓
-
-Question Object
-
----
-
-# Cấu trúc thư mục
-
-data/python_bank
-
-```
 toan10/
-toan11/
-toan12/
-```
+
+↓
+
+L10_C1.py
+
+L10_C2.py
+
+...
 
 ---
 
 # Quy tắc
 
-Một chương
+Mỗi chương
 
-=
+↓
 
 Một file Python.
 
 Ví dụ
 
-```
 L10_C1.py
 
 L10_C2.py
 
 L10_C3.py
-```
+
+...
 
 ---
 
-# Không chia theo bài.
+# Cấu trúc trong file
 
-Không chia theo mức độ.
-
-Không chia theo dạng.
-
----
-
-# Mỗi file chứa
-
-Toàn bộ hàm sinh câu hỏi của chương.
+Một file gồm nhiều Generator Function.
 
 Ví dụ
 
-```
 L10_C1.py
-```
 
-gồm
+↓
 
-```
-L10_C1_B1...
+L10_C1_B1_TH001_MC_A()
 
-L10_C1_B2...
+L10_C1_B1_TH002_MC_A()
 
-L10_C1_B3...
-```
+L10_C1_B2_VD020_TL_A()
 
----
-
-# Import
-
-Ví dụ
-
-```python
-from L10_C1 import *
-```
+...
 
 ---
 
-# Hàm
+# Generator Function
 
-Tên hàm
-
-=
-
-ID
+Tên hàm phải trùng Generator ID.
 
 Ví dụ
 
-```python
+Generator ID
+
+L10_C1_B2_VD020_TL_A
+
+↓
+
+Python
+
 def L10_C1_B2_VD020_TL_A():
-```
-
----
-
-Không đổi tên.
 
 ---
 
 # Input
 
-Không nhận Prompt.
+Generator Function không nhận tham số.
 
-Không nhận Text.
-
-Chỉ nhận
-
-```python
-seed
-```
-
-hoặc
-
-```python
-config
-```
-
-khi cần.
+Random được xử lý bên trong hàm.
 
 ---
 
 # Output
 
-Luôn trả Question Object.
-
-Không trả String.
-
----
-
-Ví dụ
-
-```python
-return {
-
-}
-```
+Mỗi Generator Function trả về đúng một Question Object.
 
 ---
 
 # Question Object
 
-TODO
+Question Object gồm
+
+- generator_id
+- content
+- answer
+- solution
+- latex
+- metadata
 
 ---
 
 # Random
 
-Mỗi hàm
+Một Generator Function có thể sinh nhiều câu hỏi khác nhau.
 
-Tự random.
+Generator ID không đổi.
 
-Không để AI random.
-
----
-
-# Seed
-
-Sau này
-
-Cho phép
-
-```python
-seed
-```
-
-để sinh lại đúng câu.
-
----
-
-# Đáp án
-
-Python sinh.
-
-Không AI.
-
----
-
-# Lời giải
-
-Python sinh.
-
-Không AI.
-
----
-
-# LaTeX
-
-Python sinh.
-
-Không AI.
-
----
-
-# Hình vẽ
-
-Python sinh.
-
-Không AI.
-
----
-
-# Đúng/Sai
-
-Một hàm
-
-Có thể sinh
-
-4 ý.
-
----
-
-# Tự luận
-
-Một hàm
-
-Sinh
-
-01 bài.
-
----
-
-# Trắc nghiệm
-
-Một hàm
-
-Sinh
-
-01 câu.
+Question Object thay đổi.
 
 ---
 
 # Không được
 
-Không gọi AI.
-
-Không đọc JSON.
-
-Không ghi Database.
-
-Không gọi API.
-
----
-
-# Được phép
-
-Random
-
-Sympy
-
-Numpy
-
-Latex
-
-Matplotlib
-
-TikZ
+- Gọi AI.
+- Đọc PPCT.
+- Đọc Curriculum.
+- Đọc Mapping.
+- Sinh PDF.
+- Sinh Web Test.
 
 ---
 
-# Quan hệ với Mapping
+# Quy tắc
 
-Mapping
-
-↓
-
-ID
-
-↓
-
-Python Function
-
----
-
-# Quan hệ với Curriculum
-
-Curriculum
-
-↓
-
-Định nghĩa năng lực.
-
-Python không đọc Curriculum.
-
----
-
-# Quan hệ với PPCT
-
-Không đọc PPCT.
-
----
-
-# Quan hệ với Code Node
-
-Code Node
-
-↓
-
-Import Python
-
-↓
-
-Gọi Function
-
----
-
-# TODO
-
-Question Object.
-
-Question Validator.
-
-Seed.
-
-Cache.
-
-Performance.
-
-Parallel Generator.
+- Một Generator ID chỉ có một Generator Function.
+- Một Generator Function chỉ sinh một Question Object.
+- Mỗi chương chỉ có một file Python.
+- Không tạo nhiều file Python cho cùng một chương.
+- Tên hàm phải trùng Generator ID.

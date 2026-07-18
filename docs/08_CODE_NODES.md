@@ -2,561 +2,399 @@
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định toàn bộ Code Node của hệ thống n8n.
+Code Node chỉ xử lý dữ liệu.
 
-Code Node là nơi xử lý nghiệp vụ.
-
-AI Agent không xử lý nghiệp vụ.
-
----
-
-# Nguyên tắc
-
-## 1
-
-Một Code Node
-
-=
-
-Một nhiệm vụ.
-
----
-
-## 2
-
-Không viết nhiều nghiệp vụ trong cùng một Node.
-
----
-
-## 3
-
-Code Node không được gọi LLM.
-
-Chỉ AI Agent mới gọi LLM.
-
----
-
-## 4
-
-Code Node được phép
-
-- Gọi API
-- Đọc JSON
-- Ghép dữ liệu
-- Lọc dữ liệu
-- Kiểm tra dữ liệu
-- Chuẩn hóa dữ liệu
-- Gọi Python
-- Gọi Database
-
----
-
-## 5
-
-Không để Code Node chứa Prompt.
-
-Prompt thuộc
-
-18_PROMPT_LIBRARY.md
-
----
-
-# Kiến trúc
-
-Webhook
-
-↓
-
-Code Node
-
-↓
-
-AI Agent
-
-↓
-
-Code Node
-
-↓
-
-Webhook
-
----
-
-# Danh sách Code Node
-
-| ID | Code Node | Chức năng | Trạng thái |
-|----|-----------|-----------|------------|
-| CN_LoadExamScope | Tra PPCT | ✅ |
-| CN_LoadCurriculum | Đọc Curriculum | ✅ |
-| CN_LoadMapping | Đọc Mapping | ✅ |
-| CN_BuildCandidatePool | Ghép Blueprint + Curriculum + Mapping | ✅ |
-| CN_QuestionSelector | Chọn ID Python theo quy tắc | ✅ |
-| CN_CallPythonGenerator | Gọi Python | ✅ |
-| CN_QuestionValidator | Kiểm tra câu hỏi sau khi sinh | ✅ |
-| CN_ExamAssembler | Ghép đề hoàn chỉnh | ✅ |
-| CN_GenerateLatex | Sinh LaTeX | TODO |
-| CN_GeneratePDF | Sinh PDF | TODO |
-| CN_SaveExam | Lưu đề | TODO |
-| CN_SaveHistory | Lưu lịch sử | TODO |
-| CN_LoadStudent | Đọc học sinh | TODO |
-| CN_LoadTeacher | Đọc giáo viên | TODO |
-| CN_ResponseFormatter | Chuẩn hóa Response | ✅ |
-
----
-
-# CN_LoadExamScope
-
-## Vai trò
-
-Tra cứu PPCT.
-
-Đổi tên chương
-
-↓
-
-lesson_id
-
----
-
-## Input
-
-JSON từ RequestParser.
-
----
-
-## Output
-
-lesson_id
-
----
-
-## Gọi API
-
-```
-GET
-
-/api/data/ppct/{grade}
-```
-
----
-
-## Không được làm
+Không thực hiện suy luận AI.
 
 Không sinh câu hỏi.
 
-Không gọi Python.
+Không sinh đề.
 
-Không đọc Curriculum.
-
----
-
-# CN_LoadCurriculum
-
-## Vai trò
-
-Đọc Curriculum.
-
----
-
-## Input
-
-lesson_id
-
----
-
-## Output
-
-Danh sách năng lực.
-
----
-
-## API
-
-```
-GET
-
-/api/data/curriculum/{chapter}
-```
-
----
-
-TODO.
-
----
-
-# CN_LoadMapping
-
-## Vai trò
-
-Đọc Mapping.
-
----
-
-Input
-
-TODO
-
-Output
-
-TODO
-
----
-
-# CN_BuildCandidatePool
-
-## Mục tiêu
-
-- Ghép Blueprint.
-- Ghép Curriculum.
-- Ghép Mapping.
-- Sinh Candidate Pool.
-
-## Input
-
-- Blueprint
-- Curriculum
-- Mapping
-
-## Output
-
-```json
-[
-    "L10_C1_B1_NB001_MC_A",
-    "L10_C1_B1_NB002_MC_A",
-    "L10_C1_B2_TH013_TF_A"
-]
-```
-
-Không chọn câu.
-
-Chỉ tạo danh sách các ID có thể sử dụng.
-
----
-
-# CN_QuestionSelector
-
-## Mục tiêu
-
-Chọn các ID Python sẽ được sinh đề.
-
-## Input
-
-Candidate Pool
-
-## Output
-
-Selected Question IDs
-
-## Quy tắc
-
-- Không trùng câu.
-- Không trùng dạng.
-- Không trùng template.
-- Random phiên bản A/B/C/D.
-- Đúng Blueprint.
-- Đúng số lượng câu.
-- Đúng mức độ.
-- Đúng chương.
-- Đúng bài.
-- Sau này: không trùng đề đã làm.
-
----
-
-# CN_CallPythonGenerator
-
-## Vai trò
-
-Import Python.
-
-↓
-
-Gọi Generator.
-
----
-
-Ví dụ
-
-```
-L10_C1.py
-```
-
-↓
-
-```
-L10_C1_B2_VD020_TL_A()
-```
-
-## Input
-
-Selected Question IDs
-
-## Công việc
-
-- Import file Python theo chương.
-- Gọi đúng hàm theo ID.
-- Nhận Question Object.
-
----
-
-Output
-
-LaTeX.
-
-JSON.
-
----
-
-Không xử lý Prompt.
-
----
-
-# CN_QuestionValidator
-
-## Mục tiêu
-
-Kiểm tra kết quả Python sinh.
-
-## Kiểm tra
-
-- Có câu hỏi.
-- Có đáp án.
-- Có lời giải.
-- Có LaTeX.
-- Không lỗi.
-
-Nếu lỗi
-
-↓
-
-Loại câu
-
-↓
-
-Quay lại CN_QuestionSelector
-
-↓
-
-Lấy ID khác.
-
----
-
-# CN_ExamAssembler
-
-## Mục tiêu
-
-Ghép toàn bộ Question Object thành một đề hoàn chỉnh.
-
-## Output
-
-```json
-{
-    "exam": [],
-    "answer": [],
-    "metadata": {}
-}
-```
-
----
-
-# CN_GenerateLatex
-
-TODO.
-
----
-
-# CN_GeneratePDF
-
-TODO.
-
----
-
-# CN_SaveExam
-
-TODO.
-
----
-
-# CN_SaveHistory
-
-TODO.
-
----
-
-# CN_LoadStudent
-
-TODO.
-
----
-
-# CN_LoadTeacher
-
-TODO.
-
----
-
-# CN_ResponseFormatter
-
-## Vai trò
-
-Chuẩn hóa Response.
-
----
-
-Ví dụ
-
-```
-success
-
-message
-
-data
-
-metadata
-```
-
----
-
-Không xử lý nghiệp vụ.
-
----
-
-# Quan hệ với AI
-
-Code Node
-
-↓
-
-AI
-
-↓
-
-Code Node
-
-Không có
-
-AI
-
-↓
-
-AI
-
----
-
-# Quan hệ với API
-
-Code Node
-
-↓
-
-FastAPI
-
-↓
-
-JSON
-
----
-
-# Quan hệ với Python
-
-Code Node
-
-↓
-
-Import
-
-↓
-
-Python Generator
-
-↓
-
-LaTeX
+Không thay thế Python Generator.
 
 ---
 
 # Quy tắc đặt tên
 
-CN_
-
-+
-
-Tên chức năng.
+CN_<Tên>
 
 Ví dụ
 
-CN_LoadExamScope
+CN_ParseRequest
 
 CN_LoadCurriculum
 
 CN_LoadMapping
 
-CN_LoadQuestionPool
+CN_BuildCandidatePool
+
+CN_QuestionSelector
 
 CN_CallPythonGenerator
+
+CN_QuestionValidator
+
+CN_ExamAssembler
 
 CN_ResponseFormatter
 
 ---
 
-# Quy tắc Input
+# WF001_GenerateExam
 
-Input luôn là JSON.
+CHV_RequestParser
 
-Không dùng Text.
+↓
+
+CN_ParseRequest
+
+↓
+
+CHV_ExamPlanner
+
+↓
+
+CN_LoadCurriculum
+
+↓
+
+CN_LoadMapping
+
+↓
+
+CN_BuildCandidatePool
+
+↓
+
+CN_QuestionSelector
+
+↓
+
+CN_CallPythonGenerator
+
+↓
+
+CN_QuestionValidator
+
+↓
+
+CN_ExamAssembler
+
+↓
+
+Switch_OutputFormat
+
+↓
+
+CN_ResponseFormatter
 
 ---
 
-# Quy tắc Output
+===============================================================================
 
-Output luôn là JSON.
+CN_ParseRequest
 
-Không trả String tự do.
+-------------------------------------------------------------------------------
 
----
+Input
 
-# Error Handling
+Request JSON
 
-TODO.
+Output
 
----
+Request Object
 
-# Retry Strategy
+Nhiệm vụ
 
-TODO.
+- Chuẩn hóa dữ liệu.
+- Kiểm tra dữ liệu bắt buộc.
+- Chuyển kiểu dữ liệu.
 
----
+Không được
 
-# Logging
+- Suy luận.
+- Gọi AI.
 
-TODO.
+===============================================================================
 
----
+CN_LoadCurriculum
 
-# Performance
+-------------------------------------------------------------------------------
 
-TODO.
+Input
 
----
+Blueprint
+
+Output
+
+Curriculum JSON
+
+Nhiệm vụ
+
+- Đọc Curriculum theo chương.
+
+Không được
+
+- Chọn câu.
+
+===============================================================================
+
+CN_LoadMapping
+
+-------------------------------------------------------------------------------
+
+Input
+
+Blueprint
+
+Output
+
+Mapping JSON
+
+Nhiệm vụ
+
+- Đọc Mapping theo chương.
+
+Không được
+
+- Chọn câu.
+
+===============================================================================
+
+CN_BuildCandidatePool
+
+-------------------------------------------------------------------------------
+
+Input
+
+Blueprint
+
+Curriculum
+
+Mapping
+
+Output
+
+Candidate Pool
+
+Nhiệm vụ
+
+Ghép:
+
+Blueprint
+
++
+
+Curriculum
+
++
+
+Mapping
+
+↓
+
+Candidate Pool
+
+Không được
+
+- Chọn ID.
+- Gọi Python.
+
+===============================================================================
+
+CN_QuestionSelector
+
+-------------------------------------------------------------------------------
+
+Input
+
+Candidate Pool
+
+Blueprint
+
+Output
+
+Question IDs
+
+Nhiệm vụ
+
+Chọn ID phù hợp Blueprint.
+
+Ví dụ
+
+L10_C1_B1_TH014_MC_A
+
+L10_C1_B2_VD020_TL_A
+
+...
+
+Không được
+
+- Sinh câu hỏi.
+- Sinh LaTeX.
+
+===============================================================================
+
+CN_CallPythonGenerator
+
+-------------------------------------------------------------------------------
+
+Input
+
+Question IDs
+
+Output
+
+Question Objects
+
+Nhiệm vụ
+
+Gọi đúng hàm Python.
+
+Ví dụ
+
+L10_C1.py
+
+↓
+
+L10_C1_B2_VD020_TL_A()
+
+↓
+
+Question Object
+
+Không được
+
+- Chọn ID.
+
+===============================================================================
+
+CN_QuestionValidator
+
+-------------------------------------------------------------------------------
+
+Input
+
+Question Objects
+
+Output
+
+Validated Questions
+
+Nhiệm vụ
+
+Kiểm tra
+
+- Trùng câu.
+- Đúng chương.
+- Đúng bài.
+- Đúng Blueprint.
+- Đúng mức độ.
+
+===============================================================================
+
+CN_ExamAssembler
+
+-------------------------------------------------------------------------------
+
+Input
+
+Validated Questions
+
+Output
+
+Exam Object
+
+Nhiệm vụ
+
+Ghép Question Object thành Exam Object.
+
+Không được
+
+- Sinh PDF.
+- Sinh Web Test.
+
+===============================================================================
+
+Switch_OutputFormat
+
+-------------------------------------------------------------------------------
+
+Input
+
+Exam Object
+
+↓
+
+latex
+
+↓
+
+Generate LaTeX
+
+----------------------------
+
+web_test
+
+↓
+
+Generate Web Test
+
+----------------------------
+
+json
+
+↓
+
+Generate JSON
+
+===============================================================================
+
+CN_ResponseFormatter
+
+-------------------------------------------------------------------------------
+
+Input
+
+PDF
+
+Web Test
+
+JSON
+
+Output
+
+Response
+
+Nhiệm vụ
+
+Chuẩn hóa dữ liệu trả về Frontend.
+
+===============================================================================
+
+# Quy tắc
+
+- Một Code Node chỉ làm một việc.
+- Không có AI trong Code Node.
+- Không có Prompt trong Code Node.
+- Không có Python trong Code Node (trừ CN_CallPythonGenerator).
+- Không sinh đề trong Code Node.
+- Mọi dữ liệu truyền giữa các Node đều là JSON.
+
+===============================================================================
 
 # TODO
 
-Thiết kế toàn bộ Input.
-
-Thiết kế Output.
-
-Thiết kế Error Code.
-
-Thiết kế Logging.
-
-Thiết kế Retry.
-
-Thiết kế Cache.
+- CN_SaveExamHistory
+- CN_SaveQuestionHistory
+- CN_SaveStudentLog
+- CN_CacheQuestion
+- CN_CacheBlueprint

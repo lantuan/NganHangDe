@@ -2,203 +2,122 @@
 
 Version: 1.0
 
+Trạng thái
+
+🟢 Chuẩn chính thức
+
 ---
 
 # Mục tiêu
 
-Ghi lại toàn bộ thay đổi của dự án.
+Theo dõi toàn bộ thay đổi của dự án.
 
-Không ghi chi tiết code.
+Mỗi lần thay đổi lớn phải cập nhật Changelog.
 
-Chỉ ghi các thay đổi ở mức kiến trúc và chức năng.
+Không ghi các thay đổi nhỏ như sửa chính tả hoặc định dạng.
 
 ---
 
 # Quy tắc
 
-Mỗi thay đổi gồm
+Mỗi phiên bản ghi theo mẫu
 
-- Version
-- Ngày
-- Người thực hiện
-- Nội dung
-- Ghi chú
+Version
 
----
-
-# Format
-
-## Version
-
-Ví dụ
-
-```
-v1.0.0
-```
-
----
-
-## Date
-
-Ví dụ
-
-```
-2026-07-18
-```
-
----
-
-## Author
-
-Ví dụ
-
-```
-Phuc Phan
-```
-
----
-
-## Type
-
-Một trong các loại
-
-- Feature
-- Fix
-- Refactor
-- Docs
-- Database
-- API
-- Frontend
-- Python
-- AI
-- n8n
-- Deployment
-
----
-
-## Description
-
-Mô tả ngắn.
-
----
-
-## Files
-
-Danh sách file liên quan.
-
----
-
-## Note
-
-Ghi chú thêm.
-
----
-
-# CHANGELOG
-
----
-
-## v1.0.0
+↓
 
 Ngày
 
-TODO
-
-Loại
-
-Architecture
+↓
 
 Nội dung
 
-- Khởi tạo kiến trúc dự án.
-- Xây dựng Sổ tay kỹ thuật.
-- Chuẩn hóa ID.
-- Chuẩn hóa Pipeline sinh đề.
+↓
+
+Người thực hiện
+
+---
+
+===============================================================================
+
+Version 1.0
+
+Ngày
+
+2026-07
+
+Trạng thái
+
+LOCKED
+
+Nội dung
+
+- Hoàn thành Sổ tay kỹ thuật.
+- Chuẩn hóa kiến trúc hệ thống.
+- Chuẩn hóa Workflow.
 - Chuẩn hóa AI Agents.
 - Chuẩn hóa Code Nodes.
+- Chuẩn hóa Data Structure.
+- Chuẩn hóa API.
+- Chuẩn hóa Python Generator.
+- Chuẩn hóa LaTeX Engine.
+- Chuẩn hóa Database.
+- Chuẩn hóa Frontend.
+- Chuẩn hóa Deployment.
+
+Người thực hiện
+
+Phuc Phan
+
+ChatGPT
 
 ---
 
-## v1.1.0
+===============================================================================
 
-TODO
+Version 1.1
 
----
+Ngày
 
-## v1.2.0
+...
 
-TODO
+Nội dung
 
----
-
-## v2.0.0
-
-TODO
+...
 
 ---
 
-# Quy tắc Version
+===============================================================================
 
-Major
+Version 1.2
 
-```
-2.0.0
-```
+Ngày
 
-Thay đổi lớn.
+...
 
----
+Nội dung
 
-Minor
-
-```
-1.2.0
-```
-
-Thêm tính năng.
+...
 
 ---
 
-Patch
+===============================================================================
 
-```
-1.2.3
-```
+Version 2.0
 
-Sửa lỗi.
+Ngày
 
----
+...
 
-# Không ghi
+Nội dung
 
-Không ghi
-
-- sửa typo
-- format
-- khoảng trắng
-- comment
+...
 
 ---
 
-# Nên ghi
+# Quy tắc
 
-- Thêm AI Agent.
-- Thêm API.
-- Thêm Workflow.
-- Thêm Database.
-- Thêm Python Generator.
-- Thay đổi Pipeline.
-- Thay đổi ID.
-- Thay đổi kiến trúc.
-
----
-
-# TODO
-
-Kết nối Git Commit.
-
-Sinh CHANGELOG tự động.
-
-Sinh Release Note.
-
-Sinh Version tự động.
+- Chỉ ghi các thay đổi lớn.
+- Không xóa lịch sử phiên bản.
+- Phiên bản mới luôn thêm xuống cuối.
+- Sau khi phát hành Version 1.0, mọi thay đổi đều phải cập nhật Changelog.

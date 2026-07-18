@@ -2,596 +2,401 @@
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định quy trình sinh đề chuẩn của hệ thống.
+WF001_GenerateExam chịu trách nhiệm sinh đề thi.
 
-Mọi hình thức sinh đề đều phải tuân theo Pipeline này.
+Workflow này chỉ được gọi từ WF000_Gateway.
 
-Bao gồm
-
-- PDF
-- LaTeX
-- Web Test
-- AI Tutor
+Không được gọi trực tiếp từ Frontend.
 
 ---
 
-# Nguyên tắc
+# Đầu vào
 
-## 1
-
-AI không sinh câu hỏi.
-
----
-
-## 2
-
-Python Generator sinh câu hỏi.
-
----
-
-## 3
-
-AI chỉ lập kế hoạch sinh đề.
-
----
-
-## 4
-
-Code Node xử lý toàn bộ Business Logic.
-
----
-
-## 5
-
-Không cho AI đọc toàn bộ JSON.
-
----
-
-# GOLDEN PIPELINE
-
-User
+Request JSON
 
 ↓
+
+Blueprint
+
+↓
+
+Curriculum
+
+↓
+
+Mapping
+
+---
+
+# Luồng tổng thể
 
 CHV_RequestParser
-# AI
-- Phân tích yêu cầu người dùng.
-- Chuẩn hóa Request.
 
 ↓
 
-CN_LoadExamScope
-# Code Node
-- Gọi API PPCT.
-- Xác định lesson_id.
+CN_ParseRequest
 
 ↓
 
 CHV_ExamPlanner
-# AI
-- Sinh Blueprint.
-- Phân bố số câu theo ma trận.
 
 ↓
 
 CN_LoadCurriculum
-# Code Node
-- Gọi Curriculum API.
-- Lấy năng lực.
 
 ↓
 
 CN_LoadMapping
-# Code Node
-- Gọi Mapping API.
-- Lấy Loại và Dạng.
 
 ↓
 
 CN_BuildCandidatePool
-# Code Node
-- Ghép
-    Blueprint
-    +
-    Curriculum
-    +
-    Mapping
-- Sinh Candidate Pool.
-- Chưa chọn câu.
 
 ↓
 
 CN_QuestionSelector
-# Code Node
-- Chọn ID Python.
-- Không trùng câu.
-- Không trùng dạng.
-- Không trùng template.
-- Random phiên bản.
-- Đúng Blueprint.
-- Đúng ma trận.
-- Đúng phân bố.
+
+↓
+
+Question IDs
 
 ↓
 
 CN_CallPythonGenerator
-# Code Node
-- Import file Python theo chương.
-- Gọi đúng hàm.
+
+↓
+
+Question Objects
 
 ↓
 
 CN_QuestionValidator
-# Code Node
-- Kiểm tra câu hỏi.
-- Kiểm tra đáp án.
-- Kiểm tra lời giải.
-- Kiểm tra LaTeX.
-- Nếu lỗi:
-    quay lại QuestionSelector.
+
+↓
+
+Validated Questions
 
 ↓
 
 CN_ExamAssembler
-# Code Node
-- Ghép toàn bộ câu.
-- Sinh Exam JSON.
 
 ↓
 
-CN_GenerateLatex
-# Code Node
-- Sinh LaTeX.
-- Sinh PDF.
+Exam Object
 
 ↓
 
-CN_ResponseFormatter
-# Code Node
-- Chuẩn hóa JSON trả về.
+Switch_OutputFormat
 
 ↓
-
-Frontend
-
----
-
-# BƯỚC 1
-
-## Người dùng
-
-Ví dụ
-
-```
-Sinh đề giữa kỳ
-
-Lớp 10
-
-Chương Mệnh đề
-
-20 câu
-
-70% trắc nghiệm
-
-30% đúng sai
-```
-
----
-
-Output
-
-↓
-
-Request tự nhiên.
-
----
-
-# BƯỚC 2
-
-## CHV_RequestParser
-
-Mục tiêu
-
-↓
-
-Chuẩn hóa yêu cầu.
-
----
-
-Output
-
-Ví dụ
-
-```json
-{
-    "grade":10,
-    "exam_type":"Giữa kỳ",
-    "chapter":"Mệnh đề",
-    "question_count":20
-}
-```
-
----
-
-# BƯỚC 3
-
-## CN_LoadExamScope
-
-Đọc PPCT.
-
-↓
-
-Tìm lesson_id.
-
----
-
-Ví dụ
-
-```
-L10_C1_B1
-
-L10_C1_B2
-```
-
----
-
-Không đọc Curriculum.
-
----
-
-# BƯỚC 4
-
-## CHV_ExamPlanner
-
-Sinh Blueprint.
-
----
-
-Ví dụ
-
-```json
-[
-    {
-        "lesson_id":"L10_C1_B1",
-        "level":"NB",
-        "count":4
-    }
-]
-```
-
----
-
-Không sinh câu hỏi.
-
----
-
-# BƯỚC 5
-
-## CN_LoadCurriculum
-
-Đọc Curriculum.
-
-↓
-
-Lấy năng lực.
-
----
-
-Không gọi AI.
-
----
-
-# BƯỚC 6
-
-## CN_LoadMapping
-
-Đọc Mapping.
-
-↓
-
-Biết
-
-Loại
-
-Dạng
-
----
-
-Ví dụ
-
-```
-MC
-
-TF
-
-TL
-```
-
----
-
-# BƯỚC 7
-
-## CN_LoadQuestionPool
-
-Ghép
-
-Blueprint
-
-+
-
-Curriculum
-
-+
-
-Mapping
-
-↓
-
-Question Pool
-
----
-
-Ví dụ
-
-```json
-[
-"L10_C1_B2_VD020_TL_A",
-"L10_C1_B1_NB004_MC_A"
-]
-```
-
----
-
-Đây là bước quan trọng nhất.
-
----
-
-# BƯỚC 8
-
-## CN_CallPythonGenerator
-
-Import Python.
-
----
-
-Ví dụ
-
-```
-L10_C1.py
-```
-
-↓
-
-Gọi
-
-```
-L10_C1_B2_VD020_TL_A()
-```
-
-↓
-
-Sinh câu hỏi.
-
----
-
-Output
-
-LaTeX
-
-JSON
-
-Đáp án
-
-Lời giải
-
----
-
-# BƯỚC 9
-
-## CN_ResponseFormatter
-
-Chuẩn hóa dữ liệu.
-
----
-
-Ví dụ
-
-```json
-{
-    "exam":{},
-    "answer":{},
-    "latex":"..."
-}
-```
-
----
-
-# BƯỚC 10
-
-## FastAPI
-
-Trả kết quả.
-
----
-
-# BƯỚC 11
-
-## Frontend
-
-Hiển thị.
-
----
-
-PDF
 
 LaTeX
 
 Web Test
 
+JSON
+
+↓
+
+Response
+
 ---
 
-# MA TRẬN ĐỀ
+===============================================================================
 
-Người dùng
+# Giai đoạn 1
 
-↓
+Request Parsing
 
-Ma trận đề
+-------------------------------------------------------------------------------
 
-↓
+AI
+
+CHV_RequestParser
+
+Input
+
+Message
+
+Output
+
+Request JSON
+
+---
+
+===============================================================================
+
+# Giai đoạn 2
 
 Blueprint
 
-↓
+-------------------------------------------------------------------------------
 
-Question Pool
+AI
 
-↓
+CHV_ExamPlanner
 
-Python
+Input
 
----
+Request
 
-Không bỏ qua Blueprint.
+PPCT
 
----
+Output
 
-# CURRICULUM
+Blueprint
 
-Vai trò
+Blueprint quy định
 
-↓
+- chương
+- bài
+- số câu
+- mức độ
+- loại câu
+- tỉ lệ
 
-Năng lực.
-
-Không sinh câu hỏi.
-
----
-
-# MAPPING
-
-Vai trò
-
-↓
-
-Loại câu.
-
-↓
-
-Dạng toán.
+Blueprint KHÔNG chứa Question ID.
 
 ---
 
-# PYTHON
+===============================================================================
 
-Vai trò
+# Giai đoạn 3
 
-↓
+Candidate Pool
 
-Sinh câu hỏi.
+-------------------------------------------------------------------------------
 
-↓
+Input
 
-Sinh đáp án.
+Blueprint
 
-↓
+Curriculum
 
-Sinh lời giải.
+Mapping
 
-↓
+Output
 
-Sinh LaTeX.
+Candidate Pool
 
----
+Candidate Pool gồm toàn bộ năng lực có thể sử dụng.
 
-# AI
-
-Vai trò
-
-↓
-
-Lập kế hoạch.
-
-↓
-
-Không sinh câu hỏi.
+Chưa chọn câu.
 
 ---
 
-# CODE NODE
+===============================================================================
 
-Vai trò
+# Giai đoạn 4
 
-↓
+Question Selector
 
-Business Logic.
+-------------------------------------------------------------------------------
 
----
+Input
 
-# FASTAPI
+Candidate Pool
 
-Vai trò
+Blueprint
 
-↓
+Output
 
-API.
+Question IDs
 
-↓
+Ví dụ
 
-Response.
+L10_C1_B1_TH014_MC_A
 
----
+L10_C1_B2_VD020_TL_A
 
-# FRONTEND
+...
 
-Vai trò
-
-↓
-
-Hiển thị.
+Đây là bước quyết định sẽ gọi hàm Python nào.
 
 ---
 
-# KHÔNG ĐƯỢC
+===============================================================================
 
-AI sinh đề.
+# Giai đoạn 5
 
-AI sinh đáp án.
+Python Generator
 
-AI sinh LaTeX.
+-------------------------------------------------------------------------------
 
-AI đọc Curriculum.
+Input
 
-AI đọc Mapping.
+Question IDs
 
-AI đọc PPCT.
+Output
+
+Question Objects
+
+Ví dụ
+
+PY_L10_C1.py
+
+↓
+
+L10_C1_B2_VD020_TL_A()
+
+↓
+
+Question Object
+
+Một Question Object gồm
+
+- nội dung
+- đáp án
+- lời giải
+- metadata
+- latex
+- hình ảnh (nếu có)
+
+---
+
+===============================================================================
+
+# Giai đoạn 6
+
+Question Validator
+
+-------------------------------------------------------------------------------
+
+Kiểm tra
+
+- trùng ID
+- trùng nội dung
+- đúng Blueprint
+- đúng chương
+- đúng bài
+- đúng mức độ
+- đúng loại câu
+
+Nếu lỗi
+
+↓
+
+Sinh lại Question ID
+
+↓
+
+Gọi lại Python
+
+---
+
+===============================================================================
+
+# Giai đoạn 7
+
+Exam Object
+
+-------------------------------------------------------------------------------
+
+Input
+
+Validated Questions
+
+Output
+
+Exam Object
+
+Exam Object là dữ liệu chuẩn của toàn bộ hệ thống.
+
+Mọi định dạng đầu ra đều sinh từ Exam Object.
+
+---
+
+===============================================================================
+
+# Giai đoạn 8
+
+Output
+
+-------------------------------------------------------------------------------
+
+Switch_OutputFormat
+
+↓
+
+latex
+
+↓
+
+Generate tex
+
+↓
+
+Compile pdf
+
+----------------------------
+
+web_test
+
+↓
+
+Generate Online Test
+
+----------------------------
+
+json
+
+↓
+
+Generate JSON
+
+---
+
+===============================================================================
+
+# Question Object
+
+Question Object là đơn vị nhỏ nhất của đề.
+
+Question Object không phụ thuộc định dạng xuất.
+
+---
+
+===============================================================================
+
+# Exam Object
+
+Exam Object là đơn vị lớn nhất.
+
+Exam Object gồm
+
+- thông tin đề
+- danh sách Question Object
+- đáp án
+- metadata
+- thống kê
+
+---
+
+===============================================================================
+
+# Quy tắc
+
+- Blueprint không chứa Question ID.
+- Candidate Pool không chứa câu hỏi.
+- Question Selector chỉ chọn ID.
+- Python chỉ sinh Question Object.
+- Validator không sửa câu hỏi.
+- Exam Object là trung tâm.
+- PDF, Web Test và JSON đều sinh từ Exam Object.
 
 ---
 
 # TODO
 
-Hoàn thiện Blueprint Schema.
-
-Hoàn thiện Matrix Schema.
-
-Hoàn thiện Exam Schema.
-
-Hoàn thiện Response Schema.
-
-Hoàn thiện Web Test Pipeline.
-
-Hoàn thiện PDF Pipeline.
-
-Hoàn thiện LaTeX Pipeline.
-
-Hoàn thiện AI Tutor Pipeline.
-
-Hoàn thiện Dashboard Pipeline.
+- Sinh DOCX
+- Sinh Moodle XML
+- Sinh QTI
+- Sinh SCORM

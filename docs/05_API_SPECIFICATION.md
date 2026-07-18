@@ -2,76 +2,50 @@
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định toàn bộ API của hệ thống.
+Toàn bộ Frontend, n8n và Python chỉ giao tiếp thông qua FastAPI.
 
-Mọi API đều phải được khai báo tại đây trước khi lập trình.
-
-Không tạo API tùy hứng.
+Không Node nào được đọc file trực tiếp nếu đã có API.
 
 ---
 
-# Quy tắc
+# Kiến trúc
 
-## RESTful
+Frontend
 
-GET
+↓
 
-POST
+FastAPI
 
-PUT
+↓
 
-DELETE
+Data
 
----
+↓
 
-## JSON UTF-8
+n8n
 
-Toàn bộ Request và Response đều dùng JSON.
+↓
 
----
-
-## Version
-
-Tương lai
-
-```
-/api/v1/
-```
-
-Hiện tại
-
-```
-/api/
-```
+Python
 
 ---
 
-# PHÂN NHÓM API
-
----
-
-# I. DATA API
-
-Chỉ đọc dữ liệu.
-
-Không xử lý nghiệp vụ.
-
----
+# API
 
 ## PPCT
 
 GET
 
 ```
-/api/data/ppct/{grade}
+/api/data/ppct/{subject}
 ```
 
 Ví dụ
@@ -80,9 +54,9 @@ Ví dụ
 /api/data/ppct/toan10
 ```
 
-Response
+Output
 
-TODO
+PPCT JSON
 
 ---
 
@@ -91,18 +65,18 @@ TODO
 GET
 
 ```
-/api/data/curriculum/{chapter}
+/api/data/curriculum/{subject}/{chapter}
 ```
 
 Ví dụ
 
 ```
-/api/data/curriculum/L10_C1
+/api/data/curriculum/toan10/L10_C1
 ```
 
-Response
+Output
 
-TODO
+Curriculum JSON
 
 ---
 
@@ -111,78 +85,38 @@ TODO
 GET
 
 ```
-/api/data/mapping/{chapter}
+/api/data/mapping/{subject}/{chapter}
 ```
 
 Ví dụ
 
 ```
-/api/data/mapping/L10_C1
+/api/data/mapping/toan10/L10_C1
 ```
 
-Response
+Output
 
-TODO
+Mapping JSON
 
 ---
 
-# II. EXAM API
+## Python Bank
 
-Đây là Business API.
+GET
 
-n8n sẽ gọi nhóm API này.
+```
+/api/data/python_bank/{subject}/{chapter}
+```
 
-Không xử lý PPCT trong n8n.
+Output
+
+Generator Information
+
+Không trả source code.
 
 ---
 
-## Exam Scope
-
-POST
-
-```
-/api/exam/scope
-```
-
-Mục tiêu
-
-↓
-
-Đổi yêu cầu
-
-↓
-
-lesson_id
-
-Request
-
-TODO
-
-Response
-
-TODO
-
----
-
-## Question Pool
-
-POST
-
-```
-/api/exam/question_pool
-```
-
-Request
-
-TODO
-
-Response
-
-TODO
-
----
-
-## Generate Exam
+# Generate Exam
 
 POST
 
@@ -190,29 +124,17 @@ POST
 /api/exam/generate
 ```
 
-Request
+Input
 
-TODO
+Blueprint
 
-Response
+Output
 
-TODO
-
----
-
-## Generate Latex
-
-POST
-
-```
-/api/exam/latex
-```
-
-TODO
+Exam Object
 
 ---
 
-## Generate PDF
+# Generate PDF
 
 POST
 
@@ -220,157 +142,191 @@ POST
 /api/exam/pdf
 ```
 
-TODO
+Input
+
+Exam Object
+
+Output
+
+PDF
 
 ---
 
-# III. STUDENT API
+# Generate LaTeX
+
+POST
+
+```
+/api/exam/latex
+```
+
+Input
+
+Exam Object
+
+Output
+
+.tex
 
 ---
 
-Login
+# Generate Web Test
 
-TODO
+POST
 
----
+```
+/api/exam/web
+```
 
-History
+Input
 
-TODO
+Exam Object
 
----
+Output
 
-Learning
-
-TODO
-
----
-
-Dashboard
-
-TODO
+Web Test JSON
 
 ---
 
-# IV. TEACHER API
+# Student Analysis
 
-TODO
+POST
 
----
+```
+/api/student/analysis
+```
 
-# V. AI API
+Input
 
-TODO
+Student ID
 
----
+Output
 
-# VI. DASHBOARD API
-
-TODO
-
----
-
-# VII. ADMIN API
-
-TODO
+Learning Report
 
 ---
 
-# VIII. AUTH API
+# Download
 
-Supabase
+GET
 
-TODO
+```
+/api/download/{file_id}
+```
+
+Output
+
+PDF
+
+LaTeX
+
+JSON
 
 ---
 
-# IX. RESPONSE FORMAT
+# Upload
 
-Thành công
+POST
+
+```
+/api/upload
+```
+
+Output
+
+File ID
+
+---
+
+# Authentication
+
+POST
+
+```
+/api/auth/login
+```
+
+---
+
+POST
+
+```
+/api/auth/register
+```
+
+---
+
+POST
+
+```
+/api/auth/logout
+```
+
+---
+
+GET
+
+```
+/api/auth/me
+```
+
+---
+
+# Admin
+
+GET
+
+```
+/api/admin/users
+```
+
+---
+
+GET
+
+```
+/api/admin/classes
+```
+
+---
+
+POST
+
+```
+/api/admin/create_class
+```
+
+---
+
+# Response chuẩn
+
+Mọi API đều trả về
 
 ```json
 {
-    "success":true,
-    "data":{}
+    "success": true,
+    "message": "",
+    "data": {}
+}
+```
+
+Nếu lỗi
+
+```json
+{
+    "success": false,
+    "message": "Error message",
+    "data": null
 }
 ```
 
 ---
 
-Lỗi
+# Quy tắc
 
-```json
-{
-    "success":false,
-    "message":"",
-    "error_code":""
-}
-```
-
----
-
-# X. ERROR CODE
-
-TODO
-
----
-
-# XI. Authentication
-
-Hiện tại
-
-Public
-
-Sau này
-
-JWT
-
-Supabase
-
----
-
-# XII. API Naming
-
-snake_case
-
-Không dùng tiếng Việt.
-
----
-
-# XIII. Nguyên tắc
-
-Data API
-
-↓
-
-Business API
-
-↓
-
-AI
-
-↓
-
-Python
-
-↓
-
-Response
-
-Không để Frontend đọc JSON trực tiếp.
-
-Không để n8n xử lý dữ liệu gốc.
-
----
-
-# TODO
-
-Thiết kế Request/Response đầy đủ.
-
-Thêm Authentication.
-
-Thêm Rate Limit.
-
-Thêm Pagination.
-
-Thêm OpenAPI.
+- Frontend không đọc file trực tiếp.
+- n8n không đọc file trực tiếp nếu có API.
+- Python không trả dữ liệu cho Frontend.
+- Mọi dữ liệu đều đi qua FastAPI.
+- API chỉ trả JSON hoặc File.
+- Không trả HTML.

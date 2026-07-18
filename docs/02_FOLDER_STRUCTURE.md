@@ -1,243 +1,159 @@
-# CẤU TRÚC THƯ MỤC DỰ ÁN
+# FOLDER STRUCTURE
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định thống nhất cấu trúc thư mục của toàn bộ dự án Ngân Hàng Đề AI.
+Quy định toàn bộ cấu trúc thư mục của dự án Ngân Hàng Đề AI.
 
-Mọi thành viên và AI khi phát triển đều phải tuân theo cấu trúc này.
-
-Không tạo thư mục hoặc đặt file theo cảm hứng.
+Không tự ý tạo thư mục ngoài tài liệu này.
 
 ---
 
-# Nguyên tắc
-
-## 1. Phân tách theo chức năng
-
-Mỗi thư mục chỉ phục vụ một mục đích.
-
-Ví dụ
-
-app/
-
-chỉ chứa source code Web.
-
-data/
-
-chỉ chứa dữ liệu.
-
-generator/
-
-chỉ chứa Python Generator.
-
-docs/
-
-chỉ chứa tài liệu.
-
----
-
-## 2. Không lưu dữ liệu lẫn với source code
-
-Sai
-
-app/
-
-curriculum.json
-
-Đúng
-
-data/curriculum/
-
-...
-
----
-
-## 3. Không lưu file tạm
-
-Không commit
-
-__pycache__
-
-.pyc
-
-.aux
-
-.log
-
-.pdf tạm
-
-temp/
-
-output/
-
-...
-
----
-
-## 4. Source code phải độc lập dữ liệu
-
-Source code không được hardcode nội dung chương trình.
-
-Mọi dữ liệu đều đọc từ
-
-data/
-
-hoặc
-
-Supabase
-
----
-
-## 5. Một loại dữ liệu chỉ có một nơi lưu
-
-PPCT
-
-↓
-
-data/ppct
-
-Curriculum
-
-↓
-
-data/curriculum
-
-Mapping
-
-↓
-
-data/mapping
-
-Python Bank
-
-↓
-
-data/python_bank
-
----
-
-# Cấu trúc tổng thể
+# Root
 
 ```
 NganHangDe/
-
-app/
-
-data/
-
-generator/
-
-n8n/
-
-docs/
-
-tests/
+```
 
 ```
+app/
+```
+
+Backend FastAPI.
+
+```
+data/
+```
+
+Toàn bộ dữ liệu.
+
+```
+docs/
+```
+
+Sổ tay kỹ thuật.
+
+```
+scripts/
+```
+
+Script hỗ trợ.
+
+```
+templates/
+```
+
+Template LaTeX.
+
+```
+tests/
+```
+
+Kiểm thử.
+
+```
+output/
+```
+
+File sinh ra.
+
+```
+logs/
+```
+
+Log hệ thống.
 
 ---
 
 # app/
 
-Chứa toàn bộ Web.
-
-Ví dụ
-
 ```
 app/
 
-main.py
-
-routers/
-
-services/
-
-models/
-
-templates/
-
-static/
-
-core/
-
+├── api/
+├── core/
+├── routers/
+├── services/
+├── models/
+├── schemas/
+├── utils/
+├── static/
+├── templates/
+└── main.py
 ```
-
-Không lưu
-
-JSON
-
-PDF
-
-LaTeX
-
-Curriculum
-
-PPCT
 
 ---
 
 # data/
 
-Chứa toàn bộ dữ liệu.
-
 ```
 data/
 
-config/
-
-curriculum/
-
-mapping/
-
-ppct/
-
-python_bank/
-
-uploads/
-
-exports/
-
-temp/
-
-prompts/
-
+├── curriculum/
+├── mapping/
+├── ppct/
+├── python_bank/
+├── prompts/
+├── config/
+├── uploads/
+├── exports/
+└── temp/
 ```
 
 ---
 
-## data/config
+# curriculum/
 
-Cấu hình hệ thống.
+```
+curriculum/
+
+toan10/
+
+toan11/
+
+toan12/
+```
+
+Mỗi chương một file.
 
 Ví dụ
 
 ```
-config.json
+L10_C1.json
 
-exam_rule.json
-
-difficulty.json
+L10_C2.json
 ```
-
-TODO
 
 ---
 
-## data/ppct
-
-Lưu Phân phối chương trình.
-
-Hiện tại
+# mapping/
 
 ```
+mapping/
+
+toan10/
+
+toan11/
+
+toan12/
+```
+
+Mỗi chương một file.
+
+---
+
+# ppct/
+
+```
+ppct/
+
 toan10.json
 
 toan11.json
@@ -245,276 +161,192 @@ toan11.json
 toan12.json
 ```
 
-Một khối
-
-=
-
-Một file JSON.
-
 ---
 
-## data/curriculum
-
-Lưu chuẩn năng lực.
+# python_bank/
 
 ```
+python_bank/
+
 toan10/
 
-L10_C1.json
-
-L10_C2.json
-
-...
-
 toan11/
-
-...
-
-toan12/
-
-...
-```
-
-Một chương
-
-=
-
-Một file.
-
----
-
-## data/mapping
-
-Lưu Mapping năng lực.
-
-```
-toan10/
-
-L10_C1.json
-
-...
-
-toan11/
-
-...
 
 toan12/
 ```
 
-Một chương
-
-=
-
-Một file.
-
----
-
-## data/python_bank
-
-Lưu Python Generator.
+Trong mỗi lớp
 
 ```
-toan10/
-
 L10_C1.py
 
 L10_C2.py
 
 ...
-
-toan11/
-
-...
-
-toan12/
 ```
 
-Một chương
+---
 
-=
+# prompts/
 
-Một file Python.
+```
+prompts/
 
-Không chia theo bài.
+CHV_Fun.md
+
+CHV_RequestParser.md
+
+CHV_ExamPlanner.md
+
+CHV_AbilityPlanner.md
+
+CHV_Analyzer.md
+
+CHV_Help.md
+
+CHV_Reject.md
+```
 
 ---
 
-## data/prompts
+# config/
 
-Lưu Prompt chuẩn.
+```
+config/
 
-TODO.
+settings.json
 
----
+exam_rules.json
 
-## data/uploads
-
-Lưu file người dùng tải lên.
-
-Ví dụ
-
-Ảnh
-
-Word
-
-Excel
-
-PDF
-
-Không commit Git.
+difficulty.json
+```
 
 ---
 
-## data/exports
+# uploads/
 
-Lưu file sinh ra.
+Người dùng upload.
 
-Ví dụ
+---
+
+# exports/
 
 PDF
 
 LaTeX
 
-DOCX
+JSON
 
-Không commit Git.
-
----
-
-## data/temp
-
-Lưu file tạm.
-
-Có thể xóa bất kỳ lúc nào.
-
-Không commit Git.
+Web Test
 
 ---
 
-# generator/
+# temp/
 
-Chứa Engine sinh câu hỏi.
-
-Ví dụ
-
-```
-generator/
-
-latex/
-
-python/
-
-utils/
-
-...
-```
-
-TODO.
-
----
-
-# n8n/
-
-Lưu Workflow.
-
-Ví dụ
-
-```
-workflow.json
-
-credential_template.json
-
-README.md
-```
-
-TODO.
+File tạm.
 
 ---
 
 # docs/
 
-Toàn bộ Sổ tay kỹ thuật.
+```
+docs/
 
-Không lưu tài liệu linh tinh.
+00_PROJECT_OVERVIEW.md
+
+01_ARCHITECTURE.md
+
+02_FOLDER_STRUCTURE.md
+
+03_DATA_STRUCTURE.md
+
+04_ID_STANDARD.md
+
+05_API_SPECIFICATION.md
+
+06_N8N_WORKFLOW.md
+
+07_AI_AGENTS.md
+
+08_CODE_NODES.md
+
+09_EXAM_GENERATION.md
+
+10_PYTHON_GENERATOR.md
+
+11_LATEX_ENGINE.md
+
+12_DATABASE.md
+
+13_FRONTEND.md
+
+14_DEPLOYMENT.md
+
+15_DEVELOPMENT_ROADMAP.md
+
+16_CHANGELOG.md
+
+17_NAMING_CONVENTIONS.md
+
+18_PROMPT_LIBRARY.md
+```
+
+---
+
+# output/
+
+```
+output/
+
+pdf/
+
+latex/
+
+json/
+
+web_test/
+```
+
+---
+
+# logs/
+
+```
+logs/
+
+api/
+
+n8n/
+
+python/
+
+latex/
+```
 
 ---
 
 # tests/
 
-Toàn bộ Test.
-
-Ví dụ
-
 ```
-API Test
+tests/
 
-Python Test
+api/
 
-Generator Test
+python/
 
-Integration Test
+latex/
+
+workflow/
 ```
-
-TODO.
 
 ---
 
-# Quy tắc mở rộng
+# Quy tắc
 
-Khi thêm module mới
-
-Không tạo thư mục ở Root.
-
-Ví dụ
-
-Sai
-
-```
-lesson/
-
-AI/
-
-exam/
-
-```
-
-Đúng
-
-```
-app/
-
-data/
-
-generator/
-
-```
-
-hoặc
-
-tạo module con đúng chức năng.
-
----
-
-# Không được phép
-
-Không lưu JSON trong app/
-
-Không lưu Python trong data/curriculum
-
-Không lưu PDF trong Git
-
-Không lưu file build
-
-Không lưu file cache
-
----
-
-# TODO
-
-Hoàn thiện cấu trúc generator.
-
-Hoàn thiện cấu trúc tests.
-
-Hoàn thiện cấu trúc n8n.
-
-Hoàn thiện cấu trúc frontend.
+- Không tạo thư mục ngoài tài liệu này.
+- Một loại dữ liệu chỉ nằm tại một thư mục.
+- Curriculum, Mapping và Python Bank luôn tách theo lớp và chương.
+- Mọi Prompt AI nằm trong data/prompts.
+- Mọi file sinh ra nằm trong output.
+- Không commit temp.
+- Không commit logs.

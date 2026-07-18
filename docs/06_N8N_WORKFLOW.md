@@ -2,138 +2,133 @@
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định toàn bộ Workflow của hệ thống.
+Toàn bộ nghiệp vụ của hệ thống được triển khai bằng nhiều Workflow độc lập.
 
-Mọi Workflow đều phải được thiết kế tại đây trước khi xây dựng trên n8n.
+Mỗi Workflow chỉ thực hiện một nhiệm vụ.
 
-Không tạo Workflow tùy ý.
-
----
-
-# Nguyên tắc
-
-## 1
-
-Một Workflow
-
-=
-
-Một chức năng.
-
----
-
-## 2
-
-Một AI Agent
-
-=
-
-Một nhiệm vụ.
-
----
-
-## 3
-
-Một Code Node
-
-=
-
-Một nhiệm vụ.
-
----
-
-## 4
-
-Không để AI đọc JSON lớn.
-
-AI chỉ nhận dữ liệu đã được Code Node xử lý.
-
----
-
-## 5
-
-Mọi dữ liệu đều đi qua API.
-
-Không đọc file JSON trực tiếp trong AI Agent.
-
----
-
-# Kiến trúc tổng thể
-
-User
-
-↓
-
-FastAPI
-
-↓
-
-Webhook
-
-↓
-
-Workflow n8n
-
-↓
-
-FastAPI
-
-↓
-
-Frontend
+Workflow không xử lý nhiều chức năng cùng lúc.
 
 ---
 
 # Danh sách Workflow
 
-| ID | Workflow | Trạng thái |
-|----|----------|------------|
-| WF001 | Sinh đề | Đang triển khai |
-| WF002 | Làm bài trực tuyến | TODO |
-| WF003 | Chấm bài AI | TODO |
-| WF004 | Phân tích kết quả | TODO |
-| WF005 | Gia sư AI | TODO |
-| WF006 | Dashboard học sinh | TODO |
-| WF007 | Dashboard giáo viên | TODO |
-| WF008 | Báo cáo học tập | TODO |
-| WF009 | Import dữ liệu | TODO |
-| WF010 | Quản trị hệ thống | TODO |
+| Workflow | Chức năng |
+|----------|-----------|
+| WF000_Gateway | Điều phối toàn bộ hệ thống |
+| WF001_GenerateExam | Sinh đề |
+| WF002_GenerateExamByAbility | Sinh đề theo năng lực |
+| WF003_StudentAnalysis | Phân tích học tập |
+| WF004_DownloadFile | Tải file |
+| WF005_Help | Hướng dẫn sử dụng |
+| WF006_Reject | Từ chối yêu cầu |
 
 ---
 
-# WF001
+# WF000_Gateway
 
-## Sinh đề
+Đây là Workflow đầu tiên.
 
-### Mục tiêu
+Mọi request đều đi qua Workflow này.
 
-Sinh đề theo yêu cầu người dùng.
-
----
-
-## Luồng
-
-User
-
-↓
+Luồng
 
 Webhook
 
 ↓
 
+CHV_Fun
+
+↓
+
+Switch
+
+↓
+
+Execute Workflow
+
+---
+
+# Switch
+
+Task
+
+↓
+
+Workflow
+
+generate_exam
+
+↓
+
+WF001_GenerateExam
+
+----------------------------
+
+generate_exam_by_ability
+
+↓
+
+WF002_GenerateExamByAbility
+
+----------------------------
+
+student_analysis
+
+↓
+
+WF003_StudentAnalysis
+
+----------------------------
+
+download_file
+
+↓
+
+WF004_DownloadFile
+
+----------------------------
+
+help
+
+↓
+
+WF005_Help
+
+----------------------------
+
+reject_math_solution
+
+↓
+
+WF006_Reject
+
+----------------------------
+
+reject_out_of_scope
+
+↓
+
+WF006_Reject
+
+---
+
+# WF001_GenerateExam
+
+Luồng
+
 CHV_RequestParser
 
 ↓
 
-CN_LoadExamScope
+CN_ParseRequest
 
 ↓
 
@@ -141,7 +136,19 @@ CHV_ExamPlanner
 
 ↓
 
-CN_LoadQuestionPool
+CN_LoadCurriculum
+
+↓
+
+CN_LoadMapping
+
+↓
+
+CN_BuildCandidatePool
+
+↓
+
+CN_QuestionSelector
 
 ↓
 
@@ -149,322 +156,147 @@ CN_CallPythonGenerator
 
 ↓
 
+Question Objects
+
+↓
+
+CN_QuestionValidator
+
+↓
+
+CN_ExamAssembler
+
+↓
+
+Exam Object
+
+↓
+
+Switch_OutputFormat
+
+↓
+
 CN_ResponseFormatter
 
-↓
-
-Respond To Webhook
-
 ---
 
-## Webhook
+# Switch_OutputFormat
 
-Input
-
-TODO
-
-Output
-
-TODO
-
----
-
-## CHV_RequestParser
-
-Mục tiêu
-
-Chuyển yêu cầu tiếng Việt
+latex
 
 ↓
 
-JSON chuẩn.
-
-Không đọc PPCT.
-
-Không đọc Curriculum.
-
-Không đọc Mapping.
-
----
-
-Output
-
-TODO
-
----
-
-## CN_LoadExamScope
-
-Mục tiêu
-
-Tra PPCT.
-
-Đổi
-
-Tên bài
+Generate LaTeX
 
 ↓
 
-lesson_id
+Compile PDF
+
+------------------------
+
+web_test
+
+↓
+
+Generate Web Test
+
+------------------------
+
+json
+
+↓
+
+Generate JSON
 
 ---
 
-Input
+# WF002_GenerateExamByAbility
 
-TODO
+Load Student History
 
-Output
+↓
 
-TODO
+Load Weak Knowledge
 
----
+↓
 
-## CHV_ExamPlanner
+CHV_AbilityPlanner
 
-Mục tiêu
+↓
 
-Sinh Blueprint.
-
-Không sinh câu hỏi.
+WF001_GenerateExam
 
 ---
 
-Input
+# WF003_StudentAnalysis
 
-TODO
+Load Student History
 
-Output
-
-TODO
-
----
-
-## CN_LoadQuestionPool
-
-Mục tiêu
-
-Tra Curriculum.
-
-Tra Mapping.
-
-Sinh danh sách ID Python.
-
----
-
-Input
-
-TODO
-
-Output
-
-TODO
-
----
-
-## CN_CallPythonGenerator
-
-Mục tiêu
-
-Import Python.
-
-Sinh câu hỏi.
-
----
-
-Input
-
-TODO
-
-Output
-
-TODO
-
----
-
-## CN_ResponseFormatter
-
-Mục tiêu
-
-Định dạng Response.
-
-JSON.
-
-LaTeX.
-
-HTML.
-
----
-
-Input
-
-TODO
-
-Output
-
-TODO
-
----
-
-## Respond To Webhook
-
-Trả kết quả.
-
----
-
-# WF002
-
-Làm bài trực tuyến
-
-TODO
-
----
-
-# WF003
-
-Chấm bài AI
-
-TODO
-
----
-
-# WF004
-
-Phân tích kết quả
-
-TODO
-
----
-
-# WF005
-
-Gia sư AI
-
-TODO
-
----
-
-# WF006
-
-Dashboard học sinh
-
-TODO
-
----
-
-# WF007
-
-Dashboard giáo viên
-
-TODO
-
----
-
-# WF008
-
-Báo cáo học tập
-
-TODO
-
----
-
-# WF009
-
-Import dữ liệu
-
-TODO
-
----
-
-# WF010
-
-Quản trị hệ thống
-
-TODO
-
----
-
-# Quy tắc Workflow
-
-Workflow không chứa Business Logic.
-
-Business Logic thuộc FastAPI.
-
----
-
-Workflow không chứa dữ liệu.
-
-Dữ liệu lấy từ API.
-
----
-
-Workflow không sinh câu hỏi.
-
-Python Generator sinh câu hỏi.
-
----
-
-Workflow không đọc JSON.
-
-Code Node đọc JSON.
-
----
-
-Workflow không xử lý LaTeX.
-
-Python Generator xử lý LaTeX.
-
----
-
-# Danh sách AI Agent
-
-CHV_RequestParser
-
-CHV_ExamPlanner
-
-CHV_SolutionWriter
+↓
 
 CHV_Analyzer
 
-CHV_Tutor
+↓
 
-CHV_ReportWriter
+Learning Report
 
-TODO
+↓
+
+Dashboard
 
 ---
 
-# Danh sách Code Node
+# WF004_DownloadFile
 
-CN_LoadExamScope
+Find File
 
-CN_LoadQuestionPool
+↓
 
-CN_CallPythonGenerator
+Download
 
-CN_ResponseFormatter
+---
 
-TODO
+# WF005_Help
+
+CHV_Help
+
+↓
+
+Response
+
+---
+
+# WF006_Reject
+
+CHV_Reject
+
+↓
+
+Response
+
+---
+
+# Execute Workflow
+
+Các Workflow liên kết với nhau bằng Execute Workflow.
+
+Không gọi trực tiếp Code Node giữa các Workflow.
+
+---
+
+# Quy tắc
+
+- Một Workflow chỉ thực hiện một nhiệm vụ.
+- Mỗi AI chỉ thuộc một Workflow.
+- Mỗi Code Node chỉ thuộc một Workflow.
+- WF000 là cổng vào duy nhất.
+- Không tạo Workflow đa nhiệm.
 
 ---
 
 # TODO
 
-Thiết kế chi tiết WF002.
-
-Thiết kế chi tiết WF003.
-
-Thiết kế chi tiết WF004.
-
-Thiết kế chi tiết WF005.
-
-Thiết kế chi tiết Dashboard.
-
-Thiết kế Workflow Import.
-
-Thiết kế Workflow Admin.
-
-Hoàn thiện Input/Output của từng Node.
-
-Hoàn thiện Error Handling.
-
-Hoàn thiện Retry Strategy.
+- WF007_AI_Tutor
+- WF008_ExerciseRecommendation
+- WF009_ReviewMistakes
+- WF010_ClassDashboard

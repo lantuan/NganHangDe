@@ -1,387 +1,316 @@
-# CẤU TRÚC DỮ LIỆU
+# DATA STRUCTURE
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định cấu trúc dữ liệu chuẩn của toàn bộ hệ thống.
+Quy định cấu trúc dữ liệu của toàn bộ hệ thống.
 
-Mọi thành phần phải sử dụng chung một cấu trúc dữ liệu.
-
-Bao gồm
-
-- PPCT
-- Curriculum
-- Mapping
-- Python Bank
-- Blueprint
-- API
-- AI
-- Database
+Workflow chỉ được trao đổi dữ liệu theo các Object được quy định trong tài liệu này.
 
 ---
 
-# Nguyên tắc
-
-## 1
-
-Một loại dữ liệu
-
-=
-
-Một chuẩn JSON.
-
----
-
-## 2
-
-Không tạo nhiều chuẩn cho cùng một dữ liệu.
-
----
-
-## 3
-
-Mọi ID đều theo chuẩn
-
-04_ID_STANDARD.md
-
----
-
-# I. PPCT
-
-## Vai trò
-
-Xác định phạm vi kiến thức.
+# Luồng dữ liệu
 
 PPCT
 
-không chứa
+↓
+
+Curriculum
+
+↓
+
+Mapping
+
+↓
+
+Blueprint
+
+↓
+
+Candidate Pool
+
+↓
+
+Generator IDs
+
+↓
+
+Question Objects
+
+↓
+
+Exam Object
+
+↓
+
+Output
+
+---
+
+===============================================================================
+
+# PPCT
+
+Mục đích
+
+Quy định chương trình giảng dạy.
+
+Ví dụ
+
+- chương
+- bài
+- tuần
+- tiết
+- lesson_type
+
+Không chứa
 
 - năng lực
-
-- dạng toán
-
+- Generator
 - câu hỏi
 
 ---
 
-## Một bản ghi
+===============================================================================
+
+# Curriculum
+
+Mục đích
+
+Mô tả các năng lực cần đạt.
 
 Ví dụ
 
-```json
-{
-"id":"L10_C1_B1",
-"lop":10,
-"hoc_ky":1,
-"chuong_so":1,
-"chuong":"Mệnh đề và tập hợp",
-"bai_so":1,
-"bai":"Mệnh đề",
-"lesson_type":"theory",
-"keywords":[]
-}
-```
+- TH
+- VD
+- VDC
 
----
+- verb
 
-## Khóa chính
+- content
 
-id
-
----
-
-## Một file
-
-=
-
-Một khối.
-
-Ví dụ
-
-toan10.json
-
----
-
-# II. Curriculum
-
-## Vai trò
-
-Mô tả năng lực cần đạt.
+- tags
 
 Không chứa
 
-đề
-
-đáp án
-
-Python
+- Generator
+- Python
+- câu hỏi
 
 ---
 
-## Một bản ghi
+===============================================================================
 
-```json
-{
-"id":"L10_C1_B1_TH014",
-"verb":"",
-"content":"",
-"MucDo":"TH",
-"tags":[]
-}
-```
+# Mapping
 
----
+Mục đích
 
-## Một file
-
-=
-
-Một chương.
+Mô tả các dạng bài.
 
 Ví dụ
 
-L10_C1.json
+ID
+
+↓
+
+L10_C1_B2_VD020_TL_A
+
+Nội dung
+
+↓
+
+Giải quyết bài toán tập hợp thực tế
+
+Loại
+
+↓
+
+Tự luận
+
+Dạng
+
+↓
+
+Tập hợp thực tế
+
+Không chứa
+
+- câu hỏi
+- Python code
 
 ---
 
-# III. Mapping
+===============================================================================
 
-## Vai trò
+# Blueprint
 
-Mô tả dạng câu hỏi.
+Được tạo bởi
+
+CHV_ExamPlanner
+
+Mục đích
+
+Quy định cấu trúc đề.
+
+Bao gồm
+
+- lớp
+- học kỳ
+- chương
+- bài
+- số câu
+- mức độ
+- loại câu
+- tỉ lệ
+
+Không chứa
+
+- Generator IDs
+- Question Objects
 
 ---
+
+===============================================================================
+
+# Candidate Pool
+
+Được tạo bởi
+
+CN_BuildCandidatePool
+
+Mục đích
+
+Danh sách Generator có thể sử dụng.
 
 Ví dụ
 
-```json
-{
-"id":"L10_C1_B2_VD020_TL_A",
-"Loai":"Tự luận",
-"Dang":"..."
-}
-```
+L10_C1_B1_TH001_MC_A
+
+L10_C1_B1_TH014_MC_A
+
+L10_C1_B2_VD020_TL_A
+
+...
+
+Candidate Pool chưa chọn Generator.
 
 ---
 
-Một file
+===============================================================================
 
-=
+# Generator IDs
 
-Một chương.
+Được tạo bởi
 
----
-
-# IV. Python Bank
-
-## Vai trò
-
-Sinh câu hỏi.
-
----
-
-Một file
-
-=
-
-Một chương.
+CN_GeneratorSelector
 
 Ví dụ
 
-```
-L10_C1.py
-```
+L10_C1_B1_TH014_MC_A
+
+L10_C1_B2_VD020_TL_A
+
+...
+
+Generator ID dùng để gọi đúng Generator Function.
 
 ---
 
-Một hàm
+===============================================================================
 
-=
+# Question Object
 
-Một dạng.
+Được tạo bởi
 
-Ví dụ
+CN_CallGenerator
 
-```
-L10_C1_B2_NB017A_MC_A()
-```
+Một Question Object gồm
 
----
+- generator_id
+- question_type
+- content
+- options
+- answer
+- solution
+- latex
+- metadata
 
-Không chia theo bài.
-
----
-
-# V. Blueprint
-
-## Vai trò
-
-Kế hoạch sinh đề.
-
-Không phải đề thi.
-
-Không chứa LaTeX.
-
-Không chứa đáp án.
+Question Object là đơn vị nhỏ nhất của đề.
 
 ---
 
-Ví dụ
+===============================================================================
 
-```json
-[
- {
-  "lesson_id":"L10_C1_B1",
-  "level":"NB",
-  "count":5
- }
-]
-```
+# Exam Object
 
----
+Được tạo bởi
 
-TODO
+CN_ExamAssembler
 
-Thiết kế đầy đủ.
+Một Exam Object gồm
 
----
+- exam_info
+- blueprint
+- questions
+- answer_key
+- metadata
 
-# VI. Question Pool
-
-## Vai trò
-
-Danh sách ID sẽ gọi Python.
-
-Ví dụ
-
-```json
-[
- "L10_C1_B1_NB001_MC_A",
- "L10_C1_B1_NB004_MC_A"
-]
-```
+Exam Object là dữ liệu chuẩn của toàn bộ hệ thống.
 
 ---
 
-TODO
+===============================================================================
+
+# Output
+
+Exam Object có thể sinh ra
+
+- PDF
+- LaTeX
+- Web Test
+- JSON
+
+Các Output đều lấy dữ liệu từ cùng một Exam Object.
 
 ---
 
-# VII. Exam
+===============================================================================
 
-TODO
+# Metadata
 
----
+Mỗi Question Object phải có Metadata.
 
-# VIII. Student Result
+Bao gồm
 
-TODO
-
----
-
-# IX. AI Analysis
-
-TODO
-
----
-
-# X. Dashboard
-
-TODO
+- generator_id
+- lop
+- chuong
+- bai
+- muc_do
+- loai
+- dang
+- tags
+- version
+- created_at
 
 ---
 
-# XI. API Exchange
+===============================================================================
 
-## Quy tắc
+# Quy tắc
 
-FastAPI
-
-↓
-
-JSON
-
-↓
-
-n8n
-
-↓
-
-JSON
-
-↓
-
-AI
-
-↓
-
-JSON
-
-↓
-
-Python
-
-↓
-
-JSON
-
-↓
-
-FastAPI
-
-Không truyền Text tự do.
-
----
-
-# XII. Database
-
-TODO
-
----
-
-# XIII. Version
-
-Sau này mỗi JSON sẽ có version.
-
-Ví dụ
-
-```
-schema_version
-```
-
-TODO.
-
----
-
-# XIV. Quy tắc mở rộng
-
-Không sửa schema cũ.
-
-Nếu thay đổi lớn
-
-↓
-
-Tăng version.
-
----
-
-# TODO
-
-Hoàn thiện Blueprint.
-
-Hoàn thiện Exam JSON.
-
-Hoàn thiện Dashboard.
-
-Hoàn thiện Student Result.
-
-Hoàn thiện AI Analysis.
-
-Hoàn thiện Database Schema.
+- PPCT chỉ chứa chương trình học.
+- Curriculum chỉ chứa năng lực.
+- Mapping chỉ chứa dạng bài.
+- Blueprint chỉ chứa cấu trúc đề.
+- Candidate Pool chỉ chứa Generator.
+- Generator chỉ sinh Question Object.
+- Exam Object là trung tâm của toàn bộ hệ thống.
+- Mọi Output đều sinh từ Exam Object.

@@ -10,386 +10,219 @@ Trạng thái
 
 # Mục tiêu
 
-Quản lý toàn bộ Prompt của hệ thống.
+Lưu trữ Prompt chính thức của toàn bộ AI trong hệ thống.
 
-Mỗi AI Agent chỉ có một Prompt chính thức.
+Mỗi AI chỉ có một Prompt chính thức.
 
-Prompt được quản lý tập trung tại tài liệu này.
-
-Không lưu Prompt trong
-
-- Python
-- Code Node
-- FastAPI
-- Database
-
-Mọi thay đổi Prompt đều cập nhật tại đây.
+Prompt được quản lý theo phiên bản.
 
 ---
 
-# Chuẩn Prompt
+# Danh sách Prompt
 
-Mỗi Prompt đều gồm
-
-AI
-
-↓
-
-Mục tiêu
-
-↓
-
-Input
-
-↓
-
-Output
-
-↓
-
-Variables
-
-↓
-
-System Prompt
-
-↓
-
-Ví dụ
-
-↓
-
-Version
-
-↓
-
-Notes
+| AI | Prompt |
+|-----|--------|
+| CHV_Fun | Điều phối hệ thống |
+| CHV_RequestParser | Phân tích yêu cầu sinh đề |
+| CHV_ExamPlanner | Lập Blueprint |
+| CHV_AbilityPlanner | Sinh đề theo năng lực |
+| CHV_Analyzer | Phân tích học tập |
+| CHV_Help | Hướng dẫn sử dụng |
+| CHV_Reject | Từ chối yêu cầu |
 
 ---
 
 ===============================================================================
 
-# AI
+CHV_Fun
+
+-------------------------------------------------------------------------------
+
+Workflow
+
+WF000_Gateway
+
+-------------------------------------------------------------------------------
+
+Prompt
+
+Điều phối toàn bộ hệ thống.
+
+Phân loại yêu cầu.
+
+Trả về
+
+{
+    "task":"",
+    "message":""
+}
+
+Không sinh đề.
+
+Không giải toán.
+
+Không trả lời kiến thức.
+
+-------------------------------------------------------------------------------
+
+File
+
+data/prompts/CHV_Fun.md
+
+---
+
+===============================================================================
 
 CHV_RequestParser
 
 -------------------------------------------------------------------------------
 
-## Mục tiêu
+Workflow
 
-Phân tích yêu cầu người dùng.
-
-Chuyển yêu cầu tự nhiên thành Request JSON chuẩn.
+WF001_GenerateExam
 
 -------------------------------------------------------------------------------
 
-## Input
+Prompt
 
-Người dùng nhập.
+Đọc yêu cầu sinh đề.
 
--------------------------------------------------------------------------------
-
-## Output
-
-Request JSON.
+Chuẩn hóa Request JSON.
 
 -------------------------------------------------------------------------------
 
-## Variables
+File
 
-USER_MESSAGE
+data/prompts/CHV_RequestParser.md
 
--------------------------------------------------------------------------------
-
-## System Prompt
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Ví dụ
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Version
-
-1.0
-
--------------------------------------------------------------------------------
-
-## Notes
-
-Không sinh đề.
-
-Không đọc PPCT.
-
-Không đọc Curriculum.
-
-Không đọc Mapping.
-
-Không chọn câu hỏi.
+---
 
 ===============================================================================
-
-# AI
 
 CHV_ExamPlanner
 
 -------------------------------------------------------------------------------
 
-## Mục tiêu
+Workflow
 
-Sinh Blueprint từ Request JSON.
-
--------------------------------------------------------------------------------
-
-## Input
-
-Request JSON
-
-PPCT
+WF001_GenerateExam
 
 -------------------------------------------------------------------------------
 
-## Output
+Prompt
 
-Blueprint
-
--------------------------------------------------------------------------------
-
-## Variables
-
-REQUEST
-
-PPCT
+Sinh Blueprint từ Request và PPCT.
 
 -------------------------------------------------------------------------------
 
-## System Prompt
+File
 
-TODO
+data/prompts/CHV_ExamPlanner.md
 
--------------------------------------------------------------------------------
-
-## Ví dụ
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Version
-
-1.0
-
--------------------------------------------------------------------------------
-
-## Notes
-
-Không sinh câu hỏi.
-
-Không đọc Python.
-
-Không chọn ID.
+---
 
 ===============================================================================
 
-# AI
-
-CHV_Tutor
+CHV_AbilityPlanner
 
 -------------------------------------------------------------------------------
 
-## Mục tiêu
+Workflow
 
-Gia sư AI.
-
-Giải thích kiến thức.
-
-Hướng dẫn học.
+WF002_GenerateExamByAbility
 
 -------------------------------------------------------------------------------
 
-## Input
+Prompt
 
-Tin nhắn học sinh.
-
--------------------------------------------------------------------------------
-
-## Output
-
-Câu trả lời.
+Sinh Blueprint theo năng lực học sinh.
 
 -------------------------------------------------------------------------------
 
-## Variables
+File
 
-CHAT_HISTORY
+data/prompts/CHV_AbilityPlanner.md
 
-USER_MESSAGE
-
--------------------------------------------------------------------------------
-
-## System Prompt
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Ví dụ
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Version
-
-1.0
-
--------------------------------------------------------------------------------
-
-## Notes
-
-Không sinh đề.
-
-Không sửa Database.
+---
 
 ===============================================================================
-
-# AI
 
 CHV_Analyzer
 
 -------------------------------------------------------------------------------
 
-## Mục tiêu
+Workflow
 
-Phân tích kết quả học tập.
-
-Đưa ra nhận xét.
-
-Đề xuất lộ trình học.
+WF003_StudentAnalysis
 
 -------------------------------------------------------------------------------
 
-## Input
+Prompt
 
-Kết quả bài làm.
+Phân tích lịch sử học tập.
 
--------------------------------------------------------------------------------
-
-## Output
-
-Phân tích.
+Sinh Learning Report.
 
 -------------------------------------------------------------------------------
 
-## Variables
+File
 
-EXAM_RESULT
+data/prompts/CHV_Analyzer.md
 
-QUESTION_HISTORY
-
--------------------------------------------------------------------------------
-
-## System Prompt
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Ví dụ
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Version
-
-1.0
-
--------------------------------------------------------------------------------
-
-## Notes
-
-Không sinh câu hỏi.
+---
 
 ===============================================================================
 
-# AI
-
-CHV_SolutionWriter
+CHV_Help
 
 -------------------------------------------------------------------------------
 
-## Mục tiêu
+Workflow
 
-Sinh lời giải bằng AI.
-
--------------------------------------------------------------------------------
-
-## Input
-
-Question Object.
+WF005_Help
 
 -------------------------------------------------------------------------------
 
-## Output
+Prompt
 
-Lời giải.
-
--------------------------------------------------------------------------------
-
-## Variables
-
-QUESTION
-
-ANSWER
+Hướng dẫn sử dụng hệ thống.
 
 -------------------------------------------------------------------------------
 
-## System Prompt
+File
 
-TODO
+data/prompts/CHV_Help.md
 
--------------------------------------------------------------------------------
-
-## Ví dụ
-
-TODO
-
--------------------------------------------------------------------------------
-
-## Version
-
-1.0
-
--------------------------------------------------------------------------------
-
-## Notes
-
-Không sinh câu hỏi mới.
-
-Chỉ giải câu hỏi đã có.
+---
 
 ===============================================================================
 
-# Quy tắc quản lý Prompt
+CHV_Reject
 
-- Mỗi AI chỉ có một Prompt chính thức.
-- Prompt có Version.
-- Prompt sửa tại đây.
-- Không hard-code Prompt trong source code.
+-------------------------------------------------------------------------------
+
+Workflow
+
+WF006_Reject
+
+-------------------------------------------------------------------------------
+
+Prompt
+
+Từ chối các yêu cầu ngoài phạm vi.
+
+-------------------------------------------------------------------------------
+
+File
+
+data/prompts/CHV_Reject.md
+
+---
+
+# Quy tắc
+
+- Một AI chỉ có một Prompt chính thức.
+- Prompt được lưu dưới dạng Markdown.
+- Không sửa Prompt trực tiếp trong n8n.
+- Prompt được quản lý trong thư mục data/prompts.
 - Khi thay đổi Prompt phải cập nhật CHANGELOG.
-
-===============================================================================
-
-# TODO
-
-- Viết Prompt chính thức cho CHV_RequestParser.
-- Viết Prompt chính thức cho CHV_ExamPlanner.
-- Viết Prompt chính thức cho CHV_Tutor.
-- Viết Prompt chính thức cho CHV_Analyzer.
-- Viết Prompt chính thức cho CHV_SolutionWriter.
-- Quản lý Version Prompt.

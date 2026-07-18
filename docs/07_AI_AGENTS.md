@@ -2,377 +2,326 @@
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Quy định toàn bộ AI Agent của hệ thống.
+Toàn bộ AI của hệ thống được chia thành các AI Agent độc lập.
 
-Mỗi AI Agent chỉ có đúng một nhiệm vụ.
+Mỗi AI chỉ đảm nhận một nhiệm vụ duy nhất.
 
-Không để một Agent làm nhiều chức năng.
-
----
-
-# Nguyên tắc
-
-## 1
-
-Một Agent
-
-=
-
-Một nhiệm vụ.
+AI không kiêm nhiều chức năng.
 
 ---
 
-## 2
+# Danh sách AI
 
-Agent không gọi Database.
-
-Agent không đọc JSON.
-
-Agent chỉ nhận JSON đã được Code Node xử lý.
-
----
-
-## 3
-
-Agent không gọi Python.
-
-Code Node sẽ gọi Python.
+| AI | Workflow | Chức năng |
+|-----|----------|-----------|
+| CHV_Fun | WF000 | Điều phối hệ thống |
+| CHV_RequestParser | WF001 | Phân tích yêu cầu sinh đề |
+| CHV_ExamPlanner | WF001 | Sinh Blueprint |
+| CHV_AbilityPlanner | WF002 | Lập kế hoạch sinh đề theo năng lực |
+| CHV_Analyzer | WF003 | Phân tích kết quả học tập |
+| CHV_Help | WF005 | Hướng dẫn sử dụng |
+| CHV_Reject | WF006 | Từ chối yêu cầu ngoài phạm vi |
 
 ---
 
-## 4
+===============================================================================
 
-Agent không sinh LaTeX.
+# AI
 
-Python Generator sinh LaTeX.
+CHV_Fun
 
----
+-------------------------------------------------------------------------------
 
-## 5
+## Workflow
 
-Agent không tự suy luận ngoài dữ liệu được cung cấp.
+WF000_Gateway
 
----
+-------------------------------------------------------------------------------
 
-# Kiến trúc
+## Mục tiêu
 
-Webhook
+Điều phối toàn bộ hệ thống.
 
-↓
-
-Code Node
-
-↓
-
-AI Agent
-
-↓
-
-Code Node
-
-↓
-
-Webhook Response
-
----
-
-# Danh sách AI Agent
-
-| ID | Agent | Chức năng | Trạng thái |
-|----|--------|-----------|------------|
-| CHV_RequestParser | Phân tích yêu cầu | Đang triển khai |
-| CHV_ExamPlanner | Lập Blueprint đề | Đang triển khai |
-| CHV_BlueprintReviewer | Kiểm tra Blueprint | TODO |
-| CHV_SolutionWriter | Viết lời giải | TODO |
-| CHV_AnswerReviewer | Kiểm tra đáp án | TODO |
-| CHV_Analyzer | Phân tích kết quả | TODO |
-| CHV_Tutor | Gia sư AI | TODO |
-| CHV_ReportWriter | Viết báo cáo | TODO |
-| CHV_DashboardAdvisor | Gợi ý Dashboard | TODO |
-| CHV_AdminAssistant | Hỗ trợ quản trị | TODO |
-
----
-
-# CHV_RequestParser
-
-## Vai trò
-
-Phân tích yêu cầu tiếng Việt.
-
-Đổi thành JSON chuẩn.
-
----
+-------------------------------------------------------------------------------
 
 ## Input
 
-Ngôn ngữ tự nhiên.
+Tin nhắn người dùng.
 
----
-
-## Output
-
-JSON.
-
----
-
-## Không được làm
-
-Không đọc PPCT.
-
-Không đọc Curriculum.
-
-Không đọc Mapping.
-
-Không sinh câu hỏi.
-
-Không sinh Blueprint.
-
-Không suy luận ID.
-
----
-
-## Ví dụ
-
-Input
-
-```
-Sinh đề giữa kỳ chương Mệnh đề.
-```
-
-Output
-
-```json
-{
-  "grade":10,
-  "chapter":"Mệnh đề",
-  "exam_type":"Giữa kỳ"
-}
-```
-
----
-
-# CHV_ExamPlanner
-
-## Vai trò
-
-Sinh Blueprint.
-
----
-
-## Input
-
-JSON.
-
----
+-------------------------------------------------------------------------------
 
 ## Output
-
-Blueprint.
-
----
-
-## Không được làm
-
-Không sinh câu hỏi.
-
-Không gọi Python.
-
-Không viết LaTeX.
-
-Không chọn ID Python.
-
----
-
-# CHV_BlueprintReviewer
-
-## Vai trò
-
-Kiểm tra Blueprint.
-
----
-
-TODO.
-
----
-
-# CHV_SolutionWriter
-
-## Vai trò
-
-Viết lời giải.
-
----
-
-TODO.
-
----
-
-# CHV_AnswerReviewer
-
-## Vai trò
-
-Kiểm tra đáp án.
-
----
-
-TODO.
-
----
-
-# CHV_Analyzer
-
-## Vai trò
-
-Phân tích bài làm.
-
----
-
-TODO.
-
----
-
-# CHV_Tutor
-
-## Vai trò
-
-Gia sư AI.
-
----
-
-TODO.
-
----
-
-# CHV_ReportWriter
-
-## Vai trò
-
-Sinh báo cáo.
-
----
-
-TODO.
-
----
-
-# CHV_DashboardAdvisor
-
-## Vai trò
-
-Đưa ra gợi ý Dashboard.
-
----
-
-TODO.
-
----
-
-# CHV_AdminAssistant
-
-## Vai trò
-
-Hỗ trợ quản trị.
-
----
-
-TODO.
-
----
-
-# Quy tắc đặt tên
-
-CHV_
-
-+
-
-Tên chức năng.
-
-Ví dụ
-
-CHV_RequestParser
-
-CHV_ExamPlanner
-
-CHV_Tutor
-
----
-
-# Vòng đời của Agent
-
-Input
-
-↓
-
-Prompt
-
-↓
-
-LLM
-
-↓
 
 JSON
 
+{
+    "task":"",
+    "message":""
+}
+
+-------------------------------------------------------------------------------
+
+## Chức năng
+
+- Phân loại yêu cầu.
+- Chọn Workflow phù hợp.
+- Không xử lý nghiệp vụ.
+
+-------------------------------------------------------------------------------
+
+## Không được
+
+- Sinh đề.
+- Giải toán.
+- Trả lời kiến thức.
+- Sinh lời giải.
+- Đọc PPCT.
+- Đọc Curriculum.
+- Đọc Mapping.
+
+-------------------------------------------------------------------------------
+
+## Workflow tiếp theo
+
+Switch
+
 ↓
 
-Code Node
+WF001
 
----
+WF002
 
-# Quan hệ với Workflow
+WF003
 
-Workflow
+WF004
 
-↓
+WF005
 
-Code Node
+WF006
 
-↓
+===============================================================================
 
-AI Agent
+# AI
 
-↓
+CHV_RequestParser
 
-Code Node
+-------------------------------------------------------------------------------
 
-Không có Agent gọi Agent.
+## Workflow
 
-Không có Agent gọi API.
+WF001_GenerateExam
 
-Không có Agent gọi Database.
+-------------------------------------------------------------------------------
 
----
+## Mục tiêu
 
-# Quan hệ với Prompt
+Phân tích yêu cầu sinh đề.
 
-Mỗi Agent
+-------------------------------------------------------------------------------
 
-=
+## Input
 
-Một Prompt.
+message
 
-Prompt được quản lý tại
+-------------------------------------------------------------------------------
 
-18_PROMPT_LIBRARY.md
+## Output
 
----
+Request JSON
+
+-------------------------------------------------------------------------------
+
+## Chức năng
+
+- Xác định lớp.
+- Học kỳ.
+- Chương.
+- Bài.
+- Loại đề.
+- Thời gian.
+- Số câu.
+- Mức độ.
+
+-------------------------------------------------------------------------------
+
+## Không được
+
+- Sinh Blueprint.
+- Chọn câu hỏi.
+- Sinh đề.
+
+===============================================================================
+
+# AI
+
+CHV_ExamPlanner
+
+-------------------------------------------------------------------------------
+
+## Workflow
+
+WF001_GenerateExam
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Sinh Blueprint.
+
+-------------------------------------------------------------------------------
+
+## Input
+
+Request JSON
+
+PPCT
+
+-------------------------------------------------------------------------------
+
+## Output
+
+Blueprint
+
+-------------------------------------------------------------------------------
+
+## Không được
+
+- Chọn câu hỏi.
+- Gọi Python.
+- Sinh PDF.
+
+===============================================================================
+
+# AI
+
+CHV_AbilityPlanner
+
+-------------------------------------------------------------------------------
+
+## Workflow
+
+WF002_GenerateExamByAbility
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Sinh Blueprint theo năng lực.
+
+-------------------------------------------------------------------------------
+
+## Input
+
+Student History
+
+Weak Knowledge
+
+-------------------------------------------------------------------------------
+
+## Output
+
+Blueprint
+
+===============================================================================
+
+# AI
+
+CHV_Analyzer
+
+-------------------------------------------------------------------------------
+
+## Workflow
+
+WF003_StudentAnalysis
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Phân tích kết quả học tập.
+
+-------------------------------------------------------------------------------
+
+## Input
+
+Exam History
+
+-------------------------------------------------------------------------------
+
+## Output
+
+Learning Report
+
+Dashboard
+
+===============================================================================
+
+# AI
+
+CHV_Help
+
+-------------------------------------------------------------------------------
+
+## Workflow
+
+WF005_Help
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Hướng dẫn sử dụng hệ thống.
+
+===============================================================================
+
+# AI
+
+CHV_Reject
+
+-------------------------------------------------------------------------------
+
+## Workflow
+
+WF006_Reject
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Từ chối các yêu cầu ngoài phạm vi của hệ thống.
+
+-------------------------------------------------------------------------------
+
+## Áp dụng
+
+- Giải toán.
+- Hỏi ngoài Toán THPT.
+- Nội dung không liên quan đến Ngân Hàng Đề.
+
+===============================================================================
+
+# Quy tắc
+
+- Một AI chỉ thuộc một Workflow.
+- Một AI chỉ có một Prompt chính thức.
+- AI không thực hiện nhiệm vụ của AI khác.
+- AI chỉ giao tiếp bằng JSON khi Workflow yêu cầu.
+- Mọi yêu cầu đều bắt đầu từ CHV_Fun.
+
+===============================================================================
 
 # TODO
 
-Hoàn thiện toàn bộ Input.
-
-Hoàn thiện Output.
-
-Viết Prompt.
-
-Đánh Version.
-
-Thêm Agent mới khi cần.
+- CHV_Tutor
+- CHV_SolutionWriter
+- CHV_QuestionReviewer
+- CHV_Recommendation
+- CHV_ClassAssistant
