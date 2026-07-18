@@ -1,248 +1,395 @@
-# THƯ VIỆN PROMPT
+# PROMPT LIBRARY
 
 Version: 1.0
 
-Trạng thái:
+Trạng thái
 
-🟡 Đang triển khai
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Lưu toàn bộ Prompt của hệ thống.
+Quản lý toàn bộ Prompt của hệ thống.
 
-Mỗi AI Agent có đúng một Prompt chính thức.
+Mỗi AI Agent chỉ có một Prompt chính thức.
 
-Mọi chỉnh sửa Prompt đều phải cập nhật tại đây trước khi đưa vào n8n.
+Prompt được quản lý tập trung tại tài liệu này.
 
----
+Không lưu Prompt trong
 
-# Quy tắc
+- Python
+- Code Node
+- FastAPI
+- Database
 
-- Một Agent = Một Prompt.
-- Không tạo nhiều Prompt cùng chức năng.
-- Prompt phải đánh version.
-- Prompt phải có Input/Output rõ ràng.
-- Prompt chỉ xử lý đúng nhiệm vụ được giao.
-- Không để Prompt tự suy luận ngoài phạm vi.
+Mọi thay đổi Prompt đều cập nhật tại đây.
 
 ---
 
-# Danh sách Prompt
+# Chuẩn Prompt
 
-| ID | Agent | Chức năng | Trạng thái |
-|----|--------|-----------|-----------|
-| P001 | CHV_RequestParser | Phân tích yêu cầu người dùng | TODO |
-| P002 | CHV_ExamPlanner | Lập Blueprint đề | TODO |
-| P003 | CHV_BlueprintBuilder | Hoàn thiện Blueprint | TODO |
-| P004 | CHV_SolutionWriter | Viết lời giải | TODO |
-| P005 | CHV_Analyzer | Phân tích kết quả | TODO |
-| P006 | CHV_Tutor | Gia sư AI | TODO |
-| P007 | CHV_ReportWriter | Báo cáo | TODO |
+Mỗi Prompt đều gồm
+
+AI
+
+↓
+
+Mục tiêu
+
+↓
+
+Input
+
+↓
+
+Output
+
+↓
+
+Variables
+
+↓
+
+System Prompt
+
+↓
+
+Ví dụ
+
+↓
+
+Version
+
+↓
+
+Notes
 
 ---
 
-# P001
+===============================================================================
 
-## Agent
+# AI
 
 CHV_RequestParser
 
+-------------------------------------------------------------------------------
+
 ## Mục tiêu
 
-TODO
+Phân tích yêu cầu người dùng.
+
+Chuyển yêu cầu tự nhiên thành Request JSON chuẩn.
+
+-------------------------------------------------------------------------------
 
 ## Input
 
-TODO
+Người dùng nhập.
+
+-------------------------------------------------------------------------------
 
 ## Output
 
+Request JSON.
+
+-------------------------------------------------------------------------------
+
+## Variables
+
+USER_MESSAGE
+
+-------------------------------------------------------------------------------
+
+## System Prompt
+
 TODO
 
-## Prompt
+-------------------------------------------------------------------------------
+
+## Ví dụ
 
 TODO
 
----
+-------------------------------------------------------------------------------
 
-# P002
+## Version
 
-## Agent
+1.0
+
+-------------------------------------------------------------------------------
+
+## Notes
+
+Không sinh đề.
+
+Không đọc PPCT.
+
+Không đọc Curriculum.
+
+Không đọc Mapping.
+
+Không chọn câu hỏi.
+
+===============================================================================
+
+# AI
 
 CHV_ExamPlanner
 
-## Mục tiêu
-
-TODO
-
-## Input
-
-TODO
-
-## Output
-
-TODO
-
-## Prompt
-
-TODO
-
----
-
-# P003
-
-## Agent
-
-CHV_BlueprintBuilder
+-------------------------------------------------------------------------------
 
 ## Mục tiêu
 
-TODO
+Sinh Blueprint từ Request JSON.
+
+-------------------------------------------------------------------------------
 
 ## Input
 
-TODO
+Request JSON
+
+PPCT
+
+-------------------------------------------------------------------------------
 
 ## Output
 
-TODO
+Blueprint
 
-## Prompt
+-------------------------------------------------------------------------------
 
-TODO
+## Variables
 
----
+REQUEST
 
-# P004
+PPCT
 
-## Agent
+-------------------------------------------------------------------------------
 
-CHV_SolutionWriter
-
-## Mục tiêu
+## System Prompt
 
 TODO
 
-## Input
+-------------------------------------------------------------------------------
+
+## Ví dụ
 
 TODO
 
-## Output
+-------------------------------------------------------------------------------
 
-TODO
+## Version
 
-## Prompt
+1.0
 
-TODO
+-------------------------------------------------------------------------------
 
----
+## Notes
 
-# P005
+Không sinh câu hỏi.
 
-## Agent
+Không đọc Python.
 
-CHV_Analyzer
+Không chọn ID.
 
-## Mục tiêu
+===============================================================================
 
-TODO
-
-## Input
-
-TODO
-
-## Output
-
-TODO
-
-## Prompt
-
-TODO
-
----
-
-# P006
-
-## Agent
+# AI
 
 CHV_Tutor
 
-## Mục tiêu
-
-TODO
-
-## Input
-
-TODO
-
-## Output
-
-TODO
-
-## Prompt
-
-TODO
-
----
-
-# P007
-
-## Agent
-
-CHV_ReportWriter
+-------------------------------------------------------------------------------
 
 ## Mục tiêu
 
-TODO
+Gia sư AI.
+
+Giải thích kiến thức.
+
+Hướng dẫn học.
+
+-------------------------------------------------------------------------------
 
 ## Input
 
-TODO
+Tin nhắn học sinh.
+
+-------------------------------------------------------------------------------
 
 ## Output
 
+Câu trả lời.
+
+-------------------------------------------------------------------------------
+
+## Variables
+
+CHAT_HISTORY
+
+USER_MESSAGE
+
+-------------------------------------------------------------------------------
+
+## System Prompt
+
 TODO
 
-## Prompt
+-------------------------------------------------------------------------------
+
+## Ví dụ
 
 TODO
 
----
+-------------------------------------------------------------------------------
 
-# Quy trình cập nhật Prompt
+## Version
 
-Prompt
+1.0
 
-↓
+-------------------------------------------------------------------------------
 
-Kiểm thử trên ChatGPT
+## Notes
 
-↓
+Không sinh đề.
 
-Chỉnh sửa
+Không sửa Database.
 
-↓
+===============================================================================
 
-Lưu vào Prompt Library
+# AI
 
-↓
+CHV_Analyzer
 
-Đưa vào n8n
+-------------------------------------------------------------------------------
 
-↓
+## Mục tiêu
 
-Đánh Version
+Phân tích kết quả học tập.
 
-↓
+Đưa ra nhận xét.
 
-Triển khai
+Đề xuất lộ trình học.
 
----
+-------------------------------------------------------------------------------
+
+## Input
+
+Kết quả bài làm.
+
+-------------------------------------------------------------------------------
+
+## Output
+
+Phân tích.
+
+-------------------------------------------------------------------------------
+
+## Variables
+
+EXAM_RESULT
+
+QUESTION_HISTORY
+
+-------------------------------------------------------------------------------
+
+## System Prompt
+
+TODO
+
+-------------------------------------------------------------------------------
+
+## Ví dụ
+
+TODO
+
+-------------------------------------------------------------------------------
+
+## Version
+
+1.0
+
+-------------------------------------------------------------------------------
+
+## Notes
+
+Không sinh câu hỏi.
+
+===============================================================================
+
+# AI
+
+CHV_SolutionWriter
+
+-------------------------------------------------------------------------------
+
+## Mục tiêu
+
+Sinh lời giải bằng AI.
+
+-------------------------------------------------------------------------------
+
+## Input
+
+Question Object.
+
+-------------------------------------------------------------------------------
+
+## Output
+
+Lời giải.
+
+-------------------------------------------------------------------------------
+
+## Variables
+
+QUESTION
+
+ANSWER
+
+-------------------------------------------------------------------------------
+
+## System Prompt
+
+TODO
+
+-------------------------------------------------------------------------------
+
+## Ví dụ
+
+TODO
+
+-------------------------------------------------------------------------------
+
+## Version
+
+1.0
+
+-------------------------------------------------------------------------------
+
+## Notes
+
+Không sinh câu hỏi mới.
+
+Chỉ giải câu hỏi đã có.
+
+===============================================================================
+
+# Quy tắc quản lý Prompt
+
+- Mỗi AI chỉ có một Prompt chính thức.
+- Prompt có Version.
+- Prompt sửa tại đây.
+- Không hard-code Prompt trong source code.
+- Khi thay đổi Prompt phải cập nhật CHANGELOG.
+
+===============================================================================
 
 # TODO
 
-- Viết Prompt hoàn chỉnh cho từng Agent.
-- Thêm Prompt cho các Agent mới.
+- Viết Prompt chính thức cho CHV_RequestParser.
+- Viết Prompt chính thức cho CHV_ExamPlanner.
+- Viết Prompt chính thức cho CHV_Tutor.
+- Viết Prompt chính thức cho CHV_Analyzer.
+- Viết Prompt chính thức cho CHV_SolutionWriter.
 - Quản lý Version Prompt.

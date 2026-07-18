@@ -62,38 +62,101 @@ User
 ↓
 
 CHV_RequestParser
+# AI
+- Phân tích yêu cầu người dùng.
+- Chuẩn hóa Request.
 
 ↓
 
 CN_LoadExamScope
+# Code Node
+- Gọi API PPCT.
+- Xác định lesson_id.
 
 ↓
 
 CHV_ExamPlanner
+# AI
+- Sinh Blueprint.
+- Phân bố số câu theo ma trận.
 
 ↓
 
 CN_LoadCurriculum
+# Code Node
+- Gọi Curriculum API.
+- Lấy năng lực.
 
 ↓
 
 CN_LoadMapping
+# Code Node
+- Gọi Mapping API.
+- Lấy Loại và Dạng.
 
 ↓
 
-CN_LoadQuestionPool
+CN_BuildCandidatePool
+# Code Node
+- Ghép
+    Blueprint
+    +
+    Curriculum
+    +
+    Mapping
+- Sinh Candidate Pool.
+- Chưa chọn câu.
+
+↓
+
+CN_QuestionSelector
+# Code Node
+- Chọn ID Python.
+- Không trùng câu.
+- Không trùng dạng.
+- Không trùng template.
+- Random phiên bản.
+- Đúng Blueprint.
+- Đúng ma trận.
+- Đúng phân bố.
 
 ↓
 
 CN_CallPythonGenerator
+# Code Node
+- Import file Python theo chương.
+- Gọi đúng hàm.
+
+↓
+
+CN_QuestionValidator
+# Code Node
+- Kiểm tra câu hỏi.
+- Kiểm tra đáp án.
+- Kiểm tra lời giải.
+- Kiểm tra LaTeX.
+- Nếu lỗi:
+    quay lại QuestionSelector.
+
+↓
+
+CN_ExamAssembler
+# Code Node
+- Ghép toàn bộ câu.
+- Sinh Exam JSON.
+
+↓
+
+CN_GenerateLatex
+# Code Node
+- Sinh LaTeX.
+- Sinh PDF.
 
 ↓
 
 CN_ResponseFormatter
-
-↓
-
-FastAPI
+# Code Node
+- Chuẩn hóa JSON trả về.
 
 ↓
 

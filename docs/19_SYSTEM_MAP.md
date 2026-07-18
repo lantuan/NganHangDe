@@ -2,180 +2,172 @@
 
 Version: 1.0
 
+Trạng thái
+
+🟢 Kiến trúc tổng thể
+
+---
+
+# Mục tiêu
+
+Tài liệu này là bản đồ của toàn bộ hệ thống.
+
+Mỗi thành phần chỉ mô tả ngắn gọn:
+
+- Là gì.
+- Làm gì.
+- Nằm ở đâu.
+
+Không mô tả chi tiết.
+
+Chi tiết xem ở từng file tương ứng.
+
+---
+
+# Kiến trúc tổng thể
+
+User
+
+↓
+
+Frontend
+
+↓
+
+FastAPI
+
+↓
+
+n8n
+
+↓
+
+Python
+
+↓
+
+LaTeX
+
+↓
+
+PDF / Web Test
+
+↓
+
+Supabase
+
 ---
 
 # AI Agents
 
-## CHV_RequestParser
-
-File:
-07_AI_AGENTS.md
-
-Nhiệm vụ:
-- Phân tích yêu cầu người dùng.
-- Chuẩn hóa thành JSON.
-
-Không được:
-- Đọc PPCT.
-- Đọc Curriculum.
-- Đọc Mapping.
-- Sinh câu hỏi.
-
----
-
-## CHV_ExamPlanner
-
-File:
-07_AI_AGENTS.md
-
-Nhiệm vụ:
-- Sinh Blueprint.
-
-Không được:
-- Sinh câu hỏi.
-- Gọi Python.
-
----
-
-## CHV_SolutionWriter
-
-TODO
-
----
-
-## CHV_Tutor
-
-TODO
-
----
-
-## CHV_Analyzer
-
-TODO
+| AI | Nhiệm vụ | Tài liệu |
+|-----|----------|----------|
+| CHV_RequestParser | Phân tích yêu cầu | 07_AI_AGENTS |
+| CHV_ExamPlanner | Sinh Blueprint | 07_AI_AGENTS |
+| CHV_Tutor | Gia sư AI | TODO |
+| CHV_Analyzer | Phân tích kết quả | TODO |
+| CHV_SolutionWriter | Sinh lời giải AI | TODO |
 
 ---
 
 # Code Nodes
 
-## CN_LoadExamScope
-
-File:
-08_CODE_NODES.md
-
-Nhiệm vụ:
-- Gọi API PPCT.
-- Xác định lesson_id.
-
----
-
-## CN_LoadCurriculum
-
-- Gọi API Curriculum.
-
----
-
-## CN_LoadMapping
-
-- Gọi API Mapping.
-
----
-
-## CN_BuildCandidatePool
-
-- Ghép Blueprint.
-- Ghép Curriculum.
-- Ghép Mapping.
-- Sinh Candidate Pool.
-
----
-
-## CN_QuestionSelector
-
-- Chọn ID Python.
-- Chống trùng.
-- Chọn phiên bản.
-- Đúng ma trận.
-
----
-
-## CN_CallPythonGenerator
-
-- Import file Python.
-- Gọi hàm.
-
----
-
-## CN_QuestionValidator
-
-- Kiểm tra câu hỏi.
-- Kiểm tra đáp án.
-- Kiểm tra LaTeX.
-
----
-
-## CN_ExamAssembler
-
-- Ghép đề.
-
----
-
-## CN_ResponseFormatter
-
-- Chuẩn hóa JSON.
-
----
-
-# APIs
-
-## /api/data/ppct/{grade}
-
-PPCT.
-
----
-
-## /api/data/curriculum/{chapter}
-
-Curriculum.
-
----
-
-## /api/data/mapping/{chapter}
-
-Mapping.
-
----
-
-## /api/exam/generate
-
-TODO
-
----
-
-# Python
-
-## data/python_bank/toan10/L10_C1.py
-
-Chứa toàn bộ hàm sinh câu hỏi Chương 1.
+| Node | Nhiệm vụ | Tài liệu |
+|------|----------|----------|
+| CN_LoadExamScope | Đọc PPCT | 08_CODE_NODES |
+| CN_LoadCurriculum | Đọc Curriculum | 08 |
+| CN_LoadMapping | Đọc Mapping | 08 |
+| CN_BuildCandidatePool | Ghép Candidate Pool | 08 |
+| CN_QuestionSelector | Chọn ID Python | 08 |
+| CN_CallPythonGenerator | Gọi Python | 08 |
+| CN_QuestionValidator | Kiểm tra câu hỏi | 08 |
+| CN_ExamAssembler | Ghép đề | 08 |
+| CN_GenerateLatex | Sinh LaTeX | 08 |
+| CN_ResponseFormatter | Trả JSON | 08 |
 
 ---
 
 # Workflow
 
-WF001
+| Workflow | Chức năng |
+|----------|-----------|
+| WF001 | Sinh đề |
+| WF002 | Thi Online |
+| WF003 | Chat AI |
+| WF004 | Chấm bài |
+| WF005 | Dashboard |
+| WF006 | Gia sư AI |
 
-Sinh đề.
+---
 
-WF002
+# APIs
 
-Làm bài.
+| API | Chức năng |
+|------|-----------|
+| /api/data/ppct | PPCT |
+| /api/data/curriculum | Curriculum |
+| /api/data/mapping | Mapping |
+| /api/chat | Chat |
+| /api/exam/generate | Sinh đề |
+| /api/exam/history | Lịch sử |
 
-WF003
+---
 
-Chấm bài.
+# Python
 
-WF004
+```
+data/python_bank/
+```
 
-Gia sư.
+Một chương
+
+↓
+
+Một file Python
+
+↓
+
+Nhiều hàm
+
+---
+
+# JSON
+
+PPCT
+
+↓
+
+Curriculum
+
+↓
+
+Mapping
+
+---
+
+# Database
+
+Supabase
+
+↓
+
+Profiles
+
+↓
+
+Classes
+
+↓
+
+Exam History
+
+↓
+
+Online Exam
+
+↓
+
+AI Logs
 
 ---
 
@@ -183,30 +175,157 @@ Gia sư.
 
 Trang chủ
 
-Đăng nhập
+↓
 
-Đăng ký
+Chat
 
-Chat AI
+↓
 
 Dashboard
 
+↓
+
+Sinh đề
+
+↓
+
 Thi Online
+
+↓
 
 Lịch sử
 
+↓
+
+Quản trị
+
 ---
 
-# Database
+# Documents
 
-profiles
+| File | Nội dung |
+|------|----------|
+| 00 | Tổng quan |
+| 01 | Kiến trúc |
+| 02 | Folder |
+| 03 | Data |
+| 04 | ID |
+| 05 | API |
+| 06 | Workflow |
+| 07 | AI Agents |
+| 08 | Code Nodes |
+| 09 | Exam Generation |
+| 10 | Python Generator |
+| 11 | LaTeX |
+| 12 | Database |
+| 13 | Frontend |
+| 14 | Deployment |
+| 15 | Roadmap |
+| 16 | Changelog |
+| 17 | Naming |
+| 18 | Prompt Library |
+| 19 | System Map |
 
-exam_history
+---
 
-...
+# Quy tắc đọc tài liệu
+
+Nếu cần biết
+
+Kiến trúc
+
+↓
+
+01
+
+Nếu cần biết
+
+ID
+
+↓
+
+04
+
+Nếu cần biết
+
+Workflow
+
+↓
+
+06
+
+Nếu cần biết
+
+AI
+
+↓
+
+07
+
+Nếu cần biết
+
+Code Node
+
+↓
+
+08
+
+Nếu cần biết
+
+Sinh đề
+
+↓
+
+09
+
+Nếu cần biết
+
+Python
+
+↓
+
+10
+
+Nếu cần biết
+
+Database
+
+↓
+
+12
+
+Nếu cần biết
+
+Frontend
+
+↓
+
+13
+
+Nếu cần biết
+
+Deployment
+
+↓
+
+14
+
+Nếu cần biết
+
+Prompt
+
+↓
+
+18
 
 ---
 
 # TODO
 
-Hoàn thiện khi hệ thống phát triển.
+Cập nhật khi có AI mới.
+
+Cập nhật khi có Workflow mới.
+
+Cập nhật khi có API mới.
+
+Cập nhật khi có Database mới.

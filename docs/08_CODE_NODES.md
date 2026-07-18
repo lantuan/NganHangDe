@@ -95,18 +95,21 @@ Webhook
 
 | ID | Code Node | Chức năng | Trạng thái |
 |----|-----------|-----------|------------|
-| CN_LoadExamScope | Tra PPCT | Đang triển khai |
-| CN_LoadCurriculum | Đọc Curriculum | TODO |
-| CN_LoadMapping | Đọc Mapping | TODO |
-| CN_LoadQuestionPool | Sinh Question Pool | Đang triển khai |
-| CN_CallPythonGenerator | Gọi Python | Đang triển khai |
+| CN_LoadExamScope | Tra PPCT | ✅ |
+| CN_LoadCurriculum | Đọc Curriculum | ✅ |
+| CN_LoadMapping | Đọc Mapping | ✅ |
+| CN_BuildCandidatePool | Ghép Blueprint + Curriculum + Mapping | ✅ |
+| CN_QuestionSelector | Chọn ID Python theo quy tắc | ✅ |
+| CN_CallPythonGenerator | Gọi Python | ✅ |
+| CN_QuestionValidator | Kiểm tra câu hỏi sau khi sinh | ✅ |
+| CN_ExamAssembler | Ghép đề hoàn chỉnh | ✅ |
 | CN_GenerateLatex | Sinh LaTeX | TODO |
 | CN_GeneratePDF | Sinh PDF | TODO |
 | CN_SaveExam | Lưu đề | TODO |
 | CN_SaveHistory | Lưu lịch sử | TODO |
 | CN_LoadStudent | Đọc học sinh | TODO |
 | CN_LoadTeacher | Đọc giáo viên | TODO |
-| CN_ResponseFormatter | Chuẩn hóa Response | Đang triển khai |
+| CN_ResponseFormatter | Chuẩn hóa Response | ✅ |
 
 ---
 
@@ -208,39 +211,63 @@ TODO
 
 ---
 
-# CN_LoadQuestionPool
+# CN_BuildCandidatePool
 
-## Vai trò
+## Mục tiêu
 
-Ghép
+- Ghép Blueprint.
+- Ghép Curriculum.
+- Ghép Mapping.
+- Sinh Candidate Pool.
 
-Curriculum
+## Input
 
-+
+- Blueprint
+- Curriculum
+- Mapping
 
-Mapping
+## Output
 
-↓
+```json
+[
+    "L10_C1_B1_NB001_MC_A",
+    "L10_C1_B1_NB002_MC_A",
+    "L10_C1_B2_TH013_TF_A"
+]
+```
 
-Question Pool.
+Không chọn câu.
+
+Chỉ tạo danh sách các ID có thể sử dụng.
 
 ---
 
-Input
+# CN_QuestionSelector
 
-lesson_id
+## Mục tiêu
 
-Blueprint
+Chọn các ID Python sẽ được sinh đề.
 
----
+## Input
 
-Output
+Candidate Pool
 
-Danh sách ID Python.
+## Output
 
----
+Selected Question IDs
 
-Không sinh câu hỏi.
+## Quy tắc
+
+- Không trùng câu.
+- Không trùng dạng.
+- Không trùng template.
+- Random phiên bản A/B/C/D.
+- Đúng Blueprint.
+- Đúng số lượng câu.
+- Đúng mức độ.
+- Đúng chương.
+- Đúng bài.
+- Sau này: không trùng đề đã làm.
 
 ---
 
@@ -268,6 +295,16 @@ L10_C1.py
 L10_C1_B2_VD020_TL_A()
 ```
 
+## Input
+
+Selected Question IDs
+
+## Công việc
+
+- Import file Python theo chương.
+- Gọi đúng hàm theo ID.
+- Nhận Question Object.
+
 ---
 
 Output
@@ -279,6 +316,54 @@ JSON.
 ---
 
 Không xử lý Prompt.
+
+---
+
+# CN_QuestionValidator
+
+## Mục tiêu
+
+Kiểm tra kết quả Python sinh.
+
+## Kiểm tra
+
+- Có câu hỏi.
+- Có đáp án.
+- Có lời giải.
+- Có LaTeX.
+- Không lỗi.
+
+Nếu lỗi
+
+↓
+
+Loại câu
+
+↓
+
+Quay lại CN_QuestionSelector
+
+↓
+
+Lấy ID khác.
+
+---
+
+# CN_ExamAssembler
+
+## Mục tiêu
+
+Ghép toàn bộ Question Object thành một đề hoàn chỉnh.
+
+## Output
+
+```json
+{
+    "exam": [],
+    "answer": [],
+    "metadata": {}
+}
+```
 
 ---
 

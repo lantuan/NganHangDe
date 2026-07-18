@@ -1,24 +1,48 @@
-# QUY ƯỚC ĐẶT TÊN
+# NAMING CONVENTIONS
 
 Version: 1.0
+
+Trạng thái
+
+🟢 Chuẩn chính thức
 
 ---
 
 # Mục tiêu
 
-Toàn bộ dự án phải thống nhất cách đặt tên.
+Chuẩn hóa toàn bộ quy tắc đặt tên trong dự án.
 
-Không đặt tên theo cảm hứng.
+Áp dụng cho
 
-Không dùng nhiều kiểu đặt tên khác nhau.
+- AI Agents
+- Code Nodes
+- Python
+- API
+- JSON
+- Database
+- Frontend
+- LaTeX
+- n8n
+- GitHub
 
 ---
 
-# 1. AI Agent
+# Quy tắc chung
 
-Tiền tố
+- Không dấu.
+- Không khoảng trắng.
+- snake_case cho file.
+- PascalCase cho Class.
+- camelCase chỉ dùng khi bắt buộc.
+- ID luôn viết IN HOA.
 
-CHV_
+---
+
+# AI Agent
+
+Format
+
+CHV_<Tên>
 
 Ví dụ
 
@@ -26,191 +50,267 @@ CHV_RequestParser
 
 CHV_ExamPlanner
 
-CHV_BlueprintPlanner
+CHV_Tutor
+
+CHV_Analyzer
 
 CHV_SolutionWriter
 
-CHV_Analysis
-
-CHV_Tutor
-
 ---
 
-# 2. Code Node
+# Code Node
 
-Tiền tố
+Format
 
-CN_
+CN_<Tên>
 
 Ví dụ
 
 CN_LoadExamScope
 
-CN_LoadQuestionPool
+CN_LoadCurriculum
 
-CN_FilterDifficulty
+CN_LoadMapping
 
-CN_FilterLesson
+CN_BuildCandidatePool
+
+CN_QuestionSelector
 
 CN_CallPythonGenerator
 
-CN_GenerateLatex
+CN_QuestionValidator
 
-CN_CreatePDF
+CN_ExamAssembler
+
+CN_GenerateLatex
 
 CN_ResponseFormatter
 
 ---
 
-# 3. Workflow
+# Workflow
 
-Tiền tố
+Format
 
-WF_
+WFxxx
 
 Ví dụ
 
-WF_ExamGeneration
+WF001_ExamGeneration
 
-WF_ExamAnalysis
+WF002_OnlineExam
 
-WF_StudentLearning
+WF003_AIChat
 
-WF_AIChat
+WF004_Analysis
 
 ---
 
-# 4. FastAPI Router
+# API
 
-snake_case
+Format
 
-Ví dụ
-
-exam_scope.py
-
-question_pool.py
-
-latex.py
-
-generator.py
-
-student.py
-
-teacher.py
-
----
-
-# 5. FastAPI Service
-
-snake_case
+/api/<module>/<action>
 
 Ví dụ
 
-exam_scope_service.py
+/api/data/ppct
 
-generator_service.py
+/api/data/curriculum
 
-pdf_service.py
-
-curriculum_service.py
-
----
-
-# 6. API
-
-RESTful
-
-Ví dụ
-
-/api/exam/scope
-
-/api/exam/question_pool
+/api/data/mapping
 
 /api/exam/generate
 
-/api/student/history
+/api/exam/history
 
-/api/teacher/dashboard
+/api/chat
 
 ---
 
-# 7. Python Generator
+# Python Folder
 
-Tên file
+data/python_bank
+
+↓
+
+toan10
+
+↓
+
+toan11
+
+↓
+
+toan12
+
+---
+
+# Python File
+
+Một chương
+
+=
+
+Một file
+
+Ví dụ
 
 L10_C1.py
 
 L10_C2.py
 
-L11_C1.py
+L11_C3.py
 
-...
+L12_C5.py
 
 ---
 
-# 8. Hàm Generator
+# Python Function
+
+Tên hàm
+
+=
+
+ID
 
 Ví dụ
 
-L10_C1_B2_NB017A_MC_A()
+L10_C1_B2_VD020_TL_A
 
-L10_C1_B2_TH014_DS_B()
-
-L10_C3_B1_VD020_TL_A()
+Không đổi tên.
 
 ---
 
-# 9. JSON
+# PPCT
+
+Một khối
+
+=
+
+Một file JSON
+
+Ví dụ
+
+toan10.json
+
+toan11.json
+
+toan12.json
+
+---
+
+# Curriculum
+
+Một chương
+
+=
+
+Một file JSON
+
+Ví dụ
+
+L10_C1.json
+
+L10_C2.json
+
+L11_C4.json
+
+---
+
+# Mapping
+
+Một chương
+
+=
+
+Một file JSON
+
+Ví dụ
+
+L10_C1.json
+
+L10_C2.json
+
+---
+
+# Database
 
 snake_case
 
 Ví dụ
 
-curriculum.json
+profiles
 
-mapping.json
+exam_history
 
-exam_scope.json
+chat_sessions
 
-question_pool.json
+question_statistics
 
 ---
 
-# 10. Database
+# Database Column
 
 snake_case
 
 Ví dụ
-
-lesson_id
-
-question_id
-
-student_id
-
-teacher_id
 
 created_at
 
 updated_at
 
+student_id
+
+teacher_id
+
+exam_id
+
 ---
 
-# 11. Constant
+# Frontend
 
-UPPER_CASE
+snake_case
 
 Ví dụ
 
-MAX_QUESTION
+chat.html
 
-DEFAULT_LEVEL
+dashboard_teacher.html
 
-SUPABASE_URL
+exam_generate.html
 
 ---
 
-# 12. Biến Python
+# CSS
+
+kebab-case
+
+Ví dụ
+
+chat-box
+
+exam-card
+
+student-table
+
+---
+
+# JavaScript Function
+
+camelCase
+
+Ví dụ
+
+loadExam()
+
+sendMessage()
+
+generateExam()
+
+---
+
+# JSON Key
 
 snake_case
 
@@ -218,66 +318,110 @@ Ví dụ
 
 lesson_id
 
-question_pool
+chapter_id
 
-exam_scope
+difficulty
 
-student_result
+question_type
 
 ---
 
-# 13. Class
+# LaTeX Template
 
-PascalCase
+snake_case
 
 Ví dụ
 
-ExamScope
+exam.tex
 
-QuestionPool
+answer.tex
 
-LatexGenerator
-
-ExamPlanner
+solution.tex
 
 ---
 
-# 14. Không sử dụng
+# Image
 
-Tên tiếng Việt.
+snake_case
 
-Tên có dấu.
+Ví dụ
 
-Tên có khoảng trắng.
+parabola_01.png
 
-Tên viết tắt không rõ nghĩa.
+graph_circle.png
 
 ---
 
-# Quy tắc
+# Upload
 
-Nhìn tên phải biết ngay chức năng.
-
-Tên phải thống nhất trên:
-
-FastAPI
+UUID
 
 ↓
 
-n8n
+Tên file gốc
+
+Ví dụ
+
+550e8400_exam.pdf
+
+---
+
+# Git Branch
+
+main
+
+dev
+
+feature/<name>
+
+fix/<name>
+
+---
+
+# Git Commit
+
+Ví dụ
+
+feat: add question selector
+
+fix: latex compile error
+
+docs: update workflow
+
+refactor: python generator
+
+---
+
+# Không được
+
+Không viết tiếng Việt có dấu.
+
+Không viết tên file có khoảng trắng.
+
+Không đổi ID sau khi phát hành.
+
+---
+
+# Quy tắc quan trọng
+
+ID là khóa chính của toàn bộ hệ thống.
+
+Một khi đã phát hành
 
 ↓
 
-Python
+Không đổi.
 
-↓
+---
 
-Database
+# TODO
 
-↓
+Quy tắc đặt tên Test.
 
-AI
+Quy tắc đặt tên Docker.
 
-↓
+Quy tắc đặt tên Cache.
 
-Tài liệu
+Quy tắc đặt tên Redis.
+
+Quy tắc đặt tên Queue.
