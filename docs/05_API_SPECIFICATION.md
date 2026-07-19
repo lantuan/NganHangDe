@@ -61,6 +61,56 @@ Ví dụ: /api/data/mapping/toan10/L10_C1
 
 ---
 
+## Exam Scope
+
+GET
+/api/data/exam-scope/{lop}/{ki_thi}
+
+Query param (bắt buộc khi `ki_thi = thuong_xuyen`)
+pham_vi_chuong
+
+Ví dụ
+/api/data/exam-scope/10/thuong_xuyen?pham_vi_chuong=chuong_1
+/api/data/exam-scope/10/cuoi_ky_1
+
+`ki_thi` hợp lệ
+thuong_xuyen
+giua_ky_1
+cuoi_ky_1
+giua_ky_2
+cuoi_ky_2
+
+Output
+
+HeSo1 (thuong_xuyen)
+
+```json
+{
+    "loai_he_so": "HeSo1",
+    "chuong_so": 1,
+    "pham_vi_bai": ["L10_C1_B1", "L10_C1_B2"]
+}
+```
+
+HeSo2_HeSo3 (giữa kỳ / cuối kỳ)
+
+```json
+{
+    "loai_he_so": "HeSo2_HeSo3",
+    "ki_thi": "cuoi_ky_1",
+    "pham_vi_chuong": [1, 2, 3, 4, 5],
+    "pham_vi_bai": ["..."],
+    "phan_bo_ty_le": {
+        "truoc_giua_ky": {"ti_le": 0.3, "pham_vi_bai": ["..."]},
+        "sau_giua_ky": {"ti_le": 0.7, "pham_vi_bai": ["..."]}
+    }
+}
+```
+
+Giữa kỳ không có `phan_bo_ty_le` (trả về `null`).
+
+---
+
 # Python Bank
 
 GET /api/data/python_bank/{subject}/{chapter}

@@ -66,3 +66,25 @@ Mai Hà Lan
 - Phiên bản mới luôn thêm xuống cuối.
 - Sau khi phát hành Version 2.0, mọi thay đổi đều phải cập nhật
   Changelog.
+
+
+===============================================================================
+
+Version 2.1
+
+Ngày
+
+2026-07-19
+
+Nội dung
+
+- Thêm API /api/data/exam-scope/{lop}/{ki_thi}.
+- Thêm app/services/exam_scope_service.py:
+  - load_scope_heso1: phạm vi bài cho kiểm tra thường xuyên (HeSo1).
+  - load_scope_heso23: phạm vi bài cho giữa kỳ/cuối kỳ (HeSo2_HeSo3),
+    có chia tỷ lệ 30/70 cho cuối kỳ.
+  - load_exam_scope: hàm điều phối (dispatcher) giữa hai case trên.
+
+Người thực hiện
+
+Mai Lan

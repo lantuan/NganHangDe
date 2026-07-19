@@ -40,7 +40,7 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 # GIAI ĐOẠN 3 - BACKEND API
 
 |3.1|API đọc dữ liệu (bọc Response chuẩn)|🟡|
-|3.2|Exam Scope API (CN_LoadExamScope)|⬜|
+|3.2|Exam Scope API (CN_LoadExamScope)|✅|
 |3.3|Blueprint API (CN_BuildBlueprint)|⬜|
 |3.4|Question Selector API (CN_QuestionSelector)|⬜|
 |3.5|Generator API|⬜|
