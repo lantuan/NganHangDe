@@ -1,6 +1,6 @@
 # EXAM GENERATION
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,373 +10,139 @@ Trạng thái
 
 # Mục tiêu
 
-WF001_GenerateExam chịu trách nhiệm sinh đề thi.
-
-Workflow này chỉ được gọi từ WF000_Gateway.
-
-Không được gọi trực tiếp từ Frontend.
+WF001_GenerateExam chịu trách nhiệm sinh đề thi. Chỉ được gọi
+từ WF000_Gateway. Không được gọi trực tiếp từ Frontend.
 
 ---
 
 # Đầu vào
 
-Request JSON
-
-↓
-
-Blueprint
-
-↓
-
-Curriculum
-
-↓
-
-Mapping
+Request JSON (từ CHV_Fun) → Blueprint → Curriculum → Mapping
 
 ---
 
 # Luồng tổng thể
 
-CHV_RequestParser
-
+CHV_Fun
 ↓
-
-CN_ParseRequest
-
+CN_LoadExamScope
 ↓
-
-CHV_ExamPlanner
-
-↓
-
 CN_LoadCurriculum
-
 ↓
-
+CN_BuildBlueprint
+↓
 CN_LoadMapping
-
 ↓
-
-CN_BuildCandidatePool
-
-↓
-
 CN_QuestionSelector
-
 ↓
-
 Question IDs
-
 ↓
-
 CN_CallPythonGenerator
-
 ↓
-
 Question Objects
-
 ↓
-
 CN_QuestionValidator
-
 ↓
-
 Validated Questions
-
 ↓
-
 CN_ExamAssembler
-
 ↓
-
 Exam Object
-
 ↓
-
 Switch_OutputFormat
-
 ↓
-
-LaTeX
-
-Web Test
-
-JSON
-
+LaTeX / Web Test / JSON
 ↓
-
 Response
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 1
+# Giai đoạn 1 — Phân tích yêu cầu (AI)
 
-Request Parsing
+CHV_Fun
 
--------------------------------------------------------------------------------
-
-AI
-
-CHV_RequestParser
-
-Input
-
-Message
-
-Output
-
-Request JSON
+Input: Tin nhắn học sinh
+Output: task, message, cau_truc_de
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 2
+# Giai đoạn 2 — Xác định phạm vi (Code)
 
-Blueprint
+CN_LoadExamScope
 
--------------------------------------------------------------------------------
-
-AI
-
-CHV_ExamPlanner
-
-Input
-
-Request
-
-PPCT
-
-Output
-
-Blueprint
-
-Blueprint quy định
-
-- chương
-- bài
-- số câu
-- mức độ
-- loại câu
-- tỉ lệ
-
-Blueprint KHÔNG chứa Question ID.
+Input: cau_truc_de, PPCT
+Output: pham_vi_chuong, pham_vi_bai
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 3
+# Giai đoạn 3 — Xây Blueprint (Code)
 
-Candidate Pool
+CN_BuildBlueprint
 
--------------------------------------------------------------------------------
-
-Input
-
-Blueprint
-
-Curriculum
-
-Mapping
-
-Output
-
-Candidate Pool
-
-Candidate Pool gồm toàn bộ năng lực có thể sử dụng.
-
-Chưa chọn câu.
+Input: cau_truc_de, pham_vi_bai, Curriculum
+Output: Blueprint (không chứa Question ID)
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 4
+# Giai đoạn 4 — Chọn Question ID (Code)
 
-Question Selector
+CN_QuestionSelector
 
--------------------------------------------------------------------------------
+Input: Candidate Pool, Blueprint, Mapping
+Output: Question IDs
 
-Input
+Ví dụ: L10_C1_B1_TH014_MC_A, L10_C1_B2_VD020_TL_A, L10_C1_TF_A
 
-Candidate Pool
-
-Blueprint
-
-Output
-
-Question IDs
-
-Ví dụ
-
-L10_C1_B1_TH014_MC_A
-
-L10_C1_B2_VD020_TL_A
-
-...
-
-Đây là bước quyết định sẽ gọi hàm Python nào.
+Đây là bước quyết định gọi hàm Python nào.
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 5
+# Giai đoạn 5 — Python Generator
 
-Python Generator
-
--------------------------------------------------------------------------------
-
-Input
-
-Question IDs
-
-Output
-
-Question Objects
-
-Ví dụ
-
-PY_L10_C1.py
-
-↓
-
-L10_C1_B2_VD020_TL_A()
-
-↓
-
-Question Object
-
-Một Question Object gồm
-
-- nội dung
-- đáp án
-- lời giải
-- metadata
-- latex
-- hình ảnh (nếu có)
+Input: Question IDs
+Output: Question Objects (nội dung, đáp án, lời giải, metadata,
+latex, hình ảnh nếu có)
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 6
+# Giai đoạn 6 — Question Validator
 
-Question Validator
+Kiểm tra: trùng ID, trùng nội dung, đúng Blueprint, đúng chương,
+đúng bài, đúng mức độ, đúng loại câu.
 
--------------------------------------------------------------------------------
-
-Kiểm tra
-
-- trùng ID
-- trùng nội dung
-- đúng Blueprint
-- đúng chương
-- đúng bài
-- đúng mức độ
-- đúng loại câu
-
-Nếu lỗi
-
-↓
-
-Sinh lại Question ID
-
-↓
-
-Gọi lại Python
+Nếu lỗi → sinh lại Question ID → gọi lại Python.
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 7
+# Giai đoạn 7 — Exam Object
 
-Exam Object
-
--------------------------------------------------------------------------------
-
-Input
-
-Validated Questions
-
-Output
-
-Exam Object
-
-Exam Object là dữ liệu chuẩn của toàn bộ hệ thống.
-
-Mọi định dạng đầu ra đều sinh từ Exam Object.
+Input: Validated Questions
+Output: Exam Object — dữ liệu chuẩn của toàn bộ hệ thống.
 
 ---
 
 ===============================================================================
 
-# Giai đoạn 8
+# Giai đoạn 8 — Output
 
-Output
-
--------------------------------------------------------------------------------
-
-Switch_OutputFormat
-
-↓
-
-latex
-
-↓
-
-Generate tex
-
-↓
-
-Compile pdf
-
-----------------------------
-
-web_test
-
-↓
-
-Generate Online Test
-
-----------------------------
-
-json
-
-↓
-
-Generate JSON
-
----
-
-===============================================================================
-
-# Question Object
-
-Question Object là đơn vị nhỏ nhất của đề.
-
-Question Object không phụ thuộc định dạng xuất.
-
----
-
-===============================================================================
-
-# Exam Object
-
-Exam Object là đơn vị lớn nhất.
-
-Exam Object gồm
-
-- thông tin đề
-- danh sách Question Object
-- đáp án
-- metadata
-- thống kê
+Switch_OutputFormat:
+latex → Generate tex → Compile pdf
+web_test → Generate Online Test
+json → Generate JSON
 
 ---
 
@@ -386,11 +152,12 @@ Exam Object gồm
 
 - Blueprint không chứa Question ID.
 - Candidate Pool không chứa câu hỏi.
-- Question Selector chỉ chọn ID.
+- Question Selector chỉ chọn ID, không dùng AI.
 - Python chỉ sinh Question Object.
 - Validator không sửa câu hỏi.
 - Exam Object là trung tâm.
-- PDF, Web Test và JSON đều sinh từ Exam Object.
+- PDF, Web Test, JSON đều sinh từ Exam Object.
+- Toàn bộ Giai đoạn 2–8 là Code Node, không có AI nào can thiệp.
 
 ---
 

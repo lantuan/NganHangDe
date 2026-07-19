@@ -1,6 +1,6 @@
 # N8N WORKFLOW
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,11 +10,8 @@ Trạng thái
 
 # Mục tiêu
 
-Toàn bộ nghiệp vụ của hệ thống được triển khai bằng nhiều Workflow độc lập.
-
+Toàn bộ nghiệp vụ triển khai bằng nhiều Workflow độc lập.
 Mỗi Workflow chỉ thực hiện một nhiệm vụ.
-
-Workflow không xử lý nhiều chức năng cùng lúc.
 
 ---
 
@@ -29,258 +26,133 @@ Workflow không xử lý nhiều chức năng cùng lúc.
 | WF004_DownloadFile | Tải file |
 | WF005_Help | Hướng dẫn sử dụng |
 | WF006_Reject | Từ chối yêu cầu |
+| WF007_GradeExam | Chấm bài (MC/TF/SA tự động + TL bằng AI) |
 
 ---
 
 # WF000_Gateway
 
-Đây là Workflow đầu tiên.
-
-Mọi request đều đi qua Workflow này.
-
-Luồng
-
-Webhook
-
-↓
-
-CHV_Fun
-
-↓
-
-Switch
-
-↓
-
-Execute Workflow
+Webhook → CHV_Fun → Switch → Execute Workflow
 
 ---
 
 # Switch
 
-Task
-
-↓
-
-Workflow
-
-generate_exam
-
-↓
-
-WF001_GenerateExam
-
-----------------------------
-
-generate_exam_by_ability
-
-↓
-
-WF002_GenerateExamByAbility
-
-----------------------------
-
-student_analysis
-
-↓
-
-WF003_StudentAnalysis
-
-----------------------------
-
-download_file
-
-↓
-
-WF004_DownloadFile
-
-----------------------------
-
-help
-
-↓
-
-WF005_Help
-
-----------------------------
-
-reject_math_solution
-
-↓
-
-WF006_Reject
-
-----------------------------
-
-reject_out_of_scope
-
-↓
-
-WF006_Reject
+generate_exam → WF001_GenerateExam
+generate_exam_by_ability → WF002_GenerateExamByAbility
+student_analysis → WF003_StudentAnalysis
+download_file → WF004_DownloadFile
+help → WF005_Help
+reject_math_solution → WF006_Reject
+reject_out_of_scope → WF006_Reject
+grade_exam → WF007_GradeExam
 
 ---
 
 # WF001_GenerateExam
 
-Luồng
-
-CHV_RequestParser
-
+CHV_Fun
 ↓
-
-CN_ParseRequest
-
+CN_LoadExamScope
 ↓
-
-CHV_ExamPlanner
-
-↓
-
 CN_LoadCurriculum
-
 ↓
-
+CN_BuildBlueprint
+↓
 CN_LoadMapping
-
 ↓
-
-CN_BuildCandidatePool
-
-↓
-
 CN_QuestionSelector
-
 ↓
-
 CN_CallPythonGenerator
-
 ↓
-
 Question Objects
-
 ↓
-
 CN_QuestionValidator
-
 ↓
-
 CN_ExamAssembler
-
 ↓
-
 Exam Object
-
 ↓
-
 Switch_OutputFormat
-
 ↓
-
 CN_ResponseFormatter
 
 ---
 
 # Switch_OutputFormat
 
-latex
-
-↓
-
-Generate LaTeX
-
-↓
-
-Compile PDF
-
-------------------------
-
-web_test
-
-↓
-
-Generate Web Test
-
-------------------------
-
-json
-
-↓
-
-Generate JSON
+latex → Generate LaTeX → Compile PDF
+web_test → Generate Web Test
+json → Generate JSON
 
 ---
 
 # WF002_GenerateExamByAbility
 
 Load Student History
-
 ↓
-
-Load Weak Knowledge
-
+CN_AnalyzeResults (lấy weak_points từ lần làm bài trước)
 ↓
-
-CHV_AbilityPlanner
-
-↓
-
-WF001_GenerateExam
+WF001_GenerateExam (ưu tiên bài/chương yếu)
 
 ---
 
 # WF003_StudentAnalysis
 
 Load Student History
-
 ↓
-
+CN_AnalyzeResults
+↓
 CHV_Analyzer
-
 ↓
-
-Learning Report
-
+Learning Report + Gợi ý lệnh tiếp theo
 ↓
-
 Dashboard
 
 ---
 
 # WF004_DownloadFile
 
-Find File
-
-↓
-
-Download
+Find File → Download
 
 ---
 
 # WF005_Help
 
-CHV_Help
-
-↓
-
-Response
+CHV_Fun (task=help) → Response tĩnh
 
 ---
 
 # WF006_Reject
 
-CHV_Reject
+CHV_Fun (task=reject_*) → Response tĩnh
 
+---
+
+# WF007_GradeExam
+
+Đáp án học sinh + Exam Object
 ↓
-
-Response
+CN_GradeAnswer (MC/TF/SA)
+↓
+CHV_Grader (TL — dùng answer/solution có sẵn)
+↓
+CN_MergeGradeResult
+↓
+Kết quả chấm đầy đủ
+↓
+CN_AnalyzeResults
+↓
+CHV_Analyzer
+↓
+Learning Report + Gợi ý lệnh tiếp theo
 
 ---
 
 # Execute Workflow
 
-Các Workflow liên kết với nhau bằng Execute Workflow.
-
-Không gọi trực tiếp Code Node giữa các Workflow.
+Các Workflow liên kết bằng Execute Workflow. Không gọi trực tiếp
+Code Node giữa các Workflow.
 
 ---
 
@@ -290,13 +162,13 @@ Không gọi trực tiếp Code Node giữa các Workflow.
 - Mỗi AI chỉ thuộc một Workflow.
 - Mỗi Code Node chỉ thuộc một Workflow.
 - WF000 là cổng vào duy nhất.
+- Toàn hệ thống chỉ có 3 AI: CHV_Fun, CHV_Grader, CHV_Analyzer.
 - Không tạo Workflow đa nhiệm.
 
 ---
 
 # TODO
 
-- WF007_AI_Tutor
-- WF008_ExerciseRecommendation
-- WF009_ReviewMistakes
+- WF008_AI_Tutor
+- WF009_ExerciseRecommendation
 - WF010_ClassDashboard

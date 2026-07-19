@@ -1,6 +1,10 @@
 # KIẾN TRÚC HỆ THỐNG
 
-Version: 1.0
+Version: 2.0
+
+Trạng thái
+
+🟢 Chuẩn chính thức
 
 ---
 
@@ -11,45 +15,24 @@ Kiến trúc được thiết kế theo hướng:
 - Module hóa.
 - Dễ mở rộng.
 - Tách biệt dữ liệu.
-- Giảm phụ thuộc vào AI.
+- Giảm phụ thuộc vào AI tối đa (chỉ 3 AI cho toàn hệ thống).
 - Có thể thay đổi từng thành phần mà không ảnh hưởng toàn hệ thống.
 
 ---
 
 # 2. Kiến trúc tổng thể
 
-Ngân Hàng Đề AI là một nền tảng AI Tutor dành cho học sinh và giáo viên THPT.
-
-Sinh đề chỉ là một chức năng của hệ thống.
-
-Mọi yêu cầu của người dùng đều đi qua một AI điều phối trung tâm trước khi chuyển đến Workflow phù hợp.
-
----
-
-# Kiến trúc tổng thể
-
 User
-
 ↓
-
 Frontend
-
 ↓
-
 FastAPI
-
 ↓
-
 WF000_Gateway
-
 ↓
-
 CHV_Fun
-
 ↓
-
 Switch
-
 ├── WF001_GenerateExam
 │
 ├── WF002_GenerateExamByAbility
@@ -62,20 +45,18 @@ Switch
 │
 ├── WF006_Reject
 │
+├── WF007_GradeExam
+│
 └── Các Workflow mở rộng trong tương lai
 
 ---
 
 # WF000_Gateway
 
-WF000 là Workflow điều phối của toàn bộ hệ thống.
-
-WF000 không xử lý nghiệp vụ.
-
-WF000 chỉ thực hiện các nhiệm vụ sau:
+Workflow điều phối trung tâm. Không xử lý nghiệp vụ.
 
 - Nhận yêu cầu từ Frontend.
-- Gọi AI CHV_Fun.
+- Gọi CHV_Fun.
 - Phân loại yêu cầu.
 - Điều hướng sang Workflow phù hợp.
 
@@ -83,7 +64,8 @@ WF000 chỉ thực hiện các nhiệm vụ sau:
 
 # CHV_Fun
 
-CHV_Fun là AI điều phối trung tâm.
+AI điều phối trung tâm, đồng thời đảm nhận luôn việc phân tích cấu
+trúc đề khi task = generate_exam (không cần AI RequestParser riêng).
 
 CHV_Fun không:
 
@@ -91,91 +73,53 @@ CHV_Fun không:
 - giải toán;
 - sinh lời giải;
 - trả lời kiến thức;
-- đọc PPCT;
-- đọc Curriculum;
-- đọc Mapping.
+- đọc PPCT, Curriculum, Mapping;
+- tự tạo hoặc tự chọn ID.
 
-CHV_Fun chỉ trả về:
+Output:
 
 {
     "task": "...",
-    "message": "..."
+    "message": "...",
+    "cau_truc_de": { ... }
 }
 
-Task quyết định Workflow tiếp theo.
+`cau_truc_de` chỉ có khi task = generate_exam hoặc
+generate_exam_by_ability.
 
 ---
 
-# Kiến trúc WF001_GenerateExam
+# WF001_GenerateExam (không còn AI ở giữa)
 
-CHV_RequestParser
-
+CHV_Fun
 ↓
-
-CN_ParseRequest
-
+CN_LoadExamScope        (tra PPCT theo boundary_after)
 ↓
-
-CHV_ExamPlanner
-
-↓
-
 CN_LoadCurriculum
-
 ↓
-
+CN_BuildBlueprint       (thuật toán phân bổ competency)
+↓
 CN_LoadMapping
-
 ↓
-
-CN_BuildCandidatePool
-
+CN_QuestionSelector     (chọn Generator ID)
 ↓
-
-CN_QuestionSelector
-
-↓
-
 CN_CallPythonGenerator
-
 ↓
-
 Question Objects
-
 ↓
-
 CN_QuestionValidator
-
 ↓
-
 CN_ExamAssembler
-
 ↓
-
 Exam Object
-
 ↓
-
 Switch_OutputFormat
-
-├── Generate LaTeX
-│      ↓
-│   Compile PDF
-│
+├── Generate LaTeX → Compile PDF
 ├── Generate Web Test
-│      ↓
-│   Online Exam
-│
 └── Generate JSON
-       ↓
-   API Response
-
 ↓
-
 CN_ResponseFormatter
-
 ↓
-
 Respond
 
 ---
@@ -183,35 +127,23 @@ Respond
 # WF002_GenerateExamByAbility
 
 Student History
-
 ↓
-
-Weak Knowledge
-
+Weak Knowledge (lấy từ CN_AnalyzeResults của lần làm bài trước)
 ↓
-
-CHV_AbilityPlanner
-
-↓
-
-WF001_GenerateExam
+WF001_GenerateExam (dùng weak_points để ưu tiên chọn bài/chương)
 
 ---
 
 # WF003_StudentAnalysis
 
 Student History
-
 ↓
-
+CN_AnalyzeResults
+↓
 CHV_Analyzer
-
 ↓
-
-Learning Report
-
+Learning Report + Gợi ý lệnh luyện tập tiếp theo
 ↓
-
 Dashboard
 
 ---
@@ -219,325 +151,179 @@ Dashboard
 # WF004_DownloadFile
 
 Find File
-
 ↓
-
 Download
 
 ---
 
 # WF005_Help
 
-CHV_Help
-
-↓
-
-Response
+CHV_Fun (task=help) → Response tĩnh, không cần AI riêng.
 
 ---
 
 # WF006_Reject
 
-CHV_Reject
+CHV_Fun (task=reject_*) → Response tĩnh, không cần AI riêng.
 
+---
+
+# WF007_GradeExam
+
+Đáp án học sinh + Exam Object
 ↓
-
-Response
+CN_GradeAnswer (chấm MC/TF/SA bằng so khớp trực tiếp)
+↓
+CHV_Grader (chấm TL, dựa trên answer/solution có sẵn)
+↓
+CN_MergeGradeResult
+↓
+Kết quả chấm đầy đủ
+↓
+CN_AnalyzeResults
+↓
+CHV_Analyzer
+↓
+Learning Report + Gợi ý lệnh tiếp theo
 
 ---
 
 # Kiến trúc dữ liệu
 
 PPCT
-
 ↓
-
 Curriculum
-
 ↓
-
 Mapping
-
 ↓
-
+Blueprint
+↓
 Candidate Pool
-
 ↓
-
 Question IDs
-
 ↓
-
 Question Objects
-
 ↓
-
 Exam Object
-
 ↓
-
 Output
+
+Nhánh riêng: câu TF không đi qua Curriculum, chỉ ghép
+Blueprint + Mapping theo chuong_so.
 
 ---
 
 # Các Output chuẩn
 
-Hệ thống chỉ sinh đề một lần.
-
-Sau đó xuất nhiều định dạng khác nhau.
-
-Các định dạng gồm:
-
-- PDF
-- LaTeX
-- Web Test
-- JSON
-
-Trong tương lai có thể bổ sung:
-
-- DOCX
-- Moodle XML
-- QTI
-- SCORM
-
-mà không cần thay đổi quy trình sinh đề.
+PDF, LaTeX, Web Test, JSON — đều sinh từ cùng một Exam Object.
+Tương lai có thể bổ sung DOCX, Moodle XML, QTI, SCORM mà không
+cần đổi quy trình sinh đề.
 
 ---
 
 # Nguyên tắc kiến trúc
 
-- WF000 là cổng vào duy nhất của hệ thống.
+- WF000 là cổng vào duy nhất.
 - CHV_Fun luôn là AI đầu tiên.
-- Mỗi Workflow chỉ thực hiện một nhiệm vụ.
-- Generate Exam chỉ là một module của AI Tutor.
-- Python chỉ sinh Question Objects.
-- Exam Object là trung tâm của toàn bộ quy trình sinh đề.
-- Mọi định dạng xuất đều được tạo từ cùng một Exam Object.
+- Toàn hệ thống chỉ có 3 AI: CHV_Fun, CHV_Grader, CHV_Analyzer.
+- Mọi bước có quy tắc rõ ràng (tra bảng, phân bổ, chọn ID, so khớp
+  đáp án) đều là Code Node, không dùng AI.
+- Python chỉ sinh Question Object (gồm answer, solution).
+- Exam Object là trung tâm của quy trình sinh đề.
+- CHV_Grader chỉ được dùng answer/solution có sẵn, không tự đặt đáp án.
 
 ---
 
 # 3. Thành phần
 
-## 3.1 Frontend
+## Frontend
 
-Chức năng
+Đăng nhập, Chat AI, Sinh đề, Làm bài, Dashboard, Nút gợi ý luyện tập
+(gửi thẳng tham số, không cần gõ lại lệnh mỗi vòng lặp).
 
-- Đăng nhập
-- Chat AI
-- Sinh đề
-- Làm bài
-- Dashboard
+## FastAPI
 
-Không chứa nghiệp vụ.
+Trung tâm hệ thống: API, Authentication, đọc dữ liệu, gọi Python,
+gọi n8n, trả kết quả. Tầng duy nhất được phép truy cập dữ liệu.
 
----
+## n8n
 
-## 3.2 FastAPI
+Workflow Orchestrator. Không xử lý nghiệp vụ ngoài việc điều phối
+Code Node và gọi đúng 3 AI khi cần.
 
-Là trung tâm của hệ thống.
+## Python Generator
 
-Chịu trách nhiệm:
+Sinh câu hỏi, đáp án, lời giải chuẩn. Không dùng AI.
 
-- API
-- Authentication
-- đọc dữ liệu
-- gọi Python
-- gọi n8n
-- trả kết quả
+## AI Agent (chỉ 3 AI)
 
-FastAPI là tầng duy nhất được phép truy cập dữ liệu.
+CHV_Fun — hiểu yêu cầu.
+CHV_Grader — chấm tự luận.
+CHV_Analyzer — nhận xét + gợi ý.
 
----
+## Database
 
-## 3.3 n8n
-
-Vai trò:
-
-Workflow Orchestrator.
-
-Không xử lý nghiệp vụ.
-
-Không đọc JSON.
-
-Không xử lý Python.
-
-Không tự sinh dữ liệu.
-
----
-
-## 3.4 Python Generator
-
-Sinh câu hỏi.
-
-Sinh đáp án.
-
-Sinh lời giải chuẩn.
-
-Không sử dụng AI.
-
----
-
-## 3.5 AI Agent
-
-Chỉ xử lý các nhiệm vụ cần suy luận.
-
-Ví dụ
-
-- hiểu yêu cầu
-- lập kế hoạch
-- giải thích
-- gia sư AI
-
----
-
-## 3.6 Database
-
-Supabase.
-
-Lưu
-
-- User
-- History
-- Exam
-- Result
-- Dashboard
+Supabase: User, History, Exam, Result, Dashboard.
 
 ---
 
 # 4. Nguyên tắc
 
-Business Logic
-
-↓
-
-FastAPI
-
-Workflow
-
-↓
-
-n8n
-
-Mathematics
-
-↓
-
-Python
-
-Reasoning
-
-↓
-
-AI
-
-Presentation
-
-↓
-
-Frontend
+Business Logic → FastAPI
+Workflow → n8n
+Mathematics → Python
+Reasoning cần ngôn ngữ tự nhiên → AI (CHV_Fun / CHV_Grader / CHV_Analyzer)
+Presentation → Frontend
 
 ---
 
 # 5. Nguyên tắc phát triển
 
 Không để Business Logic nằm trong Prompt.
-
 Không để Business Logic nằm trong n8n.
-
-Không để AI đọc dữ liệu thô.
-
+Không để AI đọc dữ liệu thô nếu Code Node có thể xử lý trước.
 Mọi dữ liệu đều phải đi qua API.
-
-Code phải quyết định.
-
-AI chỉ hỗ trợ quyết định.
+Code phải quyết định. AI chỉ hỗ trợ quyết định khi cần ngôn ngữ tự nhiên.
 
 ---
 
 # 6. Luồng sinh đề
 
-User
-
-↓
-
-FastAPI
-
-↓
-
-n8n
-
-↓
-
-Code Node
-
-↓
-
-Business API
-
-↓
-
-Python Generator
-
-↓
-
-LaTeX
-
-↓
-
-PDF
-
-↓
-
-Web
+User → FastAPI → n8n → Code Node → Business API
+→ Python Generator → LaTeX → PDF → Web
 
 ---
 
-# 7. Luồng học sinh
+# 7. Luồng học sinh (vòng lặp đầy đủ)
 
-Làm bài
-
+Nhập lệnh (VD: "tạo đề chương 5")
 ↓
-
+CHV_Fun (AI #1)
+↓
+WF001_GenerateExam (toàn Code Node)
+↓
+Học sinh làm bài (Web Test)
+↓
 Nộp bài
-
 ↓
-
-Chấm
-
+WF007_GradeExam
+  - CN_GradeAnswer (MC/TF/SA)
+  - CHV_Grader (AI #2 — chấm TL)
 ↓
-
-AI Phân tích
-
+CN_AnalyzeResults
 ↓
-
-Dashboard
-
+CHV_Analyzer (AI #3 — nhận xét + gợi ý)
 ↓
+Học sinh bấm nút gợi ý hoặc gõ lệnh mới
+↓
+Quay lại CHV_Fun
 
-AI Tutor
+Nếu học sinh bấm nút gợi ý có sẵn tham số, vòng lặp tiếp theo
+không cần gọi lại CHV_Fun để phân tích ngôn ngữ tự nhiên.
 
 ---
 
 # 8. Luồng giáo viên
 
-Đăng nhập
-
-↓
-
-Tạo đề
-
-↓
-
-Quản lý đề
-
-↓
-
-Theo dõi học sinh
-
-↓
-
-Phân tích lớp
-
-↓
-
-Điều chỉnh lộ trình
+Đăng nhập → Tạo đề → Quản lý đề → Theo dõi học sinh
+→ Phân tích lớp → Điều chỉnh lộ trình

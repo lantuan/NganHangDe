@@ -1,6 +1,6 @@
 # PYTHON GENERATOR
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,51 +10,25 @@ Trạng thái
 
 # Mục tiêu
 
-Python Generator chịu trách nhiệm sinh Question Object.
-
-Không sinh PDF.
-
-Không sinh Web Test.
-
-Không sinh JSON.
+Python Generator chịu trách nhiệm sinh Question Object. Không
+sinh PDF, không sinh Web Test, không sinh JSON đề thi.
 
 ---
 
 # Cấu trúc
 
 python_bank/
-
-↓
-
-toan10/
-
-↓
-
-L10_C1.py
-
-L10_C2.py
-
-...
+├── toan10/
+│     L10_C1.py
+│     L10_C2.py
+├── toan11/
+└── toan12/
 
 ---
 
 # Quy tắc
 
-Mỗi chương
-
-↓
-
-Một file Python.
-
-Ví dụ
-
-L10_C1.py
-
-L10_C2.py
-
-L10_C3.py
-
-...
+Mỗi chương = một file Python.
 
 ---
 
@@ -62,19 +36,10 @@ L10_C3.py
 
 Một file gồm nhiều Generator Function.
 
-Ví dụ
-
-L10_C1.py
-
-↓
-
+Ví dụ (L10_C1.py):
 L10_C1_B1_TH001_MC_A()
-
 L10_C1_B1_TH002_MC_A()
-
 L10_C1_B2_VD020_TL_A()
-
-...
 
 ---
 
@@ -82,25 +47,14 @@ L10_C1_B2_VD020_TL_A()
 
 Tên hàm phải trùng Generator ID.
 
-Ví dụ
-
-Generator ID
-
-L10_C1_B2_VD020_TL_A
-
-↓
-
-Python
-
-def L10_C1_B2_VD020_TL_A():
+Generator ID: L10_C1_B2_VD020_TL_A
+Python: def L10_C1_B2_VD020_TL_A():
 
 ---
 
 # Input
 
-Generator Function không nhận tham số.
-
-Random được xử lý bên trong hàm.
+Generator Function không nhận tham số. Random xử lý bên trong hàm.
 
 ---
 
@@ -111,8 +65,6 @@ Mỗi Generator Function trả về đúng một Question Object.
 ---
 
 # Question Object
-
-Question Object gồm
 
 - generator_id
 - content
@@ -126,21 +78,24 @@ Question Object gồm
 # Random
 
 Một Generator Function có thể sinh nhiều câu hỏi khác nhau.
+Generator ID không đổi. Question Object thay đổi.
 
-Generator ID không đổi.
+---
 
-Question Object thay đổi.
+# Ghi chú quan trọng — dùng cho CHV_Grader
+
+Trường answer và solution của mỗi Question Object là căn cứ
+DUY NHẤT để CHV_Grader chấm câu tự luận. Generator Function phải
+đảm bảo answer/solution đầy đủ, chính xác, vì AI chấm bài sẽ
+không tự nghĩ ra đáp án nào khác ngoài dữ liệu này.
 
 ---
 
 # Không được
 
 - Gọi AI.
-- Đọc PPCT.
-- Đọc Curriculum.
-- Đọc Mapping.
-- Sinh PDF.
-- Sinh Web Test.
+- Đọc PPCT, Curriculum, Mapping.
+- Sinh PDF, sinh Web Test.
 
 ---
 
@@ -151,3 +106,4 @@ Question Object thay đổi.
 - Mỗi chương chỉ có một file Python.
 - Không tạo nhiều file Python cho cùng một chương.
 - Tên hàm phải trùng Generator ID.
+- answer/solution bắt buộc phải có, đầy đủ, chính xác.

@@ -1,6 +1,6 @@
 # DATABASE
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,42 +10,28 @@ Trạng thái
 
 # Mục tiêu
 
-Database lưu trữ toàn bộ dữ liệu của hệ thống.
-
-Không lưu dữ liệu tạm.
-
-Không lưu dữ liệu sinh trong Python.
+Database lưu trữ toàn bộ dữ liệu của hệ thống. Không lưu dữ liệu
+tạm, không lưu dữ liệu sinh trong Python.
 
 ---
 
 # Database
 
-Supabase
-
-(PostgreSQL)
+Supabase (PostgreSQL)
 
 ---
 
 # Danh sách bảng
 
 profiles
-
 classes
-
 students
-
 teachers
-
 student_classes
-
 exam_history
-
 exam_files
-
 learning_history
-
 chat_history
-
 system_logs
 
 ---
@@ -56,41 +42,13 @@ Lưu thông tin người dùng.
 
 ---
 
-# classes
+# classes / students / teachers / student_classes
 
-Lưu thông tin lớp học.
-
----
-
-# students
-
-Lưu thông tin học sinh.
-
----
-
-# teachers
-
-Lưu thông tin giáo viên.
-
----
-
-# student_classes
-
-Liên kết
-
-Học sinh
-
-↓
-
-Lớp
+Quản lý lớp học, học sinh, giáo viên, liên kết học sinh–lớp.
 
 ---
 
 # exam_history
-
-Lưu lịch sử sinh đề.
-
-Thông tin
 
 - user_id
 - exam_id
@@ -101,36 +59,27 @@ Thông tin
 
 # exam_files
 
-Lưu thông tin file.
-
-Ví dụ
-
-- PDF
-- LaTeX
-- JSON
-
-Không lưu nội dung file.
-
-Chỉ lưu đường dẫn.
+Lưu thông tin file (PDF, LaTeX, JSON). Chỉ lưu đường dẫn, không
+lưu nội dung file.
 
 ---
 
 # learning_history
 
-Lưu lịch sử học tập.
+Lưu lịch sử học tập và kết quả chấm bài.
 
-Ví dụ
-
-- điểm
-- thời gian làm bài
-- kết quả
-- thống kê
+- diem
+- thoi_gian_lam_bai
+- ket_qua_theo_cau (JSON: question_id, loai_cau, dung_sai_hoac_diem,
+  chuong, bai, tags — theo Grade Result ở doc 03)
+- diem_tu_luan_chi_tiet (JSON: nhan_xet, loi_sai — từ CHV_Grader)
+- weak_points, strong_points (JSON — từ CN_AnalyzeResults)
 
 ---
 
 # chat_history
 
-Lưu lịch sử hội thoại AI.
+Lưu lịch sử hội thoại AI (CHV_Fun, CHV_Analyzer).
 
 ---
 
@@ -142,41 +91,20 @@ Lưu log hệ thống.
 
 # Quan hệ
 
-Teacher
-
-↓
-
-Class
-
-↓
-
-Student
-
-↓
-
-Exam History
-
-↓
-
-Learning History
+Teacher → Class → Student → Exam History → Learning History
 
 ---
 
 # Không lưu
 
-- PPCT
-- Curriculum
-- Mapping
-- Python Bank
-
-Các dữ liệu này lưu dưới dạng file JSON trong thư mục data.
+PPCT, Curriculum, Mapping, Python Bank — các dữ liệu này lưu
+dưới dạng file JSON trong thư mục data.
 
 ---
 
 # Quy tắc
 
 - Mỗi bảng chỉ lưu một loại dữ liệu.
-- Không lưu file PDF trong Database.
-- Không lưu file LaTeX trong Database.
+- Không lưu file PDF/LaTeX trong Database.
 - Database chỉ lưu metadata và đường dẫn.
 - Dữ liệu chương trình học không đưa vào Database.

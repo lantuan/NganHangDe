@@ -1,6 +1,6 @@
 # API SPECIFICATION
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,315 +10,136 @@ Trạng thái
 
 # Mục tiêu
 
-Toàn bộ Frontend, n8n và Python chỉ giao tiếp thông qua FastAPI.
-
+Toàn bộ Frontend, n8n và Python chỉ giao tiếp qua FastAPI.
 Không Node nào được đọc file trực tiếp nếu đã có API.
 
 ---
 
 # Kiến trúc
 
-Frontend
-
-↓
-
-FastAPI
-
-↓
-
-Data
-
-↓
-
-n8n
-
-↓
-
-Python
+Frontend → FastAPI → Data → n8n → Python
 
 ---
 
-# API
+# Response chuẩn (bắt buộc cho MỌI API)
 
-## PPCT
-
-GET
-
-```
-/api/data/ppct/{subject}
-```
-
-Ví dụ
-
-```
-/api/data/ppct/toan10
-```
-
-Output
-
-PPCT JSON
-
----
-
-## Curriculum
-
-GET
-
-```
-/api/data/curriculum/{subject}/{chapter}
-```
-
-Ví dụ
-
-```
-/api/data/curriculum/toan10/L10_C1
-```
-
-Output
-
-Curriculum JSON
-
----
-
-## Mapping
-
-GET
-
-```
-/api/data/mapping/{subject}/{chapter}
-```
-
-Ví dụ
-
-```
-/api/data/mapping/toan10/L10_C1
-```
-
-Output
-
-Mapping JSON
-
----
-
-## Python Bank
-
-GET
-
-```
-/api/data/python_bank/{subject}/{chapter}
-```
-
-Output
-
-Generator Information
-
-Không trả source code.
-
----
-
-# Generate Exam
-
-POST
-
-```
-/api/exam/generate
-```
-
-Input
-
-Blueprint
-
-Output
-
-Exam Object
-
----
-
-# Generate PDF
-
-POST
-
-```
-/api/exam/pdf
-```
-
-Input
-
-Exam Object
-
-Output
-
-PDF
-
----
-
-# Generate LaTeX
-
-POST
-
-```
-/api/exam/latex
-```
-
-Input
-
-Exam Object
-
-Output
-
-.tex
-
----
-
-# Generate Web Test
-
-POST
-
-```
-/api/exam/web
-```
-
-Input
-
-Exam Object
-
-Output
-
-Web Test JSON
-
----
-
-# Student Analysis
-
-POST
-
-```
-/api/student/analysis
-```
-
-Input
-
-Student ID
-
-Output
-
-Learning Report
-
----
-
-# Download
-
-GET
-
-```
-/api/download/{file_id}
-```
-
-Output
-
-PDF
-
-LaTeX
-
-JSON
-
----
-
-# Upload
-
-POST
-
-```
-/api/upload
-```
-
-Output
-
-File ID
-
----
-
-# Authentication
-
-POST
-
-```
-/api/auth/login
-```
-
----
-
-POST
-
-```
-/api/auth/register
-```
-
----
-
-POST
-
-```
-/api/auth/logout
-```
-
----
-
-GET
-
-```
-/api/auth/me
-```
-
----
-
-# Admin
-
-GET
-
-```
-/api/admin/users
-```
-
----
-
-GET
-
-```
-/api/admin/classes
-```
-
----
-
-POST
-
-```
-/api/admin/create_class
-```
-
----
-
-# Response chuẩn
-
-Mọi API đều trả về
-
-```json
 {
     "success": true,
     "message": "",
     "data": {}
 }
-```
 
-Nếu lỗi
+Nếu lỗi:
 
-```json
 {
     "success": false,
     "message": "Error message",
     "data": null
 }
-```
+
+---
+
+# PPCT
+
+GET /api/data/ppct/{subject}
+Ví dụ: /api/data/ppct/toan10
+Output: PPCT JSON (bọc trong Response chuẩn)
+
+---
+
+# Curriculum
+
+GET /api/data/curriculum/{subject}/{chapter}
+Ví dụ: /api/data/curriculum/toan10/L10_C1
+
+---
+
+# Mapping
+
+GET /api/data/mapping/{subject}/{chapter}
+Ví dụ: /api/data/mapping/toan10/L10_C1
+
+---
+
+# Python Bank
+
+GET /api/data/python_bank/{subject}/{chapter}
+Output: Generator Information (không trả source code)
+
+---
+
+# Generate Exam
+
+POST /api/exam/generate
+Input: Blueprint
+Output: Exam Object
+
+---
+
+# Generate PDF / LaTeX / Web Test
+
+POST /api/exam/pdf
+POST /api/exam/latex
+POST /api/exam/web
+Input: Exam Object
+
+---
+
+# Grade Exam (mới)
+
+POST /api/exam/grade
+
+Input:
+
+{
+  "exam_id": "",
+  "answers": [
+    {"question_id":"", "answer":""}
+  ]
+}
+
+Output: Kết quả chấm từng câu (MC/TF/SA chấm ngay, TL do
+CHV_Grader chấm) + tổng điểm.
+
+---
+
+# Student Analysis
+
+POST /api/student/analysis
+Input: Student ID
+Output: Learning Report (weak_points, strong_points, nhận xét,
+gợi ý lệnh luyện tập tiếp theo)
+
+---
+
+# Download
+
+GET /api/download/{file_id}
+Output: PDF, LaTeX, JSON
+
+---
+
+# Upload
+
+POST /api/upload
+Output: File ID
+
+---
+
+# Authentication
+
+POST /api/auth/login
+POST /api/auth/register
+POST /api/auth/logout
+GET /api/auth/me
+
+---
+
+# Admin
+
+GET /api/admin/users
+GET /api/admin/classes
+POST /api/admin/create_class
 
 ---
 
@@ -328,5 +149,7 @@ Nếu lỗi
 - n8n không đọc file trực tiếp nếu có API.
 - Python không trả dữ liệu cho Frontend.
 - Mọi dữ liệu đều đi qua FastAPI.
-- API chỉ trả JSON hoặc File.
+- API chỉ trả JSON hoặc File, luôn bọc theo Response chuẩn.
 - Không trả HTML.
+- Validate whitelist tham số path (subject, chapter) trước khi
+  ghép vào đường dẫn file — không cho phép path traversal.

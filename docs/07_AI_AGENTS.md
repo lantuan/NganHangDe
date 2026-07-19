@@ -1,6 +1,6 @@
 # AI AGENTS
 
-Version: 1.0
+Version: 2.0
 
 Trạng thái
 
@@ -10,11 +10,9 @@ Trạng thái
 
 # Mục tiêu
 
-Toàn bộ AI của hệ thống được chia thành các AI Agent độc lập.
-
-Mỗi AI chỉ đảm nhận một nhiệm vụ duy nhất.
-
-AI không kiêm nhiều chức năng.
+Toàn hệ thống chỉ có 3 AI Agent. Mỗi AI chỉ đảm nhận nhiệm vụ
+cần hiểu hoặc sinh ngôn ngữ tự nhiên. Mọi bước có quy tắc rõ ràng
+(tra bảng, phân bổ, chọn ID, so khớp đáp án) đều là Code Node.
 
 ---
 
@@ -22,13 +20,9 @@ AI không kiêm nhiều chức năng.
 
 | AI | Workflow | Chức năng |
 |-----|----------|-----------|
-| CHV_Fun | WF000 | Điều phối hệ thống |
-| CHV_RequestParser | WF001 | Phân tích yêu cầu sinh đề |
-| CHV_ExamPlanner | WF001 | Sinh Blueprint |
-| CHV_AbilityPlanner | WF002 | Lập kế hoạch sinh đề theo năng lực |
-| CHV_Analyzer | WF003 | Phân tích kết quả học tập |
-| CHV_Help | WF005 | Hướng dẫn sử dụng |
-| CHV_Reject | WF006 | Từ chối yêu cầu ngoài phạm vi |
+| CHV_Fun | WF000/WF001/WF002 | Điều phối hệ thống + phân tích yêu cầu sinh đề |
+| CHV_Grader | WF007 | Chấm câu tự luận dựa trên answer/solution có sẵn |
+| CHV_Analyzer | WF003/WF007 | Viết nhận xét + gợi ý lệnh luyện tập tiếp theo |
 
 ---
 
@@ -42,30 +36,35 @@ CHV_Fun
 
 ## Workflow
 
-WF000_Gateway
+WF000_Gateway (và phân tích cấu trúc đề khi task=generate_exam)
 
 -------------------------------------------------------------------------------
 
 ## Mục tiêu
 
-Điều phối toàn bộ hệ thống.
+Hiểu yêu cầu tự nhiên của học sinh, phân loại nhiệm vụ (task),
+và khi task=generate_exam thì đồng thời xác định cấu trúc đề
+(số câu, mức độ, phạm vi chương) — tra Table Tool
+QuyDinhSoLuongCauTrongDe nếu học sinh chưa tự chỉ định.
 
 -------------------------------------------------------------------------------
 
 ## Input
 
-Tin nhắn người dùng.
+Tin nhắn người dùng (tiếng Việt tự nhiên).
 
 -------------------------------------------------------------------------------
 
 ## Output
 
-JSON
-
 {
-    "task":"",
-    "message":""
+    "task": "",
+    "message": "",
+    "cau_truc_de": { }
 }
+
+cau_truc_de chỉ có khi task = generate_exam hoặc
+generate_exam_by_ability.
 
 -------------------------------------------------------------------------------
 
@@ -73,162 +72,71 @@ JSON
 
 - Phân loại yêu cầu.
 - Chọn Workflow phù hợp.
-- Không xử lý nghiệp vụ.
+- Nếu học sinh đã tự quy định cấu trúc đề (VD "20 câu trắc nghiệm,
+  50% NB") thì giữ nguyên yêu cầu, không ghi đè bằng Table Tool.
+- Nếu học sinh chưa quy định, tra Table Tool để lấy cấu trúc mặc định.
 
 -------------------------------------------------------------------------------
 
 ## Không được
 
-- Sinh đề.
-- Giải toán.
-- Trả lời kiến thức.
-- Sinh lời giải.
-- Đọc PPCT.
-- Đọc Curriculum.
-- Đọc Mapping.
+- Sinh đề, giải toán, sinh lời giải, trả lời kiến thức.
+- Đọc PPCT, Curriculum, Mapping.
+- Tự tạo hoặc tự chọn ID (curriculum_id, generator_id...).
 
 -------------------------------------------------------------------------------
 
 ## Workflow tiếp theo
 
-Switch
-
-↓
-
-WF001
-
-WF002
-
-WF003
-
-WF004
-
-WF005
-
-WF006
+Switch → WF001 / WF002 / WF003 / WF004 / WF005 / WF006 / WF007
 
 ===============================================================================
 
 # AI
 
-CHV_RequestParser
+CHV_Grader
 
 -------------------------------------------------------------------------------
 
 ## Workflow
 
-WF001_GenerateExam
+WF007_GradeExam
 
 -------------------------------------------------------------------------------
 
 ## Mục tiêu
 
-Phân tích yêu cầu sinh đề.
+Chấm điểm câu tự luận (TL) bằng cách so sánh bài làm của học sinh
+với answer/solution có sẵn trong Question Object (do Python
+Generator sinh ra từ trước, không phải AI tự nghĩ đáp án).
 
 -------------------------------------------------------------------------------
 
 ## Input
 
-message
+- Bài làm của học sinh (text hoặc kết quả OCR từ ảnh chụp).
+- Question Object tương ứng (answer, solution có sẵn).
 
 -------------------------------------------------------------------------------
 
 ## Output
 
-Request JSON
-
--------------------------------------------------------------------------------
-
-## Chức năng
-
-- Xác định lớp.
-- Học kỳ.
-- Chương.
-- Bài.
-- Loại đề.
-- Thời gian.
-- Số câu.
-- Mức độ.
+{
+    "question_id": "",
+    "diem": 0,
+    "diem_toi_da": 0,
+    "nhan_xet": "",
+    "loi_sai": ""
+}
 
 -------------------------------------------------------------------------------
 
 ## Không được
 
-- Sinh Blueprint.
-- Chọn câu hỏi.
-- Sinh đề.
-
-===============================================================================
-
-# AI
-
-CHV_ExamPlanner
-
--------------------------------------------------------------------------------
-
-## Workflow
-
-WF001_GenerateExam
-
--------------------------------------------------------------------------------
-
-## Mục tiêu
-
-Sinh Blueprint.
-
--------------------------------------------------------------------------------
-
-## Input
-
-Request JSON
-
-PPCT
-
--------------------------------------------------------------------------------
-
-## Output
-
-Blueprint
-
--------------------------------------------------------------------------------
-
-## Không được
-
-- Chọn câu hỏi.
-- Gọi Python.
-- Sinh PDF.
-
-===============================================================================
-
-# AI
-
-CHV_AbilityPlanner
-
--------------------------------------------------------------------------------
-
-## Workflow
-
-WF002_GenerateExamByAbility
-
--------------------------------------------------------------------------------
-
-## Mục tiêu
-
-Sinh Blueprint theo năng lực.
-
--------------------------------------------------------------------------------
-
-## Input
-
-Student History
-
-Weak Knowledge
-
--------------------------------------------------------------------------------
-
-## Output
-
-Blueprint
+- Tự đặt ra đáp án ngoài answer/solution có sẵn.
+- Tự sinh câu hỏi mới.
+- Sửa answer/solution gốc.
+- Chấm câu MC/TF/SA (thuộc CN_GradeAnswer).
 
 ===============================================================================
 
@@ -240,88 +148,55 @@ CHV_Analyzer
 
 ## Workflow
 
-WF003_StudentAnalysis
+WF003_StudentAnalysis, WF007_GradeExam
 
 -------------------------------------------------------------------------------
 
 ## Mục tiêu
 
-Phân tích kết quả học tập.
+Viết nhận xét kết quả học tập bằng văn phong tự nhiên, khích lệ,
+và đề xuất một lệnh cụ thể để học sinh luyện tập tiếp (kèm tham
+số sẵn để hệ thống chạy lại WF001 nếu học sinh xác nhận).
 
 -------------------------------------------------------------------------------
 
 ## Input
 
-Exam History
+Analysis Result (weak_points, strong_points) — CHỈ nhận số liệu
+đã tính sẵn từ CN_AnalyzeResults, KHÔNG nhận Exam Object thô.
 
 -------------------------------------------------------------------------------
 
 ## Output
 
-Learning Report
-
-Dashboard
-
-===============================================================================
-
-# AI
-
-CHV_Help
+{
+    "nhan_xet": "",
+    "goi_y_lenh_tiep_theo": "",
+    "tham_so_goi_y": { }
+}
 
 -------------------------------------------------------------------------------
 
-## Workflow
+## Không được
 
-WF005_Help
-
--------------------------------------------------------------------------------
-
-## Mục tiêu
-
-Hướng dẫn sử dụng hệ thống.
-
-===============================================================================
-
-# AI
-
-CHV_Reject
-
--------------------------------------------------------------------------------
-
-## Workflow
-
-WF006_Reject
-
--------------------------------------------------------------------------------
-
-## Mục tiêu
-
-Từ chối các yêu cầu ngoài phạm vi của hệ thống.
-
--------------------------------------------------------------------------------
-
-## Áp dụng
-
-- Giải toán.
-- Hỏi ngoài Toán THPT.
-- Nội dung không liên quan đến Ngân Hàng Đề.
+- Tự tính lại % đúng/sai (đã được CN_AnalyzeResults tính sẵn).
+- Đưa ra chẩn đoán tâm lý học sinh.
+- Tự tạo ID.
 
 ===============================================================================
 
 # Quy tắc
 
-- Một AI chỉ thuộc một Workflow.
+- Một AI chỉ thuộc một Workflow (CHV_Fun có thể được gọi lại từ
+  nhiều Workflow nhưng vai trò không đổi).
 - Một AI chỉ có một Prompt chính thức.
 - AI không thực hiện nhiệm vụ của AI khác.
-- AI chỉ giao tiếp bằng JSON khi Workflow yêu cầu.
 - Mọi yêu cầu đều bắt đầu từ CHV_Fun.
+- Không tạo thêm AI mới nếu nhiệm vụ có thể giải quyết bằng Code Node.
 
 ===============================================================================
 
-# TODO
+# TODO (giai đoạn sau, không thuộc vòng lặp tối thiểu)
 
-- CHV_Tutor
-- CHV_SolutionWriter
-- CHV_QuestionReviewer
-- CHV_Recommendation
-- CHV_ClassAssistant
+- CHV_Tutor — gia sư AI tương tác nhiều lượt.
+- CHV_ClassAssistant — trợ lý cho giáo viên quản lý lớp.
