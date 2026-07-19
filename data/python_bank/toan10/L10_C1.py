@@ -3797,7 +3797,7 @@ def L10_C1_B1_TH014_MC_A_02(socau, dang): ####### kiểm tra lại nội dung c�
 
     return cauTN
 
-def L10_C1_B1_TH014_TF_A_01(socau, socot=1):
+def L10_C1_TF_A_01(socau, socot=1):
 
     import numpy as np
 
@@ -7219,7 +7219,7 @@ def L10_C1_B2_VD021_TL_A_01(socau, dong=1):
     return cauTL
 
 
-def L10_C1_TF_A_01(socau, socot):
+def L10_C1_TF_B_01(socau, socot):
 
     gt = []
     dem = len(gt)
