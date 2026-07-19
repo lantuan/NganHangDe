@@ -3,6 +3,8 @@ import json
 
 from fastapi import APIRouter, HTTPException
 
+from app.services.exam_scope_service import load_exam_scope
+
 router = APIRouter(
     prefix="/api/data",
     tags=["Data"]
@@ -36,3 +38,8 @@ def get_curriculum(khoi: str, chuong: str):
 def get_mapping(khoi: str, chuong: str):
     file = DATA_DIR / "mapping" / khoi / f"{chuong}.json"
     return load_json(file)
+
+
+@router.get("/exam-scope/{lop}/{ki_thi}")
+def get_exam_scope(lop: int, ki_thi: str, pham_vi_chuong: str | None = None):
+    return load_exam_scope(lop, ki_thi, pham_vi_chuong)
