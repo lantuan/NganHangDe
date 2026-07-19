@@ -151,6 +151,36 @@ answer và solution là căn cứ DUY NHẤT để CHV_Grader chấm tự luận
 
 ---
 
+
+===== FILE: docs/03_DATA_STRUCTURE.md (thêm ngay dưới mục "Question Object") =====
+
+---
+
+## Ghi chú: Question Object dạng LaTeX string
+
+Đối với Generator Function sinh nhiều mã đề (tham số `socau`),
+Question Object thực tế là **chuỗi LaTeX** (không phải object nhiều field tách rời).
+
+Cấu trúc tối thiểu khi truyền tiếp qua các tầng sau:
+
+```json
+{
+    "generator_id": "L10_C1_B2_VD020_TL_A",
+    "latex_block": "<chuỗi LaTeX do Generator Function trả về>",
+    "so_ma_de": 1,
+    "metadata": {
+        "lop": 10,
+        "chuong": "1",
+        "bai": "2",
+        "muc_do": "VD",
+        "loai": "TL"
+    }
+}
+```
+
+`metadata` được suy ra từ `generator_id` (không cần Generator Function tự trả về).
+
+
 ===============================================================================
 
 # Exam Object
@@ -239,3 +269,4 @@ muc_do, loai, dang, tags, version, created_at.
 - Grade Result và Analysis Result chỉ chứa số liệu, không chứa
   văn bản nhận xét cuối cùng.
 - Mọi Output đều sinh từ Exam Object.
+

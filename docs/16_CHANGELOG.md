@@ -87,4 +87,36 @@ Nội dung
 
 Người thực hiện
 
-Mai Lan
+Mai Hà Lan
+
+
+
+===== FILE: docs/16_CHANGELOG.md (thêm vào cuối, sau Version 1.1 đã có) =====
+
+===============================================================================
+
+Version 2.2
+
+Ngày
+
+2026-07-19
+
+Nội dung
+
+- Cập nhật 10_PYTHON_GENERATOR.md: chính thức hoá mô hình Generator Function
+  nhận tham số (socau, socot/dong) để sinh nhiều mã đề cùng cấu trúc, khác số liệu.
+- Cập nhật 03_DATA_STRUCTURE.md: Question Object có thể là chuỗi LaTeX
+  (latex_block) thay vì object tách rời field, khi dùng Generator dạng mã đề.
+- Ghi nhận math_type.py là thư viện định dạng LaTeX dùng chung cho toàn bộ
+  python_bank, không phải Generator Function.
+- Quy định: số mã đề (socau) mặc định = 1 cho tài khoản học sinh,
+  do tầng FastAPI/n8n quyết định, không đặt cứng trong Generator Function.
+- Cập nhật 04_ID_STANDARD.md: chính thức hoá cơ chế "Biến thể nội dung"
+  (Content Variant) — một Generator ID có thể có nhiều hàm Python
+  (_01, _02, ...) để bổ sung dần độ phong phú ngân hàng đề. Hậu tố _NN
+  chỉ tồn tại trong python_bank, không xuất hiện ở Mapping/Curriculum/
+  PPCT/Database/API. Bổ sung quy tắc Function Resolution.
+
+Người thực hiện
+
+Mai Hà Lan

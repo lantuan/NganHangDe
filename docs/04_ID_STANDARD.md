@@ -200,3 +200,95 @@ L10_C1_B2_NB017_MC_A đã phát hành.
 
 FastAPI → n8n → Python → LaTeX → Dashboard → AI → Database
 đều giao tiếp bằng ID. Tên hiển thị chỉ dùng ở giao diện người dùng.
+
+===== FILE: docs/04_ID_STANDARD.md (thêm vào cuối file, TRƯỚC mục "Mục tiêu cuối cùng") =====
+
+---
+
+# GHI CHÚ CẬP NHẬT — Version 2.1
+
+Trạng thái
+
+🟢 Chuẩn chính thức (bổ sung)
+
+---
+
+## Biến thể nội dung trong Python (Content Variant)
+
+Phân biệt rõ hai khái niệm:
+
+```
+Generator ID (ID chuẩn, dùng ở Mapping/Curriculum/Database/API)
+    ↓
+L10_C1_B1_VD014_MC_A
+```
+
+Content Variant (chỉ tồn tại trong Python file, KHÔNG xuất hiện ở nơi khác)
+↓
+L10_C1_B1_VD014_MC_A_01
+L10_C1_B1_VD014_MC_A_02
+L10_C1_B1_VD014_MC_A_03
+...
+
+Ý nghĩa
+
+Một Generator ID có thể có NHIỀU hàm Python khác nhau, mỗi hàm là một
+cách ra đề khác nhau (bối cảnh khác, dạng số liệu khác) cho cùng một
+năng lực/dạng bài. Đây là cách bổ sung dần độ phong phú của ngân hàng đề
+mà không cần tạo ID mới.
+
+Quy tắc đặt tên hàm
+{Generator_ID}_{số thứ tự 2 chữ số}
+
+Ví dụ
+def L10_C1_B1_VD014_MC_A_01(socau, socot):
+...
+def L10_C1_B1_VD014_MC_A_02(socau, socot):
+...
+
+---
+
+## Nơi hậu tố _NN được phép xuất hiện
+
+CHỈ trong
+data/python_bank/
+
+KHÔNG được xuất hiện ở
+
+- Mapping
+- Curriculum
+- PPCT
+- Database
+- API Response
+- Blueprint
+- Candidate Pool
+
+Mọi nơi khác chỉ làm việc với Generator ID gốc (không hậu tố).
+
+---
+
+## Cơ chế gọi hàm (Function Resolution)
+
+Khi hệ thống cần sinh câu hỏi cho một Generator ID:
+Input: generator_id (VD: L10_C1_B1_VD014_MC_A), socau
+↓
+Quét file Python tương ứng chương, tìm tất cả hàm khớp:
+{generator_id}_01, {generator_id}_02, ...
+↓
+Nếu chỉ có 1 hàm → dùng hàm đó.
+Nếu có nhiều hàm → chọn ngẫu nhiên 1 hoặc nhiều hàm trong số đó.
+↓
+Gọi hàm đã chọn với (socau, socot/dong) tương ứng.
+
+Nếu Generator ID không có bất kỳ hàm nào khớp (`_01` trở lên không tồn tại)
+→ báo lỗi thiếu Generator, không tự suy diễn.
+
+---
+
+## Không được
+
+- Không đặt tên hàm chỉ bằng Generator ID gốc khi có từ 2 biến thể trở lên
+  (tránh trùng tên hàm Python trong cùng 1 file).
+- Không đổi số thứ tự biến thể đã phát hành (VD: đã có `_01` thì không xoá,
+  chỉ được thêm `_02`, `_03`... về sau — giữ đúng nguyên tắc bất biến ID
+  đã nêu ở phần trên của tài liệu).
