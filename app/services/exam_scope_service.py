@@ -127,3 +127,26 @@ def load_scope_heso23(lop: int, ki_thi: str) -> dict:
         "pham_vi_bai": [b["id"] for b in ket_qua],
         "phan_bo_ty_le": phan_bo_ty_le,
     }
+
+def load_exam_scope(lop: int, ki_thi: str, pham_vi_chuong: str | None = None) -> dict:
+    """
+    Hàm điều phối (dispatcher) cho API /api/data/exam-scope.
+
+    - ki_thi == "thuong_xuyen": HeSo1, bắt buộc có pham_vi_chuong.
+    - ki_thi in KI_THI_MAP: HeSo2_HeSo3 (giữa kỳ / cuối kỳ).
+    """
+    if ki_thi == "thuong_xuyen":
+        if not pham_vi_chuong:
+            return {
+                "error": "THIEU_PHAM_VI_CHUONG",
+                "message": "HeSo1 (thuong_xuyen) yêu cầu tham số pham_vi_chuong",
+            }
+        return load_scope_heso1(lop, pham_vi_chuong)
+
+    if ki_thi in KI_THI_MAP:
+        return load_scope_heso23(lop, ki_thi)
+
+    return {
+        "error": "KI_THI_KHONG_HOP_LE",
+        "ki_thi_hop_le": ["thuong_xuyen", *KI_THI_MAP.keys()],
+    }
