@@ -102,3 +102,36 @@ def generate_exam_pdf_endpoint(payload: GenerateExamRequest):
         filename="de_thi.pdf",
         media_type="application/pdf",
     )
+
+from app.services.question_selector_service import select_questions, SelectorError
+
+
+class YeuCauItem(BaseModel):
+    chuong_so: int
+    muc_do: str  # "NB" | "TH" | "VD" | "VDC"
+    so_luong: int
+
+
+class SelectQuestionsRequest(BaseModel):
+    lop: int
+    yeu_cau: list[YeuCauItem]
+
+
+@router.post("/select-questions")
+def select_questions_endpoint(payload: SelectQuestionsRequest):
+    try:
+        result = select_questions(
+            lop=payload.lop,
+            yeu_cau=[yc.model_dump() for yc in payload.yeu_cau],
+        )
+    except (FileNotFoundError, SelectorError) as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {
+        "success": True,
+        "message": "",
+        "data": {
+            "so_luong_da_chon": len(result),
+            "danh_sach": result,
+        },
+    }
