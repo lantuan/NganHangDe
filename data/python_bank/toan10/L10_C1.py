@@ -51,8 +51,7 @@ def L10_C1_B1_NB001_MC_A_01(socau, dang=1):
         'Bài thi toán này dễ quá!',
         'Bạn bao nhiêu tuổi?',
         'Trời ơi, nóng quá!',
-        'Hãy trật tự trong lớp học!',
-        ''
+        'Hãy trật tự trong lớp học!'
     ]
 
     gt = []
