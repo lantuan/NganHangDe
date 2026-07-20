@@ -68,3 +68,37 @@ def generate_question(payload: GeneratorRequest):
         "message": "",
         "data": result,
     }
+
+from fastapi.responses import FileResponse
+from app.services.exam_assembler_service import generate_exam_pdf, AssembleError
+
+
+class GenerateExamRequest(BaseModel):
+    lop: int
+    tieu_de: str
+    role: str
+    yeu_cau: list[YeuCauItem]
+    socau_ma_de: int | None = None
+
+
+@router.post("/generate-pdf")
+def generate_exam_pdf_endpoint(payload: GenerateExamRequest):
+    if payload.role not in ("student", "teacher"):
+        raise HTTPException(400, "role phải là 'student' hoặc 'teacher'")
+
+    try:
+        result = generate_exam_pdf(
+            lop=payload.lop,
+            tieu_de=payload.tieu_de,
+            yeu_cau=[yc.model_dump() for yc in payload.yeu_cau],
+            role=payload.role,
+            socau_ma_de=payload.socau_ma_de,
+        )
+    except AssembleError as e:
+        raise HTTPException(400, detail=str(e))
+
+    return FileResponse(
+        path=result["pdf_path"],
+        filename="de_thi.pdf",
+        media_type="application/pdf",
+    )

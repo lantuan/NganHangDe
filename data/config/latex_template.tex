@@ -1,0 +1,42 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{vietnam}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{ex_test}
+
+\begin{document}
+
+\begin{center}
+%Tiêu đề
+% Cách dùng: \tieude{tổng số trang}{mã đề}{tiêu đề riêng (để trống nếu dùng mặc định)}{role: hs hoặc gv}{lop: 10/11/12}
+\newcommand{\tieude}[5]{
+	\def\customtitle{#3}
+	\ifthenelse{\equal{\customtitle}{}}
+		{\def\thetitle{ÔN TẬP KIỂM TRA}}
+		{\def\thetitle{\customtitle}}
+	\noindent
+	%Trái
+	\begin{minipage}[b]{8.5cm}
+		\centerline{\textbf{\fontsize{11}{0}\selectfont \hspace{2cm} TRƯỜNG THPT CHUYÊN HÙNG VƯƠNG}}
+		\centerline{(\textit{Đề thi có #1\ trang})}
+	\end{minipage}\hspace{1.5cm}
+	%Phải
+	\begin{minipage}[b]{9cm}
+		\centerline{\textbf{\fontsize{11}{0}\selectfont \thetitle}}
+		\centerline{\textbf{\fontsize{11}{0}\selectfont MÔN TOÁN, LỚP #5 (KHÔNG CHUYÊN)}}
+	\end{minipage}\\
+	\vspace{0.4cm}
+	\ifthenelse{\equal{#4}{gv}}
+		{\rightline{
+			\setlength\fboxrule{1pt}
+			\setlength\fboxsep{4pt}
+			\fbox{\bf Mã đề #2}
+		}}
+		{}
+	\vspace{4pt}
+}
+\end{center}
+
+__NOI_DUNG__
+
+\end{document}
