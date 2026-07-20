@@ -31,6 +31,12 @@ def get_exam_scope(
     raise HTTPException(400, "loai_he_so không hợp lệ")
 
 
+class YeuCauItem(BaseModel):
+    chuong_so: int
+    muc_do: str  # "NB" | "TH" | "VD" | "VDC"
+    so_luong: int
+
+
 # ======================================================
 # GENERATOR
 # ======================================================
@@ -104,12 +110,6 @@ def generate_exam_pdf_endpoint(payload: GenerateExamRequest):
     )
 
 from app.services.question_selector_service import select_questions, SelectorError
-
-
-class YeuCauItem(BaseModel):
-    chuong_so: int
-    muc_do: str  # "NB" | "TH" | "VD" | "VDC"
-    so_luong: int
 
 
 class SelectQuestionsRequest(BaseModel):
