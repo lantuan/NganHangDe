@@ -135,3 +135,31 @@ def select_questions_endpoint(payload: SelectQuestionsRequest):
             "danh_sach": result,
         },
     }
+
+from app.services.exam_rules_service import (
+    resolve_cau_truc_de,
+    phan_bo_so_cau_theo_muc_do,
+    ExamRulesError,
+)
+
+
+class ResolveExamRulesRequest(BaseModel):
+    loai_he_so: str
+    cau_truc_tu_hoc_sinh: dict | None = None
+
+
+@router.post("/resolve-rules")
+def resolve_exam_rules(payload: ResolveExamRulesRequest):
+    try:
+        ket_qua = resolve_cau_truc_de(
+            loai_he_so=payload.loai_he_so,
+            cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+        )
+        ket_qua["phan_bo_muc_do"] = phan_bo_so_cau_theo_muc_do(
+            ket_qua["cau_truc_tong_quat"],
+            ket_qua["ty_le_muc_do_goc"],
+        )
+    except ExamRulesError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"success": True, "message": "", "data": ket_qua}
