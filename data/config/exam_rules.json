@@ -1,29 +1,14 @@
-mkdir -p data/config
-cat > data/config/exam_rules.json << 'EOF'
 {
   "HeSo1": {
-    "trac_nghiem": 6,
-    "dung_sai_cau_lon": 1,
-    "tra_loi_ngan": 2,
-    "tu_luan": 3,
-    "ty_le_muc_do": {
-      "NB": 0.4,
-      "TH": 0.3,
-      "VD": 0.2,
-      "VDC": 0.1
-    }
+    "trac_nghiem": {"so_luong": 6, "ty_le_muc_do": {"NB": 0.4, "TH": 0.3, "VD": 0.2, "VDC": 0.1}},
+    "dung_sai_cau_lon": {"so_luong": 1, "ty_le_muc_do": {"NB": 0.25, "TH": 0.25, "VD": 0.25, "VDC": 0.25}},
+    "tra_loi_ngan": {"so_luong": 2, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.5, "VDC": 0.5}},
+    "tu_luan": {"so_luong": 3, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.7, "VDC": 0.3}}
   },
   "HeSo2_HeSo3": {
-    "trac_nghiem": 12,
-    "dung_sai_cau_lon": 2,
-    "tra_loi_ngan": 3,
-    "tu_luan": 3,
-    "ty_le_muc_do": {
-      "NB": 0.4,
-      "TH": 0.3,
-      "VD": 0.2,
-      "VDC": 0.1
-    }
+    "trac_nghiem": {"so_luong": 12, "ty_le_muc_do": {"NB": 0.4, "TH": 0.3, "VD": 0.2, "VDC": 0.1}},
+    "dung_sai_cau_lon": {"so_luong": 2, "ty_le_muc_do": {"NB": 0.25, "TH": 0.25, "VD": 0.25, "VDC": 0.25}},
+    "tra_loi_ngan": {"so_luong": 3, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.5, "VDC": 0.5}},
+    "tu_luan": {"so_luong": 3, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.7, "VDC": 0.3}}
   }
 }
-EOF
