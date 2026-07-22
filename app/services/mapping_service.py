@@ -31,3 +31,16 @@ def load_mapping(lop: int, chuong_so: int) -> list[dict]:
         item["chuong_so"] = chuong_so
 
     return items
+
+def phan_loai_cau(item: dict) -> str:
+    """
+    Phân loại theo trường 'Loai' trong Mapping.
+    """
+    loai_text = item.get("Loai", "") or ""
+    if "Đúng sai" in loai_text:
+        return "dung_sai_cau_lon"
+    if "Tự luận" in loai_text:
+        return "tu_luan"
+    if "ngắn" in loai_text:
+        return "tra_loi_ngan"
+    return "trac_nghiem"

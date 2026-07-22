@@ -25,6 +25,10 @@ def generate_exam_pdf(
     except (FileNotFoundError, SelectorError) as e:
         raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
 
+    # Theo dõi biến thể Python đã dùng, tránh trùng khi 1 generator_id
+    # bị chọn nhiều lần trong CÙNG 1 lần sinh đề này.
+    used_variants: dict = {}
+
     noi_dung = ""
     for item in danh_sach_id:
         try:
@@ -34,6 +38,7 @@ def generate_exam_pdf(
                 chuong_so=item["chuong_so"],
                 role=role,
                 socau_yeu_cau=socau_ma_de,
+                used_variants=used_variants,
             )
             noi_dung += ket_qua["latex_block"] + "\n"
         except GeneratorNotFoundError as e:

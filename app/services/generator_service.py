@@ -8,8 +8,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PYTHON_BANK_DIR = BASE_DIR / "data" / "python_bank"
 
-# Đảm bảo "from math_type import *" trong các file L{lop}_C{chuong}.py
-# hoạt động được, vì math_type.py đặt tại gốc python_bank/ (dùng chung mọi khối).
 if str(PYTHON_BANK_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_BANK_DIR))
 
@@ -19,10 +17,6 @@ class GeneratorNotFoundError(Exception):
 
 
 def _load_chapter_module(lop: int, chuong_so: int):
-    """
-    Import module tương ứng 1 chương.
-    Ví dụ: data/python_bank/toan10/L10_C1.py -> module "toan10.L10_C1"
-    """
     module_name = f"toan{lop}.L{lop}_C{chuong_so}"
     file_path = PYTHON_BANK_DIR / f"toan{lop}" / f"L{lop}_C{chuong_so}.py"
 
@@ -39,10 +33,6 @@ def _load_chapter_module(lop: int, chuong_so: int):
 
 
 def _find_variant_functions(module, generator_id: str) -> list[str]:
-    """
-    Tìm tất cả hàm khớp {generator_id}_01, {generator_id}_02, ...
-    theo quy tắc Content Variant (docs/04_ID_STANDARD.md).
-    """
     pattern = re.compile(rf"^{re.escape(generator_id)}_\d{{2}}$")
     return [
         name for name in dir(module)
@@ -50,11 +40,24 @@ def _find_variant_functions(module, generator_id: str) -> list[str]:
     ]
 
 
+def _chon_bien_the(variants: list[str], used_variants: dict | None, generator_id: str) -> str:
+    """
+    Cấp 2: ưu tiên biến thể CHƯA dùng cho generator_id này (trong cùng 1 lần build đề).
+    Cấp 3: hết biến thể khác thì đành dùng lại biến thể đã dùng.
+    Nếu used_variants=None (không theo dõi), chọn ngẫu nhiên như cũ.
+    """
+    if used_variants is None:
+        return random.choice(variants)
+
+    da_dung = used_variants.setdefault(generator_id, set())
+    chua_dung = [v for v in variants if v not in da_dung]
+
+    chosen = random.choice(chua_dung) if chua_dung else random.choice(variants)
+    da_dung.add(chosen)
+    return chosen
+
+
 def _call_generator_function(func, socau: int, socot: int | None, dong: int | None):
-    """
-    Tự khớp tham số thứ 2 (socot hoặc dong) theo chữ ký thực tế của hàm,
-    vì các hàm trong ngân hàng có thể đặt tên tham số khác nhau.
-    """
     sig = inspect.signature(func)
     params = list(sig.parameters.keys())
 
@@ -71,11 +74,6 @@ def _call_generator_function(func, socau: int, socot: int | None, dong: int | No
 
 
 def resolve_socau(role: str, socau_yeu_cau: int | None) -> int:
-    """
-    Quy tắc phân quyền số câu (docs/10_PYTHON_GENERATOR.md):
-    - Học sinh: luôn = 1, không cho đổi (server tự ép, không tin request).
-    - Giáo viên: theo yêu cầu, mặc định 1 nếu không truyền.
-    """
     if role == "student":
         return 1
     return socau_yeu_cau if socau_yeu_cau else 1
@@ -89,10 +87,13 @@ def call_generator(
     socau_yeu_cau: int | None = None,
     socot: int | None = None,
     dong: int | None = None,
+    used_variants: dict | None = None,
 ) -> dict:
     """
-    Input: Generator ID gốc (không hậu tố _NN), lop, chuong_so, role tài khoản.
-    Output: dict gồm latex_block + metadata (docs/03_DATA_STRUCTURE.md).
+    used_variants: dict dùng chung xuyên suốt 1 LẦN SINH ĐỀ (1 lần gọi
+    generate_exam_pdf), để tránh chọn trùng biến thể khi cùng 1 generator_id
+    bị chọn nhiều lần (do Mapping thiếu ID khác). Truyền None nếu không cần
+    theo dõi (gọi lẻ 1 câu độc lập).
     """
     module = _load_chapter_module(lop, chuong_so)
     variants = _find_variant_functions(module, generator_id)
@@ -103,7 +104,7 @@ def call_generator(
             f"toan{lop}/L{lop}_C{chuong_so}.py"
         )
 
-    chosen_name = random.choice(variants)
+    chosen_name = _chon_bien_the(variants, used_variants, generator_id)
     func = getattr(module, chosen_name)
 
     socau = resolve_socau(role, socau_yeu_cau)
