@@ -14,7 +14,6 @@ import math
 from math_type import *
 
 import re
-import random
 
 # ==========================================
 # CHƯƠNG 1: MỆNH ĐỀ - TẬP HỢP

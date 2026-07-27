@@ -171,12 +171,12 @@
     "id": "L10_C1_TF_A",
     "content": "Mệnh đề",
     "Loai": "Đúng sai",
-    "Dang": "kí hiệu với mọi, tồn tại"
+    "Dang": "Kí hiệu với mọi, tồn tại"
   },
   {
     "id": "L10_C1_TF_B",
-    "content": "Tập hợp",
+    "content": "Mệnh đề",
     "Loai": "Đúng sai",
-    "Dang": "trên tập số thực"
+    "Dang": "Tập hợp"
   }
 ]

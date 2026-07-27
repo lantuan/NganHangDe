@@ -120,3 +120,38 @@ def call_generator(
             "chuong_so": chuong_so,
         },
     }
+
+def resolve_variant(generator_id: str, lop: int, chuong_so: int) -> str:
+    """
+    Chọn 1 biến thể Python duy nhất cho generator_id này.
+    Gọi 1 LẦN DUY NHẤT cho mỗi generator_id trong 1 lần build đề,
+    dùng chung cho mọi mã đề (không đổi biến thể giữa các mã đề).
+    """
+    module = _load_chapter_module(lop, chuong_so)
+    variants = _find_variant_functions(module, generator_id)
+
+    if not variants:
+        raise GeneratorNotFoundError(
+            f"Generator ID '{generator_id}' không có biến thể nào trong "
+            f"toan{lop}/L{lop}_C{chuong_so}.py"
+        )
+
+    return random.choice(variants)
+
+
+def call_locked_variant(
+    generator_id: str,
+    variant_name: str,
+    lop: int,
+    chuong_so: int,
+    socot: int | None = None,
+    dong: int | None = None,
+) -> str:
+    """
+    Gọi ĐÚNG biến thể đã khóa (variant_name) với socau=1,
+    dùng cho từng mã đề riêng lẻ. Mỗi lần gọi, hàm tự random số liệu
+    bên trong nên nội dung khác nhau giữa các mã đề.
+    """
+    module = _load_chapter_module(lop, chuong_so)
+    func = getattr(module, variant_name)
+    return _call_generator_function(func, 1, socot, dong)

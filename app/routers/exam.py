@@ -1,9 +1,20 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23
 from app.services.generator_service import call_generator, GeneratorNotFoundError
-
+from app.services.exam_rules_service import resolve_cau_truc_de, ExamRulesError
+from app.services.exam_blueprint_service import build_blueprint, build_and_select, BlueprintError
+from app.services.question_selector_service import (
+    select_questions_by_level,
+    SelectorError,
+)
+from app.services.exam_assembler_service import (
+    generate_exam_pdf,
+    generate_exam_pdf_auto,
+    AssembleError,
+)
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
@@ -69,15 +80,104 @@ def generate_question(payload: GeneratorRequest):
     except GeneratorNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
+    return {"success": True, "message": "", "data": result}
+
+
+# ======================================================
+# RESOLVE RULES (bảng hệ số -> so_luong/ty_le theo mức độ)
+# ======================================================
+
+class ResolveExamRulesRequest(BaseModel):
+    loai_he_so: str
+    cau_truc_tu_hoc_sinh: dict | None = None
+
+
+@router.post("/resolve-rules")
+def resolve_exam_rules(payload: ResolveExamRulesRequest):
+    try:
+        ket_qua = resolve_cau_truc_de(
+            loai_he_so=payload.loai_he_so,
+            cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+        )
+    except ExamRulesError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"success": True, "message": "", "data": ket_qua}
+
+
+# ======================================================
+# BLUEPRINT (chính thức — đi qua Curriculum, có curriculum_id)
+# ======================================================
+
+class BuildBlueprintRequest(BaseModel):
+    lop: int
+    loai_he_so: str
+    ki_thi: str | None = None
+    pham_vi_chuong: str | None = None
+    cau_truc_tu_hoc_sinh: dict | None = None
+
+
+@router.post("/blueprint")
+def build_blueprint_endpoint(payload: BuildBlueprintRequest):
+    try:
+        result = build_blueprint(
+            lop=payload.lop,
+            loai_he_so=payload.loai_he_so,
+            ki_thi=payload.ki_thi,
+            pham_vi_chuong=payload.pham_vi_chuong,
+            cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+        )
+    except BlueprintError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"success": True, "message": "", "data": result}
+
+
+@router.post("/blueprint-and-select")
+def build_and_select_endpoint(payload: BuildBlueprintRequest):
+    try:
+        result = build_and_select(
+            lop=payload.lop,
+            loai_he_so=payload.loai_he_so,
+            ki_thi=payload.ki_thi,
+            pham_vi_chuong=payload.pham_vi_chuong,
+            cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+        )
+    except BlueprintError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"success": True, "message": "", "data": result}
+
+
+# ======================================================
+# SELECT QUESTIONS — chế độ THỦ CÔNG (debug), không qua Curriculum
+# ======================================================
+
+class SelectQuestionsRequest(BaseModel):
+    lop: int
+    yeu_cau: list[YeuCauItem]
+
+
+@router.post("/select-questions")
+def select_questions_endpoint(payload: SelectQuestionsRequest):
+    try:
+        result = select_questions_by_level(
+            lop=payload.lop,
+            yeu_cau=[yc.model_dump() for yc in payload.yeu_cau],
+        )
+    except (FileNotFoundError, SelectorError) as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
     return {
         "success": True,
         "message": "",
-        "data": result,
+        "data": {"so_luong_da_chon": len(result), "danh_sach": result},
     }
 
-from fastapi.responses import FileResponse
-from app.services.exam_assembler_service import generate_exam_pdf, AssembleError
 
+# ======================================================
+# GENERATE PDF — chế độ THỦ CÔNG (debug), không qua Curriculum
+# ======================================================
 
 class GenerateExamRequest(BaseModel):
     lop: int
@@ -109,48 +209,43 @@ def generate_exam_pdf_endpoint(payload: GenerateExamRequest):
         media_type="application/pdf",
     )
 
-from app.services.question_selector_service import select_questions, SelectorError
 
+# ======================================================
+# GENERATE PDF — chế độ CHÍNH THỨC (WF001, qua Curriculum)
+# ======================================================
 
-class SelectQuestionsRequest(BaseModel):
+class GenerateExamAutoRequest(BaseModel):
     lop: int
-    yeu_cau: list[YeuCauItem]
-
-
-@router.post("/select-questions")
-def select_questions_endpoint(payload: SelectQuestionsRequest):
-    try:
-        result = select_questions(
-            lop=payload.lop,
-            yeu_cau=[yc.model_dump() for yc in payload.yeu_cau],
-        )
-    except (FileNotFoundError, SelectorError) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        "success": True,
-        "message": "",
-        "data": {
-            "so_luong_da_chon": len(result),
-            "danh_sach": result,
-        },
-    }
-
-from app.services.exam_rules_service import resolve_cau_truc_de, ExamRulesError
-
-class ResolveExamRulesRequest(BaseModel):
+    tieu_de: str
+    role: str
     loai_he_so: str
+    ki_thi: str | None = None
+    pham_vi_chuong: str | None = None
     cau_truc_tu_hoc_sinh: dict | None = None
+    socau_ma_de: int | None = None
 
 
-@router.post("/resolve-rules")
-def resolve_exam_rules(payload: ResolveExamRulesRequest):
+@router.post("/generate-pdf-auto")
+def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
+    if payload.role not in ("student", "teacher"):
+        raise HTTPException(400, "role phải là 'student' hoặc 'teacher'")
+
     try:
-        ket_qua = resolve_cau_truc_de(
+        result = generate_exam_pdf_auto(
+            lop=payload.lop,
+            tieu_de=payload.tieu_de,
+            role=payload.role,
             loai_he_so=payload.loai_he_so,
+            ki_thi=payload.ki_thi,
+            pham_vi_chuong=payload.pham_vi_chuong,
             cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+            socau_ma_de=payload.socau_ma_de,
         )
-    except ExamRulesError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    except AssembleError as e:
+        raise HTTPException(400, detail=str(e))
 
-    return {"success": True, "message": "", "data": ket_qua}
+    return FileResponse(
+        path=result["pdf_path"],
+        filename="de_thi.pdf",
+        media_type="application/pdf",
+    )
