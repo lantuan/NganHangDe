@@ -94,6 +94,22 @@ def _sinh_pdf_tu_danh_sach(
                 so_cau_thieu += 1
                 continue
             raise AssembleError(f"Lỗi sinh câu hỏi cho {item['generator_id']}: {e}")
+        except Exception as e:
+            # Có Mapping + có hàm Python, nhưng hàm đó CHẠY BỊ LỖI (bug trong
+            # python_bank — ngân hàng đề chưa hoàn chỉnh). Ở chế độ nháp,
+            # không để 1 hàm lỗi làm sập cả đề — biến thành placeholder và
+            # đi tiếp. Ở chế độ nghiêm ngặt, vẫn dừng như cũ (báo cho giáo
+            # viên biết ngay để sửa trước khi phát đề thật).
+            if cho_phep_thieu:
+                noi_dung += _dong_placeholder_thieu(
+                    item, ghi_chu=f"Lỗi khi chạy hàm sinh câu ({type(e).__name__}): {e}"
+                ) + "\n"
+                so_cau_thieu += 1
+                continue
+            raise AssembleError(
+                f"Hàm sinh câu cho {item.get('generator_id')} bị lỗi khi chạy "
+                f"({type(e).__name__}): {e}"
+            )
 
     latex_content = build_latex_document(tieu_de, noi_dung)
     filename = f"exam_{uuid.uuid4().hex[:8]}"
