@@ -350,10 +350,16 @@ def build_and_select(
     ki_thi: str | None = None,
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
+    cho_phep_thieu: bool = False,
 ) -> dict:
     """
     Ghép build_blueprint() + select_questions() (chế độ chính thức, theo
     curriculum_id) thành 1 bước — dùng cho luồng WF001 đầy đủ.
+
+    cho_phep_thieu=True: chế độ NHÁP, dùng khi ngân hàng đề (Mapping/
+    Python Generator) chưa đầy đủ — thiếu ở đâu sẽ đánh dấu "thieu": True
+    trong danh_sach_generator_id thay vì dừng hẳn. KHÔNG dùng khi ra đề
+    thật cho học sinh (xem question_selector_service.py).
     """
     blueprint = build_blueprint(
         lop=lop,
@@ -364,7 +370,7 @@ def build_and_select(
     )
 
     try:
-        danh_sach_id = select_questions(lop=lop, blueprint=blueprint)
+        danh_sach_id = select_questions(lop=lop, blueprint=blueprint, cho_phep_thieu=cho_phep_thieu)
     except SelectorError as e:
         raise BlueprintError(str(e))
 

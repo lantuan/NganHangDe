@@ -115,6 +115,10 @@ class BuildBlueprintRequest(BaseModel):
     ki_thi: str | None = None
     pham_vi_chuong: str | None = None
     cau_truc_tu_hoc_sinh: dict | None = None
+    # Chế độ NHÁP: True = thiếu Mapping/Generator ở đâu chỉ đánh dấu "thieu",
+    # không dừng cả đề. Dùng khi ngân hàng đề chưa đầy đủ. KHÔNG dùng khi
+    # ra đề thật cho học sinh (để False).
+    cho_phep_thieu: bool = False
 
 
 @router.post("/blueprint")
@@ -142,6 +146,7 @@ def build_and_select_endpoint(payload: BuildBlueprintRequest):
             ki_thi=payload.ki_thi,
             pham_vi_chuong=payload.pham_vi_chuong,
             cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
+            cho_phep_thieu=payload.cho_phep_thieu,
         )
     except BlueprintError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -223,6 +228,9 @@ class GenerateExamAutoRequest(BaseModel):
     pham_vi_chuong: str | None = None
     cau_truc_tu_hoc_sinh: dict | None = None
     socau_ma_de: int | None = None
+    # Chế độ NHÁP — xem chú thích ở BuildBlueprintRequest. Mặc định False
+    # (nghiêm ngặt) để không lỡ phát đề có chữ "THIẾU" cho học sinh.
+    cho_phep_thieu: bool = False
 
 
 @router.post("/generate-pdf-auto")
@@ -240,6 +248,7 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             pham_vi_chuong=payload.pham_vi_chuong,
             cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
             socau_ma_de=payload.socau_ma_de,
+            cho_phep_thieu=payload.cho_phep_thieu,
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))

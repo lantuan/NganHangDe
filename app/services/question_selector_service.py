@@ -7,9 +7,17 @@ ID cuối cùng — không có AI nào tham gia bước này (doc 08_CODE_NODES.
 
 File này có 2 chế độ:
 
-1. select_questions(lop, blueprint)
+1. select_questions(lop, blueprint, cho_phep_thieu=False)
    Chế độ CHÍNH THỨC, dùng trong WF001 (build_and_select). Khớp Mapping
    theo đúng curriculum_id do CN_BuildBlueprint chọn.
+
+   cho_phep_thieu=False (mặc định, dùng khi ra đề THẬT cho học sinh):
+   thiếu Mapping ở đâu -> dừng ngay, báo lỗi SelectorError.
+
+   cho_phep_thieu=True (chế độ NHÁP, dùng khi ngân hàng đề chưa đầy đủ):
+   thiếu Mapping ở đâu -> chèn 1 mục "thieu": True vào kết quả (không
+   dừng), để CN_ExamAssembler tự in ra placeholder trong PDF và tiếp
+   tục sinh phần còn lại. KHÔNG dùng chế độ này khi phát đề thật.
 
 2. select_questions_by_level(lop, yeu_cau)
    Chế độ THỦ CÔNG — giữ lại để test/debug nhanh qua API
@@ -20,7 +28,6 @@ File này có 2 chế độ:
 
 import random
 import re
-from collections import Counter
 
 from app.services.mapping_service import load_mapping, phan_loai_cau
 
@@ -73,19 +80,37 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) 
     return chon
 
 
+def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None, ghi_chu: str) -> dict:
+    """Mục kết quả dùng khi THIẾU Mapping/Generator, ở chế độ nháp (cho_phep_thieu=True)."""
+    return {
+        "generator_id": None,
+        "thieu": True,
+        "chuong_so": chuong_so,
+        "curriculum_id": curriculum_id,
+        "loai_cau": loai_cau,
+        "muc_do": muc_do,
+        "ghi_chu": ghi_chu,
+    }
+
+
 # ============================================================
 # CHẾ ĐỘ CHÍNH THỨC — theo Blueprint (curriculum_id)
 # ============================================================
 
-def select_questions(lop: int, blueprint: dict) -> list[dict]:
+def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = False) -> list[dict]:
     """
     blueprint cần có các khoá: dung_sai, trac_nghiem, tra_loi_ngan, tu_luan
     đúng cấu trúc doc 03_DATA_STRUCTURE.md (mục Blueprint).
+
+    cho_phep_thieu: xem docstring đầu file. Mặc định False (nghiêm ngặt).
     """
     cache: dict[int, list[dict]] = {}
     # da_dung tách riêng theo loại câu: cùng 1 curriculum_id vẫn có thể
     # được dùng cho cả MC lẫn TL trong cùng 1 đề (2 dạng câu khác nhau).
-    da_dung: dict[str, set] = {"trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set()}
+    da_dung: dict[str, set] = {
+        "trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set(),
+        "dung_sai_cau_lon": set(),
+    }
     ket_qua = []
 
     def _mapping_chuong(chuong_so: int) -> list[dict]:
@@ -105,10 +130,13 @@ def select_questions(lop: int, blueprint: dict) -> list[dict]:
             if phan_loai_cau(m) == "dung_sai_cau_lon"
         ]
         if not candidates:
-            raise SelectorError(f"Chương {chuong_so}: không có câu Đúng/Sai nào trong Mapping.")
+            ghi_chu = f"Chương {chuong_so}: không có câu Đúng/Sai nào trong Mapping."
+            if cho_phep_thieu:
+                for _ in range(so_luong):
+                    ket_qua.append(_muc_placeholder(chuong_so, "dung_sai_cau_lon", None, None, ghi_chu))
+                continue
+            raise SelectorError(ghi_chu)
 
-        # TF dùng chung 1 "sổ" da_dung riêng (không lẫn với MC/SA/TL)
-        da_dung.setdefault("dung_sai_cau_lon", set())
         chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung["dung_sai_cau_lon"])
         for c in chosen:
             ket_qua.append({
@@ -135,10 +163,17 @@ def select_questions(lop: int, blueprint: dict) -> list[dict]:
                 if m["id"].startswith(curriculum_id + "_") and phan_loai_cau(m) == loai_cau
             ]
             if not candidates:
-                raise SelectorError(
+                ghi_chu = (
                     f"{curriculum_id} ({LOAI_KY_HIEU[loai_cau]}): "
                     f"không có Generator nào khớp trong Mapping."
                 )
+                if cho_phep_thieu:
+                    for _ in range(so_luong):
+                        ket_qua.append(
+                            _muc_placeholder(chuong_so, loai_cau, item.get("muc_do"), curriculum_id, ghi_chu)
+                        )
+                    continue
+                raise SelectorError(ghi_chu)
 
             chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung[loai_cau])
             for c in chosen:

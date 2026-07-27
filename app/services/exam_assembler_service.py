@@ -12,6 +12,13 @@ Có 2 hàm:
    Chế độ CHÍNH THỨC (WF001) — tự build Blueprint qua Curriculum rồi
    chọn câu theo curriculum_id (select_questions). Dùng cho API mới
    /api/exam/generate-pdf-auto.
+
+   cho_phep_thieu=True: chế độ NHÁP — khi ngân hàng đề (Mapping/Python
+   Generator) chưa đủ, thay vì dừng cả đề, chèn 1 dòng cảnh báo
+   "[THIẾU CÂU HỎI: ...]" vào đúng vị trí đó trong PDF rồi sinh tiếp
+   phần còn lại. Dùng để test khung đề/luồng web trong khi bổ sung dần
+   ngân hàng đề. KHÔNG dùng khi ra đề thật cho học sinh (để mặc định
+   cho_phep_thieu=False lúc đó).
 """
 
 import uuid
@@ -30,14 +37,46 @@ class AssembleError(Exception):
     pass
 
 
-def _sinh_pdf_tu_danh_sach(lop: int, tieu_de: str, role: str,
-                            danh_sach_id: list[dict],
-                            socau_ma_de: int | None) -> dict:
+def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None) -> str:
+    """
+    Dòng LaTeX hiển thị khi 1 câu bị THIẾU (không có Mapping hoặc không có
+    hàm Python), dùng ở chế độ nháp (cho_phep_thieu=True). Chỉ dùng
+    \\textbf, \\fbox, \\center — không cần package LaTeX phụ, an toàn với
+    mọi document class.
+    """
+    nhan = item.get("curriculum_id") or f"chương {item.get('chuong_so')}"
+    loai = item.get("loai_cau", "")
+    chi_tiet = ghi_chu or item.get("ghi_chu") or ""
+
+    dong = (
+        r"\begin{center}\fbox{\textbf{[THIẾU CÂU HỎI: " + str(nhan) +
+        r" - " + str(loai) + r"]}}\end{center}"
+    )
+    if chi_tiet:
+        dong += r"\\ {\small\textit{" + chi_tiet + r"}}\\"
+    return dong
+
+
+def _sinh_pdf_tu_danh_sach(
+    lop: int,
+    tieu_de: str,
+    role: str,
+    danh_sach_id: list[dict],
+    socau_ma_de: int | None,
+    cho_phep_thieu: bool = False,
+) -> dict:
     """Phần dùng chung: gọi Python Generator -> ghép LaTeX -> biên dịch PDF."""
     used_variants: dict = {}
     noi_dung = ""
+    so_cau_thieu = 0
 
     for item in danh_sach_id:
+        # Mục đã được đánh dấu THIẾU ngay từ bước chọn câu (không có Mapping)
+        if item.get("thieu"):
+            noi_dung += _dong_placeholder_thieu(item) + "\n"
+            so_cau_thieu += 1
+            continue
+
         try:
             ket_qua = call_generator(
                 generator_id=item["generator_id"],
@@ -49,6 +88,11 @@ def _sinh_pdf_tu_danh_sach(lop: int, tieu_de: str, role: str,
             )
             noi_dung += ket_qua["latex_block"] + "\n"
         except GeneratorNotFoundError as e:
+            # Có Mapping nhưng chưa có hàm Python tương ứng
+            if cho_phep_thieu:
+                noi_dung += _dong_placeholder_thieu(item, ghi_chu=str(e)) + "\n"
+                so_cau_thieu += 1
+                continue
             raise AssembleError(f"Lỗi sinh câu hỏi cho {item['generator_id']}: {e}")
 
     latex_content = build_latex_document(tieu_de, noi_dung)
@@ -61,8 +105,9 @@ def _sinh_pdf_tu_danh_sach(lop: int, tieu_de: str, role: str,
         raise AssembleError(str(e))
 
     return {
-        "so_cau_da_sinh": len(danh_sach_id),
-        "danh_sach_generator_id": [d["generator_id"] for d in danh_sach_id],
+        "so_cau_da_sinh": len(danh_sach_id) - so_cau_thieu,
+        "so_cau_thieu": so_cau_thieu,
+        "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
         "tex_path": str(tex_path),
         "pdf_path": str(pdf_path),
     }
@@ -93,6 +138,7 @@ def generate_exam_pdf_auto(
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
     socau_ma_de: int | None = None,
+    cho_phep_thieu: bool = False,
 ) -> dict:
     """
     Chế độ CHÍNH THỨC (WF001): CN_LoadExamScope -> CN_LoadCurriculum ->
@@ -112,10 +158,12 @@ def generate_exam_pdf_auto(
 
     from app.services.question_selector_service import select_questions
     try:
-        danh_sach_id = select_questions(lop=lop, blueprint=blueprint)
+        danh_sach_id = select_questions(lop=lop, blueprint=blueprint, cho_phep_thieu=cho_phep_thieu)
     except SelectorError as e:
         raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
 
-    ket_qua = _sinh_pdf_tu_danh_sach(lop, tieu_de, role, danh_sach_id, socau_ma_de)
+    ket_qua = _sinh_pdf_tu_danh_sach(
+        lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu=cho_phep_thieu
+    )
     ket_qua["blueprint"] = blueprint
     return ket_qua
