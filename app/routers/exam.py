@@ -1,3 +1,6 @@
+import zipfile
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -231,12 +234,17 @@ class GenerateExamAutoRequest(BaseModel):
     # Chế độ NHÁP — xem chú thích ở BuildBlueprintRequest. Mặc định False
     # (nghiêm ngặt) để không lỡ phát đề có chữ "THIẾU" cho học sinh.
     cho_phep_thieu: bool = False
+    # Switch_OutputFormat: "pdf" (mặc định) | "tex" | "zip" (PDF + TEX cùng 1 đề)
+    dinh_dang: str = "pdf"
 
 
 @router.post("/generate-pdf-auto")
 def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
     if payload.role not in ("student", "teacher"):
         raise HTTPException(400, "role phải là 'student' hoặc 'teacher'")
+
+    if payload.dinh_dang not in ("pdf", "tex", "zip"):
+        raise HTTPException(400, "dinh_dang phải là 'pdf', 'tex' hoặc 'zip'")
 
     try:
         result = generate_exam_pdf_auto(
@@ -252,6 +260,29 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
+
+    # Switch_OutputFormat: cùng 1 lần sinh đề (result) -> trả về đúng định
+    # dạng người dùng chọn. Không sinh lại đề mới, nên PDF và TEX luôn khớp
+    # nhau (cùng bộ câu hỏi/biến thể đã chọn ở generate_exam_pdf_auto).
+    if payload.dinh_dang == "tex":
+        return FileResponse(
+            path=result["tex_path"],
+            filename="de_thi.tex",
+            media_type="application/x-tex",
+        )
+
+    if payload.dinh_dang == "zip":
+        pdf_path = Path(result["pdf_path"])
+        tex_path = Path(result["tex_path"])
+        zip_path = pdf_path.with_suffix(".zip")
+        with zipfile.ZipFile(zip_path, "w") as zf:
+            zf.write(pdf_path, arcname="de_thi.pdf")
+            zf.write(tex_path, arcname="de_thi.tex")
+        return FileResponse(
+            path=zip_path,
+            filename="de_thi.zip",
+            media_type="application/zip",
+        )
 
     return FileResponse(
         path=result["pdf_path"],
