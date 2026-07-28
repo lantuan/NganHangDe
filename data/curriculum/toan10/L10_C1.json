@@ -119,7 +119,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C1_B1_TH013",
+    "id": "L10_C1_B1_NB013",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Mệnh đề và Tập hợp",
@@ -127,7 +127,7 @@
     "bai": "Mệnh đề",
     "bai_so": "1",
     "subsection": null,
-    "MucDo": "TH",
+    "MucDo": "NB",
     "verb": "Phát biểu được",
     "content": "Phát biểu được mệnh đề có chứa kí hiệu ∀, ∃.",
     "examples": [],

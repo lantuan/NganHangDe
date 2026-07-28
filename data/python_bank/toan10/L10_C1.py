@@ -4510,7 +4510,7 @@ def L10_C1_TF_A_01(socau, socot=1):
     return cauTF
 
 
-def L10_C1_B1_TH015_MC_A_01(socau, dang):
+def L10_C1_B1_NB015_MC_A_01(socau, dang):
 
     x = Symbol('x')
     y = Symbol('y')
@@ -4717,7 +4717,7 @@ def L10_C1_B1_TH015_MC_A_01(socau, dang):
 
     return cauTN
 
-def L10_C1_B1_TH015_MC_A_02(socau, dang):
+def L10_C1_B1_NB015_MC_A_02(socau, dang):
 
     x = Symbol('x')
     y = Symbol('y')
@@ -4884,7 +4884,7 @@ def L10_C1_B1_TH015_MC_A_02(socau, dang):
 
     return cauTN
 
-def L10_C1_B1_TH015_MC_B_01(socau, dang):
+def L10_C1_B1_NB015_MC_B_01(socau, dang):
 
     x = Symbol('x')
     y = Symbol('y')
