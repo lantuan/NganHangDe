@@ -120,3 +120,66 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan
+
+===============================================================================
+
+Version 2.3
+
+Ngày
+
+2026-07-28
+
+Nội dung
+
+- Viết app/services/curriculum_service.py (CN_LoadCurriculum):
+  load_curriculum, load_curriculum_for_scope, group_by_muc_do.
+- Viết lại app/services/exam_blueprint_service.py: build_blueprint
+  chọn câu theo curriculum_id (đúng chuẩn doc 04), thêm
+  _chon_curriculum_id (round-robin theo bài/mức độ), giới hạn số
+  câu tra_loi_ngan/tu_luan tối đa mỗi chương.
+- Viết lại app/services/question_selector_service.py: select_questions
+  khớp Mapping theo curriculum_id + Loại câu, có cơ chế xoay vòng
+  biến thể nội dung (_xoay_vong_bien_the).
+- Thêm chế độ nháp `cho_phep_thieu` xuyên suốt build_blueprint,
+  select_questions, generate_exam_pdf_auto: khi Mapping/Generator
+  còn thiếu, chèn khung "[THIẾU CÂU HỎI: ...]" vào đúng vị trí
+  trong PDF thay vì dừng cả đề. Mặc định false (nghiêm ngặt).
+- Cập nhật app/services/exam_assembler_service.py: thêm
+  _escape_latex (escape ký tự đặc biệt LaTeX: _ % & # $ { } ~ ^ \)
+  cho mọi text thô chèn vào tài liệu (curriculum_id, ghi chú lỗi).
+- Cập nhật app/services/pdf_service.py: đặt TEXINPUTS trỏ tới
+  data/config để pdflatex luôn tìm thấy ex_test.sty bất kể thư mục
+  làm việc của subprocess; bắt lỗi FileNotFoundError (thiếu
+  pdflatex) và TimeoutExpired rõ ràng.
+- Bổ sung data/config/ex_test.sty (bản chính thức "Ex_test v3.3.4",
+  Trần Anh Tuấn & Dương Phước Sang) — thay bản dựng tạm trước đó.
+- Cập nhật app/routers/exam.py: endpoint /api/exam/generate-pdf-auto
+  thêm tham số `dinh_dang` ("pdf" | "tex" | "zip") — Switch_OutputFormat
+  rút gọn thành 1 API, trả PDF/TEX/ZIP của CÙNG một lần sinh đề
+  (không sinh lại nên không lệch câu hỏi giữa các định dạng).
+- Sửa lỗi cài đặt hệ thống trên VPS: PATH thiếu trong systemd
+  service khiến không gọi được pdflatex; cài texlive-lang-other
+  cho font tiếng Việt.
+- Xác nhận: các file app/core/security.py, app/core/supabase.py,
+  app/models/user.py, app/routers/auth.py, app/routers/chat.py,
+  app/routers/home.py, app/services/supabase_service.py là công
+  việc của Mai Hà Lan làm song song (đăng nhập/đăng ký qua
+  Supabase, trang Chat AI nối n8n) — chưa có trong sổ tay trước
+  Version 2.3, nay được ghi nhận chính thức.
+- Ghi nhận: app/routers/ai.py, app/routers/api.py, app/services/
+  ai_service.py, app/services/exam_service.py, app/services/
+  request_parser.py hiện đang RỖNG (file trống, chưa triển khai) —
+  vai trò dự kiến của các file này (phân tích ngôn ngữ tự nhiên,
+  cầu nối Chat → API sinh đề) đang tạm thời đảm nhiệm bởi n8n
+  (CHV_Fun) theo doc 06 Version 2.3.
+- Xác nhận sai lệch giữa doc 05 (API_SPECIFICATION) và API thực tế
+  đang chạy: các route thực tế nằm dưới /api/exam/... (scope,
+  generator, resolve-rules, blueprint, blueprint-and-select,
+  select-questions, generate-pdf, generate-pdf-auto) khác với
+  route dự kiến ban đầu (/api/exam/generate, /api/exam/pdf,
+  /api/exam/latex...). Xem mục "Hiện trạng triển khai" trong
+  doc 05 Version 2.3.
+
+Người thực hiện
+
+Mai Hà Lan

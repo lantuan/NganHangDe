@@ -203,3 +203,67 @@ POST /api/admin/create_class
 - Không trả HTML.
 - Validate whitelist tham số path (subject, chapter) trước khi
   ghép vào đường dẫn file — không cho phép path traversal.
+===============================================================================
+
+# Hiện trạng triển khai (Version 2.3 — 2026-07-28)
+
+Các route dưới đây là API THẬT đang chạy trên VPS, thay thế phần
+"Generate Exam / Generate PDF" dự kiến ở trên (chưa xây theo đúng
+tên đó). Response vẫn theo cấu trúc chuẩn ở phần trên khi trả JSON;
+khi trả file thì trả thẳng file nhị phân (không bọc JSON).
+
+## Exam — chính thức (qua Curriculum, dùng cho Chat/n8n)
+
+POST /api/exam/blueprint
+POST /api/exam/blueprint-and-select
+POST /api/exam/generate-pdf-auto
+
+Input chung (generate-pdf-auto):
+{
+  "lop": 10,
+  "tieu_de": "",
+  "role": "teacher" | "student",
+  "loai_he_so": "HeSo1" | "HeSo2_HeSo3",
+  "ki_thi": null,
+  "pham_vi_chuong": "chuong_1",
+  "cau_truc_tu_hoc_sinh": null,
+  "socau_ma_de": null,
+  "cho_phep_thieu": false,
+  "dinh_dang": "pdf"
+}
+
+Output: file PDF/TEX/ZIP (theo `dinh_dang`).
+
+## Exam — thủ công / debug (không qua Curriculum)
+
+GET  /api/exam/scope
+POST /api/exam/generator
+POST /api/exam/resolve-rules
+POST /api/exam/select-questions
+POST /api/exam/generate-pdf
+
+## Đăng nhập / Đăng ký (KHÔNG theo /api/auth/* như dự kiến)
+
+Triển khai thực tế dùng Supabase Auth + trang HTML (Jinja2), không
+phải API JSON riêng:
+
+GET  /login              (trang đăng nhập)
+POST /login               (form, redirect /chat)
+GET  /register            (chọn vai trò)
+GET  /register/student
+POST /register/student
+GET  /register/teacher    (coming soon)
+
+## Chat
+
+GET  /chat                (trang chat)
+POST /chat                (form message → n8n webhook → kết quả)
+
+## Chưa triển khai (vẫn là TODO thật, không phải chỉ thiếu tài liệu)
+
+- /api/exam/grade, /api/student/analysis, /api/admin/*
+- /api/auth/* dạng JSON (hiện dùng cookie/session của Supabase qua
+  trang HTML thay vì API JSON riêng — cần quyết định lại nếu sau
+  này tách Frontend riêng khỏi Jinja2)
+- Switch_OutputFormat "web_test", "json" (chỉ có "pdf"/"tex"/"zip")
+- CN_QuestionValidator (không có bước kiểm tra trùng lặp câu hỏi)
