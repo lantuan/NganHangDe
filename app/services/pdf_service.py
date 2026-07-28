@@ -15,7 +15,7 @@ def _texinputs_env() -> dict:
     """
     Thêm data/config (nơi chứa ex_test.sty, latex_template.tex) vào đường
     tìm kiếm của pdflatex, để không phụ thuộc thư mục làm việc hiện tại
-    (working directory) lúc gọi subprocess. "//" ở cuối = tìm cả thư mục con.
+    (working directory) lúc gọi subprocess.
     """
     env = os.environ.copy()
     sep = ":" if os.name != "nt" else ";"
@@ -47,9 +47,6 @@ def compile_pdf(tex_path: Path) -> Path:
                 env=env,
             )
         except FileNotFoundError:
-            # Máy chủ chưa cài pdflatex (chương trình LaTeX), hoặc systemd
-            # service không thấy được PATH có pdflatex (xem doc 14, kiểm tra
-            # Environment="PATH=..." trong file .service).
             raise PdfCompileError(
                 "Không tìm thấy chương trình 'pdflatex'. Kiểm tra: (1) đã cài "
                 "LaTeX chưa (sudo apt install texlive-latex-base texlive-latex-extra); "
