@@ -277,6 +277,8 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
         zip_path = pdf_path.with_suffix(".zip")
         with zipfile.ZipFile(zip_path, "w") as zf:
             zf.write(pdf_path, arcname="de_thi.pdf")
+            if result.get("pdf_loigiai_path"):
+                zf.write(Path(result["pdf_loigiai_path"]), arcname="loigiai.pdf")
             zf.write(tex_path, arcname="de_thi.tex")
         return FileResponse(
             path=zip_path,
