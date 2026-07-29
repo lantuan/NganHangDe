@@ -10,7 +10,7 @@ router = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
 
-N8N_WEBHOOK_URL = "https://fqrpl.n8npanel.com/webhook-test/chat"
+N8N_WEBHOOK_URL = "https://fqrpl.n8npanel.com/webhook/chat"
 
 # Nơi lưu file (PDF/TEX/ZIP) do n8n trả về, để Frontend tải qua /static
 DOWNLOAD_DIR = Path("app/static/downloads")
