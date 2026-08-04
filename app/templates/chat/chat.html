@@ -496,14 +496,23 @@ ${html}
             }
         }
 
-        // ===== SỰ KIỆN FORM =====
+        // ===== SỰ KIỆN FORM (co chan gui trung) =====
+        let dangGui = false;
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
+            if (dangGui) return;
             const text = textarea.value.trim();
             if (!text) return;
+            dangGui = true;
+            document.getElementById("send-btn").disabled = true;
             textarea.value = "";
             textarea.style.height = "auto";
-            await sendMessage(text);
+            try {
+                await sendMessage(text);
+            } finally {
+                dangGui = false;
+                document.getElementById("send-btn").disabled = false;
+            }
         });
 
         // Enter để gửi, Shift+Enter để xuống dòng
