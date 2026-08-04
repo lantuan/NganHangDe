@@ -46,13 +46,13 @@ async def chat_post(
         r = requests.post(
             N8N_WEBHOOK_URL,
             json={"message": message},
-            timeout=240,
+            timeout=300,
         )
     except requests.exceptions.Timeout:
-        print("LOI CHAT: n8n qua thoi gian cho (240s)")
+        print("LOI CHAT: n8n qua thoi gian cho (300s)")
         return {
             "success": False,
-            "message": "AI xu ly qua lau (qua 4 phut), vui long thu lai.",
+            "message": "AI xu ly qua lau (qua 5 phut), vui long thu lai.",
             "data": None,
         }
     except requests.exceptions.RequestException as e:
