@@ -76,20 +76,52 @@ async def login(
 
         print(result)
 
-        if result.user is None:
+        if result.user is None or result.session is None:
             return RedirectResponse(
                 "/login",
                 status_code=303,
             )
 
-        return RedirectResponse(
+        response = RedirectResponse(
             "/chat",
             status_code=303,
         )
+        response.set_cookie(
+            key="sb_access_token",
+            value=result.session.access_token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=60 * 60 * 24 * 7,
+        )
+        response.set_cookie(
+            key="sb_refresh_token",
+            value=result.session.refresh_token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=60 * 60 * 24 * 30,
+        )
+        return response
 
     except Exception as e:
         print("LOI LOGIN:", e)
         raise
+
+
+# ======================================================
+# LOGOUT
+# ======================================================
+
+@router.get("/logout")
+async def logout():
+    response = RedirectResponse(
+        "/login",
+        status_code=303,
+    )
+    response.delete_cookie("sb_access_token")
+    response.delete_cookie("sb_refresh_token")
+    return response
 
 # ======================================================
 # REGISTER STUDENT
