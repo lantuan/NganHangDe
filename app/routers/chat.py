@@ -8,6 +8,7 @@ from starlette.concurrency import run_in_threadpool
 import requests
 
 from app.core.deps import get_current_user
+from app.services import history_service
 
 router = APIRouter()
 
@@ -41,12 +42,16 @@ async def chat(request: Request):
     )
 
 
-def _goi_n8n(message: str):
+def _goi_n8n(message: str, user_id: str, conversation_id: str):
     """Ham dong bo (blocking) - se duoc chay trong threadpool rieng,
     khong chan event loop chinh cua uvicorn trong luc cho n8n xu ly lau."""
     return requests.post(
         N8N_WEBHOOK_URL,
-        json={"message": message},
+        json={
+            "message": message,
+            "user_id": user_id,
+            "conversation_id": conversation_id,
+        },
         timeout=300,
     )
 
@@ -55,6 +60,7 @@ def _goi_n8n(message: str):
 async def chat_post(
     request: Request,
     message: str = Form(...),
+    conversation_id: str = Form(...),
 ):
     user = get_current_user(request)
     if user is None:
@@ -69,11 +75,18 @@ async def chat_post(
     print(message)
     print("==========================")
 
+    history_service.luu_tin_nhan(
+        user_id=user.id,
+        conversation_id=conversation_id,
+        role="user",
+        noi_dung=message,
+    )
+
     r = None
     loi_cuoi = None
     for lan_thu in range(2):
         try:
-            r = await run_in_threadpool(_goi_n8n, message)
+            r = await run_in_threadpool(_goi_n8n, message, user.id, conversation_id)
             break
         except requests.exceptions.Timeout as e:
             loi_cuoi = e
@@ -83,11 +96,12 @@ async def chat_post(
             print(f"LOI CHAT: khong ket noi duoc n8n (lan {lan_thu + 1}/2) ->", e)
 
     if r is None:
-        return {
-            "success": False,
-            "message": "Khong ket noi duoc voi AI sau 2 lan thu, vui long thu lai.",
-            "data": None,
-        }
+        loi = "Khong ket noi duoc voi AI sau 2 lan thu, vui long thu lai."
+        history_service.luu_tin_nhan(
+            user_id=user.id, conversation_id=conversation_id,
+            role="assistant", noi_dung=loi, loai_phan_hoi="error",
+        )
+        return {"success": False, "message": loi, "data": None}
 
     print(r.status_code)
 
@@ -96,14 +110,22 @@ async def chat_post(
     # n8n tra JSON binh thuong (cau tra loi chat thuong, khong sinh de)
     if content_type == "application/json":
         try:
-            return r.json()
+            ket_qua = r.json()
         except ValueError:
             print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
-            return {
+            ket_qua = {
                 "success": False,
                 "message": "AI chua xu ly duoc yeu cau nay. Vui long thu lai voi yeu cau tao de cu the (lop/chuong/so cau...).",
                 "data": None,
             }
+
+        history_service.luu_tin_nhan(
+            user_id=user.id, conversation_id=conversation_id,
+            role="assistant",
+            noi_dung=ket_qua.get("message") or ket_qua.get("reply"),
+            loai_phan_hoi="text" if ket_qua.get("success", True) else "error",
+        )
+        return ket_qua
 
     # n8n tra file nhi phan (PDF/TEX/ZIP tu /api/exam/generate-pdf-auto)
     if content_type in _EXT_THEO_CONTENT_TYPE:
@@ -111,13 +133,20 @@ async def chat_post(
         filename = f"{uuid.uuid4().hex[:10]}.{ext}"
         file_path = DOWNLOAD_DIR / filename
         file_path.write_bytes(r.content)
+        file_url = f"/static/downloads/{filename}"
+
+        history_service.luu_tin_nhan(
+            user_id=user.id, conversation_id=conversation_id,
+            role="assistant", noi_dung="Da tao de xong.",
+            loai_phan_hoi="file", duong_dan_file=file_url,
+        )
 
         return {
             "success": True,
             "message": "Da tao de xong.",
             "data": {
                 "type": "file",
-                "url": f"/static/downloads/{filename}",
+                "url": file_url,
                 "filename": filename,
             },
         }
@@ -125,8 +154,9 @@ async def chat_post(
     # Truong hop la khac (n8n loi, tra HTML/text...) - khong de 500 lang le
     print("LOI CHAT: content-type khong xac dinh ->", content_type)
     print(r.text[:1000])
-    return {
-        "success": False,
-        "message": "Khong hieu phan hoi tu n8n.",
-        "data": None,
-    }
+    loi = "Khong hieu phan hoi tu n8n."
+    history_service.luu_tin_nhan(
+        user_id=user.id, conversation_id=conversation_id,
+        role="assistant", noi_dung=loi, loai_phan_hoi="error",
+    )
+    return {"success": False, "message": loi, "data": None}
