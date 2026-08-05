@@ -487,7 +487,24 @@ ${html}
                 const data = await response.json();
 
                 removeTyping();
-                addAIMessage(marked.parse(data.reply || ""));
+
+                if (data.success) {
+                    if (data.data && data.data.type === "file") {
+                        const url = data.data.url;
+                        const filename = data.data.filename;
+                        addAIMessage(
+                            `<p>${data.message || "Đã tạo đề xong."}</p>` +
+                            `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">` +
+                            `📄 Tải file: ${filename}</a></p>`
+                        );
+                    } else if (data.reply) {
+                        addAIMessage(marked.parse(data.reply));
+                    } else {
+                        addAIMessage(marked.parse(data.message || "Đã xử lý xong."));
+                    }
+                } else {
+                    addAIMessage("⚠️ " + (data.message || "Có lỗi xảy ra, vui lòng thử lại."));
+                }
 
             } catch (err) {
                 removeTyping();
