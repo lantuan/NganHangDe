@@ -344,6 +344,9 @@
                     <p class="text-xs text-slate-500" style="margin:0;">Tạo đề • Chấm bài • Phân tích học lực</p>
                 </div>
                 <div class="flex items-center gap-2">
+                    <a href="/" class="icon-btn w-10 h-10 rounded-xl flex items-center justify-center" title="Ve trang chu">
+                        <span class="material-symbols-outlined">home</span>
+                    </a>
                     <button class="icon-btn w-10 h-10 rounded-xl">
                         <span class="material-symbols-outlined">share</span>
                     </button>
@@ -410,6 +413,8 @@
         const messages = document.getElementById("messages");
         const form = document.getElementById("chat-form");
         const textarea = document.getElementById("message");
+
+        let conversationId = crypto.randomUUID();
 
         function scrollBottom() {
             document.getElementById("chat-area").scrollTop =
@@ -478,6 +483,7 @@ ${html}
             try {
                 const formData = new FormData();
                 formData.append("message", text);
+                formData.append("conversation_id", conversationId);
 
                 const response = await fetch("/chat", {
                     method: "POST",
@@ -487,6 +493,11 @@ ${html}
                 const data = await response.json();
 
                 removeTyping();
+
+                if (data.need_login) {
+                    window.location.href = "/login";
+                    return;
+                }
 
                 if (data.success) {
                     if (data.data && data.data.type === "file") {
@@ -542,6 +553,7 @@ ${html}
 
         // ===== CHAT MỚI =====
         function newChat() {
+            conversationId = crypto.randomUUID();
             messages.innerHTML = `
 <div class="text-center py-16">
 <div class="w-20 h-20 rounded-3xl bg-primary mx-auto flex items-center justify-center text-white">
