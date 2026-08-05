@@ -4,6 +4,7 @@ import uuid
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from starlette.concurrency import run_in_threadpool
 import requests
 
 router = APIRouter()
@@ -34,6 +35,16 @@ async def chat(request: Request):
     )
 
 
+def _goi_n8n(message: str):
+    """Ham dong bo (blocking) - se duoc chay trong threadpool rieng,
+    khong chan event loop chinh cua uvicorn trong luc cho n8n xu ly lau."""
+    return requests.post(
+        N8N_WEBHOOK_URL,
+        json={"message": message},
+        timeout=300,
+    )
+
+
 @router.post("/chat")
 async def chat_post(
     message: str = Form(...)
@@ -42,24 +53,23 @@ async def chat_post(
     print(message)
     print("==========================")
 
-    try:
-        r = requests.post(
-            N8N_WEBHOOK_URL,
-            json={"message": message},
-            timeout=300,
-        )
-    except requests.exceptions.Timeout:
-        print("LOI CHAT: n8n qua thoi gian cho (300s)")
+    r = None
+    loi_cuoi = None
+    for lan_thu in range(2):
+        try:
+            r = await run_in_threadpool(_goi_n8n, message)
+            break
+        except requests.exceptions.Timeout as e:
+            loi_cuoi = e
+            print(f"LOI CHAT: n8n qua thoi gian cho (lan {lan_thu + 1}/2)")
+        except requests.exceptions.RequestException as e:
+            loi_cuoi = e
+            print(f"LOI CHAT: khong ket noi duoc n8n (lan {lan_thu + 1}/2) ->", e)
+
+    if r is None:
         return {
             "success": False,
-            "message": "AI xu ly qua lau (qua 5 phut), vui long thu lai.",
-            "data": None,
-        }
-    except requests.exceptions.RequestException as e:
-        print("LOI CHAT: khong ket noi duoc n8n ->", e)
-        return {
-            "success": False,
-            "message": "Khong ket noi duoc voi AI, vui long thu lai.",
+            "message": "Khong ket noi duoc voi AI sau 2 lan thu, vui long thu lai.",
             "data": None,
         }
 
