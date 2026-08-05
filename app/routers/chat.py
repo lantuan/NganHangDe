@@ -2,10 +2,12 @@ from pathlib import Path
 import uuid
 
 from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.concurrency import run_in_threadpool
 import requests
+
+from app.core.deps import get_current_user
 
 router = APIRouter()
 
@@ -26,6 +28,10 @@ _EXT_THEO_CONTENT_TYPE = {
 
 @router.get("/chat", response_class=HTMLResponse)
 async def chat(request: Request):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
     return templates.TemplateResponse(
         request=request,
         name="chat/chat.html",
@@ -47,8 +53,18 @@ def _goi_n8n(message: str):
 
 @router.post("/chat")
 async def chat_post(
-    message: str = Form(...)
+    request: Request,
+    message: str = Form(...),
 ):
+    user = get_current_user(request)
+    if user is None:
+        return {
+            "success": False,
+            "message": "Ban chua dang nhap hoac phien da het han. Vui long dang nhap lai.",
+            "data": None,
+            "need_login": True,
+        }
+
     print("========== CHAT ==========")
     print(message)
     print("==========================")
@@ -79,7 +95,15 @@ async def chat_post(
 
     # n8n tra JSON binh thuong (cau tra loi chat thuong, khong sinh de)
     if content_type == "application/json":
-        return r.json()
+        try:
+            return r.json()
+        except ValueError:
+            print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
+            return {
+                "success": False,
+                "message": "AI chua xu ly duoc yeu cau nay. Vui long thu lai voi yeu cau tao de cu the (lop/chuong/so cau...).",
+                "data": None,
+            }
 
     # n8n tra file nhi phan (PDF/TEX/ZIP tu /api/exam/generate-pdf-auto)
     if content_type in _EXT_THEO_CONTENT_TYPE:
