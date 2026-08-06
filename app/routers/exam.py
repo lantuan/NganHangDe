@@ -20,6 +20,7 @@ from app.services.exam_assembler_service import (
 )
 
 from app.services import history_service
+from app.services.answer_parser_service import trich_dap_an, AnswerParseError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -367,3 +368,40 @@ def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
         filename="loigiai.pdf",
         media_type="application/pdf",
     )
+
+
+# ======================================================
+# DEBUG: trich dap an tu 1 cau hoi (chua dung trong cham bai that,
+# chi de kiem tra bo trich dap an truoc khi noi vao WF007)
+# ======================================================
+
+@router.post("/debug-parse-answer")
+def debug_parse_answer_endpoint(payload: GeneratorRequest):
+    if payload.role not in ("student", "teacher"):
+        raise HTTPException(status_code=400, detail="role phải là 'student' hoặc 'teacher'")
+    try:
+        result = call_generator(
+            generator_id=payload.generator_id,
+            lop=payload.lop,
+            chuong_so=payload.chuong_so,
+            role=payload.role,
+            socau_yeu_cau=payload.socau,
+            socot=payload.socot,
+            dong=payload.dong,
+        )
+    except GeneratorNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    try:
+        dap_an = trich_dap_an(result["latex_block"])
+    except AnswerParseError as e:
+        raise HTTPException(status_code=500, detail=f"Loi trich dap an: {e}")
+    return {
+        "success": True,
+        "message": "",
+        "data": {
+            "generator_id": result["generator_id"],
+            "variant_used": result["variant_used"],
+            "dap_an": dap_an,
+            "latex_block": result["latex_block"],
+        },
+    }
