@@ -270,3 +270,17 @@ muc_do, loai, dang, tags, version, created_at.
   văn bản nhận xét cuối cùng.
 - Mọi Output đều sinh từ Exam Object.
 
+
+===============================================================================
+
+# Trạng thái triển khai thực tế — đáp án (cập nhật 2026-08-06)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.5.
+
+Question Object thực tế (latex_block, xem ghi chú "Question Object dạng
+LaTeX string" ở trên) không có field `answer` tách riêng. Đáp án được
+trích SAU, từ chính latex_block đó, bằng app/services/answer_parser_service.py
+(dựa vào macro \True/\shortans/\loigiai có sẵn trong ex_test.sty — không
+sửa Generator Function). Kết quả trích được lưu thành 1 file JSON riêng
+(1 file JSON = đúng 1 lần sinh đề, danh sách câu theo so_thu_tu), KHÔNG
+lưu answer_key ngược lại vào Question Object hay Exam Object.

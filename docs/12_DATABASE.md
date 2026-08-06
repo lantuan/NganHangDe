@@ -132,3 +132,14 @@ Xem chi tiết đầy đủ ở docs/16_CHANGELOG.md, Version 2.4.
 - Khi triển khai WF007 (chấm bài) cần rà soát lại tên bảng để không
   trùng lần nữa: exam_history đã bị dùng cho mục đích khác so với
   doc này.
+
+
+===============================================================================
+
+# Trạng thái triển khai thực tế — file_de (cập nhật 2026-08-06)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.5.
+
+file_de.loai_file hiện có 4 giá trị: de, tex, loigiai, dapan_json (thêm
+dapan_json cho bước chuẩn bị chấm bài — WF007). Đã sửa CHECK constraint
+file_de_loai_file_check trên Supabase để cho phép giá trị mới này.

@@ -257,3 +257,55 @@ Ghi nhận còn thiếu / để sau
 Người thực hiện
 
 Mai Hà Lan (cùng Claude)
+
+
+===============================================================================
+
+Version 2.5
+
+Ngày
+
+2026-08-06
+
+Nội dung
+
+- Bắt đầu Giai đoạn A hướng tới WF007_GradeExam (chấm bài), theo lộ trình
+  đã thống nhất: WF007 (chấm bài) -> WF003 (phân tích học lực) -> WF002
+  (sinh đề theo năng lực), vì WF003/WF002 đều cần dữ liệu điểm số có được
+  từ WF007 trước.
+- Phát hiện quan trọng: hệ thống hiện tại không có "Question Object" tách
+  field (generator_id, answer, solution...) như doc 03 mô tả cho Generator
+  dạng mã đề — mỗi câu chỉ là 1 chuỗi LaTeX (latex_block). Tuy nhiên đáp án
+  ĐÃ có sẵn trong chuỗi đó dưới dạng macro của ex_test.sty (\True đánh dấu
+  đáp án đúng trong \choice, \shortans chứa đáp án tự luận ngắn, \loigiai
+  chứa lời giải) — không cần sửa từng hàm sinh câu trong ngân hàng đề.
+- Thêm app/services/answer_parser_service.py (CN_GradeAnswer — bước chuẩn
+  bị): đọc latex_block bằng cách đếm ngoặc {} lồng nhau (không dùng regex
+  đơn giản, vì nội dung LaTeX bên trong có thể chứa {} lồng như \frac{a}{b}),
+  trích được: loai_cau (MC/SA/TL), dap_an_dung, phuong_an (4 lựa chọn A-D
+  cho MC), loi_giai. Đã kiểm chứng bằng dữ liệu thật qua endpoint debug
+  POST /api/exam/debug-parse-answer.
+- Hạn chế đã biết: câu tự luận nhiều ý nhỏ dùng lệnh \SA{...} (bí danh của
+  \shortans, xem TL_answer_const trong math_type.py) cho đáp số TỪNG Ý —
+  bộ trích hiện tại chưa tách được đáp số riêng từng ý, chỉ lấy được lời
+  giải chung. Cần tinh chỉnh thêm khi làm chấm câu tự luận nhiều ý.
+- Sửa app/services/exam_assembler_service.py: trong lúc sinh đề (đúng 1
+  lần gọi generate_exam_pdf_auto, KHÔNG sinh lại câu hỏi), trích đáp án
+  của từng câu ngay từ latex_block vừa dùng để ghép PDF, lưu thành 1 file
+  JSON (data/temp/{filename}_dapan.json) — đảm bảo JSON này luôn khớp
+  100% với đúng đề PDF đã phát cho học sinh trong lần sinh đó.
+- Lưu đường dẫn JSON đáp án vào bảng file_de với loai_file = "dapan_json".
+  Phải sửa lại CHECK constraint file_de_loai_file_check trên Supabase
+  (trước đó chỉ cho phép de/tex/loigiai) để thêm giá trị dapan_json.
+
+Ghi nhận lỗi phát hiện thêm (chưa sửa, để sau)
+
+- Khi yêu cầu tạo đề bằng tên chủ đề (vd "chương mệnh đề") thay vì số
+  chương (vd "chương 1"), pham_vi_chuong bị CHV_Fun/n8n trả về sai định
+  dạng (vd "menh_de" thay vì "chuong_1"), làm crash
+  exam_scope_service.load_scope_heso1 (int("menh_de") lỗi ValueError).
+  Không liên quan tới Version 2.5, phát hiện tình cờ khi test.
+
+Người thực hiện
+
+Mai Hà Lan (cùng Claude)

@@ -167,3 +167,17 @@ json → Generate JSON
 - Sinh Moodle XML
 - Sinh QTI
 - Sinh SCORM
+
+
+===============================================================================
+
+# Trạng thái triển khai thực tế — lưu đáp án (cập nhật 2026-08-06)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.5.
+
+Bổ sung 1 bước sau Giai đoạn 7 (Exam Object) và trước Giai đoạn 8 (Output):
+với mỗi câu vừa ghép vào đề (trong cùng 1 lần chạy, không sinh lại), gọi
+answer_parser_service.trich_dap_an(latex_block) rồi ghi danh sách đáp án
+ra 1 file JSON. Đây là dữ liệu WF007_GradeExam sẽ dùng để chấm MC/SA tự
+động — chưa phải CN_GradeAnswer đầy đủ như doc mô tả (chưa nhận bài làm
+học sinh, chưa so khớp), chỉ mới là bước CHUẨN BỊ đáp án.
