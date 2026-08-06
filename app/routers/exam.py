@@ -1,3 +1,4 @@
+import json
 import zipfile
 from pathlib import Path
 
@@ -20,7 +21,11 @@ from app.services.exam_assembler_service import (
 )
 
 from app.services import history_service
-from app.services.answer_parser_service import trich_dap_an, AnswerParseError
+from app.services.answer_parser_service import (
+    trich_dap_an,
+    AnswerParseError,
+    chuan_hoa_dap_an_ngan,
+)
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -405,5 +410,119 @@ def debug_parse_answer_endpoint(payload: GeneratorRequest):
             "variant_used": result["variant_used"],
             "dap_an": dap_an,
             "latex_block": result["latex_block"],
+        },
+    }
+
+
+# ======================================================
+# CHAM BAI (buoc dau — WF007): cham tu dong cau MC/SA bang cach so
+# khop voi file JSON dap an da luu san khi sinh de (buoc A2). Cau tu
+# luan (TL) chua cham duoc o day, tra ve trang_thai="can_cham_tay"
+# (se lam CHV_Grader o buoc sau).
+# ======================================================
+
+class CauTraLoiHocSinh(BaseModel):
+    so_thu_tu: int
+    cau_tra_loi: str
+
+
+class ChamBaiRequest(BaseModel):
+    de_id: str | None = None
+    conversation_id: str | None = None
+    bai_lam: list[CauTraLoiHocSinh]
+
+
+@router.post("/grade")
+def grade_endpoint(payload: ChamBaiRequest):
+    if not payload.de_id and not payload.conversation_id:
+        raise HTTPException(400, "Can co de_id hoac conversation_id")
+
+    if payload.de_id:
+        de = history_service.lay_de_theo_id(payload.de_id)
+    else:
+        de = history_service.lay_de_gan_nhat(payload.conversation_id)
+
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de.")
+
+    files = de.get("files", {})
+    dapan_path = files.get("dapan_json")
+    if not dapan_path or not Path(dapan_path).exists():
+        raise HTTPException(
+            410,
+            "Khong tim thay file dap an cua de nay (co the da bi don dep "
+            "sau 1 ngay, hoac de nay sinh truoc khi co tinh nang cham bai). "
+            "Vui long tao de moi.",
+        )
+
+    danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
+    dap_an_theo_stt = {cau["so_thu_tu"]: cau for cau in danh_sach_dap_an}
+
+    chi_tiet = []
+    so_cau_da_cham = 0
+    so_cau_dung = 0
+
+    for bai in payload.bai_lam:
+        cau = dap_an_theo_stt.get(bai.so_thu_tu)
+        if cau is None:
+            chi_tiet.append({
+                "so_thu_tu": bai.so_thu_tu,
+                "trang_thai": "khong_tim_thay_cau",
+            })
+            continue
+
+        loai_cau = cau.get("loai_cau")
+
+        if loai_cau == "MC":
+            dung = (bai.cau_tra_loi or "").strip().upper() == (
+                cau.get("dap_an_dung") or ""
+            ).strip().upper()
+            so_cau_da_cham += 1
+            so_cau_dung += 1 if dung else 0
+            chi_tiet.append({
+                "so_thu_tu": bai.so_thu_tu,
+                "loai_cau": "MC",
+                "dung": dung,
+                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "dap_an_dung": cau.get("dap_an_dung"),
+            })
+        elif loai_cau == "SA":
+            dung = chuan_hoa_dap_an_ngan(bai.cau_tra_loi) == chuan_hoa_dap_an_ngan(
+                cau.get("dap_an_dung")
+            )
+            so_cau_da_cham += 1
+            so_cau_dung += 1 if dung else 0
+            chi_tiet.append({
+                "so_thu_tu": bai.so_thu_tu,
+                "loai_cau": "SA",
+                "dung": dung,
+                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "dap_an_dung": cau.get("dap_an_dung"),
+            })
+        else:
+            chi_tiet.append({
+                "so_thu_tu": bai.so_thu_tu,
+                "loai_cau": loai_cau or "TL",
+                "trang_thai": "can_cham_tay",
+                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "loi_giai": cau.get("loi_giai"),
+            })
+
+    tong_so_cau = len(danh_sach_dap_an)
+    diem_tam_tinh = round((so_cau_dung / tong_so_cau) * 10, 2) if tong_so_cau else 0.0
+
+    return {
+        "success": True,
+        "message": "",
+        "data": {
+            "tong_so_cau": tong_so_cau,
+            "so_cau_da_cham_tu_dong": so_cau_da_cham,
+            "so_cau_dung": so_cau_dung,
+            "diem_tren_10_tam_tinh": diem_tam_tinh,
+            "ghi_chu": (
+                "Diem tam tinh chi tren cac cau MC/SA da cham tu dong. "
+                "Cau tu luan (TL) can cham tay hoac CHV_Grader (chua lam xong)."
+            ),
+            "chi_tiet": chi_tiet,
         },
     }

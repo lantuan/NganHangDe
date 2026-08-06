@@ -132,6 +132,18 @@ def trich_loi_giai(latex_block: str) -> str | None:
     return noi_dung.strip()
 
 
+def chuan_hoa_dap_an_ngan(text: str | None) -> str:
+    """
+    Chuan hoa 1 chuoi dap an ngan (SA) de so sanh linh hoat giua dap an
+    dung (trich tu latex_block) va dap an hoc sinh go tay: bo khoang
+    trang dau/cuoi, bo dau $ (ky hieu cong thuc LaTeX), bo hoa/thuong,
+    bo het khoang trang o giua.
+    """
+    if not text:
+        return ""
+    return text.strip().strip("$").replace(" ", "").lower()
+
+
 def trich_dap_an(latex_block: str) -> dict:
     r"""
     Ham tong hop dung cho 1 latex_block (1 cau hoi) — tu nhan dien loai cau:

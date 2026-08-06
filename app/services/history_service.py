@@ -104,6 +104,34 @@ def lay_tin_nhan_hoi_thoai(user_id, conversation_id):
         return []
 
 
+def lay_de_theo_id(de_id):
+    """Lay 1 de_da_sinh theo dung id (khong can biet conversation_id),
+    kem cac file da co. Dung cho cham bai khi da biet chinh xac de_id."""
+    try:
+        de_result = (
+            supabase.table("de_da_sinh")
+            .select("*")
+            .eq("id", de_id)
+            .limit(1)
+            .execute()
+        )
+        if not de_result.data:
+            return None
+        de = de_result.data[0]
+
+        files_result = (
+            supabase.table("file_de")
+            .select("*")
+            .eq("de_id", de["id"])
+            .execute()
+        )
+        de["files"] = {f["loai_file"]: f["duong_dan"] for f in files_result.data}
+        return de
+    except Exception as e:
+        print("LOI LAY DE THEO ID:", e)
+        return None
+
+
 def lay_de_gan_nhat(conversation_id):
     """Lay de duoc sinh gan nhat trong 1 cuoc hoi thoai, kem cac file da co.
     Tra ve dict {id, lop, role, ..., files: {"de": "...", "tex": "...", "loigiai": "..."}}
