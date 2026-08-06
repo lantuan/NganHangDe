@@ -43,3 +43,14 @@ output/
 
 # Node  
 node_modules/
+
+# File tai xuong sinh ra khi chay (khong commit)
+app/static/downloads/
+
+# File build tam khi bien dich thu latex_template.tex
+data/config/*.pdf
+data/config/*.thm
+
+# De/PDF sinh ra khi chay (cron don sau 1 ngay, khong commit)
+data/exports/
+data/temp/
