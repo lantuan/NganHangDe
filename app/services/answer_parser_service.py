@@ -1,4 +1,4 @@
-"""
+r"""
 CN_GradeAnswer (buoc chuan bi) — trich dap an tu latex_block co san,
 KHONG can sua tung ham sinh cau trong ngan hang de (data/python_bank).
 
@@ -26,7 +26,7 @@ class AnswerParseError(Exception):
 
 
 def _tim_khoi_dong(text: str, vi_tri_mo: int) -> tuple[str, int]:
-    """
+    r"""
     vi_tri_mo phai tro dung vao ky tu '{'. Dem ngoac { } long nhau (vi noi
     dung LaTeX ben trong, vd \frac{a}{b}, co the co nhieu cap {} long nhau)
     de tim dung dau '}' dong khop voi dau '{' mo dau.
@@ -63,7 +63,7 @@ def _tim_tat_ca_khoi_lien_tiep(text: str, tu: int) -> list[str]:
 
 
 def _tim_vi_tri_sau_lenh(text: str, ten_lenh: str) -> int | None:
-    """
+    r"""
     Tim vi tri ngay sau 1 ten lenh LaTeX (vd tim \choice nhung KHONG duoc
     khop nham vao \choiceTF, \choiceTFn...). Tra ve None neu khong co.
     """
@@ -75,7 +75,7 @@ def _tim_vi_tri_sau_lenh(text: str, ten_lenh: str) -> int | None:
 
 
 def trich_dap_an_choice(latex_block: str) -> dict | None:
-    """
+    r"""
     Trich dap an cho cau trac nghiem 4 phuong an (\choice{..}{..}{..}{..}).
     Tra ve {"dap_an_dung": "A"|"B"|"C"|"D", "phuong_an": {"A":.., "B":.., ...}}
     hoac None neu latex_block nay khong co \choice (vd la cau SA/TL).
@@ -103,7 +103,7 @@ def trich_dap_an_choice(latex_block: str) -> dict | None:
 
 
 def trich_dap_an_shortans(latex_block: str) -> str | None:
-    """
+    r"""
     Trich dap an cho cau tra loi ngan (\shortans{..} hoac \shortans[N]{..}).
     Tra ve chuoi dap an (da la text thuan) hoac None neu khong co \shortans.
     """
@@ -120,7 +120,7 @@ def trich_dap_an_shortans(latex_block: str) -> str | None:
 
 
 def trich_loi_giai(latex_block: str) -> str | None:
-    """Trich noi dung trong \loigiai{...}. Tra ve None neu khong co."""
+    r"""Trich noi dung trong \loigiai{...}. Tra ve None neu khong co."""
     vi_tri = _tim_vi_tri_sau_lenh(latex_block, r"\loigiai")
     if vi_tri is None:
         return None
@@ -133,7 +133,7 @@ def trich_loi_giai(latex_block: str) -> str | None:
 
 
 def trich_dap_an(latex_block: str) -> dict:
-    """
+    r"""
     Ham tong hop dung cho 1 latex_block (1 cau hoi) — tu nhan dien loai cau:
     - Co \choice  -> MC (trac nghiem 4 phuong an)
     - Co \shortans -> SA (tra loi ngan)
