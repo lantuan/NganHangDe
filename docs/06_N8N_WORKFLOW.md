@@ -253,3 +253,32 @@ Respond to Webhook (trả thẳng file nhị phân về FastAPI)
 FastAPI lưu file vào `app/static/downloads/`, trả JSON có link tải
 ↓
 Frontend hiện nút tải file trong khung chat
+
+
+===============================================================================
+
+# Trạng thái triển khai thực tế (cập nhật 2026-08-06)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.4.
+
+- Thực tế hiện tại KHÔNG tách thành nhiều Workflow độc lập như trên.
+  Chỉ có 1 Workflow gộp: Webhook → CHV_Fun → Edit Fields → Switch
+  → (2 nhánh có nối) → Respond to Webhook.
+- 2 nhánh đang hoạt động:
+  - task == "generate_exam" → Ghep_Tham_So (Code) → Goi_API_Sinh_De
+    (HTTP → /api/exam/generate-pdf-auto) → Respond to Webhook.
+  - task == "download_file" (dùng cho "xuất đáp án") →
+    Goi_API_XuatDapAn (HTTP → /api/exam/export-loigiai) →
+    Respond to Webhook.
+- Switch còn 4 rule cũ chưa dọn: analyze_result, study_advice,
+  history, general_chat — không khớp giá trị task nào CHV_Fun thực
+  tế trả về, không nối tới đâu cả. Cần dọn/khớp lại khi triển khai
+  WF002 (generate_exam_by_ability), WF003 (student_analysis),
+  WF005 (help), WF006 (reject_*), WF007 (grade_exam) — các task này
+  CHV_Fun đã phân loại được nhưng chưa có nhánh xử lý thật.
+- CN_LoadExamScope, CN_LoadCurriculum, CN_BuildBlueprint,
+  CN_LoadMapping, CN_QuestionSelector, CN_CallPythonGenerator,
+  CN_QuestionValidator, CN_ExamAssembler trong sơ đồ WF001 ở trên
+  hiện được gộp chung trong 1 lệnh gọi API
+  /api/exam/generate-pdf-auto (FastAPI xử lý nội bộ), chưa tách
+  thành các Code Node riêng trong n8n.

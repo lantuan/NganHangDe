@@ -108,3 +108,27 @@ dưới dạng file JSON trong thư mục data.
 - Không lưu file PDF/LaTeX trong Database.
 - Database chỉ lưu metadata và đường dẫn.
 - Dữ liệu chương trình học không đưa vào Database.
+
+
+===============================================================================
+
+# Trạng thái triển khai thực tế (cập nhật 2026-08-06)
+
+Xem chi tiết đầy đủ ở docs/16_CHANGELOG.md, Version 2.4.
+
+- exam_history (bảng có sẵn từ trước) đang đóng vai trò của
+  learning_history trong doc này (lưu kết quả chấm bài: diem,
+  chi_tiet_bai_lam), KHÔNG phải nơi lưu đề đã sinh.
+- Đề đã sinh (mục tiêu ban đầu đặt tên exam_history/exam_files)
+  thực tế lưu ở 2 bảng mới: de_da_sinh (metadata mỗi lần sinh đề:
+  user_id, conversation_id, lop, role, loai_he_so, ki_thi,
+  pham_vi_chuong) và file_de (đường dẫn file, gắn de_id, loai_file
+  thuộc {de, tex, loigiai}).
+- chat_history đã triển khai đúng như doc mô tả: mỗi dòng là 1 tin
+  nhắn, gắn user_id + conversation_id.
+- Row Level Security (RLS) tắt trên cả 3 bảng mới — chủ đích, vì
+  chỉ FastAPI được đọc/ghi (đúng nguyên tắc "Frontend không đọc
+  Database trực tiếp" ở doc 13), không cần policy theo từng user.
+- Khi triển khai WF007 (chấm bài) cần rà soát lại tên bảng để không
+  trùng lần nữa: exam_history đã bị dùng cho mục đích khác so với
+  doc này.

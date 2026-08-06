@@ -183,3 +183,77 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan
+
+
+===============================================================================
+
+Version 2.4
+
+Ngày
+
+2026-08-06
+
+Nội dung
+
+- Sửa lỗi frontend/backend không khớp response (chat.html kỳ vọng
+  data.reply nhưng backend trả shape khác) — nguyên nhân chính khiến
+  chat báo "Lỗi kết nối" dù n8n đã xử lý thành công.
+- Thêm phiên đăng nhập thật: app/core/deps.py (get_current_user đọc
+  cookie sb_access_token, xác thực qua Supabase); /chat bắt buộc
+  đăng nhập, chưa đăng nhập thì chuyển hướng /login; /login set
+  cookie HttpOnly sb_access_token + sb_refresh_token; thêm /logout.
+- Thêm lưu lịch sử hội thoại: bảng chat_history (mỗi dòng 1 tin
+  nhắn, gắn user_id + conversation_id do frontend sinh bằng
+  crypto.randomUUID() và giữ nguyên trong suốt 1 cuộc chat).
+- Thêm lưu đề đã sinh: bảng de_da_sinh (metadata mỗi lần sinh đề:
+  user_id, conversation_id, lop, role, loai_he_so, ki_thi,
+  pham_vi_chuong) và file_de (đường dẫn file: de/loigiai/tex, gắn
+  de_id).
+  ĐỘ LỆCH SO VỚI DOC 12: doc 12 đặt tên 2 bảng này là exam_history/
+  exam_files, nhưng exam_history đã tồn tại sẵn trong DB với vai trò
+  khác (lưu kết quả chấm bài: diem, chi_tiet_bai_lam — tương ứng
+  learning_history trong doc 12). Để tránh xung đột, dùng tên mới
+  de_da_sinh/file_de. Cần rà soát lại khi triển khai WF007 (chấm bài)
+  để không đặt trùng tên lần nữa.
+- RLS (Row Level Security) tắt trên cả 3 bảng mới (chat_history,
+  de_da_sinh, file_de) — chủ đích: chỉ FastAPI được đọc/ghi các bảng
+  này, đúng nguyên tắc "Frontend không đọc Database trực tiếp"
+  (doc 13), nên không cần RLS theo policy của từng user.
+- Thêm tính năng "xuất đáp án": endpoint POST /api/exam/export-loigiai
+  nhận conversation_id, lấy đề đã sinh gần nhất trong hội thoại đó
+  từ de_da_sinh/file_de, đổi \usepackage[dethi]{ex_test} thành
+  \usepackage[loigiai]{ex_test} trong file .tex đã lưu rồi biên dịch
+  lại — KHÔNG chọn lại câu hỏi, không sinh lại đề. Nếu đề đã bị dọn
+  (quá 1 ngày) thì trả lỗi 410 yêu cầu tạo đề mới.
+- n8n: thêm nhánh nhận diện "xuất đáp án" — CHV_Fun đã có sẵn task
+  download_file, thêm Switch rule 6 (task == "download_file"), thêm
+  node Goi_API_XuatDapAn (nhân bản từ Goi_API_Sinh_De, gọi
+  /api/exam/export-loigiai) nối vào Respond to Webhook.
+- Thêm cron dọn file cũ: scripts/cleanup_old_files.py, chạy 3h sáng
+  mỗi ngày, xoá file trong data/exports, data/temp,
+  app/static/downloads cũ hơn 1 ngày. Đánh đổi đã thống nhất với
+  người dùng: yêu cầu "xuất đáp án" cho đề tạo hơn 1 ngày trước sẽ
+  không tái sử dụng được, phải tạo đề mới.
+- Frontend chat.html: thêm nút "Về trang chủ"; thêm 2 hàm
+  taiDanhSachLichSu()/moHoiThoai() đọc GET /api/chat/history và
+  GET /api/chat/history/{conversation_id} để hiện lịch sử hội thoại
+  thật ở sidebar (thay 3 mục giả cứng), bấm vào 1 mục sẽ nạp lại
+  đúng conversation_id và toàn bộ tin nhắn cũ để tiếp tục hội thoại.
+- Backend: thêm GET /api/chat/history, GET /api/chat/history/
+  {conversation_id} (app/routers/chat.py) và app/services/
+  history_service.py (toàn bộ hàm đọc/ghi chat_history, de_da_sinh,
+  file_de — có try/except, lỗi Supabase không làm crash chat).
+
+Ghi nhận còn thiếu / để sau
+
+- Switch trong n8n còn 4 rule cũ (analyze_result, study_advice,
+  history, general_chat) không khớp với bất kỳ giá trị task nào
+  CHV_Fun thực tế trả về — code chết, cần dọn khi làm WF002/WF003.
+- WF001-WF007 trong doc 06 vẫn là mục tiêu kiến trúc, thực tế mới
+  triển khai 2 nhánh (sinh đề, xuất đáp án) trong 1 workflow gộp,
+  chưa tách thành các Workflow độc lập như doc 06 mô tả.
+- Chưa cập nhật nginx config vào git (deploy/nginx/).
+
+Người thực hiện
+
+Mai Hà Lan (cùng Claude)

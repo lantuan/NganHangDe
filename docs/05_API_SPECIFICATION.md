@@ -267,3 +267,30 @@ POST /chat                (form message → n8n webhook → kết quả)
   này tách Frontend riêng khỏi Jinja2)
 - Switch_OutputFormat "web_test", "json" (chỉ có "pdf"/"tex"/"zip")
 - CN_QuestionValidator (không có bước kiểm tra trùng lặp câu hỏi)
+
+
+===============================================================================
+
+# Trạng thái triển khai thực tế (cập nhật 2026-08-06)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.4. Doc 16 (v2.3)
+đã ghi nhận trước đó là các route trong doc này chưa khớp thực tế.
+Danh sách endpoint ĐANG HOẠT ĐỘNG (khác với danh sách mục tiêu ở
+trên):
+
+- POST /chat — nhận {message, conversation_id} (form), yêu cầu đã
+  đăng nhập (cookie), gọi n8n, trả {success, message, data}.
+- GET /api/chat/history — danh sách hội thoại của user đang đăng
+  nhập.
+- GET /api/chat/history/{conversation_id} — toàn bộ tin nhắn của
+  1 hội thoại.
+- POST /api/exam/generate-pdf-auto — sinh đề tự động theo lop/role/
+  loai_he_so/ki_thi/pham_vi_chuong, trả file (PDF/zip). Có
+  user_id/conversation_id tuỳ chọn để lưu lịch sử.
+- POST /api/exam/export-loigiai — nhận {conversation_id}, tái sử
+  dụng đề đã sinh gần nhất trong hội thoại đó để xuất PDF lời giải.
+- POST /login, /logout, GET/POST /register — Supabase Auth, set/xoá
+  cookie sb_access_token, sb_refresh_token.
+
+Các route generate/pdf/latex/web/grade/student/download/admin ở
+trên vẫn là mục tiêu kiến trúc, chưa triển khai đúng path đó.
