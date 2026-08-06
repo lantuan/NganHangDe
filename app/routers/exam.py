@@ -429,6 +429,7 @@ class CauTraLoiHocSinh(BaseModel):
 class ChamBaiRequest(BaseModel):
     de_id: str | None = None
     conversation_id: str | None = None
+    user_id: str | None = None
     bai_lam: list[CauTraLoiHocSinh]
 
 
@@ -510,6 +511,14 @@ def grade_endpoint(payload: ChamBaiRequest):
 
     tong_so_cau = len(danh_sach_dap_an)
     diem_tam_tinh = round((so_cau_dung / tong_so_cau) * 10, 2) if tong_so_cau else 0.0
+
+    if payload.user_id:
+        history_service.luu_ket_qua_cham_bai(
+            student_id=payload.user_id,
+            de_thi_id=de["id"],
+            diem=diem_tam_tinh,
+            chi_tiet_bai_lam=chi_tiet,
+        )
 
     return {
         "success": True,

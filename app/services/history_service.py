@@ -132,6 +132,21 @@ def lay_de_theo_id(de_id):
         return None
 
 
+def luu_ket_qua_cham_bai(student_id, de_thi_id, diem, chi_tiet_bai_lam):
+    """Luu 1 lan cham bai vao exam_history (dong vai tro learning_history
+    trong doc 12: diem so + chi tiet dung/sai tung cau). Khong lam crash
+    API cham bai neu Supabase loi."""
+    try:
+        supabase.table("exam_history").insert({
+            "student_id": student_id,
+            "de_thi_id": de_thi_id,
+            "diem": diem,
+            "chi_tiet_bai_lam": chi_tiet_bai_lam,
+        }).execute()
+    except Exception as e:
+        print("LOI LUU KET QUA CHAM BAI:", e)
+
+
 def lay_de_gan_nhat(conversation_id):
     """Lay de duoc sinh gan nhat trong 1 cuoc hoi thoai, kem cac file da co.
     Tra ve dict {id, lop, role, ..., files: {"de": "...", "tex": "...", "loigiai": "..."}}
