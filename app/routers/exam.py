@@ -282,6 +282,8 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             history_service.luu_file_de(de_id, "tex", result["tex_path"])
             if result.get("pdf_loigiai_path"):
                 history_service.luu_file_de(de_id, "loigiai", result["pdf_loigiai_path"])
+            if result.get("dap_an_json_path"):
+                history_service.luu_file_de(de_id, "dapan_json", result["dap_an_json_path"])
     # Switch_OutputFormat: cùng 1 lần sinh đề (result) -> trả về đúng định
     # dạng người dùng chọn. Không sinh lại đề mới, nên PDF và TEX luôn khớp
     # nhau (cùng bộ câu hỏi/biến thể đã chọn ở generate_exam_pdf_auto).
