@@ -20,6 +20,8 @@ from app.services.exam_assembler_service import (
 )
 
 from app.services import history_service
+from app.services.latex_service import save_tex_file
+from app.services.pdf_service import compile_pdf, PdfCompileError
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
 
@@ -307,5 +309,61 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
     return FileResponse(
         path=result["pdf_path"],
         filename="de_thi.pdf",
+        media_type="application/pdf",
+    )
+
+
+# ======================================================
+# XUAT DAP AN — tai su dung file .tex da luu trong cuoc hoi
+# thoai, doi option dethi -> loigiai, khong sinh lai cau hoi
+# ======================================================
+
+class ExportLoiGiaiRequest(BaseModel):
+    conversation_id: str
+
+
+@router.post("/export-loigiai")
+def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
+    de = history_service.lay_de_gan_nhat(payload.conversation_id)
+    if de is None:
+        raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
+
+    files = de.get("files", {})
+
+    loigiai_path = files.get("loigiai")
+    if loigiai_path and Path(loigiai_path).exists():
+        return FileResponse(
+            path=loigiai_path,
+            filename="loigiai.pdf",
+            media_type="application/pdf",
+        )
+
+    tex_path = files.get("tex")
+    if not tex_path or not Path(tex_path).exists():
+        raise HTTPException(
+            410,
+            "De cu da bi don dep khoi may chu (qua 1 ngay). Vui long yeu cau tao de moi.",
+        )
+
+    noi_dung = Path(tex_path).read_text(encoding="utf-8")
+    noi_dung_loigiai = noi_dung.replace(
+        "\\usepackage[dethi]{ex_test}", "\\usepackage[loigiai]{ex_test}"
+    )
+    if noi_dung_loigiai == noi_dung:
+        raise HTTPException(500, "Khong doi duoc file .tex sang ban loi giai.")
+
+    ten_file_moi = f"{Path(tex_path).stem}_loigiai"
+    tex_path_moi = save_tex_file(noi_dung_loigiai, ten_file_moi)
+
+    try:
+        pdf_path_moi = compile_pdf(tex_path_moi)
+    except PdfCompileError as e:
+        raise HTTPException(500, detail=f"Loi bien dich PDF loi giai: {e}")
+
+    history_service.luu_file_de(de["id"], "loigiai", str(pdf_path_moi))
+
+    return FileResponse(
+        path=str(pdf_path_moi),
+        filename="loigiai.pdf",
         media_type="application/pdf",
     )
