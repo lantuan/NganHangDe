@@ -306,15 +306,7 @@
             </div>
 
             <div id="history-list" class="flex-1 overflow-y-auto px-3 pb-4 space-y-2">
-                <button class="history-item text-left rounded-xl border border-slate-200 p-3">
-                    Đề giữa kỳ I
-                </button>
-                <button class="history-item text-left rounded-xl border border-slate-200 p-3">
-                    Đề Chương 2
-                </button>
-                <button class="history-item text-left rounded-xl border border-slate-200 p-3">
-                    Ôn tập Hàm số
-                </button>
+                <div class="text-xs text-slate-400 px-1">Chưa có lịch sử.</div>
             </div>
 
             <!-- Bottom -->
@@ -475,6 +467,59 @@ ${html}
             }
         }
 
+        // ===== LICH SU CHAT (that, doc tu Supabase qua API) =====
+        async function taiDanhSachLichSu() {
+            try {
+                const res = await fetch("/api/chat/history");
+                const data = await res.json();
+                if (!data.success) return;
+                const list = document.getElementById("history-list");
+                list.innerHTML = "";
+                if (data.data.length === 0) {
+                    list.innerHTML = '<div class="text-xs text-slate-400 px-1">Chưa có lịch sử.</div>';
+                    return;
+                }
+                data.data.forEach(function (item) {
+                    const btn = document.createElement("button");
+                    btn.className = "history-item text-left rounded-xl border border-slate-200 p-3";
+                    btn.textContent = item.tieu_de ? item.tieu_de.slice(0, 40) : "Hội thoại mới";
+                    btn.addEventListener("click", function () {
+                        moHoiThoai(item.conversation_id);
+                    });
+                    list.appendChild(btn);
+                });
+            } catch (err) {
+                console.error("Loi tai lich su:", err);
+            }
+        }
+
+        async function moHoiThoai(cid) {
+            try {
+                const res = await fetch("/api/chat/history/" + cid);
+                const data = await res.json();
+                if (!data.success) return;
+                conversationId = cid;
+                messages.innerHTML = "";
+                data.data.forEach(function (msg) {
+                    if (msg.role === "user") {
+                        addUserMessage(msg.noi_dung || "");
+                    } else if (msg.loai_phan_hoi === "file" && msg.duong_dan_file) {
+                        addAIMessage(
+                            `<p>${msg.noi_dung || "Đã tạo đề xong."}</p>` +
+                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener">📄 Tải file</a></p>`
+                        );
+                    } else if (msg.loai_phan_hoi === "error") {
+                        addAIMessage("Lỗi: " + (msg.noi_dung || "Có lỗi xảy ra."));
+                    } else {
+                        addAIMessage(marked.parse(msg.noi_dung || ""));
+                    }
+                });
+                scrollBottom();
+            } catch (err) {
+                console.error("Loi mo hoi thoai:", err);
+            }
+        }
+
         // ===== GỬI TIN NHẮN LÊN /chat =====
         async function sendMessage(text) {
             addUserMessage(text);
@@ -537,6 +582,7 @@ ${html}
             textarea.style.height = "auto";
             try {
                 await sendMessage(text);
+                taiDanhSachLichSu();
             } finally {
                 dangGui = false;
                 document.getElementById("send-btn").disabled = false;
@@ -586,6 +632,7 @@ Hãy nhập yêu cầu để AI tạo đề, chấm bài hoặc phân tích họ
         window.onload = function () {
             textarea.focus();
             scrollBottom();
+            taiDanhSachLichSu();
         };
 
         // ===== TOGGLE SIDEBAR (mobile) =====
