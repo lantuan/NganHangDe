@@ -1,7 +1,7 @@
 from pathlib import Path
 import uuid
 
-from fastapi import APIRouter, Request, Form
+from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.concurrency import run_in_threadpool
@@ -40,6 +40,24 @@ async def chat(request: Request):
             "title": "Chat AI",
         },
     )
+
+
+@router.get("/api/chat/history")
+async def lay_lich_su_chat(request: Request):
+    user = get_current_user(request)
+    if user is None:
+        raise HTTPException(401, "Chua dang nhap")
+    danh_sach = history_service.lay_danh_sach_hoi_thoai(user.id)
+    return {"success": True, "data": danh_sach}
+
+
+@router.get("/api/chat/history/{conversation_id}")
+async def lay_tin_nhan(request: Request, conversation_id: str):
+    user = get_current_user(request)
+    if user is None:
+        raise HTTPException(401, "Chua dang nhap")
+    tin_nhan = history_service.lay_tin_nhan_hoi_thoai(user.id, conversation_id)
+    return {"success": True, "data": tin_nhan}
 
 
 def _goi_n8n(message: str, user_id: str, conversation_id: str):

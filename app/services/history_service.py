@@ -53,6 +53,57 @@ def luu_file_de(de_id, loai_file, duong_dan):
         print("LOI LUU FILE_DE:", e)
 
 
+def lay_danh_sach_hoi_thoai(user_id, limit=30):
+    """Lay danh sach cac cuoc hoi thoai cua 1 user, moi cuoc hoi thoai 1 dong,
+    tieu de = tin nhan dau tien cua user, sap xep moi nhat truoc."""
+    try:
+        result = (
+            supabase.table("chat_history")
+            .select("conversation_id, role, noi_dung, created_at")
+            .eq("user_id", user_id)
+            .order("created_at", desc=True)
+            .limit(300)
+            .execute()
+        )
+    except Exception as e:
+        print("LOI LAY DANH SACH HOI THOAI:", e)
+        return []
+
+    theo_hoi_thoai = {}
+    for row in result.data:
+        cid = row["conversation_id"]
+        if cid not in theo_hoi_thoai:
+            theo_hoi_thoai[cid] = {
+                "conversation_id": cid,
+                "created_at": row["created_at"],
+                "tieu_de": None,
+            }
+        if row["role"] == "user":
+            theo_hoi_thoai[cid]["tieu_de"] = row["noi_dung"]
+
+    danh_sach = list(theo_hoi_thoai.values())
+    danh_sach.sort(key=lambda x: x["created_at"], reverse=True)
+    return danh_sach[:limit]
+
+
+def lay_tin_nhan_hoi_thoai(user_id, conversation_id):
+    """Lay toan bo tin nhan cua 1 cuoc hoi thoai, chi cua dung user_id do
+    (khong cho xem hoi thoai cua nguoi khac)."""
+    try:
+        result = (
+            supabase.table("chat_history")
+            .select("role, noi_dung, loai_phan_hoi, duong_dan_file, created_at")
+            .eq("user_id", user_id)
+            .eq("conversation_id", conversation_id)
+            .order("created_at")
+            .execute()
+        )
+        return result.data
+    except Exception as e:
+        print("LOI LAY TIN NHAN HOI THOAI:", e)
+        return []
+
+
 def lay_de_gan_nhat(conversation_id):
     """Lay de duoc sinh gan nhat trong 1 cuoc hoi thoai, kem cac file da co.
     Tra ve dict {id, lop, role, ..., files: {"de": "...", "tex": "...", "loigiai": "..."}}
