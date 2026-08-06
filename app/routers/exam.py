@@ -19,6 +19,7 @@ from app.services.exam_assembler_service import (
     AssembleError,
 )
 
+from app.services import history_service
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
 
@@ -236,6 +237,8 @@ class GenerateExamAutoRequest(BaseModel):
     cho_phep_thieu: bool = False
     # Switch_OutputFormat: "pdf" (mặc định) | "tex" | "zip" (PDF + TEX cùng 1 đề)
     dinh_dang: str = "pdf"
+    user_id: str | None = None
+    conversation_id: str | None = None
 
 
 @router.post("/generate-pdf-auto")
@@ -261,6 +264,21 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
 
+    if payload.user_id and payload.conversation_id:
+        de_id = history_service.luu_de_da_sinh(
+            user_id=payload.user_id,
+            conversation_id=payload.conversation_id,
+            lop=payload.lop,
+            role=payload.role,
+            loai_he_so=payload.loai_he_so,
+            ki_thi=payload.ki_thi,
+            pham_vi_chuong=payload.pham_vi_chuong,
+        )
+        if de_id:
+            history_service.luu_file_de(de_id, "de", result["pdf_path"])
+            history_service.luu_file_de(de_id, "tex", result["tex_path"])
+            if result.get("pdf_loigiai_path"):
+                history_service.luu_file_de(de_id, "loigiai", result["pdf_loigiai_path"])
     # Switch_OutputFormat: cùng 1 lần sinh đề (result) -> trả về đúng định
     # dạng người dùng chọn. Không sinh lại đề mới, nên PDF và TEX luôn khớp
     # nhau (cùng bộ câu hỏi/biến thể đã chọn ở generate_exam_pdf_auto).
