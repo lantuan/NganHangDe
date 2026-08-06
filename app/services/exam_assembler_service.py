@@ -30,7 +30,9 @@ from app.services.question_selector_service import (
 )
 from app.services.exam_blueprint_service import build_blueprint, BlueprintError
 from app.services.generator_service import call_generator, GeneratorNotFoundError
-from app.services.latex_service import build_latex_document, save_tex_file
+import json
+from app.services.latex_service import build_latex_document, save_tex_file, TEMP_DIR
+from app.services.answer_parser_service import trich_dap_an, AnswerParseError
 from app.services.pdf_service import compile_pdf, PdfCompileError
 class AssembleError(Exception):
     pass
@@ -92,6 +94,8 @@ def _sinh_pdf_tu_danh_sach(
     used_variants: dict = {}
     noi_dung = ""
     so_cau_thieu = 0
+    so_thu_tu = 0
+    danh_sach_dap_an: list[dict] = []
     for item in danh_sach_id:
         if item.get("thieu"):
             noi_dung += _dong_placeholder_thieu(item) + "\n"
@@ -107,6 +111,21 @@ def _sinh_pdf_tu_danh_sach(
                 used_variants=used_variants,
             )
             noi_dung += ket_qua["latex_block"] + "\n"
+            so_thu_tu += 1
+            try:
+                dap_an = trich_dap_an(ket_qua["latex_block"])
+            except AnswerParseError as e:
+                dap_an = {
+                    "loai_cau": None,
+                    "dap_an_dung": None,
+                    "loi_giai": None,
+                    "loi_trich_dap_an": str(e),
+                }
+            danh_sach_dap_an.append({
+                "so_thu_tu": so_thu_tu,
+                "generator_id": ket_qua["generator_id"],
+                **dap_an,
+            })
         except GeneratorNotFoundError as e:
             if cho_phep_thieu:
                 noi_dung += _dong_placeholder_thieu(item, ghi_chu=str(e)) + "\n"
@@ -127,6 +146,12 @@ def _sinh_pdf_tu_danh_sach(
 
     tieu_de_an_toan = _escape_latex(tieu_de)
     filename = f"exam_{uuid.uuid4().hex[:8]}"
+    TEMP_DIR.mkdir(parents=True, exist_ok=True)
+    dap_an_json_path = TEMP_DIR / f"{filename}_dapan.json"
+    dap_an_json_path.write_text(
+        json.dumps(danh_sach_dap_an, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
     if role == "teacher":
         # Giáo viên: xuất CẢ đề thi (ẩn lời giải) VÀ lời giải (hiện lời
@@ -156,6 +181,7 @@ def _sinh_pdf_tu_danh_sach(
             "tex_path": str(loigiai_tex_path),
             "pdf_path": str(dethi_pdf_path),
             "pdf_loigiai_path": str(loigiai_pdf_path),
+            "dap_an_json_path": str(dap_an_json_path),
         }
 
     # Học sinh: chỉ xuất đề thi, luôn ẩn lời giải
@@ -175,6 +201,7 @@ def _sinh_pdf_tu_danh_sach(
         "tex_path": str(tex_path),
         "pdf_path": str(pdf_path),
         "pdf_loigiai_path": None,
+        "dap_an_json_path": str(dap_an_json_path),
     }
 def generate_exam_pdf(
     lop: int,
