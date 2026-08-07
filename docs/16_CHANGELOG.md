@@ -309,3 +309,117 @@ Ghi nhận lỗi phát hiện thêm (chưa sửa, để sau)
 Người thực hiện
 
 Mai Hà Lan (cùng Claude)
+
+
+===============================================================================
+
+Version 2.3
+
+Ngày
+
+2026-07-28
+
+Nội dung
+
+- Gộp CN_LoadCurriculum, CN_BuildBlueprint, CN_LoadMapping,
+  CN_QuestionSelector, CN_CallPythonGenerator, CN_ExamAssembler thành 1 hàm
+  generate_exam_pdf_auto() trong app/services/exam_assembler_service.py,
+  chạy trong tiến trình FastAPI (không còn là Code Node riêng trong n8n).
+- n8n WF001 chỉ còn 2 việc: CHV_Fun (suy ra tham số JSON) + HTTP Request
+  gọi thẳng POST /api/exam/generate-pdf-auto, nhận file nhị phân trả về.
+- Thêm API POST /api/exam/generate-pdf-auto (lop, tieu_de, role, loai_he_so,
+  ki_thi, pham_vi_chuong, cau_truc_tu_hoc_sinh, socau_ma_de, cho_phep_thieu,
+  dinh_dang) — trả file PDF/TEX/ZIP.
+- CN_QuestionValidator chưa triển khai; thay bằng cơ chế cho_phep_thieu
+  (chế độ nháp, hiện khung "[THIẾU CÂU HỎI: ...]" thay vì lỗi dừng cả đề).
+- Đăng nhập/Đăng ký triển khai thực tế bằng Supabase Auth + trang HTML
+  (Jinja2), không phải API JSON /api/auth/* như dự kiến ban đầu.
+
+Người thực hiện
+
+Mai Hà Lan
+
+===============================================================================
+
+Version 2.4
+
+Ngày
+
+2026-08-06
+
+Nội dung
+
+- /chat bắt buộc đăng nhập, nhận {message, conversation_id}, giữ đúng 1
+  conversation_id trong suốt phiên chat (không tạo lại khi gửi tin tiếp).
+- Thêm GET /api/chat/history và GET /api/chat/history/{conversation_id}.
+- Thêm POST /api/exam/export-loigiai (tái sử dụng đề vừa sinh gần nhất
+  trong hội thoại để xuất PDF lời giải, không sinh lại đề).
+- Login/Register dùng Supabase Auth, set cookie sb_access_token,
+  sb_refresh_token.
+- Database: đề đã sinh lưu ở 2 bảng mới — de_da_sinh (metadata mỗi lần
+  sinh đề) và file_de (đường dẫn file, loai_file ∈ {de, tex, loigiai}).
+  exam_history (bảng có sẵn từ trước) đổi vai trò sang lưu kết quả chấm
+  bài thay vì lưu đề. RLS tắt trên de_da_sinh, file_de, chat_history
+  (chủ đích — chỉ FastAPI được đọc/ghi).
+- Frontend: đã có chat AI sinh đề qua hội thoại, xuất đáp án, lịch sử hội
+  thoại thật ở sidebar, nút "Về trang chủ". Chưa có: dashboard, làm bài
+  online, phân tích học tập, nút "Luyện tập ngay", quản lý lớp/tài khoản.
+
+Người thực hiện
+
+Mai Hà Lan
+
+===============================================================================
+
+Version 2.5
+
+Ngày
+
+2026-08-06
+
+Nội dung
+
+- file_de.loai_file bổ sung giá trị thứ 4: dapan_json (chuẩn bị dữ liệu
+  cho bước chấm bài — WF007). Sửa CHECK constraint file_de_loai_file_check
+  trên Supabase để cho phép giá trị mới.
+
+Người thực hiện
+
+Mai Hà Lan
+
+===============================================================================
+
+Version 2.6
+
+Ngày
+
+2026-08-07
+
+Nội dung
+
+- Giai đoạn A (chấm bài tự động MC/SA) hoàn tất A1-A4:
+  - A1: app/services/answer_parser_service.py — trích đáp án đúng và lời
+    giải từ latex_block do Generator Function trả về.
+  - A2: Mỗi lần sinh đề tự động lưu đáp án từng câu thành JSON
+    (data/temp/{ten_file}_dapan.json), đăng ký vào file_de với
+    loai_file = dapan_json.
+  - A3: Thêm POST /api/exam/grade — chấm tự động câu MC/SA bằng so khớp
+    trực tiếp với JSON đáp án đã lưu ở A2; câu TL trả về trạng thái
+    can_cham_tay kèm loi_giai (chờ CHV_Grader).
+  - A4: Kết quả chấm được lưu vào bảng exam_history (student_id,
+    de_thi_id, diem, created_at).
+- Bugfix: trigger on_auth_user_created (hàm handle_new_user) chỉ có hiệu
+  lực cho tài khoản đăng ký SAU khi trigger được tạo; các tài khoản đăng
+  ký trước đó bị thiếu dòng profiles tương ứng, gây lỗi khóa ngoại khi
+  ghi exam_history. Đã backfill thủ công cho các tài khoản đang thiếu.
+- RLS: tắt row level security cho bảng exam_history (bảng có từ trước
+  Version 2.0, không nằm trong nhóm 3 bảng đã tắt RLS ở Version 2.4).
+- Ghi chú tồn đọng: format Grade Result thực tế trả về từ /api/exam/grade
+  (so_thu_tu, loai_cau, dung, dap_an_hoc_sinh, dap_an_dung, trang_thai,
+  loi_giai) CHƯA khớp hoàn toàn với schema Grade Result mô tả ở
+  docs/03_DATA_STRUCTURE.md (question_id, dung_sai_hoac_diem, diem_toi_da,
+  nhan_xet, tags). Cần quyết định trước khi xây CHV_Grader.
+
+Người thực hiện
+
+Mai Hà Lan

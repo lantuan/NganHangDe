@@ -45,7 +45,7 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 |3.4|Question Selector API (CN_QuestionSelector)|⬜|
 |3.5|Generator API|⬜|
 |3.6|LaTeX API|⬜|
-|3.7|Grade API (CN_GradeAnswer, CN_MergeGradeResult)|⬜|
+|3.7|Grade API (CN_GradeAnswer, CN_MergeGradeResult)|🟡|
 |3.8|Analysis API (CN_AnalyzeResults)|⬜|
 
 ---
@@ -107,18 +107,31 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 
 ## Đang thực hiện
 
-Giai đoạn 3 và 4 — hiện thực hoá CN_LoadExamScope, CN_BuildBlueprint,
-CN_QuestionSelector bằng Code (thay vì AI như bản nháp cũ).
+Giai đoạn 6/7 — WF007_GradeExam. Phần chấm tự động (MC/SA) đã xong và
+đã kiểm chứng bằng dữ liệu thật (Giai đoạn A, xem Version 2.6 ở
+docs/16_CHANGELOG.md). Còn thiếu CHV_Grader (chấm câu TL).
+
+## Đã xong (không lặp lại ở đây, xem CHANGELOG để biết chi tiết)
+
+- WF001_GenerateExam: scope, blueprint, mapping, question selector,
+  python generator, latex, pdf — chạy full luồng qua
+  /api/exam/generate-pdf-auto.
+- CN_GradeAnswer cho MC/SA (POST /api/exam/grade) + lưu kết quả vào
+  exam_history.
 
 ## Bước tiếp theo
 
-1. Code CN_LoadExamScope (tra PPCT theo boundary_after).
-2. Code CN_BuildBlueprint (thuật toán phân bổ competency).
-3. Code CN_QuestionSelector (chọn Generator ID từ Mapping).
-4. Hoàn thiện Python Generator cho ít nhất 1 chương để test full
-   luồng WF001 đầu đến cuối.
-5. Sau khi WF001 chạy được, làm WF007_GradeExam (MC/TF/SA trước,
-   CHV_Grader cho TL sau).
+1. Thống nhất lại format Grade Result giữa doc 03 và code thực tế
+   (xem "Ghi chú tồn đọng" ở Version 2.6, docs/16_CHANGELOG.md) trước
+   khi viết CHV_Grader, để CN_AnalyzeResults sau này đọc được thống nhất.
+2. Viết CHV_Grader (chấm câu TL dựa trên answer/solution có sẵn).
+3. CN_MergeGradeResult — gộp kết quả MC/SA (Code) + TL (CHV_Grader)
+   thành bảng điểm thống nhất.
+4. CN_AnalyzeResults + CHV_Analyzer (WF003/WF007) — tính weak_points/
+   strong_points và viết nhận xét.
+5. Mở rộng Mapping + Python Generator cho các chương còn lại (hiện chỉ
+   chương 1 có Mapping, và mới ~28% ID trong Mapping chương 1 có hàm
+   Python thật).
 
 ## Ghi chú
 

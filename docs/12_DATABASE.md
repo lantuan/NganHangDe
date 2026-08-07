@@ -143,3 +143,19 @@ Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.5.
 file_de.loai_file hiện có 4 giá trị: de, tex, loigiai, dapan_json (thêm
 dapan_json cho bước chuẩn bị chấm bài — WF007). Đã sửa CHECK constraint
 file_de_loai_file_check trên Supabase để cho phép giá trị mới này.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-07 — exam_history dùng thật cho chấm bài
+
+exam_history đã xác nhận hoạt động đúng vai trò lưu kết quả chấm bài (không
+phải lưu đề — xem cập nhật Version 2.4 ở trên). Đã tắt RLS cho bảng này
+(trước đó bị bỏ sót, không nằm trong nhóm 3 bảng tắt RLS ở Version 2.4).
+
+Lưu ý vận hành: bảng profiles chỉ được tự động tạo dòng mới nhờ trigger
+on_auth_user_created (hàm handle_new_user) — trigger này được thêm sau một
+số tài khoản đã đăng ký từ trước, nên các tài khoản đó thiếu dòng profiles
+và sẽ lỗi khóa ngoại khi ghi vào các bảng tham chiếu profiles.id (exam_history,
+de_da_sinh...). Nếu phát sinh lỗi 23503 tương tự, chạy lại đoạn backfill ở
+Version 2.6 (docs/16_CHANGELOG.md) cho tài khoản còn thiếu.

@@ -294,3 +294,13 @@ trên):
 
 Các route generate/pdf/latex/web/grade/student/download/admin ở
 trên vẫn là mục tiêu kiến trúc, chưa triển khai đúng path đó.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-07 — Grade API (MC/SA)
+
+POST /api/exam/grade nay ĐÃ hoạt động thật trên VPS cho câu MC/SA (chấm tự
+động bằng so khớp với JSON đáp án lưu ở bước sinh đề), lưu kết quả vào bảng
+exam_history. Câu TL trả về trạng thái can_cham_tay, chờ CHV_Grader (chưa
+làm). Chi tiết xem docs/16_CHANGELOG.md, Version 2.6.
