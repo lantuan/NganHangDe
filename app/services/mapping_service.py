@@ -44,3 +44,20 @@ def phan_loai_cau(item: dict) -> str:
     if "ngắn" in loai_text:
         return "tra_loi_ngan"
     return "trac_nghiem"
+
+CHUONG_BAI_PATTERN = re.compile(r"^L\d+_C(\d+)(?:_B(\d+))?")
+
+
+def trich_chuong_bai(generator_id: str | None) -> tuple[str | None, str | None]:
+    """
+    Suy ra (chuong, bai) tu Generator ID, dung cho Grade Result (doc 03).
+    VD: L10_C1_B2_NB017_MC_A -> ("1", "2")
+        L10_C1_TF_A          -> ("1", None)  (TF ra theo chuong, khong co bai)
+    Tra ve (None, None) neu khong khop dinh dang ID chuan.
+    """
+    if not generator_id:
+        return None, None
+    match = CHUONG_BAI_PATTERN.match(generator_id)
+    if not match:
+        return None, None
+    return match.group(1), match.group(2)

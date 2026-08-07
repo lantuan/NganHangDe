@@ -26,6 +26,7 @@ from app.services.answer_parser_service import (
     AnswerParseError,
     chuan_hoa_dap_an_ngan,
 )
+from app.services.mapping_service import trich_chuong_bai
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -459,57 +460,92 @@ def grade_endpoint(payload: ChamBaiRequest):
     danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
     dap_an_theo_stt = {cau["so_thu_tu"]: cau for cau in danh_sach_dap_an}
 
+    tong_so_cau = len(danh_sach_dap_an)
+    # Diem toi da moi cau (chia deu 10 diem cho tong so cau trong de). Chi
+    # la gia tri THAM KHAO/chuan hoa theo doc 03 (diem_toi_da) — tong diem
+    # chinh thuc cua bai lam van tinh theo ty le so cau dung o duoi, khong
+    # cong don truc tiep tu day (tranh lech do lam tron 2 chu so).
+    diem_moi_cau = round(10 / tong_so_cau, 2) if tong_so_cau else 0.0
+
     chi_tiet = []
     so_cau_da_cham = 0
     so_cau_dung = 0
 
-    for bai in payload.bai_lam:
-        cau = dap_an_theo_stt.get(bai.so_thu_tu)
+    for bl in payload.bai_lam:
+        cau = dap_an_theo_stt.get(bl.so_thu_tu)
         if cau is None:
             chi_tiet.append({
-                "so_thu_tu": bai.so_thu_tu,
+                "question_id": None,
+                "loai_cau": None,
+                "dung_sai_hoac_diem": None,
+                "diem_toi_da": 0,
+                "nhan_xet": "Khong tim thay cau hoi nay trong de da luu (kiem tra lai so_thu_tu).",
+                "chuong": None,
+                "bai": None,
+                "tags": [],
+                "so_thu_tu": bl.so_thu_tu,
                 "trang_thai": "khong_tim_thay_cau",
             })
             continue
 
         loai_cau = cau.get("loai_cau")
+        generator_id = cau.get("generator_id")
+        chuong, bai_so = trich_chuong_bai(generator_id)
 
         if loai_cau == "MC":
-            dung = (bai.cau_tra_loi or "").strip().upper() == (
+            dung = (bl.cau_tra_loi or "").strip().upper() == (
                 cau.get("dap_an_dung") or ""
             ).strip().upper()
             so_cau_da_cham += 1
             so_cau_dung += 1 if dung else 0
             chi_tiet.append({
-                "so_thu_tu": bai.so_thu_tu,
+                "question_id": generator_id,
                 "loai_cau": "MC",
-                "dung": dung,
-                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "dung_sai_hoac_diem": dung,
+                "diem_toi_da": diem_moi_cau,
+                "nhan_xet": "",
+                "chuong": chuong,
+                "bai": bai_so,
+                "tags": [],
+                "so_thu_tu": bl.so_thu_tu,
+                "dap_an_hoc_sinh": bl.cau_tra_loi,
                 "dap_an_dung": cau.get("dap_an_dung"),
             })
         elif loai_cau == "SA":
-            dung = chuan_hoa_dap_an_ngan(bai.cau_tra_loi) == chuan_hoa_dap_an_ngan(
+            dung = chuan_hoa_dap_an_ngan(bl.cau_tra_loi) == chuan_hoa_dap_an_ngan(
                 cau.get("dap_an_dung")
             )
             so_cau_da_cham += 1
             so_cau_dung += 1 if dung else 0
             chi_tiet.append({
-                "so_thu_tu": bai.so_thu_tu,
+                "question_id": generator_id,
                 "loai_cau": "SA",
-                "dung": dung,
-                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "dung_sai_hoac_diem": dung,
+                "diem_toi_da": diem_moi_cau,
+                "nhan_xet": "",
+                "chuong": chuong,
+                "bai": bai_so,
+                "tags": [],
+                "so_thu_tu": bl.so_thu_tu,
+                "dap_an_hoc_sinh": bl.cau_tra_loi,
                 "dap_an_dung": cau.get("dap_an_dung"),
             })
         else:
             chi_tiet.append({
-                "so_thu_tu": bai.so_thu_tu,
+                "question_id": generator_id,
                 "loai_cau": loai_cau or "TL",
+                "dung_sai_hoac_diem": None,
+                "diem_toi_da": diem_moi_cau,
+                "nhan_xet": "Cau tu luan can cham tay hoac CHV_Grader (chua lam xong).",
+                "chuong": chuong,
+                "bai": bai_so,
+                "tags": [],
+                "so_thu_tu": bl.so_thu_tu,
                 "trang_thai": "can_cham_tay",
-                "dap_an_hoc_sinh": bai.cau_tra_loi,
+                "dap_an_hoc_sinh": bl.cau_tra_loi,
                 "loi_giai": cau.get("loi_giai"),
             })
 
-    tong_so_cau = len(danh_sach_dap_an)
     diem_tam_tinh = round((so_cau_dung / tong_so_cau) * 10, 2) if tong_so_cau else 0.0
 
     if payload.user_id:
