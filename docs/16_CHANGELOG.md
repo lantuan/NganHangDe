@@ -423,3 +423,32 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan
+
+
+===============================================================================
+
+Version 2.7
+
+Ngày
+
+2026-08-07
+
+Nội dung
+
+- Sửa /api/exam/grade để trả đúng schema Grade Result theo
+  docs/03_DATA_STRUCTURE.md: mỗi câu trong chi_tiet nay có đủ question_id,
+  loai_cau, dung_sai_hoac_diem, diem_toi_da, nhan_xet, chuong, bai, tags
+  (bên cạnh các field hiển thị cũ: so_thu_tu, dap_an_hoc_sinh, dap_an_dung,
+  loi_giai, trang_thai — giữ lại vì doc 03 dùng "Gồm" chứ không giới hạn
+  chỉ đúng các field liệt kê).
+- Thêm app/services/mapping_service.py::trich_chuong_bai(generator_id) —
+  suy ra (chuong, bai) từ Generator ID theo quy tắc ID Standard (doc 04).
+- tags hiện luôn là [] (chưa nối với trường "Dang" trong Mapping) — cần bổ
+  sung khi làm CN_AnalyzeResults nếu muốn phân tích điểm yếu theo dạng bài.
+- Đã kiểm chứng full: gọi /api/exam/grade với dữ liệu thật, xác nhận
+  exam_history.chi_tiet_bai_lam lưu đúng field mới, điểm tổng không đổi
+  (7.5, không có regression so với Version 2.6).
+
+Người thực hiện
+
+Mai Hà Lan
