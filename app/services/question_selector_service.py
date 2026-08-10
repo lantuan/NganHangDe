@@ -187,7 +187,16 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = False) ->
                     "dang": c.get("Dang"),
                 })
 
-    return ket_qua
+    # Sap xep lai theo dung thu tu Phan I/II/III/IV cua Phieu TLTN chuan
+    # (Bo GD&DT) va mau de cua giao vien: MC -> TF -> SA -> TL. sorted() on
+    # dinh (stable) nen khong xao tron thu tu trong cung 1 loai cau.
+    _THU_TU_LOAI = {
+        "trac_nghiem": 0,
+        "dung_sai_cau_lon": 1,
+        "tra_loi_ngan": 2,
+        "tu_luan": 3,
+    }
+    return sorted(ket_qua, key=lambda c: _THU_TU_LOAI.get(c["loai_cau"], 99))
 
 
 # ============================================================
