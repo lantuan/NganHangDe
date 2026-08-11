@@ -27,6 +27,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_ngan,
 )
 from app.services.mapping_service import trich_chuong_bai
+from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -571,3 +572,65 @@ def grade_endpoint(payload: ChamBaiRequest):
             "chi_tiet": chi_tiet,
         },
     }
+
+
+# ======================================================
+# CHAM BAI BANG ANH (WF007 nhanh ANH): hoc sinh chup anh Phieu tra loi
+# (Bo GD&DT, cho MC/TF/SA) va/hoac anh bai lam tu luan viet tay, goi 2
+# webhook n8n (DocPhieuTraLoi + CHV_Grader) de doc va cham, gop ket qua
+# theo dung schema Grade Result (doc 03), luu vao exam_history.
+# ======================================================
+
+class ChamBaiAnhRequest(BaseModel):
+    de_id: str | None = None
+    conversation_id: str | None = None
+    user_id: str | None = None
+    anh_phieu_base64: str | None = None
+    anh_tuluan_base64: str | None = None
+
+
+@router.post("/grade-photo")
+def grade_photo_endpoint(payload: ChamBaiAnhRequest):
+    if not payload.de_id and not payload.conversation_id:
+        raise HTTPException(400, "Can co de_id hoac conversation_id")
+    if not payload.anh_phieu_base64 and not payload.anh_tuluan_base64:
+        raise HTTPException(400, "Can it nhat 1 trong 2: anh_phieu_base64 hoac anh_tuluan_base64")
+
+    if payload.de_id:
+        de = history_service.lay_de_theo_id(payload.de_id)
+    else:
+        de = history_service.lay_de_gan_nhat(payload.conversation_id)
+
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de.")
+
+    files = de.get("files", {})
+    dapan_path = files.get("dapan_json")
+    if not dapan_path or not Path(dapan_path).exists():
+        raise HTTPException(
+            410,
+            "Khong tim thay file dap an cua de nay (co the da bi don dep "
+            "sau 1 ngay, hoac de nay sinh truoc khi co tinh nang cham bai). "
+            "Vui long tao de moi.",
+        )
+
+    danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
+
+    try:
+        ket_qua = cham_bai_bang_anh(
+            danh_sach_dap_an=danh_sach_dap_an,
+            anh_phieu_base64=payload.anh_phieu_base64,
+            anh_tuluan_base64=payload.anh_tuluan_base64,
+        )
+    except GradePhotoError as e:
+        raise HTTPException(502, detail=str(e))
+
+    if payload.user_id:
+        history_service.luu_ket_qua_cham_bai(
+            student_id=payload.user_id,
+            de_thi_id=de["id"],
+            diem=ket_qua["diem_tren_10_tam_tinh"],
+            chi_tiet_bai_lam=ket_qua["chi_tiet"],
+        )
+
+    return {"success": True, "message": "", "data": ket_qua}
