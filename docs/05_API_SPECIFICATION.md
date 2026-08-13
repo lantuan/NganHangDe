@@ -304,3 +304,29 @@ POST /api/exam/grade nay ĐÃ hoạt động thật trên VPS cho câu MC/SA (ch
 động bằng so khớp với JSON đáp án lưu ở bước sinh đề), lưu kết quả vào bảng
 exam_history. Câu TL trả về trạng thái can_cham_tay, chờ CHV_Grader (chưa
 làm). Chi tiết xem docs/16_CHANGELOG.md, Version 2.6.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-12 — Grade API bằng ẢNH (grade-photo)
+
+POST /api/exam/grade-photo (mới) ĐÃ hoạt động thật trên VPS: nhận ảnh chụp
+Phiếu trả lời trắc nghiệm (MC/TF/SA) và/hoặc ảnh bài làm Tự luận viết tay,
+gọi 2 webhook n8n (DocPhieuTraLoi đọc phiếu, CHV_Grader chấm tự luận), gộp
+kết quả theo đúng schema Grade Result (doc 03), lưu exam_history. Input:
+
+```json
+{
+  "de_id": null,
+  "conversation_id": "",
+  "user_id": "",
+  "anh_phieu_base64": "",
+  "anh_tuluan_base64": ""
+}
+```
+
+Câu TF (Đúng/Sai) hiện luôn trả về trạng thái can_cham_tay dù đã đọc được
+ảnh (answer_parser_service chưa trích được đáp án đúng cho TF). Chi tiết
+xem docs/16_CHANGELOG.md, Version 2.8. Đã kiểm chứng end-to-end trên
+production bằng ảnh giả (không lỗi, đúng schema); chưa kiểm chứng độ
+chính xác đọc bằng ảnh chụp thật.

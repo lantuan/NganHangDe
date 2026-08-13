@@ -452,3 +452,69 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan
+
+===============================================================================
+
+Version 2.8
+
+Ngày
+
+2026-08-12
+
+Nội dung
+
+- Quyết định luồng chấm bài chính thức: học sinh làm bài trên giấy in
+  (đề PDF + Phiếu trả lời trắc nghiệm CHUẨN của Bộ GD&ĐT, không tự thiết
+  kế phiếu riêng), chụp ảnh gửi lên để AI chấm — thay cho phương án làm
+  bài online/quét bài tự động ban đầu dự kiến.
+- n8n: thêm 2 nhánh Webhook độc lập trong CÙNG workflow NganHangDe (không
+  đi qua CHV_Fun/Switch — đây là các lệnh gọi máy-tới-máy, không phải hội
+  thoại tự nhiên):
+  - doc-phieu-tra-loi -> Convert to File (Move Base64 String to File,
+    chuyển field anh_base64 thành binary thật) -> DocPhieuTraLoi (AI
+    Agent, model google/gemini-2.0-flash-001, bật "Automatically
+    Passthrough Binary Images") -> Respond to Webhook. Đọc ảnh Phiếu
+    TLTN đã tô (MC/TF/SA theo so_luong yêu cầu), trả JSON
+    {mc, tf, sa} theo vị trí thứ tự trong từng phần.
+  - cham-tu-luan -> Convert to File (cùng cơ chế) -> CHV_Grader (AI
+    Agent, model google/gemini-2.5-flash) -> Respond to Webhook. Đọc
+    ảnh bài làm Tự luận viết tay, chấm theo danh_sach_cau (dap_an_mau =
+    loi_giai của từng câu), trả thẳng mảng Grade Result đúng schema
+    doc 03.
+  - Cả 2 node Respond to Webhook đều phải strip rào markdown
+    (```json ... ```) trước JSON.parse vì model đôi khi tự thêm dù đã
+    yêu cầu "chỉ trả JSON" trong System Message — dùng
+    .replace(/```json/g,'').replace(/```/g,'').trim() trong expression.
+  - Đã kiểm chứng: cả 2 node đọc ảnh THẬT (không bịa dữ liệu) — xác nhận
+    qua test model text-only vs vision (báo lỗi rõ ràng "No endpoints
+    found that support image input" khi chọn nhầm model không hỗ trợ
+    ảnh) và test ảnh trắng/không khớp nội dung (model trả null/báo
+    "không có nội dung để chấm" thay vì bịa đáp án).
+- FastAPI: thêm app/services/grade_photo_service.py + POST
+  /api/exam/grade-photo (app/routers/exam.py). Nhận de_id hoặc
+  conversation_id, user_id, anh_phieu_base64, anh_tuluan_base64. Tách
+  danh_sach_dap_an (đã lưu từ lúc sinh đề, xem Version 2.5) thành 4 nhóm
+  MC/SA/TF/TL, gọi 2 webhook n8n ở trên, so khớp MC/SA với dap_an_dung để
+  ra đúng/sai, nhận thẳng kết quả TL từ CHV_Grader, gộp thành 1 mảng
+  Grade Result (doc 03), lưu vào exam_history nếu có user_id.
+- Thêm 2 biến môi trường N8N_WEBHOOK_DOC_PHIEU, N8N_WEBHOOK_CHAM_TU_LUAN
+  (app/core/config.py, .env) — trỏ tới URL Production của 2 webhook trên
+  (không dùng URL Test).
+- HẠN CHẾ ĐÃ BIẾT (chưa xử lý, để sau theo yêu cầu): answer_parser_service
+  chưa trích được đáp án đúng cho câu Đúng/Sai (TF, \choiceTFn/\choiceTFt)
+  -> mọi câu TF hiện bị lưu nhầm loai_cau="TL" trong *_dapan.json (không
+  có dap_an_dung). grade_photo_service dùng generator_id (chứa "_TF_") để
+  tách riêng câu TF ra khỏi câu TL thật khi định tuyến ảnh, nhưng CHƯA
+  thể tự chấm đúng/sai cho TF (không có đáp án đúng để so sánh) — câu TF
+  luôn trả trang_thai="can_cham_tay". Cần sửa answer_parser_service
+  trước khi TF chấm tự động được.
+- Đã kiểm chứng end-to-end trên production (sinh đề thật qua web, gọi
+  POST /api/exam/grade-photo thật, cả 2 webhook n8n Production URL) —
+  không lỗi 500/502, đúng schema Grade Result. Ảnh dùng để test là ảnh
+  giả (không phải phiếu đã tô/bài làm thật) nên điểm ra 0 — CHƯA kiểm
+  chứng độ chính xác đọc ảnh thật (cần bản in để tô/viết tay thật, để
+  sau khi có điều kiện in ấn).
+
+Người thực hiện
+
+Mai Hà Lan (cùng Claude)

@@ -60,7 +60,7 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 |4.6|Python Generator|⬜|
 |4.7|LaTeX|⬜|
 |4.8|PDF|⬜|
-|4.9|WF007_GradeExam|⬜|
+|4.9|WF007_GradeExam|🟡|
 
 ---
 
@@ -79,7 +79,7 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 # GIAI ĐOẠN 6 - AI (chỉ 3 AI)
 
 |6.1|CHV_Fun|🟡|
-|6.2|CHV_Grader|⬜|
+|6.2|CHV_Grader|🟡|
 |6.3|CHV_Analyzer|⬜|
 
 ---
@@ -87,8 +87,8 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 # GIAI ĐOẠN 7 - HỌC SINH
 
 |7.1|Làm bài Online|⬜|
-|7.2|Upload ảnh (OCR cho bài tự luận)|⬜|
-|7.3|CHV_Grader chấm tự luận|⬜|
+|7.2|Upload ảnh (OCR cho bài tự luận)|🟡|
+|7.3|CHV_Grader chấm tự luận|🟡|
 |7.4|Dashboard + nút gợi ý luyện tập|⬜|
 |7.5|AI Gia sư (giai đoạn sau)|⬜|
 
@@ -107,9 +107,13 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 
 ## Đang thực hiện
 
-Giai đoạn 6/7 — WF007_GradeExam. Phần chấm tự động (MC/SA) đã xong và
-đã kiểm chứng bằng dữ liệu thật (Giai đoạn A, xem Version 2.6 ở
-docs/16_CHANGELOG.md). Còn thiếu CHV_Grader (chấm câu TL).
+Giai đoạn 6/7 — WF007_GradeExam, nhánh chấm bằng ẢNH (học sinh chụp ảnh
+phiếu trả lời + bài tự luận viết tay). Đã xong: DocPhieuTraLoi (đọc
+phiếu MC/TF/SA), CHV_Grader (chấm Tự luận từ ảnh), POST
+/api/exam/grade-photo (gộp kết quả) — xem chi tiết Version 2.8 ở
+docs/16_CHANGELOG.md. Đã kiểm chứng plumbing end-to-end trên production
+bằng ảnh giả (không lỗi, đúng schema); CHƯA kiểm chứng độ chính xác đọc
+bằng ảnh chụp phiếu/bài làm THẬT (chờ có bản in).
 
 ## Đã xong (không lặp lại ở đây, xem CHANGELOG để biết chi tiết)
 
@@ -118,15 +122,21 @@ docs/16_CHANGELOG.md). Còn thiếu CHV_Grader (chấm câu TL).
   /api/exam/generate-pdf-auto.
 - CN_GradeAnswer cho MC/SA (POST /api/exam/grade) + lưu kết quả vào
   exam_history.
+- CHV_Grader (chấm Tự luận từ ảnh, qua n8n webhook cham-tu-luan) +
+  DocPhieuTraLoi (đọc phiếu MC/TF/SA từ ảnh, qua webhook
+  doc-phieu-tra-loi) + POST /api/exam/grade-photo gộp cả 2 nhánh
+  (xem Version 2.8).
 
 ## Bước tiếp theo
 
-1. Thống nhất lại format Grade Result giữa doc 03 và code thực tế
-   (xem "Ghi chú tồn đọng" ở Version 2.6, docs/16_CHANGELOG.md) trước
-   khi viết CHV_Grader, để CN_AnalyzeResults sau này đọc được thống nhất.
-2. Viết CHV_Grader (chấm câu TL dựa trên answer/solution có sẵn).
-3. CN_MergeGradeResult — gộp kết quả MC/SA (Code) + TL (CHV_Grader)
-   thành bảng điểm thống nhất.
+1. Test bằng ảnh chụp THẬT (phiếu đã tô + bài tự luận viết tay) để kiểm
+   chứng độ chính xác đọc của DocPhieuTraLoi/CHV_Grader — cần bản in.
+2. Sửa answer_parser_service để trích được đáp án đúng cho câu TF
+   (\choiceTFn/\choiceTFt) — hiện TF luôn phải chấm tay dù đã đọc được
+   ảnh (xem "HẠN CHẾ ĐÃ BIẾT" ở Version 2.8).
+3. CN_MergeGradeResult — hiện đã gộp thủ công trong
+   grade_photo_service.py; cân nhắc tách riêng nếu cần dùng lại ở nơi
+   khác (vd chấm bài không qua ảnh).
 4. CN_AnalyzeResults + CHV_Analyzer (WF003/WF007) — tính weak_points/
    strong_points và viết nhận xét.
 5. Mở rộng Mapping + Python Generator cho các chương còn lại (hiện chỉ
