@@ -171,7 +171,7 @@
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary" href="/">Trang chủ</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="/">Giới thiệu</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#gioi-thieu">Giới thiệu</a>
 </nav>
 <div class="flex items-center gap-4">
 <button
@@ -199,7 +199,55 @@
     class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow text-lg">
     Đăng nhập ngay
 </button>
-<button class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high transition-all text-lg">Giới thiệu chi tiết</button>
+<a href="#gioi-thieu" class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high transition-all text-lg inline-block text-center">Giới thiệu chi tiết</a>
+</div>
+</div>
+</section>
+<!-- Section: Giới thiệu chung -->
+<section id="gioi-thieu" class="py-24 bg-surface-container-low scroll-mt-20">
+<div class="max-w-[1200px] mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-bold mb-6">Giới thiệu</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6">Ngân Hàng Đề AI là gì?</h3>
+<p class="font-body-lg text-on-surface-variant mb-4">
+    Ngân Hàng Đề AI là nền tảng học tập và ôn luyện môn Toán dành cho học sinh
+    THPT Chuyên Hùng Vương (Gia Lai), do cô Mai Hà Lan xây dựng và phát triển.
+    Hệ thống ứng dụng trí tuệ nhân tạo để tự động sinh đề thi bám sát chương
+    trình học, chấm bài trắc nghiệm và tự luận, đồng thời phân tích năng lực
+    để đưa ra lộ trình luyện tập phù hợp cho từng học sinh.
+</p>
+<p class="font-body-lg text-on-surface-variant mb-8">
+    Mục tiêu của dự án là giúp học sinh chủ động luyện đề mọi lúc, nhận phản
+    hồi tức thì thay vì chờ giáo viên chấm bài thủ công, và giúp giáo viên
+    tiết kiệm thời gian ra đề, chấm bài để tập trung vào giảng dạy.
+</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
+<p class="font-headline-md text-headline-md text-primary">100%</p>
+<p class="font-body-md text-on-surface-variant">Miễn phí cho học sinh nhà trường</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
+<p class="font-headline-md text-headline-md text-primary">AI</p>
+<p class="font-body-md text-on-surface-variant">Sinh đề &amp; chấm bài tự động</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-8">
+<h4 class="font-headline-md text-headline-md mb-4">Dành cho ai?</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">school</span>
+<span class="font-body-md text-on-surface-variant">Học sinh THPT Chuyên Hùng Vương Gia Lai muốn luyện đề Toán theo đúng năng lực.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">person</span>
+<span class="font-body-md text-on-surface-variant">Giáo viên cần công cụ ra đề nhanh, chấm bài tự động, theo dõi tiến bộ học sinh.</span>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -353,7 +401,7 @@
 </div>
 </section>
 <!-- Section: Liên hệ -->
-<section class="py-24 bg-primary text-on-primary">
+<section id="lien-he" class="py-24 bg-primary text-on-primary scroll-mt-20">
 <div class="max-w-[1200px] mx-auto px-margin-desktop">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 <div>
@@ -369,7 +417,7 @@
 <p class="font-body-md font-bold text-xl">Cô Mai Hà Lan</p>
 </div>
 </div>
-<div class="flex items-center gap-4">
+<a class="flex items-center gap-4 hover:opacity-80 transition-opacity" href="tel:0982240288">
 <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined">call</span>
 </div>
@@ -377,8 +425,8 @@
 <p class="text-label-md opacity-70">Điện thoại</p>
 <p class="font-body-md font-bold text-xl">0982240288</p>
 </div>
-</div>
-<div class="flex items-center gap-4">
+</a>
+<a class="flex items-center gap-4 hover:opacity-80 transition-opacity" href="mailto:nganhangdetoanchv@gmail.com">
 <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined">mail</span>
 </div>
@@ -386,7 +434,7 @@
 <p class="text-label-md opacity-70">Email</p>
 <p class="font-body-md font-bold text-xl">nganhangdetoanchv@gmail.com</p>
 </div>
-</div>
+</a>
 </div>
 </div>
 <div class="relative">
@@ -407,8 +455,8 @@
 <span class="font-body-md text-on-surface-variant">THPT Chuyên Hùng Vương Gia Lai</span>
 </div>
 <nav class="flex flex-wrap justify-center gap-8">
-<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="/">THPT Chuyên Hùng Vương Gia Lai</a>
-<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="/">Liên hệ</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="https://thptchuyenhungvuong.gialai.edu.vn" target="_blank" rel="noopener noreferrer">THPT Chuyên Hùng Vương Gia Lai</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#lien-he">Liên hệ</a>
 <a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="/">Chính sách bảo mật</a>
 </nav>
 </div>
