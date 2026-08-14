@@ -1,16 +1,27 @@
-"""
-Danh sach lop hoc hien co (dong bo thu cong voi Google Classroom).
+import unicodedata
 
-Hoc sinh tu chon lop cua minh o trang /chon-lop khi dang nhap lan dau -
-khong doi chieu tu dong voi danh sach hoc sinh that tren Classroom, chi
-de nhom du lieu theo lop phuc vu sinh de/thong ke sau nay. Cham diem
-chinh thuc van thuc hien tren Google Classroom.
+FILE = "app/core/lop_config.py"
 
-Cap nhat danh sach nay khi giao vien tao them lop moi tren Classroom
-(vi du them khoi 12 sau nay).
-"""
+with open(FILE, "r", encoding="utf-8") as f:
+    content = f.read()
 
-DANH_SACH_LOP = {
+content = unicodedata.normalize("NFC", content)
+goc = len(content)
+
+old_block = '''DANH_SACH_LOP = {
+    "10": [
+        "C1A", "C1B", "C2A", "C2B", "C3A", "C3B",
+        "C4", "C5A", "C5B", "C6", "C7", "C8", "C9",
+    ],
+    "11": [
+        "C1A", "C1B", "C2A", "C2B", "C3A", "C3B",
+        "C4", "C5A", "C5B", "C6", "C7", "C8", "C9",
+    ],
+}'''
+
+assert content.count(old_block) == 1, "Khong tim thay DANH_SACH_LOP cu."
+
+new_block = '''DANH_SACH_LOP = {
     "10": [
         "C1A", "C1B", "C2A", "C2B", "C3A", "C3B",
         "C4", "C5A", "C5B", "C6", "C7", "C8", "C9",
@@ -56,4 +67,11 @@ MA_LOP_CLASSROOM = {
     ("11", "C8"): "869140897300",
     ("11", "C9"): "874605025088",
     ("11", "Tự do"): "855865997421",
-}
+}'''
+
+content = content.replace(old_block, new_block)
+
+with open(FILE, "w", encoding="utf-8") as f:
+    f.write(content)
+
+print(f"OK - da sua {FILE} ({goc} -> {len(content)} ky tu)")
