@@ -3,11 +3,11 @@
 <html class="light" lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Đăng ký Học sinh | QuizAI</title>
+<title>Đăng ký Học sinh | Ngân Hàng Đề AI</title>
 <!-- Google Fonts: Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols Outlined -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -118,13 +118,11 @@
 <!-- TopNavBar -->
 <header class="bg-surface-container-lowest dark:bg-inverse-surface sticky top-0 z-50 border-b border-surface-container">
 <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-[1280px] mx-auto">
-<div class="font-display text-[24px] md:text-[32px] font-bold text-primary-container">Ngân Hàng Đề AI</div>
+<a href="/" class="font-display text-[24px] md:text-[32px] font-bold text-primary-container">Ngân Hàng Đề AI</a>
 <div class="flex items-center gap-stack-lg">
-<a class="hidden md:block text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Tính năng</a>
-<a class="hidden md:block text-on-surface-variant font-medium hover:text-primary-container transition-colors" href="#">Về chúng tôi</a>
-<button class="bg-primary-container text-white px-stack-lg py-stack-sm rounded-full font-semibold hover:opacity-90 transition-opacity">
-                    Login
-                </button>
+<a href="/login" class="inline-block bg-primary-container text-white px-stack-lg py-stack-sm rounded-full font-semibold hover:opacity-90 transition-opacity">
+                    Đăng nhập
+                </a>
 </div>
 </nav>
 </header>
@@ -180,7 +178,7 @@ type="text"
 <label class="block font-medium text-on-surface-variant mb-unit" for="email">Email</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-stack-md top-1/2 -translate-y-1/2 text-outline">mail</span>
-<input class="w-full pl-12 pr-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all font-body" id="email" name="email" placeholder="hocsinh@quizai.vn" value="{{ email or '' }}" required="" type="email"/>
+<input class="w-full pl-12 pr-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all font-body" id="email" name="email" placeholder="hocsinh@email.com" value="{{ email or '' }}" required="" type="email"/>
 </div>
 </div>
 <!-- Password Field -->
