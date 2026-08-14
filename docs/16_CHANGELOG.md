@@ -635,3 +635,27 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan (cùng Claude)
+
+
+===============================================================================
+
+Version 2.12
+
+Ngày
+
+2026-08-14
+
+Nội dung
+
+- teacher_coming_soon.html (trang "Sap ra mat" khi bam the Giao vien o
+  /register/teacher): bo nav "Tinh nang / Bang gia / Huong dan" o header
+  vi ca 3 deu la link chet (href="#") khong dan di dau.
+- teacher_coming_soon.html: nut "Dang nhap" / "Dang ky" o header truoc
+  do la <button> khong co tac dung, doi thanh <a href="/login">,
+  <a href="/register"> tro dung ve 2 trang that.
+- teacher_coming_soon.html: logo "Ngan Hang De AI" goc trai header gio
+  bam vao ve trang chu "/" (truoc do la <div> tinh, khong bam duoc).
+
+Người thực hiện
+
+Mai Hà Lan (cùng Claude)
