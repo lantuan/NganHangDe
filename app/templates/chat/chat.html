@@ -379,6 +379,9 @@
                         <div class="account-badge-text">
                             <span class="account-badge-name">{{ user_display_name | default('') }}</span>
                             <span class="account-badge-email">{{ user_email | default('') }}</span>
+                            {% if user_khoi and user_lop %}
+                            <span class="account-badge-email">Khối {{ user_khoi }} - {{ user_lop }}</span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

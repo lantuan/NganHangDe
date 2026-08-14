@@ -8,7 +8,9 @@ from starlette.concurrency import run_in_threadpool
 import requests
 
 from app.core.deps import get_current_user
+from app.core.lop_config import DANH_SACH_LOP
 from app.services import history_service
+from app.services import supabase_service
 
 router = APIRouter()
 
@@ -33,6 +35,10 @@ async def chat(request: Request):
     if user is None:
         return RedirectResponse("/login", status_code=303)
 
+    ho_so = supabase_service.lay_lop_hoc_sinh(user.id)
+    if not ho_so or not ho_so.get("lop"):
+        return RedirectResponse("/chon-lop", status_code=303)
+
     metadata = user.user_metadata or {}
     ten_hien_thi = (
         metadata.get("fullname")
@@ -48,8 +54,42 @@ async def chat(request: Request):
             "title": "Chat AI",
             "user_email": user.email,
             "user_display_name": ten_hien_thi,
+            "user_khoi": ho_so.get("khoi"),
+            "user_lop": ho_so.get("lop"),
         },
     )
+
+
+@router.get("/chon-lop", response_class=HTMLResponse)
+async def chon_lop_page(request: Request):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="chat/chon_lop.html",
+        context={
+            "danh_sach_lop": DANH_SACH_LOP,
+        },
+    )
+
+
+@router.post("/chon-lop")
+async def chon_lop_submit(request: Request, lop_full: str = Form(...)):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    if "-" not in lop_full:
+        return RedirectResponse("/chon-lop", status_code=303)
+
+    khoi, lop = lop_full.split("-", 1)
+    if khoi not in DANH_SACH_LOP or lop not in DANH_SACH_LOP[khoi]:
+        return RedirectResponse("/chon-lop", status_code=303)
+
+    supabase_service.cap_nhat_lop_hoc_sinh(user.id, khoi, lop)
+    return RedirectResponse("/chat", status_code=303)
 
 
 @router.get("/api/chat/history")

@@ -1,51 +1,23 @@
-from app.core.supabase import supabase
+import unicodedata
 
+FILE = "app/services/supabase_service.py"
 
-def sign_up(fullname: str, email: str, password: str):
-    """
-    Đăng ký tài khoản mới trên Supabase Auth
-    """
+with open(FILE, "r", encoding="utf-8") as f:
+    content = f.read()
 
-    return supabase.auth.sign_up(
-        {
-            "email": email,
-            "password": password,
-            "options": {
-                "data": {
-                    "fullname": fullname
-                }
-            }
-        }
-    )
+content = unicodedata.normalize("NFC", content)
+goc = len(content)
 
-
-def sign_in(email: str, password: str):
-    """
-    Đăng nhập
-    """
-
-    return supabase.auth.sign_in_with_password(
-        {
-            "email": email,
-            "password": password
-        }
-    )
-
-
-def sign_out():
-    """
-    Đăng xuất
-    """
-
-    return supabase.auth.sign_out()
-
-
-def get_user():
+old_tail = '''def get_user():
     """
     Lấy thông tin user hiện tại
     """
 
-    return supabase.auth.get_user()
+    return supabase.auth.get_user()'''
+
+assert content.count(old_tail) == 1, "Khong tim thay get_user() cuoi file."
+
+new_tail = old_tail + '''
 
 
 def lay_lop_hoc_sinh(user_id: str):
@@ -77,4 +49,11 @@ def cap_nhat_lop_hoc_sinh(user_id: str, khoi: str, lop: str):
         .update({"khoi": khoi, "lop": lop})
         .eq("id", user_id)
         .execute()
-    )
+    )'''
+
+content = content.replace(old_tail, new_tail)
+
+with open(FILE, "w", encoding="utf-8") as f:
+    f.write(content)
+
+print(f"OK - da sua {FILE} ({goc} -> {len(content)} ky tu)")
