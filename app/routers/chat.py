@@ -33,11 +33,21 @@ async def chat(request: Request):
     if user is None:
         return RedirectResponse("/login", status_code=303)
 
+    metadata = user.user_metadata or {}
+    ten_hien_thi = (
+        metadata.get("fullname")
+        or metadata.get("full_name")
+        or metadata.get("name")
+        or user.email
+    )
+
     return templates.TemplateResponse(
         request=request,
         name="chat/chat.html",
         context={
             "title": "Chat AI",
+            "user_email": user.email,
+            "user_display_name": ten_hien_thi,
         },
     )
 
