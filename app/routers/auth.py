@@ -48,6 +48,10 @@ async def register_student_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/register_student.html",
+        context={
+            "supabase_url": SUPABASE_URL,
+            "supabase_anon_key": SUPABASE_KEY,
+        },
     )
 
 
@@ -252,6 +256,8 @@ async def register_student(
                 "error": str(e),
                 "fullname": fullname,
                 "email": email,
+                "supabase_url": SUPABASE_URL,
+                "supabase_anon_key": SUPABASE_KEY,
             }
         )
     
