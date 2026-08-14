@@ -133,10 +133,6 @@
 <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-20">
 <div class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</div>
 <div class="hidden md:flex gap-gutter items-center">
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Tính năng</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Giải pháp</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Bảng giá</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Tài liệu</a>
 <a
     href="/register"
     class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-transform inline-block"
@@ -232,7 +228,7 @@
 <!-- Options -->
 <div class="flex items-center justify-between py-2">
 <label class="flex items-center gap-2 cursor-pointer group">
-<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary cursor-pointer" type="checkbox" id="remember" name="remember" value="true"/>
 <span class="font-label-md text-label-md text-on-surface-variant group-hover:text-primary transition-colors">Ghi nhớ đăng nhập</span>
 </label>
 <a class="font-label-md text-label-md text-primary hover:underline" href="#">Quên mật khẩu?</a>
@@ -251,7 +247,7 @@
 <div class="h-px bg-outline-variant flex-1"></div>
 </div>
 <!-- Google Login -->
-<button class="w-full h-14 border border-outline-variant bg-white flex items-center justify-center gap-3 rounded-[16px] hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200" type="button">
+<button id="google-login-btn" class="w-full h-14 border border-outline-variant bg-white flex items-center justify-center gap-3 rounded-[16px] hover:bg-surface-container-low active:scale-[0.98] transition-all duration-200" type="button">
 <svg class="w-6 h-6" viewbox="0 0 24 24">
 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
 <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
@@ -297,4 +293,28 @@
             // Optional: Handle dark mode if the design system supports it
         }
     </script>
+<!-- Dang nhap Google qua Supabase (client-side OAuth) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+    (function () {
+        var supabaseClient = window.supabase.createClient(
+            "{{ supabase_url }}",
+            "{{ supabase_anon_key }}"
+        );
+        var btn = document.getElementById('google-login-btn');
+        if (btn) {
+            btn.addEventListener('click', async function () {
+                var result = await supabaseClient.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin + '/auth/callback'
+                    }
+                });
+                if (result.error) {
+                    alert('Không thể đăng nhập bằng Google: ' + result.error.message);
+                }
+            });
+        }
+    })();
+</script>
 </body></html>

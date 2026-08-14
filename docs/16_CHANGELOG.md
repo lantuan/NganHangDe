@@ -518,3 +518,35 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan (cùng Claude)
+
+
+===============================================================================
+
+Version 2.9
+
+Ngày
+
+2026-08-13
+
+Nội dung
+
+- Đơn giản hoá trang đăng nhập (app/templates/auth/login.html): xoá 4
+  link nav placeholder (Tính năng/Giải pháp/Bảng giá/Tài liệu) không dẫn
+  đi đâu, chỉ giữ logo + Đăng ký.
+- "Ghi nhớ đăng nhập" chuyển từ checkbox trang trí sang có tác dụng thật:
+  app/routers/auth.py::login() nhận thêm tham số remember (Form); nếu
+  tick thì cookie sb_access_token/sb_refresh_token sống lâu như cũ (7/30
+  ngày), không tick thì set session cookie (không truyền max_age — tự
+  hết khi đóng trình duyệt).
+- "Đăng nhập bằng Google" chuyển từ nút trang trí sang OAuth thật qua
+  Supabase, theo mô hình client-side.
+- CẦN NGƯỜI DÙNG TỰ CẤU HÌNH: bật Google provider trong Supabase
+  Dashboard, tạo OAuth Client ID/Secret ở Google Cloud Console, khai báo
+  Redirect URL https://nganhangdechv.tech/auth/callback trong Supabase
+  Dashboard. Xác nhận SUPABASE_KEY trong .env là khoá "anon public".
+- CHƯA kiểm chứng end-to-end (cần cấu hình Dashboard xong mới bấm thử
+  được nút Google thật trên production).
+
+Người thực hiện
+
+Mai Hà Lan (cùng Claude)

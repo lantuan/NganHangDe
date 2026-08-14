@@ -1,4 +1,23 @@
-from fastapi import APIRouter, Request, Form, HTTPException
+import unicodedata
+
+FILE = "app/routers/auth.py"
+
+with open(FILE, "r", encoding="utf-8") as f:
+    content = f.read()
+
+content = unicodedata.normalize("NFC", content)
+
+goc = len(content)
+
+old_imports = '''from fastapi import APIRouter, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from supabase_auth.errors import AuthApiError
+from app.services import supabase_service
+
+router = APIRouter()'''
+
+new_imports = '''from fastapi import APIRouter, Request, Form, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from supabase_auth.errors import AuthApiError
@@ -7,16 +26,19 @@ from app.services import supabase_service
 from app.core.config import SUPABASE_URL, SUPABASE_KEY
 from app.core.supabase import supabase
 
-router = APIRouter()
+router = APIRouter()'''
 
-templates = Jinja2Templates(directory="app/templates")
+assert content.count(old_imports) == 1, "Khong tim thay khoi import dau file."
+content = content.replace(old_imports, new_imports)
 
+old_login_page = '''@router.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/login.html",
+    )'''
 
-# ======================================================
-# LOGIN PAGE
-# ======================================================
-
-@router.get("/login", response_class=HTMLResponse)
+new_login_page = '''@router.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -25,48 +47,61 @@ async def login_page(request: Request):
             "supabase_url": SUPABASE_URL,
             "supabase_anon_key": SUPABASE_KEY,
         },
-    )
+    )'''
 
-# ======================================================
-# REGISTER ROLE PAGE
-# ======================================================
+assert content.count(old_login_page) == 1, "Khong tim thay route GET /login."
+content = content.replace(old_login_page, new_login_page)
 
-@router.get("/register", response_class=HTMLResponse)
-async def register_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/register.html",
-    )
+old_login_post = '''@router.post("/login")
+async def login(
+    email: str = Form(...),
+    password: str = Form(...),
+):
+    print("===== LOGIN =====")
+    print(email)
 
+    try:
 
-# ======================================================
-# REGISTER STUDENT PAGE
-# ======================================================
+        result = supabase_service.sign_in(
+            email=email,
+            password=password,
+        )
 
-@router.get("/register/student", response_class=HTMLResponse)
-async def register_student_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/register_student.html",
-    )
+        print(result)
 
+        if result.user is None or result.session is None:
+            return RedirectResponse(
+                "/login",
+                status_code=303,
+            )
 
-# ======================================================
-# REGISTER TEACHER PAGE
-# ======================================================
+        response = RedirectResponse(
+            "/chat",
+            status_code=303,
+        )
+        response.set_cookie(
+            key="sb_access_token",
+            value=result.session.access_token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=60 * 60 * 24 * 7,
+        )
+        response.set_cookie(
+            key="sb_refresh_token",
+            value=result.session.refresh_token,
+            httponly=True,
+            secure=True,
+            samesite="lax",
+            max_age=60 * 60 * 24 * 30,
+        )
+        return response
 
-@router.get("/register/teacher", response_class=HTMLResponse)
-async def register_teacher_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/register_teacher.html",
-    )
+    except Exception as e:
+        print("LOI LOGIN:", e)
+        raise'''
 
-# ======================================================
-# POST /login
-# ======================================================
-
-@router.post("/login")
+new_login_post = '''@router.post("/login")
 async def login(
     email: str = Form(...),
     password: str = Form(...),
@@ -122,10 +157,12 @@ async def login(
 
     except Exception as e:
         print("LOI LOGIN:", e)
-        raise
+        raise'''
 
+assert content.count(old_login_post) == 1, "Khong tim thay route POST /login."
+content = content.replace(old_login_post, new_login_post)
 
-# ======================================================
+anchor = '''# ======================================================
 # LOGOUT
 # ======================================================
 
@@ -137,7 +174,11 @@ async def logout():
     )
     response.delete_cookie("sb_access_token")
     response.delete_cookie("sb_refresh_token")
-    return response
+    return response'''
+
+assert content.count(anchor) == 1, "Khong tim thay khoi LOGOUT."
+
+new_block = anchor + '''
 
 
 # ======================================================
@@ -185,57 +226,11 @@ async def set_session(payload: SetSessionRequest):
         samesite="lax",
         max_age=60 * 60 * 24 * 30,
     )
-    return response
+    return response'''
 
-# ======================================================
-# REGISTER STUDENT
-# ======================================================
+content = content.replace(anchor, new_block)
 
-@router.post("/register/student")
-async def register_student(
-    request: Request,
-    fullname: str = Form(...),
-    email: str = Form(...),
-    password: str = Form(...),
-):
+with open(FILE, "w", encoding="utf-8") as f:
+    f.write(content)
 
-    try:
-
-        supabase_service.sign_up(
-            fullname=fullname,
-            email=email,
-            password=password,
-        )
-
-        return RedirectResponse(
-            "/login",
-            status_code=303
-        )
-
-    except Exception as e:
-
-        print(type(e))
-        print(e)
-
-        return templates.TemplateResponse(
-            "auth/register_student.html",
-            {
-                "request": request,
-                "error": str(e),
-                "fullname": fullname,
-                "email": email,
-            }
-        )
-    
-# ======================================================
-# TEACHER (Coming soon)
-# ======================================================
-
-@router.get("/teacher-coming-soon", response_class=HTMLResponse)
-async def teacher_coming_soon(request: Request):
-
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/teacher_coming_soon.html",
-    )
-
+print(f"OK - da sua {FILE} ({goc} -> {len(content)} ky tu)")

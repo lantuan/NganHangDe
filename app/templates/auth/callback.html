@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đang đăng nhập... | Ngân Hàng Đề</title>
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #f8f9ff;
+        color: #0b1c30;
+    }
+    p { text-align: center; padding: 0 24px; }
+    a { color: #0050cb; }
+</style>
+</head>
+<body>
+<p id="status-text">Đang xử lý đăng nhập Google...</p>
+<script>
+    (function () {
+        var hash = window.location.hash.substring(1);
+        var params = new URLSearchParams(hash);
+        var access_token = params.get('access_token');
+        var refresh_token = params.get('refresh_token');
+        var statusEl = document.getElementById('status-text');
+
+        function baoLoi(msg) {
+            statusEl.innerHTML = msg + ' <a href="/login">Quay lại đăng nhập</a>';
+        }
+
+        if (!access_token || !refresh_token) {
+            baoLoi('Đăng nhập Google thất bại hoặc bị huỷ.');
+            return;
+        }
+
+        fetch('/auth/set-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                access_token: access_token,
+                refresh_token: refresh_token,
+            }),
+        })
+            .then(function (res) {
+                if (res.ok) {
+                    window.location.href = '/chat';
+                } else {
+                    baoLoi('Không xác thực được tài khoản Google.');
+                }
+            })
+            .catch(function () {
+                baoLoi('Có lỗi khi đăng nhập.');
+            });
+    })();
+</script>
+</body>
+</html>
