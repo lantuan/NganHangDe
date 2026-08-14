@@ -59,7 +59,7 @@ async def register_student_page(request: Request):
 async def register_teacher_page(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="auth/register_teacher.html",
+        name="auth/teacher_coming_soon.html",
     )
 
 # ======================================================

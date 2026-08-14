@@ -3,7 +3,7 @@
 <html class="light" lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Đăng ký - Ngân Hàng Đề</title>
+<title>Đăng ký - Ngân Hàng Đề AI</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -133,7 +133,7 @@
 <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary-container/20 rounded-full blur-[100px]"></div>
 <nav class="relative z-10">
-<div class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</div>
+<a href="/" class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề AI</a>
 </nav>
 <div class="relative z-10 flex flex-col items-center justify-center space-y-stack-lg max-w-xl mx-auto text-center">
 <div class="w-full aspect-square max-w-[480px] rounded-[32px] overflow-hidden shadow-2xl transition-transform hover:scale-[1.02] duration-500">
@@ -147,7 +147,7 @@
 </div>
 </div>
 <footer class="relative z-10 flex gap-stack-md opacity-60">
-<span class="font-label-sm text-label-sm">© 2024 Ngân Hàng Đề</span>
+<span class="font-label-sm text-label-sm">© 2024 Ngân Hàng Đề AI</span>
 <span class="font-label-sm text-label-sm">•</span>
 <span class="font-label-sm text-label-sm">Nền tảng giáo dục thông minh</span>
 </footer>
@@ -157,7 +157,7 @@
 <div class="w-full max-w-[480px] space-y-stack-lg">
 <!-- Branding for Mobile -->
 <div class="md:hidden flex justify-center mb-stack-lg">
-<span class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề</span>
+<a href="/" class="text-headline-sm font-headline-lg text-primary tracking-tight">Ngân Hàng Đề AI</a>
 </div>
 <div class="space-y-stack-sm text-center md:text-left">
 <h1 class="font-headline-lg text-headline-lg text-on-surface">Tạo tài khoản mới</h1>
@@ -214,9 +214,6 @@
 
 </button>
 </div>
-<button class="w-full h-14 rounded-[16px] bg-primary text-on-primary font-label-md text-headline-sm shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none" disabled="" id="next-btn" onclick="nextStep()">
-                            Tiếp tục
-                        </button>
 </div>
 <!-- STEP 2: Details Form -->
 <div class="step-transition w-full space-y-stack-md absolute top-0 left-full invisible opacity-0" id="step-2">
@@ -247,7 +244,7 @@
 <div class="flex items-start space-x-stack-sm pt-stack-sm">
 <input class="mt-1 rounded-sm border-outline text-primary focus:ring-primary" id="terms" type="checkbox"/>
 <label class="font-label-sm text-label-sm text-on-surface-variant leading-tight" for="terms">
-                                Tôi đồng ý với các <a class="text-primary hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-primary hover:underline" href="#">Chính sách bảo mật</a> của Ngân Hàng Đề.
+                                Tôi đồng ý với các <a class="text-primary hover:underline" href="#">Điều khoản dịch vụ</a> và <a class="text-primary hover:underline" href="#">Chính sách bảo mật</a> của Ngân Hàng Đề AI.
                             </label>
 </div>
 <button class="w-full h-14 rounded-[16px] bg-primary-container text-on-primary-container font-headline-sm shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all mt-stack-md">
@@ -259,7 +256,7 @@
 <div class="pt-stack-lg border-t border-outline-variant/30 text-center">
 <p class="font-body-md text-body-md text-on-surface-variant">
                         Đã có tài khoản? 
-                        <a class="text-primary font-bold hover:underline" href="#">Đăng nhập</a>
+                        <a class="text-primary font-bold hover:underline" href="/login">Đăng nhập</a>
 </p>
 </div>
 </div>
@@ -312,5 +309,35 @@
 
             indicator2.classList.replace('bg-primary', 'bg-secondary-container');
         }
+
+        // Hover doi mau thanh chi bao giua nut Hoc sinh / Giao vien
+        (function () {
+            var indicator1 = document.getElementById('step-indicator-1');
+            var indicator2 = document.getElementById('step-indicator-2');
+            var roleStudentBtn = document.getElementById('role-student');
+            var roleTeacherBtn = document.getElementById('role-teacher');
+
+            function chonThanhChiBao(ben) {
+                if (!indicator1 || !indicator2) return;
+                if (ben === 'student') {
+                    indicator1.classList.remove('bg-secondary-container');
+                    indicator1.classList.add('bg-primary');
+                    indicator2.classList.remove('bg-primary');
+                    indicator2.classList.add('bg-secondary-container');
+                } else if (ben === 'teacher') {
+                    indicator1.classList.remove('bg-primary');
+                    indicator1.classList.add('bg-secondary-container');
+                    indicator2.classList.remove('bg-secondary-container');
+                    indicator2.classList.add('bg-primary');
+                }
+            }
+
+            if (roleStudentBtn) {
+                roleStudentBtn.addEventListener('mouseenter', function () { chonThanhChiBao('student'); });
+            }
+            if (roleTeacherBtn) {
+                roleTeacherBtn.addEventListener('mouseenter', function () { chonThanhChiBao('teacher'); });
+            }
+        })();
     </script>
 </body></html>
