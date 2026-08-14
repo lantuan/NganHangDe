@@ -141,6 +141,34 @@ async def logout():
 
 
 # ======================================================
+# QUEN MAT KHAU (gui email dat lai mat khau qua Supabase)
+# ======================================================
+
+@router.get("/forgot-password", response_class=HTMLResponse)
+async def forgot_password_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/forgot_password.html",
+        context={
+            "supabase_url": SUPABASE_URL,
+            "supabase_anon_key": SUPABASE_KEY,
+        },
+    )
+
+
+@router.get("/reset-password", response_class=HTMLResponse)
+async def reset_password_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/reset_password.html",
+        context={
+            "supabase_url": SUPABASE_URL,
+            "supabase_anon_key": SUPABASE_KEY,
+        },
+    )
+
+
+# ======================================================
 # DANG NHAP GOOGLE (OAuth qua Supabase)
 # ======================================================
 
