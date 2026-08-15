@@ -11,6 +11,7 @@ from app.core.deps import get_current_user
 from app.core.lop_config import DANH_SACH_LOP
 from app.services import history_service
 from app.services import supabase_service
+from app.services import classroom_service
 
 router = APIRouter()
 
@@ -37,7 +38,16 @@ async def chat(request: Request):
 
     ho_so = supabase_service.lay_lop_hoc_sinh(user.id)
     if not ho_so or not ho_so.get("lop"):
-        return RedirectResponse("/chon-lop", status_code=303)
+        # Thu tu dong ghep lop bang email da dong bo tu Google Classroom
+        # (xem app/services/classroom_service.py) truoc khi bat hoc sinh
+        # tu chon o /chon-lop. Khong tim thay (chua dong bo, hoac email
+        # dang nhap khac email tren Classroom) thi roi ve /chon-lop nhu cu.
+        khop = classroom_service.tim_lop_theo_email(user.email)
+        if khop:
+            supabase_service.cap_nhat_lop_hoc_sinh(user.id, khop["khoi"], khop["lop"])
+            ho_so = khop
+        else:
+            return RedirectResponse("/chon-lop", status_code=303)
 
     metadata = user.user_metadata or {}
     ten_hien_thi = (

@@ -12,6 +12,8 @@ from app.routers import data
 
 from app.routers import exam
 
+from app.routers import classroom
+
 app = FastAPI(title="Ngân Hàng Đề AI")
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -23,6 +25,8 @@ app.include_router(chat.router)
 app.include_router(data.router)
 
 app.include_router(exam.router)
+
+app.include_router(classroom.router)
 
 
 @app.middleware("http")
