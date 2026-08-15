@@ -99,6 +99,12 @@ async def chon_lop_submit(request: Request, lop_full: str = Form(...)):
         return RedirectResponse("/chon-lop", status_code=303)
 
     supabase_service.cap_nhat_lop_hoc_sinh(user.id, khoi, lop)
+    # Tu dong ghi danh (join) hoc sinh vao dung lop that tren Google
+    # Classroom bang chinh email dang nhap web - chi thanh cong neu email
+    # la tai khoan Google that va giao vien da ket noi Classroom (xem
+    # app/services/classroom_service.py). Loi gi cung KHONG duoc chan
+    # hoc sinh vao /chat, nen khong kiem tra ket qua o day.
+    classroom_service.tu_dong_ghi_danh_classroom(user.email, khoi, lop)
     return RedirectResponse("/chat", status_code=303)
 
 
