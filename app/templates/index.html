@@ -174,11 +174,20 @@
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#gioi-thieu">Giới thiệu</a>
 </nav>
 <div class="flex items-center gap-4">
+{% if da_dang_nhap %}
+<span class="hidden md:inline font-body-md text-body-md text-on-surface-variant">Xin chào, {{ user_display_name }}</span>
+<button
+    onclick="window.location.href='/chat'"
+    class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
+    Vào Chat
+</button>
+{% else %}
 <button
     onclick="window.location.href='/login'"
     class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Đăng nhập
 </button>
+{% endif %}
 </div>
 </div>
 </header>
@@ -194,11 +203,19 @@
                     Học tập thông minh. Luyện đề theo năng lực. AI đồng hành cùng em đến khi thành thạo mọi kiến thức toán học.
                 </p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
+{% if da_dang_nhap %}
+<button
+    onclick="window.location.href='/chat'"
+    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow text-lg">
+    Vào Chat
+</button>
+{% else %}
 <button
     onclick="window.location.href='/login'"
     class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow text-lg">
     Đăng nhập ngay
 </button>
+{% endif %}
 <a href="#gioi-thieu" class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high transition-all text-lg inline-block text-center">Giới thiệu chi tiết</a>
 </div>
 </div>
