@@ -1,0 +1,96 @@
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index 28e07c8..dcdc695 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -25,6 +25,7 @@ from app.services.answer_parser_service import (
+     trich_dap_an,
+     AnswerParseError,
+     chuan_hoa_dap_an_ngan,
++    chuan_hoa_dap_an_tf,
+ )
+ from app.services.mapping_service import trich_chuong_bai
+ from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
+@@ -425,7 +426,9 @@ def debug_parse_answer_endpoint(payload: GeneratorRequest):
+
+ class CauTraLoiHocSinh(BaseModel):
+     so_thu_tu: int
+-    cau_tra_loi: str
++    # MC/SA: string dap an. TF: dict 4 y {"a":bool,"b":bool,"c":bool,"d":bool}
++    # (thieu y nao thi coi nhu y do sai/chua tra loi).
++    cau_tra_loi: str | dict | None = None
+
+
+ class ChamBaiRequest(BaseModel):
+@@ -471,6 +474,7 @@ def grade_endpoint(payload: ChamBaiRequest):
+     chi_tiet = []
+     so_cau_da_cham = 0
+     so_cau_dung = 0
++    tong_diem_tu_dong = 0.0
+
+     for bl in payload.bai_lam:
+         cau = dap_an_theo_stt.get(bl.so_thu_tu)
+@@ -499,6 +503,7 @@ def grade_endpoint(payload: ChamBaiRequest):
+             ).strip().upper()
+             so_cau_da_cham += 1
+             so_cau_dung += 1 if dung else 0
++            tong_diem_tu_dong += diem_moi_cau if dung else 0.0
+             chi_tiet.append({
+                 "question_id": generator_id,
+                 "loai_cau": "MC",
+@@ -518,6 +523,7 @@ def grade_endpoint(payload: ChamBaiRequest):
+             )
+             so_cau_da_cham += 1
+             so_cau_dung += 1 if dung else 0
++            tong_diem_tu_dong += diem_moi_cau if dung else 0.0
+             chi_tiet.append({
+                 "question_id": generator_id,
+                 "loai_cau": "SA",
+@@ -531,6 +537,39 @@ def grade_endpoint(payload: ChamBaiRequest):
+                 "dap_an_hoc_sinh": bl.cau_tra_loi,
+                 "dap_an_dung": cau.get("dap_an_dung"),
+             })
++        elif loai_cau == "TF":
++            # dap_an_dung: {"a":True/False,...}. Diem chia deu theo ty le
++            # so y dung / 4 (khong theo thang Bo GD&DT 0.1/0.25/0.5/1) -
++            # thong nhat voi giao vien luc xay tinh nang.
++            dap_an_dung_tf = cau.get("dap_an_dung") or {}
++            tra_loi_hs = bl.cau_tra_loi if isinstance(bl.cau_tra_loi, dict) else {}
++            chi_tiet_tung_y = {}
++            so_y_dung = 0
++            for y in ("a", "b", "c", "d"):
++                hs = chuan_hoa_dap_an_tf(tra_loi_hs.get(y))
++                dung_y = hs is not None and hs == dap_an_dung_tf.get(y)
++                chi_tiet_tung_y[y] = dung_y
++                so_y_dung += 1 if dung_y else 0
++            diem_dat_duoc = round(diem_moi_cau * so_y_dung / 4, 2)
++            so_cau_da_cham += 1
++            so_cau_dung += 1 if so_y_dung == 4 else 0
++            tong_diem_tu_dong += diem_dat_duoc
++            chi_tiet.append({
++                "question_id": generator_id,
++                "loai_cau": "TF",
++                "dung_sai_hoac_diem": so_y_dung == 4,
++                "diem_toi_da": diem_moi_cau,
++                "diem_dat_duoc": diem_dat_duoc,
++                "so_y_dung": so_y_dung,
++                "chi_tiet_tung_y": chi_tiet_tung_y,
++                "nhan_xet": "",
++                "chuong": chuong,
++                "bai": bai_so,
++                "tags": [],
++                "so_thu_tu": bl.so_thu_tu,
++                "dap_an_hoc_sinh": tra_loi_hs,
++                "dap_an_dung": dap_an_dung_tf,
++            })
+         else:
+             chi_tiet.append({
+                 "question_id": generator_id,
+@@ -547,7 +586,7 @@ def grade_endpoint(payload: ChamBaiRequest):
+                 "loi_giai": cau.get("loi_giai"),
+             })
+
+-    diem_tam_tinh = round((so_cau_dung / tong_so_cau) * 10, 2) if tong_so_cau else 0.0
++    diem_tam_tinh = round(tong_diem_tu_dong, 2) if tong_so_cau else 0.0
+
+     if payload.user_id:
+         history_service.luu_ket_qua_cham_bai(

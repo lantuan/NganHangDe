@@ -159,6 +159,48 @@ def trich_dap_an_tf(latex_block: str) -> dict | None:
     return {"dap_an_dung": dap_an_dung, "phat_bieu": phat_bieu}
 
 
+_MOC_BAT_DAU_DAP_AN = [
+    r"\\choiceTFn\[[1-4]\]",
+    r"\\choiceTFt",
+    r"\\shortans(?:\[[^\]]*\])?",
+    r"\\choice(?![A-Za-z])",
+]
+
+
+def trich_de_bai(latex_block: str) -> dict:
+    r"""
+    Trich phan "de bai" (noi dung cau hoi hien thi cho hoc sinh, TRUOC khi
+    co dap an) tu 1 latex_block — dung cho trang lam bai truc tiep tren
+    web (khac PDF: PDF nhung nguyen latex_block vao document, web can
+    tach rieng phan de bai vi \choice/\shortans/\choiceTFn KHONG hien thi
+    y nguyen, ma render lai thanh nut bam/o nhap).
+
+    Lay tu sau "\begin{ex}" (bo qua dong "%%[?]" neu co) den truoc lenh
+    dap an dau tien gap duoc (\choice, \shortans, \choiceTFn, \choiceTFt).
+
+    Tra ve {"de_bai": "...", "co_hinh_ve": True/False}. co_hinh_ve=True
+    nghia la de bai co nhung phan khong the ve lai bang MathJax (hinh ve
+    TikZ qua \immini, \includegraphics...) — cau nay TAM THOI khong dua
+    vao lam bai truc tiep tren web, chi xuat PDF nhu cu.
+    """
+    m = re.search(r"\\begin\{ex\}", latex_block)
+    bat_dau = m.end() if m else 0
+
+    vi_tri_dap_an = [
+        mm.start() + bat_dau
+        for pat in _MOC_BAT_DAU_DAP_AN
+        if (mm := re.search(pat, latex_block[bat_dau:]))
+    ]
+    ket_thuc = min(vi_tri_dap_an) if vi_tri_dap_an else len(latex_block)
+
+    de_bai = latex_block[bat_dau:ket_thuc]
+    de_bai = re.sub(r"^\s*%%\[\?\]\s*\n?", "", de_bai).strip()
+
+    co_hinh_ve = bool(re.search(r"\\immini|\\includegraphics|\\begin\{tikzpicture\}", de_bai))
+
+    return {"de_bai": de_bai, "co_hinh_ve": co_hinh_ve}
+
+
 def trich_loi_giai(latex_block: str) -> str | None:
     r"""Trich noi dung trong \loigiai{...}. Tra ve None neu khong co."""
     vi_tri = _tim_vi_tri_sau_lenh(latex_block, r"\loigiai")
@@ -216,6 +258,8 @@ def trich_dap_an(latex_block: str) -> dict:
     - Co \shortans -> SA (tra loi ngan)
     - Khong co ca 3 -> TL (tu luan)
     """
+    de_bai = trich_de_bai(latex_block)
+
     tf = trich_dap_an_tf(latex_block)
     if tf is not None:
         return {
@@ -223,6 +267,7 @@ def trich_dap_an(latex_block: str) -> dict:
             "dap_an_dung": tf["dap_an_dung"],
             "phat_bieu": tf["phat_bieu"],
             "loi_giai": trich_loi_giai(latex_block),
+            **de_bai,
         }
     choice = trich_dap_an_choice(latex_block)
     if choice is not None:
@@ -231,6 +276,7 @@ def trich_dap_an(latex_block: str) -> dict:
             "dap_an_dung": choice["dap_an_dung"],
             "phuong_an": choice["phuong_an"],
             "loi_giai": trich_loi_giai(latex_block),
+            **de_bai,
         }
     shortans = trich_dap_an_shortans(latex_block)
     if shortans is not None:
@@ -238,9 +284,11 @@ def trich_dap_an(latex_block: str) -> dict:
             "loai_cau": "SA",
             "dap_an_dung": shortans,
             "loi_giai": trich_loi_giai(latex_block),
+            **de_bai,
         }
     return {
         "loai_cau": "TL",
         "dap_an_dung": None,
         "loi_giai": trich_loi_giai(latex_block),
+        **de_bai,
     }
