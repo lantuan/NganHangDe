@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+import unicodedata
+
+FILE = "app/templates/chat/tham_gia_lop_classroom.html"
+
+NOI_DUNG = '''<!DOCTYPE html>
 
 <html class="light" lang="vi"><head>
 <meta charset="utf-8"/>
@@ -145,3 +149,11 @@
 </main>
 
 </body></html>
+'''
+
+NOI_DUNG = unicodedata.normalize("NFC", NOI_DUNG)
+
+with open(FILE, "w", encoding="utf-8") as f:
+    f.write(NOI_DUNG)
+
+print(f"OK - da ghi lai (overwrite) {FILE} ({len(NOI_DUNG)} ky tu)")
