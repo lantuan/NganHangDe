@@ -2,7 +2,7 @@
 from sympy import Symbol, solve, sqrt, factor, cancel, Poly, Eq, Function, exp, Abs, And
 from sympy.abc import x, y, z, a, b
 from sympy import init_printing, nroots
-import numpy.random as np
+import numpy as np
 import numpy
 import random
 import io
@@ -2529,7 +2529,7 @@ def L10_C1_B1_NB010_MC_A_01(socau, dang):
 
             f"Nếu {Q} thì không phải {P}",
 
-            f"{P_hoa} khi và chỉ khi {Q}"
+            f"{v['P_hoa']} khi và chỉ khi {Q}"
         ]
 
         cauTN += MC_SA_answer_text(
