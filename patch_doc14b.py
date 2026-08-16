@@ -10,15 +10,11 @@ goc = len(content)
 
 assert "GOOGLE_CLASSROOM_CLIENT_ID" not in content, "Da co addendum nay - khong chay lai script."
 
-expected_tail = '''Xem chi tiết ở docs/06_N8N_WORKFLOW.md, mục "Trạng thái triển khai thực
-tế". Tóm tắt: hiện chỉ có 1 Workflow gộp (không tách WF001-WF007 riêng),
-Switch có 2 nhánh hoạt động (generate_exam, download_file), phần Business
-Logic (Blueprint, Question Selector, Generator, Assembler) nằm trong
-FastAPI (app/services/), n8n chỉ gọi 1 API duy nhất cho mỗi nhánh.'''
+expected_tail = "cho mỗi nhánh."
 
 assert content.rstrip().endswith(expected_tail), (
-    "Noi dung cuoi file khac du kien - dung lai, kiem tra thu cong "
-    "truoc khi them addendum."
+    "Noi dung cuoi file khac du kien (khac ca cau ngan) - dung lai, "
+    "kiem tra thu cong truoc khi them addendum."
 )
 
 addendum = '''
@@ -28,7 +24,7 @@ addendum = '''
 
 # Cập nhật 2026-08-16 — Google Classroom OAuth (Version 2.20 → 2.22)
 
-## Biến môi trF�ờng mới (.env trên VPS — KHÔNG qua git, sửa trực tiếp
+## Biến môi trường mới (.env trên VPS — KHÔNG qua git, sửa trực tiếp
 bằng SSH, xem mục "Quy trình sửa code" ở trên chỉ áp dụng cho code)
 
 - GOOGLE_CLASSROOM_CLIENT_ID

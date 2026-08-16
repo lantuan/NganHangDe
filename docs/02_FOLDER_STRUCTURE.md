@@ -350,3 +350,33 @@ workflow/
 - Mọi file sinh ra nằm trong output.
 - Không commit temp.
 - Không commit logs.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-16 — file thực tế thêm cho tính năng lớp học / Classroom
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.17 → 2.22. Bổ sung các
+file THẬT đang chạy trên VPS mà cấu trúc mục tiêu ở trên (app/api,
+app/schemas, app/utils — hiện chưa dùng đến) chưa liệt kê:
+
+```
+app/
+├── core/
+│   ├── lop_config.py          (DANH_SACH_LOP, MA_LOP_CLASSROOM)
+│   └── ...
+├── services/
+│   ├── classroom_service.py   (OAuth + Google Classroom API)
+│   └── ...
+├── routers/
+│   ├── classroom.py           (/gv/classroom/*)
+│   └── ...
+└── templates/
+    └── chat/
+        ├── chon_lop.html                  (học sinh tự chọn lớp)
+        └── tham_gia_lop_classroom.html    (xác nhận tham gia Classroom)
+```
+
+Thực tế app/ đang dùng đúng core/, services/, routers/, templates/,
+static/, main.py — không có api/, schemas/, utils/ như liệt kê ở cấu
+trúc mục tiêu phần trên (chưa cần tách, chưa gây vấn đề).

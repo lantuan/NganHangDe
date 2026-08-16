@@ -30,7 +30,7 @@ addendum = '''
 
 # Cập nhật 2026-08-16 — file thực tế thêm cho tính năng lớp học / Classroom
 
-Xem chi tiết đầy đủ docs/16_CHANGELOG.md, Version 2.17 → 2.22. Bổ sung các
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.17 → 2.22. Bổ sung các
 file THẬT đang chạy trên VPS mà cấu trúc mục tiêu ở trên (app/api,
 app/schemas, app/utils — hiện chưa dùng đến) chưa liệt kê:
 
@@ -51,8 +51,8 @@ app/
         └── tham_gia_lop_classroom.html    (xác nhận tham gia Classroom)
 ```
 
-Thực tế app/ đang dùng đẻng core/, services/, routers/, templates/,
-static/, main.py — không có api/, schemas/, utils/ như liệt kê �ở cấu
+Thực tế app/ đang dùng đúng core/, services/, routers/, templates/,
+static/, main.py — không có api/, schemas/, utils/ như liệt kê ở cấu
 trúc mục tiêu phần trên (chưa cần tách, chưa gây vấn đề).
 '''
 
