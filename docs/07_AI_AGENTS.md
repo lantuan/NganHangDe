@@ -200,3 +200,30 @@ Analysis Result (weak_points, strong_points) — CHỈ nhận số liệu
 
 - CHV_Tutor — gia sư AI tương tác nhiều lượt.
 - CHV_ClassAssistant — trợ lý cho giáo viên quản lý lớp.
+
+===============================================================================
+
+# ĐÍNH CHÍNH 2026-08-17 (Version 2.24)
+
+Câu "Toàn hệ thống chỉ có 3 AI: CHV_Fun, CHV_Grader, CHV_Analyzer" ở
+trên đã LỖI THỜI. Thực tế hiện có thêm:
+
+- GenerateExam_RequestParser: AI node riêng, chỉ chạy khi CHV_Fun đã
+  phân loại task="generate_exam". Đọc yêu cầu học sinh, nếu thiếu cấu
+  trúc đề (số câu/tỉ lệ mức độ) thì tra Table Tool "QuyDinhSoLuongCauTrongDe"
+  để lấy cấu trúc chuẩn theo loại hệ số (HeSo1 = kiểm tra thường
+  xuyên/15 phút/miệng: 12 câu (6 TN + 1 Đ/S + 2 TLN + 3 TL), tỉ lệ NB
+  40% - TH 30% - VD 20% - VDC 10%; HeSo2_HeSo3 = giữa kỳ/cuối kỳ/học
+  kỳ: 20 câu (12 TN + 2 Đ/S + 3 TLN + 3 TL), cùng tỉ lệ mức độ). Nếu
+  học sinh đã tự quy định một phần/toàn bộ thì ưu tiên đúng yêu cầu đó,
+  không ghi đè bằng bảng. Xuất JSON (không hỏi lại, không giải thích -
+  xem 16_CHANGELOG Version 2.24 về đề xuất cải tiến "hỏi xác nhận cấu
+  trúc đề" đang trong quá trình thiết kế, CHƯA triển khai).
+
+- CHV_Grader: đã có sẵn từ trước (chấm bài tự luận qua ảnh, xem
+  app/services/grade_photo_service.py), chỉ là trước đây chưa liệt kê
+  đầy đủ ở file này.
+
+Bảng QuyDinhSoLuongCauTrongDe (cột): KyThi, trac_nghiem, dung_sai,
+tra_loi_ngan, tu_luan, NB, TH, VD, VDC. 2 dòng dữ liệu hiện có: HeSo1
+và HeSo2_HeSo3 (chi tiết số liệu xem đoạn trên).

@@ -282,3 +282,38 @@ Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.4.
   hiện được gộp chung trong 1 lệnh gọi API
   /api/exam/generate-pdf-auto (FastAPI xử lý nội bộ), chưa tách
   thành các Code Node riêng trong n8n.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — GenerateExam_RequestParser + node hỗ trợ (Version 2.24)
+
+Thực tế trong n8n hiện có THÊM 1 AI node nữa ngoài CHV_Fun/CHV_Grader
+(doc 07 lúc trước ghi "chỉ có 3 AI" đã lỗi thời — xem đính chính ở
+doc 07). Chi tiết đầy đủ: xem 16_CHANGELOG.md, Version 2.24.
+
+Tóm tắt luồng task=generate_exam (nhánh CHV_Fun -> Switch dẫn tới):
+
+CHV_Fun (task=generate_exam)
+  -> Switch
+  -> GenerateExam_RequestParser (AI node, có Memory + Table Tool
+     QuyDinhSoLuongCauTrongDe)
+  -> Parse_RequestParserOutput (Code node, JSON.parse thô, throw nếu
+     JSON hỏng)
+  -> Ghep_Tham_So (Code node - xem doc 16 Version cũ nhất nhắc, đang
+     là task tồn đọng #16 sửa tiêu đề PDF không dấu)
+  -> Goi_API_Sinh_De (POST http://103.82.27.226:8xxx/... - gọi thẳng
+     backend FastAPI, KHÔNG qua các CN_ tách rời như sơ đồ lý tưởng
+     ở doc 08)
+  -> Goi_API_XuatDapAn (song song, xuất file đáp án)
+  -> Respond to Webhook
+
+Nhánh CHV_Fun (task=help/reject_math_solution/reject_out_of_scope) hoặc
+Switch không khớp nhánh nào (Fallback):
+  -> Code in JavaScript (Code node, xem doc 08 mục "Code in JavaScript")
+  -> Respond to Webhook1
+
+Node "doc-phieu-tra-loi" (DocPhieuTraLoi) và "cham-tu-luan" (CHV_Grader)
+là 2 webhook RIÊNG, không nằm trong luồng chat chính ở trên - được
+app/services/grade_photo_service.py gọi trực tiếp khi học sinh nộp ảnh
+bài làm ở trang /lam-bai.

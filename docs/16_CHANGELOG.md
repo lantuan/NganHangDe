@@ -1330,3 +1330,80 @@ CHUA kiem chung end-to-end tren production
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.24
+
+Ngày
+
+2026-08-17
+
+Nội dung
+
+1. Sua text khong dau trong thong bao loi chat/classroom/auth
+- app/routers/chat.py (4 cho): thong bao "Ban chua dang nhap...",
+  "Khong ket noi duoc voi AI sau 2 lan thu...", "AI chua xu ly duoc
+  yeu cau nay...", "Khong hieu phan hoi tu n8n." - doi sang co dau
+  chuan. Day chinh la nguyen nhan man hinh chat hien chu khong dau
+  "AI chua xu ly duoc yeu cau nay..." ma giao vien bao loi.
+- app/services/classroom_service.py (12 cho), app/routers/auth.py
+  (2 cho): sua tuong tu, du hien chua hien thi truc tiep len UI nhung
+  sua truoc cho nhat quan (tranh lo khi sau nay hien thi).
+
+2. Phat hien va sua loi prompt CHV_Fun bi dan nham doan huong dan
+   chinh sua vao System Message
+- Nguyen nhan sau khi giao vien bao "AI tra loi kem di", kiem tra
+  n8n thi phat hien: doan ghi chu huong dan thao tac ("THAY THE doan
+  'PHONG CACH CHO FIELD tra_loi' hien tai... bang doan duoi day. Chi
+  doi dung doan nay...") da bi dan nguyen van vao GIUA prompt that cua
+  CHV_Fun (nam giua rule 4 va doan phong cach tra loi), thay vi chi
+  dung lam huong dan roi xoa di. Doan van tu noi ve chinh no nay lam
+  nhieu prompt, co the la nguyen nhan AI phan loai/tra loi kem chinh
+  xac hon.
+- Da gui giao vien toan van System Message da sua (bo dung doan thua,
+  giu nguyen moi phan con lai) de dan de vao n8n. KHONG the tu sua
+  truc tiep trong n8n (khong co quyen truy cap).
+
+3. Them loi chao mo dau khi vao chat moi
+- app/templates/chat/chat.html: bank LOI_CHAO_MO_DAU (4 bien the,
+  random.choice thuan JS, khong ton AI token) - tu dong hien khi vao
+  /chat lan dau (khong co ?cid=) hoac bam "+ Chat moi". Noi dung: chao
+  hoi + tom tat AI lam duoc gi (tao de, xin loi giai, lam bai truc
+  tiep tren web, danh gia hoc luc dang phat trien) + hoi hoc sinh muon
+  tao de luon hay con thac mac gi. Thay the khoi HTML tinh cu (chi co
+  logo + 1 dong text, khong tuong tac).
+
+4. Phat hien them 1 AI node chua duoc ghi vao so tay: GenerateExam_RequestParser
+- Node nay chay khi CHV_Fun phan loai task="generate_exam", doc yeu
+  cau hoc sinh, neu thieu cau truc de (so cau/ty le muc do) thi tra
+  Table Tool "QuyDinhSoLuongCauTrongDe" de lay cau truc chuan:
+  + HeSo1 (kiem tra thuong xuyen/15 phut/mieng): 12 cau = 6 TN + 1
+    Dung/Sai + 2 Tra loi ngan + 3 Tu luan, ty le muc do NB 40% -
+    TH 30% - VD 20% - VDC 10%.
+  + HeSo2_HeSo3 (giua ky/cuoi ky/hoc ky): 20 cau = 12 TN + 2 Dung/Sai
+    + 3 Tra loi ngan + 3 Tu luan, cung ty le muc do nhu tren.
+  Neu hoc sinh da tu quy dinh 1 phan/toan bo cau truc thi uu tien
+  dung yeu cau do, khong ghi de bang du lieu bang.
+- Da cap nhat doc 06/07/08 (xem cac muc "Cap nhat 2026-08-17"/"DINH
+  CHINH 2026-08-17" tuong ung) de ghi lai dung kien truc thuc te dang
+  chay, bao gom ca 2 Code Node ho tro: Parse_RequestParserOutput
+  (JSON.parse output cua GenerateExam_RequestParser, throw loi neu
+  JSON hong) va "Code in JavaScript" (build cau tra loi chat cho cac
+  nhanh help/reject_math_solution/reject_out_of_scope/Fallback, dung
+  ngan hang 8 cau "chua xong" vui nhon khi CHV_Fun khong co tra_loi).
+
+5. Dang thiet ke (CHUA trien khai): tinh nang "hoi xac nhan cau truc
+   de truoc khi tao" - khi hoc sinh khong noi ro so cau/ty le muc do,
+   AI se de xuat san cau truc theo bang chuan roi hoi xac nhan ("dong
+   y thi minh lam luon, hoac ban noi cu the muon doi gi") thay vi tu
+   dien lang le nhu hien tai. Can sua them prompt CHV_Fun (nhan dien
+   luot "dong y" tiep theo van la generate_exam) + GenerateExam_RequestParser
+   (them nhanh hoi xac nhan) + 1 node dieu huong moi trong n8n (IF
+   kiem tra can_xac_nhan). Dang cho giao vien quyet dinh phuong an cu
+   the (van ban "dong y" hay nut bam) truoc khi trien khai, de tranh
+   lap lai loi dan nham prompt nhu muc 2.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

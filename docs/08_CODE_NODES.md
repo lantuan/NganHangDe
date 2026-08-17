@@ -275,3 +275,47 @@ nhận xét do CHV_Analyzer đảm nhiệm.
 - CN_SaveStudentLog
 - CN_CacheQuestion
 - CN_CacheBlueprint
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — Code Node thực tế đang dùng trong nhánh chat (Version 2.24)
+
+Khác với sơ đồ WF001 lý tưởng ở trên (CN_LoadExamScope...CN_ResponseFormatter,
+đã gộp vào 1 API call như ghi chú Version cũ ở cuối file), nhánh CHAT
+(webhook chính, không phải luồng sinh đề) hiện có 2 Code Node thật sau:
+
+-------------------------------------------------------------------------------
+
+Parse_RequestParserOutput
+
+Input: output text thô của GenerateExam_RequestParser (field output/
+text/content, tuỳ node AI trả về field nào).
+
+Logic: JSON.parse() trực tiếp, throw Error nếu không phải JSON hợp lệ
+(dừng luôn workflow tại đây, không có xử lý fallback - nếu AI trả sai
+định dạng thì cả nhánh sinh đề sẽ lỗi ở bước này).
+
+Output: JSON đã parse, giữ nguyên các field GenerateExam_RequestParser
+trả ra (loai_he_so, lop, ki_thi, pham_vi_chuong, nguon_cau_truc,
+cau_truc_tong_quat, ty_le_muc_do_goc...) để Ghep_Tham_So dùng tiếp.
+
+-------------------------------------------------------------------------------
+
+Code in JavaScript (nhánh trả lời chat thuần - help/reject_math_solution/
+reject_out_of_scope/Fallback của Switch)
+
+Input: field response_chv_fun (do node "Edit Fields" đặt tên) chứa
+{task, message, tra_loi} là output gốc của CHV_Fun.
+
+Logic:
+- Lấy tra_loi từ response_chv_fun.
+- Nếu có tra_loi (không rỗng) -> success=true, message=tra_loi.
+- Nếu KHÔNG có tra_loi (rỗng/null) -> success=false, message = 1 câu
+  ngẫu nhiên trong ngân hàng "cacCauChuaXong" (8 câu vui nhộn kiểu
+  "Tính năng này đang được code cày cuốc, sắp ra lò rồi, chờ xíu nha!" -
+  dùng cho các nhánh chưa triển khai, KHÔNG tốn AI token vì random.choice
+  thuần JS, đúng nguyên tắc "Ưu tiên Code hơn AI" của doc 00).
+
+Output: {"success": bool, "message": str, "data": null} - đúng định
+dạng app/routers/chat.py mong đợi (content-type application/json, đọc
+qua ket_qua.get("message")).
