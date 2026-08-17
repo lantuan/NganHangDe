@@ -1,0 +1,150 @@
+diff --git a/app/templates/chat/lam_bai.html b/app/templates/chat/lam_bai.html
+index 680281c..8e27a97 100644
+--- a/app/templates/chat/lam_bai.html
++++ b/app/templates/chat/lam_bai.html
+@@ -114,6 +114,14 @@
+             padding: 10px 14px; background: #f8fafc; border-radius: var(--radius-xl);
+         }
+ 
++        .upload-tl {
++            background: var(--color-surface); border: 1px solid var(--color-border);
++            border-radius: var(--radius-2xl); padding: 16px 20px; margin-bottom: 16px;
++            box-shadow: var(--shadow-card);
++        }
++        .upload-tl label { display: block; margin-bottom: 10px; font-size: 14px; color: #334155; }
++        .upload-tl input[type="file"] { width: 100%; font-size: 14px; }
++
+         .nut-nop {
+             display: block; width: 100%; padding: 14px;
+             background: var(--color-primary); color: white;
+@@ -241,11 +249,31 @@ function veTrangLamBai() {
+     const main = document.getElementById('main');
+     let html = '';
+     DANH_SACH_CAU.forEach(function (cau) { html += veMotCau(cau); });
++
++    const coTuLuan = DANH_SACH_CAU.some(function (cau) {
++        return !cau.co_hinh_ve && ['MC', 'TF', 'SA'].indexOf(cau.loai_cau) === -1;
++    });
++    if (coTuLuan) {
++        html += '<div class="upload-tl">';
++        html += '<label for="anh-tuluan">📷 Đề có câu tự luận - chụp hoặc tải ảnh bài làm (viết tay) trước khi nộp để được chấm luôn (không bắt buộc - vẫn có thể gửi ảnh qua khung chat sau như cũ):</label>';
++        html += '<input type="file" accept="image/*" capture="environment" id="anh-tuluan">';
++        html += '</div>';
++    }
++
+     html += '<button class="nut-nop" id="nut-nop" onclick="nopBai()">Nộp bài</button>';
+     main.innerHTML = html;
+     if (window.MathJax) { MathJax.typesetPromise([main]); }
+ }
+ 
++function docFileBase64(file) {
++    return new Promise(function (resolve, reject) {
++        const reader = new FileReader();
++        reader.onload = function () { resolve(reader.result.split(',')[1]); };
++        reader.onerror = reject;
++        reader.readAsDataURL(file);
++    });
++}
++
+ function thuThapBaiLam() {
+     const baiLam = [];
+     DANH_SACH_CAU.forEach(function (cau) {
+@@ -286,6 +314,8 @@ function veKetQua(ketQua) {
+             html += '<div class="dung">✅ Đúng (' + cau.diem_toi_da + ' điểm)</div>';
+         } else if (cau.dung_sai_hoac_diem === false) {
+             html += '<div class="sai">❌ Sai — đáp án đúng: ' + renderLatexText(String(cau.dap_an_dung || '')) + '</div>';
++        } else if (typeof cau.dung_sai_hoac_diem === 'number') {
++            html += '<div>📝 ' + cau.dung_sai_hoac_diem + '/' + cau.diem_toi_da + ' điểm' + (cau.nhan_xet ? ' — ' + renderLatexText(cau.nhan_xet) : '') + '</div>';
+         } else {
+             html += '<div class="ghi-chu-tl">' + (cau.nhan_xet || 'Chưa chấm được tự động.') + '</div>';
+         }
+@@ -317,7 +347,38 @@ async function nopBai() {
+             nutNop.textContent = 'Nộp bài';
+             return;
+         }
+-        veKetQua(data.data);
++
++        let ketQua = data.data;
++
++        // Neu co dinh kem anh bai lam tu luan, goi them /grade-photo (da
++        // co san, dung CHV_Grader that) de cham rieng phan tu luan, roi
++        // gop vao ket qua MC/TF/SA da cham o tren.
++        const inputAnh = document.getElementById('anh-tuluan');
++        if (inputAnh && inputAnh.files && inputAnh.files[0]) {
++            nutNop.textContent = 'Đang chấm phần tự luận...';
++            try {
++                const anhBase64 = await docFileBase64(inputAnh.files[0]);
++                const resAnh = await fetch('/api/exam/grade-photo', {
++                    method: 'POST',
++                    headers: { 'Content-Type': 'application/json' },
++                    body: JSON.stringify({
++                        de_id: DE_ID,
++                        user_id: USER_ID,
++                        anh_tuluan_base64: anhBase64
++                    })
++                });
++                const dataAnh = await resAnh.json();
++                if (dataAnh.success) {
++                    ketQua = gopKetQua(ketQua, dataAnh.data);
++                } else {
++                    alert('Chấm phần tự luận thất bại: ' + (dataAnh.message || 'lỗi không rõ') + '. Phần trắc nghiệm/đúng sai vẫn đã được chấm bình thường.');
++                }
++            } catch (e) {
++                alert('Lỗi gửi ảnh bài tự luận, phần còn lại vẫn đã được chấm. Có thể thử gửi lại ảnh qua khung chat.');
++            }
++        }
++
++        veKetQua(ketQua);
+     } catch (e) {
+         alert('Lỗi kết nối, thử lại nhé.');
+         nutNop.disabled = false;
+@@ -325,6 +386,49 @@ async function nopBai() {
+     }
+ }
+ 
++// Gop ket qua /grade (MC/TF/SA) va /grade-photo (TL qua CHV_Grader).
++// Tinh lai diem tren 10 tu dau dua tren TOAN BO cau da cham duoc o CA
++// HAI nguon - khong dung thang diem_tren_10_tam_tinh rieng cua tung ben
++// (moi ben tu chuan hoa /10 tren tap con rieng cua no nen khong cong
++// truc tiep duoc).
++function gopKetQua(ketQuaChinh, ketQuaAnh) {
++    const theoStt = {};
++    (ketQuaChinh.chi_tiet || []).forEach(function (c) { theoStt[c.so_thu_tu] = c; });
++    (ketQuaAnh.chi_tiet || []).forEach(function (c) {
++        if (c.dung_sai_hoac_diem !== null && c.dung_sai_hoac_diem !== undefined) {
++            theoStt[c.so_thu_tu] = c;
++        }
++    });
++
++    let diemDat = 0, diemToiDaDaCham = 0;
++    Object.keys(theoStt).forEach(function (stt) {
++        const c = theoStt[stt];
++        const gt = c.dung_sai_hoac_diem;
++        if (gt === null || gt === undefined) return;
++        diemToiDaDaCham += c.diem_toi_da || 0;
++        // Cau TF: dung_sai_hoac_diem chi la true/false (het 4/4 y hay
++        // khong), diem THAT SU (theo ty le so_y_dung/4) nam o
++        // diem_dat_duoc - phai uu tien truong nay truoc, khong duoc coi
++        // TF nhu true/false toan phan/khong diem.
++        if (c.loai_cau === 'TF' && typeof c.diem_dat_duoc === 'number') {
++            diemDat += c.diem_dat_duoc;
++        } else if (typeof gt === 'boolean') {
++            diemDat += gt ? (c.diem_toi_da || 0) : 0;
++        } else if (typeof gt === 'number') {
++            diemDat += gt;
++        }
++    });
++
++    const diemTren10 = diemToiDaDaCham ? Math.round((diemDat / diemToiDaDaCham) * 10 * 100) / 100 : 0;
++
++    return {
++        tong_so_cau: ketQuaChinh.tong_so_cau,
++        diem_tren_10_tam_tinh: diemTren10,
++        ghi_chu: 'Điểm tạm tính trên các câu đã chấm được (MC/TF/SA tự động + tự luận qua CHV_Grader nếu có ảnh). Câu còn lại cần cô/thầy chấm tay.',
++        chi_tiet: Object.keys(theoStt).map(function (k) { return theoStt[k]; }).sort(function (a, b) { return a.so_thu_tu - b.so_thu_tu; })
++    };
++}
++
+ taiDe();
+ </script>
+ 
