@@ -190,6 +190,38 @@ def _xoa_khoi_dap_an_an(text: str, ten_lenh: str) -> str:
     return "".join(ket_qua)
 
 
+def _rut_gon_immini(text: str) -> str:
+    r"""Thay `\immini{TEXT}{HINH}` bang chinh TEXT - \immini la macro 2
+    tham so: tham so 1 la noi dung cau hoi (chu, doc duoc), tham so 2 la
+    hinh ve (thuong la \begin{tikzpicture}...) khong the render tren
+    MathJax. Giu lai TEXT de hoc sinh con doc duoc de bai, bo hang hinh
+    ve (co_hinh_ve flag da bao hoc sinh xem PDF de xem hinh)."""
+    ket_qua = []
+    pattern = re.compile(r"\\immini(?![A-Za-z])")
+    i = 0
+    while True:
+        m = pattern.search(text, i)
+        if not m:
+            ket_qua.append(text[i:])
+            break
+        ket_qua.append(text[i:m.start()])
+        vi_tri = m.end()
+        while vi_tri < len(text) and text[vi_tri] in " \t\r\n":
+            vi_tri += 1
+        if vi_tri >= len(text) or text[vi_tri] != "{":
+            ket_qua.append(text[m.start():vi_tri])
+            i = vi_tri
+            continue
+        noi_dung_chu, vi_tri2 = _tim_khoi_dong(text, vi_tri)
+        while vi_tri2 < len(text) and text[vi_tri2] in " \t\r\n":
+            vi_tri2 += 1
+        if vi_tri2 < len(text) and text[vi_tri2] == "{":
+            _, vi_tri2 = _tim_khoi_dong(text, vi_tri2)
+        ket_qua.append(noi_dung_chu)
+        i = vi_tri2
+    return "".join(ket_qua)
+
+
 _MOC_BAT_DAU_DAP_AN = [
     r"\\choiceTFn\[[1-4]\]",
     r"\\choiceTFt",
@@ -242,6 +274,7 @@ def trich_de_bai(latex_block: str) -> dict:
     de_bai = _xoa_khoi_dap_an_an(de_bai, r"\shortans")
     de_bai = re.sub(r"\\begin\{listEXV?\}(?:\[[^\]]*\])*", "", de_bai)
     de_bai = re.sub(r"\\end\{listEXV?\}", "", de_bai)
+    de_bai = _rut_gon_immini(de_bai)
     de_bai = re.sub(r"\\item\b", "\n- ", de_bai)
     de_bai = de_bai.strip()
 
