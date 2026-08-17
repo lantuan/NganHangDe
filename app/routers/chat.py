@@ -1,4 +1,5 @@
 from pathlib import Path
+import random
 import uuid
 
 from fastapi import APIRouter, Request, Form, HTTPException
@@ -16,6 +17,47 @@ from app.services import classroom_service
 router = APIRouter()
 
 templates = Jinja2Templates(directory="app/templates")
+
+# Cau dan vui nhon hien sau khi tao DE thanh cong (khong tinh AI token -
+# random.choice thuan Python). "hoi lam truc tiep" (nut Co/Khong) se gan
+# vao day sau khi trang lam bai truc tiep tren web xong (task rieng).
+CAU_DAN_DE = [
+    "Đề của em xong rồi nè! 📄",
+    "Đề nóng hổi vừa ra lò! 🔥",
+    "Xong đề rồi đó! ✨",
+    "Đề đã sẵn sàng! 🎯",
+    "Đề ra lò nóng hổi! 🍞",
+    "Xong xuôi! Đề đây rồi. 🎉",
+    "Đề đây rồi! Ting ting! 🔔",
+    "Đề mới về, nóng hổi vừa thổi vừa ăn! 😄",
+    "Đề xong! Nút tải đang chờ em nè. 📥",
+    "Đề đã có! 🚀",
+    "Xong rồi đó nha! 💪",
+    "Đề mới toanh vừa in xong! 🖨️",
+]
+
+# Cau dan vui nhon hien sau khi xuat LOI GIAI thanh cong.
+CAU_DAN_LOIGIAI = [
+    "Lời giải nóng hổi đây, cầm lấy mà đối chiếu nha! 📖",
+    "Đáp án ra lò rồi, xem thử làm đúng được mấy câu nào! 🎯",
+    "Đây, lời giải chuẩn không cần chỉnh, ngó qua liền tay! ✅",
+    "Xong! Đáp án đã sẵn sàng, đối chiếu xem mình \"cao thủ\" cỡ nào! 🏆",
+    "Lời giải vừa in ra, thơm mùi mực, lấy liền kẻo nguội! 🖨️",
+    "Đáp án đây rồi, tự chấm thử xem được bao nhiêu điểm nha! 📝",
+    "Ting ting, lời giải đã về, mở ra dò đáp án liền! 🔔",
+    "Đây, bí kíp đáp án đã trong tay, xem \"trúng tủ\" chưa nào! 😄",
+]
+
+_TU_KHOA_LOIGIAI = ("lời giải", "loi giai", "đáp án", "dap an", "giải")
+
+
+def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:
+    """Doan (khong can chinh xac tuyet doi, chi de chon dung bo cau vui
+    nhon hien ra) xem tin nhan hoc sinh vua gui co phai xin loi giai hay
+    khong, dua vao chinh tin nhan da co san trong FastAPI (khong can sua
+    gi ben n8n)."""
+    text = (noi_dung_tin_nhan or "").lower()
+    return any(tu in text for tu in _TU_KHOA_LOIGIAI)
 
 N8N_WEBHOOK_URL = "https://fqrpl.n8npanel.com/webhook/chat"
 
@@ -224,7 +266,8 @@ async def chat_post(
         )
         return ket_qua
 
-    # n8n tra file nhi phan (PDF/TEX/ZIP tu /api/exam/generate-pdf-auto)
+    # n8n tra file nhi phan (PDF/TEX/ZIP tu /api/exam/generate-pdf-auto
+    # hoac /api/exam/export-loigiai)
     if content_type in _EXT_THEO_CONTENT_TYPE:
         ext = _EXT_THEO_CONTENT_TYPE[content_type]
         filename = f"{uuid.uuid4().hex[:10]}.{ext}"
@@ -232,15 +275,20 @@ async def chat_post(
         file_path.write_bytes(r.content)
         file_url = f"/static/downloads/{filename}"
 
+        if _la_yeu_cau_loi_giai(message):
+            cau_dan = random.choice(CAU_DAN_LOIGIAI)
+        else:
+            cau_dan = random.choice(CAU_DAN_DE)
+
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
-            role="assistant", noi_dung="Da tao de xong.",
+            role="assistant", noi_dung=cau_dan,
             loai_phan_hoi="file", duong_dan_file=file_url,
         )
 
         return {
             "success": True,
-            "message": "Da tao de xong.",
+            "message": cau_dan,
             "data": {
                 "type": "file",
                 "url": file_url,
