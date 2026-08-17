@@ -144,7 +144,7 @@
         <h1>📝 Làm bài trực tiếp</h1>
         <div class="chao">Xin chào, {{ user_display_name }}</div>
     </div>
-    <a href="/chat">← Về Chat AI</a>
+    <a href="/chat" id="link-ve-chat">← Về Chat AI</a>
 </header>
 
 <main id="main">
@@ -155,6 +155,13 @@
 const DE_ID = "{{ de_id }}";
 const USER_ID = "{{ user_id }}";
 let DANH_SACH_CAU = [];
+
+// Giu lai dung hoi thoai da tao ra de nay khi bam "Ve Chat AI" (thay vi
+// mo mot hoi thoai moi tinh) - xem chat.html doc lai tham so nay.
+const CID_TU_URL = new URLSearchParams(window.location.search).get("cid");
+if (CID_TU_URL) {
+    document.getElementById("link-ve-chat").href = "/chat?cid=" + encodeURIComponent(CID_TU_URL);
+}
 
 // ============================================================
 // Chuyen doi nhe cac macro LaTeX thuong gap (textbf, enumerate,

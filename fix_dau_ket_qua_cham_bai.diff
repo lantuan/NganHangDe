@@ -1,0 +1,24 @@
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index fcebd5a..8696f4d 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -576,7 +576,7 @@ def grade_endpoint(payload: ChamBaiRequest):
+                 "loai_cau": loai_cau or "TL",
+                 "dung_sai_hoac_diem": None,
+                 "diem_toi_da": diem_moi_cau,
+-                "nhan_xet": "Cau tu luan can cham tay hoac CHV_Grader (chua lam xong).",
++                "nhan_xet": "Câu tự luận cần chấm tay hoặc CHV_Grader (chưa làm xong).",
+                 "chuong": chuong,
+                 "bai": bai_so,
+                 "tags": [],
+@@ -605,8 +605,8 @@ def grade_endpoint(payload: ChamBaiRequest):
+             "so_cau_dung": so_cau_dung,
+             "diem_tren_10_tam_tinh": diem_tam_tinh,
+             "ghi_chu": (
+-                "Diem tam tinh chi tren cac cau MC/SA da cham tu dong. "
+-                "Cau tu luan (TL) can cham tay hoac CHV_Grader (chua lam xong)."
++                "Điểm tạm tính chỉ trên các câu MC/TF/SA đã chấm tự động. "
++                "Câu tự luận (TL) cần chấm tay hoặc CHV_Grader (chưa làm xong)."
+             ),
+             "chi_tiet": chi_tiet,
+         },

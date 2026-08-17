@@ -475,6 +475,13 @@
 
         let conversationId = crypto.randomUUID();
 
+        // Neu quay lai tu trang lam-bai (link co ?cid=...), dung lai
+        // dung hoi thoai cu thay vi tao moi - xem window.onload ben duoi.
+        const _cidTuUrl = new URLSearchParams(window.location.search).get("cid");
+        if (_cidTuUrl) {
+            conversationId = _cidTuUrl;
+        }
+
         function scrollBottom() {
             document.getElementById("chat-area").scrollTop =
                 document.getElementById("chat-area").scrollHeight;
@@ -565,7 +572,7 @@ ${html}
                 const giaiThich = GIAI_THICH_LAM_BAI[Math.floor(Math.random() * GIAI_THICH_LAM_BAI.length)];
                 box.innerHTML =
                     `<p>${giaiThich}</p>` +
-                    `<p><a href="/lam-bai/${deId}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
+                    `<p><a href="/lam-bai/${deId}?cid=${encodeURIComponent(conversationId)}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
             } else {
                 const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
                 box.innerHTML = `<p>${yKhong}</p>`;
@@ -748,8 +755,12 @@ Hãy nhập yêu cầu để AI tạo đề, chấm bài hoặc phân tích họ
         // Focus khi mở trang
         window.onload = function () {
             textarea.focus();
-            scrollBottom();
             taiDanhSachLichSu();
+            if (_cidTuUrl) {
+                moHoiThoai(_cidTuUrl);
+            } else {
+                scrollBottom();
+            }
         };
 
         // ===== TOGGLE SIDEBAR (mobile) =====

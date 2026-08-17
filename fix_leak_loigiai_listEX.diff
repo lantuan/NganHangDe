@@ -1,0 +1,77 @@
+diff --git a/app/services/answer_parser_service.py b/app/services/answer_parser_service.py
+index 8ebb173..852fe2b 100644
+--- a/app/services/answer_parser_service.py
++++ b/app/services/answer_parser_service.py
+@@ -159,11 +159,43 @@ def trich_dap_an_tf(latex_block: str) -> dict | None:
+     return {"dap_an_dung": dap_an_dung, "phat_bieu": phat_bieu}
+ 
+ 
++def _xoa_khoi_dap_an_an(text: str, ten_lenh: str) -> str:
++    r"""Thay moi khoi `ten_lenh[..]{..}` (vd \SA[4]{..}, \shortans{..})
++    con SOT LAI trong de bai bang cho trong "......" - truong hop nhieu y
++    ngan nam long trong 1 \begin{listEX}...\end{listEX} (xem
++    TL_answer_const/TL_answer_text trong data/python_bank/math_type.py),
++    khac voi truong hop 1 \shortans duy nhat lam dap an ca cau (truong
++    hop do da bi cat truoc boi _MOC_BAT_DAU_DAP_AN, khong con toi day).
++    Tranh lo dap an ra man hinh truoc khi hoc sinh nop bai."""
++    ket_qua = []
++    pattern = re.compile(re.escape(ten_lenh) + r"(?![A-Za-z])(?:\[[^\]]*\])?")
++    i = 0
++    while True:
++        m = pattern.search(text, i)
++        if not m:
++            ket_qua.append(text[i:])
++            break
++        ket_qua.append(text[i:m.start()])
++        vi_tri = m.end()
++        while vi_tri < len(text) and text[vi_tri] in " \t\r\n":
++            vi_tri += 1
++        if vi_tri >= len(text) or text[vi_tri] != "{":
++            # Khong co khoi {..} theo sau (bat thuong) - giu nguyen text
++            # nhu cu, tranh vong lap vo han.
++            ket_qua.append(text[m.start():vi_tri])
++            i = vi_tri
++            continue
++        _, i = _tim_khoi_dong(text, vi_tri)
++        ket_qua.append("......")
++    return "".join(ket_qua)
++
++
+ _MOC_BAT_DAU_DAP_AN = [
+     r"\\choiceTFn\[[1-4]\]",
+     r"\\choiceTFt",
+     r"\\shortans(?:\[[^\]]*\])?",
+     r"\\choice(?![A-Za-z])",
++    r"\\loigiai",
+ ]
+ 
+ 
+@@ -177,6 +209,9 @@ def trich_de_bai(latex_block: str) -> dict:
+ 
+     Lay tu sau "\begin{ex}" (bo qua dong "%%[?]" neu co) den truoc lenh
+     dap an dau tien gap duoc (\choice, \shortans, \choiceTFn, \choiceTFt).
++    \loigiai cung duoc tinh la 1 moc chan (an toan cho ca cau TL - khong
++    co choice/shortans/choiceTFn nao ca - de khong bi loi nguyen phan loi
++    giai/dap an vao de bai, xem bug thuc te 17/08).
+ 
+     Tra ve {"de_bai": "...", "co_hinh_ve": True/False}. co_hinh_ve=True
+     nghia la de bai co nhung phan khong the ve lai bang MathJax (hinh ve
+@@ -198,6 +233,18 @@ def trich_de_bai(latex_block: str) -> dict:
+ 
+     co_hinh_ve = bool(re.search(r"\\immini|\\includegraphics|\\begin\{tikzpicture\}", de_bai))
+ 
++    # Cau TL nhieu y ngan (\begin{listEX}...\item... \SA[..]{..}...\end{listEX}
++    # - xem TL_answer_const/TL_answer_text) khong bi chan boi cac moc o
++    # tren (vi \SA la bi danh cua \shortans nhung nam LONG trong listEX,
++    # khong phai dap an duy nhat cua ca cau). Don dep de hien thi duoc,
++    # khong lo tung dap an con:
++    de_bai = _xoa_khoi_dap_an_an(de_bai, r"\SA")
++    de_bai = _xoa_khoi_dap_an_an(de_bai, r"\shortans")
++    de_bai = re.sub(r"\\begin\{listEXV?\}(?:\[[^\]]*\])*", "", de_bai)
++    de_bai = re.sub(r"\\end\{listEXV?\}", "", de_bai)
++    de_bai = re.sub(r"\\item\b", "\n- ", de_bai)
++    de_bai = de_bai.strip()
++
+     return {"de_bai": de_bai, "co_hinh_ve": co_hinh_ve}
+ 
+ 

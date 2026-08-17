@@ -1,0 +1,68 @@
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index ab104e9..f513de7 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -475,6 +475,13 @@
+ 
+         let conversationId = crypto.randomUUID();
+ 
++        // Neu quay lai tu trang lam-bai (link co ?cid=...), dung lai
++        // dung hoi thoai cu thay vi tao moi - xem window.onload ben duoi.
++        const _cidTuUrl = new URLSearchParams(window.location.search).get("cid");
++        if (_cidTuUrl) {
++            conversationId = _cidTuUrl;
++        }
++
+         function scrollBottom() {
+             document.getElementById("chat-area").scrollTop =
+                 document.getElementById("chat-area").scrollHeight;
+@@ -565,7 +572,7 @@ ${html}
+                 const giaiThich = GIAI_THICH_LAM_BAI[Math.floor(Math.random() * GIAI_THICH_LAM_BAI.length)];
+                 box.innerHTML =
+                     `<p>${giaiThich}</p>` +
+-                    `<p><a href="/lam-bai/${deId}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
++                    `<p><a href="/lam-bai/${deId}?cid=${encodeURIComponent(conversationId)}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
+             } else {
+                 const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
+                 box.innerHTML = `<p>${yKhong}</p>`;
+@@ -748,8 +755,12 @@ Hãy nhập yêu cầu để AI tạo đề, chấm bài hoặc phân tích họ
+         // Focus khi mở trang
+         window.onload = function () {
+             textarea.focus();
+-            scrollBottom();
+             taiDanhSachLichSu();
++            if (_cidTuUrl) {
++                moHoiThoai(_cidTuUrl);
++            } else {
++                scrollBottom();
++            }
+         };
+ 
+         // ===== TOGGLE SIDEBAR (mobile) =====
+diff --git a/app/templates/chat/lam_bai.html b/app/templates/chat/lam_bai.html
+index e239c36..680281c 100644
+--- a/app/templates/chat/lam_bai.html
++++ b/app/templates/chat/lam_bai.html
+@@ -144,7 +144,7 @@
+         <h1>📝 Làm bài trực tiếp</h1>
+         <div class="chao">Xin chào, {{ user_display_name }}</div>
+     </div>
+-    <a href="/chat">← Về Chat AI</a>
++    <a href="/chat" id="link-ve-chat">← Về Chat AI</a>
+ </header>
+ 
+ <main id="main">
+@@ -156,6 +156,13 @@ const DE_ID = "{{ de_id }}";
+ const USER_ID = "{{ user_id }}";
+ let DANH_SACH_CAU = [];
+ 
++// Giu lai dung hoi thoai da tao ra de nay khi bam "Ve Chat AI" (thay vi
++// mo mot hoi thoai moi tinh) - xem chat.html doc lai tham so nay.
++const CID_TU_URL = new URLSearchParams(window.location.search).get("cid");
++if (CID_TU_URL) {
++    document.getElementById("link-ve-chat").href = "/chat?cid=" + encodeURIComponent(CID_TU_URL);
++}
++
+ // ============================================================
+ // Chuyen doi nhe cac macro LaTeX thuong gap (textbf, enumerate,
+ // itemize, \\) sang HTML, GIU NGUYEN phan $...$ de MathJax tu render.
