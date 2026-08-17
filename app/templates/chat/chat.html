@@ -277,6 +277,39 @@
         .prose p:last-child { margin-bottom: 0; }
 
         /* ===========================
+           Hoi lam bai truc tiep (nut Co/Khong)
+        =========================== */
+
+        .hoi-lam-bai { margin-top: 4px; }
+        .hoi-lam-bai p { margin: 0 0 .5em; }
+
+        .btn-co,
+        .btn-khong,
+        .btn-bat-dau {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 2px 6px 2px 0;
+            border: 1px solid var(--color-border);
+            transition: opacity .15s ease;
+        }
+
+        .btn-co,
+        .btn-bat-dau {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .btn-khong { background: #f1f5f9; color: #0f172a; }
+
+        .btn-co:hover,
+        .btn-khong:hover,
+        .btn-bat-dau:hover { opacity: .85; }
+
+        /* ===========================
            Typing indicator
         =========================== */
 
@@ -501,6 +534,44 @@ ${html}
             }
         }
 
+        // Cau giai thich vui nhon sau khi hoc sinh bam "Co" (lam bai
+        // truc tiep). Xu ly hoan toan o JS - khong tinh AI token, khong
+        // goi them API nao.
+        const GIAI_THICH_LAM_BAI = [
+            "Chốt kèo! 🎯 Vài điều cần nhớ: trắc nghiệm nộp phát chấm liền, tự luận thì làm ra giấy, chụp ảnh gửi vào đây để được chấm. Coi lại bài: trên web xem được trong hôm nay thôi, qua 3h sáng mai là file bay màu, chat thì còn giữ được 10 ngày. Sẵn sàng chưa nào?",
+            "Ok, vào trận! 🚀 Lưu ý nhanh: câu trắc nghiệm chấm ngay khi nộp, câu tự luận thì chụp ảnh bài làm gửi vào đây nhé. Xem lại bài: web giữ trong ngày hôm nay (3h sáng mai mất file), chat giữ được 10 ngày. Bắt đầu thôi!",
+            "Yes, quẩy thôi! 💪 Ghi nhớ giùm: trắc nghiệm chấm liền tay, tự luận thì chụp hình gửi vào chat để chấm. Coi lại bài: web chỉ giữ trong hôm nay (qua 3h sáng là bay), chat giữ 10 ngày. Bấm vào làm liền nào!",
+            "Được, lên đồ! 🔥 Vài dòng info: trắc nghiệm nộp là có điểm liền, tự luận nhớ chụp ảnh gửi vào đây. Coi lại bài sau này: web chỉ trong ngày hôm nay thôi (3h sáng hôm sau file mất), chat giữ 10 ngày mới mất. Bấm nút bên dưới nào!",
+            "Đã chốt! ✨ Note lẹ: trắc nghiệm chấm tự động ngay khi nộp, tự luận thì chụp ảnh gửi vào chat. Bài làm lưu ở đâu: web xem được hôm nay thôi (3h sáng hôm sau tự xoá), chat còn 10 ngày. Bấm nút vào làm bài thôi!",
+            "Xác nhận có! 🎮 Info nhanh: trắc nghiệm nộp phát ăn điểm liền, tự luận chụp ảnh gửi vào đây để chấm giúp. Xem lại bài: web giữ trong ngày (3h sáng mai mất), chat giữ 10 ngày. Vào làm bài luôn nhé!",
+        ];
+
+        // Cau tra loi khi hoc sinh bam "Khong" (lam tren giay).
+        const Y_KHONG_LAM_BAI = [
+            "Ok deal! Vậy bạn tự chiến trên giấy nhé. Làm xong cần đáp án thì cứ nhắn mình, mình xuất liền cho.",
+            "Được thôi, tự luyện cũng ngầu! Xong bài nhớ quay lại hỏi đáp án, mình gửi ngay.",
+            "Ok, kiểu tự học truyền thống! Làm xong lúc nào cần đáp án cứ gọi mình một tiếng nha.",
+            "Cũng được, làm giấy chill hơn. Khi nào xong và cần đối chiếu đáp án thì nhắn mình xuất cho.",
+            "Ok, tự thân vận động! Hoàn thành bài rồi thì kêu mình một câu, đáp án ra liền.",
+            "Được, cứ làm theo tốc độ riêng của mình. Xong xuôi cần đáp án thì nói mình nhé, có ngay.",
+        ];
+
+        // Bam Co/Khong o khung "hoi lam bai truc tiep" - doi noi dung
+        // ngay tai cho, khong goi lai server, khong tinh AI token.
+        function chonLamBai(idHoi, deId, dongY) {
+            const box = document.getElementById(idHoi);
+            if (!box) return;
+            if (dongY) {
+                const giaiThich = GIAI_THICH_LAM_BAI[Math.floor(Math.random() * GIAI_THICH_LAM_BAI.length)];
+                box.innerHTML =
+                    `<p>${giaiThich}</p>` +
+                    `<p><a href="/lam-bai/${deId}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
+            } else {
+                const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
+                box.innerHTML = `<p>${yKhong}</p>`;
+            }
+        }
+
         // ===== LICH SU CHAT (that, doc tu Supabase qua API) =====
         async function taiDanhSachLichSu() {
             try {
@@ -582,10 +653,22 @@ ${html}
                     if (data.data && data.data.type === "file") {
                         const url = data.data.url;
                         const filename = data.data.filename;
+                        const deId = data.data.de_id;
+                        let htmlHoi = "";
+                        if (deId) {
+                            const idHoi = "hoi-lam-bai-" + Date.now();
+                            htmlHoi =
+                                `<div class="hoi-lam-bai" id="${idHoi}">` +
+                                `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
+                                `<button class="btn-co" onclick="chonLamBai('${idHoi}','${deId}',true)">✅ Có, làm luôn!</button>` +
+                                `<button class="btn-khong" onclick="chonLamBai('${idHoi}','${deId}',false)">📝 Không, để làm trên giấy</button>` +
+                                `</div>`;
+                        }
                         addAIMessage(
                             `<p>${data.message || "Đã tạo đề xong."}</p>` +
                             `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">` +
-                            `📄 Tải file: ${filename}</a></p>`
+                            `📄 Tải file: ${filename}</a></p>` +
+                            htmlHoi
                         );
                     } else if (data.reply) {
                         addAIMessage(marked.parse(data.reply));

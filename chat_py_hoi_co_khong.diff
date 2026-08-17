@@ -1,0 +1,39 @@
+diff --git a/app/routers/chat.py b/app/routers/chat.py
+index d854025..f608111 100644
+--- a/app/routers/chat.py
++++ b/app/routers/chat.py
+@@ -305,20 +305,18 @@ async def chat_post(
+         file_path.write_bytes(r.content)
+         file_url = f"/static/downloads/{filename}"
+ 
++        de_id_de_hoi = None
+         if _la_yeu_cau_loi_giai(message):
+             cau_dan = random.choice(CAU_DAN_LOIGIAI)
+         else:
+             cau_dan = random.choice(CAU_DAN_DE)
+-            # Gan link lam bai truc tiep tren web (markdown - chat.html da
+-            # dung marked.js de render san). Chi gan cho DE, khong gan cho
+-            # loi giai. Neu chua tim thay de_id (VD Supabase loi) thi bo
+-            # qua, khong chan viec tra PDF cho hoc sinh.
++            # Chi hoi "lam bai truc tiep" (nut Co/Khong, xu ly hoan toan
++            # o chat.html bang JS) cho DE, khong hoi cho loi giai. Neu
++            # chua tim thay de_id (VD Supabase loi) thi bo qua, nut se
++            # khong hien ra - khong chan viec tra PDF cho hoc sinh.
+             de_vua_sinh = history_service.lay_de_gan_nhat(conversation_id)
+             if de_vua_sinh and de_vua_sinh.get("id"):
+-                cau_dan += (
+-                    f"\n\n[👉 Làm bài trực tiếp trên web để được chấm điểm]"
+-                    f"(/lam-bai/{de_vua_sinh['id']})"
+-                )
++                de_id_de_hoi = de_vua_sinh["id"]
+ 
+         history_service.luu_tin_nhan(
+             user_id=user.id, conversation_id=conversation_id,
+@@ -333,6 +331,7 @@ async def chat_post(
+                 "type": "file",
+                 "url": file_url,
+                 "filename": filename,
++                "de_id": de_id_de_hoi,
+             },
+         }
+ 
