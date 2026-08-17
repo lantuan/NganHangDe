@@ -175,3 +175,56 @@ def lay_de_gan_nhat(conversation_id):
     except Exception as e:
         print("LOI LAY DE GAN NHAT:", e)
         return None
+
+
+def lay_thong_ke_nang_luc(khoi=None, lop=None):
+    """Lay toan bo exam_history (diem + chi_tiet_bai_lam) kem ho_ten/khoi/
+    lop tu profiles - dung cho trang thong ke nang luc GV (gv/thong-ke).
+    Loc theo khoi/lop neu co truyen (loc phia Python sau khi join, du lieu
+    khong lon nen khong can query rieng). Tra ve [] neu loi/chua co du lieu,
+    khong lam crash trang thong ke."""
+    try:
+        ket_qua = (
+            supabase.table("exam_history")
+            .select("student_id, diem, chi_tiet_bai_lam, created_at")
+            .order("created_at", desc=True)
+            .execute()
+        )
+        rows = ket_qua.data or []
+    except Exception as e:
+        print("LOI LAY THONG KE NANG LUC (exam_history):", e)
+        return []
+
+    if not rows:
+        return []
+
+    student_ids = list({r["student_id"] for r in rows if r.get("student_id")})
+    try:
+        ho_so = (
+            supabase.table("profiles")
+            .select("id, ho_ten, khoi, lop")
+            .in_("id", student_ids)
+            .execute()
+        )
+        theo_id = {p["id"]: p for p in (ho_so.data or [])}
+    except Exception as e:
+        print("LOI LAY THONG KE NANG LUC (profiles):", e)
+        theo_id = {}
+
+    ket_qua_cuoi = []
+    for r in rows:
+        p = theo_id.get(r["student_id"], {})
+        if khoi and p.get("khoi") != khoi:
+            continue
+        if lop and p.get("lop") != lop:
+            continue
+        ket_qua_cuoi.append({
+            "student_id": r["student_id"],
+            "ho_ten": p.get("ho_ten") or "(chưa rõ tên)",
+            "khoi": p.get("khoi"),
+            "lop": p.get("lop"),
+            "diem": r.get("diem"),
+            "chi_tiet_bai_lam": r.get("chi_tiet_bai_lam") or [],
+            "created_at": r.get("created_at"),
+        })
+    return ket_qua_cuoi

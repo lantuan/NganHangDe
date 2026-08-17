@@ -1,0 +1,13 @@
+diff --git a/app/routers/classroom.py b/app/routers/classroom.py
+index b234dbd..eec4d18 100644
+--- a/app/routers/classroom.py
++++ b/app/routers/classroom.py
+@@ -103,7 +103,7 @@ async def thong_ke_nang_luc_page(request: Request):
+         return RedirectResponse("/login", status_code=303)
+     return templates.TemplateResponse(
+         request=request,
+-        name="gv/thong_ke.html",
++        name="teacher/thong_ke.html",
+         context={"danh_sach_lop": DANH_SACH_LOP},
+     )
+ 
