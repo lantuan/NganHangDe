@@ -171,3 +171,26 @@ User (học sinh) → /chon-lop → FastAPI (app/routers/chat.py)
 | classroom_oauth, classroom_roster | Lưu refresh_token, roster đồng bộ | 12 |
 
 Chi tiết đầy đủ xem docs/16_CHANGELOG.md, Version 2.17 → 2.22.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — Làm bài trực tiếp trên web (Version 2.23)
+
+Nhánh RIÊNG, không đi qua CHV_Fun/n8n cho phần chấm MC/TF/SA (khác
+nhánh chat/sinh đề ở trên) — chỉ đi qua n8n khi có ảnh câu tự luận:
+
+Học sinh → GET /lam-bai/{de_id} → GET /api/exam/quiz/{de_id} (ẩn đáp
+án) → nộp bài → POST /api/exam/grade (chấm MC/TF/SA tại chỗ, Python
+thuần) → (nếu có ảnh tự luận) POST /api/exam/grade-photo → CHV_Grader
+
+| Thành phần | Vai trò | Tài liệu |
+|------------|---------|----------|
+| app/services/answer_parser_service.py | Trích đề bài/đáp án từ latex_block | 03 |
+| app/routers/exam.py: GET /quiz/{de_id} | Trả câu hỏi ẩn đáp án | 05 |
+| app/routers/chat.py: GET /lam-bai/{de_id} | Trang làm bài | 05 |
+| app/templates/chat/lam_bai.html | Giao diện làm bài + nộp ảnh tự luận | 13 |
+| app/routers/classroom.py: GET /gv/thong-ke(/data) | Thống kê năng lực GV | 05 |
+| app/templates/teacher/thong_ke.html | Giao diện thống kê | 13 |
+
+Chi tiết đầy đủ xem docs/16_CHANGELOG.md, Version 2.23.

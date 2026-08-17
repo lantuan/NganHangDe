@@ -364,3 +364,41 @@ lớp) bị Google chặn 403 PERMISSION_DENIED với tài khoản Gmail cá nh�
 Version 2.22. Cách đang dùng: tạo link + mã lớp (enrollment code) để
 học sinh tự bấm "Tham gia" trên Classroom, không gọi API ghi (write)
 nào thành công thật trên Classroom ngoài đọc roster/enrollment code.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — Làm bài trực tiếp trên web (Version 2.23)
+
+Chi tiết đầy đủ xem docs/16_CHANGELOG.md, Version 2.23.
+
+## Xem đề để làm bài (ẩn đáp án)
+
+GET /api/exam/quiz/{de_id}
+
+Trả về danh sách câu hỏi KHÔNG có đáp án đúng (đề_bai + phương_án cho
+MC, phát_biểu cho TF, không thêm gì cho SA, ghi_chú cho TL). Đọc từ
+file dapan_json đã lưu lúc sinh đề — file này cùng vòng đời dọn dẹp
+1 ngày với các file PDF/TEX (cron cleanup_old_files.py có sẵn), trả
+410 nếu đã bị dọn.
+
+## Trang làm bài (HTML, không phải JSON)
+
+GET /lam-bai/{de_id}     — yêu cầu đăng nhập, gọi GET /api/exam/quiz/
+                            {de_id} rồi POST /api/exam/grade khi nộp
+GET /gv/thong-ke          — trang thống kê năng lực (GV)
+GET /gv/thong-ke/data     — API JSON cho trang trên, lọc ?khoi=&lop=
+
+## POST /api/exam/grade — cập nhật câu TF
+
+Câu TF nay ĐÃ chấm tự động (trước đó luôn can_cham_tay) — chấm theo
+tỉ lệ tuyến tính, xem docs/03_DATA_STRUCTURE.md mục Grade Result mở
+rộng cho TF.
+
+## POST /api/exam/grade-photo — dùng thêm cho câu tự luận trong trang
+   làm bài web
+
+Trang /lam-bai/{de_id} có thể gọi endpoint này (đã có sẵn từ Version
+2.8, không đổi API) chỉ với anh_tuluan_base64 (không anh_phieu_base64)
+để chấm riêng phần tự luận qua CHV_Grader, gộp kết quả với /grade ở
+phía Frontend (JS thuần, không thêm API mới).

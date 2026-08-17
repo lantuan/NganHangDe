@@ -147,3 +147,26 @@ Chi tiết đầy đủ xem docs/16_CHANGELOG.md. "Quản lý lớp học" ở d
 Vẫn CHƯA có: dashboard học sinh/giáo viên, làm bài online, chấm bài,
 phân tích học tập, quản lý tài khoản — đúng như danh sách "Chưa có" ở
 trên, không đổi.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — Làm bài Online đã triển khai (Version 2.23)
+
+Chi tiết đầy đủ xem docs/16_CHANGELOG.md, Version 2.23.
+
+ĐÍNH CHÍNH mục "Chưa có" ở phần "Trạng thái triển khai thực tế" phía
+trên: "Làm bài Online / Nộp bài / Chấm bài (WF007 chưa triển khai)" —
+KHÔNG còn đúng nữa. Đã có:
+
+- app/templates/chat/lam_bai.html (route GET /lam-bai/{de_id}) — làm
+  MC/TF/SA trực tiếp trên web, chấm điểm ngay khi nộp (không qua n8n/
+  AI, không tốn token). Câu tự luận có thể đính kèm ảnh chấm qua
+  CHV_Grader (/api/exam/grade-photo có sẵn).
+- app/templates/teacher/thong_ke.html (route GET /gv/thong-ke) — bản
+  tối giản của "Dashboard giáo viên" (mục ở trên): điểm trung bình,
+  chương/bài hay sai, theo từng học sinh và cả lớp. KHÔNG phải dashboard
+  đầy đủ (chưa có quản lý đề, danh sách lớp dạng bảng...).
+
+Vẫn CHƯA có: Phân tích học tập (CHV_Analyzer, WF003), nút "Luyện tập
+ngay", Dashboard học sinh, quản lý tài khoản.

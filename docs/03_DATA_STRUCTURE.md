@@ -284,3 +284,16 @@ trích SAU, từ chính latex_block đó, bằng app/services/answer_parser_serv
 sửa Generator Function). Kết quả trích được lưu thành 1 file JSON riêng
 (1 file JSON = đúng 1 lần sinh đề, danh sách câu theo so_thu_tu), KHÔNG
 lưu answer_key ngược lại vào Question Object hay Exam Object.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — Grade Result mở rộng cho TF (Version 2.23)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.23.
+
+Câu TF (Đúng/Sai) chấm theo tỉ lệ tuyến tính (diem_toi_da * so_y_dung/4,
+KHÔNG dùng thang bậc 0.1/0.25/0.5/1 của Bộ GD&ĐT). Grade Result của câu
+TF có thêm 3 field ngoài schema chuẩn ở trên (additive, không phá cấu
+trúc cũ): diem_dat_duoc (điểm thật đã tính), so_y_dung (0-4), chi_tiet_
+tung_y (dict a/b/c/d -> đúng/sai từng ý).

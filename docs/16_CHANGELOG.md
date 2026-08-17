@@ -1148,3 +1148,185 @@ Nội dung
 Người thực hiện
 
 Mai Hà Lan (cùng Claude))
+===============================================================================
+
+Version 2.23
+
+Ngay
+
+2026-08-17
+
+Noi dung
+
+TINH NANG CHINH: "Lam bai truc tiep tren web" (WF007 nhanh WEB, khong
+qua chup anh, khong ton token AI) - hoc sinh lam MC/TF/SA ngay tren
+trinh duyet, duoc cham diem tu dong ngay lap tuc, cau tu luan van co
+the dinh kem anh de CHV_Grader cham qua /grade-photo co san.
+
+1. answer_parser_service.py - trich dap an day du hon
+- Them trich_dap_an_tf(): trich dap an cau Dung/Sai (\choiceTFn[N] /
+  \choiceTFt, 4 y a/b/c/d doc lap, moi y danh dau \True rieng - khac
+  \choice chi co dung 1 dap an). Da kiem chung voi generator that
+  L10_C1_TF_A_01.
+- Them trich_de_bai(): tach rieng phan "de bai" (hien thi cho hoc
+  sinh, AN dap an) tu latex_block, dung cho trang lam bai web. Moc
+  chan gom \choiceTFn/\choiceTFt/\shortans/\choice VA \loigiai (them
+  \loigiai de chan an toan cho ca cau TL khong co marker nao ca -
+  BUG THAT: neu khong co moc nay, toan bo phan loi giai/dap an bi
+  lo nguyen vao de bai hien thi cho hoc sinh, phat hien qua test
+  thuc te tren production ngay 17/08).
+- Them _xoa_khoi_dap_an_an(): don dep cau TL nhieu y ngan dang
+  \begin{listEX}...\item... \SA[n]{...}/\shortans[n]{...}...\end{listEX}
+  (xem TL_answer_const/TL_answer_text trong math_type.py) - thay moi
+  dap an con bang cho trong "......", tranh lo dap an VA tranh loi
+  MathJax "Unknown environment listEX" (\SA la bi danh cua \shortans,
+  nam LONG trong listEX nen khong bi cac moc tren chan truoc).
+- Them _rut_gon_immini(): \immini{TEXT}{HINH_TIKZ} (cau co hinh ve)
+  chi giu lai TEXT, bo phan tikzpicture khong the render bang MathJax
+  (truoc do gay loi "Unknown environment tikzpicture" y het loi
+  listEX o tren).
+- Da test lai toan bo 45 ham sinh cau that trong L10_C1.py sau moi
+  lan sua, khong con leak loigiai/listEX/immini/tikzpicture trong
+  bat ky de bai nao.
+
+2. API moi - GET /api/exam/quiz/{de_id} (app/routers/exam.py)
+- Tra ve danh sach cau hoi cua 1 de da sinh, DA AN dap an dung (chi
+  co de_bai, phuong_an voi MC, phat_bieu voi TF, khong co gi them
+  voi SA, ghi_chu voi TL). Doc tu file dapan_json da luu luc sinh de
+  (dung chung nguon voi /grade, /grade-photo, /export-loigiai).
+- Tra loi 410 neu khong con file dapan_json (dep sau 1 ngay theo
+  cron cleanup_old_files.py co san) - hoc sinh duoc bao ro rang can
+  tao de moi, khong loi 500 mo ho.
+
+3. Trang lam bai - GET /lam-bai/{de_id} (app/routers/chat.py) +
+   app/templates/chat/lam_bai.html (file moi)
+- Goi GET /api/exam/quiz/{de_id} de lay cau hoi, render MC (radio
+  4 phuong an)/TF (Dung/Sai cho tung y a/b/c/d)/SA (o nhap text)
+  tuong tac duoc; cau TL/co_hinh_ve hien ghi chu "lam ra giay".
+  renderLatexText/xuLyDanhSach (JS thuan, khong AI) chuyen doi cac
+  macro LaTeX thuong gap (\textbf, \\, \begin{enumerate}...) sang
+  HTML, giu nguyen $...$ cho MathJax tu render.
+- Nut "Nop bai" goi POST /api/exam/grade (cham MC/TF/SA tu dong).
+- Neu de co cau tu luan: hien them 1 o chon/chup anh (khong bat
+  buoc). Neu co dinh kem, goi THEM POST /api/exam/grade-photo (chi
+  voi anh_tuluan_base64, khong anh_phieu_base64) de cham rieng phan
+  tu luan qua CHV_Grader (endpoint nay DA CO SAN va hoat dong that
+  tu Version 2.8, chi la chua duoc noi voi trang lam bai web truoc
+  gio). Gop ket qua 2 nguon (ham gopKetQua trong JS) thanh 1 diem
+  tren 10 duy nhat - tinh lai tu dau dua tren TOAN BO cau da cham
+  duoc o ca 2 nguon (khong cong truc tiep 2 diem_tren_10_tam_tinh
+  vi moi ben tu chuan hoa /10 tren tap con rieng cua no). Cau TF uu
+  tien dung diem_dat_duoc (ty le so_y_dung/4), khong coi la
+  true/false toan phan.
+- Doc tham so ?cid=<conversation_id> tu URL (do chat.html gan vao
+  khi tao link "Bat dau lam bai") de nut "Ve Chat AI" quay lai DUNG
+  hoi thoai cu thay vi mo hoi thoai moi rong khong (BUG THAT phat
+  hien qua test production: chat.html truoc gio luon tao
+  conversationId = crypto.randomUUID() moi hoan toan moi load trang).
+
+4. Cham TF trong /api/exam/grade (app/routers/exam.py) - diem tuyen
+   tinh theo ty le
+- Truoc gio TF luon tra ve trang_thai=can_cham_tay (answer_parser_service
+  chua trich duoc dap an TF). Nay tinh diem = diem_toi_da * so_y_dung/4
+  (linear proportional - QUYET DINH RO RANG cua nguoi dung, KHONG
+  dung thang diem bac cua Bo GD&DT 0.1/0.25/0.5/1 nhu de xuat ban dau).
+  Tra them so_y_dung, chi_tiet_tung_y (dung/sai tung y a/b/c/d) ngoai
+  cac field chuan cua Grade Result (doc 03).
+- Sua 2 chuoi thong bao khong dau con sot lai tu truoc (nhan_xet cau
+  TL, ghi_chu tong ket) - loi khong lien quan TF nhung phat hien cung
+  luc khi test.
+
+5. Cau dan vui nhon + luong hoi "lam bai truc tiep" (app/routers/chat.py,
+   app/templates/chat/chat.html)
+- CAU_DAN_DE (12 bien the), CAU_DAN_LOIGIAI (8 bien the) - random.choice
+  thuan Python, KHONG tinh token AI - thay the 2 dong co dinh "Da tao
+  de xong."/khong dau truoc do.
+- Sau khi tao de (khong phai xin loi giai), chat.py tra them field
+  data.de_id (tim qua history_service.lay_de_gan_nhat(conversation_id),
+  null neu khong tim thay - khong chan viec tra PDF cho hoc sinh).
+- chat.html: neu co de_id, hien 2 nut "Co, lam luon!"/"Khong, de lam
+  tren giay" duoi file PDF. Bam Co: doi thanh 1 trong 6 cau giai thich
+  (GIAI_THICH_LAM_BAI) + nut "Bat dau lam bai" (mang theo ?cid=...).
+  Bam Khong: doi thanh 1 trong 6 cau OK (Y_KHONG_LAM_BAI). Toan bo xu
+  ly o JS phia trinh duyet, KHONG goi them n8n/API nao - dung y tuong
+  ban dau da duyet ("hoi Co/Khong day du" thay vi ban rut gon truoc do
+  chi noi link truc tiep, da bi nguoi dung phat hien va yeu cau quay
+  lai dung ban day du).
+- Phong cach tra loi cua CHV_Fun (n8n, ngoai repo) cung duoc doi tu
+  xung ho "em/anh" sang "ban" (ngang hang) va bo sung chi dan chi
+  dung tieng Viet co dau, khong cheo tieng Trung/Anh - xem file rieng
+  CHV_Fun_phong_cach_ban_be.txt da gui, khong nam trong repo.
+
+6. Tu dong xoa chat_history sau 10 ngay (scripts/cleanup_chat_history.py,
+   file moi) - cron 3h sang, dung SO_NGAY_GIU = 10, doc dung nguyen tac
+   "code hon AI" cua doc 00. Ap dung CHUNG 1 con so 10 ngay cho ca noi
+   dung chat LAN du lieu cau hoi lam bai web (dapan_json, dung chung
+   co che don dep 1 ngay co san cua cleanup_old_files.py - KHONG doi,
+   nghia la trang lam bai chi dung duoc ~1 ngay sau khi tao de, ngan
+   hon nhieu so voi 10 ngay cua lich su chat - da bao truoc trong cau
+   dan giai thich hien cho hoc sinh).
+
+7. Sua tham so "dang" khong duoc ap dung dung khi sinh cau (BUG THAT,
+   anh huong tat ca cau SA/MC trong L10_C1.py tu truoc gio)
+- Goc bug: data/python_bank/toan10/L10_C1.py co 31 ham dung tham so
+  thu 2 ten "dang" (1=MC, 2/3=SA - xem math_type.py) nhung 29/31 ham
+  KHONG co gia tri mac dinh (bat buoc phai truyen), va
+  app/services/generator_service.py._call_generator_function() khi
+  gap tham so ten "dang" ma khong biet gia tri gi thi LUON goi
+  func(socau, 1) - tuc LUON ep thanh MC (dang=1) bat ke ham do ten la
+  _SA_ hay _MC_. Ket qua: nhung cau du dinh la "tra loi ngan" (SA) bi
+  sinh nham thanh trac nghiem (MC) trong moi de da tung sinh ra.
+- CACH SUA (theo quyet dinh cua nguoi dung - uu tien sua tan goc trong
+  python_bank thay vi truyen dang qua Mapping/exam_assembler_service):
+  them dang=1 vao 29 ham _MC_ con thieu mac dinh (2 ham con lai da
+  dung san). 2 ham _TL_ (L10_C1_B1_TH003_TL_A_01/02) dung nham ten
+  tham so "dang" nhung thuc chat la "dong" (tham so so cot cua
+  \begin{listEX}, KHAC nghia voi "dang" cua MC/SA) - doi ten cho dung
+  ban chat, giong cac ham TL khac trong file (vd
+  L10_C1_B2_VD021_TL_A_01(socau, dong=1)).
+- generator_service.py: _call_generator_function them nhanh rieng cho
+  second_param == "dang" -> chi goi func(socau) (KHONG truyen gia tri
+  cung), de Python tu ap dung dung mac dinh cua tung ham (da sua o
+  buoc tren). KHONG con them tham so "dang" rieng vao chu ky ham
+  call_generator/exam_assembler_service (thu lam roi bo, theo dung
+  yeu cau "it dinh nghia moi nhat co the" cua nguoi dung).
+- Da test qua call_generator() that: goi khong truyen gi them cho ca
+  3 loai (MC/SA/TL that trong L10_C1.py) deu ra dung loai cau nhu ten
+  ham the hien.
+
+8. Trang thong ke nang luc cho GV - GET /gv/thong-ke (trang) + GET
+   /gv/thong-ke/data (API JSON), app/routers/classroom.py + ham moi
+   history_service.lay_thong_ke_nang_luc() + file moi
+   app/templates/teacher/thong_ke.html.
+- KHONG can bang moi: doc thang tu exam_history (diem + chi_tiet_bai_lam
+  da luu san moi lan cham bai qua /grade hoac /grade-photo), join voi
+  profiles (ho_ten/khoi/lop, xem doc 12) o tang Python.
+- Hien: 3 the tong quan (so hoc sinh, so luot cham, diem trung binh
+  ca lop), bang "chuong/bai ca lop hay sai nhat" (xep theo ty le sai,
+  can >=2 luot lam de tranh mau qua nho), bang theo tung hoc sinh
+  (diem trung binh, top 3 chuong/bai hay sai). Loc theo khoi/lop qua
+  DANH_SACH_LOP (app/core/lop_config.py) co san.
+- Cau "sai" tinh thong nhat cho ca cau MC/SA (dung_sai_hoac_diem ===
+  false) va cau cham theo diem so (TF/TL tu CHV_Grader) - duoi 50%
+  diem toi da tinh la "chua vung", dong vai tro nhu sai trong thong ke.
+- Khong co he thong phan quyen giao vien/hoc sinh chinh thuc (dung
+  chung nguyen tac "chi can dang nhap" nhu /gv/classroom/* tu Version
+  2.20 - he thong hien la 1-giao-vien-ngam-dinh, chua phai da nguoi
+  dung).
+- Them link "Thong ke nang luc (GV)" vao sidebar app/templates/chat/chat.html.
+- Da test logic tong hop bang du lieu gia lap VA goi thang ham route
+  that (mock Supabase) - dung nhu thiet ke.
+
+CHUA kiem chung end-to-end tren production
+
+- Nut chup/tai anh cau tu luan tren trang lam bai (muc 3) - da test
+  logic gop diem bang Node, CHUA thu tren production voi anh that.
+- Trang thong ke nang luc (muc 8) - CHUA mo thu /gv/thong-ke tren
+  production voi du lieu that.
+- Sua tham so "dang" (muc 7) - da xac nhan code dung tren GitHub/VPS
+  (hash khop nhau), CHUA tao thu 1 de co cau SA that de kiem tra PDF
+  in ra dung dang tra loi ngan.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

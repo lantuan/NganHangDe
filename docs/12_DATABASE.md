@@ -183,3 +183,16 @@ Chi tiết đầy đủ xem docs/16_CHANGELOG.md. Bảng/cột THẬT đang dùn
 RLS tắt trên cả classroom_oauth và classroom_roster — cùng nguyên tắc
 "chỉ FastAPI được đọc/ghi" đã áp dụng cho chat_history, de_da_sinh,
 file_de, exam_history, profiles.khoi/lop.
+
+
+===============================================================================
+
+# Cập nhật 2026-08-17 — exam_history dùng thêm cho thống kê GV (Version 2.23)
+
+Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.23.
+
+exam_history (đã xác nhận vai trò lưu kết quả chấm bài từ Version 2.4)
+nay được đọc thêm bởi trang /gv/thong-ke (history_service.
+lay_thong_ke_nang_luc) — join Python-side với profiles (ho_ten/khoi/
+lop) để tổng hợp điểm trung bình + chương/bài hay sai theo học sinh và
+theo cả lớp. Không thêm bảng mới, không đổi cấu trúc exam_history.
