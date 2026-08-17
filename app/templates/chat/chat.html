@@ -545,6 +545,45 @@ ${html}
             }
         }
 
+        // Loi chao mo dau khi vao chat moi / trang trong - gioi thieu
+        // nhanh AI lam duoc gi, hoi xem hoc sinh muon tao de luon hay
+        // con thac mac gi khong. Xu ly hoan toan o JS - khong tinh AI
+        // token, khong goi them API nao.
+        const LOI_CHAO_MO_DAU = [
+            `Chào bạn! 👋 Mình là AI của Ngân Hàng Đề, hỗ trợ mấy việc chính: ` +
+            `<br>📝 <strong>Tạo đề</strong>: gõ yêu cầu tự nhiên kiểu "tạo đề lớp 10 chương 1", "kiểm tra miệng chương 2"...` +
+            `<br>📄 <strong>Xin lời giải</strong>: sau khi có đề rồi, gõ "cho tôi lời giải" là ra đáp án liền.` +
+            `<br>💻 <strong>Làm bài trực tiếp trên web</strong>: tạo đề xong sẽ có link để bấm vào làm và được chấm điểm tự động ngay.` +
+            `<br>📊 Đánh giá học lực, tạo đề theo năng lực thì đang xây dựng, sắp có nhé!` +
+            `<br><br>Bạn muốn tạo đề luôn hay còn thắc mắc gì không? 😊`,
+
+            `Chào bạn! ✨ Nhanh gọn giới thiệu vài thứ mình làm được:` +
+            `<br>📝 Tạo đề: chỉ cần gõ yêu cầu bình thường, ví dụ "cho đề giữa kỳ 1 lớp 10".` +
+            `<br>📄 Lấy lời giải: gõ "cho đáp án" ngay sau khi nhận đề là có file liền.` +
+            `<br>💻 Làm bài online: sau khi có đề, bấm link làm bài để được chấm điểm tự động, không cần chờ.` +
+            `<br>📊 Phân tích học lực/luyện theo năng lực: đang phát triển, chưa dùng được.` +
+            `<br><br>Giờ bạn muốn tạo đề luôn hay cần hỏi thêm gì trước đã? 🙂`,
+
+            `Hí, chào bạn! 🎉 Mình có thể giúp bạn:` +
+            `<br>📝 Tạo đề theo yêu cầu (lớp/chương/dạng bài) - cứ nói tự nhiên thôi.` +
+            `<br>📄 Xuất lời giải cho đề vừa tạo - gõ "cho lời giải" là có ngay.` +
+            `<br>💻 Làm bài trực tiếp trên web, chấm điểm tự động sau khi nộp.` +
+            `<br>📊 Thống kê/đánh giá năng lực: đang được xây, chưa xài được.` +
+            `<br><br>Bạn muốn ra đề luôn không, hay đang có gì thắc mắc? 😄`,
+
+            `Chào bạn! 🚀 Trước khi bắt đầu, mình giới thiệu nhanh:` +
+            `<br>📝 Tạo đề: gõ yêu cầu là được, không cần đúng cú pháp gì cả.` +
+            `<br>📄 Xin lời giải: có đề rồi thì gõ "cho tôi lời giải" để nhận đáp án.` +
+            `<br>💻 Làm bài trên web: sau khi tạo đề, bấm link là làm bài và có điểm liền.` +
+            `<br>📊 Đánh giá học lực: đang code, sắp ra mắt.` +
+            `<br><br>Bạn ra đề luôn hay hỏi mình cái gì đã? 😊`,
+        ];
+
+        function hienChaoMoDau() {
+            const loiChao = LOI_CHAO_MO_DAU[Math.floor(Math.random() * LOI_CHAO_MO_DAU.length)];
+            addAIMessage(`<p>${loiChao}</p>`);
+        }
+
         // Cau giai thich vui nhon sau khi hoc sinh bam "Co" (lam bai
         // truc tiep). Xu ly hoan toan o JS - khong tinh AI token, khong
         // goi them API nao.
@@ -728,21 +767,8 @@ ${html}
         // ===== CHAT MỚI =====
         function newChat() {
             conversationId = crypto.randomUUID();
-            messages.innerHTML = `
-<div class="text-center py-16">
-<div class="w-20 h-20 rounded-3xl bg-primary mx-auto flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-5xl">
-auto_awesome
-</span>
-</div>
-<h2 class="mt-6 text-3xl font-bold" style="margin-top:24px;">
-Ngân Hàng Đề AI
-</h2>
-<p class="mt-3 text-slate-500">
-Hãy nhập yêu cầu để AI tạo đề, chấm bài hoặc phân tích học lực.
-</p>
-</div>
-`;
+            messages.innerHTML = "";
+            hienChaoMoDau();
             textarea.focus();
         }
 
@@ -763,7 +789,8 @@ Hãy nhập yêu cầu để AI tạo đề, chấm bài hoặc phân tích họ
             if (_cidTuUrl) {
                 moHoiThoai(_cidTuUrl);
             } else {
-                scrollBottom();
+                messages.innerHTML = "";
+                hienChaoMoDau();
             }
         };
 
