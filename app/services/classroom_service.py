@@ -268,7 +268,7 @@ def them_hoc_sinh_vao_lop(access_token: str, course_id: str, email: str) -> dict
     """
     ma_dang_ky = lay_enrollment_code(access_token, course_id)
     if not ma_dang_ky:
-        return {"success": False, "message": "Khong lay duoc ma dang ky cua lop tren Classroom."}
+        return {"success": False, "message": "Không lấy được mã đăng ký của lớp trên Classroom."}
 
     res = requests.post(
         f"{CLASSROOM_API_BASE}/courses/{course_id}/students",
@@ -278,14 +278,14 @@ def them_hoc_sinh_vao_lop(access_token: str, course_id: str, email: str) -> dict
         timeout=30,
     )
     if res.status_code == 200:
-        return {"success": True, "message": "Da them vao lop tren Classroom."}
+        return {"success": True, "message": "Đã thêm vào lớp trên Classroom."}
 
     # Da la thanh vien san roi (Google tra ve 409/ALREADY_EXISTS) - coi la thanh cong, khong phai loi that.
     if res.status_code == 409:
-        return {"success": True, "message": "Hoc sinh da la thanh vien lop nay tren Classroom."}
+        return {"success": True, "message": "Học sinh đã là thành viên lớp này trên Classroom."}
 
     print(f"LOI THEM HOC SINH VAO CLASSROOM (course_id={course_id}, email={email}):", res.status_code, res.text[:300])
-    return {"success": False, "message": f"Google Classroom tu choi (ma loi {res.status_code})."}
+    return {"success": False, "message": f"Google Classroom từ chối (mã lỗi {res.status_code})."}
 
 
 def tu_dong_ghi_danh_classroom(email: str, khoi: str, lop: str) -> dict:
@@ -302,23 +302,23 @@ def tu_dong_ghi_danh_classroom(email: str, khoi: str, lop: str) -> dict:
     """
     course_id = MA_LOP_CLASSROOM.get((khoi, lop))
     if not course_id:
-        return {"success": False, "message": f"Chua co ma lop Classroom cho {khoi}-{lop}."}
+        return {"success": False, "message": f"Chưa có mã lớp Classroom cho {khoi}-{lop}."}
 
     refresh_token = lay_refresh_token()
     if not refresh_token:
-        return {"success": False, "message": "Chua ket noi Classroom (vao /gv/classroom/connect)."}
+        return {"success": False, "message": "Chưa kết nối Classroom (vào /gv/classroom/connect)."}
 
     try:
         access_token = lam_moi_access_token(refresh_token)
     except Exception as e:
         print("LOI LAM MOI ACCESS TOKEN (tu dong ghi danh Classroom):", e)
-        return {"success": False, "message": "Khong lam moi duoc access token."}
+        return {"success": False, "message": "Không làm mới được access token."}
 
     try:
         return them_hoc_sinh_vao_lop(access_token, course_id, email)
     except Exception as e:
         print(f"LOI TU DONG GHI DANH CLASSROOM ({email}, {khoi}-{lop}):", e)
-        return {"success": False, "message": "Loi khong xac dinh khi ghi danh Classroom."}
+        return {"success": False, "message": "Lỗi không xác định khi ghi danh Classroom."}
 
 
 def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
@@ -342,14 +342,14 @@ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
     if not course_id:
         return {
             "success": False, "link_tham_gia": None, "ma_dang_ky": None,
-            "message": f"Chua co ma lop Classroom cho {khoi}-{lop}.",
+            "message": f"Chưa có mã lớp Classroom cho {khoi}-{lop}.",
         }
 
     refresh_token = lay_refresh_token()
     if not refresh_token:
         return {
             "success": False, "link_tham_gia": None, "ma_dang_ky": None,
-            "message": "Chua ket noi Classroom (vao /gv/classroom/connect).",
+            "message": "Chưa kết nối Classroom (vào /gv/classroom/connect).",
         }
 
     try:
@@ -358,7 +358,7 @@ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
         print("LOI LAM MOI ACCESS TOKEN (tao link gia nhap lop):", e)
         return {
             "success": False, "link_tham_gia": None, "ma_dang_ky": None,
-            "message": "Khong lam moi duoc access token.",
+            "message": "Không làm mới được access token.",
         }
 
     try:
@@ -370,7 +370,7 @@ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
     if not ma_dang_ky:
         return {
             "success": False, "link_tham_gia": None, "ma_dang_ky": None,
-            "message": "Khong lay duoc ma dang ky cua lop tren Classroom.",
+            "message": "Không lấy được mã đăng ký của lớp trên Classroom.",
         }
 
     slug = base64.urlsafe_b64encode(str(course_id).encode()).decode().rstrip("=")

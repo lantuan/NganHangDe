@@ -235,7 +235,7 @@ async def chat_post(
     if user is None:
         return {
             "success": False,
-            "message": "Ban chua dang nhap hoac phien da het han. Vui long dang nhap lai.",
+            "message": "Bạn chưa đăng nhập hoặc phiên đã hết hạn. Vui lòng đăng nhập lại.",
             "data": None,
             "need_login": True,
         }
@@ -265,7 +265,7 @@ async def chat_post(
             print(f"LOI CHAT: khong ket noi duoc n8n (lan {lan_thu + 1}/2) ->", e)
 
     if r is None:
-        loi = "Khong ket noi duoc voi AI sau 2 lan thu, vui long thu lai."
+        loi = "Không kết nối được với AI sau 2 lần thử, vui lòng thử lại."
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=loi, loai_phan_hoi="error",
@@ -284,7 +284,7 @@ async def chat_post(
             print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
             ket_qua = {
                 "success": False,
-                "message": "AI chua xu ly duoc yeu cau nay. Vui long thu lai voi yeu cau tao de cu the (lop/chuong/so cau...).",
+                "message": "AI chưa xử lý được yêu cầu này. Vui lòng thử lại với yêu cầu tạo đề cụ thể (lớp/chương/số câu...).",
                 "data": None,
             }
 
@@ -338,7 +338,7 @@ async def chat_post(
     # Truong hop la khac (n8n loi, tra HTML/text...) - khong de 500 lang le
     print("LOI CHAT: content-type khong xac dinh ->", content_type)
     print(r.text[:1000])
-    loi = "Khong hieu phan hoi tu n8n."
+    loi = "Không hiểu phản hồi từ n8n."
     history_service.luu_tin_nhan(
         user_id=user.id, conversation_id=conversation_id,
         role="assistant", noi_dung=loi, loai_phan_hoi="error",

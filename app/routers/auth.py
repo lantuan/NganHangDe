@@ -195,10 +195,10 @@ async def set_session(payload: SetSessionRequest):
         user_result = supabase.auth.get_user(payload.access_token)
     except Exception as e:
         print("LOI XAC THUC GOOGLE:", e)
-        raise HTTPException(status_code=401, detail="Token khong hop le")
+        raise HTTPException(status_code=401, detail="Token không hợp lệ")
 
     if user_result is None or user_result.user is None:
-        raise HTTPException(status_code=401, detail="Token khong hop le")
+        raise HTTPException(status_code=401, detail="Token không hợp lệ")
 
     response = JSONResponse({"success": True})
     response.set_cookie(
