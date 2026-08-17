@@ -1,0 +1,315 @@
+diff --git a/app/services/generator_service.py b/app/services/generator_service.py
+index 500e8bc..d5c0c16 100644
+--- a/app/services/generator_service.py
++++ b/app/services/generator_service.py
+@@ -69,6 +69,13 @@ def _call_generator_function(func, socau: int, socot: int | None, dong: int | No
+         return func(socau, socot if socot is not None else 4)
+     elif second_param == "dong":
+         return func(socau, dong if dong is not None else 1)
++    elif second_param == "dang":
++        # Moi ham MC/SA trong data/python_bank da tu khai bao dung mac
++        # dinh ngay trong dinh nghia ham (MC -> dang=1, SA -> dang=2/3,
++        # xem math_type.py). Chi can goi func(socau) de Python tu ap
++        # dung mac dinh DUNG cua ham do - khong con hardcode dang=1 (MC)
++        # cho tat ca nhu bug cu (goi nham ca cau SA thanh MC).
++        return func(socau)
+     else:
+         return func(socau, 1)
+ 
+diff --git a/data/python_bank/toan10/L10_C1.py b/data/python_bank/toan10/L10_C1.py
+index a5208af..e66d5ce 100644
+--- a/data/python_bank/toan10/L10_C1.py
++++ b/data/python_bank/toan10/L10_C1.py
+@@ -474,7 +474,7 @@ def L10_C1_B1_TH003_MC_A_02(socau, dang=1):
+ 
+ 
+ 
+-def L10_C1_B1_TH003_TL_A_01(socau, dang):
++def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -617,12 +617,12 @@ def L10_C1_B1_TH003_TL_A_01(socau, dang):
+             ds_abcd,
+             0,
+             0,
+-            dang
++            dong
+         )
+ 
+     return cauTN
+ 
+-def L10_C1_B1_TH003_TL_A_02(socau, dang):
++def L10_C1_B1_TH003_TL_A_02(socau, dong=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -875,14 +875,14 @@ def L10_C1_B1_TH003_TL_A_02(socau, dang):
+             ds_abcd,
+             0,
+             0,
+-            dang
++            dong
+         )
+ 
+     return cauTN
+ 
+ 
+ 
+-def L10_C1_B1_NB005_MC_A_01(socau, dang):
++def L10_C1_B1_NB005_MC_A_01(socau, dang=1):
+     # ==========================================
+     # HÀM PHỤ BỎ VÀO TRONG (NESTED FUNCTION)
+     # AI Agent bốc hàm chính đi đâu, hàm phụ đi theo đó
+@@ -948,7 +948,7 @@ def L10_C1_B1_NB005_MC_A_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB005_MC_B_01(socau, dang):
++def L10_C1_B1_NB005_MC_B_01(socau, dang=1):
+ 
+     # Mỗi phần tử gồm:
+     # [mệnh đề gốc, phủ định đúng, nhiễu 1, nhiễu 2, nhiễu 3]
+@@ -1098,7 +1098,7 @@ def L10_C1_B1_NB005_MC_B_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB005_MC_C_01(socau, dang):
++def L10_C1_B1_NB005_MC_C_01(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -1310,7 +1310,7 @@ def L10_C1_B1_NB005_MC_C_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB007_MC_A_01(socau, dang):
++def L10_C1_B1_NB007_MC_A_01(socau, dang=1):
+ 
+     # Danh sách các mệnh đề kéo theo
+     ds_keotheo = [
+@@ -1595,7 +1595,7 @@ def L10_C1_B1_NB007_MC_A_02(socau, dang=1):
+     return cauTN
+ 
+ 
+-def L10_C1_B1_NB007_MC_B_01(socau, dang):
++def L10_C1_B1_NB007_MC_B_01(socau, dang=1):
+ 
+     # Danh sách các mệnh đề kéo theo
+     # Nội dung thực tế, liên môn, kiến thức THCS trở xuống
+@@ -1982,7 +1982,7 @@ def L10_C1_B1_NB007_MC_B_02(socau, dang=1):
+     return cauTN
+ 
+ 
+-def L10_C1_B1_NB008_MC_A_01(socau, dang):
++def L10_C1_B1_NB008_MC_A_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -2130,7 +2130,7 @@ def L10_C1_B1_NB008_MC_A_01(socau, dang):
+ 
+ 
+ 
+-def L10_C1_B1_NB008_MC_B_01(socau, dang):
++def L10_C1_B1_NB008_MC_B_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -2378,7 +2378,7 @@ def L10_C1_B1_NB008_MC_B_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB010_MC_A_01(socau, dang):
++def L10_C1_B1_NB010_MC_A_01(socau, dang=1):
+ 
+     ds_boi_canh = [
+ 
+@@ -2545,7 +2545,7 @@ def L10_C1_B1_NB010_MC_A_01(socau, dang):
+     return cauTN
+ 
+ 
+-def L10_C1_B1_NB010_MC_A_02(socau, dang):
++def L10_C1_B1_NB010_MC_A_02(socau, dang=1):
+ 
+     cac_cap_goc = [('A', 'B'), ('X', 'Y'), ('M', 'N'), ('P', 'Q'), ('C', 'D'), ('E', 'F'), ('H', 'K')]
+ 
+@@ -2600,7 +2600,7 @@ def L10_C1_B1_NB010_MC_A_02(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB011_MC_A_01(socau, dang):
++def L10_C1_B1_NB011_MC_A_01(socau, dang=1):
+ 
+     ds_boi_canh = [
+ 
+@@ -2862,7 +2862,7 @@ def L10_C1_B1_NB011_MC_A_01(socau, dang):
+     return cauTN
+ 
+ 
+-def L10_C1_B1_NB013_MC_A_01(socau, dang):
++def L10_C1_B1_NB013_MC_A_01(socau, dang=1):
+ 
+     # =========================================================
+     # HÀM PHỤ
+@@ -3151,7 +3151,7 @@ kí hiệu $\exists$ phát biểu là "tồn tại"."""
+     return cauTN
+ 
+ 
+-def L10_C1_B1_NB013_MC_B_01(socau, dang):
++def L10_C1_B1_NB013_MC_B_01(socau, dang=1):
+ 
+     # =========================================================
+     # HÀM PHỤ
+@@ -3409,7 +3409,7 @@ def L10_C1_B1_NB013_MC_B_01(socau, dang):
+ 
+ 
+ 
+-def L10_C1_B1_TH014_MC_A_01(socau, dang):
++def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
+ 
+     import random
+ 
+@@ -3555,7 +3555,7 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang):
+     return cauTN
+ 
+ 
+-def L10_C1_B1_TH014_MC_A_02(socau, dang): ####### kiểm tra lại nội dung câu hỏi, các phương án.
++def L10_C1_B1_TH014_MC_A_02(socau, dang=1): ####### kiểm tra lại nội dung câu hỏi, các phương án.
+ 
+     gt = []
+     dem = 0
+@@ -4510,7 +4510,7 @@ def L10_C1_TF_A_01(socau, socot=1):
+     return cauTF
+ 
+ 
+-def L10_C1_B1_NB015_MC_A_01(socau, dang):
++def L10_C1_B1_NB015_MC_A_01(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -4717,7 +4717,7 @@ def L10_C1_B1_NB015_MC_A_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB015_MC_A_02(socau, dang):
++def L10_C1_B1_NB015_MC_A_02(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -4884,7 +4884,7 @@ def L10_C1_B1_NB015_MC_A_02(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B1_NB015_MC_B_01(socau, dang):
++def L10_C1_B1_NB015_MC_B_01(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -5257,7 +5257,7 @@ def L10_C1_B1_NB015_MC_B_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_NB017_MC_A_01(socau, dang):
++def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
+     x = Symbol('x')
+     y = Symbol('y')
+ 
+@@ -5448,7 +5448,7 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_NB017_MC_A_02(socau, dang):
++def L10_C1_B2_NB017_MC_A_02(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -5621,7 +5621,7 @@ def L10_C1_B2_NB017_MC_A_02(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_NB017_MC_B_01(socau, dang):
++def L10_C1_B2_NB017_MC_B_01(socau, dang=1):
+ 
+     x = Symbol('x')
+     y = Symbol('y')
+@@ -5920,7 +5920,7 @@ def L10_C1_B2_NB017_MC_B_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_NB017_MC_B_02(socau, dang):
++def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -6250,7 +6250,7 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang):
+     return
+ 
+ 
+-def L10_C1_B2_NB017_MC_B_03(socau, dang):
++def L10_C1_B2_NB017_MC_B_03(socau, dang=1):
+ 
+     # Danh sách các chữ cái hoa đặt tên cho tập hợp và chữ thường đặt tên cho phần tử
+     chu_hoa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'M', 'N', 'P', 'Q', 'S', 'T', 'V', 'X', 'Y', 'Z']
+@@ -6293,7 +6293,7 @@ def L10_C1_B2_NB017_MC_B_03(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_TH018_MC_A_01(socau, dang):
++def L10_C1_B2_TH018_MC_A_01(socau, dang=1):
+ 
+     # Danh sách các chữ cái hoa đặt tên cho tập hợp
+     chu_hoa = ['A', 'B', 'X', 'Y', 'M', 'P', 'E', 'F']
+@@ -6397,7 +6397,7 @@ def L10_C1_B2_TH018_MC_A_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_TH018_MC_B_01(socau, dang):
++def L10_C1_B2_TH018_MC_B_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -6542,7 +6542,7 @@ def L10_C1_B2_TH018_MC_B_01(socau, dang):
+     return cauTN
+ 
+ 
+-def L10_C1_B2_NB017_MC_C_01(socau, dang):
++def L10_C1_B2_NB017_MC_C_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -6593,7 +6593,7 @@ def L10_C1_B2_NB017_MC_C_01(socau, dang):
+     return cauTN
+ 
+ 
+-def L10_C1_B2_TH021_MC_A_01(socau, dang):
++def L10_C1_B2_TH021_MC_A_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -6715,7 +6715,7 @@ def L10_C1_B2_TH021_MC_A_01(socau, dang):
+ 
+     return cauTN
+ 
+-def L10_C1_B2_TH019_MC_A_01(socau, dang):
++def L10_C1_B2_TH019_MC_A_01(socau, dang=1):
+ 
+     # Sinh mảng cấu hình ngẫu nhiên theo số lượng câu hỏi để tránh lặp vô hạn
+     gt = list(np.random.randint(0, 4, size=socau))
+@@ -6815,7 +6815,7 @@ def L10_C1_B2_TH019_MC_A_01(socau, dang):
+         cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+     return cauTN
+ 
+-def L10_C1_B2_VD020_MC_A_01(socau, dang):
++def L10_C1_B2_VD020_MC_A_01(socau, dang=1):
+ 
+     gt = []
+     dem = len(gt)
+@@ -6877,7 +6877,7 @@ Vậy lớp 10A có tất cả ${z_ans}$ học sinh không tham gia văn nghệ.
+ 
+     return cauTN
+ 
+-def L10_C1_B2_VD021_MC_A_01(socau, dang):
++def L10_C1_B2_VD021_MC_A_01(socau, dang=1):
+ 
+     gt = []
+     dem = 0
