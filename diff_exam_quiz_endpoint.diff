@@ -1,0 +1,68 @@
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index dcdc695..fcebd5a 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -613,6 +613,63 @@ def grade_endpoint(payload: ChamBaiRequest):
+     }
+ 
+ 
++# ======================================================
++# XEM DE DE LAM BAI TRUC TIEP TREN WEB (an dap an) - dung chung de_id/
++# conversation_id voi /grade, /grade-photo, /export-loigiai (deu doc tu
++# 1 file dapan_json duy nhat da luu khi sinh de). Chi tra ve cau MC/TF/
++# SA (co the tra loi truc tiep tren web); cau TL van phai lam giay + chup
++# anh gui qua /grade-photo nhu cu. Cau co hinh ve (co_hinh_ve=True, xem
++# answer_parser_service.trich_de_bai) khong the ve lai bang MathJax nen
++# danh dau rieng de Frontend hien ghi chu, khong bat lam truc tiep.
++# ======================================================
++
++@router.get("/quiz/{de_id}")
++def xem_de_lam_bai_endpoint(de_id: str):
++    de = history_service.lay_de_theo_id(de_id)
++    if de is None:
++        raise HTTPException(404, "Khong tim thay de.")
++
++    files = de.get("files", {})
++    dapan_path = files.get("dapan_json")
++    if not dapan_path or not Path(dapan_path).exists():
++        raise HTTPException(
++            410,
++            "Khong tim thay du lieu cau hoi cua de nay (co the da bi don "
++            "dep sau 1 ngay). Vui long tao de moi.",
++        )
++
++    danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
++
++    danh_sach_cau_hoi = []
++    for cau in danh_sach_dap_an:
++        loai_cau = cau.get("loai_cau")
++        muc = {
++            "so_thu_tu": cau.get("so_thu_tu"),
++            "loai_cau": loai_cau,
++            "de_bai": cau.get("de_bai") or "",
++            "co_hinh_ve": bool(cau.get("co_hinh_ve")),
++        }
++        if loai_cau == "MC":
++            muc["phuong_an"] = cau.get("phuong_an") or {}
++        elif loai_cau == "TF":
++            muc["phat_bieu"] = cau.get("phat_bieu") or {}
++        elif loai_cau == "SA":
++            pass  # chi can de_bai, hoc sinh tu go dap an
++        else:
++            muc["ghi_chu"] = "Cau tu luan - lam ra giay, chup anh gui de duoc cham."
++        danh_sach_cau_hoi.append(muc)
++
++    return {
++        "success": True,
++        "message": "",
++        "data": {
++            "de_id": de["id"],
++            "tong_so_cau": len(danh_sach_cau_hoi),
++            "cau_hoi": danh_sach_cau_hoi,
++        },
++    }
++
++
+ # ======================================================
+ # CHAM BAI BANG ANH (WF007 nhanh ANH): hoc sinh chup anh Phieu tra loi
+ # (Bo GD&DT, cho MC/TF/SA) va/hoac anh bai lam tu luan viet tay, goi 2

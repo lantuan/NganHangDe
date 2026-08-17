@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Làm bài - Ngân Hàng Đề AI</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- MathJax (cau hinh giong chat.html de dong bo) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: "global" }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <style>
+        :root {
+            --color-primary: #2563eb;
+            --color-success: #16a34a;
+            --color-danger: #dc2626;
+            --color-background: #f8fafc;
+            --color-surface: #ffffff;
+            --color-border: #e2e8f0;
+            --radius-xl: 12px;
+            --radius-2xl: 16px;
+            --shadow-card: 0 10px 30px rgba(15, 23, 42, .08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: var(--color-background);
+            color: #0f172a;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 { margin: 0; font-size: 18px; }
+        header .chao { font-size: 13px; color: #64748b; }
+        header a { color: var(--color-primary); text-decoration: none; font-size: 14px; font-weight: 600; }
+
+        main { max-width: 720px; margin: 24px auto; padding: 0 16px; }
+
+        .cau-hoi {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-2xl);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .cau-hoi-so { font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+        .cau-hoi-debai { margin-bottom: 14px; line-height: 1.6; }
+
+        .lua-chon {
+            display: block;
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .lua-chon:hover { border-color: var(--color-primary); background: #eff6ff; }
+        .lua-chon input { margin-right: 10px; }
+
+        .tf-hang {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            margin-bottom: 8px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .tf-hang .noi-dung { flex: 1; min-width: 200px; }
+        .tf-nut { display: flex; gap: 8px; }
+        .tf-nut label {
+            display: flex; align-items: center; gap: 4px;
+            padding: 6px 10px; border: 1px solid var(--color-border);
+            border-radius: 8px; cursor: pointer; font-size: 14px;
+        }
+
+        input[type="text"].sa-input {
+            width: 100%; padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl); font-size: 15px;
+        }
+
+        .ghi-chu-tl, .ghi-chu-hinh {
+            color: #94a3b8; font-style: italic; font-size: 14px;
+            padding: 10px 14px; background: #f8fafc; border-radius: var(--radius-xl);
+        }
+
+        .nut-nop {
+            display: block; width: 100%; padding: 14px;
+            background: var(--color-primary); color: white;
+            border: none; border-radius: var(--radius-xl);
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            margin-top: 8px;
+        }
+        .nut-nop:disabled { opacity: .6; cursor: not-allowed; }
+
+        .ket-qua {
+            background: var(--color-surface); border-radius: var(--radius-2xl);
+            padding: 24px; text-align: center; box-shadow: var(--shadow-card);
+            margin-bottom: 16px;
+        }
+        .ket-qua-diem { font-size: 48px; font-weight: 800; color: var(--color-primary); }
+
+        .dung { color: var(--color-success); font-weight: 700; }
+        .sai { color: var(--color-danger); font-weight: 700; }
+
+        .loading, .loi { text-align: center; padding: 60px 16px; color: #64748b; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>📝 Làm bài trực tiếp</h1>
+        <div class="chao">Xin chào, {{ user_display_name }}</div>
+    </div>
+    <a href="/chat">← Về Chat AI</a>
+</header>
+
+<main id="main">
+    <div class="loading">Đang tải đề...</div>
+</main>
+
+<script>
+const DE_ID = "{{ de_id }}";
+const USER_ID = "{{ user_id }}";
+let DANH_SACH_CAU = [];
+
+// ============================================================
+// Chuyen doi nhe cac macro LaTeX thuong gap (textbf, enumerate,
+// itemize, \\) sang HTML, GIU NGUYEN phan $...$ de MathJax tu render.
+// Khong xu ly het moi macro LaTeX - chi cover cac truong hop hay gap
+// trong ngan hang de hien tai.
+// ============================================================
+function xuLyDanhSach(text, theBao, cheDo) {
+    const re = new RegExp('\\\\begin\\{' + cheDo + '\\}([\\s\\S]*?)\\\\end\\{' + cheDo + '\\}', 'g');
+    return text.replace(re, function (match, noiDung) {
+        const items = noiDung.split('\\item').map(function (x) { return x.trim(); }).filter(Boolean);
+        const lis = items.map(function (it) { return '<li>' + it + '</li>'; }).join('');
+        return '<' + theBao + '>' + lis + '</' + theBao + '>';
+    });
+}
+
+function renderLatexText(raw) {
+    if (!raw) return "";
+    let s = String(raw);
+    s = s.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
+    s = s.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');
+    s = s.replace(/\\\\/g, '<br>');
+    s = xuLyDanhSach(s, 'ol', 'enumerate');
+    s = xuLyDanhSach(s, 'ul', 'itemize');
+    return s;
+}
+
+async function taiDe() {
+    const main = document.getElementById('main');
+    try {
+        const res = await fetch('/api/exam/quiz/' + DE_ID);
+        const data = await res.json();
+        if (!data.success) {
+            main.innerHTML = '<div class="loi">' + (data.message || 'Không tải được đề. Có thể đề đã hết hạn, thử tạo đề mới nhé!') + '</div>';
+            return;
+        }
+        DANH_SACH_CAU = data.data.cau_hoi;
+        veTrangLamBai();
+    } catch (e) {
+        main.innerHTML = '<div class="loi">Lỗi kết nối, thử tải lại trang nhé.</div>';
+    }
+}
+
+function veMotCau(cau) {
+    let noiDung = '<div class="cau-hoi">';
+    noiDung += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + '</div>';
+    noiDung += '<div class="cau-hoi-debai">' + renderLatexText(cau.de_bai) + '</div>';
+
+    if (cau.co_hinh_ve) {
+        noiDung += '<div class="ghi-chu-hinh">📎 Câu này có hình vẽ, web chưa hiển thị được — xem trong file PDF đề nhé!</div>';
+    } else if (cau.loai_cau === 'MC') {
+        ['A', 'B', 'C', 'D'].forEach(function (nhan) {
+            const noi = cau.phuong_an && cau.phuong_an[nhan] ? cau.phuong_an[nhan] : '';
+            noiDung += '<label class="lua-chon"><input type="radio" name="cau_' + cau.so_thu_tu + '" value="' + nhan + '"> ' + nhan + '. ' + renderLatexText(noi) + '</label>';
+        });
+    } else if (cau.loai_cau === 'TF') {
+        ['a', 'b', 'c', 'd'].forEach(function (y) {
+            const noi = cau.phat_bieu && cau.phat_bieu[y] ? cau.phat_bieu[y] : '';
+            noiDung += '<div class="tf-hang">';
+            noiDung += '<div class="noi-dung">' + y + ') ' + renderLatexText(noi) + '</div>';
+            noiDung += '<div class="tf-nut">';
+            noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="true"> Đúng</label>';
+            noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="false"> Sai</label>';
+            noiDung += '</div></div>';
+        });
+    } else if (cau.loai_cau === 'SA') {
+        noiDung += '<input type="text" class="sa-input" id="cau_' + cau.so_thu_tu + '" placeholder="Nhập đáp án...">';
+    } else {
+        noiDung += '<div class="ghi-chu-tl">✍️ ' + (cau.ghi_chu || 'Câu tự luận - làm ra giấy, chụp ảnh gửi để được chấm.') + '</div>';
+    }
+
+    noiDung += '</div>';
+    return noiDung;
+}
+
+function veTrangLamBai() {
+    const main = document.getElementById('main');
+    let html = '';
+    DANH_SACH_CAU.forEach(function (cau) { html += veMotCau(cau); });
+    html += '<button class="nut-nop" id="nut-nop" onclick="nopBai()">Nộp bài</button>';
+    main.innerHTML = html;
+    if (window.MathJax) { MathJax.typesetPromise([main]); }
+}
+
+function thuThapBaiLam() {
+    const baiLam = [];
+    DANH_SACH_CAU.forEach(function (cau) {
+        if (cau.co_hinh_ve || cau.loai_cau === 'TL') return;
+        if (cau.loai_cau === 'MC') {
+            const checked = document.querySelector('input[name="cau_' + cau.so_thu_tu + '"]:checked');
+            baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: checked ? checked.value : '' });
+        } else if (cau.loai_cau === 'SA') {
+            const input = document.getElementById('cau_' + cau.so_thu_tu);
+            baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: input ? input.value : '' });
+        } else if (cau.loai_cau === 'TF') {
+            const traLoi = {};
+            ['a', 'b', 'c', 'd'].forEach(function (y) {
+                const checked = document.querySelector('input[name="cau_' + cau.so_thu_tu + '_' + y + '"]:checked');
+                traLoi[y] = checked ? (checked.value === 'true') : null;
+            });
+            baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: traLoi });
+        }
+    });
+    return baiLam;
+}
+
+function veKetQua(ketQua) {
+    const main = document.getElementById('main');
+    let html = '<div class="ket-qua">';
+    html += '<div>Điểm của em</div>';
+    html += '<div class="ket-qua-diem">' + ketQua.diem_tren_10_tam_tinh + '<span style="font-size:20px;color:#94a3b8;">/10</span></div>';
+    html += '<div style="color:#64748b;font-size:14px;margin-top:8px;">' + (ketQua.ghi_chu || '') + '</div>';
+    html += '</div>';
+
+    ketQua.chi_tiet.forEach(function (cau) {
+        html += '<div class="cau-hoi">';
+        html += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + '</div>';
+        if (cau.loai_cau === 'TF') {
+            const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
+            html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc + ' điểm</div>';
+        } else if (cau.dung_sai_hoac_diem === true) {
+            html += '<div class="dung">✅ Đúng (' + cau.diem_toi_da + ' điểm)</div>';
+        } else if (cau.dung_sai_hoac_diem === false) {
+            html += '<div class="sai">❌ Sai — đáp án đúng: ' + renderLatexText(String(cau.dap_an_dung || '')) + '</div>';
+        } else {
+            html += '<div class="ghi-chu-tl">' + (cau.nhan_xet || 'Chưa chấm được tự động.') + '</div>';
+        }
+        html += '</div>';
+    });
+
+    main.innerHTML = html;
+    if (window.MathJax) { MathJax.typesetPromise([main]); }
+}
+
+async function nopBai() {
+    const nutNop = document.getElementById('nut-nop');
+    nutNop.disabled = true;
+    nutNop.textContent = 'Đang chấm...';
+    try {
+        const res = await fetch('/api/exam/grade', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                de_id: DE_ID,
+                user_id: USER_ID,
+                bai_lam: thuThapBaiLam()
+            })
+        });
+        const data = await res.json();
+        if (!data.success) {
+            alert(data.message || 'Có lỗi khi chấm bài.');
+            nutNop.disabled = false;
+            nutNop.textContent = 'Nộp bài';
+            return;
+        }
+        veKetQua(data.data);
+    } catch (e) {
+        alert('Lỗi kết nối, thử lại nhé.');
+        nutNop.disabled = false;
+        nutNop.textContent = 'Nộp bài';
+    }
+}
+
+taiDe();
+</script>
+
+</body>
+</html>

@@ -163,6 +163,36 @@ async def chon_lop_submit(request: Request, lop_full: str = Form(...)):
     )
 
 
+@router.get("/lam-bai/{de_id}", response_class=HTMLResponse)
+async def lam_bai_page(request: Request, de_id: str):
+    """Trang lam bai truc tiep (MC/TF/SA) - JS trong template tu goi
+    GET /api/exam/quiz/{de_id} de lay cau hoi (an dap an) va POST
+    /api/exam/grade de nop bai + cham diem. Khong tu doc de_id o day,
+    de_id khong hop le/het han se bao loi ngay trong trang (fetch that
+    bai) thay vi chan o server."""
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    metadata = user.user_metadata or {}
+    ten_hien_thi = (
+        metadata.get("fullname")
+        or metadata.get("full_name")
+        or metadata.get("name")
+        or user.email
+    )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="chat/lam_bai.html",
+        context={
+            "de_id": de_id,
+            "user_id": user.id,
+            "user_display_name": ten_hien_thi,
+        },
+    )
+
+
 @router.get("/api/chat/history")
 async def lay_lich_su_chat(request: Request):
     user = get_current_user(request)
@@ -279,6 +309,16 @@ async def chat_post(
             cau_dan = random.choice(CAU_DAN_LOIGIAI)
         else:
             cau_dan = random.choice(CAU_DAN_DE)
+            # Gan link lam bai truc tiep tren web (markdown - chat.html da
+            # dung marked.js de render san). Chi gan cho DE, khong gan cho
+            # loi giai. Neu chua tim thay de_id (VD Supabase loi) thi bo
+            # qua, khong chan viec tra PDF cho hoc sinh.
+            de_vua_sinh = history_service.lay_de_gan_nhat(conversation_id)
+            if de_vua_sinh and de_vua_sinh.get("id"):
+                cau_dan += (
+                    f"\n\n[👉 Làm bài trực tiếp trên web để được chấm điểm]"
+                    f"(/lam-bai/{de_vua_sinh['id']})"
+                )
 
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
