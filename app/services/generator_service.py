@@ -69,6 +69,13 @@ def _call_generator_function(func, socau: int, socot: int | None, dong: int | No
         return func(socau, socot if socot is not None else 4)
     elif second_param == "dong":
         return func(socau, dong if dong is not None else 1)
+    elif second_param == "dang":
+        # Moi ham MC/SA trong data/python_bank da tu khai bao dung mac
+        # dinh ngay trong dinh nghia ham (MC -> dang=1, SA -> dang=2/3,
+        # xem math_type.py). Chi can goi func(socau) de Python tu ap
+        # dung mac dinh DUNG cua ham do - khong con hardcode dang=1 (MC)
+        # cho tat ca nhu bug cu (goi nham ca cau SA thanh MC).
+        return func(socau)
     else:
         return func(socau, 1)
 
