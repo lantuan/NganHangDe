@@ -1496,3 +1496,94 @@ CHUA kiem chung end-to-end tren production
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.26
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua bug AI nham so trong "chuong X" thanh "lop"
+- Test thuc te tren n8n (giao vien gui anh Executions log): yeu cau
+  "tao de chuong 1" (hoc sinh Khoi 10) bi GenerateExam_RequestParser
+  trich nham thanh lop=1 (lop 1 tieu hoc!) thay vi lop=10 mac dinh,
+  khien Goi_API_Sinh_De loi 500 Internal Server Error (khong co du
+  lieu THPT cho lop 1).
+- Sua prompt GenerateExam_RequestParser (BUOC 1): them quy tac ro rang
+  - lop CHI duoc la 10/11/12, CHI gan gia tri khi so do di lien voi
+  chu "lop" trong cau, tuyet doi khong suy luan tu so trong "chuong
+  X"/"bai X"/"cau X". Khong noi ro lop kem chu "lop" o dau -> mac dinh
+  lop=10.
+- app/routers/exam.py, generate_exam_pdf_auto_endpoint: them kiem tra
+  som "payload.lop not in (10, 11, 12)" -> HTTPException 400 ro rang,
+  thay vi de cac ham ben duoi crash 500 kho hieu neu lan sau AI van
+  lo trich sai (phong thu them, khong thay the cho viec sua prompt).
+- Da test: py_compile app/routers/exam.py sach. CHUA test lai tren
+  n8n voi prompt moi (giao vien tu dan va thu lai).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.27
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua bug NGHIEM TRONG: cau Dung/Sai (TF) mat dinh dang khi xuat PDF
+- Giao vien bao: cau TF tren trang lam bai online (quiz web) hien dung
+  dinh dang, nhung ban PDF ("ban giay") lai in 4 y a/b/c/d thanh 1 doan
+  van chay lien, khong con khung Dung/Sai nhu ban giao vien tu soan.
+- Nguyen nhan: data/python_bank/math_type.py (ham phatbieu_giai va
+  TF_baitoan_du, dung chung cho TOAN BO cau TF trong ngan hang de) chon
+  lenh LaTeX theo tham so "socot": socot in {1,2,3,4} -> dung
+  "\choiceTFn[N]"; con lai -> "\choiceTFt". NHUNG "\choiceTFn" KHONG
+  HE TON TAI trong data/config/ex_test.sty - chi co "\choiceTFt" duoc
+  dinh nghia that (\newcommand{\choiceTFt}...). generator_service.py
+  mac dinh socot=4 khi khong truyen gi them, nen MOI cau TF khi xuat
+  PDF deu roi vao nhanh "\choiceTFn[4]" khong ton tai - LaTeX bo qua
+  lenh khong xac dinh nay va in thang noi dung 4 khoi {...} thanh doan
+  van thuong, mat toan bo dinh dang bang Dung/Sai. Day la loi co san
+  tu truoc, anh huong TOAN BO cau TF trong ca ngan hang de khi xuat
+  PDF (khong phai loi moi phat sinh tu cac sua doi trong session nay).
+  Trang lam bai online khong bi anh huong vi answer_parser_service.py
+  trich dap an bang regex tren chinh van ban LaTeX (khong qua bien
+  dich PDF nen khong bi anh huong boi loi \choiceTFn).
+- Da xac nhan bang cach chay truc tiep L10_C1_TF_B_01() va doc lai
+  data/config/ex_test.sty: grep "choiceTFn" trong file .sty tra ve 0
+  ket qua dinh nghia that (chi xuat hien trong \choiceTFt/\choiceTFn
+  o vai dong tham chieu chu khong phai \newcommand).
+- Sua: math_type.py, bo hoan toan nhanh "\choiceTFn[N]", LUON dung
+  "\choiceTFt" (macro duy nhat co that trong ex_test.sty). Khong sua
+  ex_test.sty (file .sty phuc tap, khong ro co con noi nao khac dung
+  \choiceTFn hay khong, sua o Python an toan hon vi la 1 diem duy nhat
+  dung chung).
+- Da test: chay lai L10_C1_TF_B_01(1, 4) sau khi sua, xac nhan output
+  dung "\choiceTFt", khong con "\choiceTFn". answer_parser_service.py
+  van trich dap an dung binh thuong (regex da ho tro san ca 2 dang tu
+  truoc). CHUA test bien dich PDF that tren VPS (can giao vien tu build
+  lai 1 de co cau TF va xem PDF).
+
+2. Hien chi tiet dung/sai tung y (a/b/c/d) o trang ket qua lam bai
+- Truoc: trang /lam-bai chi hien "Dung X/4 y - Y diem" cho cau TF,
+  khong ro y nao dung y nao sai.
+- Backend (app/routers/exam.py) tu truoc da tinh san "chi_tiet_tung_y"
+  (dict {a:true/false, b:..., c:..., d:...}) nhung frontend chua dung
+  toi.
+- app/templates/chat/lam_bai.html, veKetQua(): them dong hien 4 the
+  "✅/❌ y A/B/C/D" ngay duoi dong diem, mau xanh/do tuong ung, doc
+  truc tiep tu chi_tiet_tung_y co san (khong can sua backend).
+- Da test: node --check + Jinja2 render sach.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

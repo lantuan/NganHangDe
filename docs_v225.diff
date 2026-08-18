@@ -1,0 +1,97 @@
+diff --git a/docs/16_CHANGELOG.md b/docs/16_CHANGELOG.md
+index 1372bbe..b18e04b 100644
+--- a/docs/16_CHANGELOG.md
++++ b/docs/16_CHANGELOG.md
+@@ -1407,3 +1407,92 @@ Nội dung
+ Nguoi thuc hien
+ 
+ Mai Ha Lan (cung Claude)
++
++===============================================================================
++
++Version 2.25
++
++Ngày
++
++2026-08-17
++
++Nội dung
++
++1. Trien khai tinh nang "hoi xac nhan cau truc de truoc khi tao" (da
++   thiet ke o Version 2.24, muc 5)
++- Phat hien bug quan trong o node Ghep_Tham_So (n8n): code cu luon gan
++  cung "cau_truc_tu_hoc_sinh: null" va "socau_ma_de: null" khi goi API
++  /api/exam/generate-pdf-auto - nghia la du GenerateExam_RequestParser
++  co tinh dung so cau (tu bang QuyDinhSoLuongCauTrongDe hoac tu chinh
++  yeu cau hoc sinh), so lieu do bi VUT BO truoc khi toi backend. Hoc
++  sinh tu noi ro so cau ("30 cau", "20 cau trac nghiem"...) bi lo di,
++  backend luon dung mac dinh rieng cua no (data/config/exam_rules.json).
++  Da sua Ghep_Tham_So de forward dung so cau moi loai tu p.cau_truc_
++  tong_quat (AN TOAN vi khi nguon_cau_truc="table" so lieu nay von
++  giong het mac dinh backend - da doi chieu 2 bang khop nhau). KHONG
++  forward ty_le_muc_do_goc (1 ty le CHUNG cho ca de) vi backend can ty
++  le RIENG cho tung loai cau (data/config/exam_rules.json), ap chung
++  se lam hong cau dung/sai va tu luan - phan nay van de backend tu
++  dung bang chuan rieng.
++- GenerateExam_RequestParser (n8n): them field can_xac_nhan. Khi
++  nguon_cau_truc = "table" hoac "mixed" (co it nhat 1 phan so lieu tu
++  Table Tool, khong phai hoc sinh tu noi) -> KHONG ra de ngay, xuat
++  JSON hoi xac nhan (can_xac_nhan=true, tra_loi = cau hoi neu ro so
++  lieu se dung) kem theo de_xuat (cau_truc_tong_quat, ty_le_muc_do_goc,
++  lop, loai_he_so, ki_thi, pham_vi_chuong). Khi nguon_cau_truc="user"
++  (hoc sinh da noi ro toan bo) -> ra de ngay nhu cu, khong hoi.
++- Them 1 node IF moi (kiem tra can_xac_nhan) + 1 node Code moi (build
++  cau tra loi {success,message,data:{type:"xac_nhan_de",de_xuat}}) giua
++  Parse_RequestParserOutput va Ghep_Tham_So, noi nhanh true vao lai
++  "Respond to Webhook1" co san (dung chung dinh dang JSON voi nhanh
++  help/reject_*/Fallback cua CHV_Fun).
++- QUAN TRONG: luot "dong y" tiep theo cua hoc sinh KHONG di qua CHV_Fun/
++  GenerateExam_RequestParser nua (khong ton them token AI) - chat.html
++  hien 2 nut "Dong y, tao de" / "De minh noi cu the hon" ngay duoi cau
++  hoi xac nhan; bam "Dong y" goi THANG /api/exam/generate-pdf-auto tu
++  JS (dung lai dung nguyen de_xuat da nhan duoc), khong goi lai webhook
++  n8n. Day la ly do chon phuong an nut bam thay vi hoc sinh go chu
++  "dong y" (phuong an do se can AI phan loai lai, ton them token va
++  rui ro nham giong loi dan prompt tung gap o Version 2.24).
++- app/routers/exam.py: them API moi GET /api/exam/de-gan-nhat?
++  conversation_id=... - tra ve de_id cua de moi nhat trong 1 hoi thoai,
++  dung de hien nut Co/Khong lam bai truc tiep SAU KHI tao de qua duong
++  goi thang nay (vi FileResponse cua generate-pdf-auto khong tra ve
++  de_id, chi tra file PDF thuan tuy).
++- app/routers/chat.py: them user_id vao context Jinja2 cua GET /chat
++  (truoc chi co user_email/user_display_name/user_khoi/user_lop) - de
++  JS o chat.html biet duoc user hien tai khi goi thang generate-pdf-auto.
++- app/templates/chat/chat.html: them CURRENT_USER_ID, nhanh xu ly
++  data.data.type==="xac_nhan_de" trong sendMessage(), 2 ham moi
++  doiYeuCauDe() va xacNhanTaoDe() (fetch generate-pdf-auto, nhan blob
++  PDF, tao download link, goi tiep /de-gan-nhat de lay de_id hien nut
++  Co/Khong lam bai truc tiep - tai su dung dung UI/logic cua chonLamBai()
++  da co).
++- Da test: py_compile app/routers/exam.py + chat.py, node --check +
++  Jinja2 render chat.html (kiem tra CURRENT_USER_ID duoc dien dung tu
++  context). CHUA test duoc phan n8n (IF node moi, Ghep_Tham_So sua) vi
++  khong co quyen truy cap n8n - giao vien tu them/noi node theo huong
++  dan rieng (file n8n_HUONG_DAN_va_noi_dung.txt) roi tu kiem tra tren
++  production.
++
++2. Kiem tra lai tieu de PDF (task ton dong tu Version 2.16/#16)
++- Doc lai dung code Ghep_Tham_So hien tai: dong xay tieu_de
++  (`Đề ${loai_he_so === "HeSo1" ? "kiểm tra" : "thi"} - Toán ${p.lop}`)
++  DA CO DAU DUNG CHUAN san, khong co cho nao lam mat dau trong _escape_
++  latex (app/services/exam_assembler_service.py) hay latex_service.py.
++  Chua xac dinh duoc nguyen nhan thuc su cua loi "tieu de khong dau" -
++  can giao vien gui 1 vi du PDF moi tao + tieu de thuc te hien ra de
++  dieu tra tiep (co the la file PDF cu tao truoc khi sua, hoac loi o
++  buoc khac chua ro).
++
++CHUA kiem chung end-to-end tren production
++
++- Toan bo tinh nang "hoi xac nhan cau truc de" (muc 1) - CHUA test that
++  tren n8n/production (can giao vien tu ap dung 3 buoc trong file
++  n8n_HUONG_DAN_va_noi_dung.txt roi thu tao 1 de khong ro cau truc).
++- Loi tieu de PDF khong dau (muc 2) - van CHUA xac dinh duoc nguyen
++  nhan that su, dang cho vi du cu the tu giao vien.
++
++Nguoi thuc hien
++
++Mai Ha Lan (cung Claude)

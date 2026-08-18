@@ -1,0 +1,68 @@
+diff --git a/app/templates/chat/lam_bai.html b/app/templates/chat/lam_bai.html
+index 8e27a97..597f142 100644
+--- a/app/templates/chat/lam_bai.html
++++ b/app/templates/chat/lam_bai.html
+@@ -141,6 +141,10 @@
+         .dung { color: var(--color-success); font-weight: 700; }
+         .sai { color: var(--color-danger); font-weight: 700; }
+ 
++        .chi-tiet-tung-y { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; font-size: 14px; }
++        .chi-tiet-tung-y .y-dung { color: var(--color-success); }
++        .chi-tiet-tung-y .y-sai { color: var(--color-danger); }
++
+         .loading, .loi { text-align: center; padding: 60px 16px; color: #64748b; }
+     </style>
+ </head>
+@@ -310,6 +314,18 @@ function veKetQua(ketQua) {
+         if (cau.loai_cau === 'TF') {
+             const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
+             html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc + ' điểm</div>';
++            // Hien chi tiet dung/sai tung y a/b/c/d (chi_tiet_tung_y da co
++            // san tu backend, xem app/routers/exam.py) - de hoc sinh biet
++            // ro y nao dung y nao sai thay vi chi thay ti le chung.
++            if (cau.chi_tiet_tung_y && typeof cau.chi_tiet_tung_y === 'object') {
++                html += '<div class="chi-tiet-tung-y">';
++                Object.keys(cau.chi_tiet_tung_y).sort().forEach(function (y) {
++                    const dungY = cau.chi_tiet_tung_y[y];
++                    html += '<span class="y-' + (dungY ? 'dung' : 'sai') + '">' +
++                        (dungY ? '✅' : '❌') + ' ý ' + y.toUpperCase() + '</span>';
++                });
++                html += '</div>';
++            }
+         } else if (cau.dung_sai_hoac_diem === true) {
+             html += '<div class="dung">✅ Đúng (' + cau.diem_toi_da + ' điểm)</div>';
+         } else if (cau.dung_sai_hoac_diem === false) {
+diff --git a/data/python_bank/math_type.py b/data/python_bank/math_type.py
+index a2ceb35..a36651f 100644
+--- a/data/python_bank/math_type.py
++++ b/data/python_bank/math_type.py
+@@ -18,7 +18,13 @@ def phatbieu_giai(ds_abcd,socot):###Dùng cho câu TRUE FALSE mà đồ thị th
+ 	while "True" not in cau_a[0] and "True" not in cau_b[0] and "True" not in cau_c[0] and "True" not in cau_d[0]:
+ 		cau_a,cau_b,cau_c,cau_d=[random.choice(ds_abcd[i]) for i in range(len(ds_abcd))]
+ 	cau=[cau_a[0],cau_b[0],cau_c[0],cau_d[0]]
+-	text_choice='\\choiceTFn[1]' if socot==1 else '\\choiceTFn[2]' if socot==2 else '\\choiceTFn[3]' if socot==3 else '\\choiceTFn[4]' if socot==4 else '\\choiceTFt'
++	# SUA: \choiceTFn[N] KHONG TON TAI trong data/config/ex_test.sty (chi co
++	# \choiceTFt duoc dinh nghia that su) - dung \choiceTFn lam LaTeX bo qua
++	# lenh khong xac dinh roi in cac khoi {...} thanh 1 doan van chay lien,
++	# mat het dinh dang Dung/Sai khi xuat PDF (socot mac dinh la 4 nen loi
++	# nay xay ra o TAT CA cau TF khi ra PDF - xem 16_CHANGELOG Version 2.27).
++	# Luon dung \choiceTFt (macro duy nhat co that), bo tham so socot cu.
++	text_choice='\\choiceTFt'
+ 	for i in range(len(cau)):
+ 		text_choice=text_choice+cau[i]+"\n"
+ 	giai=[cau_a[1],cau_b[1],cau_c[1],cau_d[1]]
+@@ -33,7 +39,13 @@ def TF_baitoan_du(debai,ds_abcd,dothi_de,dothi_giai,socot):
+ 	while "True" not in cau_a[0] and "True" not in cau_b[0] and "True" not in cau_c[0] and "True" not in cau_d[0]:
+ 		cau_a,cau_b,cau_c,cau_d=[random.choice(ds_abcd[i]) for i in range(len(ds_abcd))]
+ 	cau=[cau_a[0],cau_b[0],cau_c[0],cau_d[0]]
+-	text_choice='\\choiceTFn[1]' if socot==1 else '\\choiceTFn[2]' if socot==2 else '\\choiceTFn[3]' if socot==3 else '\\choiceTFn[4]' if socot==4 else '\\choiceTFt'
++	# SUA: \choiceTFn[N] KHONG TON TAI trong data/config/ex_test.sty (chi co
++	# \choiceTFt duoc dinh nghia that su) - dung \choiceTFn lam LaTeX bo qua
++	# lenh khong xac dinh roi in cac khoi {...} thanh 1 doan van chay lien,
++	# mat het dinh dang Dung/Sai khi xuat PDF (socot mac dinh la 4 nen loi
++	# nay xay ra o TAT CA cau TF khi ra PDF - xem 16_CHANGELOG Version 2.27).
++	# Luon dung \choiceTFt (macro duy nhat co that), bo tham so socot cu.
++	text_choice='\\choiceTFt'
+ 	for i in range(len(cau)):
+ 		text_choice=text_choice+cau[i]+"\n"
+ 	giai=[cau_a[1],cau_b[1],cau_c[1],cau_d[1]]

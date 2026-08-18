@@ -1,0 +1,57 @@
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index f272d1e..3c59bdf 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -655,7 +655,8 @@ ${html}
+                 if (!data.success) return;
+                 conversationId = cid;
+                 messages.innerHTML = "";
+-                data.data.forEach(function (msg) {
++                let coFileOCuoi = false;
++                data.data.forEach(function (msg, idx) {
+                     if (msg.role === "user") {
+                         addUserMessage(msg.noi_dung || "");
+                     } else if (msg.loai_phan_hoi === "file" && msg.duong_dan_file) {
+@@ -663,6 +664,13 @@ ${html}
+                             `<p>${msg.noi_dung || "Đã tạo đề xong."}</p>` +
+                             `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener">📄 Tải file</a></p>`
+                         );
++                        // De MOI NHAT trong ca hoi thoai (khong chi trong
++                        // trang hien tai) - nho lai de hien lai nut "Lam
++                        // bai truc tiep" sau khi load xong toan bo lich su,
++                        // giong het luc de vua duoc tao song song. Xem
++                        // 16_CHANGELOG Version 2.28 (khac phuc mat nut khi
++                        // quay lai chat tu /lam-bai qua ?cid=).
++                        coFileOCuoi = idx === data.data.length - 1;
+                     } else if (msg.loai_phan_hoi === "error") {
+                         addAIMessage("Lỗi: " + (msg.noi_dung || "Có lỗi xảy ra."));
+                     } else {
+@@ -670,6 +678,28 @@ ${html}
+                     }
+                 });
+                 scrollBottom();
++
++                if (coFileOCuoi) {
++                    try {
++                        const deRes = await fetch(
++                            "/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(cid)
++                        );
++                        const deData = await deRes.json();
++                        if (deData.success && deData.de_id) {
++                            const idHoi = "hoi-lam-bai-" + Date.now();
++                            addAIMessage(
++                                `<div class="hoi-lam-bai" id="${idHoi}">` +
++                                `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
++                                `<button class="btn-co" onclick="chonLamBai('${idHoi}','${deData.de_id}',true)">✅ Có, làm luôn!</button>` +
++                                `<button class="btn-khong" onclick="chonLamBai('${idHoi}','${deData.de_id}',false)">📝 Không, để làm trên giấy</button>` +
++                                `</div>`
++                            );
++                            scrollBottom();
++                        }
++                    } catch (err) {
++                        console.error("Loi lay de_id khi mo lai hoi thoai:", err);
++                    }
++                }
+             } catch (err) {
+                 console.error("Loi mo hoi thoai:", err);
+             }

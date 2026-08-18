@@ -1,0 +1,174 @@
+diff --git a/app/routers/chat.py b/app/routers/chat.py
+index 8cefb4a..9274d73 100644
+--- a/app/routers/chat.py
++++ b/app/routers/chat.py
+@@ -104,6 +104,7 @@ async def chat(request: Request):
+         name="chat/chat.html",
+         context={
+             "title": "Chat AI",
++            "user_id": user.id,
+             "user_email": user.email,
+             "user_display_name": ten_hien_thi,
+             "user_khoi": ho_so.get("khoi"),
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index 8696f4d..c4f34c2 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -329,6 +329,22 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
+ # thoai, doi option dethi -> loigiai, khong sinh lai cau hoi
+ # ======================================================
+ 
++@router.get("/de-gan-nhat")
++def de_gan_nhat_endpoint(conversation_id: str):
++    """
++    Tra ve de_id cua de MOI NHAT da tao trong 1 cuoc hoi thoai. Dung cho
++    chat.html khi goi THANG /generate-pdf-auto (khong qua n8n - luong
++    "xac nhan cau truc de", xem 16_CHANGELOG Version 2.24) de lay duoc
++    de_id hien nut Co/Khong lam bai truc tiep, giong het luong binh
++    thuong dang di qua n8n (o do de_id lay tu history_service sau khi
++    n8n da goi generate-pdf-auto va luu lich su roi).
++    """
++    de = history_service.lay_de_gan_nhat(conversation_id)
++    if de is None or not de.get("id"):
++        raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
++    return {"success": True, "de_id": de["id"]}
++
++
+ class ExportLoiGiaiRequest(BaseModel):
+     conversation_id: str
+ 
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index f272d1e..bd414ca 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -478,6 +478,7 @@
+         const textarea = document.getElementById("message");
+ 
+         let conversationId = crypto.randomUUID();
++        const CURRENT_USER_ID = "{{ user_id | default('') }}";
+ 
+         // Neu quay lai tu trang lam-bai (link co ?cid=...), dung lai
+         // dung hoi thoai cu thay vi tao moi - xem window.onload ben duoi.
+@@ -622,6 +623,103 @@ ${html}
+             }
+         }
+ 
++        // Nut "De minh noi cu the hon" trong khung xac nhan cau truc de -
++        // chi doi noi dung tai cho, khong goi API, khong ton token. Hoc
++        // sinh tu nhan tin moi voi so cau/ty le cu the o luot ke tiep.
++        function doiYeuCauDe(idHoi) {
++            const box = document.getElementById(idHoi);
++            if (!box) return;
++            box.innerHTML =
++                "<p>Ok, bạn cứ nhắn lại yêu cầu cụ thể hơn nhé (ví dụ: số câu, " +
++                "tỉ lệ mức độ muốn khác), mình sẽ ra đề đúng theo ý bạn.</p>";
++        }
++
++        // Nut "Dong y, tao de" - goi THANG /api/exam/generate-pdf-auto,
++        // KHONG di qua n8n/CHV_Fun nua (khong ton them token AI cho luot
++        // xac nhan nay). cau_truc de xuat da duoc GenerateExam_RequestParser
++        // tinh san (tu Table Tool hoac tu yeu cau hoc sinh), chi viec dung
++        // lai dung nguyen, xem 16_CHANGELOG Version 2.24.
++        async function xacNhanTaoDe(idHoi, deXuatEncoded) {
++            const box = document.getElementById(idHoi);
++            if (!box) return;
++            box.innerHTML = "<p>Đang tạo đề, chờ chút nhé... ⏳</p>";
++            try {
++                const deXuat = JSON.parse(decodeURIComponent(deXuatEncoded));
++                const tieuDe = `Đề ${deXuat.loai_he_so === "HeSo1" ? "kiểm tra" : "thi"} - Toán ${deXuat.lop}`;
++                const ctq = deXuat.cau_truc_tong_quat;
++                const cauTrucTuHocSinh = ctq ? {
++                    trac_nghiem: { so_luong: ctq.trac_nghiem },
++                    dung_sai_cau_lon: { so_luong: ctq.dung_sai_cau_lon },
++                    tra_loi_ngan: { so_luong: ctq.tra_loi_ngan },
++                    tu_luan: { so_luong: ctq.tu_luan },
++                } : null;
++
++                const res = await fetch("/api/exam/generate-pdf-auto", {
++                    method: "POST",
++                    headers: { "Content-Type": "application/json" },
++                    body: JSON.stringify({
++                        lop: deXuat.lop,
++                        tieu_de: tieuDe,
++                        role: "student",
++                        loai_he_so: deXuat.loai_he_so,
++                        ki_thi: deXuat.ki_thi || null,
++                        pham_vi_chuong: deXuat.pham_vi_chuong || null,
++                        cau_truc_tu_hoc_sinh: cauTrucTuHocSinh,
++                        cho_phep_thieu: true,
++                        dinh_dang: "pdf",
++                        user_id: CURRENT_USER_ID,
++                        conversation_id: conversationId,
++                    }),
++                });
++
++                if (!res.ok) {
++                    let loi = "Có lỗi khi tạo đề, vui lòng thử lại.";
++                    try {
++                        const errData = await res.json();
++                        if (errData.detail) loi = errData.detail;
++                    } catch (e) { /* bo qua, dung thong bao mac dinh */ }
++                    box.innerHTML = `<p>⚠️ ${loi}</p>`;
++                    return;
++                }
++
++                const blob = await res.blob();
++                const url = URL.createObjectURL(blob);
++                const filename = "de_thi.pdf";
++
++                let deId = null;
++                try {
++                    const deRes = await fetch(
++                        "/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId)
++                    );
++                    const deData = await deRes.json();
++                    if (deData.success) deId = deData.de_id;
++                } catch (e) {
++                    console.error("Loi lay de_id sau khi xac nhan tao de:", e);
++                }
++
++                let htmlHoi = "";
++                if (deId) {
++                    const idHoiLamBai = "hoi-lam-bai-" + Date.now();
++                    htmlHoi =
++                        `<div class="hoi-lam-bai" id="${idHoiLamBai}">` +
++                        `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
++                        `<button class="btn-co" onclick="chonLamBai('${idHoiLamBai}','${deId}',true)">✅ Có, làm luôn!</button>` +
++                        `<button class="btn-khong" onclick="chonLamBai('${idHoiLamBai}','${deId}',false)">📝 Không, để làm trên giấy</button>` +
++                        `</div>`;
++                }
++
++                box.innerHTML =
++                    `<p>Xong rồi nè! 🎉</p>` +
++                    `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
++                    htmlHoi;
++
++                taiDanhSachLichSu();
++            } catch (err) {
++                console.error("Loi tao de tu xac nhan:", err);
++                box.innerHTML = "<p>⚠️ Có lỗi xảy ra, vui lòng thử lại hoặc nhắn yêu cầu mới.</p>";
++            }
++        }
++
+         // ===== LICH SU CHAT (that, doc tu Supabase qua API) =====
+         async function taiDanhSachLichSu() {
+             try {
+@@ -700,7 +798,17 @@ ${html}
+                 }
+ 
+                 if (data.success) {
+-                    if (data.data && data.data.type === "file") {
++                    if (data.data && data.data.type === "xac_nhan_de") {
++                        const idHoiXacNhan = "xacnhan-de-" + Date.now();
++                        const deXuatEncoded = encodeURIComponent(JSON.stringify(data.data.de_xuat || {}));
++                        addAIMessage(
++                            `<p>${marked.parseInline(data.message || "")}</p>` +
++                            `<div class="hoi-lam-bai" id="${idHoiXacNhan}">` +
++                            `<button class="btn-co" onclick="xacNhanTaoDe('${idHoiXacNhan}','${deXuatEncoded}')">✅ Đồng ý, tạo đề</button>` +
++                            `<button class="btn-khong" onclick="doiYeuCauDe('${idHoiXacNhan}')">✏️ Để mình nói cụ thể hơn</button>` +
++                            `</div>`
++                        );
++                    } else if (data.data && data.data.type === "file") {
+                         const url = data.data.url;
+                         const filename = data.data.filename;
+                         const deId = data.data.de_id;

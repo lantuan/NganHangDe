@@ -18,7 +18,13 @@ def phatbieu_giai(ds_abcd,socot):###Dùng cho câu TRUE FALSE mà đồ thị th
 	while "True" not in cau_a[0] and "True" not in cau_b[0] and "True" not in cau_c[0] and "True" not in cau_d[0]:
 		cau_a,cau_b,cau_c,cau_d=[random.choice(ds_abcd[i]) for i in range(len(ds_abcd))]
 	cau=[cau_a[0],cau_b[0],cau_c[0],cau_d[0]]
-	text_choice='\\choiceTFn[1]' if socot==1 else '\\choiceTFn[2]' if socot==2 else '\\choiceTFn[3]' if socot==3 else '\\choiceTFn[4]' if socot==4 else '\\choiceTFt'
+	# SUA: \choiceTFn[N] KHONG TON TAI trong data/config/ex_test.sty (chi co
+	# \choiceTFt duoc dinh nghia that su) - dung \choiceTFn lam LaTeX bo qua
+	# lenh khong xac dinh roi in cac khoi {...} thanh 1 doan van chay lien,
+	# mat het dinh dang Dung/Sai khi xuat PDF (socot mac dinh la 4 nen loi
+	# nay xay ra o TAT CA cau TF khi ra PDF - xem 16_CHANGELOG Version 2.27).
+	# Luon dung \choiceTFt (macro duy nhat co that), bo tham so socot cu.
+	text_choice='\\choiceTFt'
 	for i in range(len(cau)):
 		text_choice=text_choice+cau[i]+"\n"
 	giai=[cau_a[1],cau_b[1],cau_c[1],cau_d[1]]
@@ -33,7 +39,13 @@ def TF_baitoan_du(debai,ds_abcd,dothi_de,dothi_giai,socot):
 	while "True" not in cau_a[0] and "True" not in cau_b[0] and "True" not in cau_c[0] and "True" not in cau_d[0]:
 		cau_a,cau_b,cau_c,cau_d=[random.choice(ds_abcd[i]) for i in range(len(ds_abcd))]
 	cau=[cau_a[0],cau_b[0],cau_c[0],cau_d[0]]
-	text_choice='\\choiceTFn[1]' if socot==1 else '\\choiceTFn[2]' if socot==2 else '\\choiceTFn[3]' if socot==3 else '\\choiceTFn[4]' if socot==4 else '\\choiceTFt'
+	# SUA: \choiceTFn[N] KHONG TON TAI trong data/config/ex_test.sty (chi co
+	# \choiceTFt duoc dinh nghia that su) - dung \choiceTFn lam LaTeX bo qua
+	# lenh khong xac dinh roi in cac khoi {...} thanh 1 doan van chay lien,
+	# mat het dinh dang Dung/Sai khi xuat PDF (socot mac dinh la 4 nen loi
+	# nay xay ra o TAT CA cau TF khi ra PDF - xem 16_CHANGELOG Version 2.27).
+	# Luon dung \choiceTFt (macro duy nhat co that), bo tham so socot cu.
+	text_choice='\\choiceTFt'
 	for i in range(len(cau)):
 		text_choice=text_choice+cau[i]+"\n"
 	giai=[cau_a[1],cau_b[1],cau_c[1],cau_d[1]]

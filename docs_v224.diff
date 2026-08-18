@@ -1,0 +1,221 @@
+diff --git a/docs/06_N8N_WORKFLOW.md b/docs/06_N8N_WORKFLOW.md
+index 07491b6..3c6c806 100644
+--- a/docs/06_N8N_WORKFLOW.md
++++ b/docs/06_N8N_WORKFLOW.md
+@@ -282,3 +282,38 @@ Xem chi tiết ở docs/16_CHANGELOG.md, Version 2.4.
+   hiện được gộp chung trong 1 lệnh gọi API
+   /api/exam/generate-pdf-auto (FastAPI xử lý nội bộ), chưa tách
+   thành các Code Node riêng trong n8n.
++
++
++===============================================================================
++
++# Cập nhật 2026-08-17 — GenerateExam_RequestParser + node hỗ trợ (Version 2.24)
++
++Thực tế trong n8n hiện có THÊM 1 AI node nữa ngoài CHV_Fun/CHV_Grader
++(doc 07 lúc trước ghi "chỉ có 3 AI" đã lỗi thời — xem đính chính ở
++doc 07). Chi tiết đầy đủ: xem 16_CHANGELOG.md, Version 2.24.
++
++Tóm tắt luồng task=generate_exam (nhánh CHV_Fun -> Switch dẫn tới):
++
++CHV_Fun (task=generate_exam)
++  -> Switch
++  -> GenerateExam_RequestParser (AI node, có Memory + Table Tool
++     QuyDinhSoLuongCauTrongDe)
++  -> Parse_RequestParserOutput (Code node, JSON.parse thô, throw nếu
++     JSON hỏng)
++  -> Ghep_Tham_So (Code node - xem doc 16 Version cũ nhất nhắc, đang
++     là task tồn đọng #16 sửa tiêu đề PDF không dấu)
++  -> Goi_API_Sinh_De (POST http://103.82.27.226:8xxx/... - gọi thẳng
++     backend FastAPI, KHÔNG qua các CN_ tách rời như sơ đồ lý tưởng
++     ở doc 08)
++  -> Goi_API_XuatDapAn (song song, xuất file đáp án)
++  -> Respond to Webhook
++
++Nhánh CHV_Fun (task=help/reject_math_solution/reject_out_of_scope) hoặc
++Switch không khớp nhánh nào (Fallback):
++  -> Code in JavaScript (Code node, xem doc 08 mục "Code in JavaScript")
++  -> Respond to Webhook1
++
++Node "doc-phieu-tra-loi" (DocPhieuTraLoi) và "cham-tu-luan" (CHV_Grader)
++là 2 webhook RIÊNG, không nằm trong luồng chat chính ở trên - được
++app/services/grade_photo_service.py gọi trực tiếp khi học sinh nộp ảnh
++bài làm ở trang /lam-bai.
+diff --git a/docs/07_AI_AGENTS.md b/docs/07_AI_AGENTS.md
+index 004b3a5..4b0c648 100644
+--- a/docs/07_AI_AGENTS.md
++++ b/docs/07_AI_AGENTS.md
+@@ -199,4 +199,31 @@ Analysis Result (weak_points, strong_points) — CHỈ nhận số liệu
+ # TODO (giai đoạn sau, không thuộc vòng lặp tối thiểu)
+ 
+ - CHV_Tutor — gia sư AI tương tác nhiều lượt.
+-- CHV_ClassAssistant — trợ lý cho giáo viên quản lý lớp.
+\ No newline at end of file
++- CHV_ClassAssistant — trợ lý cho giáo viên quản lý lớp.
++
++===============================================================================
++
++# ĐÍNH CHÍNH 2026-08-17 (Version 2.24)
++
++Câu "Toàn hệ thống chỉ có 3 AI: CHV_Fun, CHV_Grader, CHV_Analyzer" ở
++trên đã LỖI THỜI. Thực tế hiện có thêm:
++
++- GenerateExam_RequestParser: AI node riêng, chỉ chạy khi CHV_Fun đã
++  phân loại task="generate_exam". Đọc yêu cầu học sinh, nếu thiếu cấu
++  trúc đề (số câu/tỉ lệ mức độ) thì tra Table Tool "QuyDinhSoLuongCauTrongDe"
++  để lấy cấu trúc chuẩn theo loại hệ số (HeSo1 = kiểm tra thường
++  xuyên/15 phút/miệng: 12 câu (6 TN + 1 Đ/S + 2 TLN + 3 TL), tỉ lệ NB
++  40% - TH 30% - VD 20% - VDC 10%; HeSo2_HeSo3 = giữa kỳ/cuối kỳ/học
++  kỳ: 20 câu (12 TN + 2 Đ/S + 3 TLN + 3 TL), cùng tỉ lệ mức độ). Nếu
++  học sinh đã tự quy định một phần/toàn bộ thì ưu tiên đúng yêu cầu đó,
++  không ghi đè bằng bảng. Xuất JSON (không hỏi lại, không giải thích -
++  xem 16_CHANGELOG Version 2.24 về đề xuất cải tiến "hỏi xác nhận cấu
++  trúc đề" đang trong quá trình thiết kế, CHƯA triển khai).
++
++- CHV_Grader: đã có sẵn từ trước (chấm bài tự luận qua ảnh, xem
++  app/services/grade_photo_service.py), chỉ là trước đây chưa liệt kê
++  đầy đủ ở file này.
++
++Bảng QuyDinhSoLuongCauTrongDe (cột): KyThi, trac_nghiem, dung_sai,
++tra_loi_ngan, tu_luan, NB, TH, VD, VDC. 2 dòng dữ liệu hiện có: HeSo1
++và HeSo2_HeSo3 (chi tiết số liệu xem đoạn trên).
+diff --git a/docs/08_CODE_NODES.md b/docs/08_CODE_NODES.md
+index 6ba7b81..df43c95 100644
+--- a/docs/08_CODE_NODES.md
++++ b/docs/08_CODE_NODES.md
+@@ -274,4 +274,48 @@ nhận xét do CHV_Analyzer đảm nhiệm.
+ - CN_SaveQuestionHistory
+ - CN_SaveStudentLog
+ - CN_CacheQuestion
+-- CN_CacheBlueprint
+\ No newline at end of file
++- CN_CacheBlueprint
++
++===============================================================================
++
++# Cập nhật 2026-08-17 — Code Node thực tế đang dùng trong nhánh chat (Version 2.24)
++
++Khác với sơ đồ WF001 lý tưởng ở trên (CN_LoadExamScope...CN_ResponseFormatter,
++đã gộp vào 1 API call như ghi chú Version cũ ở cuối file), nhánh CHAT
++(webhook chính, không phải luồng sinh đề) hiện có 2 Code Node thật sau:
++
++-------------------------------------------------------------------------------
++
++Parse_RequestParserOutput
++
++Input: output text thô của GenerateExam_RequestParser (field output/
++text/content, tuỳ node AI trả về field nào).
++
++Logic: JSON.parse() trực tiếp, throw Error nếu không phải JSON hợp lệ
++(dừng luôn workflow tại đây, không có xử lý fallback - nếu AI trả sai
++định dạng thì cả nhánh sinh đề sẽ lỗi ở bước này).
++
++Output: JSON đã parse, giữ nguyên các field GenerateExam_RequestParser
++trả ra (loai_he_so, lop, ki_thi, pham_vi_chuong, nguon_cau_truc,
++cau_truc_tong_quat, ty_le_muc_do_goc...) để Ghep_Tham_So dùng tiếp.
++
++-------------------------------------------------------------------------------
++
++Code in JavaScript (nhánh trả lời chat thuần - help/reject_math_solution/
++reject_out_of_scope/Fallback của Switch)
++
++Input: field response_chv_fun (do node "Edit Fields" đặt tên) chứa
++{task, message, tra_loi} là output gốc của CHV_Fun.
++
++Logic:
++- Lấy tra_loi từ response_chv_fun.
++- Nếu có tra_loi (không rỗng) -> success=true, message=tra_loi.
++- Nếu KHÔNG có tra_loi (rỗng/null) -> success=false, message = 1 câu
++  ngẫu nhiên trong ngân hàng "cacCauChuaXong" (8 câu vui nhộn kiểu
++  "Tính năng này đang được code cày cuốc, sắp ra lò rồi, chờ xíu nha!" -
++  dùng cho các nhánh chưa triển khai, KHÔNG tốn AI token vì random.choice
++  thuần JS, đúng nguyên tắc "Ưu tiên Code hơn AI" của doc 00).
++
++Output: {"success": bool, "message": str, "data": null} - đúng định
++dạng app/routers/chat.py mong đợi (content-type application/json, đọc
++qua ket_qua.get("message")).
+diff --git a/docs/16_CHANGELOG.md b/docs/16_CHANGELOG.md
+index a0b3126..1372bbe 100644
+--- a/docs/16_CHANGELOG.md
++++ b/docs/16_CHANGELOG.md
+@@ -1330,3 +1330,80 @@ CHUA kiem chung end-to-end tren production
+ Nguoi thuc hien
+ 
+ Mai Ha Lan (cung Claude)
++
++===============================================================================
++
++Version 2.24
++
++Ngày
++
++2026-08-17
++
++Nội dung
++
++1. Sua text khong dau trong thong bao loi chat/classroom/auth
++- app/routers/chat.py (4 cho): thong bao "Ban chua dang nhap...",
++  "Khong ket noi duoc voi AI sau 2 lan thu...", "AI chua xu ly duoc
++  yeu cau nay...", "Khong hieu phan hoi tu n8n." - doi sang co dau
++  chuan. Day chinh la nguyen nhan man hinh chat hien chu khong dau
++  "AI chua xu ly duoc yeu cau nay..." ma giao vien bao loi.
++- app/services/classroom_service.py (12 cho), app/routers/auth.py
++  (2 cho): sua tuong tu, du hien chua hien thi truc tiep len UI nhung
++  sua truoc cho nhat quan (tranh lo khi sau nay hien thi).
++
++2. Phat hien va sua loi prompt CHV_Fun bi dan nham doan huong dan
++   chinh sua vao System Message
++- Nguyen nhan sau khi giao vien bao "AI tra loi kem di", kiem tra
++  n8n thi phat hien: doan ghi chu huong dan thao tac ("THAY THE doan
++  'PHONG CACH CHO FIELD tra_loi' hien tai... bang doan duoi day. Chi
++  doi dung doan nay...") da bi dan nguyen van vao GIUA prompt that cua
++  CHV_Fun (nam giua rule 4 va doan phong cach tra loi), thay vi chi
++  dung lam huong dan roi xoa di. Doan van tu noi ve chinh no nay lam
++  nhieu prompt, co the la nguyen nhan AI phan loai/tra loi kem chinh
++  xac hon.
++- Da gui giao vien toan van System Message da sua (bo dung doan thua,
++  giu nguyen moi phan con lai) de dan de vao n8n. KHONG the tu sua
++  truc tiep trong n8n (khong co quyen truy cap).
++
++3. Them loi chao mo dau khi vao chat moi
++- app/templates/chat/chat.html: bank LOI_CHAO_MO_DAU (4 bien the,
++  random.choice thuan JS, khong ton AI token) - tu dong hien khi vao
++  /chat lan dau (khong co ?cid=) hoac bam "+ Chat moi". Noi dung: chao
++  hoi + tom tat AI lam duoc gi (tao de, xin loi giai, lam bai truc
++  tiep tren web, danh gia hoc luc dang phat trien) + hoi hoc sinh muon
++  tao de luon hay con thac mac gi. Thay the khoi HTML tinh cu (chi co
++  logo + 1 dong text, khong tuong tac).
++
++4. Phat hien them 1 AI node chua duoc ghi vao so tay: GenerateExam_RequestParser
++- Node nay chay khi CHV_Fun phan loai task="generate_exam", doc yeu
++  cau hoc sinh, neu thieu cau truc de (so cau/ty le muc do) thi tra
++  Table Tool "QuyDinhSoLuongCauTrongDe" de lay cau truc chuan:
++  + HeSo1 (kiem tra thuong xuyen/15 phut/mieng): 12 cau = 6 TN + 1
++    Dung/Sai + 2 Tra loi ngan + 3 Tu luan, ty le muc do NB 40% -
++    TH 30% - VD 20% - VDC 10%.
++  + HeSo2_HeSo3 (giua ky/cuoi ky/hoc ky): 20 cau = 12 TN + 2 Dung/Sai
++    + 3 Tra loi ngan + 3 Tu luan, cung ty le muc do nhu tren.
++  Neu hoc sinh da tu quy dinh 1 phan/toan bo cau truc thi uu tien
++  dung yeu cau do, khong ghi de bang du lieu bang.
++- Da cap nhat doc 06/07/08 (xem cac muc "Cap nhat 2026-08-17"/"DINH
++  CHINH 2026-08-17" tuong ung) de ghi lai dung kien truc thuc te dang
++  chay, bao gom ca 2 Code Node ho tro: Parse_RequestParserOutput
++  (JSON.parse output cua GenerateExam_RequestParser, throw loi neu
++  JSON hong) va "Code in JavaScript" (build cau tra loi chat cho cac
++  nhanh help/reject_math_solution/reject_out_of_scope/Fallback, dung
++  ngan hang 8 cau "chua xong" vui nhon khi CHV_Fun khong co tra_loi).
++
++5. Dang thiet ke (CHUA trien khai): tinh nang "hoi xac nhan cau truc
++   de truoc khi tao" - khi hoc sinh khong noi ro so cau/ty le muc do,
++   AI se de xuat san cau truc theo bang chuan roi hoi xac nhan ("dong
++   y thi minh lam luon, hoac ban noi cu the muon doi gi") thay vi tu
++   dien lang le nhu hien tai. Can sua them prompt CHV_Fun (nhan dien
++   luot "dong y" tiep theo van la generate_exam) + GenerateExam_RequestParser
++   (them nhanh hoi xac nhan) + 1 node dieu huong moi trong n8n (IF
++   kiem tra can_xac_nhan). Dang cho giao vien quyet dinh phuong an cu
++   the (van ban "dong y" hay nut bam) truoc khi trien khai, de tranh
++   lap lai loi dan nham prompt nhu muc 2.
++
++Nguoi thuc hien
++
++Mai Ha Lan (cung Claude)

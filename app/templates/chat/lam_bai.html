@@ -141,6 +141,10 @@
         .dung { color: var(--color-success); font-weight: 700; }
         .sai { color: var(--color-danger); font-weight: 700; }
 
+        .chi-tiet-tung-y { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; font-size: 14px; }
+        .chi-tiet-tung-y .y-dung { color: var(--color-success); }
+        .chi-tiet-tung-y .y-sai { color: var(--color-danger); }
+
         .loading, .loi { text-align: center; padding: 60px 16px; color: #64748b; }
     </style>
 </head>
@@ -310,6 +314,18 @@ function veKetQua(ketQua) {
         if (cau.loai_cau === 'TF') {
             const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
             html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc + ' điểm</div>';
+            // Hien chi tiet dung/sai tung y a/b/c/d (chi_tiet_tung_y da co
+            // san tu backend, xem app/routers/exam.py) - de hoc sinh biet
+            // ro y nao dung y nao sai thay vi chi thay ti le chung.
+            if (cau.chi_tiet_tung_y && typeof cau.chi_tiet_tung_y === 'object') {
+                html += '<div class="chi-tiet-tung-y">';
+                Object.keys(cau.chi_tiet_tung_y).sort().forEach(function (y) {
+                    const dungY = cau.chi_tiet_tung_y[y];
+                    html += '<span class="y-' + (dungY ? 'dung' : 'sai') + '">' +
+                        (dungY ? '✅' : '❌') + ' ý ' + y.toUpperCase() + '</span>';
+                });
+                html += '</div>';
+            }
         } else if (cau.dung_sai_hoac_diem === true) {
             html += '<div class="dung">✅ Đúng (' + cau.diem_toi_da + ' điểm)</div>';
         } else if (cau.dung_sai_hoac_diem === false) {

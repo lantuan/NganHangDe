@@ -260,6 +260,16 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
     if payload.dinh_dang not in ("pdf", "tex", "zip"):
         raise HTTPException(400, "dinh_dang phải là 'pdf', 'tex' hoặc 'zip'")
 
+    # Chan som lop khong hop le (vd AI trich nham so trong "chuong 1"
+    # thanh lop=1) - khong co du lieu THPT cho lop ngoai 10/11/12, de
+    # cho roi vao cac ham ben duoi se crash 500 kho hieu thay vi loi
+    # 400 ro rang the nay. Xem 16_CHANGELOG Version 2.26.
+    if payload.lop not in (10, 11, 12):
+        raise HTTPException(
+            400,
+            f"lop={payload.lop} không hợp lệ - hệ thống chỉ có dữ liệu cho lớp 10, 11, 12.",
+        )
+
     try:
         result = generate_exam_pdf_auto(
             lop=payload.lop,

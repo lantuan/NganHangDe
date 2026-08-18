@@ -1,0 +1,405 @@
+diff --git a/app/routers/chat.py b/app/routers/chat.py
+index 9274d73..927b418 100644
+--- a/app/routers/chat.py
++++ b/app/routers/chat.py
+@@ -6,6 +6,7 @@ from fastapi import APIRouter, Request, Form, HTTPException
+ from fastapi.responses import HTMLResponse, RedirectResponse
+ from fastapi.templating import Jinja2Templates
+ from starlette.concurrency import run_in_threadpool
++from pydantic import BaseModel
+ import requests
+ 
+ from app.core.deps import get_current_user
+@@ -226,6 +227,45 @@ def _goi_n8n(message: str, user_id: str, conversation_id: str):
+     )
+ 
+ 
++class LuuDeTrucTiepRequest(BaseModel):
++    conversation_id: str
++    user_message: str
++    ai_caption: str
++
++
++@router.post("/api/chat/luu-de-truc-tiep")
++async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequest):
++    """
++    Luu lai vao chat_history 1 luot tao de KHONG di qua CHV_Fun/n8n (nut
++    "Dong y, tao de" o luong xac nhan cau truc, hoac form chon nhanh tao
++    de) - de khong bi "bien mat" khoi hoi thoai khi quay lai qua ?cid=.
++
++    Luu y: file PDF trong luong nay la blob tai truc tiep tren trinh
++    duyet (khong qua DOWNLOAD_DIR nhu luong n8n), nen KHONG co URL server
++    on dinh de luu lai duong_dan_file - luu nhu tin nhan van ban thuong
++    (loai_phan_hoi mac dinh). Khi quay lai hoi thoai se thay lai noi
++    dung da trao doi, nhung khong co lai nut tai file cu (hoc sinh can
++    tao lai neu muon file). Xem 16_CHANGELOG Version 2.28.
++    """
++    user = get_current_user(request)
++    if user is None:
++        raise HTTPException(401, "Bạn chưa đăng nhập hoặc phiên đã hết hạn.")
++
++    history_service.luu_tin_nhan(
++        user_id=user.id,
++        conversation_id=payload.conversation_id,
++        role="user",
++        noi_dung=payload.user_message,
++    )
++    history_service.luu_tin_nhan(
++        user_id=user.id,
++        conversation_id=payload.conversation_id,
++        role="assistant",
++        noi_dung=payload.ai_caption,
++    )
++    return {"success": True}
++
++
+ @router.post("/chat")
+ async def chat_post(
+     request: Request,
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index c397bf7..eacfef3 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -27,7 +27,7 @@ from app.services.answer_parser_service import (
+     chuan_hoa_dap_an_ngan,
+     chuan_hoa_dap_an_tf,
+ )
+-from app.services.mapping_service import trich_chuong_bai
++from app.services.mapping_service import trich_chuong_bai, load_mapping
+ from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
+ from app.services.latex_service import save_tex_file
+ from app.services.pdf_service import compile_pdf, PdfCompileError
+@@ -339,6 +339,48 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
+ # thoai, doi option dethi -> loigiai, khong sinh lai cau hoi
+ # ======================================================
+ 
++@router.get("/danh-sach-chuong")
++def danh_sach_chuong_endpoint(lop: int):
++    """
++    Tra ve danh sach chuong theo dung phan phoi chuong trinh that
++    (data/ppct/toan{lop}.json), kem "co_du_cau": True/False - dua vao
++    viec da co Mapping that (data/mapping/toan{lop}/L{lop}_C{chuong_so}.json,
++    xem mapping_service.load_mapping) hay chua. Dung cho form chon
++    nhanh tao de (khong qua AI) o chat.html - xem 16_CHANGELOG Version
++    2.28.
++    """
++    if lop not in (10, 11, 12):
++        raise HTTPException(400, "lop phải là 10, 11 hoặc 12.")
++
++    ppct_file = Path("data/ppct") / f"toan{lop}.json"
++    if not ppct_file.exists():
++        raise HTTPException(404, f"Chưa có phân phối chương trình cho lớp {lop}.")
++
++    with open(ppct_file, "r", encoding="utf-8") as f:
++        items = json.load(f)
++
++    ten_chuong_theo_so = {}
++    for it in items:
++        cs = it.get("chuong_so")
++        if cs is not None and cs not in ten_chuong_theo_so:
++            ten_chuong_theo_so[cs] = it.get("chuong", f"Chương {cs}")
++
++    ket_qua = []
++    for cs in sorted(ten_chuong_theo_so.keys()):
++        try:
++            mapping = load_mapping(lop, cs)
++            co_du_cau = len(mapping) > 0
++        except FileNotFoundError:
++            co_du_cau = False
++        ket_qua.append({
++            "chuong_so": cs,
++            "ten_chuong": ten_chuong_theo_so[cs],
++            "co_du_cau": co_du_cau,
++        })
++
++    return {"success": True, "data": ket_qua}
++
++
+ @router.get("/de-gan-nhat")
+ def de_gan_nhat_endpoint(conversation_id: str):
+     """
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index 7f5c503..99a5361 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -309,6 +309,26 @@
+         .btn-khong:hover,
+         .btn-bat-dau:hover { opacity: .85; }
+ 
++        /* ===========================
++           Form tao de nhanh (chon lop/chuong, khong can AI hieu)
++        =========================== */
++
++        .form-tao-de { margin-top: 6px; max-width: 420px; }
++        .form-nhom { margin: 10px 0; }
++        .form-nhom label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 4px; }
++        .form-nhom select,
++        .form-nhom input,
++        .form-nhom textarea {
++            width: 100%; border: 1px solid var(--color-border); border-radius: 10px;
++            padding: 8px 10px; font-size: 14px; font-family: inherit;
++        }
++        .lop-buttons { display: flex; gap: 8px; }
++        .lop-btn {
++            flex: 1; border-radius: 10px; padding: 8px; font-size: 14px; font-weight: 600;
++            border: 1px solid var(--color-border); background: #f8fafc; color: #0f172a; cursor: pointer;
++        }
++        .lop-btn.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
++
+         /* ===========================
+            Typing indicator
+         =========================== */
+@@ -582,7 +602,10 @@ ${html}
+ 
+         function hienChaoMoDau() {
+             const loiChao = LOI_CHAO_MO_DAU[Math.floor(Math.random() * LOI_CHAO_MO_DAU.length)];
+-            addAIMessage(`<p>${loiChao}</p>`);
++            addAIMessage(
++                `<p>${loiChao}</p>` +
++                `<p><button type="button" class="btn-bat-dau" onclick="moFormTaoDe()">📝 Tạo đề nhanh (chọn lớp/chương)</button></p>`
++            );
+         }
+ 
+         // Cau giai thich vui nhon sau khi hoc sinh bam "Co" (lam bai
+@@ -713,6 +736,23 @@ ${html}
+                     `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
+                     htmlHoi;
+ 
++                // Luu lai vao lich su chat that (khong qua CHV_Fun) de
++                // khong bi mat khi quay lai hoi thoai sau nay - xem
++                // 16_CHANGELOG Version 2.28.
++                try {
++                    await fetch("/api/chat/luu-de-truc-tiep", {
++                        method: "POST",
++                        headers: { "Content-Type": "application/json" },
++                        body: JSON.stringify({
++                            conversation_id: conversationId,
++                            user_message: "Đồng ý, tạo đề (lớp " + deXuat.lop + ").",
++                            ai_caption: "Xong rồi nè! 🎉 Đã tạo đề lớp " + deXuat.lop + " theo cấu trúc đã xác nhận.",
++                        }),
++                    });
++                } catch (e) {
++                    console.error("Loi luu lich su sau khi xac nhan tao de:", e);
++                }
++
+                 taiDanhSachLichSu();
+             } catch (err) {
+                 console.error("Loi tao de tu xac nhan:", err);
+@@ -720,6 +760,217 @@ ${html}
+             }
+         }
+ 
++        // ===== FORM TAO DE NHANH (khong can AI hieu dung y - chon
++        // san lop/chuong/loai kiem tra, chi rieng "ghi chu them"/"so
++        // cau" moi can qua AI). Xem 16_CHANGELOG Version 2.28. =====
++        const HESO1_KITHI_SET = ["kiem_tra_thuong_xuyen", "kiem_tra_15_phut", "kiem_tra_mieng"];
++        const TEN_LOAI_KT = {
++            kiem_tra_thuong_xuyen: "kiểm tra thường xuyên",
++            kiem_tra_15_phut: "kiểm tra 15 phút",
++            kiem_tra_mieng: "kiểm tra miệng",
++            giua_ky_1: "giữa kỳ 1",
++            giua_ky_2: "giữa kỳ 2",
++            cuoi_ky_1: "cuối kỳ 1 / học kỳ 1",
++            cuoi_ky_2: "cuối kỳ 2 / học kỳ 2",
++        };
++
++        function moFormTaoDe() {
++            const idForm = "form-tao-de-" + Date.now();
++            const lopMacDinh = parseInt("{{ user_khoi or 10 }}") || 10;
++            const nutLop = [10, 11, 12].map(function (l) {
++                return `<button type="button" class="lop-btn${l === lopMacDinh ? ' active' : ''}" onclick="chonLopForm('${idForm}',${l})">Lớp ${l}</button>`;
++            }).join("");
++            const html =
++                `<div class="form-tao-de" id="${idForm}" data-lop="${lopMacDinh}">` +
++                `<p><strong>Tạo đề nhanh</strong> - chọn các mục dưới, không cần gõ gì thêm cũng ra đề được:</p>` +
++                `<div class="form-nhom"><label>Lớp</label><div class="lop-buttons">${nutLop}</div></div>` +
++                `<div class="form-nhom"><label>Loại kiểm tra</label>` +
++                `<select id="loai-kt-${idForm}" onchange="doiLoaiKiemTra('${idForm}')">` +
++                `<option value="kiem_tra_thuong_xuyen">Kiểm tra thường xuyên</option>` +
++                `<option value="kiem_tra_15_phut">Kiểm tra 15 phút</option>` +
++                `<option value="kiem_tra_mieng">Kiểm tra miệng</option>` +
++                `<option value="giua_ky_1">Giữa kỳ 1</option>` +
++                `<option value="giua_ky_2">Giữa kỳ 2</option>` +
++                `<option value="cuoi_ky_1">Cuối kỳ 1 / Học kỳ 1</option>` +
++                `<option value="cuoi_ky_2">Cuối kỳ 2 / Học kỳ 2</option>` +
++                `</select></div>` +
++                `<div class="form-nhom" id="chuong-wrap-${idForm}"><label>Chương</label>` +
++                `<select id="chuong-${idForm}"><option>Đang tải...</option></select></div>` +
++                `<div class="form-nhom"><label>Số câu (để trống = theo chuẩn)</label>` +
++                `<input type="number" id="socau-${idForm}" min="1" placeholder="VD: 20"></div>` +
++                `<div class="form-nhom"><label>Ghi chú thêm (không bắt buộc)</label>` +
++                `<textarea id="ghichu-${idForm}" rows="2" placeholder="VD: 40% nhận biết, 30% thông hiểu, 30% vận dụng"></textarea></div>` +
++                `<button type="button" class="btn-bat-dau" onclick="submitFormTaoDe('${idForm}')">🚀 Tạo đề</button>` +
++                `</div>`;
++            addAIMessage(html);
++            taiChuongTheoLop(idForm, lopMacDinh);
++        }
++
++        function chonLopForm(idForm, lop) {
++            const form = document.getElementById(idForm);
++            if (!form) return;
++            form.dataset.lop = lop;
++            const cacLop = [10, 11, 12];
++            form.querySelectorAll(".lop-btn").forEach(function (btn, i) {
++                btn.classList.toggle("active", cacLop[i] === lop);
++            });
++            taiChuongTheoLop(idForm, lop);
++        }
++
++        async function taiChuongTheoLop(idForm, lop) {
++            const sel = document.getElementById("chuong-" + idForm);
++            if (!sel) return;
++            sel.innerHTML = "<option>Đang tải...</option>";
++            try {
++                const res = await fetch("/api/exam/danh-sach-chuong?lop=" + lop);
++                const data = await res.json();
++                if (!data.success) {
++                    sel.innerHTML = "<option>Không tải được danh sách chương</option>";
++                    return;
++                }
++                sel.innerHTML = data.data.map(function (c) {
++                    return `<option value="${c.chuong_so}">Chương ${c.chuong_so}: ${c.ten_chuong}` +
++                        (c.co_du_cau ? "" : " ⚠️ (chưa có đủ câu)") + `</option>`;
++                }).join("");
++            } catch (err) {
++                console.error("Loi tai danh sach chuong:", err);
++                sel.innerHTML = "<option>Không tải được danh sách chương</option>";
++            }
++        }
++
++        function doiLoaiKiemTra(idForm) {
++            const loaiKt = document.getElementById("loai-kt-" + idForm).value;
++            const wrap = document.getElementById("chuong-wrap-" + idForm);
++            if (!wrap) return;
++            wrap.style.display = HESO1_KITHI_SET.indexOf(loaiKt) !== -1 ? "" : "none";
++        }
++
++        async function submitFormTaoDe(idForm) {
++            const form = document.getElementById(idForm);
++            if (!form) return;
++            const lop = parseInt(form.dataset.lop || "10");
++            const loaiKt = document.getElementById("loai-kt-" + idForm).value;
++            const laHeSo1 = HESO1_KITHI_SET.indexOf(loaiKt) !== -1;
++            const tenLoaiKt = TEN_LOAI_KT[loaiKt] || loaiKt;
++
++            let chuongSo = null;
++            let tenChuong = "";
++            if (laHeSo1) {
++                const selChuong = document.getElementById("chuong-" + idForm);
++                if (!selChuong || !selChuong.value) {
++                    alert("Bạn chọn chương giúp mình nhé.");
++                    return;
++                }
++                chuongSo = selChuong.value;
++                tenChuong = selChuong.options[selChuong.selectedIndex].text;
++            }
++
++            const socau = document.getElementById("socau-" + idForm).value.trim();
++            const ghichu = document.getElementById("ghichu-" + idForm).value.trim();
++
++            form.innerHTML = "<p>Đang xử lý, chờ chút nhé... ⏳</p>";
++
++            if (!socau && !ghichu) {
++                // Duong tat: du du kien lop/chuong/loai kiem tra ->
++                // goi THANG API sinh de, khong qua CHV_Fun, khong ton
++                // token AI, khong the hieu sai.
++                const loaiHeSo = laHeSo1 ? "HeSo1" : "HeSo2_HeSo3";
++                const tieuDe = `Đề ${laHeSo1 ? "kiểm tra" : "thi"} - Toán ${lop}`;
++                try {
++                    const res = await fetch("/api/exam/generate-pdf-auto", {
++                        method: "POST",
++                        headers: { "Content-Type": "application/json" },
++                        body: JSON.stringify({
++                            lop: lop,
++                            tieu_de: tieuDe,
++                            role: "student",
++                            loai_he_so: loaiHeSo,
++                            ki_thi: laHeSo1 ? null : loaiKt,
++                            pham_vi_chuong: laHeSo1 ? ("chuong_" + chuongSo) : null,
++                            cau_truc_tu_hoc_sinh: null,
++                            cho_phep_thieu: true,
++                            dinh_dang: "pdf",
++                            user_id: CURRENT_USER_ID,
++                            conversation_id: conversationId,
++                        }),
++                    });
++
++                    if (!res.ok) {
++                        let loi = "Có lỗi khi tạo đề, vui lòng thử lại.";
++                        try {
++                            const errData = await res.json();
++                            if (errData.detail) loi = errData.detail;
++                        } catch (e) { /* bo qua */ }
++                        form.innerHTML = `<p>⚠️ ${loi}</p>`;
++                        return;
++                    }
++
++                    const blob = await res.blob();
++                    const url = URL.createObjectURL(blob);
++
++                    let deId = null;
++                    try {
++                        const deRes = await fetch(
++                            "/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId)
++                        );
++                        const deData = await deRes.json();
++                        if (deData.success) deId = deData.de_id;
++                    } catch (e) {
++                        console.error("Loi lay de_id sau khi submit form tao de:", e);
++                    }
++
++                    let htmlHoi = "";
++                    if (deId) {
++                        const idHoiLamBai = "hoi-lam-bai-" + Date.now();
++                        htmlHoi =
++                            `<div class="hoi-lam-bai" id="${idHoiLamBai}">` +
++                            `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
++                            `<button class="btn-co" onclick="chonLamBai('${idHoiLamBai}','${deId}',true)">✅ Có, làm luôn!</button>` +
++                            `<button class="btn-khong" onclick="chonLamBai('${idHoiLamBai}','${deId}',false)">📝 Không, để làm trên giấy</button>` +
++                            `</div>`;
++                    }
++
++                    form.innerHTML =
++                        `<p>Xong rồi nè! 🎉</p>` +
++                        `<p><a href="${url}" download="de_thi.pdf" target="_blank" rel="noopener">📄 Tải file: de_thi.pdf</a></p>` +
++                        htmlHoi;
++
++                    try {
++                        await fetch("/api/chat/luu-de-truc-tiep", {
++                            method: "POST",
++                            headers: { "Content-Type": "application/json" },
++                            body: JSON.stringify({
++                                conversation_id: conversationId,
++                                user_message: "Tạo đề lớp " + lop + " (" + tenLoaiKt +
++                                    (laHeSo1 ? ", " + tenChuong : "") + ") - chọn nhanh từ form.",
++                                ai_caption: "Xong rồi nè! 🎉 Đã tạo đề lớp " + lop + " (" + tenLoaiKt + ").",
++                            }),
++                        });
++                    } catch (e) {
++                        console.error("Loi luu lich su sau khi submit form tao de:", e);
++                    }
++
++                    taiDanhSachLichSu();
++                } catch (err) {
++                    console.error("Loi submit form tao de (duong tat):", err);
++                    form.innerHTML = "<p>⚠️ Có lỗi xảy ra, vui lòng thử lại.</p>";
++                }
++            } else {
++                // Co "so cau" hoac "ghi chu them" -> can AI hieu ngon
++                // ngu tu nhien, nen van gui qua kenh chat binh thuong,
++                // nhung da "khoa" san lop/chuong/loai kiem tra ngay
++                // trong cau chu (giam toi da rui ro AI hieu sai/doan
++                // nham nhu "chuong 1" thanh "lop 1").
++                let cauNhan = "Tạo đề lớp " + lop + ", " + tenLoaiKt;
++                if (laHeSo1) cauNhan += ", chương " + chuongSo + " (" + tenChuong + ")";
++                if (socau) cauNhan += ", " + socau + " câu";
++                if (ghichu) cauNhan += ". " + ghichu;
++                form.remove();
++                await sendMessage(cauNhan);
++                taiDanhSachLichSu();
++            }
++        }
++
+         // ===== LICH SU CHAT (that, doc tu Supabase qua API) =====
+         async function taiDanhSachLichSu() {
+             try {

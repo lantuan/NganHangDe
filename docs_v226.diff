@@ -1,0 +1,40 @@
+diff --git a/docs/16_CHANGELOG.md b/docs/16_CHANGELOG.md
+index b18e04b..514097d 100644
+--- a/docs/16_CHANGELOG.md
++++ b/docs/16_CHANGELOG.md
+@@ -1496,3 +1496,35 @@ CHUA kiem chung end-to-end tren production
+ Nguoi thuc hien
+ 
+ Mai Ha Lan (cung Claude)
++
++===============================================================================
++
++Version 2.26
++
++Ngày
++
++2026-08-18
++
++Nội dung
++
++1. Sua bug AI nham so trong "chuong X" thanh "lop"
++- Test thuc te tren n8n (giao vien gui anh Executions log): yeu cau
++  "tao de chuong 1" (hoc sinh Khoi 10) bi GenerateExam_RequestParser
++  trich nham thanh lop=1 (lop 1 tieu hoc!) thay vi lop=10 mac dinh,
++  khien Goi_API_Sinh_De loi 500 Internal Server Error (khong co du
++  lieu THPT cho lop 1).
++- Sua prompt GenerateExam_RequestParser (BUOC 1): them quy tac ro rang
++  - lop CHI duoc la 10/11/12, CHI gan gia tri khi so do di lien voi
++  chu "lop" trong cau, tuyet doi khong suy luan tu so trong "chuong
++  X"/"bai X"/"cau X". Khong noi ro lop kem chu "lop" o dau -> mac dinh
++  lop=10.
++- app/routers/exam.py, generate_exam_pdf_auto_endpoint: them kiem tra
++  som "payload.lop not in (10, 11, 12)" -> HTTPException 400 ro rang,
++  thay vi de cac ham ben duoi crash 500 kho hieu neu lan sau AI van
++  lo trich sai (phong thu them, khong thay the cho viec sua prompt).
++- Da test: py_compile app/routers/exam.py sach. CHUA test lai tren
++  n8n voi prompt moi (giao vien tu dan va thu lai).
++
++Nguoi thuc hien
++
++Mai Ha Lan (cung Claude)
