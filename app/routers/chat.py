@@ -3,6 +3,7 @@ import random
 import uuid
 
 from fastapi import APIRouter, Request, Form, HTTPException
+from pydantic import BaseModel
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from starlette.concurrency import run_in_threadpool
@@ -223,6 +224,37 @@ def _goi_n8n(message: str, user_id: str, conversation_id: str):
         },
         timeout=300,
     )
+
+
+class LuuDeTrucTiepRequest(BaseModel):
+    conversation_id: str
+    user_message: str
+    ai_caption: str
+
+
+@router.post("/api/chat/luu-de-truc-tiep")
+async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequest):
+    """Luu lai 1 cap tin nhan user/assistant vao chat_history cho cac luong
+    tao de KHONG di qua CHV_Fun/n8n (nut "Dong y tao de" o luong xac nhan
+    cau truc, va form "Tao de nhanh") - vi cac luong nay goi thang
+    /api/exam/generate-pdf-auto tu trinh duyet nen truoc day khong duoc
+    ghi lai, lam mat noi dung trao doi khi quay lai hoi thoai."""
+    user = get_current_user(request)
+    if user is None:
+        raise HTTPException(401, "Ban chua dang nhap hoac phien da het han.")
+    history_service.luu_tin_nhan(
+        user_id=user.id,
+        conversation_id=payload.conversation_id,
+        role="user",
+        noi_dung=payload.user_message,
+    )
+    history_service.luu_tin_nhan(
+        user_id=user.id,
+        conversation_id=payload.conversation_id,
+        role="assistant",
+        noi_dung=payload.ai_caption,
+    )
+    return {"success": True}
 
 
 @router.post("/chat")

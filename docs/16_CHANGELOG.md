@@ -1587,3 +1587,267 @@ Nội dung
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.28
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua bug: nut "Lam bai truc tiep" bien mat khi quay lai chat qua ?cid=
+- Giao vien bao: lam bai online xong, quay lai tab chat (link "Ve Chat
+  AI" o /lam-bai co ?cid=...) thi khung "Lam bai truc tiep" duoi de vua
+  tao khong con nua.
+- Nguyen nhan: moHoiThoai() (ham nap lai lich su that tu Supabase) chi
+  ve lai duoc caption + link tai file cho tin nhan loai "file", nhung
+  KHONG tu dong hien lai nut Co/Khong lam bai (vi de_id khong duoc luu
+  kem trong bang chat_history, chi luu o bang de_da_sinh).
+- Sua: app/templates/chat/chat.html, moHoiThoai() - sau khi nap xong
+  toan bo lich su, neu tin nhan CUOI CUNG la loai "file", goi them
+  GET /api/exam/de-gan-nhat?conversation_id=... (endpoint moi, xem muc
+  3) de lay lai de_id va hien lai dung khung "Lam bai truc tiep" nhu
+  luc vua tao xong.
+
+2. Sua bug NGHIEM TRONG khac phat hien cung luc: luong "xac nhan cau
+   truc de" (nut Dong y tao de, Version 2.25) va form tao de nhanh
+   (muc 4 duoi day) goi thang /api/exam/generate-pdf-auto tu trinh
+   duyet, KHONG qua /chat, nen truoc day KHONG duoc luu vao chat_history
+   - toan bo doan trao doi nay se "bien mat" khi quay lai hoi thoai.
+- Them API moi: POST /api/chat/luu-de-truc-tiep (app/routers/chat.py) -
+  luu lai 1 cap tin nhan user/assistant vao chat_history cho cac luong
+  tao de KHONG qua CHV_Fun. Luu y: PDF trong cac luong nay la blob tai
+  truc tiep tren trinh duyet (khong qua DOWNLOAD_DIR nhu luong n8n) nen
+  KHONG co URL server on dinh de luu duong_dan_file - luu nhu tin nhan
+  van ban thuong. Khi quay lai hoi thoai se thay lai NOI DUNG da trao
+  doi (khong bi mat/bien mat nua), nhung khong co lai nut tai file cu
+  (can tao lai neu muon file) - han che con lai, ghi nhan de lam sau
+  neu can.
+- Da noi lai xacNhanTaoDe() (luong Version 2.25) de goi API nay sau
+  khi tao de thanh cong.
+
+3. API moi: GET /api/exam/danh-sach-chuong?lop=N
+- Tra ve danh sach chuong theo dung phan phoi chuong trinh that
+  (data/ppct/toan{lop}.json - da co san tu truoc, chua tung dung toi),
+  kem "co_du_cau": true/false dua vao viec da co Mapping that hay chua
+  (data/mapping/toan{lop}/L{lop}_C{chuong_so}.json). Hien tai CHI Lop
+  10 - Chuong 1 (Menh de va tap hop) la co_du_cau=true, tat ca lop/
+  chuong con lai deu false (chua co ngan hang cau hoi).
+- Dung cho form tao de nhanh (muc 4).
+
+4. TINH NANG MOI: Form "Tao de nhanh" - chon lop/chuong thay vi go
+   van ban tu do
+- Boi canh: giao vien phan anh AI (chay tren model qwen/qwen3-8b, xem
+  trao doi truoc do) hay hieu sai cac truong hop ro rang (vd "chuong 1"
+  thanh "lop 1"), muon co huong khoa san lua chon cho hoc sinh thay vi
+  phu thuoc hoan toan vao AI doan y.
+- app/templates/chat/chat.html: them nut "Tao de nhanh" ngay duoi loi
+  chao mo dau (moFormTaoDe()). Form gom: Lop (nut bam 10/11/12, mac
+  dinh theo khoi cua hoc sinh dang nhap neu co), Loai kiem tra (dropdown:
+  kiem tra thuong xuyen/15 phut/mieng - can chon Chuong; giua ky/cuoi
+  ky/hoc ky - khong can chon Chuong, tu dong theo pham vi ky thi), So
+  cau (khong bat buoc), Ghi chu them (khong bat buoc, vd ty le muc do).
+- Logic xu ly khi bam "Tao de":
+  + Neu KHONG dien So cau va Ghi chu: goi THANG /api/exam/generate-pdf-
+    auto (khong qua CHV_Fun/n8n) - 0 token AI, khong the hieu sai vi
+    lop/chuong/loai kiem tra da duoc khoa san tu form.
+  + Neu CO dien So cau hoac Ghi chu (can AI hieu ngon ngu tu nhien,
+    vd chia ty le muc do theo tung loai cau khong the ep may moc):
+    van gui qua kenh chat binh thuong (sendMessage(), co qua CHV_Fun/
+    GenerateExam_RequestParser nhu cu), NHUNG cau chu da "khoa" san
+    lop/chuong/loai kiem tra ro rang trong cau (vd: "Tạo đề lớp 10,
+    kiểm tra thường xuyên, chương 1 (Mệnh đề và tập hợp), 20 câu. 40%
+    NB 30% TH 30% VD"), giam toi da rui ro AI doan nham cac gia tri co
+    the xac dinh chac chan duoc.
+- Da test: py_compile exam.py + chat.py sach, node --check + Jinja2
+  render chat.html sach (2 truong hop user_khoi co gia tri va None -
+  phat hien va sua luon 1 loi nho: Jinja2 "default()" khong ap dung
+  cho gia tri None tuong minh, phai dung "or" thay the).
+- CHUA test tren production (can build lai giao dien va thu bam nut).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.28
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua bug: nut "Lam bai truc tiep" bien mat khi quay lai chat qua ?cid=
+- Giao vien bao: lam bai online xong, quay lai tab chat (link "Ve Chat
+  AI" o /lam-bai co ?cid=...) thi khung "Lam bai truc tiep" duoi de vua
+  tao khong con nua.
+- Nguyen nhan: moHoiThoai() (ham nap lai lich su that tu Supabase) chi
+  ve lai duoc caption + link tai file cho tin nhan loai "file", nhung
+  KHONG tu dong hien lai nut Co/Khong lam bai (vi de_id khong duoc luu
+  kem trong bang chat_history, chi luu o bang de_da_sinh).
+- Sua: app/templates/chat/chat.html, moHoiThoai() - sau khi nap xong
+  toan bo lich su, neu tin nhan CUOI CUNG la loai "file", goi them
+  GET /api/exam/de-gan-nhat?conversation_id=... (endpoint moi, xem muc
+  3) de lay lai de_id va hien lai dung khung "Lam bai truc tiep" nhu
+  luc vua tao xong.
+
+2. Sua bug NGHIEM TRONG khac phat hien cung luc: luong "xac nhan cau
+   truc de" (nut Dong y tao de, Version 2.25) va form tao de nhanh
+   (muc 4 duoi day) goi thang /api/exam/generate-pdf-auto tu trinh
+   duyet, KHONG qua /chat, nen truoc day KHONG duoc luu vao chat_history
+   - toan bo doan trao doi nay se "bien mat" khi quay lai hoi thoai.
+- Them API moi: POST /api/chat/luu-de-truc-tiep (app/routers/chat.py) -
+  luu lai 1 cap tin nhan user/assistant vao chat_history cho cac luong
+  tao de KHONG qua CHV_Fun. Luu y: PDF trong cac luong nay la blob tai
+  truc tiep tren trinh duyet (khong qua DOWNLOAD_DIR nhu luong n8n) nen
+  KHONG co URL server on dinh de luu duong_dan_file - luu nhu tin nhan
+  van ban thuong. Khi quay lai hoi thoai se thay lai NOI DUNG da trao
+  doi (khong bi mat/bien mat nua), nhung khong co lai nut tai file cu
+  (can tao lai neu muon file) - han che con lai, ghi nhan de lam sau
+  neu can.
+- Da noi lai xacNhanTaoDe() (luong Version 2.25) de goi API nay sau
+  khi tao de thanh cong.
+
+3. API moi: GET /api/exam/danh-sach-chuong?lop=N
+- Tra ve danh sach chuong theo dung phan phoi chuong trinh that
+  (data/ppct/toan{lop}.json - da co san tu truoc, chua tung dung toi),
+  kem "co_du_cau": true/false dua vao viec da co Mapping that hay chua
+  (data/mapping/toan{lop}/L{lop}_C{chuong_so}.json). Hien tai CHI Lop
+  10 - Chuong 1 (Menh de va tap hop) la co_du_cau=true, tat ca lop/
+  chuong con lai deu false (chua co ngan hang cau hoi).
+- Dung cho form tao de nhanh (muc 4).
+
+4. TINH NANG MOI: Form "Tao de nhanh" - chon lop/chuong thay vi go
+   van ban tu do
+- Boi canh: giao vien phan anh AI (chay tren model qwen/qwen3-8b, xem
+  trao doi truoc do) hay hieu sai cac truong hop ro rang (vd "chuong 1"
+  thanh "lop 1"), muon co huong khoa san lua chon cho hoc sinh thay vi
+  phu thuoc hoan toan vao AI doan y.
+- app/templates/chat/chat.html: them nut "Tao de nhanh" ngay duoi loi
+  chao mo dau (moFormTaoDe()). Form gom: Lop (nut bam 10/11/12, mac
+  dinh theo khoi cua hoc sinh dang nhap neu co), Loai kiem tra (dropdown:
+  kiem tra thuong xuyen/15 phut/mieng - can chon Chuong; giua ky/cuoi
+  ky/hoc ky - khong can chon Chuong, tu dong theo pham vi ky thi), So
+  cau (khong bat buoc), Ghi chu them (khong bat buoc, vd ty le muc do).
+- Logic xu ly khi bam "Tao de":
+  + Neu KHONG dien So cau va Ghi chu: goi THANG /api/exam/generate-pdf-
+    auto (khong qua CHV_Fun/n8n) - 0 token AI, khong the hieu sai vi
+    lop/chuong/loai kiem tra da duoc khoa san tu form.
+  + Neu CO dien So cau hoac Ghi chu (can AI hieu ngon ngu tu nhien,
+    vd chia ty le muc do theo tung loai cau khong the ep may moc):
+    van gui qua kenh chat binh thuong (sendMessage(), co qua CHV_Fun/
+    GenerateExam_RequestParser nhu cu), NHUNG cau chu da "khoa" san
+    lop/chuong/loai kiem tra ro rang trong cau (vd: "Tạo đề lớp 10,
+    kiểm tra thường xuyên, chương 1 (Mệnh đề và tập hợp), 20 câu. 40%
+    NB 30% TH 30% VD"), giam toi da rui ro AI doan nham cac gia tri co
+    the xac dinh chac chan duoc.
+- Da test: py_compile exam.py + chat.py sach, node --check + Jinja2
+  render chat.html sach (2 truong hop user_khoi co gia tri va None -
+  phat hien va sua luon 1 loi nho: Jinja2 "default()" khong ap dung
+  cho gia tri None tuong minh, phai dung "or" thay the).
+- CHUA test tren production (can build lai giao dien va thu bam nut).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.29
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua thiet ke: hoi lai LOP khi hoc sinh khong noi ro, thay vi tu
+   mac dinh lop = 10
+- Giao vien phat hien: hoc sinh nhan "tao de chuong 1" (khong noi lop
+  may), he thong ra de NGAY cho lop 10 ma khong hoi lai gi ca - day la
+  hanh vi CHU DINH tu ban truoc (Version 2.26, de tranh loi AI nham
+  "chuong 1" thanh "lop 1"), nhung xet ve trai nghiem la sai: hoc sinh
+  lop 11/12 go "tao de chuong 1" se bi ra nham de lop 10 ma khong duoc
+  bao truoc.
+- Sua prompt n8n GenerateExam_RequestParser (v3): khi khong xac dinh
+  duoc lop tu cau noi (khong co chu "lop" di kem so), AI PHAI de
+  "lop": null va hoi lai HOC SINH LOP MAY truoc, CHUA voi tinh cau truc
+  de/ty le muc do (hoi tung thu mot, tranh don dap). Neu hoc sinh da
+  tra loi lop o tin nhan truoc do trong cung hoi thoai (dung Memory
+  node co san), khong hoi lai nua.
+- app/templates/chat/chat.html, sendMessage(): tach nhanh xu ly khi
+  data.data.type === "xac_nhan_de": neu data.data.lop la null/rong,
+  CHI hien cau hoi bang van ban thuong (KHONG co nut "Dong y" - vi hoc
+  sinh chua tra loi lop thi chua co gi de dong y ca), hoc sinh go lai
+  lop se di qua kenh chat binh thuong nhu cu. Neu lop da ro, giu
+  nguyen luong nut "Dong y tao de" nhu Version 2.25.
+- File dinh kem: GenerateExam_RequestParser_SystemMessage_v3.txt (dan
+  toan bo vao System Message cua node GenerateExam_RequestParser
+  trong n8n, thay the ban v2 cu).
+
+2. Luu y quan trong: giao vien test tren production cho thay luong
+   "hoi xac nhan cau truc de" (Version 2.25) hoan toan CHUA hoat dong
+   - bam gui la ra file PDF ngay, khong hoi gi ca. Nhieu kha nang 3
+   buoc thu cong ben n8n (dan prompt GenerateExam_RequestParser, sua
+   code Ghep_Tham_So, noi node IF Can_Xac_Nhan_Cau_Truc - xem file
+   n8n_HUONG_DAN_va_noi_dung.txt da giao truoc do) CHUA duoc ap dung
+   hoac chua ap dung dung. Version 2.29 nay dong thoi la co hoi de lam
+   lai dung 3 buoc do (thay prompt bang ban v3 moi nay), giao vien can
+   kiem tra lai tung buoc truoc khi test lai.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.29
+
+Ngày
+
+2026-08-18
+
+Nội dung
+
+1. Sua thiet ke: hoi lai LOP khi hoc sinh khong noi ro, thay vi tu
+   mac dinh lop = 10
+- Giao vien phat hien: hoc sinh nhan "tao de chuong 1" (khong noi lop
+  may), he thong ra de NGAY cho lop 10 ma khong hoi lai gi ca - day la
+  hanh vi CHU DINH tu ban truoc (Version 2.26, de tranh loi AI nham
+  "chuong 1" thanh "lop 1"), nhung xet ve trai nghiem la sai: hoc sinh
+  lop 11/12 go "tao de chuong 1" se bi ra nham de lop 10 ma khong duoc
+  bao truoc.
+- Sua prompt n8n GenerateExam_RequestParser (v3): khi khong xac dinh
+  duoc lop tu cau noi (khong co chu "lop" di kem so), AI PHAI de
+  "lop": null va hoi lai HOC SINH LOP MAY truoc, CHUA voi tinh cau truc
+  de/ty le muc do (hoi tung thu mot, tranh don dap). Neu hoc sinh da
+  tra loi lop o tin nhan truoc do trong cung hoi thoai (dung Memory
+  node co san), khong hoi lai nua.
+- app/templates/chat/chat.html, sendMessage(): tach nhanh xu ly khi
+  data.data.type === "xac_nhan_de": neu data.data.lop la null/rong,
+  CHI hien cau hoi bang van ban thuong (KHONG co nut "Dong y" - vi hoc
+  sinh chua tra loi lop thi chua co gi de dong y ca), hoc sinh go lai
+  lop se di qua kenh chat binh thuong nhu cu. Neu lop da ro, giu
+  nguyen luong nut "Dong y tao de" nhu Version 2.25.
+- File dinh kem: GenerateExam_RequestParser_SystemMessage_v3.txt (dan
+  toan bo vao System Message cua node GenerateExam_RequestParser
+  trong n8n, thay the ban v2 cu).
+
+2. Luu y quan trong: giao vien test tren production cho thay luong
+   "hoi xac nhan cau truc de" (Version 2.25) hoan toan CHUA hoat dong
+   - bam gui la ra file PDF ngay, khong hoi gi ca. Nhieu kha nang 3
+   buoc thu cong ben n8n (dan prompt GenerateExam_RequestParser, sua
+   code Ghep_Tham_So, noi node IF Can_Xac_Nhan_Cau_Truc - xem file
+   n8n_HUONG_DAN_va_noi_dung.txt da giao truoc do) CHUA duoc ap dung
+   hoac chua ap dung dung. Version 2.29 nay dong thoi la co hoi de lam
+   lai dung 3 buoc do (thay prompt bang ban v3 moi nay), giao vien can
+   kiem tra lai tung buoc truoc khi test lai.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -310,6 +310,103 @@
         .btn-bat-dau:hover { opacity: .85; }
 
         /* ===========================
+           Xac nhan cau truc de + Form tao de nhanh
+        =========================== */
+
+        .xac-nhan-de { margin-top: 4px; }
+        .xac-nhan-de p { margin: 0 0 .5em; }
+
+        .btn-dong-y,
+        .btn-doi-y {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 2px 6px 2px 0;
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: opacity .15s ease;
+        }
+
+        .btn-dong-y {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .btn-doi-y { background: #f1f5f9; color: #0f172a; }
+
+        .btn-dong-y:hover,
+        .btn-doi-y:hover { opacity: .85; }
+
+        .form-tao-de {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 6px;
+            max-width: 420px;
+        }
+
+        .form-nhom { margin-bottom: 12px; }
+
+        .form-nhom label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-nhom select,
+        .form-nhom input,
+        .form-nhom textarea {
+            width: 100%;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 14px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .form-nhom textarea { resize: vertical; min-height: 50px; }
+
+        .lop-buttons { display: flex; gap: 8px; }
+
+        .lop-btn {
+            flex: 1;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 8px 0;
+            background: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .lop-btn.active {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+        }
+
+        .btn-submit-form {
+            display: block;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .btn-submit-form:hover { opacity: .85; }
+
+        /* ===========================
            Typing indicator
         =========================== */
 
@@ -478,6 +575,7 @@
         const textarea = document.getElementById("message");
 
         let conversationId = crypto.randomUUID();
+        const CURRENT_USER_ID = "{{ user_id | default('') }}";
 
         // Neu quay lai tu trang lam-bai (link co ?cid=...), dung lai
         // dung hoi thoai cu thay vi tao moi - xem window.onload ben duoi.
@@ -581,7 +679,10 @@ ${html}
 
         function hienChaoMoDau() {
             const loiChao = LOI_CHAO_MO_DAU[Math.floor(Math.random() * LOI_CHAO_MO_DAU.length)];
-            addAIMessage(`<p>${loiChao}</p>`);
+            addAIMessage(
+                `<p>${loiChao}</p>` +
+                `<p><button class="btn-bat-dau" onclick="moFormTaoDe()">📝 Tạo đề nhanh (chọn lớp/chương)</button></p>`
+            );
         }
 
         // Cau giai thich vui nhon sau khi hoc sinh bam "Co" (lam bai
@@ -619,6 +720,300 @@ ${html}
             } else {
                 const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
                 box.innerHTML = `<p>${yKhong}</p>`;
+            }
+        }
+
+        // ======================================================
+        // XAC NHAN CAU TRUC DE (Version 2.25) - khi GenerateExam_RequestParser
+        // tra ve can_xac_nhan=true (dang lay 1 phan/toan bo cau truc tu
+        // Table Tool thay vi hoc sinh tu noi), CHV_Fun/n8n tra ve
+        // data.type = "xac_nhan_de" thay vi tao de ngay. 2 nut duoi day
+        // xu ly HOAN TOAN client-side, KHONG tinh AI token further.
+        // ======================================================
+
+        // Bam "Doi y" - chi doi lai noi dung khung, moi hoc sinh tu go
+        // yeu cau cu the hon, khong goi API nao.
+        function doiYeuCauDe(idHoi) {
+            const box = document.getElementById(idHoi);
+            if (!box) return;
+            box.innerHTML = "<p>Ok, bạn nhắn lại cụ thể số câu/tỉ lệ mức độ bạn muốn nhé, mình sẽ ra đề đúng theo ý bạn.</p>";
+        }
+
+        // Bam "Dong y, tao de" - goi THANG /api/exam/generate-pdf-auto voi
+        // dung cau truc AI da de xuat (KHONG goi lai n8n/CHV_Fun nen KHONG
+        // tinh AI token cho buoc nay).
+        async function xacNhanTaoDe(idHoi, deXuatEncoded) {
+            const box = document.getElementById(idHoi);
+            if (!box) return;
+            const deXuat = JSON.parse(decodeURIComponent(deXuatEncoded));
+            box.innerHTML = '<p>Đang tạo đề, chờ mình xíu nha... ⏳</p>';
+
+            const ct = deXuat.cau_truc_tong_quat || {};
+            const cauTrucTuHocSinh = {};
+            if (ct.trac_nghiem) cauTrucTuHocSinh.trac_nghiem = { so_luong: ct.trac_nghiem };
+            if (ct.dung_sai_cau_lon) cauTrucTuHocSinh.dung_sai_cau_lon = { so_luong: ct.dung_sai_cau_lon };
+            if (ct.tra_loi_ngan) cauTrucTuHocSinh.tra_loi_ngan = { so_luong: ct.tra_loi_ngan };
+            if (ct.tu_luan) cauTrucTuHocSinh.tu_luan = { so_luong: ct.tu_luan };
+
+            try {
+                const res = await fetch("/api/exam/generate-pdf-auto", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        lop: deXuat.lop,
+                        tieu_de: "Đề kiểm tra - Toán " + deXuat.lop,
+                        role: "student",
+                        loai_he_so: deXuat.loai_he_so,
+                        ki_thi: deXuat.ki_thi || null,
+                        pham_vi_chuong: deXuat.pham_vi_chuong || null,
+                        cau_truc_tu_hoc_sinh: Object.keys(cauTrucTuHocSinh).length ? cauTrucTuHocSinh : null,
+                        dinh_dang: "pdf",
+                        user_id: CURRENT_USER_ID || null,
+                        conversation_id: conversationId,
+                    }),
+                });
+                if (!res.ok) {
+                    box.innerHTML = "<p>⚠️ Có lỗi khi tạo đề, bạn thử nhắn lại yêu cầu nhé.</p>";
+                    return;
+                }
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob);
+                const filename = "de_thi.pdf";
+
+                let htmlHoi = "";
+                let deId = null;
+                try {
+                    const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
+                    const dataDe = await deGanNhat.json();
+                    if (dataDe.success) deId = dataDe.de_id;
+                } catch (e) { /* bo qua, khong co nut lam bai truc tiep neu loi */ }
+
+                if (deId) {
+                    const idHoiLamBai = "hoi-lam-bai-" + Date.now();
+                    htmlHoi =
+                        `<div class="hoi-lam-bai" id="${idHoiLamBai}">` +
+                        `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
+                        `<button class="btn-co" onclick="chonLamBai('${idHoiLamBai}','${deId}',true)">✅ Có, làm luôn!</button>` +
+                        `<button class="btn-khong" onclick="chonLamBai('${idHoiLamBai}','${deId}',false)">📝 Không, để làm trên giấy</button>` +
+                        `</div>`;
+                }
+
+                const aiCaption = "Đã tạo đề xong.";
+                box.innerHTML =
+                    `<p>${aiCaption}</p>` +
+                    `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
+                    htmlHoi;
+
+                try {
+                    await fetch("/api/chat/luu-de-truc-tiep", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            conversation_id: conversationId,
+                            user_message: "Đồng ý, tạo đề theo đề xuất.",
+                            ai_caption: aiCaption,
+                        }),
+                    });
+                } catch (e) { /* khong chan luong chinh neu luu lich su loi */ }
+            } catch (err) {
+                console.error(err);
+                box.innerHTML = "<p>⚠️ Lỗi kết nối, bạn thử lại nhé.</p>";
+            }
+        }
+
+        // ======================================================
+        // FORM "TAO DE NHANH" - khoa san lop/chuong/loai kiem tra cho hoc
+        // sinh chon thay vi go van ban tu do, giam phu thuoc vao AI hieu
+        // dung y (yeu cau cua giao vien: "khoa mot so lua chon cho nguoi
+        // dung" thay vi can AI qua thong minh moi hieu dung).
+        // ======================================================
+
+        const HESO1_KITHI_SET = ["kiem_tra_thuong_xuyen", "kiem_tra_15_phut", "kiem_tra_mieng"];
+
+        const TEN_LOAI_KT = {
+            kiem_tra_thuong_xuyen: "kiểm tra thường xuyên",
+            kiem_tra_15_phut: "kiểm tra 15 phút",
+            kiem_tra_mieng: "kiểm tra miệng",
+            giua_ky_1: "giữa kỳ 1",
+            giua_ky_2: "giữa kỳ 2",
+            cuoi_ky_1: "cuối kỳ 1 / học kỳ 1",
+            cuoi_ky_2: "cuối kỳ 2 / học kỳ 2",
+        };
+
+        function moFormTaoDe() {
+            const idForm = "form-tao-de-" + Date.now();
+            const lopMacDinh = parseInt("{{ user_khoi or 10 }}") || 10;
+            addAIMessage(
+                `<div class="form-tao-de" id="${idForm}" data-lop="${lopMacDinh}">` +
+                `<div class="form-nhom">` +
+                `<label>Lớp</label>` +
+                `<div class="lop-buttons">` +
+                [10, 11, 12].map(function (l) {
+                    return `<button type="button" class="lop-btn${l === lopMacDinh ? ' active' : ''}" onclick="chonLopForm('${idForm}',${l})">${l}</button>`;
+                }).join("") +
+                `</div></div>` +
+                `<div class="form-nhom">` +
+                `<label>Loại kiểm tra</label>` +
+                `<select id="${idForm}-loai" onchange="doiLoaiKiemTra('${idForm}')">` +
+                Object.keys(TEN_LOAI_KT).map(function (k) {
+                    return `<option value="${k}">${TEN_LOAI_KT[k].charAt(0).toUpperCase() + TEN_LOAI_KT[k].slice(1)}</option>`;
+                }).join("") +
+                `</select></div>` +
+                `<div class="form-nhom" id="${idForm}-chuong-wrap">` +
+                `<label>Chương</label>` +
+                `<select id="${idForm}-chuong"><option value="">Đang tải...</option></select>` +
+                `</div>` +
+                `<div class="form-nhom">` +
+                `<label>Số câu (không bắt buộc)</label>` +
+                `<input type="number" min="1" id="${idForm}-socau" placeholder="Để trống = theo chuẩn">` +
+                `</div>` +
+                `<div class="form-nhom">` +
+                `<label>Ghi chú thêm (không bắt buộc)</label>` +
+                `<textarea id="${idForm}-ghichu" placeholder="Ví dụ: 40% nhận biết, 30% thông hiểu..."></textarea>` +
+                `</div>` +
+                `<button type="button" class="btn-submit-form" onclick="submitFormTaoDe('${idForm}')">🚀 Tạo đề</button>` +
+                `</div>`
+            );
+            taiChuongTheoLop(idForm, lopMacDinh);
+        }
+
+        function chonLopForm(idForm, lop) {
+            const formEl = document.getElementById(idForm);
+            if (!formEl) return;
+            formEl.dataset.lop = lop;
+            formEl.querySelectorAll(".lop-btn").forEach(function (btn) {
+                btn.classList.toggle("active", btn.textContent.trim() === String(lop));
+            });
+            taiChuongTheoLop(idForm, lop);
+        }
+
+        async function taiChuongTheoLop(idForm, lop) {
+            const sel = document.getElementById(idForm + "-chuong");
+            if (!sel) return;
+            sel.innerHTML = '<option value="">Đang tải...</option>';
+            try {
+                const res = await fetch("/api/exam/danh-sach-chuong?lop=" + lop);
+                const data = await res.json();
+                if (!data.success) {
+                    sel.innerHTML = '<option value="">Không tải được danh sách chương</option>';
+                    return;
+                }
+                sel.innerHTML = data.data.map(function (c) {
+                    const canh_bao = c.co_du_cau ? "" : " ⚠️ (chưa có đủ câu)";
+                    return `<option value="${c.chuong_so}">Chương ${c.chuong_so}: ${c.ten_chuong}${canh_bao}</option>`;
+                }).join("");
+            } catch (err) {
+                sel.innerHTML = '<option value="">Không tải được danh sách chương</option>';
+                console.error(err);
+            }
+        }
+
+        function doiLoaiKiemTra(idForm) {
+            const loai = document.getElementById(idForm + "-loai").value;
+            const wrap = document.getElementById(idForm + "-chuong-wrap");
+            if (!wrap) return;
+            wrap.style.display = HESO1_KITHI_SET.indexOf(loai) !== -1 ? "" : "none";
+        }
+
+        async function submitFormTaoDe(idForm) {
+            const formEl = document.getElementById(idForm);
+            if (!formEl) return;
+            const lop = parseInt(formEl.dataset.lop);
+            const loaiKt = document.getElementById(idForm + "-loai").value;
+            const laHeSo1 = HESO1_KITHI_SET.indexOf(loaiKt) !== -1;
+            const chuongSo = laHeSo1 ? document.getElementById(idForm + "-chuong").value : "";
+            const chuongTen = laHeSo1 && chuongSo
+                ? document.getElementById(idForm + "-chuong").selectedOptions[0].textContent
+                : "";
+            const socau = document.getElementById(idForm + "-socau").value.trim();
+            const ghichu = document.getElementById(idForm + "-ghichu").value.trim();
+            const tenLoaiKt = TEN_LOAI_KT[loaiKt] || loaiKt;
+
+            if (laHeSo1 && !chuongSo) {
+                alert("Bạn chọn Chương giúp mình nhé.");
+                return;
+            }
+
+            formEl.innerHTML = "<p>Đang xử lý...</p>";
+
+            if (!socau && !ghichu) {
+                // Khong co tuy chinh gi them -> goi THANG API, 0 token AI.
+                try {
+                    const res = await fetch("/api/exam/generate-pdf-auto", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            lop: lop,
+                            tieu_de: "Đề kiểm tra - Toán " + lop,
+                            role: "student",
+                            loai_he_so: laHeSo1 ? "HeSo1" : "HeSo2_HeSo3",
+                            ki_thi: loaiKt,
+                            pham_vi_chuong: laHeSo1 ? "chuong_" + chuongSo : null,
+                            cau_truc_tu_hoc_sinh: null,
+                            dinh_dang: "pdf",
+                            user_id: CURRENT_USER_ID || null,
+                            conversation_id: conversationId,
+                        }),
+                    });
+                    if (!res.ok) {
+                        formEl.innerHTML = "<p>⚠️ Có lỗi khi tạo đề, bạn thử lại nhé.</p>";
+                        return;
+                    }
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const filename = "de_thi.pdf";
+
+                    let htmlHoi = "";
+                    let deId = null;
+                    try {
+                        const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
+                        const dataDe = await deGanNhat.json();
+                        if (dataDe.success) deId = dataDe.de_id;
+                    } catch (e) { /* bo qua */ }
+
+                    if (deId) {
+                        const idHoiLamBai = "hoi-lam-bai-" + Date.now();
+                        htmlHoi =
+                            `<div class="hoi-lam-bai" id="${idHoiLamBai}">` +
+                            `<p>Làm bài này trực tiếp trên web để được chấm điểm luôn nhé?</p>` +
+                            `<button class="btn-co" onclick="chonLamBai('${idHoiLamBai}','${deId}',true)">✅ Có, làm luôn!</button>` +
+                            `<button class="btn-khong" onclick="chonLamBai('${idHoiLamBai}','${deId}',false)">📝 Không, để làm trên giấy</button>` +
+                            `</div>`;
+                    }
+
+                    const aiCaption = "Đã tạo đề xong.";
+                    formEl.outerHTML =
+                        `<div><p>${aiCaption}</p>` +
+                        `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
+                        htmlHoi + `</div>`;
+
+                    try {
+                        await fetch("/api/chat/luu-de-truc-tiep", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                conversation_id: conversationId,
+                                user_message: "Tạo đề nhanh: lớp " + lop + ", " + tenLoaiKt + (laHeSo1 ? ", chương " + chuongSo : "") + ".",
+                                ai_caption: aiCaption,
+                            }),
+                        });
+                    } catch (e) { /* bo qua */ }
+                } catch (err) {
+                    console.error(err);
+                    formEl.innerHTML = "<p>⚠️ Lỗi kết nối, bạn thử lại nhé.</p>";
+                }
+            } else {
+                // Co tuy chinh (so cau/ghi chu ty le muc do...) -> can AI hieu
+                // ngon ngu tu nhien, van gui qua kenh chat binh thuong nhung
+                // cau chu da khoa san lop/chuong/loai kiem tra.
+                const cauNhan =
+                    "Tạo đề lớp " + lop + ", " + tenLoaiKt +
+                    (laHeSo1 ? ", chương " + chuongSo + " (" + chuongTen.replace(/^Chương \d+:\s*/, "").replace(" ⚠️ (chưa có đủ câu)", "") + ")" : "") +
+                    (socau ? ", " + socau + " câu" : "") +
+                    (ghichu ? ". " + ghichu : "");
+                formEl.remove();
+                await sendMessage(cauNhan);
+                taiDanhSachLichSu();
             }
         }
 
@@ -730,7 +1125,23 @@ ${html}
                 }
 
                 if (data.success) {
-                    if (data.data && data.data.type === "file") {
+                    if (data.data && data.data.type === "xac_nhan_de" && !data.data.lop) {
+                        // Chua xac dinh duoc lop (GenerateExam_RequestParser
+                        // tra ve lop=null vi hoc sinh khong noi ro) - CHI hoi
+                        // lai bang van ban thuong, KHONG hien nut xac nhan vi
+                        // chua co gi de "dong y" - hoc sinh phai go lai lop.
+                        addAIMessage(marked.parse(data.data.tra_loi || data.message || "Bạn học lớp mấy vậy (10/11/12)? Nói rõ giúp mình để tạo đề đúng chương trình nhé!"));
+                    } else if (data.data && data.data.type === "xac_nhan_de") {
+                        const idHoi = "xac-nhan-de-" + Date.now();
+                        const deXuatEncoded = encodeURIComponent(JSON.stringify(data.data));
+                        addAIMessage(
+                            `<div class="xac-nhan-de" id="${idHoi}">` +
+                            `<p>${marked.parseInline(data.data.tra_loi || data.message || "")}</p>` +
+                            `<button class="btn-dong-y" onclick="xacNhanTaoDe('${idHoi}','${deXuatEncoded}')">✅ Đồng ý, tạo đề</button>` +
+                            `<button class="btn-doi-y" onclick="doiYeuCauDe('${idHoi}')">✏️ Để mình nói cụ thể hơn</button>` +
+                            `</div>`
+                        );
+                    } else if (data.data && data.data.type === "file") {
                         const url = data.data.url;
                         const filename = data.data.filename;
                         const deId = data.data.de_id;

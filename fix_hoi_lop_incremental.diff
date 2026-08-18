@@ -1,0 +1,19 @@
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index 19b617e..4c11906 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -1125,7 +1125,13 @@ ${html}
+                 }
+ 
+                 if (data.success) {
+-                    if (data.data && data.data.type === "xac_nhan_de") {
++                    if (data.data && data.data.type === "xac_nhan_de" && !data.data.lop) {
++                        // Chua xac dinh duoc lop (GenerateExam_RequestParser
++                        // tra ve lop=null vi hoc sinh khong noi ro) - CHI hoi
++                        // lai bang van ban thuong, KHONG hien nut xac nhan vi
++                        // chua co gi de "dong y" - hoc sinh phai go lai lop.
++                        addAIMessage(marked.parse(data.data.tra_loi || data.message || "Bạn học lớp mấy vậy (10/11/12)? Nói rõ giúp mình để tạo đề đúng chương trình nhé!"));
++                    } else if (data.data && data.data.type === "xac_nhan_de") {
+                         const idHoi = "xac-nhan-de-" + Date.now();
+                         const deXuatEncoded = encodeURIComponent(JSON.stringify(data.data));
+                         addAIMessage(

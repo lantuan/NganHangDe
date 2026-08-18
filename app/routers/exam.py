@@ -27,7 +27,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_ngan,
     chuan_hoa_dap_an_tf,
 )
-from app.services.mapping_service import trich_chuong_bai
+from app.services.mapping_service import trich_chuong_bai, load_mapping
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
@@ -332,6 +332,60 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
         filename="de_thi.pdf",
         media_type="application/pdf",
     )
+
+
+# ======================================================
+# LAY DE VUA TAO GAN NHAT TRONG 1 CUOC HOI THOAI (dung de khoi phuc
+# nut "Lam bai truc tiep" khi quay lai chat, hoac sau khi tao de qua
+# luong xac nhan cau truc / form tao de nhanh)
+# ======================================================
+
+@router.get("/de-gan-nhat")
+def de_gan_nhat_endpoint(conversation_id: str):
+    de = history_service.lay_de_gan_nhat(conversation_id)
+    if de is None or not de.get("id"):
+        raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
+    return {"success": True, "de_id": de["id"]}
+
+
+# ======================================================
+# DANH SACH CHUONG THEO LOP (theo dung phan phoi chuong trinh that
+# trong data/ppct/), kem co_du_cau de FE biet chuong nao da co
+# ngan hang cau hoi that (data/mapping/) va chuong nao chua co
+# ======================================================
+
+@router.get("/danh-sach-chuong")
+def danh_sach_chuong_endpoint(lop: int):
+    if lop not in (10, 11, 12):
+        raise HTTPException(400, "lop phai la 10, 11 hoac 12.")
+
+    ppct_file = Path("data/ppct") / f"toan{lop}.json"
+    if not ppct_file.exists():
+        raise HTTPException(404, f"Chua co phan phoi chuong trinh cho lop {lop}.")
+
+    with open(ppct_file, "r", encoding="utf-8") as f:
+        items = json.load(f)
+
+    ten_chuong_theo_so: dict[int, str] = {}
+    for it in items:
+        cs = it.get("chuong_so")
+        if cs is not None and cs not in ten_chuong_theo_so:
+            ten_chuong_theo_so[cs] = it.get("chuong", f"Chuong {cs}")
+
+    ket_qua = []
+    for cs in sorted(ten_chuong_theo_so.keys()):
+        try:
+            mapping = load_mapping(lop, cs)
+            co_du_cau = len(mapping) > 0
+        except FileNotFoundError:
+            co_du_cau = False
+        ket_qua.append({
+            "chuong_so": cs,
+            "ten_chuong": ten_chuong_theo_so[cs],
+            "co_du_cau": co_du_cau,
+        })
+
+    return {"success": True, "data": ket_qua}
 
 
 # ======================================================

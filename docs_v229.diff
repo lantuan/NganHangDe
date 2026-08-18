@@ -1,0 +1,56 @@
+diff --git a/docs/16_CHANGELOG.md b/docs/16_CHANGELOG.md
+index 433f83b..257f7b2 100644
+--- a/docs/16_CHANGELOG.md
++++ b/docs/16_CHANGELOG.md
+@@ -1587,3 +1587,51 @@ Nội dung
+ Nguoi thuc hien
+ 
+ Mai Ha Lan (cung Claude)
++
++===============================================================================
++
++Version 2.29
++
++Ngày
++
++2026-08-18
++
++Nội dung
++
++1. Sua thiet ke: hoi lai LOP khi hoc sinh khong noi ro, thay vi tu
++   mac dinh lop = 10
++- Giao vien phat hien: hoc sinh nhan "tao de chuong 1" (khong noi lop
++  may), he thong ra de NGAY cho lop 10 ma khong hoi lai gi ca - day la
++  hanh vi CHU DINH tu ban truoc (Version 2.26, de tranh loi AI nham
++  "chuong 1" thanh "lop 1"), nhung xet ve trai nghiem la sai: hoc sinh
++  lop 11/12 go "tao de chuong 1" se bi ra nham de lop 10 ma khong duoc
++  bao truoc.
++- Sua prompt n8n GenerateExam_RequestParser (v3): khi khong xac dinh
++  duoc lop tu cau noi (khong co chu "lop" di kem so), AI PHAI de
++  "lop": null va hoi lai HOC SINH LOP MAY truoc, CHUA voi tinh cau truc
++  de/ty le muc do (hoi tung thu mot, tranh don dap). Neu hoc sinh da
++  tra loi lop o tin nhan truoc do trong cung hoi thoai (dung Memory
++  node co san), khong hoi lai nua.
++- app/templates/chat/chat.html, sendMessage(): tach nhanh xu ly khi
++  data.data.type === "xac_nhan_de": neu data.data.lop la null/rong,
++  CHI hien cau hoi bang van ban thuong (KHONG co nut "Dong y" - vi hoc
++  sinh chua tra loi lop thi chua co gi de dong y ca), hoc sinh go lai
++  lop se di qua kenh chat binh thuong nhu cu. Neu lop da ro, giu
++  nguyen luong nut "Dong y tao de" nhu Version 2.25.
++- File dinh kem: GenerateExam_RequestParser_SystemMessage_v3.txt (dan
++  toan bo vao System Message cua node GenerateExam_RequestParser
++  trong n8n, thay the ban v2 cu).
++
++2. Luu y quan trong: giao vien test tren production cho thay luong
++   "hoi xac nhan cau truc de" (Version 2.25) hoan toan CHUA hoat dong
++   - bam gui la ra file PDF ngay, khong hoi gi ca. Nhieu kha nang 3
++   buoc thu cong ben n8n (dan prompt GenerateExam_RequestParser, sua
++   code Ghep_Tham_So, noi node IF Can_Xac_Nhan_Cau_Truc - xem file
++   n8n_HUONG_DAN_va_noi_dung.txt da giao truoc do) CHUA duoc ap dung
++   hoac chua ap dung dung. Version 2.29 nay dong thoi la co hoi de lam
++   lai dung 3 buoc do (thay prompt bang ban v3 moi nay), giao vien can
++   kiem tra lai tung buoc truoc khi test lai.
++
++Nguoi thuc hien
++
++Mai Ha Lan (cung Claude)
