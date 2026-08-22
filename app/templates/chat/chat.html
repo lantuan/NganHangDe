@@ -371,6 +371,13 @@
 
         .form-nhom textarea { resize: vertical; min-height: 50px; }
 
+        .ghi-chu-loai-kt {
+            font-size: 12px;
+            color: #64748b;
+            margin: 6px 0 0;
+            line-height: 1.4;
+        }
+
         .lop-buttons { display: flex; gap: 8px; }
 
         .lop-btn {
@@ -773,7 +780,14 @@ ${html}
                     }),
                 });
                 if (!res.ok) {
-                    box.innerHTML = "<p>⚠️ Có lỗi khi tạo đề, bạn thử nhắn lại yêu cầu nhé.</p>";
+                    let chiTietLoi = "";
+                    try {
+                        const err = await res.json();
+                        chiTietLoi = err.detail ? String(err.detail) : "";
+                    } catch (e) { /* body khong phai JSON, bo qua */ }
+                    box.innerHTML =
+                        "<p>⚠️ Có lỗi khi tạo đề" + (chiTietLoi ? ": " + chiTietLoi : ", bạn thử nhắn lại yêu cầu nhé.") + "</p>" +
+                        (chiTietLoi ? "<p><button class=\"btn-doi-y\" onclick=\"doiYeuCauDe('" + idHoi + "')\">✏️ Nhắn lại yêu cầu khác</button></p>" : "");
                     return;
                 }
                 const blob = await res.blob();
@@ -828,12 +842,17 @@ ${html}
         // dung" thay vi can AI qua thong minh moi hieu dung).
         // ======================================================
 
-        const HESO1_KITHI_SET = ["kiem_tra_thuong_xuyen", "kiem_tra_15_phut", "kiem_tra_mieng"];
+        // Kiem tra mieng/15 phut/thuong xuyen ve ban chat deu la kiem tra
+        // he so 1, ra de theo 1 chuong cu the - GOP LAI thanh 1 lua chon
+        // duy nhat trong FORM cho don gian (giao vien phan anh: "chung quy
+        // lai la kiem tra thuong xuyen theo chuong", khong can tach 3 dong
+        // rieng). Luu y: kenh chat tu do (go van ban) van hieu duoc ca 3
+        // cach noi rieng le nhu cu (xu ly o prompt AI, khong lien quan
+        // form nay).
+        const HESO1_KITHI_SET = ["kiem_tra_thuong_xuyen"];
 
         const TEN_LOAI_KT = {
-            kiem_tra_thuong_xuyen: "kiểm tra thường xuyên",
-            kiem_tra_15_phut: "kiểm tra 15 phút",
-            kiem_tra_mieng: "kiểm tra miệng",
+            kiem_tra_thuong_xuyen: "kiểm tra thường xuyên (miệng / 15 phút / thường xuyên)",
             giua_ky_1: "giữa kỳ 1",
             giua_ky_2: "giữa kỳ 2",
             cuoi_ky_1: "cuối kỳ 1 / học kỳ 1",
@@ -858,7 +877,9 @@ ${html}
                 Object.keys(TEN_LOAI_KT).map(function (k) {
                     return `<option value="${k}">${TEN_LOAI_KT[k].charAt(0).toUpperCase() + TEN_LOAI_KT[k].slice(1)}</option>`;
                 }).join("") +
-                `</select></div>` +
+                `</select>` +
+                `<p class="ghi-chu-loai-kt">💡 Kiểm tra thường xuyên: ra đề theo 1 chương cụ thể (chọn Chương bên dưới). Giữa kỳ / Cuối kỳ: ra đề theo phạm vi rộng hơn, không chọn riêng 1 chương.</p>` +
+                `</div>` +
                 `<div class="form-nhom" id="${idForm}-chuong-wrap">` +
                 `<label>Chương</label>` +
                 `<select id="${idForm}-chuong"><option value="">Đang tải...</option></select>` +
@@ -956,7 +977,14 @@ ${html}
                         }),
                     });
                     if (!res.ok) {
-                        formEl.innerHTML = "<p>⚠️ Có lỗi khi tạo đề, bạn thử lại nhé.</p>";
+                        let chiTietLoi = "";
+                        try {
+                            const err = await res.json();
+                            chiTietLoi = err.detail ? String(err.detail) : "";
+                        } catch (e) { /* body khong phai JSON, bo qua */ }
+                        formEl.innerHTML =
+                            "<p>⚠️ Có lỗi khi tạo đề" + (chiTietLoi ? ": " + chiTietLoi : ", bạn thử lại nhé.") + "</p>" +
+                            "<button type=\"button\" class=\"btn-submit-form\" onclick=\"moFormTaoDe()\">🔁 Mở lại form, thử lần nữa</button>";
                         return;
                     }
                     const blob = await res.blob();
