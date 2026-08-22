@@ -342,6 +342,73 @@ function veKetQua(ketQua) {
     if (window.MathJax) { MathJax.typesetPromise([main]); }
 }
 
+// Xay HTML bang tom tat ket qua (diem tung cau: dung/sai/diem dat
+// duoc) - dung y het cau truc thong tin cua veKetQua() o tren nhung
+// gon hon, phu hop hien trong 1 bubble chat. Dung the <div>/<strong>
+// thay vi CSS class rieng (vi chat.html khong co san cac class .ket-
+// qua/.cau-hoi/.dung/.sai cua trang lam-bai) de hien thi dung ngay ca
+// khi khong co CSS phu tro.
+function xayHtmlTomTatKetQua(ketQua) {
+    let html = '<p><strong>📊 Kết quả: ' + ketQua.diem_tren_10_tam_tinh +
+        '/10 điểm</strong>' +
+        (ketQua.ghi_chu ? ' <span style="color:#64748b;font-size:13px;">(' + ketQua.ghi_chu + ')</span>' : '') +
+        '</p>';
+    html += '<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;font-size:14px;">';
+    (ketQua.chi_tiet || []).forEach(function (cau) {
+        let dong = '<strong>Câu ' + cau.so_thu_tu + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + ':</strong> ';
+        if (cau.loai_cau === 'TF') {
+            dong += (cau.so_y_dung === 4 ? '✅' : '⚠️') +
+                ' đúng ' + cau.so_y_dung + '/4 ý (' + cau.diem_dat_duoc + ' điểm)';
+            if (cau.chi_tiet_tung_y && typeof cau.chi_tiet_tung_y === 'object') {
+                const yStr = Object.keys(cau.chi_tiet_tung_y).sort().map(function (y) {
+                    return (cau.chi_tiet_tung_y[y] ? '✅' : '❌') + y.toUpperCase();
+                }).join(' ');
+                dong += ' — ' + yStr;
+            }
+        } else if (cau.dung_sai_hoac_diem === true) {
+            dong += '✅ Đúng (' + (cau.diem_toi_da || 0) + ' điểm)';
+        } else if (cau.dung_sai_hoac_diem === false) {
+            dong += '❌ Sai — đáp án đúng: ' + (cau.dap_an_dung || '');
+        } else if (typeof cau.dung_sai_hoac_diem === 'number') {
+            dong += '📝 ' + cau.dung_sai_hoac_diem + '/' + (cau.diem_toi_da || 0) + ' điểm' +
+                (cau.nhan_xet ? ' — ' + cau.nhan_xet : '');
+        } else {
+            dong += '⏳ ' + (cau.nhan_xet || 'Chưa chấm được tự động.');
+        }
+        html += '<div>' + dong + '</div>';
+    });
+    html += '</div>';
+    return html;
+}
+
+// Sau khi cham xong, day bang ket qua chi tiet vao chat_history cua
+// dung hoi thoai da tao ra de nay (neu co ?cid= tren URL) - de giao
+// vien quay lai trang chat van thay duoc DUNG bang cau dung/cau sai
+// giong het trang /lam-bai, khong phai chi 1 dong tom tat (giao vien
+// yeu cau ro: "toi can cau dung, cau sai... bang cham diem y nhu cai
+// xuat ra luc lam bai"). Dung lai endpoint /api/chat/luu-de-truc-tiep
+// da co san (Version 2.28) - khong can API moi, chi ghep dung dinh
+// dang user_message/ai_caption phu hop; ai_caption o day la HTML (marked
+// khong sanitize theo mac dinh nen HTML nay hien thi dung khi chat.html
+// tai lai lich su qua marked.parse()).
+async function luuKetQuaVaoChat(ketQua) {
+    if (!CID_TU_URL) return;
+    try {
+        await fetch('/api/chat/luu-de-truc-tiep', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                conversation_id: CID_TU_URL,
+                user_message: "Đã nộp bài làm trực tiếp trên web.",
+                ai_caption: xayHtmlTomTatKetQua(ketQua)
+            })
+        });
+    } catch (e) {
+        // Khong chan luong hien ket qua neu luu lich su that bai.
+        console.error("Loi luu ket qua vao chat:", e);
+    }
+}
+
 async function nopBai() {
     const nutNop = document.getElementById('nut-nop');
     nutNop.disabled = true;
@@ -395,6 +462,7 @@ async function nopBai() {
         }
 
         veKetQua(ketQua);
+        luuKetQuaVaoChat(ketQua);
     } catch (e) {
         alert('Lỗi kết nối, thử lại nhé.');
         nutNop.disabled = false;
