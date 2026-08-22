@@ -105,6 +105,7 @@ async def chat(request: Request):
         name="chat/chat.html",
         context={
             "title": "Chat AI",
+            "user_id": user.id,
             "user_email": user.email,
             "user_display_name": ten_hien_thi,
             "user_khoi": ho_so.get("khoi"),
