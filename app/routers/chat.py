@@ -231,6 +231,13 @@ class LuuDeTrucTiepRequest(BaseModel):
     conversation_id: str
     user_message: str
     ai_caption: str
+    # Tuy chon: URL on dinh (/api/exam/tai-de/{de_id}) cho de vua tao qua
+    # luong xac nhan cau truc / form tao de nhanh. Khi co gia tri nay,
+    # luu tin nhan AI o dang "file" (giong het luong chat binh thuong qua
+    # n8n) de moHoiThoai() tu dong ve lai duoc link tai file + nut "Lam
+    # bai truc tiep" khi quay lai hoi thoai - truoc day luu dang van ban
+    # thuong nen link/nut bi mat het sau khi tai lai trang.
+    file_url: str | None = None
 
 
 @router.post("/api/chat/luu-de-truc-tiep")
@@ -254,6 +261,8 @@ async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequ
         conversation_id=payload.conversation_id,
         role="assistant",
         noi_dung=payload.ai_caption,
+        loai_phan_hoi="file" if payload.file_url else None,
+        duong_dan_file=payload.file_url,
     )
     return {"success": True}
 

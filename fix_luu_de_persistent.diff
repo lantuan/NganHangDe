@@ -1,0 +1,141 @@
+diff --git a/app/routers/chat.py b/app/routers/chat.py
+index 0ae2ea0..dbc198a 100644
+--- a/app/routers/chat.py
++++ b/app/routers/chat.py
+@@ -231,6 +231,13 @@ class LuuDeTrucTiepRequest(BaseModel):
+     conversation_id: str
+     user_message: str
+     ai_caption: str
++    # Tuy chon: URL on dinh (/api/exam/tai-de/{de_id}) cho de vua tao qua
++    # luong xac nhan cau truc / form tao de nhanh. Khi co gia tri nay,
++    # luu tin nhan AI o dang "file" (giong het luong chat binh thuong qua
++    # n8n) de moHoiThoai() tu dong ve lai duoc link tai file + nut "Lam
++    # bai truc tiep" khi quay lai hoi thoai - truoc day luu dang van ban
++    # thuong nen link/nut bi mat het sau khi tai lai trang.
++    file_url: str | None = None
+ 
+ 
+ @router.post("/api/chat/luu-de-truc-tiep")
+@@ -254,6 +261,8 @@ async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequ
+         conversation_id=payload.conversation_id,
+         role="assistant",
+         noi_dung=payload.ai_caption,
++        loai_phan_hoi="file" if payload.file_url else None,
++        duong_dan_file=payload.file_url,
+     )
+     return {"success": True}
+ 
+diff --git a/app/routers/exam.py b/app/routers/exam.py
+index a3a2f23..ccdabbf 100644
+--- a/app/routers/exam.py
++++ b/app/routers/exam.py
+@@ -348,6 +348,28 @@ def de_gan_nhat_endpoint(conversation_id: str):
+     return {"success": True, "de_id": de["id"]}
+ 
+ 
++# ======================================================
++# TAI FILE DE THEO de_id - URL ON DINH (khong phai blob), dung cho
++# luong xac nhan cau truc / form tao de nhanh de link tai file + tin
++# nhan luu lai trong chat_history van con dung sau khi tai lai trang
++# (khac voi URL.createObjectURL truoc day, se mat khi reload).
++# ======================================================
++
++@router.get("/tai-de/{de_id}")
++def tai_de_endpoint(de_id: str):
++    de = history_service.lay_de_theo_id(de_id)
++    if de is None:
++        raise HTTPException(404, "Khong tim thay de nay.")
++    duong_dan = de.get("files", {}).get("de")
++    if not duong_dan or not Path(duong_dan).exists():
++        raise HTTPException(404, "File de khong con ton tai (co the da bi xoa sau 10 ngay).")
++    return FileResponse(
++        path=duong_dan,
++        filename="de_thi.pdf",
++        media_type="application/pdf",
++    )
++
++
+ # ======================================================
+ # DANH SACH CHUONG THEO LOP (theo dung phan phoi chuong trinh that
+ # trong data/ppct/), kem co_du_cau de FE biet chuong nao da co
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index 71ae01f..414c70a 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -796,8 +796,6 @@ ${html}
+                         (chiTietLoi ? "<p><button class=\"btn-doi-y\" onclick=\"doiYeuCauDe('" + idHoi + "')\">✏️ Nhắn lại yêu cầu khác</button></p>" : "");
+                     return;
+                 }
+-                const blob = await res.blob();
+-                const url = URL.createObjectURL(blob);
+                 const filename = "de_thi.pdf";
+ 
+                 let htmlHoi = "";
+@@ -808,6 +806,18 @@ ${html}
+                     if (dataDe.success) deId = dataDe.de_id;
+                 } catch (e) { /* bo qua, khong co nut lam bai truc tiep neu loi */ }
+ 
++                // Dung URL on dinh /api/exam/tai-de/{de_id} khi da co deId
++                // (song song lai duoc sau khi tai lai trang) - chi fall
++                // back ve blob (tai duoc ngay lan nay, nhung mat sau khi
++                // reload) neu vi ly do gi do khong lay duoc deId.
++                let url;
++                if (deId) {
++                    url = "/api/exam/tai-de/" + deId;
++                } else {
++                    const blob = await res.blob();
++                    url = URL.createObjectURL(blob);
++                }
++
+                 if (deId) {
+                     const idHoiLamBai = "hoi-lam-bai-" + Date.now();
+                     htmlHoi =
+@@ -830,8 +840,13 @@ ${html}
+                         headers: { "Content-Type": "application/json" },
+                         body: JSON.stringify({
+                             conversation_id: conversationId,
+-                            user_message: "Đồng ý, tạo đề theo đề xuất.",
++                            user_message:
++                                "Đồng ý, tạo đề: lớp " + deXuat.lop +
++                                (deXuat.ki_thi ? ", " + (TEN_LOAI_KT[deXuat.ki_thi] || deXuat.ki_thi.replace(/_/g, " ")) : "") +
++                                (deXuat.pham_vi_chuong && deXuat.pham_vi_chuong !== "chua_xac_dinh" ? ", " + deXuat.pham_vi_chuong.replace("chuong_", "chương ") : "") +
++                                ".",
+                             ai_caption: aiCaption,
++                            file_url: deId ? url : null,
+                         }),
+                     });
+                 } catch (e) { /* khong chan luong chinh neu luu lich su loi */ }
+@@ -997,8 +1012,6 @@ ${html}
+                             "<button type=\"button\" class=\"btn-submit-form\" onclick=\"moFormTaoDe()\">🔁 Mở lại form, thử lần nữa</button>";
+                         return;
+                     }
+-                    const blob = await res.blob();
+-                    const url = URL.createObjectURL(blob);
+                     const filename = "de_thi.pdf";
+ 
+                     let htmlHoi = "";
+@@ -1009,6 +1022,16 @@ ${html}
+                         if (dataDe.success) deId = dataDe.de_id;
+                     } catch (e) { /* bo qua */ }
+ 
++                    // URL on dinh (song lai duoc sau reload) khi co deId,
++                    // fall back ve blob chi khi khong lay duoc deId.
++                    let url;
++                    if (deId) {
++                        url = "/api/exam/tai-de/" + deId;
++                    } else {
++                        const blob = await res.blob();
++                        url = URL.createObjectURL(blob);
++                    }
++
+                     if (deId) {
+                         const idHoiLamBai = "hoi-lam-bai-" + Date.now();
+                         htmlHoi =
+@@ -1033,6 +1056,7 @@ ${html}
+                                 conversation_id: conversationId,
+                                 user_message: "Tạo đề nhanh: lớp " + lop + ", " + tenLoaiKt + (laHeSo1 ? ", chương " + chuongSo : "") + ".",
+                                 ai_caption: aiCaption,
++                                file_url: deId ? url : null,
+                             }),
+                         });
+                     } catch (e) { /* bo qua */ }

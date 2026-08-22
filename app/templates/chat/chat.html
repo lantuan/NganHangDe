@@ -796,8 +796,6 @@ ${html}
                         (chiTietLoi ? "<p><button class=\"btn-doi-y\" onclick=\"doiYeuCauDe('" + idHoi + "')\">✏️ Nhắn lại yêu cầu khác</button></p>" : "");
                     return;
                 }
-                const blob = await res.blob();
-                const url = URL.createObjectURL(blob);
                 const filename = "de_thi.pdf";
 
                 let htmlHoi = "";
@@ -807,6 +805,18 @@ ${html}
                     const dataDe = await deGanNhat.json();
                     if (dataDe.success) deId = dataDe.de_id;
                 } catch (e) { /* bo qua, khong co nut lam bai truc tiep neu loi */ }
+
+                // Dung URL on dinh /api/exam/tai-de/{de_id} khi da co deId
+                // (song song lai duoc sau khi tai lai trang) - chi fall
+                // back ve blob (tai duoc ngay lan nay, nhung mat sau khi
+                // reload) neu vi ly do gi do khong lay duoc deId.
+                let url;
+                if (deId) {
+                    url = "/api/exam/tai-de/" + deId;
+                } else {
+                    const blob = await res.blob();
+                    url = URL.createObjectURL(blob);
+                }
 
                 if (deId) {
                     const idHoiLamBai = "hoi-lam-bai-" + Date.now();
@@ -830,8 +840,13 @@ ${html}
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             conversation_id: conversationId,
-                            user_message: "Đồng ý, tạo đề theo đề xuất.",
+                            user_message:
+                                "Đồng ý, tạo đề: lớp " + deXuat.lop +
+                                (deXuat.ki_thi ? ", " + (TEN_LOAI_KT[deXuat.ki_thi] || deXuat.ki_thi.replace(/_/g, " ")) : "") +
+                                (deXuat.pham_vi_chuong && deXuat.pham_vi_chuong !== "chua_xac_dinh" ? ", " + deXuat.pham_vi_chuong.replace("chuong_", "chương ") : "") +
+                                ".",
                             ai_caption: aiCaption,
+                            file_url: deId ? url : null,
                         }),
                     });
                 } catch (e) { /* khong chan luong chinh neu luu lich su loi */ }
@@ -997,8 +1012,6 @@ ${html}
                             "<button type=\"button\" class=\"btn-submit-form\" onclick=\"moFormTaoDe()\">🔁 Mở lại form, thử lần nữa</button>";
                         return;
                     }
-                    const blob = await res.blob();
-                    const url = URL.createObjectURL(blob);
                     const filename = "de_thi.pdf";
 
                     let htmlHoi = "";
@@ -1008,6 +1021,16 @@ ${html}
                         const dataDe = await deGanNhat.json();
                         if (dataDe.success) deId = dataDe.de_id;
                     } catch (e) { /* bo qua */ }
+
+                    // URL on dinh (song lai duoc sau reload) khi co deId,
+                    // fall back ve blob chi khi khong lay duoc deId.
+                    let url;
+                    if (deId) {
+                        url = "/api/exam/tai-de/" + deId;
+                    } else {
+                        const blob = await res.blob();
+                        url = URL.createObjectURL(blob);
+                    }
 
                     if (deId) {
                         const idHoiLamBai = "hoi-lam-bai-" + Date.now();
@@ -1033,6 +1056,7 @@ ${html}
                                 conversation_id: conversationId,
                                 user_message: "Tạo đề nhanh: lớp " + lop + ", " + tenLoaiKt + (laHeSo1 ? ", chương " + chuongSo : "") + ".",
                                 ai_caption: aiCaption,
+                                file_url: deId ? url : null,
                             }),
                         });
                     } catch (e) { /* bo qua */ }

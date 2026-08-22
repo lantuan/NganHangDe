@@ -349,6 +349,28 @@ def de_gan_nhat_endpoint(conversation_id: str):
 
 
 # ======================================================
+# TAI FILE DE THEO de_id - URL ON DINH (khong phai blob), dung cho
+# luong xac nhan cau truc / form tao de nhanh de link tai file + tin
+# nhan luu lai trong chat_history van con dung sau khi tai lai trang
+# (khac voi URL.createObjectURL truoc day, se mat khi reload).
+# ======================================================
+
+@router.get("/tai-de/{de_id}")
+def tai_de_endpoint(de_id: str):
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+    duong_dan = de.get("files", {}).get("de")
+    if not duong_dan or not Path(duong_dan).exists():
+        raise HTTPException(404, "File de khong con ton tai (co the da bi xoa sau 10 ngay).")
+    return FileResponse(
+        path=duong_dan,
+        filename="de_thi.pdf",
+        media_type="application/pdf",
+    )
+
+
+# ======================================================
 # DANH SACH CHUONG THEO LOP (theo dung phan phoi chuong trinh that
 # trong data/ppct/), kem co_du_cau de FE biet chuong nao da co
 # ngan hang cau hoi that (data/mapping/) va chuong nao chua co
