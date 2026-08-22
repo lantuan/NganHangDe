@@ -1851,3 +1851,142 @@ Nội dung
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.30
+
+Ngày
+
+2026-08-22
+
+Nội dung
+
+Cai thien UX form "Tao de nhanh" theo phan hoi truc tiep cua giao vien
+khi test tren production.
+
+1. Gop 3 loai kiem tra he so 1 (kiem tra mieng / kiem tra 15 phut /
+   kiem tra thuong xuyen) thanh 1 lua chon duy nhat trong DROPDOWN cua
+   form ("Kiem tra thuong xuyen (mieng / 15 phut / thuong xuyen)") -
+   ve ban chat ca 3 deu ra de theo 1 chuong cu the, khong can tach 3
+   dong rieng gay roi mat cho hoc sinh chon. Kenh chat go van ban tu do
+   van hieu duoc ca 3 cach noi rieng le nhu cu (khong doi prompt AI).
+2. Them ghi chu ngay duoi dropdown "Loai kiem tra": "Kiem tra thuong
+   xuyen: ra de theo 1 chuong cu the (chon Chuong ben duoi). Giua ky /
+   Cuoi ky: ra de theo pham vi rong hon, khong chon rieng 1 chuong." -
+   giup hoc sinh hieu ngay tai sao co luc form hien o Chuong, co luc
+   khong.
+3. Sua loi UX nghiem trong: truoc day khi tao de qua form/nut "Dong y
+   tao de" bi loi (vi du sai du lieu, thieu ngan hang cau hoi...), toan
+   bo form/khung bi XOA TRANG chi con lai 1 dong "Co loi khi tao de,
+   ban thu lai nhe" - khong co each nao thu lai, khong biet ly do that.
+   Sua: hien THANG noi dung loi that (doc tu field "detail" trong JSON
+   loi cua backend) va them nut "Mo lai form, thu lan nua" / "Nhan lai
+   yeu cau khac" de thao tac tiep duoc ngay, khong phai bam "+ Chat
+   moi" lam lai tu dau.
+
+===============================================================================
+
+Version 2.31
+
+Ngày
+
+2026-08-22
+
+Nội dung
+
+Sua bug: form "Tao de nhanh" va nut "Dong y tao de" bao loi cung
+"Loi chon cau hoi: <ID> (SA): khong co Generator nao khop trong
+Mapping" thay vi ra de kem canh bao "THIEU" nhu ban PDF sinh qua kenh
+chat binh thuong.
+
+Nguyen nhan: 2 luong nay goi THANG toi /api/exam/generate-pdf-auto tu
+trinh duyet (khong qua n8n/Ghep_Tham_So), va quen khong bat co
+"cho_phep_thieu: true" trong payload gui len - trong khi luong chat
+binh thuong qua n8n LUON bat co nay (xac nhan qua man hinh n8n
+Goi_API_Sinh_De). Pydantic model GenerateExamAutoRequest mac dinh
+cho_phep_thieu=False (che do nghiem ngat), nen thieu du lieu la bao
+loi cung 400 thay vi chen "THIEU" nhu thiet ke goc.
+
+Sua: them "cho_phep_thieu: true" vao ca 2 noi goi
+/api/exam/generate-pdf-auto trong app/templates/chat/chat.html
+(xacNhanTaoDe() va submitFormTaoDe()) - dung hanh vi voi luong chat
+qua n8n. Giao vien xac nhan day la hanh vi mong muon: "cu ra de, cai
+nao chua co thi hien thong bao thieu la duoc, nhu trong file pdf".
+
+===============================================================================
+
+Version 2.32
+
+Ngày
+
+2026-08-22
+
+Nội dung
+
+1. Sua bug NGHIEM TRONG: route GET /chat thieu "user_id" trong context
+   Jinja2
+- Phat hien qua qua trinh debug: hang loat trieu chung tuong nhu khong
+  lien quan (form tao de nhanh khong hien nut "Lam bai truc tiep" sau
+  khi tao xong, "cho toi loi giai" bao loi "AI chua xu ly duoc yeu cau
+  nay", GET /api/exam/de-gan-nhat luon tra ve 404) deu bat nguon TU
+  CUNG 1 CHO: route GET /chat (ham chat() trong app/routers/chat.py)
+  dung templates.TemplateResponse voi context CHUA CO field "user_id"
+  (cac route khac nhu /lam-bai/{de_id} da co san field nay, rieng
+  route chinh /chat thi thieu). Frontend doc
+  const CURRENT_USER_ID = "{{ user_id | default('') }}"; - vi context
+  thieu key nay nen Jinja2 default() kich hoat, CURRENT_USER_ID LUON
+  la chuoi rong.
+- He qua day chuyen: form tao de nhanh/nut "Dong y tao de" goi
+  /api/exam/generate-pdf-auto voi user_id="" (rong) -> backend kiem
+  tra "if payload.user_id and payload.conversation_id" luon FALSE voi
+  chuoi rong -> BO QUA hoan toan buoc luu de vao bang de_da_sinh (va
+  file vao file_de) -> moi truy van sau do (de-gan-nhat de hien nut
+  "Lam bai truc tiep", export-loigiai de xuat dap an...) deu khong tim
+  thay de, bao loi hoac im lang khong hien gi.
+- Cach debug: xac nhan tung lop mot bang du lieu that (khong doan) -
+  test tu request that qua Network/backend log, phat hien
+  /api/exam/de-gan-nhat luon tra ve 404 du backend da tra 200 OK cho
+  generate-pdf-auto; roi dung Safari "View Page Source" doc dung dong
+  "const CURRENT_USER_ID = "";" trong HTML that su duoc server render
+  ra - xac nhan chinh xac gia tri rong ngay tai nguon, khong con nghi
+  ngo o dau khac.
+- Sua: them "user_id": user.id, vao context cua ham chat() trong
+  app/routers/chat.py (1 dong).
+
+2. Tinh nang moi: URL tai file DE on dinh theo de_id, khong con dung
+   blob tam thoi
+- Boi canh: xacNhanTaoDe()/submitFormTaoDe() (luong tao de KHONG qua
+  n8n) truoc day dung URL.createObjectURL(blob) de tao link tai file -
+  link nay CHI song trong phien trinh duyet hien tai, mat ngay khi tai
+  lai trang. Giao vien phan anh: "quay ve chat thi no bien mat het cac
+  phan chat truoc do... nut tao de thi se chuyen thanh cau chat cua
+  ban theo lua chon nguoi dung" - muon de tao qua 2 luong nay hien lai
+  y het de tao qua chat thuong khi quay lai hoi thoai.
+- API moi: GET /api/exam/tai-de/{de_id} (app/routers/exam.py) - tra ve
+  truc tiep file PDF da luu (doc duong dan tu bang file_de qua
+  history_service.lay_de_theo_id(de_id), ham nay da co san tu truoc,
+  chi la chua tung dung toi). URL dang "/api/exam/tai-de/<uuid>", song
+  vinh vien (den khi file bi xoa sau 10 ngay theo co che don dep co
+  san), khong phu thuoc phien trinh duyet.
+- xacNhanTaoDe() va submitFormTaoDe(): sau khi lay duoc de_id (qua
+  /api/exam/de-gan-nhat), dung URL on dinh /api/exam/tai-de/{de_id}
+  thay cho blob. Chi fall back ve blob (khong song lai duoc sau
+  reload) trong truong hop hiem gap khong lay duoc de_id.
+- Model LuuDeTrucTiepRequest (app/routers/chat.py) them field tuy chon
+  "file_url". Khi co gia tri nay, endpoint POST /api/chat/luu-de-truc-
+  tiep luu tin nhan AI vao chat_history voi loai_phan_hoi="file",
+  duong_dan_file=file_url - GIONG HET dinh dang tin nhan cua luong
+  chat binh thuong qua n8n. Nho vay ham moHoiThoai() (da co san tu
+  Version 2.28, xu ly loai_phan_hoi === "file") tu dong hien lai dung
+  link tai file + nut "Lam bai truc tiep" khi quay lai hoi thoai, y
+  het luong chat thuong - khong can sua them gi o moHoiThoai().
+- xacNhanTaoDe(): sua cau user_message luu vao lich su tu cau chung
+  chung "Dong y, tao de theo de xuat." thanh cau co day du thong tin
+  da chon: "Dong y, tao de: lop <X>, <loai kiem tra>, chuong <Y>." -
+  dung yeu cau cua giao vien "nut tao de thi se chuyen thanh cau chat
+  cua ban theo lua chon nguoi dung".
+
+Nguoi thuc hien (ca 3 Version 2.30, 2.31, 2.32)
+
+Mai Ha Lan (cung Claude)
