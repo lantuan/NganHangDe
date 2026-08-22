@@ -1,0 +1,28 @@
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index 2061b08..71ae01f 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -774,6 +774,12 @@ ${html}
+                         ki_thi: deXuat.ki_thi || null,
+                         pham_vi_chuong: deXuat.pham_vi_chuong || null,
+                         cau_truc_tu_hoc_sinh: Object.keys(cauTrucTuHocSinh).length ? cauTrucTuHocSinh : null,
++                        // Cho phep thieu cau (hien "THIEU" trong PDF thay
++                        // vi loi cung) - giong het hanh vi luong chat binh
++                        // thuong qua n8n/Ghep_Tham_So, tranh loi cung khi
++                        // ngan hang cau hoi chua du (giao vien yeu cau: "cu
++                        // ra de, cai nao chua co thi hien thong bao thieu").
++                        cho_phep_thieu: true,
+                         dinh_dang: "pdf",
+                         user_id: CURRENT_USER_ID || null,
+                         conversation_id: conversationId,
+@@ -971,6 +977,10 @@ ${html}
+                             ki_thi: loaiKt,
+                             pham_vi_chuong: laHeSo1 ? "chuong_" + chuongSo : null,
+                             cau_truc_tu_hoc_sinh: null,
++                            // Cho phep thieu cau (hien "THIEU" trong PDF
++                            // thay vi loi cung) - giong het hanh vi luong
++                            // chat binh thuong qua n8n/Ghep_Tham_So.
++                            cho_phep_thieu: true,
+                             dinh_dang: "pdf",
+                             user_id: CURRENT_USER_ID || null,
+                             conversation_id: conversationId,
