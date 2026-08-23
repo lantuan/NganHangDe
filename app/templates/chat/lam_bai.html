@@ -409,6 +409,26 @@ async function luuKetQuaVaoChat(ketQua) {
     }
 }
 
+// Dang de + loi giai + diem cua lan lam bai nay len "Bai tap tren lop"
+// cua Classroom, rieng cho dung hoc sinh nay (cac ban khac trong lop
+// khong thay duoc). Tien ich them - KHONG chan/lam gian doan viec xem
+// ket qua neu Classroom loi (vd chua ket noi, chua co ma lop...).
+async function dangKetQuaLenClassroom(ketQua) {
+    try {
+        await fetch('/api/chat/dang-classroom', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                de_id: DE_ID,
+                diem_html: xayHtmlTomTatKetQua(ketQua),
+                diem_so: ketQua.diem_tren_10_tam_tinh
+            })
+        });
+    } catch (e) {
+        console.error("Loi dang ket qua len Classroom:", e);
+    }
+}
+
 async function nopBai() {
     const nutNop = document.getElementById('nut-nop');
     nutNop.disabled = true;
@@ -463,6 +483,7 @@ async function nopBai() {
 
         veKetQua(ketQua);
         luuKetQuaVaoChat(ketQua);
+        dangKetQuaLenClassroom(ketQua);
     } catch (e) {
         alert('Lỗi kết nối, thử lại nhé.');
         nutNop.disabled = false;

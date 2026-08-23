@@ -1990,3 +1990,96 @@ Nội dung
 Nguoi thuc hien (ca 3 Version 2.30, 2.31, 2.32)
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+Version 2.33
+
+Ngày
+
+2026-08-23
+
+Nội dung
+
+Sua UX: nut "Bat dau lam bai" (hien sau khi hoc sinh bam "Co, lam
+luon!" trong khung hoi lam bai truc tiep) dang mo trang /lam-bai
+trong TAB/CUA SO MOI (target="_blank"), khien hoc sinh bam "Ve Chat
+AI" tu trang lam bai chi dong duoc tab do, con tab chat ban dau van
+mo song song rieng - giao vien phan anh gay roi ("toi muon chi 1 cua
+so thoi, tranh roi loan").
+
+Sua: bo target="_blank" (va rel="noopener" di kem) o the <a> nay
+trong app/templates/chat/chat.html (ham chonLamBai()) - gio bam vao
+se dieu huong ngay trong cung 1 tab/cua so, "Ve Chat AI" quay lai
+dung cho cu, khong con tab thua.
+
+===============================================================================
+
+Version 2.34
+
+Ngày
+
+2026-08-23
+
+Nội dung
+
+Tinh nang moi: sau khi hoc sinh nop bai lam truc tiep tren web, DE +
+LOI GIAI (PDF) + DIEM cua lan lam bai do duoc tu dong dang len "Bai
+tap tren lop" (courseWorkMaterial) cua Google Classroom, RIENG cho
+dung hoc sinh vua lam bai (khong ban nao khac trong lop thay duoc),
+tu dong xoa sau 10 ngay - dung yeu cau cua giao vien va khop voi thoi
+gian da thong bao truoc cho hoc sinh.
+
+1. app/services/classroom_service.py:
+   - Them 2 scope OAuth moi vao SCOPES: classroom.coursework.students
+     (tao/xoa courseWorkMaterial) va drive.file (tai file len Drive
+     cua giao vien, app chi thay duoc file no tu tao ra). QUAN TRONG:
+     doi scope nghia la phai vao lai Google Cloud Console > Data
+     Access them 2 scope nay, ROI lam lai /gv/classroom/connect de
+     xin refresh_token moi (refresh_token cu chi mang quyen cu, khong
+     tu nhien co them quyen moi).
+   - Ham moi _tai_len_drive(): upload 1 file PDF len Drive qua Drive
+     API v3 (multipart), tra ve file id.
+   - Ham moi _tao_coursework_material(): tao 1 courseWorkMaterial tren
+     dung course_id, dung assigneeMode=INDIVIDUAL_STUDENTS +
+     individualStudentsOptions.studentIds=[email hoc sinh] de CHI hoc
+     sinh do thay duoc bai dang (Classroom API chap nhan email lam
+     studentId, khong can tra numeric user id rieng).
+   - Ham cap cao moi dang_ket_qua_len_classroom(de_id, student_email,
+     khoi, lop, diem_html, diem_so): tra course_id qua MA_LOP_CLASSROOM,
+     doc duong dan file "de"/"loigiai" da luu san qua
+     history_service.lay_de_theo_id(), upload len Drive, tao
+     courseWorkMaterial voi tieu de dat theo ngay gio + ghi chu
+     "Đề, bài giải, điểm", mo ta la diem so + ban tom tat dung/sai (doi
+     tu HTML sang text qua _html_sang_text()). Ghi 1 dong vao bang moi
+     classroom_coursework de biet duong ma don dep sau nay. KHONG raise
+     loi ra ngoai o bat ky buoc nao - luon tra ve {"success": bool,
+     "message": str}, vi day la tien ich them, khong duoc phep chan
+     hoc sinh xem ket qua bai lam du Classroom co loi gi.
+
+2. app/routers/chat.py: them POST /api/chat/dang-classroom - doc
+   user hien tai qua get_current_user(), lay khoi/lop qua
+   supabase_service.lay_lop_hoc_sinh(), goi
+   classroom_service.dang_ket_qua_len_classroom().
+
+3. app/templates/chat/lam_bai.html: ham moi dangKetQuaLenClassroom(),
+   goi ngay sau luuKetQuaVaoChat() trong nopBai() - chay am tham
+   (try/catch, khong alert/khong chan giao dien) ngay khi hoc sinh
+   nop bai xong.
+
+4. Bang moi public.classroom_coursework (Supabase) - luu de_id,
+   student_email, course_id, coursework_id, drive_file_ids (mang id
+   file Drive), created_at. Xem huong dan tao bang trong ghi chu trien
+   khai kem theo diff nay.
+
+5. scripts/cleanup_classroom_coursework.py (moi, hoan thanh Task #12
+   con treo tu truoc): doc cac dong classroom_coursework cu hon 10
+   ngay, xoa courseWorkMaterial tren Classroom + tung file tren Drive,
+   roi xoa dong tuong ung trong Supabase. Cung mau voi
+   cleanup_chat_history.py/cleanup_old_files.py da co - chay hang
+   ngay qua cron tren VPS (khuyen nghi cung 3h sang).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

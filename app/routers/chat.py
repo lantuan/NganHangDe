@@ -267,6 +267,35 @@ async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequ
     return {"success": True}
 
 
+class DangClassroomRequest(BaseModel):
+    de_id: str
+    diem_html: str
+    diem_so: float
+
+
+@router.post("/api/chat/dang-classroom")
+async def dang_classroom_endpoint(request: Request, payload: DangClassroomRequest):
+    """Dang de + loi giai + diem cua 1 lan lam bai truc tiep tren web len
+    "Bai tap tren lop" cua Classroom, rieng cho dung hoc sinh do (khong ai
+    khac trong lop thay duoc). Goi TU DONG tu lam_bai.html ngay sau khi
+    nop bai (task hoc sinh yeu cau). Tien ich them - KHONG duoc raise loi
+    lam gian doan trang xem ket qua, luon tra ve {"success":...}."""
+    user = get_current_user(request)
+    if user is None:
+        raise HTTPException(401, "Ban chua dang nhap hoac phien da het han.")
+
+    ho_so = supabase_service.lay_lop_hoc_sinh(user.id) or {}
+    ket_qua = classroom_service.dang_ket_qua_len_classroom(
+        de_id=payload.de_id,
+        student_email=user.email,
+        khoi=ho_so.get("khoi"),
+        lop=ho_so.get("lop"),
+        diem_html=payload.diem_html,
+        diem_so=payload.diem_so,
+    )
+    return ket_qua
+
+
 @router.post("/chat")
 async def chat_post(
     request: Request,

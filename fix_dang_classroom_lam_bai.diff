@@ -1,0 +1,404 @@
+diff --git a/app/routers/chat.py b/app/routers/chat.py
+index dbc198a..98874af 100644
+--- a/app/routers/chat.py
++++ b/app/routers/chat.py
+@@ -267,6 +267,35 @@ async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequ
+     return {"success": True}
+ 
+ 
++class DangClassroomRequest(BaseModel):
++    de_id: str
++    diem_html: str
++    diem_so: float
++
++
++@router.post("/api/chat/dang-classroom")
++async def dang_classroom_endpoint(request: Request, payload: DangClassroomRequest):
++    """Dang de + loi giai + diem cua 1 lan lam bai truc tiep tren web len
++    "Bai tap tren lop" cua Classroom, rieng cho dung hoc sinh do (khong ai
++    khac trong lop thay duoc). Goi TU DONG tu lam_bai.html ngay sau khi
++    nop bai (task hoc sinh yeu cau). Tien ich them - KHONG duoc raise loi
++    lam gian doan trang xem ket qua, luon tra ve {"success":...}."""
++    user = get_current_user(request)
++    if user is None:
++        raise HTTPException(401, "Ban chua dang nhap hoac phien da het han.")
++
++    ho_so = supabase_service.lay_lop_hoc_sinh(user.id) or {}
++    ket_qua = classroom_service.dang_ket_qua_len_classroom(
++        de_id=payload.de_id,
++        student_email=user.email,
++        khoi=ho_so.get("khoi"),
++        lop=ho_so.get("lop"),
++        diem_html=payload.diem_html,
++        diem_so=payload.diem_so,
++    )
++    return ket_qua
++
++
+ @router.post("/chat")
+ async def chat_post(
+     request: Request,
+diff --git a/app/services/classroom_service.py b/app/services/classroom_service.py
+index 65a03d3..d53f826 100644
+--- a/app/services/classroom_service.py
++++ b/app/services/classroom_service.py
+@@ -20,7 +20,10 @@ Luong hoat dong:
+ """
+ 
+ import base64
++import json
++import re
+ from datetime import datetime, timezone
++from pathlib import Path
+ from urllib.parse import urlencode
+ 
+ import requests
+@@ -28,6 +31,7 @@ import requests
+ from app.core.config import GOOGLE_CLASSROOM_CLIENT_ID, GOOGLE_CLASSROOM_CLIENT_SECRET
+ from app.core.lop_config import MA_LOP_CLASSROOM
+ from app.core.supabase import supabase
++from app.services import history_service
+ 
+ GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+ GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
+@@ -47,9 +51,22 @@ REDIRECT_URI = "https://nganhangdechv.tech/gv/classroom/callback"
+ SCOPES = (
+     "https://www.googleapis.com/auth/classroom.rosters "
+     "https://www.googleapis.com/auth/classroom.profile.emails "
+-    "https://www.googleapis.com/auth/classroom.courses.readonly"
++    "https://www.googleapis.com/auth/classroom.courses.readonly "
++    "https://www.googleapis.com/auth/classroom.coursework.students "
++    "https://www.googleapis.com/auth/drive.file"
+ )
+ 
++# Them 2 scope tren de dang bai (de/bai giai/diem) len "Bai tap tren lop"
++# rieng cho tung hoc sinh sau khi lam bai online (xem
++# dang_ket_qua_len_classroom o cuoi file). classroom.coursework.students:
++# tao/xoa courseWorkMaterial. drive.file: tai PDF len Drive cua giao vien
++# (app chi thay duoc file no tu tao ra, khong dong den file khac trong
++# Drive that). LUU Y: doi scope nhu the nay thi PHAI vao lai Google Cloud
++# Console > Data Access them 2 scope moi, ROI lam lai /gv/classroom/connect
++# de xin refresh_token moi (refresh_token cu chi mang quyen cu).
++DRIVE_API_UPLOAD = "https://www.googleapis.com/upload/drive/v3/files"
++DRIVE_API_BASE = "https://www.googleapis.com/drive/v3"
++
+ 
+ def _thoi_gian_hien_tai() -> str:
+     return datetime.now(timezone.utc).isoformat()
+@@ -321,6 +338,168 @@ def tu_dong_ghi_danh_classroom(email: str, khoi: str, lop: str) -> dict:
+         return {"success": False, "message": "Lỗi không xác định khi ghi danh Classroom."}
+ 
+ 
++# ======================================================
++# DANG DE/BAI GIAI/DIEM LEN "BAI TAP TREN LOP" CUA CLASSROOM (rieng cho
++# tung hoc sinh) - chay TU DONG ngay sau khi hoc sinh nop bai lam truc
++# tiep tren web (xem app/routers/chat.py::dang_classroom_endpoint, goi
++# tu app/templates/chat/lam_bai.html). Day la tien ich THEM, khong duoc
++# phep lam gian doan/chan luong xem ket qua cua hoc sinh du Classroom co
++# loi gi - moi ham deu tra ve {"success": bool, "message": str}, KHONG
++# raise loi ra ngoai.
++# ======================================================
++
++def _html_sang_text(html: str) -> str:
++    """Doi HTML don gian (cua xayHtmlTomTatKetQua ben lam_bai.html) sang
++    text thuan, vi mo ta (description) cua courseWorkMaterial khong hien
++    the HTML."""
++    text = re.sub(r"<br\s*/?>", "\n", html or "")
++    text = re.sub(r"</(div|p)>", "\n", text)
++    text = re.sub(r"<[^>]+>", "", text)
++    text = (
++        text.replace("&nbsp;", " ")
++        .replace("&amp;", "&")
++        .replace("&lt;", "<")
++        .replace("&gt;", ">")
++        .replace("&quot;", '"')
++    )
++    dong = [d.strip() for d in text.splitlines()]
++    return "\n".join(d for d in dong if d)
++
++
++def _tai_len_drive(access_token: str, duong_dan_file: str, ten_file: str):
++    """Tai 1 file PDF len Google Drive cua giao vien (dung quyen drive.file
++    - app CHI thay/quan ly duoc file no tu tao ra, khong dong den file
++    khac trong Drive that cua giao vien). Tra ve file id hoac None neu loi."""
++    metadata = {"name": ten_file, "mimeType": "application/pdf"}
++    try:
++        with open(duong_dan_file, "rb") as f:
++            files = {
++                "data": (None, json.dumps(metadata), "application/json; charset=UTF-8"),
++                "file": (ten_file, f, "application/pdf"),
++            }
++            res = requests.post(
++                f"{DRIVE_API_UPLOAD}?uploadType=multipart",
++                headers={"Authorization": f"Bearer {access_token}"},
++                files=files,
++                timeout=60,
++            )
++        if res.status_code in (200, 201):
++            return res.json().get("id")
++        print("LOI TAI FILE LEN DRIVE:", res.status_code, res.text[:300])
++    except Exception as e:
++        print("LOI TAI FILE LEN DRIVE (exception):", e)
++    return None
++
++
++def _tao_coursework_material(access_token: str, course_id: str, title: str,
++                              description: str, file_ids: list[str], student_email: str):
++    """Tao 1 courseWorkMaterial (dang 'tai lieu', khong phai bai tap co
++    han nop) tren dung course_id, CHI giao rieng cho 1 hoc sinh
++    (individualStudentsOptions) - cac ban khac trong lop khong thay bai
++    nay. Tra ve coursework id hoac None neu loi."""
++    body = {
++        "title": title,
++        "description": description,
++        "materials": [
++            {"driveFile": {"driveFile": {"id": fid}, "shareMode": "VIEW"}}
++            for fid in file_ids
++        ],
++        "state": "PUBLISHED",
++        "assigneeMode": "INDIVIDUAL_STUDENTS",
++        "individualStudentsOptions": {"studentIds": [student_email]},
++    }
++    try:
++        res = requests.post(
++            f"{CLASSROOM_API_BASE}/courses/{course_id}/courseWorkMaterials",
++            headers={"Authorization": f"Bearer {access_token}"},
++            json=body,
++            timeout=30,
++        )
++        if res.status_code in (200, 201):
++            return res.json().get("id")
++        print("LOI TAO COURSEWORK MATERIAL:", res.status_code, res.text[:300])
++    except Exception as e:
++        print("LOI TAO COURSEWORK MATERIAL (exception):", e)
++    return None
++
++
++def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: str,
++                                diem_html: str, diem_so) -> dict:
++    """
++    Ham cap cao: goi tu app/routers/chat.py::dang_classroom_endpoint ngay
++    sau khi hoc sinh nop bai lam truc tiep tren web. Tai file de (PDF) +
++    loi giai (PDF, neu co) len Drive cua giao vien, dang 1 courseWorkMaterial
++    RIENG cho dung hoc sinh do (khong ai khac trong lop thay duoc), tieu
++    de dat theo ngay gio + ghi chu "Đề, bài giải, điểm". Ghi 1 dong vao
++    bang classroom_coursework de scripts/cleanup_classroom_coursework.py
++    biet duong ma xoa sau 10 ngay.
++    """
++    if not khoi or not lop:
++        return {"success": False, "message": "Chưa xác định được lớp của học sinh."}
++
++    course_id = MA_LOP_CLASSROOM.get((khoi, lop))
++    if not course_id:
++        return {"success": False, "message": f"Chưa có mã lớp Classroom cho {khoi}-{lop}."}
++
++    de = history_service.lay_de_theo_id(de_id)
++    if de is None:
++        return {"success": False, "message": "Không tìm thấy đề."}
++
++    files = de.get("files", {}) or {}
++    duong_dan_de = files.get("de")
++    duong_dan_loigiai = files.get("loigiai")
++    if not duong_dan_de or not Path(duong_dan_de).exists():
++        return {"success": False, "message": "Không tìm thấy file đề để đăng lên Classroom."}
++
++    refresh_token = lay_refresh_token()
++    if not refresh_token:
++        return {"success": False, "message": "Chưa kết nối Classroom (vào /gv/classroom/connect)."}
++
++    try:
++        access_token = lam_moi_access_token(refresh_token)
++    except Exception as e:
++        print("LOI LAM MOI ACCESS TOKEN (dang Classroom):", e)
++        return {"success": False, "message": "Không làm mới được access token."}
++
++    file_ids = []
++    ma_de_ngan = str(de_id)[:8]
++
++    fid_de = _tai_len_drive(access_token, duong_dan_de, f"De_{ma_de_ngan}.pdf")
++    if fid_de:
++        file_ids.append(fid_de)
++
++    if duong_dan_loigiai and Path(duong_dan_loigiai).exists():
++        fid_lg = _tai_len_drive(access_token, duong_dan_loigiai, f"BaiGiai_{ma_de_ngan}.pdf")
++        if fid_lg:
++            file_ids.append(fid_lg)
++
++    if not file_ids:
++        return {"success": False, "message": "Không tải được file lên Drive."}
++
++    thoi_gian = datetime.now(timezone.utc).astimezone().strftime("%d/%m/%Y %H:%M")
++    tieu_de = f"{thoi_gian} - Đề, bài giải, điểm"
++    mo_ta = f"Điểm: {diem_so}/10\n\n{_html_sang_text(diem_html)}"
++
++    coursework_id = _tao_coursework_material(
++        access_token, course_id, tieu_de, mo_ta, file_ids, student_email,
++    )
++    if not coursework_id:
++        return {"success": False, "message": "Không tạo được bài đăng trên Classroom."}
++
++    try:
++        supabase.table("classroom_coursework").insert({
++            "de_id": de_id,
++            "student_email": student_email,
++            "course_id": course_id,
++            "coursework_id": coursework_id,
++            "drive_file_ids": file_ids,
++        }).execute()
++    except Exception as e:
++        print("LOI LUU CLASSROOM_COURSEWORK:", e)
++
++    return {"success": True, "message": "Đã đăng lên Classroom."}
++
++
+ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
+     """
+     THAY THE cho them_hoc_sinh_vao_lop/tu_dong_ghi_danh_classroom o tren -
+diff --git a/app/templates/chat/lam_bai.html b/app/templates/chat/lam_bai.html
+index 45499b0..74fb5a8 100644
+--- a/app/templates/chat/lam_bai.html
++++ b/app/templates/chat/lam_bai.html
+@@ -409,6 +409,26 @@ async function luuKetQuaVaoChat(ketQua) {
+     }
+ }
+ 
++// Dang de + loi giai + diem cua lan lam bai nay len "Bai tap tren lop"
++// cua Classroom, rieng cho dung hoc sinh nay (cac ban khac trong lop
++// khong thay duoc). Tien ich them - KHONG chan/lam gian doan viec xem
++// ket qua neu Classroom loi (vd chua ket noi, chua co ma lop...).
++async function dangKetQuaLenClassroom(ketQua) {
++    try {
++        await fetch('/api/chat/dang-classroom', {
++            method: 'POST',
++            headers: { 'Content-Type': 'application/json' },
++            body: JSON.stringify({
++                de_id: DE_ID,
++                diem_html: xayHtmlTomTatKetQua(ketQua),
++                diem_so: ketQua.diem_tren_10_tam_tinh
++            })
++        });
++    } catch (e) {
++        console.error("Loi dang ket qua len Classroom:", e);
++    }
++}
++
+ async function nopBai() {
+     const nutNop = document.getElementById('nut-nop');
+     nutNop.disabled = true;
+@@ -463,6 +483,7 @@ async function nopBai() {
+ 
+         veKetQua(ketQua);
+         luuKetQuaVaoChat(ketQua);
++        dangKetQuaLenClassroom(ketQua);
+     } catch (e) {
+         alert('Lỗi kết nối, thử lại nhé.');
+         nutNop.disabled = false;
+diff --git a/scripts/cleanup_classroom_coursework.py b/scripts/cleanup_classroom_coursework.py
+new file mode 100644
+index 0000000..7e4c44c
+--- /dev/null
++++ b/scripts/cleanup_classroom_coursework.py
+@@ -0,0 +1,103 @@
++#!/usr/bin/env python3
++"""Xoa cac bai da dang len Google Classroom (de/bai giai/diem cua hoc
++sinh, xem app/services/classroom_service.py::dang_ket_qua_len_classroom)
++cu hon 10 ngay - ca file tren Drive lan courseWorkMaterial tren Classroom,
++dong thoi xoa dong tuong ung trong bang classroom_coursework. Chay hang
++ngay qua cron tren VPS (cung 3h sang voi cleanup_chat_history.py va
++cleanup_old_files.py), o DUNG thu muc goc project (can doc duoc .env qua
++app.core.config/supabase)."""
++import datetime
++import sys
++from pathlib import Path
++
++import requests
++
++BASE_DIR = Path(__file__).resolve().parent.parent
++sys.path.insert(0, str(BASE_DIR))
++
++from app.core.supabase import supabase  # noqa: E402
++from app.services.classroom_service import (  # noqa: E402
++    lay_refresh_token,
++    lam_moi_access_token,
++    CLASSROOM_API_BASE,
++    DRIVE_API_BASE,
++)
++
++SO_NGAY_GIU = 10
++
++
++def time_now():
++    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
++
++
++def don_dep():
++    han = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=SO_NGAY_GIU)
++
++    try:
++        ket_qua = (
++            supabase.table("classroom_coursework")
++            .select("*")
++            .lt("created_at", han.isoformat())
++            .execute()
++        )
++    except Exception as e:
++        print(f"[{time_now()}] LOI DOC CLASSROOM_COURSEWORK: {e}")
++        return
++
++    dong_can_xoa = ket_qua.data or []
++    if not dong_can_xoa:
++        print(f"[{time_now()}] Khong co bai Classroom nao can don dep.")
++        return
++
++    refresh_token = lay_refresh_token()
++    if not refresh_token:
++        print(f"[{time_now()}] Chua ket noi Classroom, bo qua don dep.")
++        return
++
++    try:
++        access_token = lam_moi_access_token(refresh_token)
++    except Exception as e:
++        print(f"[{time_now()}] LOI LAM MOI ACCESS TOKEN: {e}")
++        return
++
++    so_xoa_ok = 0
++    for dong in dong_can_xoa:
++        # 1. Xoa courseWorkMaterial tren Classroom (khong chan neu loi -
++        # van xoa tiep file Drive + dong Supabase, tranh ket qua don dep
++        # dang do dang mai khong het).
++        try:
++            res = requests.delete(
++                f"{CLASSROOM_API_BASE}/courses/{dong['course_id']}/courseWorkMaterials/{dong['coursework_id']}",
++                headers={"Authorization": f"Bearer {access_token}"},
++                timeout=30,
++            )
++            if res.status_code not in (200, 204, 404):
++                print(f"[{time_now()}] LOI XOA COURSEWORK {dong['coursework_id']}: {res.status_code} {res.text[:200]}")
++        except Exception as e:
++            print(f"[{time_now()}] LOI XOA COURSEWORK (exception) {dong['coursework_id']}: {e}")
++
++        # 2. Xoa tung file tren Drive (de + loi giai).
++        for fid in (dong.get("drive_file_ids") or []):
++            try:
++                res = requests.delete(
++                    f"{DRIVE_API_BASE}/files/{fid}",
++                    headers={"Authorization": f"Bearer {access_token}"},
++                    timeout=30,
++                )
++                if res.status_code not in (200, 204, 404):
++                    print(f"[{time_now()}] LOI XOA DRIVE FILE {fid}: {res.status_code} {res.text[:200]}")
++            except Exception as e:
++                print(f"[{time_now()}] LOI XOA DRIVE FILE (exception) {fid}: {e}")
++
++        # 3. Xoa dong theo doi trong Supabase.
++        try:
++            supabase.table("classroom_coursework").delete().eq("id", dong["id"]).execute()
++            so_xoa_ok += 1
++        except Exception as e:
++            print(f"[{time_now()}] LOI XOA DONG SUPABASE {dong['id']}: {e}")
++
++    print(f"[{time_now()}] Da don dep {so_xoa_ok}/{len(dong_can_xoa)} bai Classroom cu hon {SO_NGAY_GIU} ngay.")
++
++
++if __name__ == "__main__":
++    don_dep()

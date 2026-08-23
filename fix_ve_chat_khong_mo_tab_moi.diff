@@ -1,0 +1,13 @@
+diff --git a/app/templates/chat/chat.html b/app/templates/chat/chat.html
+index 414c70a..22cb749 100644
+--- a/app/templates/chat/chat.html
++++ b/app/templates/chat/chat.html
+@@ -723,7 +723,7 @@ ${html}
+                 const giaiThich = GIAI_THICH_LAM_BAI[Math.floor(Math.random() * GIAI_THICH_LAM_BAI.length)];
+                 box.innerHTML =
+                     `<p>${giaiThich}</p>` +
+-                    `<p><a href="/lam-bai/${deId}?cid=${encodeURIComponent(conversationId)}" class="btn-bat-dau" target="_blank" rel="noopener">🚀 Bắt đầu làm bài</a></p>`;
++                    `<p><a href="/lam-bai/${deId}?cid=${encodeURIComponent(conversationId)}" class="btn-bat-dau">🚀 Bắt đầu làm bài</a></p>`;
+             } else {
+                 const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
+                 box.innerHTML = `<p>${yKhong}</p>`;
