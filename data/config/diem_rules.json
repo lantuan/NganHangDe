@@ -1,0 +1,19 @@
+{
+  "_ghi_chu": "Thang diem 10 theo yeu cau cua giao vien. Diem cua MOI PHAN duoc chia DEU cho so cau co trong de o phan do; rieng cau Dung/Sai (TF) chia tiep deu cho 4 y. Trong so la CO DINH: de thieu phan nao thi diem toi da giam dung phan do (khong chia lai cho cac phan con lai).",
+  "thang_diem": 10,
+  "trong_so": {
+    "MC": 3.0,
+    "TF": 2.0,
+    "SA": 2.0,
+    "TL": 3.0
+  },
+  "ten_phan": {
+    "MC": "Trắc nghiệm nhiều lựa chọn",
+    "TF": "Đúng/Sai",
+    "SA": "Trả lời ngắn",
+    "TL": "Tự luận"
+  },
+  "so_y_moi_cau_tf": 4,
+  "chia_lai_khi_thieu_phan": false,
+  "lam_tron": 2
+}

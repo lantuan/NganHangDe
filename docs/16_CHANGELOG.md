@@ -2083,3 +2083,98 @@ gian da thong bao truoc cho hoc sinh.
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.35
+
+Ngày
+
+2026-09-04
+
+Nội dung
+
+Thang diem 10 theo quy dinh cua giao vien, thay cho cach chia deu 10
+diem cho tong so cau nhu truoc.
+
+Truoc day: diem_moi_cau = 10 / tong_so_cau - moi cau bang diem nhau du
+la trac nghiem 1 lua chon hay tu luan. Gio chia theo PHAN:
+
+   Trac nghiem nhieu lua chon (MC): 3 diem
+   Dung/Sai (TF):                   2 diem
+   Tra loi ngan (SA):               2 diem
+   Tu luan (TL):                    3 diem
+   -----------------------------------------
+   Tong:                            10 diem
+
+Diem cua moi phan chia DEU cho so cau co that trong de o phan do; cau
+TF chia tiep DEU cho 4 y. Vi du de HeSo2 (12 MC, 2 TF, 3 SA, 3 TL):
+moi cau MC 0.25d, moi cau TF 1d (moi y 0.25d), moi cau SA 0.67d, moi
+cau TL 1d.
+
+Trong so la CO DINH: de thieu phan nao thi diem toi da giam dung phan
+do, KHONG chia lai cho cac phan con lai (de chi co MC + TF thi toi da
+5 diem). Quyet dinh cua giao vien.
+
+1. data/config/diem_rules.json (MOI): noi khai bao trong so, ten phan,
+   so y moi cau TF, so chu so lam tron. Doi thang diem chi can sua file
+   nay, khong dong vao code.
+
+2. app/services/diem_service.py (MOI):
+   - tinh_thang_diem(danh_sach_dap_an): dem so cau tung phan roi tra ve
+     diem moi cau / moi y, diem_toi_da_tong (chi tinh cac phan CO trong
+     de) va diem_toi_da_tu_dong (MC + TF + SA).
+   - loai_cau_chuan(cau): nhan ra ca cau TF dang bi answer_parser_service
+     luu nham thanh loai_cau="TL" (phan biet qua "_TF_" trong
+     generator_id) - neu khong se tinh nham cau TF vao diem phan Tu luan.
+     Dung CHUNG cho ca /grade va /grade-photo de hai ben khong lech nhau.
+   - diem_cau_tf(thang, so_y_dung): tra ve (diem_goc, diem_lam_tron).
+   - so_dep(): bo duoi .0 khi hien thi (3.0d -> 3d).
+
+3. app/routers/exam.py (POST /api/exam/grade):
+   - Bo diem_moi_cau = 10/tong_so_cau, dung diem_service.
+   - Cong don bang so THUC chua lam tron, chi lam tron o buoc cuoi -
+     tranh lech kieu 3 cau SA x 0.67 = 2.01 diem (test da phu).
+   - diem_tren_10_tam_tinh gio la diem CONG DON tren thang 10 chung
+     (khong con chuan hoa lai ve 10 tren tap con da cham).
+   - Response them: thang_diem, diem_toi_da_tu_dong, diem_toi_da_tong,
+     diem_phan_tu_luan, mo_ta_thang_diem.
+   - Cau TL: trang_thai doi tu "can_cham_tay" thanh "dang_xay_dung",
+     nhan xet "Phần tự luận (3đ) — đang xây dựng." theo dung yeu cau
+     cua giao vien (phan cham tu luan qua anh dang lam do).
+
+4. app/services/grade_photo_service.py: dung chung thang diem tren; bo
+   buoc chuan hoa lai ve 10 (tong_diem_dat / tong_toi_da * 10) vi
+   diem_toi_da tung cau da nam san tren thang 10 chung.
+
+5. app/templates/chat/lam_bai.html:
+   - Diem hien thi la X / diem_toi_da_tu_dong (vd 5.33/7) chu khong
+     con /10, kem 1 dong mo ta thang diem va ghi chu "Phần tự luận
+     (3đ): đang xây dựng" - de hoc sinh khong hieu nham la bi mat diem.
+   - Cau TF hien them "moi y 0.25d".
+   - gopKetQua() chi con CONG DON, khong chuan hoa lai ve 10.
+
+6. app/routers/chat.py + app/services/classroom_service.py: bai dang len
+   Classroom ghi "Điểm: 5.33/7" thay vi luon "/10" (them truong
+   diem_toi_da, mac dinh 10 neu thieu - tuong thich nguoc).
+
+7. tests/test_diem_service.py (MOI): 5 test - de du 4 phan (tong 10, tu
+   dong 7), de thieu phan (giu trong so, toi da 5), cau TF chia 4 y,
+   de HeSo1, va test lam tron (lam dung het phan trac nghiem phai ra
+   dung 7.0).
+
+8. data/config/exam_rules.json: HeSo2_HeSo3 tra_loi_ngan 3 -> 4 cau
+   (theo ma tran moi cua giao vien). LUU Y: diem_service KHONG gia dinh
+   so cau cua bat ky phan nao - no DEM so cau co that trong de roi moi
+   chia diem, nen sau nay sua ma tran trong exam_rules.json thi diem tu
+   dong chia lai, khong phai dong vao code diem. Vi du phan Tra loi ngan
+   luon 2 diem: 2 cau -> 1d/cau, 4 cau -> 0.5d/cau.
+
+HAN CHE DA BIET (giu nguyen tu Version 2.8): answer_parser_service chua
+trich duoc dap an dung cua cau TF (\choiceTFn/\choiceTFt) khi sinh de,
+nen o nhanh cham bang ANH cau TF van phai cham tay. Nhanh lam bai truc
+tiep tren web khong bi anh huong (dap an TF duoc luu du).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -21,6 +21,7 @@ from app.services.exam_assembler_service import (
 )
 
 from app.services import history_service
+from app.services import diem_service
 from app.services.answer_parser_service import (
     trich_dap_an,
     AnswerParseError,
@@ -551,15 +552,17 @@ def grade_endpoint(payload: ChamBaiRequest):
     dap_an_theo_stt = {cau["so_thu_tu"]: cau for cau in danh_sach_dap_an}
 
     tong_so_cau = len(danh_sach_dap_an)
-    # Diem toi da moi cau (chia deu 10 diem cho tong so cau trong de). Chi
-    # la gia tri THAM KHAO/chuan hoa theo doc 03 (diem_toi_da) — tong diem
-    # chinh thuc cua bai lam van tinh theo ty le so cau dung o duoi, khong
-    # cong don truc tiep tu day (tranh lech do lam tron 2 chu so).
-    diem_moi_cau = round(10 / tong_so_cau, 2) if tong_so_cau else 0.0
+    # Thang diem 10 theo quy dinh cua giao vien (data/config/diem_rules.json):
+    # MC 3d - TF 2d - SA 2d - TL 3d. Diem cua MOI PHAN duoc chia DEU cho so
+    # cau co that trong de o phan do; cau TF chia tiep deu cho 4 y. Trong so
+    # CO DINH: de thieu phan nao thi diem toi da giam dung phan do.
+    thang = diem_service.tinh_thang_diem(danh_sach_dap_an)
 
     chi_tiet = []
     so_cau_da_cham = 0
     so_cau_dung = 0
+    # Cong don bang so THUC chua lam tron, chi lam tron o buoc cuoi cung
+    # (tranh lech kieu 3 cau SA x 0.67 = 2.01 diem).
     tong_diem_tu_dong = 0.0
 
     for bl in payload.bai_lam:
@@ -589,12 +592,14 @@ def grade_endpoint(payload: ChamBaiRequest):
             ).strip().upper()
             so_cau_da_cham += 1
             so_cau_dung += 1 if dung else 0
-            tong_diem_tu_dong += diem_moi_cau if dung else 0.0
+            tong_diem_tu_dong += (
+                diem_service.diem_toi_da_cua_cau_goc(thang, "MC") if dung else 0.0
+            )
             chi_tiet.append({
                 "question_id": generator_id,
                 "loai_cau": "MC",
                 "dung_sai_hoac_diem": dung,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, "MC"),
                 "nhan_xet": "",
                 "chuong": chuong,
                 "bai": bai_so,
@@ -609,12 +614,14 @@ def grade_endpoint(payload: ChamBaiRequest):
             )
             so_cau_da_cham += 1
             so_cau_dung += 1 if dung else 0
-            tong_diem_tu_dong += diem_moi_cau if dung else 0.0
+            tong_diem_tu_dong += (
+                diem_service.diem_toi_da_cua_cau_goc(thang, "SA") if dung else 0.0
+            )
             chi_tiet.append({
                 "question_id": generator_id,
                 "loai_cau": "SA",
                 "dung_sai_hoac_diem": dung,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, "SA"),
                 "nhan_xet": "",
                 "chuong": chuong,
                 "bai": bai_so,
@@ -624,8 +631,8 @@ def grade_endpoint(payload: ChamBaiRequest):
                 "dap_an_dung": cau.get("dap_an_dung"),
             })
         elif loai_cau == "TF":
-            # dap_an_dung: {"a":True/False,...}. Diem chia deu theo ty le
-            # so y dung / 4 (khong theo thang Bo GD&DT 0.1/0.25/0.5/1) -
+            # dap_an_dung: {"a":True/False,...}. Diem cua cau TF duoc chia
+            # DEU cho 4 y (khong theo thang Bo GD&DT 0.1/0.25/0.5/1) -
             # thong nhat voi giao vien luc xay tinh nang.
             dap_an_dung_tf = cau.get("dap_an_dung") or {}
             tra_loi_hs = bl.cau_tra_loi if isinstance(bl.cau_tra_loi, dict) else {}
@@ -636,15 +643,16 @@ def grade_endpoint(payload: ChamBaiRequest):
                 dung_y = hs is not None and hs == dap_an_dung_tf.get(y)
                 chi_tiet_tung_y[y] = dung_y
                 so_y_dung += 1 if dung_y else 0
-            diem_dat_duoc = round(diem_moi_cau * so_y_dung / 4, 2)
+            diem_goc, diem_dat_duoc = diem_service.diem_cau_tf(thang, so_y_dung)
             so_cau_da_cham += 1
             so_cau_dung += 1 if so_y_dung == 4 else 0
-            tong_diem_tu_dong += diem_dat_duoc
+            tong_diem_tu_dong += diem_goc
             chi_tiet.append({
                 "question_id": generator_id,
                 "loai_cau": "TF",
                 "dung_sai_hoac_diem": so_y_dung == 4,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, "TF"),
+                "diem_moi_y": thang["theo_phan"]["TF"]["diem_moi_y"],
                 "diem_dat_duoc": diem_dat_duoc,
                 "so_y_dung": so_y_dung,
                 "chi_tiet_tung_y": chi_tiet_tung_y,
@@ -657,22 +665,40 @@ def grade_endpoint(payload: ChamBaiRequest):
                 "dap_an_dung": dap_an_dung_tf,
             })
         else:
+            # loai_cau_chuan() nhan ra ca cau TF bi answer_parser_service luu
+            # nham thanh loai_cau='TL' (phan biet qua '_TF_' trong generator_id)
+            # de khong tinh nham cau do vao diem phan Tu luan.
+            loai_chuan = diem_service.loai_cau_chuan(cau)
+            if loai_chuan == "TL":
+                nhan_xet_cau = (
+                    "Phần tự luận ("
+                    + diem_service.so_dep(thang["diem_phan_tu_luan"])
+                    + "đ) — đang xây dựng."
+                )
+                trang_thai_cau = "dang_xay_dung"
+            else:
+                nhan_xet_cau = (
+                    "Câu Đúng/Sai chưa trích được đáp án đúng khi sinh đề "
+                    "(answer_parser_service) nên phải chấm tay."
+                )
+                trang_thai_cau = "can_cham_tay"
             chi_tiet.append({
                 "question_id": generator_id,
-                "loai_cau": loai_cau or "TL",
+                "loai_cau": loai_chuan,
                 "dung_sai_hoac_diem": None,
-                "diem_toi_da": diem_moi_cau,
-                "nhan_xet": "Câu tự luận cần chấm tay hoặc CHV_Grader (chưa làm xong).",
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, loai_chuan),
+                "nhan_xet": nhan_xet_cau,
                 "chuong": chuong,
                 "bai": bai_so,
                 "tags": [],
                 "so_thu_tu": bl.so_thu_tu,
-                "trang_thai": "can_cham_tay",
+                "trang_thai": trang_thai_cau,
                 "dap_an_hoc_sinh": bl.cau_tra_loi,
                 "loi_giai": cau.get("loi_giai"),
             })
 
-    diem_tam_tinh = round(tong_diem_tu_dong, 2) if tong_so_cau else 0.0
+    lam_tron = thang.get("lam_tron", 2)
+    diem_tam_tinh = round(tong_diem_tu_dong, lam_tron) if tong_so_cau else 0.0
 
     if payload.user_id:
         history_service.luu_ket_qua_cham_bai(
@@ -690,9 +716,16 @@ def grade_endpoint(payload: ChamBaiRequest):
             "so_cau_da_cham_tu_dong": so_cau_da_cham,
             "so_cau_dung": so_cau_dung,
             "diem_tren_10_tam_tinh": diem_tam_tinh,
+            "thang_diem": thang,
+            "diem_toi_da_tu_dong": thang["diem_toi_da_tu_dong"],
+            "diem_toi_da_tong": thang["diem_toi_da_tong"],
+            "diem_phan_tu_luan": thang["diem_phan_tu_luan"],
+            "mo_ta_thang_diem": diem_service.mo_ta_thang_diem(thang),
             "ghi_chu": (
-                "Điểm tạm tính chỉ trên các câu MC/TF/SA đã chấm tự động. "
-                "Câu tự luận (TL) cần chấm tay hoặc CHV_Grader (chưa làm xong)."
+                f"Điểm các phần chấm tự động: {diem_service.so_dep(diem_tam_tinh)}/"
+                f"{diem_service.so_dep(thang['diem_toi_da_tu_dong'])} điểm. "
+                f"Phần tự luận ({diem_service.so_dep(thang['diem_phan_tu_luan'])}đ): "
+                "đang xây dựng."
             ),
             "chi_tiet": chi_tiet,
         },

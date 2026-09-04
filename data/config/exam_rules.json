@@ -8,7 +8,7 @@
   "HeSo2_HeSo3": {
     "trac_nghiem": {"so_luong": 12, "ty_le_muc_do": {"NB": 0.4, "TH": 0.3, "VD": 0.2, "VDC": 0.1}},
     "dung_sai_cau_lon": {"so_luong": 2, "ty_le_muc_do": {"NB": 0.25, "TH": 0.25, "VD": 0.25, "VDC": 0.25}},
-    "tra_loi_ngan": {"so_luong": 3, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.5, "VDC": 0.5}},
+    "tra_loi_ngan": {"so_luong": 4, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.5, "VDC": 0.5}},
     "tu_luan": {"so_luong": 3, "ty_le_muc_do": {"NB": 0, "TH": 0, "VD": 0.7, "VDC": 0.3}}
   }
 }

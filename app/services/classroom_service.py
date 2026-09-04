@@ -424,7 +424,7 @@ def _tao_coursework_material(access_token: str, course_id: str, title: str,
 
 
 def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: str,
-                                diem_html: str, diem_so) -> dict:
+                                diem_html: str, diem_so, diem_toi_da=None) -> dict:
     """
     Ham cap cao: goi tu app/routers/chat.py::dang_classroom_endpoint ngay
     sau khi hoc sinh nop bai lam truc tiep tren web. Tai file de (PDF) +
@@ -478,7 +478,7 @@ def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: s
 
     thoi_gian = datetime.now(timezone.utc).astimezone().strftime("%d/%m/%Y %H:%M")
     tieu_de = f"{thoi_gian} - Đề, bài giải, điểm"
-    mo_ta = f"Điểm: {diem_so}/10\n\n{_html_sang_text(diem_html)}"
+    mo_ta = f"Điểm: {diem_so}/{diem_toi_da or 10}\n\n{_html_sang_text(diem_html)}"
 
     coursework_id = _tao_coursework_material(
         access_token, course_id, tieu_de, mo_ta, file_ids, student_email,

@@ -46,6 +46,7 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 |3.5|Generator API|⬜|
 |3.6|LaTeX API|⬜|
 |3.7|Grade API (CN_GradeAnswer, CN_MergeGradeResult)|🟡|
+|3.9|Thang điểm 10 theo phần (CN_TinhThangDiem)|✅|
 |3.8|Analysis API (CN_AnalyzeResults)|⬜|
 
 ---
@@ -122,6 +123,9 @@ bằng ảnh chụp phiếu/bài làm THẬT (chờ có bản in).
   /api/exam/generate-pdf-auto.
 - CN_GradeAnswer cho MC/SA (POST /api/exam/grade) + lưu kết quả vào
   exam_history.
+- Thang điểm 10 theo phần: MC 3đ, TF 2đ, SA 2đ, TL 3đ, chia đều
+  trong từng phần (cấu hình ở data/config/diem_rules.json, tính ở
+  app/services/diem_service.py) — xem Version 2.35 ở CHANGELOG.
 - CHV_Grader (chấm Tự luận từ ảnh, qua n8n webhook cham-tu-luan) +
   DocPhieuTraLoi (đọc phiếu MC/TF/SA từ ảnh, qua webhook
   doc-phieu-tra-loi) + POST /api/exam/grade-photo gộp cả 2 nhánh

@@ -271,6 +271,9 @@ class DangClassroomRequest(BaseModel):
     de_id: str
     diem_html: str
     diem_so: float
+    # Diem toi da cua lan cham nay. Chua chac bang 10: phan tu luan (3d)
+    # dang xay dung nen bai lam tren web hien toi da 7d (MC 3 + TF 2 + SA 2).
+    diem_toi_da: float | None = None
 
 
 @router.post("/api/chat/dang-classroom")
@@ -292,6 +295,7 @@ async def dang_classroom_endpoint(request: Request, payload: DangClassroomReques
         lop=ho_so.get("lop"),
         diem_html=payload.diem_html,
         diem_so=payload.diem_so,
+        diem_toi_da=payload.diem_toi_da,
     )
     return ket_qua
 

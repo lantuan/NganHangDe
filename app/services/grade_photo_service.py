@@ -15,6 +15,7 @@ import httpx
 
 from app.core.config import N8N_WEBHOOK_DOC_PHIEU, N8N_WEBHOOK_CHAM_TU_LUAN
 from app.services.mapping_service import trich_chuong_bai
+from app.services import diem_service
 
 
 class GradePhotoError(Exception):
@@ -37,9 +38,9 @@ def _goi_webhook(url: str | None, payload: dict, ten_buoc: str) -> dict:
 
 def _la_cau_tf(cau: dict) -> bool:
     """TF hien bi luu nham loai_cau='TL' (xem docstring dau file).
-    Phan biet bang generator_id co chua '_TF_'."""
-    generator_id = cau.get("generator_id") or ""
-    return "_TF_" in generator_id
+    Phan biet bang generator_id co chua '_TF_'. Dung chung mot logic
+    voi diem_service de thang diem va viec cham khong lech nhau."""
+    return diem_service.loai_cau_chuan(cau) == "TF"
 
 
 def cham_bai_bang_anh(
@@ -48,12 +49,19 @@ def cham_bai_bang_anh(
     anh_tuluan_base64: str | None,
 ) -> dict:
     tong_so_cau = len(danh_sach_dap_an)
-    diem_moi_cau = round(10 / tong_so_cau, 2) if tong_so_cau else 0.0
+    # Thang diem 10 dung chung voi POST /api/exam/grade:
+    # MC 3d - TF 2d - SA 2d - TL 3d, chia deu trong tung phan
+    # (xem app/services/diem_service.py + data/config/diem_rules.json).
+    thang = diem_service.tinh_thang_diem(danh_sach_dap_an)
+    diem_mc = diem_service.diem_toi_da_cua_cau(thang, "MC")
+    diem_sa = diem_service.diem_toi_da_cua_cau(thang, "SA")
+    diem_tf = diem_service.diem_toi_da_cua_cau(thang, "TF")
+    diem_tl = diem_service.diem_toi_da_cua_cau(thang, "TL")
 
-    mc_list = [c for c in danh_sach_dap_an if c.get("loai_cau") == "MC"]
-    sa_list = [c for c in danh_sach_dap_an if c.get("loai_cau") == "SA"]
-    tf_list = [c for c in danh_sach_dap_an if c.get("loai_cau") == "TL" and _la_cau_tf(c)]
-    tl_list = [c for c in danh_sach_dap_an if c.get("loai_cau") == "TL" and not _la_cau_tf(c)]
+    mc_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "MC"]
+    sa_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "SA"]
+    tf_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "TF"]
+    tl_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "TL"]
 
     ket_qua_theo_stt: dict[int, dict] = {}
 
@@ -78,7 +86,7 @@ def cham_bai_bang_anh(
                 "question_id": generator_id,
                 "loai_cau": "MC",
                 "dung_sai_hoac_diem": dung,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_mc,
                 "nhan_xet": "",
                 "chuong": chuong,
                 "bai": bai_so,
@@ -101,7 +109,7 @@ def cham_bai_bang_anh(
                 "question_id": generator_id,
                 "loai_cau": "SA",
                 "dung_sai_hoac_diem": dung,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_sa,
                 "nhan_xet": "",
                 "chuong": chuong,
                 "bai": bai_so,
@@ -119,7 +127,8 @@ def cham_bai_bang_anh(
                 "question_id": generator_id,
                 "loai_cau": "TF",
                 "dung_sai_hoac_diem": None,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_tf,
+                "diem_moi_y": thang["theo_phan"]["TF"]["diem_moi_y"],
                 "nhan_xet": (
                     "Cau Dung/Sai: da doc duoc bai lam nhung chua tu cham dung/sai "
                     "(answer_parser_service chua ho tro trich dap an dung TF). Can cham tay."
@@ -141,7 +150,7 @@ def cham_bai_bang_anh(
             danh_sach_cau_tl.append({
                 "question_id": generator_id,
                 "bai": bai_so,
-                "diem_toi_da": diem_moi_cau,
+                "diem_toi_da": diem_tl,
                 "dap_an_mau": cau.get("loi_giai") or "",
                 "chuong": chuong,
             })
@@ -161,7 +170,7 @@ def cham_bai_bang_anh(
                     "question_id": generator_id,
                     "loai_cau": "TL",
                     "dung_sai_hoac_diem": None,
-                    "diem_toi_da": diem_moi_cau,
+                    "diem_toi_da": diem_tl,
                     "nhan_xet": "CHV_Grader khong tra ve ket qua cho cau nay.",
                     "chuong": chuong,
                     "bai": bai_so,
@@ -178,11 +187,12 @@ def cham_bai_bang_anh(
             continue
         generator_id = cau.get("generator_id")
         chuong, bai_so = trich_chuong_bai(generator_id)
+        loai_chuan = diem_service.loai_cau_chuan(cau)
         ket_qua_theo_stt[stt] = {
             "question_id": generator_id,
-            "loai_cau": "TF" if _la_cau_tf(cau) else (cau.get("loai_cau") or "TL"),
+            "loai_cau": loai_chuan,
             "dung_sai_hoac_diem": None,
-            "diem_toi_da": diem_moi_cau,
+            "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, loai_chuan),
             "nhan_xet": "Chua co anh de cham cau nay.",
             "chuong": chuong,
             "bai": bai_so,
@@ -205,17 +215,19 @@ def cham_bai_bang_anh(
         else:
             tong_diem_dat += float(gia_tri)
 
-    diem_tam_tinh = (
-        round(tong_diem_dat / tong_diem_toi_da_da_cham * 10, 2)
-        if tong_diem_toi_da_da_cham else 0.0
-    )
+    lam_tron = thang.get("lam_tron", 2)
+    diem_tam_tinh = round(tong_diem_dat, lam_tron)
 
     return {
         "tong_so_cau": tong_so_cau,
         "diem_tren_10_tam_tinh": diem_tam_tinh,
+        "thang_diem": thang,
+        "diem_toi_da_da_cham": round(tong_diem_toi_da_da_cham, lam_tron),
+        "diem_toi_da_tong": thang["diem_toi_da_tong"],
         "ghi_chu": (
-            "Diem tam tinh chi tren cac cau da cham duoc (co dung_sai_hoac_diem "
-            "khac null). Cau TF luon can cham tay (xem ghi chu dau file)."
+            "Diem cong don tren thang 10 (MC 3d - TF 2d - SA 2d - TL 3d), "
+            "chi tinh cac cau da cham duoc. Cau TF luon can cham tay "
+            "(xem ghi chu dau file)."
         ),
         "chi_tiet": chi_tiet,
     }

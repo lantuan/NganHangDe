@@ -300,11 +300,33 @@ function thuThapBaiLam() {
     return baiLam;
 }
 
+// Diem toi da dang hien thi cho hoc sinh: KHONG phai luon la 10.
+// Phan tu luan (3d) hien dang xay dung nen chua duoc cong vao mau so;
+// backend tra ve diem_toi_da_tu_dong (MC+TF+SA co trong de).
+function diemToiDaHienThi(ketQua) {
+    if (typeof ketQua.diem_toi_da_tu_dong === 'number') return ketQua.diem_toi_da_tu_dong;
+    return 10;
+}
+
+function ghiChuThangDiem(ketQua) {
+    const phanTL = ketQua.diem_phan_tu_luan;
+    let dong = ketQua.mo_ta_thang_diem ? 'Thang điểm: ' + ketQua.mo_ta_thang_diem + '.' : '';
+    if (phanTL) {
+        dong += ' Phần tự luận (' + phanTL + 'đ): đang xây dựng.';
+    }
+    return dong.trim();
+}
+
 function veKetQua(ketQua) {
     const main = document.getElementById('main');
     let html = '<div class="ket-qua">';
     html += '<div>Điểm của em</div>';
-    html += '<div class="ket-qua-diem">' + ketQua.diem_tren_10_tam_tinh + '<span style="font-size:20px;color:#94a3b8;">/10</span></div>';
+    html += '<div class="ket-qua-diem">' + ketQua.diem_tren_10_tam_tinh +
+        '<span style="font-size:20px;color:#94a3b8;">/' + diemToiDaHienThi(ketQua) + '</span></div>';
+    const ghiChu = ghiChuThangDiem(ketQua);
+    if (ghiChu) {
+        html += '<div style="color:#64748b;font-size:13px;margin-top:6px;">' + ghiChu + '</div>';
+    }
     html += '<div style="color:#64748b;font-size:14px;margin-top:8px;">' + (ketQua.ghi_chu || '') + '</div>';
     html += '</div>';
 
@@ -313,7 +335,9 @@ function veKetQua(ketQua) {
         html += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + '</div>';
         if (cau.loai_cau === 'TF') {
             const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
-            html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc + ' điểm</div>';
+            html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc +
+                '/' + (cau.diem_toi_da || 0) + ' điểm' +
+                (cau.diem_moi_y ? ' (mỗi ý ' + cau.diem_moi_y + 'đ)' : '') + '</div>';
             // Hien chi tiet dung/sai tung y a/b/c/d (chi_tiet_tung_y da co
             // san tu backend, xem app/routers/exam.py) - de hoc sinh biet
             // ro y nao dung y nao sai thay vi chi thay ti le chung.
@@ -350,7 +374,7 @@ function veKetQua(ketQua) {
 // khi khong co CSS phu tro.
 function xayHtmlTomTatKetQua(ketQua) {
     let html = '<p><strong>📊 Kết quả: ' + ketQua.diem_tren_10_tam_tinh +
-        '/10 điểm</strong>' +
+        '/' + diemToiDaHienThi(ketQua) + ' điểm</strong>' +
         (ketQua.ghi_chu ? ' <span style="color:#64748b;font-size:13px;">(' + ketQua.ghi_chu + ')</span>' : '') +
         '</p>';
     html += '<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;font-size:14px;">';
@@ -421,7 +445,8 @@ async function dangKetQuaLenClassroom(ketQua) {
             body: JSON.stringify({
                 de_id: DE_ID,
                 diem_html: xayHtmlTomTatKetQua(ketQua),
-                diem_so: ketQua.diem_tren_10_tam_tinh
+                diem_so: ketQua.diem_tren_10_tam_tinh,
+                diem_toi_da: diemToiDaHienThi(ketQua)
             })
         });
     } catch (e) {
@@ -492,10 +517,10 @@ async function nopBai() {
 }
 
 // Gop ket qua /grade (MC/TF/SA) va /grade-photo (TL qua CHV_Grader).
-// Tinh lai diem tren 10 tu dau dua tren TOAN BO cau da cham duoc o CA
-// HAI nguon - khong dung thang diem_tren_10_tam_tinh rieng cua tung ben
-// (moi ben tu chuan hoa /10 tren tap con rieng cua no nen khong cong
-// truc tiep duoc).
+// Tu 2026-09: hai ben deu dung CHUNG mot thang diem (MC 3d - TF 2d -
+// SA 2d - TL 3d, xem app/services/diem_service.py) nen diem_toi_da cua
+// tung cau da nam san tren thang 10 chung - chi can CONG DON, khong
+// con phai chuan hoa lai ve 10 nhu truoc.
 function gopKetQua(ketQuaChinh, ketQuaAnh) {
     const theoStt = {};
     (ketQuaChinh.chi_tiet || []).forEach(function (c) { theoStt[c.so_thu_tu] = c; });
@@ -524,12 +549,17 @@ function gopKetQua(ketQuaChinh, ketQuaAnh) {
         }
     });
 
-    const diemTren10 = diemToiDaDaCham ? Math.round((diemDat / diemToiDaDaCham) * 10 * 100) / 100 : 0;
+    const diemTren10 = Math.round(diemDat * 100) / 100;
+    const diemToiDa = Math.round(diemToiDaDaCham * 100) / 100;
 
     return {
         tong_so_cau: ketQuaChinh.tong_so_cau,
         diem_tren_10_tam_tinh: diemTren10,
-        ghi_chu: 'Điểm tạm tính trên các câu đã chấm được (MC/TF/SA tự động + tự luận qua CHV_Grader nếu có ảnh). Câu còn lại cần cô/thầy chấm tay.',
+        diem_toi_da_tu_dong: diemToiDa,
+        diem_toi_da_tong: ketQuaChinh.diem_toi_da_tong,
+        diem_phan_tu_luan: ketQuaChinh.diem_phan_tu_luan,
+        mo_ta_thang_diem: ketQuaChinh.mo_ta_thang_diem,
+        ghi_chu: 'Điểm tính trên các câu đã chấm được (MC/TF/SA tự động + tự luận qua CHV_Grader nếu có ảnh). Câu còn lại cần cô/thầy chấm tay.',
         chi_tiet: Object.keys(theoStt).map(function (k) { return theoStt[k]; }).sort(function (a, b) { return a.so_thu_tu - b.so_thu_tu; })
     };
 }
