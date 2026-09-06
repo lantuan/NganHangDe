@@ -2261,3 +2261,64 @@ dang xay dung, khong nen de hoc sinh chup anh roi cho vo ich.
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.37
+
+Ngày
+
+2026-09-06
+
+Nội dung
+
+Hoc sinh lam xong 1 de, muon lam tiep de nua thi go "cho toi them de
+nua" trong chat -> CHV_Fun phan loai nham thanh reject_out_of_scope va
+tra loi "he thong minh chi ho tro tao de, xem hoc luc hoac tai loi giai
+thoi nha" (buon cuoi vi day DUNG la yeu cau tao de). Nguyen nhan:
+app/routers/chat.py::_goi_n8n() chi gui `message` + `user_id` +
+`conversation_id`, KHONG gui lich su hoi thoai - CHV_Fun nhan mot cau
+cut lui khong co ngu canh, khong biet truoc do da tao de gi.
+
+Cach xu ly (theo dung nguyen tac doc 00 "Uu tien Code hon AI"): khong
+sua prompt CHV_Fun, ma them mot duong di KHONG QUA AI.
+
+1. POST /api/exam/lam-de-khac (MOI) - body {de_id, user_id?,
+   conversation_id?}:
+   - Doc lai chinh tham so cua de cu trong bang de_da_sinh (lop, role,
+     loai_he_so, ki_thi, pham_vi_chuong, blueprint).
+   - Goi thang generate_exam_pdf_auto voi dung bo tham so do -> de moi
+     CUNG cau truc, chi khac so lieu (generator random lai).
+   - Luu de moi + 4 file (de/tex/loigiai/dapan_json) y het duong di cua
+     /generate-pdf-auto. Bat buoc phai co dapan_json thi trang lam bai
+     va POST /grade moi cham duoc.
+   - Tra ve {de_id, url_lam_bai, so_cau_da_sinh}.
+
+2. /generate-pdf-auto: gio luu them vao cot blueprint cua de_da_sinh
+   {tieu_de, cau_truc_tu_hoc_sinh, socau_ma_de}. Truoc day cot nay luon
+   la null nen neu nguoi dung tu quy dinh cau truc (vd "20 cau MC, 70%
+   NB") thi tai tao se roi ve cau truc mac dinh trong exam_rules.json.
+
+3. history_service.luu_de_da_sinh(): neu insert that bai vi cot
+   blueprint (vd cot dang la text chu khong phai jsonb), thu lai lan 2
+   voi blueprint=None thay vi bo luon. Mat de nghia la mat duong dan
+   file dap an -> hoc sinh khong cham bai duoc, khong danh doi duoc.
+
+4. app/templates/chat/lam_bai.html: cuoi trang ket qua them nut
+   "🔄 Làm đề khác cùng cấu trúc" -> goi endpoint tren roi chuyen thang
+   sang /lam-bai/{de_id_moi}, giu nguyen ?cid= de nut "Ve Chat AI" va
+   viec luu ket qua vao chat van chay nhu cu. Loi (neu co) hien ngay
+   duoi nut, khong dung alert.
+
+CON TON DONG: neu hoc sinh van go "cho toi them de nua" trong KHUNG
+CHAT (khong phai o trang ket qua) thi van bi CHV_Fun tra loi nham nhu
+cu. Hai cach xu ly sau nay, chua lam:
+  a) Nhan dien cau dan o backend truoc khi goi n8n (regex "them de",
+     "de khac", "lam bai tiep"...) + da co de trong hoi thoai -> goi
+     thang /api/exam/lam-de-khac.
+  b) Gui kem lich su hoi thoai sang n8n va sua prompt CHV_Fun (ton
+     token moi luot, va van co the doan sai).
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

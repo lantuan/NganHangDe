@@ -383,8 +383,49 @@ function veKetQua(ketQua) {
         html += '</div>';
     });
 
+    // Nut lam de khac: goi thang POST /api/exam/lam-de-khac (khong qua
+    // AI/n8n) de sinh 1 de moi cung cau truc voi de vua lam - hoc sinh
+    // khong phai go "cho toi them de nua" roi bi CHV_Fun hieu nham.
+    html += '<button class="nut-nop" id="nut-de-khac" onclick="lamDeKhac()">' +
+        '🔄 Làm đề khác cùng cấu trúc</button>';
+    html += '<div id="loi-de-khac" class="ghi-chu-tl" style="display:none;margin-top:10px;"></div>';
+
     main.innerHTML = html;
     if (window.MathJax) { MathJax.typesetPromise([main]); }
+}
+
+// Sinh 1 de MOI cung cau truc voi de vua lam roi chuyen thang sang
+// trang lam bai cua de do. Giu nguyen ?cid= de nut "Ve Chat AI" va
+// viec luu ket qua vao chat van hoat dong nhu cu.
+async function lamDeKhac() {
+    const nut = document.getElementById('nut-de-khac');
+    const oLoi = document.getElementById('loi-de-khac');
+    nut.disabled = true;
+    nut.textContent = 'Đang tạo đề mới...';
+    oLoi.style.display = 'none';
+    try {
+        const res = await fetch('/api/exam/lam-de-khac', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                de_id: DE_ID,
+                user_id: USER_ID,
+                conversation_id: CID_TU_URL || null
+            })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+            throw new Error(data.detail || data.message || 'Không tạo được đề mới.');
+        }
+        let url = data.data.url_lam_bai;
+        if (CID_TU_URL) { url += '?cid=' + encodeURIComponent(CID_TU_URL); }
+        window.location.href = url;
+    } catch (e) {
+        oLoi.textContent = '❌ ' + e.message + ' Em thử lại, hoặc quay về Chat AI để tạo đề mới.';
+        oLoi.style.display = 'block';
+        nut.disabled = false;
+        nut.textContent = '🔄 Làm đề khác cùng cấu trúc';
+    }
 }
 
 // Xay HTML bang tom tat ket qua (diem tung cau: dung/sai/diem dat

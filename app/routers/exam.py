@@ -295,6 +295,14 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             loai_he_so=payload.loai_he_so,
             ki_thi=payload.ki_thi,
             pham_vi_chuong=payload.pham_vi_chuong,
+            # Luu lai cau truc nguoi dung tu quy dinh (neu co) de sau nay
+            # POST /api/exam/lam-de-khac tai tao duoc de moi Y HET cau
+            # truc nay, khong roi ve cau truc mac dinh trong exam_rules.
+            blueprint={
+                "tieu_de": payload.tieu_de,
+                "cau_truc_tu_hoc_sinh": payload.cau_truc_tu_hoc_sinh,
+                "socau_ma_de": payload.socau_ma_de,
+            },
         )
         if de_id:
             history_service.luu_file_de(de_id, "de", result["pdf_path"])
@@ -333,6 +341,87 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
         filename="de_thi.pdf",
         media_type="application/pdf",
     )
+
+
+# ======================================================
+# LAM DE KHAC CUNG CAU TRUC (nut "Lam de khac" o cuoi trang ket qua)
+#
+# Khong qua AI/n8n: doc lai chinh cac tham so da luu cua de cu trong
+# bang de_da_sinh roi goi thang generate_exam_pdf_auto. Nho vay hoc
+# sinh bam la co de moi ngay (cung chuong, cung so cau, cung muc do -
+# chi khac so lieu do generator random lai), khong phu thuoc vao viec
+# CHV_Fun co hieu dung cau "cho toi them de nua" hay khong.
+# ======================================================
+
+class LamDeKhacRequest(BaseModel):
+    de_id: str
+    user_id: str | None = None
+    conversation_id: str | None = None
+
+
+@router.post("/lam-de-khac")
+def lam_de_khac_endpoint(payload: LamDeKhacRequest):
+    de_cu = history_service.lay_de_theo_id(payload.de_id)
+    if de_cu is None:
+        raise HTTPException(404, "Khong tim thay de cu de tao de tuong tu.")
+
+    blueprint = de_cu.get("blueprint") or {}
+    lop = de_cu.get("lop")
+    if lop not in (10, 11, 12):
+        raise HTTPException(
+            400,
+            f"De cu khong ro lop (lop={lop}) nen khong tao lai duoc. "
+            "Vui long tao de moi tu dau.",
+        )
+
+    tieu_de = blueprint.get("tieu_de") or f"Đề luyện tập lớp {lop}"
+
+    try:
+        result = generate_exam_pdf_auto(
+            lop=lop,
+            tieu_de=tieu_de,
+            role=de_cu.get("role") or "student",
+            loai_he_so=de_cu.get("loai_he_so") or "HeSo1",
+            ki_thi=de_cu.get("ki_thi"),
+            pham_vi_chuong=de_cu.get("pham_vi_chuong"),
+            cau_truc_tu_hoc_sinh=blueprint.get("cau_truc_tu_hoc_sinh"),
+            socau_ma_de=blueprint.get("socau_ma_de"),
+            cho_phep_thieu=False,
+        )
+    except AssembleError as e:
+        raise HTTPException(400, detail=str(e))
+
+    # Luu de moi giong het duong di cua /generate-pdf-auto - phai co
+    # dapan_json thi trang lam bai va POST /grade moi cham duoc.
+    de_id_moi = history_service.luu_de_da_sinh(
+        user_id=payload.user_id or de_cu.get("user_id"),
+        conversation_id=payload.conversation_id or de_cu.get("conversation_id"),
+        lop=lop,
+        role=de_cu.get("role") or "student",
+        loai_he_so=de_cu.get("loai_he_so"),
+        ki_thi=de_cu.get("ki_thi"),
+        pham_vi_chuong=de_cu.get("pham_vi_chuong"),
+        blueprint=blueprint,
+    )
+    if not de_id_moi:
+        raise HTTPException(500, "Da sinh duoc de moi nhung khong luu duoc. Thu lai.")
+
+    history_service.luu_file_de(de_id_moi, "de", result["pdf_path"])
+    history_service.luu_file_de(de_id_moi, "tex", result["tex_path"])
+    if result.get("pdf_loigiai_path"):
+        history_service.luu_file_de(de_id_moi, "loigiai", result["pdf_loigiai_path"])
+    if result.get("dap_an_json_path"):
+        history_service.luu_file_de(de_id_moi, "dapan_json", result["dap_an_json_path"])
+
+    return {
+        "success": True,
+        "message": "",
+        "data": {
+            "de_id": de_id_moi,
+            "url_lam_bai": f"/lam-bai/{de_id_moi}",
+            "so_cau_da_sinh": result.get("so_cau_da_sinh"),
+        },
+    }
 
 
 # ======================================================

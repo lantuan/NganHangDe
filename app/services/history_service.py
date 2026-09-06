@@ -21,21 +21,37 @@ def luu_de_da_sinh(user_id, conversation_id, lop=None, role=None,
                     loai_he_so=None, ki_thi=None, pham_vi_chuong=None,
                     blueprint=None):
     """Luu 1 lan sinh de thanh cong vao de_da_sinh. Tra ve id (uuid) hoac None."""
+    ban_ghi = {
+        "user_id": user_id,
+        "conversation_id": conversation_id,
+        "lop": lop,
+        "role": role,
+        "loai_he_so": loai_he_so,
+        "ki_thi": ki_thi,
+        "pham_vi_chuong": pham_vi_chuong,
+        "blueprint": blueprint,
+    }
     try:
-        result = supabase.table("de_da_sinh").insert({
-            "user_id": user_id,
-            "conversation_id": conversation_id,
-            "lop": lop,
-            "role": role,
-            "loai_he_so": loai_he_so,
-            "ki_thi": ki_thi,
-            "pham_vi_chuong": pham_vi_chuong,
-            "blueprint": blueprint,
-        }).execute()
+        result = supabase.table("de_da_sinh").insert(ban_ghi).execute()
         if result.data:
             return result.data[0]["id"]
     except Exception as e:
         print("LOI LUU DE_DA_SINH:", e)
+        # Tu 2026-09-06 cot blueprint bat dau duoc ghi DU LIEU THAT (cau
+        # truc de, de con tai tao duoc qua POST /api/exam/lam-de-khac).
+        # Neu cot nay khong nhan duoc kieu dict (vd dang la text chu khong
+        # phai jsonb) thi van phai luu duoc de - mat de nghia la mat luon
+        # duong dan file dap an, hoc sinh khong cham bai duoc.
+        if blueprint is not None:
+            try:
+                ban_ghi["blueprint"] = None
+                result = supabase.table("de_da_sinh").insert(ban_ghi).execute()
+                if result.data:
+                    print("CANH BAO: da luu de nhung BO blueprint - kiem tra "
+                          "kieu cot blueprint trong bang de_da_sinh (can jsonb).")
+                    return result.data[0]["id"]
+            except Exception as e2:
+                print("LOI LUU DE_DA_SINH (lan 2, bo blueprint):", e2)
     return None
 
 

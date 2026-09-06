@@ -406,3 +406,41 @@ Trang /lam-bai/{de_id} có thể gọi endpoint này (đã có sẵn từ Versio
 2.8, không đổi API) chỉ với anh_tuluan_base64 (không anh_phieu_base64)
 để chấm riêng phần tự luận qua CHV_Grader, gộp kết quả với /grade ở
 phía Frontend (JS thuần, không thêm API mới).
+
+
+===============================================================================
+
+# Cập nhật 2026-09-06 — Làm đề khác cùng cấu trúc (Version 2.37)
+
+POST /api/exam/lam-de-khac
+
+Input:
+
+```json
+{
+  "de_id": "uuid của đề vừa làm",
+  "user_id": "",
+  "conversation_id": ""
+}
+```
+
+Output:
+
+```json
+{
+  "success": true,
+  "message": "",
+  "data": {
+    "de_id": "uuid đề mới",
+    "url_lam_bai": "/lam-bai/<uuid đề mới>",
+    "so_cau_da_sinh": 20
+  }
+}
+```
+
+Đọc lại tham số của đề cũ trong bảng de_da_sinh (lop, role, loai_he_so,
+ki_thi, pham_vi_chuong, blueprint) rồi gọi thẳng generate_exam_pdf_auto —
+KHÔNG qua AI/n8n. Dùng cho nút "Làm đề khác cùng cấu trúc" ở cuối trang
+kết quả làm bài. Lỗi: 404 nếu không tìm thấy đề cũ, 400 nếu đề cũ không
+rõ lớp, 500 nếu sinh được đề nhưng không lưu được.
+
