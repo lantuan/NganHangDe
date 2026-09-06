@@ -108,6 +108,12 @@ Quy ước: ⬜ Chưa bắt đầu | 🟡 Đang thực hiện | ✅ Hoàn thành
 
 ## Đang thực hiện
 
+TẠM DỪNG nhánh chấm bằng ẢNH (2026-09-04): trang làm bài đã ẩn ô tải ảnh
+và hiện thông báo "Chức năng chấm tự luận đang được xây dựng"; học sinh
+làm bài trên web được chấm ngay 7 điểm trắc nghiệm, phần tự luận 3 điểm
+nộp giấy cho giáo viên. Việc tiếp theo ưu tiên: đề + đáp án đăng lên
+Classroom của học sinh (hiện chưa hiện được trong tài khoản người học).
+
 Giai đoạn 6/7 — WF007_GradeExam, nhánh chấm bằng ẢNH (học sinh chụp ảnh
 phiếu trả lời + bài tự luận viết tay). Đã xong: DocPhieuTraLoi (đọc
 phiếu MC/TF/SA), CHV_Grader (chấm Tự luận từ ảnh), POST
@@ -135,9 +141,11 @@ bằng ảnh chụp phiếu/bài làm THẬT (chờ có bản in).
 
 1. Test bằng ảnh chụp THẬT (phiếu đã tô + bài tự luận viết tay) để kiểm
    chứng độ chính xác đọc của DocPhieuTraLoi/CHV_Grader — cần bản in.
-2. Sửa answer_parser_service để trích được đáp án đúng cho câu TF
-   (\choiceTFn/\choiceTFt) — hiện TF luôn phải chấm tay dù đã đọc được
-   ảnh (xem "HẠN CHẾ ĐÃ BIẾT" ở Version 2.8).
+2. ~~Sửa answer_parser_service để trích đáp án câu TF~~ — ĐÃ XONG (thực
+   ra đã xong từ Version 2.27, ghi chú cũ lỗi thời). Kiểm chứng bằng
+   tests/test_answer_parser_bank.py trên toàn bộ 46 generator thật.
+   Việc còn lại của nhánh ảnh: so khớp kết quả DocPhieuTraLoi với
+   dap_an_dung của câu TF — làm cùng lúc với mục 1.
 3. CN_MergeGradeResult — hiện đã gộp thủ công trong
    grade_photo_service.py; cân nhắc tách riêng nếu cần dùng lại ở nơi
    khác (vd chấm bài không qua ảnh).

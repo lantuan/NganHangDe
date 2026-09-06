@@ -325,9 +325,13 @@ kết quả theo đúng schema Grade Result (doc 03), lưu exam_history. Input:
 }
 ```
 
-Câu TF (Đúng/Sai) hiện luôn trả về trạng thái can_cham_tay dù đã đọc được
-ảnh (answer_parser_service chưa trích được đáp án đúng cho TF). Chi tiết
-xem docs/16_CHANGELOG.md, Version 2.8. Đã kiểm chứng end-to-end trên
+Câu TF (Đúng/Sai) trong nhánh chấm bằng ảnh vẫn trả về can_cham_tay,
+nhưng KHÔNG phải vì answer_parser_service — ghi chú cũ ở Version 2.8 đã
+lỗi thời, parser đọc đúng đáp án TF (kiểm chứng bằng
+tests/test_answer_parser_bank.py, Version 2.36). Lý do còn lại: chưa viết
+phần so khớp kết quả DocPhieuTraLoi với dap_an_dung của câu TF. Cả nhánh
+chấm bằng ảnh đang tạm dừng — trang làm bài hiện thông báo "Chức năng
+chấm tự luận đang được xây dựng". Đã kiểm chứng end-to-end trên
 production bằng ảnh giả (không lỗi, đúng schema); chưa kiểm chứng độ
 chính xác đọc bằng ảnh chụp thật.
 

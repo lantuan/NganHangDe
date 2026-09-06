@@ -47,11 +47,13 @@ def _load_rules() -> dict:
 def loai_cau_chuan(cau: dict) -> str:
     """Tra ve loai cau chuan hoa: MC / TF / SA / TL.
 
-    Can ham nay vi answer_parser_service hien CHUA nhan dien duoc cau
-    Dung/Sai: cau TF dang bi luu nham loai_cau="TL" trong file
-    *_dapan.json, chi phan biet duoc qua generator_id co chua "_TF_"
-    (xem docstring dau app/services/grade_photo_service.py). Neu khong
-    chuan hoa o day thi cau TF se bi tinh diem theo phan Tu luan.
+    Ban than answer_parser_service DA doc dung loai cau TF (kiem chung
+    bang tests/test_answer_parser_bank.py). Ham nay giu lai lam LUOI AN
+    TOAN cho cac file *_dapan.json CU sinh truoc Version 2.27 (luc do
+    generator con dung \\choiceTFn[N] khong hop le nen cau TF bi luu nham
+    loai_cau="TL"): neu khong chuan hoa, may cau do se bi tinh diem theo
+    phan Tu luan. File dap an chi song 1 ngay (cleanup_old_files.py) nen
+    co the bo ham nay sau vai thang.
     """
     loai = (cau.get("loai_cau") or "").strip().upper()
     generator_id = cau.get("generator_id") or ""

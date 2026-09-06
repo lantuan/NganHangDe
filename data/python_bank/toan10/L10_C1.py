@@ -6247,7 +6247,7 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
             dang
         )
 
-    return
+    return cauTN
 
 
 def L10_C1_B2_NB017_MC_B_03(socau, dang=1):

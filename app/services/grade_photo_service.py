@@ -3,13 +3,21 @@ CN_GradeAnswer (nhanh ANH) - cham bai bang cach goi 2 webhook n8n:
 - DocPhieuTraLoi (doc-phieu-tra-loi): doc anh Phieu TLTN (MC/TF/SA).
 - CHV_Grader (cham-tu-luan): doc anh bai lam tay (Tu luan that su).
 
-GHI CHU QUAN TRONG (bug da biet, hoan lai xu ly sau theo yeu cau):
-answer_parser_service.trich_dap_an() CHUA nhan dien duoc cau Dung/Sai
-(TF, dung \\choiceTFn/\\choiceTFt) -> moi cau TF hien dang bi luu nham
-loai_cau="TL", dap_an_dung=None trong file *_dapan.json. Ham duoi day
-dung generator_id (chua "_TF_") de tach rieng cau TF ra khoi cau TL
-that su, nhung VAN CHUA the tu cham dung/sai cho TF (vi khong co dap
-an dung de so sanh) -> cau TF luon tra ve trang_thai="can_cham_tay".
+CAP NHAT 2026-09-04: ghi chu cu ("answer_parser_service chua nhan dien
+duoc cau Dung/Sai") DA LOI THOI. Da kiem chung bang
+tests/test_answer_parser_bank.py tren toan bo 46 generator that cua
+data/python_bank/toan10/L10_C1.py: trich_dap_an() doc DUNG ca 4 loai cau,
+cau TF duoc luu dung loai_cau="TF" kem dap_an_dung {a,b,c,d} day du.
+(Bug \\choiceTFn[N] khong ton tai trong ex_test.sty da duoc sua o Version
+2.27 - tu do generator luon sinh \\choiceTFt, dung dinh dang parser doc
+duoc.)
+
+Cau TF trong nhanh cham bang ANH van tra ve trang_thai="can_cham_tay",
+nhung LY DO gio khac: chua viet phan so khop ket qua DocPhieuTraLoi doc
+tu phieu voi dap_an_dung cua cau TF. Ca nhanh cham bang anh dang tam
+dung (xem thong bao "dang xay dung" o app/templates/chat/lam_bai.html).
+Nhanh lam bai truc tiep tren web (POST /api/exam/grade) cham TF binh
+thuong, khong lien quan.
 """
 import httpx
 

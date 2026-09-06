@@ -775,7 +775,10 @@ def xem_de_lam_bai_endpoint(de_id: str):
         elif loai_cau == "SA":
             pass  # chi can de_bai, hoc sinh tu go dap an
         else:
-            muc["ghi_chu"] = "Cau tu luan - lam ra giay, chup anh gui de duoc cham."
+            muc["ghi_chu"] = (
+                "Câu tự luận — em làm ra giấy và nộp cho thầy/cô. "
+                "Chức năng chấm tự luận tự động đang được xây dựng."
+            )
         danh_sach_cau_hoi.append(muc)
 
     return {

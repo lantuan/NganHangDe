@@ -2178,3 +2178,86 @@ tiep tren web khong bi anh huong (dap an TF duoc luu du).
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.36
+
+Ngày
+
+2026-09-04
+
+Nội dung
+
+(1) Xac minh lai "HAN CHE DA BIET" ve cau Dung/Sai o Version 2.8 - GHI
+CHU DO DA LOI THOI, khong con bug. (2) Sua 1 bug that trong ngan hang
+de tim ra khi kiem tra. (3) Tam an o tai anh cham tu luan, thay bang
+thong bao "dang xay dung".
+
+--- (1) Cau Dung/Sai: parser DA doc dung tu Version 2.27 ---
+
+Ghi chu tu Version 2.8 noi answer_parser_service chua trich duoc dap an
+cau TF (\choiceTFn/\choiceTFt) nen cau TF bi luu nham loai_cau="TL".
+Kiem tra lai 2026-09-04: KHONG con dung. Nguyen nhan goc la generator
+sinh \choiceTFn[N] - macro khong ton tai trong data/config/ex_test.sty;
+Version 2.27 da doi math_type.py sang \choiceTFt (macro co that) va
+answer_parser_service.trich_dap_an_tf() doc duoc dinh dang nay. Tu do
+cau TF duoc luu dung loai_cau="TF" kem dap_an_dung {a,b,c,d}, va
+POST /api/exam/grade van cham TF binh thuong tu luc do den nay.
+
+Da cap nhat lai cac cho ghi chu sai: docstring dau
+app/services/grade_photo_service.py, docstring loai_cau_chuan() trong
+app/services/diem_service.py, docs/05_API_SPECIFICATION.md,
+docs/15_DEVELOPMENT_ROADMAP.md.
+
+loai_cau_chuan() trong diem_service KHONG bo di, nhung doi vai tro:
+tu "va bug parser" thanh "luoi an toan cho file *_dapan.json CU sinh
+truoc Version 2.27". File dap an chi song 1 ngay (cleanup_old_files.py)
+nen co the bo ham nay sau vai thang.
+
+Rieng nhanh cham bang ANH: cau TF van tra ve can_cham_tay, nhung LY DO
+gio la chua viet phan so khop ket qua DocPhieuTraLoi voi dap_an_dung -
+lam cung luc voi viec hoan thien cham tu luan bang anh.
+
+--- (2) tests/test_answer_parser_bank.py (MOI) ---
+
+Chay TOAN BO generator trong data/python_bank/toan*/L*.py mot lan, dua
+latex_block ra trich_dap_an() roi doi chieu loai cau parser doc duoc voi
+loai cau ghi trong TEN HAM (_MC_/_TF_/_SA_/_TL_), kiem them: cau TF phai
+du 4 y, cau MC/SA phai co dap an dung, generator khong duoc tra ve rong.
+
+Ket qua tren L10_C1.py: 46/46 ham dat (37 MC, 2 TF, 2 SA, 5 TL).
+
+Luu y khi goi generator trong test: chi truyen socau=1, GIU NGUYEN gia
+tri mac dinh cua tham so con lai. Vai ham SA co dang=2 lam mac dinh
+(vd L10_C1_B1_VD014_SA_A_01, L10_C1_B2_NB017_SA_C) - truyen dang=1 se
+sinh ra dang MC va lam test bao sai oan.
+
+BUG THAT DA BAT DUOC:
+data/python_bank/toan10/L10_C1.py dong 6250, ham
+L10_C1_B2_NB017_MC_B_02 ket thuc bang `return` thay vi `return cauTN`
+-> generator tra ve None -> de sinh ra 1 cau RONG, va cau rong do bi
+trich_dap_an doc thanh loai_cau="TL". Voi thang diem moi (Version 2.35)
+loi nay con nguy hiem hon truoc: cau rong se an vao phan Tu luan 3 diem.
+Da sua thanh `return cauTN` (giong ham anh em MC_B_01 o dong 5921).
+
+--- (3) Tam dung nhanh cham tu luan bang anh ---
+
+Theo yeu cau cua giao vien: phan cham tu luan bang anh (CHV_Grader) con
+dang xay dung, khong nen de hoc sinh chup anh roi cho vo ich.
+
+- app/templates/chat/lam_bai.html: o tai anh (#anh-tuluan) duoc boc
+  trong `if (false) { ... } else { ... }`, nhanh else hien khung mau
+  vang: "Chức năng chấm tự luận đang được xây dựng - em chưa cần chụp
+  ảnh bài làm gửi lên... Bấm Nộp bài để được chấm ngay phần trắc
+  nghiệm (7 điểm)". Lam xong CHV_Grader thi doi `if (false)` thanh
+  `if (true)` la khoi phuc.
+- Luong goi /grade-photo trong nopBai() GIU NGUYEN, tu dong bo qua khi
+  khong tim thay #anh-tuluan - khong phai sua gi them khi bat lai.
+- app/routers/exam.py (GET /quiz/{de_id}): ghi chu o tung cau tu luan
+  doi thanh "Câu tự luận — em làm ra giấy và nộp cho thầy/cô. Chức năng
+  chấm tự luận tự động đang được xây dựng."
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

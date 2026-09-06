@@ -121,6 +121,13 @@
         }
         .upload-tl label { display: block; margin-bottom: 10px; font-size: 14px; color: #334155; }
         .upload-tl input[type="file"] { width: 100%; font-size: 14px; }
+        /* Khung bao "chuc nang cham tu luan dang xay dung" - thay cho o
+           tai anh, de hoc sinh khong mat cong chup roi cho cham. */
+        .upload-tl.dang-xay-dung { background: #fffbeb; border-color: #fcd34d; }
+        .upload-tl.dang-xay-dung .tieu-de {
+            font-weight: 600; font-size: 14px; color: #92400e; margin-bottom: 6px;
+        }
+        .upload-tl.dang-xay-dung .noi-dung { font-size: 14px; color: #78350f; line-height: 1.5; }
 
         .nut-nop {
             display: block; width: 100%; padding: 14px;
@@ -258,10 +265,24 @@ function veTrangLamBai() {
         return !cau.co_hinh_ve && ['MC', 'TF', 'SA'].indexOf(cau.loai_cau) === -1;
     });
     if (coTuLuan) {
-        html += '<div class="upload-tl">';
-        html += '<label for="anh-tuluan">📷 Đề có câu tự luận - chụp hoặc tải ảnh bài làm (viết tay) trước khi nộp để được chấm luôn (không bắt buộc - vẫn có thể gửi ảnh qua khung chat sau như cũ):</label>';
-        html += '<input type="file" accept="image/*" capture="environment" id="anh-tuluan">';
-        html += '</div>';
+        // Chuc nang cham tu luan bang anh (CHV_Grader) DANG XAY DUNG -
+        // tam an o tai anh, chi hien thong bao. Khi nao lam xong thi bo
+        // khoi if(false) nay va dung lai 2 dong html o duoi (luong goi
+        // /grade-photo trong nopBai() van con nguyen, tu dong bo qua khi
+        // khong tim thay #anh-tuluan).
+        if (false) {
+            html += '<div class="upload-tl">';
+            html += '<label for="anh-tuluan">📷 Đề có câu tự luận - chụp hoặc tải ảnh bài làm (viết tay) trước khi nộp để được chấm luôn:</label>';
+            html += '<input type="file" accept="image/*" capture="environment" id="anh-tuluan">';
+            html += '</div>';
+        } else {
+            html += '<div class="upload-tl dang-xay-dung">';
+            html += '<div class="tieu-de">🚧 Chức năng chấm tự luận đang được xây dựng</div>';
+            html += '<div class="noi-dung">Phần tự luận (3 điểm) chưa chấm tự động được, em <strong>chưa cần chụp ảnh bài làm</strong> gửi lên. ';
+            html += 'Em cứ làm ra giấy và nộp cho thầy/cô như bình thường. ';
+            html += 'Bấm <strong>Nộp bài</strong> để được chấm ngay phần trắc nghiệm (7 điểm).</div>';
+            html += '</div>';
+        }
     }
 
     html += '<button class="nut-nop" id="nut-nop" onclick="nopBai()">Nộp bài</button>';
