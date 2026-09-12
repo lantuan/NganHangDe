@@ -417,6 +417,32 @@ async function lamDeKhac() {
         if (!res.ok || !data.success) {
             throw new Error(data.detail || data.message || 'Không tạo được đề mới.');
         }
+        const deIdMoi = data.data.de_id;
+
+        // Ghi de moi vao hoi thoai giong het luong chat binh thuong, neu
+        // khong thi de nay khong de lai dau vet nao trong chat: khong co
+        // link tai file, quay lai chat cung khong thay. Dung chung
+        // endpoint /api/chat/luu-de-truc-tiep + file_url nhu form tao de
+        // nhanh, de moHoiThoai() ve lai duoc link tai file.
+        if (CID_TU_URL && deIdMoi) {
+            const linkTaiDe = '/api/exam/tai-de/' + deIdMoi;
+            try {
+                await fetch('/api/chat/luu-de-truc-tiep', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        conversation_id: CID_TU_URL,
+                        user_message: 'Làm đề khác cùng cấu trúc.',
+                        ai_caption: 'Đã tạo đề mới cùng cấu trúc với đề vừa làm.',
+                        file_url: linkTaiDe
+                    })
+                });
+            } catch (e) {
+                // Khong chan viec sang de moi neu luu chat that bai.
+                console.error('Loi luu de moi vao chat:', e);
+            }
+        }
+
         let url = data.data.url_lam_bai;
         if (CID_TU_URL) { url += '?cid=' + encodeURIComponent(CID_TU_URL); }
         window.location.href = url;

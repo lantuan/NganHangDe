@@ -2390,3 +2390,36 @@ can quay ve cach cu): _chia_theo_so_bai(), _chon_chuong_dung_sai().
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.39
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Sua sot cua nut "Lam de khac cung cau truc" (them o Version 2.37): nut
+nay sinh de moi roi NHAY THANG sang trang lam bai, khong ghi gi vao hoi
+thoai. Hau qua: de thu 2 co that trong he thong, cham diem duoc, nhung
+KHONG de lai dau vet nao trong chat - khong co link tai file, quay lai
+hoi thoai cung khong thay.
+
+app/templates/chat/lam_bai.html, ham lamDeKhac(): sau khi co de_id moi,
+goi /api/chat/luu-de-truc-tiep voi file_url = /api/exam/tai-de/{de_id}
+truoc khi chuyen trang - dung chung duong di voi form tao de nhanh, de
+moHoiThoai() ve lai duoc link tai file khi tai lai trang. Loi khi luu
+chat KHONG chan viec sang de moi (try/catch, chi console.error).
+
+CON TON DONG (chua lam, cho giao vien quyet): go "cho toi dap an cua ca
+2 de" chi ra dap an cua DE MOI NHAT. Khong phai bug - luong xin loi giai
+goi history_service.lay_de_gan_nhat() von chi lay 1 de:
+    .order("created_at", desc=True).limit(1)
+He thong hien khong co khai niem "nhieu de cung luc". Xem ghi chu trao
+doi voi giao vien ngay 2026-09-12.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
