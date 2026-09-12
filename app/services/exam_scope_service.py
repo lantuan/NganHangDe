@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import re
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PPCT_DIR = BASE_DIR / "data" / "ppct"
@@ -12,6 +13,40 @@ KI_THI_MAP = {
     "giua_ky_2": (2, "GK2_EXAM", None),
     "cuoi_ky_2": (2, "CK2_EXAM", "GK2_EXAM"),
 }
+
+
+_TIET_KHOANG = re.compile(r"^(\d+)\s*[-–]\s*(\d+)$")
+
+
+def dem_so_tiet(tiet_str) -> int:
+    """Đếm số tiết của 1 bài từ trường "tiet" trong PPCT.
+
+    PPCT ghi kiểu "23, 25-26" (tiết 23, rồi tiết 25 và 26) -> 3 tiết.
+    Dùng để chia số câu về từng bài THEO TỈ LỆ SỐ TIẾT (quy định của
+    giáo viên) thay vì chia đều theo số bài như trước.
+
+    Bài không ghi tiết (hoặc ghi sai định dạng) tính là 1 tiết, để không
+    bị loại khỏi phạm vi ra đề.
+    """
+    if not tiet_str:
+        return 1
+    tong = 0
+    for phan in str(tiet_str).split(","):
+        phan = phan.strip()
+        if not phan:
+            continue
+        khoang = _TIET_KHOANG.match(phan)
+        if khoang:
+            dau, cuoi = int(khoang.group(1)), int(khoang.group(2))
+            if cuoi >= dau:
+                tong += cuoi - dau + 1
+        elif phan.isdigit():
+            tong += 1
+    return tong or 1
+
+
+def _so_tiet_theo_bai(danh_sach_bai: list[dict]) -> dict[str, int]:
+    return {b["id"]: dem_so_tiet(b.get("tiet")) for b in danh_sach_bai}
 
 
 def _load_ppct(lop: int) -> list[dict]:
@@ -50,6 +85,9 @@ def load_scope_heso1(lop: int, pham_vi_chuong: str) -> dict:
         "loai_he_so": "HeSo1",
         "chuong_so": so_chuong,
         "pham_vi_bai": [b["id"] for b in ket_qua],
+        # CN_BuildBlueprint KHÔNG được đọc PPCT (doc 08) nên số tiết phải
+        # lấy sẵn ở đây rồi truyền sang.
+        "so_tiet_theo_bai": _so_tiet_theo_bai(ket_qua),
     }
 
 
@@ -125,6 +163,7 @@ def load_scope_heso23(lop: int, ki_thi: str) -> dict:
         "ki_thi": ki_thi,
         "pham_vi_chuong": sorted({b["chuong_so"] for b in ket_qua}),
         "pham_vi_bai": [b["id"] for b in ket_qua],
+        "so_tiet_theo_bai": _so_tiet_theo_bai(ket_qua),
         "phan_bo_ty_le": phan_bo_ty_le,
     }
 

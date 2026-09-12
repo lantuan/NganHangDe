@@ -22,6 +22,7 @@ from app.services.curriculum_service import load_curriculum_for_scope, Curriculu
 from app.services.question_selector_service import select_questions, SelectorError
 
 _CHUONG_PATTERN = re.compile(r"_C(\d+)_B")
+_CHUONG_BAI_PATTERN = re.compile(r"_C(\d+)_B(\d+)")
 
 # "tối đa 2 câu SA/chương; tối đa 2 câu TL/chương" — doc 08_CODE_NODES.md
 MAX_SA_PER_CHUONG = 2
@@ -72,6 +73,96 @@ def _chia_theo_so_bai(so_luong: int, so_bai_theo_chuong: dict[int, int]) -> dict
         ket_qua[chuong_uu_tien] = ket_qua.get(chuong_uu_tien, 0) + con_thieu
 
     return {c: sl for c, sl in ket_qua.items() if sl > 0}
+
+
+def _tach_chuong_bai(bai_id: str) -> tuple[int, int] | None:
+    """'L10_C1_B2' -> (1, 2). Tra ve None neu khong doc duoc."""
+    m = _CHUONG_BAI_PATTERN.search(bai_id)
+    if not m:
+        return None
+    return int(m.group(1)), int(m.group(2))
+
+
+def _chia_theo_so_tiet(so_luong: int, so_tiet_theo_bai: dict[str, int]) -> dict[str, int]:
+    """Chia so_luong câu về TỪNG BÀI theo TỈ LỆ SỐ TIẾT của bài đó.
+
+    Quy định của giáo viên (thay cho cách chia đều theo số bài trước đây):
+    bài dạy nhiều tiết hơn thì được nhiều câu hơn. Làm tròn xuống trước,
+    phần dư dồn cho bài nhiều tiết nhất (nếu bằng tiết thì lấy bài đứng
+    trước trong PPCT) để tổng luôn khớp đúng so_luong.
+    """
+    if so_luong <= 0 or not so_tiet_theo_bai:
+        return {}
+
+    tong_tiet = sum(so_tiet_theo_bai.values())
+    if tong_tiet <= 0:
+        return {}
+
+    ket_qua = {
+        bai_id: math.floor(so_luong * so_tiet / tong_tiet)
+        for bai_id, so_tiet in so_tiet_theo_bai.items()
+    }
+    con_thieu = so_luong - sum(ket_qua.values())
+
+    # Phần dư: ưu tiên bài nhiều tiết nhất, rải lần lượt (không dồn hết
+    # vào 1 bài) để đề trải đều hơn khi nhiều bài cùng số tiết.
+    uu_tien = sorted(so_tiet_theo_bai, key=lambda b: (-so_tiet_theo_bai[b], b))
+    i = 0
+    while con_thieu > 0 and uu_tien:
+        ket_qua[uu_tien[i % len(uu_tien)]] += 1
+        con_thieu -= 1
+        i += 1
+
+    return {b: sl for b, sl in ket_qua.items() if sl > 0}
+
+
+def _chon_bai_dung_sai(so_tiet_theo_bai: dict[str, int], so_cau_lon: int) -> dict[str, int]:
+    """Chọn bài (đơn vị kiến thức) cho các câu Đúng/Sai — LÀM TRƯỚC TIÊN.
+
+    Ưu tiên bài nhiều tiết nhất. Mỗi câu Đúng/Sai lớn gồm đủ 4 ý
+    NB-TH-VD-VDC lấy trong CÙNG một bài, nên bài đó sẽ bị trừ 1 câu ở
+    MỖI mức khi chia các phần còn lại (xem _tru_phan_dung_sai).
+    Nếu số câu Đúng/Sai nhiều hơn số bài thì mới quay vòng lại.
+    """
+    if so_cau_lon <= 0 or not so_tiet_theo_bai:
+        return {}
+
+    bai_sap_xep = sorted(so_tiet_theo_bai, key=lambda b: (-so_tiet_theo_bai[b], b))
+    ket_qua: dict[str, int] = {}
+    for i in range(so_cau_lon):
+        bai_id = bai_sap_xep[i % len(bai_sap_xep)]
+        ket_qua[bai_id] = ket_qua.get(bai_id, 0) + 1
+    return ket_qua
+
+
+def _tru_phan_dung_sai(
+    phan_bo_bai: dict[str, int],
+    phan_bo_bai_ds: dict[str, int],
+) -> tuple[dict[str, int], int]:
+    """Trừ phần câu Đúng/Sai đã chiếm ra khỏi phân bổ của 1 mức độ.
+
+    Quy định của giáo viên: câu Đúng/Sai được tính là 4 câu (1 NB + 1 TH
+    + 1 VD + 1 VDC). Sau khi đã chọn bài cho Đúng/Sai thì ở CHÍNH bài đó
+    phải trừ đi 1 câu cho mỗi mức - "đơn vị kiến thức đó chia ra được 3
+    câu thì phải tính 1 ở đúng sai, chỉ còn 2".
+
+    Trừ ở cấp BÀI như vậy đồng thời làm tổng chỉ tiêu của mức đó giảm
+    đúng bằng số câu Đúng/Sai (doc 08: "chỉ tiêu còn lại = tổng - so_cau
+    _dung_sai") - KHÔNG được trừ thêm lần nữa ở cấp tổng, sẽ thành trừ 2 lần.
+
+    Tra ve (phan_bo_moi, so_cau_chua_tru_duoc). so_cau_chua_tru_duoc > 0
+    khi bài đó vốn không được chia câu nào ở mức này - phần đó bỏ qua,
+    không đẩy sang bài khác (tránh bài khác bị hụt câu vô cớ).
+    """
+    ket_qua = dict(phan_bo_bai)
+    con_du = 0
+    for bai_id, so_cau_ds in phan_bo_bai_ds.items():
+        co = ket_qua.get(bai_id, 0)
+        tru = min(co, so_cau_ds)
+        if tru:
+            ket_qua[bai_id] = co - tru
+        con_du += so_cau_ds - tru
+    return {b: sl for b, sl in ket_qua.items() if sl > 0}, con_du
 
 
 def _chon_chuong_dung_sai(so_bai_theo_chuong: dict[int, int], so_cau_lon: int) -> dict[int, int]:
@@ -243,6 +334,12 @@ def build_blueprint(
         raise BlueprintError("Không xác định được chương nào trong phạm vi bài")
     danh_sach_chuong = list(so_bai_theo_chuong.keys())
 
+    # Số tiết từng bài do CN_LoadExamScope đọc sẵn từ PPCT (blueprint
+    # KHÔNG được đọc PPCT - doc 08). Bài thiếu dữ liệu tính 1 tiết.
+    so_tiet_theo_bai = scope.get("so_tiet_theo_bai") or {}
+    so_tiet_theo_bai = {b: so_tiet_theo_bai.get(b, 1) for b in pham_vi_bai}
+    danh_sach_bai = list(so_tiet_theo_bai.keys())
+
     # BƯỚC 2 — số câu mỗi mức độ theo hệ số (bảng exam_rules.json)
     try:
         rules_result = resolve_cau_truc_de(loai_he_so, cau_truc_tu_hoc_sinh)
@@ -259,34 +356,49 @@ def build_blueprint(
     if not curriculum_entries:
         raise BlueprintError("CURRICULUM_NOT_FOUND")
 
-    theo_chuong_muc_do: dict[tuple, list[dict]] = {}
+    # Group Curriculum theo (bài, mức độ) - trước đây group theo (chương,
+    # mức độ). Đổi vì mọi phân bổ giờ làm ở cấp BÀI (đơn vị kiến thức).
+    theo_bai_muc_do: dict[tuple, list[dict]] = {}
     for e in curriculum_entries:
-        key = (int(e["chuong_so"]), e["MucDo"])
-        theo_chuong_muc_do.setdefault(key, []).append(e)
+        bai_id = f"L{lop}_C{int(e['chuong_so'])}_B{int(e['bai_so'])}"
+        theo_bai_muc_do.setdefault((bai_id, e["MucDo"]), []).append(e)
 
     # "chưa dùng" tách riêng theo loại câu (MC/SA/TL không đụng nhau)
     da_dung: dict[str, set] = {"trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set()}
     blueprint = {"dung_sai": [], "trac_nghiem": [], "tra_loi_ngan": [], "tu_luan": []}
     bao_cao_phan_bo: dict = {}
 
-    # ---- TF (Đúng/Sai) — theo chương, KHÔNG qua Curriculum (Ngoại lệ 1, doc 04) ----
+    # ---- BƯỚC 4a — Đúng/Sai LÀM TRƯỚC TIÊN (quy định của giáo viên) ----
+    # Chọn BÀI cho câu Đúng/Sai trước, vì mỗi câu Đúng/Sai chiếm sẵn
+    # 1 NB + 1 TH + 1 VD + 1 VDC ngay tại bài đó; các phần còn lại chia
+    # sau và phải trừ đi phần đã bị chiếm này.
     so_cau_lon = phan_bo_muc_do.get("dung_sai_cau_lon", {}).get("NB", 0)  # 4 mức bằng nhau
-    phan_bo_chuong_ds = _chon_chuong_dung_sai(so_bai_theo_chuong, so_cau_lon)
-    bao_cao_phan_bo["dung_sai_cau_lon"] = phan_bo_chuong_ds
-    for chuong_so, sl in phan_bo_chuong_ds.items():
-        blueprint["dung_sai"].append({"chuong_so": chuong_so, "so_cau": sl})
+    phan_bo_bai_ds = _chon_bai_dung_sai(so_tiet_theo_bai, so_cau_lon)
+    bao_cao_phan_bo["dung_sai_cau_lon"] = {"theo_bai": phan_bo_bai_ds}
+    for bai_id, sl in phan_bo_bai_ds.items():
+        cb = _tach_chuong_bai(bai_id)
+        blueprint["dung_sai"].append({
+            "chuong_so": cb[0] if cb else None,
+            "bai_so": cb[1] if cb else None,
+            "bai_id": bai_id,
+            "so_cau": sl,
+        })
 
-    # ---- trac_nghiem: NB, TH (không giới hạn số câu/chương) ----
+    # ---- BƯỚC 4b — trac_nghiem mức NB, TH: chia về BÀI theo TỈ LỆ SỐ TIẾT ----
     for muc_do in ("NB", "TH"):
         so_luong = phan_bo_muc_do.get("trac_nghiem", {}).get(muc_do, 0)
-        phan_bo_chuong = _chia_theo_so_bai(so_luong, so_bai_theo_chuong)
-        for chuong_so, sl in phan_bo_chuong.items():
-            entries = theo_chuong_muc_do.get((chuong_so, muc_do), [])
+        phan_bo_bai = _chia_theo_so_tiet(so_luong, so_tiet_theo_bai)
+        phan_bo_bai, _du = _tru_phan_dung_sai(phan_bo_bai, phan_bo_bai_ds)
+        bao_cao_phan_bo.setdefault("trac_nghiem", {})[muc_do] = phan_bo_bai
+        for bai_id, sl in phan_bo_bai.items():
+            cb = _tach_chuong_bai(bai_id)
+            entries = theo_bai_muc_do.get((bai_id, muc_do), [])
             chon = _chon_curriculum_id(entries, sl, da_dung["trac_nghiem"])
             for e in chon:
                 blueprint["trac_nghiem"].append({
                     "curriculum_id": e["id"],
-                    "chuong_so": chuong_so,
+                    "chuong_so": cb[0] if cb else None,
+                    "bai_so": cb[1] if cb else None,
                     "muc_do": muc_do,
                     "tong_so_cau": 1,
                 })
@@ -298,21 +410,40 @@ def build_blueprint(
         "tra_loi_ngan": MAX_SA_PER_CHUONG,
         "tu_luan": MAX_TL_PER_CHUONG,
     }
+    # Ngân sách Đúng/Sai còn phải trừ ở mức VD/VDC. Mỗi câu Đúng/Sai đã
+    # chiếm 1 VD + 1 VDC, nhưng VD/VDC có thể nằm ở CẢ 3 phần (MC/SA/TL)
+    # nên chỉ được trừ MỘT LẦN, ưu tiên phần đứng trước. Nếu phần nào
+    # cũng không còn gì để trừ (vd đề đặt tỉ lệ VDC = 0) thì thôi, không
+    # đẩy sang mức khác - đúng lựa chọn của giáo viên.
+    ngan_sach_ds = {"VD": so_cau_lon, "VDC": so_cau_lon}
+
     for loai_cau, cap in gioi_han_theo_loai.items():
         so_vd = phan_bo_muc_do.get(loai_cau, {}).get("VD", 0)
         so_vdc = phan_bo_muc_do.get(loai_cau, {}).get("VDC", 0)
+
+        tru_vd = min(so_vd, ngan_sach_ds["VD"])
+        so_vd -= tru_vd
+        ngan_sach_ds["VD"] -= tru_vd
+        tru_vdc = min(so_vdc, ngan_sach_ds["VDC"])
+        so_vdc -= tru_vdc
+        ngan_sach_ds["VDC"] -= tru_vdc
+
         if so_vd <= 0 and so_vdc <= 0:
             continue
 
-        phan_bo_chuong_vdvdc = _phan_bo_vd_vdc(danh_sach_chuong, so_vd, so_vdc, max_per_chuong=cap)
+        # Rải trên BÀI (đơn vị kiến thức) chứ không phải chương: mỗi bài
+        # tối đa 1 câu VDC, câu VD ưu tiên bài chưa có VDC.
+        phan_bo_chuong_vdvdc = _phan_bo_vd_vdc(danh_sach_bai, so_vd, so_vdc, max_per_chuong=cap)
         bao_cao_phan_bo.setdefault(loai_cau, {})["vd_vdc"] = phan_bo_chuong_vdvdc
 
-        for chuong_so, v in phan_bo_chuong_vdvdc.items():
+        for bai_id, v in phan_bo_chuong_vdvdc.items():
+            cb = _tach_chuong_bai(bai_id)
+            chuong_so = cb[0] if cb else None
             tong = v["vd"] + v["vdc"]
             if tong <= 0:
                 continue
 
-            entries_vd = theo_chuong_muc_do.get((chuong_so, "VD"), [])
+            entries_vd = theo_bai_muc_do.get((bai_id, "VD"), [])
             chon = _chon_curriculum_id(entries_vd, tong, da_dung[loai_cau])
 
             # Gộp theo curriculum_id (nếu vòng lặp bên trên phải lặp lại
@@ -328,6 +459,7 @@ def build_blueprint(
                 blueprint[loai_cau].append({
                     "curriculum_id": curriculum_id,
                     "chuong_so": chuong_so,
+                    "bai_so": cb[1] if cb else None,
                     "muc_do": "VD",
                     "tong_so_cau": so_luong_id,
                     "so_cau_VD": so_vd_id,
@@ -337,6 +469,7 @@ def build_blueprint(
     return {
         "pham_vi_bai": pham_vi_bai,
         "so_bai_theo_chuong": so_bai_theo_chuong,
+        "so_tiet_theo_bai": so_tiet_theo_bai,
         "cau_truc_tong_quat": rules_result["cau_truc_tong_quat"],
         "nguon_cau_truc": rules_result["nguon_cau_truc"],
         "bao_cao_phan_bo": bao_cao_phan_bo,

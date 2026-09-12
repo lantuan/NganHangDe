@@ -105,18 +105,37 @@ Output
 
 Blueprint
 
-Nhiệm vụ
+Nhiệm vụ (cập nhật 2026-09-12 — mọi phân bổ làm ở cấp BÀI, không
+phải cấp chương như bản cũ)
 
-1. Chọn N chương cho câu TF (N = dung_sai_cau_lon): sắp xếp các
-   chương trong pham_vi_chuong theo số bài giảm dần, lấy N chương
-   đầu. Nếu chỉ có 1 chương trong phạm vi, toàn bộ TF thuộc chương đó.
+1. Chọn BÀI cho câu TF TRƯỚC TIÊN (N = dung_sai_cau_lon): sắp xếp các
+   bài trong pham_vi_bai theo SỐ TIẾT giảm dần, lấy N bài đầu. Nếu
+   N > số bài thì mới quay vòng lại. Mỗi câu TF lấy đủ 4 ý
+   NB-TH-VD-VDC trong CÙNG một bài.
 2. Tính chỉ tiêu còn lại cho NB/TH/VD/VDC = tổng - so_cau_dung_sai
    (mỗi câu TF trừ 1 vào mỗi mức, vì gồm 1 NB+1 TH+1 VD+1 VDC).
-3. Lấy Curriculum entries thuộc pham_vi_bai, group theo MucDo.
-4. Phân bổ câu MC/SA/TL: ưu tiên đều giữa các bài; không lặp
+   CÁCH LÀM: trừ ngay tại BÀI mà TF đã chọn ("đơn vị kiến thức đó
+   chia ra được 3 câu thì phải tính 1 ở đúng sai, chỉ còn 2"). Trừ ở
+   cấp bài đã tự động làm tổng giảm đúng bằng so_cau_dung_sai —
+   TUYỆT ĐỐI KHÔNG trừ thêm lần nữa ở cấp tổng (sẽ thành trừ 2 lần).
+   Nếu bài đó vốn không được chia câu nào ở mức đang xét thì bỏ qua,
+   KHÔNG đẩy phần trừ sang bài khác.
+   Riêng mức VD/VDC có thể nằm ở cả 3 phần (MC/SA/TL) nên giữ một
+   "ngân sách trừ" dùng chung, trừ theo thứ tự MC → SA → TL, mỗi câu
+   TF chỉ được trừ MỘT LẦN. Đề đặt tỉ lệ VDC = 0 thì ý VDC của câu TF
+   không trừ đi đâu cả (kẹp ở 0), câu TF vẫn giữ đủ 4 ý.
+3. Lấy Curriculum entries thuộc pham_vi_bai, group theo (bài, MucDo).
+4. Phân bổ câu MC/SA/TL mức NB/TH: chia về từng BÀI theo TỈ LỆ SỐ
+   TIẾT của bài (số tiết lấy từ CN_LoadExamScope, trường
+   so_tiet_theo_bai — blueprint KHÔNG được đọc PPCT). Làm tròn xuống,
+   phần dư rải lần lượt cho bài nhiều tiết nhất trước. Không lặp
    competency cùng mức nếu còn lựa chọn khác; chỉ lặp khi hết;
-   tối đa 2 câu SA/chương; tối đa 2 câu TL/chương.
-5. Với mỗi curriculum_id mức VD dùng cho SA/TL: chia so_cau_VD
+   tối đa 2 câu SA/bài; tối đa 2 câu TL/bài.
+5. Mức VD/VDC: chọn VDC TRƯỚC, mỗi BÀI tối đa 1 câu VDC (không dồn
+   nhiều VDC vào cùng một đơn vị kiến thức). Sau đó rải VD, ưu tiên
+   các bài CHƯA có VDC; hết bài trống mới quay lại bài đã có.
+   Tỉ lệ VD:VDC lấy từ bảng exam_rules.json, KHÔNG ép cứng 2:1.
+6. Với mỗi curriculum_id mức VD dùng cho SA/TL: chia so_cau_VD
    và so_cau_VDC theo chỉ tiêu còn lại. curriculum_id giữ nguyên,
    không đổi thành VDC.
 

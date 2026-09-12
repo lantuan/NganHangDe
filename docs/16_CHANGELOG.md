@@ -2322,3 +2322,71 @@ cu. Hai cach xu ly sau nay, chua lam:
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.38
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Thuc hien dung quy dinh phan bo de cua giao vien. Truoc day quy dinh nay
+DA GHI trong docs/08 (muc CN_BuildBlueprint, y 2) nhung CHUA duoc viet
+vao code - khong phai bi xoa, xem git log cua
+app/services/exam_blueprint_service.py (chi co 3 commit e776e31 /
+8fc3950 / 2041215, khong commit nao dong vao y 2 nay).
+
+QUY DINH (giao vien chot 2026-09-12):
+1. Cau Dung/Sai luon tinh la 4 cau: 1 NB + 1 TH + 1 VD + 1 VDC.
+2. Chon bai cho cau Dung/Sai TRUOC TIEN, roi TRU 1 cau o moi muc ngay
+   tai bai do truoc khi chia cac phan con lai.
+3. Chia so cau ve tung bai theo TI LE SO TIET cua bai (truoc day chia
+   deu theo SO BAI).
+4. VD:VDC giu nguyen theo bang exam_rules.json, khong ep cung 2:1.
+5. De dat ti le VDC = 0 thi y VDC cua cau Dung/Sai khong tru di dau ca
+   (kep o 0), cau Dung/Sai van giu du 4 y.
+
+1. app/services/exam_scope_service.py:
+   - dem_so_tiet(): doc truong "tiet" cua PPCT ("23, 25-26" -> 3 tiet).
+     Bai thieu du lieu tinh 1 tiet de khong bi loai khoi pham vi.
+   - load_scope_heso1()/load_scope_heso23() tra them so_tiet_theo_bai.
+     De o day vi CN_BuildBlueprint KHONG duoc doc PPCT (doc 08).
+
+2. app/services/exam_blueprint_service.py:
+   - _chia_theo_so_tiet(): chia so cau ve tung BAI theo ti le so tiet,
+     lam tron xuong, phan du RAI LAN LUOT cho bai nhieu tiet nhat truoc
+     (khong don het vao 1 bai).
+   - _chon_bai_dung_sai(): chon BAI cho cau Dung/Sai theo so tiet giam
+     dan (truoc day _chon_chuong_dung_sai chon theo CHUONG).
+   - _tru_phan_dung_sai(): tru phan cau Dung/Sai da chiem, ngay tai bai
+     do. Neu bai do von khong duoc chia cau nao o muc dang xet thi bo
+     qua, KHONG day sang bai khac.
+   - Curriculum gio group theo (bai, MucDo) thay vi (chuong, MucDo).
+   - _phan_bo_vd_vdc() chay tren danh sach BAI thay vi danh sach CHUONG
+     -> "moi don vi kien thuc toi da 1 cau VDC" dung nhu quy dinh.
+   - Muc VD/VDC dung MOT ngan sach tru chung cho ca 3 phan MC/SA/TL,
+     tru theo thu tu MC -> SA -> TL. Neu khong lam vay, 1 cau Dung/Sai
+     se bi tru 3 lan (moi phan 1 lan).
+   - Blueprint item gio co them "bai_so"; item dung_sai co them
+     "bai_id" + "bai_so" (van giu "chuong_so" de CN_QuestionSelector
+     chay nhu cu, khong pha tuong thich).
+   - Tra ve them so_tiet_theo_bai de tien doi chieu khi debug.
+
+VI DU KIEM CHUNG (de HeSo1 chuong 1 lop 10, 2 bai deu 4 tiet;
+dat hang 6 TN + 1 DS + 2 TLN):
+   Chi tieu TN: NB 4, TH 1, VD 1, VDC 0
+   DS chon bai L10_C1_B1
+   NB: chia theo tiet B1=2, B2=2 -> tru 1 o B1 -> B1=1, B2=2 (con 3)
+   TH: chia theo tiet B1=1       -> tru 1 o B1 -> con 0
+   VD: TN co 1 -> DS lay het     -> TN het cau VD
+   TLN: VD 1 / VDC 1 -> DS lay VDC -> con dung 1 cau VD
+
+HAM CU CON GIU LAI (khong con duoc goi, giu de doi chieu va phong khi
+can quay ve cach cu): _chia_theo_so_bai(), _chon_chuong_dung_sai().
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
