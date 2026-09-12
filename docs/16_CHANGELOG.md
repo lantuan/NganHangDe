@@ -2505,3 +2505,35 @@ cau khac lam sai ti le theo tiet.
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.42
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Moi tin nhan BAO LOI trong chat gio hien kem nut "📝 Tạo đề nhanh (chọn
+lớp/chương)" - dung cai nut o loi chao mo dau.
+
+Ly do (yeu cau cua giao vien): khi AI khong hieu yeu cau (vd hoc sinh go
+"làm đề tiếp theo"), truoc day chat chi bao "AI chua xu ly duoc yeu cau
+nay, vui long thu lai voi yeu cau tao de cu the (lop/chuong/so cau...)"
+roi de hoc sinh tu nghi ra cau lenh dung cu phap. Gio co san duong di
+thu hai: bam nut chon lop/chuong -> goi thang /api/exam/generate-pdf-auto,
+KHONG qua AI nen luon chay.
+
+app/templates/chat/chat.html:
+- htmlNutTaoDeNhanh(): tach rieng phan HTML cua nut, dung chung cho loi
+  chao mo dau va cac tin nhan loi (truoc day viet thang trong
+  hienChaoMoDau).
+- addAIMessageLoi(): hien tin nhan loi + 1 dong goi y + nut tao de nhanh.
+- Ap dung o CA 3 cho bao loi: loi tu server (data.success = false), loi
+  ket noi (khoi catch), va loi cu khi tai lai lich su hoi thoai.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
