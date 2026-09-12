@@ -2464,3 +2464,44 @@ nut. De tao tu bay gio tro di moi co.
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.41
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Sua loi "Loi chon cau hoi: L10_C1_B2_VD021 (SA): khong co Generator nao
+khop trong Mapping" khi bam nut "Lam de khac cung cau truc".
+
+NGUYEN NHAN 1 (sot cua Version 2.37): /api/exam/lam-de-khac de cung
+cho_phep_thieu=False, trong khi form tao de nhanh o chat.html (dong 782,
+998) gui cho_phep_thieu=true. Cung mot cau truc de, tao qua chat thi ra,
+bam nut thi bao loi - nut KHAT KHE HON ca luong chinh.
+
+Sua: /generate-pdf-auto luu them "cho_phep_thieu" vao cot blueprint;
+/lam-de-khac doc lai gia tri do. De sinh truoc ban nay khong co truong
+nay -> mac dinh True cho giong luong chat.
+
+NGUYEN NHAN 2 (goc re, giao vien quyet GIU NGUYEN 2026-09-12): ngan
+hang chuong 1 thieu cau Tra loi ngan. Toan bo
+data/mapping/toan10/L10_C1.json chi co DUNG 1 cau SA:
+    L10_C1_B1_VD014_SA_A   (bai 1)
+Bai 2 muc VD chi co VD020 (MC, TL) va VD021 (MC) - khong co SA nao.
+De can 2 cau SA muc VD; tu Version 2.38 VD/VDC duoc rai tren tung BAI
+nen bai 2 buoc phai lay VD020/VD021 -> khong co generator SA -> loi.
+Truoc 2.38 rai theo CHUONG nen hay chon trung VD014 hai lan, che mat lo
+hong nay. Thay doi 2.38 khong tao ra van de, chi LAM LO RA.
+
+Quyet dinh: KHONG sua logic chon cau de tranh don vi thieu generator.
+Giai doan nay van dang xay ngan hang de, nen de o "THIEU CAU HOI" hien
+ra cho biet cho nao con thieu ma bo sung generator, hon la am tham chon
+cau khac lam sai ti le theo tiet.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

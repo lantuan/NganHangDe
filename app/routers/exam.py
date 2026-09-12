@@ -302,6 +302,11 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
                 "tieu_de": payload.tieu_de,
                 "cau_truc_tu_hoc_sinh": payload.cau_truc_tu_hoc_sinh,
                 "socau_ma_de": payload.socau_ma_de,
+                # Luu lai de /api/exam/lam-de-khac tao de moi voi DUNG che
+                # do cua de goc. Truoc day nut do de cung False nen khat
+                # khe hon ca luong chat (form tao de nhanh gui true) -> de
+                # goc ra duoc ma bam "Lam de khac" lai bao loi.
+                "cho_phep_thieu": payload.cho_phep_thieu,
             },
         )
         if de_id:
@@ -386,7 +391,10 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
             pham_vi_chuong=de_cu.get("pham_vi_chuong"),
             cau_truc_tu_hoc_sinh=blueprint.get("cau_truc_tu_hoc_sinh"),
             socau_ma_de=blueprint.get("socau_ma_de"),
-            cho_phep_thieu=False,
+            # De sinh truoc Version 2.41 khong luu cho_phep_thieu -> mac
+            # dinh True cho giong luong chat (form tao de nhanh), khong
+            # khat khe hon de goc.
+            cho_phep_thieu=bool(blueprint.get("cho_phep_thieu", True)),
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
