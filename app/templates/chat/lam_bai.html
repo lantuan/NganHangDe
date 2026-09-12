@@ -344,6 +344,12 @@ function veKetQua(ketQua) {
     html += '<div>Điểm của em</div>';
     html += '<div class="ket-qua-diem">' + ketQua.diem_tren_10_tam_tinh +
         '<span style="font-size:20px;color:#94a3b8;">/' + diemToiDaHienThi(ketQua) + '</span></div>';
+    // Cho hien ket qua dang bai len Classroom. Truoc day ham
+    // dangKetQuaLenClassroom() goi API roi VUT BO hoan toan phan hoi,
+    // nen dang that bai (vd thieu scope Drive) cung khong ai biet - phai
+    // vao VPS doc log moi thay. Gio hien thang tai day.
+    html += '<div id="trang-thai-classroom" class="ghi-chu-tl" style="display:none;margin-top:12px;"></div>';
+
     const ghiChu = ghiChuThangDiem(ketQua);
     if (ghiChu) {
         html += '<div style="color:#64748b;font-size:13px;margin-top:6px;">' + ghiChu + '</div>';
@@ -525,9 +531,17 @@ async function luuKetQuaVaoChat(ketQua) {
 // cua Classroom, rieng cho dung hoc sinh nay (cac ban khac trong lop
 // khong thay duoc). Tien ich them - KHONG chan/lam gian doan viec xem
 // ket qua neu Classroom loi (vd chua ket noi, chua co ma lop...).
+function hienTrangThaiClassroom(noiDung) {
+    const o = document.getElementById('trang-thai-classroom');
+    if (!o) return;
+    o.innerHTML = noiDung;
+    o.style.display = 'block';
+}
+
 async function dangKetQuaLenClassroom(ketQua) {
+    hienTrangThaiClassroom('⏳ Đang đăng đề, bài giải và điểm lên Classroom...');
     try {
-        await fetch('/api/chat/dang-classroom', {
+        const res = await fetch('/api/chat/dang-classroom', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -537,8 +551,24 @@ async function dangKetQuaLenClassroom(ketQua) {
                 diem_toi_da: diemToiDaHienThi(ketQua)
             })
         });
+        const data = await res.json();
+        if (data && data.success) {
+            hienTrangThaiClassroom('✅ Đã đăng đề, bài giải và điểm lên Google Classroom của em.');
+        } else {
+            // Day la tien ich THEM - dang that bai KHONG anh huong diem
+            // da cham, nen chi bao nhe nhang, khong dung chu "Loi".
+            hienTrangThaiClassroom(
+                '📤 Chưa đăng được lên Classroom: ' +
+                ((data && (data.message || data.detail)) || 'không rõ nguyên nhân') +
+                '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>'
+            );
+        }
     } catch (e) {
         console.error("Loi dang ket qua len Classroom:", e);
+        hienTrangThaiClassroom(
+            '📤 Chưa đăng được lên Classroom (lỗi kết nối).' +
+            '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>'
+        );
     }
 }
 

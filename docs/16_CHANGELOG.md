@@ -2537,3 +2537,51 @@ app/templates/chat/chat.html:
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.43
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Hien LY DO khi khong dang duoc de/bai giai/diem len Google Classroom.
+
+VAN DE: dang_ket_qua_len_classroom() (app/services/classroom_service.py)
+luon tra ve {"success": bool, "message": str} va KHONG BAO GIO raise -
+dung y do, vi day la tien ich them, khong duoc chan hoc sinh xem diem.
+Nhung app/templates/chat/lam_bai.html goi API roi VUT BO hoan toan phan
+hoi (chi await fetch(), khong doc res). Hau qua: dang that bai thi im
+lang tuyet doi, phai SSH vao VPS doc log moi biet ly do.
+
+app/templates/chat/lam_bai.html:
+- Them o #trang-thai-classroom ngay duoi khoi diem o trang ket qua.
+- dangKetQuaLenClassroom() gio doc res.json() va hien:
+  "⏳ Đang đăng..." -> "✅ Đã đăng..." hoac "📤 Chưa đăng được lên
+  Classroom: <message>".
+- Luon kem cau "Điểm của em vẫn được lưu bình thường, không ảnh hưởng
+  gì" - dang Classroom that bai KHONG lam mat diem da cham.
+- Doc ca data.detail (FastAPI tra 401 dang {"detail": ...} khi phien
+  dang nhap het han) chu khong chi data.message.
+
+CAC NGUYEN NHAN CO THE GAP (de doi chieu khi thay thong bao):
+- "Chưa kết nối Classroom (vào /gv/classroom/connect)": chua co
+  refresh_token trong DB.
+- "Không tải được file lên Drive." / "Không tạo được bài đăng trên
+  Classroom.": NGHI NHIEU NHAT - refresh_token cu xin TRUOC khi them 2
+  scope classroom.coursework.students + drive.file (Version 2.34), nen
+  khong mang quyen moi. Phai vao Google Cloud Console > Data Access them
+  2 scope, ROI lam lai /gv/classroom/connect de xin refresh_token MOI.
+  Log VPS se in "LOI TAI FILE LEN DRIVE: 403 ..." hoac "LOI TAO
+  COURSEWORK MATERIAL: 403 ...".
+- "Chưa có mã lớp Classroom cho <khoi>-<lop>.": thieu trong
+  MA_LOP_CLASSROOM (app/core/lop_config.py). Da kiem tra: ("10","Tự do")
+  CO san (course_id 874602361962) nen khong phai nguyen nhan hien tai.
+- "Chưa xác định được lớp của học sinh.": hoc sinh chua chon lop.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
