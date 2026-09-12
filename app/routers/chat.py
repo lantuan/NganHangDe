@@ -393,6 +393,13 @@ async def chat_post(
             if de_vua_sinh and de_vua_sinh.get("id"):
                 de_id_de_hoi = de_vua_sinh["id"]
 
+        # Gan them de_id vao URL (?de=...) de khi tai lai lich su chat,
+        # Frontend van biet tin nhan nay thuoc de nao ma hien nut "Loi
+        # giai" rieng cho dung de do. May chu file bo qua query string
+        # nen link tai file van chay y nhu cu.
+        if de_id_de_hoi:
+            file_url = f"{file_url}?de={de_id_de_hoi}"
+
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=cau_dan,

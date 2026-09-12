@@ -2413,12 +2413,53 @@ truoc khi chuyen trang - dung chung duong di voi form tao de nhanh, de
 moHoiThoai() ve lai duoc link tai file khi tai lai trang. Loi khi luu
 chat KHONG chan viec sang de moi (try/catch, chi console.error).
 
-CON TON DONG (chua lam, cho giao vien quyet): go "cho toi dap an cua ca
-2 de" chi ra dap an cua DE MOI NHAT. Khong phai bug - luong xin loi giai
-goi history_service.lay_de_gan_nhat() von chi lay 1 de:
-    .order("created_at", desc=True).limit(1)
-He thong hien khong co khai niem "nhieu de cung luc". Xem ghi chu trao
-doi voi giao vien ngay 2026-09-12.
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.40
+
+Ngày
+
+2026-09-12
+
+Nội dung
+
+Nut "Loi giai cua de nay" gan duoi TUNG de trong hoi thoai.
+
+VAN DE: hoc sinh lam 2 de lien tiep roi go "cho toi dap an cua ca 2 de"
+-> chi ra loi giai cua DE MOI NHAT. Khong phai bug: luong xin loi giai
+goi history_service.lay_de_gan_nhat(), von chi lay 1 de
+(.order("created_at", desc=True).limit(1)). He thong khong co khai niem
+"nhieu de cung luc".
+
+CACH XU LY (giao vien chon 2026-09-12): khong day viec doan y cho AI,
+cung khong lam tinh nang "xuat nhieu de cung luc". Moi de hien san 1 nut
+"Loi giai" ngay duoi no - bam la ra dung loi giai cua de do.
+
+1. app/routers/exam.py:
+   - Tach phan sinh loi giai ra ham dung chung _xuat_loigiai(de).
+   - GET /api/exam/tai-loigiai/{de_id} (MOI): loi giai cua DUNG 1 de
+     theo de_id. POST /api/exam/export-loigiai giu nguyen (theo
+     conversation_id - de moi nhat) de n8n va luong chat cu khong gay.
+
+2. app/routers/chat.py: URL file de luu vao chat_history duoc gan them
+   "?de=<de_id>". May chu file bo qua query string nen link tai file
+   chay y nhu cu, nhung khi tai lai lich su thi Frontend van biet tin
+   nhan do thuoc de nao. Chi gan cho DE, khong gan cho file loi giai.
+
+3. app/templates/chat/chat.html:
+   - layDeIdTuUrl(): boc de_id tu URL, ho tro ca 2 dang -
+     "...pdf?de=<id>" (luong chat) va "/api/exam/tai-de/<id>" (nut
+     "Lam de khac", Version 2.37).
+   - htmlNutLoiGiai(): sinh link "📄 Lời giải của đề này".
+   - Gan vao ca 2 cho: luc de vua duoc tao, va luc tai lai lich su
+     hoi thoai.
+
+LUU Y: de sinh TRUOC ban nay khong co "?de=" trong lich su nen khong co
+nut. De tao tu bay gio tro di moi co.
 
 Nguoi thuc hien
 

@@ -509,12 +509,17 @@ class ExportLoiGiaiRequest(BaseModel):
     conversation_id: str
 
 
-@router.post("/export-loigiai")
-def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
-    de = history_service.lay_de_gan_nhat(payload.conversation_id)
-    if de is None:
-        raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
+def _xuat_loigiai(de: dict) -> FileResponse:
+    """Tra ve PDF loi giai cua 1 de. Neu chua co san thi bien dich tu file
+    .tex da luu (doi [dethi] -> [loigiai] trong ex_test) roi luu lai de
+    lan sau khoi dich lai.
 
+    Dung chung cho:
+    - POST /api/exam/export-loigiai  (theo conversation_id - de MOI NHAT)
+    - GET  /api/exam/tai-loigiai/{de_id} (theo dung 1 de - dung cho nut
+      "Loi giai" gan duoi tung de trong hoi thoai, de hoc sinh lam nhieu
+      de van xin dung loi giai cua de minh muon).
+    """
     files = de.get("files", {})
 
     loigiai_path = files.get("loigiai")
@@ -554,6 +559,28 @@ def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
         filename="loigiai.pdf",
         media_type="application/pdf",
     )
+
+
+@router.post("/export-loigiai")
+def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
+    de = history_service.lay_de_gan_nhat(payload.conversation_id)
+    if de is None:
+        raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
+    return _xuat_loigiai(de)
+
+
+@router.get("/tai-loigiai/{de_id}")
+def tai_loigiai_endpoint(de_id: str):
+    """URL on dinh cho nut "Loi giai" gan duoi TUNG de trong hoi thoai.
+
+    Khac /export-loigiai o cho: chi dich danh 1 de theo de_id, khong lay
+    "de moi nhat". Hoc sinh lam 2-3 de lien tiep van xin duoc dung loi
+    giai cua de minh muon.
+    """
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+    return _xuat_loigiai(de)
 
 
 # ======================================================

@@ -444,3 +444,20 @@ KHÔNG qua AI/n8n. Dùng cho nút "Làm đề khác cùng cấu trúc" ở cuố
 kết quả làm bài. Lỗi: 404 nếu không tìm thấy đề cũ, 400 nếu đề cũ không
 rõ lớp, 500 nếu sinh được đề nhưng không lưu được.
 
+
+===============================================================================
+
+# Cập nhật 2026-09-12 — Lời giải theo từng đề (Version 2.40)
+
+GET /api/exam/tai-loigiai/{de_id}
+
+Trả về PDF lời giải của ĐÚNG đề đó (không phải "đề mới nhất"). Nếu chưa
+có sẵn thì biên dịch từ file .tex đã lưu rồi lưu lại cho lần sau. Dùng
+cho nút "📄 Lời giải của đề này" gắn dưới từng đề trong hội thoại.
+
+Lỗi: 404 nếu không tìm thấy đề; 410 nếu file .tex đã bị dọn (quá 1 ngày);
+500 nếu biên dịch PDF lỗi.
+
+POST /api/exam/export-loigiai giữ nguyên như cũ (theo conversation_id,
+lấy đề mới nhất) — n8n và luồng chat cũ không phải sửa gì.
+

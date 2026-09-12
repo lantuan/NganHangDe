@@ -1119,7 +1119,8 @@ ${html}
                     } else if (msg.loai_phan_hoi === "file" && msg.duong_dan_file) {
                         addAIMessage(
                             `<p>${msg.noi_dung || "Đã tạo đề xong."}</p>` +
-                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener">📄 Tải file</a></p>`
+                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener">📄 Tải file</a></p>` +
+                            htmlNutLoiGiai(msg.duong_dan_file)
                         );
                         // De MOI NHAT trong ca hoi thoai (khong chi trong
                         // trang hien tai) - nho lai de hien lai nut "Lam
@@ -1160,6 +1161,27 @@ ${html}
             } catch (err) {
                 console.error("Loi mo hoi thoai:", err);
             }
+        }
+
+        // ===== NUT "LOI GIAI" GAN DUOI TUNG DE =====
+        // Hoc sinh lam nhieu de lien tiep trong 1 hoi thoai thi go "cho
+        // toi dap an" se luon ra de MOI NHAT (lay_de_gan_nhat). Nut nay
+        // gan thang vao tung tin nhan de, bam la ra dung loi giai cua de
+        // do - khong qua AI nen khong the hieu nham.
+        // de_id nam trong URL file: /api/exam/tai-de/<id> (nut "Lam de
+        // khac") hoac ...pdf?de=<id> (luong chat binh thuong).
+        function layDeIdTuUrl(url) {
+            if (!url) return null;
+            let m = url.match(/[?&]de=([0-9a-fA-F-]{36})/);
+            if (m) return m[1];
+            m = url.match(/\/api\/exam\/tai-de\/([0-9a-fA-F-]{36})/);
+            return m ? m[1] : null;
+        }
+
+        function htmlNutLoiGiai(url) {
+            const deId = layDeIdTuUrl(url);
+            if (!deId) return "";
+            return `<p><a href="/api/exam/tai-loigiai/${deId}" download target="_blank" rel="noopener">📄 Lời giải của đề này</a></p>`;
         }
 
         // ===== GỬI TIN NHẮN LÊN /chat =====
@@ -1221,6 +1243,7 @@ ${html}
                             `<p>${data.message || "Đã tạo đề xong."}</p>` +
                             `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">` +
                             `📄 Tải file: ${filename}</a></p>` +
+                            htmlNutLoiGiai(url) +
                             htmlHoi
                         );
                     } else if (data.reply) {
