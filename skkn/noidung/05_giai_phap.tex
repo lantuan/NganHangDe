@@ -282,6 +282,65 @@ lớp thì cần kèm riêng.
 
 \chenanh[0.92]{15-lam-bai-nop-bai.png}{Màn hình làm bài trực tuyến và màn hình kết quả chấm ngay sau khi nộp}
 
+\subsubsection{Công cụ và hạ tầng đã sử dụng}
+
+Sáng kiến này là một phần mềm chạy thật trên Internet, nên tôi xin nêu rõ toàn
+bộ công cụ đã dùng để đồng nghiệp muốn làm theo biết cần chuẩn bị những gì.
+
+\begin{center}
+\begin{longtable}{|p{3.6cm}|p{4.6cm}|p{6.2cm}|}
+\hline
+\textbf{Thành phần} & \textbf{Công cụ đã dùng} & \textbf{Dùng để làm gì} \\ \hline
+\endhead
+Ngôn ngữ lập trình & Python 3 & Viết hàm sinh câu hỏi và toàn bộ phần xử lí \\ \hline
+Máy chủ web & FastAPI + Jinja2 & Cung cấp giao diện và các đường dẫn của trang web \\ \hline
+Cơ sở dữ liệu, đăng nhập & Supabase (PostgreSQL) & Lưu tài khoản, lịch sử hội thoại, đề đã sinh, bài làm, điểm \\ \hline
+Điều phối luồng & n8n (bản tự cài trên máy chủ riêng) & Nối các bước với nhau và là nơi duy nhất gọi tới trí tuệ nhân tạo \\ \hline
+Mô hình ngôn ngữ & Gọi qua OpenRouter (Qwen, Gemini) & Chỉ để hiểu yêu cầu tiếng Việt của người dùng \\ \hline
+Trình bày đề & \LaTeX, gói \texttt{ex\_test}, biên dịch bằng \texttt{pdflatex} & Sinh tệp PDF đề thi và lời giải đúng chuẩn văn bản đề \\ \hline
+Máy chủ & Máy ảo (VPS) chạy Ubuntu, nginx, systemd & Nơi phần mềm chạy 24/24 \\ \hline
+Tên miền & \texttt{nganhangdechv.tech} (tự mua) & Địa chỉ để giáo viên và học sinh truy cập \\ \hline
+Tích hợp ngoài & Google Classroom API, Google Drive API & Giao đề, đáp án và trả điểm về lớp học thật \\ \hline
+Quản lí mã nguồn & Git và GitHub & Lưu lịch sử sửa đổi, đồng bộ giữa máy cá nhân và máy chủ \\ \hline
+Soạn thảo & Visual Studio Code & Nơi viết toàn bộ mã nguồn \\ \hline
+\end{longtable}
+\end{center}
+\textit{Bảng 5. Công cụ và hạ tầng đã sử dụng}
+
+Trong đó, hai thành phần cần giải thích thêm:
+
+\textbf{n8n} là một phần mềm nối các bước xử lí thành một luồng, thao tác bằng
+cách kéo thả các khối trên màn hình thay vì viết mã. Tôi cài n8n trên máy chủ
+của mình (bản tự cài, không phải bản thuê theo tháng). Trong hệ thống này, n8n
+giữ đúng một vai trò: nhận yêu cầu tiếng Việt, chuyển cho mô hình ngôn ngữ hiểu,
+rồi gọi sang phần xử lí bằng Python. Mọi việc có quy tắc rõ ràng đều đã được
+chuyển hết về Python, đúng nguyên tắc ``ưu tiên mã nguồn hơn trí tuệ nhân tạo''.
+
+\textbf{Máy ảo (VPS)} là một máy tính thuê trên Internet, chạy liên tục, để
+phần mềm luôn sẵn sàng khi học sinh truy cập bất kể giờ nào. Cùng với tên miền,
+đây là hai khoản chi phí duy nhất của sáng kiến, do tôi tự chi trả.
+
+\ghichu{Nếu muốn ghi rõ chi phí, điền số tiền thật mỗi năm cho máy ảo và tên
+miền vào đoạn trên --- con số cụ thể sẽ làm phần ``hiệu quả kinh tế'' ở Mục
+II.5 thuyết phục hơn nhiều.}
+
+\textbf{Mã nguồn công khai.} Toàn bộ mã nguồn của hệ thống, kèm hơn 20 tài liệu kĩ
+thuật mô tả kiến trúc, chuẩn mã định danh, thuật toán dựng ma trận và nhật kí
+toàn bộ các lần cải tiến, được công khai tại:
+
+\begin{center}
+\setlength{\fboxsep}{8pt}
+\fbox{\begin{minipage}{0.85\linewidth}\centering
+\textbf{\url{https://github.com/lantuan/NganHangDe}}
+\end{minipage}}
+\end{center}
+
+Tôi công khai mã nguồn vì hai lí do. Thứ nhất, để hội đồng và đồng nghiệp kiểm
+chứng được rằng sản phẩm là có thật và do tôi làm, chứ không chỉ là mô tả trên
+giấy --- riêng nhật kí sửa đổi trong mã nguồn đã ghi lại từng lần cải tiến ở
+Bảng 6 dưới đây. Thứ hai, để giáo viên nào muốn làm theo có thể lấy về dùng
+lại, không phải bắt đầu từ con số không.
+
 \subsubsection{Quá trình cải tiến}
 
 Sáng kiến không hoàn chỉnh ngay từ bản đầu tiên. Toàn bộ quá trình được ghi lại
@@ -357,7 +416,7 @@ cần thiết của Google; và xin nhầm quyền (quyền đăng \textit{bài 
 ngay trên màn hình thay vì im lặng \\ \hline
 \end{longtable}
 \end{center}
-\textit{Bảng 5. Những lần cải tiến đáng kể trong quá trình thực hiện}
+\textit{Bảng 6. Những lần cải tiến đáng kể trong quá trình thực hiện}
 
 Nhìn lại, hầu hết các lỗi đều thuộc một trong hai nhóm: \textit{giao cho trí
 tuệ nhân tạo việc lẽ ra phải do chương trình làm}, và \textit{không có cơ chế

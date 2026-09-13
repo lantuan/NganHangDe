@@ -50,6 +50,33 @@ Về lâu dài, nếu được tổ chuyên môn hưởng ứng, mỗi giáo vi�
 câu hỏi cho một vài bài mình dạy kĩ nhất thì ngân hàng chung của tổ sẽ lớn rất
 nhanh --- đây là mô hình làm việc mà tôi mong muốn hướng tới.
 
+\subsubsection{Tổ chức lại ngân hàng khi quy mô lớn lên}
+
+Khi ngân hàng vượt vài nghìn câu hỏi, việc tra cứu và chống trùng lặp sẽ thành
+vấn đề mới. Hướng xử lí dự kiến chia làm hai mức:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Mức 1 --- chỉ mục ngân hàng.} Một chương trình quét toàn bộ
+        thư mục câu hỏi và lập ra bảng tổng hợp: bài nào, mức độ nào đang
+        thiếu câu; mã nào có trong bảng ánh xạ nhưng chưa có hàm sinh; mỗi bài
+        hiện có bao nhiêu câu mỗi mức. Kèm theo là bộ dò các câu hỏi trùng
+        nghĩa. Mức này không cần công nghệ gì mới và là việc làm trước.
+  \item \textbf{Mức 2 --- tìm kiếm theo nghĩa.} Khi giáo viên cần tìm câu hỏi
+        mà không nhớ mã, có thể dùng kĩ thuật \textit{nhúng vecto}: mỗi câu hỏi
+        được biểu diễn thành một vecto trong không gian nhiều chiều sao cho hai
+        câu gần nhau về nghĩa thì hai vecto gần nhau, và việc tìm kiếm trở
+        thành tìm vecto có cô-sin góc lớn nhất. Cơ sở dữ liệu đang dùng đã hỗ
+        trợ sẵn kiểu dữ liệu này nên không phải dựng thêm hạ tầng.
+\end{itemize}
+
+Cần nói rõ để tránh hiểu nhầm: kĩ thuật vecto \textbf{không} thay thế cách chọn
+câu hiện tại. Việc chọn câu theo ma trận đòi hỏi đúng tuyệt đối về bài, mức độ
+và loại câu, nên phải tra theo mã định danh --- đó là tra từ điển, chính xác
+hoàn toàn. Tìm kiếm vecto chỉ cho kết quả gần đúng có xếp hạng, phù hợp với
+việc \textit{tìm}, không phù hợp với việc \textit{ra đề}. Vì vậy nếu triển
+khai, nó sẽ là một lớp tìm kiếm phụ đặt bên cạnh cho giáo viên dùng, chứ không
+nằm trong luồng sinh đề.
+
 \subsubsection{Chấm câu tự luận}
 
 Hiện phần tự luận 3 điểm học sinh làm ra giấy. Hướng phát triển là cho học sinh

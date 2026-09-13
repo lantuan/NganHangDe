@@ -2637,3 +2637,38 @@ SAU KHI DEPLOY BAN NAY, BAT BUOC:
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.45 - 2026-09-13
+
+## Bo sung so tay: tim kiem vecto va tai khoan giao vien
+
+Them 2 tai lieu moi (chua trien khai code, moi la danh gia + ke hoach):
+
+- docs/20_TIM_KIEM_VECTO.md - danh gia y tuong dua ngan hang de sang
+  "lap trinh vecto" (embedding). KET LUAN: KHONG tiet kiem token vi
+  luong chon cau hien tai khong goi AI lan nao; va KHONG duoc thay tra
+  ID bang tim vecto vi ma tran de doi hoi DUNG chu khong phai GAN DUNG.
+  Vecto chi dung duoc o 3 cho: o tim kiem cau hoi cho giao vien, do cau
+  trung nghia khi nhieu nguoi cung dong gop, va gia su AI (RAG).
+  Viec "de quan ly khi ngan hang lon" giai bang CHI MUC + bo do trung
+  (Giai doan 0, khong can vecto). Neu lam vecto thi dung pgvector co san
+  trong Supabase, va PHAI giu cac cot loc cung (lop/chuong/muc_do/
+  loai_cau) de vecto khong bao gio tra ve cau sai muc do.
+
+- docs/21_TAI_KHOAN_GIAO_VIEN.md - thiet ke + ke hoach 5 buoc.
+  Hai van de da kiem tra duoc trong ma nguon:
+  1. Cac route /gv/* chi kiem tra DA DANG NHAP, KHONG kiem tra vai tro
+     -> bat ky hoc sinh nao biet duong dan /gv/thong-ke deu xem duoc
+     diem ca lop. LO DU LIEU, phai sua truoc tien.
+  2. classroom_service.luu_refresh_token() ghi vao bang classroom_oauth
+     CHI 1 DONG (id=1) -> he thong chi phuc vu duoc DUNG 1 giao vien;
+     giao vien thu hai ket noi se ghi de token cua nguoi thu nhat.
+
+Khong sua code nao trong ban nay.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
