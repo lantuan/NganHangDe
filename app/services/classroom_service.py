@@ -30,7 +30,7 @@ import requests
 
 from app.core.config import GOOGLE_CLASSROOM_CLIENT_ID, GOOGLE_CLASSROOM_CLIENT_SECRET
 from app.core.lop_config import MA_LOP_CLASSROOM
-from app.core.supabase import supabase
+from app.core.supabase import supabase_admin as supabase
 from app.services import history_service
 
 GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth"

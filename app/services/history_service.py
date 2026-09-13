@@ -1,4 +1,4 @@
-from app.core.supabase import supabase
+from app.core.supabase import supabase_admin as supabase
 
 
 def luu_tin_nhan(user_id, conversation_id, role, noi_dung=None,

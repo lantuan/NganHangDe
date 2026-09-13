@@ -2789,3 +2789,77 @@ Con 12 tep *.b64 cung loai chua xoa - cho giao vien xac nhan.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.47 - 2026-09-13
+
+## VA LO HONG BAO MAT: khoa Supabase dung chung + tat RLS
+
+Phat hien khi doc trigger handle_new_user (dang tim xem cot profiles.role
+thua duoc ghi tu dau).
+
+VAN DE - hai diem ghep lai:
+1. app/core/supabase.py tao client bang SUPABASE_KEY, va CHINH bien do
+   duoc nhung vao trang dang nhap/dang ky duoi ten supabase_anon_key
+   (app/routers/auth.py). Ai xem ma nguon trang cung lay duoc.
+2. Moi bang trong schema public deu TAT Row Level Security (nhan do
+   UNRESTRICTED trong Supabase).
+
+HAU QUA: bat ky ai cung co the doc/ghi thang vao cac bang qua PostgREST:
+- Tu dat profiles.vai_tro = 'giao_vien' -> di vong qua ma moi, vao duoc
+  het /gv/* (lam hong luon hang rao vua dung o Version 2.46).
+- DOC refresh_token Google Classroom trong classroom_oauth /
+  classroom_oauth_gv - chia khoa vao tai khoan Google cua giao vien.
+- Doc diem moi hoc sinh (exam_history), sua diem cua chinh minh.
+- Doc email toan bo hoc sinh (classroom_roster).
+
+Lo hong co tu Version 2.4 (tat RLS cho nhanh) nhung chi thanh van de ro
+rang khi co phan quyen giao vien.
+
+SUA:
+- app/core/config.py: them SUPABASE_SERVICE_KEY.
+- app/core/supabase.py: tach LAM HAI client.
+    supabase       = khoa anon  -> CHI xac thuc
+    supabase_admin = khoa service_role -> MOI thao tac bang
+  Chua dat SUPABASE_SERVICE_KEY thi tam lui ve khoa anon + in canh bao
+  that to, de deploy khong lam chet web ngay.
+- Doi sang supabase_admin: profile_service.py, history_service.py,
+  classroom_service.py (ca file), supabase_service.py (2 ham doc/ghi
+  profiles; phan sign_in/sign_up/get_user giu khoa anon).
+- app/routers/auth.py va app/core/deps.py giu khoa anon - chi goi
+  supabase.auth.*, khong dung .table().
+- sql/22_bat_rls.sql (MOI): bat RLS cho MOI bang trong schema public
+  bang vong lap, khong tao policy nao.
+- docs/22_BAO_MAT_RLS.md (MOI): mo ta lo hong, cach va, thu tu thuc hien.
+
+VI SAO KHONG CAN VIET POLICY CHI TIET: da kiem tra toan bo
+app/templates/ - trinh duyet KHONG co mot lenh .from() hay .rpc() nao,
+supabase-js phia trinh duyet chi dung de XAC THUC. Moi nghiep vu deu di
+qua FastAPI dung nhu quy tac trong docs/13. Nen bat RLS khong policy la
+du, va it rui ro nhat.
+
+THU TU BAT BUOC (lam sai thu tu la web chet):
+  1. Lay khoa service_role o Supabase > Project Settings > API Keys
+  2. Them SUPABASE_SERVICE_KEY vao .env tren VPS
+  3. git pull + systemctl restart nganhangde
+  4. Thu web: dang nhap, tao de, /gv/thong-ke - phai chay
+  5. Chay sql/22_bat_rls.sql
+  6. Thu web lai lan nua
+  7. DOI refresh_token Classroom (xem docs/22 muc 4) - khoa anon da cong
+     khai lau nay nen phai coi nhu token da lo.
+
+## Don dep kem theo
+
+Cot profiles.role la cot THUA - khong mot dong code nao doc no. Trigger
+handle_new_user cung KHONG ghi no (chi ghi id, email, ho_ten); gia tri
+"student" la do DEFAULT cua cot. Doi ten thanh role_cu_khong_dung, mot
+tuan sau khong gay gi thi drop han. Phan biet 3 chu "role" khac nghia:
+  profiles.role      -> thua, khong dung
+  de_da_sinh.role    -> student/teacher, quyet dinh xuat kem loi giai
+  chat_history.role  -> user/assistant, ai noi cau do
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

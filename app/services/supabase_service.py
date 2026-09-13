@@ -1,4 +1,9 @@
-from app.core.supabase import supabase
+"""
+Xac thuc dung khoa anon (supabase), doc/ghi bang dung khoa service role
+(supabase_admin). Xem chu thich dau app/core/supabase.py.
+"""
+
+from app.core.supabase import supabase, supabase_admin
 
 
 def sign_up(fullname: str, email: str, password: str,
@@ -65,7 +70,7 @@ def lay_lop_hoc_sinh(user_id: str):
     """
     try:
         ket_qua = (
-            supabase.table("profiles")
+            supabase_admin.table("profiles")
             .select("khoi, lop")
             .eq("id", user_id)
             .single()
@@ -82,7 +87,7 @@ def cap_nhat_lop_hoc_sinh(user_id: str, khoi: str, lop: str):
     Ghi khoi/lop hoc sinh tu chon vao public.profiles.
     """
     return (
-        supabase.table("profiles")
+        supabase_admin.table("profiles")
         .update({"khoi": khoi, "lop": lop})
         .eq("id", user_id)
         .execute()

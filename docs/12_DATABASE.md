@@ -234,3 +234,41 @@ chủ, tuyệt đối không để lộ ra Frontend.
 
 Dùng để biết khi học sinh nộp bài thì lấy kết nối Classroom của giáo viên
 nào. Lớp chưa gán → `classroom_service` tự lui về bảng `classroom_oauth` cũ.
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Row Level Security (Version 2.47)
+
+Trước đây mọi bảng trong schema `public` đều TẮT RLS (nhãn đỏ
+`UNRESTRICTED` trong Supabase). Cộng với việc máy chủ dùng chung khoá anon
+với trình duyệt, bất kỳ ai cũng đọc/ghi được mọi bảng. Chi tiết lỗ hổng và
+cách vá: **docs/22_BAO_MAT_RLS.md**.
+
+Nay: **mọi bảng đều bật RLS và không có policy nào**. Khoá anon không truy
+cập được bảng nào; máy chủ dùng khoá `service_role` (bỏ qua RLS).
+
+Quy tắc từ nay: **bảng mới tạo ra phải bật RLS ngay lúc tạo.**
+
+    alter table <tên bảng> enable row level security;
+
+Câu kiểm tra nhanh xem có bảng nào sót:
+
+    select tablename, rowsecurity from pg_tables
+    where schemaname = 'public' order by rowsecurity, tablename;
+
+## profiles.role — cột thừa
+
+Không mã nào đọc. Trigger `handle_new_user` cũng không ghi (chỉ ghi `id`,
+`email`, `ho_ten`) — giá trị `"student"` là do DEFAULT của cột. Đã đổi tên
+thành `role_cu_khong_dung`, sẽ xoá hẳn sau khi chạy thử một tuần.
+
+Ba chữ `role` trong hệ thống mang ba nghĩa khác nhau, đừng nhầm:
+
+| Cột | Giá trị | Nghĩa |
+|---|---|---|
+| `profiles.role` | `student` | Thừa, không dùng (đã đổi tên) |
+| `de_da_sinh.role` | `student` / `teacher` | Sinh đề có kèm lời giải hay không |
+| `chat_history.role` | `user` / `assistant` | Ai nói câu đó |
+
+Vai trò người dùng thật nằm ở **`profiles.vai_tro`**.

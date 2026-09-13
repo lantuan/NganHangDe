@@ -12,7 +12,7 @@ khong vao duoc /gv/*. Ham lay_vai_tro() phan biet ro 2 truong hop:
   nhung bao loi ro rang de biet duong chay SQL, khong im lang).
 """
 
-from app.core.supabase import supabase
+from app.core.supabase import supabase_admin as supabase
 
 VAI_TRO_MAC_DINH = "hoc_sinh"
 VAI_TRO_CHUA_CAU_HINH = "chua_cau_hinh"
