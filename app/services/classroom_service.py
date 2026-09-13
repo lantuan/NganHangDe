@@ -67,8 +67,8 @@ SCOPES = (
 # (reason: ACCESS_TOKEN_SCOPE_INSUFFICIENT) - da gap that ngay 13/09.
 # Them 2 scope tren de dang bai (de/bai giai/diem) len "Bai tap tren lop"
 # rieng cho tung hoc sinh sau khi lam bai online (xem
-# dang_ket_qua_len_classroom o cuoi file). classroom.coursework.students:
-# tao/xoa courseWorkMaterial. drive.file: tai PDF len Drive cua giao vien
+# dang_ket_qua_len_classroom o cuoi file).
+# drive.file: tai PDF len Drive cua giao vien
 # (app chi thay duoc file no tu tao ra, khong dong den file khac trong
 # Drive that). LUU Y: doi scope nhu the nay thi PHAI vao lai Google Cloud
 # Console > Data Access them 2 scope moi, ROI lam lai /gv/classroom/connect

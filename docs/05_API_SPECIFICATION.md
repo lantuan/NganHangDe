@@ -461,3 +461,33 @@ Lỗi: 404 nếu không tìm thấy đề; 410 nếu file .tex đã bị dọn (
 POST /api/exam/export-loigiai giữ nguyên như cũ (theo conversation_id,
 lấy đề mới nhất) — n8n và luồng chat cũ không phải sửa gì.
 
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Đăng kết quả lên Classroom (Version 2.43 → 2.44)
+
+POST /api/chat/dang-classroom
+
+Body:
+
+    {
+      "de_id": "...",
+      "hoc_sinh_id": "...",
+      "diem_so": 7.5,
+      "diem_toi_da": 10
+    }
+
+`diem_toi_da` (mới ở 2.43) do trang làm bài gửi lên theo thang điểm thật
+của đề — xem `diem_service.tinh_thang_diem`. Không gửi thì Classroom
+hiển thị mặc định `/10`, có thể sai khi đề thiếu phần.
+
+Response luôn có `thanh_cong` + `thong_bao`; trang làm bài đọc JSON này
+và hiện vào ô `#trang-thai-classroom` (trước 2.43 lỗi bị nuốt im lặng).
+
+Endpoint này gọi `classroom_service.dang_ket_qua_len_classroom`, bên
+trong dùng `courses.courseWorkMaterials` (Classroom API) + upload PDF
+(Drive API). Vì vậy tài khoản giáo viên phải cấp đủ 6 scope và project
+Google Cloud phải bật CẢ Classroom API lẫn Drive API — chi tiết, bảng
+scope và quy trình xin lại refresh_token xem docs/14_DEPLOYMENT.md mục
+"Cập nhật 2026-09-13".

@@ -179,6 +179,8 @@ Client đang dùng cho nút "Đăng nhập bằng Google" qua Supabase (2 Client
 - Scope: classroom.rosters, classroom.profile.emails,
   classroom.courses.readonly (đủ 3 scope — chi tiết lý do từng scope
   xem docs/16_CHANGELOG.md Version 2.20/2.21).
+  >>> ĐÃ THAY ĐỔI: từ Version 2.44 cần 6 scope và phải bật thêm Google
+  >>> Drive API. Xem mục "Cập nhật 2026-09-13" ở cuối file này.
 - Authorized redirect URI: https://nganhangdechv.tech/gv/classroom/callback
 - App đang ở chế độ Testing (chưa verify với Google) — CHỈ tài khoản
   được thêm làm Test user mới kết nối được; tài khoản khác bị Google
@@ -191,3 +193,68 @@ Google KHÔNG cho phép thêm thẳng học sinh vào lớp qua API
 domain Google Workspace for Education. Vì Classroom ở đây dùng tài
 khoản Gmail cá nhân, tính năng chỉ dừng ở mức tạo link + mã lớp để học
 sinh tự tham gia (xem docs/16_CHANGELOG.md Version 2.22).
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Classroom: scope + Drive API (Version 2.43 → 2.44)
+
+Mục 2026-08-16 ở trên viết "đủ 3 scope" — điều đó CHỈ đúng khi tính năng
+mới dừng ở đồng bộ danh sách lớp. Từ Version 2.43 hệ thống còn phải ĐĂNG
+đề + đáp án + điểm lên Classroom, nên cấu hình bắt buộc thay đổi như sau.
+
+## 6 scope hiện tại (app/services/classroom_service.py, hằng SCOPES)
+
+| Scope | Dùng để làm gì |
+|---|---|
+| classroom.rosters | đọc danh sách học sinh trong lớp |
+| classroom.profile.emails | lấy email học sinh để khớp với profiles |
+| classroom.courses.readonly | liệt kê lớp của giáo viên |
+| classroom.coursework.students | courses.courseWork — bài tập CÓ hạn nộp |
+| classroom.courseworkmaterials | courses.courseWorkMaterials — TÀI LIỆU |
+| drive.file | tải PDF lên Drive của giáo viên (chỉ file app tự tạo) |
+
+Hai scope coursework Google tách RIÊNG, không bao nhau. Hàm
+`_tao_coursework_material()` gọi `.../courses/{id}/courseWorkMaterials`
+nên bắt buộc phải có `classroom.courseworkmaterials`. Thiếu nó Google
+trả về 403 `"Request had insufficient authentication scopes"`
+(reason: `ACCESS_TOKEN_SCOPE_INSUFFICIENT`) — lỗi thật gặp ngày 13/09.
+
+## Google Cloud Console — phải bật CẢ HAI API
+
+- Google Classroom API
+- **Google Drive API** — dễ quên. Thiếu nó, VPS log ra 403
+  `"Google Drive API has not been used in project 299388243103 before
+  or it is disabled"`. Bật ở Console > APIs & Services > Library, chờ
+  khoảng 1–2 phút cho lan truyền rồi thử lại.
+
+Project Google Cloud đang dùng: **299388243103**.
+
+## Quy trình BẮT BUỘC mỗi khi đổi scope
+
+Đổi scope trong code là CHƯA đủ. refresh_token cũ chỉ mang quyền cũ, có
+pull code mới vẫn 403 y như trước. Phải làm đủ 3 bước, đúng thứ tự:
+
+1. Deploy code mới lên VPS (git pull + `systemctl restart nganhangde`).
+2. Console > APIs & Services > **Data Access** (OAuth consent screen) >
+   Add or remove scopes > thêm scope mới > Update > Save.
+3. Vào lại `https://nganhangdechv.tech/gv/classroom/connect`, bấm đồng ý
+   quyền lại từ đầu để Google cấp refresh_token MỚI. Bảng `profiles`
+   ghi đè token cũ.
+
+Bỏ bước 3 là nguyên nhân phổ biến nhất của "đã sửa rồi mà vẫn 403".
+
+## Cách đọc lỗi khi đăng không lên
+
+Từ Version 2.43 trang làm bài có ô `#trang-thai-classroom` hiện lý do
+ngay trên web thay vì im lặng. Log chi tiết vẫn ở VPS:
+
+    journalctl -u nganhangde -f | grep -i classroom
+
+Ba lỗi đã gặp và cách phân biệt:
+
+- `403 ... has not been used in project` → chưa bật Drive API (bước Console).
+- `403 ACCESS_TOKEN_SCOPE_INSUFFICIENT` → thiếu scope, hoặc còn dùng
+  refresh_token cũ (làm lại bước 2 + 3).
+- Không thấy dòng log nào → request chưa tới router, xem lại phía
+  frontend/`/api/chat/dang-classroom`.
