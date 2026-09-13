@@ -1,19 +1,28 @@
 from app.core.supabase import supabase
 
 
-def sign_up(fullname: str, email: str, password: str):
+def sign_up(fullname: str, email: str, password: str,
+            vai_tro: str = "hoc_sinh", **them):
     """
-    Đăng ký tài khoản mới trên Supabase Auth
+    Đăng ký tài khoản mới trên Supabase Auth.
+
+    vai_tro: 'hoc_sinh' (mặc định) hoặc 'giao_vien'. Giá trị này đi vào
+    user_metadata để trigger handle_new_user ghi xuống profiles.vai_tro.
+    Tuy nhiên KHÔNG phụ thuộc vào trigger: sau khi đăng ký, router còn
+    gọi profile_service.dat_vai_tro() một lần nữa cho chắc.
+
+    **them: các trường phụ (truong, to_chuyen_mon...) ghi kèm metadata.
     """
+
+    du_lieu = {"fullname": fullname, "vai_tro": vai_tro}
+    du_lieu.update({k: v for k, v in them.items() if v})
 
     return supabase.auth.sign_up(
         {
             "email": email,
             "password": password,
             "options": {
-                "data": {
-                    "fullname": fullname
-                }
+                "data": du_lieu
             }
         }
     )

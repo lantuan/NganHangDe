@@ -51,3 +51,65 @@ def get_current_user(request: Request):
 
     request.state.new_session = session
     return session.user
+
+
+# ======================================================
+# PHAN QUYEN (them 2026-09-13)
+# Truoc day moi route /gv/* chi kiem tra DA DANG NHAP, khong kiem tra
+# vai tro -> bat ky hoc sinh nao biet duong dan /gv/thong-ke deu xem
+# duoc diem ca lop. Hai ham duoi day de chan o TANG SERVER (khong chi
+# an nut tren giao dien). Xem docs/21_TAI_KHOAN_GIAO_VIEN.md.
+# ======================================================
+
+def lay_vai_tro(request: Request, user=None) -> str:
+    """
+    Tra ve vai tro cua nguoi dang dang nhap: 'khach' | 'hoc_sinh' |
+    'giao_vien' | 'quan_tri' | 'chua_cau_hinh'.
+    Truyen san `user` neu da goi get_current_user() truoc do, de khong
+    phai xac thuc 2 lan (moi lan la 1 luot goi sang Supabase).
+    """
+    from app.services import profile_service  # import tre: tranh vong lap import
+
+    if user is None:
+        user = get_current_user(request)
+    if user is None:
+        return "khach"
+    return profile_service.lay_vai_tro(user.id)
+
+
+def yeu_cau_giao_vien(request: Request, user=None):
+    """
+    Dat o dau MOI route /gv/*:
+
+        chan = yeu_cau_giao_vien(request, user)
+        if chan is not None:
+            return chan
+
+    Tra ve None neu du quyen. Neu chua dang nhap -> RedirectResponse ve
+    /login. Neu da dang nhap nhung khong phai giao vien -> raise 403.
+    """
+    from fastapi import HTTPException
+    from fastapi.responses import RedirectResponse
+    from app.services import profile_service
+
+    vai_tro = lay_vai_tro(request, user)
+
+    if vai_tro == "khach":
+        return RedirectResponse("/login", status_code=303)
+
+    if vai_tro == profile_service.VAI_TRO_CHUA_CAU_HINH:
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "Chua co cot profiles.vai_tro. Chay doan SQL o Buoc 1 trong "
+                "docs/21_TAI_KHOAN_GIAO_VIEN.md roi thu lai."
+            ),
+        )
+
+    if vai_tro not in profile_service.VAI_TRO_GIAO_VIEN:
+        raise HTTPException(
+            status_code=403,
+            detail="Chuc nang nay danh rieng cho tai khoan giao vien.",
+        )
+
+    return None

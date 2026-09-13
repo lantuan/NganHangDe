@@ -244,3 +244,41 @@ def lay_thong_ke_nang_luc(khoi=None, lop=None):
             "created_at": r.get("created_at"),
         })
     return ket_qua_cuoi
+
+
+def lay_de_cua_giao_vien(user_id, limit=50):
+    """
+    Danh sach de ma MOT giao vien da tao (khu lam viec giao vien,
+    GET /gv/de-da-tao). Kem duong dan cac file da co de biet con tai
+    duoc PDF / loi giai / .tex hay khong.
+    """
+    try:
+        de_result = (
+            supabase.table("de_da_sinh")
+            .select("*")
+            .eq("user_id", user_id)
+            .order("created_at", desc=True)
+            .limit(limit)
+            .execute()
+        )
+        danh_sach = de_result.data or []
+        if not danh_sach:
+            return []
+
+        ids = [d["id"] for d in danh_sach]
+        files_result = (
+            supabase.table("file_de")
+            .select("de_id, loai_file, duong_dan")
+            .in_("de_id", ids)
+            .execute()
+        )
+        theo_de: dict = {}
+        for f in files_result.data or []:
+            theo_de.setdefault(f["de_id"], {})[f["loai_file"]] = f["duong_dan"]
+
+        for d in danh_sach:
+            d["files"] = theo_de.get(d["id"], {})
+        return danh_sach
+    except Exception as e:
+        print("LOI LAY DE CUA GIAO VIEN:", e)
+        return []

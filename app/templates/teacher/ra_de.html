@@ -1,0 +1,129 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Ra đề{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Ra đề kiểm tra</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Ma trận lấy theo bảng cấu hình của loại bài kiểm tra. Đặt số mã đề lớn hơn 1 để
+nhận nhiều đề cùng cấu trúc, cùng đơn vị kiến thức, chỉ khác số liệu.
+</p>
+
+{% if loi %}
+<div class="mb-stack-lg rounded-xl bg-red-100 border border-red-300 p-stack-md text-red-700 font-body-md text-body-md">
+{{ loi }}
+</div>
+{% endif %}
+
+<form method="post" action="/gv/ra-de" id="form-ra-de"
+      class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl soft-shadow p-stack-lg space-y-stack-md">
+
+<div>
+<label class="block font-medium mb-unit" for="tieu_de">Tiêu đề đề thi</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl"
+       id="tieu_de" name="tieu_de" type="text" value="ĐỀ KIỂM TRA MÔN TOÁN"/>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div>
+<label class="block font-medium mb-unit" for="lop">Lớp</label>
+<select class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl" id="lop" name="lop">
+<option value="10">Lớp 10</option>
+<option value="11">Lớp 11</option>
+<option value="12">Lớp 12</option>
+</select>
+</div>
+<div>
+<label class="block font-medium mb-unit" for="socau_ma_de">Số mã đề</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl"
+       id="socau_ma_de" name="socau_ma_de" type="number" min="1" max="8" value="1"/>
+</div>
+</div>
+
+<div>
+<label class="block font-medium mb-unit" for="ki_thi">Loại bài kiểm tra</label>
+<select class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl" id="ki_thi" name="ki_thi">
+{% for ma, nhan in ki_thi_hien_thi %}
+<option value="{{ ma }}">{{ nhan }}</option>
+{% endfor %}
+</select>
+</div>
+
+<div id="o-chuong">
+<label class="block font-medium mb-unit" for="pham_vi_chuong">Chương</label>
+<select class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl" id="pham_vi_chuong" name="pham_vi_chuong">
+<option value="">Đang tải danh sách chương…</option>
+</select>
+<p class="text-sm text-on-surface-variant mt-unit">Chương chưa có ngân hàng câu hỏi sẽ được ghi chú trong danh sách.</p>
+</div>
+
+<div class="flex items-start gap-stack-sm">
+<input class="mt-1" id="cho_phep_thieu" name="cho_phep_thieu" type="checkbox" value="1" checked/>
+<label class="font-body-md text-body-md text-on-surface-variant" for="cho_phep_thieu">
+Cho phép chế độ nháp: nếu ngân hàng chưa đủ câu cho một ô của ma trận thì chèn
+dòng <span class="font-mono">[THIẾU CÂU HỎI]</span> vào đúng vị trí thay vì báo lỗi
+và không ra được đề. Bỏ dấu tích nếu cần đề hoàn chỉnh để in phát cho học sinh.
+</label>
+</div>
+
+<div class="pt-stack-md">
+<button id="nut-tao" class="w-full bg-primary-container text-white py-stack-md rounded-2xl font-semibold text-lg hover:opacity-90 transition-all" type="submit">
+Tạo đề
+</button>
+<p class="text-sm text-on-surface-variant mt-stack-sm text-center">
+Hệ thống phải biên dịch LaTeX ra PDF nên mất khoảng 30–60 giây cho mỗi mã đề.
+Đừng bấm lại nhiều lần.
+</p>
+</div>
+
+</form>
+
+<script>
+const oChuong = document.getElementById('o-chuong');
+const selectChuong = document.getElementById('pham_vi_chuong');
+const selectLop = document.getElementById('lop');
+const selectKiThi = document.getElementById('ki_thi');
+
+// Chuong chi can khi kiem tra thuong xuyen (he so 1).
+function capNhatHienThiChuong() {
+    oChuong.style.display = (selectKiThi.value === 'thuong_xuyen') ? '' : 'none';
+}
+
+async function napDanhSachChuong() {
+    selectChuong.innerHTML = '<option value="">Đang tải…</option>';
+    try {
+        const res = await fetch('/api/exam/danh-sach-chuong?lop=' + selectLop.value);
+        const data = await res.json();
+        // GET /api/exam/danh-sach-chuong tra ve
+        // {success, data: [{chuong_so, ten_chuong, co_du_cau}]}
+        const ds = data.data || [];
+        selectChuong.innerHTML = '';
+        ds.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = 'chuong_' + c.chuong_so;
+            opt.textContent = 'Chương ' + c.chuong_so + '. ' + (c.ten_chuong || '')
+                + (c.co_du_cau ? '' : '  (chưa có ngân hàng câu hỏi)');
+            selectChuong.appendChild(opt);
+        });
+        if (!ds.length) {
+            selectChuong.innerHTML = '<option value="">Chưa có dữ liệu chương cho lớp này</option>';
+        }
+    } catch (e) {
+        selectChuong.innerHTML = '<option value="">Không tải được danh sách chương</option>';
+    }
+}
+
+selectLop.addEventListener('change', napDanhSachChuong);
+selectKiThi.addEventListener('change', capNhatHienThiChuong);
+
+// Chan bam nut 2 lan (moi lan bam la mot lan bien dich LaTeX).
+document.getElementById('form-ra-de').addEventListener('submit', () => {
+    const nut = document.getElementById('nut-tao');
+    nut.disabled = true;
+    nut.textContent = 'Đang tạo đề, vui lòng chờ…';
+});
+
+capNhatHienThiChuong();
+napDanhSachChuong();
+</script>
+
+{% endblock %}

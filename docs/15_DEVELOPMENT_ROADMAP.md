@@ -160,3 +160,29 @@ bằng ảnh chụp phiếu/bài làm THẬT (chờ có bản in).
 Mọi Business Logic chuyển dần sang FastAPI/Code Node. n8n chỉ giữ
 vai trò Orchestrator. Toàn hệ thống chỉ dùng 3 AI: CHV_Fun,
 CHV_Grader, CHV_Analyzer.
+
+
+===============================================================================
+
+# CẬP NHẬT 2026-09-13 — Tài khoản giáo viên (Version 2.46)
+
+Mục "Quản lý lớp học / quản lý tài khoản" và "Dashboard giáo viên" trong các
+giai đoạn ở trên nay đã có phần thật, không còn là TODO hoàn toàn:
+
+| | Nội dung | Trạng thái |
+|---|---|---|
+|9.1|Phân quyền `vai_tro`, chặn `/gv/*`|✅|
+|9.2|Đăng ký tài khoản giáo viên (mã mời)|✅|
+|9.3|Mỗi giáo viên một kết nối Google Classroom|✅|
+|9.4|Khu làm việc giáo viên (`/gv`, ra đề, đề đã tạo, lớp)|✅|
+|9.5|Tải mã nguồn `.tex` của đề|✅|
+|9.6|Sinh một lượt NHIỀU MÃ ĐỀ riêng biệt|🟡 ô nhập đã có, ghép đề còn sai|
+|9.7|Màn hình gán lớp cho giáo viên|⬜ hiện gán bằng SQL|
+|9.8|Đặt ma trận chi tiết cho từng đề|⬜|
+
+## Việc tiếp theo (thứ tự đề nghị)
+
+1. Sửa 9.6 — tách `socau_ma_de` thành N đề riêng thay vì dồn vào một đề.
+2. Mở rộng ngân hàng câu hỏi sang chương 2, 3 của lớp 10, ưu tiên dạng trả
+   lời ngắn mức vận dụng cao (đang là ô mỏng nhất của ma trận).
+3. Chỉ mục ngân hàng + bộ dò trùng (Giai đoạn 0 trong docs/20).

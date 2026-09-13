@@ -13,6 +13,7 @@ from app.routers import data
 from app.routers import exam
 
 from app.routers import classroom
+from app.routers import teacher
 
 app = FastAPI(title="Ngân Hàng Đề AI")
 
@@ -27,6 +28,7 @@ app.include_router(data.router)
 app.include_router(exam.router)
 
 app.include_router(classroom.router)
+app.include_router(teacher.router)
 
 
 @app.middleware("http")

@@ -170,3 +170,32 @@ KHÔNG còn đúng nữa. Đã có:
 
 Vẫn CHƯA có: Phân tích học tập (CHV_Analyzer, WF003), nút "Luyện tập
 ngay", Dashboard học sinh, quản lý tài khoản.
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Khu làm việc giáo viên (Version 2.46)
+
+Mục "Dashboard giáo viên" ở đầu tài liệu này (Danh sách lớp, danh sách học
+sinh, thống kê, quản lý đề) trước đây mới có đúng một mảnh là `/gv/thong-ke`.
+Nay đã có khu làm việc thật:
+
+- `app/templates/teacher/_base_gv.html` — khung chung, thanh điều hướng
+  Trang chính / Ra đề / Đề đã tạo / Lớp / Thống kê / Chat AI.
+- `khu_lam_viec.html` (`/gv`) — ba thẻ lối tắt, cảnh báo nếu chưa kết nối
+  Google Classroom, bảng 5 đề tạo gần đây.
+- `ra_de.html` (`/gv/ra-de`) — biểu mẫu ra đề: lớp, loại bài kiểm tra,
+  chương (chỉ hiện khi chọn kiểm tra thường xuyên), **số mã đề**, chế độ
+  nháp. Danh sách chương nạp động từ `/api/exam/danh-sach-chuong` và ghi chú
+  chương nào chưa có ngân hàng câu hỏi. Nút bấm tự khoá sau lần bấm đầu
+  (mỗi lần bấm là một lần biên dịch LaTeX).
+- `de_da_tao.html` (`/gv/de-da-tao`) — bảng đề đã tạo, tải PDF đề / PDF lời
+  giải / mã nguồn `.tex`.
+- `lop.html` (`/gv/lop`) — lớp nào đã có mã Classroom, lớp nào của mình.
+
+Thêm `app/templates/layouts/tailwind_head.html`: khối `<head>` dùng chung
+(Tailwind CDN + bảng màu + font), để trang mới không phải chép lại ~120 dòng
+cấu hình. Các trang cũ giữ nguyên, không đụng tới.
+
+VẪN CHƯA CÓ: màn hình tự gán lớp cho giáo viên (hiện làm bằng SQL), dashboard
+học sinh, phân tích học tập (CHV_Analyzer), nút "Luyện tập ngay".

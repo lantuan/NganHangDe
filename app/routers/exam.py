@@ -2,7 +2,7 @@ import json
 import zipfile
 from pathlib import Path
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
@@ -20,6 +20,7 @@ from app.services.exam_assembler_service import (
     AssembleError,
 )
 
+from app.core.deps import yeu_cau_giao_vien
 from app.services import history_service
 from app.services import diem_service
 from app.services.answer_parser_service import (
@@ -465,6 +466,44 @@ def tai_de_endpoint(de_id: str):
         path=duong_dan,
         filename="de_thi.pdf",
         media_type="application/pdf",
+    )
+
+
+# ======================================================
+# TAI MA NGUON LATEX CUA DE (CHI GIAO VIEN)
+#
+# Giao vien quen dung LaTeX muon lay file .tex ve tu chinh: them mot cau
+# rieng, doi cach trinh bay, ghep vao mau de cua truong. He thong da luu
+# san file .tex ngay luc sinh de (file_de, loai_file="tex") nen chi viec
+# tra ve - KHONG sinh lai de, de file .tex luon dung khop voi ban PDF da
+# phat. Xem docs/21_TAI_KHOAN_GIAO_VIEN.md Buoc 5.
+#
+# Hoc sinh KHONG duoc tai: file .tex chua ca \loigiai (loi giai chi
+# tiet) va cac dau \True danh dau phuong an dung.
+# ======================================================
+
+@router.get("/tai-tex/{de_id}")
+def tai_tex_endpoint(de_id: str, request: Request):
+    chan = yeu_cau_giao_vien(request)
+    if chan is not None:
+        return chan
+
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+
+    duong_dan = de.get("files", {}).get("tex")
+    if not duong_dan or not Path(duong_dan).exists():
+        raise HTTPException(
+            410,
+            "File .tex cua de nay da bi don (cron xoa sau 1 ngay). "
+            "Tao lai de roi tai .tex ngay trong phien do.",
+        )
+
+    return FileResponse(
+        path=duong_dan,
+        filename=f"de_{de_id[:8]}.tex",
+        media_type="application/x-tex",
     )
 
 

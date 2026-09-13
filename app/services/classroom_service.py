@@ -135,8 +135,40 @@ def lam_moi_access_token(refresh_token: str) -> str:
     return res.json()["access_token"]
 
 
-def luu_refresh_token(refresh_token: str):
-    """Ghi de refresh_token vao bang public.classroom_oauth (chi 1 dong, id=1)."""
+# ---------------------------------------------------------------------
+# LUU / DOC REFRESH TOKEN
+#
+# SUA 2026-09-13: truoc day toan he thong dung DUNG 1 dong (bang
+# classroom_oauth, id=1) -> giao vien thu hai bam ket noi la GHI DE
+# token cua giao vien thu nhat, va tu do bai cua hoc sinh dang nham
+# sang Classroom cua nguoi kia. Nay moi giao vien mot dong trong bang
+# classroom_oauth_gv (khoa chinh user_id), va moi lop duoc gan cho mot
+# giao vien trong bang lop_giao_vien.
+#
+# Ca hai bang tren duoc tao bang SQL (docs/21_TAI_KHOAN_GIAO_VIEN.md
+# Buoc 3). TRUOC khi chay SQL do, moi ham duoi day tu dong lui ve bang
+# classroom_oauth cu - nghia la deploy ban nay khong lam hong gi, he
+# thong van chay nhu truoc cho toi khi chay SQL.
+# ---------------------------------------------------------------------
+
+def luu_refresh_token(refresh_token: str, user_id: str | None = None,
+                      email_google: str | None = None):
+    """
+    Ghi refresh_token cho MOT giao vien (user_id). Neu khong truyen
+    user_id, hoac bang moi chua ton tai, thi ghi vao bang cu (1 dong).
+    """
+    if user_id:
+        try:
+            supabase.table("classroom_oauth_gv").upsert({
+                "user_id": user_id,
+                "refresh_token": refresh_token,
+                "email_google": email_google,
+                "updated_at": _thoi_gian_hien_tai(),
+            }).execute()
+            return
+        except Exception as e:
+            print("LOI GHI classroom_oauth_gv (da chay SQL Buoc 3 chua?):", e)
+
     supabase.table("classroom_oauth").upsert({
         "id": 1,
         "refresh_token": refresh_token,
@@ -144,8 +176,8 @@ def luu_refresh_token(refresh_token: str):
     }).execute()
 
 
-def lay_refresh_token():
-    """Doc refresh_token da luu, None neu chua ket noi Classroom lan nao."""
+def _lay_refresh_token_cu():
+    """Doc refresh_token o bang cu (1 dong, id=1). Duong lui."""
     try:
         ket_qua = (
             supabase.table("classroom_oauth")
@@ -156,8 +188,57 @@ def lay_refresh_token():
         )
         return ket_qua.data.get("refresh_token") if ket_qua.data else None
     except Exception as e:
-        print("LOI DOC REFRESH TOKEN CLASSROOM:", e)
+        print("LOI DOC REFRESH TOKEN CLASSROOM (bang cu):", e)
         return None
+
+
+def lay_refresh_token(user_id: str | None = None):
+    """
+    Doc refresh_token. Co user_id thi doc dung cua giao vien do; khong
+    co (hoac chua co du lieu) thi lui ve bang cu.
+    """
+    if user_id:
+        try:
+            ket_qua = (
+                supabase.table("classroom_oauth_gv")
+                .select("refresh_token")
+                .eq("user_id", user_id)
+                .single()
+                .execute()
+            )
+            if ket_qua.data and ket_qua.data.get("refresh_token"):
+                return ket_qua.data["refresh_token"]
+        except Exception as e:
+            print(f"LOI DOC classroom_oauth_gv (user_id={user_id}):", e)
+
+    return _lay_refresh_token_cu()
+
+
+def lay_giao_vien_cua_lop(khoi: str, lop: str) -> str | None:
+    """Tra ve user_id cua giao vien phu trach lop, None neu chua gan."""
+    try:
+        ket_qua = (
+            supabase.table("lop_giao_vien")
+            .select("user_id")
+            .eq("khoi", khoi)
+            .eq("lop", lop)
+            .single()
+            .execute()
+        )
+        return ket_qua.data.get("user_id") if ket_qua.data else None
+    except Exception as e:
+        print(f"LOI DOC lop_giao_vien ({khoi}-{lop}):", e)
+        return None
+
+
+def lay_refresh_token_theo_lop(khoi: str, lop: str):
+    """
+    Dung cho cac ham chay trong ngu canh HOC SINH (dang bai, ghi danh,
+    tao link tham gia lop): tra ra token cua dung giao vien phu trach
+    lop do. Chua gan giao vien cho lop thi lui ve bang cu.
+    """
+    user_id = lay_giao_vien_cua_lop(khoi, lop)
+    return lay_refresh_token(user_id)
 
 
 def _lay_danh_sach_hoc_sinh_1_lop(access_token: str, course_id: str) -> list[dict]:
@@ -196,7 +277,7 @@ def _lay_danh_sach_hoc_sinh_1_lop(access_token: str, course_id: str) -> list[dic
     return hoc_sinh
 
 
-def dong_bo_toan_bo() -> dict:
+def dong_bo_toan_bo(user_id: str | None = None) -> dict:
     """
     Dong bo TOAN BO danh sach email hoc sinh tu Classroom (dung
     MA_LOP_CLASSROOM) vao bang public.classroom_roster. An toan chay
@@ -204,7 +285,7 @@ def dong_bo_toan_bo() -> dict:
     can vao lai /gv/classroom/sync). Tra ve dict thong ke
     {"khoi-lop": so_luong_email} de kiem tra bang mat.
     """
-    refresh_token = lay_refresh_token()
+    refresh_token = lay_refresh_token(user_id)
     if not refresh_token:
         raise RuntimeError("Chua ket noi Classroom - vao /gv/classroom/connect truoc.")
 
@@ -330,7 +411,7 @@ def tu_dong_ghi_danh_classroom(email: str, khoi: str, lop: str) -> dict:
     if not course_id:
         return {"success": False, "message": f"Chưa có mã lớp Classroom cho {khoi}-{lop}."}
 
-    refresh_token = lay_refresh_token()
+    refresh_token = lay_refresh_token_theo_lop(khoi, lop)
     if not refresh_token:
         return {"success": False, "message": "Chưa kết nối Classroom (vào /gv/classroom/connect)."}
 
@@ -460,7 +541,7 @@ def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: s
     if not duong_dan_de or not Path(duong_dan_de).exists():
         return {"success": False, "message": "Không tìm thấy file đề để đăng lên Classroom."}
 
-    refresh_token = lay_refresh_token()
+    refresh_token = lay_refresh_token_theo_lop(khoi, lop)
     if not refresh_token:
         return {"success": False, "message": "Chưa kết nối Classroom (vào /gv/classroom/connect)."}
 
@@ -533,7 +614,7 @@ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
             "message": f"Chưa có mã lớp Classroom cho {khoi}-{lop}.",
         }
 
-    refresh_token = lay_refresh_token()
+    refresh_token = lay_refresh_token_theo_lop(khoi, lop)
     if not refresh_token:
         return {
             "success": False, "link_tham_gia": None, "ma_dang_ky": None,

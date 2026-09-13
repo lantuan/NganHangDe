@@ -1,0 +1,37 @@
+{# Khung chung cho khu lam viec giao vien. Cac trang /gv/* extends file nay. #}
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}Khu làm việc Giáo viên{% endblock %} - Ngân Hàng Đề AI</title>
+{% include "layouts/tailwind_head.html" %}
+</head>
+<body class="min-h-screen flex flex-col bg-background text-on-surface">
+
+<header class="bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-50">
+<div class="flex flex-wrap justify-between items-center gap-stack-sm w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-7xl mx-auto">
+<a href="/gv" class="font-headline-md text-headline-md font-bold text-primary-container">Ngân Hàng Đề AI · Giáo viên</a>
+<nav class="flex flex-wrap items-center gap-stack-md font-label-md text-label-md">
+<a href="/gv" class="text-on-surface-variant hover:text-primary-container">Trang chính</a>
+<a href="/gv/ra-de" class="text-on-surface-variant hover:text-primary-container">Ra đề</a>
+<a href="/gv/de-da-tao" class="text-on-surface-variant hover:text-primary-container">Đề đã tạo</a>
+<a href="/gv/lop" class="text-on-surface-variant hover:text-primary-container">Lớp</a>
+<a href="/gv/thong-ke" class="text-on-surface-variant hover:text-primary-container">Thống kê</a>
+<a href="/chat" class="text-on-surface-variant hover:text-primary-container">Chat AI</a>
+<a href="/logout" class="px-stack-md py-stack-sm text-primary-container border border-primary-container rounded-full hover:bg-surface-container">Đăng xuất</a>
+</nav>
+</div>
+</header>
+
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="bg-surface-container-low border-t border-outline-variant mt-auto">
+<div class="w-full py-stack-md px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto text-center font-body-md text-body-md text-on-surface-variant">
+Ngân Hàng Đề AI
+</div>
+</footer>
+</body>
+</html>

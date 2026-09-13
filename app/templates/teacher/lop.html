@@ -1,0 +1,48 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Lớp{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Lớp học</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Mỗi lớp được gán cho một giáo viên. Khi học sinh nộp bài, hệ thống lấy kết nối
+Classroom của <strong>đúng giáo viên phụ trách lớp đó</strong> để đăng đề, đáp án
+và điểm. Lớp chưa gán giáo viên sẽ dùng kết nối cũ dùng chung.
+</p>
+
+<div class="mb-stack-lg p-stack-md bg-surface-container-low border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface-variant">
+Việc gán lớp cho giáo viên hiện làm bằng câu lệnh SQL trong Supabase (bảng
+<span class="font-mono">lop_giao_vien</span>) — xem
+<span class="font-mono">docs/21_TAI_KHOAN_GIAO_VIEN.md</span>. Màn hình tự gán
+sẽ làm ở bước sau.
+</div>
+
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-stack-md">Khối</th>
+<th class="p-stack-md">Lớp</th>
+<th class="p-stack-md">Mã lớp Classroom</th>
+<th class="p-stack-md">Giáo viên phụ trách</th>
+</tr>
+</thead>
+<tbody>
+{% for d in danh_sach %}
+<tr class="border-t border-outline-variant">
+<td class="p-stack-md">{{ d.khoi }}</td>
+<td class="p-stack-md">{{ d.lop }}</td>
+<td class="p-stack-md">
+{% if d.co_ma_classroom %}<span class="text-tertiary font-semibold">Đã có</span>{% else %}<span class="text-on-surface-variant">Chưa có</span>{% endif %}
+</td>
+<td class="p-stack-md">
+{% if d.la_lop_cua_toi %}<span class="text-primary-container font-semibold">Lớp của tôi</span>
+{% elif d.da_gan_giao_vien %}<span class="text-on-surface-variant">Giáo viên khác</span>
+{% else %}<span class="text-on-surface-variant">Chưa gán</span>{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+{% endblock %}

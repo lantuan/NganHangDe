@@ -2672,3 +2672,120 @@ Khong sua code nao trong ban nay.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.46 - 2026-09-13
+
+## Tai khoan giao vien + va lo hong phan quyen /gv/*
+
+Trien khai ca 5 buoc trong docs/21_TAI_KHOAN_GIAO_VIEN.md.
+
+### BUOC 1 - Vai tro va chan cua (VA LO HONG)
+
+VAN DE: moi route /gv/* chi goi get_current_user() - tuc chi kiem tra DA
+DANG NHAP. Bat ky hoc sinh nao biet duong dan /gv/thong-ke deu xem duoc
+diem va thong ke ca lop. Repo lai dang cong khai tren GitHub nen duong
+dan nay khong he kho doan.
+
+SUA:
+- app/services/profile_service.py (MOI): lay_vai_tro / la_giao_vien /
+  dat_vai_tro / lay_ho_so, doc cot profiles.vai_tro.
+- app/core/deps.py: them lay_vai_tro(request, user) va
+  yeu_cau_giao_vien(request, user). Chan o TANG SERVER, khong chi an nut.
+- app/routers/classroom.py: ca 6 route /gv/* deu goi yeu_cau_giao_vien().
+- Chua dang nhap -> ve /login. Da dang nhap ma khong phai giao vien -> 403.
+- Neu chua chay SQL them cot vai_tro -> tra 500 kem loi noi ro phai chay
+  SQL nao, KHONG im lang va cung KHONG mo cua.
+
+### BUOC 2 - Dang ky tai khoan giao vien
+
+- Xoa route GET /register/teacher CU (tro ve trang "Coming soon"). Route
+  cu nam o dau file auth.py nen neu chi them route moi o cuoi thi FastAPI
+  van dung route cu - da kiem tra bang cach liet ke router.routes.
+- GET/POST /register/teacher that + app/templates/auth/register_teacher.html.
+- Phai nhap dung MA_MOI_GIAO_VIEN (bien moi truong trong .env). De trong
+  bien nay thi KHONG ai dang ky duoc giao vien (an toan mac dinh).
+- Khong co nut "Dang ky bang Google" o trang nay: luong Google khong mang
+  theo duoc ma moi.
+- supabase_service.sign_up() them tham so vai_tro + **them (truong,
+  to_chuyen_mon) ghi vao user_metadata; sau do router con goi
+  profile_service.dat_vai_tro() mot lan nua de khong phu thuoc trigger.
+- /teacher-coming-soon giu lai, chuyen huong sang /register/teacher.
+
+### BUOC 3 - Moi giao vien mot ket noi Classroom
+
+VAN DE: luu_refresh_token() ghi vao bang classroom_oauth CHI 1 DONG
+(id=1). Giao vien thu hai bam ket noi la ghi de token cua nguoi thu nhat,
+tu do bai cua hoc sinh dang nham sang Classroom cua nguoi kia.
+
+SUA (classroom_service.py):
+- luu_refresh_token(refresh_token, user_id=None, email_google=None)
+- lay_refresh_token(user_id=None)
+- lay_giao_vien_cua_lop(khoi, lop)  - doc bang lop_giao_vien
+- lay_refresh_token_theo_lop(khoi, lop) - dung cho 3 ham chay trong ngu
+  canh HOC SINH: tu_dong_ghi_danh_classroom, dang_ket_qua_len_classroom,
+  tao_link_gia_nhap_lop.
+- dong_bo_toan_bo(user_id=None)
+
+TUONG THICH NGUOC: moi ham deu tu dong lui ve bang classroom_oauth cu khi
+bang moi chua ton tai hoac lop chua gan giao vien. Nghia la deploy ban
+nay TRUOC khi chay SQL cung khong lam hong gi.
+
+### BUOC 4 - Khu lam viec giao vien
+
+app/routers/teacher.py (truoc day rong) + 4 template moi:
+- GET  /gv            - trang chinh, canh bao neu chua ket noi Classroom
+- GET  /gv/ra-de      - bieu mau ra de, co o SO MA DE (1-8)
+- POST /gv/ra-de      - goi generate_exam_pdf_auto role="teacher"
+- GET  /gv/de-da-tao  - danh sach de, tai PDF de / PDF loi giai / .tex
+- GET  /gv/lop        - danh sach lop, ma Classroom, giao vien phu trach
+
+Them app/templates/layouts/tailwind_head.html - khoi <head> dung chung
+(Tailwind CDN + bang mau), trich tu teacher_coming_soon.html de moi trang
+moi khong phai chep lai ~120 dong cau hinh.
+
+history_service.lay_de_cua_giao_vien(user_id, limit) - MOI.
+
+### BUOC 5 - Tai ma nguon LaTeX
+
+GET /api/exam/tai-tex/{de_id} - CHI giao vien. Tra ve file .tex da luu
+san luc sinh de (file_de, loai_file="tex"), khong sinh lai de nen .tex
+luon khop voi ban PDF da phat. 410 neu file da bi cron don sau 1 ngay.
+Hoc sinh khong duoc tai vi file .tex chua ca \loigiai va cac dau \True.
+
+### SQL PHAI CHAY (chay TRUOC khi deploy, xem docs/21 muc 3)
+
+alter table profiles
+  add column if not exists vai_tro text not null default 'hoc_sinh'
+  check (vai_tro in ('hoc_sinh','giao_vien','quan_tri'));
+
+update profiles set vai_tro='giao_vien' where email='lantuan2605@gmail.com';
+
+create table if not exists classroom_oauth_gv (
+  user_id uuid primary key references profiles(id) on delete cascade,
+  refresh_token text not null,
+  email_google text,
+  updated_at timestamptz default now()
+);
+
+create table if not exists lop_giao_vien (
+  khoi text not null, lop text not null,
+  user_id uuid not null references profiles(id) on delete cascade,
+  primary key (khoi, lop)
+);
+
+### BIEN MOI TRUONG MOI (.env tren VPS, khong qua git)
+
+MA_MOI_GIAO_VIEN=<chuoi tu dat>
+
+### DON DEP
+
+Xoa 2 tep va cu con sot trong repo cong khai:
+patch_classroom_service_link.py.b64, patch_classroom_service_write.py.b64.
+Con 12 tep *.b64 cung loai chua xoa - cho giao vien xac nhan.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -12,7 +12,7 @@ from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 
-from app.core.deps import get_current_user
+from app.core.deps import get_current_user, yeu_cau_giao_vien
 from app.core.lop_config import DANH_SACH_LOP
 from app.services import classroom_service, history_service
 
@@ -23,16 +23,18 @@ templates = Jinja2Templates(directory="app/templates")
 @router.get("/gv/classroom/connect")
 async def classroom_connect(request: Request):
     user = get_current_user(request)
-    if user is None:
-        return RedirectResponse("/login", status_code=303)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
     return RedirectResponse(classroom_service.tao_url_xac_thuc(), status_code=303)
 
 
 @router.get("/gv/classroom/callback", response_class=HTMLResponse)
 async def classroom_callback(request: Request, code: str = None, error: str = None):
     user = get_current_user(request)
-    if user is None:
-        return RedirectResponse("/login", status_code=303)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
 
     if error:
         return HTMLResponse(f"<h1>Loi ket noi Classroom</h1><p>{error}</p>")
@@ -56,7 +58,7 @@ async def classroom_callback(request: Request, code: str = None, error: str = No
             "<a href='/gv/classroom/connect'>/gv/classroom/connect</a> de thu lai.</p>"
         )
 
-    classroom_service.luu_refresh_token(refresh_token)
+    classroom_service.luu_refresh_token(refresh_token, user_id=user.id)
 
     return HTMLResponse(
         "<h1>Da ket noi Classroom thanh cong!</h1>"
@@ -68,11 +70,12 @@ async def classroom_callback(request: Request, code: str = None, error: str = No
 @router.get("/gv/classroom/sync")
 async def classroom_sync(request: Request):
     user = get_current_user(request)
-    if user is None:
-        return RedirectResponse("/login", status_code=303)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
 
     try:
-        thong_ke = classroom_service.dong_bo_toan_bo()
+        thong_ke = classroom_service.dong_bo_toan_bo(user_id=user.id)
     except Exception as e:
         raise HTTPException(500, f"Loi dong bo: {e}")
 
@@ -82,8 +85,9 @@ async def classroom_sync(request: Request):
 @router.get("/gv/classroom/debug-roster")
 async def classroom_debug_roster(request: Request):
     user = get_current_user(request)
-    if user is None:
-        return RedirectResponse("/login", status_code=303)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
 
     data = classroom_service.lay_toan_bo_roster()
     return {"success": True, "so_luong": len(data), "data": data}
@@ -99,8 +103,9 @@ async def classroom_debug_roster(request: Request):
 @router.get("/gv/thong-ke", response_class=HTMLResponse)
 async def thong_ke_nang_luc_page(request: Request):
     user = get_current_user(request)
-    if user is None:
-        return RedirectResponse("/login", status_code=303)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
     return templates.TemplateResponse(
         request=request,
         name="teacher/thong_ke.html",
@@ -111,8 +116,9 @@ async def thong_ke_nang_luc_page(request: Request):
 @router.get("/gv/thong-ke/data")
 async def thong_ke_nang_luc_data(request: Request, khoi: str | None = None, lop: str | None = None):
     user = get_current_user(request)
-    if user is None:
-        raise HTTPException(401, "Chua dang nhap")
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
 
     danh_sach = history_service.lay_thong_ke_nang_luc(khoi=khoi, lop=lop)
 

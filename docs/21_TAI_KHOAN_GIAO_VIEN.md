@@ -4,7 +4,8 @@ Version: 1.0 — 2026-09-13
 
 Trạng thái
 
-🟡 Thiết kế + kế hoạch thi công (CHƯA triển khai)
+🟢 ĐÃ TRIỂN KHAI (Version 2.46 — 2026-09-13). Tài liệu này giữ nguyên phần
+thiết kế để tra cứu; phần "đã làm / chưa làm" ở cuối file.
 
 ---
 
@@ -193,3 +194,38 @@ chứ không phải vấn đề tiện dụng.
   gọi từ `chat.py` và `exam.py`; tìm hết trước khi đổi.
 - **Chuyển dữ liệu `classroom_oauth` sang bảng mới mà chưa kiểm tra.** Kiểm tra
   đăng được bài lên Classroom bằng bảng mới rồi mới xoá bảng cũ.
+
+
+===============================================================================
+
+# 6. Tình trạng sau khi thi công (2026-09-13)
+
+## Đã làm
+
+| Bước | Nội dung | Tệp |
+|---|---|---|
+| 1 | Cột `vai_tro`, hàm `lay_vai_tro`/`yeu_cau_giao_vien`, chặn cả 6 route `/gv/*` | `app/services/profile_service.py`, `app/core/deps.py`, `app/routers/classroom.py` |
+| 2 | Đăng ký giáo viên có mã mời; xoá route `/register/teacher` cũ | `app/routers/auth.py`, `app/templates/auth/register_teacher.html` |
+| 3 | `classroom_oauth_gv` + `lop_giao_vien`, mọi hàm nhận `user_id` | `app/services/classroom_service.py` |
+| 4 | Khu làm việc `/gv`, `/gv/ra-de`, `/gv/de-da-tao`, `/gv/lop` | `app/routers/teacher.py`, `app/templates/teacher/*` |
+| 5 | `GET /api/exam/tai-tex/{de_id}` | `app/routers/exam.py` |
+
+## Một chỗ suýt sai, ghi lại để nhớ
+
+Route `GET /register/teacher` **cũ** (trả về trang "Coming soon") nằm ở đầu
+`auth.py`. Nếu chỉ thêm route mới ở cuối file thì FastAPI vẫn dùng route
+đăng ký TRƯỚC, và trang đăng ký mới không bao giờ hiện ra — không báo lỗi gì
+cả. Phát hiện bằng cách liệt kê `router.routes` và thấy `/register/teacher`
+xuất hiện hai lần. Khi thêm route trùng đường dẫn, luôn kiểm tra lại như vậy.
+
+## Chưa làm (để lần sau)
+
+- Màn hình tự gán lớp cho giáo viên — hiện gán bằng SQL trong bảng
+  `lop_giao_vien`.
+- Đặt ma trận chi tiết cho từng đề (hiện lấy theo bảng cấu hình chung của
+  loại bài kiểm tra).
+- Sinh một lượt nhiều mã đề thành **các đề riêng biệt**: ô "số mã đề" đã có
+  và đã truyền xuống `socau_ma_de`, nhưng cách ghép hiện tại dồn nhiều khối
+  `\begin{ex}` vào CÙNG một đề, nên ra một đề mà mỗi câu lặp lại N lần chứ
+  chưa phải N đề riêng. Đây là việc tiếp theo.
+- Bật Row Level Security cho `classroom_oauth_gv`.

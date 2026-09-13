@@ -1,0 +1,47 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Đề đã tạo{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Đề đã tạo</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Tệp đề và lời giải được dọn tự động sau 10 ngày, riêng mã nguồn <span class="font-mono">.tex</span>
+được dọn sau 1 ngày. Cần giữ lâu thì tải về máy.
+</p>
+
+{% if danh_sach_de %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-stack-md">Tiêu đề</th>
+<th class="p-stack-md">Lớp</th>
+<th class="p-stack-md">Phạm vi</th>
+<th class="p-stack-md">Số mã đề</th>
+<th class="p-stack-md">Tải về</th>
+</tr>
+</thead>
+<tbody>
+{% for de in danh_sach_de %}
+{% set bp = de.blueprint or {} %}
+<tr class="border-t border-outline-variant">
+<td class="p-stack-md">{{ bp.get("tieu_de") or "Đề không tên" }}</td>
+<td class="p-stack-md">{{ de.lop }}</td>
+<td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
+<td class="p-stack-md">{{ bp.get("socau_ma_de") or 1 }}</td>
+<td class="p-stack-md whitespace-nowrap">
+{% if de.files.get("de") %}<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">PDF đề</a>{% else %}<span class="text-on-surface-variant">—</span>{% endif %}
+{% if de.files.get("loigiai") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">PDF lời giải</a>{% endif %}
+{% if de.files.get("tex") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">
+Chưa có đề nào. <a class="text-primary-container font-semibold" href="/gv/ra-de">Ra đề đầu tiên →</a>
+</p>
+{% endif %}
+
+{% endblock %}

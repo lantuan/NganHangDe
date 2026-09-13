@@ -1,0 +1,76 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Trang chính{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">
+Chào {{ ho_so.ho_ten or "thầy/cô" }}
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Khu làm việc dành cho giáo viên: ra đề nhiều mã, tải mã nguồn LaTeX, giao bài
+qua Google Classroom và xem thống kê lớp.
+</p>
+
+{% if not da_ket_noi_classroom %}
+<div class="mb-stack-lg p-stack-md bg-error-container border border-outline-variant rounded-xl flex flex-wrap items-center gap-stack-md">
+<span class="material-symbols-outlined text-on-error-container">link_off</span>
+<p class="font-body-md text-body-md text-on-error-container flex-1">
+Tài khoản này chưa kết nối Google Classroom, nên đề và điểm chưa tự đăng về lớp được.
+</p>
+<a href="/gv/classroom/connect" class="px-stack-lg py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">Kết nối ngay</a>
+</div>
+{% endif %}
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mb-stack-lg">
+
+<a href="/gv/ra-de" class="p-stack-lg bg-surface-container-lowest border border-outline-variant rounded-xl soft-shadow hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-primary-container text-[32px]">post_add</span>
+<h2 class="font-headline-sm text-headline-sm mt-stack-sm mb-unit">Ra đề</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Chọn lớp, phạm vi và <strong>số mã đề</strong>. Các mã đề cùng cấu trúc, chỉ khác số liệu.</p>
+</a>
+
+<a href="/gv/de-da-tao" class="p-stack-lg bg-surface-container-lowest border border-outline-variant rounded-xl soft-shadow hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-primary-container text-[32px]">folder_open</span>
+<h2 class="font-headline-sm text-headline-sm mt-stack-sm mb-unit">Đề đã tạo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Tải lại PDF đề, PDF lời giải và <strong>mã nguồn .tex</strong> để tự chỉnh.</p>
+</a>
+
+<a href="/gv/thong-ke" class="p-stack-lg bg-surface-container-lowest border border-outline-variant rounded-xl soft-shadow hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-primary-container text-[32px]">insights</span>
+<h2 class="font-headline-sm text-headline-sm mt-stack-sm mb-unit">Thống kê lớp</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Điểm trung bình và những bài học sinh hay sai.</p>
+</a>
+
+</div>
+
+<h2 class="font-headline-sm text-headline-sm mb-stack-md">Đề tạo gần đây</h2>
+{% if de_gan_day %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-stack-md">Tiêu đề</th><th class="p-stack-md">Lớp</th>
+<th class="p-stack-md">Phạm vi</th><th class="p-stack-md">Tải về</th>
+</tr>
+</thead>
+<tbody>
+{% for de in de_gan_day %}
+<tr class="border-t border-outline-variant">
+<td class="p-stack-md">{{ (de.blueprint or {}).get("tieu_de") or "Đề không tên" }}</td>
+<td class="p-stack-md">{{ de.lop }}</td>
+<td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
+<td class="p-stack-md">
+<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">Đề</a>
+{% if de.files.get("loigiai") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">Lời giải</a>{% endif %}
+{% if de.files.get("tex") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<p class="mt-stack-md"><a class="text-primary-container font-semibold" href="/gv/de-da-tao">Xem tất cả →</a></p>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">Chưa tạo đề nào. <a class="text-primary-container font-semibold" href="/gv/ra-de">Ra đề đầu tiên →</a></p>
+{% endif %}
+
+{% endblock %}

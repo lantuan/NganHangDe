@@ -196,3 +196,41 @@ nay được đọc thêm bởi trang /gv/thong-ke (history_service.
 lay_thong_ke_nang_luc) — join Python-side với profiles (ho_ten/khoi/
 lop) để tổng hợp điểm trung bình + chương/bài hay sai theo học sinh và
 theo cả lớp. Không thêm bảng mới, không đổi cấu trúc exam_history.
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Bảng cho tài khoản giáo viên (Version 2.46)
+
+## profiles — thêm cột
+
+    vai_tro text not null default 'hoc_sinh'
+        check (vai_tro in ('hoc_sinh', 'giao_vien', 'quan_tri'))
+
+Mặc định `hoc_sinh` nên mọi tài khoản cũ đều thành học sinh — đúng ý, nhưng
+phải nâng tài khoản giáo viên lên bằng tay bằng câu `update`.
+
+## classroom_oauth_gv (MỚI) — thay cho classroom_oauth
+
+    user_id       uuid primary key references profiles(id) on delete cascade
+    refresh_token text not null
+    email_google  text
+    updated_at    timestamptz default now()
+
+Bảng cũ `classroom_oauth` chỉ có **một dòng id=1** dùng chung cho cả hệ
+thống, nên giáo viên thứ hai kết nối là ghi đè token của người thứ nhất.
+Bảng mới mỗi giáo viên một dòng.
+
+**BẢO MẬT:** `refresh_token` là chìa khóa vào tài khoản Google của giáo viên.
+Bảng này phải bật Row Level Security và chỉ đọc bằng service key ở phía máy
+chủ, tuyệt đối không để lộ ra Frontend.
+
+## lop_giao_vien (MỚI)
+
+    khoi    text not null
+    lop     text not null
+    user_id uuid not null references profiles(id) on delete cascade
+    primary key (khoi, lop)
+
+Dùng để biết khi học sinh nộp bài thì lấy kết nối Classroom của giáo viên
+nào. Lớp chưa gán → `classroom_service` tự lui về bảng `classroom_oauth` cũ.

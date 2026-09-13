@@ -491,3 +491,51 @@ trong dùng `courses.courseWorkMaterials` (Classroom API) + upload PDF
 Google Cloud phải bật CẢ Classroom API lẫn Drive API — chi tiết, bảng
 scope và quy trình xin lại refresh_token xem docs/14_DEPLOYMENT.md mục
 "Cập nhật 2026-09-13".
+
+
+===============================================================================
+
+# Cập nhật 2026-09-13 — Tài khoản giáo viên (Version 2.46)
+
+## Phân quyền
+
+Mọi đường dẫn bắt đầu bằng `/gv/` nay yêu cầu `profiles.vai_tro` thuộc
+`('giao_vien', 'quan_tri')`, kiểm tra bằng `app/core/deps.py::yeu_cau_giao_vien`.
+
+- Chưa đăng nhập → 303 về `/login`.
+- Đã đăng nhập nhưng là học sinh → **403**.
+- Chưa chạy SQL thêm cột `vai_tro` → **500** kèm thông báo chỉ rõ phải chạy
+  SQL nào (không im lặng, và cũng không mở cửa).
+
+## Đăng ký giáo viên
+
+    GET  /register/teacher     — trang đăng ký
+    POST /register/teacher     — fullname, email, password, confirm_password,
+                                 ma_moi (bắt buộc), truong, to_chuyen_mon
+
+`ma_moi` phải khớp biến môi trường `MA_MOI_GIAO_VIEN`. Biến để trống thì
+không ai đăng ký được giáo viên. `/teacher-coming-soon` nay chuyển hướng
+sang `/register/teacher`.
+
+## Khu làm việc giáo viên (HTML, không phải JSON)
+
+    GET  /gv             — trang chính
+    GET  /gv/ra-de       — biểu mẫu ra đề (có ô SỐ MÃ ĐỀ, 1–8)
+    POST /gv/ra-de       — lop, ki_thi, pham_vi_chuong, socau_ma_de,
+                           tieu_de, cho_phep_thieu → sinh đề rồi 303 về
+                           /gv/de-da-tao
+    GET  /gv/de-da-tao   — danh sách đề đã tạo của chính giáo viên đó
+    GET  /gv/lop         — danh sách lớp, mã Classroom, giáo viên phụ trách
+
+`POST /gv/ra-de` gọi thẳng `generate_exam_pdf_auto` với `role="teacher"`
+(xuất cả đề và lời giải) — KHÔNG qua n8n, KHÔNG gọi AI.
+
+## Tải mã nguồn LaTeX
+
+    GET /api/exam/tai-tex/{de_id}
+
+CHỈ giáo viên. Trả về file `.tex` đã lưu lúc sinh đề (`file_de`,
+`loai_file="tex"`) nên luôn khớp với bản PDF đã phát — không sinh lại đề.
+
+Lỗi: 403 nếu không phải giáo viên; 404 nếu không tìm thấy đề; 410 nếu file
+`.tex` đã bị cron dọn (sau 1 ngày).

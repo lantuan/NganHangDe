@@ -13,3 +13,8 @@ N8N_WEBHOOK_CHAM_TU_LUAN = os.getenv("N8N_WEBHOOK_CHAM_TU_LUAN")
 # (khac Client dang dung cho nut "Dang nhap bang Google" qua Supabase).
 GOOGLE_CLASSROOM_CLIENT_ID = os.getenv("GOOGLE_CLASSROOM_CLIENT_ID")
 GOOGLE_CLASSROOM_CLIENT_SECRET = os.getenv("GOOGLE_CLASSROOM_CLIENT_SECRET")
+
+# Ma moi de dang ky tai khoan GIAO VIEN (/register/teacher). De trong thi
+# KHONG ai dang ky duoc giao vien - an toan mac dinh, tranh truong hop
+# quen dat bien moi truong ma ai cung tu nang minh len giao vien.
+MA_MOI_GIAO_VIEN = os.getenv("MA_MOI_GIAO_VIEN", "").strip()

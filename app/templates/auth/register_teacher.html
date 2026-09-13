@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng ký Giáo viên - Ngân Hàng Đề AI</title>
+{% include "layouts/tailwind_head.html" %}
+</head>
+<body class="min-h-screen flex flex-col bg-background text-on-surface">
+
+<header class="bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-7xl mx-auto">
+<a href="/" class="font-headline-md text-headline-md font-bold text-primary-container">Ngân Hàng Đề AI</a>
+<a href="/login" class="inline-block px-stack-lg py-stack-sm font-label-md text-label-md text-primary-container border border-primary-container rounded-full hover:bg-surface-container transition-all">Đăng nhập</a>
+</div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-margin-mobile md:px-margin-desktop py-stack-lg">
+<div class="max-w-xl w-full bg-surface-container-lowest rounded-xl soft-shadow border border-outline-variant p-stack-lg md:p-[48px]">
+
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm">Đăng ký tài khoản Giáo viên</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Tài khoản giáo viên dùng để ra đề nhiều mã, tải mã nguồn LaTeX, giao bài qua
+Google Classroom và xem thống kê lớp.
+</p>
+</div>
+
+<div class="mb-stack-lg p-stack-md bg-surface-container-low border border-outline-variant rounded-xl flex gap-stack-sm">
+<span class="material-symbols-outlined text-primary-container">key</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Cần <strong>mã mời</strong> do quản trị hệ thống cấp. Nếu chưa có, liên hệ
+giáo viên phụ trách để xin mã.
+</p>
+</div>
+
+<form action="/register/teacher" method="post" class="space-y-stack-md">
+
+{% if error %}
+<div class="mb-4 rounded-xl bg-red-100 border border-red-300 p-4 text-red-700">
+{{ error }}
+</div>
+{% endif %}
+
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="fullname">Họ và tên</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="fullname" name="fullname" placeholder="Nguyễn Văn A" value="{{ fullname or '' }}" required type="text"/>
+</div>
+
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="email">Email</label>
+<p class="text-sm text-on-surface-variant mb-unit">Nên dùng chính địa chỉ Gmail đang dùng cho Google Classroom.</p>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="email" name="email" placeholder="giaovien@gmail.com" value="{{ email or '' }}" required type="email"/>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="truong">Trường</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="truong" name="truong" placeholder="THPT ..." value="{{ truong or '' }}" type="text"/>
+</div>
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="to_chuyen_mon">Tổ chuyên môn</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="to_chuyen_mon" name="to_chuyen_mon" placeholder="Toán" value="{{ to_chuyen_mon or '' }}" type="text"/>
+</div>
+</div>
+
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="password">Mật khẩu</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="password" name="password" placeholder="••••••••" required type="password"/>
+</div>
+
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="confirm_password">Xác nhận mật khẩu</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="confirm_password" name="confirm_password" placeholder="••••••••" required type="password"/>
+</div>
+
+<div>
+<label class="block font-medium text-on-surface-variant mb-unit" for="ma_moi">Mã mời giáo viên</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container transition-all"
+       id="ma_moi" name="ma_moi" placeholder="Nhập mã được cấp" required type="text"/>
+</div>
+
+<div class="pt-stack-md">
+<button class="w-full bg-primary-container text-white py-stack-md px-stack-lg rounded-2xl font-semibold text-lg hover:opacity-90 transition-all" type="submit">
+Đăng ký
+</button>
+</div>
+
+<p class="text-center font-body-md text-body-md text-on-surface-variant pt-stack-sm">
+Đăng ký tài khoản học sinh? <a class="text-primary-container font-semibold" href="/register/student">Bấm vào đây</a>
+</p>
+
+</form>
+</div>
+</main>
+
+<footer class="bg-surface-container-low border-t border-outline-variant mt-auto">
+<div class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto text-center">
+<div class="font-headline-sm text-headline-sm font-semibold text-primary-container">Ngân Hàng Đề AI</div>
+</div>
+</footer>
+</body>
+</html>

@@ -3,8 +3,8 @@ from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from supabase_auth.errors import AuthApiError
 from pydantic import BaseModel
-from app.services import supabase_service
-from app.core.config import SUPABASE_URL, SUPABASE_KEY
+from app.services import supabase_service, profile_service
+from app.core.config import SUPABASE_URL, SUPABASE_KEY, MA_MOI_GIAO_VIEN
 from app.core.supabase import supabase
 
 router = APIRouter()
@@ -54,17 +54,6 @@ async def register_student_page(request: Request):
         },
     )
 
-
-# ======================================================
-# REGISTER TEACHER PAGE
-# ======================================================
-
-@router.get("/register/teacher", response_class=HTMLResponse)
-async def register_teacher_page(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="auth/teacher_coming_soon.html",
-    )
 
 # ======================================================
 # POST /login
@@ -262,14 +251,89 @@ async def register_student(
         )
     
 # ======================================================
-# TEACHER (Coming soon)
+# REGISTER TEACHER (that - thay cho trang "Coming soon" cu)
+#
+# Khac dang ky hoc sinh o 2 diem:
+#   1. Phai nhap dung MA MOI (bien moi truong MA_MOI_GIAO_VIEN trong
+#      .env tren VPS). Day la cach don gian nhat de hoc sinh khong tu
+#      dang ky thanh giao vien ma khong phai dung luong duyet tai khoan.
+#   2. Khong co nut "Dang ky bang Google": luong Google khong mang theo
+#      duoc ma moi, nen tai khoan giao vien phai tao bang email + mat khau.
+#      Sau khi co tai khoan, van dang nhap bang Google binh thuong neu
+#      email trung.
+# Xem docs/21_TAI_KHOAN_GIAO_VIEN.md.
 # ======================================================
 
-@router.get("/teacher-coming-soon", response_class=HTMLResponse)
-async def teacher_coming_soon(request: Request):
+@router.get("/register/teacher", response_class=HTMLResponse)
+async def register_teacher_page(request: Request):
 
     return templates.TemplateResponse(
         request=request,
-        name="auth/teacher_coming_soon.html",
+        name="auth/register_teacher.html",
     )
+
+
+@router.post("/register/teacher")
+async def register_teacher(
+    request: Request,
+    fullname: str = Form(...),
+    email: str = Form(...),
+    password: str = Form(...),
+    confirm_password: str = Form(...),
+    ma_moi: str = Form(...),
+    truong: str | None = Form(default=None),
+    to_chuyen_mon: str | None = Form(default=None),
+):
+
+    def bao_loi(thong_bao: str):
+        return templates.TemplateResponse(
+            "auth/register_teacher.html",
+            {
+                "request": request,
+                "error": thong_bao,
+                "fullname": fullname,
+                "email": email,
+                "truong": truong,
+                "to_chuyen_mon": to_chuyen_mon,
+            },
+        )
+
+    if password != confirm_password:
+        return bao_loi("Mat khau xac nhan khong khop.")
+
+    if not MA_MOI_GIAO_VIEN:
+        return bao_loi(
+            "He thong chua bat dang ky giao vien (thieu MA_MOI_GIAO_VIEN "
+            "trong .env). Lien he quan tri."
+        )
+
+    if ma_moi.strip() != MA_MOI_GIAO_VIEN:
+        return bao_loi("Ma moi khong dung.")
+
+    try:
+        ket_qua = supabase_service.sign_up(
+            fullname=fullname,
+            email=email,
+            password=password,
+            vai_tro="giao_vien",
+            truong=truong,
+            to_chuyen_mon=to_chuyen_mon,
+        )
+    except Exception as e:
+        print("LOI DANG KY GIAO VIEN:", type(e), e)
+        return bao_loi(str(e))
+
+    # Dat vai_tro mot lan nua o tang ung dung: khong phu thuoc vao viec
+    # trigger handle_new_user da duoc sua de doc key "vai_tro" hay chua.
+    user = getattr(ket_qua, "user", None)
+    if user is not None and getattr(user, "id", None):
+        profile_service.dat_vai_tro(user.id, "giao_vien")
+
+    return RedirectResponse("/login", status_code=303)
+
+
+@router.get("/teacher-coming-soon", response_class=HTMLResponse)
+async def teacher_coming_soon(request: Request):
+    """Duong dan cu - giu lai de link cu khong chet, chuyen sang trang that."""
+    return RedirectResponse("/register/teacher", status_code=303)
 
