@@ -1,0 +1,390 @@
+% ---------------------------------------------------------------
+%  Muc II.3 -- Cac giai phap (TRONG TAM)
+% ---------------------------------------------------------------
+\subsection{Các giải pháp đã thực hiện}
+
+Sáng kiến được thực hiện qua sáu giải pháp nối tiếp nhau, mỗi giải pháp giải
+quyết một mắt xích của quy trình: từ cách \textit{đặt tên} câu hỏi, cách
+\textit{viết} câu hỏi, cách \textit{quy định} ma trận, cách \textit{chọn} câu,
+cách \textit{in} ra đề, đến cách \textit{tổ chức} cho học sinh làm bài.
+
+\subsubsection{Giải pháp 1 --- Chuẩn hoá mã định danh câu hỏi}
+
+Đây là giải pháp nền, quyết định toàn bộ những giải pháp còn lại. Nhận xét
+xuất phát rất đơn giản: \textit{muốn máy tính chọn câu hỏi thay cho giáo viên
+thì mỗi câu hỏi phải có một địa chỉ mà máy đọc được}. Vì vậy tôi quy định mọi
+câu hỏi trong ngân hàng đều mang một mã định danh thống nhất:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\small, node distance=0pt]
+\node[font=\ttfamily\large] (id) at (0,0) {L10\_C1\_B2\_NB017\_MC\_A};
+\node[font=\scriptsize, align=center] (a) at (-4.2,-1.6) {Khối lớp\\ (10/11/12)};
+\node[font=\scriptsize, align=center] (b) at (-2.6,-2.4) {Chương};
+\node[font=\scriptsize, align=center] (c) at (-1.2,-1.6) {Bài};
+\node[font=\scriptsize, align=center] (d) at (0.4,-2.4) {Mức độ\\ NB/TH/VD/VDC};
+\node[font=\scriptsize, align=center] (e) at (2.2,-1.6) {Mã năng lực\\ (lấy từ Curriculum)};
+\node[font=\scriptsize, align=center] (f) at (3.9,-2.4) {Loại câu\\ MC/TF/SA/TL};
+\node[font=\scriptsize, align=center] (g) at (5.2,-1.6) {Phiên bản};
+\draw[gray] (-4.05,-0.25) -- (a);
+\draw[gray] (-3.05,-0.25) -- (b);
+\draw[gray] (-2.05,-0.25) -- (c);
+\draw[gray] (-0.75,-0.25) -- (d);
+\draw[gray] (0.55,-0.25) -- (e);
+\draw[gray] (1.75,-0.25) -- (f);
+\draw[gray] (2.75,-0.25) -- (g);
+\end{tikzpicture}
+\caption{Cấu trúc mã định danh của một câu hỏi trong ngân hàng}
+\end{figure}
+
+Bốn quy tắc kèm theo:
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Mã năng lực lấy nguyên văn từ bảng Curriculum}, không được tự
+        đặt. Nhờ vậy mỗi câu hỏi luôn gắn với một yêu cầu cần đạt cụ thể của
+        Chương trình 2018, và \textit{không thể vượt khung chương trình}: phạm
+        vi kiến thức đã bị khoá ngay trong tên của câu hỏi.
+  \item \textbf{Câu Đúng/Sai ra theo chương, không theo bài} --- mã rút gọn
+        \texttt{L10\_C1\_TF\_A}. Theo quy ước chuyên môn của tôi, một câu
+        Đúng/Sai gồm bốn ý ở bốn mức độ nhận thức khác nhau (nhận biết, thông
+        hiểu, vận dụng, vận dụng cao), nên khi lên ma trận nó được tính là bốn
+        câu chứ không phải một.
+  \item \textbf{Mức vận dụng cao mượn mã năng lực của mức vận dụng.} Bảng
+        Curriculum chỉ có ba mức nhận biết, thông hiểu, vận dụng; việc một câu
+        được ra ở mức vận dụng hay vận dụng cao do bước chọn câu quyết định,
+        không sinh thêm mã mới. Quy ước này giúp bảng Curriculum không phình
+        ra vô ích.
+  \item \textbf{Mã đã phát hành thì không sửa.} Muốn thay nội dung thì tạo
+        phiên bản mới (\texttt{\_A} $\to$ \texttt{\_B} $\to$ \texttt{\_C}). Nhờ
+        vậy một đề đã in ra từ hai năm trước vẫn tra ngược lại được đúng câu
+        hỏi gốc.
+\end{enumerate}
+
+Toàn hệ thống --- cơ sở dữ liệu, giao diện, phần mềm điều phối --- đều làm việc
+bằng mã định danh này chứ không bằng tên bài tiếng Việt, và \textbf{trí tuệ
+nhân tạo tuyệt đối không được phép tự tạo hay tự suy luận ra mã}.
+
+\subsubsection{Giải pháp 2 --- Viết ngân hàng câu hỏi bằng Python}
+
+\textbf{a) Ba tầng dữ liệu}
+
+Ngân hàng không phải một tệp câu hỏi mà là ba tầng dữ liệu nối nhau:
+
+\begin{center}
+\begin{tabular}{|p{2.6cm}|p{5.2cm}|p{5.6cm}|}
+\hline
+\textbf{Tầng} & \textbf{Nội dung} & \textbf{Ví dụ} \\ \hline
+Phân phối chương trình & Danh sách bài của từng lớp kèm \textbf{số tiết} và mốc kiểm tra giữa kì, cuối kì &
+\texttt{L10\_C1\_B2}, tiết ``23, 25--26'' $\to$ 3 tiết \\ \hline
+Curriculum & Các yêu cầu cần đạt của từng bài, chia theo ba mức NB/TH/VD &
+\texttt{L10\_C1\_B2\_NB017} \\ \hline
+Mapping & Cầu nối: mỗi yêu cầu cần đạt có những hàm sinh câu hỏi nào, thuộc loại nào &
+\texttt{L10\_C1\_B2\_NB017\_MC\_A} \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 4. Ba tầng dữ liệu của ngân hàng đề}
+
+\textbf{b) Câu hỏi là một hàm, không phải một đoạn văn bản}
+
+Điểm khác biệt căn bản của sáng kiến nằm ở đây. Mỗi câu hỏi được viết thành một
+hàm Python có tên trùng đúng mã định danh của nó. Hàm nhận vào số câu cần sinh
+và trả về đoạn \LaTeX\ hoàn chỉnh gồm đề bài, các phương án, đánh dấu phương án
+đúng và lời giải chi tiết:
+
+\begin{lstlisting}
+def L10_C1_B2_NB017_MC_A_01(socau, socot):
+    ket_qua = ""
+    for i in range(socau):
+        a = random.randint(2, 9)          # sinh so lieu ngau nhien
+        b = random.choice([x for x in range(2, 12) if x % a == 0])
+        dap_an_dung = b // a              # dap an do PYTHON tinh ra
+        ...                               # dung 3 phuong an nhieu
+        ket_qua += cau_hoi_latex
+    return ket_qua
+\end{lstlisting}
+
+Ba hệ quả quan trọng:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Đáp án không thể sai.} Đáp án và lời giải không phải do ai gõ
+        vào hay do trí tuệ nhân tạo đoán ra, mà do chính Python tính bằng công
+        thức toán học từ bộ số liệu vừa sinh. Mỗi lần chạy là một lần tính
+        lại, nên số liệu đổi thì đáp án đổi theo, luôn khớp.
+  \item \textbf{Số liệu luôn ``đẹp''.} Phần công sức chuyên môn của giáo viên
+        nằm ở chỗ ràng buộc miền giá trị của tham số sao cho mọi biến thể đều
+        có nghiệm đẹp, đúng tầm học sinh và không rơi vào trường hợp suy biến.
+        Máy không làm thay được việc này.
+  \item \textbf{Một mã, nhiều cách ra đề.} Cùng một mã định danh có thể có
+        nhiều hàm khác nhau, đánh số \texttt{\_01}, \texttt{\_02},
+        \texttt{\_03}\dots\ --- mỗi hàm là một bối cảnh ra đề khác. Khi sinh
+        đề, hệ thống chọn ngẫu nhiên một trong các hàm đó. Hậu tố này chỉ tồn
+        tại bên trong tệp Python, không lộ ra bất kì nơi nào khác, nên việc bổ
+        sung độ phong phú cho ngân hàng không làm thay đổi mã định danh đã
+        phát hành.
+\end{itemize}
+
+\textbf{c) Kiểm thử tự động toàn bộ ngân hàng}
+
+Ngân hàng càng lớn thì càng khó rà bằng mắt. Tôi viết thêm bộ kiểm thử tự động
+gọi lần lượt toàn bộ các hàm sinh câu hỏi và kiểm tra kết quả trả về có đúng
+định dạng, có đủ đáp án hay không. Bộ kiểm thử này đã phát hiện một lỗi thật mà
+đọc bằng mắt không thấy: một hàm kết thúc bằng \texttt{return} mà quên tên biến
+nên trả về rỗng, khiến câu hỏi biến mất khỏi đề trong suốt một thời gian dài.
+
+\chenanh[0.92]{03-ham-sinh-cau-hoi.png}{Một hàm sinh câu hỏi trong ngân hàng Python, kèm phần tính đáp án và lời giải}
+
+\subsubsection{Giải pháp 3 --- Đưa ma trận đề vào bảng cấu hình}
+
+Ma trận đề không được viết lẫn vào mã chương trình mà đặt riêng trong một bảng
+cấu hình, để khi Bộ hoặc Sở thay đổi cấu trúc đề thì chỉ cần sửa số trong bảng.
+Bảng quy định cho từng loại bài kiểm tra (hệ số 1 --- kiểm tra thường xuyên,
+hệ số 2 và 3 --- kiểm tra định kì) số lượng câu của mỗi phần và tỉ lệ bốn mức
+độ nhận thức:
+
+\begin{lstlisting}
+"HeSo2_HeSo3": {
+  "trac_nghiem":     {"so_luong": 12, "ty_le_muc_do": {"NB":0.4,"TH":0.3,"VD":0.2,"VDC":0.1}},
+  "dung_sai_cau_lon":{"so_luong":  2, "ty_le_muc_do": {"NB":0.25,"TH":0.25,"VD":0.25,"VDC":0.25}},
+  "tra_loi_ngan":    {"so_luong":  4, "ty_le_muc_do": {"NB":0,"TH":0,"VD":0.5,"VDC":0.5}},
+  "tu_luan":         {"so_luong":  3, "ty_le_muc_do": {"NB":0,"TH":0,"VD":0.7,"VDC":0.3}}
+}
+\end{lstlisting}
+
+Một bảng thứ hai quy định thang điểm 10 chia theo phần: trắc nghiệm nhiều lựa
+chọn 3 điểm, đúng/sai 2 điểm, trả lời ngắn 2 điểm, tự luận 3 điểm; trong mỗi
+phần thì chia đều cho từng câu. Cách tách này cho phép thay đổi trọng số các
+phần mà không phải sửa một dòng mã nào.
+
+\ghichu{Nếu tổ chuyên môn của chị thống nhất một ma trận khác (ví dụ hệ số 1
+chỉ 6 câu trắc nghiệm), sửa số trong bảng rồi chụp lại ảnh cho khớp với bài
+viết.}
+
+\chenanh[0.92]{04-bang-ma-tran.png}{Bảng cấu hình ma trận đề và bảng thang điểm --- thay đổi cấu trúc đề chỉ cần sửa số ở đây}
+
+\subsubsection{Giải pháp 4 --- Thuật toán dựng ma trận chi tiết và chọn câu hỏi}
+
+Đây là phần lõi và cũng là phần được chỉnh sửa nhiều lần nhất. Từ một yêu cầu
+của người dùng, hệ thống đi qua sáu bước, \textbf{tất cả đều là chương trình
+máy tính, không có trí tuệ nhân tạo tham gia}:
+
+\textbf{Bước 1 --- Xác định phạm vi.} Đọc phân phối chương trình theo lớp.
+Nếu là kiểm tra thường xuyên theo chương thì lấy toàn bộ bài của chương đó;
+nếu là giữa kì hoặc cuối kì thì lấy từ đầu học kì đến đúng bài có mốc kiểm tra
+tương ứng. Bước này trả về danh sách bài kèm \textbf{số tiết} của từng bài.
+
+\textbf{Bước 2 --- Chọn bài cho câu Đúng/Sai trước tiên.} Vì mỗi câu Đúng/Sai
+chiếm trọn bốn mức độ nên phải xếp chỗ cho nó trước, nếu không sẽ vỡ ma trận.
+Các bài trong phạm vi được sắp theo số tiết giảm dần, lấy từ trên xuống; bốn ý
+của một câu Đúng/Sai đều nằm trong cùng một bài.
+
+\textbf{Bước 3 --- Trừ chỉ tiêu ngay tại bài đã chọn.} Một câu Đúng/Sai đã
+chiếm 1 nhận biết + 1 thông hiểu + 1 vận dụng + 1 vận dụng cao, nên phải trừ
+đúng bốn ý đó ra khỏi chỉ tiêu của chính bài đó --- \textit{``đơn vị kiến thức
+đó chia ra được 3 câu thì phải tính 1 ở đúng sai, chỉ còn 2''}. Trừ ở cấp bài
+đã tự động làm tổng giảm đúng bằng số câu Đúng/Sai, tuyệt đối không trừ thêm
+lần thứ hai ở cấp tổng.
+
+\textbf{Bước 4 --- Chia câu về từng bài theo tỉ lệ số tiết.} Các câu mức nhận
+biết và thông hiểu được chia về từng bài \textit{theo tỉ lệ số tiết của bài đó
+trong phân phối chương trình} --- bài dạy nhiều tiết thì nhiều câu, đúng
+nguyên tắc trọng số của ma trận đề. Phần dư sau khi làm tròn xuống được rải
+lần lượt cho bài nhiều tiết nhất trước.
+
+\textbf{Bước 5 --- Rải mức vận dụng và vận dụng cao.} Chọn vận dụng cao trước,
+\textbf{mỗi bài nhiều nhất một câu vận dụng cao} để không dồn hết câu khó vào
+một đơn vị kiến thức. Sau đó mới rải câu vận dụng, ưu tiên những bài chưa có
+câu vận dụng cao. Tỉ lệ vận dụng so với vận dụng cao lấy đúng từ bảng cấu hình
+ở Giải pháp 3, không ép cứng trong mã.
+
+\textbf{Bước 6 --- Chọn mã câu hỏi cuối cùng.} Đến đây ma trận đã nói rõ ``cần
+một câu mức thông hiểu, thuộc yêu cầu cần đạt số 014 của bài 1, loại trắc
+nghiệm nhiều lựa chọn''. Bước chọn câu tra bảng Mapping để tìm mã hàm sinh
+tương ứng, bỏ qua những mã đã dùng trong đề hiện tại, và xoay vòng giữa các
+phiên bản A, B, C để đề nào cũng khác đề nào.
+
+Sau đó câu hỏi sinh ra còn qua một bước kiểm tra tự động: đúng chương, đúng
+bài, đúng mức độ, đúng loại câu, không trùng câu trong cùng một đề.
+
+\textbf{Chế độ nháp.} Nếu ngân hàng chưa đủ câu cho một ô nào đó của ma trận,
+hệ thống không dừng cả đề mà chèn dòng ``[THIẾU CÂU HỎI]'' vào đúng vị trí.
+Đây là lựa chọn có chủ ý: dòng đó vừa cho giáo viên một đề dùng tạm được, vừa
+là chỉ dấu rõ ràng cho biết cần bổ sung hàm sinh câu hỏi nào tiếp theo.
+
+\chenanh[0.92]{05-ma-tran-de-sinh-ra.png}{Ma trận chi tiết do hệ thống dựng ra cho một đề kiểm tra định kì}
+
+\clearpage
+\subsubsection{Giải pháp 5 --- Sinh đề, lời giải và nhiều mã đề bằng \LaTeX}
+
+\textbf{a) Đề và lời giải từ cùng một nguồn}
+
+Các câu hỏi đã chọn được ghép thành một tệp \LaTeX\ theo mẫu đề thi, rồi biên
+dịch ra PDF. Bản lời giải không được sinh lại lần nữa mà lấy chính tệp
+\LaTeX\ của đề vừa in, chỉ đổi chế độ hiển thị từ ``đề thi'' sang ``lời giải''.
+Nhờ vậy \textbf{lời giải chắc chắn ứng đúng với đề học sinh đang cầm trên tay},
+không bao giờ xảy ra tình trạng lệch câu giữa đề và đáp án --- một lỗi rất
+thường gặp khi làm thủ công.
+
+Đáp án cũng được trích ngay tại thời điểm sinh đề, đọc trực tiếp từ các dấu
+hiệu trong mã \LaTeX\ (phương án được đánh dấu đúng, đáp số của câu trả lời
+ngắn, phần lời giải), rồi lưu lại thành một tệp đáp án đi kèm. Khi chấm bài,
+hệ thống so với tệp đáp án này, nên kết quả chấm khớp 100\% với đề đã phát.
+
+\textbf{b) Nhiều mã đề cùng cấu trúc, chỉ khác số liệu}
+
+Đây là chức năng được giáo viên đánh giá cao nhất khi dùng thử. Vì mỗi câu hỏi
+là một hàm sinh, nên chỉ cần gọi lại hàm đó là có ngay một câu mới:
+\textbf{cùng bài, cùng yêu cầu cần đạt, cùng mức độ nhận thức, cùng dạng toán
+--- chỉ khác số liệu}. Từ đó hệ thống in ra bao nhiêu mã đề cũng được, và các
+mã đề ấy tương đương nhau tuyệt đối về nội dung lẫn độ khó.
+
+Ý nghĩa thực tế với giáo viên: \textit{lấy ra là dùng kiểm tra được ngay, không
+phải ngồi tự thay số để tạo đề mới, cũng không phải giải lại để kiểm tra đáp
+án}. Ý nghĩa với học sinh: hai em ngồi cạnh nhau nhận hai đề khác nhau thật
+sự, nhưng không em nào thiệt hơn em nào.
+
+Cũng từ cơ chế đó, trang kết quả sau khi làm bài có thêm nút ``Làm đề khác cùng
+cấu trúc''. Học sinh bấm một cái là có ngay một đề mới y hệt về cấu trúc để
+luyện lại phần mình vừa làm sai --- và đường đi này \textbf{không gọi trí tuệ
+nhân tạo}, vì tham số của đề cũ đã được lưu sẵn, nên vừa nhanh vừa không tốn
+chi phí.
+
+\chenanh[0.92]{06-hai-ma-de.png}{Hai mã đề của cùng một cấu trúc: cùng dạng toán, cùng mức độ, chỉ khác số liệu}
+
+\chenanh[0.92]{07-de-va-loi-giai-pdf.png}{Tệp PDF đề thi và tệp PDF lời giải tương ứng do hệ thống sinh ra}
+
+\subsubsection{Giải pháp 6 --- Tổ chức làm bài, chấm điểm và theo dõi kết quả}
+
+\textbf{a) Làm bài trực tuyến và chấm ngay.} Học sinh mở đề trên web, làm các
+phần trắc nghiệm nhiều lựa chọn, đúng/sai và trả lời ngắn ngay trên trình
+duyệt. Bấm nộp là có điểm ngay cùng với đáp án đúng của từng câu. Việc chấm do
+chương trình đối chiếu với tệp đáp án đã lưu, \textbf{không gọi trí tuệ nhân
+tạo}, nên vừa chính xác vừa không phát sinh chi phí dù bao nhiêu học sinh cùng
+làm bài.
+
+\textbf{b) Thang điểm 10 chia theo phần.} Điểm được tính theo đúng bảng trọng
+số ở Giải pháp 3: trắc nghiệm nhiều lựa chọn 3 điểm, đúng/sai 2 điểm, trả lời
+ngắn 2 điểm, tự luận 3 điểm, mỗi phần chia đều cho các câu trong phần đó. Hiện
+tại phần tự luận 3 điểm học sinh làm ra giấy nộp cho giáo viên chấm, nên màn
+hình kết quả ghi rõ điểm tự động là 7 điểm và chức năng chấm tự luận đang được
+xây dựng --- ghi rõ như vậy để học sinh không hiểu nhầm là mình bị mất điểm.
+
+\textbf{c) Giao đề và trả điểm qua Google Classroom.} Sau khi giáo viên kết
+nối một lần tài khoản Google Classroom của mình, hệ thống tự đăng đề, lời giải
+và điểm của từng học sinh về đúng lớp học thật trên Classroom. Học sinh mở
+Classroom quen thuộc là thấy bài của mình, không phải học thêm một phần mềm
+mới.
+
+\textbf{d) Trang thống kê cho giáo viên.} Giáo viên xem được điểm trung bình
+của lớp, danh sách điểm từng học sinh và --- quan trọng hơn cả --- những
+chương, bài mà học sinh sai nhiều nhất. Đây chính là thông tin để điều chỉnh
+việc dạy: bài nào cả lớp sai nhiều thì cần dạy lại, em nào sai lệch hẳn so với
+lớp thì cần kèm riêng.
+
+\chenanh[0.92]{15-lam-bai-nop-bai.png}{Màn hình làm bài trực tuyến và màn hình kết quả chấm ngay sau khi nộp}
+
+\subsubsection{Quá trình cải tiến}
+
+Sáng kiến không hoàn chỉnh ngay từ bản đầu tiên. Toàn bộ quá trình được ghi lại
+trong sổ tay kĩ thuật của hệ thống theo từng phiên bản; dưới đây là những lần
+cải tiến đáng kể nhất, đi kèm lí do --- vì chính những lần sửa này mới là nội
+dung có giá trị chia sẻ với đồng nghiệp.
+
+\begin{center}
+\begin{longtable}{|p{1.4cm}|p{5.6cm}|p{6.4cm}|}
+\hline
+\textbf{Lần} & \textbf{Vấn đề gặp phải} & \textbf{Cách khắc phục} \\ \hline
+\endhead
+1 & Bản thiết kế ban đầu định dùng nhiều trí tuệ nhân tạo cho từng khâu (phân
+tích yêu cầu, dựng ma trận, chọn câu) --- kết quả không ổn định, mỗi lần chạy
+một khác &
+Rút xuống chỉ còn ba chỗ dùng trí tuệ nhân tạo, toàn bộ khâu còn lại chuyển
+sang chương trình máy tính. Đây là lần cải tiến quan trọng nhất, đặt ra nguyên
+tắc xuyên suốt của hệ thống \\ \hline
+
+2 & Đáp án phải nhập tay riêng nên hay lệch với đề &
+Phát hiện đáp án đã nằm sẵn trong mã \LaTeX\ của câu hỏi; viết chương trình tự
+trích ra ngay lúc sinh đề. Việc trích không dùng được cách tìm kiếm thông
+thường vì công thức toán có ngoặc lồng nhau, phải viết bộ đếm ngoặc riêng \\ \hline
+
+3 & Lời giải bị lọt vào đề của học sinh &
+Bổ sung mốc chặn khi cắt phần đề bài, đồng thời lược bỏ các lệnh \LaTeX\ mà
+trình duyệt không hiển thị được \\ \hline
+
+4 & Mọi câu Đúng/Sai in ra PDF bị dính liền thành một đoạn văn &
+Truy ra một lệnh \LaTeX\ được sinh ra nhưng không hề tồn tại trong gói lệnh
+đang dùng; sửa ở thư viện sinh câu hỏi để luôn dùng lệnh đúng \\ \hline
+
+5 & Toàn bộ câu trả lời ngắn bị sinh nhầm thành câu trắc nghiệm ở mọi đề đã
+từng tạo &
+Nguyên nhân là chỗ gọi hàm luôn truyền cùng một giá trị cho tham số dạng câu;
+sửa lại nhánh gọi và bổ sung giá trị mặc định cho 29 hàm sinh \\ \hline
+
+6 & Một hàm sinh câu hỏi trả về rỗng, câu hỏi biến mất khỏi đề mà không ai biết &
+Viết bộ kiểm thử tự động chạy qua toàn bộ các hàm trong ngân hàng; lỗi bị phát
+hiện ngay và từ đó mọi lần bổ sung câu hỏi mới đều phải qua bộ kiểm thử này \\ \hline
+
+7 & Số câu do người dùng yêu cầu bị bỏ mất trên đường truyền, đề luôn ra theo
+số mặc định &
+Rà lại toàn bộ đường đi của dữ liệu, phát hiện một bước trung gian gán cứng giá
+trị rỗng đè lên yêu cầu thật \\ \hline
+
+8 & Trí tuệ nhân tạo hiểu ``chương 1'' thành ``lớp 1'' &
+Chặn sớm ngay đầu vào: lớp không thuộc 10, 11, 12 thì báo lỗi rõ ràng; sau đó
+đổi hẳn thành hỏi lại người dùng thay vì tự đoán \\ \hline
+
+9 & Câu ``cho tôi thêm đề nữa'' bị hiểu là ngoài phạm vi &
+Thay vì chỉnh trí tuệ nhân tạo cho hiểu, làm hẳn một đường đi không qua trí tuệ
+nhân tạo: nút ``Làm đề khác cùng cấu trúc'' dùng lại tham số của đề cũ \\ \hline
+
+10 & Số câu chia đều cho các bài, không đúng trọng số &
+Chuyển sang chia theo \textbf{tỉ lệ số tiết} của từng bài trong phân phối
+chương trình \\ \hline
+
+11 & Câu Đúng/Sai bị trừ chỉ tiêu hai lần, làm hụt câu ở các phần khác &
+Quy định trừ đúng một lần và trừ ngay tại bài mà câu Đúng/Sai đã chọn \\ \hline
+
+12 & Các câu vận dụng cao dồn hết vào một đơn vị kiến thức &
+Quy định mỗi bài nhiều nhất một câu vận dụng cao, chọn vận dụng cao trước rồi
+mới rải vận dụng \\ \hline
+
+13 & Học sinh mất phiên đăng nhập giữa chừng &
+Bổ sung cơ chế tự làm mới phiên khi phiên hết hạn \\ \hline
+
+14 & Đề và đáp án không hiện trong tài khoản Classroom của học sinh &
+Ba nguyên nhân nối nhau: giao diện nuốt mất thông báo lỗi; chưa bật một dịch vụ
+cần thiết của Google; và xin nhầm quyền (quyền đăng \textit{bài tập} khác quyền
+đăng \textit{tài liệu}). Sửa lần lượt cả ba, đồng thời cho hiện lí do thất bại
+ngay trên màn hình thay vì im lặng \\ \hline
+\end{longtable}
+\end{center}
+\textit{Bảng 5. Những lần cải tiến đáng kể trong quá trình thực hiện}
+
+Nhìn lại, hầu hết các lỗi đều thuộc một trong hai nhóm: \textit{giao cho trí
+tuệ nhân tạo việc lẽ ra phải do chương trình làm}, và \textit{không có cơ chế
+tự kiểm tra nên lỗi âm thầm tồn tại rất lâu}. Hai bài học rút ra tương ứng là
+nguyên tắc phân vai ở Giải pháp 1 và bộ kiểm thử tự động ở Giải pháp 2.
+
+\subsubsection{Vai trò của trợ lí trí tuệ nhân tạo trong quá trình thực hiện}
+
+Tôi xin nói rõ và không né tránh: trong quá trình xây dựng hệ thống này, tôi có
+sử dụng trợ lí trí tuệ nhân tạo (Claude của Anthropic) như một cộng sự kĩ
+thuật. Cụ thể, trợ lí giúp tôi viết và sửa mã nguồn theo yêu cầu, dò tìm
+nguyên nhân của các lỗi nêu ở bảng trên, và ghi lại sổ tay kĩ thuật của dự án.
+
+Tuy nhiên, phần thuộc về chuyên môn sư phạm vẫn hoàn toàn do tôi quyết định và
+chịu trách nhiệm: quy ước mã định danh câu hỏi, quy ước một câu Đúng/Sai gồm
+bốn ý ở bốn mức độ, quy tắc trừ chỉ tiêu tại chính bài đã chọn, nguyên tắc chia
+câu theo tỉ lệ số tiết, quy định mỗi bài nhiều nhất một câu vận dụng cao, ma
+trận và thang điểm của từng loại bài kiểm tra, cùng toàn bộ nội dung toán học
+và ràng buộc số liệu của từng hàm sinh câu hỏi. Nhiều lần trợ lí đề xuất cách
+làm khác, tôi phải yêu cầu làm lại cho đúng quy ước sư phạm mà tôi đã đặt ra.
+
+Chính trải nghiệm đó củng cố thêm quan điểm nêu ở Mục II.1: trí tuệ nhân tạo là
+một công cụ rất mạnh để hiện thực hoá ý tưởng của giáo viên, nhưng không thay
+được người giáo viên trong việc quyết định \textit{dạy gì, kiểm tra gì và kiểm
+tra đến mức nào}. Với các đồng nghiệp muốn làm theo hướng này, tôi cho rằng
+điều kiện cần không phải là biết lập trình giỏi, mà là \textbf{có quy ước
+chuyên môn rõ ràng trước khi ngồi vào máy} --- vì đó chính là thứ mà công cụ
+không tự nghĩ ra được.
+
+\clearpage

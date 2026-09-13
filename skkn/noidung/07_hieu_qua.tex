@@ -1,0 +1,132 @@
+% ---------------------------------------------------------------
+%  Muc II.5 -- Kha nang ap dung va hieu qua
+% ---------------------------------------------------------------
+\subsection{Khả năng áp dụng và hiệu quả của sáng kiến}
+
+\subsubsection{Khả năng áp dụng}
+
+\textbf{Tại đơn vị.} Sáng kiến đã được áp dụng tại \DONVI\ cho cả giáo viên tổ
+Toán và học sinh các lớp \dotfill\ trong năm học \NAMHOC.
+
+\textbf{Khả năng nhân rộng.} Do phần khung của hệ thống tách rời hoàn toàn khỏi
+nội dung câu hỏi, việc nhân rộng chỉ là bổ sung dữ liệu, không phải viết lại
+phần mềm:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Sang khối lớp khác:} bổ sung phân phối chương trình, bảng yêu
+        cầu cần đạt và các hàm sinh câu hỏi của lớp 11, lớp 12. Toàn bộ thuật
+        toán dựng ma trận, chọn câu, sinh đề, chấm bài dùng lại nguyên vẹn.
+  \item \textbf{Sang trường khác:} mỗi trường chỉ cần một tài khoản giáo viên
+        kết nối Google Classroom của mình; hệ thống chạy trên web nên không
+        phải cài đặt gì.
+  \item \textbf{Sang môn học khác:} các môn có câu hỏi dạng tính toán (Vật lí,
+        Hoá học, Sinh học) dùng lại được toàn bộ phần mềm, chỉ cần viết hàm
+        sinh câu hỏi của môn mình theo đúng chuẩn mã định danh ở Giải pháp 1.
+\end{itemize}
+
+\textbf{Điều kiện áp dụng.} Máy tính hoặc điện thoại có kết nối Internet; giáo
+viên biết dùng máy tính ở mức cơ bản; lớp học Google Classroom (không bắt
+buộc). Riêng việc \textit{bổ sung câu hỏi mới} vào ngân hàng đòi hỏi giáo viên
+biết viết hàm Python cơ bản --- đây là ngưỡng duy nhất cần vượt qua, và theo
+kinh nghiệm của tôi thì một giáo viên Toán làm quen được sau vài buổi, vì bản
+chất chỉ là viết lại công thức toán mà mình vốn đã thuộc.
+
+\subsubsection{Hiệu quả đối với giáo viên}
+
+\begin{center}
+\begin{tabular}{|p{6.4cm}|c|c|c|}
+\hline
+\textbf{Nội dung} & \textbf{Trước khi áp dụng} & \textbf{Sau khi áp dụng} &
+\textbf{Chênh lệch} \\ \hline
+Thời gian soạn một đề kiểm tra định kì & & & \\ \hline
+Thời gian soạn thêm một mã đề & & & \\ \hline
+Thời gian làm đáp án, biểu điểm & & & \\ \hline
+Thời gian chấm một lớp (phần trắc nghiệm) & & & \\ \hline
+Số mã đề thực sự khác nhau dùng được & & & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 7. Hiệu quả về thời gian làm việc của giáo viên}
+
+\ghichu{Cách lấy số cho bảng này: nhờ hai đến ba đồng nghiệp bấm giờ một lần
+soạn đề theo cách cũ, rồi bấm giờ một lần dùng hệ thống. Chỉ cần số phút, không
+cần khảo sát lớn. Riêng dòng ``thời gian soạn thêm một mã đề'' là dòng thuyết
+phục nhất --- theo cách cũ gần như phải soạn lại cả đề, còn ở đây là bấm thêm
+một lần.}
+
+\subsubsection{Hiệu quả đối với học sinh}
+
+\begin{center}
+\begin{tabular}{|c|p{7.6cm}|c|c|}
+\hline
+\textbf{TT} & \textbf{Nội dung khảo sát sau khi áp dụng} & \textbf{Số HS} &
+\textbf{Tỉ lệ} \\ \hline
+1 & Thấy hứng thú hơn khi được tự tạo đề luyện tập & & \\ \hline
+2 & Cho rằng biết điểm ngay giúp mình nhớ bài hơn & & \\ \hline
+3 & Có luyện lại bằng nút ``Làm đề khác cùng cấu trúc'' & & \\ \hline
+4 & Cho rằng kiểm tra công bằng hơn vì mỗi bạn một đề & & \\ \hline
+5 & Tự đánh giá là tiến bộ hơn so với đầu năm & & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 8. Kết quả khảo sát học sinh sau khi áp dụng (tổng số: \dots\ học sinh)}
+
+\begin{center}
+\begin{tabular}{|p{3.4cm}|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Lớp}} & \multirow{2}{*}{\textbf{Sĩ số}} &
+\multicolumn{4}{c|}{\textbf{Xếp loại điểm bài kiểm tra}} \\ \cline{3-6}
+ & & \textbf{Giỏi} & \textbf{Khá} & \textbf{Trung bình} & \textbf{Yếu} \\ \hline
+Lớp thực nghiệm \dotfill & & & & & \\ \hline
+Lớp đối chứng \dotfill & & & & & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 9. So sánh kết quả bài kiểm tra giữa lớp thực nghiệm và lớp đối chứng}
+
+\ghichu{Bảng 9 là bảng hội đồng chấm đọc kĩ nhất. Lưu ý ba điều: (1) hai lớp
+phải tương đương nhau về đầu vào --- nếu không thì ghi rõ điểm trung bình môn
+Toán học kì trước của hai lớp để chứng minh; (2) dùng cùng một đề hoặc hai đề
+cùng ma trận; (3) ghi thêm điểm trung bình của mỗi lớp dưới bảng. Nếu chị chưa
+có lớp đối chứng, có thể thay bằng so sánh cùng một lớp trước và sau khi áp
+dụng --- vẫn hợp lệ, chỉ cần nói rõ.}
+
+\subsubsection{Hiệu quả đo được từ chính hệ thống}
+
+Ngoài số liệu khảo sát, bản thân hệ thống ghi lại nhật kí hoạt động nên có thể
+lấy ra những con số khách quan sau:
+
+\begin{center}
+\begin{tabular}{|p{8.4cm}|c|}
+\hline
+\textbf{Chỉ số} & \textbf{Số liệu} \\ \hline
+Số hàm sinh câu hỏi đã viết trong ngân hàng & \\ \hline
+Số mã định danh câu hỏi đã có hàm sinh & \\ \hline
+Số đề đã được sinh ra trong năm học & \\ \hline
+Số lượt học sinh làm bài trực tuyến & \\ \hline
+Số lớp đã kết nối Google Classroom & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 10. Số liệu vận hành thực tế của hệ thống}
+
+\ghichu{Hai dòng đầu lấy bằng cách đếm trong thư mục ngân hàng Python (tại thời
+điểm viết mục này là 46 hàm sinh ứng với 32 mã định danh, đều thuộc chương I
+lớp 10). Ba dòng sau lấy bằng cách đếm số dòng trong các bảng
+\texttt{de\_da\_sinh}, \texttt{exam\_history} và \texttt{classroom\_coursework}
+của cơ sở dữ liệu --- nhớ lấy số vào sát ngày nộp, và ghi rõ mốc thời gian
+thống kê ngay dưới bảng.}
+
+\subsubsection{Hiệu quả về kinh tế và xã hội}
+
+\textbf{Về kinh tế.} Hệ thống tự xây dựng nên không phát sinh chi phí mua phần
+mềm tạo đề thương mại hằng năm. Chi phí duy trì chỉ gồm tiền thuê máy chủ và
+tên miền, ở mức một cá nhân chi trả được. Việc chấm phần trắc nghiệm không gọi
+trí tuệ nhân tạo nên không phát sinh chi phí theo số lượt làm bài, dù có bao
+nhiêu học sinh cùng sử dụng. Ngoài ra, học sinh không phải mua thêm sách bài
+tập để luyện, vì hệ thống sinh ra bài luyện không giới hạn.
+
+\textbf{Về xã hội.} Thời gian giáo viên tiết kiệm được ở khâu soạn đề và chấm
+bài được chuyển sang khâu có giá trị hơn: phân tích chỗ hổng của học sinh và
+dạy lại. Học sinh ở mọi điều kiện gia đình đều tiếp cận được nguồn đề đúng
+chương trình và có lời giải đúng, không phụ thuộc vào việc có đi học thêm hay
+có mua được sách tham khảo hay không --- đây là ý nghĩa mà tôi tâm đắc nhất khi
+làm sáng kiến này.
+
+\clearpage

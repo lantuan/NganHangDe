@@ -1,0 +1,201 @@
+% ---------------------------------------------------------------
+%  Muc II.4 -- Huong dan su dung + loi thuong gap
+% ---------------------------------------------------------------
+\subsection{Hướng dẫn sử dụng hệ thống}
+
+Mục này viết cho người dùng thật --- giáo viên và học sinh --- nên trình bày
+theo từng thao tác, mỗi thao tác kèm một hình chụp màn hình thực tế.
+
+\subsubsection{Địa chỉ truy cập}
+
+\begin{center}
+\setlength{\fboxsep}{10pt}
+\fbox{\begin{minipage}{0.85\linewidth}
+\centering
+\textbf{\large \url{https://nganhangdechv.tech}}\\[10pt]
+\IfFileExists{hinhanh/qr-nganhangdechv.png}
+  {\includegraphics[width=3.2cm]{hinhanh/qr-nganhangdechv.png}}
+  {\textcolor{red}{\fbox{\begin{minipage}{3.2cm}\centering\vspace{1.1cm}
+   \scriptsize CHỖ DÁN\\ MÃ QR\vspace{1.1cm}\end{minipage}}}}\\[6pt]
+{\small Quét mã để vào hệ thống}
+\end{minipage}}
+\end{center}
+
+Hệ thống chạy trực tiếp trên trình duyệt, dùng được cả trên máy tính và điện
+thoại, không phải cài đặt phần mềm gì thêm.
+
+\ghichu{Mã QR đã được tạo sẵn ở \texttt{skkn/hinhanh/qr-nganhangdechv.png}. Nếu
+đổi tên miền thì báo để tạo lại mã mới.}
+
+\subsubsection{Hướng dẫn dành cho học sinh}
+
+\textbf{Bước 1 --- Tạo tài khoản và đăng nhập.} Vào trang chủ, chọn
+\textit{Đăng ký}, điền họ tên, email và mật khẩu; hoặc bấm \textit{Đăng nhập
+bằng Google} để dùng luôn tài khoản Gmail của mình. Học sinh đã có tài khoản
+thì đăng nhập thẳng. Nếu quên mật khẩu, dùng chức năng \textit{Quên mật khẩu}
+để nhận thư đặt lại.
+
+\chenanh[0.85]{09-dang-ky-dang-nhap.png}{Màn hình đăng ký và đăng nhập của học sinh}
+
+\textbf{Bước 2 --- Chọn lớp.} Lần đầu đăng nhập, học sinh chọn lớp mình đang
+học trong danh sách. Việc này để hệ thống biết phạm vi chương trình và để giáo
+viên nhận đúng kết quả của lớp mình. Có thể quay lại đổi lớp bất cứ lúc nào.
+
+\chenanh[0.85]{10-chon-lop.png}{Màn hình chọn lớp}
+
+\textbf{Bước 3 --- Tham gia lớp trên Google Classroom (nếu giáo viên đã kết
+nối).} Sau khi chọn lớp, màn hình hiện mã lớp Classroom kèm hướng dẫn ba bước.
+Học sinh mở Google Classroom, bấm dấu cộng, nhập mã lớp là vào được lớp thật
+của giáo viên. Bước này không bắt buộc --- có thể bấm \textit{Bỏ qua} để vào
+dùng ngay.
+
+\chenanh[0.85]{11-tham-gia-classroom.png}{Màn hình hướng dẫn tham gia lớp Google Classroom kèm mã lớp}
+
+\textbf{Bước 4 --- Tạo đề.} Có hai cách:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Cách 1 --- gõ yêu cầu bằng tiếng Việt} vào ô hội thoại, ví dụ:
+        \textit{``Tạo cho em đề kiểm tra 15 phút chương 1 lớp 10''} hoặc
+        \textit{``Cho em đề kiểm tra giữa kì 1 môn Toán lớp 10''}. Nên nói rõ
+        \textbf{lớp}, \textbf{phạm vi} (chương mấy, giữa kì hay cuối kì) và
+        \textbf{loại bài} (kiểm tra thường xuyên hay định kì).
+  \item \textbf{Cách 2 --- dùng nút ``Tạo đề nhanh''}, chọn sẵn lớp, chương và
+        loại bài trong các ô chọn. Cách này không cần diễn đạt, chạy nhanh hơn
+        và luôn cho kết quả đúng ý --- nên dùng khi cách 1 hiểu sai yêu cầu.
+\end{itemize}
+
+\chenanh[0.85]{01-giao-dien-hoc-sinh.png}{Tạo đề bằng một câu yêu cầu tiếng Việt trong ô hội thoại}
+
+\chenanh[0.85]{13-tao-de-nhanh.png}{Biểu mẫu ``Tạo đề nhanh'' --- chọn lớp, chương, loại bài}
+
+\textbf{Bước 5 --- Nhận đề.} Sau khoảng nửa phút đến một phút (hệ thống phải
+biên dịch tệp \LaTeX\ ra PDF), màn hình hiện đường dẫn tải đề. Học sinh có thể
+tải PDF về in ra làm giấy, hoặc bấm \textit{Làm bài online} để làm ngay trên
+web.
+
+\chenanh[0.85]{07-de-va-loi-giai-pdf.png}{Đề thi dạng PDF do hệ thống sinh ra}
+
+\textbf{Bước 6 --- Làm bài và xem kết quả.} Trang làm bài hiện lần lượt các câu
+trắc nghiệm nhiều lựa chọn, đúng/sai và trả lời ngắn. Làm xong bấm \textit{Nộp
+bài}, hệ thống chấm ngay và hiện điểm kèm đáp án đúng của từng câu. Phần tự
+luận học sinh làm ra giấy nộp cho giáo viên, nên điểm chấm tự động tối đa là 7
+trên thang 10 --- màn hình có ghi rõ điều này.
+
+\chenanh[0.85]{15-lam-bai-nop-bai.png}{Trang làm bài trực tuyến và kết quả chấm ngay sau khi nộp}
+
+\textbf{Bước 7 --- Xem lời giải và luyện lại.} Dưới mỗi đề trong khung hội
+thoại có nút \textit{``Lời giải của đề này''} để tải bản lời giải chi tiết đúng
+của đề đó. Ở trang kết quả có nút \textit{``Làm đề khác cùng cấu trúc''}: bấm
+vào sẽ nhận ngay một đề mới cùng dạng, cùng mức độ, chỉ khác số liệu --- dùng
+để luyện lại phần vừa làm sai.
+
+\chenanh[0.85]{16-loi-giai-va-lam-de-khac.png}{Nút tải lời giải của từng đề và nút ``Làm đề khác cùng cấu trúc''}
+
+\subsubsection{Hướng dẫn dành cho giáo viên}
+
+\textbf{Bước 1 --- Đăng nhập.} Giáo viên đăng nhập bằng chính tài khoản Google
+đang dùng cho Google Classroom, để hai bên khớp nhau.
+
+\textbf{Bước 2 --- Kết nối Google Classroom (làm một lần duy nhất).} Vào địa
+chỉ \texttt{/gv/classroom/connect}, chọn tài khoản Google và bấm đồng ý cấp
+quyền. Hệ thống xin sáu quyền: đọc danh sách lớp, đọc danh sách học sinh, đọc
+email học sinh, đăng bài tập, đăng tài liệu, và tải tệp lên Drive của chính
+giáo viên. Sau khi đồng ý, màn hình báo kết nối thành công và liệt kê các lớp
+đọc được.
+
+\chenanh[0.85]{17-gv-ket-noi-classroom.png}{Màn hình cấp quyền và kết quả kết nối Google Classroom}
+
+\textbf{Bước 3 --- Đồng bộ danh sách lớp.} Bấm đồng bộ để hệ thống lấy về danh
+sách lớp và học sinh. Từ đây, mã lớp sẽ tự hiện ra cho học sinh ở Bước 3 phần
+trên.
+
+\textbf{Bước 4 --- Lấy đề kiểm tra.} Giáo viên tạo đề giống như học sinh (Bước
+4 phần trên), chọn loại bài \textit{kiểm tra định kì} để có đề đủ cấu trúc 12
+câu trắc nghiệm, 2 câu đúng/sai, 4 câu trả lời ngắn, 3 câu tự luận. Tạo nhiều
+lần sẽ được nhiều mã đề cùng cấu trúc, khác số liệu --- in ra dùng kiểm tra
+trực tiếp. Bản lời giải tải riêng bằng nút \textit{``Lời giải của đề này''}.
+
+\textbf{Bước 5 --- Đề, đáp án và điểm về Classroom.} Khi học sinh làm bài
+xong, hệ thống tự đăng đề, đáp án và điểm của em đó về lớp Classroom tương
+ứng. Học sinh mở Classroom quen thuộc là thấy bài của mình.
+
+\chenanh[0.85]{18-classroom-hoc-sinh.png}{Đề, đáp án và điểm hiện trong tài khoản Google Classroom của học sinh}
+
+\textbf{Bước 6 --- Xem thống kê lớp.} Vào \texttt{/gv/thong-ke} để xem điểm
+trung bình của lớp, điểm từng học sinh và những chương, bài học sinh sai nhiều
+nhất --- căn cứ để điều chỉnh việc dạy.
+
+\chenanh[0.85]{02-trang-thong-ke-giao-vien.png}{Trang thống kê kết quả của giáo viên}
+
+\subsubsection{Những lỗi thường gặp và cách khắc phục}
+
+Bảng dưới đây tổng hợp các tình huống người dùng hay gặp trong quá trình chạy
+thử, kèm cách xử lí. Đây cũng là phần tôi thường phải trả lời nhiều nhất khi
+hướng dẫn đồng nghiệp và học sinh.
+
+\begin{center}
+\begin{longtable}{|p{4.6cm}|p{4.2cm}|p{5.0cm}|}
+\hline
+\textbf{Hiện tượng} & \textbf{Nguyên nhân} & \textbf{Cách khắc phục} \\ \hline
+\endhead
+Đang dùng thì bị đưa về trang đăng nhập &
+Phiên đăng nhập hết hạn, hoặc trình duyệt chặn cookie &
+Đăng nhập lại. Nếu lặp lại nhiều lần, bật cho phép cookie, không dùng chế độ
+ẩn danh \\ \hline
+
+Gõ yêu cầu nhưng hệ thống hỏi lại ``Em học lớp mấy?'' &
+Câu yêu cầu chưa nêu rõ lớp &
+Nêu rõ lớp 10, 11 hay 12. Hệ thống cố ý hỏi lại thay vì tự đoán, để tránh ra
+nhầm đề \\ \hline
+
+Báo lỗi, không ra được đề &
+Câu yêu cầu diễn đạt khó hiểu, hoặc dịch vụ xử lí ngôn ngữ đang bận &
+Bấm nút \textit{``Tạo đề nhanh''} hiện ngay dưới thông báo lỗi để chọn trực
+tiếp lớp và chương --- đường đi này không qua trí tuệ nhân tạo nên luôn chạy
+được \\ \hline
+
+Trong đề có dòng ``[THIẾU CÂU HỎI]'' &
+Ngân hàng chưa có đủ câu ở đúng ô ma trận đó (thường là câu trả lời ngắn mức
+vận dụng cao) &
+Vẫn dùng được đề, chỉ cần thay câu đó. Về lâu dài là chỉ dấu cho giáo viên biết
+cần bổ sung hàm sinh câu hỏi nào tiếp theo \\ \hline
+
+Tạo đề lâu, màn hình quay vòng &
+Hệ thống đang biên dịch tệp \LaTeX\ ra PDF &
+Chờ khoảng 30--60 giây. Không bấm đi bấm lại nhiều lần vì mỗi lần bấm là một
+lần biên dịch mới \\ \hline
+
+Bấm tải lời giải thì báo không còn tệp &
+Tệp nguồn của đề được dọn tự động sau một ngày để tiết kiệm ổ đĩa &
+Tạo lại đề rồi tải lời giải ngay trong phiên đó. Nếu cần lưu, tải PDF về máy \\ \hline
+
+Điểm tối đa chỉ tới 7 &
+Đúng thiết kế: 3 điểm tự luận làm ra giấy, chức năng chấm tự luận tự động đang
+được xây dựng &
+Giáo viên chấm phần tự luận và cộng vào. Màn hình kết quả đã ghi rõ để học sinh
+không hiểu nhầm \\ \hline
+
+Học sinh không thấy bài trong Classroom &
+Học sinh chưa tham gia lớp bằng mã lớp; hoặc giáo viên chưa kết nối Classroom &
+Học sinh vào Classroom nhập mã lớp. Giáo viên kiểm tra lại
+\texttt{/gv/classroom/connect} \\ \hline
+
+Giáo viên đã kết nối nhưng bài vẫn không đăng lên được &
+Tài khoản Google cấp thiếu quyền, hoặc quyền đã cấp từ trước lần cập nhật &
+Vào lại \texttt{/gv/classroom/connect} và bấm đồng ý cấp quyền lại một lần nữa
+--- quyền cũ không tự có thêm quyền mới \\ \hline
+
+Không thêm được học sinh vào lớp bằng danh sách &
+Google chỉ cho phép thêm thẳng học sinh nếu tài khoản là quản trị viên
+Google Workspace for Education &
+Dùng cách phát mã lớp để học sinh tự tham gia --- hệ thống đã làm sẵn ở Bước 3 \\ \hline
+\end{longtable}
+\end{center}
+\textit{Bảng 6. Những lỗi thường gặp và cách khắc phục}
+
+\ghichu{Khi cho đồng nghiệp dùng thử, chị ghi lại thêm những câu hỏi họ hay hỏi
+rồi bổ sung vào bảng này. Một bảng ``lỗi thường gặp'' dày dặn là bằng chứng rõ
+nhất cho thấy sáng kiến đã thực sự được đem ra dùng chứ không chỉ nằm trên
+giấy.}
+
+\clearpage

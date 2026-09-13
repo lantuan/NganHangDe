@@ -1,0 +1,79 @@
+% ---------------------------------------------------------------
+%  Muc II.6 -- Huong phat trien
+% ---------------------------------------------------------------
+\subsection{Hướng phát triển tiếp theo}
+
+Phần đã hoàn thành và đang được sử dụng là vòng chạy phục vụ \textbf{học sinh}:
+tạo đề, làm bài, chấm điểm, trả kết quả về Google Classroom, cùng trang thống
+kê cơ bản cho giáo viên. Các hướng phát triển dưới đây tập trung làm sâu
+\textbf{phần dành cho giáo viên} --- phần mà theo tôi mới là chỗ sáng kiến này
+phát huy giá trị lớn nhất đối với tổ chuyên môn.
+
+\subsubsection{Khu làm việc riêng cho giáo viên}
+
+Đây là hướng ưu tiên số một, gồm bốn chức năng:
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Tự đặt ma trận chi tiết cho từng đề.} Hiện ma trận lấy theo
+        bảng cấu hình chung của loại bài kiểm tra. Giáo viên cần đặt được ma
+        trận riêng cho từng đề: bài nào mấy câu, mức độ nào mấy câu, dạng câu
+        nào --- tức là đưa chính bảng ma trận quen thuộc của tổ chuyên môn lên
+        màn hình.
+  \item \textbf{Sinh một lượt nhiều mã đề.} Thay vì bấm tạo nhiều lần, giáo
+        viên nhập số mã đề cần có và nhận về một tệp gồm đủ các mã đề cùng cấu
+        trúc, khác số liệu, kèm bản lời giải và bảng đáp án tổng hợp của tất cả
+        các mã --- dùng in kiểm tra trực tiếp.
+  \item \textbf{Tải mã nguồn \LaTeX\ của đề về máy.} Giáo viên lấy được tệp
+        \texttt{.tex} của đề để tự chỉnh sửa theo ý mình: thêm một câu riêng,
+        đổi cách trình bày, ghép vào mẫu đề của trường. Đây là yêu cầu thực tế
+        của giáo viên quen dùng \LaTeX\ --- hệ thống lo phần nặng nhọc là chọn
+        câu và sinh số liệu, còn quyền biên tập cuối cùng vẫn thuộc về giáo
+        viên.
+  \item \textbf{Quản lí lớp và kho đề đã giao.} Danh sách lớp, danh sách học
+        sinh, các đề đã giao cho từng lớp, kết quả từng đợt --- để giáo viên
+        không phải nhớ mình đã cho lớp nào làm đề nào.
+\end{enumerate}
+
+\ghichu{Bốn chức năng này em sẽ làm ngay sau khi bài sáng kiến hoàn thành, theo
+đúng yêu cầu của chị: chỉ ra đề và lấy mã nguồn, không cần làm bài trực tuyến ở
+nhánh này.}
+
+\subsubsection{Mở rộng ngân hàng câu hỏi}
+
+Ngân hàng hiện mới phủ chương I lớp 10. Kế hoạch mở rộng theo thứ tự: hoàn
+thiện các chương còn lại của lớp 10, sau đó đến lớp 11 và lớp 12. Riêng dạng
+câu trả lời ngắn mức vận dụng cao đang là ô mỏng nhất của ma trận --- đây là
+việc cần làm trước tiên, và dòng ``[THIẾU CÂU HỎI]'' trong đề chính là danh
+sách việc cần làm do hệ thống tự chỉ ra.
+
+Về lâu dài, nếu được tổ chuyên môn hưởng ứng, mỗi giáo viên đóng góp hàm sinh
+câu hỏi cho một vài bài mình dạy kĩ nhất thì ngân hàng chung của tổ sẽ lớn rất
+nhanh --- đây là mô hình làm việc mà tôi mong muốn hướng tới.
+
+\subsubsection{Chấm câu tự luận}
+
+Hiện phần tự luận 3 điểm học sinh làm ra giấy. Hướng phát triển là cho học sinh
+chụp ảnh bài làm viết tay và bài chấm được đối chiếu với lời giải chuẩn mà hàm
+sinh câu hỏi đã tạo ra. Phần kĩ thuật đã dựng xong và chạy thông với ảnh thử,
+nhưng tôi chủ động chưa đưa vào sử dụng vì chưa kiểm chứng được độ chính xác
+khi đọc chữ viết tay thật của học sinh --- một chức năng chấm điểm mà chưa chắc
+chắn thì chưa nên dùng. Màn hình hiện đang ghi rõ ``chức năng chấm tự luận đang
+được xây dựng'' để học sinh không hiểu nhầm.
+
+\subsubsection{Phân tích kết quả và gợi ý luyện tập cá nhân hoá}
+
+Hệ thống đã lưu đủ dữ liệu để biết mỗi học sinh sai nhiều ở bài nào, mức độ
+nào. Bước tiếp theo là tự động chỉ ra điểm yếu của từng em và gợi ý ngay một đề
+luyện tập đúng vào phần yếu đó, chỉ bằng một nút bấm. Khi có chức năng này,
+vòng ``học --- kiểm tra --- biết mình yếu chỗ nào --- luyện đúng chỗ đó'' mới
+thực sự khép kín, và đúng tinh thần \textit{đánh giá vì sự tiến bộ của người
+học} của Thông tư 22/2021/TT-BGDĐT.
+
+\subsubsection{Hoàn thiện phần tài khoản giáo viên}
+
+Hiện việc đăng kí tài khoản mới trên hệ thống dành cho học sinh; giáo viên dùng
+các chức năng riêng qua đường dẫn trực tiếp. Cần bổ sung luồng đăng kí và phân
+quyền cho giáo viên để nhiều giáo viên trong tổ cùng dùng độc lập, mỗi người
+quản lí lớp của mình.
+
+\clearpage

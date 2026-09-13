@@ -1,0 +1,124 @@
+% ---------------------------------------------------------------
+%  Muc II.2 -- Thuc trang (tinh trang giai phap da biet)
+% ---------------------------------------------------------------
+\subsection{Thực trạng vấn đề --- tình trạng các giải pháp đã biết}
+
+\subsubsection{Thực trạng biên soạn đề kiểm tra tại đơn vị}
+
+Để có căn cứ khách quan, tôi đã khảo sát giáo viên tổ Toán của nhà trường
+trước khi triển khai sáng kiến.
+
+\begin{center}
+\begin{tabular}{|c|p{8.2cm}|c|c|}
+\hline
+\textbf{TT} & \textbf{Nội dung khảo sát} & \textbf{Số GV} & \textbf{Tỉ lệ} \\ \hline
+1 & Thời gian soạn một đề kiểm tra định kì trên 4 giờ & & \\ \hline
+2 & Cho rằng khó bảo đảm đúng tỉ lệ bốn mức độ nhận thức & & \\ \hline
+3 & Tạo mã đề bằng cách đảo thứ tự câu hỏi và phương án & & \\ \hline
+4 & Không tái sử dụng được kho câu hỏi của năm trước & & \\ \hline
+5 & Chưa quen soạn đủ bốn dạng câu hỏi theo cấu trúc mới & & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 1. Kết quả khảo sát giáo viên tổ Toán (tổng số: \dots\ giáo viên)}
+
+\ghichu{Chị phát phiếu cho tổ Toán rồi điền hai cột cuối. Nếu tổ ít người, ghi
+thẳng số lượng (ví dụ 5/7) --- hội đồng không đòi mẫu lớn, chỉ đòi có số thật.
+Nếu chưa kịp khảo sát, có thể bỏ bảng này và viết thành đoạn văn nhận định,
+nhưng có bảng thì thuyết phục hơn nhiều.}
+
+Qua trao đổi trực tiếp, các giáo viên đều cho rằng khâu tốn công nhất không
+phải là nghĩ ra câu hỏi mà là \textit{cân đối ma trận} và \textit{tạo các mã đề
+khác nhau}. Một đề kiểm tra định kì theo cấu trúc mới gồm 12 câu trắc nghiệm
+nhiều lựa chọn, 2 câu đúng/sai (tương đương 8 ý), 4 câu trả lời ngắn và 3 câu
+tự luận; để có bốn mã đề thực sự khác nhau thì phải soạn tới bốn đề độc lập ---
+một khối lượng công việc không khả thi trong điều kiện dạy học bình thường.
+
+\subsubsection{Thực trạng tự luyện tập của học sinh}
+
+\begin{center}
+\begin{tabular}{|c|p{8.2cm}|c|c|}
+\hline
+\textbf{TT} & \textbf{Nội dung khảo sát} & \textbf{Số HS} & \textbf{Tỉ lệ} \\ \hline
+1 & Có nhu cầu tự luyện thêm bài tập sau mỗi bài học & & \\ \hline
+2 & Tìm đề luyện tập trên mạng, không rõ có đúng chương trình không & & \\ \hline
+3 & Gặp lời giải sai hoặc không hiểu được khi tự tra trên mạng & & \\ \hline
+4 & Muốn biết ngay đúng/sai sau khi làm bài & & \\ \hline
+5 & Không biết mình đang yếu ở bài nào cụ thể & & \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 2. Kết quả khảo sát học sinh trước khi áp dụng (tổng số: \dots\ học sinh)}
+
+\ghichu{Khảo sát nhanh bằng Google Biểu mẫu trong 5 phút đầu tiết là đủ. Nhớ
+giữ lại ảnh chụp biểu mẫu và bảng kết quả để đưa vào phụ lục --- đó là bằng
+chứng tốt.}
+
+Điểm đáng chú ý nhất là học sinh không thiếu \textit{ý chí} luyện tập mà thiếu
+\textit{nguồn đề đúng tầm}: đề trên mạng hoặc quá khó, hoặc thuộc chương trình
+cũ, hoặc có lời giải sai; và dù có làm thì cũng phải chờ giáo viên chữa mới
+biết mình đúng hay sai.
+
+\subsubsection{Phân tích các giải pháp đã có}
+
+Trên thực tế hiện đã có ba nhóm giải pháp, mỗi nhóm giải quyết được một phần và
+để lại một hạn chế cốt lõi.
+
+\textbf{Nhóm 1 --- Ngân hàng đề tĩnh do giáo viên tự tập hợp.} Giáo viên sưu
+tầm câu hỏi từ nhiều nguồn, gõ vào Word hoặc \LaTeX\ rồi cắt ghép thành đề.
+Ưu điểm là nội dung do chính giáo viên kiểm soát. Hạn chế cốt lõi: kho câu hỏi
+là \textit{hữu hạn và tĩnh} --- dùng một lần là học sinh biết đề, muốn có đề
+mới phải ngồi thay số bằng tay từng câu một, và mỗi lần thay số lại phải giải
+lại để kiểm tra đáp án.
+
+\textbf{Nhóm 2 --- Phần mềm trộn đề và các website ngân hàng đề thương mại.}
+Các phần mềm này lấy câu hỏi từ một kho có sẵn của nhà cung cấp rồi hoán vị thứ
+tự câu và thứ tự phương án. Hạn chế cốt lõi: các mã đề chỉ khác nhau về
+\textit{thứ tự}, nội dung vẫn y hệt; giáo viên thường không đưa được ngân hàng
+câu hỏi của riêng mình vào; và kho câu hỏi vẫn là kho tĩnh, chỉ là tĩnh của
+người khác.
+
+\textbf{Nhóm 3 --- Dùng trí tuệ nhân tạo sinh thẳng đề.} Đây là hướng đang được
+nói đến nhiều nhất hiện nay: đưa yêu cầu cho một mô hình ngôn ngữ lớn và nhận
+về một đề hoàn chỉnh. Ưu điểm là nhanh và không cần chuẩn bị gì. Hạn chế cốt
+lõi nằm ở chính bản chất của mô hình --- nó dự đoán chuỗi kí tự có xác suất cao
+nhất chứ không thực hiện phép toán, nên trong quá trình thử nghiệm tôi thường
+xuyên gặp các lỗi sau:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+  \item \textbf{Vượt khung chương trình:} đưa vào kiến thức của lớp trên hoặc
+        của chương chưa học, dù yêu cầu đã ghi rõ phạm vi.
+  \item \textbf{Tính toán sai:} đáp án không khớp với đề bài, hoặc lời giải
+        trình bày trôi chảy nhưng sai ở một bước biến đổi.
+  \item \textbf{Không ổn định:} cùng một yêu cầu, chạy hai lần cho hai kết quả
+        khác nhau, không kiểm chứng lại được.
+  \item \textbf{Sai mức độ:} câu ghi là nhận biết nhưng thực chất là vận dụng,
+        làm hỏng ma trận đề.
+\end{itemize}
+
+Một đề kiểm tra lấy điểm chính thức không chấp nhận được các rủi ro đó.
+
+\begin{center}
+\begin{tabular}{|p{3.2cm}|c|c|c|c|}
+\hline
+\textbf{Tiêu chí} & \textbf{Ngân hàng tĩnh} & \textbf{Phần mềm trộn đề} &
+\textbf{AI sinh đề} & \textbf{Sáng kiến này} \\ \hline
+Nội dung do giáo viên quyết định & Có & Không & Không & Có \\ \hline
+Sinh được đề mới, khác số liệu & Không & Không & Có & Có \\ \hline
+Các mã đề khác nhau thật sự & Không & Không & Có & Có \\ \hline
+Đáp án, lời giải chắc chắn đúng & Có & Có & Không & Có \\ \hline
+Đúng khung chương trình & Có & Tuỳ nguồn & Không chắc & Có \\ \hline
+Đúng ma trận bốn mức độ & Thủ công & Tuỳ nguồn & Không chắc & Tự động \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 3. So sánh sáng kiến với các giải pháp đã có}
+
+Bảng trên cho thấy khoảng trống mà sáng kiến này lấp vào: \textbf{vừa giữ được
+quyền quyết định nội dung của giáo viên như ngân hàng tĩnh, vừa sinh được đề
+mới như trí tuệ nhân tạo, mà không mang theo rủi ro sai sót của trí tuệ nhân
+tạo}. Cách làm để đạt được cả ba điều đó cùng lúc là: câu hỏi do chính giáo
+viên viết ra, nhưng viết dưới dạng \textit{chương trình Python sinh câu hỏi}
+chứ không phải dưới dạng văn bản cố định. Toàn bộ số liệu, đáp án và lời giải
+đều do Python tính ra bằng công thức toán học, nên không thể sai; phạm vi kiến
+thức đã bị khoá cứng ngay trong mã định danh của câu hỏi, nên không thể vượt
+khung chương trình.
+
+\clearpage

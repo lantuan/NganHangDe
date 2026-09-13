@@ -1,0 +1,133 @@
+% ---------------------------------------------------------------
+%  PHAN III -- KET LUAN, KIEN NGHI + TAI LIEU + PHU LUC
+% ---------------------------------------------------------------
+\section{KẾT LUẬN VÀ KIẾN NGHỊ}
+
+\subsection{Kết luận}
+
+Sáng kiến đã xây dựng và đưa vào sử dụng thực tế một hệ thống ngân hàng đề môn
+Toán trên nền web dùng chung cho cả giáo viên và học sinh, với ba kết quả
+chính:
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Về mặt giải pháp:} đã chứng minh được một hướng đi khác với hai
+        cách làm phổ biến hiện nay. Không dùng ngân hàng câu hỏi tĩnh --- vì
+        tĩnh thì dùng một lần là hết; cũng không giao cho trí tuệ nhân tạo sinh
+        đề --- vì không kiểm chứng được. Thay vào đó, câu hỏi do chính giáo
+        viên viết ra dưới dạng hàm sinh bằng Python, nên vừa tự sinh được vô
+        hạn biến thể, vừa bảo đảm tuyệt đối không sai đáp án và không vượt
+        khung chương trình.
+  \item \textbf{Về mặt sản phẩm:} hệ thống đang chạy thật tại địa chỉ
+        \url{https://nganhangdechv.tech}, thực hiện trọn vòng từ một câu yêu
+        cầu tiếng Việt đến đề PDF, lời giải, bài làm trực tuyến, điểm số, sổ
+        điểm Google Classroom và bảng thống kê của giáo viên.
+  \item \textbf{Về mặt chuyên môn:} các quy ước sư phạm của người viết --- mã
+        định danh gắn với yêu cầu cần đạt, một câu Đúng/Sai gồm bốn ý ở bốn mức
+        độ, chia câu theo tỉ lệ số tiết, mỗi bài nhiều nhất một câu vận dụng
+        cao --- đã được mã hoá thành thuật toán, nghĩa là chúng được thực hiện
+        chính xác và nhất quán ở mọi đề, điều mà làm thủ công rất khó bảo đảm.
+\end{enumerate}
+
+Bài học lớn nhất tôi rút ra không thuộc về kĩ thuật: \textbf{công cụ chỉ mạnh
+khi người giáo viên có quy ước chuyên môn rõ ràng trước khi ngồi vào máy}. Mọi
+lần hệ thống cho kết quả sai trong quá trình xây dựng đều quy về một trong hai
+nguyên nhân --- hoặc tôi chưa nói rõ quy ước, hoặc tôi đã giao cho máy phần
+việc lẽ ra phải do người quyết định.
+
+\subsection{Kiến nghị}
+
+\textbf{Với tổ chuyên môn.} Thống nhất một bộ ma trận chung cho từng loại bài
+kiểm tra và phân công mỗi giáo viên viết hàm sinh câu hỏi cho một vài bài mình
+dạy kĩ nhất. Nếu làm được, ngân hàng chung của tổ sẽ lớn rất nhanh và mỗi người
+đều được hưởng thành quả chung.
+
+\textbf{Với nhà trường.} Tạo điều kiện về phòng máy hoặc cho phép học sinh dùng
+điện thoại trong tiết luyện tập có kiểm soát, để việc làm bài trực tuyến diễn
+ra ngay tại lớp; đồng thời hỗ trợ tổ chức một buổi tập huấn nội bộ để đồng
+nghiệp làm quen với hệ thống.
+
+\textbf{Với Sở Giáo dục và Đào tạo.} Tôi kiến nghị có cơ chế chia sẻ ngân hàng
+câu hỏi dạng hàm sinh giữa các trường trong tỉnh, kèm một chuẩn mã định danh
+thống nhất. Khi ngân hàng đủ lớn, mọi giáo viên trong tỉnh đều có thể lấy được
+đề đúng ma trận cho lớp mình --- đó là phần giá trị vượt xa phạm vi một trường
+mà tôi mong sáng kiến này góp được.
+
+\bigskip
+\noindent Tôi xin cam đoan sáng kiến này là của bản thân tôi thực hiện, không
+sao chép của người khác. Trong quá trình thực hiện tôi có sử dụng trợ lí trí
+tuệ nhân tạo để hỗ trợ viết và gỡ lỗi mã nguồn, điều này đã được nêu rõ tại Mục
+II.3; toàn bộ quy ước chuyên môn, nội dung toán học và các quyết định sư phạm
+là do tôi đưa ra và chịu trách nhiệm.
+
+\vspace{1cm}
+\begin{flushright}
+\begin{minipage}{6cm}
+\centering
+\textit{\DIADIEM, ngày \dots\ tháng \dots\ năm 2026}\\[2pt]
+\textbf{Người viết sáng kiến}\\
+\textit{(Ký và ghi rõ họ tên)}\\[2.5cm]
+\TACGIA
+\end{minipage}
+\end{flushright}
+
+\clearpage
+
+% ---------------------------------------------------------------
+\section*{TÀI LIỆU THAM KHẢO}
+\addcontentsline{toc}{section}{TÀI LIỆU THAM KHẢO}
+\setcounter{secnumdepth}{0}
+
+\begin{enumerate}[leftmargin=1.2cm, itemsep=3pt]
+  \item Bộ Giáo dục và Đào tạo (2018), \textit{Chương trình Giáo dục phổ thông
+        --- Chương trình môn Toán}, ban hành kèm theo Thông tư số
+        32/2018/TT-BGDĐT ngày 26/12/2018.
+  \item Bộ Giáo dục và Đào tạo (2021), \textit{Thông tư số 22/2021/TT-BGDĐT
+        ngày 20/7/2021 quy định về đánh giá học sinh trung học cơ sở và học
+        sinh trung học phổ thông}.
+  \item Bộ Giáo dục và Đào tạo (2024), \textit{Quyết định số 764/QĐ-BGDĐT ngày
+        08/3/2024 về việc phê duyệt cấu trúc định dạng đề thi Kỳ thi tốt nghiệp
+        trung học phổ thông từ năm 2025}.
+  \item Thủ tướng Chính phủ (2022), \textit{Quyết định số 131/QĐ-TTg ngày
+        25/01/2022 phê duyệt Đề án ``Tăng cường ứng dụng công nghệ thông tin và
+        chuyển đổi số trong giáo dục và đào tạo giai đoạn 2022--2025, định
+        hướng đến năm 2030''}.
+  \item Bộ Chính trị (2024), \textit{Nghị quyết số 57-NQ/TW ngày 22/12/2024 về
+        đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi
+        số quốc gia}.
+  \item Chính phủ (2012), \textit{Nghị định số 13/2012/NĐ-CP ngày 02/3/2012 ban
+        hành Điều lệ Sáng kiến}.
+  \item Nhóm tác giả (2022), \textit{Toán 10 --- Bộ sách Kết nối tri thức với
+        cuộc sống}, Nhà xuất bản Giáo dục Việt Nam.
+  \item Tài liệu kĩ thuật của hệ thống Ngân hàng đề AI (sổ tay kĩ thuật nội bộ,
+        20 tài liệu, cập nhật đến tháng 9/2026).
+\end{enumerate}
+
+\ghichu{Bổ sung thêm sách, bài báo về đo lường và đánh giá mà chị thực sự có
+đọc. Không nên liệt kê tài liệu chưa đọc --- hội đồng có thể hỏi.}
+
+\clearpage
+
+% ---------------------------------------------------------------
+\section*{PHỤ LỤC}
+\addcontentsline{toc}{section}{PHỤ LỤC}
+
+\textbf{Phụ lục 1.} Phiếu khảo sát giáo viên và phiếu khảo sát học sinh.
+
+\textbf{Phụ lục 2.} Một đề kiểm tra định kì hoàn chỉnh do hệ thống sinh ra, kèm
+bản lời giải.
+
+\textbf{Phụ lục 3.} Hai mã đề cùng cấu trúc, khác số liệu (minh chứng cho Giải
+pháp 5).
+
+\textbf{Phụ lục 4.} Bảng ma trận chi tiết của đề ở Phụ lục 2.
+
+\textbf{Phụ lục 5.} Tài khoản dùng thử dành cho hội đồng chấm:
+\url{https://nganhangdechv.tech} --- tên đăng nhập \dotfill, mật khẩu \dotfill.
+
+\ghichu{Phụ lục 5 rất nên có: tạo sẵn một tài khoản học sinh dùng thử và một
+tài khoản giáo viên để hội đồng tự vào bấm. Đây là điểm mạnh mà các sáng kiến
+khác không có --- sản phẩm chạy được thật, kiểm chứng được ngay.}
+
+\ghichu{In kèm Phụ lục 2 và 3 ở dạng bản in thật (không phải ảnh chụp màn
+hình): hai mã đề đặt cạnh nhau để thấy rõ cùng dạng toán, khác số liệu.}
+
