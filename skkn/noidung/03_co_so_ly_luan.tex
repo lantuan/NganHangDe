@@ -1,0 +1,162 @@
+% ---------------------------------------------------------------
+%  PHAN II -- NOI DUNG
+%  Muc II.1 -- Co so li luan va co so phap li
+% ---------------------------------------------------------------
+\section{NỘI DUNG SÁNG KIẾN}
+
+\subsection{Cơ sở lí luận và cơ sở pháp lí}
+
+\subsubsection{Cơ sở pháp lí}
+
+Sáng kiến được xây dựng trên các căn cứ pháp lí sau:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Thông tư số 32/2018/TT-BGDĐT} ngày 26/12/2018 ban hành Chương
+        trình Giáo dục phổ thông. Chương trình môn Toán xác định mục tiêu hình
+        thành và phát triển năm thành tố của năng lực toán học, trong đó có
+        năng lực giải quyết vấn đề toán học và năng lực sử dụng công cụ,
+        phương tiện học toán. Đây là căn cứ để thiết kế câu hỏi theo mức độ
+        năng lực chứ không theo mức độ ghi nhớ.
+
+  \item \textbf{Thông tư số 22/2021/TT-BGDĐT} ngày 20/7/2021 quy định về đánh
+        giá học sinh trung học cơ sở và trung học phổ thông. Thông tư yêu cầu
+        việc đánh giá phải \textit{``vì sự tiến bộ của học sinh''}, coi trọng
+        động viên, khuyến khích sự cố gắng của người học, bảo đảm kịp thời,
+        công bằng, khách quan. Hai yêu cầu \textit{kịp thời} và \textit{công
+        bằng} chính là hai vấn đề mà sáng kiến này hướng tới giải quyết bằng
+        công nghệ: chấm ngay khi học sinh nộp bài, và mỗi học sinh một đề
+        riêng.
+
+  \item \textbf{Quyết định số 764/QĐ-BGDĐT} ngày 08/3/2024 của Bộ Giáo dục và
+        Đào tạo về việc phê duyệt cấu trúc định dạng đề thi tốt nghiệp trung
+        học phổ thông từ năm 2025, với ba dạng câu hỏi trắc nghiệm: nhiều lựa
+        chọn, đúng/sai và trả lời ngắn. Đây là căn cứ để hệ thống sinh đủ bốn
+        dạng câu hỏi (ba dạng trắc nghiệm nêu trên và tự luận).
+
+  \item \textbf{Quyết định số 131/QĐ-TTg} ngày 25/01/2022 của Thủ tướng Chính
+        phủ phê duyệt Đề án ``Tăng cường ứng dụng công nghệ thông tin và
+        chuyển đổi số trong giáo dục và đào tạo''.
+
+  \item \textbf{Nghị quyết số 57-NQ/TW} ngày 22/12/2024 của Bộ Chính trị về
+        đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi
+        số quốc gia, trong đó xác định phải đẩy mạnh ứng dụng trí tuệ nhân tạo
+        và dữ liệu lớn trong các lĩnh vực, đưa giáo dục trở thành một trong
+        những lĩnh vực được ưu tiên chuyển đổi số.
+
+  \item \textbf{Nghị định số 13/2012/NĐ-CP} ngày 02/3/2012 của Chính phủ ban
+        hành Điều lệ Sáng kiến và các văn bản hướng dẫn hiện hành của Sở Giáo
+        dục và Đào tạo về công tác sáng kiến năm học \NAMHOC.
+\end{itemize}
+
+\ghichu{Thay dòng cuối bằng đúng số hiệu công văn hướng dẫn sáng kiến năm nay
+của Sở mình --- hội đồng chấm thường đối chiếu ngay dòng này.}
+
+\subsubsection{Cơ sở lí luận}
+
+\textbf{a) Đánh giá vì sự tiến bộ của người học đòi hỏi phản hồi tức thời}
+
+Lí luận dạy học hiện đại phân biệt \textit{đánh giá kết quả học tập}
+(\textit{assessment of learning}) với \textit{đánh giá vì học tập}
+(\textit{assessment for learning}). Ở dạng thứ hai, giá trị của bài kiểm tra
+không nằm ở điểm số mà nằm ở thông tin phản hồi mà học sinh nhận được và ở
+việc học sinh được luyện lại ngay phần mình còn yếu. Muốn vậy phải đáp ứng hai
+điều kiện: phản hồi phải đến \textit{ngay} sau khi làm bài, và học sinh phải
+có \textit{đủ đề} để luyện lại nhiều lần cùng một dạng toán. Cách làm thủ công
+không đáp ứng được cả hai điều kiện này --- giáo viên không thể chấm ngay cho
+mấy trăm bài, cũng không thể soạn cho mỗi em một đề luyện tập riêng.
+
+\textbf{b) Câu hỏi tham số hoá và tính tương đương của đề}
+
+Trong đo lường giáo dục, hai câu hỏi được coi là \textit{tương đương} khi
+chúng cùng đo một chỉ báo năng lực, cùng dạng thao tác tư duy và cùng mức độ
+nhận thức, dù số liệu cụ thể khác nhau. Từ nhận xét đó hình thành kĩ thuật
+\textit{câu hỏi tham số hoá} (\textit{parameterized item} hay
+\textit{algorithmic item}): thay vì lưu một câu hỏi cố định, người ta lưu quy
+tắc sinh ra câu hỏi cùng với quy tắc sinh đáp án và lời giải. Mỗi lần gọi, quy
+tắc cho ra một câu hỏi mới với bộ số liệu mới nhưng vẫn giữ nguyên dạng toán
+và độ khó.
+
+Kĩ thuật này giải quyết triệt để vấn đề công bằng trong kiểm tra: các mã đề
+không còn là một đề hoán vị thứ tự mà là những đề thực sự khác nhau về số
+liệu. Đồng thời nó biến kho câu hỏi từ tài nguyên \textit{hữu hạn} thành tài
+nguyên \textit{không cạn}: từ một câu gốc có thể sinh ra hàng trăm câu luyện
+tập cho học sinh.
+
+Điều kiện để áp dụng được kĩ thuật này là bộ tham số phải được ràng buộc chặt
+để mọi biến thể đều có nghiệm đẹp, đúng phạm vi chương trình và không rơi vào
+trường hợp suy biến --- đây chính là phần công sức chuyên môn của giáo viên bộ
+môn, máy không làm thay được.
+
+\textbf{c) Ma trận đề và bốn mức độ nhận thức}
+
+Đề kiểm tra chỉ có giá trị đo lường khi được xây dựng từ một ma trận xác định
+rõ tỉ lệ câu hỏi theo từng đơn vị kiến thức và từng mức độ nhận thức: nhận
+biết, thông hiểu, vận dụng, vận dụng cao. Về nguyên tắc, trọng số của một đơn
+vị kiến thức trong đề phải tương ứng với thời lượng dạy học của đơn vị đó
+trong phân phối chương trình. Nguyên tắc này thường bị bỏ qua khi soạn đề thủ
+công vì phải tính toán thủ công quá nhiều; ngược lại, đó lại là việc máy tính
+làm rất tốt và tuyệt đối chính xác.
+
+\textbf{d) Trí tuệ nhân tạo là trợ lí, không phải người thay thế giáo viên}
+
+Các mô hình ngôn ngữ lớn hiện nay rất mạnh ở việc hiểu ngôn ngữ tự nhiên,
+nhưng bản chất là mô hình dự đoán chuỗi kí tự có xác suất cao nhất, không phải
+hệ suy luận toán học. Khi được yêu cầu tự ra đề và giải, mô hình có thể cho
+lời giải trôi chảy nhưng sai ở bước tính toán, và lần chạy sau lại cho kết quả
+khác lần trước. Một đề kiểm tra lấy điểm chính thức không chấp nhận được rủi
+ro đó.
+
+Vì vậy, sáng kiến này xác định rõ ranh giới phân vai: trí tuệ nhân tạo chỉ làm
+những việc \textit{cần hiểu ngôn ngữ tự nhiên hoặc cần văn phong tự nhiên};
+mọi việc có quy tắc rõ ràng --- tra bảng phân phối chương trình, dựng ma trận,
+chọn mã câu hỏi, sinh số liệu, tính điểm, so khớp đáp án --- đều do mã nguồn
+thực hiện. Còn quyền quyết định cuối cùng về nội dung và mức độ đề vẫn thuộc
+về giáo viên. Nguyên tắc này được ghi thành quy tắc phát triển bắt buộc của hệ
+thống: \textit{``Ưu tiên mã nguồn hơn trí tuệ nhân tạo; không để nghiệp vụ nằm
+trong câu lệnh gửi cho mô hình.''}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  box/.style={draw, rounded corners=3pt, align=center, minimum height=1.1cm,
+              text width=3.3cm, thick},
+  ai/.style={box, fill=blue!8},
+  code/.style={box, fill=green!8},
+  gv/.style={box, fill=orange!12},
+  mui/.style={-latex, thick}
+]
+\node[gv] (gv) at (0,0) {\textbf{Giáo viên}\\[2pt]\scriptsize quyết định nội dung, mức độ, duyệt đề};
+\node[ai] (ai) at (5,0) {\textbf{Trí tuệ nhân tạo}\\[2pt]\scriptsize hiểu yêu cầu bằng tiếng Việt};
+\node[code] (code) at (10,0) {\textbf{Mã nguồn}\\[2pt]\scriptsize chọn câu, sinh số liệu, tính điểm};
+\draw[mui] (gv) -- (ai);
+\draw[mui] (ai) -- (code);
+\node[align=center, font=\scriptsize\itshape] at (5,-1.6)
+  {chỉ khâu ngôn ngữ};
+\node[align=center, font=\scriptsize\itshape] at (10,-1.6)
+  {mọi khâu có quy tắc};
+\end{tikzpicture}
+\caption{Phân vai giữa giáo viên, trí tuệ nhân tạo và mã nguồn trong hệ thống}
+\end{figure}
+
+\textbf{e) Một hệ thống phục vụ đồng thời hai đối tượng}
+
+Từ bốn cơ sở trên, hệ thống được thiết kế để phục vụ đồng thời giáo viên và
+học sinh, với hai vai trò khác nhau nhưng dùng chung một ngân hàng câu hỏi:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Về phía học sinh:} chủ động tạo đề luyện tập đúng phạm vi mình
+        cần bằng một câu yêu cầu tiếng Việt, làm bài trực tuyến và nhận điểm
+        cùng đáp án ngay. Đây là điều kiện để đánh giá thường xuyên thực sự
+        diễn ra \textit{vì sự tiến bộ} của các em.
+  \item \textbf{Về phía giáo viên:} có nguồn đề đúng ma trận để dùng cho kiểm
+        tra trên lớp, giao đề và trả điểm qua Google Classroom, đồng thời theo
+        dõi được điểm trung bình và những bài học sinh hay sai để điều chỉnh
+        việc dạy.
+\end{itemize}
+
+Cách phân vai này cũng phù hợp với triết lí phát triển đã đặt ra ngay từ đầu
+của hệ thống: \textit{``Không dùng trí tuệ nhân tạo để thay thế giáo viên.
+Trí tuệ nhân tạo đóng vai trò trợ lí. Giáo viên vẫn là người quyết định.''}
+
+\clearpage
