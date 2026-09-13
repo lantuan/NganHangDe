@@ -1,0 +1,126 @@
+% =====================================================================
+%  BAO CAO SANG KIEN KINH NGHIEM
+%  BIEN DICH BANG: XeLaTeX  (khong dung pdflatex vi can font Times New Roman)
+%  Lenh: xelatex skkn.tex   (chay 2 lan de co muc luc)
+% =====================================================================
+\documentclass[a4paper,14pt]{extarticle}
+
+% ----- Font va tieng Viet (XeLaTeX) ----------------------------------
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% Neu may bao khong tim thay font, doi thanh:  \setmainfont{TeX Gyre Termes}
+
+% ----- Trinh bay theo quy dinh van ban hanh chinh ---------------------
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing                      % gian dong 1,5
+\setlength{\parindent}{1cm}          % lui dau dong 1cm
+
+% ----- Goi ho tro ----------------------------------------------------
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{amsmath, amssymb}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage[hidelinks, unicode]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[font=small, labelfont=bf, justification=centering]{caption}
+
+\renewcommand{\figurename}{Hình}
+\renewcommand{\tablename}{Bảng}
+\renewcommand{\contentsname}{MỤC LỤC}
+\renewcommand{\refname}{TÀI LIỆU THAM KHẢO}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% Danh so muc: I, II, III  -> tieu muc II.1, II.1.1
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% Dinh dang tieu de muc
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.6em}{\MakeUppercase}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{0.6em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{\thesubsubsection.}{0.6em}{}
+
+% =====================================================================
+%  THONG TIN CAN DIEN  -- sua o day, ca bai tu cap nhat theo
+% =====================================================================
+\def\SOGD{Sở Giáo dục và Đào tạo \dots\dots}
+\def\DONVI{Trường THPT \dots\dots}
+\def\TENSANGKIEN{Xây dựng hệ thống Ngân hàng đề Toán ứng dụng trí tuệ nhân tạo
+hỗ trợ giáo viên biên soạn đề kiểm tra và tổ chức kiểm tra, đánh giá trực tuyến
+ở trường trung học phổ thông}
+\def\LINHVUC{Toán học (ứng dụng công nghệ thông tin và chuyển đổi số trong dạy học)}
+\def\TACGIA{Mai Hà Lan}
+\def\CHUCVU{Giáo viên Toán}
+\def\NAMSINH{\dotfill}
+\def\TRINHDO{\dotfill}
+\def\DIENTHOAI{\dotfill}
+\def\EMAIL{lantuan2605@gmail.com}
+\def\NAMHOC{2025 -- 2026}
+\def\DIADIEM{\dotfill}
+
+% =====================================================================
+%  LENH TIEN ICH
+% =====================================================================
+
+% --- Bat/tat toan bo ghi chu mau do ---
+% Khi in ban nop chinh thuc: doi \hienghichutrue thanh \hienghichufalse
+\newif\ifhienghichu
+\hienghichutrue
+
+% \ghichu{noi dung nhac viec}
+\newcommand{\ghichu}[1]{%
+  \ifhienghichu
+    \par\smallskip
+    \noindent\textcolor{red}{\small\textbf{[GHI CHÚ --- xoá trước khi nộp]}\itshape\ #1}
+    \par\smallskip
+  \fi}
+
+% \chenanh[do rong]{ten-file.png}{Chu thich hinh}
+% Neu file da co trong thu muc hinhanh/ thi chen anh that,
+% neu chua co thi hien mot o vuong do bao cho biet cho nay can chup anh gi.
+\newcommand{\chenanh}[3][0.85]{%
+  \begin{figure}[H]
+    \centering
+    \IfFileExists{hinhanh/#2}%
+      {\includegraphics[width=#1\linewidth]{hinhanh/#2}}%
+      {\setlength{\fboxrule}{1.2pt}\setlength{\fboxsep}{12pt}%
+       \textcolor{red}{\fbox{\begin{minipage}{#1\linewidth}
+         \centering\vspace{1.2cm}
+         \textbf{CHỖ CHÈN ẢNH}\\[6pt]
+         \texttt{hinhanh/#2}\\[10pt]
+         \itshape\small Cần chụp: #3
+         \vspace{1.2cm}
+       \end{minipage}}}}%
+    \caption{#3}
+  \end{figure}}
+
+% =====================================================================
+\begin{document}
+
+\input{noidung/00_bia}
+\input{noidung/01_don_yeu_cau}
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\input{noidung/02_mo_dau}
+% \input{noidung/03_co_so_ly_luan}
+% \input{noidung/04_thuc_trang}
+% \input{noidung/05_giai_phap}
+% \input{noidung/06_hieu_qua}
+% \input{noidung/07_ket_luan}
+% \input{noidung/08_tai_lieu_phu_luc}
+
+\end{document}

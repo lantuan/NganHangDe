@@ -1,0 +1,146 @@
+% ---------------------------------------------------------------
+%  DON YEU CAU CONG NHAN SANG KIEN  (Mau 3)
+% ---------------------------------------------------------------
+\thispagestyle{empty}
+\begin{center}
+{\bfseries CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM}\\
+{\bfseries Độc lập -- Tự do -- Hạnh phúc}\\[4pt]
+\rule{5cm}{0.5pt}\\[1cm]
+{\Large\bfseries ĐƠN YÊU CẦU CÔNG NHẬN SÁNG KIẾN}\\[1cm]
+\end{center}
+
+\noindent\textbf{Kính gửi:} Hội đồng Sáng kiến \dotfill
+\ghichu{Điền đúng tên hội đồng ghi trong công văn hướng dẫn của Sở
+(thường là ``Hội đồng Sáng kiến ngành Giáo dục và Đào tạo tỉnh \dots'').}
+
+\medskip
+\noindent Tôi ghi tên dưới đây:
+
+\begin{center}
+\begin{tabular}{|c|p{2.6cm}|p{2cm}|p{2.4cm}|p{1.8cm}|p{2cm}|p{1.5cm}|}
+\hline
+\textbf{TT} & \textbf{Họ và tên} & \textbf{Ngày sinh} & \textbf{Nơi công tác} &
+\textbf{Chức danh} & \textbf{Trình độ chuyên môn} & \textbf{Tỷ lệ đóng góp} \\ \hline
+1 & \TACGIA & \NAMSINH & \DONVI & \CHUCVU & \TRINHDO & 100\% \\ \hline
+\end{tabular}
+\end{center}
+
+\ghichu{Điền ngày sinh, trình độ chuyên môn (Cử nhân/Thạc sĩ Toán học) vào file
+\texttt{skkn.tex} ở phần ``THÔNG TIN CẦN ĐIỀN'', cả bài sẽ tự cập nhật.}
+
+\bigskip
+\noindent\textbf{1. Là tác giả đề nghị xét công nhận sáng kiến:} \TENSANGKIEN
+
+\noindent\textbf{2. Chủ đầu tư tạo ra sáng kiến:} \TACGIA\ (tác giả tự đầu tư
+kinh phí thuê máy chủ, tên miền và tự thực hiện toàn bộ phần lập trình).
+
+\noindent\textbf{3. Lĩnh vực áp dụng sáng kiến:} \LINHVUC. Sáng kiến được áp
+dụng trong khâu biên soạn đề kiểm tra và tổ chức kiểm tra, đánh giá môn Toán
+cấp trung học phổ thông.
+
+\noindent\textbf{4. Ngày sáng kiến được áp dụng lần đầu hoặc áp dụng thử:}
+\dotfill
+\ghichu{Ghi ngày chị bắt đầu cho học sinh làm bài trên hệ thống. Nếu không nhớ
+chính xác, lấy mốc đầu học kỳ (ví dụ 05/9/2025).}
+
+\bigskip
+\noindent\textbf{5. Mô tả bản chất của sáng kiến}
+
+\subsection*{5.1. Tình trạng giải pháp đã biết}
+
+Việc biên soạn đề kiểm tra môn Toán ở trường phổ thông hiện nay chủ yếu được
+thực hiện thủ công: giáo viên sưu tầm câu hỏi từ nhiều nguồn rời rạc, gõ lại
+bằng Word hoặc \LaTeX, tự cân đối ma trận rồi tự tạo các mã đề bằng cách đảo
+thứ tự câu và phương án. Cách làm này bộc lộ bốn hạn chế: mất nhiều thời gian;
+khó bảo đảm đúng ma trận theo bốn mức độ nhận thức; các mã đề chỉ khác nhau về
+thứ tự nên thực chất vẫn là một đề; và kho câu hỏi không được mã hoá thống nhất
+nên gần như không tái sử dụng được ở các năm học sau.
+
+Một số phần mềm tạo đề thương mại đã có trên thị trường nhưng hoặc thu phí,
+hoặc chỉ hoán vị câu hỏi trong một kho có sẵn của nhà cung cấp, không cho phép
+giáo viên đưa ngân hàng câu hỏi của chính mình vào, và chưa cập nhật kịp cấu
+trúc định dạng đề mới gồm bốn dạng câu hỏi (trắc nghiệm nhiều lựa chọn,
+đúng/sai, trả lời ngắn, tự luận) theo Quyết định số 764/QĐ-BGDĐT ngày
+08/3/2024 của Bộ Giáo dục và Đào tạo. (Phân tích chi tiết ở Mục II.2.)
+
+\subsection*{5.2. Nội dung giải pháp đề nghị công nhận là sáng kiến}
+
+\textbf{a) Mục đích của giải pháp}
+
+Xây dựng một hệ thống ngân hàng đề môn Toán chạy trên nền web, giúp giáo viên
+tạo được đề kiểm tra đúng ma trận chỉ trong vài phút, mỗi lần tạo cho ra một đề
+thực sự khác nhau về số liệu, đồng thời tổ chức được cho học sinh làm bài và
+chấm điểm trực tuyến, trả kết quả về lớp học Google Classroom.
+
+\textbf{b) Tính mới của giải pháp}
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=2pt]
+  \item Câu hỏi không được lưu ở dạng văn bản tĩnh mà được lưu dưới dạng
+        \emph{hàm sinh} viết bằng Python. Mỗi lần gọi, hàm sinh ra một câu hỏi
+        mới với bộ số liệu mới và lời giải tương ứng, nên từ một câu gốc có thể
+        tạo ra hàng trăm biến thể cùng dạng, cùng độ khó.
+  \item Toàn bộ kho câu hỏi được mã hoá theo một chuẩn định danh thống nhất
+        gắn với lớp -- chương -- bài -- mức độ -- dạng câu, nhờ đó máy có thể
+        tự chọn câu theo ma trận mà không cần giáo viên chỉ định từng câu.
+  \item Thuật toán phân bổ câu hỏi bám theo số tiết của từng bài trong phân
+        phối chương trình, đồng thời xử lý riêng dạng câu đúng/sai theo quy
+        ước một câu đúng/sai tương đương bốn ý ở bốn mức độ khác nhau.
+  \item Trí tuệ nhân tạo chỉ được dùng ở khâu hiểu yêu cầu bằng ngôn ngữ tự
+        nhiên của giáo viên; toàn bộ khâu chọn câu, tính điểm và sinh đề do mã
+        nguồn đảm nhiệm. Nguyên tắc ``ưu tiên mã nguồn hơn trí tuệ nhân tạo''
+        này giúp kết quả ổn định, kiểm chứng được và không phụ thuộc vào việc
+        mô hình có trả lời đúng hay không.
+  \item Hệ thống khép kín một vòng: từ yêu cầu của giáo viên đến đề PDF, lời
+        giải PDF, bài làm trực tuyến, điểm số và sổ điểm trên Google Classroom.
+\end{enumerate}
+
+\textbf{c) Cách thức thực hiện}
+
+Trình bày chi tiết tại Mục II.3 của báo cáo, gồm sáu bước: chuẩn hoá mã câu
+hỏi; viết hàm sinh câu hỏi bằng Python; xây dựng bảng ma trận đề; lập trình
+thuật toán chọn câu; sinh đề và lời giải bằng \LaTeX; tổ chức làm bài, chấm
+điểm và trả kết quả về Google Classroom.
+
+\subsection*{5.3. Khả năng áp dụng của giải pháp}
+
+Sáng kiến đã được áp dụng tại \DONVI\ và có thể áp dụng cho mọi tổ Toán ở
+trường trung học cơ sở, trung học phổ thông. Do phần khung hệ thống tách rời
+khỏi nội dung câu hỏi, các môn học khác có ngân hàng câu hỏi dạng tính toán
+(Vật lí, Hoá học, Sinh học) có thể dùng lại toàn bộ phần mềm, chỉ cần bổ sung
+hàm sinh câu hỏi của môn mình.
+
+\subsection*{5.4. Hiệu quả, lợi ích thu được}
+
+\ghichu{Mục này em sẽ dựng bảng số liệu ở phần sau; chị điền số thật rồi chép
+tóm tắt hai đến ba dòng vào đây. Không nên ghi số ước lượng trong đơn.}
+
+Trình bày chi tiết tại Mục II.5 của báo cáo.
+
+\subsection*{5.5. Tài liệu kèm theo}
+
+Báo cáo sáng kiến; phụ lục hình ảnh sản phẩm; địa chỉ truy cập hệ thống;
+tài khoản dùng thử dành cho hội đồng chấm.
+
+\bigskip
+\noindent\textbf{6. Những thông tin cần được bảo mật:} Không có.
+
+\noindent\textbf{7. Các điều kiện cần thiết để áp dụng sáng kiến:} Máy tính
+hoặc điện thoại có kết nối Internet; giáo viên biết sử dụng máy tính ở mức cơ
+bản; nhà trường có lớp học Google Classroom (không bắt buộc).
+
+\bigskip
+\noindent Tôi xin cam đoan mọi thông tin nêu trong đơn là trung thực, đúng sự
+thật và hoàn toàn chịu trách nhiệm trước pháp luật.
+
+\vspace{1cm}
+\begin{flushright}
+\begin{minipage}{6cm}
+\centering
+\textit{\DIADIEM, ngày \dots\ tháng \dots\ năm 2026}\\[2pt]
+\textbf{Người nộp đơn}\\
+\textit{(Ký và ghi rõ họ tên)}\\[2.5cm]
+\TACGIA
+\end{minipage}
+\end{flushright}
+
+\clearpage

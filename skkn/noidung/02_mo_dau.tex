@@ -1,0 +1,136 @@
+% ---------------------------------------------------------------
+%  PHAN I -- MO DAU
+% ---------------------------------------------------------------
+\section{MỞ ĐẦU}
+
+\subsection{Lí do chọn đề tài}
+
+Kiểm tra, đánh giá là khâu then chốt quyết định chất lượng dạy học. Chương
+trình Giáo dục phổ thông 2018 ban hành kèm theo Thông tư số 32/2018/TT-BGDĐT
+chuyển trọng tâm đánh giá từ ghi nhớ kiến thức sang đánh giá năng lực; Thông tư
+số 22/2021/TT-BGDĐT quy định việc đánh giá học sinh trung học cơ sở và trung
+học phổ thông phải bảo đảm tính chính xác, công bằng, vì sự tiến bộ của người
+học. Đặc biệt, Quyết định số 764/QĐ-BGDĐT ngày 08/3/2024 của Bộ Giáo dục và Đào
+tạo công bố cấu trúc định dạng đề thi tốt nghiệp trung học phổ thông từ năm
+2025 với ba dạng câu hỏi trắc nghiệm mới --- nhiều lựa chọn, đúng/sai và trả
+lời ngắn --- đã đặt ra yêu cầu mới cho mỗi giáo viên Toán: đề kiểm tra thường
+xuyên, định kì ở trường phải sớm làm quen học sinh với cấu trúc đó.
+
+Thực tế tại trường tôi, việc đáp ứng yêu cầu này gặp ba khó khăn lớn. Thứ nhất,
+soạn một đề kiểm tra đúng ma trận bốn mức độ với đủ bốn dạng câu hỏi mất từ bốn
+đến sáu giờ làm việc, trong khi một giáo viên thường phải soạn nhiều đề cho
+nhiều lớp trong cùng một đợt kiểm tra. Thứ hai, các mã đề được tạo bằng cách
+đảo thứ tự câu hỏi và phương án nên thực chất vẫn là một đề, học sinh ngồi gần
+nhau vẫn có thể trao đổi đáp án. Thứ ba, kho câu hỏi tích luỹ qua nhiều năm nằm
+rải rác trong hàng trăm tệp Word và \LaTeX\ không được đặt tên thống nhất, đến
+năm sau gần như phải soạn lại từ đầu.
+
+Trong khi đó, Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột
+phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia
+xác định chuyển đổi số là phương thức sản xuất mới, yêu cầu ứng dụng mạnh mẽ
+trí tuệ nhân tạo vào mọi lĩnh vực, trong đó có giáo dục. Các mô hình ngôn ngữ
+lớn hiện nay đã đủ khả năng hiểu yêu cầu bằng tiếng Việt của giáo viên; tuy
+nhiên nếu giao hẳn việc ra đề cho trí tuệ nhân tạo thì lời giải thường sai và
+không kiểm chứng được, không thể dùng làm đề kiểm tra chính thức.
+
+Từ ba khó khăn thực tế và một cơ hội công nghệ nêu trên, tôi chọn nghiên cứu và
+thực hiện sáng kiến \textit{``\TENSANGKIEN''}, với hướng đi khác các phần mềm
+hiện có: trí tuệ nhân tạo chỉ làm nhiệm vụ hiểu yêu cầu của giáo viên, còn việc
+sinh câu hỏi, chọn câu theo ma trận và tính điểm đều do mã nguồn đảm nhiệm để
+bảo đảm tính chính xác tuyệt đối.
+
+\ghichu{Nếu trường chị có đặc thù riêng (ví dụ lớp đông, thiếu phòng máy, học
+sinh vùng khó) thì thêm một hai câu vào đoạn ``Thực tế tại trường tôi'' --- hội
+đồng chấm rất thích chi tiết cụ thể của đơn vị.}
+
+\subsection{Mục tiêu của sáng kiến}
+
+\textbf{Mục tiêu chung:} Xây dựng và đưa vào sử dụng một hệ thống ngân hàng đề
+môn Toán trên nền web, giúp giáo viên rút ngắn thời gian biên soạn đề kiểm tra,
+bảo đảm đề đúng ma trận và mỗi học sinh làm một đề riêng, đồng thời hỗ trợ tổ
+chức kiểm tra và chấm điểm trực tuyến.
+
+\textbf{Mục tiêu cụ thể:}
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=2pt]
+  \item Xây dựng chuẩn mã hoá định danh câu hỏi thống nhất theo lớp, chương,
+        bài, mức độ nhận thức và dạng câu hỏi, làm cơ sở để máy tự chọn câu.
+  \item Xây dựng thư viện hàm sinh câu hỏi bằng Python cho phép tạo ra vô số
+        biến thể của cùng một dạng toán, kèm lời giải chi tiết chính xác.
+  \item Lập trình thuật toán phân bổ câu hỏi theo ma trận đề, bám số tiết của
+        từng bài trong phân phối chương trình.
+  \item Tự động sinh đề và lời giải dưới dạng tệp PDF trình bày bằng \LaTeX,
+        đạt chuẩn văn bản đề thi.
+  \item Triển khai chức năng làm bài, chấm điểm tự động theo thang điểm 10 và
+        trả đề, đáp án, điểm số về lớp học Google Classroom của học sinh.
+  \item Đánh giá hiệu quả của hệ thống qua thời gian soạn đề của giáo viên và
+        kết quả học tập của học sinh.
+\end{enumerate}
+
+\subsection{Đối tượng, phạm vi và thời gian thực hiện}
+
+\textbf{Đối tượng nghiên cứu:} Quy trình biên soạn đề kiểm tra và tổ chức kiểm
+tra, đánh giá môn Toán ở trường trung học phổ thông; giải pháp tự động hoá quy
+trình đó bằng ngân hàng câu hỏi tham số và trí tuệ nhân tạo.
+
+\textbf{Đối tượng áp dụng:} Giáo viên tổ Toán và học sinh các lớp \dotfill\ của
+\DONVI.
+\ghichu{Điền tên lớp thực nghiệm và lớp đối chứng, ví dụ ``lớp 10A1, 10A2''.}
+
+\textbf{Phạm vi nội dung:} Sáng kiến được triển khai trước hết với chương trình
+Toán lớp 10 (bộ sách Kết nối tri thức với cuộc sống), chương \dotfill; phần
+khung hệ thống áp dụng được cho mọi khối lớp.
+\ghichu{Ghi rõ chương đã hoàn thành ngân hàng câu hỏi, ví dụ ``Chương I. Mệnh
+đề và tập hợp''. Không nên ghi rộng hơn phần thực sự đã làm --- hội đồng sẽ
+kiểm tra.}
+
+\textbf{Thời gian thực hiện:} Từ tháng \dots\ năm 2025 đến tháng \dots\ năm
+2026, gồm ba giai đoạn: nghiên cứu và thiết kế hệ thống; lập trình và xây dựng
+ngân hàng câu hỏi; thực nghiệm sư phạm và hoàn thiện.
+
+\subsection{Phương pháp nghiên cứu}
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+  \item \textbf{Phương pháp nghiên cứu lí luận:} nghiên cứu Chương trình Giáo
+        dục phổ thông 2018, các văn bản chỉ đạo về kiểm tra đánh giá và cấu
+        trúc định dạng đề thi, tài liệu về đo lường và đánh giá trong giáo dục.
+  \item \textbf{Phương pháp điều tra, khảo sát:} khảo sát giáo viên tổ Toán về
+        thời gian và khó khăn khi biên soạn đề; khảo sát học sinh về mức độ
+        hứng thú và tính công bằng của hình thức kiểm tra.
+  \item \textbf{Phương pháp thực nghiệm sư phạm:} tổ chức dạy học và kiểm tra
+        có đối chứng giữa lớp sử dụng hệ thống và lớp không sử dụng.
+  \item \textbf{Phương pháp thống kê toán học:} xử lí số liệu điểm kiểm tra để
+        so sánh kết quả hai nhóm lớp.
+  \item \textbf{Phương pháp chuyên gia:} xin ý kiến tổ chuyên môn và ban giám
+        hiệu về chất lượng đề do hệ thống sinh ra.
+\end{itemize}
+
+\subsection{Điểm mới của sáng kiến}
+
+So với các giải pháp đã có, sáng kiến có bốn điểm mới:
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=2pt]
+  \item \textbf{Câu hỏi tham số thay cho câu hỏi tĩnh.} Mỗi câu hỏi trong ngân
+        hàng là một chương trình sinh câu hỏi, không phải một đoạn văn bản cố
+        định; nhờ đó mỗi học sinh nhận một đề khác nhau về số liệu nhưng tương
+        đương về dạng toán và độ khó.
+  \item \textbf{Phân vai rõ ràng giữa trí tuệ nhân tạo và mã nguồn.} Trí tuệ
+        nhân tạo chỉ đọc hiểu yêu cầu bằng tiếng Việt của giáo viên; việc chọn
+        câu, tính điểm và tạo đề hoàn toàn do mã nguồn thực hiện nên kết quả
+        chính xác và lặp lại được.
+  \item \textbf{Ma trận đề đặt trong bảng cấu hình, không gài cứng trong mã.}
+        Khi Bộ hoặc Sở thay đổi cấu trúc đề, giáo viên chỉ sửa số liệu trong
+        bảng mà không cần lập trình lại.
+  \item \textbf{Khép kín một vòng dạy học.} Từ một câu yêu cầu bằng tiếng Việt
+        đến đề PDF, lời giải, bài làm trực tuyến, điểm số và sổ điểm Google
+        Classroom đều diễn ra trong cùng một hệ thống.
+\end{enumerate}
+
+\chenanh[0.9]{01-giao-dien-tong-quan.png}{Giao diện trang chủ hệ thống Ngân hàng đề Toán tại địa chỉ nganhangdechv.tech}
+
+\ghichu{Ảnh 01: chụp toàn màn hình trang chủ sau khi đăng nhập, thấy rõ ô chat
+và tên hệ thống. Lưu thành \texttt{skkn/hinhanh/01-giao-dien-tong-quan.png}.
+Khi đã có file, ô đỏ sẽ tự biến mất và ảnh hiện ra --- không phải sửa gì trong
+bài.}
+
+\clearpage
