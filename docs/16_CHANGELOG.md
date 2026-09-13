@@ -2585,3 +2585,55 @@ CAC NGUYEN NHAN CO THE GAP (de doi chieu khi thay thong bao):
 Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+Version 2.44
+
+Ngày
+
+2026-09-13
+
+Nội dung
+
+Sua loi 403 khi dang de/bai giai/diem len Google Classroom. Log VPS:
+
+    LOI TAO COURSEWORK MATERIAL: 403
+    "message": "Request had insufficient authentication scopes."
+    "reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
+
+NGUYEN NHAN: Google tach RIENG 2 scope cho 2 loai bai dang khac nhau,
+ten gan giong nhau nen rat de nham:
+
+    classroom.coursework.students  -> courses.courseWork
+                                      (BAI TAP, co han nop, cham diem)
+    classroom.courseworkmaterials  -> courses.courseWorkMaterials
+                                      (TAI LIEU, khong han nop)
+
+_tao_coursework_material() goi .../courses/{id}/courseWorkMaterials (tai
+lieu) nhung SCOPES chi khai classroom.coursework.students (bai tap). Xin
+dung 1 scope, goi sang API kia -> 403.
+
+Sua: them "https://www.googleapis.com/auth/classroom.courseworkmaterials"
+vao SCOPES trong app/services/classroom_service.py.
+
+CAC BUOC DA LAM TRUOC DO trong cung phien go loi nay (deu can, deu
+KHONG du mot minh):
+1. Version 2.43: hien ly do ra man hinh thay vi im lang - truoc do
+   Frontend vut bo phan hoi cua /api/chat/dang-classroom nen khong ai
+   biet tai sao that bai.
+2. Bat Google Drive API trong project 299388243103. Loi truoc do:
+   "Google Drive API has not been used in project ... or it is
+   disabled". Xin scope va BAT API la 2 viec khac nhau: scope cho phep
+   app XIN QUYEN, con API phai duoc bat thi project moi GOI DUOC.
+3. Them scope courseworkmaterials (ban nay).
+
+SAU KHI DEPLOY BAN NAY, BAT BUOC:
+- Vao Google Cloud Console > Data Access, them scope
+  classroom.courseworkmaterials.
+- Vao lai /gv/classroom/connect de xin refresh_token MOI. Token cu
+  khong tu nhien co them quyen moi.
+
+Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

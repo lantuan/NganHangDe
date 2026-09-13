@@ -53,9 +53,18 @@ SCOPES = (
     "https://www.googleapis.com/auth/classroom.profile.emails "
     "https://www.googleapis.com/auth/classroom.courses.readonly "
     "https://www.googleapis.com/auth/classroom.coursework.students "
+    "https://www.googleapis.com/auth/classroom.courseworkmaterials "
     "https://www.googleapis.com/auth/drive.file"
 )
 
+# SUA 2026-09-13: them classroom.courseworkMATERIALS. Google tach RIENG
+# 2 scope cho 2 loai bai dang khac nhau:
+#   - classroom.coursework.students   -> courses.courseWork (BAI TAP co han nop)
+#   - classroom.courseworkmaterials   -> courses.courseWorkMaterials (TAI LIEU)
+# Ham _tao_coursework_material() goi .../courses/{id}/courseWorkMaterials
+# nen phai co scope courseworkmaterials. Thieu no thi Google tra ve
+# 403 "Request had insufficient authentication scopes"
+# (reason: ACCESS_TOKEN_SCOPE_INSUFFICIENT) - da gap that ngay 13/09.
 # Them 2 scope tren de dang bai (de/bai giai/diem) len "Bai tap tren lop"
 # rieng cho tung hoc sinh sau khi lam bai online (xem
 # dang_ket_qua_len_classroom o cuoi file). classroom.coursework.students:
