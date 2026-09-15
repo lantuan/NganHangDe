@@ -48,13 +48,23 @@ async def lam_moi_cookie_phien(request: Request, call_next):
 
     new_session = getattr(request.state, "new_session", None)
     if new_session is not None:
+        # SUA 2026-09-15: truoc day cho cung han 7/30 ngay o day, bat ke
+        # nguoi dung co tick "Ghi nho dang nhap" hay khong -> lua chon dat
+        # luc dang nhap (app/routers/auth.py::login) bi xoa sach ngay lan
+        # lam moi phien dau tien. Nay doc cookie sb_ghi_nho de giu dung y
+        # nguoi dung: co tick thi 7/30 ngay, khong tick thi cookie phien
+        # (max_age=None - tat trinh duyet la mat).
+        ghi_nho = request.cookies.get("sb_ghi_nho") == "1"
+        han_access = 60 * 60 * 24 * 7 if ghi_nho else None
+        han_refresh = 60 * 60 * 24 * 30 if ghi_nho else None
+
         response.set_cookie(
             key="sb_access_token",
             value=new_session.access_token,
             httponly=True,
             secure=True,
             samesite="lax",
-            max_age=60 * 60 * 24 * 7,
+            max_age=han_access,
         )
         response.set_cookie(
             key="sb_refresh_token",
@@ -62,7 +72,7 @@ async def lam_moi_cookie_phien(request: Request, call_next):
             httponly=True,
             secure=True,
             samesite="lax",
-            max_age=60 * 60 * 24 * 30,
+            max_age=han_refresh,
         )
 
     return response

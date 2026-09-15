@@ -2863,3 +2863,53 @@ tuan sau khong gay gi thi drop han. Phan biet 3 chu "role" khac nghia:
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.48 - 2026-09-15
+
+## Sua 2 loi o trang dang nhap
+
+### 1. Go sai email/mat khau -> trang trang "Internal Server Error" (500)
+
+NGUYEN NHAN: khoi try/except trong POST /login ket thuc bang "raise":
+
+    except Exception as e:
+        print("LOI LOGIN:", e)
+        raise
+
+In log xong nem lai loi -> FastAPI tra 500. Supabase nem AuthApiError khi
+sai mat khau HOAC email chua dang ky, nen ca hai truong hop deu ra 500.
+
+SUA: bat AuthApiError, hien lai trang dang nhap kem thong bao tieng Viet
+(HTTP 401), giu lai email vua go de khoi nhap lai. Them ham
+_trang_login_loi() dung chung. Them khoi {% if error %} vao
+app/templates/auth/login.html (truoc do template KHONG co cho hien loi).
+
+Rieng loi "Email not confirmed" co thong bao rieng: nhac kiem tra hop thu
+va muc Thu rac.
+
+LUU Y QUAN TRONG: KHONG the chuyen thang sang trang dang ky khi "tai khoan
+khong ton tai" - Supabase CO Y tra ve cung mot loi "Invalid login
+credentials" cho ca sai mat khau lan email chua dang ky, de nguoi ngoai
+khong do duoc email nao da co tai khoan tren he thong. He thong khong
+phan biet duoc 2 truong hop nay. Thay vao do: hien nut "Dang ky tai khoan
+moi" ngay trong o bao loi.
+
+### 2. Nut "Ghi nho dang nhap" khong co tac dung
+
+NGUYEN NHAN: login() dat cookie dung theo lua chon (co tick = 7/30 ngay,
+khong tick = cookie phien), NHUNG middleware lam_moi_cookie_phien trong
+app/main.py moi lan lam moi phien lai ghi de cookie voi han CO DINH 7/30
+ngay, bat ke nguoi dung tick hay khong. Vi access_token het han sau ~1 gio
+nen lan lam moi dau tien la lua chon bi xoa sach.
+
+SUA: login() ghi them cookie sb_ghi_nho ("1"/"0"); middleware doc cookie
+do va giu dung han nguoi dung chon.
+
+Khong doi gi ve bao mat: sb_ghi_nho la httponly, chi chua "1" hoac "0".
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

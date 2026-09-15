@@ -59,8 +59,26 @@ async def register_student_page(request: Request):
 # POST /login
 # ======================================================
 
+def _trang_login_loi(request: Request, email: str, thong_bao: str,
+                    goi_y_dang_ky: bool = False):
+    """Hien lai trang dang nhap kem thong bao loi (KHONG tra 500)."""
+    return templates.TemplateResponse(
+        "auth/login.html",
+        {
+            "request": request,
+            "error": thong_bao,
+            "email": email,
+            "goi_y_dang_ky": goi_y_dang_ky,
+            "supabase_url": SUPABASE_URL,
+            "supabase_anon_key": SUPABASE_KEY,
+        },
+        status_code=401,
+    )
+
+
 @router.post("/login")
 async def login(
+    request: Request,
     email: str = Form(...),
     password: str = Form(...),
     remember: str | None = Form(default=None),
@@ -68,54 +86,84 @@ async def login(
     print("===== LOGIN =====")
     print(email, "| remember:", bool(remember))
 
+    # SUA 2026-09-15: truoc day khoi try/except ket thuc bang "raise", nen
+    # go sai email hoac mat khau la ra thang trang trang "Internal Server
+    # Error" (500). Nay bat loi va hien lai trang dang nhap kem thong bao.
     try:
+        result = supabase_service.sign_in(email=email, password=password)
+    except AuthApiError as e:
+        loi = str(getattr(e, "message", "") or e)
+        print("LOI DANG NHAP:", loi)
 
-        result = supabase_service.sign_in(
-            email=email,
-            password=password,
-        )
-
-        print(result)
-
-        if result.user is None or result.session is None:
-            return RedirectResponse(
-                "/login",
-                status_code=303,
+        if "Email not confirmed" in loi:
+            return _trang_login_loi(
+                request, email,
+                "Tài khoản chưa xác nhận email. Kiểm tra hộp thư (cả mục Thư "
+                "rác) và bấm vào liên kết xác nhận, rồi đăng nhập lại.",
             )
 
-        response = RedirectResponse(
-            "/chat",
-            status_code=303,
+        # LUU Y: Supabase co y tra ve CUNG mot loi "Invalid login credentials"
+        # cho ca 2 truong hop sai mat khau va email chua dang ky - de nguoi
+        # ngoai khong do duoc email nao da co tai khoan. Vi vay KHONG the
+        # chuyen thang sang trang dang ky khi "tai khoan khong ton tai": he
+        # thong khong phan biet duoc. Thay vao do hien nut "Dang ky tai khoan
+        # moi" ngay trong o bao loi.
+        return _trang_login_loi(
+            request, email,
+            "Email hoặc mật khẩu không đúng. Nếu chưa có tài khoản, bấm nút "
+            "bên dưới để đăng ký.",
+            goi_y_dang_ky=True,
         )
-
-        if remember:
-            access_max_age = 60 * 60 * 24 * 7
-            refresh_max_age = 60 * 60 * 24 * 30
-        else:
-            access_max_age = None
-            refresh_max_age = None
-
-        response.set_cookie(
-            key="sb_access_token",
-            value=result.session.access_token,
-            httponly=True,
-            secure=True,
-            samesite="lax",
-            max_age=access_max_age,
-        )
-        response.set_cookie(
-            key="sb_refresh_token",
-            value=result.session.refresh_token,
-            httponly=True,
-            secure=True,
-            samesite="lax",
-            max_age=refresh_max_age,
-        )
-        return response
-
     except Exception as e:
-        print("LOI LOGIN:", e)
-        raise
+        print("LOI DANG NHAP (khong ro):", type(e), e)
+        return _trang_login_loi(
+            request, email,
+            "Hệ thống đang bận, thử lại sau ít phút.",
+        )
+
+    if result.user is None or result.session is None:
+        return _trang_login_loi(
+            request, email,
+            "Email hoặc mật khẩu không đúng. Nếu chưa có tài khoản, bấm nút "
+            "bên dưới để đăng ký.",
+            goi_y_dang_ky=True,
+        )
+
+    response = RedirectResponse("/chat", status_code=303)
+
+    if remember:
+        access_max_age = 60 * 60 * 24 * 7
+        refresh_max_age = 60 * 60 * 24 * 30
+    else:
+        access_max_age = None
+        refresh_max_age = None
+
+    response.set_cookie(
+        key="sb_access_token",
+        value=result.session.access_token,
+        httponly=True, secure=True, samesite="lax",
+        max_age=access_max_age,
+    )
+    response.set_cookie(
+        key="sb_refresh_token",
+        value=result.session.refresh_token,
+        httponly=True, secure=True, samesite="lax",
+        max_age=refresh_max_age,
+    )
+
+    # SUA 2026-09-15: ghi lai LUA CHON cua nguoi dung. Truoc day middleware
+    # lam_moi_cookie_phien (app/main.py) moi lan lam moi phien deu ghi de
+    # cookie voi han co dinh 7/30 ngay, bat ke nguoi dung co tick "Ghi nho
+    # dang nhap" hay khong - nen lua chon o day bi xoa sach sau lan lam moi
+    # dau tien. Nay middleware doc cookie nay de giu dung lua chon.
+    response.set_cookie(
+        key="sb_ghi_nho",
+        value="1" if remember else "0",
+        httponly=True, secure=True, samesite="lax",
+        max_age=60 * 60 * 24 * 30 if remember else None,
+    )
+
+    return response
 
 
 # ======================================================
