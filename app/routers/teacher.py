@@ -21,6 +21,7 @@ Khac bieu mau "Tao de nhanh" cua hoc sinh o 3 diem:
 """
 
 import uuid
+from urllib.parse import quote
 
 from fastapi import APIRouter, Request, Form
 from fastapi.concurrency import run_in_threadpool
@@ -140,14 +141,20 @@ async def ra_de_submit(
             cho_phep_thieu=bool(cho_phep_thieu),
         )
     except AssembleError as e:
-        return RedirectResponse(f"/gv/ra-de?loi={e}", status_code=303)
+        return RedirectResponse("/gv/ra-de?loi=" + quote(str(e)), status_code=303)
     except Exception as e:
         print("LOI RA DE (giao vien):", e)
-        return RedirectResponse(f"/gv/ra-de?loi=Loi+sinh+de:+{e}", status_code=303)
+        return RedirectResponse("/gv/ra-de?loi=" + quote(f"Lỗi sinh đề: {e}"), status_code=303)
 
+    # LOI DA SUA 2026-09-15: truoc day dat conversation_id = f"gv-{uuid4()}".
+    # Cot conversation_id trong bang de_da_sinh co kieu UUID, them tien to
+    # "gv-" vao la khong con hop le -> Postgres tu choi voi
+    # 22P02 "invalid input syntax for type uuid" -> de sinh xong bi vut,
+    # bang "De da tao" khong bao gio co dong moi. Khong can tien to: cot
+    # role da ghi "teacher" de phan biet de do giao vien tao.
     de_id = history_service.luu_de_da_sinh(
         user_id=user.id,
-        conversation_id=f"gv-{uuid.uuid4()}",
+        conversation_id=str(uuid.uuid4()),
         lop=lop,
         role="teacher",
         loai_he_so=loai_he_so,
@@ -161,8 +168,20 @@ async def ra_de_submit(
         },
     )
     if not de_id:
+        # Sinh de xong ma khong luu duoc thi nguoi dung PHAI biet, khong
+        # duoc im lang day ve bang trong - truoc day chinh cho nay lam mat
+        # ca buoi do tim.
         print("RA DE (GV): SINH DE XONG NHUNG KHONG LUU DUOC de_da_sinh "
               "-> de se KHONG hien trong bang 'De da tao'.")
+        return RedirectResponse(
+            "/gv/ra-de?loi=" + quote(
+                "Đã sinh đề xong nhưng không lưu được vào cơ sở dữ liệu, "
+                "nên đề không hiện trong bảng. Xem log máy chủ "
+                "(journalctl -u nganhangde | grep 'LOI LUU DE_DA_SINH') "
+                "để biết lý do."
+            ),
+            status_code=303,
+        )
 
     if de_id:
         print(f"RA DE (GV): xong, de_id={de_id}, so ma de={socau_ma_de}")

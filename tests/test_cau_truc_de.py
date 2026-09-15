@@ -179,3 +179,56 @@ def test_hoc_sinh_van_giu_role_student(monkeypatch, tmp_path):
 
     assert da_goi.get("role") == "student", \
         "Hoc sinh KHONG duoc nhan de kem loi giai"
+
+
+# ---------------------------------------------------------------------
+# /gv/ra-de: conversation_id PHAI la UUID hop le
+# ---------------------------------------------------------------------
+
+def test_ra_de_luu_conversation_id_la_uuid_hop_le(monkeypatch, tmp_path):
+    """
+    Loi that ngay 15/09/2026: conversation_id dat la f"gv-{uuid4()}".
+    Cot nay kieu UUID trong Postgres nen tien to "gv-" lam ca lenh ghi
+    that bai (22P02 invalid input syntax for type uuid) -> de sinh xong
+    bi vut, bang "De da tao" khong bao gio co dong moi, va man hinh
+    khong bao gi ca.
+    """
+    import uuid as _uuid
+    from app.routers import teacher as router_gv
+
+    class UserGia:
+        id = "99999999-9999-9999-9999-999999999999"
+        email = "co@example.com"
+
+    da_luu = {}
+
+    monkeypatch.setattr(router_gv, "get_current_user", lambda request: UserGia())
+    monkeypatch.setattr(router_gv, "yeu_cau_giao_vien", lambda request, user=None: None)
+    monkeypatch.setattr(router_gv, "generate_exam_pdf_auto", lambda **kw: {
+        "pdf_path": _tep_gia(tmp_path, "de.pdf"),
+        "tex_path": _tep_gia(tmp_path, "de.tex"),
+        "pdf_loigiai_path": None, "dap_an_json_path": None,
+        "so_cau_da_sinh": 1, "so_cau_thieu": 0, "danh_sach_generator_id": [],
+    })
+
+    def gia_luu(**kw):
+        da_luu.update(kw)
+        return "de-id-gia"
+
+    monkeypatch.setattr(router_gv.history_service, "luu_de_da_sinh", gia_luu)
+    monkeypatch.setattr(router_gv.history_service, "luu_file_de", lambda *a, **k: None)
+
+    from fastapi.testclient import TestClient
+    from app.main import app
+    client = TestClient(app)
+
+    res = client.post("/gv/ra-de", data={
+        "lop": 10, "ki_thi": "thuong_xuyen", "pham_vi_chuong": "chuong_1",
+        "socau_ma_de": 4, "tieu_de": "DE THU", "cho_phep_thieu": "1",
+    }, follow_redirects=False)
+
+    assert res.status_code == 303
+    # Phai parse duoc thanh UUID - khong duoc co tien to gi
+    _uuid.UUID(da_luu["conversation_id"])
+    assert da_luu["role"] == "teacher"
+    assert da_luu["blueprint"]["socau_ma_de"] == 4

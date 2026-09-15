@@ -3390,3 +3390,61 @@ bang "def" (de FastAPI tu dua sang threadpool), hoac neu da tro thanh
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.57 - 2026-09-15
+
+## /gv/ra-de: de sinh xong nhung KHONG BAO GIO luu duoc
+
+Log tren VPS chi dung thu pham:
+
+    LOI LUU DE_DA_SINH: invalid input syntax for type uuid:
+    "gv-1e07cdec-2185-4483-879e-1dfca2d3430c"  (code 22P02)
+
+NGUYEN NHAN: khi lam khu lam viec giao vien (Version 2.46) da dat
+
+    conversation_id = f"gv-{uuid.uuid4()}"
+
+de phan biet de do giao vien tao voi de tu luong chat. Nhung cot
+conversation_id trong bang de_da_sinh co kieu UUID - them tien to "gv-"
+vao la chuoi khong con la UUID hop le, Postgres tu choi ca 2 lan ghi
+(lan 2 bo blueprint cung the). de_id tra ve None -> khong luu file nao,
+bang "De da tao" khong bao gio co dong moi.
+
+Loi nay dinh tu 16:13 ngay 15/09 - tuc la MOI lan bam "Tao de" o
+/gv/ra-de tu luc co trang do den gio deu that bai. Giao vien tuong la
+"khong co gi thay doi", thuc ra de sinh ra dung het roi bi vut di.
+
+SUA: bo tien to, dung str(uuid.uuid4()). Khong can tien to that: cot
+role da ghi "teacher" de biet de do giao vien tao.
+
+## Sinh de xong ma luu hong thi PHAI bao ra man hinh
+
+Truoc day chi ghi log roi van chuyen sang bang "De da tao" - bang trong
+tron, khong mot chu nao giai thich. Chinh cho nay lam mat ca buoi do
+tim. Nay chuyen ve /gv/ra-de kem thong bao ro rang va chi luon cau lenh
+xem log.
+
+Cac thong bao loi khac cung duoc quote() cho dung: truoc day noi thang
+chuoi loi vao URL nen tieng Viet co dau bi vo.
+
+## Them bai kiem tra
+
+tests/test_cau_truc_de.py: gui POST /gv/ra-de that (monkeypatch cac ham
+cham), roi PARSE conversation_id bang uuid.UUID() - co tien to la hong
+ngay. Kiem them role="teacher" va blueprint.socau_ma_de dung bang so
+nguoi dung nhap.
+
+Tong 36 bai, deu xanh.
+
+## Bai hoc
+
+Ghi log "khong luu duoc" la dung, nhung CHUA DU: phai bao ra man hinh.
+Nguoi dung khong doc log may chu, va im lang thi ho se bao "khong co gi
+thay doi" - dung nhu da xay ra.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
