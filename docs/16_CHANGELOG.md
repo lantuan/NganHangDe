@@ -3221,3 +3221,82 @@ ban de duoc, nguoc lai thi khong. Da bo phan zip va cot "tex_loigiai".
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.54 - 2026-09-15
+
+## 1. Chon 4 ma de nhung chi ra 1 - SUA TAN GOC
+
+Loi da ghi nhan tu Version 2.46 (muc "chua lam"), nay sua that.
+
+NGUYEN NHAN: socau_ma_de duoc TRUYEN XUONG ham sinh cau
+(call_generator(socau_yeu_cau=socau_ma_de)). Ham sinh tra ve mot chuoi
+chua N khoi \begin{ex}, roi tat ca duoc noi vao CUNG MOT de. Ket qua la
+mot de ma moi cau lap lai N lan - khong phai N de.
+
+SUA: dao nguoc cach lam. Vong lap N MA DE nam o NGOAI; moi vong goi lai
+toan bo ham sinh voi socau_yeu_cau=1 -> moi ma de co bo so lieu rieng.
+Ket qua: N ma de that su, cung cau truc, cung don vi kien thuc, chi khac
+so lieu - dung nhu giao vien can de in kiem tra.
+
+- Ma de danh so 1001, 1002, 1003... (tinh_ma_de(lop, thu_tu)).
+- used_variants rieng cho tung ma de: trong CUNG mot ma de khong lap lai
+  bien the, nhung giua cac ma de thi duoc - cac ma de von phai tuong
+  duong nhau ve dang toan.
+- File dap an: ma de > 1 thi moi ban ghi them truong "ma_de". Van la mot
+  danh sach phang nen cho nao dang doc file nay khong bi vo.
+
+## 2. Cau truc de theo dung 4 PHAN cua Bo
+
+Truoc day cac cau noi duoi nhau thanh mot mach, khong co tieu de phan.
+Nay gom theo DANG CAU va xuat dung thu tu de cua Bo (QD 764/QD-BGDDT):
+
+    PHAN I.   MC - Thi sinh tra loi tu cau 1 den cau {n}. Moi cau hoi
+                   thi sinh chi chon mot phuong an.
+    PHAN II.  TF - ... Trong moi y a), b), c), d) o moi cau, thi sinh
+                   chon dung hoac sai.
+    PHAN III. SA - Thi sinh tra loi tu cau 1 den cau {n}.
+    PHAN IV.  TL - Thi sinh trinh bay tu luan tu bai 1 den bai {n}.
+
+- \setcounter{ex}{0} truoc MOI phan -> moi phan danh so lai tu 1.
+- So cau trong loi dan lay tu so cau THAT cua phan do, khong ghi cung.
+- Phan nao khong co cau nao thi BO HAN va khong chiem so La Ma (khong bi
+  nhay coc "PHAN I" roi "PHAN III").
+
+## 3. Moi ma de mot khoi day du, tu sang trang
+
+Moi ma de gio co: \tieude + o "Ho ten thi sinh / Ma de" + \chantrang +
+than 4 phan + \hetde\label{made<ma>}, cac ma de cach nhau bang \newpage.
+Moi ma de co NHAN RIENG nen \pageref dem dung so trang cua chinh no, va
+\setcounter{page}{1} de moi de danh so trang lai tu 1 - giong het cach
+lam trong bo de mau cua giao vien.
+
+VIET LAI data/config/latex_template.tex: phan than tai lieu gio chi con
+__NOI_DUNG__. Toan bo tieu de / o ho ten / chan trang / het de chuyen
+sang Python (exam_assembler_service._khung_mot_ma_de), vi mot tep .tex
+nay co the chua nhieu ma de, moi ma de can mot bo day du rieng.
+build_latex_document() chi con thay bien o PHAN DAU tai lieu (goi
+ex_test, nam hoc).
+
+KHONG dung \input nhu bo de mau cua giao vien: tat ca noi dung nam trong
+MOT tep duy nhat, dung yeu cau "chi xuat 1 file".
+
+## 4. Kiem chung
+
+tests/test_cau_truc_de.py (MOI, 8 bai): du 4 phan dung thu tu; moi phan
+\setcounter{ex}{0}; so cau trong loi dan khop thuc te; phan rong bi bo
+han khong nhay so La Ma; suy loai cau tu Generator ID; mot ma de du tieu
+de/o ho ten/chan trang/het de; hoc sinh KHONG co o ho ten va ma de;
+4 ma de -> 4 khoi rieng, 3 lan \newpage, noi dung khac nhau.
+
+Tong 33 bai, deu xanh.
+
+CHUA KIEM CHUNG DUOC O DAY: bien dich PDF that. May cua giao vien thieu
+tabvar.sty, bclogo.sty... nen pdflatex khong chay het duoc; VPS co ban
+TeX day du. Phai xem PDF that tren web sau khi deploy.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

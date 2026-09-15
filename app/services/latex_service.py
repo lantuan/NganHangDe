@@ -32,35 +32,23 @@ def build_latex_document(
     ex_test_option: str = "dethi",
     ma_de: str | None = None,
 ) -> str:
+    """
+    Ghep noi dung da dung san (co the gom NHIEU ma de) vao khung tai lieu.
+
+    SUA 2026-09-15: phan tieu de / ho ten - ma de / chan trang / het de da
+    chuyen sang exam_assembler_service.py, vi mot tep .tex nay co the chua
+    nhieu ma de, moi ma de can mot bo day du rieng. Ham nay gio chi con
+    thay cac bien o PHAN DAU tai lieu (goi ex_test, nam hoc).
+
+    Cac tham so tieu_de / lop / role / ma_de giu lai cho tuong thich nguoc
+    (khong con dung den o day) - noi dung da duoc dung san o tang tren.
+    """
     template = TEMPLATE_FILE.read_text(encoding="utf-8")
-
-    if ma_de is None:
-        ma_de = tinh_ma_de(lop)
-
-    if role == "teacher":
-        khoi_ho_ten_ma_de = (
-            "\\noindent\n"
-            "\\begin{minipage}[b]{8.5cm}\n"
-            "\\fontsize{11}{0}\\selectfont Họ tên thí sinh:....................................... "
-            "Lớp:.......... Phòng kiểm tra:...........\n"
-            "\\end{minipage}\\hspace{1.5cm}\n"
-            "\\begin{minipage}[b]{4cm}\n"
-            f"\\hfill\\fbox{{\\bf Mã đề {ma_de}}}\n"
-            "\\end{minipage}\\vspace{4pt}\n"
-        )
-        chan_trang_ma_de = f" $-$ Mã đề {ma_de}"
-    else:
-        khoi_ho_ten_ma_de = ""
-        chan_trang_ma_de = ""
 
     return (
         template
         .replace("__EX_TEST_OPTION__", ex_test_option)
         .replace("__NAM_HOC__", tinh_nam_hoc())
-        .replace("__TIEU_DE__", tieu_de)
-        .replace("__LOP__", str(lop))
-        .replace("__KHOI_HO_TEN_MA_DE__", khoi_ho_ten_ma_de)
-        .replace("__CHAN_TRANG_MA_DE__", chan_trang_ma_de)
         .replace("__NOI_DUNG__", noi_dung)
     )
 
