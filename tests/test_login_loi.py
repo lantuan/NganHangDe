@@ -139,3 +139,67 @@ def test_ma_moi_dung_thi_nang_vai_tro_va_ve_gv(client, monkeypatch):
     assert res.status_code == 303
     assert res.headers["location"] == "/gv"
     assert da_goi == {"uid": UserGia.id, "vai_tro": "giao_vien"}
+
+
+# ---------------------------------------------------------------------
+# Man hinh chon vai tro (hien sau khi dang nhap lan dau)
+# ---------------------------------------------------------------------
+
+def _gia_lap_nguoi_dung(monkeypatch, vai_tro, email="moi@example.com"):
+    """Gia lap mot nguoi dung dang dang nhap, dang o vai_tro cho truoc."""
+    from app.routers import auth as router_auth
+
+    class UserGia:
+        id = "33333333-3333-3333-3333-333333333333"
+
+    UserGia.email = email
+    monkeypatch.setattr(router_auth, "get_current_user", lambda request: UserGia())
+    monkeypatch.setattr(router_auth.profile_service, "lay_vai_tro", lambda uid: vai_tro)
+    return router_auth, UserGia
+
+
+def test_chua_chon_thi_hien_man_hinh_chon_vai_tro(client, monkeypatch):
+    _gia_lap_nguoi_dung(monkeypatch, "chua_chon")
+    res = client.get("/chon-vai-tro")
+    assert res.status_code == 200
+    assert "Học sinh" in res.text and "Giáo viên" in res.text
+
+
+def test_da_la_hoc_sinh_thi_khong_hoi_lai(client, monkeypatch):
+    _gia_lap_nguoi_dung(monkeypatch, "hoc_sinh")
+    res = client.get("/chon-vai-tro", follow_redirects=False)
+    assert res.status_code == 303
+    assert res.headers["location"] == "/chon-lop"
+
+
+def test_da_la_giao_vien_thi_vao_thang_gv(client, monkeypatch):
+    _gia_lap_nguoi_dung(monkeypatch, "giao_vien")
+    res = client.get("/chon-vai-tro", follow_redirects=False)
+    assert res.status_code == 303
+    assert res.headers["location"] == "/gv"
+
+
+def test_chon_hoc_sinh_thi_luu_vai_tro_va_sang_chon_lop(client, monkeypatch):
+    router_auth, UserGia = _gia_lap_nguoi_dung(monkeypatch, "chua_chon")
+    da_luu = {}
+    monkeypatch.setattr(router_auth.profile_service, "dat_vai_tro",
+                        lambda uid, vt: da_luu.update(uid=uid, vai_tro=vt) or True)
+
+    res = client.post("/chon-vai-tro", data={"vai_tro": "hoc_sinh"},
+                      follow_redirects=False)
+    assert res.status_code == 303
+    assert res.headers["location"] == "/chon-lop"
+    assert da_luu == {"uid": UserGia.id, "vai_tro": "hoc_sinh"}
+
+
+def test_chon_giao_vien_thi_sang_nhap_ma_moi_va_CHUA_nang_vai_tro(client, monkeypatch):
+    router_auth, _ = _gia_lap_nguoi_dung(monkeypatch, "chua_chon")
+    da_goi = {"dat": False}
+    monkeypatch.setattr(router_auth.profile_service, "dat_vai_tro",
+                        lambda uid, vt: da_goi.update(dat=True) or True)
+
+    res = client.post("/chon-vai-tro", data={"vai_tro": "giao_vien"},
+                      follow_redirects=False)
+    assert res.status_code == 303
+    assert res.headers["location"] == "/toi-la-giao-vien"
+    assert da_goi["dat"] is False, "Bam 'Giao vien' thoi CHUA duoc nang vai tro - phai nhap ma moi da"

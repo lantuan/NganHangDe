@@ -398,6 +398,70 @@ async def register_teacher(
 
 
 # ======================================================
+# CHON VAI TRO - man hinh hien NGAY sau khi dang nhap lan dau
+#
+# Vi sao can: dang nhap bang Google khong di qua trang dang ky nen khong
+# he duoc hoi la hoc sinh hay giao vien -> truoc day roi thang vao "Chon
+# lop cua em", giao vien khong hieu tai sao. Ban dau chi them mot dong
+# chu nho o cuoi trang Chon lop, nhung giao vien phan hoi dung: khong ai
+# doc dong chu nho do, va cung khong ai biet trang web nay CO phan vai
+# tro. Nen phai la mot man hinh chon hai o to, giong het trang dang ky.
+#
+# Phan biet "chua duoc hoi" voi "da chon hoc sinh" bang vai_tro =
+# 'chua_chon' (mac dinh moi cua cot, xem sql/23_chon_vai_tro.sql).
+# ======================================================
+
+@router.get("/chon-vai-tro", response_class=HTMLResponse)
+async def chon_vai_tro_page(request: Request):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    vai_tro = profile_service.lay_vai_tro(user.id)
+    if vai_tro in profile_service.VAI_TRO_GIAO_VIEN:
+        return RedirectResponse("/gv", status_code=303)
+    if vai_tro == "hoc_sinh":
+        return RedirectResponse("/chon-lop", status_code=303)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/chon_vai_tro.html",
+        context={"email": user.email},
+    )
+
+
+@router.post("/chon-vai-tro")
+async def chon_vai_tro(request: Request, vai_tro: str = Form(...)):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    if vai_tro == "giao_vien":
+        # CHUA nang vai tro o day - phai nhap dung ma moi da. Giu nguyen
+        # 'chua_chon' de ai bo ngang giua chung thi lan sau vao van duoc
+        # hoi lai, khong bi ket o vai tro hoc sinh.
+        return RedirectResponse("/toi-la-giao-vien", status_code=303)
+
+    if vai_tro == "hoc_sinh":
+        if not profile_service.dat_vai_tro(user.id, "hoc_sinh"):
+            return templates.TemplateResponse(
+                request=request,
+                name="auth/chon_vai_tro.html",
+                context={"email": user.email,
+                         "error": "Không lưu được lựa chọn, thử lại sau ít phút."},
+                status_code=500,
+            )
+        return RedirectResponse("/chon-lop", status_code=303)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/chon_vai_tro.html",
+        context={"email": user.email, "error": "Vai trò không hợp lệ."},
+        status_code=400,
+    )
+
+
+# ======================================================
 # "TOI LA GIAO VIEN" - nang tai khoan DANG DANG NHAP len giao vien
 #
 # Vi sao can trang nay: nut "Dang nhap bang Google" khong di qua

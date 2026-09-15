@@ -11,7 +11,7 @@ import requests
 
 from app.core.deps import get_current_user
 from app.core.lop_config import DANH_SACH_LOP
-from app.services import history_service
+from app.services import history_service, profile_service
 from app.services import supabase_service
 from app.services import classroom_service
 
@@ -79,6 +79,12 @@ async def chat(request: Request):
     if user is None:
         return RedirectResponse("/login", status_code=303)
 
+    # Tai khoan moi (nhat la dang nhap bang Google - khong di qua trang
+    # dang ky nen chua he duoc hoi) phai chon vai tro TRUOC. Neu bo qua
+    # buoc nay thi giao vien bi hoi "chon lop cua em" ma khong hieu tai sao.
+    if profile_service.lay_vai_tro(user.id) == profile_service.VAI_TRO_CHUA_CHON:
+        return RedirectResponse("/chon-vai-tro", status_code=303)
+
     ho_so = supabase_service.lay_lop_hoc_sinh(user.id)
     if not ho_so or not ho_so.get("lop"):
         # Thu tu dong ghep lop bang email da dong bo tu Google Classroom
@@ -119,6 +125,9 @@ async def chon_lop_page(request: Request):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
+
+    if profile_service.lay_vai_tro(user.id) == profile_service.VAI_TRO_CHUA_CHON:
+        return RedirectResponse("/chon-vai-tro", status_code=303)
 
     return templates.TemplateResponse(
         request=request,

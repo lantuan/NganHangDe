@@ -3052,3 +3052,59 @@ Tong: 17 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.51 - 2026-09-15
+
+## Man hinh CHON VAI TRO sau khi dang nhap lan dau
+
+Ban 2.50 moi chi them mot dong chu nho o cuoi trang Chon lop ("Thay/co
+dang nhap nham vao day? Toi la giao vien"). Giao vien phan hoi dung va
+thang: KHONG AI doc dong chu nho do, va cung khong ai biet trang web nay
+CO phan vai tro. Phai la mot man hinh chon hai o to, giong het trang
+dang ky.
+
+SUA:
+
+    GET  /chon-vai-tro   - 2 o to "Hoc sinh" / "Giao vien"
+    POST /chon-vai-tro   - hoc_sinh  -> luu vai tro -> /chon-lop
+                         - giao_vien -> /toi-la-giao-vien (nhap ma moi)
+
+Man hinh nay hien NGAY sau khi dang nhap lan dau, truoc ca buoc chon lop.
+Them chan o 2 cho trong app/routers/chat.py: GET /chat va GET /chon-lop
+deu chuyen sang /chon-vai-tro neu tai khoan chua chon vai tro.
+
+QUAN TRONG - bam "Giao vien" thoi thi CHUA duoc nang vai tro. Phai nhap
+dung ma moi o /toi-la-giao-vien roi moi duoc. Trong luc do tai khoan van
+giu 'chua_chon' de ai bo ngang giua chung thi lan sau vao van duoc hoi
+lai, khong bi ket o vai tro hoc sinh. Co bai kiem tra rieng cho diem nay.
+
+## Trang thai vai_tro moi: 'chua_chon'
+
+Neu tai khoan moi mac dinh la 'hoc_sinh' thi he thong KHONG phan biet
+duoc "da chon hoc sinh" voi "chua duoc hoi bao gio" -> khong biet luc nao
+nen hien man hinh chon vai tro. Nen them gia tri thu tu:
+
+    chua_chon | hoc_sinh | giao_vien | quan_tri
+
+sql/23_chon_vai_tro.sql: noi rong rang buoc check + doi DEFAULT cua cot
+sang 'chua_chon'. Tai khoan CU giu nguyen vai tro dang co, chi tai khoan
+tao moi tu luc chay SQL moi mang 'chua_chon'.
+
+'chua_chon' KHONG nam trong VAI_TRO_GIAO_VIEN nen van bi chan o /gv/* nhu
+moi vai tro khac ngoai giao_vien - khong ho them duong nao.
+
+## Them 5 bai kiem tra (tong 22, deu xanh)
+
+  - chua chon        -> hien man hinh 2 o
+  - da la hoc sinh   -> khong hoi lai, sang /chon-lop
+  - da la giao vien  -> vao thang /gv
+  - chon hoc sinh    -> luu dung ('hoc_sinh') roi sang /chon-lop
+  - chon giao vien   -> sang /toi-la-giao-vien va KIEM CHUNG dat_vai_tro()
+                        chua he duoc goi
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

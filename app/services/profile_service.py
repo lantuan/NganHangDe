@@ -15,6 +15,11 @@ khong vao duoc /gv/*. Ham lay_vai_tro() phan biet ro 2 truong hop:
 from app.core.supabase import supabase_admin as supabase
 
 VAI_TRO_MAC_DINH = "hoc_sinh"
+# Tai khoan vua tao, CHUA tra loi cau hoi "ban la hoc sinh hay giao vien".
+# Can trang thai rieng nay vi neu tai khoan moi mac dinh la 'hoc_sinh' thi
+# khong the phan biet "da chon hoc sinh" voi "chua duoc hoi bao gio" ->
+# khong biet luc nao nen hien man hinh chon vai tro.
+VAI_TRO_CHUA_CHON = "chua_chon"
 VAI_TRO_CHUA_CAU_HINH = "chua_cau_hinh"
 VAI_TRO_GIAO_VIEN = ("giao_vien", "quan_tri")
 
@@ -51,7 +56,7 @@ def dat_vai_tro(user_id: str, vai_tro: str) -> bool:
     (trigger handle_new_user chi dat duoc vai_tro neu da sua trigger; ham
     nay la duong chac chan, khong phu thuoc trigger).
     """
-    if vai_tro not in ("hoc_sinh", "giao_vien", "quan_tri"):
+    if vai_tro not in ("chua_chon", "hoc_sinh", "giao_vien", "quan_tri"):
         raise ValueError(f"vai_tro khong hop le: {vai_tro}")
     try:
         supabase.table("profiles").update({"vai_tro": vai_tro}).eq("id", user_id).execute()

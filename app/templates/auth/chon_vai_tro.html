@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bạn là ai? - Ngân Hàng Đề AI</title>
+{% include "layouts/tailwind_head.html" %}
+</head>
+<body class="min-h-screen flex flex-col bg-background text-on-surface">
+
+<header class="bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-7xl mx-auto">
+<a href="/" class="font-headline-md text-headline-md font-bold text-primary-container">Ngân Hàng Đề AI</a>
+<a href="/logout" class="font-label-md text-label-md text-on-surface-variant hover:text-primary-container">Đăng xuất</a>
+</div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg">
+<div class="max-w-2xl w-full">
+
+<div class="text-center mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Bạn dùng hệ thống với vai trò nào?</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Chọn một lần duy nhất cho tài khoản <strong>{{ email }}</strong>.
+</p>
+</div>
+
+{% if error %}
+<div class="mb-stack-md rounded-[16px] bg-error-container border border-error/30 p-stack-md flex gap-stack-sm">
+<span class="material-symbols-outlined text-on-error-container">error</span>
+<p class="font-body-md text-body-md text-on-error-container">{{ error }}</p>
+</div>
+{% endif %}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+
+<form action="/chon-vai-tro" method="post">
+<input type="hidden" name="vai_tro" value="hoc_sinh"/>
+<button type="submit"
+  class="w-full h-full text-center p-stack-lg bg-surface-container-lowest border-2 border-outline-variant rounded-xl soft-shadow hover:border-primary-container hover:bg-surface-container-low transition-all">
+  <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-container/10 mb-stack-md">
+    <span class="material-symbols-outlined text-primary-container text-[32px]">school</span>
+  </span>
+  <h2 class="font-headline-sm text-headline-sm mb-stack-sm">Học sinh</h2>
+  <p class="font-body-md text-body-md text-on-surface-variant">
+    Luyện đề, làm bài trực tuyến, xem điểm và lời giải ngay sau khi nộp.
+  </p>
+</button>
+</form>
+
+<form action="/chon-vai-tro" method="post">
+<input type="hidden" name="vai_tro" value="giao_vien"/>
+<button type="submit"
+  class="w-full h-full text-center p-stack-lg bg-surface-container-lowest border-2 border-outline-variant rounded-xl soft-shadow hover:border-tertiary hover:bg-surface-container-low transition-all">
+  <span class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-tertiary/10 mb-stack-md">
+    <span class="material-symbols-outlined text-tertiary text-[32px]">badge</span>
+  </span>
+  <h2 class="font-headline-sm text-headline-sm mb-stack-sm">Giáo viên</h2>
+  <p class="font-body-md text-body-md text-on-surface-variant">
+    Ra đề nhiều mã, tải mã nguồn LaTeX, giao bài qua Google Classroom, xem thống kê lớp.
+  </p>
+  <p class="mt-stack-md font-label-md text-label-md text-on-surface-variant">
+    <span class="material-symbols-outlined text-[16px] align-middle">key</span>
+    Cần mã mời
+  </p>
+</button>
+</form>
+
+</div>
+
+<p class="text-center font-body-md text-body-md text-on-surface-variant mt-stack-lg">
+Chọn nhầm? Báo giáo viên phụ trách để đổi lại giúp.
+</p>
+
+</div>
+</main>
+</body>
+</html>
