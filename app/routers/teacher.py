@@ -23,6 +23,7 @@ Khac bieu mau "Tao de nhanh" cua hoc sinh o 3 diem:
 import uuid
 
 from fastapi import APIRouter, Request, Form
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 
@@ -98,6 +99,9 @@ async def ra_de_submit(
     if lop not in (10, 11, 12):
         return RedirectResponse("/gv/ra-de?loi=Lop+phai+la+10,+11+hoac+12.", status_code=303)
 
+    print(f"RA DE (GV): lop={lop} ki_thi={ki_thi} chuong={pham_vi_chuong} "
+          f"so_ma_de={socau_ma_de} nhap={bool(cho_phep_thieu)}")
+
     if socau_ma_de < 1 or socau_ma_de > 8:
         return RedirectResponse("/gv/ra-de?loi=So+ma+de+phai+tu+1+den+8.", status_code=303)
 
@@ -115,8 +119,16 @@ async def ra_de_submit(
         ki_thi_gui = ki_thi
         pham_vi_chuong = None
 
+    # PHAI chay trong threadpool. generate_exam_pdf_auto() la ham DONG BO
+    # va rat lau (moi ma de mot lan bien dich LaTeX, ~30-60 giay). Goi
+    # thang trong "async def" se CHAN han event loop cua uvicorn: ca web
+    # dung hinh trong luc sinh de, va voi nhieu ma de thi nginx cat ket
+    # noi truoc khi xong -> khong luu duoc de nao, bang "De da tao" van
+    # y nguyen. Endpoint /api/exam/generate-pdf-auto khong dinh loi nay
+    # vi no khai bang "def" nen FastAPI tu day sang threadpool.
     try:
-        ket_qua = generate_exam_pdf_auto(
+        ket_qua = await run_in_threadpool(
+            generate_exam_pdf_auto,
             lop=lop,
             tieu_de=tieu_de,
             role="teacher",
@@ -148,7 +160,12 @@ async def ra_de_submit(
             "cho_phep_thieu": bool(cho_phep_thieu),
         },
     )
+    if not de_id:
+        print("RA DE (GV): SINH DE XONG NHUNG KHONG LUU DUOC de_da_sinh "
+              "-> de se KHONG hien trong bang 'De da tao'.")
+
     if de_id:
+        print(f"RA DE (GV): xong, de_id={de_id}, so ma de={socau_ma_de}")
         history_service.luu_file_de(de_id, "de", ket_qua["pdf_path"])
         history_service.luu_file_de(de_id, "tex", ket_qua["tex_path"])
         if ket_qua.get("pdf_loigiai_path"):

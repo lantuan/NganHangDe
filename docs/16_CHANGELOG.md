@@ -3353,3 +3353,40 @@ muon nhieu ma de thi dung bieu mau /gv/ra-de.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.56 - 2026-09-15
+
+## /gv/ra-de chan ca may chu, nhieu ma de thi khong ra de nao
+
+TRIEU CHUNG: giao vien chon 4 ma de, bam Tao de, cho mai roi bang "De da
+tao" van y nguyen - khong co dong moi nao. Chay thang ham sinh de tren
+VPS thi RA DUNG 4 ma de, nen loi khong nam o bo sinh de.
+
+NGUYEN NHAN: app/routers/teacher.py::ra_de_submit khai la "async def"
+nhung goi THANG generate_exam_pdf_auto() - mot ham DONG BO va rat lau
+(moi ma de mot lan bien dich LaTeX, khoang 30-60 giay). Goi dong bo
+trong "async def" CHAN han event loop cua uvicorn:
+
+  - Ca web dung hinh trong suot luc sinh de (nguoi khac khong vao duoc).
+  - Voi nhieu ma de thi vuot thoi gian cho cua nginx -> ket noi bi cat
+    truoc khi sinh xong -> khong luu duoc de nao.
+
+Endpoint /api/exam/generate-pdf-auto (luong chat/n8n) KHONG dinh loi nay
+vi no khai bang "def" - FastAPI tu day ham dong bo sang threadpool.
+Chinh vi the chat van ra de binh thuong con /gv/ra-de thi khong.
+
+SUA: goi qua run_in_threadpool(). Them log ro rang cho moi lan ra de
+(lop / ki thi / chuong / so ma de) va canh bao rieng khi sinh de xong
+nhung KHONG luu duoc de_da_sinh - truong hop do de cung khong hien
+trong bang "De da tao", truoc day im lang hoan toan.
+
+BAI HOC: trong FastAPI, ham xu ly viec NANG va DONG BO thi hoac khai
+bang "def" (de FastAPI tu dua sang threadpool), hoac neu da tro thanh
+"async def" thi phai boc qua run_in_threadpool. Khong duoc goi thang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
