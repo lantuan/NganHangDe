@@ -174,17 +174,16 @@ def _sinh_pdf_tu_danh_sach(
         except PdfCompileError as e:
             raise AssembleError(str(e))
 
-        # SUA 2026-09-15: truoc day "tex_path" tra ve ban LOI GIAI
-        # (loigiai_tex_path) con ban DE (dethi_tex_path) bi vut di. Giao
-        # vien bam "tai .tex" tuong la lay ma nguon DE, hoa ra lai ra ban
-        # co san loi giai. Nay tra ve CA HAI, va tex_path la ban DE cho
-        # dung nghia.
+        # CHI luu MOT ban .tex, va la ban LOI GIAI. Khong can luu ca hai:
+        # hai ban chi khac nhau dung mot tham so cua goi ex_test, doi
+        # [loigiai] thanh [dethi] o dong \usepackage la an het loi giai -
+        # giao vien nao dung LaTeX cung biet. Luu ban loi giai vi tu do
+        # suy ra ban de duoc, nguoc lai thi khong.
         return {
             "so_cau_da_sinh": len(danh_sach_id) - so_cau_thieu,
             "so_cau_thieu": so_cau_thieu,
             "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
-            "tex_path": str(dethi_tex_path),
-            "tex_loigiai_path": str(loigiai_tex_path),
+            "tex_path": str(loigiai_tex_path),
             "pdf_path": str(dethi_pdf_path),
             "pdf_loigiai_path": str(loigiai_pdf_path),
             "dap_an_json_path": str(dap_an_json_path),
@@ -205,7 +204,6 @@ def _sinh_pdf_tu_danh_sach(
         "so_cau_thieu": so_cau_thieu,
         "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
         "tex_path": str(tex_path),
-        "tex_loigiai_path": None,
         "pdf_path": str(pdf_path),
         "pdf_loigiai_path": None,
         "dap_an_json_path": str(dap_an_json_path),

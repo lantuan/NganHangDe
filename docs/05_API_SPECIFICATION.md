@@ -537,9 +537,10 @@ sang `/register/teacher`.
 CHỈ giáo viên. Trả về mã nguồn `.tex` đã lưu lúc sinh đề nên luôn khớp với
 bản PDF đã phát — không sinh lại đề.
 
-Từ Version 2.53: có đủ cả mã nguồn đề (`loai_file="tex"`) và mã nguồn lời
-giải (`loai_file="tex_loigiai"`) thì trả về một tệp nén gồm `de_thi.tex` và
-`loi_giai.tex`; chỉ còn một bản thì trả về bản đó.
+Trả về **một** tệp `.tex` duy nhất. Đề sinh cho giáo viên là **bản có lời
+giải**; muốn bản đề thì đổi `[loigiai]` thành `[dethi]` ở dòng
+`\usepackage{ex_test}`. Hai bản chỉ khác nhau đúng tham số đó nên không
+lưu và không tải về cả hai.
 
 Lỗi: 403 nếu không phải giáo viên; 404 nếu không tìm thấy đề; 410 nếu file
 `.tex` đã bị cron dọn (sau 1 ngày).

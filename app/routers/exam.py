@@ -313,8 +313,6 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
         if de_id:
             history_service.luu_file_de(de_id, "de", result["pdf_path"])
             history_service.luu_file_de(de_id, "tex", result["tex_path"])
-        if result.get("tex_loigiai_path"):
-            history_service.luu_file_de(de_id, "tex_loigiai", result["tex_loigiai_path"])
             if result.get("pdf_loigiai_path"):
                 history_service.luu_file_de(de_id, "loigiai", result["pdf_loigiai_path"])
             if result.get("dap_an_json_path"):
@@ -419,8 +417,6 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
 
     history_service.luu_file_de(de_id_moi, "de", result["pdf_path"])
     history_service.luu_file_de(de_id_moi, "tex", result["tex_path"])
-    if result.get("tex_loigiai_path"):
-        history_service.luu_file_de(de_id_moi, "tex_loigiai", result["tex_loigiai_path"])
     if result.get("pdf_loigiai_path"):
         history_service.luu_file_de(de_id_moi, "loigiai", result["pdf_loigiai_path"])
     if result.get("dap_an_json_path"):
@@ -496,38 +492,20 @@ def tai_tex_endpoint(de_id: str, request: Request):
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
 
-    files = de.get("files", {})
-    tex_de = files.get("tex")
-    tex_loigiai = files.get("tex_loigiai")
-
-    co_de = bool(tex_de and Path(tex_de).exists())
-    co_loigiai = bool(tex_loigiai and Path(tex_loigiai).exists())
-
-    if not co_de and not co_loigiai:
+    duong_dan = de.get("files", {}).get("tex")
+    if not duong_dan or not Path(duong_dan).exists():
         raise HTTPException(
             410,
             "File .tex cua de nay da bi don (cron xoa sau 1 ngay). "
             "Tao lai de roi tai .tex ngay trong phien do.",
         )
 
-    # Co ca 2 ban -> nen mot tep nen, giao vien duoc ca ma nguon de VA
-    # ma nguon loi giai trong 1 lan tai.
-    if co_de and co_loigiai:
-        zip_path = Path(tex_de).with_name(f"de_{de_id[:8]}_tex.zip")
-        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
-            z.write(tex_de, arcname="de_thi.tex")
-            z.write(tex_loigiai, arcname="loi_giai.tex")
-        return FileResponse(
-            path=str(zip_path),
-            filename=f"de_{de_id[:8]}_tex.zip",
-            media_type="application/zip",
-        )
-
-    duong_dan = tex_de if co_de else tex_loigiai
-    ten = "de_thi.tex" if co_de else "loi_giai.tex"
+    # MOT tep duy nhat. De sinh cho giao vien la ban LOI GIAI; muon ban de
+    # thi doi [loigiai] thanh [dethi] o dong \usepackage{ex_test}. Hai ban
+    # chi khac nhau dung tham so do nen khong can tai ve ca hai.
     return FileResponse(
         path=duong_dan,
-        filename=f"{de_id[:8]}_{ten}",
+        filename=f"de_{de_id[:8]}.tex",
         media_type="application/x-tex",
     )
 

@@ -3207,15 +3207,16 @@ Ban de (dethi_tex_path) duoc tao ra roi VUT DI, chi giu ban loi giai.
 Giao vien bam "tai .tex" tuong lay ma nguon DE, hoa ra ra ban da co san
 loi giai - khong dung de in cho hoc sinh duoc.
 
-SUA:
-- Nhanh teacher tra ve CA HAI: "tex_path" = ban DE (dung nghia), them
-  "tex_loigiai_path" = ban loi giai. Nhanh student them
-  "tex_loigiai_path": None cho doi xung.
-- exam.py (2 cho) va teacher.py (1 cho) luu them dong file_de loai
-  "tex_loigiai".
-- GET /api/exam/tai-tex/{de_id}: co ca 2 ban thi nen thanh 1 tep zip
-  (de_thi.tex + loi_giai.tex); chi co 1 ban thi tra ve ban do; khong con
-  ban nao thi 410 kem huong dan.
+SUA (ban dau lam phuc tap - xem ghi chu cuoi muc):
+- Giu "tex_path" = ban LOI GIAI (nhu cu), CHI luu MOT tep .tex.
+- GET /api/exam/tai-tex/{de_id} tra ve dung mot tep do.
+
+GHI CHU - da lam thua roi rut lai: ban dau em sua thanh luu CA HAI ban
+.tex (de + loi giai) va tai ve dang tep nen. Giao vien chi ra ngay la
+thua: hai ban chi khac nhau dung mot tham so cua goi ex_test, doi
+[loigiai] thanh [dethi] o dong \usepackage la an het loi giai - giao
+vien nao dung LaTeX cung biet. Luu ban loi giai la du, vi tu do suy ra
+ban de duoc, nguoc lai thi khong. Da bo phan zip va cot "tex_loigiai".
 
 ## Nguoi thuc hien
 
