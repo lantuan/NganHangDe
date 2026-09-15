@@ -234,15 +234,25 @@ async def lay_tin_nhan(request: Request, conversation_id: str):
     return {"success": True, "data": tin_nhan}
 
 
-def _goi_n8n(message: str, user_id: str, conversation_id: str):
+def _goi_n8n(message: str, user_id: str, conversation_id: str,
+             vai_tro: str = "hoc_sinh"):
     """Ham dong bo (blocking) - se duoc chay trong threadpool rieng,
-    khong chan event loop chinh cua uvicorn trong luc cho n8n xu ly lau."""
+    khong chan event loop chinh cua uvicorn trong luc cho n8n xu ly lau.
+
+    Gui kem vai_tro de CHV_Fun xung ho cho dung ("em" voi hoc sinh,
+    "thay/co" voi giao vien) va hieu duoc cac yeu cau rieng cua giao vien
+    (vi du "cho 4 ma de"). LUU Y: viec QUYET DINH xuat de kem loi giai
+    hay khong KHONG phu thuoc truong nay - no do may chu tra bang
+    profiles.vai_tro o /api/exam/generate-pdf-auto. Truong nay chi de AI
+    noi nang cho dung.
+    """
     return requests.post(
         N8N_WEBHOOK_URL,
         json={
             "message": message,
             "user_id": user_id,
             "conversation_id": conversation_id,
+            "vai_tro": vai_tro,
         },
         timeout=300,
     )
@@ -336,8 +346,10 @@ async def chat_post(
             "need_login": True,
         }
 
+    vai_tro = profile_service.lay_vai_tro(user.id)
+
     print("========== CHAT ==========")
-    print(message)
+    print(f"[{vai_tro}] {message}")
     print("==========================")
 
     history_service.luu_tin_nhan(
@@ -351,7 +363,8 @@ async def chat_post(
     loi_cuoi = None
     for lan_thu in range(2):
         try:
-            r = await run_in_threadpool(_goi_n8n, message, user.id, conversation_id)
+            r = await run_in_threadpool(
+                _goi_n8n, message, user.id, conversation_id, vai_tro)
             break
         except requests.exceptions.Timeout as e:
             loi_cuoi = e

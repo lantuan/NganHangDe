@@ -98,3 +98,84 @@ def test_nhieu_ma_de_thi_moi_ma_mot_khoi_rieng_va_sang_trang():
     assert noi_dung.count("PHẦN IV.") == 4
     # Noi dung cac ma de KHAC nhau (moi ma de goi lai ham sinh)
     assert "de1 TN 1" in noi_dung and "de4 TN 1" in noi_dung
+
+
+# ---------------------------------------------------------------------
+# Chat phai phan biet vai tro: giao vien nhan de KEM loi giai
+# ---------------------------------------------------------------------
+
+def _tep_gia(tmp_path, ten):
+    """Endpoint tra ve FileResponse nen duong dan phai ton tai that."""
+    f = tmp_path / ten
+    f.write_text("gia")
+    return str(f)
+
+
+def test_may_chu_ep_role_teacher_khi_user_la_giao_vien(monkeypatch, tmp_path):
+    """
+    n8n van gui role="student" (prompt cu), nhung may chu phai tu tra
+    profiles.vai_tro theo user_id va ep thanh "teacher". Neu khong, giao
+    vien dung Chat AI chi nhan de tran, khong co loi giai.
+    """
+    from app.routers import exam as router_exam
+
+    da_goi = {}
+
+    def gia_generate(**kw):
+        da_goi.update(kw)
+        return {"pdf_path": _tep_gia(tmp_path, "a.pdf"),
+                "tex_path": _tep_gia(tmp_path, "a.tex"),
+                "pdf_loigiai_path": _tep_gia(tmp_path, "lg.pdf"),
+                "dap_an_json_path": None,
+                "so_cau_da_sinh": 1, "so_cau_thieu": 0,
+                "danh_sach_generator_id": []}
+
+    monkeypatch.setattr(router_exam, "generate_exam_pdf_auto", gia_generate)
+    monkeypatch.setattr(router_exam.profile_service, "la_giao_vien", lambda uid: True)
+    monkeypatch.setattr(router_exam.history_service, "luu_de_da_sinh", lambda **kw: None)
+
+    from fastapi.testclient import TestClient
+    from app.main import app
+    client = TestClient(app)
+
+    client.post("/api/exam/generate-pdf-auto", json={
+        "lop": 10, "tieu_de": "DE", "role": "student",
+        "loai_he_so": "HeSo1", "pham_vi_chuong": "chuong_1",
+        "user_id": "77777777-7777-7777-7777-777777777777",
+        "conversation_id": "hoi-thoai-1",
+    })
+
+    assert da_goi.get("role") == "teacher", \
+        "Giao vien chat -> may chu phai ep role=teacher du n8n gui 'student'"
+
+
+def test_hoc_sinh_van_giu_role_student(monkeypatch, tmp_path):
+    from app.routers import exam as router_exam
+
+    da_goi = {}
+
+    def gia_generate(**kw):
+        da_goi.update(kw)
+        return {"pdf_path": _tep_gia(tmp_path, "a.pdf"),
+                "tex_path": _tep_gia(tmp_path, "a.tex"),
+                "pdf_loigiai_path": None, "dap_an_json_path": None,
+                "so_cau_da_sinh": 1, "so_cau_thieu": 0,
+                "danh_sach_generator_id": []}
+
+    monkeypatch.setattr(router_exam, "generate_exam_pdf_auto", gia_generate)
+    monkeypatch.setattr(router_exam.profile_service, "la_giao_vien", lambda uid: False)
+    monkeypatch.setattr(router_exam.history_service, "luu_de_da_sinh", lambda **kw: None)
+
+    from fastapi.testclient import TestClient
+    from app.main import app
+    client = TestClient(app)
+
+    client.post("/api/exam/generate-pdf-auto", json={
+        "lop": 10, "tieu_de": "DE", "role": "student",
+        "loai_he_so": "HeSo1", "pham_vi_chuong": "chuong_1",
+        "user_id": "88888888-8888-8888-8888-888888888888",
+        "conversation_id": "hoi-thoai-2",
+    })
+
+    assert da_goi.get("role") == "student", \
+        "Hoc sinh KHONG duoc nhan de kem loi giai"

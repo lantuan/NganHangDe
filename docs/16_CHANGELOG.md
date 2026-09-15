@@ -3300,3 +3300,56 @@ TeX day du. Phai xem PDF that tren web sau khi deploy.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.55 - 2026-09-15
+
+## Chat AI phan biet vai tro giao vien / hoc sinh
+
+VAN DE: luong chat luon gui role="student" xuong
+/api/exam/generate-pdf-auto (gan cung trong Code Node cua n8n), nen giao
+vien dung Chat AI cung chi nhan DE TRAN: khong loi giai, khong o "Ho ten
+thi sinh / Ma de".
+
+SUA - dat quyet dinh o MAY CHU, khong sua n8n:
+
+    role_that = payload.role
+    if payload.user_id and profile_service.la_giao_vien(payload.user_id):
+        role_that = "teacher"
+
+May chu tu tra profiles.vai_tro theo user_id va EP role="teacher" neu
+dung la giao vien, bat ke n8n gui gi. Dung nguyen tac docs/00: nghiep vu
+thuoc ve Code, AI/n8n khong duoc quyet dinh. Sua trong n8n cung duoc
+nhung ai lo tay doi prompt la hong, con cho nay thi chac chan.
+
+Ket qua: giao vien chat mot cau la nhan DU de + loi giai, de co san o ho
+ten va ma de. Hoc sinh giu nguyen nhu cu (chi de tran) - da co bai kiem
+tra rieng cho ca hai chieu.
+
+role THAT cung duoc luu vao de_da_sinh, nen nut "Lam de khac cung cau
+truc" giu dung vai tro.
+
+## Gui them vai_tro sang n8n
+
+_goi_n8n() gui kem truong "vai_tro" de CHV_Fun xung ho cho dung ("em"
+voi hoc sinh, "thay/co" voi giao vien) va hieu duoc yeu cau rieng cua
+giao vien (vi du "cho 4 ma de"). Log chat cung ghi kem vai tro.
+
+LUU Y: truong nay CHI de AI noi nang cho dung. Viec co xuat loi giai hay
+khong KHONG phu thuoc no - da do may chu quyet dinh o tren.
+
+VIEC CON LAI THUOC VE n8n (khong sua duoc tu code): muon giao vien go
+"cho toi 4 ma de" trong chat ma ra 4 ma de thi prompt CHV_Fun phai doc
+duoc so do va dat vao truong socau_ma_de. Hien chat luon ra 1 ma de;
+muon nhieu ma de thi dung bieu mau /gv/ra-de.
+
+## Them 2 bai kiem tra (tong 35, deu xanh)
+
+  - giao vien chat -> may chu ep role=teacher du n8n gui "student"
+  - hoc sinh chat  -> van la "student", KHONG duoc nhan loi giai
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

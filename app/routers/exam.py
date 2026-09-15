@@ -21,7 +21,7 @@ from app.services.exam_assembler_service import (
 )
 
 from app.core.deps import yeu_cau_giao_vien
-from app.services import history_service
+from app.services import history_service, profile_service
 from app.services import diem_service
 from app.services.answer_parser_service import (
     trich_dap_an,
@@ -272,11 +272,30 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             f"lop={payload.lop} không hợp lệ - hệ thống chỉ có dữ liệu cho lớp 10, 11, 12.",
         )
 
+    # ------------------------------------------------------------------
+    # VAI TRO do MAY CHU quyet dinh, khong tin theo "role" n8n gui len.
+    #
+    # Truoc day luong chat luon gui role="student", nen giao vien dung
+    # Chat AI cung chi nhan de tran, khong co loi giai. Nay tra bang
+    # profiles.vai_tro theo user_id: la giao vien thi ep role="teacher"
+    # -> xuat CA de VA loi giai, va de co o "Ho ten thi sinh / Ma de".
+    #
+    # Dat o day (khong sua n8n) vi dung nguyen tac trong docs/00: nghiep
+    # vu thuoc ve Code, AI/n8n khong duoc quyet dinh. Sua n8n cung duoc
+    # nhung ai lo tay doi prompt la hong, con cho nay thi chac chan.
+    # ------------------------------------------------------------------
+    role_that = payload.role
+    if payload.user_id and profile_service.la_giao_vien(payload.user_id):
+        role_that = "teacher"
+        if payload.role != "teacher":
+            print(f"VAI TRO: ep role=teacher cho user {payload.user_id} "
+                  f"(n8n gui '{payload.role}')")
+
     try:
         result = generate_exam_pdf_auto(
             lop=payload.lop,
             tieu_de=payload.tieu_de,
-            role=payload.role,
+            role=role_that,
             loai_he_so=payload.loai_he_so,
             ki_thi=payload.ki_thi,
             pham_vi_chuong=payload.pham_vi_chuong,
@@ -292,7 +311,7 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             user_id=payload.user_id,
             conversation_id=payload.conversation_id,
             lop=payload.lop,
-            role=payload.role,
+            role=role_that,
             loai_he_so=payload.loai_he_so,
             ki_thi=payload.ki_thi,
             pham_vi_chuong=payload.pham_vi_chuong,
