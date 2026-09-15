@@ -2894,8 +2894,13 @@ LUU Y QUAN TRONG: KHONG the chuyen thang sang trang dang ky khi "tai khoan
 khong ton tai" - Supabase CO Y tra ve cung mot loi "Invalid login
 credentials" cho ca sai mat khau lan email chua dang ky, de nguoi ngoai
 khong do duoc email nao da co tai khoan tren he thong. He thong khong
-phan biet duoc 2 truong hop nay. Thay vao do: hien nut "Dang ky tai khoan
-moi" ngay trong o bao loi.
+phan biet duoc 2 truong hop nay.
+
+Vi vay thong bao gop ca hai kha nang lam mot:
+    "Tai khoan khong ton tai hoac mat khau khong dung."
+O bao loi KHONG them nut dang ky: trang dang nhap von da co 2 cho dan
+sang /register (nut o thanh tren cung, va dong "Chua co tai khoan?" o
+duoi form).
 
 ### 2. Nut "Ghi nho dang nhap" khong co tac dung
 

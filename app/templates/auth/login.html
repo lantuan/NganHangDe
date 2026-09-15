@@ -194,18 +194,9 @@
 >
 
 {% if error %}
-<div class="rounded-[16px] bg-error-container border border-error/30 p-stack-md">
-  <div class="flex gap-stack-sm">
-    <span class="material-symbols-outlined text-on-error-container">error</span>
-    <p class="font-body-md text-body-md text-on-error-container">{{ error }}</p>
-  </div>
-  {% if goi_y_dang_ky %}
-  <a href="/register"
-     class="mt-stack-md w-full inline-flex items-center justify-center gap-2 h-12 bg-primary-container text-white rounded-[16px] font-label-md text-label-md hover:opacity-90 transition-all">
-    <span class="material-symbols-outlined text-[20px]">person_add</span>
-    Đăng ký tài khoản mới
-  </a>
-  {% endif %}
+<div class="rounded-[16px] bg-error-container border border-error/30 p-stack-md flex gap-stack-sm">
+  <span class="material-symbols-outlined text-on-error-container">error</span>
+  <p class="font-body-md text-body-md text-on-error-container">{{ error }}</p>
 </div>
 {% endif %}
 

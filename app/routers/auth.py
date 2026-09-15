@@ -59,8 +59,7 @@ async def register_student_page(request: Request):
 # POST /login
 # ======================================================
 
-def _trang_login_loi(request: Request, email: str, thong_bao: str,
-                    goi_y_dang_ky: bool = False):
+def _trang_login_loi(request: Request, email: str, thong_bao: str):
     """Hien lai trang dang nhap kem thong bao loi (KHONG tra 500)."""
     return templates.TemplateResponse(
         "auth/login.html",
@@ -68,7 +67,6 @@ def _trang_login_loi(request: Request, email: str, thong_bao: str,
             "request": request,
             "error": thong_bao,
             "email": email,
-            "goi_y_dang_ky": goi_y_dang_ky,
             "supabase_url": SUPABASE_URL,
             "supabase_anon_key": SUPABASE_KEY,
         },
@@ -104,15 +102,14 @@ async def login(
 
         # LUU Y: Supabase co y tra ve CUNG mot loi "Invalid login credentials"
         # cho ca 2 truong hop sai mat khau va email chua dang ky - de nguoi
-        # ngoai khong do duoc email nao da co tai khoan. Vi vay KHONG the
-        # chuyen thang sang trang dang ky khi "tai khoan khong ton tai": he
-        # thong khong phan biet duoc. Thay vao do hien nut "Dang ky tai khoan
-        # moi" ngay trong o bao loi.
+        # ngoai khong do duoc email nao da co tai khoan tren he thong. Vi
+        # vay thong bao phai gop ca hai kha nang lam mot, khong the noi ro
+        # la "tai khoan khong ton tai". Trang dang nhap da co san 2 cho dan
+        # sang /register (thanh tren cung va dong "Chua co tai khoan?" o
+        # duoi), nen o bao loi khong can them nut nao nua.
         return _trang_login_loi(
             request, email,
-            "Email hoặc mật khẩu không đúng. Nếu chưa có tài khoản, bấm nút "
-            "bên dưới để đăng ký.",
-            goi_y_dang_ky=True,
+            "Tài khoản không tồn tại hoặc mật khẩu không đúng.",
         )
     except Exception as e:
         print("LOI DANG NHAP (khong ro):", type(e), e)
@@ -124,9 +121,7 @@ async def login(
     if result.user is None or result.session is None:
         return _trang_login_loi(
             request, email,
-            "Email hoặc mật khẩu không đúng. Nếu chưa có tài khoản, bấm nút "
-            "bên dưới để đăng ký.",
-            goi_y_dang_ky=True,
+            "Tài khoản không tồn tại hoặc mật khẩu không đúng.",
         )
 
     response = RedirectResponse("/chat", status_code=303)
