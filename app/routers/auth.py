@@ -5,6 +5,7 @@ from supabase_auth.errors import AuthApiError
 from pydantic import BaseModel
 from app.services import supabase_service, profile_service
 from app.core.config import SUPABASE_URL, SUPABASE_KEY, MA_MOI_GIAO_VIEN
+from app.core.deps import get_current_user
 from app.core.supabase import supabase
 
 router = APIRouter()
@@ -394,6 +395,69 @@ async def register_teacher(
         profile_service.dat_vai_tro(user.id, "giao_vien")
 
     return RedirectResponse("/login", status_code=303)
+
+
+# ======================================================
+# "TOI LA GIAO VIEN" - nang tai khoan DANG DANG NHAP len giao vien
+#
+# Vi sao can trang nay: nut "Dang nhap bang Google" khong di qua
+# /register/teacher nen khong co cho nhap ma moi, va cung khong hoi vai
+# tro -> moi tai khoan Google deu thanh hoc sinh roi bi hoi chon lop.
+# Trang nay cho nguoi DA dang nhap (bang Google hay mat khau deu duoc)
+# nhap ma moi de tu nang minh len giao vien. Dung duoc ca cho tai khoan
+# cu da tro thanh hoc sinh, khong phai xoa di dang ky lai.
+#
+# Dat o auth.py (KHONG phai teacher.py) vi teacher.py chan het nguoi
+# chua phai giao vien - ma trang nay thi danh cho dung nhung nguoi do.
+# ======================================================
+
+@router.get("/toi-la-giao-vien", response_class=HTMLResponse)
+async def toi_la_giao_vien_page(request: Request):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    # Da la giao vien roi thi vao thang khu lam viec, khoi nhap lai ma.
+    if profile_service.la_giao_vien(user.id):
+        return RedirectResponse("/gv", status_code=303)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="auth/toi_la_giao_vien.html",
+        context={"email": user.email},
+    )
+
+
+@router.post("/toi-la-giao-vien")
+async def toi_la_giao_vien(request: Request, ma_moi: str = Form(...)):
+    user = get_current_user(request)
+    if user is None:
+        return RedirectResponse("/login", status_code=303)
+
+    def bao_loi(thong_bao: str):
+        return templates.TemplateResponse(
+            request=request,
+            name="auth/toi_la_giao_vien.html",
+            context={"error": thong_bao, "email": user.email},
+            status_code=400,
+        )
+
+    if not MA_MOI_GIAO_VIEN:
+        return bao_loi(
+            "Hệ thống chưa bật chức năng này (thiếu mã mời trong cấu hình). "
+            "Liên hệ quản trị."
+        )
+
+    if ma_moi.strip() != MA_MOI_GIAO_VIEN:
+        # Ghi log de biet co ai do dang thu mo ma.
+        print(f"MA MOI SAI - tai khoan {user.email} thu ma: {ma_moi.strip()[:40]}")
+        return bao_loi("Mã mời không đúng.")
+
+    if not profile_service.dat_vai_tro(user.id, "giao_vien"):
+        return bao_loi("Không ghi được vai trò, thử lại sau ít phút.")
+
+    print(f"DA NANG LEN GIAO VIEN: {user.email}")
+    return RedirectResponse("/gv", status_code=303)
 
 
 @router.get("/teacher-coming-soon", response_class=HTMLResponse)

@@ -2989,3 +2989,66 @@ va test cu xanh khong chung minh duoc gi ve mot nhanh chi chay khi co loi.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.50 - 2026-09-15
+
+## Trang "Toi la giao vien" + 1 loi do chinh ban 2.48 gay ra
+
+### 1. Dang nhap bang Google khong chon duoc vai tro giao vien
+
+VAN DE (giao vien bao): bam "Dang nhap bang Google" la vao thang, tu tao
+tai khoan luon, nhung bi hoi CHON LOP ngay - khong co cho nao noi minh la
+giao vien. Ly do: luong Google di duong rieng (supabase-js -> POST
+/auth/set-session), KHONG qua /register/teacher nen khong co o nhap ma
+moi va khong co buoc hoi vai tro -> moi tai khoan Google deu la hoc sinh.
+
+SUA: them trang nang cap vai tro cho nguoi DA dang nhap:
+
+    GET  /toi-la-giao-vien   - form nhap ma moi
+    POST /toi-la-giao-vien   - dung ma -> dat vai_tro='giao_vien' -> /gv
+
+- Dat o app/routers/auth.py, KHONG phai teacher.py: teacher.py chan het
+  nguoi chua phai giao vien, ma trang nay danh cho dung nhung nguoi do.
+- Da la giao vien roi thi GET tu chuyen thang sang /gv.
+- Ma sai: tra 400, ghi log kem email nguoi thu (de biet neu co ai do do
+  ma), va TUYET DOI khong dong vao vai_tro.
+- Them template app/templates/auth/toi_la_giao_vien.html.
+- Them loi ra o cuoi trang Chon lop (app/templates/chat/chon_lop.html):
+  "Thay/co dang nhap nham vao day? Toi la giao vien".
+
+Cach nay dung duoc ca cho tai khoan CU da tro thanh hoc sinh - khong phai
+xoa di dang ky lai. Da can nhac 2 cach khac (hoi vai tro ngay sau khi
+dang nhap Google; cam giao vien dung Google) - giao vien chon cach nay.
+
+### 2. Dang nhap bang Google bi dang xuat khi dong trinh duyet
+
+Loi NAY DO BAN 2.48 GAY RA, phat hien khi ra soat lai vi cau hoi tren.
+
+Ban 2.48 cho middleware lam_moi_cookie_phien doc cookie sb_ghi_nho de
+biet nguoi dung co tick "Ghi nho dang nhap" khong. Nhung /auth/set-session
+(luong Google) khong he ghi cookie do -> middleware thay thieu, hieu la
+"khong ghi nho", va bien 2 cookie phien thanh cookie tam ngay lan lam moi
+dau tien -> dong trinh duyet la mat phien.
+
+SUA: /auth/set-session ghi them sb_ghi_nho="1" cho khop voi han 7/30 ngay
+ma chinh no dang dat.
+
+BAI HOC: them mot cookie dieu khien thi phai ra soat MOI cho dat cookie
+phien, khong chi cho vua sua.
+
+## Them bai kiem tra
+
+tests/test_login_loi.py them 3 bai cho trang moi:
+  - chua dang nhap -> 303 ve /login
+  - ma sai -> 400, va KIEM CHUNG dat_vai_tro() khong he duoc goi
+  - ma dung (ke ca co khoang trang thua) -> 303 ve /gv, dat_vai_tro()
+    duoc goi dung (user_id, 'giao_vien')
+
+Tong: 17 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

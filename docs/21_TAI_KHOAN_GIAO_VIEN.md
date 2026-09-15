@@ -229,3 +229,31 @@ xuất hiện hai lần. Khi thêm route trùng đường dẫn, luôn kiểm tr
   `\begin{ex}` vào CÙNG một đề, nên ra một đề mà mỗi câu lặp lại N lần chứ
   chưa phải N đề riêng. Đây là việc tiếp theo.
 - Bật Row Level Security cho `classroom_oauth_gv`.
+
+
+===============================================================================
+
+# 7. Nâng vai trò cho tài khoản đăng nhập bằng Google (Version 2.50)
+
+Luồng "Đăng nhập bằng Google" không đi qua `/register/teacher` (supabase-js
+→ `POST /auth/set-session`), nên không có chỗ nhập mã mời và không hỏi vai
+trò — mọi tài khoản Google mặc định là học sinh.
+
+Giải pháp: trang nâng cấp cho người **đã đăng nhập**.
+
+    GET  /toi-la-giao-vien   — form nhập mã mời
+    POST /toi-la-giao-vien   — đúng mã → vai_tro='giao_vien' → chuyển /gv
+
+Đặt ở `app/routers/auth.py`, **không** đặt ở `teacher.py`: `teacher.py`
+chặn hết người chưa phải giáo viên, mà trang này dành cho đúng những
+người đó.
+
+Lối vào: cuối trang Chọn lớp có dòng *"Thầy/cô đăng nhập nhầm vào đây? →
+Tôi là giáo viên"*.
+
+Dùng được cả cho tài khoản cũ đã trót thành học sinh — không phải xoá đi
+đăng ký lại.
+
+**Chưa làm:** giới hạn số lần nhập sai mã mời. Hiện chỉ ghi log mỗi lần
+sai kèm email người thử. Mã mời đủ dài thì dò rất khó, nhưng khi mở rộng
+cho nhiều trường thì nên thêm giới hạn (ví dụ 5 lần sai thì khoá 15 phút).

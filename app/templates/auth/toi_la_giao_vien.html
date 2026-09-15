@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tôi là giáo viên - Ngân Hàng Đề AI</title>
+{% include "layouts/tailwind_head.html" %}
+</head>
+<body class="min-h-screen flex flex-col bg-background text-on-surface">
+
+<header class="bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-7xl mx-auto">
+<a href="/" class="font-headline-md text-headline-md font-bold text-primary-container">Ngân Hàng Đề AI</a>
+<a href="/logout" class="font-label-md text-label-md text-on-surface-variant hover:text-primary-container">Đăng xuất</a>
+</div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg">
+<div class="max-w-lg w-full bg-surface-container-lowest rounded-xl soft-shadow border border-outline-variant p-stack-lg md:p-[48px]">
+
+<div class="text-center mb-stack-lg">
+<span class="material-symbols-outlined text-primary-container text-[48px]">badge</span>
+<h1 class="font-headline-lg text-headline-lg mt-stack-sm mb-stack-sm">Tôi là giáo viên</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+Nhập mã mời để nâng tài khoản <strong>{{ email }}</strong> lên tài khoản giáo viên.
+</p>
+</div>
+
+{% if error %}
+<div class="mb-stack-md rounded-[16px] bg-error-container border border-error/30 p-stack-md flex gap-stack-sm">
+<span class="material-symbols-outlined text-on-error-container">error</span>
+<p class="font-body-md text-body-md text-on-error-container">{{ error }}</p>
+</div>
+{% endif %}
+
+<form action="/toi-la-giao-vien" method="post" class="space-y-stack-md">
+<div>
+<label class="block font-medium mb-unit" for="ma_moi">Mã mời giáo viên</label>
+<input class="w-full px-stack-md py-3 bg-surface border border-outline-variant rounded-2xl focus:ring-2 focus:ring-primary-container"
+       id="ma_moi" name="ma_moi" type="text" placeholder="Nhập mã được cấp" required autofocus/>
+</div>
+<button class="w-full bg-primary-container text-white py-stack-md rounded-2xl font-semibold text-lg hover:opacity-90 transition-all" type="submit">
+Xác nhận
+</button>
+</form>
+
+<p class="text-center font-body-md text-body-md text-on-surface-variant mt-stack-lg pt-stack-md border-t border-outline-variant">
+Chưa có mã? Liên hệ giáo viên phụ trách.<br/>
+Là học sinh? <a class="text-primary-container font-semibold" href="/chon-lop">Quay lại chọn lớp</a>
+</p>
+
+</div>
+</main>
+</body>
+</html>
