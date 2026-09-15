@@ -2918,3 +2918,74 @@ Khong doi gi ve bao mat: sb_ghi_nho la httponly, chi chua "1" hoac "0".
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.49 - 2026-09-15
+
+## Trang dang nhap VAN ra 500 sau khi da sua o Version 2.48
+
+Ban 2.48 sua dung nguyen nhan thu nhat (khoi except ket thuc bang "raise")
+nhung lai them nguyen nhan thu hai ngay trong cach sua, nen nguoi dung
+khong thay khac gi: van trang trang.
+
+NGUYEN NHAN THU HAI - traceback tren VPS noi ro:
+
+    File "app/routers/auth.py", line 64, in _trang_login_loi
+        return templates.TemplateResponse(
+    File "starlette/templating.py", line 148, in TemplateResponse
+        template = self.get_template(name)
+    TypeError: unhashable type: 'dict'
+
+Ban Starlette dang chay (1.6.0) da BO cach goi cu:
+
+    templates.TemplateResponse("ten.html", {...})        # KIEU CU - HONG
+
+No coi tham so vi tri dau la REQUEST va tham so thu hai la TEN TEP, nen
+cai dict lot vao cho ten tep -> get_template(dict) -> unhashable.
+
+Cach goi DUNG (tham so co ten):
+
+    templates.TemplateResponse(
+        request=request,
+        name="ten.html",
+        context={...},
+    )
+
+SUA: doi ca 3 cho con dung kieu cu trong app/routers/auth.py:
+  - _trang_login_loi()                     (dong 64)
+  - nhanh bao loi cua register_student()   (dong 285)
+  - nhanh bao loi cua register_teacher()   (dong 333)
+
+Ca 3 deu la NHANH BAO LOI - chi chay khi nguoi dung go sai - nen truoc
+gio khong ai phat hien. Cac route GET von da dung kieu moi nen van chay
+binh thuong.
+
+Da quet lai toan bo app/: khong con cho nao dung kieu cu.
+
+## Them bai kiem tra tu dong: tests/test_login_loi.py
+
+Hai loi noi tiep o cung mot cho ma khong bai kiem tra nao bat duoc, vi
+truoc gio chi kiem tra "import co chay khong". Bai moi dung TestClient
+gia lap DUNG tinh huong go sai mat khau (monkeypatch supabase_service.
+sign_in, KHONG can mang, KHONG can Supabase):
+
+  - test_sai_mat_khau_khong_ra_500      : phai tra 401 + dung thong bao,
+                                          va giu lai email vua go
+  - test_loi_la_cung_khong_ra_500       : loi bat ngo cung khong duoc 500
+  - test_trang_dang_nhap_binh_thuong    : GET /login van 200, khong hien
+                                          o bao loi khi khong co loi
+
+Da kiem chung bai test co "rang": goi kieu cu tren may cua giao vien cung
+nem dung "TypeError: unhashable type: 'dict'", nen neu ai lo tay quay lai
+kieu cu thi test do ngay.
+
+## Bai hoc
+
+Sua loi o nhanh bao loi thi PHAI thu chay that vao nhanh do. Import duoc
+va test cu xanh khong chung minh duoc gi ve mot nhanh chi chay khi co loi.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

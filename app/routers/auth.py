@@ -61,10 +61,16 @@ async def register_student_page(request: Request):
 
 def _trang_login_loi(request: Request, email: str, thong_bao: str):
     """Hien lai trang dang nhap kem thong bao loi (KHONG tra 500)."""
+    # LUU Y: PHAI dung dang tham so co ten (request=..., name=..., context=...).
+    # Ban Starlette dang chay tren VPS da BO cach goi cu
+    # TemplateResponse("ten.html", {...}) - no coi tham so dau la request va
+    # tham so thu hai la ten tep, nen cai dict lot vao cho ten tep va nem
+    # "TypeError: unhashable type: 'dict'" -> ra trang trang 500.
+    # Gap that ngay 15/09/2026, xem docs/16_CHANGELOG.md Version 2.49.
     return templates.TemplateResponse(
-        "auth/login.html",
-        {
-            "request": request,
+        request=request,
+        name="auth/login.html",
+        context={
             "error": thong_bao,
             "email": email,
             "supabase_url": SUPABASE_URL,
@@ -282,15 +288,15 @@ async def register_student(
         print(e)
 
         return templates.TemplateResponse(
-            "auth/register_student.html",
-            {
-                "request": request,
+            request=request,
+            name="auth/register_student.html",
+            context={
                 "error": str(e),
                 "fullname": fullname,
                 "email": email,
                 "supabase_url": SUPABASE_URL,
                 "supabase_anon_key": SUPABASE_KEY,
-            }
+            },
         )
     
 # ======================================================
@@ -330,9 +336,9 @@ async def register_teacher(
 
     def bao_loi(thong_bao: str):
         return templates.TemplateResponse(
-            "auth/register_teacher.html",
-            {
-                "request": request,
+            request=request,
+            name="auth/register_teacher.html",
+            context={
                 "error": thong_bao,
                 "fullname": fullname,
                 "email": email,
