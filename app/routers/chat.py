@@ -82,11 +82,18 @@ async def chat(request: Request):
     # Tai khoan moi (nhat la dang nhap bang Google - khong di qua trang
     # dang ky nen chua he duoc hoi) phai chon vai tro TRUOC. Neu bo qua
     # buoc nay thi giao vien bi hoi "chon lop cua em" ma khong hieu tai sao.
-    if profile_service.lay_vai_tro(user.id) == profile_service.VAI_TRO_CHUA_CHON:
+    vai_tro = profile_service.lay_vai_tro(user.id)
+    if vai_tro == profile_service.VAI_TRO_CHUA_CHON:
         return RedirectResponse("/chon-vai-tro", status_code=303)
 
-    ho_so = supabase_service.lay_lop_hoc_sinh(user.id)
-    if not ho_so or not ho_so.get("lop"):
+    # Giao vien KHONG co "lop cua minh" theo nghia hoc sinh - ho day nhieu
+    # lop. Truoc day doan duoi day bat moi nguoi phai co lop moi vao duoc
+    # chat, nen giao vien bam "Chat AI" lai bi hoi "Chon lop cua em".
+    # Lay ma lop de phat cho hoc sinh la viec khac, nam o /gv/lop.
+    la_giao_vien = vai_tro in profile_service.VAI_TRO_GIAO_VIEN
+
+    ho_so = supabase_service.lay_lop_hoc_sinh(user.id) or {}
+    if not la_giao_vien and not ho_so.get("lop"):
         # Thu tu dong ghep lop bang email da dong bo tu Google Classroom
         # (xem app/services/classroom_service.py) truoc khi bat hoc sinh
         # tu chon o /chon-lop. Khong tim thay (chua dong bo, hoac email
@@ -116,6 +123,7 @@ async def chat(request: Request):
             "user_display_name": ten_hien_thi,
             "user_khoi": ho_so.get("khoi"),
             "user_lop": ho_so.get("lop"),
+            "la_giao_vien": la_giao_vien,
         },
     )
 
@@ -126,8 +134,12 @@ async def chon_lop_page(request: Request):
     if user is None:
         return RedirectResponse("/login", status_code=303)
 
-    if profile_service.lay_vai_tro(user.id) == profile_service.VAI_TRO_CHUA_CHON:
+    vai_tro = profile_service.lay_vai_tro(user.id)
+    if vai_tro == profile_service.VAI_TRO_CHUA_CHON:
         return RedirectResponse("/chon-vai-tro", status_code=303)
+    # Giao vien vao nham trang chon lop -> day ve khu lam viec.
+    if vai_tro in profile_service.VAI_TRO_GIAO_VIEN:
+        return RedirectResponse("/gv", status_code=303)
 
     return templates.TemplateResponse(
         request=request,

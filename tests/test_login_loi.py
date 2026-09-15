@@ -203,3 +203,60 @@ def test_chon_giao_vien_thi_sang_nhap_ma_moi_va_CHUA_nang_vai_tro(client, monkey
     assert res.status_code == 303
     assert res.headers["location"] == "/toi-la-giao-vien"
     assert da_goi["dat"] is False, "Bam 'Giao vien' thoi CHUA duoc nang vai tro - phai nhap ma moi da"
+
+
+# ---------------------------------------------------------------------
+# Giao vien khong bi hoi chon lop; 403 hien trang ro rang
+# ---------------------------------------------------------------------
+
+def test_giao_vien_vao_chon_lop_thi_day_ve_gv(client, monkeypatch):
+    from app.routers import chat as router_chat
+
+    class UserGia:
+        id = "44444444-4444-4444-4444-444444444444"
+        email = "co@example.com"
+
+    monkeypatch.setattr(router_chat, "get_current_user", lambda request: UserGia())
+    monkeypatch.setattr(router_chat.profile_service, "lay_vai_tro", lambda uid: "giao_vien")
+
+    res = client.get("/chon-lop", follow_redirects=False)
+    assert res.status_code == 303
+    assert res.headers["location"] == "/gv"
+
+
+def test_giao_vien_vao_chat_KHONG_bi_hoi_chon_lop(client, monkeypatch):
+    from app.routers import chat as router_chat
+
+    class UserGia:
+        id = "55555555-5555-5555-5555-555555555555"
+        email = "co@example.com"
+        user_metadata = {"fullname": "Cô Lan"}
+
+    monkeypatch.setattr(router_chat, "get_current_user", lambda request: UserGia())
+    monkeypatch.setattr(router_chat.profile_service, "lay_vai_tro", lambda uid: "giao_vien")
+    monkeypatch.setattr(router_chat.profile_service, "la_giao_vien", lambda uid: True)
+    # Giao vien khong co lop - truoc day chinh cho nay day ho sang /chon-lop
+    monkeypatch.setattr(router_chat.supabase_service, "lay_lop_hoc_sinh", lambda uid: None)
+
+    res = client.get("/chat", follow_redirects=False)
+    assert res.status_code == 200, "Giao vien phai vao thang Chat AI"
+    assert "Chọn lớp của em" not in res.text
+
+
+def test_403_hien_trang_ro_rang_kem_vai_tro(client, monkeypatch):
+    from app.core import deps
+
+    class UserGia:
+        id = "66666666-6666-6666-6666-666666666666"
+        email = "hs@example.com"
+
+    monkeypatch.setattr(deps, "get_current_user", lambda request: UserGia())
+    monkeypatch.setattr(deps.__dict__["__builtins__"] if False else deps, "lay_vai_tro",
+                        lambda request, user=None: "hoc_sinh", raising=False)
+
+    res = client.get("/gv/thong-ke", headers={"accept": "text/html"},
+                     follow_redirects=False)
+    # Hoc sinh -> 403, va phai la TRANG HTML co huong dan, khong phai JSON
+    assert res.status_code == 403
+    assert "Trang này dành cho giáo viên" in res.text
+    assert "Tôi là giáo viên" in res.text

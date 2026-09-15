@@ -3108,3 +3108,66 @@ moi vai tro khac ngoai giao_vien - khong ho them duong nao.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.52 - 2026-09-15
+
+## 1. Giao vien bam "Chat AI" bi hoi chon lop nhu hoc sinh
+
+NGUYEN NHAN: route GET /chat bat MOI nguoi phai co profiles.lop moi vao
+duoc, khong thi day sang /chon-lop. Giao vien day nhieu lop, khong co
+"lop cua minh" theo nghia hoc sinh, nen luon bi day sang do.
+
+SUA (app/routers/chat.py):
+- GET /chat : giao vien vao thang, KHONG kiem tra lop. Van dung Chat AI
+  de ra de binh thuong.
+- GET /chon-lop : giao vien vao nham thi day ve /gv.
+- Them co la_giao_vien vao context cua chat.html.
+
+## 2. Lay ma lop Google Classroom ngay trong /gv/lop
+
+Giao vien can ma lop de phat cho hoc sinh (chinh cai ma hoc sinh nhap o
+buoc "Tham gia lop"), truoc day khong co cho nao lay.
+
+SUA: moi dong lop trong /gv/lop co nut "Lay ma"; bam thi goi
+GET /gv/lop/ma?khoi=..&lop=.. -> tra ve ma dang ky + link tham gia lop,
+hien ngay tai dong do kem nut "Mo lop".
+
+Goi rieng tung lop khi bam, KHONG lay ca loat luc mo trang: moi lop la
+mot luot goi sang Google, mo trang ma goi ca chuc lan thi rat lau.
+
+## 3. Loi 403 tra ve JSON kho hieu -> hien trang ro rang
+
+Giao vien bao "vao duoc /gv mot lan roi gio khong vao lai duoc" nhung
+man hinh chi hien mot dong JSON {"detail": ...}, khong biet tai sao.
+
+SUA (app/main.py): them exception handler cho 403. Neu trinh duyet xin
+HTML thi hien trang auth/khong_du_quyen.html, GHI RO:
+- dang dang nhap bang tai khoan nao
+- VAI TRO HIEN TAI cua tai khoan do
+- nut di tiep dung cho: chua_chon -> /chon-vai-tro; hoc_sinh ->
+  /toi-la-giao-vien; chua_cau_hinh -> nhac chay SQL.
+Cac ma loi khac giu nguyen hanh vi cu.
+
+Trang nay chinh la cong cu tu chan doan: nhin mot cai la biet tai khoan
+dang o vai tro nao va phai bam di dau.
+
+## Mot loi tu gay ra trong luc sua, da bat duoc nho bai kiem tra
+
+Lan sua dau tien dat nham doan "giao vien -> /gv" vao GET /chat thay vi
+GET /chon-lop (hai ham co doan ma giong het nhau, replace trung cho dau
+tien). Ket qua nguoc han y muon: giao vien bi day RA KHOI Chat AI. Bai
+test test_giao_vien_vao_chat_KHONG_bi_hoi_chon_lop do ngay.
+
+## Them 3 bai kiem tra (tong 25, deu xanh)
+
+  - giao vien vao /chon-lop  -> 303 ve /gv
+  - giao vien vao /chat      -> 200, KHONG co chu "Chon lop cua em"
+  - hoc sinh vao /gv/thong-ke -> 403 va la TRANG HTML co huong dan,
+    khong phai JSON
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

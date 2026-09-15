@@ -1,5 +1,36 @@
 {% extends "teacher/_base_gv.html" %}
-{% block title %}Lớp{% endblock %}
+{% block title %}Lớp<script>
+// Lay ma lop (enrollment code) cua tung lop khi bam nut - khong lay ca
+// loat luc mo trang vi moi lop la mot luot goi sang Google.
+document.querySelectorAll('.nut-lay-ma').forEach(nut => {
+    nut.addEventListener('click', async () => {
+        const o = nut.nextElementSibling;
+        const nhan = nut.textContent;
+        nut.disabled = true;
+        nut.textContent = 'Đang lấy…';
+        try {
+            const res = await fetch(`/gv/lop/ma?khoi=${encodeURIComponent(nut.dataset.khoi)}`
+                                  + `&lop=${encodeURIComponent(nut.dataset.lop)}`);
+            const d = await res.json();
+            if (d.thanh_cong) {
+                o.innerHTML = `<strong class="text-tertiary">${d.ma_lop}</strong>`
+                    + ` &nbsp;<a class="text-primary-container font-semibold" href="${d.link}" target="_blank">Mở lớp</a>`;
+                nut.remove();
+            } else {
+                o.innerHTML = `<span class="text-error">${d.thong_bao || 'Không lấy được mã'}</span>`;
+                nut.disabled = false;
+                nut.textContent = nhan;
+            }
+        } catch (e) {
+            o.innerHTML = '<span class="text-error">Lỗi kết nối</span>';
+            nut.disabled = false;
+            nut.textContent = nhan;
+        }
+    });
+});
+</script>
+
+{% endblock %}
 {% block content %}
 
 <h1 class="font-headline-lg text-headline-lg mb-stack-sm">Lớp học</h1>
@@ -16,6 +47,12 @@ Việc gán lớp cho giáo viên hiện làm bằng câu lệnh SQL trong Supab
 sẽ làm ở bước sau.
 </div>
 
+<div class="mb-stack-lg p-stack-md bg-surface-container-low border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface-variant">
+Bấm <strong>Lấy mã</strong> ở cột cuối để nhận mã lớp Google Classroom — đây
+chính là mã học sinh nhập ở bước "Tham gia lớp". Bấm <strong>Mở lớp</strong>
+để vào thẳng lớp đó trên Classroom.
+</div>
+
 <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
 <table class="w-full text-left font-body-md text-body-md">
 <thead class="bg-surface-container-low">
@@ -24,6 +61,7 @@ sẽ làm ở bước sau.
 <th class="p-stack-md">Lớp</th>
 <th class="p-stack-md">Mã lớp Classroom</th>
 <th class="p-stack-md">Giáo viên phụ trách</th>
+<th class="p-stack-md">Mã lớp cho học sinh</th>
 </tr>
 </thead>
 <tbody>
@@ -38,6 +76,15 @@ sẽ làm ở bước sau.
 {% if d.la_lop_cua_toi %}<span class="text-primary-container font-semibold">Lớp của tôi</span>
 {% elif d.da_gan_giao_vien %}<span class="text-on-surface-variant">Giáo viên khác</span>
 {% else %}<span class="text-on-surface-variant">Chưa gán</span>{% endif %}
+</td>
+<td class="p-stack-md whitespace-nowrap">
+{% if d.co_ma_classroom %}
+<button type="button" class="nut-lay-ma px-stack-md py-stack-sm border border-primary-container text-primary-container rounded-full font-label-md text-label-md hover:bg-surface-container"
+        data-khoi="{{ d.khoi }}" data-lop="{{ d.lop }}">Lấy mã</button>
+<span class="o-ma font-mono"></span>
+{% else %}
+<span class="text-on-surface-variant">—</span>
+{% endif %}
 </td>
 </tr>
 {% endfor %}

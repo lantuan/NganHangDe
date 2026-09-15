@@ -1,5 +1,8 @@
 from fastapi import FastAPI, Request
+from fastapi.exception_handlers import http_exception_handler
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.routers import home
 from app.routers import auth
@@ -18,6 +21,31 @@ from app.routers import teacher
 app = FastAPI(title="Ngân Hàng Đề AI")
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+templates = Jinja2Templates(directory="app/templates")
+
+
+@app.exception_handler(StarletteHTTPException)
+async def xu_ly_khong_du_quyen(request: Request, exc: StarletteHTTPException):
+    """
+    Loi 403 (khong phai giao vien) truoc day tra ve JSON {"detail": ...} -
+    nguoi dung chi thay mot dong chu kho hieu, khong biet tai sao minh bi
+    chan va phai lam gi. Nay hien mot trang ro rang, co ghi VAI TRO HIEN
+    TAI cua tai khoan va nut di tiep dung cho. Cac loi khac giu nguyen.
+    """
+    if exc.status_code == 403 and "text/html" in request.headers.get("accept", ""):
+        from app.core.deps import get_current_user, lay_vai_tro
+        user = get_current_user(request)
+        return templates.TemplateResponse(
+            request=request,
+            name="auth/khong_du_quyen.html",
+            context={
+                "email": getattr(user, "email", None),
+                "vai_tro": lay_vai_tro(request, user),
+            },
+            status_code=403,
+        )
+    return await http_exception_handler(request, exc)
 
 app.include_router(home.router)
 app.include_router(auth.router)

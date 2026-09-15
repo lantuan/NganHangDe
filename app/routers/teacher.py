@@ -198,3 +198,27 @@ async def danh_sach_lop(request: Request):
         name="teacher/lop.html",
         context={"danh_sach": dong},
     )
+
+
+@router.get("/gv/lop/ma")
+async def lay_ma_lop(request: Request, khoi: str, lop: str):
+    """
+    Lay MA LOP (enrollment code) + link tham gia cua mot lop tren Google
+    Classroom, de giao vien phat cho hoc sinh - dung cai ma hoc sinh se
+    nhap o buoc "Tham gia lop".
+
+    Goi rieng tung lop (khong lay ca loat luc mo trang) vi moi lop la mot
+    luot goi sang Google, mo trang ma goi ca chuc lan thi rat lau.
+    """
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+
+    ket_qua = classroom_service.tao_link_gia_nhap_lop(khoi, lop)
+    return {
+        "thanh_cong": bool(ket_qua.get("success")),
+        "ma_lop": ket_qua.get("ma_dang_ky"),
+        "link": ket_qua.get("link_tham_gia"),
+        "thong_bao": ket_qua.get("message"),
+    }

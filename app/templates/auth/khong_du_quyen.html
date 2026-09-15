@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Không đủ quyền - Ngân Hàng Đề AI</title>
+{% include "layouts/tailwind_head.html" %}
+</head>
+<body class="min-h-screen flex flex-col bg-background text-on-surface">
+
+<header class="bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-md max-w-7xl mx-auto">
+<a href="/" class="font-headline-md text-headline-md font-bold text-primary-container">Ngân Hàng Đề AI</a>
+<a href="/logout" class="font-label-md text-label-md text-on-surface-variant hover:text-primary-container">Đăng xuất</a>
+</div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg">
+<div class="max-w-lg w-full bg-surface-container-lowest rounded-xl soft-shadow border border-outline-variant p-stack-lg md:p-[48px] text-center">
+
+<span class="material-symbols-outlined text-error text-[48px]">lock</span>
+<h1 class="font-headline-lg text-headline-lg mt-stack-sm mb-stack-sm">Trang này dành cho giáo viên</h1>
+
+<div class="my-stack-lg p-stack-md bg-surface-container-low border border-outline-variant rounded-xl text-left font-body-md text-body-md">
+<p><strong>Tài khoản:</strong> {{ email or "chưa đăng nhập" }}</p>
+<p><strong>Vai trò hiện tại:</strong>
+{% if vai_tro == "giao_vien" or vai_tro == "quan_tri" %}Giáo viên
+{% elif vai_tro == "hoc_sinh" %}Học sinh
+{% elif vai_tro == "chua_chon" %}Chưa chọn vai trò
+{% elif vai_tro == "chua_cau_hinh" %}Lỗi cấu hình cơ sở dữ liệu
+{% else %}{{ vai_tro }}{% endif %}
+</p>
+</div>
+
+{% if vai_tro == "chua_chon" %}
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+Tài khoản chưa chọn vai trò. Chọn vai trò rồi quay lại.
+</p>
+<a href="/chon-vai-tro" class="inline-block px-stack-lg py-stack-md bg-primary-container text-white rounded-2xl font-semibold">Chọn vai trò</a>
+{% elif vai_tro == "hoc_sinh" %}
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+Tài khoản đang là học sinh. Nếu thầy/cô cần dùng khu làm việc giáo viên,
+nhập mã mời để nâng tài khoản lên.
+</p>
+<a href="/toi-la-giao-vien" class="inline-block px-stack-lg py-stack-md bg-primary-container text-white rounded-2xl font-semibold">Tôi là giáo viên</a>
+{% elif vai_tro == "chua_cau_hinh" %}
+<p class="font-body-md text-body-md text-on-error-container">
+Cơ sở dữ liệu chưa có cột <span class="font-mono">vai_tro</span>. Chạy đoạn SQL
+trong <span class="font-mono">docs/21_TAI_KHOAN_GIAO_VIEN.md</span> rồi thử lại.
+</p>
+{% else %}
+<a href="/chat" class="inline-block px-stack-lg py-stack-md bg-primary-container text-white rounded-2xl font-semibold">Về trang Chat AI</a>
+{% endif %}
+
+</div>
+</main>
+</body>
+</html>
