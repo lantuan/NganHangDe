@@ -60,8 +60,8 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 <td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
 <td class="p-stack-md">
 <a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">Đề</a>
-{% if de.files.get("loigiai") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">Lời giải</a>{% endif %}
-{% if de.files.get("tex") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>{% endif %}
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">Lời giải</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>
 </td>
 </tr>
 {% endfor %}

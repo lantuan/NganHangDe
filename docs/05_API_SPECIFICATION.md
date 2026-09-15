@@ -534,8 +534,12 @@ sang `/register/teacher`.
 
     GET /api/exam/tai-tex/{de_id}
 
-CHỈ giáo viên. Trả về file `.tex` đã lưu lúc sinh đề (`file_de`,
-`loai_file="tex"`) nên luôn khớp với bản PDF đã phát — không sinh lại đề.
+CHỈ giáo viên. Trả về mã nguồn `.tex` đã lưu lúc sinh đề nên luôn khớp với
+bản PDF đã phát — không sinh lại đề.
+
+Từ Version 2.53: có đủ cả mã nguồn đề (`loai_file="tex"`) và mã nguồn lời
+giải (`loai_file="tex_loigiai"`) thì trả về một tệp nén gồm `de_thi.tex` và
+`loi_giai.tex`; chỉ còn một bản thì trả về bản đó.
 
 Lỗi: 403 nếu không phải giáo viên; 404 nếu không tìm thấy đề; 410 nếu file
 `.tex` đã bị cron dọn (sau 1 ngày).

@@ -151,6 +151,8 @@ async def ra_de_submit(
     if de_id:
         history_service.luu_file_de(de_id, "de", ket_qua["pdf_path"])
         history_service.luu_file_de(de_id, "tex", ket_qua["tex_path"])
+        if ket_qua.get("tex_loigiai_path"):
+            history_service.luu_file_de(de_id, "tex_loigiai", ket_qua["tex_loigiai_path"])
         if ket_qua.get("pdf_loigiai_path"):
             history_service.luu_file_de(de_id, "loigiai", ket_qua["pdf_loigiai_path"])
         if ket_qua.get("dap_an_json_path"):

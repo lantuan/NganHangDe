@@ -6,6 +6,9 @@
 <p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
 Tệp đề và lời giải được dọn tự động sau 10 ngày, riêng mã nguồn <span class="font-mono">.tex</span>
 được dọn sau 1 ngày. Cần giữ lâu thì tải về máy.
+<br/><strong>PDF lời giải</strong> được biên dịch ngay lúc bấm nếu chưa có sẵn, nên
+lần đầu có thể chờ vài giây. <strong>.tex</strong> tải về gồm cả mã nguồn đề và mã
+nguồn lời giải (tệp nén) khi có đủ cả hai.
 </p>
 
 {% if danh_sach_de %}
@@ -29,9 +32,15 @@ Tệp đề và lời giải được dọn tự động sau 10 ngày, riêng m�
 <td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
 <td class="p-stack-md">{{ bp.get("socau_ma_de") or 1 }}</td>
 <td class="p-stack-md whitespace-nowrap">
-{% if de.files.get("de") %}<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">PDF đề</a>{% else %}<span class="text-on-surface-variant">—</span>{% endif %}
-{% if de.files.get("loigiai") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">PDF lời giải</a>{% endif %}
-{% if de.files.get("tex") %} · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>{% endif %}
+{# LUON hien ca 3 lien ket. Truoc day chi hien khi co san dong tuong ung
+   trong bang file_de, nen de tao qua Chat AI (khong sinh san PDF loi giai)
+   thi giao vien khong thay nut nao ngoai "PDF de" - tuong la he thong
+   khong ho tro. Thuc ra /api/exam/tai-loigiai TU BIEN DICH loi giai tu
+   file .tex da luu neu chua co san. File nao that su khong con thi
+   endpoint bao loi ro rang (404/410), van hon la giau nut di. #}
+<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">PDF đề</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">PDF lời giải</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>
 </td>
 </tr>
 {% endfor %}

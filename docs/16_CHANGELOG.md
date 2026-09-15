@@ -3171,3 +3171,52 @@ test test_giao_vien_vao_chat_KHONG_bi_hoi_chon_lop do ngay.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+
+===============================================================================
+
+# Version 2.53 - 2026-09-15
+
+## Trang "De da tao" chi tai duoc DE, khong co dap an va khong co .tex
+
+Hai nguyen nhan doc lap, cong lai thanh mot trieu chung.
+
+### Nguyen nhan 1 - giao dien GIAU nut khi chua co san dong trong file_de
+
+de_da_tao.html va khu_lam_viec.html chi hien lien ket khi
+de.files.get("loigiai") / .get("tex") co gia tri. De tao qua Chat AI di
+theo role="student" -> assembler KHONG sinh san PDF loi giai
+(pdf_loigiai_path = None) -> khong co dong "loigiai" -> nut bi giau.
+Giao vien nhin vao tuong he thong khong ho tro.
+
+Thuc ra GET /api/exam/tai-loigiai/{de_id} TU BIEN DICH loi giai tu file
+.tex da luu neu chua co san (xem _xuat_loigiai, Version 2.40). Tuc la
+chuc nang VAN CHAY, chi co cai nut la khong hien.
+
+SUA: LUON hien ca 3 lien ket (PDF de / PDF loi giai / .tex). File nao
+that su khong con thi endpoint bao loi ro rang (404/410) - van hon la
+giau nut di khong noi gi.
+
+### Nguyen nhan 2 - ban .tex luu cho giao vien la ban LOI GIAI
+
+Trong exam_assembler_service.py nhanh role == "teacher":
+
+    "tex_path": str(loigiai_tex_path),     # SAI
+
+Ban de (dethi_tex_path) duoc tao ra roi VUT DI, chi giu ban loi giai.
+Giao vien bam "tai .tex" tuong lay ma nguon DE, hoa ra ra ban da co san
+loi giai - khong dung de in cho hoc sinh duoc.
+
+SUA:
+- Nhanh teacher tra ve CA HAI: "tex_path" = ban DE (dung nghia), them
+  "tex_loigiai_path" = ban loi giai. Nhanh student them
+  "tex_loigiai_path": None cho doi xung.
+- exam.py (2 cho) va teacher.py (1 cho) luu them dong file_de loai
+  "tex_loigiai".
+- GET /api/exam/tai-tex/{de_id}: co ca 2 ban thi nen thanh 1 tep zip
+  (de_thi.tex + loi_giai.tex); chi co 1 ban thi tra ve ban do; khong con
+  ban nao thi 410 kem huong dan.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
