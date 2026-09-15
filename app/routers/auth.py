@@ -255,6 +255,21 @@ async def set_session(payload: SetSessionRequest):
         samesite="lax",
         max_age=60 * 60 * 24 * 30,
     )
+
+    # Dang nhap bang Google khong co o tick "Ghi nho dang nhap", va o tren
+    # da dat han 7/30 ngay - tuc la MAC DINH ghi nho. Phai ghi ca cookie
+    # sb_ghi_nho cho khop, neu khong middleware lam_moi_cookie_phien
+    # (app/main.py) se thay thieu cookie nay, hieu la "khong ghi nho", va
+    # bien 2 cookie tren thanh cookie phien ngay lan lam moi dau tien ->
+    # nguoi dang nhap bang Google bi dang xuat khi dong trinh duyet.
+    response.set_cookie(
+        key="sb_ghi_nho",
+        value="1",
+        httponly=True,
+        secure=True,
+        samesite="lax",
+        max_age=60 * 60 * 24 * 30,
+    )
     return response
 
 # ======================================================
