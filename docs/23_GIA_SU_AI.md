@@ -99,20 +99,37 @@ Supabase → **SQL Editor** → dán toàn bộ `sql/24_gia_su.sql` → **Run**.
 Chưa chạy bước này thì học sinh vẫn hỏi được (không vỡ trang), nhưng log VPS sẽ in
 `LOI DOC gia_su_luot` và hạn mức lượt không đếm được.
 
-### Bước 2 — Tạo webhook n8n
+### Bước 2 — Thêm webhook `gia-su` vào workflow `NganHangDe`
 
-Tạo một workflow n8n mới, đặt tên `CHV_GiaSu`:
+**Không tạo workflow mới.** Thêm một nhánh thứ tư vào chính workflow `NganHangDe`
+đang có, đúng kiểu `doc-phieu-tra-loi` và `cham-tu-luan` — ba nút, đi thẳng, không
+qua Switch:
 
-1. **Webhook** (POST) — bật *Respond: Using Respond to Webhook*.
-2. **AI node / HTTP Request** gọi mô hình. Nạp:
+```
+[Webhook: gia-su]  →  [AI node: CHV_GiaSu]  →  [Respond to Webhook]
+```
+
+1. **Webhook** (POST), đường dẫn `gia-su`, bật *Respond: Using Respond to Webhook*.
+2. **AI node** (dùng chung OpenRouter Chat Model với các nhánh khác được):
    - phần *system* = `{{ $json.body.lenh_he_thong }}`
    - phần *user* = `{{ $json.body.cau_hoi }}`
    - lịch sử (nếu muốn) = `{{ $json.body.lich_su }}`
 3. **Respond to Webhook** trả JSON `{ "tra_loi": "<nội dung>" }`.
 
+### Vì sao KHÔNG cho gia sư đi qua `CHV_Fun` → Switch
+
+Switch nằm **sau** `CHV_Fun`, nên mọi thứ qua Switch đều đã bị `CHV_Fun` đọc và đoán ý
+định trước. Với gia sư, việc đó hỏng cả ba mặt:
+
+| | Hậu quả |
+|---|---|
+| **Tốn gấp đôi lượt gọi mô hình** | `CHV_Fun` chạy để phân loại, rồi node sau mới trả lời. Hai lượt cho một câu hỏi, trong khi đang dùng tài khoản miễn phí. |
+| **Phá lớp khoá 1** | `CHV_Fun` có system prompt riêng, sẽ trộn với `lenh_he_thong` do Python dựng. Các câu "KHÔNG TỰ TÍNH TOÁN", "cấm ra số khác lời giải mẫu" không còn là lệnh duy nhất nữa. |
+| **Không có gì để đoán** | Switch chia theo ý định `CHV_Fun` suy ra. Python đã biết chắc học sinh hỏi câu số mấy, đề nào — không cần đoán. |
+
 > ⚠️ **Không thêm bất kì nút nào để n8n tự đi tra cứu dữ liệu.** Toàn bộ đề bài, đáp án
-> và lời giải đã nằm sẵn trong `lenh_he_thong` do Python dựng. n8n chỉ làm đúng một
-> việc: gọi mô hình. Thêm nút tra cứu là phá lớp khoá 1.
+> và lời giải đã nằm sẵn trong `lenh_he_thong`. Nhánh này chỉ làm đúng một việc: gọi mô
+> hình. Thêm nút tra cứu — hay nối vào `CHV_Fun` — đều là phá lớp khoá 1.
 
 Dùng tài khoản mô hình miễn phí được — hạn mức lượt ở bước 3 chính là để chặn trần.
 
@@ -175,5 +192,6 @@ mẫu rồi mới chốt được cách đánh dấu sao cho cô ít phải sử
 | Bỏ khối "Lời giải chuẩn" ở giao diện | Đó là lớp khoá 2, không phải trang trí. |
 | Đổi `def` thành `async def` ở `app/routers/gia_su.py` | Bên trong gọi `httpx` đồng bộ tới 60 giây — sẽ chặn event loop y hệt lỗi `/gv/ra-de` (v2.56). |
 | Nhận `user_id` từ body | Ai cũng tiêu hết lượt của người khác. Luôn lấy từ cookie. |
-| Thêm nút tra cứu vào workflow n8n | Phá lớp khoá 1 (mục 6, bước 2). |
+| Nối gia sư vào `CHV_Fun` → Switch | Tốn gấp đôi lượt gọi mô hình, và system prompt của `CHV_Fun` trộn với `lenh_he_thong` → phá lớp khoá 1. Gia sư phải là webhook riêng, đi thẳng (mục 6, bước 2). |
+| Thêm nút tra cứu vào nhánh n8n | Phá lớp khoá 1 (mục 6, bước 2). |
 | Dọn `data/temp/*_dapan.json` sớm hơn | Đó là nguồn lời giải chuẩn số 1. Dọn sớm thì Mức A phải lùi về `exam_history` (không còn đề bài gốc). |

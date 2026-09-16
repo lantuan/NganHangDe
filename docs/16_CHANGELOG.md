@@ -2669,6 +2669,18 @@ Them 2 tai lieu moi (chua trien khai code, moi la danh gia + ke hoach):
 
 Khong sua code nao trong ban nay.
 
+## Sua tai lieu (cung ngay)
+
+Buoc 2 trong docs/23 ban dau viet "tao workflow n8n moi" - SAI. Workflow
+NganHangDe da co san nhieu webhook trong cung mot canvas (doc-phieu-tra-loi,
+cham-tu-luan). Gia su chi can them webhook thu 4 vao day, di thang
+Webhook -> AI node -> Respond, KHONG qua CHV_Fun/Switch.
+
+Ly do khong cho qua Switch (Switch nam SAU CHV_Fun):
+- ton gap doi luot goi mo hinh (CHV_Fun phan loai roi node sau moi tra loi)
+- system prompt cua CHV_Fun tron voi lenh_he_thong -> PHA LOP KHOA 1
+- khong co gi de doan: Python da biet chac hoi cau so may, de nao
+
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
