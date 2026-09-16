@@ -153,6 +153,57 @@
         .chi-tiet-tung-y .y-sai { color: var(--color-danger); }
 
         .loading, .loi { text-align: center; padding: 60px 16px; color: #64748b; }
+
+        /* ---- GIA SU AI (muc A) ---- */
+        .nut-gia-su {
+            margin-top: 12px; padding: 8px 14px; font-size: 14px; font-weight: 600;
+            color: var(--color-primary); background: #eff6ff;
+            border: 1px solid #bfdbfe; border-radius: var(--radius-xl); cursor: pointer;
+        }
+        .nut-gia-su:hover { background: #dbeafe; }
+        .nut-gia-su:disabled { opacity: .6; cursor: not-allowed; }
+
+        .gia-su {
+            margin-top: 14px; padding: 14px;
+            background: #f8fafc; border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+        }
+        .gia-su .luot { font-size: 13px; color: #64748b; margin-bottom: 10px; }
+        .gia-su .o-nhap { display: flex; gap: 8px; }
+        .gia-su .o-nhap input {
+            flex: 1; padding: 10px 12px; font-size: 15px;
+            border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+        }
+        .gia-su .o-nhap button {
+            padding: 10px 16px; font-weight: 600; color: #fff;
+            background: var(--color-primary); border: none;
+            border-radius: var(--radius-xl); cursor: pointer;
+        }
+        .gia-su .o-nhap button:disabled { opacity: .6; cursor: not-allowed; }
+
+        .gia-su-bong { margin: 10px 0; line-height: 1.6; font-size: 15px; }
+        .gia-su-bong.hs {
+            background: #e0f2fe; padding: 10px 14px;
+            border-radius: var(--radius-xl); margin-left: 32px;
+        }
+        .gia-su-bong.ai {
+            background: var(--color-surface); padding: 12px 14px;
+            border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+        }
+        .gia-su-bong.loi { background: #fef2f2; color: #991b1b; padding: 10px 14px;
+            border-radius: var(--radius-xl); text-align: left; }
+
+        /* Lop khoa 2: dap an + loi giai do Python sinh, LUON hien canh cau
+           tra loi cua AI. Neu AI noi lech, hoc sinh thay ngay. */
+        .dap-an-chuan {
+            margin-top: 10px; padding: 12px 14px;
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            border-radius: var(--radius-xl); font-size: 14px; line-height: 1.6;
+        }
+        .dap-an-chuan .nhan {
+            font-weight: 700; color: #15803d; font-size: 13px;
+            text-transform: uppercase; letter-spacing: .3px; margin-bottom: 6px;
+        }
     </style>
 </head>
 
@@ -338,6 +389,125 @@ function ghiChuThangDiem(ketQua) {
     return dong.trim();
 }
 
+// ======================================================
+// GIA SU AI - MUC A: giang lai dung 1 cau trong de vua lam.
+// Xem app/services/gia_su_service.py va docs/23_GIA_SU_AI.md.
+// LUU Y: loi giai chuan (do Python sinh) LUON duoc ve ra man hinh canh
+// cau tra loi cua AI - day la lop khoa thu 2 chong "AI tu tinh toan".
+// ======================================================
+const GIA_SU_LICH_SU = {};   // so_thu_tu -> [{vai, noi}]
+const GIA_SU_DA_VE_LOI_GIAI = {};
+
+function moGiaSu(soThuTu) {
+    const khung = document.getElementById('gia-su-' + soThuTu);
+    if (!khung) return;
+    if (khung.style.display !== 'none') { khung.style.display = 'none'; return; }
+    khung.style.display = 'block';
+    if (!khung.innerHTML) {
+        khung.innerHTML =
+            '<div class="luot" id="gia-su-luot-' + soThuTu + '">Em hỏi thầy/cô về câu này nhé.</div>' +
+            '<div id="gia-su-hoi-thoai-' + soThuTu + '"></div>' +
+            '<div class="o-nhap">' +
+            '  <input type="text" id="gia-su-nhap-' + soThuTu + '" maxlength="500" ' +
+            '         placeholder="Ví dụ: em chưa hiểu tại sao lại ra bước này..." ' +
+            '         onkeydown="if(event.key===\'Enter\'){guiCauHoiGiaSu(' + soThuTu + ');}">' +
+            '  <button id="gia-su-gui-' + soThuTu + '" onclick="guiCauHoiGiaSu(' + soThuTu + ')">Gửi</button>' +
+            '</div>';
+        GIA_SU_LICH_SU[soThuTu] = [];
+    }
+    const o = document.getElementById('gia-su-nhap-' + soThuTu);
+    if (o) o.focus();
+}
+
+function themBongGiaSu(soThuTu, lop, noiDung) {
+    const hoiThoai = document.getElementById('gia-su-hoi-thoai-' + soThuTu);
+    if (!hoiThoai) return null;
+    const bong = document.createElement('div');
+    bong.className = 'gia-su-bong ' + lop;
+    bong.innerHTML = renderLatexText(noiDung);
+    hoiThoai.appendChild(bong);
+    if (window.MathJax) { MathJax.typesetPromise([bong]); }
+    return bong;
+}
+
+// Ve dap an + loi giai CHUAN (Python). Chi ve 1 lan cho moi cau.
+function veLoiGiaiChuan(soThuTu, duLieu) {
+    if (!duLieu || GIA_SU_DA_VE_LOI_GIAI[soThuTu]) return;
+    if (!duLieu.loi_giai_python && !duLieu.dap_an_python) return;
+    const hoiThoai = document.getElementById('gia-su-hoi-thoai-' + soThuTu);
+    if (!hoiThoai) return;
+    const khoi = document.createElement('div');
+    khoi.className = 'dap-an-chuan';
+    let html = '<div class="nhan">Lời giải chuẩn của thầy/cô</div>';
+    if (duLieu.dap_an_python) {
+        html += '<div><strong>Đáp án:</strong> ' + renderLatexText(String(duLieu.dap_an_python)) + '</div>';
+    }
+    if (duLieu.loi_giai_python) {
+        html += '<div style="margin-top:6px;">' + renderLatexText(String(duLieu.loi_giai_python)) + '</div>';
+    }
+    khoi.innerHTML = html;
+    hoiThoai.appendChild(khoi);
+    if (window.MathJax) { MathJax.typesetPromise([khoi]); }
+    GIA_SU_DA_VE_LOI_GIAI[soThuTu] = true;
+}
+
+async function guiCauHoiGiaSu(soThuTu) {
+    const o = document.getElementById('gia-su-nhap-' + soThuTu);
+    const nut = document.getElementById('gia-su-gui-' + soThuTu);
+    if (!o || !nut) return;
+    const cauHoi = (o.value || '').trim();
+    if (!cauHoi) return;
+
+    o.value = '';
+    o.disabled = true;
+    nut.disabled = true;
+    themBongGiaSu(soThuTu, 'hs', cauHoi);
+    const dangCho = themBongGiaSu(soThuTu, 'ai', 'Thầy/cô đang xem lại bài của em...');
+
+    try {
+        const res = await fetch('/api/giasu/hoi', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                de_id: DE_ID,
+                so_thu_tu: soThuTu,
+                cau_hoi: cauHoi,
+                lich_su: (GIA_SU_LICH_SU[soThuTu] || []).slice(-6)
+            })
+        });
+        const data = await res.json();
+        if (dangCho) dangCho.remove();
+
+        if (!data.success) {
+            themBongGiaSu(soThuTu, 'loi', data.message || 'Chưa hỏi được, em thử lại nhé.');
+            veLoiGiaiChuan(soThuTu, data.data);
+        } else {
+            const d = data.data || {};
+            if (d.tra_loi) {
+                themBongGiaSu(soThuTu, 'ai', d.tra_loi);
+                (GIA_SU_LICH_SU[soThuTu] = GIA_SU_LICH_SU[soThuTu] || []).push({ vai: 'hs', noi: cauHoi });
+                GIA_SU_LICH_SU[soThuTu].push({ vai: 'ai', noi: d.tra_loi });
+            } else if (d.che_do === 'khong_ai') {
+                themBongGiaSu(soThuTu, 'ai',
+                    'Phần trò chuyện chưa được bật, em đọc lời giải chuẩn của thầy/cô bên dưới nhé.');
+            }
+            // LOP KHOA 2: luon ve loi giai chuan canh cau tra loi cua AI.
+            veLoiGiaiChuan(soThuTu, d);
+            const nhanLuot = document.getElementById('gia-su-luot-' + soThuTu);
+            if (nhanLuot && d.luot) {
+                nhanLuot.textContent = 'Hôm nay em còn ' + d.luot.con_lai + '/' + d.luot.gioi_han + ' lượt hỏi.';
+            }
+        }
+    } catch (e) {
+        if (dangCho) dangCho.remove();
+        themBongGiaSu(soThuTu, 'loi', 'Lỗi kết nối, em thử lại sau nhé.');
+    } finally {
+        o.disabled = false;
+        nut.disabled = false;
+        o.focus();
+    }
+}
+
 function veKetQua(ketQua) {
     const main = document.getElementById('main');
     let html = '<div class="ket-qua">';
@@ -385,6 +555,13 @@ function veKetQua(ketQua) {
             html += '<div>📝 ' + cau.dung_sai_hoac_diem + '/' + cau.diem_toi_da + ' điểm' + (cau.nhan_xet ? ' — ' + renderLatexText(cau.nhan_xet) : '') + '</div>';
         } else {
             html += '<div class="ghi-chu-tl">' + (cau.nhan_xet || 'Chưa chấm được tự động.') + '</div>';
+        }
+        // Gia su AI muc A: hoi lai dung cau nay. Chi hien cho cau da co
+        // loi giai chuan (cau TL chua cham tu dong thi chua co gi de giang).
+        if (cau.loai_cau !== 'TL') {
+            html += '<button class="nut-gia-su" id="nut-gia-su-' + cau.so_thu_tu + '" ' +
+                'onclick="moGiaSu(' + cau.so_thu_tu + ')">💬 Hỏi thầy/cô AI về câu này</button>';
+            html += '<div class="gia-su" id="gia-su-' + cau.so_thu_tu + '" style="display:none;"></div>';
         }
         html += '</div>';
     });

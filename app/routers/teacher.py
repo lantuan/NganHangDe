@@ -9,6 +9,8 @@ Truoc day tep nay rong: giao vien khong co trang lam viec rieng, chi co
   POST /gv/ra-de        - sinh de (co SO MA DE), roi ve /gv/de-da-tao
   GET  /gv/de-da-tao    - danh sach de da tao, tai PDF / loi giai / .tex
   GET  /gv/lop          - danh sach lop, ma lop Classroom, giao vien phu trach
+  GET  /gv/gia-su       - nhat ki hoi dap Gia su AI + nang luot cho hoc sinh
+  POST /gv/gia-su/luot  - dat lai han muc luot hoi trong ngay cho 1 em
 
 MOI route deu goi yeu_cau_giao_vien() truoc tien - chan o TANG SERVER,
 khong chi an nut tren giao dien. Xem docs/21_TAI_KHOAN_GIAO_VIEN.md.
@@ -30,7 +32,7 @@ from fastapi.templating import Jinja2Templates
 
 from app.core.deps import get_current_user, yeu_cau_giao_vien
 from app.core.lop_config import DANH_SACH_LOP, MA_LOP_CLASSROOM
-from app.services import classroom_service, history_service, profile_service
+from app.services import classroom_service, gia_su_service, history_service, profile_service
 from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError
 
 router = APIRouter()
@@ -258,3 +260,62 @@ async def lay_ma_lop(request: Request, khoi: str, lop: str):
         "link": ket_qua.get("link_tham_gia"),
         "thong_bao": ket_qua.get("message"),
     }
+
+
+# ======================================================
+# GIA SU AI (them 2026-09-16, docs/23_GIA_SU_AI.md)
+# Day la LOP KHOA thu 3 chong "AI tu tinh toan": moi cau tra loi cua AI
+# deu duoc luu kem dap an Python da dua vao lenh, giao vien doc lai o
+# day va thay ngay neu AI noi lech so voi dap an chuan.
+# ======================================================
+
+@router.get("/gv/gia-su")
+def trang_gia_su(request: Request, hoc_sinh: str | None = None):
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+
+    nhat_ki = gia_su_service.lay_nhat_ki(gioi_han=200, user_id=hoc_sinh)
+
+    # Gan ten hoc sinh vao tung dong (nhat ki chi luu user_id).
+    ten_theo_id = {}
+    for dong in nhat_ki:
+        uid = dong.get("user_id")
+        if uid and uid not in ten_theo_id:
+            ho_so = profile_service.lay_ho_so(uid) or {}
+            ten_theo_id[uid] = (
+                ho_so.get("ho_ten") or uid[:8],
+                f"{ho_so.get('khoi') or ''}{ho_so.get('lop') or ''}",
+            )
+    for dong in nhat_ki:
+        ten, lop = ten_theo_id.get(dong.get("user_id"), ("(không rõ)", ""))
+        dong["ho_ten"] = ten
+        dong["lop_hien_thi"] = lop
+        # Dap an AI co khop dap an Python khong - chi la GOI Y de mat
+        # giao vien luot nhanh, khong phai ket luan may moc.
+        dap_an = (dong.get("dap_an_python") or "").strip()
+        tra_loi = dong.get("tra_loi") or ""
+        dong["co_nhac_dap_an"] = bool(dap_an) and dap_an[:20] in tra_loi
+
+    return templates.TemplateResponse(
+        request=request,
+        name="teacher/gia_su.html",
+        context={
+            "nhat_ki": nhat_ki,
+            "loc_hoc_sinh": hoc_sinh,
+            "luot_mac_dinh": gia_su_service.GIA_SU_LUOT_MOI_NGAY,
+        },
+    )
+
+
+@router.post("/gv/gia-su/luot")
+def dat_luot_gia_su(request: Request, hoc_sinh: str = Form(...), gioi_han: int = Form(...)):
+    """Nang/ha han muc luot hoi TRONG NGAY HOM NAY cho 1 em."""
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+
+    gia_su_service.dat_gioi_han(hoc_sinh, max(0, int(gioi_han)))
+    return RedirectResponse(f"/gv/gia-su?hoc_sinh={quote(hoc_sinh)}", status_code=303)

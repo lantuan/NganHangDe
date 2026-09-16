@@ -1,0 +1,94 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Gia sư AI{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Gia sư AI — nhật kí hỏi đáp</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Mỗi lượt học sinh hỏi đều được lưu lại <strong>nguyên văn</strong>, kèm <strong>đáp án do Python
+sinh đề tính sẵn</strong> đã đưa vào câu lệnh. Cô đọc hai cột cạnh nhau là thấy ngay nếu AI nói
+lệch so với đáp án chuẩn. Học sinh cũng luôn nhìn thấy lời giải chuẩn ngay cạnh câu trả lời của AI.
+<br/>Hạn mức mặc định: <strong>{{ luot_mac_dinh }} lượt/em/ngày</strong> (đặt bằng biến môi trường
+<span class="font-mono">GIA_SU_LUOT_MOI_NGAY</span>). Nâng riêng cho một em ở cột cuối — chỉ có
+hiệu lực trong ngày hôm nay.
+</p>
+
+{% if loc_hoc_sinh %}
+<p class="mb-stack-md font-body-md text-body-md">
+Đang lọc theo một học sinh.
+<a class="text-primary-container font-semibold" href="/gv/gia-su">Xem tất cả →</a>
+</p>
+{% endif %}
+
+{% if nhat_ki %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md align-top">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-stack-md">Thời điểm</th>
+<th class="p-stack-md">Học sinh</th>
+<th class="p-stack-md">Câu</th>
+<th class="p-stack-md">Em hỏi</th>
+<th class="p-stack-md">AI trả lời</th>
+<th class="p-stack-md">Đáp án Python</th>
+<th class="p-stack-md">Lượt</th>
+</tr>
+</thead>
+<tbody>
+{% for dong in nhat_ki %}
+<tr class="border-t border-outline-variant align-top">
+<td class="p-stack-md whitespace-nowrap text-on-surface-variant">{{ (dong.created_at or "")[:16].replace("T", " ") }}</td>
+<td class="p-stack-md whitespace-nowrap">
+<a class="text-primary-container font-semibold" href="/gv/gia-su?hoc_sinh={{ dong.user_id }}">{{ dong.ho_ten }}</a>
+{% if dong.lop_hien_thi %}<div class="text-on-surface-variant">{{ dong.lop_hien_thi }}</div>{% endif %}
+</td>
+<td class="p-stack-md whitespace-nowrap">
+Câu {{ dong.so_thu_tu }}
+{% if dong.question_id %}<div class="font-mono text-on-surface-variant" style="font-size:11px;">{{ dong.question_id }}</div>{% endif %}
+</td>
+<td class="p-stack-md" style="max-width:220px;">{{ dong.cau_hoi }}</td>
+<td class="p-stack-md" style="max-width:340px;">
+{% if dong.trang_thai == "ok" %}
+{{ dong.tra_loi }}
+{% elif dong.trang_thai == "ngoai_pham_vi" %}
+<span class="text-on-surface-variant">(AI từ chối — hỏi ngoài phạm vi câu này)</span>
+{% elif dong.trang_thai == "het_luot" %}
+<span class="text-on-surface-variant">(em đã hết lượt hôm nay)</span>
+{% elif dong.trang_thai == "chua_cau_hinh" %}
+<span class="text-on-surface-variant">(chưa bật webhook — em chỉ được xem lời giải chuẩn)</span>
+{% else %}
+<span class="text-on-surface-variant">(lỗi gọi mô hình — em được xem lời giải chuẩn)</span>
+{% endif %}
+</td>
+<td class="p-stack-md" style="max-width:160px;">
+{{ dong.dap_an_python or "—" }}
+{% if dong.trang_thai == "ok" %}
+<div style="font-size:11px;margin-top:4px;">
+{% if dong.co_nhac_dap_an %}
+<span style="color:#15803d;">✓ có nhắc lại đáp án chuẩn</span>
+{% else %}
+<span class="text-on-surface-variant">— không nhắc đáp án (bình thường nếu em chỉ hỏi về một bước)</span>
+{% endif %}
+</div>
+{% endif %}
+</td>
+<td class="p-stack-md whitespace-nowrap">
+<form method="post" action="/gv/gia-su/luot" class="flex items-center gap-stack-sm">
+<input type="hidden" name="hoc_sinh" value="{{ dong.user_id }}"/>
+<input type="number" name="gioi_han" min="0" max="500" value="{{ luot_mac_dinh }}"
+       class="w-20 px-stack-sm py-stack-sm border border-outline-variant rounded-lg bg-surface-container-lowest"/>
+<button type="submit" class="px-stack-md py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">Đặt</button>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">
+Chưa có lượt hỏi nào. Học sinh bấm nút <strong>“Hỏi thầy/cô AI về câu này”</strong> ở trang kết quả
+làm bài thì nhật kí sẽ hiện ở đây.
+</p>
+{% endif %}
+
+{% endblock %}

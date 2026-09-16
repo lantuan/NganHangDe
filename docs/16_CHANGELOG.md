@@ -3448,3 +3448,74 @@ thay doi" - dung nhu da xay ra.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.58 - 2026-09-16
+
+## GIA SU AI - MUC A
+
+Hoc sinh nop bai xong, o moi cau trong trang ket qua co them nut
+"Hoi thay/co AI ve cau nay". Bam vao la mo mot khung hoi dap ngay tai
+cho, giang lai DUNG cau do.
+
+Rang buoc goc cua co Lan: "khong ra ngoai bat ki cai nao. Dap an thi
+phai lay ngay dap an Python toi da chuan bi theo de. Khong duoc de AI tu
+tinh toan." Toan bo thiet ke phuc vu cau nay.
+
+## Ba lop khoa
+
+1. CAU LENH (gia_su_service.LENH_HE_THONG): de bai, dap an dung va loi
+   giai chuan duoc nhet SAN vao lenh. Mo hinh chi duoc dien dat lai, cam
+   tinh toan, cam ra so khac loi giai mau, cam noi sang cau khac. Co san
+   mot cau tu choi de mo hinh dung lai khi bi hoi ra ngoai.
+2. HIEN THI: API luon tra ve dap_an_python + loi_giai_python nguyen van,
+   giao dien ve chung NGAY CANH cau tra loi cua AI. Lech la thay ngay.
+3. NHAT KI: bang gia_su_hoi_dap luu ca cau tra loi cua AI lan dap an
+   Python da dua vao lenh. Co doc lai o /gv/gia-su, doi chieu 2 cot.
+
+Quy tac bao trum: KHONG CO LOI GIAI CHUAN THI KHONG GOI MO HINH. Thieu
+du lieu -> bao loi va dung, vi luc do AI bat buoc phai tu nghi ra.
+
+## Han muc luot
+
+20 luot/em/ngay (GIA_SU_LUOT_MOI_NGAY trong .env). Ngay chot theo gio
+Viet Nam, khong theo UTC - theo UTC thi 7h sang da bi tinh sang ngay hom
+sau, hoc sinh mat luot giua buoi hoc. Chi tru luot KHI DA CO cau tra
+loi: mat mang, n8n hong, het du lieu deu khong tru. Co nang rieng cho
+tung em o /gv/gia-su (chi co hieu luc trong ngay).
+
+## Chay duoc ngay ca khi chua bat AI
+
+N8N_WEBHOOK_GIA_SU de trong -> nut chay o "che do khong AI": bam vao la
+hien loi giai chuan cua co. Khong bao gio vo trang hoc sinh. Nho vay
+deploy ban nay truoc, tao workflow n8n sau cung duoc.
+
+## Tep
+
+Moi: sql/24_gia_su.sql, app/services/gia_su_service.py,
+app/routers/gia_su.py, app/templates/teacher/gia_su.html,
+tests/test_gia_su.py, docs/23_GIA_SU_AI.md
+Sua: app/core/config.py, app/main.py, app/routers/teacher.py,
+app/templates/teacher/_base_gv.html, app/templates/chat/lam_bai.html
+
+## Bai kiem tra
+
+tests/test_gia_su.py - 27 bai, soi dung 3 lop khoa:
+- cau lenh co du de bai/dap an/loi giai va du cac cau cam
+- thieu ngu canh / het luot / cau hoi rong -> KHONG goi mo hinh (kiem
+  bang cach dem so lan _goi_mo_hinh duoc goi, phai bang 0)
+- ket qua luon kem dap_an_python + loi_giai_python
+- mo hinh loi thi khong tru luot
+- user_id lay tu cookie, gui them user_id trong body bi bo qua
+
+Tong 58 bai (36 cu + 22 moi o tang nghiep vu + 5 o tang API), deu xanh.
+(tests/test_supabase.py can mang that nen khong tinh o day.)
+
+## Con lai
+
+Muc B (chi dung cho trong tai lieu li thuyet .tex khi hoc sinh van chua
+hieu) CHUA LAM - dang cho mot tep .tex mau de xem cau truc. Huong da
+chot: tra theo ID truoc (moi cau da co san L10_C1_B2...), vecto tinh sau.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

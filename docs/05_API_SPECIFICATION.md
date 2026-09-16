@@ -544,3 +544,74 @@ lưu và không tải về cả hai.
 
 Lỗi: 403 nếu không phải giáo viên; 404 nếu không tìm thấy đề; 410 nếu file
 `.tex` đã bị cron dọn (sau 1 ngày).
+
+## Gia sư AI — Mức A (thêm 16/09/2026)
+
+Chi tiết nguyên lý và 3 lớp khoá: `docs/23_GIA_SU_AI.md`.
+
+| Phương thức | Đường dẫn | Ai dùng | Ghi chú |
+|---|---|---|---|
+| POST | `/api/giasu/hoi` | học sinh đã đăng nhập | hỏi về **đúng 1 câu** trong đề vừa làm |
+| GET | `/api/giasu/luot` | học sinh đã đăng nhập | còn bao nhiêu lượt hôm nay |
+| GET | `/gv/gia-su` | giáo viên | HTML — nhật kí hỏi đáp |
+| POST | `/gv/gia-su/luot` | giáo viên | đặt hạn mức lượt trong ngày cho 1 em |
+
+**`user_id` lấy từ cookie phiên đăng nhập, KHÔNG lấy từ body.** Gửi thêm `user_id`
+trong body thì bị bỏ qua (`tests/test_gia_su.py::test_user_id_lay_tu_phien_...`).
+
+### POST /api/giasu/hoi
+
+Thân yêu cầu:
+
+```json
+{
+  "de_id": "uuid của đề",
+  "so_thu_tu": 3,
+  "cau_hoi": "em chưa hiểu tại sao lại ra bước này",
+  "lich_su": [{"vai": "hs", "noi": "..."}, {"vai": "ai", "noi": "..."}]
+}
+```
+
+Trả về khi thành công:
+
+```json
+{
+  "success": true,
+  "message": "",
+  "data": {
+    "tra_loi": "<nguyên văn câu trả lời của mô hình>",
+    "che_do": "ai",
+    "dap_an_python": "B. $4$",
+    "loi_giai_python": "Cộng trực tiếp: $2+2=4$.",
+    "luot": {"da_dung": 1, "gioi_han": 20, "con_lai": 19},
+    "trang_thai": "ok"
+  }
+}
+```
+
+`dap_an_python` và `loi_giai_python` **luôn có mặt** — đây là lớp khoá số 2, giao diện
+bắt buộc vẽ chúng cạnh `tra_loi`.
+
+`che_do`: `ai` (gọi mô hình bình thường) · `khong_ai` (chưa đặt `N8N_WEBHOOK_GIA_SU`,
+chỉ trả lời giải chuẩn) · `du_phong` (đi kèm lỗi, xem dưới).
+
+`trang_thai`: `ok` · `ngoai_pham_vi` (mô hình từ chối vì bị hỏi ra ngoài câu này).
+
+### Lỗi đọc được — trả 200, không trả 4xx/5xx
+
+Hết lượt, đề quá cũ, mô hình hỏng… đều trả **HTTP 200** với `success: false`, thông báo
+tiếng Việt viết sẵn cho học sinh đọc, và **kèm lời giải chuẩn** nếu còn lấy được:
+
+```json
+{
+  "success": false,
+  "message": "Hôm nay em đã dùng hết 20 lượt hỏi rồi...",
+  "data": {"tra_loi": null, "che_do": "du_phong",
+           "dap_an_python": "...", "loi_giai_python": "..."}
+}
+```
+
+Làm vậy để giao diện in thẳng câu đó vào khung hội thoại thay vì báo "lỗi kết nối" —
+và để học sinh hết lượt **vẫn còn lời giải của cô mà đọc**.
+
+Chỉ có **401** là mã lỗi thật: chưa đăng nhập.
