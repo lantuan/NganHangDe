@@ -449,8 +449,8 @@ Ba node. Không `CHV_Fun`, không `Switch`, không Code node, không Tool.
 | Node | Loại | Cấu hình |
 |---|---|---|
 | `gia-su` | Webhook POST | Đường dẫn `gia-su`. Respond: **Using Respond to Webhook** |
-| `CHV_GiaSu` | AI Agent | *System* = `{{ $json.body.lenh_he_thong }}`<br>*User* = `{{ $json.body.cau_hoi }}`<br>*Lịch sử* (tuỳ chọn) = `{{ $json.body.lich_su }}` |
-| `Respond to Webhook Gia su` | Respond | JSON `{ "tra_loi": "<nội dung>" }` |
+| `CHV_GiaSu` | AI Agent | Source for Prompt: **Define below**<br>Prompt = `{{ $json.body.cau_hoi }}`<br>Options → System Message = `{{ $json.body.lenh_he_thong }}`<br>**Không Memory, không Tool** — mỗi lượt độc lập, lịch sử do Python gửi trong `lich_su` |
+| `Respond to Webhook Gia su` | Respond | Respond With: **First Incoming Item**. Không gõ JSON tay — AI Agent trả khoá `output`, `_goi_mo_hinh()` đọc được |
 
 **Payload vào** (do `gia_su_service.dung_lenh()` dựng — đọc chắc từ mã nguồn):
 

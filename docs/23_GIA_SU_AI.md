@@ -109,12 +109,27 @@ qua Switch:
 [Webhook: gia-su]  →  [AI node: CHV_GiaSu]  →  [Respond to Webhook]
 ```
 
-1. **Webhook** (POST), đường dẫn `gia-su`, bật *Respond: Using Respond to Webhook*.
-2. **AI node** (dùng chung OpenRouter Chat Model với các nhánh khác được):
-   - phần *system* = `{{ $json.body.lenh_he_thong }}`
-   - phần *user* = `{{ $json.body.cau_hoi }}`
-   - lịch sử (nếu muốn) = `{{ $json.body.lich_su }}`
-3. **Respond to Webhook** trả JSON `{ "tra_loi": "<nội dung>" }`.
+**Node 1 — Webhook**
+- HTTP Method: `POST` · Path: `gia-su`
+- Respond: **Using 'Respond to Webhook' Node**
+
+**Node 2 — AI Agent**, đổi tên thành `CHV_GiaSu`
+- Source for Prompt: **Define below**
+- Prompt (User Message): `{{ $json.body.cau_hoi }}`
+- Options → Add Option → **System Message**: `{{ $json.body.lenh_he_thong }}`
+- Chat Model: nối `OpenRouter Chat Model` (dùng lại credential có sẵn)
+- **Không gắn Memory, không gắn Tool.** Mỗi câu hỏi là một lượt độc lập; lịch sử
+  hội thoại đã do Python gửi sang trong `lich_su`, và câu lệnh khoá chặt phải là
+  thứ duy nhất mô hình đọc.
+
+**Node 3 — Respond to Webhook**
+- Respond With: **First Incoming Item**
+- Không cần gõ JSON tay: AI Agent trả về khoá `output`, mà `_goi_mo_hinh()` đã
+  nhận được (`tra_loi` / `output` / `text` / `message` / `answer`, kể cả khi bị
+  bọc trong một mảng).
+
+Bấm **Save**. Workflow đang *Published* nên node mới phải lưu lại thì Production
+URL mới sống. URL lấy ở node Webhook, tab **Production URL**.
 
 ### Vì sao KHÔNG cho gia sư đi qua `CHV_Fun` → Switch
 
