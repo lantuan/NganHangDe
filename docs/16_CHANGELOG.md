@@ -3531,3 +3531,43 @@ chot: tra theo ID truoc (moi cau da co san L10_C1_B2...), vecto tinh sau.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.59 - 2026-09-16
+
+## Ghi lai TUNG NODE cua workflow n8n vao doc 06
+
+Co Lan nhac: da co yeu cau tu truoc la moi lan dong vao n8n phai ghi vao
+so tay ki thuat, ghi lai tung node de sau con hieu n8n dang lam gi. Ban
+v2.58 chi ghi vao docs/23 cach tao webhook gia su, khong cap nhat
+docs/06_N8N_WORKFLOW.md - thieu sot.
+
+Nay doc 06 co them muc "Cap nhat 2026-09-16" ghi day du:
+
+- Toan canh: MOT workflow NganHangDe, BON webhook doc lap
+  (/chat, /doc-phieu-tra-loi, /cham-tu-luan, /gia-su). Chi /chat co
+  CHV_Fun + Switch; ba cai con lai di thang.
+- Bang tung node cho ca 4 nhanh: ten node, loai node, vao gi ra gi,
+  va VI SAO no ton tai. Gom ca cac node truoc day chua duoc ghi:
+  Sua_Lop_Bang_Regex, Can_Xac_Nhan_Cau_Truc, Tra_Loi_Xac_Nhan.
+- Payload vao/ra cua tung webhook, doc chac tu ma nguon Python.
+- Bon quy tac rut ra: viec nao Python xac dinh duoc thi dung de AI
+  doan; AI nhan san dap an chuan, khong tu tinh; webhook nao viec da
+  ro thi di thang, dung nhet vao Switch; toan bo cau lenh dung o
+  Python, n8n chi goi mo hinh.
+- Bang viec ton dong o n8n (4 rule chet trong Switch, Ghep_Tham_So mat
+  dau tieng Viet, CHV_Fun chua hieu "4 ma de", cac cho con danh dau (?)).
+
+## Phan biet nguon
+
+Phan giao tiep (URL, payload) doc CHAC tu ma nguon Python. Phan cau hinh
+ben trong tung node doc tu so do canvas - cho nao chua chac danh dau (?)
+de sau mo node xac nhan, khong ghi bua thanh su that.
+
+## Quy tac tu nay
+
+Ghi ngay luc dong vao n8n, khong de don. So do n8n nhin thi dep nhung 3
+thang sau mo ra khong ai nho node Sua_Lop_Bang_Regex sua cai gi.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

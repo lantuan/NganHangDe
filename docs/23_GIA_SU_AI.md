@@ -133,6 +133,8 @@ Switch nằm **sau** `CHV_Fun`, nên mọi thứ qua Switch đều đã bị `CH
 
 Dùng tài khoản mô hình miễn phí được — hạn mức lượt ở bước 3 chính là để chặn trần.
 
+> Sơ đồ đầy đủ cả 4 webhook của workflow `NganHangDe`, ghi rõ từng node làm gì: **`docs/06_N8N_WORKFLOW.md`**, mục *Cập nhật 2026-09-16*.
+
 ### Bước 3 — Đặt biến môi trường trên VPS
 
 ```bash
