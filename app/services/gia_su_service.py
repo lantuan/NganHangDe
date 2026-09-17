@@ -196,6 +196,111 @@ def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
 
 
 # ======================================================
+# 1b. LIET KE CAC CAU CUA DE GAN NHAT (cho nut "Hoi lai de cu")
+# ======================================================
+# Vi sao co ham nay: hoc sinh vua tao de xong thi trong dau da co ngu
+# canh roi, khong ai nghi phai noi lai "cau 3 cua de vua nay". Bat mo
+# hinh doan cho do la sai tu goc. Bam nut thi CODE BIET CHAC de nao,
+# cau nao - dung nguyen tac "Uu tien Code hon AI" (docs/00).
+
+# Ten 4 phan, dung thu tu nhu de cua Bo (xem exam_assembler_service).
+TEN_PHAN = {
+    "MC": "PHẦN I. Trắc nghiệm nhiều phương án",
+    "TF": "PHẦN II. Đúng/Sai",
+    "SA": "PHẦN III. Trả lời ngắn",
+    "TL": "PHẦN IV. Tự luận",
+}
+THU_TU_PHAN = ["MC", "TF", "SA", "TL"]
+
+
+def _cac_cau_da_lam(user_id: str, de_id: str) -> set[int]:
+    """So thu tu cac cau hoc sinh DA NOP BAI. Cau chua lam thi khong cho
+    hoi (co Lan chot): neu khong, hoc sinh bam luot ca de de lay loi giai
+    ma khong chiu nghi - vi giang lai luon kem dap an chuan."""
+    try:
+        ket_qua = (
+            supabase.table("exam_history")
+            .select("chi_tiet_bai_lam")
+            .eq("student_id", user_id)
+            .eq("de_thi_id", de_id)
+            .order("created_at", desc=True)
+            .limit(1)
+            .execute()
+        )
+    except Exception as e:
+        print("LOI DOC exam_history (cac cau da lam):", e)
+        return set()
+    if not ket_qua.data:
+        return set()
+    da_lam = set()
+    for cau in ket_qua.data[0].get("chi_tiet_bai_lam") or []:
+        try:
+            da_lam.add(int(cau.get("so_thu_tu")))
+        except (TypeError, ValueError):
+            continue
+    return da_lam
+
+
+def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str) -> dict:
+    """
+    Tra ve de gan nhat trong 1 cuoc hoi thoai, chia thanh 4 phan, moi cau
+    kem co hoi duoc hay khong.
+      {de_id, tieu_de, da_lam_bai, cac_phan: [{ma, ten, cau: [...]}]}
+    Nem GiaSuError neu chua co de / du lieu da bi don dep.
+    """
+    de = history_service.lay_de_gan_nhat(conversation_id)
+    if de is None:
+        raise GiaSuError(
+            "Cuộc trò chuyện này chưa có đề nào. Em tạo một đề rồi quay lại nhé."
+        )
+
+    danh_sach = _doc_dapan_json(de)
+    if not danh_sach:
+        raise GiaSuError(
+            "Dữ liệu chi tiết của đề này đã được dọn dẹp (đề cũ hơn 1 ngày) nên "
+            "chưa hỏi lại được. Em tạo đề mới cùng dạng nhé."
+        )
+
+    da_lam = _cac_cau_da_lam(user_id, de["id"])
+
+    theo_phan: dict[str, list[dict]] = {ma: [] for ma in THU_TU_PHAN}
+    for cau in danh_sach:
+        loai = (cau.get("loai_cau") or "MC").upper()
+        if loai not in theo_phan:
+            loai = "MC"
+        try:
+            stt = int(cau.get("so_thu_tu"))
+        except (TypeError, ValueError):
+            continue
+        co_loi_giai = bool(str(cau.get("loi_giai") or "").strip())
+        theo_phan[loai].append({
+            "so_thu_tu": stt,
+            "da_lam": stt in da_lam,
+            "co_loi_giai": co_loi_giai,
+            # Chi cho bam khi DA NOP BAI va cau do co loi giai chuan.
+            "hoi_duoc": (stt in da_lam) and co_loi_giai,
+        })
+
+    cac_phan = []
+    for ma in THU_TU_PHAN:
+        if not theo_phan[ma]:
+            continue
+        cac_phan.append({
+            "ma": ma,
+            "ten": TEN_PHAN[ma],
+            "cau": sorted(theo_phan[ma], key=lambda c: c["so_thu_tu"]),
+        })
+
+    blueprint = de.get("blueprint") or {}
+    return {
+        "de_id": de["id"],
+        "tieu_de": blueprint.get("tieu_de") or "Đề vừa tạo",
+        "da_lam_bai": bool(da_lam),
+        "cac_phan": cac_phan,
+    }
+
+
+# ======================================================
 # 2. CAU LENH (LOP KHOA 1)
 # ======================================================
 
@@ -405,6 +510,16 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
     # Lay ngu canh TRUOC khi tru luot: khong du du lieu thi bao loi ngay,
     # hoc sinh khong mat luot.
     ngu_canh = lay_ngu_canh_cau(de_id, so_thu_tu, user_id)
+
+    # PHAI NOP BAI ROI MOI HOI DUOC (co Lan chot 17/09/2026). Chan o
+    # TANG SERVER chu khong chi lam mo nut: chan o giao dien thi ai cung
+    # goi thang API duoc. Neu khong chan, hoc sinh bam luot ca de de lay
+    # loi giai ma khong chiu nghi - vi giang lai luon kem dap an chuan.
+    if int(so_thu_tu) not in _cac_cau_da_lam(user_id, de_id):
+        raise GiaSuError(
+            f"Em làm và nộp bài câu {so_thu_tu} trước đã nhé, rồi thầy/cô "
+            "giảng lại cho. Tự nghĩ trước thì lúc nghe giảng mới vào đầu."
+        )
 
     luot = lay_luot(user_id)
     if luot["con_lai"] <= 0:

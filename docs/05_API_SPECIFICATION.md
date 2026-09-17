@@ -553,6 +553,7 @@ Chi tiết nguyên lý và 3 lớp khoá: `docs/23_GIA_SU_AI.md`.
 |---|---|---|---|
 | POST | `/api/giasu/hoi` | học sinh đã đăng nhập | hỏi về **đúng 1 câu** trong đề vừa làm |
 | GET | `/api/giasu/luot` | học sinh đã đăng nhập | còn bao nhiêu lượt hôm nay |
+| GET | `/api/giasu/de-gan-nhat?conversation_id=` | học sinh đã đăng nhập | đề gần nhất trong hội thoại, chia PHẦN I–IV, mỗi câu kèm `hoi_duoc` |
 | GET | `/gv/gia-su` | giáo viên | HTML — nhật kí hỏi đáp |
 | POST | `/gv/gia-su/luot` | giáo viên | đặt hạn mức lượt trong ngày cho 1 em |
 

@@ -504,4 +504,5 @@ Chi tiết ba lớp khoá: `docs/23_GIA_SU_AI.md`.
 | 3 | `CHV_Fun` chưa hiểu "cho tôi 4 mã đề" trong chat — giáo viên phải vào `/gv/ra-de` |
 | 4 | Mở từng node xác nhận các chỗ đánh `(?)` ở mục này |
 | 5 | **Dán prompt `CHV_Fun` mới (mục "Cách từ chối") vào node `CHV_Fun`** — xem `data/prompts/CHV_Fun.md`. Chưa dán thì học sinh hỏi bài vẫn bị từ chối cụt |
-| 6 | Chép prompt THẬT trong các node AI về `data/prompts/*.md` — bản trong repo đang ngắn hơn bản chạy |
+| 6 | ~~Chép prompt THẬT về `data/prompts/*.md`~~ — **XONG 17/09/2026**: `data/prompts/CHV_Fun.md` nay là bản chính thức, đã gồm 4 chỗ sửa. Còn `CHV_Grader`, `CHV_Analyzer`, `GenerateExam_RequestParser` chưa chép về |
+| 7 | **Sửa ô Prompt (User Message) của node `CHV_Fun`** thành 2 dòng `Vai trò người hỏi: {{ $json.body.vai_tro }}` + `Tin nhắn: {{ $json.body.message }}` — không sửa thì mục "Xưng hô theo vai trò" trong prompt vô tác dụng |

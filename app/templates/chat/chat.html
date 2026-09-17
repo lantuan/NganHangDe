@@ -35,6 +35,29 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
     <style>
+        /* ---- Bang "Hoi lai de cu" (gia su AI muc A) ---- */
+        #bang-hoi-de-cu .khung {
+            border: 1px solid #e2e8f0; border-radius: 16px;
+            background: #f8fafc; padding: 14px 16px;
+        }
+        #bang-hoi-de-cu .ten-de { font-weight: 700; margin-bottom: 4px; }
+        #bang-hoi-de-cu .ghi-chu { font-size: 13px; color: #64748b; margin-bottom: 10px; }
+        #bang-hoi-de-cu .ten-phan {
+            font-weight: 600; font-size: 14px; color: #1d4ed8;
+            margin: 12px 0 6px;
+        }
+        #bang-hoi-de-cu .hang-cau { display: flex; flex-wrap: wrap; gap: 8px; }
+        #bang-hoi-de-cu .nut-cau {
+            min-width: 44px; padding: 8px 12px; font-weight: 600; font-size: 14px;
+            border: 1px solid #bfdbfe; background: #eff6ff; color: #1d4ed8;
+            border-radius: 10px; cursor: pointer;
+        }
+        #bang-hoi-de-cu .nut-cau:hover { background: #dbeafe; }
+        #bang-hoi-de-cu .nut-cau:disabled {
+            background: #f1f5f9; color: #94a3b8; border-color: #e2e8f0;
+            cursor: not-allowed;
+        }
+        #bang-hoi-de-cu .loi { color: #991b1b; font-size: 14px; }
 
         /* ===========================
            Reset + tokens (thay thế Tailwind)
@@ -560,13 +583,30 @@
                         <textarea id="message" rows="3" class="p-5"
                             placeholder="Nhập yêu cầu của bạn...&#10;&#10;Ví dụ:&#10;Tạo đề Toán 10 gồm 30 câu Chương Mệnh đề&#10;70% NB - 20% TH - 10% VD"></textarea>
 
-                        <div class="flex items-center justify-end border-t px-4 py-3">
+                        <!-- Hai duong di khong can go chu nao. Hoc sinh vua tao de
+                             xong thi trong dau da co ngu canh roi, khong ai nghi
+                             phai go lai "cau 3 cua de vua nay" - bam nut thi may
+                             chu BIET CHAC de nao, cau nao. -->
+                        <div class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <button type="button" id="nut-tao-de-moi" onclick="moFormTaoDe()"
+                                    class="px-4 h-10 rounded-xl border font-semibold text-sm">
+                                    📝 Tạo đề mới
+                                </button>
+                                <button type="button" id="nut-hoi-de-cu" onclick="moBangHoiDeCu()"
+                                    class="px-4 h-10 rounded-xl border font-semibold text-sm">
+                                    💬 Hỏi lại đề cũ
+                                </button>
+                            </div>
                             <button id="send-btn" class="bg-primary text-white px-6 h-11 rounded-xl font-semibold">
                                 Gửi
                             </button>
                         </div>
 
                     </form>
+
+                    <!-- Bang chon cau cua de gan nhat, hien khi bam "Hoi lai de cu" -->
+                    <div id="bang-hoi-de-cu" style="display:none;" class="mt-3"></div>
 
                 </div>
             </footer>
@@ -576,6 +616,155 @@
     </div>
 
     <script>
+
+        // ======================================================
+        // "HOI LAI DE CU" - gia su AI muc A ngay trong khung chat.
+        // Xem app/services/gia_su_service.py, docs/23_GIA_SU_AI.md.
+        //
+        // Vi sao lam bang NUT chu khong de AI doan: hoc sinh vua tao de
+        // xong thi trong dau da co ngu canh, go "giai bai 3" la du voi
+        // ho. Bat mo hinh doan "bai 3 cua de nao" la sai tu goc - bam
+        // nut thi may chu biet chac de_id va so_thu_tu.
+        //
+        // Cau CHUA NOP BAI thi nut mo, khong bam duoc (co Lan chot):
+        // neu khong, hoc sinh bam luot ca de de lay loi giai ma khong
+        // chiu nghi. May chu cung chan lai lan nua trong gia_su_service.
+        // ======================================================
+        // chat.html truoc day khong can ham nay (chi hien van ban thuong +
+        // de MathJax lo phan $...$). Loi giai chuan co \textbf{}, \\ ... nen
+        // phai doi sang HTML truoc, giong het lam_bai.html.
+        function renderLatexText(raw) {
+            if (!raw) return "";
+            let t = String(raw);
+            t = t.replace(/\\textbf\{([^{}]*)\}/g, "<strong>$1</strong>");
+            t = t.replace(/\\textit\{([^{}]*)\}/g, "<em>$1</em>");
+            t = t.replace(/\\\\/g, "<br>");
+            return t;
+        }
+
+        let DE_CU = null;   // du lieu tra ve tu /api/giasu/de-gan-nhat
+
+        function dongBangHoiDeCu() {
+            const bang = document.getElementById("bang-hoi-de-cu");
+            if (bang) { bang.style.display = "none"; }
+        }
+
+        async function moBangHoiDeCu() {
+            const bang = document.getElementById("bang-hoi-de-cu");
+            if (!bang) return;
+            if (bang.style.display !== "none") { dongBangHoiDeCu(); return; }
+
+            bang.style.display = "block";
+            bang.innerHTML = '<div class="khung">Đang tìm đề gần nhất...</div>';
+            try {
+                const res = await fetch("/api/giasu/de-gan-nhat?conversation_id=" +
+                    encodeURIComponent(conversationId));
+                const data = await res.json();
+                if (!data.success) {
+                    bang.innerHTML = '<div class="khung"><div class="loi">' +
+                        (data.message || "Chưa hỏi lại được.") + "</div></div>";
+                    return;
+                }
+                DE_CU = data.data;
+                veBangHoiDeCu();
+            } catch (e) {
+                bang.innerHTML = '<div class="khung"><div class="loi">' +
+                    "Lỗi kết nối, bạn thử lại nhé.</div></div>";
+            }
+        }
+
+        function veBangHoiDeCu() {
+            const bang = document.getElementById("bang-hoi-de-cu");
+            if (!bang || !DE_CU) return;
+
+            let html = '<div class="khung">';
+            html += '<div class="ten-de">💬 ' + (DE_CU.tieu_de || "Đề vừa tạo") + "</div>";
+            if (!DE_CU.da_lam_bai) {
+                html += '<div class="ghi-chu">Bạn chưa nộp bài đề này. ' +
+                    "Làm bài rồi nộp thì mới hỏi lại từng câu được nhé — " +
+                    "tự nghĩ trước thì lúc nghe giảng mới vào đầu.</div>";
+            } else {
+                html += '<div class="ghi-chu">Bấm vào câu nào chưa hiểu, thầy/cô AI giảng lại ngay.';
+                if (DE_CU.luot) {
+                    html += " Hôm nay còn " + DE_CU.luot.con_lai + "/" + DE_CU.luot.gioi_han + " lượt.";
+                }
+                html += "</div>";
+            }
+
+            (DE_CU.cac_phan || []).forEach(function (phan) {
+                html += '<div class="ten-phan">' + phan.ten + "</div>";
+                html += '<div class="hang-cau">';
+                phan.cau.forEach(function (cau) {
+                    const tat = cau.hoi_duoc ? "" : " disabled";
+                    let vi_sao = "";
+                    if (!cau.da_lam) { vi_sao = ' title="Bạn chưa nộp bài câu này"'; }
+                    else if (!cau.co_loi_giai) { vi_sao = ' title="Câu này chưa có lời giải mẫu"'; }
+                    html += '<button class="nut-cau"' + tat + vi_sao +
+                        ' onclick="hoiCauTrongDeCu(' + cau.so_thu_tu + ')">' +
+                        cau.so_thu_tu + "</button>";
+                });
+                html += "</div>";
+            });
+
+            html += '<div style="margin-top:12px;">' +
+                '<button type="button" class="nut-cau" onclick="dongBangHoiDeCu()" ' +
+                'style="background:#fff;">Đóng</button></div>';
+            html += "</div>";
+            bang.innerHTML = html;
+        }
+
+        async function hoiCauTrongDeCu(soThuTu) {
+            if (!DE_CU) return;
+            dongBangHoiDeCu();
+
+            addUserMessage("Giảng lại giúp mình câu " + soThuTu + " của đề vừa rồi");
+            addTyping();   // addAIMessage() khong tra ve element nen khong tu go duoc
+
+            try {
+                const res = await fetch("/api/giasu/hoi", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        de_id: DE_CU.de_id,
+                        so_thu_tu: soThuTu,
+                        cau_hoi: "Giảng lại câu " + soThuTu + " cho em, em chưa hiểu."
+                    })
+                });
+                const data = await res.json();
+                removeTyping();
+
+                const d = data.data || {};
+                let html = "";
+                if (!data.success) {
+                    html += "<p>" + (data.message || "Chưa hỏi được, bạn thử lại nhé.") + "</p>";
+                } else if (d.tra_loi) {
+                    html += "<p>" + renderLatexText(d.tra_loi) + "</p>";
+                } else if (d.che_do === "khong_ai") {
+                    html += "<p>Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn bên dưới nhé.</p>";
+                }
+                // LOP KHOA 2: loi giai chuan do Python sinh LUON hien canh
+                // cau tra loi cua AI. Lech la thay ngay.
+                if (d.dap_an_python || d.loi_giai_python) {
+                    html += '<div style="margin-top:10px;padding:12px 14px;background:#f0fdf4;' +
+                        'border:1px solid #bbf7d0;border-radius:12px;">';
+                    html += '<div style="font-weight:700;color:#15803d;font-size:13px;' +
+                        'text-transform:uppercase;margin-bottom:6px;">Lời giải chuẩn của thầy/cô</div>';
+                    if (d.dap_an_python) {
+                        html += "<div><strong>Đáp án:</strong> " +
+                            renderLatexText(String(d.dap_an_python)) + "</div>";
+                    }
+                    if (d.loi_giai_python) {
+                        html += '<div style="margin-top:6px;">' +
+                            renderLatexText(String(d.loi_giai_python)) + "</div>";
+                    }
+                    html += "</div>";
+                }
+                addAIMessage(html);
+            } catch (e) {
+                removeTyping();
+                addAIMessage("<p>Lỗi kết nối, bạn thử lại sau nhé.</p>");
+            }
+        }
 
         const messages = document.getElementById("messages");
         const form = document.getElementById("chat-form");

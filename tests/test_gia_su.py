@@ -118,6 +118,7 @@ def test_cau_khong_co_loi_giai_thi_bao_loi_chu_khong_goi_mo_hinh(monkeypatch, tm
 
 def test_hoi_khong_goi_mo_hinh_khi_thieu_ngu_canh(monkeypatch):
     """Diem quan trong nhat: thieu du lieu thi DUNG LAI, khong goi AI."""
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1})
     da_goi = []
     monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
     monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: da_goi.append(p) or "khong duoc goi")
@@ -161,6 +162,8 @@ def gia_su_gia_lap(monkeypatch, tmp_path):
     )
     monkeypatch.setattr(G.history_service, "lay_de_theo_id",
                         lambda _: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    # Mac dinh: da nop bai cau 1 (yeu cau moi 17/09/2026).
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1})
 
     trang_thai = {"luot": {"da_dung": 0, "gioi_han": 5, "con_lai": 5}, "nhat_ki": []}
     monkeypatch.setattr(G, "lay_luot", lambda uid: dict(trang_thai["luot"]))
@@ -337,3 +340,120 @@ def test_khong_lay_duoc_loi_giai_du_phong_thi_van_bao_loi_binh_thuong(client, mo
     assert r.status_code == 200
     assert r.json()["success"] is False
     assert r.json()["data"] is None
+
+
+# ======================================================
+# PHAI NOP BAI ROI MOI HOI DUOC (co Lan chot 17/09/2026)
+# ======================================================
+
+def test_chua_nop_bai_thi_khong_hoi_duoc_va_khong_goi_mo_hinh(monkeypatch, gia_su_gia_lap):
+    """Chan o TANG SERVER, khong chi lam mo nut o giao dien."""
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: set())   # chua lam gi
+    da_goi = []
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: da_goi.append(p) or "x")
+
+    with pytest.raises(G.GiaSuError) as loi:
+        G.hoi("u1", "d1", 1, "em chưa hiểu")
+    assert "nộp bài" in str(loi.value)
+    assert da_goi == []
+
+
+def test_chua_nop_bai_thi_khong_mat_luot(monkeypatch, gia_su_gia_lap):
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: set())
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: "x")
+    with pytest.raises(G.GiaSuError):
+        G.hoi("u1", "d1", 1, "em chưa hiểu")
+    assert gia_su_gia_lap["luot"]["da_dung"] == 0
+
+
+def test_da_nop_cau_khac_nhung_chua_nop_cau_nay_thi_van_bi_chan(monkeypatch, gia_su_gia_lap):
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {2, 3})   # khong co cau 1
+    da_goi = []
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: da_goi.append(p) or "x")
+    with pytest.raises(G.GiaSuError):
+        G.hoi("u1", "d1", 1, "em chưa hiểu")
+    assert da_goi == []
+
+
+# ======================================================
+# LIET KE CAU CUA DE GAN NHAT (nut "Hoi lai de cu")
+# ======================================================
+
+def _de_4_phan(tmp_path):
+    tep = tmp_path / "dapan.json"
+    tep.write_text(
+        '''[
+        {"so_thu_tu": 1, "loai_cau": "MC", "de_bai": "a", "dap_an": "A", "loi_giai": "x"},
+        {"so_thu_tu": 2, "loai_cau": "MC", "de_bai": "b", "dap_an": "B", "loi_giai": "x"},
+        {"so_thu_tu": 3, "loai_cau": "TF", "de_bai": "c", "dap_an": {"a": true}, "loi_giai": "x"},
+        {"so_thu_tu": 4, "loai_cau": "SA", "de_bai": "d", "dap_an": "5", "loi_giai": "x"},
+        {"so_thu_tu": 5, "loai_cau": "TL", "de_bai": "e", "dap_an": "", "loi_giai": ""}
+        ]''',
+        encoding="utf-8",
+    )
+    return tep
+
+
+def test_liet_ke_chia_dung_4_phan_dung_thu_tu(monkeypatch, tmp_path):
+    tep = _de_4_phan(tmp_path)
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat",
+                        lambda cid: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1, 2, 3, 4, 5})
+
+    kq = G.liet_ke_cau_de_gan_nhat("u1", "c1")
+    assert [p["ma"] for p in kq["cac_phan"]] == ["MC", "TF", "SA", "TL"]
+    assert kq["cac_phan"][0]["ten"].startswith("PHẦN I.")
+    assert [c["so_thu_tu"] for c in kq["cac_phan"][0]["cau"]] == [1, 2]
+
+
+def test_liet_ke_bo_phan_rong(monkeypatch, tmp_path):
+    tep = tmp_path / "dapan.json"
+    tep.write_text('[{"so_thu_tu": 1, "loai_cau": "MC", "dap_an": "A", "loi_giai": "x"}]',
+                   encoding="utf-8")
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat",
+                        lambda cid: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1})
+    kq = G.liet_ke_cau_de_gan_nhat("u1", "c1")
+    assert len(kq["cac_phan"]) == 1
+
+
+def test_cau_chua_lam_thi_hoi_duoc_bang_false(monkeypatch, tmp_path):
+    tep = _de_4_phan(tmp_path)
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat",
+                        lambda cid: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1})   # chi lam cau 1
+
+    kq = G.liet_ke_cau_de_gan_nhat("u1", "c1")
+    theo_stt = {c["so_thu_tu"]: c for p in kq["cac_phan"] for c in p["cau"]}
+    assert theo_stt[1]["hoi_duoc"] is True
+    assert theo_stt[2]["hoi_duoc"] is False
+    assert theo_stt[2]["da_lam"] is False
+
+
+def test_cau_khong_co_loi_giai_thi_khong_hoi_duoc_du_da_lam(monkeypatch, tmp_path):
+    """Cau 5 (TL) khong co loi giai mau -> khong co gi de giang."""
+    tep = _de_4_phan(tmp_path)
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat",
+                        lambda cid: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1, 2, 3, 4, 5})
+
+    kq = G.liet_ke_cau_de_gan_nhat("u1", "c1")
+    theo_stt = {c["so_thu_tu"]: c for p in kq["cac_phan"] for c in p["cau"]}
+    assert theo_stt[5]["da_lam"] is True
+    assert theo_stt[5]["co_loi_giai"] is False
+    assert theo_stt[5]["hoi_duoc"] is False
+
+
+def test_chua_co_de_thi_bao_loi_doc_duoc(monkeypatch):
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat", lambda cid: None)
+    with pytest.raises(G.GiaSuError) as loi:
+        G.liet_ke_cau_de_gan_nhat("u1", "c1")
+    assert "chưa có đề nào" in str(loi.value)
+
+
+def test_de_gan_nhat_can_dang_nhap(client, monkeypatch):
+    monkeypatch.setattr(R, "get_current_user", lambda request: None)
+    assert client.get("/api/giasu/de-gan-nhat?conversation_id=c1").status_code == 401

@@ -184,6 +184,57 @@ bao giờ vỡ trang học sinh.
 - Cô nâng riêng cho một em ở `/gv/gia-su`, cột cuối. Giá trị đó ghi vào
   `gia_su_luot.gioi_han` và **chỉ có hiệu lực trong ngày hôm đó**.
 
+## 7b. Hai đường vào gia sư (cập nhật 17/09/2026, v2.61)
+
+| Đường | Ở đâu | Dùng khi |
+|---|---|---|
+| Nút **"💬 Hỏi thầy/cô AI về câu này"** | trang kết quả sau khi nộp bài, dưới mỗi câu | đang xem điểm, thấy câu nào sai thì hỏi ngay |
+| Nút **"💬 Hỏi lại đề cũ"** | cố định dưới ô nhập ở Chat AI | đã rời trang kết quả, quay lại chat muốn hỏi |
+
+### Vì sao làm bằng NÚT, không để AI đoán
+
+Học sinh vừa tạo đề xong thì trong đầu đã có ngữ cảnh rồi — gõ "giải bài 3"
+là đủ với các em. Bắt mô hình đoán "bài 3 của đề nào" là **sai từ gốc**:
+nó không có cách nào biết, và đoán sai thì đi giải một bài tưởng tượng.
+
+Bấm nút thì máy chủ **biết chắc** `de_id` và `so_thu_tu` — không phải đoán,
+không tốn một lượt gọi mô hình nào để phân loại. Đúng nguyên tắc
+**"Ưu tiên Code hơn AI"** (docs/00).
+
+### Luồng
+
+```
+Bấm "💬 Hỏi lại đề cũ"
+   └─► GET /api/giasu/de-gan-nhat?conversation_id=...
+          └─► history_service.lay_de_gan_nhat()  →  đọc dapan_json
+              chia 4 phần theo loai_cau (MC/TF/SA/TL)
+              mỗi câu kèm: da_lam, co_loi_giai, hoi_duoc
+   └─► vẽ PHẦN I/II/III/IV, mỗi phần một hàng nút số câu
+          └─► bấm số câu ─► POST /api/giasu/hoi (như cũ)
+```
+
+### PHẢI NỘP BÀI RỒI MỚI HỎI ĐƯỢC
+
+Câu chưa nộp bài thì nút **mờ, không bấm được**. Lý do (cô Lan chốt): giảng
+lại luôn kèm đáp án chuẩn, nên nếu cho hỏi tự do thì học sinh bấm lướt cả đề
+để lấy lời giải mà không chịu nghĩ.
+
+**Chặn ở HAI tầng**, không chỉ làm mờ nút:
+
+| Tầng | Ở đâu |
+|---|---|
+| Giao diện | `chat.html::veBangHoiDeCu()` — `hoi_duoc = false` thì `disabled` |
+| Máy chủ | `gia_su_service.hoi()` — gọi `_cac_cau_da_lam()`, chưa làm thì `GiaSuError` |
+
+Chặn ở giao diện thôi là vô nghĩa: ai cũng gọi thẳng API được.
+`tests/test_gia_su.py::test_chua_nop_bai_thi_khong_hoi_duoc_va_khong_goi_mo_hinh`
+canh đúng điểm này.
+
+Câu **đã làm nhưng không có lời giải mẫu** (ví dụ câu tự luận) cũng mờ —
+không có gì chuẩn để giảng thì không giảng.
+
+---
+
 ## 8. Mức B — chưa làm
 
 Mức B là bước tiếp theo: học sinh đọc lời giảng mà **vẫn** chưa hiểu → chỉ đúng chỗ

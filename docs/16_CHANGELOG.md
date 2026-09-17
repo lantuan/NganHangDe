@@ -3613,3 +3613,90 @@ sua o giao dien thi chay ngay sau khi deploy.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.61 - 2026-09-17
+
+## Nut "Hoi lai de cu" trong Chat AI + sua prompt CHV_Fun
+
+Co Lan chi ra dung goc van de: hoc sinh vua tao de xong thi trong dau da
+co ngu canh roi, go "giai bai 3" la du voi cac em. Bat mo hinh doan "bai
+3 cua de nao" la SAI TU GOC - no khong co cach nao biet. Bam nut thi may
+chu BIET CHAC de_id va so_thu_tu, khong phai doan, khong ton mot luot goi
+mo hinh nao de phan loai. Dung nguyen tac "Uu tien Code hon AI".
+
+## Giao dien
+
+Hai nut co dinh duoi o nhap chat: [Tao de moi] [Hoi lai de cu].
+Bam "Hoi lai de cu" -> hien de gan nhat trong hoi thoai, chia PHAN I/II/
+III/IV, moi phan mot hang nut so cau. Bam so cau -> giang lai ngay trong
+khung chat, KEM loi giai chuan do Python sinh (lop khoa 2 giu nguyen).
+
+## PHAI NOP BAI ROI MOI HOI DUOC
+
+Cau chua nop bai thi nut MO, khong bam duoc. Ly do co Lan chot: giang lai
+luon kem dap an chuan, cho hoi tu do thi hoc sinh bam luot ca de de lay
+loi giai ma khong chiu nghi.
+
+Chan o HAI TANG, khong chi lam mo nut:
+- giao dien: veBangHoiDeCu() dat disabled khi hoi_duoc = false
+- may chu: gia_su_service.hoi() goi _cac_cau_da_lam(), chua lam thi
+  GiaSuError va KHONG goi mo hinh, KHONG tru luot
+
+Chan o giao dien thoi la vo nghia: ai cung goi thang API duoc.
+
+Cau da lam nhung khong co loi giai mau (vd cau tu luan) cung mo.
+
+## Prompt CHV_Fun - 4 cho sua
+
+Co Lan gui nguyen ban dang chay tren n8n. Da kiem tra va tim ra LOI THAT:
+
+1. THU TU XET (loi that): chu "bai" nam trong tu khoa Rule 1 (tao de),
+   nhung "giai cho toi BAI 3" cung chua chu do. Prompt khong noi rule nao
+   xet truoc -> mo hinh tu quyet moi lan mot kieu, co lan tra JSON hong ->
+   roi vao fallback. Day chinh la hien tuong "bai cho toi bai 3" co Lan
+   thay. Nay them muc THU TU XET tuong minh: Rule 4 > 6 > 7 > 5 > 2 > 3 > 1.
+2. XUNG HO THEO VAI TRO: chat.py gui vai_tro tu v2.55 nhung prompt khong
+   dung -> giao vien vao chat van bi goi la "ban".
+3. Quy tac ki thuat cho tra_loi: xuong dong that lam vo JSON -> phai \n.
+4. Rule 5 + Rule 6 chi duong sang gia su AI (ca 2 duong vao).
+
+data/prompts/CHV_Fun.md nay la BAN CHINH THUC, khong con lech voi n8n.
+
+## Viec co Lan phai lam tren n8n
+
+- Dan prompt moi vao node CHV_Fun.
+- Sua o Prompt (User Message) cua node CHV_Fun thanh 2 dong:
+  "Vai tro nguoi hoi: {{ $json.body.vai_tro }}" + "Tin nhan: {{ $json.body.message }}"
+  Khong sua thi muc "Xung ho theo vai tro" vo tac dung.
+
+## Tep
+
+Moi: (khong)
+Sua: app/services/gia_su_service.py (liet_ke_cau_de_gan_nhat, TEN_PHAN,
+_cac_cau_da_lam, chan trong hoi()), app/routers/gia_su.py
+(GET /api/giasu/de-gan-nhat), app/templates/chat/chat.html (2 nut, bang
+chon cau, renderLatexText), data/prompts/CHV_Fun.md (viet lai toan bo),
+docs/05, docs/06, docs/23
+
+## Hai loi tu bat duoc luc viet giao dien
+
+- chat.html KHONG co ham renderLatexText (lam_bai.html moi co) - loi giai
+  chuan co \textbf{} se hien ra chu tho neu khong them.
+- addAIMessage() KHONG tra ve element nen khong the .remove() de go tin
+  nhan "dang cho" - phai dung addTyping()/removeTyping() co san.
+
+## Bai kiem tra
+
+tests/test_gia_su.py len 36 bai (them 9):
+- chua nop bai -> khong hoi duoc, KHONG goi mo hinh, KHONG tru luot
+- da nop cau khac nhung chua nop cau nay -> van bi chan
+- liet ke chia dung 4 phan, dung thu tu, bo phan rong
+- cau chua lam -> hoi_duoc = false
+- cau da lam nhung khong co loi giai -> hoi_duoc = false
+- GET /api/giasu/de-gan-nhat can dang nhap
+
+Tong 72 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -1,8 +1,10 @@
 """
 API GIA SU AI - MUC A (docs/23_GIA_SU_AI.md).
 
-  POST /api/giasu/hoi   - hoi ve DUNG 1 cau trong de vua lam
-  GET  /api/giasu/luot  - con bao nhieu luot hom nay
+  POST /api/giasu/hoi          - hoi ve DUNG 1 cau trong de vua lam
+  GET  /api/giasu/luot         - con bao nhieu luot hom nay
+  GET  /api/giasu/de-gan-nhat  - liet ke cac cau cua de gan nhat, chia
+                                 4 phan, de Frontend ve nut bam tung cau
 
 Moi thao tac deu yeu cau da dang nhap: user_id lay tu COOKIE (phien dang
 nhap), KHONG lay tu body - neu khong thi ai cung gui user_id nguoi khac
@@ -38,6 +40,27 @@ def luot_con_lai_endpoint(request: Request):
     if user is None:
         raise HTTPException(401, "Em cần đăng nhập để dùng phần này.")
     return {"success": True, "message": "", "data": gia_su_service.lay_luot(user.id)}
+
+
+@router.get("/de-gan-nhat")
+def de_gan_nhat_endpoint(request: Request, conversation_id: str):
+    """
+    Cho nut "Hoi lai de cu": tra ve de gan nhat trong cuoc hoi thoai,
+    chia thanh PHAN I/II/III/IV, moi cau kem `hoi_duoc`.
+
+    Hoc sinh vua tao de xong thi trong dau da co ngu canh, khong ai nghi
+    phai go lai "cau 3 cua de vua nay". Bam nut thi may chu BIET CHAC de
+    nao, cau nao - khong phai doan.
+    """
+    user = get_current_user(request)
+    if user is None:
+        raise HTTPException(401, "Em cần đăng nhập để dùng phần này.")
+    try:
+        du_lieu = gia_su_service.liet_ke_cau_de_gan_nhat(user.id, conversation_id)
+    except GiaSuError as e:
+        return {"success": False, "message": str(e), "data": None}
+    du_lieu["luot"] = gia_su_service.lay_luot(user.id)
+    return {"success": True, "message": "", "data": du_lieu}
 
 
 @router.post("/hoi")
