@@ -681,6 +681,7 @@ ${html}
             `<br>📄 Xin lời giải: có đề rồi thì gõ "cho tôi lời giải" để nhận đáp án.` +
             `<br>💻 Làm bài trên web: sau khi tạo đề, bấm link là làm bài và có điểm liền.` +
             `<br>📊 Đánh giá học lực: đang code, sắp ra mắt.` +
+            `<br>💬 Chưa hiểu bài? Làm xong đề rồi bấm "Hỏi thầy/cô AI về câu này" ở câu nào bí, mình giảng lại cho.` +
             `<br><br>Bạn ra đề luôn hay hỏi mình cái gì đã? 😊`,
         ];
 
@@ -696,7 +697,8 @@ ${html}
         function addAIMessageLoi(noiDung) {
             addAIMessage(
                 `<p>${noiDung}</p>` +
-                `<p style="color:#64748b;font-size:14px;">Hoặc bấm nút bên dưới để chọn lớp/chương rồi tạo đề ngay, khỏi cần gõ.</p>` +
+                `<p style="color:#64748b;font-size:14px;">Hoặc bấm nút bên dưới để chọn lớp/chương rồi tạo đề ngay, khỏi cần gõ.` +
+                `<br>Còn nếu bạn đang muốn <strong>hỏi bài</strong>: làm xong một đề rồi bấm <strong>"💬 Hỏi thầy/cô AI về câu này"</strong> ở câu nào chưa hiểu nhé.</p>` +
                 htmlNutTaoDeNhanh()
             );
         }

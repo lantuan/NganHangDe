@@ -393,7 +393,7 @@ async def chat_post(
             print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
             ket_qua = {
                 "success": False,
-                "message": "AI chưa xử lý được yêu cầu này. Vui lòng thử lại với yêu cầu tạo đề cụ thể (lớp/chương/số câu...).",
+                "message": "AI chưa xử lý được yêu cầu này. Vui lòng thử lại với yêu cầu tạo đề cụ thể (lớp/chương/số câu...). Nếu bạn đang muốn hỏi bài: hãy làm một đề rồi bấm \"Hỏi thầy/cô AI về câu này\" ở câu chưa hiểu.",
                 "data": None,
             }
 

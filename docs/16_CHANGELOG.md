@@ -3571,3 +3571,45 @@ thang sau mo ra khong ai nho node Sua_Lop_Bang_Regex sua cai gi.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.60 - 2026-09-17
+
+## CHV_Fun tu choi giai bai thi phai CHI DUONG sang gia su
+
+Hoc sinh go "giai cho toi bai 3" trong Chat AI. CHV_Fun tra loi "minh
+khong co chuc nang giai dau nha" roi dung.
+
+Tu choi la DUNG: bai le ngoai web khong co dap an Python nao de bam,
+giang la phai tu tinh, ma mo hinh tinh so hoc rat hay sai. Nhung tu choi
+xong thi BO EM AY GIUA DUONG - he thong gio DA CO gia su AI (v2.58)
+giang lai tung buoc, chi la em ay khong biet loi vao.
+
+## Da sua
+
+data/prompts/CHV_Fun.md them muc "Cach tu choi": message cua
+reject_math_solution phai co du 3 y - tu choi (GIU GIONG VUI, co Lan co
+y lam vui), noi ro minh giang duoc voi cau trong de vua lam, chi dung 3
+buoc tao de -> nop bai -> bam nut "Hoi thay/co AI ve cau nay".
+
+Sua kem o giao dien (khong phu thuoc AI, luon chay):
+- chat.html loi chao mo dau: them dong "Chua hieu bai? Lam xong de roi
+  bam Hoi thay/co AI ve cau nay".
+- chat.html addAIMessageLoi(): moi tin nhan loi gio chi CA HAI duong -
+  nut "Tao de nhanh" va cach hoi bai.
+- chat.py: thong bao khi n8n tra JSON hong cung chi duong tuong tu.
+
+## Phat hien them: prompt trong repo LECH voi n8n
+
+data/prompts/*.md la BAN GHI, khong phai ban dang chay. CHV_Fun.md trong
+repo (62 dong) NGAN HON ban chay that - ban that co them phan giong dieu,
+cach xung ho (nhin cau tra loi tren web la thay). Da ghi canh bao vao
+dau tep va vao docs/18 + bang ton dong docs/06.
+
+## Con lai
+
+PHAI DAN prompt moi sang node CHV_Fun tren n8n thi moi co tac dung. Ban
+sua o giao dien thi chay ngay sau khi deploy.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

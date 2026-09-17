@@ -503,3 +503,5 @@ Chi tiết ba lớp khoá: `docs/23_GIA_SU_AI.md`.
 | 2 | `Ghep_Tham_So` làm mất dấu tiếng Việt ở tiêu đề PDF (tồn đọng #16) |
 | 3 | `CHV_Fun` chưa hiểu "cho tôi 4 mã đề" trong chat — giáo viên phải vào `/gv/ra-de` |
 | 4 | Mở từng node xác nhận các chỗ đánh `(?)` ở mục này |
+| 5 | **Dán prompt `CHV_Fun` mới (mục "Cách từ chối") vào node `CHV_Fun`** — xem `data/prompts/CHV_Fun.md`. Chưa dán thì học sinh hỏi bài vẫn bị từ chối cụt |
+| 6 | Chép prompt THẬT trong các node AI về `data/prompts/*.md` — bản trong repo đang ngắn hơn bản chạy |
