@@ -649,10 +649,12 @@
             if (bang) { bang.style.display = "none"; }
         }
 
-        async function moBangHoiDeCu() {
+        async function moBangHoiDeCu(luonMo) {
             const bang = document.getElementById("bang-hoi-de-cu");
             if (!bang) return;
-            if (bang.style.display !== "none") { dongBangHoiDeCu(); return; }
+            // Bam nut lan 2 thi dong lai. Nhung khi may chu goi (luonMo)
+            // thi phai MO, khong duoc dong mat.
+            if (!luonMo && bang.style.display !== "none") { dongBangHoiDeCu(); return; }
 
             bang.style.display = "block";
             bang.innerHTML = '<div class="khung">Đang tìm đề gần nhất...</div>';
@@ -1417,7 +1419,13 @@ ${html}
                 }
 
                 if (data.success) {
-                    if (data.data && data.data.type === "xac_nhan_de" && !data.data.lop) {
+                    if (data.data && data.data.type === "mo_bang_gia_su") {
+                        // May chu nhan ra hoc sinh dang hoi bai VA hoi thoai
+                        // nay da co de da nop bai. Khong doan so cau - mo
+                        // bang PHAN I/II/III/IV de chinh em ay bam dung cau.
+                        addAIMessage(`<p>${data.data.tra_loi || data.message || ""}</p>`);
+                        moBangHoiDeCu(true);
+                    } else if (data.data && data.data.type === "xac_nhan_de" && !data.data.lop) {
                         // Chua xac dinh duoc lop (GenerateExam_RequestParser
                         // tra ve lop=null vi hoc sinh khong noi ro) - CHI hoi
                         // lai bang van ban thuong, KHONG hien nut xac nhan vi

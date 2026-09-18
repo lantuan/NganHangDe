@@ -12,6 +12,7 @@ import requests
 from app.core.deps import get_current_user
 from app.core.lop_config import DANH_SACH_LOP
 from app.services import history_service, profile_service
+from app.services import gia_su_service
 from app.services import supabase_service
 from app.services import classroom_service
 
@@ -358,6 +359,32 @@ async def chat_post(
         role="user",
         noi_dung=message,
     )
+
+    # ======================================================
+    # BAT Y DINH "HOI BAI" TRUOC KHI GOI n8n (v2.62)
+    # ======================================================
+    # Hoc sinh vua nop bai xong, go "toi khong hieu bai 1". CHV_Fun khong
+    # co cach nao biet hoi thoai nay da co de - no chi doc moi cau chu -
+    # nen tu choi va bao em ay di TAO DE, trong khi em ay vua lam xong.
+    # May chu thi biet chac, nen chan ngay o day: khong goi n8n, khong ton
+    # mot luot goi mo hinh nao. CO Y KHONG DOAN SO CAU - chi mo bang chon
+    # cau de chinh em ay chi dung cau minh can (xem gia_su_service).
+    if (gia_su_service.la_y_dinh_hoi_bai(message)
+            and await run_in_threadpool(
+                gia_su_service.co_de_da_nop_bai, user.id, conversation_id)):
+        loi_nhan = (
+            "Bạn muốn hỏi bài trong đề vừa làm đúng không? Bấm vào câu nào "
+            "chưa hiểu bên dưới, thầy/cô AI giảng lại ngay nhé."
+        )
+        history_service.luu_tin_nhan(
+            user_id=user.id, conversation_id=conversation_id,
+            role="assistant", noi_dung=loi_nhan,
+        )
+        return {
+            "success": True,
+            "message": loi_nhan,
+            "data": {"type": "mo_bang_gia_su", "tra_loi": loi_nhan},
+        }
 
     r = None
     loi_cuoi = None

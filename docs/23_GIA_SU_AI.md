@@ -235,6 +235,46 @@ không có gì chuẩn để giảng thì không giảng.
 
 ---
 
+## 7c. Gõ hỏi bài trong chat (18/09/2026, v2.62)
+
+Học sinh vừa nộp bài xong, gõ **"tôi không hiểu bài 1"** ngay trong chat.
+`CHV_Fun` không có cách nào biết hội thoại này đã có đề — nó chỉ đọc mỗi câu
+chữ — nên từ chối và bảo em ấy đi *tạo đề rồi làm bài*, trong khi em ấy vừa
+làm xong. Vô lí với người dùng, và là lỗi của ta chứ không phải của prompt.
+
+Máy chủ thì **biết chắc**: `conversation_id` → đề gần nhất → đã nộp bài chưa.
+
+```
+POST /chat  "tôi không hiểu bài 1"
+   │
+   ├─ gia_su_service.la_y_dinh_hoi_bai(message)   ── regex, không tốn lượt AI
+   │     └─ False ──────────────────────────────────► đi tiếp sang n8n như cũ
+   │
+   ├─ gia_su_service.co_de_da_nop_bai(user, conv)
+   │     └─ False ──────────────────────────────────► đi tiếp sang n8n như cũ
+   │
+   └─ cả hai True ──► trả {"type": "mo_bang_gia_su"}, KHÔNG gọi n8n
+                       └─ Frontend mở bảng PHẦN I–IV để học sinh bấm câu
+```
+
+### CỐ Ý KHÔNG ĐOÁN SỐ CÂU
+
+Cô Lan chốt. "Bài 1" có thể là câu 1 của đề, cũng có thể là bài 1 trong sách.
+Đoán sai thì **giảng nhầm câu** — tệ hơn nhiều so với bắt học sinh bấm thêm
+một nút. Nhận ra ý định thì mở bảng chọn câu, để chính em ấy chỉ đúng câu.
+
+### Hai điều kiện, phải đủ cả hai
+
+Chỉ một điều kiện là chặn nhầm. `la_y_dinh_hoi_bai` loại sẵn "hướng dẫn **sử
+dụng**", "cách **tạo đề**", "**tính năng**" — những câu đó thuộc Rule 5 (help)
+của `CHV_Fun`, không được cướp. Và nếu hội thoại chưa có đề nào thì vẫn để
+`CHV_Fun` trả lời như cũ — lúc đó từ chối mới đúng.
+
+`co_de_da_nop_bai` **nuốt mọi lỗi**: Supabase hỏng thì trả `False` để đi
+đường cũ, không bao giờ chặn nhầm vì một lỗi đọc dữ liệu.
+
+---
+
 ## 8. Mức B — chưa làm
 
 Mức B là bước tiếp theo: học sinh đọc lời giảng mà **vẫn** chưa hiểu → chỉ đúng chỗ

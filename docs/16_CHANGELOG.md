@@ -3700,3 +3700,61 @@ Tong 72 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.62 - 2026-09-18
+
+## Go hoi bai trong chat -> mo bang chon cau, khong goi n8n
+
+Hoc sinh vua NOP BAI xong (ket qua cham con hien ngay phia tren trong
+cung hoi thoai), go "toi khong hieu bai 1". He thong tra loi: hay TAO DE,
+lam xong nop bai, roi bam nut hoi. Trong khi em ay vua lam xong.
+
+Loi cua TA chu khong phai cua prompt: CHV_Fun khong co cach nao biet hoi
+thoai nay da co de - no chi doc moi cau chu. May chu thi biet chac:
+conversation_id -> de gan nhat -> da nop bai chua.
+
+## Chan ngay o chat.py TRUOC khi goi n8n
+
+Hai dieu kien, phai du ca hai:
+1. gia_su_service.la_y_dinh_hoi_bai(message) - bieu thuc chinh quy
+2. gia_su_service.co_de_da_nop_bai(user_id, conversation_id)
+
+Du ca hai -> tra {"type": "mo_bang_gia_su"}, KHONG goi n8n (tiet kiem
+tron mot luot goi mo hinh). Frontend mo bang PHAN I/II/III/IV de hoc sinh
+bam dung cau.
+
+## CO Y KHONG DOAN SO CAU
+
+Co Lan chot. "Bai 1" co the la cau 1 cua de, cung co the la bai 1 trong
+sach. Doan sai thi GIANG NHAM CAU - te hon nhieu so voi bat hoc sinh bam
+them mot nut. Nhan ra y dinh thi mo bang, de chinh em ay chi dung cau.
+
+## Khong duoc chan nham
+
+la_y_dinh_hoi_bai loai san "huong dan SU DUNG", "cach TAO DE", "TINH
+NANG" - nhung cau do thuoc Rule 5 (help) cua CHV_Fun.
+co_de_da_nop_bai NUOT MOI LOI: Supabase hong thi tra False de di duong
+cu, khong bao gio chan nham vi mot loi doc du lieu.
+Hoi thoai chua co de nao -> van de CHV_Fun tu choi nhu cu, luc do dung.
+
+## Bai kiem tra
+
+tests/test_gia_su.py len 60 bai (them 24):
+- 9 cau PHAI nhan ra (gom 2 cau that cua hoc sinh trong anh co Lan gui)
+- 8 cau KHONG duoc nhan nham (help, tao de, xin loi giai...)
+- co_de_da_nop_bai: chua co de / co de chua nop / da nop / Supabase hong
+- POST /chat: mo bang va KHONG goi n8n (dem so lan _goi_n8n, phai = 0)
+- POST /chat: hoi thoai chua co de -> VAN goi n8n
+- POST /chat: "tao de lop 10 chuong 1" -> VAN goi n8n (khong chan nham)
+
+Tong 96 bai, deu xanh.
+
+## Van con: loi tu choi lap nguyen van 2 lan
+
+Prompt yeu cau "moi lan doi cach dien dat" nhung mo hinh mien phi bam
+khuon mau. Chua sua, khong gap - va sau ban nay thi truong hop do it xay
+ra han vi da chan truoc khi toi CHV_Fun.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

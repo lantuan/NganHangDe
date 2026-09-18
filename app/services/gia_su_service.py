@@ -33,6 +33,7 @@ MUC B (chi dung cho hoc sinh van chua hieu -> tro ve dung cho trong tai
 lieu li thuyet .tex cua co) chua lam o ban nay, xem docs/23_GIA_SU_AI.md.
 """
 import json
+import re
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -193,6 +194,65 @@ def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
             "nguon": "exam_history",
         }
     return None
+
+
+# ======================================================
+# 1a. NHAN DIEN Y DINH "HOI BAI" NGAY TRONG CHAT
+# ======================================================
+# Hoc sinh vua nop bai xong, go "toi khong hieu bai 1" trong chat. CHV_Fun
+# khong co cach nao biet trong hoi thoai nay da co de - no chi doc moi cau
+# chu - nen tu choi va bao em ay di TAO DE, trong khi em ay vua lam xong.
+# Vo li voi nguoi dung, va la loi cua chung ta chu khong phai cua prompt.
+#
+# May chu thi BIET CHAC: conversation_id -> de gan nhat -> da nop bai chua.
+# Nen bat ngay o Python TRUOC khi goi n8n: mot bieu thuc chinh quy thay cho
+# mot luot goi mo hinh doan sai ("Uu tien Code hon AI", docs/00).
+#
+# CO Y KHONG DOAN SO CAU (co Lan chot 18/09/2026): "bai 1" co the la cau 1
+# cua de, cung co the la bai 1 trong sach. Doan sai thi giang nham cau -
+# te hon nhieu so voi viec bat hoc sinh bam them mot nut. Nhan ra y dinh
+# thi MO BANG CHON CAU, de chinh em ay chi dung cau minh can.
+
+_TU_HOI_BAI = (
+    r"kh[oô]ng hi[eể]u|ch[uư]a hi[eể]u|kh[oô]ng bi[eế]t l[aà]m|kh[oô]ng l[aà]m [dđ][uư][oơ]?[cợ]"
+    r"|gi[aả]ng( l[aạ]i)?|gi[aả]i th[ií]ch|h[uư][oơ]?[nớ]ng d[aẫ]n|ch[ỉi] gi[uú]p|ch[ỉi] c[aá]ch"
+    r"|gi[aả]i (gi[uú]p|h[oộ]|d[uù]m|gi[uù]m)|l[aà]m sao ra|v[iì] sao (l[aạ]i )?ra|t[aạ]i sao"
+    r"|h[oỏ]i b[aà]i|sai [oở] [dđ][aâ]u"
+)
+# "huong dan su dung", "cach dung he thong"... la Rule 5 (help), khong phai
+# hoi bai - loai ra de khong cuop mat cua CHV_Fun.
+_TU_LOAI_TRU = r"s[uử] d[uụ]ng|d[uù]ng (web|h[eệ] th[oố]ng|trang)|c[aá]ch t[aạ]o [dđ][eề]|t[ií]nh n[aă]ng"
+
+_MAU_HOI_BAI = re.compile(_TU_HOI_BAI, re.IGNORECASE)
+_MAU_LOAI_TRU = re.compile(_TU_LOAI_TRU, re.IGNORECASE)
+
+
+def la_y_dinh_hoi_bai(message: str) -> bool:
+    """
+    True khi tin nhan NGHE NHU dang hoi bai / nho giang lai.
+    KHONG tra ve so cau: xem ghi chu o tren, co y khong doan.
+    Ham nay chi la mot nua dieu kien - nua con lai la hoi thoai PHAI co de
+    da nop bai (xem chat.py), neu khong thi van de CHV_Fun tra loi nhu cu.
+    """
+    if not message:
+        return False
+    van_ban = message.strip()
+    if _MAU_LOAI_TRU.search(van_ban):
+        return False
+    return bool(_MAU_HOI_BAI.search(van_ban))
+
+
+def co_de_da_nop_bai(user_id: str, conversation_id: str) -> bool:
+    """Hoi thoai nay da co de VA hoc sinh da nop bai chua. Nuot moi loi:
+    khong chac thi tra False de di duong cu (CHV_Fun), khong chan nham."""
+    try:
+        de = history_service.lay_de_gan_nhat(conversation_id)
+        if de is None:
+            return False
+        return bool(_cac_cau_da_lam(user_id, de["id"]))
+    except Exception as e:
+        print("LOI KIEM TRA de da nop bai:", e)
+        return False
 
 
 # ======================================================

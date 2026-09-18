@@ -457,3 +457,141 @@ def test_chua_co_de_thi_bao_loi_doc_duoc(monkeypatch):
 def test_de_gan_nhat_can_dang_nhap(client, monkeypatch):
     monkeypatch.setattr(R, "get_current_user", lambda request: None)
     assert client.get("/api/giasu/de-gan-nhat?conversation_id=c1").status_code == 401
+
+
+# ======================================================
+# NHAN DIEN Y DINH "HOI BAI" NGAY TRONG CHAT (v2.62)
+# ======================================================
+
+@pytest.mark.parametrize("cau", [
+    "tôi không hiểu bài 1",
+    "đề tôi vừa tạo đó. tôi cần hướng dẫn bài 1",   # cau that cua hoc sinh
+    "giảng lại câu 3 giúp mình",
+    "chưa hiểu câu 2",
+    "tại sao lại ra D vậy",
+    "em sai ở đâu",
+    "giải thích giúp mình câu 4",
+    "không biết làm câu này",
+    "chỉ giúp mình với",
+])
+def test_nhan_ra_y_dinh_hoi_bai(cau):
+    assert G.la_y_dinh_hoi_bai(cau) is True
+
+
+@pytest.mark.parametrize("cau", [
+    "hướng dẫn sử dụng web",          # Rule 5 (help), khong duoc cuop
+    "cách dùng hệ thống thế nào",
+    "cách tạo đề như thế nào",
+    "có những tính năng gì",
+    "tạo đề lớp 10 chương 1",
+    "cho tôi lời giải",
+    "giữa kỳ 1",
+    "",
+])
+def test_khong_nham_sang_y_dinh_khac(cau):
+    assert G.la_y_dinh_hoi_bai(cau) is False
+
+
+def test_co_de_da_nop_bai_false_khi_chua_co_de(monkeypatch):
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat", lambda cid: None)
+    assert G.co_de_da_nop_bai("u1", "c1") is False
+
+
+def test_co_de_da_nop_bai_false_khi_co_de_nhung_chua_nop(monkeypatch):
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat", lambda cid: {"id": "d1"})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: set())
+    assert G.co_de_da_nop_bai("u1", "c1") is False
+
+
+def test_co_de_da_nop_bai_true(monkeypatch):
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat", lambda cid: {"id": "d1"})
+    monkeypatch.setattr(G, "_cac_cau_da_lam", lambda uid, did: {1, 2})
+    assert G.co_de_da_nop_bai("u1", "c1") is True
+
+
+def test_loi_doc_supabase_thi_di_duong_cu_chu_khong_vo(monkeypatch):
+    """Khong chac thi tra False -> van de CHV_Fun tra loi, khong chan nham."""
+    def _hong(cid):
+        raise RuntimeError("mat ket noi")
+    monkeypatch.setattr(G.history_service, "lay_de_gan_nhat", _hong)
+    assert G.co_de_da_nop_bai("u1", "c1") is False
+
+
+# --- Tang API: /chat phai mo bang thay vi goi n8n ---
+
+def test_chat_mo_bang_gia_su_va_KHONG_goi_n8n(client, monkeypatch):
+    from app.routers import chat as C
+
+    da_goi_n8n = []
+    monkeypatch.setattr(C, "get_current_user", lambda request: _UserGia())
+    monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
+    monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
+    monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: True)
+    monkeypatch.setattr(C, "_goi_n8n", lambda *a, **kw: da_goi_n8n.append(a))
+
+    r = client.post("/chat", data={
+        "message": "tôi không hiểu bài 1",
+        "conversation_id": "c1",
+    })
+    assert r.status_code == 200
+    body = r.json()
+    assert body["success"] is True
+    assert body["data"]["type"] == "mo_bang_gia_su"
+    assert da_goi_n8n == []          # tiet kiem tron mot luot goi mo hinh
+
+
+def test_chat_van_goi_n8n_khi_hoi_thoai_chua_co_de(client, monkeypatch):
+    """Chua lam de nao ma go 'khong hieu bai 1' -> van de CHV_Fun tra loi."""
+    from app.routers import chat as C
+
+    da_goi_n8n = []
+    monkeypatch.setattr(C, "get_current_user", lambda request: _UserGia())
+    monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
+    monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
+    monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: False)
+
+    class _PhanHoiGia:
+        status_code = 200
+        headers = {"content-type": "application/json"}
+        text = '{"success": true, "message": "x"}'
+
+        def json(self):
+            return {"success": True, "message": "x", "data": None}
+
+    def _gia_n8n(*a, **kw):
+        da_goi_n8n.append(a)
+        return _PhanHoiGia()
+    monkeypatch.setattr(C, "_goi_n8n", _gia_n8n)
+
+    r = client.post("/chat", data={
+        "message": "tôi không hiểu bài 1",
+        "conversation_id": "c1",
+    })
+    assert r.status_code == 200
+    assert len(da_goi_n8n) == 1
+
+
+def test_chat_tao_de_van_di_duong_n8n(client, monkeypatch):
+    """Khong duoc chan nham yeu cau tao de."""
+    from app.routers import chat as C
+
+    da_goi_n8n = []
+    monkeypatch.setattr(C, "get_current_user", lambda request: _UserGia())
+    monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
+    monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
+    monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: True)
+
+    class _PhanHoiGia:
+        status_code = 200
+        headers = {"content-type": "application/json"}
+        text = "{}"
+
+        def json(self):
+            return {"success": True, "message": "x", "data": None}
+
+    monkeypatch.setattr(C, "_goi_n8n",
+                        lambda *a, **kw: da_goi_n8n.append(a) or _PhanHoiGia())
+
+    client.post("/chat", data={"message": "tạo đề lớp 10 chương 1",
+                               "conversation_id": "c1"})
+    assert len(da_goi_n8n) == 1
