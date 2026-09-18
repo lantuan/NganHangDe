@@ -633,6 +633,16 @@
         // chat.html truoc day khong can ham nay (chi hien van ban thuong +
         // de MathJax lo phan $...$). Loi giai chuan co \textbf{}, \\ ... nen
         // phai doi sang HTML truoc, giong het lam_bai.html.
+        // Cau tra loi cua AI la MARKDOWN, KHAC voi loi giai chuan (LaTeX
+        // tu Python). Hai loai noi dung, hai ham render khac nhau.
+        function renderMarkdownAI(raw) {
+            if (!raw) return "";
+            if (window.marked && window.marked.parse) {
+                try { return window.marked.parse(String(raw)); } catch (e) { /* roi xuong duoi */ }
+            }
+            return "<p>" + renderLatexText(raw).replace(/\n/g, "<br>") + "</p>";
+        }
+
         function renderLatexText(raw) {
             if (!raw) return "";
             let t = String(raw);
@@ -740,7 +750,9 @@
                 if (!data.success) {
                     html += "<p>" + (data.message || "Chưa hỏi được, bạn thử lại nhé.") + "</p>";
                 } else if (d.tra_loi) {
-                    html += "<p>" + renderLatexText(d.tra_loi) + "</p>";
+                    // Cau tra loi cua AI la MARKDOWN - phai qua marked, khong
+                    // thi hien ra chu tho **dam** va khong xuong dong.
+                    html += renderMarkdownAI(d.tra_loi);
                 } else if (d.che_do === "khong_ai") {
                     html += "<p>Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn bên dưới nhé.</p>";
                 }

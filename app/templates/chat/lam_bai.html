@@ -20,6 +20,10 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
+    <!-- marked: cau tra loi cua AI la MARKDOWN (**dam**, * dau dong).
+         Truoc day trang nay khong co marked nen hien ra chu tho, khong xuong dong. -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <style>
         :root {
             --color-primary: #2563eb;
@@ -248,6 +252,18 @@ function xuLyDanhSach(text, theBao, cheDo) {
     });
 }
 
+// Cau tra loi cua AI la MARKDOWN, KHAC voi loi giai chuan (LaTeX tu
+// Python). Hai loai noi dung, hai ham render khac nhau - dung nham thi
+// hoac hien ra chu tho (**dam**), hoac mat dinh dang.
+function renderMarkdownAI(raw) {
+    if (!raw) return "";
+    if (window.marked && window.marked.parse) {
+        try { return window.marked.parse(String(raw)); } catch (e) { /* roi xuong duoi */ }
+    }
+    // marked chua tai xong/chan mang: it nhat cung phai xuong dong duoc.
+    return renderLatexText(raw).replace(/\n/g, "<br>");
+}
+
 function renderLatexText(raw) {
     if (!raw) return "";
     let s = String(raw);
@@ -424,7 +440,8 @@ function themBongGiaSu(soThuTu, lop, noiDung) {
     if (!hoiThoai) return null;
     const bong = document.createElement('div');
     bong.className = 'gia-su-bong ' + lop;
-    bong.innerHTML = renderLatexText(noiDung);
+    // Bong cua AI la Markdown; bong cua hoc sinh la van ban thuong.
+    bong.innerHTML = (lop === 'ai') ? renderMarkdownAI(noiDung) : renderLatexText(noiDung);
     hoiThoai.appendChild(bong);
     if (window.MathJax) { MathJax.typesetPromise([bong]); }
     return bong;
