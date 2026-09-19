@@ -1,0 +1,1515 @@
+\section{NGUYÊN HÀM}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa} Cho hàm số $f$ xác định trên $K$ ($K$ là một khoảng, một đoạn hay một nửa khoảng). Hàm số $F$ được gọi là một nguyên hàm của $f$ trên $K$ nếu 
+\boxmini{$F'(x)=f(x),\,\forall x \in K.$}
+\begin{luuy}
+	\ind{Ví dụ:}
+		\begin{listEX}[1]
+			\item [$\bullet$] $F(x)=\dfrac{x^3}{3}$ là một nguyên hàm của $f(x)=x^2$ vì $\left( \dfrac{x^3}{3}\right)'=x^2,\,\forall x \in \mathbb{R}.$
+			\item [$\bullet$] $F(x)=\sin x$ là một nguyên hàm của $f(x)=\cos x$ vì $\left(\sin x \right)'=\cos x,\,\forall x \in \mathbb{R}.$
+			\item [$\bullet$] $F(x)=\mathrm{e}^x$ là một nguyên hàm của $f(x)=\mathrm{e}^x$ vì $\left(\mathrm{e}^x \right)'=\mathrm{e}^x,\,\forall x \in \mathbb{R}.$
+		\end{listEX}
+\end{luuy}
+\begin{note}
+	\begin{itemize}
+		\item [\ding{172}] Họ các nguyên hàm của $f$ trên $K$, kí hiệu $\displaystyle\int f(x)\mathrm{\,d}x$. Nếu $F$ là một nguyên hàm của $f$ trên $K$ thì mọi nguyên hàm của $f$ đều có dạng $F(x)+C$, với $C \in \mathbb{R}$.Vậy	$\displaystyle\int f(x)\mathrm{\,d}x=F(x)+C.$
+		\item [\ding{173}] Nếu hàm số $G(x)$ là một nguyên hàm của $f(x)$ trên $K$ thì tồn tại một hằng số $C$ sao cho $G(x)=F(x)+C$ với mọi $x \in K$.
+	\end{itemize}
+\end{note}
+\subsubsection{Các tính chất}
+\begin{listEX}[2]
+	\item [\ding{172}] $\left(\displaystyle\int f(x)\mathrm{\,d}x \right)'=f(x)$.
+	\item [\ding{173}] $\displaystyle\int f'(x)\mathrm{\,d}x =f(x)+C$.
+	\item [\ding{174}] $ \displaystyle\int k \cdot f(x)\mathrm{\,d}x = k \cdot \displaystyle\int f(x)\mathrm{\,d}x$, với $k \ne 0$.
+	\item [\ding{175}] $ \displaystyle\int \big[f(x) \pm g(x)\big]\mathrm{\,d}x = \displaystyle\int f(x)\mathrm{\,d}x\pm \displaystyle\int g(x)\mathrm{\,d}x$.
+\end{listEX} 
+\subsubsection{Bảng công thức nguyên hàm của các hàm thường gặp}
+
+\begin{tikzpicture}[xscale=5,yscale=1,font=\footnotesize]
+	\begin{scope}[shift={(-.5,.5)}]
+		\fill[pink!10] (0,-1) rectangle (1,-11);
+		\fill[cyan!20] (0,0) rectangle (3.45,-1);
+		\draw [line width=0.7pt,myblue](0,0) grid (2,-11) rectangle (3.45,0) 
+		(1,-1)--(3.45,-1) (1,-2)--(3.45,-2)
+		(1,-3)--(3.45,-3) (0,-4)--(3.45,-4)
+		(1,-5)--(3.45,-5) (0,-6)--(3.45,-6)
+		(1,-7)--(3.45,-7) (0,-8)--(3.45,-8)
+		(1,-9)--(3.45,-9) (1,-10)--(3.45,-10)
+		;
+	\end{scope}
+	\path
+	(0,0) node{\text{\textbf{Đạo hàm}}}  
+	(-0.4,-1) node[right]{$(x)'=1$}
+	(-0.4,-2) node[right]{$\left({x^{\alpha +1}}\right)^{'}=\left({\alpha +1}\right)x^\alpha $}    
+	(-0.4,-3) node[right]{$\left({\dfrac{1}{x}}\right)^{'}=\dfrac{-1}{x^2}$}
+	(-0.4,-4) node[right]{$\left({a^x}\right)^{'}=a^x.\ln a$}    
+	(-0.4,-5) node[right]{$\left({e^x}\right)^{'}=e^x$}
+	(-0.4,-6) node[right]{$\left({\ln x}\right)^{'}=\dfrac{1}{x}$}    
+	(-0.4,-7) node[right]{$\left({\sin x}\right)^{'}=\cos x$}
+	(-0.4,-8) node[right]{$\left({\cos x}\right)^{'}=-\sin x$}    
+	(-0.4,-9) node[right]{$\left({\tan x}\right)^{'}=\dfrac{1}{{\cos}^2x}$}
+	(-0.4,-10) node[right]{$\left({\cot x}\right)^{'}=-\dfrac{1}{{\sin}^2x}$}
+	
+	(1,0) node{\text{\textbf{Nguyên hàm}}}    
+	(0.55,-1) node[right]{\ding{172}\,\,$\displaystyle\int 1 \text{d}x=x+C$}
+	(0.55,-2) node[right]{\ding{173}\,\,$\displaystyle\int x^\alpha\;\text{d}x=\dfrac{x^{\alpha +1}}{\alpha+1}+ C$,\,\,\,$\alpha \ne -1$}    							
+	(0.55,-3) node[right]{\ding{174}\,\,$\displaystyle \int \dfrac{1}{x^2} \;\mathrm{d}x=-\dfrac{1}{x}+C$}
+	(0.55,-4) node[right]{\ding{175}\,\,$\displaystyle\int{{a^x\text{d}x=\dfrac{a^x}{\ln a}+C}}$}    
+	(0.55,-5) node[right]{\ding{176}\,\,$\displaystyle\int{{e^x\text{d}x}}=e^x+C$}
+	(0.55,-6) node[right]{\ding{177}\,\,$\displaystyle\int{{\dfrac{1}{x}\text{d}x}}=\ln \left|x\right|+C$}    
+	(0.55,-7) node[right]{\ding{178}\,\,$\displaystyle\int{{\cos x\,\text{d}x}}=\sin x+C$}
+	(0.55,-8) node[right]{\ding{179}\,\,$\displaystyle\int{{\sin x\,\text{d}x}}=-\cos x+C$}    
+	(0.55,-9) node[right]{\ding{180}\,\,$\displaystyle\int{{\dfrac{1}{{\cos}^2x}\text{d}x}}=\tan x+C$}
+	(0.55,-10) node[right]{\ding{181}\,\, $\displaystyle\int{{\dfrac{1}{{\sin}^2x}\text{d}x}}=-\cot x+C$}
+	
+	(2.2,0) node{\text{\textbf{Nguyên hàm mở rộng (đọc thêm)}}}    
+	(1.6,-1) node[right]{$\displaystyle\int k \text{d}x=k\cdot x+C$}
+	(1.6,-2) node[right]{$\displaystyle\int{{{\left({ax+b}\right)}^\alpha \text{d}x}}=\dfrac{1}{a}\cdot \dfrac{{\left({ax+b}\right)}^{\alpha +1}}{\alpha +1}+C$,\,\,\,$\alpha \ne -1$}    
+	(1.6,-3) node[right]{$\displaystyle\int{{\dfrac{\text{d}x}{{\left({ax+b}\right)}^2}=-\dfrac{1}{a}.\dfrac{1}{ax+b}+C}}$}
+	(1.6,-4) node[right]{$\displaystyle\int{{a^{mx+n}\text{d}x}}=\dfrac{1}{m}\cdot \dfrac{a^{mx+n}}{\ln a}+C$}    
+	(1.6,-5) node[right]{$\displaystyle\int{{e^{ax+b}\text{d}x}}=\dfrac{1}{a}e^{ax+b}+C$}
+	(1.6,-6) node[right]{$\displaystyle\int{{\dfrac{1}{ax+b}\text{d}x}}=\dfrac{1}{a}.\ln \left|{ax+b}\right|+C$}    
+	(1.6,-7) node[right]{$\displaystyle\int{{\cos \left({ax+b}\right)\,\text{d}x}}=\dfrac{1}{a}\cdot \sin \left({ax+b}\right)+C$}
+	(1.6,-8) node[right]{$\displaystyle\int{{\sin \left({ax+b}\right)\,\text{d}x}}=-\dfrac{1}{a}\cos \left({ax+b}\right)+C$}    
+	(1.6,-9) node[right]{$\displaystyle\int{{\dfrac{1}{{\cos}^2\left({ax+b}\right)}\text{d}x}}=\dfrac{1}{a}\tan \left({ax+b}\right)+C$}
+	(1.6,-10) node[right]{$\displaystyle\int{{\dfrac{1}{{\sin}^2\left({ax+b}\right)}\text{d}x}}=-\dfrac{1}{a}\cot \left({ax+b}\right)+C$}
+	;
+\end{tikzpicture}
+
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Nguyên hàm của hàm số lũy thừa}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Các công thức thường dùng:}
+		\begin{listEX}[2]
+			\item [\ding{172}] $\displaystyle\int k \text{d}x=k \cdot x+C$
+			\item [\ding{173}] Với $\alpha \ne -1$: $\displaystyle\int x^\alpha\;\text{d}x=\dfrac{x^{\alpha +1}}{\alpha+1}+ C$.
+			\item [\ding{174}] Với $\alpha = -1$: $\displaystyle\int{{\dfrac{1}{x}\text{d}x}}=\ln \left|x\right|+C$.
+			\item [\ding{175}] $\displaystyle \int \dfrac{1}{x^2} \;\mathrm{d}x=-\dfrac{1}{x}+C$.
+		\end{listEX}
+		\item \indam{Chú ý các công thức biến đổi lũy thừa:}
+		\begin{enumEX}[$\bullet$]{2}
+			\item $\dfrac{1}{x^n}=x^{-n}$.
+			\item $x^m \cdot x^n = x^{m+n}$.
+			\item $\dfrac{x^m}{x^n}=x^{m-n}$.
+			\item $\sqrt{x}=x^{\frac{1}{2}}$;\quad $\sqrt[n]{x^m}=x^{\frac{m}{n}}$.
+		\end{enumEX}
+	\end{enumerate}
+\end{dang}
+\setcounter{vd}{0}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\begin{vd} Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{tasks}(3)
+		\task $f(x)=x^2$.
+		\task $f(x)=x^4+x^{-3}$.
+		\task $f(x)=x^2+\dfrac{3}{x}$.
+		\task $f(x)=\dfrac{1}{x}-\dfrac{1}{x^2}$.
+		\task $f(x) = x^2 + \dfrac{3}{x} - 2\sqrt{x}$. 
+		\task $f(x)=3\sqrt{x}+\dfrac{1}{\sqrt[3]{x}}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Ta có $\displaystyle\int x^2\mathrm{\,d}x=\dfrac{x^3}{3}+C$.
+			\item Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int (x^4+x^{-3})\mathrm{\,d}x=\dfrac{1}{5}x^5-\dfrac{1}{2}x^{-2}+C$.
+			\item Ta có $\displaystyle\int \left(x^2+\dfrac{3}{x}\right)\mathrm{\,d}x=\dfrac{x^3}{3}+3\ln|x|+C$.
+			\item Ta có $\displaystyle\int \left(\dfrac{1}{x}-\dfrac{1}{x^2}\right)\mathrm{\,d}x=\ln \left|x\right| + \dfrac{1}{x}+C$.
+			\item Ta có $\displaystyle \int \left(x^2 + \dfrac{3}{x} - 2\sqrt{x}\right) \mathrm{d}x = \dfrac{x^3}{3} + 3\ln |x| - \dfrac{4}{3}\sqrt{x^3} + C$.
+			\item Ta có $\displaystyle\int\left (3\sqrt{x}+\dfrac{1}{\sqrt[3]{x}}\right )\mathrm{\,d}x = \int \left( 3x^{\frac{1}{2}} + x^{\frac{-1}{3}}\right)  \mathrm{\,d}x = \dfrac{6}{3}x^{3/2} + \dfrac{3}{2}x^{2/3} + C = 2x^{3/2} + \dfrac{3}{2}x^{2/3} + C.$
+		\end{enumerate}
+	}
+\end{vd}\dongcham{11}
+
+\begin{vd} Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{tasks}(3)
+		\task $f(x)=2x(1+3x^3)$.
+		\task $f(x)=(3x-2)^2$.
+		\task $f(x)=\dfrac{2x^4+3}{x^2}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Ta có $ \displaystyle\int 2x(1+3x^{3})\mathrm{\, d}x=\displaystyle\int (2x+6x^{4})\mathrm{\, d}x=x^2\left(1+\dfrac{6x^3}{5}\right)+C $.
+			\item Ta có $ \displaystyle\int (3x-2)^2\mathrm{\, d}x=\displaystyle\int (9x^2-12x+4)\mathrm{\, d}x=3x^3-6x^2+4x+C $.
+			\item Ta có $f(x)=\dfrac{2x^4+3}{x^2}=2x^2+3x^{-2},\Rightarrow\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int\left(2x^2+3x^{-2}\right)\mathrm{\,d}x=\dfrac{2x^3}{3}-\dfrac{3}{x}+C$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd} Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{tasks}(3)
+		\task $f(x)=\dfrac{1}{2x-1}$.
+		\task $f(x)=\dfrac{2}{4x-3}$.
+		\task $f(x)=\dfrac{6x + 2}{3x - 1}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Ta có $F(x)=\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int\dfrac{1}{2x-1}\mathrm{\,d}x=\dfrac{1}{2}\ln|2x-1|+C$.
+			\item  Ta có $\displaystyle\int \dfrac{2}{4x-3} \mathrm{\,d}x=\displaystyle\int \dfrac{1}{2x-\dfrac{3}{2}} \mathrm{\,d}x=\dfrac{1}{2}\ln\left|2x-\dfrac{3}{2}\right|+C$.
+			\item Ta có $\displaystyle \int \dfrac{6x + 2}{3x - 1} \mathrm{\, d} x = \int \left ( 2 + \dfrac{4}{3x-1} \right ) \mathrm{\, d}x = 2x + \dfrac{4}{3} \ln |3x - 1| + C$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Biết $F(x)$ là một nguyên hàm của hàm số $f(x)=\dfrac{1+2x^2}{x}$ thỏa mãn $F(-1)=3$. Tìm $F(x)$.
+	\loigiai
+	{
+		Ta có $F(x)=\displaystyle\int \dfrac{1+2x^2}{x}\mathrm{\,d}x=\displaystyle\int \left(\dfrac{1}{x}+2x\right)\mathrm{\,d}x=\ln|x|+x^2+C$.\\
+		Mà $F(-1)=3\Leftrightarrow \ln|-1|+(-1)^2+C=3\Leftrightarrow C=2$.\\
+		Vậy $F(x)=\ln|x|+x^2+2$.
+	}
+\end{vd}\dongcham{8}
+
+\begin{vd}
+	Biết $F(x)$ là một nguyên hàm của hàm số $f(x)=\dfrac{1}{2x+1}$ và $F(0)=2$. Tính $F(\mathrm{e})$.
+	\loigiai{
+		Ta có $F(x)=\displaystyle\int\limits f(x)\mathrm{\,d}x=\dfrac{1}{2}\ln|2x+1|+C$.\\
+		Do $F(0)=2$ suy ra $\dfrac{1}{2}\ln |2.0+1|+C=2\Leftrightarrow C=2$.\\
+		Vậy $F(\mathrm{e})=\dfrac{1}{2}\ln(2\mathrm{e}+1)+2=\ln\sqrt{2\mathrm{e}+1}+2$.
+	}
+\end{vd}\dongcham{9}
+
+\begin{vd}
+	Cho hàm số $f(x)=\left\{\begin{array}{ll}2 x-1 & \text { khi } x \geq 1 \\ 3 x^2-2 & \text { khi } x<1\end{array}\right.$. Giả sử $F$ là nguyên hàm của $f$ trên $\mathbb{R}$ thỏa mãn $F(0)=2$. Tính $F(-1)+2 F(2)$.
+	\loigiai{Ta có:
+	$$
+	\begin{aligned}
+		& \int(2 x-1) \mathrm{d} x=x^2-x+C_1 \\
+		& \int\left(3 x^2-2\right) \mathrm{d} x=x^3-2 x+C_2
+	\end{aligned}
+	$$
+	Suy ra $F(x)=\displaystyle\int f(x) \mathrm{d} x= \begin{cases}x^2-x+C_1 & \text { khi } x \geq 1 \\ x^3-2 x+C_2 & \text { khi } x<1\end{cases}$.\\
+	Mà ta có $F(0)=2 \Rightarrow C_2=2$.\\
+	Mặt khác hàm số $F$ là nguyên hàm của $f$ trên $\mathbb{R}$ nên $y=F(x)$ liên tục tại $x=1$, suy ra $$\lim _{x \rightarrow 1^{+}} F(x)=\lim _{x \rightarrow 1^{-}} F(x) \Rightarrow C_1=1.$$
+	Khi đó, ta có $F(x)=\left\{\begin{array}{ll}x^2-x+1 & \text { khi } x \geq 1 \\ x^3-2 x+2 & \text { khi } x<1\end{array}\right.$ suy ra $\left\{\begin{array}{l}F(2)=3 \\ F(-1)=3\end{array}\right.$.
+	Vậy $F(-1)+2 F(2)=9$.}
+\end{vd}\dongcham{15}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\setcounter{ex}{0}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Học sinh trả lời từ câu 1 đến câu 16. Mỗi câu hỏi học sinh chỉ chọn một phương án.}
+\Opensolutionfile{ans}[ans/2D4-B1-d1-1]
+\begin{ex}
+	Cho hàm số $y=F(x)$ là một nguyên hàm của hàm số $y=x^2$. Tính $F'(25)$.
+	\choice
+	{$ 25 $}
+	{$125 $}
+	{$ 5 $}
+	{\True $ 625 $}
+	\loigiai{
+		Ta có $F(x)$ là một nguyên hàm của hàm số $y=x^2$ nên ta có $F'(x)=x^2$, $\forall x\in\mathbb{R}$.\\
+		Do đó, $F'(25)=25^2=625$.
+	}
+\end{ex}\cham{3}
+
+\begin{ex}
+	Tìm nguyên hàm của hàm số $f(x)= x^{\sqrt{5}}$.
+	\choice
+	{$\displaystyle \int f(x) \mathrm{d} x = \dfrac{1}{\sqrt{5}-1}x^{\sqrt{5}-1} + C$}
+	{$\displaystyle \int f(x) \mathrm{d} x = x^{\sqrt{5}+1}+C$}
+	{$\displaystyle \int f(x) \mathrm{d} x = \sqrt{5}x^{\sqrt{5}-1}+ C$}
+	{\True $\displaystyle \int f(x) \mathrm{d} x = \dfrac{1}{\sqrt{5}+1}x^{\sqrt{5}+1}+C$}
+	\loigiai{
+		Áp dụng công thức nguyên hàm cơ bản suy ra $\displaystyle \int f(x) \mathrm{d} x = \dfrac{1}{\sqrt{5}+1}x^{\sqrt{5}+1}+C$.
+	}
+\end{ex}\cham{3}
+
+\begin{ex}%[56-De104-THQG2019-BGD]%[Phan Minh Tâm, dự án tex đề THQG 2019,Bộ giáo dục]%[2D3Y1-1]%Câu 8
+	Họ tất cả nguyên hàm của hàm số $f(x)=2x+4$ là
+	\choice
+	{$2x^2+4x+C$}
+	{\True $x^2+4x+C$}
+	{$x^2+C$}
+	{$2x^2+C$}
+	\loigiai{
+		Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int (2x+4)\mathrm{\,d}x=x^2+4x+C$.}
+	
+\end{ex}\cham{3}
+
+\begin{ex}
+	Họ nguyên hàm của hàm số $f(x)=4x^{3}-2024$ là
+	\choice
+	{\True $x^{4}-2024x+C$}
+	{$4x^{3}-2024x+C$}
+	{$12x^{3}+C$}
+	{$x^{4}+C$}
+	\loigiai{
+		Ta có $\displaystyle\int (4x^{3}-2024)\mathrm{d}x=x^{4}-2024x+C$.
+	}
+\end{ex}\cham{3}
+
+
+\begin{ex}
+	Tìm nguyên hàm của hàm số $f(x)=x^2+\dfrac{2}{x^2}$.
+	\choice
+	{$\dfrac{x^3}{3}-\dfrac{1}{x}+C$}
+	{\True $\dfrac{x^3}{3}-\dfrac{2}{x}+C$}
+	{$\dfrac{x^3}{3}+\dfrac{1}{x}+C$}
+	{$\dfrac{x^3}{3}+\dfrac{2}{x}+C$}
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			\displaystyle\int f(x) \mathrm{\,d}x&=&\displaystyle\int \left(x^2+\dfrac{2}{x^2} \right)  \mathrm{\,d}x\\
+			&=&\dfrac{x^3}{3}-\dfrac{2}{x}+C.
+		\end{eqnarray*}
+	}
+\end{ex}\cham{3}
+
+\begin{ex}
+	Biết $\displaystyle\int \left(\dfrac{1}{2x}+x^5\right)\mathrm{\,d}x=a\ln \left|x\right|+bx^6+C$ với $\left(a,b\in \mathbb{Q},C\in \mathbb{R}\right)$. Tính $a^2+b$.
+	\choice
+	{\True $\dfrac{5}{12}$}
+	{$9$}
+	{$\dfrac{7}{13}$}
+	{$\dfrac{7}{6}$}
+	\loigiai{
+		Ta có $\displaystyle\int \left(\dfrac{1}{2x}+x^5\right)\mathrm{\,d}x=\dfrac{1}{2}\ln \left|x\right|+\dfrac{1}{6}x^6+C$.\\
+		Vậy $a=\dfrac{1}{2}$, $b=\dfrac{1}{6}\Rightarrow a^2+b=\dfrac{1}{4}+\dfrac{1}{6}=\dfrac{5}{12}$.
+	}
+\end{ex}\cham{3}
+
+\begin{ex}
+	Họ nguyên hàm của hàm số $f(x)=(x+1)(x+2)$ là
+	\choice
+	{$2x+3+C$}
+	{$\dfrac{x^3}{3}-\dfrac{2}{3}x^2+2x+C$}
+	{$\dfrac{x^3}{3}+\dfrac{2}{3}x^2+2x+C$}
+	{\True $\dfrac{x^3}{3}+\dfrac{3}{2}x^2+2x+C$}
+	\loigiai{
+		Ta có
+		$\displaystyle\int\limits f(x)\mathrm{\,d}x=\displaystyle\int\limits (x+1)(x+2)\mathrm{\,d}x=\displaystyle\int\limits (x^2+3x+2)\mathrm{\,d}x=\dfrac{x^3}{3}+\dfrac{3}{2}x^2+2x+C$.
+	}
+\end{ex}\cham{5}
+
+\begin{ex}
+	Tìm họ nguyên hàm của hàm số $f(x)=\dfrac{5+2x^4}{x^2}$.
+	\choice
+	{$\displaystyle\int f(x)\mathrm{\,d}x=\dfrac{2x^3}{3}+\dfrac{5}{x}+C$}
+	{\True $\displaystyle\int f(x)\mathrm{\,d}x=\dfrac{2x^3}{3}-\dfrac{5}{x}+C$}
+	{$\displaystyle\int f(x)\mathrm{\,d}x=\dfrac{2x^3}{3}+5\ln x^2+C$}
+	{$\displaystyle\int f(x)\mathrm{\,d}x=2x^3-\dfrac{5}{x}+C$}
+	\loigiai{
+		Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\int \left(2x^2+\dfrac{5}{x^2}\right) \mathrm{\,d}x=\dfrac{2x^3}{3}-\dfrac{5}{x}+C$.}
+\end{ex}\cham{5}
+
+\begin{ex}
+	Tìm một nguyên hàm $F(x)$ của hàm số $f(x)=2x+3\sqrt{x}$ thoả mãn $F(1)=0$.
+	\choice
+	{$F(x)=x^2+3\sqrt{x^3}$}
+	{$F(x)=x^2+2\sqrt[3]{x^2}$}
+	{$F(x)=x^2+3\sqrt[3]{x^2}-4$}
+	{\True$F(x)=x^2+2\sqrt{x^3}-3$}
+	\loigiai{
+		Ta có $$\displaystyle\int (2x+3\sqrt{x}) \mathrm{\,d}x=x^2+2\sqrt{x^3}+C.$$\\
+		$F(1)=0 \Rightarrow C=-3$.\\
+		Vậy $F(x)=x^2+2\sqrt{x^3}-3$.
+	}
+\end{ex}\cham{5}
+
+\begin{ex}
+	Gọi $F\left( x \right)$ là một nguyên hàm của hàm số $f\left( x \right)={{\left( 2x-3 \right)}^2}$ thỏa $F\left( 0 \right)=\dfrac{1}{3}$. Tính giá trị của biểu thức $T={{\log }_2}\left[ 3F\left( 1 \right)-2F\left( 2 \right) \right]$.
+	\choice
+	{$T=10$}
+	{$T=4$}
+	{\True $T=2$}
+	{$T=-4$}
+	\loigiai{
+		$F\left( x \right)=\displaystyle\int{{{\left( 2x-3 \right)}^2}\textrm{ d}x}$$=\dfrac{1}{2}\displaystyle\int{{{\left( 2x-3 \right)}^2}d\left( 2x-3 \right)}$$=\dfrac{1}{2}.\dfrac{{{\left( 2x-3 \right)}^3}}{3}+C$. \\
+		Ta có $F\left( 0 \right)=\dfrac{1}{3} \Leftrightarrow \dfrac{1}{2}.\dfrac{{{\left( 0-3 \right)}^3}}{3}+C=\dfrac{1}{3} \Leftrightarrow C=\dfrac{29}{6}$. \\
+		Do đó $F\left( x \right)=\dfrac{1}{2}.\dfrac{{{\left( 2x-3 \right)}^3}}{3}+\dfrac{29}{6}$ nên $F\left( 1 \right)=\dfrac{1}{2}.\dfrac{-1}{3}+\dfrac{29}{6}=\dfrac{14}{3}$; $F\left( 2 \right)=\dfrac{1}{2}.\dfrac{1}{3}+\dfrac{29}{6}=5$.\\
+		$\Rightarrow T={{\log }_2}\left[ 3F\left( 1 \right)-2F\left( 2 \right) \right]$$={{\log }_2}\left( 3.\dfrac{14}{3}-2.5 \right)={{\log }_2}4=2$.}
+\end{ex}\cham{8}
+
+\begin{ex}%[Thi thử, Kinh Môn - Hải Dương, 2019]%[Lê Vũ Hải, 12EX8]%[2D3B1-1]%
+	Cho $F(x)$ là một nguyên hàm của $f(x)=\dfrac{2}{x+2}$. Biết $F(-1)=1$, khi đó $F(2)$ bằng
+	\choice
+	{$ 2\ln 3 +2$}
+	{\True $ 4\ln 2 +1 $}
+	{$ \ln 8 +1 $}
+	{$ 2\ln 4 $}
+	\loigiai{
+		Ta có $F(x) = \displaystyle\int f(x)\mathrm{\,d}x = \displaystyle \int \dfrac{2}{x+2} \mathrm{\,d}x = 2\ln \left|x+2\right| +C$.\\
+		Do $F(-1)=1$ nên $2\ln \left|-1+2\right|+C=1 \Leftrightarrow C =1$.\\
+		Vậy $F(x)= 2\ln \left|x+2\right|+1$ $\Rightarrow F(2) = 2\ln 4 +1 = 4\ln 2 +1$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}%[2D3B1-1]%
+	Cho $ F(x)$ là một nguyên hàm của hàm số $ f(x)=\dfrac{1}{2x-3}$; biết $ F(2)=1 $. Tính $ F(3)$.
+	\haicot
+	{$F(3)=2\ln 3+1$}
+	{\True $F(3)=\dfrac{1}{2}\ln 3+1$}
+	{$F(3)=\ln 3+1$}
+	{$F(3)=\dfrac{1}{2}\ln 3-1$}
+	\loigiai{
+		Ta có
+		\[F(x)=\displaystyle\int\limits f(x)\mathrm{ \,d}x=\displaystyle\int\limits\dfrac{1}{2x-3}\mathrm{ \,d}x=\dfrac{1}{2}\ln |2x-3|+C.\]
+		Vì $F(2)=1$ nên $ C=1 $. Do đó $ F(x)=\dfrac{1}{2}\ln |2x-3|+1 $.\\
+		Vậy $ F(3)=\dfrac{1}{2}\ln 3+1 $.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Một nguyên hàm của hàm số $f(x)=x^3+2x$ có dạng $F(x)=ax^4+bx^2$. Tính $T=4a+b$.
+	\choice
+	{$T=0$}
+	{$T=1$}
+	{\True $T=2$}
+	{$T=3$}
+	\loigiai{
+		$F(x)=ax^4+bx^2$ là nguyên hàm của hàm số $f(x)=x^3+2x$ nên
+		\begin{eqnarray*}
+			F'(x)=f(x),\forall x\in\mathbb{R} &\Leftrightarrow & 4ax^3+2bx=x^3+2x ,\forall x\in\mathbb{R}\\
+			&\Leftrightarrow & \heva{&4a=1\\&2b=2}\\
+			&\Leftrightarrow & \heva{&a=\dfrac{1}{4}\\&b=1.}
+		\end{eqnarray*}
+		Do đó $T=4a+b=4\cdot\dfrac{1}{4}+1=2$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Với giá trị thực nào của tham số $m$ để hàm số $F(x)=m x^3+(3m+2)x^2-4x+3$ là một nguyên hàm của hàm số $f(x)=3x^2+10x-4$?
+	\choice
+	{$m=0$}
+	{\True $m=1$}
+	{$m=-1$}
+	{$m=2$}
+	\loigiai{
+		Vì $F(x)$ là một nguyên hàm của hàm số $f(x)$ nên ta có
+		\[F'(x)=f(x)\Leftrightarrow 3mx^2+2(3m+2)x-4=3x^2+10x-4\Leftrightarrow \heva{& 3m=3 \\ & 2(3m+2)=10}\Leftrightarrow m=1.\]
+	}
+\end{ex}\cham{4}
+
+\begin{ex}%[Đề chính thức THPTQG 2020 - Mã đề 103]%[Ninh Tiến Nam, dự án 12EX-THPTQG-2020]%[2D3K1-1]%40
+	Cho hàm số $f(x)=\heva{&2x+3\;&\text{khi}&\ x\ge 1\\&3x^2+2\; &\text{khi}&\ x<1}$. Giả sử $F$ là nguyên hàm của $f$ trên $\mathbb{R}$ thỏa mãn $F(0)=2$. Giá  trị $F(-1)+2F(2)$ bằng
+	\choice
+	{$23$}
+	{$11$}
+	{$10$}
+	{\True $21$}
+	\loigiai{
+		Do 
+		$F$ là nguyên hàm của $f$ trên $\mathbb{R}$ nên
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			F(x)=\heva{&F_1(x)=\displaystyle\int \left( 2x+3\right)\mathrm{\,d}x=x^2+3x+C_1 \;&\text{khi}&\ x\ge 1\\&F_2(x)=\displaystyle\int\left( 3x^2+2\right) \mathrm{\,d}x=x^3+2x+C_2\; &\text{khi}&\ x<1.}
+		\end{eqnarray*}
+		Theo bài, ta có $F(x)$ có đạo hàm trên $\mathbb{R}$ nên $F(x)$ liên tục trên đó và $F(0)=2$. Điều này tương đương với 
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			\heva{&F_1(1)=F_2(1)\\&F_2(0)=2}\Leftrightarrow \heva{&4+C_1=3+C_2\\&C_2=2}\Leftrightarrow \heva{&C_1=1\\&C_2=2.}
+		\end{eqnarray*}
+		Do đó, $F_1(x)=x^2+3x+1$, $F_2(x)=x^3+2x+2$, suy ra $F(-1)=F_2(-1)=-1$, $F(2)=F_1(2)=11$.\\Vậy \[F(-1)+2F(2)=-1+2\cdot 11=21.\]
+	}%<MyLT3>
+\end{ex}\cham{6}
+
+\begin{ex}%[Đề TN THPT 2021-Lần 1-Mã đề 101]%[Đức Nguyễn]%[2D3K1-1]
+	Cho hàm số $f(x)=\heva{&2x+5 \quad& \text{ khi } x \geq 1\\ &3x^2+4 \quad& \text{ khi } x<1}$. Giả sử $F$ là nguyên hàm của $f$ trên $\mathbb{R}$ thỏa mãn $F(0)=2$. Giá trị của $F(-1)+2F(2)$ bằng
+	\choice
+	{\True $27$}
+	{$29$}
+	{$12$}
+	{$33$}
+	\loigiai{Theo giả thiết $F$ là một nguyên hàm của $f(x)$ trên $\mathbb{R}$ nên ta có
+		$$f(x)=\heva{&2x+5 \quad& \text{ khi } x \geq 1\\ &3x^2+4 \quad&\text{ khi } x<1}\Rightarrow F(x)=\heva{&x^2+5x+C_1 \quad&\text{ khi } x\geq 1\\ &x^3+4x+C_2 \quad&\text{ khi } x<1.}$$
+		Vì $F(0)=2\Rightarrow C_2=2$.\\
+		Mặt khác, $F(x)$ liên tục trên $\mathbb{R}$ nên liên tục tại $x=1$ nên ta có 
+		$$\lim \limits_{x \to 1^+} F(x)=\lim \limits_{x \to 1^-} F(x)\Leftrightarrow 6+C_1=5+C_2\Rightarrow C_1=C_2-1=1.$$
+		Vậy $F(x)=\heva{&x^2+5x+1 \quad& \text{ khi } x \geq 1\\ &x^3+4x+2 \quad& \text{ khi } x<1}\Rightarrow F(-1)+2F(2)=-3+2\cdot 15=27$.
+	}%<MyLT4>
+\end{ex}\cham{5}
+
+\Closesolutionfile{ans}
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Học sinh trả lời từ câu 17 đến câu 20. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D4-B1-d1-2]
+
+\begin{ex}
+	Cho $F(x)=\dfrac{x^3}{3}$ là một nguyên hàm của $\dfrac{f(x)}{x}$ và hàm số $f(x)$ liên tục trên $\mathbb{R}$.
+	\choiceTF
+	{$f(3)=3$}
+	{\True Giá trị của $F^{\prime}(1)=1$}
+	{Hàm số $y=f(x)$ có giá trị lớn nhất và giá trị nhỏ nhất trên $\mathbb{R}$}
+	{Nếu $G(x)$ là một nguyên hàm của hàm số $f(x)$ thỏa mãn $G(1)=1$ thì $G(2)$ bằng $3,75$}
+	\loigiai{
+	a) Khẳng định sai. Vì $F(x)$ là một nguyên hàm của $\dfrac{f(x)}{x}$ nên $F^{\prime}(x)=\dfrac{f(x)}{x}=x^2$ và $f(x)=x^3$. Suy ra $f(3)=3^3=27$.\\
+	b) Khẳng định đúng. $F^{\prime}(1)=1^2=1$.\\
+	c) Khẳng định sai. Hàm số $y=f(x)=x^3$ không có giá trị lớn nhất và giá trị nhỏ nhất trên $\mathbb{R}$.\\
+	d) Khẳng định sai. Ta có: $G(x)=\displaystyle\int f(x)dx=\displaystyle\int x^3 dx=\dfrac{x^4}{4}+C$.\\
+	Mà $G(1)=1$ nên $C=\dfrac{3}{4}$. Do đó $G(x)=\dfrac{x^4}{4}+\dfrac{3}{4}$. Vậy $G(2)=\dfrac{2^4}{4}+\dfrac{3}{4}=4,75$. 
+	}
+\end{ex}
+\cham{8}
+\begin{ex}
+	Cho hàm số $f(x)=\dfrac{1}{x+2}$.
+	\choiceTF
+	{\True $f^{\prime}(x)=-\dfrac{1}{(x+2)^2},\, \forall x \in \mathbb{R} \backslash\{-2\}$}
+	{\True Trên khoảng $(-2 ;+\infty)$, họ nguyên hàm của hàm số $f(x)$ là $\ln (x+2)+C$}
+	{\True Trên khoảng $(-\infty ;-2)$ một nguyên hàm của hàm số $f(x)$ là $G(x)=\ln (-x-2)-3$}
+	{\True Nếu $F(x)$ và $G(x)$ là hai nguyên hàm của hàm số $f(x)$ thì $y=F(x)-G(x)$ là hàm hằng}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định đúng. Ta có: $\displaystyle\int\dfrac{1}{x+2} dx=\ln|x+2|+C$.\\
+	Trên khoảng $(-2;+\infty)$ ta có $x+2>0$ nên $|x+2|=x+2$.\\
+	c) Khẳng định đúng. Trên khoảng $(-\infty;-2)$ ta có $x+2<0$ nên $|x+2|=-x-2$. Khi đó nguyên hàm của $f(x)$ là $\ln(-x-2)+C$. Vậy $G(x)=\ln (-x-2)-3$	cũng là một nguyên hàm.\\
+	d) Khẳng định đúng (khi xét trên một khoảng).
+	}
+\end{ex}
+\cham{8}
+\begin{ex}
+	Cho hàm số $f(x)=\left\{\begin{array}{l}2 x-1 \text { khi } x \geq 1 \\ 3 x^2-2 \text { khi } x<1\end{array}\right.$.
+	\choiceTF
+	{\True Hàm số $f(x)$ liên tục trên $\mathbb{R}$}
+	{Họ nguyên hàm của hàm số $f(x)$ trên $(1 ;+\infty)$ là $x^3-2 x+C$}
+	{Họ nguyên hàm của hàm số $f(x)$ trên $(-\infty ; 1)$ là $x^2-x+C$}
+	{Nếu $F(x)$ là một nguyên hàm của hàm số $f(x)$ trên $\mathbb{R}$ thì $F(2)-F(0)=5$}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định sai. Ta có: $\displaystyle\int(2x-1)dx=x^2-x+C$.\\
+	c) Khẳng định sai. Ta có: $\displaystyle\int(3x^2-2)dx=x^3-2x+C$.\\
+	d) Khẳng định sai. $F(x)=\left\{\begin{array}{l} x^2-x+C_1 \text { khi } x \geq 1 \\ x^3-2x+C_2 \text { khi } x<1\end{array}\right.$\\
+	Mà $\lim\limits_{x \rightarrow 1^{+}} F(x)=\lim\limits_{x \rightarrow 1^{-}} F(x)$ nên $1^2-1+C_1=1^3-2.1+C_2\Leftrightarrow C_1=-1+C_2\Leftrightarrow C_2=C_1+1$.\\
+	Khi đó: $F(2)-F(0)=2^2-2+C_1-(0^3-2.0+C_1+1)=2+C_1-C_1-1=1$.
+	}
+\end{ex}
+\cham{13}
+\begin{ex}
+	Cho hàm số $f(x)=\dfrac{1}{x^2}, \forall x \in \mathbb{R} \backslash\{0\}$. Gọi $F(x)$ là một nguyên hàm của $f(x)$ trên $(0 ;+\infty)$ và $G(x)$ là một nguyên hàm của hàm số $f(x)$ trên $(-\infty ; 0)$ sao cho $F(1)+G(-1)=1$.
+	\choiceTF
+	{\True $F^{\prime}(x)=f(x),\, \forall x>0$}
+	{\True Nếu $F(1)=1$ thì $F(0,5)=0$}
+	{\True $F(2)+G(-3)=\dfrac{5}{6}$}
+	{$F(x)=0$ có nghiệm duy nhất trên $(0 ;+\infty)$}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định đúng. Ta có: $\displaystyle\int\dfrac{1}{x^2}dx=-\dfrac{1}{x}+C$. Vì $F(1)=1$ nên $C=2$. Suy ra $F(0,5)=0$.\\
+	c) Khẳng định đúng. Vì $F(1)+G(-1)=1$ nên $-\dfrac{1}{1}+C_1-\dfrac{1}{-1}+C_2=1\Leftrightarrow C_1+C_2=1\Leftrightarrow C_2=1-C_1$.\\
+	Khi đó: $F(2)+G(-3)=-\dfrac{1}{2}+C_1-\dfrac{1}{-3}+1-C_1=\dfrac{5}{6}$.\\
+	d) Khẳng định sai.	
+	}
+\end{ex}
+\cham{13}
+\Closesolutionfile{ans}
+\begin{dang}{Nguyên hàm của hàm số lượng giác}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Công thức thường dùng:}
+		\begin{listEX}[2]
+			\item [\ding{172}] $\displaystyle\int{{\cos x\,\text{d}x}}=\sin x+C$
+			\item [\ding{173}] $\displaystyle\int{{\sin x\,\text{d}x}}=-\cos x+C$
+			\item [\ding{174}] $\displaystyle\int{{\dfrac{1}{{\cos}^2x}\text{d}x}}=\tan x+C$
+			\item [\ding{175}] $\displaystyle\int{{\dfrac{1}{{\sin}^2x}\text{d}x}}=-\cot x+C$
+		\end{listEX}
+		\item \indam{Các phép biến đổi lượng giác thường dùng:}
+	\end{enumerate}
+\begin{enumEX}[$\bullet$]{3}
+	\item $\sin^2x+\cos^2x=1$
+	\item $\tan^2x=\dfrac{1}{\cos^2x}-1$
+	\item $\cot^2x=\dfrac{1}{\sin^2x}-1$
+	\item $\sin 2x=2\sin x \cos x$
+	\item $\cos 2x=\cos^2x-\sin^2x$
+	\item $\cos 2x =2\cos^2x-1$
+	\item $\cos 2x= 1-2\sin^2x$
+	\item $\sin^2 x=\dfrac{1-\cos 2x}{2}$
+	\item $\cos^2 x=\dfrac{1+\cos 2x}{2}$.
+\end{enumEX}
+\end{dang}
+\setcounter{vd}{0}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\begin{vd}
+	Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{enumEX}[a)]{2}
+		\item $ f(x)=4x+3\cos x$. 
+		\item $ f(x)=2 x+\dfrac{1}{\sin ^{2} x}$.
+		\item $ f(x)=\tan^2x+\sin x$.
+		\item $f(x)=\left(\sin \dfrac{x}{2}+\cos \dfrac{x}{2}\right)^2$.
+	\end{enumEX}
+\loigiai{
+\begin{enumEX}[a)]{1}
+	\item Ta có $\displaystyle\int f(x)\mathrm{ \,d}x=\displaystyle\int(4x+3\cos x)\mathrm{ \,d}x=\dfrac{4x^2}{2}+3\sin x+C=2x^2+3\sin x+C $.
+	\item Ta có $\displaystyle\int\limits_{}^{}\left( 2x+\dfrac{1}{\sin^2x}\right) \mathrm{\,d}x=x^2-\cot x+C$.
+	\item Biến đổi $ f(x)=\tan^2x+\sin x=\dfrac{1}{\cos^2x}-1+\sin x$. Suy ra
+	$$
+	\displaystyle\int f(x) \mathrm{ \,d}x= \tan x -x -\cos x+C.
+	$$
+	\item
+	$$
+	\left(\sin \dfrac{x}{2}+\cos \dfrac{x}{2}\right)^2=\sin ^2 \dfrac{x}{2}+2 \sin \dfrac{x}{2} \cos \dfrac{x}{2}+\cos ^2 \dfrac{x}{2}=1+\sin x
+	$$
+	
+	
+	Do đó:
+	
+	$$
+	\displaystyle\int\left(\sin \dfrac{x}{2}+\cos \dfrac{x}{2}\right)^2 \mathrm{ \,d}x=\displaystyle\int 1 \mathrm{ \,d}x+\displaystyle\int \sin x \mathrm{ \,d}x=x-\cos x+C.
+	$$
+\end{enumEX}}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Cho hàm số $f(x)$ thỏa mãn $f'(x)=2-5\sin x$ và $f(0)=10$. Tìm hàm $f(x)$.
+	\loigiai
+	{
+		Ta có $f\left(x\right)=\int \left(2-5\sin x\right)\mathrm{\,d}x=2x+5\cos x+C$.\\
+		Mà $f(0)=10 \Rightarrow C=5$. Vậy $f(x)=2x+5\cos x+5$.
+	}
+\end{vd}\dongcham{6}
+
+\begin{vd}
+	Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{enumEX}[a)]{3}
+		\item $f(x)=\sin 3x$.
+		\item $f(x)=\cos (2x+3).$
+		\item $f(x)=\cos 5x \cdot\cos x $ 
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}[a)]{1}
+			\item Ta có $\displaystyle\int f(x) \mathrm{\,d}x=\int \sin 3x \mathrm{\,d}x=-\dfrac{1}{3}\cos 3x+C$.
+			\item Ta có $\displaystyle\int f(x) \mathrm{\, d}x=\dfrac{1}{2}\sin (2x+3)+C$
+			\item Ta có $\displaystyle  \int \cos 5x \cos x \mathrm{\, d}x=\dfrac{1}{2}\int \left(\cos 4x+\cos 6x\right)\mathrm{\, d}x=\dfrac{1}{2}\left(\dfrac{1}{4}\sin 4x+\dfrac{1}{6}\sin 6x\right)+C$.
+	\end{enumEX}}
+\end{vd}\dongcham{10}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\setcounter{ex}{0}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D4-B1-d2-1]
+
+
+\begin{ex}
+	Tìm nguyên hàm $  \displaystyle \int {6 \sin x\mathrm{\,d}x}$. 
+	\choice
+	{ $ 6 \sin x+C$ }
+	{ \True $ - 6 \cos x+C$ }
+	{ $ 6 \cos x+C$ }
+	{ $ - \cos x+C$ }
+	\loigiai{ 
+	$\displaystyle\int 6\sin x dx=-6\cos x+C$.
+}\end{ex}
+\cham{1}
+\begin{ex}
+	Tìm nguyên hàm $ \displaystyle  \int {2 \cos x\mathrm{\,d}x}$. 
+	\choice
+	{ $ - 2 \sin x+C$ }
+	{ $ - 2 \cos x+C$ }
+	{ $ \sin x+C$ }
+	{ \True $ 2 \sin x+C$ }
+	\loigiai{ 
+	$\displaystyle\int 2\cos x dx=2\sin x+C$.
+		
+}\end{ex}
+\cham{1}
+\begin{ex}
+	Họ nguyên hàm của hàm số $f(x)=3x^2+\sin x$ là
+	\choice
+	{\True $x^3-\cos x+C$}
+	{$6x-\cos x+C$}
+	{$x^3+C$}
+	{$x^3+\sin x+C$}
+	\loigiai
+	{
+		Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int \left(3x^2+\sin x\right)\mathrm{\,d}x=x^3-\cos x+C$.
+	}
+\end{ex}\cham{1}
+
+\begin{ex}
+	Tìm nguyên hàm $\displaystyle\int \dfrac{10}{\cos^2 x} \mathrm{\,d}x$. 
+	\choice
+	{ $10\cos^2 x+C$ }
+	{ $10\cot^2 x+C$ }
+	{ $10\sin^2 x+C$ }
+	{ \True $10\tan x+C$ }
+	\loigiai{ 
+		$\int \dfrac{10}{\cos^2 x}dx=10\tan x+C$. 
+}\end{ex}
+\cham{1}
+\begin{ex}
+	Tìm nguyên hàm $\displaystyle\int \dfrac{-2}{\sin^2 x} \mathrm{\,d}x$. 
+	\choice
+	{ $\dfrac{-2}{\tan^2 x}+C$ }
+	{ $-2\cos^2 x+C$ }
+	{ $-2\cot^2 x+C$ }
+	{ \True $2\cot x+C$ }
+	\loigiai{ 
+		$\int \dfrac{-2}{\sin^2 x} dx=2\cot x+C$. 
+}\end{ex}
+\cham{1}
+\begin{ex}%[Lớp 12 - Đề giữa học kì 2 - THPT Chuyên Lê Quý Đôn - Ninh Thuận]%[Tư Đô Nguyên]%[2D4N1-3]
+	Họ nguyên hàm của hàm số $f(x)=4x^3+\dfrac{1}{\cos ^2x}$ là
+	\choice
+	{$x^4-\cot x+C$}
+	{$x^4+\cot x+C$}
+	{\True $x^4+\tan x+C$}
+	{$x^4-\tan x+C$}
+	\loigiai{
+		Ta có $\displaystyle\int\limits f(x) \mathrm{\,d}x=\displaystyle\int\limits \left(4x^3+\dfrac{1}{\cos ^2x}\right)\mathrm{\,d}x=x^4+\tan x+C$.
+	}
+\end{ex}
+\cham{1}
+\begin{ex}
+	Cho hàm số $f(x)$ thỏa mãn $f'(x) = 3 - 5\cos x$ và $f(0) = 5$. Mệnh đề nào dưới đây đúng?
+	\choice
+	{$f(x) = 3x - 5\sin x - 5$}
+	{$f(x) = 3x + 5\sin x + 5$}
+	{$f(x) = 3x + 5\sin x + 2$}
+	{\True $f(x) = 3x -5\sin x + 5$}
+	\loigiai{
+		Ta có $f(x)=\displaystyle\int f'(x)\mathrm{\,d}x=\displaystyle\int(3-5\cos x)\mathrm{\,d}x=3x-5\sin x+C.$\\
+		Ta lại có $f(0)=5\Rightarrow 3\cdot 0-5\sin 0+C=5\Leftrightarrow C=5.$\\
+		Vậy $f(x) = 3x -5\sin x + 5$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Một nguyên hàm $F(x)$ của hàm số $f(x)=\sin x+2\cos x$ biết $F\left( \dfrac{\pi}{2}\right)=0$ là
+	\choice
+	{$F(x)=-2\sin x-\cos x+2  $}
+	{ $F(x)=2\sin x-\cos x+2 $}
+	{ $F(x)=\sin x-2\cos x-2  $}
+	{\True $F(x)=2\sin x-\cos x-2  $}
+	\loigiai{
+		Ta có $\displaystyle \int \limits \left(\sin x+2\cos x\right) \mathrm{d}x=-\cos x+2\sin x+C$.\\
+		Do $F\left( \dfrac{\pi}{2}\right)=0$ nên $C=-2$. Vậy $F(x)=2\sin x-\cos x-2  $.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Một nguyên hàm $F(x)$ của hàm số $f(x)=\sin x+\dfrac{1}{\cos^2 x}$ thỏa mãn $F\left(\dfrac{\pi}{4}\right)=\dfrac{\sqrt2}{2}$ là
+	\choice
+	{$-\cos x+\tan x-\sqrt2 +1$}
+	{\True $-\cos x+\tan x+\sqrt2 -1$}
+	{$\cos x+\tan x+\sqrt2 -1$}
+	{ $-\cos x+\tan x+C$}
+	\loigiai{
+		Ta có $F(x)=\displaystyle\int\limits \left( \sin x+\dfrac{1}{\cos^2 x}  \right)\mathrm{\,d}x=-\cos x+\tan x+C$.\\
+		Vì $F\left(\dfrac{\pi}{4}\right)=\dfrac{\sqrt2}{2}$ nên $C=\sqrt2-1$.\\
+		Vậy  $F(x)=-\cos x+\tan x+\sqrt2 -1$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Tìm $\displaystyle\int \sin 5x\mathrm{d}x$.
+	\choice
+	{$\displaystyle\int \sin 5x\mathrm{d}x=-5\cos 5x+C$}
+	{$\displaystyle\int \sin 5x\mathrm{d}x=-\cos 5x+C$}
+	{\True $\displaystyle\int \sin 5x\mathrm{d}x=-\dfrac{1}{5}\cos 5x+C$}
+	{$\displaystyle\int \sin 5x\mathrm{d}x=\dfrac{1}{5}\cos 5x+C$}
+	\loigiai{
+		Ta có $\displaystyle\int \sin 5x\mathrm{d}x=-\dfrac{1}{5}\cos 5x+C$.
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Với $C$ là hằng số, họ nguyên hàm của hàm số $f(x)=2\cos 2x$ là
+	\haicot
+	{\True $\sin 2x+C$}
+	{$2\sin 2x+C$}
+	{$-2\sin 2x+C$}
+	{ $-\sin 2x+C$}
+	\loigiai{
+		Ta có $\displaystyle\int\limits f(x)\mathrm{\,d}x=\displaystyle\int\limits 2\cos 2x\mathrm{\,d}x=\sin 2x+C$.
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Tìm nguyên hàm $\displaystyle\int 9\left(1+\tan^2 x\right) \mathrm{\,d}x$. 
+	\choice
+	{ $9\cot^2 x+C$ }
+	{ $9\tan^2 x+C$ }
+	{ $9\cos^2 x+C$ }
+	{ \True $9\tan x+C$ }
+	\loigiai{ 
+		$\int 9\left(1+\tan^2 x\right)dx=9\tan x+C$. 
+}\end{ex}
+\cham{3}
+\begin{ex}
+	Tìm nguyên hàm $\displaystyle\int 6\left(1+\cot^2 x\right)\mathrm{\,d}x$. 
+	\choice
+	{ $\dfrac{-6}{\cot^2 x}+C$ }
+	{ \True $-6\cot x+C$ }
+	{ $-6\cos^2 x+C$ }
+	{ $6\cot^2 x+C$ }
+	\loigiai{ 
+		$\int 6\left(1+\cot^2 x\right) dx=-6\cot x+C$. 
+}\end{ex}
+
+\cham{3}
+\begin{ex}
+	Nguyên hàm của hàm số $y=\tan^2 x$ là
+	\haicot
+	{\True $\tan x - x+C$}
+	{$-\tan x - x+C$}
+	{$-\tan x + x+C$}
+	{$\tan x + x+C$}
+	\loigiai{
+		Ta có $\displaystyle \int \tan^2 x\ \mathrm{d}x = \int \left (\dfrac{1}{\cos^2 x}-1\right )\ \mathrm{d}x = \tan x -x +C.$
+	}
+\end{ex}\cham{4}
+
+
+\begin{ex}
+	Tìm $\displaystyle \int \dfrac{\cos{2x}}{\sin^2x\cdot \cos^2x} \mathrm{d}x$
+	\haicot
+	{$\cos x+\sin x+C $}
+	{$-\cos x-\sin x+C $}
+	{\True $-\cot x-\tan x+C $}
+	{$\cot x-\tan x+C $}
+	\loigiai{
+		$\displaystyle \int \dfrac{\cos{2x}}{\sin^2x\cdot \cos^2x} \mathrm{d}x=\displaystyle \int \dfrac{\cos^2x-\sin^2x}{\sin^2x\cdot \cos^2x} \mathrm{d}x=\displaystyle \int \left(\dfrac{1}{\sin^2x}-\dfrac{1}{\cos^2x} \right) \mathrm{d}x=-\cot x-\tan x+C$.
+	}
+\end{ex}\cham{7}
+
+\begin{ex}%[2D3B1-1]
+	Biết $\displaystyle  \int(2\sin x + \cos x)^2\mathrm{\, d}x=a \sin 2x - \cos 2x + bx +C$, với $a,b \in \mathbb{Q}$. Tính $a^2+b^2$.
+	\choice
+	{$\dfrac{17}{2}$}
+	{$\dfrac{109}{4}$}
+	{$\dfrac{17}{16}$}
+	{\True $\dfrac{109}{16}$}
+	\loigiai{
+		\begin{enumerate}[\faCheckSquareO]
+			\item \textbf{Cách 1.} 
+			\begin{eqnarray*}
+				\displaystyle  \int(2\sin x + \cos x)^2\mathrm{\, d}x
+				&=&\displaystyle  \int(4\sin^2x+4\sin x \cos x + \cos^2 x)\mathrm{\, d}x\\
+				&=&\displaystyle  \int\left( 2\sin2x-\dfrac{3}{2}\cos 2x+\dfrac{5}{2}\right) \mathrm{\, d}x\\
+				&=& -\dfrac{3}{4}\sin 2x - \cos 2x +\dfrac{5}{2}x+C.
+			\end{eqnarray*}
+			Suy ra $a=-\dfrac{3}{4}$ và $b=\dfrac{5}{2}$. Từ đó tính được $a^2+b^2=\dfrac{109}{16}$.
+			\item \textbf{Cách 2.}
+			Từ giả thiết, áp dụng định nghĩa nguyên hàm, ta được
+			$$(a \sin 2x - \cos 2x + bx +C)'=(2\sin x + \cos x)^2=2\sin2x-\dfrac{3}{2}\cos 2x+\dfrac{5}{2}$$
+			Ta có $(a \sin 2x - \cos 2x + bx +C)'=2a \cos 2x + 2 \sin 2x +b$.\\
+			Đối chiếu kết quả đồng nhất, ta được $\heva{& 2a=-\dfrac{3}{2}\\&b=\dfrac{5}{2}} \Leftrightarrow \heva{& a=-\dfrac{3}{4}\\&b=\dfrac{5}{2}.}$
+	\end{enumerate}}
+\end{ex}\cham{12} 
+
+\Closesolutionfile{ans}
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai.  Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D4-B1-d2-2]
+
+\begin{ex}
+	Cho hai hàm số $f(x)=\sin x$ và $g(x)=\cos x$.
+	\choiceTF
+	{\True $f'(x)=g(x)$, $\forall x \in \mathbb{R}$}
+	{$\displaystyle\int\limits f(x)\mathrm{\,d}x=g(x)+C$}
+	{\True $\displaystyle\int\limits g(x)\mathrm{\,d}x=f(x)+C$}
+	{\True Phương trình $f(x)=g(x)$ có nghiệm là $x=\dfrac{\pi}{4}+k\pi$, với $k \in \mathbb{Z}$}
+	\loigiai{
+	a) Khẳng định đúng. $f'(x)=(\sin x)^{\prime}=\cos x$.\\
+	b) Khẳng định sai. $\displaystyle\int \sin x dx=-\cos x+C=-g(x)+C$.\\
+	c) Khẳng định đúng. $\displaystyle\int \cos x dx=\sin x+C=f(x)+C$.\\
+	d) Khẳng định đúng. $\sin x=\cos x=\sin\left(\dfrac{\pi}{2} -x\right)\Leftrightarrow \hoac{&x=\dfrac{\pi}{2}-x+k2\pi\\&x=\pi-\dfrac{\pi}{2}+x+k2\pi}\Leftrightarrow x=\dfrac{\pi}{4}+k\pi, k\in\mathbb{Z}$.
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	Cho hàm số $f(x)=\dfrac{4 m}{\pi}+\sin ^2 x$ (với $m$ là tham số). Gọi $F(x)$ là một nguyên hàm của hàm số $f(x)$ trên $\mathbb{R}$.
+	\choiceTF
+	{\True Hàm số $f(x)$ liên tục trên $\mathbb{R}$}
+	{\True $f(0)=\dfrac{4 m}{\pi}$}
+	{Hàm số $F(x)$ có đúng 1 điểm cực trị $\forall m \geq 0$}
+	{\True Biết $F(0)=1$ và $F\left(\dfrac{\pi}{4}\right)=\dfrac{\pi}{8}$. Khi đó $m=-0,75$}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định đúng. $f(0)=\dfrac{4m}{\pi}+\sin^2 0=\dfrac{4m}{\pi}$.\\
+	c) Khẳng định sai. Ta có: $F'(x)=f(x)=\dfrac{4m}{\pi}+\sin ^2 x$. Suy ra $F'(x)=0\Leftrightarrow \sin^2 x=-\dfrac{4m}{\pi}$.\\
+	Với $m>0$ thì $-\dfrac{4m}{\pi}<0\Rightarrow \sin^2 x<0$ (vô nghiệm). Do đó $F(x)$ không có cực trị.\\
+	Với $m=0$ thì $\sin^2 x=0\Leftrightarrow x=k\pi, k\in\mathbb{Z}$ (vô số nghiệm). Do đó $F(x)$ có vô số cực trị.\\
+	d) Khẳng định đúng. Ta có: $f(x)=\dfrac{4m}{\pi}+\sin^2 x=\dfrac{4m}{\pi}+\dfrac{1}{2}(1-\cos 2x)=\left(\dfrac{4m}{\pi}+\dfrac{1}{2}\right)-\dfrac{1}{2}\cos 2x$.\\
+	Suy ra $\displaystyle\int f(x)dx=\left(\dfrac{4m}{\pi}+\dfrac{1}{2}\right)x-\dfrac{1}{4}\sin 2x+C$.\\
+	Vì $F(0)=1$ nên $C=1$. Khi đó $F\left(\dfrac{\pi}{4}\right)=\left(\dfrac{4m}{\pi}+\dfrac{1}{2}\right).\dfrac{\pi}{4}-\dfrac{1}{4}.\sin\left(\dfrac{\pi}{2}\right)+1=\dfrac{\pi}{8}\Leftrightarrow m=-0,75$.
+	}
+\end{ex}
+\cham{13}
+\begin{ex}
+	Cho hàm số $y=f(x)$ có đạo hàm là $f^{\prime}(x)=\sin 2 x, \forall x \in \mathbb{R}$ và $f\left(\dfrac{\pi}{4}\right)=0$. Biết $F(x)$ là nguyên hàm của $f(x)$ thỏa mãn $F\left(\dfrac{\pi}{2}\right)=2$.
+	\choiceTF
+	{$f(x)=-\cos 2 x$}
+	{\True $F(x)=-\dfrac{1}{4} \sin 2 x+2$}
+	{\True $F\left(\dfrac{\pi}{4}\right)=\dfrac{7}{4}$}
+	{Phương trình $2F(x)-f(x)=4$ có nghiệm $x=\dfrac{\pi}{6}+k\pi$, với $k \in \mathbb{Z}$}
+	\loigiai{
+	a) Khẳng định sai. $f(x)=\displaystyle\int \sin 2x dx=-\dfrac{1}{2}\cos 2x+C$.\\
+	Vì $f\left(\dfrac{\pi}{4}\right)=0$ nên $C=0$. Vậy $f(x)=-\dfrac{1}{2}\cos 2x$.\\
+	b) Khẳng định đúng. $F(x)=\displaystyle\int\left(-\dfrac{1}{2}\cos 2x\right)=-\dfrac{1}{4}\sin 2x+C$.\\
+	Vì $F\left(\dfrac{\pi}{2}\right)=2$ nên $C=2$. Vậy $F(x)=-\dfrac{1}{4}\sin 2x+2$.\\
+	c) Khẳng định đúng. $F\left(\dfrac{\pi}{4}\right)=-\dfrac{1}{4}\sin\left(2.\dfrac{\pi}{4}\right)+2=\dfrac{7}{4}$.\\
+	d) Khẳng định sai. $2F(x)-f(x)=4\Leftrightarrow 2\left(-\dfrac{1}{4}\sin 2x+2\right)-\left(-\dfrac{1}{2}\cos 2x\right)=4\Leftrightarrow \cos 2x=\sin 2x=\cos \left(\dfrac{\pi}{2}-2x\right)\Leftrightarrow \hoac{&2x=\dfrac{\pi}{2}-2x+k2\pi\\&2x=-\dfrac{\pi}{2}+2x+k2\pi}\Leftrightarrow x=\dfrac{\pi}{8}+\dfrac{k\pi}{2}, k\in\mathbb{Z}$.
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	Cho hàm số $y=f(x)$ có $f^{\prime}(x)=\tan ^2 x+\dfrac{1}{x^2}$, $\forall x \in\left(0 ; \dfrac{\pi}{2}\right)$ và thỏa mãn $f\left(\dfrac{\pi}{4}\right)=-\dfrac{4}{\pi}$.
+	\choiceTF
+	{$f(x)=\dfrac{\tan ^3 x}{3}-\dfrac{1}{x}-\dfrac{1}{3}$}
+	{\True $f\left(\dfrac{\pi}{3}\right)<0$}
+	{Gọi $F(x)$ là một nguyên hàm của $f(x)$. Khi đó $F^{\prime}\left(\dfrac{\pi}{6}\right) \in(0 ; 1)$}
+	{\True  $F^{\prime \prime}\left(\dfrac{\pi}{2025}\right)-f^{\prime}\left(\dfrac{\pi}{2025}\right)=0$}
+	\loigiai{
+	a) Khẳng định sai. Ta có: $f'(x)=\tan^2 x+\dfrac{1}{x^2}=\dfrac{1}{\cos^2 x}-1+\dfrac{1}{x^2}$.\\
+	Khi đó: $f(x)=\displaystyle\int\left(\dfrac{1}{\cos^2 x}-1+\dfrac{1}{x^2}\right)dx=\tan x-x-\dfrac{1}{x}+C$.\\
+	Vì $f\left(\dfrac{\pi}{4}\right)=-\dfrac{4}{\pi}$ nên $C=\dfrac{\pi}{4}-1$. Vậy $f(x)=\tan x-x-\dfrac{1}{x}+\dfrac{\pi}{4}-1$.\\
+	b) Khẳng định đúng. $f\left(\dfrac{\pi}{3}\right)=\sqrt{3}-\dfrac{3}{\pi}-\dfrac{\pi}{12}-1<0$.\\
+	c) Khẳng định sai. Vì $F(x)$ là một nguyên hàm của $f(x)$ nên $F'(x)=f(x)$. Khi đó ta tính được $F'\left(\dfrac{\pi}{6}\right)\notin(0;1)$.\\
+	d) Khẳng định đúng. $F''(x)-f'(x)=f'(x)-f'(x)=0$. 	
+	}
+\end{ex}
+\cham{12}
+\Closesolutionfile{ans}
+\begin{dang}{Nguyên hàm của hàm số mũ}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Công thức thường dùng:}
+		\begin{listEX}[2]
+			\item [\ding{172}] $\displaystyle\int{{\mathrm{e}^x\text{d}x}}=\mathrm{e}^x+C$.
+			\item [\ding{173}] $\displaystyle\int{{\mathrm{a}^x\text{d}x=\dfrac{\mathrm{a}^x}{\ln a}+C}}$.
+		\end{listEX}
+		\item \indam{Một số phép biến đổi thường gặp:}
+		\begin{enumEX}[$\bullet$]{3}
+			\item $a^x \cdot a^y=a^{x+y}$.
+			\item $\dfrac{a^x}{a^y}=a^{x-y}$.
+			\item $\left(a^x\right)^y=a^{xy}$. 
+		\end{enumEX}
+	\end{enumerate}
+\end{dang}
+\setcounter{vd}{0}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\begin{vd} Tìm nguyên hàm của hàm số $f(x)$, biết
+	\begin{enumEX}[a)]{3}
+		\item $f(x)=2024^x$.
+		\item $f(x)=5^x+1$.
+		\item $f(x)=e^{-x}$.
+		\item $f(x)=\mathrm{e}^{2x}-\dfrac{1}{x^2}$
+		\item $f(x)=8^x\cdot 2^{1-2x}$. 
+		\item $f(x)=\left(3^x- \dfrac{1}{3^x}\right)^{2}$.
+	\end{enumEX}
+\loigiai{
+\begin{enumerate}[a)]
+	\item Ta có  $\displaystyle\int\limits {2024^x\mathrm{\,d}x}=\dfrac{2024^x}{\ln 2024}+C$.
+	\item Ta có  $\displaystyle\int\limits {(5^x+1)\mathrm{\,d}x}=\dfrac{5^x}{\ln 5}+x+C$.
+	\item Ta có  $\displaystyle\int\limits {\mathrm{e}^{-x}\mathrm{\,d}x}=-\mathrm{e}^{-x}+C$.
+	\item Ta có $\displaystyle\int f(x)\mathrm{\,d}x=\displaystyle\int\left(\mathrm{e}^{2x}-\dfrac{1}{x^2}\right)\mathrm{\,d}x=\dfrac{1}{2}\mathrm{e}^{2x}+\dfrac{1}{x}+C$.
+	\item Ta có $f(x)=8^x\cdot 2^{1-2x}=2^{3x}\cdot 2^{1-2x}=2^{x+1}$ nên nguyên hàm của $f(x)$ là $F(x)=\dfrac{2^{x+1}}{\ln 2}  +C $.
+	\item Ta có \begin{align*}
+		\displaystyle\int\limits \left(3^x- \dfrac{1}{3^x}\right)^{2}\mathrm{\,d} x & = \displaystyle\int\limits \left(9^x-2+9^{-x}\right)\mathrm{\,d} x\\
+		& =\dfrac{9^x}{\ln 9}- 2x - \dfrac{1}{ 9^x\ln 9} + C \\
+		& = \dfrac{9^x}{2 \ln 3}- \dfrac{1}{2\cdot 9^x\ln 3}- 2x + C
+	\end{align*}
+\end{enumerate}}
+\end{vd}\dongcham{15}
+
+\begin{vd} 
+	Gọi $F(x)$ là một nguyên hàm của hàm số $f(x)=2^x$, thỏa mãn $F(0)=\dfrac{1}{\ln 2}$. Tính giá trị biểu thức $T=F(0)+F(1)+\ldots+F(2018)+F(2019)$.
+	\loigiai{
+	Ta có $\displaystyle\int f(x) \mathrm{d} x=\int 2^x \mathrm{~d} x=\dfrac{2^x}{\ln 2}+C$.\\
+	Vì $F(x)$ là một nguyên hàm của hàm số $f(x)=2^x$ nên $F(x)=\dfrac{2^x}{\ln 2}+C$ mà $F(0)=\dfrac{1}{\ln 2}$
+	$$
+	\begin{aligned}
+		& \Rightarrow C=0 \Rightarrow F(x)=\dfrac{2^x}{\ln 2} \\
+		& T=F(0)+F(1)+\ldots+F(2018)+F(2019) \\
+		& =\dfrac{1}{\ln 2}\left(1+2+2^2+\ldots+2^{2018}+2^{2019}\right)=\dfrac{1}{\ln 2} \cdot \dfrac{2^{2020}-1}{2-1}=\dfrac{2^{2020}-1}{\ln 2}
+	\end{aligned}
+	$$
+}
+\end{vd}\dongcham{5}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\Opensolutionfile{ans}[ans/2D4-B1-d3-1]
+\setcounter{ex}{0}
+\begin{ex}%[2D3Y1-1]%
+	Nguyên hàm của hàm số $y=2^x$ là
+	\choice
+	{\True $\displaystyle\int 2^x\mathrm{d}x=\dfrac{2^x}{\ln 2}+C$}
+	{$\displaystyle\int 2^x\mathrm{d}x=\ln 2\cdot 2^x+C$}
+	{$\displaystyle\int 2^x\mathrm{d}x=2^x+C$}
+	{$\displaystyle\int 2^x\mathrm{d}x=\dfrac{2^x}{x+1}+C$}
+	\loigiai{
+		Ta có $$\displaystyle\int 2^x\mathrm{d}x=\dfrac{2^x}{\ln 2}+C.$$
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Tìm nguyên hàm của hàm số $f\left(x\right)=7^x$.
+	\choice %{2}
+	{$ \displaystyle \int 7^x \mathrm{\,d}x =7^x \ln7+C $}
+	{\True $ \displaystyle \int 7^x \mathrm{\,d}x =\dfrac{7^x}{\ln7}+C $}
+	{$ \displaystyle \int 7^x \mathrm{\,d}x =7^{x+1} +C $}
+	{$ \displaystyle \int 7^x \mathrm{\,d}x =\dfrac{7^{x+1}}{x+1}+C $}
+	\loigiai{
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Gọi $\displaystyle\int 2018^x\mathrm{\,d}x=F(x)+C$, với $C$ là hằng số. Khi đó hàm số $F(x)$ bằng
+	\choice
+	{$\dfrac{2018^{x+1}}{x+1}$}
+	{\True $\dfrac{2018^x}{\ln2018}$}
+	{$\dfrac{x\cdot2018^{x-1}}{\ln2018}$}
+	{$2018^x\ln2018$}
+	\loigiai
+	{
+		Ta có $\displaystyle\int 2018^x\mathrm{\,d}x=\dfrac{2018^x}{\ln2018}+C$, suy ra $F(x)=\dfrac{2018^x}{\ln2018}$.
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Cho hàm số $f(x)=\mathrm{e}^x+3$. Khẳng định nào dưới đây đúng?
+	\choice 
+	{\True $\displaystyle\int f(x) \mathrm{ d} x=\mathrm{e}^x+3 x+C$}
+	{$\displaystyle\int f(x) \mathrm{ d} x=\mathrm{e}^x+C$}
+	{$\displaystyle\int f(x) \mathrm{ d} x=\mathrm{e}^{x-3}+C$}
+	{ $\displaystyle \int f(x) \mathrm{ d} x=\mathrm{e}^x-3 x+C$}
+	\loigiai{
+		Ta có
+		$\displaystyle\int f(x) \mathrm{ d} x=\int( \mathrm{e}^x+3) \mathrm{ d} x=\mathrm{e}^x+3 x+C$.}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Tìm nguyên hàm của hàm số $f(x)=\mathrm{e}^{2x}$.
+	\choice
+	{$\displaystyle \int{\mathrm{e}^{2x}\mathrm{d}x}=\mathrm{e}^{2x}+C$}
+	{$\displaystyle \int{\mathrm{e}^{2x}\mathrm{d}x}=\dfrac{\mathrm{e}^{2x+1}}{2x+1}+C$}
+	{$\displaystyle \int{\mathrm{e}^{2x}\mathrm{d}x}=2\mathrm{e}^{2x}+C$}
+	{\True $\displaystyle \int{\mathrm{e}^{2x}\mathrm{d}x}=\dfrac{1}{2}\mathrm{e}^{2x}+C$}
+	\loigiai{
+		Ta có $\displaystyle \int{\mathrm{e}^{2x}\mathrm{d}x}=\dfrac{1}{2}\int{\mathrm{e}^{2x}\mathrm{d}(2x)}=\dfrac{1}{2}\mathrm{e}^{2x}+C$.
+	}
+\end{ex}\cham{2}
+
+\begin{ex}%[2D3Y1-1]%
+	Tìm họ nguyên hàm của hàm số $ f(x)=\mathrm{e}^{3x} $.
+	\choice
+	{$ \displaystyle\int f(x)\mathrm{d}x=\dfrac{\mathrm{e}^{3x}}{3x+1}+C $}
+	{$ \displaystyle\int f(x)\mathrm{d}x=\mathrm{e}^{3x}+C $}
+	{\True $ \displaystyle\int f(x)\mathrm{d}x=\dfrac{1}{3}\mathrm{e}^{3x}+C $}
+	{$ \displaystyle\int f(x)\mathrm{d}x=3\mathrm{e}^{3x}+C $}
+	\loigiai{
+		Ta có $ \displaystyle\int f(x)\mathrm{d}x=\displaystyle\int \mathrm{e}^{3x}\mathrm{d}x=\dfrac{1}{3}\mathrm{e}^{3x}+C $.
+	}
+\end{ex}\cham{2}
+
+\begin{ex}
+	Tìm nguyên hàm $F(x)$ của hàm số $f(x)={\left(\mathrm{e}^x - 1\right)}^2$.
+	\choice
+	{$F(x)=2\mathrm{e}^{2x} - 2\mathrm{e}^x + C$}
+	{$F(x)=2\mathrm{e}^x\left(\mathrm{e}^x - 1\right)$}
+	{\True $F(x)=\dfrac{1}{2}\mathrm{e}^{2x} - 2\mathrm{e}^x + x + C$}
+	{$F(x)=\mathrm{e}^{2x} - 2\mathrm{e}^x + x + C$}
+	\loigiai{
+		Ta có $f(x)={\left(\mathrm{e}^x - 1\right)}^2=\mathrm{e}^{2x} - 2\mathrm{e}^x + 1\Rightarrow F(x)=\dfrac{1}{2}\mathrm{e}^{2x} - 2\mathrm{e}^x + x + C$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex} %[2D3B1-1]%
+	Một nguyên hàm $F(x)$ của hàm số $f(x)=2 \mathrm{e}^x-3x^2$ thỏa $F(0)=\dfrac{9}{2}$ là
+	\choice
+	{$\mathrm{e}^x-x^3+\dfrac{7}{2}$}
+	{$2\mathrm{e}^x+x^3-\dfrac{3}{2}$}
+	{\True $2 \mathrm{e}^x-x^3+\dfrac{5}{2}$}
+	{$2\mathrm{e}^x-x^3+\dfrac{9}{2}$}
+	\loigiai{
+		Ta có: $F(x)=\displaystyle\int \left(2 \mathrm{e}^x-3x^2 \right) \mathrm{\,d}x= 2\mathrm{e}^x-x^3+C.$\\
+		Với $F(0)=\dfrac{9}{2}\Rightarrow C=\dfrac{5}{2}$.\\
+		Vậy $F(x)=2 \mathrm{e}^x-x^3+\dfrac{5}{2}$.
+	}
+\end{ex}\cham{4}
+
+\begin{ex}%[2D3B1-1]%
+	Biết $ F(x)$ là một nguyên hàm của hàm số $ f(x)=2\mathrm{e}^x+1 $ thoả mãn $ F(0)=1 $. Khi đó, khẳng định đúng là
+	\choice
+	{\True $F(x)=2\mathrm{e}^x+x-1$}
+	{$F(x)=2\mathrm{e}^x+x+2$}
+	{$F(x)=\mathrm{e}^{2x}+x$}
+	{$F(x)=2\mathrm{e}^x+x+1$}
+	\loigiai{
+		Có $ F(x)=\displaystyle\int f(x)\mathrm{ \,d}x=\displaystyle\int\left(2\mathrm{e}^x+1\right)\mathrm{ \,d}x=2\mathrm{e}^x+x+C $.\\
+		$ F(0)=2\mathrm{e}^0+0+C=1\Rightarrow 2+C=1\Rightarrow C=-1\Rightarrow F(x)=2\mathrm{e}^x+x-1 $.}
+\end{ex}\cham{4}
+
+
+\begin{ex}
+	Cho $F(x)$ là một nguyên hàm của hàm số $f(x)=4\mathrm{e}^{2x}+2x$ thỏa mãn $F(0)=1$. Tìm $F(x)$.
+	\choice
+	{$F(x)=2\mathrm{e}^{2x}-x^2-1$}
+	{\True $F(x)=2\mathrm{e}^{2x}+x^2-1$}
+	{$F(x)=2\mathrm{e}^{2x}+x^2+1$}
+	{$F(x)=4\mathrm{e}^{2x}+x^2-3$}
+	\loigiai{
+		Ta có
+		$$F(x)=\displaystyle\int \left(4\mathrm{e}^{2x}+2x\right)\mathrm{\,d}x=2\mathrm{e}^{2x}+x^2+C.$$
+		Mà $F(0)=1\Leftrightarrow 2+C=1\Leftrightarrow C=-1$.\\
+		Vậy $F(x)=2\mathrm{e}^{2x}+x^2-1$.
+	}
+\end{ex}\cham{4}
+
+\Closesolutionfile{ans}
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D4-B1-d3-2]
+
+\begin{ex}
+	Cho hàm số $F(x)=\displaystyle\int\left(4^x+2^x+1\right) \mathrm{d} x$.
+	\choiceTF
+	{\True $F(x)=\displaystyle\int 4^x \mathrm{~d} x+\displaystyle\int 2^x \mathrm{~d} x+\displaystyle\int \mathrm{d} x$}
+	{$F(x)=\dfrac{2^{2 x}+2^x}{\ln 2}+x+C$}
+	{Nếu $F(1)=\dfrac{4}{\ln 2}$ thì $F(2)=\dfrac{12}{\ln 2}-1$}
+	{Nếu $G(x)=\displaystyle\int \dfrac{8^x+1}{2^x+1} \mathrm{~d} x$ thì $G(x)=F(x)+C$}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định sai. $F(x)=\dfrac{4^x}{\ln 4}+\dfrac{2^x}{\ln 2}+x+C=\dfrac{2^{2x}}{2\ln 2}+\dfrac{2^x}{\ln 2}+x+C=\dfrac{2^{2x}+2.2^x}{2\ln 2}+x+C$.\\
+	c) Khẳng định sai. Nếu $F(1)=\dfrac{4}{\ln 2}$ thì $C=-1$. Khi đó: $F(2)=\dfrac{2^4+2.2^2}{2\ln 2}+2-1=\dfrac{12}{\ln 2}+1$.\\
+	d) Khẳng định sai. Xét $\dfrac{8^x+1}{2^x+1}=\dfrac{2^{3x}+1^3}{2^x+1}=\dfrac{(2^x+1)(2^{2x}-2^x+1)}{2^x+1}=2^{2x}-2^x+1=4^x-2^x+1$.\\
+	Khi đó: $G(x)=\displaystyle\int\left(4^x-2^x+1\right)dx\ne F(x)$.	
+	}
+\end{ex}
+\cham{9}
+\begin{ex}
+	Cho hai hàm số $f(x)=x^2 \ln x$ và $g(x)=x \ln x$.
+	\choiceTF
+	{Hàm số $f(x)$ có tập xác định là $[0 ;+\infty)$}
+	{$f^{\prime}(x)=x(\ln x+1)$}
+	{\True $\displaystyle\int 2 g(x) \mathrm{d} x=\displaystyle\int f^{\prime}(x) \mathrm{d} x-\displaystyle\int x \mathrm{~d} x$}
+	{\True $\displaystyle\int g(x) \mathrm{d} x=\dfrac{1}{2} x^2 \ln x-\dfrac{1}{4} x^2+C$}
+	\loigiai{
+	a) Khẳng định sai. Tập xác định của hàm số $f(x)$ là $(0;+\infty)$.\\
+	b) Khẳng định sai. $f'(x)=2x\ln x+x^2.\dfrac{1}{x}=x(2\ln x+1)$.\\
+	c) Khẳng định đúng. $\displaystyle\int f^{\prime}(x) \mathrm{d} x-\displaystyle\int x \mathrm{~d} x=\displaystyle\int\left(f'(x)-x\right)dx=\displaystyle\int\left(2x\ln x\right)dx=\displaystyle\int 2g(x)dx$.\\
+	d) Khẳng định đúng. Từ câu b), ta có 
+	$$f'(x)=x(2\ln x+1)=2g(x)+x \Rightarrow g(x)=\dfrac{1}{2}f'(x)-\dfrac{1}{2}x$$
+	Khi đó 
+	$$\displaystyle\int g(x) \mathrm{d} x=\displaystyle\int \left(\dfrac{1}{2}f'(x)-\dfrac{1}{2}x \right)  \mathrm{d} x=\dfrac{1}{2} x^2 \ln x-\dfrac{1}{4} x^2+C$$
+	}
+\end{ex}
+\cham{10}
+\begin{ex} %[Word to LaTeX 3.2]
+	Biết $F(x)=x^2+2x-\ln x+C,x\in \left(0;+\infty\right)$ là nguyên hàm của hàm số $f(x)$. Các khẳng định sau đây đúng hay sai?
+	\choiceTF
+	{\True $f(x)=2x+2-\dfrac{1}{x},x\in \left(0;+\infty\right)$}
+	{$F(1)=3$. Khi đó $F(2)=14-\ln 2$}
+	{$f(1)=1$}
+	{Bất phương trình $f(x)+\dfrac{1}{x}-8<0$ có tập nghiệm là $\left(-\infty;3\right)$}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item Đúng. $f(x)=F'(x)=2x+2-\dfrac{1}{x},x\in \left(0;+\infty\right)$.
+		\item Sai.\\
+		Ta có$F(1)=3\Leftrightarrow 1+2+C=3\Leftrightarrow C=0$.\\
+		Suy ra $F(x)=x^2+2x-\ln x,x\in \left(0;+\infty\right)$. Vậy $F(2)=8-\ln 2$.
+		\item Sai. Ta có$f(x)=2x+2-\dfrac{1}{x},x\in \left(0;+\infty\right)\Rightarrow f(1)=3$.
+		\item Sai. Ta có $f(x)=2x+2-\dfrac{1}{x},x\in \left(0;+\infty\right)$.\\
+		Nên $f(x)+\dfrac{1}{x}-8<0$$\Leftrightarrow \begin{cases}
+			&2x+2-\dfrac{1}{x}+\dfrac{1}{x}-8<0\\
+			&x>0\\
+		\end{cases}$$\Leftrightarrow 0<x<3$.\\
+		Vậy tập nghiệm bất phương trình là $(0;3)$.
+	\end{enumerate}
+}
+\end{ex}
+\cham{10}
+
+\Closesolutionfile{ans}
+\begin{dang}{Bài toán thực tế có sử dụng nguyên hàm}
+\end{dang}
+\setcounter{vd}{0}
+\boxmini{BÀI TẬP TỰ LUẬN}
+
+\begin{vd}%[Dự án TeX hóa bộ sách Cùng khám phá toán 12, Đoàn Hùng]
+	Người ta truyền nhiệt cho một bình nuôi cấy vi sinh vật từ $1^{\circ} \mathrm{C}$. Tốc độ tăng nhiệt độ của bình tại thời điểm $t$ phút $(0 \leq t \leq 5)$ được cho bởi hàm số $f(t)=3 t^{2}\left( ^{\circ} \mathrm{C} /\right.$ phút). Biết rằng nhiệt độ của bình đó tại thời điểm $t$ là một nguyên hàm của hàm số $f(t)$, tìm nhiệt độ của bình tại thời điểm $3$ phút kể từ khi truyền nhiệt.
+	\loigiai{
+		Ta có nhiệt độ của bình là $F(t)=\displaystyle \int f(t) \mathrm{\,d}t=\int 3t^2 \mathrm{\,d}t=t^3+C$.\\
+		Vì người ta bắt đầu truyền nhiệt cho bình nuôi cấy từ $1^{\circ} \mathrm{C}$ nên
+		$$F(0)=1\Leftrightarrow C=1\Rightarrow F(t)=t^3+1 \left( ^{\circ} \mathrm{C}\right).$$
+		Vậy nhiệt độ của bình tại thời điểm $3$ phút kể từ khi truyền nhiệt là $F(3)=3^3+1=28 \left( ^{\circ} \mathrm{C}\right)$.
+	}
+\end{vd}\dongcham{4}
+
+\begin{vd}%[2D3B3-2]
+	Một ô tô đang chạy với vận tốc $10$ m/s thì người lái đạp phanh, từ thời điểm đó, ô tô chuyển động chậm dần đều với vận tốc $v(t)=-5t+10$ m/s. Hỏi từ lúc đạp phanh đến khi dừng hẳn, ô tô còn di chuyển bao nhiêu mét?
+	\loigiai{
+		Vậy quãng đường di chuyển sau thời gian $t$ (tính từ lúc hãm phanh) là $s(t) = \displaystyle\int v(t) \mathrm{\,d}t=-\dfrac{5}{2}t^2+10t+C$.\\
+		Do $s(0)=0$, suy ra $C=0$. Vậy $s(t) = -\dfrac{5}{2}t^2+10t$.\\
+		Vật dừng hẳn thì $v(t)=0 \Rightarrow t=2$. Khi đó $s(2)=10$ (m).
+	}
+\end{vd}
+\dongcham{4}
+\begin{vd}
+	Một vật chuyển động với vận tốc $v(t)=3t+2$, thời gian tính bằng giây, quãng đường tính bằng mét. Biết tại thời điểm $t=2$ s thì vật đi được quãng đường $10$ m. Tính từ lúc xuất phát đến thời điểm $t=30$ s thì vật đã đi được quãng đường bao nhiêu mét?
+	\loigiai{
+		Ta có quãng đường đi được của vật là $S(t)=\displaystyle\int\limits_{0}^{t} {v(x)}\mathrm{\,d}x=\dfrac{3}{2}t^2+2t+C$.\\
+		Theo giả thiết $S(2)=10\Leftrightarrow C=0$.\\
+		Suy ra quãng đường vật đi được tính từ lúc xuất phát đến thời điểm $t=30$ là
+		\[S(30)=\dfrac{3}{2}\cdot 30^2+2\cdot 30=1410\,\mathrm{m}.\]}
+\end{vd}\dongcham{4}
+
+\begin{vd}
+	Một bác thợ xây bơm nước vào bể chứa nước. Gọi $h(t)$ là thể tích nước bơm được sau $t$ giây. Cho $h'(t) = 6at^2 +2bt$ và ban đầu bể không có nước. Sau 3 giây thì thể tích nước trong bể là $90$ m$^3$, sau 6 giây thì thể tích nước trong bể là $504$ m$^3$. Tính thể tích nước trong bể sau khi bơm được $9$ giây.
+	\loigiai{
+		Từ giả thiết suy ra $h(t)=\displaystyle \int (6at^2 +2 bt) \mathrm{d} x = 2at^3 + bt^2 +c$.\\
+		Lại có $h(0)=0; h(3)=90; h(6)=504$ nên suy ra $\heva{&c=0\\&54a+9b=90\\&432 a+ 36 b =504 }\Leftrightarrow \heva{&a=\dfrac{2}{3} \\&b=6 \\&c=0}$.\\
+		Vậy $h(t)=\dfrac{4}{3}t^3 + 6t^2 \Rightarrow h(9)= 1458$ m$^3$.
+	}
+\end{vd}\dongcham{6}
+
+\begin{vd}
+	Lợi nhuận cận biên khi $q$ đơn vị một loại hàng hoá được sản xuất là $P'(q)=300-6 q$ USD mỗi đơn vị. Khi 10 đơn vị hàng hoá được sản xuất thì lợi nhuận là 300 USD. Lợi nhuận đạt được lớn nhất là bao nhiêu?
+		\loigiai{
+		Lợi nhuận cận biên là đạo hàm của hàm lợi nhuận, tức là hàm lợi nhuận $P(q)=\displaystyle\int P'(q)dq=\displaystyle\int (300-6q)dq=300q-3q^2+C$.\\
+		Theo đề ta có $P(10)=300$ nên suy ra $C=-2400$. Vậy hàm lợi nhuận $P(q)=300q-3q^2-2400$.\\
+		Ta có: $P'(q)=0\Leftrightarrow 300-6q=0\Leftrightarrow q=50$. Mà $P''(q)=-6<0$ nên $q=50$ là điểm cực đại.\\
+		Với $q=50$ ta được: $P(50)=5100$. Vậy lợi nhuận đạt lớn nhất là 51000 USD.
+	}
+\end{vd}
+ \dongcham{6}
+\begin{vd}
+	Tại một lễ hội dân gian, tốc độ thay đổi lượng khách tham dự được biểu diễn bằng hàm số $B^{\prime}(t)=20 t^3-300 t^2+1000 t$. Trong đó $t$ tính bằng giờ $(0 \leq t \leq 15), B^{\prime}(t)$ được tính bằng khách/giờ. Sau một giờ, 500 người đã có mặt tại lễ hội.
+	\begin{enumEX}[a)]{1}
+		\item Viết công thức của hàm số $B(t)$ biểu diễn số lượng khách tham dự lễ hội với $0 \leq t \leq 15$.
+		\item Sau 3 giờ sẽ có bao nhiêu khách tham dự lễ hội?
+		\item Số lượng khách tham dự lễ hội lớn nhất là bao nhiêu?
+		\item Tại thời điểm nào thì tốc độ thay đổi lượng khách tham dự lễ hội là lớn nhất?
+	\end{enumEX}
+	\loigiai{
+	\begin{enumerate}[a)]
+		\item Ta có $B(t)$ là một nguyên hàm của hàm số $B^{\prime}(t)=20 t^3-300 t^2+1000 t$.
+		
+		Do đó $B(t)=\int\left(20 t^3-300 t^2+1000 t\right) \mathrm{d} t=5 t^4-100 t^3+500 t^2+C$.\\
+		Vì sau một giờ, 500 người đã có mặt tại lễ hội nên $B(1)=500 \Rightarrow C=95$.
+		Vậy $B(t)=5 t^4-100 t^3+500 t^2+95,0 \leq t \leq 15$.
+		\item Số lượng khách tham dự lễ hội sau 3 giờ là: $B(3)=5.3^4-100.3^3+500.3^2+95=2300$ (khách).
+		\item Giá trị lớn nhất của hàm số $B(t)$ trên đoạn $[0 ; 15]$. Ta có:
+		
+		$$
+		B^{\prime}(t)=20 t^3-300 t^2+1000 t=0 \Rightarrow\left[\begin{array}{l}
+			t=0 \\
+			t=5 \\
+			t=10
+		\end{array}\right.
+		$$
+		
+		
+		Ta có: $B(0)=95 ; B(5)=3220 ; B(10)=95, B(15)=28220$.
+		Vậy Số lượng khách tham dự lễ hội lớn nhất là 28220 khách sau 15 giờ.
+		\item Ta tìm $t$ để hàm số $B^{\prime}(t)=20 t^3-300 t^2+1000 t$ đạt giá trị lớn nhất trên đoạn $[0 ; 15]$. Ta có:
+		
+		$$
+		B^{\prime \prime}(t)=60 t^2-600 t+1000=0 \Rightarrow\left[\begin{array}{l}
+			t=\dfrac{15-5 \sqrt{3}}{3} \\
+			t=\dfrac{15+5 \sqrt{3}}{3}
+		\end{array}\right.
+		$$
+		
+		
+		Ta có: $B^{\prime}(0)=0 ; B^{\prime}\left(\dfrac{15-5 \sqrt{3}}{3}\right) \approx 962,25 ; B^{\prime}\left(\dfrac{15+5 \sqrt{3}}{3}\right) \approx-962,25 ; B^{\prime}(15)=15000$.
+		Khi đó, giá trị lớn nhất của hàm số $B^{\prime}(t)=20 t^3-300 t^2+1000 t$ trên đoạn [ $0 ; 15$ ] bằng 15000 tại $t=15$.
+		
+		Vậy tốc độ thay đổi lượng khách tham dự lễ hội là lớn nhất tại thời điểm 15 giờ.
+	\end{enumerate}
+	}
+\end{vd}
+\dongcham{25}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\setcounter{ex}{0}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn.  Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D4-B1-d4-1]
+\begin{ex}
+	Tốc độ tăng trưởng của một đàn gấu mèo tại thời điểm $t$ tháng kể từ khi người ta thả $100$ cá thể đầu tiên vào một khu rừng được ước lượng bởi công thức $P'(t)=8t+30$ (con/tháng), với $P(t)$ là số lượng cá thể trong đàn tại thời điểm $t$ tháng tương ứng. Dựa vào tốc độ tăng trưởng đã cho, hãy ước tính số cá thể của đàn gấu mèo này tại thời điểm $3$ tháng kể từ khi chúng được thả vào rừng.
+	\choice
+	{\True 226 con }
+	{ 352 con}
+	{ 301 con}
+	{ 205 con}
+	\loigiai{
+		Số lượng cá thể trong đàn gấu mèo tại thời điểm $t$ tháng là
+		$$P(t)=\displaystyle \int P'(t) \mathrm{\,d}t=\int (8t+30)\mathrm{\,d}t = 4t^2+30t+C\ (\text{con}).$$
+		Vì ban đầu thả $100$ cá thể gấu mèo nên $P(0)=100\Leftrightarrow C=100\Rightarrow P(t)=4t^2+30t+100$ (con).\\
+		Suy ra số cá thể của đàn gấu mèo này tại thời điểm $3$ tháng kể từ khi chúng được thả vào rừng là
+		$$P(3)=4\cdot 3^2+30\cdot 3+100=226\, (\text{con}).$$
+	}
+\end{ex}\cham{5}
+\begin{ex}
+	Sự sản sinh vi rút Zika ngày thứ $t$ có số lượng là $N(t)$ con, biết $N^{\prime}(t)=\dfrac{1000}{t}$ và lúc đầu đám vi rút có số lượng 250000 con. Tính số lượng vi rút sau 10 ngày (làm tròn đến hàng đơn vị).
+	\choice
+	{272304 con}
+	{212302 con}
+	{242102 con}
+	{\True 252303 con}
+	\loigiai{
+		Ta có: $N^{\prime}(t)=\dfrac{1000}{t} \Rightarrow N(t)=\int \dfrac{1000}{t} \mathrm{~d} t=1000 \ln |t|+C \Rightarrow N(t)=1000 \ln |t|+C$.\\
+		Chọn $t=1 \Rightarrow N(1)=250000 \Rightarrow C=250000 \Rightarrow N(t)=1000 \ln |t|+250000$.\\
+		Vậy số lượng vi rút sau 10 ngày là: $N(10)=1000 \ln 10+250000 \approx 252303$.
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	Cây cà chua khi trồng có chiều cao 5 cm . Tốc độ tăng chiều cao của cây cà chua sau khi trồng được cho bởi hàm số $v(t)=-0,1 t^3+t^2$, trong đó $t$ tính theo tuần, $v(t)$ tính bằng centimét/tuần. Gọi $h(t)$ là độ cao của cây cà chua ở tuần thứ $t$. Chiều cao cây cà chua sau 2 tuần là bao nhiêu? (\textit{Làm tròn kết quả đến số thập phân thứ hai})
+	\choice
+	{$7,43$ cm}
+	{$7,68$ cm}
+	{$7,15$ cm}
+	{\True $7,27$ cm}
+	\loigiai{
+	Ta có $h(t)=\displaystyle\int v(t) \mathrm{d} t=\displaystyle\int\left(-0,1 t^3+t^2\right) \mathrm{d} t=-\dfrac{1}{40} t^4+\dfrac{1}{3} t^3+C$.
+	Theo giả thiết, $h(0)=5 \Leftrightarrow C=5 \Rightarrow h(t)=-\dfrac{1}{40} t^4+\dfrac{1}{3} t^3+5(\mathrm{~cm})$.
+	Vậy $h(2)=-\dfrac{1}{40} \cdot 2^4+\dfrac{1}{3} \cdot 2^3+5=\dfrac{109}{15}(\mathrm{~cm}) \approx 7,27$.	
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	Cường độ dòng điện (đơn vị: A) trong một dây dẫn tại thời điểm $t$ giây là
+	$$I(t)=Q'(t)=3t^2-6t+5$$
+	Với $Q(t)$ là điện lượng (đơn vị: C) truyền trong dây dẫn tại thời điểm $t$. Biết khi $t=1$ giây, điện lượng truyền trong dây dẫn là $Q(1)=4$. Tính điện lượng truyền trong dây dẫn khi $t=3$.
+	\choice
+	{$18$ C}
+	{$20$ C}
+	{$15$ C}
+	{\True $16$ C}
+	\loigiai{
+		Ta có $Q(t)=\displaystyle \int Q'(t)\mathrm{\,d}t=\int \left(3t^2-6t+5\right)\mathrm{\,d}t = t^3-3t^2+5t+C$.\\
+		Vì $Q(1)=4\Rightarrow 1-3+5+C=4\Leftrightarrow C=1\Rightarrow Q(t)=t^3-3t^2+5t+1$.\\
+		Suy ra điện lượng truyền trong dây dẫn khi $t=3$ là $Q(3)=3^3-3\cdot 3^2+5\cdot 3+1=16$ (C).
+	}
+\end{ex}\cham{4}
+
+\begin{ex}
+	Một quả bóng được ném lên từ độ cao $20 m$ với vận tốc được tính bởi công thức sau đây $v(t)=-10 t+16(\mathrm{~m} / \mathrm{s})$. Công thức nào sau đây tính độ cao của quả bóng theo thời gian $t$?
+	\choice
+	{$h(t)=-5 t^2+16 t+C$}
+	{\True $h(t)=-5 t^2+16 t+20$}
+	{$h(t)=5 t^2-16 t+20$}
+	{$h(t)=5 t^2-16 t+C$}
+	\loigiai{
+		Gọi $h(t)$ là độ cao của quả bóng tại thời điểm $t$. Suy ra $h(t)$ là một nguyên hàm của $v(t)$.\\
+		Ta có: $\displaystyle \int(-10 t+16) \mathrm{dt}=-5 t^2+16 t+C$.\\
+		Do quả bóng được ném lên từ độ cao 20 m nên tại thời điểm $t=0$ thì $h=20$.
+		Suy ra $h(0)=20 \Rightarrow C=20$ nên $h(t)=-5 t^2+16 t+20$.
+	}
+\end{ex}
+\cham{4}
+\begin{ex}
+	Một ô tô đang chạy với vận tốc $70 \mathrm{~km} / \mathrm{h}$ thì hãm phanh và chuyển động chậm dần đều với tốc độ $v(t)=-10 t+30(\mathrm{~m} / \mathrm{s})$. Tính quãng đường ô tô đi được sau 3 giây kể từ khi hãm phanh?
+	\choice
+	{$51(m)$}
+	{$43(m)$}
+	{$54(m)$}
+	{\True $45(m)$}
+	\loigiai{
+	Gọi $s(t)$ là quãng đường xe ô tô đi được trong $t$ giây kể từ khi hãm phanh.
+	Ta có: $s(t)=\int(-10 t+30)=-5 t^2+30 t+C$. Do $s(0)=0 \Rightarrow C=0$.
+	Khi đó: $s(t)=-5 t^2+30 t \Rightarrow s(3)=-5.9+30.3=45(m)$.	
+	}
+\end{ex}
+\cham{4}
+\begin{ex}
+	Một chất điểm thực hiện chuyển động thẳng trên trục $Ox$, với vận tốc cho bởi công thức $v(t)=3t^2+4t$ m/s với $t$ là thời gian. Biết rằng tại thời điểm bắt đầu của chuyển động, chất điểm đang ở vị trí có tọa độ $x=1$. Tọa độ của chất điểm sau $1$ giây chuyển động là
+	\choice
+	{$x=5$}
+	{$x=9$}
+	{$x=6$}
+	{\True $x=4$}
+	\loigiai{
+		Phương trình tọa độ của chất điểm là nguyên hàm của phương trình vận tốc, nên ta có.\\
+		$x(t)=\displaystyle\int v(t)\mathrm{\,d}t=\displaystyle\int (3t^2+4t)\mathrm{\,d}t=t^3+2t^2+C$. \\
+		Tại thời điểm bắt đầu của chuyển động, chất điểm đang ở vị trí có tọa độ $x=1$ nên khi $x(0)=1$ có $C=1$.\\
+		Suy ra $x(t)=t^3+2t^2+1$.\\
+		Tọa độ của chất điểm sau $1$ giây chuyển động là $x=4$.}
+\end{ex}\cham{5}
+
+\begin{ex}%[2D3K1-1]%
+	Một vật đang chuyển động với vận tốc $6$ m/s thì tăng tốc với gia tốc $a(t)=\dfrac{3}{t+1}$ m/s$^2$, trong đó $t$ là khoảng thời gian tính bằng giây kể từ lúc bắt đầu tăng tốc. Hỏi vận tốc của vật sau $10$ giây gần nhất với kết quả nào sau đây?
+	\choice
+	{\True $13$ m/s}
+	{$14$ m/s}
+	{$12$ m/s}
+	{$11$ m/s}
+	\loigiai{
+		Ta có $v(t)=\displaystyle \int \dfrac{3}{t+1} \mathrm{\,d}t= 3\ln \left| t+1\right|+C$.\\
+		Tại thời điểm lúc bắt đầu tăng tốc $t=0$ thì $v=6$  m/s nên ta có $3\ln 1+C=6\Leftrightarrow C=6.$\\
+		Suy ra $v(t)=3\ln \left| t+1\right|+6$ m/s.\\
+		Tại thời điểm $t=10s\Rightarrow v\left(10\right)=3\ln 11+6\approx 13$ m/s.}
+\end{ex}\cham{7}
+
+\begin{ex}
+	Một chất điểm chuyển động trên đường thẳng nằm ngang với gia tốc phụ thuộc thời gian $t$(s) là $a(t)=2t-7\ \left(\mathrm{m/s}^2\right)$. Biết vận tốc đầu bằng $10$ m/s, hỏi sau bao lâu thì chất điểm đạt vận tốc $18$ m/s?
+	\choice
+	{\True $8$ s}
+	{$5$ s}
+	{$6$ s}
+	{$7$ s}
+	\loigiai{
+		Ta có $\displaystyle v(t)=\int (2t-7) \mathrm{\,d}t=t^2-7t+C$.\\
+		Vận tốc ban đầu bằng $10$ m/s nên $v(0)=10\Leftrightarrow C=10\Rightarrow v(t)=t^2-7t+10$.\\
+		Chất điểm đạt vận tốc $18$ m/s khi và chỉ khi $t^2-7t+10=18\Leftrightarrow \hoac{&t=-1\ \text{(loại)}\\&t=8.}$\\
+		Vậy sau $8$ s thì chất điểm đạt vận tốc $18$ m/s.
+	}
+\end{ex}\cham{5}
+
+\begin{ex}
+	Cho một vật chuyển động với gia tốc $a(t)=-20\cos \left(2t+\dfrac{\pi}{4}\right)$m/s$^2$. Biết vận tốc của vật vào thời điểm $t=\dfrac{\pi}{2}(s)$ là $15\sqrt{2}$ m/s. Tính vận tốc ban đầu của vật.
+	\choice
+	{$10\sqrt{2}$ m/s}
+	{\True $5\sqrt{2}$ m/s}
+	{$0$ m/s}
+	{$\sqrt{2}$ m/s}
+	\loigiai{
+		Ta có $v(t)=\displaystyle\int -20\cos \left(2t+\dfrac{\pi}{4}\right)\mathrm{d}t=-10\sin \left(2t+\dfrac{\pi}{4}\right)+C$.\\
+		Vận tốc tại thời điểm $t=\dfrac{\pi}{2}$ là $v\left(\dfrac{\pi}{2}\right)=-10\sin \left(\pi +\dfrac{\pi}{4}\right)+C=5\sqrt{2}+C=15\sqrt{2} \Rightarrow C=10\sqrt{2}$.\\
+		Vậy vận tốc ban đầu của vật là $v(0)=-10\sin \dfrac{\pi}{4}+10\sqrt{2}=5\sqrt{2}$ m/s.}
+\end{ex}\cham{5}
+
+\begin{ex}
+	Số dân của một thị trấn sau $t$ năm kể từ năm 1990 được ước tính theo một hàm số theo thời gian $f(t)\left(f(t)\right.$ được tính bằng nghìn người). Biết rằng $f^{\prime}(t)=\dfrac{34}{t^2+4 t+4}$ (nghìn người/năm) biểu thị tốc độ tăng dân số của thị trấn. Số dân của thị trấn đó vào năm $2035$ là bao nhiêu? (kết quả lấy chính xác đến hàng phần trăm) biết dân số của thị trấn đó năm $1990$ là $3$ nghìn người.
+	\choice
+	{$18,45$ (nghìn người)}
+	{\True $19,28$ (nghìn người)}
+	{$21,15$ (nghìn người)}
+	{$22,26$ (nghìn người)}
+	\loigiai{
+	Ta có: $f^{\prime}(t)=\dfrac{34}{t^2+4 t+4}=\dfrac{34}{(t+2)^2} \Rightarrow f(t)=-\dfrac{34}{t+2}+C$. Chọn mốc thời gian là năm 1990.\\
+	Dân số của thị trấn đó năm 1990 là 3 nghìn người nên ta có $f(0)=3$.\\
+	Khi đó $-\dfrac{34}{2}+C=3 \Leftrightarrow C=20$ nên $f(t)=-\dfrac{34}{t+2}+20$.\\
+	Từ năm 1990 đến năm 2035 là 45 năm nên dân số của thị trấn năm 2035 là
+	$f(45)=-\dfrac{34}{47}+20=\dfrac{906}{47} \approx 19,28$ (nghìn người).	
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	Một chiếc cốc chứa nước ở $95^{\circ}$C được đặt trong phòng có nhiệt độ $20^{\circ}$C. Theo định luật làm mát của Newton, nhiệt độ của nước trong cốc sau $t$ phút (xem $t=0$ là thời điểm nước ở $95^{\circ}$C) là một hàm số $T(t)$. Tốc độ giảm nhiệt độ của nước trong cốc tại thời điểm $t$ phút được xác định bởi $T'(t)=-\dfrac{3}{2} e^{-\tfrac{t}{50}}\, ^{\circ}$C/phút). Tính nhiệt độ của nước tại thời điểm $t=30$ phút.
+	\choice
+	{ $59{,}16 \ ^{\circ}\text{C}$}
+	{\True $61{,}16 \ ^{\circ}\text{C}$}
+	{ $36{,}06 \ ^{\circ}\text{C}$}
+	{ $45{,}06 \ ^{\circ}\text{C}$}
+	\loigiai{
+		Ta có nhiệt độ của nước trong cốc sau $t$ phút là
+		$$\begin{aligned}
+			T(t)=\displaystyle \int T'(t)\mathrm{\,d}t&=\int \left(-\dfrac{3}{2} e^{-\tfrac{t}{50}} \right)\mathrm{\,d}t\\
+			&=75\cdot e^{-\tfrac{t}{50}}+C.
+		\end{aligned}$$
+		Vì $t=0$ là thời điểm nước ở $95^{\circ}$C nên $T(0)=95\Leftrightarrow 75+C=95\Leftrightarrow C=20\Rightarrow T(t)=75\cdot e^{-\tfrac{t}{50}}+20$.\\
+		Vậy nhiệt độ của nước tại thời điểm $t=30$ phút là
+		$$T(30)=75\cdot e^{-\tfrac{30}{50}}+20\approx 61{,}16 \ ^{\circ}\text{C}.$$
+	}
+\end{ex}\cham{5}
+
+\Closesolutionfile{ans}
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D4-B1-d4-2]
+
+\begin{ex}
+	Một chiếc xe bắt đầu chuyển động từ trạng thái đứng yên với gia tốc không đổi. Vận tốc của xe tại thời điểm $t$ giây $(s)$ kể từ khi bắt đầu chuyền động là $v(t)=3 t$ tính bằng mét trên giây) $(\mathrm{m} / \mathrm{s})$. Quãng đường xe đi được từ thời điểm $t$ giây được mô tả bởi hàm số $s(t)$.
+	\choiceTF
+	{\True Gia tốc không đổi của chiếc xe là $a=3 \mathrm{~m} / \mathrm{s}^2$}
+	{\True Quãng đường xe đi được sau $10$ s là $150$ m}
+	{Vận tốc của xe sau $15$ s là $60 \mathrm{~m} / \mathrm{s}$}
+	{\True Nếu tăng gia tốc của xe lên $6 \mathrm{~m} / \mathrm{s}^2$ thì vận tốc của xe sau $10$ s sẽ là $60 \mathrm{~m} / \mathrm{s}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Khẳng định đúng. $a(t)=v'(t)=3 \Rightarrow a=3$.
+			\itemch Khẳng định đúng. $s(t)=\displaystyle\int v(t)dt=\displaystyle\int 3t dt=\dfrac{3}{2}t^2+C$.\\
+			Vì $s(0)=0$ nên $C=0$. Do đó $s(t)=\dfrac{3}{2}t^2$. Suy ra $s(10)=150$ m.
+			\itemch Khẳng định sai. $v(15)=45$ (m/s).
+			\itemch Khẳng định đúng. Nếu $a=6$ thì $v(t)=6t$. Khi đó $v(10)=60$ (m/s).
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{11}
+\begin{ex}
+	Một vườn ươm cây cảnh bán một cây sau 6 năm trồng và uốn tạo dáng. Tốc độ tăng trưởng của cây đó trong suốt 6 năm được tính xấp xi bởi công thức $h^{\prime}(t)=1,5 t+5$, trong đó $h(t)\,(\mathrm{cm})$ là chiều cao của cây sau $t$ (năm). Cây con khi được trồng cao 12 cm .
+	\choiceTF
+	{\True $h(t)$ là một nguyên hàm của hàm số $h^{\prime}(t)=1,5 t+5$}
+	{\True $h(t)=\dfrac{3}{4} t^2+5t+C$ với $C$ là một hằng số}
+	{Chiều cao của cây đó không đổi trong 6 năm được trồng}
+	{Chiều cao của cây đó khi được bán là 70 cm}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định đúng. $h(t)=\displaystyle\int(1.5t+5)dt=\dfrac{3}{4} t^2+5t+C$.\\
+	c) Khẳng định sai. Vì $t\ge 0$ nên $h'(t)\ge 5$. Do đoa chiều cao của cây luôn tăng.\\
+	d) Khẳng định sai. Vì $h(0)=12$ nên $C=12$. Suy ra $h(t)=\dfrac{3}{4} t^2+5t+12$. Khi đó $h(6)=69$ cm. 	
+	}
+\end{ex}
+\cham{12}
+\begin{ex}
+	Đối với các dự án xây dựng, chi phí nhân công lao động được tính theo số ngày công. Gọi $m(t)$ là số lượng công nhân được sử dụng ở ngày thứ $t$ (kể từ khi khời công dự án). Gọi $M(t)$ là số ngày công được tính đến hết ngày thứ $t$ (kể từ khi khời công dự án). Trong kinh tế xây dựng, người ta đã biết rằng $M^{\prime}(t)=m(t)$. Một công trình xây dựng dự kiến hoàn thành trong 400 ngày. Số lượng công nhân được sử dụng cho bởi hàm số $m(t)=800-2 t$, trong đó $t$ tính theo ngày $(0 \leq t \leq 400), m(t)$ tính theo người. Đơn giá cho một ngày công lao động là 400000 đồng.
+	\choiceTF
+	{\True $M(\mathrm{t})$ là một nguyên hàm của hàm số $m(t)=800-2 t$}
+	{\True $M(t)=800 t-t^2+C$ với $0 \leq t \leq 400$ và $C$ là một hằng số}
+	{\True Số ngày công được tính đến hết ngày thứ 400 là 160000}
+	{Chi phí nhân công lao động của công trình đó (cho đến lúc hoàn thành) là 640 nghìn đồng}
+	\loigiai{
+	a) Khẳng định đúng.\\
+	b) Khẳng định đúng. $M(t)=\displaystyle\int(800-2t)dt=800t-t^2+C$.\\
+	c) Khẳng định đúng. Vì $M(0)=0$ nên $C=0$. Khi đó $M(400)=800.400-400^2=160000$.\\
+	d) Khẳng định sai. Chi phí nhân công là: $160000.400000=64,000,000,000$ đồng, tức là 64 tỷ đồng.	
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	Mực nước trong hồ chứa của nhà máy điện thủy triều thay đổi trong suốt một ngày do nước chảy ra khi thủy triều xuống và nước chảy vào khi thủy triều lên. Tốc độ thay đổi của mực nước được xác định bởi hàm số $h^{\prime}(t)=\dfrac{1}{90}\left(t^2-17 t+60\right)$, trong đó $t$ tính bằng giờ $(0 \leq t <24), h^{\prime}(t)$ tính bằng mét/giờ. Tại thời điểm $t=0$, mực nước trong hồ chứa cao 8 m.
+	\choiceTF
+	{\True $h(0)=8$}
+	{$h(t)=\dfrac{1}{90}\left(\dfrac{1}{3} t^3-\dfrac{17}{2} t^2+60 t\right)$, với $t \in [0;24)$}
+	{Mực nước trong hồ cao nhất là $25,4$ m}
+	{\True Mực nước trong hồ thấp nhất là $8$ m}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Tại thời điểm $t=0$, mực nước trong hồ chứa cao 8 m. Suy ra $h(0)=8$.
+			\item Ta có: $h^{\prime}(t)=\dfrac{1}{90}\left(t^2-17 t+60\right) \Rightarrow h(t)=\dfrac{1}{90} \int\left(t^2-17 t+60\right) \mathrm{d} t=\dfrac{1}{90}\left(\dfrac{1}{3} t^3-\dfrac{17}{2} t^2+60 t\right)+C$.\\
+			Khi đó $h(t)=\dfrac{1}{90}\left(\dfrac{1}{3} t^3-\dfrac{17}{2} t^2+60 t\right)+C$.\\
+			Tại thời điểm $t=0$, mực nước trong hồ chứa cao $8 m$ nên $h(0)=8 \Rightarrow C=8$.
+			
+			$$
+			\Rightarrow h(t)=\dfrac{1}{90}\left(\dfrac{1}{3} t^3-\dfrac{17}{2} t^2+60 t\right)+8,\,(0 \leq t \leq 24)
+			$$
+			\item $h'(t)=0\Leftrightarrow \hoac{&t=5\\&t=12}$. Ta có: $h(0)=8; h(5)=\dfrac{1019}{108}\approx 9,44; h(12)=8,8; h(24)=20,8$.\\
+			Do đó mực nước cao nhất là 20,8 m tại $t=24$.
+			\item Mực nước thấp nhất là 8 m tại $t=0$.
+		\end{enumerate}
+		
+	}
+\end{ex}
+ \cham{11}
+ \begin{ex}
+ Doanh số hàng tháng tại một cửa hàng nhập khẩu hiện tại là 10000 USD nhưng dự kiến sẽ giảm với tốc độ $S^{\prime}(t)=-10 t^{\frac{2}{5}}$ USD mỗi tháng sau $t$ tháng từ bây giờ. Cửa hàng vẫn có lợi nhuận miễn là doanh số hàng tháng trên 8000 USD.
+ 	\choiceTF
+ 	{\True Tại thời điểm 32 tháng kể từ bây giờ thì tốc độ thay đổi của doanh thu là $-40 \mathrm{USD} /$ tháng}
+ 	{\True Công thức doanh số dự kiến trong $t$ tháng là $S(t)=10000-\dfrac{50}{7} t^{\frac{7}{5}}$}
+ 	{Cửa hàng vẫn có lãi sau 56 tháng}
+ 	{\True Doanh số dự kiến trong 2 năm kể từ bây giờ là 9389 USD}
+ 	\loigiai{
+ 	a) Khẳng định đúng. $S'(32)=-40$.\\
+ 	b) Khẳng định đúng. $S(t)=\displaystyle\int(-10 t^{\frac{2}{5}})dt=-\dfrac{50}{7}t^{\frac{7}{5}}+C$. Mà $S(0)=10000$ nên $C=10000$.\\
+ 	Do đó $S(t)=10000-\dfrac{50}{7} t^{\dfrac{7}{5}}$.\\
+ 	c) Khẳng định sai. $S(56)=7998,6<8000$.\\
+ 	d) Khẳng định đúng. 2 năm tức là 24 tháng, khi đó $S(24)=9389$.	
+ 	}
+ \end{ex}
+\cham{10}
+ \begin{ex} % Câu 2
+ 	(TN.2025) Đối với ngành nuôi trồng thủy sản, việc kiểm soát lượng thuốc tồn dư trong nước là một nhiệm vụ quan trọng nhằm đáp ứng các tiêu chuẩn an toàn về môi trường. Khi nghiên cứu một loại thuốc trị bệnh trong nuôi trồng thủy sản, người ta sử dụng thuốc đó một lần và theo dõi nồng độ thuốc tồn dư trong nước kể từ lúc sử dụng thuốc. Kết quả cho thấy nồng độ thuốc $y\left( t \right)$ (đơn vị: mg/lít) tồn dư trong nước tại thời điểm $t$ ngày ($t \geqslant 0$) kể từ lúc sử dụng thuốc, thỏa mãn $y\left( t \right) > 0$ và $y'\left( t \right) = k.y\left( t \right)$ ($t \geqslant 0$), trong đó $k$ là hằng số khác không. Đo nồng độ thuốc tồn dư trong nước tại các thời điểm $t = 6$ (ngày); $t = 12$ (ngày) nhận được kết quả lần lượt là 2 mg/lít; 1 mg/lít. Cho biết $y\left( t \right) = {e^{g\left( t \right)}}$ ($t \geqslant 0$).
+ 	\choiceTF
+ 	{\True $g\left( t \right) = kt + C$ ($t \geqslant 0$) với $C$ là một hằng số xác định}
+ 	{\True $k =  - \dfrac{{\ln 2}}{6}$}
+ 	{$C = 4\ln 2$}
+ 	{Nồng độ thuốc tồn dư trong nước tại thời điểm $t = 21$ (ngày) kể từ lúc sử dụng thuốc lớn hơn $0,4$ mg/lít}
+ 	\loigiai{
+ 		\begin{itemchoice}
+ 			\itemch Đúng\\
+ 			Ta có: $y'\left( t \right) = k.y\left( t \right)$$ \Rightarrow \dfrac{{y'\left( t \right)}}{{y\left( t \right)}} = k$$ \Rightarrow \displaystyle\int\limits {\dfrac{{y'\left( t \right)}}{{y\left( t \right)}}dt = \displaystyle\int\limits {kdt} } $\\
+ 			$ \Rightarrow \ln \left( {y\left( t \right)} \right) = k.t + C$$ \Rightarrow y\left( t \right) = {e^{k.t + C}}$. Do đó $g\left( t \right) = k.t + C$
+ 			\itemch Đúng\\
+ 			Theo giả thiết ta có: $\left\{ \begin{gathered}
+ 				y\left( 6 \right) = 2 \hfill \\
+ 				y\left( {12} \right) = 1 \hfill \\
+ 			\end{gathered}  \right. \Rightarrow \left\{ \begin{gathered}
+ 				2 = {e^{6k + C}} \hfill \\
+ 				1 = {e^{12k + C}} \hfill \\
+ 			\end{gathered}  \right. \Rightarrow \left\{ \begin{gathered}
+ 				6k + C = \ln 2 \hfill \\
+ 				12k + C = 0 \hfill \\
+ 			\end{gathered}  \right. \Rightarrow \left\{ \begin{gathered}
+ 				k =  - \dfrac{{\ln 2}}{6} \hfill \\
+ 				C = 2\ln 2 \hfill \\
+ 			\end{gathered}  \right.$
+ 			\itemch Sai\\
+ 			$C = 2\ln 2$
+ 			\itemch Sai\\
+ 			Vậy $y\left( t \right) = {e^{ - \dfrac{{\ln 2}}{6}t + 2\ln 2}}$, $g\left( t \right) =  - \dfrac{{\ln 2}}{6}t + 2\ln 2$.\\
+ 			Với $t = 21$ ta có $y\left( {21} \right) = {e^{ - \dfrac{{\ln 2}}{6}.21 + 2\ln 2}} = \dfrac{{\sqrt 2 }}{4} < 0,4$ mg/lít.
+ 		\end{itemchoice}
+ 	}
+ \end{ex}
+\cham{10}

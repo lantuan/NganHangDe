@@ -1,0 +1,713 @@
+\section{VỊ TRÍ TƯƠNG ĐỐI, GÓC, KHOẢNG CÁCH GIỮA 2 ĐƯỜNG THẲNG}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+
+\subsubsection{ Vị trí tương đối của hai đường thẳng}
+Cho hai đường thẳng $\heva{&{\Delta}_1\colon a_1x+b_1y+c_1=0\\&{\Delta}_2 \colon a_2x+b_2y+c_2=0}$. Để kiểm tra vị trí tương đối giữa chúng, ta có thể làm theo một trong hai cách sau:
+\begin{itemize}
+	\item [\iconMT] \indam{Cách 1: Dựa vào số nghiệm của hệ phương trình.}\\
+	Xét hệ $\heva{
+		& a_1x+b_1y+c_1=0 \\ 
+		& a_2x+b_2y+c_2=0 \\}.$
+	\begin{boxkn}
+		\begin{itemize}
+			\item Nếu hệ có một nghiệm $\left(x_0;y_0\right)$ thì ${\Delta}_1$ cắt ${\Delta}_2$ tại điểm $M_0\left(x_0;y_0\right).$
+			\item Nếu hệ có vô số nghiệm thì ${\Delta}_1$ trùng với ${\Delta}_2$.
+			\item Nếu hệ vô nghiệm thì ${\Delta}_1$ và ${\Delta}_2$ không có điểm chung, hay ${\Delta}_1$ song song với ${\Delta}_2$.
+		\end{itemize}
+	\end{boxkn}
+	\item [\iconMT] \indam{Cách 2: Xét tỉ số (với $a_2$, $b_2$, $c_2$ khác 0)}
+	\begin{boxkn}
+		\begin{itemize}
+			\item Nếu $\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}=\dfrac{c_1}{c_2}$ thì ${\Delta}_1$ trùng với ${\Delta}_2$.
+			\item Nếu $\dfrac{a_1}{a_2}=\dfrac{b_1}{b_2}\ne \dfrac{c_1}{c_2}$ thì ${\Delta}_1$ song song ${\Delta}_2$.
+			\item  Nếu $\dfrac{a_1}{a_2}\ne \dfrac{b_1}{b_2}$ thì ${\Delta}_1$ cắt ${\Delta}_2$.
+		\end{itemize}
+	\end{boxkn}
+\end{itemize}
+
+\subsubsection{ Góc giữa hai đường thẳng}
+\begin{itemize}
+	\item [\iconMT] \indam{Công thức tính:} Cho hai đường thẳng 
+	${\Delta}_1\colon a_1x+b_1y+c_1=0$ và 
+	${\Delta}_2\colon a_2x+b_2y+c_2=0$.  Gọi $\varphi $ $(0^\circ \le \varphi \le 90^\circ)$ là góc tạo bởi giữa hai đường thẳng ${\Delta}_1$ và ${\Delta}_2$.
+	Khi đó
+	\boxmini{$\cos \varphi =\left| \cos \left(\overrightarrow{n_1},\overrightarrow{n_2}\right)\right|=\dfrac{\left| \overrightarrow{n_1}\cdot\overrightarrow{n_2}\right|}{\left| \overrightarrow{n_1}\right|\cdot \left| \overrightarrow{n_2}\right|}=\dfrac{\left| a_1\cdot a_2+b_1\cdot b_2\right|}{\sqrt{a_1^2+b_1^2}\cdot\sqrt{a_2^2+b_2^2}}.$}
+	với $\overrightarrow{n_1}=\left(a_1;b_1\right)$, $\overrightarrow{n_2}=\left(a_2;b_2\right)$ lần lượt là vtpt của $\Delta_1$ và $\Delta_2$.
+	\immini{
+		\item[\iconMT] \indam{Chú ý: }
+		\begin{boxkn}
+			\begin{itemize}
+				\item [$\bullet$] $0^\circ \le \varphi \le 90^\circ$.
+				\item [$\bullet$] Nếu $\Delta_1$ song song hoặc trùng $\Delta_2$ thì $\varphi=0^\circ$.
+				\item [$\bullet$] Nếu $\Delta_1$ vuông góc $\Delta_2$ thì $\varphi=90^\circ$ hay \fbox{$a_1a_2+b_1b_2=0$}.
+			\end{itemize}
+	\end{boxkn}}{
+		\begin{tikzpicture}[scale=0.7, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,4/0/B,0.5/-0.5/C,4/3/D,1/0/M}
+			\tkzDrawSegments(A,B D,C)
+			%\tkzMarkAngles[size=0.7cm,arc=ll](B,M,D)
+			\tkzLabelAngles[pos=1,rotate=30](B,M,D){$\varphi$}
+			\tkzDrawPoints[size=3,fill=black](M)
+			\draw (4,0)node[below]{$\Delta_1$} (4,3)node[below right]{$\Delta_2$};
+			\begin{scope}
+				\clip (D)--(M)--(B);
+				\draw[double] (M) circle(0.6cm);
+			\end{scope}
+	\end{tikzpicture}}
+\end{itemize}
+
+\subsubsection{ Khoảng cách từ một điểm đến một đường thẳng}
+\begin{itemize}
+	\immini{\item [\iconMT] \indam{Công thức tính:} Khoảng cách từ $M_0\left(x_0;y_0\right)$ đến đường thẳng $\Delta\colon ax+by+c=0$ được tính theo công thức
+		\boxmini{$d\left(M_0,\Delta \right)=M_0H=\dfrac{\left| ax_0+by_0+c\right|}{\sqrt {a^2+b^2}}$}
+	}{\hspace{1.5cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\draw[-] (0,0)--(4,0) node [below]{$\Delta$};
+			\draw[-] (2,0)node [below]{$H$}--(2,1.5) node [right]{$M_0$};
+			\draw[fill=black] (2,0) circle(1.5pt) (2,1.5) circle(1.5pt);
+	\end{tikzpicture}}
+	\item [\iconMT] \indam{Các trường hợp đặc biệt:} $d\left(M_0,Ox \right)=M_0H=\big|y_0\big|$, \quad $d\left(M_0,Oy \right)=M_0K=\big|x_0\big|$.
+	\item [\iconMT] \indam{Phương trình các đường phân giác góc tạo bởi hai đường thẳng cắt nhau:}
+	Cho hai đường thẳng $\Delta_1\colon a_1x+b_1y+c_1=0$ và ${\Delta}_2\colon a_2x+b_2y+c_2=0$ cắt nhau thì phương trình hai đường phân giác của góc tạo bởi hai đường thẳng trên là
+	$$\dfrac{a_1x+b_1y+c_1}{\sqrt{a_1^2+b_1^2}}=\pm \dfrac{a_2x+b_2y+c_2}{\sqrt{a_2^2+b_2^2}}$$
+\end{itemize}
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Vị trí tương đối của hai đường thẳng}
+\end{dang}
+
+\begin{vd}   
+	Xét vị trí tương đối và tìm giao điểm của 2 đường thẳng sau (nếu có ).
+	\begin{tasks}(1)
+		\task $2x-5y+3=0$ và $5x+2y-3=0.$ 
+		\task $x-3y+4=0$ và $0,5x-1,5y+4=0.$ 
+		\task $10x+2y-3=0$ và $5x+y-1,5=0.$ 
+	\end{tasks}
+	\loigiai{ 
+		\begin{enumerate}[a)]
+			\item Ta có: $\dfrac{2}{5}\ne \dfrac{-5}{2}$ nên hai đường thằng cắt nhau.\\
+			Tọa độ giao điểm là nghiệm của hệ $\left\{\begin{aligned}& ~2x-5y+3=0~ \\ & 5x+2y-3=0 \\ \end{aligned} \Leftrightarrow \left\{\begin{aligned}& x=\dfrac{9}{29} \\ & y=\dfrac{21}{29}. \\ \end{aligned}\right. \right. $ \\
+			Vậy hai đường thẳng cắt nhau tại $M\left(\dfrac{9}{29};\dfrac{21}{29}\right).$ 
+			\item Vì $\dfrac{1}{0,5}=\dfrac{-3}{-1,5}$ $\ne \dfrac{4}{4}$ nên hai đường thẳng song song.
+			\item Vì $\dfrac{10}{5}=\dfrac{2}{1}=\dfrac{-3}{-1,5}$ nên hai đường thẳng trùng nhau.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{16} 
+\begin{vd}
+	Xét vị trí tương đối và tìm giao điểm của cặp đường thẳng sau (nếu có).
+	\begin{tasks}(1)
+		\task $d\colon \left\{\begin{aligned}& x=-1-5t \\ & y=2+4t \\ \end{aligned}\right. $ và $d'\colon \left\{\begin{aligned}& x=-6+5t' \\ & y=2-4t'. \\ \end{aligned}\right. $ 
+		\task $d\colon \left\{\begin{aligned}& x=1-4t \\ & y=2+2t \\ \end{aligned}\right. $ và $d'\colon 2x+4y-10=0.$ 
+		\task $d\colon \left\{\begin{aligned}& x=-2+t \\ & y=2+2t \\ \end{aligned}\right. $ và $d'\colon \dfrac{x}{1}=\dfrac{y-3}{-2}.$ 
+	\end{tasks}
+	\loigiai{ 
+		Ta chuyển các đường thẳng về dạng tổng quát
+		\begin{enumerate}[a)]
+			\item $d\colon 4x+5y-6=0$ và $d'\colon 4x+5y+14=0.$ \\
+			Ta có $\dfrac{4}{4}=\dfrac{5}{5}\ne \dfrac{-6}{14}$ nên $d,d'$ song song.
+			\item $d\colon x+2y-5=0$ và $d'\colon 2x+4y-10=0.$ \\
+			Ta có $\dfrac{1}{2}=\dfrac{2}{4}=\dfrac{-5}{-10}$ nên $d,d'$ trùng nhau.
+			\item $d\colon x+y-2=0$ và $d'\colon 2x+y-3=0.$ \\
+			Ta có $\dfrac{1}{2}\ne \dfrac{1}{1}$ nên $d,d'$ cắt nhau.\\
+			Tọa độ giao điểm là nghiệm của hệ $\left\{\begin{aligned}& x+y-2=0 \\ & 2x+y-3=0 \\ \end{aligned} \Leftrightarrow \left\{\begin{aligned}& x=1 \\ & y=1 \\ \end{aligned}\right. \right. $. Vậy $I(1;1)$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{12} 
+
+\begin{vd}
+	Tìm giá trị của tham số $m$ để $ \Delta_1\colon mx+y+8=0$ và $ \Delta_2\colon x-y+m=0$  vuông góc nhau.
+	\loigiai{ 
+		$ \Delta_1$ có VTPT là $\overrightarrow{n_1}=(m;1).$ \\
+		$ \Delta_2$ có VTPT là $\overrightarrow{n_2}=(1;-1).$ \\
+		Ta có: $ \Delta_1\perp \Delta_2 \Leftrightarrow \overrightarrow{n_1}.\overrightarrow{n_2}=0 \Leftrightarrow m-1=0 \Leftrightarrow m=1$.\\
+	}
+\end{vd}\dongcham{8} 
+
+\begin{vd}
+	Tìm $m$ để ba đường thẳng sau đây đồng quy
+	\begin{center}
+		$d_1\colon 2x+y-4=0$, $d_2\colon 5x-2y+3=0$ và $d_3\colon mx+3y-2=0.$
+	\end{center}
+	\loigiai{ 
+		Tọa độ giao điểm của $d_1$ và $d_2$ là nghiệm của hệ: $\left\{\begin{aligned}& 2x+y=4 \\ & 5x-2y=-3 \\ \end{aligned} \Leftrightarrow \left\{\begin{aligned}& x=\dfrac{5}{9} \\ & y=\dfrac{26}{9} \\ \end{aligned}\right. \right. $.Vậy $I\left(\dfrac{5}{9};\dfrac{26}{9}\right).$ \\
+		Để ba đường thẳng $d_1,d_2,d_3$ đồng quy ta phải có $I$ thuộc $d_3$ $ \Leftrightarrow \dfrac{5}{9}m+\dfrac{26}{3}-2=0 \Leftrightarrow m=-12$.\\
+	}
+\end{vd}\dongcham{8} 
+
+\begin{vd}%[0H3B1-2] 
+	Trong mặt phẳng $Oxy$, viết phương trình tổng quát của đường thẳng $d$ 
+	\begin{tasks}(1)
+		\task qua $M(-1;-4)$ và song song với đường thẳng $3x+5y-2=0.$ 
+		\task qua $N(1;1)$ và vuông góc với đường thẳng $2x+3y+7=0.$ 
+	\end{tasks}
+	\loigiai{ 
+		\begin{enumerate}
+			\item VTPT của $d$ cũng là VTPT của đường thẳng $3x+5y-2=0$ nên phương trình của $d$ là: $3x+5y+c=0.$ \\
+			Vì $d$ đi qua điểm $M(-1;-4)$ nên $-3-20+c=0 \Rightarrow c=23.$ \\
+			Vậy phương trình tổng quát $d\colon 3x+5y+23=0.$ 
+			\item Đường thẳng $d$ vuông góc với đường thẳng $2x+3y+7=0$ nên lấy VTCP $(3;-2)$ làm VTPT của $d.$ \\
+			$$\Rightarrow d\colon 3(x-1)-2(y-1)=0 \Leftrightarrow 3x-2y-1=0.$$
+		\end{enumerate}
+	}
+\end{vd}\dongcham{17}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho điểm $A(-5;2)$ và đường thẳng $ d \colon \heva{&x=2+t\\&y=-3-2t}$. Lập phương trình tổng quát của đường thẳng $ d'$ trong các trường hợp sau
+	\begin{tasks}(2)
+		\task $d'$ qua $ A $ và song song với $d.$
+		\task $d'$ qua $A$ và vuông góc với $d.$ 
+	\end{tasks}
+	\loigiai{
+	}
+\end{vd}\dongcham{17}
+\begin{dang}{Góc giữa hai đường thẳng}
+\end{dang}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho hai đường thẳng $\Delta_1:x+2y-\sqrt{2}=0$ và $\Delta_2:x-y=0$. Tính côsin của góc giữa $\Delta_1$ và $\Delta_2$.
+	\loigiai{
+		Ta có $\vec{n}=(1;2)$ và $\vec{n'}=(1;-1)$ là véc-tơ pháp tuyến của các đường thẳng $\Delta$ và $\Delta'$.\\
+		Gọi $\varphi$ là góc giữa các đường thẳng $\Delta$ và $\Delta'$. Khi đó
+		$$\cos\varphi = |\cos(\vec{n},\vec{n'})|=\dfrac{\sqrt{10}}{10}.$$
+	}
+\end{vd}\dongcham{10}
+
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, tính góc giữa hai đường thẳng sau $ \Delta_1\colon 3x-2y+1=0$ và $ \Delta_2\colon \left\{\begin{aligned}& x=t \\ & y=7-5t \\ \end{aligned}\right. \left(t\in \mathbb{R}\right)$.
+	\loigiai{
+		Ta có $\overrightarrow{n_1}(3;-2),\overrightarrow{n_2}(5;1)$ lần lượt là véc-tơ pháp tuyến của đường thẳng $ \Delta_1$ và $ \Delta_2$ suy ra\\
+		$\cos \left( \Delta_1, \Delta_2\right)=\dfrac{|3\cdot 5-2 \cdot1|}{\sqrt{13}\cdot\sqrt{26}}=\dfrac{\sqrt{2}}{2}$ do đó $\left( \Delta_1; \Delta_2\right)=45^{\circ}$.
+		
+	}
+\end{vd}\dongcham{8}
+
+\begin{vd}
+	Tìm $m$ để góc hợp bởi hai đường thẳng $ \Delta_1\colon \sqrt{3}x-y+7=0$ và $ \Delta_2\colon mx+y+1=0$ một góc bằng $30^{\circ}$. 
+	\loigiai{
+		Ta có: $\cos \left( \Delta_1, \Delta_2\right)=\dfrac{\left|m\sqrt{3}-1\right|}{\sqrt{\left(\sqrt{3}\right)^2+(-1)^2}\cdot \sqrt{m^2+1^2}}$. \\
+		Theo bài ra góc hợp bởi hai đường thẳng $ \Delta_1, \Delta_2$ bằng $30^{\circ}$ nên\\
+		$\cos 30^{\circ}=\dfrac{\left|m\sqrt{3}-1\right|}{2.\sqrt{m^2+1}} \Leftrightarrow \dfrac{\sqrt{3}}{2}=\dfrac{\left|m\sqrt{3}-1\right|}{2.\sqrt{m^2+1}} \Leftrightarrow \sqrt{3(m^2+1)}=\left|m\sqrt{3}-1\right|$. \\
+		Hay $3(m^2+1)=\left(m\sqrt{3}-1\right)^2 \Leftrightarrow 3m^2+3=3m^2-2m\sqrt{3}+1 \Leftrightarrow m=-\dfrac{1}{\sqrt{3}}$. \\
+		Vậy $m=-\dfrac{1}{\sqrt{3}}$ là giá trị cần tìm.
+		
+	}
+\end{vd}\dongcham{13}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho đường thẳng $d\colon 3x-2y+1=0$ và $M(1;2)$. Viết phương trình đường thẳng $ \Delta $ đi qua $M$ và tạo với $d$ một góc $45^\circ$.
+	\loigiai{
+		Đường thẳng $ \Delta $ đi qua M có dạng $ \Delta \colon a(x-1)+b(y-2)=0,a^2+b^2\ne 0$ hay $ax+by-a-2b=0$ \\
+		Theo bài ra $ \Delta $ tạo với $d$ một góc $45^{\circ}$ nên:\\
+		\begin{eqnarray*}
+			\cos 45^{\circ}&=&\dfrac{|3a+(-2b)|}{\sqrt{3^2+(-2)^2}\cdot \sqrt{a^2+b^2}} \\
+			&\Leftrightarrow & \dfrac{\sqrt{2}}{2}=\dfrac{|3a-2b|}{\sqrt{13}.\sqrt{a^2+b^2}} \\
+			&\Leftrightarrow & \sqrt{26(a^2+b^2)}=2|3a-2b| \\
+			&\Leftrightarrow & 5a^2-24ab-5b^2=0 \\
+			&\Leftrightarrow & \left[\begin{aligned}& a=5b \\ & 5a=-b. \\ \end{aligned}\right. 
+		\end{eqnarray*}
+		+ Nếu $a=5b$, chọn $a=5,b=1$ suy ra $ \Delta \colon 5x+y-7=0$. \\
+		+ Nếu $5a=-b$, chọn $a=1,b=-5$ suy ra $ \Delta \colon x-5y+9=0$. \\
+		Vậy có 2 đường thẳng thoả mãn $ \Delta_1\colon x-5y+9=0$ và $ \Delta_2\colon 5x+y-7=0$.	
+	}
+\end{vd}\dongcham{13}
+
+
+\begin{dang}{Khoảng cách từ một điểm đến một đường thẳng}
+	
+\end{dang}
+
+\begin{vd}%[0H3Y1-5]%
+	Trong mặt phẳng $Oxy$, cho điểm $M(3;5)$ và đường thẳng $ \Delta $ có phương trình $2x-3y-6=0$. Tính khoảng cách từ $M$ đến $\Delta$.
+	\loigiai{
+		Ta có $\mathrm{d}(M, \Delta)=\dfrac{|2\cdot 3-3\cdot 5-6|}{\sqrt{4+9}}=\dfrac{15\sqrt{13}}{13}$.}
+\end{vd}\dongcham{6}
+
+\begin{vd} 
+	Trong mặt phẳng $Oxy$, cho điểm $A(-1;3)$, đường thẳng $ \Delta \colon 5x+3y-5=0$ và $\Delta '\colon 5x+3y+8=0.$
+	\begin{tasks}(1)
+		\task Tính khoảng cách từ điểm $A$ đến đường thẳng $ \Delta .$
+		\task Tính khoảng cách giữa hai đường thẳng song song $ \Delta $ và $\Delta'$
+	\end{tasks}
+	
+	\loigiai{ 
+		\begin{enumerate}[a)]
+			\item Áp dụng công thức tính khoảng cách ta có $\mathrm{d}(A, \Delta )=\dfrac{|5.(-1)+3.3-5|}{\sqrt{5^2+3^2}}=\dfrac{1}{\sqrt{34}}.$ \\
+			\item Do $M(1;0)\in \vartriangle $ nên ta có $\mathrm{d}\left( \Delta; \Delta '\right)=\mathrm{d}(M, \Delta ')=\dfrac{|5.1+3.0+8|}{\sqrt{5^2+3^2}}=\dfrac{13}{\sqrt{34}}.$
+		\end{enumerate}
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd}%[0H3B1-5]
+	Trong một khu vực bằng phẳng, ta lấy hai xa lộ vuông góc với nhau làm hai trục tọa độ và mỗi đơn vị độ dài trên trục tương ứng với $1$ km. Cho biết với hệ trục tọa độ vừa chọn thì một trạm viễn thông $T$ có tọa độ $(2;3)$. Một người đang gọi điện thoại di động trên chiếc xe khách chạy trên đoạn cao tốc có dạng một đường thẳng $\Delta$ có phương trình $6x+8y-5=0$. Tính khoảng cách ngắn nhất giữa người đó và trạm viễn thông $T$.
+	\loigiai{
+		Khoảng cách ngắn nhất giữa người đó và trạm viễn thông $T$ chính là khoảng cách từ $T$ đến đường thẳng $\Delta$. Ta có
+		\[ \mathrm{d}(T,\Delta) = \dfrac{|6\cdot2+8\cdot3-5|}{\sqrt{6^2+8^2}} = \dfrac{31}{10} = 3{,}1\text{ km}. \]
+	}
+\end{vd}\dongcham{8}
+
+\begin{vd}%[0H3B1-5]
+	Trong mặt phẳng $Oxy$, cho tam giác $ABC$ có tọa độ các đỉnh là $A(1;1)$, $B(5;2)$, $C(4;4)$. Tính độ dài các đường cao của tam giác $ABC$.
+	\loigiai{
+		\begin{itemize}
+			\item Đường thẳng $BC$ có véc-tơ chỉ phương $\overrightarrow{BC} = (-1;2)$ và có véc-tơ pháp tuyến $\overrightarrow{n}_{BC} = (2;1)$.\\
+			Phương trình tổng quát của $BC$ là: $2(x-5) + 1(y-2) = 0 \Leftrightarrow 2x+y-12=0$.\\
+			Độ dài đường cao hạ từ $A$ là $h_A = \mathrm{d}(A,BC) = \dfrac{|2\cdot1+1-12|}{\sqrt{2^2+1^2}} = \dfrac{9\sqrt{5}}{5}$.
+			\item Đường thẳng $AC$ có véc-tơ chỉ phương $\overrightarrow{AC} = (3;3)$ và có véc-tơ pháp tuyến $\overrightarrow{n}_{AC} = (1;-1)$.\\
+			Phương trình tổng quát của $AC$ là: $1(x-1) - 1(y-1) = 0 \Leftrightarrow x-y=0$.\\
+			Độ dài đường cao hạ từ $B$ là $h_B = \mathrm{d}(B,AC) = \dfrac{|5-2|}{\sqrt{1^2+(-1)^2}} = \dfrac{3\sqrt{2}}{2}$.
+			\item Đường thẳng $AB$ có véc-tơ chỉ phương $\overrightarrow{AB} = (4;1)$ và có véc-tơ pháp tuyến $\overrightarrow{n}_{AB} = (1;-4)$.\\
+			Phương trình tổng quát của $AB$ là: $1(x-1) -4(y-1) = 0 \Leftrightarrow x-4y+3=0$.\\
+			Độ dài đường cao hạ từ $C$ là $h_C = \mathrm{d}(C,AB) = \dfrac{|4-4\cdot4+3|}{\sqrt{1^2+(-4)^2}} = \dfrac{9\sqrt{17}}{17}$.
+		\end{itemize}
+	}
+\end{vd}\dongcham{15}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, tìm những điểm nằm trên đường thẳng $\Delta\colon 2x + y - 1 = 0$ và có khoảng cách đến $d\colon 4x + 3y - 10 = 0$ bằng $2$.
+	\loigiai{
+		Giả sử có điểm $M\in \Delta$, khi đó $M(m;1-2m)$.\\
+		Theo đề $\mathrm{d}(M,\Delta)=2\Leftrightarrow \dfrac{|4m+3(1-2m)-10|}{\sqrt{4^2+3^2}}=2\Leftrightarrow |-2m-7|=10\\
+		\Leftrightarrow \hoac{&2m+7=10\\&2m+7=-10}\Leftrightarrow\hoac{&m=\dfrac{3}{2}\\&m=-\dfrac{17}{2}}$.\\
+		Vậy có hai điểm thỏa mãn điều kiện là $M_1\left(\dfrac{3}{2};-2\right)$ và $M_2\left(-\dfrac{17}{2};18\right)$.
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho hai điểm $A(-2;4)$, $B(3;5)$. Viết phương trình tổng quát của đường thẳng $ \Delta $ đi qua điểm $I(0;1)$ sao cho khoảng cách từ $A$ đến đường thẳng $ \Delta $ gấp 2 lần khoảng cách từ $B$ đến $ \Delta $.\\
+	\loigiai{ 
+		Gọi $\overrightarrow{n}=(a;b) $ với $a^2+b^2\ne 0$ là véc-tơ pháp tuyến của đường thẳng $ \Delta $. Suy ra
+		\begin{center}
+			$ \Delta \colon a(x-0)+b(y-1)=0$ hay $ax+by-b=0$.
+		\end{center}
+		Vì khoảng cách từ $A$ đến đường thẳng $ \Delta $ gấp 2 lần khoảng cách từ $B$ đến $ \Delta $ nên
+		$$\mathrm{d}\left(A, \Delta \right)=2\mathrm{d}\left(B, \Delta \right) \Leftrightarrow \dfrac{|-2a+4b-b|}{\sqrt{a^2+b^2}}=2.\dfrac{|3a+5b-b|}{\sqrt{a^2+b^2}} \Leftrightarrow |-2a+3b|=2|3a+4b| \Leftrightarrow \left[\begin{aligned}
+			&8a+5b=0\\
+			&3a+11b=0.
+		\end{aligned}\right. $$
+		\begin{itemize}
+			\item Với $8a+5b=0$, ta chọn $a=5$ suy ra $b=-8$. Khi đó $ \Delta \colon 5x-8y+8=0$.
+			\item Với $3a+11b=0$, ta chọn $a=11$ suy ra $b=-3$. Khi đó $ \Delta \colon 11x-3y+3=0$.
+		\end{itemize}
+		Vậy có hai đường thẳng cần tìm: $ \Delta \colon 5x-8y+8=0$ hoặc $ \Delta \colon 11x-3y+3=0$.
+	}
+\end{vd}\dongcham{13}
+
+
+\begin{dang}{Tìm điểm $M$ thỏa mãn điều kiện cho trước}
+	Để xác định tọa độ điểm $M$, ta thường tiếp cận theo hai cách sau:
+	\begin{itemize}
+		\item [\iconMT] \indam{Cách 1:} Tham số tọa độ điểm $M$ theo ẩn. Sau đó, kết hợp với giả thiết để xây dựng phương trình giải. Các kiểu tham số điểm thường gặp:
+		\begin{tcolorbox}[colframe=orange,colback=red!2!white,boxrule=0.2mm]
+				\begin{itemize}
+				\item Nếu $M \in Ox$ thì $M(m;0)$.
+				\item Nếu $M \in Oy$ thì $M(0;m)$.
+				\item Nếu $M \in \Delta \colon \heva{&x=x_0+u_1t\\&y=y_0+u_2t}$ thì $M\bigg(x_0+u_1t;y_0+u_2t\bigg)$.
+				\item Nếu $M \in \Delta \colon ax+by+c=0$ thì $M\bigg(x_0;\dfrac{-c-ax_0}{b}\bigg)$, với $b \ne 0$.
+			\end{itemize}
+		\end{tcolorbox}
+	\begin{luuy}
+		Chú ý các công thức tính độ dài, tính góc, khoảng cách; điều kiện vuông góc,...
+	\end{luuy}
+		\item [\iconMT] \indam{Cách 2:} Điểm $M$ có thể là giao của hai "đối tượng" hình nào đó trong đề bài (giao của hai đường thẳng, giao của đường thẳng với đường tròn,...). Khi đó, ta viết phương trình của hai "đối tượng" hình đó, rồi giải hệ tìm kết quả.
+	\end{itemize}
+\end{dang}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho đường thẳng $ \Delta \colon 4x-3y+5=0$.
+	\begin{tasks}(1)
+		\task Tìm tọa độ điểm $A$ thuộc $ \Delta $ và cách gốc tọa độ một khoảng bằng $4$.
+		\task Tìm điểm $B$ thuộc $ \Delta $ và cách đều hai điểm $E(5;0)$, $F(3;-2)$ .
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Dễ thấy $M(0;-3)$ thuộc đường thẳng $ \Delta $ và $\overrightarrow{u}(4;3)$ là một véc-tơ chỉ phương của $ \Delta $ nên có phương trình tham số là $\left\{\begin{aligned}& x=4t \\ & y=-3+3t. \\ \end{aligned}\right. $\\
+			Điểm $A$ thuộc $ \Delta $ nên tọa độ của điểm A có dạng $A(4t;-3+3t)$ suy ra\\
+			$OA=4 \Leftrightarrow \sqrt{(4t)^2+(-3+3t)^2}=4 \Leftrightarrow 25t^2-18t-7=0 \Leftrightarrow \left[\begin{aligned}& t=1 \\ & t=\dfrac{-7}{25}. \\ \end{aligned}\right. $ \\
+			Vậy ta tìm được hai điểm là $A_1(4;0)$ và $A_2\left(\dfrac{-28}{25};\dfrac{-96}{25}\right)$.\\
+			\item  Vì $B\in \Delta $ nên $B(4t;-3+3t)$.
+			Điểm B cách đều hai điểm $E(5;0)$, $F(3;-2)$ suy ra $$EB^2=FB^2 \Leftrightarrow (4t-5)^2+(3t-3)^2=(4t-3)^2+(3t-1)^2 \Leftrightarrow t=\dfrac{6}{7}.$$ \\
+			Suy ra $B\left(\dfrac{24}{7};-\dfrac{3}{7}\right)$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho đường thẳng $d\colon x-2y+4=0$ và điểm $A(4;1)$.
+	\begin{tasks}(1)
+		\task Tìm tọa độ hình chiếu vuông góc của $A$ lên $d$.
+		\task Tìm tọa độ điểm $A'$ đối xứng với $A$ qua $d$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Phương trình $d'$ qua $A$, vuông góc với $d$ có dạng: $2x+y+C=0$ \\
+			$d'$ qua $A(4;1)$ nên $8+1+C=0 \Rightarrow C=-9$. \\
+			Do đó $d'\colon 2x+y-9=0$. \\
+			Hình chiếu $H$ là giao điểm của $d$ và $d'$ nên có tọa độ thỏa mãn hệ $\left\{\begin{aligned}& x-2y+4=0 \\ & 2x+y-9=0 \\ \end{aligned} \Leftrightarrow \left\{\begin{aligned}& x=\dfrac{14}{5} \\ & y=\dfrac{17}{5}. \\ \end{aligned}\right. \right. $. Vậy $H\left(\dfrac{14}{5};\dfrac{17}{5}\right)$
+			\item 	$A'$ đối xứng với $A$ qua $d$ khi $H$ là trung điểm của $AA'$.\\
+			Khi đó, ta có $\heva{&x_A+x_{A'}=2x_H\\& y_A+y_{A'}=2y_H} \Rightarrow \heva{& x_{A'}=\dfrac{8}{5}\\& y_{A'}=\dfrac{29}{5}.}$\\
+			Vậy $A'\left(\dfrac{8}{5};\dfrac{29}{5}\right)$.
+		\end{enumerate}	
+	}
+\end{vd}\dongcham{15}
+\begin{vd}	
+	Trong mặt phẳng $Oxy$, cho hai điểm $A\left(-1;2\right)$ và $B(3;4)$. Tìm tọa độ điểm $C$ trên đường thẳng: $x-2y+1=0$ sao cho $\triangle ABC$ vuông ở $C$.
+	\loigiai{
+		Gọi $C(2t-1;t)$. Ta có $\overrightarrow{AC}=(2t;t-2)$, $\overrightarrow{BC}=(2t-4;t-4)$.\\
+		Để tam giác $ABC$ vuông ở $C$ thì $$\overrightarrow{AC}\cdot \overrightarrow{BC}=0\Leftrightarrow (2t)(2t-4)+(t-2)(t-4)=0\Leftrightarrow \hoac{&t=2\Rightarrow C(3;2)\\&t=\dfrac{4}{5}\Rightarrow C\left(\dfrac{3}{5};\dfrac{4}{5}\right).}$$
+	}
+\end{vd}\dongcham{9}
+
+\begin{vd}
+	Trong mặt phẳng $ Oxy $, cho $ A(-2;2)$, $B(1;0)$, $C(3;-3) $. Xác định toạ độ trực tâm $ H $ của $ \triangle ABC $.
+	\loigiai{
+		\begin{itemize}
+			\item [\iconMT] \indam{Cách 1:} Gọi điểm  $ H(x;y) $. Ta có $$ \heva{ & \overrightarrow{ AH } = (x+2;y-2)\\ & \overrightarrow{ BH } = (x-1;y)\\ & \overrightarrow{ BC} = (2;-3) \\ & \overrightarrow{AC } = (5;-5).  } $$
+			$ H $ là trực tâm $ \triangle ABC $, ta được
+			\begin{align*}
+				& \ \heva{ & \overrightarrow{ AH } \cdot \overrightarrow{ BC } = 0 \\ & \overrightarrow{ BH } \cdot \overrightarrow{ AC } = 0 }\\
+				\Leftrightarrow
+				& \ \heva{ & 2x - 3y = - 10\\ & 5x - 5y = 5 }\\
+				\Leftrightarrow
+				& \ \heva{& x = 13 \\ &y = 12.}
+			\end{align*} 
+			\item [\iconMT] \indam{Cách 2:} Ta có thể xem trực tâm là giao của hai đường cao. 
+				\begin{itemize}
+					\item [$\bullet$] Đường cao kẻ từ $A$ có phương trình $2x-3y+10=0$.
+					\item [$\bullet$] Đường cao kẻ từ $B$ có phương trình $x-y-1=0$.
+				\end{itemize}
+			Suy ra, tọa độ $H$ là nghiệm của hệ $\heva{&2x-3y+10=0\\&x-y-1=0} \Rightarrow H(13;12).$
+			\end{itemize}
+		
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Trong mặt phẳng tọa độ, một tín hiệu âm thanh phát đi từ một vị trí và được 3 thiết bị ghi tín hiệu đặt tại 3 vị trí $A(1 ; 2)$, $B(-1 ; 3)$, $C(2 ;-3)$ nhận được cùng một thời điểm. Hãy xác định vị trí phát tín hiệu âm thanh.
+	\loigiai{
+	Gọi vị trí phát tín hiệu âm thanh là $I(a ; b)$.
+	Do 3 thiết bị ghi tín hiệu đặt tại 3 vị trí $A, B, C$ nhận được cùng một thời điểm nên vị trí phát tín hiệu âm thanh phải cách đều 3 điềm $A, B, C$.
+	$$
+	\begin{aligned}
+		&\text { Khi đó ta có }\left\{\begin{array} { l } 
+			{ I A = I B } \\
+			{ I A = I C }
+		\end{array} \Leftrightarrow \left\{\begin{array}{l}
+			\sqrt{(a-1)^2+(b-2)^2}=\sqrt{(a+1)^2+(b-3)^2} \\
+			\sqrt{(a-1)^2+(b-2)^2}=\sqrt{(a-2)^2+(b+3)^2}
+		\end{array}\right.\right. \\
+		&\Leftrightarrow\left\{\begin{array} { l } 
+			{ ( a - 1 ) ^ { 2 } + ( b - 2 ) ^ { 2 } = ( a + 1 ) ^ { 2 } + ( b - 3 ) ^ { 2 } } \\
+			{ ( a - 1 ) ^ { 2 } + ( b - 2 ) ^ { 2 } = ( a - 2 ) ^ { 2 } + ( b + 3 ) ^ { 2 } }
+		\end{array} \Leftrightarrow \left\{\begin{array}{l}
+			a^2-2 a+1+b^2-4 b+4=a^2+2 a+1+b^2-6 b+9 \\
+			a^2-2 a+1+b^2-4 b+4=a^2-4 a+4+b^2+6 b+9
+		\end{array}\right.\right. \\
+		&\Leftrightarrow\left\{\begin{array} { l } 
+			{ 4 a - 2 b = - 5 } \\
+			{ 2 a - 1 0 b = 8 }
+		\end{array} \Leftrightarrow \left\{\begin{array}{l}
+			a=-\frac{11}{6} \\
+			b=-\frac{7}{6}
+		\end{array}\right.\right.
+	\end{aligned}
+	$$
+	Vậy vị trí phát tín hiệu âm thanh là $I\left(-\frac{11}{6} ;-\frac{7}{6}\right)$.}
+\end{vd}\dongcham{10}
+\begin{dang}{Bài toán cực trị}
+	
+\end{dang}
+\begin{vd}%[0H3G1-6]
+	Trong mặt phẳng $Oxy$, cho đường thẳng $d\colon x+2y-4=0$ và điểm $A(1;4)$. Tìm tọa độ điểm $M$ thuộc $d$ sao cho $MA$ nhỏ nhất.
+	\loigiai{
+		Điểm $M\in d$ nên có tọa độ dạng $M(4-2m;m)$.\\
+		Khi đó $\overrightarrow{AM}=(3-2m;m-4)$, suy ra $AM=\sqrt{(3-2m)^2+(m-4)^2}=\sqrt{5m^2-20m+25}$.\\
+		Ta có\\
+		$\sqrt{5m^2-20m+25}=\sqrt{5(m-2)^2+5}\geqslant \sqrt{5}$.\\
+		Dấu $``=''$ xảy ra khi và chỉ khi  $m=2$.\\
+		Vậy $M(0;2)$ và giá trị nhỏ nhất của $AM$ bằng $\sqrt{5}$.
+	}
+\end{vd}\dongcham{11}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho đường thẳng $d\colon x+2y-4=0$ và hai điểm $A(1;4)$, $B\left(8;\dfrac{1}{2}\right)$. Tìm điểm $M$ thuộc $d$ sao cho $5MA^2+2MB^2$ nhỏ nhất.
+	\loigiai{
+		Điểm $M\in d$ nên có tọa độ dạng $M(4-2m;m)$.\\
+		Ta có $\overrightarrow{MA}=(2m-3;4-m)$, suy ra $5MA^2=5\left[(2m-3)^2+(4-m)^2\right]$;\\
+		$\overrightarrow{MB}=\left(2m+4;\dfrac{1}{2}-m\right)$, suy ra $2MB^2=2\left[(2m+4)^2+\left(\dfrac{1}{2}-m\right)^2\right]$.\\
+		Do đó
+		$$5MA^2+2MB^2=35m^2-70m+\dfrac{315}{2}=35(m-1)^2+\dfrac{245}{2}\ge \dfrac{245}{2}.$$
+		Dấu ``$=$'' xảy ra khi và chỉ khi $m=1$.\\
+		Vậy $M(2;1)$ và $5MA^2+2MB^2$ đạt giá trị nhỏ nhất bằng $\dfrac{245}{2}$.
+	}
+\end{vd}\dongcham{17}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho đường thẳng $d\colon x+2y-4=0$ và hai điểm $A(1;4)$, $B(8;3)$. Tìm tọa độ điểm $M$ thuộc $d$ sao cho $MA+MB$ nhỏ nhất.
+	\loigiai{
+		\immini{Ta có $(x_A+2y_A-4)(x_B+2y_B-4)=5\cdot 10>0.$ Suy ra hai điểm $A$ và $B$ cùng phía so với đường thẳng $d$.\\
+			Gọi $A'$ là điểm đối xứng của $A$ qua $d$. Khi đó tọa độ điểm $A'(x;y)$ thỏa mãn hệ $$\left\{\begin{aligned}
+				&2(x-1)-1(y-4)=0\\
+				&\dfrac{x+1}{2}+2\cdot \dfrac{y+4}{2}-4=0
+			\end{aligned}\right. \Rightarrow A'(-1;0).$$
+			Khi đó $MA+MB=MA'+MB\ge A'B=3\sqrt{10}$}{\begin{tikzpicture}[scale=0.8]
+				\tkzDefPoints{0/0/A,3/2/B,0/-4/A'}
+				\tkzDefLine[mediator](A,A') \tkzGetPoints{C}{d}
+				\tkzInterLL(A',B)(C,d)\tkzGetPoint{M}
+				\coordinate (N) at ($(M)!0.3!(C)$);
+				\tkzDrawPoints[fill=black](A,A',B,M)
+				\tkzDrawSegments(C,d A,M A',B)
+				\tkzDrawSegments[dashed](A,A' A,N N,B)
+				\tkzLabelPoints[above](A,B,d)
+				\tkzLabelPoints[below](A')
+				\tkzLabelPoints[below right](M)
+		\end{tikzpicture}}
+		\noindent Dấu đẳng thức xảy ra khi và chỉ khi $A'$, $M$, $B$ thẳng hàng hay $M$ thuộc đường thẳng $A'B$.\\
+		Đường thẳng $A'B$ đi qua $A'(-1;0)$ và $B(8;3)$ nên có phương trình $A'B\colon x-3y+1=0$.\\
+		Mặt khác, theo giả thiết $M$ thuộc $d$ nên tọa độ điểm $M$ thỏa mãn hệ $$\left\{\begin{aligned}
+			&x+2y-4=0\\
+			&x-3y+1=0
+		\end{aligned}\right. \Rightarrow M(2;1).$$
+		\begin{luuy}
+			Bài toán này dùng cho hai điểm cùng phía so với $d$. Nếu đề bài đã cho $A$ và $B$ khác phía với $d$ thì ta không làm bước lấy đối xứng.
+		\end{luuy}	
+	}
+\end{vd}\dongcham{20}
+
+\begin{vd}
+	Trong mặt phẳng $Oxy$, cho điểm $A(2;1)$. Lấy điểm $B$ thuộc $Ox$ có hoành độ không âm và điểm $C$ thuộc $Oy$ có tung độ không âm sao cho tam giác $ABC$ vuông tại $A$. Tìm tọa độ điểm $B$ và $C$ sao cho diện tích tam giác $ABC$
+	\begin{tasks}(2)
+		\task lớn nhất.
+		\task nhỏ nhất.
+	\end{tasks}
+	\loigiai{
+		Gọi $B(b;0)$, $C(0;c)$ với điều kiện $b^2+c^2\ne 0$. Suy ra $\overrightarrow{AB}=(b-2;1)$, $\overrightarrow{AC}=(2;c-1)$.\\
+		Tam giác $ABC$ vuông tại $A$ nên\\
+		$\overrightarrow{AB}\cdot \overrightarrow{AC}=0 \Leftrightarrow (b-2)\cdot 2+1\cdot(c-1)=0 \Leftrightarrow 2b+c-5=0$.$(*)$ \\
+		Từ $(*)$ suy ra $b=\dfrac{5-c}{2}$, do $c\ge 0$ nên $b\le \dfrac{5}{2}$. Vậy $0\le b\le \dfrac{5}{2}$. Ta có
+		\begin{eqnarray*}
+			S_{\triangle ABC}&=&\dfrac{1}{2}AB\cdot AC=\dfrac{1}{2}\cdot \sqrt{(b-2)^2+1}\cdot \sqrt{4+(c-1)^2}\\
+			&=&\dfrac{1}{2}\sqrt{(b-2)^2+1}\sqrt{4+4(b-2)^2}\\
+			&=&(b-2)^2+1.
+		\end{eqnarray*}
+		\begin{tasks}(1)
+			\task Khảo sát hàm số bậc hai $f(b)=(b-2)^2+1$ trên $\left[0;\dfrac{5}{2}\right]$, ta tìm được $\max \limits_{\left[0;\dfrac{5}{2}\right]} f(b)=f(0)=5$.\\
+			Với $b=0$, suy ra $c=5$. Vậy $B(0;0)$, $C(0;5)$ và diện tích tam giác $ABC$ đạt giá trị lớn nhất bằng $5$.
+			\task Ta có $S_{\triangle ABC}=(b-2)^2+1\ge 1$.\\
+			Dấu ``$=$'' xảy ra khi và chỉ khi $b=2$, suy ra $c=1$.\\
+			Vậy $B(2;0)$, $C(0;1)$ và diện tích tam giác $ABC$ đạt giá trị nhỏ nhất bằng $1$.
+		\end{tasks}
+	}
+\end{vd}\dongcham{18}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, hãy tính khoảng cách từ $M(3;-5)$ đến các trục tọa độ.
+		\loigiai{}
+\end{baitap}\cham{5}
+
+\begin{baitap}
+	Tính khoảng cách từ điểm $M(3;5)$ đến đường thẳng $\Delta\colon x+y+1=0$.
+	\loigiai{
+		Ta có $\mathrm{d}(M,\Delta)=\dfrac{|3+5+1|}{\sqrt{1^2+1^2}}=\dfrac{9}{\sqrt{2}}=\dfrac{9\sqrt{2}}{2}$.
+	}
+\end{baitap}\cham{5}
+
+\begin{baitap}
+	Tính khoảng cách từ điểm $M(4;-5)$ đến đường thẳng $\Delta\colon \heva{&x=2t\\&y=2+3t}$.
+	\loigiai{
+		Viết phương trình dưới dạng tổng quát $\Delta\colon 3x-2y+4=0$.\\
+		Khi đó $\mathrm{d}(M,\Delta)=\dfrac{|3\cdot 4-2\cdot(-5)+4|}{\sqrt{3^2+2^2}}=\dfrac{26}{\sqrt{13}}=2\sqrt{13}.$
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}%[Tex hóa SGK CD,T8/22, Phạm Doãn Lê Bình]%[0H3B1-3]
+	Xét vị trí tương đối của mỗi cặp đường thẳng sau
+	\begin{enumerate}
+		\item $\Delta_1\colon 2x-y+1=0$ và $\Delta_2\colon -x+2y+2=0$.
+		\item $\Delta_3\colon x-y-1=0$ và $\Delta_4\colon \heva{& x = 1 + 2t \\ & y = 3+2t.}$
+		\item $\Delta_1\colon \heva{& x=1+t_1 \\ & y = -2+t_1} \text{ và } \Delta_2\colon \heva{& x = 2t_2 \\ & y = -3+2t_2.}$
+		
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Đường thẳng $\Delta_1$ có véc-tơ chỉ phương $\vec{u}_1=(1;2)$, đường thẳng $\Delta_2$ có véc-tơ chỉ phương $\vec{u}_2=(-2;-1)$.\\
+			Do $\dfrac{1}{-2}\ne \dfrac{2}{-1}$ nên $\vec{u}_1$, $\vec{u}_2$ không cùng phương, suy ra $\Delta_1$ cắt $\Delta_2$.
+			\item Đường thẳng $\Delta_3$, $\Delta_4$ lần lượt có véc-tơ chỉ phương $\vec{u}_3=(1 ; 1)$, $\vec{u}_4=(2 ; 2)$. Suy ra $\vec{u}_4=2 \vec{u}_3$. \\
+			Chọn $t=0$, ta có điểm $M(1 ; 3) \in \Delta_4$. Do $1-3-1 \neq 0$ nên $M(1 ; 3) \notin \Delta_3$. Vậy $\Delta_3$ song song với $\Delta_4$.
+			\item 	Đường thẳng $\Delta_1$ có một véc-tơ chỉ phương $\vec{u}_1=(1;1)$.\\
+			Đường thẳng $\Delta_2$ có một véc-tơ chỉ phương $\vec{u}_2=(2;2)$.\\
+			Ta có $\vec{u}_2=2\vec{u}_1$ nên $\vec{u}_1$, $\vec{u}_2$ cùng phương. Suy ra $\Delta_1$ song song hoặc trùng với $\Delta_2$.\\
+			Cho $t_1=0$ ta có điểm $A(1;-2)$ thuộc đường thẳng $\Delta_1$.\\
+			Thay $x=1$, $y=-2$ vào phương trình đường thẳng $\Delta_2$ ta có
+			\[ \heva{& 1 = 2t_2 \\ & -2=-3+2t_2} \Leftrightarrow \heva{& t_2=\dfrac{1}{2}\\ & t_2=\dfrac{1}{2}} \Leftrightarrow t_2=\dfrac{1}{2}.\]
+			Vậy $A\in\Delta_2$. Suy ra $\Delta_1$ và $\Delta_2$ trùng nhau.
+		\end{enumerate}
+	}
+\end{baitap}\cham{10}
+
+
+\begin{baitap}
+	Tính góc giữa hai đường thẳng 
+	\begin{tasks}
+		\task $d_1 \colon x+2y+4=0$ và $d_2 \colon x-3y+6=0$.
+		\task $\Delta_1 \colon 6x-5y+15=0$ và $\Delta_2 \colon \heva{& x=10+5t \\& y=1+6t.}$
+	\end{tasks}
+
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Véc-tơ pháp tuyến của hai đường thẳng $d_1$, $d_2$ lần lượt là $\overrightarrow{n}_1=(1;2)$ và $\overrightarrow{n}_2=(1;-3)$.\\
+			Ta có $\overrightarrow{n}_1 \cdot \overrightarrow{n}_2=-5$, $\left|\overrightarrow{n}_1\right|=\sqrt{5}$ và $\left|\overrightarrow{n}_2\right|=\sqrt{10}$.\\
+			Do đó $\cos (d_1, d_2)=\dfrac{\left|\overrightarrow{n}_1 \cdot \overrightarrow{n}_2\right|}{\left|\overrightarrow{n}_1\right| \cdot \left|\overrightarrow{n}_2\right|}=\dfrac{5}{\sqrt{5} \cdot \sqrt{10}}=\dfrac{\sqrt{2}}{2}$. Hay $(d_1, d_2)=45^{\circ}$.
+			\item Đường thẳng $\Delta_1 \colon 6x-5y+15=0$ có véc-tơ pháp tuyến $\overrightarrow{n}_1=(6;-5)$. \\
+			Đường thẳng $\Delta_2 \colon \heva{& x=10+5t \\& y=1+6t }\Leftrightarrow \heva{& 6x=60+30t \\& 5y=5+30t }$\\
+			$\Rightarrow 6x-5y-55=0$ có véc-tơ pháp tuyến $\overrightarrow{n}_2=(6;-5)$. \\
+			Ta có $\dfrac{6}{6}=\dfrac{-5}{-5} \ne \dfrac{15}{-55} \Rightarrow \Delta_2 \parallel \Delta_2 \Rightarrow \left( \Delta_2; \Delta_2\right)=0^{\circ}$.
+		\end{enumerate}
+		}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Tìm $m$ sao cho hai đường thẳng $\Delta: x+5my-4=0$ và $\Delta': 2x+3y-2=0$ song song với nhau.
+	\loigiai{
+		$\Delta\parallel \Delta' \Leftrightarrow \dfrac{1}{2}=\dfrac{5m}{3}\Leftrightarrow m=\dfrac{3}{10}$.
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Xác định tất cả các giá trị của tham số $m$ để hai đường thẳng $d \colon 2x-3y+4=0$ và $d' \colon \heva{&x=2-3t \\& y=1-4mt}$ vuông góc với nhau.
+	\loigiai{
+		Gọi véc-tơ pháp tuyến của hai đường thẳng lần lượt là $\overrightarrow{u}(2;-3)$ và $\overrightarrow{u'}(4m;-3)$.\\
+		Hai đường thẳng vuông góc $\Leftrightarrow \overrightarrow{u} \cdot \overrightarrow{u'}=0 \Leftrightarrow 8m+9=0 \Leftrightarrow m=-\dfrac{9}{8}$.
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, cho điểm $A(3;5)$ và đường thẳng $d \colon 2x -y -2 = 0$. Viết phương trình đường thẳng $\Delta$ qua $A$ và thỏa mãn
+	\begin{tasks}(1)
+		\task $\Delta$ song song với $d$.
+		\task $\Delta$ vuông góc với $d$.
+		\task $\Delta$ tạo với $d$ một góc bằng $45^\circ$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\Delta$ song song với $d$ nên nhận $\vec{n}=(2;-1)$ làm véc tơ pháp tuyến. Phương trình $\Delta$ là
+			$$2(x-3)-1(y-5)=0 \Leftrightarrow 2x-y-1=0$$
+			\item $\Delta \perp d$ nên $\Delta$ có dạng $x+2y+m=0$.\\
+			Mặt khác $\Delta$ qua $A(3;5)$ nên $3+10+m=0 \Leftrightarrow m=-13.$ Vậy, $\Delta \colon x+2y-13=0$.
+			\item Gọi $\vec{n}=(a,b)$ là vtpt của $\Delta$, với $\vec{n} \ne \vec{0}$. Ta có phương trình $\Delta$ là 
+			$$a(x-3)+b(y-5)=0 \Leftrightarrow ax+ by -3a -5b=0$$
+			Xét	$$\cos\left(\Delta,d \right)=\cos 45^\circ \Leftrightarrow \dfrac{\bigg|2a-b\bigg|}{\sqrt{5(a^2+b^2)}}=\dfrac{\sqrt{2}}{2}$$.
+			Biến đổi, thu gọn ta được $$3a^2-8ab-3b^2=0 \Leftrightarrow a=3b \text{ hoặc } a=-\dfrac{1}{3}b.$$
+			\begin{itemize}
+				\item [$\bullet$] Với $a=3b$: Chọn $b=1$, $a=3$ ta được $\Delta \colon 3x+y-14=0$.
+				\item [$\bullet$] Với $a=-\dfrac{1}{3}b$: Chọn $b=-3$, $a=1$ ta được $\Delta \colon x-3y+12=0$.
+			\end{itemize}
+	\end{enumerate}}	
+\end{baitap}\cham{22}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, viết phương trình đường thẳng $d$ song song với đường thẳng $\Delta\colon\heva{&x=3t\\&y=2+4t},t\in\mathbb{R}$ và cách đường thẳng $\Delta$ một khoảng bằng $3$.
+	\loigiai{
+		Vì $d\parallel\Delta$ nên phương trình đường thẳng $d$ có dạng $d\colon 4x-3y+c=0$.\\
+		Chọn điểm $M(0;2)\in\Delta$, theo đề ta có\\
+		$\mathrm{d}(M,\Delta)=\dfrac{|4\cdot 0-3\cdot 2+c|}{5}=3\Leftrightarrow |c-6|=15\Leftrightarrow \hoac{&c=21\\&c=-9}$.\\
+		Vậy có hai phương trình thỏa mãn là $d_1\colon 4x-3y+21=0$ và $d_2\colon 4x-3y-9=0$.
+	}
+\end{baitap}\cham{10}
+
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, cho điểm $M(4;4)$ và đường thẳng $d \colon 3x-y+2=0$. 
+	\begin{tasks}(1)
+		\task Tìm tọa độ điểm $H$ là hình chiếu vuông góc của $M$ trên $d$.
+		\task Tìm tọa độ điểm $N$ đối xứng với $M$ qua $d$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Đường thẳng $MH \perp d$ nên có dạng $x+3y+m=0$ và $MH$ qua $M(4;4)$ nên $4+12+m=0 \Leftrightarrow m=-16$.\\
+			Vậy $MH \colon x+3y-16=0$.\\
+			Tọa độ $H=MH \cap d$ là nghiệm của hệ $\heva{&x+3y-16=0\\&3x-y+2=0} \Leftrightarrow \heva{&x=1\\&y=5}$. Vậy $H(1;5)$.
+			\item Ta có  $N$ đối xứng với $M$ qua $d$ thì $H$ là trung điểm của $MN$. Suy ra
+			$$\heva{&x_N=2x_H-x_M=-2\\&y_N=2y_H-y_M=6} \Rightarrow N(-2;6).$$
+		\end{enumerate}
+	}
+\end{baitap}\cham{10}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, cho tam giác $ABC$ có $A(4;-13), B(4;12), C(-8;3)$. Viết phương trình đường phân giác trong góc $B$.
+	\loigiai{
+		Phương trình cạnh $BC$ là $3(x-4)-4(y-12)=0\Leftrightarrow 3x-4y+36=0$.\\
+		Phương trình cạnh $BA$ là $x-4=0$.\\
+		Phương trình đường phân giác trong và phân giác ngoài của góc $B$ là\\
+		$\dfrac{|3x-4y+36|}{5}=\dfrac{|x-4|}{1}\Leftrightarrow \hoac{&3x-4y+36=x-4\\&3x-4y+36=-x+4}\Leftrightarrow \hoac{&x-2y+20=0\,(d_1)\\&x-y+8=0\,(d_2)}$.\\
+		Ta thấy $A$ và $C$ nằm khác phía so với $(d_2)$, suy ra đường phân giác trong góc $B$ là đường $x-y+8=0$.
+	}
+\end{baitap}\cham{10}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, cho $A\left(2;-3\right)$, $B\left(3;-2\right)$. Trọng tâm G của $\triangle ABC$ nằm trên đường thẳng $d\colon 3x-y-8=0$, diện tích $\triangle ABC$ bằng $\dfrac{3}{2}$. Tìm tọa độ điểm $C$.
+	%\dapso{$C\left(1;-1\right)\vee C\left(-2;-10\right)$}
+	\loigiai{
+		Ta có $G$ là trọng tâm tam giác $ABC$ nên $S_{\triangle GAB}=\dfrac{1}{3}S_{\triangle CAB}=\dfrac{1}{2}$.\\
+		Gọi $G(t;3t-8)$ thuộc đường thẳng $d$. Ta có phương trình đường $AB$ là $x-y-5=0$.\\
+		Do đó diện tích tam giác $GAB$ là
+		\begin{eqnarray*}
+			& &S_{GAB}=\dfrac{1}{2}\cdot \mathrm{d}(G,AB)\cdot AB\\
+			&\Leftrightarrow& \dfrac{1}{2}=\dfrac{1}{2}\cdot \dfrac{|t-(3t-8)-5|}{\sqrt{1^2+(-1)^2}}\cdot \sqrt{2}\\
+			&\Leftrightarrow& |3-2t|=1\Leftrightarrow \hoac{&t=1\Rightarrow G(1;-5)\\&t=2\Rightarrow G(2;-2).}
+		\end{eqnarray*}
+		Với $G(1;-5)\Rightarrow C(-2;-10)$.\\
+		Với $G(2;-2)\Rightarrow C(1;-1)$.
+	}
+\end{baitap}\cham{15}
+
+\begin{baitap}
+	Trong mặt phẳng $Oxy$, cho $\triangle ABC$. Cạnh $BC$ có trung điểm $M(0;4)$, còn hai cạnh kia có phương trình là $2x+y-11=0$ và $x+4y-2=0$.
+	\begin{tasks}(1)
+		\task Xác định đỉnh $A$.
+		\task Gọi $C$ là đỉnh nằm trên đường thẳng $x+4y-2=0$ và $N$ là trung điểm $AC$. Tìm tọa điểm $N$ rồi tính tọa độ $B,C$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+		\item Giao điểm $A$ của hai đường thẳng $(AB)$ và $(AC)$ là nghiệm của hệ phương trình
+		$$\heva{&2x+y-11=0\\&x+4y-2=0}\Leftrightarrow\heva{&2x+y=11\\&x+4y=2}\Leftrightarrow\heva{&x=6\\&y=-1}\Rightarrow A(6;-1).$$
+		\item Theo giả thiết, ta suy ra: $(AC):x+4y-2=0$ và $(AB):2x+y-11=0$.\\
+		Mà $C\in (AC)$ nên $C(2-4c;c)$.\\
+		Vì $N$ là trung điểm của $AC$ nên $\heva{&x_N=\dfrac{x_A+x_C}{2}=4-2c\\&y_N=\dfrac{y_A+y_C}{2}=\dfrac{-1+c}{2}}\Rightarrow N\left(4-2c;\dfrac{c-1}{2}\right)$.\\
+		Vì $M(0;4)$ là trung điểm của $BC$ nên $\heva{&x_B=2x_M-x_C=4c-2\\&y_B=2y_M-y_C=8-c}\Rightarrow B(4c-2;8-c)$.\\
+		Khi đó $B\in (AB):2x+y-11=0$ nên $2(4c-2)+(8-c)-11=0\Leftrightarrow 7c-7=0\Leftrightarrow c=1\Rightarrow C(-2;1)$ và $B(2;7)$.
+		\end{enumerate}
+	}
+\end{baitap}\cham{15}
+
+\begin{baitap}%[0H3G1-2]
+	Trong mặt phẳng $Oxy$, cho hai điểm $A(1;4)$ và $B(3;5)$. Viết phương trình đường thẳng $d$ đi qua $A$ và cách $B$ một khoảng lớn nhất.
+	\loigiai{
+		Phương pháp đại số: Đường thẳng $d$ đi qua $A(1;4)$ và có véc-tơ pháp tuyến $\overrightarrow{n}=(a;b)$ với $a^2+b^2\ne 0$ nên có phương trình\\
+		$d\colon a(x-1)+b(y-4)=0$ hoặc $ax+by-a-4b=0$.\\
+		Khoảng cách từ $B$ đến đường thẳng $d$ được xác định $\mathrm{d}(B,d)=\dfrac{|2a+b|}{\sqrt{a^2+b^2}}$.\\
+		$\bullet$ Nếu $a=0$ thì $\mathrm{d}(B,d)=1$.\\
+		$\bullet$ Nếu $b=0$ thì $\mathrm{d}(B,d)=2$.\\
+		$\bullet$ Khi $a\ne 0$ và $b\ne 0$, ta chọn $b=1$. \\
+		Suy ra $\mathrm{d}(B,d)=\dfrac{|2a+1|}{\sqrt{a^2+1}}=|f(a)|$, với $f(a)=\dfrac{2a+1}{\sqrt{a^2+1}}$.\\
+		Áp dụng bất đẳng thức Cauchy - Schwarz, ta có $(2a+1)^2\leq (2^2+1^2)(a^2+1^2) \Rightarrow \dfrac{|2a+1|}{\sqrt{a^2+1}} \leq \sqrt{5}$.
+		Vậy $\max \limits_{\mathbb{R}} f(a)=\sqrt{5}$, xảy ra khi $a=2$.\\
+		So sánh các trường hợp, ta được $\mathrm{d}(B,d)$ lớn nhất khi $a=2$, $b=1$.\\
+		Vậy phương trình đường thẳng cần tìm $d\colon 2x+y-6=0$.
+		
+	}
+\end{baitap}\cham{15}
+
+\begin{baitap}
+	Trong mặt phẳng với hệ tọa độ $Oxy$, cho đường thẳng $d\colon x-2y-2=0$ và hai điểm $A(3;4)$, $B(-1;2)$. Tìm điểm $M$ thuộc $d$ sao cho $MA^2-2MB^2$ lớn nhất.
+	\loigiai{
+		Điểm $M\in d$ nên có tọa độ dạng $M(2m+2;m)$.\\
+		Ta có $\overrightarrow{MA}=(1-2m;4-m)$, suy ra $MA^2=(1-2m)^2+(4-m)^2$;\\
+		$\overrightarrow{MB}=(-3-2m;2-m)$, suy ra $2MB^2=2\left[(-3-2m)^2+(2-m)^2\right]$.\\
+		Do đó
+		$$MA^2-2MB^2=-5m^2-28m-9=-5\left(m+\dfrac{14}{5}\right)^2+\dfrac{151}{5}\le \dfrac{151}{5}.$$
+		Dấu ``$=$'' xảy ra khi và chỉ khi $m=-\dfrac{14}{5}$.\\
+		Vậy $M\left(-\dfrac{18}{5};-\dfrac{14}{5}\right)$ và $MA^2-2MB^2$ đạt giá trị lớn nhất bằng $\dfrac{151}{5}$.
+	}
+\end{baitap}\cham{20}

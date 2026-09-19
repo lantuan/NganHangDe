@@ -1,0 +1,608 @@
+\section{HÀM SỐ LƯỢNG GIÁC VÀ ĐỒ THỊ}
+\subsection{KIẾN THỨC CẦN NHỚ}
+\subsubsection{Hàm số $\mathbf{y=\sin x}$}
+\vspace{-0.5cm}
+	\immini{
+	\begin{itemize}
+		\item Tập xác định: $\mathscr{D}=\Bbb{R}.$
+		\item  Tập giá trị: $ [-1;1]$, tức là \\
+		\centerline{$-1\le \sin x\le 1$, $\forall x\in \mathbb{R}.$}
+		\item  Hàm số $y=\sin x$ là hàm số lẻ nên đồ thị hàm số nhận gốc tọa độ $O$ làm tâm đối xứng.
+	\end{itemize}}{ 
+		\begin{tikzpicture}[thick,>=stealth,x=1cm,y=1cm,scale=0.68] 
+		\draw[->] (-4.7,0) -- (4.7,0) node[below] {\small $x$};
+		\draw[->] (0,-1.4) -- (0,1.6) node[right] {\small $y$};
+		\draw[thick,samples=100,domain=-4.7:4.7] plot(\x,{sin((\x)*180/pi)});
+		\draw (-3.17,0) node[below] {$-\pi$};
+		\draw (3.14,0) node[below] {$\pi$};
+		\draw[dashed] (-1.57,-1)--(-1.57,0) node[above] {$-\frac{\pi}{2}$};
+		\draw[dashed] (1.57,1)--(1.57,-0.2) node[below] {$\frac{\pi}{2}$};
+		\draw[dashed] (-5,1)--(5,1);
+		\draw[dashed] (-5,-1)--(5,-1);
+		\end{tikzpicture}
+	}
+\begin{itemize}
+	\item Hàm số $y=\sin x$ tuần hoàn với chu kì $T=2\pi$, nghĩa là $\sin(x+k2\pi)=\sin x$, với $k \in \mathbb{Z}$.
+	\item Hàm số $y=\sin x$ đồng biến trên mỗi khoảng $\left(-\dfrac{\pi}{2}+k 2 \pi ; \dfrac{\pi}{2}+k 2 \pi\right)$, nghịch biến trên mỗi khoảng $\left(\dfrac{\pi}{2}+k 2 \pi ; \dfrac{3 \pi}{2}+k 2 \pi\right)$ với $k \in \mathbb{Z}$.
+\end{itemize}
+\subsubsection{Hàm số $y=\cos x$}
+\vspace{-0.5cm}
+\immini{
+	\begin{itemize}
+		\item Tập xác định: $\mathscr{D}=\Bbb{R}.$
+		\item  Tập giá trị: $ [-1;1]$, tức là\\
+		\centerline{ $-1\le \cos x\le 1$, $\forall x\in R.$}
+		\item  Hàm số $y=\cos x$ là hàm số chẵn nên đồ thị hàm số nhận trục $Oy$ làm trục đối xứng.
+	\end{itemize}
+	}{
+	\begin{tikzpicture}[thick,>=stealth,x=1cm,y=1cm,scale=0.68] 
+		\draw[->] (-5,0) -- (5,0) node[below] {\small $x$};
+		\draw[->] (0,-1.4)-- (0,1.6) node[right] {\small $y$};
+		\draw[thick,samples=100,domain=-4.7:4.7] plot(\x,{cos((\x)*180/pi)});
+		\draw[dashed] (-3.14,-1)--(-3.14,0) node[above] {$-\pi$};
+		\draw[dashed] (3.14,-1)--(3.14,0) node[above] {$\pi$};
+		\draw (-1.57,0) node[above] {$-\frac{\pi}{2}$};
+		\draw (1.57,-0.2) node[below] {$\frac{\pi}{2}$};
+		\draw[dashed] (-4.7,1)--(4.7,1);
+		\draw[dashed] (-4.7,-1)--(4.7,-1);
+		\end{tikzpicture}}
+	\begin{itemize}
+		\item Hàm số $y=\cos x$ là hàm số tuần hoàn với chu kì $T=2\pi $, nghĩa là $\cos(x+k2\pi)=\cos x$, với $k \in \mathbb{Z}$.
+		\item Hàm số $y=\cos x$ đồng biến trên mỗi khoảng $(-\pi+k 2 \pi ; k 2 \pi)$, nghịch biến trên mỗi khoảng $(k 2 \pi ; \pi+k 2 \pi)$ với $k \in \mathbb{Z}$.
+	\end{itemize}
+\subsubsection{Hàm số $y=\tan x$}
+	\immini{
+\begin{itemize}
+\item  Điều kiện $\cos x \ne 0 \Leftrightarrow x \ne \dfrac{\pi}{2}+k\pi, k\in \mathbb{Z}$.\\
+		Tập xác định: $\mathscr{D}=\mathbb{R}\backslash \left\{\dfrac{\pi}{2}+k\pi, k\in \mathbb{Z}\right\}.$
+		\item  Tập giá trị: $\mathbb{R}$; Là hàm số lẻ.
+		\item  Là hàm số tuần hoàn với chu kì $T=\pi$, nghĩa là $\tan(x+k\pi)=\tan x$, với $k \in \mathbb{Z}$.
+	\end{itemize}
+	}{\vspace*{-2\baselineskip}
+		\begin{tikzpicture}[thick,>=stealth,scale=0.6] 
+		\draw[->] (-4.7,0) -- (5,0) node[below] {\small $x$};
+		\draw[->] (0,-3.5) -- (0,4) node[right] {\small $y$};
+		\draw (0,0) node[below right] {$O$};
+		\clip(-4.7,-3.5) rectangle (5,3.5);
+		\draw[thick,samples=100,domain=-1.325:1.36] plot(\x,{tan((\x)*180/pi)});
+		\draw (-3.19,0) node[above] {$-\pi$};
+		\draw (3.14,0) node[below] {$\pi$};
+		\draw (-1.57,0) node[above left=-0.1] {$-\frac{\pi}{2}$};
+		\draw (1.57,-0.2) node[below left=-0.1] {$\frac{\pi}{2}$};
+		\draw[dashed] (1.57,-4)--(1.57,5);
+		\draw[dashed] (-1.57,-4)--(-1.57,5);
+		\draw[dashed] (-4.71,-4)--(-4.71,5);
+		\draw[dashed] (4.71,-4)--(4.71,5);
+		\draw[thick,samples=100,domain=1.82:4.5] plot(\x,{tan((\x)*180/pi)});
+		\draw[thick,samples=100,domain=-4.46:-1.79] plot(\x,{tan((\x)*180/pi)});
+		\end{tikzpicture}
+	}
+\begin{itemize}
+	\item Hàm số $y=\tan x$ đồng biến trên mỗi khoảng $\left(-\frac{\pi}{2}+k \pi ; \frac{\pi}{2}+k \pi\right)$ với $k \in \mathbb{Z}$.
+\end{itemize}
+\subsubsection{Hàm số $y=\cot x$}
+
+\begin{itemize}
+\immini{\item  Điều kiện $\sin x \ne 0 \Leftrightarrow x \ne k\pi, k\in \mathbb{Z}$.\\
+	Tập xác định: $\mathscr{D}=\mathbb{R}\setminus \left\{k\pi, k\in \mathbb{Z}\right\}.$
+	\item  Tập giá trị: $\mathbb{R}.$
+	\item  Là hàm số lẻ.
+	\item  Là hàm số tuần hoàn với chu kì $T=\pi$, nghĩa là  $\cot(x+k\pi)=\cot x$, với $k \in \mathbb{Z}$.
+	\item Hàm số $y=\cot x$ nghịch biến trên mỗi khoảng $(k \pi ; \pi+k \pi)$ với $k \in \mathbb{Z}$.
+}{\vspace{-0.6cm}
+	\begin{tikzpicture}[thick,>=stealth,scale=0.7] 
+		\draw[->] (-3.4,0) -- (7.5,0) node[below] {\small $x$};
+		\draw[->] (0,-4) -- (0,5) node[left] {\small $y$};
+		\draw (0,0) node[below right] {$O$};
+		\draw[thick,samples=100,domain=0.21:2.9] plot(\x,{cot((\x)*180/pi)});
+		\draw[thick,samples=100,domain=0.21:2.9] plot(\x-pi,{cot((\x)*180/pi)});
+		\draw[thick,samples=100,domain=0.21:2.9] plot(\x+pi,{cot((\x)*180/pi)});
+		%\draw[thick,samples=100,domain=0.21:2.9] plot(\x-2*pi,{cot((\x)*180/pi)});
+		\draw (-3.17,0) node[above] {$-\pi$};
+		\draw (3.14,0) node[below left=-0.1] {$\pi$};
+		\draw (-1.57,0) node[above] {$-\frac{\pi}{2}$};
+		\draw (1.57,-0.2) node[below] {$\frac{\pi}{2}$};
+		%\draw (-4.71,-0.2) node[below] {$-\frac{3\pi}{2}$};
+		\draw (4.71,0.2) node[above] {$\frac{3\pi}{2}$};
+		\draw[dashed] (3.14,-4)--(3.14,5);
+		\draw[dashed] (-3.14,-4)--(-3.1,5);
+		\draw[dashed] (6.28,-4)--(6.28,5);
+		%\draw[dashed] (-6.28,-4)--(-6.28,5);
+		\end{tikzpicture}}
+\end{itemize}
+
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Tìm tập xác định của hàm số lượng giác}
+	Ta chú ý một số điều kiện sau:
+	\begin{enumerate}
+		\item $y=\dfrac{f(x)}{g(x)}$ xác định $ \Leftrightarrow g(x)\ne 0$. 
+		\item $y=\sqrt[2n]{f(x)}$ xác định $ \Leftrightarrow f(x)\geqslant 0$, trong đó $n\in \mathbb{N}^*$. 
+		\item $y=\tan \left[u(x)\right]$ xác định $ \Leftrightarrow u(x)$ xác định và $u(x)\ne \dfrac{\pi}{2}+k\pi,k\in \mathbb{Z}$. 
+		\item $y=\cot \left[u(x)\right]$ xác định $ \Leftrightarrow u(x)$ xác định và $u(x)\ne k\pi,k\in \mathbb{Z}$. 
+	\end{enumerate}
+\end{dang}
+
+\begin{vd}
+	Tìm tập xác định của các hàm số sau đây:
+	\begin{tasks}(3)
+		\task $y=\dfrac{2\sin x+3}{\cos x}$ 
+		\task $y=\dfrac{1+\cos x}{1-\cos x}$
+		\task $y=\dfrac{\sin x-3}{\cos x+1}$ 
+		\task $y=\dfrac{2+3\cos 2x}{\sin x}$ 
+		\task $y=\dfrac{1+\cos x}{1+\sin x}$
+		\task $y=\dfrac{2\sin x+3}{\sin x-1}$ 
+		\task $y=\dfrac{2\sin x-3}{2\sin x+3}$ 
+		\task $y=\dfrac{2\sin x+3}{\cos x+2}$ 
+		\task $y=\sqrt{3-2\cos x}$.
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item Hàm số xác định khi $\cos x \ne 0 \Leftrightarrow x \ne \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \left\{\dfrac{\pi}{2} + k\pi, k \in \mathbb{Z}\right\}$.
+		
+		\item Hàm số xác định khi $1 - \cos x \ne 0 \Leftrightarrow \cos x \ne 1 \Leftrightarrow x \ne k2\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \{k2\pi, k \in \mathbb{Z}\}$.
+		
+		\item Hàm số xác định khi $\cos x + 1 \ne 0 \Leftrightarrow \cos x \ne -1 \Leftrightarrow x \ne \pi + k2\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \{\pi + k2\pi, k \in \mathbb{Z}\}$.
+		
+		\item Hàm số xác định khi $\sin x \ne 0 \Leftrightarrow x \ne k\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \{k\pi, k \in \mathbb{Z}\}$.
+		
+		\item Hàm số xác định khi $1 + \sin x \ne 0 \Leftrightarrow \sin x \ne -1 \Leftrightarrow x \ne -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \left\{-\dfrac{\pi}{2} + k2\pi, k \in \mathbb{Z}\right\}$.
+		
+		\item Hàm số xác định khi $\sin x - 1 \ne 0 \Leftrightarrow \sin x \ne 1 \Leftrightarrow x \ne \dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy $\mathscr{D} = \mathbb{R} \setminus \left\{\dfrac{\pi}{2} + k2\pi, k \in \mathbb{Z}\right\}$.
+		
+		\item Hàm số xác định khi $2\sin x + 3 \ne 0 \Leftrightarrow \sin x \ne -\dfrac{3}{2}$ (luôn đúng vì $-1 \le \sin x \le 1$).\\
+		Vậy $\mathscr{D} = \mathbb{R}$.
+		
+		\item Hàm số xác định khi $\cos x + 2 \ne 0 \Leftrightarrow \cos x \ne -2$ (luôn đúng vì $-1 \le \cos x \le 1$).\\
+		Vậy $\mathscr{D} = \mathbb{R}$.
+		
+		\item Hàm số xác định khi $3 - 2\cos x \ge 0 \Leftrightarrow \cos x \le \dfrac{3}{2}$ (luôn đúng vì $-1 \le \cos x \le 1$).\\
+		Vậy $\mathscr{D} = \mathbb{R}$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{32}
+\begin{vd}
+	Tìm tập xác định của các hàm số sau đây:
+	\begin{tasks}(3)
+		\task $y=2\tan x+3$ 
+		\task $y=2\tan 2x-4\sin x$
+		\task $y=\cot \left(x+\dfrac{\pi}{4} \right)+1$ 
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item Hàm số xác định khi $\cos x \ne 0 \Leftrightarrow x \ne \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy tập xác định là $\mathscr{D} = \mathbb{R} \setminus \left\{\dfrac{\pi}{2} + k\pi, k \in \mathbb{Z}\right\}$.
+		
+		\item Hàm số xác định khi $\cos 2x \ne 0 \Leftrightarrow 2x \ne \dfrac{\pi}{2} + k\pi \Leftrightarrow x \ne \dfrac{\pi}{4} + k\dfrac{\pi}{2}$ ($k \in \mathbb{Z}$).\\
+		Vậy tập xác định là $\mathscr{D} = \mathbb{R} \setminus \left\{\dfrac{\pi}{4} + k\dfrac{\pi}{2}, k \in \mathbb{Z}\right\}$.
+		
+		\item Hàm số xác định khi $\sin\left(x + \dfrac{\pi}{4}\right) \ne 0 \Leftrightarrow x + \dfrac{\pi}{4} \ne k\pi \Leftrightarrow x \ne -\dfrac{\pi}{4} + k\pi$ ($k \in \mathbb{Z}$).\\
+		Vậy tập xác định là $\mathscr{D} = \mathbb{R} \setminus \left\{-\dfrac{\pi}{4} + k\pi, k \in \mathbb{Z}\right\}$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{15}
+
+\begin{dang}{Tính chẵn lẻ của hàm số}
+	Ta thực hiện các bước sau: 
+	\begin{enumerate}
+		\item[\ding{172}] Tìm tập xác định $\mathscr{D}$ của hàm số -- Tập $\mathscr{D}$ phải đối xứng.
+		\item[\ding{173}] Tính $f\left(-x\right)$ (\textit{chỗ nào có biến $x$, ta thay bởi $-x$}) và thu gọn kết quả. Khi đó 
+		\begin{itemize}
+			\item [$\bullet$] Nếu $f(-x)=f(x)$: hàm số đã cho là hàm chẵn.
+			\item [$\bullet$] Nếu $f(-x)=-f(x)$: hàm số đã cho là hàm lẻ.
+			\item [$\bullet$] Nếu không rơi vào 2 trường hợp trên, ta kết luận hàm số không chẵn, không lẻ.
+		\end{itemize}
+	\end{enumerate}
+	
+	\begin{khung4}{GHI NHỚ}
+		\begin{listEX}[2]
+			\item [\ding{172}] Hàm số $y=\sin x$ là hàm số lẻ.
+			\item [\ding{173}] Hàm số $y=\cos x$ là hàm số chẵn.
+			\item [\ding{174}] Hàm số $y=\tan x$ là hàm số lẻ.
+			\item [\ding{175}] Hàm số $y=\cot x$ là hàm số lẻ.
+		\end{listEX}
+	\end{khung4}	
+\end{dang}
+
+\begin{vd} Xét tính chẵn, lẻ của các hàm số:
+	\begin{tasks}(3)
+		\task $y=\sin x\cdot\cos x$;
+		\task $y=\tan x+\cot x$;
+		\task $y=\sin^2x$.
+	\end{tasks}
+	\loigiai{
+		\hfill
+		\begin{enumerate}[a)]
+			\item Hàm số $y=f(x)=\sin x\cdot\cos x$ là hàm số lẻ vì:
+			\begin{itemize}
+				\item Tập xác định là $D=\mathbb{R}$.
+				\item $\forall x\in \mathbb{R}$ thì $-x\in\mathbb{R}$ và $f\left(-x\right)=\sin\left(-x\right)\cdot\cos\left(-x\right)=-\left(\sin x\cdot\cos x\right)=-f(x)$.
+			\end{itemize}
+			\item Hàm số $y=g(x)=\tan x+\cot x$ là hàm số lẻ vì:
+			\begin{itemize}
+				\item Tập xác định là $D=\mathbb{R}\setminus\left\{\dfrac{\pi}{2}\big|k\in\mathbb{Z}\right\}$.
+				\item $\forall x\in \mathbb{R}$ thì $-x\in D$ và $g\left(-x\right)=\tan\left(-x\right)+\cot\left(-x\right)=-\left(\tan x+\cot x\right)=-g(x)$.
+			\end{itemize}
+			\item Hàm số $y=h(x)=\sin^2x$ là hàm số chẵn vì:
+			\begin{itemize}
+				\item Tập xác định là $D=\mathbb{R}$.
+				\item $\forall x\in \mathbb{R}$ thì $-x\in\mathbb{R}$ và $h\left(-x\right)=\sin^2\left(-x\right)=\left(-\sin x\right)^2=\sin^2x=h(x)$.
+			\end{itemize}
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{10}
+
+\begin{dang}{Tìm giá trị lớn nhất - giá trị nhỏ nhất}
+	Ta thường dùng một trong 3 phương pháp sau:
+	\begin{enumerate}[\faCheckSquareO]
+		\item Sử dụng các bất đẳng thức cơ bản
+		\begin{listEX}[2]
+			\item [\ding{172}] $-1 \leq \sin x \leq 1,\forall x \in \mathbb{R}$;
+			\item [\ding{173}] $-1 \leq \cos x \leq 1,\forall x\in \mathbb{R}$;
+			\item [\ding{174}] $0 \leq \sin^2x, \cos^2 x\leq 1,\forall x \in \mathbb{R}$;
+			\item [\ding{175}]  $0 \leq |\sin x|, |\cos x| \leq 1,\forall x \in \mathbb{R}$.
+		\end{listEX}
+		\item Sử dụng điều kiện có nghiệm
+		\begin{listEX}[1]
+			\item [\ding{172}] $\sin x = f(m)$ có nghiệm khi $-1\le f(m) \le 1$.
+			\item [\ding{173}] $\cos x = f(m)$ có nghiệm khi $-1\le f(m) \le 1$.
+			\item [\ding{174}] $a\sin x + b\cos x = c$ có nghiệm khi $a^2+b^2 \ge c^2$.
+		\end{listEX}
+		\item Sử dụng bảng biến thiên: Lập bảng biến thiên của hàm số, từ đó, kết luận.
+	\end{enumerate}
+\end{dang}
+
+\begin{vd}
+	Tìm giá trị lớn nhất và giá trị nhỏ nhất của các hàm số sau
+	\begin{tasks}(3)
+		\task $y=2\sin x+3$
+		\task $y=\dfrac{1-2{{\sin}^2}x}{3}$ 
+		\task $y=\sqrt{2+\cos x}-1$ 
+		\task $y=4\sin x\cos x+1$;
+		\task $y=4-3\sin^22x$.
+		\task $y={\left(3-\sin x \right)^2}+1$ 
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item Ta có $-1 \le \sin x \le 1$ với mọi $x \in \mathbb{R}$\\
+		$\Rightarrow -2 \le 2\sin x \le 2 \Rightarrow 1 \le 2\sin x + 3 \le 5$.\\
+		Vậy $\min y = 1$ khi $\sin x = -1 \Leftrightarrow x = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = 5$ khi $\sin x = 1 \Leftrightarrow x = \dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $y = \dfrac{1 - 2\sin^2 x}{3} = \dfrac{\cos 2x}{3}$.\\
+		Vì $-1 \le \cos 2x \le 1$ với mọi $x \in \mathbb{R} \Rightarrow -\dfrac{1}{3} \le \dfrac{\cos 2x}{3} \le \dfrac{1}{3}$.\\
+		Vậy $\min y = -\dfrac{1}{3}$ khi $\cos 2x = -1 \Leftrightarrow 2x = \pi + k2\pi \Leftrightarrow x = \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = \dfrac{1}{3}$ khi $\cos 2x = 1 \Leftrightarrow 2x = k2\pi \Leftrightarrow x = k\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $-1 \le \cos x \le 1$ với mọi $x \in \mathbb{R} \Rightarrow 1 \le 2 + \cos x \le 3$\\
+		$\Rightarrow 1 \le \sqrt{2 + \cos x} \le \sqrt{3} \Rightarrow 0 \le \sqrt{2 + \cos x} - 1 \le \sqrt{3} - 1$.\\
+		Vậy $\min y = 0$ khi $\cos x = -1 \Leftrightarrow x = \pi + k2\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = \sqrt{3} - 1$ khi $\cos x = 1 \Leftrightarrow x = k2\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $y = 4\sin x\cos x + 1 = 2(2\sin x\cos x) + 1 = 2\sin 2x + 1$.\\
+		Vì $-1 \le \sin 2x \le 1$ với mọi $x \in \mathbb{R} \Rightarrow -2 \le 2\sin 2x \le 2 \Rightarrow -1 \le 2\sin 2x + 1 \le 3$.\\
+		Vậy $\min y = -1$ khi $\sin 2x = -1 \Leftrightarrow 2x = -\dfrac{\pi}{2} + k2\pi \Leftrightarrow x = -\dfrac{\pi}{4} + k\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = 3$ khi $\sin 2x = 1 \Leftrightarrow 2x = \dfrac{\pi}{2} + k2\pi \Leftrightarrow x = \dfrac{\pi}{4} + k\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $0 \le \sin^2 2x \le 1$ với mọi $x \in \mathbb{R}$\\
+		$\Rightarrow -3 \le -3\sin^2 2x \le 0 \Rightarrow 1 \le 4 - 3\sin^2 2x \le 4$.\\
+		Vậy $\min y = 1$ khi $\sin^2 2x = 1 \Leftrightarrow \cos 2x = 0 \Leftrightarrow 2x = \dfrac{\pi}{2} + k\pi \Leftrightarrow x = \dfrac{\pi}{4} + k\dfrac{\pi}{2}$ ($k \in \mathbb{Z}$).\\
+		$\max y = 4$ khi $\sin^2 2x = 0 \Leftrightarrow \sin 2x = 0 \Leftrightarrow 2x = k\pi \Leftrightarrow x = k\dfrac{\pi}{2}$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $-1 \le \sin x \le 1$ với mọi $x \in \mathbb{R} \Rightarrow -1 \le -\sin x \le 1 \Rightarrow 2 \le 3 - \sin x \le 4$\\
+		$\Rightarrow 4 \le (3 - \sin x)^2 \le 16 \Rightarrow 5 \le (3 - \sin x)^2 + 1 \le 17$.\\
+		Vậy $\min y = 5$ khi $3 - \sin x = 2 \Leftrightarrow \sin x = 1 \Leftrightarrow x = \dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = 17$ khi $3 - \sin x = 4 \Leftrightarrow \sin x = -1 \Leftrightarrow x = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+	\end{enumerate}
+}
+\end{vd} \dongcham{20}
+\begin{vd}
+	Tìm $x$ để hàm số $y={\left(\sin x+3 \right)^2}-1$ đạt giá trị nhỏ nhất.
+	\loigiai{
+		Ta có $-1 \le \sin x \le 1$ với mọi $x \in \mathbb{R}$.
+		Suy ra $2 \le \sin x + 3 \le 4$ với mọi $x \in \mathbb{R}$.
+		Do đó $4 \le (\sin x + 3)^2 \le 16 \Rightarrow 3 \le (\sin x + 3)^2 - 1 \le 15$.
+		
+		Hàm số đạt giá trị nhỏ nhất bằng $3$ khi $\sin x + 3 = 2 \Leftrightarrow \sin x = -1 \Leftrightarrow x = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+		Vậy $x = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$) thì hàm số đạt giá trị nhỏ nhất.
+	}
+\end{vd} \dongcham{6}
+
+\begin{vd}
+	Tìm $x$ để hàm số $y=1-3\sqrt{1-{{\cos}^2}x}$ đạt giá trị nhỏ nhất.
+	\loigiai{
+		Ta có $-1 \le \cos x \le 1$ với mọi $x \in \mathbb{R} \Rightarrow 0 \le \cos^2 x \le 1 \Rightarrow 0 \le 1 - \cos^2 x \le 1$.
+		Suy ra $0 \le \sqrt{1 - \cos^2 x} \le 1 \Rightarrow -3 \le -3\sqrt{1 - \cos^2 x} \le 0$.
+		Do đó $-2 \le 1 - 3\sqrt{1 - \cos^2 x} \le 1$.
+		
+		Hàm số đạt giá trị nhỏ nhất bằng $-2$ khi $\sqrt{1 - \cos^2 x} = 1 \Leftrightarrow 1 - \cos^2 x = 1 \Leftrightarrow \cos^2 x = 0 \Leftrightarrow \cos x = 0 \Leftrightarrow x = \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$).
+		Vậy $x = \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$) thì hàm số đạt giá trị nhỏ nhất.
+	}
+\end{vd} \dongcham{6}
+
+\begin{vd}
+	Tìm giá trị lớn nhất và nhỏ nhất của hàm số sau
+	\begin{tasks}(3)
+		\task $y=2{{\sin}^2}x-3\sin x+1$
+		\task $y=2{{\cos}^2}x+3\cos x-2$
+		\task  $y=\cos 2x-\sin x+3$
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item Đặt $t = \sin x$, với $x \in \mathbb{R}$ thì $t \in [-1; 1]$.
+		Hàm số trở thành $y = f(t) = 2t^2 - 3t + 1$ xét trên đoạn $[-1; 1]$.
+		Đồ thị hàm số $f(t)$ là một parabol có hoành độ đỉnh $t = \dfrac{3}{4} \in [-1; 1]$ và bề lõm hướng lên.
+		
+		Bảng biến thiên:
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.2,espcl=2.5]
+				{$t$/.7, $f(t)$/2}
+				{$-1$, $\frac{3}{4}$, $1$}
+				\tkzTabVar{+/ $6$, -/ $-\dfrac{1}{8}$, +/ $0$}
+			\end{tikzpicture}
+		\end{center}
+		
+		Dựa vào bảng biến thiên, ta có:
+		$\min y = -\dfrac{1}{8}$ khi $t = \dfrac{3}{4} \Leftrightarrow \sin x = \dfrac{3}{4}$.\\
+		$\max y = 6$ khi $t = -1 \Leftrightarrow \sin x = -1 \Leftrightarrow x = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Đặt $t = \cos x$, với $x \in \mathbb{R}$ thì $t \in [-1; 1]$.
+		Hàm số trở thành $y = f(t) = 2t^2 + 3t - 2$ xét trên đoạn $[-1; 1]$.
+		Đồ thị hàm số $f(t)$ là một parabol có hoành độ đỉnh $t = -\dfrac{3}{4} \in [-1; 1]$ và bề lõm hướng lên.
+		
+		Bảng biến thiên:
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.2,espcl=2.5]
+				{$t$/.7, $f(t)$/2}
+				{$-1$, $-\frac{3}{4}$, $1$}
+				\tkzTabVar{+/ $-3$, -/ $-\dfrac{25}{8}$, +/ $3$}
+			\end{tikzpicture}
+		\end{center}
+		
+		Dựa vào bảng biến thiên, ta có:
+		$\min y = -\dfrac{25}{8}$ khi $t = -\dfrac{3}{4} \Leftrightarrow \cos x = -\dfrac{3}{4}$.\\
+		$\max y = 3$ khi $t = 1 \Leftrightarrow \cos x = 1 \Leftrightarrow x = k2\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Ta có $y = \cos 2x - \sin x + 3 = (1 - 2\sin^2 x) - \sin x + 3 = -2\sin^2 x - \sin x + 4$.
+		Đặt $t = \sin x$, với $x \in \mathbb{R}$ thì $t \in [-1; 1]$.
+		Hàm số trở thành $y = f(t) = -2t^2 - t + 4$ xét trên đoạn $[-1; 1]$.
+		Đồ thị hàm số $f(t)$ là một parabol có hoành độ đỉnh $t = -\dfrac{1}{4} \in [-1; 1]$ và bề lõm hướng xuống.
+		
+		Bảng biến thiên:
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.2,espcl=2.5]
+				{$t$/.7, $f(t)$/2}
+				{$-1$, $-\frac{1}{4}$, $1$}
+				\tkzTabVar{-/ $3$, +/ $\dfrac{33}{8}$, -/ $1$}
+			\end{tikzpicture}
+		\end{center}
+		
+		Dựa vào bảng biến thiên, ta có:
+		$\min y = 1$ khi $t = 1 \Leftrightarrow \sin x = 1 \Leftrightarrow x = \dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).\\
+		$\max y = \dfrac{33}{8}$ khi $t = -\dfrac{1}{4} \Leftrightarrow \sin x = -\dfrac{1}{4}$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{19}
+
+\begin{vd}
+	\immini{Khi đu quay hoạt động, vận tốc theo phương ngang của một cabin $M$ phụ thuộc vào góc lượng giác $\alpha=(Ox, OM)$ theo hàm số $v_x=0,3\sin \alpha\,(\mathrm{m} / \mathrm{s})$ (Hình bên).
+		\begin{tasks}
+			\task Tìm giá trị lớn nhất và giá trị nhỏ nhất của $v_{x}$
+			\task Dựa vào đồ thị của hàm số sin, hãy cho biết trong vòng quay đầu tiên $(0 \leq \alpha \leq 2 \pi)$, góc $\alpha$ ở trong các khoảng nào thì $v_x$ tăng.
+	\end{tasks}}{
+		\begin{tikzpicture}[scale=0.7,>=stealth]
+			\def\r{3}
+			\def\a{\r/10}
+			\def\n{12}%Số nan đu quay
+			\def\m{12}%Số lồng đu quay
+			\pgfmathsetmacro{\g}{20}
+			\pgfmathsetmacro{\b}{2*\a/3}
+			\pgfmathsetmacro{\xo}{\a *cos(\g)}
+			\pgfmathsetmacro{\yo}{\b *sin(\g)}
+			\def\longdq(#1:#2){
+				\begin{scope}[shift={(#1:#2)}]
+					\draw (0,-\b) ellipse ({\b/2} and {\b});
+					\fill[blue!60] (\xo,\yo-\b) arc (\g:-180-\g:{\a} and {\b})--cycle;
+					\draw (0,-\b) ellipse({\a} and {\b});
+				\end{scope}
+			}
+			\foreach \i in {1,...,\n}{
+				\pgfmathsetmacro{\gm}{360*\i/\n}
+				\pgfmathsetmacro{\gh}{(360*\i+180)/\n}
+				\pgfmathsetmacro{\gb}{360*(\i+1)/\n}
+				\draw (\gm:\r-\a)--(\gh:\r)--(\gb:\r-\a);
+				\draw (\gm:\r-\a)--(\gm:\a);
+			}
+			\draw[double] (0:0) circle (\r);
+			\draw (0:0) circle (\r-\a);
+			\foreach \i in {1,...,\m}{\longdq(360*\i/\m:\r)}
+			\draw[top color =gray!10, bottom color=gray!30] (-30:\a) arc(-30:0:\a) --(-70:1.5*\r)--++(\a/2,0)--([turn]-70:\r/2) --([turn]-110:3*\a)--(-30:\a);
+			\draw[top color =gray!10, bottom color=gray!30, xscale=-1] (-30:\a) arc(-30:0:\a) --(-70:1.5*\r)--++(\a/2,0)--([turn]-70:\r/2) --([turn]-110:3*\a)--(-30:\a);
+			\fill[ball color=orange] (0:0) circle (\a);
+			\draw[double] (0:0) circle (\a);
+			\draw[->] (-4,0)--(5,0) node[below]{$x$};
+			\draw (0,0) node[above left]{$O$};
+			\coordinate (O) at (0,0);
+			\coordinate (A) at ($(O) + (0:3)$);
+			\coordinate (M) at ($(O) + (30:3)$);
+			\draw[thick,red] (A)--(O)--(M);
+			\foreach \x/\g in {A/50,M/50}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\draw [shift={(0,0)},line width=0.3pt] (0:.9) arc (0:15:.9) node[right]{\scriptsize$\alpha$};
+			\draw [shift={(0,0)},->,line width=0.3pt] (0:.9) arc (0:30:.9);
+			\coordinate (O') at ($(M)!0.75!-90:(O)$);
+			\draw[->] (M)--(1.5,1.5)node[below left=-2pt]{\scriptsize$\vec{v}_x$};
+			\draw[->] (M)--(O')node[above right=-1pt]{\scriptsize$\vec{v}$};
+			\draw[dashed] (1.5,1.5)--(O');
+			%\draw[dashed] (0,-5.66)--(5,-5.66)node[below]{\text{ Mặt đất}};
+			%\draw[<->] (4,0)--(4,-5.66)node[pos=.5,right]{\footnotesize$h=13$ m};
+			%\draw[<->] (4,0)--(4,3)node[pos=.5,right]{\footnotesize$R=10$ m};
+	\end{tikzpicture}}
+	\loigiai{
+	\begin{enumerate}[a)]
+		\item Ta có $-1 \le \sin \alpha \le 1$ với mọi $\alpha \in \mathbb{R}$.
+		Suy ra $-0{,}3 \le 0{,}3 \sin \alpha \le 0{,}3 \Rightarrow -0{,}3 \le v_x \le 0{,}3$.
+		Vậy giá trị lớn nhất của $v_x$ là $0{,}3$ m/s, đạt được khi $\sin \alpha = 1 \Leftrightarrow \alpha = \dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+		Giá trị nhỏ nhất của $v_x$ là $-0{,}3$ m/s, đạt được khi $\sin \alpha = -1 \Leftrightarrow \alpha = -\dfrac{\pi}{2} + k2\pi$ ($k \in \mathbb{Z}$).
+		
+		\item Hàm số $v_x = 0{,}3 \sin \alpha$ tăng khi và chỉ khi hàm số $y = \sin \alpha$ đồng biến.
+		Dựa vào đồ thị của hàm số sin, trên đoạn $[0; 2\pi]$ (ứng với vòng quay đầu tiên), hàm số $y = \sin \alpha$ đồng biến trên các khoảng $\left(0; \dfrac{\pi}{2}\right)$ và $\left(\dfrac{3\pi}{2}; 2\pi\right)$.
+		Vậy trong vòng quay đầu tiên, góc $\alpha$ thuộc các khoảng $\left(0; \dfrac{\pi}{2}\right)$ và $\left(\dfrac{3\pi}{2}; 2\pi\right)$ thì vận tốc $v_x$ tăng.
+	\end{enumerate}
+}
+\end{vd} \dongcham{7}
+
+\begin{dang}{Đồ thị hàm số lượng giác}
+\end{dang}
+
+\begin{vd} Xét sự biến thiên của mỗi hàm số sau trên các khoảng tương ứng:
+	\begin{enumerate}[a)]
+		\item 	$y=\sin x$ trên khoảng $\left(-\dfrac{9 \pi}{2} ;-\dfrac{7 \pi}{2}\right),\left(\dfrac{21 \pi}{2} ; \dfrac{23 \pi}{2}\right)$;
+		\item 	$y=\cos x$ trên khoảng $(-20 \pi ;-19 \pi),(-9 \pi ;-8 \pi)$.
+	\end{enumerate}
+	\loigiai{
+		\hfill
+		\begin{enumerate}[a)]
+			\item Ta có
+			\begin{itemize}
+				\item $\left( -\dfrac{9\pi }{2};-\dfrac{7\pi }{2} \right)=\,\left( -\dfrac{\pi }{2}-4\pi ;\dfrac{\pi }{2}-4\pi  \right)$.\\
+				Do hàm số $y=\sin x$ đồng biến trên khoảng $\left(-\dfrac{\pi}{2};\dfrac{\pi}{2}\right)$ nên hàm số đó cũng đồng biến trên khoảng $\left(-\dfrac{9\pi}{2};-\dfrac{7\pi}{2}\right)$.
+				\item $\left( \dfrac{21\pi }{2};\dfrac{23\pi }{2} \right)=\left( \dfrac{\pi }{2}+10\pi ;\dfrac{3\pi }{2}+10\pi  \right)$.\\
+				Do hàm số $y=\sin x$ nghịch biến trên khoảng $\left(\dfrac{\pi}{2};\dfrac{3\pi}{2}\right)$ nên hàm số đó cũng nghịch biến trên khoảng $\left(\dfrac{21\pi}{2};\dfrac{23\pi}{2}\right)$ .
+			\end{itemize}
+			\item Ta có
+			\begin{itemize}
+				\item $\left( -20\pi ;-19\pi  \right)=\left( 0-20\pi ;\pi -20\pi  \right)$.\\
+				Do hàm số $y=\cos x$ nghịch biến trên khoảng $\left(0;\pi\right)$ nên hàm số đó cũng nghịch biến trên khoảng $\left(-20\pi ;-19\pi\right)$
+				\item $\left( -9\pi ;-8\pi  \right)=\left( -\pi -8\pi ;0-8\pi  \right)$.\\
+				Do hàm số $y=\cos x$ đồng biến trên khoảng $\left(-\pi ;0\right)$ nên hàm số đó cũng đồng biến trên khoảng $\left(-9\pi ;-8\pi\right)$
+			\end{itemize}
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{8}
+\begin{vd} Một dao động điều hoà có phương trình li độ dao động là: $x=A\cos\left(\omega\,t+\varphi\right)$ , trong đó $t$ là thời gian tính bằng giây, $A$ là biên độ dao động và $x$ là li độ dao động đều được tính bằng centimét, $\omega >0$ . Khi đó, chu kì $T$ của dao động là $T=\dfrac{2\pi}{\omega}$ . Xác định giá trị của li độ khi $t=0,\,\,t=\dfrac{T}{4},\,\,t=\dfrac{T}{2},\,t=\dfrac{3T}{4},\,\,t=T$ và vẽ đồ thị biểu diễn li độ của dao động điều hoà trên đoạn $\left[0;2T\right]$ trong các trường hợp:
+	\begin{tasks}(3)
+		\task $A=3cm,\,\,\varphi=0$;
+		\task $A=3cm,\,\,\varphi=-\dfrac{\pi}{2}$;
+		\task $A=3cm,\,\,\varphi=\dfrac{\pi}{2}$.
+	\end{tasks}
+	\loigiai{
+		%		\begin{figure}
+			\begin{enumerate}[a)]
+				\item Khi $A=3cm,\,\,\varphi=0$, ta có: $x=3\cos\left(\omega\,t\right)=3\cos\left(\dfrac{2\pi}{T}t\right)$.\\
+				\immini
+				{Ta có bảng xác định giá trị li độ tại một số thời điểm và đồ thị cần vẽ ở Hình 9:\\
+					\begin{tabular}{|c|c|c|c|c|c|}
+						\hline
+						$t$ &$0$  &$\dfrac{T}{4}$  &$\dfrac{T}{2}$  &$\dfrac{3T}{4}$  &$T$  \\
+						\hline
+						$x$ &$3$  &$0$  &$-3$  &$0$  &$3$  \\
+						\hline
+					\end{tabular}
+				}{
+					\begin{tikzpicture} [scale=0.6,>=stealth, font=\footnotesize, line join=round, line cap=round]
+						\draw[->] (0,0)--(4*pi+0.5,0) node[above] {$t$};
+						\draw[->] (0,-3.5)--(0,3.5) node[below left]{$x$};
+						\draw (0,0) node[below left]{$O$};
+						\def\xmin{0} \def\xmax{4*pi}
+						\draw[domain=\xmin:\xmax,samples=100, smooth] plot (\x, {3*cos(\x r)});
+						\draw[dashed] (\xmin,3)--(\xmax+0.5,3) (\xmin,-3)--(\xmax+0.5,-3);
+						\node at (0.5*pi,0) [below left]{$\dfrac{T}{4}$};
+						\node at (pi,0) [above]{$\dfrac{T}{2}$};
+						\node at (1.5*pi,0) [below right]{$\dfrac{3T}{4}$};
+						\node at (2*pi,0) [below]{$T$};
+						\node at (2.5*pi,0) [below left]{$\dfrac{5T}{4}$};
+						\node at (3*pi,0) [above]{$\dfrac{3T}{2}$};
+						\node at (3.5*pi,0) [below right]{$\dfrac{7T}{4}$};
+						\node at (4*pi,0) [below]{$2T$};
+						\draw[dashed] (pi,0)--(pi,-3);
+						\draw[dashed] (2*pi,0)--(2*pi,3);
+						\draw[dashed] (3*pi,0)--(3*pi,-3);
+						\draw[dashed] (4*pi,0)--(4*pi,3);
+					\end{tikzpicture}
+					%			\caption{}
+				}
+				\item Khi $A=3cm,\,\,\varphi=-\dfrac{\pi}{2}$, ta có: $x=3\cos\left(\omega\,t-\dfrac{\pi}{2}\right)=3\cos\left(\dfrac{2\pi}{T}t-\dfrac{\pi}{2}\right)$.
+				\immini
+				{Ta có bảng xác định giá trị li độ tại một số thời điểm và đồ thị cần vẽ ở Hình 10:\\
+					\begin{tabular}{|c|c|c|c|c|c|}
+						\hline
+						$t$ &$0$  &$\dfrac{T}{4}$  &$\dfrac{T}{2}$  &$\dfrac{3T}{4}$  &$T$  \\
+						\hline
+						$x$ &$0$  &$3$  &$0$  &$-3$    &$0$  \\
+						\hline
+					\end{tabular}
+				}
+				{
+					\begin{tikzpicture} [scale=0.6,>=stealth, font=\footnotesize, line join=round, line cap=round]
+						\draw[->] (0,0)--(4*pi+0.5,0) node[above] {$t$};
+						\draw[->] (0,-3.5)--(0,3.5) node[below left]{$x$};
+						\draw (0,0) node[below left]{$O$};
+						\def\xmin{0} \def\xmax{4*pi}
+						\draw[domain=\xmin:\xmax,samples=100, smooth] plot (\x, {3*cos((\x-0.5*pi) r)});
+						\draw[dashed] (\xmin,3)--(\xmax+0.5,3) (\xmin,-3)--(\xmax+0.5,-3);
+						\node at (0.5*pi,0) [below left]{$\dfrac{T}{4}$};
+						\node at (pi,0) [below left]{$\dfrac{T}{2}$};
+						\node at (1.5*pi,0) [above]{$\dfrac{3T}{4}$};
+						\node at (2*pi,0) [below right]{$T$};
+						\node at (2.5*pi,0) [below]{$\dfrac{5T}{4}$};
+						\node at (3*pi,0) [below left]{$\dfrac{3T}{2}$};
+						\node at (3.5*pi,0) [above]{$\dfrac{7T}{4}$};
+						\node at (4*pi,0) [below right]{$2T$};
+						\draw[dashed] (0.5*pi,0)--(0.5*pi,3);
+						\draw[dashed] (1.5*pi,0)--(1.5*pi,-3);
+						\draw[dashed] (2.5*pi,0)--(2.5*pi,3);
+						\draw[dashed] (3.5*pi,0)--(3.5*pi,-3);
+					\end{tikzpicture}
+					%			\caption{}
+				}
+				\item Khi $A=3cm,\,\,\varphi=\dfrac{\pi}{2}$, ta có: $x=3\cos\left(\omega\,t+\dfrac{\pi}{2}\right)=3\cos\left(\dfrac{2\pi}{T}t+\dfrac{\pi}{2}\right)$.
+				\immini
+				{Ta có bảng xác định giá trị li độ tại một số thời điểm và đồ thị cần vẽ ở Hình 11:\\
+					\begin{tabular}{|c|c|c|c|c|c|}
+						\hline
+						$t$ &$0$  &$\dfrac{T}{4}$  &$\dfrac{T}{2}$  &$\dfrac{3T}{4}$  &$T$  \\
+						\hline
+						$x$ &$0$  &$-3$  &$0$  &$3$    &$0$  \\
+						\hline
+					\end{tabular}
+				}
+				{
+					\begin{tikzpicture} [scale=0.6,>=stealth, font=\footnotesize, line join=round, line cap=round]
+						\draw[->] (0,0)--(4*pi+0.5,0) node[above] {$t$};
+						\draw[->] (0,-3.5)--(0,3.5) node[below left]{$x$};
+						\draw (0,0) node[below left]{$O$};
+						\def\xmin{0} \def\xmax{4*pi}
+						\draw[domain=\xmin:\xmax,samples=100, smooth] plot (\x, {3*cos((\x+0.5*pi) r)});
+						\draw[dashed] (\xmin,3)--(\xmax+0.5,3) (\xmin,-3)--(\xmax+0.5,-3);
+						\node at (0.5*pi,0) [above]{$\dfrac{T}{4}$};
+						\node at (pi,0) [below right]{$\dfrac{T}{2}$};
+						\node at (1.5*pi,0) [below]{$\dfrac{3T}{4}$};
+						\node at (2*pi,0) [below left]{$T$};
+						\node at (2.5*pi,0) [above]{$\dfrac{5T}{4}$};
+						\node at (3*pi,0) [below right]{$\dfrac{3T}{2}$};
+						\node at (3.5*pi,0) [below]{$\dfrac{7T}{4}$};
+						\node at (4*pi,0) [below]{$2T$};
+						\draw[dashed] (0.5*pi,0)--(0.5*pi,-3);
+						\draw[dashed] (1.5*pi,0)--(1.5*pi,3);
+						\draw[dashed] (2.5*pi,0)--(2.5*pi,-3);
+						\draw[dashed] (3.5*pi,0)--(3.5*pi,3);
+					\end{tikzpicture}
+					%			\caption{}
+				}
+			\end{enumerate}
+			%	\end{figure}
+	}
+\end{vd}
+\dongcham{19}
+

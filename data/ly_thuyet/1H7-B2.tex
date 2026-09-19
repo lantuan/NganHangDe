@@ -1,0 +1,610 @@
+\section{ĐƯỜNG THẲNG VUÔNG GÓC VỚI MẶT PHẲNG}
+\subsection{KIẾN THỨC CẦN NHỚ}
+\subsubsection{Định nghĩa}
+\vspace{-0.65cm}
+\immini{
+	\begin{gachsoc}
+		Đường thẳng $d$ được gọi là vuông góc với mặt phẳng $(\alpha)$ nếu $d$ vuông góc với mọi đường thẳng $a$ nằm trong mặt phẳng $(\alpha)$. 	Khi đó ta còn nói $(\alpha)$ vuông góc $d$ và kí hiệu $d \perp (\alpha)$ hoặc $(\alpha) \perp d$. 
+	\end{gachsoc}
+}{\hspace{0.5cm}
+	\begin{tikzpicture}[scale=1,font=\footnotesize, line join=round, line cap=round,>=stealth]
+		\tkzDefPoints{0/0/A, 1/1/B, 3/0/D, 2/2/m1}
+		\coordinate (C) at ($(D)+(B)-(A)$);
+		\draw (A)--(B)--(C)--(D)--cycle;
+		\tkzMarkAngle[size=.5](D,A,B)
+		\draw (0.06,-0.07) node[above right]{$\alpha$};
+		\coordinate (m2) at ($(m1)-(0,2.2)$);
+		\draw (m1) node[right]{$d$};
+		\tkzInterLL(B,C)(m1,m2) \tkzGetPoint{m3}
+		\coordinate (m4) at ($(m1)!0.6!(m2)$); 
+		\tkzInterLL(A,D)(m1,m2) \tkzGetPoint{m5}
+		\tkzDrawSegments(m1,m4 m2,m5)
+		\tkzDrawSegments[dashed](m4,m5)
+		\coordinate (e1) at ($(A)!0.8!(B)$);
+		\coordinate (e2) at ($(A)!0.6!(D)$);
+		\tkzDrawLines[add = -0.15 and -0.15](e1,e2)
+		\coordinate (e3) at ($(e1)!0.25!(e2)$);
+		\draw (e3) node[above,rotate=-30]{$a$};
+	\end{tikzpicture}
+}
+\subsubsection{Điều kiện để đường thẳng vuông góc với mặt phẳng}\vspace{-0.8cm}
+\immini{
+	\begin{gachsoc}
+		Nếu một đường thẳng vuông góc với hai đường thẳng cắt nhau cùng thuộc một mặt phẳng thì nó vuông góc với mặt phẳng ấy.
+	\end{gachsoc}
+	\begin{luuy}
+		Tóm tắt định lí: \quad
+		$\heva{&a,b \subset (\alpha)\\&a \cap b= \varnothing\\&d \perp a\\&d \perp b}\Rightarrow d \perp (\alpha).$
+	\end{luuy}
+}
+{\begin{tikzpicture}[scale=1.2,font=\footnotesize, line join=round, line cap=round,>=stealth]
+		\tkzDefPoints{0/0/A, 1/1.5/B, 3/0/D, 2.5/2/m1}
+		\coordinate (C) at ($(D)+(B)-(A)$);
+		\draw (A)--(B)--(C)--(D)--cycle;
+		\tkzMarkAngle[size=.5](D,A,B)
+		\draw (0.06,-0.06) node[above right]{$\alpha$};
+		\coordinate (m2) at ($(m1)-(0,2.2)$);
+		\draw (m1) node[left]{$d$};
+		\tkzInterLL(B,C)(m1,m2) \tkzGetPoint{m3}
+		\coordinate (m4) at ($(m1)!0.5!(m2)$); 
+		\tkzInterLL(D,A)(m1,m2) \tkzGetPoint{m5}
+		\draw (m1)--(m4);
+		\draw[dashed] (m4)--(m5);
+		\tkzDrawLines[add = 2 and -0.1](m2,m5)
+		\coordinate (m6) at ($(m1)!0.15!(m2)$); 
+		\coordinate (e1) at ($(A)!0.8!(B)$);
+		\coordinate (e2) at ($(A)!0.75!(D)$);
+		\coordinate (e3) at ($(e1)!0.2!(e2)$);
+		\coordinate (e4) at ($(e1)!0.8!(e2)$);
+		\draw (e3) node[above, rotate=-30]{$a$};
+		\tkzDrawLines[add = -0.15 and -0.1](e1,e2)
+		%vecto n
+		\coordinate (e5) at ($(B)!0.6!(C)$); 
+		\tkzDrawLines[add = -0.25 and -0.14](A,e5)
+		\coordinate (e6) at ($(A)!0.3!(e5)$);
+		\coordinate (e7) at ($(A)!0.74!(e5)$);
+		\draw (e6) node[above, rotate=30]{$b$};
+		\tkzInterLL(e1,e2)(A,e5) \tkzGetPoint{O}
+		\tkzDrawPoints[fill=black](O)
+		\tkzLabelPoints[below](O)
+	\end{tikzpicture}
+}
+
+\subsubsection{Tính chất}
+\begin{itemize}
+	\item [\iconMT] \indam{Tính chất 1:} Có duy nhất một mặt phẳng đi qua một điểm cho trước và vuông góc với một đường thẳng cho trước. 
+	\begin{center}
+		\begin{tikzpicture}[scale=1.2,font=\footnotesize, line join=round, line cap=round,>=stealth]
+			\tkzDefPoints{0/0/A, 1/1/B, 3/0/D, 2.5/2/m1}
+			\coordinate (C) at ($(D)+(B)-(A)$);
+			\draw (A)--(B)--(C)--(D)--cycle;
+			\tkzMarkAngle[size=.5](D,A,B)
+			\draw (0.06,-0.07) node[above right]{$\alpha$};
+			\coordinate (m2) at ($(m1)-(0,2.2)$);
+			\draw (m1) node[right]{$d$};
+			\tkzInterLL(B,C)(m1,m2) \tkzGetPoint{m3}
+			\coordinate (m4) at ($(m1)!0.6!(m2)$); 
+			\tkzInterLL(A,D)(m1,m2) \tkzGetPoint{m5}
+			\tkzDrawSegments[thick](m1,m4 m2,m5)
+			\tkzDrawSegments[dashed](m4,m5)
+			\coordinate (e1) at ($(A)!0.8!(B)$);
+			\coordinate (e2) at ($(A)!0.6!(D)$);
+			\coordinate (O) at ($(e1)!0.5!(e2)$);
+			\tkzDrawPoints[size=1.5,fill=black](O)
+			\tkzLabelPoints[above](O)
+			\tkzDrawPoints[fill=black](O)
+		\end{tikzpicture}\qquad\qquad\qquad
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round,>=stealth,xscale=0.8,yscale=0.6]
+			\tkzDefPoints{0/0/E, 3/1/F, 0/5/H, 2/4.5/M, 1/2/I, -2/2/A}%điểm A ngay góc alpha, G ngay góc beta
+			\tkzDefPointBy[translation = from E to H](F)
+			\tkzGetPoint{G}
+			\tkzDefPointBy[symmetry = center I](A)
+			\tkzGetPoint{B}
+			\tkzInterLL(F,G)(M,B)
+			\tkzGetPoint{C}
+			\tkzInterLL(F,G)(I,B)
+			\tkzGetPoint{D}
+			\tkzInterLL(E,H)(M,A)
+			\tkzGetPoint{J}
+			\tkzInterLL(E,H)(I,A)
+			\tkzGetPoint{K}
+			\tkzDrawPoints[fill=black](A,B,I,M)
+			\tkzLabelPoints[below](A,B,I)
+			\tkzLabelPoints[above](M)
+			\tkzDrawSegments(E,F F,D C,G G,H H,E M,I M,B B,I A,K A,J)
+			\tkzDrawSegments[dashed](M,J I,K C,D)
+			\tkzMarkRightAngle[size=.2](M,I,B)
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{luuy}
+		Chú ý:
+		Mặt phẳng trung trực của đoạn thẳng $AB$ là mặt phẳng đi qua trung điểm $I$ của đoạn thẳng $AB$ và vuông góc với đường thẳng $AB$.
+	\end{luuy}
+	\item [\iconMT] \indam{Tính chất 2:} Có duy nhất một đường thẳng đi qua một điểm cho trước và vuông góc với một mặt phẳng cho trước. \\
+	\centerline{\begin{tikzpicture}[scale=1.2,font=\footnotesize, line join=round, line cap=round,>=stealth]
+			\tkzDefPoints{0/0/A, 1/1/B, 3/0/D, 2/2/m1}
+			\coordinate (C) at ($(D)+(B)-(A)$);
+			\draw (A)--(B)--(C)--(D)--cycle;
+			\tkzMarkAngle[size=.5](D,A,B)
+			\draw (0.06,-0.07) node[above right]{$\alpha$};
+			\coordinate (m2) at ($(m1)-(0,2.2)$);
+			\draw (m1) node[right]{$d$};
+			\tkzInterLL(B,C)(m1,m2) \tkzGetPoint{m3}
+			\coordinate (m4) at ($(m1)!0.6!(m2)$); 
+			\tkzInterLL(A,D)(m1,m2) \tkzGetPoint{m5}
+			\tkzDrawSegments[thick](m1,m4 m2,m5)
+			\tkzDrawSegments[dashed](m4,m5)
+			\coordinate (e1) at ($(A)!0.8!(B)$);
+			\coordinate (e2) at ($(A)!0.6!(D)$);
+			\coordinate (O) at ($(m1)!0.3!(m2)$);
+			\tkzDrawPoints[size=1.5,fill=black](O)
+			\tkzLabelPoints[left](O)
+			\tkzDrawPoints[fill=black](O)
+	\end{tikzpicture}}
+\end{itemize}
+\subsubsection{Liên hệ giữa quan hệ song song và quan hệ vuông góc của đường thẳng và mặt phẳng}
+\begin{itemize}
+	\item [\iconMT] \indam{Tính chất 3:} 
+	\immini{
+		\begin{enumerate}
+			\item Cho hai đường thẳng song song. Mặt phẳng nào vuông góc với đường thẳng này thì cũng vuông góc với đường thẳng kia.
+			\begin{luuy}
+				Tóm tắt:\quad
+				\fbox{$\heva{&a \parallel b\\&(\alpha) \perp a} \Rightarrow (\alpha) \perp b.$}
+			\end{luuy}
+			\item Hai đường thẳng phân biệt cùng vuông góc với một mặt phẳng thì song song với nhau.
+			\begin{luuy}
+				Tóm tắt:\quad
+				\fbox{$\heva{&a \perp (\alpha)\\&b \perp (\alpha)\\&a \not \equiv b} \Rightarrow a \parallel b.$}
+			\end{luuy}
+		\end{enumerate}
+	}{\vspace{1cm}
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round,>=stealth,scale=0.7]
+			\tkzDefPoints{0/0/A, 5/0/B, 6/3/C, 2/1.5/I, 4/1.5/J, 2/4/K}
+			\tkzDefPointBy[translation = from B to C](A)
+			\tkzGetPoint{D}
+			\tkzDefPointBy[symmetry = center I](K)
+			\tkzGetPoint{P}
+			\tkzDefPointBy[translation = from I to J](K)
+			\tkzGetPoint{K'}
+			\tkzDefPointBy[translation = from I to J](P)
+			\tkzGetPoint{P'}
+			\tkzInterLL(A,B)(K,P)
+			\tkzGetPoint{Q}
+			\tkzInterLL(A,B)(K',P')
+			\tkzGetPoint{Q'}
+			\tkzDrawSegments[dashed](I,Q J,Q')
+			\tkzDrawSegments(A,B B,C C,D D,A K,I Q,P K',J Q',P')
+			\tkzMarkAngle[size=.85](B,A,D)
+			\draw (A) node [above right] {$\alpha$};
+			\draw ($(K)$) node [below left] {$a$};
+			\draw ($(K')$) node [below left] {$b$};
+	\end{tikzpicture}}
+	\item [\iconMT] \indam{Tính chất 4:}
+	\immini{\begin{enumerate}
+			\item Cho hai mặt phẳng song song. Đường thẳng nào vuông góc với mặt phẳng này thì cũng vuông góc với mặt phẳng kia.
+			\begin{luuy}
+				Tóm tắt: \quad
+				\fbox{$\heva{&(\alpha) \parallel (\beta)\\&a \perp (\alpha)} \Rightarrow a \perp (\beta).$}
+			\end{luuy}
+			\item Hai mặt phẳng phân biệt cùng vuông góc với một đường thẳng thì song song với nhau.
+			\begin{luuy}
+				Tóm tắt: \quad
+				\fbox{$\heva{& (\alpha) \perp a\\&(\beta) \perp a\\&(\alpha) \not \equiv (\beta)} \Rightarrow (\alpha) \parallel (\beta).$}
+			\end{luuy}
+		\end{enumerate}
+	}{
+		\vspace*{1cm}
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round,>=stealth,scale=0.9]
+			\tkzInit[ymin=-3.6,ymax=1.6,xmin=-4.1,xmax=2.6]
+			\tkzClip %cắt bớt phần ko gian dư
+			\tkzDefPoints{-4/-3/A, 1/-3/B, -2.5/-1.5/C, 0/-2/O}
+			\tkzDefPointBy[translation = from A to B](C) \tkzGetPoint{D}%phép tịnh tiến
+			\coordinate (A') at ($(A)+(0,2)$);
+			\tkzDefPointBy[translation = from A to B](A') \tkzGetPoint{B'}
+			\tkzDefPointBy[translation = from A to C](A') \tkzGetPoint{C'}
+			\tkzDefPointBy[translation = from A to B](C') \tkzGetPoint{D'}
+			\tkzDefLine[perpendicular=through O,K=0.8](A,B) \tkzGetPoint{d}%đường qua O vuông góc AB
+			\tkzInterLL(O,d)(A,B) \tkzGetPoint{d_1}
+			\tkzInterLL(O,d)(A',B') \tkzGetPoint{d_2}
+			\coordinate (O') at ($(d_2)+(0,1)$);
+			\coordinate[label={below left}:$a$] (O'_1) at ($(O')+(0,1.5)$);
+			\coordinate (O_1) at ($(O)+(0,-1.5)$);
+			\tkzDrawSegments[dashed](d_1,O d_2,O')
+			\tkzDrawSegments(A,B B,D D,C C,A A',B' B',D' D',C' C',A' O_1,d_1 O,d_2 O',O'_1)
+			\tkzMarkAngles[arc=l,size=1.1cm](B,A,C B',A',C')
+			\tkzLabelAngle[pos=0.7](B,A,C){$\beta$}
+			\tkzLabelAngle[pos=0.7](B',A',C'){$\alpha$}
+	\end{tikzpicture}}
+	\item [\iconMT] \indam{Tính chất 5:}
+	\immini{
+		\begin{enumerate}
+			\item Cho đường thẳng $a$ và mặt phẳng $(\alpha)$ song song với nhau. Đường thẳng nào vuông góc với mặt phẳng $(\alpha)$ thì cũng vuông góc với $a$.
+			\begin{luuy}
+				Tóm tắt:\quad
+				\fbox{$\heva{&a \parallel (\alpha)\\&b \perp (\alpha)} \Rightarrow b \perp a.$}
+			\end{luuy}
+			\item Nếu một đường thẳng và một mặt phẳng  (không chứa đường thẳng đó) cùng vuông góc với một đường thẳng khác thì chúng song song với nhau.
+			\begin{luuy}
+				Tóm tắt:\quad
+				\fbox{$\heva{&a \not \subset (\alpha)\\&a \perp b\\&(\alpha) \perp b} \Rightarrow a \parallel (\alpha).$}
+			\end{luuy}
+	\end{enumerate}}{\vspace{1.7cm}
+		\begin{tikzpicture}[scale=0.9, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,5/0/B,6.5/2/C, 3/1/O}
+			\draw (1,3)--(6,3)node[above]{$a$};
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (b) at ($(O)+(0,2.5)$);
+			\coordinate (b') at ($(O)+(0,-2.5)$);
+			\tkzInterLL(b,b')(A,B)\tkzGetPoint{I}
+			\tkzDrawSegments(b,O I,b')
+			\tkzDrawSegments[dashed](O,I)
+			\tkzDrawPolygon(A,B,C,D)
+			\tkzLabelPoints[left](b)
+			\tkzMarkAngles[size=0.7cm,arc=l](B,A,D)
+			\tkzLabelAngles[pos=0.4,rotate=10](B,A,D){\scriptsize $\alpha$}
+			
+			
+	\end{tikzpicture}}
+\end{itemize}
+
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Chứng minh đường thẳng vuông góc với mặt phẳng}
+	\indamm{Một trong hai cách thường dùng:}\\
+	\begin{minipage}[b]{8cm}
+		\begin{itemize}
+			\item [\circEX{1}] Chứng minh $\Delta$ vuông góc với hai đường thẳng $a,b$ cắt nhau thuộc $(\alpha)$.
+			\begin{luuy}
+				Tóm tắt:\quad \fbox{$\heva{& a \text{ cắt } b\\& \Delta \perp a\\&\Delta \perp b} \Rightarrow \Delta \perp (\alpha)$}
+			\end{luuy}
+			\item [\circEX{2}] Chứng minh $\Delta$ song song với đường thẳng $d$, trong đó $d$ vuông góc với $(\alpha)$.
+			\begin{luuy}
+				Tóm tắt:\quad \fbox{$\heva{&\Delta \parallel d\\&d  \perp (\alpha)} \Rightarrow \Delta \perp (\alpha)$}
+			\end{luuy}
+		\end{itemize}
+	\end{minipage}\hspace{1cm}
+	\begin{minipage}[b]{10cm}
+		\begin{tikzpicture}[scale=0.9]
+			\tkzDefPoints{0/0/A, 5/0/B, 6/2/C, 1/2/D, 2.5/1/E, 2.5/3/F, 2.5/0/G, 3/0.5/M, 4.5/1.5/N, 3/1.5/P, 4.5/0.5/Q}
+			\draw (4.5,1.5) node[right] {\footnotesize a};
+			\draw (4.5,0.5) node[right] {\footnotesize b};
+			\draw (2.5,3) node[right] {\footnotesize $\Delta$};
+			\tkzDrawSegments(A,B B,C C,D D,A E,F M,N P,Q)
+			\tkzDrawSegments[dashed](E,G)
+			\tkzMarkAngles[size=0.8cm,arc=l](B,A,D)
+			\tkzLabelAngles[pos=0.45,rotate=10](B,A,D){\scriptsize$\alpha$}
+		\end{tikzpicture}
+		
+		\begin{tikzpicture}[scale=0.9]
+			\tkzDefPoints{0/0/A, 5/0/B, 6/2/C, 1/2/D, 2.5/1/E, 2.5/3/F, 2.5/0/G, 3/0.5/M, 4.5/1.5/N, 3/1.5/P, 4.5/0.5/Q, 4.5/3/R, 4.5/-0.2/S}
+			\draw (2.5,3) node[right] {\footnotesize $\Delta$};
+			\draw (4.5,3) node[right] {\footnotesize $d$};
+			\tkzDrawSegments(A,B B,C C,D D,A E,F Q,R)
+			\tkzDrawSegments[dashed](E,G Q,S)
+			\tkzMarkAngles[size=0.8cm,arc=l](B,A,D)
+			\tkzLabelAngles[pos=0.45,rotate=10](B,A,D){\scriptsize$\alpha$}
+		\end{tikzpicture}
+	\end{minipage}
+		\indamm{Khi giải toán, ta chú ý đến các "quan hệ" vuông góc thường gặp sau:}
+		\begin{boxkn}
+		\begin{itemize}
+			\item [\ding{172}] Đường trung tuyến trong tam giác cân (hạ từ đỉnh cân), trong tam giác đều thì vuông góc với cạnh đáy.
+			\item [\ding{173}] Đường chéo hình thoi, đường chéo hình vuông thì vuông góc nhau.
+			\item [\ding{174}] Xét trong tam giác, ta có thể kiểm tra quan hệ vuông góc của hai cạnh bằng cách thử định lý Pytago.
+			\item [\ding{175}] Trong không gian, khi đề bài cho giải thiết "$SA$ vuông với đáy", ta có thể suy ra $SA$ vuông với các đường nằm trong mặt đáy.
+		\end{itemize}
+	\end{boxkn}
+\end{dang}
+
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có đáy là hình vuông và các cạnh bên bằng nhau. Gọi $I$ là giao điểm của $AC$ và $BD$. Chứng minh
+	\begin{tasks}(3)
+		\task $SI \perp (ABCD).$
+		\task $AC \perp (SBD).$
+		\task $BD \perp (SAC).$
+	\end{tasks}
+
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=0.7]
+				\tkzDefPoints{0/0/A, 4/0/B, 2/-2/C, -2/-2/D, 1/3/S, 1/-1/I}
+				
+				\tkzDrawSegments[dashed](S,A A,C B,D A,D A,B S,I)
+				\tkzDrawSegments(S,D S,C S,B C,D B,C)
+				\tkzLabelPoints[left](A,D)
+				\tkzLabelPoints[right](B,C)
+				\tkzLabelPoints[above](S)
+				\tkzLabelPoints[below](I)
+			\end{tikzpicture}
+		\end{center}
+		Để chứng minh $SI$ vuông góc với mặt phẳng $(ABCD)$ ta cần chứng minh $SI$ vuông góc với hai cạnh cắt nhau trong mặt phẳng đó.\\
+		Theo giả thiết, $\triangle SAC$ và $\triangle SBD$ là tam giác cân tại $S$. Hơn nữa $I= AC \cap BD$ là trung điểm của $AC$ và $BD$ (do $ABCD$ là hình vuông). Từ đó ta có:
+		$$ \heva{&SI \perp AC \\ &SI \perp BD \\ &AC \cap BD = I} \Rightarrow SI \perp (ABCD) $$
+		\\Vậy $SI \perp (ABCD)$.}
+\end{vd}\dongcham{13}
+
+\begin{vd}
+	\immini{Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông tâm $O$; $SA$ vuông góc với $(ABCD)$. Gọi $H$, $K$ lần lượt là hình chiếu vuông góc của $A$ lên $SB$, $SD$. Chứng minh
+		\begin{tasks}(1)
+			\task $BC \perp (SAB)$;\quad $CD \perp (SAD)$.
+			\task $AH \perp (SBC)$; \quad  $AK \perp (SCD)$.
+			\task $SC \perp (AHK)$.
+	\end{tasks}}{
+		\begin{tikzpicture}[scale=0.8, line join=round, line cap=round]
+			\tikzset{label style/.style={font=\footnotesize}}
+			\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C)
+			\tkzDrawSegments[dashed](A,S A,B A,D)
+			\tkzDrawPoints[fill=black,size=4](D,C,A,B,S)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[below](A,B,C)
+			\tkzLabelPoints[right](D)
+	\end{tikzpicture}}
+	\loigiai{
+	}
+\end{vd}\dongcham{34}
+\begin{vd}
+	Cho tứ diện $ABCD$ có $ABC$ và $DBC$ là các tam giác đều cạnh $a$, $AD=\dfrac{a\sqrt{6}}{2}$. Gọi $I$ là trung điểm $BC$. Chứng minh rằng $AI\perp (BCD)$.	
+	\loigiai{\immini{Do $\triangle ABC$ đều nên $AI\perp BC$ và $AI=\dfrac{a\sqrt{3}}{2}$.\quad$(1)$\\
+			Và $\triangle DBC$ đều nên $DI\perp BC$ và $DI=\dfrac{a\sqrt{3}}{2}$.\\
+			Xét $\triangle ADI$, ta có $AI^2+DI^2=AD^2=\dfrac{6a^2}{4}$\\
+			nên tam giác $ADI$ vuông tại $I$ hay $AI\perp DI$.\quad$(2)$\\
+			Từ $(1)$ và $(2)$, ta có $\left\{\begin{aligned}&AI\perp BC\\&AI\perp DI\end{aligned}\right.\Rightarrow AI\perp (BCD)$.}
+		{\begin{tikzpicture}[scale=0.6]
+				\tkzDefPoints{0/0/B,5/0/D,2/-1.5/C}
+				\coordinate (I) at ($(B)!0.5!(C)$);
+				\coordinate (A) at ($(I)+(0,5)$);
+				\tkzDrawSegments(A,I A,B A,C A,D B,C C,D)
+				\tkzDrawSegments[dashed](B,D I,D)
+				\tkzDrawPoints(A,B,C,D,I)
+				\tkzLabelPoints[above left](B)
+				\tkzLabelPoints[above right](D)
+				\tkzLabelPoints[below left](I)
+				\tkzLabelPoints[below right](C)
+				\tkzLabelPoints[above](A)
+				\tkzMarkRightAngle(D,I,A)
+	\end{tikzpicture}}}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Cho hình chóp $S.ABC$ với đáy $ABC$ là tam giác đều cạnh $a$, $SA \perp (ABC)$, $SA=\dfrac{a\sqrt{3}}{2}$. Gọi $I, K$ lần lượt là trung điểm $BC, SI$. Chứng minh rằng $AK \perp (SBC).$ 
+	\loigiai{\begin{center}
+			\begin{tikzpicture}[scale=0.7]
+				\tkzDefPoints{0/0/A, 5/0/C, 2/-2/B, 0/4/S, 3.5/-1/I, 1.75/1.5/K}
+				\tkzDrawSegments[dashed](A,C A,K A,I)
+				\tkzDrawSegments(S,A A,B B,C S,I S,B S,C)
+				\tkzLabelPoints[left](A,B)
+				\tkzLabelPoints[right](C,I,K)
+				\tkzLabelPoints[above](S)
+				\tkzMarkRightAngle(C,I,A)
+			\end{tikzpicture}
+		\end{center}
+		Theo giả thiết $\triangle ABC$ là tam giác đều cạnh $a$,$I$ là trung điểm $BC$ suy ra $AI \perp BC$ (1) và $AI=\dfrac{a\sqrt{3}}{2}$.\\
+		Lại có $SA \perp (ABC) \Rightarrow SA \perp BC$ (2).\\
+		Từ (1) và (2) ta có $BC \perp (SAI) \Rightarrow BC \perp AK$. (3)\\
+		Tam giác $SAI$ có $SA=AI=\dfrac{a\sqrt{3}}{2}$ nên $\triangle SAI$ là tam giác cân tại $A$, hơn nữa $K$ là trung điểm $SI$ suy ra $AK \perp SI.$ (4)\\
+		Từ (3) và (4) ta có $AK \perp (SBC).$}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	\immini{Cho lăng trụ $ABCD.A'B'C'D'$ có đáy $ABCD$ là hình bình hành, các cạnh bên vuông góc với mặt đáy. $\triangle ACD$ vuông tại $A$, $AC=AA'$. Chứng minh rằng $AC' \perp (A'D'C).$
+	\cham{7}}{
+		\begin{tikzpicture}[scale=0.7]
+			\tkzDefPoints{0/0/A, 5/0/B, 3/-2/C, -2/-2/D, 0/4/A'}
+			\tkzDefPointsBy[translation= from A to A'](B,C,D){B',C',D'}
+			\tkzDrawSegments[dashed](A,A' A,C A,B A,C' A',C A,D)
+			\tkzDrawSegments(B,B' C,C' A',B' A',D' C',D' B',C' B,C C,D D,D' A',C' D',C)
+			
+			\tkzLabelPoints[left](D',D,A,A')
+			\tkzLabelPoints[right](B',C',B,C)
+			\tkzMarkRightAngle(D',A',C')
+	\end{tikzpicture}}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=0.7]
+				\tkzDefPoints{0/0/A, 5/0/B, 3/-2/C, -2/-2/D, 0/4/A'}
+				\tkzDefPointsBy[translation= from A to A'](B,C,D){B',C',D'}
+				\tkzDrawSegments[dashed](A,A' A,C A,B A,C' A',C A,D)
+				\tkzDrawSegments(B,B' C,C' A',B' A',D' C',D' B',C' B,C C,D D,D' A',C' D',C)
+				
+				\tkzLabelPoints[left](D',D,A,A')
+				\tkzLabelPoints[right](B',C',B,C)
+				\tkzMarkRightAngle(D',A',C')
+			\end{tikzpicture}
+		\end{center}
+		Theo giả thiết ta có $\heva{&AA'C'C \text{ là hình chữ nhật}\\& AA'=A'C'}\\ \Rightarrow AA'C'C \text{ là hình vuông} \Rightarrow AC' \perp A'C$ (1)
+		\\ Lại có $AA' \perp (A'B'C'D') \Rightarrow AA' \perp A'D'$. Lại có $\triangle D'A'C' $ vuông tại $A'$ nên $A'D' \perp A'C'$. Từ đó ta được\\ $A'D' \perp (AA'C'C) \Rightarrow A'D' \perp AC'$ (2).\\ Từ (1) và (2) ta có $AC' \perp (A'D'C).$ }
+\end{vd}\dongcham{5}
+
+\begin{vd}
+	\immini{Cho hình chóp tứ giác đều $S.ABCD$. Gọi $E$ là điểm đối xứng của điểm $D$ qua trung điểm $P$ của $SA$. Gọi $M$, $N$, $Q$ lần lượt là trung điểm của $AE$, $BC$, $AB$. Chứng minh $BD\perp(MNQ)$.
+		\cham{13}
+	}{
+		\begin{tikzpicture}[scale=0.9]
+			\tikzset{label style/.style={font=\footnotesize}}
+			\tkzDefPoints{0/0/A, 5/0/D, -2/-1.5/B}
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			\coordinate (O) at ($(B)!0.5!(D)$);
+			\coordinate (S) at ($(O)+(0,6)$);
+			\coordinate (P) at ($(S)!0.5!(A)$);
+			\tkzDefPointBy[symmetry=center P](D)
+			\tkzGetPoint{E}
+			\coordinate (M) at ($(E)!0.5!(A)$);
+			\coordinate (N) at ($(B)!0.5!(C)$);
+			\coordinate (Q) at ($(B)!0.5!(A)$);
+			\tkzInterLL(D,E)(S,B)	\tkzGetPoint{e}
+			\tkzInterLL(M,P)(S,B)	\tkzGetPoint{p}
+			\tkzInterLL(M,Q)(S,B)	\tkzGetPoint{q}
+			\tkzDrawSegments(S,B S,C S,D B,C C,D E,e M,p M,q E,M M,N)
+			\tkzDrawSegments[dashed](S,A A,B A,D A,C B,D S,O C,P N,Q Q,q P,p D,e A,M)
+			\tkzDrawPoints(S,A,B,C,D,O,M,N,P,Q,E)
+			\tkzLabelPoints[above right](D,A)
+			\tkzLabelPoints[below left](B,M,P)
+			\tkzLabelPoints[below right](C,N)
+			\tkzLabelPoints[below](O,Q)
+			\tkzLabelPoints[above](S,E)
+	\end{tikzpicture}}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzDefPoints{0/0/A, 5/0/D, -2/-1.5/B}
+				\coordinate (C) at ($(B)+(D)-(A)$);
+				\coordinate (O) at ($(B)!0.5!(D)$);
+				\coordinate (S) at ($(O)+(0,6)$);
+				\coordinate (P) at ($(S)!0.5!(A)$);
+				\tkzDefPointBy[symmetry=center P](D)
+				\tkzGetPoint{E}
+				\coordinate (M) at ($(E)!0.5!(A)$);
+				\coordinate (N) at ($(B)!0.5!(C)$);
+				\coordinate (Q) at ($(B)!0.5!(A)$);
+				\tkzInterLL(D,E)(S,B)	\tkzGetPoint{e}
+				\tkzInterLL(M,P)(S,B)	\tkzGetPoint{p}
+				\tkzInterLL(M,Q)(S,B)	\tkzGetPoint{q}
+				\tkzDrawSegments(S,B S,C S,D B,C C,D E,e M,p M,q E,M M,N)
+				\tkzDrawSegments[dashed](S,A A,B A,D A,C B,D S,O C,P N,Q Q,q P,p D,e A,M)
+				\tkzDrawPoints(S,A,B,C,D,O,M,N,P,Q,E)
+				\tkzLabelPoints[above right](D,A)
+				\tkzLabelPoints[below left](B,M,P)
+				\tkzLabelPoints[below right](C,N)
+				\tkzLabelPoints[below](O,Q)
+				\tkzLabelPoints[above](S,E)
+			\end{tikzpicture}	
+		\end{center}
+		Do $S.ABCD$ là hình chóp tứ giác đều nên $SO\perp BD$.\hfill$(1)$\\
+		Ta có $BD\perp AC$ (hai đường chéo của hình vuông).\hfill$(2)$\\
+		Từ $(1)$ và $(2)$, suy ra $BD\perp (SAC)$.\hfill$(*)$\\
+		Do $M$, $Q$ là trung điểm của $AE$, $AB$ nên $MQ\parallel EB$.\\
+		Tứ giác $SEBC$ là hình bình hành nên $EB\parallel SC$. Do đó $MQ\parallel SC$.\\
+		Hơn nữa $N$, $Q$ là trung điểm của $BC$, $AB$ nên $NQ\parallel AC$. Từ đó suy ra $(MNQ)\parallel (SAC)$.\hfill$(**)$\\
+		Từ $(*)$ và $(**)$, suy ra $BD\perp (MNQ)$.}
+\end{vd}\dongcham{7}
+
+\begin{dang}{Chứng minh hai đường thẳng vuông góc}
+\immini{ Chứng minh đường thẳng $\Delta$ vuông góc với $d$, ta có thể chứng minh $\Delta$ vuông góc với mặt phẳng $(\alpha)$ chứa $d$, nghĩa là
+			\begin{center}
+				\fbox{$\heva{&\Delta \perp (\alpha)\\& d \subset (\alpha) }\Rightarrow \Delta \perp d.$}
+			\end{center}
+		}{
+			\begin{tikzpicture}[scale=0.9]
+				\tkzDefPoints{0/0/A, 5/0/B, 6/2/C, 1/2/D, 2.5/1/E, 2.5/3/F, 2.5/0/G, 3/0.5/M, 4.5/1.5/N, 3/1.5/P, 4.5/0.5/Q}
+				\draw (4.5,1.5) node[right] {\footnotesize d};
+				\draw (2.5,3) node[right] {\footnotesize $\Delta$};
+				\tkzDrawSegments(A,B B,C C,D D,A E,F M,N)
+				\tkzDrawSegments[dashed](E,G)
+				\tkzMarkAngles[size=0.7cm,arc=l](B,A,D)
+				\tkzLabelAngles[pos=0.4,rotate=10](B,A,D){\scriptsize $\alpha$}
+			\end{tikzpicture}
+		}
+\end{dang}
+\begin{vd}
+	Cho hình chóp $S.ABC$ có $AB=AC$ và $\widehat{SAC}=\widehat{SAB}$. Gọi $M$ là trung điểm $BC$. Chứng minh $BC\perp SA$.
+	\loigiai{\immini{Tam giác $ABC$ có $AB=AC$ nên là tam giác cân tại đỉnh $A$. Mặt khác $M$ là trung điểm $BC$ nên $AM$ vừa là đường trung tuyến vừa là đường cao nên $AM\perp BC$.\hfill$(1)$\\
+			Xét hai tam giác $SAB$ và $SAC$, ta có$$\left\{\begin{aligned}
+				&SA\text{ chung }\\&AB=AC\\&\widehat{SAB}=\widehat{SAC}\end{aligned}\right.\Rightarrow \triangle SAB=\triangle SAC(c-g-c).$$
+			Suy ra $SB=SC$ nên $SBC$ là tam giác cân tại đỉnh $S$.\\
+			Mặt khác $M$ là trung điểm $BC$ nên $SM$ vừa là đường trung tuyến vừa là đường cao nên $SM\perp BC$.\hfill$(2)$\\
+			Từ $(1)$ và $(2)$, suy ra $BC\perp (SAM) \Rightarrow BC\perp SA$.}
+		{\begin{tikzpicture}[scale=0.7]
+				\tkzDefPoints{0/0/A,5/-1.5/B, 8/0/C, 4/6/S}
+				\coordinate (M) at ($(C)!0.5!(B)$);
+				\tkzDrawSegments(S,A S,C S,B A,B C,B S,M)
+				\tkzDrawSegments[dashed](A,C A,M)
+				\tkzDrawPoints(A,B,C,S,M)
+				\tkzLabelPoints[above left](A)
+				\tkzLabelPoints[above right](C)
+				\tkzLabelPoints[below right](B,M)
+				\tkzLabelPoints[above](S)
+	\end{tikzpicture}}}
+\end{vd}\dongcham{10}
+
+
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông, $SA$ vuông góc $(ABCD)$. 
+	\begin{tasks}(1)
+		\task Chứng minh các mặt bên của hình chóp là các tam giác vuông.
+		\task Gọi $H$ là hình chiếu vuông góc của $A$ lên $SD$. Chứng minh $AH \perp SC$ và $BH \perp SD$.
+	\end{tasks}
+	\loigiai{
+	\begin{enumerate}[a)]
+		\item Ta có $SA \perp (ABCD)$ nên $SA \perp AB$, $SA \perp AD$. Suy ra $\triangle SAB$ và $\triangle SAD$ vuông tại $A$. \\
+		Ta có $\heva{&BC \perp AB\\&BC \perp SA 	\quad (\text{ do }SA \perp (ABCD))} \Rightarrow BC \perp (SAB)$. Suy ra $BC \perp SB$ hay $\triangle SBC$ vuông tại $B$.\\
+		Ta có $\heva{&CD \perp AD\\&CD \perp SA \quad (\text{ do }SA \perp (ABCD))} \Rightarrow CD \perp (SAD)$. Suy ra $CD \perp SD$ hay $\triangle SCD$ vuông tại $D$.
+	\immini{
+		\item Ta có $\heva{&CD \perp AD\\&CD \perp SA 	\quad (\text{ do }SA \perp (ABCD))} \Rightarrow CD \perp (SAD)$.\\
+		Mà $AH \subset (SAD)$, suy ra $CD \perp AH \quad (1)$.\\
+		Mặt khác $AH \perp SD \quad (2)$.\\
+		Từ (1) và (2), suy ra $AH \perp (SCD) \Rightarrow AH \perp SC$.\\
+		Ta có $\heva{&SD \perp AH\\&SD \perp BA 	\quad (\text{ do } BA \perp CD)} \Rightarrow SD \perp (ABH)$.\\
+		Mà $BH \subset (ABH)$, suy ra $SD \perp BH$.
+}{
+	\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+		\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+		\coordinate (D) at ($(A)+(C)-(B)$);
+		\coordinate (S) at ($(A)+(0,3)$);
+		\coordinate (H) at ($(S)!0.4!(D)$);
+		\tkzDrawPolygon(S,B,C,D)
+		\tkzDrawSegments(S,C)
+		\tkzDrawSegments[dashed](A,S A,B A,D A,H)
+		\tkzDrawPoints[fill=black,size=4](D,C,A,B,S,H)
+		\tkzLabelPoints[above](S)
+		\tkzLabelPoints[below](A,B,C)
+		\tkzLabelPoints[right](D)
+		\tkzLabelPoints[above right](H)
+\end{tikzpicture}}
+	\end{enumerate}
+}
+\end{vd}\dongcham{20}
+
+\begin{vd}
+	Cho hình lăng trụ $ABC.A'B'C'$ có đáy $ABC$ là tam giác đều cạnh $a$, cạnh bên $CC'$ vuông góc với đáy và $CC' = a$.
+	\begin{tasks}(1)
+		\task Gọi $I$ là trung điểm của $BC$. Chứng minh $AI \perp BC'$.
+		\task Gọi $M$ là trung điểm của $BB'$. Chứng minh $BC' \perp AM$.
+		\task Gọi $K$ là điểm trên đoạn $A'B'$ sao cho $B'K = \dfrac{a}{4}$ và $J$ là trung điểm của $B'C'$. Chứng minh $AM \perp MK$ và $AM \perp KJ$.
+	\end{tasks}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[>=stealth, line join=round, line cap = round]
+				\tkzDefPoints{0/0/A, -1.5/-1.5/x, -4/0/y, 0/4/h}
+				\coordinate (B) at ($(A) + (x)$);
+				\coordinate (C) at ($(A) + (y)$);
+				\coordinate (A') at ($(A) + (h)$);
+				\coordinate (B') at ($(B) + (h)$);
+				\coordinate (C') at ($(C) + (h)$);
+				\coordinate (M) at ($(B)!0.5!(B')$);
+				\coordinate (I) at ($(C)!0.5!(B)$);
+				\coordinate (K) at ($(B')!0.25!(A')$);
+				\coordinate (J) at ($(B')!0.5!(C')$);
+				\tkzDrawSegments(A',B' B',C' C',A' A,A' B,B' C,C' A,B B,C B,C' B',C I,M K,M J,M J,K A,M)
+				\tkzDrawSegments[dashed](A,I A,C)
+				\tkzDrawPoints[fill=black](A,B,C,A',B',C',M,I,J,K)
+				\tkzLabelPoints[left](C,C',I)
+				\tkzLabelPoints[below](B)
+				\tkzLabelPoints[above right](M,A)
+				\tkzLabelPoints[above](J,K,B',A')
+			\end{tikzpicture}
+		\end{center}
+		\begin{enumerate}[a)]
+			\item Theo giả thiết $CC' \perp (ABC) \Rightarrow CC' \perp AI \hfill(1)$.\\ 		 
+			Tam giác $ABC$ đều nên $BC \perp AI \hfill(2)$.\\
+			Từ $(1)$ và $(2)$, suy ra $AI \perp (BCC'B') \Rightarrow AI \perp BC' \hfill(*)$.
+			\item Do $BC = CC' = C'B' = BB' = a$ và $CC' \perp CB$ nên $BCC'B'$ là hình vuông, suy ra $C'B \perp CB'$. \\
+			Trong tam giác $BCB'$ có $IM$ là đường trung bình nên $IM \parallel CB'$. \\
+			Kết hợp với kết quả trên, ta có $C'B \perp IM \hfill(**)$.	 \\
+			Từ $(*)$ và $(**)$, suy ra $C'B \perp (AIM) \Rightarrow C'B \perp AM$.
+			\item Theo giả thiết $B'K = \dfrac{a}{4}=\dfrac{BB'}{4} = \dfrac{BM}{2} \Rightarrow \dfrac{B'K}{B'M} = \dfrac{1}{2}\hfill(3)$.\\
+			Ta cũng có $BM = \dfrac{BB'}{2} = \dfrac{a}{2} = \dfrac{AB}{2} \Rightarrow \dfrac{BM}{BA} = \dfrac{1}{2}\hfill(4)$.\\
+			Từ $(3)$ và $(4)$, suy ra $\dfrac{B'K}{B'M} = \dfrac{BM}{BA}$. \\
+			Do đó tam giác vuông $ABM$ và $MB'K$ đồng dạng, cho ta $\widehat{B'MK} = \widehat{BMA}.$\\
+			Mà $\widehat{BMA} + \widehat{AMB} = 90^\circ$, suy ra $\widehat{B'MK} + \widehat{AMB} = 90^\circ$. Do đó $AM \perp MK\hfill(5)$. 	\\			 
+			Xét tam giác $BB'C'$ có $M$, $J$ lần lượt là trung điểm của  $BB'$ và $B'C'$ nên $MJ$ là đường trung bình, suy ra $MJ \parallel BC'$.\\ Mà $AM \perp C'B$ (chứng minh câu b). \\
+			Do đó $AM \perp MJ. \hfill(6)$\\
+			Từ $(5)$ và $(6)$, suy ra $AM \perp KJ.$ 
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{10}

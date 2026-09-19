@@ -1,0 +1,579 @@
+\section{CẤP SỐ NHÂN}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa}
+Cấp số nhân là một dãy số (hữu hạn hoặc vô hạn), trong đó kể từ số hạng thứ hai, mỗi số hạng đều là tích của số hạng đứng ngay trước nó với một số không đổi $q$. Nghĩa là
+\boxminitt{${{u}_{n+1}}={{u}_n}q$ với $n\in \mathbb{N}^*$.}
+\begin{gachsoc}
+	\begin{itemize}
+		\item [$\bullet$] Số $q$ được gọi là công bội của cấp số nhân.
+		\item [$\bullet$] Khi $q=0$ cấp số nhân có dạng ${{u}_{1}},0,0,\ldots,0,\ldots$
+		\item [$\bullet$] Khi $q=1$ cấp số nhân có dạng ${{u}_{1}},{{u}_{1}},{{u}_{1}},\ldots,{{u}_{1}},\ldots$
+		\item [$\bullet$] Khi ${{u}_{1}}=0$ thì với mọi $q$ cấp số nhân có dạng $0,0,0,\ldots,0,\ldots$
+	\end{itemize}
+\end{gachsoc}
+
+\subsubsection{Số hạng tổng quát} 
+	Nếu một cấp số nhân có số hạng đầu $u_1$ và công bội $q$ thì số hạng tổng quát $u_n$ của nó được xác định bởi công thức
+	\boxminitt{$u_n=u_1 \cdot q^{n-1}\, \text{với} \,n \geq 2.$}
+\subsubsection{Tính chất của ba số hạng liên tiếp} 
+Giả sử $u_{k-1}$, $u_k$, $u_{k+1}$ là ba số hạng liên tiếp của một cấp số nhân thì 
+\boxminitt{$u_k^2={{u}_{k-1}}\cdot{{u}_{k+1}}$ với $k\ge 2$}
+\subsubsection{Tổng của $ n $ số hạng đầu của một cấp số nhân}
+Cho cấp số nhân $\left(u_n\right)$ với công bội $q \neq 1$. Đặt $S_n=u_1+u_2+\cdots+u_n$. Khi đó
+\begin{itemize}
+	\item [$\bullet$] Nếu $q \ne 1$ thì \boxminitt{$S_n=\dfrac{u_1\left(1-q^n\right)}{1-q}.$}
+	\item [$\bullet$] Nếu $ q=1 $ thì \boxminit{$S_n =nu_1 $}
+\end{itemize}
+\newpage
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Chứng minh dãy số là một cấp số nhân}
+\end{dang}
+
+\begin{vd}
+	Trong các dãy số sau, dãy nào là cấp số nhân? Xác định số hạng đầu và công bội của cấp số nhân.
+	\begin{tasks}(2)
+		\task Dãy số $(u_n)$ với $u_n=(-3)^{2n+1}$. \dapso{$u_1=-27$, $q=9$.}
+		\task Dãy số $(u_n)$ với $u_n=n\cdot 5^{2n-1}$. 
+	\end{tasks}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Ta có $u_n\neq 0$ và $\dfrac{u_{n+1}}{u_n}=\dfrac{(-3)^{2(n+1)+1}}{(-3)^{2n+1}}=9$, $\forall\, n\in\mathbb{N^*}$.\\
+			Do đó $(u_n)$ là cấp số nhân với số hạng đầu $u_1=-27$, công bội $q=9$.
+			\item Dãy số $(u_n)$ có $u_1=5, u_2=250, u_3=9375$ và $u^2_2\neq u_1\cdot u_3$ nên $(u_n)$ không là cấp số nhân.
+		\end{enumEX}
+	}
+\end{vd}\dongcham{5}
+
+\begin{vd}
+	Chứng minh các dãy số sau là cấp số nhân. Hãy tìm công bội và số hạng đầu của cấp số nhân đó.
+	\begin{tasks}(2)
+		\task Dãy $(u_n)$ với $u_n=(-1)^n.3^{2n}$.	\dapso{$u_1=-9$, $q=-9$.}
+		\task Dãy $(v_n)$ với $v_n=\dfrac{5}{3^n}$.	\dapso{$u_1=\dfrac{5}{3}$, $q=\dfrac{1}{3}$.}
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Với $\forall n\geq 1$, ta có  $\dfrac{u_{n+1}}{u_n}=\dfrac{(-1)^{n+1}.3^{2(n+1)}}{(-1)^n.3^{2n}}=-9\Leftrightarrow u_{n+1}=-9.u_n$ nên $(u_n)$ là cấp số nhân có $u_1=-9$, công bội $q=-9$.
+			\item Với $\forall n\geq 1$, ta có  $\dfrac{u_{n+1}}{u_n}=\dfrac{\dfrac{5}{3^{n+1}}}{\dfrac{5}{3^n}}=\dfrac{1}{3}\Leftrightarrow u_{n+1}=\dfrac{1}{3}.u_n$ nên $(u_n)$ là cấp số nhân có $u_1=\dfrac{5}{3}$, công bội $q=\dfrac{1}{3}$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{5}
+
+\begin{dang}{Công bội, số hạng đầu, số hạng tổng quát}
+\end{dang}
+
+\begin{vd}
+	Cho cấp số nhân $(u_n)$ với công bội dương, biết $u_1=3$ và  $u_5=48$.
+	\begin{tasks}(1)
+		\task Tìm công bội $q$ và tính $u_8$.	\dapso{$384$.}
+		\task Hỏi số $1536$ là số hạng thứ mấy? \dapso{$8$.}
+	\end{tasks}
+	\loigiai{
+		Theo bài ra ta có: $u_5=u_1.q^4=48\Rightarrow q^4=16\Rightarrow q=\pm 2$, theo giả thiết, suy ra $q=2$
+		\begin{enumerate}
+			\item $u_8=u_1.q^7=3.2^7=384$.
+			\item Số hạng thứ $n$ của cấp số nhân là $u_n=u_1.q^{n-1}$.\\ Theo bài ra ta có $$1536=3.2^{n-1}\Rightarrow 2^{n-1}=512=2^9\Rightarrow n-1=9\Rightarrow n=8.$$
+			Vậy số đã cho là số hạng thứ $8$. 
+		\end{enumerate}
+	}
+\end{vd}\dongcham{4}
+
+
+\begin{vd}
+	Giữa các số $160$ và $5$ hãy chèn $4$ số nữa để tạo thành một cấp số nhân. Tìm $4$ số đó.
+	\dapso{$(80;40;20;10)$}
+	\loigiai{
+		Theo bài ra, ta có $\heva{&u_1=160\\&u_6=5} \Leftrightarrow \heva{&u_1=160\\&u_1q^5=5} \Rightarrow q^5=\dfrac{5}{160} \Rightarrow q=\dfrac{1}{2}$.\\
+		Vậy $4$ số cần tìm là $u_2=u_1\cdot q = 80$, $u_3=u_2\cdot q = 40$, $u_4=u_3\cdot q = 20$, $u_5=u_4\cdot q= 10$.
+	}	
+\end{vd}\dongcham{5}
+
+\begin{vd}
+	Tìm số hạng đầu $u_1$, công bội $q$ và số hạng tổng quát $u_n$ của cấp số nhân $(u_n)$ biết 
+	\begin{tasks}(3)
+		\task $\heva{&u_2=6\\&u_4=54.}$
+		\task $\heva{&u_3=7\\&u_6=56.}$
+		\task $\left\{ \begin{aligned}
+			& {{u}_{1}}+{{u}_{2}}+{{u}_{3}}=13 \\
+			& {{u}_{4}}-{{u}_{1}}=26 \\
+		\end{aligned} \right.$
+		\task $\heva{&u_1+u_5=51\\&u_2+u_6=102.}$	
+		\dapso{$ u_1=3;q=2 $.}
+		\task $\heva{&u_4-u_2=72\\&u_5-u_3=144.}$ \dapso{$u_1=12, q=2$.}
+		\task $\heva{&u_1+u_2+u_3=13\\&u_4+u_5+u_6=351.}$ \dapso{$u_1=1, q=3$.}	
+	\end{tasks}
+		\loigiai{
+		Gọi $u_1$ là số hạng đầu và $q$ là công bội của cấp số nhân $(u_n)$. Ta có công thức số hạng tổng quát: $u_n = u_1 \cdot q^{n-1}$.
+		
+		\begin{enumerate}[a)]
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1 \cdot q = 6 \\ u_1 \cdot q^3 = 54 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q = 6 \\ (u_1 \cdot q) \cdot q^2 = 54 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q = 6 \\ 6 \cdot q^2 = 54 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q = 6 \\ q^2 = 9 \end{cases} $$
+			$$ \Leftrightarrow \left[ \begin{aligned} &\begin{cases} q = 3 \\ u_1 = 2 \end{cases} \\ &\begin{cases} q = -3 \\ u_1 = -2 \end{cases} \end{aligned} \right. $$
+			Vậy có hai cấp số nhân thoả mãn:
+			\begin{itemize}
+				\item Với $u_1 = 2$, $q = 3 \Rightarrow u_n = 2 \cdot 3^{n-1}$.
+				\item Với $u_1 = -2$, $q = -3 \Rightarrow u_n = -2 \cdot (-3)^{n-1}$.
+			\end{itemize}
+			
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1 \cdot q^2 = 7 \\ u_1 \cdot q^5 = 56 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q^2 = 7 \\ (u_1 \cdot q^2) \cdot q^3 = 56 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q^2 = 7 \\ 7 \cdot q^3 = 56 \end{cases} \Leftrightarrow \begin{cases} u_1 \cdot q^2 = 7 \\ q^3 = 8 \end{cases} $$
+			$$ \Leftrightarrow \begin{cases} q = 2 \\ u_1 \cdot 2^2 = 7 \end{cases} \Leftrightarrow \begin{cases} q = 2 \\ u_1 = \frac{7}{4} \end{cases} $$
+			Vậy $u_1 = \frac{7}{4}$, $q = 2$ và $u_n = \frac{7}{4} \cdot 2^{n-1}$.
+			
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1 + u_1q + u_1q^2 = 13 \\ u_1q^3 - u_1 = 26 \end{cases} \Leftrightarrow \begin{cases} u_1(1 + q + q^2) = 13 \quad (1) \\ u_1(q^3 - 1) = 26 \quad (2) \end{cases} $$
+			Từ $(2)$, áp dụng hằng đẳng thức ta có $u_1(q - 1)(1 + q + q^2) = 26$. Thay $(1)$ vào ta được:
+			$$ 13(q - 1) = 26 \Leftrightarrow q - 1 = 2 \Leftrightarrow q = 3. $$
+			Thay $q = 3$ vào $(1)$ ta được: 
+			$$ u_1(1 + 3 + 9) = 13 \Leftrightarrow 13u_1 = 13 \Leftrightarrow u_1 = 1. $$
+			Vậy $u_1 = 1$, $q = 3$ và $u_n = 1 \cdot 3^{n-1} = 3^{n-1}$.
+			
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1 + u_1q^4 = 51 \\ u_1q + u_1q^5 = 102 \end{cases} \Leftrightarrow \begin{cases} u_1(1 + q^4) = 51 \\ u_1q(1 + q^4) = 102 \end{cases} $$
+			Lấy phương trình dưới chia cho phương trình trên vế theo vế (do $u_1(1+q^4) \neq 0$), ta được:
+			$$ q = \frac{102}{51} \Leftrightarrow q = 2. $$
+			Thay $q = 2$ vào phương trình đầu ta được:
+			$$ u_1(1 + 2^4) = 51 \Leftrightarrow 17u_1 = 51 \Leftrightarrow u_1 = 3. $$
+			Vậy $u_1 = 3$, $q = 2$ và $u_n = 3 \cdot 2^{n-1}$.
+			
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1q^3 - u_1q = 72 \\ u_1q^4 - u_1q^2 = 144 \end{cases} \Leftrightarrow \begin{cases} u_1q(q^2 - 1) = 72 \\ u_1q^2(q^2 - 1) = 144 \end{cases} $$
+			Lấy phương trình dưới chia cho phương trình trên vế theo vế (với $u_1q(q^2-1) \neq 0$), ta được:
+			$$ q = \frac{144}{72} \Leftrightarrow q = 2. $$
+			Thay $q = 2$ vào phương trình đầu ta được:
+			$$ u_1 \cdot 2 \cdot (2^2 - 1) = 72 \Leftrightarrow 6u_1 = 72 \Leftrightarrow u_1 = 12. $$
+			Vậy $u_1 = 12$, $q = 2$ và $u_n = 12 \cdot 2^{n-1}$.
+			
+			\item Ta có hệ phương trình:
+			$$ \begin{cases} u_1 + u_1q + u_1q^2 = 13 \\ u_1q^3 + u_1q^4 + u_1q^5 = 351 \end{cases} \Leftrightarrow \begin{cases} u_1(1 + q + q^2) = 13 \\ u_1q^3(1 + q + q^2) = 351 \end{cases} $$
+			Lấy phương trình dưới chia cho phương trình trên vế theo vế, ta được:
+			$$ q^3 = \frac{351}{13} \Leftrightarrow q^3 = 27 \Leftrightarrow q = 3. $$
+			Thay $q = 3$ vào phương trình đầu ta được:
+			$$ u_1(1 + 3 + 3^2) = 13 \Leftrightarrow 13u_1 = 13 \Leftrightarrow u_1 = 1. $$
+			Vậy $u_1 = 1$, $q = 3$ và $u_n = 1 \cdot 3^{n-1} = 3^{n-1}$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{23}
+
+\begin{dang}{Tính tổng của $n$ số hạng đầu tiên của một cấp số nhân}
+\end{dang}
+
+\begin{vd}
+	Cho cấp số nhân $(u_n)$ với $u_n=12.2^{n-1}$. 
+	\begin{tasks}(2)
+		\task Tìm số hạng đầu $u_1$ và công bội $q$.	\dapso{$ u_1=12;q=2 $.}
+		\task Tính tổng của $10$ số hạng đầu tiên.		\dapso{$ 12\,276 $.}
+		\task Tính tổng $S'=u_3+u_4+\ldots+u_{12}$. 	\dapso{$ 49\,104 $.}
+	\end{tasks}
+	\loigiai{ 
+		\begin{enumerate}
+			\item Ta có : $u_1=12.\left(\dfrac{1}{2} \right)^0=12$, dễ thấy $q=2$.
+			\item Tổng của $10$ số hạng đầu tiên là : $S_{10}=u_1.\dfrac{q^{10}-1}{q-1}=12.\dfrac{2^{10}-1}{2-1}=12276$.
+			\item $S'=u_3+u_4+\ldots+u_{12}=u_3.\dfrac{q^{10}-1}{q-1}=12.2^2.\dfrac{2^{10}-1}{2-1}=49104$. 
+		\end{enumerate}
+	}
+\end{vd}\dongcham{6}
+
+\begin{vd}
+	Tìm công bội của một cấp số nhân có số hạng đầu là  $7$, số hạng cuối là  $448$   và tổng số các số hạng là  $889$.	\dapso{$ q=2 $.}
+	\loigiai{
+		Do đây là cấp số nhân, từ giả thiết ta có hệ 
+		$\left\{ \begin{array}{l}
+			u_1 = 7\\
+			u_1.\dfrac {q^n - 1} {q - 1} = 889\\
+			u_1q^{n - 1} = 448
+		\end{array} \right.$  
+		
+		$ \Leftrightarrow \left\{ \begin{array}{l}
+			q^{n-1}  = 64\\
+			\dfrac{q^n-1}{q-1} = 127
+		\end{array} \right. \Rightarrow q = 2$.
+	}
+\end{vd}\dongcham{7}
+
+\begin{vd}
+	Tìm số hạng đầu của một cấp số nhân, biết rằng công bội là  $3$, tổng số các số hạng là  $728$   và số hạng cuối là  $486$.	\dapso{$ u_1=2 $.}
+	\loigiai{
+		Do đây là cấp số nhân, từ giả thiết ta có hệ $\left\{ \begin{array}{l}
+			q = 3\\
+			u_1.\dfrac {q^n - 1} {q - 1} = 728\\
+			u_1q^{n - 1} = 486
+		\end{array} \right.$  
+		
+		$ \Leftrightarrow \left\{ \begin{array}{l}
+			u_1q^n - u_1 = 1456\\
+			u_1q^n = 1458
+		\end{array} \right. \Rightarrow u_1 = 2$.
+	}
+\end{vd}\dongcham{7}
+
+\begin{vd}
+	Tính tổng sau: 
+	\begin{tasks}(2)
+		\task $S=1+2+4+\ldots+128$
+		\task $S=\dfrac{1}{3} + \dfrac{2}{3} + \dfrac{2^2}{3} + \ldots + \dfrac{2^{12}}{3}$.
+		\task $A=1+3+3^2+\cdots +3^{2018}$
+		\task $B=2-1+\dfrac{1}{2}-\dfrac{1}{4}+\cdots +\dfrac{1}{512}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $S=1+2+4+\ldots+128=1+2+2^2+\ldots+2^{7}=\dfrac{1(1-2^8)}{1-2}=255$.
+			\item Ta nhận thấy các số hạng của tổng là cấp số nhân có $u_1 = \dfrac{1}{3}$, công bội $q = 2$ và có $13$ số hạng.\\
+			Vậy $S=\dfrac{1}{3} + \dfrac{2}{3} + \dfrac{2^2}{3} + \ldots + \dfrac{2^{12}}{3} = \dfrac{1}{3} \cdot \dfrac{1 - 2^{13}}{1 - 2} = \dfrac{8191}{3}$.
+			\item $A$ là tổng của cấp số nhân có $2019$ số hạng, trong đó $u_1=1$, $q=3$. Vậy $A=\dfrac{3^{2020}-1}{2}$.
+			\item 	Ta có các số hạng trong tổng lập thành cấp số nhân với\\ $\begin{cases} & u_1=2, q=-\dfrac{1}{2} \\  & u_n=\dfrac{1}{512}=2. {{(-\dfrac{1}{2})}^{n-1}} \\  \end{cases} \Rightarrow \begin{cases} & u_1=2, q=-\dfrac{1}{2} \\  & \dfrac{1}{1024}={(-\dfrac{1}{2})}^{n-1} \\  \end{cases} \Rightarrow \begin{cases} & u_1=2, q=-\dfrac{1}{2} \\  & n=11 \\  \end{cases} $.\\ 
+			Suy ra $B=S_{11}=u_1. \dfrac{q^{11}-1}{q-1}=2. \dfrac{{(-\dfrac{1}{2})}^{11}-1}{-\dfrac{1}{2}-1}=\dfrac{638}{512}$. 
+		\end{enumerate}
+	}
+\end{vd}\dongcham{18}
+
+
+\begin{dang}{Tính chất của cấp số nhân}
+\end{dang}
+
+\begin{vd}
+	Tìm $a$ để ba số $a-2$; $a-4$; $a+2$ theo thứ tự lập thành cấp số nhân.	\dapso{$a=\dfrac{5}{2}$.}
+	\loigiai{ 
+		Ba số $a-2$; $a-4$; $a+2$ lập thành cấp số nhân điều kiện là 
+		$$(a-4)^2=(a-2)(a+2)\Leftrightarrow 8a=20\Leftrightarrow a=\dfrac{5}{2}.$$
+		Vậy $a=\dfrac{5}{2}$.
+	}
+\end{vd}\dongcham{8}
+
+\begin{vd}
+	Tìm $3$ số hạng liên tiếp của một cấp số nhân biết tổng của chúng là $19$ và tích là $216$.	\dapso{$9;6;4$ hoặc $4;6;9$.}
+	\loigiai{
+		Từ giả thiết ta có hệ 
+		\begin{eqnarray*}
+			\heva{&u_1 + u_2 + u_3 = 19\\&u_1.u_2.u_3 = 216} 
+			&\Leftrightarrow&
+			\heva{&u_1 + u_1q + u_1q^2 = 19\\& ({u_1q})^3 = 216}\\
+			&\Leftrightarrow& \heva{& u_1 + u_1q + u_1q^2 = 19\\& u_1q = 6}
+		\end{eqnarray*}
+		Suy ra 	
+		$$u_1 + 6 + \dfrac {36} {u_1} = 19 \Leftrightarrow u_1^2 - 13u_1 + 36 = 0 \Leftrightarrow \hoac{&u_1 = 9\\&u_1 = 4}$$
+		\begin{itemize}
+			\item [$\bullet$] Với $u_1=9$, suy ra $q=\dfrac{2}{3}$, ta được ba số $9;6;4$.
+			\item [$\bullet$] Với $u_1=4$, suy ra $q=\dfrac{3}{2}$, ta được ba số $4;6;9$.
+		\end{itemize}
+	}
+\end{vd}\dongcham{13}
+
+\begin{vd}
+	Tìm các số dương $a$ và $b$ sao cho $a, a+2b, 2a+b$ theo thứ tự lập thành một cấp số cộng và ${(b+1)}^2$, $ab+5$, ${(a+1)}^2$ theo thứ tự lập thành một cấp số nhân. \dapso{$ a=3;b=1 $.}
+	\loigiai{
+		Theo giả thiết ta có \\$\begin{cases} & 2a+4b=3a+b \\  & {(ab+5)}^2={(a+1)}^2{(b+1)}^2 \\  \end{cases} $ $\Leftrightarrow \begin{cases} & a=3b \\  & {(3{b^2+5)}^2}={(3b+1)}^2{(b+1)}^2 \\  \end{cases} $\\
+		$\Leftrightarrow \begin{cases} & a=3b \\  & (b-1)(3b^2+2b+3)=0 \\  \end{cases} \Leftrightarrow \begin{cases} & a=3 \\  & b=1 \end{cases} $. }
+\end{vd}\dongcham{13}
+\begin{vd}
+	Chứng minh rằng nếu 3 số $\dfrac{2}{y-x}, \dfrac{1}{y}, \dfrac{2}{y-z}$ theo thứ tự lập thành một cấp số cộng thì 3 số $x, y, z$ lập thành một cấp số nhân. 
+	\loigiai{
+		Theo giả thiết ta có
+		\begin{eqnarray*}
+			\dfrac{2}{y}=\dfrac{2}{y-z}+\dfrac{2}{y-x}
+			&\Leftrightarrow&
+			\dfrac{1}{y}=\dfrac{2y-x-z}{y^2-xy-yz+xz}\\
+			&\Leftrightarrow&
+			y^2-xy-yz+xz=2y^2-xy-yz \Leftrightarrow y^2=zx.
+		\end{eqnarray*}
+		Vậy, ba số $x, y, z$ lập thành một cấp số nhân. 
+	}
+\end{vd}\dongcham{11}
+
+\begin{vd}
+	Cho ba số tạo thành một cấp số cộng có tổng $21$. Nếu thêm $2$, $3$, $9$ lần lượt vào số thứ nhất, số thứ hai, số thứ ba tạo thành một cấp số nhân. Tìm $3$ số đó.
+	\dapso{$(3;7;11)$ và $(18;7;-4)$}
+	\loigiai{
+		Gọi $3$ số cần tìm là $x$, $y$, $z$. Theo bài ra ta có hệ phương trình
+		{\allowdisplaybreaks
+			\begin{eqnarray*}
+				& &\heva{&x+y+z=21\\&x+z=2y\\& (x+2)(z+9)=(y+3)^2} \Leftrightarrow \heva{&y=7\\&x+z=14&\quad(1)\\&(x+2)(z+9)=100.&\quad(2)}	
+			\end{eqnarray*}
+		}
+		Từ $(1)\Rightarrow z=14-x\quad(3)$. Thay vào $(2)$ ta được phương trình
+		\[(x+2)(23-x)=100\Leftrightarrow x^2-21x+54=0\Leftrightarrow \hoac{&x=3\\&x=18.}\]
+		\begin{itemize}
+			\item Với $x=3\Rightarrow z=11$.
+			\item Với $x=18\Rightarrow z=-4$.
+		\end{itemize}
+		Vậy bộ ba số cần tìm là $(3;7;11)$ và $(18;7;-4)$.	
+	}	
+\end{vd}\dongcham{11}
+
+\begin{vd}
+	Ba số khác nhau có tổng bằng $114$ có thể coi là ba số hạng liên tiếp của một cấp số nhân hoặc coi là số hạng thứ nhất, thứ tư và thứ $25$ của $1$ cấp số cộng. Tìm các số đó.\dapso{$(2;14;98)$}
+	\loigiai{
+		Gọi $3$ số cần tìm là $x$, $y$, $z$. Theo bài ra ta có hệ phương trình
+		\[\heva{&x+y+z=114&\quad(1)\\&xz=y^2.&\quad(2)}\]
+		Lại có cấp số cộng có $u_1=x$, $u_4=y$, $u_{25}=z$. Gọi $d$ là công sai của cấp số cộng  ta có hệ phương trình
+		\[\heva{&u_4=u_1+3d\\&u_{25}=u_1+24d}\Leftrightarrow \heva{&y=x+3d &\quad(3)\\&z=x+24d. &\quad(4)}\]
+		Thay $(3)$, $(4)$ vào $(1)$ và $(2)$ ta có
+		\[\heva{&x+x+3d+x+24d=114\\&x(x+24d)=(x+3d)^2}\Leftrightarrow\heva{&x+9d=38 &\quad(5)\\&d(2x-d)=0. &\quad(6)}\]
+		Từ $(6)\Rightarrow d=0$ hoặc $d=2x$. Thay vào $(5)$
+		\begin{itemize}
+			\item Với $d=0\Rightarrow x=38\Rightarrow y = z = 38$, loại do điều kiện ba số khác nhau.
+			\item Với $d=2x\Rightarrow 19x=38\Rightarrow x= 2\Rightarrow d = 4\Rightarrow y=14$, $z=98$.
+		\end{itemize}
+		Vậy các số cần tìm là $(2;14;98)$.
+	}	
+\end{vd}\dongcham{11}
+
+
+\begin{dang}{Vận dụng, thực tiễn}
+\end{dang}
+
+\begin{vd}
+	Một khu rừng có trữ lượng gỗ là ${4. 10}^5$ mét khối. Biết tốc độ sinh trưởng của các cây ở khu rừng đó là $4 \%$ mỗi năm. Hỏi sau $5$ năm, khu rừng đó sẽ có khoảng bao nhiêu mét khối gỗ?	\dapso{$ 4.8666 \cdot 10^5 $.}
+	\loigiai{
+		Đặt $u_0=4. 10^5$ và $r=4 \%=0,04$. Khi đó năm thứ nhất, trữ lượng gỗ là $$u_1=4. 10^5 + 4. 10^5 \cdot 0,04=4,16 \cdot 10^5 \,(m^3).$$
+		Gọi $u_n$ là trữ lượng gỗ của khu rừng sau năm thứ $n$, $n \ge 1$. Khi đó ta có $$u_{n+1}=u_n+u_n\cdot r =u_n(1+r), n\in \mathbb{N}*$$
+		Suy ra $(u_n)$ là cấp số nhân với số hạng đầu $u_1$ và công bội $q=1+r $.\\
+		Sau $5$ năm, khu rừng đó sẽ có
+		$u_5=u_1. q^4=4,16. 10^5. (1+0,04)^4=4.8666 \cdot 10^5$ mét khối gỗ. 
+	}
+\end{vd}\dongcham{5}
+
+\begin{vd}
+	Tỷ lệ tăng dân số của tỉnh M là $1,2 \%$. Biết rằng số dân của tỉnh M hiện nay là $2$ triệu người. Nếu lấy kết quả chính xác đến hàng nghìn thì sau $9$ năm nữa số dân của tỉnh M sẽ là bao nhiêu?	\dapso{$ 2\,227\,000 $.}
+	\loigiai{
+		Đặt $P_0=2000000={2. 10}^6$ và $r=1,2 \%=0,012$. Số dân của tỉnh $M$ sau năm thứ nhất là $$P1=P_0 + P_0r=P_0(1+r)$$
+		Gọi $P_n$ là số dân của tỉnh $M$ sau $n$ năm nữa. Ta tính được
+		$$P_{n+1}=P_n+P_nr=P_n(1+r)$$ 
+		Suy ra $(P_n)$ là một cấp số nhân với số hạng đầu $P_1$ và công bội $q=1+r$.
+		Do đó số dân của tỉnh $M$ sau $10$ năm nữa là $$P_{10}=M_1(1+r)^9=M_0(1+r)^{10}\approx 2227000.$$ 
+	}
+\end{vd}\dongcham{5}
+
+\begin{vd}
+	Một người gửi ngân hàng $150$ triệu đồng theo thể thức lãi kép, lãi suất $0,58 \%$ một tháng (kể từ tháng thứ $2$, tiền lãi được tính theo phần trăm của tổng tiền lãi tháng trước đó và tiền gốc của tháng trước đó). Sau ít nhất bao nhiêu tháng, người đó có $180$ triệu đồng?	\dapso{$ 32 $.}
+	\loigiai{
+		Đặt $M_0=150$ (triệu đồng) và $r=\dfrac{0,58}{100}$. Ta có Số tiền người đó nhận được ở tháng thứ nhất là 
+		$$M_1=M_0 + M_0 \cdot r=M_0\left(1+r \right)$$
+		Gọi $M_n$ là số tiền mà người đó nhận được ở tháng thứ $n$, $n \ge 1$ thì
+		$$M_{n+1}=M_n+M_n \cdot r =M_n\left(1+r \right) $$
+		Suy ra $(M_n)$ là một cấp số nhân với số hạng đầu là $M_1$ và công bội $q=1+r$. Từ đây, ta tính được số tiền người đó nhận được sau $n$ tháng là
+		$$M_n=M_1 \cdot q^{n-1}=M_0\left(1+r \right). \left(1+r \right)^{n-1}=M_0\left(1+r\right)^n.$$
+		Yêu cầu bài toán
+		$M_n=180 \Rightarrow 180=M_0\left(1+r \right)^n$. 
+		Sử dụng máy tính cầm tay, ta tính được $n\approx 31,526$.
+		Vậy sau ít nhất 32 tháng, người đó nhận được số tiền 180 triệu đồng.
+	}
+\end{vd}\dongcham{5}
+\begin{vd}
+	Trong điều kiện nuôi cấy lý tưởng, một loài vi khuẩn phân bào theo chu kì: cứ sau $2$ giờ, từ $1$ con vi khuẩn sẽ phân chia thành $4$ con vi khuẩn mới. Một nhà nghiên cứu bắt đầu nuôi cấy $100$ con vi khuẩn loài này. 
+	\begin{enumerate}
+		\item[a)] Hỏi sau $12$ giờ, số lượng vi khuẩn trong môi trường nuôi cấy là bao nhiêu?
+		\item[b)] Sức chứa tối đa của ống nghiệm nuôi cấy là $50$ triệu con vi khuẩn. Hỏi sau ít nhất bao nhiêu giờ thì số lượng vi khuẩn sẽ sinh sôi vượt quá sức chứa của ống nghiệm?
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item[a)] Gọi $u_n$ là số lượng vi khuẩn sau chu kì thứ $n$. Một chu kì kéo dài $2$ giờ.
+			Số lượng vi khuẩn ban đầu (thời điểm 0): $u_0 = 100$.
+			Sau chu kì thứ nhất ($n=1$), số vi khuẩn là: $u_1 = 100 \times 4$.
+			Tổng quát, số lượng vi khuẩn sau $n$ chu kì lập thành cấp số nhân với công bội $q = 4$. Ta có: $u_n = 100 \times 4^n$.
+			Thời gian $12$ giờ tương ứng với $n = \dfrac{12}{2} = 6$ chu kì.
+			Số lượng vi khuẩn sau $12$ giờ là:
+			$$u_6 = 100 \times 4^6 = 100 \times 4096 = 409\,600 \text{ (con)}.$$
+			\item[b)] Để số lượng vi khuẩn vượt quá $50$ triệu con ($50\,000\,000$), ta có bất phương trình:
+			$$u_n > 50\,000\,000 \Leftrightarrow 100 \times 4^n > 50\,000\,000 \Leftrightarrow 4^n > 500\,000$$
+			$$\Leftrightarrow n > \log_4 (500\,000) \approx 9,46$$
+			Vì $n$ là số nguyên (số chu kì hoàn thành) nên $n \ge 10$.
+			Số chu kì tối thiểu là $10$, tương ứng với thời gian là $10 \times 2 = 20$ giờ.
+			Vậy sau ít nhất $20$ giờ thì số lượng vi khuẩn vượt sức chứa của ống nghiệm.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{9}
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+
+\begin{baitap}%[1D2K3-5]
+	Cho cấp số nhân $(u_n)$, biết $u_1=2,u_3=18$.
+	\begin{enumerate}
+		\item Tìm công bội.
+		\item Tính tổng 10 số hạng đầu tiên của cấp số nhân đó.
+	\end{enumerate}
+	\loigiai
+	{
+		\begin{enumerate}
+			\item Ta có $u_3=u_1\cdot q^2=2\cdot q^2=18$, suy ra $q=3$ hoặc $q=-3$.
+			\item Nếu $q=3$ thì $S_{10}=\dfrac{2\left(1-3^{10}\right)}{1-3}=59048$.\\
+			Nếu $q=-3$ thì $S_{10}=\dfrac{2\left[1-(-3)^{10}\right]}{1-(-3)}=-29524$.
+		\end{enumerate}
+	}
+\end{baitap}
+\cham{10}
+\begin{baitap}%[1D2B3-5]
+	Cho một cấp số nhân $(u_n)$ có các số hạng đều không âm và thoả mãn $u_2=6$ và $u_4=24$. Tính tổng của $12$ số hạng đầu tiên của cấp số nhân đó.
+	\loigiai
+	{
+		Gọi công bội của cấp số nhân là $q$.\\
+		Ta có $u_4=u_2\cdot q^2$ hay $24=6\cdot q^2$, suy ra $q=-2$ hoặc $q=2$. Do cấp số nhân có các số hạng không âm nên $q=2$.\\
+		Khi đó, cấp số nhân $(u_n)$ có $u_1=\dfrac{u_2}{q}=\dfrac{6}{2}=3$.\\
+		Ta có: $S_{12}=\dfrac{u_1\left(1-q^{12}\right)}{1-q}=\dfrac{3\left(1-2^{12}\right)}{1-2}=12285$.
+	}
+\end{baitap}
+\cham{8}
+\begin{baitap}
+	Tìm số hạng đầu $u_1$ và công bội $q$ của cấp số nhân trong các trường hợp sau:
+	\begin{tasks}(2)
+		\task $u_2=\dfrac{1}{4}$ và $u_5=16$.
+		\task $\heva{&u_1-u_3+u_5=65\\&u_1+u_7=325.}$	\dapso{$u_1=5;q=2$ hoặc $u_1=5 ;q=-2$.}
+	\end{tasks}
+	
+	\loigiai{
+		\begin{listEX}
+			\item Ta có $u_5=u_1 \cdot q^4=u_2 \cdot q^3$, suy ra $q^3=\dfrac{u_5}{u_2}=\dfrac{16}{\dfrac{1}{4}}=64$, suy ra $q=4, u_1=\dfrac{1}{16}$.
+			\item Ta có
+			\begin{eqnarray*}\heva{&u_1-u_3+u_5=65\\&u_1+u_7=325}&\Leftrightarrow&\heva{&u_1-u_1\cdot q^2+u_1\cdot q^4=65\\&u_1+u_1\cdot q^6=325}
+				\Leftrightarrow \heva{&u_1\left(1-q^2+q^4\right)=65\\&u_1\left(1+q^6\right)=325}\\
+				&\Leftrightarrow& \heva{&q^2+1=5\\&u_1=\dfrac{325}{1+q^6}}
+				\Leftrightarrow \heva{&q^2=4\\&u_1=5}
+				\Leftrightarrow \hoac{&\heva{&q=2\\&u_1=5}\\&\heva{&q=-2\\&u_1=5.}}
+			\end{eqnarray*}
+		\end{listEX}
+	}
+\end{baitap}\cham{12}
+
+\begin{baitap}
+	Cho ba số khác nhau lập thành cấp số cộng, bình phương của các số đó lập thành cấp số nhân. Tìm các số đó.	\dapso{$k(1-\sqrt 2), k, k(1+\sqrt 2);k(1+\sqrt 2), k, k(1-\sqrt 2) .$}
+	\loigiai{
+		
+		Gọi ba số cần tìm là $a,b,c.$ Ta nhận thấy nếu một bộ $a,b,c$ hỏa mãn đề bài thì mọi bộ $ka,kb,kc(k\ne 0)$ cũng thỏa mãn nên ta chuẩn hóa bài toán bằng cách xét $b=1.$
+		
+		Khi đó ta có,
+		$$ \begin{cases}
+			a+c=2b\\ 
+			a^2.c^2=b^2
+		\end{cases}\Leftrightarrow  \begin{cases}
+			a+c=2\\ 
+			a^2.c^2=1
+		\end{cases}$$
+		Giải hệ trên ta được $a=1-\sqrt 2,c=1+\sqrt 2$ hoặc $a=1+\sqrt 2,c=1-\sqrt 2$ nên ta có hai bộ số thỏa đề bài là
+		$$k(1-\sqrt 2), k, k(1+\sqrt 2) ; $$
+		$$k(1+\sqrt 2), k, k(1-\sqrt 2) .$$
+	}
+\end{baitap}\cham{10}
+
+\begin{baitap}
+	Tìm số đo bốn góc của một tứ giác, biết số đo các góc đó lập thành một cấp số nhân có số hạng cuối gấp tám lần số hạng đầu tiên.	\dapso{$24^\circ, 48^\circ, 96^\circ, 192^\circ$.}
+	\loigiai{Giả sử cấp số nhân có số hạng đầu là $u_1$, công bội là $q$, $u_1, q>0$. Theo đề bài ta có
+		\begin{center}$u_4=8.u_1\Leftrightarrow u_1.q^3=8.u_1\Leftrightarrow q^3=8\Leftrightarrow q=2$.
+		\end{center}
+		Mà
+		\begin{center}$S_4=u_1+u_2+u_3+u_4=360^\circ\Leftrightarrow u_1.\dfrac{1-q^4}{1-q}=360^\circ\Leftrightarrow u_1.\dfrac{1-2^4}{1-2}=360^\circ\Leftrightarrow u_1=24^\circ$.
+		\end{center}
+		Vậy số đo bốn góc của tứ giác là $24^\circ, 48^\circ, 96^\circ, 192^\circ$.
+	}
+\end{baitap}\cham{12}
+\begin{baitap}
+	Số đo ba kích thước của hình hộp chữ nhật lập thành một cấp số nhân. Biết thể tích của khối hộp là $125~\mathrm{cm}^3$ và diện tích toàn phần là $175~\mathrm{cm}^2 $. Tính tổng số đo ba kích thước của hình hộp chữ nhật đó.	\dapso{$ 17,5\,\mathrm{cm} $.}
+	\loigiai{
+		Vì ba kích thước của hình hộp chữ nhật lập thành một cấp số nhân nên ta có thể gọi ba kích thước đó là $\dfrac{a}{q}, q, aq $.\\
+		Thể tích của khối hình hộp chữ nhật là $V=\dfrac{a}{q}. a. qa=a^3=125 \Rightarrow a=5$.
+		Diện tích toàn phần của hình hộp chữ nhật là 
+		$S_{tp}=2(\dfrac{a}{q}. a+a. aq+aq. \dfrac{a}{q})=2a^2(1+q+\dfrac{1}{q})=50(1+q+\dfrac{1}{q})$.\\
+		Theo giả thiết, ta có $50(1+q+\dfrac{1}{q})=175\Leftrightarrow 2q^2-5q+2=0 \Leftrightarrow \left[\begin{aligned}
+			q=2  \\q=\dfrac{1}{2}\end{aligned}\right.$.\\
+		Với $q=2$ hoặc $q=\dfrac{1}{2}$ thì kích thước của hình hộp chữ nhật là $2,5cm; 5cm; 10cm$.
+		Suy ra tổng của ba kích thước này là $2,5+5+10=17,5$ cm. 
+	} 
+\end{baitap}\cham{11}
+
+\begin{baitap}%[1D2B3-7]
+	Bác Năm gửi tiết kiệm vào ngân hàng 100 triệu đồng với hình thức lãi kép, kì hạn một năm với lãi suất $8\%/$ năm. Tính số tiền cả gốc và lãi bác Năm nhận được sau 10 năm (Giả sử lãi suất không thay đổi trong suốt thời gian gửi tiền).
+	\loigiai
+	{
+		Số tiền cả gốc và lãi bác Năm nhận được sau $10$ năm là $T=100(1+8\%)^{10}\approx 215,89$ triệu đồng.
+	}
+\end{baitap}
+\cham{8}
+
+\begin{baitap}%[Thi thử, Yên Phong số 1 – Bắc Ninh, 2019]%[Đặng Văn Khuyến, 12EX7]%[1D3K4-7]%
+	Một người gửi tiết kiệm vào ngân hàng theo hình thức như sau: Hàng tháng từ đầu mỗi tháng người đó sẽ gửi cố định số tiền $5$ triệu đồng với lãi suất $0{,}6\%$ trên tháng. Biết rằng lãi suất không thay đổi trong quá trình gửi, thì sau $10$ năm số tiền mà người đó nhận được cả vốn lẫn lãi khoảng bao nhiêu? \dapso{$880{,}26$ triệu}
+	\loigiai{
+		Theo bài ra, ta có
+		\begin{itemize}
+			\item Cuối tháng $1$, người đó có $5\cdot 1{,}006$ triệu đồng trong tài khoản tiết kiệm.
+			\item Cuối tháng $2$, người đó có
+			$(5+5\cdot 1{,}006)\cdot 1{,}006
+			=5\cdot 1{,}006\cdot (1+1{,}006)$ triệu đồng trong tài khoản tiết kiệm.
+			\item Cuối tháng $3$, người đó có
+			$\left(5+5\cdot 1{,}006\cdot (1+1{,}006)\right)\cdot 1{,}006
+			=5\cdot 1{,}006\cdot \left(1+1{,}006+1{,}006^{2}\right)$ triệu đồng trong tài khoản tiết kiệm.
+			\[\ldots\]
+			\item Cuối tháng $n$, người đó có
+			$5\cdot 1{,}006\cdot \left(1+1{,}006+1{,}006^{2}+\cdots +1{,}006^{n-1}\right)=5\cdot 1{,}006\cdot \dfrac{1{,}006^{n}-1}{0{,}006}$ triệu đồng trong tài khoản tiết kiệm.
+		\end{itemize}
+		Do $10 \text{ năm }=120 \text{ tháng }$
+		nên sau 10 năm tổng cộng số tiền người đó nhận được là
+		\[5\cdot 1{,}006\cdot\dfrac{1{,}006^{120}-1}{0{,}006}=880{,}26 \text{ triệu đồng}.\]
+	}
+\end{baitap}
+\cham{7}
+
+\begin{baitap}%[THPTQG 2020 đợt 2 - Mã đề 101]%[Trần Nhân Kiệt]%[2D2K4-5]
+	Năm $2020$, một hãng xe ô tô niêm yết giá bán loại xe $X$ là $900.000.000$ đồng và dự định trong $10$ năm tiếp theo, mỗi năm giảm $2\%$ giá bán so với giá bán của năm liền trước. Theo dự định đó, năm $2025$ hãng xe ô tô niêm yết giá bán loại xe $X$ là bao nhiêu (kết quả làm tròn đến hàng phần nghìn)? \dapso{$813.529.000$ đồng}
+	\loigiai{
+		Gọi giá xe $X$ năm $2020$ là $A=900.000.000$ đồng và $r=2\%$. Khi đó
+		\begin{itemize}
+			\item Giá xe $X$ năm $2021$ là $A_1=A-A\cdot r=A(1-r)$.
+			\item Giá xe $X$ năm $2022$ là $A_2=A_1-A_1\cdot r=A(1-r)^2$.
+			\item Giá xe $X$ năm $2023$ là $A_3=A_2-A_2\cdot r=A(1-r)^3$.
+			\item Giá xe $X$ năm $2024$ là $A_4=A_3-A_3\cdot r=A(1-r)^4$.
+			\item Giá xe $X$ năm $2025$ là $A_5=A_4-A_4\cdot r=A(1-r)^5$.
+		\end{itemize}
+		Vậy giá xe $X$ năm $2025$ là $A_5=900.000.000\cdot \left(1-2\%\right)^5\approx813.529.000$ đồng.
+	}
+\end{baitap}
+\cham{7}
+\begin{baitap}%[1D3T4]
+	Tế bào E. Coli trong điều kiện nuôi cấy thích hợp cứ 20 phút lại nhân đôi một lần. Nếu lúc đầu có ${10}^{12}$ tế bào thì sau 3 giờ sẽ phân chia thành bao nhiêu tế bào?	\dapso{$ {512. 10}^{12} $.}
+	\loigiai{
+		Lúc đầu có ${10}^{22}$ tế bào và mỗi lần phân chia thì một tế bào tách thành hai tế bào nên ta có cấp số nhân với $u_1={10}^{22}$ và công bội $q=2$. 
+		Do cứ $20$ phút phân đôi một lần nên sau $3$ giờ sẽ có $9$ lần phân chia tế bào. Ta có $u_{10}$ là số tế bào nhận được sau $3$ giờ. Vậy số tế bào nhận được sau $3$ giờ là $u_{10}=u_1q^9={512. 10}^{12}$. 
+	}
+\end{baitap}\cham{7}
+\begin{baitap}%[Nguyễn Bình Nguyên]%[1D3T4]
+	Người ta thiết kế một cái tháp gồm $11$ tầng theo cách: Diện tích bề mặt trên của mỗi tầng bằng nửa diện tích mặt trên của tầng ngay bên dưới và diện tích bề mặt trên của tầng 1 bằng nửa diện tích đế tháp. Biết diện tích đế tháp là $12\,288\, \mathrm{m}^2$, tính diện tích mặt trên cùng.	\dapso{$ 6\,\mathrm{m}^2 $.}
+	\loigiai{
+		Gọi $u_0$ là diện tích đế tháp và $u_n$ là diện tích bề mặt trên của tầng thứ $n$, với $1\le n\le 11$. Theo giả thiết, ta có $u_{n+1}=\dfrac{1}{2}u_n, 0\le n\le 10$. 
+		Dãy số $(u_n)$ lập thành cấp số nhân với số hạng đầu $u_0=12288$ và công bội $q=\dfrac{1}{2}$.\\ 
+		Diện tích mặt trên cùng của tháp là $$u_{11}=u_0. q^{11}=12288. {\left(\dfrac{1}{2}\right)}^{11}=6m^2$$
+	}
+\end{baitap}\cham{14}
+
+
+\begin{baitap}
+	Ông An vay ngân hàng 1 tỉ đồng với lãi suất $12 \%$/năm. Ông đã trả nợ theo cách: Bắt đầu từ tháng thứ nhất sau khi vay, cuối mỗi tháng ông trả ngân hàng cùng số tiền là $a$ (đồng) và đã trả hết nợ sau đúng 2 năm kể từ ngày vay. Hỏi số tiền mỗi tháng mà ông An phải trả là bao nhiêu đồng (làm tròn kết quả đến hàng nghìn)?
+	\loigiai{
+		Gọi un là số tiền sau mỗi tháng ông An còn nợ ngân hàng.
+		Lãi suất mỗi tháng là $1 \%$.
+		Ta có:
+		$u_1=1000000000$ đồng.
+		$$
+		\begin{aligned}
+			& \mathrm{u}_2=\mathrm{u}_1+\mathrm{u}_1 \cdot 1 \%-\mathrm{a}=\mathrm{u}_1(1+1 \%)-\mathrm{a} \text { (đồng) } \\
+			& \mathrm{u}_3=\mathrm{u}_1(1+1 \%)-a+\left[\mathrm{u}_1(1+1 \%)-a\right] \cdot 1 \%-a=u_1(1+1 \%)^2-a(1+1 \%)-a
+		\end{aligned}
+		$$
+		...
+		$$
+		u_n=u_1(1+1 \%)^{n-1}-a(1+1 \%)^{n-2}-a(1+1 \%)^{n-3}-a(1+1 \%)^{n-4}-\ldots-a
+		$$
+		Ta thấy dãy $\mathrm{a}(1+1 \%)^{\mathrm{n}-2} ; \mathrm{a}(1+1 \%)^{\mathrm{n}-3} ; \mathrm{a}(1+1 \%)^{\mathrm{n}-4} ; \ldots ;$ lập thành một cấp số nhân với số hạng đầu $\mathrm{a}_1$ = $\mathrm{a}$ và công bội $\mathrm{q}=1$ + $1 \%$ $=99 \%$ có tổng $n-2$ số hạng đầu là:
+		$$
+		S_{n-2}=\frac{a\left(1-(99 \%)^{n-2}\right)}{1-99 \%}=100 a\left[1-(99 \%)^{n-2}\right] .
+		$$
+		Suy ra $u_n=u_1(1+1 \%)^{n-1}-100 a\left[1-(99 \%)^{n-2}\right]$.
+		Vì sau 2 năm = 24 tháng thì ông An trả xong số tiền nên $n=24$ và $u_{24}=0$. Do đó ta có:
+		$$
+		\begin{aligned}
+			& u_{24}=u_1(1+1 \%)^{23}-100 a\left[1-(99 \%)^{22}\right]=0 \\
+			& \Leftrightarrow 1000000000 .(99 \%)^{23}-100 a\left[1-(99 \%)^{22}\right]=0 \\
+			& \Leftrightarrow a=40006888,25
+		\end{aligned}
+		$$
+		Vậy mỗi tháng ông An phải trả 40006 888,25 đồng.}
+\end{baitap}
+\cham{18}

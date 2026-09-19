@@ -1,0 +1,254 @@
+\section{NHỊ THỨC NIU - TƠN}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Nhị thức Niu-tơn}
+\begin{itemize}
+\item [\ding{172}] Nhắc lại các hằng đẳng thức
+		\begin{boxkn}
+		\begin{listEX}[2]
+			\item [\ding{172}] $(a+b)^2=a^2+2ab+b^2$.
+			\item [\ding{173}] $(a-b)^2=a^2-2ab+b^2$.
+			\item [\ding{174}] $(a+b)^3=a^3+3a^2b+3ab^2+b^3$.
+			\item [\ding{175}] $(a-b)^3=a^3-3a^2b+3ab^2-b^3$.
+		\end{listEX}
+	\end{boxkn}
+\item [\ding{173}] Công thức nhị thức Niu - tơn
+	\begin{boxkn}
+		\begin{align*}
+		\left(a+b\right)^n &=\mathrm{C}_n^0a^n+\mathrm{C}_n^1{a}^{n-1}b+\cdots+\mathrm{C}_n^{n-1}a{b}^{n-1}+\mathrm{C}_n^nb^n \\ 
+		&=\displaystyle \sum\limits_{k=0}^n{\mathrm{C}_n^k{a}^{n-k}b^k.}
+		\end{align*}
+	\end{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Với $a=b=1$, ta có \quad $\mathrm{C}_n^0+\mathrm{C}_n^1+\cdots+\mathrm{C}_n^{n-1}+\mathrm{C}_n^n=2^n$.
+		\item [$\bullet$] Với $a=1;  b=-1$, ta có \quad $\mathrm{C}_n^0-\mathrm{C}_n^1+\cdots+{\left(-1\right)}^k\mathrm{C}_n^k+\cdots+{\left(-1\right)}^n\mathrm{C}_n^n=0$.
+	\end{itemize}
+	\end{itemize}
+\subsubsection{Chú ý}
+Trong biểu thức ở vế phải của khai triển $\left(a+b\right)^n$ thì
+	\begin{itemize}
+		\item Số các hạng tử là $n+1$;
+		\item Các hạng tử có số mũ của $a$ giảm dần từ $n$ đến $0$; số mũ của $b$ tăng dần từ $0$ đến $n$, nhưng tổng các số mũ của $a$ và $b$ trong mỗi hạng tử luôn bằng $n$ (quy ước $a^0=b^0=1$);
+		\item Các hệ số của mỗi cặp hạng tử cách đều hai hạng tử đầu và cuối đều bằng nhau.
+	\end{itemize}
+
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Khai triển nhị thức Newton.} %Dạng 1
+Áp dụng công thức nhị thức Newton để khai triển các biểu thức.
+\end{dang}
+
+\begin{vd} Khai triển các nhị thức sau
+	\begin{tasks}(3)
+		\task $(x+2)^4$
+		\task $(x-2)^6$
+		\task $\left(2x-1\right)^5$
+		\task $\left(x+2y\right)^5$
+		\task $\left(x^2-\dfrac{2}{x}\right)^5$
+		\task $\left(2+\dfrac{x}{2}\right)^6$
+		\task $\left(x+\dfrac{2}{x}\right)^7$
+		\task ${x^2}{\left(1-2x\right)^5}$ 
+		\task $\left(\dfrac{1}{2x}-2x\right)^6$
+	\end{tasks}
+\end{vd} \dongcham{40}
+
+\begin{dang}{Tìm hệ số (số hạng) của $x^k$ trong khai triển $P(x)$}
+	\begin{itemize}
+		\item [\ding{172}] \indamm{Cách 1:} Khai triển $P(x)$, từ đó trả lời hệ số (số hạng) chứa $x^k$.
+		\item [\ding{173}] \indamm{Cách 2:} Sử dụng khai triển tổng quát $(a+b)^n=\displaystyle \sum\limits_{k=0}^n{\mathrm{C}_n^k{a}^{n-k}b^k}$.
+		\begin{itemize}
+			\item [$\bullet$] Số hạng tổng quát trong khai triển trên là $\mathrm{C}_n^k{a}^{n-k}b^k$, với $k=0,1,2,\cdots,n$.
+			\item [$\bullet$] Thu gọn phần hệ số và phần biến trong công thức vừa lập.
+			\item [$\bullet$] Đồng nhất lũy thừa của biến với yêu cầu đề. Từ đây, suy ra kết quả.
+		\end{itemize}
+	\end{itemize}
+\end{dang}
+	\noindent
+	\begin{tcolorbox}[colframe=cyan,colback=red!3!white,boxrule=0.5mm]
+		{\color{blue}\textbf{Bài mẫu: }}Tìm hệ số của số hạng chứa $x^{12}$ trong khai triển nhị thức Niutơn của $\left(x-\dfrac{1}{x^2}\right)^{18}$
+	\end{tcolorbox}
+	{\centerline{\color{violet}\textbf{Lời giải:}}}
+	\begin{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Số hạng tổng quát của khai triển trên là $$\mathrm{C}_{18}^k{x}^{18-k}\left(-\dfrac{1}{x^2} \right) ^k=\mathrm{C}_{18}^k\left(-1\right)^k\cdot x^{18-3k}, \text { với } k \in \mathbb{N} \text{ và } 0 \le k \le 18.$$
+		\item [$\bullet$] Số hạng chứa $x^{12}$ tương ứng với $18-3k=12\Leftrightarrow k=2$.
+		\item [$\bullet$] Vậy hệ số của số hạng chứa $x^{12}$ trong khai triển là $\left(-1\right)^2C_{18}^2=153$.
+	\end{itemize}
+	\end{boxkn}
+\begin{vd}%[1D2Y3]
+	Tìm hệ số của $x^{15}$ trong khai triển $\left(3x^2-2x\right)^{10}$.
+	\loigiai{Theo công thức ở trên, ta có số hạng tổng quát trong khai triển là $$\mathrm{C}_{10}^k(3x^2)^{10-k}(-2x)^k=\mathrm{C}_{10}^k3^{10-k}(-2)^kx^{20-k}$$
+		Số hạng chứa $x^{15}$ tương ứng với $20-k=15\Leftrightarrow k=5$.\\
+		Vậy hệ số chứa $x^{15}$ trong khai triển là $\mathrm{C}_{10}^53^{5}(-2)^5=-6^5\cdot \mathrm{C}_{10}^5$.
+	}
+\end{vd} \dongcham{9}
+\begin{vd}%[1D2K3]
+	Tìm số hạng chứa $x^{33}$ trong các khai triển $\left(x^3+2xy\right)^{21}$.
+	\loigiai{
+		Số hạng tổng quát trong khai triển $\left(x^3+xy\right)^{21}$ là $$\mathrm{C}_{21}^k\left(x^3\right)^{21-k}\left(2xy\right)^k=2^k\mathrm{C}_{21}^kx^{63-2k}y^k$$
+		Số hạng chứa $x^{33}$ tương ứng với số hạng có $k$ thỏa mãn $63-2k=33\Leftrightarrow k=15$.\\
+		Vậy số hạng chứa $x^{23}$ trong khai triển đã cho là $2^{15}\mathrm{C}_{21}^{15}x^{33}y^{15}.$
+	}
+\end{vd} \dongcham{9}
+\begin{vd}%01
+	Tìm số hạng không chứa $x$ trong khai triển $\left(2x - \dfrac{1}{x^2}\right)^6$, với $x\ne 0$. 
+	\loigiai{
+		Số hạng tổng quát trong khai triển là 
+		\begin{equation*}
+		\mathrm{C}^k_6 (2x)^{6-k} \left(- \dfrac{1}{x^2}\right)^k = \mathrm{C}^k_6 2^{6-k} (-1)^k x^{6-3k}. 
+		\end{equation*}
+		
+		Số hạng không chứa $x$ tương ứng với $6-3k =0 \Leftrightarrow k=2$. 
+		
+		Vậy số hạng cần tìm là $\mathrm{C}^2_6 2^{6-2} (-1)^2 = 240$. 
+	}
+\end{vd} \dongcham{11}
+
+\begin{vd}
+	Tìm hệ số $x^5$ trong khai triển $P(x)=x(1-2x)^{5} + x^2 (1+3x)^{10}$ thành đa thức.
+	\loigiai{
+		
+		Ta có
+			\begin{eqnarray*}
+			x(1-2x)^{5} + x^2 (1+3x)^{10}
+			&=&x \sum\limits_{k=0}^{5} \mathrm{C}_{5}^{k} (-2x)^{k}+x^{2} \sum\limits_{p=0}^{10} \mathrm{C}_{10}^{p} (3x)^{p}\\
+			&=&
+			\sum\limits_{k=0}^{5} \mathrm{C}_{5}^{k} \cdot x \cdot  (-2)^{k} \cdot x^{k} + \sum\limits_{p=0}^{10} \mathrm{C}_{10}^{p} \cdot x^2 \cdot  3^{p} \cdot x^{p}\\
+			&=& \sum\limits_{k=0}^{5} \mathrm{C}_{5}^{k} \cdot  (-2)^{k} \cdot x^{k+1} + \sum\limits_{p=0}^{10} \mathrm{C}_{10}^{p} \cdot  3^{p} \cdot x^{p+2}.
+		\end{eqnarray*}
+	Suy ra hệ số của $x^5$ trong khai triển $P(x)$ ứng với $k=4; p=3$ là
+		$\mathrm{C}_{5}^{4} \cdot (-2)^4 + \mathrm{C}_{10}^{3} \cdot 3^3 = 3320$.
+	}
+\end{vd} \dongcham{13}
+
+\begin{vd}%[1D2B3]
+	Tìm hệ số của $x^{12}$ trong khai triển $\left(x^2+1\right)^n$, biết tổng tất cả các hệ số trong khai triển đó bằng $1024$.
+	\loigiai{Ta có
+		$$\left(x^2+1\right)^n=\sum\limits_{k=0}^n\mathrm{C}_n^k(x^2)^k$$
+		Tổng tất cả các hệ số trong khai triển là $\sum\limits_{k=0}^n\mathrm{C}_n^k=(1+1)^2=2^n$. Do đó $2^n=1024\Rightarrow n=10$.\\
+		Số hạng tổng quát trong khai triển $\left(x^2+1\right)^{10}$ là $\mathrm{C}_{10}^k(x^2)^k=\mathrm{C}_{10}^kx^{2k}$.\\
+		Số hạng chứa $x^{12}$ tương ứng với $2k=12\Leftrightarrow k=6$.\\
+		Vậy hệ số của $x^{12}$ trong khai triển là $\mathrm{C}_{10}^6=210$.
+	}
+\end{vd} \dongcham{12}
+
+\begin{vd} 
+	Khai triển $(1-2x)^n=a_0+a_1 x+a_2 x^2 +\cdots +a_n x^n$. Tìm $a_5$ biết $a_0+a_1+a_2 = 71$.
+	\loigiai{
+		Ta có:	\begin{eqnarray*}
+			\left(1-2x\right)^{n}&=&\sum\limits_{k=0}^{n} \mathrm{C}_{n}^{k} \cdot 1^{n-k} \cdot \left(-2x\right)^{k}\\
+			&=&\sum\limits_{k=0}^{n} \mathrm{C}_{n}^{k}\cdot (-2)^{k} \cdot x^{k}
+		\end{eqnarray*}
+		Dạng tổng quát của hệ số là $a_k=\mathrm{C}_{n}^{k} (-2)^k$.
+		\begin{itemize}
+			\item Với $k=0 \Rightarrow a_0 = \mathrm{C}_{n}^{0} (-2)^0=1$.
+			\item Với $k=1 \Rightarrow a_1 =-2 \mathrm{C}_{n}^{1}=-2n$.
+			\item Với $k=2 \Rightarrow a_2 = 4 \mathrm{C}_{n}^{2} $.
+		\end{itemize}
+		Suy ra
+			\begin{eqnarray*}
+			a_0 + a_1 + a_2= 71
+			&\Leftrightarrow& 1-2n+4 \mathrm{C}_{n}^{2}=71\\
+			&\Leftrightarrow& 1-2n +4 \dfrac{n(n-1)}{2}=71 \\
+			&\Leftrightarrow& 1-2n+2n^2-2n=71 \\
+			&\Leftrightarrow& n^2 -2n - 35=0 \Leftrightarrow n=7.
+		\end{eqnarray*}
+		Với $n=7$ ta có hệ số của $x^5$  trong khai triển $(1-2x)^n$ là
+		$$a_5=\mathrm{C}_{7}^{5} \cdot (-2)^5 = -672.$$
+	}
+\end{vd} \dongcham{13}
+
+\begin{vd}
+	Tìm hệ số của số hạng chứa $x^{4}$ trong khai triển $ (1+x+3x^2)^{10}$.
+	\loigiai{
+		Ta có: $\begin{aligned}[t]
+			(1+x+3x^{2})^{10} &= [1+(x+3x^{2})]^{10} \\
+			&= \sum_{k=0}^{10}  1^{10-k} \cdot C^{k}_{10} \cdot (x+3x^{2})^{k}\\
+			&= \sum_{k=10}^{10}  C^{k}_{10} \sum_{p=0}^{k} \cdot C^{p}_k \cdot x^{k-p}\cdot (3x^{2})^{p}\\
+			&= \sum_{k=10}^{10}  \sum_{p=0}^{k}  C^{k}_{10} \cdot C^{p}_k\cdot x^{k+p}\cdot 3^{p} 
+		\end{aligned}
+		$\\
+		
+		Số hạng chứa $x^{4}$ tương ứng với $k + p =4 $ mà $0 \le p \le k \le 10$ nên ta có các trường hợp sau
+		\begin{itemize}
+			\item [$\bullet$] $p=0$ thì $k=4$;
+			\item [$\bullet$] $p=1$ thì $k=3$;
+			\item [$\bullet$] $p=2$ thì $k=2$.
+		\end{itemize}
+	Vậy hệ số cần tìm là $ C^{4}_{10} \cdot C^{0}_{4} \cdot 3^{0}+ C^{3}_{10} \cdot C^{1}_{3} \cdot 3^{1} +C^{2}_{10} \cdot C^{2}_{2} \cdot 3^{2}= 1965$.
+	}
+\end{vd} \dongcham{13}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+\begin{baitap}
+	Khai triển các biểu thức sau
+	\begin{tasks}(2)
+		\task $\left(x+y\right)^6$.
+		\task $\left(2x-3\right)^4$.
+	\end{tasks} 
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Theo công thức nhị thức Newton ta có
+			\begin{align*}
+				\left(x+y\right)^6&=\mathrm{C}_6^0x^6+\mathrm{C}_6^1x^5y+\mathrm{C}_6^2x^4y^2+\mathrm{C}_6^3x^3y^3+\mathrm{C}_6^4x^2y^4+\mathrm{C}_6^5xy^5+\mathrm{C}_6^6y^6\\
+				&=x^6+6x^5y+15x^4y^2+20x^3y^3+15x^2y^4+6xy^5+y^6.
+			\end{align*}
+			\item Theo công thức nhị thức Newton ta có
+			\begin{align*}
+				\left(2x-3\right)^4&=\mathrm{C}_4^0\left(2x\right)^4+\mathrm{C}_4^1\left(2x\right)^3\left(-3\right)+\mathrm{C}_4^2\left(2x\right)^2\left(-3\right)^2+\mathrm{C}_4^32x\left(-3\right)^3+\mathrm{C}_4^4\left(-3\right)^4\\
+				&=16x^4-96x^3+216x^2-216x+81.
+			\end{align*}
+		\end{enumerate}
+		
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Tìm hệ số của số hạng chứa $x^{6}$ trong khai triển nhị thức $(1-3x)^{11}$.
+	\loigiai{
+		Số hạng TQ:
+		$T_{k+1} = C^{k}_{11}\cdot 1^{11-k} \cdot (-3x)^{k}= C^{k}_{11} \cdot 1^{11-k} \cdot (-3)^{k}\cdot x^{k}.$\\
+		Số hạng chứa $x^{6} \Rightarrow k = 6$.\\
+		Vậy hệ số cần tìm là: $C^{6}_{11} \cdot 1^{11-6}\cdot (-3)^{6}= 336798$.
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Tìm hệ số của số hạng chứa $x^{8}y^{9}$ trong khai triển nhị thức $ (2x-3y)^{17}$.
+	\loigiai{
+		Số hạng TQ:
+		$\begin{aligned}[t]
+			T_{k+1} &= C^{k}_{12}\cdot (2x)^{17-k}\cdot (-3y)^{k}\\
+			&= C^{k}_{12}\cdot 2^{17-k}\cdot (-3)^{k}\cdot x^{17-k}\cdot y^{k}\\
+		\end{aligned}$\\
+		Số hạng chứa $x^{8}y^{9} \Rightarrow \heva{17-k =8 \\ k =9}\Leftrightarrow k =9$.\\
+		Vậy hệ số cần tìm là: $C^{9}_{17}\cdot 2^{8}\cdot(-3)^{9}= -122494394880$.
+	}
+\end{baitap}\cham{8}
+
+\begin{baitap}
+	Tìm hệ số của số hạng chứa $x^{16}$ trong khai triển nhị thức $(x^{2}-2x)^{10}$.
+	\loigiai{
+		Số hạng TQ: 
+		$\begin{aligned}[t]
+			T_{k+1} &= C^{k}_{10} \cdot (x^{2})^{10-k} \cdot (-2x)^{k }\\
+			&= C^{k}_{10} \cdot x^{2(10-k)} \cdot (-2)^{k} \cdot x^{k}\\
+			&=C^{k}_{10} \cdot(-2)^{k}\cdot x^{20-2k} \cdot x^{k}\\
+			&=C^{k}_{10} \cdot(-2)^{k}\cdot x^{20-k}.\\
+		\end{aligned}$\\
+		Vì có số hạng $x^{16} \Rightarrow 20 - k =16 \Leftrightarrow k =4$.\\
+		Vậy hệ số cần tìm là: $C^{4}_{10}\cdot (-2)^{4} = 3360$. 
+	}
+\end{baitap}\cham{9}
+
+\begin{baitap}%02
+	Tìm số hạng không chứa $x$ trong khai triển $\left(x - \dfrac{2}{x^2}\right)^{21}$, với $x \ne 0$. 
+	\loigiai{
+		Số hạng tổng quát trong khai triển là 
+		\begin{equation*}
+			\mathrm{C}^k_{21} (x)^{21-k} \left(- \dfrac{2}{x^2}\right)^k = \mathrm{C}^k_{21} (-2)^{k} x^{21-3k}. 
+		\end{equation*}
+		
+		Ta phải tìm $k$ sao cho $21-3k =0 \Leftrightarrow k=7$. 
+		
+		Vậy số hạng cần tìm là $\mathrm{C}^7_{21} (-2)^{7}$. 
+	}
+\end{baitap}\cham{9}

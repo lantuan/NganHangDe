@@ -1,0 +1,634 @@
+\section{PHƯƠNG TRÌNH LƯỢNG GIÁC CƠ BẢN}
+\subsection{KIẾN THỨC CẦN NHỚ}
+\subsubsection{Phương trình $\mathbf{sin\, x = a}$.}
+\begin{enumerate}[\faCheckSquareO]
+	\item Trường hợp $a \in \{-1;0;1\}$.
+	\begin{gachsoc}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.5,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.5)--(0,1.8) node[right]{\footnotesize$sin$};
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (0,1) circle(2.5pt);
+		\node[above left] at (0,1) {$B$};
+		\node[below] at (0,-1.5) {\fbox{$\sin x=1 \Leftrightarrow x=\tfrac{\pi}{2}+k2\pi$}};
+		\end{tikzpicture}
+		\hspace{0.5cm}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.5,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.5)--(0,1.8) node[right]{\footnotesize$sin$};
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (0,-1) circle(2.5pt);
+		\node[below left] at (0,-1) {$B'$};
+		\node[below] at (0,-1.5) {\fbox{$\sin x=-1 \Leftrightarrow x=-\tfrac{\pi}{2}+k2\pi$}};
+		\end{tikzpicture}
+		\hspace{0.5cm}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.5,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.5)--(0,1.8) node[right]{\footnotesize$sin$};
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (1,0) circle(2.5pt) (-1,0) circle(2.5pt);
+		\node[above right] at (1,0) {$A$};
+		\node[above left] at (-1,0) {$A'$};
+		\node[below] at (0,-1.5) {\fbox{$\sin x=0 \Leftrightarrow x=k\pi$}};
+		\end{tikzpicture}
+	\end{gachsoc}
+	\item Trường hợp $a \in \left\{\pm \dfrac{1}{2};\pm \dfrac{\sqrt{2}}{2};\pm \dfrac{\sqrt{3}}{2}\right\}$. Ta bấm máy \fbox{\textbf{SHIFT}} \fbox{\textbf{sin}} \fbox{\textbf{a}} để đổi số $a$ về góc $\alpha$ hoặc $\beta^\circ$ tương ứng.
+	\begin{gachsoc}
+		\begin{minipage}[b]{9cm}
+			\begin{listEX}[1]
+				\item [\ding{172}] Công thức theo đơn vị rad:
+				$$\sin x = a \Leftrightarrow \hoac{&x=\alpha+k2\pi\\&x=\pi-\alpha+k2\pi}, \,k \in \mathbb{Z}$$
+				\item [\ding{173}] Công thức theo đơn vị độ: $$\sin x = a \Leftrightarrow \hoac{&x=\beta^\circ+k360^\circ\\&x=180^\circ-\beta^\circ+k360^\circ}, \,k \in \mathbb{Z}$$
+			\end{listEX}
+		\end{minipage}
+		\begin{minipage}[b]{8cm}
+			\begin{tikzpicture}[smooth,samples=300,scale=1.5,>=stealth]
+			\draw[->] (-1.5,0)--(1.5,0);
+			\draw[->] (0,-1.3)--(0,1.5) node[right]{\footnotesize$sin$};
+			\draw (0,0) node[below left]{\footnotesize$O$};
+			\tkzDefPoints{0/0/I}
+			\draw (I) circle(1cm);
+			\coordinate (M) at ($(I)+(50:1cm)$);
+			\coordinate (N) at ($(I)+(130:1cm)$);
+			\tkzDrawPoints[size=3,fill=black](M,N)
+			\tkzDrawSegments(I,M I,N)
+			\tkzDrawSegments[dashed](M,N)
+			\tkzLabelPoints[right](M)
+			\tkzLabelPoints[left](N)
+			\node[below right] at (0,0.7) {$a$};
+			\end{tikzpicture}
+		\end{minipage}
+	\end{gachsoc}
+	
+	\item Trường hợp $a\in [-1;1]$ nhưng khác các số ở trên.
+	\begin{gachsoc}
+			$$\sin x = a \Leftrightarrow \hoac{&x=\arcsin a+k2\pi\\&x=\pi-\arcsin a+k2\pi}, \,k \in \mathbb{Z}$$
+	\end{gachsoc}
+		\item Công thức mở rộng cho hai hàm $f(x)$ và $g(x)$
+	\begin{gachsoc}
+			$$\sin[f(x)]=\sin[g(x)]\Leftrightarrow \hoac{&f(x)=g(x)+k2\pi\\&f(x)=\pi-g(x)+k2\pi}, \,k \in \mathbb{Z}$$	
+	\end{gachsoc}
+\end{enumerate}
+
+\subsubsection{Phương trình $\mathbf{cos\, x = a}$.}
+\begin{enumerate}[\faCheckSquareO]
+	\item Trường hợp $a \in \{-1;0;1\}$.
+	\begin{gachsoc}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.8,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.5)--(0,1.8) node[right]{\footnotesize$sin$};
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (1,0) circle(2.5pt);
+		\node[above right] at (1,0) {$A$};
+		\node[below] at (0,-1.5) {\fbox{$\cos x=1 \Leftrightarrow x=k2\pi$}};
+		\end{tikzpicture}
+		\hspace{.5cm}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.5,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.8)--(0,1.5) node[right]{\footnotesize$sin$};
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (-1,0) circle(2.5pt);
+		\node[below left] at (-1,0) {$A'$};
+		\node[below] at (0,-1.5) {\fbox{$\cos x=-1 \Leftrightarrow x=\pi+k2\pi$}};
+		\end{tikzpicture}
+		\hspace{.5cm}
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth]
+		\draw[->] (-1.5,0)--(1.8,0) node[below]{\footnotesize$cos$};
+		\draw[->] (0,-1.5)--(0,1.5);
+		\draw (0,0) node[below left]{\footnotesize$O$};
+		\tkzDefPoints{0/0/I}
+		\draw (I) circle(1cm);
+		\draw[fill=black] (0,1) circle(2.5pt) (0,-1) circle(2.5pt);
+		\node[above right] at (0,1) {$B$};
+		\node[below left] at (0,-1) {$B'$};
+		\node[below] at (0,-1.5) {\fbox{$\cos x=0 \Leftrightarrow x=\frac{\pi}{2}+k\pi$}};
+		\end{tikzpicture}
+	\end{gachsoc}
+	\item Trường hợp $a \in \left\{\pm \dfrac{1}{2};\pm \dfrac{\sqrt{2}}{2};\pm \dfrac{\sqrt{3}}{2}\right\}$. Ta bấm máy \fbox{\textbf{SHIFT}} \fbox{\textbf{cos}} \fbox{\textbf{a}} để đổi số $a$ về góc $\alpha$ hoặc $\beta^\circ$ tương ứng.
+	\begin{gachsoc}
+		\begin{minipage}[b]{9cm}
+			\begin{listEX}[1]
+				\item [\ding{172}] Công thức theo đơn vị rad:
+				$$\cos x = a \Leftrightarrow \hoac{&x=\alpha+k2\pi\\&x=-\alpha+k2\pi}, \,k \in \mathbb{Z}$$
+				\item [\ding{173}] Công thức theo đơn vị độ: $$\cos x = a \Leftrightarrow \hoac{&x=\beta^\circ+k360^\circ\\&x=-\beta^\circ+k360^\circ}, \,k \in \mathbb{Z}$$
+			\end{listEX}
+		\end{minipage}
+		\begin{minipage}[b]{8cm}
+			\begin{tikzpicture}[smooth,samples=300,scale=1.5,>=stealth]
+			\draw[->] (-1.5,0)--(1.7,0)node[above]{\footnotesize$cos$};
+			\draw[->] (0,-1.3)--(0,1.5);
+			\draw (0,0) node[below left]{\footnotesize$O$};
+			\tkzDefPoints{0/0/I}
+			\draw (I) circle(1cm);
+			\coordinate (M) at ($(I)+(50:1cm)$);
+			\coordinate (N) at ($(I)+(-50:1cm)$);
+			\tkzDrawPoints[size=3,fill=black](M,N)
+			\tkzDrawSegments(I,M I,N)
+			\tkzDrawSegments[dashed](M,N)
+			\tkzLabelPoints[above](M)
+			\tkzLabelPoints[below](N)
+			\node[below right] at (0.7,0) {$a$};
+			\end{tikzpicture}
+		\end{minipage}
+	\end{gachsoc}
+	\item Trường hợp $a\in [-1;1]$ nhưng khác các số ở trên.
+	\begin{gachsoc}
+		$$\cos x = a \Leftrightarrow \hoac{&x=\arccos a+k2\pi\\&x=-\arccos a+k2\pi}, \,k \in \mathbb{Z}$$
+	\end{gachsoc}
+	\item Công thức mở rộng cho hai hàm $f(x)$ và $g(x)$
+	\begin{gachsoc}
+		$$\cos[f(x)]=\cos[g(x)]\Leftrightarrow \hoac{&f(x)=g(x)+k2\pi\\&f(x)=-g(x)+k2\pi}, \,k \in \mathbb{Z}$$
+	\end{gachsoc}
+\end{enumerate}
+\subsubsection{Phương trình $\mathbf{tan\, x = a}$.}
+\begin{enumerate}[\faCheckSquareO]
+	\item Trường hợp $a \in \left\{0;\pm \dfrac{\sqrt{3}}{3};\pm 1; \pm \sqrt{3}\right\}$. Ta bấm máy \fbox{\textbf{SHIFT}} \fbox{\textbf{tan}} \fbox{\textbf{a}} để đổi số $a$ về góc $\alpha$ hoặc $\beta^\circ$ tương ứng.
+	\begin{gachsoc}
+		\begin{minipage}[b]{9cm}
+			\begin{listEX}[1]
+				\item [\ding{172}] Công thức theo đơn vị rad:
+				$$\tan x = a \Leftrightarrow x=\alpha+k\pi, \,k \in \mathbb{Z}$$
+				\item [\ding{173}] Công thức theo đơn vị độ: 
+				$$\tan x = a \Leftrightarrow x=\beta^\circ +k180^\circ, \,k \in \mathbb{Z}$$
+			\end{listEX}
+		\end{minipage}
+		\begin{minipage}[b]{8cm}
+			\begin{tikzpicture}[smooth,samples=300,scale=1.5,>=stealth]
+			\draw[->] (-1.5,0)--(1.5,0);
+			\draw[->] (0,-1.3)--(0,1.5);
+			\draw (0,0) node[below right]{\footnotesize$O$};
+			\tkzDefPoints{0/0/I, 1/0.9/A}
+			\draw (I) circle(1cm);
+			\draw[->] (1,-1.3)--(1,1.5)node[right]{\footnotesize$tang$};
+			\tkzInterLC[R](I,A)(I,1cm)\tkzGetPoints{M}{N}
+			\tkzDrawPoints[size=3,fill=black](I,M,N,A)
+			\tkzDrawSegments(A,M)
+			\tkzLabelPoints[below,font=\footnotesize](M)
+			\tkzLabelPoints[above,font=\footnotesize](N)
+			\node[right] at (1,0.9) {$a$};
+			\end{tikzpicture}
+		\end{minipage}
+	\end{gachsoc}
+	\item Trường hợp $a$ khác các số ở trên thì
+	\begin{gachsoc}
+		$$\tan x = a \Leftrightarrow x=\arctan a+k\pi, \,k \in \mathbb{Z}.$$
+	\end{gachsoc}
+\end{enumerate}
+
+\subsubsection{Phương trình $\mathbf{cot\, x = a}$.}
+
+\begin{enumerate}[\faCheckSquareO]
+	\item Trường hợp $a \in \left\{\pm \dfrac{\sqrt{3}}{3};\pm 1; \pm \sqrt{3}\right\}$. Ta bấm máy \fbox{\textbf{SHIFT}} \fbox{\textbf{tan}} \fbox{$\tfrac{1}{a}$} để đổi số $a$ về góc $\alpha$  hoặc $\beta^\circ$ tương ứng. Riêng $a=0$ thì $\alpha=\dfrac{\pi}{2}$
+	\begin{gachsoc}
+		\begin{minipage}[b]{9cm}
+			\begin{listEX}[1]
+				\item [\ding{172}] Công thức theo đơn vị rad:
+				$$\cot x = a \Leftrightarrow x=\alpha+k\pi, \,k \in \mathbb{Z}$$
+				\item [\ding{173}] Công thức theo đơn vị độ: 
+				$$\cot x = a \Leftrightarrow x=\beta^\circ +k180^\circ, \,k \in \mathbb{Z}$$
+			\end{listEX}
+		\end{minipage}
+		\begin{minipage}[b]{8cm}
+			\begin{tikzpicture}[smooth,samples=300,scale=1.5,>=stealth]
+			\draw[->] (-1.5,0)--(2,0);
+			\draw[->] (0,-1.3)--(0,1.5);
+			\draw (0,0) node[below right]{\footnotesize$O$};
+			\tkzDefPoints{0/0/I, 0.9/1/A}
+			\draw (I) circle(1cm);
+			\draw[->] (-1.4,1)--(2,1)node[above]{\footnotesize$cotang$};
+			\tkzInterLC[R](I,A)(I,1cm)\tkzGetPoints{M}{N}
+			\tkzDrawPoints[size=3,fill=black](I,M,N,A)
+			\tkzDrawSegments(A,M)
+			\tkzLabelPoints[below,font=\footnotesize](M)
+			\tkzLabelPoints[right,font=\footnotesize](N)
+			\node[above] at (0.9,1) {$a$};
+			\end{tikzpicture}
+		\end{minipage}
+	\end{gachsoc}
+	\item Trường hợp $a$ khác các số ở trên thì 
+	\begin{gachsoc}
+		$$\cot x = a \Leftrightarrow x=\text{arccot } a+k\pi, \,k \in \mathbb{Z}.$$
+	\end{gachsoc}
+\end{enumerate}
+
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Giải các phương trình lượng giác cơ bản}
+	\begin{itemize}
+		\item [$\bullet$] Nhận dạng (biến đổi) về đúng loại phương trình cơ bản, xem số $a$ quy đổi về góc "đẹp" hay xấu;
+		\item [$\bullet$] Chọn và ráp công thức nghiệm.
+	\end{itemize}
+\end{dang}
+
+\begin{vd}
+	Giải các phương trình sau:
+	\begin{tasks}(3)
+		\task $\sin 3x=-\dfrac{\sqrt{3}}{2}$ 
+		\task $2\sin \left( \dfrac{\pi }{5}-x \right)=1$ 
+		\task $2\sin \left( x-45^\circ \right)-1=0$
+		\task $\cos \left( x-\dfrac{2\pi }{3} \right)=1$ 
+		\task $\sqrt{2}\cos 2x-1=0$ 
+		\task $3\cos x-1=0$.
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item $\sin 3x = -\dfrac{\sqrt{3}}{2} \Leftrightarrow \sin 3x = \sin\left(-\dfrac{\pi}{3}\right) \Leftrightarrow \hoac{3x &= -\dfrac{\pi}{3} + k2\pi \\ 3x &= \dfrac{4\pi}{3} + k2\pi} \Leftrightarrow \hoac{x &= -\dfrac{\pi}{9} + k\dfrac{2\pi}{3} \\ x &= \dfrac{4\pi}{9} + k\dfrac{2\pi}{3}} \ (k \in \mathbb{Z})$.
+		
+		\item $2\sin\left(\dfrac{\pi}{5} - x\right) = 1 \Leftrightarrow \sin\left(\dfrac{\pi}{5} - x\right) = \dfrac{1}{2} \Leftrightarrow \sin\left(\dfrac{\pi}{5} - x\right) = \sin\dfrac{\pi}{6} \Leftrightarrow \hoac{\dfrac{\pi}{5} - x &= \dfrac{\pi}{6} + k2\pi \\ \dfrac{\pi}{5} - x &= \dfrac{5\pi}{6} + k2\pi} \Leftrightarrow \hoac{x &= \dfrac{\pi}{30} + k2\pi \\ x &= -\dfrac{19\pi}{30} + k2\pi} \ (k \in \mathbb{Z})$.
+		
+		\item $2\sin(x - 45^\circ) - 1 = 0 \Leftrightarrow \sin(x - 45^\circ) = \dfrac{1}{2} \Leftrightarrow \sin(x - 45^\circ) = \sin 30^\circ \Leftrightarrow \hoac{x - 45^\circ &= 30^\circ + k360^\circ \\ x - 45^\circ &= 150^\circ + k360^\circ} \Leftrightarrow \hoac{x &= 75^\circ + k360^\circ \\ x &= 195^\circ + k360^\circ} \ (k \in \mathbb{Z})$.
+		
+		\item $\cos\left(x - \dfrac{2\pi}{3}\right) = 1 \Leftrightarrow x - \dfrac{2\pi}{3} = k2\pi \Leftrightarrow x = \dfrac{2\pi}{3} + k2\pi \ (k \in \mathbb{Z})$.
+		
+		\item $\sqrt{2}\cos 2x - 1 = 0 \Leftrightarrow \cos 2x = \dfrac{\sqrt{2}}{2} \Leftrightarrow \cos 2x = \cos\dfrac{\pi}{4} \Leftrightarrow 2x = \pm\dfrac{\pi}{4} + k2\pi \Leftrightarrow x = \pm\dfrac{\pi}{8} + k\pi \ (k \in \mathbb{Z})$.
+		
+		\item $3\cos x - 1 = 0 \Leftrightarrow \cos x = \dfrac{1}{3} \Leftrightarrow x = \pm\arccos\dfrac{1}{3} + k2\pi \ (k \in \mathbb{Z})$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{18}
+
+\begin{vd}
+	Giải các phương trình sau:
+	\begin{tasks}(3)
+		\task $\tan 3x=-\dfrac{\sqrt{3}}{3}$ 
+		\task $\sqrt{3}\tan \left( \dfrac{\pi }{6}-x \right)=1$ 
+		\task $\tan \left( x-45^\circ \right)-1=0$
+		\task $\sin x -\sqrt{3} \cos x=0$ 
+		\task $\sqrt{3}\cot x-1=0$ 
+		\task $\sin x+4 \cos x=2+\sin 2 x$.
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item $\tan 3x = -\dfrac{\sqrt{3}}{3} \Leftrightarrow \tan 3x = \tan\left(-\dfrac{\pi}{6}\right) \Leftrightarrow 3x = -\dfrac{\pi}{6} + k\pi \Leftrightarrow x = -\dfrac{\pi}{18} + k\dfrac{\pi}{3} \ (k \in \mathbb{Z})$.
+		
+		\item $\sqrt{3}\tan\left(\dfrac{\pi}{6} - x\right) = 1 \Leftrightarrow \tan\left(\dfrac{\pi}{6} - x\right) = \dfrac{\sqrt{3}}{3} \Leftrightarrow \tan\left(\dfrac{\pi}{6} - x\right) = \tan\dfrac{\pi}{6} \Leftrightarrow \dfrac{\pi}{6} - x = \dfrac{\pi}{6} + k\pi \Leftrightarrow x = -k\pi \Leftrightarrow x = k\pi \ (k \in \mathbb{Z})$.
+		
+		\item $\tan(x - 45^\circ) - 1 = 0 \Leftrightarrow \tan(x - 45^\circ) = 1 \Leftrightarrow \tan(x - 45^\circ) = \tan 45^\circ \Leftrightarrow x - 45^\circ = 45^\circ + k180^\circ \Leftrightarrow x = 90^\circ + k180^\circ \ (k \in \mathbb{Z})$.
+		
+		\item $\sin x - \sqrt{3}\cos x = 0 \Leftrightarrow \dfrac{1}{2}\sin x - \dfrac{\sqrt{3}}{2}\cos x = 0 \Leftrightarrow \sin\left(x - \dfrac{\pi}{3}\right) = 0 \Leftrightarrow x - \dfrac{\pi}{3} = k\pi \Leftrightarrow x = \dfrac{\pi}{3} + k\pi \ (k \in \mathbb{Z})$.
+		
+		\item $\sqrt{3}\cot x - 1 = 0 \Leftrightarrow \cot x = \dfrac{\sqrt{3}}{3} \Leftrightarrow \cot x = \cot\dfrac{\pi}{3} \Leftrightarrow x = \dfrac{\pi}{3} + k\pi \ (k \in \mathbb{Z})$.
+		
+		\item $\sin x + 4\cos x = 2 + \sin 2x \Leftrightarrow \sin x + 4\cos x - 2 - 2\sin x\cos x = 0 \Leftrightarrow (\sin x - 2) - 2\cos x(\sin x - 2) = 0 \Leftrightarrow (\sin x - 2)(1 - 2\cos x) = 0$.\\
+		Vì $-1 \le \sin x \le 1 \Rightarrow \sin x - 2 \ne 0$ với mọi $x$, do đó phương trình tương đương:\\
+		$1 - 2\cos x = 0 \Leftrightarrow \cos x = \dfrac{1}{2} \Leftrightarrow \cos x = \cos\dfrac{\pi}{3} \Leftrightarrow x = \pm\dfrac{\pi}{3} + k2\pi \ (k \in \mathbb{Z})$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{33}
+
+\begin{vd}
+	Tìm nghiệm của các phương trình lượng giác sau trên khoảng cho trước
+	\begin{tasks}(2)
+		\task $ \sqrt{3}\tan x-3=0 $ trên $ (0,3\pi) $.
+		\task $\sqrt{2}\sin (x - 1) =  - 1$ trên $\left( - \frac{{7\pi }}{2} , \frac{\pi }{2} \right) $.
+		\task $2\cos \left( 3x - \dfrac{\pi }{3}\right) -1 =0$ trên $ \left(-\pi, \pi\right) $.
+		\task $\tan (3x + 2) - \sqrt 3  = 0$ trên $ \left( -\tfrac{\pi}{2}, \tfrac{\pi}{2}\right) $.
+	\end{tasks}
+\loigiai{
+	\begin{enumerate}[a)]
+		\item $\sqrt{3}\tan x - 3 = 0 \Leftrightarrow \tan x = \sqrt{3} \Leftrightarrow x = \dfrac{\pi}{3} + k\pi \ (k \in \mathbb{Z})$.\\
+		Vì $x \in (0; 3\pi)$ nên $0 < \dfrac{\pi}{3} + k\pi < 3\pi \Leftrightarrow -\dfrac{1}{3} < k < \dfrac{8}{3}$.\\
+		Do $k \in \mathbb{Z} \Rightarrow k \in \{0; 1; 2\}$.\\
+		Vậy các nghiệm của phương trình trên khoảng $(0; 3\pi)$ là: $x \in \left\{\dfrac{\pi}{3}; \dfrac{4\pi}{3}; \dfrac{7\pi}{3}\right\}$.
+		
+		\item $\sqrt{2}\sin(x - 1) = -1 \Leftrightarrow \sin(x - 1) = -\dfrac{\sqrt{2}}{2} \Leftrightarrow \hoac{x - 1 &= -\dfrac{\pi}{4} + k2\pi \\ x - 1 &= \dfrac{5\pi}{4} + k2\pi} \Leftrightarrow \hoac{x &= 1 - \dfrac{\pi}{4} + k2\pi \\ x &= 1 + \dfrac{5\pi}{4} + k2\pi} \ (k \in \mathbb{Z})$.\\
+		Vì $x \in \left(-\dfrac{7\pi}{2}; \dfrac{\pi}{2}\right)$ nên:
+		\begin{itemize}
+			\item TH1: $-\dfrac{7\pi}{2} < 1 - \dfrac{\pi}{4} + k2\pi < \dfrac{\pi}{2} \Leftrightarrow -\dfrac{13}{8} - \dfrac{1}{2\pi} < k < \dfrac{3}{8} - \dfrac{1}{2\pi} \Rightarrow k \in \{-1; 0\}$.\\
+			Ta được các nghiệm: $x = 1 - \dfrac{9\pi}{4}$ và $x = 1 - \dfrac{\pi}{4}$.
+			\item TH2: $-\dfrac{7\pi}{2} < 1 + \dfrac{5\pi}{4} + k2\pi < \dfrac{\pi}{2} \Leftrightarrow -\dfrac{19}{8} - \dfrac{1}{2\pi} < k < -\dfrac{3}{8} - \dfrac{1}{2\pi} \Rightarrow k \in \{-2; -1\}$.\\
+			Ta được các nghiệm: $x = 1 - \dfrac{11\pi}{4}$ và $x = 1 - \dfrac{3\pi}{4}$.
+		\end{itemize}
+		Vậy phương trình có các nghiệm là: $x \in \left\{1 - \dfrac{\pi}{4}; 1 - \dfrac{9\pi}{4}; 1 - \dfrac{3\pi}{4}; 1 - \dfrac{11\pi}{4}\right\}$.
+		
+		\item $2\cos\left(3x - \dfrac{\pi}{3}\right) - 1 = 0 \Leftrightarrow \cos\left(3x - \dfrac{\pi}{3}\right) = \dfrac{1}{2} \Leftrightarrow \hoac{3x - \dfrac{\pi}{3} &= \dfrac{\pi}{3} + k2\pi \\ 3x - \dfrac{\pi}{3} &= -\dfrac{\pi}{3} + k2\pi} \Leftrightarrow \hoac{x &= \dfrac{2\pi}{9} + k\dfrac{2\pi}{3} \\ x &= k\dfrac{2\pi}{3}} \ (k \in \mathbb{Z})$.\\
+		Vì $x \in (-\pi; \pi)$ nên:
+		\begin{itemize}
+			\item TH1: $-\pi < \dfrac{2\pi}{9} + k\dfrac{2\pi}{3} < \pi \Leftrightarrow -\dfrac{11}{6} < k < \dfrac{7}{6} \Rightarrow k \in \{-1; 0; 1\}$.\\
+			Ta được các nghiệm: $x \in \left\{-\dfrac{4\pi}{9}; \dfrac{2\pi}{9}; \dfrac{8\pi}{9}\right\}$.
+			\item TH2: $-\pi < k\dfrac{2\pi}{3} < \pi \Leftrightarrow -\dfrac{3}{2} < k < \dfrac{3}{2} \Rightarrow k \in \{-1; 0; 1\}$.\\
+			Ta được các nghiệm: $x \in \left\{-\dfrac{2\pi}{3}; 0; \dfrac{2\pi}{3}\right\}$.
+		\end{itemize}
+		Vậy phương trình có các nghiệm là: $x \in \left\{-\dfrac{2\pi}{3}; -\dfrac{4\pi}{9}; 0; \dfrac{2\pi}{9}; \dfrac{2\pi}{3}; \dfrac{8\pi}{9}\right\}$.
+		
+		\item $\tan(3x + 2) - \sqrt{3} = 0 \Leftrightarrow \tan(3x + 2) = \sqrt{3} \Leftrightarrow 3x + 2 = \dfrac{\pi}{3} + k\pi \Leftrightarrow x = \dfrac{\pi}{9} - \dfrac{2}{3} + k\dfrac{\pi}{3} \ (k \in \mathbb{Z})$.\\
+		Vì $x \in \left(-\dfrac{\pi}{2}; \dfrac{\pi}{2}\right)$ nên $-\dfrac{\pi}{2} < \dfrac{\pi}{9} - \dfrac{2}{3} + k\dfrac{\pi}{3} < \dfrac{\pi}{2} \Leftrightarrow -\dfrac{11}{6} + \dfrac{2}{\pi} < k < \dfrac{7}{6} + \dfrac{2}{\pi}$.\\
+		Do $-\dfrac{11}{6} + \dfrac{2}{\pi} \approx -1{,}19$ và $\dfrac{7}{6} + \dfrac{2}{\pi} \approx 1{,}80$, suy ra $k \in \{-1; 0; 1\}$.\\
+		Vậy phương trình có các nghiệm là: $x \in \left\{-\dfrac{2\pi}{9} - \dfrac{2}{3}; \dfrac{\pi}{9} - \dfrac{2}{3}; \dfrac{4\pi}{9} - \dfrac{2}{3}\right\}$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{38}
+
+\begin{dang}{Giải các phương trình lượng giác dạng mở rộng}
+	\begin{itemize}
+		\item [$\bullet$] Biến đổi về một trong các cấu trúc sau
+		\begin{listEX}[4]
+			\item [\ding{172}] $\sin u = \sin v$
+			\item [\ding{173}] $\cos u = \cos v$
+			\item [\ding{174}] $\tan u = \tan v$
+			\item [\ding{175}] $\cot u = \cot v$
+		\end{listEX}
+		\item [$\bullet$] Chú ý các công thức biến đổi lượng giác sau:
+		\begin{listEX}[2]
+			\item [\ding{172}] $-\sin x = \sin(-x)$.
+			\item [\ding{173}] $-\cos x=\cos\left(\pi -x \right)$.
+			\item [\ding{174}] $\sin x =\cos\left(\dfrac{\pi}{2}-x \right)$.
+			\item [\ding{175}] $\cos x =\sin\left(\dfrac{\pi}{2}-x \right)$.
+		\end{listEX}
+	\end{itemize}
+\end{dang}
+
+\begin{vd}
+	Giải các phương trình sau:
+	\begin{tasks}(3)
+		\task $\sin 3x=\sin 2x$
+		\task $\sin 2x-\sin x=0$ 
+		\task $\sin 5x+\sin x=0$ 
+		\task $\cos 2x-\cos x=0$ 
+		\task $\cos 8x+\cos x=0$
+		\task $\cos 4x-\sin x=0$ 
+	\end{tasks}
+	\loigiai{
+	\begin{enumerate}[a)]
+		\item $\sin 3x = \sin 2x \Leftrightarrow \hoac{3x &= 2x + k2\pi \\ 3x &= \pi - 2x + k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ 5x &= \pi + k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ x &= \dfrac{\pi}{5} + k\dfrac{2\pi}{5}} \ (k \in \mathbb{Z})$.
+		
+		\item $\sin 2x - \sin x = 0 \Leftrightarrow \sin 2x = \sin x \Leftrightarrow \hoac{2x &= x + k2\pi \\ 2x &= \pi - x + k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ 3x &= \pi + k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ x &= \dfrac{\pi}{3} + k\dfrac{2\pi}{3}} \ (k \in \mathbb{Z})$.
+		
+		\item $\sin 5x + \sin x = 0 \Leftrightarrow \sin 5x = -\sin x \Leftrightarrow \sin 5x = \sin(-x) \Leftrightarrow \hoac{5x &= -x + k2\pi \\ 5x &= \pi - (-x) + k2\pi} \Leftrightarrow \hoac{6x &= k2\pi \\ 4x &= \pi + k2\pi} \Leftrightarrow \hoac{x &= k\dfrac{\pi}{3} \\ x &= \dfrac{\pi}{4} + k\dfrac{\pi}{2}} \ (k \in \mathbb{Z})$.
+		
+		\item $\cos 2x - \cos x = 0 \Leftrightarrow \cos 2x = \cos x \Leftrightarrow \hoac{2x &= x + k2\pi \\ 2x &= -x + k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ 3x &= k2\pi} \Leftrightarrow \hoac{x &= k2\pi \\ x &= k\dfrac{2\pi}{3}} \ (k \in \mathbb{Z})$.\\
+		\textit{(Lưu ý: Tập nghiệm $x = k2\pi$ là tập con của $x = k\dfrac{2\pi}{3}$, nên có thể viết gọn nghiệm là $x = k\dfrac{2\pi}{3}, k \in \mathbb{Z}$).}
+		
+		\item $\cos 8x + \cos x = 0 \Leftrightarrow \cos 8x = -\cos x \Leftrightarrow \cos 8x = \cos(\pi - x) \Leftrightarrow \hoac{8x &= \pi - x + k2\pi \\ 8x &= -(\pi - x) + k2\pi} \Leftrightarrow \hoac{9x &= \pi + k2\pi \\ 7x &= -\pi + k2\pi} \Leftrightarrow \hoac{x &= \dfrac{\pi}{9} + k\dfrac{2\pi}{9} \\ x &= -\dfrac{\pi}{7} + k\dfrac{2\pi}{7}} \ (k \in \mathbb{Z})$.
+		
+		\item $\cos 4x - \sin x = 0 \Leftrightarrow \cos 4x = \sin x \Leftrightarrow \cos 4x = \cos\left(\dfrac{\pi}{2} - x\right) \Leftrightarrow \hoac{4x &= \dfrac{\pi}{2} - x + k2\pi \\ 4x &= -\left(\dfrac{\pi}{2} - x\right) + k2\pi} \Leftrightarrow \hoac{5x &= \dfrac{\pi}{2} + k2\pi \\ 3x &= -\dfrac{\pi}{2} + k2\pi} \Leftrightarrow \hoac{x &= \dfrac{\pi}{10} + k\dfrac{2\pi}{5} \\ x &= -\dfrac{\pi}{6} + k\dfrac{2\pi}{3}} \ (k \in \mathbb{Z})$.
+	\end{enumerate}
+}
+\end{vd} \dongcham{30}
+
+\begin{vd}
+	\textbf{(B.2013).} Giải phương trình $\sin 5 x+2 \cos ^{2} x=1$
+	\loigiai{
+		Phương trình tương đương với 
+		\begin{eqnarray*}
+			\sin 5 x+2 \cos ^2 x-1=0
+			&\Leftrightarrow&  \sin 5 x+ \cos 2x=0 \\
+			&\Leftrightarrow&
+			\cos 2x = -\sin 5x = \cos\left(\tfrac{\pi}{2}+5x \right) \\
+			&\Leftrightarrow&
+			\hoac{&2x=\dfrac{\pi}{2}+5x+k2 \pi\\&2x=-\dfrac{\pi}{2}-5x+k2 \pi}\\
+			&\Leftrightarrow&
+			\hoac{&x=-\dfrac{\pi}{6}-k\dfrac{2 \pi}{3}\\&x=-\dfrac{\pi}{14}+k\dfrac{2 \pi}{7}} (k \in \mathbb{Z}).
+		\end{eqnarray*}
+	}
+\end{vd} \dongcham{8}
+
+\begin{dang}{Vận dụng thực tiễn}
+	
+\end{dang}
+
+\begin{vd}
+	Số giờ có ánh sáng mặt trời của một thành phố $A$ ở vĩ độ $40^{\circ}$ bắc trong ngày thứ $t$ của một năm không nhuận được cho bởi hàm số
+	$$
+	d(t)=3\sin \left[\frac{\pi}{182}(t-80)\right]+12 \text { với } t \in \mathbb{Z} \text { và } 0<t \leq 365.
+	$$
+	\begin{tasks}
+		\task Thành phố $A$ có đúng 12 giờ có ánh sáng mặt trời vào ngày nào trong năm?
+		\task Vào ngày nào trong năm thì thành phố $A$ có ít giờ có ánh sáng mặt trời nhất?
+		\task Vào ngày nào trong năm thì thành phố $A$ có nhiều giờ có ánh sáng mặt trời nhất?
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Ta có phương trình 
+			
+			\begin{eqnarray*}
+				&&3\sin \left[\dfrac{\pi}{182}(t-80)\right]+12=12\\
+				&\Leftrightarrow & \sin \left[\dfrac{\pi}{182}(t-80)\right]=0 \\
+				&\Leftrightarrow &
+				\dfrac{\pi}{182}(t-80)=k\pi \Leftrightarrow t=80+182k
+			\end{eqnarray*}
+			Với $k,t \in \mathbb{Z}$ và $0<t \leq 365$, ta tìm được $k=0$ và $k=1$ thỏa.\\
+			Suy ra thành phố $A$ có 12 giờ ánh sáng vào ngày thứ 80 và ngày thứ 262 của năm.
+			\item Thành phố $A$ có ít giờ có ánh sáng mặt trời nhất đồng nghĩa với $d(t)$ nhỏ nhất. Điều này xảy ra khi $\sin \left[\dfrac{\pi}{182}(t-80)\right]=-1$. Giải phương trình này, ta tìm được $t=353$.
+			\item Thành phố $A$ có nhiều giờ có ánh sáng mặt trời nhất đồng nghĩa với $d(t)$ lớn nhất. Điều này xảy ra khi $\sin \left[\dfrac{\pi}{182}(t-80)\right]=1$. Giải phương trình này, ta tìm được $t=171$.
+	\end{enumerate}}
+\end{vd} \dongcham{7}
+
+\begin{vd}
+	\immini{Trong Hình bên , khi được kéo ra khỏi vị trí cân bằng ở điểm $O$ và buông tay, lực đàn hồi của lò xo khiến vật $A$ gắn ở đầu của lò xo dao động quanh $O$. Toạ độ $s$ (cm) của $A$ trên trục $Ox$ vào thời điểm $t$ (giây) sau khi buông tay được xác định bởi công thức $s=10 \sin \left(10 t+\dfrac{\pi}{2}\right)$. Vào các thời điểm nào thì $s=-5 \sqrt{3}$ cm?}{
+		\begin{tikzpicture}[>=stealth']
+			\path
+			(2.5,-1) coordinate (O)
+			(4,-1) coordinate (s)
+			;
+			\draw (0,0)--(0.5,0)(3,0)--(3.5,0) (0,-0.4)--(7,-0.4);
+			\draw[fill=orange] (3.5,-0.4) rectangle (4.5,.4);
+			\draw[decoration={aspect=0.5, segment length=2mm, amplitude=2mm,coil},decorate] (0.5,0) -- (3,0);
+			\draw[->] (4,0)--(5.5,0);
+			\draw[->] (0,-1)--(7,-1) node[below]{$x$};
+			\draw[dashed] (2.5,-0.4)--(2.5,1);
+			\draw[line width=3pt,brown](0,-0.4)--(0,0.4);
+			\foreach \x/\g in {s/-90,O/-90}\draw[fill=black] (\x) circle (.05) +(\g:.35)node{\footnotesize$\x$};
+			\node[above] at (4,0.4) {$A$};
+	\end{tikzpicture}}
+	\loigiai{
+		Theo yêu cầu bài toán
+		\begin{eqnarray*}
+			s=-5 \sqrt{3} 
+			&\Leftrightarrow& 10 \sin \left(10 t+\dfrac{\pi}{2}\right)=-5\sqrt{3}\\
+			&\Leftrightarrow& \sin \left(10 t+\dfrac{\pi}{2}\right)=-\dfrac{3}{2}
+		\end{eqnarray*}
+		Giải phương trình này ta được $t=\pm \dfrac{\pi}{12}+k \dfrac{\pi}{5}$, với $k \in \mathbb{Z}$.
+	}
+\end{vd} \dongcham{7}
+
+\begin{vd}%[1D1T5-6]
+	Vận tốc $v_1$ (cm/s) của con lắc đơn thứ nhất và vận tốc $v_2$ (cm/s) của con lắc đơn thứ hai theo thời gian $t$ (giây) được cho bởi các công thức
+	$$
+	v_1(t)=-4 \cos \left(\dfrac{2 t}{3}+\dfrac{\pi}{4}\right) \text { và }\; v_2(t)=2 \sin \left(2 t+\dfrac{\pi}{6}\right) .
+	$$
+	Xác định các thời điểm $t$ mà tại đó
+	\begin{enumerate}[a)]
+		\item 
+		vận tốc của con lắc đơn thứ nhất bằng $2$ (cm/s);
+		\item  vận tốc của con lắc đơn thứ nhất gấp hai lần vận tốc của con lắc đơn thứ hai.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item 	 Vận tốc của con lắc đơn thứ nhất bằng $2$ (cm/s) khi và chỉ khi
+			\allowdisplaybreaks
+			\begin{eqnarray*}	
+				-4 \cos \left(\dfrac{2 t}{3}+\dfrac{\pi}{4}\right)=2 &\Leftrightarrow& \cos \left(\frac{2 t}{3}+\frac{\pi}{4}\right)=-\frac{1}{2} \\ 
+				& \Leftrightarrow& \cos \left(\frac{2 t}{3}+\frac{\pi}{4}\right)=\cos \frac{2 \pi}{3} \\ & \Leftrightarrow&\hoac{&\frac{2 t}{3}+\frac{\pi}{4}=\frac{2 \pi}{3}+k 2 \pi \\& \frac{2 t}{3}+\frac{\pi}{4}=\frac{2 \pi}{3}+k 2 \pi}, k \in \mathbb{N}\\ 
+				& \Leftrightarrow&\hoac{&t=\frac{5 \pi}{8}+k 3 \pi \\& t=\frac{13 \pi}{8}+k 3 \pi}, k \in \mathbb{N}.
+			\end{eqnarray*}
+			Vậy	với $t=\dfrac{5 \pi}{8}+k 3 \pi, k \in \mathbb{N}$ hoặc $t=\dfrac{13 \pi}{8}+k 3 \pi, k \in \mathbb{N}$ thì  vận tốc của con lắc đơn thứ nhất bằng $2$ (cm/s).
+			\item 
+			Vận tốc của con lắc đơn thứ nhất gấp hai lần vận tốc của con lắc đơn thứ hai khi và chỉ khi 
+			\allowdisplaybreaks
+			\begin{eqnarray*}	
+				-4 \cos \left(\frac{2 t}{3}+\frac{\pi}{4}\right)=2 \cdot 2 \sin \left(2 t+\frac{\pi}{6}\right)& \Leftrightarrow& \cos \left(\frac{2 t}{3}+\frac{\pi}{4}\right)=\sin \left(-2 t-\frac{\pi}{6}\right) \\
+				& \Leftrightarrow& \cos \left(\frac{2 t}{3}+\frac{\pi}{4}\right)=\cos \left(\frac{2 \pi}{3}+2 t\right) \\ 
+				& \Leftrightarrow &\hoac{&\frac{2 t}{3}+\frac{\pi}{4}=\frac{2 \pi}{3}+2 t+k 2 \pi \\& \frac{2 t}{3}+\frac{\pi}{4}=-\frac{2 \pi}{3}-2 t+k 2 \pi}, k \in \mathbb{Z} \\
+				& \Leftrightarrow&\hoac{&t=-\frac{5 \pi}{6}+k \frac{3 \pi}{2} \\& t=-\frac{11 \pi}{32}+k \frac{3 \pi}{4}}, k \in \mathbb{Z}.
+			\end{eqnarray*}		
+			Vì $t>0$ nên nhận	 $t=\dfrac{19 \pi}{16}+k \dfrac{3 \pi}{2}, k \in \mathbb{N}$ và $t=\dfrac{13 \pi}{32}+k \dfrac{3 \pi}{4}, k \in \mathbb{N}$.
+	\end{enumerate}}
+\end{vd}
+\dongcham{15}
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}
+	Giải phương trình: $3-\sqrt{3}\tan\left(2x-\dfrac{\pi}{3}\right)=0$ với $\dfrac{-\pi}{4}<x<\dfrac{2\pi}{3}$.
+	\loigiai{
+		Phương trình tương đương với 
+		$$\tan\left(2x-\dfrac{\pi}{3}\right)=\sqrt{3} \Leftrightarrow x=\dfrac{\pi}{3}+\dfrac{k\pi}{2},k\in\mathbb{Z}.$$
+		Vì 
+		
+		\begin{eqnarray*}
+			\dfrac{-\pi}{4}<x<\dfrac{2\pi}{3}
+			&\Leftrightarrow&
+			\dfrac{-\pi}{4}<\dfrac{\pi}{3}+\dfrac{k\pi}{2}<\dfrac{2\pi}{3}\Leftrightarrow\dfrac{-7\pi}{12}<\dfrac{k\pi}{2}<\dfrac{\pi}{3}\\	
+			&\Leftrightarrow& \dfrac{-7}{6}<k<\dfrac{2}{3}
+		\end{eqnarray*}
+		Do $k\in\mathbb{Z}$ nên $k\in\{-1;0\}$.
+		\begin{itemize}
+			\item [$\bullet$] Với $k=-1$ thì $x=\dfrac{-\pi}{6}$; 
+			\item [$\bullet$] Với $k=0$ thì $x=\dfrac{\pi}{3}$ .
+		\end{itemize}
+		Vậy $x=\dfrac{-\pi}{6}$ và $x=\dfrac{\pi}{3}$ thỏa mãn yêu cầu bài toán.}
+\end{baitap} \cham{12}
+
+\begin{baitap}
+	Giải phương trình: $\tan \left(x+30^\circ\right)+1=0$ với $-90^\circ<x<360^\circ$.
+	\loigiai{
+		Ta có: $\tan \left(x+30^\circ\right)+1=0\Leftrightarrow \tan \left(x+30^\circ\right)=-1=\tan\left(-45^\circ\right)\Leftrightarrow x=-75^\circ+k180^\circ$.\\
+		Do $-90^\circ<x<360^\circ$ nên tập nghiệm của phương trình là $S=\left\{-75^\circ, 105^\circ, 285^\circ\right\}$.
+	}
+\end{baitap} \cham{12}
+
+
+\begin{baitap} %[1D1Y2-1]%
+	Giải các phương trình sau:
+	\begin{enumEX}{3}
+		\item $\cos 3 x=\sin 2 x$
+		\item $\cos 3 x-2 \cos \dfrac{\pi}{4}=0$
+		\item $\cos \left(2 x+\dfrac{\pi}{3}\right)=-\dfrac{1}{2}$
+		\item $\cos \left(2 x+30^{\circ}\right)=\dfrac{1}{2}$
+		\item $2 \cos \left(x-\dfrac{\pi}{3}\right)=0$
+		\item $2 \cos \left(2 x-60^{\circ}\right)-1=0$
+		\item $\cos \left(2 x+\dfrac{\pi}{4}\right)+2=0$
+		\item $\cos \left(\dfrac{x}{3}-30^{\circ}\right)=1$
+		\item $\sin ^{2} 2 x=\dfrac{1}{4}$
+	\end{enumEX}
+	\loigiai{
+		\begin{enumerate}
+			\item $\cos 3x=\sin 2x\Leftrightarrow \cos 3x=\cos \left( \dfrac{\pi }{2}-2x \right)\Leftrightarrow \hoac{
+				& 3x=\dfrac{\pi }{2}-2x+k2\pi  \\
+				& 3x=-\dfrac{\pi }{2}+2x+k2\pi
+			}\Leftrightarrow \hoac{
+				& x=\dfrac{\pi }{10}+k\frac{2\pi }{5} \\
+				& x=-\dfrac{\pi }{2}+k2\pi  }$ $\left(k \in \mathbb{Z}\right)$.
+			\item $\cos 3 x-2 \cos \dfrac{\pi}{4}=0 \Leftrightarrow \cos 3x=\sqrt{2} \text{ (Phương trình vô nghiệm)}$
+			\item $\cos \left(2 x+\dfrac{\pi}{3}\right)=-\dfrac{1}{2} \Leftrightarrow \hoac{&2x+\dfrac{\pi}{3}=\dfrac{2\pi}{3}+k2\pi\\ &2x + \dfrac{\pi}{3} = -\dfrac{2\pi}{3}+k2\pi } \Leftrightarrow \hoac{&x=\dfrac{\pi}{6}+k\pi \\ &x=-\dfrac{\pi}{2}+k\pi}$ $\left(k \in \mathbb{Z}\right)$.
+			
+			\item $\cos \left(2 x+30^{\circ}\right)=\dfrac{1}{2}\Leftrightarrow \hoac{&2x+30^{\circ}=60^{\circ}+k360^{\circ}\\ &2x+30^{\circ}=-60^{\circ}+k360^{\circ}} \Leftrightarrow \hoac{&x=15^{\circ}+k180^{\circ}\\&x=-45^{\circ}+k180^{\circ}} $ $\left(k \in \mathbb{Z}\right)$.
+			\item $2 \cos \left(x-\dfrac{\pi}{3}\right)=0 \Leftrightarrow \cos \left(x-\dfrac{\pi}{3}\right)=0 \Leftrightarrow x-\dfrac{\pi}{3} = \dfrac{\pi}{2} + k2\pi \Leftrightarrow x = \dfrac{5\pi}{6} + k2\pi $ $\left(k \in \mathbb{Z}\right)$.
+			\item $2 \cos \left(2 x-60^{\circ}\right)+1=0 \Leftrightarrow \cos \left(2x-60^{\circ}\right)=-\dfrac{1}{2} \Leftrightarrow \hoac{&2x-60^{\circ}=120^{\circ}+k360^{\circ}\\ &2x-60^{\circ}=-120^{\circ}+k360^{\circ}} \Leftrightarrow \hoac{&x=90^{\circ}+k180^{\circ}\\&x=-30^{\circ}+k180^{\circ}} $ $\left(k \in \mathbb{Z}\right)$.
+			\item $\cos \left(2 x+\dfrac{\pi}{4}\right)+2=0 \Leftrightarrow \cos \left(2 x+\dfrac{\pi}{4}\right)=-2 \text{ (Phương trình vô nghiệm)} $
+			\item $\cos \left(\dfrac{x}{3}-30^{\circ}\right)=1 \Leftrightarrow \dfrac{x}{3}-30^{\circ}=k360^{\circ} \Leftrightarrow x = 90^{\circ}+k1080^{\circ}$ $\left(k \in \mathbb{Z}\right)$.
+			\item $\sin ^{2} 2 x=\dfrac{1}{4} \Leftrightarrow \hoac{&\sin2x=\dfrac{1}{2}\\&\sin2x=-\dfrac{1}{2}} \Leftrightarrow \hoac{&2x=\dfrac{\pi}{6} + k2\pi\\ &2x=\dfrac{5\pi}{6} + k2\pi \\ &2x=-\dfrac{\pi}{6} + k2\pi \\ &2x=-\dfrac{5\pi}{6} + k2\pi  } \Leftrightarrow \hoac{&x=\dfrac{\pi}{12} + k\pi\\ &x=\dfrac{5\pi}{12} + k\pi \\ &x=-\dfrac{\pi}{12} + k\pi \\ &x=-\dfrac{5\pi}{12} + k\pi }$ $\left(k \in \mathbb{Z}\right)$.
+		\end{enumerate}
+		
+	}
+\end{baitap} \cham{35}
+
+\begin{baitap}
+	Giải các phương trình sau:
+	\begin{tasks}(2)
+		\task $\tan x=\sqrt{3}$.
+		\task $\cot (x - \dfrac{\pi}{3}) =1$.
+		\task $\tan\left( x+48^\circ\right) =\tan25^\circ$.
+		\task $\tan\left( x+\dfrac{3\pi}{4}\right) =\tan\dfrac{\pi}{7}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\tan x=\sqrt{3}\Leftrightarrow x=\dfrac{\pi}{3}+k\pi,\ (k\in \mathbb{Z})$.\\
+			Vậy tập nghiệm của phương trình là $S=\left\lbrace\dfrac{\pi}{3}+k\pi,\ k\in \mathbb{Z} \right\rbrace$.
+			\item $\cot \left (x - \dfrac{\pi}{3}\right ) =1 \Leftrightarrow x- \dfrac{\pi}{3} = \dfrac{\pi}{4} + k\pi \Leftrightarrow x=\dfrac{7\pi}{12} + k \pi$ $(k \in \mathbb{Z})$.
+			\item 
+			$\tan\left( x+48^\circ\right) =\tan25^\circ\Leftrightarrow x+48^\circ=25^\circ+k180^\circ\Leftrightarrow x=25^\circ-48^\circ+k108^\circ\Leftrightarrow x=-23^\circ+k180^\circ,\ (k\in \mathbb{Z})$.\\
+			Vậy tập nghiệm của phương trình là $S=\left\lbrace-23^\circ+k180^\circ,\ k\in \mathbb{Z} \right\rbrace$.
+			\item $\tan\left( x+\dfrac{3\pi}{4}\right) =\tan\dfrac{\pi}{7}\Leftrightarrow x+\dfrac{3\pi}{4}=\dfrac{\pi}{7}+k\pi\Leftrightarrow x=\dfrac{\pi}{7}-\dfrac{3\pi}{4}+k\pi\Leftrightarrow x=-\dfrac{17\pi}{28}+k\pi,\ (k\in \mathbb{Z})$.\\
+			Vậy tập nghiệm của phương trình là $S=\left\lbrace-\dfrac{17\pi}{28}+k\pi,\ k\in \mathbb{Z} \right\rbrace$.
+	\end{enumerate}}
+\end{baitap} \cham{24}
+\begin{baitap}%[1D1B2-1]
+	Giải phương trình 
+	\begin{tasks}(2)
+		\task $\tan\left(2x+\dfrac{\pi}{6}\right)+\tan\left(\dfrac{\pi}{3}-x\right)=0$.
+		\task $\dfrac{\sin 2x +2\cos x-\sin x-1}{\sqrt{3}+\tan x}=0$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item 	Điều kiện $\heva{\newline
+				& 2x+\dfrac{\pi}{6}\ne\dfrac{\pi}{2}+m\pi\\
+				&\dfrac{\pi}{3}-x\ne\dfrac{\pi}{2}+m\pi\\
+			}\Leftrightarrow\heva{\newline
+				& x\ne\dfrac{\pi}{6}+\dfrac{m\pi}{2}\\
+				& x\ne-\dfrac{\pi}{6}-m\pi\\
+			},m\in\mathbb{Z}.$\newline
+			PT $\Leftrightarrow\tan\left(2x+\dfrac{\pi}{6}\right)=-\tan\left(\dfrac{\pi}{3}-x\right)\Leftrightarrow\tan\left(2x+\dfrac{\pi}{6}\right)=\tan\left(-\dfrac{\pi}{3}+x\right)\Leftrightarrow x=\dfrac{-\pi}{2}+k\pi ,k\in\mathbb{Z}.$\newline
+			Kết hợp với điều kiện ta suy ra phương trình có một họ nghiệm $x=\dfrac{-\pi}{2}+k\pi ,k\in\mathbb{Z}.$
+			\item Điều kiện xác định $\heva{& \tan x \ne -\sqrt{3} \\& \cos x \ne 0}$.\\ Khi đó, phương trình tương đương với $\sin 2x+ 2 \cos x - (\sin x +1)=0$
+			\begin{eqnarray*}
+				&\Leftrightarrow& (2 \sin x \cos x + 2 \cos x)- (\sin x +1)=0\\
+				&\Leftrightarrow& 2 \cos x\left( \sin x +1\right) - (\sin x +1)=0\\
+				&\Leftrightarrow& \hoac{& \sin x =-1 \text{ ( loại, do $\cos x \ne 0$) }\\& \cos x =\dfrac{1}{2}}\\
+				&\Leftrightarrow& \hoac{& x=\dfrac{\pi}{3}+k2 \pi\\&x=-\dfrac{\pi}{3}+k2 \pi}.
+			\end{eqnarray*}
+			Thử lại với điều kiện, ta loại nghiệm $x=-\dfrac{\pi}{3}+k2 \pi$, do không thỏa $\tan x \ne -\sqrt{3}$.\\
+			Vậy, nghiệm của phương trình là $x=\dfrac{\pi}{3}+k2 \pi$.
+		\end{enumerate}
+	}
+\end{baitap} \cham{14}
+
+\begin{baitap}
+	Một quả đạn pháo được bắn ra khỏi nòng pháo với vận tốc ban đầu có độ lớn $v_0$ không đổi. Tìm góc bắn $\alpha$ để quả đạn pháo bay xa nhất, bở qua sức cản của không khí và coi quả đạn pháo được bắn ra từ mặt đất.
+	\loigiai{
+		Trong Vật lí, ta biết rằng, nếu bỏ qua sức cản của không khí và coi quả đạn pháo được bắn ra từ mặt đất thì quỹ đạo của quả đạn tuân theo phương trình $y=\dfrac{-g}{2 v_0^2 \cos ^2 \alpha} x^2+x \tan \alpha$, ở đó $g=9,8 \mathrm{~m} / \mathrm{s}^2$ là gia tốc trọng trường.\\
+		Áp dụng công thức này: 
+		\begin{itemize}
+			\item [$\bullet$] Cho $y=0$ ta được $\dfrac{-g}{2 v_0^2 \cos ^2 \alpha} x^2+x \tan \alpha=0$, suy ra $x=0$ hoặc $x=\dfrac{v_0^2 \sin 2 \alpha}{g}$.
+			\item [$\bullet$] Quả đạn tiếp đất khi $x=\dfrac{v_0^2 \sin 2 \alpha}{g}$. \\
+			Ta có $x=\dfrac{v_0^2 \sin 2 \alpha}{g} \leq \dfrac{v_0^2}{g}$, dấu bằng xảy ra khi $\sin 2 \alpha=1$.
+		\end{itemize}
+		Giải phương trình $\sin 2 \alpha=1$, ta được $\alpha=\dfrac{\pi}{4}+k \pi, k \in \mathbb{Z}$. Do $0 \leq \alpha \leq \dfrac{\pi}{2}$ nên $\alpha=\dfrac{\pi}{4}$ hay $\alpha=45^{\circ}$.\\
+		Vậy quả đạn pháo sẽ bay xa nhất khi góc bắn bằng $45^{\circ}$.}
+\end{baitap} \cham{12}
+
+\begin{baitap}
+	Độ sâu $h(\mathrm{~m})$ của mực nước ở một cảng biển vào thời điểm $t$ (giờ) sau khi thuỷ triều lên lần đầu tiên trong ngày được tính xấp xỉ bởi công thức $h(t)=0,8 \cos 0,5 t+4$.
+	\begin{enumEX}[a)]{1}
+		\item  Độ sâu của nước vào thời điểm $t=2$ là bao nhiêu mét?
+		\item  Một con tàu cần mực nước sâu tối thiểu $3,6 \mathrm{~m}$ để có thể di chuyển ra vào cảng an toàn. Dựa vào đồ thị của hàm số côsin, hãy cho biết trong vòng 12 tiếng sau khi thuỷ triều lên lần đầu tiên, ở những thời điềm $t$ nào tàu có thể hạ thuỷ. Làm tròn đến hàng phần trăm.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}[a)]{1}
+			\item Tại thời điểm $t=2$. Ta có: $h(2)=0,8 \cdot \cos (0,5 \cdot 2)+4=4,43$ m.
+			\item Tàu không thể di chuyển ra vào cảng khi 
+			$$h(t) <3{,}6 \Leftrightarrow\cos0{,}5t< -\dfrac{1}{2} \Rightarrow \dfrac{2\pi}{3}<0,5t<\dfrac{4\pi}{3} \Rightarrow \dfrac{4\pi}{3}<t<\dfrac{8\pi}{3}.$$
+			Với điều kiện $t \in [0;12]$, ta chọn được thời gian tàu có thể di chuyển ra vào cảng là $$0 \le t \le \dfrac{4\pi}{3} \text{ hoặc } \dfrac{8\pi}{3} \le t \le 12.$$
+			
+	\end{enumEX}}
+\end{baitap} \cham{14}

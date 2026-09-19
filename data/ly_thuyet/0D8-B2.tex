@@ -1,0 +1,454 @@
+\section{HOÁN VỊ - CHỈNH HỢP - TỔ HỢP}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Hoán vị}
+Cho tập $A$ gồm $n$ phần tử $\left(n\ge 1\right)$. Mỗi kết quả của sự sắp xếp thứ tự $n$ phần tử của tập hợp $A$ được gọi là một hoán vị của $n$ phần tử đó.
+\begin{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Số các hoán vị của $n$ phần tử, kí hiệu là $\mathrm{P}_n$.
+		\item [$\bullet$] Công thức tính $\mathrm{P}_n = n! = n\cdot (n - 1)\cdot (n - 2) \cdots 3\cdot 2\cdot 1$. ($n!$ đọc là $n$ giai thừa)
+	\end{itemize}
+\end{boxkn}
+\noindent
+\textit{Nhận dạng bài toán: "Chọn hết phần tử và đi sắp xếp"}
+\begin{vidu}
+	Xếp 4 học sinh A, B, C, D vào một bàn dài 4 chỗ ngồi thì
+	\begin{itemize}
+		\item [$\bullet$] Các hoán vị là $ABCD$, $ACDB$,...
+		\item [$\bullet$] Số hoán vị (hay số cách xếp) là $P_4=4!=24$ cách.
+	\end{itemize}
+\end{vidu}
+\subsubsection{Chỉnh hợp}
+Cho tập $A$ gồm $n$ phần tử $\left(n\ge 1\right)$. Kết quả của việc lấy $k$ $\left(1\le k\le n\right)$ phần tử khác nhau từ $n$ phần tử của tập hợp $A$ và sắp xếp chúng theo một thứ tự nào đó được gọi là một chỉnh hợp chập $k$ của $n$ phần tử đã cho (gọi tắt là một chỉnh hợp chập $k$ của $A$).
+\begin{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Số các chỉnh hợp chập $k$ của một tập hợp có $n$ phần tử, kí hiệu là
+		$\mathrm{A}_n^k$.
+		\item [$\bullet$] Với quy ước $0! = 1$, ta có công thức tính $\mathrm{A}_n^k = n\cdot (n - 1)\cdot (n - 2)\cdots (n - k + 1) = \dfrac{n!}{(n - k)!}\cdot$
+		\item [$\bullet$] $\mathrm{A}_n^n = n! = \mathrm{P}_n$.
+	\end{itemize}
+\end{boxkn}
+\noindent
+\textit{Nhận dạng bài toán: "Chọn $k$ phần tử trong tập gồm $n$ phần tử và đi \textbf{sắp xếp}"}
+\subsubsection{Tổ hợp}
+Cho tập hợp $A$ gồm $n$ phần tử và số nguyên $k$ với $1\le k\le n$. Mỗi tập con của $A$ có $k$ phần tử được gọi là một tổ hợp chập $k$ của $n$ phần tử của $A$ (gọi tắt là một tổ hợp chập $k$ của $A$).
+\begin{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Số các tổ hợp chập $k$ của một tập hợp có $n$ phần tử, kí hiệu là
+		$\mathrm{C}_n^k$. 
+		\item [$\bullet$] Số $k$  trong định nghĩa cần thỏa mãn điều kiện $1 \leq k \leq n$. Tuy nhiên, tập hợp không có phần tử nào là tập rỗng nên ta quy ước gọi tổ hợp chập $0$  của $n$  phần tử là tập rỗng.
+		\item [$\bullet$] Cho các số nguyên dương $n$ và $k$ với $0\le k\le n$. Với quy ước $0! = 1$, số các tổ hợp chập $k$ của một tập hợp có $n$ phần tử là
+		$$\mathrm{C}_n^k=\dfrac{n!}{k!(n-k)!}=\dfrac{\mathrm{A}_n^k}{k!}\cdot$$
+	\end{itemize}
+\end{boxkn}
+\noindent
+\textit{Nhận dạng bài toán: "Chọn $k$ phần tử trong tập gồm $n$ phần tử để tạo thành 1 tập con.}
+\subsubsection{Các công thức cơ bản về tổ hợp}
+\begin{boxkn}
+	\begin{listEX}[1]
+		\item [\ding{172}] $\mathrm{C}_n^k=\mathrm{C}_n^{n-k}$ với mọi nguyên $n$ và $k$ thỏa $0\le k\le n$.
+		\item [\ding{173}] $\mathrm{C}_{n+1}^k=\mathrm{C}_n^k+\mathrm{C}_n^{k-1}$ với mọi nguyên $n$ và $k$ thỏa $1\le k\le n$.
+	\end{listEX}
+\end{boxkn}
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Hoán vị và số hoán vị}
+\end{dang}
+
+\begin{vd}
+	Có bao nhiêu cách xếp 5 học sinh A, B, C, D, E vào 1 ghế dài sao cho 
+	\begin{tasks}(2)
+		\task 5 học sinh ngồi tùy ý.
+		\task C luôn ngồi chính giữa.
+		\task A và E luôn ngồi đầu bàn.
+		\task A và E không ngồi cạnh nhau.
+	\end{tasks}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) 120. \quad b) 24. \quad c) 12. \quad d) 72.}
+\end{vd} \dongcham{15}
+\begin{vd}%[1D2B2]
+	Cho tập hợp $S=\{1,2,3,4\}$. Có bao nhiêu số tự nhiên có $4$ chữ số phân biệt lấy từ tập $A$?
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 24.}
+	\loigiai{
+		Gọi $x=\overline{a_1a_2a_3a_4}$ là số cần tìm, $a_i\in S,\,\forall i=\overline{1,4}$.	
+		Mỗi hoán vị của $4$ phần tử tập hợp $A$ ta được $1$ số tự nhiên có $4$ chữ số cần tìm, ví dụ như $x=3214$. Do vậy, ta được $\mathrm{P}_4=4!=4\cdot3\cdot2\cdot1=24$ số.
+	}
+\end{vd} \dongcham{10}
+
+\begin{vd}
+	Một nhóm học sinh gồm 7 học sinh nam và 3 học sinh nữ. 
+	\begin{tasks}(1)
+		\task Có bao nhiêu cách xếp 10 học sinh này thành một hàng dọc.
+		\task Có bao nhiêu cách xếp 10 học sinh này thành hàng học sao cho 7 học sinh nam phải đứng cạnh nhau.
+	\end{tasks}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) 3628800 \quad b) 120960.}
+\end{vd} \dongcham{8}
+
+\begin{vd}%[1D2B2]
+	Cho tập hợp $S=\{0,1,2,3,4,5,6\}$. Có bao nhiêu số tự nhiên có $7$ chữ số phân biệt lấy từ tập $A$?
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 4320.}
+	\loigiai{Gọi $x=\overline{a_1a_2\ldots a_7}$ là số cần tìm, $a_i\in S,\,\forall i=\overline{1,7}$.
+		\begin{itemize}
+			\item Chọn $a_1\neq0$ nên có $6$ cách chọn.
+			\item Từ $a_2\to a_7$ có số cách chọn là số hoán vị của $6$ phần tử còn lại: $\mathrm{P}_6=6!$ cách chọn.
+		\end{itemize} Do vậy, ta được $6\cdot6!=4320$ số.
+	}
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Một chồng sách gồm 4 quyển sách Toán khác nhau, 3 quyển sách Vật Lý khác nhau, 5 quyển sách Hóa Học khác nhau. Hỏi có bao nhiêu cách xếp các quyển sách trên thành một hàng ngang sao cho 
+	\begin{tasks}(1)
+		\task Các quyển sách cùng môn thì đứng cạnh nhau.
+		\task Các quyển sách toán đứng gần nhau.
+	\end{tasks}
+	\loigiai{ 
+		\begin{itemize}
+			\item[a.] Xếp 4 quyển sách toán thành một nhóm đứng gần nhau có $\mathrm{P}_4=4!=24$ cách xếp\\
+			Xếp 3 quyển sách Vật Lí thành một nhóm gần nhau có $\mathrm{P}_3=3!=6$ cách xếp\\
+			Xếp 5 quyển sách Hóa Học thành một nhóm gần nhau có $\mathrm{P}_5=5!=120$ cách xếp.\\
+			Xếp 3 nhóm sách trên lên giá sách có $\mathrm{P}_3=3!=6$ cách xếp.\\
+			Vậy có $24.6.120.6 = 103680$ cách xếp các cuốn sách cùng môn thì đứng cạnh nhau.
+			\item[b.] Xếp 4 quyển sách toán thành một nhóm đứng gần nhau có $\mathrm{P}_4=4!=24$ cách xếp.\\
+			Coi nhóm sách Toán là một quyển sách lớn, xếp quyển sách lớn đó và 8 quyển sách còn lại có $\mathrm{P}_9=9!$ cách xếp.\\
+			Vậy có $24.9!= 8709120$ cách xếp các cuốn sách Toán đứng gần nhau.
+		\end{itemize}
+	}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) 103680. \quad b) 8709120. }
+\end{vd} \dongcham{9}
+
+\begin{dang}{Chỉnh hợp và số chỉnh hợp}
+\end{dang}
+
+\begin{vd}%[Thi thử L1, THPT Trần Phú - Đà Nẵng, 2018]%[1D2B2-1]%[Lê Thanh Nin, dự án(12EX-8)]
+	Một tổ có $10$ học sinh. Hỏi có bao nhiêu cách chọn ra $2$ học sinh từ tổ đó để giữ hai chức vụ tổ trưởng và tổ phó?
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 90.}
+	\loigiai{
+		Mỗi cách chọn $2$ học sinh giữ hai chức vụ tổ trưởng và tổ phó là một chỉnh hợp chập $2$ của $10$. Vậy số cách chọn là  $\mathrm{A}_{10}^2$}
+\end{vd} \dongcham{6}
+\begin{vd}%[Đề thi thử lần 1, An Phước, Ninh Thuận 2018%[QK Trương, Dự án (12EX-10)]%[1D2Y2-1]
+	Cho đa giác đều có $10$ đỉnh. Tìm số véc-tơ khác véc-tơ-không có điểm đầu và điểm cuối là các đỉnh của đa giác. 
+	\hspace*{5cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 90.}
+	\loigiai{
+		Số véc-tơ khác véc-tơ-không có điểm đầu và điểm cuối là các đỉnh của đa giác có $ 10 $ đỉnh là $ \mathrm{A}_{10}^2 =90$. }
+\end{vd} \dongcham{6}
+
+\begin{vd}%[Đề TT THCS và THPT M.V Lômônôxốp - Hà Nội, 2018]%[Đỗ Đường Hiếu (dự án 12EX-11)]%[1D2B2-1]
+	Cho tập $X=\{1; 2; 3; 4; 5; 6\}$. Có bao nhiêu số tự nhiên có ba chữ số đôi một khác nhau được tạo thành từ tập $X$? 
+	\hspace*{5cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 120.}
+	\loigiai{
+		Mỗi số tự nhiên có ba chữ số khác nhau được tạo thành từ tập $X$ là một chỉnh hợp chập $3$ của tập $X$. Cho nên, số các số tự nhiên có ba chữ số đôi một khác nhau được tạo thành từ tập $X$ là $\mathrm{A}^3_6=120$ số.
+	}
+\end{vd} \dongcham{7}
+
+\begin{vd}%[Đề KSCL THPT Quốc gia 2018 môn Toán trường THPT Phước Vĩnh $-$ Bình Dương]%[Trần Minh, Dự án (12EX-11)]%[1D2B2-1]
+	Từ các số $1$, $2$, $3$, $4$, $5$, $7$. Từ các số trên có thể lập được bao nhiêu số tự nhiên có $4$ chữ số khác nhau và chia hết cho $5$?
+	\hspace*{5cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 60.}
+	\loigiai{
+		Theo bài ra chữ số hàng đơn vị có $1$ cách chọn.\\
+		Ba chữ số còn lại có $\mathrm{A}_5^3=60$ cách.\\
+		Vậy có $60$ số.}
+\end{vd} \dongcham{11}
+
+\begin{dang}{Tổ hợp và số tổ hợp}
+	
+\end{dang}
+\begin{vd}%[1D2B2-1]
+	Một tổ công nhân có $12$ người. Cần chọn $3$ người để đi làm cùng một nhiệm vụ, hỏi có bao nhiêu cách chọn?
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 220 }
+	\loigiai
+	{Chọn $3$ người từ $12$ người đi thực hiện cùng một nhiệm vụ là một tổ hợp chập $3$ của $12$ phần tử.\\
+		Số cách chọn là $\mathrm{C}_{12}^3$.
+	}
+\end{vd} \dongcham{5}
+\begin{vd}%[1D2B2-1]
+	Giải bóng đá AFF-CUP $2018$ có tất cả $10$ đội bóng tham gia, chia đều làm hai bảng $A$ và $B$. Ở vòng đấu bảng, mỗi đội bóng thi đấu với mỗi đội bóng cùng bảng $1$ trận. Hỏi tại vòng bảng các đội thi đấu tổng cộng bao nhiêu trận?	
+	\hspace*{3cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 20}
+	\loigiai{
+		Mỗi bảng có $5$ đội bóng.\\
+		Mỗi đội bóng thi đấu với mỗi đội bóng cùng bảng $1$ trận nên số trận thi đấu trong mỗi bảng bằng số cách chọn $2$ đội bóng từ $5$ đội, tức là $\mathrm{C}_5^2=10$ trận.\\
+		Vì có hai bảng nên tổng số trận đấu ở vòng bảng là $20$ trận.
+	}
+\end{vd} \dongcham{6}
+
+\begin{vd}%[1D2K2-1]
+	Có $20$ bông hoa trong đó có $8$ bông đỏ, $7$ bông vàng, $5$ bông trắng. Chọn ngẫu nhiên $4$ bông để
+	tạo thành một bó. Có bao nhiên cách chọn để bó hoa có cả $3$ màu?
+	\loigiai{
+		Số cách chọn được một bó hoa có $2$ hoa đỏ, $1$ hoa vàng và $1$ hoa trắng là $\mathrm{C}_8^2\mathrm{C}_7^1\mathrm{C}_5^1=980$. Số cách chọn được một bó hoa có $1$ hoa đỏ, $2$ hoa vàng và $1$ hoa trắng là $\mathrm{C}_8^1\mathrm{C}_7^2\mathrm{C}_5^1=840$. Số cách chọn được một bó hoa có $1$ hoa đỏ, $1$ hoa vàng và $2$ hoa trắng là $\mathrm{C}_8^1\mathrm{C}_7^1\mathrm{C}_5^2=560$. Do đó số cách chọn được bó hoa có cả $3$ màu là
+		$$980+840+560=2380.$$	
+	}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 2380 }
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Một đội xây dựng gồm 3 kỹ sư, 7 công nhân. Có bao nhiêu cách lập từ đó một tổ công tác 5 người gồm 1 kỹ sư làm tổ trưởng, 1 công nhân làm tổ phó và 3 công nhân làm tổ viên?
+	\loigiai{
+		Có 3 cách chọn kỹ sư làm tổ trưởng, 7 cách chọn công nhân làm tổ phó và $\mathrm{C}_6^3$ cách chọn 3 công nhân còn lại.\\
+		Vậy có $3\cdot 7\cdot \mathrm{C}_6^3=420$ cách.
+	}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 420}
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Từ một tập gồm $10$ câu hỏi, trong đó có $4$ câu lý thuyết và $6$ câu bài tập, người ta cấu tạo thành các đề thi. Biết rằng trong một đề thi phải gồm $3$ câu hỏi trong đó có ít nhất $1$ câu lý thuyết và $1$ câu hỏi bài tập. Hỏi có thể tạo được bao nhiêu đề như trên?
+	\loigiai{
+		
+		Để lập một đề ta chia hai trường hợp
+		\begin{enumerate}
+			\item[\textbf{TH1:}] Đề gồm 2 câu lí thuyết, 1 câu bài tập, ta có $\mathrm{\,C}_4^2\cdot\mathrm{C}_6^1$ đề.
+			\item[\textbf{TH2:}] Đề gồm 1 câu lí thuyết, 2 câu bài tập, ta có $\mathrm{\,C}_4^1\cdot\mathrm{C}_6^2$ đề.
+		\end{enumerate}
+		
+		Vậy tổng số đề có thể tạo là: $\mathrm{\,C}_4^2\cdot\mathrm{C}_6^1+\mathrm{\,C}_4^1\cdot\mathrm{C}_6^2 =96$ đề.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 96}
+\end{vd} \dongcham{9}
+
+
+\begin{vd}
+	Từ các số 1, 2, 3, 4, 5, 6 có thể lập ra được bao nhiêu số tự nhiên gồm 4 chữ số khác nhau sao cho số cần lập có đúng 2 chữ số chẵn và 2 chữ số lẻ?
+	\loigiai{}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 216}
+\end{vd} \dongcham{9}
+
+\begin{vd}
+	Thầy giáo Dương có $30$ câu hỏi khác nhau gồm $5$ câu khó, $10$ câu trung bình và $15$ câu dễ. Từ $30$ câu hỏi đó có thể lập được bao nhiêu đề kiểm tra, mỗi đề gồm $5$ câu hỏi khác nhau, sao cho trong mỗi đề nhất thiết phải có đủ $3$ loại câu hỏi và số câu dễ không ít hơn $2$.
+	\loigiai{Ta có các trường hợp:
+		\begin{itemize}
+			\item Trường hợp 1. Một đề có $2$ câu dễ, $1$ câu khó và $2$ câu trung bình $\Rightarrow$ số đề tạo được là: $\mathrm{C}_{2}^{15}\cdot \mathrm{C}_{1}^{5}\cdot \mathrm{C}_{2}^{10} = 23625$.
+			\item Trường hợp 2. Một đề có $2$ câu dễ, $2$ câu khó và $1$ câu trung bình $\Rightarrow$ số đề tạo được là: $\mathrm{C}_{2}^{15}\cdot \mathrm{C}_{2}^{5}\cdot \mathrm{C}_{1}^{10} = 10500$.
+			\item Trường hợp 3. Một đề có $3$ câu dễ, $1$ câu khó và $1$ câu trung bình $\Rightarrow$ số đề tạo được là: $\mathrm{C}_{3}^{15}\cdot \mathrm{C}_{1}^{5}\cdot \mathrm{C}_{1}^{10} = 22750$.
+		\end{itemize}
+		$\Rightarrow$ số đề có thể tạo được là: $23625 + 10500 + 22750 = 56875$.
+	}
+\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 56875.}
+\end{vd} \dongcham{9}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}
+	Một hộp đựng $5$ viên bi màu xanh, $7$ viên bi màu vàng. Có bao nhiêu cách lấy ra $6$ viên bi bất kỳ?
+	\loigiai{
+		Số cách lấy $6$ viên bi bất kỳ (không phân biệt màu) trong $12$\\
+		viên bi là một tổ hợp chập $6$ của $12$ (viên bi).\\
+		Vậy ta có $\mathrm{C}_{12}^6=924$ cách lấy.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 924.}
+\end{baitap} \cham{8}
+
+
+\begin{baitap}
+	Trong mặt phẳng cho tập hợp gồm $6$ điểm phân biệt. Có bao nhiêu véc-tơ khác $\vec{0}$ có điểm đầu và điểm cuối trong tập hợp này?
+	\loigiai{
+		Vì một cặp sắp thứ tự bao gồm $2$ điểm $A,B$ cho ta một véc-tơ khác $\vec{0},$ vậy có $\mathrm{A}_6^2=6.5=30$ véc-tơ.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 30.}
+\end{baitap} \cham{5}
+
+\begin{baitap}
+	Một câu lạc bộ có $25$ thành viên. Tìm số cách chọn một ban quản lí gồm $1$ chủ tịch, $1$ phó chủ tịch và $1$ thư ký.\\
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 13800}
+	\loigiai{
+		Mỗi cách chọn ban quản lí là một chỉnh hợp của $3$ phần tử. Suy ra số cách chọn là $\mathrm{A}^{3}_{25} = 13800$.		
+	}
+\end{baitap} \cham{6}
+
+
+\begin{baitap}
+	Có $10$ cuốn sách khác nhau và $7$ cây bút máy khác nhau. Cần chọn ra $3$ cuốn sách và $3$ cây bút máy để làm quà tặng cho $3$ học sinh, mỗi em $1$ cuốn sách và $1$ cây bút máy. Hỏi có mấy cách chọn?
+	\loigiai{
+		Chọn $3$ từ $10$ cuốn sách khác nhau, có $\mathrm{A}_{10}^3$ cách\\
+		Chọn $3$ từ trong $7$ cây bút khác nhau, có $\mathrm{A}_7^3$ cách.\\
+		Vậy có $\mathrm{A}_{10}^3.\mathrm{A}_7^3=151200$ cách.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 151200.}
+\end{baitap} \cham{7}
+
+
+\begin{baitap}%[1D2K2]
+	Một tổ có 5 học sinh nam và 5 học sinh nữ.
+	\begin{tasks}(1)
+		\task Có bao nhiêu cách xếp 10 học sinh đó thành một hàng dọc.
+		\task Có bao nhiêu cách xếp 10 học sinh đó thành một hàng dọc sao cho các học sinh cùng giới tính không đứng kề nhau.
+	\end{tasks}
+	\loigiai{ 
+		\begin{itemize}
+			\item[a.] Xếp 10 học sinh thành một hàng dọc có $\mathrm{P}_{10}=10!=3628800$ cách xếp.
+			\item[b.] Đánh số thứ tự từ 1 đến 10. Khi đó nếu học sinh nam đứng ở các vị trí $1, 3, 5, 7, 9$ thì học sinh nữ đứng ở các vị trí $2, 4, 6, 8, 10$ và ngược lại.\\
+			Xếp 5 học sinh nam vào 5 vị trí có $\mathrm{P}_5=5!$ cách xếp.\\
+			Xếp 5 học sinh nữ vào 5 vị trí có $\mathrm{P}_5=5!$ cách xếp.\\
+			Vậy có $2.5!.5!=28800$ cách xếp mà các học sinh cùng giới tính không đứng cạnh nhau.
+		\end{itemize}
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: a) 3628800 \quad b) 28800 }
+\end{baitap} \cham{11}
+
+\begin{baitap}
+	Từ các chữ số $1,2,3,4,5,6,7,8,9$ có thể lập được bao nhiêu số tự nhiên gồm $5$ chữ số khác nhau?
+	\loigiai{
+		Mỗi số tự nhiên có năm chữ số khác nhau được lập bằng cách lấy năm chữ số khác nhau từ chín số đã cho và xếp chúng theo một thứ tự nhất định.\\
+		Mỗi số như vậy được coi là một chỉnh hợp chập $5$ của $9$.\\
+		Vậy số các số đó là $\mathrm{A}_9^5 = 9.8.7.6.5 = 15120$.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 15120.}
+\end{baitap} \cham{10}
+
+\begin{baitap}%[1D2K2]
+	Cho tập hợp $S=\{0,1,2,3,4,5,6\}$. Có bao nhiêu số tự nhiên có $7$ chữ số phân biệt lấy từ tập $A$ và 3 chữ số $ 1,2,3 $ luôn đứng cạnh nhau?\\
+	\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 576.}
+	\loigiai{Gọi $x=\overline{a_1a_2\ldots a_7}$ là số cần tìm, $a_i\in S,\,\forall i=\overline{1,7}$.
+		\\\textbf{Trường hợp 1.}
+		\begin{itemize}
+			\item Chọn $a_1,a_2,a_3\in\{1,2,3\}$ để đảm bảo $a_1\neq0$: có $3!$ cách chọn.
+			\item Từ $a_4\to a_7$ có số cách chọn là số hoán vị của $4$ phần tử còn lại: $\mathrm{P}_4=4!$ cách chọn.\\Do vậy, ta được $3!\cdot4!=144$ số.
+		\end{itemize}
+		\textbf{Trường hợp 2.}
+		\begin{itemize}
+			\item Các số $1,2,3$ nằm ở ba trong bốn vị trí từ $a_4\to a_7$: có $4\cdot3\cdot2$ cách sắp xếp.
+			\item Chọn $a_1\in\{4,5,6\}$: có $3$ cách chọn.
+			\item Còn $3$ vị trí còn lại có số cách chọn là số hoán vị của $3$ phần tử còn lại từ $A$: $\mathrm{P}_3=3!$ cách chọn.\\Do vậy, ta được $4\cdot3\cdot2\cdot3\cdot3!=432$ số.
+		\end{itemize}  
+		Tổng cộng có $576$ số.
+	}
+\end{baitap} \cham{10}
+
+
+
+\begin{baitap}
+	Cho tập $A=\{1;2;3;4;5;6;7;8;9\}.$
+	\begin{tasks}(1)
+		\task Từ tập $A$ có thể lập được bao nhiêu số có $6$ chữ số khác nhau và mỗi số chứa chữ số $5$?
+		\task Trong các số trên, có bao nhiêu số không chia hết cho $5$?
+	\end{tasks}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: a) $40320$ số \quad b)  $33600$ số.}
+	\loigiai{
+		\begin{tasks}(1)
+			\task Một số gồm $6$ chữ số phân biệt hình thành từ $A$ có dạng $\overline{a_1a_2a_3a_4a_5a_6},$ với $a_i\in A, i=\overline{1,6}$ và $a_i\neq a_j, i\neq j.$ \\
+			Để số tìm được phải có mặt chữ số $5,$ ta thấy:
+			$5\in \{a_1;a_2;a_3;a_4;a_5;a_6\}$ có $6$ cách chọn.\\
+			Tiếp theo, mỗi bộ số dành cho năm vị trí còn lại ứng với một chỉnh hợp chập $5$ của các phần tử của tập $A\setminus \{5\}$ có $8$ phần tử. Suy ra có $\mathrm{A}_8^5$ cách chọn.\\
+			Như vậy ta được $6.\mathrm{A}_8^5=40320$ số.
+			\task Trong các số trên, những số chia hết cho $5$ có $a_6=5,$ tức là có $\mathrm{A}_8^5$ số.\\
+			Vậy số các số tìm thấy không chia hết cho $5$ là $6\mathrm{A}_8^5-\mathrm{A}_8^5=5\mathrm{A}_8^5=33600$ số 
+		\end{tasks}
+	}
+\end{baitap} \cham{12}
+\begin{baitap}
+	Có $100$ người mua $100$ vé số, có $4$ giải (nhất, nhì, ba, tư).
+	\begin{tasks}(1)
+		\task Có bao nhiêu kết quả nếu người giữ vé số $47$ đạt giải nhất?
+		\task Có bao nhiêu kết quả biết rằng người giữ vé số $47$ trúng $1$ trong $4$ giải
+	\end{tasks}
+	\loigiai{
+		\begin{tasks}(1)
+			\task Người giữ vé số $47$ đạt giải nhất (có $1$ cách chọn giải cho người này), còn $3$ giải nằm trong $99$ người còn lại. Suy ra có $1.\mathrm{A}_{99}^3=99.98.97$ kết quả.
+			\task Người giữ vé $47$ đạt giải nhất: có $1.\mathrm{A}_{99}^3$ kết quả.\\
+			Người giữ vé $47$ đạt giải nhì: có $1.\mathrm{A}_{99}^3$kết quả.\\
+			Người giữ vé $47$ đạt giải ba: có $1.\mathrm{A}_{99}^3$ kết quả.\\
+			Người giữ vé $47$ đạt giải tư: có $1.\mathrm{A}_{99}^3$ kết quả.\\
+			Vậy có $4.\mathrm{A}_{99}^3=3764376$ kết quả.
+		\end{tasks}
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: a) 941094 \quad b) 3764376.}
+\end{baitap} \cham{9}
+
+\begin{baitap}
+	Một tổ gồm $8$ học sinh nam và $6$ học sinh nữ. Cần lấy một nhóm $5$ người trong đó có $2$ học sinh nữ. Hỏi có bao nhiêu cách chọn?
+	\loigiai{
+		Việc lấy một nhóm $5$ người trong đó có $2$ nữ và $3$ nam được thực hiện theo hai công đoạn:\\
+		Chọn $2$ nữ trong $6$ nữ có $\mathrm{C}_6^2$ cách.\\
+		Chọn $3$ nữ trong $8$ nữ có $\mathrm{C}_8^3$ cách.\\
+		Theo quy tắc nhân ta có $\mathrm{C}_6^2\times\mathrm{C}_8^3=840$ cách chọn.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 840.}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Một tổ sinh viên có 20 em, trong đó có 8 em chỉ biết tiếng Anh, 7 em chỉ biết tiếng Pháp \& 5 em chỉ biết tiếng Đức. Cần lập một nhóm đi thực tế gồm 3 em biết tiếng Anh, 4 em biết tiếng Pháp, 2 em biết tiếng Đức. Hỏi có bao nhiêu cách lập nhóm đi thực tế từ tổ sinh viên đó?
+	\loigiai{
+		Việc lập nhóm đi thực tế từ tổ sinh viên được thực hiện qua ba công đoạn.\\
+		Chọn $3$ sinh viên biết tiếng Anh từ $8$ sinh viên có $\mathrm{C}_8^3$ cách.\\
+		Chọn $4$ sinh viên biết tiếng Anh từ $7$ sinh viên có $\mathrm{C}_7^4$ cách.\\
+		Chọn $2$ sinh viên biết tiếng Anh từ $5$ sinh viên có $\mathrm{C}_5^2$ cách.\\
+		Theo quy tắc nhân ta có $\mathrm{C}_8^3\times\mathrm{C}_7^4\times\mathrm{C}_5^2=19600$ cách chọn.
+		
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 19600.}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Trên một mặt phẳng có $10$ đường thẳng song song cắt $9$ đường thẳng song song khác. Hỏi có bao nhiêu hình bình hành được tạo thành?
+	\loigiai{Mỗi hình bình hành được tạo nên nhờ giao của hai đường thẳng của họ thứ nhất (gồm $10$ đường thẳng) và hai đường thẳng của họ thứ hai (gồm $9$ đường thẳng).\\Do đó ta cần tính số cách chọn ra $4$ đường thẳng gồm $2$ đường thẳng thuộc họ thứ nhất và $2$ đường thẳng thuộc họ thứ hai.\\Chọn $2$ đường thẳng từ $10$ đường thẳng thuộc họ thứ nhất có $\mathrm{C}_{10}^2$ cách.\\Chọn $2$ đường thẳng từ $9$ đường thẳng thuộc họ thứ nhất có $\mathrm{C}_9^2$ cách.\\ Theo quy tắc nhân ta được $\mathrm{C}_{10}^2\times\mathrm{C}_9^2=1620$ hình bình hành.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 1620.}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Trong một lớp học có $20$ học sinh, trong đó có $2$ cán bộ lớp. Hỏi có bao nhiêu cách cử $3$ học sinh đi dự Đại hội Đoàn trường sao cho trong $3$ học sinh đó có ít nhất một cán bộ lớp.
+	\loigiai{
+		Số cách cử ra $3$ học sinh tùy ý là $\mathrm{C}_{20}^3$.\\
+		Số cách cử ra $3$ học sinh trong đó không có ai là cán bộ lớp là $\mathrm{C}_{18}^3$.\\
+		Do đó số cách cử $3$ học sinh trong đó có ít nhất một cán bộ lớp là $\mathrm{C}_{20}^3-\mathrm{C}_{18}^3=324$ cách.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 324.}
+\end{baitap} \cham{7}
+
+\begin{baitap}
+	Trong một lớp học có $50$ học sinh, trong đó có $4$ cặp anh em sinh đôi. Cần chọn một nhóm $3$ học sinh tham gia đội diễn văn nghệ của trường sao cho trong nhóm không có cặp anh em sinh đôi nào. Hỏi có bao nhiêu cách chọn?
+	\loigiai{
+		Số cách cử ra $3$ học sinh tùy ý là $\mathrm{C}_{50}^3$.\\
+		Ta tính số cách cử ra $3$ học sinh mà trong đó có một cặp anh em sinh đôi:\\
+		+ Có $4$ cách chọn một cặp anh em sinh đôi.\\
+		+ Với mỗi cách chọn một cặp anh em sinh đôi có $48$ cách chọn thêm một học sinh nữa.\\
+		Do đó có $4\times 48=192$ cách cử ra $3$ học sinh mà trong đó có đúng một cặp anh em sinh đôi.\\
+		Vậy số cách cử ra $3$ học sinh mà trong nhóm không có cặp anh em sinh đôi nào là $\mathrm{C}_{50}^3-192=19408$ cách.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 19408.}
+\end{baitap} \cham{7}
+
+\begin{baitap}%[TT Sở Ninh Bình 2018]%[TranTony, 12EX-11]%[1D2G2-1]
+	Cho hai đường thẳng $d_1$ và $d_2$ song song với nhau. Trên $d_1$ có $10$ điểm phân biệt, trên $d_2$ có $n$ điểm phân biệt ($n\geq 2$). Biết rằng có $1725$ tam giác có các đỉnh là ba trong số các điểm thuộc $d_1$ và $d_2$ nói trên. Tìm $n$.
+	\loigiai{
+		Số cách chọn ba điểm trong $n+10$ điểm đã cho là $\mathrm{C}_{n+10}^3$.\\
+		Số cách chọn ba điểm trong $10$ trên $d_1$ là $\mathrm{C}_{10}^3$.\\
+		Số cách chọn ba điểm trong $n$ trên $d_2$ là $\mathrm{C}_n^3$.\\
+		Số tam giác được tạo thành là $\mathrm{C}_{n+10}^3-\mathrm{C}_{10}^3-\mathrm{C}_n^3$.\\
+		Từ giả thiết ta có phương trình $\mathrm{C}_{n+10}^3-\mathrm{C}_{10}^3-\mathrm{C}_n^3=1725.$\hfill $(1)$\\
+		$(1)\Leftrightarrow\dfrac{(n+10)(n+9)(n+8)}{6}-120-\dfrac{n(n-1)(n-2)}{6}=1725\Leftrightarrow\hoac{&n=15\\&n=-23.}$\\
+		Vì $n\geq 2$ nên $n=15$.
+	}
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: $n=15$.}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Từ các chữ số $1, 2, 3, 4$ có thể lập được bao nhiêu số có 6 chữ số, trong đó chữ số 1 xuất hiện 3 lần, các chữ số còn lại xuất hiện đúng một lần.
+	\hspace*{3cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 120.}
+	\loigiai{ 
+		Xếp các chữ số $1, 1, 1, 2, 3, 4$ thành một hàng có $\dfrac{6!}{3!}=120$ cách xếp (do đổi chỗ 3 chữ số 1 thì hàng không thay đổi).\\
+		Vậy có 120 số thỏa mãn yêu cầu.
+	}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Từ các chữ số $0, 1, 2, 3, 4$ có thể lập được bao nhiêu số gồm 7 chữ số, trong đó chữ số 2 có mặt 3 lần, các chữ số còn lại có mặt đúng một lần.
+	\hspace*{3cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 1440.}
+	\loigiai{ 
+		Xếp các chữ số $0, 1, 2, 2, 2, 3, 4$ thành một hàng có $\dfrac{7!}{3!}$ cách xếp.\\
+		Xếp  các chữ số $0, 1, 2, 2, 2, 3, 4$ thành một hàng sao cho chữ số $0$ đứng đầu có $\dfrac{6!}{3!}$ cách xếp.\\
+		Vậy có $\dfrac{7!}{3!}-\dfrac{6!}{3!}=1440$ số thỏa mãn yêu cầu.
+	}
+\end{baitap} \cham{8}
+
+\begin{baitap}
+	Bạn Việt chọn mật khẩu cho Email của mình gồm $8$ kí tự đôi một khác nhau, trong đó có $3$ kí tự đầu tiên là $3$ chữ cái trong bảng gồm $26$ chữ in thường và $5$ kí tự tiếp theo là chữ số. Bạn Việt có bao nhiêu cách tạo ra mật khẩu?\\
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 471744000.}
+	\loigiai{Mật khẩu Email của bạn Việt có dạng ***xxxxx, trong đó các vị trí dấu * là các chữ cái, các vị trí dấu x là chữ số.\\
+		Mỗi một cách xếp cho các vị trí dấu * là một chỉnh hợp chập $3$ của $26$ chữ in thường, do đó có $\mathrm{A}_{26}^3$.\\
+		Mỗi một cách xếp cho các vị trí dấu x là một chỉnh hợp chập $5$ của $10$ chữ số, do đó có $\mathrm{A}_{10}^5$.\\
+		Từ đó suy ra bạn Việt có $S=\mathrm{A}_{26}^3\cdot\mathrm{A}_{10}^5=471744000$ cách tạo mật khẩu.}
+\end{baitap} \cham{10}
+
+\begin{baitap}
+	Mỗi máy tính tham gia vào mạng phải có một địa chỉ duy nhất, gọi là địa chỉ IP, nhằm định danh máy tính đó trên Internet. Xét tập hợp $A$ gồm các địa chỉ IP có dạng $192.168.abc.deg$, trong đó $a$, $b$, $c$ là các chữ số phân biệt được chọn ra từ các chữ số $0$, $1$, $2$, $3$, $4$ còn $d$, $e$, $g$ là các chữ số phân biệt được chọn ra từ các chữ số $5$, $6$, $7$, $8$, $9$. Hỏi tập hợp $A$ có bao nhiêu phần tử?\\
+	\hspace*{8cm} {\sf\fontsize{10pt}{1pt}\color{blue}\selectfont Đáp số: 3600.}
+	\loigiai{Mỗi cách chọn các chữ số cho các vị trí $abc$ là một chỉnh hợp chập $3$ của $5$ chữ số $0$, $1$, $2$, $3$, $4$, do đó có $\mathrm{A}_5^3$ cách.\\
+		Mỗi cách chọn các chữ số cho các vị trí $deg$ là một chỉnh hợp chập $3$ của $5$ chữ số $5$, $6$, $7$, $8$, $9$, do đó có $\mathrm{A}_5^3$ cách.\\
+		Vậy có tất cả $S=\mathrm{A}_5^3\cdot\mathrm{A}_5^3=3600$ cách đặt IP cho máy tính.}
+\end{baitap} \cham{8}

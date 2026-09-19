@@ -1,0 +1,226 @@
+%\setcounter{section}{11}
+\section{SỐ GẦN ĐÚNG VÀ SAI SỐ}
+\subsection{TÓM TẮT LÝ THUYẾT}
+\subsubsection{Số gần đúng}
+	Trong nhiều trường hợp, ta không biết hoặc khó biết số đúng (kí hiệu $\overline{a}$) mà chỉ tìm được giá trị khác xấp xỉ nó. Giá trị này được gọi là \indamm{số gần đúng}, kí hiệu là $a$.
+\begin{tcolorbox}[colframe=orange,colback=white,boxrule=0.2mm]
+	\indam{Ví dụ:} Cho hình vuông $ABCD$ có độ dài cạnh bằng 3. Khi đó, 
+	độ dài đường chéo hình vuông được tính theo công thức là \fbox{$\text{cạnh} \cdot \sqrt{2}=3\sqrt{2}$}.  
+	\begin{itemize}
+		\item [$\bullet$] Kết quả $3\sqrt{2}$ là số đúng khi tính đường chéo hình vuông.
+		\item [$\bullet$] Các kết quả \quad $4,2$; \quad $4,24$; \quad $4,23$; \quad$\cdots$ là các số gần đúng.
+	\end{itemize}
+\end{tcolorbox}
+\subsubsection{Sai số tuyệt đối và sai số tương đối}
+\begin{itemize}
+	\item [\iconMT] \indam{Sai số tuyệt đối:} Cho $\overline{a}$ là số đúng và $a$ là số gần đúng của $\overline{a}$. Giá trị $\Delta_a=\big|a-\overline{a}\big|$ phản ánh mức độ sai lêch giữa số đúng $\overline{a}$ và số gần đúng $a$, được gọi là \indamm{sai số tuyệt đối} của số gần đúng $a$.
+	\begin{boxkn}
+		\begin{itemize}
+			\item Trên thực tế, nhiều khi ta không biết $\overline{a}$ nên cũng không biết được $\Delta_a$. Tuy nhiên ta có thể đánh giá được $\Delta_a \le d$, với $d$ là một số dương nào đó.
+			\item  Nếu $\Delta_a \le d$ thì $\big|a-\overline{a}\big|\le d \Leftrightarrow a-d \le \overline{a} \le a+d$. Khi đó, ta có thể viết $\overline{a}=a \pm d$ và hiểu là số đúng $\overline{a}$ nằm trong đoạn $\left[a-d;a+d \right]$. 
+			\item Với $d$ càng nhỏ thì $a$ càng gần $\overline{a}$ nên \indamm{ $d$ gọi là độ chính xác của số gần đúng}.
+		\end{itemize}
+	\end{boxkn}
+	\item [\iconMT] \indam{Sai số tương đối:}  Sai số tương đối của số gần đúng $a$, kí hiệu là $\delta_{a}$ và được tính bởi công thức $\delta_{a}=\dfrac{\Delta_a}{|a|}$.
+	\begin{boxkn}
+		\begin{itemize}
+			\item  Nếu $\overline{a}=a \pm d$ thì $\Delta_a \le d$, suy ra $\delta_{a}=\dfrac{\Delta_a}{|a|} \le \dfrac{d}{|a|}$. Nếu $\dfrac{d}{|a|}$ càng nhỏ thì chất lượng của phép đo càng cao.
+			\item Người ta thường viết sai số tương đối dưới dạng phần trăm.
+		\end{itemize}
+	\end{boxkn}
+\end{itemize}
+\subsubsection{Quy tròn số gần đúng}
+Số thu được sau khi thực hiện làm tròn số được gọi là \indamm{số quy tròn}. Số quy tròn là một số gần đúng của số ban đầu.
+\begin{itemize}
+	\item [\iconMT] \indam{Quy tắc quy tròn số:}
+	\begin{itemize}
+		\item [\ding{172}] Đối với chữ số hàng làm tròn:
+		\begin{boxkn}
+			\begin{itemize}
+				\item Giữ nguyên nếu chữ số ngay bên phải nó nhỏ hơn $5$;
+				\item Tăng $1$ đơn vị nếu chữ số ngay bên phải nó lớn hơn hoặc bằng $5$.
+			\end{itemize}
+		\end{boxkn}
+		\item [\ding{173}] Đối với chữ số sau hàng làm tròn:
+		\begin{boxkn}
+			\begin{itemize}
+				\item Bỏ đi nếu ở phần thập phân;
+				\item Thay bởi các chữ số $0$ nếu ở phần số nguyên.
+			\end{itemize}
+		\end{boxkn}
+	\end{itemize}
+	\item [\iconMT] \indam{Nhận xét:}
+	\begin{itemize}
+		\item[\ding{172}]  Khi thay số đúng bởi số quy tròn đến một hàng nào đó thì sai số tuyệt đối của số quy tròn không vượt quá nửa đơn vị của hàng làm tròn.
+		\item[\ding{173}] Khi quy tròn số đúng $\overline{a}$ đến một hàng nào đó thì ta nói số gần đúng $a$ nhận được là chính xác đến hàng đó. Ví dụ, số gần đúng của $\pi$ chính xác đến hàng phần trăm là $3,14$.
+		\item[\ding{174}] Cho số gần đúng $a$ với độ chính xác $d$. Khi được yêu cầu làm tròn số $a$ mà không nói rõ làm tròn đến hàng nào thì ta làm tròn số $a$ đến hàng thấp nhất mà $d$ nhỏ hơn $1$ đơn vị của hàng đó.
+	\end{itemize}
+\end{itemize}
+\subsection{RÈN LUYỆN KĨ NĂNG GIẢI TOÁN}
+
+\begin{dang}{Sai số tuyệt đối và sai số tương đối}
+	Cho $\overline{a}$ là số đúng và $a$ là số gần đúng của $\overline{a}$. 
+	\begin{listEX}[1]
+		\item [\ding{172}] Sai số tuyệt đối được tính theo công thức: $\Delta_a=\big|a-\overline{a}\big|$. 
+		\item [\ding{173}] Sai số tương đối được tính theo công thức: $\delta_{a}=\dfrac{\Delta_a}{|a|}$.
+		\item [\ding{173}] Nếu  $\overline{a}=a \pm d$ thì 
+		\begin{itemize}
+			\item [$\bullet$] Số đúng $\overline{a}$ nằm trong đoạn $\left[a-d;a+d\right]$.
+			\item [$\bullet$] Đánh giá sai số tương đối $\delta_{a} \le \dfrac{d}{|a|}$.
+		\end{itemize} 
+	\end{listEX}
+	
+\end{dang}
+
+\begin{vd}%[0D1Y5-2]
+	Một bao gạo ghi thông tin khối lượng là $ 5\pm 0{,}2 $ kg.
+	\begin{enumerate}
+		\item Xác định khối lượng đúng, khối lượng gần đúng và độ chính xác của bao gạo.
+		\item Khối lượng thực của bao gạo nằm trong đoạn nào?
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Không xác định được khối lượng đúng của bao gạo nhưng ta xem bao gạo có khối lượng là $ 5 $ kg. Do đó $ 5 $ là khối lượng gần đúng của bao gạo. Độ chính xác là $ d=0{,}2 $ kg.
+			\item Khối lượng thực của bao gạo nằm trong đoạn $ [5-0{,}2;5+0{,}2]=[4{,}8;5{,}2] $.
+		\end{enumerate}
+		
+	}
+\end{vd} \dongcham{3}
+
+\begin{vd}
+	Giả sử khối lượng đúng của một hộp kẹo là $0{,}85$ kg. Bình và An cân hộp kẹo này và ghi nhận kết quả lần lượt là $0{,}8$ kg và $1$ kg.
+	\begin{enumerate}
+		\item Tìm sai số tuyệt đối của kết quả cân của mỗi bạn.
+		\item Kết quả cân của bạn nào chính xác hơn? Vì sao?
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Sai số tuyệt đối của kết quả cân của bạn Bình là $0{,}85-0{,}8=0{,}05$ kg.\\
+			Sai số tuyệt đối của kết quả cân của bạn An là $1-0{,}85=0{,}15$ kg.
+			\item Vì sai số tuyệt đối của bạn Bình nhỏ hơn sai số của bạn An nên kết quả cân của bạn Bình chính xác hơn.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{7}
+
+\begin{vd}%[0D1B5-1]%
+	Cho $\overline{a}=\sqrt[19]{19}-\sqrt[23]{23}$. Số nào trong ba số sau : $ \dfrac{1}{50} $, $ \dfrac{7}{33} $ và $ \dfrac{8}{37} $ xấp xỉ tốt nhất giá trị của  $\overline{a}$.
+	\loigiai
+	{
+		Ta có phân số $ \dfrac{1}{50} $ có sai số tuyệt đối $ \Delta_a=\left|\sqrt[19]{19}-\sqrt[23]{23}-\dfrac{1}{50}\right| =0{,}0016 $.\\
+		và phân số $ \dfrac{7}{33} $ có sai số tuyệt đối $ \Delta_a=\left|\sqrt[19]{19}-\sqrt[23]{23}-\dfrac{7}{33}\right| =0{,}1906 $.\\
+		và phân số $ \dfrac{8}{37} $ có sai số tuyệt đối $ \Delta_a=\left|\sqrt[19]{19}-\sqrt[23]{23}-\dfrac{8}{37}\right| =0{,}1946 $.\\
+		Vậy phân số $ \dfrac{1}{50} $ xấp xỉ tốt nhất giá trị của $\overline{a}$.
+	}
+\end{vd} \dongcham{10}
+
+\begin{vd}
+	Kết quả đo chiều dài của một cây cầu được ghi là $152m\pm 0,2m$ . Tìm sai số tương đối của phép đo chiều dài cây cầu.
+\loigiai{
+		Sai số tương đối $\delta_a\le\dfrac{0,2}{152}=0,001315789\approx 0,1316\% $}
+\end{vd} \dongcham{6}
+
+\begin{vd}
+	Hãy xác định sai số tuyệt đối của số $ a=123456$ biết sai số tương đối $\delta_a=0,2\% $.
+	\loigiai{Ta có $\delta_a=\dfrac{\Delta_a}{\left| a\right|}\Rightarrow{\Delta_a}=\delta_a\left| a\right|=146,912$.}
+\end{vd} \dongcham{6}
+
+
+
+\begin{dang}{Quy tròn số gần đúng}
+	
+\end{dang}
+
+\begin{vd}%[0D1Y5-2]
+	Biết $ \sqrt{7}=2{,}6457513\ldots $
+	\begin{enumerate}
+		\item Làm tròn kết quả đến phần mười và ước lượng sai số tuyệt đối.
+		\item Làm tròn kết quả đến phần nghìn và ước lượng sai số tuyệt đối.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có $ \sqrt{7}\approx 2{,}6 $.\\
+			Sai số tuyệt đối là $ \Delta_{\sqrt{7}}=\vert \sqrt{7}-2{,}6\vert < \vert 2{,}6457513-2{,}6\vert=0{,}0457513$.
+			\item Ta có $ \sqrt{7}\approx 2{,}646 $.\\
+			Sai số tuyệt đối là $ \Delta_{\sqrt{7}}=\vert \sqrt{7}-2{,}646\vert < \vert 2{,}6457513-2{,}646\vert=0{,}0002487$.
+		\end{enumerate}	
+	}
+\end{vd} \dongcham{6}
+
+\begin{vd}%[0D1B5-1]
+	Cho biết $\sqrt{3}=1{,}7320508\ldots$. Hãy quy tròn $ \sqrt{3} $ đến hàng phần trăm và ước lượng sai số tương đối.
+	
+	\loigiai{
+		Số quy tròn là $  1{,}73  $.
+		Sai số tuyệt đối là $ \Delta_{\sqrt{3}}=\vert \sqrt{3}-1{,}73\vert < \vert 1{,}7320508-1{,}73\vert=0{,}0020508$.\\
+		Sai số tương đối là $ \delta_{\sqrt{3}}=\dfrac{\Delta_{\sqrt{3}}}{1{,}73}=0{,}0011854335526$ .		
+	}
+\end{vd} \dongcham{4}
+
+\begin{vd}%[0D1B5-2]
+	Hãy viết số quy tròn của số a với độ chính xác $d$ được cho sau đây:
+	\begin{tasks}(2)
+		\task $\overline{a}=17658\pm 16$.
+		\task $\overline{a}=15{,}318\pm 0{,}056$.
+	\end{tasks}
+	\loigiai{ 
+		\begin{enumerate}[a)]
+			\item Ta có $10<16<100$ nên hàng cao nhất mà $d$ nhỏ hơn một đơn vị của hàng đó là hàng trăm. Do đó ta phải quy tròn số 17638 đến hàng trăm. Vậy số quy tròn là 17700 (hay viết $\overline{a}\approx 17700$ ).
+			\item Ta có $0{,}01<0{,}056<0{,}1$ nên hàng cao nhất mà d nhỏ hơn một đơn vị của hàng đó là hàng phần chục. Do đó phải quy tròn số 15,318 đến hàng phần chục. Vậy số quy tròn là 15,3 (hay viết $\overline{a}\approx 15{,}3$ ).
+		\end{enumerate}
+	}
+\end{vd} \dongcham{4}
+
+\begin{vd}%[0D1B5-1]
+	Cho số gần đúng $ a =6547$ với độ chính xác $ d=100 $. Hãy viết số quy tròn của số $ a $ và ước lượng sai số tương đối của số quy tròn đó.
+	\loigiai{
+		Số quy tròn là $  7000  $.
+		Sai số tuyệt đối là $ \Delta_{6547}=\vert 6547-7000\vert =453$.\\
+		Sai số tương đối là $ \delta_{6547}=\dfrac{\Delta_{6547}}{7000}=0{,}935285714$ .			
+	}
+\end{vd} \dongcham{4}
+
+\begin{vd}%[Khanh Lê, dự án 10-EX-3-DCHT]%[0D1Y5-2]%
+	Biết số gần đúng $ a=173{,}4592 $ có sai số tuyệt đối không vượt quá $ 0{,}01 $. Hãy viết số qui tròn của số $ a $.%\dapso{$ 173{,}46 $}
+	\loigiai
+	{
+		Số qui tròn của $ a $ là $ 173{,}46 $.
+	}
+\end{vd} \dongcham{5}
+
+\begin{dang}{Vận dụng, thực tiễn}
+	
+\end{dang}
+
+\begin{vd}
+	Bạn A đo chiều dài của một sân bóng ghi được $250\pm 0,2m$ . Bạn B đo chiều cao của một cột cờ được $15\pm 0,1m$ . Trong hai bạn A và B, bạn nào có phép đo chính xác hơn tính theo sai số tương đối?
+	\loigiai{
+		\begin{itemize}
+			\item [$\bullet$] Phép đo của bạn A có sai số tương đối $\delta_1\le\dfrac{0,2}{250}=0,0008=0,08\% $
+			\item [$\bullet$] Phép đo của bạn B có sai số tương đối $\delta_2\le\dfrac{0,1}{15}=0,0066=0,66\% $
+		\end{itemize}
+		Như vậy phép đo của bạn A có độ chính xác cao hơn.
+	}
+\end{vd} \dongcham{9}
+
+\begin{vd}%[0D1B5-2]
+	Cho tam giác $ABC$ có độ dài ba cạnh đo được như sau $a=12\,\text{cm}\pm 0,2\,\text{cm}$; $b=10,2\,\text{cm}\pm 0,2\,\text{cm}$; $c=8\,\text{cm}\pm 0,1\,\text{cm}$. Tính chu vi $P$ của tam giác và đánh giá sai số tuyệt đối, sai số tương đối của số gần đúng của chu vi qua phép đo.
+	\loigiai{
+		Giả sử $a=12+d_1, b=10,2+d_2, c=8+d_3$.\\
+		Ta có $P=a+b+c+d_1+d_2+d_3=30,2+d_1+d_2+d_3$.\\
+		Theo giả thiết, ta có $-0,2\leqslant d_1\leqslant 0,2 ; -0,2\leqslant d_2\leqslant 0,2 ; -0,1\leqslant d_3\leqslant 0,1$.\\
+		Suy ra $-0,5\leqslant d_1+d_2+d_3\leqslant 0,5$.\\
+		Do đó $P =30,2 cm\pm 0,5 cm$.\\
+		Sai số tuyệt đối $ \Delta_P\leqslant 0,5$. Sai số tương đối $\delta_P\leqslant \dfrac{d}{P}\approx 1,66\%$.
+		
+	}
+\end{vd} \dongcham{9}
+
+
+\begin{vd}%[0D1T5-2]%
+	Hai kỹ thuật viên trắc địa tham gia đo diện tích của một thửa đất hình tam giác. Người thứ nhất đo đáy tam giác với kết quả $ 65{,}58 $ (m) với sai số tương đối là $ 1 $\textperthousand. Người thứ hai đo đường cao tương ứng của tam giác với kết quả $ 47{,}39 $ (m) với sai số tương đối là $ 3 $\textperthousand. Hãy tính diện tích của tam giác và viết kết quả dưới dạng chuẩn.
+	\loigiai
+	{
+		Ta có sai số tuyệt đối của cạnh đáy tam giác $ \Delta =65{,}58\cdot 0{,}001=0{,}06558 $ và sai số tuyệt đối của chiều cao $ \Delta =47{,}39\cdot 0{,}003=0{,}14217 $. Do đó diện $ S $ của tích tam giác $ S=\dfrac{1}{2}\text{cạnh đáy}\cdot \text{chiều cao}=1553{,}9228\pm 6{,}2157 $ m$ ^2 $.\\
+		Diện tích viết dạng chuẩn $ 1553{,}9228\pm 0{,}00005 $.
+	}
+\end{vd} \dongcham{10}

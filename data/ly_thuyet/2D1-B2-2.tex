@@ -1,0 +1,995 @@
+\begin{dang}{Bài toán vận dụng, thực tiễn có liên quan đến max min}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Bài toán chuyển động:}
+		\begin{itemize}
+			\item [$\bullet$] Gọi $s(t)$ là hàm quãng đường; $v(t)$ là hàm vận tốc; $a(t)$ là hàm giá tốc;
+			\item [$\bullet$] Khi đó $s'(t)=v(t)$; $v'(t)=a(t)$.
+		\end{itemize}
+		\item \indam{Bài toán thực tế -- tối ưu:}
+		\begin{itemize}
+			\item[$\bullet$] Biểu diễn dữ kiện cần đạt max -- min qua một hàm $f(t)$. 
+			\item[$\bullet$] Khảo sát hàm $f(t)$ trên miền điều kiện của hàm và suy ra kết quả.
+		\end{itemize}
+	\end{enumerate}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+
+\begin{vd}
+	\immini{
+		Sự phân huỷ của rác thải hữu cơ có trong nước sẽ làm tiêu hao oxygen hoà tan trong nước. Nồng độ oxygen (mg/l) trong một hồ nước sau $t$ giờ $(t \geq 0)$ khi một lượng rác thải hữu cơ bị xả vào hồ được xấp xỉ bởi hàm số (có đồ thị như đường màu đỏ ở hình bên)
+		$$
+		y(t)=5-\frac{15 t}{9 t^2+1}.
+		$$
+	}{
+		\begin{tikzpicture}[>=stealth,x=1cm,y=0.3cm,scale=1.5,font=\footnotesize]
+			\draw[->] (-0.5,0) -- (4,0) node[below] {$t$};
+			\draw[->] (0,-1) -- (0,6) node[left] {$y$};
+			\filldraw (0,0) circle (1pt)node[below left]{$O$};
+			\draw[domain=0:4,samples=200,red] plot (\x,{5-(15*(\x))/(9*(\x)^2+1)});
+			\draw[dashed] (0,5) node [left] {$5$}--(4,5);
+			\foreach \x/\g in {1/-90,2/-90,3/-90}
+			\draw[thin] (\x,2pt)--(\x,-2pt) + (\g:3mm) node {$\x$};
+		\end{tikzpicture}
+	}
+	\noindent
+	Vào các thời điểm nào nồng độ oxygen trong nước cao nhất và thấp nhất?\
+	\loigiai{
+		Xét hàm số $y(t)=5-\dfrac{15t}{9t^2+1}$ xác định và liên tục trên khoảng $[0;+\infty)$ .\\
+		Ta có $y'(t)=\dfrac{135t^2-15}{(9t^2+1)^2}=0\Leftrightarrow t=\dfrac{1}{3}$ (giờ).\\
+		Mặt khác $\lim\limits_{t\to+\infty}y(t)=\lim\limits_{t\to+\infty}\left[5-\dfrac{15t}{9t^2+1}\right]=5$ và $\lim\limits_{t\to 0}y(t)=\lim\limits_{t\to 0}\left[5-\dfrac{15t}{9t^2+1}\right]=5$.\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[espcl=3,lgt=1.5]
+				{$t$/0.6,$y'(t)$/0.6,$y(t)$/1.5}
+				{$0$,$\frac{1}{3}$,$+\infty$}
+				\tkzTabLine{,-,0,+,}
+				\tkzTabVar{+/$5$,-/$\frac{5}{2}$,+/$5$}
+			\end{tikzpicture}
+		\end{center}
+		Từ bảng biến thiên, ta thấy $\min\limits_{[0;+\infty)}y(x)=\dfrac{5}{2}$ và $\mathop{\rm{max}}\limits_{[0;+\infty)}y(x)=5$.
+	}
+\end{vd}
+\dongcham{7}
+
+\begin{vd}%[2D1B3-6]
+	Một chất điểm chuyển động có vận tốc tức thời $v(t)$ phụ thuộc vào thời gian $t$ theo hàm số $v(t)=-t^4+24t^2+500$ (m/s). Trong khoảng thời gian từ $t=0$ (s) đến $t=5$ (s) chất điểm đạt vận tốc lớn nhất tại thời điểm nào?
+	\loigiai{Ta có $v'(t)=-4t^3+48t=-4t(t^2-12)$\\
+		$v'(t)=0\Leftrightarrow \hoac{&t=0\\&t=\pm 2\sqrt{3}}$.\\
+		Bài toán trở thành tìm giá trị lớn nhất của hàm số $v(t)$ trên đoạn $[0;10]$, ta có:\\
+		$v(0)=500$, $v(2\sqrt{3})=664$, $v(5)=475$.\\
+		Vậy vận tốc lớn nhất khi $t=2\sqrt{3}\approx 4$ (s).
+	}
+\end{vd}
+\dongcham{7}
+
+\begin{vd}%[2D1T3-6]
+	\immini{
+		Tính diện tích lớn nhất $S_{\max}$ của một hình chữ nhật nội tiếp trong nửa đường tròn bán kính $R=6$ cm nếu một cạnh của hình chữ nhật nằm dọc theo đường kính của hình tròn mà hình chữ nhật đó nội tiếp.
+	}{
+		\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=1] 
+			\def\R{2}
+			\coordinate[label = below:$O$] (O) at (0,0); 
+			\coordinate (A) at (-\R,0); 
+			\coordinate (B) at ($(A)!2!(O)$);
+			\coordinate[label = above right:$C$] (C) at (50:\R); 
+			\coordinate[label = above left:$D$] (D) at (130:\R);
+			\coordinate[label = below:$A$] (AA) at ($(A)!(D)!(B)$); 
+			\coordinate[label = below:$B$] (BB) at ($(A)!(C)!(B)$); 
+			\draw (A) arc(180:0:\R)--cycle;
+			\draw[fill=cyan!20] (BB)--(C)--(D)--(AA)--cycle;
+			\foreach \x in {AA,O,BB} \fill[black] (\x) circle (1.5pt); 
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\immini{
+			{\bf Cách 1.}\\
+			Gọi chiều dài $AD=2x$ ($0<x<6$)\\
+			$\Rightarrow AB=\sqrt{36-x^{2}}$.\\
+			Diện tích hình chữ nhật là $S=2x\sqrt{36-x^{2}}$.\\
+			Xét $f(x)=x\sqrt{36-x^{2}}$ trên $(0;6)$, ta có $$f'(x)=\sqrt{36-x^{2}}-\dfrac{x^{2}}{\sqrt{36-x^{2}}}=0\Leftrightarrow x=\pm 3\sqrt{2}.$$
+		}{
+			\begin{tikzpicture}
+				\tikzset{on double/.style = {fill = \tkzTabDefaultBackgroundColor}} 
+				\tikzset{h style/.style = {pattern=north west lines}} 
+				\tkzTabInit[lgt=1.2,espcl=2]
+				{$x$ /.6,$f'(x)$ /.6, $f(x)$ /1.5}
+				{$0$,$3\sqrt{2}$,$6$}
+				\tkzTabLine{d,+,0,-,d}
+				\tkzTabVar{-/$0$,+/$36$,-/$0$}
+			\end{tikzpicture}
+		}
+		Bảng biến thiên hàm số $f(x)$ trên $(0,6)$ ở hình bên\\
+		Vậy giá trị lớn nhất của diện tích hình chữ nhật $ABCD$ là $36$ cm$^2$.\\
+		{\bf Cách 2.}\\
+		Đặt $AB=CD=2x$ ($0<x<6$). Khi đó $AD=\sqrt{DO^2-AO^2}=\sqrt{36-x^2}$. Suy ra
+		\begin{align*}
+			S_{ABCD}=2x\sqrt{36-x^2}\le 2\cdot \dfrac{x^2+36-x^2}{2}=36.
+		\end{align*}
+		Dấu bằng xảy ra khi $x=\sqrt{36-x^2}$ hay $x=3\sqrt{2}$.\\
+		Vậy giá trị lớn nhất của diện tích hình chữ nhật $ABCD$ là $36$ cm$^2$.
+	}
+\end{vd}
+\dongcham{7}
+
+\begin{vd} %[Word to LaTeX 3.2]
+	\immini{Chào đón năm mới $2025$, Thành phố trang trí đèn led cho biểu tượng hình chữ $V$ được ghép từ các thanh $AB=4$m, $AC=5$m sao cho tam giác $ABC$ vuông tại $B$(tham khảo hình vẽ)
+		Để tăng hiệu ứng các kỹ sư đã thiết kế một chuỗi led chạy từ $B$ xuống $A$ với vận tốc $4$m/phút và một chuỗi led chạy từ $A$ đến $C$ với vận tốc $10$m/phút. Sau khi đóng nguồn điện thì cả hai chuỗi led đồng thời xuất phát. Hỏi sau bao giây từ thời điểm đóng nguồn điện thì khoảng cách giữa hai điểm sáng đầu tiên của hai chuỗi led là nhỏ nhất?
+	}{
+		\begin{tikzpicture}[scale=0.8, thick,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(0,4) coordinate (B)
+			(3,4) coordinate (C)
+			;
+			\draw (B)--(A)--(C);
+			\foreach \x/\g in {A/-90,B/180,C/0}\draw[fill=black] (\x) circle (.04) +(\g:.3)node{$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		Gọi $x$ (giây, $x>0$) là khoảng thời gian sau khi đóng nguồn điện hai điểm sáng gần nhau nhất.\\
+		Đổi $4$m/phút$=\dfrac{1}{15}$m/s; $10$m/phút$=\dfrac{1}{6}$m/s.\\
+		Giả sử sau $x$(giây), điểm sáng từ $B$ đi được quãng đường $BM=\dfrac{1}{15}x$ và quãng đường $AN=\dfrac{1}{6}x$.\\
+		Áp dụng định lý cosin cho tam giác $AMN$, ta có:\\
+		$MN^2=AM^2+AN^2-2AN\cdot AM\cdot \cos \widehat{MAN}$\\
+		$=\left(4-\dfrac{x}{15}\right)^2+\left(\dfrac{x}{6}\right)^2-2\left(4-\dfrac{x}{15}\right)\cdot \dfrac{x}{6}\cdot \dfrac{4}{5}$\\
+		$=\dfrac{{\left(60-x\right)}^2}{225}+\dfrac{x^2}{36}-\dfrac{8}{30}\dfrac{\left(60-x\right)x}{15}$\\
+		$=\dfrac{3600-120x+x^2}{225}+\dfrac{x^2}{36}-\dfrac{8\cdot \left(-x^2+60x\right)}{450}$\\
+		$=\dfrac{1}{20}x^2-\dfrac{8}{5}x+16$.\\
+		Ta thấy $MN_{\min}\Leftrightarrow MN^2_{\min}$
+		Do đó, đặt $f(x)=\dfrac{1}{20}x^2-\dfrac{8}{5}x+16, x>0$.\\
+		Có $f'(x)=\dfrac{1}{10}x-\dfrac{8}{5}$
+		$f'(x)=0\Leftrightarrow x=16$.
+		
+		Lập bảng biến thiên, suy ra $\underset{\left(0;+\infty\right)}{\min}f(x)=f(16)$.
+		Vậy sau $16$ giây thì khoảng cách giữa hai điểm sáng là nhỏ nhất.
+	}
+\end{vd}
+\dongcham{10}
+\begin{vd}%[2D1K3-6]
+	\immini{Một người muốn xây một cái bể chứa nước, dạng một khối hộp chữ nhật không nắp có thể tích
+		bằng $288$ dm$^3$. Đáy bể là hình chữ nhật có chiều dài gấp đôi chiều rộng, giá thuê nhân công để xây bể là
+		$500000$ đồng/ m$^2$. Nếu người đó biết xác định các kích thước của bể hợp lí thì chi phí thuê nhân công sẽ
+		thấp nhất. Hỏi người đó trả chi phí thấp nhất để thuê nhân công xây dựng bể đó là bao nhiêu?}{\hspace{1cm}
+		\begin{tikzpicture}[scale=0.8, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (A') at ($(A)+(0,2.5)$);
+			\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+			\tkzDrawPolygon(A',B',B,C,D,D')
+			\tkzDrawSegments(B',C' C',D' C,C')
+			\tkzDrawSegments[dashed](A,B A,D A,A')
+	\end{tikzpicture}}
+	\loigiai{
+		Gọi $x(x>0)$ là chiều rộng của đáy bể. Khi đó, chiều dài của bể là $2x$ và chiều cao của bể là $\dfrac{0,144}{x^2}$.\\
+		Diện tích cần xây $2x^2+\dfrac{0,864}{x}$\\
+		Xét $f(x) = 2x^2 + \dfrac{0,864}{x}$, có
+		$f'(x) = 4x - \dfrac{0,864}{x^2}$\\
+		$f'(x) = 0 \Leftrightarrow 4x - \dfrac{0,864}{x^2} \Leftrightarrow x=0,6.$\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=false, lgt=1.2, espcl=3]
+				{$x$ /0.6,$f'(x)$ /0.6,$f(x)$ /1.5} 	
+				{$0$, $0{,}6$, $+\infty$}
+				\tkzTabLine{,-,$0$,+}
+				\tkzTabVar{+/ $+\infty$ ,-/$2{,}16$,+/$+\infty$}
+			\end{tikzpicture}
+		\end{center}
+		Từ bảng biến thiên ta có $\min f(x)= 2,16.$\\
+		Vậy chi phí thấp nhất để thuê nhân công xây bể là $2,16 \times 500000 = 1080000$ đồng.
+	}
+\end{vd}
+\dongcham{13}
+\begin{vd}%[2D1T3-2]
+	\immini{Một nhà sản xuất cần làm ra những chiếc bình có dạng hình trụ với dung tích $1000\mathrm{~cm}^3$. Mặt trên và mặt dưới của bình được làm bằng vật liệu có giá 1,2 nghìn đồng$/\mathrm{cm}^2$, trong khi mặt bên của bình được làm bằng vật liệu có giá $0{,}75$ nghìn đồng$/\mathrm{cm}^2$. Tìm các kích thước của bình để chi phí vật liệu sản xuất mỗi chiếc bình là nhỏ nhất.}{\hspace{1cm}
+		\begin{tikzpicture}[line join=round,line cap=round,line width=.6pt,font=\footnotesize,scale=0.46,>=stealth]
+			\coordinate[label=right:$A$] (A) at (3,0);
+			\coordinate[label=left:$O$] (O) at (0,0);
+			\coordinate[label=right:$A'$] (A1) at ($(A)+(90:6)$);
+			\coordinate[label=left:$O'$] (O1) at ($(O)+(90:6)$);
+			\draw (A) arc (0:-180:3 and 3/4)--($(A1)!2!(O1)$) arc (180:0:3 and 3/4) arc (0:-180:3 and 3/4) (A)--(A1)--(O1);
+			\draw[dashed] (O1)--(O)--(A) arc (0:180:3 and 3/4);
+			\fill (O)circle(1.5pt) (O1)circle(1.5pt) (A)circle(1.5pt) (A1)circle(1.5pt);
+	\end{tikzpicture}}
+	\loigiai{
+		Gọi bán kính đáy của bình là $x$ (cm), ($x > 0$).\\
+		Chiều cao của bình là $\dfrac{1000}{\pi \cdot x^2}$ (cm).\\
+		Chi phí để sản xuất một chiếc bình là 
+		\[
+		T(x)=2\cdot1{,}2\cdot\pi \cdot x^2+0{,}75\cdot \dfrac{2000}{x}=2{,}4\pi \cdot x^2+\dfrac{1500}{x}~\text{(nghìn đồng)}.
+		\]
+		Để chi phí sản xuất mỗi chiếc bình là thấp nhất thì $T(x)$ là nhỏ nhất.\\
+		$T^{\prime}(x)=4,8\pi x-\dfrac{1500}{x^2}, T^{\prime}(x)=0\Leftrightarrow x=\sqrt[3]{\dfrac{625}{2\pi}}$ (thỏa mãn).\\
+		Bảng biến thiên:
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize]
+				\tkzTabInit[nocadre=false, lgt=1.2, espcl=2, deltacl=0.6]
+				{$x$/0.8,$T'(x)$/0.6,$T(x)$/2}
+				{$0$,$\sqrt[3]{\frac{625}{2\pi}}$,$12$};
+				\tkzTabLine{,-,$0$,+,};
+				\tkzTabVar{+/$+\infty$,-/$T\left(\sqrt[3]{\frac{625}{2\pi}}\right)$,+/$T(12)$};
+			\end{tikzpicture}
+		\end{center}
+		Để chi phí sản xuất mỗi chiếc bình là nhỏ nhất thì bán kính đáy của bình là $\sqrt[3]{\dfrac{625}{2\pi}}$ cm và chiều cao của bình là $\dfrac{1000}{\pi \cdot\left(\sqrt[3]{\dfrac{625}{2\pi}}\right)^2}$ cm.
+	}
+\end{vd}
+\dongcham{13}
+
+\begin{vd}
+	Một công ty tiến hành khai thác 12 giếng dầu trong khu vực được chỉ định. Trung bình mỗi giếng dầu chiết xuất được 133 thùng dầu mỗi ngày. Công ty có thể khai thác nhiều hơn 12 giếng dầu nhưng cứ khai thác thêm một giếng thì lượng dầu mỗi giếng chiết xuất được hằng ngày sẽ giảm 4 thùng. Để công ty có thể quyết định số giếng cần thêm cho phù hợp với tài chính, hãy chỉ ra số giếng công ty có thể khai thác thêm để sản lượng dầu chiết xuất đạt lớn nhất.
+	\loigiai{ 
+		Gọi ${x}$ là số giếng dầu khai thác thêm.
+		
+		Sản lượng dầu khi khai thác thêm ${x}$ giếng là: $(12+x)(133-4x)$ (thùng).
+		
+		Xét hàm số $f(x)=(12+x)(133-4x)=- 4 x^{2} + 85 x + 1596$ mô tả sản lượng thùng dầu.
+		
+		Ta có: $f'(x)=0\Leftrightarrow 85 - 8 x=0 \Leftrightarrow x=\frac{85}{8}$.
+		
+		Bảng biến thiên:
+		
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[espcl=2.5,lgt=1.5,nocadre=false]
+				{$x$/1.2,$y'$/0.7,$y$/2.1}
+				{$0$,$\frac{85}{8}$,$+\infty$}
+				\tkzTabLine{,+,0,-}
+				\tkzTabVar{-/,+/$\frac{32761}{16}$,-/}
+			\end{tikzpicture} 
+		\end{center}
+		Ta có: $10<\frac{85}{8}<11$ và $f(10)=2046<f(11)=2047$.
+		
+		Do đó công ty có thể khai thác thêm 11 giếng dầu.
+		
+		Đáp án: 11 
+}\end{vd}
+\dongcham{15}
+\begin{vd}%[Đề Minh Hoạ TNTHPT 2024-2025]%[2PhatTrien-DMH-2024-2025, GV: Hoàng Trọng Tấn]%[id6]
+	(Minh họa -2025). Một doanh nghiệp dự định sản xuất không quá $500$ sản phẩm. Nếu doanh nghiệp sản xuất $x$ sản phẩm ($1 \leq x \leq 500$) thì doanh thu nhận được khi bán hết số sản phẩm đó là $F(x) = x^3 - 1\,999x^2 + 1\,001\,000x + 250\,000$ đồng, trong khi chi phí sản xuất bình quân cho một sản phẩm là $G(x) = x + 1\,000 + \dfrac{250\,000}{x}$ (đồng). Doanh nghiệp cần sản xuất bao nhiêu sản phẩm để lợi nhuận thu được là lớn nhất?
+	\loigiai{
+		Chi phí sản xuất cho $x$ sản phẩm là $xG(x)=x^2+1\,000x+250\,000$ (đồng).
+		\\
+		Lợi nhuận thu được $L(x)=F(x)-xG(x)= x^3-2\,000x^2+1\,000\,000x$ (đồng).
+		\\
+		Đạo hàm $L'(x)=3x^2-4\,000x+1\,000\,000$, giải phương trình $L'(x)=0$
+		\\
+		$3x^2-4\,000x+1\,000\,000=0\Leftrightarrow x=1000$ hoặc $x=\dfrac{2\,000}{6}$.
+		\\
+		Do $1\le x \le 500$ nên $x=\dfrac{2\,000}{6}$.
+		\\
+		Mà $333<x=\dfrac{2\,000}{6}<334$.
+		\\
+		Ta có $L(333)=148\, 148\, 037$, $L(334)=148\,147\,704$, $L(1)=998\,001$ và $L(500)=125\,000\,000$.
+		\\
+		Vậy doanh nghiệp cần sản xuất $333$ sản phẩm để lợi nhuận thu được là lớn nhất.
+	}
+\end{vd}
+\dongcham{15}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D1-B2-d2-1]
+\begin{ex}%[2D1K3]
+	Một chất điểm chuyển động với quãng đường $s(t)$ cho bởi công thức $s(t)=6t^2-t^3$, $t$ (giây) là thời gian. Hỏi trong khoảng thời gian từ $0$ đến $4$ giây, vận tốc tức thời của chất điểm đạt giá trị lớn nhất tại thời điểm  $t$ (giây) bằng bao nhiêu?
+	\choice
+	{$t=3$ s}
+	{$t=4$ s}
+	{\True $t=2$ s}
+	{$t=6$ s}
+	\loigiai{Ta có $v(t)=s'(t)=12t-3t^2$.\\
+		$v'(t)=12-6t$, $v'(t)=0\Leftrightarrow t=2$. \\
+		Lập bảng biến thiên ta thấy $v(t)$ đạt giá trị lớn nhất tại $t=2$.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}
+	Trong $3$ giây đầu tiên, một chất điểm chuyển động theo phương trình $s(t)=-t^3+6t^2+t+5,$ trong đó $t$ tính bằng giây và $s$ tính bằng mét. Chất điểm có vận tốc tức thời lớn nhất bằng bao nhiêu trong $3$ giây đầu tiên đó?
+	\choice
+	{\True 13 m/s}
+	{10 m/s}
+	{9 m/s}
+	{12 m/s}
+	\loigiai{
+		Ta có $v(t)=s'(t)=-3t^2+12t+1.$ Xét hàm số $v(t)=-3t^2+12t+1$ trên đoạn $[0;5]$.\\
+		$v'(t)=-6t+12$; $v'(t)=0 \Leftrightarrow t=2$.\\
+		Tính các giá trị $v(0)=1$, $v\left(2\right)=13$, $v(3)=10$.\\
+		So sánh các giá trị, ta có $\max\limits_{[0;3]}v(t)=13$.
+	}
+\end{ex}
+\cham{6}
+\begin{ex}
+	Trong thí nghiệm y học, người ta cấy $1\,000$ vi khuẩn vào môi trường dinh dưỡng. Bằng thực nghiệm, người ta xác định số lượng vi khuẩn thay đổi theo thời gian bởi công thức \[N(t)=1\,000+\dfrac{100t}{100+t^2}\,\text(con).\]
+	trong đó $t$ là thời gian tính bằng giây. Tính số lượng vi khuẩn lớn nhất kể từ khi thực hiện cấy vi khuẩn vào môi trường dinh dưỡng.
+	\choice
+	{$1\,008$ con}
+	{$1\,012$ con}
+	{\True $1\,005$ con}
+	{$1\,020$ con}
+	\loigiai{
+		Xét hàm số $N(t)=1\,000+\dfrac{100t}{100+t^2}$ ($t>0$).\\
+		Ta có $N'(t)=\dfrac{100\cdot (100+t^2)-100t\cdot 2t}{\left(100+t^2\right)^2}=\dfrac{100\cdot (100-t^2)}{\left(100+t^2\right)^2}$.\\
+		Khi đó, với $t>0$, $N'(t)=0\Leftrightarrow 100-t^2=0\Leftrightarrow t^2=100\Leftrightarrow t=10$.\\
+		Bảng biến thiên của hàm số $N(t)$ như sau
+		\begin{center}
+			\begin{tikzpicture}[>=stealth]
+				\tkzTabInit[nocadre=false,lgt=1.5,espcl=3,deltacl=0.6]{$t$/.6 ,$N'(t)$/.6,$N(t)$/1.5}
+				{$0$ , $10$ , $+\infty$}
+				\tkzTabLine{ ,+ , $0$ , - , }
+				\tkzTabVar{-/$1\,000$ , +/$1\,005$ , -/$1\,000$}
+			\end{tikzpicture}
+		\end{center}
+		Căn cứ vào bảng biến thiên, ta thấy trên khoảng $(0;+\infty)$, hàm số $N(t)$ đạt giá trị lớn nhất bằng $1\,005$ tại $t=10$.\\
+		Vậy số lượng vi khuẩn lớn nhất kể từ khi thực hiện nuôi cấy vi khuẩn vào môi trường dinh dưỡng là $1\,005$ con.
+	}
+\end{ex}
+\cham{7}
+\begin{ex}
+	Tam giác vuông có cạnh huyền bằng $5 \mathrm{~cm}$ có thể có diện tích lớn nhất bằng bao nhiêu?
+	\choice
+	{25 $\text{cm}^2$}
+	{\True $\dfrac{25}{4}\,\text{cm}^2$}
+	{$\dfrac{625}{4}\,\text{cm}^2$}
+	{$125 \text{cm}^2$}
+	\loigiai{Gọi một cạnh góc vuông là $x$ ($0<x<5$) thì cạnh góc vuông còn lại là $\sqrt{25-x^2}$.\\ Như vậy, diện tích tam giác là $S=\dfrac{x\cdot\sqrt{25-x^2}}{2}=\dfrac{1}{2}\sqrt{25x^2-x^4}$.
+		Đặt $f(x)=25x^2-x^4$, với $0<x<5$. 
+		\\Ta có $f'(x)=50x-4x^3$. Khi đó
+		$f'(x)=0 \Leftrightarrow x=\dfrac{5\sqrt{2}}{2}$.\\
+		Vì vậy $\displaystyle\max _{(0;5)} f(x)=f\left( \dfrac{5\sqrt{2}}{2}\right) =\dfrac{625}{4}$.\\
+		Vậy tam giác vuông có cạnh huyền bằng $5 \mathrm{~cm}$ có thể có diện tích lớn nhất là $S_{\max}\dfrac{1}{2}\sqrt{\dfrac{625}{4}}=\dfrac{25}{4}$.}
+\end{ex}
+\cham{7}
+\begin{ex}
+	\immini[thm]{
+		Từ một tấm tôn có hình dạng là nửa hình tròn bán kính $R=3$, người ta muốn cắt ra một hình chữ nhật (hình vẽ bên). Diện tích lớn nhất có thể của tấm tôn hình chữ nhật là
+		\choice
+		{$\dfrac{9}{2}$}
+		{$6\sqrt2$}
+		{\True $9$}
+		{$9\sqrt2$}
+	}
+	{
+		\begin{tikzpicture}[thick,scale=0.57]
+			\draw [-] (-4,0)--(4,0);
+			\draw [-] (-3,0)--(-2.99,2.65)--(2.99,2.65)--(3,0);
+			\draw[smooth,samples=200,variable=\t,domain=0:180] plot({(4)*cos (\t)},{(4)*sin(\t)});
+			\draw (0,0) [fill=black] circle (1pt) node[below]{$O$};
+			\draw (-3,0) [fill=black] circle (1pt) node[below]{$Q$};
+			\draw (3,0) [fill=black] circle (1pt) node[below]{$P$};
+			\draw (-2.99,2.65) [fill=black] circle (1pt) node[left]{$M$};
+			\draw (2.99,2.65) [fill=black] circle (1pt) node[right]{$N$};
+			\draw[pattern=north east lines,pattern color=black!50!] (-3,0)--(-2.99,2.65)--(2.99,2.65)--(3,0);
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Đặt $OQ=x,\ (0<x<3) \Rightarrow MQ=\sqrt{MO^2-OQ^2}=\sqrt{9-x^2}$.\\
+		Ta có  $S_{MNPQ}=PQ\cdot MQ=2x\cdot\sqrt{9-x^2}\le 2\cdot\dfrac{x^2+9-x^2}{2}=9.$\\
+		Dấu $=$ xảy ra khi $x=\dfrac{3\sqrt2}{2}.$
+	}
+\end{ex} \cham{7}
+\begin{ex}%[2D1V3-6]
+	Từ một tấm bìa hình chữ nhật có chiều rộng $30 \mathrm{~cm}$ và chiều dài $80 \mathrm{~cm}$ (Hình a), người ta cắt ở bốn góc bốn hình vuông có cạnh $x(\mathrm{~cm})$ với $5 \leq x \leq 10$ và gấp lại để tạo thành chiếc hộp có dạng hình hộp chữ nhật không nắp như Hình b. Tìm $x$ để thể tích chiếc hộp là lớn nhất (kết quả làm tròn đến hàng phần trăm).
+	\begin{center}
+		\begin{tikzpicture}[line join=round, line cap=round,scale=0.9]
+			\coordinate (A) at (0,3);
+			\coordinate (B) at (5,3);
+			\coordinate (D) at (0,0);
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			\draw(A)--(B)--(C)--(D)--cycle;
+			\draw (0,0) rectangle (1,1) (A) rectangle (1,2) (B) rectangle (4,2) (4,1) rectangle (C);
+			\draw[dashed] (1,1) rectangle (4,2);
+			%	\foreach \i/\g in {A/90,B/90,C/-90,D/-90}{\draw[fill=black](\i) circle (1pt) ($(\i)+(\g:3mm)$) node[scale=1]{$\i$};}
+			\draw (0,.5) node [left] {$x$};
+			\draw (.5,0) node [below] {$x$};
+			\draw (0,2.5) node [left] {$x$};
+			\draw (0.5,3) node [above] {$x$};
+			%%%%%%%%%
+			\draw (4.5,0) node [below] {$x$};
+			\draw (5,0.5) node [right] {$x$};
+			\draw (5,2.5) node [right] {$x$};
+			\draw (4.5,3) node [above] {$x$};
+			%%%%%%%%
+			\draw[<->] (-1,0)--(-1,3) node[above,midway,sloped] {$30$cm};
+			\draw[<->] (0,-1)--(5,-1) node[above,midway] {$80$cm};
+			\path (current bounding box.south) node[below, black]{a)}; %dưới
+		\end{tikzpicture}
+		\hspace*{1cm}
+		\begin{tikzpicture}[scale=0.9, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\bc{3} % cạnh BC
+			\def\ba{1} % cạnh BA
+			\def\h{1.5} % đường cao
+			\def\gocnghieng{90} % góc nghiêng
+			\def\gocB{35} % góc B của đáy
+			\coordinate (B) at (0,0);
+			\coordinate (A) at (\gocB:\ba);
+			\coordinate (C) at (\bc,0);
+			\coordinate (D) at ($(C)-(B)+(A)$);
+			\coordinate (A') at ($(A)+(\gocnghieng:\h)$);
+			\coordinate (B') at ($(B)-(A)+(A')$);
+			\coordinate (C') at ($(C)-(A)+(A')$);
+			\coordinate (D') at ($(D)-(A)+(A')$);
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(D) (A)--(B);
+			\path (current bounding box.south) node[below, black]{b)}; %dưới
+		\end{tikzpicture}
+	\end{center}
+	\choice
+	{\True $x=\dfrac{20}{3} \mathrm{~cm}$}
+	{$x=\dfrac{20}{7} \mathrm{~cm}$}
+	{$x=\dfrac{25}{3} \mathrm{~cm}$}
+	{$x=\dfrac{25}{7} \mathrm{~cm}$}
+	\loigiai{
+		Thể tích chiếc hộp là $V(x)=x(30-2 x)(80-2 x)=2400 x-220 x^2+4 x^3$ với $5 \leq x \leq 10$.\\
+		Ta có: $V'(x)=12 x^2-440 x+2400$;\\
+		$V'(x)=0 \Leftrightarrow x=\dfrac{20}{3}$ hoặc $x=30$ (loại vì không thuộc $[5 ; 10]$);
+		\begin{center}
+			$V(5)=7000 ; V\left(\dfrac{20}{3}\right)=\dfrac{200000}{27} ; V(10)=6000$.
+		\end{center}
+		Do đó $\max \limits_{[5 ; 10]} V(x)=\dfrac{200000}{27}$ khi $x=\dfrac{20}{3}$.
+		Vậy để thể tích chiếc hộp là lớn nhất thì $x=\dfrac{20}{3} \mathrm{~cm}$.}
+\end{ex}
+\cham{3}
+\begin{ex}%[2H1K3-6]
+	Ông Bình dự định sử dụng hết $5,5\,\mathrm{m^2}$ kính để làm một bể cá bằng kính có dạng hình hộp chữ nhật không nắp, chiều dài gấp đôi chiều rộng (các mối ghép có kích thước không đáng kể). Bể cá có dung tích lớn nhất bằng bao nhiêu (làm tròn đến hàng phần trăm)?
+	\choice
+	{ $1{,}01\,\mathrm{m^3}$}
+	{\True $1{,}17\,\mathrm{m^3}$}
+	{ $1{,}51\,\mathrm{m^3}$}
+	{ $1{,}40\,\mathrm{m^3}$}
+	\loigiai{
+		\immini{
+			Gọi $x,2x,y$ với $x,y>0$  lần lượt là chiều rộng, chiều dài, chiều cao của bể cá.
+			Theo giả thiết ta có: $$2\cdot 2xy+2\cdot xy+2x^2=5{,}5\Leftrightarrow 6xy+2x^2=5{,}5\Rightarrow y=\dfrac{5{,}5-2x^2}{6x}.$$
+			Do $y>0$ nên $5,5 - 2x^2 >0 \Rightarrow 0<x<\dfrac{\sqrt{11}}{2}$.\\
+			Thể tích bể cá là $$V(x)=2x^2y=2x^2\cdot \dfrac{5{,}5-2x^2}{6x}=-\dfrac{2}{3}{x^3}+\dfrac{11}{6}x.$$
+			Khảo sát hàm số $V(x)=-\dfrac{2}{3}{x^3}+\dfrac{11}{6}x$ trên khoảng $\left( 0;\dfrac{\sqrt{11}}{2} \right) $
+			\begin{itemize}
+				\item [$\bullet$] $V'(x)=-2x^2+\dfrac{11}{6}$; $V'(x)=0\Leftrightarrow x=\sqrt{\dfrac{11}{12}}$.
+				\item [$\bullet$] Bảng biến thiên:
+				\begin{center}
+					\begin{tikzpicture}
+						\tkzTabInit[nocadre=True,lgt=1,espcl=3]
+						{$x$ /1,$V'$ /0.6,$V$ /2}
+						{$0$,$\sqrt{\frac{11}{12}}$,$\frac{\sqrt{11}}{2}$}
+						\tkzTabLine{,+,$0$,-,}
+						\tkzTabVar{-/, +/$y_0$,-/}
+					\end{tikzpicture}
+				\end{center}
+			\end{itemize}
+			Thể tích lớn nhất của bể cá là $V\left( \sqrt{\dfrac{11}{12}} \right)=1{,}17\,\mathrm{m^3}$.}{
+			\begin{tikzpicture}
+				\def\tls{.4}
+				\path
+				(0,0) coordinate (A)
+				++ (0:4)coordinate (B)
+				++ (30:2.3)coordinate (C)
+				($(A)+(C)-(B)$)coordinate (D)
+				\foreach \x in {A,B,C,D}{(\x)++(90:2.5) coordinate (\x_1)}
+				;
+				\draw[dashed]
+				(A)--(D) node[pos=.5,sloped,above]{$x$}
+				(D)--(C) node[pos=.4,sloped,above]{$2x$}
+				(D)--(D_1) node[pos=.4, right]{$y$}
+				;
+				\draw
+				(A)--(B)--(C)
+				(A_1)--(B_1)--(C_1)--(D_1)--cycle
+				(A)--(A_1) (B)--(B_1) (C)--(C_1)
+				;
+		\end{tikzpicture}}
+	}
+\end{ex} \cham{15}
+
+\begin{ex}%[2D1T3-6]
+	Người ta muốn xây một chiếc bể nước có hình dạng là	một khối hộp chữ nhật không nắp có thể tích bằng $\dfrac {500}{3}$ m$^3$. Biết đáy bể là một hình chữ nhật có chiều dài gấp đôi chiều rộng và giá thuê thợ xây là $700.000$ đồng/m$^2$. Để chi phí thuê nhân công ít nhất thì chi phí thuê nhân công là
+	\choice
+	{$120$ triệu đồng}	
+	{\True $105$ triệu đồng}
+	{$115$ triệu đồng}	
+	{$110$ triệu đồng}
+	\loigiai{
+		Gọi $x,y$ lần lượt là chiều rộng và chiều cao của bể cá (điều kiện $x,y>0$ ).
+		\immini{Với giả thiết của bài toán, thể tích bể cá là $$V=2x^2y=\dfrac {500}{3}\Rightarrow y=\dfrac {250}{3x^2}.$$
+			Để chi phí thuê nhân công ít nhất thì tổng diện tích các mặt của bể cá phải nhỏ nhất. Tổng diện tích các mặt của bể cá} 
+		{\begin{tikzpicture}[scale=0.8, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+				\coordinate (D) at ($(A)+(C)-(B)$);
+				\coordinate (A') at ($(A)+(0,2.5)$);
+				\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+				\tkzDrawPolygon(A',B',B,C,D,D')
+				\tkzDrawSegments(B',C' C',D' C,C')
+				\tkzDrawSegments[dashed](A,B A,D A,A')
+				\tkzDrawPoints[fill=black](A,B,D,C,A',B',C',D')
+				\tkzLabelSegment[left](B',B){$y$}
+				\tkzLabelSegment[below](B,C){$2x$}
+				\tkzLabelSegment[right](A,B){$x$}
+		\end{tikzpicture}}
+		$S=2xy+2\cdot 2xy+2x^2=6xy+2x^2=\dfrac {500}{x}+2x^2$.\\
+		Xét hàm số $S(x)=\dfrac {500}{x}+2x^2$ trên khoảng $(0;+\infty)$.\\
+		$\Rightarrow S'(x)=-\dfrac {500}{x^2}+4x$.\\
+		$S'(x)=0\Leftrightarrow -500+4x^3=0\Leftrightarrow x=5$.\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\tkzTabInit[nocadre=false,lgt=1.2,espcl=2, deltacl=0.5]
+				{$x$/0.6,$S’(x)$/0.6,$S(x)$/1.5}
+				{$0$,$5$,$+\infty$}
+				\tkzTabLine{,-,z,+,}
+				\tkzTabVar{+/$+\infty$,-/$150$,+/$+\infty$}
+			\end{tikzpicture}
+		\end{center}
+		Do đó $\min S=150$ tại $x=5$. \\
+		Khi đó, chi phí thuê nhân công là $150\cdot 700000=105$ triệu đồng.\\Vậy chi phí thuê nhân công ít nhất là $105$ triệu đồng.}
+\end{ex}
+\cham{15}
+
+\begin{ex}%[2D1K3]
+	Một sợi dây có chiều dài là $6$ m, được chia thành $2$ phần. Phần thứ nhất được uốn thành hình tam giác đều, phần thứ hai uốn thành hình vuông. Hỏi độ dài của cạnh hình tam giác đều bằng bao nhiêu để tổng diện tích $2$ hình thu được là nhỏ nhất?
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8,>=stealth]
+			\draw(0,0)--(7,0);
+			\draw (0,0)circle (1pt)(7,0) circle (1pt)(3,0) circle (1pt);
+			\draw[->](1.5,-0.3)--(1.5,-0.7);
+			\draw[->](5,-0.3)--(5,-0.7);
+			\draw(4.5,-0.9)--(5.5,-0.9)--(5.5,-1.9)--(4.5,-1.9)--(4.5,-0.9);
+			\draw(1.5,-0.9)--(2,-1.9)--(1,-1.9)--(1.5,-0.9);
+		\end{tikzpicture}
+	\end{center}
+	\choice
+	{$\dfrac{12}{4+\sqrt{3}}$ m}
+	{$\dfrac{18\sqrt{3}}{4+\sqrt{3}}$ m}
+	{$\dfrac{36\sqrt{3}}{4+\sqrt{3}}$ m}
+	{\True $\dfrac{18}{9+4\sqrt{3}}$ m}
+	\loigiai{
+		Gọi độ dài cạnh hình tam giác đều là $x$ (m). Khi đó độ dài cạnh hình vuông là $\dfrac{6-3x}{4}$.\\
+		Tổng diện tích khi đó là $S =\dfrac{\sqrt{3}}{4}x^2 + \left(\dfrac{{6 - 3x}}{4}\right)^2 =\dfrac{1}{16}\left[\left(9+4\sqrt{3}\right)x^2 - 36x + 36 \right)]$.\\
+		Xét hàm số $f(x)=\left(9+4\sqrt{3}\right)x^2-36x+36, x\in(0;6)$.\\
+		Ta có $f(x)$ là tam thức bậc $2$ có $-\dfrac{b}{2a}=\dfrac{18}{9+4\sqrt{3}} \in (0;6)$ và $a>0$.\\
+		Suy ra $f(x)$ đạt giá trị nhỏ nhất tại
+		$x=-\dfrac{b}{2a}\dfrac{18}{9+4\sqrt{3}}$.\\
+		Vậy diện tích nhỏ nhất khi $x=\dfrac{18}{9+4\sqrt{3}}$ m.
+	}
+\end{ex}
+\cham{12}
+\begin{ex}
+	Một doanh nghiệp tư nhân $A$ chuyên kinh doanh xe gắn máy các loại. Hiện nay doanh nghiệp đang tập trung vào chiến lược kinh doanh xe $X$ với chi phí mua vào một chiếc là 27 triệu đồng và bán ra với giá 31 triệu đồng. Với giá bán này, số lượng xe mà khách hàng đã mua trong một năm là 600 chiếc. Nhằm mục tiêu đẩy mạnh hơn nữa lượng tiêu thụ dòng xe đang bán chạy này, doanh nghiệp dự định giảm giá bán. Bộ phận nghiên cứu thị trường ước tính rằng nếu giảm 1 triệu đồng mỗi chiếc xe thì số lượng xe bán ra trong một năm sẽ tăng thêm 200 chiếc. Hỏi theo đó, giá bán mới là bao nhiêu thì lợi nhuận thu được cao nhất?
+	\choice
+	{$30$ triệu đồng}
+	{\True $30,5$ triệu đồng}
+	{$29,5$ triệu đồng}
+	{$32$ triệu đồng}
+	\loigiai{
+		Gọi giá bán mới là $x$ (triệu đồng) với $x \in [27;31]$.\\
+		Khi đó số xe bán ra là $600+(31-x) \cdot 200$.\\
+		Lợi nhuận thu được là 
+		\begin{eqnarray*}
+			f(x) &=& [600+(31-x) \cdot 200](x-27)\\
+			&=& (-200x+6800)(x-27)\\
+			&=& -200x^2+12200x-183600\\
+			&=& -200\left(x-\dfrac{61}{2}\right)^2+2450\\
+			&\leq&2450.
+		\end{eqnarray*}
+		Vậy giá bán mới là $30,5$ triệu đồng thì lợi nhuận thu được là lớn nhất là $2\,450$ (triệu đông).
+	}
+\end{ex}
+\cham{11}
+\Closesolutionfile{ans}
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D1-B2-d2-2]
+
+\begin{ex}
+	Người ta bơm xăng vào bình xăng của một xe ô tô. Biết rằng thể tích $V$ (lít) của lượng xăng trong bình xăng tính theo thời gian bơm xăng $t$ (phút) được cho bởi công thức $$V(t)=300(t^2-t^3)+4 \text{ với } 0\le t\le 0{,}5.$$
+	Gọi $V'(t)$ là tốc độ tăng thể tích tại thời điểm $t$ với $0\le t\le 0{,}5$.
+	\choiceTF
+	{Lượng xăng trong bình ban đầu là $1$ lít}
+	{\True Lượng xăng lớn nhất bơm vào bình xăng là $41{,}5$ lít}
+	{$V'(t)=300(2t-3t^2)+4$, với $0\le t\le 0{,}5$}
+	{Xăng chảy vào bình xăng vào thời điểm ở giây thứ $30$ có tốc độ tăng thể tích là lớn nhất}
+	\loigiai{
+		\begin{enumerate}
+			\item Số xăng trong bình ban đầu là $V(0)=4$ lít.
+			\item Lượng xăng lớn nhất bơm vào bình xăng là $V=V\left(\dfrac{1}{2}\right)=41{,}5$ lít.
+			\item Xét hàm số $V(t)=300(t^2-t^3)+4 \text{ với } 0\le t\le 0{,}5.$ Đạo hàm $V'(t)=300(2t-3t^2)$.
+			\item Xét hàm  hàm $V'(t)=300(2t-3t^2)$, có $V''(t)=300(2-6t)=0\Leftrightarrow t=\dfrac{1}{3}$\\
+			Bảng biến thiên của hàm $V'(t)$ trân $[0;0.5]$
+			\begin{center}
+				\begin{tikzpicture}
+					\tkzTabInit[nocadre=false,lgt=1,espcl=2.5]
+					{$t$ /0.6,$V''$ /0.6,$V'$ /2}
+					{$0$,$\frac{1}{3}$,$0.5$}
+					\tkzTabLine{,+,$0$,-,}
+					\tkzTabVar{-/, +/$V\left(\frac{1}{3} \right)$,-/}
+				\end{tikzpicture}
+			\end{center}
+			Suy ra tốc độ tăng thể tích là lớn nhất khi $t=\dfrac{1}{3}$ giờ, tương ứng khi 20 phút.
+		\end{enumerate}
+	}
+\end{ex}
+\cham{9}
+\begin{ex}
+	Tại một xí nghiệp chuyên sản xuất vật liệu xây dựng, nếu trong một ngày xí nghiệp sản xuất $x$ (m$^3$) sản phẩm thì phải bỏ ra các khoản chi phí bao gồm: $4$ triệu đồng chi phí cố định; $0{,}2$ triệu đồng chi phí cho mỗi mét khối sản phẩm và $0{,}001 x^2$ triệu đồng chi phí bảo dưỡng máy móc. Biết rằng, mỗi ngày xí nghiệp sản xuất được tối đa $100$ m$^3$ sản phẩm. Goi $C(x)$ là tổng chi phí để xí nghiệp sản xuất $x$ (m$^3$) sản phẩm trong một ngày và $\overline{C}$ là chi phí trung bình  trên mỗi mét khối sản phẩm.
+	\choiceTF
+	{$C=0{,}2 x+0{,}001 x^2 \quad \text { với } 0 \leq x \leq 100$}
+	{\True Tổng chi phí khi sản xuất 100 m$^3$ sản phẩm là 34 triệu đồng}
+	{\True $\overline{C}=0{,}001 x+\dfrac{4}{x}+0{,}2 \quad\text { với } 0<x \leq 100$}
+	{\True $\overline{C}$ có giá trị thấp nhất bằng 0,326 triệu đồng (\textit{kết quả làm tròn 3 chữ số thập phân})}
+	\loigiai{
+		\begin{enumerate}
+			\item Tổng chi phí (triệu đồng) để xí nghiệp sản xuất $x$ (m$^3$) sản phẩm trong một ngày là
+			$$
+			C=C(x)=4+0{,}2 x+0{,}001 x^2 \text { với } 0 \leq x \leq 100.
+			$$
+			\item Thay $x=100$ vào hàm $C(x)$, ta được kết quả 34 (triệu đồng).
+			\item Chi phí trung bình (triệu đồng) trên mỗi mét khối sản phẩm là
+			$$
+			\overline{C}=\overline{C}(x)=\dfrac{C(x)}{x}=\dfrac{4+0{,}2 x+0{,}001 x^2}{x}=0{,}001 x+\dfrac{4}{x}+0{,}2 \text { với } 0<x \leq 100.
+			$$
+			\item Ta có $\bar{C}'(x)=0{,}001-\dfrac{4}{x^2}$;
+			$$
+			\overline{C}'(x)=0 \Leftrightarrow 0{,}001-\dfrac{4}{x^2}=0 \Leftrightarrow x^2=4\,000 \Leftrightarrow x=20 \sqrt{10} \in(0 ; 100].
+			$$
+			
+			Ta có $\overline{C}(20 \sqrt{10})=\dfrac{\sqrt{10}}{25}+\dfrac{1}{5} \approx 0,326$.\\
+			Bảng biến thiên
+			\begin{center}
+				\begin{tikzpicture}
+					\tikzset{double style/.append style={double distance=2pt}}
+					\tkzTabInit[lgt=1.2, espcl=2]
+					{$x$/0.6,$\overline{C'}(x)$/0.6,$\overline{C}(x)$/2.5}{$0$,$20\sqrt{10}$,$100$}
+					\tkzTabLine{,-,0,+,}
+					\tkzTabVar{+/$+\infty$,-/$\dfrac{\sqrt{10}}{25}+\dfrac{1}{5}$,+/$0{,}34$}
+				\end{tikzpicture}
+			\end{center}
+			Từ bảng biến thiên, ta thấy chi phí trung bình thấp nhất là $\bar{C}(20 \sqrt{10}) \approx 0{,}326$ (triệu đồng/m$^3$ sản phẩm), đạt được khi $x=20 \sqrt{10} \approx 63$ (m$^3$).
+		\end{enumerate}
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	Nhà máy $A$ chuyên sản xuất một loại sản phẩm cung cấp cho nhà máy $B$. Hai nhà máy thoả thuận rằng, hằng tháng $A$ cung cấp cho $B$ số lượng sản phẩm theo đơn đặt hàng của $B$ (tối đa $100$ tấn sản phẩm). Nếu số lượng đặt hàng là $x$ tấn sản phẩm thì giá bán cho mỗi tấn sản phẩm là $P(x)=45-0{,}001 x^2$ (triệu đồng). Chi phí để $A$ sản xuất $x$ tấn sản phẩm trong một tháng là $C(x)=100+30 x$ (triệu đồng) (gồm $100$ triệu đồng chi phí cố định và $30$ triệu đồng cho mỗi tấn sản phẩm).
+	\choiceTF
+	{\True Chi phí để  A sản xuất 10 tấn sảm phẩm trong một tháng là 400 triệu đồng}
+	{Số tiền  A thu được khi bán 10 tấn sản phẩm cho B là 600 triệu đồng}
+	{\True Lợi nhuận mà A thu được khi bán $x$ tấn sản phẩm ($0\le x \le 100)$ cho  B là $-0{,}001 x^3+15 x-100$}
+	{\True A bán cho $B$ khoảng 70,7 tấn sản phẩm mỗi tháng thì thu được lợi nhuận lớn nhất}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Chi phí để  A sản xuất 10 tấn sảm phẩm trong một tháng là $C(10)=100+30\cdot 10=400$ (triệu)
+			\item Số tiền mà $A$ thu được (gọi là doanh thu) từ việc bán $x$ tấn sản phẩm $(0 \leq x \leq 100)$ cho $B$ là
+			$$
+			R(x)=x \cdot P(x)=x\left(45-0{,}001 x^2\right)=45 x-0{,}001 x^3 \text { (triệu đồng). }
+			$$
+			Thay $x=10$, ta được $R(10)=449$ (triệu đồng).
+			\item Lợi nhuận (triệu đồng) mà $A$ thu được là
+			$$
+			P(x)=R(x)-C(x)=x\left(45-0{,}001 x^2\right)-(100+30 x)=-0{,}001 x^3+15 x-100.
+			$$
+			\item Xét hàm số $P(x)=-0{,}001 x^3+15 x-100$ với $0 \leq x \leq 100$, ta có
+			$$
+			\begin{aligned}
+				& P'(x)=-0{,}003 x^2+15; \\
+				& P'(x)=0 \Leftrightarrow-0{,}003 x^2+15=0 \Leftrightarrow x^2=5\,000 \Leftrightarrow x=50 \sqrt{2} \in[0 ; 100].
+			\end{aligned}
+			$$
+			
+			Ta có $P(0)=-100$; $P(50 \sqrt{2})=500 \sqrt{2}-100 \approx 607$; $P(100)=400$.\\
+			Bảng biến thiên
+			\begin{center}
+				\begin{tikzpicture}
+					\tkzTabInit[lgt=1, espcl=4]
+					{$x$/1,$y'$/0.6,$y$/3}{$0$,$50\sqrt{2}$,$100$}
+					\tkzTabLine{,+,0,-,}
+					\tkzTabVar{-/$100$,+/$500\sqrt{2}-100$,-/$400$}
+				\end{tikzpicture}
+			\end{center}
+			
+			Từ bảng biến thiên, ta có $\max \limits_{[0 ; 100]} P=P(50 \sqrt{2})=500 \sqrt{2}-100 \approx 607$.\\
+			Vậy $A$ thu được lợi nhuận lớn nhất khi bán $50 \sqrt{2} \approx 70{,}7$ tấn sản phẩm cho $B$ mỗi tháng và lợi nhuận lớn nhất thu được khoảng $607$ triệu đồng.
+		\end{enumerate}
+	}
+\end{ex}
+\cham{10}
+
+\begin{ex}%[2D1K3-6]
+	Một người thợ muốn làm một chiếc thùng hình hộp chữ nhật có đáy là hình vuông và không có nắp, biết thể tích của khối hộp là $ V=2{,}16 $ m$ ^3 $. Giá nguyên liệu để làm bốn mặt bên là $ 36000 $ đồng/m$ ^2 $ và giá nguyên liệu để làm đáy là $ 90000 $ đồng/m$ ^2 $. Gọi độ dài cạnh đáy là $ x $ (m) và chiều cao là $ h $ (m). Xét tính đúng-sai của các khẳng định sau:
+	\choiceTF
+	{Thể tích khối hộp được tính bởi công thức $V=x \cdot h$}
+	{Mối liên hệ giữa $x$ và $h$ là $h=\dfrac{2{,}16}{x}$}
+	{\True Để chi phí làm chiếc thùng đó thấp nhất thì độ dài cạnh đáy là $ 1{,}2 $ m}
+	{Số tiền $345\,600$  đồng là chi phí thấp nhất có thể làm chiếc thùng}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=0.8, font=\footnotesize, line join=round, line cap=round]
+				\foreach \x\y\t in {0/0/A,-1/-1.1/B,2.6/-1.1/C}
+				\coordinate (\t) at (\x,\y);
+				\coordinate (D) at ($(A)+(C)-(B)$);
+				\coordinate (A') at ($(A)+(0,3.2)$);
+				\coordinate (B') at ($(B)+(0,3.2)$);
+				\coordinate (C') at ($(C)+(0,3.2)$);
+				\coordinate (D') at ($(D)+(0,3.2)$);
+				\draw (B')--(A')--(D')--(C')--(B')--(B)--(C)--(D)--(D')node[midway,right,scale=1]{$h$} (C')--(C);
+				\draw[dashed](B)--(A)--(D)node[midway,above,scale=1]{$x$} (A)--(A');
+				%\foreach \t/\g in {A/170,B/-150,C/-100,D/0,A'/100,B'/170,C'/-20,D'/50}
+				%	\draw[fill=black] (\t) circle(1pt)node[shift={(\g:7pt)}]{$\t$};
+			\end{tikzpicture}
+		\end{center}
+		\begin{itemchoice}
+			\itemch Thể tích khối hộp chữ nhật là $V=x \cdot x \cdot h = x^2\cdot h$.
+			\itemch Từ $V=x^2\cdot h \Rightarrow h=\dfrac{V}{x^2}=\dfrac{2{,}16}{x^2}$.
+			\itemch Diện tích toàn phần của khối hộp $S_{tp}=x^2+4x\cdot h$.\\
+			Chi phí làm chiếc thùng là $ f(x)=90x^{2}+4\cdot 36\cdot \dfrac{2{,}16}{x}=90x^{2}+\dfrac{7776}{25x} $. Ta có
+			\begin{itemize}
+				\item [$\bullet$] $ f'(x)=180x-\dfrac{7776}{25x^{2}}=0\Rightarrow x=1{,}2 $
+				\item [$\bullet$] Ta có bảng biến thiên
+				\begin{center}
+					\begin{tikzpicture}[>=stealth,scale=1]
+						\tkzTabInit[nocadre=false,lgt=1.5,espcl=3]
+						{$x$/1,$f'(x)$/1,$f(x)$/1.5}
+						{$0$,$1{,}2$,$+\infty$}
+						\tkzTabLine{t,-,z,+,}
+						\tkzTabVar{+/$+\infty$,-/,+/$+\infty$}
+					\end{tikzpicture}
+				\end{center}
+				Để chi phí làm chiếc thùng nhỏ nhất thì cạnh đáy là $x= 1{,}2 $ m.
+			\end{itemize}
+			\itemch Khi $x= 1{,}2 $ thì $f(x)=90x^{2}+\dfrac{7776}{25x}=388\,800$  đồng.
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{12}
+\Closesolutionfile{ans}
+\ind{PHẦN III.} \inden{Câu trắc nghiệm trả lời ngắn.}\\
+\Opensolutionfile{ans}[ans/2D1-B2-d2-3]
+
+\begin{ex}
+	Một nhà máy sản xuất xe đạp cho thị trường châu Âu theo đơn giá $120$ euro. Chi phí mỗi ngày của nhà máy được cho bởi hàm số
+	$K(x)=0{,}02x^3-3x^2+172x+2400,$
+	trong đó $x$ là số lượng xe đạp sản xuất được trong ngày hôm đó. Mỗi ngày có thể sản xuất tối đa $130$ xe đạp. Giả sử số xe đạp sản xuất được trong mỗi ngày đều được bán hết vào cuối ngày đó. Gọi $G(x)$ là hàm số biểu diễn lợi nhuận hàng ngày của nhà máy. Hỏi số lượng xe mỗi ngày cần sản xuất là bao nhiêu để nhà máy có lợi nhuận lớn nhất? \\
+	\shortans[oly]{$90$}
+	\loigiai
+	{
+		\begin{enumerate}[$\bullet$]
+			\item
+			Ta có $G(x)=120x-K(x)=-0{,}02x^3+3x^2-52x-2400$. \\
+			Ta có $G'(x)=-0{,}06x^2+6x-52=-0{,}02\left(3x^2-300x+2600\right)$. \\
+			Xét $G'(x)=0 \Leftrightarrow \hoac{ & x=\dfrac{150+70\sqrt{3}}{3} \\ & x=\dfrac{150-70\sqrt{3}}{3}.}$ \\
+			\item Bảng biến thiên của $G(x)$
+			\begin{center}
+				\begin{tikzpicture}[scale=1]
+					\tkzTabInit[nocadre=false, lgt=1.2, espcl=2.5, deltacl=0.6]{$x$/1.2, $G(x)$/2}{$0$, $\dfrac{150-70\sqrt{3}}{3}$, $50$, $\dfrac{150+70\sqrt{3}}{3}$, $120$, $140$}
+					\tkzTabVar{+/, -/, R, +/, R, -/}
+				\end{tikzpicture}
+			\end{center}
+			\item Từ vào bảng biến thiên, ta có $\max\limits_{(50;120)} G(x)=G\left(\dfrac{150+70\sqrt{3}}{3}\right)$. \\
+			Vì $x\in\mathbb{N}$ nên xét $G(90)=2640$ và $G(91)=2639{,}58$. \\
+			Vậy để thu được lợi nhuận lớn nhất thì số lượng xe đạp cần sản xuất là $90$ cái.
+		\end{enumerate}
+	}
+\end{ex}
+\cham{10}
+
+\begin{ex}%[Đề Ôn Tập số 2, phát triển theo ĐMH TNPT 2024-2025 ]%[2PhatTrien-DMH-2024-2025, GV: Nguyễn Cường]%[2D1V3-6]
+	Các nhà tổ chức các buổi hòa nhạc gây quỹ cần phải cân nhắc kỹ lưỡng giữa lợi nhuận và thua lỗ, đặc biệt khi xác định giá vé cho các buổi phát sóng truyền hình tại các rạp chiếu địa phương. Qua việc lưu trữ hồ sơ, một rạp chiếu phim nhận thấy rằng với mức giá vé là $260$ nghìn đồng, họ trung bình có $1\,000$ người tham dự. Với mỗi lần giảm $10$ nghìn đồng giá vé, số lượng khách sẽ tăng thêm $50$ người. Mỗi khách hàng chi tiêu trung bình $40$ nghìn đồng cho các món đồ ăn và thức uống. Vậy rạp chiếu phim nên thu giá vé vào cửa bao nhiêu để tối đa hóa tổng doanh thu (đơn vị nghìn đồng)?\\
+	\shortans[oly]{$210$}
+	\loigiai{
+		Gọi $x$ là số lần giảm giảm giá vé, với $0\le x\le 26$.\\
+		Lợi nhuận đạt được của rạp chiếu phim là
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			R(x)&=&(1\,000+50x)(260-10x)+(1\,000+50x)\cdot 40\\
+			&=&260\,000-10\,000x+13\,000x-500x^2+40\,000+2\,000x\\
+			&=&-500x^2+5\,000x+300\,000.
+		\end{eqnarray*}
+		Ta có $R'(x)=-1\,000x+5\,000$ và $R'(x)=0\Leftrightarrow x=5$.
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[nocadre=true,lgt=1.4,espcl=4,deltacl=0.6]
+				{$x$ /1, $R'(x)$ /0.7, $R(x)$ /2}
+				{$0$,$5$,$26$}
+				\tkzTabLine{,+,$0$,-,}
+				\tkzTabVar{-/$R(0)$,+/$R(5)$,-/$R(26)$}
+			\end{tikzpicture}
+		\end{center}
+		Vậy lợi nhuận lớn nhất là $R(5)=312\,500$ (nghìn đồng) khi giá vé là $260-50=210$ (nghìn đồng).
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	\immini[thm]{Vào lúc 12 giờ 7 phút anh Hùng chạy xe xuất phát từ điểm $A$ và đi đến điểm $C$ với vận tốc là $60(\mathrm{~km} / \mathrm{h})$. Biết rằng 7 phút trước đó anh Quang chạy xe xuất phát từ điểm $B$ với vận tốc là $30(\mathrm{~km} / \mathrm{h})$ sao cho hai quãng đường của hai xe hợp nhau một góc $60^{\circ}$ như hình vẽ dưới đây. Cho biết $A B=42(\mathrm{~km})$ và vào lúc $a$ giờ $b$ phút thì anh Quang và anh Hùng ở vị trí có cự li gần nhất để vẫy tay chào nhau $\left(a, b \in \mathbb{N}^*\right.$ ). Tính $a+b$ ? Xem như hai xe đều chuyển động đều và không có tác dụng ngoại lực hay yếu tố nào khác.\\
+		\shortans[oly]{$41$}
+	}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (A)
+			(3,0) coordinate (C)
+			(3.5,4) coordinate (B)
+			;
+			\draw (B)--(A)--(C);
+			\draw pic["$60^\circ$",draw,angle eccentricity=1.6,angle radius=0.5cm]{angle=C--A--B};
+			\foreach \x/\g in {B/90,A/-90,C/0}\draw[fill=black] (\x) circle (.05) +(\g:.4)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		
+	}
+\end{ex}\cham{10}
+
+
+\begin{ex}%[2D1V3-6]
+	\immini[thm]{Hai nhà máy được đặt tại các vị trí $A$ và $B$ cách nhau $4$ km. Nhà máy xử lí nước thải được đặt ở vị trí $C$ trên đường trung trực của đoạn thẳng $A B$, cách trung điểm $M$ của đoạn thẳng $A B$ một khoảng là $3$ km. Người ta muốn làm đường ống dẫn nước thải từ hai nhà máy $A, B$ đến nhà máy xử lí nước thải $C$ gồm các đoạn thẳng $A I$, $B I$ và $I C$, với $I$ là vị trí nằm giữa $M$ và $C$ (Hình bên). Cần chọn vị trí điểm $I$ cách điểm $M$ bao nhiêu km để tổng độ dài đường ống nhỏ nhất? (\textit{kết quả làm tròn đến hàng phần trăm})\\
+		\shortans[oly]{$1{,}15$}	
+	}{\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=0.7]
+			\path 
+			(0,0) coordinate (A)
+			(6,0) coordinate (B)
+			($(A)!1/2!(B)$) coordinate (M)
+			($(M)!3/2!90:(B)$) coordinate (C)
+			($(C)!2/3!(M)$) coordinate(I)
+			($(M)+(-1,0)$) coordinate (u)
+			($(C)+(-1,0)$) coordinate (v)
+			($(u)!1/2!(v)$) coordinate (u')
+			($(A)+(0,-1)$) coordinate (x)
+			($(B)+(0,-1)$) coordinate (y)
+			($(x)!1/2!(y)$) coordinate (x')
+			;
+			\draw(C)--(I)--(A) (I)--(B);
+			\draw[dashed](I)--(M) (A)--(B);
+			\draw[dashed](C)to [bend left=-20] (M);
+			\draw[dashed](A)to [bend left=-20] (B);
+			\foreach \x/\y in {A/180,B/0,C/90,I/20,M/28}
+			\draw[fill=black] (\x) circle (1.1pt) + (\y:0.5cm) node{$\x$};
+			\draw (1.75,2.7)node[below]{$3$\,\text{km} } ;
+			\draw (3.25,-0.5)node[below]{$4$\,\text{km} } ;
+	\end{tikzpicture}}
+	\loigiai{
+		Gọi độ dài đoạn $MI$ là $x$ (km). Điều kiện $x>0$.\\
+		Khi đó $IC=3-x$ (km).\\
+		Xét tam giác $IAM$ vuông tại $M$, áp dụng định lý Py-ta-go ta được $$IA=IB=\sqrt{2^2+x^2}.$$.\\
+		Suy ra tổng độ dài đường ống là $$IA+IB+IC=3-x+2\sqrt{4+x^2} \quad (\text{km}).$$\\
+		Đặt $f(x)=3-x+2\sqrt{4+x^2}$, suy ra $f'(x)=-1+\dfrac{2x}{\sqrt{4+x^2}}$.\\
+		$f'(x)=0\Leftrightarrow\sqrt{4+x^2}=2x\Leftrightarrow x=\pm \dfrac{2\sqrt{3}}{3}$.\\
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1, espcl=2]
+				{$x$/1,$y'$/0.6,$y$/2.5}{$0$,$\dfrac{2\sqrt{3}}{3}$,$3$}
+				\tkzTabLine{,-,0,+,}
+				\tkzTabVar{+/$7$,-/$3+2\sqrt{3}$,+/$2\sqrt{13}$}
+			\end{tikzpicture}
+		\end{center}
+		Vậy cần chọn điểm $I$ cách vị trí $M$ một khoảng xấp xỉ bằng $
+		1{,}1547$ thì tổng độ dài đoạn đường là nhỏ nhất.
+	}
+\end{ex}
+\cham{10}
+\begin{ex}
+	\immini[thm]{Để làm một cái hộp đựng quà tặng bạn, từ một tấm bài hình chữ nhật với kích thước $40$ cm $\times$ $20$ cm, bạn Hoa cắt bỏ hai hình vuông cạnh là $x$ (cm) và hai hình chữ nhật (phần gạch sọc như hình bên) rồi gấp theo đường nét đứt và dán các mép để được một cái hộp kín có dạng hình hộp chữ nhật. Hỏi có thể tạo được cái hộp có thể tích lớn nhất bằng bao nhiêu? (\textit{kết quả tính theo đơn vị $cm^3$ và làm tròn đến hàng đơn vị})\\
+		\shortans[oly]{$770$}
+	}{
+		\begin{tikzpicture}[smooth,font=\footnotesize,scale=0.7,thick]
+			\path
+			(0,0) coordinate (A)
+			(8,0) coordinate (B)
+			(8,4) coordinate (C)
+			(0,4) coordinate (D)
+			;
+			\fill[pattern = north east lines] (0,3)--(1,3)--(1,4)--(0,4);
+			\fill[pattern = north east lines] (0,0)--(1,0)--(1,1)--(0,1);
+			\fill[pattern = north east lines] (4,0)--(8,0)--(8,1)--(4,1);
+			\fill[pattern = north east lines] (4,3)--(8,3)--(8,4)--(4,4);
+			\draw 
+			(A)--(B)--(C)--(D)--(A)
+			(4,0)--(8,0)--(8,1)--(4,1)--(4,0)
+			(4,4)--(4,3)--(8,3)--(8,4)--(4,4)
+			(1,0)--(1,1)--(0,1)--(0,0)node[left,midway]{$x$}
+			(1,4)--(1,3)--(0,3)--(0,4)node[left,midway]{$x$}
+			;
+			\draw[dashed] (1,1)--(4,1)--(4,3)--(1,3)--(1,1) (5,1)--(5,3);
+			\draw[<->] (9,0)--(9,4) node[above,midway,sloped]{$20$cm};
+			\draw[<->] (0,-1)--(8,-1) node[above,midway]{$40$cm};
+	\end{tikzpicture}}
+	\loigiai{ 
+		Kết quả $770$
+}\end{ex}
+\cham{10}
+\begin{ex}
+	\immini[thm]{
+		Từ một tấm bìa hình vuông $ABCD$ có cạnh bằng $5 $ dm, người ta cắt bỏ bốn tam giác bằng nhau là $AMB,$ $BNC,$ $CPD$ và $DQA.$ Với phần còn lại, người ta gấp lên và ghép lại để thành hình chóp tứ giác đều. Hỏi cạnh đáy của khối chóp bằng bao nhiêu dm để thể tích của nó là lớn nhất? (kết quả làm tròn đến hàng phần trăm)\\
+		\shortans[oly]{$2,83$}
+	}{
+		\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+			\tikzset{label style/.style={font=\footnotesize}}
+			\coordinate (A) at (0,4);
+			\coordinate (B) at (4,4);
+			\coordinate (D) at (0,0);
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			\tkzInterLL(A,C)(B,D) \tkzGetPoint{O}
+			\coordinate (M1) at ($(A)!0.5!(B)$);
+			\coordinate (N1) at ($(B)!0.5!(C)$);
+			\coordinate (P1) at ($(D)!0.5!(C)$);
+			\coordinate (Q1) at ($(A)!0.5!(D)$);
+			\tkzDefPointBy[homothety = center O ratio 2/5](M1)\tkzGetPoint{M}
+			\tkzDefPointBy[homothety = center O ratio 2/5](N1)\tkzGetPoint{N}
+			\tkzDefPointBy[homothety = center O ratio 2/5](P1)\tkzGetPoint{P}
+			\tkzDefPointBy[homothety = center O ratio 2/5](Q1)\tkzGetPoint{Q}
+			\tkzInterLL(A,O)(Q,M) \tkzGetPoint{I}
+			\tkzDrawPoints[fill=black,size=2pt](A,B,C,D,O,M,N,P,Q,I)
+			\tkzDrawSegments(A,B B,C C,D D,A A,M M,B B,N N,C C,P P,D D,Q Q,A A,I)
+			\tkzDrawSegments[dashed](M,N N,P P,Q Q,M I,O)
+			\tkzLabelPoints[left](D,Q)
+			\tkzLabelPoints[above](A,B,M,I)
+			\tkzLabelPoints[right](C,O,N)
+			\tkzLabelPoints[below](P)
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[line join=round, line cap=round,>=stealth,thick]
+				\tikzset{label style/.style={font=\footnotesize}}
+				\coordinate (A) at (0,4);
+				\coordinate (B) at (4,4);
+				\coordinate (D) at (0,0);
+				\coordinate (C) at ($(B)+(D)-(A)$);
+				\tkzInterLL(A,C)(B,D) \tkzGetPoint{O}
+				\coordinate (M1) at ($(A)!0.5!(B)$);
+				\coordinate (N1) at ($(B)!0.5!(C)$);
+				\coordinate (P1) at ($(D)!0.5!(C)$);
+				\coordinate (Q1) at ($(A)!0.5!(D)$);
+				\tkzDefPointBy[homothety = center O ratio 2/5](M1)\tkzGetPoint{M}
+				\tkzDefPointBy[homothety = center O ratio 2/5](N1)\tkzGetPoint{N}
+				\tkzDefPointBy[homothety = center O ratio 2/5](P1)\tkzGetPoint{P}
+				\tkzDefPointBy[homothety = center O ratio 2/5](Q1)\tkzGetPoint{Q}
+				\tkzInterLL(A,O)(Q,M) \tkzGetPoint{I}
+				\tkzDrawPoints[fill=black,size=2pt](A,B,C,D,O,M,N,P,Q,I)
+				\tkzDrawSegments(A,B B,C C,D D,A A,M M,B B,N N,C C,P P,D D,Q Q,A A,I)
+				\tkzDrawSegments[dashed](M,N N,P P,Q Q,M I,O)
+				\tkzLabelPoints[left](D,Q)
+				\tkzLabelPoints[above](A,B,M,I)
+				\tkzLabelPoints[right](C,O,N)
+				\tkzLabelPoints[below](P)
+			\end{tikzpicture}
+			\hspace*{1cm}
+			\begin{tikzpicture}[scale=0.7,line join=round, line cap=round,thick]
+				\tikzset{label style/.style={font=\footnotesize}}
+				\coordinate (P) at (0,0);
+				\coordinate (N) at (-2,-2);
+				\coordinate (Q) at (5,0);
+				\coordinate (M) at ($(N)+(Q)-(P)$);
+				\tkzInterLL(P,M)(N,Q) \tkzGetPoint{O}
+				\coordinate (S) at ($(O)+(0,5)$);
+				\coordinate (I) at ($(M)!0.5!(Q)$);
+				\tkzDrawPoints[fill=black,size=2pt](M,N,P,Q,S,O,I)
+				\tkzDrawSegments(N,M M,Q S,N S,M S,Q S,I)
+				\tkzDrawSegments[style=dashed ](P,N P,Q S,P P,M N,Q S,O O,I)
+				\tkzLabelPoints[above](S)
+				\tkzLabelPoints[left](P)
+				\tkzLabelPoints[below](M,N,O)
+				\tkzLabelPoints[right](Q,I)
+			\end{tikzpicture}
+		\end{center}
+		Đặt $MQ=x$ dm $\left(0<x<5\sqrt{2}\right).$\\
+		Ta có $AO= \dfrac{AC}{2}=\dfrac{5\sqrt{2}}{2},$ \quad $OI=\dfrac{MQ}{2}=\dfrac{x}{2},$ \quad  $SI=AI=AO-IO=\dfrac{5\sqrt{2}-x}{2}.$\\
+		Chiều cao hình chóp là  $$h=SO=\sqrt{SI^2-OI^2}=\sqrt{{\left(\dfrac{5\sqrt{2}-x}{2}\right)}^2-{\left(\dfrac{x}{2}\right)}^2}=\sqrt{\dfrac{50-10x\sqrt{2}}{4}}.$$
+		Thể tích khối chóp là 
+		$$V=\dfrac{1}{3}S_{MNPQ}\cdot SO =\dfrac{1}{3}\cdot x^2\sqrt{\dfrac{50-10x\sqrt{2}}{4}}=\dfrac{1}{6}\sqrt{50x^4-10x^5\sqrt{2}}.$$
+		Xét hàm số $f(x)=\sqrt{50x^4-10x^5\sqrt{2}}$ trên khoảng $\left(0;5\sqrt{2}\right).$ Ta có
+		\begin{itemize}
+			\item [$\bullet$] $f'(x)=\dfrac{100x^3-25x^4\sqrt{2}}{\sqrt{50x^4-10x^5\sqrt{2}}}.$
+			\item [$\bullet$] Khi đó $f'(x)=0 \Leftrightarrow 100x^3-25x^4\sqrt{2}=0 \Leftrightarrow \hoac{&x=0 \notin \left(0;5\sqrt{2} \right)\\& x=2\sqrt{2}.}$
+		\end{itemize}
+		Bảng biến thiên
+		\begin{center}
+			\begin{tikzpicture}
+				\tkzTabInit[lgt=1.2,espcl=3]{$x$ /1,$f'(x)$ /0.8,$f(x)$ /1.7}
+				{$0$,$2\sqrt{2}$,$5\sqrt{2}$}%
+				\tkzTabLine{ , + , 0 ,-, }
+				\tkzTabVar{-/ , +/  ,  -/ }
+			\end{tikzpicture}
+		\end{center}
+		Hàm số $f(x)$ đạt giá trị lớn nhất khi $x=2\sqrt{2}.$\\
+		Vậy thể tích hình chóp lớn nhất khi $x=2\sqrt{2}\approx 2,83$ (dm).
+	}
+\end{ex}
+\cham{12}
+
+
+\Closesolutionfile{ans}

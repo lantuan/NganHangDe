@@ -3758,3 +3758,59 @@ ra han vi da chan truoc khi toi CHV_Fun.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.64 - 2026-09-19
+
+## Bang anh xa bai <-> tep ly thuyet (chuan bi cho gia su muc B)
+
+Co Lan da dua 87 tep .tex ly thuyet vao data/ly_thuyet/ (3,1 MB, khong
+co .git long nhau, khong tep nang). Cau truc ben trong RAT nhat quan:
+\section{TEN BAI} -> \subsection{LY THUYET CAN NHO} -> \subsubsection.
+
+## Vi sao phai viet tay bang anh xa
+
+Khop tu dong theo ten bai chi duoc 11/28 tep lop 10. KHONG phai tep dat
+sai - ma cach chia bai cua tai lieu khac cach chia cua chuong trinh, va
+quan he la NHIEU-NHIEU:
+- L10_C1_B2 "Tap hop va cac phep toan tren tap hop" = 0D1-CD2 + 0D1-CD3
+- L10_C4_B8 "Cac phep toan tren vecto"  = 0H4-B2 + 0H4-B3 + 0H4-B5
+- L10_C7_B18 "Duong thang trong mp toa do" = 0H7-B1 + 0H7-B2
+Vai cho chi khac chu: "NHI THUC NIU-TON" / "Nhi thuc Newton".
+
+-> data/ly_thuyet/anh_xa.json, viet mot lan, canh bang bai kiem tra.
+
+## PHAT HIEN QUAN TRONG: curriculum lop 11 va 12 con RONG
+
+data/curriculum/toan11/ va toan12/ khong co tep nao. Toan he thong moi
+co 23 bai LOP 10.
+
+  Khoi 10: 28 tep ly thuyet - 23 bai curriculum -> anh xa DU CA 23 BAI
+  Khoi 11: 33 tep ly thuyet - 0 bai            -> chua gan vao dau duoc
+  Khoi 12: 26 tep ly thuyet - 0 bai            -> chua gan vao dau duoc
+
+59/87 tep chua dung duoc, KHONG phai vi tep sai ma vi chua co cau hoi
+nao de gan. Lam ngan hang 11/12 xong thi bo sung vao anh_xa.json la chay.
+
+## Cat phan nao cua tep - DA DO, khong doan
+
+Do that tren 23 bai lop 10:
+  Ca tep, trung binh            : 34.079 ki tu (~8.500 token)
+  CHI muc ly thuyet, trung binh :  4.534 ki tu (~1.130 token)
+  Chi ly thuyet, dai nhat       : 14.576 (L10_C4_B8, gop 3 tep)
+  Chi ly thuyet, ngan nhat      :    914 (L10_C2_B4)
+
+-> Nap ca tep la KHONG DUOC voi tai khoan mo hinh mien phi. Cat lay dung
+muc ly thuyet thi duoc, va chi nap khi hoc sinh bam "Em van chua hieu".
+Muc A giu nguyen nhe nhu cu.
+
+## Bai kiem tra
+
+tests/test_anh_xa_ly_thuyet.py - 7 bai, canh dung nhung cho de hong am
+tham (doi ten tep, go nham ma bai, them bai moi vao curriculum ma quen
+bo sung ly thuyet). Khong can mang, khong can chay web.
+
+Tong 103 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

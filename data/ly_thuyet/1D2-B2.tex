@@ -1,0 +1,511 @@
+\section{CẤP SỐ CỘNG}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa}
+Cấp số cộng là một dãy số (hữu hạn hoặc vô hạn), trong đó kể từ số hạng thứ hai, mỗi số hạng đều bằng số hạng đứng ngay trước nó cộng với một số không đổi $d.$ Nghĩa là
+\boxminit{$u_{n+1}=u_n+d \text{ với } n\in \mathbb{N}^{*}.$}
+\begin{gachsoc}
+	\begin{itemize}
+		\item [$\bullet$] Số $d$ được gọi là công sai của cấp số cộng.
+		\item [$\bullet$] Đặc biệt khi $d=0$ thì cấp số cộng là một dãy số không đổi (tất cả các số hạng đều bằng nhau).
+	\end{itemize}
+\end{gachsoc}
+\subsubsection{Số hạng tổng quát}
+	Nếu cấp số cộng $\left(u_n\right)$ có số hạng đầu $u_1$ và công sai $d$ thì số hạng tổng quát $u_n$ của nó được xác định theo công thức
+	\boxminit{$u_n=u_1+(n-1) d$}
+
+\subsubsection{Tính chất của ba số hạng liên tiếp}
+Gọi $u_{k-1}$,$u_{k}$, $u_{k+1}$ là ba số hạng lien tiếp của một cấp số cộng thì \boxminit{$u_k=\dfrac{u_{k-1}+u_{k+1}}{2} \text{ với } k\ge 2$}
+
+\subsubsection{Tổng $ n $ số hạng đầu của một cấp số cộng}
+	Cho $(u_n)$ là một cấp số cộng với số hạng đầu là $u_1$ và công sai $d$. Đặt $${{S}_{n}}={{u}_{1}}+{{u}_{2}}+{{u}_{3}}+\cdots+{{u}_{n}}$$
+	Khi đó:
+		\boxminit{$S_n=\dfrac{n\left( u_1+u_n \right)}{2}=\dfrac{n\left( u_2+u_{n-1}\right)}{2}=\dfrac{n\left(u_3+u_{n-2} \right)}{2}=\cdots$}
+	hoặc 
+	\boxminit{$S_n=\dfrac{n}{2}\left(2u_1+(n-1)d \right)$}
+\newpage
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Chứng minh dãy số là một cấp số cộng}
+	Ta cần chứng minh $u_{n+1}-u_{n}=d$, với $d$ là một số không đổi (công sai).
+\end{dang}
+
+
+\begin{vd}
+	Trong các dãy số sau, dãy số nào là cấp số cộng? Vì sao?
+	\begin{tasks}(2)
+		\task $10,-2,-14,-26,-38$;
+		\task $\dfrac{1}{2}, \dfrac{5}{4}, 2, \dfrac{11}{4}, \dfrac{7}{2}$;
+		\task $\sqrt{1}, \sqrt{2}, \sqrt{3}, \sqrt{4}, \sqrt{5}$;
+		\task $1,4,7,10,13$.
+	\end{tasks}
+\loigiai{
+	Một dãy số $(u_n)$ là cấp số cộng nếu hiệu của hai số hạng liên tiếp $u_{n+1} - u_n = d$ (không đổi) với mọi $n \ge 1$. Hằng số $d$ gọi là công sai.
+	\begin{enumerate}[a)]
+		\item Xét hiệu hai số hạng liên tiếp:
+		\begin{align*}
+			-2 - 10 &= -12 \\
+			-14 - (-2) &= -12 \\
+			-26 - (-14) &= -12 \\
+			-38 - (-26) &= -12
+		\end{align*}
+		Hiệu giữa hai số hạng liên tiếp luôn bằng $-12$ (không đổi). 
+		Vậy dãy số trên là cấp số cộng với số hạng đầu $u_1 = 10$ và công sai $d = -12$.
+		
+		\item Xét hiệu hai số hạng liên tiếp:
+		\begin{align*}
+			\dfrac{5}{4} - \dfrac{1}{2} &= \dfrac{3}{4} \\
+			2 - \dfrac{5}{4} &= \dfrac{3}{4} \\
+			\dfrac{11}{4} - 2 &= \dfrac{3}{4} \\
+			\dfrac{7}{2} - \dfrac{11}{4} &= \dfrac{3}{4}
+		\end{align*}
+		Hiệu giữa hai số hạng liên tiếp luôn bằng $\dfrac{3}{4}$ (không đổi). 
+		Vậy dãy số trên là cấp số cộng với số hạng đầu $u_1 = \dfrac{1}{2}$ và công sai $d = \dfrac{3}{4}$.
+		
+		\item Xét hiệu hai số hạng đầu tiên:
+		Ta có $\sqrt{2} - \sqrt{1} \approx 0{,}414$ và $\sqrt{3} - \sqrt{2} \approx 0{,}317$. 
+		Rõ ràng $\sqrt{2} - \sqrt{1} \neq \sqrt{3} - \sqrt{2}$. 
+		Vậy dãy số trên không phải là cấp số cộng.
+		
+		\item Xét hiệu hai số hạng liên tiếp:
+		\begin{align*}
+			4 - 1 &= 3 \\
+			7 - 4 &= 3 \\
+			10 - 7 &= 3 \\
+			13 - 10 &= 3
+		\end{align*}
+		Hiệu giữa hai số hạng liên tiếp luôn bằng $3$ (không đổi). 
+		Vậy dãy số trên là cấp số cộng với số hạng đầu $u_1 = 1$ và công sai $d = 3$.
+	\end{enumerate}
+}
+\end{vd}\dongcham{10}
+
+
+\begin{vd}
+	Viết 5 số hạng đầu của mỗi dãy $(u_n)$ sau và xem nó có phải là một cấp số cộng hay không? Nếu dãy là một cấp số cộng, hãy tìm công sai.
+	\begin{tasks}(2)
+		\task $u_n=3n+2$
+		\task $u_n=3^n-1$
+		\task $u_n=(n+2)^2-n^2$
+		\task $\heva{&u_1=2 \\ &u_{n+1}=3-u_n, \text{ với } n\ge 1.}$
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có: $u_{n+1}-u_n=3(n+1)+2 - (3n+2) = 3$. Vậy $(u_n)$ là cấp số cộng.
+			\item Ta có: $u_1=2, u_2=8, u_3=26$.\\ Khi đó $u_2-u_1=6, u_3-u_2=18 \neq u_2-u_1$.\\ Vậy $(u_n)$ không là cấp số cộng.
+			\item Ta có $u_n=(n+2)^2-n^2 = 4n+4$. Khi đó $u_{n+1}-u_n=4(n+1)+4 - (4n+4) = 4$.\\
+			Vậy $(u_n)$ là cấp số cộng.
+			\item Ta có: $u_1=2, u_2=1, u_3=2$.\\ Khi đó $u_2-u_1=-1, u_3-u_2=1 \neq u_2-u_1$.\\ Vậy $(u_n)$ không là cấp số cộng.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}
+	Chứng minh các dãy số sau là một cấp số cộng. Xác định công sai và số hạng đầu tiên của cấp số cộng đó.
+	\begin{tasks}(2)
+		\task Dãy số $(u_n)$ với $u_n = 19n - 5$. \dapso{$ u_1=14;d=19 $.}
+		\task Dãy số $(u_n)$ với $u_n = -3n + 1$. \dapso{$ u_1=-2;d=-3 $.}
+	\end{tasks}
+	
+	\loigiai{\begin{enumEX}{1}
+			\item 
+			Ta có $u_{n + 1} - u_n = 19(n + 1) - 5 - 19n + 5 = 19n + 19 - 5 - 19n + 5 = 19$.\\
+			Do đó dãy số $(u_n)$ là một cấp số cộng với công sai $d = 19$, số hạng đầu $u_1 = 14$.
+			\item Ta có $u_{n + 1} - u_n = -3(n + 1) + 1 + 3n -1 = -3n - 3 + 1 + 3n - 1 = -3$.\\
+			Do đó dãy số $(u_n)$ là một cấp số cộng với công sai $d = -3$, số hạng đầu $u_1 = -2$.
+	\end{enumEX}}
+\end{vd}\dongcham{9}
+
+\begin{dang}{Công sai, số hạng đầu và số hạng tổng quát của cấp số cộng}
+\end{dang}
+
+\begin{vd}
+	Cho cấp số cộng $(u_n)$ có số hạng đầu $u_1=4$ và công sai $d=3$.
+	\begin{tasks}
+		\task Viết công thức số hạng tổng quát $u_n$.
+		\task Số 832 là số hạng thứ mấy của cấp số cộng trên?
+		\task Số 2024 có là số hạng nào của cấp số cộng trên không?
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $u_n=u_1+(n-1)d=3n+1$.
+			\item $u_n=832 \Leftrightarrow 3n+1=832 \Leftrightarrow 3n = 831 \Leftrightarrow n=277$.\\
+			Vậy 832 là số hạng thứ 277 của cấp số cộng.
+			\item $u_n=2024 \Leftrightarrow 3n+1=2024 \Leftrightarrow 3n = 2023 \Leftrightarrow n=\dfrac{2023}{7}$ (loại).\\
+			Vậy 2024 không phải là 1 số hạng của cấp số cộng trên.
+	\end{enumerate}}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Viết sáu số xen giữa hai số $3$ và $24$ để được cấp số cộng có tám số hạng. Tìm cấp số cộng đó.	\dapso{$3$, $6$, $9$, $12$, $ 15$, $18$, $21$, $ 24$.}
+	\loigiai{
+		Gọi số hạng đầu của cấp số cộng là $u_1$, công sai $d$.
+		Theo đề bài ta có
+		\begin{align*}
+			\heva{&u_1=3\\&u_8=24}
+			\Leftrightarrow \heva{&u_1=3\\& u_1+7d=24}
+			\Leftrightarrow \heva{&u_1=3\\&d=3.}
+		\end{align*}
+		Vậy cấp số cộng đó là $3$, $6$, $9$, $12$, $ 15$, $18$, $21$, $ 24$.
+		
+	}
+\end{vd}\dongcham{8}
+
+\begin{vd}
+	Tìm số hạng đầu, công sai và số hạng tổng quát của cấp số cộng, biết
+	\begin{tasks}(2)
+		\task $\heva{&u_7 = 27\\&u_{15} = 59.}$	\dapso{$ u_1 = 3;d = 4 $.}
+		\task $\heva{&u_9 = 5u_2\\&u_{13} = 2u_6 + 5.}$	\dapso{$ u_1 = 3;d = 4 $.}
+		\task $\heva{&u_2 + u_4 - u_6 = -7\\&u_8 - u_7 = 2u_4.}$	\dapso{$ u_1 = -5;d = 2. $}
+		\task $\heva{&u_3 - u_7 = -8\\&u_2 \cdot u_7 = 75.}$	\dapso{$u_1 = 3;d = 2$ hoặc $u_1 = -17;d = 2$.}
+		\task $\heva{&u_1 + u_5 = \dfrac{5}{3}\\&u_3 \cdot u_4 = \dfrac{65}{72}.}$	\dapso{$u_1 = \dfrac{1}{3}$, $d = \dfrac{1}{4}$.}
+		\task $\heva{&u_1 + u_2 + u_3 = 9\\&u_1^2 + u_2^2 + u_3^2 = 35.}$	\dapso{$u_1 = 1$, $d = 2$ hoặc $u_1 = 5$, $d = -2$.}
+	\end{tasks}
+	\loigiai{
+		\begin{listEX}
+			\item $\heva{&u_7 = 27\\&u_{15} = 59} \Leftrightarrow \heva{&u_1 + 6d = 27\\&u_1 + 14d = 59} \Leftrightarrow \heva{&u_1 = 3\\&d = 4.}$\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 3$, công sai là $d = 4$.
+			\item $\heva{&u_9 = 5u_2\\&u_{13} = 2u_6 + 5} \Leftrightarrow \heva{&u_1 + 8d = 5u_1 + 5d\\&u_1 + 12d = 2u_1 + 10d + 5} \Leftrightarrow \heva{&4u_1 - 3d = 0\\&-u_1 + 2d = 5} \Leftrightarrow \heva{&u_1 = 3\\&d = 4.}$\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 3$, công sai là $d = 4$.
+			\item $\heva{&u_2 + u_4 - u_6 = -7\\&u_8 - u_7 = 2u_4} \Leftrightarrow \heva{&u_1 + d + u_1 + 3d - u_1 - 5d = -7\\&u_1 + 7d - u_1 - 6d = 2u_1 + 6d} \Leftrightarrow \heva{&u_1 - d = -7\\&2u_1 + 5d = 0} \Leftrightarrow \heva{&u_1 = -5\\&d = 2.}$\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = -5$, công sai là $d = 2$.
+			\item $\heva{&u_3 - u_7 = -8\\&u_2 \cdot u_7 = 75} \Leftrightarrow \heva{&u_1 + 2d -u_1 - 6d = -8\\&(u_1 + d)(u_1 + 6d) = 75} \Leftrightarrow \heva{&d = 2\\&u_1^2 + 14u_1 - 51 = 0} \Leftrightarrow \heva{&d = 2\\&\hoac{&u_1 = 3\\&u_1 = -17.}}$\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 3$, công sai là $d = 2$ hoặc $u_1 = -17$, $d = 2$.
+			\item $\heva{&u_1 + u_5 = \dfrac{5}{3}\\&u_3 \cdot u_4 = \dfrac{65}{72}} \Leftrightarrow \heva{&2u_3 = \dfrac{5}{3}\\&u_3 \cdot u_4 = \dfrac{65}{72}} \Leftrightarrow \heva{&u_3 = \dfrac{5}{6}\\&u_4 = \dfrac{13}{12}.}$\\
+			Khi đó ta có $u_4 = u_3 + d \Leftrightarrow d = u_4 - u_3 = \dfrac{13}{12} - \dfrac{5}{6} = \dfrac{1}{4}$.
+			Mặt khác $u_3 = u_1 + 2d \Leftrightarrow u_1 = u_3 - 2d = \dfrac{5}{6} - \dfrac{1}{2} = \dfrac{1}{3}$.\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = \dfrac{1}{3}$, công sai là $d = \dfrac{1}{4}$.	
+			\item $\heva{&u_1 + u_2 + u_3 = 9\\&u_1^2 + u_2^2 + u_3^2 = 35} \Leftrightarrow \heva{&3u_2 = 9\\&(u_2 - d)^2 + u_2^2 + (u_2 + d)^2 = 35} \Leftrightarrow \heva{&u_2 = 3\\&(3 - d)^2 + 9 + (3 + d)^2 = 35} \Leftrightarrow \heva{&u_2 = 3\\&d^2 = 4.}$\\
+			Do $d^2 = 4 \Leftrightarrow \hoac{&d = -2\\&d = 2}$.
+			Với $u_2 = 3$ và $d = 2$ thì $u_1 = u_2 - d = 1$. Với $u_2 = 3$ và $d = -2$ thì $u_1 = u_2 - d = 5$.\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 1$, công sai là $d = 2$ hoặc $u_1 = 5$, $d = -2$.
+	\end{listEX}}	
+\end{vd}\dongcham{32}
+
+\begin{dang}{Tổng của $n$ số hạng đầu tiên của một cấp số cộng}
+	Tổng của $n$ số hạng đầu tiên:	Đặt ${{S}_{n}}={{u}_{1}}+{{u}_{2}}+{{u}_{3}}+\cdots+{{u}_{n}}.$ Khi đó
+	\begin{itemize}
+		\item [$\bullet$] ${{S}_{n}}=\dfrac{n\left( {{u}_{1}}+{{u}_{n}} \right)}{2}=\dfrac{n\left( {{u}_{2}}+{{u}_{n-1}} \right)}{2}=\dfrac{n\left( {{u}_{3}}+{{u}_{n-2}} \right)}{2}=\cdots$
+		\item [$\bullet$] Vì ${{u}_{n}}={{u}_{1}}+\left( n-1 \right)d$ nên công thức trên có thể viết lại là ${{S}_{n}}=n{{u}_{1}}+\dfrac{n\left( n-1 \right)}{2}d.$
+	\end{itemize}
+\end{dang}
+
+\begin{vd}
+	Cho một cấp số cộng $(u_n)$ có $u_3 + u_{28} = 100$. Hãy tính tổng của $30$ số hạng đầu tiên của cấp số cộng đó.\dapso{$1500$}
+	\loigiai{Ta có $S_{30} = \dfrac{30(u_1 + u_{30})}{2} = \dfrac{30(u_1 + 2d + u_{30} - 2d)}{2} = \dfrac{30(u_3 + u_{28})}{2} = \dfrac{30 \cdot 100}{2} = 1500$.}
+\end{vd}\dongcham{7}
+
+\begin{vd}
+	Cho một cấp số cộng $(u_n)$ có $S_6 = 18$ và $S_{10} = 110$. Tính $S_{20}$.	\dapso{$ 620 $.}
+	\loigiai{
+		Giả sử cấp số cộng $(u_n)$ có số hạng đầu là $u_1$ và công sai là $d$.\\
+		Ta có $S_6 = 6u_1 + \dfrac{6 \cdot 5}{2}d \Leftrightarrow 6u_1 + 15d = 18$. \quad (1)\\
+		$S_{10} = 10u_1 + \dfrac{10 \cdot 9}{2}d \Leftrightarrow 10u_1 + 45d = 110$. \quad (2)\\
+		Từ (1) và (2), ta có hệ phương trình $\heva{&6u_1 + 15d = 18\\&10u_1 + 45d = 110} \Leftrightarrow \heva{&u_1 = -7\\&d = 4.}$\\
+		Khi đó $S_{20} = 20u_1 + \dfrac{20 \cdot 19}{2}d = 20 \cdot (-7) + 190 \cdot 4 = 620$.
+	}
+\end{vd}\dongcham{8}
+
+
+\begin{vd}
+	Tìm số hạng đầu và công sai của cấp số cộng, biết
+	\begin{tasks}(2)
+		\task $\heva{&u_1^2 + u_2^2 + u_3^2 = 155\\&S_3 = 21.}$	\dapso{$u_1 = 9$, $d = -2$ hoặc $u_1 = 5$, $d = 2$.}
+		\task $\heva{&S_3 = 12\\&S_5 = 35.}$	\dapso{$u_1 = 1$, $d = 3$.}
+	\end{tasks}
+	\loigiai{
+		\begin{listEX}
+			\item $\heva{&u_1^2 + u_2^2 + u_3^2 = 155\\&S_3 = 21} \Leftrightarrow \heva{&u_1^2 + (u_1 + d)^2 + (u_1 + 2d)^2 = 155 &(1)\\&3u_1 + 3d = 21.&(2)}$\\
+			Từ (2), ta có $3u_1 + 3d = 21 \Rightarrow d = 7 - u_1$, thay vào (1)
+			$$u_1^2 + 7^2 + (14 - u_1)^2 = 155 \Leftrightarrow 2u_1^2 - 28u_1 + 90 = 0 \Leftrightarrow \hoac{&u_1 = 9\\&u_1 = 5.}$$
+			Với $u_1 = 9$ thì $d = -2$. Với $u_1 = 5$ thì $d = 2$.\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 9$, công sai là $d = -2$ hoặc $u_1 = 5$, $d = 2$.
+			\item $\heva{&S_3 = 12\\&S_5 = 35} \Leftrightarrow \heva{&3u_1 + 3d = 12\\&5u_1 + 10d = 35} \Leftrightarrow \heva{&u_1 = 1\\&d = 3.}$\\
+			Vậy số hạng đầu của cấp số cộng là $u_1 = 1$, công sai là $d = 3$.
+	\end{listEX}}
+\end{vd}\dongcham{12}
+
+\begin{vd}
+	Tìm số hạng tổng quát của cấp số cộng, biết 
+	$\heva{&S_4 = 20\\&\dfrac{1}{u_1} + \dfrac{1}{u_2} + \dfrac{1}{u_3} + \dfrac{1}{u_4} = \dfrac{25}{24}}$ và cấp số cộng có công sai là một số nguyên âm.	\dapso{$ u_n=10-2n $.}
+	\loigiai{
+		$\heva{&S_4 = 20 &(1)\\&\dfrac{1}{u_1} + \dfrac{1}{u_2} + \dfrac{1}{u_3} + \dfrac{1}{u_4} = \dfrac{25}{24}&(2).}$\\
+		Từ (1), suy ra $u_1 + u_4 = u_2 + u_3 = 10$ và $u_1 = 5 - \dfrac{3}{2}d$.\\
+		Từ (2), ta có 
+		\begin{eqnarray*}
+			& &\dfrac{u_1 + u_4}{u_1 \cdot u_4} + \dfrac{u_2 + u_3}{u_2 \cdot u_3} = \dfrac{25}{24} \Leftrightarrow \dfrac{10}{u_1(u_1 + 3d)} + \dfrac{10}{(u_1 + d)(u_1 + 2d)} = \dfrac{25}{24}\\
+			&\Leftrightarrow & \dfrac{10}{\left(5 - \dfrac{3}{2}d\right)\left(5 + \dfrac{3}{2}d\right)} + \dfrac{10}{\left(5 - \dfrac{1}{2}d\right)\left(5 + \dfrac{1}{2}d\right)} = \dfrac{25}{24} \Leftrightarrow \dfrac{10}{25 - \dfrac{9}{4}d^2} + \dfrac{10}{25 - \dfrac{1}{4}d^2} = \dfrac{25}{24}\\
+			&\Leftrightarrow & 10\left(25 - \dfrac{9}{4}d^2 + 25 - \dfrac{1}{4}d^2\right) = \dfrac{25}{24}\left(25 - \dfrac{9}{4}d^2\right)\left(25 - \dfrac{1}{4}d^2\right)\\
+			&\Leftrightarrow & \dfrac{75}{128}d^4 - \dfrac{1925}{48}d^2 + \dfrac{3625}{24} = 0 \Leftrightarrow \hoac{&d^2 = \dfrac{580}{9}\\&d^2 = 4} \Leftrightarrow \hoac{&d = \pm \dfrac{2\sqrt{145}}{3}\\&d = \pm 2.}
+		\end{eqnarray*}
+		Với $d = -2$ thì $u_1 = 8$. Suy ra $u_n=u_1+(n-1)d=10-2n$}
+\end{vd}\dongcham{18}
+
+\begin{vd}
+	Tính các tổng sau
+	\begin{tasks}(2)
+		\task $S = 1 + 3 + 5 + \cdots + (2n - 1) + (2n + 1)$.\dapso{$S = (n + 1)^2$}
+		\task $S = 100^2 - 99^2 + 98^2 - 97^2 + \cdots + 2^2 - 1^2$.\dapso{$S = 5050$}
+	\end{tasks}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item $S = 1 + 3 + 5 + \cdots + (2n - 1) + (2n + 1)$.\\
+			Xét cấp số cộng $(u_k)$, $k \in \mathbb{N}^*$ với số hạng đầu là $u_1 = 1$ và công sai là $d = 2$.\\
+			Ta có $u_k = u_1 + (k - 1)d \Leftrightarrow 2n + 1 = 1 + 2(k - 1) \Leftrightarrow k = n + 1$.\\
+			Vậy $S = \dfrac{k(u_1 + u_k)}{2} = \dfrac{(n + 1)(1 + 2n + 1)}{2} = (n + 1)^2$.
+			\item $S = 100^2 - 99^2 + 98^2 - 97^2 + \cdots + 2^2 - 1^2 = 199 + 195 + \cdots + 3$.\\
+			Xét cấp số cộng $(u_n)$ có số hạng đầu $u_1 = 199$ và công sai $d = u_2 - u_1 = 195 - 199 = -4$.\\
+			Ta có $u_n = u_1 + (n - 1)d \Leftrightarrow 3 = 199 - 4(n - 1) \Leftrightarrow n = 50$.\\
+			Khi đó $S = \dfrac{n(u_1 + u_{50})}{2} = \dfrac{50(199 + 3)}{2} = 5050$.
+			
+		\end{enumEX}
+	}
+\end{vd}\dongcham{18}
+
+\begin{dang}{Tính chất của cấp số cộng}
+	\begin{itemize}
+		\item [\ding{172}] Nếu $a$; $b$; $c$ theo thứ tự lập thành cấp số cộng thì $a+c=2b$.
+		\item [\ding{173}] Lưu ý:
+		\begin{itemize}
+			\item [$\bullet$] Nếu cho ba số liên tiếp của một cấp số cộng, ta có thể xem ba số đó là $$a-d;\quad a; \quad a+d$$
+			\item [$\bullet$] Nếu cho bốn số liên tiếp của một cấp số cộng, ta có thể xem ba số đó là $$a-3d;\quad a-d; \quad a+d; \quad a+3d.$$
+		\end{itemize}
+	\end{itemize}
+\end{dang}
+
+\begin{vd}
+	Tìm ba số hạng liên tiếp của một cấp số cộng biết tổng của chúng bằng $27$ và tổng các bình phương của chúng là $293$.\dapso{$4$, $9$, $14$}
+	\loigiai{
+		Gọi ba số hạng liên tiếp của cấp số cộng là $x - d$, $x$, $x + d$ trong đó $d$ là công sai của cấp số cộng.\\
+		Khi đó ta có $x - d + x + x + d = 27 \Leftrightarrow 3x = 27 \Leftrightarrow x = 9$.\\
+		Mà $(x - d)^2 + x^2 + (x + d)^2 = 293 \Leftrightarrow (9 - d)^2 + 81 + (9 + d)^2 = 293 \Leftrightarrow 2d^2 -50 = 0 \Leftrightarrow \hoac{&d = 5\\&d = -5.}$\\	
+		Với $d = 5$ thì ba số hạng của cấp số cộng là $4$, $9$, $14$.
+		Với $d = -5$ thì ba số hạng của cấp số cộng là $14$, $9$, $4$.\\
+		Vậy ba số hạng liên tiếp của cấp số cộng là $4$, $9$, $14$.
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}
+	Tìm bốn số hạng liên tiếp của một cấp số cộng, biết tổng của chúng bằng $10$ và tổng bình phương của chúng bằng $30$.\dapso{$1$, $2$, $3$, $4$}
+	\loigiai{
+		Gọi bốn số hạng liên tiếp của cấp số cộng là $x - 3d$, $x - d$, $x 
+		+ d$, $x + 3d$ với $2d$ là công sai của cấp số cộng.\\
+		Khi đó ta có $x - 3d + x - d + x + d + x + 3d = 10 \Leftrightarrow 4x = 10 \Leftrightarrow x = \dfrac{5}{2}$.\\
+		Mặt khác $$(x - 3d)^2 + (x - d)^2 + (x + d)^2 + (x + 3d)^2 = 30 \Leftrightarrow 4x^2 + 20d^2 = 30 \Leftrightarrow d^2 = \dfrac{1}{4} \Leftrightarrow \hoac{&d = \dfrac{1}{2}\\&d = -\dfrac{1}{2}.}$$
+		Với $x = \dfrac{5}{2}$ thì $d = \dfrac{1}{2}$, khi đó bốn số hạng liên tiếp của cấp số cộng là $1$, $2$, $3$, $4$.\\
+		Với $x = \dfrac{5}{2}$ thì $d = -\dfrac{1}{2}$, khi đó bốn số hạng liên tiếp của cấp số cộng là $4$, $3$, $2$, $1$.\\
+		Vậy bốn số hạng liên tiếp của cấp số cộng là $1$, $2$, $3$, $4$.
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}
+	Ba góc của một tam giác vuông lập thành một cấp số cộng. Tìm ba góc đó.\dapso{$\dfrac{\pi}{6}$, $\dfrac{\pi}{3}$, $\dfrac{\pi}{2}$}
+	\loigiai{Gọi ba góc của tam giác lần lượt là $A$, $B$, $C$.
+		Khi đó ta có $A + B + C = \pi$.\\
+		Do ba góc $A$, $B$, $C$ của tam giác theo thứ tự lập thành một cấp số cộng nên $A + C = 2B$.\\
+		Do đó $2B + B = \pi \Rightarrow 3B = \pi \Rightarrow B = \dfrac{\pi}{3}$.\\
+		Do tam giác $ABC$ vuông nên giả sử $C = \dfrac{\pi}{2}$ khi đó công sai $d$ của cấp số cộng là $d = C - B = \dfrac{\pi}{6}$.\\
+		Vậy góc $A$ của tam giác là $A = \dfrac{\pi}{3} - \dfrac{\pi}{6} = \dfrac{\pi}{6}$.}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Cho $a$, $b$, $c$ là ba số hạng liên tiếp của một cấp số cộng. Chứng minh rằng
+	\begin{tasks}(1)
+		\task $a^2 + 2bc = c^2 + 2ab$.
+		\task $2(a+b+c)^3 = 9 \left[ a^2(b+c) + b^2(a+c) + c^2(a+b) \right]$.
+		\task  $b^2 + bc +c^2$, $a^2 + ac + c^2$, $a^2 + ab + b^2$ cũng là một cấp số cộng.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Vì $a$, $b$, $c$ là ba số liên tiếp của một cấp số cộng nên $a + c = 2b \Rightarrow a = 2b -c$.\\
+			Do đó
+			$$a^2 +2bc = (2b-c)^2 + 2bc = 4b^2 - 2bc + c^2 = 2b(2b -c) + c^2 = 2ba + c^2 = c^2 + 2ab.$$
+			Vậy $a^2 + 2bc = c^2 + 2ab$ (đpcm).
+			
+			\item Vì $a$, $b$, $c$ là ba số liên tiếp của một cấp số cộng nên $a + c = 2b \Rightarrow a = 2b -c$.\\
+			Do đó
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+				& \mbox{VT}  & = 2(a+b+c)^3 = 2(3b)^3 = 54b^3\\
+				& \mbox{VP}  & = 9\left[ a^2(b+c) + b^2(a+c) + c^2(a+b) \right] \\
+				& & = 9\left[ (2b-c)^2(b+c) + b^2(2b-c+c) + c^2(2b-c+b) \right] \\ 
+				& & = 9\left[ (4b^2 - 4bc+c^2)(b+c) + b^2(2b) + c^2(3b-c) \right] \\
+				& & = 9\left[ 4b^3 - 4b^2c +bc^2 + 4b^2c - 4bc^2 + c^3 + 2b^3 + 3bc^2 - c^3 \right] \\
+				& & = 9\cdot (6b^3) = 54b^3 = \mbox{ VT }.
+			\end{eqnarray*}
+			Vậy $2(a+b+c)^3 = 9 \left[ a^2(b+c) + b^2(a+c) + c^2(a+b) \right]$ (đpcm).
+			
+			\item Vì ba số $a$, $b$, $c$ theo thứ tự lập thành một cấp số cộng thì $a + c = 2b \Rightarrow a = 2b - c$.\\
+			Xét
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+				& 2(a^2 + ac + c^2) - (a^2 + ab + b^2) & = a^2 + a(2c-b) + 2c^2 - b^2 \\
+				& & = (2b-c)^2 + (2b-c)(2c-b) + 2c^2 - b^2 \\
+				& & = b^2 + bc  +c^2\\
+				&\Rightarrow (b^2 + bc  +c^2) + (a^2 + ab + b^2) &= 2(a^2 + ac + c^2).
+			\end{eqnarray*}
+			Vậy ba số: $b^2 + bc +c^2$, $a^2 + ac + c^2$, $a^2 + ab + b^2$ cũng là một cấp số cộng.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{25}
+
+
+\begin{dang}{Vận dụng, thực tiễn}
+\end{dang}
+
+\begin{vd}
+	Một người trồng $3003$ cây theo một hình tam giác như sau: \lq\lq Hàng thứ nhất có một cây, hàng thứ hai có $2$ cây, hàng thứ ba có $3$ cây, $\ldots$\rq\rq. Hỏi có bao nhiêu hàng cây được trồng như thế?\dapso{$77$ hàng}
+	\loigiai{
+		Gọi $u_n$ là số cây trồng ở hàng thứ $n$.\\
+		Theo đề bài ta có $u_1=1; u_2=2; u_3=3, \ldots$.\\
+		Dễ thấy $u_n$ là cấp số cộng với số hạng đầu là $u_1=1$, công sai $d=1$.\\
+		Giả sử với $3003$ cây trồng được $n_o$ hàng. Khi đó ta có
+		\begin{align*}
+			\dfrac{\left[ 2u_1+(n_o-1)d\right] n_o}{2}=3003 
+			\Leftrightarrow \dfrac{\left[ 2 \cdot 1+(n_o-1)\right] n_o}{2}=3003 
+			\Leftrightarrow n^2_o+n_o-6006=0 
+			\Leftrightarrow \hoac{&n_o=77 \ (\text{thỏa mãn})\\&n_o=-78 \ (\text{loại }).}
+		\end{align*}
+		Vậy có $77$ hàng được trồng.
+	}
+\end{vd}\dongcham{6}
+
+\begin{vd}
+	Bạn $A$ muốn mua món quà tặng mẹ và chị nhân ngày Quốc tế phụ nữ $8/3$. Do đó $A$ quyết định tiết kiệm từ ngày $1/1$ của năm đó với ngày đầu là $500$ đồng/ngày, ngày sau cao hơn ngày trước $ 500$ đồng. Hỏi đúng đến ngày $8/3$ bạn $A$ có đủ tiền để mua quà cho mẹ và chị không? Giả sử rằng món quà $A$ dự  định mua khoảng $800$ ngàn đồng và từ ngày $1/1$ đến ngày $8/3$ có số ngày ít nhất là $67$ ngày.
+	\loigiai{
+		Gọi $ u_1$, $u_2$,$\ldots$, $u_n$ là số tiền tiết kiệm của ngày $1/1$, $2/1$,$\ldots$, $8/3$.\\
+		Theo đề bài ta có $(u_n)$ lập thành cấp số cộng với công sai $d=500$. \\
+		Từ ngày $1/1$ đến ngày $8/3$, bạn $A$ tiết kiệm được ít nhất là
+		$ \dfrac{\left[ 2\cdot 500+(67-1)\cdot 500\right]\cdot 67 }{2}=1 139 000 > 800 000$.\\
+		Vậy bạn $A$ đủ tiền để mua quà cho mẹ mùng $8/3$.
+		
+	}
+\end{vd}\dongcham{6}
+
+\begin{vd}%[1D3K3-6]%
+	Một gia đình cần khoan một cái giếng để lấy nước. Họ thuê một đội khoan giếng nước. Biết giá của mét khoan đầu tiên là $80000$ đồng, kể từ mét khoan thứ hai giá của mỗi mét khoan tăng thêm $5000$ đồng so với giá của mét khoan trước đó. Biết cần phải khoan sâu xuống $50m$ mới có nước. Hỏi phải trả bao nhiêu tiền để khoan cái giếng đó?
+	\loigiai{
+		* Áp dụng công thức tính tổng của $n$ số hạng đầu của cấp số nhân có số hạng đầu $u_1=80000$, công sai $d=5000$ ta được số tiền phải trả khi khoan đến mét thứ $n$ là\\
+		$S_n=\dfrac{n(u_1+u_n)}{2}=\dfrac{n\left[2u_1+(n-1)d\right]}{2}$.\\
+		* Khi khoan đến mét thứ $50$, số tiền phải trả là\\
+		$S_{50}=\dfrac{50\left[2\cdot 80000+(50-1)\cdot 5000\right]}{2}=10125000$ đồng.}
+\end{vd}\dongcham{6}
+
+\begin{vd}
+	Anh Nam được nhận vào làm việc ở một công ty về công nghệ với mức lương khởi điểm là $ 100 $ triệu đồng một năm. Công ty sẽ tăng thêm lương cho anh Nam mỗi năm là $ 20 $ triệu đồng. Tính tổng số tiền lương mà anh Nam nhận được sau $ 10 $ năm làm việc cho công ty đó.
+	\loigiai{
+		Số tiền anh Nam nhận được mỗi năm tăng theo quy luật của một cấp số cộng với $u_1=100$ (triệu đồng) và $d=20$.\\
+		Suy ra tổng số tiền anh Nam nhận trong 10 năm là
+		$S_{10}=\dfrac{10}{2}\left(2u_1+9d \right)= 1900$ tương ứng 1 tỉ 900 triệu đồng.
+	}
+\end{vd}\dongcham{6}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}
+	Cho cấp số cộng $\left(u_n\right)$ với $u_1=9$, công sai $d=-2$. Viết ba số hạng đầu của cấp số cộng đó.	\dapso{$ 9;7;5 $.}
+	\loigiai{
+		Ba số hạng đầu của cấp số cộng $\left(u_n\right)$ là: $u_1=9$; $u_2=u_1+d=9+(-2)=7; u_3=u_2+d=7+(-2)=5$.	
+	}
+\end{baitap}\cham{4}
+\begin{baitap}
+	Cho cấp số cộng $\left(u_n\right)$ có số hạng đầu $u_1=2$ và công sai $d=3$. Hãy viết năm số hạng đầu của cấp số cộng này.\dapso{$ 2;5;8;11;14 $.}
+	\loigiai{
+		Năm số hạng đầu của cấp số cộng này là:
+		$$\begin{aligned}
+			& u_1=2, u_2=u_1+d=2+3=5, u_3=u_2+d=5+3=8, \\
+			& u_4=u_3+d=8+3=11, u_5=u_4+d=11+3=14.
+		\end{aligned}$$	
+	}
+\end{baitap}\cham{5}
+\begin{baitap}
+	Cho dãy số $\left(u_n\right)$ với $u_n=5 n-1$. Chứng minh rằng $\left(u_n\right)$ là một cấp số cộng. Tìm số hạng đầu $u_1$ và công sai $d$ của nó.	\dapso{$ u_1=4;d=5 $.}
+	\loigiai{
+		Ta có $u_n-u_{n-1}=(5 n-1)-[5(n-1)-1]=5$, với mọi $n \geq 2$.\\
+		Do đó $\left(u_n\right)$ là cấp số cộng có số hạng đầu $u_1=5 \cdot 1-1=4$ và công sai $d=5$.	
+	}
+\end{baitap}\cham{7}
+\begin{baitap}
+	Cho dãy số $\left(u_n\right)$ với $u_n=-2 n+3$. Chứng minh rằng $\left(u_n\right)$ là một cấp số cộng. Xác định số hạng đầu và công sai của cấp số cộng này.	\dapso{$ u_1=1;d=-2 $.}
+\end{baitap}\cham{7}
+\begin{baitap}
+	Tìm năm số hạng đầu và số hạng thứ $ 100 $ của cấp số cộng $\left(u_n\right): 10,5, \ldots$.	\dapso{$ u_1=10;u_{100}=-485 $.}
+	\loigiai{
+		Cấp số cộng này có số hạng đầu $u_1=10$ và công sai $d=-5$.\\
+		Do đó năm số hạng đầu là: $10,5,0,-5,-10$.\\
+		Số hạng thứ $ 100 $ là $u_{100}=u_1+(100-1) d=10+99 \cdot(-5)=-485$.	
+	}
+\end{baitap}\cham{6}
+\begin{baitap}
+	Số hạng thứ $ 10 $ của một cấp số cộng $\left(u_n\right)$ bằng $ 48 $ và số hạng thứ $ 18 $ bằng $ 88 $. Tìm số hạng thứ $ 100 $ của cấp số cộng đó.	\dapso{$ 498 $.}
+	\loigiai{
+		Giả sử $u_1$ là số hạng đầu và $d$ là công sai của cấp số cộng đó. \\
+		Ta có:	$\begin{aligned}
+			& u_{10}=u_1+9 d=48 \\
+			& u_{18}=u_1+17 d=88.
+		\end{aligned}$\\
+		Giải hệ này ta được $u_1=3$ và $d=5$.\\
+		Vậy số hạng thứ $ 100 $ của cấp số cộng này là $u_{100}=u_1+99 d=3+99 \cdot 5=498$.
+	}
+\end{baitap}\cham{7}
+\begin{baitap}
+	Cần lấy tổng của bao nhiêu số hạng đầu của cấp số cộng $2,5,8, \ldots$ để được kết quả bằng $345?$	\dapso{$ 15 $.}
+	\loigiai{
+		Cấp số cộng này có số hạng đầu $u_1=2$ và công sai $d=3$. Gọi $n$ là số các số hạng đầu của cấp số cộng cần lấy tổng, ta có 
+		$$345=S_n=\dfrac{n}{2}\left[2 u_1+(n-1) d\right]=\dfrac{n}{2}[2 \cdot 2+(n-1) \cdot 3]=\dfrac{n}{2}(3 n+1).$$
+		Do đó $3 n^2+n-690=0$.\\
+		Giải phương trình bậc hai này ta được $n=-\dfrac{230}{15}$ (loại) và $n=15$.\\
+		Vậy phải lấy tổng của $ 15 $ số hạng đầu của cấp số cộng đã cho để được tổng bằng $ 345 $.	
+	}
+\end{baitap}\cham{7}
+\begin{baitap}
+	Một nhà thi đấu có $ 20 $ hàng ghế dành cho khán giả. Hàng thứ nhất có $ 20 $ ghế, hàng thứ hai có $ 21 $ ghế, hàng thứ ba có $ 22 $ ghế, \ldots. Cứ như thế, số ghế ở hàng sau nhiều hơn số ghế ở hàng trước là $ 1 $ ghế. Trong một giải thi đấu, ban tổ chức đã bán được hết số vé phát ra và số tiền thu được từ bán vé là $ 70\,800\,000 $ đồng. Tính giá tiền của mỗi vé (đơn vị: đồng), biết số vé bán ra bằng số ghế dành cho khán giả của nhà thi đấu và các vé là đồng giá.	\dapso{$ 120\,000 $ đồng.}
+	\loigiai{
+		Số ghế ở mỗi hàng lập thành một cấp số cộng có số hạng đầu $u_1=20$, công sai $d=1$. Cấp số cộng này có 20 số hạng.\\
+		Do đó, tổng số ghế trong nhà thi đấu là: $S_{20}=\dfrac{[2 \cdot 20+(20-1) \cdot 1] \cdot 20}{2}=590$.\\
+		Vì số vé bán ra bằng số ghế dành cho khán giả của nhà thi đấu nên số vé bán ra là $ 590 $.\\
+		Vậy giá tiền của một vé là: $70\,800\,000: 590=120\,000$ (đồng).	
+	}
+\end{baitap}\cham{8}
+\begin{baitap}
+	Giá của một chiếc xe ô tô lúc mới mua là $ 680 $ triệu đồng. Cứ sau mỗi năm sử dụng, giá của chiếc xe ô tô giảm $ 55 $ triệu đồng. Tính giá còn lại của chiếc xe sau $ 5 $ năm sử dụng.
+	\loigiai{
+		Giá của chiếc xe ô tô sau một năm sử dụng là 680 - 55 = 625 (triệu đồng).\\
+		Giá của chiếc xe ô tô sau mỗi năm sử dụng lập thành một cấp số cộng với số hạng đầu là u $u_1=625$ và công sai $d=-55$ (do giá xe giảm).\\
+		Do đó, giá của chiếc ô tô sau 5 năm sử dụng là
+		$u_5=u_1+(5-1) d=625+4 \cdot(-55)=405$ (triệu đồng).}
+\end{baitap}\cham{8}
+\begin{baitap}
+	Một kiến trúc sư thiết kế một hội trường với $ 15 $ ghế ngồi ở hàng thứ nhất, $ 18 $ ghế ngồi ở hàng thứ hai, $ 21 $ ghế ngồi ở hàng thứ ba, và cứ như vậy (số ghế ở hàng sau nhiều hơn $ 3 $ ghế so với số ghế ở hàng liền trước nó). Nếu muốn hội trường đó có sức chứa ít nhất $ 870 $ ghế ngồi thì kiến trúc sư đó phải thiết kế tối thiểu bao nhiêu hàng ghế?
+	\loigiai{
+		Số ghế ở mỗi hàng của hội trường lập thành một cấp số cộng với số hạng đầu $u_1 = 15$ và công sai $d = 3$. Giả sử cần thiết kế tối thiếu $n$ hàng ghế để hội trường có sức chứa ít nhất 870 ghế ngồi.
+		Ta có: $S_n=\dfrac{n}{2}\left(2 u_1+(n-1) d\right)=\dfrac{n}{2}(2.15+(n-1) .3) \geq 870$
+		Biến đổi bất phương trình này, ta được $$n(30+3 n-3) \geq 1740 \Leftrightarrow 3n^2+27n-1740 \geq 0\Rightarrow n \ge 20.$$
+		Vậy cần thiết kế tối thiểu 20 hàng ghế để thỏa mãn yêu cầu bài toán.
+	}
+\end{baitap}\cham{8}
+\begin{baitap}
+	Vào năm $ 2020 $, dân số của một thành phố là khoảng $ 1,2 $ triệu người. Giả sử mỗi năm, dân số của thành phố này tăng thêm khoảng $ 30 $ nghìn người. Hãy ước tính dân số của thành phố này vào năm $ 2030 $.
+	\loigiai{
+		Ta có: 1,2 triệu người = 1200 nghìn người.\\
+		Dân số mỗi năm của thành phố từ năm 2020 đến năm 2030 lập thành một cấp số cộng, gồm 11 số hạng (2030 - 2020 + 1 = 11), với số hạng đầu $u_1=1200$ và công sai $d=30$.\\
+		Ta có: $u_{11}=u_1+(11-1) d=1200+10 \cdot 30=1500$.\\
+		Vậy dân số của thành phố này vào năm 2030 khoảng 1500 nghìn người hay 1,5 triệu người.}
+\end{baitap}\cham{8}
+\begin{baitap}
+	Chiều cao (đơn vị: centimét) của một đứa trẻ $n$ tuổi phát triển bình thường được cho bởi công thức:	
+	$$x_n=75+5(n-1).$$
+	\begin{flushright}
+		(Nguồn: https://bibabo.vn)
+	\end{flushright}
+	\begin{enumEX}{1}
+		\item Một đứa trẻ phát triển bình thường có chiều cao năm 3 tuổi là bao nhiêu centimét?
+		\item Dãy số $\left(x_n\right)$ có là một cấp số cộng không? Trung bình một năm, chiều cao mỗi đứa trẻ phát triển bình thường tăng lên bao nhiêu centimét?
+	\end{enumEX}
+\end{baitap}\cham{10}
+\begin{baitap}
+	Ở một loài thực vật lưỡng bội, tính trạng chiều cao cây do hai gene không alen là $\mathrm{A}$ và $\mathrm{B}$ cùng quy định theo kiểu tương tác cộng gộp. Trong kiểu gene nếu cứ thêm một alen trội $\mathrm{A}$ hay $\mathrm{B}$ thì chiều cao cây tăng thêm $5 \mathrm{~cm}$. Khi trưởng thành, cây thấp nhất của loài này với kiểu gene aabb có chiều cao $100 \mathrm{~cm}$. Hỏi cây cao nhất với kiểu gene $\mathrm{AABB}$ có chiều cao bao nhiêu?
+	\loigiai{
+	}
+\end{baitap}\cham{12}
+ 
+
+

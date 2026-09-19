@@ -1,0 +1,429 @@
+\section{LÔGARIT}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa và tính chất}
+	\begin{itemize}
+			\item [\iconMT]\indam{Định nghĩa:} Cho hai số dương $a, b$ với $a\neq 1$. Số $\alpha$ thỏa mãn đẳng thức $a^{\alpha}=b$ được gọi là lôgarit cơ số $a$ của $b$ và kí hiệu là $\log_ab$.
+			$$\alpha=\log_ab \Leftrightarrow a^{\alpha}=b.$$
+			\item [\iconMT]\indam{Tính chất:} Cho hai số dương $a, b$ với $a\neq 1$, ta có tính chất sau:
+			\begin{boxdn}
+			\begin{listEX}[2]
+				\item [\ding{172}] \,\,$\log_a1=0$.
+				\item [\ding{173}] \,\,$\log_aa=1$.
+				\item [\ding{174}] \,\,$a^{\log_ab}=b$.
+				\item [\ding{175}] \,\,$\log_aa^{\alpha}=\alpha.$
+			\end{listEX}
+		\end{boxdn}	
+	\end{itemize}
+
+\subsubsection{Các công thức lôgarit cần nhớ}
+		Cho các số dương $a$, $b$, $b_1$, $b_2$,...$b_n$ với $a\neq 1$, ta có các quy tắc sau:
+		\begin{itemize}
+			\item [\iconMT] \indam{Công thức biến đổi tích thương:}
+			\begin{boxdn}
+			\begin{listEX}[2]
+				\item [\ding{172}] \,\,$\log_a\big(b_1b_2\big)=\log_ab_1+\log_ab_2$;
+				\item [\ding{173}] \,\,$\log_a\left( \dfrac{b_1}{b_2}\right)=\log_ab_1-\log_ab_2$.
+			\end{listEX}
+		\end{boxdn}
+		\begin{luuy}
+			\underline{Ghi nhớ}: Lô ga của một tích thành một tổng; Lô ga của một thương thành một hiệu.
+		\end{luuy}
+			\item [\iconMT] \indam{Công thức biến đổi số mũ:}
+			\begin{boxdn}
+			\begin{listEX}[2]
+			\item [\ding{172}] \,\,$\log_ab^{m}=m \cdot\log_ab$.
+			\item [\ding{173}] \,\, $\log_{a}{\left( \dfrac{1}{b}\right) }=-\log_ab$.
+			\end{listEX}
+			\end{boxdn}
+		\begin{luuy}
+			\underline{Ghi nhớ}: Với điều kiện $b \ne 0$ thì	$\log_ab^{2n}=2n\cdot \log_a|b|$.
+		\end{luuy}
+		\item [\iconMT] \indam{Công thức đổi cơ số:}
+		\begin{boxdn}
+		\begin{listEX}
+			\item [\ding{172}] \,\, $\log_ab=\dfrac{1}{\log_ba}$, với $b\neq 1$
+			\item [\ding{173}] \,\, $\log_ab=\dfrac{\log_cb}{\log_ca}$, với $a, b, c>0$ và $a\neq 1, c\neq 1$
+			\item [\ding{174}] \,\,  $\log_ab \cdot  \log_bc = \log_ac$, với $a, b, c>0$ và $a\neq 1, b\neq 1$
+		\end{listEX}
+	\end{boxdn}
+	\end{itemize}
+
+\subsubsection{Lôgarít thập phân và lôgarit tự nhiên}
+	\begin{itemize}
+			\item [\iconMT]  \indam{Lôgarit thập phân:}Lôgarit cơ số $10$ gọi là lôgarit thập phân.
+			\begin{itemize}
+				\item [\faCheck] $\log_{10}N$, ($N>0$) được viết là $\log N$ hay $\lg N$.
+			\end{itemize}
+			\item [\iconMT] \indam{Lôgarít tự nhiên:} Lôgarit cơ số $e$ gọi là lôgarit tự nhiên.
+			\begin{itemize}
+				\item [\faCheck] $\log_eN$, ($N>0$) được viết là $\ln N$.
+			\end{itemize}
+	\end{itemize}
+\subsection{CÁC DẠNG TOÁN THƯỜNG GẶP}
+
+\begin{dang}{Tính toán biểu thức chứa lôgarit}
+\end{dang}
+
+\begin{vd}%[1D4Y2-1]
+	Không sử dụng máy tính cầm tay, hãy tính:
+	\begin{enumEX}[a)]{3}
+		\item $\log_3 \sqrt[3]{9}$;
+		\item $\log_{\sqrt{2}} 8$;
+		\item $9^{\log_3 12}$;
+		\item $2^{\log_4 9}$;
+		\item $\log_2 5\cdot \log_5 64$;
+		\item $ \log \sqrt{1000}$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumerate}
+			\item $\log_3 \sqrt[3]{9}=\log_3 9^{\tfrac{1}{3}}=\dfrac{1}{3}\log_3 3^2=\dfrac{2}{3}$;
+			\item $\log_{\sqrt{2}} 8=\log_{\sqrt{2}} \left( \sqrt{2}\right)^6=6$;
+			\item $9^{\log_3 12}=12^{\log_3 9}=12^2=144$;
+			\item $2^{\log_4 9}=2^{2\cdot \tfrac{1}{2}\log_2 3}=2^{\log_2 3}=3^{\log_2 2}=3$.
+			\item $\log_2 5\cdot \log_5 64 =\log_2 64 =\log_2 2^6 =6$.
+			\item $ \log \sqrt{1000}=\log 10^{\frac{3}{2}}=\dfrac{3}{2}\log 10=\dfrac{3}{2}\cdot 1=\dfrac{3}{2}$.
+		\end{enumerate}	
+	}
+\end{vd} \dongcham{13}
+
+\begin{vd}
+	Với $a$ là số thực dương và $a \ne 1$. Tính
+	\begin{enumEX}[a)]{3}
+		\item $\log_a\sqrt[3]{a}$.
+		\item $\log_a\left( a\sqrt[3]{a\sqrt{a}}\right)$;
+		\item $\log_a\dfrac{1}{a^3}$;
+		\item $\log_{\tfrac{a}{3}}\left(\dfrac{a^2}{9}\right)$;
+		\item $\log_{a\sqrt{a}}{a\sqrt[3]{a}}$;
+		\item $\log_{a^2} \sqrt[4]{a^3}$.
+	\end{enumEX}
+	\loigiai{}
+\end{vd} \dongcham{14}
+
+\begin{vd}%[1D4B2-1]
+	Tính giá trị của các biểu thức sau:
+	\begin{enumEX}[a)]{2}
+		\item $\log _{3} \dfrac{9}{10}+\log _{3} 30$;
+		\item $\log _{5} 75-\log _{5} 3$;
+		\item $\log _{3} \dfrac{5}{9}-2 \log _{3} \sqrt{5}$;
+		\item $4 \log _{12} 2+2 \log _{12} 3$;
+		\item $2 \log _{5} 2-\log _{5} 4 \sqrt{10}+\log _{5} \sqrt{2}$;
+		\item $\log _{3} \sqrt{3}-\log _{3} \sqrt[3]{9}+2 \log _{3} \sqrt[4]{27}$.
+	\end{enumEX} 
+	\loigiai{
+		\begin{enumEX}[\hspace*{.5cm}a)]{1}
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				\log _{3} \dfrac{9}{10}+\log _{3} 30&=&\log _{3} 9-\log _{3} 10+\log _{3} 3\cdot 10\\&=&\log _{3} 3^2-\log _{3} 10+\log _{3} 3+\log _{3} 10
+				\\&=&2\log _{3} 3+\log _{3} 3=3\log _{3} 3=3\cdot 1=3.
+			\end{eqnarray*}
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}\log _{5} 75-\log _{5} 3&=&\log _{5} 3\cdot 25-\log _{5} 3\\
+				&=&\log _{5} 3+\log _{5} 25-\log _{5} 3=\log _{5} 5^2=2\log _{5} 5=2.
+			\end{eqnarray*}
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				\log _{3} \dfrac{5}{9}-2 \log _{3} \sqrt{5}&=&\log _{3} 5-\log _{3} 9-2 \log _{3} 5^{\tfrac{1}{2}}\\
+				&=&\log _{3} 5-\log _{3} 3^2-2\cdot \dfrac{1}{2} \log _{3} 5\\
+				&=&-2\log _{3} 3=-2
+				.
+			\end{eqnarray*}
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				A=4 \log _{12} 2+2 \log _{12} 3&=&4 \dfrac{1}{\log _2 12}+2 \dfrac{1}{\log _3 12}\\
+				&=& \dfrac{4}{\log _2 3\cdot 4}+ \dfrac{2}{\log _3 3\cdot 4}\\
+				&=& \dfrac{4}{\log _2 3+\log _2 2^2}+ \dfrac{2}{\log _3 3+\log _3 2^2}\\
+				&=& \dfrac{4}{\log _2 3+2}+ \dfrac{2}{1+2\log _3 2}.
+			\end{eqnarray*}
+			Đặt $t=\log _2 3\Rightarrow \log _3 2=\dfrac{1}{t}$. Khi đó
+			\begin{eqnarray*}
+				A&=& \dfrac{4}{t+2}+ \dfrac{2}{1+2\cdot  \dfrac{1}{t}}=\dfrac{4}{t+2}+ \dfrac{2t}{t+2}\\&=&\dfrac{4+2t}{t+2}=\dfrac{2(2+t)}{t+2}=2.
+			\end{eqnarray*}
+			
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				2 \log _{5} 2-\log _{5} 4 \sqrt{10}+\log _{5} \sqrt{2}&=&2 \log _{5} 2-\left(\log _{5} 4 +\log _{5} 10^{\tfrac{1}{2}}\right)+\log _{5} 2^{\tfrac{1}{2}}\\
+				&=&2 \log _{5} 2-\left(\log _{5} 2^2 +\dfrac{1}{2}\log _{5} 2\cdot 5\right)+\dfrac{1}{2}\log _{5} 2\\
+				&=&2 \log _{5} 2-2\log _{5} 2 -\dfrac{1}{2}\left(\log _{5} 2+\log _{5} 5\right)+\dfrac{1}{2}\log _{5} 2\\
+				&=&-\dfrac{1}{2}\log _{5} 2-\dfrac{1}{2}\cdot 1+\dfrac{1}{2}\log _{5} 2=-\dfrac{1}{2}.
+			\end{eqnarray*}
+			\item Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				\log _{3} \sqrt{3}-\log _{3} \sqrt[3]{9}+2 \log _{3} \sqrt[4]{27}&=&\log _{3} 3^{\tfrac{1}{2}}-\log _{3} 9^{\tfrac{1}{3}}+2 \log _{3} 27^{\tfrac{1}{4}}\\&=&\dfrac{1}{2}\log _{3} 3-\dfrac{1}{3}\log _{3} 3^2+2\cdot \dfrac{1}{4} \log _{3} 3^3\\
+				&=&\dfrac{1}{2}\cdot 1-\dfrac{1}{3}\cdot  2\log _{3} 3+ \dfrac{1}{2}\cdot 3 \log _{3} 3\\
+				&=&\dfrac{1}{2}-\dfrac{2}{3}+ \dfrac{3}{2}=\dfrac{4}{3}
+				.
+			\end{eqnarray*}
+\end{enumEX} }
+\end{vd} \dongcham{20}
+
+\begin{vd}
+	Cho $\log_2x = \dfrac{1}{2}$. Tính giá trị của biểu thức $P = \dfrac{\log_2{(4x)} + \log_2 \dfrac{x}{2}}{x^2 - \log_{\sqrt{2}}x}$.
+	\loigiai
+	{
+		Ta có $\log_2x = \dfrac{1}{2} \Leftrightarrow x = \sqrt{2} \Rightarrow x^2 = 2$. \\ Khi đó
+		$P=\dfrac{\log_2(4x)+\log_2\dfrac{x}{2}}{x^2-\log_{\sqrt{2}}x}=\dfrac{\log_2\left(2x^2\right)}{x^2-2\log_2x}=\dfrac{1+2\log_2x}{x^2-2\log_2x}=\dfrac{1+2\cdot \dfrac{1}{2}}{2-2\cdot \dfrac{1}{2}}=2.$
+	}
+\end{vd} \dongcham{12}
+
+\begin{vd}
+	Cho $a$ và $b$ là hai số thực dương thỏa mãn $\sqrt{a}b^3=27$. Tính giá trị của $\log_3a+6\log_3b$.
+	\loigiai{
+		$\sqrt{a}b^3=27$. \\
+		Lấy $\log_3$  hai vế  ta được:\\
+		\allowdisplaybreaks
+		\begin{eqnarray*}&&\log_3{\sqrt{a}b^3}=\log_3 27\\
+			&\Leftrightarrow & \log_3 \sqrt{a}+\log_3 b^3=3\\
+			&\Leftrightarrow &\dfrac{1}{2}\log_3a+3\log_3b=3\\
+			&\Leftrightarrow &\log_3a+6\log_3b=6
+	\end{eqnarray*}}
+\end{vd} \dongcham{7}
+
+\begin{dang}{Phân tích một logarit theo hai logarit cho trước}
+\end{dang}
+
+\begin{vd}
+	Cho $a=\log_25$, $b=\log_29$. Tính $\log_2\dfrac{40}{3}$ theo $a$ và $b$.
+	\loigiai{
+		Ta có $P=\log_2\dfrac{40}{3}=\log_240-\log_23=\log_2(2^3\cdot 5)-\dfrac{1}{2}\log_29=3+\log_25-\dfrac{1}{2}\log_29=3+a-\dfrac{1}{2}b$.
+	}
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Cho $\log_32=a$, $\log_35=b$. Tính $\log_620$ theo $a$ và $b$.
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			\log_620&=&\dfrac{\log_320}{\log_36}=\dfrac{\log_3(2^2\cdot 5)}{\log_3(2\cdot 3)}=\dfrac{\log_32^2+\log_35}{\log_32+\log_33}\\
+			&=&\dfrac{2\log_32+\log_35}{\log_32+\log_33}=\dfrac{2a+b}{a+1}.
+		\end{eqnarray*}
+	}
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Đặt $a=\log_3 5$; $b=\log_4 5$. Hãy biểu diễn $\log_{15} 20$ theo $a$ và $b$.
+	\loigiai{
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			\log_{15} 20 &=& \dfrac{\log_5 20}{\log_5 15}\\
+			&=& \dfrac{1+\log_5 4}{1+\log_5 3}\\
+			&=& \dfrac{1+\dfrac{1}{b}}{1+\dfrac{1}{a}}=\dfrac{a\left(1+b\right)}{b\left(a+1\right)}.
+		\end{eqnarray*}
+		Do đó $\log_{15} 20=\dfrac{a\left(1+b\right)}{b\left(a+1\right)}$.
+	}
+\end{vd} \dongcham{8}
+
+\begin{dang}{Vận dụng, thực tiễn}
+\end{dang}
+
+\begin{vd}%[1D4B2-2]
+	Cho $\log_a b=4$. Tính:
+	\begin{enumEX}[a)]{2}
+		\item $\log_a\left(a^{\frac{1}{2}} b^5\right)$;
+		\item $\log_a\left(\dfrac{a \sqrt{b}}{b \sqrt[3]{a}}\right)$;
+		\item $\log_{a^3 b^2}\left(a^2 b^3\right)$;
+		\item $\log_{a \sqrt[3]{b}}(\sqrt[4]{a \sqrt{b}})$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\log_a\left(a^{\frac{1}{2}} b^5\right)=\log_a a^{\tfrac{1}{2}}+\log_a b^5=\dfrac{1}{2}+5\log_a b=\dfrac{1}{2}+5\cdot 4=\dfrac{41}{2}$;
+			\item $\log_a\left(\dfrac{a \sqrt{b}}{b \sqrt[3]{a}}\right)=\log_a \left(a^{\tfrac{2}{3}}b^{-\tfrac{1}{2}}\right)=\log_a a^{\tfrac{2}{3}}\cdot \log_a b^{-\tfrac{1}{2}}=\dfrac{2}{3}-\dfrac{1}{2}\log_a b=\dfrac{2}{3}-\dfrac{1}{2}\cdot 4=-\dfrac{4}{3}$;
+			\item $\log_{a^3 b^2}\left(a^2 b^3\right)=\dfrac{\log_a (a^2b^3)}{\log_a (a^3b^2)}=\dfrac{2+3\log_a b}{3+2\log_a b}=\dfrac{2+3\cdot 4}{3+2\cdot 4}=\dfrac{14}{11}$;
+			\item $\log_{a \sqrt[3]{b}}(\sqrt[4]{a \sqrt{b}})=\dfrac{\log_a \sqrt[4]{a \sqrt{b}}}{\log_a a\sqrt[3]{b}}=\dfrac{\log_a \left(a^{\tfrac{1}{4}}\cdot b^{\tfrac{1}{8}}\right)}{\log_a a+\log_a b^{\tfrac{1}{3}}}=\dfrac{\dfrac{1}{4}+\dfrac{1}{8}\cdot 4}{1+\dfrac{1}{3}\cdot 4}=\dfrac{9}{28}$.
+		\end{enumerate}	
+	}	
+\end{vd} \dongcham{16}
+
+
+\begin{vd}
+	Cho $a>0,~b>0$ thỏa mãn $a^2+9b^2=10ab$. Chứng minh $$\log \dfrac{a+3b}{4}=\dfrac{\log a+\log b}{2}.$$
+	\loigiai{
+		Ta có
+		\begin{eqnarray*}
+			a^2+9b^2=10ab \Leftrightarrow \dfrac{(a+3b)^2}{16}=ab\\
+			& \Leftrightarrow & \log \dfrac{(a+3b)^2}{16}=\log ab (\text{do} a>0,~b>0)\\
+			& \Leftrightarrow & 2\log \dfrac{a+3b}{4}=\log a+\log b\\
+			& \Leftrightarrow & \log \dfrac{a+3b}{4}=\dfrac{\log a+\log b}{2}.
+		\end{eqnarray*}
+	}
+\end{vd} \dongcham{12}
+
+\begin{vd}%[Tex hóa SGK CTST,T1/23, TVN-001]%[1T6K2-3]
+	Trong hóa học, độ  pH  của một dung dịch được tính theo công thức $\text{pH}=-\log[\text{H}^+] $, trong đó $ [\text{H}^+] $ là nồng độ  H$^+ $ (ion hydro) tính bằng mol/L. Các dung dịch có  pH  bé hơn $ 7 $ thì có tính acid, có pH  lớn hơn $ 7 $ thì có tính kiềm, có  pH  bằng $ 7 $ thì trung tính.
+	\begin{listEX}[1]
+		\item[a)] Tính độ  pH  của dung dịch có nồng độ H$^+ $ là $ 0{,}0001 $ mol/L. Dung dịch này có tính acid, hay kiềm hay trung tính?
+		\item[b)] Dung dịch $ A $ có nồng độ  H$^+ $ gấp đôi nồng độ  H$^+ $ của dung dịch $ B $.\\
+		Độ pH  của dung dịch nào lớn hơn và lớn hơn bao nhiêu? Làm tròn kết quả đến hàng phần nghìn.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}[1]
+			\item[a)] $ \text{pH}=-\log 0{,}0001=-\log 10^{-4} =4\log 10=4$.\\
+			Do $ 4<7 $ nên dung dịch có tính acid.
+			\item[b)] Kí hiệu pH$_A $,  pH$_B $ lần lượt là độ  pH  của hai dung dịch $ A $ và $ B $; $ [\text{H}^+]_A $, $ [\text{H}^+]_B $ lần lượt là nồng độ của hai dung dịch $ A $ và $ B $. Ta có
+			$$\text{pH}_A=-\log[\text{H}^+]_A=-\log\left(2[\text{H}^+]_B\right)=-\log 2-\log[\text{H}^+]_B=-\log 2+\text{pH}_B.$$ 
+			Suy ra $ \text{pH}_B-\text{pH}_A=\log 2\approx 0{,}301 $.\\
+			Vậy dung dịch $ B $ có độ  pH  lớn hơn và lớn hơn khoảng $ 0{,}301 $.
+		\end{listEX}
+	}
+\end{vd} \dongcham{7}
+
+\begin{vd}
+	Để đặc trưng cho độ to nhỏ của âm, người ta đưa ra khái niệm mức cường độ của âm. Một đơn vị thường dùng để đo mức cường độ của âm là đềxinben (viết tắt là đB). Khi đó mức cường độ $L$ của âm được tính theo công thức: $L(I)=10 \log \left( \dfrac{I}{I_0}\right) $ trong đó, $I$ là cường độ của âm tại thời điểm đang xét, $I_0$ cường độ âm ở ngưỡng nghe $\left(I_0=10^{-12}\, w / \mathrm{m}^2\right)$. Một cuộc trò chuyện bình thường trong lớp học có mức cường độ âm trung bình là $68 \mathrm{~dB}$. Hãy tính cường độ âm tương ứng ra đơn vị $w / m^2$.
+	\loigiai{
+	Theo giả thiết ta có $L(d b)=68 d b, I_0=10^{-12} w / m^2$. Tính $I$.
+	Áp dụng công thức ta có: $L(d b)=10 \log \dfrac{I}{I_0} \Leftrightarrow 68=10 \log \dfrac{I}{I_0} \Leftrightarrow \log \dfrac{I}{I_0}=6,8 \Leftrightarrow \dfrac{I}{I_0}=10^{6,8}$
+	$$
+	\Leftrightarrow \dfrac{I}{I_0}=6,3 \cdot 10^6 \Rightarrow I \approx 6,3 \cdot 10^6 \cdot 10^{-12} \approx 6,3 \cdot 10^{-6} \mathrm{w} / \mathrm{m}^2
+	$$}
+\end{vd} \dongcham{6}
+
+\begin{vd}%[Tex hóa SGK CTST,T1/23, TVN-001]%[1T6K2-3]
+	Độ lớn $ M $ của một trận động đất theo thang Richter được tính theo công thức $ M=\log \dfrac{A}{A_0} $, trong đó $ A $ là biên độ lớn nhất ghi được bởi máy đo địa chấn, $ A_0 $ là biên độ tiêu chuẩn được sử dụng để hiệu chỉnh độ lệch gây ra bởi khoảng cách của máy đo địa chấn so với tâm chấn ($ \mathrm{A}_0=1 \mu m$).
+	\begin{listEX}[1]
+		\item[a)] Tính độ lớn của trận động đất có biên độ $A$ bằng
+		\begin{listEX}[2]
+			\item[i)] $ 10^{5{,}1}A_0 $;
+			\item[ii)] $ 65~000 A_0$.  
+		\end{listEX}
+		\item[b)] Một trận động đất tại địa điểm $ N $ có biên độ lớn nhất gấp ba lần biên độ lớn nhất của trận động đất tại địa điểm $ P $. So sánh độ lớn của hai trận động đất.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}[1]
+			\item[a)] Độ lớn của trận động đất có biên độ $ A $ là
+			\begin{listEX}[1]
+				\item[i)] $ 10^{5{,}1}A_0 \Rightarrow M=\log \dfrac{10^{5{,}1}A_0}{A_0}=5{,}1$;
+				\item[ii)] $ 65~000 A_0\Rightarrow M=\log \dfrac{65~000 A_0}{A_0} =\log (65\cdot 10^3)\approx 4{,}81 $.  
+			\end{listEX}
+			\item[b)] Gọi $ M_N $ và $ M_P $ lần lượt là độ lớn của các trận động đất tại địa điểm $ N $ và $ P $.\\
+			Gọi $ A $ là biên độ lớn nhất ghi được bởi máy đo địa chấn tại địa điểm  $ P $. Ta có
+			$$M_P=\log \dfrac{A}{A_0};\quad M_N=\log \dfrac{3A}{A_0}=\log 3+\log \dfrac{A}{A_0}.$$
+			Do $ \log 3\approx 0{,}3>0 $ nên $ M_N>M_P $.
+		\end{listEX}
+	}
+\end{vd} \dongcham{7}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}%[1D4B2-1]
+	Cho $\log_a b=2$. Tính
+	\begin{enumEX}[a)]{2}
+		\item $\log_a\left(a^2 b^3\right)$;
+		\item $\log_a \dfrac{a \sqrt{a}}{b \sqrt[3]{b}}$;
+		\item $\log_a(2 b)+\log_a\left(\dfrac{b^2}{2}\right)$;	
+		\item $\log_{ab}\left(a^2 b^3\right)$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\log_a\left(a^2 b^3\right)=\log_a a^2+\log_a b^3=2+3 \log_a b=2+3 \cdot 2=8$.
+			\item $\log_a \dfrac{a \sqrt{a}}{b \sqrt[3]{b}}=\log_a a^{\tfrac{3}{2}}-\log_a b^{\tfrac{4}{3}}=\dfrac{3}{2}-\dfrac{4}{3} \log_a b=\dfrac{3}{2}-\dfrac{4}{3} \cdot 2=-\dfrac{7}{6}$.
+			\item $\log_a(2 b)+\log_a\left(\dfrac{b^2}{2}\right)=\log_a 2+\log_a b+\log_a b^2-\log_a 2=3 \log_a b=3 \cdot 2=6$.
+			\item  $\log_{ab}\left(a^2 b^3\right)=\dfrac{\log_a\left(a^2 b^3\right)}{\log_a(ab)}=\dfrac{2+3\log_ab}{1+\log_ab}=\dfrac{8}{3}$.
+		\end{enumerate}
+	}
+\end{baitap}\cham{13}
+
+\begin{baitap}%[1D4B2-1]
+	Biết $\log_2 3\approx 1{,}585$. Hãy tính
+	\begin{multicols}{2}
+		\begin{enumerate}
+			\item [a)]  $\log_2 48$;	
+			\item [b)] $\log_4 27$.
+		\end{enumerate}
+	\end{multicols}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\log_2 48=\log_2 \left(3\cdot 2^4 \right)=\log_2 3+\log_2 2^4\approx 1{,}585+4=5{,}585 $.
+			\item  $\log_4 27=\dfrac{\log_2 47}{\log_2 4}=\dfrac{\log_2 3^3}{\log_2 2^2}=\dfrac{3\log_2 3}{2}=\dfrac{3}{2}\cdot\approx 1{,}585=2{,}3775$.	
+		\end{enumerate}
+	}
+\end{baitap}\cham{12}
+
+\begin{baitap}
+	\begin{enumEX}[a)]{1}
+		\item Cho $1\neq a$, $b>0$ thỏa mãn $\log_ab=3$. Tính $T=\log_{\tfrac{\sqrt b}a}\dfrac{\sqrt[3]b}{\sqrt a}$.
+		\item Cho $\log_ab=2$; $\log_ac=3$. Tính giá trị của biểu thức $P=\log_a\left(a{b^3}{c^5}\right)$.
+		\item Cho $\log_a{x}=2, \log_b{x}=3$ với $a,b$ là các số thực lớn hơn $1$. Tính $P=\log_{\frac{a}{b^2}}x$.
+		\item Cho $\log_a c=3$, $\log_b c=4$ với $a$, $b$, $c$ là các số thực lớn hơn $1$. Tính $P=\log_{ab}c$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumerate}[a)]
+				\item Ta có
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+				\log_{\tfrac{\sqrt b}a}\dfrac{\sqrt[3]b}{\sqrt a}&=&\log_{\tfrac{\sqrt b}a}b^{\frac{1}{3}}-\log_{\tfrac{\sqrt b}a}a^{\frac{1}{2}}\\
+				&=&\dfrac{1}{3.\log_b\dfrac{\sqrt{b}}{a}}-\dfrac{1}{2.\log_a\dfrac{\sqrt b}{a}}\\
+				&=&\dfrac{1}{3\left(\log_bb^{\frac{1}{2}}-\log_ba\right)}-\dfrac{1}{2\left(\log_ab^{\frac{1}{2}}-1\right)}\\
+				&=&\dfrac{1}{3\left(\dfrac{1}{2}-\log_ba\right)}-\dfrac{1}{2\left(\dfrac{1}{2}\log_ab-1\right)}\\
+				&=&\dfrac{1}{3\left(\dfrac{1}{2}-\dfrac{1}{3}\right)}-\dfrac{1}{2\left(\dfrac{3}{2}-1\right)}=1.
+			\end{eqnarray*}
+			\item Ta có $P=\log_a\left(a{b^3}{c^5}\right)=\log_aa+\log_a{b^3}+\log_a{c^5}=1+3\log_ab+5\log_ac=1+3\cdot2+5\cdot 3=22$.
+			\item Ta có $\heva{& \log_a x =2 \\ & \log_b x =3} \Leftrightarrow \heva{& x=a^2 \\ & x = b^3} \Rightarrow a^2=b^3 \Leftrightarrow a = b^{\frac{3}{2}}$.\\
+			Do đó, $P=\log_{\frac{a}{b^2}}x=\log_{b^{-\frac{1}{2}}}x=-2 \log_b x = -2 \times 3=-6$.
+			\item Ta có $P=\log_{ab}c=\dfrac{\log_c c}{\log_c{ab}}=\dfrac{1}{\log_c a+\log_c b}=\dfrac{1}{\dfrac{1}{\log_a c}+\dfrac{1}{\log_b c}}=\dfrac{1}{\dfrac{1}{3}+\dfrac{1}{4}}=\dfrac{12}{7}$.
+	\end{enumerate}}
+\end{baitap}\cham{25}
+
+\begin{baitap}
+	Biết $\log_23=a$; $\log_25=b$. Tính $\log_{5}360$ theo $a$ và $b$.
+	\loigiai{
+		Ta có $\log_{5}360=\dfrac{\log_2(2^3\cdot 3^2\cdot 5)}{\log_2 5}=\dfrac{3+2\log_2 3+\log_2 5}{\log_2 5}=\dfrac{2 a+b+3}{b}$.
+	}
+\end{baitap}\cham{9}
+
+\begin{baitap}%[1D4B2-2]
+	Chứng minh rằng
+	\begin{enumerate}[a)]
+		\item $\log_a\left(x+\sqrt{x^2-1}\right)+\log_a\left(x-\sqrt{x^2-1}\right)=0$;
+		\item $\ln \left(1+\mathrm{e}^{2x}\right)=2x+\ln\left(1+\mathrm{e}^{-2x}\right)$.	
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\log_a\left(x+\sqrt{x^2-1}\right)+\log_a\left(x-\sqrt{x^2-1}\right)=\log_a\left[\left(x+\sqrt{x^2-1}\right)\left(x-\sqrt{x^2-1}\right)\right]=\log_a1=0$.
+			\item $\ln \left(1+\mathrm{e}^{2x}\right)=\ln\left[\mathrm{e}^{2x}\left(1+\mathrm{e}^{-2x}\right)\right]=\ln\mathrm{e}^{2x}+\ln\left(1+\mathrm{e}^{-2x}\right)=2x+\ln\left(1+\mathrm{e}^{-2x}\right)$.
+		\end{enumerate}
+	}
+\end{baitap}\cham{15}
+
+\begin{baitap}
+	Cho $a$, $b$ là các số thực dương thỏa mãn $a^2+b^2=14ab$. Chứng minh rằng $$\log _{2}(a+b)=\dfrac{1}{2}\left(4+\log_2a+\log_2b\right).$$
+	\loigiai{
+		\begin{eqnarray*}
+			a^2+b^2=14ab&\Leftrightarrow& (a+b)^2=16ab\\
+			&\Rightarrow& \log_2(a+b)^2=\log_2 (16ab)\\
+			&\Rightarrow& 2\log_2(a+b)=4+\log_2 a+\log_2 b\\
+			&\Rightarrow& \log_2 (a+b)=\dfrac{1}{2}(4+\log_2a+\log_2b)
+		\end{eqnarray*}
+	}
+\end{baitap}\cham{10}
+
+\begin{baitap}
+	Với mọi số thực dương $a$ và $b$ thỏa mãn $a^2 + b^2 = 8ab$. Chứng minh rằng $$ \log (a + b) = \dfrac{1}{2}(1 + \log a + \log b). $$
+	\loigiai{
+		Ta có $a^2 + b^2 = 8ab \Leftrightarrow (a + b)^2 = 10ab \Leftrightarrow \log (a + b)^2 = \log (10ab) \Leftrightarrow 2\log (a + b) = 1 + \log a + \log b$.\\ Hay $\log (a + b) = \dfrac{1}{2}(1 + \log a + \log b)$.
+	}
+\end{baitap}\cham{10}
+
+\begin{baitap}%[1D4Y2-4]
+	Trong nuôi trồng thuỷ sản, độ $\mathrm{pH}$ của môi trường nước sẽ ảnh hưởng đến sức khỏe và sự phát triển của thuỷ sản. Độ $\mathrm{pH}$ thích hợp cho nước trong đầm nuôi tôm sú là từ $7{,}2$ đến $8{,}8$ và tốt nhất là trong khoảng từ $7{,}8$ đến $8{,}5$. Phân tích nồng độ $\left[\mathrm{H}^{+}\right]\left(\mathrm{mol}\, \mathrm{L}^{-1}\right)$ trong một đầm nuôi tôm sú, ta thu được $\left[\mathrm{H}^{+}\right]=8\cdot10^{-8}$ (Nguồn: https://nongnghiep.farmvina.com). \\
+	Hỏi độ $\mathrm{pH}$ của đầm đó có thích hợp cho tôm sú phát triển không? Biết $\mathrm{pH}=-\log \left[\mathrm{H}^{+}\right]$.
+	\loigiai{
+		Độ $\mathrm{pH}$ của đầm đó là: $\mathrm{pH}=-\log \left[\mathrm{H}^{+}\right]=-\log \left(8.10^{-8}\right) \approx 7{,}097$.\\
+		Do $7{,}097 < 7{,}2$ nên đầm đó không thích hợp cho tôm sú phát triển.	
+	}
+\end{baitap}\cham{12}	
+
+\begin{baitap}
+	Cường độ một trận động đất $\mathrm{M}$ (Richte) được cho bởi công thức $M=\log A-\log A_0$, với A là biên độ rung chấn tối đa và $\mathrm{A}_0$ là một biên độ chuẩn (hằng số). Đầu thế kỷ 20 , một trận động đất ở San Francisco có cường độ 8 độ Richter. Trong cùng năm đó, trận động đất khác ở Nhật Bản có cường độ đo được 6 độ Richte. Hỏi trận động đất ở San Francisco có biên độ gấp bao nhiêu lần biên độ trận động đất ở Nhật Bản.
+	\loigiai{
+	Trận động đất ở San Francisco có cường độ 8 độ Richte khi đó áp dụng công thức
+	$$
+	M_1=\log A_1-\log A_0 \Rightarrow 8=\log A_1-\log A_0 \Rightarrow \log A_1=8+\log A_0 \Rightarrow A_1=10^{8+\log A_0}=10^{\log A_0} \cdot 10^8
+	$$
+	với $\mathrm{A}_1$ là biên độ của trận động đất ở San Prancisco.
+	Trận động đất ở Nhật có cường độ 6 độ Richte khi đó áp dụng công thức
+	$$
+	M_2=\log A_2-\log A_0 \Rightarrow 6=\log A_2-\log A_0 \Rightarrow \log A_2=6+\log A_0 \Rightarrow A_2=10^{6+\log A_0}=10^{\log A_0} \cdot 10^6
+	$$
+	với $\mathrm{A}_2$ là biên độ của trận động đất ở Nhật.\\
+	Khi đó ta có $\dfrac{A_1}{A_2}=\frac{10^8}{10^6}=10^2 \Rightarrow A_1=100 A_2$.\\
+	Vậy trận động đất ở San Prancisco có biên độ gấp 100 lần biên độ trận động đất ở Nhật Bản.}
+\end{baitap}\cham{15}

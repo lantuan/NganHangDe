@@ -1,0 +1,440 @@
+\section{XÁC SUẤT CỦA BIẾN CỐ}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa cổ điển của xác suất}
+
+\begin{enumerate}[\iconMT]
+	\item 	\indam{Công thức tính:} Cho phép thử $T$ có không gian mẫu là $\Omega$. Giả thiết rằng các kết quả có thể của $T$ là đồng khả năng. Khi đó, nếu $E$ là một biến cố liên quan phép thử $T$ thì xác suất của $E$ được cho bởi công thức
+	\boxmini{$\mathrm{P}(E) = \dfrac{n(E)}{n(\Omega)}$}
+	Trong đó, $n(\omega)$ và $n(E)$ lần lượt là số phần tử của tập không gian mẫu $\omega$ và tập biến cố $E$.
+	\item \indam{Nhận xét:}
+	\begin{boxkn}
+		\begin{itemize}
+			
+			\item $0\le \mathrm{P}(E)\le 1$, với mọi biến cố $E$.
+			\item Với biến cố chắc chắn (là tập $\Omega$), ta có  $\mathrm{P}(\Omega)=1$.
+			\item Với biến cố không thể (là tập $\varnothing$), ta có  $\mathrm{P}(\varnothing)=0$.
+		\end{itemize}
+	\end{boxkn}
+\end{enumerate}
+\subsubsection{Nguyên lý xác suất bé}
+
+Nếu một biến cố có xác suất rất bé thì trong một phép thử biến cố đó sẽ không xảy ra.
+
+\subsubsection{Ý nghĩa thực tế của xác suất}
+Giả sử biến cố $A$ có xác suất là $\mathrm{P}$. Khi thực hiện phép thử $n$ lần ($n\ge 30$) thì số lần xuất hiện của biến cố $A$ sẽ xấp xỉ bằng $n\cdot \mathrm{P(A)}$ (khi $n$ càng lớn thì sai số tương đối càng bé).
+
+
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{khung4}{GHI NHỚ}
+	Để tính xác suất của biến cố theo định nghĩa cố điển, ta thực hiện 3 bước sau:
+	\begin{itemize}
+		\item [\ding{172}] Tính $n(\Omega)$ là số kết quả thuận lợi của tập không gian mẫu theo một trong hai cách sau:
+		\begin{itemize}
+			\item [$\bullet$] Liệt kê phần tử rồi đếm;
+			\item [$\bullet$] Suy luận theo các quy tắc đếm.
+		\end{itemize}
+		\item [\ding{173}] Tính $n(A)$ là số kết quả thuận lợi của tập biến cố $A$ theo một trong hai cách sau:
+		\begin{itemize}
+			\item [$\bullet$] Liệt kê phần tử rồi đếm;
+			\item [$\bullet$] Suy luận theo các quy tắc đếm.
+		\end{itemize}
+		\item [\ding{174}] Lấy tỉ số $\dfrac{n(A)}{n(\Omega)}$.
+	\end{itemize}
+\end{khung4}
+
+\begin{dang}{Sử dụng phương pháp liệt kê tính xác suất của biến cố}
+\end{dang}
+\begin{vd}
+	Xét phép thử : Gieo một đồng tiền 2 lần
+	\begin{itemize}
+		\item [a)] Mô tả tập không gian mẫu
+		\item [b)] Xác định các biến cố
+		\begin{itemize}
+			\item [$\bullet$] $A \colon$ "Mặt sấp xuất hiện đúng một lần"
+			\item [$\bullet$] $B \colon$ "Mặt sấp xuất hiện ít nhất một lần"
+		\end{itemize}
+		\item [c)]Tính xác suất của biến cố A và B.
+	\end{itemize}
+\end{vd} \dongcham{10}
+
+\begin{vd}%[Triệu Minh Hà][0D2B5]
+	Xét phép thử gieo một con súc sắc cân đối đồng chất $2$ lần.
+	\begin{itemize}
+		\item [a)] Mô tả tập không gian mẫu.
+		\item [b)] Xác định các biến cố
+		\begin{itemize}
+			\item [$\bullet$] $A$: "Số chấm xuất hiện trong 2 lần gieo đều giống nhau".
+			\item [$\bullet$] $B$: "Tích số chấm xuất hiện trong $2$ lần gieo là số lẻ".
+			\item [$\bullet$] $C$: "Tổng số chấm xuất hiện trong hai lần gieo là một số chia hết cho $5$".
+		\end{itemize} 
+		\item [c)] Tính xác suất của biến cố A , B và C.
+	\end{itemize}
+	\loigiai{
+	}
+\end{vd} \dongcham{13}
+\begin{vd}%[Triệu Minh Hà][0D2B5]
+	Gieo một con súc sắc cân đối đồng chất $3$ lần. Tính xác suất của biến cố sau:
+	\begin{tasks}(1)
+		\task $A$: "Số chấm xuất hiện trong $3$ lần gieo giống nhau".
+		\task $B$: "Tích số chấm xuất hiện trong $3$ lần gieo là số lẻ".
+		\task $C$: "Tổng số chấm xuất hiện trong $3$ lần gieo là $5$".
+	\end{tasks}
+	\loigiai{
+		Gieo súc sắc $3$ lần sẽ có $n(\Omega)=6.6.6=216$ cách có thể xảy ra. Ta gọi kết quả $3$ lần gieo lần lượt theo dãy số $(x;y;z)$.
+		\begin{itemize}
+			\item [a)] Có $A=\{(1;1;1),(2;2;2),(3;3;3),(4;4;4),(5;5;5),(6;6;6)\}$.\\ Do đó $n(A)=6\Rightarrow \mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{1}{36}.$
+			\item [b)]Để có biến cố $B$ thì $3$ lần gieo chỉ gieo được trong các số $1,3,5$. Từ đó\\Lần $1$: $3$ cách.\\ Lần $2$: $3$ cách.\\ Lần $3$: $3$ cách.\\$\Rightarrow n(B)=3.3.3=27\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{27}{216}$.
+			\item [c)]$C=\{(1;1;3),(1;2;2),(1;3;1),;(2;1;2),(2;2;1),(3;1;1)\}$.\\ Do đó $n(C)=6\Rightarrow \mathrm{P}(C)=\dfrac{n(C)}{n(\Omega)}=\dfrac{1}{36}$.
+			
+		\end{itemize}
+	}
+\end{vd} \dongcham{24}
+\vspace{-0.8cm}
+\begin{vd}
+	Một cửa hàng bán ba loại kem: xoài,  sôcôla và sữa. Một học sinh chọn mua ba cốc kem một cách ngẫu nhiên. Tính xác suất để ba cốc kem chọn được thuộc hai loại.
+	\loigiai{
+		Kí hiệu $A$ là kem xoài, $B$ là kem socola, $C$ là kem sữa.\\
+		$\Omega={AAA,BBB,CCC, AAB, ABB, ACC, ABC, BCC, AAC, AAB }$.\\
+		Gọi $E$ là biến cố "Ba cốc kem chọn được thuộc hai loại.\\
+		$E={AAB, AAC, BBA, BBC, CAA, CBB}$\\
+		Vậy $P(E)=\dfrac{6}{10}=\dfrac{3}{5}$.
+	}
+\end{vd} \dongcham{12}
+
+\begin{vd}
+	Chọn ngẫu nhiên một số tự nhiên có hai chữ số nhỏ hơn 20. Gọi $A$  là biến cố: “Số được chọn chia hết cho 3”. Tính xác suất của biến cố $A$ .
+\end{vd} \dongcham{7}
+
+\begin{vd}
+	Từ một hộp chứa $5$ quả cầu được đánh số $1,2,3,4,5$. Lấy ngẫu nhiên liên tiếp hai lần mỗi lần một quả cầu và xếp theo thứ tự từ trái sang phải. Tính xác suất các biến cố sau:
+	\begin{tasks}(2)
+		\task $A$ : “ Chữ số sau lớn hơn chữ số trước ”.
+		\task $B$  : “Chữ số trước gấp đôi chữ số sau”.
+		\task $C$ : “Hai chữ số bằng nhau”;
+		\task $D$ : “ Cả hai chữ số đều là số nguyên tố ”.
+	\end{tasks}
+\end{vd} \dongcham{13}
+
+\begin{dang}{Sử dụng phương pháp tổ hợp tính xác suất của biến cố}
+\end{dang}
+
+\begin{vd}
+	Một chiếc hộp chứa 6 quả cầu trắng, 4 quả cầu đỏ và 2 quả cầu đen. Chọn ngẫu nhiên 6 quả cầu. Tính xác suất để chọn được 3 quả cầu trắng, 2 quả cầu đỏ và 1 quả cầu đen.
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Trong một chiếc hộp có 20 viên bi, trong đó có 8  viên bi màu đỏ,  7 viên bi màu xanh và 5  viên bi màu vàng. Lấy ngẫu nhiên ra 3 viên bi. Tìm xác suất để:
+	\begin{tasks}
+		\task  $3$ viên bi lấy ra có cùng một màu.
+		\task $3$ viên bi lấy ra có đủ ba màu.
+		\task $3$ viên bi lấy ra có đúng 2  màu khác nhau.
+	\end{tasks}
+\end{vd} \dongcham{15}
+\begin{vd}
+	Trong một hộp kín có $18$ quả bóng khác nhau: $9$ trắng, $6$ đen, $3$ vàng.Lấy ngẫu nhiên từ hộp đồng thời $5$ quả bóng . Tính xác suất của các biến cố sau
+	\begin{tasks}(1)
+		\task $A$: "$5$ quả bóng cùng màu".
+		\task $B$: "$5$ quả bóng có đủ $3$ màu"
+		\task $C$: "$5$ quả bóng không có màu trắng"
+	\end{tasks}
+	\loigiai{
+		Lấy ngẫu nhiên $5$ bóng đồng thời trong hộp kín đo đó $n(\Omega)=C^5_{18}= 8568$ cách.
+		\begin{enumerate}[a)]
+			\item TH1: $5$ quả bóng đồng màu trắng: $C^5_9=126$ cách lấy.\\ TH2: $5$ quả bóng đồng màu đen: $C^5_6=6$ cách lấy.\\
+			Từ đó $n(A)=126+6=132\Rightarrow \mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{11}{714}$.
+			\item TH1: $1$ trắng, $1$ đen, $3$ vàng: $ 9.6.C^3_3=54$ cách.\\
+			TH2: $1$ trắng, $2$ đen, $2$ vàng: $9.C^2_6.C^2_3= 405 $ cách.\\
+			TH3: $2$ trắng, $1$ đen, $2$ vàng: $C^2_9.6.C^2_3=648$ cách.\\
+			TH4: $2$ trắng, $2$ đen, $1$ vàng: $C^2_9.C^2_6.3=1620$ cách.\\
+			TH5: $3$ trắng, $1$ đen, $1$ vàng: $C^3_9.6.3= 1512$ cách.\\
+			Từ đó $n(B)=4239\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{471}{952}$.
+			\item $5$ quả bóng lấy trong $9$ quả đen vàng do đó\\ $n(B)=C^5_9=126\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{1}{68}$.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{15}
+
+\begin{vd}
+	Một hộp đựng 16 thẻ được đánh số từ 1 đến 16. Chọn ngẫu nhiên từ hộp 4 thẻ. Tính xác suất để 4 thẻ được chọn đều đánh số chẵn.
+	%	\hspace*{4cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: $\dfrac{1}{26}$ }
+\end{vd} \dongcham{11}
+
+\begin{vd}
+	Một hộp đựng 30 tấm thẻ đánh số từ 1 đến 30. Chọn ngẫu nhiên 10 tấm thẻ. Tính xác suất để trong đó có 5 tấm mang số chia hết cho 3 và 5 tấm mang số không chia hết cho 3.
+\end{vd} \dongcham{11}
+\begin{vd}
+	Một lớp có 40 học sinh trong đó có 16 học sinh nam. Trong các em nam có 3 em thuận tay trái. Trong các em nữ có 2 em thuận tay trái. Chọn ngẫu nhiên hai em. Tính xác suất để trong hai em được chọn có một em nữ không thuận tay trái và một em nam thuận tay trái.
+\end{vd} \dongcham{11}
+
+\begin{vd}%[1D2B5-2]
+	Xếp ngẫu nhiên $5$ người $A$, $B$, $C$, $D$, $E$ vào một cái bàn dài có $5$ chỗ ngồi. 
+	\begin{tasks}(1)
+		\task Tính xác suất để bạn $A$ ngồi chính giữa.
+		\task Tính xác suất để hai người $A$ và $B$ ngồi đầu bàn.
+	\end{tasks}
+	\loigiai{
+		Xếp $5$ người vào bàn $5$ chỗ là một hoán vị của $5$ phần tử nên có   $n(\omega)=5!=120$.
+		\begin{enumerate}[a)]
+			\item Gọi $M$ là biến cố \lq\lq Xếp 5 người trong đó $A$ ngồi chính giữa\rq\rq. Suy ra $n(M)=4!=24$.\\
+			Xác suất của biến cố $M$ là $\dfrac{24}{120}=\dfrac{1}{5}$.
+			\item
+			Gọi $X$ là biến cố \lq\lq Xếp 5 người trong đó $A$ và $B$ ngồi đầu bàn\rq\rq, có hai giai đoạn:
+			\begin{itemize}
+				\item Xếp $A$ và $B$ ngồi đầu bàn có $2$ cách.
+				\item Xếp $3$ người còn lại vào $3$ chỗ có $3!$ cách.
+			\end{itemize}
+			Do đó số khả năng xảy ra biến cố $X$ là $2\cdot 3!=12.$\\
+			Vậy xác suất để hai người $A$ và $B$ ngồi đầu bàn là $\mathrm{P}(X)=\dfrac{12}{120}=0{,}1.$ 
+		\end{enumerate}
+	}
+\end{vd} \dongcham{15}
+
+\begin{vd}
+	Hai thầy trò đến dự một buổi hội thảo. Ban tổ chức xếp ngẫu nhiên 6 đại biểu trong đó có hai thầy trò ngồi trên một chiếc ghế dài. Tính xác suất để hai thầy trò ngồi cạnh nhau.
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Trong đợt ứng phó dịch MERS-CoV, Sở y tế thành phố đã chọn ngẫu nhiên 3 đội phòng chống dịch cơ động trong số 5 đội của Trung tâm y tế dự phòng thành phố và 20 đội của các trung tâm y tế cơ sở để kiểm tra công tác chuẩn bị. Tính xác suất để có ít nhất 2 đội của các Trung tâm y tế cơ sở được chọn.
+	%\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số:$\dfrac{209}{230}$ }
+\end{vd} \dongcham{8}
+
+\begin{vd}
+	Học sinh A thiết kế bảng điều khiển tự mở cửa phòng học của lớp mình. Bảng gồm 10 nút, mỗi nút được ghi một số từ 0 đến 9 và không có hai nút nào cùng ghi một số. Để mở cửa cần nhấn liên tiếp 3 nút khác nhau sao cho 3 số ghi trêm 3 nút đó theo thứ tự đã nhấ tạo thành một dãy số tăng và có tổng bằng 10. Học sinh B không biết quy tắc mở cửa trên, đã nhấn liên tiếp 3 nút khác nhau trên bẳng điều khiển. Tính xác suất để B mở được cửa phòng đó.
+\end{vd} \dongcham{13}
+%\hspace*{10cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: $\dfrac{1}{90}$ }
+
+\begin{vd}
+	Tại một quán ăn lúc đầu có 50 khách trong đó có $2x$ đàn ông và $y$ phụ nữ. Sau một tiếng có $y-6$ đàn ông ra về và $2x-5$ khách mới đến là nữ. Chọn ngẫu nhiên một khách. Biết rằng xác suất để chọn được một khách nữ là $\dfrac{9}{13}$. Tìm $x$ và $y$.
+\end{vd} \dongcham{8}
+\begin{vd}
+	Một hội đồng có đúng 1 người là nữ. Nếu chọn ngẫu nhiên 2 người từ hội đồng thì xác suất để cả hai người đều là nam là $0,8$. Chọn ngẫu nhiên hai người từ hội đồng. Tính xác suất của biến cố có đúng 1 người nữ trong 2 người đó.
+\end{vd} \dongcham{8}
+\begin{vd}
+	Một hộp kín có 1 quả bóng xanh và 5 quả bóng đỏ có kích thước và khối lượng bằng nhau. Hỏi Dũng cần lấy ra từ hộp ít nhất bao nhiêu quả bóng để xác suất lấy được quả bóng xanh lớn hơn $0,5$?
+\end{vd} \dongcham{8}
+\begin{dang}
+	{Sử dụng sơ đồ hình cây tính xác suất của biến cố}
+\end{dang}
+\begin{vd}
+	Chọn ngẫu nhiên một gia đình có ba con và quan sát giới tính của ba người con này.
+	\begin{tasks}
+		\task Vẽ sơ đồ hình cây mô tả các phần tử của không gian mẫu.
+		\task 	Tính xác suất của các biến cố sau:
+		\begin{itemize}
+			\item $A$: " Con đầu là gái".
+			\item $B$: “Có ít nhất một người con trai”.
+			\item $C$: : "Con thứ hai là trai".
+			\item $D$: " Có hai người con gái".
+		\end{itemize}
+	\end{tasks}
+\end{vd} \dongcham{18}
+\begin{vd}
+	Gieo một đồng tiền cân đối ba lần.
+	\begin{tasks}
+		\task Vẽ sơ đồ hình cây mô tả các phần tử của không gian mẫu.
+		\task Tính xác suất của các biến cố :
+		\begin{itemize}
+			\item $A$: "Trong ba lần gieo có hai lần sấp, một lần ngửa".
+			\item $B$: "Trong ba lần gieo có ít nhất một lần sấp".
+		\end{itemize}
+	\end{tasks}
+\end{vd} \dongcham{15}
+
+\begin{vd}
+	Trên một dãy phố có ba quán ăn $A, B, C$. Hai bạn Văn và Hải mỗi người chọn ngẫu nhiên một quán để ăn trưa. 
+	\begin{tasks}
+		\task  Vẽ sơ đồ hình cây mô tả các phần tử của không gian mẫu.
+		\task Tính xác suất của các biến cố sau:
+		\begin{itemize}
+			\item $E$: "Hai người cùng vào một quán".
+			\item $F$: " Cả hai người không chọn quán $C$".
+		\end{itemize}
+	\end{tasks}
+\end{vd} \dongcham{11}
+
+\begin{vd}
+	Màu hạt của đậu Hà Lan có hai kiểu hình là màu vàng và màu xanh tương ứng với hai loại gen là gen trội $A$  và gen lặn $a$ . Hình dạng hạt của đậu Hà Lan có hai kiểu hình là hạt trơn và hạt nhăn tương ứng với hai loại gen là gen trội $B$  và gen lặn $b$ . Biết rằng, cây con lấy ngẫu nhiên một gen từ cây bố và một gen từ cây mẹ.
+	Phép thử là cho lai hai loại đậu Hà Lan, trong đó cả cây bố và cây mẹ đều có kiểu gen là $(Aa, Bb)$ và kiểu hình là hạt màu vàng và trơn. Giả sử các kết quả có thể là đồng khả năng. Tính xác suất để cây con có kiểu hình là hạt màu xanh và nhăn.
+	\loigiai{
+		Xác suất để cây con có kiểu hình là hạt màu xanh và nhăn là $\dfrac{1}{16}$.
+	}
+\end{vd} \dongcham{12}
+\begin{dang}{Sử dụng biến cố đối}
+	Khi đề bài yêu cầu tính xác suất của biến cố $A$, nhưng việc đếm số kết quả thuận lợi của biến cố $A$ khó khăn (do phải phân chia nhiều trường hợp). Lúc này, ta có thể tìm biến cố đối của $A$ là $\overline{A}$.
+	\begin{listEX}[1]
+		\item [\ding{172}] Đếm số kết quả thuận lợi của $\overline{A}$
+		\item [\ding{173}] Tính $P(\overline{A})$
+		\item [\ding{174}] Suy ra $\mathrm{P}\left(A\right)=1-\mathrm{P}(\overline{A})$.
+	\end{listEX}
+\end{dang}
+\begin{vd}
+	Một hộp chứa 10 tấm thẻ có kích thước như nhau và được đánh số từ 2021 đến 2030, mỗi thẻ chỉ ghi đúng một số. Chọn ra ngẫu nhiên đồng thời 3 thẻ từ hộp.
+	\begin{tasks}
+		\task Tìm biến cố đối của biến cố $A$:" Tích các số ghi trên ba thẻ chia hết cho 5".
+		\task Tính xác suất của biến cố $A$.
+	\end{tasks}
+\end{vd} \dongcham{12}
+\begin{vd}
+	Gieo ba con xúc xắc cân đối. Tính xác suất để có ít nhất một con xuất hiện mặt $6$ chấm.
+\end{vd} \dongcham{10}
+\begin{vd}
+	Một hộp đựng 5  viên bi xanh,  4 viên bi đỏ, 7  viên bi vàng. Chọn ngẫu nhiên cùng một lúc ra 8  viên bi. Tính xác suất của biến cố $A$: “ 8  viên bi được chọn có đủ 3  màu”.
+\end{vd} \dongcham{12}
+\begin{vd}
+	Một lớp có $41$ học sinh trong đó có $15$ bạn nam và $26$ bạn nữ. Cô giáo chủ nhiệm chọn ngẫu nhiên ra bốn bạn đi trực ban. 
+	\begin{tasks}(2)
+		\task Tính xác suất để cả bốn bạn đó đều là nữ.
+		\task Tính xác suất để có ít nhất một bạn nam.
+	\end{tasks}
+	\loigiai{
+		Ta có $n(\Omega)=C_{41}^4$.
+		\begin{enumerate}[a)]
+			\item Gọi $A$ là biến cố: \lq\lq Cả bốn bạn đều là nữ\rq\rq.\\
+			$n(A)=C_{26}^4$.\\
+			Vậy $\mathrm{P}(A)=\dfrac{C_{26}^4}{C_{41}^4}=\dfrac{115}{779}$.
+			\item Gọi $B$ là biến cố: \rq\rq Có ít nhất một bạn nam\rq\rq.\\
+			Ta có $B=\overline{A}$. Do đó $\mathrm{P}(B)=1-\mathrm{P}(A)=\dfrac{664}{779}$.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{12}
+%\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) $\dfrac{115}{779}$. \quad b) $\dfrac{664}{779}$.}
+
+\begin{vd}
+	Có hai hòm đựng thẻ, mỗi hòm đựng $10$ thẻ đánh số từ $1$ đến $10$. Lấy ngẫu nhiên từ mỗi hòm một thẻ. Tính xác suất để trong hai thẻ lấy ra
+	\begin{tasks}(2)
+		\task có ít nhất một thẻ đánh số $1$.
+		\task tổng hai số ghi trên hai thẻ khác $19$.
+	\end{tasks}
+	\loigiai{
+		Ta có $n(\Omega)=C_{10}^1.C_{10}^1$.
+		\begin{enumerate}[a)]
+			\item Gọi $A$ là biến cố: \lq\lq Lấy được ít nhất một thẻ đánh số $1$\rq\rq.\\
+			Khi đó, $\overline{A}$ là biến cố: \lq\lq Cả hai thẻ đều không đánh số $1$\rq\rq.\\
+			Ta có $n\left(\overline{A}\right)=C_9^1.C_9^1\Rightarrow \mathrm{P}\left(\overline{A}\right)=\dfrac{C_9^1.C_9^1}{C_{10}^1.C_{10}^1}$.\\
+			Vậy $\mathrm{P}(A)=1-\mathrm{P}\left(\overline{A}\right)=\dfrac{19}{100}$.
+			\item Gọi $B$ là biến cố: \lq\lq Tổng hai số ghi trên thẻ khác $19$\rq\rq.\\
+			Khi đó, $\overline{B}$ là biến cố: \lq\lq Tổng hai số ghi trên thẻ bằng $19$\rq\rq.\\
+			Ta có $n\left(\overline{B}\right)=2\Rightarrow \mathrm{P}(B)=\dfrac{2}{C_{10}^1.C_{10}^1}$.\\
+			Vậy $\mathrm{P}(B)=1-\mathrm{P}\left(\overline{B}\right)=\dfrac{49}{50}$.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{18}
+%\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) $\dfrac{19}{100}$ \quad b) $\dfrac{49}{50}$. }
+
+\begin{vd}
+	Xếp ngẫu nhiên $6$ người $A$, $B$, $C$, $D$, $E$, $F$ vào một cái bàn dài có $6$ chỗ ngồi. Tính xác suất để 
+	\begin{tasks}(2)
+		\task hai người $A$ và $B$ ngồi cạnh nhau.
+		\task hai người $A$ và $B$ không ngồi cạnh nhau.
+	\end{tasks}
+\end{vd} \dongcham{18}
+%\hspace*{9cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) $\dfrac{1}{3}$. \quad b) $\dfrac{2}{3}$}.
+
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}%[Bùi Mạnh Tiến]%[1D2B5-2]
+	Trong hộp có $20$ nắp khoen bia Tiger, trong đó có $2$ nắp ghi \lq\lq Chúc mừng bạn đã trúng thưởng xe FORD\rq\rq. Bạn được chọn lên rút thăm lần lượt hai nắp khoen, tính xác suất để cả hai nắp đều trúng thưởng.
+	\loigiai{
+		Số cách chọn lần lượt $2$ nắp khoen từ $20$ nắp khoen là $\mathrm{C}_{20}^1\cdot \mathrm{C}_{19}^1$.\\
+		Gọi $A$ là biến cố \lq\lq Cả $2$ nắp khoen được chọn đều trúng thưởng\rq\rq.\\
+		Số cách chọn nắp khoen đầu tiên trúng thưởng là $\mathrm{C}_{2}^1$.\\
+		Số cách chọn nắp khoen lần thứ hai trúng thưởng là $\mathrm{C}_{1}^1$.\\
+		Do đó số khả năng xảy ra biến cố $A$ là $\mathrm{C}_{2}^1+\mathrm{C}_{1}^1$.\\
+		Vậy xác suất để cả hai nắp đều trúng thưởng là $\mathrm{P}(A)=\dfrac{\mathrm{C}_{2}^1+\mathrm{C}_{1}^1}{\mathrm{C}_{20}^1\cdot \mathrm{C}_{19}^1}=\dfrac{1}{190}\approx 0{,}00526.$
+	}
+\end{baitap}
+%\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: $\dfrac{1}{190}$ }
+
+\begin{baitap}%[Bùi Mạnh Tiến]%[1D2B5-2]
+	Trên giá sách có $4$ quyển sách Toán, $3$ quyển sách Lý và $2$ quyển sách Hóa. Lấy ngẫu nhiên ba quyển sách. Tính xác suất sao cho ba quyển lấy ra có ít nhất một quyển sách Toán.
+	\loigiai{
+		Không gian mẫu là số cách lấy ra ba quyển sách từ bộ $9$ quyển sách nên $|\Omega|=\mathrm{C}_9^3$ cách.\\
+		Gọi $A$ là biến cố \lq\lq Trong ba quyển lấy ra không có quyển sách Toán\rq\rq. Tức là trong ba quyển lấy ra được lấy từ bộ $5$ quyển ($3$ cuốn sách Lý và $2$ cuốn sách Hóa) nên không gian của biến cố $A$ là $|\Omega_A|=\mathrm{C}_5^3.$ \\
+		Vậy xác suất để ba quyển sách lấy ra có ít nhất một quyển sách Toán là
+		\begin{center}
+			$\mathrm{P}(\overline{A})=1-\mathrm{P}(A)=1-\dfrac{\mathrm{C}_5^3}{\mathrm{C}_9^3}=1-\dfrac{10}{84}=\dfrac{37}{42}.$
+		\end{center}
+	}
+\end{baitap}
+
+\begin{baitap}
+	Trong một buổi liên hoan có $15$ cặp nam nữ, trong đó có $4$ cặp vợ chồng. Chọn ngẫu nhiên $5$ người để biểu diễn một tiết mục văn nghệ. Tính xác suất để $5$ người được chọn không có cặp vợ chồng nào.
+	%	\hspace*{5cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 0{,}907.}
+	\loigiai{
+		Số phần tử không gian mẫu $|\Omega|=\mathrm{C}_{30}^5=142506$.
+		Gọi $A$ là biến cố \lq\lq $5$ người được chọn không có cặp vợ chồng nào\rq\rq.
+		\begin{itemize}
+			\item Chọn $1$ cặp vợ chồng có $4$ cách chọn, chọn thêm $3$ người trong $28$ người nhưng không có cặp vợ chồng nào thì có $\mathrm{C}_{28}^3-3$ cách chọn. Suy ra số cách chọn trong trường hợp này là $4\left(\mathrm{C}_{28}^3-3\right)=13092$.
+			\item Chọn $2$ cặp vợ chồng có $\mathrm{C}_4^2$ cách chọn, chọn thêm $1$ người trong $26$ người còn lại thì có $26$ cách chọn. Suy ra số cách chọn trong trường hợp này là  $\mathrm{C}_4^2\cdot 26=156$.
+		\end{itemize}
+		Do đó tập các kết quả thuận lợi cho biến cố $A$ là $|\Omega_A|=\mathrm{C}_{30}^5-(13092+156)=129258.$\\
+		Vậy xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{|\Omega_A|}{|\Omega|}=\dfrac{7181}{7917}=0{,}907.$ 
+	}
+\end{baitap}
+
+
+\begin{baitap}
+	Một giáo viên muốn chọn hai câu hỏi ra đề kiểm tra $15$ phút môn Toán lớp $11$. Trong ngân hàng đề có $10$ câu lượng giác, $6$ câu toán tổ hợp, $8$ câu hỏi toán xác suất.
+	\begin{tasks}(1)
+		\task Tính xác suất để hai câu hỏi rơi vào cùng một chủ đề.
+		\task Tính xác suất để hai câu hỏi rơi vào hai chủ đề khác nhau.
+	\end{tasks}
+	\loigiai{
+		Ta có $n(\Omega)=C_{24}^2$.
+		\begin{enumerate}[a)]
+			\item Gọi $A$ là biến cố: \lq\lq Chọn được hai câu cùng chủ đề\rq\rq.\\
+			$A_1$ là biến cố: \lq\lq Chọn được hai câu lượng giác\rq\rq.\,$\Rightarrow \mathrm{P}(A_1)=\dfrac{C_{10}^2}{C_{24}^2}$.\\
+			$A_2$ là biến cố: \lq\lq Chọn được hai câu tổ hợp\rq\rq.\, $\Rightarrow \mathrm{P}(A_2)=\dfrac{C_8^2}{C_{24}^2}$.\\
+			$A_3$ là biến cố: \lq\lq Chọn được hai câu xác suất\rq\rq.\, $\Rightarrow \mathrm{P}(A_3)=\dfrac{C_6^2}{C_{24}^2}$.\\
+			Vậy $\mathrm{P}(A)=\mathrm{P}(A_1\cup A_2\cup A_3)=\mathrm{P}(A_1)+\mathrm{P}(A_2)+\mathrm{P}(A_3)=\dfrac{C_{10}^2+C_8^2+C_6^2}{C_{24}^2}=\dfrac{22}{69}$.
+			\item Gọi $B$ là biến cố: \lq\lq Chọn được hai câu vào hai chủ đề khác nhau\rq\rq.\\
+			Vì $B=\overline{A}$ nên $\mathrm{P}(B)=1-\mathrm{P}(A)=\dfrac{47}{69}$.
+		\end{enumerate}
+	}
+\end{baitap}
+%\hspace*{6cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: a) $\dfrac{22}{69}$\quad b) $\dfrac{47}{69}$.} 
+\begin{baitap}
+	Một ngân hàng đề thi gồm $30$ câu hỏi. Mỗi đề thi gồm $5$ câu được lấy ngẫu nhiên từ ngân hàng đề thi. Thí sinh $A$ đã học thuộc $10$ câu trong ngân hàng đề thi. Tìm xác suất để thí sinh $A$ rút ngẫu nhiên được một đề thi có ít nhất $3$ câu đã thuộc.
+	%	\hspace*{3cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 0{,}191.}
+	\loigiai{
+		Chọn ngẫu nhiên $5$ đề thi từ $30$ đề thi của ngân hàng thì có $\mathrm{C}_{30}^5$ cách.\\
+		Do đó số phần tử của không gian mẫu là $|\Omega|=\mathrm{C}_{30}^5=142506$.\\
+		Gọi $A$ là biến cố \lq\lq Thí sinh $A$ rút ngẫu nhiên được một đề thi có ít nhất $2$ câu đã thuộc\rq\rq. Ta có các trường hợp:
+		\begin{itemize}
+			\item Trường hợp $1$: Đề thi có $3$ câu đã thuộc, có $\mathrm{C}_{10}^3\cdot \mathrm{C}_{20}^2=22800$ trường hợp.
+			\item Trường hợp $2$: Đề thi có $4$ câu đã thuộc, có $\mathrm{C}_{10}^4\cdot \mathrm{C}_{20}^1=4200$ trường hợp.
+			\item Trường hợp $3$: Đề thi có $5$ câu đã thuộc, có $\mathrm{C}_{10}^5\cdot \mathrm{C}_{20}^0=252$ trường hợp.
+		\end{itemize}
+		Do đó số trường hợp thuận lợi cho biến cố $A$ là $|\Omega_A|=22800+4200+252=27252$ trường hợp.\\
+		Vậy xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{|\Omega_A|}{|\Omega|}=\dfrac{27252}{142506}\approx 0{,}191.$ 
+	}
+\end{baitap}
+
+\begin{baitap}%[Bùi Mạnh Tiến]%[1D2K5-2]
+	Một bài thi trắc nghiệm khách quan gồm $5$ câu hỏi, mỗi câu có $4$ phương án trả lời. Tính xác suất để một học sinh làm bài thi được ít nhất $3$ câu hỏi. 
+	%\hspace*{2cm} {\sf\fontsize{10pt}{1pt}\selectfont Đáp số: 0{,}104}
+	\loigiai{
+		Mỗi câu đều có $4$ phương án trả lời. Theo quy tắc nhân ta có số phương án trả lời của bài thi là $|\Omega|=4^5$.\\
+		Gọi $A$ là biến cố \lq\lq Học sinh làm bài thi được ít nhất 3 câu hỏi\rq\rq. Ta có các trường hợp:
+		\begin{itemize}
+			\item Trường hợp $1$: Học sinh làm được $5$ câu hỏi, có duy nhất $1$ khả năng xảy ra vì bài thi có duy nhất $1$ đáp án.
+			\item Trường hợp $2$: Học sinh làm được $4$ câu hỏi, tức là
+			\begin{itemize}
+				\item Làm đúng được $4$ câu nên có $\mathrm{C}_5^4$ cách.
+				\item Làm sai 1 câu nên có $\mathrm{C}_3^1$ cách chọn phương án sai cho câu đó vì mỗi câu có 3 phương án sai.
+			\end{itemize} 
+			Suy ra số khả năng xảy ra trong trường hợp này là $\mathrm{C}_5^4\cdot \mathrm{C}_3^1$.
+			\item Trường hợp $3$: Học sinh làm được $3$ câu hỏi, tức là
+			\begin{itemize}
+				\item Làm đúng được $3$ câu nên có $\mathrm{C}_5^3$ cách.
+				\item Làm sai $2$ câu nên có $\left(\mathrm{C}_3^1\right)^2$  cách chọn phương án sai.
+			\end{itemize}
+			Suy ra số khả năng xảy ra trong trường hợp này là $\mathrm{C}_5^3\left(\mathrm{C}_3^1\right)^2.$
+		\end{itemize}
+		Do đó số khả năng xảy ra biến cố $A$ là $|\Omega_A|=1+\mathrm{C}_5^4\cdot \mathrm{C}_3^1+\mathrm{C}_5^3\left(\mathrm{C}_3^1\right)^2=106.$\\
+		Vậy xác suất của biến cố $A$ là $\mathrm{P}(A)=\dfrac{|\Omega_A|}{\Omega}=\dfrac{106}{4^5}=\dfrac{53}{512}\approx 0{,}104$. 
+	}
+\end{baitap}
+
+
+

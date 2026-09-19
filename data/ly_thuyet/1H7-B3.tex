@@ -1,0 +1,276 @@
+\section{PHÉP CHIẾU VUÔNG GÓC. GÓC GIỮA ĐƯỜNG THẲNG VÀ MẶT PHẲNG}
+\subsection{KIẾN THỨC CẦN NHỚ}
+\subsubsection{Phép chiếu vuông góc}
+Phép chiếu song song lên mặt phẳng $(P)$ theo phương $\Delta$ vuông góc với $(P)$ được gọi là \emph{phép chiếu vuông góc} lên mặt phẳng $(P)$.
+\begin{boxkn}
+\begin{itemize}
+	\item Vì phép chiếu vuông góc lên một mặt phẳng là một trường hợp đặc biệt của phép chiếu song song nên nó có mọi tính chất của phép chiếu song song.
+	\item Phép chiếu vuông góc lên mặt phẳng $(P)$ còn được gọi đơn giản là phép chiếu lên mặt phẳng $(P)$. \emph{Hình chiếu vuông góc} $\mathscr{H}'$ của hình $\mathscr{H}$ trên mặt phẳng $(P)$ còn được gọi là \emph{hình chiếu} của $\mathscr{H}$ trên mặt phẳng $(P)$.
+\end{itemize}
+\end{boxkn}
+\subsubsection{Định lý ba đường vuông góc}
+\immini{
+	Cho đường thẳng $a$ nằm trong mặt phẳng $(\alpha)$ và $b$ là đường thẳng không thuộc $(\alpha)$ đồng thời không vuông góc với $(\alpha)$. Gọi $b'$ là hình chiếu vuông góc của $b$ trên $(\alpha)$. Khi đó $a$ vuông góc với $b$ khi và chỉ khi a vuông góc với $b'$.
+}{
+	\begin{tikzpicture}[line cap=round,line join=round,scale=0.6,font=\footnotesize]
+		\path 
+		(-4,-4) coordinate (M)
+		(-2,-1) coordinate (Q)
+		(2,-4) coordinate (N)
+		(-1,-2.5) coordinate (A')
+		(2.2,-2.5) coordinate (B')
+		($(Q)+(N)-(M)$) coordinate (P)
+		($(Q)!(A')!(P)$) coordinate (m)
+		(intersection of A'--m and Q--P) coordinate (m_1)
+		($(Q)!(B')!(P)$) coordinate (n)
+		(intersection of B'--n and Q--P) coordinate (n_1)
+		;
+		\coordinate[label={above}:$A$] (A) at ($(m_1)+(0,1)$);
+		\coordinate[label={above}:$B$] (B) at ($(n_1)+(0,2)$);
+		\coordinate (H) at ($(A')!0.3!(B')$);
+		\coordinate (x) at ($(H)+(Q)-(M)$);
+		\coordinate (H_1) at ($(H)!0.4!(x)$);
+		\coordinate[label={right}:$a$] (H_2) at ($(H)!-0.4!(x)$);
+		\foreach \p/\r in {A'/-90,B'/-90}
+		\fill (\p) circle (1.5pt) node[shift={(\r:3mm)}]{$\p$};
+		\draw[dashed] (m_1)--(n_1) (H)--(H_1);
+		\draw ($(A)!1.2!(B)$)--($(B)!1.2!(A)$)node[pos=0.4,above]{$b$} 	
+		($(A')!1.2!(B')$)--($(B')!1.2!(A')$)node[pos=0.7,above]{$b'$}  
+		(M)--(N)--(P)--(n_1) (m_1)--(Q)--(M) (H_2)--(H) (A)--(A') (B)--(B');
+		\draw 
+		pic[draw, "\scriptsize$(P)$",angle radius=1cm]{angle = N--M--Q}
+		pic [draw,angle radius=2mm]{right angle=H_2--H--B'};	
+	\end{tikzpicture}
+}
+\subsubsection{Góc giữa đường thẳng và mặt phẳng}
+	\immini{
+	Cho đường thẳng $d$ và mặt phẳng $(\alpha)$.
+	\begin{itemize}
+		\item [$\bullet$] Trường hợp $d \perp (\alpha)$ thì góc giữa đường thẳng $d$ và $(\alpha)$ bằng $90^\circ$.
+		\item [$\bullet$] Trường hợp $d$ không vuông góc với $(\alpha)$ thì góc giữa $d$ và và $(\alpha)$ bằng góc giữa $d$ hình chiếu $d'$ của nó trên $(\alpha)$.
+	\end{itemize}
+\begin{luuy}
+	Nếu $\varphi$ là góc giữa đường thẳng $d$ và mặt phẳng $(\alpha)$ thì ta luôn có $0^\circ \leq \varphi \leq 90^\circ$.
+\end{luuy}
+}{\vspace{1cm}
+	\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round,>=stealth,scale=0.6]
+		\tikzset{label style/.style={font=\footnotesize}}
+		\tkzInit[ymin=-5,ymax=0.5,xmin=-4.1,xmax=4.1]
+		\tkzClip %cắt bớt phần ko gian dư
+		\tkzDefPoints{-4/-4/M, -2/-1.5/Q, 2/-4/N, -0.5/-3/H}
+		\tkzDefPointBy[translation = from M to N](Q) \tkzGetPoint{P}%phép tịnh tiến biến Q thành P
+		\tkzDefLine[perpendicular=through H,K=0.4](Q,P) \tkzGetPoint{h}%đường qua H vuông góc QP
+		\tkzInterLL(H,h)(Q,P) \tkzGetPoint{h_1}
+		\coordinate[label={above right}:$A$] (A) at ($(h_1)+(0,1)$);
+		\tkzDefLine[parallel=through H](Q,P) \tkzGetPoint{x}%đường qua H song song MQ
+		\coordinate[label={above right}:$O$] (O) at ($(H)!0.4!(x)$);
+		\tkzInterLL(A,O)(N,P) \tkzGetPoint{O_1}
+		\tkzInterLL(A,O)(P,Q) \tkzGetPoint{O_3}
+		\coordinate (O_2) at ($(O)!3.3!(O_1)$);
+		\tkzLabelPoints[below](H)
+		\tkzDrawLines[add=0 and 0.3](O,H O,A)
+		\tkzDrawSegments[dashed](h_1,O_3 O,O_1)
+		\tkzDrawSegments(M,N N,P P,O_3 h_1,Q Q,M A,H O_1,O_2)
+		\tkzLabelLine[below left,pos=1.3](O,A){$d$}
+		\tkzLabelLine[above,pos=1.3](O,H){$d'$}
+		\tkzMarkRightAngle(A,H,O)
+		\tkzMarkAngles[arc=l,size=0.7cm](A,O,H)
+		\tkzLabelAngle[pos=0.9](A,O,H){$\varphi$}
+		\tkzMarkAngles[arc=l,size=1.1cm](N,M,Q)
+		\tkzLabelAngle[pos=0.7](N,M,Q){$\alpha$}
+		\tkzDrawPoints[fill=black](A,H,O)
+	\end{tikzpicture}
+}
+\newpage
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Góc giữa đường thẳng và mặt phẳng}
+	Cho đường thẳng $d$ và mặt phẳng $(P)$ cắt nhau.
+	\begin{itemize}
+		\immini{	\item [\iconMT] Nếu $d\perp (P)$ thì $(d,(P))=90^{\circ}$.
+			\item [\iconMT] Nếu $d$ không vuông $(P)$ thì  để xác định góc giữa $d$ và $(P)$, ta thường làm như sau
+			\begin{itemize}
+				\item Xác định giao điểm $O$ của $d$ và $(P)$.
+				\item Lấy một điểm $A$ trên $d$ ($A$ khác $O$). Xác định hình chiếu vuông góc (vuông góc) $H$ của $A$ lên $(P)$. Lúc đó $(d,(P))=(d,d')=\widehat{AOH}$.
+			\end{itemize}
+			\begin{luuy}
+				$0^{\circ}\leq (d,(P))\leq 90^{\circ}$.
+			\end{luuy}
+		}{
+			\begin{tikzpicture}[scale=0.7,scale=0.9]
+				\tikzset{label style/.style={font=\scriptsize}}
+				\tkzInit[ymin=-5,ymax=0.5,xmin=-4.1,xmax=4.1]
+				\tkzClip %cắt bớt phần ko gian dư
+				\tkzDefPoints{-4/-4/M, -2/-1.5/Q, 2/-4/N, -0.5/-3/H}
+				\tkzDefPointBy[translation = from M to N](Q) \tkzGetPoint{P}%phép tịnh tiến biến Q thành P
+				\tkzDefLine[perpendicular=through H,K=0.4](Q,P) \tkzGetPoint{h}%đường qua H vuông góc QP
+				\tkzInterLL(H,h)(Q,P) \tkzGetPoint{h_1}
+				\coordinate[label={above right}:$A$] (A) at ($(h_1)+(0,1)$);
+				\tkzDefLine[parallel=through H](Q,P) \tkzGetPoint{x}%đường qua H song song MQ
+				\coordinate[label={above right}:$O$] (O) at ($(H)!0.4!(x)$);
+				\tkzInterLL(A,O)(N,P) \tkzGetPoint{O_1}
+				\tkzInterLL(A,O)(P,Q) \tkzGetPoint{O_3}
+				\coordinate (O_2) at ($(O)!3.3!(O_1)$);
+				\tkzLabelPoints[below](H)
+				\tkzDrawLines[add=0 and 0.3](O,H O,A)
+				\tkzDrawSegments[dashed](h_1,O_3 O,O_1)
+				\tkzDrawSegments(M,N N,P P,O_3 h_1,Q Q,M A,H O_1,O_2)
+				\tkzLabelLine[below left,pos=1.3](O,A){$d$}
+				\tkzLabelLine[above,pos=1.3](O,H){$d'$}
+				\tkzMarkRightAngle(A,H,O)
+				\tkzMarkAngles[arc=l,size=0.7cm](A,O,H)
+				\tkzLabelAngle[pos=0.9](A,O,H){$\varphi$}
+				\tkzMarkAngles[arc=l,size=1.1cm](N,M,Q)
+				\tkzLabelAngle[pos=0.7](N,M,Q){$\alpha$}
+		\end{tikzpicture}}		
+	\end{itemize}
+\end{dang}
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông tâm $O$ cạnh $a$, $SA=a\sqrt{6}$ và $SA$ vuông góc $(ABCD)$. Hãy xác định các góc giữa
+	\begin{tasks}(3)
+		\task $SB$ và $(ABCD)$.
+		\task $SC$ và $(ABCD)$.
+		\task $SO$ và $(ABCD)$.
+		\task $SC$ và $(SAB)$.
+		\task $SB$ và $(SAC)$.
+		\task $BD$ và $(SAC)$.
+	\end{tasks}
+	\loigiai{
+	}
+\end{vd}\dongcham{23}
+
+\begin{vd}
+	Cho hình chóp $S.ABC$ có đáy $ABC$ là tam giác đều cạnh $a$, $SA=2a$ và vuông góc với đáy. 
+	\begin{tasks}(1)
+		\task Tính góc giữa $SC$ với $(ABC)$.
+		\task Tính góc giữa $SC$ và mặt phẳng $(SAB)$. 
+	\end{tasks}
+	
+	\loigiai{
+		\begin{enumerate}[a)]
+		\immini{
+		\item Ta có $SA \perp (ABC)$ nên hình chiếu vuông góc của $SC$ lên $(ABC)$ là $AC$. Suy ra 
+				$$\widehat{(SC,(ABC))}=\widehat{(SC,SAC)}=\widehat{SCA}.$$
+				Xét $\triangle SAC$, có $\tan \widehat{SCA}=\dfrac{SA}{AC}=2 \Rightarrow \widehat{SCA} \approx 63^\circ 26'. $
+				\item Gọi $M$ là trung điểm $AB$, suy ra $CM\perp AB$. \\
+				Hơn nữa $SA\perp (ABC)$ suy ra $SA\perp CM$. \\
+				Do đó $CM\perp (SAB)$ nên hình chiếu vuông góc của $SC$ trên mặt phẳng $(SAB)$ là $SM$. Suy ra 
+				$$\widehat{(SC,(SAB))}=\widehat{(SC,SM)}=\widehat{CSM}.$$
+				}{
+			\begin{tikzpicture}[scale=.8]
+					\tkzDefPoints{0/0/A, 3/-2/C, 8/0/B}
+					\coordinate (S) at ($(A)+(0,4)$);
+					\coordinate (M) at ($(A)!0.5!(B)$);
+					\tkzDrawSegments[dashed](A,B S,M C,M)
+					\tkzDrawPoints[fill=black](S,A,B,C,M)
+					\tkzDrawPolygon(S,B,C)
+					\tkzDrawSegments(S,A A,C)
+					\tkzLabelPoints[left](A)
+					\tkzLabelPoints[right](B)\tkzLabelPoints[above right](M)
+					\tkzLabelPoints[below](C)
+					\tkzLabelPoints[above](S)
+					\tkzMarkRightAngles(B,A,S A,M,C)
+			\end{tikzpicture}} 
+				Trong tam giác vuông $SMC$, ta có $\tan \widehat{CSM}=\dfrac{CM}{SM}=\dfrac{CM}{\sqrt{SA^2+AM^2}}=\dfrac{\dfrac{a\sqrt{3}}{2}}{\sqrt{4a^2+\dfrac{a^2}{4}}}=\dfrac{\sqrt{51}}{17}$.\\
+				Vậy $SC$ hợp với $(SAB)$ một góc $\alpha $ thỏa mãn $\tan \alpha =\dfrac{\sqrt{51}}{17}.$
+			\end{enumerate}
+	}
+\end{vd}\dongcham{20}
+
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có đáy là hình vuông cạnh $a$, tâm $O$, $SO$ vuông góc $(ABCD)$. Gọi $M, N$ lần lượt là trung điểm $SA, BC$. Biết rằng góc giữa $MN$ và $(ABCD)$ bằng $60^{\circ}$. Tính góc giữa $MN$ và $(SBD)$.
+	\loigiai{
+	\begin{center}
+		\begin{tikzpicture}
+			\tkzDefPoints{0/0/O, -4/-1/A, 1/-1/B, 0/5/S}
+			\tkzDefPointBy[symmetry = center O](A)
+			\tkzGetPoint{C}
+			\tkzDefPointBy[symmetry = center O](B)
+			\tkzGetPoint{D}
+			\tkzDefMidPoint(S,A)
+			\tkzGetPoint{M}
+			\tkzDefMidPoint(B,C)
+			\tkzGetPoint{N}
+			\tkzDefMidPoint(A,O)
+			\tkzGetPoint{H}
+			\tkzDefMidPoint(S,D)
+			\tkzGetPoint{K}
+			\tkzDrawSegments[dashed](A,D A,C D,C D,B S,D S,O M,N M,H N,H C,K O,K M,K)
+			\tkzDrawSegments(A,B B,C S,A S,B S,C)
+			\tkzMarkRightAngle[size=.2](B,O,C)
+			\tkzMarkRightAngle[size=.2](M,H,N)
+			\tkzMarkRightAngle[size=.2](K,O,C)
+			\tkzLabelPoints[below](O,A,B,N,H)
+			\tkzLabelPoints[above left](S,M,K)
+			\tkzLabelPoints[right](C)
+			\tkzLabelPoints[left](D)
+			\tkzMarkAngles[mark=|,arc=l,size=0.5cm](O,K,C)
+			\tkzMarkAngles[arc=l,size=0.7cm](M,N,H)
+			%\tkzMarkSegments[mark=||](S,A S,B S,C S,D)
+		\end{tikzpicture}
+	\end{center}
+	Gọi $H$ là trung điểm $AO$. Ta có $MH\parallel SO$ nên $MH\perp (ABCD)$, suy ra $HN$ là hình chiếu vuông góc của $MN$ lên $(ABCD)$. Do đó $\left(MN,(ABCD)\right)=(MN,KN)=\widehat{MNK}=60^{\circ}$.\\
+		Trong tam giác $HCN$, ta có $HN^2=HC^2+CN^2-2HC.CN.\cos\widehat{HCN}$, suy ra $HN=\dfrac{a\sqrt{10}}{4}$.\\
+		Mà trong tam giác $MNH$, ta có $\sqrt{3}=\tan\widehat{MNH}=\dfrac{MH}{HN}$ nên $MH=\dfrac{a\sqrt{30}}{4}$, suy ra $SO=2MH=\dfrac{a\sqrt{30}}{2}$.\\
+		Gọi $K$ là trung điểm $SD$.\\
+		Ta có $MKCN$ là hình bình hành nên $MN$ song song $KC$. Do đó $\left(MN,(SBD)\right)=\left(KC,(SBD)\right)$.\\
+		Mà $CO\perp (SBD)$ tại $O$ (do $CO\perp DO$ và $CO\perp SO$) nên $KO$ là hình chiếu vuông góc của $KC$ lên $(SBD)$. Suy ra $\left(KC,(SBD)\right)=\left(KC,KO\right)=\widehat{CKO}$.\\
+		Ta có $OK=\dfrac{1}{2}SD=\dfrac{1}{2}\sqrt{OD^2+OS^2}=a\sqrt{2}$.\\
+		Mặt khác, trong tam giác $COK$, ta có $\tan\widehat{CKO}=\dfrac{OC}{OK}=\dfrac{1}{2}$, suy ra $\left(KC,(SBD)\right)=\arctan\widehat{CKO}=\arctan\dfrac{1}{2}\approx 26^{\circ}33'$.
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}%Bài 7.16 
+	Cho hình hộp $ABCD.A'B'C'D'$ có đáy $ABCD$ là hình vuông cạnh $a$ và $AA'=a\sqrt{2}$. Hình chiếu vuông góc của $A$ trên mặt phẳng $(A'B'C'D')$ trùng với trung điểm của $B'D'$. Tính góc giữa đường thẳng $AA'$ và mặt phẳng $(A'B'C'D')$.
+	\loigiai{
+		\begin{center}			
+			\begin{tikzpicture}
+				\def\a{5}	\def\h{4}
+				\path 	(0:0) coordinate (A')
+				++(0:\a) coordinate (B')
+				++(-150:.6*\a) coordinate (C')
+				($(A')+(C')-(B')$) coordinate (D')	
+				(intersection of A'--C' and B'--D') coordinate (O')	
+				($(O')+(90:\h)$) coordinate (A)
+				($(A)+(C')-(A')$) coordinate (C)
+				($(C)+(D')-(C')$) coordinate (D)
+				($(A)+(B')-(A')$) coordinate (B);
+				\draw[dashed] 	(D')--(A')--(B')	(A)--(A') (A)--(O') (A')--(C') (B')--(D');
+				\draw[thick] 	(C)--(C') 	(D)--(D') 	(B)--(B')  (B')--(C')--(D') (A)--(B)--(C)--(D)--cycle;
+				\foreach \x/\g in {A/90,B/90,C/90,D/180,A'/180,B'/0,C'/-45,D'/180,O'/-90}
+				\draw[fill=white] (\x) circle (1pt)
+				($(\g:4mm)+(\x)$) node {$\x$};
+				\draw pic[draw,angle radius=2mm]{right angle=A--O'--A'}
+				pic[draw,angle radius=3mm]{angle=O'--A'--A};
+			\end{tikzpicture}
+		\end{center}
+		Gọi $O'$ là tâm hình vuông $(A'B'C'D')$ thì $AO'\perp (A'B'C'D')\\
+		\Rightarrow A'O'$ là hình chiếu vuông góc của $AA'$ lên mặt phẳng $(A'B'C'D')$.\\
+		Khi đó $\left( \widehat{AA',(A'B'C'D')} \right)=\left( \widehat{AA',AO'} \right)=\widehat{AA'O'}$.\\
+		Mặt khác tam giác $AA'O'$ vuông tại $O'$ có $A'O'=\dfrac{1}{2}A'C'=\dfrac{a\sqrt{2}}{2}$ và $\cos \widehat{AA'O'}=\dfrac{AO'}{AA'}=\dfrac{1}{2}$.\\
+		Suy ra $\widehat{AA'O'}=60{}^\circ $.\\
+		Vậy góc giữa đường thẳng $AA'$ và mặt phẳng $(A'B'C'D')$ bằng $60^\circ $.
+	}	
+\end{vd}\dongcham{14}
+
+\begin{vd}%Ví dụ 3.
+	Một chiếc cột cao $3 \mathrm{~m}$ được dựng vuông góc với mặt đất phẳng. Dưới ánh nắng mặt trời, bóng của cột trên mặt đất dài $5 \mathrm{~m}$. Tính góc giữa đường thẳng chứa tia nắng mặt trời và mặt đất (tính gần đúng theo đơn vị độ, làm tròn kết quả đến chữ số thập phân thứ hai).
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\coordinate(B) at (0,0);
+				\coordinate(H) at (5,0);
+				\coordinate(A) at (5,3);
+				\draw(A)--(B)--(H)--cycle;
+				\draw[red]  pic [draw,angle radius=3mm]{right angle=A--H--B};
+				\foreach \x/\y in {B/left,H/right,A/above}{
+					\node at (\x)[\y]{$\x$};
+					\fill[red] (\x) circle (1.5pt);}
+				\node at (2.5,0)[below]{$5~\mathrm{cm}$};
+				\node at (5,1.5)[right]{$3~\mathrm{cm}$};
+			\end{tikzpicture}
+		\end{center}
+		Góc giữa tia nắng mặt trời $AB$ và mặt đất là góc $\widehat{ABH}$.\\
+		Ta có: $\tan\widehat{ABH}=\dfrac{AH}{BH}=\dfrac{3}{5}$, suy ra $\widehat{ABH} \approx 30,96^{\circ}.$}
+\end{vd}\dongcham{7}
+

@@ -1,0 +1,774 @@
+\section{KHOẢNG BIẾN THIÊN, KHOẢNG TỨ PHÂN VỊ CỦA MẪU SỐ LIỆU GHÉP NHÓM}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Khoảng biến thiên}
+\begin{enumerate}[\iconMT] 
+	\item \indam{Định nghĩa:} Xét mẫu số liệu ghép nhóm được cho ở bảng sau:
+	\begin{center}
+		\begin{tikzpicture}
+			\matrix[matrix of nodes,nodes in empty cells,
+			row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+			nodes={minimum height=8mm,minimum width=20mm,draw=black,anchor=center},
+			column 1/.style={nodes={minimum width=24mm,color=black}},
+			row 1/.style={nodes={fill=cyan!10}},
+			row 2/.style={nodes={minimum height=7mm}},
+			]{
+				Nhóm &$[u_1;u_2)$&$[u_2;u_3)$&\dots&$[u_p;u_{p+1})$&\dots&$[u_k;u_{k+1})$\\ 
+				\node[align=center]{Tần số}; &$n_1$&$n_2$&\dots&$n_p$&\dots&$n_k$\\
+			};
+		\end{tikzpicture}
+	\end{center}
+	Nếu $n_1$ và $n_k$ cùng khác $0$ thì khoảng biến thiên của mẫu số liệu ghép nhóm được tính theo công thức
+		\boxmini{$R=u_{k+1}-u_1$}
+	\item \indam{Ý nghĩa:} Khoảng biến thiên của mẫu số liệu ghép nhóm là giá trị xấp xỉ khoảng biến thiên của mẫu số liệu gốc và có thể dùng để đo mức độ phân tán của mẫu số liệu. Khoảng biến thiên càng lớn thì mẫu số liệu càng phân tán.
+\end{enumerate}
+
+\subsubsection{Khoảng tứ phân vị}
+	\indamm{Nhắc lại công thức tính tứ phân vị thứ $r$:} 
+$$Q_r=u_p+\dfrac{ \dfrac{r\cdot n}{4} -(n_1+n_2+\ldots + n_{p-1})}{n_p}(u_{p+1}-u_p)$$
+	Trong đó $[u_p;u_{p+1})$ là nhóm chứa tứ phân vị thứ $r$, với $r=1, 2, 3$.
+\begin{enumerate}[\iconMT] 
+	\item \indam{Định nghĩa:}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm, kí hiệu $\Delta_Q$, là hiệu giữa tứ phân vị thứ ba $Q_3$ và tứ phân vị thứ nhất $Q_1$ của mẫu số liệu ghép nhóm đó, tức là \boxmini{$\Delta_Q=Q_3-Q_1$}
+	\item \indam{Ý nghĩa:}
+	\begin{listEX}[1]
+		\item [\iconCH] Khoảng tứ phân vị của mẫu số liệu ghép nhóm là giá trị xấp xỉ cho khoảng tứ phân vị của mẫu số liệu gốc và có thể dùng để đo mức độ phân tán của nửa giữa của mẫu số liệu (tập hợp gồm $50 \%$ số liệu nằm chính giữa mẫu số liệu).
+		\item [\iconCH] Khoảng tứ phân vị của mẫu số liệu ghép nhóm càng nhỏ thì dữ liệu càng tập trung xung quanh trung vị.
+		\item [\iconCH] Khoảng tứ phân vị được dùng để xác định giá trị ngoại lệ trong mẫu số liệu. Giá trị $x$ trong mẫu số liệu là giá trị ngoại lệ nếu $x>Q_3+1,5 \Delta_Q$ hoặc $x<Q_1-1,5 \Delta_Q$.
+		\item [\iconCH] Khoảng tứ phân vị của mẫu số liệu ghép nhóm không bị ảnh hưởng nhiều bởi các giá trị ngoại lệ trong mẫu số liệu.
+	\end{listEX}
+\end{enumerate}
+
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Tìm khoảng biến thiên của mẫu số liệu ghép nhóm}
+\begin{listEX}[1]
+	\item [\ding{172}] Xác định $ u_1 $ là giá trị đầu mút trái của nhóm đầu tiên và $ u_{k+1} $ là giá trị đầu mút phải của nhóm cuối cùng có chứa dữ liệu (tần số khác $0$).
+	\item [\ding{173}] Khoảng biến thiên $$R=u_{k+1}-u_1$$
+\end{listEX}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\begin{vd}
+	Bảng sau thống kê thời gian tập thể dục buổi sáng mỗi ngày trong tháng 9/2022 của bác Bình và bác An.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline \begin{tabular}{c} 
+				Thời gian \\
+				(phút)
+			\end{tabular} &{$[15; 20)$} &{$[20; 25)$} &{$[25; 30)$} &{$[30; 35)$} &{$[35; 40)$} \\
+			\hline \begin{tabular}{c} 
+				Số ngày tập
+				của bác Bình
+			\end{tabular} & $ 5 $ & $ 12 $ & $ 8 $ & $ 3 $ & $ 2 $ \\
+			\hline \begin{tabular}{c} 
+				Số ngày tập
+				của bác An
+			\end{tabular} & $ 0 $ & $ 25 $ & $ 5 $ & $ 7 $ & $ 0 $ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{enumEX}{1}
+		\item Hãy tìm khoảng biến thiên của mẫu số liệu ghép nhóm về thời gian tập thể dục buổi sáng mỗi ngày của bác Bình và bác An.
+		\item Sử dụng khoảng biến thiên, hãy cho biết bác nào có thời gian tập phân tán hơn.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Khoảng biến thiên của mẫu số liệu ghép nhóm về thời gian tập thể dục buổi sáng của bác Bình là $40-15=25$ (phút).\\
+			Trong mẫu số liệu ghép nhóm về thời gian tập thể dục buổi sáng của bác An, khoảng đầu tiên chứa dữ liệu là $[20; 25)$ và khoảng cuối cùng chứa dữ liệu là $[25; 30)$.\\
+			Do đó khoảng biến thiên của mẫu số liệu ghép nhóm về thời gian tập thể dục buổi sáng của bác An là $30-20=10$ (phút).
+			\item Nếu căn cứ theo khoảng biến thiên thì bác Bình có thời gian tập phân tán hơn bác An.
+		\end{enumEX}	
+	}
+\end{vd}
+\begin{vd}
+	Thống kê thời gian sử dụng mạng xã hội trong ngày của các bạn Tổ 1, Tổ 2 lớp 12A, được kết quả như bảng sau:
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|}
+			\hline Thời gian sử dụng (phút) &{$[0; 10)$} &{$[10; 30)$} &{$[30; 60)$} &{$[60; 90)$} \\
+			\hline Số học sinh Tổ 1 & $ 2 $ & $ 4 $ & $ 3 $ & $ 1 $ \\
+			\hline Số học sinh Tổ 2 & $ 5 $ & $ 1 $ & $ 3 $ & $ 0 $ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm khoảng biến thiên cho thời gian sử dụng mạng xã hội của học sinh. Căn cứ vào đó, nhận xét thời gian sử dụng mạng xã hội của các bạn Tổ nào phân tán hơn.
+	\loigiai{
+		Gọi $R_1, R_2$ tương ứng là khoảng biến thiên của mẫu số liệu ghép nhóm về thời gian sử dụng mạng xã hội trong ngày của các bạn Tổ 1 và Tổ 2.\\
+		Ta có: $R_1=90-0=90$ và $R_2=60-0=60$.\\
+		Do $R_1>R_2$ nên nếu dựa vào khoảng biến thiên, ta kết luận rằng thời gian sử dụng mạng xã hội trong ngày của các bạn Tổ 1 phân tán hơn thời gian sử dụng mạng xã hội của các bạn Tổ 2.	
+	}
+\end{vd}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\Opensolutionfile{ans}[ans/2D3-B1-d1]
+\begin{ex}
+	Cho mẫu số liệu ghép nhóm sau:
+	\vspace*{-10pt}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian & {$[0 ; 20)$} & {$[20 ; 40)$} & {$[40 ; 60)$} & {$[60 ; 80)$} &  {$[80 ;100)$} \\
+			\hline Số học sinh & $5$ & $9$ & $12$ & $10$ & $6$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm khoảng biến thiên của mẫu số liệu ghép nhóm trên.
+	\choice
+	{$80$}
+	{$60$}
+	{\True $100$}
+	{$12$}
+	\loigiai{
+		Xác định $ u_1=0 $ là giá trị đầu mút trái của nhóm đầu tiên và $ u_{k+1}=100 $ là giá trị đầu mút phải của nhóm cuối cùng có chứa dữ liệu. Suy ra $R=u_{k+1}-u_{1}=100-0=100$.
+}
+\end{ex}
+\begin{ex}
+	Cho mẫu số liệu ghép nhóm sau:
+	\vspace*{-10pt}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Mức thưởng tết & {$[5 ; 10)$} & {$[10 ; 15)$} & {$[15 ; 20)$} & {$[20 ; 25)$} &  {$[25 ;30)$} \\
+			\hline Số nhân viên & $13$ & $35$ & $47$ & $25$ & $10$  \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm khoảng biến thiên của mẫu số liệu ghép nhóm trên.
+	\choice
+	{$20$}
+	{\True $25$}
+	{$47$}
+	{$23$}
+	\loigiai{
+			Xác định $ u_1=5 $ là giá trị đầu mút trái của nhóm đầu tiên và $ u_{k+1}=30 $ là giá trị đầu mút phải của nhóm cuối cùng có chứa dữ liệu. Suy ra $R=u_{k+1}-u_{1}=30-5=25$.
+}
+\end{ex}
+\begin{ex}
+	Thời gian truy cập Internet mỗi tối của một số học sinh được cho trong bảng sau:
+	%	\vspace*{-10pt}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Thời gian (phút) & {$[9{,}5 ; 12{,}5)$} & {$[12{,}5 ; 15{,}5)$} & {$[15{,}5 ; 18{,}5)$} & {$[18{,}5 ; 21{,}5)$} & {$[21{,}5 ; 24{,}5)$} \\
+			\hline Số học sinh & $0$ & $12$ & $15$ & $24$ & $26$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Tìm khoảng biến thiên của mẫu số liệu ghép nhóm trên.
+	\choice
+	{$26$}
+	{$14$}
+	{$15$}
+	{\True $12$}
+	\loigiai{
+		Xác định $ u_1=12,5 $ là giá trị đầu mút trái của nhóm đầu tiên và $ u_{k+1}=24,5 $ là giá trị đầu mút phải của nhóm cuối cùng có chứa dữ liệu. Suy ra $R=u_{k+1}-u_{1}=24,5-12,5=12$.
+	}
+\end{ex}
+\Closesolutionfile{ans}
+\begin{dang}{Tìm khoảng tứ phân vị của mẫu số liệu ghép nhóm}
+	\begin{listEX}[1]
+		\item [\ding{172}] Tìm tứ phân vị $ Q_1$ và $Q_3 $ theo công thức:
+		$$Q_r=u_p+\dfrac{\dfrac{r \cdot n}{4}-\left(n_1+\cdots+n_{p-1}\right)}{n_p} \cdot\left(u_{p+1}-u_p\right), $$
+		trong đó $\left[u_p; u_{p+1}\right)$ là nhóm chứa tứ phân vị thứ $r$ với $r=1$, $3$; \quad $n$ là cỡ mẫu.
+		\item [\ding{173}] Khoảng tứ phân vị của mẫu số liệu ghép nhóm là $\Delta_Q=Q_3-Q_1$.
+	\end{listEX}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+\begin{vd}
+	Cho bảng số liệu ghép nhóm về cân nặng của $ 50 $ quả xoài:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Cân nặng $(\mathrm{g})$ &{$[250; 290)$} &{$[290; 330)$} &{$[330; 370)$} &{$[370; 410)$} &{$[410; 450)$} \\
+			\hline Số quả xoài & $ 3 $ & $ 13 $ & $ 18 $ & $ 11 $ & $ 5 $ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tìm khoảng tứ phân vị của mẫu số liệu ghép nhóm đã cho.
+	\loigiai{
+		Cỡ mẫu $n=50$.\\
+		Gọi $x_1; x_2; \ldots; x_{50}$ là mẫu số liệu gốc gồm cân nặng của $ 50 $ quả xoài được xếp theo thứ tự không giảm.\\
+		Ta có 
+		\begin{listEX}[3]
+			\item [] $x_1, x_2, x_3 \in[250; 290)$
+			\item [] $x_4, \ldots, x_{16} \in[290; 330)$
+			\item [] $x_{17}, \ldots, x_{34} \in[330; 370)$
+			\item [] $x_{35}, \ldots, x_{45} \in[370; 410)$
+			\item [] $x_{46}, \ldots, x_{50} \in[410; 450).$
+		\end{listEX}
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $x_{13} \in[290; 330)$.\\
+		Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+		$$Q_1=290+\dfrac{\dfrac{50}{4}-3}{13} \cdot(330-290)=\dfrac{4150}{13} .$$	
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $x_{38} \in[370; 410)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là 
+		$$Q_3=370+\dfrac{\dfrac{3 \cdot 50}{4}-(3+13+18)}{11} \cdot(410-370)=\dfrac{4210}{11}.$$
+		Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là
+		$$\Delta_Q=\dfrac{4210}{11}-\dfrac{4150}{13}=\dfrac{9080}{143} \approx 63,5.$$
+	}
+\end{vd}
+\dongcham{5}
+\begin{vd}%[2D3H1-4]
+	Bảng sau đây cho biết chiều cao của các học sinh lớp 12A và 12B.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			Chiều cao (cm) & $[145;150 )$ & $[150;155)$ &$[155;160 )$ & $[160;165)$ & $[165;170)$ & $[170;175)$ \\
+			\hline
+			Số học sinh của lớp 12A & $1$ & $0$ & $15$ & $12$ & $10$ & $5$\\
+			\hline
+			Số học sinh của lớp 12B & $0$ & $0$ & $17$ & $10$ & $9$ & $6$\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{enumerate}
+		\item Tính khoảng biến thiên, khoảng tứ phân vị cho các mẫu số liệu ghép nhóm của học sinh lớp 12A, 12B.
+		\item Để so sánh độ phân tán về chiều cao của học sinh hai lớp này ta nên dùng khoảng biến thiên hay khoảng tứ phân vị? Vì sao?	
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có
+			\begin{center}
+				\begin{tabular}{|c|c|c|c|c|c|c|}
+					\hline
+					Chiều cao (cm) & $[145;150 )$ & $[150;155)$ &$[155;160 )$ & $[160;165)$ & $[165;170)$ & $[170;175)$ \\
+					\hline
+					Số học sinh \\
+					của lớp 12A & $1$ & $0$ & $15$ & $12$ & $10$ & $5$\\
+					\hline
+					Số học sinh \\
+					của lớp 12B & $0$ & $0$ & $17$ & $10$ & $9$ & $6$\\
+					\hline
+				\end{tabular}
+			\end{center}
+			Khoảng biến thiên là $175-145 = 30$ (cm).\\
+			Xét lớp 12A,\\
+			\[Q_1 = 155 + \dfrac{\dfrac{43}{4}-1}{15}\cdot 5 = 158{,}25.\]
+			\[Q_3 = 165 + \dfrac{\dfrac{43\cdot 3}{4}-28}{10}\cdot 5 = 167{,}125.\]
+			\[\triangle Q = Q_3 -Q_1 = 8{,}875.\]
+			Xét lớp 12B,\\
+			\[Q_1 = 155 + \dfrac{\dfrac{42}{4}-0}{17}\cdot 5 = 158{,}5\]
+			\[Q_3 = 165 + \dfrac{\dfrac{42\cdot 3}{4}-27}{9}\cdot 5 = 167{,}5\]
+			\[\triangle Q = Q_3 -Q_1 = 9{,}4.\]
+			\item Để so sánh độ phân tán về chiều cao của học sinh hai lớp này ta nên dùng khoảng tứ phân vị, vì khoảng biến thiên của $2$ lớp này là bằng nhau.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{7}
+\begin{vd}
+	Hằng ngày ông Thắng đều đi xe buýt từ nhà đến cơ quan. Dưới đây là bảng thống kê thời gian của $ 100 $ lần ông Thắng đi xe buýt từ nhà đến cơ quan.
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline Thời gian(phút) &{$[15; 18)$} &{$[18; 21)$} &{$[21; 24)$} &{$[24; 27)$} &{$[27; 30)$} &{$[30; 33)$} \\
+			\hline Số lần & $ 22 $ & $ 38 $ & $ 27 $ & $ 8 $ & $ 4 $ & $ 1 $ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{enumEX}{1}
+		\item Hãy tìm khoảng tứ phân vị của mẫu số liệu ghép nhóm trên. (Làm tròn kết quả đến hàng phần trăm.)
+		\item Biết rằng trong $ 100 $ lần đi trên, chỉ có đúng một lần ông Thắng đi hết $ 32 $ phút. Thời gian của lần đi đó có phải là giá trị ngoại lệ không?
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Cỡ mẫu $n=100$.\\
+			Gọi $x_1; x_2; \ldots; x_{100}$ là mẫu số liệu gốc gồm thời gian 100 lần đi xe buýt của ông Thắng.\\
+			Ta có: 
+			\begin{listEX}[3]
+				\item [] $x_1, \ldots, x_{22} \in[15; 18)$
+				\item [] $x_{23}, \ldots, x_{60} \in[18; 21)$
+				\item [] $x_{61}, \ldots, x_{87} \in[21; 24)$
+				\item [] $x_{88}, \ldots, x_{95} \in[24; 27)$
+				\item [] $x_{96}, \ldots, x_{99} \in[27; 30)$
+				\item [] $x_{100} \in[30; 33)$.
+			\end{listEX}
+			Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{1}{2}\left(x_{25}+x_{26}\right) \in[18; 21)$.\\
+			Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+			$$Q_1=18+\dfrac{\dfrac{100}{4}-22}{38} \cdot(21-18)=\dfrac{693}{38}.$$
+			Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{1}{2}\left(x_{75}+x_{76}\right) \in[21; 24)$.\\
+			Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+			$$Q_3=21+\dfrac{\dfrac{3 \cdot 100}{4}-(22+38)}{27} \cdot(24-21)=\dfrac{68}{3}.$$
+			Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là
+			$$\Delta_Q=\dfrac{68}{3}-\dfrac{693}{38}=\dfrac{505}{114} \approx 4,43.$$
+			\item Trong lần duy nhất ông Thắng đi hết $ 32 $ phút, thời gian đi của ông thuộc nhóm $[30; 33)$.\\
+			Vì $Q_3+1,5 \Delta_Q=\dfrac{6683}{228} \approx 29,31<30$ nên thời gian của lần ông Thắng đi hết $ 32 $ phút là giá trị ngoại lệ của mẫu số liệu ghép nhóm.
+		\end{enumEX}	
+	}
+\end{vd}
+\dongcham{8}
+\begin{vd}
+	\immini
+	{
+		Bảng bên biểu diễn mẫu số liệu ghép nhóm về chiều cao của $ 42 $ mẫu cây ở một vườn thực vật (đơn vị: centimét). Tính khoảng tứ phân vị của mẫu số liệu ghép nhóm đó (làm tròn kết quả đến hàng phần mười nếu cần).
+		\begin{luuy}
+			Tần số tích lũy của nhóm thứ $m$ chính bằng $n_1+n_2+\cdots+n_m$. Trong đó, $n_1$, $n_2$,..., $n_m$ lần lượt là tần số của nhóm thứ $1$, thứ $2$,..., thứ $m$.
+		\end{luuy}
+	}
+	{
+		\begin{tabular}{|c|c|c|}
+			\hline Nhóm & Tần số & Tần số tích luỹ\\
+			\hline$[40; 45)$ & $ 5 $ & $ 5 $ \\
+			{$[45; 50)$} & $ 10 $ & $ 15 $ \\
+			{$[50; 55)$} & $ 7 $ & $ 22 $ \\
+			{$[55; 60)$} & $ 9 $ & $ 31 $ \\
+			{$[60; 65)$} & $ 7 $ & $ 38 $ \\
+			{$[65; 70)$} & $ 4 $ & $ 42 $ \\
+			\hline & $n=42$ & \\
+			\hline
+		\end{tabular}
+	}
+	\loigiai{
+		Cỡ mẫu là $n=42$.
+		\begin{itemize}
+			\item Ta có: $\dfrac{n}{4}=\dfrac{42}{4}=10,5$ mà $5<10,5<15$.\\
+			Suy ra nhóm $ 2 $ là nhóm đầu tiên có tần số tích luỹ lớn hơn hoặc bằng $ 10,5 $ nên nhóm $ 2 $ ( nhóm $[45; 50$) ) là chứa tứ phân vị thứ nhất. Áp dụng công thức, ta có tứ phân vị thứ nhất là
+			$$Q_1=45+\left(\dfrac{10,5-5}{10}\right) \cdot 5=47,75.$$	
+			\item Ta có: $\dfrac{3 n}{4}=\dfrac{3 \cdot 42}{4}=31,5$ mà $31<31,5<38$.\\
+			Suy ra nhóm $ 5 $ là nhóm đầu tiên có tần số tích luỹ lớn hơn hoặc bằng $ 31,5 $ nên nhóm $ 5 $ ( nhóm $[60; 65)$)  là nhóm chứa tứ phân vị thứ ba. Áp dụng công thức, ta có tứ phân vị thứ ba là
+			$$Q_3=60+\left(\dfrac{31,5-31}{7}\right) \cdot 5 \approx 60,4.$$
+		\end{itemize}
+		Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm đã cho là
+		$$\Delta_Q=Q_3-Q_1 \approx 60,4-47,75=12,65.$$
+	}
+\end{vd}
+\dongcham{5}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D3-B1-d2-1]
+
+\begin{ex}%[1D1B2-2]
+	Cho bảng số liệu ghép nhóm về cân nặng của các học sinh:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline Cân nặng & {$[30 ; 40)$} & {$[40 ; 50)$} & {$[50 ; 60)$} & {$[60 ; 70)$} & {$[70 ; 80)$} & {$[80 ; 90)$} \\
+			\hline Số học sinh & $2$ & $10$ & $16$ & $8$ & $2$ & $2$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của bảng số liệu ghép nhóm trên là
+	\choice
+	{$17$}
+	{\True $14.5$}
+	{$14$}
+	{$17.5$}
+	\loigiai{
+		Ta có $n=40\Rightarrow\dfrac{n}{4}=10$. \\
+		Gọi $x_1, \ldots, x_{40}$ là mẫu số liệu gốc về cân nặng của 40 học sinh lớp 11D3 và giả sử rằng dãy số liệu gốc này đã được sắp xếp theo thứ tự tăng dần.\\
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{1}{2}\left( x_{10}+x_{11}\right) $ nên nhóm chứa tứ phân vị thứ nhất là nhóm $\left[40\,;\,50\right)$. Do đó tứ phân vị thứ nhất của mẫu số liệu trên là
+		$$Q_1=40+\dfrac{10-2}{10}\cdot10=48.$$
+		Ta có $\dfrac{3 n}{4}=30$.\\
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{1}{2}\left( x_{30}+x_{31}\right) $ nên nhóm chứa tứ phân vị thứ ba là nhóm $[60 ; 70)$. Do đó tứ phân vị thứ ba của mẫu số liệu trên là
+		$$Q_3=60+\dfrac{30-28}{8} \cdot 10=62{,}5.$$
+		Khoảng tứ phân vị $\Delta _Q=Q_3-Q_1=62{,}5-48=14,5$.
+	}
+\end{ex}
+\cham{4}
+\begin{ex}%[1D1B2-2]
+	Doanh thu bán hàng trong $20$ ngày được lựa chọn ngẫu nhiên của một của hàng được ghi lại ở bảng sau (đơn vị: triệu đồng)
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline Doanh thu & {$[5 ; 7)$} & {$[7 ; 9)$} & {$[9 ; 11)$} & {$[11 ; 13)$} & {$[13 ; 15)$} \\
+			\hline Số ngày & $2$ & $7$ & $7$ & $3$ & $1$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm này là
+	\choice
+	{$\dfrac{25}{7}$}
+	{$\dfrac{13}{7}$}
+	{ \True $\dfrac{20}{7}$}
+	{$\dfrac{55}{7}$}
+	\loigiai{
+		Ta có $n=20$. Gọi $x_1$, $x_2$, $\ldots$, $x_{20}$ là doanh thu bán hàng trong 20 ngày xếp theo thứ tự không giảm.\\
+		Khi đó 
+		\begin{listEX}[3]
+			\item [] $x_1$, $x_2 \in[5 ; 7)$
+			\item [] $x_3, \ldots, x_9 \in[7 ; 9)$
+			\item [] $x_9$, $\ldots$, $x_{16} \in[9 ; 11)$
+			\item [] $x_{17}$, $\ldots$, $x_{19} \in[11 ; 13)$
+			\item [] $x_{20} \in[13 ; 15)$.
+		\end{listEX}
+		Tứ phân vị thứ nhất của mẫu số liệu gốc là $\dfrac{1}{2}\left( x_{5}+x_{6}\right)$ nên tứ phân vị thứ nhất của mẫu số liệu thuộc nhóm $[7 ; 9)$.\\
+		Tứ phân vị thứ nhất của mẫu số liệu là
+				$$Q_1=7+\dfrac{\dfrac{1.20}{4}-2}{7}(9-7) =\dfrac{55}{7}.$$
+		Tứ phân vị thứ ba của mẫu số liệu gốc là $\dfrac{1}{2}\left( x_{15}+x_{16}\right)$ nên tứ phân vị thứ ba của mẫu số liệu thuộc nhóm $[9 ; 11)$.\\
+		Tứ phân vị thứ ba của mẫu số liệu là
+		$$
+		Q_3=9+\dfrac{\dfrac{3\cdot20}{4}-9}{7}(11-9) =\dfrac{75}{7}.
+		$$
+		Khoảng tứ phân vị $\Delta _Q=Q_3-Q_1=\dfrac{20}{7}$.
+	}
+\end{ex}
+\cham{3}
+\begin{ex}%[1D1B2-2]
+	Trung tâm ngoại ngữ thống kê bảng điểm môn Tiếng Anh của một khóa học trong bảng bên dưới
+	\begin{center}
+		\begin{tabular}{|l|c|c|c|c|c|}
+			\hline
+			Điểm     & [0;2) & [2;4) & [4;6) & [6;8) & [8;10) \\ \hline
+			Học viên & 10   & 30   & 55   & 42   & 9     \\ \hline
+		\end{tabular}
+	\end{center}
+	Khoảng tứ phân vị của mẫu số liệu ghép nhóm này là (làm tròn đến hàng phần trăm)
+	\choice
+	{\True $2{,}92$}
+	{$2{,}93$}
+	{$3{,}93$}
+	{$3,92$}
+	\loigiai{
+		Ta có $n=146$. Gọi $x_{1}, x_{2}, ..., x_{146}$ là số liệu được sắp xếp theo thứ tự không giảm. \\
+		Tứ phân vị thứ nhất của của dãy số liệu gốc là $x_{37}\in [2;4)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm trên là 
+		$$Q_{1}=2+\dfrac{\dfrac{1.146}{4}-10}{30}.(4-2)=\dfrac{113}{30}.$$
+		Tứ phân vị thứ ba của của dãy số liệu gốc là $x_{110}\in [6;8)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm trên là \\
+		$$Q_{3}=6+\dfrac{\dfrac{3.146}{4}-(10+30+55)}{42}.(8-6)=\dfrac{281}{42}$$
+		Khoảng tứ phân vị $Q_3-Q_1=\dfrac{307}{105}\approx 2{,}92$.
+	}
+\end{ex}
+\cham{5}
+\begin{ex}%[1T5K2-2]
+	Thời gian luyện tập trong một ngày (tính theo giờ) của một số vận động viên được ghi lại ở bảng sau:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline 
+			Thời gian luyện tập (giờ)	& $ \left[ 0 ; 2\right) $ & $ \left[ 2 ; 4\right) $ & $ \left[ 4 ; 6\right) $ & $ \left[ 6 ; 8\right) $ & $ \left[8 ; 10 \right) $ \\ 
+			\hline 
+			Số vận động viên	& $ 3 $ & $ 8 $ & $ 12 $ & $ 12 $ & $ 4 $ \\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+	Hãy xác định khoảng tứ phân vị của mẫu số liệu đã cho (làm tròn đến hàng phần trăm).
+	\choice
+	{$4{,}52$}
+	{\True $3{,}35$}
+	{$2{,}85$}
+	{$3{,}36$}
+	\loigiai{
+	Số vận động viên được khảo sát là $ n=3+8+12+12+4=39$.\\
+	Gọi $ x_1 $; $ x_2 $; \ldots ;$ x_{39} $ là thời gian luyện tập của $ 39 $ vận động viên được xếp theo thứ tự không giảm.	Ta có 
+	\begin{enumEX}[]{3}
+		\item $ x_1, x_2, x_3 \in \left[ 0 ; 2\right) $;
+		\item $ x_4, \ldots, x_{11}\in \left[2 ; 4 \right) $;
+		\item $ x_{12}, \ldots, x_{23}\in \left[ 4 ; 6\right) $;
+		\item $ x_{24}, \ldots, x_{35}\in \left[6;8\right) $;
+		\item $ x_{36},\ldots , x_{39}\in \left[ 8 ; 10\right) $.
+	\end{enumEX}
+	\begin{itemize}
+		\item Tứ phân vị thứ nhất là $ x_{10} $ thuộc nhóm $\left[ 2 ; 4\right)$;
+		\item Tứ phân vị thứ ba là $ x_{30} $ thuộc nhóm $ \left[ 6 ; 8\right) $.
+	\end{itemize}
+	Tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là $$Q_1=2+\dfrac{\dfrac{1\cdot 39}{4}-3}{8}\cdot(4-2)=\dfrac{59}{16}.$$\\
+	Tứ phân vị thứ ba của mẫu số liệu ghép nhóm là $$Q_3=6+\dfrac{\dfrac{3\cdot 39}{4}-(3+8+12)}{12}\cdot(8-6)=\dfrac{169}{24}.$$ 
+	Khoảng tứ phân vị $Q_3-Q_1=\dfrac{161}{48}\approx 3{,}35$.
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	Ở một phòng điều trị nội trú của bệnh viện, dữ liệu thống kê thời gian ngủ hằng đêm của một bệnh nhân trong suốt một tháng được tổng hợp bởi bảng dưới đây
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline Thời gian (phút) & Tần số & \begin{tabular}{c} 
+				Tần số \\
+				tích luỹ
+			\end{tabular} \\
+			\hline$[180 ; 240)$ & $2$ & $2$ \\
+			\hline$[240 ; 300)$ & $9$ & $11$ \\
+			\hline$[300 ; 360)$ & $12$ & $23$\\
+			\hline$[360 ; 420)$ & $5$ & $28$ \\
+			\hline$[420 ; 480)$ & $2$ & $30$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+\choice
+{$75{,}53$}
+{$84{,}83$}
+{\True $80{,}83$}
+{$72{,}53$}
+\loigiai{
+	Kích thước mẫu $n=30$. Ta có $\dfrac{n}{4}=\dfrac{15}{2}=7{,}5 ;\, \dfrac{3 n}{4}=\dfrac{45}{2}=22{,}5$.	\\
+\begin{itemize}
+	\item [$\bullet$] Nhóm chứa $Q_1$ là $[240 ; 300)$. Suy ra
+	$$Q_1=240+\dfrac{7{,}5 -2}{9} \cdot 60 =\dfrac{830}{3}.$$
+	\item [$\bullet$] Nhóm chứa $Q_3$ là $[300 ; 360)$.Suy ra
+	$$Q_3=300+\dfrac{22{,}5 -11}{12} \cdot 60=357{,}5$$
+\end{itemize}
+	Vậy $\Delta_Q=357{,}5-\dfrac{830}{3}\approx 80{,}83$.
+	}
+\end{ex}
+\cham{5}
+\begin{ex}%[2D3H1-3]
+	Biểu đồ dưới đây biểu diễn số lượt khách hàng đặt bàn qua hình thức trực tuyến mỗi ngày trong quý III năm 2022 của một nhà hàng. Cột thứ nhất biểu diễn số ngày có từ $1$ đến dưới $6$ lượt đặt bàn; cột thứ hai biểu diễn số ngày có từ $6$ đến dưới $11$ lượt đặt bàn;\ldots.
+	\begin{center}
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth,x=0.25cm,y=0.6cm]
+			\draw[->](0,0)--(0,8)node[left]{\textbf{Số ngày}};
+			\draw[->](0,0)--(35,0)node[below]{\textbf{Số lượt đặt bàn}};
+			\foreach \i in{1,...,7} \pgfmathsetmacro{\gti}{int(5*(\i))}
+			\draw [dotted](0,\i) circle(1pt)node[left]{$\gti$} -- (30,\i);
+			\foreach \i/\a/\b in {1/15/20,2/20/25,3/25/30,4/30/35,5/35/40}
+			\foreach \i/\j in {1/14,6/30,11/25,16/18,21/5}
+			{
+				\draw[fill=cyan!50](\i,0)rectangle(\i+5,\j/5);
+				\draw (\i,0) node [below] {$\i$};
+				\draw (\i+2.5,\j/5) node [above] {$\j$};
+			}
+			\draw (26,0) node [below] {$26$};
+		\end{tikzpicture}
+	\end{center}
+	Hãy tìm khoảng tứ phân vị của mẫu số liệu ghép nhóm cho bởi biểu đồ trên.
+	\choice
+	{$9{,}5$}
+	{\True $8{,}5$}
+	{$10{,}5$}
+	{$7{,}5$}
+	\loigiai{Dựa vào biểu đồ, ta lập được bảng ghép nhóm như bên dưới.
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				Lượt đặt bàn & $[1;6)$ & $[6;11)$ & $[11;16)$ & $[16;21)$ & $[21;26)$ \\
+				\hline
+				Số ngày & $14$ & $30$ & $25$ & $18$ & $5$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Ta có cỡ mẫu $n=92$.\\
+		Gọi $x_1$; $x_2$; \ldots; $x_{92}$ là mẫu số liệu đã cho.\\
+		Ta có: 
+		\begin{enumEX}[]{3}
+			\item $x_1$, \ldots, $x_{14}\in[1;6)$; 
+			\item $x_{15}$, \ldots, $x_{44}\in[6;11)$; 
+			\item $x_{45}$, \ldots, $x_{69}\in[11;16)$;
+			\item $x_{70}$, \ldots, $x_{87}\in[16;21)$;
+			\item $x_{88}$, \ldots, $x_{92}\in[21;26)$.
+		\end{enumEX} 
+		Tứ phân vị thứ nhất của mẫu số liệu là $\dfrac{x_{23}+x_{24}}{2}\in[6;11)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu là
+		$$Q_1=6+\dfrac{\dfrac{92}{4}-14}{30}\cdot(11-6)=7{,}5.$$
+		Tứ phân vị thứ ba của mẫu số liệu là $\dfrac{x_{69}+x_{70}}{2}$ với $x_{69}\in[11;16)$ và $x_{70}\in[16;21)$. Do đó, tứ phân vị thứ ba của mẫu số liệu là $Q_3=16$.\\
+		%Đoạn này sách giáo khoa 12 không đề cập, tôi lấy từ kiến thức của sách CTST lớp 11.
+		Vậy khoảng tứ phân vị của mẫu số liệu là $\Delta_Q=Q_3-Q_1=8{,}5$.}
+\end{ex}
+\cham{3}
+\Closesolutionfile{ans}
+
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2D3-B1-d2-2]
+
+\begin{ex}%[2D3H1-3]
+	Kết quả đo chiều cao của $100$ cây keo 3 năm tuổi tại một nông trường được cho ở bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Chiều cao (m) & $[8{,}4;8{,}6)$ & $[8{,}6;8{,}8)$ & $[8{,}8;9{,}0)$ & $[9{,}0;9{,}2)$ & $[9{,}2;9{,}4)$ \\
+			\hline
+			Số cây & $5$ & $12$ & $25$ & $44$ & $14$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{\True Khoảng biến thiên của mẫu số liệu này là $R=1$}
+	{Tứ phân vị thứ nhất của mẫu số liệu là $Q_1=8$}
+	{\True Khoảng tứ phân vị của mẫu số liệu là $\Delta Q=0{,}286$}
+	{\True Biết rằng trong $100$ cây keo trên có $1$ cây cao $8{,}4$ m. Chiều cao của cây keo này là giá trị ngoại lệ}
+	\loigiai{\begin{enumerate}
+			\item Khoảng biến thiên của mẫu số liệu là $R=9{,}4-8{,}4=1$.
+			\item
+			Ta có cỡ mẫu $n=100$.\\
+			Gọi $x_1$; $x_2$; \ldots; $x_{100}$ là mẫu số liệu gồm chiều cao của $100$ cây keo.\\
+			Ta có: 
+			\begin{enumEX}[]{3}
+				\item $x_1$, \ldots, $x_5\in[8{,}4;8{,}6)$; 
+				\item $x_6$, \ldots, $x_{17}\in[8{,}6;8{,}8)$;
+				\item $x_{18}$, \ldots, $x_{42}\in[8{,}8;9{,}0)$; 
+				\item $x_{43}$, \ldots, $x_{86}\in[9{,}0;9{,}2)$; 
+				\item $x_{87}$, \ldots, $x_{100}\in[9{,}2;9{,}4)$.
+			\end{enumEX}
+			Tứ phân vị thứ nhất của mẫu số liệu là $\dfrac{x_{25}+x_{26}}{2}\in[8{,}8;9{,}0)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu ghép nhóm là
+			$$Q_1=8{,}8+\dfrac{\dfrac{100}{4}-(5+12)}{25}\cdot(9{,}0-8{,}8)=8{,}864.$$
+			\item	Tứ phân vị thứ ba của mẫu số liệu là $\dfrac{x_{75}+x_{76}}{2}\in[9{,}0;9{,}2)$. Do đó, tứ phân vị thứ ba của mẫu số liệu ghép nhóm là
+			$$Q_3=9{,}0+\dfrac{\dfrac{3\cdot100}{4}-(5+12+25)}{44}\cdot(9{,}2-9{,}0)=9{,}15.$$
+			Vậy khoảng tứ phân vị của mẫu số liệu ghép nhóm là $\Delta_Q=Q_3-Q_1=0{,}286$.
+			\item Vì $Q_1-1{,}5\Delta_Q=8{,}435$ và $Q_3+1{,}5\Delta_Q=9{,}579$ nên cây keo có chiều cao $8{,}4$ m là giá trị ngoại lệ của mẫu số liệu ghép nhóm.
+	\end{enumerate}}
+\end{ex}
+\cham{10}
+\begin{ex}
+	\immini{Bảng bên biểu diễn mẫu số liệu ghép nhóm thống kê mức lương của một công ty (đơn vị: triệu đồng).
+		\choiceTF
+		{Khoảng biến thiên của mẫu số liệu này là $R=25$}
+		{\True Tứ phân vị thứ nhất của mẫu số liệu là $Q_1=15$}
+		{Tứ phân vị thứ ba của mẫu số liệu là $Q_3=27$}
+		{Khoảng tứ phân vị của mẫu số liệu là $\Delta Q=12$}
+	}{\begin{tabular}{|c|c|}
+			\hline Nhóm & Tần số \\
+			\hline$[10 ; 15)$ & $15$ \\
+			{$[15 ; 20)$} & $18$ \\
+			{$[20 ; 25)$} & $10$ \\
+			{$[25 ; 30)$} & $10$ \\
+			{$[30 ; 35)$} & $5$ \\
+			{$[35 ; 40)$} & $2$ \\
+			\hline & $n=60$ \\
+			\hline
+	\end{tabular}}
+	\loigiai{
+		\begin{enumerate}
+			\item Trong mẫu số liệu ghép nhóm ở bảng, ta có đầu mút trái của nhóm $1$ là $a_1=10$, đầu mút phải của nhóm $6$ là $a_7=40$.\\Vậy khoảng biến thiên của mẫu số liệu ghép nhóm đó là $R=a_7-a_1=40-10=30.$
+			\item Ta có bảng sau
+			\begin{center}
+				\begin{tabular}{|c|c|c|}
+					\hline Nhóm & Tần số & Tần số tích luỹ\\
+					\hline$[10 ; 15)$ & $15$ & $15$\\
+					{$[15 ; 20)$} & $18$ & $33$\\
+					{$[20 ; 25)$} & $10$ & $43$\\
+					{$[25 ; 30)$} & $10$ & $53$\\
+					{$[30 ; 35)$} & $5$ & $58$\\
+					{$[35 ; 40)$} & $2$ & $60$\\
+					\hline & $n=60$ & \\
+					\hline
+				\end{tabular}
+			\end{center}
+			Số phần tử của mẫu là $n=60$. \\
+			Nhóm $[15;20)$ là nhóm chứa tứ phân vị thứ nhất. 
+			Áp dụng công thức, ta có tứ phân vị thứ nhất là $$Q_1=15+\left(\dfrac{15-15}{18}\right)\cdot 5=15 ~\text{(triệu đồng)}.$$
+			\item Nhóm $[25;30)$ là nhóm chứa tứ phân vị thứ 3. Áp dụng công thức, ta có tứ phân vị thứ ba là
+			$$Q_3=25+\left(\dfrac{45-43}{10}\right)\cdot5=26 ~\text{(triệu đồng)}.$$
+			\item  Khoảng tứ phân vị của mẫu số liệu ghép nhóm đã cho là 
+			$$\Delta _Q=Q_3-Q_1=26-15=11 ~\text{(triệu đồng)}.$$
+		\end{enumerate}
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	Điều tra một số hộ gia đình thu nhập ở mức trung bình sinh sống trên hai địa bàn $A$, $B$, người ta thấy diện tích nhà ở của họ đều nhỏ hơn $100$ m$^2$. Hai biểu đồ dưới biểu diễn kết quả thống kê. 
+	\begin{center}
+		\begin{tikzpicture}[>=stealth,scale=1.5]
+			%========================
+			\draw[opacity=.25,thin,step=.2,cyan](0,0) grid(7,3);
+			\draw[opacity=.5,cyan](0,0) grid (7,3);
+			\draw[stealth-stealth](0,3) node[left]{Tần số}|-(7,0)node[below]{m$^2$};
+			\foreach\x/\dientich[count=\i from 1] in {0/50,.4/60,1/70,2.5/80,.9/90,.2/100}{
+				\draw[fill=gray](\i-1,0) rectangle +(1,\x);
+				\draw (\i,0) node[below]{\dientich};
+			}
+			\foreach \y [count=\i from 1] in {10,20,30,40,50}{
+				\draw (-.1,\i/2)--(.1,\i/2)(0,\i/2) node[left]{$\y$};}
+			\foreach \z [count=\i from 1] in {8,20,50,18,4}{
+				\draw (\i+0.5,\z/20) node[above] {$\z$};}
+		\end{tikzpicture}\\	
+		\textit{Hình 3.3a. Diện tích nhà ở của cư dân địa bàn $A$}
+		%========================
+	\end{center}
+	\begin{center}
+		\begin{tikzpicture}[>=stealth,scale=1.5]
+			%========================
+			\draw[opacity=.25,thin,step=.2,cyan](0,0) grid(7,3);
+			\draw[opacity=.5,cyan](0,0) grid (7,3);
+			\draw[stealth-stealth](0,3) node[left]{Tần số}|-(7,0)node[below]{m$^2$};
+			\foreach\x/\dientich[count=\i from 1] in {0/50,.75/60,1/70,1.5/80,1/90,.75/100}{
+				\draw[fill=gray](\i-1,0) rectangle +(1,\x);
+				\draw (\i,0) node[below]{\dientich};
+			}
+			\foreach \y [count=\i from 1] in {10,20,30,40,50}{
+				\draw (-.1,\i/2)--(.1,\i/2)(0,\i/2) node[left]{$\y$};}
+			\foreach \z [count=\i from 1] in {15,20,30,20,15}{
+				\draw (\i+0.5,\z/20-0.05) node[above] {$\z$};}
+			%========================
+		\end{tikzpicture}\\
+		\textit{Hình 3.3b. Diện tích nhà ở của cư dân địa bàn $B$}
+	\end{center}
+	\choiceTF
+	{\True Khoảng biến thiên của hai mẫu số liệu này bằng nhau}
+	{\True Khoảng tứ phân vị ghép nhóm diện tích căn hộ của địa phương A là $10{,}9$}
+	{Khoảng tứ phân vị ghép nhóm diện tích căn hộ của địa phương B là $8{,}5$.}
+	{Số liệu về diện tích nhà ở của cư dân thuộc địa bàn A phân tán hơn địa bàn B}
+	\loigiai{
+		Ta có bảng tần số tích luỹ như sau:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline \begin{tabular}{c}
+					Diện tích nhà ở \\
+					Địa bàn $A$ (m$^2$) 
+				\end{tabular} & Tần số  & \begin{tabular}{c}
+					Tần số \\
+					tích luỹ 
+				\end{tabular}  & \begin{tabular}{c}
+					Diện tích nhà ở \\
+					Địa bàn $B$ (m$^2$) 
+				\end{tabular} & Tần số & \begin{tabular}{c}
+					Tần số  \\
+					tích luỹ 
+				\end{tabular}   \\
+				\hline$[50 ; 60)$ & $8$ & $8$& $[50 ; 60)$ & $15$& $15$ \\
+				\hline$[60 ; 70)$ & $20$ &$28$&  $[60 ; 70)$ & $20$& $35$ \\
+				\hline$[70 ; 80)$ & $50$ &$78$&  $[70 ; 80)$ & $30$& $65$ \\
+				\hline$[80 ; 90)$ & $18$ &$96$&  $[80 ; 90)$ & $20$& $85$ \\
+				\hline$[90 ; 100)$ & $4$ &$100$&  $[90 ; 100)$ & $15$& $100$ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{enumerate}[a)]
+			\item Khoảng biến thiên của hai mẫu số liệu này bằng nhau và bằng $100=50=50$.
+			\item Xét bảng số liệu $A$, ta có $N=100; \dfrac{N}{4}=25; \dfrac{N}{2}=50; \dfrac{3N}{4}=75$.
+			\begin{itemize}
+				\item [$\bullet$] Nhóm chứa $Q_1^A$ là $[60 ; 70)$. Suy ra
+						$$Q_1^A=60+\dfrac{25-8}{20} \cdot 10 = 68,5 $$
+				\item [$\bullet$] Nhóm chứa $Q_3^A$ là $[70;80)$. Suy ra
+						$$Q_3^A=70+\dfrac{75 -28}{50} \cdot 10=79{,}4$$
+			\end{itemize}
+		Vậy khoảng tứ phân vị ghép nhóm diện tích căn hộ của địa phương A là\\ $\Delta_{Q_A} =79{,}4-68{,}5=10{,}9$. 
+			\item  Xét bảng số liệu $B$, ta có $N=100; \dfrac{N}{4}=25; \dfrac{N}{2}=50; \dfrac{3N}{4}=75$.
+			\begin{itemize}
+				\item [$\bullet$] Nhóm chứa $Q_1^B$ là $[60 ; 70)$. Suy ra
+						$$Q_1^B=60+\dfrac{25 -15}{20} \cdot 10=65.$$
+				\item [$\bullet$] Nhóm chứa $Q_3^B$ là $[80;90)$.Suy ra
+					$$Q_3^B=80+\dfrac{75 -65}{20} \cdot 10= 85.$$
+			\end{itemize}
+			Vậy khoảng tứ phân vị  ghép nhóm diện tích căn hộ của địa phương B là là $\Delta_{Q_B} =85-65=20$. 
+			\item $\Delta_{Q_B}>\Delta_{Q_A}$ nên dựa vào khoảng tứ phân vị về diện tích căn hộ người dân hai địa phương, ta thấy địa phương B phân tán hơn.
+		\end{enumerate}
+	}
+\end{ex}
+
+\begin{ex}%[2D3H1-3]
+	Bảng tần số ghép nhóm dưới đây thể hiện kết quả điều tra về tuổi thọ trung bình của nam giới và nữ giới ở $50$ quốc gia.
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\diagbox{Nhóm (Tuổi thọ)}{Giới tính} & Nam & Nữ \\
+			\hline
+			$[50;55)$ & $4$ & $3$ \\
+			\hline
+			$[55;60)$ & $7$ & $4$ \\
+			\hline
+			$[60;65)$ & $4$ & $5$ \\
+			\hline
+			$[65;70)$ & $6$ & $3$ \\
+			\hline
+			$[70;75)$ & $15$ & $7$ \\
+			\hline
+			$[75;80)$ & $12$ & $14$ \\
+			\hline
+			$[80;85)$ & $2$ & $13$ \\
+			\hline
+			$[85;90)$ & $0$ & $1$ \\
+			\hline	
+		\end{tabular}
+	\end{center}
+	\choiceTF
+	{Khoảng biến thiên của mẫu số liệu về độ tuổi trung bình của nam giới là $50$}
+	{Khoảng tứ phân vị của mẫu số liệu về độ tuổi trung bình của nam giới là $14{,}75$}
+	{Khoảng tứ phân vị của mẫu số liệu về độ tuổi trung bình của nữ giới là $15$}
+	{\True Dựa vào khoảng tứ phân vị thì tuổi thọ trung bình của nam giới đều hơn tuổi thọ trung bình của nữ giới}
+	\loigiai{
+		\begin{enumerate}
+			\item Khoảng biến thiên của mẫu số liệu về độ tuổi trung bình của nam giới là $90-50=40$.
+			\item Xét ở nam giới, ta có cỡ mẫu $n=50$.\\
+			Gọi $x_1$; $x_2$; \ldots; $x_{50}$ là mẫu số liệu gồm tuổi thọ của $50$ nam giới.\\
+			Ta có: $x_1$, \ldots, $x_4\in[50;55)$; $x_5$, \ldots, $x_{11}\in[55;60)$; $x_{12}$, \ldots, $x_{15}\in[60;65)$; $x_{16}$, \ldots, $x_{21}\in[65;70)$; $x_{22}$, \ldots, $x_{36}\in[70;75)$; $x_{37}$, \ldots, $x_{48}\in[75;80)$; $x_{49}$, $x_{50}\in[80;85)$.\\
+			Tứ phân vị thứ nhất của mẫu số liệu là $x_{13}\in[60;65)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu nam giới là
+			$$Q_1=60+\dfrac{\dfrac{50}{4}-(4+7)}{4}\cdot(65-60)=\dfrac{495}{8}.$$
+			Tứ phân vị thứ ba của mẫu số liệu là $x_{38}\in[75;80)$. Do đó, tứ phân vị thứ ba của mẫu số liệu nam giới là
+			$$Q_3=75+\dfrac{\dfrac{3\cdot50}{4}-(4+7+4+6+15)}{12}\cdot(80-75)=\dfrac{605}{8}.$$
+			Vậy khoảng tứ phân vị của mẫu số liệu nam giới là $\Delta_Q=Q_3-Q_1=\dfrac{55}{4}=13{,}75$.
+			\item Xét ở nữ giới, ta có cỡ mẫu $n=50$.\\
+			Gọi $x_1$; $x_2$; \ldots; $x_{50}$ là mẫu số liệu gồm tuổi thọ của $50$ nữ giới.\\
+			Ta có: $x_1$, $x_2$, $x_3\in[50;55)$; $x_4$, \ldots, $x_7\in[55;60)$; $x_8$, \ldots, $x_{12}\in[60;65)$; $x_{13}$, $x_{14}$, $x_{15}\in[65;70)$; $x_{16}$, \ldots, $x_{22}\in[70;75)$; $x_{23}$, \ldots, $x_{36}\in[75;80)$; $x_{37}$, \ldots, $x_{49}\in[80;85)$; $x_{50}\in[85;90)$.\\
+			Tứ phân vị thứ nhất của mẫu số liệu là $x_{13}\in[65;70)$. Do đó, tứ phân vị thứ nhất của mẫu số liệu nữ giới là
+			$$Q_1=65+\dfrac{\dfrac{50}{4}-(3+4+5)}{3}\cdot(70-65)=\dfrac{395}{6}.$$
+			Tứ phân vị thứ ba của mẫu số liệu là $x_{38}\in[80;85)$. Do đó, tứ phân vị thứ ba của mẫu số liệu nữ giới là
+			$$Q_3=80+\dfrac{\dfrac{3\cdot50}{4}-(3+4+5+3+7+14)}{13}\cdot(85-80)=\dfrac{2095}{26}.$$
+			Vậy khoảng tứ phân vị của mẫu số liệu nữ giới là $\Delta_Q=Q_3-Q_1=\dfrac{575}{39}\approx14{,}74$.
+			\item Do khoảng tứ phân vị của mẫu số liệu của nam giới nhỏ hơn mẫu số liệu của nữ giới nên tuổi thọ của nam giới đều hơn tuổi thọ của nữ giới.
+	\end{enumerate}}
+\end{ex}
+\cham{22}
+
+\Closesolutionfile{ans}

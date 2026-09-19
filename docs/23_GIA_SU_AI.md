@@ -275,7 +275,63 @@ của `CHV_Fun`, không được cướp. Và nếu hội thoại chưa có đ�
 
 ---
 
-## 8. Mức B — chưa làm
+## 8. Mức B — tài liệu lí thuyết đã có, bảng ánh xạ đã xong (19/09/2026)
+
+Cô Lan đã đưa **87 tệp `.tex` lí thuyết** vào `data/ly_thuyet/` (3,1 MB).
+
+### Vì sao phải có bảng ánh xạ viết tay
+
+Khớp tự động theo tên bài chỉ được **11/28** tệp lớp 10. Không phải tệp đặt
+sai — mà **cách chia bài của tài liệu khác cách chia của chương trình**, và
+quan hệ là **nhiều–nhiều**:
+
+| Bài trong chương trình | Tệp lí thuyết |
+|---|---|
+| `L10_C1_B2` Tập hợp và các phép toán trên tập hợp | `0D1-CD2.tex` + `0D1-CD3.tex` |
+| `L10_C4_B8` Các phép toán trên vectơ | `0H4-B2.tex` + `0H4-B3.tex` + `0H4-B5.tex` |
+| `L10_C7_B18` Đường thẳng trong mặt phẳng toạ độ | `0H7-B1.tex` + `0H7-B2.tex` |
+
+Và vài chỗ chỉ khác chữ: *NHỊ THỨC NIU-TƠN* ↔ *Nhị thức Newton*;
+*DẤU TAM THỨC BẬC HAI* ↔ *Dấu **của** tam thức bậc hai*.
+
+Không có cách nào tự động hoá việc này cho đúng. Nên: **`data/ly_thuyet/anh_xa.json`**
+— viết một lần, canh bằng `tests/test_anh_xa_ly_thuyet.py` (7 bài).
+
+### Phủ sóng
+
+| Khối | Tệp lí thuyết | Curriculum | Ánh xạ |
+|---|---|---|---|
+| 10 | 28 | 23 bài | **đủ cả 23 bài** |
+| 11 | 33 | **rỗng** | chưa làm được |
+| 12 | 26 | **rỗng** | chưa làm được |
+
+`data/curriculum/toan11/` và `toan12/` chưa có tệp nào, nên 59 tệp lí thuyết
+lớp 11–12 **chưa gắn vào đâu được** — không phải tệp sai, mà chưa có câu hỏi
+nào để gắn. Làm ngân hàng 11/12 xong thì bổ sung vào `anh_xa.json` là dùng ngay.
+
+### Cắt phần nào của tệp — đã đo, không đoán
+
+Mỗi tệp gồm: `\section{TÊN BÀI}` → `\subsection{LÝ THUYẾT CẦN NHỚ}` (hoặc
+*TÓM TẮT LÝ THUYẾT* / *KIẾN THỨC CẦN NHỚ*) → *PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI
+TOÁN* → *BÀI TẬP TỰ LUYỆN*.
+
+Đo thật trên 23 bài lớp 10:
+
+| | Ký tự | ≈ token |
+|---|---|---|
+| Cả tệp (trung bình) | 34 079 | ~8 500 |
+| **Chỉ mục lí thuyết** (trung bình) | **4 534** | **~1 130** |
+| Chỉ lí thuyết, dài nhất (`L10_C4_B8`) | 14 576 | ~3 600 |
+| Chỉ lí thuyết, ngắn nhất (`L10_C2_B4`) | 914 | ~230 |
+
+→ **Nạp cả tệp là không được** (8 500 token mỗi lượt, tài khoản miễn phí chịu
+không nổi). **Cắt lấy đúng mục lí thuyết thì được** — trung bình ~1 130 token,
+và chỉ nạp khi học sinh bấm *"Em vẫn chưa hiểu"*, không nạp ở Mức A.
+
+Riêng `L10_C4_B8` (gộp 3 tệp) vượt trần → cắt tiếp theo `\subsubsection`,
+giữ các tiểu mục khớp từ khoá của câu hỏi.
+
+## 8b. Mức B — phần còn lại chưa làm
 
 Mức B là bước tiếp theo: học sinh đọc lời giảng mà **vẫn** chưa hiểu → chỉ đúng chỗ
 trong tài liệu lí thuyết `.tex` của cô để em học lại.

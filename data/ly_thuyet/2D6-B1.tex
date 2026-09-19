@@ -1,0 +1,1352 @@
+\section{XÁC SUẤT CÓ ĐIỀU KIỆN}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Định nghĩa xác suất có điều kiện}
+	\begin{enumerate}[\iconCH]
+		\item \indamm{Định nghĩa:} Cho hai biến cố $A$ và $B$. Xác suất của biến cố $A$, tính trong điều kiện biết rằng biến cố $B$ đã xảy ra, được gọi là xác suất của $A$ với điều kiện $B$ và kí hiệu là $\mathrm{P}(A\mid B)$.
+		\item \indamm{Công thức tính:} Cho hai biến cố $A$ và $B$ bất kì, với $\mathrm{P}(B)>0$. Khi đó 
+		\boxminit{$\mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}$}
+		\begin{center}
+			\begin{tikzpicture}[scale=0.8, every node/.style={font=\small}]
+				% ----------------------------------------------------
+				% HÌNH 1: Không gian mẫu ban đầu
+				% ----------------------------------------------------
+				\begin{scope}[xshift=0cm]
+					% Viền không gian mẫu
+					\draw[rounded corners=5pt, fill=gray!5, draw=black!70] (-2.5,-2.2) rectangle (2.5,2.2);
+					\node[font=\bfseries] at (-2.1, 1.9) {$\Omega$};
+					% Viền các tập hợp
+					\draw[blue, thick] (-0.6,0) circle (1.3);
+					\draw[red, thick] (0.6,0) circle (1.3);
+					
+					% Ghi chú chữ
+					\node[blue!80!black, font=\bfseries] at (-1.3, 0) {$A$};
+					\node[red!80!black, font=\bfseries] at (1.3, 0) {$B$};
+					\node[black, font=\bfseries] at (0, 0) {$AB$};
+					
+					\node[below, align=center] at (0,-2.4) {\textbf{Xác suất không điều kiện}\\Không gian mẫu là $\Omega$};
+				\end{scope}
+				
+				% ----------------------------------------------------
+				% Mũi tên chuyển đổi trạng thái
+				% ----------------------------------------------------
+				\draw[->, thick, >=stealth, draw=black!60] (3,0) -- (4.5,0);
+				\node[align=center, font=\footnotesize, text=black!80] at (3.75, 0.4) {\tiny Thu hẹp};
+				\node[align=center, font=\footnotesize, text=black!80] at (3.75, -0.8) {\tiny khi biết $B$\\\tiny đã xảy ra};
+				
+				% ----------------------------------------------------
+				% HÌNH 2: Không gian mẫu thu hẹp
+				% ----------------------------------------------------
+				\begin{scope}[xshift=7.5cm]
+					% Viền không gian mẫu ban đầu (làm mờ)
+					\draw[rounded corners=5pt, dashed, draw=gray!40] (-2.5,-2.2) rectangle (2.5,2.2);
+					
+					% Tô màu B (vũ trụ mới) và phần giao
+					\fill[red!10] (0.6,0) circle (1.3);
+					
+					\begin{scope}
+						\clip (-0.6,0) circle (1.3);
+						\fill[purple!50] (0.6,0) circle (1.3);
+					\end{scope}
+					
+					% Viền mờ cho phần không còn liên quan của A
+					\draw[blue, dashed, opacity=0.4] (-0.6,0) circle (1.3);
+					\node[blue!50!black, opacity=0.4] at (-1.3, 0) {$A$};
+					
+					% Viền đậm cho B (không gian mẫu mới)
+					\draw[red, very thick] (0.6,0) circle (1.3);
+					\node[red!80!black, font=\bfseries] at (2.8, 0) {\tiny$B \equiv \Omega_{\text{mới}}$};
+					
+					% Nhấn mạnh phần A giao B
+					\node[white, font=\bfseries] at (0, 0) {$AB$};
+					
+					\node[below, align=center] at (0,-2.4) {\textbf{Xác suất có điều kiện $P(A|B)$}\\Không gian mẫu thu hẹp thành $B$};
+				\end{scope}
+			\end{tikzpicture}
+		\end{center}
+		\item \indamm{Chú ý:} Nếu $A$, $B$ là hai biến cố độc lập thì $\mathrm{P}(A\mid B)=\mathrm{P}(A)$ và $\mathrm{P}(B\mid A)=\mathrm{P}(B)$.
+\end{enumerate}
+\subsubsection{Công thức nhân xác suất}
+\begin{enumerate}[\iconCH]
+	\item \indamm{Định nghĩa:} 	Với hai biến cố $A$ và $B$ bất kì, ta có
+	\boxminit{$\mathrm{P}(A B)=\mathrm{P}(B) \cdot \mathrm{P}(A \mid B)=\mathrm{P}(A) \cdot \mathrm{P}(B \mid A)$}
+	Công thức trên được gọi là \textbf{\textit{công thức nhân xác suất}}.
+	\item \indamm{Chú ý:}
+	\begin{boxkn}
+	 Nếu $A$ và $B$ là hai biến cố độc lập thì 
+	\boxminit{$\mathrm{P}(A B)=\mathrm{P}(A) \cdot \mathrm{P}(B)$}
+\end{boxkn}
+\end{enumerate}
+
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Ôn tập xác suất cổ điển. Các quy tắc tính xác suất}
+	\begin{enumerate}[\iconCH]
+		\item 	\indamm{Công thức tính:} Cho phép thử $T$ có không gian mẫu là $\Omega$. Giả thiết rằng các kết quả có thể của $T$ là đồng khả năng. Khi đó, nếu $E$ là một biến cố liên quan phép thử $T$ thì xác suất của $E$ được cho bởi công thức
+		\boxminit{$\mathrm{P}(E) = \dfrac{n(E)}{n(\Omega)}$}
+		Trong đó, $n(\Omega)$ và $n(E)$ lần lượt là số phần tử của tập không gian mẫu $\Omega$ và tập biến cố $E$.
+		\item \indamm{Nhận xét:}
+		\begin{boxkn}
+			\begin{itemize}
+				\item $0\le \mathrm{P}(E)\le 1$, với mọi biến cố $E$.
+				\item Với biến cố chắc chắn (là tập $\Omega$), ta có  $\mathrm{P}(\Omega)=1$.
+				\item Với biến cố không thể (là tập $\varnothing$), ta có  $\mathrm{P}(\varnothing)=0$.
+			\end{itemize}
+		\end{boxkn}
+		\item \indamm{Quy tắc nhân xác suất:} Nếu hai biến cố $A$ và $B$ độc lập thì
+		$\mathrm{P}(A B)=\mathrm{P}(A) \mathrm{P}(B).$
+		\item \indamm{Quy tắc cộng xác suất:} Cho hai biến cố $A$ và $B$. Khi đó $\mathrm{P}(A \cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A B)$.
+	\end{enumerate}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+\begin{vd}%[Triệu Minh Hà][0D2B5]
+	Gieo một con súc sắc cân đối đồng chất $3$ lần. Tính xác suất của biến cố sau:
+	\begin{tasks}(1)
+		\task $A$: \lq\lq Số chấm xuất hiện trong $3$ lần gieo giống nhau\rq\rq.
+		\task $B$: \lq\lq Tích số chấm xuất hiện trong $3$ lần gieo là số lẻ\rq\rq.
+		\task $C$: \lq\lq Tổng số chấm xuất hiện trong $3$ lần gieo là $5$\rq\rq.
+	\end{tasks}
+	\loigiai{
+		Gieo súc sắc $3$ lần sẽ có $n(\Omega)=6.6.6=216$ cách có thể xảy ra. Ta gọi kết quả $3$ lần gieo lần lượt theo dãy số $(x;y;z)$.
+		\begin{itemize}
+			\item [a)] Có $A=\{(1;1;1),(2;2;2),(3;3;3),(4;4;4),(5;5;5),(6;6;6)\}$.\\ Do đó $n(A)=6\Rightarrow \mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{1}{36}.$
+			\item [b)]Để có biến cố $B$ thì $3$ lần gieo chỉ gieo được trong các số $1,3,5$. Từ đó\\Lần $1$: $3$ cách.\\ Lần $2$: $3$ cách.\\ Lần $3$: $3$ cách.\\$\Rightarrow n(B)=3.3.3=27\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{27}{216}$.
+			\item [c)]$C=\{(1;1;3),(1;2;2),(1;3;1),(2;1;2),(2;2;1),(3;1;1)\}$.\\ Do đó $n(C)=6\Rightarrow \mathrm{P}(C)=\dfrac{n(C)}{n(\Omega)}=\dfrac{1}{36}$.
+			
+		\end{itemize}
+	}
+\end{vd}
+\dongcham{11}
+\begin{vd}
+	Trong một hộp kín có $18$ quả bóng khác nhau: $9$ trắng, $6$ đen, $3$ vàng. Lấy ngẫu nhiên từ hộp đồng thời $5$ quả bóng. Tính xác suất của các biến cố sau:
+	\begin{tasks}(1)
+		\task $A$: \lq\lq $5$ quả bóng cùng màu\rq\rq.
+		\task $B$: \lq\lq $5$ quả bóng có đủ $3$ màu\rq\rq.
+		\task $C$: \lq\lq $5$ quả bóng không có màu trắng\rq\rq.
+	\end{tasks}
+	\loigiai{
+		Lấy ngẫu nhiên $5$ bóng đồng thời trong hộp kín đo đó $n(\Omega)=C^5_{18}= 8568$ cách.
+		\begin{enumerate}[a)]
+			\item TH1: $5$ quả bóng đồng màu trắng: $C^5_9=126$ cách lấy.\\ TH2: $5$ quả bóng đồng màu đen: $C^5_6=6$ cách lấy.\\
+			Từ đó $n(A)=126+6=132\Rightarrow \mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{11}{714}$.
+			\item TH1: $1$ trắng, $1$ đen, $3$ vàng: $ 9.6.C^3_3=54$ cách.\\
+			TH2: $1$ trắng, $2$ đen, $2$ vàng: $9.C^2_6.C^2_3= 405 $ cách.\\
+			TH3: $2$ trắng, $1$ đen, $2$ vàng: $C^2_9.6.C^2_3=648$ cách.\\
+			TH4: $2$ trắng, $2$ đen, $1$ vàng: $C^2_9.C^2_6.3=1620$ cách.\\
+			TH5: $3$ trắng, $1$ đen, $1$ vàng: $C^3_9.6.3= 1512$ cách.\\
+			Từ đó $n(B)=4239\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{471}{952}$.
+			\item $5$ quả bóng lấy trong $9$ quả đen vàng do đó\\ $n(B)=C^5_9=126\Rightarrow \mathrm{P}(B)=\dfrac{n(B)}{n(\Omega)}=\dfrac{1}{68}$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{10}
+\begin{vd}%[1D2B5-2]
+	Xếp ngẫu nhiên $5$ người $A$, $B$, $C$, $D$, $E$ vào một cái bàn dài có $5$ chỗ ngồi. 
+	\begin{tasks}(1)
+		\task Tính xác suất để bạn $A$ ngồi chính giữa.
+		\task Tính xác suất để hai người $A$ và $B$ ngồi đầu bàn.
+	\end{tasks}
+	\loigiai{
+		Xếp $5$ người vào bàn $5$ chỗ là một hoán vị của $5$ phần tử nên có   $n(\Omega)=5!=120$.
+		\begin{enumerate}[a)]
+			\item Gọi $M$ là biến cố \lq\lq Xếp 5 người trong đó $A$ ngồi chính giữa\rq\rq. Suy ra $n(M)=4!=24$.\\
+			Xác suất của biến cố $M$ là $\dfrac{24}{120}=\dfrac{1}{5}$.
+			\item
+			Gọi $X$ là biến cố \lq\lq Xếp 5 người trong đó $A$ và $B$ ngồi đầu bàn\rq\rq, có hai giai đoạn:
+			\begin{itemize}
+				\item Xếp $A$ và $B$ ngồi đầu bàn có $2$ cách.
+				\item Xếp $3$ người còn lại vào $3$ chỗ có $3!$ cách.
+			\end{itemize}
+			Do đó số khả năng xảy ra biến cố $X$ là $2\cdot 3!=12.$\\
+			Vậy xác suất để hai người $A$ và $B$ ngồi đầu bàn là $\mathrm{P}(X)=\dfrac{12}{120}=0{,}1.$ 
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{8}
+\begin{vd}%[1D2K2-6]
+	Chọn ngẫu nhiên một số nguyên dương có hai chữ số. Xét các biến cố
+	\begin{enumEX}[$\bullet$]{2}
+		\item $A$: ``Số được chọn chia hết cho $5$''
+		\item $B$: ``Số được chọn chia hết cho $7$''.
+	\end{enumEX}
+	Tính $P\left(A\cup B\right)$.
+	\loigiai{
+		Trong $90$ số có hai chữ số, có $18$ số chia hết cho $5$, có $13$ số chia hết cho $7$ và có $2$ số chia hết cho cả $5$ và $7$.\\
+		Vì thế, ta có
+		\[P(A)=\dfrac{18}{90}, P(B)=\dfrac{13}{90}, P(A \cap B)=\dfrac{2}{90}. \]
+		Vậy $P(A \cup B)=P(A)+P(B)-P(A \cap B)=\dfrac{18}{90}+\dfrac{13}{90}-\dfrac{2}{90}=\dfrac{29}{90}$.	
+	}
+\end{vd}
+\dongcham{7}
+%%=====Ví dụ 6
+\begin{vd}%[1D2K2-6]
+	Một xưởng sản xuất có hai động cơ chạy độc lập với nhau. Xác suất để động cơ I và động cơ II chạy tốt lần lượt là $0{,}7$ và $0{,}8$. Tính xác suất của biến cố $C$: ``Cả hai động cơ đều chạy tốt''.
+	\loigiai{
+		Xét biến cố $A$: ``Động cơ I chạy tốt'', ta có $P(A)=0{,}7$.\\
+		Xét biến cố $B$: ``Động cơ II chạy tốt'', ta có $P(B)=0{,}8$.\\
+		Ta thấy $A$ và $B$ là hai biến cố độc lập và $C=A \cap B$.\\
+		Suy ra $P(C)=P(A \cap B)=P(A) \cdot P(B)=0{,}7 \cdot 0{,}8=0{,}56$.	
+	}
+\end{vd}
+\dongcham{5}
+%%=====Ví dụ 7
+\begin{vd}%[1D2K2-6]
+	Trong một giải bóng đá có hai đội Tín Phát và An Bình ở hai bảng khác nhau. Mỗi bảng chọn ra một đội để vào vòng chung kết. Xác suất lọt qua vòng bảng của hai đội Tín Phát và An Bình lần lượt là $0{,}6$ và $0{,}7$. Tính xác suất của các biến cố sau:
+	\begin{enumerate}[]
+		\item $A$: ``Cả hai đội Tín Phát và An Bình lọt vào vòng chung kết''.
+		\item $B$: ``Có ít nhất một đội lọt vào vòng chung kết''.
+		\item $C$: ``Chỉ có đội Tín Phát lọt vào vòng chung kết''.
+	\end{enumerate}
+	\loigiai{
+		Xét các biến cố:
+		\begin{enumerate}[]
+			\item $E$: ``Đội Tín Phát lọt vào vòng chung kết''.
+			\item $G$: ``Đội An Bình lọt vào vòng chung kết''.
+		\end{enumerate}
+		Vì hai đội ở hai bảng khác nhau nên hai biến cố $E$ và $G$ là hai biến cố độc lập, ta có $P(E)=0{,}6$ và $P(G)=0{,}7$.
+		\begin{enumerate}
+			\item Vì $A=E \cap G$ nên $P(A)=P(E \cap G)=P(E) \cdot P(G)=0{,}6 \cdot 0{,}7=0{,}42$.
+			\item Vì $B=E \cup G$ nên
+			\[P(B)=P(E \cup G)=P(E)+P(G)-P(E \cap G)=0{,}6+0{,}7-0{,}42=0{,}88. \]
+			\item Xét biến cố đối $\overline{G}$ của biến cố $G$. Ta có $P(\overline{G})=1-P(G)=1-0{,}7=0{,}3$.\\
+			Vì $E$ và $\overline{G}$ là hai biến cố độc lập và $C=E \cap \overline{G}$ nên
+			\[P(C)=P(E \cap \overline{G})=P(E) \cdot P(\overline{G})=0{,}6 \cdot 0{,}3=0{,}18. \]
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{10}
+
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D6-B1-d1-1]
+
+
+\begin{ex}%[1D2B5-2]
+	Một bình chứa $6$ viên bi màu, trong đó có $2$ bi xanh, $2$ bi đỏ, $2$ bi trắng. Lấy ngẫu nhiên $2$ viên bi. Xác suất để lấy được $2$ viên bi trắng là
+	\choice
+	{\True $\dfrac{1}{15}$}
+	{$\dfrac{2}{15}$}
+	{$\dfrac{4}{5}$}
+	{$\dfrac{4}{15}$}
+	\loigiai{
+		Lấy $2$ viên bi bất kì trong $6$ viên bi trong bình thì có $\mathrm{C}_{6}^{2}=15$ (cách). \\
+		Lấy $2$ viên bi trắng trong $2$ viên bi trắng thì có $\mathrm{C}_{2}^{2}=1$ (cách).  \\
+		Xác suất để lấy được $2$ viên bi trắng trong số $6$ viên bi là $\mathrm{P}=\dfrac{1}{15}$. 
+	}
+\end{ex} \cham{2}
+
+
+\begin{ex}%[1D2B5-2]
+	Một bình chứa $6$ viên bi màu, trong đó có $2$ bi xanh, $2$ bi đỏ, $2$ bi trắng. Lấy ngẫu nhiên $2$ viên bi. Xác suất để lấy được $2$ viên bi khác màu là
+	\choice
+	{$\dfrac{1}{15}$}
+	{$\dfrac{2}{15}$}
+	{\True $\dfrac{4}{5}$}
+	{$\dfrac{4}{15}$}
+	\loigiai{
+		Lấy $2$ viên bi bất kì trong $6$ viên bi trong bình thì có $\mathrm{C}_{6}^{2}=15$ (cách). \\
+		Lấy $2$ viên bi cùng màu thì có $\mathrm{C}_{2}^{2}+\mathrm{C}_{2}^{2}+\mathrm{C}_{2}^{2}=3$ (cách) nên có $15-3=12$ (cách) lấy được 2 viên bi khác màu.  \\
+		Xác suất để lấy được $2$ viên bi khác màu trong tổng số 6 viên bi là
+		$
+		\mathrm{P}=\dfrac{12}{15}=\dfrac{4}{5}.
+		$
+	}
+\end{ex} \cham{3}
+
+
+\begin{ex}%[1D2B5-2]
+	Một thùng có $7$ sản phẩm, trong đó có $4$ sản phẩm loại I và $3$ sản phẩm loại II. Lấy ngẫu nhiên $2$ sản phẩm. Xác suất để lấy được $2$ sản phẩm cùng loại là
+	\choice
+	{$\dfrac{1}{7}$}
+	{$\dfrac{2}{7}$}
+	{\True $\dfrac{3}{7}$}
+	{$\dfrac{4}{7}$}
+	\loigiai{
+		Lấy ngẫu nhiên $2$ sản phẩm trong $7$ sản phẩm thì có $\mathrm{C}_{7}^{2}=21$ (cách). \\
+		$2$ sản phẩm được lấy ra đều là sản phẩm loại I có $\mathrm{C}_{4}^{2}=6$ (cách).\\
+		$2$ sản phẩm được lấy ra đều là sản phẩm loại II có $\mathrm{C}_{3}^{2}=3$ (cách).\\
+		Xác suất để lấy được $2$ sản phẩm cùng loại là
+		$
+		\mathrm{P}=\dfrac{6+3}{21}=\dfrac{3}{7}.
+		$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%[1D2B5-2]
+	Một hộp chứa $2$ bi xanh, $3$ bi đỏ. Lấy ngẫu nhiên $3$ bi. Xác suất để có ít nhất một bi xanh là
+	\choice
+	{$\dfrac{1}{5}$}
+	{$\dfrac{1}{10}$}
+	{\True $\dfrac{9}{10}$}
+	{$\dfrac{4}{5}$}
+	\loigiai{
+		Số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}_{5}^{3}=10$. \\
+		Gọi $A$ là biến cố: ``Lấy ít nhất 1 bi xanh''. \\
+		Chọn $1$ bi xanh, $2$ bi đỏ, có $\mathrm{C}_{2}^{1} \cdot \mathrm{C}_{3}^{2}=6$ (cách).\\
+		Chọn $2$ bi xanh, $1$ bi đỏ, có $\mathrm{C}_{2}^{2} \cdot \mathrm{C}_{3}^{1}=3$ (cách).\\
+		Suy ra $n(A)=3+6=9$.\\
+		Xác suất cần tìm là  $\mathrm{P}(A)=\dfrac{9}{10}$. 
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%[1D2B5-2]
+	Lớp $11 \mathrm{B}$ có $20$ nam và $25$ nữ. Chọn ngẫu nhiên hai học sinh để làm trực nhật. Xác suất để trong đó có ít nhất một nam là
+	\choice
+	{$\dfrac{20}{33}$}
+	{\True $\dfrac{23}{33}$}
+	{$\dfrac{25}{33}$}
+	{$\dfrac{1}{20}$}
+	\loigiai{
+		Lớp $11 \mathrm{B}$ có $20+25=45$ (học sinh). \\
+		Chọn $2$ học sinh trong số $45$ học sinh của lớp $11 \mathrm{~B}$ thì có $\mathrm{C}_{45}^{2}=990$ (cách).\\
+		Chọn $2$ học sinh trong số $45$ học sinh bao gồm $1$ nam và $1$ nữ thì có $\mathrm{C}_{20}^{1} \cdot \mathrm{C}_{25}^{1}=500$ (cách).\\
+		Chọn $2$ học sinh nam trong số $20$ học sinh nam thì có $\mathrm{C}_{20}^{2}=190$ (cách).\\
+		Xác suất để trong $2$ học sinh được chọn có ít nhất $1$ học sinh nam là $\mathrm{P}=\dfrac{500+190}{990}=\dfrac{23}{33}$.\\
+	}
+\end{ex} \cham{3}
+
+
+\begin{ex}%[1D2B5-2]
+	Một hội nghị có $15$ nam và $10$ nữ. Chọn ngẫu nhiên $3$ người vào ban tổ chức. Xác suất để trong ban tổ chức có nhiều hơn hai người nam là
+	\choice
+	{$\dfrac{1}{4}$}
+	{$\dfrac{1}{2}$}
+	{$\dfrac{3}{4}$}
+	{\True $\dfrac{91}{460}$}
+	\loigiai{
+		Số người trong hội nghị là $15+10=25$. \\
+		Chọn $3$ người trong $25$ người thì có $\mathrm{C}_{25}^{3}=2300$ (cách).\\
+		Số nam trong ban tổ chức nhiều hơn $2$ tức là cà $3$ người trong ban tổ chức đều là nam. Chọn $3$ nam trong số $15$ nam thì có $\mathrm{C}_{15}^{3}=455$ (cách).\\
+		Xác suất để trong ban tổ chức có số nam nhiều hơn hai là $\mathrm{P}=\dfrac{455}{2300}=\dfrac{91}{460}$.
+	}
+\end{ex} \cham{3}
+
+
+\begin{ex}%[1D2K5-1]
+	Gọi $A$ là tập các số có 6 chữ số khác nhau được tạo ra từ các số $\{0,1,2,3,4,5\}$. Từ $A$ chọn ngẫu nhiên một số, xác suất số đó có số $3$ và $4$ đứng cạnh nhau là
+	\choice
+	{\True $\dfrac{8}{25}$}
+	{$\dfrac{4}{15}$}
+	{$\dfrac{4}{25}$}
+	{$\dfrac{2}{15}$}
+	\loigiai{
+		Số phần tử của không gian mẫu là $n(\Omega)=5\cdot5!=600$.\\
+		Gọi $X$ là biến cố: \lq\lq Số chọn ra là số có hai chữ số $3, 4$ đứng cạnh nhau\rq\rq.\\
+		Vì hai số $3,4$ đứng cạnh nhau nên ta coi nó là một phần tử. Do đó, số cần tìm sẽ là số được lập từ tập hợp các chữ số $0,1,2, x, 5$ với $x=34$ hoặc $x=43$.\\
+		Suy ra số kết quả thuận lợi cho biến cố $X$ là $n(X)=2\cdot4\cdot4!=192$.\\
+		Vậy xác suất cần tính là $P=\dfrac{n(X)}{n(\Omega)}=\dfrac{192}{600}=\dfrac{8}{25}$. 
+	}
+\end{ex} \cham{4}
+
+\begin{ex}%[1D2K5-1]
+	Gọi tập $A$ là tập các số có 6 chữ số khác nhau được lập từ các số $\{1,2,3,4,5,6\}$. Từ $A$ chọn ra một số, xác suất số đó bé hơn $432000$ là
+	\choice
+	{$\dfrac{17}{30}$}
+	{$\dfrac{17}{40}$}
+	{\True $\dfrac{23}{40}$}
+	{$\dfrac{13}{30}$}
+	\loigiai{
+		Số phần tử của không gian mẫu là $n(\Omega)=6!=720$.\\
+		Gọi $X$ là biến cố: \lq\lq Số chọn ra bé hơn $432000$\rq\rq.\\
+		Gọi số cần tìm có dạng $\overline{abcdef}$, vì $\overline{abcdef}<432000$ nên ta xét các trường hợp.\\
+		TH1. Nếu $a=\{1; 2; 3\}$ và sắp xếp 5 số còn lại vào 5 vị trí nên có $3\cdot 5 !=360$ số.\\
+		TH2. Nếu $a=4$, ta đi xét hai trường hợp.
+		\begin{itemize}
+			\item[] $b=3$ thì $c=1$ suy ra có $3 !=6$ số.
+			\item[] $b<3 \Rightarrow b\in\{1; 2\}$ và sắp xếp 4 số còn lại vào 4 vị trí nên có $2\cdot 4 !=48$ số.
+		\end{itemize}
+		Do đó, số kết quả thuận lợi cho biến cố $X$ là $n(X)=360+6+48=414$.\\
+		Vậy xác suất cần tính là $P=\dfrac{n(X)}{n(\Omega)}=\dfrac{414}{720}=\dfrac{23}{40}$.
+	}
+\end{ex} \cham{4}
+\begin{ex}%[1D2K5-1]
+	Cho tập hợp $A=\{2; 3; 4; 5; 6; 7; 8\}$. Gọi $S$ là tập hợp các số tự nhiên có 4 chữ số đôi một khác nhau được lập thành từ các chữ số của tập $A$. Chọn ngẫu nhiên một số từ $S$, tính xác suất để số được chọn mà trong mỗi số luôn luôn có mặt hai chữ số chẵn và hai chữ số lẻ.
+	\choice
+	{$\dfrac{1}{5}$}
+	{$\dfrac{3}{35}$}
+	{$\dfrac{17}{35}$}
+	{\True $\dfrac{18}{35}$}
+	\loigiai{
+		Số phần tử của tập $S$ là $\mathrm{A}_7^4=840$.\\
+		Không gian mẫu là chọn ngẫu nhiên 1 số từ tập $S$.\\
+		Suy ra số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}_{840}^1=840$.\\
+		Gọi $X$ là biến cố: \lq\lq Số được chọn mà trong mỗi số luôn luôn có mặt hai chữ số chẵn và hai chữ số lẻ\rq\rq.
+		\begin{itemize}
+			\item Số cách chọn hai chữ số chẵn từ bốn chữ số $2; 4; 6; 8$ là $\mathrm{C}_4^2=6$ cách.
+			\item Số cách chọn hai chữ số lẻ từ ba chữ số $3; 5; 7$ là $\mathrm{C}_3^2=3$ cách.
+		\end{itemize}
+		Suy ra số phần tử của biến cố $X$ là $n(X)=\mathrm{C}_4^2 \cdot \mathrm{C}_3^2 \cdot 4 !=432$.\\
+		Vậy xác suất cần tính $\mathrm{P}(X)=\dfrac{n(X)}{n(\Omega)}=\dfrac{432}{840}=\dfrac{18}{35}$.	
+	}
+\end{ex} \cham{4}
+\begin{ex}%[1D2K5-1]
+	Gọi $X$ là tập hợp các số tự nhiên gồm 6 chữ số đôi một khác nhau được tạo thành từ các chữ số $1,2,3,4,5,6,7,8,9.$ Chọn ngẫu nhiên một số từ tập hợp $X$. Tính xác suất để số được chọn chỉ chứa 3 chữ số lẻ.
+	\choice
+	{\True $\dfrac{10}{21}$}
+	{$\dfrac{25}{49}$}
+	{$\dfrac{1}{3}$}
+	{$13/25$}
+	\loigiai{
+		Số phần tử không gian mẫu $n(\Omega)=9.8.7.6.5.4$.\\
+		Chọn 3 chữ số lẻ trong 5 chữ số lẻ $1;3;5;7;9$ có $\mathrm{C}_5^3$ cách chọn.\\
+		Chọn 3 chữ số chẵn trong 4 chữ số chẵn $2;3;6;8$ có $\mathrm{C}_4^3$ cách chọn.\\
+		Khi đó số cách chọn được số chỉ chứa 3 chữ số lẻ là $\mathrm{C}_5^3\cdot\mathrm{C}_4^3\cdot6!$ cách chọn.
+		Xác suất cần tìm là $\dfrac{\mathrm{C}_5^3\cdot\mathrm{C}_4^3\cdot6!}{9.8.7.6.5.4}=\dfrac{10}{21}$.
+	}
+\end{ex} \cham{4}
+\begin{ex}%[1D2K5-1]
+	Một hộp chứa 12 viên bi kích thước như nhau, trong đó có 5 viên bi màu xanh được đánh số từ 1 đến 5; có 4 viên bi màu đỏ được đánh số từ 1 đến 4 và 3 viên bi màu vàng được đánh số từ 1 đến 3. Lấy ngẫu nhiên 2 viên bi từ hộp, tính xác suất để 2 viên bi được lấy vừa khác màu vừa khác số.
+	\choice
+	{$\dfrac{8}{33}$}
+	{$\dfrac{14}{33}$}
+	{$\dfrac{29}{66}$}
+	{\True $\cdot \dfrac{37}{66}$}
+	\loigiai{
+		Không gian mẫu là số sách lấy tùy ý 2 viên từ hộp chứa 12 viên bi. Suy ra số phần tử của không gian mẫu là $n(\Omega)=\mathrm{C}_{12}^2=66$.\\
+		Gọi $A$ là biến cố: \lq\lq2 viên bi được lấy vừa khác màu vừa khác số\rq\rq.
+		\begin{itemize}
+			\item Số cách lấy 2 viên bi gồm 1 bi xanh và 1 bi đỏ là $4\cdot 4=16$ cách (do số bi đỏ ít hơn nên ta lấy trước, có 4 cách lấy bi đỏ. Tiếp tục lấy bi xanh nhưng không lấy viên trùng với số của bi đỏ nên có 4 cách lấy bi xanh).
+			\item Số cách lấy 2 viên bi gồm 1 bi xanh và 1 bi vàng là $3\cdot 4=12$ cách.
+			\item Số cách lấy 2 viên bi gồm 1 bi đỏ và 1 bi vàng là $3\cdot 3=9$ cách.
+		\end{itemize}
+		Suy ra số phần tử của biến cố $A$ là $n(A)=16+12+9=37$.\\
+		Vậy xác suất cần tính $\mathrm{P}(A)=\dfrac{n(A)}{n(\Omega)}=\dfrac{37}{66}$.
+	}
+\end{ex} \cham{6}
+\begin{ex}
+	Cho $P(A)=\dfrac{1}{4}, P(A \cup B)=\dfrac{1}{2}$. Biết $A, B$ là hai biến cố xung khắc, thì $P(B)$ bằng
+	\choice
+	{ $\dfrac{1}{8}$}
+	{\True $\dfrac{1}{4}$}
+	{$\dfrac{3}{4}$}
+	{$\dfrac{1}{3}$}
+	\loigiai{
+		$A, B$ là hai biến cố xung khắc: $P(A \cup B)=P(A)+P(B) \Leftrightarrow P(B)=\dfrac{1}{4}$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex} %[1D2Y2-5]
+	Cho $A$ và $B$ là hai biến cố độc lập. Biết $\mathrm{P}(A)=0,4$ và $\mathrm{P}(A B)=0,2$. Xác suất của biến cố $A \cup B$ là
+	\choice
+	{$0,6$}
+	{\True $0,7$}
+	{$0,8$}
+	{$0,9$}
+	\loigiai{
+		$$\mathrm{P}(A \cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=0,7.$$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Trên giá sách có 4 quyến sách toán, 3 quyển sách lý, 2 quyển sách hóa. Lấy ngẫu nhiên 3 quyển sách. Tính xác suất để 3 quyển lấy ra có ít nhất 1 quyển là môn toán.
+	\choice
+	{ $\dfrac{2}{7}$}
+	{$\dfrac{1}{21}$}
+	{\True $\dfrac{37}{42}$}
+	{$\dfrac{5}{42}$}
+	\loigiai{
+		$n(\Omega)=C_9^3=84$.\\
+		Gọi $A: " 3$ quyển lấy ra có ít nhất 1 quyển là môn toán"
+		Khi đó $\overline{A}$ :" 3 quyển lấy ra không có quyền nào môn toán" hay $\overline{A}$ :"3 quyền lấy ra là môn lý hoặc hóa".
+		Ta có $3+2=5$ quyển sách lý hoặc hóa. $n(\overline{A})=C_5^3=10$.
+		Vậy $P(A)=1-P(\overline{A})=1-\dfrac{10}{84}=\dfrac{37}{42}$.
+	}
+\end{ex} \cham{4}
+
+\begin{ex}
+	Một hộp chứa sáu quả cầu trắng và bốn quả cầu đen. Lấy ngẫu nhiên đồng thời bốn quả. Tính xác suất sao cho có ít nhất một quả màu trắng.
+	\choice
+	{\True $\dfrac{209}{210}$}
+	{$\dfrac{8}{105}$}
+	{$\dfrac{1}{21}$}
+	{$\dfrac{1}{210}$}
+	\loigiai{
+		
+		Gọi $\mathrm{A}$ là biến cố: "trong bốn quả được chọn có ít nhất 1 quả trắng."
+		Không gian mẫu: $C_{10}^4=210$.
+		$\overline{A}$ là biến cố: "trong bốn quả được chọn không có 1 quả trắng nào."
+		$\rightarrow n(\overline{A})=C_4^4=1$.
+		$\rightarrow P(\overline{A})=\dfrac{n(\overline{A})}{|\Omega|}=\dfrac{1}{210}$.
+		$\rightarrow P(A)=1-P(\overline{A})=1-\dfrac{1}{210}=\dfrac{209}{210}$.
+	}
+\end{ex} \cham{5}
+
+\begin{ex} %[1D2Y2-4]
+	Xác suất thực hiện thành công một thí nghiệm là $0,7$ . Thực hiện thí nghiệm đó $2$ lần liên tiếp một cách độc lập với nhau. Xác suất của biến cố "Cả 2 lần thí nghiệm đều thành công" là
+	\choice
+	{$0,7$}
+	{$0,21$}
+	{\True $0,49$}
+	{$1,4$}
+	\loigiai{
+		Xét biến cố $A$: "Lần thứ nhất thí nghiệm thành công", ta có $\mathrm{P}(A)=0,7.$\\
+		Xét biến cố $B$: "Lần thứ hai thí nghiệm thành công", ta có $\mathrm{P}(B)=0,7.$\\
+		Ta thấy $A$ và $B$ là hai biến cố độc lập nên xác suất của biến cố "Cả 2 lần thí nghiệm đều thành công" là:\\
+		$$\mathrm{P}(AB)=\mathrm{P}(A) \cdot \mathrm{P}(B)=0,49.$$
+	}
+\end{ex} \cham{4}
+
+\begin{ex} %[1D2B5-4]%
+	Trong phòng làm việc có hai máy tính hoạt động độc lập với nhau, khả năng hoạt động tốt trong ngày của hai máy này tương ứng là $0,75$ và $0,85$. Xác suất để cả hai máy hoạt động không tốt trong ngày là
+	\choice
+	{ $0,0675$ }
+	{ \True $0,0375$ }
+	{$0,0575$}
+	{ $0,0475$}
+	\loigiai
+	{
+		Gọi $A$ là biến cố: "Khả năng hoạt động tốt trong ngày của máy $A$".\\
+		$P(A)=0,75$, $P( \overline{A} )=0,25$.\\
+		Gọi $B$ là biến cố: "Khả năng hoạt động tốt trong ngày của máy $B$".\\
+		$P( B )=0,85$, $P( \overline{B})=0,15$.\\
+		Suy ra $X=\overline{A}\cap \overline{B}$ là biến cố : "Cả hai máy hoạt động không tốt trong ngày".\\
+		Vậy $P(X)=P(\overline{A})\cdot P( \overline{B})=0,25\cdot  0,15 =0,0325$.
+	}
+\end{ex} \cham{4}
+
+\begin{ex}
+	Trong nhóm 60 học sinh có 30 học sinh thích học Toán, 25 học sinh thích học Lý và 10 học sinh thích cả Toán và Lý. Chọn ngẫu nhiên 1 học sinh từ nhóm này. Xác suất để được học sinh này thích học ít nhất là một môn Toán hoặc Lý là
+	\choice
+	{\True $\dfrac{1}{2}$}
+	{$\dfrac{4}{5}$}
+	{\True $\dfrac{3}{4}$}
+	{$\dfrac{2}{3}$}
+	\loigiai{
+		Gọi $A$ là tập hợp "học sinh thích học Toán".\\
+		Gọi $B$ là tập hợp "học sinh thích học Lý".\\
+		Gọi $C$ là tập hợp " học sinh thích học ít nhất một môn".\\
+		Ta có $n(C)=n(A \cup B)=n(A)+n(B)-n(A \cap B)=30+25-10=45$.\\
+		Vậy xác suất để được học sinh này thích học ít nhất là một môn Toán hoặc Lý là: $P(C)=\dfrac{n(C)}{n(\Omega)}=\dfrac{45}{60}=\dfrac{3}{4}$
+	}
+\end{ex} \cham{4}
+\begin{ex}%[1D2Y2-2]
+	Một lớp học gồm $50$ bạn, trong đó có $20$ bạn thích chơi bóng đá, $28$ bạn thích chơi bóng rổ và $8$ bạn thích chơi cả hai môn. Gặp ngẫu nhiên $1$ học sinh trong lớp. Xác suất của biến cố "Bạn được gặp thích chơi bóng đá hoặc bóng rổ" là
+	\choice
+	{$0,16$}
+	{$0,96$}
+	{$0,48$}
+	{\True $0,8$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Bạn được gặp thích chơi bóng đá\rq\rq,
+		$B$ là biến cố "Bạn được gặp thích chơi bóng rổ".\\
+		Xác suất của biến cố $A$ là $$\mathrm{P}(A)=\dfrac{20}{50}=\dfrac{2}{5}.$$
+		Xác suất của biến cố $B$ là $$\mathrm{P}(B)=\dfrac{28}{50}=\dfrac{14}{25}.$$
+		Xác suất của biến cố \lq\lq Bạn được gặp thích chơi cả hai loại\rq\rq \ là:
+		$$\mathrm{P}(A B)=\dfrac{8}{50}=\dfrac{4}{25}\text {. }$$	
+		Xác suất của biến cố \lq\lq Bạn được gặp thích chơi bóng đá hoặc bóng rổ \rq\rq \ là:
+		$$\mathrm{P}(A \cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=\dfrac{2}{5}+\dfrac{14}{25}-\dfrac{4}{25}=\dfrac{4}{5}=0,8.$$
+	}
+\end{ex} \cham{6}
+\begin{ex}%[1D2Y2-5]
+	Một hộp đựng 10 viên bi đỏ được đánh số từ $1$ đến $10$ và $15$ viên bi xanh được đánh số từ $1$ đến $15$ . Các viên bi có cùng kích thước và khối lượng. Lấy ra ngẫu nhiên $1$ viên bi từ trong hộp. Gọi $A$ là biến cố "Viên bi lấy ra có màu đỏ", $B$ là biến cố "Viên bi lấy ra ghi số chẵn". Xác suất của biến cố $A \cup B$ là
+	\choice
+	{$0,4$}
+	{$0,88$}
+	{$0,48$}
+	{\True $0,68$}
+	\loigiai{
+		$$\mathrm{P}(A \cup B)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(AB)=0,68.$$
+	}
+\end{ex} \cham{6}
+
+\Closesolutionfile{ans}
+%\newpage
+\begin{dang}{Xác suất có điều kiện. Công thức nhân xác suất}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Công thức xác suất có điều kiện:} Cho hai biến cố $A$ và $B$ bất kì, với $\mathrm{P}(B)>0$. Khi đó 
+		\boxminit{$\mathrm{P}(A \mid B)=\dfrac{\mathrm{P}(A B)}{\mathrm{P}(B)}$}
+		\item \indam{Công thức nhân xác suất:} Với hai biến cố $A$ và $B$ bất kì, ta có
+		\boxminit{$\mathrm{P}(A B)=\mathrm{P}(B) \cdot \mathrm{P}(A \mid B)=\mathrm{P}(A) \cdot \mathrm{P}(B \mid A)$}
+		\item \indam{Một số kết quả cần lưu ý:}
+	\begin{listEX}[1]
+		\item [\ding{172}] Nếu $A$, $B$ là hai biến cố độc lập thì $\mathrm{P}(A\mid B)=\mathrm{P}(A)$ và $\mathrm{P}(B\mid A)=\mathrm{P}(B)$.
+		\item [\ding{173}] $\mathrm{P}(A\mid B)+\mathrm{P}(\overline{A}\mid B)=1$ hay $\mathrm{P}(\overline{A}\mid B)=1-\mathrm{P}(A\mid B)$.
+		\item [\ding{174}] $\mathrm{P}(AB)=\mathrm{P}(A)+\mathrm{P}(B)-\mathrm{P}(A\cup B)$.
+		\item [\ding{175}] $\mathrm{P}(AB)+\mathrm{P}(\overline{A}B)=\mathrm{P}(B)$ hay  $\mathrm{P}(\overline{A}B)=\mathrm{P}(B)-\mathrm{P}(AB) $.
+		\item [\ding{176}] $\mathrm{P}(AB)+\mathrm{P}(A\overline{B})=\mathrm{P}(A)$ hay  $\mathrm{P}(A\overline{B})=\mathrm{P}(A)-\mathrm{P}(AB) $.
+		\item [\ding{177}] $\mathrm{P}(A\cup B)+\mathrm{P}(\overline{A}\cdot \overline{B})=1$ hay  $\mathrm{P}(A\cup B)=1-\mathrm{P}(\overline{A}\cdot \overline{B}) $.
+	\end{listEX}
+	\end{enumerate}
+	
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+
+\begin{vd}%[2D6H1-2]
+	Ông Hải rút ngẫu nhiên $1$ lá bài từ bộ bài tây $52$ lá. Gọi $A$ là biến cố \lq\lq Lá bài được chọn là lá K\rq\rq\ và $B$ là biến cố \lq\lq Lá bài được chọn là chất cơ\rq\rq. Tính $\mathrm{P}(A)$, $\mathrm{P}(A\mid B)$ và $\mathrm{P}(A\mid \overline{B})$.
+	\loigiai{
+		Xác suất lá bài được chọn là lá K là $\mathrm{P}(A)=\dfrac{4}{52}=\dfrac{1}{13}$.\\
+		Xác suất lá bài được chọn là chất cơ là $\mathrm{P}(B)=\dfrac{13}{52}=\dfrac{1}{4}$.\\
+		Xác suất lá bài được chọn là quân K cơ là $\mathrm{P}(A\cap B)=\dfrac{1}{52}$.\\
+		Xác suất lá bài được chọn là lá K, biết rằng lá đó có chất cơ là 
+		\[\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(A\cap B)}{P(B)}=\dfrac{\dfrac{1}{52}}{\dfrac{1}{4}}=\dfrac{1}{13}.\]
+		Xác suất lá bài được chọn là lá K, nhưng không phải chất cơ là $\mathrm{P}(A\cap \overline{B})=\dfrac{3}{52}$.\\
+		Xác suất lá bài được chọn không phải chất cơ là $\mathrm{P}(\overline{B})=\dfrac{52-13}{52}=\dfrac{3}{4}$.\\
+		Xác suất lá bài được chọn là lá K, biết rằng lá đó không phải chất cơ là 
+		\[\mathrm{P}(A\mid \overline{B})=\dfrac{\mathrm{P}(A\cap \overline{B})}{\mathrm{P}(\overline{B})}=\dfrac{\dfrac{3}{52}}{\dfrac{3}{4}}=\dfrac{1}{13}.\]
+	}
+\end{vd}
+\dongcham{5}
+
+\begin{vd}%[2D6H1-2]
+	Một hộp chứa $15$ thẻ cùng loại được ghi số từ $1$ đến $15$. Các thẻ có số từ $1$ đến $10$ được sơn màu đỏ, các thẻ còn lại được sơn màu xanh. Bạn Việt chọn ngẫu nhiên $1$ thẻ từ hộp.
+	\begin{enumerate}
+		\item Tính xác suất để thẻ được chọn có màu đỏ, biết rằng nó được ghi số chẵn. Làm tròn kết quả đến hàng phần trăm.
+		\item Tính xác suất để thẻ được chọn ghi số chẵn, biết rằng nó có màu xanh.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Do từ $1$ đến $15$ có $7$ số chẵn nên có $7$ tấm thẻ được ghi số chẵn.\\
+			Trong $7$ tấm thẻ được ghi số chẵn, có $5$ thẻ có số không lớn hơn $10$ nên được sơn màu đỏ.\\
+			Do đó, trong tổng sổ $7$ tấm thẻ được ghi số chẵn có $5$ tấm thẻ màu đỏ.\\
+			Vậy xác suất để thẻ được chọn có màu đỏ, biết rằng nó được ghi số chẵn là $$\mathrm{P}(A\mid B)=\dfrac{5}{7} \approx 0{,}71.$$
+			\textbf{Cách khác}\\
+			Do có $7$ tấm thẻ được ghi số chẵn trong tổng số $15$ tấm thẻ nên $\mathrm{P}(B)=\dfrac{7}{15}$.\\
+			Do có $5$ tấm thẻ có màu đỏ được ghi số chẵn trong tổng số $15$ thẻ nên $\mathrm{P}(AB)=\dfrac{5}{15}$.\\
+			Vậy $\mathrm{P}(A\mid B)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(B)}=\dfrac{5}{15}:\dfrac{7}{15}=\dfrac{5}{7} \approx 0{,}71$.
+			\item Hộp chứa $5$ tấm thẻ màu xanh, trong đó có $2$ tấm thẻ ghi số chẵn.\\
+			Vậy $\mathrm{P}(B\mid \overline{A})=\dfrac{2}{5}=0{,}4$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{5}
+
+
+\begin{vd}%[BG-12-New-4in1, Quyết Nguyễn]%[2D5H1-2]
+	Hộp thứ nhất chứa $4$ viên bi xanh và $3$ viên bi đỏ. Hộp thứ hai chứa $3$ viên bi xanh và $5$ viên bi đỏ. Các viên bi có cùng kích thước và khối lượng. Bạn Thanh lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ nhất bỏ vào hộp thứ hai, sau đó lại lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ hai. Tính xác suất để viên bi lấy ra ở lần thứ hai là viên bi đỏ, biết viên bi lấy ra ở lần thứ nhất là viên bi xanh.
+	\loigiai{
+		$A$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ hai là viên bi đỏ\rq\rq; $B$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ nhất là viên bi xanh\rq\rq.\\
+		Biến cố $B$ xảy ra, nghĩa là lần thứ nhất lấy $1$ viên bi xanh và bỏ vào hộp thứ hai. Khi đó trong hộp thứ hai sẽ có $4$ viên bi xanh và $5$ viên bi đỏ.\\
+		Vậy $\mathrm{P}(A\mid B)=\dfrac{5}{9}$. 
+	}
+\end{vd}
+\dongcham{5}
+
+\begin{vd}%[2D6H1-2]
+	Một lớp học có $40\%$ học sinh là nam. Số học sinh nữ bị cận thị chiếm $20\%$ số học sinh trong lớp. Chọn ngẫu nhiên $1$ học sinh của lớp. Tính xác suất học sinh đó bị cận thị, biết rằng đó là học sinh nữ. Làm tròn kết quả đến hàng phần trăm.
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Học sinh được chọn là nữ\rq\rq.\\
+		$B$ là biến cố \lq\lq Học sinh được chọn bị cận thị\rq\rq.\\
+		Do có $40\%$ học sinh là nam nên $\mathrm{P}(A)=1-0{,}4=0{,}6$.\\
+		Mà có $20\%$ học sinh nữ bị cận trong tổng số học sinh của lớp nên $\mathrm{P}(AB)=0{,}2$.\\
+		Vậy $\mathrm{P}\left(B\mid A\right)=\dfrac{\mathrm{P}(AB)}{\mathrm{P}(A)}=\dfrac{0{,}2}{0{,}6}=\dfrac{1}{3}\approx 0{,}33$.
+	}
+\end{vd}
+\dongcham{5}
+
+\begin{vd}%[CTST]%[BG12-4in1, Võ Thành Huấn]%[ID6]
+	Cho hai biến cố $A$ và $B$ có $\mathrm{P}(A)=0{,}3 ; \mathrm{P}(B)=0{,}5$ và $\mathrm{P}(A \mid B)=0{,}4$. Tính $\mathrm{P}(\overline{A} B)$ và $\mathrm{P}(\overline{A} \mid B)$.
+	\loigiai
+	{
+		\immini
+		{
+			Theo công thức nhân xác suất, ta có $\mathrm{P}(A B)=\mathrm{P}(B) \cdot \mathrm{P}(A \mid B)=0{,}2$.\\
+			Vì $\overline{A} B$ và $A B$ là hai biến cố xung khắc và $\overline{A} B \cup A B=B$ nên theo tính chất của xác suất, ta có $\mathrm{P}(\overline{A} B)=\mathrm{P}(B)-\mathrm{P}(A B)=0{,}3$.\\
+			Theo công thức tính xác suất có điều kiện,
+			$$
+			\mathrm{P}(\overline{A} \mid B)=\dfrac{\mathrm{P}(\overline{A} B)}{\mathrm{P}(B)}=\dfrac{0{,}3}{0{,}5}=0{,}6.$$
+		}
+		{
+			\begin{tikzpicture}[scale=0.54]
+				\def\firstven{(0,0) ellipse (3cm and 2cm)}
+				\def\secondven{(2.5,1) ellipse (2.8cm and 2cm)}
+				\begin{scope}
+					\clip \firstven;
+					\fill[gray!50,opacity=0.85] \secondven;
+				\end{scope}
+				\draw \firstven \secondven;
+				\node at (-2.2,2) {$A$};
+				\node at (5.6,2.2){$B$};
+				\node at (1.3,0.5){$AB$};
+				\node at (4,1){$\overline{A} B$};
+			\end{tikzpicture}    
+		}
+	}
+\end{vd}
+\dongcham{7}
+
+\begin{vd}
+	Cho hai biến cố $A$ và $B$ thỏa mãn $P(A) = 0,55$; $P(B) = 0,4$; $P(A|B) = 0,3$. Tính các xác suất sau: $P(AB)$; $P(A \cup B)$; $P(\overline{A}\overline{B})$; $P(\overline{A}B)$; $P(A\overline{B})$.
+	\loigiai{
+		Theo công thức nhân xác suất, ta có:
+		$$P(AB) = P(B) \cdot P(A|B) = 0,4 \cdot 0,3 = 0,12.$$
+		
+		Theo công thức cộng xác suất, ta có:
+		$$P(A \cup B) = P(A) + P(B) - P(AB) = 0,55 + 0,4 - 0,12 = 0,83.$$
+		
+		Sử dụng tính chất biến cố đối, ta có:
+		$$P(\overline{A}\overline{B}) = P(\overline{A B}) = 1 - P(A B) = 1 - 0,12 = 0,88.$$
+		
+		Xét biến cố $\overline{A}B$ (phần thuộc $B$ nhưng không thuộc $A$):
+		$$P(\overline{A}B) = P(B) \cdot P(\overline{A}|B) = P(B) \cdot [1 - P(A|B)] = 0,4 \cdot (1 - 0,3) = 0,28.$$
+		
+		Xét biến cố $A\overline{B}$ (phần thuộc $A$ nhưng không thuộc $B$):
+		$$P(A\overline{B}) = P(A) \cdot P(\overline{B}|A) = P(A) \cdot [1 - P(B|A)].$$
+		Do $P(A) > 0$ nên:
+		$$P(B|A) = \dfrac{P(AB)}{P(A)} = \dfrac{0,12}{0,55} = \dfrac{12}{55}.$$
+		Vậy:
+		$$P(A\overline{B}) = 0,55 \cdot \left( 1 - \dfrac{12}{55} \right) = 0,43.$$
+	}
+\end{vd}
+\dongcham{7}
+\begin{vd}%[KNTT]%[BG12-4in1, Võ Thành Huấn]%[2D5H2-4]
+	Trong một hộp kín có 7 chiếc bút bi xanh và 5 chiếc bút bi đen, các chiếc bút có cùng kích thước và khối lượng. Bạn Sơn lấy ngẫu nhiên một chiếc bút bi từ trong hộp, không trả lại. Sau đó bạn Tùng lấy ngẫu nhiên một trong 11 chiếc bút còn lại. Tính xác suất để Sơn lấy được bút bi đen và Tùng lấy được bút bi xanh.
+	\loigiai{
+		Gọi $A$ là biến cố: ``Bạn Sơn lấy được bút bi đen'';\\
+		$B$ là biến cố: ``Bạn Tùng lấy được bút bi xanh''.\\
+		Ta cần tính $\mathrm{P}(AB)$.\\
+		Vì $n(A)=5$ nên $\mathrm{P}(A)=\dfrac{5}{12}$.\\
+		Nếu $A$ xảy ra tức là bạn Sơn lấy được bút bi đen thì trong hộp có 11 bút bi với 7 bút bi xanh.\\
+		Vậy $\mathrm{P}(B\mid A)=\dfrac{7}{11}$.\\
+		Theo công thức nhân xác suất: $\mathrm{P}(AB)=\mathrm{P}(A)\cdot \mathrm{P}(B\mid A)=\dfrac{5}{12}\cdot\dfrac{7}{11}=\dfrac{35}{132}$.\\}
+\end{vd}
+\dongcham{4}
+\begin{vd}
+	Một cuộc thi có $3$ vòng. Vòng $1$ lấy $80\%$ số thí sinh, vòng $2$ lấy $70\%$ số thí sinh của vòng $1$ và vòng $3$ lấy $50\%$ số thí sinh của vòng $2$. Biết khả năng của các thí sinh là như nhau.
+	\begin{enumerate}[a)]
+		\item Tính xác suất để thí sinh đó lọt qua cả $3$ vòng.
+		\item Tính xác suất để thí sinh đó bị loại ở vòng thứ $2$, biết rằng thí sinh đó bị loại.
+	\end{enumerate}
+	\loigiai{
+		a) Gọi $A_1$ là biến cố: ``thí sinh vượt qua vòng $1$''; $A_2$ là biến cố: ``thí sinh vượt qua vòng $2$''; và $A_3$ là biến cố: ``thí sinh vượt qua vòng $3$''. \\
+		Thí sinh vượt qua cả $3$ vòng là $A_1A_2A_3$. \\
+		Ta có: $P(A_1A_2A_3) = P(A_1)P(A_2|A_1)P(A_3|A_1A_2) = 0,8 \cdot 0,7 \cdot 0,5 = 0,28$ (do tính độc lập của các biến cố). \\
+		
+		b) Gọi $B$ là biến cố: ``thí sinh bị loại''. Theo câu a, ta có $P(B) = 1 - 0,28 = 0,72$. \\
+		Gọi $A$ là biến cố: ``Thí sinh bị loại ở vòng $2$'', khi đó $A|B$ là biến cố: ``Thí sinh bị loại ở vòng $2$, với điều kiện thí sinh bị loại''. \\
+		Ta có:
+		$$P(A|B) = \dfrac{P(AB)}{P(B)}.$$
+		Xét $P(AB) = P(A_1\overline{A}_2) = P(A_1).P(\overline{A}_2|A_1) = 0,8 \cdot 0,3 = 0,24$. \\
+		Do đó:
+		$$P(A|B) = \dfrac{0,24}{0,72} = \dfrac{1}{3}.$$
+	}
+\end{vd}
+\dongcham{7}
+\begin{vd}
+	Gieo ba con xúc xắc cân đối một cách độc lập. Tính xác suất để tổng số chấm xuất hiện là $8$, biết rằng có ít nhất một con ra $1$ chấm.
+	\loigiai{
+		Gọi $A$ là biến cố: ``Tổng số chấm xuất hiện là $8$'';\\
+		$B$ là biến cố: ``Ít nhất có $1$ con ra $1$ chấm''.\\
+		Xác suất cần tìm là $P(A|B)$, theo công thức xác suất có điều kiện, ta có
+		$$P(A|B) = \dfrac{P(AB)}{P(B)} \quad (i).$$
+		Dễ thấy xét $\overline{B}$ là biến cố: ``Không xuất hiện mặt $1$ chấm''.
+		$$P(\overline{B}) = \left(\dfrac{5}{6}\right)^3 = \dfrac{125}{216} \Rightarrow P(B) = 1 - P(\overline{B}) = 1 - \dfrac{125}{216} = \dfrac{91}{216} \quad (ii).$$
+		Ta tính $P(AB)$: Số phần tử của không gian mẫu: $|\Omega| = 6^3 = 216$.\\
+		Biến cố $AB$ là biến cố: ``tổng các mặt là $8$ và có ít nhất một mặt là $1$ chấm'', bao gồm các khả năng: $(1; 1; 6), (1; 2; 5), (1; 3; 4)$ và các hoán vị có thể có của chúng, vì thế:
+		$$|AB| = 3 + 6 + 6 = 15.$$
+		Do đó:
+		$$P(AB) = \dfrac{|AB|}{|\Omega|} = \dfrac{15}{216} = \dfrac{5}{72} \quad (iii).$$
+		Thay $(iii), (ii)$ và $(i)$, ta có:
+		$$P(A|B) = \dfrac{15}{91}.$$
+		\begin{center}
+			\textbf{* CHÚ Ý}
+		\end{center}
+		Xác suất của bài toán, mới nghe có thể giống với xác suất để ``tổng số chấm xuất hiện là $8$ và có ít nhất một con ra $1$ chấm'', nhưng thực ra hai xác suất này khác nhau.
+		\begin{itemize}
+			\item Xác suất để tổng số chấm xuất hiện là $8$, biết có ít nhất $1$ con ra $1$ chấm bằng $\dfrac{15}{91}$.
+			\item Xác suất để tổng số chấm xuất hiện là $8$, và có ít nhất $1$ con ra $1$ chấm bằng $\dfrac{5}{72}$.
+		\end{itemize}
+	}
+\end{vd}
+\dongcham{13}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2D6-B1-d2-1]
+
+\begin{ex}
+	Cho hai biến cố ${F}$ và ${E}$ có $P(F)=0,41$ và $P(FE)= 0,25$. Tính $P(E|F)$ (kết quả làm tròn đến hàng phần trăm). 
+	\choice
+	{ ${0,70}$ }
+	{ ${0,01}$ }
+	{ \True ${0,61}$ }
+	{ ${0,35}$ }
+	\loigiai{ 
+		$P(E|F)=\dfrac{P(EF)}{P(F)}=\dfrac{0,25}{0,41}=0,61$.
+		
+		
+}\end{ex}
+\cham{2}
+\begin{ex}
+	Cho hai biến cố ${A}$ và ${E}$ có $P(A)=0,66$ và $P(E|A)=0,35$. Tính $P(AE)$ (kết quả làm tròn đến hàng phần trăm). 
+	\choice
+	{ ${0,98}$ }
+	{ ${0,61}$ }
+	{ \True ${0,23}$ }
+	{ ${0,76}$ }
+	\loigiai{ 
+		$P(E|A)=\dfrac{P(EA)}{P(A)}\Rightarrow P(AE)=P(A).P(E|A)=0,66.0,35=0,23$.
+		
+		
+}\end{ex}
+\cham{2}
+\begin{ex}
+	Cho hai biến cố ${C}$ và ${F}$ có $P(C)=0,40$ và $P(CF)=0,13$. Tính $P(\overline{F}|C)$ (kết quả làm tròn đến hàng phần trăm). 
+	\choice
+	{ ${0,11}$ }
+	{ ${0,90}$ }
+	{ ${0,06}$ }
+	{ \True ${0,68}$ }
+	\loigiai{ 
+		$P(\overline{F}|C)=1-P(F|C)=1-\dfrac{P(FC)}{P(C)}=1-\dfrac{0,13}{0,40}=0,68$.
+		
+		
+}\end{ex}
+\cham{3}
+\begin{ex}
+	Cho hai biến cố $A$ và $B$ là hai biến cố độc lập, với $P(A)=0,2024, P(B)=0,2025$. Tính $P(A \mid B)$.
+	\choice
+	{ $ 0,7976$}
+	{$0,7975$}
+	{$0,2025$}
+	{\True $0,2024$}
+	\loigiai{
+		$A$ và $B$ là hai biến cố độc lập nên: $P(A \mid B)=P(A)=0,2024$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai biến cố $A$ và $B$ là hai biến cố độc lập, với $P(A)=0,2024, P(B)=0,2025$. Tính $P(B \mid \overline{A})$.
+	\choice
+	{$0,7976$}
+	{$0,7975$}
+	{\True $0,2025$}
+	{$0,2024$}
+	\loigiai{
+		$\overline{A}$ và $B$ là hai biến cố độc lập nên: $P(B \mid \overline{A})=P(B)=0,2025$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai biến cố $A$ và $B$, với $P(A)=0,6, P(B)=0,7, P(A \cap B)=0,3$. Tính $P(A \mid B)$.
+	\choice
+	{\True $\dfrac{3}{7}$}
+	{$\dfrac{1}{2}$}
+	{$\dfrac{6}{7}$}
+	{$\dfrac{1}{7}$}
+	\loigiai{
+		Ta có: $P(A \mid B)=\dfrac{P(A \cap B)}{P(B)}=\dfrac{0,3}{0,7}=\dfrac{3}{7}$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai biến cố $A$ và $B$, với $P(A)=0,6, P(B)=0,7, P(A \cap B)=0,3$. Tính $P(\overline{B} \mid A)$.
+	\choice
+	{$\dfrac{3}{7}$}
+	{\True $\dfrac{1}{2}$}
+	{$\dfrac{6}{7}$}
+	{$\dfrac{1}{7}$}
+	\loigiai{
+		Ta có: $P(\overline{B} \mid A)=1-P(B \mid A)=1-\dfrac{P(A \cap B)}{P(A)}=1-\dfrac{0,3}{0,6}=1-\dfrac{1}{2}=\dfrac{1}{2}$
+	}
+\end{ex} \cham{4}
+
+
+\begin{ex}
+	Cho hai biến cố ${A}$ và ${B}$ có $P(B)=0,60, P(A|B)= 0,38$. Tính $P(\overline{A}B)$ (kết quả làm tròn đến hàng phần trăm). 
+	\choice
+	{ ${0,05}$ }
+	{ \True ${0,37}$ }
+	{ ${0,57}$ }
+	{ ${0,74}$ }
+	\loigiai{ 
+		Theo công thức nhân xác suất, ta có $P(AB) = P(B)P(A|B) = 0,60.0,38=0,23$.
+		
+		Vì $\overline{A}B$ và ${AB}$ là hai biên cố xung khắc và $\overline{A}B \cup AB=B$ nên:
+		
+		$P(\overline{A}B)=P(B)-P(AB)=0,37$. 
+}\end{ex}
+ \cham{4}
+\begin{ex}%[Mức độ 1]
+	Gieo một con xúc xắc cân đối và đồng chất một lần. Biết rằng mặt xuất hiện có số chấm là số lẻ, tính xác suất để mặt xuất hiện có số chấm là số nguyên tố.
+	\choice
+	{\True $\dfrac{2}{3}$}
+	{$\dfrac{1}{2}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{1}{6}$}
+	\loigiai{
+		Gọi $A$ là biến cố: ``Mặt xuất hiện có số chấm là số lẻ'', ta có không gian mẫu thu hẹp $\Omega_A = \{1; 3; 5\}$. Suy ra $n(A) = 3$.
+		Gọi $B$ là biến cố: ``Mặt xuất hiện có số chấm là số nguyên tố''.
+		Khi đó $A \cap B$ là biến cố: ``Mặt xuất hiện có số chấm là số lẻ và là số nguyên tố'', ta có $A \cap B = \{3; 5\}$ nên $n(A \cap B) = 2$.
+		Xác suất cần tìm là xác suất có điều kiện: $P(B|A) = \dfrac{n(A \cap B)}{n(A)} = \dfrac{2}{3}$.
+	}
+\end{ex}
+ \cham{4}
+\begin{ex}%[Mức độ 2]
+	Từ một bộ bài tú lơ khơ $52$ lá, rút ngẫu nhiên $1$ lá. Biết rằng lá bài rút được là lá màu đỏ, tính xác suất để đó là lá Át.
+	\choice
+	{\True $\dfrac{1}{13}$}
+	{$\dfrac{1}{26}$}
+	{$\dfrac{4}{52}$}
+	{$\dfrac{2}{52}$}
+	\loigiai{
+		Gọi $D$ là biến cố ``Rút được lá bài màu đỏ''. Bộ bài có $26$ lá màu đỏ nên $n(D) = 26$.
+		Gọi $A$ là biến cố ``Rút được lá Át''.
+		Biến cố $A \cap D$ là ``Rút được lá Át màu đỏ''. Trong bộ bài có $2$ lá Át đỏ (Át cơ và Át rô) nên $n(A \cap D) = 2$.
+		Xác suất cần tìm là: $P(A|D) = \dfrac{n(A \cap D)}{n(D)} = \dfrac{2}{26} = \dfrac{1}{13}$.
+	}
+\end{ex}
+ \cham{4}
+\begin{ex}
+	Trong hộp có 3 viên bi màu trắng và 7 viên bi màu đỏ. Lấy lần lượt mỗi lần một viên theo cách lấy không trả lại. Xác suất để viên bi lấy lần thứ hai là màu đỏ nếu biết rằng viên bi lấy lần thứ nhất cũng là màu đỏ là
+	\choice
+	{\True $\dfrac{2}{3}$}
+	{$\dfrac{2}{7}$}
+	{$\dfrac{1}{5}$}
+	{$\dfrac{1}{7}$}
+	\loigiai{
+		Gọi $A$ là biến cố "viên bi lấy lần thứ nhất là màu đỏ".\\
+		Gọi $B$ là biến cố "viên bi lấy lần thứ hai là màu đỏ".\\
+		Ta đi tính $P(B \mid A)$ với $P(B \mid A)=\dfrac{P(A \cap B)}{P(A)}$\\
+		Không gian mẫu $n(\Omega)=10.9$ cách chọn\\
+		Lần thứ nhất lấy 1 viên bi màu đỏ có 7 cách chọn, lần thứ hai lấy 1 viên bi trong 9 viên còn lại có cách 9 chọn, do đó $P(A)=\dfrac{7.9}{10.9}=\dfrac{7}{10}$\\
+		Lần thứ nhất lấy 1 viên bi màu đỏ có 7 cách chọn, lần thứ hai lấy 1 viên bi màu đỏ trong 6 viên bi còn lại có 6 cách chọn, do đó $P(A \cap B)=\dfrac{7.6}{10.9}=\dfrac{7}{15}$\\
+		Vậy xác suất để viên bi lấy lần thứ hai là màu đỏ nếu biết rằng viên bi lấy lần thứ nhất cũng là màu đỏ là 
+		$$P(B \mid A)=\dfrac{P(A \cap B)}{P(A)}=\dfrac{\dfrac{7}{15}}{\dfrac{7}{10}}=\dfrac{2}{3}$$
+		Cách khác: Sau khi biết viên bi lấy lần thứ nhất là màu đỏ.\\
+		Khi đó trong hộp còn lại 9 viên: gồm 3 viên bi màu trắng và 6 viên bi màu đỏ. Vậy xác suất để viên bi lấy lần thứ hai là màu đỏ nếu biết rằng viên bi lấy lần thứ nhất cũng màu đỏ là $P(B \mid A)=\dfrac{6}{9}=\dfrac{2}{3}$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%Câu 7%[2D6N1-2]
+	Một hộp chứa $5$ viên bi đỏ được ghi số từ $1$ đến $5$; $6$ viên bi xanh được ghi số từ $1$ đến $6$. Các viên bi có cùng kích thước và khối lượng. Bạn Thái chọn ra ngẫu nhiên $1$ viên bi từ hộp. Tính xác suất để viên bi được chọn ghi số $1$, biết rằng nó có màu xanh. Làm tròn kết quả đến hàng phần trăm.
+	\choice
+	{$0,21$}
+	{\True $0,17$}
+	{$0,50$}
+	{$0,32$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Viên bi được chọn ghi số $1$\rq\rq, $B$ là biến cố \lq\lq Viên bi được chọn có màu xanh\rq\rq.\\
+		Do có $6$ viên bi màu xanh trong tổng số $11$ viên bi nên $\mathrm{P}(B)=\dfrac{6}{11}$.\\ Vậy xác suất để viên bi được chọn ghi số $1$, biết rằng nó có màu xanh là \[\mathrm{P}(A|B)=\dfrac{P(A B)}{\mathrm{P}(B)}=\dfrac{\dfrac{1}{11}}{\dfrac{6}{11}}=\dfrac{1}{6}\approx 0{,}17.\]
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%Câu 7%[2D6N1-2]
+	Một hộp chứa $5$ viên bi đỏ được ghi số từ $1$ đến $5$; $6$ viên bi xanh được ghi số từ $1$ đến $6$. Các viên bi có cùng kích thước và khối lượng. Bạn Thái chọn ra ngẫu nhiên $1$ viên bi từ hộp. Tính xác suất để viên bi được chọn có màu xanh, biết rằng nó được ghi số chẵn.
+	\choice
+	{$0,2$}
+	{\True $0,6$}
+	{$0,5$}
+	{$0,7$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Viên bi được chọn ghi số $1$\rq\rq, $B$ là biến cố \lq\lq Viên bi được chọn có màu xanh\rq\rq. \\
+		Gọi $C$ là biến cố \lq\lq Viên bi được chọn ghi số chẵn\rq\rq. \\
+		Do có $5$ viên bi được ghi số chẵn trong tổng số $11$ viên bi nên $\mathrm{P}(C)=\dfrac{5}{11}$.\\
+		Do có $3$ viên bi màu xanh được ghi số chẵn trong tổng số 11 viên bi nên $\mathrm{P}(B C)=\dfrac{3}{11}$.\\
+		Vậy xác suất để viên bi được chọn có màu xanh, biết rằng nó được ghi số chẵn là \[\mathrm{P}(B | C)=\dfrac{\mathrm{P}(B C)}{\mathrm{P}(C)}=\dfrac{\dfrac{3}{11}}{\dfrac{5}{11}}=\dfrac{3}{5}=0{,}6.\]
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%[Mức độ 2]%[BG-12-New-4in1, Quyết Nguyễn]%[2D5H2-2]
+	Hộp thứ nhất chứa $2$ viên bi xanh và $1$ viên bi đỏ. Hộp thứ hai chứa $2$ viên bi xanh và $3$ viên bi đỏ. Các viên bi có cùng kích thước và khối lượng. Bạn Thanh lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ nhất bỏ vào hộp thứ hai, sau đó lại lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ hai. Tính xác suất để viên bi lấy ra ở lần thứ hai là viên bi đỏ, biết viên bi lấy ra ở lần thứ nhất là viên bi xanh.
+	\choice
+	{\True $\dfrac{1}{2}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{4}{9}$}
+	{$\dfrac{3}{4}$}
+	\loigiai{
+		Gọi $A$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ hai là viên bi đỏ\rq\rq; $B$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ nhất là viên bi xanh\rq\rq.\\
+		Biến cố $B$ xảy ra, nghĩa là lần thứ nhất lấy $1$ viên bi xanh và bỏ vào hộp thứ hai. Khi đó trong hộp thứ hai sẽ có $3$ viên bi xanh và $3$ viên bi đỏ.\\
+		Vậy $\mathrm{P}(A\mid B)=\dfrac{3}{6}=\dfrac{1}{2}$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex}%[Mức độ 2]%[BG-12-New-4in1, Quyết Nguyễn]%[2D5H2-2]
+	Hộp thứ nhất chứa $6$ viên bi đánh số từ $1$ đến $6$. Hộp thứ hai chứa $5$ viên bi đánh số từ $7$ đến $11$. Các viên bi có cùng kích thước và khối lượng. Bạn Phong lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ nhất bỏ vào hộp thứ hai, sau đó lại lấy ra ngẫu nhiên $1$ viên bi từ hộp thứ hai. Tính xác suất để viên bi lấy ra ở lần thứ hai là viên bi đánh số lẻ, biết viên bi lấy ra ở lần thứ nhất là viên bi đánh số chẵn.
+	\choice
+	{\True $\dfrac{1}{2}$}
+	{$\dfrac{1}{4}$}
+	{$\dfrac{1}{3}$}
+	{$\dfrac{1}{5}$}
+	\loigiai{
+		Gọi $A$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ hai đánh số lẻ\rq\rq; $B$ là biến cố: \lq\lq viên bi lấy ra ở lần thứ nhất đánh số chẵn\rq\rq.\\
+		Biến cố $B$ xảy ra, nghĩa là lần thứ nhất lấy $1$ viên bi đánh số chẵn và bỏ vào hộp thứ hai. Khi đó trong hộp thứ hai sẽ có $3$ viên bi đánh số chẵn và $3$ viên bi đánh số lẻ.\\
+		Vậy $\mathrm{P}(A\mid B)=\dfrac{3}{6}=\dfrac{1}{2}$.
+	}
+\end{ex} \cham{4}
+
+
+\begin{ex}
+	Trong hộp có 20 nắp khoen bia Tiger, trong đó có 2 nắp ghi "Chúc mừng bạn đã trúng thưởng xe Camry". Bạn Minh Hiền được chọn lên rút thăm lần lượt hai nắp khoen, xác suất để cả hai nắp đều trúng thưởng là
+	\choice
+	{$\dfrac{1}{20}$}
+	{$\dfrac{1}{19}$}
+	{$\dfrac{1}{190}$}
+	{$\dfrac{1}{10}$}
+	\loigiai{
+		Gọi A là biến cố "nắp khoen đầu trúng thưởng".\\
+		Gọi B là biến cố "nắp khoen thứ hai trúng thưởng".\\
+		Ta đi tính $P(A \cap B)$\\
+		Khi bạn rút thăm lần đầu thì trong hộp có 20 nắp trong đó có 2 nắp trúng do đó $P(A)=\dfrac{2}{20}=\dfrac{1}{10}$\\
+		Khi biến cố A đã xảy ra thù còn lại 19 nắp trong đó có 1 nắp trúng thưởng, do đó: $P(B \mid A)=\dfrac{1}{19}$\\
+		Ta có $P(B \mid A)=\dfrac{P(A \cap B)}{P(A)}$. Suy ra
+		$$\Rightarrow P(A \cap B)=P(B \mid A) \cdot P(A)=\dfrac{1}{19} \cdot \dfrac{1}{10}=\dfrac{1}{190}$$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Áo sơ mi An Phước trước khi xuất khẩu sang Mỹ phải qua 2 lần kiểm tra, nếu cả hai lần đều đạt thì chiếc áo đó mới đủ tiêu chuẩn xuất khẩu. Biết rằng bình quân $98 \%$ sản phẩm làm ra qua được lần kiểm tra thứ nhất, và $95 \%$ sản phẩm qua được lần kiểm tra đầu sẽ tiếp tục qua được lần kiểm tra thứ hai. Tìm xác suất để 1 chiếc áo sơ mi đủ tiêu chuẩn xuất khẩu.
+	\choice
+	{$\dfrac{95}{98}$}
+	{\True $\dfrac{931}{1000}$}
+	{$\dfrac{95}{100}$}
+	{$\dfrac{98}{100}$}
+	\loigiai{
+		Gọi A là biến cố" qua được lần kiểm tra đầu tiên" $\Rightarrow P(A)=0,98$\\
+		Gọi B là biên cố "qua được lần kiểm tra thứ 2 " $\Rightarrow P(B \mid A)=0,95$\\
+		chiếc áo sơ mi đủ tiêu chuẩn xuất khẩu phải thỏa mãn 2 điều kiện trên hay ta đi tính $P(A \cap B)$\\
+		ta có $P(B \mid A)=\dfrac{P(A \cap B)}{P(A)} \Rightarrow P(A \cap B)=P(B \mid A) \cdot P(A)=0,95 \cdot 0,98=\dfrac{931}{1000}$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Trong một kỳ thi, có $60 \%$ học sinh đã làm đúng bài toán đầu tiên và $40 \%$ học sinh đã làm đúng bài toán thứ hai. Biết rằng có $20 \%$ học sinh làm đúng cả hai bài toán. Xác suất để một học sinh làm đúng bài toán thứ hai biết rằng học sinh đó đã làm đúng bài toán đầu tiên là bao nhiêu (làm tròn đến hàng phần trăm)?
+	\choice
+	{$0,53$}
+	{$0,33$}
+	{$0,26$}
+	{$0,67$}
+	\loigiai{
+		$A$ : "Học sinh đã làm đúng bài toán đầu tiên", thì $P(A)=60 \%=0,6$.
+		$B$ : "Học sinh đã làm đúng bài toán thứ hai", thì $P(B)=40 \%=0,4$.
+		$A \cap B$ : "học sinh làm đúng cả hai bài toán", thì $P(A \cap B)=20 \%=0,2$.
+		Xác suất để một học sinh làm đúng bài toán thứ hai biết rằng học sinh đó đã làm đúng bài toán đầu tiên là $P(B \mid A)=\dfrac{P(A \cap B)}{P(A)}=\dfrac{0,2}{0,6}=\dfrac{1}{3} \approx 0.33$.}
+\end{ex} \cham{3}
+
+
+\begin{ex}
+	Câu lạc bộ thể thao của nhà trường gồm ${26}$ thành viên, mỗi thành viên biết chơi ít nhất một trong hai môn bóng chuyền hoặc cờ vua. Biết rằng có ${15}$ thành viên biết chơi bóng chuyền và ${16}$ thành viên biết chơi cờ vua. Chọn ngẫu nhiên 1 thành viên của câu lạc bộ. Tính xác suất thành viên được chọn biết chơi bóng chuyền, biết rằng thành viên đó biết chơi cờ vua. 
+	\choice
+	{ $\dfrac{8}{13}$ }
+	{ $\dfrac{1}{3}$ }
+	{ $\dfrac{15}{26}$ }
+	{ \True $\dfrac{5}{16}$ }
+	\loigiai{ 
+		Gọi A là biến cố "Thành viên được chọn biết chơi cờ vua" và B là biến cố "Thành viên được chọn biết chơi bóng chuyền".
+		
+		Số thành viên của câu lạc bộ biết chơi cả hai môn là: $15+16-26=5.$
+		
+		Do đó, trong số ${16}$ thành viên biết chơi cờ vua, có đúng ${5}$ thành viên biết chơi bóng chuyền.
+		
+		Vậy nên xác suất thành viên được chọn biết chơi bóng chuyền, biết rằng thành viên đó biết chơi cờ vua là:
+		
+		$P(B|A)=\dfrac{5}{16}$.
+		
+		$P(B|A)=\dfrac{5}{16}$. 
+}\end{ex}
+ \cham{4}
+\begin{ex}
+	Một công ty bán thực phẩm hữu cơ cao cấp nhận thấy có $59\%$ số người mua hàng là nữ giới và có $46\%$ số người mua hàng là nữ giới trên 44 tuổi. Biết một người mua thực phẩm hữu cơ cao cấp là nữ giới, tính xác suất để người đó trên 44 tuổi. 
+	\choice
+	{ $\dfrac{41}{100}$ }
+	{ $\dfrac{27}{50}$ }
+	{ $\dfrac{46}{61}$ }
+	{ \True  $\dfrac{46}{59}$ }
+	\loigiai{ 
+		Gọi A là biến cố "Người mua thực phẩm hữu cơ cao cấp là nữ giới, B là biến cố "Người mua thực phẩm hữu cơ cao cấp trên 44 tuổi.Ta cần tính $P(B|A)$.
+		
+		Do có $59\%$ người mua thực phẩm hữu cơ cao cấp là nữ giới nên P(A) = 0,59.
+		
+		Do có $46\%$ số người mua thực phẩm hữu cơ cao cấp là nữ giới trên 44 tuổi nên $P(AB) = 0,46$.
+		
+		Vậy $P(A|B)=\dfrac{P(AB)}{P(A)}=\dfrac{0,46}{0,59}=\dfrac{46}{59}$ 
+}\end{ex}
+ \cham{4}
+\begin{ex}%[CTST, Mức độ 2]%[BG-12-New-4in1, Quyết Nguyễn]%[2D5H2-2]
+	Câu lạc bộ cờ của nhà trường gồm $35$ thành viên, mỗi thành viên biết chơi ít nhất một trong hai môn cờ vua hoặc cờ tướng. Biết rằng có $25$ thành viên biết chơi cờ vua và $20$ thành viên biết chơi cờ tướng. Chọn ngẫu nhiên $1$ thành viên của câu lạc bộ. Tính xác suất thành viên được chọn biết chơi cờ vua, biết rằng thành viên đó biết chơi cờ tướng.
+	\choice
+	{$0{,}3$}
+	{$0{,}4$}
+	{\True $0{,}5$}
+	{$0{,}6$}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Thành viên được chọn biết chơi cờ tướng\rq\rq \,và $B$ là biến cố \lq\lq Thành viên được chọn biết chơi cờ vua\rq\rq.\\
+		Số thành viên của câu lạc bộ biết chơi cả hai môn cờ là $20+25-35=10$.\\
+		Do đó, trong số $20$ thành viên biết chơi cờ tướng, có đúng $10$ thành viên biết chơi cờ vua.\\ 
+		Vậy nên xác suất thành viên được chọn biết chơi cờ vua, biết rằng thành viên đó biết chơi cờ tướng là $\mathrm{P}(B \mid A)=\dfrac{10}{20}=0{.}5$.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}%[Mức độ 3]%[BG-12-New-4in1, Quyết Nguyễn]%[2D5H3-2]
+	Một lớp học có $40$ học sinh, trong đó có $25$ bạn học sinh đạt điểm giỏi môn Toán, $14$ bạn học sinh đạt điểm giỏi môn Lý và $4$ bạn học sinh không đạt điểm giỏi cả hai môn. Chọn ngẫu nhiên một học sinh của lớp học này. Xác suất để học sinh được chọn giỏi môn Toán, biết rằng học sinh đó giỏi môn Lý là
+	\choice
+	{$\dfrac{7}{20}$}
+	{\True $\dfrac{1}{7}$}
+	{$\dfrac{14}{37}$}
+	{$\dfrac{1}{10}$}
+	\loigiai{
+		Gọi $A$ là biến cố: \lq\lq học sinh được chọn giỏi môn Toán\rq\rq; $B$ là biến cố: \lq\lq học sinh được chọn giỏi môn Lý\rq\rq.\\
+		Số học sinh trong lớp giỏi ít nhất một trong hai môn Toán hoặc Lý là $40-3=37$.\\
+		Số học sinh trong lớp giỏi cả hai môn Toán và Lý là $25+14-37=2$.\\
+		Biến cố $B$ xảy ra, nghĩa là học sinh chọn đã giỏi môn Lý, trong $14$ học sinh có thể chọn có $2$ kết quả thuận lợi để chọn được học sinh giỏi môn Toán.
+		Vậy $\mathrm{P}(A\mid B)=\dfrac{2}{14}=\dfrac{1}{7}$.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}%[2D6V1-4]
+	Một hộp đựng $10$ quả cầu đỏ và $8$ quả cầu xanh cùng kích thước và khối lượng. Hùng lấy một quả không hoàn lại. Sau đó Lâm lấy ngẫu nhiên một quả cầu. Gọi $A$ là biến cố “Hùng lấy được quả cầu đỏ”, $B$ là biến cố “Lâm lấy được một quả cầu đỏ”. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True $\mathrm{P}\left(A\right)$ bằng $\dfrac{5}{9}$}
+	{\True $\mathrm{P}\left(B\mid A\right)$ bằng $\dfrac{9}{17}$}
+	{$\mathrm{P}\left(AB\right)$ bằng $\dfrac{4}{17}$}
+	{\True $\mathrm{P}\left(B\mid\overline{A}\right)$ bằng $\dfrac{10}{17}$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch Đúng.\\
+			$n\left(\Omega\right)=18$.\\
+			Số cách Hùng chọn được một quả cầu đỏ là $n\left(A\right)=\mathrm{C}_{10}^{1}=10$.\\
+			Xác suất Hùng chọn được một quả cầu đỏ là $\mathrm{P}\left(A\right)=\dfrac{n\left(A\right)}{n\left(\Omega\right)}=\dfrac{10}{18}=\dfrac{5}{9}$.
+			\itemch Đúng.\\
+			Sau khi Hùng lấy một quả cầu đỏ trong hộp còn lại $17$ quả cầu trong đó có $9$ quả cầu đỏ.\\ Do đó, xác suất Lâm lấy được quả cầu đỏ trong $17$ quả cầu còn lại là xác suất cần tìm.\\
+			Vậy $\mathrm{P}\left(B\mid A\right)=\dfrac{\mathrm{C}_{9}^{1}}{\mathrm{C}_{17}^{1}}=\dfrac{9}{17}$.
+			\itemch Sai.\\
+			Ta có $\mathrm{P}\left(B\mid A\right)=\dfrac{\mathrm{P}\left(AB\right)}{\mathrm{P}\left(A\right)}\Rightarrow \mathrm{P}\left(AB\right)=\mathrm{P}\left(A\right)\cdot \mathrm{P}\left(B\mid A\right)\Rightarrow \mathrm{P}\left(AB\right)=\dfrac{5}{9}\cdot\dfrac{9}{17}=\dfrac{5}{17}$.
+			\itemch Đúng.\\
+			$\overline{A}$ là biến cố “Hùng lấy một quả màu xanh”.\\
+			Sau khi Hùng lấy một quả cầu xanh trong hộp còn lại $17$ quả cầu trong đó có $10$ quả cầu đỏ.\\
+			Do đó, xác suất Lâm lấy được quả cầu đỏ trong $17$ quả cầu còn lại là xác suất cần tìm.\\
+			Vậy $\mathrm{P}\left( B\mid\overline{A}\right)=\dfrac{\mathrm{C}_{10}^{1}}{\mathrm{C}_{17}^{1}}=\dfrac{10}{17}$.
+		\end{itemchoice}
+	}
+\end{ex}
+ \cham{11}
+\begin{ex}%[2D6V1-4]
+	Lớp $12$A có $30$ học sinh, trong đó có $17$ bạn nữ, còn lại là nam. Có $3$ bạn tên Hiền, trong đó có $1$ bạn nữ và $2$ bạn nam. Thầy giáo gọi ngẫu nhiên $1$ bạn lên bảng. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Xác suất để bạn lên bảng có tên Hiền là $\dfrac{1}{10}$}
+	{Xác suất để bạn lên bảng có tên Hiền, nhưng với điều kiện bạn đó nữ là $\dfrac{3}{17}$}
+	{\True Xác suất để bạn lên bảng có tên Hiền, nhưng với điều kiện bạn đó nam là $\dfrac{2}{13}$}
+	{Nếu thầy giáo gọi $1$ bạn có tên là Hiền lên bảng thì xác xuất để bạn đó là bạn nữ là $\dfrac{3}{17}$}
+	\loigiai{\begin{itemchoice}
+			\itemch \textbf{Đúng}.\\
+			Xác suất để bạn lên bảng có tên Hiền là $\dfrac{3}{30}=\dfrac{1}{10}$.
+			\itemch \textbf{Sai}.\\
+			Xác suất để bạn lên bảng có tên Hiền, nhưng với điều kiện bạn đó nữ là $\dfrac{1}{17}$.
+			\itemch \textbf{Đúng}.\\
+			Xác suất để bạn lên bảng có tên Hiền, nhưng với điều kiện bạn đó nam là $\dfrac{2}{13}$.
+			\itemch \textbf{Sai}.\\
+			Nếu thầy giáo gọi 1 bạn có tên là Hiền lên bảng thì xác xuất để bạn đó là bạn nữ là $\dfrac{1}{3}$.
+	\end{itemchoice}}
+\end{ex}
+ \cham{10}
+\begin{ex}
+	Ông An hằng ngày đi làm bằng xe máy hoặc xe buýt. Nếu hôm nay ông đi làm bằng xe buýt thì xác suất để hôm sau ông đi làm bằng xe máy là $0,4$. Nếu hôm nay ông đi làm bằng xe máy thì xác suất để hôm sau ông đi làm bằng xe buýt là $0,7$. Xét một tuần mà thứ Hai ông An đi làm bằng xe buýt. Gọi $A$ là biến cố: ``Thứ Ba, ông An đi làm bằng xe máy'' và $B$ là biến cố: ``Thứ Tư, ông An đi làm bằng xe máy''. Xét tính đúng sai của các khẳng định sau:
+	\choiceTF
+	{\True Xác suất để thứ Ba, ông An đi làm bằng xe buýt là $0,6$}
+	{\True Xác suất để thứ Tư, ông An đi làm bằng xe máy nếu thứ Ba, ông An đi làm bằng xe máy là $0,3$}
+	{\True Xác suất để thứ Tư, ông An đi làm bằng xe máy nếu thứ Ba, ông An đi làm bằng xe buýt là $0,4$}
+	{\True Xác suất để thứ Tư trong tuần đó, ông An đi làm bằng xe máy nếu thứ Hai ông An đi làm bằng xe buýt là $0,36$}
+	\loigiai{
+		Dựa vào giả thiết bài toán, ta có các xác suất chuyển trạng thái như sau:
+		\begin{itemize}
+			\item Nếu hôm nay đi xe buýt ($B_n$): $P(M_{n+1}|B_n) = 0,4 \Rightarrow P(B_{n+1}|B_n) = 1 - 0,4 = 0,6$.
+			\item Nếu hôm nay đi xe máy ($M_n$): $P(B_{n+1}|M_n) = 0,7 \Rightarrow P(M_{n+1}|M_n) = 1 - 0,7 = 0,3$.
+		\end{itemize}
+		Theo giả thiết, thứ Hai ông An đi xe buýt ($B_2$):
+		\begin{enumerate}
+			\item Xác suất thứ Ba đi xe buýt là $P(B_3|B_2) = 0,6$. \textbf{Đúng}.
+			\item Xác suất thứ Tư đi xe máy nếu thứ Ba đi xe máy là $P(M_4|M_3) = 0,3$. \textbf{Đúng}.
+			\item Xác suất thứ Tư đi xe máy nếu thứ Ba đi xe buýt là $P(M_4|B_3) = 0,4$.  \textbf{Đúng}.
+			\item Xác suất thứ Tư đi xe máy: 
+			$P(M_4) = P(M_4|M_3)P(M_3|B_2) + P(M_4|B_3)P(B_3|B_2) = 0,3 \cdot 0,4 + 0,4 \cdot 0,6 = 0,12 + 0,24 = 0,36$. \textbf{Đúng}.
+		\end{enumerate}
+	}
+\end{ex}
+ \cham{10}
+\Closesolutionfile{ans}
+
+
+\begin{dang}{Sơ đồ hình cây}
+	Trên sơ đồ hình cây:
+	\begin{itemize}
+		\item Xác suất của các nhánh trong sơ đồ hình cây từ đỉnh thứ hai là xác suất có điều kiện.
+		\item Xác suất xảy ra của mỗi kết quả bằng tích các xác suất trên các nhánh của cây đi đến kết quả đó.
+	\end{itemize}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+
+\begin{vd}%[BG12-4in1, Võ Thành Huấn]%[2D5H2-3]
+	\immini{Bạn Việt chuẩn bị đi tham quan một hòn đảo trong hai ngày thứ Bảy và Chủ nhật. Ở hòn đảo đó, mỗi ngày chỉ có nắng hoặc mưa, nếu một ngày là nắng thì khả năng xảy ra mưa ở ngày tiếp theo là $20 \%$, còn nếu một ngày là mưa thì khả năng ngày hôm sau vẫn mưa là $30 \%$. Theo dự báo thời tiết, xác suất trời sẽ nắng vào thứ Bảy là $0{,}7$.
+	Hãy tìm các giá trị thích hợp thay vào \mbox{?} ở sơ đồ hình cây sau:}{
+\begin{tikzpicture}
+	\def\gocm{20}
+	\def\gocn{10}
+	\def\r{4}
+	\tikzset{s/.style={outer sep=0.5 mm,draw=magenta,rectangle,minimum width=2.75cm,rounded corners=1mm}}
+	\path(0,0)node(O){}++(\gocm:\r)node[s](A1){Nắng}++(\gocn:\r)node[s](A2){Nắng};
+	\path(A1)++({-\gocn}:\r)node[s](a2){Mưa};
+	\path(O)++(-\gocm:\r)node[s](B1){Mưa}++(\gocn:\r)node[s](B2){Nắng};
+	\path(B1)++({-\gocn}:\r)node[s](b2){Mưa};
+	\foreach \x/\y in {
+		O/A1,A1/A2,
+		O/B1,B1/B2,
+		A1/a2,
+		B1/b2}
+	\draw[-stealth](\x.east)--(\y.west);
+	\path(O)--(A1.west)node[pos=0.5,above,sloped]{$\mbox{0{,}7}$}(O)--(B1.west)node[pos=0.5,below]{$\mbox{?}$}(B1.east)--(B2.west)node[pos=0.5,above]{$\mbox{?}$}(A1.east)--(A2.west)node[pos=0.5,above]{$\mbox{?}$}
+	(A1.east)--(a2.west)node[pos=0.5,below,sloped]{$\mbox{0{,}2}$}
+	(B1.east)--(b2.west)node[pos=0.5,below,sloped]{$\mbox{0{,}3}$};
+	%%Node dòng trên
+	\path(A2)++(0,1)node{\textbf{Chủ nhật}}++(180:4)node{\textbf{Thứ bảy}};
+\end{tikzpicture}}
+	\loigiai{
+		Gọi $A$ là biến cố \lq\lq Ngày thứ Bảy trời nắng\rq\rq  và $B$ là biến cố \lq\lq Ngày Chủ nhật trời mưa\rq\rq.\\
+		Ta có $\mathrm{P}(A)=0{,}7 ; \mathrm{P}(B \mid A)=0{,}2 ; \mathrm{P}(B \mid \overline{A})=0{,}3$.\\
+		Do đó $\mathrm{P}(\overline{A})=1-\mathrm{P}(A)=0{,}3 ;\, \mathrm{P}(\overline{B} \mid A)=1-\mathrm{P}(B \mid A)=0{,}8 ;\, \mathrm{P}(\overline{B} \mid \overline{A})=1-\mathrm{P}(B \mid \overline{A})=0{,}7$.
+		Áp dụng công thức nhân xác suất, ta có xác suất trời nắng vào thứ Bảy và trời mưa vào Chủ nhật là
+		$$
+		\mathrm{P}(A B)=\mathrm{P}(A) \mathrm{P}(B \mid A)=0{,}7\cdot 0{,}2=0{,}14 .
+		$$
+		Tương tự, ta có
+		\allowdisplaybreaks
+		\begin{eqnarray*}
+			&&\mathrm{P}(A \overline{B})=\mathrm{P}(A) \mathrm{P}(\overline{B} \mid A)=0{,}7\cdot 0{,}8=0{,}56 ; \\
+			&&\mathrm{P}(\overline{A} B)=\mathrm{P}(\overline{A}) \mathrm{P}(B \mid \overline{A})=0{,}3\cdot 0{,}3=0{,}09 ; \\
+			&&\mathrm{P}(\overline{A} \overline{B})=\mathrm{P}(\overline{A}) \mathrm{P}(\overline{B} \mid \overline{A})=0{,}3\cdot0{,}7=0{,}21.
+		\end{eqnarray*}
+		Ta có thể biểu diễn các kết quả trên theo sơ đồ hình cây như sau:
+		\begin{center}
+			\begin{tikzpicture}
+				\def\gocm{20}
+				\def\gocn{10}
+				\def\r{4}
+				\tikzset{s/.style={outer sep=0.5 mm,draw=magenta,rectangle,minimum width=2.75cm,rounded corners=1mm}}
+				\path(0,0)node(O){}++(\gocm:\r)node[s](A1){A}++(\gocn:\r)node[s](A2){$\overline{B}$}++(0:\r)node[s](A3){$A\overline{B}$}++(0:\r)node[s](A4){$0{,}56$};
+				\path(A1)++({-\gocn}:\r)node[s](a2){B}++(0:\r)node[s](a3){$AB$}++(0:\r)node[s](a4){$0{,}14$};
+				\path(O)++(-\gocm:\r)node[s](B1){$\overline{A}$}++(\gocn:\r)node[s](B2){$\overline{B}$}++(0:\r)node[s](B3){$\overline{A}\overline{B}$}++(0:\r)node[s](B4){$0{,}21$};
+				\path(B1)++({-\gocn}:\r)node[s](b2){$B$}++(0:\r)node[s](b3){$\overline{A}B$}++(0:\r)node[s](b4){$0{,}09$};
+				\foreach \x/\y in {
+					O/A1,A1/A2,
+					O/B1,B1/B2,
+					A1/a2,
+					B1/b2}
+				\draw[-stealth](\x.east)--(\y.west);
+				\path(O)--(A1.west)node[pos=0.5,above,sloped]{$0{,}7$}(O)--(B1.west)node[pos=0.5,below,sloped]{$0{,}3$}(B1.east)--(B2.west)node[pos=0.5,above,sloped]{$0{,}7$}(A1.east)--(A2.west)node[pos=0.5,above,sloped]{$0{,}8$}
+				(A1.east)--(a2.west)node[pos=0.5,below,sloped]{$0{,}2$}
+				(B1.east)--(b2.west)node[pos=0.5,below,sloped]{$0{,}3$};
+				%%Node dòng trên
+				\path(A2)++(0,1)node{\textbf{Chủ nhật}}++(180:4)node{\textbf{Thứ bảy}}(A3)++(0,1)node{\textbf{Kết quả}}(A4)++(0,1)node{\textbf{Xác suất}};
+			\end{tikzpicture}
+	\end{center}}
+\end{vd}
+
+\begin{vd}%[CKP]%[BG12-4in1, Võ Thành Huấn]%[2D5H2-3]
+	Theo kết quả từ trạm nghiên cứu khí hậu tại địa phương $T$, xác suất để một ngày có gió là $0{,}6$; nếu ngày có gió thì xác suất có mưa là $0{,}4$; nếu ngày không có gió thì xác suất có mưa là $0{,}2$. Gọi $G$ là biến cố \lq\lq Ngày có gió\rq\rq~ và $M$ là biến cố \la\la Ngày có mưa\rq\rq.
+	\begin{enumerate}
+		\item  Vẽ lại sơ đồ hình cây sau và điền vào ô? các giá trị xác suất tương ứng.
+		\begin{center}
+			\begin{tikzpicture}[node distance=1.5cm, every node/.style={fill=white}, align=center]
+				\definecolor{diagram_bg_green}{HTML}{d5e8d4}
+				\definecolor{diagram_bg_blue}{HTML}{dae8fc}
+				\definecolor{diagram_bg_pink}{HTML}{f8cecc}
+				\definecolor{diagram_bd_green}{HTML}{82b366}
+				\definecolor{diagram_bd_blue}{HTML}{7494c2}
+				\definecolor{diagram_bd_pink}{HTML}{b85450}
+				\tikzset{>={Latex[width=2mm,length=2mm]}, base/.style = {rectangle, rounded corners, draw=black, minimum width=1cm, minimum height=1cm, text centered, drop shadow={shadow xshift=0.6mm, shadow yshift=-0.6mm}},
+					Style1/.style = {base, fill=diagram_bg_blue, draw=diagram_bd_blue},
+					Style2/.style = {base, fill=diagram_bg_pink, draw=diagram_bd_pink},
+					Style3/.style = {base, fill=diagram_bg_green, draw=diagram_bd_green},
+					Style4/.style = {base, minimum width=2.5cm, fill=orange!15, draw=orange},
+				}
+				\node (B0) [Style1, text width=1cm] {Ngày};
+				\node (B1) [Style2, right of=B0, xshift=2cm, yshift=2cm, text width=1.5cm] {Có gió \\ $(G)$};
+				\node (B3) [Style2, right of=B0, xshift=2cm, yshift=-2cm, text width=1.5cm] {Không có gió\\$(\overline{G})$};
+				\node (B11) [Style3, right of=B1, xshift=6cm, yshift=1.2cm, text width=7cm] {Có mưa};
+				\node (B13) [Style3, right of=B1, xshift=6cm, yshift=-1.2cm, text width=7cm] {Không có mưa};
+				\node (B31) [Style3, right of=B3, xshift=6cm, yshift=1.2cm, text width=7cm] {Có mưa};
+				\node (B33) [Style3, right of=B3, xshift=6cm, yshift=-1.2cm, text width=7cm] {Không có mưa};
+				\draw[->] (B0) -- (B1.west)node[sloped,above,pos=0.5]{$\mathrm{P}(G)=?$};
+				\draw[->] (B0) -- (B3.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{G})=?$};
+				\draw[->] (B1) -- (B11.west)node[sloped,above,pos=0.5]{$\mathrm{P}(M\mid G)=?$};
+				\draw[->] (B1) -- (B13.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{M}\mid G)=?$};
+				\draw[->] (B3) -- (B31.west)node[sloped,above,pos=0.5]{$\mathrm{P}(M\mid\overline{G})=?$};
+				\draw[->] (B3) -- (B33.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{M}\mid\overline{G})=?$};
+			\end{tikzpicture}
+		\end{center}
+		\item  Tính xác suất $\mathrm{P}(G M)$ và $\mathrm{P}(G \overline{M})$. Nêu ý nghĩa của các xác suất này.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Theo đề bài, nếu ngày có gió thì xác suất có mưa là 0{,}4 nên $\mathrm{P}(M \mid G)=0{,}4$.\\ 
+			Suy ra $\mathrm{P}(\overline{M} \mid G)=1-0{,}4=0{,}6$.
+			Ngày không có gió thì xác suất có mưa là $0{,}2$ nên $\mathrm{P}(M \mid \overline{G})=0{,}2$.\\
+			Suy ra $\mathrm{P}(\overline{M} \mid \overline{G})=1-0{,}2=0{,}8$.
+			\begin{center}
+				\begin{tikzpicture}[node distance=1.5cm, every node/.style={fill=white}, align=center]
+					\definecolor{diagram_bg_green}{HTML}{d5e8d4}
+					\definecolor{diagram_bg_blue}{HTML}{dae8fc}
+					\definecolor{diagram_bg_pink}{HTML}{f8cecc}
+					\definecolor{diagram_bd_green}{HTML}{82b366}
+					\definecolor{diagram_bd_blue}{HTML}{7494c2}
+					\definecolor{diagram_bd_pink}{HTML}{b85450}
+					\tikzset{>={Latex[width=2mm,length=2mm]}, base/.style = {rectangle, rounded corners, draw=black, minimum width=1cm, minimum height=1cm, text centered, drop shadow={shadow xshift=0.6mm, shadow yshift=-0.6mm}},
+						Style1/.style = {base, fill=diagram_bg_blue, draw=diagram_bd_blue},
+						Style2/.style = {base, fill=diagram_bg_pink, draw=diagram_bd_pink},
+						Style3/.style = {base, fill=diagram_bg_green, draw=diagram_bd_green},
+						Style4/.style = {base, minimum width=2.5cm, fill=orange!15, draw=orange},
+					}
+					\node (B0) [Style1, text width=1cm] {Ngày};
+					\node (B1) [Style2, right of=B0, xshift=2cm, yshift=2cm, text width=1.5cm] {Có gió \\ $(G)$};
+					\node (B3) [Style2, right of=B0, xshift=2cm, yshift=-2cm, text width=1.5cm] {Không có gió\\$(\overline{G})$};
+					\node (B11) [Style3, right of=B1, xshift=8cm, yshift=1.2cm, text width=7cm] {Có mưa};
+					\node (B13) [Style3, right of=B1, xshift=8cm, yshift=-1.2cm, text width=7cm] {Không có mưa};
+					\node (B31) [Style3, right of=B3, xshift=8cm, yshift=1.2cm, text width=7cm] {Có mưa};
+					\node (B33) [Style3, right of=B3, xshift=8cm, yshift=-1.2cm, text width=7cm] {Không có mưa};
+					\draw[->] (B0) -- (B1.west)node[sloped,above,pos=0.5]{$\mathrm{P}(G)=0{,}6$};
+					\draw[->] (B0) -- (B3.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{G})=0{,}4$};
+					\draw[->] (B1) -- (B11.west)node[sloped,above,pos=0.5]{$\mathrm{P}(M\mid G)=0{,}4$};
+					\draw[->] (B1) -- (B13.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{M}\mid G)=0{,}6$};
+					\draw[->] (B3) -- (B31.west)node[sloped,above,pos=0.5]{$\mathrm{P}(M\mid\overline{G})=0{,}2$};
+					\draw[->] (B3) -- (B33.west)node[sloped,below,pos=0.5]{$\mathrm{P}(\overline{M}\mid\overline{G})=0{,}8$};
+				\end{tikzpicture}
+			\end{center}
+			\item $\mathrm{P}(G M)=\mathrm{P}(G) \cdot \mathrm{P}(M \mid G)=0{,}6 \cdot 0{,}4=0{,}24 $.\\
+			$\mathrm{P}(G \overline{M})=\mathrm{P}(G) \cdot \mathrm{P}(\overline{M} \mid G)=0{,}6 \cdot 0{,}6=0{,}36$.\\
+			Điều này có nghĩa là tại địa phương $T$, trong một ngày, xác suất để trời vừa có gió và vừa có mưa là $0{,}24$; xác suất để trời có gió nhưng không có mưa là $0{,}36$.
+		\end{enumerate}
+	}
+\end{vd}
+
+\begin{vd}%[CTST, Mức độ 2]%[BG12-4in1, Võ Thành Huấn]%[2D5H2-3]
+	Ở một sân bay, người ta sử dụng một loại máy soi tự động phát hiện hàng cấm trong hành lí kí gửi. Máy phát chuông cảnh báo với $95 \%$ các kiện hành lí có chứa hàng cấm và $2 \%$ các kiện hành lí không chứa hàng cấm. Tỉ lệ các kiện hành lí có chứa hàng cấm là $1 \%$.\\
+	Chọn ngẫu nhiên một kiện hành lí để soi bằng máy trên. Sử dụng sơ đồ hình cây, tính xác suất của các biến cố:
+	\begin{itemize}
+		\item $ M: $ \lq\lq Kiện hành lí có chứa hàng cấm và máy phát chuông cảnh báo \rq\rq;
+		\item $ N: $ \lq\lq Kiện hành lí không chứa hàng cấm và máy phát chuông cảnh báo\rq\rq.
+	\end{itemize}
+	\loigiai
+	{
+		Gọi $A$ là biến cố \lq\lq Kiện hành lí có chứa hàng cấm\rq\rq và $B$ là biến cố \lq\lq Máy phát chuông cảnh báo\rq\rq. Ta có
+		$$
+		\mathrm{P}(B \mid A)=0{,}95 ; \mathrm{P}(B \mid \overline{A})=0{,}02 ; \mathrm{P}(A)=0{,}01.
+		$$
+		Do đó $\mathrm{P}(\overline{A})=1-\mathrm{P}(A)=0{,}99 ; \mathrm{P}(\overline{B} \mid A)=1-\mathrm{P}(B \mid A)=0{,}05 ; \mathrm{P}(\overline{B} \mid \overline{A})=1-\mathrm{P}(B \mid \overline{A})=0{,}98$.
+		Ta có sơ đồ hình cây như sau:
+		\begin{center}
+			\begin{tikzpicture}
+				\def\gocm{20}
+				\def\gocn{10}
+				\def\r{4}
+				\tikzset{s/.style={outer sep=0.5 mm,draw=magenta,rectangle,minimum width=2.75cm,rounded corners=1mm}}
+				\path(0,0)node(O){}++(\gocm:\r)node[s](A1){A}++(\gocn:\r)node[s](A2){$B$}++(0:\r)node[s](A3){$AB$}++(0:\r)node[s](A4){$0{,}0095$};
+				\path(A1)++({-\gocn}:\r)node[s](a2){$\overline{B}$}++(0:\r)node[s](a3){$A\overline{B}$}++(0:\r)node[s](a4){$0{,}0005$};
+				\path(O)++(-\gocm:\r)node[s](B1){$\overline{A}$}++(\gocn:\r)node[s](B2){$B$}++(0:\r)node[s](B3){$\overline{A}B$}++(0:\r)node[s](B4){$0{,}0198$};
+				\path(B1)++({-\gocn}:\r)node[s](b2){$\overline{B}$}++(0:\r)node[s](b3){$\overline{A}\overline{B}$}++(0:\r)node[s](b4){$0{,}9702$};
+				\foreach \x/\y in {
+					O/A1,A1/A2,
+					O/B1,B1/B2,
+					A1/a2,
+					B1/b2}
+				\draw[-stealth](\x.east)--(\y.west);
+				\path(O)--(A1.west)node[pos=0.5,above,sloped]{$0{,}01$}(O)--(B1.west)node[pos=0.5,below,sloped]{$0{,}99$}(B1.east)--(B2.west)node[pos=0.5,above,sloped]{$0{,}02$}(A1.east)--(A2.west)node[pos=0.5,above,sloped]{$0{,}95$}
+				(A1.east)--(a2.west)node[pos=0.5,below,sloped]{$0{,}05$}
+				(B1.east)--(b2.west)node[pos=0.5,below,sloped]{$0{,}98$};				
+			\end{tikzpicture}			
+		\end{center}
+		Do $M=A B$ nên $\mathrm{P}(M)=\mathrm{P}(A B)=0{,}0095$.\\
+		Do $N=\overline{A} B$ nên $\mathrm{P}(N)=\mathrm{P}(\overline{A} B)=0{,}0198$.
+	}
+\end{vd}
+\dongcham{11}
+
+
+

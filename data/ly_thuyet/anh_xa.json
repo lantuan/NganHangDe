@@ -1,0 +1,46 @@
+{
+  "_ghi_chu": [
+    "Bang anh xa BAI trong chuong trinh  <->  TEP ly thuyet (.tex) cua co Lan.",
+    "Vi sao phai co bang nay thay vi khop tu dong theo ten: quan he la NHIEU-NHIEU.",
+    "  - 1 bai co the do NHIEU tep phu trach (vd 'Cac phep toan tren vecto' = 3 tep).",
+    "  - Cach chia bai cua tai lieu khac cach chia cua chuong trinh KNTT.",
+    "Khoa = ma bai chuan (xem docs/04_ID_STANDARD.md). Moi cau hoi trong ngan",
+    "hang deu mang san ma nay trong generator_id, nen tra bang nay la ra tep.",
+    "Duong dan tep tinh tu chinh thu muc data/ly_thuyet/.",
+    "LOP 11 va 12: da co tep ly thuyet (59 tep) nhung data/curriculum/toan11",
+    "va toan12 con RONG, chua co cau hoi nao de gan vao -> chua anh xa duoc.",
+    "Khi nao lam ngan hang 11/12 thi bo sung vao day."
+  ],
+  "anh_xa": {
+    "L10_C1_B1": {"ten_bai": "Mệnh đề",                                    "tep": ["0D1-CD1.tex"]},
+    "L10_C1_B2": {"ten_bai": "Tập hợp và các phép toán trên tập hợp",      "tep": ["0D1-CD2.tex", "0D1-CD3.tex"]},
+
+    "L10_C2_B3": {"ten_bai": "Bất phương trình bậc nhất hai ẩn",           "tep": ["0D2-CD1.tex"]},
+    "L10_C2_B4": {"ten_bai": "Hệ bất phương trình bậc nhất hai ẩn",        "tep": ["0D2-CD2.tex"]},
+
+    "L10_C3_B5": {"ten_bai": "Giá trị lượng giác của một góc từ 0 độ đến 180 độ", "tep": ["0H3-CD1.tex"]},
+    "L10_C3_B6": {"ten_bai": "Hệ thức lượng trong tam giác",               "tep": ["0H3-CD2.tex"]},
+
+    "L10_C4_B7": {"ten_bai": "Khái niệm vectơ",                            "tep": ["0H4-B1.tex"]},
+    "L10_C4_B8": {"ten_bai": "Các phép toán trên vectơ",                   "tep": ["0H4-B2.tex", "0H4-B3.tex", "0H4-B5.tex"]},
+
+    "L10_C5_B9":  {"ten_bai": "Hàm số và đồ thị",                          "tep": ["0D6-B1.tex"]},
+    "L10_C5_B10": {"ten_bai": "Hàm số bậc hai",                            "tep": ["0D6-B2.tex"]},
+    "L10_C5_B11": {"ten_bai": "Dấu của tam thức bậc hai",                  "tep": ["0D6-B3.tex"]},
+    "L10_C5_B12": {"ten_bai": "Phương trình quy về phương trình bậc hai",  "tep": ["0D6-B4.tex"]},
+
+    "L10_C6_B13": {"ten_bai": "Số gần đúng và sai số",                     "tep": ["0D5-B1.tex"]},
+    "L10_C6_B14": {"ten_bai": "Các số đặc trưng đo xu thế trung tâm",      "tep": ["0D5-B2.tex"]},
+    "L10_C6_B15": {"ten_bai": "Các số đặc trưng đo độ phân tán",           "tep": ["0D5-B3.tex"]},
+    "L10_C6_B16": {"ten_bai": "Biến cố và định nghĩa cổ điển của xác suất","tep": ["0D9-B1.tex", "0D9-B2.tex"]},
+
+    "L10_C7_B17": {"ten_bai": "Toạ độ của vectơ",                          "tep": ["0H4-B4.tex"]},
+    "L10_C7_B18": {"ten_bai": "Đường thẳng trong mặt phẳng toạ độ",        "tep": ["0H7-B1.tex", "0H7-B2.tex"]},
+    "L10_C7_B19": {"ten_bai": "Đường tròn trong mặt phẳng toạ độ",         "tep": ["0H7-B3.tex"]},
+    "L10_C7_B20": {"ten_bai": "Ba đường conic trong mặt phẳng toạ độ",     "tep": ["0H7-B4.tex"]},
+
+    "L10_C8_B21": {"ten_bai": "Quy tắc cộng và quy tắc nhân",              "tep": ["0D8-B1.tex"]},
+    "L10_C8_B22": {"ten_bai": "Hoán vị, chỉnh hợp và tổ hợp",              "tep": ["0D8-B2.tex"]},
+    "L10_C8_B23": {"ten_bai": "Nhị thức Newton",                           "tep": ["0D8-B3.tex"]}
+  }
+}

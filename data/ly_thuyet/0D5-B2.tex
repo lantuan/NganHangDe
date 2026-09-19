@@ -1,0 +1,351 @@
+\section{CÁC SỐ ĐẶC TRƯNG ĐO XU THẾ TRUNG TÂM}
+\subsection{TÓM TẮT LÝ THUYẾT}
+\subsubsection{Số trung bình và trung vị}
+\begin{itemize}
+	\item [\iconMT] \indam{Số trung bình: } Kí hiệu là $\overline{x}$.
+	\begin{tcolorbox}[colframe=orange,colback=white,boxrule=0.2mm]
+		\begin{itemize}
+			\item Với mẫu số liệu kích thước $n$ là $\{x_1; x_2;\ldots; x_{n}\}$ thì 
+			\boxmini{$\overline{x}=\dfrac{x_1+x_2+\ldots + x_n}{n}$}
+			\item Với mẫu số liệu được cho bởi bảng phân bố tần số thì \boxmini{$\overline{x}=\dfrac{n_1x_1+n_2x_2+\ldots+ n_kx_k}{n}$}
+			Trong đó, $n_k$ là tần số của giá trị $x_k$ và $n_1+n_2+\cdots n_k=n$.
+			\item Với mẫu số liệu được cho bởi bảng phân bố tần suất (tần số tương đối) thì
+			\boxmini{$\overline{x}=f_1x_1+f_2x_2+\cdots + f_kx_k$}
+			Trong đó, $f_k=\dfrac{n_k}{n}$ là tần suất (tần số tương đối) của giá trị $x_k$.
+		\end{itemize}
+	\end{tcolorbox}
+	\textit{\indamm{Ý nghĩa của số trung bình:} Số trung bình cộng cho biết vị trí trung tâm của mẫu số liệu. Khi các số liệu trong mẫu ít sai lệch với số trung bình cộng ta có thể lấy số trung bình cộng làm đại diện cho mẫu số liệu.}
+	\item [\iconMT] \indam{Số trung vị:} Trong trường hợp mẫu số liệu có giá trị bất thường (rất lớn hoặc rất bé so với đa số các giá trị khác), người ta không dùng số trung bình để đo xu thế trung tâm mà dùng \textbf{số trung vị}, được xác định như sau:
+	\begin{tcolorbox}[colframe=orange,colback=white,boxrule=0.2mm]
+			Giả sử có một mẫu gồm $n$ số liệu được sắp xếp theo thứ tự không giảm (hoặc không tăng). Khi đó \textbf{số trung vị $\mathrm{M_e}$} là
+		\begin{itemize}
+			\item Số liệu ở vị trí thứ $\dfrac{n+1}{2}$ nếu $n$ là lẻ.
+			\item Trung bình cộng của hai số đứng giữa (số thứ $\dfrac{n}{2}$ và $\dfrac{n}{2}+1$) nếu $n$ là chẵn.
+		\end{itemize}
+	\end{tcolorbox}
+\indamm{Ý nghĩa của số trung vị:}
+\begin{itemize}
+	\item \textit{Trung vị là giá trị chia đôi trong mẫu số liệu. Trung vị không bị ảnh hưởng bởi giá trị bất thường trong khi đó số trung bình cộng bị ảnh hưởng bởi giá trị bất thường.}
+	\item \textit{Nếu những số liệu trong mẫu có sự chênh lệch lớn thì ta nên chọn thêm trung vị làm đại diện cho mẫu số liệu đó nhằm điều chỉnh một số hạn chế khi sử dụng số trung bình cộng. Những kết luận về đối tượng thống kê rút ra khi đó sẽ tin cậy hơn.}
+\end{itemize}
+\end{itemize}
+\subsubsection{Tứ phân vị}
+Trung vị chia mẫu ra làm hai phần. Trong thực tế người ta cũng quan tâm đến trung vị của mỗi phần đó. Ba trung vị này được gọi là  \indamm{tứ phân vị} của mẫu. Để tìm tứ phân vị của mẫu số liệu có $n$ giá trị, ta làm như sau:
+\begin{tcolorbox}[colframe=orange,colback=white,boxrule=0.2mm]
+	\begin{itemize}
+		\item  Sắp thứ tự mẫu số liệu gồm $n$ số liệu thành một dãy không giảm.
+		\item Tìm trung vị. Giá trị này là $Q_2$.
+		\item Tìm trung vị của nửa số liệu bên trái $Q_2$ (không bao gồm $Q_2$ nếu $n$ lẻ). Giá trị này là $Q_1$.
+		\item Tìm trung vị của nửa số liệu bên phải $Q_2$ (không bao gồm $Q_2$ nếu $n$ lẻ). Giá trị này là $Q_3$.
+		\begin{center}
+			\begin{tikzpicture}[scale=0.9, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path (0,0) coordinate(A) ++(0:2) coordinate(Q_1) ++(0:3.5) coordinate(Q_2) ++(0:2.5) coordinate(Q_3) ++(0:1.5) coordinate(B);
+				\draw (A)node[text width=1.5cm,align=center,below=5pt] {Giá trị\\nhỏ nhất} -- (Q_1) node[below=5pt]{$Q_1$} -- (Q_2) node[below=5pt]{$Q_2$} -- (Q_3) node[below=5pt]{$Q_3$} -- (B)node[below=5pt, text width=1.5 cm, align=center]{Giá trị\\lớn nhất};
+				\foreach \i in {A,Q_1,Q_2,Q_3,B} \draw (\i)++(-90:0.07) -- ++(90:0.14);
+				\draw[decoration={brace}, decorate] ($(A)+(0,0.2)$)--($(Q_2)+(0,0.2)$) node[sloped,midway,above]{Nửa dãy phía dưới};
+				\draw[decoration={brace}, decorate] ($(Q_2)+(0,0.2)$)--($(B)+(0,0.2)$) node[sloped,midway,above]{Nửa dãy phía trên};	
+			\end{tikzpicture}
+		\end{center}
+		\item [] $Q_1$, $Q_2$, $Q_3$ được gọi là các \indamm{tứ phân vị} của mẫu số liệu.
+	\end{itemize}
+\end{tcolorbox}
+
+
+\subsubsection{Mốt}
+\begin{itemize}
+	\item [] Mốt của mẫu số liệu là giá trị xuất hiện với tần số lớn nhất và được kí hiệu là $M_O$.
+	\item [] \indamm{Lưu ý:}
+	\begin{boxdn}
+	\begin{itemize}
+		\item [$\bullet$] Một mẫu số liệu có thể có nhiều mốt.
+		\item [$\bullet$] Khi tất cả các giá trị trong mấu số liệu có tần số xuất hiện bằng nhau thì mẫu số liệu đó không có mốt.
+	\end{itemize}
+	\end{boxdn}
+\end{itemize}
+
+\subsection{RÈN LUYỆN KĨ NĂNG GIẢI TOÁN}
+
+\begin{dang}{Tìm số trung bình của bảng số liệu}
+\end{dang}
+
+\begin{vd}%[0D5B3]
+	Hãy tính trung bình cộng của các mẫu số liệu sau (Kết quả làm trong đến hai chữ số thập phân)
+	\begin{tasks}(2)
+		\task 5 \quad 6 \quad 6 \quad 4 \quad 10 \quad 17 \quad 8 \quad 13.
+		\task 50 \quad 36 \quad 61 \quad 43 \quad 36 \quad 97 \quad 61.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\overline{x}=\dfrac{5+6+6+4+10+17+8+13}{8}=8,63$.
+			\item $\overline{x}=\dfrac{50+36+61+43+36+97+61}{7}=54,86$.
+	\end{enumerate}}
+\end{vd}\dongcham{7}
+
+\begin{vd}%[BG10-2022]
+	Cho biết nhiệt độ trung bình các tháng trong năm ở Hà Nội.\\
+	\begin{tikzpicture}
+		\matrix[matrix of nodes,nodes in empty cells,
+		row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+		nodes={minimum height=8mm,minimum width=12mm,draw=black,anchor=center},
+		column 1/.style={nodes={minimum width=24mm,color=black}},
+		row 1/.style={nodes={fill=cyan!10}},
+		row 2/.style={nodes={minimum height=13mm}},
+		]{
+			Tháng &1&2&3&4&5&6&7&8&9&10&11&12\\ 
+			\node[align=center]{Nhiệt độ \\($^\circ$C)}; &16,4&17,0&20,2&23,7&27,3&28,8&28,9&28,2&27,2&24,6&21,4&18,2\\
+		};
+	\end{tikzpicture}
+	\begin{listEX}[1]
+		\item Nhiệt độ trung bình trong năm ở Hà Nội là bao nhiêu?
+		\item Nhiệt độ trung bình của tháng có giá trị thấp nhất; cao nhất là bao nhiêu độ C?
+	\end{listEX}
+	\loigiai{	
+		\begin{listEX}[1]
+			\item Nhiệt độ trung bình trong năm ở Hà Nội là:
+			\[\dfrac{16{,}4 + 17{,}0 + 20{,}2 + 23{,}7 + 27{,}3 + 28{,}8 + 28{,}9 + 28{,}2 + 27{,}2 + 24{,}6 + 21{,}4 + 18{,}2}{12}\approx 23{,}5^\circ\mathrm{C}.\]
+			\item Nhiệt độ trung bình của tháng $1$ có giá trị thấp nhất là $16{,}4^\circ\mathrm{C}$.\\
+			Nhiệt độ trung bình của tháng $7$ có giá trị cao nhất là $28{,}9^\circ\mathrm{C}$.
+		\end{listEX}
+	}
+\end{vd}\dongcham{7}
+
+\begin{vd}%[0D5B3]
+	Khối lượng $30$ chi tiết máy được cho bởi bảng sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			Khối lượng(gam)  & 250 &300&350& 400 &450 &500& Cộng   \\
+			\hline
+			Tần số&4&4 & 5& 6 &4 &7& 30  \\
+			\hline	
+		\end{tabular}
+	\end{center}
+	Tính số trung bình $\overline{x}$ (làm tròn đến chữ số thứ hai sau dấu phẩy) của bảng nói trên.
+	\loigiai{ Áp dụng công thức tính số trung bình cho bảng tần số ta có
+		\begin{center}
+			$\overline{x}=\dfrac{250.4+300.4+350.5+400.6+450.4+500.7}{30} \approx 388,33$ (gam).
+		\end{center}
+	}
+\end{vd}\dongcham{7}
+
+\begin{vd}%[0D5K3]
+	Bảng liệt kê điểm thi học kì của Nam như sau
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			Môn &Toán &Lí &Hóa&Anh&Văn&Sử&Địa&Công nghệ&Tin học \\
+			\hline
+			Điểm&7 &5 &3 &3&5&6&7&3&$x$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Biết rằng điểm thi các môn đều là hệ số 1. Hỏi Nam sẽ phải thi môn tin học bao nhiêu điểm thì sẽ có điểm trung bình học kì là $5$ điểm (điểm số cho làm tròn thành số tự nhiên)?
+	\loigiai{
+	Điểm trung bình của Nam được tính như sau
+		$$\overline{x}=\dfrac{7+5+3+3+5+6+7+3+x}{9}=\dfrac{39+x}{9}$$
+	Để Nam có thể đạt điểm trung bình học kì là 5 thì 
+		$$\dfrac{39+x}{9}=5\Leftrightarrow x=6.$$}
+\end{vd}\dongcham{8}
+
+\begin{vd}%[BG10-2022]
+	Một cửa hàng bán xe đạp thống kê số xe bán được hàng tháng trong năm 2021 như sau:\\
+	\begin{tikzpicture}
+		\matrix[matrix of nodes,nodes in empty cells,
+		row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+		nodes={minimum height=8mm,minimum width=12mm,draw=black,anchor=center},
+		column 1/.style={nodes={minimum width=24mm,color=black}},
+		row 1/.style={nodes={fill=cyan!10}},
+		row 2/.style={nodes={minimum height=15mm}},
+		]{
+			Tháng &1&2&3&4&5&6&7&8&9&10&11&12\\ 
+			\node[align=center]{Số xe}; &8&10&7&10&22&28&28&25&20&10&9&7\\
+		};
+	\end{tikzpicture}
+	\begin{listEX}[1]
+		\item Hãy tính số xe trung bình cửa hàng bán được mỗi tháng?
+		\item Tính xem trong bốn quý (I, II, III, IV), quý nào cửa hàng bán được nhiều xe nhất?
+	\end{listEX}
+	\loigiai{	
+		\begin{enumerate}[a)]
+			\item Số xe trung bình mỗi tháng bán được là
+					$$\overline{x}=\dfrac{10+8+7+10+22+28+28+25+20+10+9+7}{12}=15,3$$
+			\item Từ bảng số liệu, hai quý có khả năng bán cáo nhất là quý II và quý III.
+			\begin{itemize}
+				\item [$\bullet$] Trung bình của quý II là $\dfrac{10+22+28}{3}=20$ xe.
+				\item [$\bullet$] Trung bình của quý III là $\dfrac{28+25+20}{3}=24,33$ xe.
+			\end{itemize}
+		Vậy, quý III cửa hàng bán được nhiều xe nhất.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{10}
+
+\begin{dang}{Tìm trung vị và tứ phân vị  của bảng số liệu}
+\end{dang}
+
+\begin{vd}%[0D5B3]
+	Điểm học kì một của một học sinh được cho bởi  bảng số liệu sau (Đơn vị: điểm)
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+			\hline
+			5& 6 &6&7& 7 &8 &8& 8,5&9\\
+			\hline
+		\end{tabular}
+	\end{center}
+	\begin{tasks}(1)
+		\task Tìm số trung vị của mẫu số liệu trên..
+		\task Tìm các tứ phân vị của mẫu số liệu trên.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Bảng trên có 9 số liệu và đã xếp theo thự tự không giảm. Ta có $n=9$ là số lẻ. Áp dụng cách tìm số trung vị, ta được số trung vị là số thứ $\dfrac{n+1}{2}$ tương ứng là số thứ năm trong dãy. Do đó số trung vị là 
+			$M_e = 7$.
+			\item Ta có $Q_2=7$. 
+			\begin{itemize}
+				\item [$\bullet$] Xét nửa số liệu bên trái $Q_2$ là
+				$5 \quad 6 \quad 6 \quad 7$.
+				Trung vị của nửa số liệu này là $$Q_1=\dfrac{6+6}{2}=6$$
+				\item [$\bullet$] Xét nửa số liệu bên phải $Q_2$ là
+				$8 \quad 8 \quad 8,5 \quad 9$. 
+				Trung vị của nửa số liệu này là $$Q_3=\dfrac{8+8,5}{2}=8,25$$
+			\end{itemize}
+		Vậy, các tứ phân vị của mẫu số liệu trên là $Q_1=6$, $Q_2=7$, $Q_3=8,25$.
+		\end{enumerate} 
+	}
+\end{vd}\dongcham{13}
+\begin{vd}
+	Điều tra về tuổi nghề của $30$ công nhân được chọn ra từ $150$ công nhân của một nhà máy A. Người ta thu được bảng số liệu ban đầu như sau:
+	\begin{center}
+		\begin{tabular}{|llllllllll|}
+			\hline 
+			$7$ & $2$ & $5$ & $9$ & $7$ & $4$ & $3$ & $8$ & $10$ & $4$ \\ 
+			$2$ & $4$ & $4$ & $5$ & $6$ & $7$ & $7$ & $5$ & $4$ & $1$ \\ 
+			$9$ & $4$ & $14$ & $2$ & $8$ & $5$ & $5$ & $7$ & $3$ & $8$ \\ 
+			\hline 
+		\end{tabular}
+	\end{center}
+\begin{tasks}(1)
+	\task Tìm số trung vị của bảng số liệu trên
+	\task Tìm các tứ phân vị của bảng số liệu trên.
+\end{tasks}
+	\loigiai{
+		Ta thống kê số liệu trên thông qua bản phân bố tần số như sau: 
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+				\hline 
+				Tuổi nghề (năm) & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $14$ & Cộng \\ 
+				\hline 
+				Tần số & $1$ & $3$ & $2$ & $6$ & $5$ & $1$ & $5$ & $3$ & $2$ & $1$ & $1$ & $30$ \\ 
+				\hline 
+			\end{tabular} 
+		\end{center}
+	\begin{enumerate}[a)]
+		\item Bảng trên có 30 số liệu và đã xếp theo thự tự không giảm. Ta có $n=30$ là số lẻ. Áp dụng cách tìm số trung vị, ta được số trung vị là trung bình cộng của số thứ $\dfrac{n}{2}$ và $\dfrac{n}{2}+1$ tương ứng là trung bình cộng của số thứ 15 và 16 trong dãy. Do đó số trung vị là 
+		$M_e = \dfrac{5+5}{2}=5$.
+		\item Ta có $Q_2=5$. 
+		\begin{itemize}
+			\item [$\bullet$] Xét nửa số liệu bên trái $Q_2$ gổm 15 số liệu. Suy ra
+			trung vị của nửa số liệu này là số ở vị trí thứ 8 tương ứng là số 4. Vậy $Q_1=4$
+			\item [$\bullet$] Xét nửa số liệu bên phải $Q_2$ gổm 15 số liệu. Suy ra
+			trung vị của nửa số liệu này là số ở vị trí thứ 8 tương ứng là số 7. Vậy $Q_3=7$
+		\end{itemize}
+		Vậy, các tứ phân vị của mẫu số liệu trên là $Q_1=5$, $Q_2=5$, $Q_3=7$.
+	\end{enumerate}
+	}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Thống kê GDP năm 2020 (đơn vị: tỉ đô la Mỹ) của 10 nước tại khu vực Đông Nam Á được kết quả như sau:
+	\begin{center}
+		\begin{tikzpicture}
+			\matrix[matrix of nodes,nodes in empty cells,
+			row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+			nodes={minimum height=8mm,minimum width=29mm,draw=black,anchor=center},
+			%column 1/.style={nodes={minimum width=36mm,font=\bf,color=black}},
+			row 1/.style={nodes={fill=cyan!10,minimum height=10mm}},
+			row 2/.style={nodes={minimum height=10mm}},
+			row 3/.style={nodes={fill=cyan!10,minimum height=10mm}},
+			row 4/.style={nodes={minimum height=10mm}},
+			]{
+				Brunei & \node[align=center]{Campuchia}; &\node[align=center]{Indonesia};&\node[align=center]{Lào};&\node[align=center]{Malaysia};\\ 
+				12,02 &25,95&1059,64&19,08&338,28\\
+				Myanma & \node[align=center]{Philippines}; &\node[align=center]{Singapore};&\node[align=center]{Thái Lan};&\node[align=center]{Việt Nam};\\ 
+				81,26 &362,24&339,98&501,89&340,82\\
+			};
+		\end{tikzpicture}
+	\end{center}
+	\begin{tasks}(1)
+		\task Hãy tìm các tứ phân vị của dãy số liệu trên.
+		\task Giải thích ý nghĩa của các tứ phân vị này. Việt Nam có thuộc nhóm 25\% quốc gia có GDP năm 2020 cao nhất trong vùng Đông Nam Á không?
+	\end{tasks}
+	\loigiai{
+		Sắp xếp dãy số liệu trên theo thứ tự không giảm:
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+				\hline
+				12,02& 19,08 &25,95& 81,26& 338,28 &339,98 &340,82& 362,24&501,89&1059,64\\
+				\hline
+			\end{tabular}
+		\end{center}
+		\begin{enumerate}[a)]
+			\item Vì $n=10$ nên trung vị là trung bình cộng của số thứ 5 và thứ 6 trong dãy số liệu. Suy ra
+			$$Q_2=\dfrac{338,28+339,98}{2}=339,13.$$
+			Xét nửa dữ liệu bên trái $Q_2$ (gồm 5 dữ liệu), ta được là số hạng thứ 3. Suy ra $Q_1=25,95$.\\
+			Xét nửa dữ liệu bên phải $Q_2$ (gồm 5 dữ liệu), ta được là số hạng thứ 3. Suy ra $Q_3=362,24$.
+			\item GDP của Việt Nam là 340,82, nhỏ hơn $Q_3$ nên Việt Nam không thuộc nhóm $25\%$ quốc gia có GDP cao nhất.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{8}
+
+\begin{dang}{Tìm mốt của bảng số liệu}
+\end{dang}
+\begin{vd}%[0D5Y3]
+	Tuổi thọ của 30 bóng đèn được thắp thử (đơn vị: giờ) được cho bởi bảng số liệu thống kê dưới đây
+	\begin{center}
+		\begin{tabular}{|cccccccccc|}
+			\hline
+			1180  & 1150  & 1190  & 1170  & 1180  & 1170  & 1160  & 1170  & 1160  & 1150 \\
+			1190  & 1180  & 1170  & 1170  & 1170  & 1190  & 1170  & 1170  & 1170  & 1180 \\
+			1170  & 1160  & 1160  & 1160  & 1170  & 1160  & 1180  & 1180  & 1150  & 1170 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	Hãy tính mốt của bảng số liệu thống kê trên.
+	\loigiai{
+		Từ bảng số liệu trên ta suy ra bảng phân bố tần số các giá trị tuổi thọ của 30 bóng đèn như sau
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				Tuổi thọ (giờ) & 1150  & 1160  & 1170  & 1180  & 1190  & Tổng \\
+				\hline
+				Tần số & 3     & 6     & 12    & 6     & 3     & 30 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		Ta thấy giá trị $1170$ có tần số bằng $12$ là lớn nhất. Do đó mốt của bảng số liệu là: $M_O=1170$.
+	}
+\end{vd}\dongcham{10}
+\begin{vd}%[BG10-2022]
+	Số đôi giày bán ra trong Quý $IV$ năm $2020$ của một cửa hàng được thống kê trong bảng tần số sau:\\
+	\begin{tikzpicture}
+		\matrix[matrix of nodes,nodes in empty cells,
+		row sep=-\pgflinewidth,column sep=-\pgflinewidth,
+		nodes={minimum height=8mm,minimum width=12mm,draw=black,anchor=center},
+		column 1/.style={nodes={minimum width=62mm,color=black}},
+		row 1/.style={nodes={fill=cyan!10}},
+		row 2/.style={nodes={minimum height=15mm}},
+		]{
+			Cỡ giày &37&38&39&40&41&42&43&44\\ 
+			\node[align=center]{Tần số \\(Số đôi giày bán được)}; &40&48&52&70&54&47&28&3\\
+		};
+	\end{tikzpicture}
+	\begin{listEX}[1]
+		\item Mốt của mẫu số liệu trên là bao nhiêu?
+		\item Cửa hàng đó nên nhập về nhiều hơn cỡ giày nào để bán trong tháng tiếp theo?
+	\end{listEX}
+	\loigiai{	
+		\begin{listEX}[1]
+			\item Ta thấy giá trị $40$ có tần số $70$ lớn nhất, do đó mốt của mẫu số liệu trên là: $M_O=40$.
+			\item Cửa hàng nên nhập về nhiều hơn cỡ giày $40$ để bán trong tháng tiếp theo.
+		\end{listEX}
+	}
+\end{vd}\dongcham{13}

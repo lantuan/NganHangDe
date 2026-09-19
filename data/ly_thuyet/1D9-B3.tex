@@ -1,0 +1,239 @@
+\section{ĐẠO HÀM CẤP HAI}
+\subsection{KIẾN THỨC CẦN NHỚ}
+\subsubsection{Định nghĩa}
+	Giả sử hàm số $y = f(x)$ có đạo hàm tại mỗi điểm $x \in (a; b)$. Khi đó hệ thức $y'= f'(x)$ xác định một hàm số mới trên khoảng $(a; b)$. Nếu hàm số $y' = f'(x)$ lại có đạo hàm tại $x$ thì ta gọi đạo hàm của $y'$ là đạo hàm cấp hai của hàm số $y = f(x)$.
+	\begin{gachsoc}
+	\begin{itemize}
+		\item [$\bullet$] Kí hiệu $y''$ hoặc $f''(x)$
+		\item [$\bullet$] Công thức tính $f''(x)=[f'(x)]'$.
+	\end{itemize}
+\end{gachsoc}
+\subsubsection{Ý nghĩa cơ học của đạo hàm cấp hai}
+	Một chuyển động có phương trình $s=f(t)$ thì đạo hàm cấp hai (nếu có) của hàm số $f(t)$ là gia tốc tức thời của chuyển động. Ta có 
+		\boxmini{$a(t)=f''(t)$}
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Tính đạo hàm cấp hai}
+\end{dang}
+
+\begin{vd}%[1D5B3-1]
+	Cho hàm số $f(x)=x^2+2 x-1$.
+	\begin{enumEX}{1}
+		\item Tìm đạo hàm cấp hai của hàm số.
+		\item Tính đạo hàm cấp hai của hàm số tại điểm $x_0=0, x_0=1$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Ta có: $f'(x)=2 x+2$ và $f''(x)=(2 x+2)'=2$.
+			\item Vì $f''(x)=2$ nên $f''(0)=f''(1)=2$.
+		\end{enumEX}	
+	}
+\end{vd} \dongcham{4}
+
+\begin{vd}%[1D5B3-1]
+	Cho hàm số $h(x)=\ln x, x>0$.
+		\begin{enumEX}{1}
+		\item Tìm đạo hàm cấp hai của hàm số.
+		\item Tính đạo hàm cấp hai của hàm số tại $x_0=\sqrt{2}$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Ta có: $h'(x)=\dfrac{1}{x}, h''(x)=\left(\dfrac{1}{x}\right)'=-\dfrac{1}{x^2}$.
+			\item Vì $h''(x)=-\dfrac{1}{x^2}$ nên $h''(\sqrt{2})=-\dfrac{1}{(\sqrt{2})^2}=-\dfrac{1}{2}$.
+		\end{enumEX}	
+	}
+\end{vd} \dongcham{6}
+
+\begin{vd}
+	Tìm đạo hàm cấp hai của các hàm số sau:
+	\begin{tasks}(3)
+		\task $y= \sin x$. 
+		\task $y=\tan x$.
+		\task $y={\left(x^2+1\right)}^3$.
+		\task $y=\dfrac{x}{x-2}$.
+		\task $y=x^2 e^{-x}$.
+		\task $y=\ln (2x+3)$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $y'= \cos x = sin\left (\dfrac{\pi}{2}+x\right )$; $y''= \cos\left (\dfrac{\pi}{2}+x\right )= \sin\left (\pi+x\right )$.
+			\item $y'=\dfrac{1}{\cos^2x}$; $y''=-\dfrac{2 \cos x\left(- \sin x\right)}{\cos^4x}=\dfrac{2 \sin x}{\cos^3x}$.
+			\item $y=x^6+3x^4+3x^2+1$; $y'=6x^5+12x^3+6x$; 
+			$y''=30x^4+36x^2+6$.
+			\item $y'=\left(\dfrac{x}{x-2}\right)^{\prime}=\dfrac{-2}{\left(x-2\right)^2}$; $y''=\left(\dfrac{-2}{\left(x-2\right)^2}\right)^{\prime}=2\cdot\dfrac{2\left(x-2\right)}{\left(x-2\right)^4}=\dfrac{4}{\left(x-2\right)^3}$.
+			\item Ta có $y'=\left(x^2\right)' e^{-x}+x^2\left(e^{-x}\right)'=2x e^{-x}-x^2 e^{-x}$.\\
+			$\begin{aligned}[t]
+				\Rightarrow y''& =\left(2x-x^2\right)'e^{-x}+\left(2 x-x^2\right)\left(e^{-x}\right)'\\
+				& =(2-2x) e^{-x}-\left(2x-x^2\right) e^{-x} \\
+				& =\left(x^2-4 x+2\right) e^{-x}.
+			\end{aligned}
+			$
+			\item $y'=\dfrac{(2x+3)'}{2x+3}=\dfrac{2}{2x+3}$;\\
+			$y''=-\dfrac{2\left(2x+3\right)'}{(2x+3)^2}=-\dfrac{4}{(2x+3)^2}$.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{25}
+
+\begin{vd}
+	Cho hàm số $f(x)=x e^{x^2}+\ln (x+1)$. Tính $f'(0)$ và $f"(0)$.
+	\loigiai{
+		Ta có
+		$$ f'(x)=\left(1+2 x^2\right) e^{x^2}+\dfrac{1}{x+1} \Rightarrow f''(x)=\left(6 x+4 x^3\right) e^{x^2}-\dfrac{1}{(x+1)^2}.$$
+		Thay $x=0$ ta được $f'(0)=2$ và $f"(0)=-1$.
+	}
+\end{vd} \dongcham{12}
+
+\begin{vd}
+	Cho hàm số $h(x)=5\left(x+1\right)^3+4\left(x+1\right)$. Giải phương trình $h''(x)=0$.
+	\loigiai{
+		$h(x)=5\left(x+1\right)^3+4\left(x+1\right)$;\\
+		$h'(x)=15\left(x+1\right)^2+4$;\\
+		$h''(x)=30\left(x+1\right)$.\\
+		$h''(x)=0\Leftrightarrow x=-1$.
+	}
+\end{vd} \dongcham{9}
+
+\begin{vd}%[Ngô Quang Anh]%[1D5B5]
+	Cho hàm số $y=\sqrt{2x-x^2}$. Chứng minh rằng: $y^3.{y}''+1=0.$
+	\loigiai{
+		Ta có: ${y}'=\dfrac{1-x}{\sqrt{2x-x^2}}$, ${y}''=-\dfrac{1}{\sqrt{{\left(2x-x^2\right)}^3}}$\\
+		Thay vào: $y^3.{y}''+1=\sqrt{{\left(2x-x^2\right)}^3}\cdot  \dfrac{\left(-1\right)}{\sqrt{{\left(2x-x^2\right)}^3}}+1=-1+1=0$ (đpcm).
+	}
+\end{vd} \dongcham{9}
+
+\begin{dang}{Ý nghĩa cơ học của đạo hàm cấp 2}
+\end{dang}
+
+\begin{vd}%[1D5B3-3]
+	Một chất điểm chuyển động theo phương trình $s(t)=\dfrac{1}{3} t^3-3 t^2+5 t+4$, trong đó $t>0, t$ tính bằng giây, $s(t)$ tính bằng mét. Tính gia tốc tức thời của chất điểm tại thời điểm $t=3 \,(\mathrm{s})$.
+	\loigiai{
+		Ta có: $s'(t)=t^2-6 t+5$.\\
+		Gia tốc tức thời của chất điểm tại thời điểm $t\,(\mathrm{s})$ là:
+		$$s''(t)=2 t-6.$$
+		Vậy gia tốc tức thời của chất điểm tại thời điểm $t=3\,(\mathrm{s})$ là:
+		$$s''(3)=2 \cdot 3-6=0\,\left(\mathrm{m} / \mathrm{s}^2\right).$$	
+	}
+\end{vd} \dongcham{5}
+
+\begin{vd}%[TeX hóa SBT KNTT]%[Phạm Hoài]%[1K9YW-3]
+	Phương trình chuyển động của một hạt được cho bởi công thức $s(t)=10+0{,}5\sin \left(2\pi t+\dfrac{\pi}{5}\right)$, trong đó $s$ tính bằng centimét, $t$ tính bằng giây. Gia tốc của hạt tại thời điểm $t=5$ giây (làm tròn kết quả đến chữ số thập phân thứ nhất).
+	
+	\loigiai{ $v(t)=s'(t)=\left(2\pi t+\dfrac{\pi}{5}\right)'\cdot 0{,}5 \cos \left(2\pi t+\dfrac{\pi}{5}\right)=\pi \cos \left(2\pi t+\dfrac{\pi}{5}\right).$\\
+		$a(t)=v'(t)=-\pi \cdot  \left(2\pi t+\dfrac{\pi}{5}\right)'\cdot \sin  \left(2\pi t+\dfrac{\pi}{5}\right)=-2\pi^2 \sin  \left(2\pi t+\dfrac{\pi}{5}\right) $.\\ 
+		Gia tốc của hạt tại thời điểm $t=5$ giây là $a(5)=-2\pi^2 \sin  \left(2\pi 5+\dfrac{\pi}{5}\right)\approx -11{,}6  \, \text{(m/s}^2).$	
+	}
+\end{vd} \dongcham{6}
+
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+
+\begin{baitap}%[1D5B3-1]
+	Cho hàm số $g(x)=\cos x$.
+	\begin{enumEX}{1}
+		\item Tìm đạo hàm cấp hai của hàm số.
+		\item Tính đạo hàm cấp hai của hàm số tại $x_0=\dfrac{\pi}{6}$.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}{1}
+			\item Ta có: $g'(x)=-\sin x, g''(x)=(-\sin x)'=-\cos x$.
+			\item Vì $g''(x)=-\cos x$ nên $g''\left(\dfrac{\pi}{6}\right)=-\cos \dfrac{\pi}{6}=-\dfrac{\sqrt{3}}{2}$.
+		\end{enumEX}
+	}
+\end{baitap}
+
+\begin{baitap}%[Đỗ Vũ Minh Thắng]%[1D5B5] 
+	Tìm đạo hàm cấp hai của các hàm số sau:
+	\begin{tasks}(2)
+		\task $y=-3x^4+4x^3+5x^2-2x$.
+		\task $y=\dfrac{4}{5}x^5-3x^2-x+4$. 
+		\task $y=-\dfrac{1}{x}$.
+		\task $y=\dfrac{1}{x-3}$
+		\task $y=x\cdot\sin x$.
+		\task $y=\mathrm{e}^x\cdot\sin x$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $y'=-12x^3+12x^2+10x-2$; $y''=-36x^2+24x+10$.
+			\item $y'=4x^4-6x-1$; $y''=16x^3-6$.
+			\item $y'=\dfrac{1}{x^2}$; $y''=-\dfrac{2}{x^3}$.
+			\item  $y'=-\dfrac{1}{\left(x-3\right)^2}$; $y''=\dfrac{2}{{\left(x-3\right)}^3}$.
+			\item $y'=\sin x+x\cos x$; $y''=2\cos x-x\sin x$.
+			\item
+		\end{enumerate}
+	}
+\end{baitap}
+
+
+\begin{baitap}%[1D5B3-1]
+	Cho hàm số $f(x)=x^2-4 x$. Giải phương trình $f'(x)=f''(x)$.
+	\loigiai{
+		Ta có: $f'(x)=2 x-4, f''(x)=2$.\\
+		Khi đó, ta có phương trình
+		$$f'(x)=f''(x) \Leftrightarrow 2 x-4=2 \Leftrightarrow x=3.$$	
+	}
+\end{baitap}
+
+\begin{baitap}
+	Cho hàm số $f(x)=\sin^3x+x^2$.  Tính giá trị $f''\left(\dfrac{\pi}{2}\right)$.
+	\loigiai{
+		$f'(x)=3 \sin^2x \cos x+2x$; $f''(x)=6 \sin x \cos^2x-3 \sin^3x+2 \Rightarrow f''\left(\dfrac{\pi}{2}\right)=-1$.
+	}
+\end{baitap}
+
+\begin{baitap}%[Ngô Quang Anh]%[1D5Y5]
+	Cho hàm số $y=-2+\dfrac{5}{x}\cdot $ Chứng minh rằng: $\dfrac{2{y}'}{x}+{y}''=0.$
+	\loigiai{
+		${y}'=-\dfrac{5}{x^2};  {y}''=\dfrac{10}{x^3}$\\
+		$\dfrac{2{y}'}{x}+{y}''=-\dfrac{10}{x^3}+\dfrac{10}{x^3}=0.$
+	}
+\end{baitap}
+
+\begin{baitap}%[Ngô Quang Anh]%[1D5B5]
+	Cho $y=\dfrac{x-3}{x+4}.$ Chứng minh rằng: $2{\left({{y}'}\right)}^2=\left(y-1\right){y}''.$
+	\loigiai{
+		$y=\dfrac{x-3}{x+4}\Rightarrow {y}'=\dfrac{7}{{\left(x+4\right)}^2}\Rightarrow {y}''=-\dfrac{14}{{\left(x+4\right)}^3}\cdot$\\
+		Ta có vế trái: $2{\left({{y}'}\right)}^2=\dfrac{98}{{\left(x+4\right)}^4}\cdot $\\
+		Và vế phải:$\left(y-1\right){y}''=\left(\dfrac{x-3}{x+4}-1\right)\left[\dfrac{-14}{{\left(x+4\right)}^3}\right]=\dfrac{98}{{\left(x+4\right)}^4}\cdot $\\
+		Vậy $2{\left({{y}'}\right)}^2=\left(y-1\right){y}''.$
+	}
+\end{baitap}
+\begin{baitap}%[Ngô Quang Anh]%[1D5K5]
+	Cho hàm số $y=x\cos x.$ Chứng minh rằng: $x.y-2({y}'-\cos x)+x.{y}''=0.$
+	\loigiai{
+		${y}'=\cos x-x\sin x;{y}''=-2\sin x-x\cos x$ \\
+		$VT=x.y-2\left({y}'-\cos x\right)+x.{y}''=x.x\cos x-2\left(\cos x-x\sin x-\cos x\right)+x\left(-2\sin x-x\cos x\right)=$\\$=x^2\cos x+2x\sin x-2x\sin x-x^2\cos x=0=VP$ (đpcm).
+	}
+\end{baitap}
+
+\begin{baitap}%[Ngô Quang Anh]%[1D5K5]
+	Cho hàm số $y=\sin^2x$. Chứng minh rằng: $2y+{y}'\tan x+{y}''-2=0.$
+	\loigiai{
+		$ {y}'=2\sin x\cos x;{y}''=2\cos^2x-2\sin^2x$ \\ 
+		$2y+{y}'\tan x+{y}''-2=0 \\ 
+		\Leftrightarrow 2\sin^2x+2\sin x.\cos x.\dfrac{\sin x}{\cos x}+2\cos^2x-2\sin^2x -2=0 \\ 
+		\Leftrightarrow 2\sin^2x+2\cos^2x-2=0\Leftrightarrow 0=0$ (đúng). 
+	}
+\end{baitap}
+
+\begin{baitap}
+	Cho chuyển động thẳng xác định bởi phương trình $s=t^3-3t^2-9t$, trong đó $t>0$, $t$ tính bằng giây và $s(t)$ tính bằng mét. Gia tốc của chuyển động tại thời điểm vận tốc bị triệt tiêu là
+	\loigiai{
+		\begin{itemize}
+			\item Ta có $v(t)=s'(t)=3t^2-6t-9\Rightarrow a(t)=v'(t)=6t-6$.
+			\item Vận tốc bị triệt tiêu $\Leftrightarrow v(t)=0\Leftrightarrow 3t^2-6t-9=0\Leftrightarrow \hoac{
+				& t=-1 \text{ (loại)} \\ 
+				& t=3.}$
+			\item Với $t=3\Rightarrow a(3)=12$ m/s$^2$. 
+		\end{itemize}
+	}
+\end{baitap}
+
+\begin{baitap}%[1D5B3-3]
+	Một chất điểm có phương trình chuyển động $s(t)=6 \sin \left(3 t+\dfrac{\pi}{4}\right)$, trong đó $t>0, t$ tính bằng giây, $s(t)$ tính bằng centimét. Tính gia tốc tức thời của chất điểm tại thời điểm $t=\dfrac{\pi}{6}\,(\mathrm{s})$.
+	\loigiai{
+		Ta có: $s'(t)=18 \cos \left(3 t+\dfrac{\pi}{4}\right)$.\\
+		Gia tốc tức thời của chất điểm tại thời điểm $t\,(\mathrm{s})$ là: $s''(t)=-54 \sin \left(3 t+\dfrac{\pi}{4}\right)$.\\
+		Vậy gia tốc tức thời của chất điểm tại thời điểm $t=\dfrac{\pi}{6}\, (\mathrm{s})$ là:
+		$$s''\left(\dfrac{\pi}{6}\right)=-54 \sin \left(3 \cdot \dfrac{\pi}{6}+\dfrac{\pi}{4}\right)=-27 \sqrt{2}\,\left(\mathrm{cm} / \mathrm{s}^2\right).$$
+	}
+\end{baitap}

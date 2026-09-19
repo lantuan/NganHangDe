@@ -1,0 +1,1384 @@
+\section{TỌA ĐỘ CỦA VÉC TƠ TRONG KHÔNG GIAN}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Hệ tọa độ trong không gian}
+Trong không gian, ba trục $O x$, $O y$, $O z$ đôi một vuông góc với nhau tại gốc $O$ của mỗi trục. Gọi $\vec{i}$, $\vec{j}$, $\vec{k}$ lần lượt là các véc-tơ đơn vị trên các trục $O x$, $O y$, $O z$.
+\immini{
+	\begin{boxkn}
+	\begin{itemize}
+		\item  Hệ ba trục như vậy được gọi là hệ trục toạ độ Descartes vuông góc $Oxyz$, hay đơn giản là hệ toạ độ $Oxyz$. Điểm $O$ được gọi là gốc toạ độ.
+		\item  Các mặt phẳng $(O x y)$, $(O y z)$, $(O z x)$ đôi một vuông góc với nhau được gọi là các mặt phẳng toạ độ.
+		\item  ${\overrightarrow i ^2} = {\overrightarrow j ^2} = {\overrightarrow k ^2} = 1 \text{ và } \overrightarrow i  \cdot \overrightarrow j  = \overrightarrow j  \cdot \overrightarrow k  = \overrightarrow k  \cdot \overrightarrow i  = 0$
+	\end{itemize}
+	\end{boxkn}
+}{
+	\begin{tikzpicture}[>=stealth,line join=round,line cap=round,scale=0.8]
+		\def\a{3.0}
+		\path
+		(0,0) coordinate (A1)
+		(\a,0) coordinate (A2)
+		(\a,\a) coordinate (A3)
+		(0,\a) coordinate (A4);
+		\foreach \i in {1,...,4}
+		\path (A\i)+(45:.75) coordinate (B\i);
+		\draw (B1)--(A1) (B1)--(B2) (B1)--(B4);
+		%	\draw(A4)--(B4)--(B3)--(B2)--(A2) (A3)--(B3)
+		%	(A1)--(A2)--(A3)--(A4)--cycle;
+		\draw[-stealth] (B1)--(B2)node[right]{$y$};
+		\draw[-stealth] (B1)--(B4)node[above]{$z$};
+		\draw[dashed](B1)--+(45:0.85)[dashed](B1)--+(180:0.85)(B1)--+(270:0.85);
+		\draw[-stealth] (A1)--+(-135:.95)node[below]{$x$};
+		\draw[-stealth,blue] (B1)--+(0:.95)node[above]{$\vec{j}$};
+		\draw[-stealth,blue] (B1)--+(90:.85)node[above left]{$\vec{k}$};
+		\draw[-stealth,blue] (B1)--+(-135:0.95)node[right]{$\vec{i}$};
+		\fill(B1)circle(1pt) node[below right]{$O$};
+\end{tikzpicture}}
+\subsubsection{Tọa độ của điểm}
+	Trong không gian với hệ tọa độ $Oxyz$, cho điểm $M$. Tọa độ điểm $M$ được xác định như sau:
+	\immini{
+		\begin{boxkn}
+		\begin{itemize}
+			\item Xác định hình chiếu $M_1$ của điểm $M$ trên mặt phẳng $Oxy$. Trong mặt phẳng tọa độ $Oxy$, tìm hoành độ $a$, tung độ $b$ của điểm $M_1$.
+			\item Xác định hình chiếu $P$ của điểm $M$ trên trục cao $Oz$, điểm $P$ ứng với số $c$ trên trục $Oz$. Số $c$ là cao độ của điểm $M$.
+		\end{itemize}
+		Bộ số $(a;b;c)$ là toạ độ của điểm $M$ trong không gian với hệ toạ độ $Oxyz$, kí hiệu là $M(a;b;c)$.
+		\end{boxkn}
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (O)
+			(-2,-2) coordinate (H)
+			(3,-2) coordinate (M_1)
+			(5,0) coordinate (K)
+			(3,1) coordinate (M)
+			(0,3) coordinate (P)
+			;
+			\draw[->] (0,0)--(6.7,0) node[below]{$y$};
+			\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+			\draw[->] (0,0)--(0,4.3) node[left]{$z$};
+			\draw[dashed] (P)node[left]{$c$}--(M)--(M_1)--(H)node[left]{$a$} (O)--(M_1)--(K)node[above]{$b$} (O)--(M);
+			\foreach \x/\g in {O/160,M_1/-90,M/30,H/-80,K/-70,P/30}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\foreach \x/\y/\z in {M_1/H/O,M_1/K/O,M/P/O}{\path pic[draw,angle radius=5pt]{right angle= \x--\y--\z};}
+		\end{tikzpicture}
+	}	
+\subsubsection{Tọa độ của vectơ}
+Trong không gian $Oxyz$:
+	\immini{
+		\begin{boxkn}
+		\begin{itemize}
+			\item Toạ độ của điểm $M$ là toạ độ của vectơ $\overrightarrow{OM}$.
+			\item Cho $\vec{u}$. Dựng điểm $M(a;b;c)$ thỏa $\vec{OM}=\vec{u}$ thì tọa độ của điểm $M$ là tọa độ của $\vec{u}$. Ta có
+			$$\vec{u}=\vec{OM}=\vec{OH}+\vec{OK}+\vec{OP}=a\vec{i}+b\vec{j}+c\vec{k}.$$
+			Suy ra
+			$$\vec{u}=\left(a;b;c \right)\Leftrightarrow \vec{u}=a\vec{i}+b\vec{j}+c\vec{k}. $$
+		\end{itemize}
+	\end{boxkn}
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (O)
+			(-2,-2) coordinate (H)
+			(3,-2) coordinate (M_1)
+			(5,0) coordinate (K)
+			(3,1) coordinate (M)
+			(0,3) coordinate (P)
+			;
+			\draw[->] (0,0)--(6.7,0) node[below]{$y$};
+			\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+			\draw[->] (0,0)--(0,4.3) node[left]{$z$};
+			\draw[-stealth,blue,thick] (O)--(-1,-1)node[above]{$\vec{i}$};
+			\draw[-stealth,blue,thick](O)--(1,0)node[below right]{$\vec{j}$};
+			\draw[-stealth,blue,thick] (O)--(0,1)node[above left]{$\vec{k}$};
+			\draw[dashed] (P)node[left]{$c$}--(M)--(M_1)--(H)node[left]{$a$} (O)--(M_1)--(K)node[above]{$b$};
+			\draw[thick,->](O)--(M)node[midway,sloped,above,scale=1]{$\vec{u}$};
+			\foreach \x/\g in {O/160,M_1/-90,M/30,H/-80,K/-70,P/30}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\foreach \x/\y/\z in {M_1/H/O,M_1/K/O,M/P/O}{\path pic[draw,angle radius=5pt]{right angle= \x--\y--\z};}
+	\end{tikzpicture}}
+\begin{luuy}
+	Tọa độ các véc tơ đơn vị lần lượt là: $\vec{i}=(1;0;0)$,\quad $\vec{j}=(0;1;0)$,\quad $\vec{k}=(0;0;1)$.
+\end{luuy}
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Tọa độ điểm, tọa độ vec tơ}
+	\indamm{Khi xác định tọa độ điểm, tọa độ véc tơ ta chú ý các kết quả sau:}
+	\begin{listEX}[2]
+		\item [\ding{172}] $\vec{u}=a\vec{i}+b\vec{j}+c\vec{k} \Leftrightarrow \vec{u}=\big(a;b;c\big)$.
+		\item [\ding{173}] $\vec{u}=\vec{v} \Leftrightarrow \heva{&u_1=v_1\\&u_2=v_2\\&u_3=v_3}$
+		\item [\ding{174}] $\vec{OM}=(a;b;c)$ thì $M\big(a;b;c\big)$.
+		\item [\ding{175}] $\vec{AB}=\big(x_B-x_A\,;\,y_B-y_A\,;\,z_B-z_A \big).$
+		\item [\ding{176}] Chiếu điểm $M(a;b;c)$ lên mặt phẳng tọa độ (hoặc trục tọa độ) thì "thành phần bị khuyết" bằng $0$. Chẳng hạn: $M(1;2;3)$ chiếu lên $(Oxy)$ thì $z=0$. Suy ra hình chiếu là $M_1(1;2;0)$.
+		\item [\ding{177}] Tứ giác $ABCD$ là hình bình hành khi và chỉ khi $$\vec{AD}=\vec{BC}$$
+	\end{listEX}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+\begin{vd}
+	Trong không gian $Oxyz$, cho $A(3 ;-2 ;-1)$. Gọi $ A_1, A_2, A_3$ lần lượt là hình chiếu của điểm $A$ trên các mặt phẳng toạ độ $(Oxy),(Oyz),(Oxz)$. Tìm toạ độ của các điểm $ A_1, A_2, A_3$.
+	\loigiai{
+		Toạ độ của các điểm $ A_1=(3 ;-2 ;0)$.\\
+		Toạ độ của các điểm $ A_2=(3 ;0 ;-1)$.\\
+		Toạ độ của các điểm $ A_3=(0 ;-2 ;-1)$
+	}
+\end{vd}
+\dongcham{2}
+\begin{vd}
+	Trong không gian $Oxyz$, cho $A(-2;3;4)$. Gọi $H, K, P$ lần lượt là hình chiếu của điểm $A$ trên các trục $Ox, Oy, Oz$. Tìm tọa độ của các điểm $H,K,P$.
+	\loigiai{
+		Tìm tọa độ của các điểm $H=(-2;0;0)$.\\ 
+		Tìm tọa độ của các điểm $K=(0;3;0)$.\\ 
+		Tìm tọa độ của các điểm $P=(0;0;4)$. 
+	}
+\end{vd}
+\dongcham{2}
+\begin{vd} Trong không gian $Oxyz$, cho $A(1; 1;-2)$, $B(4; 3; 1)$ và $C(-1;-2; 2)$.
+	\begin{tasks}
+		\task Tìm tọa độ của véctơ $\overrightarrow{A B}$.
+		\task Tìm toạ độ của điểm $D$ sao cho $ABCD$ là hình bình hành.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có $
+			\overrightarrow{AB}=(4-1; 3-1; 1-(-2))=(3; 2; 3) .
+			$
+			\item Gọi tọa độ của điểm $D$ là $\left(x_D; y_D; z_D\right)$, ta có
+			$
+			\overrightarrow{DC}=\left(-1-x_D;-2-y_D; 2-z_D\right) .
+			$\\
+			Tứ giác $A B C D$ là hình bình hành khi và chỉ khi
+			$$
+			\overrightarrow{DC}=\overrightarrow{A B} \Leftrightarrow\heva{&
+				- 1 - x _ { D } = 3 \\&
+				- 2 - y _ { D } = 2 \\&
+				2 - z _ { D } = 3.} 
+			\Leftrightarrow \heva{&
+				x_D=-4 \\&
+				y_D=-4 \\&
+				z_D=-1.}$$
+			Vậy $D(-4;-4;-1)$.
+	\end{enumerate}}
+\end{vd}
+\dongcham{7}
+\begin{vd}
+	Trong không gian $Oxyz$, cho hình hộp $ABCD \cdot A'B'C'D'$ có $A(4;6;-5)$, $B(5;7;-4)$, $C(5;6;-4)$, $D'(2;0;2)$. Tìm tọa độ các đỉnh còn lại của hình hộp $ABCD\cdot A'B'C'D'$.
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{3} % cạnh BA
+				\def\gocB{35} % góc B của đáy
+				\coordinate[label=below left:$B(5;7;-4)$] (B) at (0,0);
+				\coordinate[label=above left:$A(4;6;-5)$] (A) at (\gocB:\ba);
+				\coordinate[label=below:$C(5;6;-4)$] (C) at (\bc,0);
+				\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+				\coordinate[label=above left:$A'$] (A') at ($(A)+(90:\bc)$);
+				\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+				\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+				\coordinate[label=right:$D'(2;0;2)$] (D') at ($(D)-(A)+(A')$);
+				\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+				\draw[dashed] (A')--(A)--(D) (A)--(B);
+				\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		\end{center}
+		Ta có  $\overrightarrow{AD}=\overrightarrow{BC}\Leftrightarrow \heva{x_D&=x_A-x_B+x_C\\y_D&=y_A-y_B+y_C\\z_D&=z_A-z_B+z_C}\Leftrightarrow \heva{x_D&=4\\y_D&=5\\z_D&=-5}$. Suy ra $D(4;5;-5)$.\\
+		Do đó $\overrightarrow{DD'}=(2-4;0-5;2-(-5)) =(-2;-5;7)$.\\
+		Theo tính chất của hình hộp ta có $\overrightarrow{AA'}=\overrightarrow{BB'}=\overrightarrow{CC'}=\overrightarrow{DD'}=(-2;-5;7)$. Suy ra tọa độ đỉnh còn lại của hình hộp là $A'=(2;1;2)$, $B'(3;2;3)$, $C'(3;1;3)$.
+	}
+\end{vd}
+\dongcham{17}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2H2-B2-d1-1]
+
+
+\begin{ex}
+	Trong không gian $Oxyz$, cho $\overrightarrow{a}=-2\overrightarrow{i}+3\overrightarrow{j}+5\overrightarrow{k}$. Toạ độ của véc-tơ $\overrightarrow{a}$ là
+	\choice
+	{$(2;-3;-5)$}
+	{$(2;3;-5)$}
+	{\True $(-2;3;5)$}
+	{$(2;3;5)$}
+	\loigiai{
+		Toạ độ của véc-tơ $\overrightarrow{a}$ là $(-2;3;5)$.}
+\end{ex} \cham{1}
+
+\begin{ex}
+	Trong không gian $Oxyz$, cho véc-tơ $\overrightarrow{u}=3\overrightarrow{i}+4\overrightarrow{k}-\overrightarrow{j}$. Tọa độ của véc-tơ $\overrightarrow{u}$ là
+	\choice
+	{\True $(3;-1;4)$}
+	{$(3;4;-1)$}
+	{$(4;-1;3)$}
+	{$(4;3;-1)$}
+	\loigiai
+	{
+		Tọa độ của véc-tơ $\overrightarrow{u}$ là $(3;-1;4)$.
+	}
+\end{ex} \cham{1}
+
+\begin{ex}
+	Trong không gian $Oxyz$, điểm nào sau đây thuộc trục $Oz$?
+	\choice
+	{$M(1;0;0)$}
+	{$M(1;0;2)$}
+	{$M(1;2;0)$}
+	{\True $M(0;0;-2)$}
+	\loigiai{
+		Ta có $M(0;0;-2) \in Oz$.
+	}
+\end{ex} \cham{1}
+
+\begin{ex}%[An Do - Dự án 2H3-LVD]%[2H3Y1-1]%
+	Trong không gian $Oxyz$, cho điểm $M$ thỏa $\vec{OM} = 2\vec{i} + \vec{j}$. Tọa độ điểm $M$ là
+	\choice
+	{$M(0;2;1)$}
+	{$M(1;2;0)$}
+	{$M(2;0;1)$}
+	{\True$M(2;1;0)$}
+	\loigiai{
+		Tọa độ $\vec{OM} = 2\vec{i} + \vec{j} = (2;0;0) + (0;1;0) = (2;1;0)$.\\
+		Vậy $M (2;1;0)$.
+	}
+\end{ex} \cham{1}
+
+\begin{ex}%[2H3Y1-1]%[Đoàn Mạnh Hùng]%
+	Trong không gian $Oxyz$, cho vectơ $\overrightarrow{OA}=\overrightarrow{j}-2\overrightarrow{k}$. Tọa độ điểm $A$ là
+	\choice
+	{$(1;0;-2)$}
+	{\True $(0;1;-2)$}
+	{$(0;-1;2)$}
+	{$(1;-2;0)$}
+	\loigiai{
+		Ta có $\overrightarrow{OA}=\vec{j}-2\vec{k}\Leftrightarrow A(0;1;-2)$.
+	}
+\end{ex} \cham{1}
+
+\begin{ex}
+	Trong không gian $O x y z$, xác định toạ độ của điểm $A$ biết $A$ nằm trên tia $O x$ và $O A=2$.
+	\choice
+	{$A(0;0;2)$}
+	{$A(2;2;0)$}
+	{$A(0;2;0)$}
+	{\True $A(2;0;0)$}
+	\loigiai{$A$ nằm trên tia $O x$ và $O A=2$ nên $A(2;0;0)$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Trong không gian $O x y z$, xác định toạ độ của điểm $A$ biết $A$ nằm trên tia đối của tia $O y$ và $O A=3$.
+	\choice
+	{$A(0;3;0)$}
+	{\True $A(0;-3;0)$}
+	{$A(0;-9;0)$}
+	{$A(3;-3;0)$}
+	\loigiai{
+		$A$ nằm trên tia đối của tia $O y$ và $O A=3$ nên $A(0;-3;0)$.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Trong không gian $ Oxyz $, cho hai điểm $ A(1;3;-2) $, $ B(3;-2;4) $. Véc-tơ $ \overrightarrow{AB} $ có tọa độ là
+	\choice
+	{\True $ (2;5;6) $}
+	{$ (4;1;2) $}
+	{\True $ (2;-5;6) $}
+	{$ (-2;5;6) $}
+	\loigiai{
+		Véc-tơ $ \overrightarrow{AB} $ có tọa độ là $ (2;-5;6) $.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho hai điểm $A$, $B$ thỏa mãn $\vec{OA} = (2;-1; 3)$ và  $\vec{OB}= (5;2;-1)$. Tìm tọa độ véc-tơ $\vec{AB}$.
+	\choice
+	{$\vec{AB} =(2;-1;3)$}
+	{\True  $\vec{AB} =(3;3;-4)$}
+	{$\vec{AB} = (7;1;2)$}
+	{$\vec{AB} =(3;-3;4)$}
+	\loigiai{
+		$\vec{AB} = \vec{OB} - \vec{OA} = (5-2;2+1;-1-3)=(3;3;-4)$.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Trong không gian $Oxyz$, cho hai điểm $M$ và $N$ biết $M(2;1;-1)$ và $\vv{MN}=(-1;2-3)$. Tọa độ $N$ là
+	\choice
+	{$N(1;-3;-4)$}
+	{\True $N(1;3;-4)$}
+	{$N(-1;3;-4)$}
+	{$N(1;3;4)$}
+	\loigiai
+	{
+		Gọi $N(x,y,z)$, khi đó ta có $\heva{&x-2=-1\\&y-1=2\\&z+1=-3}\Leftrightarrow \heva{&x=1\\&y=3\\&z=-4}\Rightarrow N(1;3;-4)$.\\
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Hình chiếu vuông góc của điểm $A(3;-4;5)$ trên mặt phẳng $(Oxz)$ là điểm
+	\choice
+	{$M(3;0;0)$}
+	{$M(0;-4;5)$}
+	{$M(0;0;5)$}
+	{\True $M(3;0;5)$}
+	\loigiai{
+		Hình chiếu vuông góc của điểm $A(3;-4;5)$ trên mặt phẳng $(Oxz)$ là điểm $M(3;0;5)$.}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Hình chiếu vuông góc của điểm $A(1;2;3)$ trên mặt phẳng $(Oxy)$ là điểm
+	\choice
+	{$M(0;0;3)$}
+	{\True $N(1;2;0)$}
+	{$Q(0;2;0)$}
+	{$P(1;0;0)$}
+	\loigiai
+	{
+		Hình chiếu vuông góc của điểm $A(1;2;3)$ trên mặt phẳng $(Oxy)$ là điểm $N(1;2;0)$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Hình chiếu vuông góc của điểm $M(2;1;-3)$ lên mặt phẳng $(Oyz)$ có tọa độ là
+	\choice
+	{$(2;0;0)$}
+	{$(2;1;0)$}
+	{\True $(0;1;-3)$}
+	{$(2;0;-3)$}
+	\loigiai{
+		Điểm thuộc $(Oyz)$ có tọa độ $(0;y;z)$ nên hình chiếu của $M$ lên $(Oyz)$ có tọa độ là $(0;-1;3)$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Hình chiếu vuông góc của điểm $A(3;2;1)$ trên trục $Ox$ có tọa độ là
+	\choice
+	{$(0;2;1)$}
+	{$(0;2;0)$}
+	{\True $(3;0;0)$}
+	{$(0;0;1)$}
+	\loigiai{
+		Hình chiếu vuông góc của điểm $A(3;2;1)$ lên trục $Ox$ là $A'(3;0;0)$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Hình chiếu của điểm $M(2;3;-2)$ trên trục $Oy$ có tọa độ là
+	\choice
+	{$ (2;0;0) $}
+	{\True $ (0;3;0) $}
+	{$ (0;0;-2) $}
+	{$ (2;0;-2) $}
+	\loigiai{
+		Hình chiếu của điểm $M(2;3;-2)$ trên trục $Oy$ có tọa độ là $(0;3;0)$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	\immini[thm]{Trong không gian $Oxyz$, cho hình bình hành $ABCD$ với $A(-2;3;1)$, $B(3;0;-1)$, $C(6;5;0)$. Tọa độ đỉnh $D$ là
+		\choice
+		{$D(11;2;2)$}
+		{\True $D(1;8;2)$}
+		{$D(11;2;-2)$}
+		{$D(1;8;-2)$}}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (A)
+			(1,1.5) coordinate (B)
+			(4,0) coordinate (D)
+			($(D)+(B)-(A)$)coordinate (C)
+			;
+			\draw (A)--(B)--(C)--(D)--(A);
+			\foreach \x/\g in {A/-90,B/90,C/0,D/-90}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Ta có $\heva{& x_D = x_A+x_C-x_B = 1 \\ & y_D = y_A +y_C -y_B = 8 \\ & z_D = z_A + z_C - z_B = 2}\Rightarrow D(1;8;2)$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	\immini[thm]{Trong không gian $Oxyz$, cho các điểm $A(1;0;3)$, $B(2;3;-4)$,$C(-3;1;2)$. Tìm tọa độ điểm $D$ sao cho tứ giác $ABCD$ là hình bình hành.
+		\choice
+		{$D(4;2;9) $}
+		{$D(-2;4;-5) $}
+		{$D(6;2;-3) $}
+		{\True $(-4;-2;9) $}}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (A)
+			(1,1.5) coordinate (B)
+			(4,0) coordinate (D)
+			($(D)+(B)-(A)$)coordinate (C)
+			;
+			\draw (A)--(B)--(C)--(D)--(A);
+			\foreach \x/\g in {A/-90,B/90,C/0,D/-90}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		Gọi $D(x;y;z) \Rightarrow \vec{CD}=(x+3;y-1;z-2)$ và $\vec{BA}=(-1;-3;7)$.\\
+		Để tứ giác $ABCD$ là hình bình hành ta có $\vec{BA}=\vec{CD}$ $\Rightarrow \heva{&x+3=-1\\&y-1=-3\\&z-2=7} \Rightarrow D(-4;-2;9)$.
+	}
+\end{ex} \cham{3}
+\begin{ex}
+	\immini[thm]{Trong không gian $Oxyz$, cho hình hộp $ABCD.A'B'C'D'$, biết rằng $A(-3;0;0)$, $B(0;2;0)$, $D(0;0;1)$, $A'(1;2;3)$. Tìm tọa độ điểm $C'$.
+	\choice
+	{$(-13;4;4)$}
+	{$(13;4;4)$}
+	{\True $(7;4;4)$}
+	{$(10;4;4)$}
+}{
+\begin{tikzpicture}[scale=0.85, line join=round, line cap=round]
+	\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+	\coordinate (D) at ($(A)+(C)-(B)$);
+	\coordinate (A') at ($(A)+(-0.5,2.5)$);
+	\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+	\tkzDrawPolygon(A',B',B,C,D,D')
+	\tkzDrawSegments(B',C' C',D' C,C')
+	\tkzDrawSegments[dashed](A,B A,D A,A')
+	\tkzDrawPoints[fill=black,size=4](A,B,D,C,A',B',C',D')
+	\tkzLabelPoints[above](A',D')
+	\tkzLabelPoints[below](A,B,C)
+	\tkzLabelPoints[left](B')
+	\tkzLabelPoints[right](C',D)
+\end{tikzpicture}}
+	\loigiai{
+		Gọi $C'(x;y;z)$. Ta có $\overrightarrow{AB}=(3;2;0)$, $\overrightarrow{AD}=(3;0;1)$, $\overrightarrow{AA'}=(4;2;3)$.\\
+		Mà $\overrightarrow{AC'}=\overrightarrow{AB}+\overrightarrow{AD}+\overrightarrow{AA'}=(10;4;4)\Rightarrow \heva{&x=7\\&y=4\\&z=4.}$
+	}
+\end{ex}
+\cham{3}
+\begin{ex}
+	\immini[thm]{Trong không gian $Oxyz$, cho hình hộp $ABCD.A'B'C'D'$ với các đỉnh $A(-1;1;2)$, $B(-3;2;1)$, $D(0;-1;2)$, $A'(2;1;2)$. Tìm tọa độ đỉnh $C'$.
+	\choice
+	{$C'(-3;1;3)$}
+	{$C'(0;1;0)$}
+	{\True $C'(1;0;1)$}
+	{$C'(-1;3;1)$}
+}{
+\begin{tikzpicture}[scale=0.85, line join=round, line cap=round]
+	\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+	\coordinate (D) at ($(A)+(C)-(B)$);
+	\coordinate (A') at ($(A)+(-0.5,2.5)$);
+	\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+	\tkzDrawPolygon(A',B',B,C,D,D')
+	\tkzDrawSegments(B',C' C',D' C,C')
+	\tkzDrawSegments[dashed](A,B A,D A,A')
+	\tkzDrawPoints[fill=black,size=4](A,B,D,C,A',B',C',D')
+	\tkzLabelPoints[above](A',D')
+	\tkzLabelPoints[below](A,B,C)
+	\tkzLabelPoints[left](B')
+	\tkzLabelPoints[right](C',D)
+\end{tikzpicture}}
+	\loigiai{
+		Gọi $C'(x;y;z)$. \\
+		Áp dụng quy tắc hình hộp ta có\\
+		$$\begin{aligned}
+			&\overrightarrow{AC'}=\overrightarrow{AA'}+\overrightarrow{AB}+\overrightarrow{AD}\\
+			& \Leftrightarrow (x+1;y-1;z-2)=(3;0;0)+(-2;1;-1)+(1;-2;0)\\
+			&\Leftrightarrow (x+1;y-1;z-2)=(2;-1;-1)\\
+			&\Leftrightarrow\heva{&x+1=2\\&y-1=-1\\&x-2=-1}\Leftrightarrow\heva{&x=1\\&y=0\\&z=1.}
+		\end{aligned}$$
+	}
+\end{ex}
+\cham{2}
+\begin{ex}
+	\immini[thm]{Trong không gian $Oxyz$, cho hình hộp $ABCD.A’B’C’D’$ biết $A(1;2;3)$, $B’(2;0;-1)$, $C(3;0;-3)$ và $D’(-2;4;-3)$. Tọa độ đỉnh $B$ của hình hộp $ABCD.A’B’C’D’$ là
+	\choice
+	{\True $B(4;-1;1)$}
+	{$B(2;-1;2)$}
+	{$B(0;1;-3)$}
+	{$B(4;1;-1)$}
+}{
+\begin{tikzpicture}[scale=0.85, line join=round, line cap=round]
+	\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+	\coordinate (D) at ($(A)+(C)-(B)$);
+	\coordinate (A') at ($(A)+(-0.5,2.5)$);
+	\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+	\tkzDrawPolygon(A',B',B,C,D,D')
+	\tkzDrawSegments(B',C' C',D' C,C')
+	\tkzDrawSegments[dashed](A,B A,D A,A')
+	\tkzDrawPoints[fill=black,size=4](A,B,D,C,A',B',C',D')
+	\tkzLabelPoints[above](A',D')
+	\tkzLabelPoints[below](A,B,C)
+	\tkzLabelPoints[left](B')
+	\tkzLabelPoints[right](C',D)
+\end{tikzpicture}}
+	\loigiai{
+		\immini{
+			Gọi $I$, $I’$ lần lượt là trung điểm của $AC$ và $B’D’$.\\
+			Ta có $I(2;1;0)$, $I’(0;2;-2)$ và $\overrightarrow{II’}=(-2;1;-2)$.\\
+			Giả sử $B(a;b;c) \Rightarrow \overrightarrow{BB'}=(2-a;-b;-1-c)$.\\
+			Theo tính chất của hình hộp ta có $$\overrightarrow{II’}=\overrightarrow{BB'} \Leftrightarrow \heva{& 2-a=-2 \\& -b=1 \\&-1-c=-2 }\Leftrightarrow \heva{& a=4 \\& b=-1 \\& c=1. }$$
+			Vậy B$(4;-1;1)$.
+		}
+		{
+			\begin{tikzpicture}[line join = round, line cap = round,>=stealth,font=\footnotesize,scale=.7]
+				\tkzDefPoints{0/0/A}
+				\coordinate (B) at ($(A)+(4,0)$);
+				\tkzDefShiftPoint[A](-140:2.2){D}
+				\coordinate (C) at ($(B)+(D)-(A)$);
+				\tkzDefShiftPoint[A](-110:4){A'}
+				\tkzDefPointsBy[translation = from A to A'](B,C,D){B'}{C'}{D'}
+				\tkzDefMidPoint(A,C)
+				\tkzGetPoint{I}
+				\tkzDefMidPoint(A',C')
+				\tkzGetPoint{I'}
+				\tkzDrawPolygon(A,B,B',C',D',D)
+				\tkzDrawSegments(C,B C,C' C,D A,C B,D)
+				\tkzDrawSegments[dashed](A',A A',B' A',D' A',C' I,I' B',D')
+				\tkzDrawPoints[fill=black](A,B,D,C,A',B',C',D')
+				\tkzLabelPoints[above](A,B,I)
+				\tkzLabelPoints[below](D',C',I')
+				\tkzLabelPoints[left](D)
+				\tkzLabelPoints[right](B')
+				\tkzLabelPoints[above left](A')
+				\tkzLabelPoints[below right](C)
+			\end{tikzpicture}
+		}
+	}
+\end{ex}
+\cham{2}
+\Closesolutionfile{ans}
+
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2H2-B2-d1-2]
+\begin{ex}
+	Trong không gian $Oxyz$, cho $\vec{a}=\vec{i}+3\vec{k}-4\vec{j}$ và $\vec{b}=\big(m-n;4m-6n;n^2-3m+2\big)$, với $m$, $n$ là tham số.
+	\choiceTF
+	{Tọa độ $\vec{a}=\big(1;3;-4\big)$}
+	{\True Dựng điểm $A$ thỏa $\vec{OA}=\vec{a}$ thì $A(1;-4;3)$}
+	{Tồn tại giá trị của $m$ và $n$ để $\vec{b}=\vec{0}$}
+	{\True Nếu $\vec{a}=\vec{b}$ thì $m+n=9$}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Tọa độ $\vec{a}=\big(1;-4;3\big)$.
+			\item Khi $\vec{OA}=\vec{a}$ thì tọa độ $\vec{a}$ cũng là tọa độ điểm $A$. Suy ra $A(1;-4;3)$.
+			\item $\vec{b}=\vec{0} \Leftrightarrow \heva{&m-n=0\\&4m-6n=0\\&n^2-3m+2=0} \Leftrightarrow \heva{&m=0\\&n=0\\&n^2-3m+2=0}$ (vô nghiệm).\\
+			Vậy, không tồn tại $m$, $n$ để $\vec{b}=\vec{0}$.
+			\item $\vec{a}=\vec{b} \Leftrightarrow \heva{&m-n=1\\&4m-6n=-4\\&n^2-3m+2=3} \Leftrightarrow \heva{&m=5\\&n=4}$.\\
+			Suy ra $m+n=9$.
+	\end{enumerate}}
+\end{ex} \cham{1}
+\begin{ex}
+	\immini{Trong không gian $Oxyz$, cho $\vec{a}=(2;0;2)$, $\vec{b}=2\vec{j}+2\vec{k}$. Dựng $\vec{OA}=\vec{a}$ và $\vec{OB}=\vec{b}$.
+		\choiceTF
+		{$\vec{a}=2\vec{i}+2\vec{k}$}
+		{\True Toạ độ $\vec{b}=(0;2;2)$}
+		{\True Toạ độ $\vec{AB}=(-2;2;0)$}
+		{Góc $\widehat{AOB}=45^\circ$}}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (O)
+			(-2,-2) coordinate (H)
+			(4,0) coordinate (K)
+			(0,3.5) coordinate (P)
+			($(P)+(H)-(O)$)coordinate (A)
+			($(P)+(K)-(O)$)coordinate (B)
+			;
+			\draw[->] (0,0)--(6.7,0) node[below]{$y$};
+			\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+			\draw[->] (0,0)--(0,5) node[left]{$z$};
+			\draw[-stealth,blue,thick] (O)--(-1,-1)node[above]{$\vec{i}$};
+			\draw[-stealth,blue,thick](O)--(1,0)node[below right]{$\vec{j}$};
+			\draw[-stealth,blue,thick] (O)--(0,1)node[above right]{$\vec{k}$};
+			\draw[dashed] (H)--(A)--(P)--(B)--(K);
+			\draw[thick,->](O)--(A)node[midway,sloped,above,scale=1]{$\vec{a}$};
+			\draw[thick,->](O)--(B)node[midway,sloped,below,scale=1]{$\vec{b}$};
+			\foreach \x/\g in {O/-90,A/180,B/10}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		\immini{
+			\begin{enumerate}[a)]
+				\item Ta có $\vec{a}=(2;0;2)\Rightarrow \vec{a}=2\vec{i}+2\vec{k} $.
+				\item Ta có $\vec{b}=2\vec{j}+2\vec{k} \Rightarrow \vec{b}=(0;2;2)$.
+				\item Ta có $\vec{OA}=\vec{a}$ thì toạ độ véc tơ $\vec{a}$ cũng chính là toạ độ $A$. Suy ra $A(2;0;2)$. Tương tự $B(0;2;2)$. Từ đây, ta tính được
+				$$\vec{AB}=(-2;2;0).$$
+				\item Nhận xét $OHMK.PANB$ là hình lập phương. Suy ra $\triangle OAB$ đều. Vậy $\widehat{AOB}=60^\circ$.
+		\end{enumerate}}{
+			\begin{tikzpicture}[scale=0.8, font=\footnotesize,>=stealth]
+				\path
+				(0,0) coordinate (O)
+				(-2,-2) coordinate (H)
+				(4,0) coordinate (K)
+				(0,3.5) coordinate (P)
+				($(P)+(H)-(O)$)coordinate (A)
+				($(P)+(K)-(O)$)coordinate (B)
+				($(H)+(K)-(O)$)coordinate (M)
+				($(A)+(B)-(P)$)coordinate (N)
+				;
+				\draw[->] (0,0)--(6.7,0) node[below]{$y$};
+				\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+				\draw[->] (0,0)--(0,4.3) node[left]{$z$};
+				\draw[-stealth,blue,thick] (O)--(-1,-1)node[above]{$\vec{i}$};
+				\draw[-stealth,blue,thick](O)--(1,0)node[below right]{$\vec{j}$};
+				\draw[-stealth,blue,thick] (O)--(0,1)node[above right]{$\vec{k}$};
+				\draw[dashed] (H)--(A)--(P)--(B)--(K)--(M)--(H) (A)--(N)--(B) (M)--(N);
+				\draw[thick,->](O)--(A)node[midway,sloped,above,scale=1]{$\vec{a}$};
+				\draw[thick,->](O)--(B)node[midway,sloped,above,scale=1]{$\vec{b}$};
+				\foreach \x/\g in {O/-90,A/180,B/10,H/-90,M/-90,K/20,P/30,N/0}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\end{tikzpicture}
+		}
+	}
+\end{ex} \cham{1}
+
+\begin{ex}
+	\immini{Trong không gian $O x y z$, cho hình hộp $O A B C . O' A' B' C'$ có $A(1 ; 1 ;-1)$, $B(0 ; 3 ; 0)$, $\vec{BC'}=(2 ;-6 ; 6)$. Gọi $H$, $K$ lần lượt là trọng tâm của tam giác $OA'O'$ và $CB'C'$.
+		\choiceTF
+		{\True Tọa độ điểm $C'$ là $(2;-3;6)$}
+		{\True Tọa độ điểm $O'$ là $(3;-5;5)$}
+		{Tọa độ véc tơ $\vec{AB'}=(-2;3;-6)$}
+		{Tọa độ véc tơ $\vec{HK}=(-1;2;-1)$}
+	}{\hspace{1.5cm}
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (O)
+			(-1.5,-1) coordinate (A)
+			(5,0) coordinate (C)
+			($(A)+(C)-(O)$)coordinate (B)
+			($(O)+(-.5,4)$)coordinate (O')
+			($(A)+(C)-(O)$)coordinate (B)
+			($(A)+(O')-(O)$)coordinate (A')
+			($(A')+(B)-(A)$)coordinate (B')
+			($(B')+(C)-(B)$)coordinate (C')
+			;
+			\draw (B)--(A)--(A')--(B')--(B)--(C)--(C')--(O')--(A') (B')--(C');
+			\draw[thick,->] (B)--(C');
+			\draw[dashed] (C)--(O)--(O') (O)--(A);
+			\foreach \x/\g in {O/170,A/-90,B/-90,C/0,O'/90,A'/180,B'/-5,C'/10}\draw[fill=black] (\x) circle (.05) +(\g:.4)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Gọi $C'(x;y;z)$. Ta có $$\vec{BC'}=(2 ;-6 ; 6) \Rightarrow \heva{&x-0=2\\&y-3=-6\\&z-0=6} \Leftrightarrow \heva{&x=2\\&y=-3\\&z=6}$$
+			Vậy $C(2;-3;6)$.
+			\item Gọi $O'(x;y;z)$. Theo hình vẽ thì
+			$$\vec{AO'}=\vec{BC'} \Leftrightarrow \heva{&x-1=2\\&y-1=-6\\&z+1=6} \Leftrightarrow \heva{&x=3\\&y=-5\\&z=5}$$
+			Vậy $O'(3;-5;5)$.
+			\item Theo hình vẽ thì $\vec{AB'}=\vec{OC'}=(2;-3;6)$.
+			\item Ta có $\vec{HK}=\vec{AB}=(-1;2;1)$.
+		\end{enumerate}
+	}
+\end{ex} \cham{5}
+\Closesolutionfile{ans}
+
+\begin{dang}{Tọa độ hóa một số hình không gian}
+	\begin{listEX}[1]
+		\item [\ding{172}] Chọn một điểm mà từ đó có ba đường đôi một vuông góc nhau làm gốc tọa độ.
+		\item [\ding{173}] Xây dựng tọa độ các điểm trên hình đã cho tương ứng với hệ trục vừa chọn.
+		\item [\ding{173}] Tọa độ các điểm đặc biệt:
+		\begin{listEX}[2]
+			\item [$\bullet$] $M \in Ox \Rightarrow M(x;0;0)$.
+			\item [$\bullet$] $M \in Oy \Rightarrow M(0;y;0)$.
+			\item [$\bullet$] $M \in Oz \Rightarrow M(0;0;z)$.
+			\item [$\bullet$] $M \in (Oxy) \Rightarrow M(x;y;0)$.
+			\item [$\bullet$] $M \in (Oxz) \Rightarrow M(x;0;z)$.
+			\item [$\bullet$] $M \in (Oyz) \Rightarrow M(0;y;z)$.
+		\end{listEX}
+	\end{listEX}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+
+\begin{vd}%[2H2H2-6]
+	Cho tứ diện $OABC$ có $OA$, $OB$, $OC$ đôi một vuông góc với nhau và $OA=4$, $OB=6$, $OC=8$.
+	\begin{enumerate}
+		\item  Xác định một hệ toạ độ với $O$ là gốc tọa độ và các vectơ đơn vị $\overrightarrow{i}$, $\overrightarrow{j}$, $\overrightarrow{k}$ theo thứ tự cùng hướng với $\overrightarrow{OA}$, $\overrightarrow{OB}$, $\overrightarrow{OC}$.
+		\item  Trong hệ toạ độ thiết lập ở câu a), tìm toạ độ các điểm $A$, $B$, $C$ và điểm $M$ là trung điểm của $AB$.
+	\end{enumerate}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{2} % cạnh BA
+				\def\l{1}
+				\def\h{4} % đường cao
+				\def\gocB{45} % góc B của đáy
+				\coordinate[label=left:$B$] (B) at (0,0);
+				\coordinate[label=above left:$O$] (O) at (\gocB:\ba);
+				\coordinate[label=below:$A$] (A) at ($(O)+(0:\bc)$);
+				\coordinate[label=right:$C$] (C) at ($(O)+(90:\h)$);
+				\coordinate[label=right:$z$] (z) at ($(C)+(90:\l)$);
+				\coordinate[label=above:$x$] (x) at ($(A)+(0:\l)$);
+				\coordinate[label=left:$y$] (y) at ($(B)-(\gocB:\l)$);
+				\coordinate[label=right:$\overrightarrow{k}$] (k) at ($(O)+(90:\l)$);
+				\coordinate[label=above:$\overrightarrow{i}$] (i) at ($(O)+(0:\l)$);
+				\coordinate[label=left:$\overrightarrow{j}$] (j) at ($(O)-(\gocB:\l)$);
+				\coordinate[label=below:$M$] (M) at ($(A)!0.5!(B)$);
+				\draw[dashed] (B)--(O)--(C) (O)--(A);
+				\draw (C)--(A)--(B)--cycle;
+				\draw[->] (C)--(z);
+				\draw[->] (B)--(y);
+				\draw[->] (A)--(x);
+				\draw[->,line width=2] (O)--(i);
+				\draw[->,line width=2] (O)--(j);
+				\draw[->,line width=2] (O)--(k);
+				\foreach \diem in {A,B,O,M,C}	\fill (\diem)circle(1pt);
+				\newcommand{\gocv}[4][black]{\draw[#1] ($(#3)!5pt!(#2)$)--($(#3)!2!($($(#3)!5pt!(#2)$)!.5!($(#3)!5pt!(#4)$)$)$)--($(#3)!5pt!(#4)$);}
+				\gocv{C}{O}{A};
+				\gocv{B}{O}{A};
+				\gocv{C}{O}{B}
+			\end{tikzpicture}
+		\end{center}
+		\begin{enumerate}
+			\item  Ta thiết lập một hệ tọa độ $Oxyz$ với $\overrightarrow{i}=\dfrac{1}{4} \overrightarrow{OA}$; $\overrightarrow{j}=\dfrac{1}{6} \overrightarrow{OB};\overrightarrow{k}=\dfrac{1}{8} \overrightarrow{OC}$.
+			\item  Trong hệ toạ độ vừa chọn, ta có
+			\begin{align*}
+				&\overrightarrow{OA}=4\overrightarrow{i}+0\overrightarrow{j}+0 \overrightarrow{k};\overrightarrow{OB}=0\overrightarrow{i}+6 \overrightarrow{j}+0\overrightarrow{k}\\
+				&\overrightarrow{OC}=0\overrightarrow{i}+0\overrightarrow{j}+8 \overrightarrow{k};\\
+				&\overrightarrow{OM}=\dfrac{1}{2}\Big(\overrightarrow{OA}+\overrightarrow{OB}\Big)=2\overrightarrow{i}+3\overrightarrow{j}+0\overrightarrow{k}.
+			\end{align*}
+			Suy ra $A(4;0;0)$, $B(0;6;0)$, $C(0;0;8)$, $M(2;3;0)$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{7}
+\begin{vd}
+	\immini{Cho hình hộp chữ nhật $ABCD.A'B'C'D'$ có cạnh $AB=AA'=2$, $AD=4$. Gọi $E$ là tâm của hình chữ nhật $ABCD$, $F$ là trung điểm $AC'$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với $A$), hãy xác định tọa độ các đỉnh của hình hộp chữ nhật và tọa độ hai điểm $E$, $F$.
+	}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(5,0) coordinate (D)
+			(0,3) coordinate (A')
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A')+(B)-(A)$)coordinate (B')
+			($(B')+(C)-(B)$)coordinate (C')
+			($(A')+(D)-(A)$)coordinate (D')
+			($(A)!0.5!(C)$)coordinate (E)
+			($(A)!0.5!(C')$)coordinate (F)
+			;
+			\draw[->] (D)--(6.7,0) node[below]{$y$};
+			\draw[->] (B)--(-3,-3) node[below]{$x$};
+			\draw[->] (A')--(0,4.5) node[left]{$z$};
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(B)--(D)--(A)--(C)--(A') (A)--(C');
+			\draw[-stealth,blue,thick] (O)--(-0.6,-0.6)node[above]{$\vec{i}$};
+			\draw[-stealth,blue,thick](O)--(1,0)node[below right]{$\vec{j}$};
+			\draw[-stealth,blue,thick] (O)--(0,0.7)node[left]{$\vec{k}$};
+			\foreach \x/\g in {A/-90,B/180,C/-70,D/40,A'/40,B'/180,C'/10,D'/0,E/-90,F/-10}\draw[fill=black] (\x) circle (.04) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{}
+\end{vd}
+\dongcham{10}
+
+\begin{vd}%[2H2V2-6]
+	Một người đứng ở mặt đất điều khiển hai flycam để phục vụ trong một chương trình của đài truyền hình. Flycam I ở vị trí $A$ cách vị trí điều khiển $130$ m về phía nam và $170$ m về phía đông, đồng thời cách mặt đất $55$ m. Flycam II ở vị trí $B$ cách vị trí điều khiển $170$ m về phía bắc và $216$ m về phía tây, đồng thời cách mặt đất $60$ m. Chọn hệ trục tọa độ $Oxyz$ với gốc $O$ là vị trí người điều khiển, mặt phẳng $(Oxy)$ trùng với mặt đất, trục $Ox$ có hướng trùng với hướng nam, trục $Oy$ trùng với hướng đông, trục $Oz$ vuông góc với mặt đất hướng lên bầu trời, đơn vị trên mỗi trục tính theo mét. Khoảng cách giữa hai flycam (làm tròn đến hàng đơn vị của mét) bằng bao nhiêu?
+	\loigiai{
+		Theo cách đặt hệ trục tọa độ trong đề bài, ta có tọa độ điểm $A(130; 170; 55)$ và tọa độ điểm $B(-170; -216; 60)$. Khi đó khoảng cách giữa hai flycam chính là độ dài đoạn $AB$.\\
+		Ta có $\vec{AB}=(-300; -386; 5)$. Suy ra
+		$$AB=|\vec{AB}|=\sqrt{(-300)^2+(-386)^2+5^2}=\sqrt{239021}\approx 489.$$
+		Vậy khoảng cách giữa hai flycam đó bằng $489$ m.
+	}
+\end{vd}
+\dongcham{11}
+\begin{vd}%[2H2V2-2]
+	\immini{
+		Một máy bay $M$ đang cất cánh từ phi trường. Với hệ toạ độ $Oxyz$ được thiết lập như Hình bên, cho biết $M$ là vị trí của máy bay với $OM=14$, $\widehat{NOB}=32^\circ$, $\widehat{MOC}=65^\circ$. Tính toạ độ điểm $M$.
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (O)
+			(-2,-2) coordinate (A)
+			(3,-2) coordinate (N)
+			(5,0) coordinate (B)
+			(3,1) coordinate (M)
+			(0,3) coordinate (C)
+			;
+			\draw[->] (0,0)--(6,0) node[below]{$y$};
+			\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+			\draw[->] (0,0)--(0,4) node[left]{$z$};
+			\draw[dashed] (C)--(M)--(N)--(A) (O)--(N)--(B);
+			\draw[fill=blue] (M)circle (0.15)--(O)node[midway,sloped,scale=1,above]{$14$};
+			\foreach \x/\g in {O/160,N/-90,M/30,A/-80,B/-70,C/30}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\foreach \x/\y/\z in {N/A/O,N/B/O,M/C/O}{\path pic[draw,angle radius=5pt]{right angle= \x--\y--\z};}
+			\draw pic["$65^\circ$",draw,angle eccentricity=1.9,angle radius=0.3cm]{angle=M--O--C};
+			\draw pic["$32^\circ$",draw,angle eccentricity=1.9,angle radius=0.4cm]{angle=N--O--B};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\immini{
+			Ta có:\\
+			$OC=OM\cos 65^\circ\approx 5{,}9$.\\
+			$ON=CN=OM\sin 65^\circ\approx 12{,}7$.\\
+			$OB=ON\cos 32^\circ\approx 10{,}8$.\\
+			$OA=BN=ON\sin 32^\circ\approx 6{,}7$.\\
+			Vì $OANB$ là hình chữ nhật nên $\vec{ON}=\vec{OA}+\vec{OB}$.\\
+			Vì $OCMN$ là hình chữ nhật nên $$\vec{OM}=\vec{OC}+\vec{ON}=\vec{OA}+\vec{OB}+\vec{OC}=6{,}7\vec{i}+10{,}8\vec{j}+5{,}9\vec{k}.$$
+			Do đó $M(6{,}7; 10{,}8; 5{,}9)$.
+		}{
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\x{2.5} 
+				\def\y{4} 
+				\def\z{3} 
+				\def\gocXY{-150} % góc B của đáy
+				\coordinate[label=above left:$O$] (O) at (0,0);
+				\coordinate[label=below:$x$] (x) at (\gocXY:\x);
+				\coordinate[label=below:$y$] (y) at (\y,0);
+				\coordinate[label=right:$z$] (z) at (0,\z);
+				\def\vtdv{1}
+				\coordinate (i) at (\gocXY:\vtdv);
+				\coordinate (j) at (\vtdv,0);
+				\coordinate (k) at (0,\vtdv);
+				\coordinate[label=above left:$A$] (A) at (\gocXY:0.7*\x);
+				\coordinate[label=above:$B$] (B) at (0.8*\y,0);
+				\coordinate[label=left:$C$] (C) at (0,0.8*\z);
+				\coordinate[label=below:$N$] (N) at ($(A)+(B)$);
+				\coordinate[label=right:$M$] (M) at ($(N)+(C)$);
+				\draw[->] (O)--(x);
+				\draw[->] (O)--(y);
+				\draw[->] (O)--(z);
+				\draw[->] (O)--(M);
+				\draw[->, red] (O)--(i) node[left]{$\vec{i}$};
+				\draw[->, red] (O)--(j) node[above]{$\vec{j}$};
+				\draw[->, red] (O)--(k) node[left]{$\vec{k}$};
+				\draw[dashed] (A)--(N)--(B) (O)--(N) (C)--(M)--(N);
+				\foreach \diem in {A,B,C,O,N,M}	\fill (\diem)circle(1.5pt);
+				\foreach \A/\B/\C in {O/C/M,N/B/y,N/A/O}
+				\draw pic[draw=black,angle radius=6pt] {right angle = \A--\B--\C}; 
+				\draw pic[draw,% double,% nét đôi
+				blue,angle radius=5mm,angle eccentricity=2.5,"$32^\circ$"] {angle = N--O--y}; 
+				\draw pic[draw,% double,% nét đôi
+				blue,angle radius=3mm,angle eccentricity=2.5,"$65^\circ$"] {angle = M--O--C}; 
+			\end{tikzpicture}
+		}
+	}
+\end{vd}
+\dongcham{12}
+\begin{vd}%[2H2H2-6]
+	\immini{Một chiếc xe đang kéo căng sợi dây cáp $AB$ trong công trường xây dựng, trên đó đã thiết lập hệ toạ độ $Oxyz$ như hình bên với độ dài đơn vị trên các trục toạ độ bằng $1$(m). Tìm toạ độ của véc-tơ $\overrightarrow{AB}$.
+	}{
+		\includegraphics[scale=0.4]{images/H6}
+	}
+	\loigiai{
+	
+			$\triangle OBH$ vuông tại $H$, có $\widehat{HOB}= 30^\circ$,\\
+			$OB = 15\Rightarrow OH = OB\cdot \cos 30 = \dfrac{15\sqrt{3}}{2}$,\\
+			$ BH = OB\cdot \sin 30 = \dfrac{15}{2} \Rightarrow OK = \dfrac{15}{2}$.\\
+			Ta có $\overrightarrow{OA} = 10\overrightarrow{k} $, $\overrightarrow{OH} = \dfrac{15\sqrt{3}}{2} \overrightarrow{j}$, $\overrightarrow{OK} = \dfrac{15}{2}\overrightarrow{i}$.\\
+			Khi đó 
+			\begin{eqnarray*}
+				\overrightarrow{AB} & = &\overrightarrow{OB} - \overrightarrow{OA} = \overrightarrow{OH}+\overrightarrow{OK}-\overrightarrow{OA}\\
+				& = & \dfrac{15}{2}\overrightarrow{i} + \dfrac{15\sqrt{3}}{2} \overrightarrow{j} - 10 \overrightarrow{k}\\
+				\Rightarrow \overrightarrow{AB} & =&  \left(\dfrac{15}{2}; \dfrac{15\sqrt{3}}{2}; - 10 \right).
+			\end{eqnarray*}
+	}
+\end{vd}
+
+\dongcham{12}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2H2-B2-d2-1]
+
+\begin{ex}
+	\immini[thm]{Hình bên mô tả một sân cầu lông với kích thước theo tiêu chuẩn quốc tế. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (đơn vị trên mỗi trục là mét), giả sử $AB$ là một trụ cầu lông để căng lưới, hãy xác định tọa độ của $B$.
+		\choice
+		{$\big(6,1\,;\,6,7\,;\,1,55\big)$}
+		{\True $\big(6,7\,;\,6,1\,;\,1,55\big)$}
+		{$\big(6,1\,;\,0\,;\,1,55\big)$}
+		{$\big(0\,;\,6,7\,;\,1,55\big)$}
+	}{
+		\begin{tikzpicture}[scale=0.55, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (O)
+			(8,0) coordinate (M)
+			(10,2) coordinate (N)
+			(2,2) coordinate (K)
+			(4,1) coordinate (F)
+			(4,0) coordinate (E)
+			(6,3) coordinate (B)
+			(6,2) coordinate (A)
+			(2.3,-0.7) coordinate (I)
+			($(A)!0.5!(B)$)coordinate (C)
+			($(E)!0.5!(F)$)coordinate (D)
+			;
+			\draw[->] (M)--(10.5,0) node[below]{$x$};
+			\draw[->] (K)--(3,3) node[above]{$y$};
+			\draw[->] (O)--(0,4.5) node[left]{$z$};
+			\draw[fill=green!20] (O)--(M)--(N)--(K)--cycle;
+			\draw[pattern=north west lines] (C)--(B)--(F)--(D)--cycle;
+			\draw (O)--(M)--(N)--(K)--(O) (E)--(F) (A)--(B);
+			\draw[<->,dashed] (0,-0.3)--(8,-0.3)node[midway,sloped,below]{\scriptsize$13,40$ m};
+			\draw[<->,dashed] (8.3,0)--(10.3,2)node[midway,right]{\scriptsize$6,10$ m};
+			\draw[<->,dashed] (6.3,2)--(6.3,3)node[midway,right]{\scriptsize$1,55$ m};
+			\foreach \x/\g in {O/180,A/-80,B/90}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		\begin{itemize}
+			\item Gọi toạ độ điểm $A$ là $\left(x_A;y_A;z_A\right)$. Vì chiều rộng của sân là $6,1 \mathrm{~m}$ nên $x_A=6,1$. Do một nửa chiều dài của sân là $6,7 \mathrm{~m}$ nên $y_A=6,7$. Điểm $A$ thuộc mặt phẳng $(Oxy)$ nên $z_A=0$. Vì vậy, điểm $A$ có tọa độ là $(6,1;6,7;0)$.
+			\item Độ dài đoạn thẳng $AB$ là $1,55 \mathrm{~m}$ nên điểm $B$ có toạ độ là $(6,1;6,7;1,55)$.
+		\end{itemize}
+		Vậy ta có: $\overrightarrow{AB}=(6,1-6,1;6,7-6,7;1,55-0)$, tức là $\overrightarrow{AB}=(0;0;1,55)$.
+	}
+	\loigiai{
+	}
+\end{ex} \cham{4}
+
+\begin{ex}
+	\immini[thm]{Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng 2. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với điểm $A$), tọa độ điểm $B'$ là
+		\haicot
+		{$B'(0;2;0)$}
+		{$B'(2;2;2)$}
+		{$B'(2;2;0)$}
+		{\True $B'(2;0;2)$}
+	}{
+		\begin{tikzpicture}[scale=0.5, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(5,0) coordinate (D)
+			(0,3) coordinate (A')
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A')+(B)-(A)$)coordinate (B')
+			($(B')+(C)-(B)$)coordinate (C')
+			($(A')+(D)-(A)$)coordinate (D')
+			;
+			\draw[->] (D)--(6.7,0) node[below]{$y$};
+			\draw[->] (B)--(-3,-3) node[below]{$x$};
+			\draw[->] (A')--(0,4.5) node[left]{$z$};
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(B) (A)--(D);
+			\foreach \x/\g in {A/-90,B/180,C/-70,D/40,A'/40,B'/180,C'/10,D'/20}\draw[fill=black] (\x) circle (.04) +(\g:.6)node{\footnotesize$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+	}
+\end{ex} \cham{3}
+\begin{ex}
+	\immini[thm]{Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng 2. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với điểm $A$), tọa độ điểm $C'$ là
+		\haicot
+		{$C'(2;2;0)$}
+		{\True $C'(2;2;2)$}
+		{$C'(0;2;0)$}
+		{$C'(2;0;2)$}
+	}{
+		\begin{tikzpicture}[scale=0.65, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(5,0) coordinate (D)
+			(0,3) coordinate (A')
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A')+(B)-(A)$)coordinate (B')
+			($(B')+(C)-(B)$)coordinate (C')
+			($(A')+(D)-(A)$)coordinate (D')
+			;
+			\draw[->] (D)--(6.7,0) node[below]{$y$};
+			\draw[->] (B)--(-3,-3) node[below]{$x$};
+			\draw[->] (A')--(0,4.5) node[left]{$z$};
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(B) (A)--(D);
+			\foreach \x/\g in {A/-90,B/180,C/-70,D/40,A'/40,B'/180,C'/10,D'/20}\draw[fill=black] (\x) circle (.04) +(\g:.6)node{\footnotesize$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+	}
+\end{ex} \cham{3}
+
+
+\begin{ex}
+	\immini[thm]{Cho hình chóp tứ giác đều $S.ABCD$ có cạnh đáy bằng $a\sqrt{2}$, cạnh bên bằng $a\sqrt{5}$. Gọi $O$ là tâm của hình vuông $ABCD$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với tâm hình vuông $ABCD$), tọa độ $\vec{SC}$ là
+		\choice
+		{$\vec{SC}=(2a;0;-2a)$}
+		{$\vec{SC}=(2a;-a;-2a)$}
+		{\True $\vec{SC}=(a;0;-2a)$}
+		{$\vec{SC}=(a;0;2a)$}}{
+		\begin{tikzpicture}[scale=0.65, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-3,-2) coordinate (B)
+			(5,0) coordinate (D)
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A)!0.5!(C)$)coordinate (O)
+			($(O)+(0,4)$)coordinate (S)
+			;
+			\draw[->] (D)--(7,0.5) node[below]{$y$};
+			\draw[->] (C)--(3,-3) node[below]{$x$};
+			\draw[->] (S)--(1,4.5) node[left]{$z$};
+			\draw (C)--(D)--(S)--(C)--(B)--(S);
+			\draw[dashed] (S)--(A)--(D)--(B)--(A)--(C) (S)--(O);
+			\pic[draw,thin,angle radius=2mm] {right angle = C--O--D};
+			\foreach \x/\g in {A/180,B/-90,C/-100,D/-30,S/10,O/-90}\draw[fill=black] (\x) circle (.04) +(\g:.6)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+	}
+\end{ex} \cham{5}
+
+\begin{ex}%[2H2H2-2]
+	\immini[thm]{
+		Cho tứ diện $SABC$ có $ABC$ là tam giác vuông tại $B$, $BC=3$, $BA=2$, $SA$ vuông góc với mặt phẳng $(ABC)$ và có độ dài bằng $2$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với điểm $B$), tìm khẳng định \textbf{sai}.
+		\haicot
+		{$A(0; 2; 0)$}
+		{$B(0; 0; 0)$}
+		{$C(3; 0; 0)$}
+		{\True $S(-2; 2; 2)$}
+	}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=Stealth]
+			\path 
+			(0:0) coordinate (B)
+			(20:4) coordinate (x)
+			(90:3) coordinate (z)
+			(130:2) coordinate (y)
+			($(B)!.7!(x)$) coordinate (C)
+			($(B)!4/6!(y)$) coordinate (A)
+			($(B)!3/5!(z)$) coordinate (H)
+			($(A)+(H)-(B)$) coordinate (S)
+			;
+			\draw[->] (B)--(x);
+			\draw[->] (B)--(y);
+			\draw[->] (B)--(z);
+			\draw[dashed] 	(A)--(C)
+			;
+			\draw (A)--(S) (B)--(S)--(C);
+			\pic[draw,angle radius=2mm]{right angle=C--B--A}
+			pic[draw,angle radius=2mm]{right angle=C--B--H}
+			pic[draw,angle radius=2mm]{right angle=H--B--A}
+			;
+			\foreach \x/\g in {B/-90,x/90,y/180,z/0,C/-90,A/210,S/90}
+			\draw[fill=black] 	(\x)
+			($(\g:.2)+(\x)$) node {$\x$};	
+		\end{tikzpicture}
+	}
+	\loigiai{
+	}
+\end{ex} \cham{5}
+
+\begin{ex}%[2H2H2-2]
+	\immini[thm]{Cho hình chóp $S.ABC$ có đáy $ABC$ là tam giác đều cạnh bằng $2$, $SA$ vuông góc với đáy và $SA =1$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với trung điểm của đoạn $BC$), hãy tìm toạ độ điểm $S$.
+		\haicot
+		{$S(0;1;1)$}
+		{$S(0;2;1)$}
+		{$S(0;2\sqrt{3};1)$}
+		{\True $S(0;\sqrt{3};1)$}
+	}{
+		\begin{tikzpicture}[ font = \footnotesize, scale =1,>=stealth]
+			\path 
+			(0:0) coordinate (A)
+			++(0:4) coordinate (C)
+			++(-160:3)coordinate(B)
+			(A)++(90:2) coordinate (S)
+			($(B)!1/2!(C)$) coordinate (O)
+			($(S)+(O)-(A)$) coordinate (H)
+			($(O)!1.4!(A)$) coordinate (y) node[above]{$y$}
+			($(O)!1.7!(C)$) coordinate (x) node[above]{$x$}
+			($(O)!1.4!(H)$) coordinate (z) node[right]{$z$}
+			(intersection of S--C and O--H) coordinate (t)
+			;
+			\draw (S)--(A)--(B)--(C) (S)--(B) (O)--(z) (S)--(H) (C)--(t)
+			;
+			\draw[dashed] (C)--(A)--(O) (S)--(t)
+			;
+			\draw[->] (C)--(x); 
+			\draw[->] (A)--(y);
+			\draw[->] (H)--(z);
+			\pic[draw,thin,angle radius=2mm] {right angle = A--O--B}
+			pic[draw,thin,angle radius=2mm] {right angle = O--H--S}
+			pic[draw,thin,angle radius=2mm] {right angle = H--O--C}
+			;
+			\foreach \x/\g in {A/-100,C/-50,B/-90,O/-70,H/0,S/90}
+			\fill (\x) circle (1pt)
+			+(\g:3mm) node{$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+	}
+\end{ex} \cham{5}
+\begin{ex}%[2H2V2-6]
+	\immini[thm]{Ở một sân bay, vị trí của máy bay được xác định bởi điểm $M$ trong không gian $Oxyz$ như hình bên. Gọi $H$ là hình chiếu vuông góc của $M$ xuống mặt phẳng $(Oxy)$. Cho biết $OM = 50$, $\left(\overrightarrow{i},\overrightarrow{OH}\right) = 64^\circ$, $\left(\overrightarrow{OH},\overrightarrow{OM}\right) = 48^\circ$. Tìm toạ độ của điểm $M$ (làm tròn đến hàng phần chục).
+		\choice
+		{$M(13{,}8; 25{,}1; 37{,}2)$}
+		{\True $M(14{,}7; 30{,}1; 37{,}2)$}
+		{$M(14{,}7; 30{,}1; 27{,}2)$}
+		{$M(13{,}8; 30{,}1; 32{,}2)$}
+	}{
+		\begin{tikzpicture}[scale=0.85, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (O)
+			(-2,-2) coordinate (A)
+			(3,-2) coordinate (H)
+			(5,0) coordinate (B)
+			(3,1) coordinate (M)
+			(0,3) coordinate (C)
+			;
+			\draw[->] (0,0)--(6,0) node[below]{$y$};
+			\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+			\draw[->] (0,0)--(0,4) node[left]{$z$};
+			\draw[dashed] (C)--(M)--(H)--(A) (O)--(H)--(B);
+			\draw[fill=blue] (M)circle (0.15)--(O)node[midway,sloped,scale=1,above]{$50$};
+			\foreach \x/\g in {O/160,H/-90,M/30,A/-80,B/-70,C/30}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\foreach \x/\y/\z in {H/A/O,H/B/O,M/C/O}{\path pic[draw,angle radius=5pt]{right angle= \x--\y--\z};}
+			\draw pic["\scriptsize$48^\circ$",draw,angle eccentricity=1.9,angle radius=0.45cm]{angle=H--O--M};
+			\draw pic["\scriptsize$64^\circ$",draw,angle eccentricity=1.9,angle radius=0.3cm]{angle=A--O--H};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\immini{
+			Tam giác $OMH$ vuông tại $H$, $OM = 50$; $\widehat{MOH} = 48^\circ$ nên ta có 
+			\begin{itemize}
+				\item [$\bullet$] $OH = OM\cdot \cos 48 \approx 33{,}5$
+				\item [$\bullet$] $OC = MH = OM \cdot \sin 48 \approx 37{,}2$.
+			\end{itemize}
+			Tam giác $OAH$ vuông tại $A$, $OH = 33{,}5$; $\widehat{AOH} = 64^\circ$ nên ta có 
+			\begin{itemize}
+				\item [$\bullet$] $OA = OH\cdot \cos 64 \approx 14{,}7$,
+				\item [$\bullet$] $OB = AH = OH\cdot \sin 64 \approx 30{,}1$.
+			\end{itemize}
+			Suy ra 
+			\begin{eqnarray*}
+				\overrightarrow{OM} & = & \overrightarrow{OC} + \overrightarrow{OH} = \overrightarrow{OC} + \overrightarrow{OA}+\overrightarrow{OB} \\
+				& = & 14{,}7\overrightarrow{i}+30{,}1\overrightarrow{j}+37{,}2\overrightarrow{k}.
+			\end{eqnarray*}
+			Vậy $M(14{,}7; 30{,}1; 37{,}2)$.
+		}{
+			\begin{tikzpicture}[scale=0.85, font=\footnotesize,>=stealth]
+				\path
+				(0,0) coordinate (O)
+				(-2,-2) coordinate (A)
+				(3,-2) coordinate (H)
+				(5,0) coordinate (B)
+				(3,1) coordinate (M)
+				(0,3) coordinate (C)
+				;
+				\draw[->] (0,0)--(6,0) node[below]{$y$};
+				\draw[->] (0,0)--(-3,-3) node[below]{$x$};
+				\draw[->] (0,0)--(0,4) node[left]{$z$};
+				\draw[dashed] (C)--(M)--(H)--(A) (O)--(H)--(B);
+				\draw[fill=blue] (M)circle (0.15)--(O)node[midway,sloped,scale=1,above]{$50$};
+				\foreach \x/\g in {O/160,H/-90,M/30,A/-80,B/-70,C/30}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+				\foreach \x/\y/\z in {H/A/O,H/B/O,M/C/O}{\path pic[draw,angle radius=5pt]{right angle= \x--\y--\z};}
+				\draw pic["\scriptsize$48^\circ$",draw,angle eccentricity=1.9,angle radius=0.45cm]{angle=H--O--M};
+				\draw pic["\scriptsize$64^\circ$",draw,angle eccentricity=1.9,angle radius=0.3cm]{angle=A--O--H};
+			\end{tikzpicture}
+		}	
+	}
+\end{ex} \cham{6}
+
+\Closesolutionfile{ans}
+
+
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2H2-B2-d2-2]
+\begin{ex}
+	\immini{Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình chữ nhật, $AB=1$, $AD=2$, $SA$ vuông góc với mặt đáy và $SA=3$. Với hệ toạ độ $Oxyz$ được thiết lập như sau: Gốc tọa độ $O$ trùng với điểm $A$, các véc tơ $\vec{AB}$, $\vec{AD}$, $\vec{AS}$ lần lượt cùng hướng với $\vec{i}$, $\vec{j}$ và $\vec{k}$. Xét tính đúng sai của các khẳng định sau
+		\choiceTF
+		{\True Tọa độ $D(0;2;0)$}
+		{Tọa độ $C(1;2;3)$}
+		{\True Tọa độ $S(2;0;0)$}
+		{Tọa độ $I(1;1;0)$}
+	}{
+		\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(5,0) coordinate (D)
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A)!0.5!(C)$)coordinate (I)
+			($(A)+(0,3)$)coordinate (S)
+			;
+			\draw (C)--(D)--(S)--(C)--(B)--(S);
+			\draw[dashed] (S)--(A)--(D)--(B)--(A)--(C);
+			\pic[draw,thin,angle radius=2mm] {right angle = B--A--D};
+			\foreach \x/\g in {A/180,B/-90,C/-100,D/-80,S/90,I/-90}\draw[fill=black] (\x) circle (.04) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}	}
+	\loigiai{
+		\immini{
+			Với hệ trục đã chọn như hình vẽ thì
+			\begin{enumerate}[a)]
+				\item Điểm $D \in Oy$ và $AD=2$ nên $D(0;2;0)$.
+				\item Điểm $C \in (Oxy)$ và có hình chiếu lên $Ox$, $Oy$ lần lượt là điểm $B$ và $D$.\\
+				Do $AB=1$ và $AD=2$ nên $C(2;2;0)$.
+				\item Điểm $S \in Oz$ và $AS=3$ nên $S(0;0;3)$.
+				\item Điểm $I \in (Oxy)$ và và có hình chiếu lên $Ox$, $Oy$ lần lượt là trung điểm của $AB$ và $AD$ nên $I(0,5;1;0)$.
+		\end{enumerate}}{
+			\begin{tikzpicture}[scale=0.6, font=\footnotesize,>=stealth]
+				\path
+				(0,0) coordinate (A)
+				(-2,-2) coordinate (B)
+				(5,0) coordinate (D)
+				($(B)+(D)-(A)$)coordinate (C)
+				($(A)!0.5!(C)$)coordinate (I)
+				($(A)+(0,3)$)coordinate (S)
+				;
+				\draw[->] (D)--(7,0) node[below]{$y$};
+				\draw[->] (B)--(-3,-3) node[below]{$x$};
+				\draw[->] (S)--(0,4) node[left]{$z$};
+				\draw (C)--(D)--(S)--(C)--(B)--(S);
+				\draw[dashed] (S)--(A)--(D)--(B)--(A)--(C);
+				\pic[draw,thin,angle radius=2mm] {right angle = B--A--D};
+				\foreach \x/\g in {A/180,B/-90,C/-100,D/-80,S/170,I/-90}\draw[fill=black] (\x) circle (.04) +(\g:.5)node{\footnotesize$\x$};
+		\end{tikzpicture}}		
+	}
+\end{ex} \cham{11}
+
+
+\begin{ex}
+	\immini{Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng $2$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với tâm hình vuông $ABCD$), hãy xét tính đúng sai của các khẳng định sau:
+		\choiceTF
+		{Tọa độ $A(-1;0;0)$}
+		{\True $\vec{AC'}=(2\sqrt{2};0;2)$}
+		{\True Tọa độ $D'(0;\sqrt{2};2)$}
+		{$\vec{BD'}=(0;0;2)$}
+	}{
+		\begin{tikzpicture}[scale=0.45, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(-2,-2) coordinate (B)
+			(6,0) coordinate (D)
+			(0,4) coordinate (A')
+			($(B)+(D)-(A)$)coordinate (C)
+			($(A')+(B)-(A)$)coordinate (B')
+			($(B')+(C)-(B)$)coordinate (C')
+			($(A')+(D)-(A)$)coordinate (D')
+			($(A)!0.5!(C)$)coordinate (O)
+			($(A')!0.5!(C')$)coordinate (O')
+			;
+			\draw[->] (D)--(8,0.5) node[below]{$y$};
+			\draw[->] (C)--(6,-3) node[below]{$x$};
+			\draw[->] (O')--(2,5.5) node[left]{$z$};
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C')--(A') (B')--(D');
+			\draw[dashed] (A')--(A)--(B)--(D)--(A)--(C) (O)--(O');
+			\pic[draw,thin,angle radius=2mm] {right angle = C--O--D};
+			\foreach \x/\g in {A/-90,B/180,C/-70,D/-40,A'/40,B'/180,C'/10,D'/20,O/-90}\draw[fill=black] (\x) circle (.04) +(\g:.65)node{\footnotesize$\x$};
+		\end{tikzpicture}
+	}
+	\loigiai{
+		Độ dài $AC=2\sqrt{2}$. Với hệ trục $Oxyz$ đã chọn như hình vẽ thì
+		\begin{enumerate}[a)]
+			\item Điểm $A \in Ox$, nằm ngược chiều dương và $OA=\sqrt{2}$ nên $A(-\sqrt{2};0;0)$.
+			\item Tọa độ $C'(\sqrt{2};0;2)$. Suy ra $\vec{AC'}=(2\sqrt{2};0;2)$.
+			\item Điểm $D'$ có hình chiếu vuông góc xuống $(Oxy)$ là điểm $D(0;\sqrt{2};0)$ và $DD'=2$ nên $D'(0;\sqrt{2};2)$.
+			\item Tọa độ $B(0;-\sqrt{2};0)$, $D'(0;\sqrt{2};2)$. Suy ra $\vec{BD'}=(0;2\sqrt{2};2)$.
+		\end{enumerate}
+	}
+\end{ex} \cham{8}
+
+\begin{ex}
+	\immini{Cho hình lăng trụ $ABC.A'B'C'$ có đáy $ABC$ là tam giác đều cạnh bằng $2$ như hình vẽ. Hình chiếu vuông góc của $A'$ lên $(ABC)$ trùng với trung điểm cạnh $AB$, góc $\widehat{A'AO}=60^\circ$. Với hệ toạ độ $Oxyz$ được thiết lập như hình bên (gốc tọa độ $O$ trùng với trung điểm của đoạn $BC$), hãy xét tính đúng sai của các khẳng định sau:
+		\choiceTF
+		{\True Tọa độ điểm $A(-1;0;0)$}
+		{\True Tọa độ điểm $C(0;\sqrt{3};0)$}
+		{Tọa độ điểm $A'(0;-1;\sqrt{3})$}
+		{\True Tọa độ điểm $C'\big(1;\sqrt{3};\sqrt{3}\big)$}
+	}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+			\path
+			(0,0) coordinate (A)
+			(2,-2) coordinate (B)
+			(5,0) coordinate (C)
+			(1,4) coordinate (A')
+			($(A)!0.5!(B)$)coordinate (O)
+			($(A')+(B)-(A)$)coordinate (B')
+			($(A')+(C)-(A)$)coordinate (C')
+			;
+			\draw[->] (B)--(3,-3) node[below]{$x$};
+			\draw[->] (C)--(7,0.5) node[below]{$y$};
+			\draw[->] (A')--(1,5) node[left]{$z$};
+			\draw (B)--(A)--(A')--(B')--(B)--(C)--(C')--(B') (A')--(C') (O)--(A');
+			\draw[dashed] (A)--(C)--(O);
+			\pic[draw,thin,angle radius=2mm] {right angle = C--O--B};
+			\pic[draw,thin,angle radius=2mm] {right angle = A'--O--B};
+			\pic[draw,thin,angle radius=2mm] {right angle = A'--O--C};
+			\foreach \x/\g in {A/180,B/-90,C/-90,A'/180,B'/-20,C'/0,O/-100}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		Độ dài $OC=2.\dfrac{\sqrt{3}}{2}=\sqrt{3}$. $OA'=OA.\tan60^\circ=\sqrt{3}$. Với hệ trục $Oxyz$ đã chọn như hình vẽ trên thì
+		\begin{enumerate}[a)]
+			\item Điểm $A \in Ox$, nằm ngược chiều dương và $OA=1$ nên $A(-1;0;0)$.
+			\item Điểm $A' \in Oy$, nằm cùng chiều dương và $OC=\sqrt{3}$ nên $C(0;\sqrt{3};0)$.
+			\item $A' \in Oz$, nằm cùng chiều dương và $OA'=\sqrt{3}$ nên $A'(0;0;\sqrt{3})$.
+			\item Gọi $C'(x;y;z)$. Ta có
+			$$\vec{A'C'}=\vec{AC} \Leftrightarrow\heva{&x-0=1\\&y-0=\sqrt{3}\\&z-\sqrt{3}=0}\Leftrightarrow\heva{&x=1\\&y=\sqrt{3}\\&z=\sqrt{3}}.$$
+		\end{enumerate}
+	}
+\end{ex} \cham{13}
+
+\begin{ex}%[2H5V2-8]
+	\immini{Một tháp phát sóng cao $50$ m đặt ở góc $A$ của sân hình chữ nhật $ABCD$. Để giữ cho tháp không bị đổ, người ta có cột rất nhiều dây cáp quanh tháp và cố định tại các vị trí trên mặt đất. Hai chú kiến vàng và kiến đen bắt đầu leo lên hai dây cáp $CM$ và $BN$ (từ $C$ và $B$) với vận tốc lần lượt là $3$ m/phút và $2{,}5$ m/phút (được mô hình hóa trong hệ trục tọa độ $Axyz$ như hình vẽ bên). Xét trong thời gian $10$ phút.}{
+		\begin{tikzpicture}[thick, font = \footnotesize, scale =1,>=stealth]
+			\path
+			(0,0) coordinate (A)++(0:4) coordinate (D)
+			(A)++(0:-2) coordinate (B')
+			(A)++(90:3.5) coordinate (Cz)
+			(A)++(-140:2) coordinate (B)
+			($(B)+(D)-(A)$) coordinate (C)
+			($(A)!0.6!(Cz)$)  coordinate (N)
+			($(A)!0.8!(Cz)$)  coordinate (M)
+			($(A)!0.99!(Cz)$)  coordinate (t)
+			($(B)!0.4!(N)$)  coordinate (P)
+			($(C)!0.7!(M)$)  coordinate (K)
+			($(A)!1.3!(B)$) coordinate (x) node[below]{$x$}
+			($(A)!1.2!(D)$) coordinate (y) node[below]{$y$}
+			($(A)!1.3!(Cz)$) coordinate (z) node[right]{$z$};
+			\draw (A)--(B) (A)--(D) (A)--(Cz) 
+			(B)--(C)--(D)
+			(B)--(N) (C)--(M)
+			(P)--(K)
+			;
+			\path (A)--(D)--([turn]90:0.4) coordinate (xt)
+			($(A)-(D)+(xt)$) coordinate (yt);
+			\draw[dash pattern=on 2pt off 2pt] (A)--(yt) (D)--(xt);
+			\draw[>=stealth,|<->|] (xt)--(yt) node[fill=white,inner sep=0pt,font=\scriptsize,midway,sloped]{$12\ \mathrm{m}$};
+			\path (A)--(B)--([turn]90:0.35) coordinate (xt)
+			($(A)-(B)+(xt)$) coordinate (yt);
+			\draw[dash pattern=on 2pt off 2pt] (A)--(yt) (B)--(xt);
+			\draw[>=stealth,|<->|] (xt)--(yt) node[fill=white,inner sep=0pt,font=\scriptsize,midway,sloped]{$8\ \mathrm{m}$};
+			\path (A)--(t)--([turn]90:2) coordinate (xt)
+			($(A)-(t)+(xt)$) coordinate (yt);
+			\draw[dash pattern=on 2pt off 2pt] (A)--(yt) (t)--(xt);
+			\draw[>=stealth,|<->|] (xt)--(yt) node[fill=white,inner sep=0pt,font=\scriptsize,midway,sloped]{$50\ \mathrm{m}$};
+			\path (N)--(M)--([turn]90:0.5) coordinate (xt)
+			($(N)-(M)+(xt)$) coordinate (yt);
+			\draw[dash pattern=on 2pt off 2pt] (N)--(yt) (M)--(xt);
+			\draw[>=stealth,|<->|] (xt)--(yt) node[fill=white,inner sep=0pt,font=\scriptsize,midway]{$6\ \mathrm{m}$};
+			\path (M)--(t)--([turn]90:0.5) coordinate (xt)
+			($(M)-(t)+(xt)$) coordinate (yt);
+			\draw[dash pattern=on 2pt off 2pt] (M)--(yt) (t)--(xt);
+			\draw[>=stealth,|<->|] (xt)--(yt) node[fill=white,inner sep=0pt,font=\scriptsize,midway]{$4\ \mathrm{m}$};
+			\draw[->] (B)--(x);
+			\draw[->] (D)--(y);
+			\draw[->] (Cz)--(z);
+			\foreach \x/\g/\n in {B/180/B,D/-60/D
+				,A/50/A,C/-90/C,N/0/N,M/0/M,t/0/t,P/180/P,K/0/K}
+			\fill (\x) circle (1pt)
+			+(\g:2mm) node[scale =1]{\n};
+		\end{tikzpicture}
+	}
+	\choiceTF
+	{\True Tọa độ của điểm $N$ là $(0;0;40)$}
+	{\True Sau $10$ phút, kiến vàng ở vị trí $K$ với $CK=30$ m}
+	{Sau $10$ phút, kiến đen ở vị trí $P$ với $BP=24$ m}
+	{Sau $10$ phút, kiến vàng và kiến đen cách nhaukhoảng $6{,}93$ m}
+	\loigiai{
+		Ta có $ A(0;0;0) $, $ B(8;0;0)$, $C(8;12;0) $, và $D(0;12;0)$.
+		\begin{itemchoice}
+			\itemch  \textbf{Đúng}. \\		
+			$AN=50-6-4=40$ m. Suy ra $N(0;0;40)$.
+			\itemch  \textbf{Đúng}. \\
+			Ta có $AM=50-4=46$ m. Suy ra $M(0;0;46)$.\\
+			$\vec{CM}=(-8;-12;46)$.\\
+			Sau $10$ phút, kiến vàng leo được $s = 10 \cdot 3 = 30$ m.	Suy ra $CK=30$ m.		
+			\itemch  \textbf{Sai}. \\
+			Ta có $\vec{BN}=(-8;0;40)$.\\
+			Sau $10$ phút, kiến đen leo được $s = 2{,}5 \cdot 10 = 25$ m. Suy ra $BP=25$ m.
+			\itemch  \textbf{Sai}. \\
+			Sau $10$ phút, kiến vàng và kiến đen cách nhau $KP$.\\
+			Đường thẳng $CM$ qua $C(8;12;0)$ và có vectơ chỉ phương $\vec{CM}=(-8;-12;46)$.\\
+			Ta có $CM\colon \heva{&x=8-8t\\&y=12-12t\\&z=46t.} $\\
+			Ta có $K\in CM\Rightarrow K(8-8t;12-12t;46t)$.\\
+			$CK=30\Leftrightarrow (8t)^2+(12t)^2+(46t)^2=900\Leftrightarrow 2324t^2=900\Leftrightarrow \hoac{&t=\sqrt{\dfrac{225}{581}}\\&t=-\sqrt{\dfrac{225}{581}} \text{ (loại)}.}$\\
+			Suy ra $K\left(8- 8\cdot\sqrt{\dfrac{225}{581}};12-12\cdot\sqrt{\dfrac{225}{581}};46\cdot\sqrt{\dfrac{225}{581}}\right)$.\\
+			Đường thẳng $BN$ qua $B(8;0;0)$ và có vectơ chỉ phương $\vec{BN}=(-8;0;40)$.\\
+			Ta có $BN\colon \heva{&x=8-8t\\&y=0\\&z=40t.} $\\
+			Ta có $P\in BN\Rightarrow P(8-8t;0;40t)$.\\
+			$BP=25\Leftrightarrow (8t)^2+0^2+(40t)^2=625\Leftrightarrow 1664t^2=625\Leftrightarrow \hoac{&t=\sqrt{\dfrac{625}{1664}}\\&t=-\sqrt{\dfrac{625}{1664}}\text{ (loại)}.}$\\
+			Suy ra $P\left(8- 8\cdot\sqrt{\dfrac{625}{1664}};0;40\cdot\sqrt{\dfrac{625}{1664}}\right)$.\\
+			Khi đó 
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+				KP&=&\sqrt{\left(8\sqrt{\dfrac{625}{581}}-8\sqrt{\dfrac{625}{1664}}\right)^2+\left(12\sqrt{\dfrac{225}{581}}-12\right)^2+\left(40\sqrt{\dfrac{625}{1664}}-46\sqrt{\dfrac{225}{581}}\right)^2}
+				\\
+				&\approx& 6{,}12 \text{m}.
+			\end{eqnarray*}
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{14}
+\Closesolutionfile{ans}

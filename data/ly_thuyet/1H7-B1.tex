@@ -1,0 +1,411 @@
+%\setcounter{section}{21}
+\section{HAI ĐƯỜNG THẲNG VUÔNG GÓC}
+\subsection{KIẾN THỨC CẦN NHỚ}
+
+\subsubsection{Góc giữa hai đường thẳng}
+\begin{itemize}
+	\item [\iconMT] \indam{Định nghĩa:} 
+	\immini{
+		Góc giữa hai đường thẳng $m$ và $n$ trong không gian, kí hiệu $(m, n)$, là góc giữa hai đường thẳng $a$ và $b$ cùng đi qua một điểm và tương ứng song song với $m$ và $n$. Ta tóm tắt cách dựng như sau:
+		\vspace{0.2cm}
+		\begin{gachsoc}
+			\begin{listEX}[1]
+				\item [\ding{172}] Chọn điểm $O$. Qua $O$, kẻ $a \parallel m$ và $b \parallel n$;
+				\item [\ding{173}] Góc giữa $m$ và $n$ bằng góc giữa $a$ và $b$.
+			\end{listEX}
+		\end{gachsoc}
+		
+	}{	\begin{tikzpicture}[scale=0.8,font=\footnotesize]
+			\def \c{0.5}
+			\def \d{-0.7}
+			\coordinate[label=above:$O$] (O) at (0,0);
+			\fill (O)circle(1.5pt);
+			\path
+			(-2,-2*\c) coordinate (A1)
+			(3,3*\c) coordinate (B1)
+			(-0.2,-0.2*\c+1) coordinate (A2)
+			(2.5,2.5*\c+1) coordinate (B2)
+			
+			(-2,-2*\d) coordinate (C1)
+			(2,2*\d) coordinate (D1)
+			(-0.4,-0.4*\d-0.8) coordinate (C2)
+			(1.8,1.8*\d-0.8) coordinate (D2)		
+			
+			($(O)!0.8!(B1)$)node[above]{$a$}
+			($(O)!0.5!(D1)$)node[above]{$b$}
+			($(A2)!0.3!(B2)$)node[above]{$m$}
+			($(C2)!0.7!(D2)$)node[above]{$n$}
+			;
+			\draw (A1)--(B1)
+			(A2)--(B2)
+			(C1)--(D1)
+			(C2)--(D2)
+			;
+	\end{tikzpicture}}
+
+	\item [\iconMT] \indam{Chú ý:} 
+		\begin{gachsoc}
+		\begin{itemize}
+			\item [\ding{172}] Gọi $\varphi$ là góc giữa hai đường thẳng $a$, $b$ thì $0^\circ \le \varphi \le 90^\circ$.
+			\item [\ding{173}] Nếu hai đường thẳng $a$, $b$ song song hoặc trùng nhau thì $ \varphi =0^\circ$.
+		\end{itemize}
+	\end{gachsoc}	
+\end{itemize}
+\subsubsection{Hai đường thẳng vuông góc}
+\begin{itemize}
+	\item [\iconMT] \indam{Định nghĩa:} 
+	\immini{Hai đường thẳng được gọi là vuông góc nếu góc tạo bởi giữa chúng bằng $90^\circ$. 
+		$$a\perp b\Leftrightarrow \left(a,b\right)=90^\circ.$$}
+	{\begin{tikzpicture}[scale=0.6]
+			\tkzDefPoints{0/0/O,-2/0/a,0.5/0/A,0/-0.5/B,0/2/b}
+			\tkzDrawSegments(a,A b,B)
+			\tkzDrawPoints(O)
+			\tkzLabelPoints[above right](a,b)
+			\tkzMarkRightAngle(b,O,a)
+	\end{tikzpicture}}
+	\item [\iconMT] \indam{Định lý:} 
+		\immini{Nếu một đường thẳng vuông góc với một trong hai đường thẳng song song thì nó sẽ vuông góc với đường còn lại. 
+		$$\heva{&a\parallel b\\&d\perp a}\Rightarrow d\perp b.$$}
+	{\begin{tikzpicture}[scale=0.6]
+			\tkzDefPoints{0/0/O,-3/0/a,1.5/0/A,-4/1.2/b,0/1.2/M,1/1.2/B,0/-1/D,0/3/d}
+			\tkzDrawSegments(d,D a,A b,B)
+			\tkzDrawPoints(O,M)
+			\tkzLabelPoints[above left](d)
+			\tkzLabelPoints[above right](a,b)
+			\tkzMarkRightAngle(d,O,a)
+			\tkzMarkRightAngle(d,M,b)
+	\end{tikzpicture}}
+	\begin{luuy}
+		Hai đường thẳng vuông góc với nhau có thể chéo nhau hoặc cắt nhau.
+	\end{luuy}
+\end{itemize}
+
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+
+\begin{dang}{Xác định góc giữa hai đường thẳng}
+	Trong không gian, giả sử cần xác định góc giữa hai đường thẳng $AB$ và $CD$. Ta có thể thực hiện các bước như sau:
+	\immini{\begin{listEX}[1]
+		\item [\ding{172}] Chọn gốc $A$, dựng $AE \parallel CD$;
+		\item [\ding{173}] Kết luận góc giữa $AB$ và $CD$ bằng góc giữa $AB$ và $AE$.
+		\item [\ding{174}] Xác định góc giữa $AB$ và $AE$. Có thể dùng hệ quả định lý cô-sin:
+		$$\cos A = \dfrac{AB^2+AE^2-BE^2}{2AB \cdot AE}$$
+	\end{listEX}}{\hspace{0.5cm}
+	\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+		\path
+		%	Vẽ mp
+		(0,0) coordinate (A)
+		(-2,-1) coordinate (C)
+		(1,-2) coordinate (D)
+		(3,-1) coordinate (E)
+		(4,1) coordinate (B)
+		;
+		\draw (A)--(B) (C)--(D) (A)--(E);
+		\draw[dashed] (E)--(B);
+		\foreach \x/\g in {A/180,B/90,C/180,D/-90,E/-90}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+\end{tikzpicture}}
+	\begin{luuy}
+		Ta có thể chọn điểm gốc khác điểm $A$, ưu tiên cho điểm dễ dựng hình.
+	\end{luuy}
+\end{dang}
+\begin{vd}%[1H3B2]
+	\immini{Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh là $a$. Tính góc giữa các cặp đường thẳng sau đây:
+	\begin{tasks}(1)
+		\task $AB$ và $A'D'$.
+		\task $AD$ và $A'C'$.
+		\task $BC'$ và $B'D'$.
+	\end{tasks}}{
+	\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+		\tkzDefPoints{0/0/A,-1.3/-1.1/B,2/-1.1/C}
+		\coordinate (D) at ($(A)+(C)-(B)$);
+		\coordinate (A') at ($(A)+(0,2.5)$);
+		\tkzDefPointsBy[translation=from A to A'](B,C,D){B'}{C'}{D'}
+		\tkzDrawPolygon(A',B',B,C,D,D')
+		\tkzDrawSegments(B',C' C',D' C,C')
+		\tkzDrawSegments[dashed](A,B A,D A,A')
+		\tkzDrawPoints[fill=black,size=4](A,B,D,C,A',B',C',D')
+		\tkzLabelPoints[above](A',D')
+		\tkzLabelPoints[below](A,B,C)
+		\tkzLabelPoints[left](B')
+		\tkzLabelPoints[right](C',D)
+\end{tikzpicture}}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}[scale=.4]
+			\tkzDefPoints{0/0/A, -3/-2/B, 5/-2/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (A') at ($(A)+(0,7)$);
+			\tkzDefPointsBy[translation=from A to A'](B,C,D){}
+			\tkzDrawPolygon(A',B',C',D')
+			\tkzDrawSegments[line width=1](B,B' B,C C,D D,D' C,C' B,C' A',C' B',D' C',D)
+			\tkzDrawSegments[dashed,line width=1](A,C A,A' A,B A,D B,D)
+			\tkzLabelPoints[below right](C,D,C')
+			\tkzLabelPoints[above right](D')
+			\tkzLabelPoints[above left](A',B',A)
+			\tkzLabelPoints[below](B)
+			\tkzDrawPoints[fill=black](A,B,C,D,A',B',C',D')
+			\end{tikzpicture}
+		\end{center}
+		\begin{enumerate}[a)]
+			\item Ta có $A'D'\parallel AD$ nên $(AB,A'D')=(AB,AD)=\widehat{BAD}=90^{\circ}$.
+			\item Ta có $A'C'\parallel AC$ nên $(AD,A'C')=(AD,AC)=\widehat{DAC}=45^{\circ}$.
+			\item Ta có $B'D'\parallel BD$ nên $(BC',B'D')=(BC',BD)=\widehat{DBC'}$.\\
+			Ta có $BD=BC'=C'D=AB\sqrt{2}$ nên $\triangle BDC'$ đều, suy ra $\widehat{DBC'}=60^{\circ}$.\\
+			Vậy $(BC',B'D')=60^{\circ}$.
+	\end{enumerate}}
+\end{vd}\dongcham{4}
+
+\begin{vd}
+	\immini{Cho hình lăng trụ $ABC.A'B'C'$ có tam giác $ABC$ cân tại $A$ và $\widehat{BAC}=120^\circ$. Các điểm $M$, $N$ lần lượt thuộc hai đoạn thẳng $AA'$ và $BB'$ thoả mãn $MN\parallel AB$, các điểm $P$, $Q$ lần lượt thuộc hai đoạn thẳng $AA'$ và $CC'$ ($P$ khác $M)$ thoả mãn $PQ\parallel AC$ (hình bên dưới). Tính số đo các góc sau
+	\begin{tasks}
+		\task $(AB,AC)$.
+		\task $\left(AB,B'C'\right)$.
+		\task $(MN,PQ)$.
+	\end{tasks}}{
+	\begin{tikzpicture}[scale=0.7]
+		\path 
+		(0,0) coordinate (B)
+		++(0:5) coordinate (C)
+		++(150:4) coordinate (A)
+		(B)++(70:5) coordinate (B')
+		(C)++(70:5) coordinate (C')
+		(A)++(70:5) coordinate (A')
+		(barycentric cs:A=2,A'=1) coordinate (M)
+		($(M)+(B)-(A)$) coordinate (N)
+		(barycentric cs:A'=2,A=1) coordinate (P)
+		($(P)+(C)-(A)$) coordinate (Q)
+		;
+		\draw (B)--(C)--(C')--(B')--cycle (A')--(B')--(C')--cycle;
+		\draw[dashed] (A')--(A)--(B) (A)--(C) (N)--(M) (P)--(Q) ;
+		\foreach \x/\y in {A/-90,B/180,C/0,A'/90,B'/180,C'/0,N/180,M/0,P/180,Q/0}{
+			\draw[fill=black] (\x)circle(1pt)++(\y:0.32) node{$\x$};}
+\end{tikzpicture}}
+	\loigiai{
+		\begin{enumerate}
+			\item Trong mặt phẳng $(ABC)$, vì $\widehat{BAC}=120^{\circ}$ nên
+			$(AB,AC)=180^{\circ}-120^{\circ}=60^{\circ}$.
+			\item Vì tam giác $ABC$ cân tại $A$ nên $\widehat{ABC}=\widehat{ACB}=\dfrac{180^{\circ}-\widehat{BAC}}{2}=\dfrac{180^{\circ}-120^{\circ}}{2}=30^{\circ}$.\\ 
+			Ta có $BC\parallel B'C'$ nên $\left(AB,B'C\right)=(AB,BC)=\widehat{ABC}=30^{\circ}$.
+			\item Vì $MN\parallel AB$, $PQ\parallel AC$ nên $(MN,PQ)=(AB,AC)=60^{\circ}$.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{4}
+
+\begin{vd}
+	Cho tứ diện $ABCD$. Gọi $M$, $N$ lần lượt là trung điểm của $BC$ và $AD$, biết $AB=CD=a$, $MN=\dfrac{a\sqrt{3}}{2}$. Tính góc giữa hai đường thẳng $AB$ và $CD$. 
+	\loigiai{
+		\immini{Gọi $I$ là trung điểm của $AC$. \\
+			Ta có $\left\{\begin{aligned}
+			&IM\parallel AB \\
+			&IN\parallel CD
+			\end{aligned}\right. \Rightarrow \widehat{(AB,CD)}=\widehat{(IM,IN)}$. Đặt $\widehat{MIN}=\alpha $. \\
+			Xét tam giác $IMN$ có $$IM=\dfrac{AB}{2}=\dfrac{a}{2}, IN=\dfrac{CD}{2}=\dfrac{a}{2},MN=\dfrac{a\sqrt{3}}{2}.$$
+			Theo định lí hàm số côsin, ta có $$\cos \alpha =\dfrac{IM^2+IN^2-MN^2}{2IM\cdot IN}=-\dfrac{1}{2}.$$
+			Suy ra $\widehat{MIN}=120^\circ$. Do đó $\widehat{(AB,CD)}=60^\circ$.}{\begin{tikzpicture}[scale=.8]
+			\tkzDefPoints{0/0/B, 3/-2/C, 8/0/D}
+			\coordinate (A) at ($(B)+(1,7)$);
+			\coordinate (M) at ($(B)!0.5!(C)$);
+			\coordinate (N) at ($(A)!0.5!(D)$);
+			\coordinate (I) at ($(A)!0.5!(C)$);
+			\tkzDrawSegments[dashed](B,D M,N)
+			\tkzDrawPoints[fill=black](A,B,C,D,M,I,N)
+			\tkzDrawPolygon(A,C,D)
+			\tkzDrawSegments(A,B B,C M,I I,N)
+			\tkzLabelPoints[left](B,I)
+			\tkzLabelPoints[right](D,N)
+			\tkzLabelPoints[below](C)
+			\tkzLabelPoints[above](A)
+			\tkzLabelPoints[below left](M)
+			\end{tikzpicture}}	
+	}
+\end{vd}\dongcham{11}
+\begin{vd}%[1H3K2]
+	Cho hình chóp $S.ABC$ có $SA=SB=SC=AB=AC=a\sqrt{2}$ và $BC=2a$. Tính góc giữa hai đường thẳng $AC$ và $SB$.
+	\loigiai{\immini{Ta có $SAB$ và $SAC$ là tam giác đều, $ABC$ và $SBC$ là tam giác vuông cân cạnh huyền $BC$.\\
+			Gọi $M$, $N$, $P$ lần lượt là trung điểm của $SA$, $AB$, $BC$, ta có $MN\parallel SB$, $NP\parallel AC$ nên $(AC,SB)=(NP,MN)$.\\
+			$MN=\dfrac{SB}{2}=\dfrac{a\sqrt{2}}{2}$, $NP=\dfrac{AC}{2}=\dfrac{a\sqrt{2}}{2}$.\\
+			$AP=SP=\dfrac{BC}{2}=a$, $SA=a\sqrt{2}$\\Nên $\triangle SAP$ vuông cân tại $P\Rightarrow MP=\dfrac{SA}{2}=\dfrac{a\sqrt{2}}{2}$.\\
+			Vậy $\triangle MNP$ đều $\Rightarrow (AC,SB)=(NP,NM)=\widehat{MNP}=60^{\circ}$.\\
+		}{\begin{tikzpicture}
+				\tkzDefPoints{0/0/A,2/-1.5/B,5/0/C,3/5/S}
+				\coordinate (M) at ($(S)!0.5!(A)$);
+				\coordinate (N) at ($(A)!0.5!(B)$);
+				\coordinate (P) at ($(B)!0.5!(C)$);
+				\tkzDrawSegments(S,A S,B S,C A,B B,C M,N S,P)
+				\tkzDrawSegments[dashed,line width=1](A,C N,P M,P A,P)
+				\tkzDrawPoints[fill=black](S,A,B,C,M,N,P)
+				\tkzLabelPoints(B,C,P)
+				\tkzLabelPoints[left](S,A,M,N)
+	\end{tikzpicture}}}
+\end{vd}\dongcham{11}
+\begin{dang}{Chứng minh hai đường thẳng vuông góc}
+	Để chứng minh hai đường thẳng $\triangle$ và $\triangle'$ vuông góc với nhau ta có thể sử dụng tính chất vuông góc trong mặt phẳng, cụ thể:
+	\begin{itemize}
+		\item Tam giác $ABC$ vuông tại $A$ khi và chỉ khi $\widehat{BAC}=90^{\circ} \Leftrightarrow \widehat{ABC}+\widehat{ACB}=90^{\circ}.$
+		\item Tam giác $ABC$ vuông tại $A$ khi và chỉ khi $AB^2+AC^2=BC^2.$
+		\item Tam giác $ABC$ vuông tại $A$ khi và chỉ khi trung tuyến xuất phát từ $A$ có độ dài bằng nửa cạnh $BC$.
+		\item Nếu tam giác $ABC$ cân tại $A$ thì đường trung tuyến xuất phát từ $A$ cũng là đường cao của tam giác.
+	\end{itemize}
+	Ngoài ra, chúng ta cũng sử dụng tính chất: Nếu $d\perp \triangle$ và $\triangle'\parallel d$ thì $\triangle'$ cũng vuông góc với đường thẳng $\triangle.$
+\end{dang}
+
+\begin{vd}%[1H3K2]
+	Cho hình chóp $S.ABC$ có $SA=SB=SC=a$, $\widehat{ASB}=60^{\circ}, \widehat{BSC}=90^{\circ}, \widehat{CSA}=120^{\circ}$. Cho $H$ là trung điểm $AC$. Chứng minh rằng
+	\begin{tasks}(2)
+		\task $SH\perp AC$.
+		\task $AB\perp BC$.
+	\end{tasks}
+	\loigiai{
+		\immini{
+			\begin{enumerate}[a)]
+				\item Do tam giác $SAC$ cân tại $S$ và $H$ là trung điểm $AC$ nên $SH\perp AC$.
+				\item Do $SA=SB=a$ và $\widehat{ASB}=60^{\circ}$ nên $\triangle SAB$ đều. Từ đó suy ra $AB=a$.\hfill (1)\\
+				Áp dụng định lý hàm số cos cho các tam giác $SAC$ ta có\\ $AC^2=SA^2+SC^2-2SA.SC.\cos\widehat{ASC}=2a^2-2a^2.\cos120^{\circ}=3a^2.$\hfill (2)\\
+				Áp dụng định lý Pitago cho tam giác $SBC$, ta có $BC^2=SB^2+SC^2=2a^2$.\hfill (3)\\
+				Từ (1), (2), (3) suy ra $AC^2=AB^2+BC^2 \Rightarrow AB\perp BC$.
+			\end{enumerate}
+		}
+		{
+			\begin{tikzpicture}[scale=1.0]
+			\tkzDefPoints{0/0/A, 1.5/-1.5/B, 5/0/C}
+			\coordinate (H) at ($(A)!0.5!(C)$);
+			\coordinate (S) at ($(H)+(0,3.5)$);
+			\tkzDrawSegments[dashed](A,C S,H B,H)
+			\tkzDrawSegments(A,B B,C S,A S,B S,C)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[left](A)
+			\tkzLabelPoints[right](C)
+			\tkzLabelPoints[below](B)
+			\tkzLabelPoints[below right](H)
+			\tkzMarkRightAngle(A,B,C)
+			\tkzDrawPoints[fill=black](A,B,C,S,H)
+			\tkzMarkSegments[mark=||](H,A H,C)
+			\end{tikzpicture}
+		}
+	}
+\end{vd}\dongcham{11}
+
+\begin{vd}
+	Cho hình chóp $S.ABC$ có $AB=AC$. Lấy $M$, $N$ và $P$ lần lượt là trung điểm của các cạnh $BC$, $SB$ và $SC$. Chứng minh rằng $AM$ vuông góc với $NP$.
+	\loigiai{
+		\hfill
+		\immini{
+			Do $N$, $P$ lần lượt là trung điểm của các cạnh $SB$ và $SC$ nên $NP$ là đường trung bình của tam giác $SBC$, từ đó suy ra $NP\parallel BC$. \hfill $(1)$\\
+			Mặt khác, do tam giác $ABC$ cân tại $A$, suy ra trung tuyến $AM\perp BC$. \hfill $(2)$\\
+			Từ $(1)(2)$ suy ra $AM\perp NP$.
+		}{
+			\begin{tikzpicture}[scale=0.7]
+			\tkzDefPoints{0/0/A,2/-1.5/B,5/0/C,3/4/S}
+			\tkzDefMidPoint(B,C)\tkzGetPoint{M}
+			\tkzDefMidPoint(S,B)\tkzGetPoint{N}
+			\tkzDefMidPoint(S,C)\tkzGetPoint{P}
+			\tkzDrawSegments(S,A S,B S,C A,B B,C N,P)
+			\tkzDrawSegments[dashed](A,C A,M)
+			\tkzDrawPoints[fill=black](A,B,C,S,M,N,P)
+			\tkzMarkSegments[mark=||](A,B A,C)
+			\tkzMarkSegments[mark=|](S,N N,B S,P P,C)
+			\tkzMarkSegments[mark=x](B,M M,C)
+			\tkzMarkRightAngle(A,M,B)
+			\tkzLabelPoints[left](A)
+			\tkzLabelPoints[below](B)
+			\tkzLabelPoints[right](C)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints(M,N)
+			\tkzLabelPoints[right](P)
+			\end{tikzpicture}
+	}}
+\end{vd}\dongcham{11}
+
+\begin{vd}
+	Cho hình lăng trụ tam giác $ABC.A'B'C'$ có đáy là tam giác đều. Lấy $M$ là trung điểm của cạnh $BC$. Chứng minh rằng $AM$ vuông góc với $B'C'$.
+	\loigiai{
+		\hfill
+		\immini{
+			Do tứ giác $BB'C'C$ là hình bình hành nên $BC\parallel B'C'$. \hfill $(1)$\\
+			Mặt khác, do tam giác $ABC$ đều nên $AM\perp BC$. \hfill $(2)$\\
+			Từ $(1)(2)$ suy ra $AM\perp B'C'$.
+		}{
+			\begin{tikzpicture}[scale=0.7]
+			\tkzDefPoints{0/0/A',2/-1.5/B',5/0/C',1/4/A}
+			\coordinate (B) at ($(A)+(B')-(A')$);
+			\coordinate (C) at ($(A)+(C')-(A')$);
+			\tkzDefMidPoint(B,C)\tkzGetPoint{M}
+			
+			\tkzDrawPoints[fill=black](A',B',C',A,B,C,M)
+			\tkzDrawSegments(A',B' B',C' A,B B,C C,A A,A' B,B' C,C' A,M)
+			\tkzDrawSegments[dashed](A',C')
+			\tkzMarkRightAngle(A,M,B)
+			\tkzLabelPoints[left](A')
+			\tkzLabelPoints[below right](C,C',M,B',B)
+			\tkzLabelPoints[left](A)
+			\end{tikzpicture}
+	}}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có $SA=x$ và tất cả các cạnh còn lại đều bằng 1. Chứng minh rằng $SA\perp SC$.
+	\loigiai{
+		\immini{Ta có $ABCD$ là hình thoi, gọi $O$ là giao điểm của $AC$ và $BD$ suy ra $O$ là trung điểm của $AC, BD$.\\
+			Xét các tam giác $SBD$ và $CBD$, ta có:\\
+			$\heva{&SB=CB\\&SD=CD\\&BD \text{ chung}}\Rightarrow \triangle SBD=\triangle CBD$.\\
+			Từ đó suy ra $SO=CO=\dfrac{1}{2}AC$.\\
+			Vậy tam giác $SAC$ vuông tại $S$ hay $SA\perp SC$.
+		}{
+			\begin{tikzpicture}
+				\tkzDefPoints{2/2/D, 0/0/C, 4/0/B}
+				\tkzDefPointBy[translation = from C to B](D)
+				\tkzGetPoint{A}
+				\tkzDefMidPoint(B,D) \tkzGetPoint{O}
+				\coordinate (H) at ($(A)!0.7!(C)$);
+				\coordinate (x) at ($(A)!0.5!(S)$);
+				\coordinate (S) at ($(H)+(0,4)$);
+				\tkzDrawSegments(S,A S,B S,C B,C A,B)
+				\tkzDrawSegments[dashed](S,D D,C D,A A,C B,D S,O)
+				\tkzLabelPoints[right](A,B)
+				\tkzLabelPoints[above](x)
+				\tkzLabelPoints[below](O)
+				\tkzLabelPoints[above](S)
+				\tkzLabelPoints[left](C,D)
+			\end{tikzpicture}
+	}}
+\end{vd}\dongcham{10}
+
+\begin{vd}
+	Cho hình lập phương $ABCD.A'B'C'D'$ cạnh $a$. Các điểm $M$, $N$ lần lượt là trung điểm của các cạnh $AB$, $BC$. Trên cạnh $B'C'$ lấy điểm $P$ sao cho $C'P=x$ ($0<x<a$). Trên cạnh $C'D'$ lấy điểm $Q$ sao cho $C'Q=x$. Chứng minh rằng $MN$ vuông góc với $PQ$.
+	\loigiai{
+		\hfill
+		\immini{
+			Do tứ giác $BB'D'D$ là hình chữ nhật, suy ra $BD\parallel B'D'$. \hfill $(1)$\\
+			Do $ABCD$ là hình vuông, suy ra $BD\perp AC$. \hfill $(2)$\\
+			Từ $(1)(2)$ suy ra $B'D'\perp AC$. \hfill $(3)$\\
+			Theo bài ra ta có $MN$ là đường trung bình của tam giác $ABC$, suy ra $MN\parallel AC$. \hfill $(4)$\\
+			Mặt khác, ta có $\dfrac{C'P}{C'B}=\dfrac{C'Q}{C'D'}=\dfrac{x}{a}$, suy ra $PQ\parallel B'D'$. \hfill $(5)$\\
+			Từ $(3)(4)(5)$ ta có $MN\perp PQ$.
+		}{
+			\begin{tikzpicture}[scale=0.7,>=stealth, line cap=round, line join=round]%Hình HĐ 2/ Tr-94
+			\tkzDefPoints{0/0/A}
+			\tkzDefShiftPoint[A](0:4){B}
+			\tkzDefShiftPoint[A](50:2.5){D}
+			\coordinate (C) at ($(B)+(D)-(A)$);
+			
+			\tkzDefShiftPoint[A](-90:4){A'}
+			\tkzDefPointBy[translation = from A to A'](B) \tkzGetPoint{B'}
+			\tkzDefPointBy[translation = from A to A'](C) \tkzGetPoint{C'}
+			\tkzDefPointBy[translation = from A to A'](D) \tkzGetPoint{D'}
+			\tkzDefMidPoint(A,B)\tkzGetPoint{M}
+			\tkzDefMidPoint(B,C)\tkzGetPoint{N}
+			\coordinate (P) at ($(C')!0.7!(B')$);
+			\coordinate (Q) at ($(C')!0.7!(D')$);
+			
+			\tkzDrawSegments[dashed](D',D D',A' D',C' P,Q A',C' B',D')
+			\tkzDrawSegments(A,B B,C C,D D,A A,A' A',B' B',C' B,B' C,C' M,N B,D A,C)
+			\tkzDrawPoints[fill=black](A,B,C,D,A',B',C',D',M,N,P,Q)
+			\tkzLabelPoints[left](A)
+			\tkzLabelPoints[right](B)
+			\tkzLabelPoints[above](C,D,M,N,Q) 
+			\tkzLabelPoints[below](A') 
+			\tkzLabelPoints[below](B')
+			\tkzLabelPoints[right](C',P) 
+			\tkzLabelPoints[left](D')
+			\end{tikzpicture}
+	}}
+\end{vd}\dongcham{13}

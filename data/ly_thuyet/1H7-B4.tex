@@ -1,0 +1,557 @@
+\section{HAI MẶT PHẲNG VUÔNG GÓC}
+
+\subsection{PHÂN LOẠI, PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Xác định góc giữa hai mặt phẳng}
+
+	\begin{enumerate}
+		\item[\iconCH] \indamm{\underline{Cách 1}: Dùng định nghĩa:} Góc giữa $(\alpha)$ và $(\beta)$ bằng góc giữa hai đường thẳng $a$ và $b$ lần lượt vuông góc với chúng.
+		\immini{
+			\item [\iconCH] \indamm{\underline{Cách 2}: Dựng hai đường trong hai mặt lần lượt vuông góc với giao tuyến.}  Các bước thực hiện:
+			\begin{itemize}
+				\item [\ding{172}] Dựng giao tuyến $c=(\alpha)\cap (\beta)$.
+				\item [\ding{173}] Dựng $m \bot c$ và $n \bot c$ tại $I$, với $m \in (\alpha)$ và $n \in (\beta)$.
+				\item [\ding{174}] Góc cần tìm là $\left(m; n\right)$.
+		\end{itemize}}{\begin{tikzpicture}[scale=.7][>=stealth, line join=round, line cap = round]
+				\tkzDefPoints{0/0/A, 4/0/B, 5/2/C, 1/2/D, 3/4/E, 4/6/F, 3.5/2/G, 2/1/H, 3.73/1/K,4/3/M, 4.5/1/N}
+				\tkzDrawSegments(A,B B,C A,D D,G B,E E,F C,F H,K M,N)
+				\tkzDrawPoints[fill=black](N)
+				\tkzDrawSegments[dashed](G,C K,N)
+				\tkzMarkAngle[mkpos=.3,size=.8](B,A,D)
+				\tkzMarkAngle[mkpos=.2,size=.6](B,E,F)
+				\tkzMarkAngle[mkpos=.2,size=.6](M,N,K)
+				\draw (3,1)node[below]{$m$} (4,3)node[right]{$n$} (0.4,-0.12)node[above]{\scriptsize $\alpha$} (2.95,4)node[right]{\scriptsize  $\beta$} (4.75,1)node[below]{$I$};
+		\end{tikzpicture}}
+		\begin{luuy}
+		Nếu $(\beta)$ chứa điểm $S$ và $H$ là hình chiếu vuông góc của $S$ lên $(\alpha)$ (hình vẽ) thì ta dựng như sau:
+		\immini{
+			\begin{itemize}
+				\item [\ding{172}] Từ chân đường cao $H$, kẻ $HI \bot BC$.
+				\begin{itemize}
+					\item [$\bullet$] Nếu $\Delta HBC$ cân tại $H$ hoặc đều thì $I$ là trung điểm của $BC$.
+					\item [$\bullet$] Nếu $\Delta HAB$ vuông tại $B$ (hoặc $C$) thì $I$ trùng $B$ (hoặc $C$).
+				\end{itemize}
+				\item [\ding{172}] Từ $S$, kẻ $SI$. Suy ra góc cần tìm là $\boxed{\widehat{SIH}}$.
+			\end{itemize}
+		}{\begin{tikzpicture}[scale=.7][>=stealth, line join=round, line cap = round]
+				\tikzset{label style/.style={font=\footnotesize}}
+				\tkzDefPoints{0/0/A, 4/0/B, 5/2/C, 1/2/D, 2/1/H, 2/4/S, 2/2/E, 4.5/1/I, 3.5/1/L}
+				\tkzDrawSegments(A,B B,C A,D D,E S,H H,L S,B S,C S,I H,B)
+				\tkzDrawPoints(I,S,H)
+				\tkzDrawSegments[dashed](E,C L,I H,C)
+				\tkzMarkAngle[mkpos=.3,size=.8](B,A,D)
+				\tkzMarkAngle[mkpos=.2,size=.6](S,I,H)
+				\tkzMarkRightAngle(S,I,C)
+				\tkzMarkRightAngle(H,I,B)
+				\draw (2,1)node[below]{$H$} (4.5,1)node[right]{$I$} (0.4,-0.05)node[above]{$\alpha$} (2,4)node[above]{$S$} (4,0)node[below]{$B$} (5,2)node[right]{$C$};
+		\end{tikzpicture}}
+	\end{luuy}
+	\end{enumerate}
+\end{dang}
+
+\begin{vd}%[TeX hóa SGK CTST]%[Truc Danh]%[1T8B3-6]
+	Cho hình chóp $S. ABCD$ có đáy $ABCD$ là hình vuông tâm $O$, cạnh bên $SA$ vuông góc với mặt phẳng đáy. Tính góc giữa hai mặt phẳng
+	\begin{enumEX}{2}
+		\item $(SAC)$ và $(SAD)$.
+		\item $(SAB)$ và $(SAD)$.
+	\end{enumEX}
+	\loigiai{
+		\immini
+		{
+			\begin{enumerate}
+				\item Ta có $BO\perp SA$ và $BO\perp AC$, suy ra $BO\perp(SAC)$.\\
+				$BA\perp SA$ và $BA\perp AD$, suy ra $BA\perp(SAD)$.\\
+				Do đó, nếu gọi góc giữa hai mặt phẳng $(SAC)$ và $(SAD)$ là $\alpha$ thì 
+				$$\alpha=(BO, BA)=\widehat{ABO}=45^{\circ}.$$
+				\item Ta có $CB\perp SA$ và $CB\perp AB$, suy ra $CB\perp(SAB)$.\\
+				$CD\perp SA$ và $CD\perp AD$, suy ra $CD\perp(SAD)$.\\
+				Do đó, nếu gọi góc giữa hai mặt phẳng $(SAB)$ và $(SAD)$ là $\beta$ thì 
+				$$\beta=(CB, CD)=\widehat{BCD}=90^{\circ}.$$
+			\end{enumerate}	
+		}{
+			\begin{tikzpicture}[scale=0.8,font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\path 
+				(0,0) coordinate (A)
+				(4,0) coordinate (D)
+				(-1,-2) coordinate (B)
+				($(B)+(D)-(A)$) coordinate (C)	
+				($(A)+(0,3)$) coordinate (S)
+				($(A)!.5!(C)$) coordinate (O)
+				;
+				\draw (S)--(B) (S)--(C) (S)--(D) (B)--(C)--(D);
+				\draw[dashed] (B)--(A)--(D) (S)--(A) (A)--(C) (B)--(D);
+				\foreach \x/\g in {A/180,B/-90,C/0,D/0,S/90,O/-90} \fill[black] (\x) circle (1pt)+(\g:.3) node {$\x$};
+			\end{tikzpicture}
+		}
+	}
+\end{vd}\dongcham{14}
+
+\begin{vd}
+	Cho hình vuông $ABCD$ cạnh $a$, và $SA\bot (ABCD)$ và $SA=a\sqrt{3}$. Tính góc giữa các cặp mặt phẳng sau: 
+	\begin{tasks}(2)
+		\task $\left(SBC\right)$ và $\left(ABCD\right)$.
+		\task  $\left(SAD\right)$ và $\left(ABCD\right)$. 		 
+		\task $\left(SBD\right)$ và $\left(ABCD\right)$. 		 
+		\task  $\left(SAB\right)$ và $\left(SCD\right)$. 
+	\end{tasks}
+	\loigiai{
+		\hspace*{1cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\coordinate (O) at ($(A)!0.5!(C)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C)
+			\tkzDrawSegments[dashed](A,S A,B A,D B,D A,C S,O)
+			\tkzDrawPoints[fill=black,size=4](D,C,A,B,S)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[below](A,B,C,O)
+			\tkzLabelPoints[right](D)
+		\end{tikzpicture}
+		\hspace{2cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\coordinate (d) at ($(S)+(C)-(D)$);
+			\coordinate (d') at ($(S)+(D)-(C)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C d',d)
+			\tkzDrawSegments[dashed](A,S A,B A,D)
+			\tkzDrawPoints[fill=black,size=4](D,C,A,B,S)
+			\tkzLabelPoints[above](S,d)
+			\tkzLabelPoints[below](A,B,C)
+			\tkzLabelPoints[right](D)
+		\end{tikzpicture}
+		\begin{enumerate}[a)]
+			\item Ta có $(SBC) \cap (ABCD)=BC$. Mặt khác 
+			\begin{itemize}
+				\item [$\bullet$] $AB \perp BC \quad (1)$.
+				\item [$\bullet$] $BC \perp AB$, $BC \perp SA$ nên $SB \perp BC \quad (2)$.
+			\end{itemize}
+			Từ (1) và (2) suy ra góc giữa $(SBC)$ và $(ABCD)$ bằng góc giữa $AB$ và $SB$ bằng $\widehat{SBA}$.\\
+			Xét $\triangle SBA$ có $\tan \widehat{SBA}=\dfrac{SA}{AB}=\sqrt{3}$, suy ra $\widehat{SBA}=60^\circ$.
+			\item Do $SA \perp (ABCD)$ nên $(SAD) \perp (ABCD)$, suy ra góc giữa $\left(SAD\right)$ và $\left(ABCD\right)$ bằng $90^\circ$. 	
+			\item Ta có $(SBD) \cap (ABCD)=BD$. Mặt khác 
+			\begin{itemize}
+				\item [$\bullet$] $AO \perp BD \quad (1)$.
+				\item [$\bullet$] $BD \perp AC$, $BD \perp SA$ nên $BD \perp (SAC) \Rightarrow SO \perp BD \quad (2)$.
+			\end{itemize}
+			Từ (1) và (2) suy ra góc giữa $(SBD)$ và $(ABCD)$ bằng góc giữa $AO$ và $SO$ bằng $\widehat{SOA}$.\\
+			Xét $\triangle SOA$ có $\tan \widehat{SOA}=\dfrac{SA}{AO}=\dfrac{a\sqrt{3}}{\tfrac{a\sqrt{2}}{2}}=\sqrt{6}$, suy ra $\widehat{SOA}\approx 67^\circ47'$.
+			\item Ta có $(SAB) \cap (SCD)=d$, với $d$ qua $S$ và song song với $AB$, $CD$. Mặt khác 
+			\begin{itemize}
+				\item [$\bullet$] $SA \perp AB$ mà $AB \parallel d$ nên $SA \perp d \quad (1)$.
+				\item [$\bullet$] $SD \perp CD$ mà $CD \parallel d$ nên $SD \perp d \quad 21)$.
+			\end{itemize}
+			Từ (1) và (2) suy ra góc giữa $(SAB)$ và $(SCD)$ bằng góc giữa $SA$ và $SD$ bằng $\widehat{DSA}$.\\
+			Xét $\triangle SAD$ có $\tan \widehat{DSA}=\dfrac{AD}{SA}=\dfrac{1}{\sqrt{3}}$, suy ra $\widehat{DSA}=30^\circ$.
+	\end{enumerate}}
+\end{vd}\dongcham{38}
+
+\begin{vd}
+	Cho hình chóp $S. ABC$  có đáy là tam giác đều cạnh bằng $2a $, $SA$ vuông góc mặt phẳng đáy và
+	$SA =a $. Tính góc giữa hai mặt phẳng $(SBC)$ và $(ABC)$.
+	\loigiai{
+		\immini{
+			Gọi $M$ là trung điểm của $BC$. Dễ thấy $BC \perp (SAM)$ nên góc giữa hai mặt phẳng $(SBC)$ và $(ABC)$ bằng góc $\widehat{SMA}$.  \\
+			Ta có $\tan \widehat{SMA} = \dfrac{SA}{AM} = \dfrac{a}{a\sqrt{3}} =\dfrac{\sqrt{3}}{3} \Rightarrow \widehat{SMA} = 30^\circ$.
+		}
+		{
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\tkzDefPoints{1.25/1/A,2/0/B,4.5/1/C,1.25/3.5/S}
+				\tkzDefMidPoint(B,C) \tkzGetPoint{M}
+				\tkzDrawSegments[dashed](A,C A,M)
+				\tkzDrawSegments(S,A S,B S,C A,B B,C S,M)
+				\tkzMarkRightAngle(S,A,B)
+				\tkzMarkRightAngle(S,A,C)
+				\tkzDrawPoints[fill=black,size=6](A,B,C,S,M)
+				\tkzLabelPoints[below](B,M)
+				\tkzLabelPoints[above](S)
+				\tkzLabelPoints[right](C)
+				\tkzLabelPoints[left](A)
+			\end{tikzpicture}
+		}
+	}
+\end{vd}\dongcham{13}
+
+\begin{vd}
+	Cho hình chóp tứ giác đều $S.ABCD$ có cạnh đáy bằng $2a$, cạnh bên bằng $a\sqrt{5}$.
+	\begin{tasks}(1)
+		\task Tính góc giữa $(SCD)$ với $(ABCD)$.
+		\task Tính góc giữa $(SCD)$ với $(SBC)$.
+	\end{tasks}
+	\loigiai{
+		\hspace*{1cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-2/-1.6/B,1.6/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (O) at ($(A)!1/2!(C)$);
+			\coordinate (S) at ($(O)+(0,3)$);
+			\coordinate (M) at ($(C)!0.5!(D)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C S,M)
+			\tkzDrawSegments[dashed](A,S A,B A,D A,C B,D S,O O,M)
+			\tkzDrawPoints[fill=black,size=5](D,C,A,B,S,M)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[left](A)
+			\tkzLabelPoints[below](B,C,O,M)
+			\tkzLabelPoints[right](D)
+		\end{tikzpicture}
+		\hspace{2cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-2/-1.6/B,1.6/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (O) at ($(A)!1/2!(C)$);
+			\coordinate (S) at ($(O)+(0,3)$);
+			\coordinate (K) at ($(S)!0.45!(C)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C K,D K,B)
+			\tkzDrawSegments[dashed](A,S A,B A,D A,C B,D S,O)
+			\tkzDrawPoints[fill=black,size=5](D,C,A,B,S,K)
+			\tkzMarkRightAngle[size=0.2](D,K,C)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[left](A)
+			\tkzLabelPoints[below](B,C,O)
+			\tkzLabelPoints[right](D)
+			\tkzLabelPoints[above right](K)
+		\end{tikzpicture}
+		\begin{enumerate}[a)]
+			\item $(SCD) \cap (ABCD) =CD$. Gọi $M$ là trung điểm của $CD$, ta có
+			\begin{itemize}
+				\item [$\bullet$] $\triangle OCD$ cân tại $O$ nên $OM \perp CD \quad (1)$.
+				\item [$\bullet$] $CD \perp OM \Rightarrow SM \perp CD \quad (2)$ \quad (định lý 3 đường vuông góc)
+			\end{itemize}
+			Từ (1) và (2) suy ra góc giữa $(SCD)$ với $(ABCD)$ là $\widehat{SMO}$.\\
+			Xét $\triangle SMO$ có $SO=\sqrt{SD^2-OD^2}=\sqrt{5a^2-2a^2}=a\sqrt{3}$, $OM=a$. Suy ra
+			$$\tan\widehat{SMO}=\dfrac{SO}{OM}=\sqrt{3} \Rightarrow \widehat{SMO} =60^\circ. $$
+			\item $(SCD) \cap (SBC) =SC$. Kẻ $DK \perp SC$ tại $K$. Ta có
+			\begin{itemize}
+				\item [$\bullet$] $SC \perp DK \quad (1)$.
+				\item [$\bullet$] $BD \perp (SAC) \Rightarrow SC \perp BD \quad (2)$
+			\end{itemize}
+			Từ (1) và (2) suy ra $SC \perp (BDK)$ nên $BK \perp SC$.\\
+			Do $DK \perp SC$ và $BK \perp SC$ nên góc giữa $(SCD)$ với $(SBC)$ bằng góc giữa $KD$ và $KB$.\\
+			Xét $\triangle KBD$. Ta có
+			\begin{itemize}
+				\item [$\bullet$] $BD=2\sqrt{2}a$; $KB=KD=\dfrac{a\sqrt{13}}{2}$.
+				\item [$\bullet$] $\cos (KB,KD)=\dfrac{\bigg|KB^2+KD^2-BD^2\bigg|}{2\cdot KB \cdot KD}=\dfrac{3}{13} \Rightarrow (KB,KD) \approx 76^\circ 39' $
+			\end{itemize}
+			Vậy góc giữa $(SCD)$ với $(SBC)$ gần bằng $76^\circ 39'$.
+	\end{enumerate}}
+\end{vd}\dongcham{22}
+
+\begin{vd}
+	Cho lăng trụ $ABC.A'B'C'$ có đáy $ABC$ là tam giác đều cạnh $a$ và $A'A=A'B=A'C=\dfrac{a\sqrt{15}}{6}$. Xác định và tính góc giữa hai mặt phẳng $(ABB'A')$ và $(ABC)$.
+	\loigiai{
+		\immini{
+			Gọi $M$ là trung điểm $AB$, $H$ là trọng tâm tam giác $ABC$. Khi đó $A'H\perp(ABC)$ và $(A'HM) \perp AB$.\\
+			Suy ra $\left((ABB'A');(ABC)\right)=\widehat{A'MH}$.\\
+			Ta có $MH=\dfrac{CM}{3}=\dfrac{a\sqrt{3}}{6}$ và $CH=2MH=\dfrac{a\sqrt{3}}{3}$,\\
+			suy ra $A'H=\sqrt{A'C^2-CH^2}=\dfrac{a\sqrt{3}}{6}$.\\
+			Xét $\triangle A'MH$, ta có $\tan\widehat{A'MH}=\dfrac{A'H}{MH}=1$.\\
+			Vậy $\left((ABB'A');(ABC)\right)=45^\circ$.
+		}{
+			\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\tkzInit[xmin=-0.5, xmax=5.5, ymin=-2, ymax=4]
+				\tkzClip
+				\tkzDefPoints{0/0/A,0.8/-1.5/B,3.7/0/C,1.5/3/A'}
+				\tkzDefMidPoint(A,B)\tkzGetPoint{M}
+				\tkzCentroid(A,B,C)\tkzGetPoint{H}
+				\tkzDefPointBy[translation=from A to B](A')\tkzGetPoint{B'}
+				\tkzDefPointBy[translation=from A to C](A')\tkzGetPoint{C'}
+				\tkzDrawPoints[fill=black](A,B,C,A',B',C',M,H)
+				\tkzDrawSegments(A,B B,C B,A' A,A' B,B' C,C' A',B' B',C' C',A' A',M)
+				\tkzDrawSegments[dashed](C,M A',H A',C A,C)
+				\tkzLabelPoints[above](A',C')
+				\tkzLabelPoints[below](B,H,C)
+				\tkzLabelPoints[left](A,M,B')
+			\end{tikzpicture}
+		}
+	}
+\end{vd}\dongcham{13}
+\begin{dang}{Tính số đo của góc nhị diện}
+\end{dang}
+
+\begin{vd}%[1H2B6-2]
+	Cho hình chóp $S.ABCD$ có $SA \perp(ABCD)$, đáy $ABCD$ là hình thoi cạnh $a$ và $AC=a$. Tính số đo của mỗi góc nhị diện sau:
+	\begin{tasks}(2)
+		\task $[B,SA,C]$;
+		\task $[S,DA,B]$.
+	\end{tasks}
+	\loigiai{
+		\immini{ \begin{enumerate}
+				\item Vì $S A \perp(A B C D)$ nên $SA \perp AB, SA \perp AC$, suy ra góc $BAC$ là góc phẳng nhị diện của góc nhị diện $[B, SA, C]$. Do $AC=A B=BC=a$ nên tam giác $ABC$ đều, suy ra $\widehat{BAC}=60^{\circ}$. Vậy góc nhị diện $[B, SA, C]$ có số đo bằng $60^{\circ}$.
+				\item Trong mặt phẳng $(ABCD)$, lấy $H$ thuộc $BC$ sao cho $AH \perp AD$. Mà $SA \perp AD$ (vì $SA \perp(ABCD)$ và $AD \subset(ABCD))$ nên góc $SAH$ là góc phẳng nhị diện của góc nhị diện $[S, DA, B]$. Mặt khác, $SA \perp(ABCD)$ và $AH \subset(ABCD)$ nên $SA \perp AH$, suy ra góc $SAH$ bằng $90^{\circ}$.
+				Vậy góc nhị diện $[S, DA, B]$ có số đo bằng $90^{\circ}$.
+		\end{enumerate}}{
+			\begin{tikzpicture}
+				\def\a{4}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\a)$) coordinate (S)
+				($(C)!0.6!(B)$) coordinate (H)%
+				(intersection of A--C and B--D) coordinate (O);%giao điểm O
+				
+				\draw[dashed,thick] (C)--(A)--(H)	(B)--(A)--(D)	(A)--(S);
+				\draw[thick] 			(B)-- (C)--(D)
+				(B)--(S)	(C)--(S)	(D)--(S);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,H/-90}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+	\end{tikzpicture}}}
+\end{vd}\dongcham{20}
+
+\begin{vd}%[1H2K6-2]
+	Cho hình lập phương $ABCD.A'B'C'D'$ có cạnh bằng $a$.
+	\begin{listEX}[1]
+		\item Tính côsin của góc giữa hai mặt phẳng $(A'BD)$ và $(ABCD)$.
+		\item Tính côsin của số đo góc nhị diện $\left[A',BD,C'\right]$.
+	\end{listEX}
+	\loigiai{
+		\begin{center}
+			
+			\begin{tikzpicture}
+				\def\a{3.5}
+				\path 	(0:0) coordinate (A)
+				++(0:\a) coordinate (D)
+				++(-130:\a/2) coordinate (C)
+				($(A)+(C)-(D)$) coordinate (B)
+				($(A)+(90:\a)$) coordinate (A')
+				($(B)+(90:\a)$) coordinate (B')
+				($(C)+(90:\a)$) coordinate (C')
+				($(D)+(90:\a)$) coordinate (D')
+				(intersection of A--C and B--D) coordinate (O)
+				;
+				\draw[dashed] 	(B)--(A)--(D)	(A)--(A')--(B)--(D)--(A') (A)--(C) (A')--(O)--(C') ;
+				\draw 	(C)--(C') 	(D)--(D') 	(B)--(B') 	(B)--(C)--(D) (A')--(B')--(C')--(D')--cycle (C')--(D) (A')--(C')--(B);
+				\foreach \x/\g in {A/180,B/180,C/0,D/0,A'/180,B'/180,C'/0,D'/0,O/-90}
+				\fill[black] 	(\x) circle (1pt)
+				($(\g:4mm)+(\x)$) node {$\x$};	
+			\end{tikzpicture}
+		\end{center}
+		\begin{listEX}[1]
+			\item Gọi $O$ là giao điểm của $AC$ và $BD$, ta có $AO \perp BD$, $A'O \perp BD$ nên góc giữa hai mặt phẳng $(A'BD)$ và $(ABCD)$ bằng góc giữa hai đường thẳng $AO$, $A'O$.\\
+			Mà $(AO,A'O)=\widehat{AOA'}$ nên góc giữa hai mặt phẳng $(A'BD)$ và $(ABCD)$ bằng $\widehat{AOA'}$.\\
+			Ta có $OA=\dfrac{a\sqrt{2}}{2}$, $OA'=\sqrt{OA^2+AA'^2}=\dfrac{a\sqrt{6}}{2}$.\\
+			Suy ra $\cos \widehat{AOA'}=\dfrac{AO}{A'O}=\dfrac{\sqrt{3}}{3}$.
+			\item Vì $A'O \perp BD$, $CO' \perp BD$ nên góc nhị diện $\left[A',BD,C'\right]$ bằng $\widehat{A'OC'}$.\\Ta có $OA'=OC'=\dfrac{a\sqrt{6}}{2}$, $A'C'=a\sqrt{2}$ nên $\cos \widehat{A'OC'}=\dfrac{OA'^2+OC^2-A'C'^2}{2OA'\cdot OC'}=\dfrac{2}{9}$.
+		\end{listEX}	
+	}
+\end{vd}\dongcham{17}
+
+\begin{dang}{Chứng minh hai mặt phẳng vuông góc}
+	\begin{enumerate}[\iconCH]
+		\immini{
+			\item \indamm{Phương pháp:} Chứng minh mặt phẳng này chứa một đường thẳng vuông góc với mặt phẳng kia.
+			\begin{luuy} Sơ đồ trình bày:
+				\begin{tcolorbox}[colframe=red,colback=yellow!3!white,boxrule=0.18mm]
+					\begin{itemize}
+						\item [] Ta có  $\heva{& d \perp a \text{ \indamm{(giải thích )} }\\  & d \perp b \text{ \indamm{(giải thích )} }} \Rightarrow d \perp \left(\alpha\right)$.
+						\item [] Mà $d \subset (\beta)$ nên $\left(\beta\right) \perp \left(\alpha\right)$.
+					\end{itemize}
+				\end{tcolorbox}
+			\end{luuy}
+		}{\begin{tikzpicture}[scale=.7][>=stealth, line join=round, line cap = round]
+				\tkzDefPoints{0/0/A, 7/0/B, 8/2/C, 1/2/D, 2/0/H, 2/2/G, 4/2/M, 3/1/I, 2/4/N, 4/6/Q, 3/4/T, 3/0.5/P, 7/1.5/X, 5/1.5/R, 6/0.5/V}
+				\tkzDrawSegments(A,B B,C A,D D,G M,C H,M H,N M,Q I,T N,Q P,X R,V)
+				%\tkzDrawPoints(I)
+				\tkzDrawSegments[dashed](G,M)
+				\tkzMarkRightAngle(H,I,T)
+				\tkzMarkAngle[mkpos=.3,size=.8](B,A,D)
+				\tkzMarkAngle[mkpos=.3,size=.6](H,N,Q)
+				\draw (3,3)node[right]{$d$} (3.6,1.4)node[below]{$c$} (0.1,0.22)node[right]{$\alpha$} (1.9,3.85)node[right]{$\beta$} (4,0.1)node[above]{$a$} (6.2,0.3)node[above]{$b$};
+		\end{tikzpicture}}
+		\item \indamm{Lưu ý:}
+		\begin{itemize}
+			\item [] Nếu dựng được góc giữa $(\alpha)$ và $(\beta)$. Khi đó, muốn chứng minh $(\alpha)$ vuông góc $(\beta)$, ta chỉ cần chứng minh góc đó bằng $90^\circ$.
+		\end{itemize}
+	\end{enumerate}
+\end{dang}
+
+\begin{vd}
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông, $SA\bot (ABCD)$ .
+	\begin{tasks}
+		\task Chứng minh $(SAB)\bot (SBC)$; $(SAC)\bot (SBD)$; $(SAD)\bot (SCD)$. 
+		\task Gọi $M$, $N$ lần lượt là trung điểm $SB$, $SD$. Chứng minh $(AMN)\bot (SAC)$
+		\task Gọi $I$ là trung điểm $AD$ và $H$ là giao điểm của $AC$ và $BD$. Chứng minh $(SHI)\bot (SAD)$
+		\task Gọi $BE$, $DF$ là 2 đường cao của $\Delta SBD$. Chứng minh $(ACF)\bot (SBC)$; $(AEF)\bot (SAC)$ 
+	\end{tasks}
+	\loigiai{
+		\hspace*{1cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\coordinate (M) at ($(S)!0.5!(B)$);
+			\coordinate (N) at ($(S)!0.5!(D)$);
+			\coordinate (I) at ($(A)!0.5!(D)$);
+			\coordinate (H) at ($(A)!0.5!(C)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C)
+			\tkzDrawSegments[dashed](A,S A,B A,D A,C B,D M,N I,H)
+			\tkzDrawPoints[fill=black,size=5](D,C,A,B,S,M,N,I,H)
+			\tkzLabelPoints[above](S,I)
+			\tkzLabelPoints[left](A,M)
+			\tkzLabelPoints[below](B,C,H)
+			\tkzLabelPoints[right](D,N)
+		\end{tikzpicture}
+		\hspace{2cm}
+		\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+			\tkzDefPoints{0/0/A,-1.3/-1.6/B,2.5/-1.6/C}
+			\coordinate (D) at ($(A)+(C)-(B)$);
+			\coordinate (S) at ($(A)+(0,3)$);
+			\coordinate (E) at ($(S)!0.5!(D)$);
+			\coordinate (F) at ($(S)!0.5!(B)$);
+			\tkzDrawPolygon(S,B,C,D)
+			\tkzDrawSegments(S,C)
+			\tkzDrawSegments[dashed](A,S A,B A,D B,E D,F B,D A,E A,F E,F)
+			\tkzDrawPoints[fill=black,size=4](D,C,A,B,S,E,F)
+			\tkzMarkRightAngle[size=0.2](B,E,D)
+			\tkzMarkRightAngle[size=0.2](D,F,B)
+			\tkzLabelPoints[above](S)
+			\tkzLabelPoints[left](A,F)
+			\tkzLabelPoints[below](B,C)
+			\tkzLabelPoints[right](D,E)
+		\end{tikzpicture}
+		\begin{enumerate}[a)]
+			\item \indam{* Chứng minh $(SAB)\perp (SBC)$.}\\
+			Ta có $\heva{&BC \perp AB\\& BC \perp SA \quad (\text{ do }SA \perp (ABCD) \text { và } BC \subset (ABCD))} \Rightarrow BC \perp (SAB).$\\
+			Mà $BC \subset (SBC)$ nên $(SBC) \perp (SAB)$.\\
+			\indam{* Chứng minh $(SAC)\perp (SBD)$.}\\
+			Ta có $\heva{&BD \perp AC \quad (\text{ đường chéo hình vuông})\\& BD \perp SA \quad (\text{ do }SA \perp (ABCD) \text { và } BD \subset (ABCD))} \Rightarrow BD \perp (SAC).$\\
+			Mà $BD \subset (SBD)$ nên $(SBD) \perp (SAC)$.\\
+			\indam{* Chứng minh $(SAD)\perp (SCD)$.}\\
+			Ta có $\heva{&CD \perp AD\\& CD \perp SA \quad (\text{ do }SA \perp (ABCD) \text { và } CD \subset (ABCD))} \Rightarrow CD \perp (SAD).$\\
+			Mà $CD \subset (SCD)$ nên $(SCD) \perp (SAD)$.\\
+			\item Ta có $MN \parallel BD$ (đường trung bình), mà $BD \perp (SAC)$ nên $MN \perp (SAC)$.\\
+			Mặt khác $MN \subset (AMN)$, suy ra $(AMN) \perp (SAC)$.
+			\item Ta có $\heva{&HI \perp AD \quad ( \text{ do } \triangle HAD \text{ cân tại } H)\\&HI \perp SA \quad (\text{ do }SA \perp (ABCD) \text { và } HI \subset (ABCD)) } \Rightarrow HI \perp (SAD).$\\
+			Mà $HI \subset (SHI)$, suy ra $(SHI) \perp (SAD)$.
+			
+			\item \indam{* Chứng minh $(ACF)\perp (SBC)$.}\\
+			Ta có $BC \perp (SAB)$ (chứng minh trên), mà $AF, SB \subset (SAB)$ nên $\heva{&AF \perp BC\\& SB \perp BC}$.\\
+			Ta có $\heva{&SB \perp DF \quad (\text{ giải thiết})\\& SB \perp AD \quad (\text{ do }SB \perp BC \text { và } BC \parallel AD)} \Rightarrow SB \perp (ADF)$, mà $AF \subset (ADF)$ nên $AF \perp SB$.\\
+			Vậy $\heva{&AF \perp BC\\& AF \perp SB}$ nên $AF \perp (SBC) \Rightarrow (ACF) \perp (SBC).$\\
+			\indam{* Chứng minh $(SAC)\perp (SBD)$.}\\
+			Ta có 
+			\begin{itemize}
+				\item [$\bullet$] $AF \perp (SBC)$ (chứng minh trên), suy ra $AF \perp SC \quad (1)$.
+				\item [$\bullet$] Chứng minh tương tự $AE \perp (SCD)$, suy ra $AE \perp SC \quad (2)$.
+			\end{itemize}
+			Từ (1) và (2), suy ra $SC \perp (AEF) \Rightarrow (SAC) \perp (AEF).$
+		\end{enumerate}
+		
+	}
+\end{vd}\dongcham{27}
+
+\begin{vd}
+	Cho hình chóp $S. ABC$ có đáy $ABC$ là tam giác cân tại $A$. Gọi $G$ là trọng tâm $\Delta ABC$, $M$ là trung điểm $BC$ và $SG\bot (ABC)$. Chứng minh $(SAM)\bot (ABC)$
+	\loigiai{
+		\immini{
+			Ta có 
+			\begin{itemize}
+				\item [$\bullet$] $\triangle ABC$ cân tại $A$ nên $BC \perp AM \quad(1)$
+				\item [$\bullet$] $SG\bot (ABC)$ và $BC \subset (ABC)$ nên $BC \perp SG \quad (2)$
+			\end{itemize}
+			Mà $AM, SG \subset (SAM)$ nên từ (1) và (2) suy ra $$BC \perp (SAM) \Rightarrow (SBC) \perp (SAM).$$
+		}{
+			\begin{tikzpicture}[scale=1, line join=round, line cap=round]
+				\tkzDefPoints{0/0/A,1.2/-1.6/B,4.5/0/C}
+				\tkzCentroid(A,B,C)\tkzGetPoint{G}
+				\coordinate (S) at ($(G)+(0,3.5)$);
+				\coordinate (M) at ($(B)!1/2!(C)$);
+				\tkzDrawPolygon(A,B,C,S)
+				\tkzDrawSegments(S,B S,M)
+				\tkzDrawSegments[dashed](M,A A,C S,G)
+				\tkzDrawPoints[fill=black,size=4](A,B,C,S,G,M)
+				\tkzMarkRightAngle[size=0.13](S,G,A)
+				\tkzMarkRightAngle[size=0.14](A,M,B)
+				\tkzLabelPoints[above](S)
+				\tkzLabelPoints[below](B,G,M)
+				\tkzLabelPoints[left](A)
+				\tkzLabelPoints[right](C)
+		\end{tikzpicture}}
+	}
+\end{vd}\dongcham{13}
+
+\begin{vd}%[1H2K4-2] 
+	Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình thoi tâm $O$, cạnh bằng $a$, góc $BAD$ bằng $60^{\circ}$. Kẻ $OH$ vuông góc với $SC$ tại $H$. Biết $SA \perp (ABCD)$ và $SA=\dfrac{a\sqrt{6}}{2}$. Chứng minh rằng
+	\begin{tasks}(3)
+		\task $(SBD) \perp (SAC)$;
+		\task $(SBC) \perp (BDH)$;
+		\task $(SBC) \perp (SCD)$;
+	\end{tasks}
+	\loigiai{
+		\begin{center}
+			\begin{tikzpicture}
+				\def\a{4}
+				\def\h{4}
+				\path 	(0:0) coordinate (D)
+				++(0:\a) coordinate (C)
+				++(-130:\a/2) coordinate (B)
+				($(B)+(D)-(C)$) coordinate (A)
+				($(A)+(90:\h)$) coordinate (S)
+				(intersection of A--C and B--D) coordinate (O)%giao điểm O
+				($(C)!1/3!(S)$) coordinate (H);
+				\draw[dashed] 	(S)--(D)--(A)--(C) (B)--(D)--(C) (O)--(H)--(D);
+				\draw (S)--(A)--(B)--(S) (S)--(C)--(B) (H)--(B);
+				\foreach \x/\g in {A/135,B/-135,C/-45,D/45,S/90,O/-90,H/90}
+				\fill[black] 	(\x) circle (1.5pt)
+				($(\g:3mm)+(\x)$) node {$\x$};	
+			\end{tikzpicture}
+		\end{center}
+		\begin{listEX}
+			\item Ta có $SA \perp (ABCD)$ nên $SA \perp BD$ mà $BD \perp AC$, do đó $BD \perp (SAC)$.\\
+			Vì mặt phẳng $(SBD)$ chứa $BD$ nên $(SBD) \perp (SAC)$.
+			\item Ta có $BD \perp (SAC)$ nên $BD \perp SC$, mà $SC \perp OH$, do đó $SA \perp (BDH)$.
+			\item Ta có $SC=\sqrt{SA^2+AC^2}=\dfrac{3a\sqrt{2}}{2}$.\\
+			Vì $\triangle CHO \backsim \triangle CAS$ nên $\dfrac{HO}{AS}=\dfrac{CO}{CS}$, suy ra $HO=\dfrac{CO \cdot AS}{CS}=\dfrac{a}{2}=\dfrac{BD}{2}$.\\
+			Do đó, tam giác $BDH$ vuông tại H, suy ra $\widehat{BHD}=90^{\circ}$.\\
+			Ta lại có $BH \perp SC$, $DH \perp SC$ nên $(SBC) \perp (SCD)$.
+		\end{listEX}
+	}
+\end{vd}\dongcham{22}
+
+\begin{vd}
+	Cho hình vuông $ABCD$ và tam giác đều $SAB$ cạnh $a$ nằm trong hai mặt phẳng vuông góc nhau. Gọi $I$ và $F$ lần lượt là trung điểm $AB$ và $AD$. Chứng minh rằng $(SID)\perp (SFC)$.
+	\loigiai{
+		\immini{
+			Gọi $K=CF\cap ID$.\\
+			Tam giác $SAB$ đều nên $SI\perp AB$.\\
+			Mà $(SAB)\perp (ABCD)$ nên $SI\perp (ABCD)$,\\
+			suy ra $CF\perp SI$.\\
+			Mặt khác $\widehat{KFD}+\widehat{KDF}=\widehat{KFD}+\widehat{KCD}=90^\circ$.\\
+			Suy ra $CF\perp ID$. Do đó $CF\perp (SID)$.\\
+			Vì vậy $(SFC)\perp (SID)$.
+		}
+		{
+			\begin{tikzpicture}[scale=0.7]
+				\tkzDefPoints{0/0/A, -2/-2/B, 2.5/-2/C}
+				\coordinate (D) at ($(A)+(C)-(B)$);
+				\draw (B)--(C)--(D);
+				\draw[dashed] (B)--(A)--(D) (S)--(A);
+				\coordinate (I) at ($(A)!0.5!(B)$);
+				\coordinate (F) at ($(A)!0.5!(D)$);
+				\coordinate (S) at ($(I)+(0,4)$);
+				\draw[dashed] (S)--(I)--(D) (S)--(F)--(C);
+				\draw (S)--(B) (D)--(S)--(C);
+				\tkzInterLL(I,D)(F,C) \tkzGetPoint{K}
+				\tkzMarkRightAngle(S,I,A)
+				\tkzMarkRightAngle(C,K,D)
+				\begin{scriptsize}
+					\draw (S) node[above]{$S$};
+					\draw (A) node[left]{$A$};
+					\draw (B) node[left]{$B$};
+					\draw (C) node[right]{$C$};
+					\draw (D) node[right]{$D$};
+					\draw (I) node[left]{$I$};
+					\draw (F) node[above]{$F$};
+					\draw (K) node[below left]{$K$};
+				\end{scriptsize}
+			\end{tikzpicture}
+		}
+	}
+\end{vd}\dongcham{14}

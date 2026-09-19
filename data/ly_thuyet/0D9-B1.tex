@@ -1,0 +1,196 @@
+\section{KHÔNG GIAN MẪU VÀ BIẾN CỐ}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Phép thử ngẫu nhiên, không gian mẫu}
+	\begin{itemize}
+		\item [$\bullet$]  \textbf{Phép thử ngẫu nhiên} (gọi tắt là phép thử) là một thí nghiệm hay một hành động mà kết quả của nó không thể biết được trước khi phép thử được thực hiện.
+		\item [$\bullet$]  \textbf{Không gian mẫu} của phép thử (kí hiệu là $\Omega$) là tập hợp tất cả các kết quả có thể xảy ra khi thực hiện phép thử.
+	\end{itemize}
+\indamm{Chú ý}: Ta chỉ xét phép thử mà không gian mẫu gồm hữu hạn kết quả.
+\subsubsection{Biến cố}
+\immini{
+		\begin{itemize}
+			\item [$\bullet$] Biến cố là một tập con của không gian mẫu $\Omega $, kí hiệu $A$, $B$, $C$,...
+			\item [$\bullet$] Một kết quả thuộc tập $A$ được gọi là kết quả thuận lợi cho biến cố $A$.
+		\end{itemize}
+}{
+	\begin{tikzpicture}[scale=.6]
+		\tkzDefPoints{0/0/A, 5/0/B, 0/3/D, 5/3/C}
+		\draw[fill=cyan!50] (A)--(B)--(C)--(D)--cycle;
+		\draw(4,0)--(4.5,-.5) node[below] {$\Omega$};
+		\node (A) at (1.5,1.5) [circle, draw,fill=white] {$A$};
+\end{tikzpicture}}
+\indamm{Chú ý}: 
+\begin{itemize}
+	\item [$\bullet$] Biến cố chắc chắn là biến cố luôn xảy ra, kí hiệu là $\Omega$.
+	\item [$\bullet$] Biến cố không thể là biến cố không bao giờ xảy ra, ki hiệu là $\varnothing$.
+\end{itemize}
+\subsubsection{Biến cố đối}
+Xét phép thử $T$  với không gian mẫu là  $\Omega$. Giả sử $E$ là một biến cố.
+\begin{boxkn}
+	\begin{itemize}
+		\item [$\bullet$] Biến cố đối của biến cố $E$ là biến cố "$E$ không xảy ra". Nếu biến cố $E$ được mô tả dưới dạng mệnh đề toán học $Q$ thì biến cố đối $\overline{E}$ được mô tả bằng mệnh đề phủ định của mệnh đề $Q$ (tức là mệnh đề $\overline{Q}$ ).
+		\item [$\bullet$] Biến cố đối của biến cố $E$ kí hiệu là $\overline{E}$. Nhận xét $\overline{E}=\Omega \backslash E$.
+	\end{itemize}
+\end{boxkn}
+\indamm{Nhận xét}: Nếu biến cố $E$ là tập con của không gian mẫu $\Omega$ thì $\overline{E}$ là phần bù của $E$ trong $\Omega$.
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Phép thử gieo đồng xu}
+\end{dang}
+\begin{vd}
+	Xét phép thử $T$ \lq\lq Gieo một đồng xu 3 lần\rq\rq. 
+	\begin{tasks}(1)
+		\task Mô tả không gian mẫu. Tính số phần tử của tập không gian mẫu.
+		\task Xác định phần tử của các biến cố và biến cố đối tương ứng với
+		\begin{itemize}
+			\item [$\bullet$] $A$ : \lq\lq Ba lần gieo đều mặt sấp\rq\rq.
+			\item [$\bullet$] $B$ : \lq\lq Có đúng 2 lần gieo xuất hiện mặt sấp\rq\rq.
+		\end{itemize}
+	\end{tasks}
+	\loigiai{
+		Mỗi đồng xu có hai khả năng xuất hiện mặt $S$ hay $N\Rightarrow$ không gian mẫu của phép thử là
+		$$\Omega =\{NNN,NSN,SNN,SSN,NNS,NSS,SNS,SSS\}.$$
+		Do vậy số phần tử của không gian mẫu là $n\left(\Omega\right)=8$.}
+\end{vd} \dongcham{10}
+\vspace{-0.8cm}
+\begin{vd}
+	Gieo một đồng xu cân đối và đồng chất liên tiếp cho đến khi lần đầu tiên xuất hiện mặt sấp hoặc cả năm lần ngửa thì dừng lại
+	\begin{enumerate}
+		\item Mô tả không gian mẫu. Tính số phần tử của tập không gian mẫu.
+		\item Liệt kê tất cả các kết quả thuận lợi của các biến cố
+		\begin{itemize}
+			\item [$\bullet$] $A$: \lq\lq Số lần gieo không vượt quá ba\rq\rq.
+			\item [$\bullet$] $B$: \lq\lq Có ít nhất $2$ lần gieo xuất hiện mặt ngửa\rq\rq.
+		\end{itemize}
+	\end{enumerate}
+	\loigiai{
+		Kí hiệu mặt sấp là $S$, mặt ngửa là $N$. Ta có
+		\begin{enumerate}
+			\item $\Omega=\left\{S; NS; NNS; NNNS; NNNNS; NNNNN\right\}\Rightarrow|\Omega|=6$.
+			\item $A=\{S; NS; NNS\}\Rightarrow|\Omega_A|=3$.\\
+			$B=\left\{NNS; NNNS; NNNNS; NNNNN\right\}\Rightarrow|{\Omega}_B|=4$.
+		\end{enumerate}
+	}
+\end{vd} \dongcham{12}
+
+\begin{dang}{Phép thử gieo súc sắc}
+\end{dang}
+
+\begin{vd}%[1D2Y4-1]%
+	Xét phép thử $T$ \lq\lq Gieo một con súc sắc cân đối và đồng chất\rq\rq. 
+	\begin{tasks}(1)
+		\task Mô tả không gian mẫu.
+		\task Gọi $A$ là biến cố \lq\lq Số chấm trên mặt xuất hiện là số chấm chẵn\rq\rq. Liệt kê tất cả các kết quả thuận lợi của biến cố $A$ và $\overline{A}$.
+	\end{tasks}
+	\loigiai{
+		
+	}
+\end{vd} \dongcham{14}
+
+\begin{vd}
+	Gieo một con xúc xắc liên tiếp hai lần.
+	\begin{tasks}
+		\task Mô tả không gian mẫu.
+		\task Gọi $A$ là biến cố "Tổng số chấm xuất hiện lớn hơn hoặc bằng 8". Liệt kê tất cả các kết quả thuận lợi của biến cố $A$.
+	\end{tasks}
+\end{vd} \dongcham{14}
+
+\begin{dang}{Một số phép thử đơn giản khác}
+\end{dang}
+
+\begin{vd}
+	Chọn ngẫu nhiên một số nguyên dương không lớn hơn 25.
+	\begin{tasks}
+		\task Mô tả không gian mẫu.
+		\task Gọi $A$ là biến cố "Số được chọn là số chính phương". Liệt kê tất cả các kết quả thuận lợi của biến cố $A$.
+	\end{tasks}
+\end{vd} \dongcham{14}
+
+\begin{vd}
+	Lập số tự nhiên có hai chữ số đôi một khác nhau từ các số $1,2,3,4$ .
+	\begin{tasks}
+	\task Mô tả không gian mẫu.
+	\task Gọi  $A$ là biến cố: “Số lập được chia hết cho $3$”. Liệt kê tất cả các kết quả thuận lợi của biến cố $A$.
+	\end{tasks}
+\end{vd} \dongcham{14}
+
+\begin{vd}
+	Một hộp chứa bốn  thẻ được đánh số $1, 2, 3, 4$. Lấy ngẫu nhiên hai thẻ.
+	\begin{tasks}
+		\task	Mô tả không gian mẫu. 
+		\task	Liệt kê tất cả các kết quả thuận lợi của các biến cố sau
+		\begin{itemize}
+			\item $H$: “Tổng các số trên hai thẻ là số chẵn”.
+			\item $K$: “Tích các số trên hai thẻ là số chẵn”.
+		\end{itemize}
+	\end{tasks}
+\end{vd} \dongcham{15}
+
+\subsection{BÀI TẬP TỰ LUYỆN}
+\begin{baitap}%[Tex hóa SGK CT,T7/22, Hiếu Phan]%[1D2B4-1]
+	Gieo một con xúc xắc bốn mặt cân đối hai lần liên tiếp và quan sát số ghi trên đỉnh của con xúc xắc.
+	\begin{enumEX}[a)]{1}
+		\item Hãy mô tả không gian mẫu của phép thử.
+		\item Hãy viết tập hợp các kết quả thuận lợi cho biến cố \lq\lq Số xuất hiện ở lần gieo thứ hai gấp $2$ lần số xuất hiện ở lần gieo thứ nhất\rq\rq.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}[a)]{1}
+			\item Không gian mẫu của phép thử là
+			$$ \Omega =\big\{(1;1);(1;2);(1;3);(1;4);(2;1);(2;2);(2;3);(2;4);\\(3;1);(3;2);(3;3);
+			(3;4);(4;1);(4;2);(4;3);(4;4)\big\}.$$
+			\item Tập hợp mô tả cho biến cố \lq\lq Số xuất hiện ở lần gieo thứ hai gấp $2$ lần số xuất hiện ở lần gieo thứ nhất\rq\rq\,là $\big\{(1;2);(2;4)\big\}$.
+		\end{enumEX}
+	}
+\end{baitap}
+
+\begin{baitap}%[Tex hóa SGK CT,T7/22, Hiếu Phan]%[1D2Y4-1]
+	Tung một đồng xu ba lần liên tiếp. Phát biểu mỗi biến cố sau dưới dạng mệnh đề
+	\begin{tasks}(1)
+		\task $A=\big\{SSS;NSS;SNS;NNS\big\}$;
+		\task $B=\big\{SSN;SNS;NSS\big\}$.
+	\end{tasks}
+	\loigiai{
+		\begin{itemize}
+			\item $A$: \lq\lq Lần tung thứ ba xuất hiện mặt sấp\rq\rq.
+			\item $B$: \lq\lq Có đúng một lần tung xuất hiện mặt ngửa\rq\rq.
+		\end{itemize}
+	}
+\end{baitap}
+
+\begin{baitap}%[Tex hóa SGK CT,T7/22, Hiếu Phan]%[1D2B4-1]
+	Một hộp chứa $5$ quả bóng xanh, $4$ quả bóng đỏ có kích thước và khối lượng như nhau. Hãy mô tả không gian mẫu của phép thử lấy ra ngẫu nhiên một quả bóng từ hộp.
+	\loigiai{
+		Kí hiệu $5$ quả bóng xanh lần lượt là $X_1,X_2,X_3,X_4,X_5$ và $4$ quả bóng đỏ lần lượt là $D_1, D_2, D_3, D_4$.\\
+		Không gian mẫu của phép thử là 
+		$\Omega =\big\{X_1;X_2;X_3;X_4;X_5;D_1;D_2;D_3;D_4\big\}$.
+	}
+\end{baitap}
+
+\begin{baitap}%[Tex hóa SGK CT,T7/22, Hiếu Phan]%[1D2K4-1]
+	Trường mới của bạn Dũng có $3$ câu lạc bộ ngoại ngữ là câu lạc bộ tiếng Anh, câu lạc bộ tiếng Bồ Đào Nha và câu lạc bộ tiếng Campuchia.
+	\begin{enumEX}[a)]{1}
+		\item Dũng chọn ngẫu nhiên $1$ câu lạc bộ ngoại ngữ để tìm hiểu thông tin. Hãy mô tả không gian mẫu của phép thử nêu trên.
+		\item Dũng thử chọn ngẫu nhiên $1$ câu lạc bộ ngoại ngữ để tham gia trong học kì $1$ và $1$ câu lạc bộ ngoại ngữ khác để tham gia trong học kì $2$. Hãy mô tả không gian mẫu của phép thử nêu trên.
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}[a)]{1}
+			\item $\Omega =\big\{A;B;C\big\}$ trong đó $A,B,C$ lần lượt kí hiệu kết quả Dũng chọn câu lạc bộ tiếng Anh, câu lạc bộ tiếng Bồ Đào Nha và câu lạc bộ tiếng Campuchia.
+			\item $\Omega =\big\{AB;AC;BC;BA;CA;CB\big\}$ trong đó $AB$ kí hiệu kết quả Dũng tham gia câu lạc bộ tiếng Anh trong học kì 1, câu lạc bộ tiếng Bồ Đào Nha trong học kì 2,$\ldots$.
+		\end{enumEX}
+	}
+\end{baitap}
+
+\begin{baitap}%[Tex hóa SGK CT,T7/22, Hiếu Phan]%[1D2K4-1]
+	Một hợp tác xã cung cấp giống lúa của $7$ loại gạo ngon ST24, MS19RMTT, ST25, Hạt Ngọc Rồng, Ngọc trời Thiên Vương, gạo đặc sản 20 Gò Công Tiền Giang, gạo lúa tôm Kiên Giang. Bác Bình và bác An mỗi người chọn $1$ trong $7$ loại giống lúa trên để gieo trồng cho vụ mới.
+	\begin{enumEX}[a)]{1}
+		\item Có bao nhiêu kết quả thuận lợi cho biến cố \lq\lq Hai bác Bình và An chọn hai giống lúa giống nhau\rq\rq?
+		\item Có bao nhiêu kết quả thuận lợi cho biến cố \lq\lq Có ít nhất một trong hai bác chọn giống lúa ST24\rq\rq?
+	\end{enumEX}
+	\loigiai{
+		\begin{enumEX}[a)]{1}
+			\item Số kết quả thuận lợi cho biến cố \lq\lq Hai bác Bình và An chọn hai giống gạo giống nhau\rq\rq\,là $7$.
+			\item Tổng số kết quả có thể xảy ra là $7 \cdot 7=49$.\\
+			Số kết quả thuận lợi cho biến cố \lq\lq Không bác nào chọn giống lúa ST24\rq\rq\,là $6 \cdot 6=36$.\\
+			Vậy số kết quả thuận lợi cho biến cố \lq\lq Có ít nhất một trong hai bác chọn giống lúa ST24\rq\rq\,là $49-36=13$.
+		\end{enumEX}
+	}
+\end{baitap}

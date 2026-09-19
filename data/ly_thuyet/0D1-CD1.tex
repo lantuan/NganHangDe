@@ -1,0 +1,469 @@
+\section{MỆNH ĐỀ}
+
+\subsection{TÓM TẮT LÝ THUYẾT}
+\subsubsection{Mệnh đề, mệnh đề chứa biến}
+\begin{itemize}
+	\item [\iconMT] \indam{Mệnh đề:} Mệnh đề là một \indamm{ câu khẳng định} đúng hoặc sai. 
+	\begin{boxkn}
+		\begin{itemize}
+			\item Câu khẳng định đúng gọi là mệnh đề đúng.
+			\item Câu khẳng định sai gọi là mệnh đề \textbf{sai}.
+			\item Một mệnh đề không thể vừa đúng, vừa sai.
+			\item Những mệnh đề liên quan đến toán học được gọi là mệnh đề toán học.
+		\end{itemize} 
+	\end{boxkn}
+	\item [\iconMT] \indam{Mệnh đề chứa biến:} Mệnh đề chứa biến là một câu khẳng định chứa biến nhận giá trị trong một tập $X$ nào đó và với mỗi giá trị của biến thuộc $X$ ta được một mệnh đề.
+	
+\end{itemize}
+\subsubsection{Mệnh đề phủ định}
+\begin{itemize}
+	\item [\iconMT] Cho mệnh đề $P$. Mệnh đề \lq\lq không phải $P$ \rq\rq gọi là mệnh đề phủ định của $P$.
+	\item [\iconMT] Chú ý: 
+		\begin{boxkn}
+	\begin{itemize}
+		\item  Mệnh đề phủ định của $P$, kí hiệu là $\overline{P}$.
+		\item  Nếu $P$ đúng thì $\overline{P}$ sai, nếu $P$ sai thì $\overline{P}$ đúng.
+	\end{itemize}
+	\end{boxkn}
+\end{itemize}
+\subsubsection{Mệnh đề kéo theo và mệnh đề đảo}
+	Cho hai mệnh đề $P$ và $Q$.
+		\begin{itemize}
+			\item[\iconMT] \indam{Mệnh đề kéo theo:} Mệnh đề "Nếu $P$ thì $Q$" gọi là mệnh đề kéo theo, kí hiệu  $P\Rightarrow Q$.
+				\begin{boxkn}
+			\begin{itemize}
+				\item  Mệnh đề $P\Rightarrow Q$ còn được phát biểu là "$P$ kéo theo $Q$" hoặc "Từ $P$ suy ra $Q$"
+				\item  Mệnh đề này chỉ sai khi $P$ đúng và $Q$ sai.
+			\end{itemize}
+				\end{boxkn}
+				\item[\iconMT] \indam{Mệnh đề đảo:} Cho mệnh đề $P\Rightarrow Q$. Khi đó, $Q\Rightarrow P$ gọi là mệnh đề đảo của $P\Rightarrow Q$.
+		\end{itemize}
+	\begin{khung4}{Lưu ý}
+		Xét định lý dạng $P\Rightarrow Q$. Khi đó, ta có thể phát biểu định lý này theo một trong 2 cách sau:
+		\begin{listEX}[2]
+			\item[\ding{172}] $P$ là điều kiện đủ để có $Q$.
+			\item[\ding{173}] $Q$ là điều kiện cần để có $P$.
+		\end{listEX}
+	\end{khung4}
+\subsubsection{Mệnh đề tương đương}
+\begin{itemize}
+	\item [\iconMT] Cho hai mệnh đề $P$ và $Q$. Mệnh đề ``$P$ nếu và chỉ nếu $Q$''  gọi là  mệnh đề tương đương.
+	\item [\iconMT] Chú ý:
+	\begin{boxkn}
+	\begin{itemize}
+		\item  Mệnh đề ``$P$ nếu và chỉ nếu $Q$'' được kí hiệu là $P\Leftrightarrow Q$.
+		\item 	Mệnh đề $P\Leftrightarrow Q$ đúng khi cả $P\Rightarrow Q$ và $Q\Rightarrow P$ cùng đúng.
+	\end{itemize}
+	\end{boxkn}
+\end{itemize}
+			\begin{khung4}{Lưu ý}
+				Xét định lý dạng $P \Leftrightarrow Q$. Khi đó, ta có thể phát biểu định lý này theo một trong các cách sau:
+				\begin{itemize}
+					\item[\ding{172}] $P$ là điều cần và đủ để có $Q$.
+					\item[\ding{173}] $P$ khi và chỉ khi $Q$.
+					\item[\ding{174}] $P$ tương đương $Q$.
+				\end{itemize}
+			\end{khung4}
+\subsubsection{Mệnh đề có chứa kí hiệu $\forall, \exists$}
+	\begin{itemize}
+		\item[\iconMT] Mệnh đề chứa kí hiệu với mọi: $\forall x \in X,\, P(x) $.
+	\begin{boxkn}
+		\begin{itemize}
+			\item Mệnh đề này đúng khi tất cả các giá trị của $x \in X$ đều làm cho phát biểu $P(x)$ đúng.
+			\item Nếu ta tìm được ít nhất một giá trị $x \in X$ làm cho $P(x)$ sai thì mệnh đề này \textbf{sai}.
+		\end{itemize}
+	\end{boxkn}
+		\begin{vidu}
+			Mệnh đề "Bình phương mọi số thực đều không âm" được viết là
+			$\forall x \in \mathbb{R},\, x^2 \ge 0.$
+		\end{vidu}
+		\item[\iconMT] Mệnh đề chứa kí hiệu tồn tại: $\exists x \in X,\, P(x) $.
+	\begin{boxkn}
+		\begin{itemize}
+			\item Mệnh đề này đúng khi ta tìm được ít nhất một giá trị của $x \in X$ làm cho phát biểu $P(x)$ đúng.
+			\item Nếu tất cả giá trị của $x \in X$ đều làm cho $P(x)$ sai thì mệnh đề này \textbf{sai}.
+		\end{itemize}
+	\end{boxkn}
+		\begin{vidu}
+			Mệnh đề "Có một số tự nhiên mà bình phương của nó bằng 3" được viết là
+			$\exists x \in \mathbb{N},\, x^2=3.$
+		\end{vidu}
+		\item[\iconMT] Phủ định của Mệnh đề chứa kí hiệu $\forall $, $\exists $.
+	\begin{boxkn}
+		\begin{itemize}
+			\item Phủ định của mệnh đề ``$\forall x\in X,P\left( x \right)"$ là mệnh đề ``$\exists x\in X,\overline{P(x)}"$.
+			\item Phủ định của mệnh đề ``$\exists x\in X,P\left( x \right)"$ là mệnh đề ``$\forall x\in X,\overline{P(x)}"$.
+		\end{itemize}
+	\end{boxkn}
+	\end{itemize}
+
+	
+\subsection{RÈN LUYỆN KĨ NĂNG GIẢI TOÁN}
+\begin{dang}{Mệnh đề, phủ định của mệnh đề}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Mệnh đề:}
+		\begin{listEX}[1]
+			\item [\ding{172}] Khẳng định đúng là mệnh đề đúng, khẳng định sai là mệnh đề sai.
+			\item [\ding{173}] Câu không phải là câu khẳng định hoặc câu khẳng định mà không có tính đúng-sai đều không phải là mệnh đề.
+		\end{listEX}
+		\item \indam{Mệnh đề phủ định:} Cho mệnh đề $P$. 
+		\begin{listEX}[1]
+			\item [\ding{172}] Mệnh đề phủ định của $P$, kí hiệu là $\overline{P}$.
+			\item [\ding{173}] Nếu $P$ đúng thì $\overline{P}$ \textbf{sai}; $P$ \textbf{sai} thì $\overline{P}$ đúng.
+		\end{listEX} 
+	\end{enumerate}	
+\end{dang}
+
+\begin{vd}
+	Các câu sau đây, câu nào là mệnh đề, câu nào không phải là mệnh đề? Nếu là mệnh đề hay cho biết mệnh đề đó đúng hay \textbf{sai}?
+	\begin{listEX}[2]
+		\item Không được đi lối này!
+		\item Bây giờ là mấy giờ?
+		\item $7$ không là số nguyên tố.
+		\item $\sqrt{5}$ là số vô tỉ.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}[1]
+			\item Không phải là mệnh đề. Đây là câu cảm thán.
+			\item Không phải mệnh đề. Đây là câu hỏi.
+			\item Mệnh đề sai.
+			\item Mệnh đề đúng
+	\end{listEX}}
+\end{vd}\dongcham{1}
+
+\begin{vd}
+	Xét tính đúng sai của các mệnh đề sau và lập mệnh đề phủ định của chúng.
+	\begin{enumerate}
+		\item[a)] $5$ là số nguyên tố.
+		\item[b)] Phương trình $2x^2 - 3x + 1 = 0$ có nghiệm nguyên.
+		\item[c)] Tổng ba góc trong một tam giác bằng $180^\circ$.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item[a)] Đây là {mệnh đề đúng} vì $5$ chỉ có hai ước là $1$ và chính nó.\\
+			\textbf{Mệnh đề phủ định:} ``$5$ không phải là số nguyên tố''.
+			
+			\item[b)] Giải phương trình $2x^2 - 3x + 1 = 0$, ta được các nghiệm là $x = 1$ và $x = \frac{1}{2}$. Vì phương trình có một nghiệm nguyên là $x = 1$ nên đây là {mệnh đề đúng}.\\
+			\textbf{Mệnh đề phủ định:} ``Phương trình $2x^2 - 3x + 1 = 0$ không có nghiệm nguyên''.
+			
+			\item[c)] Đây là {mệnh đề đúng} (theo định lí tổng ba góc của một tam giác trong hình học phẳng).\\
+			\textbf{Mệnh đề phủ định:} ``Tổng ba góc trong một tam giác không bằng $180^\circ$''.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{1}
+\begin{vd}%[Tex hóa SGK CD-CT,T7/22, TVN-001]%[0D1B1-3]
+	Lập mệnh đề phủ định của mỗi mệnh đề sau và nhận xét tính đứng sai của mỗi mệnh đề phủ định đó.
+	\begin{listEX}[1]
+		\item $ A\colon $\lq\lq $ \dfrac{5}{1{,}2} $ là  một phân số\rq\rq;
+		\item $ B\colon $\lq\lq Phương trình $ x^2+3x+2=0 $ có nghiệm\rq\rq;
+		\item $ C\colon $\lq\lq $ 2^2+2^3=2^{2+3} $\rq\rq;
+		\item $ D\colon $\lq\lq Số $ 2025 $ chia hết cho $ 15 $\rq\rq.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}[1]
+			\item Mệnh đề $ \overline{A}\colon $\lq\lq $ \dfrac{5}{1{,}2} $ không là một phân số\rq\rq. Mệnh đề $ \overline{A} $ đúng.
+			\item Mệnh đề $ \overline{B}\colon $\lq\lq Phương trình $ x^2+3x+2=0 $ vô nghiệm\rq\rq. Mệnh đề $ \overline{B} $ sai.
+			\item Mệnh đề $ \overline{C}\colon $\lq\lq $ 2^2+2^3\neq 2^{2+3} $\rq\rq. Mệnh đề $ \overline{C} $ đúng.
+			\item Mệnh đề $ \overline{D}\colon $\lq\lq Số $ 2~025 $ không chia hết cho $ 15 $\rq\rq. Mệnh đề $ \overline{D} $ sai.
+		\end{listEX}	
+	}
+\end{vd}
+\dongcham{6}
+\begin{dang}{Mệnh đề kéo theo, mệnh đề đảo}
+\end{dang}
+
+\begin{vd}
+	Cho tam giác $ABC$. Xét hai mệnh đề 
+	\begin{itemize}
+		\item $P\colon$ \lq\lq Tam giác $ABC$ vuông\rq\rq;
+		\item $Q\colon$\lq\lq Tam giác $ABC$ có $AB^2+AC^2=BC^2$ \rq\rq.
+	\end{itemize}
+Phát biểu các mệnh đề sau và cho biết mệnh đề sau đúng hay \textbf{sai}?
+	\begin{listEX}[2]
+		\item $P\Rightarrow Q$.
+		\item $Q\Rightarrow P$.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}[2]
+			\item Mệnh đề $P\Rightarrow Q$ là ``Nếu tam giác $ABC$ vuông thì $AB^2+AC^2=BC^2$''.\\
+			Mênh đề $P\Rightarrow Q$ sai vì chưa chắc tam giác đã vuông tại $A$.
+			\item Mệnh đề $Q\Rightarrow P$ là ``Nếu tam giác $ABC$ có $AB^2+AC^2=BC^2$ thì tam giác vuông''.\\
+			Mệnh đề $Q\Rightarrow P$ đúng (theo định lí Pitago).
+	\end{listEX}}
+\end{vd}\dongcham{3}
+
+\begin{vd}
+	Với mỗi cặp mệnh đề $P$ và $Q$ sau đây, hãy phát biểu mệnh đề $P \Rightarrow Q$ và xét tính đúng sai của nó.
+	\begin{enumerate}[a)]
+		\item $P$: ``$b^2 \ge 4ac$'';\\
+		$Q$: ``Phương trình $ax^2 + bx + c = 0$ vô nghiệm'' ($a, b, c$ là ba số thực nào đó, $a \ne 0$).
+		\item $P$: \lq\lq $a$ là số chia hết cho 6\rq\rq;\\
+		$Q$: \lq\lq $a$ là số chia hết cho 3 \rq\rq.
+		\item $P$: ``$a$ và $b$ là hai số chẵn'';\\
+		$Q$: ``$a + b$ là số chẵn'' ($a, b$ là hai số tự nhiên).
+		\item $P$: ``Tứ giác $ABCD$ có bốn cạnh bằng nhau'';\\
+		$Q$: ``Tứ giác $ABCD$ là một hình vuông''.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item[a)] Mệnh đề $P \Rightarrow Q$ phát biểu là: ``Nếu $b^2 \ge 4ac$ thì phương trình $ax^2 + bx + c = 0$ vô nghiệm'' ($a, b, c$ là ba số thực nào đó, $a \ne 0$).\\
+			\textbf{Xét tính đúng sai:} Mệnh đề này là \textbf{sai}. \\
+			\textit{Giải thích:} Xét phương trình bậc hai $ax^2 + bx + c = 0$ ($a \ne 0$) có biệt thức $\Delta = b^2 - 4ac$. Điều kiện $b^2 \ge 4ac$ tương đương với $\Delta \ge 0$. Khi đó, phương trình phải có nghiệm (nghiệm kép hoặc hai nghiệm phân biệt).
+			
+			\item[b)] Mệnh đề $P \Rightarrow Q$ phát biểu là: ``Nếu $a$ chia hết cho 6 thì $a$ chia hết cho 3''($a$ là một số tự nhiên)..\\
+			\textbf{Xét tính đúng sai:} Mệnh đề này là \textbf{đúng}.\\
+			\textit{Giải thích:} Vì $6 = 2 \cdot 3$, nên một số chia hết cho $6$ (tức là bội của $6$) thì chắc chắn sẽ chia hết cho $3$.
+			
+			\item[c)] Mệnh đề $P \Rightarrow Q$ phát biểu là: ``Nếu $a$ và $b$ là hai số chẵn thì $a + b$ là số chẵn'' ($a, b$ là hai số tự nhiên).\\
+			\textbf{Xét tính đúng sai:} Mệnh đề này là \textbf{đúng}. \\
+			\textit{Giải thích:} Tổng của hai số chẵn luôn là một số chẵn.
+			
+			\item[d)] Mệnh đề $P \Rightarrow Q$ phát biểu là: ``Nếu tứ giác $ABCD$ có bốn cạnh bằng nhau thì tứ giác $ABCD$ là một hình vuông''.\\
+			\textbf{Xét tính đúng sai:} Mệnh đề này là \textbf{sai}. \\
+			\textit{Giải thích:} Tứ giác có bốn cạnh bằng nhau là hình thoi. Hình thoi cần thêm điều kiện có một góc vuông (hoặc hai đường chéo bằng nhau) mới trở thành hình vuông.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{7}
+\begin{vd}
+	Phát biểu mệnh đề đảo của các mệnh đề sau và xét tính đúng sai của mệnh đề đảo đó.
+	\begin{enumerate}
+		\item Nếu tam giác $ABC$ có $AB = AC$ thì tam giác $ABC$ cân.
+		\item Nếu tam giác $ABC$ có $2$ góc bằng $60^\circ$ thì tam giác $ABC$ đều.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item[a)] \textbf{Mệnh đề đảo:} ``Nếu tam giác $ABC$ cân thì tam giác $ABC$ có $AB = AC$''.\\
+			\textbf{Xét tính đúng sai:} Mệnh đề đảo này là \textbf{sai}.\\
+			\textit{Giải thích:} Tam giác $ABC$ cân thì có thể cân tại đỉnh $B$ (khi đó $BA = BC$) hoặc cân tại đỉnh $C$ (khi đó $CA = CB$), không nhất thiết phải có $AB = AC$ (chỉ xảy ra khi tam giác cân tại đỉnh $A$).
+			
+			\item[b)] \textbf{Mệnh đề đảo:} ``Nếu tam giác $ABC$ đều thì tam giác $ABC$ có $2$ góc bằng $60^\circ$''.\\
+			\textbf{Xét tính đúng sai:} Mệnh đề đảo này là \textbf{đúng}.\\
+			\textit{Giải thích:} Tam giác đều thì cả ba góc của nó đều bằng $60^\circ$, do đó hiển nhiên thỏa mãn việc có $2$ góc bằng $60^\circ$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{4}
+\begin{dang}{Mệnh đề chứa kí hiệu với mọi, tồn tại}
+	\begin{enumerate}[\iconMT]
+		\item \indam{Tính đúng sai:}
+		\begin{listEX}[1]
+			\item [\ding{172}]  Mệnh đề chứa kí hiệu với mọi: $\forall x \in X,\, P(x) $.
+				\begin{itemize}
+					\item Mệnh đề này đúng khi tất cả các giá trị của $x \in X$ đều làm cho phát biểu $P(x)$ đúng.
+					\item Nếu ta tìm được ít nhất một giá trị $x \in X$ làm cho $P(x)$ sai thì mệnh đề này \textbf{sai}.
+				\end{itemize}
+			\item [\ding{173}] Mệnh đề chứa kí hiệu tồn tại: $\exists x \in X,\, P(x) $.
+					\begin{itemize}
+					\item Mệnh đề này đúng khi ta tìm được ít nhất một giá trị của $x \in X$ làm cho phát biểu $P(x)$ đúng.
+					\item Nếu tất cả giá trị của $x \in X$ đều làm cho $P(x)$ sai thì mệnh đề này \textbf{sai}.
+				\end{itemize}
+		\end{listEX}
+		\item \indam{Phủ định của mệnh đề có dấu $\forall,\exists $:}
+		\begin{listEX}[1]
+			\item [\ding{172}] $\forall x\in X,P(x)$ thành $\exists x\in X,\overline{P(x)}$.
+			\item [\ding{173}] $\exists x\in X,P(x)$ thành $\forall x\in X,\overline{P(x)}$.
+		\end{listEX}
+	\indam{Chú ý:} \indamm{Khi lấy phủ định, ta chú ý các vấn đề đối lập sau:}
+	\begin{listEX}[1]
+		\item [\ding{172}] Quan hệ $=$ thành quan hệ $\ne $, và ngược lại.
+		\item [\ding{173}] Quan hệ $>$ thành quan hệ $\le $, và ngược lại.
+		\item [\ding{174}] Quan hệ $\ge $ thành quan hệ $<$, và ngược lại.
+		\item [\ding{175}] Liên kết "và" thành liên kết "hoặc", và ngược lại.
+	\end{listEX}
+	\end{enumerate}
+\end{dang}
+
+\begin{vd}%[0D1Y1-5]
+	Sử dụng kí hiệu \lq\lq$\forall$\rq\rq \,để viết mỗi mệnh đề sau và xét xem mệnh đề đó là đúng hay sai?
+	\begin{enumerate}
+		\item $P\colon$\lq\lq Với mọi số thực $x, x^2+1>0$\rq\rq.
+		\item $Q\colon$\lq\lq Với mọi số tự nhiên $n, n^2+n$ chia hết cho $6$\rq\rq.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item $P\colon$\lq\lq Với mọi số thực $x, x^2+1>0$\rq\rq.\\
+			Mệnh đề được viết là $P \colon \lq\lq\forall x \in \mathbb{R}, x^2+1>0$\rq\rq.\\
+			Xét một số thực $x$ tùy ý, ta phải chứng tỏ rằng $x^2+1>0$.\\
+			Thật vậy, ta có $x^2+1 \geq 1>0$.\\
+			Vậy mệnh đề $P$ là mệnh đề đúng.
+			\item $Q\colon$\lq\lq Với mọi số tự nhiên $n, n^2+n$ chia hết cho $6$\rq\rq.\\
+			Mệnh đề được viết là $Q\colon\lq\lq \forall n \in \mathbb{N},\left(n^2+n\right) \,\vdots\, 6$\rq\rq.\\
+			Để chứng minh mệnh đề $Q$ là sai, ta cần chỉ ra một giá trị cụ thể của $n$ để nhận được mệnh đề sai.\\
+			Thật vậy, chọn $n=1$, ta thấy $n^2+n=2$ không chia hết cho $6$.\\
+			Vậy mệnh đề $Q$ là mệnh đề sai.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{4}
+
+\begin{vd}%[0D1Y1-5]
+	Sử dụng kí hiệu \lq\lq$\exists$\rq\rq\, để viết mỗi mệnh đề sau và xét xem mệnh đề đó là đúng hay sai?
+	\begin{enumerate}
+		\item $M\colon$\lq\lq Có ít nhất một số thực $x$ sao cho $x^3=-8$\rq\rq.
+		\item $N\colon$\lq\lq Tồn tại số nguyên $x$ sao cho $2x+1=0$\rq\rq.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item $M\colon$\lq\lq Có ít nhất một  số thực $x$ sao cho $x^3=-8$\rq\rq.\\
+			Mệnh đề được viết là $M\colon\lq\lq\exists x \in \mathbb{R}, x^3=-8$\rq\rq.
+			Để chứng tỏ mệnh đề $M$ là đúng, ta cần chỉ ra một giá trị cụ thể của $x$ để nhận được mệnh đề đúng.\\
+			Thật vậy, chọn $x=-2$, ta thấy $(-2)^3=-8$.\\
+			Vậy mệnh đề $M$ là mệnh đề đúng.\\
+			Mệnh đề $N\colon\lq\lq\exists x \in \mathbb{Z}, 2x+1=0$\rq\rq.
+			\item $N\colon$\lq\lq Tồn tại số nguyên $x$ sao cho $2x+1=0$\rq\rq.\\
+			Để chứng minh mệnh đề $N$ là sai, ta phải chứng tỏ rằng với số nguyên $x$ tùy ý thì $2x+1 \neq 0$.\\
+			Thật vậy, xét một số nguyên $x$ tùy ý, ta có $2x+1 \neq 0$.\\
+			Vì thế mệnh đề $N$ là mệnh đề sai.
+		\end{enumerate}
+	}
+\end{vd}\dongcham{4}
+
+\begin{vd}
+	Xét tính đúng sai của mệnh đề sau và nêu mệnh đề phủ định của nó.
+	\begin{tasks}(2)
+		\task $\exists x\in \mathbb{Z},x^2=3$.
+		\task $\forall n\in {\mathbb{N}}^{*}:2^n+3$ là một số nguyên tố.
+		\task $\forall x\in \mathbb{R},x^2+4x+5>0$.
+		\task $\forall x\in \mathbb{R},x^4-x^2+2x+2\ge 0$.
+	\end{tasks}
+	\loigiai{
+		\begin{listEX}
+			\item Ta có $x^2=3\Leftrightarrow x=\pm \sqrt{3}$. Vì $\pm \sqrt{3}\notin \mathbb{Z}$ nên mệnh đề đã cho sai.\\
+			Mệnh đề phủ định là $\overline{P(x)}:``\forall x\in \mathbb{Z},x^2\ne 3"$.
+			\item Với $n= 5$ thì $2^n+3=2^5+3=35$, số này chia hết cho $5$ (không nguyên tố). Do đó mệnh đề đã cho sai.\\
+			Mệnh đề phủ định là $\overline{P(n)}:``\exists n\in {\mathbb{N}}^{*}:2^n+3$ không là một số nguyên tố''.
+			\item Mệnh đề đúng vì $x^2+4x+5={\left(x+2\right)}^2+1>0, \forall x\in \mathbb{R}$.\\
+			Mệnh đề phủ định là $\overline{P(x)}:``\exists x\in \mathbb{R},x^2+4x+5\le 0"$.
+			\item Do $x^4-x^2+2x+2={\left(x^2-1\right)}^2+{\left(x+1\right)}^2\ge 0, \forall x\in \mathbb{R}$ nên mệnh đề đã cho đúng.\\
+			Mệnh đề phủ định là $\overline{P(x)}:``\exists x\in \mathbb{R},x^4-x^2+2x+2<0"$.
+		\end{listEX}
+	}
+\end{vd}\dongcham{7}
+
+\begin{vd}
+	Nêu mệnh đề phủ định của các mệnh đề sau và cho biết tính đúng sai của mệnh đề phủ định đó.
+	\begin{listEX}[2]
+		\item $A:``\exists n\in \mathbb{N},n^2+3$ chia hết cho $4$''.
+		\item $B:``\exists x\in \mathbb{N}$, $x$ chia hết cho $x+1$''.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}
+			\item $\overline{A}:``\forall x\in \mathbb{N},n^2+3$ không chia hết cho $4$''. Mệnh đề này sai.
+			\item $\overline{B}:``\forall x\in \mathbb{N},x$ không chia hết $x+1$''. Mệnh đề này sai.
+		\end{listEX}
+	}
+\end{vd}\dongcham{7}
+
+\boxmini{BÀI TẬP TỔNG HỢP TỰ LUYỆN}
+
+\begin{baitap}%[0D1Y1-2]
+	Trong các mệnh đề toán học sau đây, mệnh đề nào đúng? Mệnh đề nào sai?
+	\begin{itemize}
+		\item [a)]$P\colon$\lq\lq Tổng hai góc đối của một tứ giác nội tiếp bằng $180^{\circ}$\rq\rq.
+		\item [b)]$Q\colon$\lq\lq $7$ là số chính phương\rq\rq.
+		\item [c)]$R\colon$\lq\lq $1$ là số nguyên tố\rq\rq.
+	\end{itemize}
+	\loigiai
+	{
+		Mệnh đề $P$ là mệnh đề đúng. \\
+		Mệnh đề $Q$ và $R$ là mệnh đề sai. \\
+	}
+\end{baitap}\cham{9}
+
+\begin{baitap}%[0D1Y1-2]
+	Xét tính đúng sai của mỗi mệnh đề sau
+	\begin{tasks}(2)
+		\task $1993$ chia hết cho $3$.
+		\task $\sqrt{12}$ là một số hữu tỉ.
+		\task $9$ là một số chính phương.
+		\task $|-1997|\leqslant0$.
+		\task $\pi<\dfrac{10}{3}$. 
+		\task Phương trình $3x+7=0$ có nghiệm.
+	\end{tasks}
+	\loigiai
+	{
+		\begin{enumerate}[a)]
+			\item Mệnh đề \lq\lq $1993$ chia hết cho $3$\rq\rq\ là mệnh đề sai vì $1993$ chia $3$ dư $1$.
+			\item Mệnh đề \lq\lq $\sqrt{12}$ là một số hữu tỉ\rq\rq\ là mệnh đề sai vì $\sqrt{12}$ là một số vô tỉ.
+			\item Mệnh đề \lq\lq $9$ là một số chính phương\rq\rq\ là mệnh đề đúng vì $\sqrt{9}=3$.
+			\item Mệnh đề \lq\lq $|-1997|\leqslant0$\rq\rq\ là mệnh đề sai vì $|-1997|=1997>0$.
+			\item Mệnh đề\lq\lq $\pi<\dfrac{10}{3}$\rq\rq\ là mệnh đề đúng.
+			\item Mệnh đề \lq\lq Phương trình $3x+7=0$ có nghiệm\rq\rq\ là mệnh đề đúng vì $3x+7=0 \Leftrightarrow x=-\dfrac{7}{3}$.
+		\end{enumerate}
+	}
+\end{baitap}\cham{9}
+
+\begin{baitap}%[0D1K1-4]
+	Sử dụng thuật ngữ ``điều kiện đủ'' để phát biểu các định lí sau.
+	\begin{enumerate}
+		\item Nếu $a$ và $b$ là hai số hữu tỉ thì tổng $a+b$ là số hữu tỉ.
+		\item Nếu hai tam giác bằng nhau thì chúng có diện tích bằng nhau.
+		\item Nếu một số tự nhiên có chữ số tận cùng là chữ số 5 thì nó chia hết cho $5$.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Điều kiện đủ để tổng $a+b$ là số hữu tỉ là cả hai số $a$ và $b$ đều là số hữu tỉ.\\
+			Hoặc: $a$ và $b$ là hai số hữu tỉ là điều kiện đủ để tổng $a+b$ là số hữu tỉ.
+			\item Điều kiện đủ để hai tam giác có diện tích bằng nhau là chúng bằng nhau.\\
+			Hoặc: hai tam giác bằng nhau là điều kiện đủ để chúng có diện tích bằng nhau.
+			\item Điều kiện đủ để một số chia hết cho 5 là số đó tận cùng bằng 5.\\
+			Hoặc: một số tự nhiên có chữ số tận cùng là chữ số 5 là điều kiện đủ để nó chia hết cho 5.
+			
+		\end{enumerate}
+	}
+\end{baitap}\cham{15}
+
+\begin{baitap}%[0D1B1-5]
+	Dùng kí hiệu $\forall$ hoặc $\exists$ để viết các mệnh đề sau và xét tính đúng sai của chúng.
+	\begin{tasks}(1)
+		\task Mọi số thực khác $0$ nhân với nghịch đảo của nó bằng $1$.
+		\task Có số tự nhiên mà bình phương của nó bằng $20$.
+		\task Bình phương của mọi số thực đều dương.
+		\task Có ba số tự nhiên khác $0$ sao cho tổng bình phương của hai số bằng bình phương của số còn lại.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\forall x \in \mathbb{R},x \ne 0,x \cdot \dfrac{1}{x}=1$. Mệnh đề đúng.
+			\item  $\exists x \in \mathbb{N},x^2=20$. Mệnh đề \textbf{sai}.
+			\item  $\forall x \in \mathbb{R},x^2>0$. Mệnh đề \textbf{sai}.
+			\item  $\exists x,y,z \in \mathbb{N}^*,x^2+y^2=z^2$. Mệnh đề đúng.
+	\end{enumerate}}
+\end{baitap}\cham{17}
+
+\begin{baitap}%[Nguyễn Cường- BG Toán 10]%[0D1B1-5]
+	Lập mệnh đề phủ định của mỗi mệnh đề sau
+	\begin{tasks}(2)
+		\task $\forall x \in \mathbb{R},|x| \geq x$.
+		\task $\exists x \in \mathbb{R}, x^2+1=0$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item Phủ định của mệnh đề \lq\lq$\forall x \in \mathbb{R},|x| \geq x$\rq\rq\,là mệnh đề \lq\lq$\exists x \in \mathbb{R},|x|<x$\rq\rq.
+			\item Phủ định của mệnh đề \lq\lq$\exists x \in \mathbb{R}, x^2+1=0$\rq\rq\,là mệnh đề \lq\lq$\forall x \in \mathbb{R}, x^2+1 \neq 0$\rq\rq.
+		\end{enumerate}
+	}
+\end{baitap}\cham{10}
+
+
+\begin{baitap}%[Nguyễn Cường- BG Toán 10]%[0D1B1-5]
+	Lập mệnh đề phủ định của mỗi mệnh đề sau và xét tính đúng sai của mỗi mệnh đề phủ định đó
+	\begin{tasks}(2)
+		\task $\forall x \in \mathbb{R}, x^2 \neq 2x-2$.
+		\task $\forall x \in \mathbb{R}, x^2 \leq 2x-1$.
+		\task $\exists x \in \mathbb{R}, x+\dfrac{1}{x} \geq 2$.
+		\task $\exists x \in \mathbb{R}, x^2-x+1<0$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\exists x \in \mathbb{R}, x^2=2x-2$.\\
+			Mệnh đề này sai vì phương trình $x^2-2x+2=0$ vô nghiệm trên tập số thực.
+			\item $\exists x \in \mathbb{R}, x^2 > 2x-1$.\\
+			Mệnh đề này đúng vì với $x=2$ thì $2^2>2\cdot 2-1$.
+			\item $\forall x \in \mathbb{R}, x+\dfrac{1}{x}<2$.\\
+			Mệnh đề này sai vì với $x=1$ thì $1+\dfrac{1}{1}=2$.
+			\item $\forall x \in \mathbb{R}, x^2-x+1\ge 0$.\\
+			Mệnh đề này đúng vì $x^2-x+1=\left(x-\dfrac{1}{2}\right)^2+\dfrac{3}{4}> 0$ với mọi $x\in\mathbb{R}$.
+		\end{enumerate}	
+	}
+\end{baitap}\cham{21}

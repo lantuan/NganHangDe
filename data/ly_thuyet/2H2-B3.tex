@@ -1,0 +1,1723 @@
+\section{BIỂU THỨC TỌA ĐỘ CỦA CÁC PHÉP TOÁN VECTƠ}
+\subsection{LÝ THUYẾT CẦN NHỚ}
+\subsubsection{Biểu thức tọa độ của phép toán cộng, trừ, nhân một số thực với một véctơ}
+Trong không gian $Oxyz$, cho hai véc-tơ $\vec{a} = (a_1;a_2;a_3)$, $\vec{b} = (b_1; b_2; b_3)$ và số $k$. Khi đó
+\begin{gachsoc}
+	\begin{listEX}[1]
+		\item [\ding{172}] $\vec{a}+\vec{b}=(a_1+b_1;a_2+b_2;a_3+b_3)$;
+		\item [\ding{173}] $\vec{a}-\vec{b}=(a_1-b_1;a_2-b_2;a_3-b_3)$;
+		\item [\ding{174}] $k\vec{a} = (ka_1; ka_2; ka_3)$.
+	\end{listEX}
+\end{gachsoc}
+\begin{luuy}
+	Cho hai véc-tơ $\vec{a}=(a_1;a_2;a_3)$, $\vec{b}=(b_1;b_2;b_3)$, $\vec{b}\ne \vec{0}$. Hai véc-tơ $\vec{a}$, $\vec{b}$ cùng phương khi và chỉ khi tồn tại một số thực $k$ sao cho $\heva{&a_1=k b_1\\& a_2= k b_2\\& a_3= k b_3.}$
+\end{luuy}
+\subsubsection{Biểu thức tọa độ của tích vô hướng hai véctơ}
+Trong không gian $Oxyz$, tích vô hướng của hai véc-tơ $\vec{a} = (a_1;a_2;a_3)$ và $\vec{b} = (b_1; b_2; b_3)$ được xác định bởi công thức
+\[\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3. \]
+\begin{note}
+	\begin{itemize}
+		\item[\ding{172}] $\vec{a} \perp \vec{b} \Leftrightarrow a_1b_1 + a_2b_2 + a_3b_3 = 0$;
+		\item[\ding{173}] $\left| \vec{a} \right| = \sqrt{a_1^2 + a_2^2 +a_3^2}$;
+		\item[\ding{174}] $\cos \left(\vec{a}; \vec{b}\right) = \dfrac{\vec{a}\cdot \vec{b}}{\left|\vec{a}\right| \cdot \left|\vec{b}\right|} = \dfrac{a_1b_1 + a_2b_2 + a_3b_3}{\sqrt{a_1^2 + a_2^2 +a_3^2} \cdot \sqrt{b_1^2 + b_2^2 +b_3^2}}$ (với $\vec{a} \ne \vec{0}$ và $\vec{b} \ne \vec{0}$).
+	\end{itemize}
+\end{note}
+\subsubsection{Biểu thức tọa độ của tích có hướng hai véctơ}
+Cho hai véc-tơ $\vec{a}=(a_1;a_2;a_3)$ và $\vec{b}=(b_1;b_2;b_3)$ không cùng phương. Khi đó vec tơ $$\vec{w}=\bigg(a_2b_3-b_2a_3\,;\,a_3b_1-b_3a_1\,;\,a_1b_2-b_1a_2 \bigg)$$ vuông góc với cả hai véc tơ $\vec{a}$ và $\vec{b}$.
+\begin{luuy}
+	\begin{itemize}
+		\item [\ding{172}] Véc tơ $\vec{w}$ xác định như trên còn gọi là \indamm{tích có hướng} của hai véc tơ $\vec{a}$, $\vec{b}$, kí hiệu  $\vec{w}=\big[\vec{a},\vec{a}\big]$.
+		\item [\ding{173}] Quy ước $\left|\begin{array}{l}
+			{a_1}\quad{a_2}\\
+			{b_1}\quad{b_2}
+		\end{array}\right|=a_1b_2-a_2b_1$ thì
+		$$\left[\vec a ,\vec b\right]=\left(\left|\begin{array}{l}
+			{a_2}\quad{a_3}\\
+			{b_2}\quad{b_3}
+		\end{array}\right|;\left|\begin{array}{l}
+			{a_3}\quad {a_1}\\
+			{b_3}\quad{b_1}
+		\end{array}\right|;\left|\begin{array}{l}
+			{a_1}\quad{a_2}\\
+			{b_1}\quad{b_2}
+		\end{array}\right|\right)=\bigg(a_2b_3-b_2a_3\,;\,a_3b_1-b_3a_1\,;\,a_1b_2-b_1a_2 \bigg) $$
+		\item [\ding{174}] $\vec{a}$ không cùng phương với $\vec{b}$ $\Leftrightarrow \left[\vec a ,\vec b\right] \ne \vec{0}$.
+	\end{itemize}
+\end{luuy}
+\subsubsection{Biểu thức tọa độ trung điểm đoạn thẳng, trọng tâm tam giác, độ dài đoạn thẳng}
+\vspace{-0.7cm}
+\immini{
+	\begin{itemize}
+		\item [\ding{172}] Tọa độ trung điểm $M$ của đoạn thẳng $AB$ là
+		\[ M\left(\dfrac{x_A + x_B}{2}; \dfrac{y_A + y_B}{2}; \dfrac{z_A + z_B}{2} \right).\]
+		\item [\ding{173}] Tọa độ trọng tâm $G$ của tam giác $ABC$ là
+		\[ G\left(\dfrac{x_A + x_B +x_C}{3}; \dfrac{y_A + y_B +y_C}{3}; \dfrac{z_A + z_B + z_C}{3} \right).\]
+		\item  [\ding{174}] Độ dài đoạn $AB$: $$AB=\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}.$$
+\end{itemize}}{\vspace{1cm}
+	\begin{tikzpicture}[scale=0.8, font=\footnotesize, line join=round, line cap=round]
+		\begin{scope}
+			\foreach \x\y\t in {-2/-2/A, 0/0/B}
+			\coordinate (\t) at (\x,\y);
+			\coordinate (M) at ($(A)!0.5!(B)$);
+			\foreach \a\b in {A/B}
+			\draw[] (\a)--(\b);
+			\foreach \t\g in {A/-90, B/40,M/1200}
+			\draw[fill=black] (\t)circle(0.6pt) +(\g:8pt)node{$\t$};
+		\end{scope}
+		\begin{scope}[xshift=3cm]
+			\foreach \x\y\t in {0/0/A, -2/-2/B, 2.5/-2/C}
+			\coordinate (\t) at (\x,\y);
+			\coordinate (M) at ($(A)!0.5!(B)$);
+			\coordinate (N) at ($(A)!0.5!(C)$);
+			\coordinate (K) at ($(C)!0.5!(B)$);
+			\coordinate (G) at ($(A)!2/3!(K)$);
+			\foreach \a\b in {A/B, B/C, A/C, A/K, M/C, B/N}
+			\draw[] (\a)--(\b);
+			\foreach \t\g in {A/90, B/-100, C/-80, M/120, N/40, K/-90,G/60}
+			\draw[fill=black] (\t)circle(0.8pt) +(\g:10pt)node{$\t$};
+		\end{scope}
+\end{tikzpicture}}
+\subsection{PHÂN LOẠI VÀ PHƯƠNG PHÁP GIẢI TOÁN}
+\begin{dang}{Tọa độ của các phép toán vec tơ, tọa độ điểm, độ dài đoạn thẳng}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\begin{vd}
+	Cho $\vec{a}=(-2 ; 3 ; 2), \vec{b}=(2 ; 1 ;-1), \vec{c}=(1 ; 2 ; 3)$. Tìm tọa độ và tính độ dài của mỗi vectơ sau:
+	\begin{listEX}[3]
+		\item $3 \vec{a}$;
+		\item $2 \vec{a}-\vec{b}$;
+		\item $\vec{a}+2 \vec{b}-\dfrac{3}{2} \vec{c}$.
+	\end{listEX}
+	\loigiai{
+		Ta có
+		\begin{listEX}
+			\item $3 \vec{a}=(3 \cdot(-2) ; 3 \cdot 3 ; 3 \cdot 2)$. Vậy $3 \vec{a}=(-6 ; 9 ; 6)$.
+			\item Ta có $2 \vec{a}=(-4 ; 6 ; 4)$ và $\vec{b}=(2 ; 1 ;-1)$.\\ Do đó, $2 \vec{a}-\vec{b}=(-4-2 ; 6-1 ; 4-(-1))$.\\
+			Vậy $2 \vec{a}-\vec{b}=(-6 ; 5 ; 5)$.
+			\item Do $\vec{a}=(-2 ; 3 ; 2)$ và $2 \vec{b}=(4 ; 2 ;-2)$ nên 
+			\[\vec{a}+2 \vec{b}=(2 ; 5 ; 0).\]
+			Ngoài ra, vì $-\dfrac{3}{2} \vec{c}=\left(-\dfrac{3}{2} ;-3 ;-\dfrac{9}{2}\right)$ nên $\vec{a}+2 \vec{b}-\dfrac{3}{2} \vec{c}=\left(\dfrac{1}{2} ; 2 ;-\dfrac{9}{2}\right)$.
+	\end{listEX}}
+\end{vd}
+\dongcham{8}
+\begin{vd}
+	Trong không gian $Oxyz$, cho các véc-tơ $\vec{u}=3\vec{i}-2\vec{j}+\vec{k}$, $\vec{v}=-\dfrac{3}{2}\vec{i}+\vec{j}-\dfrac{1}{2}\vec{k}$, $\vec{w}=6\vec{i}+m\vec{j}-n\vec{k}$.
+	\begin{enumerate}
+		\item Chứng minh $\vec{u}$ và $\vec{v}$ cùng phương.
+		\item Tìm giá trị của $m$ và $n$ để véc-tơ $\vec{u}$ và $\vec{w}$ cùng phương.
+	\end{enumerate}
+	\loigiai{
+		Ta có $\vec{u}=(3;-2;1)$, $\vec{v}=\left(-\dfrac{3}{2}; 1; -\dfrac{1}{2}\right)$, $\vec{w}=\left(6; m; -n\right)$.
+		\begin{enumerate}
+			\item Hai véc-tơ $\vec{u}$ và $\vec{v}$ cùng phương khi và chỉ khi 
+			$$\vec{v}=k\vec{u}\Leftrightarrow{ \left\{\begin{aligned}& -\dfrac{3}{2}=3k\\&1=-2k\\&-\dfrac{1}{2}=k\end{aligned}\right.}\Leftrightarrow k=-\dfrac{1}{2}$$
+			Như vậy $ \vec{v}=-\dfrac{1}{2}\vec{u} $ nên hai véc-tơ $\vec{u}$ và $\vec{v}$ cùng phương.
+			\item Hai véc-tơ $\vec{u}$ và $\vec{w}$ cùng phương khi và chỉ khi 
+			$$\vec{w}=k\vec{u}\Leftrightarrow{ \left\{\begin{aligned}&6=3k\\&m=-2k\\&-n=k\end{aligned}\right.}\Leftrightarrow { \left\{\begin{aligned}&k=2\\&m=-4\\&n=-2\end{aligned}\right.}$$
+			Như vậy $ m=-4$ và $ n=-2 $ thì hai véc-tơ $\vec{u}$ và $\vec{w}$ cùng phương. Khi đó $\vec{w}=\left(6; -4; 2\right)$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{8}
+\begin{vd}
+	Trong không gian với hệ tọa độ $Oxyz$, cho ba điểm $A(3;-1;2)$, $B(1;2;3)$, $C(4;-2;1)$.
+	\begin{tasks}
+		\task Chứng minh ba điểm $A, B, C$ không thẳng hàng. Xác định tọa độ trọng tâm tam giác $ABC$.
+		\task Tìm tọa độ điểm $D$ biết $ABCD$ là hình bình hành.
+		\task Tìm tọa độ giao điểm $E$ của đường thẳng $BC$ với mặt phẳng tọa độ $\left(Oxz\right)$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có $\vec{AB}=(-2;3;1)$, $\vec{AC}=(1;-1;-1)$.
+			Vì $\dfrac{-2}{1}\neq \dfrac{-3}{-1}$ nên hai véc-tơ $\vec{AB}$, $\vec{AC}$ không cùng phương.\\
+			Hay ba điểm $A$, $B$, $C$ không thẳng hàng. Suy ra, tọa độ trọng tâm là $G\left(\dfrac{8}{3};-\dfrac{1}{3};2 \right)$. 
+			\item 
+			\immini{Tứ giác $ABCD$ là hình bình hành khi và chỉ khi
+				$$ \vec{DC}=\vec{AB}\Leftrightarrow{ \left\{\begin{aligned}&4-x_D=-2\\&-2-y_D=3\\&1-z_D=1\end{aligned}\right.}\Leftrightarrow {\left\{\begin{aligned}&x_D=6\\&y_D=-5\\&z_D=0\end{aligned}\right.}$$
+				Vậy $D(6;-5;0)$.
+			}{
+				\begin{tikzpicture}[scale=.8]
+					\tkzDefPoints{0/4/A,-2/0/B,3/0/C}
+					\coordinate (D) at ($(A)+(C)-(B)$);
+					\tkzDrawSegments(A,B B,C C,D D,A)
+					\tkzLabelPoints[left](A,B)
+					\tkzLabelPoints[right](C,D)
+					\tkzDrawPoints(A,B,C,D)
+			\end{tikzpicture}}
+			\item Vì $E$ thuộc mặt phẳng $Oxz$ nên $E=(x;0;z)$.\\
+			Ta có $\vec{AE}=(x-3;1;z-2)$.\\
+			Mặt khác $A, B, E$ thẳng hàng nên hai véc-tơ $\vec{AB}$, $\vec{AE}$ cùng phương, do đó:
+			$$ \vec{AE}=k\vec{AB}\Leftrightarrow{ \left\{\begin{aligned}&x-3=-2k\\&1=3k\\&z-2=k\end{aligned}\right.}\Leftrightarrow {\left\{\begin{aligned}&x=\dfrac{7}{3}\\&k=\dfrac{1}{3}\\&z=\dfrac{7}{3}\end{aligned}\right.}$$
+			Vậy $E=\left(\dfrac{7}{3}; 0; \dfrac{7}{3}\right)$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{18}
+
+\begin{vd}
+	Trong không gian $ Oxyz $, cho các điểm $ A(4;2;-1) $, $ B(1;-1;2) $ và $ C(0;-2;3) $.
+	\begin{enumerate}
+		\item Tìm tọa độ của véc-tơ $ \vec{AB} $ và tính độ dài đoạn thẳng $ AB $.
+		\item Tìm tọa độ điểm $ M $ sao cho $ \vec{AB}+\vec{CM}=\vec{0} $.
+		\item Tìm tọa độ điểm $ N $ thuộc mặt phẳng $ (Oxy) $, sao cho $ A $, $ B $, $ N $ thẳng hàng.
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item $ \vec{AB}=(-3;-3;3) $ suy ra $ AB=\sqrt{(-3)^{2}+(-3)^{2}+3^{2}}=3\sqrt{3} $.
+			\item Gọi $ M(a;b;c) $.\\
+			$ \vec{AB}=(-3;-3;3) $, $ \vec{CM}=(a;b+2;c-3) $.\\
+			$ \Rightarrow \vec{AB}+\vec{CM}=\vec{0}\Leftrightarrow\heva{&a-3=0\\&b-1=0\\&c=0}\Leftrightarrow\heva{&a=3\\&b=1\\&c=0} $ suy ra $ M(3;1;0) $.
+			\item Ta có $ N\in (Oxy) \Rightarrow N(a;b;0)$.\\
+			$ \vec{AB}=(-3;-3;3) $, $ \vec{BN}=(a-1;b+1;-2) $.\\
+			Để $ A $, $ B $, $ N $ thẳng hàng thì $ \dfrac{a-1}{-3}=\dfrac{b+1}{-3}=\dfrac{2}{-3} \Leftrightarrow \heva{&a-1=2\\&b+1=2}\Leftrightarrow \heva{&a=3\\&b=1.}$\\
+			Suy ra $ N(3;1;0) $.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{16}
+\begin{vd}
+	Trong không gian $Oxyz$, cho ba điểm $A(5;-3;0)$, $B(2;1;-1)$, $C(4;1;2)$.
+	\begin{enumerate}
+		\item Tìm tọa độ của vectơ $\vec{u}=2\vec{AB}+\vec{AC}-5\vec{BC}$.
+		\item Tìm tọa độ điểm $N$ sao cho $2\vec{NA}=-\vec{NB}$.	
+	\end{enumerate}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có $\heva{&A(5;-3;0)\\ &B(2;1;-1)\\&C(4;1;2)}\Rightarrow\heva{&\vec{AB}=(-3;4;-1)\\&\vec{AC}=(-1;4;2)\\&\vec{BC}=(2;0;3)}\Rightarrow\heva{&2\vec{AB}=(-6;8;-2)\\&\vec{AC}=(-1;4;2)\\&-5\vec{BC}=(-10;0;-15)}\Rightarrow \vec{u}=(-17;12;-15)$.
+			\item Gọi $N(x;y;z)$, khi đó $\heva{&\vec{NA}=(5-x;-3-y;-z)\\&\vec{NB}=(2-x;1-y;-1-z)}$\\
+			$$2\vec{NA}=-\vec{NB}\Leftrightarrow \heva{&2(5-x)=-2+x\\&2(-3-y)=-1+y\\&-2z=1+z}\Leftrightarrow \heva{&x=4\\&y=-\dfrac{5}{3}\\&z=-\dfrac{1}{3}}\Rightarrow N\left(4;-\dfrac{5}{3};-\dfrac{1}{3}\right).$$
+		\end{enumerate}	
+	}
+\end{vd}
+\dongcham{16}
+\begin{vd}%[2H2V2-4]
+	Cho ba điểm $A(0 ; 1 ; 2)$, $B(1 ; 2 ; 3)$, $C(1 ;-2 ;-5)$. Gọi $M$ là điểm nằm trên đoạn thẳng $B C$ sao cho $M B=3 M C$. Tính độ dài đoạn thẳng $A M$.
+	\loigiai{
+		$M$ là điểm nằm trên đoạn thẳng $B C$ sao cho $M B=3 M C$ nên ta có
+		\[ \overrightarrow{BC}=4\overrightarrow{MC}\Leftrightarrow
+		\heva{& 1-1 = 4 \cdot \left(1-x_M\right)\\ & -2-2=4\cdot \left(-2-y_M\right) \\
+			& -5-3=4\cdot \left(-5-z_M\right)} \Leftrightarrow
+		\heva{& x_M = 1 \\ & y_M=-1\\ & z_M = -3.}\]
+		Vậy $M(1;-1;-3)$ và $AM = \sqrt{(1-0)^2 + (-1-1)^2 + (-3-2)^2}=\sqrt{30}$.
+	}
+\end{vd}
+\dongcham{8}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2H2-B3-d1-1]
+Các câu hỏi sau đều xét trong không gian $Oxyz$.
+\begin{ex}
+	Cho $\vec{a}=(1;2;-3),\vec{b}=(-2;-4;6)$. Khẳng định nào sau đây đúng?
+	\choice
+	{$\vec{a}=2\vec{b}$}
+	{$\vec{b}=2\vec{a}$}
+	{\True $\vec{b}=-2\vec{a}$}
+	{$\vec{a}=-2\vec{b}$}
+	\loigiai{
+		Ta có: $-2\vec{a}=\left(-2;-4;6\right)=\vec{b}$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai véc-tơ $\vec{x}=(2;1;-3),\vec{y}=(1;0;-1)$. Tìm tọa độ của véc-tơ $\vec{a}=\vec{x}+2\vec{y}$.
+	\choice
+	{\True $\vec{a}(4;1;-5)$}
+	{$\vec{a}(4;1;-1)$}
+	{$\vec{a}(3;1;-4)$}
+	{$\vec{a}(0;1;-1)$}
+	\loigiai{
+		Ta có $\vec{a}=(2;1;-3)+2\cdot (1;0;-1)=(4;1;-5)$.}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho $\vec{a}=(1;-1;3)$, $\vec{b}=(2;0;-1)$. Tìm tọa độ véc-tơ $\vec{u}=2\vec{a}-3\vec{b}$.
+	\choice
+	{\True $\vec{u}=(-4;-2;9)$}
+	{$\vec{u}=(4;2;-9)$}
+	{$\vec{u}=(-4;-5;9)$}
+	{$\vec{u}=(1;3;-11)$}
+	\loigiai{
+		$\vec{u}=2\vec{a}-3\vec{b}=(-4;-2;9)$.
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai véc-tơ  $\vec{a}=(3;0;1)$,  $\vec{c}=(1;1;0)$. Tìm tọa độ của véc-tơ $\vec{b}$ thỏa mãn biểu thức  $\vec{b}-\vec{a}+2\vec{c}=\vec{0}$.
+	\choice
+	{$\vec{b}=(-2;1;-1)$}
+	{$\vec{b}=(-1;2;-1)$}
+	{$\vec{b}=(5;2;1)$}
+	{\True $\vec{b}=(1;-2;1)$}
+	\loigiai
+	{Gọi $\vec{b}=\left(x; y; z\right)$. Ta có
+		$$\vec{b}-\vec{a}+2\vec{c}=\vec{0}\Leftrightarrow\heva{& x-3+2\cdot 1=0 \\ & y-0+2\cdot 1=0\\ & z-1+2\cdot 0=0}\Leftrightarrow\heva{& x=1 \\ & y=-2\\ & z=1.}$$
+		Vậy $\vec{b}=(1;-2;1)$.
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho vectơ $\vec{a}=(1;-3;4)$. Vectơ  nào sau đây cùng phương với $\vec{a}$?
+	\choice
+	{$\vec{b}=(-2;-6;8)$}
+	{\True $\vec{c}=(-2;6;-8)$}
+	{$\vec{d}=(-2;6;8)$}
+	{$\vec{m}=(2;-6;-8)$}
+	\loigiai
+	{
+		$$\vec{b}=(-2;6;-8)=-2\vec{a}.$$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho hai điểm $A(2;3;1)$ và  $B(3;1;5)$. Tính độ dài đoạn thẳng $AB$.
+	\choice
+	{\True  $AB= \sqrt{21}$}
+	{$AB= 2\sqrt{3}$}
+	{$AB= 2\sqrt{5}$}
+	{$AB= \sqrt{13}$}
+	\loigiai{
+		$AB = \sqrt{(3-2)^2 + (1-3)^2 +(5-1)^2} = \sqrt{21}$.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho hai điểm $M(3;-2;1)$ và $N(0;1;-1)$. Tính độ dài đoạn thẳng $MN$.
+	\choice
+	{$MN=\sqrt{17}$}
+	{$MN=22$}
+	{\True $MN=\sqrt{22}$}
+	{$MN=\sqrt{19}$}
+	\loigiai
+	{
+		Ta có $\vec{MN}=(-3;3;-2)\Rightarrow MN=\sqrt{9+9+4}=\sqrt{22}$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho hai điểm $A(-1;1;2)$ và $B(3;-5;0)$. Tọa độ trung diểm của đoạn thẳng $AB$ là
+	\choice
+	{\True $(1;-2;1)$}
+	{$(4;-6;2)$}
+	{$(2;-3;-1)$}
+	{$(2;-4;2)$}
+	\loigiai{
+		Gọi $M$ là trung điểm $AB$, khi đó tọa độ của $M$ được tính bởi
+		\[ \heva{&x_M=\dfrac{x_A+y_A}{2}=1\\ &y_M=\dfrac{y_A+y_B}{2}=-2\\ &z_M=\dfrac{z_A+z_B}{2}=1.} \]
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho hai điểm $A(1;1;0)$, $B(3;-1;2)$. Tọa độ điểm $C$ sao cho $B$ là trung điểm của đoạn $AC$ là
+	\choice
+	{\True $C(5;-3;4)$}
+	{$C(4;-3;5)$}
+	{$C(-1;3;-2)$}
+	{$C(2;0;1)$}
+	\loigiai{
+		Ta có $\heva{&x_B=\dfrac{x_A+x_C}{2}\\&y_B=\dfrac{y_A+y_C}{2}\\&z_B=\dfrac{z_A+z_C}{2}}\Rightarrow \heva{&x_C=2x_B-x_A=5\\&y_C=2y_B-y_A=-3\\&z_C=2z_B-z_A=4.}$
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho tam giác $ABC$ với $A(0;-1;3)$, $B(2;1;1)$, $C(1;0;-1)$. Tọa độ trọng tâm của tam giác $ABC$ là
+	\choice
+	{\True$(1;0;1)$}
+	{$(-1;0;1)$}
+	{$(0;1;1)$}
+	{$(1;1;0)$}
+	\loigiai{
+		Gọi $G$ là trọng tâm của tam giác $ABC$. Khi đó $\heva{&x_G=\dfrac{x_A+x_B+x_C}{3}\\&y_G=\dfrac{y_A+y_B+y_C}{3}\\&z_G=\dfrac{z_A+z_B+z_C}{3}}$ $\Leftrightarrow \heva{&x_G=1\\&y_G=0\\&z_G=1.}$\\
+		Vậy tọa độ trọng tâm tam giác $ABC$ là $(1;0;1)$.
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho $\vec{OA}=\vec{i}-2\vec{j}+3\vec{k}$, điểm $B(3;-4;1)$ và $C(2;0;-1)$. Tọa độ trọng tâm của tam giác $ABC$ là
+	\choice
+	{$(1;-2;3)$}
+	{$(-1;2;-3)$}
+	{\True $(2;-2;1)$}
+	{$(-2;2;-1)$}
+	\loigiai{
+		Từ giả thiết: $\vec{OA}=\vec{i}-2\vec{j}+3\vec{k} \Rightarrow A(1;-2;3)$. \\
+		Gọi $G$ là trọng tâm tam giác $ABC$, ta có: $\left\{\begin{aligned}
+			&x_G=\dfrac{x_A+x_B+x_C}{3}=2\\
+			&y_G=\dfrac{y_A+y_B+y_C}{3}=-2\\
+			&z_G=\dfrac{z_A+z_B+z_C}{3}=1\\
+		\end{aligned}\right. \Rightarrow G(2;-2;1)$. \\
+		Vậy trọng tâm của tam giác $ABC$ là điểm $G(2;-2;1)$.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Cho tam giác $ABC$ trọng tâm $G$. Biết $A(0;2;1)$, $B(1;-1;2)$, $G(1;1;1)$. Khi đó điểm $C$ có tọa độ là
+	\choice
+	{$(2;2;4)$}
+	{$(-2;0;2)$}
+	{$(-2;-3;-2)$}
+	{\True $(2;2;0)$}
+	\loigiai{
+		\begin{itemize}
+			\item [$\bullet$] Giả sử tọa độ $C$ là $C(a;b;c)$ khi đó $\heva{&\dfrac{0+1+a}{3}=1 \\ &\dfrac{2-1+b}{3}=1 \\ &\dfrac{1+2+c}{3}=1} \Leftrightarrow \heva{&a=2 \\ &b=2 \\ &c=0.}$
+			\item [$\bullet$] Vậy điểm $C$ có tọa độ là $(2;2;0)$.
+		\end{itemize}
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Cho bốn điểm $A(1;0;3)$, $B(2;-1;1)$, $C(-1;3;-4)$, $D(2;6;0)$ tạo thành một hình tứ diện. Gọi $M$, $N$ lần lượt là trung điểm các đoạn thẳng $AB$, $CD$. Tìm tọa độ trung điểm $G$ của đoạn $MN$.
+	\choice
+	{$G\left(\dfrac{4}{3};\dfrac{8}{3};0\right)$}
+	{$G(2;4;0)$}
+	{\True $G(1;2;0)$}
+	{$G(4;8;0)$}
+	\loigiai{
+		Gọi $M$ là trung điểm đoạn thẳng $AB\Rightarrow M\left(\dfrac{3}{2};-\dfrac{1}{2};2\right)$.\\
+		Gọi $N$ là trung điểm đoạn thẳng $CD\Rightarrow N\left(\dfrac{1}{2};\dfrac{9}{2};-2\right))$.\\
+		Gọi $G$ là trung điểm đoạn thẳng $MN\Rightarrow G(1;2;0)$.
+	}
+\end{ex} \cham{3}
+
+
+\begin{ex}
+	Cho hai điểm $B(1;2;-3)$, $C(7;4;-2)$. Nếu $E$ là điểm thỏa mãn đẳng thức $\vec{CE}=2\vec{EB}$ thì tọa độ điểm $E$ là
+	\choice
+	{$\left(3;\dfrac{8}{3};\dfrac{8}{3}\right)$}
+	{$\left(1;2;\dfrac{1}{3}\right)$}
+	{$\left(3;3;-\dfrac{8}{3}\right)$}
+	{\True $\left(\dfrac{8}{3};3;-\dfrac{8}{3}\right)$}
+	\loigiai{
+		$E(x;y;z)$, từ $\vec{CE}=2\vec{EB}\Rightarrow\heva{&x=\dfrac{8}{3}\\&y=3\\&z=-\dfrac{8}{3}.}$}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho các điểm $A(1;-1;0)$, $B(0;2;0)$, $C(2;1;3)$ và $M$ là điểm thỏa mãn hệ thức $\vec{MA}-\vec{MB}+\vec{MC}=\vec{0}$. Khi đó điểm $M$ có tọa độ là
+	\choice
+	{$(3;2;3)$}
+	{$(3;-2;-3)$}
+	{\True$(3;-2;3)$}
+	{$(3;2;-3)$}
+	\loigiai
+	{
+		Gọi $M(x;y;z)$, ta có $\heva{&1-x-(0-x)+(2-x)&=0\\&-1-y-(2-y)+1-y&=0\\&0-z-(0-z)+3-z&=0}\Leftrightarrow \heva{&x=3\\&y=-2\\&z=3}\Rightarrow M(3;-2;3).$
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho tọa độ các điểm $A(-1;3);B(2;-2)$ và $C(m;1)$. Tìm $m$ để $3$ điểm $A,B,C$ thẳng hàng.
+	\choice
+	{$m=\dfrac{2}{5}$}
+	{$m=\dfrac{1}{5}$}
+	{$m=-\dfrac{1}{3}$}
+	{\True $m=-\dfrac{1}{5}$}
+	\loigiai{
+		Ta có $\vec{AB}=(3;-5);\vec{AC}=(m+1;-2)$.\\
+		$A,B,C$ thẳng hàng $\Leftrightarrow$ $\vec{AB}$ cùng phương với $\vec{AC} \Leftrightarrow \dfrac{3}{m+1}=\dfrac{-5}{-2} \Leftrightarrow m=-\dfrac{1}{5}$.
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho ba điểm $A\left(-1;1;2\right),\ B(0;1;-1),\ C(x+2;y;-2)$ thẳng hàng. Tổng $x+y$ bằng
+	\choice
+	{$\dfrac{7}{3}$}
+	{$-\dfrac{8}{3}$}
+	{\True $-\dfrac{2}{3}$}
+	{$-\dfrac{1}{3}$}
+	\loigiai{
+		\begin{itemize}
+			\item [$\bullet$] Ta có $\vec{AB}=(1;0-3),\ \vec{AC}=(x+3;y-1;-4)$.
+			\item [$\bullet$] Các điểm $A,\ B,\ C$ thẳng hàng $\Leftrightarrow$ có số thực $t$ thỏa mãn $\vec{AC}=t\vec{AB}$.\tagEX{1}
+			Ta có $(1)\Leftrightarrow\heva{&x+3=t\\&y-1=0\\&-4=-3t}\Leftrightarrow\heva{&x=-\dfrac{5}{3}\\&y=1\\&t=\dfrac{4}{3}}\Rightarrow x+y=-\dfrac{2}{3}$.
+			\item [$\bullet$] Vậy tổng $x+y=-\dfrac{2}{3}$.
+		\end{itemize}
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Tứ giác $ABCD$ là hình bình hành, biết $A(1; 0; 1)$, $B(2; 1; 2)$, $D(1; -1; 1)$. Tìm tọa độ điểm $C$.
+	\choice
+	{$(0; -2; 0)$}
+	{$(2; 2; 2)$}
+	{\True $(2; 0; 2)$}
+	{$(2; -2; 2)$}
+	\loigiai{
+		\begin{itemize}
+			\item [$\bullet$] Tứ giác $ABCD$ là hình bình hành khi 
+			$$\vec{AB}=\vec{DC} \Leftrightarrow \heva{&x_C -1=2-1\\&y_C+1=1-0\\&z_C-1=2-1}\Leftrightarrow \heva{&x_C =2\\&y_C=0\\&z_C=2}.$$
+			\item [$\bullet$] Tọa độ điểm $C(2; 0; 2)$.
+		\end{itemize}
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	\immini[thm]{Cho hình hộp $ABCD.A'B'C'D'$ có $A(0;0;0)$, $B(a;0;0)$, $D(0;2a;0)$, $A'(0;0;2a),a\ne 0$. Tính độ dài đoạn thẳng $AC'$.
+		\haicot
+		{$|a|$}
+		{$2|a|$}
+		{\True $3|a|$}
+		{$\dfrac{3|a|}{2}$}}{
+		\begin{tikzpicture}[scale=0.65, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\bc{4} % cạnh BC
+			\def\ba{2} % cạnh BA
+			\def\gocB{35} % góc B của đáy
+			\coordinate[label=below left:$B$] (B) at (0,0);
+			\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+			\coordinate[label=below:$C$] (C) at (\bc,0);
+			\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+			\coordinate[label=above left:$A'$] (A') at ($(A)+(99:\bc)$);
+			\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+			\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+			\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(D) (A)--(B);
+			\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+	\end{tikzpicture}}
+	\loigiai{
+		\immini{
+			Ta có: $\vec{AB}=(a;0;0); \vec{AD}=(0;2a;0); \vec{AA'}=(0;0;2a)$.
+			$$\vec{AC'}=\vec{AB}+\vec{AD}+\vec{AA'}\Rightarrow \vec{AC'}=(a;2a;2a).$$
+			Suy ra $AC'=\sqrt{a^2+4a^2+4a^2}=3|a|$.
+		}
+		{
+			\begin{tikzpicture}[scale=0.65, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{2} % cạnh BA
+				\def\gocB{35} % góc B của đáy
+				\coordinate[label=below left:$B$] (B) at (0,0);
+				\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+				\coordinate[label=below:$C$] (C) at (\bc,0);
+				\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+				\coordinate[label=above left:$A'$] (A') at ($(A)+(99:\bc)$);
+				\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+				\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+				\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+				\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+				\draw[dashed] (A')--(A)--(D) (A)--(B);
+				\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+			
+		}
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	\immini[thm]{Cho hình hộp $ABCD.A'B'C'D'$ có $A(0;0;1)$, $B'(1;0;0)$, $C'(1;1;0)$. Tìm tọa độ của điểm $D$.
+		\haicot
+		{$D(0;-1;1)$}
+		{\True $D(0;1;1)$}
+		{$D(0;1;0)$}
+		{$D(1;1;1)$}}{
+		\begin{tikzpicture}[scale=0.65, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\bc{4} % cạnh BC
+			\def\ba{2} % cạnh BA
+			\def\gocB{35} % góc B của đáy
+			\coordinate[label=below left:$B$] (B) at (0,0);
+			\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+			\coordinate[label=below:$C$] (C) at (\bc,0);
+			\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+			\coordinate[label=above left:$A'$] (A') at ($(A)+(99:\bc)$);
+			\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+			\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+			\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+			\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+			\draw[dashed] (A')--(A)--(D) (A)--(B);
+			\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+	\end{tikzpicture}}
+	\loigiai
+	{
+		\immini
+		{
+			Gọi $D(x_D;y_D;z_D)$.\\
+			Ta có $\vec{B'C'}=(0;1;0)$, $\vec{AD}=\left(x_D;y_D;z_D-1\right)$. Vì $B'C'DA$ là hình bình hành nên
+			\begin{align*}
+				\vec{B'C'}=\vec{AD}\Leftrightarrow \heva{& x_D=0 \\ & y_D=1\\& z_D-1=0}\Leftrightarrow \heva{& x_D=0 \\ & y_D=1\\& z_D=1.}
+			\end{align*}
+			Vậy $D(0;1;1)$.
+		}
+		{
+			\begin{tikzpicture}[scale=0.65, font=\footnotesize, line join=round, line cap=round, >=stealth]
+				\def\bc{4} % cạnh BC
+				\def\ba{2} % cạnh BA
+				\def\gocB{35} % góc B của đáy
+				\coordinate[label=below left:$B$] (B) at (0,0);
+				\coordinate[label=above left:$A$] (A) at (\gocB:\ba);
+				\coordinate[label=below:$C$] (C) at (\bc,0);
+				\coordinate[label=right:$D$] (D) at ($(C)-(B)+(A)$);
+				\coordinate[label=above left:$A'$] (A') at ($(A)+(99:\bc)$);
+				\coordinate[label=left:$B'$] (B') at ($(B)-(A)+(A')$);
+				\coordinate[label=below right:$C'$] (C') at ($(C)-(A)+(A')$);
+				\coordinate[label=right:$D'$] (D') at ($(D)-(A)+(A')$);
+				\draw (B')--(B)--(C)--(D)--(D')--(A')--(B')--(C')--(D') (C)--(C');
+				\draw[dashed] (A')--(A)--(D) (A)--(B);
+				\foreach \diem in {A,B,C,D,A',B',C',D'}	\fill (\diem)circle(1.5pt);
+			\end{tikzpicture}
+		}
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Trong không gian chọn hệ trục tọa độ cho trước, đơn vị đo là kilômét, một máy bay chiến đấu di chuyển với vận tốc và hướng không đổi từ điểm $F(186;59;7)$ đến điểm $D(265;282;7)$ trong 36 phút. Nếu máy bay tiếp tục giữ nguyên vận tốc và hướng bay sau $6$ phút tiếp theo thì tọa độ của máy bay lúc này là $N(a;b;c)$. Kết quả của phép tính $\dfrac{a+b+c}{2025}$ (làm tròn đến hàng phần mười) bằng bao nhiêu?
+	\begin{center}
+		\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\def\i{1}
+			%Cânh đuôi trái
+			\tikzset{Icon-Maybay/.pic={
+					\begin{scope}
+						\fill[ball color =cyan!40!gray,rounded corners=0.02](-5.6,3)--++(60:0.8)--++(2:0.55)--++(-90:2)--cycle;
+						%%Hai cánh
+						\fill[ball color =cyan!90!gray!40!white](-0.4,1.5)..controls++(75:2)and++(-68:0.75)..(-0.15,4)--++(-5:0.35)..controls++(-50:0.95)and++(106:2)..(1.25,1.5)--cycle;
+						%Thân
+						\fill[ball color =cyan!30!gray](-4.85,1)..controls++(-90:0.6) and++(180:0.2)..(-4,0.5)--++(-12:3.3)--++(0:4)..controls++(0:2) and++(-172:1)..(6,0)..controls++(8:1)and++(-90:0.1)..(6.85,0.3)..controls++(90:0.2) and++(-30:1)..(5,1.3)..controls++(90:0.25) and++(0:8)..(-4,1.5)--cycle;
+						\draw[cyan!40!black](6.85,0.3)coordinate(mui)..controls++(-90:0.5) and++(0:6)..(-2,0.2);
+						% Cánh phải
+						\fill[ball color =cyan!90!gray!40!white,rounded corners=0.02](-1.8,0)--++(-5:0.35)--++(-147:4.85)--++(-50:0.7)--++(25.5:6.5)..controls++(-155.5:0.5) and++(-170:0.15)..(1.5,-0.25)..controls++(120:0.5) and++(2:1)..(-1.8,0);
+						\fill[ball color =cyan!90!gray!40!white,rounded corners=0.02](-6.1,-2.3)--++(-54:0.7)--++(-28:0.7)--++(25.5:.35)--++(-180:.2)--++(135:1.2)--cycle;
+						%%Thân đuôi
+						\fill[ball color =cyan!90!gray!40!white,rounded corners=0.02](-6.9,3.6)--++(2:1)..controls++(-35:2) and++(178:2.3)..(-2,1.5)..controls++(-90:0.2) and++(20:1)..(-3.5,1)--++(180:1.2)--cycle;
+						%%Đuôi
+						\fill[ball color =cyan!90!gray!40!white,rounded corners=0.02](-6,2.5)--++(0:1.35)--++(-156:2.5)--++(170:0.75)--cycle;
+						\fill[ball color =cyan!70!gray!40!white,rounded corners=0.02](-1.9,-0.17)--++(90:0.72)--++(181:2.45)--++(-90:0.6)--cycle;
+						\fill[ball color =cyan!90!gray!10!black,line width=0.02,draw=cyan!30!black,rounded corners=0.005](-1.9,-0.18)arc(-90:270:0.2 and 0.38);
+						%%Cửa kính
+						\fill[cyan](5.05,1.3)--++(-25:0.8)..controls++(-140:0.55)and++(10:0.5)..(4.2,0.6)..controls++(180:0.15) and++(182:0.45)..(4.3,1.1)..controls++(2:0.5) and++(-135:0.2)..(5.1,1.3);
+						\draw[draw=teal,double,distance=0.03](5.05,1.3)++(-26:0.8)..controls++(-140:0.55)and++(10:0.5)..(4.2,0.6)foreach \i in{1,2,...,4}{coordinate[pos=\i/4](B\i)}..controls++(180:0.15) and++(182:0.45)..(4.3,1.1)..controls++(2:0.5) and++(-135:0.2)..(5.1,1.3)foreach \i in{1,2,...,10}{coordinate[pos=\i/10](A\i)}(A2)--(B2)(A6)--(B1);
+						%Ô cửa trên thân máy bay
+						\foreach \i in {0,1,...,6}
+						\fill[ball color=cyan](-0.8+0.5*\i,0.4)arc(-90:270:0.1 and 0.2);
+						\fill[draw=cyan!10!teal,ball color=cyan!80!gray,rounded corners=0.015](3.2,-0.2)--++(95:0.9)--++(0:0.5)--++(-85:0.9)--cycle;
+						\pgfmathsetmacro{\j}{int(mod(\i,2))}
+						\ifnum \j=1
+						\begin{scope}[opacity=1]
+							\fill[ball color=orange](2.5,-0.15)arc(-90:270:0.2 and 0.1);
+							\fill[ball color=orange!50!red!50!white,rotate around={10:(6,0.25)}](6,0.25)arc(-90:270:0.2 and 0.1);
+						\end{scope}
+						\else
+						\begin{scope}[opacity=0.4]
+							\fill[ball color=orange](2.5,-0.15)arc(-90:270:0.2 and 0.1);
+							\fill[ball color=orange!50!red!50!white,rotate around={10:(6,0.25)}](6,0.25)arc(-90:270:0.2 and 0.1);
+						\end{scope}
+						\fi
+					\end{scope}
+			}}
+			\path(0,2)pic[scale=0.15]{Icon-Maybay};
+			\draw (1,2) node[below]{$F$}--(9,4) node[below]{$D$}--(11,4.5) node[below]{$N$};
+			\draw[fill=black] (1,2) circle(1pt) (9,4) circle(1pt) (11,4.5) circle(1pt);
+		\end{tikzpicture}
+	\end{center}
+\choice
+{$0,4$}
+{$0,5$}
+{\True $0,3$}
+{$0,6$}
+	\loigiai{ 
+		$\overrightarrow{FD}=(79;223;0), \overrightarrow{DN}=(a-265;b-282;c-7)$.
+		
+		Vì máy bay giữ nguyên hướng bay nên $\overrightarrow{FD}$ và $\overrightarrow{DN}$ cùng hướng.
+		
+		Do máy bay tiếp tục giữ nguyên vận tốc và thời gian bay từ ${F}$ đến ${D}$ gấp ${6}$ lần thời gian bay từ ${D}$ đến ${N}$ nên $\overrightarrow{FD}=6\overrightarrow{DN}$.
+		
+		$\Rightarrow \left\{ \begin{array}{l} 
+			79=6(a-265) \\ 
+			223=6(b-282) \\ 
+			0=6(c-7)
+		\end{array} \right.$$\Rightarrow\left\{ \begin{array}{l} 
+			a=\frac{1}{6}.79+265 \\ 
+			b=\frac{1}{6}.223+282 \\ 
+			c=\frac{1}{6}.0+7
+		\end{array} \right.$$\Rightarrow\left\{ \begin{array}{l} 
+			a=278,17 \\ 
+			b=319,17 \\ 
+			c=7,00
+		\end{array} \right.$
+		
+		Sau 6 phút tọa độ của máy bay là $N=(278,17;319,17;7,00)$.
+		
+		$\dfrac{a+b+c}{2025}=0,3$. 
+}\end{ex}
+\cham{2}
+\begin{ex}
+	\immini[thm]{Trong không gian $O x y z$, một cabin cáp treo ở Bà Nà Hill xuất phát từ điểm $A(-2 ; 1 ; 5)$ và chuyền động đều theo đường cáp có vectơ chỉ phương là $\vec{u}=(0 ;-2 ; 6)$ với tốc độ là $4 \mathrm{~m} / \mathrm{s}$ (đơn vị trên mỗi trục toạ độ là mét). Giả sử sau 5 (s) kể từ lúc xuất phát, cabin đến điểm $M$. Gọi tọa độ $M(a ; b ; c)$. Tính $a+3 b+c$.
+		\choice
+		{$8$}
+		{$2\sqrt{10}$}
+		{\True $6$}
+		{$6-12\sqrt{10}$}
+	}{\hspace{1cm}
+		\includegraphics[scale=0.6]{Images/De1-3.png}}
+	\loigiai{
+		Phương trình tham số của đường cáp là : $d:\left\{\begin{array}{l}x=-2 \\ y=1-2 k \\ z=5+6 k\end{array} \quad(k \in \mathbb{R})\right.$
+		Do tốc độ chuyển động của cabin là $4 \mathrm{~m} / \mathrm{s}$ nên độ dài $A M=4 t(\mathrm{~m})$.
+		Vì vậy sau $5(\mathrm{~s})$ kể từ lúc xuất phát, cabin đến điểm $M$ thì $A M=4.5=20(\mathrm{~m})$.
+		Vì $M \in d \Rightarrow M(-2 ; 1-2 k ; 5+6 k)$
+		$\overrightarrow{A M}(0 ;-2 k ; 6 k)$. Do 2 vec tơ $\overrightarrow{A M} ; \vec{u}$ cùng hướng $k>0$
+		
+		$$
+		A M=20 \Leftrightarrow \sqrt{0^2+4 k^2+36 k^2}=20 \Leftrightarrow 40 k^2=400 \Leftrightarrow k= \pm \sqrt{10}
+		$$
+		
+		
+		Vì $k>0 \Rightarrow k=\sqrt{10}$.
+		Vậy tọa độ $M(-2 ; 1-2 \sqrt{10} ; 5+6 \sqrt{10})$. Khi đó $a+3 b+c=-2+3(1-2 \sqrt{10})+5+6 \sqrt{10}=6$.
+	}
+\end{ex}
+\cham{7}
+\Closesolutionfile{ans}
+
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2H2-B3-d1-2]
+\begin{ex}
+	Cho các điểm $A(1 ;-2 ; 3), B(-2 ; 1 ; 2), C(3 ;-1 ; 2)$.
+	\choiceTF
+	{\True $\vec{A B}=(-3 ; 3 ;-1)$}
+	{$\vec{A C}=(-2 ;-1 ; 1)$}
+	{$\vec{A B}=3 \vec{A C}$}
+	{\True  Ba điểm $A, B, C$ không thẳng hàng}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\vec{A B}=\big(x_B-x_A;y_B-y_A;z_B-z_A\big)=(-3 ; 3 ;-1)$.
+			\item $\vec{A C}=\big(x_C-x_A;y_C-y_A;z_C-z_A\big)=(2 ; 1 ;-1)$
+			\item $\vec{A B}=(-3 ; 3 ;-1)$, $\vec{A C}=(2 ; 1 ;-1)$. Hai vec tơ này không cùng phương nên không tồn tại số thực $k$ để $\vec{A B}=k \vec{A C}$.
+			\item Hai vec tơ $\vec{A B}$ và $\vec{A C}$ không cùng phương nên ba điểm $A, B, C$ không thẳng hàng.
+		\end{enumerate}
+	}
+\end{ex} \cham{5}
+
+\begin{ex}%[2H2H2-3]%[Dự án đề kiểm tra Toán 12 GHKI NH24-25- Quan Ón]%[THPT Lê Trọng Tấn - Tp.HCM]
+	Cho các điểm $A(1;2;3)$, $B(3;2;0)$, $C(3;-2;-1)$.
+	\choiceTF
+	{\True Điểm $B$ nằm trên mặt phẳng $(Oxy)$}
+	{Các vectơ $\overrightarrow{AB}$, $\overrightarrow{AC}$ cùng phương}
+	{Hình chiếu của điểm $A$ trên trục $Oz$ là $A'(0;2;3)$}
+	{\True Nếu vectơ $\overrightarrow{u} = x\overrightarrow{BA} + y\overrightarrow{OB} + z\overrightarrow{OC} = (-10;8;9)$ thì $x + 2y + z = 1$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng}.
+			\itemch \textbf{Sai}. Ta có $\overrightarrow{AB} = (2;0;-3)$, $\overrightarrow{AC} = (2;-4;-4)$.\\
+			Vì $\dfrac{2}{2} \neq \dfrac{0}{-4}$ $(1\neq 0)$ nên $\overrightarrow{AB}$, $\overrightarrow{AC}$ không cùng phương.
+			\itemch \textbf{Sai}. Hình chiếu của điểm $A$ lên trục $Oz$ là $A'(0;0;3)$.
+			\itemch \textbf{Đúng}. Ta có $\overrightarrow{BA} = (-2;0;3)$, $\overrightarrow{OB}= (3;2;0)$, $\overrightarrow{OC} = (3;-2;-1)$.\\
+			Khi đó
+			\allowdisplaybreaks
+			\begin{eqnarray*}
+				&&\overrightarrow{u} = x\overrightarrow{BA} + y\overrightarrow{OB} + z\overrightarrow{OC}\\
+				&\Leftrightarrow& (-10;8;9) = (-2x + 3y + 3z; 2y - 2z; 3x - z)\\
+				&\Leftrightarrow& \heva{&-2x + 3y + 3z = -10\\&2y - 2z = 8\\&3x - z = 9}\\
+				&\Leftrightarrow& \heva{&x = 2\\&y = 1\\&z = -3.}
+			\end{eqnarray*}
+			Suy ra $x + 2y + z = 2 + 2\cdot 1 + (-3) = 1$.
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{5}
+\begin{ex}
+	\immini{Cho ba điểm $ A(3;3;-6) $, $ B(1;3;2) $ và $ C(-1;-3;1)$. Gọi $M$, $N$, $K$ lần lượt là trung điểm của $AB$, $BC$ và $CA$.
+		\choiceTF
+		{Tọa độ $M\left(2;3;2 \right)$}
+		{Với $G$ là trọng tâm tam giác $ABC$ thì $GC=2\sqrt{5}$}
+		{\True Trọng tâm tam giác $MNK$ là $E(1;1;-1)$}
+		{\True Với $D(-3;-3;9)$ thì tứ giác $ABDC$ là hình bình hành}}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize,>=stealth]
+			\path
+			%	Vẽ mp
+			(0,0) coordinate (B)
+			(5,0) coordinate (C)
+			(2,3) coordinate (A)
+			($(A)!0.5!(B)$)coordinate (M)
+			($(B)!0.5!(C)$)coordinate (N)
+			($(A)!0.5!(C)$)coordinate (K)
+			($(A)!2/3!(N)$)coordinate (G)
+			;
+			\draw (B)--(A)--(C)--(B) (M)--(N)--(K)--(M);
+			\foreach \x/\g in {A/90,B/180,C/0,M/160,N/-90,K/10}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+	\end{tikzpicture}}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $M$ là trung điểm của $AB$, suy ra $M\left(\dfrac{x_A+x_B}{2}; \dfrac{y_A+y_B}{2};\dfrac{z_A+z_B}{2}\right)$ hay $M(2;3;-2)$.
+			\item Ta có $G(1;1;-1)$. Suy ra $GC=\sqrt{(-1-1)^2+(-3-1)^2+(1+1)^2}=2\sqrt{6}$.
+			\item Hai tam giác $ABC$ và $MNK$ có cùng trọng tâm. Suy ra $E$ trùng với $G(1;1;-1)$.
+			\item Ta có $\vec{AC}=(-4;-6;7)$, $\vec{BD}=(-4;-6;7)$, suy ra $\vec{AC}=\vec{BD}$. Vậy $ABDC$ là hình bình hành.
+		\end{enumerate}
+	}
+\end{ex} \cham{10}
+
+\begin{ex}
+	\immini{Cho hình hộp $ ABCD.A'B'C'D' $, biết điểm $ A(0; 0; 0)$, $ B(1; 0; 0)$, $ C(1; 2; 0)$, $ D'(-1; 3; 5)$. Gọi $M$, $N$ là tâm của các hình bình hành $ABB'A'$, $ADD'A'$.
+		\choiceTF
+		{\True Tọa độ $D(0; 2; 0)$}
+		{\True Tọa độ $A'(-1; 1; 5)$}
+		{Tọa độ $\vec{MN}=(-1;1;0)$}
+		{$\big|\vec{AB}+\vec{AD}+\vec{CC'}\big|=\sqrt{29}$}}{
+		\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round,>=stealth]
+			\tkzDefPoints{0/0/A,-2/-2/B, 4/0/D,-0.5/3.5/A'}
+			\coordinate (C) at ($(B)+(D)$);
+			\coordinate (B') at ($(B)+(A')$);
+			\coordinate (C') at ($(C)+(A')$);
+			\coordinate (D') at ($(D)+(A')$);
+			\coordinate (x) at ($(A)!1.5!(B)$);
+			\coordinate (y) at ($(A)!1.5!(D)$);
+			\coordinate (z) at ($(A)!1.5!(A')$);
+			\tkzDrawPoints[fill=black](A,B,C,D,A',B',C',D')
+			\draw[dashed] (A)--(B) (A)--(D) (A)--(A');
+			\draw (A')--(B')--(C')--(D')--(A') (B)--(B') (C)--(C') (D)--(D') (B)--(C)--(D);
+			\tkzLabelPoints[left](A,B,B',A')
+			\tkzLabelPoints[below right=-0.1](C,D)
+			\tkzLabelPoints[right](C',D')
+	\end{tikzpicture}}
+	\loigiai{
+		\immini{
+			\begin{enumerate}[a)]
+				\item Theo qui tắc hình bình hành, ta có
+				\[\vec{AD}=\vec{AC}-\vec{AB}=(0; 2; 0)\Rightarrow D(0; 2; 0).\]
+				\item Ta có
+				\[\vec{AA'}=\vec{DD'}=(-1; 1; 5)\Rightarrow A'(-1; 1; 5).\]
+				\item Theo hình vẽ $\vec{MN}=\vec{BC}=(0;2;0)$.
+				\item Ta có $\vec{AC'}=\vec{AB}+\vec{AD}+\vec{AA'}=(0;3;5)$.\\ Xét
+				\begin{eqnarray*}
+					\big|\vec{AB}+\vec{AD}+\vec{CC'}\big|
+					&=&\big|\vec{AB}+\vec{AD}+\vec{AA'}\big|=\big|\vec{AC'}\big|\\
+					&=& \sqrt{0^2+3^2+5^2}=\sqrt{34}.
+				\end{eqnarray*}
+			\end{enumerate}
+		}{
+			\begin{tikzpicture}[scale=0.7, font=\footnotesize, line join=round, line cap=round,>=stealth]
+				\tkzDefPoints{0/0/A,-2/-2/B, 4/0/D,-0.5/3.5/A'}
+				\coordinate (C) at ($(B)+(D)$);
+				\coordinate (B') at ($(B)+(A')$);
+				\coordinate (C') at ($(C)+(A')$);
+				\coordinate (D') at ($(D)+(A')$);
+				\coordinate (x) at ($(A)!1.5!(B)$);
+				\coordinate (y) at ($(A)!1.5!(D)$);
+				\coordinate (z) at ($(A)!1.5!(A')$);
+				\coordinate (M) at ($(A')!0.5!(B)$);
+				\coordinate (N) at ($(C)!0.5!(D')$);
+				\tkzDrawPoints[fill=black](A,B,C,D,A',B',C',D')
+				\draw[dashed] (A)--(B) (A)--(D) (A)--(A') (M)--(N);
+				\draw (A')--(B')--(C')--(D')--(A') (B)--(B') (C)--(C') (D)--(D') (B)--(C)--(D) (A')--(B) (C)--(D');
+				\draw[->] (B)--(x) node[above] {$x$};
+				\draw[->] (D)--(y) node[above] {$y$};
+				%\draw[->] (A')--(z) node[left] {$z$};
+				\tkzLabelPoints[left](A,B,B',A',M)
+				\tkzLabelPoints[below right=-0.1](C,D)
+				\tkzLabelPoints[right](C',D',N)
+			\end{tikzpicture}
+		}
+	}
+\end{ex} \cham{13}
+
+\begin{ex}
+	\immini{Một tháp trung tâm kiểm soát không lưu ở sân bay cao ${69}$ m sử dụng ra đa có phạm vi theo dõi ${320}$ km được đặt trên đỉnh tháp. Chọn hệ trục toạ độ ${O x y z}$ có gốc ${O}$ trùng với vị trí chân tháp, mặt phẳng ${(Oxy)}$ trùng với mặt đất sao cho trục ${Ox}$ hướng về phía tây, trục ${Oy}$ hướng về phía nam, trục ${Oz}$ hướng thẳng đứng lên phía trên (Hình bên) (đơn vị trên mỗi trục tính theo kilômét).	Một máy bay tại vị trí ${C}$ cách mặt đất $16 \mathrm{~km}$, cách $200 \mathrm{~km}$ về phía đông và $208 \mathrm{~km}$ về phía bắc so với tháp trung tâm kiểm soát không lưu. Xét tính đúng-sai của các khẳng định sau: 
+		\choiceTF
+		{ Vị trí ${C}$ có tọa độ $(-200; -208; -16)$ }
+		{ \True  Vị trí của ra đa có tọa độ là $(0;0;0,069)$ }
+		{ Khoảng cách từ máy bay đến ra đa xấp xỉ bằng ${293,38}$ (kết quả làm tròn đến hàng phần trăm) }
+		{ \True  Ra đa của trung tâm kiểm soát không lưu phát hiện được máy bay tại vị trí ${C}$}
+	}{
+		\begin{tikzpicture}[>=stealth,line join=round,line cap=round,font=\footnotesize,scale=1]
+			\def\h{3.5}\def\d{0.4}\def\dd{0.8}\def\hh{0.5}
+			\draw[ball color=cyan!50] (-0.5*\d,0) rectangle +(\d,\h);
+			\draw[fill=yellow] (-0.5*\dd,\h) rectangle +(\dd,\hh);
+			\draw[fill=red] (-0.6*\dd,\h+\hh)--(0,\h+\hh+0.3) --(0.6*\dd,\h+\hh)--cycle;
+			\coordinate(O) at (0,0); 
+			\draw[->,line width=1.5pt,red] (O)--++(3,0) node[above]{$y$};
+			\draw[->,line width=1.5pt,red] (O)--++(0,\h+\hh+1) node[right]{$z$};
+			\draw[->,line width=1.5pt,red] (O)--++(-150:2cm) node[left]{$x$};
+			\fill[ball color=red] (O) circle (2.5pt) node[below right,red]{$O$};
+	\end{tikzpicture}}
+	\loigiai{ 
+		
+		
+		a) Khẳng định đã cho là khẳng định sai.
+		
+		Vị trí ${C}$ có tọa độ $(-200; -208; 16)$.
+		
+		b) Khẳng định đã cho là khẳng định đúng.
+		
+		Vị trí của ra đa có tọa độ là $(0;0;0,069)$.
+		
+		c) Khẳng định đã cho là khẳng định sai.
+		
+		Ra đa đặt tại vị trí $G(0;0;0,069)$.
+		
+		Khoảng cách từ máy bay đến ra đa bằng:
+		
+		$\sqrt{(-200)^2+(-208)^2+(16-0,069)^2}\equiv 288,99$.
+		
+		d) Khẳng định đã cho là khẳng định đúng.
+		
+		Vì $320>288,99$ nên ra đa phát hiện được máy bay tại vị trí ${C}$.
+		
+		
+}\end{ex}
+\cham{8}
+ \begin{ex}%[2H2H2-4]
+	Trong không gian $Oxyz$, cho ba điểm $A(1;3;-2)$, $B(3;4;-5)$, $C(2;0;0)$:
+	\choiceTF
+	{\True Góc $\widehat{BAC} = 120^\circ$}
+	{\True Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} = (1;-3;2)$}
+	{\True Tọa độ trọng tâm $G$ của tam giác $ABC$ là $G\left(2; \dfrac{7}{3}; -\dfrac{7}{3}\right)$}
+	{Tam giác $ABC$ là tam giác đều}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng}.\\
+			Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} =(1;-3;2)$.\\
+			Khi đó 
+			\[
+			\cos\widehat{BAC} = \dfrac{\overrightarrow{AB} \cdot \overrightarrow{AC}}{\left|\overrightarrow{AB}\right| \cdot \left|\overrightarrow{AC}\right|}=\dfrac{2 \cdot 1 + 1 \cdot (-3) + (-3) \cdot 2}{\sqrt{2^2 + 1^2 + (-3)^2}\cdot \sqrt{1^2 + (-3)^2 + 2^2} }=-\dfrac{1}{2}.
+			\]
+			Suy ra $\widehat{BAC} = 120^\circ$.
+			\itemch \textbf{Đúng}.\\
+			Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} =(1;-3;2)$.
+			\itemch  \textbf{Đúng}.\\
+			Ta có $G$ là trọng tâm của tam giác $ABC$, do đó
+			\[
+			\heva{
+				&x_G=\dfrac{x_A + x_B + x_C}{3}=dfrac{1 + 3 + 2}{3}=2\\
+				&y_G=\dfrac{y_A + y_B + y_C}{3}=\dfrac{3 + 4 + 0}{3}=\dfrac{7}{3}\\
+				&z_G= \dfrac{z_A + z_B + z_C}{3}=\dfrac{-2 - 5 + 0}{3}=-\dfrac{7}{3}
+			}\]
+			Vậy $G$ có tọa độ là $G\left(2; \dfrac{7}{3}; -\dfrac{7}{3}\right)$.
+			\itemch \textbf{Sai}.\\
+			Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				AB&=&\left|\overrightarrow{AB}\right| = \sqrt{2^2 + 1^2 + (-3)^2} = \sqrt{4 + 1 + 9} = \sqrt{14};\\ 
+				AC&=&\left|\overrightarrow{AC}\right| = \sqrt{1^2 + (-3)^2 + 2^2} = \sqrt{1 + 9 + 4} = \sqrt{14}\\
+				BC &=& \left|\overrightarrow{AB}\right|=\sqrt{(3 - 2)^2 + (4 - 0)^2 + (-5 - 0)^2} = \sqrt{1 + 16 + 25} = \sqrt{42}.			
+			\end{eqnarray*}
+			Ta thấy $AB = AC = \sqrt{14}$ nhưng $BC = \sqrt{42}$, suy ra tam giác $ABC$ không phải là tam giác đều.
+		\end{itemchoice}
+		
+	}
+\end{ex}
+\cham{11}
+\begin{ex}
+	\immini[thm]{Hai chiếc khinh khí cầu bay lên từ cùng một địa điểm. Chiếc thứ nhất cách điểm xuất phát $2$ km về phía nam và $1$ km về phía đông, đồng thời cách mặt đất $0{,}5$ km. Chiếc thứ hai nằm cách điểm xuất phát $1$ km về phía bắc và $1{,}5$ km về phía tây, đồng thời cách mặt đất $0{,}8$ km.\\
+		Chọn hệ trục $Oxyz$ với gốc $O$ đặt tại điểm xuất phát của hai khinh khí cầu, mặt phẳng $(Oxy)$ trùng với mặt đất với trục $Ox$ hướng về phía nam, trục $Oy$ hướng về phía đông và trục $Oz$ hướng thẳng đứng lên trời (hình bên), đơn vị đo lấy theo kilomet.
+	}{
+		\begin{tikzpicture}[smooth,samples=300,scale=0.8,>=stealth,font=\footnotesize]
+			\draw[->] (-4,0)node[above right]{Tây}--(6,0) node[below]{$y$} node[above left]{Đông};
+			\draw[->] (3,3)node[above right]{Bắc}--(-2.3,-2.3) node[left]{$x$}node[below right]{Nam};
+			\draw[->] (0,0)--(0,4.5) node[right]{$z$};
+			\draw (0,0) node[below]{$O$};
+			\fill [scale=.1,black,yshift=12 cm,xshift=25 cm]
+			(-1,0) rectangle (1,1)
+			(-1,2).. controls +(135:1) and +(180:4) .. (0,7)
+			.. controls +(180:2) and +(135:2).. (-.5,2)
+			.. controls +(120:2) and +(180:1) .. (0,6.99)
+			.. controls +(0:1) and +(60:2) .. (.5,2)
+			.. controls +(45:2) and +(0:2) .. (0,7)
+			.. controls +(0:4) and +(45:1).. (1,2)
+			;
+			\draw[scale=.1,yshift=12 cm,xshift=25 cm] (-1,0) rectangle (1,2) (0,1)--(0,2);
+			;
+			\fill [scale=.1,blue,yshift=37 cm,xshift=-20 cm]
+			(-1,0) rectangle (1,1)
+			(-1,2).. controls +(135:1) and +(180:4) .. (0,7)
+			.. controls +(180:2) and +(135:2).. (-.5,2)
+			.. controls +(120:2) and +(180:1) .. (0,6.99)
+			.. controls +(0:1) and +(60:2) .. (.5,2)
+			.. controls +(45:2) and +(0:2) .. (0,7)
+			.. controls +(0:4) and +(45:1).. (1,2)
+			;
+			\draw[blue,scale=.1,yshift=37 cm,xshift=-20 cm] (-1,0) rectangle (1,2) (0,1)--(0,2);
+			;
+			\draw[dashed] (4,0)--(2.5,-1.5)--(-1.5,-1.5) 
+			(2.5,1)--(0,0)--(2.5,-1.5)--(2.5,1);
+			\draw[dashed] (-3,0)--(-2,1)--(1,1) (-2,1)--(0,0)--(-2,3.5)--(-2,1)
+			;
+			\draw[fill=black] (2.5,1) circle(2pt) (-2,3.5) circle(2pt);
+	\end{tikzpicture}}
+	\choiceTF
+	{\True Với hệ tọa độ đã chọn, toạ độ khinh khí cầu thứ nhất là $(2;1;0{,}5)$}
+	{Với hệ tọa độ đã chọn, toạ độ khinh khí cầu thứ hai  là $(-1{,}5;-1;0{,}8)$}
+	{Khoảng cách từ điểm xuất phát đến khinh khí cầu thứ nhất bằng $\sqrt{21}$ km}
+	{\True Khoảng cách hai chiếc khinh khí cầu là $3{,}92\text{ km}$ (\textit{Kết quả làm tròn đến hàng phần trăm})}
+	\loigiai{
+		\begin{enumerate}
+			\item Chiếc khinh khí cầu thứ nhất có tọa độ là $(2;1;0{,}5)$.
+			\item Chiếc khinh khí cầu thứ hai có tọa độ là $(-1;-1{,}5;0{,}8)$.
+			\item Khoảng cách từ điểm xuất phát đến khinh khí cầu thứ nhất bằng $\sqrt{2^2+1^2+0,5^2}=\dfrac{\sqrt{21}}{2}$ (km)
+			\item Khoảng cách hai chiếc khinh khí cầu là
+			$\sqrt{(-1-2)^2+(1{,}5-1)^2+(0{,}8-0{,}5)^2}=\sqrt{15{,}34}\approx3{,}92\text{ (km)}.$
+		\end{enumerate}
+	}
+\end{ex}
+ \cham{10}
+  
+ \begin{ex}%[2H2V2-6]%[Lớp 12- Kiểm tra giữa học kỳ - THPT Chuyên Lê Quý Đôn - Đà Nẵng]%[Nguyễn Văn Sang]
+ Một sân vận động hình chữ nhật có chiều dài $150$ m , chiều rộng $90$ m . Để ghi hình một trận đấu, người ta lấp đặt một hệ thống flycam gồm $4$ flycam, ban đầu đặt tại bốn điểm $A$, $B$, $C$, $D$ nằm trên $4$ đường thẳng vuông góc với sân tại $4$ góc sân vận động và cách đều mặt đất $30$ m, (tham khảo hình vẽ). 
+ \begin{center}
+ 	\begin{tikzpicture}[scale=.7, font=\footnotesize, line join=round, line cap=round, >=stealth]
+ 		\def\bc{7} \def\ba{6} \def\h{4} \def\gocB{35} 
+ 		\coordinate(B) at (0,0);
+ 		\coordinate(A) at (\gocB:\ba);
+ 		\coordinate(C) at (\bc,0);
+ 		\coordinate(D) at ($(C)-(B)+(A)$);
+ 		\fill[green] (B) -- (A) -- (D) -- (C) -- cycle;
+ 		\coordinate (O) at ($(A)!0.5!(C)$);
+ 		% \node[circle,fill,inner sep=1pt,label=below:{$O$}] at (O) {};
+ 		\coordinate(A') at ($(A)+(90:\h)$);
+ 		\coordinate[label=left:$C$](CC) at ($(A)+(90:\h)+(-0.35,0)$);
+ 		\coordinate[label=left:$B$] (DD) at ($(B)-(A)+(A')+(-0.35,0)$);
+ 		\coordinate(B') at ($(B)-(A)+(A')$);
+ 		\coordinate(C') at ($(C)-(A)+(A')$);
+ 		\coordinate[label=right:$A$](CC) at ($(C)-(A)+(A')+(0.35,0)$);
+ 		\coordinate (D') at ($(D)-(A)+(A')$);
+ 		\coordinate[label=right:$D$](BB) at ($(D)-(A)+(A')+(0.35,0)$);
+ 		\draw[dashed] (A')--(A) (D')--(D) (B')--(B) (C)--(C');
+ 		\draw[<->, dashed] (A) -- (B) node[midway, above left] {$150$ m}; 
+ 		\draw[<->, dashed] (B) -- ++(B') node[midway, left] {$30$ m}; 
+ 		\draw[<->, dashed] (D) -- (A) node[midway, above right] {$90$ m}; 
+ 		\newcommand{\drawFlycam}[2]{
+ 			\begin{scope}[shift={(#1)}]
+ 				\filldraw[fill=orange, draw=black] (0,0) ellipse (0.3 and 0.15); 
+ 				\foreach \angle in {45,135,225,315} { 
+ 					\draw[line width=0.5mm] (0,0) -- (\angle:0.5);
+ 				}
+ 				\foreach \angle in {45,135,225,315} {
+ 					\fill[black] (\angle:0.5) circle (0.04);
+ 				}
+ 				\foreach \angle in {45,135,225,315} {
+ 					\draw[fill=gray!50] (\angle:0.5) ++(\angle+90:0.05) arc (\angle+90:\angle-90:0.1) -- cycle;
+ 				}
+ 			\end{scope}
+ 			\node[below left, inner sep=2pt, font=\tiny] at (#1) {#2};
+ 		}
+ 		\drawFlycam{A'}{};
+ 		\drawFlycam{B'}{};
+ 		\drawFlycam{C'}{};
+ 		\drawFlycam{D'}{};
+ 		\coordinate (O') at ($(A')!0.5!(C')$);
+ 		\coordinate (I) at ($(A')!0.6!(C)$);
+ 		\drawFlycam{I}{};
+ 		\draw[dashed] (B')--(I)--(A') (D')--(I)--(C');
+ 		\foreach \diem in {A,B,C,D}	\fill (\diem)circle(1pt);
+ 		%\draw[->] (O) -- ++(-145:4)coordinate (X)node[right]{$x$};
+ 		%\draw[->] (O) -- ++(0:4)coordinate (Y)node[right]{$y$};
+ 		%\draw[->](O)--(O')node[right]{$z$};
+ 		\node[below] at (4,-.5) {Khán đài A}; 
+ 		\node[below right] at (9.5,2) {Khán đài B}; 
+ 	\end{tikzpicture}
+ \end{center}Biết bốn flycam này có thể di chuyển đến các vị trí bất kỳ và được kết nối với một thiết bị điều khiển trung tâm đặt tại điểm $O$ cách tâm của sân vân động theo phương thẳng đứng là $15$ m. Xây dựng hệ trục tọa độ $Oxyz$, đơn vi độ dài trên mỗi trục tính bằng mét, trong đó
+ 	\begin{itemize}
+ 		\item Gốc toạ độ $O$ trùng với thiết bị điều khiển.
+ 		\item Trục $Ox$ song song với chiều dài sân, chiều dương hướng về phía khác đài $A$.
+ 		\item Trục $Oy$ song song với chiều rộng sân, chiều dương hướng về phía khác đài $B$.
+ 		\item Trục $Oz$ theo phương thẳng đứng, chiều dương hướng lên trên.
+ 	\end{itemize}
+ 	\choiceTF
+ 	{\True $A(75 ; 45 ; 15)$, $B(75 ;-45 ; 15)$, $C(-75 ;-45 ; 15)$, $D(-75 ; 45 ; 15)$}
+ 	{Giả sử ban đầu flycam $1$ được điều khiển đến vị trí $I(40;30;25)$. Khoảng cách từ flycam $1$ đến thiết bị điều khiển trung tâm $O$ bằng $5\sqrt{71}$}
+ 	{Từ điểm $I$, flycam $1$ tiếp tục di chuyển theo hướng vectơ $\overrightarrow{u}=\left(-1;2;-1\right)$ với quãng đường là $9$ m đến vị trí $K$ để quay một tình huống trên sân. Toạ độ điểm $K(37;34;19)$}
+ 	{Một cầu thủ đang đứng trong sân tại điểm $G$ cách đường biên dọc (chiều dài của sân) của hướn đối diện với khán đài $B$ sân vận động một khoảng bằng $\dfrac{1}{5}$ chiều rộng sân và tạo với flycam $1$ (đang ở vị trí $K$) một góc $45^{\circ}$ so với mặt sân. Toạ độ điểm $G\left(37-\sqrt{578};-18;-15\right)$}
+ 	\loigiai{
+ 		\begin{center}
+ 			\begin{tikzpicture}[scale=.9, font=\footnotesize, line join=round, line cap=round, >=stealth]
+ 				\def\bc{7} \def\ba{6} \def\h{4} \def\gocB{35} 
+ 				\coordinate(B) at (0,0);
+ 				\coordinate(A) at (\gocB:\ba);
+ 				\coordinate(C) at (\bc,0);
+ 				\coordinate(D) at ($(C)-(B)+(A)$);
+ 				\fill[green] (B) -- (A) -- (D) -- (C) -- cycle;
+ 				\coordinate (O') at ($(A)!0.5!(C)+(90:0.5)$);
+ 				\node[circle,fill,inner sep=1pt,label=left:{$O$}] at (O') {};
+ 				\coordinate (O) at ($(A)!0.5!(C)$);
+ 				\node[circle,fill,inner sep=1pt,label=below:{}] at (O) {};
+ 				\coordinate(A') at ($(A)+(90:\h)$);
+ 				\coordinate[label=left:$C$](CC) at ($(A)+(90:\h)+(-0.35,0)$);
+ 				\coordinate[label=left:$B$] (DD) at ($(B)-(A)+(A')+(-0.35,0)$);
+ 				\coordinate(B') at ($(B)-(A)+(A')$);
+ 				\coordinate(C') at ($(C)-(A)+(A')$);
+ 				\coordinate[label=right:$A$](CC) at ($(C)-(A)+(A')+(0.35,0)$);
+ 				\coordinate (D') at ($(D)-(A)+(A')$);
+ 				\coordinate[label=right:$D$](BB) at ($(D)-(A)+(A')+(0.35,0)$);
+ 				\draw[dashed] (A')--(A) (D')--(D) (B')--(B) (C)--(C');
+ 				\draw[<->, dashed] (A) -- (B) node[midway, above left] {$150$ m}; 
+ 				\draw[<->, dashed] (B) -- ++(B') node[midway, left] {$30$ m}; 
+ 				\draw[<->, dashed] (D) -- (A) node[midway, above right] {$90$ m}; 
+ 				\newcommand{\drawFlycam}[2]{
+ 					\begin{scope}[shift={(#1)}]
+ 						\filldraw[fill=orange, draw=black] (0,0) ellipse (0.3 and 0.15); 
+ 						\foreach \angle in {45,135,225,315} { 
+ 							\draw[line width=0.5mm] (0,0) -- (\angle:0.5);
+ 						}
+ 						\foreach \angle in {45,135,225,315} {
+ 							\fill[black] (\angle:0.5) circle (0.04);
+ 						}
+ 						\foreach \angle in {45,135,225,315} {
+ 							\draw[fill=gray!50] (\angle:0.5) ++(\angle+90:0.05) arc (\angle+90:\angle-90:0.1) -- cycle;
+ 						}
+ 					\end{scope}
+ 					\node[below left, inner sep=2pt, font=\tiny] at (#1) {#2};
+ 				}
+ 				\drawFlycam{A'}{};
+ 				\drawFlycam{B'}{};
+ 				\drawFlycam{C'}{};
+ 				\drawFlycam{D'}{};
+ 				\coordinate (O2) at ($(A')!0.5!(C')$);
+ 				\coordinate (I) at ($(A')!0.6!(C)$);
+ 				\drawFlycam{I}{};
+ 				\draw[dashed] (B')--(I)--(A') (D')--(I)--(C');
+ 				\foreach \diem in {A,B,C,D}	\fill (\diem)circle(1pt);
+ 				\draw[->] (O') -- ++(-145:4)coordinate (X)node[right]{$x$};
+ 				\draw[->] (O') -- ++(0:4)coordinate (Y)node[right]{$y$};
+ 				\draw[->](O')--(O2)node[right]{$z$};
+ 				\node[below] at (X) {Khán đài A}; 
+ 				\node[below right] at (Y) {Khán đài B}; 
+ 				\draw[dashed](A)--(C) (O)--(O') (B)--(D);
+ 			\end{tikzpicture}
+ 		\end{center}
+ 		\begin{itemchoice}
+ 			\itemch \textbf{Đúng} vì\\
+ 			\begin{itemize}
+ 				\item \textbf{Phân tích:}
+ 				\begin{itemize}
+ 					\item Chiều dài sân vận động là $150$ m, nên trục $Ox$ chạy từ $-75$ m đến $+75$ m.
+ 					\item Chiều rộng sân vận động là $90$ m, nên trục $Oy$ chạy từ $-45$ m đến $+45$ m.
+ 					\item Các flycam được đặt cách đều mặt đất $30$ m. Thiết bị điều khiển trung tâm $O$ cách mặt đất $15$ m, do đó điểm $O$ có tọa độ $(0;0;0)$ trong hệ trục này (vì chiều $Oz$ dương hướng lên trên).
+ 					\item Các điểm $A$, $B$, $C$, $D$ nằm trên các đường thẳng vuông góc với sân vận động tại các góc, cách mặt đất $30$ m, nên tọa độ của chúng sẽ có hoành độ và tung độ tương ứng với các góc của sân và hoành độ $z = 15$ (vì $O$ cách mặt đất $15$ m, và flycam cách $30$ m mặt đất nên $z = 15$).
+ 				\end{itemize}
+ 				\item \textbf{Kiểm tra:}
+ 				\begin{itemize}
+ 					\item Điểm $A$: Tọa độ $(75; 45; 15)$ nằm ở góc dương của cả trục $Ox$ và $Oy$.
+ 					\item Điểm $B$: Tọa độ $(75; -45; 15)$ nằm ở góc dương $Ox$ và âm $Oy$.
+ 					\item Điểm $C$: Tọa độ $(-75; -45; 15)$ nằm ở góc âm của cả trục $Ox$ và $Oy$.
+ 					\item Điểm $D$: Tọa độ $(-75; 45; 15)$ nằm ở góc âm $Ox$ và dương $Oy$.
+ 				\end{itemize}
+ 				\item \textbf{Kết luận:} Tọa độ các điểm $A$, $B$, $C$, $D$ được cho là đúng.
+ 			\end{itemize}
+ 			\itemch \textbf{Sai} vì ta có
+ 			\begin{itemize}
+ 				\item Điểm $O$ có tọa độ $(0;0;0)$.
+ 				\item Điểm $I$ có tọa độ $(40;30;25)$.
+ 				\item Khoảng cách giữa $I$ và $O$ được tính theo công thức
+ 				$$
+ 				d = \sqrt{(x_I - x_O)^2 + (y_I - y_O)^2 + (z_I - z_O)^2} = \sqrt{40^2 + 30^2 + 25^2}=25\sqrt{5}.
+ 				$$
+ 			\end{itemize}
+ 			\itemch \textbf{Sai} vì ta có
+ 			\begin{itemize}
+ 				\item Vectơ hướng di chuyển là $\overrightarrow{u} = (-1;2;-1)$.
+ 				\item Độ dài vectơ hướng là
+ 				$$
+ 				\left|\overrightarrow{u}\right| = \sqrt{(-1)^2 + 2^2 + (-1)^2} = \sqrt{1 + 4 + 1} = \sqrt{6}
+ 				$$
+ 				\item Đơn vị vectơ hướng là:
+ 				$$
+ 				\overrightarrow{i} =\dfrac{\overrightarrow{u}}{\left|\overrightarrow{u}\right|}= \left( -\dfrac{1}{\sqrt{6}} ; \dfrac{2}{\sqrt{6}} ; -\dfrac{1}{\sqrt{6}} \right)
+ 				$$
+ 				\item Quãng đường di chuyển là $9$ m, nên vectơ di chuyển là
+ 				\begin{eqnarray*}
+ 					&&\overrightarrow{IK} = 9 \cdot\overrightarrow{i} = \left( -\dfrac{9}{\sqrt{6}} ; \dfrac{18}{\sqrt{6}} ; -\dfrac{9}{\sqrt{6}} \right)\\
+ 					&\Leftrightarrow& \left(x_K-40;y_K-30;z_K-25\right)=\left( -\dfrac{9}{\sqrt{6}} ; \dfrac{18}{\sqrt{6}} ; -\dfrac{9}{\sqrt{6}} \right)\\
+ 					&\Leftrightarrow&\heva{&x_K=40-\dfrac{9}{\sqrt{6}}\\& y_K=30+\dfrac{18}{\sqrt{6}}\\& z_K=25-\dfrac{9}{\sqrt{6}}.}
+ 				\end{eqnarray*}
+ 				\item Tọa độ điểm $K\left(40-\dfrac{9}{\sqrt{6}};30+\dfrac{18}{\sqrt{6}};25-\dfrac{9}{\sqrt{6}}\right)$.
+ 			\end{itemize}
+ 			\itemch \textbf{Sai} vì\\
+ 			\begin{itemize}
+ 				\item Chiều rộng sân là $90$ m theo trục $Oy$, do đó từ tâm $O$ theo hướng dướng (về khán đài B) có tung độ thuộc $\left[0;45\right]$ m.
+ 				\item Cầu thủ cách đường biên dọc của phía đối diện với khán đài $B$ một khoảng bằng $\dfrac{1}{5}$ chiều rộng sân là $18$ m.
+ 				\item Do đó, điểm $G$ có tung độ $y_G=45-18=27$ m.
+ 				\item Vậy khẳng định toạ độ điểm $G\left(37-\sqrt{578};-18;-15\right)$ là sai.
+ 			\end{itemize}
+ 		\end{itemchoice}
+ 	}
+ \end{ex}
+\cham{23}
+\Closesolutionfile{ans}
+
+\begin{dang}{Tích vô hướng, tích có hướng hai vec tơ và ứng dụng}
+\end{dang}
+\boxmini{BÀI TẬP TỰ LUẬN}
+\setcounter{vd}{0}
+
+\begin{vd}
+	Cho ba véc-tơ $\vec{a} = (3; 0; 1)$, $\vec{b} = (1; -1; -2)$, $\vec{c} = (2; 1; -1)$, $\vec{d} = (1; 7; -3)$.
+	\begin{tasks}(1)
+		\task Tính $\vec{a}\cdot \vec{b}$ và $\vec{b}\cdot \vec{c}$.
+		\task Tính $\left| \vec{a} \right|$, $\left| \vec{b} \right|$, $\cos \left(\vec{a}, \vec{b}\right)$.
+		\task Chứng minh $\vec{d} \perp \vec{a}$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}
+			\item Ta có $\vec{a} \cdot \vec{b} = 3\cdot 1 + 0\cdot (-1) + 1\cdot (-2) = 1$ và $\vec{b} \cdot \vec{c} = 1\cdot 2 + (-1)\cdot 1 + (-2)\cdot (-1) = 3$.
+			\item Ta có $\left| \vec{a} \right| = \sqrt{3^2 + 0^2 + 1^2} = \sqrt{10}$, $\left| \vec{b} \right| \sqrt{1^2 + (-1)^2 + (-2)^2} = \sqrt{6}$.\\
+			$\cos \left(\vec{a}, \vec{b}\right) = \dfrac{\vec{a}\cdot \vec{b}}{\left|\vec{a}\right| \cdot \left|\vec{b}\right|} = \dfrac{1}{\sqrt{10}\cdot \sqrt{6}} = \dfrac{\sqrt{15}}{60}$.
+			\item Ta có $\vec{d}\cdot \vec{a} = 1\cdot 3 + 7 \cdot 0 + (-3)\cdot 1 = 0 \Rightarrow \vec{d} \perp \vec{a}$.
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{12}
+\begin{vd}
+	Trong không gian $Oxyz$, cho $\vec{a}=(1;0;1)$, $\vec{b}=(1;1;0)$ và $\vec{c}=(-4;3;m)$.
+	\begin{listEX}
+		\item Tính góc giữa hai vectơ $\vec{a}$ và $\vec{b}$.
+		\item Tìm $m$ để vectơ $\vec{d}=2\vec{a}+3\vec{b}$ vuông góc với $\vec{c}$.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}
+			\item Ta có $\heva{&\vec{a}=(1;0;1)\\ &\vec{b}=(1;1;0)}\Rightarrow \cos(\vec{a};\vec{b})=\dfrac{\vec{a}\cdot\vec{b}}{|\vec{a}|\cdot |\vec{b}|}=\dfrac{1}{2}$.
+			\item Ta có $\vec{d}=2\vec{a}+3\vec{b}=(5;3;2)$.\\
+			Ta có $\vec{d}\perp \vec{c}\Leftrightarrow \vec{d}\cdot\vec{c}=0\Leftrightarrow -20+9+2m=0\Leftrightarrow m=\dfrac{11}{2}$.
+		\end{listEX}
+	}
+\end{vd}
+\dongcham{12}
+\begin{vd}
+	Trong không gian $Oxyz$, cho tam giác $ABC$ có $A(-1; 0; 2)$, $B(0; 4; 3)$ và $C(-2; 1; 2)$. 
+	\begin{tasks}
+		\task Chỉ ra tọa độ một véc tơ (khác $\vec{0}$) vuông góc với hai véc tơ $\vec{AB}$, $\vec{AC}$.
+		\task Tính chu vi tam giác $ABC$.
+		\task Tính $\cos \widehat{BAC}$.
+		\task Tìm độ dài đường phân giác trong $AD$ của tam giác $ABC$.
+	\end{tasks}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item
+			\item Ta có $AB = \sqrt{1 + 16 + 1} = 3\sqrt{2}$ và $AC = \sqrt{1 + 1 + 0}$.
+			\item
+			\item Theo tính chất đường phân giác trong của tam giác, ta có $\dfrac{DB}{DC} = \dfrac{AB}{AC} = 3$.\\
+			Suy ra $\overrightarrow{DB} = -3\overrightarrow{DC} \Leftrightarrow \heva{&x_D = \dfrac{x_B + 3x_C}{4} = -\dfrac{3}{2} \\&y_D = \dfrac{y_B + 3y_C}{4} = \dfrac{7}{4} \\&z_D = \dfrac{z_B + 3z_C}{4} = \dfrac{9}{4}\cdot}$\\
+			$\Rightarrow D\left(-\dfrac{3}{2}; \dfrac{7}{4}; \dfrac{9}{4}\right)$.\\
+			Vậy $AD = \sqrt{\dfrac{1}{4} + \dfrac{49}{16} + \dfrac{1}{16}} = \dfrac{3\sqrt{6}}{4}\cdot$
+		\end{enumerate}
+	}
+\end{vd}
+\dongcham{22}
+\begin{vd}
+	Trong không gian $Oxyz$, cho 3 điểm $A\left(0;1;-2\right);B\left(3;0;0\right)$ và điểm $C$ thuộc trục $Oz$. Biết $ABC$ là tam giác cân tại $C$. Tìm toạ độ điểm $C$.
+	\loigiai{
+		Gọi $C\left(0;0;z\right)$ là điểm thuộc trục $Oz$.\\ 
+		Tam giác $ABC$ cân tại $C$ nên $CA=CB$. \\
+		Suy ra $CA^2=CB^2 \Rightarrow 1+(z+2)^2=9+z^2\Rightarrow z=1\Rightarrow C(0;0;1)$.}
+	
+\end{vd}
+\dongcham{10}
+\begin{vd}
+	Trong không gian $Oxyz$, cho ba điểm $M\left(2;3;-1\right)$, $N\left(-1;1;1\right)$, $P\left(1;m-1;2\right)$. Với những giá trị nào của $m$ thì tam giác $MNP$ vuông tại $N$?
+	\loigiai{Ta có $\vec{NM}=\left(3;2;-2\right)$ và $\vec{NP}=\left(2;m-2;1\right)$.\\
+		Vì tam giác $MNP$ vuông tại $N$ nên ta có $\vec{NM} \perp \vec{NP} \Leftrightarrow \vec{NM}.\vec{NP} =0 \Leftrightarrow 2m=0 \Leftrightarrow m=0$.\\
+		Vậy $m=0$ thỏa yêu cầu bài toán.}
+\end{vd}
+\dongcham{10}
+\begin{vd}
+	Cho hai điểm $A\left({2,-1,1}\right);B\left({3,-2,-1}\right)$. Tìm điểm $N$ trên trục  $Ox$ cách đều $A$ và $B$.
+	\loigiai{$N$ nằm trên trục $Ox$ nên $N\left(x;0;0\right).$\\
+		Khi đó, ta có $\overrightarrow {AN}  = \left({x-2;1;-1}\right)$;\quad $\overrightarrow {BN}  = \left({x-3;2;1}\right)$.\\
+		Vì $N$ cách đều $A$ và $B$ nên $AN=BN\Leftrightarrow \sqrt {{(x-2)^2}+1+1}  = \sqrt {{(x-3)^2}+4+1} \Leftrightarrow x = 4.$\\
+		Suy ra $N(4;0;0)$.}
+	
+\end{vd}
+\dongcham{10}
+\begin{vd}
+	\immini{Trong Hóa học, cấu tạo của phân tử ammoniac ($\mathrm{NH}_3$) có dạng hình chóp tam giác đều mà đỉnh là nguyên tử nitrogen ($\mathrm{N}$) và đáy là tam giác $H_1H_2H_3$ với $H_1$, $H_2$, $H_3$ là vị trí của ba nguyên tử hydrogen ($\mathrm{H}$). Góc tạo bởi liên kết $\mathrm{H}-\mathrm{N}-\mathrm{H}$, có hai cạnh là hai đoạn thẳng nối $N$ với hai trong ba điểm $H_1$, $H_2$, $H_3$ (chẳng hạn $\widehat{H_1NH_2}$), gọi là góc liên kết của phân tử $\mathrm{NH}_3$. Góc này xấp xỉ $107^{\circ}$.\\
+		Trong không gian $Oxyz$, cho một phân tử $\mathrm{NH}_3$ được biểu diễn bởi hình chóp tam giác đều $N.H_1H_2H_3$ với $O$ là tâm của đáy. Nguyên tử nitrogen được biểu diễn bởi điểm $N$ thuộc trục $Oz$, ba nguyên tử hydrogen ở các vị trí $H_1$, $H_2$, $H_3$ trong đó $H_1(0;-2;0)$ và $H_2H_3$ song song với trục $Ox$ (Hình bên).}{
+		\begin{tikzpicture}[>=stealth,line join=round,line cap=round,scale=3]
+			\draw (0,0)coordinate(H1)--(-35:0.8)coordinate(H2)--(1,0)coordinate(H3);
+			\draw[dashed,black] ($(H2)!.5!(H3)$)coordinate(M1)--($(H1)!2/3!(M1)$)coordinate(H)--(H1)--(H3) (H)--($(H)+(90:1)$)coordinate(N);
+			\draw[black,scale=2.5] (H1)node[left]{$H_1$}--(N)node[right]{$N$}--(H3)node[right]{$H_3$} (N)--(H2)node[below]{$H_2$};
+			\draw[->] (H)node[below]{$O$}--($(H)+(90:1.2)$)node[right]{$z$};
+			\draw[->] (H)--($4*(M1)-4*(H)$)node[above]{$y$};
+			\draw[->] (H)--($(H2)-(H3)+(H)$)node[below]{$x$};	
+			\foreach \diem in {N,H1,H2,H3}\fill[blue] (\diem)circle(0.7pt);
+	\end{tikzpicture}}
+	\begin{listEX}
+		\item Tính khoảng cách giữa hai nguyên tử hydrogen.
+		\item Tính khoảng cách giữa nguyên tử nitrogen với mỗi nguyên tử hydrogen.
+	\end{listEX}
+	\loigiai{
+		\begin{listEX}
+			\item Gọi $x=H_1H_2$, khi đó độ dài $OH_1=x\dfrac{\sqrt{3}}{3}\Leftrightarrow 2=x\dfrac{\sqrt{3}}{3}\Leftrightarrow x=2\sqrt{3}$.
+			\item Gọi $y$ là khoảng cách giữa nguyên tử nitrogen với mỗi nguyên tử hydrogen; khi đó $NH_2=y$.\\
+			Áp dụng định lí cosin ta có $$ H_1H_2^2=NH_1^2+NH_2^2-2\cdot NH_1\cdot NH_2\cos \widehat{H_1NH_2}\Leftrightarrow 2y^2-2y^2\cos 107^\circ=12$$ $$\Leftrightarrow y^2=\dfrac{12}{2-2\cos 107}\Leftrightarrow y=2{,}155 $$
+		\end{listEX}
+	}
+\end{vd}
+\dongcham{14}
+\begin{vd}%[2H2V2-6]
+	\immini{
+		Một chậu cây được đặt trên một giá đỡ có bốn chân với điểm đặt $S(0; 0; 20)$ và các điểm chạm mặt đất của bốn chân lần lượt là $A(20; 0; 0)$, $B(0; 20; 0)$, $C(-20; 0; 0)$, $D(0; -20; 0)$ (đơn vị cm). Cho biết trọng lực tác dụng lên chậu cây có độ lớn $40$(N) và được phân bố thành bốn lực $\overrightarrow{F_1}$, $\overrightarrow{F_2}$, $\overrightarrow{F_3}$, $\overrightarrow{F_4}$ có độ lớn bằng nhau như Hình 4.  Tìm toạ độ của các lực 
+		nói trên (mỗi centimét biểu diễn 1 N).
+	}{
+		\includegraphics[scale=0.7]{Images/luc-1}
+	}
+	\loigiai{
+		Tứ giác $ABCD$ có hai đường chéo bằng nhau và vuông góc với nhau tại trung điểm của mỗi đường nên là hình vuông.
+		\begin{center}
+			\begin{tikzpicture}[scale=0.7, font=\footnotesize,>=stealth]
+				\path
+				%	Vẽ mp
+				(0,0) coordinate (O)
+				(-2,-1) coordinate (A)
+				(5,-1) coordinate (B)
+				(2,1) coordinate (C)
+				(-5,1) coordinate (D)
+				($(O)+(0,6)$)coordinate (S)
+				($(A)!0.5!(S)$)coordinate (A')
+				($(B)!0.5!(S)$)coordinate (B')
+				($(C)!0.5!(S)$)coordinate (C')
+				($(D)!0.5!(S)$)coordinate (D')
+				($(B')!0.5!(D')$)coordinate (O')
+				;
+				\draw (A)--(D)--(S)--(A)--(B)--(S) (D')--(A')--(B');
+				\draw[dashed] (A)--(C)--(B)--(D)--(C)--(S)--(O) (C')--(B')--(D')--(C')--(A');
+				\foreach \x/\g in {A/-90,B/0,C/0,D/180,S/90,O/30,O'/-30,A'/200,B'/0,C'/20,D'/180}\draw[fill=black] (\x) circle (.05) +(\g:.5)node{\footnotesize$\x$};
+			\end{tikzpicture}
+		\end{center}
+		Ta có $\overrightarrow{SA} = (20; 0; -20)$, $\overrightarrow{SB} = (0; 20; -20)$, $\overrightarrow{SC} = (-20; 0; -20)$ , $\overrightarrow{SD} = (0; -20; -20)$.\\
+		Suy ra $SA = SB = SC = SD = 20\sqrt{2}$. Do đó $S.ABCD$ là hình chóp tứ giác đều.
+		Các véctơ $\overrightarrow{F_1}$, $\overrightarrow{F_2}$, $\overrightarrow{F_3}$, $\overrightarrow{F_4}$ có điểm đầu tại $S$ và điểm cuối lần lượt là $A'$, $B'$, $C'$, $D'$.\\
+			Ta có $SA' = SB' = SC' = SD'$ nên $S.A'B'C'D'$ cũng là hình chóp tứ giác đều.\\
+			Gọi $\overrightarrow{F} $ là trọng lực tác dụng lên chậu cây và $O'$ là tâm của hình vuông $A'B'C'D'$. Ta có
+			\[ \overrightarrow{F} =\overrightarrow{F_1} + \overrightarrow{F_2}+ \overrightarrow{F_3}+ \overrightarrow{F_4} = \overrightarrow{SA'} + \overrightarrow{SB'}+ \overrightarrow{SC'}+ \overrightarrow{SD'} = 4\overrightarrow{SO'}.\]
+			Ta có $\left| \overrightarrow{F} \right| =40$, suy ra $\left| \overrightarrow{SO'} \right| = SO' = 10$.
+			Do tam giác $SO'A'$ vuông cân nên $SA' = \sqrt{2}SO' = 10\sqrt{2}$.\\
+		Suy ra $\overrightarrow{F_1} = \overrightarrow{SA'} = \dfrac{1}{2}\overrightarrow{SA}  = (10; 0; -10)$.
+		Chứng minh tương tự ta cũng có\\
+		\[ \overrightarrow{F_2} = \dfrac{1}{2}\overrightarrow{SB}  = (0; 10; -10), \overrightarrow{F_3} = \dfrac{1}{2}\overrightarrow{SC}  = (-10; 0; -10), \overrightarrow{F_4} = \dfrac{1}{2}\overrightarrow{SD}  = (0; -10; -10). \]
+	}
+\end{vd}
+\dongcham{20}
+\boxmini{BÀI TẬP TRẮC NGHIỆM}
+\ind{PHẦN I.} \inden{Câu trắc nghiệm nhiều phương án lựa chọn. Mỗi câu hỏi học sinh chỉ chọn một phương án.}\\
+\setcounter{ex}{0}
+\Opensolutionfile{ans}[ans/2H2-B3-d2-1]
+
+\begin{ex}
+	Tích vô hướng của hai vectơ $\vec{u}=(3;0;1)$ và $\vec{v}=(2;1;0)$ là
+	\choice
+	{$0$}
+	{\True$6$}
+	{$8$}
+	{$-6$}
+	\loigiai
+	{
+		$$\vec{u}\cdot\vec{v}=6+0+0=6.$$
+	}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Tích vô hướng của hai vectơ $\vec{u} = \vec{i} + 2 \vec{j} - \vec{k}$ và $ \vec{v} = (0;1; -2)$ bằng
+	\choice
+	{$ -4 $}
+	{$ 0 $}
+	{\True $ 4 $}
+	{$ -2 $}
+	\loigiai{
+		Ta có $ \vec{u}=(1;2;-1) $.\\
+		Suy ra $ \vec{u}\cdot \vec{v}=1\cdot0+2\cdot1+(-1)\cdot(-2)=4 $.
+	}
+\end{ex} \cham{2}
+
+
+\begin{ex}
+	Cho các véc-tơ $\vec{a}=(1;2;1)$ và $\vec{b}=(2;2;1)$. Tính tích vô hướng $\vec{a} \cdot \left(\vec{a}-\vec{b}\right)$.
+	\choice
+	{\True $-1$}
+	{$-2$}
+	{$2$}
+	{$1$}
+	\loigiai{
+		Ta có: $\left(\vec{a}-\vec{b}\right)=(-1;0;0) \Rightarrow \vec{a} \cdot \left(\vec{a}-\vec{b}\right)=1 \cdot (-1)+2 \cdot 0+1 \cdot 0=-1$.}
+\end{ex} \cham{2}
+
+\begin{ex}
+	Một thiết bị thăm dò đáy biển được đẩy bởi một lực $\overrightarrow{f} = (5; 4; -2)$ (đơn vị: N) giúp thiết bị thực hiện độ dời $\overrightarrow{a} = (70; 20; -40)$ (đơn vị: m). Tính công sinh bởi lực $\overrightarrow{f}$.
+	\choice
+	{$480\,(\text{J})$}
+	{$530\,(\text{J})$}
+	{\True $510\,(\text{J})$}
+	{$500\,(\text{J})$}
+	\loigiai{
+		Công sinh bởi lực $\overrightarrow{f}$ là
+		\[ A = \left| \overrightarrow{f} \right| \cdot \left| \overrightarrow{a} \right|\cdot \cos \left(\overrightarrow{f}, \overrightarrow{a}\right) = \overrightarrow{f} \cdot \overrightarrow{a} = 5\cdot 70 + 4\cdot 20 + (-2)\cdot (-40) = 510(\text{J}).\]
+	}
+\end{ex} \cham{3}
+
+\begin{ex}
+	Góc giữa hai véc-tơ $ \vec{i} $ và $ \vec{u}=(-\sqrt{3};0,;1) $ bằng
+	\choice
+	{$ 60^\circ $}
+	{$ 120^\circ $}
+	{\True $ 150^\circ $}
+	{$ 30^\circ $}
+	\loigiai{
+		$\cos \left(\vec{i},\vec{u}\right)=\dfrac{\vec{i}\cdot \vec{u}}{\vert \vec{i} \vert \cdot \vert \vec{u} \vert}=\dfrac{1\cdot (-\sqrt3)}{1\cdot\sqrt{3+1}}=-\dfrac{\sqrt{3}}{2}$.\\
+		Vậy góc của hai véc-tơ đã cho bằng $ 150^\circ $.
+	}
+\end{ex} \cham{4}
+
+\begin{ex}
+	Cho hai véc-tơ $ \vec{u}=(-1;1;0) $ và $ \vec{v}=(0;-1;0) $. Góc hợp bởi hai véc-tơ $ \vec{u} $ và $ \vec{v} $ bằng
+	\choice
+	{$ 60^\circ $}
+	{$ 45^\circ $}
+	{\True $ 135^\circ $}
+	{$ 120^\circ $}
+	\loigiai{
+		$\cos \left(\vec{u},\vec{v}\right)=\dfrac{\vec{u}\cdot \vec{v}}{\vert \vec{u} \vert \cdot \vert \vec{v} \vert}=\dfrac{(-1)\cdot 0+1\cdot (-1)+0 \cdot 0}{\sqrt{(-1)^2+1^2+0^2}\sqrt{0^2+(-1)^2+0^2}}=-\dfrac{1}{\sqrt{2}}$.\\
+		Vậy góc của hai véc-tơ đã cho bằng $ 135^\circ $.}
+\end{ex} \cham{4}
+
+\begin{ex}
+	Cho hai véc-tơ $ \vec{a}(-2;-3;1) $ và $ \vec{b}(1;0;1) $. Tính $ \cos(\vec{a},\vec{b}) $.
+	\choice
+	{\True $ \cos(\vec{a},\vec{b})=-\dfrac{1}{2\sqrt{7}} $}
+	{$ \cos(\vec{a},\vec{b})=-\dfrac{3}{2\sqrt{7}} $}
+	{$ \cos(\vec{a},\vec{b})=\dfrac{1}{2\sqrt{7}} $}
+	{$ \cos(\vec{a},\vec{b})=\dfrac{3}{2\sqrt{7}} $}
+	\loigiai{
+		Ta có $ \cos(\vec{a},\vec{b})=\dfrac{(-2)\cdot 1+(-3)\cdot 0+1\cdot 1}{\sqrt{14}\cdot \sqrt{2}}=-\dfrac{1}{2\sqrt{7}} $.
+	}
+\end{ex}
+
+\begin{ex}
+	Cho $\vec{a}=(3;2;1)$, $\vec{b}=(-2;2;-4)$. Giá trị của $\left| \vec{a}-\vec{b} \right|$ bằng
+	\choice
+	{\True$5\sqrt{2}$}
+	{$50$}
+	{$2\sqrt{5}$}
+	{$3$}
+	\loigiai
+	{
+		Gọi $\vec{c}=\vec{a}-\vec{b}=(5;0-5)\Rightarrow \left| \vec{c} \right|=\sqrt{5^2+(-5)^2}=5\sqrt{2}$.}
+\end{ex} \cham{4}
+
+\begin{ex}
+	Cho hai véc-tơ $\vec{u}=(-1;0;2)$ và $\vec{v}=(x;-2;1)$. Biết rằng $\vec{u}\cdot \vec{v}=4$. Khi đó $|\vec{v}|$ bằng
+	\choice
+	{$\sqrt{21}$}
+	{$2$}
+	{\True $3$}
+	{$5$}
+	\loigiai{
+		Ta có $\vec{u}\cdot \vec{v}=-x+2=4\Leftrightarrow x=-2$.\\
+		Vậy $|\vec{v}|=3$.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}
+	Tìm $x$ để hai véc-tơ $\vec{a}=(x;x-2;2)$ và $\vec{b}=(x;1;-2)$ vuông góc với nhau.
+	\choice
+	{$x=3$}
+	{$x=1$}
+	{\True $\hoac{&x=2\\ &x=-3}$}
+	{$\hoac{&x=-2\\&x=3}$}
+	\loigiai{
+		Hai véc-tơ đã cho vuông góc khi $0=\vec{a}\cdot \vec{b}=x^2+x-2-4$ hay $x=2\ \text{hoặc}\ x=-3$.
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho hai véc-tơ $\vec{u}=(1;-2;1)$ và $\vec{v}=(2;1;-1)$. Véc-tơ nào dưới đây vuông góc với cả hai véc-tơ $\vec{u}$ và $\vec{v}$?
+	\choice
+	{\True $\vec{w_2}=(1;3;5)$}
+	{$\vec{w_3}=(1;-4;7)$}
+	{$\vec{w_4}=(1;4;7)$}
+	{$\vec{w_1}=(1;-3;5)$}
+	\loigiai{
+		Ta có $\vec{u}\cdot\vec{w_2}=0$, $\vec{v}\cdot\vec{w_2}=0$. Do đó $\vec{w_2}$ thỏa mãn đề bài.
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Tích có hướng của hai véc-tơ $\vec{a}=(-1;2;0)$ và $\vec{b}=(0;4;-3)$ có tọa độ là
+	\choice
+	{$(-6;3;-4)$}
+	{$(6;-3;4)$}
+	{$(6;3;4)$}
+	{\True $(-6;-3;-4)$}
+	\loigiai{
+		Ta có
+		$\left[\vec{a},\vec{b}\right]=\left(\left|\begin{array}{lr}
+			2 & 0 \\ 4 & -3
+		\end{array}\right|;\left|\begin{array}{lr}
+			0 & -1 \\ -3 & 0
+		\end{array}\right|; \left|\begin{array}{lr}
+			-1 & 2 \\ 0 & 4
+		\end{array}\right|\right)=(-6;-3;-4)$.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}
+	Cho $ A(2;1;4), B(-2;2;-6), C(6;0;-1) $. Tính tích vô hướng $ \vec{AB}\cdot \vec{AC} $.
+	\choice
+	{$\vec{AB}\cdot \vec{AC}=67$}
+	{$\vec{AB}\cdot \vec{AC}=-67$}
+	{\True$\vec{AB}\cdot \vec{AC}=33$}
+	{$\vec{AB}\cdot \vec{AC}=65$}
+	\loigiai{
+		Ta có: $ \heva{& \vec{AB}=(-4;1;-10) \\ & \vec{AC}=(4;-1;-5).} $\\
+		$ \vec{AB}\cdot \vec{AC}=(-4)\cdot6+1\cdot (-1)+(-10)\cdot (-5)=33 $.
+	}
+\end{ex} \cham{6}
+
+\begin{ex}
+	Cho $ A(1;-2; 3)$, $ B(2;-4; 1)$, $ C(2; 0; 2)$, khi đó tích vô hướng $\vec{AB}\cdot\vec{AC}$ bằng
+	\choice
+	{$4$}
+	{\True $-1$}
+	{$7$}
+	{$-5$}
+	\loigiai
+	{
+		Ta có $\vec{AB}=(1;-2;-2)$ và $\vec{AC}=(1; 2;-1)$.\\
+		Vì vậy $\vec{AB}\cdot\vec{AC}=1\cdot 1+(-2)\cdot 2+(-2)\cdot (-1)=-1 $.
+	}
+\end{ex} \cham{5}
+
+\begin{ex}%
+	Cho tam giác $ABC$ với $A(8; 9; 2)$, $B(3; 5; 1)$, $C(11; 10; 4)$. Số đo góc $A$ của tam giác $ABC$ là
+	\choice
+	{$60^\circ$}
+	{\True $150^\circ$}
+	{$30^\circ$}
+	{$120^\circ$}
+	\loigiai{
+		Ta có $\widehat{BAC} = \left( \vec{AB}; \vec{AC} \right)$, $\vec{AB} = (-5; -4; -1)$, $\vec{AC} = (3;1;2)$. Ta có
+		$$\cos \left( \vec{AB}; \vec{AC} \right) = \dfrac{\vec{AB} \cdot \vec{AC}}{\left| \vec{AB} \right| \cdot \left| \vec{AC} \right|} = \dfrac{-21}{\sqrt{42} \cdot \sqrt{14}} = - \dfrac{\sqrt{3}}{2} \Rightarrow \widehat{BAC} = \left( \vec{AB}; \vec{AC} \right) = 150^\circ.$$
+	}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho điểm $A(3;-1;5)$, $B(m;2;7)$. Tìm tất cả các giá trị của $m$ để độ dài đoạn $AB=7$.
+	\choice
+	{$m=3$ hoặc $m=-3$}
+	{\True $m=9$ hoặc $m=-3$}
+	{$m=-3$ hoặc $m=-9$}
+	{$m=9$ hoặc $m=3$}
+	\loigiai{
+		$$AB=7\Leftrightarrow \sqrt{\left(m-3\right)^2+3^2+2^2}=7\Leftrightarrow (m-3)^2=36\Leftrightarrow \hoac{&m-3=6\\&m-3=-6}\Leftrightarrow \hoac{&m=9\\&m=-3.}$$
+	}
+\end{ex} \cham{5}
+
+
+
+\begin{ex}
+	Cho ba điểm $A(3;2;8)$, $B(0;1;3)$ và $C(2;m;4)$. Tìm $m$ để tam giác $ABC$ vuông tại $B$.
+	\choice
+	{$m=4$}
+	{\True $m=-10$}
+	{$m=25$}
+	{$m=-1$}
+	\loigiai{
+		Tam giác $ABC$ vuông tại $B$ tương đương với $\vec{BA}\cdot\vec{BC}=\vec{0}$.\\
+		Ta có $\vec{BA}=(3;1;5)$, $\vec{BC}=(2;m-1;1)$.\\
+		Nên $\vec{BA}\cdot\vec{BC}=0\Leftrightarrow 3\cdot 2+(m-1)+5\cdot 1=0\Leftrightarrow m=-10$.}
+\end{ex} \cham{5}
+
+\begin{ex}
+	Cho ba điểm $M(2;3;-1)$, $N(-1;1;1)$ và $P(1;m-1;2)$. Tìm $m$ để tam giác $MNP$ vuông tại $N$.
+	\choice
+	{\True $ m=0 $  }
+	{ $ m=-4 $}
+	{$ m=2 $ }
+	{ $ m=-6 $}
+	\loigiai{
+		$\vec{MN}(-3;-2;2)$; $\vec{NP}(2;m-2;1)$.\\
+		Tam giác $MNP$ vuông tại $N \Leftrightarrow \vec{MN} \cdot \vec{NP}=0 \Leftrightarrow -6-2(m-2)+2=0 \Leftrightarrow m-2=-2 \Leftrightarrow m=0$.}
+\end{ex} \cham{6}
+
+\begin{ex}%[2H2V2-4]%[2H2H2-4]
+	Cho tam giác $ABC$ có $A(7; 3; 3)$, $B(1; 2; 4)$, $C(2; 3; 5)$. Tìm toạ độ điểm $H$ là chân đường cao kẻ từ $A$ của tam giác $ABC$.
+	\choice
+	{\True $H(3; 4; 6)$}
+	{$H(-3; 4; 7)$}
+	{$H(2; 4; 1)$}
+	{$H(2; -4; 3)$}
+	\loigiai{
+		Ta có $\overrightarrow{BC} = (1; 1; 1)$.\\
+		Gọi $H(x; y; z)$ là chân đường cao của tam giác $ABC$ kẻ từ $A$.\\
+		Suy ra $\overrightarrow{BH} = (x-1; y-2; z-4)$.\\
+		$\overrightarrow{BH}$ cùng phương với $\overrightarrow{BC}$, do đó $x-1 = t$; $y-2 = t$; $z-4=t$. Suy ra $H(1+t; 2+t; 4+t)$.\\
+		Ta có $\overrightarrow{AH} = (x_H-x_A; y_H-y_A; z_H-z_A) = (t-6; t-1; t+1)$.\\
+		$\overrightarrow{AH} \perp \overrightarrow{BC} \Leftrightarrow \overrightarrow{AH}\cdot \overrightarrow{BC} = 0 \Leftrightarrow t-6 + t-1 + t+ 1 =0\Leftrightarrow 3t =6 \Leftrightarrow t =2$.\\
+		Suy ra $H(3; 4; 6)$. 
+	}
+\end{ex} \cham{10}
+
+\begin{ex}
+	Cho hai điểm $A(1;1;0)$, $B(2;-1;2)$. Gọi $M(0;0;z)$ là điểm thuộc trục $Oz$ sao cho $MA^2+MB^2$ nhỏ nhất. Khẳng định nào sau đây là đúng?
+	\choice
+	{\True $z \in (0;1]$}
+	{$z \in (1;2]$}
+	{$z \in (-1;0]$}
+	{$z \in (-2;-1]$}
+	\loigiai{Gọi $M(0;0; z)$.Khi đó $MA^2+MB^2=2z^2-4z+11=2(z-1)^2+9 \geq 9$.\\
+		Dấu $"="$ xảy ra khi và chỉ khi $z=1$. Do đó, $ M(0;0;1)$.}
+	
+\end{ex} \cham{13}
+
+\Closesolutionfile{ans}
+
+\ind{PHẦN II.} \inden{Câu trắc nghiệm đúng sai. Trong mỗi ý a), b), c), d) ở mỗi câu, học sinh chọn đúng hoặc sai.}\\
+\Opensolutionfile{ans}[ans/2H2-B3-d2-2]
+
+\begin{ex}
+	Cho ba vec-tơ $ \overrightarrow a=(-1;1;0)$, $ \overrightarrow b=(1;1;0)$ và $ \overrightarrow c=(1;1;1)$.
+	\choiceTF
+	{$\left| {\overrightarrow a } \right| = 2$}
+	{\True $\left| {\overrightarrow c } \right| = \sqrt 3 $}
+	{$\cos\left(\vec{a},\vec{c} \right)=\dfrac{2}{\sqrt{5}}$}
+	{ $\overrightarrow b \perp \overrightarrow c$}
+	\loigiai{
+		\begin{enumerate}[a)]
+			\item $\left| \overrightarrow {a} \right| = \sqrt{(-1)^2+1^2}=\sqrt{2}$.
+			\item $\left|\overrightarrow {c} \right| = \sqrt{1^2+1^2+1^2}=\sqrt{3}$
+			\item $\cos\left(\vec{a},\vec{c} \right)=\dfrac{\vec{a}\cdot \vec{c}}{|\vec{a}|.|\vec{c}|}=0$
+			\item $\vec{b} \cdot \vec{c}=2$, suy ra $\vec{b}$ không vuông $\vec{c}$.
+		\end{enumerate}
+	}
+\end{ex} \cham{5}
+
+\begin{ex}%[2H2H2-2]%[Đề thi khảo sát chất lượng HKI - SGD Nam Định]%[Nguyễn Ngọc Huy Trường]
+	Trong không gian với hệ trục toạ độ $Oxyz$, cho hình bình hành $ABCD$ có $A(-1;3;0)$, $B(1;2;-1)$, $C(1;1;-2)$.
+	\choiceTF
+	{\True $\vv{AB} = (2;-1;-1)$}
+	{\True $\cos\left(\vv{AB},\vv{AC}\right) = \dfrac{2\sqrt{2}}{3}$}
+	{Diện tích của tam giác $ABC$ bằng $2\sqrt{2}$}
+	{\True Toạ độ của điểm $D$ là $(-1;2;-1)$}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng}. Ta có $\vv{AB} = (2;-1;-1)$.
+			\itemch \textbf{Đúng}. Ta có $\vv{AC} =  (2;-2;-2)$. \\
+			Suy ra $$\cos\left(\vv{AB},\vv{AC}\right) = \dfrac{\vv{AB}\cdot \vv{AC}}{AB\cdot AC} = \dfrac{2\cdot 2 + (-1)\cdot (-2) + (-1)\cdot (-2)}{\sqrt{2^2 + (-1)^2 + (-1)^2} \cdot \sqrt{2^2 + (-2)^2 + (-2)^2}} = \dfrac{2\sqrt{2}}{3}.$$
+			\itemch \textbf{Sai}. Ta có $\sin \widehat{BAC} = \sqrt{1-\cos^2 \widehat{BAC}} = \sqrt{1-\left(\dfrac{2\sqrt{2}}{3}\right)^2} = \dfrac{1}{3}$. \\
+			Suy ra $S_{ABC} = \dfrac{1}{2}\cdot AB\cdot AC \cdot \sin\widehat{BAC} = \dfrac{1}{2}\cdot \sqrt{6}\cdot 2\sqrt{3}\cdot \dfrac{1}{3} = \sqrt{2}$.
+			\itemch \textbf{Đúng}. Ta có 
+			$$\vv{CD} = \vv{BA}\Leftrightarrow \heva{&x_D-1 = -2 \\ &y_D - 1 = 1 \\&z_D + 2 = 1}\Leftrightarrow \heva{&x_D = -1\\&y_D = 2\\&z_D = -1.}$$
+			Vậy toạ độ điểm $D$ là $(-1;2;-1)$.
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{9}
+\begin{ex}%[2H2H2-4]
+	Trong không gian $Oxyz$, cho ba điểm $A(1;3;-2)$, $B(3;4;-5)$, $C(2;0;0)$:
+	\choiceTF
+	{\True Góc $\widehat{BAC} = 120^\circ$}
+	{\True Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} = (1;-3;2)$}
+	{\True Tọa độ trọng tâm $G$ của tam giác $ABC$ là $G\left(2; \dfrac{7}{3}; -\dfrac{7}{3}\right)$}
+	{Tam giác $ABC$ là tam giác đều}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng}.\\
+			Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} =(1;-3;2)$.\\
+			Khi đó 
+			\[
+			\cos\widehat{BAC} = \dfrac{\overrightarrow{AB} \cdot \overrightarrow{AC}}{\left|\overrightarrow{AB}\right| \cdot \left|\overrightarrow{AC}\right|}=\dfrac{2 \cdot 1 + 1 \cdot (-3) + (-3) \cdot 2}{\sqrt{2^2 + 1^2 + (-3)^2}\cdot \sqrt{1^2 + (-3)^2 + 2^2} }=-\dfrac{1}{2}.
+			\]
+			Suy ra $\widehat{BAC} = 120^\circ$.
+			\itemch \textbf{Đúng}.\\
+			Ta có $\overrightarrow{AB} = (2;1;-3)$, $\overrightarrow{AC} =(1;-3;2)$.
+			\itemch  \textbf{Đúng}.\\
+			Ta có $G$ là trọng tâm của tam giác $ABC$, do đó
+			\[
+			\heva{
+				&x_G=\dfrac{x_A + x_B + x_C}{3}=dfrac{1 + 3 + 2}{3}=2\\
+				&y_G=\dfrac{y_A + y_B + y_C}{3}=\dfrac{3 + 4 + 0}{3}=\dfrac{7}{3}\\
+				&z_G= \dfrac{z_A + z_B + z_C}{3}=\dfrac{-2 - 5 + 0}{3}=-\dfrac{7}{3}
+			}\]
+			Vậy $G$ có tọa độ là $G\left(2; \dfrac{7}{3}; -\dfrac{7}{3}\right)$.
+			\itemch \textbf{Sai}.\\
+			Ta có \allowdisplaybreaks
+			\begin{eqnarray*}
+				AB&=&\left|\overrightarrow{AB}\right| = \sqrt{2^2 + 1^2 + (-3)^2} = \sqrt{4 + 1 + 9} = \sqrt{14};\\ 
+				AC&=&\left|\overrightarrow{AC}\right| = \sqrt{1^2 + (-3)^2 + 2^2} = \sqrt{1 + 9 + 4} = \sqrt{14}\\
+				BC &=& \left|\overrightarrow{AB}\right|=\sqrt{(3 - 2)^2 + (4 - 0)^2 + (-5 - 0)^2} = \sqrt{1 + 16 + 25} = \sqrt{42}.			
+			\end{eqnarray*}
+			Ta thấy $AB = AC = \sqrt{14}$ nhưng $BC = \sqrt{42}$, suy ra tam giác $ABC$ không phải là tam giác đều.
+		\end{itemchoice}
+		
+	}
+\end{ex}
+\cham{9}
+\begin{ex}%[2H2V2-6]%[Dự án đề kiểm tra Toán 12 GKI Dot 03 NH24-25-Lê Hữu Kiệt]%[THCS-THPT Bùi Thị Xuân - TP Hồ Chí Minh]
+	\immini{Hình minh họa sơ đồ một ngôi nhà trong hệ trục tọa độ $Oxyz$, trong đó $OABC.DEFG$ là hình hộp chữ nhật, $EFN.DGM$ là hình lăng trụ đứng và các điểm có tọa độ như hình vẽ.
+	\choiceTF
+	{\True Điểm $F$ có tọa độ là $(7;6;4)$}
+	{\True Độ dài $FN=\sqrt{10}$}
+	{Tích vô hướng $\overrightarrow{FN}\cdot\overrightarrow{FE}=-18$}
+	{Góc dốc của mái nhà, tức là số đo của góc nhị diện có cạnh là đường thẳng $FG$, hai mặt lần
+	lượt là $(FGMN)$ và $(FGDE)$ bằng $20{,}4^\circ$ (làm tròn kết quả đến hàng phần mười của độ)}
+}{
+\tdplotsetmaincoords{75}{115} % Đặt góc nhìn
+\begin{tikzpicture}[font=\footnotesize, line join=round, line cap=round, >=stealth, tdplot_main_coords, scale=0.8]
+	\path (0,0,0) coordinate (O) (7,0,0) coordinate (A) (7,6,0) coordinate (B) (0,6,0) coordinate (C) (0,0,4) coordinate (D)
+	(7,0,4) coordinate (E) (7,6,4) coordinate (F) (0,6,4) coordinate (G)
+	(7,3,5) coordinate (N) (0,3,5) coordinate (M);
+	\draw[->] (A)--++(2,0,0)node[left]{$x$};
+	\draw[->] (C)--++(0,2,0)node[above]{$y$};
+	\draw[->] (D)--++(0,0,2)node[left]{$z$};
+	\draw[dashed] (O)--(A) (O)--(C) (O)--(D)--(G);
+	\draw (A)--(B)--(C) (E)--(F)--(G) (E)--(D)--(M)--(N)--cycle (M)--(G) (N)--(F) (A)--(E) (B)--(F) (C)--(G);
+	\foreach \x/\g in {A/below, C/below, E/left, F/below right, G/right}{
+		\fill (\x) circle (1pt) node[\g=1mm]{$\x$};
+	}
+	\foreach \d/\l/\x/\y/\z in {O/left/0/0/0, B/right/7/6/0, D/left/0/0/4, M/above/0/3/5, N/right/7/3/5}{
+		\fill (\d) circle (1pt) node[\l=1mm]{$\d(\x;\y;\z)$};
+	}
+\end{tikzpicture}}
+	\loigiai{
+		\begin{itemchoice}
+			\itemch \textbf{Đúng}.\\
+			Hình chiếu của $F$ trên $(Oxy)$ là $B(7;6;0)$ và hình chiếu của $F$ trên $Oz$ là $D(0;0;4)$ nên tọa độ của $F$ là $(7;6;4)$.
+			\itemch \textbf{Đúng}.\\
+			Ta có $FN=\sqrt{(7-7)^2+(3-6)^2+(5-4)^2}=\sqrt{10}$.
+			\itemch \textbf{Sai}.\\
+			Ta có $E(7;0;4)$, $\overrightarrow{FN}=(0;-3;1)$, $\overrightarrow{FE}=(0;-6;0)$.\\
+			Khi đó $\overrightarrow{FN}\cdot\overrightarrow{FE}=0\cdot 0 + (-3)\cdot(-6) + 1 \cdot 0 = 18$.
+			\itemch \textbf{Sai}.\\
+			Ta có $\left((FGMN),(FGDE)\right)=\widehat{NFE}=\left(\overrightarrow{FN},\overrightarrow{FE}\right)$.\\
+			Ta có $FE=6$, khi đó\\
+			$$ \cos\left(\overrightarrow{FN},\overrightarrow{FE}\right)=\dfrac{\overrightarrow{FN}\cdot\overrightarrow{FE}}{FN\cdot FE} =\dfrac{18}{\sqrt{10}\cdot6}=\dfrac{3}{\sqrt{10}}.$$
+			Suy ra $\left(\overrightarrow{FN},\overrightarrow{FE}\right)\approx 18{,}4^\circ$.
+		\end{itemchoice}
+	}
+\end{ex}
+\cham{7}
+\begin{ex}
+	\immini{Hình minh họa sơ đồ một ngôi nhà trong hệ trục tọa độ $Oxyz$, trong đó nền nhà, bốn bức tường và hai mái nhà đều là hình chữ nhật.
+		\choiceTF
+		{Tọa độ của các điểm $A(5;0;0)$}
+		{\True Tọa độ của các điểm $H(0;5;3)$}
+		{\True Góc nhị diện có cạnh là đường thẳng $FG$, hai mặt lần lượt là $(FGQP)$ và $(FGHE)$ gọi là góc dốc của mái nhà. Số đo của góc dốc của mái nhà bằng $26{,}6^\circ$ (làm tròn kết quả đến hàng phần mười của độ)}
+		{\True Chiều cao của ngôi nhà là 4}
+	}{
+		\begin{tikzpicture}[scale=1, font=\footnotesize, line join=round, line cap=round, >=stealth]
+			\path 
+			(0,0) coordinate (O) node[below]{$O(0;0;0)$}
+			(4,0) coordinate (A) node[below]{$A$}
+			(0,3) coordinate (E) node[left]{$E(0;0;3)$}
+			($(A)+(E)-(O)$) coordinate (F)node[right]{$F$}
+			(A)+(1,2) coordinate (B) node[right]{$B(4;5;0)$}
+			($(O)+(B)-(A)$) coordinate (C) node[left]{$C$}
+			($(C)+(E)-(O)$) coordinate (H) node[above left]{$H$}
+			($(H)+(B)-(C)$) coordinate (G) node [right]{$G(4;5;3)$}
+			($(O)!.6!(A)$) coordinate (x)
+			(x)+(0,4.5) coordinate (P) node[right]{$P(2;0;4)$}
+			($(P)+(H)-(E)$) coordinate (Q) node[above]{$Q(2;5;4)$}
+			;
+			\draw[->] (O)--(E)--($(E)+(90:1)$)node[above]{$z$};
+			\draw[->] (O)--(A)--($(A)+(0:1)$) node[below]{$x$};
+			\draw[dashed,->] (O)--(C)--($(O)!1.3!(C)$) node[above]{$y$};
+			\draw (A)--(B)--(G)--(Q)--(H)--(E)--(F)--cycle (E)--(P)--(F) (P)--(Q) (F)--(G);
+			\draw[dashed] (C)--(B) (C)--(H)--(G);
+		\end{tikzpicture}
+	}
+	\loigiai{
+		\begin{enumerate}
+			\item Vì nền nhà là hình chữ nhật nên tứ giác $OABC$ là hình chữ nhật, suy ra $x_A=x_B=4$, $y_C=y_B=5$. Do $A$ nằm trên trục $Ox$ nên tọa độ điểm $A$ là $(4;0;0)$. 
+			\item Tường nhà là hình chữ nhật, suy ra $y_H=y_C=5$, $z_H=z_E=3$. Do $H$ nằm trên mặt phẳng $(Oyz)$ nên tọa độ điểm $H$ là $(0;5;3)$.\\
+			\item Để tính góc dốc của mái nhà, ta đi tính số đo góc nhị diện có cạnh là đường thẳng $FG$, hai mặt phẳng lần lượt là $(FGQP)$ và $(FGHE)$. Do mặt phẳng $(Ozx)$ vuông góc với hai mặt phẳng $(FGQP)$ và $(FGHE)$ nên góc $PFE$ là góc phẳng nhị diện ứng với góc nhị diện đó. \\
+			Ta có $\vec{FP}=(-2;0;1)$, $\vec{FE}=(-4;0;0)$.\\
+			Suy ra 
+			\begin{eqnarray*}
+				\cos \widehat{PFE}&=&\cos \left(\vec{FP},\vec{FE}\right)=\dfrac{\vec{FP}\cdot \vec{FE}}{\left|\vec{FP}\right|\cdot \left|\vec{FE}\right|}\\
+				&=&\dfrac{(-2)\cdot (-4)+0\cdot 0+1\cdot 0}{\sqrt{(-2)^2+0^2+1^2}\cdot \sqrt{(-4)^2+0^2+0^2}}=\dfrac{2\sqrt{5}}{5}.
+			\end{eqnarray*}
+			Do đó, $\widehat{PFE}\approx 26{,}^\circ$. Vậy góc dốc của mái nhà khoảng $26{,}6^\circ$.
+			\item Chiều cao bằng cao độ của điểm $P$. Suy ra $h=4$.
+		\end{enumerate}
+	}
+\end{ex} \cham{7}
+
+\Closesolutionfile{ans}
