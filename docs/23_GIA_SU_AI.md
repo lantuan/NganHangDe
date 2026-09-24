@@ -348,6 +348,46 @@ Việc còn thiếu để làm Mức B: **một tệp `.tex` mẫu của tài li
 trúc hiện tại (đánh mục bằng `\section`? `\subsection`? có nhãn `\label` chưa?). Có tệp
 mẫu rồi mới chốt được cách đánh dấu sao cho cô ít phải sửa tay nhất.
 
+## 8c. Nút "Kiểm tra kết nối n8n" (24/09/2026)
+
+### Vì sao phải có
+
+Cô Lan mất **nhiều ngày** vì một lỗi **không nhìn thấy được**: node `CHV_GiaSu`
+không nạp `lenh_he_thong`, nên mô hình không có đề bài và **tự bịa ra ngữ cảnh** —
+lần thì tâm lí học hành vi, lần thì phân đoạn thị trường, lần thì phân phối ngân
+sách cho các tỉnh. Nhìn từ ngoài chỉ thấy "AI trả lời lung tung", không biết hỏng
+ở đâu; muốn biết thì phải mở tab **Executions** của n8n và đọc JSON.
+
+`/gv/gia-su` → nút **🔌 Kiểm tra kết nối n8n** trả lời đúng câu hỏi đó trong một
+lần bấm, bằng tiếng Việt.
+
+### Cách làm — một phép thử, không đoán
+
+Gửi sang n8n một câu lệnh chứa **mã ngẫu nhiên 6 kí tự**, bảo mô hình đọc lại
+đúng mã đó. Mã quay về = `lenh_he_thong` **có** tới mô hình. Không quay về =
+**không** tới. Không cần đọc Executions, không cần hiểu n8n.
+
+Mã phải **ngẫu nhiên mỗi lần** — mã cố định thì mô hình có thể nhớ từ lượt trước
+và trả lời đúng dù lệnh không tới (`test_moi_lan_kiem_tra_dung_ma_khac_nhau`).
+
+### Bốn kết luận
+
+| Kết luận | Nghĩa | Sửa ở đâu |
+|---|---|---|
+| `ok` | câu lệnh tới nơi, gia sư chạy đúng | — |
+| `khong_nap_lenh` | webhook chạy nhưng mô hình không nhận được lệnh | n8n: ô **System Message** phải ở chế độ **Expression** và bằng `{{ $json.body.lenh_he_thong }}` |
+| `khong_goi_duoc` | không gọi được webhook | URL trong `.env`, hoặc workflow chưa Save/Active |
+| `chua_cau_hinh` | chưa đặt `N8N_WEBHOOK_GIA_SU` | `.env` trên VPS |
+
+Phép thử **không trừ lượt của học sinh nào** và **không ghi vào nhật kí hỏi đáp**
+(`test_kiem_tra_khong_tru_luot_cua_ai`).
+
+### `\itemch` → xuống dòng
+
+Câu Đúng/Sai dùng `\itemch` đánh dấu từng ý a) b) c) d). Xoá hẳn thì bốn ý dính
+liền thành một đoạn dài khó đọc, nên đổi thành **xuống dòng** — vừa sạch chữ thô,
+vừa dễ đọc.
+
 ## 9. Những chỗ dễ sai về sau
 
 | Chỗ | Vì sao dễ sai |

@@ -11,6 +11,7 @@ Truoc day tep nay rong: giao vien khong co trang lam viec rieng, chi co
   GET  /gv/lop          - danh sach lop, ma lop Classroom, giao vien phu trach
   GET  /gv/gia-su       - nhat ki hoi dap Gia su AI + nang luot cho hoc sinh
   POST /gv/gia-su/luot  - dat lai han muc luot hoi trong ngay cho 1 em
+  POST /gv/gia-su/kiem-tra - tu kiem tra ket noi n8n (xem gia_su_service)
 
 MOI route deu goi yeu_cau_giao_vien() truoc tien - chan o TANG SERVER,
 khong chi an nut tren giao dien. Xem docs/21_TAI_KHOAN_GIAO_VIEN.md.
@@ -319,3 +320,14 @@ def dat_luot_gia_su(request: Request, hoc_sinh: str = Form(...), gioi_han: int =
 
     gia_su_service.dat_gioi_han(hoc_sinh, max(0, int(gioi_han)))
     return RedirectResponse(f"/gv/gia-su?hoc_sinh={quote(hoc_sinh)}", status_code=303)
+
+
+@router.post("/gv/gia-su/kiem-tra")
+def kiem_tra_gia_su(request: Request):
+    """Gui mot phep thu sang n8n va bao ket qua bang tieng Viet de doc.
+    `def` chu khong `async def`: ben trong goi httpx dong bo (docs v2.58)."""
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+    return {"success": True, "message": "", "data": gia_su_service.tu_kiem_tra()}

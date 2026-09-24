@@ -221,8 +221,14 @@ MOI_TRUONG_MATHJAX = {
 
 # Lenh cua ex_test chi co nghia khi bien dich PDF - bo han tren web.
 _LENH_BO_HAN = re.compile(
-    r"\\(?:loigiai|choiceTFt|choiceTF|choice|shortans|True|immini|hetde|tieude|chantrang)\b"
+    r"\\(?:loigiai|choiceTFt|choiceTF|choice|shortans|True|immini"
+    r"|hetde|tieude|chantrang|dapan)\b"
 )
+
+# \itemch danh dau TUNG Y a) b) c) d) cua cau Dung/Sai. Xoa han thi 4 y
+# dinh lien nhau thanh mot doan dai kho doc (co Lan 24/09/2026: "nhin rat
+# kho chiu") - nen doi thanh XUONG DONG: vua sach, vua de doc.
+_LENH_XUONG_DONG = re.compile(r"\\(?:itemch|itemTF)\b")
 _MOI_TRUONG = re.compile(r"\\(begin|end)\{([a-zA-Z*]+)\}")
 
 
@@ -232,6 +238,7 @@ def _lam_sach_latex(van_ban: str) -> str:
     if not van_ban:
         return ""
     s = str(van_ban)
+    s = _LENH_XUONG_DONG.sub("\n", s)
     s = _LENH_BO_HAN.sub("", s)
     s = _MOI_TRUONG.sub(
         lambda m: m.group(0) if m.group(2) in MOI_TRUONG_MATHJAX else "", s
@@ -672,4 +679,80 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
         "loi_giai_python": ngu_canh["loi_giai"],
         "luot": lay_luot(user_id),
         "trang_thai": trang_thai,
+    }
+
+
+# ======================================================
+# 7. TU KIEM TRA KET NOI n8n (them 24/09/2026)
+# ======================================================
+# Vi sao can: co Lan mat nhieu ngay vi mot loi KHONG NHIN THAY DUOC -
+# node CHV_GiaSu khong nap lenh_he_thong, nen mo hinh khong co de bai va
+# TU BIA ra ngu canh (tam li hoc, marketing, phan phoi ngan sach...).
+# Nhin tu ngoai thi "AI tra loi lung tung", khong biet hong o dau.
+#
+# Ham nay tra lai cau hoi do bang MOT phep thu: gui mot cau lenh chua
+# MA NGAU NHIEN va bao mo hinh doc lai ma do. Ma quay ve = lenh_he_thong
+# CO toi mo hinh. Khong quay ve = KHONG toi. Khong can doc Executions,
+# khong can hieu n8n.
+
+MA_KIEM_TRA_DAI = 6
+
+LENH_KIEM_TRA = """Đây là một phép thử kết nối, không phải câu hỏi của học sinh.
+Hãy trả lời DUY NHẤT bằng mã sau, không thêm bất kì chữ nào khác:
+
+{ma}
+"""
+
+
+def tu_kiem_tra() -> dict:
+    """
+    Tra ve {ket_luan, chi_tiet, ma_gui, tra_loi} - ket_luan la mot trong:
+      chua_cau_hinh | khong_goi_duoc | khong_nap_lenh | ok
+    Khong tru luot cua ai, khong ghi nhat ki hoc sinh.
+    """
+    if not N8N_WEBHOOK_GIA_SU:
+        return {
+            "ket_luan": "chua_cau_hinh",
+            "chi_tiet": ("Chưa đặt N8N_WEBHOOK_GIA_SU trong tệp .env trên máy chủ. "
+                         "Gia sư đang chạy ở chế độ không AI (chỉ hiện lời giải chuẩn)."),
+            "ma_gui": None, "tra_loi": None,
+        }
+
+    ma = uuid.uuid4().hex[:MA_KIEM_TRA_DAI].upper()
+    payload = {
+        "muc": "kiem_tra",
+        "lenh_he_thong": LENH_KIEM_TRA.format(ma=ma),
+        "cau_hoi": "Đọc lại mã trong phần hướng dẫn hệ thống.",
+        "lich_su": [],
+        "question_id": None,
+        "dap_an_python": None,
+    }
+
+    try:
+        tra_loi = _goi_mo_hinh(payload)
+    except httpx.HTTPError as e:
+        return {
+            "ket_luan": "khong_goi_duoc",
+            "chi_tiet": (f"Không gọi được webhook n8n: {e}. Kiểm tra URL trong .env, "
+                         "và workflow đã bấm Save/Active chưa."),
+            "ma_gui": ma, "tra_loi": None,
+        }
+
+    if ma in (tra_loi or ""):
+        return {
+            "ket_luan": "ok",
+            "chi_tiet": ("Tốt. Câu lệnh hệ thống ĐÃ tới mô hình — mã kiểm tra quay về "
+                         "nguyên vẹn. Gia sư AI hoạt động đúng."),
+            "ma_gui": ma, "tra_loi": tra_loi,
+        }
+
+    return {
+        "ket_luan": "khong_nap_lenh",
+        "chi_tiet": (
+            "Webhook gọi được, nhưng câu lệnh hệ thống KHÔNG tới mô hình: mã kiểm tra "
+            "không quay về. Vào n8n, node CHV_GiaSu, ô System Message phải ở chế độ "
+            "Expression và bằng đúng: {{ $json.body.lenh_he_thong }} — đây chính là "
+            "nguyên nhân AI trả lời lạc đề."
+        ),
+        "ma_gui": ma, "tra_loi": tra_loi,
     }

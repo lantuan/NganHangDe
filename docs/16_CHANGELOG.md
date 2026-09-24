@@ -3850,3 +3850,43 @@ Tong 114 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.66 - 2026-09-24
+
+## Nut "Kiem tra ket noi n8n" - tra loi mot loi KHONG NHIN THAY DUOC
+
+Co Lan mat nhieu ngay vi node CHV_GiaSu khong nap lenh_he_thong: mo hinh
+khong co de bai nen TU BIA ngu canh (tam li hoc hanh vi, phan doan thi
+truong, phan phoi ngan sach cho cac tinh). Nhin tu ngoai chi thay "AI tra
+loi lung tung", muon biet hong o dau phai mo Executions cua n8n doc JSON.
+
+/gv/gia-su nay co nut "Kiem tra ket noi n8n": gui sang n8n mot cau lenh
+chua MA NGAU NHIEN 6 ki tu, bao mo hinh doc lai ma do.
+  Ma quay ve     -> lenh_he_thong CO toi mo hinh
+  Khong quay ve  -> KHONG toi -> chi thang ra o System Message phai sua
+
+Ma phai NGAU NHIEN moi lan: ma co dinh thi mo hinh co the nho tu luot
+truoc va tra dung du lenh khong toi (co bai kiem tra canh diem nay).
+
+Bon ket luan: ok | khong_nap_lenh | khong_goi_duoc | chua_cau_hinh, moi
+cai kem mot cau tieng Viet noi ro sua o dau.
+
+Phep thu KHONG tru luot cua hoc sinh nao va KHONG ghi vao nhat ki.
+
+## Sua \itemch -> xuong dong
+
+Cau Dung/Sai dung \itemch danh dau tung y a) b) c) d). Ban v2.65 chua loc
+lenh nay nen no hien ra chu tho giua man hinh. Xoa han thi 4 y dinh lien
+thanh mot doan dai kho doc -> doi thanh XUONG DONG: vua sach vua de doc.
+
+## Bai kiem tra
+
+Them 7 bai: itemch thanh xuong dong va giu nguyen cong thuc; 4 ket luan
+cua tu_kiem_tra (gom dung cau tra loi that co Lan gap lam du lieu thu);
+khong tru luot; ma khac nhau moi lan.
+
+Tong 127 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

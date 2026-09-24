@@ -658,3 +658,84 @@ def test_loi_giai_tra_ve_da_duoc_lam_sach(monkeypatch, tmp_path):
     assert "itemchoice" not in ngu_canh["loi_giai"]
     assert "choice" not in ngu_canh["loi_giai"]
     assert "$1+1=2$" in ngu_canh["loi_giai"]
+
+
+# ======================================================
+# \itemch -> XUONG DONG (4 y Dung/Sai dinh lien nhau rat kho doc)
+# ======================================================
+
+def test_itemch_doi_thanh_xuong_dong_chu_khong_xoa_han():
+    ra = G._lam_sach_latex(r"\itemch Sai. Vì $a>0$. \itemch Đúng. Vì $b<0$.")
+    assert "itemch" not in ra
+    dong = [d.strip() for d in ra.split("\n") if d.strip()]
+    assert len(dong) == 2
+    assert dong[0].startswith("Sai.") and dong[1].startswith("Đúng.")
+    assert "$a>0$" in ra and "$b<0$" in ra
+
+
+# ======================================================
+# TU KIEM TRA KET NOI n8n
+# ======================================================
+
+def test_kiem_tra_bao_chua_cau_hinh_khi_chua_dat_webhook(monkeypatch):
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "")
+    assert G.tu_kiem_tra()["ket_luan"] == "chua_cau_hinh"
+
+
+def test_kiem_tra_ok_khi_ma_quay_ve(monkeypatch):
+    """Mo hinh doc lai duoc ma -> lenh_he_thong CO toi noi."""
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    ghi = {}
+
+    def _gia(payload):
+        ghi["lenh"] = payload["lenh_he_thong"]
+        # Mo hinh doc duoc lenh -> tra lai dung ma nam trong lenh do.
+        import re as _re
+        return _re.search(r"\n\n([0-9A-F]{6})\n", payload["lenh_he_thong"]).group(1)
+
+    monkeypatch.setattr(G, "_goi_mo_hinh", _gia)
+    kq = G.tu_kiem_tra()
+    assert kq["ket_luan"] == "ok"
+    assert kq["ma_gui"] in ghi["lenh"]
+
+
+def test_kiem_tra_bat_duoc_loi_KHONG_NAP_LENH(monkeypatch):
+    """Dung loi co Lan gap: webhook chay, nhung mo hinh khong co lenh nen
+    tu bia ra noi dung khac han."""
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(
+        G, "_goi_mo_hinh",
+        lambda p: "Ý A của bạn là: Bất kỳ thay đổi nào trong công thức phân phối tài nguyên...",
+    )
+    kq = G.tu_kiem_tra()
+    assert kq["ket_luan"] == "khong_nap_lenh"
+    assert "System Message" in kq["chi_tiet"]
+
+
+def test_kiem_tra_bao_khong_goi_duoc_khi_mat_mang(monkeypatch):
+    import httpx
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+
+    def _hong(p):
+        raise httpx.ConnectError("mat mang")
+    monkeypatch.setattr(G, "_goi_mo_hinh", _hong)
+    assert G.tu_kiem_tra()["ket_luan"] == "khong_goi_duoc"
+
+
+def test_kiem_tra_khong_tru_luot_cua_ai(monkeypatch):
+    """Phep thu khong duoc tinh vao han muc cua hoc sinh nao."""
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: "gi do")
+    da_tru = []
+    monkeypatch.setattr(G, "tru_luot", lambda uid: da_tru.append(uid))
+    monkeypatch.setattr(G, "ghi_nhat_ki", lambda *a, **k: da_tru.append("nhat_ki"))
+    G.tu_kiem_tra()
+    assert da_tru == []
+
+
+def test_moi_lan_kiem_tra_dung_ma_khac_nhau(monkeypatch):
+    """Ma co dinh thi mo hinh co the doan/nho - phai ngau nhien moi lan."""
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: "x")
+    ma = {G.tu_kiem_tra()["ma_gui"] for _ in range(5)}
+    assert len(ma) == 5

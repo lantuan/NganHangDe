@@ -12,6 +12,63 @@ lệch so với đáp án chuẩn. Học sinh cũng luôn nhìn thấy lời gi�
 hiệu lực trong ngày hôm nay.
 </p>
 
+<!-- Nut tu kiem tra: tra loi cau hoi "n8n da nhan duoc cau lenh chua"
+     ma khong bat co phai mo Executions cua n8n ra doc. -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg mb-stack-lg">
+<div class="flex flex-wrap items-center gap-stack-md">
+<button type="button" onclick="kiemTraN8n()" id="nut-kiem-tra"
+        class="px-stack-lg py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">
+🔌 Kiểm tra kết nối n8n
+</button>
+<span class="font-body-md text-body-md text-on-surface-variant">
+Gửi một phép thử sang n8n để xem câu lệnh hệ thống có tới được mô hình không.
+Không tốn lượt hỏi của học sinh nào.
+</span>
+</div>
+<div id="ket-qua-kiem-tra" style="display:none;" class="mt-stack-md font-body-md text-body-md"></div>
+</div>
+
+<script>
+async function kiemTraN8n() {
+    const nut = document.getElementById("nut-kiem-tra");
+    const o = document.getElementById("ket-qua-kiem-tra");
+    nut.disabled = true;
+    o.style.display = "block";
+    o.innerHTML = "Đang gửi phép thử sang n8n, chờ một chút...";
+    try {
+        const res = await fetch("/gv/gia-su/kiem-tra", { method: "POST" });
+        const data = await res.json();
+        const d = (data && data.data) || {};
+        const mau = {
+            ok:             ["#f0fdf4", "#bbf7d0", "#15803d", "✅ Hoạt động đúng"],
+            khong_nap_lenh: ["#fef2f2", "#fecaca", "#991b1b", "❌ n8n chưa nạp câu lệnh hệ thống"],
+            khong_goi_duoc: ["#fef2f2", "#fecaca", "#991b1b", "❌ Không gọi được webhook"],
+            chua_cau_hinh:  ["#fffbeb", "#fcd34d", "#92400e", "⚠️ Chưa bật AI"]
+        }[d.ket_luan] || ["#f8fafc", "#e2e8f0", "#334155", "Không rõ"];
+
+        let html = '<div style="background:' + mau[0] + ';border:1px solid ' + mau[1] +
+            ';border-radius:12px;padding:14px 16px;">';
+        html += '<div style="font-weight:700;color:' + mau[2] + ';margin-bottom:6px;">' + mau[3] + "</div>";
+        html += "<div>" + (d.chi_tiet || data.message || "") + "</div>";
+        if (d.ma_gui) {
+            html += '<div style="margin-top:10px;font-size:13px;color:#64748b;">' +
+                "Mã đã gửi: <strong>" + d.ma_gui + "</strong>";
+            if (d.tra_loi) {
+                html += "<br>Mô hình trả về: <em>" +
+                    String(d.tra_loi).slice(0, 300).replace(/</g, "&lt;") + "</em>";
+            }
+            html += "</div>";
+        }
+        html += "</div>";
+        o.innerHTML = html;
+    } catch (e) {
+        o.innerHTML = '<div style="color:#991b1b;">Lỗi kết nối, thầy/cô thử lại nhé.</div>';
+    } finally {
+        nut.disabled = false;
+    }
+}
+</script>
+
 {% if loc_hoc_sinh %}
 <p class="mb-stack-md font-body-md text-body-md">
 Đang lọc theo một học sinh.
