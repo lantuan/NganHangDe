@@ -12,6 +12,8 @@ Va mot dieu quan trong khong kem: KHONG BAO GIO goi mo hinh khi chua co
 loi giai chuan - vi luc do AI bat buoc phai tu nghi ra, dung cai bi cam.
 """
 
+import json
+
 import pytest
 
 from app.services import gia_su_service as G
@@ -595,3 +597,64 @@ def test_chat_tao_de_van_di_duong_n8n(client, monkeypatch):
     client.post("/chat", data={"message": "tạo đề lớp 10 chương 1",
                                "conversation_id": "c1"})
     assert len(da_goi_n8n) == 1
+
+
+# ======================================================
+# LAM SACH LATEX cua goi ex_test (co Lan gap 24/09/2026:
+# MathJax in "Unknown environment 'itemchoice'" ra man hinh hoc sinh)
+# ======================================================
+
+@pytest.mark.parametrize("vao,phai_mat", [
+    (r"\begin{itemchoice}A\end{itemchoice}", "itemchoice"),
+    (r"\choice \True {$x=2$}",               "choice"),
+    (r"\loigiai{Vì $a>0$}",                  "loigiai"),
+    (r"\shortans{5}",                        "shortans"),
+    (r"\begin{immini}{x}{y}\end{immini}",    "immini"),
+])
+def test_bo_lenh_rieng_cua_ex_test(vao, phai_mat):
+    assert phai_mat not in G._lam_sach_latex(vao)
+
+
+@pytest.mark.parametrize("moi_truong", [
+    "align", "aligned", "cases", "array", "pmatrix", "bmatrix", "equation", "gather",
+])
+def test_giu_nguyen_moi_truong_mathjax_hieu(moi_truong):
+    vao = "\\begin{%s} a &= 1 \\end{%s}" % (moi_truong, moi_truong)
+    ra = G._lam_sach_latex(vao)
+    assert f"\\begin{{{moi_truong}}}" in ra
+    assert f"\\end{{{moi_truong}}}" in ra
+
+
+def test_giu_nguyen_phan_toan_hoc_ben_trong():
+    """Bo cap begin/end nhung RUOT phai con - khong duoc mat noi dung."""
+    ra = G._lam_sach_latex(r"\begin{itemchoice}$x = 2$ và $y = 3$\end{itemchoice}")
+    assert "$x = 2$" in ra and "$y = 3$" in ra
+
+
+def test_khong_dung_den_cong_thuc_thuong():
+    goc = r"Thay $x = 3$ vào $2x + 3 = 7$ ta được $\dfrac{a}{b} \ne 0$."
+    assert G._lam_sach_latex(goc) == goc
+
+
+def test_van_ban_rong_thi_tra_ve_rong():
+    assert G._lam_sach_latex("") == ""
+    assert G._lam_sach_latex(None) == ""
+
+
+def test_loi_giai_tra_ve_da_duoc_lam_sach(monkeypatch, tmp_path):
+    """Duong di day du: loi giai ban trong dapan_json -> ra ngoai phai sach."""
+    tep = tmp_path / "dapan.json"
+    tep.write_text(
+        json.dumps([{
+            "so_thu_tu": 1, "loai_cau": "MC", "de_bai": "Tính $1+1$.",
+            "phuong_an": {"A": "$1$", "B": "$2$"}, "dap_an": "B",
+            "loi_giai": r"\begin{itemchoice}\choice \True Vì $1+1=2$.\end{itemchoice}",
+        }], ensure_ascii=False),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(G.history_service, "lay_de_theo_id",
+                        lambda _: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    ngu_canh = G.lay_ngu_canh_cau("d1", 1)
+    assert "itemchoice" not in ngu_canh["loi_giai"]
+    assert "choice" not in ngu_canh["loi_giai"]
+    assert "$1+1=2$" in ngu_canh["loi_giai"]

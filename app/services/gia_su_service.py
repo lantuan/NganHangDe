@@ -136,9 +136,9 @@ def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None) -> 
                     "chưa giảng lại được. Em hỏi trực tiếp thầy/cô nhé."
                 )
             return {
-                "de_bai": _mo_ta_de_bai(cau),
-                "dap_an": _mo_ta_dap_an(cau),
-                "loi_giai": loi_giai,
+                "de_bai": _lam_sach_latex(_mo_ta_de_bai(cau)),
+                "dap_an": _lam_sach_latex(_mo_ta_dap_an(cau)),
+                "loi_giai": _lam_sach_latex(loi_giai),
                 "question_id": cau.get("generator_id") or cau.get("question_id"),
                 "loai_cau": cau.get("loai_cau"),
                 "chuong": cau.get("chuong"),
@@ -185,8 +185,8 @@ def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
             # exam_history khong luu de_bai -> de trong, cau lenh se noi ro
             # cho mo hinh la CHI duoc bam vao loi giai, khong doan de bai.
             "de_bai": "",
-            "dap_an": str(cau.get("dap_an_dung") or ""),
-            "loi_giai": loi_giai,
+            "dap_an": _lam_sach_latex(str(cau.get("dap_an_dung") or "")),
+            "loi_giai": _lam_sach_latex(loi_giai),
             "question_id": cau.get("question_id"),
             "loai_cau": cau.get("loai_cau"),
             "chuong": cau.get("chuong"),
@@ -194,6 +194,52 @@ def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
             "nguon": "exam_history",
         }
     return None
+
+
+# ======================================================
+# 1. LAM SACH LATEX TRUOC KHI DUA RA WEB / DUA VAO LENH
+# ======================================================
+# Loi giai do Python sinh ra la LaTeX danh cho goi ex_test (de bien dich
+# PDF). Tren web, MathJax KHONG biet cac moi truong rieng cua goi do nen
+# in thang loi ra man hinh hoc sinh:
+#     Unknown environment 'itemchoice'
+# (co Lan gap 24/09/2026). Va dua nguyen van sang mo hinh cung khong hay:
+# no tuong \begin{itemchoice} la mot phan cua de bai.
+#
+# Cach lam: giu DANH SACH TRANG cac moi truong MathJax that su hieu; moi
+# thu khac thi BO CAP \begin{}/\end{} nhung GIU NGUYEN RUOT - noi dung
+# toan hoc ben trong khong duoc mat.
+
+# Cac moi truong MathJax ho tro (khong dung den goi ngoai).
+MOI_TRUONG_MATHJAX = {
+    "align", "align*", "aligned", "alignat", "alignat*",
+    "array", "cases", "dcases", "rcases",
+    "matrix", "pmatrix", "bmatrix", "vmatrix", "Vmatrix", "Bmatrix",
+    "smallmatrix", "subarray", "split",
+    "equation", "equation*", "gather", "gather*", "eqnarray", "eqnarray*",
+}
+
+# Lenh cua ex_test chi co nghia khi bien dich PDF - bo han tren web.
+_LENH_BO_HAN = re.compile(
+    r"\\(?:loigiai|choiceTFt|choiceTF|choice|shortans|True|immini|hetde|tieude|chantrang)\b"
+)
+_MOI_TRUONG = re.compile(r"\\(begin|end)\{([a-zA-Z*]+)\}")
+
+
+def _lam_sach_latex(van_ban: str) -> str:
+    """Bo cac lenh/moi truong LaTeX rieng cua ex_test, GIU nguyen phan
+    toan hoc. Dung cho ca phan hien thi lan phan dua vao cau lenh."""
+    if not van_ban:
+        return ""
+    s = str(van_ban)
+    s = _LENH_BO_HAN.sub("", s)
+    s = _MOI_TRUONG.sub(
+        lambda m: m.group(0) if m.group(2) in MOI_TRUONG_MATHJAX else "", s
+    )
+    # Gon lai khoang trang thua sinh ra sau khi bo lenh.
+    s = re.sub(r"[ \t]{2,}", " ", s)
+    s = re.sub(r"\n{3,}", "\n\n", s)
+    return s.strip()
 
 
 # ======================================================

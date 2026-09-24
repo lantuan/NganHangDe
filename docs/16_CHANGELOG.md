@@ -3814,3 +3814,39 @@ Tong 103 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.65 - 2026-09-24
+
+## Loc lenh LaTeX rieng cua ex_test truoc khi dua ra web
+
+Co Lan gap: khoi "LOI GIAI CHUAN CUA THAY/CO" in ra dong chu vang
+    Unknown environment 'itemchoice'
+ngay giua man hinh hoc sinh.
+
+Nguyen nhan: loi giai do Python sinh la LaTeX danh cho goi ex_test (de
+bien dich PDF). MathJax tren web khong biet cac moi truong rieng cua goi
+do nen in thang loi ra. Dua nguyen van sang mo hinh cung khong hay: no
+tuong \begin{itemchoice} la mot phan cua de bai.
+
+## Sua o NGUON, khong sua o giao dien
+
+gia_su_service._lam_sach_latex(): giu DANH SACH TRANG cac moi truong
+MathJax that su hieu (align, cases, array, pmatrix, equation...); moi
+thu khac thi BO CAP \begin{}/\end{} nhung GIU NGUYEN RUOT. Bo han cac
+lenh chi co nghia khi bien dich PDF: \loigiai \choice \choiceTFt \True
+\shortans \immini \hetde \tieude \chantrang.
+
+Sua o Python (mot cho) thay vi o renderLatexText (hai cho: chat.html va
+lam_bai.html) - va nho vay CAU LENH gui sang mo hinh cung sach theo.
+
+## Bai kiem tra
+
+Them 11 bai: bo dung cac lenh ex_test, GIU nguyen 7 moi truong MathJax
+hieu, ruot khong duoc mat, cong thuc thuong khong bi dung den, va mot
+bai di duong day du (dapan_json -> lay_ngu_canh_cau -> phai sach).
+
+Tong 114 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
