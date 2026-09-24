@@ -739,3 +739,52 @@ def test_moi_lan_kiem_tra_dung_ma_khac_nhau(monkeypatch):
     monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: "x")
     ma = {G.tu_kiem_tra()["ma_gui"] for _ in range(5)}
     assert len(ma) == 5
+
+
+# ======================================================
+# DE BAI phai di kem loi giai (co Lan 24/09/2026: "nhin giai
+# ma ko the nho de")
+# ======================================================
+
+def test_hoi_tra_ve_ca_de_bai(monkeypatch, gia_su_gia_lap):
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(G, "_goi_mo_hinh", lambda p: "Giảng đây.")
+    kq = G.hoi("u1", "d1", 1, "em chưa hiểu")
+    assert "Tính $2+2$." in kq["de_bai_python"]
+    assert "A. $3$" in kq["de_bai_python"]
+    assert "B. $4$" in kq["de_bai_python"]
+
+
+def test_che_do_khong_ai_cung_co_de_bai(monkeypatch, gia_su_gia_lap):
+    monkeypatch.setattr(G, "N8N_WEBHOOK_GIA_SU", "")
+    assert "Tính $2+2$." in G.hoi("u1", "d1", 1, "em chưa hiểu")["de_bai_python"]
+
+
+def test_du_phong_khi_loi_cung_co_de_bai(client, monkeypatch):
+    """Het luot / AI hong -> hoc sinh VAN doc duoc ca de bai lan loi giai."""
+    monkeypatch.setattr(R, "get_current_user", lambda request: _UserGia())
+
+    def _hoi(**kwargs):
+        raise R.GiaSuError("Hôm nay em đã dùng hết lượt hỏi rồi.")
+    monkeypatch.setattr(R.gia_su_service, "hoi", _hoi)
+    monkeypatch.setattr(R.gia_su_service, "lay_ngu_canh_cau",
+                        lambda de_id, so_thu_tu, user_id: dict(NGU_CANH_MAU))
+
+    body = client.post("/api/giasu/hoi",
+                       json={"de_id": "d1", "so_thu_tu": 1, "cau_hoi": "x"}).json()
+    assert body["data"]["de_bai_python"] == NGU_CANH_MAU["de_bai"]
+
+
+def test_de_bai_TF_liet_ke_du_4_y(monkeypatch, tmp_path):
+    tep = tmp_path / "dapan.json"
+    tep.write_text(json.dumps([{
+        "so_thu_tu": 1, "loai_cau": "TF", "de_bai": "Xét các mệnh đề:",
+        "phat_bieu": {"a": "P đúng", "b": "Q sai", "c": "R đúng", "d": "S sai"},
+        "dap_an": {"a": True, "b": False, "c": True, "d": False},
+        "loi_giai": "Giải thích.",
+    }], ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(G.history_service, "lay_de_theo_id",
+                        lambda _: {"id": "d1", "files": {"dapan_json": str(tep)}})
+    de_bai = G.lay_ngu_canh_cau("d1", 1)["de_bai"]
+    for y in ("a) P đúng", "b) Q sai", "c) R đúng", "d) S sai"):
+        assert y in de_bai

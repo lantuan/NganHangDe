@@ -204,6 +204,14 @@
             background: #f0fdf4; border: 1px solid #bbf7d0;
             border-radius: var(--radius-xl); font-size: 14px; line-height: 1.6;
         }
+        .dap-an-chuan .de-bai-chuan {
+            background: #fff; border: 1px solid #d1fae5; border-radius: 10px;
+            padding: 10px 12px; margin-bottom: 10px;
+        }
+        .dap-an-chuan .de-bai-chuan > strong {
+            display: block; font-size: 12px; text-transform: uppercase;
+            letter-spacing: .3px; color: #64748b; margin-bottom: 4px;
+        }
         .dap-an-chuan .nhan {
             font-weight: 700; color: #15803d; font-size: 13px;
             text-transform: uppercase; letter-spacing: .3px; margin-bottom: 6px;
@@ -262,6 +270,13 @@ function renderMarkdownAI(raw) {
     }
     // marked chua tai xong/chan mang: it nhat cung phai xuong dong duoc.
     return renderLatexText(raw).replace(/\n/g, "<br>");
+}
+
+// Loi giai chuan co xuong dong THAT (de bai nhieu dong, 4 y Dung/Sai
+// sau khi doi \itemch). renderLatexText() khong doi \n thanh <br> nen
+// tat ca dinh lien mot doan - ham nay lam not viec do.
+function renderXuongDong(raw) {
+    return renderLatexText(raw).replace(/\n/g, '<br>');
 }
 
 function renderLatexText(raw) {
@@ -448,6 +463,9 @@ function themBongGiaSu(soThuTu, lop, noiDung) {
 }
 
 // Ve dap an + loi giai CHUAN (Python). Chi ve 1 lan cho moi cau.
+// Ve khoi "Loi giai chuan": DE BAI -> DAP AN -> LOI GIAI, dung thu tu
+// nhu trong tep .tex cua co. Truoc day khong co de bai nen hoc sinh doc
+// loi giai ma khong biet dang giai cai gi (co Lan 24/09/2026).
 function veLoiGiaiChuan(soThuTu, duLieu) {
     if (!duLieu || GIA_SU_DA_VE_LOI_GIAI[soThuTu]) return;
     if (!duLieu.loi_giai_python && !duLieu.dap_an_python) return;
@@ -456,11 +474,15 @@ function veLoiGiaiChuan(soThuTu, duLieu) {
     const khoi = document.createElement('div');
     khoi.className = 'dap-an-chuan';
     let html = '<div class="nhan">Lời giải chuẩn của thầy/cô</div>';
+    if (duLieu.de_bai_python) {
+        html += '<div class="de-bai-chuan"><strong>Đề bài</strong><div>' +
+            renderXuongDong(duLieu.de_bai_python) + '</div></div>';
+    }
     if (duLieu.dap_an_python) {
-        html += '<div><strong>Đáp án:</strong> ' + renderLatexText(String(duLieu.dap_an_python)) + '</div>';
+        html += '<div><strong>Đáp án:</strong> ' + renderXuongDong(String(duLieu.dap_an_python)) + '</div>';
     }
     if (duLieu.loi_giai_python) {
-        html += '<div style="margin-top:6px;">' + renderLatexText(String(duLieu.loi_giai_python)) + '</div>';
+        html += '<div style="margin-top:6px;">' + renderXuongDong(String(duLieu.loi_giai_python)) + '</div>';
     }
     khoi.innerHTML = html;
     hoiThoai.appendChild(khoi);

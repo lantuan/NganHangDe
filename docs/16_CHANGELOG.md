@@ -3890,3 +3890,40 @@ Tong 127 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.67 - 2026-09-24
+
+## Khoi "Loi giai chuan" nay co ca DE BAI
+
+Co Lan: "gio nhin giai ma ko the nho de". Dung - khoi do ban dau chi co
+dap an va loi giai, hoc sinh doc ma khong biet dang giai cai gi, nhat la
+khi hoi lai mot de da lam tu luc nao.
+
+API tra them de_bai_python. Giao dien ve theo dung thu tu trong tep .tex
+cua co:
+    DE BAI   <- than cau + cac phuong an A/B/C/D (hoac 4 y a,b,c,d)
+    DAP AN
+    LOI GIAI
+De bai dat trong khung nen trang rieng o tren cung, tach khoi loi giai.
+
+Du lieu DA CO SAN tu dau: _mo_ta_de_bai() van dung no de dua vao cau lenh
+cho mo hinh, chi la chua tra ra cho giao dien. Khong phai doc them gi.
+
+## renderXuongDong() - dung nham voi renderLatexText()
+
+Loi giai chuan co xuong dong THAT (\n): de bai nhieu dong, va 4 y Dung/Sai
+sau khi \itemch doi thanh xuong dong. renderLatexText() chi doi \\ cua
+LaTeX thanh <br>, KHONG doi \n - dung no thi tat ca dinh lien mot doan.
+renderXuongDong() boc ngoai va lam not viec do. Sua o ca 2 trang.
+
+## Bai kiem tra
+
+Them 4 bai: hoi() tra ve de bai kem phuong an; che do khong AI cung co de
+bai; duong du phong (het luot/AI hong) VAN co de bai; cau Dung/Sai liet ke
+du 4 y a) b) c) d).
+
+Tong 131 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -382,6 +382,33 @@ và trả lời đúng dù lệnh không tới (`test_moi_lan_kiem_tra_dung_ma_k
 Phép thử **không trừ lượt của học sinh nào** và **không ghi vào nhật kí hỏi đáp**
 (`test_kiem_tra_khong_tru_luot_cua_ai`).
 
+### Khối "Lời giải chuẩn" gồm ĐỀ BÀI → ĐÁP ÁN → LỜI GIẢI
+
+Cô Lan: *"giờ nhìn giải mà ko thể nhớ đề"*. Đúng — khối này ban đầu chỉ có đáp
+án và lời giải, học sinh đọc mà không biết đang giải cái gì, nhất là khi hỏi lại
+một đề đã làm từ lúc nào.
+
+Nay API trả thêm **`de_bai_python`**, và giao diện vẽ theo đúng thứ tự trong tệp
+`.tex` của cô:
+
+```
+ĐỀ BÀI      ← thân câu + các phương án A/B/C/D (hoặc 4 ý a,b,c,d của câu Đúng/Sai)
+ĐÁP ÁN
+LỜI GIẢI
+```
+
+Đề bài đặt trong một khung nền trắng riêng ở trên cùng, tách khỏi lời giải.
+
+Dữ liệu đã có sẵn từ đầu — `_mo_ta_de_bai()` vẫn dựng nó để đưa vào câu lệnh cho
+mô hình, chỉ là chưa trả ra cho giao diện. Không phải đọc thêm gì.
+
+### `renderXuongDong()` — đừng nhầm với `renderLatexText()`
+
+Lời giải chuẩn có xuống dòng **thật** (`\n`): đề bài nhiều dòng, và 4 ý Đúng/Sai
+sau khi `\itemch` được đổi thành xuống dòng. `renderLatexText()` chỉ đổi `\\`
+của LaTeX thành `<br>`, **không** đổi `\n` — nên nếu dùng nó thì tất cả dính
+liền thành một đoạn. `renderXuongDong()` bọc ngoài và làm nốt việc đó.
+
 ### `\itemch` → xuống dòng
 
 Câu Đúng/Sai dùng `\itemch` đánh dấu từng ý a) b) c) d). Xoá hẳn thì bốn ý dính

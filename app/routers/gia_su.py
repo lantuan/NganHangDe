@@ -98,6 +98,7 @@ def _loi_giai_du_phong(de_id: str, so_thu_tu: int, user_id: str) -> dict | None:
     return {
         "tra_loi": None,
         "che_do": "du_phong",
+        "de_bai_python": ngu_canh["de_bai"],
         "dap_an_python": ngu_canh["dap_an"],
         "loi_giai_python": ngu_canh["loi_giai"],
     }
