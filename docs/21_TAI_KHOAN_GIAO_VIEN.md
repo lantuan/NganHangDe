@@ -257,3 +257,43 @@ Dùng được cả cho tài khoản cũ đã trót thành học sinh — không
 **Chưa làm:** giới hạn số lần nhập sai mã mời. Hiện chỉ ghi log mỗi lần
 sai kèm email người thử. Mã mời đủ dài thì dò rất khó, nhưng khi mở rộng
 cho nhiều trường thì nên thêm giới hạn (ví dụ 5 lần sai thì khoá 15 phút).
+
+
+---
+
+## Đường đi giữa Chat AI và khu giáo viên (25/09/2026, v2.68)
+
+### Việc đã xảy ra
+
+Cô Lan đăng nhập bằng tài khoản giáo viên, vào thẳng Chat AI, rồi **mắc kẹt ở
+đó** — thanh bên không có mục nào dẫn sang `/gv`. Từ `/gv` thì có mục *Chat AI*
+để đi sang, nhưng **chiều ngược lại không có gì**. Muốn quay lại phải tự biết mà
+gõ địa chỉ, không ai đoán ra.
+
+Cô: *"chỉ là không có đường dẫn quay lại khu quản lý của gv"*.
+
+### Đã sửa
+
+Thanh bên Chat AI thêm mục **🎓 Khu giáo viên** → `/gv`, đặt trên *Đăng xuất*.
+
+Và một lỗi phát hiện kèm: mục **"Thống kê năng lực (GV)"** trước đây hiện cho
+**cả học sinh** — bấm vào là bị chặn 403. Vừa khó hiểu, vừa để lộ là có khu
+riêng. Nay cả hai mục đều bọc trong `{% if la_giao_vien %}`.
+
+`la_giao_vien` đã có sẵn trong context của `/chat` từ v2.55, không phải thêm gì.
+
+### Thanh giáo viên hiện email
+
+`profiles` có **hai tài khoản cùng tên "Lan Mai", cùng lớp C9**:
+
+| Email | vai_tro |
+|---|---|
+| `lantuan2605@gmail.com` | giao_vien |
+| `maihalan2605@gmail.com` | hoc_sinh |
+
+Nhìn tên không phân biệt được đang đăng nhập bằng cái nào — mà đó chính là câu
+hỏi đầu tiên khi bị chặn. Nay `_base_gv.html` hiện email cạnh nút *Đăng xuất*.
+
+`teacher.py::_ngu_canh_chung(user)` gom thứ phải có ở **mọi** trang `/gv`, mỗi
+route trải vào context của mình. `test_moi_trang_gv_deu_truyen_email` đọc chính
+mã nguồn và bắt lỗi nếu có trang nào quên — để lần sau thêm trang mới không sót.

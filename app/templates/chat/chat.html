@@ -517,10 +517,21 @@
                     <span class="material-symbols-outlined">analytics</span>
                     Đánh giá học lực
                 </button>
+                {# Chi giao vien moi thay 2 muc nay. Truoc day "Thong ke nang
+                   luc (GV)" hien cho CA HOC SINH - bam vao la bi chan 403.
+                   Va khong co loi nao quay lai khu giao vien: dang nhap xong
+                   vao thang Chat AI la mac ket, phai tu biet ma go /gv
+                   (co Lan 25/09/2026). #}
+                {% if la_giao_vien %}
+                <a href="/gv" class="sidebar-link w-full flex items-center gap-3 rounded-xl px-4 py-3" style="text-decoration:none;color:inherit;">
+                    <span class="material-symbols-outlined">school</span>
+                    Khu giáo viên
+                </a>
                 <a href="/gv/thong-ke" class="sidebar-link w-full flex items-center gap-3 rounded-xl px-4 py-3" style="text-decoration:none;color:inherit;">
                     <span class="material-symbols-outlined">bar_chart</span>
                     Thống kê năng lực (GV)
                 </a>
+                {% endif %}
                 <a href="/logout" class="sidebar-link w-full flex items-center gap-3 rounded-xl px-4 py-3" style="text-decoration:none;color:inherit;">
                     <span class="material-symbols-outlined">logout</span>
                     Đăng xuất

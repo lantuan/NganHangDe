@@ -3927,3 +3927,42 @@ Tong 131 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.68 - 2026-09-25
+
+## Duong di quay lai khu giao vien + hien email dang dang nhap
+
+Co Lan dang nhap tai khoan giao vien, vao thang Chat AI roi MAC KET:
+thanh ben khong co muc nao dan sang /gv. Tu /gv thi co muc "Chat AI" de
+di sang, nhung chieu nguoc lai khong co gi - muon quay lai phai tu biet
+ma go dia chi.
+
+Co Lan: "chi la khong co duong dan quay lai khu quan ly cua gv".
+
+## Da sua
+
+- Thanh ben Chat AI them muc "Khu giao vien" -> /gv, dat tren Dang xuat.
+- LOI PHAT HIEN KEM: muc "Thong ke nang luc (GV)" truoc day hien cho CA
+  HOC SINH - bam vao la bi chan 403. Vua kho hieu vua lo ra co khu rieng.
+  Nay ca 2 muc deu boc trong {% if la_giao_vien %}.
+  la_giao_vien da co san trong context cua /chat tu v2.55.
+- _base_gv.html hien EMAIL canh nut Dang xuat: profiles co 2 tai khoan
+  trung ten "Lan Mai" cung lop C9 (mot giao_vien, mot hoc_sinh), nhin ten
+  khong biet dang la ai - ma do chinh la cau hoi dau tien khi bi chan.
+
+## _ngu_canh_chung(user)
+
+Gom thu phai co o MOI trang /gv, moi route trai vao context cua minh.
+test_moi_trang_gv_deu_truyen_email DOC CHINH MA NGUON va bat loi neu co
+trang nao quen - de lan sau them trang moi khong sot.
+
+## Bai kiem tra
+
+Them 4 bai: giao vien thay loi quay lai; hoc sinh KHONG thay muc nao cua
+giao vien; thanh GV hien email; moi trang /gv deu truyen email.
+
+Tong 135 bai, deu xanh.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -39,6 +39,13 @@ from app.services.exam_assembler_service import generate_exam_pdf_auto, Assemble
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 
+
+def _ngu_canh_chung(user) -> dict:
+    """Thu phai co o MOI trang /gv. Hien tai la email dang dang nhap:
+    co Lan co 2 tai khoan trung ten "Lan Mai" (mot giao vien, mot hoc
+    sinh) nen nhin ten khong phan biet duoc dang la ai (25/09/2026)."""
+    return {"email_dang_nhap": getattr(user, "email", None)}
+
 # Nhan hien thi cho cac ky thi (HeSo2_HeSo3). "thuong_xuyen" la HeSo1.
 KI_THI_HIEN_THI = [
     ("thuong_xuyen", "Kiểm tra thường xuyên (hệ số 1) — theo chương"),
@@ -64,6 +71,7 @@ async def khu_lam_viec(request: Request):
         request=request,
         name="teacher/khu_lam_viec.html",
         context={
+            **_ngu_canh_chung(user),
             "ho_so": ho_so,
             "de_gan_day": danh_sach_de,
             "da_ket_noi_classroom": da_ket_noi_classroom,
@@ -81,7 +89,8 @@ async def ra_de_form(request: Request, loi: str | None = None):
     return templates.TemplateResponse(
         request=request,
         name="teacher/ra_de.html",
-        context={"ki_thi_hien_thi": KI_THI_HIEN_THI, "loi": loi},
+        context={
+            **_ngu_canh_chung(user),"ki_thi_hien_thi": KI_THI_HIEN_THI, "loi": loi},
     )
 
 
@@ -208,7 +217,8 @@ async def de_da_tao(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="teacher/de_da_tao.html",
-        context={"danh_sach_de": history_service.lay_de_cua_giao_vien(user.id)},
+        context={
+            **_ngu_canh_chung(user),"danh_sach_de": history_service.lay_de_cua_giao_vien(user.id)},
     )
 
 
@@ -235,7 +245,8 @@ async def danh_sach_lop(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="teacher/lop.html",
-        context={"danh_sach": dong},
+        context={
+            **_ngu_canh_chung(user),"danh_sach": dong},
     )
 
 
@@ -303,6 +314,7 @@ def trang_gia_su(request: Request, hoc_sinh: str | None = None):
         request=request,
         name="teacher/gia_su.html",
         context={
+            **_ngu_canh_chung(user),
             "nhat_ki": nhat_ki,
             "loc_hoc_sinh": hoc_sinh,
             "luot_mac_dinh": gia_su_service.GIA_SU_LUOT_MOI_NGAY,

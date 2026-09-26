@@ -260,3 +260,54 @@ def test_403_hien_trang_ro_rang_kem_vai_tro(client, monkeypatch):
     assert res.status_code == 403
     assert "Trang này dành cho giáo viên" in res.text
     assert "Tôi là giáo viên" in res.text
+
+
+# ======================================================
+# DUONG DI GIUA CHAT AI <-> KHU GIAO VIEN (co Lan 25/09/2026:
+# "chi la khong co duong dan quay lai khu quan ly cua gv")
+# ======================================================
+
+def _html_chat(la_giao_vien: bool) -> str:
+    from jinja2 import Environment, FileSystemLoader
+    env = Environment(loader=FileSystemLoader("app/templates"))
+    return env.get_template("chat/chat.html").render(
+        title="Chat AI", user_id="u1", user_email="x@y.z",
+        user_display_name="Lan Mai", user_khoi="10", user_lop="C9",
+        la_giao_vien=la_giao_vien,
+    )
+
+
+def test_giao_vien_thay_loi_quay_lai_khu_giao_vien():
+    html = _html_chat(True)
+    assert 'href="/gv"' in html
+    assert "Khu giáo viên" in html
+
+
+def test_hoc_sinh_khong_thay_muc_nao_cua_giao_vien():
+    """Truoc day 'Thong ke nang luc (GV)' hien cho ca hoc sinh - bam vao
+    la bi chan 403, vua kho hieu vua lo ra co khu rieng."""
+    html = _html_chat(False)
+    assert "Khu giáo viên" not in html
+    assert "Thống kê năng lực (GV)" not in html
+
+
+def test_thanh_giao_vien_hien_email_dang_dang_nhap():
+    """Co 2 tai khoan trung ten 'Lan Mai' - nhin ten khong biet la ai."""
+    from jinja2 import Environment, FileSystemLoader
+    env = Environment(loader=FileSystemLoader("app/templates"))
+    html = env.get_template("teacher/gia_su.html").render(
+        nhat_ki=[], loc_hoc_sinh=None, luot_mac_dinh=20,
+        email_dang_nhap="lantuan2605@gmail.com",
+    )
+    assert "lantuan2605@gmail.com" in html
+
+
+def test_moi_trang_gv_deu_truyen_email():
+    """Sot mot trang la trang do mat email - de lot luc them trang moi."""
+    import re
+    from pathlib import Path
+    nguon = Path("app/routers/teacher.py").read_text(encoding="utf-8")
+    trang = re.findall(r'name="teacher/([a-z_]+)\.html",\n\s*context=\{([^}]*)', nguon)
+    assert trang, "khong tim thay trang /gv nao"
+    thieu = [ten for ten, ctx in trang if "_ngu_canh_chung(user)" not in ctx]
+    assert not thieu, f"Trang /gv chua truyen email: {thieu}"
