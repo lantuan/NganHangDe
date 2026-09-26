@@ -91,6 +91,30 @@ vào sẽ nhận ngay một đề mới cùng dạng, cùng mức độ, chỉ k
 
 \chenanh[0.85]{16-loi-giai-va-lam-de-khac.png}{Nút tải lời giải của từng đề và nút ``Làm đề khác cùng cấu trúc''}
 
+\textbf{Bước 8 --- Hỏi lại thầy/cô AI câu chưa hiểu.} Ngay dưới mỗi câu ở trang
+kết quả có nút \textit{``Hỏi thầy/cô AI về câu này''}. Bấm vào, gõ chỗ mình
+vướng (ví dụ: \textit{``em chưa hiểu tại sao lại ra bước này''}), máy sẽ giảng
+lại từng bước.
+
+Ba điều học sinh cần biết:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+  \item \textbf{Phải nộp bài rồi mới hỏi được.} Câu chưa làm thì nút bị mờ.
+        Tự nghĩ trước thì lúc nghe giảng mới vào đầu.
+  \item \textbf{Bên dưới lời giảng luôn có khung xanh ``Lời giải chuẩn của
+        thầy/cô''}, gồm đủ đề bài, đáp án và lời giải. Nếu hai phần nói khác
+        nhau thì \textbf{tin khung xanh}, vì đó mới là bản do chương trình sinh
+        ra. Và báo lại cho thầy cô biết.
+  \item \textbf{Mỗi ngày hai mươi lượt hỏi.} Hết lượt thì vẫn đọc được lời giải
+        chuẩn, chỉ không có phần giảng lại.
+\end{itemize}
+
+Nếu đã rời trang kết quả, học sinh vẫn hỏi lại được: về Chat AI, bấm nút
+\textit{``Hỏi lại đề cũ''} ở dưới ô nhập, hệ thống hiện lại đề gần nhất chia
+theo Phần I--IV, bấm vào số câu nào là giảng câu đó.
+
+\chenanh[0.85]{23-nut-hoi-lai-de-cu.png}{Nút ``Hỏi lại đề cũ'' trong Chat AI: chọn câu theo từng phần của đề}
+
 \subsubsection{Hướng dẫn dành cho giáo viên}
 
 \textbf{Bước 1 --- Đăng nhập.} Giáo viên đăng nhập bằng chính tài khoản Google
@@ -126,6 +150,18 @@ trung bình của lớp, điểm từng học sinh và những chương, bài h�
 nhất --- căn cứ để điều chỉnh việc dạy.
 
 \chenanh[0.85]{02-trang-thong-ke-giao-vien.png}{Trang thống kê kết quả của giáo viên}
+
+\textbf{Bước 7 --- Đọc nhật kí trợ giảng.} Vào \texttt{/gv/gia-su} để xem học
+sinh đã hỏi những gì và máy trả lời ra sao. Bảng có hai cột đặt cạnh nhau:
+\textit{AI trả lời} và \textit{Đáp án Python} --- đối chiếu là biết ngay máy có
+nói lệch không. Cột cuối cho phép nâng thêm lượt hỏi cho từng em trong ngày.
+
+Trang này còn có nút \textbf{``Kiểm tra kết nối n8n''}. Bấm một cái, hệ thống
+gửi sang công cụ điều phối một mã ngẫu nhiên và bắt máy đọc lại; mã quay về
+nghĩa là câu lệnh tới nơi, trợ giảng hoạt động đúng. Nếu không quay về, hệ
+thống nói thẳng ra chỗ cần sửa. Phép thử này không tốn lượt hỏi của học sinh
+nào. Tôi làm nút này sau khi mất mấy ngày dò một lỗi không nhìn thấy được
+(lần 19, Bảng 6).
 
 \subsubsection{Những lỗi thường gặp và cách khắc phục}
 
@@ -189,6 +225,24 @@ Không thêm được học sinh vào lớp bằng danh sách &
 Google chỉ cho phép thêm thẳng học sinh nếu tài khoản là quản trị viên
 Google Workspace for Education &
 Dùng cách phát mã lớp để học sinh tự tham gia --- hệ thống đã làm sẵn ở Bước 3 \\ \hline
+Trợ giảng trả lời lạc đề, nói chuyện không liên quan đến toán &
+Công cụ điều phối chưa nạp câu lệnh nên máy không có đề bài và tự bịa &
+Vào \texttt{/gv/gia-su} bấm \textit{``Kiểm tra kết nối n8n''} --- hệ thống chỉ
+ra đúng ô cần sửa \\ \hline
+
+Nút ``Hỏi thầy/cô AI'' bị mờ, không bấm được &
+Câu đó học sinh chưa nộp bài, hoặc là câu tự luận chưa có lời giải mẫu &
+Làm và nộp bài câu đó trước. Đây là quy định có chủ ý, không phải lỗi \\ \hline
+
+Học sinh báo hết lượt hỏi &
+Mỗi em hai mươi lượt một ngày &
+Giáo viên vào \texttt{/gv/gia-su}, cột cuối, nâng thêm lượt cho em đó trong
+ngày hôm nay \\ \hline
+
+Giáo viên đăng nhập xong không tìm thấy khu làm việc riêng &
+Vào thẳng Chat AI nên không thấy lối sang &
+Thanh bên Chat AI có mục \textit{``Khu giáo viên''}; hoặc gõ thẳng
+\texttt{nganhangdechv.tech/gv} rồi đánh dấu trang lại \\ \hline
 \end{longtable}
 \end{center}
 \textit{Bảng 7. Những lỗi thường gặp và cách khắc phục}

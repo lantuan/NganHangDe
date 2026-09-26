@@ -3,40 +3,15 @@
 % ---------------------------------------------------------------
 \subsection{Hướng phát triển tiếp theo}
 
-Phần đã hoàn thành và đang được sử dụng là vòng chạy phục vụ \textbf{học sinh}:
-tạo đề, làm bài, chấm điểm, trả kết quả về Google Classroom, cùng trang thống
-kê cơ bản cho giáo viên. Các hướng phát triển dưới đây tập trung làm sâu
-\textbf{phần dành cho giáo viên} --- phần mà theo tôi mới là chỗ sáng kiến này
-phát huy giá trị lớn nhất đối với tổ chuyên môn.
+Tại thời điểm hoàn thành bài viết này, hệ thống đã chạy đủ \textbf{cả hai vòng}:
+vòng của học sinh (tạo đề, làm bài, chấm điểm, hỏi lại bài đã làm, trả kết quả
+về Google Classroom) và vòng của giáo viên (ra đề nhiều mã, tải mã nguồn
+\LaTeX, quản lí lớp, thống kê, đọc nhật kí trợ giảng).
 
-\subsubsection{Khu làm việc riêng cho giáo viên}
-
-Đây là hướng ưu tiên số một, gồm bốn chức năng:
-
-\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=3pt]
-  \item \textbf{Tự đặt ma trận chi tiết cho từng đề.} Hiện ma trận lấy theo
-        bảng cấu hình chung của loại bài kiểm tra. Giáo viên cần đặt được ma
-        trận riêng cho từng đề: bài nào mấy câu, mức độ nào mấy câu, dạng câu
-        nào --- tức là đưa chính bảng ma trận quen thuộc của tổ chuyên môn lên
-        màn hình.
-  \item \textbf{Sinh một lượt nhiều mã đề.} Thay vì bấm tạo nhiều lần, giáo
-        viên nhập số mã đề cần có và nhận về một tệp gồm đủ các mã đề cùng cấu
-        trúc, khác số liệu, kèm bản lời giải và bảng đáp án tổng hợp của tất cả
-        các mã --- dùng in kiểm tra trực tiếp.
-  \item \textbf{Tải mã nguồn \LaTeX\ của đề về máy.} Giáo viên lấy được tệp
-        \texttt{.tex} của đề để tự chỉnh sửa theo ý mình: thêm một câu riêng,
-        đổi cách trình bày, ghép vào mẫu đề của trường. Đây là yêu cầu thực tế
-        của giáo viên quen dùng \LaTeX\ --- hệ thống lo phần nặng nhọc là chọn
-        câu và sinh số liệu, còn quyền biên tập cuối cùng vẫn thuộc về giáo
-        viên.
-  \item \textbf{Quản lí lớp và kho đề đã giao.} Danh sách lớp, danh sách học
-        sinh, các đề đã giao cho từng lớp, kết quả từng đợt --- để giáo viên
-        không phải nhớ mình đã cho lớp nào làm đề nào.
-\end{enumerate}
-
-\ghichu{Bốn chức năng này em sẽ làm ngay sau khi bài sáng kiến hoàn thành, theo
-đúng yêu cầu của chị: chỉ ra đề và lấy mã nguồn, không cần làm bài trực tuyến ở
-nhánh này.}
+Bốn chức năng mà bản thảo trước của bài viết này còn để ở mục ``hướng phát
+triển'' --- khu làm việc riêng cho giáo viên, sinh một lượt nhiều mã đề, tải mã
+nguồn \LaTeX, quản lí lớp --- nay đã hoàn thành và được trình bày ở Giải pháp
+7. Các hướng dưới đây là phần còn lại.
 
 \subsubsection{Mở rộng ngân hàng câu hỏi}
 
@@ -96,11 +71,32 @@ vòng ``học --- kiểm tra --- biết mình yếu chỗ nào --- luyện đún
 thực sự khép kín, và đúng tinh thần \textit{đánh giá vì sự tiến bộ của người
 học} của Thông tư 22/2021/TT-BGDĐT.
 
-\subsubsection{Hoàn thiện phần tài khoản giáo viên}
+\subsubsection{Trợ giảng mức B --- chỉ đúng chỗ trong tài liệu lí thuyết}
 
-Hiện việc đăng kí tài khoản mới trên hệ thống dành cho học sinh; giáo viên dùng
-các chức năng riêng qua đường dẫn trực tiếp. Cần bổ sung luồng đăng kí và phân
-quyền cho giáo viên để nhiều giáo viên trong tổ cùng dùng độc lập, mỗi người
-quản lí lớp của mình.
+Trợ giảng hiện có (Giải pháp 8) giảng lại \textit{chính câu} học sinh vừa làm
+sai --- tôi gọi là \textbf{mức A}. Nhưng có những em nghe giảng lại vẫn chưa
+thông, vì chỗ hổng nằm ở phần lí thuyết phía trước chứ không ở câu đó.
+
+\textbf{Mức B} giải quyết việc này: khi học sinh bấm ``em vẫn chưa hiểu'', hệ
+thống chỉ đúng phần lí thuyết cần đọc lại trong tài liệu của chính tôi --- để
+trợ giảng \textit{tự biên diễn trong đó}, không nói ra ngoài.
+
+Phần chuẩn bị đã xong: 87 tệp lí thuyết \LaTeX\ của tôi đã đưa vào hệ thống,
+kèm một bảng ánh xạ nối từng bài trong chương trình với tệp tương ứng. Bảng này
+phải viết tay, vì quan hệ là \textbf{nhiều--nhiều}: cách chia bài trong tài liệu
+không trùng cách chia của chương trình --- chẳng hạn bài ``Các phép toán trên
+vectơ'' ứng với ba tệp, còn ``Tập hợp và các phép toán trên tập hợp'' ứng với
+hai tệp. Khớp tự động theo tên chỉ đúng được mười một trên hai mươi tám tệp.
+
+Tôi cũng đã đo để biết nạp bao nhiêu là vừa: cả tệp trung bình 34 nghìn kí tự
+--- quá lớn; riêng phần lí thuyết trung bình 4{,}5 nghìn kí tự --- vừa đủ. Nên
+mức B chỉ nạp phần lí thuyết, và chỉ nạp khi học sinh thực sự bấm hỏi tiếp.
+
+\subsubsection{Nhiều giáo viên trong tổ cùng dùng}
+
+Hệ thống đã có luồng đăng kí tài khoản giáo viên bằng mã mời và phân quyền theo
+vai trò. Bước tiếp theo là để mỗi thầy cô quản lí lớp của riêng mình: kho đề
+riêng, danh sách lớp riêng, thống kê riêng --- và tổ trưởng chuyên môn xem được
+tổng hợp toàn tổ.
 
 \clearpage

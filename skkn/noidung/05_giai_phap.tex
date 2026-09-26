@@ -282,6 +282,111 @@ lớp thì cần kèm riêng.
 
 \chenanh[0.92]{15-lam-bai-nop-bai.png}{Màn hình làm bài trực tuyến và màn hình kết quả chấm ngay sau khi nộp}
 
+\subsubsection{Giải pháp 7 --- Khu làm việc riêng cho giáo viên}
+
+Sáu giải pháp trên phục vụ vòng chạy của học sinh. Nhưng chính tổ chuyên môn
+mới là nơi sáng kiến tiết kiệm được nhiều công sức nhất, nên tôi xây thêm một
+khu làm việc riêng tại đường dẫn \texttt{/gv}, chỉ mở cho tài khoản có vai trò
+giáo viên.
+
+\begin{enumerate}[label=(\arabic*), leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Ra đề nhiều mã cùng lúc.} Giáo viên nhập số mã đề cần có; hệ
+        thống trả về một tệp duy nhất gồm đủ các mã, \textbf{cùng cấu trúc và
+        cùng đơn vị kiến thức, chỉ khác số liệu}, mỗi mã bắt đầu ở một trang
+        mới. Đề trình bày theo bốn phần như đề của Bộ: Phần I trắc nghiệm
+        nhiều phương án, Phần II đúng/sai, Phần III trả lời ngắn, Phần IV tự
+        luận --- và số câu ghi trong lời dẫn từng phần chạy theo đúng số câu
+        thực có, không phải con số cố định.
+  \item \textbf{Tải mã nguồn \LaTeX.} Giáo viên lấy được tệp \texttt{.tex} của
+        đề để tự biên tập. Tệp xuất ra là bản \textbf{có lời giải}; thầy cô nào
+        quen \LaTeX\ chỉ cần đổi tuỳ chọn \texttt{[loigiai]} thành
+        \texttt{[dethi]} là ẩn toàn bộ lời giải --- không cần xuất hai tệp.
+  \item \textbf{Quản lí lớp.} Danh sách lớp, mã lớp Google Classroom để phát
+        cho học sinh, và giáo viên phụ trách từng lớp.
+  \item \textbf{Thống kê lớp.} Điểm trung bình và những bài học sinh hay sai,
+        lấy từ chính lịch sử làm bài trên hệ thống.
+\end{enumerate}
+
+Việc phân quyền được chặn ở \textbf{tầng máy chủ} chứ không chỉ ẩn nút trên
+giao diện. Đây là một bài học đáng nói: ở bản đầu, các đường dẫn \texttt{/gv/*}
+chỉ kiểm tra \textit{đã đăng nhập hay chưa} mà không kiểm tra vai trò, nên bất
+kì học sinh nào biết đường dẫn đều xem được điểm cả lớp. Ẩn nút đi là vô nghĩa
+--- người dùng vẫn gõ thẳng địa chỉ được.
+
+\chenanh[0.9]{20-khu-lam-viec-giao-vien.png}{Khu làm việc dành cho giáo viên: ra đề nhiều mã, tải mã nguồn \LaTeX, quản lí lớp và thống kê}
+
+\ghichu{Ảnh 16: chụp trang \texttt{/gv} sau khi đăng nhập bằng tài khoản giáo
+viên, thấy rõ ba thẻ Ra đề --- Đề đã tạo --- Thống kê lớp và bảng đề tạo gần đây.}
+
+\subsubsection{Giải pháp 8 --- Trợ giảng trí tuệ nhân tạo bị khoá vào lời giải}
+
+\textbf{Vấn đề đặt ra.} Học sinh làm bài xong, thấy mình sai, và câu hỏi tự
+nhiên nhất là \textit{tại sao lại sai}. Nếu chỉ đưa lời giải in sẵn thì nhiều
+em vẫn không hiểu, vì lời giải viết cho người đã nắm được phương pháp. Các em
+cần một người giảng lại bằng lời khác, chậm hơn, đúng chỗ các em vướng.
+
+Đưa trí tuệ nhân tạo vào việc này là điều ai cũng nghĩ tới. Nhưng ở đây có một
+rủi ro nghiêm trọng mà tôi không chấp nhận được: \textbf{các mô hình ngôn ngữ
+tính toán số học rất hay sai, và sai một cách tự tin}. Nếu để máy tự giải lại
+bài toán rồi giảng cho học sinh, sẽ có ngày nó giảng ra một đáp án khác với đáp
+án in trong đề. Học sinh tin máy, chép vào bài, và giáo viên là người phải sửa
+hậu quả.
+
+\textbf{Lợi thế của hệ thống này.} Mọi câu hỏi đều do chương trình Python sinh
+ra, nên \textbf{đáp án và lời giải đã có sẵn, chính xác tuyệt đối, từ trước khi
+trí tuệ nhân tạo được gọi tới}. Việc của máy vì thế không phải là \textit{giải},
+mà là \textit{diễn đạt lại cho dễ hiểu}. Toàn bộ thiết kế xoay quanh ràng buộc
+đó.
+
+\textbf{Ba lớp khoá.} Ba lớp độc lập nhau, hỏng một lớp thì hai lớp còn lại vẫn
+đứng:
+
+\begin{center}
+\begin{tabular}{|p{1.1cm}|p{4.2cm}|p{8.1cm}|}
+\hline
+\textbf{Lớp} & \textbf{Đặt ở đâu} & \textbf{Làm gì} \\ \hline
+1 & Câu lệnh gửi cho máy &
+Đề bài, đáp án đúng và lời giải chuẩn được đưa \textit{sẵn} vào câu lệnh. Máy
+chỉ được diễn đạt lại; cấm tính toán, cấm đưa ra con số khác lời giải mẫu, cấm
+nói sang câu khác hay kiến thức ngoài đề \\ \hline
+2 & Màn hình học sinh &
+Lời giải gốc của giáo viên \textbf{luôn} được hiển thị ngay cạnh lời giảng của
+máy, kèm cả đề bài. Nếu máy nói lệch, học sinh nhìn thấy ngay \\ \hline
+3 & Nhật kí hội thoại &
+Mỗi lượt hỏi đều lưu nguyên văn câu trả lời của máy \textit{kèm} đáp án chuẩn
+đã đưa vào lệnh. Giáo viên đọc lại, đối chiếu hai cột \\ \hline
+\end{tabular}
+\end{center}
+\textit{Bảng 8. Ba lớp khoá chống việc trí tuệ nhân tạo tự tính toán}
+
+Trên tất cả ba lớp là một quy tắc bao trùm: \textbf{không có lời giải chuẩn thì
+không gọi máy}. Nếu thiếu dữ liệu --- đề quá cũ đã bị dọn, hoặc câu chưa có lời
+giải mẫu --- hệ thống báo lỗi và dừng lại, chứ không gọi trí tuệ nhân tạo; vì
+lúc đó máy bắt buộc phải tự nghĩ ra, đúng cái bị cấm.
+
+\textbf{Điều kiện: phải làm bài rồi mới được hỏi.} Câu nào học sinh chưa nộp
+bài thì nút hỏi bị mờ. Lí do sư phạm: lời giảng luôn kèm đáp án chuẩn, nên nếu
+cho hỏi tự do, học sinh sẽ bấm lướt cả đề để lấy lời giải mà không chịu nghĩ.
+Ràng buộc này cũng được chặn ở tầng máy chủ, không chỉ làm mờ nút.
+
+\textbf{Hạn mức lượt hỏi.} Mỗi em hai mươi lượt một ngày. Ngày được chốt theo
+giờ Việt Nam --- nếu tính theo giờ quốc tế thì từ bảy giờ sáng đã bị tính sang
+ngày hôm sau và học sinh mất lượt ngay giữa buổi học. Chỉ trừ lượt khi đã thực
+sự nhận được câu trả lời; mất mạng hay máy chủ bận thì không trừ. Giáo viên
+nâng thêm lượt cho từng em khi cần.
+
+\chenanh[0.9]{21-gia-su-ai.png}{Trợ giảng giảng lại một câu học sinh làm sai --- lời giải chuẩn của giáo viên hiển thị ngay bên dưới}
+
+\ghichu{Ảnh 17 là ảnh quan trọng nhất của mục này: chụp sao cho thấy \textbf{cả
+hai khối} --- phần máy giảng ở trên và khung xanh ``Lời giải chuẩn của thầy/cô''
+ở dưới (có đề bài, đáp án, lời giải). Chính hai khối cạnh nhau là bằng chứng
+trực quan cho lớp khoá thứ hai.}
+
+\chenanh[0.9]{22-nhat-ki-gia-su.png}{Nhật kí hỏi đáp: giáo viên đối chiếu câu trả lời của máy với đáp án do chương trình sinh ra}
+
+\ghichu{Ảnh 18: chụp trang \texttt{/gv/gia-su}, lấy đủ hai cột ``AI trả lời'' và
+``Đáp án Python'' nằm cạnh nhau. Nhớ che tên thật của học sinh.}
+
 \subsubsection{Công cụ và hạ tầng đã sử dụng}
 
 Sáng kiến này là một phần mềm chạy thật trên Internet, nên tôi xin nêu rõ toàn
@@ -414,14 +519,58 @@ Ba nguyên nhân nối nhau: giao diện nuốt mất thông báo lỗi; chưa b
 cần thiết của Google; và xin nhầm quyền (quyền đăng \textit{bài tập} khác quyền
 đăng \textit{tài liệu}). Sửa lần lượt cả ba, đồng thời cho hiện lí do thất bại
 ngay trên màn hình thay vì im lặng \\ \hline
+15 & Bất kì học sinh nào biết đường dẫn \texttt{/gv/thong-ke} đều xem được
+điểm cả lớp &
+Các đường dẫn dành cho giáo viên chỉ kiểm tra \textit{đã đăng nhập}, không kiểm
+tra \textit{vai trò}. Bổ sung kiểm tra vai trò ở tầng máy chủ cho mọi đường dẫn
+\texttt{/gv/*}. Bài học: ẩn nút trên giao diện không phải là phân quyền \\ \hline
+
+16 & Khoá truy cập cơ sở dữ liệu dùng chung cho cả trình duyệt lẫn máy chủ &
+Tách làm hai: trình duyệt chỉ dùng khoá hạn chế để đăng nhập, mọi thao tác dữ
+liệu đi qua máy chủ bằng khoá riêng không bao giờ lộ ra ngoài; đồng thời bật
+khoá bảo vệ từng bảng trong cơ sở dữ liệu \\ \hline
+
+17 & Chọn bốn mã đề nhưng chỉ ra một mã &
+Số mã đề bị truyền nhầm xuống tầng sinh câu hỏi, khiến bốn phần đề bị nối liền
+thành một đề duy nhất. Đảo lại thứ tự: lặp theo từng mã đề ở vòng ngoài \\ \hline
+
+18 & Mọi đề giáo viên tạo đều không lưu được, suốt tám tiếng không ai biết &
+Một mã định danh bị gắn thêm tiền tố nên sai định dạng, cơ sở dữ liệu từ chối.
+Lỗi chỉ ghi vào nhật kí máy chủ nên im lặng hoàn toàn. Sửa mã định danh, và cho
+\textbf{hiện lỗi ra màn hình} thay vì chỉ ghi nhật kí --- ghi nhật kí là đúng
+nhưng chưa đủ \\ \hline
+
+19 & Trợ giảng trả lời lạc sang chuyện marketing, tâm lí học, ngân sách &
+Ô nạp câu lệnh trong công cụ điều phối bị bỏ trống nên máy không nhận được đề
+bài, và nó \textit{tự bịa} ra ngữ cảnh. Mất nhiều ngày vì lỗi này không nhìn
+thấy được từ bên ngoài. Khắc phục: nối đúng ô, và bổ sung một nút tự kiểm tra
+gửi mã ngẫu nhiên sang, bắt máy đọc lại --- mã quay về nghĩa là câu lệnh tới
+nơi. Từ nay một lần bấm là biết, không phải dò \\ \hline
+
+20 & Học sinh vừa nộp bài, gõ ``tôi không hiểu bài 1'', hệ thống bảo đi tạo đề &
+Bộ phân loại yêu cầu không có cách nào biết cuộc trò chuyện đã có đề. Nhưng máy
+chủ thì biết chắc. Chuyển việc nhận dạng về cho chương trình: nếu đúng là hỏi
+bài và cuộc trò chuyện đã có đề đã nộp, mở luôn bảng chọn câu. Cố ý
+\textbf{không đoán số câu} --- ``bài 1'' có thể là câu 1 của đề, cũng có thể là
+bài 1 trong sách; đoán sai thì giảng nhầm câu, tệ hơn nhiều so với để học sinh
+bấm thêm một nút \\ \hline
 \end{longtable}
 \end{center}
 \textit{Bảng 6. Những lần cải tiến đáng kể trong quá trình thực hiện}
 
-Nhìn lại, hầu hết các lỗi đều thuộc một trong hai nhóm: \textit{giao cho trí
-tuệ nhân tạo việc lẽ ra phải do chương trình làm}, và \textit{không có cơ chế
-tự kiểm tra nên lỗi âm thầm tồn tại rất lâu}. Hai bài học rút ra tương ứng là
-nguyên tắc phân vai ở Giải pháp 1 và bộ kiểm thử tự động ở Giải pháp 2.
+Nhìn lại, hầu hết các lỗi đều thuộc một trong ba nhóm: \textit{giao cho trí
+tuệ nhân tạo việc lẽ ra phải do chương trình làm} (các lần 1, 19, 20);
+\textit{không có cơ chế tự kiểm tra nên lỗi âm thầm tồn tại rất lâu} (các lần
+14, 18, 19); và \textit{nhầm việc ẩn đi với việc chặn lại} (các lần 15, 16).
+
+Ba bài học tương ứng là nguyên tắc phân vai ở Giải pháp 1, bộ kiểm thử tự động
+ở Giải pháp 2, và nguyên tắc chặn ở tầng máy chủ ở Giải pháp 7. Tôi nhấn mạnh
+bài học thứ hai, vì đó là loại lỗi tốn thời gian nhất: lần 18 khiến mọi đề giáo
+viên tạo ra đều không lưu được suốt tám tiếng mà không ai hay, còn lần 19 mất
+nhiều ngày chỉ vì một ô cấu hình bỏ trống. Cả hai đều 	extit{không nhìn thấy
+được} từ bên ngoài --- hệ thống vẫn chạy, chỉ là chạy sai. Từ đó tôi rút ra:
+mỗi khi một bộ phận có thể hỏng âm thầm, phải làm sẵn một cách để hỏi nó
+\textit{``anh còn sống không''} và nhận câu trả lời bằng tiếng Việt dễ hiểu.
 
 \subsubsection{Vai trò của trợ lí trí tuệ nhân tạo trong quá trình thực hiện}
 

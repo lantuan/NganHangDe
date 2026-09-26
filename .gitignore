@@ -54,3 +54,8 @@ data/config/*.thm
 # De/PDF sinh ra khi chay (cron don sau 1 ngay, khong commit)
 data/exports/
 data/temp/
+
+# Ban bien dich SKKN (co Lan tu bien dich tren may, khong commit)
+skkn/skkn.pdf
+skkn/*.xdv
+skkn/tmp*.tmp

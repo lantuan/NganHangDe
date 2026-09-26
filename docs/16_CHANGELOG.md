@@ -3966,3 +3966,69 @@ Tong 135 bai, deu xanh.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.69 - 2026-09-26
+
+## Cap nhat SKKN theo he thong da thay doi (13/09 -> 26/09)
+
+Ban SKKN viet ngay 13/09, tu do den nay he thong da di rat xa (v2.45 ->
+v2.68). Cap nhat lai cho khop.
+
+## Diem moi thu 6 (02_mo_dau)
+
+"Tro giang tri tue nhan tao bi khoa vao loi giai cua giao vien" - day la
+dong gop co gia tri chia se nhat, vi no tra loi cau hoi ma nhieu thay co
+e ngai: lam sao chac chan may khong day sai cho hoc sinh.
+
+## Hai giai phap moi (05_giai_phap)
+
+Giai phap 7 - Khu lam viec rieng cho giao vien: ra de nhieu ma theo cau
+truc 4 phan cua Bo, tai ma nguon .tex, quan li lop, thong ke. Nhan manh
+bai hoc "an nut tren giao dien khong phai la phan quyen".
+
+Giai phap 8 - Tro giang bi khoa vao loi giai: van de dat ra (mo hinh tinh
+so hoc hay sai va sai tu tin), loi the cua he thong (dap an da co san tu
+truoc), BA LOP KHOA (Bang 8 moi), quy tac bao trum "khong co loi giai
+chuan thi khong goi may", dieu kien phai nop bai roi moi duoc hoi, han
+muc luot.
+
+## Bang 6 - them 6 lan cai tien (15-20)
+
+Lo hong phan quyen /gv/*; khoa co so du lieu dung chung; chon 4 ma de chi
+ra 1; de giao vien khong luu duoc suot 8 tieng ma khong ai biet; tro giang
+tra loi lac de vi o nap cau lenh bo trong; hoc sinh vua nop bai go "khong
+hieu bai 1" lai bi bao di tao de.
+
+Doan ket luan sau bang viet lai: tu 2 nhom loi thanh 3 nhom, them nhom
+"nham viec an di voi viec chan lai". Nhan manh bai hoc ve loi HONG AM
+THAM - loai ton thoi gian nhat.
+
+## 08_huong_phat_trien - viet lai
+
+Bo muc "Khu lam viec rieng cho giao vien" va "Hoan thien tai khoan giao
+vien" (DA XONG, chuyen sang Giai phap 7). Them muc "Tro giang muc B" kem
+so lieu that da do (87 tep li thuyet, bang anh xa nhieu-nhieu, ca tep
+34 nghin ki tu vs rieng li thuyet 4,5 nghin).
+
+## 06_huong_dan - them buoc moi
+
+Hoc sinh: Buoc 8 hoi lai thay/co AI (3 dieu can biet, trong do co "neu 2
+phan noi khac nhau thi TIN KHUNG XANH").
+Giao vien: Buoc 7 doc nhat ki tro giang + nut Kiem tra ket noi n8n.
+Bang 7 them 4 dong loi thuong gap moi.
+
+## Anh
+
+Them 4 anh: 20-khu-lam-viec-giao-vien, 21-gia-su-ai, 22-nhat-ki-gia-su,
+23-nut-hoi-lai-de-cu. Ban dau danh so 16-19 bi TRUNG voi anh da co, da
+doi lai. Tong 19 anh can chup.
+
+## Bien dich thu
+
+latexmk -xelatex chay duoc, ra 52 trang. Loi duy nhat la thieu font Times
+New Roman - do may ao Linux khong co font do, may Mac cua co Lan co san.
+Da them skkn/skkn.pdf vao .gitignore (co tu bien dich tren may).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

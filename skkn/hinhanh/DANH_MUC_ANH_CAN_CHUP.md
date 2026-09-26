@@ -33,3 +33,19 @@ Tổng cộng 15 ảnh. Một số ảnh được dùng lại ở hai chỗ nên
 - `qr-nganhangdechv.png` — mã QR trỏ tới https://nganhangdechv.tech (đã tạo sẵn)
 - Hình 2 (sơ đồ phân vai AI / mã nguồn / giáo viên) và hình cấu trúc mã định danh
   là hình vẽ bằng TikZ ngay trong bài, không phải ảnh chụp.
+
+---
+
+## Bổ sung 26/09/2026 — ảnh cho Giải pháp 7, 8 và hướng dẫn mới
+
+| Tệp | Chụp ở đâu | Lưu ý |
+|---|---|---|
+| `20-khu-lam-viec-giao-vien.png` | `/gv` sau khi đăng nhập tài khoản giáo viên | Lấy đủ ba thẻ **Ra đề — Đề đã tạo — Thống kê lớp** và bảng *Đề tạo gần đây*. Thanh trên có email — **che email đi** trước khi nộp |
+| `21-gia-su-ai.png` | trang kết quả làm bài, sau khi bấm *Hỏi thầy/cô AI về câu này* | **Ảnh quan trọng nhất.** Phải thấy **cả hai khối**: phần máy giảng ở trên, và khung xanh *Lời giải chuẩn của thầy/cô* ở dưới (có đề bài + đáp án + lời giải). Hai khối cạnh nhau chính là bằng chứng cho lớp khoá thứ hai |
+| `22-nhat-ki-gia-su.png` | `/gv/gia-su` | Lấy đủ hai cột **AI trả lời** và **Đáp án Python** nằm cạnh nhau. **Che tên thật học sinh** |
+| `23-nut-hoi-lai-de-cu.png` | Chat AI, sau khi bấm *Hỏi lại đề cũ* | Thấy bảng chia **PHẦN I / II / III / IV** với các nút số câu |
+
+### Nhắc chung trước khi nộp
+
+- **Che hết tên thật và email học sinh** trong mọi ảnh.
+- Ảnh 17 nếu dài quá một màn hình thì chụp hai lần rồi ghép, **đừng cắt mất khung xanh** — đó là phần có giá trị nhất.
