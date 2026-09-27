@@ -1,0 +1,272 @@
+[
+  {
+    "id": "L11_C7_B22_NB100_MC_A",
+    "content": "Nhận biết được khái niệm góc giữa hai đường thẳng trong không gian.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Góc giữa hai đường thẳng trong không gian"
+  },
+  {
+    "id": "L11_C7_B22_NB101_MC_A",
+    "content": "Nhận biết được hai đường thẳng vuông góc trong không gian.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hai đường thẳng vuông góc trong không gian"
+  },
+  {
+    "id": "L11_C7_B22_TH102_MC_A",
+    "content": "Chứng minh được hai đường thẳng vuông góc trong không gian.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hai đường thẳng vuông góc trong không gian"
+  },
+  {
+    "id": "L11_C7_B22_TH102_TL_A",
+    "content": "Chứng minh được hai đường thẳng vuông góc trong không gian.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh hai đường thẳng vuông góc"
+  },
+  {
+    "id": "L11_C7_B22_VD103_MC_A",
+    "content": "Sử dụng được kiến thức về hai đường thẳng vuông góc để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiến thức về hai đường thẳng vuông góc"
+  },
+  {
+    "id": "L11_C7_B23_NB104_MC_A",
+    "content": "Nhận biết được đường thẳng vuông góc với mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đường thẳng vuông góc với mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B23_TH105_MC_A",
+    "content": "Xác định được điều kiện để đường thẳng vuông góc với mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Điều kiện để đường thẳng vuông góc với mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B23_TH105_TL_A",
+    "content": "Xác định được điều kiện để đường thẳng vuông góc với mặt phẳng.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh đường thẳng vuông góc với mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B23_TH106_MC_A",
+    "content": "Giải thích được định lí ba đường vuông góc.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Định lí ba đường vuông góc"
+  },
+  {
+    "id": "L11_C7_B23_TH107_MC_A",
+    "content": "Giải thích được mối liên hệ giữa tính song song và tính vuông góc của đường thẳng và mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mối liên hệ giữa tính song song và tính vuông góc của đường"
+  },
+  {
+    "id": "L11_C7_B23_VD108_MC_A",
+    "content": "Vận dụng được kiến thức về đường thẳng vuông góc với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiến thức về đường thẳng vuông góc với mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B24_NB109_MC_A",
+    "content": "Nhận biết được khái niệm phép chiếu vuông góc.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép chiếu vuông góc"
+  },
+  {
+    "id": "L11_C7_B24_TH110_MC_A",
+    "content": "Xác định được hình chiếu vuông góc của một điểm, một đường thẳng, một tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hình chiếu vuông góc của một điểm, một đường thẳng, một tam giác"
+  },
+  {
+    "id": "L11_C7_B24_NB111_MC_A",
+    "content": "Nhận biết được khái niệm góc giữa đường thẳng và mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Góc giữa đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B24_TH112_MC_A",
+    "content": "Xác định và tính được góc giữa đường thẳng và mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định và tính được góc giữa đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B25_NB113_MC_A",
+    "content": "Nhận biết được hai mặt phẳng vuông góc trong không gian.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hai mặt phẳng vuông góc trong không gian"
+  },
+  {
+    "id": "L11_C7_B25_NB113_SA_A",
+    "content": "Nhận biết được hai mặt phẳng vuông góc trong không gian.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đo góc giữa đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B25_NB113_TL_A",
+    "content": "Nhận biết được hai mặt phẳng vuông góc trong không gian.",
+    "Loai": "Tự luận",
+    "Dang": "Xác định và tính góc giữa đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B25_TH114_MC_A",
+    "content": "Xác định được điều kiện để hai mặt phẳng vuông góc.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Điều kiện để hai mặt phẳng vuông góc"
+  },
+  {
+    "id": "L11_C7_B25_TH115_MC_A",
+    "content": "Giải thích được tính chất cơ bản về hai mặt phẳng vuông góc.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất cơ bản về hai mặt phẳng vuông góc"
+  },
+  {
+    "id": "L11_C7_B25_TH116_MC_A",
+    "content": "Giải thích được tính chất cơ bản của hình lăng trụ đứng, lăng trụ đều, hình hộp đứng, hình hộp chữ nhật, hình lập phương, hình chóp đều.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất cơ bản của hình lăng trụ đứng, lăng trụ đều, hình hộp"
+  },
+  {
+    "id": "L11_C7_B25_NB117_MC_A",
+    "content": "Nhận biết được khái niệm góc nhị diện, góc phẳng nhị diện.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Góc nhị diện, góc phẳng nhị diện"
+  },
+  {
+    "id": "L11_C7_B25_TH118_MC_A",
+    "content": "Xác định và tính được số đo góc nhị diện, góc phẳng nhị diện.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định và tính được số đo góc nhị diện, góc phẳng nhị diện"
+  },
+  {
+    "id": "L11_C7_B25_TH118_TL_A",
+    "content": "Xác định và tính được số đo góc nhị diện, góc phẳng nhị diện.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh hai mặt phẳng vuông góc"
+  },
+  {
+    "id": "L11_C7_B25_VD119_MC_A",
+    "content": "Sử dụng được kiến thức về góc giữa đường thẳng và mặt phẳng, góc nhị diện để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiến thức về góc giữa đường thẳng và mặt phẳng, góc nhị diện"
+  },
+  {
+    "id": "L11_C7_B26_TH120_MC_A",
+    "content": "Xác định được khoảng cách từ một điểm đến một đường thẳng; khoảng cách từ một điểm đến một mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Khoảng cách từ một điểm đến một đường thẳng"
+  },
+  {
+    "id": "L11_C7_B26_TH120_SA_A",
+    "content": "Xác định được khoảng cách từ một điểm đến một đường thẳng; khoảng cách từ một điểm đến một mặt phẳng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đo góc nhị diện"
+  },
+  {
+    "id": "L11_C7_B26_TH120_TL_A",
+    "content": "Xác định được khoảng cách từ một điểm đến một đường thẳng; khoảng cách từ một điểm đến một mặt phẳng.",
+    "Loai": "Tự luận",
+    "Dang": "Xác định và tính góc phẳng nhị diện"
+  },
+  {
+    "id": "L11_C7_B26_TH121_MC_A",
+    "content": "Xác định được khoảng cách giữa hai đường thẳng song song; khoảng cách giữa đường thẳng và mặt phẳng song song; khoảng cách giữa hai mặt phẳng song song.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Khoảng cách giữa hai đường thẳng song song"
+  },
+  {
+    "id": "L11_C7_B26_TH122_MC_A",
+    "content": "Nhận biết được đường vuông góc chung của hai đường thẳng chéo nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đường vuông góc chung của hai đường thẳng chéo nhau"
+  },
+  {
+    "id": "L11_C7_B26_TH122_SA_A",
+    "content": "Nhận biết được đường vuông góc chung của hai đường thẳng chéo nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách từ một điểm đến một mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B26_TH122_TL_A",
+    "content": "Nhận biết được đường vuông góc chung của hai đường thẳng chéo nhau.",
+    "Loai": "Tự luận",
+    "Dang": "Tính khoảng cách từ điểm đến mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B26_VD123_MC_A",
+    "content": "Tính được khoảng cách giữa hai đường thẳng chéo nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Khoảng cách giữa hai đường thẳng chéo nhau"
+  },
+  {
+    "id": "L11_C7_B26_VD124_MC_A",
+    "content": "Sử dụng được kiến thức về khoảng cách trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiến thức về khoảng cách trong không gian"
+  },
+  {
+    "id": "L11_C7_B27_NB125_MC_A",
+    "content": "Nhận biết được công thức tính thể tích của hình chóp, hình lăng trụ, hình hộp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức tính thể tích của hình chóp, hình lăng trụ, hình hộp"
+  },
+  {
+    "id": "L11_C7_B27_NB125_SA_A",
+    "content": "Nhận biết được công thức tính thể tích của hình chóp, hình lăng trụ, hình hộp.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách giữa hai đường thẳng chéo nhau"
+  },
+  {
+    "id": "L11_C7_B27_NB125_TL_A",
+    "content": "Nhận biết được công thức tính thể tích của hình chóp, hình lăng trụ, hình hộp.",
+    "Loai": "Tự luận",
+    "Dang": "Tính khoảng cách giữa hai đường thẳng chéo nhau"
+  },
+  {
+    "id": "L11_C7_B27_TH126_MC_A",
+    "content": "Tính được thể tích của hình chóp, hình lăng trụ, hình hộp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Thể tích của hình chóp, hình lăng trụ, hình hộp"
+  },
+  {
+    "id": "L11_C7_B27_NB127_MC_A",
+    "content": "Nhận biết được hình chóp cụt đều.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hình chóp cụt đều"
+  },
+  {
+    "id": "L11_C7_B27_TH128_MC_A",
+    "content": "Tính được thể tích khối chóp cụt đều.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Thể tích khối chóp cụt đều"
+  },
+  {
+    "id": "L11_C7_B27_TH128_SA_A",
+    "content": "Tính được thể tích khối chóp cụt đều.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Thể tích khối chóp, khối lăng trụ"
+  },
+  {
+    "id": "L11_C7_B27_TH128_TL_A",
+    "content": "Tính được thể tích khối chóp cụt đều.",
+    "Loai": "Tự luận",
+    "Dang": "Tính thể tích khối chóp"
+  },
+  {
+    "id": "L11_C7_B27_VD129_MC_A",
+    "content": "Vận dụng được kiến thức về hình chóp cụt đều để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiến thức về hình chóp cụt đều"
+  },
+  {
+    "id": "L11_C7_TF_A",
+    "content": "Quan hệ vuông góc trong không gian",
+    "Loai": "Đúng sai",
+    "Dang": "Đường vuông góc mặt, hai mặt vuông góc"
+  },
+  {
+    "id": "L11_C7_TF_B",
+    "content": "Góc, khoảng cách và thể tích",
+    "Loai": "Đúng sai",
+    "Dang": "Góc nhị diện, khoảng cách, thể tích khối chóp"
+  }
+]

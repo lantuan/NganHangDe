@@ -1,0 +1,478 @@
+[
+  {
+    "id": "L11_C4_B10_NB048",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các quan hệ liên thuộc cơ bản giữa điểm, đường thẳng, mặt phẳng trong không gian.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khong_gian",
+      "quan_he_lien_thuoc"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B10_TH049",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được ba cách xác định mặt phẳng: qua ba điểm không thẳng hàng; qua một đường thẳng và một điểm không thuộc đường thẳng đó; qua hai đường thẳng cắt nhau.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khong_gian",
+      "xac_dinh_mat_phang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B10_TH050",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được giao tuyến của hai mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khong_gian",
+      "giao_tuyen"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B10_TH051",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được giao điểm của đường thẳng và mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khong_gian",
+      "giao_diem"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B10_VD052",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khong_gian",
+      "giao_tuyen",
+      "giao_diem"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C4_B10_NB053",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được hình chóp, hình tứ diện.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hinh_chop",
+      "tu_dien"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B10_VD054",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng trong không gian",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về đường thẳng, mặt phẳng trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "examples": [],
+    "scope": "hình ảnh trong thực tiễn",
+    "tags": [
+      "khong_gian",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C4_B11_NB055",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai đường thẳng song song",
+    "bai_so": "11",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được vị trí tương đối của hai đường thẳng trong không gian: trùng nhau, song song, cắt nhau, chéo nhau.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hai_duong_thang",
+      "vi_tri_tuong_doi"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B11_TH056",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai đường thẳng song song",
+    "bai_so": "11",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tính chất cơ bản về hai đường thẳng song song trong không gian.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hai_duong_thang",
+      "song_song"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B11_VD057",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai đường thẳng song song",
+    "bai_so": "11",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về hai đường thẳng song song để mô tả một số hình ảnh trong thực tiễn.",
+    "examples": [],
+    "scope": "hình ảnh trong thực tiễn",
+    "tags": [
+      "hai_duong_thang",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C4_B12_NB058",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng song song",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được đường thẳng song song với mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_mat_song_song"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B12_TH059",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng song song",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được điều kiện để đường thẳng song song với mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_mat_song_song",
+      "dieu_kien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B12_TH060",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng song song",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tính chất cơ bản về đường thẳng song song với mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_mat_song_song",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B12_VD061",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Đường thẳng và mặt phẳng song song",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về đường thẳng song song với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "examples": [],
+    "scope": "hình ảnh trong thực tiễn",
+    "tags": [
+      "duong_mat_song_song",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C4_B13_NB062",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được hai mặt phẳng song song trong không gian.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hai_mat_phang_song_song"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B13_TH063",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được điều kiện để hai mặt phẳng song song.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hai_mat_phang_song_song",
+      "dieu_kien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B13_TH064",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tính chất cơ bản về hai mặt phẳng song song.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hai_mat_phang_song_song",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B13_TH065",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được định lí Thalès trong không gian.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dinh_li_thales"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B13_TH066",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tính chất cơ bản của lăng trụ và hình hộp.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "lang_tru",
+      "hinh_hop"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B13_VD067",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Hai mặt phẳng song song",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về quan hệ song song để mô tả một số hình ảnh trong thực tiễn.",
+    "examples": [],
+    "scope": "hình ảnh trong thực tiễn",
+    "tags": [
+      "quan_he_song_song",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C4_B14_NB068",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Phép chiếu song song",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm và các tính chất cơ bản về phép chiếu song song.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phep_chieu_song_song"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C4_B14_TH069",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Phép chiếu song song",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được ảnh của một điểm, một đoạn thẳng, một tam giác, một đường tròn qua một phép chiếu song song.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phep_chieu_song_song",
+      "anh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B14_TH070",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Phép chiếu song song",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Vẽ được",
+    "content": "Vẽ được hình biểu diễn của một số hình khối đơn giản.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "hinh_bieu_dien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C4_B14_VD071",
+    "lop": 11,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Quan hệ song song trong không gian",
+    "chuong_so": "4",
+    "bai": "Phép chiếu song song",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được kiến thức về phép chiếu song song để mô tả một số hình ảnh trong thực tiễn.",
+    "examples": [],
+    "scope": "hình ảnh trong thực tiễn",
+    "tags": [
+      "phep_chieu_song_song",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

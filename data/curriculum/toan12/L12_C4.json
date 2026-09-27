@@ -1,0 +1,182 @@
+[
+  {
+    "id": "L12_C4_B10_NB025",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Nguyên hàm",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm nguyên hàm của một hàm số.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "nguyen_ham"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C4_B10_TH026",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Nguyên hàm",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tính chất cơ bản của nguyên hàm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "nguyen_ham",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B10_TH027",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Nguyên hàm",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được nguyên hàm của một số hàm số sơ cấp.",
+    "examples": [],
+    "scope": "các hàm x mũ alpha, 1/x, sin x, cos x, 1/cos^2 x, 1/sin^2 x, a mũ x, e mũ x",
+    "tags": [
+      "nguyen_ham",
+      "ham_so_cap"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B10_TH028",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Nguyên hàm",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
+    "examples": [],
+    "scope": "trong những trường hợp đơn giản",
+    "tags": [
+      "nguyen_ham",
+      "tinh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B11_NB029",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Tích phân",
+    "bai_so": "11",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa và các tính chất của tích phân.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "tich_phan",
+      "dinh_nghia",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C4_B11_TH030",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Tích phân",
+    "bai_so": "11",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được tích phân trong những trường hợp đơn giản.",
+    "examples": [],
+    "scope": "trong những trường hợp đơn giản",
+    "tags": [
+      "tich_phan",
+      "tinh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B12_TH031",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Ứng dụng hình học của tích phân",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được tích phân để tính diện tích của một số hình phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "tich_phan",
+      "dien_tich_hinh_phang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B12_TH032",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Ứng dụng hình học của tích phân",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được tích phân để tính thể tích của một số hình khối.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "tich_phan",
+      "the_tich"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C4_B12_VD033",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Nguyên hàm và tích phân",
+    "chuong_so": "4",
+    "bai": "Ứng dụng hình học của tích phân",
+    "bai_so": "12",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được tích phân để giải một số bài toán có liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "tich_phan",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

@@ -1,0 +1,558 @@
+[
+  {
+    "id": "L11_C1_B1_NB001",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm góc lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_luong_giac"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B1_NB002",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được số đo của góc lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_luong_giac",
+      "so_do"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B1_TH003",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được hệ thức Chasles cho các góc lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_luong_giac",
+      "he_thuc_chasles"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B1_NB004",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được đường tròn lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_tron_luong_giac"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B1_NB005",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm giá trị lượng giác của một góc lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "gia_tri_luong_giac"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B1_NB006",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Mô tả được",
+    "content": "Mô tả được bảng giá trị lượng giác của một số góc lượng giác thường gặp.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "gia_tri_luong_giac",
+      "goc_thuong_gap"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B1_TH007",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được các hệ thức cơ bản giữa các giá trị lượng giác của một góc lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "gia_tri_luong_giac",
+      "he_thuc_co_ban"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B1_TH008",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được quan hệ giữa các giá trị lượng giác của các góc lượng giác có liên quan đặc biệt: bù nhau, phụ nhau, đối nhau, hơn kém nhau pi.",
+    "examples": [],
+    "scope": "góc bù nhau, phụ nhau, đối nhau, hơn kém nhau pi",
+    "tags": [
+      "gia_tri_luong_giac",
+      "goc_lien_quan_dac_biet"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B1_TH009",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Giá trị lượng giác của góc lượng giác",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được máy tính cầm tay để tính giá trị lượng giác của một góc lượng giác khi biết số đo của góc đó.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "gia_tri_luong_giac",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B2_TH010",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Công thức lượng giác",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức cộng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "bien_doi_luong_giac",
+      "cong_thuc_cong"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B2_TH011",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Công thức lượng giác",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức góc nhân đôi.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "bien_doi_luong_giac",
+      "goc_nhan_doi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B2_TH012",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Công thức lượng giác",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức biến đổi tích thành tổng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "bien_doi_luong_giac",
+      "tich_thanh_tong"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B2_TH013",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Công thức lượng giác",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức biến đổi tổng thành tích.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "bien_doi_luong_giac",
+      "tong_thanh_tich"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B2_VD014",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Công thức lượng giác",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác và các phép biến đổi lượng giác.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "bien_doi_luong_giac",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C1_B3_NB015",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các khái niệm về hàm số chẵn, hàm số lẻ, hàm số tuần hoàn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_chan_le",
+      "tuan_hoan"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B3_NB016",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các đặc trưng hình học của đồ thị hàm số chẵn, hàm số lẻ, hàm số tuần hoàn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_chan_le",
+      "do_thi"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B3_NB017",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa các hàm lượng giác y = sin x, y = cos x, y = tan x, y = cot x thông qua đường tròn lượng giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_luong_giac",
+      "duong_tron_luong_giac"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B3_TH018",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được bảng giá trị của bốn hàm số lượng giác đó trên một chu kì.",
+    "examples": [],
+    "scope": "trên một chu kì",
+    "tags": [
+      "ham_so_luong_giac",
+      "bang_gia_tri"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B3_TH019",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Vẽ được",
+    "content": "Vẽ được đồ thị của các hàm số y = sin x, y = cos x, y = tan x, y = cot x.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_luong_giac",
+      "do_thi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B3_TH020",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được tập xác định, tập giá trị, tính chất chẵn lẻ, tính tuần hoàn, chu kì, khoảng đồng biến, nghịch biến của các hàm số lượng giác dựa vào đồ thị.",
+    "examples": [],
+    "scope": "dựa vào đồ thị",
+    "tags": [
+      "ham_so_luong_giac",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B3_VD021",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Hàm số lượng giác",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với hàm số lượng giác.",
+    "examples": [],
+    "scope": "ví dụ: bài toán liên quan đến dao động điều hoà trong Vật lí",
+    "tags": [
+      "ham_so_luong_giac",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C1_B4_NB022",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản sin x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "sin"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B4_NB023",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản cos x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "cos"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B4_NB024",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản tan x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "tan"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B4_NB025",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản cot x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "cot"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C1_B4_TH026",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được nghiệm gần đúng của phương trình lượng giác cơ bản bằng máy tính cầm tay.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B4_TH027",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải được",
+    "content": "Giải được phương trình lượng giác ở dạng vận dụng trực tiếp phương trình lượng giác cơ bản.",
+    "examples": [],
+    "scope": "ví dụ: sin 2x = sin 3x, sin x = cos 3x",
+    "tags": [
+      "phuong_trinh_luong_giac"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C1_B4_VD028",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số lượng giác và phương trình lượng giác",
+    "chuong_so": "1",
+    "bai": "Phương trình lượng giác cơ bản",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với phương trình lượng giác.",
+    "examples": [],
+    "scope": "ví dụ: bài toán liên quan đến dao động điều hoà trong Vật lí",
+    "tags": [
+      "phuong_trinh_luong_giac",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

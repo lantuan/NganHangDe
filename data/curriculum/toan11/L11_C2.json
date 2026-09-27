@@ -1,0 +1,220 @@
+[
+  {
+    "id": "L11_C2_B5_NB029",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Dãy số",
+    "bai_so": "5",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được dãy số hữu hạn, dãy số vô hạn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "day_so"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C2_B5_TH030",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Dãy số",
+    "bai_so": "5",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thể hiện được",
+    "content": "Thể hiện được cách cho dãy số bằng liệt kê các số hạng; bằng công thức tổng quát; bằng hệ thức truy hồi; bằng cách mô tả.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "day_so",
+      "cach_cho_day_so"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B5_TH031",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Dãy số",
+    "bai_so": "5",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được tính chất tăng, giảm, bị chặn của dãy số.",
+    "examples": [],
+    "scope": "trong những trường hợp đơn giản",
+    "tags": [
+      "day_so",
+      "tang_giam",
+      "bi_chan"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B6_NB032",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số cộng",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một dãy số là cấp số cộng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_cong"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C2_B6_TH033",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số cộng",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được công thức xác định số hạng tổng quát của cấp số cộng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_cong",
+      "so_hang_tong_quat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B6_TH034",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số cộng",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được tổng của n số hạng đầu tiên của cấp số cộng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_cong",
+      "tong_n_so_hang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B6_VD035",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số cộng",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số cộng.",
+    "examples": [],
+    "scope": "ví dụ: một số vấn đề trong Sinh học, trong Giáo dục dân số",
+    "tags": [
+      "cap_so_cong",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C2_B7_NB036",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số nhân",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một dãy số là cấp số nhân.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_nhan"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C2_B7_TH037",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số nhân",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được công thức xác định số hạng tổng quát của cấp số nhân.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_nhan",
+      "so_hang_tong_quat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B7_TH038",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số nhân",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được tổng của n số hạng đầu tiên của cấp số nhân.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cap_so_nhan",
+      "tong_n_so_hang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C2_B7_VD039",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Dãy số. Cấp số cộng và cấp số nhân",
+    "chuong_so": "2",
+    "bai": "Cấp số nhân",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số nhân.",
+    "examples": [],
+    "scope": "ví dụ: một số vấn đề trong Sinh học, trong Giáo dục dân số",
+    "tags": [
+      "cap_so_nhan",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

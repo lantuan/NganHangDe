@@ -54,12 +54,28 @@ def test_moi_ma_bai_deu_co_trong_curriculum(anh_xa, bai_curriculum):
 
 
 def test_moi_bai_trong_curriculum_deu_co_ly_thuyet(anh_xa, bai_curriculum):
-    """Bai nao chua co tep ly thuyet thi muc B chua phuc vu duoc bai do."""
-    thieu = sorted(ma for ma in bai_curriculum if ma not in anh_xa)
+    """
+    Bai nao chua co tep ly thuyet thi tro giang muc B chua phuc vu duoc bai do.
+
+    Chi doi hoi voi KHOI DA BAT DAU co tep ly thuyet. Khoi chua co tep nao
+    (co Lan bo sung dan tung khoi) thi khong coi la loi -- chi la chua lam.
+    """
+    khoi_da_co = {ma.split("_")[0] for ma in anh_xa}
+    thieu = sorted(ma for ma in bai_curriculum
+                   if ma.split("_")[0] in khoi_da_co and ma not in anh_xa)
     assert not thieu, (
         "Bai co trong curriculum nhung CHUA co tep ly thuyet:\n"
         + "\n".join(f"  {ma}  {bai_curriculum[ma]}" for ma in thieu)
     )
+
+
+def test_bao_khoi_chua_co_ly_thuyet(anh_xa, bai_curriculum):
+    """Khoi nao chua co tep ly thuyet nao thi in ra cho biet, khong bao loi."""
+    khoi_da_co = {ma.split("_")[0] for ma in anh_xa}
+    chua = sorted({ma.split("_")[0] for ma in bai_curriculum} - khoi_da_co)
+    if chua:
+        print("\nChua co tep ly thuyet cho khoi: " + ", ".join(chua)
+              + " -- tro giang muc B chua phuc vu duoc cac khoi nay.")
 
 
 def test_ten_bai_trong_bang_khop_curriculum(anh_xa, bai_curriculum):

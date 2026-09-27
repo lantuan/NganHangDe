@@ -1,0 +1,324 @@
+[
+  {
+    "id": "L11_C6_B18_NB084",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Luỹ thừa với số mũ thực",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm luỹ thừa với số mũ nguyên của một số thực khác 0; luỹ thừa với số mũ hữu tỉ và luỹ thừa với số mũ thực của một số thực dương.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "luy_thua",
+      "so_mu"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C6_B18_TH085",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Luỹ thừa với số mũ thực",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được các tính chất của phép tính luỹ thừa với số mũ nguyên, số mũ hữu tỉ và số mũ thực.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "luy_thua",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B18_TH086",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Luỹ thừa với số mũ thực",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được tính chất của phép tính luỹ thừa trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "examples": [],
+    "scope": "tính viết và tính nhẩm, tính nhanh một cách hợp lí",
+    "tags": [
+      "luy_thua",
+      "rut_gon"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B18_TH087",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Luỹ thừa với số mũ thực",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được giá trị biểu thức số có chứa phép tính luỹ thừa bằng sử dụng máy tính cầm tay.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "luy_thua",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B18_VD088",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Luỹ thừa với số mũ thực",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính luỹ thừa.",
+    "examples": [],
+    "scope": "ví dụ: bài toán về lãi suất, sự tăng trưởng",
+    "tags": [
+      "luy_thua",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C6_B19_NB089",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Lôgarit",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm lôgarit cơ số a (a > 0, a khác 1) của một số thực dương.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "logarit"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C6_B19_TH090",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Lôgarit",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được các tính chất của phép tính lôgarit nhờ sử dụng định nghĩa hoặc các tính chất đã biết trước đó.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "logarit",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B19_TH091",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Lôgarit",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được tính chất của phép tính lôgarit trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "examples": [],
+    "scope": "tính viết và tính nhẩm, tính nhanh một cách hợp lí",
+    "tags": [
+      "logarit",
+      "rut_gon"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B19_TH092",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Lôgarit",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được giá trị (đúng hoặc gần đúng) của lôgarit bằng cách sử dụng máy tính cầm tay.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "logarit",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B19_VD093",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Lôgarit",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính lôgarit.",
+    "examples": [],
+    "scope": "ví dụ: bài toán liên quan đến độ pH trong Hoá học",
+    "tags": [
+      "logarit",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C6_B20_NB094",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Hàm số mũ và hàm số lôgarit",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được hàm số mũ và hàm số lôgarit. Nêu được một số ví dụ thực tế về hàm số mũ, hàm số lôgarit.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_mu",
+      "ham_so_logarit"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C6_B20_TH095",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Hàm số mũ và hàm số lôgarit",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Nhận dạng được",
+    "content": "Nhận dạng được đồ thị của các hàm số mũ, hàm số lôgarit.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_mu",
+      "ham_so_logarit",
+      "do_thi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B20_TH096",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Hàm số mũ và hàm số lôgarit",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được các tính chất của hàm số mũ, hàm số lôgarit thông qua đồ thị của chúng.",
+    "examples": [],
+    "scope": "thông qua đồ thị",
+    "tags": [
+      "ham_so_mu",
+      "ham_so_logarit",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B20_VD097",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Hàm số mũ và hàm số lôgarit",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với hàm số mũ và hàm số lôgarit.",
+    "examples": [],
+    "scope": "ví dụ: lãi suất, sự tăng trưởng",
+    "tags": [
+      "ham_so_mu",
+      "ham_so_logarit",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C6_B21_TH098",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Phương trình, bất phương trình mũ và lôgarit",
+    "bai_so": "21",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải được",
+    "content": "Giải được phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản.",
+    "examples": [],
+    "scope": "ở dạng đơn giản",
+    "tags": [
+      "phuong_trinh_mu",
+      "bat_phuong_trinh_logarit"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C6_B21_VD099",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số mũ và hàm số lôgarit",
+    "chuong_so": "6",
+    "bai": "Phương trình, bất phương trình mũ và lôgarit",
+    "bai_so": "21",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phương trình, bất phương trình mũ và lôgarit.",
+    "examples": [],
+    "scope": "ví dụ: bài toán liên quan đến độ pH, độ rung chấn",
+    "tags": [
+      "phuong_trinh_mu",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

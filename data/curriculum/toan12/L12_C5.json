@@ -1,0 +1,383 @@
+[
+  {
+    "id": "L12_C5_B13_NB034",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được phương trình tổng quát của mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "phuong_trinh_tong_quat"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C5_B13_TH035",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình tổng quát của mặt phẳng khi biết một điểm và vectơ pháp tuyến.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "vecto_phap_tuyen"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B13_TH036",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình tổng quát của mặt phẳng khi biết một điểm và cặp vectơ chỉ phương.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "cap_vecto_chi_phuong"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B13_TH037",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình tổng quát của mặt phẳng khi biết ba điểm không thẳng hàng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "ba_diem"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B13_TH038",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được điều kiện để hai mặt phẳng song song, vuông góc với nhau.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "song_song",
+      "vuong_goc"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B13_TH039",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được khoảng cách từ một điểm đến một mặt phẳng bằng phương pháp toạ độ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_phang",
+      "khoang_cach"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B13_VD040",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt phẳng",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về phương trình mặt phẳng để giải một số bài toán liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "mat_phang",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L12_C5_B14_NB041",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình đường thẳng trong không gian",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được phương trình chính tắc, phương trình tham số, vectơ chỉ phương của đường thẳng trong không gian.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang_khong_gian",
+      "phuong_trinh"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C5_B14_TH042",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình đường thẳng trong không gian",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình của đường thẳng khi biết một điểm và một vectơ chỉ phương.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang_khong_gian",
+      "vecto_chi_phuong"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B14_TH043",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình đường thẳng trong không gian",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình của đường thẳng khi biết hai điểm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang_khong_gian",
+      "hai_diem"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B14_TH044",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình đường thẳng trong không gian",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được điều kiện để hai đường thẳng chéo nhau, cắt nhau, song song hoặc vuông góc với nhau.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang_khong_gian",
+      "vi_tri_tuong_doi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B14_VD045",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình đường thẳng trong không gian",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về phương trình đường thẳng trong không gian để giải một số bài toán liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "duong_thang_khong_gian",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L12_C5_B15_TH046",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Công thức tính góc trong không gian",
+    "bai_so": "15",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được công thức tính góc giữa hai đường thẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_khong_gian",
+      "hai_duong_thang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B15_TH047",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Công thức tính góc trong không gian",
+    "bai_so": "15",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được công thức tính góc giữa đường thẳng và mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_khong_gian",
+      "duong_va_mat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B15_TH048",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Công thức tính góc trong không gian",
+    "bai_so": "15",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được công thức tính góc giữa hai mặt phẳng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "goc_khong_gian",
+      "hai_mat_phang"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B16_NB049",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt cầu",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được phương trình mặt cầu.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_cau",
+      "phuong_trinh"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C5_B16_TH050",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt cầu",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được tâm, bán kính của mặt cầu khi biết phương trình của nó.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_cau",
+      "tam_ban_kinh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B16_TH051",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt cầu",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình của mặt cầu khi biết tâm và bán kính.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mat_cau",
+      "lap_phuong_trinh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C5_B16_VD052",
+    "lop": 12,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong không gian",
+    "chuong_so": "5",
+    "bai": "Phương trình mặt cầu",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về phương trình mặt cầu để giải một số bài toán liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "mat_cau",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

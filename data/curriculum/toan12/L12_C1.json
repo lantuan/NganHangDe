@@ -1,0 +1,241 @@
+[
+  {
+    "id": "L12_C1_B1_NB001",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Tính đơn điệu và cực trị của hàm số",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được tính đồng biến, nghịch biến của một hàm số trên một khoảng dựa vào dấu của đạo hàm cấp một của nó.",
+    "examples": [],
+    "scope": "dựa vào dấu của đạo hàm cấp một",
+    "tags": [
+      "dao_ham",
+      "don_dieu"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C1_B1_TH002",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Tính đơn điệu và cực trị của hàm số",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thể hiện được",
+    "content": "Thể hiện được tính đồng biến, nghịch biến của hàm số trong bảng biến thiên.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "don_dieu",
+      "bang_bien_thien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B1_TH003",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Tính đơn điệu và cực trị của hàm số",
+    "bai_so": "1",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được tính đơn điệu, điểm cực trị, giá trị cực trị của hàm số thông qua bảng biến thiên hoặc thông qua hình ảnh hình học của đồ thị hàm số.",
+    "examples": [],
+    "scope": "thông qua bảng biến thiên hoặc đồ thị",
+    "tags": [
+      "cuc_tri",
+      "bang_bien_thien",
+      "do_thi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B2_NB004",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Giá trị lớn nhất và giá trị nhỏ nhất của hàm số",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một tập xác định cho trước.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "gtln_gtnn"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C1_B2_TH005",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Giá trị lớn nhất và giá trị nhỏ nhất của hàm số",
+    "bai_so": "2",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được giá trị lớn nhất, giá trị nhỏ nhất của hàm số bằng đạo hàm.",
+    "examples": [],
+    "scope": "trong những trường hợp đơn giản",
+    "tags": [
+      "gtln_gtnn",
+      "dao_ham"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B3_NB006",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Đường tiệm cận của đồ thị hàm số",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được hình ảnh hình học của đường tiệm cận ngang, đường tiệm cận đứng, đường tiệm cận xiên của đồ thị hàm số.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "tiem_can"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C1_B4_TH007",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được sơ đồ tổng quát để khảo sát hàm số: tìm tập xác định, xét chiều biến thiên, tìm cực trị, tìm tiệm cận, lập bảng biến thiên, vẽ đồ thị.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "khao_sat_ham_so",
+      "so_do_tong_quat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B4_TH008",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Khảo sát được",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm số bậc ba.",
+    "examples": [],
+    "scope": "hàm số bậc ba y = ax^3 + bx^2 + cx + d",
+    "tags": [
+      "khao_sat_ham_so",
+      "ham_bac_ba"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B4_TH009",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Khảo sát được",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm phân thức bậc nhất trên bậc nhất.",
+    "examples": [],
+    "scope": "hàm số y = (ax + b)/(cx + d)",
+    "tags": [
+      "khao_sat_ham_so",
+      "phan_thuc_bac_nhat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B4_TH010",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Khảo sát được",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm phân thức bậc hai trên bậc nhất.",
+    "examples": [],
+    "scope": "hàm số y = (ax^2 + bx + c)/(mx + n)",
+    "tags": [
+      "khao_sat_ham_so",
+      "phan_thuc_bac_hai"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C1_B4_NB011",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm số đã khảo sát.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "do_thi",
+      "doi_xung"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C1_B4_VD012",
+    "lop": 12,
+    "hoc_phan": "Một số yếu tố giải tích",
+    "chuong": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
+    "chuong_so": "1",
+    "bai": "Khảo sát sự biến thiên và vẽ đồ thị của hàm số",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được đạo hàm và khảo sát hàm số để giải quyết một số vấn đề liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "khao_sat_ham_so",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

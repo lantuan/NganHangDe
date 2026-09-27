@@ -1,0 +1,121 @@
+[
+  {
+    "id": "L12_C6_B17_NB053",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Xác suất có điều kiện",
+    "bai_so": "17",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm về xác suất có điều kiện.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat_co_dieu_kien"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L12_C6_B17_TH054",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Xác suất có điều kiện",
+    "bai_so": "17",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được ý nghĩa của xác suất có điều kiện trong những tình huống thực tiễn quen thuộc.",
+    "examples": [],
+    "scope": "tình huống thực tiễn quen thuộc",
+    "tags": [
+      "xac_suat_co_dieu_kien",
+      "y_nghia"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C6_B18_TH055",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Công thức xác suất toàn phần và công thức Bayes",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được công thức xác suất toàn phần thông qua bảng dữ liệu thống kê 2x2 và sơ đồ hình cây.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat_toan_phan",
+      "so_do_hinh_cay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C6_B18_TH056",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Công thức xác suất toàn phần và công thức Bayes",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được công thức Bayes thông qua bảng dữ liệu thống kê 2x2 và sơ đồ hình cây.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "cong_thuc_bayes",
+      "so_do_hinh_cay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C6_B18_VD057",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Công thức xác suất toàn phần và công thức Bayes",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được công thức Bayes để tính xác suất có điều kiện và vận dụng vào một số bài toán thực tiễn.",
+    "examples": [],
+    "scope": "bài toán có nội dung thực tiễn",
+    "tags": [
+      "cong_thuc_bayes",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L12_C6_B18_VD058",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Xác suất có điều kiện",
+    "chuong_so": "6",
+    "bai": "Công thức xác suất toàn phần và công thức Bayes",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được sơ đồ hình cây để tính xác suất có điều kiện trong một số bài toán thực tiễn liên quan tới thống kê.",
+    "examples": [],
+    "scope": "bài toán thực tiễn liên quan tới thống kê",
+    "tags": [
+      "so_do_hinh_cay",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

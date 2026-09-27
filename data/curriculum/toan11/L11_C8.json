@@ -1,0 +1,142 @@
+[
+  {
+    "id": "L11_C8_B28_NB130",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Biến cố hợp, biến cố giao, biến cố độc lập",
+    "bai_so": "28",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm biến cố hợp của hai biến cố.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_hop"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C8_B28_NB131",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Biến cố hợp, biến cố giao, biến cố độc lập",
+    "bai_so": "28",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm biến cố giao của hai biến cố.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_giao"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C8_B28_NB132",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Biến cố hợp, biến cố giao, biến cố độc lập",
+    "bai_so": "28",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm biến cố độc lập.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_doc_lap"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C8_B29_TH133",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Công thức cộng xác suất",
+    "bai_so": "29",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố hợp bằng cách sử dụng công thức cộng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "cong_thuc_cong"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C8_B30_TH134",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Công thức nhân xác suất cho hai biến cố độc lập",
+    "bai_so": "30",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố giao bằng cách sử dụng công thức nhân.",
+    "examples": [],
+    "scope": "cho trường hợp biến cố độc lập",
+    "tags": [
+      "xac_suat",
+      "cong_thuc_nhan"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C8_B30_TH135",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Công thức nhân xác suất cho hai biến cố độc lập",
+    "bai_so": "30",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố trong một số bài toán đơn giản bằng phương pháp tổ hợp.",
+    "examples": [],
+    "scope": "bài toán đơn giản",
+    "tags": [
+      "xac_suat",
+      "phuong_phap_to_hop"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C8_B30_TH136",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "bai": "Công thức nhân xác suất cho hai biến cố độc lập",
+    "bai_so": "30",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất trong một số bài toán đơn giản bằng cách sử dụng sơ đồ hình cây.",
+    "examples": [],
+    "scope": "bài toán đơn giản",
+    "tags": [
+      "xac_suat",
+      "so_do_hinh_cay"
+    ],
+    "difficulty_rank": 2
+  }
+]

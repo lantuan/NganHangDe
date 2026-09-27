@@ -4471,3 +4471,65 @@ mapping thi test do hong ngay.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.77 - 2026-09-27
+
+## Bao THIEU thay vi bao loi
+
+Theo y co Lan: cho nao chua co thi ghi ro THIEU O DAU va MA NAO, roi van ra de
+tiep - khong dung ca de lai.
+
+Dong bao trong de gio ghi:
+    [THIEU O MAPPING --- ID: L10_C5_B11_TH069_SA_A]
+    [THIEU O PYTHON  --- ID: L10_C5_B11_TH069_MC_A]
+
+"Thieu o Mapping" = chua khai dang cau hoi nao cho yeu cau can dat do.
+"Thieu o Python"  = da khai dang trong Mapping nhung chua viet ham sinh.
+
+Ket qua chon cau cung mang them hai truong thieu_o va ma_thieu de man hinh
+giao vien liet ke duoc danh sach can bo sung.
+
+Mac dinh cho_phep_thieu doi tu False sang True o moi cho (selector, assembler,
+blueprint, endpoint /exam) nen khong con truong hop vo ca de nua.
+
+## Curriculum + Mapping lop 11 va lop 12
+
+    Lop 11: 148 yeu cau can dat / 9 chuong / 33 bai | 238 dang mapping
+    Lop 12:  58 yeu cau can dat / 6 chuong / 18 bai | 113 dang mapping
+
+Doi chieu tung dong voi Thong tu 32/2018 (lop 11 tr.89-102, lop 12 tr.105-110).
+Moi yeu cau deu co it nhat mot dang; moi chuong deu co cau Dung/Sai.
+
+Tong ca ba khoi: 360 yeu cau can dat, 610 dang mapping, 46 ham Python.
+
+## PHAT HIEN QUAN TRONG: PPCT va Curriculum danh so khac nhau
+
+He thong noi PPCT voi Curriculum bang chuoi ma L{lop}_C{chuong}_B{bai}. Hai ben
+dang danh so khac nhau nen ma VAN KHOP CHUOI nhung tro vao BAI KHAC - may khong
+bao loi, chi lang le lay sai yeu cau can dat.
+
+    L10_C5_B12  PPCT: So gan dung va sai so
+                Curriculum: Phuong trinh quy ve phuong trinh bac hai
+    L10_C6_B15  PPCT: Ham so
+                Curriculum: Cac so dac trung do do phan tan
+
+Hoc sinh chon on den bai "So gan dung" se nhan de "Phuong trinh bac hai".
+
+Chua gay hau qua vi moi chuong 1 lop 10 co ham Python, ma chuong 1 thi hai ben
+trung nhau. Nhung ngay khi viet ham cho chuong khac la loi hien ra.
+
+Chua sua gi - can co Lan quyet ben nao la chuan. Phan tich day du:
+docs/25_LECH_PPCT_CURRICULUM.md
+
+## Sua bai test ly thuyet
+
+test_moi_bai_trong_curriculum_deu_co_ly_thuyet truoc doi hoi MOI bai trong
+curriculum phai co tep ly thuyet - them lop 11, 12 vao la hong ngay. Sua lai:
+chi doi hoi voi KHOI DA BAT DAU co tep ly thuyet. Khoi chua co tep nao thi in
+ra cho biet, khong bao loi. Dung tinh than "chua lam thi bao thieu".
+
+259 bai test qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

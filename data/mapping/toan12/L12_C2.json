@@ -1,0 +1,62 @@
+[
+  {
+    "id": "L12_C2_B5_NB013_MC_A",
+    "content": "Nhận biết được vectơ và các phép toán vectơ trong không gian: tổng và hiệu của hai vectơ, tích của một số với một vectơ, tích vô hướng của hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vectơ và các phép toán vectơ trong không gian: tổng và hiệu của"
+  },
+  {
+    "id": "L12_C2_B6_NB014_MC_A",
+    "content": "Nhận biết được toạ độ của một vectơ đối với hệ trục toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Toạ độ của một vectơ đối với hệ trục toạ độ"
+  },
+  {
+    "id": "L12_C2_B6_TH015_MC_A",
+    "content": "Xác định được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Độ dài của một vectơ khi biết toạ độ hai đầu mút của nó"
+  },
+  {
+    "id": "L12_C2_B6_TH015_SA_A",
+    "content": "Xác định được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài vectơ trong không gian"
+  },
+  {
+    "id": "L12_C2_B7_TH016_MC_A",
+    "content": "Xác định được biểu thức toạ độ của các phép toán vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu thức toạ độ của các phép toán vectơ"
+  },
+  {
+    "id": "L12_C2_B7_TH016_SA_A",
+    "content": "Xác định được biểu thức toạ độ của các phép toán vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Toạ độ vectơ sau phép toán"
+  },
+  {
+    "id": "L12_C2_B7_VD017_MC_A",
+    "content": "Vận dụng được toạ độ của vectơ để giải một số bài toán có liên quan đến thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Toạ độ của vectơ để giải một số bài toán có liên quan đến thực"
+  },
+  {
+    "id": "L12_C2_B7_VD017_TL_A",
+    "content": "Vận dụng được toạ độ của vectơ để giải một số bài toán có liên quan đến thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn dùng toạ độ trong không gian"
+  },
+  {
+    "id": "L12_C2_TF_A",
+    "content": "Vectơ trong không gian",
+    "Loai": "Đúng sai",
+    "Dang": "Phép toán vectơ"
+  },
+  {
+    "id": "L12_C2_TF_B",
+    "content": "Hệ trục toạ độ trong không gian",
+    "Loai": "Đúng sai",
+    "Dang": "Toạ độ vectơ và độ dài"
+  }
+]

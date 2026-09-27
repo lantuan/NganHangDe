@@ -505,7 +505,7 @@ def build_and_select(
     ki_thi: str | None = None,
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
-    cho_phep_thieu: bool = False,
+    cho_phep_thieu: bool = True,
 ) -> dict:
     """
     Ghép build_blueprint() + select_questions() (chế độ chính thức, theo

@@ -1,0 +1,236 @@
+[
+  {
+    "id": "L11_C1_B1_NB001_MC_A",
+    "content": "Nhận biết được khái niệm góc lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Góc lượng giác"
+  },
+  {
+    "id": "L11_C1_B1_NB002_MC_A",
+    "content": "Nhận biết được số đo của góc lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Số đo của góc lượng giác"
+  },
+  {
+    "id": "L11_C1_B1_TH003_MC_A",
+    "content": "Nhận biết được hệ thức Chasles cho các góc lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hệ thức Chasles cho các góc lượng giác"
+  },
+  {
+    "id": "L11_C1_B1_NB004_MC_A",
+    "content": "Nhận biết được đường tròn lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đường tròn lượng giác"
+  },
+  {
+    "id": "L11_C1_B1_NB005_MC_A",
+    "content": "Nhận biết được khái niệm giá trị lượng giác của một góc lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị lượng giác của một góc lượng giác"
+  },
+  {
+    "id": "L11_C1_B1_NB006_MC_A",
+    "content": "Mô tả được bảng giá trị lượng giác của một số góc lượng giác thường gặp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bảng giá trị lượng giác của một số góc lượng giác thường gặp"
+  },
+  {
+    "id": "L11_C1_B1_TH007_MC_A",
+    "content": "Mô tả được các hệ thức cơ bản giữa các giá trị lượng giác của một góc lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hệ thức cơ bản giữa các giá trị lượng giác của một góc lượng"
+  },
+  {
+    "id": "L11_C1_B1_TH008_MC_A",
+    "content": "Mô tả được quan hệ giữa các giá trị lượng giác của các góc lượng giác có liên quan đặc biệt: bù nhau, phụ nhau, đối nhau, hơn kém nhau pi.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Quan hệ giữa các giá trị lượng giác của các góc lượng giác có"
+  },
+  {
+    "id": "L11_C1_B1_TH008_SA_A",
+    "content": "Mô tả được quan hệ giữa các giá trị lượng giác của các góc lượng giác có liên quan đặc biệt: bù nhau, phụ nhau, đối nhau, hơn kém nhau pi.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Rút gọn biểu thức dùng góc liên quan đặc biệt"
+  },
+  {
+    "id": "L11_C1_B1_TH009_MC_A",
+    "content": "Sử dụng được máy tính cầm tay để tính giá trị lượng giác của một góc lượng giác khi biết số đo của góc đó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Máy tính cầm tay để tính giá trị lượng giác của một góc lượng"
+  },
+  {
+    "id": "L11_C1_B2_TH010_MC_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức cộng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép biến đổi lượng giác cơ bản: công thức cộng"
+  },
+  {
+    "id": "L11_C1_B2_TH010_SA_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức cộng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính giá trị biểu thức bằng công thức cộng"
+  },
+  {
+    "id": "L11_C1_B2_TH011_MC_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức góc nhân đôi.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép biến đổi lượng giác cơ bản: công thức góc nhân đôi"
+  },
+  {
+    "id": "L11_C1_B2_TH011_SA_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức góc nhân đôi.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính giá trị biểu thức bằng công thức góc nhân đôi"
+  },
+  {
+    "id": "L11_C1_B2_TH012_MC_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức biến đổi tích thành tổng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép biến đổi lượng giác cơ bản: công thức biến đổi tích thành"
+  },
+  {
+    "id": "L11_C1_B2_TH013_MC_A",
+    "content": "Mô tả được phép biến đổi lượng giác cơ bản: công thức biến đổi tổng thành tích.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép biến đổi lượng giác cơ bản: công thức biến đổi tổng thành"
+  },
+  {
+    "id": "L11_C1_B2_VD014_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác và các phép biến đổi lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác"
+  },
+  {
+    "id": "L11_C1_B2_VD014_TL_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác và các phép biến đổi lượng giác.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn dùng biến đổi lượng giác"
+  },
+  {
+    "id": "L11_C1_B3_NB015_MC_A",
+    "content": "Nhận biết được các khái niệm về hàm số chẵn, hàm số lẻ, hàm số tuần hoàn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Khái niệm về hàm số chẵn, hàm số lẻ, hàm số tuần hoàn"
+  },
+  {
+    "id": "L11_C1_B3_NB016_MC_A",
+    "content": "Nhận biết được các đặc trưng hình học của đồ thị hàm số chẵn, hàm số lẻ, hàm số tuần hoàn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đặc trưng hình học của đồ thị hàm số chẵn, hàm số lẻ, hàm số"
+  },
+  {
+    "id": "L11_C1_B3_NB017_MC_A",
+    "content": "Nhận biết được định nghĩa các hàm lượng giác y = sin x, y = cos x, y = tan x, y = cot x thông qua đường tròn lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Định nghĩa các hàm lượng giác y = sin x, y = cos x, y = tan x"
+  },
+  {
+    "id": "L11_C1_B3_TH018_MC_A",
+    "content": "Mô tả được bảng giá trị của bốn hàm số lượng giác đó trên một chu kì.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bảng giá trị của bốn hàm số lượng giác đó trên một chu kì"
+  },
+  {
+    "id": "L11_C1_B3_TH019_MC_A",
+    "content": "Vẽ được đồ thị của các hàm số y = sin x, y = cos x, y = tan x, y = cot x.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đồ thị của các hàm số y = sin x, y = cos x, y = tan x, y = cot x"
+  },
+  {
+    "id": "L11_C1_B3_TH020_MC_A",
+    "content": "Giải thích được tập xác định, tập giá trị, tính chất chẵn lẻ, tính tuần hoàn, chu kì, khoảng đồng biến, nghịch biến của các hàm số lượng giác dựa vào đồ thị.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập xác định, tập giá trị, tính chất chẵn lẻ, tính tuần hoàn"
+  },
+  {
+    "id": "L11_C1_B3_TH020_SA_A",
+    "content": "Giải thích được tập xác định, tập giá trị, tính chất chẵn lẻ, tính tuần hoàn, chu kì, khoảng đồng biến, nghịch biến của các hàm số lượng giác dựa vào đồ thị.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tập giá trị, chu kì của hàm số lượng giác"
+  },
+  {
+    "id": "L11_C1_B3_VD021_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với hàm số lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề thực tiễn gắn với hàm số lượng giác"
+  },
+  {
+    "id": "L11_C1_B3_VD021_TL_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với hàm số lượng giác.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán dao động điều hoà"
+  },
+  {
+    "id": "L11_C1_B4_NB022_MC_A",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản sin x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức nghiệm của phương trình lượng giác cơ bản sin x = m"
+  },
+  {
+    "id": "L11_C1_B4_NB023_MC_A",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản cos x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức nghiệm của phương trình lượng giác cơ bản cos x = m"
+  },
+  {
+    "id": "L11_C1_B4_NB024_MC_A",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản tan x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức nghiệm của phương trình lượng giác cơ bản tan x = m"
+  },
+  {
+    "id": "L11_C1_B4_NB025_MC_A",
+    "content": "Nhận biết được công thức nghiệm của phương trình lượng giác cơ bản cot x = m bằng cách vận dụng đồ thị hàm số lượng giác tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức nghiệm của phương trình lượng giác cơ bản cot x = m"
+  },
+  {
+    "id": "L11_C1_B4_TH026_MC_A",
+    "content": "Tính được nghiệm gần đúng của phương trình lượng giác cơ bản bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nghiệm gần đúng của phương trình lượng giác cơ bản bằng máy"
+  },
+  {
+    "id": "L11_C1_B4_TH026_SA_A",
+    "content": "Tính được nghiệm gần đúng của phương trình lượng giác cơ bản bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số nghiệm của phương trình lượng giác trên một khoảng"
+  },
+  {
+    "id": "L11_C1_B4_TH026_TL_A",
+    "content": "Tính được nghiệm gần đúng của phương trình lượng giác cơ bản bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Giải phương trình lượng giác"
+  },
+  {
+    "id": "L11_C1_B4_TH027_MC_A",
+    "content": "Giải được phương trình lượng giác ở dạng vận dụng trực tiếp phương trình lượng giác cơ bản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phương trình lượng giác ở dạng vận dụng trực tiếp phương trình"
+  },
+  {
+    "id": "L11_C1_B4_VD028_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với phương trình lượng giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề thực tiễn gắn với phương trình lượng giác"
+  },
+  {
+    "id": "L11_C1_B4_VD028_TL_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với phương trình lượng giác.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn dẫn đến phương trình lượng giác"
+  },
+  {
+    "id": "L11_C1_TF_A",
+    "content": "Giá trị lượng giác và công thức lượng giác",
+    "Loai": "Đúng sai",
+    "Dang": "Góc lượng giác, biến đổi lượng giác"
+  },
+  {
+    "id": "L11_C1_TF_B",
+    "content": "Hàm số lượng giác và phương trình lượng giác",
+    "Loai": "Đúng sai",
+    "Dang": "Đồ thị, tính chất, nghiệm phương trình"
+  }
+]

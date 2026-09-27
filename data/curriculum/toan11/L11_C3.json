@@ -1,0 +1,161 @@
+[
+  {
+    "id": "L11_C3_B8_NB040",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Mẫu số liệu ghép nhóm",
+    "bai_so": "8",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C3_B9_TH041",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "so_trung_binh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C3_B9_TH042",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được trung vị của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "trung_vi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C3_B9_TH043",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được tứ phân vị của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "tu_phan_vi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C3_B9_TH044",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được mốt của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "mot"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C3_B9_TH045",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Hiểu được",
+    "content": "Hiểu được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm trong thực tiễn.",
+    "examples": [],
+    "scope": "tình huống thực tiễn",
+    "tags": [
+      "mau_ghep_nhom",
+      "y_nghia"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C3_B9_VD046",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Rút ra được",
+    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": "trong trường hợp đơn giản",
+    "tags": [
+      "mau_ghep_nhom",
+      "ket_luan"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C3_B9_NB047",
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 11 và trong thực tiễn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "thong_ke",
+      "lien_mon"
+    ],
+    "difficulty_rank": 1
+  }
+]

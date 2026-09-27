@@ -80,11 +80,23 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) 
     return chon
 
 
-def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None, ghi_chu: str) -> dict:
-    """Mục kết quả dùng khi THIẾU Mapping/Generator, ở chế độ nháp (cho_phep_thieu=True)."""
+def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None,
+                     ghi_chu: str, thieu_o: str = "mapping", ma_thieu: str | None = None) -> dict:
+    """
+    Mục kết quả dùng khi câu hỏi chưa có sẵn.
+
+    KHÔNG coi đây là lỗi: ngân hàng đề được xây dần, nên chỗ nào chưa có thì
+    ghi rõ THIẾU Ở ĐÂU và MÃ NÀO để giáo viên bổ sung, rồi vẫn ra đề tiếp.
+
+    thieu_o : "mapping" — chưa khai dạng câu hỏi nào cho yêu cầu cần đạt này
+              "python"  — đã có dạng trong Mapping nhưng chưa viết hàm sinh
+    ma_thieu: mã cần bổ sung (Curriculum ID hoặc Generator ID)
+    """
     return {
         "generator_id": None,
         "thieu": True,
+        "thieu_o": thieu_o,
+        "ma_thieu": ma_thieu or curriculum_id,
         "chuong_so": chuong_so,
         "curriculum_id": curriculum_id,
         "loai_cau": loai_cau,
@@ -97,7 +109,7 @@ def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str |
 # CHẾ ĐỘ CHÍNH THỨC — theo Blueprint (curriculum_id)
 # ============================================================
 
-def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = False) -> list[dict]:
+def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> list[dict]:
     """
     blueprint cần có các khoá: dung_sai, trac_nghiem, tra_loi_ngan, tu_luan
     đúng cấu trúc doc 03_DATA_STRUCTURE.md (mục Blueprint).
@@ -130,10 +142,13 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = False) ->
             if phan_loai_cau(m) == "dung_sai_cau_lon"
         ]
         if not candidates:
-            ghi_chu = f"Chương {chuong_so}: không có câu Đúng/Sai nào trong Mapping."
+            ma = f"L{lop}_C{chuong_so}_TF_A"
+            ghi_chu = f"Chưa khai câu Đúng/Sai cho chương {chuong_so} trong Mapping."
             if cho_phep_thieu:
                 for _ in range(so_luong):
-                    ket_qua.append(_muc_placeholder(chuong_so, "dung_sai_cau_lon", None, None, ghi_chu))
+                    ket_qua.append(_muc_placeholder(
+                        chuong_so, "dung_sai_cau_lon", None, None, ghi_chu,
+                        thieu_o="mapping", ma_thieu=ma))
                 continue
             raise SelectorError(ghi_chu)
 
@@ -163,15 +178,13 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = False) ->
                 if m["id"].startswith(curriculum_id + "_") and phan_loai_cau(m) == loai_cau
             ]
             if not candidates:
-                ghi_chu = (
-                    f"{curriculum_id} ({LOAI_KY_HIEU[loai_cau]}): "
-                    f"không có Generator nào khớp trong Mapping."
-                )
+                ma = f"{curriculum_id}_{LOAI_KY_HIEU[loai_cau]}_A"
+                ghi_chu = f"Chưa khai dạng {LOAI_KY_HIEU[loai_cau]} nào cho {curriculum_id} trong Mapping."
                 if cho_phep_thieu:
                     for _ in range(so_luong):
-                        ket_qua.append(
-                            _muc_placeholder(chuong_so, loai_cau, item.get("muc_do"), curriculum_id, ghi_chu)
-                        )
+                        ket_qua.append(_muc_placeholder(
+                            chuong_so, loai_cau, item.get("muc_do"), curriculum_id, ghi_chu,
+                            thieu_o="mapping", ma_thieu=ma))
                     continue
                 raise SelectorError(ghi_chu)
 

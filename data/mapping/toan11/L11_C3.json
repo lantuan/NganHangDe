@@ -1,0 +1,92 @@
+[
+  {
+    "id": "L11_C3_B8_NB040_MC_A",
+    "content": "Nhận biết được mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH041_MC_A",
+    "content": "Tính được số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH041_SA_A",
+    "content": "Tính được số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số trung bình của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH042_MC_A",
+    "content": "Tính được trung vị của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Trung vị của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH042_SA_A",
+    "content": "Tính được trung vị của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Trung vị của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH043_MC_A",
+    "content": "Tính được tứ phân vị của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tứ phân vị của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH043_SA_A",
+    "content": "Tính được tứ phân vị của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tứ phân vị của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH044_MC_A",
+    "content": "Tính được mốt của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mốt của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH044_SA_A",
+    "content": "Tính được mốt của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mốt của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L11_C3_B9_TH045_MC_A",
+    "content": "Hiểu được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm của"
+  },
+  {
+    "id": "L11_C3_B9_VD046_MC_A",
+    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm"
+  },
+  {
+    "id": "L11_C3_B9_VD046_TL_A",
+    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
+    "Loai": "Tự luận",
+    "Dang": "So sánh hai mẫu số liệu ghép nhóm và kết luận"
+  },
+  {
+    "id": "L11_C3_B9_NB047_MC_A",
+    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 11 và trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mối liên hệ giữa thống kê với những kiến thức của các môn học"
+  },
+  {
+    "id": "L11_C3_TF_A",
+    "content": "Mẫu số liệu ghép nhóm",
+    "Loai": "Đúng sai",
+    "Dang": "Bảng tần số ghép nhóm"
+  },
+  {
+    "id": "L11_C3_TF_B",
+    "content": "Các số đặc trưng đo xu thế trung tâm",
+    "Loai": "Đúng sai",
+    "Dang": "Trung bình, trung vị, tứ phân vị, mốt"
+  }
+]

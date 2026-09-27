@@ -74,12 +74,14 @@ def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None) -> str:
     mọi document class. Mọi text thô đều phải escape qua _escape_latex
     trước khi chèn vào (curriculum_id có dấu "_", ghi_chu có thể có "_", "%"...).
     """
-    nhan = item.get("curriculum_id") or f"chương {item.get('chuong_so')}"
-    loai = item.get("loai_cau", "")
+    thieu_o = item.get("thieu_o") or "python"
+    o_dau = "MAPPING" if thieu_o == "mapping" else "PYTHON"
+    nhan = (item.get("ma_thieu") or item.get("generator_id")
+            or item.get("curriculum_id") or f"chương {item.get('chuong_so')}")
     chi_tiet = ghi_chu or item.get("ghi_chu") or ""
     dong = (
-        r"\begin{center}\fbox{\textbf{[THIẾU CÂU HỎI: " + _escape_latex(str(nhan)) +
-        r" - " + _escape_latex(str(loai)) + r"]}}\end{center}"
+        r"\begin{center}\fbox{\textbf{[THIẾU Ở " + o_dau + r" --- ID: " +
+        _escape_latex(str(nhan)) + r"]}}\end{center}"
     )
     if chi_tiet:
         dong += "\n\n" + r"\begin{center}{\small\textit{" + _escape_latex(chi_tiet) + r"}}\end{center}"
@@ -189,7 +191,7 @@ def _sinh_pdf_tu_danh_sach(
     role: str,
     danh_sach_id: list[dict],
     socau_ma_de: int | None,
-    cho_phep_thieu: bool = False,
+    cho_phep_thieu: bool = True,
 ) -> dict:
     """
     Phần dùng chung: gọi Python Generator -> ghép LaTeX -> biên dịch PDF.
@@ -260,10 +262,12 @@ def _sinh_pdf_tu_danh_sach(
                     ban_ghi["ma_de"] = ma_de
                 danh_sach_dap_an.append(ban_ghi)
 
-            except GeneratorNotFoundError as e:
+            except GeneratorNotFoundError:
                 if cho_phep_thieu:
-                    theo_phan.setdefault(loai, []).append(
-                        _dong_placeholder_thieu(item, ghi_chu=str(e)))
+                    ma = item.get("generator_id")
+                    item = dict(item, thieu_o="python", ma_thieu=ma)
+                    theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(
+                        item, ghi_chu="Đã khai dạng này trong Mapping nhưng chưa có hàm sinh trong ngân hàng Python."))
                     so_cau_thieu += 1
                     continue
                 raise AssembleError(f"Lỗi sinh câu hỏi cho {item['generator_id']}: {e}")
@@ -369,7 +373,7 @@ def generate_exam_pdf_auto(
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
     socau_ma_de: int | None = None,
-    cho_phep_thieu: bool = False,
+    cho_phep_thieu: bool = True,
 ) -> dict:
     """
     Chế độ CHÍNH THỨC (WF001): CN_LoadExamScope -> CN_LoadCurriculum ->

@@ -1,0 +1,128 @@
+[
+  {
+    "id": "L11_C5_B15_NB072_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn của dãy số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn của dãy số"
+  },
+  {
+    "id": "L11_C5_B15_TH073_MC_A",
+    "content": "Giải thích được một số giới hạn cơ bản của dãy số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn cơ bản của dãy số"
+  },
+  {
+    "id": "L11_C5_B15_TH073_SA_A",
+    "content": "Giải thích được một số giới hạn cơ bản của dãy số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giới hạn của dãy số cơ bản"
+  },
+  {
+    "id": "L11_C5_B15_TH074_MC_A",
+    "content": "Vận dụng được các phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn giản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn"
+  },
+  {
+    "id": "L11_C5_B15_TH074_SA_A",
+    "content": "Vận dụng được các phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn giản.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giới hạn của dãy số dạng phân thức"
+  },
+  {
+    "id": "L11_C5_B15_VD075_MC_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tổng của một cấp số nhân lùi vô hạn"
+  },
+  {
+    "id": "L11_C5_B15_VD075_SA_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tổng của cấp số nhân lùi vô hạn"
+  },
+  {
+    "id": "L11_C5_B15_VD075_TL_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về cấp số nhân lùi vô hạn"
+  },
+  {
+    "id": "L11_C5_B16_NB076_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn hữu hạn của hàm số, giới hạn hữu hạn một phía của hàm số tại một điểm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn hữu hạn của hàm số, giới hạn hữu hạn một phía của hàm"
+  },
+  {
+    "id": "L11_C5_B16_NB077_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn hữu hạn của hàm số tại vô cực và mô tả được một số giới hạn cơ bản dạng c chia x mũ k.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn hữu hạn của hàm số tại vô cực"
+  },
+  {
+    "id": "L11_C5_B16_NB078_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn vô cực (một phía) của hàm số tại một điểm và hiểu được một số giới hạn cơ bản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn vô cực (một phía) của hàm số tại một điểm"
+  },
+  {
+    "id": "L11_C5_B16_TH079_MC_A",
+    "content": "Tính được một số giới hạn hàm số bằng cách vận dụng các phép toán trên giới hạn hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn hàm số"
+  },
+  {
+    "id": "L11_C5_B16_TH079_SA_A",
+    "content": "Tính được một số giới hạn hàm số bằng cách vận dụng các phép toán trên giới hạn hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giới hạn của hàm số tại một điểm"
+  },
+  {
+    "id": "L11_C5_B16_VD080_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giới hạn hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề thực tiễn gắn với giới hạn hàm số"
+  },
+  {
+    "id": "L11_C5_B17_TH081_MC_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên"
+  },
+  {
+    "id": "L11_C5_B17_TH081_SA_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tham số để hàm số liên tục tại một điểm"
+  },
+  {
+    "id": "L11_C5_B17_TH081_TL_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Tự luận",
+    "Dang": "Xét tính liên tục của hàm số"
+  },
+  {
+    "id": "L11_C5_B17_TH082_MC_A",
+    "content": "Nhận dạng được tính liên tục của tổng, hiệu, tích, thương của hai hàm số liên tục.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính liên tục của tổng, hiệu, tích, thương của hai hàm số liên"
+  },
+  {
+    "id": "L11_C5_B17_NB083_MC_A",
+    "content": "Nhận biết được tính liên tục của một số hàm sơ cấp cơ bản trên tập xác định của chúng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính liên tục của một số hàm sơ cấp cơ bản trên tập xác định"
+  },
+  {
+    "id": "L11_C5_TF_A",
+    "content": "Giới hạn của dãy số và hàm số",
+    "Loai": "Đúng sai",
+    "Dang": "Các phép toán giới hạn"
+  },
+  {
+    "id": "L11_C5_TF_B",
+    "content": "Hàm số liên tục",
+    "Loai": "Đúng sai",
+    "Dang": "Liên tục tại một điểm và trên một khoảng"
+  }
+]

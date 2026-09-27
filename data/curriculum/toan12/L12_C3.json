@@ -1,0 +1,142 @@
+[
+  {
+    "id": "L12_C3_B8_TH018",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Khoảng biến thiên và khoảng tứ phân vị của mẫu số liệu ghép nhóm",
+    "bai_so": "8",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được khoảng biến thiên của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "khoang_bien_thien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C3_B8_TH019",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Khoảng biến thiên và khoảng tứ phân vị của mẫu số liệu ghép nhóm",
+    "bai_so": "8",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được khoảng tứ phân vị của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "khoang_tu_phan_vi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C3_B9_TH020",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Phương sai và độ lệch chuẩn của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được phương sai của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "phuong_sai"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C3_B9_TH021",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Phương sai và độ lệch chuẩn của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được độ lệch chuẩn của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "mau_ghep_nhom",
+      "do_lech_chuan"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C3_B9_TH022",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Phương sai và độ lệch chuẩn của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm trong thực tiễn.",
+    "examples": [],
+    "scope": "tình huống thực tiễn",
+    "tags": [
+      "mau_ghep_nhom",
+      "y_nghia"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L12_C3_B9_VD023",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Phương sai và độ lệch chuẩn của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Chỉ ra được",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm.",
+    "examples": [],
+    "scope": "trong trường hợp đơn giản",
+    "tags": [
+      "mau_ghep_nhom",
+      "ket_luan"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L12_C3_B9_NB024",
+    "lop": 12,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
+    "chuong_so": "3",
+    "bai": "Phương sai và độ lệch chuẩn của mẫu số liệu ghép nhóm",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 12 và trong thực tiễn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "thong_ke",
+      "lien_mon"
+    ],
+    "difficulty_rank": 1
+  }
+]

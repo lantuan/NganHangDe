@@ -1,0 +1,164 @@
+[
+  {
+    "id": "L11_C6_B18_NB084_MC_A",
+    "content": "Nhận biết được khái niệm luỹ thừa với số mũ nguyên của một số thực khác 0; luỹ thừa với số mũ hữu tỉ và luỹ thừa với số mũ thực của một số thực dương.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Luỹ thừa với số mũ nguyên của một số thực khác 0"
+  },
+  {
+    "id": "L11_C6_B18_TH085_MC_A",
+    "content": "Giải thích được các tính chất của phép tính luỹ thừa với số mũ nguyên, số mũ hữu tỉ và số mũ thực.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của phép tính luỹ thừa với số mũ nguyên, số mũ hữu tỉ"
+  },
+  {
+    "id": "L11_C6_B18_TH086_MC_A",
+    "content": "Sử dụng được tính chất của phép tính luỹ thừa trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của phép tính luỹ thừa trong tính toán các biểu thức"
+  },
+  {
+    "id": "L11_C6_B18_TH086_SA_A",
+    "content": "Sử dụng được tính chất của phép tính luỹ thừa trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Rút gọn biểu thức chứa luỹ thừa"
+  },
+  {
+    "id": "L11_C6_B18_TH087_MC_A",
+    "content": "Tính được giá trị biểu thức số có chứa phép tính luỹ thừa bằng sử dụng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị biểu thức số có chứa phép tính luỹ thừa bằng sử dụng"
+  },
+  {
+    "id": "L11_C6_B18_VD088_MC_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính luỹ thừa.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C6_B18_VD088_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính luỹ thừa.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị biểu thức luỹ thừa bằng máy tính cầm tay"
+  },
+  {
+    "id": "L11_C6_B19_NB089_MC_A",
+    "content": "Nhận biết được khái niệm lôgarit cơ số a (a > 0, a khác 1) của một số thực dương.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lôgarit cơ số a (a > 0, a khác 1) của một số thực dương"
+  },
+  {
+    "id": "L11_C6_B19_NB089_TL_A",
+    "content": "Nhận biết được khái niệm lôgarit cơ số a (a > 0, a khác 1) của một số thực dương.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán lãi suất, tăng trưởng"
+  },
+  {
+    "id": "L11_C6_B19_TH090_MC_A",
+    "content": "Giải thích được các tính chất của phép tính lôgarit nhờ sử dụng định nghĩa hoặc các tính chất đã biết trước đó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của phép tính lôgarit"
+  },
+  {
+    "id": "L11_C6_B19_TH091_MC_A",
+    "content": "Sử dụng được tính chất của phép tính lôgarit trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của phép tính lôgarit trong tính toán các biểu thức"
+  },
+  {
+    "id": "L11_C6_B19_TH091_SA_A",
+    "content": "Sử dụng được tính chất của phép tính lôgarit trong tính toán các biểu thức số và rút gọn các biểu thức chứa biến.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính giá trị biểu thức lôgarit"
+  },
+  {
+    "id": "L11_C6_B19_TH092_MC_A",
+    "content": "Tính được giá trị (đúng hoặc gần đúng) của lôgarit bằng cách sử dụng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị (đúng hoặc gần đúng) của lôgarit bằng cách sử dụng máy"
+  },
+  {
+    "id": "L11_C6_B19_TH092_SA_A",
+    "content": "Tính được giá trị (đúng hoặc gần đúng) của lôgarit bằng cách sử dụng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Rút gọn biểu thức chứa lôgarit"
+  },
+  {
+    "id": "L11_C6_B19_VD093_MC_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính lôgarit.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C6_B20_NB094_MC_A",
+    "content": "Nhận biết được hàm số mũ và hàm số lôgarit. Nêu được một số ví dụ thực tế về hàm số mũ, hàm số lôgarit.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hàm số mũ và hàm số lôgarit"
+  },
+  {
+    "id": "L11_C6_B20_NB094_TL_A",
+    "content": "Nhận biết được hàm số mũ và hàm số lôgarit. Nêu được một số ví dụ thực tế về hàm số mũ, hàm số lôgarit.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán về độ pH"
+  },
+  {
+    "id": "L11_C6_B20_TH095_MC_A",
+    "content": "Nhận dạng được đồ thị của các hàm số mũ, hàm số lôgarit.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đồ thị của các hàm số mũ, hàm số lôgarit"
+  },
+  {
+    "id": "L11_C6_B20_TH096_MC_A",
+    "content": "Giải thích được các tính chất của hàm số mũ, hàm số lôgarit thông qua đồ thị của chúng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của hàm số mũ, hàm số lôgarit thông qua đồ thị của"
+  },
+  {
+    "id": "L11_C6_B20_VD097_MC_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với hàm số mũ và hàm số lôgarit.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C6_B21_TH098_MC_A",
+    "content": "Giải được phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản"
+  },
+  {
+    "id": "L11_C6_B21_TH098_SA_A",
+    "content": "Giải được phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nghiệm của phương trình mũ, lôgarit"
+  },
+  {
+    "id": "L11_C6_B21_TH098_TL_A",
+    "content": "Giải được phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản.",
+    "Loai": "Tự luận",
+    "Dang": "Giải phương trình, bất phương trình mũ và lôgarit"
+  },
+  {
+    "id": "L11_C6_B21_VD099_MC_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phương trình, bất phương trình mũ và lôgarit.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C6_B21_VD099_TL_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phương trình, bất phương trình mũ và lôgarit.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về phương trình mũ, lôgarit"
+  },
+  {
+    "id": "L11_C6_TF_A",
+    "content": "Luỹ thừa và lôgarit",
+    "Loai": "Đúng sai",
+    "Dang": "Tính chất và rút gọn biểu thức"
+  },
+  {
+    "id": "L11_C6_TF_B",
+    "content": "Hàm số mũ, hàm số lôgarit và phương trình",
+    "Loai": "Đúng sai",
+    "Dang": "Đồ thị, tính chất, nghiệm"
+  }
+]

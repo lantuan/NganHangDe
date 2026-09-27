@@ -135,7 +135,7 @@ class BuildBlueprintRequest(BaseModel):
     # Chế độ NHÁP: True = thiếu Mapping/Generator ở đâu chỉ đánh dấu "thieu",
     # không dừng cả đề. Dùng khi ngân hàng đề chưa đầy đủ. KHÔNG dùng khi
     # ra đề thật cho học sinh (để False).
-    cho_phep_thieu: bool = False
+    cho_phep_thieu: bool = True
 
 
 @router.post("/blueprint")
@@ -247,7 +247,7 @@ class GenerateExamAutoRequest(BaseModel):
     socau_ma_de: int | None = None
     # Chế độ NHÁP — xem chú thích ở BuildBlueprintRequest. Mặc định False
     # (nghiêm ngặt) để không lỡ phát đề có chữ "THIẾU" cho học sinh.
-    cho_phep_thieu: bool = False
+    cho_phep_thieu: bool = True
     # Switch_OutputFormat: "pdf" (mặc định) | "tex" | "zip" (PDF + TEX cùng 1 đề)
     dinh_dang: str = "pdf"
     user_id: str | None = None

@@ -1,0 +1,134 @@
+[
+  {
+    "id": "L12_C1_B1_NB001_MC_A",
+    "content": "Nhận biết được tính đồng biến, nghịch biến của một hàm số trên một khoảng dựa vào dấu của đạo hàm cấp một của nó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính đồng biến, nghịch biến của một hàm số trên một khoảng dựa"
+  },
+  {
+    "id": "L12_C1_B1_TH002_MC_A",
+    "content": "Thể hiện được tính đồng biến, nghịch biến của hàm số trong bảng biến thiên.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính đồng biến, nghịch biến của hàm số trong bảng biến thiên"
+  },
+  {
+    "id": "L12_C1_B1_TH002_SA_A",
+    "content": "Thể hiện được tính đồng biến, nghịch biến của hàm số trong bảng biến thiên.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số điểm cực trị của hàm số"
+  },
+  {
+    "id": "L12_C1_B1_TH003_MC_A",
+    "content": "Nhận biết được tính đơn điệu, điểm cực trị, giá trị cực trị của hàm số thông qua bảng biến thiên hoặc thông qua hình ảnh hình học của đồ thị hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính đơn điệu, điểm cực trị, giá trị cực trị của hàm số thông"
+  },
+  {
+    "id": "L12_C1_B1_TH003_SA_A",
+    "content": "Nhận biết được tính đơn điệu, điểm cực trị, giá trị cực trị của hàm số thông qua bảng biến thiên hoặc thông qua hình ảnh hình học của đồ thị hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị cực đại, cực tiểu đọc từ bảng biến thiên"
+  },
+  {
+    "id": "L12_C1_B2_NB004_MC_A",
+    "content": "Nhận biết được giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một tập xác định cho trước.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một tập xác"
+  },
+  {
+    "id": "L12_C1_B2_TH005_MC_A",
+    "content": "Xác định được giá trị lớn nhất, giá trị nhỏ nhất của hàm số bằng đạo hàm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị lớn nhất, giá trị nhỏ nhất của hàm số bằng đạo hàm"
+  },
+  {
+    "id": "L12_C1_B2_TH005_SA_A",
+    "content": "Xác định được giá trị lớn nhất, giá trị nhỏ nhất của hàm số bằng đạo hàm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị lớn nhất của hàm số trên một đoạn"
+  },
+  {
+    "id": "L12_C1_B2_TH005_TL_A",
+    "content": "Xác định được giá trị lớn nhất, giá trị nhỏ nhất của hàm số bằng đạo hàm.",
+    "Loai": "Tự luận",
+    "Dang": "Tìm giá trị lớn nhất, nhỏ nhất của hàm số"
+  },
+  {
+    "id": "L12_C1_B3_NB006_MC_A",
+    "content": "Nhận biết được hình ảnh hình học của đường tiệm cận ngang, đường tiệm cận đứng, đường tiệm cận xiên của đồ thị hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hình ảnh hình học của đường tiệm cận ngang, đường tiệm cận"
+  },
+  {
+    "id": "L12_C1_B3_NB006_SA_A",
+    "content": "Nhận biết được hình ảnh hình học của đường tiệm cận ngang, đường tiệm cận đứng, đường tiệm cận xiên của đồ thị hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đường tiệm cận của đồ thị hàm số"
+  },
+  {
+    "id": "L12_C1_B4_TH007_MC_A",
+    "content": "Mô tả được sơ đồ tổng quát để khảo sát hàm số: tìm tập xác định, xét chiều biến thiên, tìm cực trị, tìm tiệm cận, lập bảng biến thiên, vẽ đồ thị.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Sơ đồ tổng quát để khảo sát hàm số: tìm tập xác định, xét chiều"
+  },
+  {
+    "id": "L12_C1_B4_TH008_MC_A",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm số bậc ba.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến"
+  },
+  {
+    "id": "L12_C1_B4_TH008_TL_A",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm số bậc ba.",
+    "Loai": "Tự luận",
+    "Dang": "Khảo sát và vẽ đồ thị hàm số bậc ba"
+  },
+  {
+    "id": "L12_C1_B4_TH009_MC_A",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm phân thức bậc nhất trên bậc nhất.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến"
+  },
+  {
+    "id": "L12_C1_B4_TH009_TL_A",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm phân thức bậc nhất trên bậc nhất.",
+    "Loai": "Tự luận",
+    "Dang": "Khảo sát và vẽ đồ thị hàm phân thức bậc nhất trên bậc nhất"
+  },
+  {
+    "id": "L12_C1_B4_TH010_MC_A",
+    "content": "Khảo sát được tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến thiên và vẽ đồ thị của hàm phân thức bậc hai trên bậc nhất.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến"
+  },
+  {
+    "id": "L12_C1_B4_NB011_MC_A",
+    "content": "Nhận biết được tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm số đã khảo sát.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm"
+  },
+  {
+    "id": "L12_C1_B4_VD012_MC_A",
+    "content": "Vận dụng được đạo hàm và khảo sát hàm số để giải quyết một số vấn đề liên quan đến thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đạo hàm và khảo sát hàm số"
+  },
+  {
+    "id": "L12_C1_B4_VD012_TL_A",
+    "content": "Vận dụng được đạo hàm và khảo sát hàm số để giải quyết một số vấn đề liên quan đến thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán tối ưu giải bằng đạo hàm"
+  },
+  {
+    "id": "L12_C1_TF_A",
+    "content": "Tính đơn điệu, cực trị và giá trị lớn nhất, nhỏ nhất",
+    "Loai": "Đúng sai",
+    "Dang": "Đọc từ bảng biến thiên và đồ thị"
+  },
+  {
+    "id": "L12_C1_TF_B",
+    "content": "Tiệm cận và khảo sát đồ thị hàm số",
+    "Loai": "Đúng sai",
+    "Dang": "Tiệm cận, dạng đồ thị, đối xứng"
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "L11_C9_B31_NB137",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số bài toán dẫn đến khái niệm đạo hàm.",
+    "examples": [],
+    "scope": "ví dụ: xác định vận tốc tức thời của một vật chuyển động không đều, xác định tốc độ thay đổi của nhiệt độ",
+    "tags": [
+      "dao_ham",
+      "bai_toan_dan_den"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C9_B31_NB138",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa đạo hàm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dao_ham",
+      "dinh_nghia"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C9_B31_TH139",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được đạo hàm của một số hàm đơn giản bằng định nghĩa.",
+    "examples": [],
+    "scope": "hàm số đơn giản",
+    "tags": [
+      "dao_ham",
+      "bang_dinh_nghia"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C9_B31_NB140",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được ý nghĩa hình học của đạo hàm.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dao_ham",
+      "y_nghia_hinh_hoc"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C9_B31_TH141",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Thiết lập được",
+    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dao_ham",
+      "tiep_tuyen"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C9_B31_NB142",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Định nghĩa và ý nghĩa của đạo hàm",
+    "bai_so": "31",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được số e thông qua bài toán mô hình hoá lãi suất ngân hàng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "so_e",
+      "lai_suat"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C9_B32_TH143",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Các quy tắc tính đạo hàm",
+    "bai_so": "32",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được đạo hàm của một số hàm số sơ cấp cơ bản.",
+    "examples": [],
+    "scope": "hàm đa thức, hàm căn thức đơn giản, hàm số lượng giác, hàm số mũ, hàm số lôgarit",
+    "tags": [
+      "dao_ham",
+      "ham_so_cap"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C9_B32_TH144",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Các quy tắc tính đạo hàm",
+    "bai_so": "32",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được các công thức tính đạo hàm của tổng, hiệu, tích, thương của các hàm số và đạo hàm của hàm hợp.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dao_ham",
+      "quy_tac_tinh",
+      "ham_hop"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C9_B32_VD145",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Các quy tắc tính đạo hàm",
+    "bai_so": "32",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm.",
+    "examples": [],
+    "scope": "ví dụ: xác định vận tốc tức thời của một vật chuyển động không đều",
+    "tags": [
+      "dao_ham",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L11_C9_B33_NB146",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Đạo hàm cấp hai",
+    "bai_so": "33",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được khái niệm đạo hàm cấp hai của một hàm số.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "dao_ham_cap_hai"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L11_C9_B33_TH147",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Đạo hàm cấp hai",
+    "bai_so": "33",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được đạo hàm cấp hai của một số hàm số đơn giản.",
+    "examples": [],
+    "scope": "hàm số đơn giản",
+    "tags": [
+      "dao_ham_cap_hai",
+      "tinh"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L11_C9_B33_VD148",
+    "lop": 11,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Đạo hàm",
+    "chuong_so": "9",
+    "bai": "Đạo hàm cấp hai",
+    "bai_so": "33",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm cấp hai.",
+    "examples": [],
+    "scope": "ví dụ: xác định gia tốc từ đồ thị vận tốc theo thời gian của một chuyển động không đều",
+    "tags": [
+      "dao_ham_cap_hai",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]
