@@ -314,3 +314,54 @@ neu sau nay doi may chu.
 - Khong tu day khi dang o nhanh khac main, phai hoi.
 - Khong bao "xong" khi chua kiem tra web that su tra ve gi. Restart thanh cong
   ma web loi van la loi.
+
+---
+
+# Lenh xem con thieu gi: scripts/thieu.py
+
+Viet ngay 27/09/2026. Ngan hang de duoc xay dan, nen can mot cho nhin ra ngay
+CON THIEU CHO NAO va MA CAN BO SUNG LA GI.
+
+## Cach dung
+
+    python3 scripts/thieu.py              tom tat ca ba khoi
+    python3 scripts/thieu.py 10           chi tiet lop 10
+    python3 scripts/thieu.py 11 5         chi tiet lop 11 chuong 5
+    python3 scripts/thieu.py 10 --tomtat  chi dem, khong liet ke tung ma
+
+## Hai loai thieu
+
+THIEU O MAPPING  yeu cau can dat chua duoc khai dang cau hoi nao.
+                 Sua bang cach them dong vao data/mapping/toan{lop}/L{lop}_C{n}.json
+
+THIEU O PYTHON   da khai dang trong Mapping nhung chua viet ham sinh.
+                 Sua bang cach viet ham trong data/python_bank/toan{lop}/L{lop}_C{n}.py
+
+## Ten ham phai dat the nao
+
+Lay dung ma dang trong Mapping roi them duoi _01 (hoac _02, _03 cho cac bien
+the khac nhau cua cung mot dang):
+
+    Mapping: L10_C2_B3_NB022_MC_A
+    Ham    : def L10_C2_B3_NB022_MC_A_01(socau, dang=1):
+
+Duoi hai chu so la BAT BUOC. generator_service tim bien the theo mau
+^<ma>_\d{2}$ nen ham khong co duoi se khong bao gio duoc tim thay - da tung
+mat cong vi loi nay mot lan (ham L10_C1_B2_NB017_SA_C).
+
+## Viet den dau, chuong tu mo den do
+
+/danh-sach-chuong bao chuong da san sang hay chua bang cach DEM SO DANG DA CO
+HAM, khong phai dem so dong Mapping. Nen khong phai sua code hay cau hinh gi:
+viet xong ham la chuong do tu hien ra cho hoc sinh chon.
+
+## Tinh trang 27/09/2026
+
+    Lop 10: 154 yeu cau can dat | 259 dang | 34 dang da co ham
+    Lop 11: 148 yeu cau can dat | 238 dang | 0
+    Lop 12:  58 yeu cau can dat | 113 dang | 0
+
+Khong con cho nao thieu o Mapping. Con 576 dang cho viet ham.
+
+Chuong nho nhat de lam truoc: lop 10 chuong 2 (13 dang), lop 12 chuong 2 (10
+dang), lop 12 chuong 6 (12 dang).

@@ -4533,3 +4533,40 @@ ra cho biet, khong bao loi. Dung tinh than "chua lam thi bao thieu".
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.78 - 2026-09-27
+
+## Lenh xem con thieu gi: scripts/thieu.py
+
+Theo y co Lan: cho nao chua co thi chi can bao thieu, ghi ro thieu o Mapping
+hay thieu o Python va MA la gi, de bo sung dan.
+
+    python3 scripts/thieu.py              tom tat ca ba khoi
+    python3 scripts/thieu.py 10 2         chi tiet lop 10 chuong 2
+
+In ra tung ma kem loai cau va ten dang, vi du:
+
+    L10_C2_B3_TH024_MC_A    trac nghiem   Chon hinh ve dung cua mien nghiem
+    L10_C2_B4_VD028_SA_A    tra loi ngan  Gia tri lon nhat cua F tren mien nghiem
+
+Doc thang tep .py bang van ban de tim ham da co, khong import module, nen chay
+nhanh va khong keo theo sympy.
+
+Huong dan day du: docs/14_DEPLOYMENT.md
+
+## Tinh trang ngan hang de
+
+    Lop 10: 154 yeu cau can dat | 259 dang | 34 dang da co ham
+    Lop 11: 148 yeu cau can dat | 238 dang | 0
+    Lop 12:  58 yeu cau can dat | 113 dang | 0
+    -------------------------------------------------------
+    Tong  : 360 yeu cau can dat | 610 dang | 34 dang da co ham
+
+Khong con cho nao thieu o Mapping. Con 576 dang cho viet ham Python.
+
+Chuong nho nhat de lam truoc: lop 10 chuong 2 (13 dang), lop 12 chuong 2 (10),
+lop 12 chuong 6 (12).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
