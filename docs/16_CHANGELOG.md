@@ -5182,3 +5182,39 @@ chua tu kiem tra duoc cho nay.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.87 - 2026-09-27
+
+## Va loi canh bao ky tu thoat, va sua lai script kiem tra
+
+Co Lan chay scripts/kiem_tra_hinh.sh thi Python in ra giua man hinh:
+
+    hinh_ve_service.py:10: SyntaxWarning: "\e" is an invalid escape sequence
+
+Docstring co viet \end{tikzpicture} nhung khong phai chuoi tho (raw string)
+nen Python hieu "\e" la ky tu thoat khong hop le. Python 3.12 tro len bao
+SyntaxWarning; ban 3.10 tren may ao cua Claude chi bao DeprecationWarning
+nen KHONG THAY - phai co may cua co Lan moi lo ra.
+
+Da va 5 cho (1 trong hinh_ve_service.py, 4 trong L10_C3.py).
+
+tests/test_ma_nguon_sach.py (moi): chay tren MOI tep .py cua du an, bat loi
+nay ngay. Ngan hang de day chuoi LaTeX nen chuyen nay chac chan con lap lai.
+64 tep, 0 canh bao.
+
+## Script kiem tra: noi ro dang kiem tra MAY NAO
+
+Co Lan chay tren may Mac chu khong phai VPS - ma web chay tren VPS. Script
+cu khong noi gi nen khong biet. Nay script:
+  - in ten may va thu muc, va noi thang neu khong phai VPS, kem san lenh
+    ssh de chay lai cho dung cho
+  - canh bao khi chi co MOT cong cu doi PDF sang anh: van chay duoc nhung
+    khong co cai du phong, va khong chon duoc dinh dang nhe nhat
+  - ket luan ro mot dong o cuoi: du do nghe hay chua
+
+Ket qua tren may Mac cua co Lan: chi co dvisvgm (thieu pdftocairo, pdftoppm).
+Van dich duoc hinh, nhung nen cai them: brew install poppler
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

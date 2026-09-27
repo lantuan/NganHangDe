@@ -1,4 +1,4 @@
-"""
+r"""
 Dich hinh ve TikZ trong de bai thanh anh de HIEN DUOC TREN WEB.
 
 Vi sao can: cau co hinh ve khong the bo hinh di. Bo hinh la doi luon MUC

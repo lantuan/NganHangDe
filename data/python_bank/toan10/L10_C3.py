@@ -79,7 +79,7 @@ def _cap_nguyen_to_cung_nhau(lo=2, hi=20):
             return p, q
 
 def _gon(x):
-    """Viết một biểu thức thành MỘT phân số, số hạng dương đứng trước.
+    r"""Viết một biểu thức thành MỘT phân số, số hạng dương đứng trước.
 
     sympy để nguyên sẽ ra $\frac{-1 + \sqrt{3}}{2}$; giáo viên viết
     $\dfrac{\sqrt{3} - 1}{2}$. Hàm này lo đúng việc đó.
@@ -834,12 +834,12 @@ def L10_C3_B6_VD036_SA_A_01(socau, dang=2):
 # =====================================================================
 
 def _L(x):
-    """latex() nhưng dùng \dfrac cho phân số, đúng kiểu cô Lan vẫn viết."""
+    r"""latex() nhưng dùng \dfrac cho phân số, đúng kiểu cô Lan vẫn viết."""
     return latex(x).replace(r"\frac", r"\dfrac")
 
 
 def _toa_do_nua_duong_tron(p, q, doi, ben_trai):
-    """Toạ độ một điểm trên nửa đường tròn đơn vị, sinh từ cặp p < q.
+    r"""Toạ độ một điểm trên nửa đường tròn đơn vị, sinh từ cặp p < q.
 
     Vì $\left(\dfrac{p}{q}\right)^2 + \left(\dfrac{\sqrt{q^2-p^2}}{q}\right)^2 = 1$
     nên điểm luôn nằm ĐÚNG trên đường tròn đơn vị; lấy tung độ dương để
@@ -912,7 +912,7 @@ def L10_C3_B5_NB029_MC_C_01(socau, dang=1):
 
 
 def L10_C3_B5_NB029_MC_D_01(socau, dang=1):
-    """Nhận biết giá trị lượng giác nào CÓ THỂ xảy ra với góc từ 0 độ đến 180 độ.
+    r"""Nhận biết giá trị lượng giác nào CÓ THỂ xảy ra với góc từ 0 độ đến 180 độ.
 
     LƯU Ý khi làm phương án nhiễu: chỉ được dùng $\sin$ hoặc $\cos$ cho
     phương án "giá trị vượt quá 1". KHÔNG dùng $\tan$ hay $\cot$ vì
