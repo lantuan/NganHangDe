@@ -92,7 +92,7 @@ def _gon(x):
         if len(duong) == 1 and len(am) == 1:
             tu_chu = r"%s - %s" % (latex(duong[0]), latex(-am[0]))
             return tu_chu if mau == 1 else r"\dfrac{%s}{%s}" % (tu_chu, latex(mau))
-    return latex(t)
+    return latex(t).replace(r"\frac", r"\dfrac")
 
 
 # ---- Bảng giá trị lượng giác của các góc đặc biệt từ 0° đến 180° ----
@@ -660,12 +660,12 @@ def L10_C3_TF_A_01(socau, socot=1):
                r"Sai. Hai góc bù nhau có sin \textbf{bằng nhau}, không đối nhau.")]
 
         # b) TH - thay số: dùng quan hệ bù nhau rồi tra bảng
-        y2 = [(r"{\True $\cos %s = %s$}" % (_goc(bu), latex(simplify(-cos_d))),
+        y2 = [(r"{\True $\cos %s = %s$}" % (_goc(bu), _L(simplify(-cos_d))),
                r"Hai góc bù nhau có côsin đối nhau nên $\cos %s = -\cos %s = %s$."
-               % (_goc(bu), _goc(d), latex(simplify(-cos_d)))),
-              (r"{$\cos %s = %s$}" % (_goc(bu), latex(cos_d)),
+               % (_goc(bu), _goc(d), _L(simplify(-cos_d)))),
+              (r"{$\cos %s = %s$}" % (_goc(bu), _L(cos_d)),
                r"Sai. Đó là $\cos %s$; côsin của hai góc bù nhau \textbf{đối nhau} nên $\cos %s = %s$."
-               % (_goc(d), _goc(bu), latex(simplify(-cos_d))))]
+               % (_goc(d), _goc(bu), _L(simplify(-cos_d))))]
 
         # c) VD - phải dùng CẢ hai quan hệ ở trên, RỒI tra bảng giá trị
         #         của chính góc alpha đã cho mới ra được số
@@ -679,7 +679,7 @@ def L10_C3_TF_A_01(socau, socot=1):
                r"$\cos\left(180^{\circ}-\alpha\right) = -\cos\alpha$, nên "
                r"$P = \sin\alpha - \cos\alpha$.\\ "
                r"Với $\alpha = %s$ thì $P = %s - %s = %s$."
-               % (_goc(d), latex(hang[1]), latex(cos_d), _gon(P))),
+               % (_goc(d), _L(hang[1]), _L(cos_d), _gon(P))),
               (r"{Giá trị của biểu thức $P = \sin\left(180^{\circ} - \alpha\right) "
                r"+ \cos\left(180^{\circ} - \alpha\right)$ bằng $%s$}" % _gon(P_sai),
                r"Sai. Đó là $\sin\alpha + \cos\alpha$; quên rằng "
@@ -734,38 +734,61 @@ def L10_C3_TF_B_01(socau, socot=1):
         # b) TH - thay số vào đúng công thức vừa nhắc ở ý a)
         y2 = [(r"{\True $BC = %d$}" % a,
                r"$BC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\left(%s\right) = %d$ nên $BC = %d$."
-               % (b, c, b, c, latex(cos_A), a2, a)),
+               % (b, c, b, c, _L(cos_A), a2, a)),
               (r"{$BC = %d$}" % (b + c),
                r"Sai. $BC = %d$ chứ không phải tổng hai cạnh kia." % a)]
 
         # c) VD - phải có BC của ý b) rồi mới dùng được định lí sin
-        y3 = [(r"{\True Bán kính đường tròn ngoại tiếp tam giác $ABC$ là $R = %s$}" % latex(R),
+        y3 = [(r"{\True Bán kính đường tròn ngoại tiếp tam giác $ABC$ là $R = %s$}" % _L(R),
                r"Định lí sin: $\dfrac{BC}{\sin A} = 2R$ nên $R = \dfrac{BC}{2\sin A}$.\\ "
                r"Với $\sin %s = \dfrac{\sqrt{3}}{2}$ và $BC = %d$ thì "
                r"$R = \dfrac{%d}{2\cdot\dfrac{\sqrt{3}}{2}} = %s$."
-               % (_goc(A), a, a, latex(R))),
+               % (_goc(A), a, a, _L(R))),
               (r"{Bán kính đường tròn ngoại tiếp tam giác $ABC$ là $R = %s$}"
-               % latex(simplify(R / 2)),
+               % _L(simplify(R / 2)),
                r"Sai. Đó là $\dfrac{BC}{4\sin A}$; định lí sin cho $\dfrac{BC}{\sin A} = 2R$ "
-               r"nên $R = \dfrac{BC}{2\sin A} = %s$." % latex(R))]
+               r"nên $R = \dfrac{BC}{2\sin A} = %s$." % _L(R))]
 
-        # d) VDC - không có công thức sẵn trong sách: phải tự tách diện tích
-        #          tam giác thành hai phần để tìm độ dài đường phân giác
+        # d) VDC - tách diện tích tam giác làm hai phần để tính đường phân giác.
+        #    CHỈ dùng công thức TRONG CHƯƠNG:
+        #      - S = 1/2 . AB . AC . sin A          (công thức diện tích, bài 6)
+        #      - bảng giá trị lượng giác góc đặc biệt (bài 5)
+        #      - phân giác chia góc A thành hai góc bằng nhau (hình học lớp 7)
+        #    KHÔNG dùng sin A = 2 sin(A/2) cos(A/2): đó là công thức nhân đôi
+        #    của lớp 11, học sinh lớp 10 chưa học. Ở đây không cần, vì góc A
+        #    chỉ là 60 hoặc 120 độ nên sin A và sin(A/2) đều tra thẳng bảng.
+        nua = A // 2
+        sin_nua = sqrt(3) / 2 if nua == 60 else Rational(1, 2)
+        sin_A = sqrt(3) / 2                      # đúng cho cả 60 và 120 độ
+        sin_nua_lan = Rational(1, 2) if nua == 60 else sqrt(3) / 2   # lấy nhầm
+        AD = simplify(b * c * sin_A / ((b + c) * sin_nua))
+        AD_sai = simplify(b * c * sin_A / ((b + c) * sin_nua_lan))
         y4 = [(r"{\True Gọi $AD$ là đường phân giác trong của góc $A$ $\left(D \in BC\right)$, "
-               r"khi đó $AD = %s$}" % latex(AD),
-               r"Phân giác $AD$ chia tam giác thành hai phần nên "
-               r"$S_{ABD} + S_{ACD} = S_{ABC}$:\\ "
-               r"$\dfrac{1}{2}\cdot AB\cdot AD\cdot\sin\dfrac{A}{2} "
-               r"+ \dfrac{1}{2}\cdot AC\cdot AD\cdot\sin\dfrac{A}{2} "
-               r"= \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin A$.\\ "
-               r"Mà $\sin A = 2\sin\dfrac{A}{2}\cos\dfrac{A}{2}$, rút gọn được "
-               r"$AD = \dfrac{2\cdot AB\cdot AC\cdot\cos\dfrac{A}{2}}{AB + AC} "
-               r"= \dfrac{2\cdot %d\cdot %d\cdot %s}{%d} = %s$."
-               % (c, b, latex(cos_nua_A), b + c, latex(AD))),
+               r"khi đó $AD = %s$}" % _L(AD),
+               r"$AD$ là phân giác của góc $A$ nên nó chia góc $%s$ thành hai góc bằng nhau: "
+               r"$\widehat{BAD} = \widehat{CAD} = %s$.\\ "
+               r"Điểm $D$ nằm trên cạnh $BC$ nên tam giác $ABC$ được chia thành hai tam giác "
+               r"$ABD$ và $ACD$, do đó $S_{ABD} + S_{ACD} = S_{ABC}$.\\ "
+               r"Dùng công thức diện tích $S = \dfrac{1}{2}\cdot\text{cạnh}\cdot\text{cạnh}\cdot\sin(\text{góc xen giữa})$:\\ "
+               r"$\dfrac{1}{2}\cdot %d\cdot AD\cdot\sin %s + \dfrac{1}{2}\cdot %d\cdot AD\cdot\sin %s "
+               r"= \dfrac{1}{2}\cdot %d\cdot %d\cdot\sin %s$.\\ "
+               r"Tra bảng: $\sin %s = %s$ và $\sin %s = %s$, thay vào:\\ "
+               r"$\dfrac{1}{2}\cdot %s\cdot AD\cdot\left(%d + %d\right) "
+               r"= \dfrac{1}{2}\cdot %s\cdot %d$.\\ "
+               r"Rút gọn được $AD = %s$."
+               % (_goc(A), _goc(nua),
+                  c, _goc(nua), b, _goc(nua), b, c, _goc(A),
+                  _goc(nua), _L(sin_nua), _goc(A), _L(sin_A),
+                  _L(sin_nua), c, b, _L(sin_A), b * c,
+                  _L(AD))),
               (r"{Gọi $AD$ là đường phân giác trong của góc $A$ $\left(D \in BC\right)$, "
-               r"khi đó $AD = %s$}" % latex(simplify(Rational(2 * b * c, b + c))),
-               r"Sai. Thiếu $\cos\dfrac{A}{2}$: công thức đúng là "
-               r"$AD = \dfrac{2\cdot AB\cdot AC\cdot\cos\dfrac{A}{2}}{AB + AC} = %s$." % latex(AD))]
+               r"khi đó $AD = %s$}" % _L(AD_sai),
+               r"Sai vì lấy nhầm sin của \textbf{nửa góc} $A$. "
+               r"Phân giác chia góc $%s$ thành hai góc $%s$, mà $\sin %s = %s$ "
+               r"(chứ không phải $%s$).\\ "
+               r"Thay đúng vào $S_{ABD} + S_{ACD} = S_{ABC}$ sẽ được $AD = %s$."
+               % (_goc(A), _goc(nua), _goc(nua), _L(sin_nua),
+                  _L(sin_nua_lan), _L(AD)))]
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF

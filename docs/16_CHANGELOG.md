@@ -5097,3 +5097,88 @@ PDF dep hon nhung cau do bien mat khoi trang lam bai cua hoc sinh. Ba huong:
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.86 - 2026-09-27
+
+## 1. Y d) cau Dung/Sai: bo cong thuc ngoai sach giao khoa
+
+Co Lan bat duoc: "do dai duong phan giac phai qua bai hinh hoc... ko su dung
+cac cai khong co trong sach giao khoa. Neu tach dien tich thanh 2 phan, hoc
+sinh co the su dung cac cong thuc thuoc chuong tinh duoc ko. neu duoc thi de lai."
+
+Co dung. Loi giai cu viet "Ma sin A = 2 sin(A/2) cos(A/2)" - do la CONG THUC
+NHAN DOI, lop 11 moi hoc. Hoc sinh lop 10 khong theo duoc.
+
+Nhung cach tach dien tich thi CUU DUOC, vi goc A o day chi la 60 hoac 120 do
+nen ca sin A lan sin(A/2) deu TRA THANG BANG:
+
+    A = 120 -> nua goc 60,  sin 60 = can3/2,  sin 120 = can3/2  -> AD = bc/(b+c)
+    A = 60  -> nua goc 30,  sin 30 = 1/2,     sin 60  = can3/2  -> AD = can3.bc/(b+c)
+
+Loi giai moi chi dung ba thu, deu trong tam tay hoc sinh:
+  - S = 1/2 . canh . canh . sin(goc xen giua)   -> cong thuc dien tich, bai 6
+  - bang gia tri luong giac goc dac biet         -> bai 5
+  - phan giac chia goc A thanh hai goc bang nhau -> hinh hoc lop 7
+KHONG con cong thuc nhan doi, KHONG con cong thuc do dai phan giac.
+
+Phuong an sai doi lai cho co y nghia: lay nham sin cua NUA goc.
+Da kiem chung lai bang toa do (tim giao diem phan giac voi BC): 11 tam giac,
+0 lech. Dong thoi doi het \frac sang \dfrac trong hai ham Dung/Sai.
+
+## 2. HINH VE HIEN DUOC TREN WEB
+
+Co Lan: "phai co hinh ca tren web. ko the ko co hinh. se bi sai muc do cua
+cau. co hinh muc do se de hon. hoac phuc tap hon (vi du bai ham bac 2 - ko co
+hinh sao lam cac muc do nhin hinh ra dinh, truc doi xung)".
+
+Truoc day cau co TikZ bi danh dau co_hinh_ve va BI LOAI khoi phan lam bai
+truc tiep, chi con trong PDF. Trong 8 de chuong 3 ra thu co 7 cau nhu vay.
+
+Nay dich hinh ra anh:
+
+    app/services/hinh_ve_service.py   (moi)
+      - tim moi doan \begin{tikzpicture}...\end{tikzpicture} trong de bai
+      - ghep vao DUNG phan dau cua khung de (latex_template.tex) roi dich
+        bang xelatex -> PDF -> anh, nen hinh tren web giong het trong PDF
+      - may nao thieu goi (tabvar, bclogo, esvect...) thi tu lui ve mot
+        phan dau RUT GON chi co tikz/tkz-euclide/pgfplots
+      - dich ra moi dinh dang lam duoc roi GIU CAI NHE NHAT: hinh con song
+        ve bang plot[smooth] cho ra SVG 2,2 MB tu pdftocairo nhung chi 20 KB
+        tu dvisvgm; trang lam bai cua hoc sinh hay mo bang 3G nen chon nhe
+      - luu theo ma bam sha1 cua doan TikZ: mot hinh chi dich mot lan
+
+    answer_parser_service   giu lai hinh_tikz thay vi vut di
+    exam_assembler_service  dich hinh NGAY LUC SINH DE (may dang chay LaTeX
+                            san roi) nen hoc sinh mo trang khong phai cho
+    exam.py                 duong moi GET /hinh/{ma} tra anh, cache 1 nam
+    lam_bai.html            hien <img>, va cau co hinh nay DUOC LAM binh
+                            thuong (truoc day bi bo qua khi thu bai lam)
+
+Hinh hong thi khong lam vo de: cau van ra, chi la khong co anh, va luc do
+web moi hien ghi chu "xem trong PDF" nhu cu.
+
+    scripts/kiem_tra_hinh.sh (moi)  chay tren VPS de xem may co du do nghe
+    data/hinh_cache/  da cho vao .gitignore (tu sinh lai duoc)
+
+## Da kiem chung the nao
+
+1. Dich that ba hinh cua chuong 3 (nua duong tron don vi, dam lay, cu lao):
+   6 KB PNG / 5 KB SVG / 20 KB SVG, moi hinh 1,5s lan dau, 0,000s lan sau.
+2. XEM ANH hinh cu lao sau khi dich - song, cu lao, cay, tam giac ABC va
+   nhan 65 do, 85 do, 40 deu dung.
+3. Chay CA DUONG DAY: sinh cau -> trich de bai -> dich hinh -> tra duong
+   dan anh, ca ba dang deu ra anh va phan CHU cua de bai van con nguyen.
+4. tests/test_hinh_ve.py (4 bai): tim dung doan TikZ, ma bam on dinh va
+   phan biet, de bai giu chu nhung khong lot ma TikZ ra cho hoc sinh.
+5. 308 bai test qua, 2 bo qua.
+
+## Con phai lam tren VPS
+
+Chay "bash scripts/kiem_tra_hinh.sh". Neu bao thieu cong cu doi PDF sang
+anh thi cai: apt-get install -y poppler-utils (va texlive-extra-utils neu
+muon co pdfcrop cat vien cho sat). Khong ssh duoc tu may ao cua Claude nen
+chua tu kiem tra duoc cho nay.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

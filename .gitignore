@@ -59,3 +59,6 @@ data/temp/
 skkn/skkn.pdf
 skkn/*.xdv
 skkn/tmp*.tmp
+
+# Anh hinh ve da dich tu TikZ (tu sinh lai duoc, xem hinh_ve_service.py)
+data/hinh_cache/

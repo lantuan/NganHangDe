@@ -29,6 +29,7 @@ from app.services.question_selector_service import (
     SelectorError,
 )
 from app.services.exam_blueprint_service import build_blueprint, BlueprintError
+from app.services.hinh_ve_service import dich_hinh_trong_khoi
 from app.services.generator_service import (
     call_generator, GeneratorNotFoundError, LoaiCauSaiError,
 )
@@ -248,6 +249,12 @@ def _sinh_pdf_tu_danh_sach(
                 so_thu_tu += 1
                 try:
                     dap_an = trich_dap_an(ket_qua["latex_block"])
+                    # Dich hinh ve ra anh NGAY LUC SINH DE (may dang chay
+                    # LaTeX san roi), de trang lam bai cua hoc sinh khong
+                    # phai cho. Hinh hong thi bo qua, cau van ra binh thuong.
+                    if dap_an.get("hinh_tikz"):
+                        dap_an["hinh"] = dich_hinh_trong_khoi(
+                            "\n".join(dap_an["hinh_tikz"]))
                 except AnswerParseError as e:
                     dap_an = {
                         "loai_cau": None,

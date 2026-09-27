@@ -2,6 +2,8 @@ import json
 import zipfile
 from pathlib import Path
 
+import re
+
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
@@ -29,6 +31,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_ngan,
     chuan_hoa_dap_an_tf,
 )
+from app.services.hinh_ve_service import duong_dan_anh
 from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dang_co_ham
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
@@ -931,6 +934,19 @@ def grade_endpoint(payload: ChamBaiRequest):
 # danh dau rieng de Frontend hien ghi chu, khong bat lam truc tiep.
 # ======================================================
 
+@router.get("/hinh/{ma}")
+def xem_hinh_ve_endpoint(ma: str):
+    """Tra ve anh hinh ve da dich san (xem app/services/hinh_ve_service.py)."""
+    if not re.fullmatch(r"[0-9a-f]{8,40}", ma):
+        raise HTTPException(404, "Ma hinh khong hop le.")
+    duong = duong_dan_anh(ma)
+    if duong is None:
+        raise HTTPException(404, "Khong tim thay hinh.")
+    kieu = "image/svg+xml" if duong.suffix == ".svg" else "image/png"
+    return FileResponse(duong, media_type=kieu,
+                        headers={"Cache-Control": "public, max-age=31536000"})
+
+
 @router.get("/quiz/{de_id}")
 def xem_de_lam_bai_endpoint(de_id: str):
     de = history_service.lay_de_theo_id(de_id)
@@ -956,6 +972,9 @@ def xem_de_lam_bai_endpoint(de_id: str):
             "loai_cau": loai_cau,
             "de_bai": cau.get("de_bai") or "",
             "co_hinh_ve": bool(cau.get("co_hinh_ve")),
+            # Duong dan anh hinh ve (neu da dich duoc). Con co_hinh_ve giu
+            # lai de Frontend biet cau NAY CO hinh nhung chua dich duoc.
+            "hinh": ["/hinh/%s" % m for m in (cau.get("hinh") or [])],
         }
         if loai_cau == "MC":
             muc["phuong_an"] = cau.get("phuong_an") or {}

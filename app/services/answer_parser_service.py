@@ -264,6 +264,11 @@ def trich_de_bai(latex_block: str) -> dict:
     de_bai = re.sub(r"^\s*%%\[\?\]\s*\n?", "", de_bai).strip()
 
     co_hinh_ve = bool(re.search(r"\\immini|\\includegraphics|\\begin\{tikzpicture\}", de_bai))
+    # GIU LAI ma nguon hinh ve. Truoc day hinh bi vut di va cau bi danh dau
+    # "web chua hien duoc" - nhung bo hinh la doi luon MUC DO cua cau (bai
+    # do thi ham bac hai ma khong co do thi thi khong con la cau nhin hinh
+    # doc dinh nua). Nay giu lai de dich ra anh cho web.
+    hinh_tikz = re.findall(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", de_bai, flags=re.S)
 
     # Cau TL nhieu y ngan (\begin{listEX}...\item... \SA[..]{..}...\end{listEX}
     # - xem TL_answer_const/TL_answer_text) khong bi chan boi cac moc o
@@ -278,7 +283,7 @@ def trich_de_bai(latex_block: str) -> dict:
     de_bai = re.sub(r"\\item\b", "\n- ", de_bai)
     de_bai = de_bai.strip()
 
-    return {"de_bai": de_bai, "co_hinh_ve": co_hinh_ve}
+    return {"de_bai": de_bai, "co_hinh_ve": co_hinh_ve, "hinh_tikz": hinh_tikz}
 
 
 def trich_loi_giai(latex_block: str) -> str | None:

@@ -118,6 +118,14 @@
             padding: 10px 14px; background: #f8fafc; border-radius: var(--radius-xl);
         }
 
+        /* Hinh ve cua cau hoi, da dich san tu TikZ ra anh */
+        .hinh-ve { margin: 12px 0; text-align: center; }
+        .hinh-ve img {
+            max-width: 100%; height: auto; background: #fff;
+            border-radius: var(--radius-xl); padding: 8px;
+            border: 1px solid var(--color-border);
+        }
+
         .upload-tl {
             background: var(--color-surface); border: 1px solid var(--color-border);
             border-radius: var(--radius-2xl); padding: 16px 20px; margin-bottom: 16px;
@@ -311,7 +319,16 @@ function veMotCau(cau) {
     noiDung += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + '</div>';
     noiDung += '<div class="cau-hoi-debai">' + renderLatexText(cau.de_bai) + '</div>';
 
-    if (cau.co_hinh_ve) {
+    // Hinh ve da duoc dich san ra anh luc sinh de (xem hinh_ve_service.py).
+    // Khong duoc bo hinh: bo hinh la doi luon muc do cua cau.
+    const coAnh = cau.hinh && cau.hinh.length > 0;
+    if (coAnh) {
+        cau.hinh.forEach(function (duong) {
+            noiDung += '<div class="hinh-ve"><img src="' + duong + '" alt="Hình vẽ của câu ' + cau.so_thu_tu + '" loading="lazy"></div>';
+        });
+    }
+
+    if (cau.co_hinh_ve && !coAnh) {
         noiDung += '<div class="ghi-chu-hinh">📎 Câu này có hình vẽ, web chưa hiển thị được — xem trong file PDF đề nhé!</div>';
     } else if (cau.loai_cau === 'MC') {
         ['A', 'B', 'C', 'D'].forEach(function (nhan) {
@@ -344,7 +361,8 @@ function veTrangLamBai() {
     DANH_SACH_CAU.forEach(function (cau) { html += veMotCau(cau); });
 
     const coTuLuan = DANH_SACH_CAU.some(function (cau) {
-        return !cau.co_hinh_ve && ['MC', 'TF', 'SA'].indexOf(cau.loai_cau) === -1;
+        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length);
+        return !chuaHienDuocHinh && ['MC', 'TF', 'SA'].indexOf(cau.loai_cau) === -1;
     });
     if (coTuLuan) {
         // Chuc nang cham tu luan bang anh (CHV_Grader) DANG XAY DUNG -
@@ -384,7 +402,8 @@ function docFileBase64(file) {
 function thuThapBaiLam() {
     const baiLam = [];
     DANH_SACH_CAU.forEach(function (cau) {
-        if (cau.co_hinh_ve || cau.loai_cau === 'TL') return;
+        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length);
+        if (chuaHienDuocHinh || cau.loai_cau === 'TL') return;
         if (cau.loai_cau === 'MC') {
             const checked = document.querySelector('input[name="cau_' + cau.so_thu_tu + '"]:checked');
             baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: checked ? checked.value : '' });
