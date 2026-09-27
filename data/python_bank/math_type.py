@@ -51,9 +51,52 @@ def TF_baitoan_du(debai,ds_abcd,dothi_de,dothi_giai,socot):
 	giai=[cau_a[1],cau_b[1],cau_c[1],cau_d[1]]
 	return TF_dothi_khong(debai,text_choice,giai) if (dothi_de==0 and dothi_giai==0) else TF_dothi_de(debai,text_choice,giai,dothi_de) if (dothi_de!=0 and dothi_giai==0) else TF_dothi_giai(debai,text_choice,giai,dothi_giai) if (dothi_de==0 and dothi_giai!=0) else TF_dothi_de_giai(debai,text_choice,giai,dothi_de,dothi_giai)
 # ===========================================================================================
+# QUY ƯỚC BẮT BUỘC VỀ LOẠI CÂU (chốt 27/09/2026)
+#
+#   Trả lời ngắn (TLN, dang=2 hoặc 3): MỘT câu hỏi -> MỘT đáp án.
+#                                      KHÔNG được chia ý a), b).
+#   Tự luận (TL):                      phải có TỪ HAI Ý trở lên.
+#
+# Hai hàm dưới đây chặn ngay lúc viết hàm sinh câu hỏi, để không lọt vào đề.
+# Tầng khoá thứ hai nằm ở app/services/generator_service.py, kiểm theo TÊN HÀM
+# (có _SA_ hay _TL_) nên dù ai viết kiểu gì cũng không lách được.
+# ===========================================================================================
+class LoaiCauSaiError(ValueError):
+	"""Câu sinh ra không đúng loại mà TÊN HÀM đã hứa.
+
+	Kế thừa ValueError để hàm cũ nào đang bắt ValueError vẫn bắt được, nhưng
+	có tên riêng để lúc ra đề phân biệt được: đây là câu SAI LOẠI (bỏ qua,
+	báo thiếu) chứ không phải hàm tính toán bị lỗi số liệu (phải dừng).
+	"""
+
+
+def _khoa_loai_cau_TLN(debai, dang):
+	"""Chặn câu trả lời ngắn bị chia ý a), b)."""
+	if dang not in (2, 3):
+		return
+	dau_hieu = ("\\begin{listEX}", "\\item ", "\\SA[")
+	for d in dau_hieu:
+		if d in str(debai):
+			raise LoaiCauSaiError(
+				"Câu TRẢ LỜI NGẮN không được chia ý a), b): đề bài đang chứa %r. "
+				"Một câu trả lời ngắn chỉ có MỘT câu hỏi và MỘT đáp án. "
+				"Muốn nhiều ý thì viết thành câu TỰ LUẬN (tên hàm có _TL_)." % d)
+
+
+def _khoa_loai_cau_TL(ds_abcd):
+	"""Chặn câu tự luận chỉ có một ý."""
+	if len(ds_abcd) < 2:
+		raise LoaiCauSaiError(
+			"Câu TỰ LUẬN phải có từ HAI ý trở lên, đang chỉ có %d ý. "
+			"Nếu chỉ hỏi một ý thì đó là câu TRẢ LỜI NGẮN (tên hàm có _SA_)."
+			% len(ds_abcd))
+
+
+# ===========================================================================================
 # Hàm này dùng cho câu MC_SA mà đáp số là hằng số
 # Nếu không có đồ thị thì tại vị trí đồ thị nhập số 0
 def MC_SA_answer_const(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
+	_khoa_loai_cau_TLN(debai,dang)
 	nhieuda=random.sample(dsnhieu,3)
 	while len(set([dapso,nhieuda[0],nhieuda[1],nhieuda[2]]))<4:
 		nhieuda=random.sample(dsnhieu,3)
@@ -79,6 +122,7 @@ def MC_SA_answer_const(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
 # Hàm này dùng cho câu MC_SA mà đáp số là dạng kí tự - Bên ham bài toán để sẵn dấu f"$đáp án $" nếu là kí hiệu toán học
 # Nếu không có đồ thị thì tại vị trí đồ thị nhập số 0
 def MC_SA_answer_text(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
+	_khoa_loai_cau_TLN(debai,dang)
 	nhieuda=random.sample(dsnhieu,3)
 	while len(set([dapso,nhieuda[0],nhieuda[1],nhieuda[2]]))<4:
 		nhieuda=random.sample(dsnhieu,3)
@@ -103,6 +147,7 @@ def MC_SA_answer_text(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
 # #########====================================================
 
 def TL_answer_const(debai,ds_abcd,dothi_de,dothi_giai,dong):##
+	_khoa_loai_cau_TL(ds_abcd)
 	hoi_item=f"\\begin{{listEX}}[{dong}]\n"
 	for j in range(len(ds_abcd)):
 		hoi_item+=f"\\item {ds_abcd[j][0]} \\SA[4]{{${vlatex(ds_abcd[j][1])}$}}\n"
@@ -118,6 +163,7 @@ def TL_answer_const(debai,ds_abcd,dothi_de,dothi_giai,dong):##
 	return TL_dothi_not if (dothi_de==0 and dothi_giai==0) else TL_dothi_de if (dothi_de!=0 and dothi_giai==0) else TL_dothi_giai if (dothi_de==0 and dothi_giai!=0) else TL_dothi_de_giai
 # #########====================================================
 def TL_answer_text(debai,ds_abcd,dothi_de,dothi_giai,dong):##
+	_khoa_loai_cau_TL(ds_abcd)
 	hoi_item=f"\\begin{{listEX}}[{dong}]\n"
 	for j in range(len(ds_abcd)):
 		hoi_item+=f"\\item {ds_abcd[j][0]} \\SA[4]{{${ds_abcd[j][1]}$}}\n"

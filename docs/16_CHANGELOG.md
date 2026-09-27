@@ -4824,3 +4824,82 @@ truong hop chua co tep Python.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.83 - 2026-09-27
+
+## Khoa loai cau ngay trong TEN HAM
+
+Yeu cau cua co Lan: "TLN: khong co cac bai a,b duoc. chi co 1 cau hoi de ra 1
+dap an tra loi ngan thoi. cau tu luan moi can 2 y. chot, khoa luon trong ten
+ham cho toi."
+
+Tu nay TEN HAM la loi hua, va he thong bat ham giu loi hua do. Khoa hai lop.
+
+## Lop 1 - chan ngay luc viet ham (data/python_bank/math_type.py)
+
+    _khoa_loai_cau_TLN(debai, dang)   dang 2/3 (tra loi ngan) ma de bai co
+                                      listEX / item / SA[  -> bao loi ngay
+    _khoa_loai_cau_TL(ds_abcd)        cau tu luan ma ds_abcd duoi 2 y
+
+Goi ngay dong dau cua MC_SA_answer_const, MC_SA_answer_text, TL_answer_const,
+TL_answer_text. Loi bao kem cau nhac nen doi sang loai nao.
+
+## Lop 2 - chan theo ten ham (app/services/generator_service.py)
+
+kiem_tra_dung_loai_cau(generator_id, latex_block) soi khoi LaTeX sinh ra so
+voi ten ham, chay trong ca call_generator va call_locked_variant:
+
+    _SA_   dung 1 shortans, khong duoc co listEX
+    _TL_   tu 2 item tro len
+    _TF_   phai co choiceTFt
+    _MC_   phai co choice, khong duoc co shortans
+
+Sai thi nem LoaiCauSaiError.
+
+## Mot loai loi dung chung cho ca hai lop
+
+LoaiCauSaiError dinh nghia MOT lan trong math_type.py (ke thua ValueError),
+generator_service import lai dung lop do. Neu de hai lop khoa nem hai loai loi
+khac nhau thi bo rap de chi bat duoc mot nua, nua con lai van lam vo ca de -
+da thu that va gap dung loi nay truoc khi gop.
+
+## De khong vo
+
+exam_assembler_service bat LoaiCauSaiError giong nhu bat GeneratorNotFoundError
+- cau sai loai KHONG vao de cua hoc sinh, thay vao do de in dong bao thieu kem
+ID de sua. Dung nguyen tac "cu bao thieu, khong can bao loi".
+
+## Vong quet tim ra 1 ham cu chua dung quy uoc
+
+L10_C1_B2_VD021_TL_A_01 - ten la tu luan nhung ca 4 kieu deu chi sinh MOT y
+("So gia tri nguyen cua tham so m de A hop B = A"). Theo quy uoc moi thi mot
+cau hoi ra mot dap an la TRA LOI NGAN.
+
+Hai cach sua, cho co Lan quyet:
+  (1) Them y thu hai vao ca 4 kieu, giu nguyen ten _TL_ va Mapping.
+  (2) Doi ham sang _SA_ , phai sua ca dong trong Mapping.
+
+Trong luc cho: ham nay bi chan khi ra de va he thong bao thieu, nen khong co
+cau sai loai nao den tay hoc sinh. Ten ham ghi trong CHUA_DUNG_QUY_UOC o
+tests/test_loai_cau.py; sua xong thi xoa khoi do, bai test se tu doi hoi lai.
+
+## Da kiem chung the nao
+
+1. Thu that ca hai lop: TLN chia y -> bi chan; tu luan 1 y -> bi chan; trac
+   nghiem co shortans -> bi chan; TLN dung quy uoc -> qua.
+2. tests/test_loai_cau.py (23 test) trong do co vong quet chay THAT moi ham
+   _SA_ / _TL_ dang co trong ngan hang va soi theo dung ten no.
+3. Quet CA 3 KHOI qua duong ra de that (call_generator tren moi dong Mapping):
+   51 ham chay dung loai, 1 ham bi chan (VD021), 561 dang chua co ham. Khong
+   ham nao nem loi la lam vo de.
+4. 296 bai test qua, 1 bo qua (dung ham VD021 dang cho quyet).
+
+## Con lai
+
+    Lop 10: con 210 dang cho viet ham (chuong 1, 3 da xong)
+    Lop 11: con 238
+    Lop 12: con 113
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -86,6 +86,63 @@ def resolve_socau(role: str, socau_yeu_cau: int | None) -> int:
     return socau_yeu_cau if socau_yeu_cau else 1
 
 
+# Dùng LẠI đúng lớp lỗi mà math_type đã định nghĩa, để hai lớp khoá (lúc viết
+# hàm và lúc ra đề) cùng ném MỘT loại lỗi - nếu tách thành hai lớp khác nhau thì
+# bộ ráp đề chỉ bắt được một nửa, nửa còn lại vẫn làm vỡ cả đề.
+from math_type import LoaiCauSaiError  # noqa: E402
+
+
+def kiem_tra_dung_loai_cau(generator_id: str, latex_block: str) -> None:
+    """
+    Khoá loại câu theo TÊN HÀM. Quy ước của ngân hàng (chốt 27/09/2026):
+
+        _SA_  trả lời ngắn : MỘT câu hỏi -> MỘT đáp án, KHÔNG chia ý a), b)
+        _TL_  tự luận      : phải có TỪ HAI Ý trở lên
+        _MC_  trắc nghiệm  : phải có \\choice, không được có \\shortans
+        _TF_  đúng/sai     : phải có \\choiceTFt
+
+    Vì sao khoá ở đây chứ không chỉ ở math_type: math_type chặn lúc viết hàm,
+    còn chỗ này chặn lúc RA ĐỀ - ai viết hàm kiểu gì, bỏ qua math_type hay
+    tự ghép chuỗi LaTeX, vẫn không lọt được câu sai loại vào đề của học sinh.
+    """
+    khoi = re.findall(r"\\begin\{ex\}.*?\\end\{ex\}", latex_block, re.S) or [latex_block]
+
+    for i, cau in enumerate(khoi, 1):
+        so_shortans = cau.count("\\shortans")
+        so_y = cau.count("\\begin{listEX}")
+
+        if "_SA_" in generator_id:
+            if so_shortans != 1:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu trả lời ngắn phải có đúng MỘT đáp án "
+                    "(\\shortans), đang có %d." % (generator_id, i, so_shortans))
+            if so_y:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu trả lời ngắn KHÔNG được chia ý a), b). "
+                    "Muốn nhiều ý thì đổi sang câu tự luận (_TL_)."
+                    % (generator_id, i))
+        elif "_TL_" in generator_id:
+            if cau.count("\\item ") < 2:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu tự luận phải có từ HAI ý trở lên. "
+                    "Nếu chỉ hỏi một ý thì đó là câu trả lời ngắn (_SA_)."
+                    % (generator_id, i))
+        elif "_TF_" in generator_id:
+            if "\\choiceTFt" not in cau:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu đúng/sai phải dùng \\choiceTFt."
+                    % (generator_id, i))
+        elif "_MC_" in generator_id:
+            if "\\choice" not in cau:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu trắc nghiệm phải có \\choice."
+                    % (generator_id, i))
+            if so_shortans:
+                raise LoaiCauSaiError(
+                    "%s (câu %d): câu trắc nghiệm không được có \\shortans."
+                    % (generator_id, i))
+
+
 def call_generator(
     generator_id: str,
     lop: int,
@@ -116,6 +173,7 @@ def call_generator(
 
     socau = resolve_socau(role, socau_yeu_cau)
     latex_block = _call_generator_function(func, socau, socot, dong)
+    kiem_tra_dung_loai_cau(generator_id, latex_block)
 
     return {
         "generator_id": generator_id,
@@ -161,4 +219,6 @@ def call_locked_variant(
     """
     module = _load_chapter_module(lop, chuong_so)
     func = getattr(module, variant_name)
-    return _call_generator_function(func, 1, socot, dong)
+    latex_block = _call_generator_function(func, 1, socot, dong)
+    kiem_tra_dung_loai_cau(generator_id, latex_block)
+    return latex_block

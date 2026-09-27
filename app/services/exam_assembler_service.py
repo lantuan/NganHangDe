@@ -29,7 +29,9 @@ from app.services.question_selector_service import (
     SelectorError,
 )
 from app.services.exam_blueprint_service import build_blueprint, BlueprintError
-from app.services.generator_service import call_generator, GeneratorNotFoundError
+from app.services.generator_service import (
+    call_generator, GeneratorNotFoundError, LoaiCauSaiError,
+)
 import json
 from app.services.latex_service import (
     build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR,
@@ -261,6 +263,19 @@ def _sinh_pdf_tu_danh_sach(
                 if so_ma_de > 1:
                     ban_ghi["ma_de"] = ma_de
                 danh_sach_dap_an.append(ban_ghi)
+
+            except LoaiCauSaiError as e:
+                # Hàm có thật nhưng sinh ra câu KHÔNG ĐÚNG LOẠI mà tên nó hứa
+                # (ví dụ tên có _TL_ nhưng chỉ sinh một ý). Không cho câu đó vào
+                # đề của học sinh, nhưng cũng không dừng cả đề - báo ra để sửa.
+                if cho_phep_thieu:
+                    ma = item.get("generator_id")
+                    item = dict(item, thieu_o="python", ma_thieu=ma)
+                    theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(
+                        item, ghi_chu=str(e)))
+                    so_cau_thieu += 1
+                    continue
+                raise AssembleError(f"Câu sai loại: {e}")
 
             except GeneratorNotFoundError:
                 if cho_phep_thieu:
