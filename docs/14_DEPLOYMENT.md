@@ -258,3 +258,59 @@ Ba lỗi đã gặp và cách phân biệt:
   refresh_token cũ (làm lại bước 2 + 3).
 - Không thấy dòng log nào → request chưa tới router, xem lại phía
   frontend/`/api/chat/dang-classroom`.
+
+---
+
+# Lenh got tat: scripts/day.sh
+
+Viet ngay 27/09/2026. Muc dich: co Lan khong phai nho chuoi lenh push + pull +
+restart nua, va khong bao gio con day len GitHub roi QUEN cap nhat VPS.
+
+## Cach dung
+
+    day          -> chi day len GitHub  (dung cho SKKN, tai lieu, docs/)
+    day web      -> day len GitHub + cap nhat VPS + kiem tra web con song
+    day -h       -> xem huong dan
+
+Script tu tim thu muc du an (dua vao vi tri cua chinh no) nen goi tu dau cung
+duoc, khong can cd truoc.
+
+## Dat got tat mot lan duy nhat
+
+    echo 'alias day="/Users/mailan/Desktop/NganHangDe_Lan/web/NganHangDe/scripts/day.sh"' >> ~/.zshrc
+    source ~/.zshrc
+
+Neu chua dat alias thi goi truc tiep:  ./scripts/day.sh
+
+## Script lam gi, theo dung thu tu
+
+1. Vao thu muc du an, kiem tra co phai kho git khong.
+2. Kiem tra dang o nhanh nao. Neu khong phai main thi HOI lai truoc khi day.
+3. Neu con tep sua ma chua commit: in danh sach ra, hoi co muon luu khong. Neu
+   co thi hoi mot cau mo ta roi commit tat ca.
+4. git fetch, roi so may nay voi GitHub:
+     - GitHub moi hon  -> DUNG LAI, nhac chay git pull --rebase truoc.
+       (Day la buoc quan trong nhat: day de len khi GitHub moi hon se that bai
+        hoac gay xung dot, tot nhat la chan ngay tu dau.)
+     - Khong co gi moi -> noi ro va dung, khong day vo ich.
+     - Co gi moi        -> in danh sach commit sap day roi day.
+5. Neu KHONG goi voi tham so "web" thi dung o day, kem mot dong nhac rang VPS
+   chua duoc cap nhat.
+6. Neu goi "day web": ssh vao may chu, git pull --ff-only, restart dich vu, doi
+   3 giay roi bao trang thai dich vu.
+7. Kiem tra https://nganhangdechv.tech tra ve ma gi. 200/302/307 la binh thuong.
+   Ma khac -> bao loi va chi cho co Lan lenh xem nhat ki.
+
+## Vi sao dung ten mien thay vi dia chi IP khi ssh
+
+Kho ma nguon nay cong khai cho hoi dong cham xem. Ten mien da tro ve dung may
+chu do nen dung ten mien khong he tiet lo them gi, ma cung khong can sua script
+neu sau nay doi may chu.
+
+## Cai script CO Y KHONG lam
+
+- Khong tu chay git pull khi GitHub moi hon. Pull co the sinh xung dot phai
+  nguoi xem, may khong nen tu quyet.
+- Khong tu day khi dang o nhanh khac main, phai hoi.
+- Khong bao "xong" khi chua kiem tra web that su tra ve gi. Restart thanh cong
+  ma web loi van la loi.

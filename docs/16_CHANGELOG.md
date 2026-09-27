@@ -4185,3 +4185,32 @@ ai bat loi duoc ve chuyen khac lua). Bang 12 rut tu 7 xuong 5 phep kiem dinh
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.72 - 2026-09-27
+
+## Lenh got tat day code: scripts/day.sh
+
+Ly do: Claude commit duoc nhung KHONG day len GitHub duoc - thong tin dang nhap
+GitHub nam trong Keychain cua may Mac, may ao Claude lam viec khong voi toi
+(da thu: "could not read Username for https://github.com"). Nen phan vai la
+Claude sua tep + commit + ghi so tay, co Lan day len.
+
+Viet script de co Lan khoi phai nho chuoi lenh:
+
+    day          -> day len GitHub
+    day web      -> day len GitHub + cap nhat VPS + kiem tra web
+
+Chi tiet tung buoc: xem docs/14_DEPLOYMENT.md
+
+## Diem quan trong nhat cua script
+
+Truoc khi day, script fetch roi so may nay voi GitHub. Neu GITHUB MOI HON thi
+DUNG LAI va nhac pull truoc, khong co day de. Truoc day co Lan tung gap tinh
+huong nay va mat thoi gian go xung dot.
+
+Va: script chi bao "xong" sau khi curl that su thay web tra ve 200/302/307.
+Restart dich vu thanh cong ma web loi van la loi - khong duoc bao xong.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
