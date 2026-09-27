@@ -13,7 +13,10 @@
     "content": "Nhận biết được bất phương trình bậc nhất hai ẩn.",
     "examples": [],
     "scope": null,
-    "tags": ["bat_phuong_trinh", "bac_nhat_hai_an"],
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -30,7 +33,11 @@
     "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
     "examples": [],
     "scope": null,
-    "tags": ["bat_phuong_trinh", "bac_nhat_hai_an", "nghiem"],
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "nghiem"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -47,7 +54,11 @@
     "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
     "examples": [],
     "scope": "trên mặt phẳng toạ độ",
-    "tags": ["bat_phuong_trinh", "bac_nhat_hai_an", "mien_nghiem"],
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "mien_nghiem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -64,7 +75,11 @@
     "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
     "examples": [],
     "scope": "thông qua các ví dụ thực tiễn",
-    "tags": ["bat_phuong_trinh", "bac_nhat_hai_an", "vi_du_thuc_tien"],
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "vi_du_thuc_tien"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -81,7 +96,10 @@
     "content": "Nhận biết được hệ bất phương trình bậc nhất hai ẩn.",
     "examples": [],
     "scope": null,
-    "tags": ["he_bat_phuong_trinh", "bac_nhat_hai_an"],
+    "tags": [
+      "he_bat_phuong_trinh",
+      "bac_nhat_hai_an"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -98,7 +116,11 @@
     "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
     "examples": [],
     "scope": "trên mặt phẳng tọa độ",
-    "tags": ["he_bat_phuong_trinh", "bac_nhat_hai_an", "mien_nghiem"],
+    "tags": [
+      "he_bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "mien_nghiem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -112,12 +134,16 @@
     "subsection": null,
     "MucDo": "VD",
     "verb": "Vận dụng được",
-    "content": "Vận dụng được kiến thức hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán.",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
     "examples": [
       "Bài toán tìm cực trị của biểu thức F = ax + by trên một miền đa giác"
     ],
-    "scope": "bài toán giá trị lớn nhất đơn giản",
-    "tags": ["he_bat_phuong_trinh", "bac_nhat_hai_an", "quy_hoach_tuyen_tinh"],
+    "scope": "bài toán tìm cực trị của biểu thức F = ax + by trên một miền đa giác",
+    "tags": [
+      "he_bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "quy_hoach_tuyen_tinh"
+    ],
     "difficulty_rank": 3
   }
 ]

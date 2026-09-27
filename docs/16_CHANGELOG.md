@@ -4336,3 +4336,82 @@ conic. Claude doc nham vi luc do chi xem 14 ban ghi dau moi tep.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.75 - 2026-09-27
+
+## Curriculum lop 10: bo sung 28 yeu cau, danh lai so C2-C8
+
+Co Lan chot: curriculum la nen, phai dung va du truoc; mapping va ham Python
+bo sung dan sau.
+
+    Truoc: 126 yeu cau can dat
+    Sau  : 154 yeu cau can dat, so lien mach 001-155
+
+## 28 ban ghi moi (theo dung van ban Bo)
+
+C3 +1   Mo ta duoc cach giai tam giac
+C4 +1   Su dung vecto giai thich hien tuong Vat li, Hoa hoc
+C5 +4   mo hinh thuc te dan den khai niem ham so; VD ham so vao bai toan thuc
+        tien; lap bang bien thien; tinh chat co ban cua Parabola (dinh, truc
+        doi xung)
+C6 +12  xac dinh so gan dung voi do chinh xac cho truoc; xac dinh sai so tuong
+        doi; may tinh cam tay voi so gan dung; phat hien so lieu khong chinh
+        xac; hai cho "chi ra ket luan nho y nghia so dac trung"; moi lien he
+        thong ke voi mon khac; dinh nghia co dien cua xac suat; nguyen li xac
+        suat be; so do hinh cay cho thi nghiem lap; tinh chat co ban cua xac
+        suat; xac suat cua bien co doi
+C7 +8   do dai vecto tu toa do hai dau mut; giai tam giac bang toa do; toa do
+        vecto vao bai toan thuc tien; MO TA phuong trinh tong quat va tham so;
+        lien he do thi ham bac nhat va duong thang; duong tron vao bai toan
+        thuc tien; nhan biet phuong trinh chinh tac ba duong conic; van de
+        thuc tien gan voi conic
+C8 +2   van dung quy tac cong/nhan trong tinh huong thuc tien; TINH SO HOAN VI,
+        CHINH HOP, TO HOP BANG CONG THUC (truoc do chi co ban may tinh cam tay)
+
+## Sua cho lech
+
+- C7 hoc_phan: "Dai so va Mot so yeu to giai tich" -> "Hinh hoc va Do luong".
+  Bo xep Phuong phap toa do trong mat phang vao HINH HOC VA DO LUONG (tr.83).
+- C5 TH057: "bang bien thien" -> "bang gia tri" theo dung chu cua Bo, va them
+  mot ban ghi rieng cho bang bien thien (la cach trinh bay cua SGK, van ra de).
+- C2 VD028: lay lai chu "thuc tien"; scope sua thanh "cuc tri" (Bo noi cuc tri,
+  truoc do thu hep con "gia tri lon nhat").
+- C5 TH066/TH067: cong thuc viet lai bang LaTeX thay vi ta bang loi.
+- C7 VD104A: scope bi chep nham tu VD104, da sua.
+
+## Danh lai so C2-C8
+
+C1 GIU NGUYEN 001-021 (dang co mapping va 46 ham Python tro vao - danh lai la
+mo coi het). Tu C2 danh lai lien mach:
+
+    C2 022-028   C3 029-036   C4 037-053   C5 054-073
+    C6 074-111   C7 112-138   C8 139-155
+
+Cac cap cung don vi kien thuc van giu chung mot so: 014, 021 (C1), 095 (C6),
+121, 122 (C7).
+
+Lam duoc vi C2-C8 chua co mapping va chua co ham Python nao tro vao. Sau nay
+co roi thi khong danh lai duoc nua.
+
+Bang doi chieu ma cu -> ma moi: 137 ma (khong luu vao kho, chi dung trong lan
+sua nay vi khong co gi tro vao cac ma do).
+
+## Kiem tra sau khi sua
+
+Khong trung ID; du 15 truong; so lien mach va tang dan theo tung chuong; thu
+tu bai tang dan; cac cap cung don vi kien thuc con nguyen; ba lop cua C1 van
+khop; 142 test qua.
+
+## CHUA lam mapping C2-C8 - ly do
+
+/danh-sach-chuong tinh co_du_cau BANG CACH DEM SO DONG MAPPING. Neu them
+mapping cho C2-C8 ma chua co ham Python thi web se bao voi hoc sinh la cac
+chuong do DA SAN SANG, hoc sinh chon vao, va vi ra de that chay voi
+cho_phep_thieu=False nen se VO CA DE chu khong phai thieu vai cau.
+
+Phai sua co_du_cau thanh "co it nhat mot dang DA CO HAM PYTHON" truoc, roi moi
+them mapping duoc. Xem version sau.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

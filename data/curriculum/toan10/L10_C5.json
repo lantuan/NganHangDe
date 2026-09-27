@@ -1,6 +1,26 @@
 [
-    {
-    "id": "L10_C5_B9_NB052",
+  {
+    "id": "L10_C5_B9_NB054",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số và đồ thị",
+    "chuong_so": "5",
+    "bai": "Hàm số và đồ thị",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được những mô hình thực tế (dạng bảng, biểu đồ, công thức) dẫn đến khái niệm hàm số.",
+    "examples": [],
+    "scope": "mô hình thực tế dạng bảng, biểu đồ, công thức",
+    "tags": [
+      "ham_so",
+      "mo_hinh_thuc_te"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C5_B9_NB055",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -13,11 +33,15 @@
     "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
     "examples": [],
     "scope": null,
-    "tags": ["ham_so", "tap_xac_dinh", "tap_gia_tri"],
+    "tags": [
+      "ham_so",
+      "tap_xac_dinh",
+      "tap_gia_tri"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C5_B9_TH053",
+    "id": "L10_C5_B9_TH056",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -30,11 +54,16 @@
     "content": "Mô tả được các cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức.",
     "examples": [],
     "scope": null,
-    "tags": ["ham_so", "cho_ham_so_bang_bang", "cho_ham_so_bang_bieu_do", "cho_ham_so_bang_cong_thuc"],
+    "tags": [
+      "ham_so",
+      "cho_ham_so_bang_bang",
+      "cho_ham_so_bang_bieu_do",
+      "cho_ham_so_bang_cong_thuc"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B9_NB054",
+    "id": "L10_C5_B9_NB057",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -47,11 +76,14 @@
     "content": "Nhận biết được đồ thị của hàm số.",
     "examples": [],
     "scope": null,
-    "tags": ["ham_so", "do_thi_ham_so"],
+    "tags": [
+      "ham_so",
+      "do_thi_ham_so"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C5_B9_TH055",
+    "id": "L10_C5_B9_TH058",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -64,11 +96,16 @@
     "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: khoảng đồng biến, khoảng nghịch biến.",
     "examples": [],
     "scope": "thông qua đồ thị",
-    "tags": ["ham_so", "dong_bien", "nghich_bien", "do_thi_ham_so"],
+    "tags": [
+      "ham_so",
+      "dong_bien",
+      "nghich_bien",
+      "do_thi_ham_so"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B9_TH056",
+    "id": "L10_C5_B9_TH059",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -81,11 +118,36 @@
     "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
     "examples": [],
     "scope": "thông qua đồ thị trên một khoảng hoặc đoạn",
-    "tags": ["ham_so", "gia_tri_lon_nhat", "gia_tri_nho_nhat", "do_thi_ham_so"],
+    "tags": [
+      "ham_so",
+      "gia_tri_lon_nhat",
+      "gia_tri_nho_nhat",
+      "do_thi_ham_so"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B10_TH057",
+    "id": "L10_C5_B9_VD060",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số và đồ thị",
+    "chuong_so": "5",
+    "bai": "Hàm số và đồ thị",
+    "bai_so": "9",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "examples": [],
+    "scope": "ví dụ: xây dựng hàm số bậc nhất trên những khoảng khác nhau để tính số tiền phải trả theo số phút gọi của một gói cước điện thoại",
+    "tags": [
+      "ham_so",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C5_B10_TH061",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -95,14 +157,37 @@
     "subsection": null,
     "MucDo": "TH",
     "verb": "Thiết lập được",
-    "content": "Thiết lập được bảng biến thiên của hàm số bậc hai.",
+    "content": "Thiết lập được bảng giá trị của hàm số bậc hai.",
     "examples": [],
     "scope": null,
-    "tags": ["ham_so_bac_hai", "bang_bien_thien"],
+    "tags": [
+      "ham_so_bac_hai",
+      "bang_gia_tri"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B10_TH058",
+    "id": "L10_C5_B10_TH062",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số và đồ thị",
+    "chuong_so": "5",
+    "bai": "Hàm số bậc hai",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Lập được",
+    "content": "Lập được bảng biến thiên của hàm số bậc hai.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_bac_hai",
+      "bang_bien_thien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C5_B10_TH063",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -115,11 +200,37 @@
     "content": "Vẽ được đồ thị hàm số bậc hai.",
     "examples": [],
     "scope": null,
-    "tags": ["ham_so_bac_hai", "ve_do_thi", "parabol"],
+    "tags": [
+      "ham_so_bac_hai",
+      "ve_do_thi",
+      "parabol"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B10_TH059",
+    "id": "L10_C5_B10_NB064",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Hàm số và đồ thị",
+    "chuong_so": "5",
+    "bai": "Hàm số bậc hai",
+    "bai_so": "10",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "ham_so_bac_hai",
+      "parabola",
+      "dinh",
+      "truc_doi_xung"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C5_B10_TH065",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -132,11 +243,16 @@
     "content": "Nhận biết được các tính chất của hàm số bậc hai từ đồ thị.",
     "examples": [],
     "scope": "thông qua đồ thị",
-    "tags": ["ham_so_bac_hai", "tinh_chat_ham_so", "toa_do_dinh", "truc_doi_xung"],
+    "tags": [
+      "ham_so_bac_hai",
+      "tinh_chat_ham_so",
+      "toa_do_dinh",
+      "truc_doi_xung"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B10_VD060",
+    "id": "L10_C5_B10_VD066",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -152,11 +268,15 @@
       "Bài toán tối ưu hóa doanh thu, lợi nhuận dạng bậc hai đơn giản"
     ],
     "scope": "bài toán thực tiễn đơn giản",
-    "tags": ["ham_so_bac_hai", "bai_toan_thuc_tien", "toi_uu_hoa"],
+    "tags": [
+      "ham_so_bac_hai",
+      "bai_toan_thuc_tien",
+      "toi_uu_hoa"
+    ],
     "difficulty_rank": 3
   },
   {
-    "id": "L10_C5_B11_NB061",
+    "id": "L10_C5_B11_NB067",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -169,11 +289,13 @@
     "content": "Nhận biết được tam thức bậc hai.",
     "examples": [],
     "scope": null,
-    "tags": ["tam_thuc_bac_hai"],
+    "tags": [
+      "tam_thuc_bac_hai"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C5_B11_TH062",
+    "id": "L10_C5_B11_TH068",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -186,11 +308,14 @@
     "content": "Xét được dấu của tam thức bậc hai.",
     "examples": [],
     "scope": null,
-    "tags": ["tam_thuc_bac_hai", "xet_dau"],
+    "tags": [
+      "tam_thuc_bac_hai",
+      "xet_dau"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B11_TH063",
+    "id": "L10_C5_B11_TH069",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -203,11 +328,14 @@
     "content": "Giải được bất phương trình bậc hai một ẩn.",
     "examples": [],
     "scope": null,
-    "tags": ["bat_phuong_trinh_bac_hai", "giai_bat_phuong_trinh"],
+    "tags": [
+      "bat_phuong_trinh_bac_hai",
+      "giai_bat_phuong_trinh"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B11_TH064",
+    "id": "L10_C5_B11_TH070",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -220,11 +348,14 @@
     "content": "Giải thích được khoảng nghiệm của bất phương trình bậc hai một ẩn dựa vào đồ thị của hàm số bậc hai tương ứng.",
     "examples": [],
     "scope": "thông qua đồ thị",
-    "tags": ["bat_phuong_trinh_bac_hai", "do_thi_ham_so"],
+    "tags": [
+      "bat_phuong_trinh_bac_hai",
+      "do_thi_ham_so"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B11_VD065",
+    "id": "L10_C5_B11_VD071",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -239,11 +370,14 @@
       "Tìm khoảng kích thước, khoảng giá bán để đảm bảo lợi nhuận dương"
     ],
     "scope": "bài toán thực tiễn đơn giản",
-    "tags": ["bat_phuong_trinh_bac_hai", "bai_toan_thuc_tien"],
+    "tags": [
+      "bat_phuong_trinh_bac_hai",
+      "bai_toan_thuc_tien"
+    ],
     "difficulty_rank": 3
   },
   {
-    "id": "L10_C5_B12_TH066",
+    "id": "L10_C5_B12_TH072",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -253,14 +387,17 @@
     "subsection": null,
     "MucDo": "TH",
     "verb": "Giải được",
-    "content": "Giải được phương trình chứa căn thức dạng: căn bậc hai của (ax^2 + bx + c) = căn bậc hai của (dx^2 + ex + f).",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
     "examples": [],
     "scope": "dạng hai căn bằng nhau",
-    "tags": ["phuong_trinh_chua_can", "quy_ve_bac_hai"],
+    "tags": [
+      "phuong_trinh_chua_can",
+      "quy_ve_bac_hai"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C5_B12_TH067",
+    "id": "L10_C5_B12_TH073",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Hàm số và đồ thị",
@@ -270,10 +407,13 @@
     "subsection": null,
     "MucDo": "TH",
     "verb": "Giải được",
-    "content": "Giải được phương trình chứa căn thức dạng: căn bậc hai của (ax^2 + bx + c) = dx + e.",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
     "examples": [],
     "scope": "dạng căn bằng nhị thức bậc nhất",
-    "tags": ["phuong_trinh_chua_can", "quy_ve_bac_hai"],
+    "tags": [
+      "phuong_trinh_chua_can",
+      "quy_ve_bac_hai"
+    ],
     "difficulty_rank": 2
   }
 ]

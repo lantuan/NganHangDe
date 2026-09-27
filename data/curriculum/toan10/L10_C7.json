@@ -1,8 +1,8 @@
 [
   {
-    "id": "L10_C7_B17_NB094",
+    "id": "L10_C7_B17_NB112",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Toạ độ của vectơ",
@@ -21,9 +21,9 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C7_B17_TH095",
+    "id": "L10_C7_B17_TH113",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Toạ độ của vectơ",
@@ -42,9 +42,29 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B17_TH096",
+    "id": "L10_C7_B17_TH114",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Toạ độ của vectơ",
+    "bai_so": "17",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tìm được",
+    "content": "Tìm được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "toa_do_vecto",
+      "do_dai_vecto"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C7_B17_TH115",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Toạ độ của vectơ",
@@ -65,9 +85,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B17_TH097",
+    "id": "L10_C7_B17_TH116",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Toạ độ của vectơ",
@@ -85,9 +105,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B17_VD098",
+    "id": "L10_C7_B17_VD117",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Toạ độ của vectơ",
@@ -113,9 +133,70 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_TH099",
+    "id": "L10_C7_B17_VD118",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Toạ độ của vectơ",
+    "bai_so": "17",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "ví dụ: vị trí của vật trên mặt phẳng toạ độ",
+    "tags": [
+      "toa_do_vecto",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C7_B17_VD119",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Toạ độ của vectơ",
+    "bai_so": "17",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "toa_do_vecto",
+      "giai_tam_giac"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C7_B18_NB120",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Đường thẳng trong mặt phẳng toạ độ",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Mô tả được",
+    "content": "Mô tả được phương trình tổng quát và phương trình tham số của đường thẳng trong mặt phẳng toạ độ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang",
+      "phuong_trinh_tong_quat",
+      "phuong_trinh_tham_so"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C7_B18_TH121",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -139,9 +220,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_VD099",
+    "id": "L10_C7_B18_VD121",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -165,9 +246,9 @@
     "difficulty_rank": 3
   },
   {
-    "id": "L10_C7_B18_TH100",
+    "id": "L10_C7_B18_TH122",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -190,9 +271,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_VD100",
+    "id": "L10_C7_B18_VD122",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -215,9 +296,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_TH101",
+    "id": "L10_C7_B18_TH123",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -235,9 +316,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_TH102",
+    "id": "L10_C7_B18_TH124",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
@@ -255,9 +336,29 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B19_TH103",
+    "id": "L10_C7_B18_TH125",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Đường thẳng trong mặt phẳng toạ độ",
+    "bai_so": "18",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Giải thích được",
+    "content": "Giải thích được mối liên hệ giữa đồ thị hàm số bậc nhất và đường thẳng trong mặt phẳng toạ độ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "duong_thang",
+      "ham_so_bac_nhat"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C7_B19_TH126",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường tròn trong mặt phẳng toạ độ",
@@ -276,9 +377,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B19_VD104",
+    "id": "L10_C7_B19_VD127",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường tròn trong mặt phẳng toạ độ",
@@ -297,9 +398,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B19_VD104A",
+    "id": "L10_C7_B19_VD128",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường tròn trong mặt phẳng toạ độ",
@@ -309,7 +410,7 @@
     "verb": "Lập được",
     "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
     "examples": [],
-    "scope": "đường tròn đi qua ba điểm",
+    "scope": "đường tròn xác định bởi điều kiện không trực tiếp cho trước",
     "tags": [
       "hinh_hoc_toa_do",
       "phuong_trinh_duong_tron",
@@ -318,9 +419,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B19_TH105",
+    "id": "L10_C7_B19_TH129",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường tròn trong mặt phẳng toạ độ",
@@ -339,9 +440,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B19_TH106",
+    "id": "L10_C7_B19_TH130",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Đường tròn trong mặt phẳng toạ độ",
@@ -360,9 +461,29 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B20_NB107",
+    "id": "L10_C7_B19_VD131",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Đường tròn trong mặt phẳng toạ độ",
+    "bai_so": "19",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về phương trình đường tròn để giải một số bài toán liên quan đến thực tiễn.",
+    "examples": [],
+    "scope": "ví dụ: bài toán về chuyển động tròn trong Vật lí",
+    "tags": [
+      "duong_tron",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C7_B20_NB132",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Ba đường conic trong mặt phẳng toạ độ",
@@ -383,9 +504,29 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C7_B20_TH108",
+    "id": "L10_C7_B20_NB133",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Ba đường conic trong mặt phẳng toạ độ",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được phương trình chính tắc của ba đường conic trong mặt phẳng toạ độ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "conic",
+      "phuong_trinh_chinh_tac"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C7_B20_TH134",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Ba đường conic trong mặt phẳng toạ độ",
@@ -404,9 +545,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B20_TH109",
+    "id": "L10_C7_B20_TH135",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Ba đường conic trong mặt phẳng toạ độ",
@@ -425,9 +566,9 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B20_TH110",
+    "id": "L10_C7_B20_TH136",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Ba đường conic trong mặt phẳng toạ độ",
@@ -446,9 +587,29 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B20_VD111",
+    "id": "L10_C7_B20_VD137",
     "lop": 10,
-    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Phương pháp toạ độ trong mặt phẳng",
+    "chuong_so": "7",
+    "bai": "Ba đường conic trong mặt phẳng toạ độ",
+    "bai_so": "20",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải quyết được",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với ba đường conic.",
+    "examples": [],
+    "scope": "ví dụ: giải thích một số hiện tượng trong Quang học",
+    "tags": [
+      "conic",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C7_B20_VD138",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
     "chuong_so": "7",
     "bai": "Ba đường conic trong mặt phẳng toạ độ",

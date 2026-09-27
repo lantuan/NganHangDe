@@ -1,6 +1,6 @@
 [
-    {
-    "id": "L10_C4_B7_NB036",
+  {
+    "id": "L10_C4_B7_NB037",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -13,11 +13,17 @@
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "khai_niem", "do_dai", "cung_phuong", "cung_huong"],
+    "tags": [
+      "vecto",
+      "khai_niem",
+      "do_dai",
+      "cung_phuong",
+      "cung_huong"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C4_B7_NB037",
+    "id": "L10_C4_B7_NB038",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -30,11 +36,15 @@
     "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "hai_vecto_bang_nhau", "vecto_khong"],
+    "tags": [
+      "vecto",
+      "hai_vecto_bang_nhau",
+      "vecto_khong"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C4_B7_TH038",
+    "id": "L10_C4_B7_TH039",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -50,24 +60,11 @@
       "Lực"
     ],
     "scope": "các đại lượng thực tiễn",
-    "tags": ["vecto", "bieu_dien", "vat_li"],
-    "difficulty_rank": 2
-  },
-  {
-    "id": "L10_C4_B8_TH039",
-    "lop": 10,
-    "hoc_phan": "Hình học và Đo lường",
-    "chuong": "Vectơ",
-    "chuong_so": "4",
-    "bai": "Các phép toán trên vectơ",
-    "bai_so": "8",
-    "subsection": "Tổng và hiệu của hai vectơ",
-    "MucDo": "TH",
-    "verb": "Thực hiện được",
-    "content": "Thực hiện được các phép toán tổng hai vectơ.",
-    "examples": [],
-    "scope": null,
-    "tags": ["vecto", "tong_hai_vecto", "quy_tac_ba_diem", "quy_tac_hinh_binh_hanh"],
+    "tags": [
+      "vecto",
+      "bieu_dien",
+      "vat_li"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -81,10 +78,15 @@
     "subsection": "Tổng và hiệu của hai vectơ",
     "MucDo": "TH",
     "verb": "Thực hiện được",
-    "content": "Thực hiện được các phép toán hiệu hai vectơ.",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "hieu_hai_vecto"],
+    "tags": [
+      "vecto",
+      "tong_hai_vecto",
+      "quy_tac_ba_diem",
+      "quy_tac_hinh_binh_hanh"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -97,11 +99,14 @@
     "bai_so": "8",
     "subsection": "Tổng và hiệu của hai vectơ",
     "MucDo": "TH",
-    "verb": "Mô tả được",
-    "content": "Mô tả được các tính chất của phép cộng vectơ.",
+    "verb": "Thực hiện được",
+    "content": "Thực hiện được các phép toán hiệu hai vectơ.",
     "examples": [],
-    "scope": "giao hoán, kết hợp, tính chất của vectơ-không",
-    "tags": ["vecto", "tinh_chat_phep_cong"],
+    "scope": null,
+    "tags": [
+      "vecto",
+      "hieu_hai_vecto"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -112,13 +117,16 @@
     "chuong_so": "4",
     "bai": "Các phép toán trên vectơ",
     "bai_so": "8",
-    "subsection": "Tích của một số với một vectơ",
+    "subsection": "Tổng và hiệu của hai vectơ",
     "MucDo": "TH",
-    "verb": "Thực hiện được",
-    "content": "Thực hiện được phép toán tích của một số với một vectơ.",
+    "verb": "Mô tả được",
+    "content": "Mô tả được các tính chất của phép cộng vectơ.",
     "examples": [],
-    "scope": null,
-    "tags": ["vecto", "tich_so_voi_vecto"],
+    "scope": "giao hoán, kết hợp, tính chất của vectơ-không",
+    "tags": [
+      "vecto",
+      "tinh_chat_phep_cong"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -131,11 +139,14 @@
     "bai_so": "8",
     "subsection": "Tích của một số với một vectơ",
     "MucDo": "TH",
-    "verb": "Mô tả được",
-    "content": "Mô tả được các tính chất của phép nhân một số với một vectơ.",
+    "verb": "Thực hiện được",
+    "content": "Thực hiện được phép toán tích của một số với một vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "tinh_chat_phep_nhan"],
+    "tags": [
+      "vecto",
+      "tich_so_voi_vecto"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -148,11 +159,14 @@
     "bai_so": "8",
     "subsection": "Tích của một số với một vectơ",
     "MucDo": "TH",
-    "verb": "Giải thích được",
-    "content": "Giải thích được điều kiện để hai vectơ cùng phương.",
+    "verb": "Mô tả được",
+    "content": "Mô tả được các tính chất của phép nhân một số với một vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "dieu_kien_cung_phuong"],
+    "tags": [
+      "vecto",
+      "tinh_chat_phep_nhan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -166,10 +180,13 @@
     "subsection": "Tích của một số với một vectơ",
     "MucDo": "TH",
     "verb": "Giải thích được",
-    "content": "Giải thích được điều kiện ba điểm thẳng hàng bằng vectơ.",
+    "content": "Giải thích được điều kiện để hai vectơ cùng phương.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "ba_diem_thang_hang"],
+    "tags": [
+      "vecto",
+      "dieu_kien_cung_phuong"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -182,11 +199,14 @@
     "bai_so": "8",
     "subsection": "Tích của một số với một vectơ",
     "MucDo": "TH",
-    "verb": "Xác định được",
-    "content": "Xác định được trung điểm của đoạn thẳng bằng vectơ.",
+    "verb": "Giải thích được",
+    "content": "Giải thích được điều kiện ba điểm thẳng hàng bằng vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "trung_diem_doan_thang"],
+    "tags": [
+      "vecto",
+      "ba_diem_thang_hang"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -200,14 +220,37 @@
     "subsection": "Tích của một số với một vectơ",
     "MucDo": "TH",
     "verb": "Xác định được",
-    "content": "Xác định được trọng tâm của tam giác bằng vectơ.",
+    "content": "Xác định được trung điểm của đoạn thẳng bằng vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "trong_tam_tam_giac"],
+    "tags": [
+      "vecto",
+      "trung_diem_doan_thang"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C4_B8_NB048",
+    "id": "L10_C4_B8_TH048",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Các phép toán trên vectơ",
+    "bai_so": "8",
+    "subsection": "Tích của một số với một vectơ",
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được trọng tâm của tam giác bằng vectơ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "vecto",
+      "trong_tam_tam_giac"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C4_B8_NB049",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -220,11 +263,14 @@
     "content": "Nhận biết được góc giữa hai vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "goc_giua_hai_vecto"],
+    "tags": [
+      "vecto",
+      "goc_giua_hai_vecto"
+    ],
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C4_B8_TH049",
+    "id": "L10_C4_B8_TH050",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -237,11 +283,14 @@
     "content": "Thực hiện được phép toán tích vô hướng của hai vectơ.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "tich_vo_huong"],
+    "tags": [
+      "vecto",
+      "tich_vo_huong"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C4_B8_TH050",
+    "id": "L10_C4_B8_TH051",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -254,11 +303,36 @@
     "content": "Mô tả được tính chất của tích vô hướng.",
     "examples": [],
     "scope": null,
-    "tags": ["vecto", "tinh_chat_tich_vo_huong"],
+    "tags": [
+      "vecto",
+      "tinh_chat_tich_vo_huong"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C4_B8_VD051",
+    "id": "L10_C4_B8_VD052",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Các phép toán trên vectơ",
+    "bai_so": "8",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Sử dụng được",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "examples": [],
+    "scope": "những vấn đề liên quan đến lực, đến chuyển động",
+    "tags": [
+      "vecto",
+      "lien_mon",
+      "vat_li",
+      "hoa_hoc"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C4_B8_VD053",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
     "chuong": "Vectơ",
@@ -274,7 +348,13 @@
       "Tính công sinh bởi một lực"
     ],
     "scope": "bài toán thực tiễn đơn giản",
-    "tags": ["vecto", "bai_toan_thuc_tien", "vat_li", "hop_luc", "tinh_cong"],
+    "tags": [
+      "vecto",
+      "bai_toan_thuc_tien",
+      "vat_li",
+      "hop_luc",
+      "tinh_cong"
+    ],
     "difficulty_rank": 3
   }
 ]

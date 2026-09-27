@@ -1,6 +1,6 @@
 [
   {
-    "id": "L10_C6_B13_NB068",
+    "id": "L10_C6_B13_NB074",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -20,7 +20,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B13_NB069",
+    "id": "L10_C6_B13_NB075",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -40,7 +40,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B13_NB070",
+    "id": "L10_C6_B13_NB076",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -60,7 +60,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B13_NB071",
+    "id": "L10_C6_B13_NB077",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -80,7 +80,27 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B13_TH072",
+    "id": "L10_C6_B13_TH078",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Số gần đúng và sai số",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được số gần đúng của một số với độ chính xác cho trước.",
+    "examples": [],
+    "scope": "với độ chính xác cho trước",
+    "tags": [
+      "so_gan_dung",
+      "do_chinh_xac"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C6_B13_TH079",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -100,7 +120,27 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B13_TH073",
+    "id": "L10_C6_B13_TH080",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Số gần đúng và sai số",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Xác định được",
+    "content": "Xác định được sai số tương đối của số gần đúng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "so_gan_dung",
+      "sai_so_tuong_doi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C6_B13_TH081",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -120,7 +160,47 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_TH074",
+    "id": "L10_C6_B13_VD082",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Thu thập và tổ chức dữ liệu",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Phát hiện và lí giải được",
+    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
+    "examples": [],
+    "scope": "mối liên hệ toán học đơn giản giữa các số liệu",
+    "tags": [
+      "thong_ke",
+      "so_lieu_khong_chinh_xac"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C6_B13_TH083",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Số gần đúng và sai số",
+    "bai_so": "13",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Biết sử dụng",
+    "content": "Biết sử dụng máy tính cầm tay để tính toán với các số gần đúng.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "so_gan_dung",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C6_B14_TH084",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -141,7 +221,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_TH075",
+    "id": "L10_C6_B14_TH085",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -162,7 +242,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_TH076",
+    "id": "L10_C6_B14_TH086",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -183,7 +263,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_TH077",
+    "id": "L10_C6_B14_TH087",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -204,7 +284,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_TH078",
+    "id": "L10_C6_B14_TH088",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -225,7 +305,28 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B14_VD079",
+    "id": "L10_C6_B14_VD089",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Các số đặc trưng đo xu thế trung tâm",
+    "bai_so": "14",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Chỉ ra được",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
+    "examples": [],
+    "scope": "trong trường hợp đơn giản",
+    "tags": [
+      "thong_ke",
+      "xu_the_trung_tam",
+      "ket_luan"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C6_B14_VD090",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -246,7 +347,7 @@
     "difficulty_rank": 3
   },
   {
-    "id": "L10_C6_B15_TH080",
+    "id": "L10_C6_B15_TH091",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -267,7 +368,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_TH081",
+    "id": "L10_C6_B15_TH092",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -288,7 +389,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_TH082",
+    "id": "L10_C6_B15_TH093",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -309,7 +410,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_TH083",
+    "id": "L10_C6_B15_TH094",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -330,7 +431,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_TH084",
+    "id": "L10_C6_B15_TH095",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -351,7 +452,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_VD084",
+    "id": "L10_C6_B15_VD095",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -372,7 +473,48 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B16_NB085",
+    "id": "L10_C6_B15_VD096",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Các số đặc trưng đo độ phân tán",
+    "bai_so": "15",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Chỉ ra được",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
+    "examples": [],
+    "scope": "trong trường hợp đơn giản",
+    "tags": [
+      "thong_ke",
+      "do_phan_tan",
+      "ket_luan"
+    ],
+    "difficulty_rank": 3
+  },
+  {
+    "id": "L10_C6_B15_NB097",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Các số đặc trưng đo độ phân tán",
+    "bai_so": "15",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 10 và trong thực tiễn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "thong_ke",
+      "lien_mon"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C6_B16_NB098",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -392,7 +534,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_NB086",
+    "id": "L10_C6_B16_NB099",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -412,7 +554,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_NB087",
+    "id": "L10_C6_B16_NB100",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -432,7 +574,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_NB088",
+    "id": "L10_C6_B16_NB101",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -452,7 +594,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_NB089",
+    "id": "L10_C6_B16_NB102",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -472,7 +614,7 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_NB090",
+    "id": "L10_C6_B16_NB103",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -492,7 +634,47 @@
     "difficulty_rank": 1
   },
   {
-    "id": "L10_C6_B16_TH091",
+    "id": "L10_C6_B16_NB104",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được nguyên lí xác suất bé.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "nguyen_li_xac_suat_be"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C6_B16_NB105",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa cổ điển của xác suất.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "dinh_nghia_co_dien"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C6_B16_TH106",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -517,7 +699,7 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B16_TH092",
+    "id": "L10_C6_B16_TH107",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -538,7 +720,68 @@
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B16_VD093",
+    "id": "L10_C6_B16_TH108",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố đối.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_doi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C6_B16_NB109",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Mô tả được",
+    "content": "Mô tả được các tính chất cơ bản của xác suất.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C6_B16_TH110",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Một số yếu tố thống kê và xác suất",
+    "chuong_so": "6",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "16",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
+    "examples": [],
+    "scope": "ví dụ: tung xúc xắc hai lần, tính xác suất để tổng số chấm bằng 7",
+    "tags": [
+      "xac_suat",
+      "so_do_hinh_cay",
+      "thi_nghiem_lap"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C6_B16_VD111",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
