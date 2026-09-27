@@ -1,140 +1,140 @@
 [
   {
-    "id": "L11_C9_B31_NB137_MC_A",
+    "id": "L11_C9_B32_NB137_MC_A",
     "content": "Nhận biết được một số bài toán dẫn đến khái niệm đạo hàm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán dẫn đến khái niệm đạo hàm"
   },
   {
-    "id": "L11_C9_B31_NB138_MC_A",
+    "id": "L11_C9_B32_NB138_MC_A",
     "content": "Nhận biết được định nghĩa đạo hàm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Định nghĩa đạo hàm"
   },
   {
-    "id": "L11_C9_B31_TH139_MC_A",
-    "content": "Tính được đạo hàm của một số hàm đơn giản bằng định nghĩa.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đạo hàm của một số hàm đơn giản bằng định nghĩa"
-  },
-  {
-    "id": "L11_C9_B31_TH139_SA_A",
-    "content": "Tính được đạo hàm của một số hàm đơn giản bằng định nghĩa.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Đạo hàm của hàm số tại một điểm bằng định nghĩa"
-  },
-  {
-    "id": "L11_C9_B31_NB140_MC_A",
+    "id": "L11_C9_B32_NB140_MC_A",
     "content": "Nhận biết được ý nghĩa hình học của đạo hàm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Ý nghĩa hình học của đạo hàm"
   },
   {
-    "id": "L11_C9_B31_TH141_MC_A",
-    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ"
-  },
-  {
-    "id": "L11_C9_B31_TH141_SA_A",
-    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Hệ số góc của tiếp tuyến"
-  },
-  {
-    "id": "L11_C9_B31_TH141_TL_A",
-    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
-    "Loai": "Tự luận",
-    "Dang": "Viết phương trình tiếp tuyến của đồ thị hàm số"
-  },
-  {
-    "id": "L11_C9_B31_NB142_MC_A",
+    "id": "L11_C9_B32_NB142_MC_A",
     "content": "Nhận biết được số e thông qua bài toán mô hình hoá lãi suất ngân hàng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Số e"
   },
   {
-    "id": "L11_C9_B32_TH143_MC_A",
+    "id": "L11_C9_B32_TH139_MC_A",
+    "content": "Tính được đạo hàm của một số hàm đơn giản bằng định nghĩa.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đạo hàm của một số hàm đơn giản bằng định nghĩa"
+  },
+  {
+    "id": "L11_C9_B32_TH139_SA_A",
+    "content": "Tính được đạo hàm của một số hàm đơn giản bằng định nghĩa.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đạo hàm của hàm số tại một điểm bằng định nghĩa"
+  },
+  {
+    "id": "L11_C9_B32_TH141_MC_A",
+    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ"
+  },
+  {
+    "id": "L11_C9_B32_TH141_SA_A",
+    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hệ số góc của tiếp tuyến"
+  },
+  {
+    "id": "L11_C9_B32_TH141_TL_A",
+    "content": "Thiết lập được phương trình tiếp tuyến của đồ thị hàm số tại một điểm thuộc đồ thị.",
+    "Loai": "Tự luận",
+    "Dang": "Viết phương trình tiếp tuyến của đồ thị hàm số"
+  },
+  {
+    "id": "L11_C9_B33_TH143_MC_A",
     "content": "Tính được đạo hàm của một số hàm số sơ cấp cơ bản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đạo hàm của một số hàm số sơ cấp cơ bản"
   },
   {
-    "id": "L11_C9_B32_TH143_SA_A",
+    "id": "L11_C9_B33_TH143_SA_A",
     "content": "Tính được đạo hàm của một số hàm số sơ cấp cơ bản.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đạo hàm của hàm số sơ cấp"
   },
   {
-    "id": "L11_C9_B32_TH144_MC_A",
+    "id": "L11_C9_B33_TH144_MC_A",
     "content": "Sử dụng được các công thức tính đạo hàm của tổng, hiệu, tích, thương của các hàm số và đạo hàm của hàm hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức tính đạo hàm của tổng, hiệu, tích, thương của các hàm"
   },
   {
-    "id": "L11_C9_B32_TH144_SA_A",
+    "id": "L11_C9_B33_TH144_SA_A",
     "content": "Sử dụng được các công thức tính đạo hàm của tổng, hiệu, tích, thương của các hàm số và đạo hàm của hàm hợp.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đạo hàm của hàm hợp"
   },
   {
-    "id": "L11_C9_B32_TH144_TL_A",
+    "id": "L11_C9_B33_TH144_TL_A",
     "content": "Sử dụng được các công thức tính đạo hàm của tổng, hiệu, tích, thương của các hàm số và đạo hàm của hàm hợp.",
     "Loai": "Tự luận",
     "Dang": "Tính đạo hàm và giải phương trình đạo hàm bằng 0"
   },
   {
-    "id": "L11_C9_B32_VD145_MC_A",
+    "id": "L11_C9_B33_VD145_MC_A",
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
   },
   {
-    "id": "L11_C9_B32_VD145_TL_A",
+    "id": "L11_C9_B33_VD145_TL_A",
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm.",
     "Loai": "Tự luận",
     "Dang": "Bài toán vận tốc tức thời"
   },
   {
-    "id": "L11_C9_B33_NB146_MC_A",
+    "id": "L11_C9_B34_NB146_MC_A",
     "content": "Nhận biết được khái niệm đạo hàm cấp hai của một hàm số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đạo hàm cấp hai của một hàm số"
   },
   {
-    "id": "L11_C9_B33_TH147_MC_A",
+    "id": "L11_C9_B34_TH147_MC_A",
     "content": "Tính được đạo hàm cấp hai của một số hàm số đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đạo hàm cấp hai của một số hàm số đơn giản"
   },
   {
-    "id": "L11_C9_B33_TH147_SA_A",
+    "id": "L11_C9_B34_TH147_SA_A",
     "content": "Tính được đạo hàm cấp hai của một số hàm số đơn giản.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đạo hàm cấp hai của hàm số"
   },
   {
-    "id": "L11_C9_B33_VD148_MC_A",
+    "id": "L11_C9_B34_VD148_MC_A",
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm cấp hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
   },
   {
-    "id": "L11_C9_B33_VD148_TL_A",
+    "id": "L11_C9_B34_VD148_TL_A",
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm cấp hai.",
     "Loai": "Tự luận",
     "Dang": "Bài toán gia tốc của chuyển động"
   },
   {
     "id": "L11_C9_TF_A",
-    "content": "Định nghĩa và ý nghĩa của đạo hàm",
+    "content": "Đạo hàm",
     "Loai": "Đúng sai",
-    "Dang": "Đạo hàm tại một điểm, tiếp tuyến"
+    "Dang": "Định nghĩa và ý nghĩa của đạo hàm; Các quy tắc tính đạo hàm"
   },
   {
     "id": "L11_C9_TF_B",
-    "content": "Các quy tắc tính đạo hàm",
+    "content": "Đạo hàm",
     "Loai": "Đúng sai",
-    "Dang": "Đạo hàm hàm sơ cấp, hàm hợp, cấp hai"
+    "Dang": "Đạo hàm cấp hai"
   }
 ]

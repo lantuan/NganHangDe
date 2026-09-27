@@ -1,74 +1,74 @@
 [
   {
-    "id": "L12_C6_B17_NB053_MC_A",
+    "id": "L12_C6_B15_NB053_MC_A",
     "content": "Nhận biết được khái niệm về xác suất có điều kiện.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Về xác suất có điều kiện"
   },
   {
-    "id": "L12_C6_B17_TH054_MC_A",
+    "id": "L12_C6_B15_TH054_MC_A",
     "content": "Giải thích được ý nghĩa của xác suất có điều kiện trong những tình huống thực tiễn quen thuộc.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Ý nghĩa của xác suất có điều kiện trong những tình huống thực"
   },
   {
-    "id": "L12_C6_B17_TH054_SA_A",
+    "id": "L12_C6_B15_TH054_SA_A",
     "content": "Giải thích được ý nghĩa của xác suất có điều kiện trong những tình huống thực tiễn quen thuộc.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất có điều kiện"
   },
   {
-    "id": "L12_C6_B18_TH055_MC_A",
+    "id": "L12_C6_B16_TH055_MC_A",
     "content": "Mô tả được công thức xác suất toàn phần thông qua bảng dữ liệu thống kê 2x2 và sơ đồ hình cây.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức xác suất toàn phần thông qua bảng dữ liệu thống kê"
   },
   {
-    "id": "L12_C6_B18_TH056_MC_A",
+    "id": "L12_C6_B16_TH056_MC_A",
     "content": "Mô tả được công thức Bayes thông qua bảng dữ liệu thống kê 2x2 và sơ đồ hình cây.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức Bayes thông qua bảng dữ liệu thống kê 2x2 và sơ đồ"
   },
   {
-    "id": "L12_C6_B18_VD057_MC_A",
+    "id": "L12_C6_B16_VD057_MC_A",
     "content": "Sử dụng được công thức Bayes để tính xác suất có điều kiện và vận dụng vào một số bài toán thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức Bayes để tính xác suất có điều kiện"
   },
   {
-    "id": "L12_C6_B18_VD057_SA_A",
+    "id": "L12_C6_B16_VD057_SA_A",
     "content": "Sử dụng được công thức Bayes để tính xác suất có điều kiện và vận dụng vào một số bài toán thực tiễn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất tính bằng công thức Bayes"
   },
   {
-    "id": "L12_C6_B18_VD057_TL_A",
+    "id": "L12_C6_B16_VD057_TL_A",
     "content": "Sử dụng được công thức Bayes để tính xác suất có điều kiện và vận dụng vào một số bài toán thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn dùng công thức Bayes"
   },
   {
-    "id": "L12_C6_B18_VD058_MC_A",
+    "id": "L12_C6_B16_VD058_MC_A",
     "content": "Sử dụng được sơ đồ hình cây để tính xác suất có điều kiện trong một số bài toán thực tiễn liên quan tới thống kê.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Sơ đồ hình cây để tính xác suất có điều kiện trong một số bài"
   },
   {
-    "id": "L12_C6_B18_VD058_TL_A",
+    "id": "L12_C6_B16_VD058_TL_A",
     "content": "Sử dụng được sơ đồ hình cây để tính xác suất có điều kiện trong một số bài toán thực tiễn liên quan tới thống kê.",
     "Loai": "Tự luận",
     "Dang": "Bài toán xác suất dùng sơ đồ hình cây"
   },
   {
     "id": "L12_C6_TF_A",
-    "content": "Xác suất có điều kiện",
+    "content": "Xác suất có điều kiện. Công thức xác suất toàn phần và công thức Bayes",
     "Loai": "Đúng sai",
-    "Dang": "Khái niệm và ý nghĩa"
+    "Dang": "Xác suất có điều kiện"
   },
   {
     "id": "L12_C6_TF_B",
-    "content": "Công thức xác suất toàn phần và công thức Bayes",
+    "content": "Xác suất có điều kiện. Công thức xác suất toàn phần và công thức Bayes",
     "Loai": "Đúng sai",
-    "Dang": "Bảng 2x2 và sơ đồ hình cây"
+    "Dang": "Công thức xác suất toàn phần và cô"
   }
 ]

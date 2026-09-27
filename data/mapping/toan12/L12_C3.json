@@ -1,86 +1,86 @@
 [
   {
-    "id": "L12_C3_B8_TH018_MC_A",
+    "id": "L12_C3_B7_TH018_MC_A",
     "content": "Tính được khoảng biến thiên của mẫu số liệu ghép nhóm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Khoảng biến thiên của mẫu số liệu ghép nhóm"
   },
   {
-    "id": "L12_C3_B8_TH018_SA_A",
+    "id": "L12_C3_B7_TH018_SA_A",
     "content": "Tính được khoảng biến thiên của mẫu số liệu ghép nhóm.",
     "Loai": "Trả lời ngắn",
     "Dang": "Khoảng biến thiên của mẫu ghép nhóm"
   },
   {
-    "id": "L12_C3_B8_TH019_MC_A",
+    "id": "L12_C3_B7_TH019_MC_A",
     "content": "Tính được khoảng tứ phân vị của mẫu số liệu ghép nhóm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Khoảng tứ phân vị của mẫu số liệu ghép nhóm"
   },
   {
-    "id": "L12_C3_B8_TH019_SA_A",
+    "id": "L12_C3_B7_TH019_SA_A",
     "content": "Tính được khoảng tứ phân vị của mẫu số liệu ghép nhóm.",
     "Loai": "Trả lời ngắn",
     "Dang": "Khoảng tứ phân vị của mẫu ghép nhóm"
   },
   {
-    "id": "L12_C3_B9_TH020_MC_A",
-    "content": "Tính được phương sai của mẫu số liệu ghép nhóm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phương sai của mẫu số liệu ghép nhóm"
-  },
-  {
-    "id": "L12_C3_B9_TH020_SA_A",
-    "content": "Tính được phương sai của mẫu số liệu ghép nhóm.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Phương sai của mẫu ghép nhóm"
-  },
-  {
-    "id": "L12_C3_B9_TH021_MC_A",
-    "content": "Tính được độ lệch chuẩn của mẫu số liệu ghép nhóm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Độ lệch chuẩn của mẫu số liệu ghép nhóm"
-  },
-  {
-    "id": "L12_C3_B9_TH021_SA_A",
-    "content": "Tính được độ lệch chuẩn của mẫu số liệu ghép nhóm.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Độ lệch chuẩn của mẫu ghép nhóm"
-  },
-  {
-    "id": "L12_C3_B9_TH022_MC_A",
-    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm trong thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Ý nghĩa và vai trò của các số đặc trưng đo mức độ phân tán của"
-  },
-  {
-    "id": "L12_C3_B9_VD023_MC_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân"
-  },
-  {
-    "id": "L12_C3_B9_VD023_TL_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm.",
-    "Loai": "Tự luận",
-    "Dang": "So sánh độ phân tán của hai mẫu ghép nhóm"
-  },
-  {
-    "id": "L12_C3_B9_NB024_MC_A",
+    "id": "L12_C3_B8_NB024_MC_A",
     "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 12 và trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Mối liên hệ giữa thống kê với những kiến thức của các môn học"
   },
   {
+    "id": "L12_C3_B8_TH020_MC_A",
+    "content": "Tính được phương sai của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phương sai của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L12_C3_B8_TH020_SA_A",
+    "content": "Tính được phương sai của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phương sai của mẫu ghép nhóm"
+  },
+  {
+    "id": "L12_C3_B8_TH021_MC_A",
+    "content": "Tính được độ lệch chuẩn của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Độ lệch chuẩn của mẫu số liệu ghép nhóm"
+  },
+  {
+    "id": "L12_C3_B8_TH021_SA_A",
+    "content": "Tính được độ lệch chuẩn của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ lệch chuẩn của mẫu ghép nhóm"
+  },
+  {
+    "id": "L12_C3_B8_TH022_MC_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm trong thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ý nghĩa và vai trò của các số đặc trưng đo mức độ phân tán của"
+  },
+  {
+    "id": "L12_C3_B8_VD023_MC_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân"
+  },
+  {
+    "id": "L12_C3_B8_VD023_TL_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm.",
+    "Loai": "Tự luận",
+    "Dang": "So sánh độ phân tán của hai mẫu ghép nhóm"
+  },
+  {
     "id": "L12_C3_TF_A",
-    "content": "Khoảng biến thiên và khoảng tứ phân vị",
+    "content": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
     "Loai": "Đúng sai",
-    "Dang": "Mẫu số liệu ghép nhóm"
+    "Dang": "Khoảng biến thiên và khoảng tứ phâ"
   },
   {
     "id": "L12_C3_TF_B",
-    "content": "Phương sai và độ lệch chuẩn",
+    "content": "Các số đặc trưng đo mức độ phân tán của mẫu số liệu ghép nhóm",
     "Loai": "Đúng sai",
-    "Dang": "Mẫu số liệu ghép nhóm"
+    "Dang": "Phương sai và độ lệch chuẩn của mẫ"
   }
 ]

@@ -91,14 +91,14 @@
   },
   {
     "id": "L10_C3_TF_A",
-    "content": "Giá trị lượng giác của một góc từ 0 độ đến 180 độ",
+    "content": "Hệ thức lượng trong tam giác",
     "Loai": "Đúng sai",
-    "Dang": "Góc đặc biệt, góc bù nhau"
+    "Dang": "Giá trị lượng giác của một góc từ "
   },
   {
     "id": "L10_C3_TF_B",
     "content": "Hệ thức lượng trong tam giác",
     "Loai": "Đúng sai",
-    "Dang": "Định lí sin, định lí côsin, diện tích"
+    "Dang": "Hệ thức lượng trong tam giác"
   }
 ]

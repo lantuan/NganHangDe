@@ -1,5 +1,137 @@
 [
   {
+    "id": "L10_C4_B10_NB049_MC_A",
+    "content": "Nhận biết được toạ độ của vectơ đối với một hệ trục toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra toạ độ của vectơ trong hệ trục toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_TH050_MC_A",
+    "content": "Tìm được toạ độ của một vectơ, một điểm đối với một hệ trục toạ độ cho trước.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm toạ độ vectơ, toạ độ điểm trong hệ trục"
+  },
+  {
+    "id": "L10_C4_B10_TH050_SA_A",
+    "content": "Tìm được toạ độ của một vectơ, một điểm đối với một hệ trục toạ độ cho trước.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Toạ độ của điểm thoả điều kiện"
+  },
+  {
+    "id": "L10_C4_B10_TH051_MC_A",
+    "content": "Tìm được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính độ dài vectơ từ toạ độ hai đầu mút"
+  },
+  {
+    "id": "L10_C4_B10_TH051_SA_A",
+    "content": "Tìm được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài đoạn thẳng theo toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_TH052_MC_A",
+    "content": "Xác định được toạ độ của vectơ tổng, hiệu, tích của một số với một vectơ bằng toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Toạ độ vectơ tổng, hiệu, tích với một số"
+  },
+  {
+    "id": "L10_C4_B10_TH052_SA_A",
+    "content": "Xác định được toạ độ của vectơ tổng, hiệu, tích của một số với một vectơ bằng toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Toạ độ vectơ sau phép toán"
+  },
+  {
+    "id": "L10_C4_B10_TH053_MC_A",
+    "content": "Tính được tích vô hướng của hai vectơ bằng toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính tích vô hướng hai vectơ bằng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_TH053_SA_A",
+    "content": "Tính được tích vô hướng của hai vectơ bằng toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tích vô hướng theo toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD054_MC_A",
+    "content": "Vận dụng được biểu thức toạ độ của các phép toán vectơ vào giải một số bài toán hình học phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán hình học phẳng giải bằng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD054_TL_A",
+    "content": "Vận dụng được biểu thức toạ độ của các phép toán vectơ vào giải một số bài toán hình học phẳng.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh tính chất hình học bằng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD055_MC_A",
+    "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vị trí của vật trên mặt phẳng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD056_MC_A",
+    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải tam giác bằng phương pháp toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD056_TL_A",
+    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Tính cạnh, góc, diện tích tam giác bằng toạ độ"
+  },
+  {
+    "id": "L10_C4_B11_NB057_MC_A",
+    "content": "Nhận biết được góc giữa hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định góc giữa hai vectơ"
+  },
+  {
+    "id": "L10_C4_B11_TH058_MC_A",
+    "content": "Thực hiện được phép toán tích vô hướng của hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính tích vô hướng của hai vectơ"
+  },
+  {
+    "id": "L10_C4_B11_TH058_SA_A",
+    "content": "Thực hiện được phép toán tích vô hướng của hai vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính tích vô hướng"
+  },
+  {
+    "id": "L10_C4_B11_TH059_MC_A",
+    "content": "Mô tả được tính chất của tích vô hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất của tích vô hướng"
+  },
+  {
+    "id": "L10_C4_B11_VD060_MC_A",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tổng hợp lực tác dụng lên vật bằng vectơ"
+  },
+  {
+    "id": "L10_C4_B11_VD060_TL_A",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán về lực, về chuyển động dùng vectơ"
+  },
+  {
+    "id": "L10_C4_B11_VD061_MC_A",
+    "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phân tích một vectơ theo hai vectơ không cùng phương"
+  },
+  {
+    "id": "L10_C4_B11_VD061_TL_A",
+    "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh đẳng thức vectơ trong tam giác"
+  },
+  {
     "id": "L10_C4_B7_NB037_MC_A",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -42,111 +174,63 @@
     "Dang": "Tính chất giao hoán, kết hợp của phép cộng vectơ"
   },
   {
-    "id": "L10_C4_B8_TH043_MC_A",
+    "id": "L10_C4_B9_TH043_MC_A",
     "content": "Thực hiện được phép toán tích của một số với một vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tích của một số với một vectơ"
   },
   {
-    "id": "L10_C4_B8_TH044_MC_A",
+    "id": "L10_C4_B9_TH044_MC_A",
     "content": "Mô tả được các tính chất của phép nhân một số với một vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất của phép nhân một số với một vectơ"
   },
   {
-    "id": "L10_C4_B8_TH045_MC_A",
+    "id": "L10_C4_B9_TH045_MC_A",
     "content": "Giải thích được điều kiện để hai vectơ cùng phương.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Điều kiện để hai vectơ cùng phương"
   },
   {
-    "id": "L10_C4_B8_TH046_MC_A",
+    "id": "L10_C4_B9_TH046_MC_A",
     "content": "Giải thích được điều kiện ba điểm thẳng hàng bằng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Chứng minh ba điểm thẳng hàng bằng vectơ"
   },
   {
-    "id": "L10_C4_B8_TH046_TL_A",
+    "id": "L10_C4_B9_TH046_TL_A",
     "content": "Giải thích được điều kiện ba điểm thẳng hàng bằng vectơ.",
     "Loai": "Tự luận",
     "Dang": "Chứng minh ba điểm thẳng hàng"
   },
   {
-    "id": "L10_C4_B8_TH047_MC_A",
+    "id": "L10_C4_B9_TH047_MC_A",
     "content": "Xác định được trung điểm của đoạn thẳng bằng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đẳng thức vectơ về trung điểm đoạn thẳng"
   },
   {
-    "id": "L10_C4_B8_TH048_MC_A",
+    "id": "L10_C4_B9_TH048_MC_A",
     "content": "Xác định được trọng tâm của tam giác bằng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đẳng thức vectơ về trọng tâm tam giác"
   },
   {
-    "id": "L10_C4_B8_TH048_SA_A",
+    "id": "L10_C4_B9_TH048_SA_A",
     "content": "Xác định được trọng tâm của tam giác bằng vectơ.",
     "Loai": "Trả lời ngắn",
     "Dang": "Phân tích vectơ theo trọng tâm"
   },
   {
-    "id": "L10_C4_B8_NB049_MC_A",
-    "content": "Nhận biết được góc giữa hai vectơ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định góc giữa hai vectơ"
-  },
-  {
-    "id": "L10_C4_B8_TH050_MC_A",
-    "content": "Thực hiện được phép toán tích vô hướng của hai vectơ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính tích vô hướng của hai vectơ"
-  },
-  {
-    "id": "L10_C4_B8_TH050_SA_A",
-    "content": "Thực hiện được phép toán tích vô hướng của hai vectơ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Tính tích vô hướng"
-  },
-  {
-    "id": "L10_C4_B8_TH051_MC_A",
-    "content": "Mô tả được tính chất của tích vô hướng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính chất của tích vô hướng"
-  },
-  {
-    "id": "L10_C4_B8_VD052_MC_A",
-    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tổng hợp lực tác dụng lên vật bằng vectơ"
-  },
-  {
-    "id": "L10_C4_B8_VD052_TL_A",
-    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán về lực, về chuyển động dùng vectơ"
-  },
-  {
-    "id": "L10_C4_B8_VD053_MC_A",
-    "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phân tích một vectơ theo hai vectơ không cùng phương"
-  },
-  {
-    "id": "L10_C4_B8_VD053_TL_A",
-    "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
-    "Loai": "Tự luận",
-    "Dang": "Chứng minh đẳng thức vectơ trong tam giác"
-  },
-  {
     "id": "L10_C4_TF_A",
-    "content": "Vectơ và các phép toán trên vectơ",
+    "content": "Vectơ",
     "Loai": "Đúng sai",
-    "Dang": "Tổng, hiệu, tích với một số"
+    "Dang": "Các khái niệm mở đầu; Tổng và hiệu của hai vectơ; Tích của một vectơ với một số"
   },
   {
     "id": "L10_C4_TF_B",
-    "content": "Tích vô hướng của hai vectơ",
+    "content": "Vectơ",
     "Loai": "Đúng sai",
-    "Dang": "Góc giữa hai vectơ và tích vô hướng"
+    "Dang": "Vectơ trong mặt phẳng toạ độ; Tích vô hướng của hai vectơ"
   }
 ]

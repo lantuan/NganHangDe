@@ -1,128 +1,128 @@
 [
   {
-    "id": "L12_C4_B10_NB025_MC_A",
-    "content": "Nhận biết được khái niệm nguyên hàm của một hàm số.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nguyên hàm của một hàm số"
-  },
-  {
-    "id": "L12_C4_B10_TH026_MC_A",
-    "content": "Giải thích được tính chất cơ bản của nguyên hàm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính chất cơ bản của nguyên hàm"
-  },
-  {
-    "id": "L12_C4_B10_TH027_MC_A",
-    "content": "Xác định được nguyên hàm của một số hàm số sơ cấp.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nguyên hàm của một số hàm số sơ cấp"
-  },
-  {
-    "id": "L12_C4_B10_TH027_SA_A",
-    "content": "Xác định được nguyên hàm của một số hàm số sơ cấp.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Nguyên hàm của hàm số sơ cấp"
-  },
-  {
-    "id": "L12_C4_B10_TH028_MC_A",
-    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nguyên hàm"
-  },
-  {
-    "id": "L12_C4_B10_TH028_SA_A",
-    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Nguyên hàm thoả điều kiện cho trước"
-  },
-  {
-    "id": "L12_C4_B10_TH028_TL_A",
-    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
-    "Loai": "Tự luận",
-    "Dang": "Tìm nguyên hàm của hàm số"
-  },
-  {
-    "id": "L12_C4_B11_NB029_MC_A",
+    "id": "L12_C4_B10_NB029_MC_A",
     "content": "Nhận biết được định nghĩa và các tính chất của tích phân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Định nghĩa và các tính chất của tích phân"
   },
   {
-    "id": "L12_C4_B11_TH030_MC_A",
+    "id": "L12_C4_B10_TH030_MC_A",
     "content": "Tính được tích phân trong những trường hợp đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tích phân"
   },
   {
-    "id": "L12_C4_B11_TH030_SA_A",
+    "id": "L12_C4_B10_TH030_SA_A",
     "content": "Tính được tích phân trong những trường hợp đơn giản.",
     "Loai": "Trả lời ngắn",
     "Dang": "Giá trị của tích phân"
   },
   {
-    "id": "L12_C4_B11_TH030_TL_A",
+    "id": "L12_C4_B10_TH030_TL_A",
     "content": "Tính được tích phân trong những trường hợp đơn giản.",
     "Loai": "Tự luận",
     "Dang": "Tính tích phân"
   },
   {
-    "id": "L12_C4_B12_TH031_MC_A",
+    "id": "L12_C4_B11_TH031_MC_A",
     "content": "Sử dụng được tích phân để tính diện tích của một số hình phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tích phân để tính diện tích của một số hình phẳng"
   },
   {
-    "id": "L12_C4_B12_TH031_SA_A",
+    "id": "L12_C4_B11_TH031_SA_A",
     "content": "Sử dụng được tích phân để tính diện tích của một số hình phẳng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Diện tích hình phẳng giới hạn bởi các đường"
   },
   {
-    "id": "L12_C4_B12_TH031_TL_A",
+    "id": "L12_C4_B11_TH031_TL_A",
     "content": "Sử dụng được tích phân để tính diện tích của một số hình phẳng.",
     "Loai": "Tự luận",
     "Dang": "Tính diện tích hình phẳng"
   },
   {
-    "id": "L12_C4_B12_TH032_MC_A",
+    "id": "L12_C4_B11_TH032_MC_A",
     "content": "Sử dụng được tích phân để tính thể tích của một số hình khối.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tích phân để tính thể tích của một số hình khối"
   },
   {
-    "id": "L12_C4_B12_TH032_SA_A",
+    "id": "L12_C4_B11_TH032_SA_A",
     "content": "Sử dụng được tích phân để tính thể tích của một số hình khối.",
     "Loai": "Trả lời ngắn",
     "Dang": "Thể tích khối tròn xoay"
   },
   {
-    "id": "L12_C4_B12_TH032_TL_A",
+    "id": "L12_C4_B11_TH032_TL_A",
     "content": "Sử dụng được tích phân để tính thể tích của một số hình khối.",
     "Loai": "Tự luận",
     "Dang": "Tính thể tích khối tròn xoay"
   },
   {
-    "id": "L12_C4_B12_VD033_MC_A",
+    "id": "L12_C4_B11_VD033_MC_A",
     "content": "Vận dụng được tích phân để giải một số bài toán có liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tích phân để giải một số bài toán có liên quan đến thực tiễn"
   },
   {
-    "id": "L12_C4_B12_VD033_TL_A",
+    "id": "L12_C4_B11_VD033_TL_A",
     "content": "Vận dụng được tích phân để giải một số bài toán có liên quan đến thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn giải bằng tích phân"
   },
   {
+    "id": "L12_C4_B9_NB025_MC_A",
+    "content": "Nhận biết được khái niệm nguyên hàm của một hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nguyên hàm của một hàm số"
+  },
+  {
+    "id": "L12_C4_B9_TH026_MC_A",
+    "content": "Giải thích được tính chất cơ bản của nguyên hàm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất cơ bản của nguyên hàm"
+  },
+  {
+    "id": "L12_C4_B9_TH027_MC_A",
+    "content": "Xác định được nguyên hàm của một số hàm số sơ cấp.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nguyên hàm của một số hàm số sơ cấp"
+  },
+  {
+    "id": "L12_C4_B9_TH027_SA_A",
+    "content": "Xác định được nguyên hàm của một số hàm số sơ cấp.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nguyên hàm của hàm số sơ cấp"
+  },
+  {
+    "id": "L12_C4_B9_TH028_MC_A",
+    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nguyên hàm"
+  },
+  {
+    "id": "L12_C4_B9_TH028_SA_A",
+    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nguyên hàm thoả điều kiện cho trước"
+  },
+  {
+    "id": "L12_C4_B9_TH028_TL_A",
+    "content": "Tính được nguyên hàm trong những trường hợp đơn giản.",
+    "Loai": "Tự luận",
+    "Dang": "Tìm nguyên hàm của hàm số"
+  },
+  {
     "id": "L12_C4_TF_A",
-    "content": "Nguyên hàm",
+    "content": "Nguyên hàm. Tích phân và ứng dụng",
     "Loai": "Đúng sai",
-    "Dang": "Nguyên hàm của hàm sơ cấp và tính chất"
+    "Dang": "Nguyên hàm; Tích phân"
   },
   {
     "id": "L12_C4_TF_B",
-    "content": "Tích phân và ứng dụng",
+    "content": "Nguyên hàm. Tích phân và ứng dụng",
     "Loai": "Đúng sai",
-    "Dang": "Tính tích phân, diện tích, thể tích"
+    "Dang": "Ứng dụng hình học của tích phân"
   }
 ]

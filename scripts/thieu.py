@@ -22,7 +22,7 @@ GOC = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(GOC)
 sys.path.insert(0, GOC)
 
-SO_CHUONG = {10: 8, 11: 9, 12: 6}
+SO_CHUONG = {10: 9, 11: 9, 12: 6}
 HAU_TO = re.compile(r"_(MC|SA|TL)_[A-Z]$")
 LOAI_TEN = {"MC": "trắc nghiệm", "SA": "trả lời ngắn", "TL": "tự luận", "TF": "đúng/sai"}
 

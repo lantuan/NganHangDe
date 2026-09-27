@@ -1,0 +1,290 @@
+[
+  {
+    "id": "L10_C9_B26_NB142",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: phép thử ngẫu nhiên.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "phep_thu_ngau_nhien"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB143",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "khong_gian_mau"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB144",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố.",
+    "examples": [],
+    "scope": "biến cố liên quan đến phép thử",
+    "tags": [
+      "xac_suat",
+      "bien_co"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB145",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố không thể.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_khong_the"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB146",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố chắc chắn.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_chac_chan"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB147",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố đối.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_doi"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB148",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được nguyên lí xác suất bé.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "nguyen_li_xac_suat_be"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_NB149",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa cổ điển của xác suất.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "dinh_nghia_co_dien"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B26_TH150",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Biến cố và định nghĩa cổ điển của xác suất",
+    "bai_so": "26",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Mô tả được",
+    "content": "Mô tả được không gian mẫu, tập hợp mô tả biến cố trong các thí nghiệm đơn giản.",
+    "examples": [
+      "Tung đồng xu",
+      "Gieo xúc xắc",
+      "Chọn quân bài"
+    ],
+    "scope": "các thí nghiệm đơn giản",
+    "tags": [
+      "xac_suat",
+      "mo_ta_khong_gian_mau",
+      "mo_ta_bien_co"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C9_B27_TH151",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
+    "bai_so": "27",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
+    "examples": [],
+    "scope": "định nghĩa cổ điển, thí nghiệm đơn giản",
+    "tags": [
+      "xac_suat",
+      "tinh_xac_suat",
+      "dinh_nghia_co_dien"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C9_B27_TH152",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
+    "bai_so": "27",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất của biến cố đối.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "bien_co_doi"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C9_B27_NB153",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
+    "bai_so": "27",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Mô tả được",
+    "content": "Mô tả được các tính chất cơ bản của xác suất.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "xac_suat",
+      "tinh_chat"
+    ],
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C9_B27_TH154",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
+    "bai_so": "27",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Tính được",
+    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
+    "examples": [],
+    "scope": "ví dụ: tung xúc xắc hai lần, tính xác suất để tổng số chấm bằng 7",
+    "tags": [
+      "xac_suat",
+      "so_do_hinh_cay",
+      "thi_nghiem_lap"
+    ],
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C9_B27_VD155",
+    "lop": 10,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Tính xác suất theo định nghĩa cổ điển",
+    "chuong_so": "9",
+    "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
+    "bai_so": "27",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
+    "examples": [],
+    "scope": "bài toán thực tiễn đơn giản",
+    "tags": [
+      "xac_suat",
+      "dinh_nghia_co_dien",
+      "bai_toan_thuc_tien"
+    ],
+    "difficulty_rank": 3
+  }
+]

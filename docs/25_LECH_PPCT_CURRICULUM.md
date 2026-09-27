@@ -83,3 +83,76 @@ deu khop). Cho co Lan chon roi moi doi.
 Bai test tests/test_mapping_curriculum.py canh tinh nhat quan trong noi bo ba
 lop du lieu. Chua co bai test nao canh cho lech PPCT nay - se them sau khi co
 Lan chon cach.
+
+---
+
+# DA XU LI (27/09/2026)
+
+Co Lan chot: **Curriculum chay theo PPCT**. Da lam xong.
+
+## Cach lam
+
+Khong phai doi so la xong, vi PPCT chia bai KHAC Curriculum. Phai dinh tuyen
+TUNG YEU CAU CAN DAT ve dung bai cua PPCT. Bon cho phai tach/gop:
+
+| Cho | Truoc | Sau (theo PPCT) |
+|---|---|---|
+| L10 C4_B8 "Cac phep toan tren vecto" | 1 bai, 14 yeu cau | tach lam 3: B8 tong/hieu, B9 tich voi mot so, B11 tich vo huong |
+| L10 C6_B16 "Bien co va xac suat" | 1 bai, 14 yeu cau | tach lam 2: C9_B26 bien co va dinh nghia, C9_B27 thuc hanh tinh |
+| L10 C7_B18 "Duong thang" | 1 bai, 8 yeu cau | tach lam 2: B19 phuong trinh, B20 vi tri tuong doi/goc/khoang cach |
+| L11 C1_B1 | 1 bai, 9 yeu cau | tach lam 2: B1 Goc luong giac, B2 Gia tri luong giac |
+| L12 C2_B7, C5_B15 | 2 bai rieng | gop vao B6 va B13 theo PPCT |
+
+Va hai cho doi han chuong:
+
+    L10 "Toa do cua vecto"  C7_B17 -> C4_B10   (PPCT xep vao chuong Vecto)
+    L10 Thong ke <-> Ham so  C5 va C6 dao cho nhau
+    L11 Gioi han <-> Thong ke  C3 va C5 dao cho nhau
+
+## Ket qua
+
+    Lop 10: 27/27 bai khop PPCT, 9 chuong (truoc la 8)
+    Lop 11: 18/34 bai khop PPCT
+    Lop 12: 16/16 bai khop PPCT
+
+Khong con bai nao lech ten. Khong con bai nao cua PPCT bi bo quen.
+
+## Lop 10 chuong 1 khong bi dung den
+
+C1 dang co 46 ham Python va 34 dong mapping tro vao. PPCT cung ghi dung
+B1 Menh de, B2 Tap hop nen von da khop - giu nguyen toan bo ma, ke ca cac lo
+so 002, 004, 006, 009, 012, 016.
+
+## Chu cai dang (A, B, C) duoc giu nguyen
+
+Lan dung lai mapping dau tien Claude danh lai chu cai tu dau, lam
+NB017_SA_C thanh NB017_SA_A va mat khop voi ham Python. Da sua: giu nguyen
+chu cai cu, chi doi khi that su dung do (hai bai cu gop lam mot bai moi).
+Ket qua: 0 cho phai doi chu cai.
+
+## Bang anh xa ly thuyet cung doi theo
+
+data/ly_thuyet/anh_xa.json khoa theo ma bai nen phai doi theo: 23 bai -> 27
+bai. Bai cu tach lam nhieu bai moi thi moi bai moi nhan danh sach tep cua bai
+cu do (vd 0H1-CD2.tex phuc vu ca B8, B9, B11 cua chuong Vecto).
+
+## PPCT con thieu - can co Lan bo sung
+
+PPCT lop 11 moi co het hoc ki I (5 chuong, 18 bai). Curriculum da co ca nam
+nen 16 bai sau chua co trong PPCT:
+
+    C6 B19-B22  Ham so mu va ham so logarit
+    C7 B23-B28  Quan he vuong goc trong khong gian
+    C8 B29-B31  Cac quy tac tinh xac suat
+    C9 B32-B34  Dao ham
+
+So bai B19-B34 hien la Claude danh noi tiep sau B18 - HOP LI nhung chua duoc
+PPCT xac nhan. Khi co Lan bo sung PPCT hoc ki II, neu truong day thu tu khac
+thi bao de doi lai (luc do van con re vi chua co ham Python nao).
+
+## Canh khong cho lech lai
+
+tests/test_ppct_curriculum.py (9 bai):
+  - cung ma chuong/bai thi hai ben phai la cung mot bai
+  - bai nao PPCT co day ma Curriculum khong co yeu cau nao -> bao loi
+  - bai nao Curriculum co ma PPCT chua co -> chi in ra cho biet, khong bao loi

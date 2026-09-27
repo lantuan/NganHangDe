@@ -12,6 +12,12 @@
     "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không"
   },
   {
+    "id": "L10_C2_B3_NB025_MC_A",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn bất phương trình mô tả đúng tình huống thực tế"
+  },
+  {
     "id": "L10_C2_B3_TH024_MC_A",
     "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -22,12 +28,6 @@
     "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
     "Loai": "Tự luận",
     "Dang": "Biểu diễn miền nghiệm trên mặt phẳng toạ độ"
-  },
-  {
-    "id": "L10_C2_B3_NB025_MC_A",
-    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn bất phương trình mô tả đúng tình huống thực tế"
   },
   {
     "id": "L10_C2_B4_NB026_MC_A",
@@ -67,14 +67,14 @@
   },
   {
     "id": "L10_C2_TF_A",
-    "content": "Bất phương trình bậc nhất hai ẩn",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
     "Loai": "Đúng sai",
-    "Dang": "Miền nghiệm và nghiệm"
+    "Dang": "Bất phương trình bậc nhất 2 ẩn"
   },
   {
     "id": "L10_C2_TF_B",
-    "content": "Hệ bất phương trình bậc nhất hai ẩn",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
     "Loai": "Đúng sai",
-    "Dang": "Miền nghiệm và bài toán cực trị"
+    "Dang": "Hệ bất phương trình bậc nhất hai ẩ"
   }
 ]

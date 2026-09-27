@@ -66,6 +66,12 @@
     "Dang": "Số đường tiệm cận của đồ thị hàm số"
   },
   {
+    "id": "L12_C1_B4_NB011_MC_A",
+    "content": "Nhận biết được tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm số đã khảo sát.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm"
+  },
+  {
     "id": "L12_C1_B4_TH007_MC_A",
     "content": "Mô tả được sơ đồ tổng quát để khảo sát hàm số: tìm tập xác định, xét chiều biến thiên, tìm cực trị, tìm tiệm cận, lập bảng biến thiên, vẽ đồ thị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -102,12 +108,6 @@
     "Dang": "Tập xác định, chiều biến thiên, cực trị, tiệm cận, bảng biến"
   },
   {
-    "id": "L12_C1_B4_NB011_MC_A",
-    "content": "Nhận biết được tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm số đã khảo sát.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính đối xứng (trục đối xứng, tâm đối xứng) của đồ thị các hàm"
-  },
-  {
     "id": "L12_C1_B4_VD012_MC_A",
     "content": "Vận dụng được đạo hàm và khảo sát hàm số để giải quyết một số vấn đề liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -121,14 +121,14 @@
   },
   {
     "id": "L12_C1_TF_A",
-    "content": "Tính đơn điệu, cực trị và giá trị lớn nhất, nhỏ nhất",
+    "content": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
     "Loai": "Đúng sai",
-    "Dang": "Đọc từ bảng biến thiên và đồ thị"
+    "Dang": "Tính đơn điệu và cực trị của hàm s; Giá trị lớn nhất và giá trị nhỏ nh"
   },
   {
     "id": "L12_C1_TF_B",
-    "content": "Tiệm cận và khảo sát đồ thị hàm số",
+    "content": "Ứng dụng đạo hàm để khảo sát và vẽ đồ thị của hàm số",
     "Loai": "Đúng sai",
-    "Dang": "Tiệm cận, dạng đồ thị, đối xứng"
+    "Dang": "Đường tiệm cận của đồ thị hàm số; Khảo sát sự biến thiên và vẽ đồ th"
   }
 ]

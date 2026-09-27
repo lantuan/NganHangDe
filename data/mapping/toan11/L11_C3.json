@@ -1,92 +1,128 @@
 [
   {
-    "id": "L11_C3_B8_NB040_MC_A",
-    "content": "Nhận biết được mẫu số liệu ghép nhóm.",
+    "id": "L11_C3_B10_NB044_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn hữu hạn của hàm số, giới hạn hữu hạn một phía của hàm số tại một điểm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mẫu số liệu ghép nhóm"
+    "Dang": "Giới hạn hữu hạn của hàm số, giới hạn hữu hạn một phía của hàm"
+  },
+  {
+    "id": "L11_C3_B10_NB045_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn hữu hạn của hàm số tại vô cực và mô tả được một số giới hạn cơ bản dạng c chia x mũ k.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn hữu hạn của hàm số tại vô cực"
+  },
+  {
+    "id": "L11_C3_B10_NB046_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn vô cực (một phía) của hàm số tại một điểm và hiểu được một số giới hạn cơ bản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn vô cực (một phía) của hàm số tại một điểm"
+  },
+  {
+    "id": "L11_C3_B10_TH047_MC_A",
+    "content": "Tính được một số giới hạn hàm số bằng cách vận dụng các phép toán trên giới hạn hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn hàm số"
+  },
+  {
+    "id": "L11_C3_B10_TH047_SA_A",
+    "content": "Tính được một số giới hạn hàm số bằng cách vận dụng các phép toán trên giới hạn hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giới hạn của hàm số tại một điểm"
+  },
+  {
+    "id": "L11_C3_B10_VD048_MC_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giới hạn hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vấn đề thực tiễn gắn với giới hạn hàm số"
+  },
+  {
+    "id": "L11_C3_B11_NB051_MC_A",
+    "content": "Nhận biết được tính liên tục của một số hàm sơ cấp cơ bản trên tập xác định của chúng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính liên tục của một số hàm sơ cấp cơ bản trên tập xác định"
+  },
+  {
+    "id": "L11_C3_B11_TH049_MC_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên"
+  },
+  {
+    "id": "L11_C3_B11_TH049_SA_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tham số để hàm số liên tục tại một điểm"
+  },
+  {
+    "id": "L11_C3_B11_TH049_TL_A",
+    "content": "Nhận dạng được hàm số liên tục tại một điểm, hoặc trên một khoảng, hoặc trên một đoạn.",
+    "Loai": "Tự luận",
+    "Dang": "Xét tính liên tục của hàm số"
+  },
+  {
+    "id": "L11_C3_B11_TH050_MC_A",
+    "content": "Nhận dạng được tính liên tục của tổng, hiệu, tích, thương của hai hàm số liên tục.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính liên tục của tổng, hiệu, tích, thương của hai hàm số liên"
+  },
+  {
+    "id": "L11_C3_B9_NB040_MC_A",
+    "content": "Nhận biết được khái niệm giới hạn của dãy số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giới hạn của dãy số"
   },
   {
     "id": "L11_C3_B9_TH041_MC_A",
-    "content": "Tính được số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm.",
+    "content": "Giải thích được một số giới hạn cơ bản của dãy số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm"
+    "Dang": "Giới hạn cơ bản của dãy số"
   },
   {
     "id": "L11_C3_B9_TH041_SA_A",
-    "content": "Tính được số trung bình (trung bình cộng) của mẫu số liệu ghép nhóm.",
+    "content": "Giải thích được một số giới hạn cơ bản của dãy số.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Số trung bình của mẫu số liệu ghép nhóm"
+    "Dang": "Giới hạn của dãy số cơ bản"
   },
   {
     "id": "L11_C3_B9_TH042_MC_A",
-    "content": "Tính được trung vị của mẫu số liệu ghép nhóm.",
+    "content": "Vận dụng được các phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Trung vị của mẫu số liệu ghép nhóm"
+    "Dang": "Phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn"
   },
   {
     "id": "L11_C3_B9_TH042_SA_A",
-    "content": "Tính được trung vị của mẫu số liệu ghép nhóm.",
+    "content": "Vận dụng được các phép toán giới hạn dãy số để tìm giới hạn của một số dãy số đơn giản.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Trung vị của mẫu số liệu ghép nhóm"
+    "Dang": "Giới hạn của dãy số dạng phân thức"
   },
   {
-    "id": "L11_C3_B9_TH043_MC_A",
-    "content": "Tính được tứ phân vị của mẫu số liệu ghép nhóm.",
+    "id": "L11_C3_B9_VD043_MC_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tứ phân vị của mẫu số liệu ghép nhóm"
+    "Dang": "Tổng của một cấp số nhân lùi vô hạn"
   },
   {
-    "id": "L11_C3_B9_TH043_SA_A",
-    "content": "Tính được tứ phân vị của mẫu số liệu ghép nhóm.",
+    "id": "L11_C3_B9_VD043_SA_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tứ phân vị của mẫu số liệu ghép nhóm"
+    "Dang": "Tổng của cấp số nhân lùi vô hạn"
   },
   {
-    "id": "L11_C3_B9_TH044_MC_A",
-    "content": "Tính được mốt của mẫu số liệu ghép nhóm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mốt của mẫu số liệu ghép nhóm"
-  },
-  {
-    "id": "L11_C3_B9_TH044_SA_A",
-    "content": "Tính được mốt của mẫu số liệu ghép nhóm.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Mốt của mẫu số liệu ghép nhóm"
-  },
-  {
-    "id": "L11_C3_B9_TH045_MC_A",
-    "content": "Hiểu được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm trong thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm của"
-  },
-  {
-    "id": "L11_C3_B9_VD046_MC_A",
-    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm"
-  },
-  {
-    "id": "L11_C3_B9_VD046_TL_A",
-    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
+    "id": "L11_C3_B9_VD043_TL_A",
+    "content": "Tính được tổng của một cấp số nhân lùi vô hạn và vận dụng được kết quả đó để giải quyết một số tình huống thực tiễn.",
     "Loai": "Tự luận",
-    "Dang": "So sánh hai mẫu số liệu ghép nhóm và kết luận"
-  },
-  {
-    "id": "L11_C3_B9_NB047_MC_A",
-    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 11 và trong thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mối liên hệ giữa thống kê với những kiến thức của các môn học"
+    "Dang": "Bài toán thực tiễn về cấp số nhân lùi vô hạn"
   },
   {
     "id": "L11_C3_TF_A",
-    "content": "Mẫu số liệu ghép nhóm",
+    "content": "Giới hạn. Hàm số liên tục",
     "Loai": "Đúng sai",
-    "Dang": "Bảng tần số ghép nhóm"
+    "Dang": "Giới hạn của dãy số; Giới hạn của hàm số"
   },
   {
     "id": "L11_C3_TF_B",
-    "content": "Các số đặc trưng đo xu thế trung tâm",
+    "content": "Giới hạn. Hàm số liên tục",
     "Loai": "Đúng sai",
-    "Dang": "Trung bình, trung vị, tứ phân vị, mốt"
+    "Dang": "Hàm số liên tục"
   }
 ]

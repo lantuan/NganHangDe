@@ -18,7 +18,7 @@ import pytest
 
 from app.services.mapping_service import load_mapping, dem_dang_co_ham
 
-SO_CHUONG = {10: 8, 11: 9, 12: 6}
+SO_CHUONG = {10: 9, 11: 9, 12: 6}
 KHOI = [(lop, c) for lop, n in SO_CHUONG.items() for c in range(1, n + 1)]
 HAU_TO = re.compile(r"_(MC|SA|TL)_[A-Z]$")
 

@@ -6,12 +6,6 @@
     "Dang": "Mệnh đề bất kỳ"
   },
   {
-    "id": "L10_C1_B1_TH003_MC_A",
-    "content": "Xác định được tính đúng sai của các mệnh đề.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mệnh đề toán học"
-  },
-  {
     "id": "L10_C1_B1_NB005_MC_A",
     "content": "Nhận biết được mệnh đề phủ định.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -78,6 +72,30 @@
     "Dang": "lời sang kí hiệu"
   },
   {
+    "id": "L10_C1_B1_NB015_MC_A",
+    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phát biểu điều kiện cần, đủ, điều kiện cần và đủ"
+  },
+  {
+    "id": "L10_C1_B1_NB015_MC_B",
+    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm giả thiết, kết luận"
+  },
+  {
+    "id": "L10_C1_B1_TH003_MC_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề toán học"
+  },
+  {
+    "id": "L10_C1_B1_TH003_TL_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Tự luận",
+    "Dang": "Xét tính đúng sai mệnh đề chứa kí hiệu với mọi, tồn tại"
+  },
+  {
     "id": "L10_C1_B1_TH014_MC_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -94,18 +112,6 @@
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề chưa biến"
-  },
-  {
-    "id": "L10_C1_B1_NB015_MC_A",
-    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phát biểu điều kiện cần, đủ, điều kiện cần và đủ"
-  },
-  {
-    "id": "L10_C1_B1_NB015_MC_B",
-    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm giả thiết, kết luận"
   },
   {
     "id": "L10_C1_B2_NB017_MC_A",
@@ -126,6 +132,12 @@
     "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê"
   },
   {
+    "id": "L10_C1_B2_NB017_SA_C",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên"
+  },
+  {
     "id": "L10_C1_B2_TH018_MC_A",
     "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -144,6 +156,18 @@
     "Dang": "A,B,C giao/hợp/hiệu"
   },
   {
+    "id": "L10_C1_B2_TH019_TL_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Tự luận",
+    "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
+  },
+  {
+    "id": "L10_C1_B2_TH021_MC_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép toán tập hợp"
+  },
+  {
     "id": "L10_C1_B2_VD020_MC_A",
     "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -156,51 +180,27 @@
     "Dang": "tập hợp thực tế"
   },
   {
-    "id": "L10_C1_B2_TH021_MC_A",
-    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phép toán tập hợp"
-  },
-  {
     "id": "L10_C1_B2_VD021_MC_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Phép toán tập hợp tham "
   },
   {
-    "id": "L10_C1_TF_A",
-    "content": "Mệnh đề",
-    "Loai": "Đúng sai",
-    "Dang": "Kí hiệu với mọi, tồn tại"
-  },
-  {
-    "id": "L10_C1_TF_B",
-    "content": "Mệnh đề",
-    "Loai": "Đúng sai",
-    "Dang": "Tập hợp"
-  },
-  {
-    "id": "L10_C1_B1_TH003_TL_A",
-    "content": "Xác định được tính đúng sai của các mệnh đề.",
-    "Loai": "Tự luận",
-    "Dang": "Xét tính đúng sai mệnh đề chứa kí hiệu với mọi, tồn tại"
-  },
-  {
-    "id": "L10_C1_B2_NB017_SA_C",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên"
-  },
-  {
-    "id": "L10_C1_B2_TH019_TL_A",
-    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
-    "Loai": "Tự luận",
-    "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
-  },
-  {
     "id": "L10_C1_B2_VD021_TL_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Tự luận",
     "Dang": "Tìm tham số để hợp, giao thoả điều kiện cho trước"
+  },
+  {
+    "id": "L10_C1_TF_A",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Mệnh đề"
+  },
+  {
+    "id": "L10_C1_TF_B",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Tập hợp và các phép toán trên tập "
   }
 ]

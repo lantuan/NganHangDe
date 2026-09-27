@@ -1,194 +1,194 @@
 [
   {
-    "id": "L11_C4_B10_NB048_MC_A",
+    "id": "L11_C4_B12_NB052_MC_A",
     "content": "Nhận biết được các quan hệ liên thuộc cơ bản giữa điểm, đường thẳng, mặt phẳng trong không gian.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Quan hệ liên thuộc cơ bản giữa điểm, đường thẳng, mặt phẳng"
   },
   {
-    "id": "L11_C4_B10_TH049_MC_A",
-    "content": "Mô tả được ba cách xác định mặt phẳng: qua ba điểm không thẳng hàng; qua một đường thẳng và một điểm không thuộc đường thẳng đó; qua hai đường thẳng cắt nhau.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Ba cách xác định mặt phẳng: qua ba điểm không thẳng hàng"
-  },
-  {
-    "id": "L11_C4_B10_TH050_MC_A",
-    "content": "Xác định được giao tuyến của hai mặt phẳng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giao tuyến của hai mặt phẳng"
-  },
-  {
-    "id": "L11_C4_B10_TH050_TL_A",
-    "content": "Xác định được giao tuyến của hai mặt phẳng.",
-    "Loai": "Tự luận",
-    "Dang": "Xác định giao tuyến của hai mặt phẳng"
-  },
-  {
-    "id": "L11_C4_B10_TH051_MC_A",
-    "content": "Xác định được giao điểm của đường thẳng và mặt phẳng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giao điểm của đường thẳng và mặt phẳng"
-  },
-  {
-    "id": "L11_C4_B10_TH051_TL_A",
-    "content": "Xác định được giao điểm của đường thẳng và mặt phẳng.",
-    "Loai": "Tự luận",
-    "Dang": "Xác định giao điểm của đường thẳng và mặt phẳng"
-  },
-  {
-    "id": "L11_C4_B10_VD052_MC_A",
-    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường"
-  },
-  {
-    "id": "L11_C4_B10_VD052_TL_A",
-    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán thiết diện của hình chóp"
-  },
-  {
-    "id": "L11_C4_B10_NB053_MC_A",
+    "id": "L11_C4_B12_NB057_MC_A",
     "content": "Nhận biết được hình chóp, hình tứ diện.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Hình chóp, hình tứ diện"
   },
   {
-    "id": "L11_C4_B10_VD054_MC_A",
+    "id": "L11_C4_B12_TH053_MC_A",
+    "content": "Mô tả được ba cách xác định mặt phẳng: qua ba điểm không thẳng hàng; qua một đường thẳng và một điểm không thuộc đường thẳng đó; qua hai đường thẳng cắt nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ba cách xác định mặt phẳng: qua ba điểm không thẳng hàng"
+  },
+  {
+    "id": "L11_C4_B12_TH054_MC_A",
+    "content": "Xác định được giao tuyến của hai mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giao tuyến của hai mặt phẳng"
+  },
+  {
+    "id": "L11_C4_B12_TH054_TL_A",
+    "content": "Xác định được giao tuyến của hai mặt phẳng.",
+    "Loai": "Tự luận",
+    "Dang": "Xác định giao tuyến của hai mặt phẳng"
+  },
+  {
+    "id": "L11_C4_B12_TH055_MC_A",
+    "content": "Xác định được giao điểm của đường thẳng và mặt phẳng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giao điểm của đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C4_B12_TH055_TL_A",
+    "content": "Xác định được giao điểm của đường thẳng và mặt phẳng.",
+    "Loai": "Tự luận",
+    "Dang": "Xác định giao điểm của đường thẳng và mặt phẳng"
+  },
+  {
+    "id": "L11_C4_B12_VD056_MC_A",
+    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường"
+  },
+  {
+    "id": "L11_C4_B12_VD056_TL_A",
+    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thiết diện của hình chóp"
+  },
+  {
+    "id": "L11_C4_B12_VD058_MC_A",
     "content": "Vận dụng được kiến thức về đường thẳng, mặt phẳng trong không gian để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về đường thẳng, mặt phẳng trong không gian"
   },
   {
-    "id": "L11_C4_B11_NB055_MC_A",
+    "id": "L11_C4_B13_NB059_MC_A",
     "content": "Nhận biết được vị trí tương đối của hai đường thẳng trong không gian: trùng nhau, song song, cắt nhau, chéo nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vị trí tương đối của hai đường thẳng trong không gian: trùng"
   },
   {
-    "id": "L11_C4_B11_TH056_MC_A",
+    "id": "L11_C4_B13_TH060_MC_A",
     "content": "Giải thích được tính chất cơ bản về hai đường thẳng song song trong không gian.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất cơ bản về hai đường thẳng song song trong không gian"
   },
   {
-    "id": "L11_C4_B11_VD057_MC_A",
+    "id": "L11_C4_B13_VD061_MC_A",
     "content": "Vận dụng được kiến thức về hai đường thẳng song song để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về hai đường thẳng song song"
   },
   {
-    "id": "L11_C4_B12_NB058_MC_A",
+    "id": "L11_C4_B14_NB062_MC_A",
     "content": "Nhận biết được đường thẳng song song với mặt phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đường thẳng song song với mặt phẳng"
   },
   {
-    "id": "L11_C4_B12_TH059_MC_A",
+    "id": "L11_C4_B14_TH063_MC_A",
     "content": "Giải thích được điều kiện để đường thẳng song song với mặt phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Điều kiện để đường thẳng song song với mặt phẳng"
   },
   {
-    "id": "L11_C4_B12_TH059_TL_A",
+    "id": "L11_C4_B14_TH063_TL_A",
     "content": "Giải thích được điều kiện để đường thẳng song song với mặt phẳng.",
     "Loai": "Tự luận",
     "Dang": "Chứng minh đường thẳng song song với mặt phẳng"
   },
   {
-    "id": "L11_C4_B12_TH060_MC_A",
+    "id": "L11_C4_B14_TH064_MC_A",
     "content": "Giải thích được tính chất cơ bản về đường thẳng song song với mặt phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất cơ bản về đường thẳng song song với mặt phẳng"
   },
   {
-    "id": "L11_C4_B12_VD061_MC_A",
+    "id": "L11_C4_B14_VD065_MC_A",
     "content": "Vận dụng được kiến thức về đường thẳng song song với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về đường thẳng song song với mặt phẳng"
   },
   {
-    "id": "L11_C4_B13_NB062_MC_A",
+    "id": "L11_C4_B15_NB066_MC_A",
     "content": "Nhận biết được hai mặt phẳng song song trong không gian.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Hai mặt phẳng song song trong không gian"
   },
   {
-    "id": "L11_C4_B13_TH063_MC_A",
+    "id": "L11_C4_B15_TH067_MC_A",
     "content": "Giải thích được điều kiện để hai mặt phẳng song song.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Điều kiện để hai mặt phẳng song song"
   },
   {
-    "id": "L11_C4_B13_TH064_MC_A",
+    "id": "L11_C4_B15_TH068_MC_A",
     "content": "Giải thích được tính chất cơ bản về hai mặt phẳng song song.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất cơ bản về hai mặt phẳng song song"
   },
   {
-    "id": "L11_C4_B13_TH064_TL_A",
+    "id": "L11_C4_B15_TH068_TL_A",
     "content": "Giải thích được tính chất cơ bản về hai mặt phẳng song song.",
     "Loai": "Tự luận",
     "Dang": "Chứng minh hai mặt phẳng song song"
   },
   {
-    "id": "L11_C4_B13_TH065_MC_A",
+    "id": "L11_C4_B15_TH069_MC_A",
     "content": "Giải thích được định lí Thalès trong không gian.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Định lí Thalès trong không gian"
   },
   {
-    "id": "L11_C4_B13_TH065_SA_A",
+    "id": "L11_C4_B15_TH069_SA_A",
     "content": "Giải thích được định lí Thalès trong không gian.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tính tỉ số độ dài theo định lí Thalès"
   },
   {
-    "id": "L11_C4_B13_TH066_MC_A",
+    "id": "L11_C4_B15_TH070_MC_A",
     "content": "Giải thích được tính chất cơ bản của lăng trụ và hình hộp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất cơ bản của lăng trụ và hình hộp"
   },
   {
-    "id": "L11_C4_B13_VD067_MC_A",
+    "id": "L11_C4_B15_VD071_MC_A",
     "content": "Vận dụng được kiến thức về quan hệ song song để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về quan hệ song song"
   },
   {
-    "id": "L11_C4_B14_NB068_MC_A",
+    "id": "L11_C4_B16_NB072_MC_A",
     "content": "Nhận biết được khái niệm và các tính chất cơ bản về phép chiếu song song.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Và các tính chất cơ bản về phép chiếu song song"
   },
   {
-    "id": "L11_C4_B14_TH069_MC_A",
+    "id": "L11_C4_B16_TH073_MC_A",
     "content": "Xác định được ảnh của một điểm, một đoạn thẳng, một tam giác, một đường tròn qua một phép chiếu song song.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Ảnh của một điểm, một đoạn thẳng, một tam giác, một đường tròn"
   },
   {
-    "id": "L11_C4_B14_TH070_MC_A",
+    "id": "L11_C4_B16_TH074_MC_A",
     "content": "Vẽ được hình biểu diễn của một số hình khối đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Hình biểu diễn của một số hình khối đơn giản"
   },
   {
-    "id": "L11_C4_B14_VD071_MC_A",
+    "id": "L11_C4_B16_VD075_MC_A",
     "content": "Sử dụng được kiến thức về phép chiếu song song để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về phép chiếu song song"
   },
   {
     "id": "L11_C4_TF_A",
-    "content": "Đường thẳng và mặt phẳng trong không gian",
+    "content": "Đường thẳng và mặt phẳng trong không gian. Quan hệ song song",
     "Loai": "Đúng sai",
-    "Dang": "Giao tuyến, giao điểm, thiết diện"
+    "Dang": "Đường thẳng và mặt phẳng trong khô; Hai đường thẳng song song; Đường thẳng song song với mặt phẳn"
   },
   {
     "id": "L11_C4_TF_B",
-    "content": "Quan hệ song song trong không gian",
+    "content": "Đường thẳng và mặt phẳng trong không gian. Quan hệ song song",
     "Loai": "Đúng sai",
-    "Dang": "Đường song song mặt, hai mặt song song"
+    "Dang": "Hai mặt phẳng song song; Phép chiếu song song. Hình lăng tr"
   }
 ]

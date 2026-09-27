@@ -24,39 +24,39 @@
     "Dang": "Độ dài vectơ trong không gian"
   },
   {
-    "id": "L12_C2_B7_TH016_MC_A",
+    "id": "L12_C2_B6_TH016_MC_A",
     "content": "Xác định được biểu thức toạ độ của các phép toán vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Biểu thức toạ độ của các phép toán vectơ"
   },
   {
-    "id": "L12_C2_B7_TH016_SA_A",
+    "id": "L12_C2_B6_TH016_SA_A",
     "content": "Xác định được biểu thức toạ độ của các phép toán vectơ.",
     "Loai": "Trả lời ngắn",
     "Dang": "Toạ độ vectơ sau phép toán"
   },
   {
-    "id": "L12_C2_B7_VD017_MC_A",
+    "id": "L12_C2_B6_VD017_MC_A",
     "content": "Vận dụng được toạ độ của vectơ để giải một số bài toán có liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Toạ độ của vectơ để giải một số bài toán có liên quan đến thực"
   },
   {
-    "id": "L12_C2_B7_VD017_TL_A",
+    "id": "L12_C2_B6_VD017_TL_A",
     "content": "Vận dụng được toạ độ của vectơ để giải một số bài toán có liên quan đến thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn dùng toạ độ trong không gian"
   },
   {
     "id": "L12_C2_TF_A",
-    "content": "Vectơ trong không gian",
+    "content": "Vectơ và hệ toạ độ trong không gian",
     "Loai": "Đúng sai",
-    "Dang": "Phép toán vectơ"
+    "Dang": "Vectơ trong không gian"
   },
   {
     "id": "L12_C2_TF_B",
-    "content": "Hệ trục toạ độ trong không gian",
+    "content": "Vectơ và hệ toạ độ trong không gian",
     "Loai": "Đúng sai",
-    "Dang": "Toạ độ vectơ và độ dài"
+    "Dang": "Hệ toạ độ trong không gian"
   }
 ]

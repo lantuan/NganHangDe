@@ -1,308 +1,224 @@
 [
   {
-    "id": "L10_C7_B17_NB112_MC_A",
-    "content": "Nhận biết được toạ độ của vectơ đối với một hệ trục toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra toạ độ của vectơ trong hệ trục toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_TH113_MC_A",
-    "content": "Tìm được toạ độ của một vectơ, một điểm đối với một hệ trục toạ độ cho trước.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm toạ độ vectơ, toạ độ điểm trong hệ trục"
-  },
-  {
-    "id": "L10_C7_B17_TH113_SA_A",
-    "content": "Tìm được toạ độ của một vectơ, một điểm đối với một hệ trục toạ độ cho trước.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Toạ độ của điểm thoả điều kiện"
-  },
-  {
-    "id": "L10_C7_B17_TH114_MC_A",
-    "content": "Tìm được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính độ dài vectơ từ toạ độ hai đầu mút"
-  },
-  {
-    "id": "L10_C7_B17_TH114_SA_A",
-    "content": "Tìm được độ dài của một vectơ khi biết toạ độ hai đầu mút của nó.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Độ dài đoạn thẳng theo toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_TH115_MC_A",
-    "content": "Xác định được toạ độ của vectơ tổng, hiệu, tích của một số với một vectơ bằng toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Toạ độ vectơ tổng, hiệu, tích với một số"
-  },
-  {
-    "id": "L10_C7_B17_TH115_SA_A",
-    "content": "Xác định được toạ độ của vectơ tổng, hiệu, tích của một số với một vectơ bằng toạ độ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Toạ độ vectơ sau phép toán"
-  },
-  {
-    "id": "L10_C7_B17_TH116_MC_A",
-    "content": "Tính được tích vô hướng của hai vectơ bằng toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính tích vô hướng hai vectơ bằng toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_TH116_SA_A",
-    "content": "Tính được tích vô hướng của hai vectơ bằng toạ độ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Tích vô hướng theo toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_VD117_MC_A",
-    "content": "Vận dụng được biểu thức toạ độ của các phép toán vectơ vào giải một số bài toán hình học phẳng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Bài toán hình học phẳng giải bằng toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_VD117_TL_A",
-    "content": "Vận dụng được biểu thức toạ độ của các phép toán vectơ vào giải một số bài toán hình học phẳng.",
-    "Loai": "Tự luận",
-    "Dang": "Chứng minh tính chất hình học bằng toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_VD118_MC_A",
-    "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Vị trí của vật trên mặt phẳng toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_VD119_MC_A",
-    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giải tam giác bằng phương pháp toạ độ"
-  },
-  {
-    "id": "L10_C7_B17_VD119_TL_A",
-    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
-    "Loai": "Tự luận",
-    "Dang": "Tính cạnh, góc, diện tích tam giác bằng toạ độ"
-  },
-  {
-    "id": "L10_C7_B18_NB120_MC_A",
+    "id": "L10_C7_B19_NB106_MC_A",
     "content": "Mô tả được phương trình tổng quát và phương trình tham số của đường thẳng trong mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra phương trình tổng quát của đường thẳng"
   },
   {
-    "id": "L10_C7_B18_NB120_MC_B",
+    "id": "L10_C7_B19_NB106_MC_B",
     "content": "Mô tả được phương trình tổng quát và phương trình tham số của đường thẳng trong mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra phương trình tham số của đường thẳng"
   },
   {
-    "id": "L10_C7_B18_TH121_MC_A",
+    "id": "L10_C7_B19_TH107_MC_A",
     "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình đường thẳng qua một điểm và có vectơ pháp tuyến"
   },
   {
-    "id": "L10_C7_B18_TH121_MC_B",
+    "id": "L10_C7_B19_TH107_MC_B",
     "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình đường thẳng đi qua hai điểm"
   },
   {
-    "id": "L10_C7_B18_TH121_SA_A",
+    "id": "L10_C7_B19_TH107_SA_A",
     "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hệ số trong phương trình đường thẳng"
   },
   {
-    "id": "L10_C7_B18_VD121_MC_A",
-    "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập phương trình đường thẳng từ điều kiện không trực tiếp"
-  },
-  {
-    "id": "L10_C7_B18_VD121_TL_A",
-    "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
-    "Loai": "Tự luận",
-    "Dang": "Lập phương trình đường thẳng thoả điều kiện cho trước"
-  },
-  {
-    "id": "L10_C7_B18_TH122_MC_A",
-    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xét vị trí tương đối của hai đường thẳng bằng toạ độ"
-  },
-  {
-    "id": "L10_C7_B18_VD122_MC_A",
-    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm tham số để hai đường thẳng song song, vuông góc"
-  },
-  {
-    "id": "L10_C7_B18_VD122_SA_A",
-    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Giá trị tham số thoả điều kiện"
-  },
-  {
-    "id": "L10_C7_B18_TH123_MC_A",
-    "content": "Tính được khoảng cách từ một điểm đến một đường thẳng bằng phương pháp toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính khoảng cách từ một điểm đến một đường thẳng"
-  },
-  {
-    "id": "L10_C7_B18_TH123_SA_A",
-    "content": "Tính được khoảng cách từ một điểm đến một đường thẳng bằng phương pháp toạ độ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Khoảng cách từ điểm đến đường thẳng"
-  },
-  {
-    "id": "L10_C7_B18_TH124_MC_A",
-    "content": "Tính được góc giữa hai đường thẳng bằng phương pháp toạ độ.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính góc giữa hai đường thẳng"
-  },
-  {
-    "id": "L10_C7_B18_TH124_SA_A",
-    "content": "Tính được góc giữa hai đường thẳng bằng phương pháp toạ độ.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Số đo góc giữa hai đường thẳng"
-  },
-  {
-    "id": "L10_C7_B18_TH125_MC_A",
+    "id": "L10_C7_B19_TH108_MC_A",
     "content": "Giải thích được mối liên hệ giữa đồ thị hàm số bậc nhất và đường thẳng trong mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Liên hệ giữa đồ thị hàm số bậc nhất và đường thẳng"
   },
   {
-    "id": "L10_C7_B19_TH126_MC_A",
+    "id": "L10_C7_B19_VD107_MC_A",
+    "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lập phương trình đường thẳng từ điều kiện không trực tiếp"
+  },
+  {
+    "id": "L10_C7_B19_VD107_TL_A",
+    "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
+    "Loai": "Tự luận",
+    "Dang": "Lập phương trình đường thẳng thoả điều kiện cho trước"
+  },
+  {
+    "id": "L10_C7_B20_TH109_MC_A",
+    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xét vị trí tương đối của hai đường thẳng bằng toạ độ"
+  },
+  {
+    "id": "L10_C7_B20_TH110_MC_A",
+    "content": "Tính được khoảng cách từ một điểm đến một đường thẳng bằng phương pháp toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính khoảng cách từ một điểm đến một đường thẳng"
+  },
+  {
+    "id": "L10_C7_B20_TH110_SA_A",
+    "content": "Tính được khoảng cách từ một điểm đến một đường thẳng bằng phương pháp toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách từ điểm đến đường thẳng"
+  },
+  {
+    "id": "L10_C7_B20_TH111_MC_A",
+    "content": "Tính được góc giữa hai đường thẳng bằng phương pháp toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính góc giữa hai đường thẳng"
+  },
+  {
+    "id": "L10_C7_B20_TH111_SA_A",
+    "content": "Tính được góc giữa hai đường thẳng bằng phương pháp toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đo góc giữa hai đường thẳng"
+  },
+  {
+    "id": "L10_C7_B20_VD109_MC_A",
+    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tham số để hai đường thẳng song song, vuông góc"
+  },
+  {
+    "id": "L10_C7_B20_VD109_SA_A",
+    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị tham số thoả điều kiện"
+  },
+  {
+    "id": "L10_C7_B21_TH112_MC_A",
     "content": "Lập được phương trình đường tròn khi biết tâm và bán kính.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình đường tròn khi biết tâm và bán kính"
   },
   {
-    "id": "L10_C7_B19_VD127_MC_A",
-    "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập phương trình đường tròn đi qua ba điểm"
-  },
-  {
-    "id": "L10_C7_B19_VD127_TL_A",
-    "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
-    "Loai": "Tự luận",
-    "Dang": "Viết phương trình đường tròn ngoại tiếp tam giác"
-  },
-  {
-    "id": "L10_C7_B19_VD128_MC_A",
-    "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập phương trình đường tròn từ điều kiện không trực tiếp"
-  },
-  {
-    "id": "L10_C7_B19_VD128_SA_A",
-    "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Bán kính đường tròn thoả điều kiện"
-  },
-  {
-    "id": "L10_C7_B19_TH129_MC_A",
+    "id": "L10_C7_B21_TH115_MC_A",
     "content": "Xác định được tâm và bán kính của đường tròn từ phương trình cho trước.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Xác định tâm và bán kính từ phương trình đường tròn"
   },
   {
-    "id": "L10_C7_B19_TH129_SA_A",
+    "id": "L10_C7_B21_TH115_SA_A",
     "content": "Xác định được tâm và bán kính của đường tròn từ phương trình cho trước.",
     "Loai": "Trả lời ngắn",
     "Dang": "Bán kính của đường tròn cho trước"
   },
   {
-    "id": "L10_C7_B19_TH130_MC_A",
+    "id": "L10_C7_B21_TH116_MC_A",
     "content": "Lập được phương trình tiếp tuyến của đường tròn khi biết toạ độ tiếp điểm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình tiếp tuyến tại một điểm của đường tròn"
   },
   {
-    "id": "L10_C7_B19_VD131_MC_A",
+    "id": "L10_C7_B21_VD113_MC_A",
+    "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lập phương trình đường tròn đi qua ba điểm"
+  },
+  {
+    "id": "L10_C7_B21_VD113_TL_A",
+    "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
+    "Loai": "Tự luận",
+    "Dang": "Viết phương trình đường tròn ngoại tiếp tam giác"
+  },
+  {
+    "id": "L10_C7_B21_VD114_MC_A",
+    "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lập phương trình đường tròn từ điều kiện không trực tiếp"
+  },
+  {
+    "id": "L10_C7_B21_VD114_SA_A",
+    "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bán kính đường tròn thoả điều kiện"
+  },
+  {
+    "id": "L10_C7_B21_VD117_MC_A",
     "content": "Vận dụng được kiến thức về phương trình đường tròn để giải một số bài toán liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán chuyển động tròn trong Vật lí"
   },
   {
-    "id": "L10_C7_B19_VD131_TL_A",
+    "id": "L10_C7_B21_VD117_TL_A",
     "content": "Vận dụng được kiến thức về phương trình đường tròn để giải một số bài toán liên quan đến thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn về đường tròn"
   },
   {
-    "id": "L10_C7_B20_NB132_MC_A",
+    "id": "L10_C7_B22_NB118_MC_A",
     "content": "Nhận biết được ba đường conic (elip, hypebol, parabol) bằng hình học.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra elip, hypebol, parabol bằng hình học"
   },
   {
-    "id": "L10_C7_B20_NB133_MC_A",
+    "id": "L10_C7_B22_NB119_MC_A",
     "content": "Nhận biết được phương trình chính tắc của ba đường conic trong mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra phương trình chính tắc của ba đường conic"
   },
   {
-    "id": "L10_C7_B20_TH134_MC_A",
+    "id": "L10_C7_B22_TH120_MC_A",
     "content": "Lập được phương trình chính tắc của elip trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình chính tắc của elip"
   },
   {
-    "id": "L10_C7_B20_TH134_SA_A",
+    "id": "L10_C7_B22_TH120_SA_A",
     "content": "Lập được phương trình chính tắc của elip trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tiêu cự, độ dài trục của elip"
   },
   {
-    "id": "L10_C7_B20_TH135_MC_A",
+    "id": "L10_C7_B22_TH121_MC_A",
     "content": "Lập được phương trình chính tắc của hypebol trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình chính tắc của hypebol"
   },
   {
-    "id": "L10_C7_B20_TH136_MC_A",
+    "id": "L10_C7_B22_TH122_MC_A",
     "content": "Lập được phương trình chính tắc của parabol trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Lập phương trình chính tắc của parabol"
   },
   {
-    "id": "L10_C7_B20_VD137_MC_A",
+    "id": "L10_C7_B22_VD123_MC_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với ba đường conic.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Hiện tượng Quang học gắn với đường conic"
   },
   {
-    "id": "L10_C7_B20_VD137_TL_A",
+    "id": "L10_C7_B22_VD123_TL_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với ba đường conic.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn về đường conic"
   },
   {
-    "id": "L10_C7_B20_VD138_MC_A",
+    "id": "L10_C7_B22_VD124_MC_A",
     "content": "Vận dụng được kiến thức về phương pháp toạ độ trong mặt phẳng để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán thực tiễn dùng phương pháp toạ độ"
   },
   {
-    "id": "L10_C7_B20_VD138_TL_A",
+    "id": "L10_C7_B22_VD124_TL_A",
     "content": "Vận dụng được kiến thức về phương pháp toạ độ trong mặt phẳng để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn tổng hợp về toạ độ"
   },
   {
     "id": "L10_C7_TF_A",
-    "content": "Đường thẳng trong mặt phẳng toạ độ",
+    "content": "Phương pháp toạ độ trong mặt phẳng",
     "Loai": "Đúng sai",
-    "Dang": "Phương trình, vị trí tương đối, khoảng cách"
+    "Dang": "Phương trình đường thẳng; Vị trí tương đối giữa hai đường th"
   },
   {
     "id": "L10_C7_TF_B",
-    "content": "Đường tròn và ba đường conic",
+    "content": "Phương pháp toạ độ trong mặt phẳng",
     "Loai": "Đúng sai",
-    "Dang": "Phương trình đường tròn, tiếp tuyến, conic"
+    "Dang": "Đường tròn trong mặt phẳng toạ độ; Ba đường conic"
   }
 ]

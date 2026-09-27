@@ -1,0 +1,134 @@
+[
+  {
+    "id": "L10_C9_B26_NB142_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: phép thử ngẫu nhiên.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra phép thử ngẫu nhiên"
+  },
+  {
+    "id": "L10_C9_B26_NB143_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định không gian mẫu của một phép thử"
+  },
+  {
+    "id": "L10_C9_B26_NB143_SA_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số phần tử của không gian mẫu"
+  },
+  {
+    "id": "L10_C9_B26_NB144_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra biến cố và tập hợp mô tả biến cố"
+  },
+  {
+    "id": "L10_C9_B26_NB145_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố không thể.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra biến cố không thể"
+  },
+  {
+    "id": "L10_C9_B26_NB146_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố chắc chắn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra biến cố chắc chắn"
+  },
+  {
+    "id": "L10_C9_B26_NB147_MC_A",
+    "content": "Nhận biết được một số khái niệm về xác suất: biến cố đối.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định biến cố đối của một biến cố"
+  },
+  {
+    "id": "L10_C9_B26_NB148_MC_A",
+    "content": "Nhận biết được nguyên lí xác suất bé.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nguyên lí xác suất bé"
+  },
+  {
+    "id": "L10_C9_B26_NB149_MC_A",
+    "content": "Nhận biết được định nghĩa cổ điển của xác suất.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Định nghĩa cổ điển của xác suất"
+  },
+  {
+    "id": "L10_C9_B26_TH150_MC_A",
+    "content": "Mô tả được không gian mẫu, tập hợp mô tả biến cố trong các thí nghiệm đơn giản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mô tả không gian mẫu và biến cố khi tung đồng xu, xúc xắc"
+  },
+  {
+    "id": "L10_C9_B26_TH150_SA_A",
+    "content": "Mô tả được không gian mẫu, tập hợp mô tả biến cố trong các thí nghiệm đơn giản.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số phần tử của biến cố"
+  },
+  {
+    "id": "L10_C9_B27_NB153_MC_A",
+    "content": "Mô tả được các tính chất cơ bản của xác suất.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính chất cơ bản của xác suất"
+  },
+  {
+    "id": "L10_C9_B27_TH151_MC_A",
+    "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính xác suất của biến cố bằng định nghĩa cổ điển"
+  },
+  {
+    "id": "L10_C9_B27_TH151_SA_A",
+    "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Xác suất của biến cố"
+  },
+  {
+    "id": "L10_C9_B27_TH152_MC_A",
+    "content": "Tính được xác suất của biến cố đối.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính xác suất của biến cố đối"
+  },
+  {
+    "id": "L10_C9_B27_TH152_SA_A",
+    "content": "Tính được xác suất của biến cố đối.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Xác suất của biến cố đối"
+  },
+  {
+    "id": "L10_C9_B27_TH154_MC_A",
+    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Dùng sơ đồ hình cây tính xác suất thí nghiệm lặp"
+  },
+  {
+    "id": "L10_C9_B27_TH154_SA_A",
+    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Xác suất trong thí nghiệm lặp"
+  },
+  {
+    "id": "L10_C9_B27_VD155_MC_A",
+    "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán xác suất thực tiễn dùng tổ hợp"
+  },
+  {
+    "id": "L10_C9_B27_VD155_TL_A",
+    "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán xác suất có nội dung thực tiễn"
+  },
+  {
+    "id": "L10_C9_TF_A",
+    "content": "Tính xác suất theo định nghĩa cổ điển",
+    "Loai": "Đúng sai",
+    "Dang": "Biến cố và định nghĩa cổ điển của "
+  },
+  {
+    "id": "L10_C9_TF_B",
+    "content": "Tính xác suất theo định nghĩa cổ điển",
+    "Loai": "Đúng sai",
+    "Dang": "Thực hành tính xác suất theo định "
+  }
+]

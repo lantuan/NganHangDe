@@ -1,188 +1,248 @@
 [
   {
-    "id": "L10_C5_B9_NB054_MC_A",
-    "content": "Nhận biết được những mô hình thực tế (dạng bảng, biểu đồ, công thức) dẫn đến khái niệm hàm số.",
+    "id": "L10_C5_B12_NB062_MC_A",
+    "content": "Nhận biết được khái niệm số gần đúng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra mô hình thực tế dẫn đến khái niệm hàm số"
+    "Dang": "Nhận ra số gần đúng trong tình huống cho trước"
   },
   {
-    "id": "L10_C5_B9_NB055_MC_A",
-    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
+    "id": "L10_C5_B12_NB063_MC_A",
+    "content": "Nhận biết được khái niệm sai số tuyệt đối.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm tập xác định của hàm số"
+    "Dang": "Nhận ra sai số tuyệt đối của một số gần đúng"
   },
   {
-    "id": "L10_C5_B9_NB055_SA_A",
-    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
+    "id": "L10_C5_B12_NB064_MC_A",
+    "content": "Nhận biết được khái niệm độ chính xác của một số gần đúng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra độ chính xác của một số gần đúng"
+  },
+  {
+    "id": "L10_C5_B12_NB065_MC_A",
+    "content": "Nhận biết được khái niệm sai số tương đối.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra sai số tương đối của một số gần đúng"
+  },
+  {
+    "id": "L10_C5_B12_TH066_MC_A",
+    "content": "Xác định được số gần đúng của một số với độ chính xác cho trước.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định số gần đúng với độ chính xác cho trước"
+  },
+  {
+    "id": "L10_C5_B12_TH066_SA_A",
+    "content": "Xác định được số gần đúng của một số với độ chính xác cho trước.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Số phần tử nguyên của tập xác định"
+    "Dang": "Số gần đúng với độ chính xác cho trước"
   },
   {
-    "id": "L10_C5_B9_TH056_MC_A",
-    "content": "Mô tả được các cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức.",
+    "id": "L10_C5_B12_TH067_MC_A",
+    "content": "Biết viết số gần đúng dưới dạng chuẩn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức"
+    "Dang": "Viết số gần đúng dưới dạng chuẩn"
   },
   {
-    "id": "L10_C5_B9_NB057_MC_A",
-    "content": "Nhận biết được đồ thị của hàm số.",
+    "id": "L10_C5_B12_TH068_MC_A",
+    "content": "Xác định được sai số tương đối của số gần đúng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra đồ thị của một hàm số"
+    "Dang": "Tính sai số tương đối của số gần đúng"
   },
   {
-    "id": "L10_C5_B9_TH058_MC_A",
-    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: khoảng đồng biến, khoảng nghịch biến.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đọc khoảng đồng biến, nghịch biến từ đồ thị"
-  },
-  {
-    "id": "L10_C5_B9_TH059_MC_A",
-    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đọc giá trị lớn nhất, nhỏ nhất từ đồ thị"
-  },
-  {
-    "id": "L10_C5_B9_TH059_SA_A",
-    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
+    "id": "L10_C5_B12_TH068_SA_A",
+    "content": "Xác định được sai số tương đối của số gần đúng.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Giá trị lớn nhất của hàm số trên một đoạn"
+    "Dang": "Sai số tương đối"
   },
   {
-    "id": "L10_C5_B9_VD060_MC_A",
-    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "id": "L10_C5_B12_TH069_MC_A",
+    "content": "Biết quy tròn số gần đúng căn cứ vào độ chính xác cho trước.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại"
+    "Dang": "Quy tròn số gần đúng theo độ chính xác"
   },
   {
-    "id": "L10_C5_B9_VD060_TL_A",
-    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "id": "L10_C5_B12_TH069_SA_A",
+    "content": "Biết quy tròn số gần đúng căn cứ vào độ chính xác cho trước.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số quy tròn"
+  },
+  {
+    "id": "L10_C5_B12_TH071_MC_A",
+    "content": "Biết sử dụng máy tính cầm tay để tính toán với các số gần đúng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Dùng máy tính cầm tay tính toán với số gần đúng"
+  },
+  {
+    "id": "L10_C5_B12_VD070_MC_A",
+    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phát hiện số liệu không hợp lí trong bảng dữ liệu"
+  },
+  {
+    "id": "L10_C5_B12_VD070_TL_A",
+    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
     "Loai": "Tự luận",
-    "Dang": "Bài toán thực tiễn giải bằng hàm số"
+    "Dang": "Lí giải số liệu không chính xác trong bảng"
   },
   {
-    "id": "L10_C5_B10_TH061_MC_A",
-    "content": "Thiết lập được bảng giá trị của hàm số bậc hai.",
+    "id": "L10_C5_B13_TH072_MC_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập bảng giá trị của hàm số bậc hai"
+    "Dang": "Tính số trung bình của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B10_TH062_MC_A",
-    "content": "Lập được bảng biến thiên của hàm số bậc hai.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập bảng biến thiên của hàm số bậc hai"
-  },
-  {
-    "id": "L10_C5_B10_TH063_MC_A",
-    "content": "Vẽ được đồ thị hàm số bậc hai.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn đồ thị đúng của hàm số bậc hai cho trước"
-  },
-  {
-    "id": "L10_C5_B10_NB064_MC_A",
-    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Toạ độ đỉnh và trục đối xứng của Parabola"
-  },
-  {
-    "id": "L10_C5_B10_NB064_SA_A",
-    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
+    "id": "L10_C5_B13_TH072_SA_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
     "Loai": "Trả lời ngắn",
-    "Dang": "Hoành độ đỉnh của Parabola"
+    "Dang": "Số trung bình của mẫu"
   },
   {
-    "id": "L10_C5_B10_TH065_MC_A",
-    "content": "Nhận biết được các tính chất của hàm số bậc hai từ đồ thị.",
+    "id": "L10_C5_B13_TH073_MC_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: trung vị (median).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đọc tính chất của hàm số bậc hai từ đồ thị"
+    "Dang": "Tìm trung vị của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B10_VD066_MC_A",
-    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
+    "id": "L10_C5_B13_TH073_SA_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: trung vị (median).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Trung vị của mẫu"
+  },
+  {
+    "id": "L10_C5_B13_TH074_MC_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: tứ phân vị (quartiles).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Bài toán cổng, cầu dạng Parabola"
+    "Dang": "Tìm tứ phân vị của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B10_VD066_TL_A",
-    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
+    "id": "L10_C5_B13_TH074_SA_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: tứ phân vị (quartiles).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tứ phân vị thứ nhất, thứ ba"
+  },
+  {
+    "id": "L10_C5_B13_TH075_MC_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: mốt (mode).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm mốt của mẫu số liệu"
+  },
+  {
+    "id": "L10_C5_B13_TH075_SA_A",
+    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: mốt (mode).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mốt của mẫu"
+  },
+  {
+    "id": "L10_C5_B13_TH076_MC_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm trong các tình huống thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ý nghĩa của số trung bình, trung vị, mốt trong tình huống thực tiễn"
+  },
+  {
+    "id": "L10_C5_B13_VD077_MC_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Rút ra kết luận từ số đặc trưng đo xu thế trung tâm"
+  },
+  {
+    "id": "L10_C5_B13_VD077_TL_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
     "Loai": "Tự luận",
-    "Dang": "Bài toán thực tiễn về hàm số bậc hai"
+    "Dang": "So sánh hai mẫu số liệu và kết luận"
   },
   {
-    "id": "L10_C5_B11_NB067_MC_A",
-    "content": "Nhận biết được tam thức bậc hai.",
+    "id": "L10_C5_B13_VD078_MC_A",
+    "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra tam thức bậc hai"
+    "Dang": "Tìm giá trị ngoại lệ của mẫu số liệu qua biểu đồ hộp"
   },
   {
-    "id": "L10_C5_B11_TH068_MC_A",
-    "content": "Xét được dấu của tam thức bậc hai.",
+    "id": "L10_C5_B14_NB085_MC_A",
+    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 10 và trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xét dấu của tam thức bậc hai"
+    "Dang": "Liên hệ giữa thống kê với môn học khác và thực tiễn"
   },
   {
-    "id": "L10_C5_B11_TH069_MC_A",
-    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "id": "L10_C5_B14_TH079_MC_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng biến thiên.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giải bất phương trình bậc hai một ẩn"
+    "Dang": "Tính khoảng biến thiên của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B11_TH069_SA_A",
-    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "id": "L10_C5_B14_TH079_SA_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng biến thiên.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Số nghiệm nguyên của bất phương trình bậc hai"
+    "Dang": "Khoảng biến thiên"
   },
   {
-    "id": "L10_C5_B11_TH070_MC_A",
-    "content": "Giải thích được khoảng nghiệm của bất phương trình bậc hai một ẩn dựa vào đồ thị của hàm số bậc hai tương ứng.",
+    "id": "L10_C5_B14_TH080_MC_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đọc tập nghiệm của bất phương trình bậc hai từ đồ thị"
+    "Dang": "Tính khoảng tứ phân vị của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B11_VD071_MC_A",
-    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "id": "L10_C5_B14_TH080_SA_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng tứ phân vị"
+  },
+  {
+    "id": "L10_C5_B14_TH081_MC_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: phương sai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Bài toán thực tiễn dẫn đến bất phương trình bậc hai"
+    "Dang": "Tính phương sai của mẫu số liệu"
   },
   {
-    "id": "L10_C5_B11_VD071_TL_A",
-    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "id": "L10_C5_B14_TH081_SA_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: phương sai.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phương sai của mẫu"
+  },
+  {
+    "id": "L10_C5_B14_TH082_MC_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: độ lệch chuẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính độ lệch chuẩn của mẫu số liệu"
+  },
+  {
+    "id": "L10_C5_B14_TH082_SA_A",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: độ lệch chuẩn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ lệch chuẩn"
+  },
+  {
+    "id": "L10_C5_B14_TH083_MC_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ý nghĩa của độ phân tán trong tình huống thực tiễn"
+  },
+  {
+    "id": "L10_C5_B14_VD083_MC_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "So sánh độ ổn định của hai mẫu số liệu thực tiễn"
+  },
+  {
+    "id": "L10_C5_B14_VD084_MC_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Rút ra kết luận từ số đặc trưng đo độ phân tán"
+  },
+  {
+    "id": "L10_C5_B14_VD084_TL_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
     "Loai": "Tự luận",
-    "Dang": "Bài toán thực tiễn về chiều cao, khoảng cách"
-  },
-  {
-    "id": "L10_C5_B12_TH072_MC_A",
-    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giải phương trình dạng hai căn thức bằng nhau"
-  },
-  {
-    "id": "L10_C5_B12_TH072_SA_A",
-    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Tổng các nghiệm của phương trình"
-  },
-  {
-    "id": "L10_C5_B12_TH073_MC_A",
-    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Giải phương trình dạng căn thức bằng nhị thức bậc nhất"
-  },
-  {
-    "id": "L10_C5_B12_TH073_SA_A",
-    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Số nghiệm của phương trình chứa căn"
+    "Dang": "Đánh giá mức độ ổn định và kết luận"
   },
   {
     "id": "L10_C5_TF_A",
-    "content": "Hàm số và đồ thị",
+    "content": "Các số đặc trưng đo xu thế trung tâm và đo mức độ phân tán của mẫu số liệu không ghép nhóm",
     "Loai": "Đúng sai",
-    "Dang": "Tập xác định, đồng biến, nghịch biến"
+    "Dang": "Số gần đúng và sai số; Các số đặc trưng đo xu thế trung t"
   },
   {
     "id": "L10_C5_TF_B",
-    "content": "Hàm số bậc hai và bất phương trình bậc hai",
+    "content": "Các số đặc trưng đo xu thế trung tâm và đo mức độ phân tán của mẫu số liệu không ghép nhóm",
     "Loai": "Đúng sai",
-    "Dang": "Đồ thị, dấu tam thức, tập nghiệm"
+    "Dang": "Các số đặc trưng đo độ phân tán"
   }
 ]

@@ -1,164 +1,164 @@
 [
   {
-    "id": "L10_C8_B21_TH139_MC_A",
+    "id": "L10_C8_B23_TH125_MC_A",
     "content": "Giải thích được quy tắc cộng thông qua các ví dụ thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Giải thích quy tắc cộng qua ví dụ thực tiễn"
   },
   {
-    "id": "L10_C8_B21_TH140_MC_A",
+    "id": "L10_C8_B23_TH126_MC_A",
     "content": "Giải thích được quy tắc nhân thông qua các ví dụ thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Giải thích quy tắc nhân qua ví dụ thực tiễn"
   },
   {
-    "id": "L10_C8_B21_TH141_MC_A",
+    "id": "L10_C8_B23_TH127_MC_A",
     "content": "Sử dụng được quy tắc cộng để giải bài toán đếm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đếm số cách chọn bằng quy tắc cộng"
   },
   {
-    "id": "L10_C8_B21_TH141_SA_A",
+    "id": "L10_C8_B23_TH127_SA_A",
     "content": "Sử dụng được quy tắc cộng để giải bài toán đếm.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số cách chọn theo quy tắc cộng"
   },
   {
-    "id": "L10_C8_B21_TH142_MC_A",
+    "id": "L10_C8_B23_TH128_MC_A",
     "content": "Sử dụng được quy tắc nhân để giải bài toán đếm.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đếm số cách chọn bằng quy tắc nhân"
   },
   {
-    "id": "L10_C8_B21_TH142_SA_A",
+    "id": "L10_C8_B23_TH128_SA_A",
     "content": "Sử dụng được quy tắc nhân để giải bài toán đếm.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số cách chọn theo quy tắc nhân"
   },
   {
-    "id": "L10_C8_B21_TH143_MC_A",
+    "id": "L10_C8_B23_TH129_MC_A",
     "content": "Sử dụng được sơ đồ hình cây trong các bài toán đếm đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Dùng sơ đồ hình cây đếm số kết quả"
   },
   {
-    "id": "L10_C8_B21_VD144_MC_A",
+    "id": "L10_C8_B23_VD130_MC_A",
     "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán đếm thực tiễn dùng quy tắc cộng và nhân"
   },
   {
-    "id": "L10_C8_B21_VD144_TL_A",
+    "id": "L10_C8_B23_VD130_TL_A",
     "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán đếm có nội dung thực tiễn"
   },
   {
-    "id": "L10_C8_B22_NB145_MC_A",
+    "id": "L10_C8_B24_NB131_MC_A",
     "content": "Nhận biết được khái niệm hoán vị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra bài toán hoán vị"
   },
   {
-    "id": "L10_C8_B22_NB146_MC_A",
+    "id": "L10_C8_B24_NB132_MC_A",
     "content": "Nhận biết được khái niệm chỉnh hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra bài toán chỉnh hợp"
   },
   {
-    "id": "L10_C8_B22_NB147_MC_A",
+    "id": "L10_C8_B24_NB133_MC_A",
     "content": "Nhận biết được khái niệm tổ hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra bài toán tổ hợp"
   },
   {
-    "id": "L10_C8_B22_TH148_MC_A",
+    "id": "L10_C8_B24_TH134_MC_A",
     "content": "Tính được số các hoán vị, chỉnh hợp, tổ hợp bằng công thức.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính số hoán vị, chỉnh hợp, tổ hợp bằng công thức"
   },
   {
-    "id": "L10_C8_B22_TH148_SA_A",
+    "id": "L10_C8_B24_TH134_SA_A",
     "content": "Tính được số các hoán vị, chỉnh hợp, tổ hợp bằng công thức.",
     "Loai": "Trả lời ngắn",
     "Dang": "Giá trị của biểu thức chứa hoán vị, chỉnh hợp, tổ hợp"
   },
   {
-    "id": "L10_C8_B22_TH149_MC_A",
+    "id": "L10_C8_B24_TH135_MC_A",
     "content": "Tính được số các hoán vị bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính số hoán vị bằng máy tính cầm tay"
   },
   {
-    "id": "L10_C8_B22_TH150_MC_A",
+    "id": "L10_C8_B24_TH136_MC_A",
     "content": "Tính được số các chỉnh hợp bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính số chỉnh hợp bằng máy tính cầm tay"
   },
   {
-    "id": "L10_C8_B22_TH151_MC_A",
+    "id": "L10_C8_B24_TH137_MC_A",
     "content": "Tính được số các tổ hợp bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính số tổ hợp bằng máy tính cầm tay"
   },
   {
-    "id": "L10_C8_B22_VD152_MC_A",
+    "id": "L10_C8_B24_VD138_MC_A",
     "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán đếm thực tiễn dùng hoán vị, chỉnh hợp, tổ hợp"
   },
   {
-    "id": "L10_C8_B22_VD152_TL_A",
+    "id": "L10_C8_B24_VD138_TL_A",
     "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán đếm có điều kiện ràng buộc"
   },
   {
-    "id": "L10_C8_B23_TH153_MC_A",
+    "id": "L10_C8_B25_TH139_MC_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 4.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Khai triển nhị thức Newton với n = 4"
   },
   {
-    "id": "L10_C8_B23_TH153_SA_A",
+    "id": "L10_C8_B25_TH139_SA_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 4.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hệ số trong khai triển với n = 4"
   },
   {
-    "id": "L10_C8_B23_TH154_MC_A",
+    "id": "L10_C8_B25_TH140_MC_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 5.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Khai triển nhị thức Newton với n = 5"
   },
   {
-    "id": "L10_C8_B23_TH154_SA_A",
+    "id": "L10_C8_B25_TH140_SA_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 5.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hệ số trong khai triển với n = 5"
   },
   {
-    "id": "L10_C8_B23_VD155_MC_A",
+    "id": "L10_C8_B25_VD141_MC_A",
     "content": "Tìm được hệ số của x^k trong khai triển nhị thức Newton (a + b)^n.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tìm hệ số của một số hạng trong khai triển"
   },
   {
-    "id": "L10_C8_B23_VD155_SA_A",
+    "id": "L10_C8_B25_VD141_SA_A",
     "content": "Tìm được hệ số của x^k trong khai triển nhị thức Newton (a + b)^n.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hệ số của số hạng chứa x mũ k"
   },
   {
     "id": "L10_C8_TF_A",
-    "content": "Quy tắc đếm",
+    "content": "Đại số tổ hợp",
     "Loai": "Đúng sai",
-    "Dang": "Quy tắc cộng, quy tắc nhân, sơ đồ hình cây"
+    "Dang": "Quy tắc đếm; Hoán vị, chỉnh hợp, tổ hợp"
   },
   {
     "id": "L10_C8_TF_B",
-    "content": "Hoán vị, chỉnh hợp, tổ hợp và nhị thức Newton",
+    "content": "Đại số tổ hợp",
     "Loai": "Đúng sai",
-    "Dang": "Công thức đếm và khai triển"
+    "Dang": "Nhị thức Newton"
   }
 ]

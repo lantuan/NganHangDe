@@ -1,368 +1,188 @@
 [
   {
-    "id": "L10_C6_B13_NB074_MC_A",
-    "content": "Nhận biết được khái niệm số gần đúng.",
+    "id": "L10_C6_B15_NB086_MC_A",
+    "content": "Nhận biết được những mô hình thực tế (dạng bảng, biểu đồ, công thức) dẫn đến khái niệm hàm số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra số gần đúng trong tình huống cho trước"
+    "Dang": "Nhận ra mô hình thực tế dẫn đến khái niệm hàm số"
   },
   {
-    "id": "L10_C6_B13_NB075_MC_A",
-    "content": "Nhận biết được khái niệm sai số tuyệt đối.",
+    "id": "L10_C6_B15_NB087_MC_A",
+    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra sai số tuyệt đối của một số gần đúng"
+    "Dang": "Tìm tập xác định của hàm số"
   },
   {
-    "id": "L10_C6_B13_NB076_MC_A",
-    "content": "Nhận biết được khái niệm độ chính xác của một số gần đúng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra độ chính xác của một số gần đúng"
-  },
-  {
-    "id": "L10_C6_B13_NB077_MC_A",
-    "content": "Nhận biết được khái niệm sai số tương đối.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra sai số tương đối của một số gần đúng"
-  },
-  {
-    "id": "L10_C6_B13_TH078_MC_A",
-    "content": "Xác định được số gần đúng của một số với độ chính xác cho trước.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định số gần đúng với độ chính xác cho trước"
-  },
-  {
-    "id": "L10_C6_B13_TH078_SA_A",
-    "content": "Xác định được số gần đúng của một số với độ chính xác cho trước.",
+    "id": "L10_C6_B15_NB087_SA_A",
+    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Số gần đúng với độ chính xác cho trước"
+    "Dang": "Số phần tử nguyên của tập xác định"
   },
   {
-    "id": "L10_C6_B13_TH079_MC_A",
-    "content": "Biết viết số gần đúng dưới dạng chuẩn.",
+    "id": "L10_C6_B15_NB089_MC_A",
+    "content": "Nhận biết được đồ thị của hàm số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Viết số gần đúng dưới dạng chuẩn"
+    "Dang": "Nhận ra đồ thị của một hàm số"
   },
   {
-    "id": "L10_C6_B13_TH080_MC_A",
-    "content": "Xác định được sai số tương đối của số gần đúng.",
+    "id": "L10_C6_B15_TH088_MC_A",
+    "content": "Mô tả được các cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính sai số tương đối của số gần đúng"
+    "Dang": "Cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức"
   },
   {
-    "id": "L10_C6_B13_TH080_SA_A",
-    "content": "Xác định được sai số tương đối của số gần đúng.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Sai số tương đối"
-  },
-  {
-    "id": "L10_C6_B13_TH081_MC_A",
-    "content": "Biết quy tròn số gần đúng căn cứ vào độ chính xác cho trước.",
+    "id": "L10_C6_B15_TH090_MC_A",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: khoảng đồng biến, khoảng nghịch biến.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Quy tròn số gần đúng theo độ chính xác"
-  },
-  {
-    "id": "L10_C6_B13_TH081_SA_A",
-    "content": "Biết quy tròn số gần đúng căn cứ vào độ chính xác cho trước.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Số quy tròn"
-  },
-  {
-    "id": "L10_C6_B13_VD082_MC_A",
-    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phát hiện số liệu không hợp lí trong bảng dữ liệu"
-  },
-  {
-    "id": "L10_C6_B13_VD082_TL_A",
-    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
-    "Loai": "Tự luận",
-    "Dang": "Lí giải số liệu không chính xác trong bảng"
-  },
-  {
-    "id": "L10_C6_B13_TH083_MC_A",
-    "content": "Biết sử dụng máy tính cầm tay để tính toán với các số gần đúng.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Dùng máy tính cầm tay tính toán với số gần đúng"
-  },
-  {
-    "id": "L10_C6_B14_TH084_MC_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính số trung bình của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B14_TH084_SA_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Số trung bình của mẫu"
-  },
-  {
-    "id": "L10_C6_B14_TH085_MC_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: trung vị (median).",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm trung vị của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B14_TH085_SA_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: trung vị (median).",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Trung vị của mẫu"
-  },
-  {
-    "id": "L10_C6_B14_TH086_MC_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: tứ phân vị (quartiles).",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm tứ phân vị của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B14_TH086_SA_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: tứ phân vị (quartiles).",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Tứ phân vị thứ nhất, thứ ba"
-  },
-  {
-    "id": "L10_C6_B14_TH087_MC_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: mốt (mode).",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm mốt của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B14_TH087_SA_A",
-    "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: mốt (mode).",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Mốt của mẫu"
-  },
-  {
-    "id": "L10_C6_B14_TH088_MC_A",
-    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm trong các tình huống thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Ý nghĩa của số trung bình, trung vị, mốt trong tình huống thực tiễn"
-  },
-  {
-    "id": "L10_C6_B14_VD089_MC_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Rút ra kết luận từ số đặc trưng đo xu thế trung tâm"
-  },
-  {
-    "id": "L10_C6_B14_VD089_TL_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
-    "Loai": "Tự luận",
-    "Dang": "So sánh hai mẫu số liệu và kết luận"
-  },
-  {
-    "id": "L10_C6_B14_VD090_MC_A",
-    "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm giá trị ngoại lệ của mẫu số liệu qua biểu đồ hộp"
+    "Dang": "Đọc khoảng đồng biến, nghịch biến từ đồ thị"
   },
   {
     "id": "L10_C6_B15_TH091_MC_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng biến thiên.",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính khoảng biến thiên của mẫu số liệu"
+    "Dang": "Đọc giá trị lớn nhất, nhỏ nhất từ đồ thị"
   },
   {
     "id": "L10_C6_B15_TH091_SA_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng biến thiên.",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Khoảng biến thiên"
+    "Dang": "Giá trị lớn nhất của hàm số trên một đoạn"
   },
   {
-    "id": "L10_C6_B15_TH092_MC_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
+    "id": "L10_C6_B15_VD092_MC_A",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính khoảng tứ phân vị của mẫu số liệu"
+    "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại"
   },
   {
-    "id": "L10_C6_B15_TH092_SA_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Khoảng tứ phân vị"
-  },
-  {
-    "id": "L10_C6_B15_TH093_MC_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: phương sai.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính phương sai của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B15_TH093_SA_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: phương sai.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Phương sai của mẫu"
-  },
-  {
-    "id": "L10_C6_B15_TH094_MC_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: độ lệch chuẩn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính độ lệch chuẩn của mẫu số liệu"
-  },
-  {
-    "id": "L10_C6_B15_TH094_SA_A",
-    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: độ lệch chuẩn.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Độ lệch chuẩn"
-  },
-  {
-    "id": "L10_C6_B15_TH095_MC_A",
-    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Ý nghĩa của độ phân tán trong tình huống thực tiễn"
-  },
-  {
-    "id": "L10_C6_B15_VD095_MC_A",
-    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "So sánh độ ổn định của hai mẫu số liệu thực tiễn"
-  },
-  {
-    "id": "L10_C6_B15_VD096_MC_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Rút ra kết luận từ số đặc trưng đo độ phân tán"
-  },
-  {
-    "id": "L10_C6_B15_VD096_TL_A",
-    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
+    "id": "L10_C6_B15_VD092_TL_A",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Tự luận",
-    "Dang": "Đánh giá mức độ ổn định và kết luận"
+    "Dang": "Bài toán thực tiễn giải bằng hàm số"
   },
   {
-    "id": "L10_C6_B15_NB097_MC_A",
-    "content": "Nhận biết được mối liên hệ giữa thống kê với những kiến thức của các môn học khác trong Chương trình lớp 10 và trong thực tiễn.",
+    "id": "L10_C6_B16_NB096_MC_A",
+    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Liên hệ giữa thống kê với môn học khác và thực tiễn"
+    "Dang": "Toạ độ đỉnh và trục đối xứng của Parabola"
   },
   {
-    "id": "L10_C6_B16_NB098_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: phép thử ngẫu nhiên.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra phép thử ngẫu nhiên"
-  },
-  {
-    "id": "L10_C6_B16_NB099_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định không gian mẫu của một phép thử"
-  },
-  {
-    "id": "L10_C6_B16_NB099_SA_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
+    "id": "L10_C6_B16_NB096_SA_A",
+    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Số phần tử của không gian mẫu"
+    "Dang": "Hoành độ đỉnh của Parabola"
   },
   {
-    "id": "L10_C6_B16_NB100_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: biến cố.",
+    "id": "L10_C6_B16_TH093_MC_A",
+    "content": "Thiết lập được bảng giá trị của hàm số bậc hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra biến cố và tập hợp mô tả biến cố"
+    "Dang": "Lập bảng giá trị của hàm số bậc hai"
   },
   {
-    "id": "L10_C6_B16_NB101_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: biến cố không thể.",
+    "id": "L10_C6_B16_TH094_MC_A",
+    "content": "Lập được bảng biến thiên của hàm số bậc hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra biến cố không thể"
+    "Dang": "Lập bảng biến thiên của hàm số bậc hai"
   },
   {
-    "id": "L10_C6_B16_NB102_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: biến cố chắc chắn.",
+    "id": "L10_C6_B16_TH095_MC_A",
+    "content": "Vẽ được đồ thị hàm số bậc hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra biến cố chắc chắn"
+    "Dang": "Chọn đồ thị đúng của hàm số bậc hai cho trước"
   },
   {
-    "id": "L10_C6_B16_NB103_MC_A",
-    "content": "Nhận biết được một số khái niệm về xác suất: biến cố đối.",
+    "id": "L10_C6_B16_TH097_MC_A",
+    "content": "Nhận biết được các tính chất của hàm số bậc hai từ đồ thị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định biến cố đối của một biến cố"
+    "Dang": "Đọc tính chất của hàm số bậc hai từ đồ thị"
   },
   {
-    "id": "L10_C6_B16_NB104_MC_A",
-    "content": "Nhận biết được nguyên lí xác suất bé.",
+    "id": "L10_C6_B16_VD098_MC_A",
+    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nguyên lí xác suất bé"
+    "Dang": "Bài toán cổng, cầu dạng Parabola"
   },
   {
-    "id": "L10_C6_B16_NB105_MC_A",
-    "content": "Nhận biết được định nghĩa cổ điển của xác suất.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Định nghĩa cổ điển của xác suất"
-  },
-  {
-    "id": "L10_C6_B16_TH106_MC_A",
-    "content": "Mô tả được không gian mẫu, tập hợp mô tả biến cố trong các thí nghiệm đơn giản.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mô tả không gian mẫu và biến cố khi tung đồng xu, xúc xắc"
-  },
-  {
-    "id": "L10_C6_B16_TH106_SA_A",
-    "content": "Mô tả được không gian mẫu, tập hợp mô tả biến cố trong các thí nghiệm đơn giản.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Số phần tử của biến cố"
-  },
-  {
-    "id": "L10_C6_B16_TH107_MC_A",
-    "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính xác suất của biến cố bằng định nghĩa cổ điển"
-  },
-  {
-    "id": "L10_C6_B16_TH107_SA_A",
-    "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Xác suất của biến cố"
-  },
-  {
-    "id": "L10_C6_B16_TH108_MC_A",
-    "content": "Tính được xác suất của biến cố đối.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính xác suất của biến cố đối"
-  },
-  {
-    "id": "L10_C6_B16_TH108_SA_A",
-    "content": "Tính được xác suất của biến cố đối.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Xác suất của biến cố đối"
-  },
-  {
-    "id": "L10_C6_B16_NB109_MC_A",
-    "content": "Mô tả được các tính chất cơ bản của xác suất.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính chất cơ bản của xác suất"
-  },
-  {
-    "id": "L10_C6_B16_TH110_MC_A",
-    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Dùng sơ đồ hình cây tính xác suất thí nghiệm lặp"
-  },
-  {
-    "id": "L10_C6_B16_TH110_SA_A",
-    "content": "Tính được xác suất trong một số thí nghiệm lặp bằng cách sử dụng sơ đồ hình cây.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Xác suất trong thí nghiệm lặp"
-  },
-  {
-    "id": "L10_C6_B16_VD111_MC_A",
-    "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Bài toán xác suất thực tiễn dùng tổ hợp"
-  },
-  {
-    "id": "L10_C6_B16_VD111_TL_A",
-    "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
+    "id": "L10_C6_B16_VD098_TL_A",
+    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
     "Loai": "Tự luận",
-    "Dang": "Bài toán xác suất có nội dung thực tiễn"
+    "Dang": "Bài toán thực tiễn về hàm số bậc hai"
+  },
+  {
+    "id": "L10_C6_B17_NB099_MC_A",
+    "content": "Nhận biết được tam thức bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra tam thức bậc hai"
+  },
+  {
+    "id": "L10_C6_B17_TH100_MC_A",
+    "content": "Xét được dấu của tam thức bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xét dấu của tam thức bậc hai"
+  },
+  {
+    "id": "L10_C6_B17_TH101_MC_A",
+    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải bất phương trình bậc hai một ẩn"
+  },
+  {
+    "id": "L10_C6_B17_TH101_SA_A",
+    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số nghiệm nguyên của bất phương trình bậc hai"
+  },
+  {
+    "id": "L10_C6_B17_TH102_MC_A",
+    "content": "Giải thích được khoảng nghiệm của bất phương trình bậc hai một ẩn dựa vào đồ thị của hàm số bậc hai tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc tập nghiệm của bất phương trình bậc hai từ đồ thị"
+  },
+  {
+    "id": "L10_C6_B17_VD103_MC_A",
+    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn dẫn đến bất phương trình bậc hai"
+  },
+  {
+    "id": "L10_C6_B17_VD103_TL_A",
+    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về chiều cao, khoảng cách"
+  },
+  {
+    "id": "L10_C6_B18_TH104_MC_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải phương trình dạng hai căn thức bằng nhau"
+  },
+  {
+    "id": "L10_C6_B18_TH104_SA_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tổng các nghiệm của phương trình"
+  },
+  {
+    "id": "L10_C6_B18_TH105_MC_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải phương trình dạng căn thức bằng nhị thức bậc nhất"
+  },
+  {
+    "id": "L10_C6_B18_TH105_SA_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số nghiệm của phương trình chứa căn"
   },
   {
     "id": "L10_C6_TF_A",
-    "content": "Số gần đúng và các số đặc trưng",
+    "content": "Hàm số, đồ thị và ứng dụng",
     "Loai": "Đúng sai",
-    "Dang": "Sai số, số trung bình, độ phân tán"
+    "Dang": "Hàm số; Hàm số bậc hai"
   },
   {
     "id": "L10_C6_TF_B",
-    "content": "Biến cố và định nghĩa cổ điển của xác suất",
+    "content": "Hàm số, đồ thị và ứng dụng",
     "Loai": "Đúng sai",
-    "Dang": "Không gian mẫu, biến cố, xác suất"
+    "Dang": "Dấu của tam thức bậc hai; Phương trình quy về phương trình b"
   }
 ]
