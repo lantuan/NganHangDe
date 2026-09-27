@@ -1,72 +1,72 @@
 [
   {
-    "id": "L11_C8_B29_NB130_MC_A",
+    "id": "L11_C8_B28_NB130_MC_A",
     "content": "Nhận biết được khái niệm biến cố hợp của hai biến cố.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Biến cố hợp của hai biến cố"
   },
   {
-    "id": "L11_C8_B29_NB131_MC_A",
+    "id": "L11_C8_B28_NB131_MC_A",
     "content": "Nhận biết được khái niệm biến cố giao của hai biến cố.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Biến cố giao của hai biến cố"
   },
   {
-    "id": "L11_C8_B29_NB132_MC_A",
+    "id": "L11_C8_B28_NB132_MC_A",
     "content": "Nhận biết được khái niệm biến cố độc lập.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Biến cố độc lập"
   },
   {
-    "id": "L11_C8_B30_TH133_MC_A",
+    "id": "L11_C8_B29_TH133_MC_A",
     "content": "Tính được xác suất của biến cố hợp bằng cách sử dụng công thức cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Xác suất của biến cố hợp bằng cách sử dụng công thức cộng"
   },
   {
-    "id": "L11_C8_B30_TH133_SA_A",
+    "id": "L11_C8_B29_TH133_SA_A",
     "content": "Tính được xác suất của biến cố hợp bằng cách sử dụng công thức cộng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất của biến cố hợp"
   },
   {
-    "id": "L11_C8_B31_TH134_MC_A",
+    "id": "L11_C8_B30_TH134_MC_A",
     "content": "Tính được xác suất của biến cố giao bằng cách sử dụng công thức nhân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Xác suất của biến cố giao bằng cách sử dụng công thức nhân"
   },
   {
-    "id": "L11_C8_B31_TH134_SA_A",
+    "id": "L11_C8_B30_TH134_SA_A",
     "content": "Tính được xác suất của biến cố giao bằng cách sử dụng công thức nhân.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất của biến cố giao"
   },
   {
-    "id": "L11_C8_B31_TH135_MC_A",
+    "id": "L11_C8_B30_TH135_MC_A",
     "content": "Tính được xác suất của biến cố trong một số bài toán đơn giản bằng phương pháp tổ hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Xác suất của biến cố trong một số bài toán đơn giản bằng phương"
   },
   {
-    "id": "L11_C8_B31_TH135_SA_A",
+    "id": "L11_C8_B30_TH135_SA_A",
     "content": "Tính được xác suất của biến cố trong một số bài toán đơn giản bằng phương pháp tổ hợp.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất tính bằng phương pháp tổ hợp"
   },
   {
-    "id": "L11_C8_B31_TH135_TL_A",
+    "id": "L11_C8_B30_TH135_TL_A",
     "content": "Tính được xác suất của biến cố trong một số bài toán đơn giản bằng phương pháp tổ hợp.",
     "Loai": "Tự luận",
     "Dang": "Bài toán xác suất dùng tổ hợp"
   },
   {
-    "id": "L11_C8_B31_TH136_MC_A",
+    "id": "L11_C8_B30_TH136_MC_A",
     "content": "Tính được xác suất trong một số bài toán đơn giản bằng cách sử dụng sơ đồ hình cây.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Xác suất trong một số bài toán đơn giản bằng cách sử dụng sơ đồ"
   },
   {
-    "id": "L11_C8_B31_TH136_SA_A",
+    "id": "L11_C8_B30_TH136_SA_A",
     "content": "Tính được xác suất trong một số bài toán đơn giản bằng cách sử dụng sơ đồ hình cây.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất tính bằng sơ đồ hình cây"

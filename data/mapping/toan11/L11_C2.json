@@ -1,120 +1,120 @@
 [
   {
-    "id": "L11_C2_B6_NB029_MC_A",
+    "id": "L11_C2_B5_NB029_MC_A",
     "content": "Nhận biết được dãy số hữu hạn, dãy số vô hạn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Dãy số hữu hạn, dãy số vô hạn"
   },
   {
-    "id": "L11_C2_B6_TH030_MC_A",
+    "id": "L11_C2_B5_TH030_MC_A",
     "content": "Thể hiện được cách cho dãy số bằng liệt kê các số hạng; bằng công thức tổng quát; bằng hệ thức truy hồi; bằng cách mô tả.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Cách cho dãy số bằng liệt kê các số hạng"
   },
   {
-    "id": "L11_C2_B6_TH031_MC_A",
+    "id": "L11_C2_B5_TH031_MC_A",
     "content": "Nhận biết được tính chất tăng, giảm, bị chặn của dãy số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính chất tăng, giảm, bị chặn của dãy số"
   },
   {
-    "id": "L11_C2_B6_TH031_SA_A",
+    "id": "L11_C2_B5_TH031_SA_A",
     "content": "Nhận biết được tính chất tăng, giảm, bị chặn của dãy số.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số hạng thứ n của dãy số cho bởi công thức"
   },
   {
-    "id": "L11_C2_B7_NB032_MC_A",
+    "id": "L11_C2_B6_NB032_MC_A",
     "content": "Nhận biết được một dãy số là cấp số cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Một dãy số là cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_TH033_MC_A",
+    "id": "L11_C2_B6_TH033_MC_A",
     "content": "Giải thích được công thức xác định số hạng tổng quát của cấp số cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức xác định số hạng tổng quát của cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_TH033_SA_A",
+    "id": "L11_C2_B6_TH033_SA_A",
     "content": "Giải thích được công thức xác định số hạng tổng quát của cấp số cộng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác định công sai của cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_TH034_MC_A",
+    "id": "L11_C2_B6_TH034_MC_A",
     "content": "Tính được tổng của n số hạng đầu tiên của cấp số cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tổng của n số hạng đầu tiên của cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_TH034_SA_A",
+    "id": "L11_C2_B6_TH034_SA_A",
     "content": "Tính được tổng của n số hạng đầu tiên của cấp số cộng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số hạng tổng quát của cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_VD035_MC_A",
+    "id": "L11_C2_B6_VD035_MC_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề thực tiễn gắn với cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_VD035_SA_A",
+    "id": "L11_C2_B6_VD035_SA_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số cộng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tổng n số hạng đầu của cấp số cộng"
   },
   {
-    "id": "L11_C2_B7_VD035_TL_A",
+    "id": "L11_C2_B6_VD035_TL_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số cộng.",
     "Loai": "Tự luận",
     "Dang": "Bài toán về cấp số cộng"
   },
   {
-    "id": "L11_C2_B8_NB036_MC_A",
+    "id": "L11_C2_B7_NB036_MC_A",
     "content": "Nhận biết được một dãy số là cấp số nhân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Một dãy số là cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_NB036_TL_A",
+    "id": "L11_C2_B7_NB036_TL_A",
     "content": "Nhận biết được một dãy số là cấp số nhân.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn về cấp số cộng"
   },
   {
-    "id": "L11_C2_B8_TH037_MC_A",
+    "id": "L11_C2_B7_TH037_MC_A",
     "content": "Giải thích được công thức xác định số hạng tổng quát của cấp số nhân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Công thức xác định số hạng tổng quát của cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_TH038_MC_A",
+    "id": "L11_C2_B7_TH038_MC_A",
     "content": "Tính được tổng của n số hạng đầu tiên của cấp số nhân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tổng của n số hạng đầu tiên của cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_TH038_SA_A",
+    "id": "L11_C2_B7_TH038_SA_A",
     "content": "Tính được tổng của n số hạng đầu tiên của cấp số nhân.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số hạng tổng quát của cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_VD039_MC_A",
+    "id": "L11_C2_B7_VD039_MC_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số nhân.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề thực tiễn gắn với cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_VD039_SA_A",
+    "id": "L11_C2_B7_VD039_SA_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số nhân.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tổng n số hạng đầu của cấp số nhân"
   },
   {
-    "id": "L11_C2_B8_VD039_TL_A",
+    "id": "L11_C2_B7_VD039_TL_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với cấp số nhân.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn về cấp số nhân"

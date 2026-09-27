@@ -4637,3 +4637,71 @@ vi ma van khop chuoi nen may khong bao loi, chi lang le lay sai bai.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.80 - 2026-09-27
+
+## Dung lai PPCT tu KE HOACH DAY HOC THAT cua to
+
+Co Lan gui "Ke hoach giang day toan chung nam hoc 2026-2027.docx" (kem quyet
+dinh 97/QD-THPTCHV ngay 29/08/2026). Doi chieu thi PPCT trong kho SAI:
+
+    data/ppct/toan11.json  chi co 18 bai (het HK I) va LECH MOT BAI:
+        ghi B1 "Goc luong giac", B2 "Gia tri luong giac..."
+        that ra B1 la "Gia tri luong giac cua goc luong giac" (mot bai)
+    data/ppct/toan12.json  chi co 16 bai, thieu 3 bai va lech so tu B5 tro di
+
+Da dung lai ca ba tep tu van ban that:
+
+    toan10.json  27 bai / 9 chuong  (HK1 14 bai, HK2 13 bai)  - trung voi ban cu
+    toan11.json  33 bai / 9 chuong  (HK1 17 bai, HK2 16 bai)  - truoc chi co 18
+    toan12.json  19 bai / 6 chuong  (HK1 10 bai, HK2  9 bai)  - truoc chi co 16
+
+Kem tuan bat dau / tuan ket thuc / tiet / hoc ky lay tu chinh ke hoach.
+Keywords cua lop 10 giu nguyen tu ban cu.
+
+## Hau qua: phai chinh lai curriculum lop 11 va 12
+
+Version 2.79 da chinh curriculum theo PPCT SAI, nay chinh lai theo PPCT dung.
+
+Lop 11: bo phan tach C1_B1 lam hai (PPCT that chi co MOT bai "Gia tri luong
+giac cua goc luong giac"); Gioi han ve lai chuong V bai 15-17; Thong ke ve lai
+chuong III bai 8-9. Ket qua bai 1-33 dung nhu SGK Ket noi tri thuc - tinh co
+la trung voi ban Claude dung ban dau.
+
+Lop 12: PPCT that co 19 bai chu khong phai 16. Ba bai truoc bi gop nham nay
+tach ra dung:
+    B5  Ung dung dao ham de giai quyet mot so van de lien quan den thuc tien
+    B8  Bieu thuc toa do cua cac phep toan vecto
+    B16 Cong thuc tinh goc trong khong gian
+
+## Ket qua doi chieu
+
+    Lop 10: PPCT 27 bai | Curriculum 154 yeu cau tren 27 bai | 261 dang
+    Lop 11: PPCT 33 bai | Curriculum 148 yeu cau tren 33 bai | 238 dang
+    Lop 12: PPCT 19 bai | Curriculum  58 yeu cau tren 19 bai | 113 dang
+
+KHONG con bai nao cua PPCT thieu yeu cau can dat. Khong con bai nao lech ten.
+Chu cai dang A/B/C giu nguyen het (0 cho phai doi).
+
+## THIEU: chuyen de hoc tap
+
+Ke hoach co ca chuyen de hoc tap ma he thong CHUA co gi:
+
+    Lop 10  8 bai   CD1 He phuong trinh bac nhat ba an (b1-2)
+                    CD2 Quy nap toan hoc, Nhi thuc Newton (b3-4)
+                    CD3 Elip, Hypebol, Parabol, Su thong nhat ba duong conic (b5-8)
+    Lop 11 12 bai   CD1 Phep bien hinh (b1-7)
+                    CD2 Graph, Euler, Hamilton, duong di toi uu (b8-10)
+                    CD3 Hinh chieu vuong goc, Ban ve ki thuat (b11-12)
+    Lop 12  7 bai   CD1 Bien ngau nhien roi rac (b1-2)
+                    CD2 He bat phuong trinh, dao ham toi uu (b3-4)
+                    CD3 Tien te, tin dung, dau tu tai chinh (b5-7)
+
+Da ghi lai o data/ppct/chuyen_de.json de biet con thieu gi. CHUA dua vao
+curriculum/mapping - he thong chua ra de duoc phan chuyen de.
+
+273 bai test qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

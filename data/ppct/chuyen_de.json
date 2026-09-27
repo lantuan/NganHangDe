@@ -1,0 +1,178 @@
+{
+  "_ghi_chu": [
+    "Chuyen de hoc tap trong Ke hoach day hoc cua to, nam hoc 2026-2027.",
+    "Trich tu 'Ke hoach giang day toan chung nam hoc 2026-2027.docx'.",
+    "CHUA co trong data/curriculum va data/mapping -> he thong chua ra de duoc",
+    "phan chuyen de. Day la danh sach de biet con thieu gi."
+  ],
+  "chuyen_de": {
+    "10": [
+      {
+        "chuyen_de": 1,
+        "bai_so": 1,
+        "bai": "Hệ phương trình bậc nhất ba ẩn",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 2,
+        "bai": "Ứng dụng của hệ phương trình bậc nhất ba ẩn",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 3,
+        "bai": "Phương pháp quy nạp toán học",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 4,
+        "bai": "Nhị thức Newton",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 5,
+        "bai": "Elip",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 6,
+        "bai": "Hypebol",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 7,
+        "bai": "Parabol",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 8,
+        "bai": "Sự thống nhất giữa ba đường conic",
+        "hoc_ky": 2
+      }
+    ],
+    "11": [
+      {
+        "chuyen_de": 1,
+        "bai_so": 1,
+        "bai": "Phép biến hình",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 2,
+        "bai": "Phép tịnh tiến",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 3,
+        "bai": "Phép đối xứng trục",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 4,
+        "bai": "Phép quay và phép đối xứng tâm",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 5,
+        "bai": "Phép dời hình",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 6,
+        "bai": "Phép vị tự",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 7,
+        "bai": "Phép đồng dạng",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 8,
+        "bai": "Một số khái niệm cơ bản về Graph",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 9,
+        "bai": "Đường đi Euler và đường đi Hamilton",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 10,
+        "bai": "Bài toán tìm đường đi tối ưu trong một số trường hợp đơn giản",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 11,
+        "bai": "Hình chiếu vuông góc và hình chiếu trục đo",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 12,
+        "bai": "Bản vẽ kỹ thuật",
+        "hoc_ky": 2
+      }
+    ],
+    "12": [
+      {
+        "chuyen_de": 1,
+        "bai_so": 1,
+        "bai": "Biến ngẫu nhiên rời rạc và các số đặc trưng",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 1,
+        "bai_so": 2,
+        "bai": "Biến ngẫu nhiên có phân bố nhị thức và áp dụng",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 3,
+        "bai": "Vận dụng hệ bất phương trình bậc nhất để giải quyết một số bài toán quy hoạch tuyến tính",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 2,
+        "bai_so": 4,
+        "bai": "Vận dụng đạo hàm để giải quyết một số bài toán tối ưu",
+        "hoc_ky": 1
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 5,
+        "bai": "Tiền tệ - lãi suất",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 6,
+        "bai": "Tín dụng – Vay nợ",
+        "hoc_ky": 2
+      },
+      {
+        "chuyen_de": 3,
+        "bai_so": 7,
+        "bai": "Đầu tư tài chính. Lập kế hoạch tài chính cá nhân",
+        "hoc_ky": 2
+      }
+    ]
+  }
+}
