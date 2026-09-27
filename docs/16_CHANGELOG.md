@@ -4103,3 +4103,85 @@ dung dai dien de xoa khi trong thu muc co ca tep nguon lan tep tam.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.71 - 2026-09-27
+
+## SKKN: cat ngan, dan link + QR thay cho in day du
+
+Co Lan yeu cau: bo diem thi vao 10; SKKN ngan gon, tam 50 trang; tap trung vao
+phan cot loi la tao web; code Python / json / diff chi neu vai cai co ban roi
+dan link + QR len GitHub cho giam khao tu vao coi.
+
+## Ket qua do (tat ghi chu do, la ban se in nop)
+
+  Truoc      : 66 trang
+  Sau        : 55 trang  (14pt, gian dong 1,5 - dung quy dinh)
+  Neu 13pt   : 35 trang
+
+LUU Y QUAN TRONG: 22/23 cho chen anh hien con la O DO (chua chup). Khi dan anh
+that vao, tai lieu se DAI THEM khoang 2,5-3 trang -> ban 14pt se ra ~58 trang.
+Muon ve dung ~50 thi phai giam so anh xuong khoang 12 cho.
+
+## Da cat gi
+
+Qua trinh cai tien: 20 dong -> 7 dong tieu bieu, dan QR sang docs/16_CHANGELOG.md
+Loi thuong gap    : 14 dong -> 6 dong, dan QR sang docs/
+Huong phat trien  : 6 muc con -> 6 doan van ngan gon
+Don yeu cau 5.1-5.2: gon lai (than bai da trinh bay day du)
+Co so li luan     : gon can cu phap li, bo muc (e) trung voi Mo dau
+Thuc trang        : gon ba doan phan tich nhom 1/2/3
+Vai tro tro li AI : 3 doan -> 2 doan
+Muc tieu cu the   : bo 4 tieu de nhom rieng, gop thanh 1 danh sach 7 muc
+
+## KHONG cat (dung y co Lan)
+
+Huong dan su dung giu day du - co Lan noi "noi dung van phai neu ro, y dinh cua
+toi phai co du (doi voi ban hoan chinh)".
+Giai phap 1-8 giu nguyen - day la phan cot loi tao web.
+
+## Ma QR
+
+Them goi qrcode. Lenh moi \linkqr{duong-dan}{mo ta}: o co ma QR ben trai,
+duong dan ben phai. QR do LaTeX sinh ra TU CHINH duong dan in ben canh nen ma
+va duong dan khong the lech nhau - khong con phai dan anh QR thu cong.
+
+5 cho co QR: dia chi web (muc Huong dan), ma nguon + so tay (Giai phap 9),
+nhat ki cai tien (Qua trinh cai tien), bang loi day du (Huong dan), va Phu luc
+muc B (4 ma QR: he thong dang chay, ma nguon, ngan hang cau hoi Python, so tay).
+
+## Phu luc viet lai
+
+Phan A: 4 phu luc in kem (phieu khao sat, 1 de hoan chinh + loi giai, 2 ma de
+cung cau truc, ma tran chi tiet).
+Phan B: 4 ma QR de hoi dong quet dien thoai xem truc tiep + bang tai khoan dung
+thu cho hoi dong. KHONG in code Python vao bao cao (L10_C1.py co 7855 dong).
+
+## Thiet ke thuc nghiem - viet lai theo huong co Lan chon
+
+Bo hoan toan phan dua vao diem thi vao 10 va ANCOVA. Thay bang 4 co so bao dam
+tuong dong: cung la lop chuyen Dia, cung mot giao vien day, cung don vi kien
+thuc + cung ma tran trong de, cung thoi diem trong nam hoc.
+
+Van giu mot cau noi thang rang day la doi chung lich su nen khong loai tru het
+duoc khac biet giua hai lua - va khac phuc bang thiet ke thu hai chay song song:
+so TRUOC-SAU ngay trong lop thuc nghiem (so chinh cac em voi chinh minh, khong
+ai bat loi duoc ve chuyen khac lua). Bang 12 rut tu 7 xuong 5 phep kiem dinh
+(bo ANCOVA va dong kiem dinh dau vao). Bang 13 rut con 3 dong.
+
+## Sua loi phat hien trong luc lam
+
+1. Loi danh may trong 05: mot cho viet "extit" (thieu dau gach cheo) - da sua.
+2. 02_mo_dau con ghi "khu lam viec rieng cho giao vien" o muc DANG XAY DUNG,
+   nhung Giai phap 7 lai noi da xong -> mau thuan, hoi dong doc se bat. Da
+   chuyen sang muc DA HOAN THANH.
+3. Bon anh bi chen HAI LAN trong cung bao cao (01, 02, 07, 15). Da bo ban lap
+   trong muc Huong dan, thay bang dan chieu \ref den hinh goc. Them nhan tu
+   dong cho moi hinh de dan chieu duoc.
+4. Do rong anh khong nhat quan (0.92 / 0.9 / 0.85 / 0.75 / 0.7) - chuan hoa ve
+   0.68 het.
+5. Bo ngat trang giua cac muc con trong Phan II (tiet kiem 3 trang, khong mat
+   chu nao).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

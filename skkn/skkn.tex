@@ -33,6 +33,7 @@
         framexleftmargin=0.5cm, aboveskip=10pt, belowskip=10pt}
 \usepackage{titlesec}
 \usepackage[hidelinks, unicode]{hyperref}
+\usepackage{qrcode}   % ma QR cho cac duong dan (goi qrcode cua TeX Live)
 \usepackage{fancyhdr}
 \usepackage[font=small, labelfont=bf, justification=centering]{caption}
 
@@ -94,7 +95,7 @@ hỗ trợ giáo viên biên soạn đề kiểm tra và tổ chức kiểm tra,
 % \chenanh[do rong]{ten-file.png}{Chu thich hinh}
 % Neu file da co trong thu muc hinhanh/ thi chen anh that,
 % neu chua co thi hien mot o vuong do bao cho biet cho nay can chup anh gi.
-\newcommand{\chenanh}[3][0.85]{%
+\newcommand{\chenanh}[3][0.65]{%
   \begin{figure}[H]
     \centering
     \IfFileExists{hinhanh/#2}%
@@ -107,8 +108,22 @@ hỗ trợ giáo viên biên soạn đề kiểm tra và tổ chức kiểm tra,
          \itshape\small Cần chụp: #3
          \vspace{1.2cm}
        \end{minipage}}}}%
-    \caption{#3}
+    \caption{#3}\label{hinh:#2}
   \end{figure}}
+
+% \linkqr{duong-dan}{mo ta ngan}
+% Hien mot o co ma QR ben trai va duong dan ben phai, de giam khao quet dien thoai.
+\newcommand{\linkqr}[2]{%
+  \begin{center}
+  \setlength{\fboxsep}{8pt}%
+  \fbox{\begin{minipage}{0.88\linewidth}
+    \begin{minipage}{2.6cm}\centering\qrcode[height=2.3cm]{#1}\end{minipage}%
+    \hfill
+    \begin{minipage}{\dimexpr\linewidth-3.1cm\relax}
+      \small\textbf{#2}\\[3pt]\url{#1}
+    \end{minipage}
+  \end{minipage}}
+  \end{center}}
 
 % =====================================================================
 \begin{document}

@@ -6,97 +6,58 @@
 Tại thời điểm hoàn thành bài viết này, hệ thống đã chạy đủ \textbf{cả hai vòng}:
 vòng của học sinh (tạo đề, làm bài, chấm điểm, hỏi lại bài đã làm, trả kết quả
 về Google Classroom) và vòng của giáo viên (ra đề nhiều mã, tải mã nguồn
-\LaTeX, quản lí lớp, thống kê, đọc nhật kí trợ giảng).
+\LaTeX, quản lí lớp, thống kê, đọc nhật kí trợ giảng). Những phần dưới đây là
+việc còn lại, xếp theo thứ tự tôi sẽ làm.
 
-Bốn chức năng mà bản thảo trước của bài viết này còn để ở mục ``hướng phát
-triển'' --- khu làm việc riêng cho giáo viên, sinh một lượt nhiều mã đề, tải mã
-nguồn \LaTeX, quản lí lớp --- nay đã hoàn thành và được trình bày ở Giải pháp
-7. Các hướng dưới đây là phần còn lại.
+\textbf{(1) Mở rộng ngân hàng câu hỏi.} Ngân hàng hiện mới phủ chương I lớp 10;
+kế hoạch là hoàn thiện các chương còn lại của lớp 10, sau đó đến lớp 11 và 12.
+Ô mỏng nhất của ma trận là câu trả lời ngắn mức vận dụng cao --- và dòng
+``[THIẾU CÂU HỎI]'' trong đề chính là danh sách việc cần làm do hệ thống tự chỉ
+ra. Về lâu dài, nếu mỗi giáo viên trong tổ đóng góp hàm sinh cho một vài bài
+mình dạy kĩ nhất thì ngân hàng chung sẽ lớn rất nhanh.
 
-\subsubsection{Mở rộng ngân hàng câu hỏi}
+\textbf{(2) Tổ chức lại ngân hàng khi quy mô lớn lên.} Khi vượt vài nghìn câu,
+việc tra cứu và chống trùng lặp thành vấn đề mới. Việc làm trước là một chương
+trình quét toàn bộ thư mục câu hỏi để lập bảng tổng hợp: bài nào mức nào đang
+thiếu câu, mã nào có trong bảng ánh xạ mà chưa có hàm sinh. Xa hơn có thể thêm
+một lớp tìm kiếm theo nghĩa bằng kĩ thuật nhúng vecto, để giáo viên tìm được câu
+hỏi mà không cần nhớ mã. Cần nói rõ để tránh hiểu nhầm: tìm kiếm vecto chỉ cho
+kết quả gần đúng nên chỉ dùng để \textit{tìm}, hoàn toàn \textbf{không} thay cách
+chọn câu theo mã định danh trong luồng sinh đề --- việc ra đề đòi hỏi đúng tuyệt
+đối về bài, mức độ và loại câu.
 
-Ngân hàng hiện mới phủ chương I lớp 10. Kế hoạch mở rộng theo thứ tự: hoàn
-thiện các chương còn lại của lớp 10, sau đó đến lớp 11 và lớp 12. Riêng dạng
-câu trả lời ngắn mức vận dụng cao đang là ô mỏng nhất của ma trận --- đây là
-việc cần làm trước tiên, và dòng ``[THIẾU CÂU HỎI]'' trong đề chính là danh
-sách việc cần làm do hệ thống tự chỉ ra.
+\textbf{(3) Chấm câu tự luận.} Hiện phần tự luận 3 điểm học sinh làm ra giấy.
+Hướng phát triển là cho học sinh chụp ảnh bài làm viết tay để đối chiếu với lời
+giải chuẩn mà hàm sinh câu hỏi đã tạo ra. Phần kĩ thuật đã dựng xong và chạy
+thông với ảnh thử, nhưng tôi chủ động chưa đưa vào sử dụng vì chưa kiểm chứng
+được độ chính xác khi đọc chữ viết tay thật --- một chức năng chấm điểm mà chưa
+chắc chắn thì chưa nên dùng. Màn hình hiện ghi rõ ``đang được xây dựng'' để học
+sinh không hiểu nhầm.
 
-Về lâu dài, nếu được tổ chuyên môn hưởng ứng, mỗi giáo viên đóng góp hàm sinh
-câu hỏi cho một vài bài mình dạy kĩ nhất thì ngân hàng chung của tổ sẽ lớn rất
-nhanh --- đây là mô hình làm việc mà tôi mong muốn hướng tới.
+\textbf{(4) Phân tích kết quả và gợi ý luyện tập cá nhân hoá.} Hệ thống đã lưu
+đủ dữ liệu để biết mỗi em sai nhiều ở bài nào, mức độ nào. Bước tiếp theo là tự
+động chỉ ra điểm yếu của từng em và gợi ý ngay một đề luyện tập đúng vào phần
+yếu đó, chỉ bằng một nút bấm. Khi có chức năng này, vòng ``học --- kiểm tra ---
+biết mình yếu chỗ nào --- luyện đúng chỗ đó'' mới thực sự khép kín, đúng tinh
+thần \textit{đánh giá vì sự tiến bộ của người học} của Thông tư 22/2021/TT-BGDĐT.
 
-\subsubsection{Tổ chức lại ngân hàng khi quy mô lớn lên}
+\textbf{(5) Trợ giảng mức B --- chỉ đúng chỗ trong tài liệu lí thuyết.} Trợ giảng
+hiện có (Giải pháp 8) giảng lại \textit{chính câu} học sinh vừa làm sai --- tôi
+gọi là \textbf{mức A}. Nhưng có em nghe giảng lại vẫn chưa thông, vì chỗ hổng nằm
+ở phần lí thuyết phía trước. \textbf{Mức B} giải quyết việc đó: khi học sinh bấm
+``em vẫn chưa hiểu'', hệ thống chỉ đúng phần lí thuyết cần đọc lại trong tài liệu
+của chính tôi, để trợ giảng \textit{tự biên diễn trong đó}, không nói ra ngoài.
+Phần chuẩn bị đã xong: 87 tệp lí thuyết \LaTeX\ của tôi đã đưa vào hệ thống kèm
+bảng ánh xạ nối từng bài trong chương trình với tệp tương ứng. Bảng này phải viết
+tay vì quan hệ là \textbf{nhiều--nhiều} --- cách chia bài trong tài liệu không
+trùng cách chia của chương trình, và khớp tự động theo tên chỉ đúng được mười một
+trên hai mươi tám tệp. Tôi cũng đã đo để biết nạp bao nhiêu là vừa: cả tệp trung
+bình 34 nghìn kí tự là quá lớn, riêng phần lí thuyết trung bình 4{,}5 nghìn kí
+tự là vừa đủ.
 
-Khi ngân hàng vượt vài nghìn câu hỏi, việc tra cứu và chống trùng lặp sẽ thành
-vấn đề mới. Hướng xử lí dự kiến chia làm hai mức:
+\textbf{(6) Nhiều giáo viên trong tổ cùng dùng.} Hệ thống đã có luồng đăng kí
+tài khoản giáo viên bằng mã mời và phân quyền theo vai trò. Bước tiếp theo là để
+mỗi thầy cô quản lí lớp của riêng mình --- kho đề riêng, danh sách lớp riêng,
+thống kê riêng --- và tổ trưởng chuyên môn xem được tổng hợp toàn tổ.
 
-\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
-  \item \textbf{Mức 1 --- chỉ mục ngân hàng.} Một chương trình quét toàn bộ
-        thư mục câu hỏi và lập ra bảng tổng hợp: bài nào, mức độ nào đang
-        thiếu câu; mã nào có trong bảng ánh xạ nhưng chưa có hàm sinh; mỗi bài
-        hiện có bao nhiêu câu mỗi mức. Kèm theo là bộ dò các câu hỏi trùng
-        nghĩa. Mức này không cần công nghệ gì mới và là việc làm trước.
-  \item \textbf{Mức 2 --- tìm kiếm theo nghĩa.} Khi giáo viên cần tìm câu hỏi
-        mà không nhớ mã, có thể dùng kĩ thuật \textit{nhúng vecto}: mỗi câu hỏi
-        được biểu diễn thành một vecto trong không gian nhiều chiều sao cho hai
-        câu gần nhau về nghĩa thì hai vecto gần nhau, và việc tìm kiếm trở
-        thành tìm vecto có cô-sin góc lớn nhất. Cơ sở dữ liệu đang dùng đã hỗ
-        trợ sẵn kiểu dữ liệu này nên không phải dựng thêm hạ tầng.
-\end{itemize}
-
-Cần nói rõ để tránh hiểu nhầm: kĩ thuật vecto \textbf{không} thay thế cách chọn
-câu hiện tại. Việc chọn câu theo ma trận đòi hỏi đúng tuyệt đối về bài, mức độ
-và loại câu, nên phải tra theo mã định danh --- đó là tra từ điển, chính xác
-hoàn toàn. Tìm kiếm vecto chỉ cho kết quả gần đúng có xếp hạng, phù hợp với
-việc \textit{tìm}, không phù hợp với việc \textit{ra đề}. Vì vậy nếu triển
-khai, nó sẽ là một lớp tìm kiếm phụ đặt bên cạnh cho giáo viên dùng, chứ không
-nằm trong luồng sinh đề.
-
-\subsubsection{Chấm câu tự luận}
-
-Hiện phần tự luận 3 điểm học sinh làm ra giấy. Hướng phát triển là cho học sinh
-chụp ảnh bài làm viết tay và bài chấm được đối chiếu với lời giải chuẩn mà hàm
-sinh câu hỏi đã tạo ra. Phần kĩ thuật đã dựng xong và chạy thông với ảnh thử,
-nhưng tôi chủ động chưa đưa vào sử dụng vì chưa kiểm chứng được độ chính xác
-khi đọc chữ viết tay thật của học sinh --- một chức năng chấm điểm mà chưa chắc
-chắn thì chưa nên dùng. Màn hình hiện đang ghi rõ ``chức năng chấm tự luận đang
-được xây dựng'' để học sinh không hiểu nhầm.
-
-\subsubsection{Phân tích kết quả và gợi ý luyện tập cá nhân hoá}
-
-Hệ thống đã lưu đủ dữ liệu để biết mỗi học sinh sai nhiều ở bài nào, mức độ
-nào. Bước tiếp theo là tự động chỉ ra điểm yếu của từng em và gợi ý ngay một đề
-luyện tập đúng vào phần yếu đó, chỉ bằng một nút bấm. Khi có chức năng này,
-vòng ``học --- kiểm tra --- biết mình yếu chỗ nào --- luyện đúng chỗ đó'' mới
-thực sự khép kín, và đúng tinh thần \textit{đánh giá vì sự tiến bộ của người
-học} của Thông tư 22/2021/TT-BGDĐT.
-
-\subsubsection{Trợ giảng mức B --- chỉ đúng chỗ trong tài liệu lí thuyết}
-
-Trợ giảng hiện có (Giải pháp 8) giảng lại \textit{chính câu} học sinh vừa làm
-sai --- tôi gọi là \textbf{mức A}. Nhưng có những em nghe giảng lại vẫn chưa
-thông, vì chỗ hổng nằm ở phần lí thuyết phía trước chứ không ở câu đó.
-
-\textbf{Mức B} giải quyết việc này: khi học sinh bấm ``em vẫn chưa hiểu'', hệ
-thống chỉ đúng phần lí thuyết cần đọc lại trong tài liệu của chính tôi --- để
-trợ giảng \textit{tự biên diễn trong đó}, không nói ra ngoài.
-
-Phần chuẩn bị đã xong: 87 tệp lí thuyết \LaTeX\ của tôi đã đưa vào hệ thống,
-kèm một bảng ánh xạ nối từng bài trong chương trình với tệp tương ứng. Bảng này
-phải viết tay, vì quan hệ là \textbf{nhiều--nhiều}: cách chia bài trong tài liệu
-không trùng cách chia của chương trình --- chẳng hạn bài ``Các phép toán trên
-vectơ'' ứng với ba tệp, còn ``Tập hợp và các phép toán trên tập hợp'' ứng với
-hai tệp. Khớp tự động theo tên chỉ đúng được mười một trên hai mươi tám tệp.
-
-Tôi cũng đã đo để biết nạp bao nhiêu là vừa: cả tệp trung bình 34 nghìn kí tự
---- quá lớn; riêng phần lí thuyết trung bình 4{,}5 nghìn kí tự --- vừa đủ. Nên
-mức B chỉ nạp phần lí thuyết, và chỉ nạp khi học sinh thực sự bấm hỏi tiếp.
-
-\subsubsection{Nhiều giáo viên trong tổ cùng dùng}
-
-Hệ thống đã có luồng đăng kí tài khoản giáo viên bằng mã mời và phân quyền theo
-vai trò. Bước tiếp theo là để mỗi thầy cô quản lí lớp của riêng mình: kho đề
-riêng, danh sách lớp riêng, thống kê riêng --- và tổ trưởng chuyên môn xem được
-tổng hợp toàn tổ.
-
-\clearpage
+\bigskip
