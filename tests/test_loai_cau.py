@@ -105,22 +105,8 @@ def _ham_sa_tl():
     return ra
 
 
-# Ham da co san trong ngan hang nhung CHUA dung quy uoc, cho co Lan quyet.
-# Khi nao sua xong thi xoa khoi danh sach nay - bai test se tu doi hoi lai.
-CHUA_DUNG_QUY_UOC = {
-    # Tu luan nhung chi co MOT y ("So gia tri nguyen cua m de A hop B = A").
-    # Theo quy uoc thi mot cau mot dap an la TRA LOI NGAN. Hai cach sua:
-    # them mot y thu hai, hoac doi sang dang _SA_ (phai sua ca Mapping).
-    # Trong luc cho: khi ra de, ham nay bi chan va he thong bao thieu, khong
-    # cho cau sai loai vao de cua hoc sinh.
-    "L10_C1_B2_VD021_TL_A_01",
-}
-
-
 @pytest.mark.parametrize("ten,ham", _ham_sa_tl(), ids=lambda x: x if isinstance(x, str) else "")
 def test_moi_ham_da_co_deu_dung_loai(ten, ham):
     """Chay that tung ham _SA_ / _TL_ trong ngan hang, soi theo dung ten no."""
-    if ten in CHUA_DUNG_QUY_UOC:
-        pytest.skip("cho co Lan sua: %s chua dung quy uoc loai cau" % ten)
     khoi = ham(1, 2 if "_SA_" in ten else 1)
     kiem_tra_dung_loai_cau(ten, khoi)

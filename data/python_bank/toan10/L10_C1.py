@@ -6877,344 +6877,172 @@ Vậy lớp 10A có tất cả ${z_ans}$ học sinh không tham gia văn nghệ.
 
     return cauTN
 
-def L10_C1_B2_VD021_MC_A_01(socau, dang=1):
+# =====================================================================
+# DẠNG VD021: tìm tham số m để hợp / giao của hai tập thoả điều kiện
+# ---------------------------------------------------------------------
+# Dùng CHUNG cho câu trắc nghiệm (_MC_A) và câu trả lời ngắn (_SA_A), để hai
+# câu không bao giờ lệch nhau về đề bài hoặc lời giải.
+#
+# SỬA TOÁN 27/09/2026 - hai chỗ trước đây cho đáp số sai:
+#   1) Đề phải nói rõ $B \ne \varnothing$. Nếu không, với $m \le n$ thì
+#      $B = \varnothing$; mà $\varnothing \subset A$ nên $A \cup B = A$ vẫn
+#      đúng, và $A \cap B = \varnothing$ cũng vẫn đúng. Khi đó có VÔ SỐ giá
+#      trị nguyên của $m$, không phải $b - n$ hay $a - n - 1$.
+#   2) Kiểu 2 dẫn tới $m \ge b$, kiểu 4 dẫn tới $m \ge a$ - tức cũng có VÔ SỐ
+#      giá trị nguyên của $m$. Bản cũ lặng lẽ lấy $m \le 15$ theo cách sinh
+#      số liệu, nhưng ĐỀ KHÔNG HỀ NÓI $m \le 15$ nên học sinh không thể biết.
+#      Nay hai kiểu này hỏi GIÁ TRỊ NGUYÊN NHỎ NHẤT của $m$ - luôn tồn tại và
+#      duy nhất, đúng tinh thần một câu một đáp số.
+# =====================================================================
+def _VD021_ngoac(x):
+    """Bọc ngoặc số âm để phép trừ không ra hai dấu trừ liền nhau: 10 - (-1)."""
+    return f"\\left( {x} \\right)" if x < 0 else f"{x}"
 
-    gt = []
-    dem = 0
-    while dem < socau:
-        kieu = int(np.random.choice([1, 2, 3, 4]))
-        # 1: A \cup B = A
-        # 2: A \cup B = B
-        # 3: A \cap B = \varnothing
-        # 4: A \cap B \ne \varnothing
 
-        a_val = np.random.randint(-15, 5)
-        b_val = np.random.randint(a_val + 5, 16)
+def _VD021_liet_ke(dau, cuoi):
+    """Liệt kê các số nguyên từ dau đến cuoi.
 
-        # =========================
-        # KIỂU 1: A \cup B = A
-        # <=> B \subset A
-        # B = (n;m], cần n < m <= b
-        # Chọn n nằm trong A để lời giải gọn
-        # =========================
-        if kieu == 1:
-            n_val = np.random.randint(a_val + 1, b_val)
-            z_ans = b_val - n_val
+    Ít giá trị thì ghi ra hết; nhiều thì mới dùng dấu $\\ldots$ - tránh cảnh
+    vô lí như $\\left\\{ -9; -8; \\ldots; -8 \\right\\}$ khi chỉ có hai giá trị.
+    """
+    so = list(range(dau, cuoi + 1))
+    if len(so) <= 4:
+        ben_trong = "; ".join(str(x) for x in so)
+    else:
+        ben_trong = f"{so[0]}; {so[1]}; \\ldots; {so[-1]}"
+    return "\\left\\{ " + ben_trong + " \\right\\}"
 
-            if z_ans <= 0:
-                continue
 
-            v = [kieu, a_val, b_val, n_val, z_ans]
+def _VD021_de_giai(kieu, a_val, b_val, n_val):
+    """Trả về (debai, dapso, giai) cho một bộ số liệu của dạng VD021."""
 
-        # =========================
-        # KIỂU 2: A \cup B = B
-        # <=> A \subset B
-        # Với A = [a;b], B = (n;m]
-        # cần n < a và m >= b
-        # Chọn n < a để điều kiện còn lại chỉ là m >= b
-        # =========================
-        elif kieu == 2:
-            n_val = np.random.randint(a_val - 8, a_val)
-            z_ans = 16 - b_val   # m nguyên từ b_val đến 15
+    cho = (f"Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và "
+           f"$B = \\left( {n_val}; m \\right]$, trong đó $m$ là số nguyên "
+           f"sao cho $B \\ne \\varnothing$. ")
 
-            if z_ans <= 0:
-                continue
+    # ---- KIỂU 1: A ∪ B = A  ⟺  B ⊂ A. Vì n > a nên chỉ cần m ≤ b ----
+    if kieu == 1:
+        dapso = b_val - n_val
+        debai = cho + ("Có tất cả bao nhiêu giá trị nguyên của tham số $m$ "
+                       "để $A \\cup B = A$?")
+        giai = f"""Ta có $A \\cup B = A \\Leftrightarrow B \\subset A$.\\\\
+Vì $B \\ne \\varnothing$ nên $m > {n_val}$.\\\\
+Do ${n_val} > {a_val}$ nên đầu bên trái của $B$ đã nằm trong $A$, vậy chỉ cần thêm
+$m \\le {b_val}$.\\\\
+Suy ra
+$\\heva{{m > {n_val} \\\\ m \\le {b_val}}}$ hay ${n_val} < m \\le {b_val}$.\\\\
+Vì $m \\in \\mathbb{{Z}}$ nên $m \\in {_VD021_liet_ke(n_val + 1, b_val)}$,
+số giá trị nguyên của $m$ là ${b_val} - {_VD021_ngoac(n_val)} = {dapso}$.\\\\
+Vậy có tất cả ${dapso}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
 
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        # =========================
-        # KIỂU 3: A \cap B = \varnothing
-        # Ép B nằm hoàn toàn bên trái A
-        # B = (n;m], cần n < m < a
-        # =========================
-        elif kieu == 3:
-            n_val = np.random.randint(a_val - 8, a_val - 1)
-            z_ans = a_val - n_val - 1   # số m nguyên thỏa n < m < a
-
-            if z_ans <= 0:
-                continue
-
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        # =========================
-        # KIỂU 4: A \cap B \ne \varnothing
-        # Chọn n < a để khi đó giao khác rỗng <=> m >= a
-        # Vì A chứa a_val, B = (n;m] chứa a_val khi m >= a_val
-        # m nguyên từ a_val đến 15
-        # =========================
-        else:
-            n_val = np.random.randint(a_val - 8, a_val)
-            z_ans = 16 - a_val   # m nguyên từ a_val đến 15
-
-            if z_ans <= 0:
-                continue
-
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        if v not in gt:
-            gt.append(v)
-            dem += 1
-
-    cauTN = ''
-    for v in gt:
-        kieu, a_val, b_val, n_val, z_ans = v
-
-        ds_nhieu_so = []
-        sai_so = [-3, -2, -1, 1, 2, 3, 4]
-        for delta in sai_so:
-            val_nhieu = z_ans + delta
-            if val_nhieu >= 0 and val_nhieu != z_ans and val_nhieu not in ds_nhieu_so:
-                ds_nhieu_so.append(val_nhieu)
-
-        if len(ds_nhieu_so) < 3:
-            continue
-
-        nhieu_chon = list(np.random.choice(ds_nhieu_so, size=3, replace=False))
-        dsnhieu = [
-            f"""${nhieu_chon[0]}$""",
-            f"""${nhieu_chon[1]}$""",
-            f"""${nhieu_chon[2]}$"""
-        ]
-
-        # =========================
-        # KIỂU 1: A \cup B = A
-        # =========================
-        if kieu == 1:
-            debai = f"""Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$. Có tất cả bao nhiêu giá trị nguyên của tham số $m$ để $A \\cup B = A$?"""
-            dapso = f"""${z_ans}$"""
-
-            giai = f"""Ta có $A \\cup B = A \\Leftrightarrow B \\subset A$.\\\\
-Vì $B = \\left( {n_val}; m \\right]$ nên để $B \\subset A = \\left[ {a_val}; {b_val} \\right]$ thì cần
-$\\heva{{m > {n_val} \\\\ m \\le {b_val}}}$.\\\\
-Suy ra ${n_val} < m \\le {b_val}$.\\\\
-Vì $m \\in \\mathbb{{Z}}$ nên số giá trị nguyên của $m$ là
-${b_val} - {n_val} = {z_ans}$.\\\\
-Vậy có tất cả ${z_ans}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
-
-        # =========================
-        # KIỂU 2: A \cup B = B
-        # =========================
-        elif kieu == 2:
-            debai = f"""Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$. Có tất cả bao nhiêu giá trị nguyên của tham số $m$ để $A \\cup B = B$?"""
-            dapso = f"""${z_ans}$"""
-
-            giai = f"""Ta có $A \\cup B = B \\Leftrightarrow A \\subset B$.\\\\
+    # ---- KIỂU 2: A ∪ B = B  ⟺  A ⊂ B  ⟺  m ≥ b (có vô số m nguyên) ----
+    elif kieu == 2:
+        dapso = b_val
+        debai = cho + ("Tìm giá trị nguyên nhỏ nhất của tham số $m$ "
+                       "để $A \\cup B = B$.")
+        giai = f"""Ta có $A \\cup B = B \\Leftrightarrow A \\subset B$.\\\\
 Với $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$, để $A \\subset B$ thì cần
 $\\heva{{{n_val} < {a_val} \\\\ m \\ge {b_val}}}$.\\\\
-Do ${n_val} < {a_val}$ luôn đúng theo cách chọn dữ liệu nên chỉ cần
+Bất đẳng thức ${n_val} < {a_val}$ đã đúng, nên điều kiện còn lại là
 $m \\ge {b_val}$.\\\\
-Vì $m \\in \\mathbb{{Z}}$ và theo cách sinh dữ liệu ta có $m \\le 15$, nên
-$m \\in \\{{{b_val}, {b_val + 1}, \\ldots, 15\\}}$.\\\\
-Số giá trị nguyên của $m$ là
-$15 - {b_val} + 1 = {z_ans}$.\\\\
-Vậy có tất cả ${z_ans}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
+Có vô số số nguyên $m$ thỏa mãn, nhưng số nguyên NHỎ NHẤT trong số đó là
+$m = {b_val}$.\\\\
+Thử lại: với $m = {b_val}$ thì $B = \\left( {n_val}; {b_val} \\right] \\supset \\left[ {a_val}; {b_val} \\right] = A$, suy ra $A \\cup B = B$.\\\\
+Vậy $m = {dapso}$."""
 
-        # =========================
-        # KIỂU 3: A \cap B = \varnothing
-        # =========================
-        elif kieu == 3:
-            debai = f"""Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$. Có tất cả bao nhiêu giá trị nguyên của tham số $m$ để $A \\cap B = \\varnothing$?"""
-            dapso = f"""${z_ans}$"""
-
-            giai = f"""Để $A \\cap B = \\varnothing$ thì hai tập hợp không có phần tử chung.\\\\
-Với $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$, để $B$ nằm hoàn toàn bên trái $A$ thì cần
+    # ---- KIỂU 3: A ∩ B = ∅. B ≠ ∅ nên n < m, và B nằm hẳn bên trái A ----
+    elif kieu == 3:
+        dapso = a_val - n_val - 1
+        debai = cho + ("Có tất cả bao nhiêu giá trị nguyên của tham số $m$ "
+                       "để $A \\cap B = \\varnothing$?")
+        giai = f"""Vì $B \\ne \\varnothing$ nên $m > {n_val}$.\\\\
+Do ${n_val} < {a_val}$, tập $B = \\left( {n_val}; m \\right]$ nằm bên trái $A = \\left[ {a_val}; {b_val} \\right]$;
+hai tập không có phần tử chung khi và chỉ khi
 $m < {a_val}$.\\\\
-Mặt khác, để $B = \\left( {n_val}; m \\right]$ là tập hợp khác rỗng thì cần
-$m > {n_val}$.\\\\
 Suy ra
-${n_val} < m < {a_val}$.\\\\
-Vì $m \\in \\mathbb{{Z}}$ nên số giá trị nguyên của $m$ là
-${a_val} - {n_val} - 1 = {z_ans}$.\\\\
-Vậy có tất cả ${z_ans}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
+$\\heva{{m > {n_val} \\\\ m < {a_val}}}$ hay ${n_val} < m < {a_val}$.\\\\
+Vì $m \\in \\mathbb{{Z}}$ nên $m \\in {_VD021_liet_ke(n_val + 1, a_val - 1)}$,
+số giá trị nguyên của $m$ là ${a_val} - {_VD021_ngoac(n_val)} - 1 = {dapso}$.\\\\
+Vậy có tất cả ${dapso}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
 
-        # =========================
-        # KIỂU 4: A \cap B \ne \varnothing
-        # =========================
-        else:
-            debai = f"""Cho hai tập hợp $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$. Có tất cả bao nhiêu giá trị nguyên của tham số $m$ để $A \\cap B \\ne \\varnothing$?"""
-            dapso = f"""${z_ans}$"""
-
-            giai = f"""Để $A \\cap B \\ne \\varnothing$ thì hai tập hợp phải có ít nhất một phần tử chung.\\\\
-Do ${n_val} < {a_val}$ theo cách chọn dữ liệu nên để $A = \\left[ {a_val}; {b_val} \\right]$ và $B = \\left( {n_val}; m \\right]$ có phần tử chung, chỉ cần
+    # ---- KIỂU 4: A ∩ B ≠ ∅  ⟺  m ≥ a (có vô số m nguyên) ----
+    else:
+        dapso = a_val
+        debai = cho + ("Tìm giá trị nguyên nhỏ nhất của tham số $m$ "
+                       "để $A \\cap B \\ne \\varnothing$.")
+        giai = f"""Do ${n_val} < {a_val}$ nên $B = \\left( {n_val}; m \\right]$ và $A = \\left[ {a_val}; {b_val} \\right]$ có phần tử chung
+khi và chỉ khi đầu bên phải của $B$ chạm tới $A$, tức là
 $m \\ge {a_val}$.\\\\
 Khi đó phần tử ${a_val}$ thuộc cả $A$ và $B$, suy ra $A \\cap B \\ne \\varnothing$.\\\\
-Vì $m \\in \\mathbb{{Z}}$ và theo cách sinh dữ liệu ta có $m \\le 15$, nên
-$m \\in \\{{{a_val}, {a_val + 1}, \\ldots, 15\\}}$.\\\\
-Số giá trị nguyên của $m$ là
-$15 - {a_val} + 1 = {z_ans}$.\\\\
-Vậy có tất cả ${z_ans}$ giá trị nguyên của tham số $m$ thỏa mãn yêu cầu đề bài."""
+Có vô số số nguyên $m$ thỏa mãn, nhưng số nguyên NHỎ NHẤT trong số đó là
+$m = {a_val}$.\\\\
+Vậy $m = {dapso}$."""
 
-        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+    return debai, dapso, giai
 
-    return cauTN
 
-def L10_C1_B2_VD021_TL_A_01(socau, dong=1):
+def _VD021_nhieu(dapso, khong_am):
+    """Ba phương án nhiễu khác nhau và khác đáp số (câu trả lời ngắn không dùng)."""
+    ds = []
+    for delta in (-3, -2, -1, 1, 2, 3, 4):
+        val = dapso + delta
+        if val == dapso or val in ds:
+            continue
+        if khong_am and val < 0:
+            continue
+        ds.append(val)
+    return [f"""${val}$""" for val in ds[:3]]
 
+
+def _VD021_sinh(socau, dang):
+    """Sinh socau câu của dạng VD021; dang=1 -> trắc nghiệm, dang=2/3 -> trả lời ngắn."""
     gt = []
-    dem = 0
-    while dem < socau:
+    while len(gt) < socau:
         kieu = int(np.random.choice([1, 2, 3, 4]))
-        # 1: A ∪ B = A
-        # 2: A ∪ B = B
-        # 3: A ∩ B = ∅
-        # 4: A ∩ B ≠ ∅
+        a_val = int(np.random.randint(-15, 5))
+        b_val = int(np.random.randint(a_val + 5, 16))
 
-        a_val = np.random.randint(-15, 5)
-        b_val = np.random.randint(a_val + 5, 16)
-
-        # =========================
-        # KIỂU 1: A ∪ B = A
-        # <=> B ⊂ A
-        # B = (n;m], cần n < m <= b
-        # =========================
         if kieu == 1:
-            n_val = np.random.randint(a_val + 1, b_val)
-            z_ans = b_val - n_val
-
-            if z_ans <= 0:
-                continue
-
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        # =========================
-        # KIỂU 2: A ∪ B = B
-        # <=> A ⊂ B
-        # cần n < a và m >= b
-        # =========================
-        elif kieu == 2:
-            n_val = np.random.randint(a_val - 8, a_val)
-            z_ans = 16 - b_val   # số m nguyên từ b_val đến 15
-
-            if z_ans <= 0:
-                continue
-
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        # =========================
-        # KIỂU 3: A ∩ B = ∅
-        # cần n < m < a
-        # =========================
+            # n nằm TRONG A để đầu bên trái của B chắc chắn thuộc A
+            n_val = int(np.random.randint(a_val + 1, b_val))
         elif kieu == 3:
-            n_val = np.random.randint(a_val - 8, a_val - 1)
-            z_ans = a_val - n_val - 1
-
-            if z_ans <= 0:
-                continue
-
-            v = [kieu, a_val, b_val, n_val, z_ans]
-
-        # =========================
-        # KIỂU 4: A ∩ B ≠ ∅
-        # chọn n < a để điều kiện tương đương m >= a
-        # =========================
+            n_val = int(np.random.randint(a_val - 8, a_val - 1))
         else:
-            n_val = np.random.randint(a_val - 8, a_val)
-            z_ans = 16 - a_val   # số m nguyên từ a_val đến 15
+            n_val = int(np.random.randint(a_val - 8, a_val))
 
-            if z_ans <= 0:
-                continue
+        v = (kieu, a_val, b_val, n_val)
+        if v in gt:
+            continue
 
-            v = [kieu, a_val, b_val, n_val, z_ans]
+        dapso = _VD021_de_giai(*v)[1]
+        # Kiểu 1, 3 đếm số giá trị -> đáp số phải là số dương.
+        if kieu in (1, 3) and dapso <= 0:
+            continue
+        if len(_VD021_nhieu(dapso, kieu in (1, 3))) < 3:
+            continue
 
-        if v not in gt:
-            gt.append(v)
-            dem += 1
+        gt.append(v)
 
-    cauTL = ''
+    cau = ''
     for v in gt:
-        kieu, a_val, b_val, n_val, z_ans = v
+        debai, dapso, giai = _VD021_de_giai(*v)
+        dsnhieu = _VD021_nhieu(dapso, v[0] in (1, 3))
+        cau += MC_SA_answer_text(debai, f"""${dapso}$""", dsnhieu, giai, 0, 0, dang)
+    return cau
 
-        # =========================
-        # KIỂU 1: A ∪ B = A
-        # =========================
-        if kieu == 1:
-            debai = (
-                f"Cho hai tập hợp $A = \\left[{a_val}; {b_val}\\right]$ và "
-                f"$B = \\left({n_val}; m\\right]$, với $m \\in \\mathbb{{Z}}$. Tính:"
-            )
 
-            ds_abcd = [
-                (
-                    "Số giá trị nguyên của tham số $m$ để $A \\cup B = A$.",
-                    z_ans,
-                    f"Ta có $A \\cup B = A \\Leftrightarrow B \\subset A$. "
-                    f"Vì $B = \\left({n_val}; m\\right]$ nên để $B \\subset A = \\left[{a_val}; {b_val}\\right]$ thì cần "
-                    f"$\\heva{{m > {n_val} \\\\ m \\le {b_val}}}$. "
-                    f"Suy ra ${n_val} < m \\le {b_val}$. "
-                    f"Vì $m \\in \\mathbb{{Z}}$ nên số giá trị nguyên của $m$ là "
-                    f"${b_val} - {n_val} = {z_ans}$."
-                )
-            ]
+def L10_C1_B2_VD021_MC_A_01(socau, dang=1):
+    """Trắc nghiệm 4 phương án."""
+    return _VD021_sinh(socau, dang)
 
-        # =========================
-        # KIỂU 2: A ∪ B = B
-        # =========================
-        elif kieu == 2:
-            debai = (
-                f"Cho hai tập hợp $A = \\left[{a_val}; {b_val}\\right]$ và "
-                f"$B = \\left({n_val}; m\\right]$, với $m \\in \\mathbb{{Z}}$. Tính:"
-            )
 
-            ds_abcd = [
-                (
-                    "Số giá trị nguyên của tham số $m$ để $A \\cup B = B$.",
-                    z_ans,
-                    f"Ta có $A \\cup B = B \\Leftrightarrow A \\subset B$. "
-                    f"Để $A = \\left[{a_val}; {b_val}\\right]$ là tập con của $B = \\left({n_val}; m\\right]$ thì cần "
-                    f"$\\heva{{{n_val} < {a_val} \\\\ m \\ge {b_val}}}$. "
-                    f"Do ${n_val} < {a_val}$ luôn đúng theo cách chọn dữ liệu nên chỉ cần $m \\ge {b_val}$. "
-                    f"Vì $m \\in \\mathbb{{Z}}$ và theo cách sinh dữ liệu ta có $m \\le 15$, nên "
-                    f"$m \\in \\{{{b_val}, {b_val + 1}, \\ldots, 15\\}}$. "
-                    f"Vậy số giá trị nguyên của $m$ là $15 - {b_val} + 1 = {z_ans}$."
-                )
-            ]
+def L10_C1_B2_VD021_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: MỘT câu hỏi -> MỘT đáp số, không chia ý a), b).
 
-        # =========================
-        # KIỂU 3: A ∩ B = ∅
-        # =========================
-        elif kieu == 3:
-            debai = (
-                f"Cho hai tập hợp $A = \\left[{a_val}; {b_val}\\right]$ và "
-                f"$B = \\left({n_val}; m\\right]$, với $m \\in \\mathbb{{Z}}$. Tính:"
-            )
-
-            ds_abcd = [
-                (
-                    "Số giá trị nguyên của tham số $m$ để $A \\cap B = \\varnothing$.",
-                    z_ans,
-                    f"Để $A \\cap B = \\varnothing$ thì hai tập hợp không có phần tử chung. "
-                    f"Với $A = \\left[{a_val}; {b_val}\\right]$ và $B = \\left({n_val}; m\\right]$, để $B$ nằm hoàn toàn bên trái $A$ thì cần $m < {a_val}$. "
-                    f"Mặt khác, để $B = \\left({n_val}; m\\right]$ là tập hợp khác rỗng thì cần $m > {n_val}$. "
-                    f"Suy ra ${n_val} < m < {a_val}$. "
-                    f"Vì $m \\in \\mathbb{{Z}}$ nên số giá trị nguyên của $m$ là ${a_val} - {n_val} - 1 = {z_ans}$."
-                )
-            ]
-
-        # =========================
-        # KIỂU 4: A ∩ B ≠ ∅
-        # =========================
-        else:
-            debai = (
-                f"Cho hai tập hợp $A = \\left[{a_val}; {b_val}\\right]$ và "
-                f"$B = \\left({n_val}; m\\right]$, với $m \\in \\mathbb{{Z}}$. Tính:"
-            )
-
-            ds_abcd = [
-                (
-                    "Số giá trị nguyên của tham số $m$ để $A \\cap B \\ne \\varnothing$.",
-                    z_ans,
-                    f"Để $A \\cap B \\ne \\varnothing$ thì hai tập hợp phải có ít nhất một phần tử chung. "
-                    f"Do ${n_val} < {a_val}$ theo cách chọn dữ liệu nên để $A = \\left[{a_val}; {b_val}\\right]$ và $B = \\left({n_val}; m\\right]$ có phần tử chung, chỉ cần $m \\ge {a_val}$. "
-                    f"Khi đó phần tử ${a_val}$ thuộc cả $A$ và $B$, suy ra $A \\cap B \\ne \\varnothing$. "
-                    f"Vì $m \\in \\mathbb{{Z}}$ và theo cách sinh dữ liệu ta có $m \\le 15$, nên "
-                    f"$m \\in \\{{{a_val}, {a_val + 1}, \\ldots, 15\\}}$. "
-                    f"Vậy số giá trị nguyên của $m$ là $15 - {a_val} + 1 = {z_ans}$."
-                )
-            ]
-
-        cauTL += TL_answer_const(debai, ds_abcd, 0, 0, dong)
-
-    return cauTL
+    Trước 27/09/2026 dạng này là hàm tự luận L10_C1_B2_VD021_TL_A_01 nhưng chỉ
+    có một ý, nên theo quy ước đã chốt thì nó phải là câu trả lời ngắn.
+    """
+    return _VD021_sinh(socau, dang)
 
 
 def L10_C1_TF_B_01(socau, socot):

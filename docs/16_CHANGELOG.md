@@ -4903,3 +4903,75 @@ tests/test_loai_cau.py; sua xong thi xoa khoi do, bai test se tu doi hoi lai.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.84 - 2026-09-27
+
+## Dang VD021 lop 10: doi cau tu luan mot y thanh cau TRA LOI NGAN
+
+Co Lan chot: "doi sang TLN".
+
+    L10_C1_B2_VD021_TL_A   Tu luan       ->  L10_C1_B2_VD021_SA_A   Tra loi ngan
+    (Mapping doi ca id lan cot Loai; Dang giu nguyen)
+
+Ham L10_C1_B2_VD021_TL_A_01 doi ten thanh L10_C1_B2_VD021_SA_A_01 (dang=2).
+Sau buoc nay khong con ham nao vi pham quy uoc loai cau; danh sach ngoai le
+CHUA_DUNG_QUY_UOC trong tests/test_loai_cau.py da xoa han, moi ham _SA_/_TL_
+deu bi soi that.
+
+## Nhan tien phat hien SAI TOAN trong ca dang nay
+
+Doc ky de sua loai cau thi thay dap so cua dang VD021 SAI o hai cho, dinh ca
+cau trac nghiem L10_C1_B2_VD021_MC_A_01 chu khong rieng cau vua doi.
+
+De cu: "Cho A = [a;b] va B = (n;m]. Co bao nhieu gia tri nguyen cua m de ...?"
+
+  (1) De KHONG noi B khac rong. Ma voi m <= n thi B = rong, va tap rong la
+      tap con cua moi tap, nen:
+        - kieu 1 (A hop B = A): van dung -> co VO SO gia tri nguyen cua m
+        - kieu 3 (A giao B = rong): cung van dung -> cung VO SO
+      Dap so cu b - n va a - n - 1 la thieu truong hop.
+
+  (2) Kieu 2 (A hop B = B) dan toi m >= b; kieu 4 (A giao B khac rong) dan
+      toi m >= a. Deu co VO SO gia tri nguyen cua m. Loi giai cu viet "theo
+      cach sinh du lieu ta co m <= 15" roi dem tu b (hoac a) den 15 - nhung
+      DE BAI KHONG HE NOI m <= 15, hoc sinh khong the nao biet duoc.
+
+Da chung minh bang may: giu nguyen de cu roi dem m trong cac khoang rong dan
+[-33;42], [-63;72], [-123;132] thi so gia tri dem duoc la 46, 76, 136 - tang
+theo khoang do, dung nghia VO SO.
+
+## Cach sua
+
+  - De bai them dieu kien: "trong do m la so nguyen sao cho B khac rong".
+    Cai nay chan het truong hop B = rong, kieu 1 va kieu 3 tro lai dung.
+  - Kieu 2 va kieu 4 doi cau hoi: khong hoi "co bao nhieu gia tri" nua ma hoi
+    "TIM GIA TRI NGUYEN NHO NHAT cua m" - luon ton tai, duy nhat, va dung
+    tinh than mot cau mot dap so cua tra loi ngan.
+  - Gop chung phan sinh de/loi giai cua hai ham (_VD021_de_giai, _VD021_nhieu,
+    _VD021_sinh) de cau trac nghiem va cau tra loi ngan khong bao gio lech
+    nhau; hai ham cong khai chi con goi lai phan chung do.
+
+## Hai loi trinh bay tu phat hien khi doc PDF
+
+  - Phep tru ra hai dau tru lien nhau: "10 - -1 = 11". Da boc ngoac so am
+    (_VD021_ngoac) -> "10 - (-1) = 11".
+  - Khi dap so nho, dong liet ke thanh vo li: "m thuoc {-9; -8; ...; -8}".
+    Da sua (_VD021_liet_ke): tu 4 gia tri tro xuong thi ghi ra het, nhieu hon
+    moi dung dau ba cham.
+
+## Da kiem chung the nao
+
+1. Doi chieu DOC LAP: khong dung lai cong thuc trong ham, ma rai diem cach
+   nhau 1/4 de xet that quan he tap hop, roi do m nguyen trong mot khoang
+   rong. Quet 3000 bo so lieu ngau nhien va 1491 bo quet co he thong:
+   0 truong hop lech.
+2. Soi TOAN BO 11800 truong hop co the co cua dong liet ke: 0 dong vo li.
+3. Bien dich THAT ra PDF 16 cau (8 trac nghiem + 8 tra loi ngan), 5 trang,
+   0 loi; doc lai PDF doi chieu tung dong tinh.
+4. Ra de that 8 lan cho chuong 1: 64 cau, 0 loi.
+5. Quet ca 3 khoi qua duong ra de: 52 ham chay dung loai, 0 ham bi chan.
+6. 297 bai test qua, khong con bai nao bi bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
