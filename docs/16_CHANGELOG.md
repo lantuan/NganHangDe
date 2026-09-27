@@ -4415,3 +4415,59 @@ them mapping duoc. Xem version sau.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.76 - 2026-09-27
+
+## Mapping lop 10 day du + sua cho co the lam vo de
+
+    Truoc: mapping chi co C1 (34 dang)
+    Sau  : ca 8 chuong, 259 dang cho 154 yeu cau can dat
+
+C1 34 | C2 13 | C3 17 | C4 25 | C5 31 | C6 61 | C7 51 | C8 27
+
+Moi yeu cau can dat deu co it nhat mot dang. Moi chuong deu co cau Dung/Sai.
+Phan bo: 167 trac nghiem, 49 tra loi ngan, 27 tu luan, 16 dung/sai.
+
+## SUA MOT CHO CO THE LAM VO DE THAT
+
+/danh-sach-chuong tinh co_du_cau = "co dong mapping nao khong". Mapping la BAN
+KE HOACH, co ca dang chua viet ham. Nen ngay khi them mapping cho C2-C8, web se
+bao voi hoc sinh la 8 chuong deu da san sang - hoc sinh chon vao chuong 5, ra
+de that chay voi cho_phep_thieu=False, va VO CA DE chu khong phai thieu vai cau.
+
+Da them mapping_service.dem_dang_co_ham(lop, chuong): dem so dong mapping ma
+THUC SU co ham sinh trong ngan hang Python. Doc thang tep .py bang van ban,
+khong import module (khong keo theo sympy/numpy chi de dem).
+
+/danh-sach-chuong gio tra ve:
+    co_du_cau            = so_dang_co_cau_hoi > 0
+    so_dang_co_cau_hoi   = so dang da co ham (truong moi, FE dung de hien
+                           "da co 34/34 dang" neu muon)
+
+Hien tai: C1 = 34 dang co ham; C2-C8 = 0. Dung su that.
+
+## Y nghia cua thay doi nay
+
+Gio ba lop co vai tro ro rang:
+    curriculum  Bo yeu cau gi           154 dong
+    mapping     can nhung dang nao      259 dong  <- ban ke hoach
+    Python      dang nao da co that      46 ham   <- hang co that
+
+Mapping tro thanh DANH SACH VIEC nhin thay duoc: con 225 dang chua co ham.
+Co Lan viet ham den dau, chuong tu mo den do, khong phai sua code.
+
+## Kiem thu
+
+Them tests/test_mapping_curriculum.py (41 bai): moi dong mapping phai tro vao
+mot yeu cau co that; content phai khop curriculum; khong trung id; moi yeu cau
+co it nhat mot dang; moi chuong co cau Dung/Sai; va co_du_cau phai dem theo ham
+Python chu khong phai dong mapping.
+
+Tong 183 bai test qua (truoc: 142).
+
+Bai test cuoi la bay chan hoi quy: neu sau nay ai do doi co_du_cau ve dem dong
+mapping thi test do hong ngay.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

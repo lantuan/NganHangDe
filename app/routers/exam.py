@@ -29,7 +29,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_ngan,
     chuan_hoa_dap_an_tf,
 )
-from app.services.mapping_service import trich_chuong_bai, load_mapping
+from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dang_co_ham
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
@@ -555,15 +555,19 @@ def danh_sach_chuong_endpoint(lop: int):
 
     ket_qua = []
     for cs in sorted(ten_chuong_theo_so.keys()):
+        # co_du_cau phai tinh theo so dang DA CO HAM Python, khong phai so
+        # dong Mapping. Mapping la ban ke hoach (co ca dang chua viet ham);
+        # bao "san sang" chi vi co dong Mapping se moi hoc sinh vao mot
+        # chuong chua co cau hoi nao, va ra de that se vo ca de.
         try:
-            mapping = load_mapping(lop, cs)
-            co_du_cau = len(mapping) > 0
+            so_dang_co_ham = dem_dang_co_ham(lop, cs)
         except FileNotFoundError:
-            co_du_cau = False
+            so_dang_co_ham = 0
         ket_qua.append({
             "chuong_so": cs,
             "ten_chuong": ten_chuong_theo_so[cs],
-            "co_du_cau": co_du_cau,
+            "co_du_cau": so_dang_co_ham > 0,
+            "so_dang_co_cau_hoi": so_dang_co_ham,
         })
 
     return {"success": True, "data": ket_qua}

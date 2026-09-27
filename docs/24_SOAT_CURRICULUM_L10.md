@@ -156,3 +156,36 @@ duoc ngay. Claude da de xuat, co Lan chua chot.
 
 - Mapping C2-C8: chua co dong nao (117 yeu cau chua co dang cau hoi).
 - Lop 11: curriculum va mapping deu trong.
+
+---
+
+# DA XU LI (27/09/2026)
+
+Muc A: da them het 28 ban ghi (25 dong trong bang + bang bien thien + VD quy
+tac dem + VD toa do vecto thuc tien). Muc B: da sua B1, B2, B5, B6, B9 va
+scope cua VD104A. Con B3, B4, B7, B8 co y de nguyen - li do ngay duoi.
+
+Muc C1: da chon Cach 2 - danh lai so C2-C8, giu nguyen C1.
+Muc D: mapping C2-C8 da dung xong (259 dang cho ca lop 10).
+
+## Ba cho co y KHONG sua
+
+**B3 - quy tac cong/nhan dang o muc TH trong khi Bo dung dong tu "Van dung
+duoc".** Neu ha het xuong hay nang het len thi bai 21 mat can mot muc. Da giu
+nguyen cac ban ghi TH va THEM mot ban ghi VD rieng, de bai 21 co du ca hai muc.
+
+**B4 - TH122/VD122 dung verb "Thiet lap duoc dieu kien" trong khi Bo viet
+"Nhan biet duoc hai duong thang cat nhau, song song...".** Giu nguyen vi neu
+theo dung chu cua Bo thi phai ha xuong muc NB, ma xet vi tri tuong doi cua hai
+duong thang bang toa do la viec phai tinh toan, khong phai nhan biet. Sua theo
+chu se lam ngan hang de kem di.
+
+**B7, B8 - VD155 (he so trong khai trien) va VD090 (gia tri ngoai le, bieu do
+hop) khong co trong chuong trinh cot loi.** VD155 thuoc Chuyen de 10.1, VD090
+thuoc SGK Ket noi tri thuc. Giu lai vi co Lan day lop chuyen Toan va ca hai
+deu la dang ra de that. Neu ra de dai tra thi khong chon hai ma nay.
+
+## Ghi nho cho lan sau
+
+Truong `nguon` (CT2018 / SGK_KNTT) van chua duoc chot. Neu sau nay hoi dong
+hoi "cau nay can cu vao dau" thi cac ban ghi lay tu SGK se kho tra loi ngay.

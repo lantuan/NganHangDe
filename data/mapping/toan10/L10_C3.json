@@ -1,0 +1,104 @@
+[
+  {
+    "id": "L10_C3_B5_NB029_MC_A",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giá trị lượng giác của góc đặc biệt từ 0 độ đến 180 độ"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_A",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính giá trị lượng giác bằng máy tính cầm tay"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_A",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Quan hệ giữa giá trị lượng giác của hai góc bù nhau, phụ nhau"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_A",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Rút gọn biểu thức lượng giác dùng góc bù nhau"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính cạnh còn lại bằng định lí côsin"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính độ dài cạnh bằng định lí côsin"
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính cạnh hoặc góc bằng định lí sin"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính bán kính đường tròn ngoại tiếp tam giác"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính diện tích tam giác"
+  },
+  {
+    "id": "L10_C3_B6_TH035_MC_A",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải tam giác khi biết hai cạnh và góc xen giữa"
+  },
+  {
+    "id": "L10_C3_B6_TH035_MC_B",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải tam giác khi biết một cạnh và hai góc kề"
+  },
+  {
+    "id": "L10_C3_B6_TH035_SA_A",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giải tam giác, tính cạnh hoặc góc còn lại"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_A",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đo khoảng cách giữa hai địa điểm khi gặp vật cản"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_A",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Tính chiều cao của vật khi không đo trực tiếp được"
+  },
+  {
+    "id": "L10_C3_TF_A",
+    "content": "Giá trị lượng giác của một góc từ 0 độ đến 180 độ",
+    "Loai": "Đúng sai",
+    "Dang": "Góc đặc biệt, góc bù nhau"
+  },
+  {
+    "id": "L10_C3_TF_B",
+    "content": "Hệ thức lượng trong tam giác",
+    "Loai": "Đúng sai",
+    "Dang": "Định lí sin, định lí côsin, diện tích"
+  }
+]

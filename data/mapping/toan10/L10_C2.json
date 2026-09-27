@@ -1,0 +1,80 @@
+[
+  {
+    "id": "L10_C2_B3_NB022_MC_A",
+    "content": "Nhận biết được bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra bất phương trình bậc nhất hai ẩn trong các biểu thức cho trước"
+  },
+  {
+    "id": "L10_C2_B3_NB023_MC_A",
+    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không"
+  },
+  {
+    "id": "L10_C2_B3_TH024_MC_A",
+    "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn hình vẽ đúng của miền nghiệm"
+  },
+  {
+    "id": "L10_C2_B3_TH024_TL_A",
+    "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
+    "Loai": "Tự luận",
+    "Dang": "Biểu diễn miền nghiệm trên mặt phẳng toạ độ"
+  },
+  {
+    "id": "L10_C2_B3_NB025_MC_A",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn bất phương trình mô tả đúng tình huống thực tế"
+  },
+  {
+    "id": "L10_C2_B4_NB026_MC_A",
+    "content": "Nhận biết được hệ bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra hệ bất phương trình bậc nhất hai ẩn"
+  },
+  {
+    "id": "L10_C2_B4_TH027_MC_A",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn hình vẽ đúng của miền nghiệm hệ"
+  },
+  {
+    "id": "L10_C2_B4_TH027_TL_A",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Tự luận",
+    "Dang": "Biểu diễn miền nghiệm của hệ trên mặt phẳng toạ độ"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_A",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm giá trị lớn nhất, nhỏ nhất của F = ax + by trên miền đa giác"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_A",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị lớn nhất của F trên miền nghiệm"
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_A",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán tối ưu thực tiễn dẫn đến hệ bất phương trình"
+  },
+  {
+    "id": "L10_C2_TF_A",
+    "content": "Bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Miền nghiệm và nghiệm"
+  },
+  {
+    "id": "L10_C2_TF_B",
+    "content": "Hệ bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Miền nghiệm và bài toán cực trị"
+  }
+]

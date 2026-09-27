@@ -1,0 +1,188 @@
+[
+  {
+    "id": "L10_C5_B9_NB054_MC_A",
+    "content": "Nhận biết được những mô hình thực tế (dạng bảng, biểu đồ, công thức) dẫn đến khái niệm hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra mô hình thực tế dẫn đến khái niệm hàm số"
+  },
+  {
+    "id": "L10_C5_B9_NB055_MC_A",
+    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tập xác định của hàm số"
+  },
+  {
+    "id": "L10_C5_B9_NB055_SA_A",
+    "content": "Nhận biết được các khái niệm về hàm số, tập xác định, tập giá trị của hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số phần tử nguyên của tập xác định"
+  },
+  {
+    "id": "L10_C5_B9_TH056_MC_A",
+    "content": "Mô tả được các cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cách cho hàm số bằng bảng, bằng biểu đồ, bằng công thức"
+  },
+  {
+    "id": "L10_C5_B9_NB057_MC_A",
+    "content": "Nhận biết được đồ thị của hàm số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra đồ thị của một hàm số"
+  },
+  {
+    "id": "L10_C5_B9_TH058_MC_A",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: khoảng đồng biến, khoảng nghịch biến.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc khoảng đồng biến, nghịch biến từ đồ thị"
+  },
+  {
+    "id": "L10_C5_B9_TH059_MC_A",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc giá trị lớn nhất, nhỏ nhất từ đồ thị"
+  },
+  {
+    "id": "L10_C5_B9_TH059_SA_A",
+    "content": "Giải thích được các tính chất của hàm số dựa vào đồ thị: giá trị lớn nhất, giá trị nhỏ nhất của hàm số trên một khoảng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị lớn nhất của hàm số trên một đoạn"
+  },
+  {
+    "id": "L10_C5_B9_VD060_MC_A",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại"
+  },
+  {
+    "id": "L10_C5_B9_VD060_TL_A",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn giải bằng hàm số"
+  },
+  {
+    "id": "L10_C5_B10_TH061_MC_A",
+    "content": "Thiết lập được bảng giá trị của hàm số bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lập bảng giá trị của hàm số bậc hai"
+  },
+  {
+    "id": "L10_C5_B10_TH062_MC_A",
+    "content": "Lập được bảng biến thiên của hàm số bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lập bảng biến thiên của hàm số bậc hai"
+  },
+  {
+    "id": "L10_C5_B10_TH063_MC_A",
+    "content": "Vẽ được đồ thị hàm số bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn đồ thị đúng của hàm số bậc hai cho trước"
+  },
+  {
+    "id": "L10_C5_B10_NB064_MC_A",
+    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Toạ độ đỉnh và trục đối xứng của Parabola"
+  },
+  {
+    "id": "L10_C5_B10_NB064_SA_A",
+    "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hoành độ đỉnh của Parabola"
+  },
+  {
+    "id": "L10_C5_B10_TH065_MC_A",
+    "content": "Nhận biết được các tính chất của hàm số bậc hai từ đồ thị.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc tính chất của hàm số bậc hai từ đồ thị"
+  },
+  {
+    "id": "L10_C5_B10_VD066_MC_A",
+    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán cổng, cầu dạng Parabola"
+  },
+  {
+    "id": "L10_C5_B10_VD066_TL_A",
+    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về hàm số bậc hai"
+  },
+  {
+    "id": "L10_C5_B11_NB067_MC_A",
+    "content": "Nhận biết được tam thức bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra tam thức bậc hai"
+  },
+  {
+    "id": "L10_C5_B11_TH068_MC_A",
+    "content": "Xét được dấu của tam thức bậc hai.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xét dấu của tam thức bậc hai"
+  },
+  {
+    "id": "L10_C5_B11_TH069_MC_A",
+    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải bất phương trình bậc hai một ẩn"
+  },
+  {
+    "id": "L10_C5_B11_TH069_SA_A",
+    "content": "Giải được bất phương trình bậc hai một ẩn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số nghiệm nguyên của bất phương trình bậc hai"
+  },
+  {
+    "id": "L10_C5_B11_TH070_MC_A",
+    "content": "Giải thích được khoảng nghiệm của bất phương trình bậc hai một ẩn dựa vào đồ thị của hàm số bậc hai tương ứng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc tập nghiệm của bất phương trình bậc hai từ đồ thị"
+  },
+  {
+    "id": "L10_C5_B11_VD071_MC_A",
+    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn dẫn đến bất phương trình bậc hai"
+  },
+  {
+    "id": "L10_C5_B11_VD071_TL_A",
+    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về chiều cao, khoảng cách"
+  },
+  {
+    "id": "L10_C5_B12_TH072_MC_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải phương trình dạng hai căn thức bằng nhau"
+  },
+  {
+    "id": "L10_C5_B12_TH072_SA_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=\\sqrt{dx^2+ex+f}$.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tổng các nghiệm của phương trình"
+  },
+  {
+    "id": "L10_C5_B12_TH073_MC_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải phương trình dạng căn thức bằng nhị thức bậc nhất"
+  },
+  {
+    "id": "L10_C5_B12_TH073_SA_A",
+    "content": "Giải được phương trình chứa căn thức có dạng $\\sqrt{ax^2+bx+c}=dx+e$.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số nghiệm của phương trình chứa căn"
+  },
+  {
+    "id": "L10_C5_TF_A",
+    "content": "Hàm số và đồ thị",
+    "Loai": "Đúng sai",
+    "Dang": "Tập xác định, đồng biến, nghịch biến"
+  },
+  {
+    "id": "L10_C5_TF_B",
+    "content": "Hàm số bậc hai và bất phương trình bậc hai",
+    "Loai": "Đúng sai",
+    "Dang": "Đồ thị, dấu tam thức, tập nghiệm"
+  }
+]

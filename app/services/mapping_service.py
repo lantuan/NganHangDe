@@ -32,6 +32,42 @@ def load_mapping(lop: int, chuong_so: int) -> list[dict]:
 
     return items
 
+PYTHON_BANK_DIR = BASE_DIR / "data" / "python_bank"
+
+
+def dem_dang_co_ham(lop: int, chuong_so: int) -> int:
+    """
+    Dem so dang cau hoi trong Mapping ma THUC SU da co ham sinh trong
+    ngan hang Python.
+
+    Vi sao can: Mapping la BAN KE HOACH -- liet ke cac dang cau hoi can co
+    cho tung yeu cau can dat, ke ca dang chua viet ham. Ham Python moi la
+    HANG CO THAT. Neu lay so dong Mapping de bao "chuong nay da san sang"
+    thi web se moi hoc sinh vao mot chuong chua co cau hoi nao, va vi ra de
+    that chay voi cho_phep_thieu=False nen se VO CA DE.
+
+    Doc thang tep .py bang van ban, khong import module: nhanh, va khong
+    keo theo sympy/numpy chi de dem.
+    """
+    file_py = PYTHON_BANK_DIR / f"toan{lop}" / f"L{lop}_C{chuong_so}.py"
+    if not file_py.exists():
+        return 0
+    try:
+        src = file_py.read_text(encoding="utf-8")
+    except OSError:
+        return 0
+
+    co_ham = set(re.findall(r"^def (L\d+_[A-Za-z0-9_]+?)_\d{2}\s*\(", src, re.M))
+    if not co_ham:
+        return 0
+
+    try:
+        items = load_mapping(lop, chuong_so)
+    except (FileNotFoundError, ValueError):
+        return 0
+    return sum(1 for it in items if it.get("id") in co_ham)
+
+
 def phan_loai_cau(item: dict) -> str:
     """
     Phân loại theo trường 'Loai' trong Mapping.

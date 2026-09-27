@@ -109,19 +109,19 @@
   },
   {
     "id": "L10_C1_B2_NB017_MC_A",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con"
   },
   {
     "id": "L10_C1_B2_NB017_MC_B",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "phân biệt thuộc/tập con"
   },
   {
     "id": "L10_C1_B2_NB017_MC_C",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê"
   },
@@ -187,7 +187,7 @@
   },
   {
     "id": "L10_C1_B2_NB017_SA_C",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên"
   },
