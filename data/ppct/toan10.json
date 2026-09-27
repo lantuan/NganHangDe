@@ -177,7 +177,7 @@
     "bai": "Tổng và hiệu của hai vectơ",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [
       "tong_vecto",
@@ -313,7 +313,7 @@
     "bai": "Các số đặc trưng đo độ phân tán",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [
       "khoang_bien_thien",
@@ -494,7 +494,7 @@
     "bai": "Ba đường conic",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [
       "elip",
@@ -605,7 +605,7 @@
     "bai": "Thực hành tính xác suất theo định nghĩa cổ điển",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [
       "thuc_hanh_xac_suat",

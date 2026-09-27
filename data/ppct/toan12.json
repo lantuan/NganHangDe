@@ -84,7 +84,7 @@
     "bai": "Ứng dụng đạo hàm để giải quyết một số vấn đề liên quan đến thực tiễn",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 5. Ứng dụng đạo hàm để giải quyết một số vấn đề liên quan đến thực tiễn"
@@ -174,7 +174,7 @@
     "bai": "Phương sai và độ lệch chuẩn",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 10. Phương sai và độ lệch chuẩn"
@@ -228,7 +228,7 @@
     "bai": "Ứng dụng hình học của tích phân",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 13. Ứng dụng hình học của tích phân"
@@ -336,7 +336,7 @@
     "bai": "Công thức xác suất toàn phần và công thức Bayes",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 19. Công thức xác suất toàn phần và công thức Bayes"

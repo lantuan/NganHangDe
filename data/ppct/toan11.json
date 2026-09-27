@@ -174,7 +174,7 @@
     "bai": "Đường thẳng và mặt phẳng trong không gian",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 10. Đường thẳng và mặt phẳng trong không gian"
@@ -300,7 +300,7 @@
     "bai": "Hàm số liên tục",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK1_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 17. Hàm số liên tục"
@@ -426,7 +426,7 @@
     "bai": "Phép chiếu vuông góc. Góc giữa đường thẳng và mặt phẳng",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "GK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 24. Phép chiếu vuông góc. Góc giữa đường thẳng và mặt phẳng"
@@ -588,7 +588,7 @@
     "bai": "Đạo hàm cấp hai",
     "lesson_type": "theory",
     "is_continuation": false,
-    "boundary_after": null,
+    "boundary_after": "CK2_EXAM",
     "exclude_from_exam": false,
     "keywords": [],
     "raw_text": "Bài 33. Đạo hàm cấp hai"

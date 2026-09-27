@@ -4705,3 +4705,43 @@ curriculum/mapping - he thong chua ra de duoc phan chuyen de.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.81 - 2026-09-27
+
+## Khoi phuc moc ki thi trong PPCT (loi Claude tu gay ra)
+
+Khi dung lai PPCT o v2.80, Claude de boundary_after = null cho MOI bai. Do la
+moc de exam_scope_service biet de giua ki / cuoi ki dung o bai nao. Mat moc
+thi moi loi goi load_scope_heso23 deu tra ve loi KHONG_TIM_THAY_MOC_DUNG -
+tuc la KHONG RA DUOC de dinh ki nao ca.
+
+Da suy lai moc tu chinh ke hoach day hoc: bai duoc day ngay TRUOC tuan "On
+tap kiem tra giua ky / cuoi ky" chinh la moc.
+
+    Lop 10  GK1 sau B8   CK1 sau B14  GK2 sau B22  CK2 sau B27
+    Lop 11  GK1 sau B10  CK1 sau B17  GK2 sau B24  CK2 sau B33
+    Lop 12  GK1 sau B5   CK1 sau B10  GK2 sau B13  CK2 sau B19
+
+Lop 10 suy ra TRUNG KHIT ban cu trong git (B8, B14, B22, B27) - xac nhan cach
+suy dung. Da thu ca 12 pham vi (3 khoi x 4 ki thi), chay dung het.
+
+## scripts/thieu.py: loc theo ki thi
+
+    python3 scripts/thieu.py 10 --giuaki1
+
+Chi liet ke nhung dang nam trong pham vi ki thi do, lay tu PPCT. De biet phai
+viet ham nao TRUOC cho kip ky kiem tra sap toi.
+
+Cac tuy chon: --giuaki1  --cuoiki1  --giuaki2  --cuoiki2
+
+## Can bao nhieu cho kiem tra giua ki I
+
+    Lop 10  chuong 1-4, 8 bai   73 dang   da co 34   con thieu 39
+    Lop 11  chuong 1-4, 10 bai  88 dang   da co  0   con thieu 88
+    Lop 12  chuong 1, 5 bai     22 dang   da co  0   con thieu 22
+
+273 bai test qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
