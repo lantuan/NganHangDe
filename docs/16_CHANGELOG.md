@@ -4975,3 +4975,125 @@ theo khoang do, dung nghia VO SO.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.85 - 2026-09-27
+
+## Ba viec: bac do kho cau Dung/Sai, don vi met, va nhap tep 10-3.py
+
+## 1. Cau Dung/Sai phai tang dan NB -> TH -> VD -> VDC
+
+Co Lan bao: "cau d) ko dung chuan. vi theo dung cau dung sai thi a: NB,
+b: TH, c: VD, d: VDC."
+
+Dung vay - y d) cu cua L10_C3_TF_B_01 chi la PHAT BIEU dinh li sin
+("BC/sin A = 2R"), tuc muc nhan biet, dat o cho van dung cao. Da viet lai
+ca hai ham Dung/Sai cua chuong 3:
+
+    L10_C3_TF_A_01 (gia tri luong giac)
+      a) NB   sin cua hai goc bu nhau bang nhau
+      b) TH   cos cua goc bu, thay so cu the
+      c) VD   tinh P = sin(180-a) + cos(180-a) theo dung goc alpha cua de
+      d) VDC  cho sin(beta) va beta tu -> tim cos(beta) (he thuc co ban +
+              xet dau cosin cua goc tu)
+
+    L10_C3_TF_B_01 (he thuc luong trong tam giac)
+      a) NB   phat bieu dinh li cosin
+      b) TH   thay so tinh BC
+      c) VD   phai co BC cua y b) moi dung duoc dinh li sin de tinh R
+      d) VDC  do dai duong phan giac trong AD - khong co cong thuc san
+              trong sach, phai tu tach dien tich tam giac lam hai phan
+
+Kiem chung hai y moi bang TOA DO (dung ban kinh ngoai tiep tu ba dinh, va
+giao diem phan giac voi BC): 11 tam giac, 0 lech.
+
+tests/test_cau_dung_sai.py (moi): soi moi ham _TF_ phai co DUNG BON y, va
+than ham phai ghi ro bon moc "# a) NB", "# b) TH", "# c) VD", "# d) VDC"
+theo thu tu.
+
+CON LAI, cho co Lan quyet: L10_C1_TF_A_01 va L10_C1_TF_B_01 (ham cu cua co)
+rut bon y tu cung mot kho menh de nen khong phan bac do kho. Chua sua vi do
+la noi dung cua co. Ten ghi trong CHUA_XEP_BAC o tep test.
+
+## 2. Loi don vi tren web
+
+De hien tren web la "CA = 8\,m" - chu "\,m" hien nguyen xi. Ly do: don vi
+dat NGOAI cap $...$, ma trinh render cua web chi dich phan trong $...$.
+Da dua don vi vao trong cong thuc: "$CA = 8\,\text{m}$" - dung ca trong PDF
+lan tren web. Sua 7 cho trong L10_C3.py.
+
+## 3. Nhap 10 dang tu tep 10-3.py cua co Lan
+
+Tep cu ghi thang ra latex\data\de.tex, de \loigiai{} RONG va goi
+DefChung.UCLN / DefChung.check. Da chuyen sang chuan ngan hang: moi ham
+TRA VE chuoi LaTeX, co loi giai day du, dung math_type.py.
+
+    K10_2_3_1_1_NB   -> L10_C3_B5_NB029_MC_B_01   toa do M -> gia tri luong giac
+    K10_2_3_1_2_NB   -> L10_C3_B5_NB029_MC_C_01   gia tri luong giac -> toa do M
+    K10_2_3_1_3_NB   -> L10_C3_B5_NB029_MC_D_01   gia tri nao co the xay ra
+    K10_2_3_1_4_NB   -> L10_C3_B5_TH031_MC_B_01   doi xung qua Oy (co hinh)
+    K10_2_3_2_1_TH   -> L10_C3_B5_TH030_MC_A_02   may tinh cam tay (bien the)
+    K10_2_3_3_1_TH   -> L10_C3_B6_TH032_MC_A_02   dinh li cosin gan dung (bien the)
+    K10_2_3_3_2_TH   -> L10_C3_B6_TH033_MC_B_01   ban kinh duong tron ngoai tiep
+    K10_2_3_4_1_VD   -> L10_C3_B6_VD036_MC_B_01   dam lay, dinh li sin (co hinh)
+    K10_2_3_4_2_VD   -> L10_C3_B6_VD036_TL_B_01   cu lao, tu luan (co hinh)
+    K10_2_3_4_3_VDC  -> L10_C3_B6_VD036_MC_C_01   tau chay hai chang
+
+Them 8 dang vao Mapping. Chuong 3 lop 10: 26/26 dang da co ham.
+
+## Cac loi trong tep cu, da va khi chuyen
+
+1. K10_2_3_1_2_NB nhanh choice==2: DE BAI truyen sai thu tu tham so nen
+   ghi "sin = can(p)/q, cos = -(q^2-p^2)/q", trong khi dap an lai theo
+   cach doc dung. De va dap an khong khop.
+2. 7/10 ham de \loigiai{} RONG. Tro giang AI chi duoc lay dap an tu day
+   nen bat buoc phai co loi giai - da viet day du cho ca 10 dang.
+3. Lay hai so ngau nhien roi chia cho UCLN: khi hai so BANG NHAU thi ra
+   p = q = 1, diem M(1;0), can bang 0 - cau hoi vo nghia. Da ep p < q.
+4. K10_2_3_2_1_TH nhanh cos: mang phuong an nhieu chua -sin HAI LAN, nen
+   cau hoi co hai phuong an trung nhau. Da bat buoc bon phuong an phan biet.
+5. K10_2_3_4_3_VDC goi input() de hoi tu luan hay trac nghiem, va GOI LUON
+   ham o cuoi tep. Ca hai deu lam TREO ngan hang luc nap mo-dun. Da bo.
+6. Can bac hai so chinh phuong van de nguyen dang "can 16" thay vi "4".
+   Nay dung sympy nen tu rut gon.
+7. Cau tu luan cu lao chi co MOT y - trai quy uoc da chot. Da tach dung
+   theo hai buoc cua chinh loi giai cu: (a) tinh goc ACB, (b) tinh AC.
+
+## Mot loi CHINH CLAUDE tu tao ra roi tu bat duoc
+
+Khi viet lai dang "gia tri nao co the xay ra", Claude mo rong phuong an
+nhieu sang \tan va \cot: "$\tan\alpha = 2$". Nhung tan cua goc khoang
+63 do DUNG BANG 2 - thanh ra cau hoi co hai dap an dung. Ban cua co Lan
+chi dung sin/cos nen khong vuong. Da tra lai dung nhu ban cua co va ghi
+chu canh bao ngay trong ham.
+
+## Da kiem chung the nao
+
+1. Diem tren nua duong tron don vi: 1600 truong hop, deu that su nam tren
+   duong tron (x^2 + y^2 = 1) va o nua tren.
+2. Soi TUNG PHUONG AN cua hai dang de sai nhat: dang may tinh cam tay
+   (1200 phuong an) va dang "gia tri co the xay ra" (1200 phuong an) -
+   moi cau dung mot phuong an dung, 0 sai.
+3. Doi chieu DOC LAP bang toa do / vecto: dinh li cosin (300 bo), ban kinh
+   ngoai tiep (300 bo), dinh li sin (400 bo), va bai toan tau chay - dung
+   VECTO HUONG DI THAT (N goc E roi S goc E) de kiem lai goc ABC = goc1 +
+   goc2 (500 bo). Tat ca 0 lech.
+4. Bien dich THAT 20 cau cua 10 dang moi ra PDF 7 trang, 0 loi; doc lai
+   PDF va XEM ANH ba trang co hinh ve - ca ba hinh (nua duong tron, dam
+   lay, cu lao) deu ve ra dung.
+5. Ra de that 8 lan cho chuong 3: 36 cau, 0 cho thieu, 0 loi.
+6. 304 bai test qua, 2 bo qua (hai ham Dung/Sai cua chuong 1 dang cho).
+
+## Mot viec can co Lan quyet: HINH VE va WEB
+
+answer_parser_service danh dau co_hinh_ve = True cho cau co tikzpicture,
+va cau do KHONG duoc dua vao phan lam bai truc tiep tren web (chi ra PDF).
+Trong 8 de chuong 3 vua ra thu co 7 cau co hinh. Nghia la them hinh thi de
+PDF dep hon nhung cau do bien mat khoi trang lam bai cua hoc sinh. Ba huong:
+  (a) giu nguyen - hinh chi phuc vu PDF;
+  (b) bo hinh o nhung dang van du du kien de giai;
+  (c) dung LaTeX dich TikZ ra anh SVG/PNG roi luu lai cho web hien - viec
+      nay la tinh nang moi, phai co Lan dong y truoc.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

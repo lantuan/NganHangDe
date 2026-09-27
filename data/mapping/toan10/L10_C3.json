@@ -106,5 +106,53 @@
     "content": "Hệ thức lượng trong tam giác",
     "Loai": "Đúng sai",
     "Dang": "Hệ thức lượng trong tam giác"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_B",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính giá trị lượng giác khi biết toạ độ điểm trên nửa đường tròn đơn vị"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_C",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm toạ độ điểm trên nửa đường tròn đơn vị khi biết giá trị lượng giác"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_D",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận biết giá trị lượng giác có thể xảy ra của góc từ 0 độ đến 180 độ"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_B",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Quan hệ giữa hai góc bù nhau qua hai điểm đối xứng trên nửa đường tròn"
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính bán kính đường tròn ngoại tiếp bằng định lí sin"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_B",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đo khoảng cách qua đầm lầy bằng định lí sin"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_C",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán chuyển động: tính khoảng cách bằng định lí côsin"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_B",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Đo khoảng cách tới điểm không tới được bằng định lí sin"
   }
 ]
