@@ -4745,3 +4745,82 @@ Cac tuy chon: --giuaki1  --cuoiki1  --giuaki2  --cuoiki2
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.82 - 2026-09-27
+
+## Ngan hang cau hoi chuong 3 lop 10 (He thuc luong trong tam giac)
+
+Co Lan chon lam chuong nay truoc vi can cho lop 10C9 lam de hoan thanh sang
+kien kinh nghiem. Chuong 3 roi vao tuan 6-7 nen con khoang hai tuan.
+
+    data/python_bank/toan10/L10_C3.py   18 ham sinh cau hoi
+    18/18 dang trong Mapping da co ham -> chuong 3 mo cho hoc sinh chon
+
+Truoc do chuong 3 chua co ham nao.
+
+## Cac dang da viet
+
+Bai 5 (4 dang)  gia tri luong giac goc dac biet; dung may tinh cam tay;
+                quan he hai goc bu nhau (MC + SA rut gon bieu thuc)
+Bai 6 (12 dang) dinh li cosin tinh canh (MC + SA); dinh li sin tinh canh (MC);
+                ban kinh duong tron ngoai tiep (SA); chon cong thuc dien tich
+                (MC); tinh dien tich (SA); giai tam giac c-g-c (MC) va g-c-g
+                (MC); giai tam giac (SA); do khoang cach khi gap vat can
+                (MC + SA); tinh chieu cao vat khong do truc tiep (TL 3 y)
+Dung/Sai (2)    gia tri luong giac 0-180 do; he thuc luong trong tam giac
+
+## Lam sao so lieu luon "dep"
+
+Tinh san CAP_COSIN: cac cap canh (b,c) ma voi goc 60 hoac 120 do thi canh thu
+ba ra SO NGUYEN (vi du 3-5 goc 120 -> 7; 7-8 goc 120 -> 13). Hoc sinh khong
+phai bam may ra so le.
+
+Dinh li sin: chon cap goc dac biet kem san he so k = sinB/sinA da rut gon
+(vi du 45-60 -> can6/2) nen canh con lai luon la bieu thuc can rut gon duoc.
+
+Dien tich: chon goc 30 hoac 150 do (sin = 1/2) va bc chia het 4 -> S nguyen.
+
+Chieu cao vat: goc nang 30 roi 60 do, tam giac ABC can tai B nen BC = AB = d,
+suy ra CH = d.can3/2 - chon d chan de ket qua gon.
+
+## Da kiem chung the nao
+
+1. 18/18 ham chay duoc, moi ham sinh dung so cau yeu cau.
+2. Soat cau truc 51 cau: can ngoac {}, so dau $ chan, moi truong dong mo khop,
+   khong co moi truong la, cau nao cung co loi giai.
+3. Bien dich THAT ra PDF 5 trang, 0 loi (dich rieng phan toan bang XeLaTeX vi
+   may ao thieu tabvar.sty, bclogo.sty, esvect.sty, vietnam.sty ma khung de
+   cua co Lan can - VPS co du).
+4. Doc lai PDF, doi chieu tung ket qua: 5^2+16^2+5.16 = 361 -> 19; 7^2+8^2+56
+   = 169 -> 13; CH = 10.can3/2 = 5can3; cot150 = -can3; sin136 = 0,69. Dung het.
+5. Chay CA DAY CHUYEN ra de 6 lan (blueprint -> chon cau -> sinh cau):
+   24 cau, 0 loi, 0 cho thieu.
+
+## Hai loi tu phat hien khi soat
+
+- Ham TL viet "chieu cao CH cua mot TOA NHA" nhung cau sau lai ghi "chan THAP".
+  Da gan danh tu di lien voi nhau (thap/chan thap, cot/chan cot, toa nha/chan
+  toa nha).
+- Ma tran doi mot cau TRA LOI NGAN muc van dung ma Mapping chua khai dang nao
+  -> he thong bao "THIEU O MAPPING: L10_C3_B6_VD036_SA_A". Da them dang do va
+  viet ham. Chinh co che bao thieu (v2.77) chi ra cho nay.
+
+## Viet lai mot bai test
+
+test_co_du_cau_dem_theo_ham_python... truoc ghim cung "moi chuong tru (10,1)
+deu phai co 0 ham" - them ham cho chuong 3 la hong ngay. Viet lai theo QUAN HE
+(so dang co ham khong vuot so dong Mapping; chuong khong co tep .py thi phai
+dem ra 0) nen van dung khi co Lan them ham dan. Them mot bai test nua cho
+truong hop chua co tep Python.
+
+274 bai test qua.
+
+## Con lai
+
+    Lop 10: con 210 dang cho viet ham (chuong 1, 3 da xong)
+    Lop 11: con 238
+    Lop 12: con 113
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

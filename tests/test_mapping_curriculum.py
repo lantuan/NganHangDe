@@ -77,12 +77,40 @@ def test_moi_chuong_co_cau_dung_sai(lop, chuong):
 
 def test_co_du_cau_dem_theo_ham_python_khong_phai_dong_mapping():
     """
-    Cho nay tung la bay: neu dem so dong mapping thi web se bao hoc sinh rang
-    chuong 2-8 da san sang trong khi chua co ham nao, va ra de that se vo ca de.
+    Cho nay tung la bay: neu dem so dong Mapping thi web se bao hoc sinh rang
+    chuong da san sang trong khi chua co ham nao, va ra de that se vo ca de.
+
+    Bai test viet sao cho van dung khi co Lan them ham dan: khong ghim cung
+    chuong nao da co ham, chi kiem tra dung QUAN HE giua ba lop du lieu.
     """
-    assert dem_dang_co_ham(10, 1) > 0            # C1 da co 46 ham
+    co_ham_o_dau = False
+    chua_co_ham_o_dau = False
+
     for lop, chuong in KHOI:
-        if (lop, chuong) == (10, 1):
-            continue
-        assert len(load_mapping(lop, chuong)) > 0   # da co ban ke hoach
-        assert dem_dang_co_ham(lop, chuong) == 0    # nhung chua co ham -> chua san sang
+        mp = load_mapping(lop, chuong)
+        n = dem_dang_co_ham(lop, chuong)
+        assert mp, "lop %d chuong %d chua co ban ke hoach Mapping" % (lop, chuong)
+        # so dang co ham khong bao gio duoc vuot so dong Mapping
+        assert 0 <= n <= len(mp), (
+            "lop %d chuong %d: dem duoc %d dang co ham nhung Mapping chi co %d dong"
+            % (lop, chuong, n, len(mp)))
+        if n:
+            co_ham_o_dau = True
+        else:
+            chua_co_ham_o_dau = True
+
+    assert co_ham_o_dau, "khong chuong nao co ham - kiem tra lai dem_dang_co_ham"
+    assert chua_co_ham_o_dau, (
+        "moi chuong deu co ham roi - hay bo bai test nay, no khong con canh duoc gi")
+
+
+def test_chuong_chua_co_tep_python_thi_dem_ra_khong():
+    """Chuong chua co tep .py thi phai bao 0, du Mapping da day du dang."""
+    from pathlib import Path
+    for lop, chuong in KHOI:
+        tep = Path("data/python_bank/toan%d/L%d_C%d.py" % (lop, lop, chuong))
+        if not tep.exists():
+            assert load_mapping(lop, chuong), "chuong nay phai co Mapping de bai test co nghia"
+            assert dem_dang_co_ham(lop, chuong) == 0, (
+                "lop %d chuong %d khong co tep Python ma van dem ra dang co ham"
+                % (lop, chuong))
