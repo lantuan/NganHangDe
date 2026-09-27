@@ -7730,7 +7730,7 @@ def L10_C1_B2_TH019_TL_A_01(socau, dong=1):
 
     return cauTL
 
-def L10_C1_B2_NB017_SA_C(socau, dang=2):
+def L10_C1_B2_NB017_SA_C_01(socau, dang=2):
 
     BIEN = 60          # miền quét tham số m để kiểm tra tính duy nhất
     A_MIN, A_MAX = -30, 30

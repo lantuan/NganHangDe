@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "L10_C7_B17_NB094",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
@@ -13,7 +13,11 @@
     "content": "Nhận biết được toạ độ của vectơ đối với một hệ trục toạ độ.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "toa_do_vecto", "he_truc_toa_do"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "toa_do_vecto",
+      "he_truc_toa_do"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -30,7 +34,11 @@
     "content": "Tìm được toạ độ của một vectơ, một điểm đối với một hệ trục toạ độ cho trước.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "toa_do_vecto", "toa_do_diem"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "toa_do_vecto",
+      "toa_do_diem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -47,7 +55,13 @@
     "content": "Xác định được toạ độ của vectơ tổng, hiệu, tích của một số với một vectơ bằng toạ độ.",
     "examples": [],
     "scope": "các phép toán bằng toạ độ",
-    "tags": ["hinh_hoc_toa_do", "phep_toan_vecto_toa_do", "tong", "hieu", "tich_so_voi_vecto"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phep_toan_vecto_toa_do",
+      "tong",
+      "hieu",
+      "tich_so_voi_vecto"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -64,7 +78,10 @@
     "content": "Tính được tích vô hướng của hai vectơ bằng toạ độ.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "tich_vo_huong_toa_do"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "tich_vo_huong_toa_do"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -85,7 +102,14 @@
       "Tìm toạ độ trung điểm đoạn thẳng, toạ độ trọng tâm tam giác"
     ],
     "scope": "bài toán hình học phẳng phẳng đơn giản",
-    "tags": ["hinh_hoc_toa_do", "bieu_thuc_toa_do", "do_dai_doan_thang", "goc", "trung_diem", "trong_tam"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "bieu_thuc_toa_do",
+      "do_dai_doan_thang",
+      "goc",
+      "trung_diem",
+      "trong_tam"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -106,11 +130,16 @@
       "Đi qua hai điểm cho trước"
     ],
     "scope": "biết các yếu tố xác định đường thẳng",
-    "tags": ["hinh_hoc_toa_do", "phuong_trinh_duong_thang", "vecto_phap_tuyen", "vecto_chi_phuong"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phuong_trinh_duong_thang",
+      "vecto_phap_tuyen",
+      "vecto_chi_phuong"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_VD099A",
+    "id": "L10_C7_B18_VD099",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
@@ -118,7 +147,7 @@
     "bai": "Đường thẳng trong mặt phẳng toạ độ",
     "bai_so": "18",
     "subsection": null,
-    "MucDo": "TH",
+    "MucDo": "VD",
     "verb": "Lập được",
     "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
     "examples": [
@@ -127,8 +156,13 @@
       "các bài toán chưa cho sẵn các điều kiện cho trước của đường thằng song song hoặc vuống góc khác"
     ],
     "scope": "biết các yếu tố xác định đường thẳng",
-    "tags": ["hinh_hoc_toa_do", "phuong_trinh_duong_thang", "vecto_phap_tuyen", "vecto_chi_phuong"],
-    "difficulty_rank": 2
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phuong_trinh_duong_thang",
+      "vecto_phap_tuyen",
+      "vecto_chi_phuong"
+    ],
+    "difficulty_rank": 3
   },
   {
     "id": "L10_C7_B18_TH100",
@@ -144,11 +178,19 @@
     "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
     "examples": [],
     "scope": "sử dụng phương pháp toạ độ",
-    "tags": ["hinh_hoc_toa_do", "vi_tri_tuong_doi", "hai_duong_thang", "cat_nhau", "song_song", "trung_nhau", "vuong_goc"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "vi_tri_tuong_doi",
+      "hai_duong_thang",
+      "cat_nhau",
+      "song_song",
+      "trung_nhau",
+      "vuong_goc"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C7_B18_VD100A",
+    "id": "L10_C7_B18_VD100",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
     "chuong": "Phương pháp toạ độ trong mặt phẳng",
@@ -161,7 +203,15 @@
     "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
     "examples": [],
     "scope": "sử dụng phương pháp toạ độ",
-    "tags": ["hinh_hoc_toa_do", "vi_tri_tuong_doi", "hai_duong_thang", "cat_nhau", "song_song", "trung_nhau", "vuong_goc"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "vi_tri_tuong_doi",
+      "hai_duong_thang",
+      "cat_nhau",
+      "song_song",
+      "trung_nhau",
+      "vuong_goc"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -178,7 +228,10 @@
     "content": "Tính được khoảng cách từ một điểm đến một đường thẳng bằng phương pháp toạ độ.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "khoang_cach_tu_diem_den_duong_thang"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "khoang_cach_tu_diem_den_duong_thang"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -195,7 +248,10 @@
     "content": "Tính được góc giữa hai đường thẳng bằng phương pháp toạ độ.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "goc_giua_hai_duong_thang"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "goc_giua_hai_duong_thang"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -212,7 +268,11 @@
     "content": "Lập được phương trình đường tròn khi biết tâm và bán kính.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "phuong_trinh_duong_tron", "tam_va_ban_kinh"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phuong_trinh_duong_tron",
+      "tam_va_ban_kinh"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -229,7 +289,11 @@
     "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
     "examples": [],
     "scope": "đường tròn đi qua ba điểm",
-    "tags": ["hinh_hoc_toa_do", "phuong_trinh_duong_tron", "qua_ba_diem"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phuong_trinh_duong_tron",
+      "qua_ba_diem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -246,7 +310,11 @@
     "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
     "examples": [],
     "scope": "đường tròn đi qua ba điểm",
-    "tags": ["hinh_hoc_toa_do", "phuong_trinh_duong_tron", "qua_ba_diem"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "phuong_trinh_duong_tron",
+      "qua_ba_diem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -263,7 +331,11 @@
     "content": "Xác định được tâm và bán kính của đường tròn từ phương trình cho trước.",
     "examples": [],
     "scope": null,
-    "tags": ["hinh_hoc_toa_do", "duong_tron", "tim_tam_va_ban_kinh"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "duong_tron",
+      "tim_tam_va_ban_kinh"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -280,7 +352,11 @@
     "content": "Lập được phương trình tiếp tuyến của đường tròn khi biết toạ độ tiếp điểm.",
     "examples": [],
     "scope": "biết toạ độ tiếp điểm",
-    "tags": ["hinh_hoc_toa_do", "tiep_tuyen_duong_tron", "biet_tiep_diem"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "tiep_tuyen_duong_tron",
+      "biet_tiep_diem"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -297,7 +373,13 @@
     "content": "Nhận biết được ba đường conic (elip, hypebol, parabol) bằng hình học.",
     "examples": [],
     "scope": "nhận biết qua hình ảnh, định nghĩa hình học",
-    "tags": ["hinh_hoc_toa_do", "ba_duong_conic", "elip", "hypebol", "parabol"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "ba_duong_conic",
+      "elip",
+      "hypebol",
+      "parabol"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -314,7 +396,11 @@
     "content": "Lập được phương trình chính tắc của elip trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "examples": [],
     "scope": "phương trình chính tắc",
-    "tags": ["hinh_hoc_toa_do", "elip", "phuong_trinh_chinh_tac"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "elip",
+      "phuong_trinh_chinh_tac"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -331,7 +417,11 @@
     "content": "Lập được phương trình chính tắc của hypebol trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "examples": [],
     "scope": "phương trình chính tắc",
-    "tags": ["hinh_hoc_toa_do", "hypebol", "phuong_trinh_chinh_tac"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "hypebol",
+      "phuong_trinh_chinh_tac"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -348,7 +438,11 @@
     "content": "Lập được phương trình chính tắc của parabol trong mặt phẳng toạ độ khi biết các yếu tố cơ bản.",
     "examples": [],
     "scope": "phương trình chính tắc",
-    "tags": ["hinh_hoc_toa_do", "parabol", "phuong_trinh_chinh_tac"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "parabol",
+      "phuong_trinh_chinh_tac"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -369,7 +463,11 @@
       "Hệ thống định vị sử dụng tính chất của hypebol"
     ],
     "scope": "bài toán thực tiễn đơn giản liên quan đến đường tròn, đường thẳng, conic",
-    "tags": ["hinh_hoc_toa_do", "bai_toan_thuc_tien", "mo_hinh_hoa_toan_hoc"],
+    "tags": [
+      "hinh_hoc_toa_do",
+      "bai_toan_thuc_tien",
+      "mo_hinh_hoa_toan_hoc"
+    ],
     "difficulty_rank": 3
   }
 ]

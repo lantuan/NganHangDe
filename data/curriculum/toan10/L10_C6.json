@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "L10_C6_B13_NB068",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
@@ -13,7 +13,10 @@
     "content": "Nhận biết được khái niệm số gần đúng.",
     "examples": [],
     "scope": null,
-    "tags": ["so_gan_dung", "sai_so"],
+    "tags": [
+      "so_gan_dung",
+      "sai_so"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -30,7 +33,10 @@
     "content": "Nhận biết được khái niệm sai số tuyệt đối.",
     "examples": [],
     "scope": null,
-    "tags": ["so_gan_dung", "sai_so_tuyet_doi"],
+    "tags": [
+      "so_gan_dung",
+      "sai_so_tuyet_doi"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -47,7 +53,10 @@
     "content": "Nhận biết được khái niệm độ chính xác của một số gần đúng.",
     "examples": [],
     "scope": null,
-    "tags": ["so_gan_dung", "do_chinh_xac"],
+    "tags": [
+      "so_gan_dung",
+      "do_chinh_xac"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -64,7 +73,10 @@
     "content": "Nhận biết được khái niệm sai số tương đối.",
     "examples": [],
     "scope": null,
-    "tags": ["so_gan_dung", "sai_so_tuong_doi"],
+    "tags": [
+      "so_gan_dung",
+      "sai_so_tuong_doi"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -81,7 +93,10 @@
     "content": "Biết viết số gần đúng dưới dạng chuẩn.",
     "examples": [],
     "scope": "dạng viết chuẩn",
-    "tags": ["so_gan_dung", "dang_chuan"],
+    "tags": [
+      "so_gan_dung",
+      "dang_chuan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -98,7 +113,10 @@
     "content": "Biết quy tròn số gần đúng căn cứ vào độ chính xác cho trước.",
     "examples": [],
     "scope": "quy tròn dựa vào độ chính xác",
-    "tags": ["so_gan_dung", "quy_tron_so"],
+    "tags": [
+      "so_gan_dung",
+      "quy_tron_so"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -115,7 +133,11 @@
     "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "so_trung_binh", "xu_the_trung_tam"],
+    "tags": [
+      "thong_ke",
+      "so_trung_binh",
+      "xu_the_trung_tam"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -132,7 +154,11 @@
     "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: trung vị (median).",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "trung_vi", "xu_the_trung_tam"],
+    "tags": [
+      "thong_ke",
+      "trung_vi",
+      "xu_the_trung_tam"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -149,7 +175,11 @@
     "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: tứ phân vị (quartiles).",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "tu_phan_vi", "xu_the_trung_tam"],
+    "tags": [
+      "thong_ke",
+      "tu_phan_vi",
+      "xu_the_trung_tam"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -166,7 +196,11 @@
     "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: mốt (mode).",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "mot", "xu_the_trung_tam"],
+    "tags": [
+      "thong_ke",
+      "mot",
+      "xu_the_trung_tam"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -183,7 +217,11 @@
     "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo xu thế trung tâm trong các tình huống thực tiễn.",
     "examples": [],
     "scope": "tính huống thực tiễn đơn giản",
-    "tags": ["thong_ke", "xu_the_trung_tam", "y_nghia_thong_ke"],
+    "tags": [
+      "thong_ke",
+      "xu_the_trung_tam",
+      "y_nghia_thong_ke"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -200,7 +238,11 @@
     "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
     "examples": [],
     "scope": "thông qua biểu đồ hộp",
-    "tags": ["thong_ke", "bieu_do_hop", "gia_tri_ngoai_le"],
+    "tags": [
+      "thong_ke",
+      "bieu_do_hop",
+      "gia_tri_ngoai_le"
+    ],
     "difficulty_rank": 3
   },
   {
@@ -217,7 +259,11 @@
     "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng biến thiên.",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "khoang_bien_thien", "do_phan_tan"],
+    "tags": [
+      "thong_ke",
+      "khoang_bien_thien",
+      "do_phan_tan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -234,7 +280,11 @@
     "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "khoang_tu_phan_vi", "do_phan_tan"],
+    "tags": [
+      "thong_ke",
+      "khoang_tu_phan_vi",
+      "do_phan_tan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -251,7 +301,11 @@
     "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: phương sai.",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "phuong_sai", "do_phan_tan"],
+    "tags": [
+      "thong_ke",
+      "phuong_sai",
+      "do_phan_tan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -268,7 +322,11 @@
     "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: độ lệch chuẩn.",
     "examples": [],
     "scope": "mẫu số liệu không ghép nhóm",
-    "tags": ["thong_ke", "do_lech_chuan", "do_phan_tan"],
+    "tags": [
+      "thong_ke",
+      "do_lech_chuan",
+      "do_phan_tan"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -285,11 +343,15 @@
     "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
     "examples": [],
     "scope": "tình huống thực tiễn đơn giản",
-    "tags": ["thong_ke", "do_phan_tan", "y_nghia_thong_ke"],
+    "tags": [
+      "thong_ke",
+      "do_phan_tan",
+      "y_nghia_thong_ke"
+    ],
     "difficulty_rank": 2
   },
   {
-    "id": "L10_C6_B15_VD084A",
+    "id": "L10_C6_B15_VD084",
     "lop": 10,
     "hoc_phan": "Thống kê và Xác suất",
     "chuong": "Một số yếu tố thống kê và xác suất",
@@ -302,7 +364,11 @@
     "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
     "examples": [],
     "scope": "tình huống thực tiễn",
-    "tags": ["thong_ke", "do_phan_tan", "y_nghia_thong_ke"],
+    "tags": [
+      "thong_ke",
+      "do_phan_tan",
+      "y_nghia_thong_ke"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -319,7 +385,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: phép thử ngẫu nhiên.",
     "examples": [],
     "scope": null,
-    "tags": ["xac_suat", "phep_thu_ngau_nhien"],
+    "tags": [
+      "xac_suat",
+      "phep_thu_ngau_nhien"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -336,7 +405,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: không gian mẫu.",
     "examples": [],
     "scope": null,
-    "tags": ["xac_suat", "khong_gian_mau"],
+    "tags": [
+      "xac_suat",
+      "khong_gian_mau"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -353,7 +425,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: biến cố.",
     "examples": [],
     "scope": "biến cố liên quan đến phép thử",
-    "tags": ["xac_suat", "bien_co"],
+    "tags": [
+      "xac_suat",
+      "bien_co"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -370,7 +445,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: biến cố không thể.",
     "examples": [],
     "scope": null,
-    "tags": ["xac_suat", "bien_co_khong_the"],
+    "tags": [
+      "xac_suat",
+      "bien_co_khong_the"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -387,7 +465,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: biến cố chắc chắn.",
     "examples": [],
     "scope": null,
-    "tags": ["xac_suat", "bien_co_chac_chan"],
+    "tags": [
+      "xac_suat",
+      "bien_co_chac_chan"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -404,7 +485,10 @@
     "content": "Nhận biết được một số khái niệm về xác suất: biến cố đối.",
     "examples": [],
     "scope": null,
-    "tags": ["xac_suat", "bien_co_doi"],
+    "tags": [
+      "xac_suat",
+      "bien_co_doi"
+    ],
     "difficulty_rank": 1
   },
   {
@@ -425,7 +509,11 @@
       "Chọn quân bài"
     ],
     "scope": "các thí nghiệm đơn giản",
-    "tags": ["xac_suat", "mo_ta_khong_gian_mau", "mo_ta_bien_co"],
+    "tags": [
+      "xac_suat",
+      "mo_ta_khong_gian_mau",
+      "mo_ta_bien_co"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -442,7 +530,11 @@
     "content": "Tính được xác suất của biến cố trong các thí nghiệm đơn giản bằng định nghĩa cổ điển.",
     "examples": [],
     "scope": "định nghĩa cổ điển, thí nghiệm đơn giản",
-    "tags": ["xac_suat", "tinh_xac_suat", "dinh_nghia_co_dien"],
+    "tags": [
+      "xac_suat",
+      "tinh_xac_suat",
+      "dinh_nghia_co_dien"
+    ],
     "difficulty_rank": 2
   },
   {
@@ -459,7 +551,11 @@
     "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
     "examples": [],
     "scope": "bài toán thực tiễn đơn giản",
-    "tags": ["xac_suat", "dinh_nghia_co_dien", "bai_toan_thuc_tien"],
+    "tags": [
+      "xac_suat",
+      "dinh_nghia_co_dien",
+      "bai_toan_thuc_tien"
+    ],
     "difficulty_rank": 3
   }
 ]

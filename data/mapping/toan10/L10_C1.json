@@ -1,5 +1,5 @@
 [
-    {
+  {
     "id": "L10_C1_B1_NB001_MC_A",
     "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -108,7 +108,7 @@
     "Dang": "Tìm giả thiết, kết luận"
   },
   {
-    "id": "L10_C1_B2_NB017A_MC_A",
+    "id": "L10_C1_B2_NB017_MC_A",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con"
@@ -178,5 +178,29 @@
     "content": "Mệnh đề",
     "Loai": "Đúng sai",
     "Dang": "Tập hợp"
+  },
+  {
+    "id": "L10_C1_B1_TH003_TL_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Tự luận",
+    "Dang": "Xét tính đúng sai mệnh đề chứa kí hiệu với mọi, tồn tại"
+  },
+  {
+    "id": "L10_C1_B2_NB017_SA_C",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên"
+  },
+  {
+    "id": "L10_C1_B2_TH019_TL_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Tự luận",
+    "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
+  },
+  {
+    "id": "L10_C1_B2_VD021_TL_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Tự luận",
+    "Dang": "Tìm tham số để hợp, giao thoả điều kiện cho trước"
   }
 ]

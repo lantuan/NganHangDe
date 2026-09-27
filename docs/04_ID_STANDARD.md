@@ -292,3 +292,57 @@ Nếu Generator ID không có bất kỳ hàm nào khớp (`_01` trở lên khô
 - Không đổi số thứ tự biến thể đã phát hành (VD: đã có `_01` thì không xoá,
   chỉ được thêm `_02`, `_03`... về sau — giữ đúng nguyên tắc bất biến ID
   đã nêu ở phần trên của tài liệu).
+---
+
+# Quy uoc: CUNG don vi kien thuc thi CUNG so
+
+Chot ngay 27/09/2026 (co Lan). Day la quy uoc de RA DE khong bi trung dang,
+khong phai quy uoc danh so cho dep.
+
+## Noi dung quy uoc
+
+Mot don vi kien thuc co the duoc hoi o NHIEU MUC DO khac nhau. Khi do cac ban
+ghi giu NGUYEN SO, chi doi phan muc do:
+
+    L10_C1_B2_TH021    Xac dinh hop, giao, hieu... tren truc so   (thong hieu)
+    L10_C1_B2_VD021    Xac dinh hop, giao, hieu... tren truc so   (van dung)
+
+KHONG dung hau to chu cai (VD021A) cho truong hop nay.
+
+## Vi sao
+
+Neu mot de lay ca TH021 lan VD021 thi hai cau ay cung mot dang toan, chi khac
+do kho -- hoc sinh nhin vao la thay trung. Cung mot so chinh la dau hieu de
+may biet "hai ban ghi nay that ra la mot", tu do khong lay ca hai.
+
+Thuat toan dung blueprint co ham _don_vi_kien_thuc() trong
+app/services/exam_blueprint_service.py lam viec do: bo phan muc do khoi ma de
+lay khoa.
+
+    L10_C1_B2_TH021  ->  L10_C1_B2_021
+    L10_C1_B2_VD021  ->  L10_C1_B2_021     cung khoa -> khong lay ca hai
+
+Chi khi da het sach lua chon khac (vong 2) thi moi chap nhan lap, vi de van
+phai du so cau theo ma tran.
+
+## Khi nao thi dung so KHAC
+
+Khi noi dung KHAC nhau, du cung bai va cung muc do. Vi du chuong 7:
+
+    L10_C7_B19_VD104    Lap phuong trinh duong tron khi biet toa do ba diem
+    L10_C7_B19_VD104A   Lap phuong trinh duong tron khi biet dieu kien khong
+                        truc tiep cho truoc
+
+Hai cai nay la HAI don vi kien thuc khac nhau nen PHAI khac so. Hien VD104A
+dang dung hau to chu cai -- xem muc "Con ton dong" ben duoi.
+
+## Con ton dong
+
+L10_C7_B19_VD104A: noi dung khac VD104 nen dang la mot don vi rieng, phai cap
+so rieng chu khong phai hau to A. Chua sua vi so chay lien tuc theo tung chuong
+(C7 la 094-111), cap so moi o cuoi day (126) se pha tinh lien tuc do. Cho co Lan
+quyet: hoac cap 126, hoac danh lai so cho ca C7 tro di (hien an toan vi tu C2
+tro di chua co mapping hay ham Python nao tro vao).
+
+Ngoai ra scope cua VD104A dang bi chep nham tu VD104 ("duong tron di qua ba
+diem") trong khi noi dung la "dieu kien khong truc tiep cho truoc".

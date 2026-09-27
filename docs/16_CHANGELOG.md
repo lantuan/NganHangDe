@@ -4214,3 +4214,75 @@ Restart dich vu thanh cong ma web loi van la loi - khong duoc bao xong.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.73 - 2026-09-27
+
+## Soat curriculum + mapping lop 10, va 5 loi
+
+Doi chieu voi Chuong trinh GDPT mon Toan 2018 (Thong tu 32/2018/TT-BGDDT),
+phan lop 10 (tr.79-88).
+
+## Loi 1 (NANG NHAT) - 4 ham da viet xong ma he thong khong dung duoc
+
+question_selector_service chi chon cau TU MAPPING. Ham Python khong co ten
+trong mapping thi may khong bao gio nhin thay. Bon ham sau da viet xong, chay
+duoc, nhung quen khai vao mapping nen la ma chet:
+
+    L10_C1_B1_TH003_TL_A     Tu luan
+    L10_C1_B2_NB017_SA_C     Tra loi ngan
+    L10_C1_B2_TH019_TL_A     Tu luan
+    L10_C1_B2_VD021_TL_A     Tu luan
+
+Dang chu y: ca bon deu la SA va TL - dung cai o co Lan than la mong nhat trong
+SKKN. Da khai vao mapping, dung duoc ngay, khong phai viet them gi.
+
+## Loi 2 - ham L10_C1_B2_NB017_SA_C thieu duoi _01
+
+generator_service._find_variant_functions tim theo mau ^<id>_\d{2}$ nen ham
+khong co duoi _01 se khong bao gio duoc tim thay. Da doi ten thanh
+L10_C1_B2_NB017_SA_C_01. Neu chi khai vao mapping ma khong sua ten thi van
+hong - phai sua ca hai.
+
+## Loi 3 - mot chu A thua trong mapping
+
+L10_C1_B2_NB017A_MC_A -> L10_C1_B2_NB017_MC_A. Dong nay dang tro vao mot ma
+curriculum khong ton tai va mot ham Python khong ton tai.
+
+## Loi 4 - curriculum thieu VD014
+
+Mapping da co VD014_MC_A va VD014_SA_A (co Lan chuyen tu TH sang VD vi muc TH
+kho ra de) nhung quen them ban ghi ben curriculum. Da them L10_C1_B1_VD014.
+
+## Loi 5 (NANG) - thuat toan chua chan trung don vi kien thuc
+
+Quy uoc cua co Lan: cung don vi kien thuc thi cung so, de ma tran khong lay ca
+hai muc ma de bi trung dang. Nhung _chon_curriculum_id dang ghi nho theo ID
+DAY DU, ma TH021 va VD021 la hai ID khac nhau -> van lay ca hai duoc. Y dinh
+cua co Lan chua he duoc thuc hien.
+
+Da them ham _don_vi_kien_thuc() bo phan muc do khoi ma de lay khoa, va doi
+da_dung sang dung khoa do. Chi tiet: docs/04_ID_STANDARD.md.
+
+## Ngoai ra
+
+- NB017 bi mat phan trong ngoac cua van ban Bo ("tap con, hai tap hop bang
+  nhau, tap rong va biet su dung cac ki hieu con, chua, rong"). TH018 ngay
+  duoi lai giu nguyen ngoac. Da lay lai cho NB017 va ghi vao scope. Phan trong
+  ngoac chinh la hang rao pham vi - mat no thi hang sinh cau hoi khong biet
+  duoc phep hoi toi dau.
+- Bo hau to chu cai o 3 cho dung sai quy uoc: VD084A -> VD084, VD099A -> VD099,
+  VD100A -> VD100.
+- VD099A con sai them: id ghi VD nhung truong MucDo lai ghi TH, thanh ra trung
+  y het TH099. Da sua MucDo thanh VD.
+
+## Kiem thu
+
+142 bai test qua (them tests/test_don_vi_kien_thuc.py, 7 bai).
+test_supabase.py khong chay duoc tren may ao (can mang ra Supabase).
+
+Ba lop du lieu cua chuong 1 gio khop het: 17 yeu cau can dat <-> 34 dang cau
+hoi <-> 46 ham Python, khong con mo coi chieu nao.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

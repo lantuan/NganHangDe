@@ -250,6 +250,26 @@ def _phan_bo_vd_vdc(
     return {c: v for c, v in ket_qua.items() if v["vd"] > 0 or v["vdc"] > 0}
 
 
+_DON_VI_PATTERN = re.compile(r"_(?:NB|TH|VD|VDC)(\d+[A-Z]?)$")
+
+
+def _don_vi_kien_thuc(curriculum_id: str) -> str:
+    """
+    Khoá "đơn vị kiến thức": bỏ mức độ ra khỏi Curriculum ID.
+
+        L10_C1_B2_TH021  ->  L10_C1_B2_021
+        L10_C1_B2_VD021  ->  L10_C1_B2_021
+
+    Quy ước của ngân hàng: CÙNG một đơn vị kiến thức thì CÙNG số, chỉ khác
+    mức độ. Nếu một đề lấy cả hai mức của cùng một số thì hai câu sẽ cùng
+    một dạng toán, chỉ khác độ khó -- nhìn vào là thấy trùng.
+
+    Vì vậy khi đã dùng một mức của đơn vị nào thì không lấy mức còn lại của
+    chính đơn vị đó nữa, trừ khi đã hết sạch lựa chọn khác (vòng 2).
+    """
+    return _DON_VI_PATTERN.sub(lambda m: "_" + m.group(1), curriculum_id)
+
+
 def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set) -> list[dict]:
     """
     Chọn so_luong Curriculum entries (không nhất thiết distinct nếu hết
@@ -257,7 +277,9 @@ def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set)
 
     Quy tắc (doc 08_CODE_NODES.md, mục CN_BuildBlueprint bước 4):
     - Ưu tiên rải ĐỀU giữa các bài (không dồn hết vào 1 bài).
-    - Không lặp competency cùng mức nếu còn lựa chọn khác (da_dung).
+    - Không lặp ĐƠN VỊ KIẾN THỨC nếu còn lựa chọn khác (da_dung) -- kể cả
+      khi hai bản ghi khác mức độ nhưng cùng số (L10_C1_B2_TH021 và
+      L10_C1_B2_VD021 là cùng một đơn vị, không lấy cả hai).
     - Chỉ lặp khi đã dùng hết toàn bộ competency khác trong đề hiện tại.
     """
     if so_luong <= 0 or not entries_muc_do:
@@ -283,12 +305,12 @@ def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set)
                 break
             ung_vien = [
                 e for e in theo_bai[bai]
-                if e["id"] not in da_dung and e not in chon
+                if _don_vi_kien_thuc(e["id"]) not in da_dung and e not in chon
             ]
             if ung_vien:
                 e = ung_vien[0]
                 chon.append(e)
-                da_dung.add(e["id"])
+                da_dung.add(_don_vi_kien_thuc(e["id"]))
                 con_thieu -= 1
                 lay_duoc_vong_nay = True
         if not lay_duoc_vong_nay:
