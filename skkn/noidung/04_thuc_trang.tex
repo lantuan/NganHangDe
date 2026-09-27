@@ -107,6 +107,10 @@ Các mã đề khác nhau thật sự & Không & Không & Có & Có \\ \hline
 Đáp án, lời giải chắc chắn đúng & Có & Có & Không & Có \\ \hline
 Đúng khung chương trình & Có & Tuỳ nguồn & Không chắc & Có \\ \hline
 Đúng ma trận bốn mức độ & Thủ công & Tuỳ nguồn & Không chắc & Tự động \\ \hline
+Nhiều mã cùng đơn vị kiến thức, chỉ khác số liệu & Không & Không & Không chắc & Có \\ \hline
+Lấy được mã nguồn \LaTeX\ để tự chỉnh & Tuỳ nguồn & Không & Không & Có \\ \hline
+Giảng lại cho học sinh câu làm sai & Không & Không & Có & Có \\ \hline
+Lời giảng bị khoá vào đáp án đã kiểm chứng & --- & --- & \textbf{Không} & \textbf{Có} \\ \hline
 \end{tabular}
 \end{center}
 \textit{Bảng 3. So sánh sáng kiến với các giải pháp đã có}
@@ -114,7 +118,30 @@ Các mã đề khác nhau thật sự & Không & Không & Có & Có \\ \hline
 Bảng trên cho thấy khoảng trống mà sáng kiến này lấp vào: \textbf{vừa giữ được
 quyền quyết định nội dung của giáo viên như ngân hàng tĩnh, vừa sinh được đề
 mới như trí tuệ nhân tạo, mà không mang theo rủi ro sai sót của trí tuệ nhân
-tạo}. Cách làm để đạt được cả ba điều đó cùng lúc là: câu hỏi do chính giáo
+tạo}.
+
+Ba dòng cuối bảng là chỗ tôi cho là khác biệt rõ nhất, xin nói thêm:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=3pt]
+  \item \textbf{Nhiều mã đề cùng đơn vị kiến thức.} Phần mềm trộn đề chỉ đảo
+        thứ tự nên các mã thực chất là một đề; các trang sinh đề bằng trí tuệ
+        nhân tạo thì mỗi lần cho ra một dạng khác, không kiểm soát được là có
+        cùng đơn vị kiến thức hay không. Ở đây, nhiều mã đề đi ra từ \textit{cùng
+        một tập hàm sinh câu hỏi}, nên chắc chắn cùng dạng, cùng mức độ, chỉ
+        khác số liệu --- giáo viên dùng in kiểm tra được ngay, không phải ngồi
+        đổi số bằng tay.
+  \item \textbf{Lấy được mã nguồn \LaTeX.} Phần lớn các giải pháp chỉ trả về
+        bản PDF đã đóng. Giáo viên quen dùng \LaTeX\ cần tệp nguồn để ghép vào
+        mẫu đề của trường hoặc thêm một câu riêng --- hệ thống lo phần nặng
+        nhọc, quyền biên tập cuối cùng vẫn thuộc về giáo viên.
+  \item \textbf{Lời giảng bị khoá vào đáp án đã kiểm chứng.} Đây là khác biệt
+        quan trọng nhất, và cũng là chỗ dễ bị bỏ qua nhất. Các trợ giảng trí
+        tuệ nhân tạo hiện có đều \textit{tự giải lại} bài toán rồi giảng --- mà
+        mô hình ngôn ngữ tính toán số học rất hay sai và sai một cách tự tin.
+        Ở hệ thống này, đáp án và lời giải đã do chương trình sinh đề tạo ra từ
+        trước; máy chỉ được diễn đạt lại, không được tính. Ba lớp khoá bảo đảm
+        điều đó (Giải pháp 8).
+\end{itemize} Cách làm để đạt được cả ba điều đó cùng lúc là: câu hỏi do chính giáo
 viên viết ra, nhưng viết dưới dạng \textit{chương trình Python sinh câu hỏi}
 chứ không phải dưới dạng văn bản cố định. Toàn bộ số liệu, đáp án và lời giải
 đều do Python tính ra bằng công thức toán học, nên không thể sai; phạm vi kiến

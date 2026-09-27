@@ -4032,3 +4032,74 @@ Da them skkn/skkn.pdf vao .gitignore (co tu bien dich tren may).
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.70 - 2026-09-27
+
+## SKKN: thiet ke thuc nghiem su pham, tinh cap thiet, phieu khao sat
+
+Co Lan se khao sat diem 2 lop truoc/sau khi dung web:
+  Lop doi chung  : 10C9 nam hoc 2025-2026
+  Lop thuc nghiem: 10C9 nam hoc 2026-2027
+Ly do: khoi 10 co chi day 2 lop la chuyen Toan va chuyen Dia, khong the
+lay lop nay lam doi chung cho lop kia (khac han ve dinh huong va nang
+luc), nen phai so cung mot lop chuyen Dia o hai nam hoc lien ke.
+
+## DIEM YEU PHAI VA - da noi thang trong bai viet
+
+Day la DOI CHUNG LICH SU: hai nhom hoc sinh khac nhau, khong cung thoi
+diem. Hoi dong se hoi "lam sao biet chenh lech la do web chu khong phai
+do lua nay gioi hon". Ba cach khac phuc, viet ro trong muc moi:
+1. Chung minh 2 lua tuong duong dau vao bang DIEM THI VAO 10 MON TOAN
+   (de chung toan tinh, cham tap trung, khong phu thuoc co Lan).
+2. So dau ra SAU KHI DA KHU anh huong dau vao (ANCOVA).
+3. Chay song song thiet ke thu hai: TRUOC-SAU trong chinh lop thuc
+   nghiem - khong dinh van de khac lua.
+
+VIEC GAP da bao co Lan: lay diem thi vao 10 cua lua 2025-2026 ngay khi
+con tra duoc trong ho so cu.
+
+## Da viet
+
+07_hieu_qua: muc "Thiet ke thuc nghiem su pham" - 2 nhom so sanh, ly do
+chon 2 lop khac nam (noi thang rang buoc thuc te), diem yeu + 3 cach
+khac phuc, Bang 12 cac phep kiem dinh, Bang 13 ket qua xu li thong ke
+(bang trong de co dien).
+
+Phep kiem dinh: Shapiro-Wilk (n<50), t-test doc lap, Mann-Whitney U,
+t-test ghep cap, ANCOVA, Cohen's d, Cronbach's alpha. Nhac co Lan BAO CA
+p LAN d: voi si so ~30, p co the khong dat 0,05 du chenh lech co y nghia
+thuc tien.
+
+02_mo_dau: muc "Tinh cap thiet" (3 ly do) + "Tinh kha thi". Ly do cap
+thiet nhat: tri tue nhan tao DA VAO LOP HOC ROI du nha truong co chuan bi
+hay khong - van de khong phai "co nen dung hay khong" ma "dung loai co
+kiem soat hay de cac em tu dung loai khong kiem soat".
+
+04_thuc_trang: Bang 3 them 4 tieu chi (nhieu ma cung don vi kien thuc,
+lay duoc ma nguon .tex, giang lai cau lam sai, LOI GIANG BI KHOA VAO DAP
+AN DA KIEM CHUNG) + doan binh luan 3 khac biet ro nhat.
+
+skkn/phieu_khao_sat.tex: tep DOC LAP, 3 trang (2 trang phat cho HS + 1
+trang huong dan cho GV). Likert 5 muc, 4 nhom (thai do, tu tin, thoi quen
+tu luyen, cam nhan ve he thong) + 4 cau tra loi ngan. Dung 2 lan: dau nam
+va cuoi dot.
+
+## Danh lai SO BANG
+
+Bang "Ba lop khoa" (v2.69) chen giua Bang 4 va 5 nhung danh nham la 8 ->
+danh lai toan bo: nay lien mach 1-14, tham chieu trong van da khop.
+
+## Bien dich thu
+
+Ca 2 tep sach loi (thu voi font thay the TeX Gyre Termes vi may ao khong
+co Times New Roman): skkn 66 trang, phieu_khao_sat 3 trang.
+
+## Loi cua Claude trong luc lam
+
+Xoa nham phieu_khao_sat.tex bang ky tu dai dien "phieu_khao_sat.*" khi
+don tep tam. Da viet lai ngay va bien dich kiem chung. Bai hoc: khong
+dung dai dien de xoa khi trong thu muc co ca tep nguon lan tep tam.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
