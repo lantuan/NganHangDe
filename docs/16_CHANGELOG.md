@@ -4286,3 +4286,53 @@ hoi <-> 46 ham Python, khong con mo coi chieu nao.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.74 - 2026-09-27
+
+## Soat xong curriculum lop 10 voi van ban Bo
+
+Doi chieu tung dong 126 yeu cau can dat trong data/curriculum/toan10/ voi
+Thong tu 32/2018/TT-BGDDT phan lop 10 (tr.79-88).
+
+Ket qua: 24 cho THIEU, 9 cho LECH. Chi tiet tung dong kem muc do de xuat:
+docs/24_SOAT_CURRICULUM_L10.md
+
+CHUA them dong nao vao curriculum - cho co Lan duyet, vi viec dat muc do cho
+tung yeu cau la chuyen mon cua giao vien.
+
+## Mot so cho dang chu y
+
+C8: Bo tach HAI gach dau dong - "Tinh duoc so cac hoan vi, chinh hop, to hop"
+va "... bang may tinh cam tay". Curriculum chi co ban may tinh cam tay. Ban
+tinh bang cong thuc moi la ban ra de duoc.
+
+C7: khong co ban ghi nao cho "Mo ta duoc phuong trinh tong quat va phuong
+trinh tham so cua duong thang" - day la cau nhan biet ra de nhieu nhat cua
+bai 18.
+
+C3: "Mo ta duoc cach giai tam giac" bi bo. Bo viet chung mot gach dau dong voi
+ve "van dung vao bai toan thuc tien"; co Lan moi tach ve sau.
+
+C6 thieu nhieu nhat (11 cho), gom ca "tinh xac suat cua bien co doi" va "cac
+tinh chat co ban cua xac suat".
+
+C7 dang ghi hoc_phan la "Dai so va Mot so yeu to giai tich" trong khi Bo xep
+"Phuong phap toa do trong mat phang" vao HINH HOC VA DO LUONG.
+
+## Viec phai quyet truoc khi them
+
+Them 25 ban ghi moi vao giua se pha tinh lien tuc cua so theo chuong. Day la
+CO HOI CUOI CUNG de danh lai so re: C2-C8 hien chua co mapping va chua co ham
+Python nao tro vao. Khi da viet ham Python roi thi danh lai se lam mo coi toan
+bo. Xem muc C trong docs/24_SOAT_CURRICULUM_L10.md.
+
+## Dinh chinh mot cau Claude noi sai
+
+Claude tung noi voi co Lan rang bai so "nhay B12, B16, B20 vi do la bai tap
+cuoi chuong". SAI. Ca 23 bai deu co ban ghi: B12 Phuong trinh quy ve phuong
+trinh bac hai, B16 Bien co va dinh nghia co dien cua xac suat, B20 Ba duong
+conic. Claude doc nham vi luc do chi xem 14 ban ghi dau moi tep.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
