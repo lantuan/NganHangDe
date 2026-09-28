@@ -256,6 +256,27 @@
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
+    "id": "L10_C3_B5_NB029_MC_E",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xét dấu giá trị lượng giác khi biết khoảng của góc",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_F",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc giá trị lượng giác theo toạ độ điểm M trên hình vẽ",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_G",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết dấu giá trị lượng giác, suy ra khoảng của góc",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C3_B5_TH030_TL_A",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Tự luận",

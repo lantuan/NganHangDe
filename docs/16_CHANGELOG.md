@@ -5961,3 +5961,77 @@ khau SINH CAU rieng, khong qua PDF.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.99 - 2026-09-28
+
+## Mot yeu cau NB co the co NHIEU DANG - them ba dang cho L10_C3_B5_NB029
+
+Co Lan chi ra: khong can bo sung yeu cau vao Curriculum, vi MOT yeu cau
+Nhan biet von da de ra duoc nhieu dang khac nhau. Co neu ba vi du cho bai
+"Gia tri luong giac cua mot goc tu 0 do den 180 do":
+
+    1. Xet dau: goc alpha tu 0 den 90 thi cos alpha > hay < 0; de tu sinh
+       ra sin, tan, cot.
+    2. Ve goc alpha tren he truc, diem M, hoi ve toa do x_M, y_M,
+       x_M/y_M... la sin, cos, tan hay cot.
+    3. Ve goc va he truc: voi cos > 0 thi goc tu dau den dau.
+
+Da kiem chung truoc khi viet: bo chon cau CO xoay vong cac chu cai. Khi
+NB029 duoc chon 4 lan trong mot de thi ra 4 dang KHAC NHAU, va thu tu doi
+theo tung de. Nen them dang la co tac dung ngay, khong can sua gi them.
+
+Ba dang moi (deu la CLAUDE THEM 28/09/2026, co Lan kiem tra lai):
+
+    NB029_MC_E  Xet dau gia tri luong giac khi biet khoang cua goc
+    NB029_MC_F  Doc gia tri luong giac theo toa do diem M TREN HINH VE
+    NB029_MC_G  Biet dau gia tri luong giac, suy ra khoang cua goc
+
+Truoc: 4 dang trac nghiem duoi NB029. Nay: 7 dang.
+
+## Hai cho phai can than khi viet ba dang nay
+
+### Hinh ve khong duoc mau thuan voi de
+
+Ban dau dang MC_G ve san mot goc cu the. Nhung de cho dau
+(vi du cos alpha < 0) roi hoi goc nam trong khoang nao - neu hinh ve san
+goc thoa man gia thiet thi hoc sinh doc thang dap an tren hinh, cau hoi
+mat het y nghia; tram trong hon, ban chay thu dau tien ra hinh goc NHON
+trong khi de cho cos alpha < 0, tuc la hinh SAI so voi de.
+
+Nay MC_G dung hinh rieng _hinh_nua_duong_tron_hai_phia(): ve HAI vi tri
+mau cua M, mot ben phai va mot ben trai truc Oy, kem hoanh do x_M va x_N.
+Hoc sinh thay duoc dau cua hoanh do doi ra sao ma van phai tu chon khoang.
+
+### Hai dau mut cua khoang
+
+Cac khoang ghi trong MC_G la khoang DUNG BANG tap nghiem, da xet ca hai
+dau mut:
+
+    cos alpha > 0   <=>   0 <= alpha < 90
+    cos alpha < 0   <=>   90 < alpha <= 180   (vi cos 180 = -1 < 0)
+    tan alpha > 0   <=>   0 < alpha < 90      (vi tan 0 = 0)
+    tan alpha < 0   <=>   90 < alpha < 180    (vi tan 180 = 0)
+
+Phuong an nhieu deu la khang dinh SAI, khong dung
+"0 <= alpha <= 180" lam nhieu vi cai do gia thiet da cho, tuc la DUNG.
+
+## Da kiem chung the nao
+
+1. Chay 40 lan moi dang: khong loi, moi cau dung MOT dap an dung, bon
+   phuong an doi mot khac nhau, ra 23-26 bo phuong an khac nhau.
+2. Hai hinh moi dich qua duong ra hinh cho web (dich_hinh) deu ra anh,
+   va da XEM TAN MAT anh de kiem tra. Lan dau nhan y_M cham vao cung tron
+   khi goc lon nen da ha goc toi da xuong 60 do.
+3. Chay 8 de chuong 3: ca bay dang NB029 deu duoc dung
+   (MC_A 3, MC_B 3, MC_C 7, MC_D 4, MC_E 6, MC_F 5, MC_G 4).
+4. 445 bai test qua, 8 bo qua.
+
+## Ap dung tiep
+
+Cach nay dung cho MOI chuong, khong rieng chuong 3: chuong nao it yeu cau
+trong Curriculum thi them DANG duoi yeu cau san co, khong phai them yeu
+cau moi.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

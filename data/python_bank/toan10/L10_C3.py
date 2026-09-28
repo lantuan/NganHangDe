@@ -2676,3 +2676,287 @@ def L10_C3_TF_E_01(socau, socot=1):
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+
+
+# ==========================================================
+# Ba dạng NHẬN BIẾT bổ sung cho yêu cầu L10_C3_B5_NB029
+# (giá trị lượng giác của một góc từ 0 độ đến 180 độ).
+#
+# CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+# Ba dạng này theo đúng ba ví dụ cô Lan đưa ra:
+#   MC_E  xét dấu giá trị lượng giác khi biết khoảng của góc
+#   MC_F  đọc sin/cos/tan/cot theo toạ độ điểm M TRÊN HÌNH VẼ
+#   MC_G  biết dấu một giá trị lượng giác, suy ra khoảng của góc
+# ==========================================================
+
+# Bảng dấu trên nửa đường tròn đơn vị, dùng chung cho MC_E.
+#   0  < alpha < 90 : M nằm bên phải Oy nên x_M > 0, y_M > 0
+#   90 < alpha < 180: M nằm bên trái  Oy nên x_M < 0, y_M > 0
+DAU_GTLG = {
+    "nhon": {r"\sin": 1, r"\cos": 1, r"\tan": 1, r"\cot": 1},
+    "tu":   {r"\sin": 1, r"\cos": -1, r"\tan": -1, r"\cot": -1},
+}
+
+MO_TA_KHOANG = {
+    "nhon": r"$0^{\circ} < \alpha < 90^{\circ}$",
+    "tu": r"$90^{\circ} < \alpha < 180^{\circ}$",
+}
+
+LY_DO_KHOANG = {
+    "nhon": (r"Với $0^{\circ} < \alpha < 90^{\circ}$ thì điểm $M$ nằm trên phần "
+             r"nửa đường tròn đơn vị ở \textbf{bên phải} trục $Oy$, nên "
+             r"$x_M > 0$ và $y_M > 0$."),
+    "tu": (r"Với $90^{\circ} < \alpha < 180^{\circ}$ thì điểm $M$ nằm trên phần "
+           r"nửa đường tròn đơn vị ở \textbf{bên trái} trục $Oy$, nên "
+           r"$x_M < 0$ còn $y_M > 0$."),
+}
+
+
+def _hinh_nua_duong_tron(goc, ten_diem="M", ve_hinh_chieu=True):
+    r"""Nửa đường tròn đơn vị, góc $\alpha$ và điểm $M$ trên đó.
+
+    Có vẽ hình chiếu của $M$ xuống hai trục để học sinh ĐỌC ĐƯỢC
+    $x_M$, $y_M$ ngay trên hình - đây chính là chỗ làm câu hỏi nhẹ đi
+    một mức so với việc chỉ cho toạ độ bằng chữ.
+    """
+    chieu = ""
+    if ve_hinh_chieu:
+        chieu = (
+            "\\draw[dashed] (M) -- ({cos(%d)*1.6},0) node[below]"
+              "{\\footnotesize $x_M$};\n" % goc
+            + "\\draw[dashed] (M) -- (0,{sin(%d)*1.6}) node[left]"
+              "{\\footnotesize $y_M$};\n" % goc
+        )
+    return (
+        "\\begin{tikzpicture}[>=stealth,x=1.0cm,y=1.0cm,thick,scale=1.2]\n"
+        "\\def\\r{1.6}\n"
+        "\\draw[->] (-\\r - 0.6,0) -- (\\r + 0.6,0) node[below] {$x$};\n"
+        "\\draw[->] (0,-0.5) -- (0,\\r + 0.6) node[left] {$y$};\n"
+        "\\draw (\\r,0) arc (0:180:\\r);\n"
+        "\\fill[black] (\\r,0) circle[radius=1.2pt] node[below right]"
+        "{\\footnotesize $1$};\n"
+        "\\fill[black] (-\\r,0) circle[radius=1.2pt] node[below left]"
+        "{\\footnotesize $-1$};\n"
+        "\\coordinate (M) at (%d:\\r);\n" % goc
+        + "\\draw (0,0) -- (M);\n"
+        "\\draw[->] (0.45,0) arc (0:%d:0.45);\n" % goc
+        + "\\node at (%d:0.68) {\\footnotesize $\\alpha$};\n" % (goc // 2)
+        + chieu
+        + "\\fill[black] (M) circle[radius=1.5pt] node[above right]"
+          "{\\footnotesize $%s$};\n" % ten_diem
+        + "\\fill[black] (0,0) circle[radius=1.0pt] node[below left]"
+          "{\\footnotesize $O$};\n"
+        "\\end{tikzpicture}"
+    )
+
+
+def _hinh_nua_duong_tron_hai_phia():
+    r"""Nửa đường tròn đơn vị với HAI vị trí mẫu của điểm $M$.
+
+    Dùng cho dạng MC_G. Không được vẽ đúng MỘT góc ở đây: đề cho dấu của
+    một giá trị lượng giác rồi hỏi góc nằm trong khoảng nào, nên nếu hình
+    vẽ sẵn góc thoả mãn giả thiết thì học sinh đọc thẳng đáp án trên hình,
+    câu hỏi mất hết ý nghĩa. Vẽ hai vị trí - một bên phải, một bên trái
+    trục $Oy$ - để học sinh thấy được dấu của hoành độ đổi ra sao mà vẫn
+    phải tự chọn khoảng.
+    """
+    return (
+        "\\begin{tikzpicture}[>=stealth,x=1.0cm,y=1.0cm,thick,scale=1.2]\n"
+        "\\def\\r{1.6}\n"
+        "\\draw[->] (-\\r - 0.6,0) -- (\\r + 0.6,0) node[below] {$x$};\n"
+        "\\draw[->] (0,-0.5) -- (0,\\r + 0.7) node[left] {$y$};\n"
+        "\\draw (\\r,0) arc (0:180:\\r);\n"
+        "\\fill[black] (\\r,0) circle[radius=1.2pt] node[below right]"
+        "{\\footnotesize $1$};\n"
+        "\\fill[black] (-\\r,0) circle[radius=1.2pt] node[below left]"
+        "{\\footnotesize $-1$};\n"
+        "\\coordinate (M) at (55:\\r);\n"
+        "\\coordinate (N) at (130:\\r);\n"
+        "\\draw (0,0) -- (M);\n"
+        "\\draw (0,0) -- (N);\n"
+        "\\draw[dashed] (M) -- ({cos(55)*1.6},0);\n"
+        "\\draw[dashed] (N) -- ({cos(130)*1.6},0);\n"
+        "\\fill[black] (M) circle[radius=1.5pt] node[above right]"
+        "{\\footnotesize $M$};\n"
+        "\\fill[black] (N) circle[radius=1.5pt] node[above left]"
+        "{\\footnotesize $N$};\n"
+        "\\node[below] at ({cos(55)*1.6},0) {\\footnotesize $x_M$};\n"
+        "\\node[below] at ({cos(130)*1.6},0) {\\footnotesize $x_N$};\n"
+        "\\fill[black] (0,0) circle[radius=1.0pt] node[below left]"
+        "{\\footnotesize $O$};\n"
+        "\\end{tikzpicture}"
+    )
+
+
+def L10_C3_B5_NB029_MC_E_01(socau, dang=1):
+    r"""Xét dấu giá trị lượng giác khi đã biết khoảng của góc.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Mỗi phương án là một khẳng định dạng "$\sin\alpha > 0$". Đáp án đúng
+    lấy từ bảng dấu, ba phương án nhiễu lấy từ các khẳng định SAI của
+    chính khoảng góc ấy - luôn có đúng 4 khẳng định sai nên không bao giờ
+    thiếu nhiễu, và không bao giờ có hai đáp án đúng.
+    """
+    def _viet(ten, dau):
+        return r"$%s\alpha %s 0$" % (ten, ">" if dau > 0 else "<")
+
+    gt = []
+    while len(gt) < socau:
+        khoang = random.choice(["nhon", "tu"])
+        ten_dung = random.choice(list(DAU_GTLG[khoang].keys()))
+        v = (khoang, ten_dung)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for khoang, ten_dung in gt:
+        bang = DAU_GTLG[khoang]
+        dung = _viet(ten_dung, bang[ten_dung])
+        # mọi khẳng định SAI của khoảng này
+        sai = [_viet(ten, -dau) for ten, dau in bang.items()]
+
+        debai = (r"Cho góc $\alpha$ thoả mãn %s. Khẳng định nào sau đây "
+                 r"\textbf{đúng}?" % MO_TA_KHOANG[khoang])
+
+        dau_chu = "dương" if bang[ten_dung] > 0 else "âm"
+        if ten_dung == r"\sin":
+            cach = r"$\sin\alpha = y_M$"
+        elif ten_dung == r"\cos":
+            cach = r"$\cos\alpha = x_M$"
+        elif ten_dung == r"\tan":
+            cach = r"$\tan\alpha = \dfrac{y_M}{x_M}$"
+        else:
+            cach = r"$\cot\alpha = \dfrac{x_M}{y_M}$"
+
+        giai = (LY_DO_KHOANG[khoang] + "\\\\\n"
+                + r"Mà %s nên $%s\alpha$ mang dấu %s, tức là %s."
+                % (cach, ten_dung, dau_chu, dung))
+
+        cauTN += MC_SA_answer_text(debai, dung, sai, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_NB029_MC_F_01(socau, dang=1):
+    r"""Đọc sin/cos/tan/cot theo toạ độ điểm $M$ TRÊN HÌNH VẼ.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Khác dạng MC_B ở chỗ MC_B cho toạ độ bằng số, còn dạng này cho HÌNH
+    và hỏi công thức theo $x_M$, $y_M$ - đúng ví dụ cô Lan nêu
+    ("hỏi về toạ độ $x_M$, $y_M$, $x_M/y_M$... là sin, cos, tan, cot").
+    """
+    CT = {
+        r"\sin": r"$\sin\alpha = y_M$",
+        r"\cos": r"$\cos\alpha = x_M$",
+        r"\tan": r"$\tan\alpha = \dfrac{y_M}{x_M}$",
+        r"\cot": r"$\cot\alpha = \dfrac{x_M}{y_M}$",
+    }
+    # các khẳng định SAI: đổi chỗ hoành độ với tung độ
+    SAI = {
+        r"\sin": r"$\sin\alpha = x_M$",
+        r"\cos": r"$\cos\alpha = y_M$",
+        r"\tan": r"$\tan\alpha = \dfrac{x_M}{y_M}$",
+        r"\cot": r"$\cot\alpha = \dfrac{y_M}{x_M}$",
+    }
+
+    gt = []
+    while len(gt) < socau:
+        # tránh 40-50 độ để trên hình thấy rõ x_M khác y_M
+        # Không lấy góc lớn hơn 60 độ: khi đó $y_M$ nằm cao, nhãn của nó
+        # chạm vào cung tròn, hình nhìn rối.
+        v = (random.choice([25, 30, 35, 40, 55, 60]),
+             random.choice(list(CT.keys())))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for goc, ten in gt:
+        debai = (r"Cho góc $\alpha$ với $0^{\circ} < \alpha < 90^{\circ}$ và "
+                 r"điểm $M$ nằm trên nửa đường tròn đơn vị như hình vẽ, "
+                 r"trong đó $x_M$, $y_M$ lần lượt là hoành độ và tung độ "
+                 r"của $M$. Khẳng định nào sau đây \textbf{đúng}?")
+
+        giai = (r"Theo định nghĩa giá trị lượng giác của góc $\alpha$ với "
+                r"$0^{\circ} \le \alpha \le 180^{\circ}$, nếu $M(x_M; y_M)$ "
+                r"là điểm trên nửa đường tròn đơn vị ứng với góc $\alpha$ thì"
+                "\\\\\n"
+                r"$\sin\alpha = y_M$, \quad $\cos\alpha = x_M$, \quad "
+                r"$\tan\alpha = \dfrac{y_M}{x_M}$ \ $(\alpha \ne 90^{\circ})$, "
+                r"\quad $\cot\alpha = \dfrac{x_M}{y_M}$ \ "
+                r"$(\alpha \ne 0^{\circ},\ \alpha \ne 180^{\circ})$."
+                "\\\\\n"
+                r"Vậy khẳng định đúng là %s." % CT[ten])
+
+        nhieu = [SAI[t] for t in CT if t != ten] + [SAI[ten]]
+        hinh = _hinh_nua_duong_tron(goc)
+        cauTN += MC_SA_answer_text(debai, CT[ten], nhieu, giai, hinh, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_NB029_MC_G_01(socau, dang=1):
+    r"""Biết dấu một giá trị lượng giác, suy ra khoảng của góc.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Đây là chiều NGƯỢC của dạng MC_E, đúng ví dụ cô Lan nêu
+    ("với $\cos > 0$ thì góc từ đâu đến đâu").
+
+    Các khoảng ghi ở đây là khoảng ĐÚNG BẰNG tập nghiệm, đã xét cả hai
+    đầu mút: $\cos 180^{\circ} = -1 < 0$ nên lấy $\alpha \le 180^{\circ}$,
+    còn $\tan 180^{\circ} = 0$ nên KHÔNG lấy $\alpha = 180^{\circ}$.
+    """
+    TRUONG_HOP = [
+        (r"\cos\alpha > 0", r"$0^{\circ} \le \alpha < 90^{\circ}$",
+         [r"$90^{\circ} < \alpha \le 180^{\circ}$",
+          r"$90^{\circ} \le \alpha \le 180^{\circ}$",
+          r"$0^{\circ} < \alpha \le 90^{\circ}$",
+          r"$\alpha = 90^{\circ}$"],
+         r"$\cos\alpha = x_M$ nên $\cos\alpha > 0$ khi và chỉ khi $x_M > 0$, "
+         r"tức là $M$ nằm bên phải trục $Oy$."),
+        (r"\cos\alpha < 0", r"$90^{\circ} < \alpha \le 180^{\circ}$",
+         [r"$0^{\circ} \le \alpha < 90^{\circ}$",
+          r"$0^{\circ} < \alpha < 90^{\circ}$",
+          r"$0^{\circ} \le \alpha \le 90^{\circ}$",
+          r"$\alpha = 90^{\circ}$"],
+         r"$\cos\alpha = x_M$ nên $\cos\alpha < 0$ khi và chỉ khi $x_M < 0$, "
+         r"tức là $M$ nằm bên trái trục $Oy$. Chú ý $\cos 180^{\circ} = -1 < 0$ "
+         r"nên $\alpha = 180^{\circ}$ vẫn thoả mãn."),
+        (r"\tan\alpha > 0", r"$0^{\circ} < \alpha < 90^{\circ}$",
+         [r"$90^{\circ} < \alpha < 180^{\circ}$",
+          r"$0^{\circ} \le \alpha < 90^{\circ}$",
+          r"$90^{\circ} < \alpha \le 180^{\circ}$",
+          r"$0^{\circ} < \alpha \le 90^{\circ}$"],
+         r"$\tan\alpha = \dfrac{y_M}{x_M}$ với $y_M > 0$, nên $\tan\alpha > 0$ "
+         r"khi và chỉ khi $x_M > 0$. Chú ý $\tan 0^{\circ} = 0$ nên loại "
+         r"$\alpha = 0^{\circ}$, và $\tan 90^{\circ}$ không xác định."),
+        (r"\tan\alpha < 0", r"$90^{\circ} < \alpha < 180^{\circ}$",
+         [r"$0^{\circ} < \alpha < 90^{\circ}$",
+          r"$90^{\circ} \le \alpha \le 180^{\circ}$",
+          r"$90^{\circ} < \alpha \le 180^{\circ}$",
+          r"$0^{\circ} \le \alpha < 90^{\circ}$"],
+         r"$\tan\alpha = \dfrac{y_M}{x_M}$ với $y_M > 0$, nên $\tan\alpha < 0$ "
+         r"khi và chỉ khi $x_M < 0$. Chú ý $\tan 180^{\circ} = 0$ nên loại "
+         r"$\alpha = 180^{\circ}$."),
+    ]
+
+    gt = []
+    while len(gt) < socau:
+        v = random.randrange(len(TRUONG_HOP))
+        if v not in gt:
+            gt.append(v)
+        if len(gt) >= len(TRUONG_HOP):
+            break
+
+    cauTN = ""
+    for chi_so in gt:
+        gia_thiet, dung, nhieu, ly_do = TRUONG_HOP[chi_so]
+        debai = (r"Cho góc $\alpha$ với $0^{\circ} \le \alpha \le 180^{\circ}$ "
+                 r"và $M$ là điểm trên nửa đường tròn đơn vị ứng với góc "
+                 r"$\alpha$. Hình vẽ minh hoạ hai vị trí có thể có của $M$. "
+                 r"Biết $%s$. Khẳng định nào sau đây \textbf{đúng}?"
+                 % gia_thiet)
+        giai = ly_do + "\\\\\n" + r"Vậy %s." % dung
+        hinh = _hinh_nua_duong_tron_hai_phia()
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, hinh, 0, dang)
+    return cauTN
