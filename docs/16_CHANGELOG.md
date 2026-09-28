@@ -6545,3 +6545,92 @@ Se xong khi lam chuong 5.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.06 - 2026-09-28
+
+## Chuong 5 (Thong ke): tu 0 len 48/48 dang co ham
+
+Tep LopXChuong5.py cua co Lan o FORM CU va chi co 3 ham. Da viet lai
+toan bo cho dung khuon math_type - math_type.py GIU NGUYEN.
+
+    Bai 12  so gan dung va sai so        16 dang
+    Bai 13  do xu the trung tam          15 dang
+    Bai 14  do do phan tan               15 dang
+    Dung/Sai                              2 dang
+
+Trong do 7 dang la bo sung vi bo chon cau can ma Mapping chua khai (de
+he so 1 chuong 5 luc dau mat 26/96 cau): VD070_SA_A, VD077_SA_A,
+VD078_SA_A, VD078_TL_A, VD083_SA_A, VD083_TL_A, VD084_SA_A.
+
+## Ba loi trong tep cua co - da tranh khi viet lai
+
+1. K10_5_13_2_1_TH co input() nen TREO khi sinh de tu dong; de hoi TRUNG
+   VI nhung lai tinh numpy.mean (so trung binh); loi giai dung bien
+   "median" chua he duoc gan -> NameError.
+2. K10_5_14_1_1_TH ghi can nang tre so sinh "don vi kg" nhung so lieu la
+   2700-4200, tuc la GAM.
+3. K10_5_14_1_3_VD goi numpy.delete(X, i) voi i la GIA TRI chu khong
+   phai chi so.
+
+## Quy uoc SGK KNTT lop 10 da bam dung
+
+    Tu phan vi   sap xep tang dan; Q2 la trung vi; Q1 la trung vi nua
+                 ben trai, Q3 la trung vi nua ben phai; neu n LE thi Q2
+                 KHONG thuoc nua nao.
+    Phuong sai   s^2 = (1/n) * tong (x_i - x_tb)^2 - chia cho n, KHONG
+                 phai n-1.
+    Ngoai le     x < Q1 - 1,5*delta_Q hoac x > Q3 + 1,5*delta_Q.
+
+## Cho phai can than: dap so cau TRA LOI NGAN
+
+Cau tra loi ngan cham bang SO KHOP CHUOI nen dap so phai la so thap phan
+HUU HAN. Thong ke rat de ra so le vo han:
+
+  - so trung binh, trung vi, tu phan vi: loc bang _dep(x, 2);
+  - DO LECH CHUAN la CAN cua phuong sai nen hau het bo so cho ket qua vo
+    ti - phai loc rieng bang _mau_phuong_sai_dep(can_do_lech=True).
+
+## Mot loi da vap phai
+
+VD084 (tim gia tri ngoai le) tinh nguong tren MAU GOC roi moi them gia
+tri la vao. Nhung them mot so lieu lam ba tu phan vi DICH DI, nen so vua
+them co the khong con vuot nguong - danh sach ngoai le rong, lay
+ngoai[0] thi IndexError. Hong 4/10 lan. Nay kiem tra lai SAU KHI them,
+chi nhan mau co dung MOT ngoai le.
+
+## Da kiem chung the nao
+
+1. 48/48 dang chay tron 20/20 lan, khong loi; trac nghiem dung MOT dap
+   an dung, tra loi ngan dung MOT shortans, Dung/Sai dung BON y.
+2. Doi chieu voi thu vien chuan va vi du SGK:
+   - so trung binh khop statistics.fmean
+   - phuong sai khop statistics.pvariance (chia n)
+   - trung vi khop statistics.median
+   - tu phan vi khop bon vi du SGK, ca truong hop n chan va n le
+   - 200 mau sinh ra deu co do lech chuan huu han
+3. Bieu do hop ve bang TikZ, da dich thu qua duong ra hinh cho web va
+   XEM TAN MAT anh - nam moc va diem ngoai le hien dung cho.
+4. De he so 1 chuong 5: 8/8 de du ma tran, 96/96 cau sinh duoc.
+5. 543 bai test qua, 8 bo qua (truoc: 511).
+
+## DE CUOI KY 1 nay chay tron ven
+
+Truoc dot nay cuoi ky 1 chi sinh duoc 172/210 cau vi thieu ham chuong 5.
+
+    giua ky 1   10/10 de du ma tran   210/210 cau sinh duoc
+    cuoi ky 1   10/10 de du ma tran   210/210 cau sinh duoc
+
+Phan bo chuong cua de cuoi ky 1: C1 87, C2 21, C3 14, C4 41, C5 47 -
+deu co mat.
+
+## Hien trang toan lop 10
+
+    C1   37/37   xong        C6    0/31
+    C2   15/15   xong        C7    0/37  (chua co nguon)
+    C3   53/53   xong        C8   30/30   xong
+    C4   46/46   xong        C9   27/27   xong
+    C5   48/48   xong
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

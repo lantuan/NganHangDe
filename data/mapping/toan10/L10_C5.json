@@ -84,6 +84,13 @@
     "Dang": "Lí giải số liệu không chính xác trong bảng"
   },
   {
+    "id": "L10_C5_B12_VD070_SA_A",
+    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số liệu không hợp lí trong bảng dữ liệu",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C5_B13_TH072_MC_A",
     "content": "Tính được các số đặc trưng đo xu thế trung tâm cho mẫu số liệu không ghép nhóm: số trung bình (trung bình cộng).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -150,10 +157,31 @@
     "Dang": "So sánh hai mẫu số liệu và kết luận"
   },
   {
+    "id": "L10_C5_B13_VD077_SA_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đặc trưng thay thế khi mẫu có giá trị bất thường",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C5_B13_VD078_MC_A",
     "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tìm giá trị ngoại lệ của mẫu số liệu qua biểu đồ hộp"
+  },
+  {
+    "id": "L10_C5_B13_VD078_SA_A",
+    "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị ngoại lệ đọc từ biểu đồ hộp",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C5_B13_VD078_TL_A",
+    "content": "Chỉ ra được những giá trị bất thường (giá trị ngoại lệ) của mẫu số liệu thông qua biểu đồ hộp (box plot).",
+    "Loai": "Tự luận",
+    "Dang": "Đọc biểu đồ hộp và tìm giá trị ngoại lệ",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C5_B14_NB085_MC_A",
@@ -222,6 +250,20 @@
     "Dang": "So sánh độ ổn định của hai mẫu số liệu thực tiễn"
   },
   {
+    "id": "L10_C5_B14_VD083_SA_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ lệch chuẩn của mẫu ổn định hơn",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C5_B14_VD083_TL_A",
+    "content": "Giải thích được ý nghĩa và vai trò của các số đặc trưng đo độ phân tán trong các tình huống thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "So sánh độ ổn định của hai mẫu số liệu",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C5_B14_VD084_MC_A",
     "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -232,6 +274,13 @@
     "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
     "Loai": "Tự luận",
     "Dang": "Đánh giá mức độ ổn định và kết luận"
+  },
+  {
+    "id": "L10_C5_B14_VD084_SA_A",
+    "content": "Chỉ ra được những kết luận nhờ ý nghĩa của các số đặc trưng đo độ phân tán của mẫu số liệu.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị ngoại lệ theo khoảng tứ phân vị",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C5_TF_A",
