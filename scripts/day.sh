@@ -106,7 +106,15 @@ fi
 # moi vua nhanh vua khong dinh chuyen xac thuc lan hai.
 echo
 dam "Dang cap nhat may chu $DOMAIN ..."
-KQ_VPS="$(ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" bash -s <<VPSEOF 2>&1
+# KHONG dat heredoc ben trong $( ... ): bash 3.2 (ban di kem macOS) doc
+# ca THAN heredoc de tim dau ) dong lai, nen mot dau ) le trong than -
+# vi du nhan cua case "*/uvicorn)" - lam no tuong da het lenh thay the.
+# Do dung la loi "syntax error near unexpected token '('" o dong 123 hom
+# 29/09. Bash 5 (Linux) doc dung nen may chu khong he bao gi.
+# Nay ghi lenh ra TEP TAM roi moi ssh - cach nay chay dung tren moi ban.
+TEP_LENH_VPS="$(mktemp "${TMPDIR:-/tmp}/nhd_lenh_vps.XXXXXX")"
+TEP_KQ_VPS="$(mktemp "${TMPDIR:-/tmp}/nhd_kq_vps.XXXXXX")"
+cat > "$TEP_LENH_VPS" <<VPSEOF
 set -e
 cd "$VPS_DIR"
 git pull --ff-only
@@ -138,8 +146,12 @@ fi
 echo "--- do nghe ve hinh ---"
 bash scripts/kiem_tra_hinh.sh 2>&1 || true
 VPSEOF
-)"
+
+ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" bash -s \
+    < "$TEP_LENH_VPS" > "$TEP_KQ_VPS" 2>&1
 KQ=$?
+KQ_VPS="$(cat "$TEP_KQ_VPS")"
+rm -f "$TEP_LENH_VPS" "$TEP_KQ_VPS"
 echo "$KQ_VPS"
 
 if [ $KQ -ne 0 ]; then

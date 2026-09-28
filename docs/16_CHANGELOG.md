@@ -6946,3 +6946,87 @@ la doi cach hien thi nen doi co Lan chot.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.10 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Loi: "day web" dut ngay o buoc cap nhat VPS
+
+    day.sh: line 123: syntax error near unexpected token `('
+    day.sh: line 123: `  */uvicorn) PY="\$(dirname "\$PY")/python" ;;'
+
+Ma nguon da len GitHub roi nhung VPS KHONG duoc cap nhat - dung luc
+dang can day ban sua de he so 1 len (xem Version 3.09 muc 1).
+
+## Nguyen nhan
+
+Ca khoi lenh gui sang VPS nam trong mot lenh thay the:
+
+    KQ_VPS="$(ssh ... bash -s <<VPSEOF 2>&1
+    ...
+    VPSEOF
+    )"
+
+Bash 3.2 - ban di kem macOS, /bin/bash, tu nam 2007 - DOC CA THAN
+heredoc de di tim dau ) dong lai. Dem dau ngoac trong than:
+
+    dong 120  PY="\$(systemctl ...            can = +2
+    dong 121         | grep -E '(python|uvicorn)\$' ...   can = +1
+    dong 122  case "\$PY" in                   can = +1
+    dong 123    */uvicorn) PY="\$(dirname ...  can =  0   <-- tuong het lenh
+
+Nhan cua case "*/uvicorn)" la mot dau ) LE. Den do bash 3.2 tuong lenh
+thay the da dong, doc tiep phan con lai nhu ma lenh binh thuong va bao
+loi. Bash 5 (Linux, may chu, CI) doc dung nen KHONG he bao gi - loi chi
+lo ra tren may Mac.
+
+Vi sao truoc do van chay: khoi $( ... heredoc ... ) co tu c399edf
+(28/09 04:51), nhung luc ay trong than chua co dau ) le nao. Ba phut
+sau, 7bbe5f6 them nhanh case "*/uvicorn)" - tu do hong.
+
+## Da sua
+
+Ghi lenh ra TEP TAM roi moi ssh, khong boc heredoc trong $( ) nua:
+
+    TEP_LENH_VPS="$(mktemp "${TMPDIR:-/tmp}/nhd_lenh_vps.XXXXXX")"
+    TEP_KQ_VPS="$(mktemp "${TMPDIR:-/tmp}/nhd_kq_vps.XXXXXX")"
+    cat > "$TEP_LENH_VPS" <<VPSEOF
+    ...
+    VPSEOF
+    ssh ... bash -s < "$TEP_LENH_VPS" > "$TEP_KQ_VPS" 2>&1
+    KQ=$?
+    KQ_VPS="$(cat "$TEP_KQ_VPS")"
+    rm -f "$TEP_LENH_VPS" "$TEP_KQ_VPS"
+
+NOI DUNG lenh gui sang VPS giu NGUYEN TUNG CHU (da diff: 0 dong khac).
+
+## Da kiem chung the nao
+
+1. Than heredoc ban cu va ban moi: diff ra 0 dong khac.
+2. Chay thu ca doan voi ssh GIA LAP:
+   - duong binh thuong: lenh sang VPS dung nhu mong doi (bien cua may
+     Mac da the san: /root/NganHangDe, nganhangde; bien cua VPS giu
+     nguyen: \$PY, \$(dirname "\$PY"));
+   - duong loi (ssh tra ma 255): in dung loi canh bao, thoat ma 1;
+   - ca hai duong deu don sach tep tam.
+3. Them tests/test_kich_ban_day.py (5 bai) cam han hai thu:
+   - heredoc nam trong $( ) - dung cai vua lam hong;
+   - cu phap chi co tu bash 4 tro len (declare -A, ${x^^}, mapfile,
+     |&, &>>...) vi may Mac chi co bash 3.2.
+   Da kiem nguoc: cho bai test doc ban day.sh CU thi no bao sai dung
+   dong 109.
+4. Quet ca hai kich ban trong scripts/: khong con cho nao dung cu phap
+   bash 4. bash -n qua ca hai.
+5. 633 bai test qua, 8 bo qua (truoc: 627).
+
+## Bai hoc
+
+Kich ban chay tren MAY MAC phai theo bash 3.2, du may chu va CI deu
+chay bash 5 va khong bao gi. Nay da co bai test khoa.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
