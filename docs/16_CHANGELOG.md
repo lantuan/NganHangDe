@@ -5542,3 +5542,31 @@ import num2words that bai: bao thieu dung, khong vo de.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.93 - 2026-09-29
+
+## Cai thu vien tren VPS: pip bi Ubuntu chan, va phai dung DUNG con python
+
+Co Lan chay pip tren VPS thi gap:
+
+    error: externally-managed-environment   (PEP 668)
+
+Ubuntu 24.04 tro len khong cho pip cai thang vao Python he thong.
+
+Nay day.sh tu tim con python ma dich vu dang chay:
+
+    systemctl show -p ExecStart --value nganhangde
+
+roi kiem num2words bang CHINH con python do (neu dich vu chay trong venv
+thi python3 he thong va python cua dich vu la hai con khac han - kiem nham
+con se ra ket luan sai), va in ra dung lenh can go:
+
+    venv        -> <python cua venv> -m pip install -r requirements.txt
+    he thong    -> python3 -m pip install --break-system-packages -r requirements.txt
+
+Ghi them muc huong dan vao docs/14_DEPLOYMENT.md, kem luu y: "day" la lenh
+tat tren MAY MAC, khong co tren VPS - dang trong ssh thi phai exit ra da.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

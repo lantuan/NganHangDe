@@ -115,7 +115,26 @@ sleep 3
 echo "--- trang thai dich vu ---"
 systemctl is-active $SERVICE
 echo "--- thu vien Python can thiet ---"
-python3 -c "import num2words" 2>/dev/null && echo "num2words: co" || echo "num2words: THIEU"
+# Phai kiem bang DUNG con python ma dich vu dang chay, khong phai python3
+# he thong: neu dich vu chay trong venv thi hai con nay khac nhau han.
+PY="\$(systemctl show -p ExecStart --value $SERVICE 2>/dev/null \
+       | tr ' ' '\n' | grep -m1 -E '(python|uvicorn)\$' || true)"
+case "\$PY" in
+  */uvicorn) PY="\$(dirname "\$PY")/python" ;;
+esac
+[ -x "\$PY" ] || PY=python3
+echo "python cua dich vu: \$PY"
+if "\$PY" -c "import num2words" 2>/dev/null; then
+  echo "num2words: co"
+else
+  echo "num2words: THIEU"
+  # Goi y dung lenh cho tung kieu cai dat
+  if echo "\$PY" | grep -q "venv\|/env/"; then
+    echo "lenh cai: \$PY -m pip install -r $VPS_DIR/requirements.txt"
+  else
+    echo "lenh cai: \$PY -m pip install --break-system-packages -r $VPS_DIR/requirements.txt"
+  fi
+fi
 echo "--- do nghe ve hinh ---"
 bash scripts/kiem_tra_hinh.sh 2>&1 || true
 VPSEOF
@@ -134,7 +153,8 @@ echo
 CAN_SUA=0
 if echo "$KQ_VPS" | grep -q "num2words: THIEU"; then
   do_ "THIEU thu vien num2words -- chuong 9 (xac suat) se KHONG nap duoc."
-  vang "   Sua:  ssh $VPS_USER@$DOMAIN  roi  pip install -r $VPS_DIR/requirements.txt"
+  vang "   Vao VPS:  ssh $VPS_USER@$DOMAIN"
+  echo "$KQ_VPS" | grep "^lenh cai:" | sed 's/^lenh cai:/   Roi chay:/'
   CAN_SUA=1
 fi
 if echo "$KQ_VPS" | grep -q "Du do nghe"; then

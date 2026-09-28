@@ -365,3 +365,42 @@ Khong con cho nao thieu o Mapping. Con 576 dang cho viet ham.
 
 Chuong nho nhat de lam truoc: lop 10 chuong 2 (13 dang), lop 12 chuong 2 (10
 dang), lop 12 chuong 6 (12 dang).
+
+===============================================================================
+
+CAI THU VIEN PYTHON TREN VPS (Ubuntu moi chan pip)
+
+Ubuntu 24.04 tro len khong cho pip cai thang vao Python he thong:
+
+    error: externally-managed-environment   (PEP 668)
+
+Cach lam dung la cai bang CHINH con python ma dich vu dang chay, khong phai
+go "pip install" chung chung. Tim con python do:
+
+    systemctl show -p ExecStart --value nganhangde
+
+Neu duong dan co venv (vi du /root/NganHangDe/venv/bin/python) thi:
+
+    /root/NganHangDe/venv/bin/python -m pip install -r /root/NganHangDe/requirements.txt
+
+Neu dich vu chay bang python he thong thi phai them co:
+
+    python3 -m pip install --break-system-packages -r /root/NganHangDe/requirements.txt
+
+Khong can nho: chay "day web" o MAY MAC, no tu tim con python cua dich vu
+va in ra dung lenh can go.
+
+LUU Y: "day" la lenh tat tren MAY MAC cua co Lan, KHONG co tren VPS. Dang o
+trong ssh cua VPS thi phai thoat ra (go exit) roi moi chay day web.
+
+===============================================================================
+
+DO NGHE VE HINH TREN VPS
+
+Cau co hinh ve chi hien duoc tren web khi VPS co xelatex VA it nhat mot
+cong cu doi PDF sang anh:
+
+    apt-get install -y poppler-utils        (cho pdftocairo, pdftoppm)
+
+Kiem tra:  bash scripts/kiem_tra_hinh.sh   (chay trong /root/NganHangDe)
+Hoac cu chay "day web" o may Mac, no tu kiem va bao.
