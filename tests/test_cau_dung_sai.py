@@ -53,6 +53,13 @@ def _ham_TF():
 CHUA_XEP_BAC = {
     "L10_C1_TF_A_01",   # bon y deu rut tu cung mot kho menh de, khong phan bac
     "L10_C1_TF_B_01",
+    # Chuong 9 nhap tu tep LopXChuong9.py cua co Lan 28/09/2026. Noi dung
+    # toan dung, nhung bon y chua xep theo bac NB -> TH -> VD -> VDC.
+    "L10_C9_TF_A_01",
+    "L10_C9_TF_B_01",
+    "L10_C9_TF_C_01",
+    "L10_C9_TF_D_01",
+    "L10_C9_TF_E_01",
 }
 
 

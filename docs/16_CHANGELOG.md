@@ -5261,3 +5261,96 @@ dong ket luan; neu thieu do nghe thi in luon lenh cai dat.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.89 - 2026-09-28
+
+## Nhap chuong 9 lop 10 (Xac suat) tu tep LopXChuong9.py cua co Lan
+
+Co Lan gui 9 tep chuong cua lop 10 (124 ham). Lam theo thu tu co chon:
+chuong da theo form moi truoc. Dot nay la CHUONG 9.
+
+    data/python_bank/toan10/L10_C9.py   13 ham
+    data/python_bank/DefChung.py        dung lai mo-dun dem dung chung
+
+13/13 dang chay duoc va DUNG LOAI cau. Chuong 9: 13/27 dang da co ham.
+
+## Doi ten theo ID ngan hang
+
+    K10_9_TN_1_H                    -> L10_C9_B27_TH154_MC_A_01
+    K10_9_TN_2_VD                   -> L10_C9_B27_VD155_MC_A_01
+    K10_9_TN_3_VD                   -> L10_C9_B27_VD155_MC_B_01  (dang moi)
+    K10_9_TN_4_B                    -> L10_C9_B26_NB144_MC_A_01
+    K10_C9_B26_XacSuatBienCo_MC_VD  -> L10_C9_B27_TH152_MC_A_01
+    K10_9_Ngan_1_VD                 -> L10_C9_B27_VD155_SA_A_01  (dang moi)
+    K10_9_Ngan_3_VD                 -> L10_C9_B27_TH151_SA_A_01
+    K10_9_Ngan_4_VD                 -> L10_C9_B27_TH154_SA_A_01
+    K10_9_DS_1_VD                   -> L10_C9_TF_A_01
+    K10_9_DS_2_VD                   -> L10_C9_TF_B_01
+    K10_9_DS_3_VDC                  -> L10_C9_TF_C_01            (dang moi)
+    K10_9_DS_4_VD                   -> L10_C9_TF_D_01            (dang moi)
+    K10_9_DS_5_VD                   -> L10_C9_TF_E_01            (dang moi)
+
+Them 5 dang vao Mapping.
+
+## Kiem chung noi dung KHONG bi lam sai lech
+
+Chay ham goc cua co Lan va ham da doi ten voi CUNG MOT HAT NGAU NHIEN roi
+so tung ky tu: 12/13 ham ra ket qua GIONG HET. Ham thu 13 khong so duoc vi
+ban goc bi loi (xem duoi).
+
+## Cac loi da va
+
+1. K10_C9_B26_XacSuatBienCo_MC_VD goi np.random.randint(...) - nhung trong
+   tep nay np CHINH LA numpy.random, nen np.random la ham random(), khong co
+   .randint. Ham nem AttributeError, KHONG ra duoc cau nao. Doi thanh
+   np.randint(...). Da do lai dap an: gieo 9 lan, xac suat co it nhat mot
+   lan mat 2 cham = 1 - (5/6)^9 = 0,81 - dung.
+
+2. K10_9_TN_4_B de \loigiai{} RONG. Tro giang AI chi duoc lay dap an tu day
+   nen bat buoc phai co loi giai; da viet phan giai thich cho ca bon phuong
+   an (hai bien co xung khac, hop hai bien co khac khong gian mau...).
+   Dong thoi doi ID: de hoi ve QUAN HE GIUA HAI BIEN CO chu khong phai tinh
+   xac suat, nen thuoc NB144 chu khong phai TH151.
+
+3. Nam ham trac nghiem khai bao (socau, dang) KHONG co gia tri mac dinh.
+   Ngan hang goi func(socau) va dua vao mac dinh nen nem TypeError. Da dat
+   dang=1 theo dung quy uoc (MC -> 1, SA -> 2/3).
+
+4. Loi goi ham o muc mo-dun (print(...)) - nap mo-dun la chay ngay. Da bo.
+
+5. Nam canh bao ky tu thoat (\Omega, \dfrac). Sua bang cach nhan doi dau
+   gach cheo, KHONG doi sang chuoi tho, vi trong cung chuoi con co "\\ \\"
+   ma doi sang raw se lam doi ket qua in ra.
+
+## Mot ham KHONG nhap
+
+K11_9_TN_2_H - chinh co Lan ghi chu "danh cho lop 11". Ngoai ra ham nay con
+hai loi: (a) v = [mat, xac_suat_mat] chi co HAI phan tu nhung dong sau lai
+lay v[0] den v[3] -> IndexError; (b) de hoi "xac suat xuat hien mat a HOAC
+mat b" thi phai CONG hai xac suat, nhung dap an lai lay TICH, con tong thi
+de lam phuong an nhieu - tuc dap an va nhieu bi doi cho.
+
+## Phu thuoc moi
+
+num2words (viet so bang chu tieng Viet) - da them vao requirements.txt.
+VPS phai cai: pip install num2words
+
+## Sua hai bai test
+
+- test_loai_cau goi ham bang hai tham so cung; nay goi qua chinh
+  _call_generator_function nhu ngan hang goi that (soi chu ky ham), vi co
+  ham cua co Lan chi nhan mot tham so socau.
+- Nam ham Dung/Sai chuong 9 chua xep bon y theo bac NB -> TH -> VD -> VDC,
+  da ghi vao CHUA_XEP_BAC cho co Lan xem lai.
+
+## Da kiem chung the nao
+
+1. So tung ky tu voi ban goc: 12/13 ham giong het.
+2. 13/13 dang chay qua duong ra de that, dung loai cau, 0 loi.
+3. Bien dich THAT 26 cau (13 dang x 2) ra PDF 10 trang, 0 loi.
+4. Soi loi giai tung dang: sau khi va, ca 13 dang deu co loi giai.
+5. 382 bai test qua, 7 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -23,6 +23,9 @@ import pytest
 
 sys.path.insert(0, "data/python_bank")
 
+from app.services.generator_service import (  # noqa: F401
+    _call_generator_function,
+)
 from app.services.generator_service import kiem_tra_dung_loai_cau, LoaiCauSaiError
 
 EX = "\\begin{ex}%s\\loigiai{x}\\end{ex}"
@@ -108,5 +111,8 @@ def _ham_sa_tl():
 @pytest.mark.parametrize("ten,ham", _ham_sa_tl(), ids=lambda x: x if isinstance(x, str) else "")
 def test_moi_ham_da_co_deu_dung_loai(ten, ham):
     """Chay that tung ham _SA_ / _TL_ trong ngan hang, soi theo dung ten no."""
-    khoi = ham(1, 2 if "_SA_" in ten else 1)
+    # Goi y het cach ngan hang goi that (generator_service soi chu ky ham
+    # roi tu chon tham so), chu khong goi cung 2 tham so - co ham cua co
+    # Lan chi nhan mot tham so socau va tu chot dang ben trong.
+    khoi = _call_generator_function(ham, 1, 4, 1)
     kiem_tra_dung_loai_cau(ten, khoi)
