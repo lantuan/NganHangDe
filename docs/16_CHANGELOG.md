@@ -5506,3 +5506,39 @@ phan tram"; loi giai van giu ca gia tri dung lan gia tri gan dung.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.92 - 2026-09-29
+
+## 'day web' mo ket noi ssh thu hai - bi hoi mat khau roi dut
+
+Co Lan chay day web thi thay:
+
+    Dang kiem tra do nghe ve hinh tren VPS...
+    root@nganhangdechv.tech's password:
+    Connection closed by 103.82.27.226 port 22
+
+Buoc truoc do (git pull + restart) vao bang khoa binh thuong, chi buoc kiem
+tra hinh moi bi hoi mat khau - vi no MO MOT KET NOI SSH THU HAI.
+
+Da gop: mot ket noi ssh duy nhat lam het moi viec tren VPS (keo ma nguon,
+khoi dong lai dich vu, kiem tra thu vien, kiem tra do nghe ve hinh), roi
+doc ket qua o may cua co Lan. Vua nhanh vua khong dinh chuyen xac thuc lan hai.
+
+Them mot buoc kiem tra nua trong cung ket noi do: VPS co thu vien num2words
+khong (chuong 9 can). Thieu thi in ro lenh cai.
+
+Dong ket luan cuoi khong con bao "XONG" khi VPS van con viec phai lam.
+
+## Loi nap mo-dun lam VO CA DE - nay chi bao thieu
+
+VPS da keo ma nguon chuong 9 nhung co the chua co num2words. Khi do
+_load_chapter_module goi exec_module se nem ImportError, va loi nay BAY
+THANG RA NGOAI, lam vo ca de - ke ca de cua chuong khac.
+
+Nay bat lai va doi thanh GeneratorNotFoundError: he thong bao thieu dung
+cho, con cac chuong khac van ra de binh thuong. Da thu that bang cach ep
+import num2words that bai: bao thieu dung, khong vo de.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

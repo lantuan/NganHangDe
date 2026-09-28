@@ -99,9 +99,14 @@ if [ "${1:-}" != "web" ]; then
 fi
 
 # ---------- 6. Cap nhat VPS ----------
+# MOT ket noi ssh duy nhat lam HET moi viec tren VPS: keo ma nguon, khoi
+# dong lai dich vu, roi kiem tra do nghe. Truoc day buoc kiem tra hinh mo
+# them mot ket noi ssh thu hai - lan do bi hoi mat khau roi dut (29/09),
+# trong khi ket noi thu nhat van vao bang khoa binh thuong. Gop lai mot
+# moi vua nhanh vua khong dinh chuyen xac thuc lan hai.
 echo
 dam "Dang cap nhat may chu $DOMAIN ..."
-ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" bash -s <<VPSEOF
+KQ_VPS="$(ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" bash -s <<VPSEOF 2>&1
 set -e
 cd "$VPS_DIR"
 git pull --ff-only
@@ -109,8 +114,14 @@ systemctl restart $SERVICE
 sleep 3
 echo "--- trang thai dich vu ---"
 systemctl is-active $SERVICE
+echo "--- thu vien Python can thiet ---"
+python3 -c "import num2words" 2>/dev/null && echo "num2words: co" || echo "num2words: THIEU"
+echo "--- do nghe ve hinh ---"
+bash scripts/kiem_tra_hinh.sh 2>&1 || true
 VPSEOF
+)"
 KQ=$?
+echo "$KQ_VPS"
 
 if [ $KQ -ne 0 ]; then
   do_ "Cap nhat VPS that bai. Ma nguon TREN GITHUB da moi, nhung web van dang chay ban cu."
@@ -118,20 +129,20 @@ if [ $KQ -ne 0 ]; then
   exit 1
 fi
 
-# ---------- 6b. Kiem tra do nghe ve hinh tren VPS ----------
-# Cau co hinh ve chi hien duoc tren web khi VPS co xelatex VA mot cong cu
-# doi PDF sang anh. Kiem ngay o day de khong phai nho chay tay, va nho
-# dung thu muc (chay o /root se khong thay script).
+# ---------- 6b. Doc ket qua kiem tra tren VPS ----------
 echo
-echo "Dang kiem tra do nghe ve hinh tren VPS..."
-HINH="$(ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" \
-  "cd $VPS_DIR && bash scripts/kiem_tra_hinh.sh 2>&1" || true)"
-if echo "$HINH" | grep -q "Du do nghe"; then
+CAN_SUA=0
+if echo "$KQ_VPS" | grep -q "num2words: THIEU"; then
+  do_ "THIEU thu vien num2words -- chuong 9 (xac suat) se KHONG nap duoc."
+  vang "   Sua:  ssh $VPS_USER@$DOMAIN  roi  pip install -r $VPS_DIR/requirements.txt"
+  CAN_SUA=1
+fi
+if echo "$KQ_VPS" | grep -q "Du do nghe"; then
   xanh "Hinh ve: du do nghe, hoc sinh xem duoc hinh tren web."
 else
   vang "Hinh ve: VPS CHUA du do nghe -- cau co hinh se khong hien tren web."
-  echo "$HINH" | sed 's/^/     /'
-  vang "Cach sua:  ssh $VPS_USER@$DOMAIN  roi  apt-get install -y poppler-utils"
+  vang "   Sua:  ssh $VPS_USER@$DOMAIN  roi  apt-get install -y poppler-utils"
+  CAN_SUA=1
 fi
 
 # ---------- 7. Kiem tra web con song ----------
@@ -140,7 +151,11 @@ echo "Dang kiem tra web..."
 MA="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://$DOMAIN" || echo 000)"
 if [ "$MA" = "200" ] || [ "$MA" = "302" ] || [ "$MA" = "307" ]; then
   xanh "Web tra ve $MA -- dang chay binh thuong."
-  xanh "XONG: GitHub da moi, VPS da cap nhat, web da kiem tra."
+  if [ "$CAN_SUA" = 1 ]; then
+    vang "XONG phan day code, NHUNG con viec phai lam tren VPS (xem o tren)."
+  else
+    xanh "XONG: GitHub da moi, VPS da cap nhat, web da kiem tra."
+  fi
 else
   do_ "Web tra ve $MA -- co the dang loi."
   vang "Xem nhat ki:  ssh $VPS_USER@$DOMAIN  roi  journalctl -u $SERVICE -n 50"

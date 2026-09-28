@@ -28,7 +28,20 @@ def _load_chapter_module(lop: int, chuong_so: int):
     spec = importlib.util.spec_from_file_location(module_name, file_path)
     module = importlib.util.module_from_spec(spec)
     sys.modules[module_name] = module
-    spec.loader.exec_module(module)
+    try:
+        spec.loader.exec_module(module)
+    except Exception as e:
+        # Tep chuong co that nhung KHONG nap duoc - hay gap nhat la may chu
+        # thieu mot thu vien ma tep do can (vi du num2words cho chuong 9).
+        # Truoc day loi nay bay thang ra ngoai va lam VO CA DE. Nay coi nhu
+        # "chua co ham", de he thong bao thieu dung cho, con cac chuong khac
+        # van ra de binh thuong.
+        sys.modules.pop(module_name, None)
+        raise GeneratorNotFoundError(
+            f"Không nạp được file Python của khối {lop} chương {chuong_so} "
+            f"({file_path.name}): {type(e).__name__}: {e}. "
+            f"Nếu là thiếu thư viện thì cài theo requirements.txt."
+        ) from e
     return module
 
 
