@@ -6263,3 +6263,106 @@ math_type. Da doc va ghi nhan cac loi can sua khi chuyen - xem muc duoi.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.03 - 2026-09-28
+
+## Chuong 4 (Vecto): tu 0 len 40/40 dang co ham
+
+Tep LopXChuong4.py cua co Lan o FORM CU (tu mo tep de.tex roi de.write),
+chi co 6 ham. Da viet lai toan bo cho dung khuon math_type -
+math_type.py GIU NGUYEN, khong sua mot dong nao, dung nhu co Lan dan.
+
+Noi dung toan cua co duoc giu o cac dang:
+
+    NB038_MC_A  hinh chu nhat, hai trung diem, hoi khang dinh nao SAI
+                (tu K10_2_3_1_2_NB)
+    TH041_MC_B  hinh vuong, tam O, tong hai vecto doi
+                (tu K10_2_3_1_3_TH)
+    TH048_MC_A  trong tam tam giac (tu K10_2_3_1_4_TH)
+    VD060       ba luc can bang (tu K10_2_3_2_1_VD)
+    VD061       phan tich mot vecto theo hai vecto khong cung phuong
+                (y cua K10_2_3_3_1_VD)
+
+Da kiem lai bang toa do: noi dung toan cua co o NB038, TH041, TH048 DUNG.
+Rieng NB038 ban cu hong LaTeX - phuong an thu tu thua mot dau }, va khoi
+tikzpicture dat sau \choice nen hinh roi ra ngoai o hinh; da sua.
+
+Them dang TH041_MC_B (Mapping chua khai) de giu bai hinh vuong cua co.
+
+## CO HINH VE - dung yeu cau co Lan chot
+
+Sau dang co hinh, deu da dich thu qua duong ra hinh cho web:
+NB037 (hinh binh hanh), NB038 (hinh chu nhat + hai trung diem),
+TH040_MC_B (hinh binh hanh), TH041_MC_B (hinh vuong + hai duong cheo),
+TH048 (tam giac + trong tam), NB057 (tam giac deu),
+VD061 (tam giac + diem M tren canh), TF_A (hinh binh hanh + tam O).
+
+## Ba loi da vap phai va da sua
+
+### 1. Dau phay thap phan lam HONG toa do TikZ
+
+Ham _xx4 doi dau cham thanh dau PHAY theo cach viet so cua Viet Nam. Lan
+dau dung luon _xx4 de viet toa do TikZ, nen (4.4, 2.2) thanh (4,4, 2,2) -
+TikZ doc thanh bon so, hinh ve meo hoan toan. Da XEM TAN MAT anh moi phat
+hien. Nay them ham rieng _toa() luon dung dau CHAM cho toa do.
+
+### 2. Bang cap luc go tay bi SAI mot dong
+
+CAP_LUC_60 (cac cap p, q lam cho p^2 + pq + q^2 chinh phuong, dung cho
+bai ba luc can bang goc 60 do) ban go tay co cap (16; 19; 31) - nhung
+16^2 + 16*19 + 19^2 = 921 chu khong phai 31^2 = 961. De nguyen thi bai ba
+luc ra DAP SO SAI. Nay tinh bang may thay vi go tay, duoc 26 cap, da kiem
+lai tat ca deu dung.
+
+### 3. Ba dang trung phuong an nhieu
+
+TH053_MC_A, TH058_MC_A, VD061_MC_A co luc sinh ra hai phuong an nhieu
+giong het nhau (vi du goc 90 do thi tich vo huong bang 0 va so doi cua no
+cung bang 0; hoac k = 1/2 thi hai he so bang nhau). Da loc qua _ba_nhieu4.
+
+## Da kiem chung the nao
+
+1. Chay 25 lan moi dang cho ca 40 dang: 40/40 khong loi; trac nghiem dung
+   MOT dap an dung, tra loi ngan dung MOT shortans, Dung/Sai dung BON y.
+2. Dung TOA DO kiem lai toan, doc lap voi cong thuc trong ham:
+   - hinh chu nhat: DA = -MN (nen "DA = MN" dung la khang dinh SAI), ba
+     khang dinh con lai deu dung
+   - hinh binh hanh: AB = DC, AD = BC
+   - ba luc goc 60 do: moi cap deu cho |F3| nguyen
+   - tam giac vuong can dung tu bo ba Pytago: AB.AC = 0 va |AB| = |AC|
+   - AM = (1-k)AB + k.AC: khop voi toa do
+   - dien tich |x1y2 - x2y1|/2: khop cong thuc Heron qua 300 bo so
+3. 488 bai test qua, 8 bo qua (truoc dot nay la 472).
+
+## CAN CO LAN QUYET: de he so 1 chuong 4 chi ra duoc 6 cau
+
+Khong phai loi. load_scope_heso1 lay bai trong chuong cho den khi gap bai
+co boundary_after, ma bai 8 CO boundary_after, nen de he so 1 chuong 4
+chi gom BAI 7 va BAI 8 - dung PPCT cua co.
+
+Nhung trong Curriculum, bai 7 va bai 8 KHONG co yeu cau nao muc VD (bai 7
+co 2 NB + 1 TH, bai 8 co 3 TH). Ma ma tran he so 1 doi 6 cau muc VD. Nen
+de chi ra duoc 6 cau: 5 trac nghiem + 1 Dung/Sai, va bao_cao_phan_bo ghi
+ro mat 6 cau o muc VD/VDC.
+
+Muon de chuong 4 du 12 cau thi phai bo sung yeu cau muc VD cho bai 7
+hoac bai 8 trong data/curriculum/toan10/L10_C4.json - day la SUA CHUONG
+TRINH nen khong tu lam, cho co Lan quyet.
+
+(Cac bai 9, 10, 11 deu da co du ham va deu co yeu cau muc VD, nen khi ra
+de giua ky / cuoi ky co pham vi rong hon thi dung duoc ngay.)
+
+## Hien trang toan lop 10
+
+    C1   37/37   xong        C6    0/31
+    C2   15/15   xong        C7    0/37  (chua co nguon)
+    C3   53/53   xong        C8   30/30   xong
+    C4   40/40   xong*       C9   27/27   xong
+    C5    0/41
+
+(*) chuong 4 du ham cho MOI dang, nhung de he so 1 chi ra 6 cau vi ly do
+o tren.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

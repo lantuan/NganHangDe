@@ -168,6 +168,13 @@
     "Dang": "Hiệu hai vectơ, quy tắc trừ"
   },
   {
+    "id": "L10_C4_B8_TH041_MC_B",
+    "content": "Thực hiện được các phép toán hiệu hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vectơ đối, tổng hai vectơ đối trong hình vuông",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C4_B8_TH042_MC_A",
     "content": "Mô tả được các tính chất của phép cộng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
