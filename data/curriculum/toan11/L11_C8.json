@@ -138,5 +138,74 @@
       "so_do_hinh_cay"
     ],
     "difficulty_rank": 2
+  },
+  {
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "examples": [],
+    "difficulty_rank": 3,
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat",
+    "id": "L11_C8_B28_VD149",
+    "bai": "Biến cố hợp, biến cố giao, biến cố độc lập",
+    "bai_so": "28",
+    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
+    "scope": "ví dụ: hai thiết bị hoạt động độc lập, tính xác suất có ít nhất một thiết bị hỏng",
+    "tags": [
+      "xac_suat",
+      "bien_co_doi",
+      "bien_co_doc_lap",
+      "bai_toan_thuc_tien"
+    ]
+  },
+  {
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "examples": [],
+    "difficulty_rank": 3,
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat",
+    "id": "L11_C8_B29_VD150",
+    "bai": "Công thức cộng xác suất",
+    "bai_so": "29",
+    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
+    "scope": "ví dụ: tỉ lệ học sinh của một lớp giỏi Toán hoặc giỏi Ngữ văn",
+    "tags": [
+      "xac_suat",
+      "cong_thuc_cong",
+      "bien_co_khong_xung_khac",
+      "bai_toan_thuc_tien"
+    ]
+  },
+  {
+    "lop": 11,
+    "hoc_phan": "Thống kê và Xác suất",
+    "chuong": "Các quy tắc tính xác suất",
+    "chuong_so": "8",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "examples": [],
+    "difficulty_rank": 3,
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat",
+    "id": "L11_C8_B30_VD151",
+    "bai": "Công thức nhân xác suất cho hai biến cố độc lập",
+    "bai_so": "30",
+    "content": "Vận dụng được công thức nhân xác suất và sơ đồ hình cây để giải quyết bài toán thực tiễn gồm nhiều giai đoạn độc lập.",
+    "scope": "ví dụ: bài toán bắn bia, sản phẩm đi qua hai công đoạn kiểm tra",
+    "tags": [
+      "xac_suat",
+      "cong_thuc_nhan",
+      "so_do_hinh_cay",
+      "bai_toan_thuc_tien"
+    ]
   }
 ]

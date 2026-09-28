@@ -7189,3 +7189,91 @@ cung dung goi do.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.13 - 2026-09-29
+
+Trang thai: CHO CO LAN DUYET NOI DUNG YEU CAU
+
+## Lop 10 DA XONG - bat dau lop 11
+
+Chot lai lop 10: 327/327 dang deu co ham; ca bon ky thi ra de du ma tran.
+
+    C1 37  C2 15  C3 53  C4 46  C5 48  C6 34  C7 37  C8 30  C9 27
+
+## Da soat du lieu lop 11 truoc khi viet ham
+
+    PPCT lop 11                 33 bai, 9 chuong, du 4 moc thi
+                                (GK1 o B10, CK1 o B17, GK2 o B24, CK2 o B33)
+    Curriculum -> PPCT          0 cho lech
+    Mapping -> Curriculum       0 ID sai khuon, 0 ID khong co yeu cau
+    Moi chuong 2 dang Dung/Sai  du ca 9 chuong
+    Blueprint lop 11            chay duoc 9 chuong he so 1 + ca 4 ky thi
+
+Nghia la curriculum, ppct, mapping cua lop 11 DA CO VA SACH. Chi thieu
+dung phan ham Python: 238 dang, data/python_bank/toan11/ dang trong.
+
+    C1 39  C2 22  C3 15  C4 32  C5 21  C6 27  C7 45  C8 14  C9 23
+
+## Lo hong DUY NHAT tim duoc: chuong 8 khong co yeu cau muc Van dung
+
+Curriculum chuong 8 (Cac quy tac tinh xac suat) chi co NB 3 + TH 4,
+khong co yeu cau nao muc Van dung. Do duoc: de he so 1 chuong 8 mat 6
+cau (1 TN + 2 TLN + 3 TL deu o muc VD/VDC). Doi chieu: moi chuong khac
+cua lop 11 va lop 10 deu co dang muc VD.
+
+Co Lan chot 29/09/2026: bo sung yeu cau muc Van dung.
+
+Da them 3 yeu cau vao data/curriculum/toan11/L11_C8.json:
+
+    L11_C8_B28_VD149  Van dung duoc bien co doi va tinh doc lap de tinh
+                      xac suat cua bien co "co it nhat mot" trong mot so
+                      bai toan thuc tien.
+    L11_C8_B29_VD150  Van dung duoc cong thuc cong xac suat de giai quyet
+                      mot so bai toan thuc tien voi hai bien co khong
+                      xung khac.
+    L11_C8_B30_VD151  Van dung duoc cong thuc nhan xac suat va so do hinh
+                      cay de giai quyet bai toan thuc tien gom nhieu giai
+                      doan doc lap.
+
+So thu tu 149-151 noi tiep sau so lon nhat dang dung cua lop 11 (148),
+KHONG danh chen vao khoang 130-136 cua chuong 8 - danh chen se phai
+danh so lai chuong 9 va lam hong cac ID mapping da co.
+
+Va 8 dang vao data/mapping/toan11/L11_C8.json (VD-MC 3, VD-SA 2,
+VD-TL 3) - dung bang nhu cau cua ma tran he so 1, co du mot chut de
+xoay vong bien the. Chuong 8 tu 14 -> 22 dang.
+
+Moi dong them deu mang ghi_chu "CLAUDE THEM 29/09/2026 - co Lan duyet
+lai noi dung yeu cau can dat".
+
+LUU Y khi duyet: van ban Chuong trinh GDPT 2018 cua chuong nay dung dong
+tu cao nhat la "Tinh duoc", khong co "Van dung duoc". Ba yeu cau them
+vao KHONG dua them kien thuc moi - van chi dung cong thuc cong, cong
+thuc nhan cho bien co doc lap, bien co doi, to hop va so do hinh cay
+(KHONG dung xac suat co dieu kien - do la lop 12). Chung chi nang mu'c
+do van dung cua chinh nhung kien thuc ay len bai toan thuc tien.
+
+## Da kiem chung the nao
+
+1. De he so 1 chuong 8 lop 11: truoc khi sua mat 6 cau, sau khi sua
+   5/5 seed deu "KHONG THIEU CAU NAO".
+2. Bon ky thi lop 11 van dung blueprint duoc binh thuong.
+3. 131 bai test ve tinh nhat quan cua ba lop du lieu deu qua, trong do
+   co bai soi "content cua mapping phai khop curriculum" va bai soi
+   "ten bai phai khop PPCT".
+4. 671 bai test qua, 8 bo qua.
+
+## Viec tiep theo (co Lan chot 29/09/2026)
+
+- Hai chuong hinh khong gian C4 (32 dang) va C7 (45 dang) DE SAU CUNG,
+  vi phai dung hinh TikZ 3D.
+- Bay chuong dai so lam truoc: C1 39, C2 22, C3 15, C5 21, C6 27,
+  C8 22, C9 23 - tong 169 dang.
+- Co Lan co tep Python san cho MOT SO chuong; chuong nao co thi chuyen
+  doi theo khuon math_type, chuong nao khong thi viet moi.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
