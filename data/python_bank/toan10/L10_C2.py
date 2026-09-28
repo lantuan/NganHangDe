@@ -1987,3 +1987,470 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
 #         de.write(r"\loigiai{}" + os.linesep)
 #         de.write(r"\end{ex}" + os.linesep)
 
+
+# =====================================================================
+# BỔ SUNG DẠNG CHO CHƯƠNG 2 (29/09/2026)
+# ---------------------------------------------------------------------
+# Trước khối này chương 2 chỉ có 6/14 dạng có hàm, và TOÀN LÀ trắc
+# nghiệm: không có câu trả lời ngắn, tự luận hay đúng/sai nào.
+# Khối này lấp các ô còn trống của bảng loại câu.
+#
+# Quy ước đã chốt: câu trả lời ngắn có MỘT câu hỏi một đáp số, câu tự
+# luận phải từ HAI ý trở lên, câu đúng/sai xếp bốn ý theo bậc
+# NB -> TH -> VD -> VDC.
+# =====================================================================
+import math as _math
+import random as _rd
+
+
+def _xx2(gt, n=2):
+    """Làm tròn rồi viết theo kiểu Việt Nam (dấu phẩy thập phân)."""
+    s = ("%%.%df" % n) % float(gt)
+    if "." in s:
+        s = s.rstrip("0").rstrip(".")
+    return ("0" if s in ("-0", "") else s).replace(".", ",")
+
+
+def _ba_nhieu2(dapso, ung_vien, buoc=None):
+    """Ba phương án nhiễu đôi một khác nhau và khác đáp số."""
+    ds = []
+    for v in ung_vien:
+        if v != dapso and v not in ds:
+            ds.append(v)
+        if len(ds) == 3:
+            return ds
+    k = 1
+    while len(ds) < 3:
+        v = buoc(k) if buoc else str(k)
+        if v != dapso and v not in ds:
+            ds.append(v)
+        k += 1
+    return ds
+
+
+def _mien_tu_giac():
+    r"""Sinh miền nghiệm là TỨ GIÁC có bốn đỉnh NGUYÊN.
+
+    Cách làm: chọn trước ba đỉnh $P(m;0)$, $Q(u;v)$, $R(0;n)$ rồi mới viết
+    hai bất phương trình đi qua chúng, nên đỉnh chắc chắn nguyên (nếu sinh
+    bất phương trình trước rồi mới giải thì giao điểm hay ra phân số).
+    Miền nghiệm là $x \ge 0$, $y \ge 0$ và hai bất phương trình đó.
+    Trả về (m, n, u, v, (a1,b1,c1), (a2,b2,c2), dinh).
+    """
+    while True:
+        m = _rd.randint(4, 12)
+        n = _rd.randint(4, 12)
+        u = _rd.randint(1, m - 1)
+        v = _rd.randint(1, n - 1)
+        # Q phải nằm NGOÀI đoạn PR thì mới thành tứ giác lồi
+        if u * n + v * m <= m * n:
+            continue
+        a1, b1, c1 = v, m - u, v * m          # đường qua P và Q
+        a2, b2, c2 = n - v, u, u * n          # đường qua Q và R
+        if a1 <= 0 or b1 <= 0 or a2 <= 0 or b2 <= 0:
+            continue
+        g = _math.gcd(_math.gcd(a1, b1), c1)
+        a1, b1, c1 = a1 // g, b1 // g, c1 // g
+        g = _math.gcd(_math.gcd(a2, b2), c2)
+        a2, b2, c2 = a2 // g, b2 // g, c2 // g
+        dinh = [(0, 0), (m, 0), (u, v), (0, n)]
+        return m, n, u, v, (a1, b1, c1), (a2, b2, c2), dinh
+
+
+def _bpt_tex(a, b, c):
+    """Viết ax + by <= c cho gọn (bỏ hệ số 1, đổi dấu cho đẹp)."""
+    def he_so(k, ten, dau_dau):
+        if k == 0:
+            return ""
+        d = "-" if k < 0 else ("+" if not dau_dau else "")
+        k = abs(k)
+        so = "" if k == 1 else str(k)
+        return ("%s %s%s" % (d, so, ten)).strip() if not dau_dau else "%s%s%s" % (d, so, ten)
+    return ("%s %s \\le %d" % (he_so(a, "x", True), he_so(b, "y", False), c)).strip()
+
+
+# ---------------------------------------------------------------------
+# BÀI 3 - bất phương trình bậc nhất hai ẩn
+# ---------------------------------------------------------------------
+
+def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: tính giá trị vế trái của bất phương trình tại một điểm."""
+    gt = []
+    while len(gt) < socau:
+        v = (_rd.randint(-6, 6) or 2, _rd.randint(-6, 6) or 3, _rd.randint(-9, 9),
+             _rd.randint(-5, 5), _rd.randint(-5, 5))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a, b, c, x0, y0 in gt:
+        gt_ve_trai = a * x0 + b * y0 + c
+        debai = (r"Cho bất phương trình $%s$. Tính giá trị của biểu thức "
+                 r"$f\left(x; y\right) = %dx + %dy + %d$ tại điểm $M\left(%d; %d\right)$."
+                 % (_bpt_tex(a, b, -c), a, b, c, x0, y0))
+        giai = (r"Thay $x = %d$ và $y = %d$ vào biểu thức:\\ "
+                r"$f\left(%d; %d\right) = %d\cdot\left(%d\right) + %d\cdot\left(%d\right) + %d = %d$.\\ "
+                r"(Giá trị này %s nên điểm $M$ %s miền nghiệm của bất phương trình đã cho.)"
+                % (x0, y0, x0, y0, a, x0, b, y0, c, gt_ve_trai,
+                   "nhỏ hơn hoặc bằng $0$" if gt_ve_trai <= 0 else "lớn hơn $0$",
+                   "thuộc" if gt_ve_trai <= 0 else "không thuộc"))
+        dung = str(gt_ve_trai)
+        ds = _ba_nhieu2(dung, [str(a * x0 + b * y0), str(-gt_ve_trai), str(gt_ve_trai + c)],
+                        buoc=lambda k: str(gt_ve_trai + 2 * k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B3_NB025_MC_A_01(socau, dang=1):
+    """Chọn bất phương trình mô tả đúng một tình huống thực tế."""
+    TINH_HUONG = [
+        ("Một cửa hàng bán hai loại bút: bút chì giá {p} nghìn đồng một chiếc và "
+         "bút bi giá {q} nghìn đồng một chiếc. Bạn An có {c} nghìn đồng. Gọi $x$, $y$ "
+         "lần lượt là số bút chì và số bút bi bạn An mua. Bất phương trình nào sau đây "
+         "mô tả đúng điều kiện về số tiền?", "tiền"),
+        ("Một xưởng may làm hai loại áo: áo sơ mi cần {p} giờ công và áo khoác cần {q} "
+         "giờ công để hoàn thành. Trong một tuần xưởng có nhiều nhất {c} giờ công. "
+         "Gọi $x$, $y$ lần lượt là số áo sơ mi và số áo khoác may được trong tuần. "
+         "Bất phương trình nào sau đây mô tả đúng điều kiện về giờ công?", "giờ công"),
+        ("Một người chở hai loại hàng: mỗi thùng hàng loại một nặng {p} kg, mỗi thùng "
+         "loại hai nặng {q} kg. Xe chở được tối đa {c} kg. Gọi $x$, $y$ lần lượt là số "
+         "thùng loại một và loại hai. Bất phương trình nào sau đây mô tả đúng điều kiện "
+         "về khối lượng?", "khối lượng"),
+    ]
+    gt = []
+    while len(gt) < socau:
+        i = _rd.randrange(len(TINH_HUONG))
+        p, q = _rd.randint(2, 9), _rd.randint(2, 9)
+        c = _rd.randint(40, 200)
+        if p == q:
+            continue
+        if (i, p, q, c) not in gt:
+            gt.append((i, p, q, c))
+
+    cauTN = ''
+    for i, p, q, c in gt:
+        mau, ten = TINH_HUONG[i]
+        debai = mau.format(p=p, q=q, c=c)
+        dung = r"$%dx + %dy \le %d$" % (p, q, c)
+        giai = (r"Tổng %s dùng cho $x$ đơn vị loại một và $y$ đơn vị loại hai là "
+                r"$%dx + %dy$.\\ "
+                r"Vì không được vượt quá $%d$ nên ta có $%dx + %dy \le %d$.\\ "
+                r"Dấu phải là $\le$ (không vượt quá) chứ không phải $\ge$; và hệ số đi "
+                r"kèm $x$ phải là $%d$, đi kèm $y$ phải là $%d$."
+                % (ten, p, q, c, p, q, c, p, q))
+        ds = _ba_nhieu2(dung, [r"$%dx + %dy \ge %d$" % (p, q, c),
+                               r"$%dx + %dy \le %d$" % (q, p, c),
+                               r"$%dx + %dy < %d$" % (p, q, c - 1)],
+                        buoc=lambda k: r"$%dx + %dy \le %d$" % (p, q, c + k))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B3_TH024_TL_A_01(socau, dong=1):
+    """Tự luận: các bước vẽ miền nghiệm - tìm hai giao điểm của đường bờ với hai trục."""
+    gt = []
+    while len(gt) < socau:
+        a = _rd.choice([1, 2, 3, 4, 5])
+        b = _rd.choice([1, 2, 3, 4, 5])
+        k = _rd.randint(2, 8)
+        c = a * b * k                      # chia het cho ca a va b -> giao diem nguyen
+        if (a, b, c) not in gt:
+            gt.append((a, b, c))
+
+    cauTN = ''
+    for a, b, c in gt:
+        debai = (r"Cho bất phương trình $%dx + %dy \le %d$. Để biểu diễn miền nghiệm của "
+                 r"nó trên mặt phẳng toạ độ, trước hết ta vẽ đường thẳng bờ "
+                 r"$d: %dx + %dy = %d$." % (a, b, c, a, b, c))
+        ds_abcd = [
+            (r"Tìm toạ độ giao điểm của $d$ với trục hoành.",
+             r"\left(%d; 0\right)" % (c // a),
+             r"Giao điểm với trục hoành có $y = 0$, thay vào $d$:\\ "
+             r"$%dx + %d\cdot 0 = %d \Rightarrow x = \dfrac{%d}{%d} = %d$.\\ "
+             r"Vậy giao điểm là $\left(%d; 0\right)$."
+             % (a, b, c, c, a, c // a, c // a)),
+            (r"Tìm toạ độ giao điểm của $d$ với trục tung.",
+             r"\left(0; %d\right)" % (c // b),
+             r"Giao điểm với trục tung có $x = 0$, thay vào $d$:\\ "
+             r"$%d\cdot 0 + %dy = %d \Rightarrow y = \dfrac{%d}{%d} = %d$.\\ "
+             r"Vậy giao điểm là $\left(0; %d\right)$. Nối hai điểm vừa tìm được ta có "
+             r"đường thẳng $d$; thay $O\left(0; 0\right)$ vào vế trái được $0 \le %d$ "
+             r"(đúng), nên miền nghiệm là nửa mặt phẳng bờ $d$ có chứa gốc toạ độ."
+             % (a, b, c, c, b, c // b, c // b, c)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+# ---------------------------------------------------------------------
+# BÀI 4 - hệ bất phương trình bậc nhất hai ẩn
+# ---------------------------------------------------------------------
+
+def L10_C2_B4_NB026_MC_A_01(socau, dang=1):
+    """Nhận ra hệ bất phương trình bậc nhất hai ẩn."""
+    gt = []
+    while len(gt) < socau:
+        v = tuple(_rd.randint(1, 9) for _ in range(6)) + (_rd.randrange(4),)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a1, b1, c1, a2, b2, c2, _k in gt:
+        he = lambda t1, t2: r"$\heva{& %s \\ & %s}$" % (t1, t2)
+        dung = he(r"%dx + %dy \le %d" % (a1, b1, c1), r"%dx - %dy > %d" % (a2, b2, c2))
+        giai = (r"Hệ bất phương trình bậc nhất hai ẩn là hệ gồm các bất phương trình "
+                r"dạng $ax + by \le c$ (hoặc $<, \ge, >$), trong đó $a$ và $b$ không đồng "
+                r"thời bằng $0$ và các ẩn $x$, $y$ đều có bậc nhất.\\ "
+                r"$\bullet$ Hệ có số hạng $x^{2}$, $y^{2}$ hoặc tích $xy$: loại.\\ "
+                r"$\bullet$ Hệ có ẩn thứ ba $z$: loại, vì khi đó không còn là hai ẩn.\\ "
+                r"Chỉ hệ gồm hai bất phương trình mà $x$, $y$ đều bậc nhất mới thoả mãn.")
+        ds = _ba_nhieu2(dung,
+                        [he(r"%dx^{2} + %dy \le %d" % (a1, b1, c1), r"%dx - %dy > %d" % (a2, b2, c2)),
+                         he(r"%dxy + %dy \le %d" % (a1, b1, c1), r"%dx - %dy > %d" % (a2, b2, c2)),
+                         he(r"%dx + %dy - z \le %d" % (a1, b1, c1), r"%dx - %dy > %d" % (a2, b2, c2))],
+                        buoc=lambda k: he(r"%dx^{%d} + %dy \le %d" % (a1, k + 1, b1, c1),
+                                          r"%dx - %dy > %d" % (a2, b2, c2)))
+        debai = r"Hệ nào sau đây là hệ bất phương trình bậc nhất hai ẩn?"
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_TH027_TL_A_01(socau, dong=1):
+    """Tự luận: miền nghiệm của hệ là tam giác vuông - tìm đỉnh và tính diện tích."""
+    gt = []
+    while len(gt) < socau:
+        m = _rd.randint(3, 12)
+        n = _rd.randint(3, 12)
+        if (m * n) % 2:                    # de dien tich m.n/2 la so nguyen
+            continue
+        if (m, n) not in gt:
+            gt.append((m, n))
+
+    cauTN = ''
+    for m, n in gt:
+        g = _math.gcd(n, m)
+        a, b, c = n // g, m // g, m * n // g
+        S = m * n // 2
+        debai = (r"Cho hệ bất phương trình $\heva{& x \ge 0 \\ & y \ge 0 \\ & %dx + %dy \le %d}$"
+                 % (a, b, c))
+        ds_abcd = [
+            (r"Tìm toạ độ ba đỉnh của miền nghiệm.",
+             r"\left(0;0\right), \left(%d;0\right), \left(0;%d\right)" % (m, n),
+             r"Miền nghiệm nằm trong góc phần tư thứ nhất, bị chặn bởi đường thẳng "
+             r"$d: %dx + %dy = %d$.\\ "
+             r"$d$ cắt trục hoành tại $\left(%d; 0\right)$ và cắt trục tung tại "
+             r"$\left(0; %d\right)$; cùng với gốc $O\left(0;0\right)$ ta được ba đỉnh."
+             % (a, b, c, m, n)),
+            (r"Tính diện tích miền nghiệm.", r"%d" % S,
+             r"Ba đỉnh tạo thành tam giác vuông tại $O$, hai cạnh góc vuông nằm trên hai "
+             r"trục toạ độ và có độ dài $%d$ và $%d$.\\ "
+             r"$S = \dfrac{1}{2}\cdot %d\cdot %d = %d$." % (m, n, m, n, S)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C2_B4_VD028_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: giá trị lớn nhất của F = px + qy trên miền nghiệm của hệ."""
+    gt = []
+    while len(gt) < socau:
+        m, n, u, v, bpt1, bpt2, dinh = _mien_tu_giac()
+        p, q = _rd.randint(1, 9), _rd.randint(1, 9)
+        gtri = [p * X + q * Y for X, Y in dinh]
+        lon = max(gtri)
+        if gtri.count(lon) != 1:           # phai co DUY NHAT mot dinh dat gia tri lon nhat
+            continue
+        gt.append((m, n, u, v, bpt1, bpt2, dinh, p, q, lon))
+        if len(gt) > socau:
+            break
+
+    cauTN = ''
+    for m, n, u, v, bpt1, bpt2, dinh, p, q, lon in gt[:socau]:
+        (a1, b1, c1), (a2, b2, c2) = bpt1, bpt2
+        debai = (r"Cho hệ bất phương trình $\heva{& x \ge 0 \\ & y \ge 0 \\ "
+                 r"& %s \\ & %s}$. Tìm giá trị lớn nhất của biểu thức "
+                 r"$F\left(x; y\right) = %dx + %dy$ trên miền nghiệm của hệ."
+                 % (_bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2), p, q))
+        bang = r"\\ ".join(r"$F\left(%d; %d\right) = %d\cdot %d + %d\cdot %d = %d$"
+                           % (X, Y, p, X, q, Y, p * X + q * Y) for X, Y in dinh)
+        giai = (r"Miền nghiệm của hệ là miền tứ giác có bốn đỉnh "
+                r"$\left(0;0\right)$, $\left(%d;0\right)$, $\left(%d;%d\right)$, "
+                r"$\left(0;%d\right)$.\\ "
+                r"Biểu thức $F = %dx + %dy$ đạt giá trị lớn nhất tại một trong các đỉnh, "
+                r"nên chỉ cần tính $F$ tại bốn đỉnh đó:\\ %s.\\ "
+                r"Vậy giá trị lớn nhất của $F$ bằng $%d$."
+                % (m, u, v, n, p, q, bang, lon))
+        dung = str(lon)
+        ds = _ba_nhieu2(dung, [str(min(p * X + q * Y for X, Y in dinh)),
+                               str(p * m + q * n), str(lon + p)],
+                        buoc=lambda k: str(lon + 2 * k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_VD028_TL_A_01(socau, dong=1):
+    """Tự luận: bài toán tối ưu thực tiễn dẫn đến hệ bất phương trình."""
+    gt = []
+    while len(gt) < socau:
+        m, n, u, v, bpt1, bpt2, dinh, = _mien_tu_giac()
+        p, q = _rd.randint(2, 9), _rd.randint(2, 9)
+        gtri = [p * X + q * Y for X, Y in dinh]
+        lon = max(gtri)
+        if gtri.count(lon) != 1 or lon < 30:
+            continue
+        gt.append((m, n, u, v, bpt1, bpt2, dinh, p, q, lon))
+
+    cauTN = ''
+    for m, n, u, v, bpt1, bpt2, dinh, p, q, lon in gt[:socau]:
+        (a1, b1, c1), (a2, b2, c2) = bpt1, bpt2
+        dinh_lon = [d for d in dinh if p * d[0] + q * d[1] == lon][0]
+        debai = (r"Một xưởng sản xuất hai loại sản phẩm. Gọi $x$, $y$ lần lượt là số sản "
+                 r"phẩm loại một và loại hai làm được trong một ngày. Điều kiện về nguyên "
+                 r"liệu và giờ công dẫn đến hệ bất phương trình "
+                 r"$\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}$, và tiền lãi thu được "
+                 r"(đơn vị nghìn đồng) là $F\left(x; y\right) = %dx + %dy$."
+                 % (_bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2), p, q))
+        bang = r"\\ ".join(r"$F\left(%d; %d\right) = %d$" % (X, Y, p * X + q * Y)
+                           for X, Y in dinh)
+        ds_abcd = [
+            (r"Tìm toạ độ các đỉnh của miền nghiệm.",
+             r"\left(0;0\right), \left(%d;0\right), \left(%d;%d\right), \left(0;%d\right)"
+             % (m, u, v, n),
+             r"Miền nghiệm là giao của bốn nửa mặt phẳng, nằm trong góc phần tư thứ nhất.\\ "
+             r"Giải từng cặp phương trình đường bờ ta được bốn đỉnh "
+             r"$\left(0;0\right)$, $\left(%d;0\right)$, $\left(%d;%d\right)$, "
+             r"$\left(0;%d\right)$." % (m, u, v, n)),
+            (r"Hỏi mỗi ngày nên làm bao nhiêu sản phẩm mỗi loại để tiền lãi lớn nhất? "
+             r"Tiền lãi lớn nhất là bao nhiêu nghìn đồng?",
+             r"%d" % lon,
+             r"Biểu thức bậc nhất $F$ đạt giá trị lớn nhất tại một đỉnh của miền nghiệm, "
+             r"nên chỉ cần so sánh $F$ tại bốn đỉnh:\\ %s.\\ "
+             r"Lớn nhất là $%d$, đạt tại $\left(%d; %d\right)$. Vậy mỗi ngày nên làm $%d$ "
+             r"sản phẩm loại một và $%d$ sản phẩm loại hai, tiền lãi lớn nhất là $%d$ "
+             r"nghìn đồng."
+             % (bang, lon, dinh_lon[0], dinh_lon[1], dinh_lon[0], dinh_lon[1], lon)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C2_TF_A_01(socau, socot=1):
+    """Đúng/Sai - bất phương trình bậc nhất hai ẩn."""
+    cauTF = ''
+    for _ in range(socau):
+        a = _rd.choice([1, 2, 3])
+        b = _rd.choice([1, 2, 3])
+        k = _rd.randint(2, 6)
+        c = a * b * k
+        x0, y0 = _rd.randint(0, 4), _rd.randint(0, 4)
+        ve_trai = a * x0 + b * y0
+        # dem diem nguyen trong hinh vuong 0..k thoa man
+        dem = sum(1 for X in range(0, k + 1) for Y in range(0, k + 1)
+                  if a * X + b * Y <= c)
+
+        debai = (r"Cho bất phương trình $%dx + %dy \le %d$. "
+                 r"Xét tính đúng sai của các khẳng định sau:" % (a, b, c))
+
+        # a) NB - nhan dang
+        y1 = [(r"{\True Bất phương trình đã cho là bất phương trình bậc nhất hai ẩn}",
+               r"Đúng. Nó có dạng $ax + by \le c$ với $a = %d$, $b = %d$ không đồng thời "
+               r"bằng $0$, và $x$, $y$ đều bậc nhất." % (a, b)),
+              (r"{Bất phương trình đã cho không phải là bất phương trình bậc nhất hai ẩn}",
+               r"Sai. Nó đúng dạng $ax + by \le c$ nên là bất phương trình bậc nhất hai ẩn.")]
+
+        # b) TH - thay so kiem tra mot cap so
+        dung_b = ve_trai <= c
+        y2 = [((r"{\True " if dung_b else "{") +
+               r"Cặp số $\left(%d; %d\right)$ là một nghiệm của bất phương trình}" % (x0, y0),
+               r"Thay vào vế trái: $%d\cdot %d + %d\cdot %d = %d$, so với $%d$ thì %s. "
+               r"Nên cặp số này %s một nghiệm."
+               % (a, x0, b, y0, ve_trai, c,
+                  "nhỏ hơn hoặc bằng" if dung_b else "lớn hơn",
+                  "" if dung_b else "không phải")),
+              ((r"{" if dung_b else r"{\True ") +
+               r"Cặp số $\left(%d; %d\right)$ không phải là nghiệm của bất phương trình}" % (x0, y0),
+               r"Thay vào vế trái được $%d$; so với $%d$ thì %s."
+               % (ve_trai, c, "thoả mãn" if dung_b else "không thoả mãn"))]
+
+        # c) VD - phai hinh dung mien nghiem
+        y3 = [(r"{\True Miền nghiệm của bất phương trình là nửa mặt phẳng bờ là đường "
+               r"thẳng $%dx + %dy = %d$ và có chứa gốc toạ độ $O$}" % (a, b, c),
+               r"Thay $O\left(0;0\right)$ vào vế trái được $0$, mà $0 \le %d$ nên $O$ "
+               r"thuộc miền nghiệm.\\ "
+               r"Vậy miền nghiệm là nửa mặt phẳng bờ $%dx + %dy = %d$ chứa $O$ (kể cả bờ)."
+               % (c, a, b, c)),
+              (r"{Miền nghiệm của bất phương trình là nửa mặt phẳng bờ là đường thẳng "
+               r"$%dx + %dy = %d$ và KHÔNG chứa gốc toạ độ $O$}" % (a, b, c),
+               r"Sai. Thay $O$ vào vế trái được $0 \le %d$ (đúng) nên $O$ thuộc miền nghiệm."
+               % c)]
+
+        # d) VDC - dem diem nguyen, phai ket hop mien nghiem voi rang buoc phu
+        y4 = [(r"{\True Có đúng $%d$ cặp số nguyên $\left(x; y\right)$ thoả mãn bất phương "
+               r"trình và $0 \le x \le %d$, $0 \le y \le %d$}" % (dem, k, k),
+               r"Với mỗi $x$ nguyên từ $0$ đến $%d$, điều kiện $%dx + %dy \le %d$ cho "
+               r"$y \le \dfrac{%d - %dx}{%d}$; đếm số $y$ nguyên từ $0$ đến $%d$ thoả mãn "
+               r"rồi cộng lại theo từng $x$, ta được tất cả $%d$ cặp."
+               % (k, a, b, c, c, a, b, k, dem)),
+              (r"{Có đúng $%d$ cặp số nguyên $\left(x; y\right)$ thoả mãn bất phương trình "
+               r"và $0 \le x \le %d$, $0 \le y \le %d$}" % (dem + 2, k, k),
+               r"Sai. Đếm đầy đủ theo từng giá trị của $x$ thì được $%d$ cặp." % dem)]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+
+def L10_C2_TF_B_01(socau, socot=1):
+    """Đúng/Sai - hệ bất phương trình bậc nhất hai ẩn và bài toán tối ưu."""
+    cauTF = ''
+    for _ in range(socau):
+        while True:
+            m, n, u, v, bpt1, bpt2, dinh = _mien_tu_giac()
+            p, q = _rd.randint(1, 9), _rd.randint(1, 9)
+            gtri = [p * X + q * Y for X, Y in dinh]
+            if gtri.count(max(gtri)) == 1:
+                break
+        (a1, b1, c1), (a2, b2, c2) = bpt1, bpt2
+        lon = max(gtri)
+        dinh_lon = [d for d in dinh if p * d[0] + q * d[1] == lon][0]
+
+        debai = (r"Cho hệ bất phương trình $\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}$ "
+                 r"và biểu thức $F\left(x; y\right) = %dx + %dy$. "
+                 r"Xét tính đúng sai của các khẳng định sau:"
+                 % (_bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2), p, q))
+
+        # a) NB - nhan dang he
+        y1 = [(r"{\True Hệ đã cho là hệ bất phương trình bậc nhất hai ẩn}",
+               r"Đúng. Mỗi bất phương trình trong hệ đều có dạng bậc nhất đối với hai ẩn "
+               r"$x$ và $y$."),
+              (r"{Hệ đã cho không phải là hệ bất phương trình bậc nhất hai ẩn}",
+               r"Sai. Cả bốn bất phương trình đều bậc nhất đối với $x$ và $y$.")]
+
+        # b) TH - thay mot diem vao he
+        y2 = [(r"{\True Điểm $\left(%d; %d\right)$ thuộc miền nghiệm của hệ}" % (u, v),
+               r"Thay $x = %d$, $y = %d$ vào từng bất phương trình đều thấy thoả mãn "
+               r"(điểm này chính là giao điểm của hai đường bờ), nên nó thuộc miền nghiệm."
+               % (u, v)),
+              (r"{Điểm $\left(%d; %d\right)$ không thuộc miền nghiệm của hệ}" % (u, v),
+               r"Sai. Đó chính là một đỉnh của miền nghiệm nên nó thuộc miền nghiệm.")]
+
+        # c) VD - phai giai he de biet hinh dang mien nghiem
+        y3 = [(r"{\True Miền nghiệm của hệ là một miền tứ giác}",
+               r"Bốn bất phương trình cho bốn nửa mặt phẳng; giao của chúng là miền tứ "
+               r"giác với bốn đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
+               r"$\left(%d;%d\right)$, $\left(0;%d\right)$." % (m, u, v, n)),
+              (r"{Miền nghiệm của hệ là một miền tam giác}",
+               r"Sai. Giải các cặp đường bờ ta được BỐN đỉnh chứ không phải ba, nên miền "
+               r"nghiệm là tứ giác.")]
+
+        # d) VDC - tim gia tri lon nhat, phai co toa do cac dinh o y c)
+        y4 = [(r"{\True Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$}" % lon,
+               r"Biểu thức bậc nhất đạt giá trị lớn nhất tại một đỉnh của miền nghiệm. "
+               r"Tính $F$ tại bốn đỉnh:\\ %s.\\ Lớn nhất là $%d$, đạt tại "
+               r"$\left(%d; %d\right)$."
+               % (r"\\ ".join(r"$F\left(%d; %d\right) = %d$" % (X, Y, p * X + q * Y)
+                              for X, Y in dinh), lon, dinh_lon[0], dinh_lon[1])),
+              (r"{Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$}" % (lon + p + q),
+               r"Sai. So sánh $F$ tại bốn đỉnh thì giá trị lớn nhất là $%d$." % lon)]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF

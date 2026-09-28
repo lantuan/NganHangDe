@@ -5715,3 +5715,65 @@ Cau tra loi ngan TH035_SA_B: dap an la so do goc lam tron hai chu so.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.96 - 2026-09-29
+
+## Chuong 2: viet ham cho 8 dang con trong + 1 dang moi (6 -> 15 dang co ham)
+
+Truoc dot nay chuong 2 co 14 dang nhung chi 6 dang co ham, va TOAN LA trac
+nghiem: khong co cau tra loi ngan, tu luan hay dung/sai nao. Nay 15/15 dang
+deu da co ham.
+
+    NB023   MC_A          -> them SA_A (dang moi)
+    NB025   (chua co ham) -> MC_A
+    TH024   MC_A, MC_B    -> them TL_A
+    NB026   (chua co ham) -> MC_A
+    TH027   MC_A, MC_B    -> them TL_A
+    VD028   MC_A          -> them SA_A, TL_A
+    TF      (chua co ham) -> TF_A, TF_B
+
+## Chin dang moi
+
+    NB023_SA_A  tinh gia tri ve trai cua bat phuong trinh tai mot diem
+    NB025_MC_A  chon bat phuong trinh mo ta dung tinh huong thuc te
+                (mua but, gio cong xuong may, khoi luong hang tren xe)
+    TH024_TL_A  cac buoc ve mien nghiem: tim hai giao diem cua duong bo voi hai truc
+    NB026_MC_A  nhan ra he bat phuong trinh bac nhat hai an
+    TH027_TL_A  mien nghiem la tam giac vuong: tim ba dinh, tinh dien tich
+    VD028_SA_A  gia tri lon nhat cua F = px + qy tren mien nghiem
+    VD028_TL_A  bai toan toi uu thuc tien (xuong san xuat hai loai san pham)
+    TF_A        bat phuong trinh bac nhat hai an
+    TF_B        he bat phuong trinh va bai toan toi uu
+
+Hai ham Dung/Sai deu xep bon y theo bac NB -> TH -> VD -> VDC.
+
+## De so lieu luon dep: chon DINH truoc, viet bat phuong trinh sau
+
+_mien_tu_giac() khong sinh bat phuong trinh roi moi giai tim dinh (lam nhu
+the giao diem hay ra phan so xau). Nguoc lai: chon truoc ba dinh nguyen
+P(m;0), Q(u;v), R(0;n) roi moi viet hai duong thang di qua chung, nen bon
+dinh cua mien nghiem CHAC CHAN nguyen. Con loc them dieu kien Q nam ngoai
+doan PR (de thanh tu giac loi) va F dat gia tri lon nhat tai DUY NHAT mot
+dinh (de dap an khong nhap nhang).
+
+TH024_TL_A: chon c = a.b.k nen hai giao diem voi hai truc deu nguyen.
+TH027_TL_A: chon m.n chan nen dien tich m.n/2 la so nguyen.
+
+## Da kiem chung the nao
+
+1. Mien tu giac: 400 truong hop. TU TIM dinh bang cach lay giao tung cap
+   trong bon duong bo (dung phan so huu ti) roi giu diem thoa CA HE -
+   khop 100% voi bon dinh ham khai. 0 lech.
+2. Gia tri lon nhat cua F: voi ca 400 mien do, QUET LUOI buoc 1/4 tren
+   toan mien roi so voi gia tri lon nhat tinh tai cac dinh - 0 lech.
+3. TF_A: 120 cau. Y d) dem cap so nguyen: tu dem lai - 0 sai. Y b) xet mot
+   cap so co la nghiem khong: tu thay so - 0 sai.
+4. Chin ham deu chay 15/15 lan, dung so cau yeu cau.
+5. 15/15 dang chay qua duong ra de that, dung loai cau, 0 loi.
+6. Bien dich THAT 18 cau ra PDF 8 trang, 0 loi; doc lai doi chieu
+   (F(9;1) = 5.9 + 7.1 = 52 la gia tri lon nhat).
+7. 411 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

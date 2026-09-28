@@ -83,5 +83,12 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Miền nghiệm của hệ là đa giác gì (tam giác, tứ giác, ngũ giác...)",
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C2_B3_NB023_SA_A",
+    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính giá trị vế trái của bất phương trình tại một điểm",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]
