@@ -5777,3 +5777,81 @@ TH027_TL_A: chon m.n chan nen dien tich m.n/2 la so nguyen.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.97 - 2026-09-29
+
+## Da ra duoc DE HE SO 1 tron ven cho bon chuong: 1, 2, 3, 9
+
+Co Lan hoi: "lam sao de du so cau ra duoc de he so 1".
+
+Cach do: chay CA DUONG RA DE that (blueprint -> chon cau -> goi ham sinh)
+cho tung pham vi chuong, dem xem bao nhieu cho khong ra duoc cau va thieu o
+dau. Luu y: chi nhin select_questions thoi thi KHONG DU, vi no mo i bao
+thieu o Mapping; thieu HAM chi lo ra khi that su goi call_generator.
+
+Truoc dot nay:
+
+    chuong 1   6/8 cau   thieu 3 dong Mapping
+    chuong 2   du cau
+    chuong 3   du cau
+    chuong 9   1/6 cau   thieu 9 ham
+
+Sau dot nay, chay 20 de moi chuong:
+
+    chuong 1   160/160 cau   DU CAU
+    chuong 2   121/121 cau   DU CAU
+    chuong 3    79/79  cau   DU CAU
+    chuong 9   123/123 cau   DU CAU
+    chuong 4, 5, 6, 7, 8: chua co ham (4 den 18 cho thieu moi chuong)
+
+## Chuong 1: them ba dang ma tran doi nhung Mapping chua khai
+
+    VD014_TL_A  tu luan: xet tinh dung sai cua menh de keo theo va menh de dao
+    VD020_SA_A  tra loi ngan: dem phan tu tap hop trong bai toan thuc te
+                (dung n(A hop B) = n(A) + n(B) - n(A giao B))
+    VD021_TL_A  tu luan: phep toan tap hop chua tham so tren truc so
+
+VD021_TL_A dung lai dung phan sinh de va loi giai da kiem chung cua dang
+VD021 (_VD021_de_giai): y (a) dem so gia tri m de giao bang rong, y (b) tim
+m nho nhat de giao khac rong - hai cau hoi bo sung cho nhau va cung can
+n < a nen dung chung mot bo so lieu.
+
+## Chuong 9: them tam cau NHAN BIET va mot cau tu luan
+
+Ngan hang chuong 9 truoc do chi toan cau tinh toan muc TH/VD, khong co cau
+nhan biet khai niem nao - ma ma tran de he so 1 lai doi nhung cau do.
+
+    NB142_MC_A  nhan biet phep thu ngau nhien
+    NB143_MC_A  khong gian mau (xuc xac / dong xu / rut the)
+    NB145_MC_A  bien co khong the
+    NB146_MC_A  bien co chac chan
+    NB147_MC_A  bien co doi
+    NB148_MC_A  nguyen li xac suat be
+    NB149_MC_A  dinh nghia co dien cua xac suat
+    NB153_MC_A  cac tinh chat co ban cua xac suat
+    VD155_TL_A  tu luan: gieo hai xuc xac, mo ta khong gian mau va tinh xac suat
+
+Cau NB148 co ghi ro trong loi giai hai cho hoc sinh hay nham: xac suat be
+KHONG co nghia la "khong bao gio xay ra", va neu P(A) rat be thi
+P(A ngang) = 1 - P(A) lai rat GAN 1 chu khong he be.
+
+## Da kiem chung the nao
+
+1. Chay 20 de he so 1 cho MOI chuong, goi ham sinh that tung cau:
+   chuong 1, 2, 3, 9 ra du 100% so cau, 0 loi.
+2. Quet ca lop 10 qua duong ra de: 121 dang chay dung loai cau, 0 loi.
+3. Ra DE THAT cho ba chuong 1, 3, 9 roi bien dich: 17 cau, PDF 6 trang, 0 loi.
+4. Muoi hai ham moi deu chay 12-15/15 lan, dung so cau yeu cau.
+5. 415 bai test qua, 8 bo qua.
+
+## Con lai de ra duoc de he so 1 cho ca lop 10
+
+    chuong 4    4 cho thieu
+    chuong 5   17 cho thieu
+    chuong 6   13 cho thieu
+    chuong 7   18 cho thieu
+    chuong 8   11 cho thieu
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

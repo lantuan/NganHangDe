@@ -7681,3 +7681,156 @@ def L10_C1_B2_NB017_SA_C_01(socau, dang=2):
 
     return cauSA
 
+
+# =====================================================================
+# BỔ SUNG BA DẠNG CHO CHƯƠNG 1 (29/09/2026)
+# ---------------------------------------------------------------------
+# Ma trận đề hệ số 1 đòi ba dạng này nhưng Mapping chưa khai, nên mỗi
+# lần ra đề chương 1 đều thiếu câu. Ba dạng đó là:
+#     VD014_TL_A   tự luận về mệnh đề kéo theo và mệnh đề đảo
+#     VD020_SA_A   trả lời ngắn, đếm phần tử tập hợp trong bài toán thực tế
+#     VD021_TL_A   tự luận về phép toán tập hợp chứa tham số
+# =====================================================================
+
+def _ba_nhieu(dapso, ung_vien, buoc=None):
+    """Ba phuong an nhieu doi mot khac nhau va khac dap so."""
+    ds = []
+    for v in ung_vien:
+        if v != dapso and v not in ds:
+            ds.append(v)
+        if len(ds) == 3:
+            return ds
+    k = 1
+    while len(ds) < 3:
+        v = buoc(k) if buoc else str(k)
+        if v != dapso and v not in ds:
+            ds.append(v)
+        k += 1
+    return ds
+
+
+def L10_C1_B1_VD014_TL_A_01(socau, dong=1):
+    """Tự luận: xét tính đúng sai của mệnh đề kéo theo và của mệnh đề đảo."""
+    # (boi, uoc): "n chia het cho boi" keo theo "n chia het cho uoc" la MENH DE DUNG
+    CAP = [(6, 3), (6, 2), (4, 2), (9, 3), (10, 5), (8, 4), (12, 4), (15, 5)]
+    gt = []
+    while len(gt) < socau:
+        boi, uoc = random.choice(CAP)
+        nguoc = random.choice([False, True])   # co dao vai tro hai menh de khong
+        if (boi, uoc, nguoc) not in gt:
+            gt.append((boi, uoc, nguoc))
+
+    cauTN = ''
+    for boi, uoc, nguoc in gt:
+        # P => Q dung khi so cua P la BOI cua so trong Q
+        sP, sQ = (uoc, boi) if nguoc else (boi, uoc)
+        pq_dung = (sP % sQ == 0)
+        qp_dung = (sQ % sP == 0)
+        # phan vi du khi menh de sai: so chia het cho so nho ma khong chia het cho so lon
+        vd_pq = sQ if not pq_dung else None
+        vd_qp = sP if not qp_dung else None
+
+        debai = (r"Cho $n$ là một số tự nhiên và hai mệnh đề\\ "
+                 r"$P$: ``$n$ chia hết cho $%d$'' \quad và \quad $Q$: ``$n$ chia hết cho $%d$''."
+                 % (sP, sQ))
+        ds_abcd = [
+            (r"Xét tính đúng sai của mệnh đề $P \Rightarrow Q$.",
+             r"\text{%s}" % ("Đúng" if pq_dung else "Sai"),
+             (r"Mọi số chia hết cho $%d$ đều chia hết cho $%d$ (vì $%d$ chia hết cho $%d$), "
+              r"nên $P \Rightarrow Q$ là mệnh đề \textbf{đúng}." % (sP, sQ, sP, sQ))
+             if pq_dung else
+             (r"Lấy $n = %d$: khi đó $n$ chia hết cho $%d$ nên $P$ đúng, nhưng $n$ không "
+              r"chia hết cho $%d$ nên $Q$ sai.\\ "
+              r"Có trường hợp $P$ đúng mà $Q$ sai, vậy $P \Rightarrow Q$ là mệnh đề "
+              r"\textbf{sai}." % (vd_pq, sP, sQ))),
+            (r"Xét tính đúng sai của mệnh đề đảo $Q \Rightarrow P$.",
+             r"\text{%s}" % ("Đúng" if qp_dung else "Sai"),
+             (r"Mọi số chia hết cho $%d$ đều chia hết cho $%d$, nên mệnh đề đảo "
+              r"$Q \Rightarrow P$ \textbf{đúng}." % (sQ, sP))
+             if qp_dung else
+             (r"Lấy $n = %d$: khi đó $n$ chia hết cho $%d$ nên $Q$ đúng, nhưng $n$ không "
+              r"chia hết cho $%d$ nên $P$ sai.\\ "
+              r"Vậy mệnh đề đảo $Q \Rightarrow P$ \textbf{sai}." % (vd_qp, sQ, sP))),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C1_B2_VD020_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: đếm số phần tử bằng công thức n(A hợp B) = n(A) + n(B) - n(A giao B)."""
+    BOI_CANH = [("lớp 10A", "thích môn Toán", "thích môn Văn", "học sinh"),
+                ("tổ dân phố", "trồng cây cảnh", "nuôi cá cảnh", "hộ gia đình"),
+                ("câu lạc bộ", "chơi cầu lông", "chơi bóng bàn", "thành viên")]
+    gt = []
+    while len(gt) < socau:
+        n = random.randint(35, 50)
+        ca_hai = random.randint(5, 12)
+        chi_a = random.randint(6, 16)
+        chi_b = random.randint(6, 16)
+        khong = n - (chi_a + chi_b + ca_hai)
+        if khong < 2:                      # phai con it nhat vai nguoi khong thuoc hai nhom
+            continue
+        i = random.randrange(len(BOI_CANH))
+        v = (i, n, chi_a, chi_b, ca_hai, khong)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for i, n, chi_a, chi_b, ca_hai, khong in gt:
+        noi, hd1, hd2, dv = BOI_CANH[i]
+        A = chi_a + ca_hai                 # so nguoi thuoc nhom thu nhat
+        B = chi_b + ca_hai
+        debai = (r"Một %s có $%d$ %s, trong đó có $%d$ %s %s, $%d$ %s %s và $%d$ %s "
+                 r"%s cả hai. Hỏi có bao nhiêu %s không %s và cũng không %s?"
+                 % (noi, n, dv, A, dv, hd1, B, dv, hd2, ca_hai, dv,
+                    hd1.split()[0], dv, hd1, hd2))
+        giai = (r"Gọi $A$ là tập các %s %s, $B$ là tập các %s %s.\\ "
+                r"Ta có $n\left(A\right) = %d$, $n\left(B\right) = %d$, "
+                r"$n\left(A \cap B\right) = %d$.\\ "
+                r"Số %s thuộc ít nhất một trong hai nhóm là\\ "
+                r"$n\left(A \cup B\right) = n\left(A\right) + n\left(B\right) "
+                r"- n\left(A \cap B\right) = %d + %d - %d = %d$.\\ "
+                r"Vậy số %s không thuộc nhóm nào là $%d - %d = %d$."
+                % (dv, hd1, dv, hd2, A, B, ca_hai, dv, A, B, ca_hai, A + B - ca_hai,
+                   dv, n, A + B - ca_hai, khong))
+        dung = str(khong)
+        ds = _ba_nhieu(dung, [str(n - A - B), str(A + B - ca_hai), str(n - ca_hai)],
+                       buoc=lambda k: str(khong + k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C1_B2_VD021_TL_A_01(socau, dong=1):
+    """Tự luận: phép toán tập hợp chứa tham số - hai câu hỏi bổ sung cho nhau.
+
+    Dùng lại đúng phần sinh đề và lời giải đã kiểm chứng của dạng VD021
+    (xem _VD021_de_giai): ý (a) đếm số giá trị của m để giao bằng rỗng,
+    ý (b) tìm m nhỏ nhất để giao khác rỗng. Cả hai đều cần n < a nên dùng
+    chung được một bộ số liệu.
+    """
+    gt = []
+    while len(gt) < socau:
+        a_val = int(np.random.randint(-15, 5))
+        b_val = int(np.random.randint(a_val + 5, 16))
+        n_val = int(np.random.randint(a_val - 8, a_val - 1))
+        if a_val - n_val - 1 <= 0:
+            continue
+        v = (a_val, b_val, n_val)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a_val, b_val, n_val in gt:
+        _, dem, giai_dem = _VD021_de_giai(3, a_val, b_val, n_val)
+        _, nho_nhat, giai_nn = _VD021_de_giai(4, a_val, b_val, n_val)
+        debai = (r"Cho hai tập hợp $A = \left[ %d; %d \right]$ và "
+                 r"$B = \left( %d; m \right]$, trong đó $m$ là số nguyên sao cho "
+                 r"$B \ne \varnothing$." % (a_val, b_val, n_val))
+        ds_abcd = [
+            (r"Có bao nhiêu giá trị nguyên của $m$ để $A \cap B = \varnothing$?",
+             r"%d" % dem, giai_dem),
+            (r"Tìm giá trị nguyên nhỏ nhất của $m$ để $A \cap B \ne \varnothing$.",
+             r"%d" % nho_nhat, giai_nn),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN

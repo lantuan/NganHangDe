@@ -202,5 +202,26 @@
     "content": "Mệnh đề và tập hợp",
     "Loai": "Đúng sai",
     "Dang": "Tập hợp và các phép toán trên tập "
+  },
+  {
+    "id": "L10_C1_B1_VD014_TL_A",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Tự luận",
+    "Dang": "Xét tính đúng sai của mệnh đề kéo theo và mệnh đề đảo",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C1_B2_VD020_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số phần tử tập hợp trong bài toán thực tế",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C1_B2_VD021_TL_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Tự luận",
+    "Dang": "Phép toán tập hợp chứa tham số trên trục số",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]

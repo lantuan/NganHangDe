@@ -1102,3 +1102,290 @@ def L10_C9_TF_E_01(socau,socot):
 
 # ##############################################
 
+
+# =====================================================================
+# BỔ SUNG CÁC DẠNG NHẬN BIẾT CHO CHƯƠNG 9 (29/09/2026)
+# ---------------------------------------------------------------------
+# Ma trận đề hệ số 1 đòi các câu nhận biết khái niệm xác suất, nhưng
+# ngân hàng mới chỉ có các câu tính toán mức TH/VD. Khối này viết đủ
+# các câu nhận biết còn thiếu, nhờ đó chương 9 ra được đề hệ số 1.
+# =====================================================================
+import random as _rd
+
+
+def _ba_nhieu9(dapso, ung_vien, buoc=None):
+    """Ba phương án nhiễu đôi một khác nhau và khác đáp số."""
+    ds = []
+    for v in ung_vien:
+        if v != dapso and v not in ds:
+            ds.append(v)
+        if len(ds) == 3:
+            return ds
+    k = 1
+    while len(ds) < 3:
+        v = buoc(k) if buoc else str(k)
+        if v != dapso and v not in ds:
+            ds.append(v)
+        k += 1
+    return ds
+
+
+def L10_C9_B26_NB142_MC_A_01(socau, dang=1):
+    """Nhận biết phép thử ngẫu nhiên."""
+    NGAU_NHIEN = ["Gieo một con xúc xắc cân đối và quan sát số chấm xuất hiện",
+                  "Tung một đồng xu và quan sát mặt xuất hiện",
+                  "Rút ngẫu nhiên một tấm thẻ từ hộp có 10 tấm thẻ đánh số",
+                  "Chọn ngẫu nhiên một học sinh trong lớp và xem bạn đó là nam hay nữ"]
+    KHONG = ["Đun nước ở điều kiện thường đến $100^{\\circ}\\mathrm{C}$ và quan sát nước có sôi hay không",
+             "Tính tổng hai số tự nhiên $3$ và $5$",
+             "Đo chiều dài của một chiếc bàn bằng thước",
+             "Thả một hòn đá từ trên cao và quan sát nó rơi xuống hay bay lên",
+             "Cộng hai số chẵn và xét xem kết quả có chẵn không"]
+    gt = []
+    while len(gt) < socau:
+        v = (_rd.randrange(len(NGAU_NHIEN)), tuple(_rd.sample(range(len(KHONG)), 3)))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for i, bo in gt:
+        dung = NGAU_NHIEN[i]
+        giai = (r"Phép thử ngẫu nhiên là phép thử mà ta \textbf{không đoán trước được} "
+                r"kết quả của nó, tuy vẫn biết tập hợp tất cả các kết quả có thể xảy ra.\\ "
+                r"$\bullet$ ``%s'': không biết trước kết quả nào sẽ xảy ra, nên đây là "
+                r"phép thử ngẫu nhiên.\\ "
+                r"$\bullet$ Các hoạt động còn lại đều cho kết quả \textbf{biết trước}, "
+                r"không phải phép thử ngẫu nhiên." % dung)
+        cauTN += MC_SA_answer_text(
+            r"Trong các hoạt động sau, hoạt động nào là một \textbf{phép thử ngẫu nhiên}?",
+            dung, [KHONG[j] for j in bo], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB143_MC_A_01(socau, dang=1):
+    """Nhận biết không gian mẫu của một phép thử đơn giản."""
+    gt = []
+    while len(gt) < socau:
+        v = _rd.choice(["xucxac", "dongxu", "the"])
+        n = _rd.randint(5, 12)
+        if (v, n) not in gt:
+            gt.append((v, n))
+
+    cauTN = ''
+    for loai, n in gt:
+        if loai == "xucxac":
+            debai = (r"Gieo một con xúc xắc cân đối và quan sát số chấm xuất hiện. "
+                     r"Không gian mẫu của phép thử là")
+            dung = r"$\Omega = \left\{1; 2; 3; 4; 5; 6\right\}$"
+            nhieu = [r"$\Omega = \left\{1; 2; 3; 4; 5\right\}$",
+                     r"$\Omega = \left\{0; 1; 2; 3; 4; 5; 6\right\}$",
+                     r"$\Omega = \left\{2; 4; 6\right\}$"]
+            giai = (r"Không gian mẫu là tập hợp \textbf{tất cả} các kết quả có thể xảy ra "
+                    r"của phép thử.\\ Con xúc xắc có sáu mặt, số chấm từ $1$ đến $6$, nên "
+                    r"$\Omega = \left\{1; 2; 3; 4; 5; 6\right\}$ và $n\left(\Omega\right) = 6$.")
+        elif loai == "dongxu":
+            debai = (r"Tung một đồng xu cân đối và quan sát mặt xuất hiện "
+                     r"($S$: mặt sấp, $N$: mặt ngửa). Không gian mẫu của phép thử là")
+            dung = r"$\Omega = \left\{S; N\right\}$"
+            nhieu = [r"$\Omega = \left\{S\right\}$", r"$\Omega = \left\{N\right\}$",
+                     r"$\Omega = \left\{S; N; SN\right\}$"]
+            giai = (r"Tung một đồng xu chỉ có hai kết quả có thể xảy ra là sấp hoặc ngửa, "
+                    r"nên $\Omega = \left\{S; N\right\}$ và $n\left(\Omega\right) = 2$.")
+        else:
+            debai = (r"Một hộp có $%d$ tấm thẻ được đánh số từ $1$ đến $%d$. Rút ngẫu nhiên "
+                     r"một tấm thẻ. Số phần tử của không gian mẫu là" % (n, n))
+            dung = r"$%d$" % n
+            nhieu = [r"$%d$" % (n - 1), r"$%d$" % (n + 1), r"$%d$" % (2 * n)]
+            giai = (r"Mỗi kết quả của phép thử là rút được một tấm thẻ, mà có $%d$ tấm thẻ "
+                    r"khác nhau nên $n\left(\Omega\right) = %d$." % (n, n))
+        cauTN += MC_SA_answer_text(debai, dung, _ba_nhieu9(dung, nhieu), giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB145_MC_A_01(socau, dang=1):
+    """Nhận biết biến cố không thể."""
+    gt = []
+    while len(gt) < socau:
+        m = _rd.randint(7, 12)
+        if m not in gt:
+            gt.append(m)
+
+    cauTN = ''
+    for m in gt:
+        debai = (r"Gieo một con xúc xắc cân đối. Biến cố nào sau đây là "
+                 r"\textbf{biến cố không thể}?")
+        dung = r"``Số chấm xuất hiện bằng $%d$''" % m
+        nhieu = [r"``Số chấm xuất hiện là số chẵn''",
+                 r"``Số chấm xuất hiện lớn hơn $4$''",
+                 r"``Số chấm xuất hiện nhỏ hơn $7$''"]
+        giai = (r"Biến cố không thể là biến cố \textbf{không bao giờ xảy ra}.\\ "
+                r"Con xúc xắc chỉ có số chấm từ $1$ đến $6$, nên ``số chấm bằng $%d$'' "
+                r"không bao giờ xảy ra: đó là biến cố không thể.\\ "
+                r"Các biến cố còn lại đều có thể xảy ra (riêng ``nhỏ hơn $7$'' thì luôn "
+                r"xảy ra, là biến cố chắc chắn)." % m)
+        cauTN += MC_SA_answer_text(debai, dung, _ba_nhieu9(dung, nhieu), giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB146_MC_A_01(socau, dang=1):
+    """Nhận biết biến cố chắc chắn."""
+    gt = []
+    while len(gt) < socau:
+        m = _rd.randint(7, 12)
+        if m not in gt:
+            gt.append(m)
+
+    cauTN = ''
+    for m in gt:
+        debai = (r"Gieo một con xúc xắc cân đối. Biến cố nào sau đây là "
+                 r"\textbf{biến cố chắc chắn}?")
+        dung = r"``Số chấm xuất hiện nhỏ hơn $%d$''" % m
+        nhieu = [r"``Số chấm xuất hiện là số lẻ''",
+                 r"``Số chấm xuất hiện lớn hơn $%d$''" % m,
+                 r"``Số chấm xuất hiện bằng $6$''"]
+        giai = (r"Biến cố chắc chắn là biến cố \textbf{luôn xảy ra} trong mọi kết quả của "
+                r"phép thử.\\ "
+                r"Số chấm của con xúc xắc chỉ từ $1$ đến $6$, mà $6 < %d$, nên ``số chấm "
+                r"nhỏ hơn $%d$'' luôn đúng: đó là biến cố chắc chắn.\\ "
+                r"Còn ``lớn hơn $%d$'' thì không bao giờ xảy ra (biến cố không thể), hai "
+                r"biến cố kia thì lúc xảy ra lúc không." % (m, m, m))
+        cauTN += MC_SA_answer_text(debai, dung, _ba_nhieu9(dung, nhieu), giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB147_MC_A_01(socau, dang=1):
+    """Nhận biết biến cố đối."""
+    CAP = [("số chấm xuất hiện là số chẵn", "số chấm xuất hiện là số lẻ"),
+           ("số chấm xuất hiện lớn hơn $4$", "số chấm xuất hiện nhỏ hơn hoặc bằng $4$"),
+           ("số chấm xuất hiện là $6$", "số chấm xuất hiện khác $6$"),
+           ("số chấm xuất hiện chia hết cho $3$", "số chấm xuất hiện không chia hết cho $3$")]
+    gt = []
+    while len(gt) < socau:
+        i = _rd.randrange(len(CAP))
+        if i not in gt:
+            gt.append(i)
+
+    cauTN = ''
+    for i in gt:
+        A, doi = CAP[i]
+        khac = [CAP[j][0] for j in range(len(CAP)) if j != i]
+        debai = (r"Gieo một con xúc xắc cân đối. Gọi $A$ là biến cố ``%s''. "
+                 r"Biến cố đối $\overline{A}$ của $A$ là" % A)
+        dung = r"``%s''" % doi
+        nhieu = [r"``%s''" % t for t in khac] + [r"``số chấm xuất hiện bằng $7$''"]
+        giai = (r"Biến cố đối $\overline{A}$ gồm \textbf{tất cả} các kết quả của không gian "
+                r"mẫu mà $A$ \textbf{không} xảy ra.\\ "
+                r"$A$ là ``%s'' nên $\overline{A}$ là ``%s''.\\ "
+                r"Lưu ý: $\overline{A}$ phải phủ kín phần còn lại của không gian mẫu, "
+                r"chứ không phải một biến cố tuỳ ý khác." % (A, doi))
+        cauTN += MC_SA_answer_text(debai, dung, _ba_nhieu9(dung, nhieu), giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB148_MC_A_01(socau, dang=1):
+    """Nhận biết nguyên lí xác suất bé."""
+    gt = list(range(socau))
+    cauTN = ''
+    for _ in gt:
+        debai = (r"Theo \textbf{nguyên lí xác suất bé}, khẳng định nào sau đây đúng?")
+        dung = (r"Nếu một biến cố có xác suất rất bé thì trong một phép thử, "
+                r"biến cố đó \textbf{gần như không xảy ra}")
+        nhieu = [r"Nếu một biến cố có xác suất rất bé thì biến cố đó \textbf{không bao giờ} xảy ra",
+                 r"Nếu một biến cố có xác suất rất bé thì biến cố đó \textbf{chắc chắn} xảy ra",
+                 r"Nếu một biến cố có xác suất rất bé thì xác suất của biến cố đối của nó cũng rất bé"]
+        giai = (r"Nguyên lí xác suất bé: nếu một biến cố có xác suất \textbf{rất bé} thì "
+                r"trong một phép thử, biến cố đó \textbf{gần như không xảy ra}.\\ "
+                r"$\bullet$ Không được nói ``không bao giờ xảy ra'': xác suất bé vẫn khác $0$, "
+                r"biến cố vẫn có thể xảy ra.\\ "
+                r"$\bullet$ Nếu $P\left(A\right)$ rất bé thì $P\left(\overline{A}\right) "
+                r"= 1 - P\left(A\right)$ lại rất \textbf{gần} $1$, không hề bé.")
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_NB149_MC_A_01(socau, dang=1):
+    """Nhận biết định nghĩa cổ điển của xác suất."""
+    gt = list(range(socau))
+    cauTN = ''
+    for _ in gt:
+        debai = (r"Cho phép thử có không gian mẫu $\Omega$ gồm hữu hạn kết quả \textbf{đồng "
+                 r"khả năng}, và $E$ là một biến cố. Theo định nghĩa cổ điển, xác suất của "
+                 r"biến cố $E$ được tính bằng")
+        dung = r"$P\left(E\right) = \dfrac{n\left(E\right)}{n\left(\Omega\right)}$"
+        nhieu = [r"$P\left(E\right) = \dfrac{n\left(\Omega\right)}{n\left(E\right)}$",
+                 r"$P\left(E\right) = n\left(E\right)\cdot n\left(\Omega\right)$",
+                 r"$P\left(E\right) = n\left(\Omega\right) - n\left(E\right)$"]
+        giai = (r"Định nghĩa cổ điển của xác suất: khi các kết quả của phép thử là đồng khả "
+                r"năng thì\\ "
+                r"$P\left(E\right) = \dfrac{n\left(E\right)}{n\left(\Omega\right)} "
+                r"= \dfrac{\text{số kết quả thuận lợi cho } E}{\text{số kết quả có thể xảy ra}}$.\\ "
+                r"Vì $n\left(E\right) \le n\left(\Omega\right)$ nên luôn có "
+                r"$0 \le P\left(E\right) \le 1$; các công thức còn lại không bảo đảm điều này.")
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B27_NB153_MC_A_01(socau, dang=1):
+    """Mô tả các tính chất cơ bản của xác suất."""
+    DUNG = [r"$0 \le P\left(E\right) \le 1$ với mọi biến cố $E$",
+            r"$P\left(\Omega\right) = 1$",
+            r"$P\left(\varnothing\right) = 0$",
+            r"$P\left(\overline{E}\right) = 1 - P\left(E\right)$"]
+    SAI = [r"$P\left(E\right)$ có thể lớn hơn $1$",
+           r"$P\left(\Omega\right) = 0$",
+           r"$P\left(\varnothing\right) = 1$",
+           r"$P\left(\overline{E}\right) = P\left(E\right) - 1$",
+           r"$P\left(E\right)$ có thể là một số âm"]
+    gt = []
+    while len(gt) < socau:
+        v = (_rd.randrange(len(DUNG)), tuple(_rd.sample(range(len(SAI)), 3)))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for i, bo in gt:
+        dung = DUNG[i]
+        giai = (r"Các tính chất cơ bản của xác suất:\\ "
+                r"$\bullet$ $0 \le P\left(E\right) \le 1$ với mọi biến cố $E$;\\ "
+                r"$\bullet$ $P\left(\Omega\right) = 1$ (biến cố chắc chắn) và "
+                r"$P\left(\varnothing\right) = 0$ (biến cố không thể);\\ "
+                r"$\bullet$ $P\left(\overline{E}\right) = 1 - P\left(E\right)$.\\ "
+                r"Đối chiếu thì chỉ có %s là đúng." % dung)
+        cauTN += MC_SA_answer_text(
+            r"Khẳng định nào sau đây về xác suất là \textbf{đúng}?",
+            dung, [SAI[j] for j in bo], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B27_VD155_TL_A_01(socau, dong=1):
+    """Tự luận: gieo hai con xúc xắc - mô tả không gian mẫu và tính xác suất."""
+    gt = []
+    while len(gt) < socau:
+        tong = _rd.randint(4, 10)
+        if tong not in gt:
+            gt.append(tong)
+
+    cauTN = ''
+    for tong in gt:
+        thuan_loi = [(i, j) for i in range(1, 7) for j in range(1, 7) if i + j == tong]
+        k = len(thuan_loi)
+        from math import gcd as _gcd
+        g = _gcd(k, 36)
+        debai = (r"Gieo đồng thời hai con xúc xắc cân đối. Gọi $E$ là biến cố "
+                 r"``tổng số chấm xuất hiện trên hai con xúc xắc bằng $%d$''." % tong)
+        ds_abcd = [
+            (r"Tính số phần tử của không gian mẫu.", r"36",
+             r"Mỗi con xúc xắc có $6$ kết quả, hai con gieo đồng thời nên mỗi kết quả của "
+             r"phép thử là một cặp $\left(i; j\right)$.\\ "
+             r"Vậy $n\left(\Omega\right) = 6\cdot 6 = 36$."),
+            (r"Tính xác suất của biến cố $E$.",
+             r"\dfrac{%d}{%d}" % (k // g, 36 // g),
+             r"Các kết quả thuận lợi cho $E$ là các cặp có tổng bằng $%d$:\\ "
+             r"$%s$, tất cả có $n\left(E\right) = %d$ cặp.\\ "
+             r"Vậy $P\left(E\right) = \dfrac{n\left(E\right)}{n\left(\Omega\right)} "
+             r"= \dfrac{%d}{36} = \dfrac{%d}{%d}$."
+             % (tong, ", ".join(r"\left(%d; %d\right)" % c for c in thuan_loi),
+                k, k, k // g, 36 // g)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
