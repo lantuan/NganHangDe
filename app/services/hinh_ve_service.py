@@ -65,13 +65,25 @@ PREAMBLE_GON = r"""\documentclass[12pt]{standalone}
 
 
 def _preamble_day() -> str:
-    """Phan dau cua CHINH khung de, den truoc \begin{document}.
+    r"""Phan dau cua CHINH khung de, den truoc \begin{document}.
 
-    Dung cai nay truoc de hinh tren web giong het hinh trong PDF.
+    Dung cai nay truoc de hinh tren web giong het hinh trong PDF: cung
+    goi, cung lenh tu che, cung co chu.
+
+    NHUNG phai doi hai thu, neu khong anh se hong:
+      - \documentclass{book} -> standalone[preview]: khung de la sach kho
+        A4, dich mot hinh ra se duoc ca trang giay voi hinh be ti o goc.
+        standalone cat sat vien hinh, khong phu thuoc pdfcrop co hay khong.
+      - bo goi geometry: no dat le trang, vo nghia voi mot hinh roi va con
+        keo hinh lech di.
     """
     van = TEMPLATE.read_text(encoding="utf-8")
     van = van[:van.index(r"\begin{document}")]
-    return van.replace("__EX_TEST_OPTION__", "dethi")
+    van = van.replace("__EX_TEST_OPTION__", "dethi")
+    van = re.sub(r"\\documentclass(\[[^\]]*\])?\{[^}]*\}",
+                 r"\\documentclass[preview,border=4pt]{standalone}", van, count=1)
+    van = re.sub(r"\\usepackage(\[[^\]]*\])?\{geometry\}\s*", "", van)
+    return van
 
 
 def ma_hinh(tikz: str) -> str:
@@ -97,8 +109,11 @@ def dich_hinh(tikz: str) -> Path:
 
     KHO_ANH.mkdir(parents=True, exist_ok=True)
     import os
+    # ex_test.sty nam trong repo chu khong nam trong TeX Live; noi them vao
+    # TEXINPUTS san co (neu may da dat) chu khong de len no.
     moi_truong = dict(os.environ,
-                      TEXINPUTS="%s:" % (BASE_DIR / "data" / "config"))
+                      TEXINPUTS="%s:%s" % (BASE_DIR / "data" / "config",
+                                           os.environ.get("TEXINPUTS", "")))
     with tempfile.TemporaryDirectory() as thu_muc:
         tm = Path(thu_muc)
         pdf = None

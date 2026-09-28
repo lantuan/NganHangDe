@@ -118,6 +118,22 @@ if [ $KQ -ne 0 ]; then
   exit 1
 fi
 
+# ---------- 6b. Kiem tra do nghe ve hinh tren VPS ----------
+# Cau co hinh ve chi hien duoc tren web khi VPS co xelatex VA mot cong cu
+# doi PDF sang anh. Kiem ngay o day de khong phai nho chay tay, va nho
+# dung thu muc (chay o /root se khong thay script).
+echo
+echo "Dang kiem tra do nghe ve hinh tren VPS..."
+HINH="$(ssh -o ConnectTimeout=15 "$VPS_USER@$DOMAIN" \
+  "cd $VPS_DIR && bash scripts/kiem_tra_hinh.sh 2>&1" || true)"
+if echo "$HINH" | grep -q "Du do nghe"; then
+  xanh "Hinh ve: du do nghe, hoc sinh xem duoc hinh tren web."
+else
+  vang "Hinh ve: VPS CHUA du do nghe -- cau co hinh se khong hien tren web."
+  echo "$HINH" | sed 's/^/     /'
+  vang "Cach sua:  ssh $VPS_USER@$DOMAIN  roi  apt-get install -y poppler-utils"
+fi
+
 # ---------- 7. Kiem tra web con song ----------
 echo
 echo "Dang kiem tra web..."

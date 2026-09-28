@@ -5218,3 +5218,46 @@ Van dich duoc hinh, nhung nen cai them: brew install poppler
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.88 - 2026-09-28
+
+## Loi chi xay ra TREN VPS: hinh lot thom giua trang A4
+
+Tim ra khi dung nghi vi sao may ao cua Claude khong gap loi nay duoc.
+
+hinh_ve_service dich hinh bang chinh phan dau (preamble) cua khung de, de
+hinh tren web giong het trong PDF. Nhung khung de la \documentclass{book}
+kho A4 co goi geometry - dich MOT hinh ra se duoc ca mot trang giay A4 voi
+hinh be ti o goc. Da do that:
+
+    preamble nguyen goc (book + geometry) -> trang 595 x 842 pt  (A4)
+    sau khi sua                           -> trang  65 x  69 pt  (vua hinh)
+
+Vi sao truoc khong thay: may ao cua Claude THIEU tabvar, bclogo, esvect nen
+duong "preamble day du" luon hong va tu lui ve preamble rut gon, ma preamble
+rut gon dung \documentclass{standalone} - tu cat sat vien. VPS co du goi nen
+se di duong day du, va do moi la duong bi loi. Da gia lap VPS bang cach tao
+bon tep .sty rong roi cho vao TEXINPUTS de di dung duong do ma thu.
+
+Cach sua: khi dung preamble day du thi doi \documentclass thanh
+standalone[preview,border=4pt] va bo goi geometry. Khong phu thuoc pdfcrop
+co hay khong (may ao thieu pdfcrop, may co Lan co).
+
+Da do lai sau khi sua, di duong preamble DAY DU: SVG 166 x 143 pt,
+PNG 350 x 238 px - vua khit hinh.
+
+## TEXINPUTS: noi them chu khong de len
+
+dich_hinh dat TEXINPUTS de tim ex_test.sty trong repo, nhung dat de len
+TEXINPUTS san co cua may. Nay noi them vao sau.
+
+## 'day web' tu kiem tra do nghe ve hinh
+
+Co Lan chay kiem_tra_hinh.sh o /root nen bao "No such file or directory" -
+phai cd vao /root/NganHangDe moi thay. Khong bat ai phai nho duong dan:
+day.sh nay tu chay buoc kiem tra tren VPS sau khi cap nhat xong, va in mot
+dong ket luan; neu thieu do nghe thi in luon lenh cai dat.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
