@@ -1389,3 +1389,61 @@ def L10_C9_B27_VD155_TL_A_01(socau, dong=1):
         ]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
+
+
+def L10_C9_B27_TH151_MC_A_01(socau, dang=1):
+    """Tính xác suất của biến cố bằng định nghĩa cổ điển.
+
+    Gieo hai con xúc xắc cân đối - thí nghiệm đơn giản nhất mà học sinh
+    lập được không gian mẫu đầy đủ ($n(\\Omega)=36$), đúng mức Thông hiểu:
+    chỉ cần đếm số kết quả thuận lợi rồi chia.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta
+    (mapping L10_C9_B27_TH151_MC_A da co san nhung chua co ham).
+    """
+    def _phan_so(tu, mau):
+        g = math.gcd(tu, mau)
+        tu, mau = tu // g, mau // g
+        if mau == 1:
+            return "$%d$" % tu
+        return "$\\dfrac{%d}{%d}$" % (tu, mau)
+
+    da_ra = []
+    ket_qua = ""
+    while len(da_ra) < socau:
+        # tong tu 3 den 11 de so ket qua thuan loi luon >= 2
+        tong = random.randint(3, 11)
+        if tong in da_ra:
+            if len(set(range(3, 12))) <= len(da_ra):
+                break
+            continue
+        da_ra.append(tong)
+
+        # so cap (a;b) voi a+b = tong, 1 <= a,b <= 6
+        cap = [(a, tong - a) for a in range(1, 7) if 1 <= tong - a <= 6]
+        thuan_loi = len(cap)
+        dapso = _phan_so(thuan_loi, 36)
+
+        liet_ke = "; ".join("$(%d;%d)$" % (a, b) for a, b in cap)
+        debai = ("Gieo đồng thời hai con xúc xắc cân đối và đồng chất. "
+                 "Tính xác suất của biến cố $A$: ``Tổng số chấm xuất hiện "
+                 "trên hai con xúc xắc bằng $%d$''." % tong)
+
+        giai = ("Mỗi con xúc xắc có $6$ mặt nên số kết quả có thể xảy ra là\\\\\n"
+                "$n(\\Omega) = 6 \\cdot 6 = 36$.\\\\\n"
+                "Các kết quả thuận lợi cho $A$ là: %s.\\\\\n"
+                "Do đó $n(A) = %d$.\\\\\n"
+                "Vậy $P(A) = \\dfrac{n(A)}{n(\\Omega)} = \\dfrac{%d}{36} = %s$."
+                % (liet_ke, thuan_loi, thuan_loi,
+                   dapso.strip("$")))
+
+        # nhieu: dem thua/thieu mot cap, hoac chia nham cho 6 (so mat mot con)
+        ung_vien = [_phan_so(thuan_loi + 1, 36),
+                    _phan_so(thuan_loi - 1, 36),
+                    _phan_so(thuan_loi, 6),
+                    _phan_so(thuan_loi + 2, 36),
+                    _phan_so(thuan_loi, 12)]
+        dsnhieu = _ba_nhieu9(dapso, ung_vien,
+                             buoc=lambda k: _phan_so(thuan_loi + 2 + k, 36))
+        ket_qua += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+    return ket_qua

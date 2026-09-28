@@ -5855,3 +5855,109 @@ P(A ngang) = 1 - P(A) lai rat GAN 1 chu khong he be.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.98 - 2026-09-28
+
+## De he so 1 ra THIEU CAU ma KHONG BAO GI - da sua
+
+Co Lan hoi: "chuong 3 con it. co the lam them duoc khong". Do lai thi
+KHONG phai do thieu dang: de he so 1 chuong 3 chi ra 5/12 cau, va nam cau
+kia BIEN MAT lang le - khong ra cau, cung khong co dong
+[THIEU O PYTHON --- ID: xxx] nao. Day la dieu trai voi nguyen tac "bao
+thieu chu khong vo de" da chot tu truoc.
+
+Hai nguyen nhan, deu nam o buoc CHIA CAU chu khong nam o ngan hang ham.
+
+### 1. Chia cau cho bai KHONG CO yeu cau o muc do do
+
+So cau duoc chia ve tung bai theo TI LE SO TIET, hoan toan khong kiem tra
+bai ay trong Curriculum co yeu cau nao o muc do dang xet hay khong.
+Chuong 3 chi co DUNG MOT yeu cau muc NB (bai 5) va DUNG MOT yeu cau muc VD
+(bai 6), nhung bo chia van rai:
+
+    trac nghiem NB    B5: 1, B6: 2    B6 khong co NB nao   -> mat 2 cau
+    tra loi ngan VD   B5: 1           B5 khong co VD nao   -> mat 1 cau
+    tu luan VD        B5: 2, B6: 1    B5 khong co VD nao   -> mat 2 cau
+
+_chon_curriculum_id tra ve rong, va so cau ay roi mat khong dau vet.
+
+Nay them hai ham _don_ve_bai_co_cau (muc NB/TH) va _don_vd_ve_bai_co_cau
+(muc VD/VDC): phan cua bai khong co yeu cau duoc don sang bai co, uu tien
+bai dang duoc chia nhieu cau nhat, van giu quy uoc moi bai toi da 1 cau
+VDC. Neu trong phan bo khong con bai nao nhan duoc thi mo rong ra MOI BAI
+thuoc pham vi de - bai co yeu cau nhung khong duoc chia cau nao van la cho
+don hop le. (Thieu buoc mo rong nay thi chuong 3 van mat cau trac nghiem
+muc VD, vi ca suat VD roi vao bai 5 trong khi yeu cau VD duy nhat o bai 6.)
+
+Neu ca chuong that su khong co yeu cau nao o muc do do thi ghi vao
+bao_cao_phan_bo["khong_du_yeu_cau"] de co Lan nhin thay, khong im lang nua.
+
+### 2. Cau Dung/Sai an suat muc do cua cac phan khac
+
+Thiet ke cu: moi cau Dung/Sai da chua san 4 y NB/TH/VD/VDC nen tru 1 suat
+NB + 1 TH cua trac nghiem (_tru_phan_dung_sai) va 1 suat VD + 1 VDC cua
+phan dung truoc (ngan_sach_ds). Voi chuong 3 dieu nay an sach ca cau trac
+nghiem muc VD.
+
+Co Lan chot 28/09/2026: "cu lam theo dung muc do la duoc. vi quan trong
+muc do se anh huong diem so. muc do khac di se lam diem so ko phan anh dung
+cai ma nguoi kiem tra mong muon."
+
+Nay BO ca hai phep tru. Moi phan ra dung so cau tung muc do ma tran ghi,
+khong bu tru cheo giua cac phan. Ham _tru_phan_dung_sai giu lai de tham
+khao nhung khong con duoc goi.
+
+### 3. Them ham con thieu: L10_C9_B27_TH151_MC_A_01
+
+Mapping da co tu truoc nhung chua co ham. Gieo hai xuc xac, tinh xac suat
+tong so cham bang mot so cho - thi nghiem don gian nhat ma hoc sinh lap
+duoc khong gian mau day du (36 ket qua), dung muc Thong hieu. Ba phuong an
+nhieu la ba loi hay gap: dem thua mot cap, dem thieu mot cap, va chia nham
+cho 6 thay vi 36.
+GHI CHU: ham nay CLAUDE THEM 28/09/2026 - co Lan kiem tra lai noi dung.
+
+## Ket qua
+
+Truoc:
+
+    chuong 1    8/12 cau
+    chuong 2    6/12 cau
+    chuong 3    5/12 cau
+    chuong 9    6/12 cau
+
+Sau, chay 5 lan bat de moi chuong (ma tran he so 1 doi 12 cau:
+trac nghiem 6, dung/sai 1, tra loi ngan 2, tu luan 3):
+
+    chuong 1   5/5 de du ma tran   60/60 cau sinh duoc
+    chuong 2   5/5 de du ma tran   60/60 cau sinh duoc
+    chuong 3   5/5 de du ma tran   60/60 cau sinh duoc
+    chuong 9   5/5 de du ma tran   60/60 cau sinh duoc
+
+Muc do ra dung ma tran: NB 4, TH 1, VD 6, cong 1 cau Dung/Sai cau lon.
+
+## Da kiem chung the nao
+
+1. Chay 5 seed x 4 chuong, dem theo TUNG PHAN: du ca 4 phan, khong phan
+   nao hut.
+2. Goi ham sinh THAT cho tung cau (khong chi nhin select_questions):
+   240/240 cau ra duoc, 0 loi.
+3. Them tests/test_du_cau_he_so_1.py - 29 bai test khoa lai: de phai du
+   cau, va neu co cau khong xep duoc vao bai nao thi PHAI bao, khong duoc
+   bien mat.
+4. 445 bai test qua, 8 bo qua (truoc dot nay la 415).
+
+Luu y moi truong: khong bien dich duoc PDF tren may co Lan vi thieu
+tabvar.sty; VPS co du bo TeX Live nen van dich binh thuong. Da kiem tra
+khau SINH CAU rieng, khong qua PDF.
+
+## Con lai de ra duoc de he so 1 cho ca lop 10
+
+    chuong 4    4 cho thieu
+    chuong 5   17 cho thieu
+    chuong 6   13 cho thieu
+    chuong 7   18 cho thieu
+    chuong 8   11 cho thieu
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

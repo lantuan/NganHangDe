@@ -270,6 +270,89 @@ def _don_vi_kien_thuc(curriculum_id: str) -> str:
     return _DON_VI_PATTERN.sub(lambda m: "_" + m.group(1), curriculum_id)
 
 
+def _don_ve_bai_co_cau(phan_bo_bai: dict[str, int],
+                       theo_bai_muc_do: dict, muc_do: str,
+                       danh_sach_bai: list[str] | None = None) -> tuple[dict[str, int], int]:
+    """Dồn số câu đã chia cho BÀI KHÔNG CÓ yêu cầu nào ở mức độ này sang bài có.
+
+    Vì sao cần: số câu được chia về từng bài theo TỈ LỆ SỐ TIẾT, hoàn toàn
+    không biết bài đó trong Curriculum có yêu cầu nào ở mức độ đang xét hay
+    không. Ví dụ chương 3 lớp 10 chỉ có ĐÚNG MỘT yêu cầu mức NB và nó nằm ở
+    bài 5; nhưng ma trận lại chia 2 câu NB cho bài 6. Bài 6 không có yêu cầu
+    NB nào nên _chon_curriculum_id trả về rỗng, và hai câu ấy BIẾN MẤT lặng
+    lẽ - đề ra thiếu câu mà không báo gì (đo được: đề hệ số 1 chương 3 chỉ
+    có 5 câu trong khi ma trận đòi 12).
+
+    Nay: phần của bài không có yêu cầu được dồn sang các bài có, chia theo
+    tỉ lệ số câu sẵn có. Trả về (phân bổ mới, số câu KHÔNG dồn được đi đâu).
+    """
+    co_cau = {b: sl for b, sl in phan_bo_bai.items()
+              if theo_bai_muc_do.get((b, muc_do))}
+    khong_co = sum(sl for b, sl in phan_bo_bai.items()
+                   if not theo_bai_muc_do.get((b, muc_do)))
+    if khong_co == 0:
+        return dict(phan_bo_bai), 0
+    if not co_cau:
+        # Không bài nào TRONG PHÂN BỔ có yêu cầu ở mức độ này. Mở rộng ra
+        # mọi bài thuộc phạm vi đề: bài có yêu cầu nhưng không được chia
+        # câu nào vẫn là chỗ dồn hợp lệ. (Thiếu bước này thì chương 3 mất
+        # câu trắc nghiệm mức VD, vì cả suất VD rơi vào bài 5 trong khi
+        # yêu cầu mức VD duy nhất nằm ở bài 6.)
+        co_cau = {b: 0 for b in (danh_sach_bai or [])
+                  if theo_bai_muc_do.get((b, muc_do))}
+    if not co_cau:
+        # cả chương thật sự không có yêu cầu nào ở mức độ này
+        return {}, khong_co
+    # dồn lần lượt cho bài đang được chia nhiều câu nhất
+    thu_tu = sorted(co_cau, key=lambda b: -co_cau[b])
+    i = 0
+    while khong_co > 0:
+        co_cau[thu_tu[i % len(thu_tu)]] += 1
+        khong_co -= 1
+        i += 1
+    return co_cau, 0
+
+
+def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
+                          theo_bai_muc_do: dict,
+                          danh_sach_bai: list[str] | None = None) -> tuple[dict[str, dict], int]:
+    """Như _don_ve_bai_co_cau nhưng cho khối VD/VDC (trắc nghiệm, trả lời
+    ngắn, tự luận). Cùng một lỗi: chương 3 lớp 10 chỉ có yêu cầu mức VD ở
+    bài 6, nhưng _phan_bo_vd_vdc vẫn chia câu cho bài 5 - những câu ấy rơi
+    mất, không báo thiếu. Đo được: đề hệ số 1 chương 3 mất 1 câu trả lời
+    ngắn và 2 câu tự luận vì lý do này.
+    """
+    co = {b: dict(v) for b, v in phan_bo_vdvdc.items()
+          if theo_bai_muc_do.get((b, "VD"))}
+    du_vd = sum(v["vd"] for b, v in phan_bo_vdvdc.items()
+                if not theo_bai_muc_do.get((b, "VD")))
+    du_vdc = sum(v["vdc"] for b, v in phan_bo_vdvdc.items()
+                 if not theo_bai_muc_do.get((b, "VD")))
+    if du_vd == 0 and du_vdc == 0:
+        return {b: dict(v) for b, v in phan_bo_vdvdc.items()}, 0
+    if not co:
+        # mở rộng ra mọi bài thuộc phạm vi đề - xem chú thích ở
+        # _don_ve_bai_co_cau
+        co = {b: {"vd": 0, "vdc": 0} for b in (danh_sach_bai or [])
+              if theo_bai_muc_do.get((b, "VD"))}
+    if not co:
+        return {}, du_vd + du_vdc
+    thu_tu = sorted(co, key=lambda b: -(co[b]["vd"] + co[b]["vdc"]))
+    i = 0
+    while du_vd > 0:
+        co[thu_tu[i % len(thu_tu)]]["vd"] += 1
+        du_vd -= 1
+        i += 1
+    while du_vdc > 0:
+        # mỗi bài tối đa 1 câu VDC - giữ đúng quy ước của _phan_bo_vd_vdc
+        cho = [b for b in thu_tu if co[b]["vdc"] == 0]
+        if not cho:
+            break
+        co[cho[0]]["vdc"] += 1
+        du_vdc -= 1
+    return co, du_vd + du_vdc
+
+
 def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set) -> list[dict]:
     """
     Chọn so_luong Curriculum entries (không nhất thiết distinct nếu hết
@@ -410,8 +493,18 @@ def build_blueprint(
     for muc_do in ("NB", "TH"):
         so_luong = phan_bo_muc_do.get("trac_nghiem", {}).get(muc_do, 0)
         phan_bo_bai = _chia_theo_so_tiet(so_luong, so_tiet_theo_bai)
-        phan_bo_bai, _du = _tru_phan_dung_sai(phan_bo_bai, phan_bo_bai_ds)
+        # KHÔNG trừ phần Đúng/Sai ra khỏi ngân sách NB/TH của trắc nghiệm.
+        # Cô Lan chốt 28/09/2026: "cứ làm theo đúng mức độ là được, vì mức độ
+        # ảnh hưởng điểm số - mức độ khác đi sẽ làm điểm số không phản ánh
+        # đúng cái người kiểm tra mong muốn". Mỗi phần phải ra ĐÚNG số câu
+        # từng mức độ mà ma trận ghi, không bù trừ chéo giữa các phần.
+        # (_tru_phan_dung_sai giữ lại để tham khảo, không còn được gọi.)
+        phan_bo_bai, mat_cau = _don_ve_bai_co_cau(
+            phan_bo_bai, theo_bai_muc_do, muc_do, danh_sach_bai)
         bao_cao_phan_bo.setdefault("trac_nghiem", {})[muc_do] = phan_bo_bai
+        if mat_cau:
+            bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
+                {"loai_cau": "trac_nghiem", "muc_do": muc_do, "so_cau_mat": mat_cau})
         for bai_id, sl in phan_bo_bai.items():
             cb = _tach_chuong_bai(bai_id)
             entries = theo_bai_muc_do.get((bai_id, muc_do), [])
@@ -432,23 +525,14 @@ def build_blueprint(
         "tra_loi_ngan": MAX_SA_PER_CHUONG,
         "tu_luan": MAX_TL_PER_CHUONG,
     }
-    # Ngân sách Đúng/Sai còn phải trừ ở mức VD/VDC. Mỗi câu Đúng/Sai đã
-    # chiếm 1 VD + 1 VDC, nhưng VD/VDC có thể nằm ở CẢ 3 phần (MC/SA/TL)
-    # nên chỉ được trừ MỘT LẦN, ưu tiên phần đứng trước. Nếu phần nào
-    # cũng không còn gì để trừ (vd đề đặt tỉ lệ VDC = 0) thì thôi, không
-    # đẩy sang mức khác - đúng lựa chọn của giáo viên.
-    ngan_sach_ds = {"VD": so_cau_lon, "VDC": so_cau_lon}
-
+    # Câu Đúng/Sai KHÔNG trừ vào ngân sách VD/VDC của các phần khác.
+    # Cô Lan chốt 28/09/2026: mức độ quyết định điểm số nên mỗi phần phải ra
+    # đúng số câu từng mức độ ma trận ghi. Trước đây mỗi câu Đúng/Sai ăn
+    # 1 suất VD + 1 suất VDC của phần đứng trước, làm đề chương 3 mất cả
+    # câu trắc nghiệm mức VD lẫn câu trả lời ngắn mức VDC.
     for loai_cau, cap in gioi_han_theo_loai.items():
         so_vd = phan_bo_muc_do.get(loai_cau, {}).get("VD", 0)
         so_vdc = phan_bo_muc_do.get(loai_cau, {}).get("VDC", 0)
-
-        tru_vd = min(so_vd, ngan_sach_ds["VD"])
-        so_vd -= tru_vd
-        ngan_sach_ds["VD"] -= tru_vd
-        tru_vdc = min(so_vdc, ngan_sach_ds["VDC"])
-        so_vdc -= tru_vdc
-        ngan_sach_ds["VDC"] -= tru_vdc
 
         if so_vd <= 0 and so_vdc <= 0:
             continue
@@ -456,7 +540,12 @@ def build_blueprint(
         # Rải trên BÀI (đơn vị kiến thức) chứ không phải chương: mỗi bài
         # tối đa 1 câu VDC, câu VD ưu tiên bài chưa có VDC.
         phan_bo_chuong_vdvdc = _phan_bo_vd_vdc(danh_sach_bai, so_vd, so_vdc, max_per_chuong=cap)
+        phan_bo_chuong_vdvdc, mat_vd = _don_vd_ve_bai_co_cau(
+            phan_bo_chuong_vdvdc, theo_bai_muc_do, danh_sach_bai)
         bao_cao_phan_bo.setdefault(loai_cau, {})["vd_vdc"] = phan_bo_chuong_vdvdc
+        if mat_vd:
+            bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
+                {"loai_cau": loai_cau, "muc_do": "VD/VDC", "so_cau_mat": mat_vd})
 
         for bai_id, v in phan_bo_chuong_vdvdc.items():
             cb = _tach_chuong_bai(bai_id)
