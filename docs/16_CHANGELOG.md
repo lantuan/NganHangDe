@@ -6035,3 +6035,78 @@ cau moi.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.00 - 2026-09-28
+
+## Van dung cung nhieu phien ban: them ba dang cho L10_C3_B6_VD036
+
+Co Lan: "Van dung cung co the lam nhieu phien ban khac nhau: cac bai ve do
+chieu cao, ngay ca bai do nui kinh dien cua luong giac, do ban kinh trai
+dat... do cay, do toa nha, di chuyen tren bien. Kiem tra tren mang, cac
+bai toan van dung cua sach giao khoa, sach bai tap. Rat nhieu."
+
+Va co dan them: "luu y co nh cach giai, co cach giai su dung kien thuc lop
+11, khong duoc dung. chi dung pp ma don vi kien thuc nam trong lop 10 dang
+hoc."
+
+Da tra cuu cac dang bai thuc te cua chuong nay truoc khi viet (do chieu
+cao, do khoang cach khong toi duoc, tau thuyen doi huong, dien tich manh
+dat). Truoc dot nay VD036 da co 8 dang; nay 11 dang.
+
+    VD036_MC_D  Do chieu cao vat cao bang HAI GOC NANG bat ki
+    VD036_TL_D  Tau doi huong tren bien: dinh li cosin roi dinh li sin
+    VD036_TL_E  Do ban kinh Trai Dat bang goc ha toi duong chan troi
+
+## Da giu dung rang buoc "khong dung kien thuc lop 11"
+
+Bai do ban kinh Trai Dat quen thuoc nhat la cach cua Eratosthenes, dung
+DO DAI CUNG TRON l = R.alpha voi alpha tinh bang radian - day la chuong
+trinh LOP 11, da KHONG dung.
+
+Cach dung o day chi can tam giac vuong, nam tron trong lop 10: tu dinh nui
+M cao h, tia nhin toi duong chan troi tiep xuc mat bien tai T nen
+OT vuong goc MT. Goi theta la goc ha so voi phuong nam ngang thi
+goc OMT = 90 - theta, suy ra cos(theta) = R/(R+h) va
+R = h.cos(theta)/(1 - cos(theta)).
+
+Dang MC_D cung vay: chi dung dinh li sin trong tam giac ABD roi ti so
+luong giac trong tam giac vuong BDH, khong dung cong thuc cong hay nhan
+doi.
+
+## Hai cho da phai sua giua chung
+
+### Bai ban kinh Trai Dat KHONG lam trac nghiem duoc
+
+Ban dau viet thanh trac nghiem. Nhung vi cos(theta) rat gan 1 nen phuong
+an nhieu "quen nhan cos(theta)", tuc la h/(1 - cos theta), ra 6311 km
+trong khi dap an dung la 6310 km - hai dap an deu dung, cau hoi hong.
+Con moi bien the sai khac thi lai lech han ve co h (vai ki-lo-met), nhin
+la loai duoc ngay, khong phai phuong an nhieu tu te.
+
+Ket luan: bai nay khong co bo phuong an nhieu dung nghia. Da chuyen thanh
+TU LUAN ba y - chung to tam giac OTM vuong, chung minh cos(theta) =
+R/(R+h), roi tinh R. Cho phai danh gia la lap duoc he thuc, dung cho do.
+
+### Phuong an trac nghiem phai cung dang so
+
+Dang MC_D hoi "lam tron den hang phan muoi" nhung ham _xx cat duoi so 0,
+nen co phuong an ra so nguyen (90 m, 61 m) ben canh phuong an co thap
+phan (76,3 m). Hoc sinh nhin DANG SO cung doan duoc dap an. Nay ep moi
+phuong an dung MOT chu so thap phan.
+
+## Da kiem chung the nao
+
+1. Dung TOA DO dung lai hinh de kiem cong thuc, khong tin cong thuc minh
+   vua viet: chieu cao do bang hai goc nang lech 1e-14; AC va goc BAC cua
+   bai tau bien khop tuyet doi; bai Trai Dat chay vong kin tu R = 6371 ra
+   theta roi tu theta ra lai R, lech 0,2 den 1,0 phan tram do lam tron
+   theta ve hai chu so.
+2. Chay 30 lan moi dang: 30/30 ra cau, khong loi, cau trac nghiem luon
+   dung MOT dap an dung.
+3. Chay 10 de chuong 3: 120/120 cau sinh duoc, ca 11 dang VD036 deu duoc
+   dung.
+4. 447 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

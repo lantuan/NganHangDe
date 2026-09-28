@@ -2960,3 +2960,316 @@ def L10_C3_B5_NB029_MC_G_01(socau, dang=1):
         hinh = _hinh_nua_duong_tron_hai_phia()
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, hinh, 0, dang)
     return cauTN
+
+
+# =====================================================================
+# Ba dạng VẬN DỤNG bổ sung cho yêu cầu L10_C3_B6_VD036
+# (vận dụng hệ thức lượng để giải bài toán có nội dung thực tiễn).
+#
+# CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+#
+# RÀNG BUỘC đã bám theo: chỉ dùng kiến thức nằm trong chương 3 lớp 10 -
+# định lí sin, định lí côsin, công thức diện tích, và tỉ số lượng giác
+# trong tam giác vuông (lớp 9). KHÔNG dùng công thức cộng, công thức
+# nhân đôi, độ dài cung tròn - đó là chương trình lớp 11.
+# =====================================================================
+
+
+def L10_C3_B6_VD036_MC_D_01(socau, dang=1):
+    r"""Đo chiều cao vật cao (núi, toà nhà, cây) bằng HAI GÓC NÂNG bất kì.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Khác dạng TL_A ở chỗ TL_A dùng cặp góc đặc biệt $30^{\circ}$ và
+    $60^{\circ}$ nên tam giác cân, ra kết quả căn thức đẹp. Dạng này dùng
+    góc BẤT KÌ nên phải đi đúng đường định lí sin:
+
+        tam giác $ABD$ có $\widehat{DAB} = \alpha$,
+        $\widehat{DBA} = 180^{\circ} - \beta$ nên
+        $\widehat{ADB} = \beta - \alpha$;
+        định lí sin cho $BD = \dfrac{a\sin\alpha}{\sin(\beta - \alpha)}$;
+        tam giác $BDH$ vuông tại $H$ cho
+        $h = BD\sin\beta = \dfrac{a\sin\alpha\sin\beta}{\sin(\beta-\alpha)}$.
+
+    Cả hai bước đều nằm trong chương 3 lớp 10.
+    """
+    BOI_CANH = [
+        ("một ngọn núi", "chân núi", "đỉnh núi"),
+        ("một toà nhà cao tầng", "chân toà nhà", "nóc toà nhà"),
+        ("một cây cổ thụ", "gốc cây", "ngọn cây"),
+        ("một ngọn hải đăng", "chân hải đăng", "đỉnh hải đăng"),
+    ]
+
+    gt = []
+    thu = 0
+    while len(gt) < socau and thu < 200:
+        thu += 1
+        alpha = random.choice([25, 30, 32, 35, 38, 40])
+        beta = alpha + random.choice([10, 12, 15, 18, 20])
+        a = random.choice([40, 50, 60, 80, 100, 120])
+        if beta >= 75:
+            continue
+        v = (alpha, beta, a, random.randrange(len(BOI_CANH)))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for alpha, beta, a, i_bc in gt:
+        vat, chan, dinh = BOI_CANH[i_bc]
+        ra = math.radians(alpha)
+        rb = math.radians(beta)
+        hieu = math.sin(math.radians(beta - alpha))
+
+        # GIỮ ĐÚNG MỘT chữ số thập phân cho MỌI phương án: đề yêu cầu làm
+        # tròn đến hàng phần mười, nếu để _xx cắt đuôi số 0 thì có phương
+        # án ra số nguyên, học sinh nhìn dạng số cũng đoán được đáp án.
+        def _mot_le(x):
+            return "$%s\\,\\text{m}$" % ("%.1f" % float(x)).replace(".", DAU_THAP_PHAN)
+
+        h = a * math.sin(ra) * math.sin(rb) / hieu
+        dapso = _mot_le(h)
+
+        # Các phương án nhiễu là LỖI THẬT của học sinh:
+        ung_vien = [
+            # dừng lại ở BD, quên bước tam giác vuông
+            a * math.sin(ra) / hieu,
+            # nhầm góc ADB thành beta + alpha
+            a * math.sin(ra) * math.sin(rb) / math.sin(math.radians(beta + alpha)),
+            # dùng côsin thay vì sin ở hai góc nâng
+            a * math.cos(ra) * math.cos(rb) / hieu,
+            # nhân sin alpha hai lần
+            a * math.sin(ra) * math.sin(ra) / hieu,
+        ]
+        nhieu = []
+        for x in ung_vien:
+            s = _mot_le(x)
+            if s != dapso and s not in nhieu:
+                nhieu.append(s)
+        if len(nhieu) < 3:
+            continue
+
+        debai = (r"Để đo chiều cao $DH$ của %s mà không tới được %s, người ta "
+                 r"chọn hai điểm $A$, $B$ trên mặt đất cùng nằm trên một đường "
+                 r"thẳng đi qua $H$ (điểm $B$ nằm giữa $A$ và $H$) với "
+                 r"$AB = %d\,\text{m}$. Từ $A$ nhìn lên %s được góc nâng "
+                 r"$%d^{\circ}$, từ $B$ nhìn lên %s được góc nâng $%d^{\circ}$. "
+                 r"Chiều cao $DH$ gần nhất với giá trị nào sau đây "
+                 r"(làm tròn đến hàng phần mười)?"
+                 % (vat, chan, a, dinh, alpha, dinh, beta))
+
+        giai = (r"Trong tam giác $ABD$: $\widehat{DAB} = %d^{\circ}$, còn "
+                r"$\widehat{DBA} = 180^{\circ} - %d^{\circ}$ (hai góc kề bù với "
+                r"góc nâng tại $B$), nên"
+                "\\\\\n"
+                r"$\widehat{ADB} = 180^{\circ} - %d^{\circ} - "
+                r"\left(180^{\circ} - %d^{\circ}\right) = %d^{\circ}$."
+                "\\\\\n"
+                r"Áp dụng định lí sin trong tam giác $ABD$:"
+                "\\\\\n"
+                r"$\dfrac{BD}{\sin\widehat{DAB}} = "
+                r"\dfrac{AB}{\sin\widehat{ADB}} \Rightarrow "
+                r"BD = \dfrac{%d\cdot\sin %d^{\circ}}{\sin %d^{\circ}} "
+                r"\approx %s\,\text{(m)}$."
+                "\\\\\n"
+                r"Tam giác $BDH$ vuông tại $H$ có $\widehat{DBH} = %d^{\circ}$ nên"
+                "\\\\\n"
+                r"$DH = BD\cdot\sin %d^{\circ} \approx %s\,\text{(m)}$."
+                % (alpha, beta, alpha, beta, beta - alpha,
+                   a, alpha, beta - alpha, _xx(a * math.sin(ra) / hieu, 2),
+                   beta, beta, _xx(h, 1)))
+
+        cauTN += MC_SA_answer_text(debai, dapso, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_VD036_TL_E_01(socau, dong=1):
+    r"""Đo bán kính Trái Đất bằng góc hạ tới đường chân trời.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    CHÚ Ý VỀ PHƯƠNG PHÁP (cô Lan dặn: không dùng kiến thức lớp 11).
+    Cách đo bán kính Trái Đất quen thuộc nhất - cách của Eratosthenes -
+    dùng ĐỘ DÀI CUNG TRÒN $\ell = R\alpha$ với $\alpha$ tính bằng radian.
+    Đó là chương trình LỚP 11 nên KHÔNG dùng ở đây.
+
+    Cách dùng trong dạng này chỉ cần tam giác vuông: từ đỉnh núi $M$ cao
+    $h$, tia nhìn tới đường chân trời tiếp xúc mặt đất tại $T$ nên
+    $OT \perp MT$. Tam giác $OTM$ vuông tại $T$, gọi $\theta$ là góc hạ
+    của tia nhìn so với phương nằm ngang thì $\widehat{OMT} =
+    90^{\circ} - \theta$, do đó $\cos\theta = \dfrac{R}{R+h}$ và
+    $R = \dfrac{h\cos\theta}{1 - \cos\theta}$.
+
+    VÌ SAO LÀ TỰ LUẬN CHỨ KHÔNG PHẢI TRẮC NGHIỆM: vì $\cos\theta$ rất
+    gần $1$ nên $\dfrac{h\cos\theta}{1-\cos\theta}$ và $\dfrac{h}{1-\cos\theta}$
+    cho kết quả lệch nhau chưa tới $1\,\text{km}$ - phương án nhiễu
+    "quên nhân $\cos\theta$" hoá ra CŨNG ĐÚNG, câu hỏi có hai đáp án.
+    Mọi biến thể sai khác thì lại lệch hẳn về cỡ $h$, nhìn là loại được
+    ngay. Nói cách khác bài này không có bộ phương án nhiễu tử tế. Để tự
+    luận thì học sinh phải lập được hệ thức, đúng chỗ cần đánh giá.
+    """
+    NUI = [("Phan Xi Păng", 3.1), ("Ngọc Linh", 2.6), ("Bà Đen", 1.0),
+           ("Tây Côn Lĩnh", 2.4), ("Pu Ta Leng", 3.0)]
+
+    gt = []
+    thu = 0
+    while len(gt) < socau and thu < 200:
+        thu += 1
+        i = random.randrange(len(NUI))
+        # chọn theta từ bán kính thật 6371 km rồi làm tròn hai chữ số,
+        # để số liệu đề bài là con số đo được hợp lí
+        h = NUI[i][1]
+        theta = round(math.degrees(math.acos(6371.0 / (6371.0 + h))), 2)
+        if (i, theta) not in gt:
+            gt.append((i, theta))
+
+    cauTN = ''
+    for i, theta in gt:
+        ten, h = NUI[i]
+        c = math.cos(math.radians(theta))
+        R = h * c / (1 - c)
+
+        debai = (r"Đứng trên đỉnh núi %s ở độ cao $h = %s\,\text{km}$ so với "
+                 r"mực nước biển, một người nhìn về phía biển thì thấy đường "
+                 r"chân trời. Tia nhìn tới đường chân trời tạo với phương nằm "
+                 r"ngang một góc hạ $\theta = %s^{\circ}$. Coi Trái Đất là "
+                 r"khối cầu tâm $O$ bán kính $R$; gọi $M$ là vị trí người quan "
+                 r"sát và $T$ là điểm mà tia nhìn chạm mặt biển."
+                 % (ten, _xx(h, 1), _xx(theta, 2)))
+
+        hoi_a = (r"Chứng tỏ tam giác $OTM$ vuông tại $T$ và tính "
+                 r"$\widehat{OMT}$ theo $\theta$.")
+        giai_a = (r"Tia nhìn chạm mặt biển ở đúng đường chân trời nên $MT$ "
+                  r"là tiếp tuyến của đường tròn tâm $O$ tại $T$, do đó "
+                  r"$OT \perp MT$: tam giác $OTM$ vuông tại $T$."
+                  "\\\\\n"
+                  r"Phương nằm ngang tại $M$ vuông góc với bán kính $OM$. "
+                  r"Tia nhìn $MT$ hạ xuống dưới phương ấy một góc $\theta$, "
+                  r"nên góc giữa $MT$ và $MO$ là"
+                  "\\\\\n"
+                  r"$\widehat{OMT} = 90^{\circ} - \theta = %s^{\circ}$."
+                  % _xx(90 - theta, 2))
+
+        hoi_b = r"Chứng minh rằng $\cos\theta = \dfrac{R}{R + h}$."
+        giai_b = (r"Tam giác $OTM$ vuông tại $T$ có $OT = R$ là cạnh đối diện "
+                  r"góc $\widehat{OMT}$ và $OM = R + h$ là cạnh huyền, nên"
+                  "\\\\\n"
+                  r"$\sin\widehat{OMT} = \dfrac{OT}{OM} = \dfrac{R}{R + h}$."
+                  "\\\\\n"
+                  r"Mà $\widehat{OMT} = 90^{\circ} - \theta$ và hai góc phụ "
+                  r"nhau có sin góc này bằng côsin góc kia, nên "
+                  r"$\sin\left(90^{\circ} - \theta\right) = \cos\theta$."
+                  "\\\\\n"
+                  r"Vậy $\cos\theta = \dfrac{R}{R + h}$.")
+
+        hoi_c = (r"Từ đó tính bán kính $R$ của Trái Đất (làm tròn đến hàng "
+                 r"đơn vị, tính theo ki-lô-mét).")
+        giai_c = (r"Từ $\cos\theta = \dfrac{R}{R+h}$ suy ra "
+                  r"$\left(R + h\right)\cos\theta = R$, tức là"
+                  "\\\\\n"
+                  r"$R\left(1 - \cos\theta\right) = h\cos\theta "
+                  r"\Rightarrow R = \dfrac{h\cos\theta}{1 - \cos\theta}$."
+                  "\\\\\n"
+                  r"Thay số $h = %s\,\text{km}$ và $\theta = %s^{\circ}$:"
+                  "\\\\\n"
+                  r"$R = \dfrac{%s\cdot\cos %s^{\circ}}{1 - \cos %s^{\circ}} "
+                  r"\approx %s\,\text{(km)}$."
+                  "\\\\\n"
+                  r"Kết quả này sát với bán kính Trái Đất thường dùng là "
+                  r"$6371\,\text{km}$. Lưu ý $1 - \cos\theta$ là một số rất "
+                  r"bé, nên khi bấm máy phải giữ đủ chữ số thập phân, làm "
+                  r"tròn sớm sẽ ra kết quả lệch nhiều."
+                  % (_xx(h, 1), _xx(theta, 2), _xx(h, 1),
+                     _xx(theta, 2), _xx(theta, 2), _xx(R, 0)))
+
+        ds_abcd = [(hoi_a, r"90^{\circ} - \theta", giai_a),
+                   (hoi_b, r"\cos\theta = \dfrac{R}{R + h}", giai_b),
+                   (hoi_c, r"R \approx %s\,\text{km}" % _xx(R, 0), giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_B6_VD036_TL_D_01(socau, dong=1):
+    r"""Tàu đổi hướng trên biển: định lí côsin rồi định lí sin.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Số liệu chọn sao cho $AC$ ra SỐ NGUYÊN: tàu đổi hướng $60^{\circ}$
+    nên $\widehat{ABC} = 120^{\circ}$, $\cos 120^{\circ} = -\dfrac{1}{2}$,
+    do đó $AC^2 = a^2 + b^2 + ab$. Chỉ lấy những cặp $(a; b)$ làm cho
+    $a^2 + ab + b^2$ là số chính phương, ví dụ $(3;5)$ cho $AC = 7$.
+    """
+    # các cặp (a, b) cho a^2 + ab + b^2 chính phương
+    CAP = []
+    for a in range(3, 41):
+        for b in range(a + 1, 61):
+            k2 = a * a + a * b + b * b
+            k = math.isqrt(k2)
+            if k * k == k2:
+                CAP.append((a, b, k))
+
+    PHUONG_TIEN = [("Một chiếc tàu", "tàu"), ("Một chiếc ca nô", "ca nô"),
+                   ("Một chiếc thuyền buồm", "thuyền")]
+
+    gt = []
+    thu = 0
+    while len(gt) < socau and thu < 200:
+        thu += 1
+        v = (random.randrange(len(CAP)), random.randrange(len(PHUONG_TIEN)))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for i_cap, i_pt in gt:
+        a, b, k = CAP[i_cap]
+        ten_hoa, ten = PHUONG_TIEN[i_pt]
+
+        # góc BAC: định lí sin, sin(BAC) = b*sin(120)/k
+        sin_A = b * math.sin(math.radians(120)) / k
+        goc_A = math.degrees(math.asin(sin_A))
+
+        debai = (r"%s xuất phát từ cảng $A$, chạy thẳng $%d\,\text{km}$ theo "
+                 r"một hướng cố định tới vị trí $B$. Tại $B$, %s đổi hướng "
+                 r"một góc $60^{\circ}$ rồi chạy thẳng thêm $%d\,\text{km}$ "
+                 r"nữa thì tới đảo $C$."
+                 % (ten_hoa, a, ten, b))
+
+        hoi_a = r"Tính số đo góc $\widehat{ABC}$."
+        giai_a = (r"Hướng cũ của %s là tia đối của tia $BA$. Đổi hướng một góc "
+                  r"$60^{\circ}$ nghĩa là tia $BC$ hợp với hướng cũ ấy một góc "
+                  r"$60^{\circ}$, nên $\widehat{ABC}$ kề bù với góc $60^{\circ}$:"
+                  "\\\\\n"
+                  r"$\widehat{ABC} = 180^{\circ} - 60^{\circ} = 120^{\circ}$."
+                  % ten)
+
+        hoi_b = r"Tính khoảng cách $AC$ từ cảng $A$ tới đảo $C$."
+        giai_b = (r"Áp dụng định lí côsin trong tam giác $ABC$:"
+                  "\\\\\n"
+                  r"$AC^2 = AB^2 + BC^2 - 2\cdot AB\cdot BC\cdot"
+                  r"\cos\widehat{ABC}$"
+                  "\\\\\n"
+                  r"$AC^2 = %d^2 + %d^2 - 2\cdot %d\cdot %d\cdot"
+                  r"\left(-\dfrac{1}{2}\right) = %d$."
+                  "\\\\\n"
+                  r"Vậy $AC = %d\,\text{(km)}$."
+                  % (a, b, a, b, k * k, k))
+
+        hoi_c = (r"Từ đảo $C$, %s muốn quay thẳng về cảng $A$. Tính số đo góc "
+                 r"$\widehat{BAC}$ (làm tròn đến hàng phần mười của độ)." % ten)
+        giai_c = (r"Áp dụng định lí sin trong tam giác $ABC$:"
+                  "\\\\\n"
+                  r"$\dfrac{BC}{\sin\widehat{BAC}} = "
+                  r"\dfrac{AC}{\sin\widehat{ABC}} \Rightarrow "
+                  r"\sin\widehat{BAC} = \dfrac{BC\cdot\sin\widehat{ABC}}{AC} "
+                  r"= \dfrac{%d\cdot\sin 120^{\circ}}{%d} \approx %s$."
+                  "\\\\\n"
+                  r"Vì tam giác $ABC$ đã có góc tù $\widehat{ABC} = "
+                  r"120^{\circ}$ nên $\widehat{BAC}$ là góc nhọn, do đó"
+                  "\\\\\n"
+                  r"$\widehat{BAC} \approx %s^{\circ}$."
+                  % (b, k, _xx(sin_A, 4), _xx(goc_A, 1)))
+
+        ds_abcd = [(hoi_a, r"120^{\circ}", giai_a),
+                   (hoi_b, "%d\\,\\text{km}" % k, giai_b),
+                   (hoi_c, "%s^{\\circ}" % _xx(goc_A, 1), giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
