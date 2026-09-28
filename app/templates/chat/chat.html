@@ -27,7 +27,20 @@
         window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                // Cac lenh RIENG cua de, dinh nghia trong
+                // data/config/latex_template.tex. MathJax khong biet
+                // chung nen truoc day cau co he bat phuong trinh hien ra
+                // o do "Misplaced &" (29/09/2026): \heva chua duoc dinh
+                // nghia -> \begin{aligned} khong bao gio mo -> dau & tro
+                // thanh & tran. Sua o day thi MOI cau dung \heva/\hoac
+                // deu hien dung, khong phai sua tung ham trong ngan hang.
+                // tests/test_macro_latex_web.py soi cho hai ben khong lech.
+                macros: {
+                    heva: ['\\left\\{\\begin{aligned}#1\\end{aligned}\\right.', 1],
+                    hoac: ['\\left[\\begin{aligned}#1\\end{aligned}\\right.', 1],
+                    vv: ['\\overrightarrow{#1}', 1]
+                }
             },
             svg: { fontCache: "global" }
         };

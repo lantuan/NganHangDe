@@ -71,12 +71,12 @@ def L10_C9_B27_TH154_MC_A_01(socau,dang=1):
 
 		if v[2] == 'liên tiếp':
 			giai = f"""
-				Một đồng xu khi tung có hai trường hợp xảy ra là sấp hoặc ngửa. Nên khi tung đồng xu ${v[0]}$ lần liên tiếp thì $n(\\Omega) = 2^{v[0]}$.\\ \\
+				Một đồng xu khi tung có hai trường hợp xảy ra là sấp hoặc ngửa. Nên khi tung đồng xu ${v[0]}$ lần liên tiếp thì $n(\\Omega) = 2^{v[0]}$.\\ \\\\
 				Để ra tất cả các mặt đều {v[1]} thì chỉ có 1 trường hợp. Do đó, xác suất cần tìm là $P(E) = \\dfrac{{1}}{{ 2^{v[0]} }}$.
 			"""
 		else:
 			giai = f"""
-				Một đồng xu khi tung có hai trường hợp xảy ra là sấp hoặc ngửa. Nên đối với ${v[0]}$ đồng xu thì $n(\\Omega) = 2^{v[0]}$.\\ \\
+				Một đồng xu khi tung có hai trường hợp xảy ra là sấp hoặc ngửa. Nên đối với ${v[0]}$ đồng xu thì $n(\\Omega) = 2^{v[0]}$.\\ \\\\
 				Để ra tất cả các mặt đều {v[1]} thì chỉ có 1 trường hợp. Do đó, xác suất cần tìm là $P(E) = \\dfrac{{1}}{{ 2^{v[0]} }}$.
 			"""
 
@@ -307,15 +307,15 @@ def L10_C9_B26_NB144_MC_A_01(socau,dang=1):
 
 		giai = f"""
 
-			Chọn hai bạn từ tổ có ${boy}$ bạn nam và ${girl}$ bạn nữ.\\
+			Chọn hai bạn từ tổ có ${boy}$ bạn nam và ${girl}$ bạn nữ.\\\\
 
-			$A$: ``hai bạn được chọn đều là nam''; $B$: ``hai bạn được chọn đều là nữ''.\\
+			$A$: ``hai bạn được chọn đều là nam''; $B$: ``hai bạn được chọn đều là nữ''.\\\\
 
 			$\\bullet$ Một kết quả không thể vừa là ``cả hai đều nam'' vừa là ``cả hai đều nữ'',
 
-			nên hai biến cố $A$ và $B$ không bao giờ cùng xảy ra: $A \\cap B = \\varnothing$ (hai biến cố xung khắc).\\
+			nên hai biến cố $A$ và $B$ không bao giờ cùng xảy ra: $A \\cap B = \\varnothing$ (hai biến cố xung khắc).\\\\
 
-			$\\bullet$ $A \\cup B \\ne \\Omega$ vì còn trường hợp chọn được một nam và một nữ.\\
+			$\\bullet$ $A \\cup B \\ne \\Omega$ vì còn trường hợp chọn được một nam và một nữ.\\\\
 
 			$\\bullet$ $A \\ne B$ và $A$ cũng không phải biến cố đối của $B$, vì biến cố đối của $B$
 
@@ -368,9 +368,9 @@ def L10_C9_B27_TH152_MC_A_01(socau, dang=1):
         debai = f"""Gieo một con xúc xắc cân đối liên tiếp ${lan}$ lần. Tính xác suất để có ít nhất một lần xuất hiện mặt ${mat}$ chấm."""
 
         giai = f"""
-            Không gian mẫu $n(\\Omega) = 6^{lan}$.\\
-            Để không lần nào xuất hiện mặt ${mat}$ chấm thì mỗi lần gieo có $5$ khả năng xảy ra (các mặt khác mặt ${mat}$), nên có tất cả $5^{lan}$ trường hợp thuận lợi cho biến cố đối.\\
-            Xác suất để không lần nào xuất hiện mặt ${mat}$ chấm là $\\left(\\dfrac{{5}}{{6}}\\right)^{lan}$.\\
+            Không gian mẫu $n(\\Omega) = 6^{lan}$.\\\\
+            Để không lần nào xuất hiện mặt ${mat}$ chấm thì mỗi lần gieo có $5$ khả năng xảy ra (các mặt khác mặt ${mat}$), nên có tất cả $5^{lan}$ trường hợp thuận lợi cho biến cố đối.\\\\
+            Xác suất để không lần nào xuất hiện mặt ${mat}$ chấm là $\\left(\\dfrac{{5}}{{6}}\\right)^{lan}$.\\\\
             Vậy xác suất cần tìm là $1 - \\left(\\dfrac{{5}}{{6}}\\right)^{lan} \\approx {dapso}$.
         """
 
@@ -424,9 +424,9 @@ def L10_C9_B27_VD155_SA_A_01(socau):
 		(với $x,y$ là các số nguyên) nằm trong hình chữ nhật $ABCD$ (kể cả các điểm nằm trên cạnh).
 		 Tính xác suất để $x$ và $y$ chia hết cho $2$."""
 
-		giai = f"""Ta có $\\Omega = \\left\\lbrace (x;y), {xA}\\le x \\le {xC} , {yA}\\le y \\le {yC} \\right\\rbrace$ với $x,y \\in \\mathbb{{Z}}$.\\
-		Suy ra $n\\left( \\Omega \\right) = {xC - xA + 1} \\cdot {yC - yA + 1}={(xC - xA + 1) * (yC - yA + 1)}$. \\
-		Ta có $x,y$ đều chia hết cho $2$ nên $A$ có số phần tử là ${count_even_numbers(xA,xC)} \\cdot {count_even_numbers(yA, yC)} = {count_even_numbers(xA,xC) * count_even_numbers(yA, yC)}$.\\
+		giai = f"""Ta có $\\Omega = \\left\\lbrace (x;y), {xA}\\le x \\le {xC} , {yA}\\le y \\le {yC} \\right\\rbrace$ với $x,y \\in \\mathbb{{Z}}$.\\\\
+		Suy ra $n\\left( \\Omega \\right) = {xC - xA + 1} \\cdot {yC - yA + 1}={(xC - xA + 1) * (yC - yA + 1)}$. \\\\
+		Ta có $x,y$ đều chia hết cho $2$ nên $A$ có số phần tử là ${count_even_numbers(xA,xC)} \\cdot {count_even_numbers(yA, yC)} = {count_even_numbers(xA,xC) * count_even_numbers(yA, yC)}$.\\\\
 		Suy ra $\\mathrm{{P}}(A)=\\dfrac{{ {count_even_numbers(xA,xC) * count_even_numbers(yA, yC)} }}{{ {(xC - xA + 1) * (yC - yA + 1)}  }} = {dapso} $."""
 
 		dsnhieu = ((count_even_numbers(xA,xC) * count_even_numbers(yA, yC)) / ((xC - xA) * (yC - yA)),
@@ -487,7 +487,7 @@ def L10_C9_B27_TH151_SA_A_01(socau): ####bị lỗi xác suất rất nhỏ
 				Gọi $A$ là biến cố: ``Trong {vienbi_chu} viên bi {dk}''. Tính $P(\\overline{{A}})$."""
 
 		giai = f"""Không gian mẫu $n(\\Omega) = C_{{{blue + red}}}^{vienbi} = {khonggianmau}$. 
-				$\\overline{{A}}$: ``Trong {vienbi_chu} viên bi {DK[0]}''.\\ \\ 
+				$\\overline{{A}}$: ``Trong {vienbi_chu} viên bi {DK[0]}''.\\ \\\\ 
 				Nên kết quả là ${dapso}$.
 				"""
 
@@ -552,7 +552,7 @@ def L10_C9_B27_TH154_SA_A_01(socau):
 
 		debai = f"""Gieo một con xúc xắc cân đối liên tiếp ${lan}$ lần. Tính xác suất để luôn xuất hiện đúng một lần mặt ${mat1}$ chấm và một lần mặt ${mat2}$ chấm."""
 
-		giai = f"""Không gian mẫu $n(\\Omega) = 6^{lan}$.\\
+		giai = f"""Không gian mẫu $n(\\Omega) = 6^{lan}$.\\\\
 		Để có đúng một lần mặt ${mat1}$ chấm và ${mat2}$ chấm thì có tất cả số trường hợp là $A_{lan}^2 \\cdot 4^{lan - 2} = {calculate_permutations(6,2) * 4 ** (lan-2)}$. 
 		Nên xác suất cần tìm là $\\dfrac{{ {calculate_permutations(lan,2) * 4 ** (lan-2)} }} {{ 6^{lan} }} = {dapso}$."""
 

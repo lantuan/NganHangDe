@@ -991,8 +991,14 @@ def L10_C4_B10_TH050_MC_A_01(socau, dang=1):
     for xa, ya, xb, yb in gt:
         u, v = xb - xa, yb - ya
         dung = r"$%s$" % _toado(u, v)
-        nhieu = [r"$%s$" % _toado(-u, -v), r"$%s$" % _toado(xa + xb, ya + yb),
-                 r"$%s$" % _toado(v, u), r"$%s$" % _toado(xb, yb)]
+        # Qua _ba_nhieu4: bo so suy bien (u = v, hai diem doi xung qua goc...)
+        # lam hai phuong an trung nhau -> NhieuTrungError, cau bien thanh
+        # o "[THIEU O PYTHON]" trong de. Do duoc 29/09/2026.
+        nhieu = _ba_nhieu4(
+            dung,
+            [r"$%s$" % _toado(-u, -v), r"$%s$" % _toado(xa + xb, ya + yb),
+             r"$%s$" % _toado(v, u), r"$%s$" % _toado(xb, yb)],
+            buoc=lambda t: r"$%s$" % _toado(u + t, v))
         debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A%s$ và $B%s$. "
                  r"Toạ độ của vectơ $%s$ là"
                  % (_toado(xa, ya), _toado(xb, yb), _vt("A", "B")))
@@ -1154,10 +1160,13 @@ def L10_C4_B10_TH052_MC_A_01(socau, dang=1):
     for a1, a2, b1, b2, m, n in gt:
         c1, c2 = m * a1 + n * b1, m * a2 + n * b2
         dung = r"$%s$" % _toado(c1, c2)
-        nhieu = [r"$%s$" % _toado(m * a1 + n * b1, m * a2 - n * b2),
-                 r"$%s$" % _toado(m * a1 * n * b1, m * a2 * n * b2),
-                 r"$%s$" % _toado(a1 + b1, a2 + b2),
-                 r"$%s$" % _toado(c2, c1)]
+        nhieu = _ba_nhieu4(
+            dung,
+            [r"$%s$" % _toado(m * a1 + n * b1, m * a2 - n * b2),
+             r"$%s$" % _toado(m * a1 * n * b1, m * a2 * n * b2),
+             r"$%s$" % _toado(a1 + b1, a2 + b2),
+             r"$%s$" % _toado(c2, c1)],
+            buoc=lambda t: r"$%s$" % _toado(c1 + t, c2))
         dau = "+" if n > 0 else "-"
         he_so_n = "" if abs(n) == 1 else "%d" % abs(n)
         debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho hai vectơ $%s = %s$ và "
@@ -1468,8 +1477,11 @@ def L10_C4_B10_VD056_MC_A_01(socau, dang=1):
         d = u1 * v2 - u2 * v1
         S = abs(d) // 2
         dung = r"$%d$" % S
-        nhieu = [r"$%d$" % abs(d), r"$%d$" % (abs(u1 * v1 + u2 * v2) // 2 + 1),
-                 r"$%d$" % (S + 1), r"$%d$" % (S * 2 + 1)]
+        nhieu = _ba_nhieu4(
+            dung,
+            [r"$%d$" % abs(d), r"$%d$" % (abs(u1 * v1 + u2 * v2) // 2 + 1),
+             r"$%d$" % (S + 1), r"$%d$" % (S * 2 + 1)],
+            buoc=lambda t: r"$%d$" % (S + 1 + t))
         debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho tam giác $ABC$ với "
                  r"$A%s$, $B%s$, $C%s$. Diện tích tam giác $ABC$ bằng"
                  % (_toado(xa, ya), _toado(xb, yb), _toado(xc, yc)))

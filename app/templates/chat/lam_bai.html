@@ -13,7 +13,20 @@
         window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                // Cac lenh RIENG cua de, dinh nghia trong
+                // data/config/latex_template.tex. MathJax khong biet
+                // chung nen truoc day cau co he bat phuong trinh hien ra
+                // o do "Misplaced &" (29/09/2026): \heva chua duoc dinh
+                // nghia -> \begin{aligned} khong bao gio mo -> dau & tro
+                // thanh & tran. Sua o day thi MOI cau dung \heva/\hoac
+                // deu hien dung, khong phai sua tung ham trong ngan hang.
+                // tests/test_macro_latex_web.py soi cho hai ben khong lech.
+                macros: {
+                    heva: ['\\left\\{\\begin{aligned}#1\\end{aligned}\\right.', 1],
+                    hoac: ['\\left[\\begin{aligned}#1\\end{aligned}\\right.', 1],
+                    vv: ['\\overrightarrow{#1}', 1]
+                }
             },
             svg: { fontCache: "global" }
         };
@@ -266,10 +279,32 @@ if (CID_TU_URL) {
 function xuLyDanhSach(text, theBao, cheDo) {
     const re = new RegExp('\\\\begin\\{' + cheDo + '\\}([\\s\\S]*?)\\\\end\\{' + cheDo + '\\}', 'g');
     return text.replace(re, function (match, noiDung) {
+        // Bo doi so tuy chon ngay sau \begin{...}, vi du \begin{listEX}[1].
+        // Truoc day khong bo nen "[1]" tro thanh mot muc, hien ra thanh
+        // dong "1." thua o dau danh sach (29/09/2026).
+        noiDung = noiDung.replace(/^\s*\[[^\]]*\]/, '');
         const items = noiDung.split('\\item').map(function (x) { return x.trim(); }).filter(Boolean);
         const lis = items.map(function (it) { return '<li>' + it + '</li>'; }).join('');
         return '<' + theBao + '>' + lis + '</' + theBao + '>';
     });
+}
+
+// Tach chuoi thanh cac doan TOAN ($...$, $$...$$, \( \), \[ \]) va cac
+// doan CHU. Phai tach vi trong doan toan, "\\" la dau xuong dong CUA
+// CONG THUC (\begin{aligned}, cases, array...) - doi no thanh <br> la vo
+// het cong thuc. Loi that 29/09/2026: he bat phuong trinh hien ra mot
+// mach "x >= -6x <= 34x - 9y <= 12x + 9y <= 39".
+function tachDoanToan(s) {
+    const doan = [];
+    const re = /\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]|\$[^$]*\$|\\\([\s\S]*?\\\)/g;
+    let i = 0, m;
+    while ((m = re.exec(s)) !== null) {
+        if (m.index > i) doan.push({ toan: false, chu: s.slice(i, m.index) });
+        doan.push({ toan: true, chu: m[0] });
+        i = m.index + m[0].length;
+    }
+    if (i < s.length) doan.push({ toan: false, chu: s.slice(i) });
+    return doan;
 }
 
 // Cau tra loi cua AI la MARKDOWN, KHAC voi loi giai chuan (LaTeX tu
@@ -284,22 +319,42 @@ function renderMarkdownAI(raw) {
     return renderLatexText(raw).replace(/\n/g, "<br>");
 }
 
-// Loi giai chuan co xuong dong THAT (de bai nhieu dong, 4 y Dung/Sai
-// sau khi doi \itemch). renderLatexText() khong doi \n thanh <br> nen
-// tat ca dinh lien mot doan - ham nay lam not viec do.
+// Giu lai cho tuong thich: tu 29/09/2026 chinh renderLatexText da doi
+// \n thanh <br> (o doan chu, khong dong vao cong thuc) nen hai ham nay
+// lam mot viec.
 function renderXuongDong(raw) {
-    return renderLatexText(raw).replace(/\n/g, '<br>');
+    return renderLatexText(raw);
 }
 
 function renderLatexText(raw) {
     if (!raw) return "";
     let s = String(raw);
-    s = s.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
-    s = s.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');
-    s = s.replace(/\\\\/g, '<br>');
+    // Danh sach xu ly TRUOC (\item nam ngoai vung toan). listEX la moi
+    // truong danh sach ma ngan hang de dung that - truoc day khong xu ly
+    // nen cac y cua cau tu luan dinh lien mot mach (29/09/2026).
     s = xuLyDanhSach(s, 'ol', 'enumerate');
     s = xuLyDanhSach(s, 'ul', 'itemize');
-    return s;
+    s = xuLyDanhSach(s, 'ol', 'listEX');
+    return tachDoanToan(s).map(function (d) {
+        // Doan toan GIU NGUYEN TUNG KY TU cho MathJax tu render.
+        if (d.toan) return d.chu;
+        let t = d.chu;
+        t = t.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
+        t = t.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');
+        t = t.replace(/\\\\/g, '<br>');
+        // Xuong dong THAT cung phai thanh <br>. Bo phan tich de bai da
+        // doi \item thanh "\n- " (xem answer_parser_service.py), truoc
+        // day renderLatexText khong doi \n nen cac y cua cau tu luan
+        // dinh lien mot mach tren web (29/09/2026).
+        // Lam o DAY chu khong lam sau cung, de khong dong vao \n nam
+        // ben trong cong thuc.
+        t = t.replace(/\r?\n/g, '<br>');
+        return t;
+    }).join('')
+        // Bo phan tich de bai de lai nhieu dong trong giua cac y; gop
+        // lai nhiều nhất MOT dong trong cho de bai khong bi thua thot.
+        .replace(/(?:<br>\s*){3,}/g, '<br><br>')
+        .replace(/^(?:<br>\s*)+|(?:<br>\s*)+$/g, '');
 }
 
 async function taiDe() {

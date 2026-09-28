@@ -7277,3 +7277,117 @@ do van dung cua chinh nhung kien thuc ay len bai toan thuc tien.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.14 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Lam sach lop 10 TRUOC khi sang lop 11 (co Lan chot)
+
+Co Lan mo trang "Lam bai truc tiep" va thay bon kieu hong, tat ca deu
+KHONG lo ra trong file PDF - vi PDF va web dung hai bo may khac nhau.
+"Truoc khi lam tiep phai chinh sua loi lop 10 da, de cac lop tiep theo
+khong loi nua."
+
+## 1. O do "Misplaced &" o cau co he bat phuong trinh
+
+\heva (he va) va \hoac (he hoac) KHONG phai lenh chuan - chinh
+data/config/latex_template.tex tu dinh nghia:
+
+    \newcommand{\heva}[1]{\left\{\begin{aligned}#1\end{aligned}\right.}
+
+PDF dich duoc vi co dinh nghia ay. MathJax tren web khong biet, nen
+\begin{aligned} khong bao gio mo ra va dau & tro thanh & tran ->
+"Misplaced &".
+
+Sua: khai bao lai \heva, \hoac, \vv trong phan macros cua MathJax o CA
+HAI trang lam_bai.html va chat.html. Sua o day thi MOI cau dung cac
+lenh ay deu hien dung, khong phai sua tung ham trong ngan hang.
+
+## 2. He phuong trinh hien ra MOT MACH
+
+renderLatexText doi MOI "\\" thanh <br>, ke ca "\\" nam TRONG cong
+thuc - ma o do no la dau xuong dong CUA cong thuc (aligned, cases,
+array). Ket qua: "{x >= -6x <= 34x - 9y <= 12x + 9y <= 39".
+
+Sua: them ham tachDoanToan() cat chuoi thanh cac doan TOAN ($...$,
+$$...$$, \( \), \[ \]) va cac doan CHU; chi doi \\ va xuong dong that
+o doan CHU, doan toan giu nguyen tung ky tu cho MathJax.
+
+## 3. Cac y cua cau tu luan dinh lien nhau, va co "......" o sau
+
+Hai nguyen nhan:
+- renderLatexText khong doi xuong dong THAT (\n) thanh <br>. Bo phan
+  tich de bai da doi \item thanh "\n- " roi nhung web nuot het.
+- _xoa_khoi_dap_an_an thay \SA[4]{..} bang chuoi "......" cho giong o
+  dien dap an trong PDF. Tren web hoc sinh lam ra GIAY, khong go vao
+  dau ca, nen day cham chi lam de bai roi rac.
+
+Sua: doi \n thanh <br> ngay trong doan CHU (khong dong vao cong thuc),
+gop nhieu dong trong lien nhau con nhieu nhat mot dong, va xoa han
+"......". Them xu ly moi truong listEX (truong danh sach ma ngan hang
+de dung that - truoc chi xu ly enumerate/itemize) va bo doi so tuy chon
+\begin{listEX}[1] - chinh doi so nay truoc day hien ra thanh dong "1."
+thua o dau danh sach.
+
+## 4. Phuong an tra loi bang chu hien thanh "Mienngugiac"
+
+L10_C2_B4_TH027_MC_B goi MC_SA_answer_const, ma ham nay boc MOI phuong
+an trong $...$. "Mien ngu giac" bi doc nhu cong thuc -> mat het dau
+cach, in nghieng kieu toan. Sua: dung MC_SA_answer_text.
+
+## Soat CA NGAN HANG, tim them ba ho loi cung kieu
+
+Viet may soat chay tren ket qua THAT cua tung ham:
+
+    chu tieng Viet nam tran trong $...$     1 ham   (da sua)
+    chu dam kieu Markdown **dam**          6 ham   (24 cho, da sua)
+    dau \ le cuoi dong                     12 ham  (31 dong, da sua)
+
+Loi dau gach cheo: trong f-string KHONG co tien to r, "\\" chi ra MOT
+dau gach cheo, nen LaTeX nhan duoc "\" + xuong dong = mot dau cach,
+MAT luon dau xuong dong. Ca loi giai bi don thanh mot khoi. Da doi
+thanh "\\\\" o 31 dong cuoi dong cua cac f-string do.
+
+## Va sau chot: 6 ham co the HONG khi ra de
+
+Chay thu 343 ham x 3 muc socau x 40 seed (truoc day chi chay 1 muc
+socau) tim ra 6 ham sinh ra phuong an nhieu TRUNG NHAU -> NhieuTrungError
+-> cau bien thanh o "[THIEU O PYTHON]" trong de:
+
+    L10_C3_B5_TH031_MC_A    bu phuong an ngau nhien ma khong so lai voi
+                            dap so; lai dung set() nen khong tai lap duoc
+    L10_C3_B6_TH033_MC_A    danh sach nhieu tu ghep, khong chong trung
+    L10_C3_B6_TH034_SA_A    2*S va b*c//2 LUON bang nhau (vi S = bc/4)
+    L10_C4_B10_TH050_MC_A   bo so suy bien lam hai phuong an trung nhau
+    L10_C4_B10_TH052_MC_A   nhu tren
+    L10_C4_B10_VD056_MC_A   nhu tren
+
+Da cho ca sau di qua _ba_nhieu/_ba_nhieu4 (ham chong trung co buoc du
+phong) - dung khuon da dung cho chuong 5, 6, 7.
+
+## Da kiem chung the nao
+
+1. 343/343 ham lop 10 chay sach 3 muc socau x 40 seed - truoc: 6 ham hong.
+2. Nap Y NGUYEN ham render cua trang web bang node roi chay tren 343 de
+   bai THAT: 0 cau con <br> lot vao cong thuc, 0 cau con listEX/\item
+   tho, 0 cau con "......", 0 cau lo \SA/\shortans.
+3. Them tests/test_hien_thi_web.py (1035 bai) khoa ca sau ho loi:
+   - chu tieng Viet khong duoc nam tran trong $...$;
+   - khong duoc dung **dam** kieu Markdown;
+   - khong duoc co dau \ le cuoi dong;
+   - lenh rieng cua template ma ngan hang CO DUNG thi MathJax phai biet
+     (bai test tu doc latex_template.tex roi doi chieu - hai ben khong
+     the lech nhau nua);
+   - renderLatexText phai goi tachDoanToan;
+   - phai xu ly moi truong listEX;
+   - va mot bai chay that ham render bang node tren de bai that.
+   Bai test cuoi tu bo qua neu may khong co node.
+4. De he so 1 lop 10 van du ma tran: chuong 1..9 deu 10/10 de.
+5. 1707 bai test qua, 8 bo qua (truoc: 671).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

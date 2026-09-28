@@ -221,12 +221,14 @@ def L10_C3_B5_TH031_MC_A_01(socau, dang=1):
         else:
             he_thuc = r"\tan(180^{\circ}-\alpha)=-\tan\alpha"
 
-        ds = set()
-        for x in (-gia_tri_bu, hang[1], hang[2]):
-            if x is not None and simplify(x - gia_tri_bu) != 0:
-                ds.add(latex(x))
-        while len(ds) < 3:
-            ds.add(latex(Rational(random.randint(1, 3), random.randint(2, 4))))
+        # Truoc day dung set() roi bu them Rational ngau nhien ma KHONG
+        # so lai voi dap so -> co luc bu trung dap so, con lai 2 phuong an
+        # -> NhieuTrungError. Va set() khong giu thu tu nen de khong tai
+        # lap lai duoc. Do duoc 29/09/2026.
+        ds = _ba_nhieu(
+            latex(gia_tri_bu),
+            [latex(x) for x in (-gia_tri_bu, hang[1], hang[2]) if x is not None],
+            buoc=lambda t: latex(Rational(t, t + 2)))
 
         debai = r"Cho $\%s %s = %s$. Giá trị của $\%s %s$ bằng" % (
             ki, _goc(d), latex(hang[chi]), ki, _goc(bu))
@@ -373,10 +375,10 @@ def L10_C3_B6_TH033_MC_A_01(socau, dang=1):
                 r"Suy ra $AC = \dfrac{BC\cdot\sin B}{\sin A} "
                 r"= \dfrac{%d\cdot %s}{%s} = %s$."
                 % (a, latex(hang_B[1]), latex(hang_A[1]), latex(b)))
-        ds = list(dict.fromkeys([latex(simplify(a / k)), latex(a * 2), latex(simplify(b + a))]))
-        ds = [x for x in ds if x != latex(b)][:3]
-        while len(ds) < 3:
-            ds.append(latex(a + len(ds) + 2))
+        ds = _ba_nhieu(
+            latex(b),
+            [latex(simplify(a / k)), latex(a * 2), latex(simplify(b + a))],
+            buoc=lambda t: latex(a + t + 2))
         cauTN += MC_SA_answer_const(debai, latex(b), ds, giai, 0, 0, dang)
     return cauTN
 
@@ -454,10 +456,10 @@ def L10_C3_B6_TH034_SA_A_01(socau, dang=2):
                  r"Diện tích tam giác $ABC$ bằng bao nhiêu?" % (c, b, _goc(A)))
         giai = (r"$S = \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin A "
                 r"= \dfrac{1}{2}\cdot %d\cdot %d\cdot\dfrac{1}{2} = %d$." % (c, b, S))
-        ds = [str(2 * S), str(S + 2), str(b * c // 2)]
-        ds = [x for x in dict.fromkeys(ds) if x != str(S)][:3]
-        while len(ds) < 3:
-            ds.append(str(S + len(ds) + 5))
+        # 2*S va b*c//2 LUON bang nhau (S = bc/4) nen danh sach cu thuc
+        # chat chi co 2 gia tri khac nhau. Do duoc 29/09/2026.
+        ds = _ba_nhieu(str(S), [str(2 * S), str(S + 2), str(b * c // 2)],
+                       buoc=lambda t: str(S + t + 5))
         cauTN += MC_SA_answer_const(debai, str(S), ds, giai, 0, 0, dang)
     return cauTN
 
@@ -1580,17 +1582,17 @@ def L10_C3_B6_VD036_MC_B_01(socau, dang=1):
         Trong tam giác $ABC$, ta đã biết hai góc $\\widehat{{A}} = {A}^\\circ$, $\\widehat{{C}} = {C}^\\circ$ và cạnh $b = AC = {b}$ m.
         Khoảng cách từ $A$ đến $B$ là độ dài cạnh $c=AB$.
 
-        **Bước 1: Tính góc $\\widehat{{B}}$**
+        \\textbf{{Bước 1: Tính góc $\\widehat{{B}}$}}
         Tổng ba góc trong tam giác là $180^\\circ$, nên:
         \\[\\widehat{{B}} = 180^\\circ - \\widehat{{A}} - \\widehat{{C}} = 180^\\circ - {A}^\\circ - {C}^\\circ = {B}^\\circ\\]
 
-        **Bước 2: Áp dụng Định lí Sin**
+        \\textbf{{Bước 2: Áp dụng Định lí Sin}}
         Ta có tỉ lệ:
         \\[\\dfrac{{AB}}{{\\sin C}} = \\dfrac{{AC}}{{\\sin B}}\\]
         Thay các giá trị đã biết ($AC=b={b}$, $\\widehat{{B}}={B}^\\circ$, $\\widehat{{C}}={C}^\\circ$):
         \\[AB = \\dfrac{{AC \\cdot \\sin C}}{{\\sin B}} = \\dfrac{{{b} \\cdot \\sin({C}^\\circ)}}{{\\sin({B}^\\circ)}}\\]
 
-        **Bước 3: Tính toán**
+        \\textbf{{Bước 3: Tính toán}}
         \\[AB \\approx \\dfrac{{{b} \\cdot {round(math.sin(C_rad), 4)}}}{{{round(math.sin(B_rad), 4)}}} \\approx {c} \\mathrm{{~m}}\\]
         Vậy khoảng cách từ $A$ đến $B$ xấp xỉ ${c}$ m.
         """
@@ -1680,18 +1682,18 @@ def L10_C3_B6_VD036_MC_C_01(socau, dang=1):
         $A$ là vị trí xuất phát, $B$ là vị trí đổi hướng, và $C$ là đảo.
         Khoảng cách cần tìm là $AC$ (cạnh $b$).
 
-        **Bước 1. Tính độ dài các cạnh**
+        \\textbf{{Bước 1. Tính độ dài các cạnh}}
         \\begin{{itemize}}
         \\item $AB = c = {vt1} \\cdot {t1_h_str} = {c} \\mathrm{{~(km)}}$
         \\item $BC = a = {vt2} \\cdot {t2_h_str} = {a} \\mathrm{{~(km)}}$
         \\end{{itemize}}
 
-        **Bước 2. Xác định góc $\\widehat{{ABC}}$**
+        \\textbf{{Bước 2. Xác định góc $\\widehat{{ABC}}$}}
         Hai hướng $N{goc1}^\\circ E$ và $S{goc2}^\\circ E$ cùng nghiêng về phía Đông,
         nên góc giữa hai hướng bằng tổng hai góc phương vị:
         \\[\\widehat{{ABC}} = {goc1}^\\circ + {goc2}^\\circ = {Goc_B_deg}^\\circ\\]
 
-        **Bước 3. Áp dụng định lí Cosin**
+        \\textbf{{Bước 3. Áp dụng định lí Cosin}}
         \\[AC^2 = AB^2 + BC^2 - 2AB \\cdot BC \\cdot \\cos(\\widehat{{ABC}})\\]
         Thay số:
         \\[AC^2 = {c}^2 + {a}^2 - 2 \\cdot {c} \\cdot {a} \\cdot \\cos({Goc_B_deg}^\\circ)\\]
@@ -1859,7 +1861,7 @@ def L10_C3_TF_C_01(socau, socot):
 
         # Lời giải chi tiết (không có dấu chấm cuối)
         giai_chung = f"""
-        **Phân tích bài toán:** Quỹ đạo chuyển động của tàu tạo thành tam giác $ABC$.
+        \\textbf{{Phân tích bài toán:}} Quỹ đạo chuyển động của tàu tạo thành tam giác $ABC$.
         $AB = c = {vt1} \\cdot \\frac{{{t1}}}{{60}} = {c}$ km 
         $BC = a = {vt2} \\cdot \\frac{{{t2}}}{{60}} = {a}$ km
         Góc $\\widehat{{ABC}} = {goc1_f}^\\circ + {goc2_f}^\\circ = {goc_B_dung}^\\circ$
@@ -1869,42 +1871,42 @@ def L10_C3_TF_C_01(socau, socot):
 
         # a) Độ dài AB hoặc BC
         ds_a = [
-            (f"{{\\True Độ dài đoạn $AB$ là ${c}$ km}}", f"Độ dài $AB = {c}$ km. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{\\True Độ dài đoạn $AB$ là ${c}$ km}}", f"Độ dài $AB = {c}$ km. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Độ dài đoạn $AB$ là ${a}$ km}}",
-             f"Độ dài $AB = {c}$ km $\\ne {a}$ km. Phát biểu **Sai**. {giai_chung}"),
-            (f"{{\\True Độ dài đoạn $BC$ là ${a}$ km}}", f"Độ dài $BC = {a}$ km. Phát biểu **Đúng**. {giai_chung}"),
+             f"Độ dài $AB = {c}$ km $\\ne {a}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
+            (f"{{\\True Độ dài đoạn $BC$ là ${a}$ km}}", f"Độ dài $BC = {a}$ km. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Độ dài đoạn $BC$ là ${b}$ km}}",
-             f"Độ dài $BC = {a}$ km $\\ne {b}$ km. Phát biểu **Sai**. {giai_chung}"),
+             f"Độ dài $BC = {a}$ km $\\ne {b}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
         # b) Góc ABC
         ds_b = [
             (f"{{\\True Góc $\\widehat{{ABC}}$ bằng ${goc_B_dung}^\\circ$}}",
-             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ$. Phát biểu **Đúng**. {giai_chung}"),
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ$. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Góc $\\widehat{{ABC}}$ bằng ${goc_B_sai}^\\circ$}}",
-             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc_B_sai}^\\circ$. Phát biểu **Sai**. {giai_chung}"),
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc_B_sai}^\\circ$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
             (f"{{Góc $\\widehat{{ABC}}$ bằng ${goc1_f}^\\circ$}}",
-             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc1_f}^\\circ$. Phát biểu **Sai**. {giai_chung}"),
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc1_f}^\\circ$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
         # CÂU C: Khoảng cách từ A đến C
         ds_c = [
             (f"{{\\True Khoảng cách từ $A$ đến $C$ xấp xỉ ${b}$ km}}",
-             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km. Phát biểu **Đúng**. {giai_chung}"),
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Khoảng cách từ $A$ đến $C$ xấp xỉ ${a}$ km}}",
-             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {a}$ km. Phát biểu **Sai**. {giai_chung}"),
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {a}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
             (f"{{Khoảng cách từ $A$ đến $C$ xấp xỉ ${c}$ km}}",
-             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {c}$ km. Phát biểu **Sai**. {giai_chung}"),
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {c}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
         # CÂU D: Hướng đi từ A đến C
         ds_d = [
             (f"{{\\True Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng ${Huong_AC_str}$}}",
-             f"Hướng $AC$ là ${Huong_AC_str}$. Phát biểu **Đúng**. {giai_chung}"),
+             f"Hướng $AC$ là ${Huong_AC_str}$. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng ${Huong_AC_str_sai}$}}",
-             f"Hướng $AC$ là ${Huong_AC_str} \\ne {Huong_AC_str_sai}$. Phát biểu **Sai**. {giai_chung}"),
+             f"Hướng $AC$ là ${Huong_AC_str} \\ne {Huong_AC_str_sai}$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
             (f"{{Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng $N {goc1_f}^\\circ E$}}",
-             f"Hướng $AC$ là ${Huong_AC_str} \\ne N {goc1_f}^\\circ E$. Phát biểu **Sai**. {giai_chung}"),
+             f"Hướng $AC$ là ${Huong_AC_str} \\ne N {goc1_f}^\\circ E$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
         # Sắp xếp lại theo thứ tự: a, b, c (khoảng cách), d (hướng)

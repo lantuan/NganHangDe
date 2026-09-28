@@ -160,13 +160,20 @@ def trich_dap_an_tf(latex_block: str) -> dict | None:
 
 
 def _xoa_khoi_dap_an_an(text: str, ten_lenh: str) -> str:
-    r"""Thay moi khoi `ten_lenh[..]{..}` (vd \SA[4]{..}, \shortans{..})
-    con SOT LAI trong de bai bang cho trong "......" - truong hop nhieu y
+    r"""XOA moi khoi `ten_lenh[..]{..}` (vd \SA[4]{..}, \shortans{..})
+    con SOT LAI trong de bai - truong hop nhieu y
     ngan nam long trong 1 \begin{listEX}...\end{listEX} (xem
     TL_answer_const/TL_answer_text trong data/python_bank/math_type.py),
     khac voi truong hop 1 \shortans duy nhat lam dap an ca cau (truong
     hop do da bi cat truoc boi _MOC_BAT_DAU_DAP_AN, khong con toi day).
-    Tranh lo dap an ra man hinh truoc khi hoc sinh nop bai."""
+    Tranh lo dap an ra man hinh truoc khi hoc sinh nop bai.
+
+    SUA 29/09/2026 - co Lan chot: truoc day thay bang chuoi "......" cho
+    giong o dien dap an trong file PDF. Nhung tren web cau tu luan hoc
+    sinh lam ra GIAY, khong go vao dau ca, nen day cham chi lam de bai
+    roi rac: "Tinh so do goc ACB. ...... - Tinh khoang cach ...".
+    Nay xoa han; moi y van xuong dong rieng vi \begin{listEX} da duoc
+    doi thanh danh sach HTML (xem xuLyDanhSach trong lam_bai.html)."""
     ket_qua = []
     pattern = re.compile(re.escape(ten_lenh) + r"(?![A-Za-z])(?:\[[^\]]*\])?")
     i = 0
@@ -186,7 +193,7 @@ def _xoa_khoi_dap_an_an(text: str, ten_lenh: str) -> str:
             i = vi_tri
             continue
         _, i = _tim_khoi_dong(text, vi_tri)
-        ket_qua.append("......")
+        # KHONG chen gi ca - xem ghi chu o dau ham.
     return "".join(ket_qua)
 
 

@@ -112,7 +112,7 @@ def L10_C2_B3_NB022_MC_A_01(socau, dang=1):
 
         # Lời giải
         giai = f"""
-        Một bất phương trình bậc nhất hai ẩn có dạng $a x + b y {dau} c$ với $a,b$ không đồng thời bằng 0.\\
+        Một bất phương trình bậc nhất hai ẩn có dạng $a x + b y {dau} c$ với $a,b$ không đồng thời bằng 0.\\\\
         Trong các phương án, chỉ có bất phương trình:
         \\[{latex(fx[0]*x + fx[1]*y)} {dau} {fx[2]}\\]
         là bất phương trình bậc nhất hai ẩn, vì mỗi ẩn chỉ có số mũ 1.
@@ -310,8 +310,8 @@ def L10_C2_B3_NB022_MC_A_02(socau, dang=1):
         debai = "Bất phương trình nào sau đây là bất phương trình bậc nhất hai ẩn?"
 
         giai = f"""
-        Bất phương trình bậc nhất hai ẩn có dạng tổng quát là $a x + b y {dau} c$ (hoặc với các dấu $<, \\le, \\ge$), trong đó $a,b$ không đồng thời bằng $0$.\\
-        * Xét các phương án nhiễu: chứa các số hạng bậc hai $x^2, y^2$, tích $x \\cdot y$, hoặc bậc ba ${latex(bien_ngau_nhien ** 3)}$ nên không phải bậc nhất hai ẩn.\\
+        Bất phương trình bậc nhất hai ẩn có dạng tổng quát là $a x + b y {dau} c$ (hoặc với các dấu $<, \\le, \\ge$), trong đó $a,b$ không đồng thời bằng $0$.\\\\
+        * Xét các phương án nhiễu: chứa các số hạng bậc hai $x^2, y^2$, tích $x \\cdot y$, hoặc bậc ba ${latex(bien_ngau_nhien ** 3)}$ nên không phải bậc nhất hai ẩn.\\\\
         * Phương án đúng: ${latex(fx[0] * x + fx[1] * y)} {dau} {fx[2]}$ là bất phương trình bậc nhất hai ẩn vì hai ẩn $x, y$ đều có bậc bằng $1$.
         """
 
@@ -460,7 +460,7 @@ def L10_C2_B3_NB023_MC_A_01(socau, dang=1):
             Thay tọa độ của $P$ vào vế trái của BPT, ta được:
             $$F({diem_dung[0]}; {diem_dung[1]}) = {a}({diem_dung[0]}) + {b}({diem_dung[1]}) + {c} = {F(diem_dung[0], diem_dung[1])}$$
 
-            Vì ${F(diem_dung[0], diem_dung[1])} {dau} 0$ là mệnh đề **ĐÚNG**, nên điểm $P({diem_dung[0]}; {diem_dung[1]})$ thuộc miền nghiệm của bất phương trình.
+            Vì ${F(diem_dung[0], diem_dung[1])} {dau} 0$ là mệnh đề \\textbf{{ĐÚNG}}, nên điểm $P({diem_dung[0]}; {diem_dung[1]})$ thuộc miền nghiệm của bất phương trình.
 
             (Các điểm còn lại không thỏa mãn bất phương trình.)
         """
@@ -726,8 +726,8 @@ def L10_C2_B3_TH024_MC_A_01(socau, dang=1):
             Bất phương trình đã cho là $${latex(AB[0] * x + AB[1] * y)} {dau} {c}$$
             Bước 1: Vẽ đường thẳng $d: {latex(AB[0] * x + AB[1] * y)} = {c}$.
             \\begin{{itemize}}
-                \\item Nếu dấu bất phương trình là $>$ hoặc $<$, ta vẽ $d$ bằng **nét đứt**.
-                \\item Nếu dấu bất phương trình là $\\ge$ hoặc $\\le$, ta vẽ $d$ bằng **nét liền**.
+                \\item Nếu dấu bất phương trình là $>$ hoặc $<$, ta vẽ $d$ bằng \\textbf{{nét đứt}}.
+                \\item Nếu dấu bất phương trình là $\\ge$ hoặc $\\le$, ta vẽ $d$ bằng \\textbf{{nét liền}}.
             \\end{{itemize}}
             Bước 2: Xét điểm $O(0;0)$.
             Thay $x=0, y=0$ vào vế trái của bất phương trình, ta được: $VT = {AB[0]}(0) + {AB[1]}(0) = 0$.
@@ -1052,10 +1052,10 @@ def L10_C2_B3_TH024_MC_A_02(socau, dang=1):
         debai = f"Hình nào dưới đây biểu diễn miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$?"
 
         giai = f"""
-        Để xác định miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$:\\
-        1. Vẽ đường thẳng d: ${latex(AB[0] * x + AB[1] * y)} = {c}$.\\
-        2. Chọn điểm gốc tọa độ $O(0;0)$, ta thấy giá trị vế trái tại $O$ là $0$.\\
-        3. So sánh kết quả để xác định nửa mặt phẳng bị gạch bỏ (không thuộc miền nghiệm).\\
+        Để xác định miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$:\\\\
+        1. Vẽ đường thẳng d: ${latex(AB[0] * x + AB[1] * y)} = {c}$.\\\\
+        2. Chọn điểm gốc tọa độ $O(0;0)$, ta thấy giá trị vế trái tại $O$ là $0$.\\\\
+        3. So sánh kết quả để xác định nửa mặt phẳng bị gạch bỏ (không thuộc miền nghiệm).\\\\
         Hình đúng biểu diễn chính xác phần miền nghiệm được giữ lại (không gạch chéo) phù hợp với dấu của bất phương trình.
         """
 
@@ -1452,9 +1452,9 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
         debai = "Hình bên là biểu diễn miền nghiệm của hệ bất phương trình nào sau đây?"
 
         giai = f"""
-        Dựa vào hình vẽ ta thấy miền nghiệm được giới hạn bởi hai đường thẳng:\\
-        $d_1: {latex(AB[0] * x + AB[1] * y)} = {c}$ và $d_2: {latex(BC[0] * x + BC[1] * y)} = {d}$.\\
-        Thử nghiệm với tọa độ điểm không bị gạch hoặc điểm gốc tọa độ $O(0;0)$, ta chọn được hệ bất phương trình tương ứng chính xác là:\\
+        Dựa vào hình vẽ ta thấy miền nghiệm được giới hạn bởi hai đường thẳng:\\\\
+        $d_1: {latex(AB[0] * x + AB[1] * y)} = {c}$ và $d_2: {latex(BC[0] * x + BC[1] * y)} = {d}$.\\\\
+        Thử nghiệm với tọa độ điểm không bị gạch hoặc điểm gốc tọa độ $O(0;0)$, ta chọn được hệ bất phương trình tương ứng chính xác là:\\\\
         $\\heva{{& {latex(AB[0] * x + AB[1] * y)} {dau1} {c} \\\\& {latex(BC[0] * x + BC[1] * y)} {dau2} {d}}}$.
         """
 
@@ -1576,15 +1576,18 @@ def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
         dsnhieu = [Mien_list[0], Mien_list[1], Mien_list[2]]
 
         giai = f"""
-        Hệ bất phương trình gồm:\\
-        * Các bất phương trình ${fx} \\le x \\le {gx}$ và ${hx} \\le y \\le {kx}$ xác định miền nghiệm là một hình chữ nhật giới hạn bởi các đường biên.\\
-        * Bất phương trình còn lại ${latex(VT_MN)} {dau} {VP_MN}$ là một nửa mặt phẳng bờ là đường thẳng $MN$ cắt hình chữ nhật trên.\\
-        Giao của hai miền nghiệm này cắt bớt một phần góc của hình chữ nhật, tạo thành một đa giác lồi.\\
-        Dựa vào số đỉnh nằm trong miền thỏa mãn, ta xác định được miền nghiệm là **{mien.lower()}**.
+        Hệ bất phương trình gồm:\\\\
+        * Các bất phương trình ${fx} \\le x \\le {gx}$ và ${hx} \\le y \\le {kx}$ xác định miền nghiệm là một hình chữ nhật giới hạn bởi các đường biên.\\\\
+        * Bất phương trình còn lại ${latex(VT_MN)} {dau} {VP_MN}$ là một nửa mặt phẳng bờ là đường thẳng $MN$ cắt hình chữ nhật trên.\\\\
+        Giao của hai miền nghiệm này cắt bớt một phần góc của hình chữ nhật, tạo thành một đa giác lồi.\\\\
+        Dựa vào số đỉnh nằm trong miền thỏa mãn, ta xác định được miền nghiệm là \\textbf{{{mien.lower()}}}.
         """
 
-        # Sử dụng MC_SA_answer_const với (0, 0) vì đáp án là dạng text thuần túy không chứa công thức phức tạp
-        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+        # PHAI dung MC_SA_answer_text: dap an la CHU tieng Viet.
+        # MC_SA_answer_const boc moi phuong an trong $...$, nen
+        # "Mien ngu giac" bi doc nhu cong thuc -> mat het dau cach va in
+        # nghieng: "Mienngugiac". Co Lan bat duoc tren web 29/09/2026.
+        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
 
     return cauTN
 
@@ -1850,7 +1853,7 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
         max_F_giai = max([F_A, F_B, F_C, F_D])
 
         giai = f"""
-            Miền nghiệm $D$ của hệ bất phương trình là miền tứ giác lồi $ABDC$ (được giới hạn bởi 4 cạnh $x = {fx}, x = {gx}, {latex(VT_BD)} = {VP_BD}, {latex(VT_CA)} = {VP_CA}$), với tọa độ các đỉnh là:\\
+            Miền nghiệm $D$ của hệ bất phương trình là miền tứ giác lồi $ABDC$ (được giới hạn bởi 4 cạnh $x = {fx}, x = {gx}, {latex(VT_BD)} = {VP_BD}, {latex(VT_CA)} = {VP_CA}$), với tọa độ các đỉnh là:\\\\
             \\begin{{itemize}}
                 \\item $A({A[0]}; {A[1]})$
                 \\item $B({B[0]}; {B[1]})$
@@ -1858,7 +1861,7 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
                 \\item $C({C[0]}; {C[1]})$
             \\end{{itemize}}
 
-            Giá trị của hàm mục tiêu $F(x;y) = {F_expr}$ tại các đỉnh là:\\
+            Giá trị của hàm mục tiêu $F(x;y) = {F_expr}$ tại các đỉnh là:\\\\
             \\begin{{itemize}}
                 \\item $F(A) = {H0} \\cdot {A[0]} + {H1} \\cdot {A[1]} = {F_A}$
                 \\item $F(B) = {H0} \\cdot {B[0]} + {H1} \\cdot {B[1]} = {F_B}$
@@ -1866,7 +1869,7 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
                 \\item $F(C) = {H0} \\cdot {C[0]} + {H1} \\cdot {C[1]} = {F_C}$
             \\end{{itemize}}
 
-            Áp dụng định lý về giá trị lớn nhất/nhỏ nhất của hàm mục tiêu trên miền nghiệm giới hạn, ta có:\\
+            Áp dụng định lý về giá trị lớn nhất/nhỏ nhất của hàm mục tiêu trên miền nghiệm giới hạn, ta có:\\\\
             $$\\min F = {min_F_giai} \\quad \\text{{và}} \\quad \\max F = {max_F_giai}$$
 
             Theo yêu cầu đề bài ({GiaTri}):
