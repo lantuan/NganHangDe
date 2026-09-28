@@ -6634,3 +6634,87 @@ deu co mat.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.07 - 2026-09-28
+
+## Chuong 6 (Ham so, do thi va ung dung): tu 0 len 34/34 dang co ham
+
+Tep LopXChuong6.py cua co Lan o FORM CU va co 13 ham. Da viet lai toan
+bo cho dung khuon math_type - math_type.py GIU NGUYEN.
+
+    Bai 15  Ham so                          11 dang
+    Bai 16  Ham so bac hai                    9 dang
+    Bai 17  Dau cua tam thuc bac hai          8 dang
+    Bai 18  Phuong trinh quy ve bac hai        4 dang
+    Dung/Sai                                   2 dang
+
+Trong do 3 dang la bo sung vi bo chon cau can ma Mapping chua khai (de
+mat 16/96 cau): VD092_SA_A, VD098_SA_A, VD103_SA_A.
+
+## Hai loi trong tep cua co - da sua khi chuyen
+
+1. K10_6_15_1_1 hoi "dai luong y nao LA ham so cua x" nhung dat \True
+   vao bang X1 - dung bang co chu thich "# KHONG phai ham so" (co mot
+   gia tri x lap lai). DAP AN DAT NHAM VAO PHUONG AN SAI. Nay
+   L10_C6_B15_NB089_MC_A dung bang co cac gia tri x DOI MOT KHAC NHAU
+   lam dap an, ba bang nhieu deu co mot gia tri x lap lai.
+
+2. K10_6_18_1_1 lay nghiem_hq[1] nen IndexError khi phuong trinh he qua
+   co it hon hai nghiem; va viet {$\True S = \varnothing$} - dat \True
+   BEN TRONG $...$ nen LaTeX hong. Nay sinh NGUOC tu nghiem (ham
+   _pt_hai_can va _pt_can_bang_nhi_thuc) nen luon biet truoc nghiem nao
+   nhan, nghiem nao loai; khong con phai giai roi do chi so.
+
+Rieng K10_6_15_1_2 (doc dong bien / nghich bien tu do thi) ghi cung ket
+luan theo dau cua mot he so ma khong doi chieu voi cac diem that, nen
+ket luan co the sai. Nay L10_C6_B15_TH090_MC_A sinh do thi gap khuc roi
+DOC CHIEU TU CHINH HAI DIEM dau mut cua doan.
+
+## Hinh ve - ve bang TikZ THUAN, khong dung tkz-tab
+
+Bang xet dau va bang bien thien deu ve bang TikZ thuan. Ly do: tkz-tab
+can tabvar.sty, may co Lan khong co goi nay (da gap khi dich PDF), con
+TikZ thuan thi chay o moi noi.
+
+Da XEM TAN MAT anh va sua hai cho:
+  - ban dau dat moc dau va moc cuoi DUNG TAI vien nen $-\infty$ chong
+    len khung; nay chua le hai ben;
+  - so 0 tai nghiem va gia tri cuc tri bi duong net dut gach ngang qua;
+    nay cho nen trang.
+
+## Da kiem chung the nao
+
+1. 34/34 dang chay tron 15/15 lan, khong loi.
+2. Kiem toan doc lap, khong tin cong thuc trong ham:
+   - 400 bo phuong trinh hai can: nghiem duoc bao deu THOA MAN that su,
+     nghiem bi loai deu that su vi pham dieu kien - 0 cho sai;
+   - 400 bo phuong trinh can = nhi thuc: 0 cho sai;
+   - 500 bo he so bac hai: hai nghiem dung, hoanh do dinh dung bang
+     trung binh cong hai nghiem va luon nguyen - 0 cho sai.
+3. De he so 1 chuong 6: 8/8 de du ma tran, 96/96 cau sinh duoc.
+4. 566 bai test qua, 8 bo qua (truoc: 543).
+
+## Mot loi CHINH BAI TEST DA BAT DUOC
+
+Lan chay test dau tien bao FAILED o test_ma_nguon_sach: docstring cua
+_hinh_bang_xet_dau quen tien to r nen "\\infty" thanh ky tu thoat hong
+'\\i' - Python 3.12 tren VPS bao SyntaxWarning. Da them tien to r cho
+moi docstring co dau gach cheo nguoc.
+
+Luu y cho lan sau: script sua hang loat cua minh ban dau qua tay, no
+them ca tien to r vao dong DONG docstring (dong chi co ba dau nhay), lam
+chu r lot vao trong van ban. Da ra soat va tra lai dung.
+
+## Hien trang toan lop 10
+
+    C1   37/37   xong        C6   34/34   xong
+    C2   15/15   xong        C7    0/37  (chua co nguon)
+    C3   53/53   xong        C8   30/30   xong
+    C4   46/46   xong        C9   27/27   xong
+    C5   48/48   xong
+
+Chi con chuong 7.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

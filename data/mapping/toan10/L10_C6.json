@@ -60,6 +60,13 @@
     "Dang": "Bài toán thực tiễn giải bằng hàm số"
   },
   {
+    "id": "L10_C6_B15_VD092_SA_A",
+    "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tiền cước theo hàm số bậc nhất trên từng khoảng",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C6_B16_NB096_MC_A",
     "content": "Nhận biết được các tính chất cơ bản của Parabola như đỉnh, trục đối xứng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -108,6 +115,13 @@
     "Dang": "Bài toán thực tiễn về hàm số bậc hai"
   },
   {
+    "id": "L10_C6_B16_VD098_SA_A",
+    "content": "Vận dụng được hàm số bậc hai và đồ thị vào giải quyết một số bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chiều cao cổng parabol tại một vị trí",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C6_B17_NB099_MC_A",
     "content": "Nhận biết được tam thức bậc hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -148,6 +162,13 @@
     "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn về chiều cao, khoảng cách"
+  },
+  {
+    "id": "L10_C6_B17_VD103_SA_A",
+    "content": "Vận dụng được bất phương trình bậc hai một ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng thời gian vật ở trên một độ cao cho trước",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C6_B18_TH104_MC_A",
