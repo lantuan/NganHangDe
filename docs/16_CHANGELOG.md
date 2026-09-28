@@ -6829,3 +6829,120 @@ tests/test_du_cau_he_so_1.py.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.09 - 2026-09-28
+
+Trang thai: DA KIEM CHUNG
+
+## Vi sao co ban nay
+
+Co Lan tao de he so 1 chuong 3 tren web (tai khoan hoc sinh), mo trang
+"Lam bai truc tiep" roi doi chieu voi file PDF tai ve, thay BON cho sai.
+Da truy ra tan goc tung cai.
+
+## 1. De chi ra 3 cau, thieu han phan Tra loi ngan - VPS CHAY CODE CU
+
+KHONG PHAI loi cua ban code hien tai. Chay lai dung yeu cau do tren may
+co Lan: ra DU 12 cau (6 TN, 1 DS, 2 TLN, 3 TL).
+
+Bung ban code TRUOC cac ban sua 28/09 (commit 01bd144^) ra chay thu:
+
+    seed 0 -> 3 cau  {TN 1, DS 1, TLN 0, TL 1}   <- khop y het PDF co gui
+    seed 1 -> 5 cau  {TN 1, DS 1, TLN 1, TL 2}
+    seed 4 -> 4 cau  {TN 1, DS 1, TLN 1, TL 1}
+    seed 5 -> 3 cau  {TN 1, DS 1, TLN 0, TL 1}
+
+Vay VPS chua keo ve cac ban sua: 01bd144 (buoc chia cau lam mat cau
+lang le), b21241f (de he so 1 chay het chuong), 98f9776 (bon loi he so
+2). Cach chua: chay "day web" (khong phai "day") - xem docs/14.
+
+GHI NHO: day  = day len GitHub.
+         day web = day len GitHub + ssh VPS git pull + restart dich vu.
+
+## 2. PDF ghi "PHAN III" cho tu luan, web ghi "PHAN IV" - DA SUA
+
+_ghep_4_phan (exam_assembler_service) don so La Ma lien tuc: phan nao
+rong thi khong chiem so. De thieu Tra loi ngan nen tu luan tut tu IV
+xuong III. Trong khi trang web dung bang TEN_PHAN (gia_su_service) gan
+so CO DINH theo loai cau -> hai ben goi ten khac nhau cho CUNG mot cau.
+
+Co Lan chot: so La Ma GAN CHET vao loai cau, dung khuon de cua Bo
+(QD 764/QD-BGDDT):
+
+    PHAN I   Trac nghiem nhieu phuong an
+    PHAN II  Dung/Sai
+    PHAN III Tra loi ngan
+    PHAN IV  Tu luan
+
+Phan nao khong co cau nao thi bo han, nhung KHONG don so cua phan sau
+len. CAC_PHAN_DE nay giu luon so La Ma, bo bien SO_LA_MA.
+
+Da doi luon bai test cu test_phan_rong_thi_bo_han_va_khong_nhay_so_la_ma
+- no dang khoa dung luat cu.
+
+## 3. Cau co hinh: PDF co hinh, web khong co gi - SAI DUONG DAN ANH
+
+app/routers/exam.py tra ve "hinh": ["/hinh/<ma>"], nhung router khai
+prefix="/api/exam" nen dia chi that la "/api/exam/hinh/<ma>". Trinh
+duyet goi "/hinh/..." -> 404.
+
+Vi hinh coi nhu "da dich duoc" (mang hinh khac rong) nen frontend KHONG
+hien dong nhac "cau nay co hinh, xem trong PDF" - hoc sinh chi thay o
+vuong dau hoi (icon anh hong cua Safari). Dung la cai o vuong trong anh
+chup man hinh co gui.
+
+Cau co hinh ma mat hinh la DOI LUON MUC DO cua cau (co Lan chot
+27/09/2026), nen them ca luoi an toan: <img onerror="baoHinhHong(this)">
+- anh tai khong duoc vi bat ki li do gi (sai duong dan, file bi don dep
+sau 1 ngay...) thi thay bang dong chu bao ro, khong de im lang nua.
+
+Da kiem: hinh con song/cu lao (L10_C3_B6_VD036_TL_B) dich ra anh binh
+thuong, file co that tren dia - chi la web goi sai dia chi.
+
+## 4. Trang lam bai khong ghi PHAN I/II/... - DA THEM
+
+Truoc day /api/exam/quiz/<de_id> chi tra so_thu_tu + loai_cau, va
+lam_bai.html chi in "Cau 1, Cau 2, ... Cau 12" lien mach. Nay:
+
+- API them ba truong: ma_phan, ten_phan, so_trong_phan.
+- Trang lam bai in tieu de phan moi khi sang phan moi, va danh so cau
+  LAI TU 1 trong moi phan - y het file PDF (co Lan chot), de hoc sinh
+  cam de giay doi chieu voi man hinh la khop tung cau.
+- Man hinh ket qua va bang chon cau cua Gia su AI cung danh so kieu do.
+
+QUAN TRONG: so_thu_tu (1 mach) VAN la khoa nop bai / cham diem / hoi
+gia su. Chi doi so HIEN THI. Neu doi ca khoa thi hai cau khac phan se
+trung ten o input (cau_1 cua phan I va cau_1 cua phan II).
+
+De cu sinh truoc ban sua nay khong co so_trong_phan -> frontend tu lui
+ve so_thu_tu, khong vo.
+
+## Da kiem chung the nao
+
+1. Them tests/test_trang_lam_bai.py (10 bai) khoa ca bon cho:
+   - so La Ma trong PDF phai TRUNG KHOP voi bang TEN_PHAN cua web;
+   - phan rong khong keo so cua phan sau tut xuong;
+   - URL anh hinh ve phai dung dia chi that cua route (so voi bang
+     dinh tuyen cua FastAPI, khong phai so voi chuoi viet tay);
+   - trang lam bai co in tieu de phan va co danh so theo phan;
+   - khoa nop bai van la so_thu_tu.
+2. Kiem tra NGUOC: dung lai hanh vi cu -> bai test do that su bao sai.
+   (Bai test URL anh cung da bao sai mot lan khi viet nham prefix.)
+3. Chay that ca luong tren may co Lan: sinh de he so 1 chuong 3 ->
+   12 cau, dung ten phan, danh so 1..6 / 1 / 1..2 / 1..3, URL anh
+   /api/exam/hinh/<ma> va file anh co that tren dia.
+4. 627 bai test qua, 8 bo qua (truoc: 616).
+
+## Con lai, chua sua (cho co Lan quyet)
+
+Cau tu luan tren web hien in de bai lien mot mach:
+"- Tinh so do goc ACB. ...... - Tinh khoang cach tu A den goc cay C."
+trong khi PDF in thanh hai y danh so 1, 2 kem o KQ. Do la do
+listEX/\\SA trong LaTeX bi ep phang khi doi sang HTML. Sua duoc, nhung
+la doi cach hien thi nen doi co Lan chot.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

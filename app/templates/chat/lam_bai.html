@@ -75,6 +75,10 @@
         }
 
         .cau-hoi-so { font-weight: 700; color: var(--color-primary); margin-bottom: 8px; }
+        .tieu-de-phan {
+            font-weight: 700; font-size: 17px; margin: 22px 0 10px;
+            padding-bottom: 6px; border-bottom: 2px solid var(--color-primary);
+        }
         .cau-hoi-debai { margin-bottom: 14px; line-height: 1.6; }
 
         .lua-chon {
@@ -314,9 +318,38 @@ async function taiDe() {
     }
 }
 
+// So cau de HIEN THI: danh lai tu 1 trong moi phan, y het file PDF
+// (co Lan chot 28/09/2026). Con cau.so_thu_tu la so 1 mach dung lam
+// khoa nop bai / cham diem / hoi gia su - tuyet doi khong doi.
+// De cu sinh truoc ban sua nay khong co so_trong_phan -> lui ve so cu.
+function soHienThi(cau) {
+    return (cau && cau.so_trong_phan) ? cau.so_trong_phan : (cau ? cau.so_thu_tu : '');
+}
+
+// Anh hinh ve tai khong duoc (sai duong dan, file bi don dep...) thi
+// PHAI noi ro cho hoc sinh, dung de tro anh hong im lang - cau co hinh
+// ma mat hinh la doi luon muc do cua cau, em ay se lam sai ma khong
+// hieu vi sao. Loi that da gap: API tra "/hinh/<ma>" trong khi dia chi
+// that la "/api/exam/hinh/<ma>" -> Safari chi hien o vuong dau hoi.
+function baoHinhHong(img) {
+    const o = img.parentNode;
+    if (!o) return;
+    o.innerHTML = '<div class="ghi-chu-hinh">📎 Câu này có hình vẽ nhưng web '
+        + 'chưa tải được — em xem hình trong file PDF đề nhé!</div>';
+}
+
+// Tra cuu phan cua mot cau theo so_thu_tu (dung cho man hinh ket qua,
+// vi API cham diem chi tra ve so_thu_tu).
+function timCau(soThuTu) {
+    for (let i = 0; i < DANH_SACH_CAU.length; i++) {
+        if (DANH_SACH_CAU[i].so_thu_tu === soThuTu) return DANH_SACH_CAU[i];
+    }
+    return null;
+}
+
 function veMotCau(cau) {
     let noiDung = '<div class="cau-hoi">';
-    noiDung += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + '</div>';
+    noiDung += '<div class="cau-hoi-so">Câu ' + soHienThi(cau) + '</div>';
     noiDung += '<div class="cau-hoi-debai">' + renderLatexText(cau.de_bai) + '</div>';
 
     // Hinh ve da duoc dich san ra anh luc sinh de (xem hinh_ve_service.py).
@@ -324,7 +357,7 @@ function veMotCau(cau) {
     const coAnh = cau.hinh && cau.hinh.length > 0;
     if (coAnh) {
         cau.hinh.forEach(function (duong) {
-            noiDung += '<div class="hinh-ve"><img src="' + duong + '" alt="Hình vẽ của câu ' + cau.so_thu_tu + '" loading="lazy"></div>';
+            noiDung += '<div class="hinh-ve"><img src="' + duong + '" alt="Hình vẽ của câu ' + soHienThi(cau) + '" loading="lazy" onerror="baoHinhHong(this)"></div>';
         });
     }
 
@@ -358,7 +391,17 @@ function veMotCau(cau) {
 function veTrangLamBai() {
     const main = document.getElementById('main');
     let html = '';
-    DANH_SACH_CAU.forEach(function (cau) { html += veMotCau(cau); });
+    // In tieu de "PHAN I/II/III/IV" moi khi sang phan moi, giong het file
+    // PDF. Truoc day trang nay chi in "Cau 1, Cau 2..." lien mach nen hoc
+    // sinh khong biet cau nao thuoc phan nao, cach cham diem cung khac.
+    let phanDangVe = null;
+    DANH_SACH_CAU.forEach(function (cau) {
+        if (cau.ten_phan && cau.ma_phan !== phanDangVe) {
+            phanDangVe = cau.ma_phan;
+            html += '<div class="tieu-de-phan">' + cau.ten_phan + '</div>';
+        }
+        html += veMotCau(cau);
+    });
 
     const coTuLuan = DANH_SACH_CAU.some(function (cau) {
         const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length);
@@ -585,9 +628,15 @@ function veKetQua(ketQua) {
     html += '<div style="color:#64748b;font-size:14px;margin-top:8px;">' + (ketQua.ghi_chu || '') + '</div>';
     html += '</div>';
 
+    let phanDangVe = null;
     ketQua.chi_tiet.forEach(function (cau) {
+        const goc = timCau(cau.so_thu_tu);
+        if (goc && goc.ten_phan && goc.ma_phan !== phanDangVe) {
+            phanDangVe = goc.ma_phan;
+            html += '<div class="tieu-de-phan">' + goc.ten_phan + '</div>';
+        }
         html += '<div class="cau-hoi">';
-        html += '<div class="cau-hoi-so">Câu ' + cau.so_thu_tu + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + '</div>';
+        html += '<div class="cau-hoi-so">Câu ' + soHienThi(goc || cau) + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + '</div>';
         if (cau.loai_cau === 'TF') {
             const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
             html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc +
@@ -708,7 +757,7 @@ function xayHtmlTomTatKetQua(ketQua) {
         '</p>';
     html += '<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;font-size:14px;">';
     (ketQua.chi_tiet || []).forEach(function (cau) {
-        let dong = '<strong>Câu ' + cau.so_thu_tu + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + ':</strong> ';
+        let dong = '<strong>Câu ' + soHienThi(timCau(cau.so_thu_tu) || cau) + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + ':</strong> ';
         if (cau.loai_cau === 'TF') {
             dong += (cau.so_y_dung === 4 ? '✅' : '⚠️') +
                 ' đúng ' + cau.so_y_dung + '/4 ý (' + cau.diem_dat_duoc + ' điểm)';

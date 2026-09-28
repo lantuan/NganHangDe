@@ -98,17 +98,26 @@ def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None) -> str:
 # in ra la dung duoc ngay, khong phai tu chen tieu de tung phan.
 # ---------------------------------------------------------------------
 
-# Thu tu 4 phan + cach ghi loi dan. {n} la so cau cua phan do.
+# Thu tu 4 phan + so La Ma + cach ghi loi dan. {n} la so cau cua phan do.
+#
+# SO LA MA GAN CHET VAO LOAI CAU (co Lan chot 28/09/2026): Trac nghiem
+# luon la PHAN I, Dung/Sai luon PHAN II, Tra loi ngan luon PHAN III, Tu
+# luan luon PHAN IV - dung khuon de cua Bo (QD 764/QD-BGDDT). Phan nao
+# khong co cau nao thi bo han, nhung KHONG don so cua cac phan sau len.
+#
+# Vi sao doi: ban cu don so lien tuc, nen de thieu phan Tra loi ngan thi
+# tu luan in ra "PHAN III" trong khi trang lam bai tren web (bang TEN_PHAN
+# trong gia_su_service.py) van goi no la "PHAN IV" - hoc sinh cam de giay
+# doi chieu voi man hinh thi lech nhau. Nay hai ben dung chung mot chuan.
 CAC_PHAN_DE = [
-    ("MC", "Thí sinh trả lời từ câu 1 đến câu {n}. Mỗi câu hỏi thí sinh "
-           "chỉ chọn một phương án."),
-    ("TF", "Thí sinh trả lời từ câu 1 đến câu {n}. Trong mỗi ý "
-           "\\textbf{{a), b), c), d)}} ở mỗi câu, thí sinh chọn đúng hoặc sai."),
-    ("SA", "Thí sinh trả lời từ câu 1 đến câu {n}."),
-    ("TL", "Thí sinh trình bày tự luận từ bài 1 đến bài {n}."),
+    ("MC", "I", "Thí sinh trả lời từ câu 1 đến câu {n}. Mỗi câu hỏi thí sinh "
+                "chỉ chọn một phương án."),
+    ("TF", "II", "Thí sinh trả lời từ câu 1 đến câu {n}. Trong mỗi ý "
+                 "\\textbf{{a), b), c), d)}} ở mỗi câu, thí sinh chọn đúng "
+                 "hoặc sai."),
+    ("SA", "III", "Thí sinh trả lời từ câu 1 đến câu {n}."),
+    ("TL", "IV", "Thí sinh trình bày tự luận từ bài 1 đến bài {n}."),
 ]
-
-SO_LA_MA = ["I", "II", "III", "IV", "V", "VI"]
 
 
 def _loai_cau_cua(item: dict) -> str:
@@ -129,18 +138,16 @@ def _loai_cau_cua(item: dict) -> str:
 def _ghep_4_phan(theo_phan: dict[str, list[str]]) -> str:
     """
     Ghep cac khoi LaTeX da gom theo dang cau thanh than mot ma de, co
-    tieu de PHAN I/II/III/IV. Phan nao khong co cau nao thi BO HAN va
-    khong chiem so La Ma (de khong bi nhay coc "PHAN I" roi "PHAN III").
+    tieu de PHAN I/II/III/IV. So La Ma GAN CHET vao loai cau (xem
+    CAC_PHAN_DE): phan nao khong co cau nao thi bo han, nhung cac phan
+    con lai VAN GIU dung so cua minh.
     \\setcounter{ex}{0} truoc moi phan de moi phan danh so lai tu 1.
     """
     cac_khoi = []
-    thu_tu = 0
-    for ma_loai, loi_dan in CAC_PHAN_DE:
+    for ma_loai, so_la_ma, loi_dan in CAC_PHAN_DE:
         khoi_cau = theo_phan.get(ma_loai) or []
         if not khoi_cau:
             continue
-        so_la_ma = SO_LA_MA[thu_tu] if thu_tu < len(SO_LA_MA) else str(thu_tu + 1)
-        thu_tu += 1
         cac_khoi.append(
             "\\setcounter{ex}{0}\n"
             "\\noindent\\textbf{PHẦN " + so_la_ma + ".} "

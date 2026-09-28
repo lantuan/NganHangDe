@@ -44,14 +44,23 @@ def test_so_cau_trong_loi_dan_khop_thuc_te():
     assert "đến bài 3." in than           # 3 bai tu luan
 
 
-def test_phan_rong_thi_bo_han_va_khong_nhay_so_la_ma():
-    # Chi co trac nghiem va tu luan -> phai la PHAN I va PHAN II,
-    # KHONG duoc nhay thanh PHAN I roi PHAN IV.
+def test_phan_rong_thi_bo_han_nhung_so_La_Ma_GIU_NGUYEN():
+    """Số La Mã gắn chết vào LOẠI CÂU, phần rỗng không kéo số tụt xuống.
+
+    ĐỔI 28/09/2026 - cô Lan chốt. Bản cũ dồn số liên tục cho khỏi
+    "nhảy cóc". Nhưng cô Lan tạo đề hệ số 1 chương 3 (đề thiếu phần
+    Trả lời ngắn) rồi đối chiếu PDF với trang làm bài trên web thì
+    thấy cùng một câu tự luận mà PDF gọi là PHẦN III, web gọi là
+    PHẦN IV - vì web dùng bảng TEN_PHAN gán số cố định theo loại câu.
+    Nay cả hai nơi đều theo khuôn đề của Bộ (QĐ 764): Trắc nghiệm
+    luôn I, Đúng/Sai luôn II, Trả lời ngắn luôn III, Tự luận luôn IV.
+    """
     than = A._ghep_4_phan({"MC": [_cau("a")], "TL": [_cau("b")]})
     assert "PHẦN I." in than
-    assert "PHẦN II." in than
+    assert "PHẦN IV." in than
+    # Hai phan khong co cau nao thi bo han, khong in ra
+    assert "PHẦN II." not in than
     assert "PHẦN III." not in than
-    assert "PHẦN IV." not in than
 
 
 def test_loai_cau_suy_ra_dung_tu_generator_id():

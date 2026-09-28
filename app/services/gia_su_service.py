@@ -398,10 +398,16 @@ def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str) -> dict:
     for ma in THU_TU_PHAN:
         if not theo_phan[ma]:
             continue
+        # Danh so lai TU 1 trong moi phan, y het file PDF va trang lam bai
+        # (co Lan chot 28/09/2026). so_thu_tu van giu nguyen la so 1 mach -
+        # do la khoa gui len may chu khi hoc sinh bam hoi mot cau.
+        cau_sap_xep = sorted(theo_phan[ma], key=lambda c: c["so_thu_tu"])
+        for vi_tri, cau in enumerate(cau_sap_xep, start=1):
+            cau["so_trong_phan"] = vi_tri
         cac_phan.append({
             "ma": ma,
             "ten": TEN_PHAN[ma],
-            "cau": sorted(theo_phan[ma], key=lambda c: c["so_thu_tu"]),
+            "cau": cau_sap_xep,
         })
 
     blueprint = de.get("blueprint") or {}

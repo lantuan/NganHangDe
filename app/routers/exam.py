@@ -32,6 +32,9 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_tf,
 )
 from app.services.hinh_ve_service import duong_dan_anh
+# Ten 4 phan lay tu gia_su_service de CHI CO MOT nguon - PDF, trang lam
+# bai va bang chon cau cua gia su luon goi ten phan giong nhau.
+from app.services.gia_su_service import TEN_PHAN
 from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dang_co_ham
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
@@ -964,17 +967,42 @@ def xem_de_lam_bai_endpoint(de_id: str):
 
     danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
 
+    # Dem so cau da ra trong TUNG PHAN, de danh so lai tu 1 giong het
+    # file PDF (co Lan chot 28/09/2026). Truoc day web danh 1 mach
+    # 1..12 con PDF danh lai tu 1 moi phan -> hoc sinh cam de giay doi
+    # chieu voi man hinh thi khong khop cau nao voi cau nao.
+    #
+    # so_thu_tu VAN GIU nguyen la so 1 mach: day la khoa dung de nop bai,
+    # cham diem va hoi gia su. Chi them so_trong_phan de HIEN THI.
+    dem_trong_phan: dict[str, int] = {}
+
     danh_sach_cau_hoi = []
     for cau in danh_sach_dap_an:
         loai_cau = cau.get("loai_cau")
+        ma_phan = (loai_cau or "MC").upper()
+        if ma_phan not in TEN_PHAN:
+            ma_phan = "MC"
+        dem_trong_phan[ma_phan] = dem_trong_phan.get(ma_phan, 0) + 1
         muc = {
             "so_thu_tu": cau.get("so_thu_tu"),
             "loai_cau": loai_cau,
+            # Phan cua cau (PHAN I/II/III/IV theo khuon de cua Bo) va so
+            # thu tu CUA CAU TRONG PHAN do - de trang lam bai in tieu de
+            # phan va danh so cau y het file PDF.
+            "ma_phan": ma_phan,
+            "ten_phan": TEN_PHAN[ma_phan],
+            "so_trong_phan": dem_trong_phan[ma_phan],
             "de_bai": cau.get("de_bai") or "",
             "co_hinh_ve": bool(cau.get("co_hinh_ve")),
             # Duong dan anh hinh ve (neu da dich duoc). Con co_hinh_ve giu
             # lai de Frontend biet cau NAY CO hinh nhung chua dich duoc.
-            "hinh": ["/hinh/%s" % m for m in (cau.get("hinh") or [])],
+            #
+            # SUA 28/09/2026: truoc ghi "/hinh/<ma>" nhung router nay khai
+            # prefix="/api/exam" nen dia chi that la "/api/exam/hinh/<ma>".
+            # Trinh duyet goi "/hinh/..." -> 404, tren trang lam bai chi
+            # thay o vuong dau hoi (icon anh hong). Cau co hinh ma mat hinh
+            # la doi luon muc do cua cau.
+            "hinh": ["/api/exam/hinh/%s" % m for m in (cau.get("hinh") or [])],
         }
         if loai_cau == "MC":
             muc["phuong_an"] = cau.get("phuong_an") or {}

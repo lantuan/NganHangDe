@@ -728,9 +728,12 @@
                     let vi_sao = "";
                     if (!cau.da_lam) { vi_sao = ' title="Bạn chưa nộp bài câu này"'; }
                     else if (!cau.co_loi_giai) { vi_sao = ' title="Câu này chưa có lời giải mẫu"'; }
+                    // Hien so cau TRONG PHAN (giong PDF va trang lam bai),
+                    // nhung van gui so_thu_tu 1 mach cho may chu.
+                    const soHien = cau.so_trong_phan || cau.so_thu_tu;
                     html += '<button class="nut-cau"' + tat + vi_sao +
                         ' onclick="hoiCauTrongDeCu(' + cau.so_thu_tu + ')">' +
-                        cau.so_thu_tu + "</button>";
+                        soHien + "</button>";
                 });
                 html += "</div>";
             });
