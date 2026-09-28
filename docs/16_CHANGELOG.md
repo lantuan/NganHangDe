@@ -6110,3 +6110,60 @@ phuong an dung MOT chu so thap phan.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.01 - 2026-09-28
+
+## Chuong 9 da du ham cho MOI dang trong Mapping (23/27 -> 27/27)
+
+Bon dang con lai da duoc khai trong Mapping tu truoc nhung chua co ham:
+
+    L10_C9_B26_NB143_SA_A  So phan tu cua khong gian mau
+    L10_C9_B26_TH150_MC_A  Mo ta khong gian mau va bien co (dong xu, xuc xac)
+    L10_C9_B26_TH150_SA_A  So phan tu cua bien co
+    L10_C9_B27_TH152_SA_A  Xac suat cua bien co doi
+
+Deu la CLAUDE THEM 28/09/2026 - co Lan kiem tra lai noi dung.
+
+## Hai cho da phai sua
+
+### Cau TRA LOI NGAN van phai truyen ba phuong an nhieu
+
+Lan dau viet ba ham SA voi dsnhieu rong, chay 0/30 lan ra cau, bao
+NhieuTrungError. Doc lai math_type.py thay MC_SA_answer_text va
+MC_SA_answer_const goi _chon_ba_nhieu NGAY TU DAU, roi moi bo phan
+\choice di khi dang=2. Tuc la du cau tra loi ngan khong in phuong an
+nhieu, van phai truyen du ba cai. Da bo sung, dung _ba_nhieu9 de bao dam
+ba phuong an doi mot khac nhau.
+
+### Dap so cau tra loi ngan phai la so thap phan HUU HAN
+
+Cau xac suat bien co doi neu lay "gieo mot con xuc xac" thi dap so hay
+ra 5/6 = 0,8333... Cau tra loi ngan cham bang so khop dung chuoi nen hoc
+sinh lam dung van co the go ra so khac. Da doi sang "chon mot so nguyen
+duong khong vuot qua N, chia het cho k" va chi giu nhung cap (N; k) cho
+ket qua thap phan huu han.
+
+## Da kiem chung the nao
+
+1. Chay 30 lan moi dang: 30/30 ra cau, khong loi; cau trac nghiem dung
+   MOT dap an dung, cau tra loi ngan dung MOT \shortans.
+2. 450 bai test qua, 8 bo qua.
+
+## Hien trang toan lop 10 - so dang CO HAM tren tong so dang Mapping
+
+    C1   37/37   xong
+    C2   15/15   xong
+    C3   53/53   xong
+    C4    0/39
+    C5    0/41
+    C6    0/31
+    C7    0/37
+    C8    0/27
+    C9   27/27   xong
+
+Bon chuong 1, 2, 3, 9 deu ra duoc de he so 1 tron ven. Nam chuong
+4, 5, 6, 7, 8 CHUA CO MOT HAM NAO - moi chi co Curriculum va Mapping.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

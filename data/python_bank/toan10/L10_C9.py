@@ -1447,3 +1447,219 @@ def L10_C9_B27_TH151_MC_A_01(socau, dang=1):
                              buoc=lambda k: _phan_so(thuan_loi + 2 + k, 36))
         ket_qua += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
     return ket_qua
+
+
+# ==========================================================
+# Bốn dạng còn thiếu hàm của chương 9 (Mapping đã khai từ trước).
+# CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+# ==========================================================
+
+def _so_tp(x, n=2):
+    """Số thập phân theo cách viết Việt Nam (dấu phẩy), bỏ đuôi 0 thừa."""
+    s = ("%%.%df" % n) % float(x)
+    if "." in s:
+        s = s.rstrip("0").rstrip(".")
+    return s.replace(".", ",")
+
+
+def L10_C9_B26_NB143_SA_A_01(socau):
+    """Số phần tử của không gian mẫu.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    PHEP_THU = [
+        ("Tung một đồng xu liên tiếp {n_chu} lần", lambda n: 2 ** n,
+         [2, 3, 4, 5],
+         r"Mỗi lần tung có $2$ kết quả (sấp hoặc ngửa). Tung {n_chu} lần nên "
+         r"$n(\Omega) = 2^{{{n}}} = {kq}$."),
+        ("Gieo một con xúc xắc cân đối {n_chu} lần", lambda n: 6 ** n,
+         [1, 2],
+         r"Mỗi lần gieo có $6$ kết quả. Gieo {n_chu} lần nên "
+         r"$n(\Omega) = 6^{{{n}}} = {kq}$."),
+    ]
+    gt = []
+    while len(gt) < socau:
+        i = random.randrange(len(PHEP_THU))
+        n = random.choice(PHEP_THU[i][2])
+        if (i, n) not in gt:
+            gt.append((i, n))
+
+    cau = ""
+    for i, n in gt:
+        mau, tinh, _ds, mau_giai = PHEP_THU[i]
+        kq = tinh(n)
+        n_chu = num2words(n, lang="vi")
+        debai = (mau.format(n_chu=n_chu) +
+                 r" và quan sát kết quả. Số phần tử của không gian mẫu "
+                 r"$n(\Omega)$ bằng bao nhiêu?")
+        giai = mau_giai.format(n_chu=n_chu, n=n, kq=kq)
+        # math_type luôn dựng bốn phương án rồi mới bỏ đi khi dang=2, nên
+        # câu trả lời ngắn vẫn phải truyền đủ ba phương án nhiễu.
+        nhieu = _ba_nhieu9(kq, [kq * 2, kq // 2, kq + n, kq - n],
+                           buoc=lambda t: kq + 10 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C9_B26_TH150_MC_A_01(socau, dang=1):
+    r"""Mô tả không gian mẫu và biến cố khi tung đồng xu, gieo xúc xắc.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Phương án nhiễu là các TẬP HỢP khác của cùng phép thử, nên chắc chắn
+    chỉ có một phương án đúng.
+    """
+    DONG_XU = {
+        "Kết quả hai lần tung giống nhau": r"\{SS;\ NN\}",
+        "Kết quả hai lần tung khác nhau": r"\{SN;\ NS\}",
+        "Có ít nhất một lần xuất hiện mặt ngửa": r"\{SN;\ NS;\ NN\}",
+        "Lần tung thứ nhất xuất hiện mặt sấp": r"\{SS;\ SN\}",
+    }
+    XUC_XAC = {
+        "Số chấm xuất hiện là số nguyên tố": r"\{2;\ 3;\ 5\}",
+        "Số chấm xuất hiện là số chẵn": r"\{2;\ 4;\ 6\}",
+        "Số chấm xuất hiện lớn hơn $4$": r"\{5;\ 6\}",
+        "Số chấm xuất hiện là ước của $6$": r"\{1;\ 2;\ 3;\ 6\}",
+    }
+
+    gt = []
+    while len(gt) < socau:
+        loai = random.choice(["xu", "xx"])
+        bang = DONG_XU if loai == "xu" else XUC_XAC
+        mo_ta = random.choice(list(bang.keys()))
+        if (loai, mo_ta) not in gt:
+            gt.append((loai, mo_ta))
+
+    cauTN = ""
+    for loai, mo_ta in gt:
+        bang = DONG_XU if loai == "xu" else XUC_XAC
+        dung = "$A = %s$" % bang[mo_ta]
+        nhieu = ["$A = %s$" % v for k, v in bang.items() if k != mo_ta]
+
+        if loai == "xu":
+            debai = (r"Tung một đồng xu liên tiếp hai lần, kí hiệu $S$ là mặt "
+                     r"sấp và $N$ là mặt ngửa. Không gian mẫu là "
+                     r"$\Omega = \{SS;\ SN;\ NS;\ NN\}$. Gọi $A$ là biến cố "
+                     r"``%s''. Khẳng định nào sau đây \textbf{đúng}?" % mo_ta)
+            giai = (r"Liệt kê các kết quả của $\Omega = \{SS;\ SN;\ NS;\ NN\}$ "
+                    r"thoả mãn ``%s'', ta được" % mo_ta)
+            nhieu.append(r"$A = \{SS;\ SN;\ NS;\ NN\}$")
+        else:
+            debai = (r"Gieo một con xúc xắc cân đối và đồng chất, quan sát số "
+                     r"chấm xuất hiện. Không gian mẫu là "
+                     r"$\Omega = \{1;\ 2;\ 3;\ 4;\ 5;\ 6\}$. Gọi $A$ là biến "
+                     r"cố ``%s''. Khẳng định nào sau đây \textbf{đúng}?" % mo_ta)
+            giai = (r"Xét từng phần tử của $\Omega = \{1;\ 2;\ 3;\ 4;\ 5;\ 6\}$ "
+                    r"xem có thoả mãn ``%s'' hay không, ta được" % mo_ta)
+            nhieu.append(r"$A = \{1;\ 2;\ 3;\ 4;\ 5;\ 6\}$")
+
+        giai = giai + "\\\\\n" + dung + "."
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C9_B26_TH150_SA_A_01(socau):
+    r"""Số phần tử của biến cố.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Gieo hai con xúc xắc nên $n(\Omega) = 36$; học sinh phải đếm được số
+    cặp $(a; b)$ thoả mãn điều kiện - đúng mức Thông hiểu.
+    """
+    DIEU_KIEN = [
+        ("Tổng số chấm trên hai con xúc xắc bằng $%d$",
+         lambda s: lambda a, b: a + b == s, [5, 6, 7, 8, 9]),
+        ("Tổng số chấm trên hai con xúc xắc là số chia hết cho $%d$",
+         lambda k: lambda a, b: (a + b) % k == 0, [3, 4, 5]),
+        ("Số chấm trên hai con xúc xắc hơn kém nhau $%d$ đơn vị",
+         lambda d: lambda a, b: abs(a - b) == d, [1, 2, 3]),
+    ]
+    gt = []
+    while len(gt) < socau:
+        i = random.randrange(len(DIEU_KIEN))
+        t = random.choice(DIEU_KIEN[i][2])
+        if (i, t) not in gt:
+            gt.append((i, t))
+
+    cau = ""
+    for i, t in gt:
+        mau, tao, _ds = DIEU_KIEN[i]
+        kiem = tao(t)
+        cap = [(a, b) for a in range(1, 7) for b in range(1, 7) if kiem(a, b)]
+        kq = len(cap)
+        mo_ta = mau % t
+
+        debai = (r"Gieo đồng thời hai con xúc xắc cân đối và đồng chất. Gọi "
+                 r"$A$ là biến cố ``%s''. Tính số phần tử $n(A)$ của biến cố "
+                 r"$A$." % mo_ta)
+
+        liet_ke = "; ".join("$(%d;%d)$" % (a, b) for a, b in cap)
+        giai = (r"Mỗi kết quả là một cặp $(a; b)$ với $a$, $b$ lần lượt là số "
+                r"chấm trên con thứ nhất và con thứ hai, nên "
+                r"$n(\Omega) = 6\cdot 6 = 36$."
+                "\\\\\n"
+                r"Các kết quả thuận lợi cho $A$ là: %s."
+                "\\\\\n"
+                r"Vậy $n(A) = %d$." % (liet_ke, kq))
+
+        nhieu = _ba_nhieu9(kq, [36 - kq, kq * 2, kq + 1, kq - 1],
+                           buoc=lambda t: kq + 2 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C9_B27_TH152_SA_A_01(socau):
+    r"""Xác suất của biến cố đối.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Số liệu chọn sao cho $P(\overline{A})$ là SỐ THẬP PHÂN HỮU HẠN: câu
+    trả lời ngắn chấm bằng cách so khớp đúng chuỗi, nếu đáp số là phân số
+    vô hạn tuần hoàn như $\dfrac{5}{6}$ thì học sinh làm đúng vẫn có thể
+    gõ ra số khác.
+    """
+    BO = []
+    for N in (20, 25, 40, 50):
+        for k in range(3, 10):
+            m = N // k                      # số bội của k trong [1; N]
+            p = 1 - m / N
+            if abs(p * 100 - round(p * 100)) < 1e-9 and 0 < m < N:
+                BO.append((N, k, m, p))
+
+    gt = []
+    thu = 0
+    while len(gt) < socau and thu < 200:
+        thu += 1
+        i = random.randrange(len(BO))
+        if i not in gt:
+            gt.append(i)
+
+    cau = ""
+    for i in gt:
+        N, k, m, p = BO[i]
+        debai = (r"Chọn ngẫu nhiên một số nguyên dương không vượt quá $%d$. "
+                 r"Gọi $A$ là biến cố ``Số được chọn chia hết cho $%d$''. "
+                 r"Tính xác suất của biến cố đối $\overline{A}$ (viết kết quả "
+                 r"dưới dạng số thập phân)." % (N, k))
+
+        giai = (r"Không gian mẫu gồm các số $1;\ 2;\ \ldots;\ %d$ nên "
+                r"$n(\Omega) = %d$." % (N, N) +
+                "\\\\\n"
+                r"Các số chia hết cho $%d$ và không vượt quá $%d$ là "
+                r"$%d;\ %d;\ \ldots;\ %d$, gồm $%d$ số, nên $n(A) = %d$."
+                % (k, N, k, 2 * k, m * k, m, m) +
+                "\\\\\n"
+                r"Do đó $P(A) = \dfrac{%d}{%d} = %s$."
+                % (m, N, _so_tp(m / N, 3)) +
+                "\\\\\n"
+                r"Vì $\overline{A}$ là biến cố đối của $A$ nên"
+                "\\\\\n"
+                r"$P\left(\overline{A}\right) = 1 - P(A) = 1 - %s = %s$."
+                % (_so_tp(m / N, 3), _so_tp(p, 3)))
+
+        nhieu = _ba_nhieu9(_so_tp(p, 3),
+                           [_so_tp(1 - p, 3), _so_tp(p / 2, 3),
+                            _so_tp(m / k / N, 4), _so_tp(1 - p / 2, 3)],
+                           buoc=lambda t: _so_tp(p - t / 100.0, 3))
+        cau += MC_SA_answer_text(debai, _so_tp(p, 3), nhieu, giai, 0, 0, 2)
+    return cau
