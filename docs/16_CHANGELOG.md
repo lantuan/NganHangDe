@@ -5570,3 +5570,86 @@ tat tren MAY MAC, khong co tren VPS - dang trong ssh thi phai exit ra da.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.94 - 2026-09-29
+
+## Nhap chuong 2 lop 10 (Bat phuong trinh bac nhat hai an)
+
+    data/python_bank/toan10/L10_C2.py   8 ham / 6 dang
+    Chuong 2: 6/14 dang da co ham.
+
+    K10_2_3_1_1_H       -> L10_C2_B3_NB022_MC_A_01
+    K10_2_3_1_1_NB      -> L10_C2_B3_NB022_MC_A_02   (bien the cung dang)
+    K10_CheckDiemBPT_H  -> L10_C2_B3_NB023_MC_A_01
+    K10_2_3_2_1_H       -> L10_C2_B3_TH024_MC_A_01   (co hinh)
+    K10_2_3_2_1_TH      -> L10_C2_B3_TH024_MC_A_02   (co hinh, bien the)
+    K10_2_3_2_2_TH      -> L10_C2_B4_TH027_MC_A_01   (co hinh)
+    K10_2_3_3_2_VD      -> L10_C2_B4_TH027_MC_B_01   (DANG MOI)
+    K10_2_3_3_1_H       -> L10_C2_B4_VD028_MC_A_01
+
+## Bon loi da va
+
+1. d0.is_integer() (5 cho) - int.is_integer() chi co tu Python 3.12, ma may
+   co Lan dang chay Python 3.10 nen HAI HAM NEM LOI NGAY TREN MAY CO. Doi
+   thanh (int(d0) == d0), chay duoc moi ban Python.
+2. latex(bien_ngau_nhien ^ 3) - trong Python dau ^ la phep XOR chu khong
+   phai luy thua, nen sympy Symbol nem TypeError. Doi thanh ** 3.
+3. while N == M ... dung bien N khi N CHUA duoc gan -> UnboundLocalError.
+   Da gan N truoc vong lap va rut gon dieu kien (hai ve cua dieu kien cu
+   von la mot).
+4. Bo lenh goi ham o muc mo-dun; va 2 chuoi ky tu thoat.
+
+## Hai ham KHONG nhap
+
+K10_2_3_1_2_NB - de hoi "Bat phuong trinh nao sau day LA bat phuong trinh
+bac nhat hai an?" nhung CA BON PHUONG AN DEU KHONG PHAI. Vi du mot cau:
+
+    dap an danh dau:  343(x-4)^2 y <= -3     (bac ba)
+    cac phuong an:    -5xy + 6y >= -7        (co xy)
+                      -5x^2 - 2y >= -3       (co x binh phuong)
+                      4x - 9y - z <= 9       (ba an)
+
+Loi giai con tu mau thuan: "Bien doi phuong an dung, ta thay cac an x va y
+deu chi co bac lon nhat la 1" - sai hien nhien voi (x-4)^2 y. Soi 40 cau,
+40 cau deu khong co phuong an nao dung. Can co Lan sua lai phan sinh dap an.
+
+K10_2_4_1_1_VDC_TL - goi TL_answer(debai, giai, "0,5 diem", dang), nhung
+math_type.py KHONG CO ham ten TL_answer. Ngoai ra day la cau tu luan chi co
+MOT y, trai voi quy uoc da chot (tu luan phai tu hai y tro len). Muon nhap
+thi phai tach thanh hai y, vi du: (a) lap he bat phuong trinh va tim toa do
+cac dinh cua mien nghiem; (b) tim gia tri lon nhat cua F.
+
+## Kiem chung noi dung KHONG bi lam sai lech
+
+Chay ham goc va ham da doi ten voi CUNG hat ngau nhien (ca random lan
+numpy.random) roi so tung ky tu: 8/8 ham GIONG HET.
+
+## Kiem chung doc lap dang "mien nghiem la da giac gi"
+
+Tu giai he bat phuong trinh bang phan so huu ti: lay giao diem tung cap
+duong bien, giu lai diem nao thoa man CA HE, roi dem so dinh. Soi 120 cau:
+0 lech. Ghi nhan them: phan bo chi ra "tam giac" (55) va "ngu giac" (65) -
+khong bao gio ra tu giac hay luc giac, nen hai phuong an do khong bao gio
+la dap an. Khong sai, nhung co Lan co the noi rong khoang tham so cho da dang.
+
+## Da kiem chung the nao
+
+1. So tung ky tu voi ban goc: 8/8 ham giong het.
+2. 120 cau dang "da giac gi" doi chieu bang cach tu dem dinh: 0 lech.
+3. Soi tay dang "nhan ra BPT bac nhat hai an": dap an luon dung.
+4. 6/6 dang chay qua duong ra de that, dung loai cau, 0 loi.
+5. Bien dich THAT 16 cau ra PDF 9 trang, 0 loi (co ca cau co hinh TikZ).
+6. 391 bai test qua, 8 bo qua.
+
+## Tong ket lop 10 sau dot nay
+
+    chuong 1   34 dang,  34 co ham
+    chuong 2   14 dang,   6 co ham
+    chuong 3   38 dang,  38 co ham
+    chuong 9   27 dang,  13 co ham
+    con lai (4, 5, 6, 7, 8) chua co ham
+    LOP 10: 288 dang, 91 da co ham (32%)
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

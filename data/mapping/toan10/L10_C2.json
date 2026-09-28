@@ -76,5 +76,12 @@
     "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
     "Loai": "Đúng sai",
     "Dang": "Hệ bất phương trình bậc nhất hai ẩ"
+  },
+  {
+    "id": "L10_C2_B4_TH027_MC_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Miền nghiệm của hệ là đa giác gì (tam giác, tứ giác, ngũ giác...)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]
