@@ -247,5 +247,68 @@
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tế: biết hai cạnh và góc xen giữa, tính cạnh còn lại và diện tích",
     "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_NB029_SA_A",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết toạ độ điểm trên nửa đường tròn đơn vị, đọc ra sin hoặc côsin",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_A",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết một giá trị lượng giác, tính giá trị còn lại và giá trị biểu thức",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH032_TL_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Định lí côsin: tính cạnh thứ ba rồi tính côsin một góc khác",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH033_TL_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Tự luận",
+    "Dang": "Định lí sin: tính bán kính ngoại tiếp rồi tính một cạnh",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH034_TL_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Heron: tính diện tích rồi tính bán kính đường tròn nội tiếp",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH035_SA_B",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giải tam giác c-g-c: tính số đo góc còn lại",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH035_TL_A",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Giải tam giác khi biết một cạnh và hai góc kề",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_TF_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Đúng sai",
+    "Dang": "Giá trị lượng giác đọc từ toạ độ điểm trên nửa đường tròn đơn vị",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_TF_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Đúng sai",
+    "Dang": "Định lí sin, công thức diện tích và quan hệ giữa chúng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]

@@ -2349,3 +2349,330 @@ def L10_C3_B6_VD036_TL_C_01(socau, dong=1):
         ]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
+
+
+# =====================================================================
+# BỔ SUNG LOẠI CÂU CHO CHƯƠNG 3 (29/09/2026)
+# ---------------------------------------------------------------------
+# Cô Lan: "cùng 1 dạng có thể ra 3 đến 4 loại, từ nhiều lựa chọn, đúng
+# sai, trả lời ngắn, thậm chí cả tự luận."
+#
+# Trước khối này chương 3 chỉ có câu tự luận ở VD036, và NB029 chỉ toàn
+# trắc nghiệm. Khối này lấp các ô còn trống của bảng loại câu.
+# =====================================================================
+
+def L10_C3_B5_NB029_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: biết toạ độ điểm trên nửa đường tròn đơn vị, đọc ra sin hoặc côsin."""
+    gt = []
+    while len(gt) < socau:
+        doi, ke, huyen = random.choice(BO_BA_THAP_PHAN)
+        v = (doi, ke, huyen, random.choice([True, False]), random.choice(["sin", "cos"]))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for doi, ke, huyen, trai, ham in gt:
+        x0 = (-1 if trai else 1) * ke / huyen
+        y0 = doi / huyen
+        dapso = y0 if ham == "sin" else x0
+        ten = r"\sin" if ham == "sin" else r"\cos"
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$, điểm $M\left(%s; %s\right)$ thuộc nửa đường "
+                 r"tròn đơn vị. Tính $%s\widehat{xOM}$." % (_xx(x0), _xx(y0), ten))
+        giai = (r"Với điểm $M\left(x_{0}; y_{0}\right)$ thuộc nửa đường tròn đơn vị thì "
+                r"$\cos\widehat{xOM} = x_{0}$ và $\sin\widehat{xOM} = y_{0}$.\\ "
+                r"Kiểm tra: $\left(%s\right)^{2} + \left(%s\right)^{2} = 1$ nên $M$ đúng là "
+                r"điểm trên nửa đường tròn đơn vị.\\ "
+                r"Vậy $%s\widehat{xOM} = %s$." % (_xx(x0), _xx(y0), ten, _xx(dapso)))
+        dung = _xx(dapso)
+        ds = _ba_nhieu(dung, [_xx(-dapso), _xx(y0 if ham == "cos" else x0),
+                              _xx(-(y0 if ham == "cos" else x0))],
+                       buoc=lambda k: _xx(dapso + k / 10.0))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_TH030_TL_A_01(socau, dong=1):
+    """Tự luận: biết một giá trị lượng giác và khoảng của góc, tính tiếp."""
+    gt = []
+    while len(gt) < socau:
+        doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+        k1, k2 = random.randint(1, 5), random.randint(1, 5)
+        v = (doi, ke, huyen, k1, k2)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for doi, ke, huyen, k1, k2 in gt:
+        # He so chon boi huyen de P luon nguyen
+        m, n = k1 * huyen, k2 * huyen
+        P = k1 * doi - k2 * ke          # m.sin + n.cos voi cos am
+        debai = (r"Cho góc $\alpha$ thoả mãn $\sin\alpha = \dfrac{%d}{%d}$ và "
+                 r"$90^{\circ} < \alpha < 180^{\circ}$." % (doi, huyen))
+        ds_abcd = [
+            (r"Tính $\cos\alpha$.",
+             r"-\dfrac{%d}{%d}" % (ke, huyen),
+             r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ ta có "
+             r"$\cos^{2}\alpha = 1 - \left(\dfrac{%d}{%d}\right)^{2} = \dfrac{%d}{%d}$, "
+             r"suy ra $\cos\alpha = \pm\dfrac{%d}{%d}$.\\ "
+             r"Vì $90^{\circ} < \alpha < 180^{\circ}$ nên $\alpha$ là góc tù, côsin âm. "
+             r"Vậy $\cos\alpha = -\dfrac{%d}{%d}$."
+             % (doi, huyen, ke * ke, huyen * huyen, ke, huyen, ke, huyen)),
+            (r"Tính giá trị biểu thức $P = %d\sin\alpha + %d\cos\alpha$." % (m, n),
+             r"%d" % P,
+             r"Thay hai giá trị vừa tìm được:\\ "
+             r"$P = %d\cdot\dfrac{%d}{%d} + %d\cdot\left(-\dfrac{%d}{%d}\right) "
+             r"= %d - %d = %d$."
+             % (m, doi, huyen, n, ke, huyen, k1 * doi, k2 * ke, P)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_B6_TH032_TL_A_01(socau, dong=1):
+    """Tự luận: định lí côsin - tính cạnh thứ ba rồi tính côsin một góc khác."""
+    gt = []
+    while len(gt) < socau:
+        A = random.choice([60, 120])
+        b, c = random.choice(CAP_COSIN[A])
+        if (A, b, c) not in gt:
+            gt.append((A, b, c))
+
+    cauTN = ''
+    for A, b, c in gt:
+        dau = -1 if A == 60 else 1
+        a2 = b * b + c * c + dau * b * c
+        a = int(round(a2 ** 0.5))
+        cos_A = Rational(1, 2) if A == 60 else Rational(-1, 2)
+        cos_B = Rational(a * a + c * c - b * b, 2 * a * c)
+        debai = (r"Cho tam giác $ABC$ có $AC = %d$, $AB = %d$ và $\widehat{A} = %s$."
+                 % (b, c, _goc(A)))
+        ds_abcd = [
+            (r"Tính độ dài cạnh $BC$.", r"%d" % a,
+             r"Định lí côsin:\\ "
+             r"$BC^{2} = AC^{2} + AB^{2} - 2\cdot AC\cdot AB\cdot\cos A "
+             r"= %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\left(%s\right) = %d$.\\ "
+             r"Vậy $BC = %d$." % (b, c, b, c, _L(cos_A), a2, a)),
+            (r"Tính $\cos B$.", _L(cos_B),
+             r"Lại dùng định lí côsin, lần này cho góc $B$:\\ "
+             r"$\cos B = \dfrac{BC^{2} + AB^{2} - AC^{2}}{2\cdot BC\cdot AB} "
+             r"= \dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$."
+             % (a, c, b, a, c, _L(cos_B))),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_B6_TH033_TL_A_01(socau, dong=1):
+    """Tự luận: định lí sin - tính bán kính ngoại tiếp rồi tính một cạnh."""
+    gt = []
+    while len(gt) < socau:
+        A, B = random.choice([(30, 45), (30, 60), (45, 60), (60, 45), (45, 30), (60, 30)])
+        a = random.randint(4, 15)
+        if (A, B, a) not in gt:
+            gt.append((A, B, a))
+
+    cauTN = ''
+    for A, B, a in gt:
+        sin_A = [r[1] for r in BANG_GTLG if r[0] == A][0]
+        sin_B = [r[1] for r in BANG_GTLG if r[0] == B][0]
+        R = simplify(a / (2 * sin_A))
+        b = simplify(2 * R * sin_B)
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $\widehat{A} = %s$, $\widehat{B} = %s$."
+                 % (a, _goc(A), _goc(B)))
+        ds_abcd = [
+            (r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.", _L(R),
+             r"Định lí sin: $\dfrac{BC}{\sin A} = 2R$, suy ra $R = \dfrac{BC}{2\sin A}$.\\ "
+             r"Với $\sin %s = %s$ thì $R = \dfrac{%d}{2\cdot %s} = %s$."
+             % (_goc(A), _L(sin_A), a, _L(sin_A), _L(R))),
+            (r"Tính độ dài cạnh $AC$.", _L(b),
+             r"Vẫn định lí sin: $\dfrac{AC}{\sin B} = 2R$, suy ra $AC = 2R\sin B$.\\ "
+             r"$AC = 2\cdot %s\cdot %s = %s$." % (_L(R), _L(sin_B), _L(b))),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_B6_TH034_TL_A_01(socau, dong=1):
+    """Tự luận: Heron - tính diện tích rồi tính bán kính đường tròn nội tiếp."""
+    gt = []
+    while len(gt) < socau:
+        v = random.choice(BANG_HERON)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a, b, c, S, p, r in gt:
+        debai = r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$." % (a, b, c)
+        ds_abcd = [
+            (r"Tính diện tích tam giác $ABC$.", r"%d" % S,
+             r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d$.\\ "
+             r"Công thức Heron:\\ "
+             r"$S = \sqrt{p\left(p-a\right)\left(p-b\right)\left(p-c\right)} "
+             r"= \sqrt{%d\cdot %d\cdot %d\cdot %d} = \sqrt{%d} = %d$."
+             % (a, b, c, p, p, p - a, p - b, p - c, S * S, S)),
+            (r"Tính bán kính $r$ của đường tròn nội tiếp tam giác $ABC$.", r"%d" % r,
+             r"Diện tích tam giác còn tính được bằng $S = p\cdot r$, nên\\ "
+             r"$r = \dfrac{S}{p} = \dfrac{%d}{%d} = %d$." % (S, p, r)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_B6_TH035_SA_B_01(socau, dang=2):
+    """Trả lời ngắn: giải tam giác c-g-c, tính số đo góc còn lại (làm tròn độ)."""
+    gt = []
+    while len(gt) < socau:
+        A = random.choice([60, 120])
+        b, c = random.choice([x for x in CAP_COSIN[A] if x[0] != x[1]])
+        if (A, b, c) not in gt:
+            gt.append((A, b, c))
+
+    cauTN = ''
+    for A, b, c in gt:
+        dau = -1 if A == 60 else 1
+        a2 = b * b + c * c + dau * b * c
+        a = int(round(a2 ** 0.5))
+        cos_B = (a * a + c * c - b * b) / (2.0 * a * c)
+        gocB = math.degrees(math.acos(max(-1.0, min(1.0, cos_B))))
+        debai = (r"Cho tam giác $ABC$ có $AC = %d$, $AB = %d$, $\widehat{A} = %s$. "
+                 r"Tính số đo góc $B$ (đơn vị độ, làm tròn đến hàng phần trăm)."
+                 % (b, c, _goc(A)))
+        giai = (r"Định lí côsin cho $BC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot"
+                r"\left(%s\right) = %d$, nên $BC = %d$.\\ "
+                r"Lại theo định lí côsin:\\ "
+                r"$\cos B = \dfrac{BC^{2} + AB^{2} - AC^{2}}{2\cdot BC\cdot AB} "
+                r"= \dfrac{%d + %d - %d}{2\cdot %d\cdot %d} = %s$.\\ "
+                r"Suy ra $\widehat{B} \approx %s^{\circ}$."
+                % (b, c, b, c, _L(Rational(1, 2) if A == 60 else Rational(-1, 2)), a2, a,
+                   a * a, c * c, b * b, a, c, _xx(cos_B, 4), _xx(gocB)))
+        dung = _xx(gocB)
+        ds = _ba_nhieu(dung, [_xx(180 - gocB - A), _xx(A), _xx(gocB + 10)],
+                       buoc=lambda k: _xx(gocB + 5 * (k + 1)))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH035_TL_A_01(socau, dong=1):
+    """Tự luận: giải tam giác khi biết một cạnh và hai góc kề."""
+    gt = []
+    while len(gt) < socau:
+        A, B = random.choice([(30, 45), (45, 60), (30, 60), (60, 45), (45, 30)])
+        a = random.randint(4, 15)
+        if (A, B, a) not in gt:
+            gt.append((A, B, a))
+
+    cauTN = ''
+    for A, B, a in gt:
+        C = 180 - A - B
+        sin_A = [r[1] for r in BANG_GTLG if r[0] == A][0]
+        sin_B = [r[1] for r in BANG_GTLG if r[0] == B][0]
+        b = simplify(a * sin_B / sin_A)
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $\widehat{A} = %s$, $\widehat{B} = %s$."
+                 % (a, _goc(A), _goc(B)))
+        ds_abcd = [
+            (r"Tính số đo góc $C$.", r"%s" % _goc(C),
+             r"Tổng ba góc trong một tam giác bằng $180^{\circ}$ nên\\ "
+             r"$\widehat{C} = 180^{\circ} - %s - %s = %s$." % (_goc(A), _goc(B), _goc(C))),
+            (r"Tính độ dài cạnh $AC$.", _L(b),
+             r"Định lí sin: $\dfrac{AC}{\sin B} = \dfrac{BC}{\sin A}$, suy ra "
+             r"$AC = \dfrac{BC\cdot\sin B}{\sin A}$.\\ "
+             r"$AC = \dfrac{%d\cdot %s}{%s} = %s$." % (a, _L(sin_B), _L(sin_A), _L(b))),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C3_TF_D_01(socau, socot=1):
+    """Đúng/Sai - giá trị lượng giác đọc từ toạ độ điểm trên nửa đường tròn đơn vị."""
+    cauTF = ''
+    for _ in range(socau):
+        doi, ke, huyen = random.choice(BO_BA_THAP_PHAN)
+        x0, y0 = -ke / huyen, doi / huyen          # lay diem o goc phan tu thu hai
+        tan0 = y0 / x0
+
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$, điểm $M\left(x_{0}; y_{0}\right)$ thuộc nửa "
+                 r"đường tròn đơn vị, với $x_{0} = %s$ và $y_{0} = %s$. "
+                 r"Xét tính đúng sai của các khẳng định sau:" % (_xx(x0), _xx(y0)))
+
+        # a) NB - nhac lai dinh nghia
+        y1 = [(r"{\True $\cos\widehat{xOM} = x_{0}$}",
+               r"Đúng. Theo định nghĩa, hoành độ của $M$ chính là côsin của góc $\widehat{xOM}$."),
+              (r"{$\cos\widehat{xOM} = y_{0}$}",
+               r"Sai. $y_{0}$ là \textbf{sin}, còn côsin là $x_{0}$.")]
+
+        # b) TH - thay so cu the
+        y2 = [(r"{\True $\sin\widehat{xOM} = %s$}" % _xx(y0),
+               r"Sin của góc bằng tung độ của $M$, tức $\sin\widehat{xOM} = y_{0} = %s$." % _xx(y0)),
+              (r"{$\sin\widehat{xOM} = %s$}" % _xx(x0),
+               r"Sai. Đó là hoành độ, tức côsin. Sin bằng $%s$." % _xx(y0))]
+
+        # c) VD - phai lap ti so tu hai toa do
+        y3 = [(r"{\True $\tan\widehat{xOM} = %s$}" % _xx(tan0),
+               r"$\tan\widehat{xOM} = \dfrac{\sin\widehat{xOM}}{\cos\widehat{xOM}} "
+               r"= \dfrac{y_{0}}{x_{0}} = \dfrac{%s}{%s} = %s$."
+               % (_xx(y0), _xx(x0), _xx(tan0))),
+              (r"{$\tan\widehat{xOM} = %s$}" % _xx(-tan0),
+               r"Sai ở dấu. Vì $x_{0} < 0$ và $y_{0} > 0$ nên $\tan\widehat{xOM}$ \textbf{âm}, "
+               r"bằng $%s$." % _xx(tan0))]
+
+        # d) VDC - diem doi xung, phai suy ra quan he hai goc bu nhau
+        y4 = [(r"{\True Gọi $N$ là điểm đối xứng với $M$ qua trục $Oy$. "
+               r"Khi đó $\cos\widehat{xON} + \cos\widehat{xOM} = 0$}",
+               r"$N$ đối xứng với $M$ qua $Oy$ nên $N\left(-x_{0}; y_{0}\right)$, "
+               r"do đó $\cos\widehat{xON} = -x_{0}$.\\ "
+               r"Vậy $\cos\widehat{xON} + \cos\widehat{xOM} = -x_{0} + x_{0} = 0$ "
+               r"(hai góc $\widehat{xOM}$ và $\widehat{xON}$ bù nhau)."),
+              (r"{Gọi $N$ là điểm đối xứng với $M$ qua trục $Oy$. "
+               r"Khi đó $\sin\widehat{xON} + \sin\widehat{xOM} = 0$}",
+               r"Sai. Hai điểm đối xứng qua $Oy$ có \textbf{cùng} tung độ, nên hai sin "
+               r"\textbf{bằng nhau} chứ không đối nhau; tổng của chúng bằng $2y_{0} = %s$."
+               % _xx(2 * y0))]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+
+def L10_C3_TF_E_01(socau, socot=1):
+    """Đúng/Sai - định lí sin, công thức diện tích và quan hệ giữa chúng."""
+    cauTF = ''
+    for _ in range(socau):
+        a, b, c, S, p, r = random.choice([t for t in BANG_HERON if t[3] >= 20])
+        R = Rational(a * b * c, 4 * S)
+
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. "
+                 r"Gọi $S$, $p$, $R$, $r$ lần lượt là diện tích, nửa chu vi, bán kính đường "
+                 r"tròn ngoại tiếp và bán kính đường tròn nội tiếp của tam giác. "
+                 r"Xét tính đúng sai của các khẳng định sau:" % (a, b, c))
+
+        # a) NB - nhac lai cong thuc
+        y1 = [(r"{\True $S = p\cdot r$}",
+               r"Đúng. Đây là một trong các công thức tính diện tích tam giác."),
+              (r"{$S = 2p\cdot r$}",
+               r"Sai. Công thức đúng là $S = p\cdot r$, không có hệ số $2$.")]
+
+        # b) TH - thay so vao cong thuc Heron
+        y2 = [(r"{\True $p = %d$ và $S = %d$}" % (p, S),
+               r"$p = \dfrac{%d + %d + %d}{2} = %d$; Heron cho "
+               r"$S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$."
+               % (a, b, c, p, p, p - a, p - b, p - c, S)),
+              (r"{$p = %d$ và $S = %d$}" % (p, S + 2),
+               r"Sai. Heron cho $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$ chứ không phải $%d$."
+               % (p, p - a, p - b, p - c, S, S + 2))]
+
+        # c) VD - phai co S cua y b) moi tinh duoc r
+        y3 = [(r"{\True $r = %d$}" % r,
+               r"Từ $S = p\cdot r$ suy ra $r = \dfrac{S}{p} = \dfrac{%d}{%d} = %d$." % (S, p, r)),
+              (r"{$r = %s$}" % _L(simplify(Rational(S, p) + 1)),
+               r"Sai. $r = \dfrac{S}{p} = \dfrac{%d}{%d} = %d$." % (S, p, r))]
+
+        # d) VDC - noi hai cong thuc dien tich khac nhau lai voi nhau
+        y4 = [(r"{\True $R = %s$}" % _L(R),
+               r"Diện tích tam giác còn tính được bằng $S = \dfrac{abc}{4R}$, "
+               r"suy ra $R = \dfrac{abc}{4S}$.\\ "
+               r"$R = \dfrac{%d\cdot %d\cdot %d}{4\cdot %d} = %s$."
+               % (a, b, c, S, _L(R))),
+              (r"{$R = %s$}" % _L(simplify(R * 2)),
+               r"Sai. Từ $S = \dfrac{abc}{4R}$ ta được $R = \dfrac{abc}{4S} = %s$." % _L(R))]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF

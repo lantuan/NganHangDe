@@ -5653,3 +5653,65 @@ la dap an. Khong sai, nhung co Lan co the noi rong khoang tham so cho da dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.95 - 2026-09-29
+
+## Chuong 3: them 9 dang, phu cac LOAI CAU con trong (38 -> 47 dang)
+
+Co Lan: "cung 1 dang co the ra 3 den 4 loai, tu nhieu lua chon, dung sai,
+tra loi ngan, tham chi ca tu luan... 1 ID mapping da co rat nhieu ID ham roi."
+
+Soi lai bang loai cau cua chuong 3 thi thay lo ro:
+
+    KHONG CO CAU TU LUAN NAO ngoai VD036, va NB029 chi toan trac nghiem.
+
+Dot nay lap cac o trong do:
+
+    NB029   MC A,B,C,D                     -> them SA_A
+    TH030   MC A,B  SA A                   -> them TL_A
+    TH032   MC A,B  SA A,B                 -> them TL_A
+    TH033   MC A,B  SA A,B                 -> them TL_A
+    TH034   MC A,B  SA A,B                 -> them TL_A
+    TH035   MC A,B,C  SA A                 -> them SA_B, TL_A
+    Dung/Sai theo chuong: A,B,C            -> them D, E
+
+Chuong 3: 47/47 dang deu da co ham.
+
+## Chin dang moi
+
+    NB029_SA_A  doc sin / cosin tu toa do diem tren nua duong tron don vi
+    TH030_TL_A  biet sin va khoang goc -> tinh cosin, roi tinh gia tri bieu thuc
+    TH032_TL_A  dinh li cosin: tinh canh thu ba, roi tinh cosin mot goc khac
+    TH033_TL_A  dinh li sin: tinh ban kinh ngoai tiep, roi tinh mot canh
+    TH034_TL_A  Heron: tinh dien tich, roi tinh ban kinh duong tron noi tiep
+    TH035_SA_B  giai tam giac c-g-c: so do goc con lai (lam tron)
+    TH035_TL_A  giai tam giac khi biet mot canh va hai goc ke
+    TF_D        gia tri luong giac doc tu toa do diem tren nua duong tron
+    TF_E        dinh li sin, cong thuc dien tich va quan he giua chung
+
+Hai ham Dung/Sai moi deu xep bon y theo bac NB -> TH -> VD -> VDC, nen qua
+duoc tests/test_cau_dung_sai.py ma khong can ghi vao danh sach cho.
+
+## De so lieu dep va dap an tra loi ngan la MOT SO
+
+Cau tu luan TH030_TL_A: he so cua bieu thuc P duoc chon la boi cua mau so
+(huyen cua bo ba Pythagore), nen P luon ra SO NGUYEN.
+Cau tra loi ngan NB029_SA_A: chi lay bo ba co thuong so thap phan huu han.
+Cau tra loi ngan TH035_SA_B: dap an la so do goc lam tron hai chu so.
+
+## Da kiem chung the nao
+
+1. TH033_TL_A: 72 truong hop, doi chieu DOC LAP bang toa do (dung ban kinh
+   ngoai tiep tu ba dinh, va canh tu dinh li sin) - 0 lech.
+2. Heron / r = S/p / R = abc/(4S): do lai ca 24 tam giac trong BANG_HERON - 0 lech.
+3. TH035_SA_B: 80 cau, tu tinh lai goc B bang arccos - 0 lech.
+4. TF_D: 60 cau, kiem diem co THUC SU nam tren duong tron don vi (x^2+y^2=1) - dung het.
+5. Chin ham deu chay 15/15 lan, dung so cau yeu cau.
+6. 47/47 dang chay qua duong ra de that, dung loai cau, 0 loi.
+7. Bien dich THAT 18 cau ra PDF 7 trang, 0 loi; doc lai doi chieu
+   (6-8-10 -> p=12, S=24, r=2).
+8. 402 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
