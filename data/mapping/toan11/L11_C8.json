@@ -18,6 +18,27 @@
     "Dang": "Biến cố độc lập"
   },
   {
+    "id": "L11_C8_B28_VD149_MC_A",
+    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác suất “có ít nhất một” của hai biến cố độc lập",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C8_B28_VD149_SA_A",
+    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Xác suất “có ít nhất một” của hai biến cố độc lập",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C8_B28_VD149_TL_A",
+    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn dùng biến cố đối và tính độc lập",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C8_B29_TH133_MC_A",
     "content": "Tính được xác suất của biến cố hợp bằng cách sử dụng công thức cộng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -28,6 +49,27 @@
     "content": "Tính được xác suất của biến cố hợp bằng cách sử dụng công thức cộng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Xác suất của biến cố hợp"
+  },
+  {
+    "id": "L11_C8_B29_VD150_MC_A",
+    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức cộng cho hai biến cố không xung khắc",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C8_B29_VD150_SA_A",
+    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Xác suất của biến cố hợp trong bài toán thực tiễn",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C8_B29_VD150_TL_A",
+    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn dùng công thức cộng xác suất",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C8_B30_TH134_MC_A",
@@ -72,53 +114,6 @@
     "Dang": "Xác suất tính bằng sơ đồ hình cây"
   },
   {
-    "id": "L11_C8_TF_A",
-    "content": "Các quy tắc tính xác suất",
-    "Loai": "Đúng sai",
-    "Dang": "Biến cố hợp, biến cố giao, biến cố; Công thức cộng xác suất"
-  },
-  {
-    "id": "L11_C8_TF_B",
-    "content": "Các quy tắc tính xác suất",
-    "Loai": "Đúng sai",
-    "Dang": "Công thức nhân xác suất cho hai bi"
-  },
-  {
-    "id": "L11_C8_B28_VD149_MC_A",
-    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác suất “có ít nhất một” của hai biến cố độc lập",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
-  },
-  {
-    "id": "L11_C8_B28_VD149_TL_A",
-    "content": "Vận dụng được biến cố đối và tính độc lập của các biến cố để tính xác suất của biến cố “có ít nhất một” trong một số bài toán thực tiễn.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán thực tiễn dùng biến cố đối và tính độc lập",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
-  },
-  {
-    "id": "L11_C8_B29_VD150_MC_A",
-    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Công thức cộng cho hai biến cố không xung khắc",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
-  },
-  {
-    "id": "L11_C8_B29_VD150_SA_A",
-    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Xác suất của biến cố hợp trong bài toán thực tiễn",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
-  },
-  {
-    "id": "L11_C8_B29_VD150_TL_A",
-    "content": "Vận dụng được công thức cộng xác suất để giải quyết một số bài toán thực tiễn với hai biến cố không xung khắc.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán thực tiễn dùng công thức cộng xác suất",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
-  },
-  {
     "id": "L11_C8_B30_VD151_MC_A",
     "content": "Vận dụng được công thức nhân xác suất và sơ đồ hình cây để giải quyết bài toán thực tiễn gồm nhiều giai đoạn độc lập.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -138,5 +133,17 @@
     "Loai": "Tự luận",
     "Dang": "Bài toán thực tiễn dùng công thức nhân và sơ đồ hình cây",
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C8_TF_A",
+    "content": "Các quy tắc tính xác suất",
+    "Loai": "Đúng sai",
+    "Dang": "Biến cố hợp, biến cố giao, biến cố; Công thức cộng xác suất"
+  },
+  {
+    "id": "L11_C8_TF_B",
+    "content": "Các quy tắc tính xác suất",
+    "Loai": "Đúng sai",
+    "Dang": "Công thức nhân xác suất cho hai bi"
   }
 ]

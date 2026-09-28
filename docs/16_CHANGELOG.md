@@ -7711,3 +7711,61 @@ Da xong 119/257 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.20 - 2026-09-29
+
+## Lop 11 chuong 8 (Cac quy tac tinh xac suat): 23/23 dang co ham
+
+Viet moi data/python_bank/toan11/L11_C8.py.
+
+Bai 28 (bien co hop, giao, doc lap): nhan biet ba khai niem; bai toan
+"co it nhat mot" qua BIEN CO DOI (MC + SA + TL).
+Bai 29 (cong thuc cong): khao sat lop/cau lac bo/to dan pho, bai toan
+thuc tien hai bien co KHONG xung khac (MC + SA + TL).
+Bai 30 (cong thuc nhan, to hop, so do hinh cay): bien co giao cua hai
+bien co doc lap, xac suat bang to hop (hop bi), SO DO HINH CAY (co hinh),
+bai toan ba giai doan doc lap (MC + SA + TL).
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+So do hinh cay hai tang ve bang TIKZ THUAN, da dich thu ra anh PNG qua
+hinh_ve_service nen web cung co hinh.
+
+So lieu chon de DAP SO DEP:
+  - moi xac suat cho truoc co DUNG mot chu so thap phan, nen tich hai
+    xac suat luon co dung hai chu so thap phan (khong phai lam tron);
+  - bai ba giai doan duoc loc lai sao cho tich ba so van viet duoc dung
+    hai chu so thap phan;
+  - bai dung to hop loc bo cac truong hop roi dung vao moc lam tron
+    0,xx5 (ham _an_toan_lam_tron) nen dap so lam tron khong gay tranh cai;
+  - bai to hop luon hoi "dung j vien do" voi 1 <= j <= k-1 de loi giai
+    khong phai viet C_x^0.
+
+## Bo sung dang con thieu cua chuong 8
+
+VD149 SA (xac suat "co it nhat mot"). Nho vay de he so 1 chuong 8 khong
+con o trong nao.
+
+## Da kiem chung the nao
+
+1. 23/23 ham chay sach 3 muc socau x 60 seed.
+2. Kiem toan DOC LAP 3150 cau: doc lai so lieu TU CHINH DE BAI (va tu
+   chinh nhan cua so do hinh cay) bang bieu thuc chinh quy roi tu tinh
+   lai xac suat bang phan so huu ti - 0 cho sai.
+3. So do hinh cay da dich thanh anh PNG qua dung hinh_ve_service, xem
+   lai anh bang mat: du 4 nhanh, du nhan xac suat.
+4. De he so 1 chuong 8 lop 11: 20/20 de du ma tran 6-1-2-3.
+5. Quet 25 de x 9 chuong x 2 lop: chi con thieu o C1, C4, C7 lop 11 -
+   la cac chuong CHUA viet ham.
+6. 2252 bai test qua, 8 bo qua (truoc: 2167).
+
+## Hien trang lop 11
+
+    C1  0/39   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5 23/23          C8 23/23
+    C3 16/16   C6 33/33          C9 25/25
+
+Da xong 142/258 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
