@@ -35,7 +35,7 @@ from app.services.exam_blueprint_service import (
 from app.services.question_selector_service import select_questions
 
 # Các chương lớp 10 đã có đủ hàm Python để bắt được đề hệ số 1.
-CHUONG_DA_DU_HAM = [1, 2, 3, 4, 5, 6, 8, 9]
+CHUONG_DA_DU_HAM = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Ma trận hệ số 1 (doc 07): tổng 12 câu.
 DOI_HOI = {

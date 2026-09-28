@@ -6718,3 +6718,114 @@ Chi con chuong 7.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.08 - 2026-09-28
+
+Trang thai: DA KIEM CHUNG
+
+## Viec da lam
+
+Viet xong chuong 7 lop 10 - Phuong phap toa do trong mat phang:
+37/37 dang trong mapping deu co ham Python.
+
+    Bai 19  Phuong trinh duong thang            8 dang
+    Bai 20  Vi tri tuong doi, goc, khoang cach   7 dang
+    Bai 21  Duong tron trong mat phang toa do   10 dang
+    Bai 22  Ba duong conic                      10 dang
+    Cau Dung/Sai cua chuong                      2 dang
+
+Nguon: viet MOI hoan toan. Tep LopXChuong7.py co Lan gui lai la noi
+dung chuong 9 (xac suat, toan bo ID K10_9_*), khong co gi de chuyen doi.
+
+## Nguyen tac chon so de dap so ra DEP
+
+- Khoang cach tu diem den duong thang: vecto phap tuyen lay tu bo ba
+  Pytago (PYTAGO7) nen mau $\sqrt{a^2+b^2}$ luon la SO NGUYEN.
+- Goc giua hai duong thang: chi dung cac cap cho goc 0, 45, 90 do.
+  Voi vecto phap tuyen NGUYEN thi goc 30 va 60 do KHONG dung duoc
+  (can $b^2 = 3a^2$, vo nghiem nguyen) - da kiem lai bang tay.
+  Loi giai viet gia tri cos CHINH XAC ($\dfrac{\sqrt{2}}{2}$), khong
+  lay so thap phan gan dung.
+- Duong tron: tam nguyen, ban kinh nguyen. Diem tiep xuc M lay theo
+  bo ba Pytago nen M chac chan nam tren duong tron.
+- Elip/hypebol: bo (a, b, c) co tieu cu NGUYEN.
+
+## Cac loi da TU BAT va da sua trong chuong 7
+
+1. Bay dang cho nhieu bi TRUNG dap so khi bo so roi vao truong hop
+   suy bien (tam o goc toa do, c = 0, a = b, k = 1...). Da dua het
+   qua _ba_nhieu7 co buoc du phong.
+2. VD109_MC_A: dieu kien chia het dat NHAM trong vong lap in cau,
+   gap so khong chia het thi "continue" lam MAT cau - de ra thieu
+   lang le. Da chuyen dieu kien len khau sinh so.
+3. VD109_MC_A: c2 co the bang c1, khi do hai duong THUNG nhau chu
+   khong song song - cau sai dap an. Da buoc c2 khac c1 va them
+   dong kiem lai hang so trong loi giai.
+4. TH109_MC_A: truong hop "cat nhau" co the DONG THOI vuong goc,
+   ma "Vuong goc voi nhau" lai la mot phuong an - cau co HAI dap an
+   dung. Da loai bo cac bo so do.
+5. TH109_MC_A: a1, b1 hoac c1 bang 0 lam loi giai in ra ti so
+   \dfrac{0}{0}. Da buoc ba he so deu khac 0.
+6. Loi DAU khi in cong thuc: "$+ -7$", "$-4 + -2$", "$0\cdot -1$",
+   "$\sqrt{-4^2 + 0^2}$" (doc thanh $-16$!), "$1x$", "$1y$",
+   "$- 0y$", "$1 m$", "$y^2 = 1x$". Da them nam ham phu tro
+   _so7, _tich7, _tong7, _don_thuc7, _khai_trien7 va _tron_khai_trien.
+7. Phuong trinh dap an bat dau bang dau tru ("$-4x + 3y - 40 = 0$")
+   va he so chua rut gon ("$2x - 2y + 8 = 0$"). Da them _rut_gon7
+   (chia uoc chung + chuan hoa dau he so dau) cho tiep tuyen, trung
+   truc va duong thang vuong goc.
+8. VD113_TL_A y a) truoc day hoi "lap he phuong trinh" - dap so ghi
+   "He ba phuong trinh bac nhat", khong cham duoc. Da doi thanh
+   "tim toa do tam I" va tach y b) thanh "tinh ban kinh R".
+9. VD124_TL_A y c) hoi phuong trinh duong tron nhung dap so lai ghi
+   "R = 3". Da sua dap so thanh phuong trinh duong tron.
+10. VD117_TL_A y c) so sanh $IN = 6,32$ voi $R$ - so vo ti lam tron.
+    Da doi sang so sanh BINH PHUONG: $IN^2 = 40 < 169 = R^2$, chinh
+    xac tuyet doi.
+11. NB106_MC_B in phuong trinh tham so thanh "$x = 0 + 1t$". Da them
+    _pt_tham_so bo he so 1 va bo hang tu 0.
+
+## Da kiem chung the nao
+
+1. 37/37 ham chay sach 400/400 seed - khong loi, khong cau rong,
+   so dau $ chan, ngoac { } can.
+2. Kiem toan DOC LAP: doc lai de va dap an tu LaTeX roi tu tinh lai,
+   khong tin cong thuc trong ham - 1500 cau, 0 cho sai:
+   - 300 cau tiep tuyen: M that su nam tren (C), tiep tuyen that su
+     di qua M, va khoang cach tu tam toi tiep tuyen dung bang R;
+   - 300 cau duong tron qua ba diem: ca ba diem deu cach tam dung
+     bang R, va ba diem khong thang hang;
+   - 300 cau duong thang qua hai diem: ca hai diem deu thoa phuong
+     trinh dap an;
+   - 300 cau trung truc: cach deu A va B, va vuong goc voi AB;
+   - 300 cau duong tron tiep xuc duong thang: dung tam, va khoang
+     cach tu tam toi duong thang dung bang ban kinh.
+3. DICH THU LATEX: 444 cau (37 ham x 6 seed x 2 cau) dich ra PDF
+   153 trang, KHONG MOT LOI nao. Da xem tan mat trang PDF.
+   (Dich bang macro gia lap ex_test vi may co Lan thieu tabvar.sty
+   va bclogo.sty - hai goi nay VPS co du.)
+4. De he so 1 chuong 7: 20/20 de du ma tran.
+5. 616 bai test qua, 8 bo qua (truoc: 566).
+
+## LOP 10 DA XONG - ca bon ky thi deu ra duoc de
+
+    C1   37/37      C4   46/46      C7   37/37
+    C2   15/15      C5   48/48      C8   30/30
+    C3   53/53      C6   34/34      C9   27/27
+
+Chay thu 20 de moi ky, moi de 21 cau:
+
+    giua ky 1  (C1-C4)        20/20 du ma tran   420/420 cau
+    cuoi ky 1  (C1-C5)        20/20 du ma tran   420/420 cau
+    giua ky 2  (C6-C7)        20/20 du ma tran   420/420 cau
+    cuoi ky 2  (C6-C9)        20/20 du ma tran   420/420 cau
+
+Da mo test cho ca bon ky trong tests/test_du_cau_giua_ky.py
+(truoc day chi bat giua_ky_1) va them chuong 7 vao
+tests/test_du_cau_he_so_1.py.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

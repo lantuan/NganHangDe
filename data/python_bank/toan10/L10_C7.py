@@ -108,6 +108,75 @@ def _pt_tham_so(px, py, vx, vy):
             % (_dong("x", px, vx), _dong("y", py, vy)))
 
 
+def _tong7(u, v):
+    r"""Viết $u + v$ cho đúng dấu: $-4 + (-2)$ phải thành $-4 - 2$."""
+    return r"%d %s %d" % (u, "+" if v >= 0 else "-", abs(v))
+
+
+def _ngoac7(ten, t):
+    r"""Viết $\left(x - t\right)$; nếu $t = 0$ thì chỉ còn $x$."""
+    if t == 0:
+        return ten
+    return r"\left(%s %s %d\right)" % (ten, "-" if t > 0 else "+", abs(t))
+
+
+def _khai_trien7(a, b, x0, y0):
+    r"""Viết $a\left(x-x_0\right) + b\left(y-y_0\right) = 0$ cho đúng dấu,
+    bỏ hệ số 1 và bỏ hẳn hạng tử có hệ số 0."""
+    phan = []
+    if a:
+        he = "" if a == 1 else ("-" if a == -1 else "%d" % a)
+        phan.append(he + _ngoac7("x", x0))
+    if b:
+        he = "" if abs(b) == 1 else "%d" % abs(b)
+        cum = he + _ngoac7("y", y0)
+        phan.append(cum if not phan else
+                    ("+ " if b > 0 else "- ") + cum)
+        if len(phan) == 1 and b < 0:
+            phan[0] = "-" + phan[0]
+    return " ".join(phan) + " = 0"
+
+
+def _don_thuc7(k, bien, dau_dau=True):
+    r"""Viết hạng tử $k\cdot\text{bien}$: bỏ hệ số 1, bỏ hẳn khi $k = 0$.
+
+    dau_dau=True: đứng đầu biểu thức (dấu cộng thì không viết).
+    """
+    if k == 0:
+        return ""
+    he = "" if abs(k) == 1 else "%d" % abs(k)
+    if dau_dau:
+        return ("-" if k < 0 else "") + he + bien
+    return ("+ " if k > 0 else "- ") + he + bien
+
+
+def _so7(t):
+    r"""Số âm phải đóng ngoặc: $\left(-4\right)^2$ chứ không phải $-4^2$."""
+    return "%d" % t if t >= 0 else r"\left(%d\right)" % t
+
+
+def _can7(n):
+    r"""Viết $\sqrt{n}$, rút thành số nguyên khi $n$ là số chính phương."""
+    g = int(round(math.sqrt(n)))
+    return "%d" % g if g * g == n else r"\sqrt{%d}" % n
+
+
+def _tich7(u, v):
+    r"""Viết $u\cdot v$, đóng ngoặc số âm: $0\cdot\left(-1\right)$."""
+    def _so(t):
+        return "%d" % t if t >= 0 else r"\left(%d\right)" % t
+    return r"%s\cdot %s" % (_so(u), _so(v))
+
+
+def _rut_gon7(a, b, c):
+    r"""Chia cả phương trình cho ước chung và chuẩn hoá dấu hệ số đầu."""
+    g = math.gcd(math.gcd(abs(a), abs(b)), abs(c)) or 1
+    a, b, c = a // g, b // g, c // g
+    if a < 0 or (a == 0 and b < 0):
+        a, b, c = -a, -b, -c
+    return a, b, c
+
+
 # Bộ ba Pytago dùng làm vectơ pháp tuyến để mẫu căn ra SỐ NGUYÊN.
 PYTAGO7 = [(3, 4, 5), (4, 3, 5), (6, 8, 10), (8, 6, 10),
            (5, 12, 13), (12, 5, 13), (8, 15, 17), (15, 8, 17)]
@@ -127,7 +196,8 @@ def L10_C7_B19_NB106_MC_A_01(socau, dang=1):
         a = random.randint(-5, 5)
         b = random.randint(-5, 5)
         c = random.randint(-9, 9)
-        if a == 0 and b == 0:
+        # cả hai hệ số đều khác 0 thì phương án nhiễu không còn hạng tử "0y"
+        if a == 0 or b == 0:
             continue
         if (a, b, c) not in gt:
             gt.append((a, b, c))
@@ -246,15 +316,13 @@ def L10_C7_B19_TH107_MC_A_01(socau, dang=1):
                 "\\\\\n"
                 r"$a\left(x - x_0\right) + b\left(y - y_0\right) = 0$."
                 "\\\\\n"
-                r"$%d\left(x %s %d\right) + %d\left(y %s %d\right) = 0$"
-                % (a, "-" if x0 >= 0 else "+", abs(x0),
-                   b, "-" if y0 >= 0 else "+", abs(y0)) +
+                r"$%s$" % _khai_trien7(a, b, x0, y0) +
                 "\\\\\n"
                 r"Khai triển và thu gọn: $%s$." % _pt_duong_thang(a, b, c) +
                 "\\\\\n"
                 r"Kiểm lại: thay $M%s$ vào vế trái được "
-                r"$%d\cdot %d + %d\cdot %d %s %d = 0$."
-                % (_toado7(x0, y0), a, x0, b, y0,
+                r"$%s + %s %s %d = 0$."
+                % (_toado7(x0, y0), _tich7(a, x0), _tich7(b, y0),
                    "+" if c >= 0 else "-", abs(c)))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
@@ -304,10 +372,8 @@ def L10_C7_B19_TH107_MC_B_01(socau, dang=1):
                 r"Đường thẳng qua $A%s$ với pháp tuyến $%s$:"
                 % (_toado7(xa, ya), _toado7(a, b)) +
                 "\\\\\n"
-                r"$%d\left(x %s %d\right) + %d\left(y %s %d\right) = 0 "
-                r"\Leftrightarrow %s$."
-                % (a, "-" if xa >= 0 else "+", abs(xa),
-                   b, "-" if ya >= 0 else "+", abs(ya),
+                r"$%s \Leftrightarrow %s$."
+                % (_khai_trien7(a, b, xa, ya),
                    _pt_duong_thang(a, b, c)) +
                 "\\\\\n"
                 r"Kiểm lại: cả $A$ và $B$ đều thoả mãn phương trình này.")
@@ -435,19 +501,17 @@ def L10_C7_B19_VD107_MC_A_01(socau, dang=1):
         giai = (r"Đường trung trực của $AB$ đi qua \textbf{trung điểm} $M$ "
                 r"của $AB$ và \textbf{vuông góc} với $AB$."
                 "\\\\\n"
-                r"Trung điểm: $M\left(\dfrac{%d + %d}{2};\ "
-                r"\dfrac{%d + %d}{2}\right) = M%s$."
-                % (xa, xb, ya, yb, _toado7(xm, ym)) +
+                r"Trung điểm: $M\left(\dfrac{%s}{2};\ "
+                r"\dfrac{%s}{2}\right) = M%s$."
+                % (_tong7(xa, xb), _tong7(ya, yb), _toado7(xm, ym)) +
                 "\\\\\n"
                 r"Vì trung trực vuông góc với $AB$ nên nhận "
                 r"$\overrightarrow{AB} = %s$ làm \textbf{vectơ pháp "
                 r"tuyến}; rút gọn lấy $\overrightarrow{n} = %s$ cùng phương."
                 % (_toado7(ux, uy), _toado7(a, b)) +
                 "\\\\\n"
-                r"Phương trình: $%d\left(x %s %d\right) + "
-                r"%d\left(y %s %d\right) = 0 \Leftrightarrow %s$."
-                % (a, "-" if xm >= 0 else "+", abs(xm),
-                   b, "-" if ym >= 0 else "+", abs(ym),
+                r"Phương trình: $%s \Leftrightarrow %s$."
+                % (_khai_trien7(a, b, xm, ym),
                    _pt_duong_thang(a, b, c)) +
                 "\\\\\n"
                 r"Kiểm lại: $M$ thoả mãn phương trình, và $A$, $B$ cách đều "
@@ -475,19 +539,18 @@ def L10_C7_B19_VD107_TL_A_01(socau, dong=1):
     cauTN = ""
     for xa, ya, xb, yb in gt:
         u1, u2 = xb - xa, yb - ya
-        a, b = u2, -u1
-        c = -(a * xa + b * ya)
+        a, b, c = _rut_gon7(u2, -u1, -(u2 * xa - u1 * ya))
         xm, ym = (xa + xb) // 2, (ya + yb) // 2
-        a2, b2 = u1, u2
-        c2 = -(a2 * xm + b2 * ym)
+        a2, b2, c2 = _rut_gon7(u1, u2, -(u1 * xm + u2 * ym))
 
         debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho hai điểm $A%s$ và $B%s$."
                  % (_toado7(xa, ya), _toado7(xb, yb)))
 
         hoi_a = r"Lập phương trình tổng quát của đường thẳng $AB$."
-        giai_a = (r"$\overrightarrow{AB} = %s$ là vectơ chỉ phương, nên vectơ "
-                  r"pháp tuyến là $\overrightarrow{n} = %s$."
-                  % (_toado7(u1, u2), _toado7(a, b)) +
+        giai_a = (r"$\overrightarrow{AB} = %s$ là vectơ chỉ phương, nên một "
+                  r"vectơ pháp tuyến là $%s$; rút gọn lấy "
+                  r"$\overrightarrow{n} = %s$."
+                  % (_toado7(u1, u2), _toado7(u2, -u1), _toado7(a, b)) +
                   "\\\\\n"
                   r"Đường thẳng qua $A%s$: $%s$."
                   % (_toado7(xa, ya), _pt_duong_thang(a, b, c)))
@@ -498,13 +561,12 @@ def L10_C7_B19_VD107_TL_A_01(socau, dong=1):
 
         hoi_c = r"Lập phương trình đường trung trực của đoạn thẳng $AB$."
         giai_c = (r"Đường trung trực đi qua $M%s$ và vuông góc với $AB$, nên "
-                  r"nhận $\overrightarrow{AB} = %s$ làm vectơ pháp tuyến."
-                  % (_toado7(xm, ym), _toado7(a2, b2)) +
+                  r"nhận $\overrightarrow{AB} = %s$ làm vectơ pháp tuyến; "
+                  r"rút gọn lấy $\overrightarrow{n} = %s$."
+                  % (_toado7(xm, ym), _toado7(u1, u2), _toado7(a2, b2)) +
                   "\\\\\n"
-                  r"$%d\left(x %s %d\right) + %d\left(y %s %d\right) = 0 "
-                  r"\Leftrightarrow %s$."
-                  % (a2, "-" if xm >= 0 else "+", abs(xm),
-                     b2, "-" if ym >= 0 else "+", abs(ym),
+                  r"$%s \Leftrightarrow %s$."
+                  % (_khai_trien7(a2, b2, xm, ym),
                      _pt_duong_thang(a2, b2, c2)))
 
         ds_abcd = [(hoi_a, _pt_duong_thang(a, b, c), giai_a),
@@ -529,13 +591,17 @@ def L10_C7_B20_TH109_MC_A_01(socau, dang=1):
         a1 = random.randint(-4, 4)
         b1 = random.randint(-4, 4)
         c1 = random.randint(-6, 6)
-        if a1 == 0 and b1 == 0:
+        # ba hệ số đều khác 0 thì mọi tỉ số trong lời giải đều có nghĩa
+        if a1 == 0 or b1 == 0 or c1 == 0:
             continue
         kieu = random.choice(KIEU)
         k = random.choice([2, 3, -2])
         if kieu == "cat":
             a2, b2 = b1, a1 + 1
             if a1 * b2 - a2 * b1 == 0:
+                continue
+            # cắt nhau mà lại vuông góc thì câu có HAI đáp án đúng
+            if a1 * a2 + b1 * b2 == 0:
                 continue
             c2 = random.randint(-6, 6)
         elif kieu == "song_song":
@@ -559,10 +625,10 @@ def L10_C7_B20_TH109_MC_A_01(socau, dang=1):
                  r"$d_1: %s$ và $d_2: %s$."
                  % (_pt_duong_thang(a1, b1, c1), _pt_duong_thang(a2, b2, c2)))
         if kieu == "cat":
-            ly_do = (r"$a_1b_2 - a_2b_1 = %d\cdot %d - %d\cdot %d = %d "
+            ly_do = (r"$a_1b_2 - a_2b_1 = %s - %s = %d "
                      r"\ne 0$ nên hai vectơ pháp tuyến \textbf{không cùng "
                      r"phương}: hai đường thẳng cắt nhau."
-                     % (a1, b2, a2, b1, dinh_thuc))
+                     % (_tich7(a1, b2), _tich7(a2, b1), dinh_thuc))
         elif kieu == "song_song":
             ly_do = (r"$\dfrac{%d}{%d} = \dfrac{%d}{%d}$ nhưng "
                      r"$\dfrac{%d}{%d}$ khác tỉ số đó, nên hai đường thẳng "
@@ -619,9 +685,10 @@ def L10_C7_B20_TH110_MC_A_01(socau, dang=1):
                 r"$d\left(M;\ \Delta\right) = "
                 r"\dfrac{\left|ax_0 + by_0 + c\right|}{\sqrt{a^2 + b^2}}$."
                 "\\\\\n"
-                r"Tử số: $\left|%d\cdot %d + %d\cdot %d %s %d\right| "
+                r"Tử số: $\left|%s + %s %s %d\right| "
                 r"= \left|%d\right| = %d$."
-                % (a, x0, b, y0, "+" if c >= 0 else "-", abs(c),
+                % (_tich7(a, x0), _tich7(b, y0),
+                   "+" if c >= 0 else "-", abs(c),
                    a * x0 + b * y0 + c, tu) +
                 "\\\\\n"
                 r"Mẫu số: $\sqrt{%d^2 + %d^2} = \sqrt{%d} = %d$."
@@ -665,10 +732,11 @@ def L10_C7_B20_TH110_SA_A_01(socau):
         debai = (r"Tính khoảng cách từ điểm $M%s$ đến đường thẳng "
                  r"$\Delta: %s$." % (_toado7(x0, y0),
                                      _pt_duong_thang(a, b, c)))
-        giai = (r"$d = \dfrac{\left|%d\cdot %d + %d\cdot %d %s %d\right|}"
-                r"{\sqrt{%d^2 + %d^2}} = \dfrac{%d}{%d} = %s$."
-                % (a, x0, b, y0, "+" if c >= 0 else "-", abs(c),
-                   a, b, tu, n, _xx7(d)))
+        giai = (r"$d = \dfrac{\left|%s + %s %s %d\right|}"
+                r"{\sqrt{%s^2 + %s^2}} = \dfrac{%d}{%d} = %s$."
+                % (_tich7(a, x0), _tich7(b, y0),
+                   "+" if c >= 0 else "-", abs(c),
+                   _so7(a), _so7(b), tu, n, _xx7(d)))
         nhieu = _ba_nhieu7(_xx7(d), [_xx7(tu), _xx7(tu / (n * n)),
                                      _xx7(d * n)],
                            buoc=lambda t: _xx7(d + t / 2.0))
@@ -679,6 +747,10 @@ def L10_C7_B20_TH110_SA_A_01(socau):
 # Các cặp vectơ pháp tuyến cho góc ĐẸP giữa hai đường thẳng.
 # Với vectơ pháp tuyến NGUYÊN, góc 30 và 60 độ không dựng được
 # (cần b^2 = 3a^2, vô nghiệm nguyên), nên chỉ dùng 0, 45, 90 độ.
+# Giá trị cos CHÍNH XÁC của các góc dùng trong CAP_GOC7 (không dùng
+# số thập phân gần đúng trong lời giải).
+COS_GOC7 = {0: "1", 45: r"\dfrac{\sqrt{2}}{2}", 90: "0"}
+
 CAP_GOC7 = [
     ((1, 0), (1, 1), 45), ((1, 0), (1, -1), 45),
     ((0, 1), (1, 1), 45), ((0, 1), (1, -1), 45),
@@ -724,14 +796,15 @@ def L10_C7_B20_TH111_MC_A_01(socau, dang=1):
                 r"{\left|\overrightarrow{n_1}\right|\cdot"
                 r"\left|\overrightarrow{n_2}\right|}$."
                 "\\\\\n"
-                r"Tử số: $\left|%d\cdot %d + %d\cdot %d\right| = %d$."
-                % (a1, a2, b1, b2, abs(tich)) +
+                r"Tử số: $\left|%s + %s\right| = %d$."
+                % (_tich7(a1, a2), _tich7(b1, b2), abs(tich)) +
                 "\\\\\n"
                 r"Mẫu số: $\sqrt{%d}\cdot\sqrt{%d} = %s$."
-                % (a1 * a1 + b1 * b1, a2 * a2 + b2 * b2, _xx7(n1 * n2, 4)) +
+                % (a1 * a1 + b1 * b1, a2 * a2 + b2 * b2,
+                   _can7((a1 * a1 + b1 * b1) * (a2 * a2 + b2 * b2))) +
                 "\\\\\n"
                 r"$\cos\varphi = %s$ nên $\varphi = %d^{\circ}$."
-                % (_xx7(abs(tich) / (n1 * n2), 4), goc) +
+                % (COS_GOC7[goc], goc) +
                 "\\\\\n"
                 r"Chú ý có \textbf{dấu giá trị tuyệt đối} ở tử nên góc giữa "
                 r"hai đường thẳng luôn thuộc $\left[0^{\circ};\ "
@@ -764,10 +837,10 @@ def L10_C7_B20_TH111_SA_A_01(socau):
                  r"$d_2: %s$ (đơn vị: độ, chỉ ghi số)."
                  % (_pt_duong_thang(a1, b1, c1),
                     _pt_duong_thang(a2, b2, c2)))
-        giai = (r"$\cos\varphi = \dfrac{\left|%d\cdot %d + %d\cdot %d\right|}"
+        giai = (r"$\cos\varphi = \dfrac{\left|%s + %s\right|}"
                 r"{\sqrt{%d}\cdot\sqrt{%d}} = %s$."
-                % (a1, a2, b1, b2, a1 * a1 + b1 * b1, a2 * a2 + b2 * b2,
-                   _xx7(abs(tich) / (n1 * n2), 4)) +
+                % (_tich7(a1, a2), _tich7(b1, b2),
+                   a1 * a1 + b1 * b1, a2 * a2 + b2 * b2, COS_GOC7[goc]) +
                 "\\\\\n"
                 r"Vậy $\varphi = %d^{\circ}$." % goc)
         nhieu = _ba_nhieu7(goc, [g for g in (0, 30, 45, 60, 90) if g != goc],
@@ -791,6 +864,9 @@ def L10_C7_B20_VD109_MC_A_01(socau, dang=1):
         # vuông góc thì m = -b1^2/a1 phải NGUYÊN, nếu không thì bỏ bộ số
         if kieu == "vuong_goc" and (b1 * b1) % a1 != 0:
             continue
+        # song song: c2 phải KHÁC c1, nếu bằng thì hai đường TRÙNG nhau
+        if kieu == "song_song" and c2 == c1:
+            continue
         v = (a1, b1, c1, c2, kieu)
         if v not in gt:
             gt.append(v)
@@ -801,11 +877,15 @@ def L10_C7_B20_VD109_MC_A_01(socau, dang=1):
             # d2: a1 x + m y + c2 = 0 song song d1  =>  m = b1
             m = b1
             dk = (r"Hai đường thẳng song song khi hai vectơ pháp tuyến "
-                  r"\textbf{cùng phương}: $\dfrac{%d}{%d} = \dfrac{m}{%d}$."
-                  % (a1, a1, b1))
-            tinh = (r"$\dfrac{%d}{%d} = 1$ nên $\dfrac{m}{%d} = 1$, suy ra "
-                    r"$m = %d$." % (a1, a1, b1, m))
-            mo_ta = "song song"
+                  r"\textbf{cùng phương}: "
+                  r"$\dfrac{a_2}{a_1} = \dfrac{b_2}{b_1}$.")
+            tinh = (r"$\dfrac{a_2}{a_1} = \dfrac{%d}{%d} = 1$ nên "
+                    r"$\dfrac{m}{%d} = 1$, suy ra $m = %d$."
+                    % (a1, a1, b1, m) +
+                    "\\\\\n"
+                    r"Kiểm lại hằng số: $%d \ne %d$ nên hai đường thẳng "
+                    r"\textbf{song song} chứ không trùng nhau." % (c2, c1))
+            mo_ta = "song song với"
         else:
             # d2: m x + b1' y + c2 = 0 vuong goc d1: a1 x + b1 y + c1 = 0
             # n1 . n2 = 0  =>  a1*m + b1*b1 = 0  =>  m = -b1^2/a1
@@ -813,20 +893,20 @@ def L10_C7_B20_VD109_MC_A_01(socau, dang=1):
             dk = (r"Hai đường thẳng vuông góc khi hai vectơ pháp tuyến "
                   r"\textbf{vuông góc}: $\overrightarrow{n_1}\cdot"
                   r"\overrightarrow{n_2} = 0$.")
-            tinh = (r"$%d\cdot m + %d\cdot %d = 0 \Rightarrow %dm = %d "
-                    r"\Rightarrow m = %d$."
-                    % (a1, b1, b1, a1, -(b1 * b1), m))
+            tinh = (r"$%s + %s = 0 \Rightarrow %s = %d \Rightarrow m = %d$."
+                    % (_don_thuc7(a1, "m"), _tich7(b1, b1),
+                       _don_thuc7(a1, "m"), -(b1 * b1), m))
             mo_ta = "vuông góc với"
 
         dung = r"$m = %d$" % m
         nhieu = [r"$m = %d$" % x for x in _ba_nhieu7(
             m, [-m, m + 1, m - 1, a1], buoc=lambda t: m + 2 * t)]
         if kieu == "song_song":
-            d2 = r"%dx + my %s %d = 0" % (a1, "+" if c2 >= 0 else "-",
-                                          abs(c2))
+            d2 = r"%s + my %s %d = 0" % (_don_thuc7(a1, "x"),
+                                         "+" if c2 >= 0 else "-", abs(c2))
         else:
-            d2 = r"mx %s %dy %s %d = 0" % ("+" if b1 >= 0 else "-", abs(b1),
-                                           "+" if c2 >= 0 else "-", abs(c2))
+            d2 = r"mx %s %s %d = 0" % (_don_thuc7(b1, "y", False),
+                                       "+" if c2 >= 0 else "-", abs(c2))
         debai = (r"Tìm $m$ để đường thẳng $d_2: %s$ %s đường thẳng "
                  r"$d_1: %s$." % (d2, mo_ta, _pt_duong_thang(a1, b1, c1)))
         giai = (r"$\overrightarrow{n_1} = %s$." % _toado7(a1, b1) +
@@ -855,9 +935,9 @@ def L10_C7_B20_VD109_SA_A_01(socau):
     cau = ""
     for a1, b1, c1, c2 in gt:
         m = -(b1 * b1) // a1
-        debai = (r"Tìm $m$ để đường thẳng $d_2: mx %s %dy %s %d = 0$ vuông "
+        debai = (r"Tìm $m$ để đường thẳng $d_2: mx %s %s %d = 0$ vuông "
                  r"góc với đường thẳng $d_1: %s$."
-                 % ("+" if b1 >= 0 else "-", abs(b1),
+                 % (_don_thuc7(b1, "y", False),
                     "+" if c2 >= 0 else "-", abs(c2),
                     _pt_duong_thang(a1, b1, c1)))
         giai = (r"$\overrightarrow{n_1} = %s$, $\overrightarrow{n_2} = "
@@ -866,8 +946,8 @@ def L10_C7_B20_VD109_SA_A_01(socau):
                 r"Hai đường thẳng vuông góc khi "
                 r"$\overrightarrow{n_1}\cdot\overrightarrow{n_2} = 0$:"
                 "\\\\\n"
-                r"$%d m + %d\cdot %d = 0 \Rightarrow m = %d$."
-                % (a1, b1, b1, m))
+                r"$%s + %s = 0 \Rightarrow m = %d$."
+                % (_don_thuc7(a1, "m"), _tich7(b1, b1), m))
         nhieu = _ba_nhieu7(m, [-m, a1, b1], buoc=lambda t: m + 2 * t)
         cau += MC_SA_answer_const(debai, m, nhieu, giai, 0, 0, 2)
     return cau
@@ -956,10 +1036,7 @@ def L10_C7_B21_TH115_MC_A_01(socau, dang=1):
              r"$I%s$, $R = %d$" % (_toado7(2 * a, 2 * b), R),
              r"$I%s$, $R = %d$" % (_toado7(a, b), R + 1)],
             buoc=lambda t: r"$I%s$, $R = %d$" % (_toado7(a, b), R + 1 + t))
-        ve_trai = (r"x^2 + y^2 %s %dx %s %dy %s %d = 0"
-                   % ("-" if 2 * a >= 0 else "+", abs(2 * a),
-                      "-" if 2 * b >= 0 else "+", abs(2 * b),
-                      "+" if c >= 0 else "-", abs(c)))
+        ve_trai = _tron_khai_trien(a, b, c)
         debai = (r"Xác định tâm $I$ và bán kính $R$ của đường tròn "
                  r"$%s$." % ve_trai)
         giai = (r"Phương trình dạng $x^2 + y^2 - 2ax - 2by + c = 0$ là "
@@ -970,8 +1047,8 @@ def L10_C7_B21_TH115_MC_A_01(socau, dang=1):
                 r"$-2b = %d \Rightarrow b = %d$; $c = %d$."
                 % (-2 * a, a, -2 * b, b, c) +
                 "\\\\\n"
-                r"$R = \sqrt{%d^2 + %d^2 - \left(%d\right)} = \sqrt{%d} "
-                r"= %d$." % (a, b, c, R * R, R) +
+                r"$R = \sqrt{%s^2 + %s^2 - %s} = \sqrt{%d} = %d$."
+                % (_so7(a), _so7(b), _so7(c), R * R, R) +
                 "\\\\\n"
                 r"Vậy $I%s$ và $R = %d$." % (_toado7(a, b), R))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
@@ -994,17 +1071,14 @@ def L10_C7_B21_TH115_SA_A_01(socau):
     cau = ""
     for a, b, R in gt:
         c = a * a + b * b - R * R
-        ve_trai = (r"x^2 + y^2 %s %dx %s %dy %s %d = 0"
-                   % ("-" if 2 * a >= 0 else "+", abs(2 * a),
-                      "-" if 2 * b >= 0 else "+", abs(2 * b),
-                      "+" if c >= 0 else "-", abs(c)))
+        ve_trai = _tron_khai_trien(a, b, c)
         debai = (r"Tìm bán kính của đường tròn $%s$." % ve_trai)
         giai = (r"So sánh với $x^2 + y^2 - 2ax - 2by + c = 0$ được "
                 r"$a = %d$, $b = %d$, $c = %d$." % (a, b, c) +
                 "\\\\\n"
-                r"$R = \sqrt{a^2 + b^2 - c} = \sqrt{%d + %d - "
-                r"\left(%d\right)} = \sqrt{%d} = %d$."
-                % (a * a, b * b, c, R * R, R))
+                r"$R = \sqrt{a^2 + b^2 - c} = \sqrt{%d + %d - %s} "
+                r"= \sqrt{%d} = %d$."
+                % (a * a, b * b, _so7(c), R * R, R))
         nhieu = _ba_nhieu7(R, [R * R, abs(a), abs(b), R + 1],
                            buoc=lambda t: R + 2 * t)
         cau += MC_SA_answer_const(debai, R, nhieu, giai, 0, 0, 2)
@@ -1032,13 +1106,17 @@ def L10_C7_B21_TH116_MC_A_01(socau, dang=1):
     cauTN = ""
     for a, b, u, v, R in gt:
         xm, ym = a + u, b + v          # điểm M trên đường tròn
-        # tiếp tuyến tại M: pháp tuyến là IM = (u; v)
-        c = -(u * xm + v * ym)
-        dung = r"$%s$" % _pt_duong_thang(u, v, c)
-        nhieu = [r"$%s$" % _pt_duong_thang(u, v, -c),
-                 r"$%s$" % _pt_duong_thang(-v, u, -(-v * xm + u * ym)),
-                 r"$%s$" % _pt_duong_thang(u, v, -(u * a + v * b)),
-                 r"$%s$" % _pt_duong_thang(v, u, c)]
+        # tiếp tuyến tại M: pháp tuyến là IM = (u; v); rút gọn và chuẩn
+        # hoá dấu để phương trình không bắt đầu bằng dấu trừ
+        pn, qn, cn = _rut_gon7(u, v, -(u * xm + v * ym))
+        dung = r"$%s$" % _pt_duong_thang(pn, qn, cn)
+        nhieu = _ba_nhieu7(
+            dung,
+            [r"$%s$" % _pt_duong_thang(pn, qn, -cn),
+             r"$%s$" % _pt_duong_thang(-qn, pn, -(-qn * xm + pn * ym)),
+             r"$%s$" % _pt_duong_thang(pn, qn, -(pn * a + qn * b)),
+             r"$%s$" % _pt_duong_thang(qn, pn, cn)],
+            buoc=lambda t: r"$%s$" % _pt_duong_thang(pn, qn, cn + t))
         debai = (r"Cho đường tròn $\left(C\right): %s$ và điểm $M%s$ thuộc "
                  r"$\left(C\right)$. Lập phương trình tiếp tuyến của "
                  r"$\left(C\right)$ tại $M$."
@@ -1046,23 +1124,35 @@ def L10_C7_B21_TH116_MC_A_01(socau, dang=1):
         giai = (r"Tâm đường tròn là $I%s$." % _toado7(a, b) +
                 "\\\\\n"
                 r"Tiếp tuyến tại $M$ \textbf{vuông góc} với bán kính $IM$, "
-                r"nên nhận $\overrightarrow{IM} = %s$ làm vectơ pháp tuyến."
-                % _toado7(u, v) +
+                r"nên nhận $\overrightarrow{IM} = %s$ (hoặc một vectơ cùng "
+                r"phương) làm vectơ pháp tuyến; chọn $%s$ cho gọn."
+                % (_toado7(u, v), _toado7(pn, qn)) +
                 "\\\\\n"
                 r"Tiếp tuyến đi qua $M%s$ với pháp tuyến $%s$:"
-                % (_toado7(xm, ym), _toado7(u, v)) +
+                % (_toado7(xm, ym), _toado7(pn, qn)) +
                 "\\\\\n"
-                r"$%d\left(x %s %d\right) + %d\left(y %s %d\right) = 0 "
-                r"\Leftrightarrow %s$."
-                % (u, "-" if xm >= 0 else "+", abs(xm),
-                   v, "-" if ym >= 0 else "+", abs(ym),
-                   _pt_duong_thang(u, v, c)) +
+                r"$%s \Leftrightarrow %s$."
+                % (_khai_trien7(pn, qn, xm, ym),
+                   _pt_duong_thang(pn, qn, cn)) +
                 "\\\\\n"
-                r"Kiểm lại: khoảng cách từ $I$ tới đường thẳng này bằng "
-                r"$\dfrac{\left|%d\right|}{%d} = %d = R$."
-                % (u * u + v * v, R, R))
+                r"Kiểm lại: khoảng cách từ $I%s$ tới đường thẳng này bằng "
+                r"$\dfrac{\left|%d\right|}{%s} = %d = R$."
+                % (_toado7(a, b), abs(pn * a + qn * b + cn),
+                   _can7(pn * pn + qn * qn), R))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
+
+
+def _tron_khai_trien(a, b, c):
+    r"""Viết $x^2+y^2-2ax-2by+c = 0$, bỏ hẳn hạng tử có hệ số 0."""
+    ve = "x^2 + y^2"
+    ve += _don_thuc7(-2 * a, "x", False) and \
+        (" " + _don_thuc7(-2 * a, "x", False))
+    ve += _don_thuc7(-2 * b, "y", False) and \
+        (" " + _don_thuc7(-2 * b, "y", False))
+    if c:
+        ve += " %s %d" % ("+" if c > 0 else "-", abs(c))
+    return ve + " = 0"
 
 
 def _ba_diem_duong_tron(lan_thu=300):
@@ -1166,25 +1256,32 @@ def L10_C7_B21_VD113_TL_A_01(socau, dong=1):
                  % (_toado7(x1, y1), _toado7(x2, y2), _toado7(x3, y3)))
 
         hoi_a = (r"Gọi đường tròn ngoại tiếp tam giác có phương trình "
-                 r"$x^2 + y^2 - 2ax - 2by + c = 0$. Lập hệ phương trình "
-                 r"xác định $a$, $b$, $c$.")
+                 r"$x^2 + y^2 - 2ax - 2by + c = 0$. Tìm toạ độ tâm $I$ "
+                 r"của đường tròn đó.")
         giai_a = (r"Thay lần lượt toạ độ ba điểm vào phương trình:"
                   "\\\\\n"
-                  r"$%d - 2a\cdot %d - 2b\cdot %d + c = 0$;"
-                  % (x1 * x1 + y1 * y1, x1, y1) +
+                  r"$%d - 2a\cdot %s - 2b\cdot %s + c = 0$;"
+                  % (x1 * x1 + y1 * y1, _so7(x1), _so7(y1)) +
                   "\\\\\n"
-                  r"$%d - 2a\cdot %d - 2b\cdot %d + c = 0$;"
-                  % (x2 * x2 + y2 * y2, x2, y2) +
+                  r"$%d - 2a\cdot %s - 2b\cdot %s + c = 0$;"
+                  % (x2 * x2 + y2 * y2, _so7(x2), _so7(y2)) +
                   "\\\\\n"
-                  r"$%d - 2a\cdot %d - 2b\cdot %d + c = 0$."
-                  % (x3 * x3 + y3 * y3, x3, y3))
-
-        hoi_b = r"Giải hệ và tìm tâm, bán kính của đường tròn."
-        giai_b = (r"Giải hệ được $a = %d$, $b = %d$, $c = %d$."
+                  r"$%d - 2a\cdot %s - 2b\cdot %s + c = 0$."
+                  % (x3 * x3 + y3 * y3, _so7(x3), _so7(y3)) +
+                  "\\\\\n"
+                  r"Trừ từng đôi một để khử $c$ rồi giải hệ hai phương "
+                  r"trình bậc nhất còn lại: $a = %d$, $b = %d$, $c = %d$."
                   % (a, b, c) +
                   "\\\\\n"
-                  r"Tâm $I%s$; bán kính $R = \sqrt{a^2 + b^2 - c} = "
-                  r"\sqrt{%d} = %d$." % (_toado7(a, b), R * R, R))
+                  r"Vậy tâm là $I%s$." % _toado7(a, b))
+
+        hoi_b = r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác."
+        giai_b = (r"$R = \sqrt{a^2 + b^2 - c} = \sqrt{%d + %d - %s} = "
+                  r"\sqrt{%d} = %d$."
+                  % (a * a, b * b, _so7(c), R * R, R) +
+                  "\\\\\n"
+                  r"Cách khác: $R = IA = \sqrt{%d + %d} = %d$."
+                  % ((x1 - a) ** 2, (y1 - b) ** 2, R))
 
         hoi_c = r"Viết phương trình đường tròn ngoại tiếp tam giác $ABC$."
         giai_c = (r"$%s$." % _pt_duong_tron(a, b, R) +
@@ -1192,9 +1289,8 @@ def L10_C7_B21_VD113_TL_A_01(socau, dong=1):
                   r"Kiểm lại: $IA = IB = IC = %d$ nên $I$ đúng là tâm đường "
                   r"tròn ngoại tiếp." % R)
 
-        ds_abcd = [(hoi_a, r"\text{Hệ ba phương trình bậc nhất}", giai_a),
-                   (hoi_b, r"I\left(%d;\ %d\right),\ R = %d" % (a, b, R),
-                    giai_b),
+        ds_abcd = [(hoi_a, r"I\left(%d;\ %d\right)" % (a, b), giai_a),
+                   (hoi_b, r"R = %d" % R, giai_b),
                    (hoi_c, _pt_duong_tron(a, b, R), giai_c)]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
@@ -1234,9 +1330,10 @@ def L10_C7_B21_VD114_MC_A_01(socau, dang=1):
                 r"tâm tới $\Delta$ \textbf{đúng bằng} bán kính."
                 "\\\\\n"
                 r"$R = d\left(I;\ \Delta\right) = "
-                r"\dfrac{\left|%d\cdot %d + %d\cdot %d %s %d\right|}"
-                r"{\sqrt{%d^2 + %d^2}}$"
-                % (u, a, v, b, "+" if c >= 0 else "-", abs(c), u, v) +
+                r"\dfrac{\left|%s + %s %s %d\right|}"
+                r"{\sqrt{%s^2 + %s^2}}$"
+                % (_tich7(u, a), _tich7(v, b),
+                   "+" if c >= 0 else "-", abs(c), _so7(u), _so7(v)) +
                 "\\\\\n"
                 r"$= \dfrac{%d}{%d} = %d$."
                 % (abs(u * a + v * b + c), n, R) +
@@ -1269,9 +1366,10 @@ def L10_C7_B21_VD114_SA_A_01(socau):
                  % (_toado7(a, b), _pt_duong_thang(u, v, c)))
         giai = (r"Tiếp xúc nghĩa là $R = d\left(I;\ \Delta\right)$:"
                 "\\\\\n"
-                r"$R = \dfrac{\left|%d\cdot %d + %d\cdot %d %s %d\right|}"
-                r"{\sqrt{%d^2 + %d^2}} = \dfrac{%d}{%d} = %d$."
-                % (u, a, v, b, "+" if c >= 0 else "-", abs(c), u, v,
+                r"$R = \dfrac{\left|%s + %s %s %d\right|}"
+                r"{\sqrt{%s^2 + %s^2}} = \dfrac{%d}{%d} = %d$."
+                % (_tich7(u, a), _tich7(v, b),
+                   "+" if c >= 0 else "-", abs(c), _so7(u), _so7(v),
                    abs(u * a + v * b + c), n, R))
         nhieu = _ba_nhieu7(R, [R * R, n, abs(u * a + v * b + c)],
                            buoc=lambda t: R + 2 * t)
@@ -1301,10 +1399,13 @@ def L10_C7_B21_VD117_MC_A_01(socau, dang=1):
     for a, b, R, u, v in gt:
         xm, ym = a + u, b + v
         dung = r"$%s$" % _pt_duong_tron(a, b, R)
-        nhieu = [r"$%s$" % _pt_duong_tron(xm, ym, R),
-                 r"$%s$" % _pt_duong_tron(a, b, R + 1),
-                 r"$%s$" % _pt_duong_tron(-a, -b, R),
-                 r"$%s$" % _pt_duong_tron(a, b, R * 2)]
+        nhieu = _ba_nhieu7(
+            dung,
+            [r"$%s$" % _pt_duong_tron(xm, ym, R),
+             r"$%s$" % _pt_duong_tron(a, b, R + 1),
+             r"$%s$" % _pt_duong_tron(-a, -b, R),
+             r"$%s$" % _pt_duong_tron(a, b, R * 2)],
+            buoc=lambda t: r"$%s$" % _pt_duong_tron(a, b, R + 1 + t))
         debai = (r"Một vệ tinh chuyển động tròn đều quanh tâm $I%s$ trong "
                  r"mặt phẳng toạ độ $Oxy$ (đơn vị trên mỗi trục là nghìn "
                  r"ki-lô-mét). Tại một thời điểm, vệ tinh ở vị trí $M%s$. "
@@ -1368,16 +1469,18 @@ def L10_C7_B21_VD117_TL_A_01(socau, dong=1):
 
         # điểm N ở trong vùng phủ sóng
         xn, yn = a + u // 2, b + v // 2
-        d_in = math.sqrt((xn - a) ** 2 + (yn - b) ** 2)
+        p_in, q_in = xn - a, yn - b
+        s_in = p_in * p_in + q_in * q_in
         hoi_c = (r"Điểm $N%s$ có nằm trong vùng phủ sóng không? Giải thích."
                  % _toado7(xn, yn))
-        giai_c = (r"$IN = \sqrt{\left(%d %s %d\right)^2 + "
-                  r"\left(%d %s %d\right)^2} = %s$ (km)."
-                  % (xn, "-" if a >= 0 else "+", abs(a),
-                     yn, "-" if b >= 0 else "+", abs(b), _xx7(d_in)) +
+        giai_c = (r"So sánh $IN$ với $R$ bằng cách so sánh BÌNH PHƯƠNG, "
+                  r"khỏi phải tính căn:"
                   "\\\\\n"
-                  r"Vì $IN = %s < %d = R$ nên $N$ \textbf{nằm trong} vùng "
-                  r"phủ sóng." % (_xx7(d_in), R))
+                  r"$IN^2 = %s^2 + %s^2 = %d$ và $R^2 = %d$."
+                  % (_so7(p_in), _so7(q_in), s_in, R * R) +
+                  "\\\\\n"
+                  r"Vì $%d < %d$ nên $IN < R$: điểm $N$ \textbf{nằm trong} "
+                  r"vùng phủ sóng." % (s_in, R * R))
 
         ds_abcd = [(hoi_a, r"R = %d\ \text{km}" % R, giai_a),
                    (hoi_b, _pt_duong_tron(a, b, R), giai_b),
@@ -1627,9 +1730,14 @@ def L10_C7_B22_TH122_MC_A_01(socau, dang=1):
 
     cauTN = ""
     for p in gt:
-        dung = r"$y^2 = %dx$" % (2 * p)
-        nhieu = [r"$y^2 = %dx$" % p, r"$y^2 = %dx$" % (4 * p),
-                 r"$x^2 = %dy$" % (2 * p), r"$y^2 = %dx$" % (2 * p + 2)]
+        dung = r"$y^2 = %s$" % _don_thuc7(2 * p, "x")
+        nhieu = _ba_nhieu7(
+            dung,
+            [r"$y^2 = %s$" % _don_thuc7(p, "x"),
+             r"$y^2 = %s$" % _don_thuc7(4 * p, "x"),
+             r"$x^2 = %s$" % _don_thuc7(2 * p, "y"),
+             r"$y^2 = %s$" % _don_thuc7(2 * p + 2, "x")],
+            buoc=lambda t: r"$y^2 = %s$" % _don_thuc7(2 * p + 2 + t, "x"))
         debai = (r"Lập phương trình chính tắc của parabol có tiêu điểm "
                  r"$F\left(%s;\ 0\right)$." % _xx7(p / 2.0))
         giai = (r"Parabol chính tắc $y^2 = 2px$ (với $p > 0$) có tiêu điểm "
@@ -1639,8 +1747,8 @@ def L10_C7_B22_TH122_MC_A_01(socau, dang=1):
                 r"$\dfrac{p}{2} = %s \Rightarrow p = %d$."
                 % (_xx7(p / 2.0), p) +
                 "\\\\\n"
-                r"Vậy phương trình là $y^2 = 2\cdot %d\cdot x = %dx$."
-                % (p, 2 * p))
+                r"Vậy phương trình là $y^2 = 2\cdot %d\cdot x = %s$."
+                % (p, _don_thuc7(2 * p, "x")))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
@@ -1779,9 +1887,10 @@ def L10_C7_B22_VD124_MC_A_01(socau, dang=1):
                 r"$d\left(A;\ \Delta\right) = "
                 r"\dfrac{\left|ax_0 + by_0 + c\right|}{\sqrt{a^2 + b^2}}$."
                 "\\\\\n"
-                r"$= \dfrac{\left|%d\cdot %d + %d\cdot %d %s %d\right|}"
-                r"{\sqrt{%d^2 + %d^2}} = \dfrac{%d}{%d} = %s$ (km)."
-                % (a, x0, b, y0, "+" if c >= 0 else "-", abs(c), a, b,
+                r"$= \dfrac{\left|%s + %s %s %d\right|}"
+                r"{\sqrt{%s^2 + %s^2}} = \dfrac{%d}{%d} = %s$ (km)."
+                % (_tich7(a, x0), _tich7(b, y0),
+                   "+" if c >= 0 else "-", abs(c), _so7(a), _so7(b),
                    tu, n, _xx7(d)))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
@@ -1813,9 +1922,11 @@ def L10_C7_B22_VD124_TL_A_01(socau, dong=1):
         tu = abs(a * x0 + b * y0 + c)
         d = tu / float(n)
         # đường thẳng qua A vuông góc với con đường
-        a2, b2 = -b, a
-        c2 = -(a2 * x0 + b2 * y0)
+        a2, b2, c2 = _rut_gon7(-b, a, b * x0 - a * y0)
         R = d
+        pt_tron = (r"\left(x %s %d\right)^2 + \left(y %s %d\right)^2 = %s"
+                   % ("-" if x0 >= 0 else "+", abs(x0),
+                      "-" if y0 >= 0 else "+", abs(y0), _xx7(R * R, 4)))
 
         debai = (r"Trên bản đồ đặt trong mặt phẳng toạ độ $Oxy$ (đơn vị: "
                  r"ki-lô-mét), một con đường thẳng có phương trình "
@@ -1824,9 +1935,10 @@ def L10_C7_B22_VD124_TL_A_01(socau, dong=1):
 
         hoi_a = r"Tính khoảng cách từ trạm $A$ tới con đường $\Delta$."
         giai_a = (r"$d\left(A;\ \Delta\right) = "
-                  r"\dfrac{\left|%d\cdot %d + %d\cdot %d %s %d\right|}"
-                  r"{\sqrt{%d^2 + %d^2}} = \dfrac{%d}{%d} = %s$ (km)."
-                  % (a, x0, b, y0, "+" if c >= 0 else "-", abs(c), a, b,
+                  r"\dfrac{\left|%s + %s %s %d\right|}"
+                  r"{\sqrt{%s^2 + %s^2}} = \dfrac{%d}{%d} = %s$ (km)."
+                  % (_tich7(a, x0), _tich7(b, y0),
+                     "+" if c >= 0 else "-", abs(c), _so7(a), _so7(b),
                      tu, n, _xx7(d)))
 
         hoi_b = (r"Lập phương trình đường thẳng đi qua $A$ và vuông góc với "
@@ -1844,14 +1956,11 @@ def L10_C7_B22_VD124_TL_A_01(socau, dong=1):
         giai_c = (r"Đường tròn tiếp xúc với $\Delta$ nên bán kính bằng đúng "
                   r"khoảng cách từ tâm tới $\Delta$: $R = %s$ km." % _xx7(R) +
                   "\\\\\n"
-                  r"Phương trình: $\left(x %s %d\right)^2 + "
-                  r"\left(y %s %d\right)^2 = %s$."
-                  % ("-" if x0 >= 0 else "+", abs(x0),
-                     "-" if y0 >= 0 else "+", abs(y0), _xx7(R * R, 4)))
+                  r"Phương trình: $%s$." % pt_tron)
 
         ds_abcd = [(hoi_a, r"%s\ \text{km}" % _xx7(d), giai_a),
                    (hoi_b, _pt_duong_thang(a2, b2, c2), giai_b),
-                   (hoi_c, r"R = %s" % _xx7(R), giai_c)]
+                   (hoi_c, pt_tron, giai_c)]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
 
@@ -1897,14 +2006,14 @@ def L10_C7_TF_A_01(socau, socot=1):
             # a) NB - đọc thẳng hệ số của phương trình tổng quát
             [
                 (r"{\True Đường thẳng $\Delta$ có một vectơ pháp tuyến là "
-                 r"$\vec{n} = %s$}" % _toado7(a, b),
+                 r"$\overrightarrow{n} = %s$}" % _toado7(a, b),
                  r"Đúng. Phương trình tổng quát $ax + by + c = 0$ luôn "
-                 r"nhận $\vec{n} = \left(a;\ b\right)$ làm vectơ pháp "
+                 r"nhận $\overrightarrow{n} = \left(a;\ b\right)$ làm vectơ pháp "
                  r"tuyến; ở đây $a = %d$, $b = %d$." % (a, b)),
                 (r"{Đường thẳng $\Delta$ có một vectơ pháp tuyến là "
-                 r"$\vec{n} = %s$}" % _toado7(-b, a),
+                 r"$\overrightarrow{n} = %s$}" % _toado7(-b, a),
                  r"Sai. $%s$ là vectơ CHỈ PHƯƠNG của $\Delta$ (vuông góc "
-                 r"với $\vec{n} = %s$), không phải vectơ pháp tuyến."
+                 r"với $\overrightarrow{n} = %s$), không phải vectơ pháp tuyến."
                  % (_toado7(-b, a), _toado7(a, b))),
             ],
             # b) TH - thay toạ độ điểm vào vế trái
@@ -1912,8 +2021,8 @@ def L10_C7_TF_A_01(socau, socot=1):
                 (r"{\True Điểm $A$ không nằm trên đường thẳng $\Delta$}",
                  r"Đúng. Thay $x = %d$, $y = %d$ vào vế trái:" % (x0, y0) +
                  "\\\\\n"
-                 r"$%d\cdot\left(%d\right) + %d\cdot\left(%d\right) %s %d "
-                 r"= %d \ne 0$," % (a, x0, b, y0, dau_c, abs(c), tu) +
+                 r"$%s + %s %s %d = %d \ne 0$,"
+                 % (_tich7(a, x0), _tich7(b, y0), dau_c, abs(c), tu) +
                  "\\\\\n"
                  r"nên toạ độ của $A$ không thoả mãn phương trình của "
                  r"$\Delta$."),
@@ -1972,6 +2081,8 @@ def L10_C7_TF_B_01(socau, socot=1):
         p = random.randint(-5, 5)
         # tâm phải GẦN trục hoành hơn bán kính để (C) cắt Ox tại 2 điểm
         q = random.randint(-(R - 1), R - 1)
+        if q == 0:                     # tâm nằm ngay trên Ox thì ý d) nhạt
+            continue
         A, B, c = _bo_elip()
         bo = (p, q, u, v, R, A, B, c)
         if bo not in gt:
@@ -1981,7 +2092,9 @@ def L10_C7_TF_B_01(socau, socot=1):
     for p, q, u, v, R, A, B, c in gt:
         xM, yM = p + u, q + v          # M thuộc (C) vì u^2 + v^2 = R^2
         # tiếp tuyến tại M: vectơ pháp tuyến IM = (u; v)
-        ct = -(u * xM + v * yM)
+        tu7, tv7, ct = _rut_gon7(u, v, -(u * xM + v * yM))
+        # đường thẳng IM kéo dài - dùng làm phương án SAI
+        sa7, sb7, sc7 = _rut_gon7(-v, u, v * xM - u * yM)
         debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho đường tròn "
                  r"$\left(C\right): %s$ và elip "
                  r"$\left(E\right): \dfrac{x^2}{%d} + \dfrac{y^2}{%d} = 1$."
@@ -2021,26 +2134,26 @@ def L10_C7_TF_B_01(socau, socot=1):
             [
                 (r"{\True Tiếp tuyến của $\left(C\right)$ tại điểm "
                  r"$M%s$ có phương trình $%s$}"
-                 % (_toado7(xM, yM), _pt_duong_thang(u, v, ct)),
+                 % (_toado7(xM, yM), _pt_duong_thang(tu7, tv7, ct)),
                  r"Đúng. Trước hết $M \in \left(C\right)$ vì "
                  r"$\left(%d\right)^2 + \left(%d\right)^2 = %d = R^2$."
                  % (u, v, R * R) +
                  "\\\\\n"
                  r"Tiếp tuyến tại $M$ vuông góc với bán kính $IM$, nên "
-                 r"nhận $\vec{IM} = %s$ làm vectơ pháp tuyến:"
-                 % _toado7(u, v) +
+                 r"nhận $\overrightarrow{IM} = %s$ (rút gọn thành $%s$) "
+                 r"làm vectơ pháp tuyến:"
+                 % (_toado7(u, v), _toado7(tu7, tv7)) +
                  "\\\\\n"
-                 r"$%d\left(x - %d\right) + %d\left(y - %d\right) = 0 "
-                 r"\Leftrightarrow %s$."
-                 % (u, xM, v, yM, _pt_duong_thang(u, v, ct))),
+                 r"$%s \Leftrightarrow %s$."
+                 % (_khai_trien7(tu7, tv7, xM, yM),
+                    _pt_duong_thang(tu7, tv7, ct))),
                 (r"{Tiếp tuyến của $\left(C\right)$ tại điểm $M%s$ có "
                  r"phương trình $%s$}"
-                 % (_toado7(xM, yM), _pt_duong_thang(-v, u,
-                                                     v * xM - u * yM)),
+                 % (_toado7(xM, yM), _pt_duong_thang(sa7, sb7, sc7)),
                  r"Sai. Đó là đường thẳng $IM$ kéo dài chứ không phải "
                  r"tiếp tuyến: nó nhận $%s$ làm vectơ pháp tuyến, tức là "
                  r"VUÔNG GÓC với tiếp tuyến cần tìm."
-                 % _toado7(-v, u)),
+                 % _toado7(sa7, sb7)),
             ],
             # d) VDC - phải tự so sánh khoảng cách tâm - trục với bán kính
             [

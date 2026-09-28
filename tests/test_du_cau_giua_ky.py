@@ -39,7 +39,9 @@ DOI_HOI = {
 
 # Giữa kỳ 1 lớp 10 gồm chương 1, 2, 3 và bài 7-8 của chương 4 - tất cả
 # đều đã có đủ hàm Python.
-KI_THI_DA_DU_HAM = ["giua_ky_1"]
+# 28/09/2026: xong chương 7 -> lớp 10 đủ hàm cho CẢ BỐN kỳ thi.
+KI_THI_DA_DU_HAM = ["giua_ky_1", "cuoi_ky_1",
+                    "giua_ky_2", "cuoi_ky_2"]
 
 
 @pytest.mark.parametrize("ki_thi", KI_THI_DA_DU_HAM)
