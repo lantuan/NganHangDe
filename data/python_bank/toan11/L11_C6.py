@@ -70,6 +70,15 @@ def _ba_nhieu6(dapso, ung_vien, buoc=None):
         k += 1
     return ds
 
+def _chon_chi_muc(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, KHÔNG trùng nhau chừng nào còn
+    đủ; hết mẫu thì quay vòng (tránh vòng lặp vô hạn khi socau > n)."""
+    ds = []
+    while len(ds) < socau:
+        thieu = socau - len(ds)
+        ds += random.sample(range(n), min(n, thieu))
+    return ds
+
 
 def _dau(x):
     return ("+ %d" % abs(x)) if x >= 0 else ("- %d" % abs(x))
@@ -604,11 +613,7 @@ def L11_C6_B19_TH090_MC_A_01(socau, dang=1):
          r"$\log_a x^{\alpha}$ khác $\left(\log_a x\right)^{\alpha}$; "
          r"còn $\log_{a^{\alpha}} x = \dfrac{1}{\alpha}\log_a x$."),
     ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(MAU))
-        if i not in gt:
-            gt.append(i)
+    gt = _chon_chi_muc(len(MAU), socau)
 
     cauTN = ""
     for i in gt:
@@ -769,11 +774,7 @@ def L11_C6_B19_VD093_MC_A_01(socau, dang=1):
 
     CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
     """
-    gt = []
-    while len(gt) < socau:
-        k = random.randint(3, 8)
-        if k not in gt:
-            gt.append(k)
+    gt = [3 + i for i in _chon_chi_muc(6, socau)]
 
     cauTN = ""
     for k in gt:
@@ -1051,12 +1052,8 @@ def L11_C6_B20_TH095_MC_A_01(socau, dang=1):
 
     CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
     """
-    gt = []
-    while len(gt) < socau:
-        a = random.choice([2, 3])
-        loai = random.choice(["mu", "log"])
-        if (a, loai) not in gt:
-            gt.append((a, loai))
+    BO = [(a, loai) for a in (2, 3) for loai in ("mu", "log")]
+    gt = [BO[i] for i in _chon_chi_muc(len(BO), socau)]
 
     cauTN = ""
     for a, loai in gt:
@@ -1112,12 +1109,8 @@ def L11_C6_B20_TH096_MC_A_01(socau, dang=1):
 
     CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
     """
-    gt = []
-    while len(gt) < socau:
-        a = random.choice([2, 3])
-        loai = random.choice(["mu", "log"])
-        if (a, loai) not in gt:
-            gt.append((a, loai))
+    BO = [(a, loai) for a in (2, 3) for loai in ("mu", "log")]
+    gt = [BO[i] for i in _chon_chi_muc(len(BO), socau)]
 
     cauTN = ""
     for a, loai in gt:

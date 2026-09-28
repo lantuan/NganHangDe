@@ -102,6 +102,13 @@
     "Dang": "Vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác"
   },
   {
+    "id": "L11_C1_B2_VD014_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác và các phép biến đổi lượng giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giá trị lượng giác trong bài toán guồng nước",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C1_B2_VD014_TL_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với giá trị lượng giác của góc lượng giác và các phép biến đổi lượng giác.",
     "Loai": "Tự luận",
@@ -154,6 +161,13 @@
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với hàm số lượng giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề thực tiễn gắn với hàm số lượng giác"
+  },
+  {
+    "id": "L11_C1_B3_VD021_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với hàm số lượng giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Li độ của vật dao động điều hoà",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C1_B3_VD021_TL_A",
@@ -214,6 +228,13 @@
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với phương trình lượng giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề thực tiễn gắn với phương trình lượng giác"
+  },
+  {
+    "id": "L11_C1_B4_VD028_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với phương trình lượng giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Thời điểm đầu tiên thoả mãn điều kiện cho trước",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C1_B4_VD028_TL_A",

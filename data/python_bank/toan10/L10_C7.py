@@ -59,6 +59,16 @@ def _ba_nhieu7(dapso, ung_vien, buoc=None):
     return ds
 
 
+def _chon_chi_muc7(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, KHÔNG trùng nhau chừng nào còn
+    đủ; hết mẫu thì quay vòng (tránh vòng lặp vô hạn khi socau > n)."""
+    ds = []
+    while len(ds) < socau:
+        thieu = socau - len(ds)
+        ds += random.sample(range(n), min(n, thieu))
+    return ds
+
+
 def _pt_duong_thang(a, b, c):
     r"""Viết $ax + by + c = 0$ thành LaTeX gọn."""
     phan = []
@@ -1688,11 +1698,7 @@ def L10_C7_B22_TH121_MC_A_01(socau, dang=1):
     # (a, b, c) với c^2 = a^2 + b^2
     BO = [(3, 4, 5), (4, 3, 5), (6, 8, 10), (5, 12, 13),
           (12, 5, 13), (8, 15, 17), (15, 8, 17)]
-    gt = []
-    while len(gt) < socau:
-        v = random.choice(BO)
-        if v not in gt:
-            gt.append(v)
+    gt = [BO[i] for i in _chon_chi_muc7(len(BO), socau)]
 
     cauTN = ""
     for a, b, c in gt:

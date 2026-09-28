@@ -7769,3 +7769,78 @@ Da xong 142/258 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.21 - 2026-09-29
+
+## Lop 11 chuong 1 (Ham so luong giac va PT luong giac): 42/42 dang
+
+Viet moi data/python_bank/toan11/L11_C1.py.
+
+Bai 1 (gia tri luong giac cua goc luong giac): khai niem goc luong giac,
+doi do - radian, duong tron luong giac, dau cua sin/cos, bang gia tri dac
+biet, he thuc Chasles, he thuc co ban, goc lien quan dac biet, may tinh
+cam tay.
+Bai 2 (cong thuc luong giac): cong thuc cong, cong thuc nhan doi, tich
+thanh tong, tong thanh tich, bai toan guong nuoc (MC + SA + TL).
+Bai 3 (ham so luong giac): ham chan - le - tuan hoan, tap xac dinh,
+bang gia tri, NHAN DANG DO THI sin/cos/tan (co hinh), tap gia tri va chu
+ki, bai toan dao dong dieu hoa (MC + SA + TL).
+Bai 4 (PT luong giac co ban): bon cong thuc nghiem, giai PT voi gia tri
+dac biet, so nghiem tren mot khoang, giai PT (tu luan), PT dang cos(mx),
+bai toan thuc tien (MC + SA + TL).
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+BANG GIA TRI LUONG GIAC DAC BIET DUOC DUNG TU DONG khi nap tep: chuong
+trinh tu tinh sin/cos/tan cua moi boi cua pi/12 roi doi chieu voi bang
+{0; 1/2; can2/2; can3/2; 1} - khong go tay nen khong the chep nham.
+
+Ba do thi y = sin x, y = cos x, y = tan x ve bang TIKZ THUAN (co ca tiem
+can dung cho tan), da dich thu ra anh qua hinh_ve_service.
+
+So lieu chon de DAP SO DEP: moi goc deu la boi cua pi/6 hoac pi/4; cac
+cau SA dung bo ba Pytago mau 5 hoac 25 nen ket quaviet duoc dung hai chu
+so thap phan (khong phai lam tron).
+
+## Bo sung 3 dang con thieu cua chuong 1
+
+VD014 SA, VD021 SA, VD028 SA. De he so 1 chuong 1 khong con o trong nao.
+
+## Sua mot lop loi CHUNG: vong lap vo han khi socau > so mau co dinh
+
+Nhung ham dung danh sach mau CO DINH (vi du chi co 2 hoac 3 tinh huong)
+ma lai doi "khong duoc trung" se quay vong mai mai neu goi voi socau lon
+hon so mau. Da quet CA NGAN HANG bang dong ho bao gio va sua 7 ham:
+
+  L11_C1_B1_TH008_SA_A_01, L11_C1_B3_NB016 (va cac ham cung kieu),
+  L11_C5_B15_NB072_MC_A_01, L11_C6_B19_VD093_MC_A_01,
+  L11_C6_B20_TH095_MC_A_01, L11_C6_B20_TH096_MC_A_01,
+  L11_C9_B31_NB138_MC_A_01, L10_C7_B22_TH121_MC_A_01.
+
+Cach sua: them ham _chon_chi_muc (va _chon_chi_muc7 cho lop 10) - chon
+khong trung chung nao con du mau, het mau thi quay vong.
+
+## Da kiem chung the nao
+
+1. 42/42 ham chay sach 3 muc socau x 40 seed.
+2. Quet CA NGAN HANG (lop 10 + lop 11) voi socau = 1, 8 va dong ho bao
+   gio 10 giay moi lan goi - khong con ham nao treo.
+3. Kiem toan DOC LAP 2700 cau: doc lai so lieu TU CHINH DE BAI bang bieu
+   thuc chinh quy roi tu tinh lai bang phan so huu ti - 0 cho sai.
+4. Ba do thi luong giac da dich thanh anh PNG qua dung hinh_ve_service,
+   xem lai bang mat: dung dang, dung diem dac biet, tan co tiem can.
+5. De he so 1 chuong 1 lop 11: 20/20 de du ma tran 6-1-2-3.
+6. Quet 20 de x 9 chuong x 2 lop: chi con thieu o C4 va C7 lop 11 - hai
+   chuong HINH HOC KHONG GIAN chua viet ham.
+7. 2395 bai test qua, 8 bo qua (truoc: 2252).
+
+## Hien trang lop 11
+
+    C1 42/42   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5 23/23          C8 23/23
+    C3 16/16   C6 33/33          C9 25/25
+
+Da xong 184/261 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

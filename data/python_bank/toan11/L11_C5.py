@@ -57,6 +57,15 @@ def _ba_nhieu5(dapso, ung_vien, buoc=None):
         k += 1
     return ds
 
+def _chon_chi_muc(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, KHÔNG trùng nhau chừng nào còn
+    đủ; hết mẫu thì quay vòng (tránh vòng lặp vô hạn khi socau > n)."""
+    ds = []
+    while len(ds) < socau:
+        thieu = socau - len(ds)
+        ds += random.sample(range(n), min(n, thieu))
+    return ds
+
 
 def _dau(x):
     return ("+ %d" % abs(x)) if x >= 0 else ("- %d" % abs(x))
@@ -118,13 +127,7 @@ def L11_C5_B15_NB072_MC_A_01(socau, dang=1):
         (r"\lim\left(\dfrac{1}{2}\right)^{n}", "0"),
         (r"\lim c \text{ (với } c \text{ là hằng số)}", "c"),
     ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(MAU))
-        if i not in gt:
-            gt.append(i)
-        if len(gt) >= len(MAU):
-            break
+    gt = _chon_chi_muc(len(MAU), socau)
 
     cauTN = ""
     for i in gt:

@@ -64,6 +64,16 @@ def _ba_nhieu9(dapso, ung_vien, buoc=None):
     return ds
 
 
+def _chon_chi_muc(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, KHÔNG trùng nhau chừng nào còn
+    đủ; hết mẫu thì quay vòng (tránh vòng lặp vô hạn khi socau > n)."""
+    ds = []
+    while len(ds) < socau:
+        thieu = socau - len(ds)
+        ds += random.sample(range(n), min(n, thieu))
+    return ds
+
+
 def _dau(x):
     return ("+ %d" % abs(x)) if x >= 0 else ("- %d" % abs(x))
 
@@ -169,11 +179,7 @@ def L11_C9_B31_NB138_MC_A_01(socau, dang=1):
 
     CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
     """
-    gt = []
-    while len(gt) < socau:
-        x0 = random.randint(1, 5)
-        if x0 not in gt:
-            gt.append(x0)
+    gt = [1 + i for i in _chon_chi_muc(5, socau)]
 
     cauTN = ""
     for x0 in gt:

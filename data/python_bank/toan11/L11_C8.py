@@ -68,6 +68,15 @@ def _ba_nhieu8(dapso, ung_vien, buoc=None):
         k += 1
     return ds
 
+def _chon_chi_muc(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, KHÔNG trùng nhau chừng nào còn
+    đủ; hết mẫu thì quay vòng (tránh vòng lặp vô hạn khi socau > n)."""
+    ds = []
+    while len(ds) < socau:
+        thieu = socau - len(ds)
+        ds += random.sample(range(n), min(n, thieu))
+    return ds
+
 
 def _ps(f):
     r"""Viết phân số tối giản dạng LaTeX."""
@@ -153,11 +162,7 @@ def L11_C8_B28_NB130_MC_A_01(socau, dang=1):
          r"Không lấy được viên bi màu đỏ",
          r"Lấy được viên bi không phải màu đỏ và không phải màu xanh"),
     ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(MAU))
-        if i not in gt:
-            gt.append(i)
+    gt = _chon_chi_muc(len(MAU), socau)
 
     cauTN = ""
     for i in gt:
@@ -202,11 +207,7 @@ def L11_C8_B28_NB131_MC_A_01(socau, dang=1):
          r"Sản phẩm lấy ra không đạt tiêu chuẩn nào",
          r"Sản phẩm lấy ra chỉ đạt tiêu chuẩn về kích thước"),
     ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(MAU))
-        if i not in gt:
-            gt.append(i)
+    gt = _chon_chi_muc(len(MAU), socau)
 
     cauTN = ""
     for i in gt:
@@ -242,11 +243,7 @@ def L11_C8_B28_NB132_MC_A_01(socau, dang=1):
          r"$A$: ``Viên bi lấy từ hộp thứ nhất màu đỏ''",
          r"$B$: ``Viên bi lấy từ hộp thứ hai màu đỏ''"),
     ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(MAU))
-        if i not in gt:
-            gt.append(i)
+    gt = _chon_chi_muc(len(MAU), socau)
 
     cauTN = ""
     for i in gt:
