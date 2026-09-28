@@ -7468,3 +7468,56 @@ vay. Da doi thanh bat dau tu 2.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.16 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Lop 11 chuong 2: 22/22 dang co ham
+
+Day so. Cap so cong va cap so nhan. Viet moi theo Curriculum + Mapping.
+
+    B5  Day so                4 dang
+    B6  Cap so cong           8 dang
+    B7  Cap so nhan           8 dang
+    Cau Dung/Sai cua chuong   2 dang
+
+## So lieu chon de dap so DEP
+
+u_1, d, q deu NGUYEN; cap so nhan chi dung q nguyen (2, 3, -2, -3) nen
+moi so hang va moi tong deu la SO NGUYEN, viet duoc chinh xac - cau
+tra loi ngan cham bang so khop chuoi nen khong duoc co so thap phan vo
+han. Da chan cac bo so lam |u_n| hoac |S_n| vuot qua 10^6 (de bai se
+kho doc, va hoc sinh khong bam may kip).
+
+## Mot cho lech nhan trong Mapping - da ghi chu de co Lan xem
+
+L11_C2_B7_NB036_TL_A co nhan Dang ghi "Bai toan thuc tien ve cap so
+CONG", nhung yeu cau can dat cua chinh L11_C2_B7_NB036 la "Nhan biet
+duoc mot day so la cap so NHAN". Da viet ham theo YEU CAU CAN DAT
+(cap so nhan) va ghi chu ngay trong docstring cua ham. Nhan Dang chi la
+chu de doc, khong anh huong viec chon cau; co Lan sua lai luc nao cung
+duoc.
+
+## Da kiem chung the nao
+
+1. 22/22 ham chay sach 3 muc socau x 60 seed; moi ket qua deu: so dau $
+   chan, ngoac can, khong co tabular, khong co **dam**, khong co dau
+   gach cheo le.
+2. Kiem toan DOC LAP 1050 cau: doc lai u_1, d, q va chi so n TU CHINH
+   DE BAI bang bieu thuc chinh quy, roi tu tinh lai u_n, S_n va cong
+   sai bang cong thuc viet tay - 0 cho sai.
+3. De he so 1 chuong 2 lop 11: 20/20 de du ma tran.
+4. 1842 bai test qua, 8 bo qua (truoc: 1762).
+
+## Hien trang lop 11
+
+    C1  0/39   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5  0/21          C8  0/22
+    C3 15/15   C6  0/27          C9  0/23
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
