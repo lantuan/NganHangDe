@@ -31,7 +31,7 @@ from app.services.question_selector_service import (
 from app.services.exam_blueprint_service import build_blueprint, BlueprintError
 from app.services.hinh_ve_service import dich_hinh_trong_khoi
 from app.services.generator_service import (
-    call_generator, GeneratorNotFoundError, LoaiCauSaiError,
+    call_generator, GeneratorNotFoundError, LoaiCauSaiError, CauHongError,
 )
 import json
 from app.services.latex_service import (
@@ -271,7 +271,7 @@ def _sinh_pdf_tu_danh_sach(
                     ban_ghi["ma_de"] = ma_de
                 danh_sach_dap_an.append(ban_ghi)
 
-            except LoaiCauSaiError as e:
+            except CauHongError as e:
                 # Hàm có thật nhưng sinh ra câu KHÔNG ĐÚNG LOẠI mà tên nó hứa
                 # (ví dụ tên có _TL_ nhưng chỉ sinh một ý). Không cho câu đó vào
                 # đề của học sinh, nhưng cũng không dừng cả đề - báo ra để sửa.

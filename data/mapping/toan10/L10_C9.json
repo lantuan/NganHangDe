@@ -135,30 +135,35 @@
     "id": "L10_C9_B27_VD155_MC_B",
     "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Lập số tự nhiên từ các chữ số cho trước rồi tính xác suất"
+    "Dang": "Lập số tự nhiên từ các chữ số cho trước rồi tính xác suất",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C9_B27_VD155_SA_A",
     "content": "Vận dụng được định nghĩa cổ điển của xác suất vào giải quyết một số bài toán thực tiễn đơn giản.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Chọn ngẫu nhiên điểm có toạ độ nguyên, tính xác suất"
+    "Dang": "Chọn ngẫu nhiên điểm có toạ độ nguyên, tính xác suất",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C9_TF_C",
     "content": "Tính xác suất theo định nghĩa cổ điển.",
     "Loai": "Đúng sai",
-    "Dang": "Trò chơi quay bánh xe nhiều lần (vận dụng cao)"
+    "Dang": "Trò chơi quay bánh xe nhiều lần (vận dụng cao)",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C9_TF_D",
     "content": "Tính xác suất theo định nghĩa cổ điển.",
     "Loai": "Đúng sai",
-    "Dang": "Trò chơi quay bánh xe nhiều lần"
+    "Dang": "Trò chơi quay bánh xe nhiều lần",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C9_TF_E",
     "content": "Tính xác suất theo định nghĩa cổ điển.",
     "Loai": "Đúng sai",
-    "Dang": "Chọn lọ dung dịch axit, bazơ, trung tính"
+    "Dang": "Chọn lọ dung dịch axit, bazơ, trung tính",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]

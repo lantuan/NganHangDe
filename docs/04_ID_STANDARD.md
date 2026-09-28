@@ -346,3 +346,27 @@ tro di chua co mapping hay ham Python nao tro vao).
 
 Ngoai ra scope cua VD104A dang bi chep nham tu VD104 ("duong tron di qua ba
 diem") trong khi noi dung la "dieu kien khong truc tiep cho truoc".
+
+
+===============================================================================
+
+DANG DO CLAUDE TU THEM VAO MAPPING
+
+Khi nhap ham tu cac tep cua giao vien, co dang chua duoc khai trong Mapping.
+Claude tu them dong Mapping cho dang do, va PHAI danh dau ngay tai dong ay:
+
+    {
+      "id": "L10_C9_TF_C",
+      "content": "...",
+      "Loai": "Dung sai",
+      "Dang": "Tro choi quay banh xe nhieu lan (van dung cao)",
+      "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+    }
+
+Truong "ghi_chu" chi de nguoi doc biet dong nay do Claude dat ID chu khong
+phai giao vien; he thong ra de khong dung den no. Xoa truong nay khi giao
+vien da soat va dong y voi ID.
+
+Tim nhanh moi dong nhu vay:
+
+    grep -rn "CLAUDE THEM" data/mapping/

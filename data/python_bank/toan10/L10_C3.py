@@ -852,63 +852,6 @@ def _toa_do_nua_duong_tron(p, q, doi, ben_trai):
     return simplify(hoanh), simplify(tung)
 
 
-def L10_C3_B5_NB029_MC_B_01(socau, dang=1):
-    """Biết toạ độ điểm M trên nửa đường tròn đơn vị, tính sin hoặc côsin."""
-    gt = []
-    while len(gt) < socau:
-        p, q = _cap_nguyen_to_cung_nhau()
-        v = (p, q, random.choice([False, True]), random.choice([False, True]),
-             random.choice(["sin", "cos"]))
-        if v not in gt:
-            gt.append(v)
-
-    cauTN = ''
-    for p, q, doi, ben_trai, ham in gt:
-        hoanh, tung = _toa_do_nua_duong_tron(p, q, doi, ben_trai)
-        dapso, con_lai = (tung, hoanh) if ham == "sin" else (hoanh, tung)
-        ten = r"\sin" if ham == "sin" else r"\cos"
-
-        debai = (r"Trong mặt phẳng toạ độ $Oxy$, lấy điểm "
-                 r"$M\left( %s; %s \right)$ thuộc nửa đường tròn đơn vị. "
-                 r"Tính $%s\widehat{xOM}$." % (_L(hoanh), _L(tung), ten))
-        giai = (r"Với điểm $M\left( x_{0}; y_{0} \right)$ thuộc nửa đường tròn đơn vị thì "
-                r"$\cos\widehat{xOM} = x_{0}$ và $\sin\widehat{xOM} = y_{0}$.\\ "
-                r"Do đó $%s\widehat{xOM} = %s$." % (ten, _L(dapso)))
-        dung = "$%s$" % _L(dapso)
-        ds = _ba_nhieu(dung, ["$%s$" % _L(simplify(-dapso)),
-                              "$%s$" % _L(con_lai),
-                              "$%s$" % _L(simplify(-con_lai))])
-        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
-    return cauTN
-
-
-def L10_C3_B5_NB029_MC_C_01(socau, dang=1):
-    """Biết sin và côsin của góc, tìm toạ độ điểm M trên nửa đường tròn đơn vị."""
-    gt = []
-    while len(gt) < socau:
-        p, q = _cap_nguyen_to_cung_nhau()
-        v = (p, q, random.choice([False, True]), random.choice([False, True]))
-        if v not in gt:
-            gt.append(v)
-
-    cauTN = ''
-    for p, q, doi, ben_trai in gt:
-        hoanh, tung = _toa_do_nua_duong_tron(p, q, doi, ben_trai)
-        diem = lambda x, y: r"$M\left( %s; %s \right)$" % (_L(x), _L(y))
-
-        debai = (r"Trong mặt phẳng toạ độ $Oxy$, lấy điểm $M$ thuộc nửa đường tròn đơn vị. "
-                 r"Biết $\sin\widehat{xOM} = %s$ và $\cos\widehat{xOM} = %s$. "
-                 r"Tìm toạ độ điểm $M$." % (_L(tung), _L(hoanh)))
-        giai = (r"Điểm $M\left( x_{0}; y_{0} \right)$ trên nửa đường tròn đơn vị có "
-                r"hoành độ là côsin và tung độ là sin của góc $\widehat{xOM}$:\\ "
-                r"$x_{0} = \cos\widehat{xOM} = %s$, $y_{0} = \sin\widehat{xOM} = %s$.\\ "
-                r"Vậy $M\left( %s; %s \right)$." % (_L(hoanh), _L(tung), _L(hoanh), _L(tung)))
-        dung = diem(hoanh, tung)
-        ds = _ba_nhieu(dung, [diem(tung, hoanh),                  # đổi chỗ hai toạ độ
-                              diem(simplify(-hoanh), tung),       # sai dấu hoành độ
-                              diem(hoanh, simplify(-tung))])      # tung độ âm: không ở nửa trên
-        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
-    return cauTN
 
 
 def L10_C3_B5_NB029_MC_D_01(socau, dang=1):
@@ -1092,44 +1035,6 @@ def debai_MTCT():
     return r"Trong các khẳng định sau, khẳng định nào \textbf{đúng}?"
 
 
-def L10_C3_B6_TH032_MC_A_02(socau, dang=1):
-    """Định lí côsin với góc BẤT KÌ: đáp số gần đúng, học sinh phải bấm máy.
-
-    Biến thể này bổ sung cho _01 (số liệu đẹp, góc đặc biệt). Ba phương án
-    nhiễu đổi lại theo ba lỗi học sinh hay mắc: quên dấu trừ, dùng sin thay
-    côsin, quên nhân 2.
-    """
-    DAC_BIET = (30, 45, 60, 90, 120, 135, 150)
-    gt = []
-    while len(gt) < socau:
-        a = random.randint(3, 19)
-        b = a + random.randint(1, 5)
-        C = random.randint(20, 160)
-        if C in DAC_BIET or (a, b, C) in gt:
-            continue
-        gt.append((a, b, C))
-
-    cauTN = ''
-    for a, b, C in gt:
-        r = math.radians(C)
-        c = math.sqrt(a * a + b * b - 2 * a * b * math.cos(r))
-        dung = r"$AB \approx %s$" % _xx(c)
-        giai = (r"Áp dụng định lí côsin trong tam giác $ABC$:\\ "
-                r"$AB^{2} = CA^{2} + CB^{2} - 2\cdot CA\cdot CB\cdot\cos\widehat{C} "
-                r"= %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\cos %d^{\circ} \approx %s$.\\ "
-                r"Vậy $AB \approx %s$."
-                % (a, b, a, b, C, _xx(a*a + b*b - 2*a*b*math.cos(r)), _xx(c)))
-        ds = _ba_nhieu(
-            dung,
-            [r"$AB \approx %s$" % _xx(math.sqrt(a*a + b*b + 2*a*b*math.cos(r))),
-             r"$AB \approx %s$" % _xx(math.sqrt(a*a + b*b - 2*a*b*math.sin(r))),
-             r"$AB \approx %s$" % _xx(math.sqrt(a*a + b*b - a*b*math.cos(r)))],
-            buoc=lambda k: r"$AB \approx %s$" % _xx(c + k))
-        debai = (r"Cho tam giác $ABC$ có $\widehat{C} = %d^{\circ}$, $CA = %d$ và $CB = %d$. "
-                 r"Tính độ dài cạnh $AB$ (làm tròn đến hàng phần trăm)." % (C, a, b))
-        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
-    return cauTN
-
 
 def L10_C3_B6_TH033_MC_B_01(socau, dang=1):
     """Định lí sin: tính bán kính đường tròn ngoại tiếp, góc bất kì (bấm máy)."""
@@ -1164,46 +1069,6 @@ def L10_C3_B6_TH033_MC_B_01(socau, dang=1):
         cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
     return cauTN
 
-
-def L10_C3_B6_VD036_MC_B_01(socau, dang=1):
-    """Đo khoảng cách qua đầm lầy bằng ĐỊNH LÍ SIN (biết một cạnh và hai góc)."""
-    gt = []
-    while len(gt) < socau:
-        b = random.randint(3, 19)
-        A = random.randint(92, 117)
-        C = random.randint(35, 69)
-        if not (80 <= A + C <= 150) or (b, A, C) in gt:
-            continue
-        gt.append((b, A, C))
-
-    cauTN = ''
-    for b, A, C in gt:
-        B = 180 - A - C
-        sinB, sinC = math.sin(math.radians(B)), math.sin(math.radians(C))
-        AB = b * sinC / sinB
-        dung = r"$AB \approx %s\,\text{m}$" % _xx(AB)
-        giai = (r"Trong tam giác $ABC$: "
-                r"$\widehat{B} = 180^{\circ} - \widehat{A} - \widehat{C} "
-                r"= 180^{\circ} - %d^{\circ} - %d^{\circ} = %d^{\circ}$.\\ "
-                r"Áp dụng định lí sin:\\ "
-                r"$\dfrac{AB}{\sin \widehat{C}} = \dfrac{AC}{\sin \widehat{B}} "
-                r"\Rightarrow AB = \dfrac{AC\cdot\sin \widehat{C}}{\sin \widehat{B}} "
-                r"= \dfrac{%d\cdot\sin %d^{\circ}}{\sin %d^{\circ}} \approx %s\,\text{(m)}$."
-                % (A, C, B, b, C, B, _xx(AB)))
-        ds = _ba_nhieu(
-            dung,
-            [r"$AB \approx %s\,\text{m}$" % _xx(b * sinB / sinC),   # lộn hai góc
-             r"$AB \approx %s\,\text{m}$" % _xx(b * sinC),          # quên chia
-             r"$AB \approx %s\,\text{m}$" % _xx(b * sinC + b)],
-            buoc=lambda k: r"$AB \approx %s\,\text{m}$" % _xx(AB + k))
-        debai = (r"Để đo khoảng cách từ $A$ đến $B$ ngang qua một đầm lầy, người ta chọn "
-                 r"điểm $C$ như hình bên và đo được khoảng cách từ $A$ đến $C$ bằng "
-                 r"$%d\,\text{m}$. Biết rằng từ điểm $A$ nhìn hai điểm $B$ và $C$ dưới một góc "
-                 r"$%d^{\circ}$, từ điểm $C$ nhìn hai điểm $A$ và $B$ dưới một góc $%d^{\circ}$. "
-                 r"Tính khoảng cách từ $A$ đến $B$ (làm tròn đến hàng phần trăm)."
-                 % (b, A, C))
-        cauTN += MC_SA_answer_text(debai, dung, ds, giai, HINH_DAM_LAY, 0, dang)
-    return cauTN
 
 
 def L10_C3_B6_VD036_TL_B_01(socau, dong=1):
@@ -1250,56 +1115,802 @@ def L10_C3_B6_VD036_TL_B_01(socau, dong=1):
     return cauTN
 
 
-def L10_C3_B6_VD036_MC_C_01(socau, dang=1):
-    """Bài toán chuyển động: tàu chạy hai chặng theo hai hướng, tính khoảng cách.
+# =====================================================================
+# CAC DANG CO LAN DA TU CHUYEN SANG FORM MOI (tep LopXChuong3.py)
+# Nhap 28/09/2026. Noi dung toan va loi giai giu NGUYEN nhu co viet;
+# chi doi ten ham theo ID ngan hang va va cac loi neu co.
+# =====================================================================
 
-    Bản cũ hỏi người dùng bằng input() để chọn tự luận hay trắc nghiệm, và
-    gọi luôn hàm ở cuối tệp - hai thứ đó làm treo cả ngân hàng khi nạp
-    mô-đun, nên đã bỏ; ở đây cố định là câu trắc nghiệm.
-    """
+# ---- Toa do M tren nua duong tron don vi -> gia tri luong giac ----
+# (ten cu cua co: K10_3_3_1_1_H)
+def L10_C3_B5_NB029_MC_B_01(socau, dang=1):
     gt = []
-    while len(gt) < socau:
-        v = (random.choice([40, 50, 70, 80]),          # hướng chặng 1: N goc1 E
-             random.choice([10, 20, 40, 50, 70, 80]),  # hướng chặng 2: S goc2 E
-             random.choice([20, 30, 40, 50, 60]),      # vận tốc chặng 1
-             random.choice([20, 30, 40, 50, 60]),      # vận tốc chặng 2
-             random.choice([30, 35, 40, 45, 50, 55]),  # thời gian chặng 1 (phút)
-             random.randint(20, 49))                   # thời gian chặng 2 (phút)
+    dem = len(gt)
+    while dem < socau:
+        # Sinh dữ liệu ngẫu nhiên
+        a = []
+        while len(a) < 2:
+            k = random.randint(1, 10)  # Giảm giới hạn để đảm bảo sqrt(b^2 - a^2) là số đẹp hơn
+            if k not in a:
+                a.append(k)
+
+        a.sort()
+        # Đảm bảo b > a để căn bậc hai dương (với b là mẫu số/bán kính)
+        if a[0] == a[1]:
+            a[1] += random.randint(1, 5)
+            a.sort()
+
+        d1 = math.gcd(a[0], a[1])
+        A = int(a[0] / d1)
+        B = int(a[1] / d1)
+        C_square = B ** 2 - A ** 2
+
+        # Đảm bảo C_square dương
+        if C_square <= 0:
+            continue
+
+        gtlg = random.choice(['\\sin', '\\cos'])
+        choice = random.choice([0, 1, 2, 3])  # Chọn 1 trong 4 dạng tọa độ
+
+        # choice: 0: (A/B, sqrt(C)/B), 1: (sqrt(C)/B, A/B), 2: (-A/B, sqrt(C)/B), 3: (-sqrt(C)/B, A/B)
+        v = [A, B, C_square, gtlg, choice]
+
         if v not in gt:
             gt.append(v)
+            dem += 1
 
     cauTN = ''
-    for goc1, goc2, vt1, vt2, t1, t2 in gt:
-        AB = vt1 * t1 / 60.0
-        BC = vt2 * t2 / 60.0
-        gocB = goc1 + goc2
-        r = math.radians(gocB)
-        AC2 = AB * AB + BC * BC - 2 * AB * BC * math.cos(r)
-        AC = math.sqrt(AC2)
-        dung = r"$%s\,\text{km}$" % _xx(AC)
-        giai = (r"Hướng $N %d^{\circ} E$ đi từ $A$ tới $B$, nên nhìn từ $B$ thì hướng về $A$ là "
-                r"$S %d^{\circ} W$; chặng sau tàu đi theo hướng $S %d^{\circ} E$. "
-                r"Hai hướng đó nằm hai bên hướng nam nên\\ "
-                r"$\widehat{ABC} = %d^{\circ} + %d^{\circ} = %d^{\circ}$.\\ "
-                r"Quãng đường mỗi chặng (đổi phút ra giờ):\\ "
-                r"$AB = %d\cdot\dfrac{%d}{60} = %s\,\text{(km)}$, "
-                r"$BC = %d\cdot\dfrac{%d}{60} = %s\,\text{(km)}$.\\ "
-                r"Áp dụng định lí côsin trong tam giác $ABC$:\\ "
-                r"$AC^{2} = AB^{2} + BC^{2} - 2\cdot AB\cdot BC\cdot\cos\widehat{ABC} "
-                r"\approx %s$, suy ra $AC \approx %s\,\text{(km)}$."
-                % (goc1, goc1, goc2, goc1, goc2, gocB,
-                   vt1, t1, _xx(AB), vt2, t2, _xx(BC), _xx(AC2), _xx(AC)))
-        ds = _ba_nhieu(
-            dung,
-            [r"$%s\,\text{km}$" % _xx(math.sqrt(AB*AB + BC*BC)),                      # coi như vuông
-             r"$%s\,\text{km}$" % _xx(math.sqrt(AB*AB + BC*BC + 2*AB*BC*math.cos(r))),# quên dấu trừ
-             r"$%s\,\text{km}$" % _xx(AB + BC)],                                      # cộng thẳng
-            buoc=lambda k: r"$%s\,\text{km}$" % _xx(AC + k))
-        debai = (r"Một tàu xuất phát từ bãi biển $A$, chạy theo hướng $N %d^{\circ} E$ với tốc độ "
-                 r"$%d\,\text{km/h}$. Sau khi đi được $%d$ phút thì đến vị trí $B$, tàu chuyển "
-                 r"sang hướng $S %d^{\circ} E$ với tốc độ $%d\,\text{km/h}$ và chạy tiếp $%d$ phút "
-                 r"nữa thì đến đảo $C$. Khi đó tàu cách vị trí xuất phát khoảng bao nhiêu kilômét "
-                 r"(làm tròn đến hàng phần trăm)?"
-                 % (goc1, vt1, t1, goc2, vt2, t2))
-        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    for v in gt:
+        A, B, C_square, gtlg, choice = v
+
+        if choice == 0:
+            # M(A/B, sqrt(C)/B). sin = sqrt(C)/B, cos = A/B
+            M_toa_do = f"\\left( \\dfrac{{{A}}}{{{B}}}; \\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}} \\right)"
+            dapso_sin = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+            dapso_cos = f"\\dfrac{{{A}}}{{{B}}}"
+
+        elif choice == 1:
+            # M(sqrt(C)/B, A/B). sin = A/B, cos = sqrt(C)/B
+            M_toa_do = f"\\left( \\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}; \\dfrac{{{A}}}{{{B}}} \\right)"
+            dapso_sin = f"\\dfrac{{{A}}}{{{B}}}"
+            dapso_cos = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+
+        elif choice == 2:
+            # M(-A/B, sqrt(C)/B). sin = sqrt(C)/B, cos = -A/B
+            M_toa_do = f"\\left( -\\dfrac{{{A}}}{{{B}}}; \\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}} \\right)"
+            dapso_sin = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+            dapso_cos = f"-\\dfrac{{{A}}}{{{B}}}"
+
+        elif choice == 3:
+            # M(-sqrt(C)/B, A/B). sin = A/B, cos = -sqrt(C)/B
+            M_toa_do = f"\\left( -\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}; \\dfrac{{{A}}}{{{B}}} \\right)"
+            dapso_sin = f"\\dfrac{{{A}}}{{{B}}}"
+            dapso_cos = f"-\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+
+        debai = f"""Trong mặt phẳng toạ độ $Oxy$, lấy điểm $M {M_toa_do}$ thuộc nửa đường tròn đơn vị. Tính ${gtlg} \\widehat{{ xOM }}$.
+        """
+
+        # Tính đáp số đúng và các nhiễu
+        if gtlg == '\\sin':
+            dapso = dapso_sin
+            nhieu_val = [dapso_cos, f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{A}}}",
+                         f"-\\dfrac{{{A}}}{{{B}}}" if B != A else f"-\\dfrac{{{B}}}{{{A}}}"]
+        else:  # gtlg == 'cos'
+            dapso = dapso_cos
+            nhieu_val = [dapso_sin, f"\\dfrac{{{A}}}{{\\sqrt{{{C_square}}}}}",
+                         f"-\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}" if C_square > 0 else f"\\dfrac{{{A}}}{{{B}}}"]
+
+        # SỬA 28/09/2026: bản gốc gom nhiễu rồi mới lọc trùng TRONG vòng lặp,
+        # nên nếu danh sách đã đủ ba phần tử mà trong đó có hai phần tử giống
+        # nhau thì vòng lặp không chạy, và MC_SA_answer_const nhận [x, y, y]
+        # -> quay mãi không dừng (đo được: treo 4/8 lần). Nay dùng _ba_nhieu:
+        # bảo đảm đúng ba phương án đôi một khác nhau và khác đáp số.
+        du_tru = [
+            f"-\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}",
+            f"-\\dfrac{{{A}}}{{{B}}}",
+            f"\\dfrac{{{A}}}{{\\sqrt{{{C_square}}}}}",
+            f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{A}}}",
+            f"\\dfrac{{{B}}}{{{A}}}",
+        ]
+        dsnhieu = _ba_nhieu(dapso, list(nhieu_val) + du_tru,
+                            buoc=lambda k: f"\\dfrac{{{k}}}{{{B + k}}}")
+        nhieu1, nhieu2, nhieu3 = dsnhieu[0], dsnhieu[1], dsnhieu[2]
+
+        # Lời giải
+        xM = f"\\dfrac{{{A}}}{{{B}}}" if choice == 0 or choice == 1 else f"-\\dfrac{{{A}}}{{{B}}}" if choice == 2 else f"-\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+        yM = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}" if choice == 0 or choice == 2 else f"\\dfrac{{{A}}}{{{B}}}"
+
+        x_coord = f"\\dfrac{{{A}}}{{{B}}}"
+        y_coord = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+
+        if choice == 1:
+            x_coord, y_coord = y_coord, x_coord
+        elif choice == 2:
+            x_coord = f"-\\dfrac{{{A}}}{{{B}}}"
+        elif choice == 3:
+            x_coord = f"-\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+            y_coord = f"\\dfrac{{{A}}}{{{B}}}"
+
+        giai = f"""
+            Điểm $M(x_M; y_M)$ thuộc nửa đường tròn đơn vị (bán kính $R=1$) nên ta có:
+            \\[\\cos \\widehat{{ xOM }} = x_M \\quad \\text{{và}} \\quad \\sin \\widehat{{ xOM }} = y_M\\]
+            Từ tọa độ điểm $M {M_toa_do}$, ta có:
+            \\begin{{itemize}}
+                \\item $x_M = {x_coord}$
+                \\item $y_M = {y_coord}$
+            \\end{{itemize}}
+            Giá trị cần tìm là ${gtlg} \\widehat{{ xOM }}$.
+            \\begin{{itemize}}
+                \\item Nếu cần tính $\\cos \\widehat{{ xOM }}$, ta lấy $x_M = {dapso_cos}$.
+                \\item Nếu cần tính $\\sin \\widehat{{ xOM }}$, ta lấy $y_M = {dapso_sin}$.
+            \\end{{itemize}}
+            Do đó, ${gtlg} \\widehat{{ xOM }} = {dapso}$.
+        """
+
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
     return cauTN
+
+
+
+# ---- Gia tri luong giac -> toa do M ----
+# (ten cu cua co: K10_3_3_1_2_H)
+def L10_C3_B5_NB029_MC_C_01(socau, dang=1):
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh dữ liệu ngẫu nhiên
+        a = []
+        while len(a) < 2:
+            k = random.randint(1, 10)
+            if k not in a:
+                a.append(k)
+
+        a.sort()
+        if a[0] == a[1]:
+            a[1] += random.randint(1, 5)
+            a.sort()
+
+        d1 = math.gcd(a[0], a[1])
+        A = int(a[0] / d1)
+        B = int(a[1] / d1)
+        C_square = B ** 2 - A ** 2
+
+        if C_square <= 0:
+            continue
+
+        choice = random.choice([0, 1, 2, 3])
+
+        v = [A, B, C_square, choice]
+
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        A, B, C_square, choice = v
+
+        # 1. Định nghĩa các giá trị lượng giác và tọa độ
+        val_A = f"\\dfrac{{{A}}}{{{B}}}"
+        val_C = f"\\dfrac{{\\sqrt{{{C_square}}}}}{{{B}}}"
+
+        if choice == 0:
+            cos_val = val_A
+            sin_val = val_C
+            dapso = f"M \\left( {cos_val}; {sin_val} \\right)"
+        elif choice == 1:
+            cos_val = val_C
+            sin_val = val_A
+            dapso = f"M \\left( {cos_val}; {sin_val} \\right)"
+        elif choice == 2:
+            cos_val = f"-{val_A}"
+            sin_val = val_C
+            dapso = f"M \\left( {cos_val}; {sin_val} \\right)"
+        elif choice == 3:
+            cos_val = f"-{val_C}"
+            sin_val = val_A
+            dapso = f"M \\left( {cos_val}; {sin_val} \\right)"
+
+        # 2. Xây dựng đề bài
+        debai = f"""Trong mặt phẳng toạ độ $Oxy$, lấy điểm $M$ thuộc nửa đường tròn đơn vị.
+        Biết $\\sin \\widehat{{ xOM }} = {sin_val}$ và $\\cos \\widehat{{ xOM }} = {cos_val}$. Tìm toạ độ điểm $M$.
+        """
+
+        # 3. Xây dựng **tất cả** phương án nhiễu tiềm năng (chỉ góc I và II)
+
+        potential_nhieu = set()
+
+        # Nhiễu 1: Hoán đổi x, y (dấu giữ nguyên)
+        nhieu1_x = cos_val if sin_val == val_A else sin_val
+        nhieu1_y = sin_val if sin_val == val_A else cos_val
+
+        # Điều chỉnh dấu cho đúng cặp (x, y) hoán đổi
+        if cos_val[0] == '-' and nhieu1_x[0] != '-':
+            nhieu1_x = f"-{nhieu1_x}"
+        if sin_val == val_C and nhieu1_y == val_A and cos_val[
+            0] == '-':  # Ví dụ: cos=-A/B, sin=C/B. Hoán đổi: x=C/B, y=-A/B (SAI, y phải dương)
+            # Cần đảm bảo y_nhiễu >= 0
+            nhieu1_y = nhieu1_y.replace('-', '', 1)
+            nhieu1 = f"M \\left( {nhieu1_x}; {nhieu1_y} \\right)"
+        else:
+            nhieu1 = f"M \\left( {nhieu1_x}; {nhieu1_y.replace('-', '', 1)} \\right)"
+        potential_nhieu.add(nhieu1)
+
+        # Nhiễu 2: Đảo dấu cos (thay đổi góc phần tư)
+        nhieu2_x = f"-{cos_val}" if cos_val[0] != '-' else cos_val.replace('-', '', 1)
+        nhieu2_y = sin_val
+        potential_nhieu.add(f"M \\left( {nhieu2_x}; {nhieu2_y} \\right)")
+
+        # Nhiễu 3: Đáp án đúng nhưng sin, cos bị viết ngược (thay sin bằng cos và ngược lại trong M(cos; sin))
+        potential_nhieu.add(f"M \\left( {sin_val.replace('-', '', 1)}; {cos_val} \\right)")
+
+        # Nhiễu 4: Giữ nguyên cos, đảo dấu sin (SAI với nửa đường tròn) - Vẫn thêm vào để có đủ nhiễu
+        potential_nhieu.add(f"M \\left( {cos_val}; -{sin_val} \\right)")
+
+        # Nhiễu 5: Các cặp tọa độ cơ bản khác
+        potential_nhieu.add(f"M \\left( {val_A}; {val_C} \\right)")
+        potential_nhieu.add(f"M \\left( -{val_A}; {val_C} \\right)")
+        potential_nhieu.add(f"M \\left( {val_C}; {val_A} \\right)")
+        potential_nhieu.add(f"M \\left( -{val_C}; {val_A} \\right)")
+
+        # Loại bỏ đáp án đúng khỏi tập hợp nhiễu
+        final_nhieu_list = list(potential_nhieu - {dapso})
+
+        # Chọn ngẫu nhiên 3 nhiễu từ danh sách đã lọc. Đảm bảo luôn có ít nhất 3 nhiễu.
+        if len(final_nhieu_list) < 3:
+            # Trường hợp cực hiếm, cần thêm nhiễu khác hẳn
+            if A != B:
+                final_nhieu_list.append(f"M \\left( \\dfrac{{{B}}}{{{A}}}; \\dfrac{{{A}}}{{{B}}} \\right)")
+            else:
+                final_nhieu_list.append(f"M \\left( 1; 0 \\right)")
+
+        dsnhieu = random.sample(final_nhieu_list, 3)
+
+        nhieu1, nhieu2, nhieu3 = dsnhieu[0], dsnhieu[1], dsnhieu[2]
+        dsnhieu = [nhieu1, nhieu2, nhieu3]
+
+        # 4. Lời giải
+        giai = f"""
+            Điểm $M(x_M; y_M)$ thuộc nửa đường tròn đơn vị (bán kính $R=1$).
+            Theo định nghĩa, toạ độ điểm $M$ trên nửa đường tròn đơn vị là:
+            \\[x_M = \\cos \\widehat{{ xOM }} \\quad \\text{{và}} \\quad y_M = \\sin \\widehat{{ xOM }}\\]
+            Theo đề bài, ta có:
+            \\begin{{itemize}}
+                \\item $x_M = \\cos \\widehat{{ xOM }} = {cos_val}$
+                \\item $y_M = \\sin \\widehat{{ xOM }} = {sin_val}$
+            \\end{{itemize}}
+            Vậy toạ độ điểm $M$ là $M \\left( {cos_val}; {sin_val} \\right)$, tức là ${dapso}$.
+            (Vì $M$ thuộc nửa đường tròn đơn vị, nên $\\sin \\widehat{{ xOM }} = y_M$ luôn dương.)
+        """
+
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+
+# ---- Dinh li cosin, goc bat ki (bam may) ----
+# (ten cu cua co: K10_3_3_3_1_H)
+def L10_C3_B6_TH032_MC_A_02(socau, dang=1):
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # Sinh dữ liệu ngẫu nhiên
+        # Dùng random.randint() để tránh xung đột với numpy import
+        a = random.randint(3, 20)
+        b = a + random.randint(1, 5)
+
+        # Chọn góc C không phải các góc đặc biệt
+        C = random.randint(20, 160)
+        while C in [150, 135, 120, 90, 60, 45, 30]:
+            C = random.randint(20, 160)
+
+        # Tính toán kết quả chính xác (cạnh c = AB)
+        C_rad = C * math.pi / 180
+        c_square = b ** 2 + a ** 2 - 2 * a * b * math.cos(C_rad)
+
+        if c_square <= 0:  # Đảm bảo tam giác hợp lệ
+            continue
+
+        c = round(math.sqrt(c_square), 2)
+
+        # Tính các nhiễu
+        # Nhiễu 1: Dùng dấu + thay vì - trong định lý cos
+        c_sai1 = round(math.sqrt(b ** 2 + a ** 2 + 2 * a * b * math.cos(C_rad)), 2)
+
+        # Nhiễu 2: Không đổi góc sang radian
+        try:
+            # math.cos(C) với C là độ sẽ ra kết quả sai (cần là radian), nhưng là nhiễu hợp lý
+            c_sai2 = round(math.sqrt(b ** 2 + a ** 2 - 2 * a * b * math.cos(C)), 2)
+        except ValueError:
+            # Đảm bảo c_sai2 hợp lệ (nếu phép căn bị âm)
+            c_sai2 = round(math.sqrt(b ** 2 + a ** 2 + a * b), 2)
+
+        # Nhiễu 3: Dùng sin thay vì cos
+        try:
+            c_sai3 = round(math.sqrt(b ** 2 + a ** 2 - 2 * a * b * math.sin(C_rad)), 2)
+        except ValueError:
+            # Đảm bảo c_sai3 hợp lệ (nếu phép căn bị âm)
+            c_sai3 = round(math.sqrt(b ** 2 + a ** 2 + a * b), 2)
+
+        # Tạo tập hợp các giá trị
+        v = [a, b, C, c, c_sai1, c_sai2, c_sai3]
+
+        # Kiểm tra xem đáp án và các nhiễu có đủ 4 giá trị khác nhau không
+        if v not in gt and len(set([c, c_sai1, c_sai2, c_sai3])) == 4:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        a, b, C, c, c_sai1, c_sai2, c_sai3 = v
+
+        # Định dạng đề bài
+        debai = f"""
+        Cho tam giác $ABC$ có $\\widehat{{ C }} = {C} ^\\circ$ và các cạnh $AC = {a}$, $BC = {b}$. Tính độ dài cạnh $AB$.
+        """
+
+        # Định dạng đáp án và các nhiễu (dạng chuỗi đầy đủ)
+        dapso = f"AB \\approx {c}"
+        nhieu1 = f"AB \\approx {c_sai1}"
+        nhieu2 = f"AB \\approx {c_sai2}"
+        nhieu3 = f"AB \\approx {c_sai3}"
+
+        # Chuẩn bị dsnhieu cho hàm gọi
+        dsnhieu = [nhieu1, nhieu2, nhieu3]
+
+        # Lời giải
+        cos_C_giai = round(math.cos(C * math.pi / 180), 4)
+        c_square_giai = round(c ** 2, 2)
+
+        giai = f"""
+        Áp dụng Định lí Cosin cho tam giác $ABC$ để tính độ dài cạnh $AB$ (tức cạnh $c$) với góc $\\widehat{{ C }}$ và hai cạnh $AC=b={a}$, $BC=a={b}$.
+        Công thức: $c^2 = a^2 + b^2 - 2ab \\cos C$.
+        Với $a={b}$, $b={a}$, $C = {C}^\\circ$, ta có:
+        \\[AB^2 = {b}^2 + {a}^2 - 2 \\cdot {b} \\cdot {a} \\cdot \\cos({C}^\\circ)\\]
+        \\[AB^2 = {b ** 2 + a ** 2} - {2 * a * b} \\cdot \\cos({C}^\\circ)\\]
+        Sử dụng $\\cos({C}^\\circ) \\approx {cos_C_giai}$, ta tính được:
+        \\[AB^2 \\approx {c_square_giai}\\]
+        \\[AB = \\sqrt{{AB^2}} \\approx {c}\\]
+        Vậy độ dài cạnh $AB$ xấp xỉ ${c}$.
+        """
+
+        # Chuyển đáp số và nhiễu thành giá trị số đơn thuần (String) để hàm MC_SA_answer_const xử lý.
+        # Ở đây tôi dùng hàm MC_SA_answer_text vì đáp án bao gồm cả chữ "AB \approx"
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+
+# ---- Do khoang cach qua dam lay bang dinh li sin (co hinh) ----
+# (ten cu cua co: K10_3_3_4_1_H)
+def L10_C3_B6_VD036_MC_B_01(socau, dang=1):
+    gt = []
+    dem = len(gt)
+    while dem < socau:
+        # 1. Sinh dữ liệu đảm bảo tam giác hợp lệ
+        b = random.randint(3, 20)  # AC
+        A = random.randint(92, 118)
+        C = random.randint(35, 70)
+
+        # Đảm bảo tổng A + C < 180 và B > 0
+        while A + C >= 170:  # Giới hạn 170 để góc B không quá nhỏ
+            A = random.randint(92, 118)
+            C = random.randint(35, 70)
+
+        B = 180 - A - C
+
+        # 2. Tính toán kết quả chính xác (cạnh c = AB)
+        # Định lý Sin: c/sinC = b/sinB => c = b * sinC / sinB
+
+        C_rad = C * math.pi / 180
+        B_rad = B * math.pi / 180
+
+        c = round(b * math.sin(C_rad) / math.sin(B_rad), 2)
+
+        # 3. Tính các nhiễu
+        # Lấy giá trị đã được làm tròn
+        c_val = round(b * math.sin(C_rad) / math.sin(B_rad), 2)
+        c_sai1_val = round(b * math.sin(B_rad) / math.sin(C_rad), 2)
+        c_sai2_val = round(b * math.sin(C_rad), 2)
+        c_sai3_val = round(b * math.sin(C_rad) + b, 2)
+
+        # Chuyển sang chuỗi và thay thế dấu thập phân
+        c = str(c_val).replace('.', ',')
+        c_sai1 = str(c_sai1_val).replace('.', ',')
+        c_sai2 = str(c_sai2_val).replace('.', ',')
+        c_sai3 = str(c_sai3_val).replace('.', ',')
+
+        v = [b, A, C, B, c, c_sai1, c_sai2, c_sai3]
+
+        # Kiểm tra tính duy nhất và tính hợp lệ của nhiễu
+        if v not in gt and len(set([c, c_sai1, c_sai2, c_sai3])) == 4:
+            gt.append(v)
+            dem += 1
+
+    cauTN = ''
+    for v in gt:
+        b, A, C, B, c, c_sai1, c_sai2, c_sai3 = v
+
+        # 4. Tạo mã TikZ cho đồ thị (Dùng code mẫu đã cho)
+        dothi_de = f"""
+        \\begin{{tikzpicture}}[scale=1, font=\\footnotesize, line join=round, line cap=round,>=stealth]
+        \\path
+        (2,2) coordinate (A)
+        (7,2) coordinate (B)
+        (1.6,4.5) coordinate (C)
+        (2.5,2) coordinate (D)
+        (3.5,3.1) coordinate (E)
+        (5.5,2.9) coordinate (F)
+        (6.4,1.5) coordinate (G)
+        (5.2,0.7) coordinate (H)
+        (3.5,0.7) coordinate (I)
+        (2.6,1.3) coordinate (J) ; 
+        \\draw[fill=gray!40]
+        (D)
+        .. controls ++(65:0.1) and ++(200: 1) .. (E)
+        .. controls ++(200:-0.5) and ++(170: 0.3) .. (F)
+        .. controls ++(170:-0.5) and ++(100: 0.3) .. (G)
+        .. controls ++(100:-0.3) and ++(30: 0.3) .. (H)
+        .. controls ++(30:-0.3) and ++(150: -0.3) .. (I)
+        .. controls ++(150:0.3) and ++(130: -0.3) .. (J)
+        .. controls ++(130:0.3) and ++(65: -0.1) .. (D) ; 
+        \\draw[dashed] (A)--(B)--(C) ;
+        \\draw (A)--(C)   ;
+        \\foreach \\x/\\g in {{A/-120,B/-60,C/90}}
+        \\fill[black] (\\x) circle (1pt)+(\\g:3mm) node {{$\\x$}};
+        \\node at ($(A)!0.5!(C)$) [left] {{$ {b} $}};
+        \\draw (A) ++(0:{.5}) arc (0:100:{.5}) node at ($(A)+(50:0.8)$) {{${A}^\\circ$}};
+        \\draw (C) ++(-80:{.5}) arc (-80:-23:{.5}) node at ($(C)+(-50:0.8)$) {{${C}^\\circ$}};
+        \\draw (C) ++(-80:{.55}) arc (-80:-23:{.55}) node at ($(C)+(-50:0.8)$) {{${C}^\\circ$}};
+        \\end{{tikzpicture}}
+        """
+
+        # 5. Định dạng đề bài
+        debai = f"""
+        Để đo khoảng cách từ $A$ đến $B$ ngang qua một đầm lầy, người ta chọn điểm $C$ như hình. Người ta đo được khoảng cách từ $A$ đến $C$ bằng ${b}$ m. Và biết rằng từ điểm $A$ nhìn hai điểm $B$ và $C$ dưới một góc bằng $ {A} ^\\circ$, từ điểm $C$ nhìn hai điểm $A$ và $B$ dưới một góc bằng $ {C} ^\\circ$. Tính khoảng cách từ $A$ đến $B$.
+        """
+
+        # 6. Định dạng đáp án và nhiễu (chỉ là giá trị số xấp xỉ)
+        dapso = str(c)
+        dsnhieu = [str(c_sai1), str(c_sai2), str(c_sai3)]
+
+        # 7. Lời giải
+        giai = f"""
+        Trong tam giác $ABC$, ta đã biết hai góc $\\widehat{{A}} = {A}^\\circ$, $\\widehat{{C}} = {C}^\\circ$ và cạnh $b = AC = {b}$ m.
+        Khoảng cách từ $A$ đến $B$ là độ dài cạnh $c=AB$.
+
+        **Bước 1: Tính góc $\\widehat{{B}}$**
+        Tổng ba góc trong tam giác là $180^\\circ$, nên:
+        \\[\\widehat{{B}} = 180^\\circ - \\widehat{{A}} - \\widehat{{C}} = 180^\\circ - {A}^\\circ - {C}^\\circ = {B}^\\circ\\]
+
+        **Bước 2: Áp dụng Định lí Sin**
+        Ta có tỉ lệ:
+        \\[\\dfrac{{AB}}{{\\sin C}} = \\dfrac{{AC}}{{\\sin B}}\\]
+        Thay các giá trị đã biết ($AC=b={b}$, $\\widehat{{B}}={B}^\\circ$, $\\widehat{{C}}={C}^\\circ$):
+        \\[AB = \\dfrac{{AC \\cdot \\sin C}}{{\\sin B}} = \\dfrac{{{b} \\cdot \\sin({C}^\\circ)}}{{\\sin({B}^\\circ)}}\\]
+
+        **Bước 3: Tính toán**
+        \\[AB \\approx \\dfrac{{{b} \\cdot {round(math.sin(C_rad), 4)}}}{{{round(math.sin(B_rad), 4)}}} \\approx {c} \\mathrm{{~m}}\\]
+        Vậy khoảng cách từ $A$ đến $B$ xấp xỉ ${c}$ m.
+        """
+
+        # Sử dụng MC_SA_answer_const với tham số dothi_de
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, dothi_de, 0, dang)
+
+    return cauTN
+
+
+
+# ---- Tau chay hai chang, tinh khoang cach ----
+# (ten cu cua co: K10_3_3_4_3_H)
+def L10_C3_B6_VD036_MC_C_01(socau, dang=1):
+    gt = []
+    dem = 0
+    while dem < socau:
+        goc1 = random.choice([40, 50, 70, 80])
+        goc2 = random.choice([10, 20, 40, 50, 70, 80])
+        vt1 = random.choice([20, 30, 40, 50, 60])
+        vt2 = random.choice([20, 30, 40, 50, 60])
+        t1 = random.choice([30, 35, 40, 45, 50, 55])
+        t2 = random.randint(20, 50)
+
+        # ---- Bước 1: Chuyển thời gian sang giờ ----
+        t1_h = t1 / 60
+        t2_h = t2 / 60
+
+        # ---- Bước 2: Tính chiều dài cạnh ----
+        a_val = vt2 * t2_h
+        c_val = vt1 * t1_h
+        Goc_B_deg = goc1 + goc2
+        Goc_B_rad = math.radians(Goc_B_deg)
+
+        b_square_val = a_val ** 2 + c_val ** 2 - 2 * a_val * c_val * math.cos(Goc_B_rad)
+        if b_square_val <= 0:
+            continue
+        b_val = round(math.sqrt(b_square_val), 2)
+
+        # ---- Sinh đáp án nhiễu ----
+        z_sai1_val = round(math.sqrt(a_val ** 2 + c_val ** 2), 2)
+        z_sai2_val = round(math.sqrt(a_val ** 2 + c_val ** 2 + 2 * a_val * c_val * math.cos(Goc_B_rad)), 2)
+        z_sai3_val = round(math.sqrt(a_val ** 2 + c_val ** 2 - a_val * c_val * math.cos(Goc_B_rad)), 2)
+
+        if len(set([b_val, z_sai1_val, z_sai2_val, z_sai3_val])) < 4:
+            continue
+
+        gt.append((goc1, goc2, vt1, vt2, t1, t2))
+        dem += 1
+
+    cauTN = ''
+    for (goc1, goc2, vt1, vt2, t1, t2) in gt:
+        # ---- Tính toán lại chính xác ----
+        t1_h = t1 / 60
+        t2_h = t2 / 60
+        a_val = vt2 * t2_h
+        c_val = vt1 * t1_h
+        Goc_B_deg = goc1 + goc2
+        Goc_B_rad = math.radians(Goc_B_deg)
+        cos_B = math.cos(Goc_B_rad)
+
+        b_square_val = a_val ** 2 + c_val ** 2 - 2 * a_val * c_val * cos_B
+        b_val = round(math.sqrt(b_square_val), 2)
+
+        # ---- Format giá trị ----
+        def f(x):
+            return str(round(x, 2)).replace('.', ',')
+
+        a, b, c = f(a_val), f(b_val), f(c_val)
+        b_square = f(b_square_val)
+        cos_B_str = f(cos_B)
+        t1_h_str, t2_h_str = f(t1_h), f(t2_h)
+
+        z_sai1 = f(math.sqrt(a_val ** 2 + c_val ** 2))
+        z_sai2 = f(math.sqrt(a_val ** 2 + c_val ** 2 + 2 * a_val * c_val * cos_B))
+        z_sai3 = f(math.sqrt(a_val ** 2 + c_val ** 2 - a_val * c_val * cos_B))
+
+        debai = f"""
+        Một tàu xuất phát từ bãi biển $A$, chạy theo hướng $N {goc1}^\\circ E$ với vận tốc ${vt1}$ km/h. 
+        Sau khi đi được ${t1}$ phút đến vị trí $B$, tàu chuyển sang hướng $S {goc2}^\\circ E$ 
+        và chạy với tốc độ ${vt2}$ km/h trong ${t2}$ phút nữa thì đến đảo $C$. 
+        Hỏi tàu cách vị trí xuất phát xấp xỉ bao nhiêu kilômet?
+        """
+
+        giai = f"""
+        Quỹ đạo chuyển động của tàu tạo thành tam giác $ABC$ với:
+        $A$ là vị trí xuất phát, $B$ là vị trí đổi hướng, và $C$ là đảo.
+        Khoảng cách cần tìm là $AC$ (cạnh $b$).
+
+        **Bước 1. Tính độ dài các cạnh**
+        \\begin{{itemize}}
+        \\item $AB = c = {vt1} \\cdot {t1_h_str} = {c} \\mathrm{{~(km)}}$
+        \\item $BC = a = {vt2} \\cdot {t2_h_str} = {a} \\mathrm{{~(km)}}$
+        \\end{{itemize}}
+
+        **Bước 2. Xác định góc $\\widehat{{ABC}}$**
+        Hai hướng $N{goc1}^\\circ E$ và $S{goc2}^\\circ E$ cùng nghiêng về phía Đông,
+        nên góc giữa hai hướng bằng tổng hai góc phương vị:
+        \\[\\widehat{{ABC}} = {goc1}^\\circ + {goc2}^\\circ = {Goc_B_deg}^\\circ\\]
+
+        **Bước 3. Áp dụng định lí Cosin**
+        \\[AC^2 = AB^2 + BC^2 - 2AB \\cdot BC \\cdot \\cos(\\widehat{{ABC}})\\]
+        Thay số:
+        \\[AC^2 = {c}^2 + {a}^2 - 2 \\cdot {c} \\cdot {a} \\cdot \\cos({Goc_B_deg}^\\circ)\\]
+        Với $\\cos({Goc_B_deg}^\\circ) \\approx {cos_B_str}$, ta được:
+        \\[AC^2 \\approx {b_square}\\]
+        \\[AC = \\sqrt{{AC^2}} \\approx {b} \\mathrm{{~(km)}}\\]
+
+        Vậy tàu cách vị trí xuất phát xấp xỉ ${b}$ km.
+        """
+
+        dapso = b
+        dsnhieu = [z_sai1, z_sai2, z_sai3]
+
+        cauTN += MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)
+
+    return cauTN
+
+
+# bài toán đúng sai của dạng trên
+
+
+# ---- Tau chay hai chang (dung/sai) ----
+# (ten cu cua co: K10_3_3_4_3_TF)
+def L10_C3_TF_C_01(socau, socot):
+    gt = []
+    dem = len(gt)
+
+    # Hàm format ĐÚNG: Dùng dấu phẩy (,), bỏ số 0 thừa. max_decimals = 1 cho góc, 2 cho cạnh
+    def f(x, max_decimals=2):
+        # Làm tròn theo số chữ số thập phân tối đa cho phép
+        x_round = round(x, max_decimals)
+
+        # Định dạng thành chuỗi với dấu chấm
+        s = f"{x_round:.{max_decimals}f}"
+
+        # Bỏ các số 0 thừa ở cuối
+        while s.endswith('0') and '.' in s:
+            s = s[:-1]
+        if s.endswith('.'):
+            s = s[:-1]
+
+        # Cuối cùng, thay dấu chấm thành dấu phẩy
+        return s.replace('.', ',')
+
+    def calculate_huong_ac(goc1, Goc_A_deg_high_precision):
+        """
+        Tính hướng AC (từ Bắc, chiều kim đồng hồ) và chuyển sang dạng Lat-Goc-Long.
+        Quy tắc: Goc_AC = goc1 + Goc_A_deg
+        """
+        # Góc từ Bắc (chiều kim đồng hồ) đến AC (giữ độ chính xác cao)
+        Goc_AC_raw = goc1 + Goc_A_deg_high_precision
+
+        # Chỉ làm tròn ở BƯỚC CUỐI CÙNG (1 chữ số thập phân)
+        Goc_AC_round = round(Goc_AC_raw, 1)
+
+        if Goc_AC_round < 90:
+            # Dạng N alpha E
+            huong_val = Goc_AC_round
+            huong_str = f"N {f(huong_val, 1)}^\\circ E"
+        elif Goc_AC_round == 90:
+            huong_str = "E"
+            huong_val = 90.0
+        elif Goc_AC_round < 180:
+            # Dạng S alpha E (Goc = 180 - Goc_AC)
+            Goc_SE = 180 - Goc_AC_round
+            huong_val = Goc_SE
+            huong_str = f"S {f(huong_val, 1)}^\\circ E"
+        elif Goc_AC_round == 180:
+            huong_str = "S"
+            huong_val = 0.0
+        else:
+            return None, None
+
+            # huong_val là góc dùng để sinh nhiễu
+        return huong_str, huong_val
+
+    while dem < socau:
+        # 1. Chọn góc B
+        goc1_list = [10, 20, 30, 40, 50, 70]
+        goc2_list = [10, 20, 40, 50, 70, 80]
+        goc1 = np.random.choice(goc1_list)
+        goc2 = np.random.choice(goc2_list)
+        Goc_B_deg = goc1 + goc2
+        Goc_B_rad = math.radians(Goc_B_deg)
+        cos_B = math.cos(Goc_B_rad)
+
+        # 2. Chọn vận tốc và thời gian để tích ra số không phải làm tròn
+        v_t_pairs = [
+            (30, 40), (40, 30), (60, 20), (50, 30), (45, 40), (40, 45),
+            (25, 36), (40, 75), (50, 54), (70, 36), (60, 25), (75, 20)
+        ]
+
+        vt1, t1 = random.choice(v_t_pairs)
+        vt2, t2 = random.choice(v_t_pairs)
+        while (vt2 == vt1 and t2 == t1):
+            vt2, t2 = random.choice(v_t_pairs)
+
+        # ---- Tính toán chính xác $AB$ và $BC$ ----
+        a_val = vt2 * t2 / 60
+        c_val = vt1 * t1 / 60
+
+        if round(a_val, 2) == round(c_val, 2):
+            continue
+
+        # ---- Tính AC (Độ chính xác cao - KHÔNG LÀM TRÒN) ----
+        b_square_val = a_val ** 2 + c_val ** 2 - 2 * a_val * c_val * cos_B
+        if b_square_val <= 0:
+            continue
+        b_val_high_precision = math.sqrt(b_square_val)
+
+        # Kết quả làm tròn cuối cùng cho cạnh b (AC)
+        b_val = round(b_val_high_precision, 2)
+
+        # Tính toán góc A (Độ chính xác cao - KHÔNG LÀM TRÒN)
+        # Sử dụng giá trị b_val_high_precision cho độ chính xác cao nhất
+        cos_A = (b_val_high_precision ** 2 + c_val ** 2 - a_val ** 2) / (2 * b_val_high_precision * c_val)
+
+        # Kiểm tra điều kiện cosA
+        if -1.000000001 <= cos_A <= 1.000000001:
+            # Góc A độ chính xác cao (KHÔNG LÀM TRÒN)
+            Goc_A_deg_high_precision = math.degrees(math.acos(np.clip(cos_A, -1.0, 1.0)))
+        else:
+            continue
+
+        # TÍNH HƯỚNG AC CHÍNH XÁC (Dùng Goc_A_deg_high_precision)
+        Huong_AC_str, Huong_AC_deg_val = calculate_huong_ac(goc1, Goc_A_deg_high_precision)
+        if Huong_AC_str is None:
+            continue
+
+        # ---- Sinh đáp án nhiễu ----
+        Goc_B_deg_sai = Goc_B_deg + np.random.choice([-5, 5, 10, -10])
+        Huong_AC_deg_sai_val = round(Huong_AC_deg_val + np.random.choice([-2, 2, 5, -5]), 1)
+
+        # Sinh chuỗi nhiễu
+        Huong_AC_str_sai = f"N {f(Huong_AC_deg_sai_val, 1)}^\\circ E"
+
+        # Đảm bảo nhiễu khác hẳn đáp án đúng
+        if Huong_AC_str_sai == Huong_AC_str:
+            Huong_AC_str_sai = f"S {f(Huong_AC_deg_sai_val, 1)}^\\circ E"
+
+        v = [goc1, goc2, vt1, vt2, t1, t2, a_val, c_val, b_val, Goc_B_deg, Goc_A_deg_high_precision, Huong_AC_str,
+             Huong_AC_str_sai, Goc_B_deg_sai]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
+
+    cauTF = ''
+    for v in gt:
+        goc1, goc2, vt1, vt2, t1, t2, a_val, c_val, b_val, Goc_B_deg, Goc_A_deg_high_precision, Huong_AC_str, Huong_AC_str_sai, Goc_B_deg_sai = v
+
+        # Áp dụng hàm f(x)
+        a, c, b = f(a_val), f(c_val), f(b_val)
+        goc_B_dung = f(Goc_B_deg)
+        goc_B_sai = f(Goc_B_deg_sai)
+        goc1_f = f(goc1)
+        goc2_f = f(goc2)
+
+        # Khai báo đề bài chung
+        debai = f"""
+        Một tàu xuất phát từ bãi biển $A$, chạy theo hướng $N {goc1_f}^\\circ E$ với vận tốc ${vt1}$ km/h. 
+        Sau khi đi được ${t1}$ phút đến vị trí $B$, tàu chuyển sang hướng $S {goc2_f}^\\circ E$ 
+        và chạy với tốc độ ${vt2}$ km/h trong ${t2}$ phút nữa thì đến đảo $C$. 
+        Xác định tính đúng/sai của các phát biểu sau:
+        """
+
+        # Lời giải chi tiết (không có dấu chấm cuối)
+        giai_chung = f"""
+        **Phân tích bài toán:** Quỹ đạo chuyển động của tàu tạo thành tam giác $ABC$.
+        $AB = c = {vt1} \\cdot \\frac{{{t1}}}{{60}} = {c}$ km 
+        $BC = a = {vt2} \\cdot \\frac{{{t2}}}{{60}} = {a}$ km
+        Góc $\\widehat{{ABC}} = {goc1_f}^\\circ + {goc2_f}^\\circ = {goc_B_dung}^\\circ$
+        Áp dụng Định lí Cosin: $AC = b \\approx {b}$ km
+        Hướng từ $A$ đến $C$ là ${Huong_AC_str}$
+        """
+
+        # a) Độ dài AB hoặc BC
+        ds_a = [
+            (f"{{\\True Độ dài đoạn $AB$ là ${c}$ km}}", f"Độ dài $AB = {c}$ km. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{Độ dài đoạn $AB$ là ${a}$ km}}",
+             f"Độ dài $AB = {c}$ km $\\ne {a}$ km. Phát biểu **Sai**. {giai_chung}"),
+            (f"{{\\True Độ dài đoạn $BC$ là ${a}$ km}}", f"Độ dài $BC = {a}$ km. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{Độ dài đoạn $BC$ là ${b}$ km}}",
+             f"Độ dài $BC = {a}$ km $\\ne {b}$ km. Phát biểu **Sai**. {giai_chung}"),
+        ]
+
+        # b) Góc ABC
+        ds_b = [
+            (f"{{\\True Góc $\\widehat{{ABC}}$ bằng ${goc_B_dung}^\\circ$}}",
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ$. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{Góc $\\widehat{{ABC}}$ bằng ${goc_B_sai}^\\circ$}}",
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc_B_sai}^\\circ$. Phát biểu **Sai**. {giai_chung}"),
+            (f"{{Góc $\\widehat{{ABC}}$ bằng ${goc1_f}^\\circ$}}",
+             f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc1_f}^\\circ$. Phát biểu **Sai**. {giai_chung}"),
+        ]
+
+        # CÂU C: Khoảng cách từ A đến C
+        ds_c = [
+            (f"{{\\True Khoảng cách từ $A$ đến $C$ xấp xỉ ${b}$ km}}",
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{Khoảng cách từ $A$ đến $C$ xấp xỉ ${a}$ km}}",
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {a}$ km. Phát biểu **Sai**. {giai_chung}"),
+            (f"{{Khoảng cách từ $A$ đến $C$ xấp xỉ ${c}$ km}}",
+             f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {c}$ km. Phát biểu **Sai**. {giai_chung}"),
+        ]
+
+        # CÂU D: Hướng đi từ A đến C
+        ds_d = [
+            (f"{{\\True Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng ${Huong_AC_str}$}}",
+             f"Hướng $AC$ là ${Huong_AC_str}$. Phát biểu **Đúng**. {giai_chung}"),
+            (f"{{Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng ${Huong_AC_str_sai}$}}",
+             f"Hướng $AC$ là ${Huong_AC_str} \\ne {Huong_AC_str_sai}$. Phát biểu **Sai**. {giai_chung}"),
+            (f"{{Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng $N {goc1_f}^\\circ E$}}",
+             f"Hướng $AC$ là ${Huong_AC_str} \\ne N {goc1_f}^\\circ E$. Phát biểu **Sai**. {giai_chung}"),
+        ]
+
+        # Sắp xếp lại theo thứ tự: a, b, c (khoảng cách), d (hướng)
+        ds_abcd = [ds_a, ds_b, ds_c, ds_d]
+
+        # Gọi hàm TF_baitoan_du để sinh câu hỏi Đúng/Sai
+        cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
+
+    return cauTF

@@ -93,7 +93,8 @@
     "id": "L10_C3_B6_VD036_SA_A",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Khoảng cách giữa hai địa điểm khi gặp vật cản"
+    "Dang": "Khoảng cách giữa hai địa điểm khi gặp vật cản",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_TF_A",
@@ -111,48 +112,63 @@
     "id": "L10_C3_B5_NB029_MC_B",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính giá trị lượng giác khi biết toạ độ điểm trên nửa đường tròn đơn vị"
+    "Dang": "Tính giá trị lượng giác khi biết toạ độ điểm trên nửa đường tròn đơn vị",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B5_NB029_MC_C",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tìm toạ độ điểm trên nửa đường tròn đơn vị khi biết giá trị lượng giác"
+    "Dang": "Tìm toạ độ điểm trên nửa đường tròn đơn vị khi biết giá trị lượng giác",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B5_NB029_MC_D",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận biết giá trị lượng giác có thể xảy ra của góc từ 0 độ đến 180 độ"
+    "Dang": "Nhận biết giá trị lượng giác có thể xảy ra của góc từ 0 độ đến 180 độ",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B5_TH031_MC_B",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Quan hệ giữa hai góc bù nhau qua hai điểm đối xứng trên nửa đường tròn"
+    "Dang": "Quan hệ giữa hai góc bù nhau qua hai điểm đối xứng trên nửa đường tròn",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B6_TH033_MC_B",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính bán kính đường tròn ngoại tiếp bằng định lí sin"
+    "Dang": "Tính bán kính đường tròn ngoại tiếp bằng định lí sin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B6_VD036_MC_B",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đo khoảng cách qua đầm lầy bằng định lí sin"
+    "Dang": "Đo khoảng cách qua đầm lầy bằng định lí sin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B6_VD036_MC_C",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Bài toán chuyển động: tính khoảng cách bằng định lí côsin"
+    "Dang": "Bài toán chuyển động: tính khoảng cách bằng định lí côsin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C3_B6_VD036_TL_B",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Tự luận",
-    "Dang": "Đo khoảng cách tới điểm không tới được bằng định lí sin"
+    "Dang": "Đo khoảng cách tới điểm không tới được bằng định lí sin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_TF_C",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán tàu chạy hai chặng: tính khoảng cách và hướng",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]

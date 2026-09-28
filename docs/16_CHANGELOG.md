@@ -5354,3 +5354,81 @@ VPS phai cai: pip install num2words
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.90 - 2026-09-28
+
+## Chan mot loi TREO trong math_type (anh huong ca ngan hang)
+
+Do thu ham K10_3_3_1_1_H cua co Lan thi thay no TREO 4/5 lan. Lan theo thi
+loi nam trong chinh math_type.py:
+
+    nhieuda = random.sample(dsnhieu, 3)
+    while len(set([dapso, nhieuda[0], nhieuda[1], nhieuda[2]])) < 4:
+        nhieuda = random.sample(dsnhieu, 3)      # KHONG CO LOI THOAT
+
+Neu danh sach nhieu chi co dung ba phan tu ma trong do co hai phan tu trung
+nhau (hoac trung dap so) thi random.sample luon tra ve dung ba phan tu ay -
+vong lap quay mai khong dung, TREO ca lan ra de, khong bao gi het.
+
+Nay thay bang _chon_ba_nhieu(dapso, dsnhieu): loc trung mot lan, du thi
+lay, khong du thi nem NhieuTrungError kem danh sach nhieu de con sua.
+
+Gom luon cac loi "cau hong nhung de van phai ra" ve mot lop CauHongError;
+LoaiCauSaiError va NhieuTrungError deu ke thua no, bo rap de chi phai bat
+mot loai - cau hong thi BAO THIEU chu khong lam vo de.
+
+## Nhap 6 dang chuong 3 co Lan da tu chuyen form
+
+Co Lan chot: ban cua co lam goc, bo ban Claude viet hom qua.
+
+    K10_3_3_1_1_H   -> L10_C3_B5_NB029_MC_B_01   (thay ban Claude)
+    K10_3_3_1_2_H   -> L10_C3_B5_NB029_MC_C_01   (thay ban Claude)
+    K10_3_3_3_1_H   -> L10_C3_B6_TH032_MC_A_02   (thay ban Claude)
+    K10_3_3_4_1_H   -> L10_C3_B6_VD036_MC_B_01   (thay ban Claude; hinh
+                                                  dam lay cua co co nhan
+                                                  canh va hai goc, dep hon)
+    K10_3_3_4_3_H   -> L10_C3_B6_VD036_MC_C_01   (thay ban Claude)
+    K10_3_3_4_3_TF  -> L10_C3_TF_C_01            (DANG MOI)
+
+Chuong 3 lop 10: 27/27 dang da co ham, 0 loi.
+
+## Cac loi da va khi nhap
+
+1. K10_3_3_1_1_H: gom nhieu roi moi loc trung TRONG vong lap, nen neu danh
+   sach da du ba phan tu ma co hai cai giong nhau thi vong lap khong chay,
+   va math_type nhan [x, y, y] -> treo. Nay dung _ba_nhieu, bao dam ba
+   phuong an doi mot khac nhau. Do lai: 40/40 lan chay tron.
+   Loc luon phuong an co mau bang 1 (\dfrac{...}{1}) - nhin rat vo li.
+2. Bo lenh goi ham o muc mo-dun.
+3. Va 9 chuoi co ky tu thoat hong. Dung bo phan tich cu phap (tokenize) de
+   CHI sua chuoi thuong, khong dung den chuoi tho fr"""...""" - neu sua bua
+   bang regex ca tep se lam hong cac chuoi tho von da dung.
+4. Dat mac dinh dang=1 cho cac ham trac nghiem.
+
+## Con lai o chuong 3 (chua lam)
+
+Hai ham Dung/Sai con o form cu - K10_3_3_3_2_TH_DS va K10_3_3_3_4_VD_DS.
+Chua nhap vi ca hai deu goi dc.GiaiTamGiac_Goc() (hoac _Canh()) SAU LAN,
+moi lan tra ve mot tam giac ngau nhien KHAC NHAU, nen sau so A, B, C, a, b,
+c khong thuoc cung mot tam giac - de bai khong khop nhau. Muon nhap thi
+phai goi mot lan roi lay ca sau so, va viet lai loi giai (ban cu de
+\loigiai{} rong). De dot sau, lam cung luc voi cac ham can DefChung.
+
+## Danh dau dang do Claude tu them vao Mapping
+
+Theo yeu cau cua co Lan: moi dong Mapping do Claude dat ID deu co them
+truong "ghi_chu" ghi ro. Da danh dau nguoc lai cho 15 dong da them truoc do
+(chuong 3: 10 dong, chuong 9: 5 dong). Quy uoc ghi trong docs/04_ID_STANDARD.md.
+Tim nhanh:  grep -rn "CLAUDE THEM" data/mapping/
+
+## Da kiem chung the nao
+
+1. Ham NB029_MC_B_01 sau khi va: 40/40 lan chay tron (truoc do treo 4/8).
+2. 27/27 dang chuong 3 chay qua duong ra de that, dung loai cau, 0 loi.
+3. Bien dich THAT 12 cau cua 6 dang moi nhap ra PDF 9 trang, 0 loi.
+4. Soi lai: 0 phuong an co mau bang 1 trong 120 cau.
+5. 383 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

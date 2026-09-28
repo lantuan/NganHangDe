@@ -89,7 +89,7 @@ def resolve_socau(role: str, socau_yeu_cau: int | None) -> int:
 # Dùng LẠI đúng lớp lỗi mà math_type đã định nghĩa, để hai lớp khoá (lúc viết
 # hàm và lúc ra đề) cùng ném MỘT loại lỗi - nếu tách thành hai lớp khác nhau thì
 # bộ ráp đề chỉ bắt được một nửa, nửa còn lại vẫn làm vỡ cả đề.
-from math_type import LoaiCauSaiError  # noqa: E402
+from math_type import CauHongError, LoaiCauSaiError  # noqa: E402
 
 
 def kiem_tra_dung_loai_cau(generator_id: str, latex_block: str) -> None:

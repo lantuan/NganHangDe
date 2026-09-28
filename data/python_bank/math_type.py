@@ -61,7 +61,15 @@ def TF_baitoan_du(debai,ds_abcd,dothi_de,dothi_giai,socot):
 # Tầng khoá thứ hai nằm ở app/services/generator_service.py, kiểm theo TÊN HÀM
 # (có _SA_ hay _TL_) nên dù ai viết kiểu gì cũng không lách được.
 # ===========================================================================================
-class LoaiCauSaiError(ValueError):
+class CauHongError(ValueError):
+	"""Cau sinh ra khong dung duoc - bo rap de se BAO THIEU chu khong vo de.
+
+	Moi loi "cau nay hong nhung de van phai ra" deu ke thua lop nay, de
+	exam_assembler_service chi phai bat MOT loai loi.
+	"""
+
+
+class LoaiCauSaiError(CauHongError):
 	"""Câu sinh ra không đúng loại mà TÊN HÀM đã hứa.
 
 	Kế thừa ValueError để hàm cũ nào đang bắt ValueError vẫn bắt được, nhưng
@@ -95,11 +103,37 @@ def _khoa_loai_cau_TL(ds_abcd):
 # ===========================================================================================
 # Hàm này dùng cho câu MC_SA mà đáp số là hằng số
 # Nếu không có đồ thị thì tại vị trí đồ thị nhập số 0
+class NhieuTrungError(CauHongError):
+	"""Ba phuong an nhieu khong tao noi bon lua chon khac nhau."""
+
+
+def _chon_ba_nhieu(dapso, dsnhieu):
+	"""Rut ba phuong an nhieu sao cho BON lua chon doi mot khac nhau.
+
+	Truoc day cho nay la `while ... : random.sample(...)` khong co loi thoat.
+	Neu nguoi viet ham dua vao mot danh sach chi co ba phan tu ma trong do co
+	hai phan tu trung nhau (hoac trung dap so) thi random.sample luon tra ve
+	dung ba phan tu ay - vong lap QUAY MAI KHONG DUNG, treo ca lan ra de.
+	Gap that ngay 28/09/2026 o ham K10_3_3_1_1_H (treo 4/5 lan).
+
+	Nay: thu mot so lan co han, khong duoc thi bao loi ro rang de nguoi viet
+	ham sua danh sach nhieu, con hon de he thong treo im lim.
+	"""
+	rieng = []
+	for x in dsnhieu:
+		if x != dapso and x not in rieng:
+			rieng.append(x)
+	if len(rieng) < 3:
+		raise NhieuTrungError(
+			"Can BA phuong an nhieu khac nhau va khac dap so, nhung chi lap "
+			"duoc %d. Dap so: %r. Danh sach nhieu dua vao: %r"
+			% (len(rieng), dapso, list(dsnhieu)))
+	return random.sample(rieng, 3)
+
+
 def MC_SA_answer_const(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
 	_khoa_loai_cau_TLN(debai,dang)
-	nhieuda=random.sample(dsnhieu,3)
-	while len(set([dapso,nhieuda[0],nhieuda[1],nhieuda[2]]))<4:
-		nhieuda=random.sample(dsnhieu,3)
+	nhieuda=_chon_ba_nhieu(dapso,dsnhieu)
 	ketqua=f"{{\\True ${dapso}$}}\n"
 	nhieu1=f"{{$ {nhieuda[0]}$}}\n"
 	nhieu2=f"{{${nhieuda[1]}$}}\n"
@@ -123,9 +157,7 @@ def MC_SA_answer_const(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
 # Nếu không có đồ thị thì tại vị trí đồ thị nhập số 0
 def MC_SA_answer_text(debai,dapso,dsnhieu,giai,dothi_de,dothi_giai,dang):
 	_khoa_loai_cau_TLN(debai,dang)
-	nhieuda=random.sample(dsnhieu,3)
-	while len(set([dapso,nhieuda[0],nhieuda[1],nhieuda[2]]))<4:
-		nhieuda=random.sample(dsnhieu,3)
+	nhieuda=_chon_ba_nhieu(dapso,dsnhieu)
 	ketqua=f"{{\\True {dapso}}}\n"
 	nhieu1=f"{{{nhieuda[0]}}}\n"
 	nhieu2=f"{{{nhieuda[1]}}}\n"

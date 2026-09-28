@@ -60,6 +60,8 @@ CHUA_XEP_BAC = {
     "L10_C9_TF_C_01",
     "L10_C9_TF_D_01",
     "L10_C9_TF_E_01",
+    # Chuong 3, ham co Lan tu viet (bai toan tau chay), nhap 28/09/2026.
+    "L10_C3_TF_C_01",
 }
 
 
