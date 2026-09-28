@@ -136,18 +136,55 @@ def _chia_theo_so_tiet(so_luong: int, so_tiet_theo_bai: dict[str, int]) -> dict[
 def _chon_bai_dung_sai(so_tiet_theo_bai: dict[str, int], so_cau_lon: int) -> dict[str, int]:
     """Chọn bài (đơn vị kiến thức) cho các câu Đúng/Sai — LÀM TRƯỚC TIÊN.
 
-    Ưu tiên bài nhiều tiết nhất. Mỗi câu Đúng/Sai lớn gồm đủ 4 ý
-    NB-TH-VD-VDC lấy trong CÙNG một bài, nên bài đó sẽ bị trừ 1 câu ở
-    MỖI mức khi chia các phần còn lại (xem _tru_phan_dung_sai).
-    Nếu số câu Đúng/Sai nhiều hơn số bài thì mới quay vòng lại.
+    HAI CÂU ĐÚNG/SAI PHẢI Ở HAI CHƯƠNG KHÁC NHAU (cô Lan chốt, nhắc lại
+    29/09/2026). Nên chia CHƯƠNG trước, trong chương mới chọn bài.
+
+    Vì sao phải sửa (đo được 29/09/2026): bản cũ chỉ xếp TẤT CẢ các bài
+    trong phạm vi theo số tiết giảm dần rồi lấy N bài đầu. Lớp 10 có
+    bài 1 và bài 2 của chương 1 nhiều tiết nhất, nên đề giữa kỳ 1 và
+    cuối kỳ 1 ra 30/30 đề đều có CẢ HAI câu Đúng/Sai ở chương 1 - và
+    luôn đúng hai bài ấy, không đề nào khác đề nào.
+
+    Cách làm bây giờ:
+    - Xếp các chương theo bài nhiều tiết nhất của chương đó, giảm dần
+      (vẫn giữ tinh thần "bài dạy nhiều tiết hơn thì được nhiều câu hơn"
+      mà cô Lan chốt 12/09/2026).
+    - Rải lần lượt mỗi chương một câu. Chỉ khi số câu Đúng/Sai NHIỀU HƠN
+      số chương trong phạm vi mới quay lại chương đã dùng - lúc ấy lấy
+      bài KHÁC trong chương đó, không lặp lại đúng bài cũ.
+
+    Mỗi câu Đúng/Sai lớn gồm đủ 4 ý NB-TH-VD-VDC lấy trong CÙNG một bài.
+    Lưu ý: CN_QuestionSelector chọn câu Đúng/Sai theo CHƯƠNG, không theo
+    bài (Ngoại lệ 1, docs/04) - nên chương mới là thứ quyết định câu nào
+    ra đề, còn bài dùng để trừ suất ở các phần khác.
     """
     if so_cau_lon <= 0 or not so_tiet_theo_bai:
         return {}
 
     bai_sap_xep = sorted(so_tiet_theo_bai, key=lambda b: (-so_tiet_theo_bai[b], b))
+
+    def _chuong_cua(bai_id: str):
+        cb = _tach_chuong_bai(bai_id)
+        return cb[0] if cb else None
+
+    # Gom bài theo chương; trong mỗi chương, bài nhiều tiết đứng trước.
+    theo_chuong: dict = {}
+    for bai_id in bai_sap_xep:
+        theo_chuong.setdefault(_chuong_cua(bai_id), []).append(bai_id)
+
+    # Chương nào có bài nhiều tiết nhất thì đứng trước.
+    chuong_sap_xep = sorted(
+        theo_chuong,
+        key=lambda c: (-so_tiet_theo_bai[theo_chuong[c][0]], str(c)))
+
     ket_qua: dict[str, int] = {}
     for i in range(so_cau_lon):
-        bai_id = bai_sap_xep[i % len(bai_sap_xep)]
+        chuong = chuong_sap_xep[i % len(chuong_sap_xep)]
+        ds_bai = theo_chuong[chuong]
+        # Vòng thứ mấy -> lấy bài thứ mấy của chương, để khi buộc phải
+        # quay lại một chương thì không rơi trúng đúng bài đã dùng.
+        vong = i // len(chuong_sap_xep)
+        bai_id = ds_bai[vong % len(ds_bai)]
         ket_qua[bai_id] = ket_qua.get(bai_id, 0) + 1
     return ket_qua
 

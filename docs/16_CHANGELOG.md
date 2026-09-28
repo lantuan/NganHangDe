@@ -7030,3 +7030,89 @@ chay bash 5 va khong bao gi. Nay da co bai test khoa.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.11 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Loi: hai cau Dung/Sai roi vao CUNG MOT CHUONG
+
+Co Lan mo de tren web, thay cau 3 (tap hop) va cau 4 (menh de) deu
+thuoc chuong 1, va nhac: "toi co chot de cau dung sai phai o 2 chuong
+khac nhau co ma".
+
+Do duoc tren may co Lan, 30 de moi ky:
+
+    giua ky 1  30/30 de CA HAI cau Dung/Sai o chuong 1
+    cuoi ky 1  30/30 de CA HAI cau Dung/Sai o chuong 1
+    giua ky 2   0/30  (chuong 6 va 7 co so tiet gan nhau nen may man)
+    cuoi ky 2   0/30
+
+Khong nhung trung chuong ma con TRUNG Y HET NHAU: de nao cung ra dung
+L10_C1_TF_A + L10_C1_TF_B (menh de + tap hop), khong de nao khac de nao.
+
+## Nguyen nhan: luat chuong bi mat tu ban 2.38 (12/09/2026)
+
+Truoc 2.38 co ham _chon_chuong_dung_sai() - chon dung N CHUONG khac
+nhau. Ban 2.38 doi sang _chon_bai_dung_sai() de lam dung quy dinh moi
+"chia cau ve tung bai theo ti le so tiet". Nhung ham moi xep TAT CA cac
+bai trong pham vi chung MOT HANG theo so tiet giam dan roi lay N bai
+dau - khong con biet gi den chuong nua.
+
+Lop 10: bai 1 (Menh de) va bai 2 (Tap hop) cua chuong 1 nhieu tiet nhat
+trong ca pham vi giua ky 1, nen hai cau Dung/Sai luon roi ca vao do.
+
+_chon_chuong_dung_sai() van nam trong tep nhung TU 12/09 DEN NAY KHONG
+HE DUOC GOI - da kiem bang grep ca ma nguon. Changelog 2.38 co ghi ro
+"ham cu con giu lai (khong con duoc goi)".
+
+LUU Y quan trong: CN_QuestionSelector chon cau Dung/Sai theo CHUONG chu
+khong theo bai (Ngoai le 1, docs/04) - nen chuong moi la thu quyet dinh
+cau nao ra de, con bai chi dung de tru suat o cac phan khac. Vi vay
+chon bai ma khong nhin chuong la hong dung cho quan trong nhat.
+
+## Da sua
+
+_chon_bai_dung_sai() nay chia CHUONG truoc, trong chuong moi chon bai:
+
+- Xep cac chuong theo bai nhieu tiet nhat cua chuong do, giam dan (van
+  giu tinh than "bai day nhieu tiet hon thi duoc nhieu cau hon" ma co
+  Lan chot 12/09).
+- Rai lan luot moi chuong MOT cau.
+- Chi khi so cau Dung/Sai NHIEU HON so chuong trong pham vi moi quay
+  lai chuong da dung - va luc ay lay BAI KHAC trong chuong do, khong
+  lap lai dung bai cu.
+
+De he so 1 khong doi gi (pham vi chi co 1 chuong, 1 cau Dung/Sai).
+
+## Da kiem chung the nao
+
+1. Sau khi sua: 0/30 de trung chuong o CA BON ky thi.
+   Chon ra that su: L10_C1_TF_* + L10_C2_TF_* (truoc: C1_TF_A + C1_TF_B).
+2. Kiem nguoc: dung lai hanh vi cu roi chay chinh bai test -> bao sai
+   dung nhu mong doi.
+3. Them tests/test_dung_sai_khac_chuong.py (27 bai) khoa:
+   - bon ky thi x 6 seed: khong ky nao co hai cau Dung/Sai cung chuong;
+   - rai moi chuong mot cau truoc khi quay vong, quay vong thi phai
+     sang bai khac;
+   - VAN uu tien bai nhieu tiet trong moi chuong (khong duoc sua luat
+     chuong ma bo mat quy dinh so tiet);
+   - bai_id khong doc duoc chuong thi chay nhu cu (khong vo).
+4. De van ra DU ma tran sau khi sua:
+   he so 1: chuong 1..9 deu 20/20 de;
+   he so 2: bon ky deu 20/20 de, 420/420 cau moi ky.
+5. 661 bai test qua, 8 bo qua (truoc: 633).
+
+## Con lai, cho co Lan quyet
+
+Cap chuong cua hai cau Dung/Sai hien CO DINH: giua ky 1 va cuoi ky 1
+luon ra chuong 1 + chuong 2, khong bao gio ra chuong 3 hay 4. Vi cach
+xep chuong theo so tiet la tinh (khong co ngau nhien). Muon moi de moi
+khac, co the boc ngau nhien trong so cac chuong cua pham vi (van uu
+tien chuong nhieu tiet). Doi co Lan chot roi lam.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
