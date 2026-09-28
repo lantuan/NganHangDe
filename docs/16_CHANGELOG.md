@@ -7521,3 +7521,56 @@ duoc.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.17 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Lop 11 chuong 9: 23/23 dang co ham
+
+Dao ham. Viet moi theo Curriculum + Mapping.
+
+    B31 Dinh nghia va y nghia cua dao ham   9 dang
+    B32 Cac quy tac tinh dao ham            6 dang
+    B33 Dao ham cap hai                     5 dang
+    Cau Dung/Sai cua chuong                 2 dang
+
+Bao gom: dinh nghia dao ham bang gioi han, y nghia hinh hoc (he so goc
+tiep tuyen) va y nghia co hoc (van toc, gia toc), so e, cac cong thuc
+dao ham so cap, quy tac tich va ham hop, dao ham cap hai.
+
+## So lieu chon de dap so DEP
+
+He so nguyen, diem x_0 nguyen nho (|f(x_0)| va |f'(x_0)| deu khong qua
+60) nen moi gia tri dao ham va moi he so cua tiep tuyen deu NGUYEN -
+cau tra loi ngan cham bang so khop chuoi.
+
+Cau tu luan "giai phuong trinh f'(x) = 0" dung khuon
+f(x) = 2x^3 - 3(p+q)x^2 + 6pq x + r, khi do f'(x) = 6(x-p)(x-q) nen hai
+nghiem luon NGUYEN va hoc sinh nham duoc ngay - khong phai dung cong
+thuc nghiem.
+
+## Da kiem chung the nao
+
+1. 23/23 ham chay sach 3 muc socau x 60 seed; moi ket qua deu: so dau $
+   chan, ngoac can, khong co tabular, khong co **dam**, khong co dau
+   gach cheo le.
+2. Kiem toan DOC LAP 450 cau: doc lai da thuc TU CHINH DE BAI bang bieu
+   thuc chinh quy, tu dao ham bang quy tac he so - so mu roi doi chieu
+   voi dap an cua ham - 0 cho sai.
+3. De he so 1 chuong 9 lop 11: 20/20 de du ma tran.
+4. 1925 bai test qua, 8 bo qua (truoc: 1842).
+
+## Hien trang lop 11
+
+    C1  0/39   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5  0/21          C8  0/22
+    C3 15/15   C6  0/27          C9 23/23
+
+Da xong 60/238 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
