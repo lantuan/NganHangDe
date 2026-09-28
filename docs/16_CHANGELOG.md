@@ -7391,3 +7391,80 @@ phong) - dung khuon da dung cho chuong 5, 6, 7.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.15 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Lop 11 chuong 3: 15/15 dang co ham
+
+Cac so dac trung do xu the trung tam cua mau so lieu GHEP NHOM.
+Viet moi hoan toan theo Curriculum + Mapping da co.
+
+    B8  Mau so lieu ghep nhom                1 dang
+    B9  Cac so dac trung do xu the trung tam 12 dang
+    Cau Dung/Sai cua chuong                   2 dang
+
+## Quy uoc SGK KNTT lop 11 dung trong tep
+
+  * Nhom la nua khoang [u_i; u_{i+1}), gia tri dai dien la TRUNG DIEM.
+  * Trung vi: tim nhom chua gia tri thu n/2 (KHONG phai (n+1)/2 nhu mau
+    khong ghep nhom o lop 10), roi noi suy theo tan so tich luy.
+  * Tu phan vi: CUNG cong thuc, thay n/2 bang n/4 va 3n/4.
+  * Mot: nhom co tan so lon nhat, noi suy theo hai nhom ke ben.
+
+## Bang so lieu ve bang TikZ, KHONG dung tabular
+
+Day la cho quan trong nhat cua chuong nay: de bai chinh la CAI BANG -
+mat bang thi cau khong con lam duoc nua.
+
+MathJax tren trang lam bai KHONG dung duoc moi truong tabular, nen bang
+viet bang tabular se BIEN MAT tren web. Vi vay bang tan so duoc ve bang
+TikZ thuan (chi \draw va \node) roi truyen qua duong dothi_de - hinh
+TikZ duoc dich san ra anh luc sinh de nen hien dung o CA PDF LAN WEB.
+Da xem tan mat anh dich ra.
+
+Loi giai thi khong dung bang nua ma liet ke mot dong
+("$c_1 = 42,5$ (tan so $6$); $c_2 = ...$") - vua du ro vua hien duoc
+o moi noi.
+
+Cung KHONG dung tkz-tab (may co Lan thieu goi tabvar).
+
+## So lieu chon de dap so DEP
+
+Co mau n chia het cho 4; ba vi tri n/4, n/2, 3n/4 deu roi HAN vao trong
+mot nhom (khong roi dung dau mut); mot duy nhat va khong o hai dau
+(de cong thuc mot dung duoc ca hai nhom ke ben); va moi so dac trung
+deu LAM TRON duoc dut khoat den hang phan tram - tranh cac gia tri roi
+sat mep .xx5 vi luc ay hoc sinh lam tron len hay xuong deu co ly, ma
+cau tra loi ngan cham bang SO KHOP CHUOI nen se cham oan.
+
+## Da ap dung het bai hoc cua lop 10 (Version 3.14)
+
+  * chu tieng Viet KHONG bao gio nam tran trong $...$;
+  * khong dung chu dam kieu Markdown;
+  * moi chuoi co dau gach cheo deu la chuoi r"...";
+  * moi danh sach phuong an nhieu deu di qua _ba_nhieu11;
+  * so dung lam toa do TikZ luon dung dau CHAM (ham _toa rieng).
+
+Mot cho da tu bat: boi canh "diem kiem tra mon Toan" ban dau bat dau tu
+4, bon nhom rong 2 -> nhom cuoi thanh [10; 12), khong co diem nao nhu
+vay. Da doi thanh bat dau tu 2.
+
+## Da kiem chung the nao
+
+1. 15/15 ham chay sach 3 muc socau x 60 seed; moi ket qua deu: so dau $
+   chan, ngoac can, khong con tabular, khong co **dam**, khong co dau
+   gach cheo le.
+2. Kiem toan DOC LAP 960 cau: doc lai bang tan so TU CHINH HINH TIKZ
+   cua de roi tu tinh lai so trung binh, trung vi, tu phan vi va mot
+   bang cong thuc viet tay - 0 cho sai.
+3. De he so 1 chuong 3 lop 11: 20/20 de du ma tran.
+4. 1762 bai test qua, 8 bo qua (truoc: 1707). Bo test
+   test_hien_thi_web.py tu dong soi ca cac ham lop 11 moi viet.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
