@@ -7651,3 +7651,63 @@ Da xong 86/251 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.19 - 2026-09-29
+
+## Lop 11 chuong 6 (Ham so mu va ham so logarit): 33/33 dang co ham
+
+Viet moi data/python_bank/toan11/L11_C6.py.
+
+Bai 18 (luy thua so mu thuc): nhan biet luy thua so mu huu ti, tinh chat
+phep tinh luy thua, gia tri bieu thuc so, lai kep (MC + SA + TL).
+Bai 19 (logarit): dinh nghia, tinh chat, doi co so, bai toan tang truong
+vi khuan, do Richter cua dong dat (MC + SA + TL).
+Bai 20 (ham so mu, ham so logarit): nhan biet, do pH, NHAN DANG DO THI
+(co hinh), tinh chat qua do thi (co hinh), phan ra phong xa.
+Bai 21 (PT, BPT mu va logarit): giai PT mu, PT logarit, BPT mu, bai toan
+lai kep tim so nam.
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+Hai do thi ham so mu va ham so logarit ve bang TIKZ THUAN
+(plot(\x,{pow(a,\x)}) va plot(\x,{ln(\x)/ln(a)})), KHONG dung pgfplots -
+da dich thu tren may va qua luon hinh_ve_service nen web cung co hinh.
+
+So lieu chon de DAP SO DEP:
+  - luy thua huu ti: co so luon la luy thua dung (8^(2/3), 16^(3/4)...)
+    nen ket qua NGUYEN;
+  - logarit: doi so luon la luy thua dung cua co so;
+  - lai kep: lai suat chon trong {5,10,20,25,50}% nen (1+r)^n la so thap
+    phan HUU HAN; bai "tim so nam" dung r = 1/4 (P = c.4^n, Q = c.5^n)
+    hoac r = 1/2 (P = c.2^n, Q = c.3^n) nen so nam NGUYEN;
+  - phan ra phong xa: khoi luong dau chia het cho 2^k.
+
+## Bo sung 6 dang con thieu cua chuong 6
+
+VD088 TL (lai kep), VD093 SA + TL (do Richter), VD097 SA + TL (phan ra
+phong xa), VD099 SA (so nam gui tiet kiem). Nho vay de he so 1 chuong 6
+khong con o trong nao.
+
+## Da kiem chung the nao
+
+1. 33/33 ham chay sach 3 muc socau x 60 seed.
+2. Kiem toan DOC LAP 2880 cau: doc lai so lieu TU CHINH DE BAI bang bieu
+   thuc chinh quy roi tu tinh lai dap so (luy thua, logarit, lai kep,
+   Richter, phan ra, PT logarit) - 0 cho sai.
+3. Hai do thi moi da dich thanh anh PNG qua dung hinh_ve_service (duong
+   di that cua web), xem lai anh bang mat: dung dang, dung diem dac biet.
+4. De he so 1 chuong 6 lop 11: 20/20 de du ma tran 6-1-2-3.
+5. Quet 25 de x 9 chuong x 2 lop: lop 10 sach; lop 11 chi con thieu o
+   C1, C4, C7, C8 la cac chuong CHUA viet ham.
+6. 2167 bai test qua, 8 bo qua (truoc: 2048).
+
+## Hien trang lop 11
+
+    C1  0/39   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5 23/23          C8  0/22
+    C3 16/16   C6 33/33          C9 25/25
+
+Da xong 119/257 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

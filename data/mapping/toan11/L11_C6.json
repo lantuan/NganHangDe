@@ -42,6 +42,13 @@
     "Dang": "Giá trị biểu thức luỹ thừa bằng máy tính cầm tay"
   },
   {
+    "id": "L11_C6_B18_VD088_TL_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính luỹ thừa.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán lãi kép",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C6_B19_NB089_MC_A",
     "content": "Nhận biết được khái niệm lôgarit cơ số a (a > 0, a khác 1) của một số thực dương.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -90,6 +97,20 @@
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
   },
   {
+    "id": "L11_C6_B19_VD093_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính lôgarit.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "So sánh cường độ hai trận động đất theo thang Richter",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C6_B19_VD093_TL_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phép tính lôgarit.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về độ Richter",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C6_B20_NB094_MC_A",
     "content": "Nhận biết được hàm số mũ và hàm số lôgarit. Nêu được một số ví dụ thực tế về hàm số mũ, hàm số lôgarit.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -120,6 +141,20 @@
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
   },
   {
+    "id": "L11_C6_B20_VD097_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với hàm số mũ và hàm số lôgarit.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khối lượng chất phóng xạ còn lại sau một số chu kì bán rã",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C6_B20_VD097_TL_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với hàm số mũ và hàm số lôgarit.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn về hàm số mũ (phân rã phóng xạ)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C6_B21_TH098_MC_A",
     "content": "Giải được phương trình, bất phương trình mũ, lôgarit ở dạng đơn giản.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -142,6 +177,13 @@
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phương trình, bất phương trình mũ và lôgarit.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C6_B21_VD099_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với phương trình, bất phương trình mũ và lôgarit.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số năm gửi tiết kiệm theo lãi kép",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C6_B21_VD099_TL_A",
