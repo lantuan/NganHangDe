@@ -66,10 +66,31 @@
     "Dang": "Chứng minh tính chất hình học bằng toạ độ"
   },
   {
+    "id": "L10_C4_B10_VD054_SA_A",
+    "content": "Vận dụng được biểu thức toạ độ của các phép toán vectơ vào giải một số bài toán hình học phẳng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài trung tuyến theo toạ độ",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C4_B10_VD055_MC_A",
     "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vị trí của vật trên mặt phẳng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD055_SA_A",
+    "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Vị trí của vật sau một khoảng thời gian",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C4_B10_VD055_TL_A",
+    "content": "Vận dụng được kiến thức về toạ độ của vectơ để giải một số bài toán liên quan đến thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Tốc độ, vị trí và quãng đường của vật chuyển động thẳng đều",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C4_B10_VD056_MC_A",
@@ -82,6 +103,13 @@
     "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
     "Loai": "Tự luận",
     "Dang": "Tính cạnh, góc, diện tích tam giác bằng toạ độ"
+  },
+  {
+    "id": "L10_C4_B10_VD056_SA_A",
+    "content": "Vận dụng được phương pháp toạ độ vào bài toán giải tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Diện tích tam giác theo toạ độ",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C4_B11_NB057_MC_A",
@@ -120,6 +148,13 @@
     "Dang": "Bài toán về lực, về chuyển động dùng vectơ"
   },
   {
+    "id": "L10_C4_B11_VD060_SA_A",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ lớn lực thứ ba khi vật cân bằng",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C4_B11_VD061_MC_A",
     "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -130,6 +165,13 @@
     "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Chứng minh đẳng thức vectơ trong tam giác"
+  },
+  {
+    "id": "L10_C4_B11_VD061_SA_A",
+    "content": "Vận dụng được kiến thức về vectơ vào giải một số bài toán hình học và một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hệ số trong phân tích vectơ theo trung điểm, trọng tâm",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C4_B7_NB037_MC_A",

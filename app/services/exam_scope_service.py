@@ -65,21 +65,26 @@ def load_scope_heso1(lop: int, pham_vi_chuong: str) -> dict:
     """
     pham_vi_chuong: vd "chuong_1" -> chuong_so = 1
 
-    Luật:
-    - Chỉ lấy bài trong đúng chương đó.
-    - Nếu gặp bài có boundary_after khác null -> lấy bài đó rồi dừng
-      (không lấy các bài sau, dù cùng chương).
+    Luật: lấy TOÀN BỘ các bài của chương đó.
+
+    SỬA 28/09/2026 - cô Lan chốt: "hệ số 2 - đề giữa kỳ mới quan tâm
+    phạm vi này. còn hệ số 1 sẽ chạy theo chương."
+
+    Bản cũ dừng lại khi gặp bài có boundary_after khác null. Nhưng
+    boundary_after là mốc của các KỲ THI (GK1_EXAM, CK1_EXAM, GK2_EXAM,
+    CK2_EXAM) - nó dùng cho đề giữa kỳ / cuối kỳ, KHÔNG dùng cho bài
+    kiểm tra thường xuyên. Hệ số 1 ra theo chương nên phải lấy đủ cả
+    chương.
+
+    Hậu quả của bản cũ (đo được): chương 4 có boundary_after = GK1_EXAM
+    ở bài 8 nên đề hệ số 1 chương 4 chỉ gồm bài 7 và bài 8; mà hai bài
+    ấy không có yêu cầu nào mức Vận dụng, nên đề chỉ ra được 6/12 câu.
+    Tương tự chương 5 (mốc ở bài 14) và chương 7 (mốc ở bài 22).
     """
     ppct = _load_ppct(lop)
     so_chuong = int(pham_vi_chuong.replace("chuong_", ""))
 
-    bai_trong_chuong = [b for b in ppct if b["chuong_so"] == so_chuong]
-
-    ket_qua = []
-    for b in bai_trong_chuong:
-        ket_qua.append(b)
-        if b.get("boundary_after") is not None:
-            break
+    ket_qua = [b for b in ppct if b["chuong_so"] == so_chuong]
 
     return {
         "loai_he_so": "HeSo1",

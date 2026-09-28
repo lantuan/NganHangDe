@@ -10,6 +10,13 @@ KHÔNG báo thiếu gì cả. Hai nguyên nhân:
    NB cho bài 6 và câu VD cho bài 5 -> những câu ấy rơi mất lặng lẽ.
 2. Mỗi câu Đúng/Sai trừ 1 suất VD + 1 suất VDC của các phần khác.
 
+PHẠM VI ĐỀ HỆ SỐ 1 (cô Lan chốt 28/09/2026): "hệ số 2 - đề giữa kỳ mới
+quan tâm phạm vi này. còn hệ số 1 sẽ chạy theo chương." Trước đó
+load_scope_heso1 dừng ở bài có boundary_after - nhưng đó là mốc của các
+KỲ THI (GK1_EXAM, CK1_EXAM...), dùng cho đề giữa kỳ/cuối kỳ chứ không
+dùng cho kiểm tra thường xuyên. Đo được: chương 4 chỉ ra 6/12 câu vì
+phạm vi bị cắt còn bài 7 và bài 8.
+
 Cô Lan chốt 28/09/2026: "cứ làm theo đúng mức độ là được, vì mức độ ảnh
 hưởng điểm số - mức độ khác đi sẽ làm điểm số không phản ánh đúng cái người
 kiểm tra mong muốn." Nên nay mỗi phần ra đúng số câu từng mức độ ma trận
@@ -28,7 +35,7 @@ from app.services.exam_blueprint_service import (
 from app.services.question_selector_service import select_questions
 
 # Các chương lớp 10 đã có đủ hàm Python để bắt được đề hệ số 1.
-CHUONG_DA_DU_HAM = [1, 2, 3, 8, 9]
+CHUONG_DA_DU_HAM = [1, 2, 3, 4, 8, 9]
 
 # Ma trận hệ số 1 (doc 07): tổng 12 câu.
 DOI_HOI = {

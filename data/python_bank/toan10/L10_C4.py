@@ -2231,3 +2231,275 @@ def L10_C4_TF_B_01(socau, socot=1):
             ])
         cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
     return cauTF
+
+
+# ---------------------------------------------------------------------
+# Năm dạng TRẢ LỜI NGẮN bổ sung cho các yêu cầu mức Vận dụng.
+# Sau khi sửa phạm vi đề hệ số 1 (chạy hết chương, không dừng ở mốc thi
+# giữa kỳ), bộ chọn câu cần trả lời ngắn cho VD054, VD055, VD056, VD060,
+# VD061 mà Mapping chưa khai, nên đề mất 12/60 câu.
+# CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+# ---------------------------------------------------------------------
+
+def L10_C4_B10_VD054_SA_A_01(socau):
+    """Bài toán hình học bằng toạ độ - độ dài trung tuyến, đáp số nguyên.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        p, q, r = random.choice(BO_BA_PYTAGO4[:5])
+        xa, ya = random.randint(-4, 4), random.randint(-4, 4)
+        sx, sy = random.choice([1, -1]), random.choice([1, -1])
+        w = (xa, ya, sx * p, sy * q, r)
+        if w not in gt:
+            gt.append(w)
+
+    cau = ""
+    for xa, ya, u, v, r in gt:
+        # B và C đối xứng nhau qua A theo hướng (u; v): trung điểm BC là A
+        xb, yb = xa + u, ya + v
+        xc, yc = xa - u, ya - v
+        # lấy điểm D để trung tuyến từ D tới trung điểm BC (chính là A)
+        xd, yd = xa + 2 * (-v), ya + 2 * u
+        kq = 2 * r
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho tam giác $DBC$ với "
+                 r"$D%s$, $B%s$, $C%s$. Gọi $A$ là trung điểm của $BC$. "
+                 r"Tính độ dài trung tuyến $DA$."
+                 % (_toado(xd, yd), _toado(xb, yb), _toado(xc, yc)))
+        giai = (r"Trung điểm $A$ của $BC$ có toạ độ "
+                r"$\left(\dfrac{x_B + x_C}{2};\ \dfrac{y_B + y_C}{2}\right) "
+                r"= %s$." % _toado(xa, ya) +
+                "\\\\\n"
+                r"$%s = %s$." % (_vt("D", "A"), _toado(xa - xd, ya - yd)) +
+                "\\\\\n"
+                r"$DA = \sqrt{\left(%d\right)^2 + \left(%d\right)^2} = "
+                r"\sqrt{%d} = %d$."
+                % (xa - xd, ya - yd, (xa - xd) ** 2 + (ya - yd) ** 2, kq))
+        nhieu = _ba_nhieu4(kq, [r, kq * kq, kq + 1, abs(u) + abs(v)],
+                           buoc=lambda t: kq + 3 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C4_B10_VD055_SA_A_01(socau):
+    """Vị trí của vật trên mặt phẳng toạ độ - trả lời ngắn.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        x0, y0 = random.randint(-6, 6), random.randint(-6, 6)
+        vx, vy = random.randint(-5, 5), random.randint(-5, 5)
+        t = random.randint(2, 5)
+        if (vx, vy) == (0, 0):
+            continue
+        w = (x0, y0, vx, vy, t)
+        if w not in gt:
+            gt.append(w)
+
+    cau = ""
+    for x0, y0, vx, vy, t in gt:
+        x1 = x0 + t * vx
+        debai = (r"Một ca nô xuất phát từ vị trí $A%s$ trên mặt phẳng toạ độ "
+                 r"$Oxy$ (đơn vị trên mỗi trục là ki-lô-mét) và chuyển động "
+                 r"thẳng đều với vectơ vận tốc $\overrightarrow{v} = %s$ "
+                 r"(đơn vị: km/h). Tìm \textbf{hoành độ} vị trí của ca nô "
+                 r"sau $%d$ giờ." % (_toado(x0, y0), _toado(vx, vy), t))
+        giai = (r"Độ dịch chuyển sau $%d$ giờ là $%d\overrightarrow{v} = %s$."
+                % (t, t, _toado(t * vx, t * vy)) +
+                "\\\\\n"
+                r"Hoành độ vị trí mới: $%d + %d\cdot\left(%d\right) = %d$."
+                % (x0, t, vx, x1))
+        nhieu = _ba_nhieu4(x1, [x0 + vx, t * vx, x0 - t * vx, y0 + t * vy],
+                           buoc=lambda k: x1 + 2 * k)
+        cau += MC_SA_answer_const(debai, x1, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C4_B10_VD056_SA_A_01(socau):
+    """Diện tích tam giác bằng toạ độ - trả lời ngắn, đáp số nguyên.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        xa, ya = random.randint(-4, 4), random.randint(-4, 4)
+        u1, u2 = random.randint(-5, 5), random.randint(-5, 5)
+        v1, v2 = random.randint(-5, 5), random.randint(-5, 5)
+        d = u1 * v2 - u2 * v1
+        if d == 0 or abs(d) % 2 != 0:
+            continue
+        w = (xa, ya, u1, u2, v1, v2)
+        if w not in gt:
+            gt.append(w)
+
+    cau = ""
+    for xa, ya, u1, u2, v1, v2 in gt:
+        xb, yb = xa + u1, ya + u2
+        xc, yc = xa + v1, ya + v2
+        d = u1 * v2 - u2 * v1
+        S = abs(d) // 2
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho tam giác $ABC$ với "
+                 r"$A%s$, $B%s$, $C%s$. Tính diện tích tam giác $ABC$."
+                 % (_toado(xa, ya), _toado(xb, yb), _toado(xc, yc)))
+        giai = (r"$%s = %s$; $%s = %s$."
+                % (_vt("A", "B"), _toado(u1, u2),
+                   _vt("A", "C"), _toado(v1, v2)) +
+                "\\\\\n"
+                r"$S = \dfrac{1}{2}\left|x_1y_2 - x_2y_1\right| = "
+                r"\dfrac{1}{2}\left|\left(%d\right)\left(%d\right) - "
+                r"\left(%d\right)\left(%d\right)\right| = "
+                r"\dfrac{1}{2}\cdot %d = %d$."
+                % (u1, v2, v1, u2, abs(d), S))
+        nhieu = _ba_nhieu4(S, [abs(d), S + 1, 2 * S + 1,
+                               abs(u1 * v1 + u2 * v2)],
+                           buoc=lambda t: S + 3 * t)
+        cau += MC_SA_answer_const(debai, S, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C4_B11_VD060_SA_A_01(socau):
+    """Tổng hợp lực - trả lời ngắn, độ lớn lực thứ ba ra số nguyên.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        i = random.randrange(len(CAP_LUC_60))
+        if i not in gt:
+            gt.append(i)
+        if len(gt) >= len(CAP_LUC_60):
+            break
+
+    cau = ""
+    for i in gt:
+        p, q, k = CAP_LUC_60[i]
+        debai = (r"Chất điểm $A$ chịu tác dụng của ba lực "
+                 r"$\overrightarrow{F_1}$, $\overrightarrow{F_2}$, "
+                 r"$\overrightarrow{F_3}$ và ở trạng thái cân bằng. Biết "
+                 r"$\left|\overrightarrow{F_1}\right| = %d\ \text{N}$, "
+                 r"$\left|\overrightarrow{F_2}\right| = %d\ \text{N}$, góc "
+                 r"giữa $\overrightarrow{F_1}$ và $\overrightarrow{F_2}$ "
+                 r"bằng $60^{\circ}$. Tính $\left|\overrightarrow{F_3}\right|$ "
+                 r"(đơn vị: N)." % (p, q))
+        giai = (r"Cân bằng nên $\overrightarrow{F_3} = "
+                r"-\left(\overrightarrow{F_1} + \overrightarrow{F_2}\right)$, "
+                r"do đó $\left|\overrightarrow{F_3}\right| = "
+                r"\left|\overrightarrow{F_1} + \overrightarrow{F_2}\right|$."
+                "\\\\\n"
+                r"$\left|\overrightarrow{F_1} + \overrightarrow{F_2}\right|^2 "
+                r"= %d^2 + %d^2 + 2\cdot %d\cdot %d\cdot\cos 60^{\circ} = %d$."
+                % (p, q, p, q, p * p + q * q + p * q) +
+                "\\\\\n"
+                r"Vậy $\left|\overrightarrow{F_3}\right| = \sqrt{%d} = %d$."
+                % (k * k, k))
+        nhieu = _ba_nhieu4(k, [p + q, abs(p - q), k * k, k + 2],
+                           buoc=lambda t: k + 3 * t)
+        cau += MC_SA_answer_const(debai, k, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C4_B11_VD061_SA_A_01(socau):
+    r"""Phân tích vectơ - trả lời ngắn, hỏi MỘT số nguyên.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Hỏi mẫu số $n$ trong $\overrightarrow{AM} =
+    \dfrac{1}{n}\left(\overrightarrow{AB} + \overrightarrow{AC}\right)$
+    để đáp số là số nguyên.
+    """
+    BO = [("trung điểm của cạnh $BC$", "M", 2,
+           r"$M$ là trung điểm $BC$ nên $\overrightarrow{AM} = "
+           r"\dfrac{1}{2}\left(\overrightarrow{AB} + "
+           r"\overrightarrow{AC}\right)$."),
+          ("trọng tâm của tam giác $ABC$", "G", 3,
+           r"$G$ là trọng tâm nên $\overrightarrow{AG} = "
+           r"\dfrac{2}{3}\overrightarrow{AI}$ với $I$ là trung điểm $BC$; "
+           r"mà $\overrightarrow{AI} = \dfrac{1}{2}\left(\overrightarrow{AB} "
+           r"+ \overrightarrow{AC}\right)$, nên $\overrightarrow{AG} = "
+           r"\dfrac{1}{3}\left(\overrightarrow{AB} + "
+           r"\overrightarrow{AC}\right)$.")]
+    gt = []
+    while len(gt) < socau:
+        i = random.randrange(len(BO))
+        if i not in gt:
+            gt.append(i)
+        if len(gt) >= len(BO):
+            break
+
+    cau = ""
+    for i in gt:
+        mo_ta, ten, kq, ly_do = BO[i]
+        debai = (r"Cho tam giác $ABC$ và điểm $%s$ là %s. Biết "
+                 r"$\overrightarrow{A%s} = \dfrac{1}{n}\left("
+                 r"\overrightarrow{AB} + \overrightarrow{AC}\right)$. "
+                 r"Tìm số nguyên dương $n$." % (ten, mo_ta, ten))
+        giai = ly_do + "\\\\\n" + r"Vậy $n = %d$." % kq
+        nhieu = _ba_nhieu4(kq, [1, 4, 6, 2 if kq != 2 else 5],
+                           buoc=lambda t: kq + 3 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C4_B10_VD055_TL_A_01(socau, dong=1):
+    """Tự luận: vị trí của vật trên mặt phẳng toạ độ.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Vectơ vận tốc lấy từ bộ ba Pytago nên tốc độ và quãng đường ra SỐ
+    NGUYÊN, học sinh không phải làm tròn giữa chừng.
+    """
+    gt = []
+    while len(gt) < socau:
+        p, q, r = random.choice(BO_BA_PYTAGO4[:5])
+        sx, sy = random.choice([1, -1]), random.choice([1, -1])
+        x0, y0 = random.randint(-6, 6), random.randint(-6, 6)
+        t = random.randint(2, 4)
+        w = (x0, y0, sx * p, sy * q, r, t)
+        if w not in gt:
+            gt.append(w)
+
+    cauTN = ""
+    for x0, y0, vx, vy, r, t in gt:
+        x1, y1 = x0 + t * vx, y0 + t * vy
+
+        debai = (r"Trên mặt phẳng toạ độ $Oxy$ (đơn vị trên mỗi trục là "
+                 r"ki-lô-mét), một ca nô xuất phát từ vị trí $A%s$ và chuyển "
+                 r"động thẳng đều với vectơ vận tốc $\overrightarrow{v} = %s$ "
+                 r"(đơn vị: km/h)." % (_toado(x0, y0), _toado(vx, vy)))
+
+        hoi_a = r"Tính tốc độ của ca nô."
+        giai_a = (r"Tốc độ là độ lớn của vectơ vận tốc:"
+                  "\\\\\n"
+                  r"$\left|\overrightarrow{v}\right| = "
+                  r"\sqrt{\left(%d\right)^2 + \left(%d\right)^2} = "
+                  r"\sqrt{%d} = %d$ (km/h)."
+                  % (vx, vy, vx * vx + vy * vy, r))
+
+        hoi_b = r"Tìm toạ độ vị trí $B$ của ca nô sau $%d$ giờ." % t
+        giai_b = (r"Chuyển động thẳng đều nên độ dịch chuyển sau $%d$ giờ là "
+                  r"$%s = %d\overrightarrow{v} = %s$."
+                  % (t, _vt("A", "B"), t, _toado(t * vx, t * vy)) +
+                  "\\\\\n"
+                  r"Toạ độ $B$ bằng toạ độ $A$ cộng độ dịch chuyển:"
+                  "\\\\\n"
+                  r"$B\left(%d + %d;\ %d + %d\right) = B%s$."
+                  % (x0, t * vx, y0, t * vy, _toado(x1, y1)))
+
+        hoi_c = r"Tính quãng đường ca nô đi được sau $%d$ giờ." % t
+        giai_c = (r"Ca nô chạy thẳng đều nên quãng đường bằng tốc độ nhân "
+                  r"thời gian:"
+                  "\\\\\n"
+                  r"$s = %d \cdot %d = %d$ (km)." % (r, t, r * t) +
+                  "\\\\\n"
+                  r"Kiểm tra lại bằng độ dài $AB$: "
+                  r"$AB = \sqrt{\left(%d\right)^2 + \left(%d\right)^2} = %d$ "
+                  r"(km), đúng bằng kết quả trên."
+                  % (t * vx, t * vy, r * t))
+
+        ds_abcd = [(hoi_a, r"%d\ \text{km/h}" % r, giai_a),
+                   (hoi_b, r"B\left(%d;\ %d\right)" % (x1, y1), giai_b),
+                   (hoi_c, r"%d\ \text{km}" % (r * t), giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN

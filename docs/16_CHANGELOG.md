@@ -6366,3 +6366,78 @@ o tren.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.04 - 2026-09-28
+
+## SUA PHAM VI DE HE SO 1: chay HET CHUONG, khong dung o moc thi
+
+Co Lan chot 28/09/2026: "he so 2 - de giua ky moi quan tam pham vi nay.
+con he so 1 se chay theo chuong."
+
+load_scope_heso1 truoc day lay bai trong chuong cho den khi gap bai co
+boundary_after roi DUNG. Nhung boundary_after la moc cua cac KY THI
+(GK1_EXAM, CK1_EXAM, GK2_EXAM, CK2_EXAM) - no danh cho de giua ky /
+cuoi ky, khong danh cho bai kiem tra thuong xuyen.
+
+Bon cho bi cat trong PPCT lop 10:
+
+    L10_C4_B8  -> GK1_EXAM
+    L10_C5_B14 -> CK1_EXAM
+    L10_C7_B22 -> GK2_EXAM
+    L10_C9_B27 -> CK2_EXAM
+
+Hau qua do duoc: de he so 1 chuong 4 chi gom bai 7 va bai 8, ma hai bai
+ay khong co yeu cau nao muc Van dung, nen de chi ra 6/12 cau. Chuong 5 va
+chuong 7 cung bi cat tuong tu (chua lo ra vi hai chuong ay chua co ham).
+Chuong 9 khong anh huong vi moc nam o bai cuoi cung.
+
+Nay lay TOAN BO cac bai cua chuong. Pham vi moi:
+
+    chuong 4  bai 7, 8, 9, 10, 11   (truoc: chi 7, 8)
+    chuong 5  bai 12, 13, 14
+    chuong 7  bai 19, 20, 21, 22
+    cac chuong khac: khong doi
+
+## Sau khi sua, chuong 4 thieu 6 dang nen da bo sung
+
+Pham vi rong ra thi bo chon cau voi toi cac yeu cau muc Van dung o bai
+10 va bai 11, nhung Mapping chua khai du loai cau, de mat 12/60 cau. Da
+them:
+
+    VD054_SA_A  do dai trung tuyen theo toa do
+    VD055_SA_A  vi tri cua vat sau mot khoang thoi gian
+    VD055_TL_A  toc do, vi tri va quang duong cua vat chuyen dong deu
+    VD056_SA_A  dien tich tam giac theo toa do
+    VD060_SA_A  do lon luc thu ba khi vat can bang
+    VD061_SA_A  he so trong phan tich vecto theo trung diem, trong tam
+
+Chuong 4 nay co 46 dang, deu co ham.
+
+## Da kiem chung the nao
+
+1. 46/46 dang chuong 4 chay tron 10/10 lan, khong loi.
+2. De he so 1, chay 8 lan bat de moi chuong:
+
+       chuong 1   8/8 du ma tran   96/96 cau sinh duoc
+       chuong 2   8/8 du ma tran   96/96
+       chuong 3   8/8 du ma tran   96/96
+       chuong 4   8/8 du ma tran   96/96   (truoc dot nay: 0/5, 30/60)
+       chuong 8   8/8 du ma tran   96/96
+       chuong 9   8/8 du ma tran   96/96
+
+3. Them chuong 4 vao tests/test_du_cau_he_so_1.py va ghi ro ly do sua
+   pham vi ngay trong tep test. 500 bai test qua, 8 bo qua (truoc: 488).
+
+## Hien trang toan lop 10
+
+    C1   37/37   xong        C6    0/31
+    C2   15/15   xong        C7    0/37  (chua co nguon)
+    C3   53/53   xong        C8   30/30   xong
+    C4   46/46   xong        C9   27/27   xong
+    C5    0/41
+
+Sau chuong 1, 2, 3, 4, 8, 9 deu ra duoc de he so 1 tron ven.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
