@@ -1193,3 +1193,74 @@ def L11_C9_TF_B_01(socau, socot=1):
             ])
         cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
     return cauTF
+
+
+def L11_C9_B32_VD145_SA_A_01(socau):
+    r"""Vận tốc tức thời - trả lời ngắn (đáp số NGUYÊN).
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        v = _bo_chuyen_dong()
+        if v not in gt:
+            gt.append(v)
+
+    cau = ""
+    for a, b, c, t0 in gt:
+        hs = [a, b, c, 0]
+        dh = _dao_ham(hs)
+        v0 = _gia_tri(dh, t0)
+        debai = (r"Một chất điểm chuyển động theo phương trình "
+                 r"$s\left(t\right) = %s$, trong đó $s$ tính bằng mét và "
+                 r"$t$ tính bằng giây. Tính vận tốc tức thời của chất điểm "
+                 r"tại thời điểm $t = %d$ giây (đơn vị: m/s)."
+                 % (_da_thuc(hs, "t"), t0))
+        giai = (r"Vận tốc tức thời là đạo hàm của quãng đường theo thời "
+                r"gian: $v\left(t\right) = s'\left(t\right)$." +
+                "\\\\\n"
+                r"$s'\left(t\right) = %s$." % _da_thuc(dh, "t") +
+                "\\\\\n"
+                r"$v\left(%d\right) = %d$ (m/s)." % (t0, v0))
+        nhieu = _ba_nhieu9(str(v0),
+                           [str(_gia_tri(hs, t0)), str(t0), "0"],
+                           buoc=lambda t: str(v0 + t))
+        cau += MC_SA_answer_const(debai, str(v0), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L11_C9_B33_VD148_SA_A_01(socau):
+    r"""Gia tốc tức thời (đạo hàm cấp hai) - trả lời ngắn (đáp số NGUYÊN).
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        v = _bo_chuyen_dong()
+        if v not in gt:
+            gt.append(v)
+
+    cau = ""
+    for a, b, c, t0 in gt:
+        hs = [a, b, c, 0]
+        dh1 = _dao_ham(hs)
+        dh2 = _dao_ham(dh1)
+        g0 = _gia_tri(dh2, t0)
+        debai = (r"Một chất điểm chuyển động theo phương trình "
+                 r"$s\left(t\right) = %s$, trong đó $s$ tính bằng mét và "
+                 r"$t$ tính bằng giây. Tính gia tốc tức thời của chất điểm "
+                 r"tại thời điểm $t = %d$ giây (đơn vị: m/s$^2$)."
+                 % (_da_thuc(hs, "t"), t0))
+        giai = (r"Gia tốc tức thời là đạo hàm cấp hai của quãng đường theo "
+                r"thời gian: $a\left(t\right) = s''\left(t\right)$." +
+                "\\\\\n"
+                r"$s'\left(t\right) = %s$." % _da_thuc(dh1, "t") +
+                "\\\\\n"
+                r"$s''\left(t\right) = %s$." % _da_thuc(dh2, "t") +
+                "\\\\\n"
+                r"$a\left(%d\right) = %d$ (m/s$^2$)." % (t0, g0))
+        nhieu = _ba_nhieu9(str(g0),
+                           [str(_gia_tri(dh1, t0)), str(t0), "0"],
+                           buoc=lambda t: str(g0 + t))
+        cau += MC_SA_answer_const(debai, str(g0), nhieu, giai, 0, 0, 2)
+    return cau

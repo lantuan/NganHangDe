@@ -1024,3 +1024,43 @@ def L11_C3_TF_B_01(socau, socot=1):
             ])
         cauTF += TF_baitoan_du(debai, ds_abcd, _hinh_bang(bien, tanso), 0, socot)
     return cauTF
+
+
+def L11_C3_B9_VD046_SA_A_01(socau):
+    r"""Chênh lệch số trung bình của hai mẫu ghép nhóm - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        v = _cap_mau_so_sanh()
+        if v is not None:
+            gt.append(v)
+
+    cau = ""
+    for mo_ta, don_vi, bien, t1, t2, tb1, tb2 in gt:
+        # Lấy hiệu của HAI SỐ ĐÃ LÀM TRÒN để đáp số khớp đúng với cách
+        # học sinh tính (tránh lệch 0,01 do làm tròn hai lần).
+        lech = abs(_tron(tb1) - _tron(tb2))
+        cao = "A" if tb1 > tb2 else "B"
+        debai = (r"Khảo sát %s ở hai nhóm $A$ và $B$ (đơn vị: %s), người ta "
+                 r"thu được kết quả sau."
+                 % (_mo_ta_chung(mo_ta), don_vi) +
+                 "\\\\\n" + _dong_nhom("A", bien, t1) +
+                 "\\\\\n" + _dong_nhom("B", bien, t2) +
+                 "\\\\\n"
+                 r"Số trung bình của mỗi nhóm được làm tròn đến hàng phần "
+                 r"trăm. Hai số trung bình đó chênh lệch nhau bao nhiêu?")
+        giai = (_giai_trung_binh_gon("A", bien, t1, tb1) +
+                "\\\\\n" + _giai_trung_binh_gon("B", bien, t2, tb2) +
+                "\\\\\n"
+                r"Chênh lệch $= \left|%s - %s\right| = %s$."
+                % (_xx(tb1), _xx(tb2), _xx(lech)) +
+                "\\\\\n"
+                r"Nhóm $%s$ có số trung bình lớn hơn nhóm còn lại đúng "
+                r"$%s$ %s." % (cao, _xx(lech), don_vi))
+        nhieu = _ba_nhieu11(_xx(lech),
+                            [_xx(tb1), _xx(tb2), _xx(lech / 2.0)],
+                            buoc=lambda t: _xx(lech + t))
+        cau += MC_SA_answer_const(debai, _xx(lech), nhieu, giai, 0, 0, 2)
+    return cau

@@ -90,6 +90,13 @@
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
   },
   {
+    "id": "L11_C9_B32_VD145_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Vận tốc tức thời của chuyển động",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C9_B32_VD145_TL_A",
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm.",
     "Loai": "Tự luận",
@@ -118,6 +125,13 @@
     "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm cấp hai.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực"
+  },
+  {
+    "id": "L11_C9_B33_VD148_SA_A",
+    "content": "Giải quyết được một số vấn đề có liên quan đến môn học khác hoặc có liên quan đến thực tiễn gắn với đạo hàm cấp hai.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Gia tốc tức thời của chuyển động",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C9_B33_VD148_TL_A",

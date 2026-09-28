@@ -72,6 +72,13 @@
     "Dang": "Kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm"
   },
   {
+    "id": "L11_C3_B9_VD046_SA_A",
+    "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chênh lệch số trung bình của hai mẫu số liệu ghép nhóm",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C3_B9_VD046_TL_A",
     "content": "Rút ra được kết luận nhờ ý nghĩa của các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm.",
     "Loai": "Tự luận",

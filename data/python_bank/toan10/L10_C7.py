@@ -19,6 +19,7 @@
 # ==========================================================
 import math
 import random
+from fractions import Fraction
 
 from math_type import *
 
@@ -166,6 +167,12 @@ def _tich7(u, v):
     def _so(t):
         return "%d" % t if t >= 0 else r"\left(%d\right)" % t
     return r"%s\cdot %s" % (_so(u), _so(v))
+
+
+def _cong_tich7(k, t):
+    r"""Viết hạng tử cộng thêm $k\cdot t$ cho đúng dấu:
+    $3\cdot\left(-4\right) - 2\cdot\left(-1\right)$, không để "+ -2"."""
+    return "%s %s" % ("+" if k >= 0 else "-", _tich7(abs(k), t))
 
 
 def _rut_gon7(a, b, c):
@@ -2180,3 +2187,365 @@ def L10_C7_TF_B_01(socau, socot=1):
             ])
         cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
     return cauTF
+
+
+# =====================================================================
+# BỔ SUNG 29/09/2026 - các yêu cầu cần đạt mức VD còn thiếu dạng SA/TL
+# (Blueprint hệ số 1 gọi tới nhưng Mapping chưa khai, nên đề bị chèn
+#  ô trống). Thứ tự theo bài 19 -> 22.
+# CLAUDE THEM 29/09/2026 - co Lan kiem tra lai noi dung toan.
+# =====================================================================
+
+def L10_C7_B19_VD107_SA_A_01(socau):
+    r"""Lập phương trình đường thẳng song song - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Đáp số NGUYÊN: hệ số tự do $m$ của đường thẳng song song.
+    """
+    gt = []
+    while len(gt) < socau:
+        a, b = random.choice([(1, 2), (2, 1), (3, -2), (2, -3),
+                              (1, -1), (3, 1), (1, 3), (2, 3)])
+        c = random.randint(-6, 6)
+        x0 = random.randint(-5, 5)
+        y0 = random.randint(-5, 5)
+        m = -(a * x0 + b * y0)
+        if m != c and (a, b, c, x0, y0) not in gt:
+            gt.append((a, b, c, x0, y0))
+
+    cau = ""
+    for a, b, c, x0, y0 in gt:
+        m = -(a * x0 + b * y0)
+        debai = (r"Đường thẳng $d$ đi qua điểm $M%s$ và song song với đường "
+                 r"thẳng $\Delta: %s$ có phương trình dạng $%s + m = 0$. "
+                 r"Tìm $m$."
+                 % (_toado7(x0, y0), _pt_duong_thang(a, b, c),
+                    _pt_duong_thang(a, b, 0)[:-4].strip()))
+        giai = (r"Vì $d \parallel \Delta$ nên $d$ nhận cùng vectơ pháp "
+                r"tuyến $\overrightarrow{n} = %s$ với $\Delta$."
+                % _toado7(a, b) +
+                "\\\\\n"
+                r"Do đó $d$ có dạng $%s + m = 0$."
+                % _pt_duong_thang(a, b, 0)[:-4].strip() +
+                "\\\\\n"
+                r"Thay toạ độ $M%s$ vào: $%s %s + m = 0$."
+                % (_toado7(x0, y0), _tich7(a, x0), _cong_tich7(b, y0)) +
+                "\\\\\n"
+                r"$%s + m = 0 \Rightarrow m = %d$."
+                % (a * x0 + b * y0, m) +
+                "\\\\\n"
+                r"Kiểm lại $m = %d \neq %d$ nên $d$ thật sự song song với "
+                r"$\Delta$ (không trùng)." % (m, c))
+        nhieu = _ba_nhieu7(str(m), [str(-m), str(c), "0"],
+                           buoc=lambda t: str(m + t))
+        cau += MC_SA_answer_const(debai, str(m), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C7_B20_VD109_TL_A_01(socau, dong=1):
+    r"""Tự luận: vị trí tương đối, tham số và khoảng cách.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Pháp tuyến lấy từ bộ ba Pytago nên khoảng cách ra SỐ HỮU TỈ đẹp.
+    """
+    gt = []
+    while len(gt) < socau:
+        a, b, n = random.choice([(3, 4, 5), (4, 3, 5), (6, 8, 10),
+                                 (8, 6, 10)])
+        c = random.randint(-8, 8)
+        x0 = random.randint(-5, 5)
+        y0 = random.randint(-5, 5)
+        if a * x0 + b * y0 + c == 0:
+            continue
+        if (a, b, c, x0, y0) not in gt:
+            gt.append((a, b, c, x0, y0))
+
+    cauTN = ""
+    for a, b, c, x0, y0 in gt:
+        # d2 vuông góc d1, đi qua gốc toạ độ
+        a2, b2 = -b, a
+        tu = abs(a * x0 + b * y0 + c)
+        kc = Fraction(tu, n)
+        m = -(a * x0 + b * y0)          # để d3: ax + by + m = 0 qua M
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$ cho đường thẳng "
+                 r"$d_1: %s$, đường thẳng $d_2: %s$ và điểm $M%s$."
+                 % (_pt_duong_thang(a, b, c), _pt_duong_thang(a2, b2, 0),
+                    _toado7(x0, y0)))
+
+        hoi_a = r"Xét vị trí tương đối của $d_1$ và $d_2$."
+        giai_a = (r"$d_1$ có vectơ pháp tuyến $\overrightarrow{n_1} = %s$, "
+                  r"$d_2$ có $\overrightarrow{n_2} = %s$."
+                  % (_toado7(a, b), _toado7(a2, b2)) +
+                  "\\\\\n"
+                  r"$\overrightarrow{n_1}\cdot\overrightarrow{n_2} = "
+                  r"%s + %s = 0$."
+                  % (_tich7(a, a2), _tich7(b, b2)) +
+                  "\\\\\n"
+                  r"Tích vô hướng bằng $0$ nên $d_1 \perp d_2$; hai đường "
+                  r"thẳng cắt nhau và vuông góc với nhau.")
+
+        hoi_b = (r"Viết phương trình đường thẳng $d_3$ đi qua $M$ và song "
+                 r"song với $d_1$.")
+        giai_b = (r"$d_3 \parallel d_1$ nên $d_3: %s + m = 0$."
+                  % _pt_duong_thang(a, b, 0)[:-4].strip() +
+                  "\\\\\n"
+                  r"Thay $M%s$: $%s %s + m = 0 \Rightarrow m = %d$."
+                  % (_toado7(x0, y0), _tich7(a, x0), _cong_tich7(b, y0), m) +
+                  "\\\\\n"
+                  r"Vậy $d_3: %s$." % _pt_duong_thang(a, b, m))
+
+        hoi_c = r"Tính khoảng cách từ $M$ đến $d_1$."
+        giai_c = (r"$d\left(M, d_1\right) = \dfrac{\left|%s %s %s\right|}"
+                  r"{\sqrt{%d^2 + %d^2}}$."
+                  % (_tich7(a, x0), _cong_tich7(b, y0),
+                     ("+ %d" % c) if c >= 0 else ("- %d" % (-c)), a, b) +
+                  "\\\\\n"
+                  r"$= \dfrac{%d}{\sqrt{%d}} = \dfrac{%d}{%d} = %s$."
+                  % (tu, a * a + b * b, tu, n, _xx7(float(kc), 4)))
+
+        ds_abcd = [(hoi_a, r"d_1 \perp d_2", giai_a),
+                   (hoi_b, r"d_3: %s" % _pt_duong_thang(a, b, m), giai_b),
+                   (hoi_c, r"d\left(M, d_1\right) = \dfrac{%d}{%d}"
+                    % (kc.numerator, kc.denominator), giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C7_B21_VD113_SA_A_01(socau):
+    r"""Đường tròn đi qua ba điểm - trả lời ngắn (đáp số NGUYÊN).
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        bo = _ba_diem_duong_tron()
+        if bo is None:
+            continue
+        a, b, R, diem = bo
+        if (a, b, R, tuple(diem)) not in [(x[0], x[1], x[2], tuple(x[3]))
+                                          for x in gt]:
+            gt.append((a, b, R, diem))
+
+    cau = ""
+    for a, b, R, diem in gt:
+        kq = a + b + R
+        (x1, y1), (x2, y2), (x3, y3) = diem
+        debai = (r"Đường tròn đi qua ba điểm $A%s$, $B%s$, $C%s$ có tâm "
+                 r"$I\left(a;\ b\right)$ và bán kính $R$. Tính $a + b + R$."
+                 % (_toado7(x1, y1), _toado7(x2, y2), _toado7(x3, y3)))
+        giai = (r"Gọi phương trình đường tròn là "
+                r"$x^2 + y^2 - 2ax - 2by + c = 0$." +
+                "\\\\\n"
+                r"Thay lần lượt toạ độ $A$, $B$, $C$ vào ta được hệ ba "
+                r"phương trình bậc nhất ba ẩn $a$, $b$, $c$." +
+                "\\\\\n"
+                r"Giải hệ được $a = %d$, $b = %d$, $c = %d$."
+                % (a, b, a * a + b * b - R * R) +
+                "\\\\\n"
+                r"Bán kính $R = \sqrt{a^2 + b^2 - c} = "
+                r"\sqrt{%d} = %d$." % (R * R, R) +
+                "\\\\\n"
+                r"Vậy $a + b + R = %d %s %s = %d$."
+                % (a, ("+ %d" % b) if b >= 0 else ("- %d" % (-b)),
+                   "+ %d" % R, kq) +
+                "\\\\\n"
+                r"Kiểm lại: $IA = IB = IC = %d$." % R)
+        nhieu = _ba_nhieu7(str(kq), [str(a + b), str(R), str(a + b - R)],
+                           buoc=lambda t: str(kq + t))
+        cau += MC_SA_answer_const(debai, str(kq), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C7_B21_VD114_TL_A_01(socau, dong=1):
+    r"""Tự luận: đường tròn tiếp xúc với một đường thẳng.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Pháp tuyến lấy từ bộ ba Pytago nên bán kính ra SỐ HỮU TỈ đẹp.
+    """
+    gt = []
+    while len(gt) < socau:
+        a, b, n = random.choice([(3, 4, 5), (4, 3, 5), (6, 8, 10),
+                                 (8, 6, 10)])
+        xi = random.randint(-4, 4)
+        yi = random.randint(-4, 4)
+        # chọn c sao cho khoảng cách là SỐ NGUYÊN
+        R = random.randint(1, 5)
+        c = R * n - (a * xi + b * yi)
+        if (a, b, c, xi, yi) not in gt:
+            gt.append((a, b, c, xi, yi))
+
+    cauTN = ""
+    for a, b, c, xi, yi in gt:
+        n = int(round(math.sqrt(a * a + b * b)))
+        tu = abs(a * xi + b * yi + c)
+        R = tu // n
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$ cho điểm $I%s$ và đường "
+                 r"thẳng $\Delta: %s$."
+                 % (_toado7(xi, yi), _pt_duong_thang(a, b, c)))
+
+        hoi_a = r"Tính khoảng cách từ $I$ đến $\Delta$."
+        giai_a = (r"$d\left(I, \Delta\right) = \dfrac{\left|%s %s %s"
+                  r"\right|}{\sqrt{%d^2 + %d^2}} = \dfrac{%d}{%d} = %d$."
+                  % (_tich7(a, xi), _cong_tich7(b, yi),
+                     ("+ %d" % c) if c >= 0 else ("- %d" % (-c)),
+                     a, b, tu, n, R))
+
+        hoi_b = (r"Viết phương trình đường tròn $\left(C\right)$ có tâm $I$ "
+                 r"và tiếp xúc với $\Delta$.")
+        giai_b = (r"Đường tròn tiếp xúc với $\Delta$ nên bán kính bằng "
+                  r"đúng khoảng cách từ tâm đến $\Delta$: $R = %d$." % R +
+                  "\\\\\n"
+                  r"Vậy $\left(C\right): %s$." % _pt_duong_tron(xi, yi, R))
+
+        hoi_c = (r"Điểm $O\left(0;\ 0\right)$ nằm trong, nằm trên hay nằm "
+                 r"ngoài đường tròn $\left(C\right)$?")
+        d2 = xi * xi + yi * yi
+        vt = ("nằm trong" if d2 < R * R else
+              ("nằm trên" if d2 == R * R else "nằm ngoài"))
+        giai_c = (r"$IO^2 = %s + %s = %d$ còn $R^2 = %d$."
+                  % (_tich7(xi, xi), _tich7(yi, yi), d2, R * R) +
+                  "\\\\\n"
+                  r"Vì $%d %s %d$ nên $O$ %s đường tròn."
+                  % (d2, "<" if d2 < R * R else ("=" if d2 == R * R else ">"),
+                     R * R, vt))
+
+        ds_abcd = [(hoi_a, r"d\left(I, \Delta\right) = %d" % R, giai_a),
+                   (hoi_b, r"%s" % _pt_duong_tron(xi, yi, R), giai_b),
+                   (hoi_c, r"O \text{ %s đường tròn}" % vt, giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C7_B21_VD117_SA_A_01(socau):
+    r"""Bài toán thực tiễn về đường tròn - trả lời ngắn (đáp số NGUYÊN).
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        a = random.randint(-6, 6)
+        b = random.randint(-6, 6)
+        R = random.choice([3, 4, 5, 6, 7, 8, 10])
+        if (a, b, R) not in gt:
+            gt.append((a, b, R))
+
+    cau = ""
+    for a, b, R in gt:
+        c = a * a + b * b - R * R
+        debai = (r"Một trạm phát sóng đặt tại vị trí $I%s$ (đơn vị: km) "
+                 r"phủ sóng trong bán kính $%d$ km. Ranh giới vùng phủ "
+                 r"sóng là đường tròn có phương trình "
+                 r"$x^2 + y^2 - 2ax - 2by + c = 0$. Tính $c$."
+                 % (_toado7(a, b), R))
+        giai = (r"Ranh giới vùng phủ sóng là đường tròn tâm $I%s$, bán "
+                r"kính $R = %d$." % (_toado7(a, b), R) +
+                "\\\\\n"
+                r"Phương trình dạng khai triển: $x^2 + y^2 - 2ax - 2by "
+                r"+ c = 0$ với $c = a^2 + b^2 - R^2$." +
+                "\\\\\n"
+                r"$c = %s + %s - %d^2 = %d$."
+                % (_tich7(a, a), _tich7(b, b), R, c) +
+                "\\\\\n"
+                r"Kiểm lại: $\sqrt{a^2 + b^2 - c} = \sqrt{%d} = %d = R$."
+                % (R * R, R))
+        nhieu = _ba_nhieu7(str(c), [str(-c), str(a * a + b * b), str(R * R)],
+                           buoc=lambda t: str(c + t))
+        cau += MC_SA_answer_const(debai, str(c), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C7_B22_VD123_SA_A_01(socau):
+    r"""Bài toán thực tiễn về elip - trả lời ngắn (đáp số THẬP PHÂN HỮU HẠN).
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Chọn $\left(a, x_0, k\right)$ là bộ ba Pytago với $a \in \{5, 10, 20,
+    25\}$ để $\dfrac{bk}{a}$ luôn viết được thành số thập phân hữu hạn.
+    """
+    BO = [(5, 3, 4), (5, 4, 3), (10, 6, 8), (10, 8, 6),
+          (20, 12, 16), (20, 16, 12), (25, 7, 24), (25, 24, 7),
+          (25, 15, 20), (25, 20, 15)]
+    gt = []
+    while len(gt) < socau:
+        a, x0, k = random.choice(BO)
+        b = random.randint(2, a - 1)
+        if (a, x0, k, b) not in gt:
+            gt.append((a, x0, k, b))
+
+    cau = ""
+    for a, x0, k, b in gt:
+        h = Fraction(b * k, a)
+        dapso = _xx7(float(h), 6)
+        debai = (r"Một cổng vòm có dạng nửa elip với chiều rộng đáy bằng "
+                 r"$%d$ m và chiều cao ở giữa bằng $%d$ m. Tính chiều cao "
+                 r"của cổng tại vị trí cách tâm đáy $%d$ m (đơn vị: m)."
+                 % (2 * a, b, x0))
+        giai = (r"Chọn hệ trục $Oxy$ với $O$ là tâm đáy cổng, trục $Ox$ "
+                r"nằm trên đáy." +
+                "\\\\\n"
+                r"Nửa elip có phương trình $\dfrac{x^2}{%d^2} + "
+                r"\dfrac{y^2}{%d^2} = 1$ với $y \geq 0$." % (a, b) +
+                "\\\\\n"
+                r"Thay $x = %d$: $\dfrac{%d}{%d} + \dfrac{y^2}{%d} = 1$."
+                % (x0, x0 * x0, a * a, b * b) +
+                "\\\\\n"
+                r"$\dfrac{y^2}{%d} = \dfrac{%d}{%d} \Rightarrow "
+                r"y^2 = \dfrac{%d}{%d}$."
+                % (b * b, a * a - x0 * x0, a * a,
+                   b * b * (a * a - x0 * x0), a * a) +
+                "\\\\\n"
+                r"$y = \dfrac{%d\cdot %d}{%d} = %s$ (m)."
+                % (b, k, a, dapso))
+        nhieu = _ba_nhieu7(dapso, [str(b), str(x0), _xx7(float(h) / 2, 6)],
+                           buoc=lambda t: _xx7(float(h) + t, 6))
+        cau += MC_SA_answer_const(debai, dapso, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C7_B22_VD124_SA_A_01(socau):
+    r"""Bài toán thực tiễn tổng hợp về toạ độ - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+
+    Pháp tuyến lấy từ bộ ba Pytago có cạnh huyền $5$ hoặc $10$ nên
+    khoảng cách luôn là số thập phân hữu hạn.
+    """
+    gt = []
+    while len(gt) < socau:
+        a, b, n = random.choice([(3, 4, 5), (4, 3, 5), (6, 8, 10),
+                                 (8, 6, 10)])
+        c = random.randint(-10, 10)
+        x0 = random.randint(-8, 8)
+        y0 = random.randint(-8, 8)
+        if a * x0 + b * y0 + c == 0:
+            continue
+        if (a, b, c, x0, y0) not in gt:
+            gt.append((a, b, c, x0, y0))
+
+    cau = ""
+    for a, b, c, x0, y0 in gt:
+        n = int(round(math.sqrt(a * a + b * b)))
+        tu = abs(a * x0 + b * y0 + c)
+        kc = Fraction(tu, n)
+        dapso = _xx7(float(kc), 6)
+        debai = (r"Một con tàu chạy thẳng theo đường có phương trình "
+                 r"$%s$ trong hệ toạ độ $Oxy$ (đơn vị: km). Một hòn đảo "
+                 r"nằm ở vị trí $M%s$. Tính khoảng cách ngắn nhất từ hòn "
+                 r"đảo đến đường đi của tàu (đơn vị: km)."
+                 % (_pt_duong_thang(a, b, c), _toado7(x0, y0)))
+        giai = (r"Khoảng cách ngắn nhất từ $M$ đến đường đi của tàu chính "
+                r"là khoảng cách từ điểm $M$ đến đường thẳng đó." +
+                "\\\\\n"
+                r"$d = \dfrac{\left|%s %s %s\right|}{\sqrt{%d^2 + %d^2}}$."
+                % (_tich7(a, x0), _cong_tich7(b, y0),
+                   ("+ %d" % c) if c >= 0 else ("- %d" % (-c)), a, b) +
+                "\\\\\n"
+                r"$= \dfrac{%d}{\sqrt{%d}} = \dfrac{%d}{%d} = %s$ (km)."
+                % (tu, a * a + b * b, tu, n, dapso))
+        nhieu = _ba_nhieu7(dapso, [str(tu), str(n), _xx7(float(kc) * 2, 6)],
+                           buoc=lambda t: _xx7(float(kc) + t, 6))
+        cau += MC_SA_answer_const(debai, dapso, nhieu, giai, 0, 0, 2)
+    return cau

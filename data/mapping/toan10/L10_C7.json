@@ -42,6 +42,13 @@
     "Dang": "Lập phương trình đường thẳng từ điều kiện không trực tiếp"
   },
   {
+    "id": "L10_C7_B19_VD107_SA_A",
+    "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hệ số tự do của đường thẳng song song đi qua một điểm",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C7_B19_VD107_TL_A",
     "content": "Lập được phương trình đường thẳng trong mặt phẳng toạ độ khi biết các yếu tố xác định đường thẳng đó.",
     "Loai": "Tự luận",
@@ -90,6 +97,13 @@
     "Dang": "Giá trị tham số thoả điều kiện"
   },
   {
+    "id": "L10_C7_B20_VD109_TL_A",
+    "content": "Thiết lập được điều kiện để hai đường thẳng cắt nhau, song song, trùng nhau, vuông góc với nhau bằng phương pháp toạ độ.",
+    "Loai": "Tự luận",
+    "Dang": "Vị trí tương đối hai đường thẳng, đường thẳng song song và khoảng cách",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C7_B21_TH112_MC_A",
     "content": "Lập được phương trình đường tròn khi biết tâm và bán kính.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -120,6 +134,13 @@
     "Dang": "Lập phương trình đường tròn đi qua ba điểm"
   },
   {
+    "id": "L10_C7_B21_VD113_SA_A",
+    "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tâm và bán kính đường tròn đi qua ba điểm",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C7_B21_VD113_TL_A",
     "content": "Lập được phương trình đường tròn khi biết toạ độ ba điểm thuộc đường tròn.",
     "Loai": "Tự luận",
@@ -138,10 +159,24 @@
     "Dang": "Bán kính đường tròn thoả điều kiện"
   },
   {
+    "id": "L10_C7_B21_VD114_TL_A",
+    "content": "Lập được phương trình đường tròn khi biết các điều kiện không trực tiếp cho trước",
+    "Loai": "Tự luận",
+    "Dang": "Đường tròn tiếp xúc với một đường thẳng cho trước",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C7_B21_VD117_MC_A",
     "content": "Vận dụng được kiến thức về phương trình đường tròn để giải một số bài toán liên quan đến thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán chuyển động tròn trong Vật lí"
+  },
+  {
+    "id": "L10_C7_B21_VD117_SA_A",
+    "content": "Vận dụng được kiến thức về phương trình đường tròn để giải một số bài toán liên quan đến thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn về vùng phủ sóng dạng đường tròn",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C7_B21_VD117_TL_A",
@@ -192,6 +227,13 @@
     "Dang": "Hiện tượng Quang học gắn với đường conic"
   },
   {
+    "id": "L10_C7_B22_VD123_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với ba đường conic.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn về cổng vòm dạng nửa elip",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C7_B22_VD123_TL_A",
     "content": "Giải quyết được một số vấn đề thực tiễn gắn với ba đường conic.",
     "Loai": "Tự luận",
@@ -202,6 +244,13 @@
     "content": "Vận dụng được kiến thức về phương pháp toạ độ trong mặt phẳng để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Bài toán thực tiễn dùng phương pháp toạ độ"
+  },
+  {
+    "id": "L10_C7_B22_VD124_SA_A",
+    "content": "Vận dụng được kiến thức về phương pháp toạ độ trong mặt phẳng để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách ngắn nhất từ một điểm đến đường đi thẳng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C7_B22_VD124_TL_A",

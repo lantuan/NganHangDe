@@ -84,6 +84,20 @@
     "Dang": "Vấn đề thực tiễn gắn với giới hạn hàm số"
   },
   {
+    "id": "L11_C5_B16_VD080_SA_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giới hạn hàm số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giới hạn tại vô cực trong bài toán thực tiễn",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C5_B16_VD080_TL_A",
+    "content": "Giải quyết được một số vấn đề thực tiễn gắn với giới hạn hàm số.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn gắn với giới hạn hàm số",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C5_B17_NB083_MC_A",
     "content": "Nhận biết được tính liên tục của một số hàm sơ cấp cơ bản trên tập xác định của chúng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

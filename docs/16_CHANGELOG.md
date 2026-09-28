@@ -7574,3 +7574,80 @@ Da xong 60/238 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.18 - 2026-09-29
+
+## Lop 11 chuong 5 (Gioi han. Ham so lien tuc): 23/23 dang co ham
+
+Viet moi data/python_bank/toan11/L11_C5.py.
+
+Bai 15 (gioi han day so): nhan biet gioi han co ban, gioi han day phan
+thuc, tong cap so nhan lui vo han (MC + SA + TL).
+Bai 16 (gioi han ham so): gioi han tai mot diem, gioi han tai vo cuc,
+gioi han vo cuc mot phia, dang vo dinh 0/0, bai toan thuc tien.
+Bai 17 (ham so lien tuc): ham so cap co ban, diem gian doan, tim tham so
+de lien tuc, xet tinh lien tuc (tu luan), tong - hieu - tich - thuong.
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+So lieu chon de DAP SO DEP: moi gioi han deu ra so nguyen hoac phan so
+toi gian; cap so nhan lui vo han chon q = 1/k de tong ra phan so dep;
+cau SA deu co dap so NGUYEN nen cham bang so khop chuoi khong lech.
+
+## Bit lo hong ma tran he so 1 (quan trong)
+
+Phat hien: mot so YEU CAU CAN DAT muc Van dung duoc Blueprint goi den
+nhung Mapping chua khai dang SA hoac TL, nen de he so 1 bi chen o trong
+(placeholder) thay cho cau that. Kiem tra 25 de x 9 chuong x 2 lop.
+
+LOP 10 - chuong 7 thieu 7 dang, nay da bo sung DU:
+  VD107 SA (he so tu do duong thang song song)
+  VD109 TL (vi tri tuong doi, duong song song, khoang cach)
+  VD113 SA (tam va ban kinh duong tron qua ba diem)
+  VD114 TL (duong tron tiep xuc duong thang)
+  VD117 SA (vung phu song dang duong tron)
+  VD123 SA (cong vom nua elip)
+  VD124 SA (khoang cach ngan nhat den duong di thang)
+
+LOP 11 - bo sung cho cac chuong da co ham:
+  C3 VD046 SA (chenh lech so trung binh hai mau ghep nhom)
+  C5 VD080 SA + TL (bai toan thuc tien gan voi gioi han ham so)
+  C9 VD145 SA (van toc tuc thoi) va VD148 SA (gia toc tuc thoi)
+
+Sau khi bo sung: LOP 10 sach hoan toan - 9/9 chuong ra du 12 cau, khong
+con o trong nao. Lop 11 chi con thieu o cac chuong CHUA viet ham
+(C1, C4, C6, C7, C8) - se bo sung ngay khi viet ham cho tung chuong do.
+
+Cac dong Mapping moi deu co ghi_chu "CLAUDE THEM 29/09/2026 - co Lan
+duyet lai noi dung yeu cau can dat".
+
+## Cac loi hien thi da sua trong dot nay
+
+1. "x - -1" trong loi giai gioi han mot phia - nay dung _nhi_thuc.
+2. "3.(-4) + -2.(-1)" khi thay toa do - them helper _cong_tich7 viet
+   hang tu cong mot tich cho dung dau.
+3. "3/2 = 3/2" thua khi phan so da toi gian - chi viet buoc rut gon khi
+   that su co rut gon.
+4. "dfrac{-5}{n}" - them helper _hang_chia viet dau truoc phan so.
+5. Cau SA "chenh lech hai so trung binh": lay hieu cua HAI SO DA LAM
+   TRON de dap so khop voi cach hoc sinh tinh (tranh lech 0,01).
+
+## Da kiem chung the nao
+
+1. 23/23 ham chuong 5 chay sach 3 muc socau x 60 seed; 7 ham moi cua
+   lop 10 chuong 7 va 5 ham moi cua lop 11 chay sach 60-80 seed.
+2. De he so 1 chuong 5 lop 11: 20/20 de du ma tran 6-1-2-3.
+3. Quet lai toan bo: 25 de x 9 chuong x 2 lop = 450 de. Lop 10 khong
+   con o trong; lop 11 chi con o cac chuong chua viet ham.
+4. 2048 bai test qua, 8 bo qua (truoc: 1925).
+
+## Hien trang lop 11
+
+    C1  0/39   C4  0/32 (hinh)   C7  0/45 (hinh)
+    C2 22/22   C5 23/23          C8  0/22
+    C3 16/16   C6  0/27          C9 25/25
+
+Da xong 86/251 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
