@@ -379,16 +379,38 @@ go "pip install" chung chung. Tim con python do:
 
     systemctl show -p ExecStart --value nganhangde
 
-Neu duong dan co venv (vi du /root/NganHangDe/venv/bin/python) thi:
+TUYET DOI KHONG chay ca requirements.txt tren python HE THONG
+---------------------------------------------------------------
+Da gap that 29/09/2026:
+
+    python3 -m pip install --break-system-packages -r requirements.txt
+    ...
+    ERROR: Cannot uninstall urllib3 2.0.7, RECORD file not found.
+           Hint: The package was installed by debian.
+
+Ubuntu cai san urllib3 bang APT (goi python3-urllib3). Goi do khong co tep
+RECORD nen pip KHONG go duoc; requirements.txt lai ghim urllib3==2.7.0 nen
+pip buoc phai go ban cu truoc -> DUT CA LENH, cac goi dang sau khong duoc
+cai. Ma nguon cua minh khong he import urllib3 truc tiep (no chi la goi phu
+cua requests) nen ep dung ban ghim vua vo ich vua co the lam hong cac cong
+cu he thong khac cung dung goi do.
+
+CACH DUNG: chi cai nhung goi THIEU HAN. Co san tep soat:
+
+    python3 /root/NganHangDe/scripts/thu_vien_thieu.py
+
+No in ra danh sach goi thieu va IN LUON lenh cai dung nhung goi ay, vi du:
+
+    python3 -m pip install --break-system-packages num2words==0.5.14
+
+Goi nao chi LECH BAN (dang co ban khac ban ghim) thi de yen, khong dong vao.
+
+Neu dich vu chay trong venv thi khong vuong chuyen nay, cai binh thuong:
 
     /root/NganHangDe/venv/bin/python -m pip install -r /root/NganHangDe/requirements.txt
 
-Neu dich vu chay bang python he thong thi phai them co:
-
-    python3 -m pip install --break-system-packages -r /root/NganHangDe/requirements.txt
-
-Khong can nho: chay "day web" o MAY MAC, no tu tim con python cua dich vu
-va in ra dung lenh can go.
+Khong can nho: chay "day web" o MAY MAC, no tu tim con python cua dich vu,
+tu chay tep soat va in ra dung lenh can go.
 
 LUU Y: "day" la lenh tat tren MAY MAC cua co Lan, KHONG co tren VPS. Dang o
 trong ssh cua VPS thi phai thoat ra (go exit) roi moi chay day web.

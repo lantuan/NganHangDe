@@ -132,15 +132,19 @@ case "\$PY" in
 esac
 [ -x "\$PY" ] || PY=python3
 echo "python cua dich vu: \$PY"
-if "\$PY" -c "import num2words" 2>/dev/null; then
-  echo "num2words: co"
+# KHONG goi y chay ca requirements.txt nua (29/09/2026): tren VPS lenh
+# do dut giua chung vi Ubuntu cai san urllib3 bang APT, pip khong go
+# duoc goi apt (khong co tep RECORD) - cac goi dang sau khong duoc cai.
+# scripts/thu_vien_thieu.py chi bao nhung goi THIEU HAN va in san lenh
+# cai dung nhung goi ay.
+if [ -f "$VPS_DIR/scripts/thu_vien_thieu.py" ]; then
+  "\$PY" "$VPS_DIR/scripts/thu_vien_thieu.py" || true
 else
-  echo "num2words: THIEU"
-  # Goi y dung lenh cho tung kieu cai dat
-  if echo "\$PY" | grep -q "venv\|/env/"; then
-    echo "lenh cai: \$PY -m pip install -r $VPS_DIR/requirements.txt"
+  # Ban ma nguon cu chua co tep soat -> kiem tam nhu truoc
+  if "\$PY" -c "import num2words" 2>/dev/null; then
+    echo "num2words: co"
   else
-    echo "lenh cai: \$PY -m pip install --break-system-packages -r $VPS_DIR/requirements.txt"
+    echo "num2words: THIEU - keo ma nguon moi roi chay lai de biet lenh cai"
   fi
 fi
 echo "--- do nghe ve hinh ---"

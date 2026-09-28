@@ -7116,3 +7116,76 @@ tien chuong nhieu tiet). Doi co Lan chot roi lam.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.12 - 2026-09-29
+
+Trang thai: DA KIEM CHUNG
+
+## Loi: cai thu vien tren VPS dut giua chung
+
+Co Lan ssh vao VPS, chay dung lenh ma day.sh goi y:
+
+    python3 -m pip install --break-system-packages -r requirements.txt
+    ...
+    Installing collected packages: urllib3, typing_extensions, sympy, ...
+      Attempting uninstall: urllib3
+        Found existing installation: urllib3 2.0.7
+    ERROR: Cannot uninstall urllib3 2.0.7, RECORD file not found.
+           Hint: The package was installed by debian.
+
+urllib3 la goi DAU TIEN trong danh sach cai, nen lenh dut ngay tu dau:
+43 goi con lai KHONG duoc cai goi nao.
+
+## Nguyen nhan
+
+Ubuntu cai san urllib3 bang APT (goi python3-urllib3). Goi do khong co
+tep RECORD nen pip khong biet no gom nhung tep gi -> khong go duoc.
+requirements.txt lai ghim urllib3==2.7.0 trong khi he thong co 2.0.7,
+nen pip BUOC phai go ban cu truoc khi cai ban moi -> dut.
+
+Cai sai nam o chinh loi goi y cua day.sh: bao chay CA requirements.txt
+tren python HE THONG. Tren may chu Ubuntu thi khong duoc lam vay.
+
+Them nua: ma nguon cua minh KHONG he import urllib3 truc tiep - no chi
+la goi phu cua requests, va requests chay binh thuong voi 2.0.7. Ep cho
+bang ban ghim vua vo ich vua co the lam hong cac cong cu he thong khac
+cung dung goi do.
+
+## Da sua
+
+1. Them scripts/thu_vien_thieu.py: doc requirements.txt roi chia lam
+   hai loai:
+   - THIEU HAN (chua cai bao gio)  -> in san lenh cai DUNG nhung goi ay;
+   - LECH BAN (da co, khac ban)    -> BAO DE YEN, khong dong vao.
+   Nhan ca ten co gach ngang lan gach duoi (typing_extensions ~
+   typing-extensions). Ma thoat 1 neu con goi thieu han.
+
+2. day.sh khong con goi y "-r requirements.txt" nua. Buoc kiem thu vien
+   trong ssh gio goi thang tep soat bang DUNG con python cua dich vu:
+
+       "$PY" /root/NganHangDe/scripts/thu_vien_thieu.py
+
+   Ban ma nguon cu (chua co tep soat) thi lui ve kiem tam num2words.
+
+3. docs/14_DEPLOYMENT.md: thay muc huong dan cai thu vien, ghi ro vi sao
+   tuyet doi khong chay ca requirements.txt tren python he thong.
+
+## Da kiem chung the nao
+
+1. Chay tep soat that: bao dung goi thieu, va 21 goi lech ban deu duoc
+   xep vao muc "de yen".
+2. Them tests/test_thu_vien_thieu.py (8 bai), trong do bai then chot:
+   goi DA CAI nhung lech ban thi KHONG duoc coi la thieu - dung cho
+   urllib3 vap phai.
+3. Bai test test_day_sh_KHONG_con_xui_chay_ca_requirements: quet day.sh,
+   thay dong "pip install ... requirements.txt" nao ngoai chu thich la
+   bao sai. Da kiem nguoc: ban day.sh CU co dong do o dong 141 va 143.
+4. Chay thu ca doan cap nhat VPS voi ssh gia lap: lenh gui sang may chu
+   dung nhu mong doi.
+5. 671 bai test qua, 8 bo qua (truoc: 661).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
