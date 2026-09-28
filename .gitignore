@@ -62,3 +62,8 @@ skkn/tmp*.tmp
 
 # Anh hinh ve da dich tu TikZ (tu sinh lai duoc, xem hinh_ve_service.py)
 data/hinh_cache/
+
+# Cac tep khoa cua git khong xoa duoc (thu muc du an duoc gan o che do
+# KHONG cho xoa tep). Claude chuyen chung vao day de git chay tiep duoc;
+# co Lan xoa thu muc nay luc nao cung duoc.
+_to_delete/
