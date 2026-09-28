@@ -3449,12 +3449,26 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
             ]
 
         elif nhom == 4:
-            a = random.randint(2,20)
-            b = random.choice([u for u in range(1,a+1) if a % u == 0])
+            # SUA 28/09/2026 - hai loi:
+            #
+            # 1) b lay trong range(1, a+1) nen b CO THE BANG a. Khi do dap
+            #    so thanh "a|n => a|n" va phuong an nhieu thu nhat cung la
+            #    "a|n => a|n" - trung het, math_type bao NhieuTrungError.
+            #    Do duoc: hong 10/400 lan chay. b = 1 cung cho menh de
+            #    tam thuong. Nay b la uoc THUC SU cua a, 1 < b < a.
+            #
+            # 2) Phuong an nhieu "ton tai n, a|n => b khong chia het n" la
+            #    menh de DUNG, khong phai sai: chi can lay mot so n khong
+            #    chia het cho a thi gia thiet sai nen phep keo theo dung,
+            #    va menh de ton tai duoc thoa man. Nhu vay cau hoi co HAI
+            #    dap an dung. Da thay bang menh de sai that.
+            a = random.choice([x for x in range(4, 31)
+                               if any(x % u == 0 for u in range(2, x))])
+            b = random.choice([u for u in range(2, a) if a % u == 0])
             dapso = rf"$\forall n\in\mathbb Z,\ {a}\mid n\Rightarrow {b}\mid n$"
             dsnhieu = [
                 rf"$\forall n\in\mathbb Z,\ {b}\mid n\Rightarrow {a}\mid n$",
-                rf"$\exists n\in\mathbb Z,\ {a}\mid n\Rightarrow {b}\nmid n$",
+                rf"$\forall n\in\mathbb Z,\ {a}\mid n\Rightarrow {b}\nmid n$",
                 rf"$\forall n\in\mathbb Z,\ {a}\mid n\Rightarrow {a+1}\mid n$"
             ]
 
@@ -3611,9 +3625,18 @@ def L10_C1_B1_TH014_MC_A_02(socau, dang=1): ####### kiểm tra lại nội dung 
 
         elif nhom == 4:
 
-            a = random.randint(2, 20)
+            # SUA 28/09/2026 - cung mot loi nhu ham _01: b lay trong
+            # range(1, a+1) nen CO THE BANG a. Khi do:
+            #   - dap so thanh "a|n => a|n" la menh de DUNG, trong khi de
+            #     hoi "khang dinh nao SAI" -> dap an bi sai han;
+            #   - phuong an nhieu thu nhat cung la "a|n => a|n" -> trung
+            #     voi dap so, math_type bao NhieuTrungError.
+            # Nay b la uoc THUC SU cua a, 1 < b < a, khi do
+            # "b|n => a|n" luon SAI - dung y do cua de.
+            a = random.choice([x for x in range(4, 21)
+                               if any(x % u == 0 for u in range(2, x))])
 
-            b = random.choice([u for u in range(1, a + 1) if a % u == 0])
+            b = random.choice([u for u in range(2, a) if a % u == 0])
 
             dapso = rf"$\forall n\in\mathbb Z,\ {b}\mid n\Rightarrow {a}\mid n$"
 

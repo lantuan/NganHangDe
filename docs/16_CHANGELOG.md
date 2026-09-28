@@ -6441,3 +6441,107 @@ Sau chuong 1, 2, 3, 4, 8, 9 deu ra duoc de he so 1 tron ven.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.05 - 2026-09-28
+
+## Kiem tra duong ra DE HE SO 2 (giua ky) - bat duoc BON loi
+
+Co Lan: "gio da xong chuong 1,2,3,4. da toi duoc he so 2. hay ra de he so
+2. kiem tra hoat dong he so 2 truoc cho toi. de xem co loi gi ko de chinh
+sua luon."
+
+Pham vi de giua ky 1 lop 10 = chuong 1, 2, 3 va bai 7-8 cua chuong 4 -
+dung phan da lam xong. Ma tran he so 2: trac nghiem 12, dung/sai 2,
+tra loi ngan 4, tu luan 3 = 21 cau.
+
+### Loi 1: de giua ky chi ra cau cua CHUONG 1 va CHUONG 2
+
+Nang nhat. Pham vi 8 bai thuoc 4 chuong nhung 20 cau roi het vao chuong 1
+va chuong 2; chuong 3 va chuong 4 KHONG co cau nao.
+
+Nguyen nhan: _chia_theo_so_tiet lam tron xuong roi rai phan du theo thu
+tu (-so tiet, ten) - lan nao cung DUNG MOT THU TU. De giua ky chia rieng
+cho tung loai cau, nen hai bai nhieu tiet nhat thang o MOI loai cau, cac
+bai con lai khong bao gio toi luot.
+
+Da doi sang chia theo PHAN DU LON NHAT (largest remainder): bai bi lam
+tron xuong nhieu nhat duoc uu tien, bai bang phan du thi boc ngau nhien
+de cac loai cau khac nhau khong cung chon mot bai.
+
+### Loi 2: buoc don cau lam chuong dau phinh ra
+
+_don_ve_bai_co_cau don phan cua bai khong co yeu cau cho bai dang NHIEU
+CAU NHAT - ma bai ay gan nhu luon la bai cua chuong dau. Do duoc: chuong
+1 chiem 62% so cau du chi chiem 36% so tiet.
+
+Da doi sang chia lai toan bo so cau cua muc do ay theo ti le so tiet,
+chi tren nhung bai that su co yeu cau o muc do do.
+
+### Loi 3: mat mot cau tra loi ngan
+
+Khoi VD/VDC chi don trong dam bai DA CO trong phan bo. De giua ky 1 co
+bon bai mang yeu cau muc VD (B1, B2, B4, B6) nhung phan bo ban dau chi
+cham toi B1, nen ca bon cau tra loi ngan don het ve B1; quy uoc moi bai
+toi da MOT cau VDC nen cau thu tu roi mat. Do duoc: 3/20 de chi ra 20 cau
+thay vi 21.
+
+Da doi sang chia lai tren MOI bai thuoc pham vi de co yeu cau muc VD.
+
+### Loi 4: cau L10_C1_B1_TH014_MC_A co HAI DAP AN DUNG
+
+Loi TOAN, nang. Ca hai bien the _01 va _02 deu lay
+b = random.choice([u for u in range(1, a+1) if a % u == 0])
+nen b CO THE BANG a.
+
+Ham _01 (hoi "khang dinh nao DUNG"): khi b = a, dap so thanh
+"a|n => a|n" va phuong an nhieu thu nhat cung the - trung nhau.
+Rieng phuong an nhieu "ton tai n, a|n => b khong chia het n" la menh de
+DUNG chu khong sai: chi can lay mot n khong chia het cho a thi gia thiet
+sai nen phep keo theo dung, va menh de ton tai duoc thoa man. Nhu vay cau
+hoi co HAI dap an dung. Da thay bang menh de sai that.
+
+Ham _02 (hoi "khang dinh nao SAI"): khi b = a, dap so "a|n => a|n" la
+menh de DUNG - dap an bi sai han. Ham nay chinh co Lan da ghi chu
+"kiem tra lai noi dung cau hoi, cac phuong an".
+
+Nay b la uoc THUC SU cua a, 1 < b < a, o ca hai ham.
+
+## Ket qua sau khi sua
+
+De giua ky 1, chay 20 lan bat de:
+
+    truoc: 3/20 de thieu cau, 20 cau roi het vao chuong 1 va 2
+    sau  : 20/20 de du ma tran (21 cau), 420/420 cau sinh duoc, 0 loi
+
+Phan bo chuong sau khi sua (20 de, 420 cau):
+
+    chuong 1   251 cau   (ti le so tiet 36%)
+    chuong 2    85 cau   (23%)
+    chuong 3    73 cau   (23%)
+    chuong 4    11 cau   (18%)
+
+Chuong 1 van cao hon ti le so tiet va chuong 4 van thap - day la chuyen
+cua CURRICULUM chu khong phai cua bo chia: trong pham vi giua ky, bai 7
+va bai 8 cua chuong 4 KHONG co yeu cau nao muc Van dung, ma ma tran doi
+toi 9 cau muc VD; con bon yeu cau muc VD trong ca pham vi thi chuong 1
+giu ba.
+
+## Da kiem chung the nao
+
+1. De giua ky 1: 20/20 de du ma tran, 420/420 cau sinh duoc, khong loi.
+2. Kiem lai HE SO 1 sau khi sua bo chia - khong lam hong cai da chay:
+   chuong 1, 2, 3, 4, 8, 9 deu 8/8 de du ma tran, 96/96 cau sinh duoc.
+3. Ham L10_C1_B1_TH014_MC_A chay 1500 lan qua call_generator: 1500/1500
+   ra cau, moi cau dung MOT dap an dung.
+4. Them tests/test_du_cau_giua_ky.py - khoa lai ba dieu: de du cau, KHONG
+   chuong nao trong pham vi bi bo trang, va cau khong xep duoc thi phai
+   bao chu khong duoc bien mat. 511 bai test qua, 8 bo qua (truoc: 500).
+
+## Chua kiem duoc
+
+De cuoi ky 1 con thieu ham chuong 5 nen chua chay tron ven (172/210 cau).
+Se xong khi lam chuong 5.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

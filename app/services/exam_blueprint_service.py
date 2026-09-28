@@ -104,14 +104,31 @@ def _chia_theo_so_tiet(so_luong: int, so_tiet_theo_bai: dict[str, int]) -> dict[
     }
     con_thieu = so_luong - sum(ket_qua.values())
 
-    # Phần dư: ưu tiên bài nhiều tiết nhất, rải lần lượt (không dồn hết
-    # vào 1 bài) để đề trải đều hơn khi nhiều bài cùng số tiết.
-    uu_tien = sorted(so_tiet_theo_bai, key=lambda b: (-so_tiet_theo_bai[b], b))
-    i = 0
-    while con_thieu > 0 and uu_tien:
-        ket_qua[uu_tien[i % len(uu_tien)]] += 1
-        con_thieu -= 1
-        i += 1
+    # Phần dư chia theo PHẦN DƯ LỚN NHẤT (largest remainder), không dồn
+    # cho bài nhiều tiết nhất nữa.
+    #
+    # SỬA 28/09/2026. Cách cũ xếp bài theo (-số tiết, tên) rồi rải phần
+    # dư theo đúng thứ tự ấy - nghĩa là LẦN NÀO CŨNG cùng một thứ tự.
+    # Với đề giữa kỳ, mỗi loại câu chia riêng một lần, nên hai bài nhiều
+    # tiết nhất thắng ở MỌI loại câu và các bài còn lại không bao giờ
+    # tới lượt.
+    #
+    # Đo được: đề giữa kỳ 1 lớp 10 có phạm vi 8 bài thuộc 4 chương,
+    # nhưng ra đề thì 20 câu rơi hết vào chương 1 và chương 2; chương 3
+    # và chương 4 KHÔNG có câu nào.
+    #
+    # Chia theo phần dư lớn nhất thì bài bị làm tròn xuống nhiều nhất
+    # được ưu tiên, nên các bài ít tiết vẫn có phần. Bài bằng phần dư
+    # thì bốc ngẫu nhiên (random đã được gieo hạt theo từng đề) để các
+    # loại câu khác nhau không cùng chọn một bài.
+    if con_thieu > 0:
+        du = []
+        for bai_id, so_tiet in so_tiet_theo_bai.items():
+            phan_le = so_luong * so_tiet / tong_tiet - ket_qua[bai_id]
+            du.append((phan_le, random.random(), bai_id))
+        du.sort(key=lambda t: (-t[0], t[1]))
+        for _phan_le, _rnd, bai_id in du[:con_thieu]:
+            ket_qua[bai_id] += 1
 
     return {b: sl for b, sl in ket_qua.items() if sl > 0}
 
@@ -272,7 +289,8 @@ def _don_vi_kien_thuc(curriculum_id: str) -> str:
 
 def _don_ve_bai_co_cau(phan_bo_bai: dict[str, int],
                        theo_bai_muc_do: dict, muc_do: str,
-                       danh_sach_bai: list[str] | None = None) -> tuple[dict[str, int], int]:
+                       danh_sach_bai: list[str] | None = None,
+                       so_tiet_theo_bai: dict[str, int] | None = None) -> tuple[dict[str, int], int]:
     """Dồn số câu đã chia cho BÀI KHÔNG CÓ yêu cầu nào ở mức độ này sang bài có.
 
     Vì sao cần: số câu được chia về từng bài theo TỈ LỆ SỐ TIẾT, hoàn toàn
@@ -303,8 +321,25 @@ def _don_ve_bai_co_cau(phan_bo_bai: dict[str, int],
     if not co_cau:
         # cả chương thật sự không có yêu cầu nào ở mức độ này
         return {}, khong_co
-    # dồn lần lượt cho bài đang được chia nhiều câu nhất
-    thu_tu = sorted(co_cau, key=lambda b: -co_cau[b])
+
+    # CHIA LẠI TOÀN BỘ số câu của mức độ này theo tỉ lệ số tiết, nhưng
+    # chỉ trên những bài THẬT SỰ có yêu cầu ở mức độ ấy.
+    #
+    # SỬA 28/09/2026. Cách cũ dồn phần thừa cho bài đang được chia nhiều
+    # câu nhất - mà bài ấy gần như luôn là bài của chương đầu (nhiều tiết
+    # nhất, lại nhiều yêu cầu nhất), nên chương đầu càng ngày càng phình.
+    # Đo được ở đề giữa kỳ 1: chương 1 chiếm 62% số câu trong khi chỉ
+    # chiếm 36% số tiết.
+    #
+    # Chia lại theo số tiết thì phần của bài không có yêu cầu được san
+    # đều theo đúng quy định "bài dạy nhiều tiết hơn thì nhiều câu hơn",
+    # thay vì dồn hết vào một bài.
+    tong_cau = sum(phan_bo_bai.values())
+    if so_tiet_theo_bai:
+        tiet_hop_le = {b: so_tiet_theo_bai.get(b, 1) for b in co_cau}
+        return _chia_theo_so_tiet(tong_cau, tiet_hop_le), 0
+
+    thu_tu = sorted(co_cau, key=lambda b: co_cau[b])
     i = 0
     while khong_co > 0:
         co_cau[thu_tu[i % len(thu_tu)]] += 1
@@ -315,7 +350,8 @@ def _don_ve_bai_co_cau(phan_bo_bai: dict[str, int],
 
 def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
                           theo_bai_muc_do: dict,
-                          danh_sach_bai: list[str] | None = None) -> tuple[dict[str, dict], int]:
+                          danh_sach_bai: list[str] | None = None,
+                          cap: int | None = None) -> tuple[dict[str, dict], int]:
     """Như _don_ve_bai_co_cau nhưng cho khối VD/VDC (trắc nghiệm, trả lời
     ngắn, tự luận). Cùng một lỗi: chương 3 lớp 10 chỉ có yêu cầu mức VD ở
     bài 6, nhưng _phan_bo_vd_vdc vẫn chia câu cho bài 5 - những câu ấy rơi
@@ -330,27 +366,28 @@ def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
                  if not theo_bai_muc_do.get((b, "VD")))
     if du_vd == 0 and du_vdc == 0:
         return {b: dict(v) for b, v in phan_bo_vdvdc.items()}, 0
-    if not co:
-        # mở rộng ra mọi bài thuộc phạm vi đề - xem chú thích ở
-        # _don_ve_bai_co_cau
-        co = {b: {"vd": 0, "vdc": 0} for b in (danh_sach_bai or [])
-              if theo_bai_muc_do.get((b, "VD"))}
-    if not co:
+
+    # CHIA LẠI toàn bộ số câu VD/VDC trên MỌI bài thuộc phạm vi đề mà
+    # thật sự có yêu cầu mức VD, thay vì chỉ dồn quanh những bài đã được
+    # chia sẵn.
+    #
+    # SỬA 28/09/2026. Cách cũ chỉ dồn trong đám bài ĐÃ CÓ trong phân bổ.
+    # Đề giữa kỳ 1 lớp 10 có bốn bài mang yêu cầu mức VD (B1, B2, B4,
+    # B6), nhưng phân bổ ban đầu chỉ chạm tới B1, nên cả bốn câu trả lời
+    # ngăn dồn hết về B1; mà quy ước là mỗi bài tối đa MỘT câu VDC, nên
+    # câu thứ tư rơi mất. Đo được: 3/20 đề giữa kỳ chỉ ra 20 câu thay vì
+    # 21, luôn hụt đúng một câu trả lời ngắn.
+    hop_le = [b for b in (danh_sach_bai or list(phan_bo_vdvdc))
+              if theo_bai_muc_do.get((b, "VD"))]
+    if not hop_le:
         return {}, du_vd + du_vdc
-    thu_tu = sorted(co, key=lambda b: -(co[b]["vd"] + co[b]["vdc"]))
-    i = 0
-    while du_vd > 0:
-        co[thu_tu[i % len(thu_tu)]]["vd"] += 1
-        du_vd -= 1
-        i += 1
-    while du_vdc > 0:
-        # mỗi bài tối đa 1 câu VDC - giữ đúng quy ước của _phan_bo_vd_vdc
-        cho = [b for b in thu_tu if co[b]["vdc"] == 0]
-        if not cho:
-            break
-        co[cho[0]]["vdc"] += 1
-        du_vdc -= 1
-    return co, du_vd + du_vdc
+
+    tong_vd = sum(v["vd"] for v in phan_bo_vdvdc.values())
+    tong_vdc = sum(v["vdc"] for v in phan_bo_vdvdc.values())
+    moi_phan_bo = _phan_bo_vd_vdc(hop_le, tong_vd, tong_vdc,
+                                  max_per_chuong=cap)
+    da_xep = sum(v["vd"] + v["vdc"] for v in moi_phan_bo.values())
+    return moi_phan_bo, (tong_vd + tong_vdc) - da_xep
 
 
 def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set) -> list[dict]:
@@ -500,7 +537,8 @@ def build_blueprint(
         # từng mức độ mà ma trận ghi, không bù trừ chéo giữa các phần.
         # (_tru_phan_dung_sai giữ lại để tham khảo, không còn được gọi.)
         phan_bo_bai, mat_cau = _don_ve_bai_co_cau(
-            phan_bo_bai, theo_bai_muc_do, muc_do, danh_sach_bai)
+            phan_bo_bai, theo_bai_muc_do, muc_do, danh_sach_bai,
+            so_tiet_theo_bai)
         bao_cao_phan_bo.setdefault("trac_nghiem", {})[muc_do] = phan_bo_bai
         if mat_cau:
             bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
@@ -541,7 +579,7 @@ def build_blueprint(
         # tối đa 1 câu VDC, câu VD ưu tiên bài chưa có VDC.
         phan_bo_chuong_vdvdc = _phan_bo_vd_vdc(danh_sach_bai, so_vd, so_vdc, max_per_chuong=cap)
         phan_bo_chuong_vdvdc, mat_vd = _don_vd_ve_bai_co_cau(
-            phan_bo_chuong_vdvdc, theo_bai_muc_do, danh_sach_bai)
+            phan_bo_chuong_vdvdc, theo_bai_muc_do, danh_sach_bai, cap)
         bao_cao_phan_bo.setdefault(loai_cau, {})["vd_vdc"] = phan_bo_chuong_vdvdc
         if mat_vd:
             bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
