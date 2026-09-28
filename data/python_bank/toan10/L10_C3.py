@@ -1914,3 +1914,438 @@ def L10_C3_TF_C_01(socau, socot):
         cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
 
     return cauTF
+
+
+# =====================================================================
+# BỔ SUNG DẠNG CHO CHƯƠNG 3 (28/09/2026)
+# ---------------------------------------------------------------------
+# Cô Lan: "mỗi dạng cần nhiều ID đề... vào dạng chọn 1 bài, nhưng mỗi
+# lần vào nó ra khác đề chứ không chỉ khác số".
+#
+# Nên chữ cái A, B, C sau loại câu là các DẠNG ĐỀ KHÁC NHAU của cùng một
+# yêu cầu cần đạt (hỏi cái khác, cho dữ kiện khác), còn _01 _02 mới là
+# cùng một đề đổi số. Khối dưới đây thêm chữ cái mới cho các yêu cầu
+# đang mỏng: TH030 (mới có 1 dạng), TH032, TH034 (mới có 2 dạng).
+# =====================================================================
+
+# Bộ ba Pythagore: dùng cho các dạng "biết một giá trị lượng giác, tìm
+# giá trị còn lại" - luôn ra phân số đẹp.
+BO_BA_PYTAGO = [(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25), (20, 21, 29)]
+
+# Bộ ba cho ĐÁP SỐ THẬP PHÂN hữu hạn (mẫu chỉ có ước 2 và 5).
+BO_BA_THAP_PHAN = [(3, 4, 5), (4, 3, 5), (7, 24, 25), (24, 7, 25),
+                   (15, 20, 25), (20, 15, 25)]
+
+
+def _bang_heron(gioi_han=30):
+    """Tam giác ba cạnh nguyên, diện tích nguyên VÀ bán kính nội tiếp nguyên.
+
+    Trả về danh sách (a, b, c, S, p, r). Dùng cho các dạng Heron và đường
+    tròn nội tiếp để số liệu luôn đẹp, học sinh không phải bấm máy ra số lẻ.
+    """
+    ra = []
+    for a in range(3, gioi_han + 1):
+        for b in range(a, gioi_han + 1):
+            for c in range(b, gioi_han + 1):
+                if a + b <= c:
+                    continue
+                if (a + b + c) % 2:
+                    continue
+                p = (a + b + c) // 2
+                t = p * (p - a) * (p - b) * (p - c)
+                s = math.isqrt(t)
+                if s * s != t or s == 0 or s % p:
+                    continue
+                ra.append((a, b, c, s, p, s // p))
+    return ra
+
+
+BANG_HERON = _bang_heron()
+
+
+def _goc_tu_ba_canh(a, b, c):
+    """Số đo (độ) của góc đối cạnh a, làm tròn - dùng để nhận dạng tam giác."""
+    cos_a = (b * b + c * c - a * a) / (2.0 * b * c)
+    return math.degrees(math.acos(max(-1.0, min(1.0, cos_a))))
+
+
+# ---------------------------------------------------------------------
+# BÀI 5 - giá trị lượng giác của một góc từ 0 độ đến 180 độ
+# ---------------------------------------------------------------------
+
+def L10_C3_B5_TH030_MC_B_01(socau, dang=1):
+    """Biết một giá trị lượng giác và khoảng của góc, tìm giá trị còn lại."""
+    gt = []
+    while len(gt) < socau:
+        doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+        tu = random.choice([True, False])        # góc tù hay góc nhọn
+        cho_sin = random.choice([True, False])   # đề cho sin hay cho cos
+        v = (doi, ke, huyen, tu, cho_sin)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for doi, ke, huyen, tu, cho_sin in gt:
+        khoang = (r"$90^{\circ} < \alpha < 180^{\circ}$" if tu
+                  else r"$0^{\circ} < \alpha < 90^{\circ}$")
+        dau = "-" if tu else ""
+        if cho_sin:
+            # sin luôn dương trên (0; 180); cos mang dấu theo khoảng
+            cho = r"\sin\alpha = \dfrac{%d}{%d}" % (doi, huyen)
+            hoi, dapso = r"\cos\alpha", r"%s\dfrac{%d}{%d}" % (dau, ke, huyen)
+            giai = (r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra "
+                    r"$\cos^{2}\alpha = 1 - \left(\dfrac{%d}{%d}\right)^{2} "
+                    r"= \dfrac{%d}{%d}$, nên $\cos\alpha = \pm\dfrac{%d}{%d}$.\\ "
+                    r"Vì %s nên $\alpha$ là góc %s, côsin mang dấu %s. "
+                    r"Vậy $\cos\alpha = %s\dfrac{%d}{%d}$."
+                    % (doi, huyen, ke * ke, huyen * huyen, ke, huyen,
+                       khoang, "tù" if tu else "nhọn",
+                       "âm" if tu else "dương", dau, ke, huyen))
+            nhieu = [r"%s\dfrac{%d}{%d}" % ("" if tu else "-", ke, huyen),
+                     r"\dfrac{%d}{%d}" % (doi, huyen),
+                     r"%s\dfrac{%d}{%d}" % (dau, doi, ke),
+                     r"\dfrac{%d}{%d}" % (ke, doi)]
+        else:
+            cho = r"\cos\alpha = %s\dfrac{%d}{%d}" % (dau, ke, huyen)
+            hoi, dapso = r"\sin\alpha", r"\dfrac{%d}{%d}" % (doi, huyen)
+            giai = (r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra "
+                    r"$\sin^{2}\alpha = 1 - \left(\dfrac{%d}{%d}\right)^{2} "
+                    r"= \dfrac{%d}{%d}$, nên $\sin\alpha = \pm\dfrac{%d}{%d}$.\\ "
+                    r"Với $0^{\circ} < \alpha < 180^{\circ}$ thì $\sin\alpha$ luôn "
+                    r"\textbf{dương}. Vậy $\sin\alpha = \dfrac{%d}{%d}$."
+                    % (ke, huyen, doi * doi, huyen * huyen, doi, huyen, doi, huyen))
+            nhieu = [r"-\dfrac{%d}{%d}" % (doi, huyen),
+                     r"%s\dfrac{%d}{%d}" % (dau, ke, huyen),
+                     r"\dfrac{%d}{%d}" % (doi, ke),
+                     r"\dfrac{%d}{%d}" % (ke, doi)]
+
+        debai = (r"Cho góc $\alpha$ thoả mãn $%s$ và %s. Tính $%s$."
+                 % (cho, khoang, hoi))
+        dung = "$%s$" % dapso
+        ds = _ba_nhieu(dung, ["$%s$" % x for x in nhieu],
+                       buoc=lambda k: r"$\dfrac{%d}{%d}$" % (k, huyen + k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_TH030_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: biết côsin (số thập phân), tìm sin. MỘT câu hỏi, MỘT đáp số."""
+    gt = []
+    while len(gt) < socau:
+        doi, ke, huyen = random.choice(BO_BA_THAP_PHAN)
+        tu = random.choice([True, False])
+        if (doi, ke, huyen, tu) not in gt:
+            gt.append((doi, ke, huyen, tu))
+
+    cauTN = ''
+    for doi, ke, huyen, tu in gt:
+        cos_val = (-1 if tu else 1) * ke / huyen
+        sin_val = doi / huyen
+        khoang = (r"$90^{\circ} < \alpha < 180^{\circ}$" if tu
+                  else r"$0^{\circ} < \alpha < 90^{\circ}$")
+        debai = (r"Cho góc $\alpha$ có $\cos\alpha = %s$ và %s. "
+                 r"Tính $\sin\alpha$." % (_xx(cos_val), khoang))
+        giai = (r"Áp dụng $\sin^{2}\alpha + \cos^{2}\alpha = 1$:\\ "
+                r"$\sin^{2}\alpha = 1 - \left(%s\right)^{2} = %s$, "
+                r"nên $\sin\alpha = \pm %s$.\\ "
+                r"Với $0^{\circ} < \alpha < 180^{\circ}$ thì $\sin\alpha$ luôn dương, "
+                r"vậy $\sin\alpha = %s$."
+                % (_xx(cos_val), _xx(sin_val * sin_val, 4), _xx(sin_val), _xx(sin_val)))
+        dung = _xx(sin_val)
+        ds = _ba_nhieu(dung, [_xx(-sin_val), _xx(cos_val), _xx(abs(cos_val))],
+                       buoc=lambda k: _xx(sin_val + k / 10.0))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_TH031_SA_B_01(socau, dang=2):
+    """Trả lời ngắn: rút gọn biểu thức bằng hệ thức cơ bản và quan hệ hai góc bù."""
+    gt = []
+    while len(gt) < socau:
+        v = (random.randint(2, 9), random.randint(2, 9))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for m, n in gt:
+        dapso = m + n
+        debai = (r"Cho góc $\alpha$ với $0^{\circ} < \alpha < 90^{\circ}$. "
+                 r"Tính giá trị của biểu thức\\ "
+                 r"$P = %d\left[\sin^{2}\left(180^{\circ} - \alpha\right) "
+                 r"+ \cos^{2}\left(180^{\circ} - \alpha\right)\right] "
+                 r"+ %d\cdot\tan\alpha\cdot\cot\alpha$." % (m, n))
+        giai = (r"Đặt $\beta = 180^{\circ} - \alpha$. Hệ thức lượng giác cơ bản đúng với "
+                r"mọi góc nên\\ "
+                r"$\sin^{2}\beta + \cos^{2}\beta = 1$, tức phần trong ngoặc vuông bằng $1$.\\ "
+                r"Mặt khác $\tan\alpha\cdot\cot\alpha = 1$ với mọi $\alpha$ mà hai giá trị "
+                r"này xác định.\\ "
+                r"Vậy $P = %d\cdot 1 + %d\cdot 1 = %d$." % (m, n, dapso))
+        dung = str(dapso)
+        ds = _ba_nhieu(dung, [str(m * n), str(abs(m - n)), str(m + n + 1)],
+                       buoc=lambda k: str(dapso + k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+# ---------------------------------------------------------------------
+# BÀI 6 - hệ thức lượng trong tam giác
+# ---------------------------------------------------------------------
+
+def L10_C3_B6_TH032_MC_B_01(socau, dang=1):
+    """Định lí côsin dùng ngược: biết BA CẠNH, tính côsin của một góc."""
+    gt = []
+    while len(gt) < socau:
+        A = random.choice([60, 120])
+        b, c = random.choice(CAP_COSIN[A])
+        dinh = random.choice(["B", "C"])   # hỏi góc B hoặc góc C cho đa dạng
+        if (A, b, c, dinh) not in gt:
+            gt.append((A, b, c, dinh))
+
+    cauTN = ''
+    for A, b, c, dinh in gt:
+        dau = -1 if A == 60 else 1
+        a2 = b * b + c * c + dau * b * c
+        a = int(round(a2 ** 0.5))
+        if dinh == "B":
+            cos_x = Rational(a * a + c * c - b * b, 2 * a * c)
+            ct = (r"\cos B = \dfrac{BC^{2} + AB^{2} - AC^{2}}{2\cdot BC\cdot AB}", a, c, b, a, c)
+        else:
+            cos_x = Rational(a * a + b * b - c * c, 2 * a * b)
+            ct = (r"\cos C = \dfrac{BC^{2} + AC^{2} - AB^{2}}{2\cdot BC\cdot AC}", a, b, c, a, b)
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $AC = %d$, $AB = %d$. "
+                 r"Tính $\cos %s$." % (a, b, c, dinh))
+        giai = (r"Định lí côsin viết cho góc $%s$:\\ "
+                r"$%s = \dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$."
+                % (dinh, ct[0], ct[1], ct[2], ct[3], ct[4], ct[5], _L(cos_x)))
+        dung = "$%s$" % _L(cos_x)
+        ds = _ba_nhieu(dung, ["$%s$" % _L(simplify(-cos_x)),
+                              "$%s$" % _L(Rational(1, 2) if A == 60 else Rational(-1, 2)),
+                              "$%s$" % _L(simplify(cos_x / 2))],
+                       buoc=lambda k: "$%s$" % _L(Rational(k, 2 * (k + 2))))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH032_SA_B_01(socau, dang=2):
+    """Trả lời ngắn: biết ba cạnh, tính SỐ ĐO (độ) của một góc đặc biệt."""
+    gt = []
+    while len(gt) < socau:
+        loai = random.choice([60, 90, 120])
+        if loai == 90:
+            doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+            v = (90, ke, doi, huyen)          # góc vuông đối cạnh huyền
+        else:
+            b, c = random.choice(CAP_COSIN[loai])
+            dau = -1 if loai == 60 else 1
+            a = int(round((b * b + c * c + dau * b * c) ** 0.5))
+            v = (loai, b, c, a)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for goc, b, c, a in gt:
+        debai = (r"Cho tam giác $ABC$ có $AC = %d$, $AB = %d$, $BC = %d$. "
+                 r"Tính số đo góc $A$ (đơn vị độ)." % (b, c, a))
+        cos_A = Rational(b * b + c * c - a * a, 2 * b * c)
+        giai = (r"Định lí côsin: $\cos A = \dfrac{AC^{2} + AB^{2} - BC^{2}}{2\cdot AC\cdot AB} "
+                r"= \dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$.\\ "
+                r"Tra bảng giá trị lượng giác, góc có côsin bằng $%s$ là $%s$."
+                % (b, c, a, b, c, _L(cos_A), _L(cos_A), _goc(goc)))
+        dung = str(goc)
+        ds = _ba_nhieu(dung, [str(180 - goc), str(goc // 2), str(goc + 30)],
+                       buoc=lambda k: str(goc + 10 * (k + 1)))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH033_SA_B_01(socau, dang=2):
+    """Trả lời ngắn: định lí sin - biết một cạnh và hai góc, tính cạnh còn lại."""
+    gt = []
+    while len(gt) < socau:
+        A, B = random.choice([(30, 90), (90, 30), (30, 60), (45, 90), (90, 45), (60, 90)])
+        a = random.randint(3, 14)
+        if (A, B, a) not in gt:
+            gt.append((A, B, a))
+
+    cauTN = ''
+    for A, B, a in gt:
+        sin_A = [r[1] for r in BANG_GTLG if r[0] == A][0]
+        sin_B = [r[1] for r in BANG_GTLG if r[0] == B][0]
+        b = simplify(a * sin_B / sin_A)
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $\widehat{A} = %s$, $\widehat{B} = %s$. "
+                 r"Tính độ dài cạnh $AC$ (làm tròn đến hàng phần trăm)."
+                 % (a, _goc(A), _goc(B)))
+        giai = (r"Định lí sin: $\dfrac{BC}{\sin A} = \dfrac{AC}{\sin B}$, "
+                r"suy ra $AC = \dfrac{BC\cdot\sin B}{\sin A}$.\\ "
+                r"Với $\sin %s = %s$ và $\sin %s = %s$ thì "
+                r"$AC = \dfrac{%d\cdot %s}{%s} = %s \approx %s$."
+                % (_goc(B), _L(sin_B), _goc(A), _L(sin_A), a, _L(sin_B), _L(sin_A),
+                   _L(b), _xx(float(b))))
+        # Dap an cua cau TRA LOI NGAN phai la mot SO (hoc sinh go vao o
+        # tra loi), khong the la can thuc \dfrac{10\sqrt{3}}{3}. Nen lam
+        # tron hai chu so thap phan, va de bai noi ro yeu cau lam tron.
+        dung = _xx(float(b))
+        ds = _ba_nhieu(dung, [_xx(float(simplify(a * sin_A / sin_B))), str(a),
+                              _xx(float(2 * b))],
+                       buoc=lambda k: _xx(float(b) + k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH034_MC_B_01(socau, dang=1):
+    """Công thức Heron: biết ba cạnh, tính diện tích tam giác."""
+    gt = []
+    while len(gt) < socau:
+        v = random.choice(BANG_HERON)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a, b, c, S, p, r in gt:
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. "
+                 r"Tính diện tích tam giác $ABC$." % (a, b, c))
+        giai = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d$.\\ "
+                r"Công thức Heron:\\ "
+                r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)} "
+                r"= \sqrt{%d\cdot %d\cdot %d\cdot %d} = \sqrt{%d} = %d$."
+                % (a, b, c, p, p, p - a, p - b, p - c, S * S, S))
+        dung = "$%d$" % S
+        ds = _ba_nhieu(dung, ["$%d$" % (2 * S), "$%d$" % p, "$%d$" % (S + p)],
+                       buoc=lambda k: "$%d$" % (S + 2 * k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH034_SA_B_01(socau, dang=2):
+    """Trả lời ngắn: bán kính đường tròn nội tiếp, dùng S = p.r."""
+    gt = []
+    while len(gt) < socau:
+        v = random.choice(BANG_HERON)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for a, b, c, S, p, r in gt:
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. "
+                 r"Tính bán kính $r$ của đường tròn nội tiếp tam giác $ABC$."
+                 % (a, b, c))
+        giai = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d$.\\ "
+                r"Heron: $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$.\\ "
+                r"Mà $S = p\cdot r$ nên $r = \dfrac{S}{p} = \dfrac{%d}{%d} = %d$."
+                % (a, b, c, p, p, p - a, p - b, p - c, S, S, p, r))
+        dung = str(r)
+        ds = _ba_nhieu(dung, [str(r + 1), str(S), str(p)],
+                       buoc=lambda k: str(r + k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_TH035_MC_C_01(socau, dang=1):
+    """Nhận dạng tam giác nhọn / vuông / tù bằng định lí côsin."""
+    gt = []
+    while len(gt) < socau:
+        kieu = random.choice(["nhon", "vuong", "tu"])
+        if kieu == "vuong":
+            doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+            v = (kieu, ke, doi, huyen)
+        elif kieu == "tu":
+            b, c = random.choice(CAP_COSIN[120])
+            a = int(round((b * b + c * c + b * c) ** 0.5))
+            v = (kieu, b, c, a)
+        else:
+            b, c = random.choice(CAP_COSIN[60])
+            a = int(round((b * b + c * c - b * c) ** 0.5))
+            v = (kieu, b, c, a)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ''
+    for kieu, b, c, a in gt:
+        # kiem lai bang so: goc lon nhat doi canh lon nhat
+        canh = sorted([a, b, c])
+        lon = _goc_tu_ba_canh(canh[2], canh[0], canh[1])
+        that = "vuông" if abs(lon - 90) < 1e-9 else ("tù" if lon > 90 else "nhọn")
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. "
+                 r"Tam giác $ABC$ là tam giác gì?" % (a, b, c))
+        giai = (r"Cạnh lớn nhất là $%d$, nên góc lớn nhất là góc đối diện cạnh ấy. "
+                r"Gọi góc đó là $\varphi$, định lí côsin cho\\ "
+                r"$\cos\varphi = \dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$.\\ "
+                r"Côsin của góc lớn nhất %s nên tam giác %s."
+                % (canh[2], canh[0], canh[1], canh[2], canh[0], canh[1],
+                   _L(Rational(canh[0] ** 2 + canh[1] ** 2 - canh[2] ** 2,
+                               2 * canh[0] * canh[1])),
+                   {"nhọn": "dương", "vuông": "bằng $0$", "tù": "âm"}[that],
+                   {"nhọn": "có ba góc nhọn", "vuông": "vuông", "tù": "tù"}[that]))
+        dung = "tam giác %s" % that
+        ds = _ba_nhieu(dung, ["tam giác %s" % x for x in ("nhọn", "vuông", "tù", "đều")
+                              if x != that],
+                       buoc=lambda k: "tam giác cân")
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_VD036_SA_B_01(socau, dang=2):
+    """Trả lời ngắn (thực tế): tính diện tích mảnh đất tam giác bằng Heron."""
+    NOI = [("một mảnh vườn", "mảnh vườn"), ("một thửa ruộng", "thửa ruộng"),
+           ("một khu đất", "khu đất")]
+    gt = []
+    while len(gt) < socau:
+        v = random.choice(BANG_HERON)
+        if v[3] >= 20 and v not in gt:      # dien tich du lon cho hop ly thuc te
+            gt.append(v)
+
+    cauTN = ''
+    for a, b, c, S, p, r in gt:
+        ten, goi = random.choice(NOI)
+        debai = (r"Người ta đo %s hình tam giác và được ba cạnh lần lượt là "
+                 r"$%d\,\text{m}$, $%d\,\text{m}$ và $%d\,\text{m}$. "
+                 r"Tính diện tích %s (đơn vị $\text{m}^{2}$)."
+                 % (ten, a, b, c, goi))
+        giai = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d\,\text{(m)}$.\\ "
+                r"Theo công thức Heron:\\ "
+                r"$S = \sqrt{p\left(p-a\right)\left(p-b\right)\left(p-c\right)} "
+                r"= \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d\,\text{(m}^{2}\text{)}$."
+                % (a, b, c, p, p, p - a, p - b, p - c, S))
+        dung = str(S)
+        ds = _ba_nhieu(dung, [str(2 * S), str(p), str(a + b + c)],
+                       buoc=lambda k: str(S + 3 * k + 1))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B6_VD036_TL_C_01(socau, dong=1):
+    """Tự luận thực tế: đo hai cạnh và góc xen giữa của một khu đất."""
+    gt = []
+    while len(gt) < socau:
+        A = random.choice([60, 120])
+        b, c = random.choice([x for x in CAP_COSIN[A] if x[0] >= 8])
+        if (A, b, c) not in gt:
+            gt.append((A, b, c))
+
+    cauTN = ''
+    for A, b, c in gt:
+        dau = -1 if A == 60 else 1
+        a2 = b * b + c * c + dau * b * c
+        a = int(round(a2 ** 0.5))
+        cos_A = Rational(1, 2) if A == 60 else Rational(-1, 2)
+        S = simplify(Rational(1, 2) * b * c * sqrt(3) / 2)
+
+        debai = (r"Một khu đất hình tam giác $ABC$ có hai cạnh $AB = %d\,\text{m}$, "
+                 r"$AC = %d\,\text{m}$ và góc giữa hai cạnh đó là "
+                 r"$\widehat{A} = %s$." % (c, b, _goc(A)))
+        ds_abcd = [
+            (r"Tính độ dài cạnh $BC$ (đơn vị mét).",
+             r"%d\,\text{m}" % a,
+             r"Định lí côsin trong tam giác $ABC$:\\ "
+             r"$BC^{2} = AB^{2} + AC^{2} - 2\cdot AB\cdot AC\cdot\cos A "
+             r"= %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\left(%s\right) = %d$.\\ "
+             r"Vậy $BC = %d\,\text{(m)}$."
+             % (c, b, c, b, _L(cos_A), a2, a)),
+            (r"Tính diện tích khu đất (đơn vị $\text{m}^{2}$).",
+             r"%s\,\text{m}^{2}" % _L(S),
+             r"$S = \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin A "
+             r"= \dfrac{1}{2}\cdot %d\cdot %d\cdot\dfrac{\sqrt{3}}{2} "
+             r"= %s\,\text{(m}^{2}\text{)}$." % (c, b, _L(S))),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN

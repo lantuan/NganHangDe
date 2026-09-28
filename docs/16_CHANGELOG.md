@@ -5432,3 +5432,77 @@ Tim nhanh:  grep -rn "CLAUDE THEM" data/mapping/
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 2.91 - 2026-09-28
+
+## Them 11 dang cho chuong 3, de ra de da dang hon
+
+Co Lan: "moi dang can nhieu ID de... vao dang chon 1 bai, nhung moi lan vao
+no ra khac de chu ko chi khac so. de se da dang hon."
+
+Dung quy uoc: chu cai A, B, C sau loai cau la cac DANG DE KHAC NHAU cua
+cung mot yeu cau can dat (hoi cai khac, cho du kien khac); con _01 _02 moi
+la cung mot de doi so.
+
+Truoc dot nay co yeu cau chi co mot dang duy nhat:
+
+    TH030  1 dang  ->  3 dang
+    TH032  2 dang  ->  4 dang
+    TH034  2 dang  ->  4 dang
+
+Chuong 3 lop 10: 27 -> 38 dang, ca 38 deu da co ham.
+
+## Muoi mot dang moi
+
+    Bai 5
+      TH030_MC_B  biet mot gia tri luong giac + khoang cua goc -> gia tri con lai
+      TH030_SA_A  biet cosin (so thap phan) -> tim sin
+      TH031_SA_B  rut gon bieu thuc bang he thuc co ban va quan he hai goc bu
+    Bai 6
+      TH032_MC_B  biet BA CANH -> tinh cosin mot goc (dinh li cosin dung nguoc)
+      TH032_SA_B  biet ba canh -> so do goc (60, 90 hoac 120 do)
+      TH033_SA_B  dinh li sin: biet mot canh va hai goc -> canh con lai
+      TH034_MC_B  cong thuc Heron -> dien tich
+      TH034_SA_B  ban kinh duong tron noi tiep, dung S = p.r
+      TH035_MC_C  nhan dang tam giac nhon / vuong / tu
+      VD036_SA_B  thuc te: dien tich manh dat tam giac (Heron)
+      VD036_TL_C  thuc te (tu luan 2 y): tinh canh con lai va dien tich
+
+Moi dong Mapping deu co "ghi_chu" danh dau Claude dat ID.
+
+## Lam sao so lieu luon dep
+
+BANG_HERON: quet toan bo tam giac ba canh nguyen (canh <= 30) giu lai
+nhung tam giac vua co DIEN TICH NGUYEN vua co BAN KINH NOI TIEP NGUYEN -
+duoc 24 tam giac. Nho vay dang Heron va dang duong tron noi tiep khong bao
+gio ra so le.
+
+BO_BA_PYTAGO cho cac dang "biet sin tim cos": ket qua luon la phan so dep.
+BO_BA_THAP_PHAN rieng cho dang tra loi ngan: chi lay bo ba ma thuong so co
+so thap phan huu han (3-4-5 va 7-24-25), nen dap an go vao o tra loi duoc.
+
+## Mot loi tu phat hien khi bien dich
+
+TH033_SA_B ban dau tra dap an la can thuc: \shortans{ \dfrac{10\sqrt{3}}{3}}
+- vua thieu dau $ (LaTeX bao 18 loi), vua SAI VE BAN CHAT: cau tra loi ngan
+thi hoc sinh go MOT SO vao o tra loi, khong go duoc can thuc. Da doi sang
+dap an lam tron hai chu so thap phan, va de bai noi ro "lam tron den hang
+phan tram"; loi giai van giu ca gia tri dung lan gia tri gan dung.
+
+## Da kiem chung the nao
+
+1. BANG_HERON: do lai ca 24 tam giac bang cong thuc Heron va S = p.r, dung het.
+2. BO_BA_PYTAGO va BO_BA_THAP_PHAN: kiem a^2 + b^2 = c^2, dung het.
+3. Dang nhan dang tam giac: 200 cau, DOC LAP tinh lai cosin goc lon nhat roi
+   doi chieu - 0 sai. Phan bo: 92 tu, 70 vuong, 38 nhon.
+4. Dang cosin tu ba canh: 120 cau, doi chieu bang toa do - 0 lech.
+5. Dang dinh li sin: 120 cau - 0 lech.
+6. 38/38 dang chay qua duong ra de that, dung loai cau, 0 loi.
+7. Bien dich THAT 22 cau cua 11 dang moi ra PDF 6 trang, 0 loi; doc lai
+   doi chieu (5-12-13 -> p=15, S=30; 20-24-... -> S=96).
+8. Ra de that 12 lan: 49 cau, dung 12 dang khac nhau.
+9. 390 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

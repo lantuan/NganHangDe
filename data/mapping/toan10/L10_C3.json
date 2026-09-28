@@ -170,5 +170,82 @@
     "Loai": "Đúng sai",
     "Dang": "Bài toán tàu chạy hai chặng: tính khoảng cách và hướng",
     "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_B",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một giá trị lượng giác và khoảng của góc, tìm giá trị còn lại",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_A",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết côsin (số thập phân), tìm sin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_B",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Rút gọn biểu thức bằng hệ thức cơ bản và quan hệ hai góc bù",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh, tính côsin của một góc (định lí côsin dùng ngược)",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh, tính số đo góc",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Định lí sin: biết một cạnh và hai góc, tính cạnh còn lại",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Công thức Heron: biết ba cạnh, tính diện tích",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bán kính đường tròn nội tiếp, dùng S = p.r",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_TH035_MC_C",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận dạng tam giác nhọn, vuông hay tù bằng định lí côsin",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_B",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tế: tính diện tích mảnh đất tam giác bằng Heron",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_C",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tế: biết hai cạnh và góc xen giữa, tính cạnh còn lại và diện tích",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   }
 ]
