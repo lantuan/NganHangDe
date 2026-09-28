@@ -54,6 +54,13 @@
     "Dang": "Bài toán đếm có nội dung thực tiễn"
   },
   {
+    "id": "L10_C8_B23_VD130_SA_A",
+    "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán đếm thực tiễn dùng quy tắc cộng và nhân",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C8_B24_NB131_MC_A",
     "content": "Nhận biết được khái niệm hoán vị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -114,6 +121,13 @@
     "Dang": "Bài toán đếm có điều kiện ràng buộc"
   },
   {
+    "id": "L10_C8_B24_VD138_SA_A",
+    "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số cách chọn nhóm có điều kiện về thành phần",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
     "id": "L10_C8_B25_TH139_MC_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 4.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -148,6 +162,13 @@
     "content": "Tìm được hệ số của x^k trong khai triển nhị thức Newton (a + b)^n.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hệ số của số hạng chứa x mũ k"
+  },
+  {
+    "id": "L10_C8_B25_VD141_TL_A",
+    "content": "Tìm được hệ số của x^k trong khai triển nhị thức Newton (a + b)^n.",
+    "Loai": "Tự luận",
+    "Dang": "Khai triển nhị thức Newton và các hệ số",
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
     "id": "L10_C8_TF_A",

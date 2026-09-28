@@ -6167,3 +6167,99 @@ Bon chuong 1, 2, 3, 9 deu ra duoc de he so 1 tron ven. Nam chuong
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.02 - 2026-09-28
+
+## Chuong 8 (Dai so to hop): tu 0 len 30/30 dang co ham
+
+Co Lan gui lai nam tep LopXChuong4/5/6/7/8.py. Rieng tep chuong 8 da viet
+theo FORM MOI (goi MC_SA_answer_*, TF_baitoan_du cua math_type) nen chuyen
+duoc; bon tep con lai van la form cu (tu mo tep de.tex roi de.write).
+
+Co Lan dan: KHONG duoc sua math_type.py, chi viet lai HAM CUA TUNG CHUONG
+cho dung khuon cua math_type. Da lam dung the - math_type.py giu nguyen,
+khong mot dong nao thay doi.
+
+Nay data/python_bank/toan10/L10_C8.py co 30 ham, phu kin 30 dong Mapping:
+
+    Bai 23  quy tac dem          10 dang
+    Bai 24  hoan vi, chinh hop, to hop  11 dang
+    Bai 25  nhi thuc Newton       7 dang
+    Dung/Sai                      2 dang
+
+## Ba dang phai them de de he so 1 du cau
+
+Lan chay thu dau tien: 5/5 de du ma tran nhung chi sinh duoc 48/60 cau.
+Bo chon can TRA LOI NGAN cho VD130 va VD138, can TU LUAN cho VD141, ma
+Mapping chua khai. Da them ba dang:
+
+    L10_C8_B23_VD130_SA_A  dem thuc tien dung quy tac cong va nhan
+    L10_C8_B24_VD138_SA_A  dem so cach chon nhom co dieu kien thanh phan
+    L10_C8_B25_VD141_TL_A  khai trien nhi thuc Newton va cac he so
+
+## Loi trong tep cua co - da sua khi chuyen
+
+1. K10_8_25_1_B dinh nghia HAI LAN (dong 292 va 363), ban sau de ban
+   truoc. Khi chuyen chi giu mot.
+2. K10_8_DS_1_TH co vong "while l > n: k = np.randint([1, n-1])" - truyen
+   mot LIST cho randint va khong cap nhat l, roi vao la treo may. Da bo.
+3. K10_8_DS_1_TH co bon y ngang muc nhau. Da xep lai theo dung thang
+   NB - TH - VD - VDC nhu quy uoc chot 27/09/2026 (nay la L10_C8_TF_B).
+4. K10_8_23_2_Ngan_1_NB viet $C_{blue}^{2}$ bang f-string nen ra "C_9^2"
+   khong co ngoac nhon; so hai chu so se hien sai (C_10^2 thanh C_1 roi
+   0^2). Da viet lai co ngoac day du (nay la L10_C8_B23_TH127_SA_A).
+
+## Da kiem chung the nao
+
+1. Chay 10 lan moi dang cho ca 30 dang: 30/30 khong loi; cau trac nghiem
+   dung MOT dap an dung, tra loi ngan dung MOT shortans, Dung/Sai dung
+   BON y.
+2. Doi chieu ket qua dem bang VET CAN chu khong tin cong thuc:
+   - chon 2 vien bi cung mau: khop
+   - so co d chu so tu tap 1..k: khop
+   - xep n nguoi sao cho hai ban canh nhau / khong canh nhau: khop
+   - chon 2 hoc sinh cung gioi tinh: khop
+   - he so khai trien (a+bx)^n voi n = 4, 5: khop sympy o MOI truong hop
+   - tong cac he so = (1+a)^n: khop
+3. De he so 1 chuong 8: 5/5 de du ma tran, 60/60 cau sinh duoc.
+4. Them chuong 8 vao tests/test_du_cau_he_so_1.py. 472 bai test qua,
+   8 bo qua (truoc dot nay la 450).
+
+## Hien trang toan lop 10
+
+    C1   37/37   xong        C6    0/31
+    C2   15/15   xong        C7    0/37  (chua co nguon)
+    C3   53/53   xong        C8   30/30   xong
+    C4    0/39               C9   27/27   xong
+    C5    0/41
+
+Nam chuong 1, 2, 3, 8, 9 deu ra duoc de he so 1 tron ven.
+
+## Con lai
+
+Tep LopXChuong7.py co Lan gui LAI LA NOI DUNG CHUONG 9 (toan ham
+K10_9_*, xac suat), khong phai phuong phap toa do trong mat phang. Chuong
+7 van chua co nguon.
+
+Bon tep chuong 4, 5, 6 o form cu, phai viet lai ham cho dung khuon
+math_type. Da doc va ghi nhan cac loi can sua khi chuyen - xem muc duoi.
+
+## Loi da ghi nhan trong tep chuong 4, 5, 6 (chua sua, de doi chuyen)
+
+    C6 K10_6_15_1_1   \True dat vao bang X1 - ma X1 chinh la bang co chu
+                      thich "KHONG phai ham so" (co mot gia tri x lap
+                      lai). DAP AN DUNG DANG DAT NHAM VAO PHUONG AN SAI.
+    C5 K10_5_13_2_1   co input() nen treo khi sinh de tu dong; de hoi
+                      TRUNG VI nhung lai tinh numpy.mean; loi giai dung
+                      bien "median" chua he duoc gan -> NameError.
+    C5 K10_5_14_1_1   de ghi can nang tre so sinh "don vi kg" nhung so
+                      lieu la 2700-4200 (gam).
+    C5 K10_5_14_1_3   numpy.delete(X, i) voi i la GIA TRI chu khong phai
+                      chi so.
+    C6 K10_6_18_1_1   nghiem_hq[1] se IndexError khi phuong trinh co it
+                      hon hai nghiem; {$\True S = \varnothing$} dat \True
+                      BEN TRONG $...$ nen LaTeX hong.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

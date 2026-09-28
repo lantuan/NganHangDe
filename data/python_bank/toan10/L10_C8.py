@@ -966,3 +966,301 @@ def L10_C8_B25_VD141_SA_A_01(socau):
                            buoc=lambda t: kq + 6 * t)
         cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
     return cau
+
+
+# =====================================================================
+# CÂU ĐÚNG/SAI - bốn ý phải TĂNG DẦN mức độ NB, TH, VD, VDC
+# =====================================================================
+
+def L10_C8_TF_A_01(socau, socot=1):
+    """Đúng/Sai - quy tắc đếm; hoán vị, chỉnh hợp, tổ hợp.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        nam = random.randint(5, 8)
+        nu = random.randint(4, 7)
+        if (nam, nu) not in gt:
+            gt.append((nam, nu))
+
+    cauTF = ''
+    for nam, nu in gt:
+        tong = nam + nu
+        chon2 = calculate_coefficient(tong, 2)
+        a2 = calculate_permutations(tong, 2)
+        mot_nam_mot_nu = nam * nu
+        cung_gioi = chon2 - mot_nam_mot_nu
+
+        debai = (r"Một tổ có $%d$ học sinh nam và $%d$ học sinh nữ, các học "
+                 r"sinh đôi một khác nhau." % (nam, nu))
+
+        ds_abcd = (
+            # a) NB - nhắc lại một công thức
+            [
+                (r"{\True Số cách xếp toàn bộ $%d$ học sinh của tổ thành một "
+                 r"hàng dọc là $%d!$}" % (tong, tong),
+                 r"Đúng. Xếp tất cả $%d$ phần tử theo thứ tự là một hoán vị: "
+                 r"$P_{%d} = %d!$." % (tong, tong, tong)),
+                (r"{Số cách xếp toàn bộ $%d$ học sinh của tổ thành một hàng "
+                 r"dọc là $%d^{2}$}" % (tong, tong),
+                 r"Sai. Đó là hoán vị của $%d$ phần tử nên bằng $%d!$, không "
+                 r"phải $%d^{2}$." % (tong, tong, tong)),
+            ],
+            # b) TH - thay số vào đúng một công thức
+            [
+                (r"{\True Số cách chọn $2$ học sinh bất kì của tổ là $%d$}"
+                 % chon2,
+                 r"Đúng. Hai bạn được chọn có vai trò như nhau nên đây là tổ "
+                 r"hợp: $C_{%d}^{2} = %d$." % (tong, chon2)),
+                (r"{Số cách chọn $2$ học sinh bất kì của tổ là $%d$}" % a2,
+                 r"Sai. $%d$ là $A_{%d}^{2}$, dùng khi hai vị trí có vai trò "
+                 r"khác nhau. Ở đây hai bạn như nhau nên phải dùng "
+                 r"$C_{%d}^{2} = %d$." % (a2, tong, tong, chon2)),
+            ],
+            # c) VD - phải có kết quả ý trước mới làm được
+            [
+                (r"{\True Số cách chọn $2$ học sinh gồm $1$ nam và $1$ nữ là "
+                 r"$%d$}" % mot_nam_mot_nu,
+                 r"Đúng. Chọn một bạn nam rồi chọn một bạn nữ, dùng quy tắc "
+                 r"nhân: $%d \cdot %d = %d$." % (nam, nu, mot_nam_mot_nu)),
+                (r"{Số cách chọn $2$ học sinh gồm $1$ nam và $1$ nữ là $%d$}"
+                 % tong,
+                 r"Sai. $%d$ là số cách chọn MỘT bạn bất kì (quy tắc cộng). "
+                 r"Chọn một nam và một nữ phải dùng quy tắc nhân: "
+                 r"$%d \cdot %d = %d$." % (tong, nam, nu, mot_nam_mot_nu)),
+            ],
+            # d) VDC - phải tự nghĩ ra cách, không có công thức sẵn
+            [
+                (r"{\True Số cách chọn $2$ học sinh cùng giới tính là $%d$}"
+                 % cung_gioi,
+                 r"Đúng. Lấy tổng số cách chọn $2$ bạn bất kì trừ đi số cách "
+                 r"chọn $1$ nam $1$ nữ: $%d - %d = %d$."
+                 "\\\\\n"
+                 r"Cách khác: $C_{%d}^{2} + C_{%d}^{2} = %d + %d = %d$."
+                 % (chon2, mot_nam_mot_nu, cung_gioi, nam, nu,
+                    calculate_coefficient(nam, 2),
+                    calculate_coefficient(nu, 2), cung_gioi)),
+                (r"{Số cách chọn $2$ học sinh cùng giới tính là $%d$}" % chon2,
+                 r"Sai. $%d$ là số cách chọn $2$ bạn \textbf{bất kì}. Phải "
+                 r"trừ đi $%d$ cách chọn $1$ nam $1$ nữ mới ra $%d$."
+                 % (chon2, mot_nam_mot_nu, cung_gioi)),
+            ])
+        cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
+    return cauTF
+
+
+def L10_C8_TF_B_01(socau, socot=1):
+    """Đúng/Sai - nhị thức Newton.
+
+    Dựa trên bài K10_8_DS_1_TH của cô Lan, xếp lại bốn ý theo đúng thang
+    NB - TH - VD - VDC (bản cũ bốn ý ngang mức nhau), và bỏ vòng lặp
+    "while l > n: k = np.randint([1, n-1])" - vòng đó truyền một LIST cho
+    randint và không cập nhật l, nếu rơi vào thì treo máy.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([4, 5])
+        k = random.randint(1, n - 1)
+        a = random.randint(2, 4)
+        v = (n, k, a)
+        if v not in gt:
+            gt.append(v)
+
+    cauTF = ''
+    for n, k, a in gt:
+        # nhị thức (a + a x)^n
+        he_so = calculate_coefficient(n, k) * a ** n
+        tong_he_so = (a + a) ** n
+        k_lech = k + 1 if k + 1 != n - k else max(1, k - 1)
+
+        debai = (r"Xét khai triển nhị thức Newton của "
+                 r"$\left(%d + %dx\right)^{%d}$." % (a, a, n))
+
+        ds_abcd = (
+            # a) NB - nhắc lại một tính chất
+            [
+                (r"{\True Khai triển này có $%d$ số hạng}" % (n + 1),
+                 r"Đúng. Khai triển $\left(a + bx\right)^{n}$ có $n + 1$ số "
+                 r"hạng, ứng với $k = 0,\ 1,\ \ldots,\ %d$." % n),
+                (r"{Khai triển này có $%d$ số hạng}" % n,
+                 r"Sai. Chỉ số $k$ chạy từ $0$ đến $%d$ nên có $%d$ số hạng."
+                 % (n, n + 1)),
+            ],
+            # b) TH - thay số vào đúng một công thức
+            [
+                (r"{\True Hệ số của $x^{%d}$ trong khai triển bằng $%d$}"
+                 % (k, he_so),
+                 r"Đúng. Số hạng chứa $x^{%d}$ là $C_{%d}^{%d}\cdot "
+                 r"%d^{%d}\cdot\left(%dx\right)^{%d} = %dx^{%d}$."
+                 % (k, n, k, a, n - k, a, k, he_so, k)),
+                (r"{Hệ số của $x^{%d}$ trong khai triển bằng $%d$}"
+                 % (k, calculate_coefficient(n, k)),
+                 r"Sai. $C_{%d}^{%d} = %d$ mới chỉ là hệ số nhị thức, còn "
+                 r"phải nhân thêm $%d^{%d}\cdot %d^{%d}$ nữa, được $%d$."
+                 % (n, k, calculate_coefficient(n, k), a, n - k, a, k, he_so)),
+            ],
+            # c) VD - phải hiểu ý trước mới kết luận được
+            [
+                (r"{\True Hệ số của $x^{%d}$ bằng hệ số của $x^{%d}$}"
+                 % (k, n - k),
+                 r"Đúng. Hệ số của $x^{k}$ là $C_{%d}^{k}\cdot %d^{%d-k}"
+                 r"\cdot %d^{k} = C_{%d}^{k}\cdot %d^{%d}$ - phần luỹ thừa "
+                 r"KHÔNG phụ thuộc $k$ vì hai số hạng của nhị thức bằng nhau. "
+                 r"Mà $C_{%d}^{%d} = C_{%d}^{%d}$ nên hai hệ số bằng nhau."
+                 % (n, a, n, a, n, a, n, n, k, n, n - k)),
+                (r"{Hệ số của $x^{%d}$ bằng hệ số của $x^{%d}$}"
+                 % (k, k_lech),
+                 r"Sai. Tính đối xứng cho hệ số của $x^{%d}$ bằng hệ số của "
+                 r"$x^{%d}$, chứ không phải $x^{%d}$." % (k, n - k, k_lech)),
+            ],
+            # d) VDC - phải tự nghĩ ra cách, không có công thức sẵn
+            [
+                (r"{\True Tổng tất cả các hệ số của khai triển bằng $%d$}"
+                 % tong_he_so,
+                 r"Đúng. Viết khai triển là $a_0 + a_1x + \ldots + "
+                 r"a_{%d}x^{%d}$. Thay $x = 1$: vế phải thành đúng tổng các "
+                 r"hệ số, vế trái thành $\left(%d + %d\right)^{%d} = %d$."
+                 % (n, n, a, a, n, tong_he_so)),
+                (r"{Tổng tất cả các hệ số của khai triển bằng $%d$}" % (a ** n),
+                 r"Sai. Thay $x = 1$ được $\left(%d + %d\right)^{%d} = %d$, "
+                 r"chứ không phải $%d^{%d} = %d$."
+                 % (a, a, n, tong_he_so, a, n, a ** n)),
+            ])
+        cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
+    return cauTF
+
+
+# ---------------------------------------------------------------------
+# Ba dạng bổ sung: bộ chọn câu cần TRẢ LỜI NGẮN cho VD130, VD138 và
+# TỰ LUẬN cho VD141, nhưng Mapping chưa khai nên đề hệ số 1 bị thiếu câu.
+# CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+# ---------------------------------------------------------------------
+
+def L10_C8_B23_VD130_SA_A_01(socau):
+    """Trả lời ngắn: bài toán đếm thực tiễn dùng quy tắc cộng và nhân.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        v = (random.randint(3, 6), random.randint(3, 6), random.randint(2, 5))
+        if v[0] != v[1] and v not in gt:
+            gt.append(v)
+
+    cau = ""
+    for m, n, p in gt:
+        kq = (m + n) * p
+        debai = (r"Từ thành phố $A$ đến thành phố $C$ bắt buộc phải đi qua "
+                 r"thành phố $B$. Từ $A$ đến $B$ có $%d$ tuyến xe khách và "
+                 r"$%d$ tuyến tàu hoả; từ $B$ đến $C$ có $%d$ tuyến xe khách. "
+                 r"Hỏi có bao nhiêu cách đi từ $A$ đến $C$?" % (m, n, p))
+        giai = (r"Chặng $A \to B$: đi xe khách \textbf{hoặc} tàu hoả, hai "
+                r"phương án loại trừ nhau nên dùng quy tắc cộng, được "
+                r"$%d + %d = %d$ cách." % (m, n, m + n) +
+                "\\\\\n"
+                r"Đi từ $A$ đến $C$ phải qua chặng $A \to B$ \textbf{rồi} "
+                r"chặng $B \to C$ nên dùng quy tắc nhân:"
+                "\\\\\n"
+                r"$%d \cdot %d = %d$ (cách)." % (m + n, p, kq))
+        nhieu = _ba_nhieu8(kq, [m + n + p, m * n * p, m * p + n, m + n * p],
+                           buoc=lambda t: kq + 5 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C8_B24_VD138_SA_A_01(socau):
+    """Trả lời ngắn: đếm thực tiễn dùng tổ hợp, có điều kiện về thành phần.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        nam = random.randint(6, 10)
+        nu = random.randint(5, 9)
+        v = (nam, nu)
+        if v not in gt:
+            gt.append(v)
+
+    cau = ""
+    for nam, nu in gt:
+        c_nam = calculate_coefficient(nam, 2)
+        kq = c_nam * nu
+        debai = (r"Một tổ có $%d$ học sinh nam và $%d$ học sinh nữ. Cần chọn "
+                 r"một nhóm gồm $3$ học sinh, trong đó có \textbf{đúng $2$ "
+                 r"nam và $1$ nữ}, các bạn trong nhóm có vai trò như nhau. "
+                 r"Hỏi có bao nhiêu cách chọn?" % (nam, nu))
+        giai = (r"Chọn $2$ bạn nam trong $%d$ bạn nam, các bạn có vai trò như "
+                r"nhau nên là tổ hợp: $C_{%d}^{2} = %d$ cách."
+                % (nam, nam, c_nam) +
+                "\\\\\n"
+                r"Chọn $1$ bạn nữ trong $%d$ bạn nữ: $%d$ cách." % (nu, nu) +
+                "\\\\\n"
+                r"Phải làm đủ hai công đoạn nên dùng quy tắc nhân:"
+                "\\\\\n"
+                r"$%d \cdot %d = %d$ (cách)." % (c_nam, nu, kq))
+        nhieu = _ba_nhieu8(
+            kq, [c_nam + nu, calculate_coefficient(nam + nu, 3),
+                 calculate_permutations(nam, 2) * nu,
+                 calculate_coefficient(nam, 2) * calculate_coefficient(nu, 2)],
+            buoc=lambda t: kq + 13 * t)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C8_B25_VD141_TL_A_01(socau, dong=1):
+    """Tự luận: khai triển nhị thức Newton và các hệ số.
+
+    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([4, 5])
+        a = random.choice([2, 3, -2])
+        k = random.randint(1, n - 1)
+        v = (n, a, k)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for n, a, k in gt:
+        dau = "+" if a > 0 else "-"
+        cac_hs = [calculate_coefficient(n, j) * a ** j for j in range(n + 1)]
+        he_so_k = cac_hs[k]
+        tong = (1 + a) ** n
+        lon_nhat = max(cac_hs)
+        vi_tri = [j for j, c in enumerate(cac_hs) if c == lon_nhat]
+
+        debai = (r"Cho biểu thức $P(x) = \left(1 %s %dx\right)^{%d}$."
+                 % (dau, abs(a), n))
+
+        hoi_a = r"Viết khai triển nhị thức Newton của $P(x)$."
+        giai_a = (r"$P(x) = %s$." % _da_thuc(list(reversed(cac_hs))) +
+                  "\\\\\n"
+                  r"(Số hạng chứa $x^{j}$ có hệ số $C_{%d}^{j}\cdot "
+                  r"\left(%d\right)^{j}$.)" % (n, a))
+
+        hoi_b = r"Tìm hệ số của $x^{%d}$ trong khai triển." % k
+        giai_b = (r"Hệ số của $x^{%d}$ là $C_{%d}^{%d}\cdot"
+                  r"\left(%d\right)^{%d} = %d\cdot %d = %d$."
+                  % (k, n, k, a, k, calculate_coefficient(n, k),
+                     a ** k, he_so_k))
+
+        hoi_c = r"Tính tổng tất cả các hệ số trong khai triển của $P(x)$."
+        giai_c = (r"Tổng các hệ số chính là giá trị của $P(x)$ tại $x = 1$:"
+                  "\\\\\n"
+                  r"$P(1) = \left(1 %s %d\right)^{%d} = "
+                  r"\left(%d\right)^{%d} = %d$."
+                  % (dau, abs(a), n, 1 + a, n, tong) +
+                  "\\\\\n"
+                  r"Cộng trực tiếp để kiểm tra: $%s = %d$."
+                  % (" + ".join(("%d" % c) if c >= 0 else ("(%d)" % c)
+                                for c in cac_hs), tong))
+
+        ds_abcd = [(hoi_a, r"P(x) = %s" % _da_thuc(list(reversed(cac_hs))).strip("$"), giai_a),
+                   (hoi_b, "%d" % he_so_k, giai_b),
+                   (hoi_c, "%d" % tong, giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
