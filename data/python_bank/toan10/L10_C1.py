@@ -5392,11 +5392,14 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
 
             pt1 = A_list[idx1]
 
-            dapso = f"""$\\left\\{{ {pt1}, {ngoai} \\right\\}}$"""
+            # Viet theo thu tu tang dan, cach nhau boi dau ";" nhu tap A
+            nho, lon = sorted([pt1, ngoai])
+
+            dapso = f"""$\\left\\{{ {nho}; {lon} \\right\\}}$"""
 
             giai = (
                 f"Ta có ${ngoai} \\notin A$ nên "
-                f"$\\left\\{{ {pt1}, {ngoai} \\right\\}}$ không phải là tập con của $A$."
+                f"$\\left\\{{ {nho}; {lon} \\right\\}}$ không phải là tập con của $A$."
             )
 
         # =====================================================
@@ -5422,7 +5425,7 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
         if pt3 > pt4:
             pt3, pt4 = pt4, pt3
 
-        nhieu3 = f"""$\\left\\{{ {pt3}, {pt4} \\right\\}}$"""
+        nhieu3 = f"""$\\left\\{{ {pt3}; {pt4} \\right\\}}$"""
 
         dsnhieu = [nhieu1, nhieu2, nhieu3]
 
@@ -5440,7 +5443,11 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
         # TẠO ĐỀ
         # =====================================================
 
-        cach_hoi = np.random.randint(0, 4)
+        # SUA 29/09/2026 (co Lan bao loi): hai cach hoi cu "Tim phuong an sai
+        # trong cac khang dinh sau" / "phuong an nao khong dung?" lai dua ra
+        # cac TAP HOP tran (khong phai khang dinh) -> cau vo nghia. Nay ca
+        # 3 cach hoi deu hoi cung mot y: phuong an nao KHONG la tap con cua A.
+        cach_hoi = np.random.randint(0, 3)
 
         if cach_hoi == 0:
 
@@ -5462,14 +5469,7 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
 
             debai = (
                 f"""Cho tập hợp $A = {A_latex}$.\\\\
-                Tìm phương án sai trong các khẳng định sau."""
-            )
-
-        else:
-
-            debai = (
-                f"""Xét tập hợp $A = {A_latex}$.\\\\
-                Trong các phương án sau, phương án nào không đúng?"""
+                Tìm phương án \\textbf{{không}} phải là tập con của $A$."""
             )
 
         cauTN += MC_SA_answer_text(
@@ -5570,7 +5570,7 @@ def L10_C1_B2_NB017_MC_D_01(socau, dang=1):
                 a, b = b, a
 
             nhieu3 = (
-                f"$\\left\\{{ {a}, {b} \\right\\}}$"
+                f"$\\left\\{{ {a}; {b} \\right\\}}$"
             )
 
         else:
@@ -6468,7 +6468,7 @@ def L10_C1_B2_TH018_MC_B_01(socau, dang=1):
             giai_chi_tiet = (
                 f"Tập hợp ${tap1} \\setminus {tap2}$ gồm các phần tử thuộc "
                 f"${tap1}$ nhưng không thuộc ${tap2}$. Ta có "
-                f"${tap1} \\setminus {tap2}=\\left\\{{{', '.join(map(str, tap_kq_list))}\\right\\}}$."
+                f"${tap1} \\setminus {tap2}=\\left\\{{{'; '.join(map(str, tap_kq_list))}\\right\\}}$."
             )
 
         elif pheptoan_code == 1:
@@ -6478,7 +6478,7 @@ def L10_C1_B2_TH018_MC_B_01(socau, dang=1):
             giai_chi_tiet = (
                 f"Tập hợp ${tap2} \\setminus {tap1}$ gồm các phần tử thuộc "
                 f"${tap2}$ nhưng không thuộc ${tap1}$. Ta có "
-                f"${tap2} \\setminus {tap1}=\\left\\{{{', '.join(map(str, tap_kq_list))}\\right\\}}$."
+                f"${tap2} \\setminus {tap1}=\\left\\{{{'; '.join(map(str, tap_kq_list))}\\right\\}}$."
             )
 
         elif pheptoan_code == 2:
@@ -6488,7 +6488,7 @@ def L10_C1_B2_TH018_MC_B_01(socau, dang=1):
             giai_chi_tiet = (
                 f"Tập hợp ${tap1} \\cap {tap2}$ gồm các phần tử vừa thuộc "
                 f"${tap1}$ vừa thuộc ${tap2}$. Ta có "
-                f"${tap1} \\cap {tap2}=\\left\\{{{', '.join(map(str, tap_kq_list))}\\right\\}}$."
+                f"${tap1} \\cap {tap2}=\\left\\{{{'; '.join(map(str, tap_kq_list))}\\right\\}}$."
             )
 
         else:
@@ -6498,7 +6498,7 @@ def L10_C1_B2_TH018_MC_B_01(socau, dang=1):
             giai_chi_tiet = (
                 f"Tập hợp ${tap1} \\cup {tap2}$ gồm các phần tử thuộc "
                 f"${tap1}$ hoặc thuộc ${tap2}$. Ta có "
-                f"${tap1} \\cup {tap2}=\\left\\{{{', '.join(map(str, tap_kq_list))}\\right\\}}$."
+                f"${tap1} \\cup {tap2}=\\left\\{{{'; '.join(map(str, tap_kq_list))}\\right\\}}$."
             )
 
         A_tex = "\\left\\{" + "; ".join(map(str, A_list)) + "\\right\\}"

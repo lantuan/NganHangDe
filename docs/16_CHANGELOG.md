@@ -8679,3 +8679,25 @@ sinh de / AI tao de". 2953 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.36 - 2026-09-29
+
+## L10_C1_B2_NB017_MC_A_01: cau hoi vo nghia (co Lan bao)
+
+Ham co 4 cach hoi; 2 cach "Tim phuong an sai trong cac khang dinh sau" va
+"Trong cac phuong an sau, phuong an nao khong dung?" lai dua ra cac TAP
+HOP tran ({2}, {-10, 5}, rong, {-11}) - tap hop khong phai khang dinh nen
+cau khong co nghia. Nay ca 3 cach hoi deu cung mot y "phuong an nao
+KHONG la tap con cua A" (dung dang cua ID, dung dap an cu).
+
+Dau ngan cach phan tu: tap A in "; " nhung phuong an in ", " -> thong
+nhat "; " (dau phay la dau thap phan). Sua o NB017_MC_A_01 (tap 2 phan
+tu, xep tang dan), NB017_MC_D_01, TH018_MC_B_01 (loi giai). Quet ca ngan
+hang: khong con ham nao in tap liet ke bang dau phay.
+tests/test_tap_hop_dau_cham_phay.py. 2956 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
