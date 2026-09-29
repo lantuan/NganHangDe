@@ -827,6 +827,93 @@ def L10_C3_B6_VD036_SA_A_01(socau, dang=2):
     return cauTN
 
 
+
+_BOI_CANH_VAT_CAN = [
+    (r"Hai đầu $A$, $B$ của một đường hầm xuyên qua một ngọn núi không đo trực tiếp "
+     r"được. Từ một điểm $C$ ở chân núi, người ta đo được", r"chiều dài đường hầm $AB$"),
+    (r"Hai điểm $A$, $B$ nằm ở hai bên bờ một hồ nước. Từ một điểm $C$ trên bờ, người "
+     r"ta đo được", r"khoảng cách $AB$"),
+    (r"Một ngôi nhà che khuất tầm nhìn giữa hai cột điện $A$ và $B$. Từ vị trí $C$, "
+     r"một kĩ sư đo được", r"khoảng cách giữa hai cột điện"),
+]
+
+
+def L10_C3_B6_VD036_SA_A_02(socau, dang=2):
+    r"""Khoảng cách giữa hai địa điểm khi gặp vật cản (định lí côsin) - bối
+    cảnh đường hầm / hồ nước / nhà che khuất, đáp số nguyên (mét).
+
+    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (dam lay).
+    Co Lan duyet.
+    """
+    gt = []
+    while len(gt) < socau:
+        A = random.choice([60, 120])
+        b, c = random.choice(CAP_COSIN[A])
+        k = random.choice([10, 20, 30])            # phong to cho thuc te hon
+        if (A, b, c, k) in gt or (b + c) * k > 900:
+            continue
+        gt.append((A, b, c, k))
+    cau = ''
+    for A, b, c, k in gt:
+        B_, C_ = b * k, c * k
+        d2 = B_ * B_ + C_ * C_ + (-1 if A == 60 else 1) * B_ * C_
+        d = int(round(d2 ** 0.5))
+        mo, hoi = random.choice(_BOI_CANH_VAT_CAN)
+        debai = (mo + r" $CA = %d\,\text{m}$, $CB = %d\,\text{m}$ và $\widehat{ACB} = %s$. "
+                 r"Tính %s (đơn vị mét)." % (B_, C_, _goc(A), hoi))
+        giai = (r"Trong tam giác $ABC$, theo định lí côsin:\\ "
+                r"$AB^{2} = CA^{2} + CB^{2} - 2\cdot CA\cdot CB\cdot\cos %s "
+                r"= %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\left(%s\right) = %d$.\\ "
+                r"Suy ra $AB = %d\,\text{m}$."
+                % (_goc(A), B_, C_, B_, C_, r"\dfrac{1}{2}" if A == 60 else r"-\dfrac{1}{2}", d2, d))
+        ds = _ba_nhieu(str(d), [str(B_ + C_), str(abs(C_ - B_)),
+                                str(int(round((B_ * B_ + C_ * C_) ** 0.5)))],
+                       buoc=lambda t: str(d + 10 * t))
+        cau += MC_SA_answer_text(debai, str(d), ds, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_A_03(socau, dang=2):
+    r"""Khoảng cách tới một điểm KHÔNG TỚI ĐƯỢC (bên kia sông) bằng định lí
+    sin: biết đoạn $AC$ đo được và hai góc tại $A$, $C$; làm tròn đến hàng
+    phần mười.
+
+    CLAUDE THEM 29/09/2026 - bien the 03 (cung dang: khoang cach giua hai
+    dia diem khi gap vat can). Dap so toi da 4 ki tu. Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        d = random.randrange(20, 91, 5)
+        al = random.randrange(40, 86, 5)
+        ga = random.randrange(40, 86, 5)
+        if al + ga >= 150:
+            continue
+        ab = d * math.sin(math.radians(ga)) / math.sin(math.radians(al + ga))
+        kq = round(ab, 1)
+        if not 10 <= kq < 100 or (d, al, ga) in [g[:3] for g in gt]:
+            continue
+        gt.append((d, al, ga, kq))
+    cau = ''
+    for d, al, ga, kq in gt:
+        be = 180 - al - ga
+        dap = _xx(kq, 1)
+        debai = (r"Để đo khoảng cách từ điểm $A$ trên bờ sông đến gốc cây $B$ ở bờ bên kia, "
+                 r"người ta chọn điểm $C$ cùng bờ với $A$ và đo được $AC = %d\,\text{m}$, "
+                 r"$\widehat{BAC} = %s$, $\widehat{BCA} = %s$. Tính khoảng cách $AB$ (đơn vị "
+                 r"mét, làm tròn đến hàng phần mười)." % (d, _goc(al), _goc(ga)))
+        giai = (r"Trong tam giác $ABC$: $\widehat{ABC} = 180^{\circ} - %s - %s = %s$.\\ "
+                r"Theo định lí sin: $\dfrac{AB}{\sin C} = \dfrac{AC}{\sin B}$ nên\\ "
+                r"$AB = \dfrac{AC\cdot\sin C}{\sin B} = \dfrac{%d\cdot\sin %s}{\sin %s} "
+                r"\approx %s\,\text{m}$." % (_goc(al), _goc(ga), _goc(be), d, _goc(ga), _goc(be), dap))
+        sai1 = _xx(round(d * math.sin(math.radians(al)) / math.sin(math.radians(al + ga)), 1), 1)
+        sai2 = _xx(round(d * math.sin(math.radians(ga)) / math.sin(math.radians(al)), 1), 1)
+        ds = _ba_nhieu(dap, [sai1, sai2], buoc=lambda t: _xx(kq + t, 1))
+        cau += MC_SA_answer_text(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
 # =====================================================================
 # CÁC DẠNG CHUYỂN TỪ TỆP 10-3.py CỦA CÔ LAN (27/09/2026)
 # ---------------------------------------------------------------------
@@ -2314,6 +2401,109 @@ def L10_C3_B6_VD036_SA_B_01(socau, dang=2):
         cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
     return cauTN
 
+
+
+def L10_C3_B6_VD036_SA_B_02(socau, dang=2):
+    r"""Diện tích mảnh đất tam giác khi đo được HAI CẠNH và GÓC XEN GIỮA
+    ($S = \dfrac{1}{2}ab\sin C$).
+
+    CLAUDE THEM 29/09/2026 - bien the 02 (cung dang: dien tich manh dat tam
+    giac; _01 dung Heron). Goc 30 / 150 do cho dap so nguyen; goc 45, 60,
+    120, 135 do lam tron den hang phan muoi. Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        C = random.choice([30, 150, 45, 60, 120, 135])
+        a, b = random.randint(5, 40), random.randint(5, 40)
+        S = 0.5 * a * b * math.sin(math.radians(C))
+        if C in (30, 150):
+            if (a * b) % 4 or S > 9999:
+                continue
+            dap = str(int(round(S)))
+            lam_tron = ""
+        else:
+            S = round(S, 1)
+            if S >= 100 or S < 10:
+                continue
+            dap = _xx(S, 1)
+            lam_tron = ", làm tròn đến hàng phần mười"
+        if (a, b, C) in [g[:3] for g in gt]:
+            continue
+        gt.append((a, b, C, dap, lam_tron))
+    ten = [("mảnh vườn", "mảnh vườn"), ("thửa ruộng", "thửa ruộng"), ("khu đất", "khu đất")]
+    cau = ''
+    for a, b, C, dap, lam_tron in gt:
+        t1, t2 = random.choice(ten)
+        sin_tex = {30: r"\dfrac{1}{2}", 150: r"\dfrac{1}{2}", 45: r"\dfrac{\sqrt{2}}{2}",
+                   135: r"\dfrac{\sqrt{2}}{2}", 60: r"\dfrac{\sqrt{3}}{2}",
+                   120: r"\dfrac{\sqrt{3}}{2}"}[C]
+        debai = (r"Một %s hình tam giác $ABC$ có $CA = %d\,\text{m}$, $CB = %d\,\text{m}$ và "
+                 r"$\widehat{ACB} = %s$. Tính diện tích %s (đơn vị $\text{m}^{2}$%s)."
+                 % (t1, a, b, _goc(C), t2, lam_tron))
+        giai = (r"$S = \dfrac{1}{2}\cdot CA\cdot CB\cdot\sin\widehat{ACB} = \dfrac{1}{2}\cdot %d\cdot %d"
+                r"\cdot %s %s %s\,\text{(m}^{2}\text{)}$."
+                % (a, b, sin_tex, "=" if not lam_tron else r"\approx", dap))
+        ds = _ba_nhieu(dap, [str(a * b // 2) if (a * b) % 2 == 0 else str(a * b), str(a * b)],
+                       buoc=lambda t: str(int(float(dap.replace(",", "."))) + 2 * t + 1))
+        cau += MC_SA_answer_text(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
+def _cap_heron_chung_canh():
+    """Hai tam giác Heron có chung một cạnh (làm đường chéo tứ giác)."""
+    theo_canh = {}
+    for t in BANG_HERON:
+        for k in range(3):
+            theo_canh.setdefault(t[k], []).append(t)
+    ung = [(c, ds) for c, ds in theo_canh.items() if len(ds) >= 2]
+    c, ds = random.choice(ung)
+    t1, t2 = random.sample(ds, 2)
+    return c, t1, t2
+
+
+def L10_C3_B6_VD036_SA_B_03(socau, dang=2):
+    r"""Diện tích mảnh đất hình TỨ GIÁC khi đo được bốn cạnh và một đường chéo:
+    chia thành hai tam giác, dùng Heron hai lần rồi cộng lại.
+
+    CLAUDE THEM 29/09/2026 - bien the 03 (cung dang Heron cho manh dat).
+    Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        c, t1, t2 = _cap_heron_chung_canh()
+        if t1[3] + t2[3] > 9999 or (c, t1, t2) in gt:
+            continue
+        gt.append((c, t1, t2))
+    cau = ''
+    for c, t1, t2 in gt:
+        a1 = [x for x in t1[:3]]
+        a1.remove(c)
+        a2 = [x for x in t2[:3]]
+        a2.remove(c)
+        AB, BC = a1
+        CD, DA = a2
+        S = t1[3] + t2[3]
+        debai = (r"Một mảnh đất hình tứ giác $ABCD$ có $AB = %d\,\text{m}$, $BC = %d\,\text{m}$, "
+                 r"$CD = %d\,\text{m}$, $DA = %d\,\text{m}$ và đường chéo $AC = %d\,\text{m}$ "
+                 r"(hai điểm $B$, $D$ nằm khác phía đối với $AC$). Tính diện tích mảnh đất "
+                 r"(đơn vị $\text{m}^{2}$)." % (AB, BC, CD, DA, c))
+        giai = (r"Đường chéo $AC$ chia mảnh đất thành hai tam giác $ABC$ và $ACD$.\\ "
+                r"Tam giác $ABC$: $p = \dfrac{%d + %d + %d}{2} = %d$, "
+                r"$S_1 = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$.\\ "
+                r"Tam giác $ACD$: $p = \dfrac{%d + %d + %d}{2} = %d$, "
+                r"$S_2 = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$.\\ "
+                r"Diện tích mảnh đất: $S = S_1 + S_2 = %d + %d = %d\,\text{(m}^{2}\text{)}$."
+                % (AB, BC, c, t1[4], t1[4], t1[4] - AB, t1[4] - BC, t1[4] - c, t1[3],
+                   CD, DA, c, t2[4], t2[4], t2[4] - CD, t2[4] - DA, t2[4] - c, t2[3],
+                   t1[3], t2[3], S))
+        ds = _ba_nhieu(str(S), [str(t1[3]), str(t2[3]), str(2 * S)],
+                       buoc=lambda t: str(S + 3 * t + 1))
+        cau += MC_SA_answer_text(debai, str(S), ds, giai, 0, 0, dang)
+    return cau
 
 def L10_C3_B6_VD036_TL_C_01(socau, dong=1):
     """Tự luận thực tế: đo hai cạnh và góc xen giữa của một khu đất."""

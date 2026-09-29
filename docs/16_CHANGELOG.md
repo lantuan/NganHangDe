@@ -8987,3 +8987,14 @@ chua sua, cho co quyet.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+## Bien the dot 2 (tiep) - chuong 3 (VD036 tra loi ngan)
+
+Chuong 3 he so 1 co dung hai cau tra loi ngan VD nen VD036_SA_A va SA_B co
+mat 100% de:
+  VD036_SA_A  _02 dinh li cosin, boi canh duong ham / ho nuoc / nha che
+              khuat (so do x10, x20, x30); _03 dinh li sin: diem ben kia song,
+              biet AC va hai goc, lam tron hang phan muoi (toi da 4 ki tu).
+  VD036_SA_B  _02 hai canh va goc xen giua (goc 30/150 -> so nguyen, goc
+              45/60/120/135 -> lam tron); _03 manh dat TU GIAC: duong cheo
+              chia hai tam giac Heron, cong hai dien tich.
