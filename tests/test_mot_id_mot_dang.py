@@ -46,6 +46,12 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C4_B11_TH057_MC_A",  # khong chung diem dau: tam giac deu / hinh vuong
     "L10_C4_B11_TH057_MC_B",  # chung diem cuoi: tam giac deu / hinh vuong
     "L10_C5_B14_NB085_MC_A",  # khang dinh dung / khang dinh sai / tinh huong can thong ke
+    "L10_C1_B1_VD014_MC_A",   # tham so k: voi moi x dung / ton tai x dung / voi moi x sai
+    "L10_C1_B1_VD014_SA_A",   # nhu MC_A, tra loi ngan
+    "L10_C1_B1_VD014_TL_A",   # keo theo + menh de dao: chia het / hinh hoc / so thuc
+    "L10_C2_B4_VD028_MC_A",   # GTLN-NN tu he / diem dat GTLN / mien cho bang hinh
+    "L10_C2_B4_VD028_SA_A",   # GTLN tu he / tu hinh / GTNN mien khong bi chan
+    "L10_C2_B4_VD028_TL_A",   # cho san he / tu lap he (lai lon nhat) / chi phi nho nhat
 }
 
 

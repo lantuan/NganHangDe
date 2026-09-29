@@ -2459,6 +2459,310 @@ def L10_C2_B4_VD028_TL_A_01(socau, dong=1):
     return cauTN
 
 
+# ---------------------------------------------------------------------
+# CLAUDE THEM 29/09/2026 - bien the _02, _03 cho VD028 (MC_A, SA_A, TL_A).
+# Co Lan duyet.
+# ---------------------------------------------------------------------
+
+def _hinh_mien_da_giac(dinh, ghi_dinh=True):
+    r"""Hình vẽ miền nghiệm là đa giác (tô đậm) trên hệ trục Oxy, có lưới và
+    ghi toạ độ các đỉnh. dinh: danh sách đỉnh NGUYÊN theo thứ tự vòng."""
+    xm = max(x for x, _y in dinh) + 1
+    ym = max(y for _x, y in dinh) + 1
+    tl = 0.45 if max(xm, ym) > 10 else 0.6
+    duong = " -- ".join("(%d,%d)" % d for d in dinh) + " -- cycle"
+    nhan = ""
+    if ghi_dinh:
+        for X, Y in dinh:
+            if (X, Y) == (0, 0):
+                continue
+            vt = "above right" if X > 0 and Y > 0 else ("below" if Y == 0 else "left")
+            nhan += ("\\fill (%d,%d) circle[radius=2pt] node[%s]{\\scriptsize $\\left(%d;%d\\right)$};\n"
+                     % (X, Y, vt, X, Y))
+    return (
+        "\\begin{tikzpicture}[scale=%s,>=stealth]\n" % tl +
+        "\\draw[gray!40,very thin] (0,0) grid (%d,%d);\n" % (xm, ym) +
+        "\\fill[gray!35] %s;\n" % duong +
+        "\\draw[thick] %s;\n" % duong +
+        "\\draw[->] (-0.5,0) -- (%s,0) node[below right]{$x$};\n" % (xm + 0.6) +
+        "\\draw[->] (0,-0.5) -- (0,%s) node[above left]{$y$};\n" % (ym + 0.6) +
+        "\\node[below left] at (0,0) {\\scriptsize $O$};\n" + nhan +
+        "\\end{tikzpicture}")
+
+
+def _F_tex(p, q):
+    return _bt((p, "x"), (q, "y"))
+
+
+def _bang_F(dinh, p, q):
+    return r"\\ ".join(r"$F\left(%d; %d\right) = %d$" % (X, Y, p * X + q * Y) for X, Y in dinh)
+
+
+def L10_C2_B4_VD028_MC_A_02(socau, dang=1):
+    r"""Tìm ĐIỂM mà tại đó F = ax + by đạt giá trị lớn nhất trên miền đa giác
+    (hỏi toạ độ điểm, không hỏi giá trị)."""
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        m, n, u, v, bpt1, bpt2, dinh = _mien_tu_giac()
+        p, q = _rd.randint(1, 9), _rd.randint(1, 9)
+        gtri = [p * X + q * Y for X, Y in dinh]
+        if gtri.count(max(gtri)) != 1:
+            continue
+        gt.append((bpt1, bpt2, dinh, p, q))
+    cauTN = ''
+    for (a1, b1, c1), (a2, b2, c2), dinh, p, q in gt:
+        gtri = [p * X + q * Y for X, Y in dinh]
+        dinh_lon = dinh[gtri.index(max(gtri))]
+        dung = r"$\left(%d; %d\right)$" % dinh_lon
+        nhieu = [r"$\left(%d; %d\right)$" % d for d in dinh if d != dinh_lon]
+        debai = (r"Biểu thức $F\left(x; y\right) = %s$, với $\left(x; y\right)$ thuộc miền "
+                 r"nghiệm của hệ $\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}$, đạt giá trị "
+                 r"lớn nhất tại điểm nào sau đây?"
+                 % (_F_tex(p, q), _bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2)))
+        giai = (r"Miền nghiệm là tứ giác có các đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
+                r"$\left(%d;%d\right)$, $\left(0;%d\right)$ (giao của các đường bờ)."
+                % (dinh[1][0], dinh[2][0], dinh[2][1], dinh[3][1]) +
+                "\\\\\n" + r"$F$ đạt giá trị lớn nhất tại một đỉnh; tính $F$ tại các đỉnh:\\ " +
+                _bang_F(dinh, p, q) + "." + "\\\\\n" +
+                r"Giá trị lớn nhất là $%d$, đạt tại $\left(%d; %d\right)$." % (max(gtri), dinh_lon[0], dinh_lon[1]))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def _chon_F_co_dau(dinh, hoi_lon):
+    """Hệ số p, q (có thể âm) để GTLN hoặc GTNN đạt tại DUY NHẤT một đỉnh."""
+    while True:
+        p = _rd.choice([k for k in range(-6, 7) if k])
+        q = _rd.choice([k for k in range(-6, 7) if k])
+        g = [p * X + q * Y for X, Y in dinh]
+        t = max(g) if hoi_lon else min(g)
+        # duy nhat mot dinh, va khong phai goc O (dat tai O thi qua de)
+        if g.count(t) == 1 and dinh[g.index(t)] != (0, 0):
+            return p, q, t
+
+
+def L10_C2_B4_VD028_MC_A_03(socau, dang=1):
+    r"""GTLN/GTNN của F = ax + by trên miền đa giác cho bằng HÌNH VẼ."""
+    cauTN = ''
+    for _ in range(socau):
+        m, n, u, v, _b1, _b2, dinh = _mien_tu_giac()
+        hoi_lon = _rd.random() < 0.5
+        p, q, t = _chon_F_co_dau(dinh, hoi_lon)
+        ten = "lớn nhất" if hoi_lon else "nhỏ nhất"
+        hinh = _hinh_mien_da_giac(dinh)
+        gtri = [p * X + q * Y for X, Y in dinh]
+        dung = "$%d$" % t
+        khac = [g for g in dict.fromkeys(gtri) if g != t]
+        nhieu = _ba_nhieu2(dung, ["$%d$" % g for g in khac] + ["$%d$" % (-t)],
+                           buoc=lambda k: "$%d$" % (t + k + 1))
+        debai = (r"Miền đa giác tô đậm trong hình vẽ (kể cả biên) là miền nghiệm của một "
+                 r"hệ bất phương trình bậc nhất hai ẩn. Giá trị %s của biểu thức "
+                 r"$F\left(x; y\right) = %s$ trên miền đó bằng" % (ten, _F_tex(p, q)))
+        giai = (r"Đọc trên hình, miền nghiệm là tứ giác có bốn đỉnh $\left(0;0\right)$, "
+                r"$\left(%d;0\right)$, $\left(%d;%d\right)$, $\left(0;%d\right)$." % (m, u, v, n) +
+                "\\\\\n" + r"$F$ đạt giá trị %s tại một đỉnh:\\ " % ten + _bang_F(dinh, p, q) +
+                "." + "\\\\\n" + r"Vậy giá trị %s của $F$ bằng $%d$." % (ten, t))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, hinh, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_VD028_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn: GTLN của F trên miền đa giác cho bằng HÌNH VẼ."""
+    cau = ''
+    for _ in range(socau):
+        m, n, u, v, _b1, _b2, dinh = _mien_tu_giac()
+        p, q, t = _chon_F_co_dau(dinh, True)
+        hinh = _hinh_mien_da_giac(dinh)
+        debai = (r"Miền tứ giác tô đậm trong hình vẽ (kể cả biên) là miền nghiệm của một "
+                 r"hệ bất phương trình bậc nhất hai ẩn. Tìm giá trị lớn nhất của biểu thức "
+                 r"$F\left(x; y\right) = %s$ trên miền đó." % _F_tex(p, q))
+        giai = (r"Các đỉnh của miền: $\left(0;0\right)$, $\left(%d;0\right)$, "
+                r"$\left(%d;%d\right)$, $\left(0;%d\right)$." % (m, u, v, n) +
+                "\\\\\n" + _bang_F(dinh, p, q) + "." + "\\\\\n" +
+                r"Giá trị lớn nhất của $F$ là $%d$." % t)
+        nhieu = [str(t + 1), str(t - 1), str(t + 2)]
+        cau += MC_SA_answer_text(debai, str(t), nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+def _mien_khong_bi_chan():
+    r"""Miền $x \ge 0$, $y \ge 0$, $a_1x + b_1y \ge c_1$, $a_2x + b_2y \ge c_2$ (không bị
+    chặn) có ba đỉnh NGUYÊN $(0;N)$, $(u;v)$, $(M;0)$.
+
+    Đường 1 qua $(0;N)$ và $(u;v)$: $(N - v)x + uy = uN$.
+    Đường 2 qua $(u;v)$ và $(M;0)$: $vx + (M - u)y = vM$.
+    Cần $(N - v)(M - u) > uv$ để $(u;v)$ thật sự là đỉnh.
+    """
+    while True:
+        u, v = _rd.randint(1, 6), _rd.randint(1, 6)
+        N = _rd.randint(v + 2, v + 10)
+        M = _rd.randint(u + 2, u + 10)
+        if (N - v) * (M - u) <= u * v:
+            continue
+        l1 = (N - v, u, u * N)
+        l2 = (v, M - u, v * M)
+        g1, g2 = _math.gcd(_math.gcd(*l1[:2]), l1[2]), _math.gcd(_math.gcd(*l2[:2]), l2[2])
+        l1 = tuple(k // g1 for k in l1)
+        l2 = tuple(k // g2 for k in l2)
+        return (0, N), (u, v), (M, 0), l1, l2
+
+
+def _bpt_ge_tex(a, b, c):
+    return _bpt_tex(a, b, c).replace(r"\le", r"\ge")
+
+
+def L10_C2_B4_VD028_SA_A_03(socau, dang=2):
+    r"""Trả lời ngắn: GTNN của F = px + qy (p, q > 0) trên miền KHÔNG BỊ CHẶN
+    $x \ge 0$, $y \ge 0$, $a_1x + b_1y \ge c_1$, $a_2x + b_2y \ge c_2$."""
+    cau = ''
+    lan = 0
+    dem = 0
+    while dem < socau and lan < 300:
+        lan += 1
+        R, Q, P, l1, l2 = _mien_khong_bi_chan()
+        p, q = _rd.randint(1, 9), _rd.randint(1, 9)
+        dinh = [R, Q, P]
+        g = [p * X + q * Y for X, Y in dinh]
+        t = min(g)
+        if g.count(t) != 1:
+            continue
+        dem += 1
+        debai = (r"Cho hệ bất phương trình $\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}$. "
+                 r"Tìm giá trị nhỏ nhất của biểu thức $F\left(x; y\right) = %s$ trên miền "
+                 r"nghiệm của hệ." % (_bpt_ge_tex(*l1), _bpt_ge_tex(*l2), _F_tex(p, q)))
+        giai = (r"Miền nghiệm không bị chặn, có các đỉnh $\left(0;%d\right)$, "
+                r"$\left(%d;%d\right)$, $\left(%d;0\right)$." % (R[1], Q[0], Q[1], P[0]) +
+                "\\\\\n" +
+                r"Vì hệ số của $x$, $y$ trong $F$ đều dương nên $F$ càng lớn khi đi ra xa; "
+                r"giá trị nhỏ nhất đạt tại một đỉnh:\\ " + _bang_F(dinh, p, q) + "." +
+                "\\\\\n" + r"Vậy giá trị nhỏ nhất của $F$ là $%d$." % t)
+        nhieu = _ba_nhieu2(str(t), [str(x) for x in g if x != t] + [str(t + 1)],
+                           buoc=lambda k: str(t + k + 1))
+        cau += MC_SA_answer_text(debai, str(t), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+_BOI_CANH_SAN_XUAT = [
+    ("Một xưởng may làm hai loại áo: áo sơ mi và áo khoác. May một áo sơ mi cần "
+     "{a1} mét vải và {a2} giờ công, may một áo khoác cần {b1} mét vải và {b2} giờ "
+     "công. Mỗi ngày xưởng có không quá {c1} mét vải và {c2} giờ công. Mỗi áo sơ mi "
+     "lãi {p} nghìn đồng, mỗi áo khoác lãi {q} nghìn đồng.",
+     "áo sơ mi", "áo khoác", "mét vải", "giờ công", "nghìn đồng"),
+    ("Một bác nông dân trồng ngô và khoai trên một khu đất. Mỗi sào ngô cần {a1} "
+     "ngày công và {a2} bao phân, mỗi sào khoai cần {b1} ngày công và {b2} bao phân. "
+     "Bác có không quá {c1} ngày công và {c2} bao phân. Mỗi sào ngô lãi {p} trăm "
+     "nghìn đồng, mỗi sào khoai lãi {q} trăm nghìn đồng.",
+     "sào ngô", "sào khoai", "ngày công", "bao phân", "trăm nghìn đồng"),
+    ("Một tiệm bánh làm hai loại bánh: bánh mặn và bánh ngọt. Mỗi mẻ bánh mặn cần "
+     "{a1} kg bột và {a2} giờ nướng, mỗi mẻ bánh ngọt cần {b1} kg bột và {b2} giờ "
+     "nướng. Mỗi ngày tiệm có không quá {c1} kg bột và {c2} giờ nướng. Mỗi mẻ bánh "
+     "mặn lãi {p} chục nghìn đồng, mỗi mẻ bánh ngọt lãi {q} chục nghìn đồng.",
+     "mẻ bánh mặn", "mẻ bánh ngọt", "kg bột", "giờ nướng", "chục nghìn đồng"),
+]
+
+
+def L10_C2_B4_VD028_TL_A_02(socau, dong=1):
+    r"""Tự luận: bài toán tối ưu thực tiễn - học sinh PHẢI TỰ LẬP hệ bất
+    phương trình từ bối cảnh (sản xuất, trồng trọt, làm bánh), rồi tìm
+    phương án lãi lớn nhất. (_01 cho sẵn hệ.)"""
+    cauTN = ''
+    dem, lan = 0, 0
+    while dem < socau and lan < 500:
+        lan += 1
+        m, n, u, v, (A1, B1, C1), (A2, B2, C2), dinh = _mien_tu_giac()
+        # bpt1: A1 x + B1 y <= C1 ; bpt2: A2 x + B2 y <= C2 -> tai nguyen 1, 2
+        p, q = _rd.randint(2, 9), _rd.randint(2, 9)
+        g = [p * X + q * Y for X, Y in dinh]
+        if g.count(max(g)) != 1 or max(A1, B1, A2, B2) > 9:
+            continue
+        dem += 1
+        bc = _rd.choice(_BOI_CANH_SAN_XUAT)
+        de = bc[0].format(a1=A1, a2=A2, b1=B1, b2=B2, c1=C1, c2=C2, p=p, q=q)
+        de = re.sub(r"(\d+)", r"$\1$", de)
+        lon = max(g)
+        dl = dinh[g.index(lon)]
+        debai = (de + r" Gọi $x$, $y$ lần lượt là số %s và số %s." % (bc[1], bc[2]))
+        he = (r"\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}"
+              % (_bpt_tex(A1, B1, C1), _bpt_tex(A2, B2, C2)))
+        ds_abcd = [
+            (r"Lập hệ bất phương trình mô tả các điều kiện của bài toán.",
+             he,
+             r"Số %s và số %s không âm: $x \ge 0$, $y \ge 0$.\\ " % (bc[1], bc[2]) +
+             r"Số %s cần dùng: $%s \le %d$.\\ " % (bc[3], _bt((A1, "x"), (B1, "y")), C1) +
+             r"Số %s cần dùng: $%s \le %d$.\\ " % (bc[4], _bt((A2, "x"), (B2, "y")), C2) +
+             r"Ta được hệ $%s$." % he),
+            (r"Tìm phương án để tiền lãi lớn nhất.",
+             r"\left(%d; %d\right)" % dl,
+             r"Tiền lãi $F\left(x; y\right) = %s$. Miền nghiệm của hệ là tứ giác có các đỉnh "
+             r"$\left(0;0\right)$, $\left(%d;0\right)$, $\left(%d;%d\right)$, $\left(0;%d\right)$."
+             % (_F_tex(p, q), m, u, v, n) + "\\\\\n" +
+             r"$F$ đạt giá trị lớn nhất tại một đỉnh:\\ " + _bang_F(dinh, p, q) + "." + "\\\\\n" +
+             r"Vậy cần làm $%d$ %s và $%d$ %s, tiền lãi lớn nhất là $%d$ %s."
+             % (dl[0], bc[1], dl[1], bc[2], lon, bc[5])),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+_BOI_CANH_CHI_PHI = [
+    ("Một trại chăn nuôi trộn hai loại thức ăn I và II cho gà. Mỗi kg thức ăn I chứa "
+     "{a1} đơn vị đạm và {a2} đơn vị khoáng, mỗi kg thức ăn II chứa {b1} đơn vị đạm "
+     "và {b2} đơn vị khoáng. Mỗi ngày đàn gà cần ít nhất {c1} đơn vị đạm và {c2} đơn "
+     "vị khoáng. Giá mỗi kg thức ăn I là {p} nghìn đồng, thức ăn II là {q} nghìn đồng.",
+     "kg thức ăn I", "kg thức ăn II", "đơn vị đạm", "đơn vị khoáng"),
+    ("Một bếp ăn cần mua hai loại rau A và B. Mỗi kg rau A cung cấp {a1} đơn vị "
+     "vitamin C và {a2} đơn vị chất xơ, mỗi kg rau B cung cấp {b1} đơn vị vitamin C và "
+     "{b2} đơn vị chất xơ. Mỗi bữa cần ít nhất {c1} đơn vị vitamin C và {c2} đơn vị "
+     "chất xơ. Giá mỗi kg rau A là {p} nghìn đồng, rau B là {q} nghìn đồng.",
+     "kg rau A", "kg rau B", "đơn vị vitamin C", "đơn vị chất xơ"),
+]
+
+
+def L10_C2_B4_VD028_TL_A_03(socau, dong=1):
+    r"""Tự luận: bài toán CHI PHÍ NHỎ NHẤT (điều kiện ``ít nhất'' - miền không
+    bị chặn): lập hệ bất phương trình rồi tìm phương án rẻ nhất."""
+    cauTN = ''
+    dem, lan = 0, 0
+    while dem < socau and lan < 500:
+        lan += 1
+        R, Q, P, (A1, B1, C1), (A2, B2, C2) = _mien_khong_bi_chan()
+        if max(A1, B1, A2, B2) > 9:
+            continue
+        p, q = _rd.randint(10, 40), _rd.randint(10, 40)
+        dinh = [R, Q, P]
+        g = [p * X + q * Y for X, Y in dinh]
+        if g.count(min(g)) != 1:
+            continue
+        dem += 1
+        bc = _rd.choice(_BOI_CANH_CHI_PHI)
+        de = bc[0].format(a1=A1, b1=B1, a2=A2, b2=B2, c1=C1, c2=C2, p=p, q=q)
+        de = re.sub(r"(\d+)", r"$\1$", de)
+        nho = min(g)
+        dn = dinh[g.index(nho)]
+        he = (r"\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}"
+              % (_bpt_ge_tex(A1, B1, C1), _bpt_ge_tex(A2, B2, C2)))
+        debai = de + r" Gọi $x$, $y$ lần lượt là số %s và số %s cần mua." % (bc[1], bc[2])
+        ds_abcd = [
+            (r"Lập hệ bất phương trình mô tả các điều kiện của bài toán.", he,
+             r"$x \ge 0$, $y \ge 0$; tổng số %s: $%s \ge %d$; tổng số %s: $%s \ge %d$.\\ "
+             % (bc[3], _bt((A1, "x"), (B1, "y")), C1, bc[4], _bt((A2, "x"), (B2, "y")), C2) +
+             r"Ta được hệ $%s$." % he),
+            (r"Cần mua bao nhiêu mỗi loại để chi phí nhỏ nhất? Tính chi phí đó.",
+             r"%d" % nho,
+             r"Chi phí $F\left(x; y\right) = %s$ (nghìn đồng). Miền nghiệm không bị chặn, có "
+             r"các đỉnh $\left(0;%d\right)$, $\left(%d;%d\right)$, $\left(%d;0\right)$."
+             % (_F_tex(p, q), R[1], Q[0], Q[1], P[0]) + "\\\\\n" +
+             r"Hệ số của $x$, $y$ đều dương nên $F$ nhỏ nhất tại một đỉnh:\\ " +
+             _bang_F(dinh, p, q) + "." + "\\\\\n" +
+             r"Vậy mua $%d$ %s và $%d$ %s, chi phí nhỏ nhất là $%d$ nghìn đồng."
+             % (dn[0], bc[1], dn[1], bc[2], nho)),
+        ]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
 def L10_C2_TF_A_01(socau, socot=1):
     """Đúng/Sai - bất phương trình bậc nhất hai ẩn."""
     cauTF = ''

@@ -7399,6 +7399,116 @@ def L10_C1_B1_VD014_SA_A_01(socau, dang = 2):
     return cauTN
 
 
+def _vd014_bien_the(kieu, a, dau, i_left, i_right, k_min_val, k_max_val):
+    r"""Biến thể 02/03 của VD014_MC_A / SA_A (CLAUDE THEM 29/09/2026).
+
+    kieu = "ton_tai": mệnh đề "tồn tại x thuộc R, f(x) (dấu) 0" ĐÚNG.
+    kieu = "moi_sai": mệnh đề "với mọi x thuộc R, f(x) (dấu) 0" SAI
+                      (tức mệnh đề phủ định của nó đúng).
+    Hệ số x^2 chọn theo dấu để bài không tầm thường:
+      ton_tai: dấu <, <= đi với x^2 - 2ax + k ; dấu >, >= đi với -x^2 + 2ax + k
+      moi_sai: dấu >, >= đi với x^2 - 2ax + k ; dấu <, <= đi với -x^2 + 2ax + k
+    """
+    k_lower = k_min_val if i_left == '[' else k_min_val + 1
+    k_upper = k_max_val if i_right == ']' else k_max_val - 1
+    khoang = r"\left%s%d;\ %d\right%s" % (i_left, k_min_val, k_max_val, i_right)
+    a2 = a ** 2
+    nho = dau in ('<', r'\leq')
+    duong = (kieu == "ton_tai") == nho          # he so x^2 duong?
+    bt = (r"x^2 - %dx + k" if duong else r"-x^2 + %dx + k") % (2 * a)
+    ghep = r"\left(x - %d\right)^2 + k - %d" % (a, a2) if duong else \
+        r"-\left(x - %d\right)^2 + k + %d" % (a, a2)
+    cuc = r"k - %d" % a2 if duong else r"k + %d" % a2
+    ten_cuc = "nhỏ nhất" if duong else "lớn nhất"
+    # gia tri cuc tri cua f la  k - a^2 (duong)  hoac  k + a^2 (am)
+    if kieu == "ton_tai":
+        # ton tai x: f(x) dau 0  <=>  cuc tri dau 0 (min khi f<.., max khi f>..)
+        dau_k = dau
+        cau_hoi = r"mệnh đề ``$\exists x \in \mathbb{R},\ %s %s 0$'' là mệnh đề đúng" % (bt, dau)
+        ly_do = (r"Ta có $%s = %s$ nên giá trị %s của vế trái là $%s$ (khi $x = %d$)."
+                 % (bt, ghep, ten_cuc, cuc, a) + "\\\\\n" +
+                 r"Tồn tại $x$ để $%s %s 0$ khi và chỉ khi giá trị %s ấy $%s 0$, "
+                 r"tức là $%s %s 0$." % (bt, dau, ten_cuc, dau, cuc, dau))
+    else:
+        # voi moi x: f(x) dau 0 SAI <=> ton tai x: f(x) (dau phu dinh) 0
+        phu = {'>': r'\leq', r'\geq': '<', '<': r'\geq', r'\leq': '>'}[dau]
+        dau_k = phu
+        cau_hoi = (r"mệnh đề ``$\forall x \in \mathbb{R},\ %s %s 0$'' là mệnh đề \textbf{sai}"
+                   % (bt, dau))
+        ly_do = (r"Mệnh đề ``$\forall x \in \mathbb{R},\ %s %s 0$'' sai khi và chỉ khi mệnh đề "
+                 r"phủ định ``$\exists x \in \mathbb{R},\ %s %s 0$'' đúng." % (bt, dau, bt, phu) +
+                 "\\\\\n" +
+                 r"Ta có $%s = %s$ nên giá trị %s của vế trái là $%s$ (khi $x = %d$)."
+                 % (bt, ghep, ten_cuc, cuc, a) + "\\\\\n" +
+                 r"Do đó điều kiện là $%s %s 0$." % (cuc, phu))
+    # giai bat phuong trinh cuc_tri (dau_k) 0 theo k
+    nguong = a2 if duong else -a2               # cuc = k - nguong
+    if dau_k == '<':
+        k_dau, k_cuoi, dk = k_lower, min(k_upper, nguong - 1), r"k < %d" % nguong
+    elif dau_k == r'\leq':
+        k_dau, k_cuoi, dk = k_lower, min(k_upper, nguong), r"k \leq %d" % nguong
+    elif dau_k == '>':
+        k_dau, k_cuoi, dk = max(k_lower, nguong + 1), k_upper, r"k > %d" % nguong
+    else:
+        k_dau, k_cuoi, dk = max(k_lower, nguong), k_upper, r"k \geq %d" % nguong
+    dem = max(0, k_cuoi - k_dau + 1)
+    debai = (r"Có tất cả bao nhiêu giá trị nguyên của tham số $k$ thuộc $%s$ để %s?"
+             % (khoang, cau_hoi))
+    giai = (ly_do.rstrip(".") + r" $\Leftrightarrow %s$." % dk + "\\\\\n" +
+            r"Kết hợp với $k \in %s$ và $k$ nguyên: $k \in \left\{%d; %d; \ldots; %d\right\}$."
+            % (khoang, k_dau, k_dau + 1, k_cuoi) + "\\\\\n" +
+            r"Số giá trị nguyên của $k$ là $%d - %s + 1 = %d$."
+            % (k_cuoi, (r"\left(%d\right)" % k_dau) if k_dau < 0 else str(k_dau), dem))
+    return debai, dem, giai
+
+
+def _vd014_bien_the_cau(kieu, socau, dang, ham_ra):
+    nam = datetime.datetime.now().year
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        v = (random.randint(1, 39), random.choice(['<', '>', r'\geq', r'\leq']),
+             random.choice(['(', '[']), random.choice([')', ']']))
+        if v not in gt:
+            gt.append(v)
+    cau = ''
+    for a, dau, tr, ph in gt:
+        debai, dem, giai = _vd014_bien_the(kieu, a, dau, tr, ph, -nam, nam + 1)
+        dap = str(dem)
+        nhieu = [x for x in dict.fromkeys([str(dem + 1), str(max(0, dem - 1)), str(dem + 2),
+                                            str(max(0, dem - 2))]) if x != dap][:3]
+        cau += ham_ra(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_MC_A_02(socau, dang=1):
+    r"""Mệnh đề chứa biến có lượng từ TỒN TẠI: đếm k để mệnh đề đúng.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 (cung dang "Menh de chua bien":
+    tim tham so de menh de co luong tu dung/sai). Co Lan duyet.
+    """
+    return _vd014_bien_the_cau("ton_tai", socau, dang, MC_SA_answer_const)
+
+
+def L10_C1_B1_VD014_MC_A_03(socau, dang=1):
+    r"""Mệnh đề ``với mọi x'' là mệnh đề SAI: đếm k (dùng mệnh đề phủ định).
+
+    CLAUDE THEM 29/09/2026 - bien the 03. Co Lan duyet.
+    """
+    return _vd014_bien_the_cau("moi_sai", socau, dang, MC_SA_answer_const)
+
+
+def L10_C1_B1_VD014_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn - biến thể 02 (lượng từ tồn tại). CLAUDE THEM 29/09/2026."""
+    return _vd014_bien_the_cau("ton_tai", socau, dang, MC_SA_answer_const)
+
+
+def L10_C1_B1_VD014_SA_A_03(socau, dang=2):
+    r"""Trả lời ngắn - biến thể 03 (mệnh đề với mọi là sai). CLAUDE THEM 29/09/2026."""
+    return _vd014_bien_the_cau("moi_sai", socau, dang, MC_SA_answer_const)
+
+
 def L10_C1_B1_VD014_MC_B_01(socau, dang=1):
     """
     Thông hiểu: Mệnh đề chứa biến P(x): x [dau] x^n.
@@ -7820,6 +7930,123 @@ def L10_C1_B1_VD014_TL_A_01(socau, dong=1):
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
 
+
+
+def _vd014_tl_cau(debai_dau, A, B, ab, ba, nguoc):
+    r"""Ghép một câu tự luận "xét P => Q và mệnh đề đảo Q => P".
+
+    ab = (A => B đúng?, lời giải), ba = (B => A đúng?, lời giải).
+    nguoc = True thì đổi vai: P là B, Q là A.
+    """
+    P, Q, (pq, lg_pq), (qp, lg_qp) = (B, A, ba, ab) if nguoc else (A, B, ab, ba)
+    debai = (debai_dau + r"\\ $P$: ``%s'' \quad và \quad $Q$: ``%s''." % (P, Q))
+    return debai, [
+        (r"Xét tính đúng sai của mệnh đề $P \Rightarrow Q$.",
+         r"\text{%s}" % ("Đúng" if pq else "Sai"),
+         lg_pq + (r" Vậy $P \Rightarrow Q$ là mệnh đề \textbf{%s}." % ("đúng" if pq else "sai"))),
+        (r"Phát biểu mệnh đề đảo $Q \Rightarrow P$ và xét tính đúng sai của nó.",
+         r"\text{%s}" % ("Đúng" if qp else "Sai"),
+         r"Mệnh đề đảo: ``Nếu %s thì %s''.\\ " % (Q, P) + lg_qp +
+         (r" Vậy $Q \Rightarrow P$ là mệnh đề \textbf{%s}." % ("đúng" if qp else "sai"))),
+    ]
+
+
+_VD014_HINH = [
+    (r"tứ giác $ABCD$ là hình chữ nhật", r"tứ giác $ABCD$ có hai đường chéo bằng nhau",
+     (True, r"Hình chữ nhật luôn có hai đường chéo bằng nhau."),
+     (False, r"Hình thang cân (không có góc vuông) có hai đường chéo bằng nhau nhưng "
+             r"không phải hình chữ nhật.")),
+    (r"tứ giác $ABCD$ là hình vuông", r"tứ giác $ABCD$ là hình thoi",
+     (True, r"Hình vuông có bốn cạnh bằng nhau nên là hình thoi."),
+     (False, r"Hình thoi có một góc bằng $60^{\circ}$ không phải hình vuông.")),
+    (r"tam giác $ABC$ đều", r"tam giác $ABC$ cân",
+     (True, r"Tam giác đều có ba cạnh bằng nhau nên cân tại mỗi đỉnh."),
+     (False, r"Tam giác cân tại $A$ có $\widehat{A} = 40^{\circ}$ không phải tam giác đều.")),
+    (r"tam giác $ABC$ vuông tại $A$", r"$BC^2 = AB^2 + AC^2$",
+     (True, r"Theo định lí Pythagore."),
+     (True, r"Theo định lí Pythagore đảo.")),
+    (r"tứ giác $ABCD$ là hình bình hành",
+     r"hai đường chéo của tứ giác $ABCD$ cắt nhau tại trung điểm của mỗi đường",
+     (True, r"Đó là tính chất của hình bình hành."),
+     (True, r"Đó là dấu hiệu nhận biết hình bình hành.")),
+    (r"tứ giác $ABCD$ là hình thoi", r"tứ giác $ABCD$ có hai đường chéo vuông góc",
+     (True, r"Hai đường chéo của hình thoi vuông góc với nhau."),
+     (False, r"Tứ giác có $AB = AD$, $CB = CD$ nhưng $AB \ne CB$ có hai đường chéo vuông "
+             r"góc mà không phải hình thoi.")),
+    (r"hai tam giác bằng nhau", r"hai tam giác có diện tích bằng nhau",
+     (True, r"Hai tam giác bằng nhau thì có diện tích bằng nhau."),
+     (False, r"Tam giác có đáy $4$, chiều cao $3$ và tam giác có đáy $6$, chiều cao $2$ "
+             r"cùng có diện tích $6$ nhưng không bằng nhau.")),
+    (r"tam giác $ABC$ có hai góc bằng $60^{\circ}$", r"tam giác $ABC$ đều",
+     (True, r"Góc còn lại bằng $180^{\circ} - 2\cdot 60^{\circ} = 60^{\circ}$ nên tam giác đều."),
+     (True, r"Tam giác đều có cả ba góc bằng $60^{\circ}$.")),
+]
+
+
+def L10_C1_B1_VD014_TL_A_02(socau, dong=1):
+    r"""Tự luận: xét mệnh đề kéo theo và mệnh đề đảo - bối cảnh HÌNH HỌC.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 (cung dang "Xet tinh dung sai cua
+    menh de keo theo va menh de dao"; _01 dung tinh chia het). Co Lan duyet.
+    """
+    ds = list(range(len(_VD014_HINH)))
+    random.shuffle(ds)
+    cauTN = ''
+    for i in ds[:min(socau, len(ds))]:
+        A, B, ab, ba = _VD014_HINH[i]
+        debai, ds_abcd = _vd014_tl_cau(r"Cho hai mệnh đề", A, B, ab, ba,
+                                       random.choice([False, True]))
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C1_B1_VD014_TL_A_03(socau, dong=1):
+    r"""Tự luận: xét mệnh đề kéo theo và mệnh đề đảo - bối cảnh SỐ THỰC
+    (bình phương, giá trị tuyệt đối, phương trình bậc hai), số thay đổi.
+
+    CLAUDE THEM 29/09/2026 - bien the 03. Co Lan duyet.
+    """
+    cauTN = ''
+    da = []
+    lan = 0
+    while len(da) < socau and lan < 200:
+        lan += 1
+        kieu = random.randrange(4)
+        a = random.randint(2, 9)
+        b = random.choice([k for k in range(-9, 10) if k not in (0, a, -a)])
+        if (kieu, a, b) in da:
+            continue
+        da.append((kieu, a, b))
+        if kieu == 0:
+            A, B = r"$x > %d$" % a, r"$x^2 > %d$" % (a * a)
+            ab = (True, r"Nếu $x > %d$ thì $x > 0$ nên $x^2 > %d^2 = %d$." % (a, a, a * a))
+            ba = (False, r"Lấy $x = %d$: $x^2 = %d > %d$ nhưng $x < %d$."
+                  % (-a - 1, (a + 1) ** 2, a * a, a))
+        elif kieu == 1:
+            A, B = r"$x = %d$" % a, r"$x^2 = %d$" % (a * a)
+            ab = (True, r"Thay $x = %d$ được $x^2 = %d$." % (a, a * a))
+            ba = (False, r"Lấy $x = %d$: $x^2 = %d$ nhưng $x \ne %d$." % (-a, a * a, a))
+        elif kieu == 2:
+            A, B = r"$\left|x\right| < %d$" % a, r"$x < %d$" % a
+            ab = (True, r"$\left|x\right| < %d \Leftrightarrow -%d < x < %d$ nên $x < %d$."
+                  % (a, a, a, a))
+            ba = (False, r"Lấy $x = %d$: $x < %d$ nhưng $\left|x\right| = %d > %d$."
+                  % (-a - 1, a, a + 1, a))
+        else:
+            tong, tich = a + b, a * b
+            pt = (r"x^2" + (r" - %dx" % tong if tong > 0 else (r" + %dx" % -tong if tong < 0 else "")) +
+                  (r" + %d" % tich if tich > 0 else r" - %d" % -tich) + " = 0")
+            pt = pt.replace(" 1x", " x")
+            A, B = r"$x = %d$" % a, r"$%s$" % pt
+            ab = (True, r"Thay $x = %d$ vào vế trái được $%d^2 %s %s = 0$."
+                  % (a, a, (r"- %d\cdot %d" % (tong, a)) if tong >= 0 else (r"+ %d\cdot %d" % (-tong, a)),
+                     (r"+ %d" % tich) if tich >= 0 else (r"- %d" % -tich)))
+            ba = (False, r"Phương trình $%s$ có hai nghiệm $x = %d$ và $x = %d$. Với $x = %d$ "
+                         r"thì phương trình được thoả mãn nhưng $x \ne %d$." % (pt, a, b, b, a))
+        debai, ds_abcd = _vd014_tl_cau(r"Cho $x$ là số thực và hai mệnh đề", A, B, ab, ba,
+                                       random.choice([False, True]))
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
 
 def L10_C1_B2_VD020_SA_A_01(socau, dang=2):
     """Trả lời ngắn: đếm số phần tử bằng công thức n(A hợp B) = n(A) + n(B) - n(A giao B)."""

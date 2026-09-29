@@ -8951,3 +8951,39 @@ Dat/Khong dat/Tong, ve nguoi lon/tre em/Tong), mot so dong tong ghi sai ->
 phai kiem tra tung dong moi dem duoc. TL them y b) tinh lai tong dung cua
 ca bang. Ban cu cua SA/TL (chieu cao 15 cm, 1700 cm) bo, vi nhin la thay -
 kieu de thay da co o NB070_MC_A_01.
+
+===============================================================================
+
+# Version 3.45 - 2026-09-29
+
+## Bien the dot 2 - chuong 1 (VD014) va chuong 2 (VD028)
+
+Hai ID nay co mat trong 100% de he so 1 cua chuong (chuong 2 chi co mot
+yeu cau muc VD la VD028) nen can nhieu bien the nhat.
+
+  L10_C1_B1_VD014_MC_A / SA_A (tham so k, menh de chua bien co luong tu)
+    _01 "voi moi x" dung; _02 "ton tai x" dung; _03 "voi moi x" SAI (qua
+    menh de phu dinh). Doi chieu dem vet can 624 bo tham so: 0 sai.
+  L10_C1_B1_VD014_TL_A (keo theo va menh de dao)
+    _01 chia het; _02 hinh hoc (8 cap: hinh chu nhat - duong cheo bang nhau,
+    Pythagore, hinh thoi - duong cheo vuong goc...); _03 so thuc (x > a va
+    x^2 > a^2, |x| < a va x < a, x = a va phuong trinh bac hai...), co phan
+    vi du cu the khi sai.
+  L10_C2_B4_VD028_MC_A: _02 hoi DIEM dat GTLN; _03 mien nghiem cho bang
+    HINH VE (tu giac to dam, luoi, ghi toa do dinh), F co he so am.
+  L10_C2_B4_VD028_SA_A: _02 GTLN tu hinh ve; _03 GTNN tren mien KHONG BI
+    CHAN (dieu kien >=).
+  L10_C2_B4_VD028_TL_A: _02 hoc sinh TU LAP he tu boi canh (xuong may, trong
+    ngo-khoai, tiem banh) roi tim lai lon nhat; _03 bai toan CHI PHI NHO
+    NHAT (thuc an chan nuoi, bep an) - mien khong bi chan.
+
+Kiem: 200 seed moi ham, bien dich PDF 5 bo nhap (0 loi), xem hinh mien
+nghiem. 3055 bai test qua, 8 bo qua.
+
+Ghi chu cho co Lan: loi giai cua VD028_MC_A_01 (ham goc) liet ke ca bon
+truong hop "Neu tim GTLN/GTNN/Tong/Tich" thay vi chi dung cai de hoi - em
+chua sua, cho co quyet.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
