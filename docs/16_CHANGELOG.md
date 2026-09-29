@@ -8853,3 +8853,62 @@ tests/test_mot_id_mot_dang.py: them 4 ID vao danh sach duoc phep nhieu ham.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.43 - 2026-09-29
+
+## Sua theo anh chup de cuoi ky 1 cua co Lan
+
+### 1. De cuoi ky: 30/70 va cau Dung/Sai
+exam_scope_service da tach phan_bo_ty_le (truoc giua ky 30%, sau 70%) tu
+lau, nhung exam_blueprint_service BO QUA - chia theo so tiet ca hoc ky.
+Do duoc: cuoi ky 1 lop 10 lay 60% so cau o phan truoc giua ky (toan chuong
+1, 2). Nay moi phan (trac nghiem NB/TH, VD/VDC cua trac nghiem - tra loi
+ngan - tu luan) chia cho hai nhom theo ti le (lam tron ngau nhien de trung
+binh dung ti le), trong nhom chia theo so tiet nhu cu. Cau Dung/Sai nam
+het o phan sau nen ti le cac phan con lai duoc nang nhe de CA DE dung 30/70.
+Do lai 80 de: lop 10 CK1 29%, CK2 30%; lop 11 CK1 30%.
+Cau Dung/Sai de cuoi ky (co Lan chot): chi o CHUONG CHUA KIEM TRA giua ky;
+khong du chuong (hai cau Dung/Sai phai khac chuong) thi lay them chuong co
+mot phan sau giua ky, chi cac bai sau giua ky. Lop 10 CK1: chuong 4 (bai
+9-11) va chuong 5; CK2: chuong 8, 9.
+
+### 2. Web: dau < > trong cong thuc
+"$\forall x\in\mathbb R,\ x^2+1<0$" - trinh duyet hieu "<0..." la mo the
+HTML, nuot mat cong thuc va ca phuong an sau (cau 7 co Lan bao). Nay doi
+< > thanh &lt; &gt; trong vung toan (MathJax van hien dung).
+
+### 3. Goc giua hai vecto tach muc do (co Lan chot)
+  NB057_MC_A  chung diem dau (_01 tam giac deu co H, _02 hinh vuong co O,
+              _03 cung/nguoc huong)
+  TH057_MC_A  MOI: khong chung diem dau (_01 tam giac deu, _02 hinh vuong)
+  TH057_MC_B  MOI: chung diem cuoi (_01, _02) - muc TH, co Lan duyet lai
+Curriculum them L10_C4_B11_TH057 (cung don vi voi NB057). Goc tinh tu toa
+do; loi giai sinh theo loai cap (chung goc / chung ngon / noi duoi / doi
+vecto cung phuong / vuong goc).
+
+### 4. L10_C1_B1_VD014_MC_A_01, VD014_SA_A_01
+Bien thuc goi la x (n danh cho so tu nhien). Dau < va <= truoc day LUON ra
+0 gia tri (x^2 - 2ax + k < 0 khong the dung voi moi x) - nay dung
+-x^2 + 2ax + k. Khoang cua k viet trong che do toan. Loi giai giai thich vi
+sao dem duoc (k nguyen trong khoang bi chan). Doi chieu dem vet can 312 bo
+tham so: 0 sai.
+
+### 5. So lieu bat thuong tach muc do
+  L10_C5_B12_NB070_MC_A_01  = ham VD070_MC_A_01 cu (chieu cao 15 cm... nhin
+                              la thay) - curriculum them NB070
+  L10_C5_B12_VD070_MC_A_01  VIET MOI: bang Nam/Nu/Si so (hoac Dat/Khong
+                              dat/Tong...) - mot dong tong sai, phai cong
+                              lai moi thay (dung "moi lien he toan hoc don gian")
+  L10_C5_B14_TH080_MC_B_01  MOI: gia tri bat thuong vuot nguong
+                              Q1-1,5DQ / Q3+1,5DQ chi 1-2 don vi, kem mot
+                              gia tri SAT nguong nhung khong bat thuong (bay)
+                              -> buoc phai tinh.
+
+Kiem: bien dich PDF 6 bo nhap (0 loi), xem hinh tam giac deu co H va bang.
+tests/test_sua_29_09_dot2.py. 3011 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -386,7 +386,13 @@ function renderLatexText(raw) {
         // trang, "0,7" bi in thanh "0, 7". Boc lai thanh "0{,}7" thi
         // MathJax coi la mot ky tu thuong, khong chen khoang trang.
         // Chi doi CACH HIEN THI, khong dong den chuoi dap an hoc sinh go.
-        if (d.toan) return d.chu.replace(/(\d),(?=\d)/g, '$1{,}');
+        // SUA 29/09/2026 (co Lan bao cau 7 hien "$\forall x\in\mathbb R,\ x"
+        // bi cut): dau "<" trong cong thuc (vd "x<0") bi trinh duyet hieu
+        // la MO THE HTML nen nuot mat phan con lai cua cong thuc va ca cac
+        // phuong an sau. Doi < > thanh &lt; &gt; - MathJax doc van ban
+        // SAU khi HTML da giai ma nen van hien dung dau be hon/lon hon.
+        if (d.toan) return d.chu.replace(/(\d),(?=\d)/g, '$1{,}')
+            .replace(/</g, '&lt;').replace(/>/g, '&gt;');
         let t = d.chu;
         t = t.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
         t = t.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');

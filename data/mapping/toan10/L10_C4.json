@@ -115,7 +115,22 @@
     "id": "L10_C4_B11_NB057_MC_A",
     "content": "Nhận biết được góc giữa hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định góc giữa hai vectơ"
+    "Dang": "Xác định góc giữa hai vectơ chung điểm đầu",
+    "ghi_chu": "CLAUDE SUA 29/09/2026 - co Lan tach muc do: NB chi con cap chung diem dau (va cung/nguoc huong); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B11_TH057_MC_A",
+    "content": "Nhận biết được góc giữa hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định góc giữa hai vectơ không chung điểm đầu",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan tach muc do; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B11_TH057_MC_B",
+    "content": "Nhận biết được góc giữa hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định góc giữa hai vectơ chung điểm cuối",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan tach muc do (cung ngon); co Lan duyet lai muc do TH"
   },
   {
     "id": "L10_C4_B11_TH058_MC_A",

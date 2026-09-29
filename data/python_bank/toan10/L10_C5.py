@@ -586,10 +586,13 @@ def L10_C5_B12_TH071_MC_A_01(socau, dang=1):
     return cauTN
 
 
-def L10_C5_B12_VD070_MC_A_01(socau, dang=1):
-    r"""Phát hiện số liệu không hợp lí trong bảng dữ liệu.
+def L10_C5_B12_NB070_MC_A_01(socau, dang=1):
+    r"""Phát hiện số liệu VÔ LÍ DỄ THẤY trong bảng dữ liệu (mức NB).
 
     CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    SUA 29/09/2026 (co Lan: "gia tri bat thuong qua ro, kiem tra lai muc
+    do"): truoc la L10_C5_B12_VD070_MC_A_01. So lieu vo li nhin la thay
+    (chieu cao 15 cm, diem 15/10...) nen chuyen ve muc NB.
     """
     BOI_CANH = [
         ("chiều cao (cm) của $6$ học sinh lớp 10", 150, 180, 15,
@@ -634,6 +637,67 @@ def L10_C5_B12_VD070_MC_A_01(socau, dang=1):
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
+
+
+def L10_C5_B12_VD070_MC_A_01(socau, dang=1):
+    r"""Phát hiện số liệu KHÔNG CHÍNH XÁC dựa trên mối liên hệ toán học đơn
+    giản giữa các số liệu (tổng các thành phần phải bằng số tổng).
+
+    CLAUDE THEM 29/09/2026 (co Lan duyet): ban VD that su cua VD070 - moi
+    so lieu deu "trong co ve hop li", chi khi cong lai moi phat hien dong
+    sai. Ban de thay chuyen sang L10_C5_B12_NB070_MC_A_01.
+    """
+    BOI_CANH = [
+        ("Bảng sau ghi số học sinh nam, nữ và sĩ số của bốn lớp:",
+         ("Lớp", "Nam", "Nữ", "Sĩ số"), ["10A1", "10A2", "10A3", "10A4"],
+         (15, 25), "lớp"),
+        ("Bảng sau ghi số sản phẩm đạt và không đạt chuẩn cùng tổng số sản "
+         "phẩm của bốn tổ trong một ngày:",
+         ("Tổ", "Đạt", "Không đạt", "Tổng"), ["Tổ 1", "Tổ 2", "Tổ 3", "Tổ 4"],
+         (40, 70), "tổ"),
+        ("Bảng sau ghi số vé người lớn, vé trẻ em và tổng số vé bán được của "
+         "một rạp chiếu phim trong bốn ngày:",
+         ("Ngày", "Người lớn", "Trẻ em", "Tổng"), ["Thứ Sáu", "Thứ Bảy",
+                                                 "Chủ nhật", "Thứ Hai"],
+         (60, 150), "ngày"),
+    ]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 200:
+        lan += 1
+        i = random.randrange(len(BOI_CANH))
+        lo, hi = BOI_CANH[i][3]
+        hang = [(random.randint(lo, hi), random.randint(lo // 3, hi)) for _ in range(4)]
+        sai = random.randrange(4)
+        lech = random.choice([-3, -2, -1, 1, 2, 3, 10, -10])
+        v = (i, tuple(hang), sai, lech)
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for i, hang, sai, lech in gt:
+        mo_dau, cot, ten_hang, _khoang, don_vi = BOI_CANH[i]
+        tong = [a + b + (lech if k == sai else 0) for k, (a, b) in enumerate(hang)]
+        dong = [r"%s & $%d$ & $%d$ & $%d$ \\ \hline" % (ten_hang[k], a, b, tong[k])
+                for k, (a, b) in enumerate(hang)]
+        bang = (r"\begin{center}\begin{tabular}{|c|c|c|c|}\hline " +
+                " & ".join(cot) + r" \\ \hline " + " ".join(dong) +
+                r"\end{tabular}\end{center}")
+        dung = ten_hang[sai]
+        nhieu = [t for k, t in enumerate(ten_hang) if k != sai]
+        debai = (mo_dau + "\n" + bang + "\n" +
+                 r"Biết rằng chỉ có một %s bị ghi sai số liệu. Đó là %s nào?"
+                 % (don_vi, don_vi))
+        kiem = "; ".join(r"%s: $%d + %d = %d$" % (ten_hang[k], a, b, a + b)
+                         for k, (a, b) in enumerate(hang))
+        giai = (r"Với mỗi %s, cột ``%s'' phải bằng tổng hai cột ``%s'' và ``%s''."
+                % (don_vi, cot[3], cot[1], cot[2]) +
+                "\\\\\n" + r"Kiểm tra: " + kiem + "." +
+                "\\\\\n" +
+                r"Chỉ %s ghi $%d$ trong khi tổng đúng là $%d$, nên số liệu của "
+                r"%s không chính xác." % (dung, tong[sai], hang[sai][0] + hang[sai][1], dung))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
 
 def L10_C5_B12_VD070_TL_A_01(socau, dong=1):
     r"""Tự luận: lí giải số liệu không chính xác trong bảng.
@@ -2440,6 +2504,104 @@ def _mau_co_dung_mot_ngoai_le(lan_thu=400):
         if len(ngoai) == 1 and all(_dep(q, 2) for q in (q1, q2, q3)):
             return Z, ngoai[0]
     return None, None
+
+
+def _mau_ngoai_le_sat_nguong(lan_thu=2000):
+    """Mẫu có ĐÚNG MỘT giá trị bất thường nằm SÁT ngưỡng (vượt 1-2 đơn vị)
+    và một giá trị KHÔNG bất thường cũng sát ngưỡng ấy (bẫy): nhìn qua
+    thấy hai số "lạ" như nhau, buộc phải tính ngưỡng mới phân biệt được.
+
+    Cách dựng: mẫu n = 10 hoặc 11 số (mỗi nửa có 5 số) nên đổi giá trị của
+    HAI số lớn nhất (hay nhỏ nhất) mà vẫn giữ thứ tự thì Q1, Q2, Q3 KHÔNG
+    đổi - ngưỡng tính trên mẫu gốc vẫn đúng. Vẫn kiểm tra lại cho chắc.
+
+    CLAUDE THEM 29/09/2026 cho L10_C5_B14_TH080_MC_B_01.
+    """
+    for _ in range(lan_thu):
+        n = random.choice([10, 11])
+        Z = _mau_so_lieu(n, 20, 40, lambda Y: all(_dep(q, 2) for q in _tu_phan_vi(Y)))
+        if Z is None:
+            continue
+        Z = list(Z)
+        q1, q2, q3 = _tu_phan_vi(Z)
+        d = q3 - q1
+        if not 3 <= d <= 10:
+            continue
+        if random.random() < 0.5:
+            tren = q3 + 1.5 * d
+            la = math.floor(tren) + random.choice([1, 2])
+            bay = math.floor(tren) - random.choice([0, 1])
+            if bay <= Z[-3]:
+                continue
+            Z[-1], Z[-2] = la, bay
+        else:
+            duoi = q1 - 1.5 * d
+            la = math.ceil(duoi) - random.choice([1, 2])
+            bay = math.ceil(duoi) + random.choice([0, 1])
+            if la <= 0 or bay >= Z[2]:
+                continue
+            Z[0], Z[1] = la, bay
+        Z.sort()
+        q1, q2, q3 = _tu_phan_vi(Z)
+        d = q3 - q1
+        tren, duoi = q3 + 1.5 * d, q1 - 1.5 * d
+        ngoai = [x for x in Z if x < duoi or x > tren]
+        if ngoai != [la] or Z.count(la) != 1 or Z.count(bay) != 1:
+            continue
+        return Z, la, bay
+    return None, None, None
+
+
+def L10_C5_B14_TH080_MC_B_01(socau, dang=1):
+    r"""Tìm giá trị bất thường của mẫu số liệu nhờ khoảng tứ phân vị - giá
+    trị bất thường nằm SÁT ngưỡng $Q_3 + 1{,}5\Delta_Q$ (hoặc
+    $Q_1 - 1{,}5\Delta_Q$), không nhìn qua mà thấy được, buộc phải tính.
+
+    CLAUDE THEM 29/09/2026 (co Lan: muc TH "lay nhung gia tri bat thuong
+    hoi sat voi 2 dau mut +- 1,5 Delta_Q de hoc sinh kho nhan ra, buoc phai
+    tinh"). Phuong an nhieu co mot gia tri cung sat nguong nhung KHONG bat
+    thuong. Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 50:
+        lan += 1
+        Z, la, bay = _mau_ngoai_le_sat_nguong()
+        if Z is None or tuple(Z) in [g[0] for g in gt]:
+            continue
+        gt.append((tuple(Z), la, bay))
+
+    cauTN = ""
+    for Z, la, bay in gt:
+        Z = list(Z)
+        q1, q2, q3 = _tu_phan_vi(Z)
+        d = q3 - q1
+        tren, duoi = q3 + 1.5 * d, q1 - 1.5 * d
+        dung = r"$%s$" % _xx5(la)
+        khac = [x for x in (bay, max(Z), min(Z), Z[len(Z) // 2]) if x != la]
+        nhieu = [r"$%s$" % t for t in _ba_nhieu5(_xx5(la), [_xx5(x) for x in khac],
+                                                 buoc=lambda t: _xx5(Z[t % len(Z)]))]
+        tron = list(Z)
+        random.shuffle(tron)
+        debai = (r"Cho mẫu số liệu:" + "\\\\\n" + r"\begin{center}" + _bang(tron) +
+                 r"\end{center}" + "\n" +
+                 r"Giá trị nào sau đây là \textbf{giá trị bất thường} của mẫu số liệu?")
+        giai = (r"Sắp xếp theo thứ tự không giảm: " + ", ".join("$%s$" % _xx5(x) for x in Z) + "." +
+                "\\\\\n" +
+                r"$Q_1 = %s$, $Q_2 = %s$, $Q_3 = %s$ nên $\Delta_Q = %s - %s = %s$."
+                % (_xx5(q1), _xx5(q2), _xx5(q3), _xx5(q3), _xx5(q1), _xx5(d)) +
+                "\\\\\n" +
+                r"$Q_1 - 1{,}5\Delta_Q = %s$ và $Q_3 + 1{,}5\Delta_Q = %s$."
+                % (_xx5(duoi), _xx5(tren)) +
+                "\\\\\n" +
+                r"Giá trị bất thường là giá trị nhỏ hơn $%s$ hoặc lớn hơn $%s$: chỉ có $%s$."
+                % (_xx5(duoi), _xx5(tren), _xx5(la)) +
+                "\\\\\n" +
+                r"Chú ý $%s$ tuy gần ngưỡng nhưng vẫn nằm trong đoạn "
+                r"$\left[%s;\ %s\right]$ nên không phải giá trị bất thường."
+                % (_xx5(bay), _xx5(duoi), _xx5(tren)))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
 
 
 def L10_C5_B14_VD083_SA_A_01(socau):

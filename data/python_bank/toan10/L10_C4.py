@@ -1685,164 +1685,222 @@ def L10_C4_B10_VD056_TL_A_01(socau, dong=1):
 # BÀI 11. TÍCH VÔ HƯỚNG CỦA HAI VECTƠ
 # =====================================================================
 
-def L10_C4_B11_NB057_MC_A_01(socau, dang=1):
-    r"""Xác định góc giữa hai vectơ - CÓ HÌNH VẼ (tam giác đều).
+# ---------------------------------------------------------------------
+# GÓC GIỮA HAI VECTƠ - SỬA 29/09/2026 theo cô Lan: tách theo MỨC ĐỘ
+#   NB057_MC_A : hai vectơ CHUNG ĐIỂM ĐẦU (đọc thẳng góc trên hình)
+#   TH057_MC_A : hai vectơ KHÔNG chung điểm đầu, không chung điểm cuối
+#                (phải dời vectơ / đổi hướng)
+#   TH057_MC_B : hai vectơ CHUNG ĐIỂM CUỐI (đổi hướng cả hai vectơ)
+# Góc luôn TÍNH TỪ TOẠ ĐỘ (không gõ tay), lời giải sinh theo loại cặp.
+# ---------------------------------------------------------------------
 
-    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+_TG_DEU = {"A": (1.5, 2.598076), "B": (0.0, 0.0), "C": (3.0, 0.0), "H": (1.5, 0.0)}
+_HV = {"A": (0.0, 3.0), "B": (3.0, 3.0), "C": (3.0, 0.0), "D": (0.0, 0.0),
+       "O": (1.5, 1.5)}
+_GOC_TG = (0, 30, 60, 90, 120, 150, 180)
+_GOC_HV = (0, 45, 90, 135, 180)
 
-    Tam giác đều nên mọi góc đều là góc đặc biệt, tính nhẩm được, đúng
-    mức Nhận biết.
-    """
-    HINH_TAM_GIAC_DEU = (
+
+def _hinh_tg_deu_H():
+    """Tam giác đều ABC, H là trung điểm BC, có đoạn AH."""
+    return (
         "\\begin{tikzpicture}[>=stealth,x=1cm,y=1cm,thick,scale=0.95]\n"
-        "\\coordinate (A) at (1.5,2.598);\n"
-        "\\coordinate (B) at (0,0);\n"
-        "\\coordinate (C) at (3,0);\n"
-        "\\draw (A) -- (B) -- (C) -- cycle;\n"
-        "\\fill[black] (A) circle[radius=1.4pt] node[above]"
-        "{\\footnotesize $A$};\n"
-        "\\fill[black] (B) circle[radius=1.4pt] node[below left]"
-        "{\\footnotesize $B$};\n"
-        "\\fill[black] (C) circle[radius=1.4pt] node[below right]"
-        "{\\footnotesize $C$};\n"
+        "\\coordinate (A) at (1.5,2.598);\n\\coordinate (B) at (0,0);\n"
+        "\\coordinate (C) at (3,0);\n\\coordinate (H) at (1.5,0);\n"
+        "\\draw (A) -- (B) -- (C) -- cycle;\n\\draw[dashed] (A) -- (H);\n"
+        "\\fill[black] (A) circle[radius=1.4pt] node[above]{\\footnotesize $A$};\n"
+        "\\fill[black] (B) circle[radius=1.4pt] node[below left]{\\footnotesize $B$};\n"
+        "\\fill[black] (C) circle[radius=1.4pt] node[below right]{\\footnotesize $C$};\n"
+        "\\fill[black] (H) circle[radius=1.4pt] node[below]{\\footnotesize $H$};\n"
         "\\end{tikzpicture}")
 
-    # (mô tả cặp vectơ, số đo góc, lời giải thích)
-    CAP = [
-        ((_vt("A", "B"), _vt("A", "C")), 60,
-         r"Hai vectơ cùng xuất phát từ $A$ nên góc giữa chúng chính là góc "
-         r"$\widehat{BAC} = 60^{\circ}$ của tam giác đều."),
-        ((_vt("A", "B"), _vt("B", "C")), 120,
-         r"Hai vectơ KHÔNG chung điểm đầu. Dời $%s$ về gốc $A$ thì nó thành "
-         r"vectơ cùng hướng, và góc giữa $%s$, $%s$ bằng $180^{\circ} - "
-         r"\widehat{ABC} = 180^{\circ} - 60^{\circ} = 120^{\circ}$."
-         % (_vt("B", "C"), _vt("A", "B"), _vt("B", "C"))),
-        ((_vt("B", "A"), _vt("B", "C")), 60,
-         r"Hai vectơ cùng xuất phát từ $B$ nên góc giữa chúng là "
-         r"$\widehat{ABC} = 60^{\circ}$."),
-        ((_vt("A", "B"), _vt("C", "A")), 120,
-         r"Hai vectơ không chung điểm đầu; góc giữa chúng bằng "
-         r"$180^{\circ} - \widehat{BAC} = 120^{\circ}$."),
-    ]
-    gt = []
-    while len(gt) < socau:
-        i = random.randrange(len(CAP))
-        if i not in gt:
-            gt.append(i)
-        if len(gt) >= len(CAP):
-            break
 
+def _hinh_hv_O():
+    """Hình vuông ABCD, O là giao điểm hai đường chéo."""
+    them = ("\\draw[thin] (A) -- (C);\n\\draw[thin] (B) -- (D);\n"
+            "\\fill[black] (1.5,1.5) circle[radius=1.4pt] node[right=2pt]"
+            "{\\footnotesize $O$};\n")
+    return _hinh_tu_giac("ABCD", [_HV["A"], _HV["B"], _HV["C"], _HV["D"]], them)
+
+
+def _goc2(TD, v1, v2):
+    x1, y1 = TD[v1[1]][0] - TD[v1[0]][0], TD[v1[1]][1] - TD[v1[0]][1]
+    x2, y2 = TD[v2[1]][0] - TD[v2[0]][0], TD[v2[1]][1] - TD[v2[0]][1]
+    c = (x1 * x2 + y1 * y2) / math.hypot(x1, y1) / math.hypot(x2, y2)
+    return int(round(math.degrees(math.acos(max(-1.0, min(1.0, c))))))
+
+
+def _goc_ten(P, Q, R, g):
+    r"""Tên góc $\widehat{PQR}$ (đỉnh Q) hoặc mô tả khi thẳng hàng."""
+    if g == 180:
+        return r"$%s$, $%s$, $%s$ thẳng hàng và $%s$ nằm giữa nên góc bằng $180^{\circ}$" % (P, Q, R, Q)
+    if g == 0:
+        return r"hai vectơ cùng hướng nên góc bằng $0^{\circ}$"
+    return r"$\widehat{%s%s%s} = %d^{\circ}$" % (P, Q, R, g)
+
+
+def _loi_giai_goc(TD, v1, v2, g, _sau=True):
+    """Lời giải theo loại cặp vectơ (chung gốc / chung ngọn / nối đuôi /
+    dời vectơ cùng phương / vuông góc). Góc g đã tính từ toạ độ."""
+    u, v = _vt(*v1), _vt(*v2)
+    diem = list(TD)
+
+    def cung_phuong_tu(goc_diem, mau):
+        """Vectơ (goc_diem -> Y) cùng hướng (0) hoặc ngược hướng (180) với mau."""
+        for Y in diem:
+            if Y == goc_diem:
+                continue
+            w = (goc_diem, Y)
+            gg = _goc2(TD, mau, w)
+            if gg in (0, 180):
+                return w, gg
+        return None, None
+
+    if v1[0] == v2[0]:
+        return (r"Hai vectơ $%s$ và $%s$ có chung điểm đầu $%s$ nên góc giữa "
+                r"chúng là góc tạo bởi hai tia $%s%s$, $%s%s$: %s."
+                % (u, v, v1[0], v1[0], v1[1], v2[0], v2[1],
+                   _goc_ten(v1[1], v1[0], v2[1], g)))
+    if g in (0, 180):
+        return (r"Hai vectơ $%s$ và $%s$ %s nên góc giữa chúng bằng $%d^{\circ}$."
+                % (u, v, r"\textbf{cùng hướng}" if g == 0 else r"\textbf{ngược hướng}", g))
+    if v1[1] == v2[1]:
+        X = v1[1]
+        return (r"Hai vectơ chung \textbf{điểm cuối} $%s$. Đổi hướng cả hai vectơ "
+                r"thì góc giữa chúng không đổi: góc giữa $%s$, $%s$ bằng góc "
+                r"giữa $%s$, $%s$ - hai vectơ này chung điểm đầu $%s$."
+                % (X, u, v, _vt(X, v1[0]), _vt(X, v2[0]), X) +
+                "\\\\\n" + r"Do đó góc cần tìm: %s." % _goc_ten(v1[0], X, v2[0], g))
+    if v1[1] == v2[0] or v2[1] == v1[0]:
+        # noi duoi: doi huong vecto ket thuc tai diem chung
+        if v1[1] == v2[0]:
+            X, w1, w2 = v1[1], (v1[1], v1[0]), v2
+        else:
+            X, w1, w2 = v1[0], v1, (v2[1], v2[0])
+        g2 = 180 - g
+        doi = u if w1 != v1 else v
+        return (r"Hai vectơ chưa chung điểm đầu. Đổi hướng $%s$ (được một vectơ "
+                r"có điểm đầu $%s$) thì góc giữa hai vectơ đổi thành phần bù của nó."
+                % (doi, X) + "\\\\\n" +
+                r"Góc giữa $%s$ và $%s$ là %s, nên góc cần tìm bằng "
+                r"$180^{\circ} - %d^{\circ} = %d^{\circ}$."
+                % (_vt(*w1), _vt(*w2), _goc_ten(w1[1], X, w2[1], g2), g2, g))
+    w, gg = cung_phuong_tu(v1[0], v2)
+    if w:
+        gw = _goc2(TD, v1, w)
+        return (r"Hai vectơ chưa chung điểm đầu. Vectơ $%s$ %s với $%s$ (chung "
+                r"điểm đầu $%s$ với $%s$)" % (v, "cùng hướng" if gg == 0 else "ngược hướng",
+                                              _vt(*w), v1[0], u) +
+                (r" nên góc cần tìm bằng góc giữa $%s$, $%s$: %s."
+                 % (u, _vt(*w), _goc_ten(v1[1], v1[0], w[1], g)) if gg == 0 else
+                 r" nên góc cần tìm bằng $180^{\circ}$ trừ góc giữa $%s$, $%s$, "
+                 r"tức là $180^{\circ} - %d^{\circ} = %d^{\circ}$." % (u, _vt(*w), gw, g)))
+    w, gg = cung_phuong_tu(v2[0], v1)
+    if w:
+        gw = _goc2(TD, w, v2)
+        return (r"Hai vectơ chưa chung điểm đầu. Vectơ $%s$ %s với $%s$ (chung "
+                r"điểm đầu $%s$ với $%s$)" % (u, "cùng hướng" if gg == 0 else "ngược hướng",
+                                              _vt(*w), v2[0], v) +
+                (r" nên góc cần tìm bằng góc giữa $%s$, $%s$: %s."
+                 % (_vt(*w), v, _goc_ten(w[1], v2[0], v2[1], g)) if gg == 0 else
+                 r" nên góc cần tìm bằng $180^{\circ}$ trừ góc giữa $%s$, $%s$, "
+                 r"tức là $180^{\circ} - %d^{\circ} = %d^{\circ}$." % (_vt(*w), v, gw, g)))
+    if g == 90:
+        return (r"Hai đường thẳng $%s%s$ và $%s%s$ vuông góc với nhau nên góc giữa "
+                r"hai vectơ $%s$, $%s$ bằng $90^{\circ}$." % (v1[0], v1[1], v2[0], v2[1], u, v))
+    if _sau:
+        # thay v2 bang vecto cung huong co ten khac roi giai lai
+        for Y in diem:
+            for Z in diem:
+                w = (Y, Z)
+                if Y == Z or w == v2 or _goc2(TD, v2, w) != 0:
+                    continue
+                phu = _loi_giai_goc(TD, v1, w, g, _sau=False)
+                if "dời" not in phu:
+                    return (r"Vectơ $%s$ cùng hướng với $%s$ nên góc giữa $%s$, $%s$ "
+                            r"bằng góc giữa $%s$, $%s$." % (v, _vt(*w), u, v, u, _vt(*w)) +
+                            "\\\\\n" + phu)
+    return (r"Hai vectơ chưa chung điểm đầu: dời $%s$ về điểm đầu $%s$ rồi đọc "
+            r"góc tạo thành, được $%d^{\circ}$." % (v, v1[0], g))
+
+
+def _cau_goc_vecto(socau, dang, TD, hinh, ten_hinh, CAP, GOC):
+    ds = list(range(len(CAP)))
+    random.shuffle(ds)
     cauTN = ""
-    for i in gt:
-        (v1, v2), goc, ly_do = CAP[i]
-        dung = r"$%d^{\circ}$" % goc
-        nhieu = [r"$%d^{\circ}$" % g
-                 for g in (30, 45, 60, 90, 120, 150, 180) if g != goc]
-        random.shuffle(nhieu)
-        debai = (r"Cho tam giác đều $ABC$ như hình vẽ. Góc giữa hai vectơ "
-                 r"$%s$ và $%s$ bằng bao nhiêu?" % (v1, v2))
-        giai = (r"Góc giữa hai vectơ được tính khi hai vectơ có \textbf{chung "
-                r"điểm đầu}; nếu chưa chung thì phải dời một vectơ về cùng "
-                r"gốc với vectơ kia."
-                "\\\\\n" + ly_do)
-        cauTN += MC_SA_answer_text(debai, dung, nhieu[:4], giai,
-                                   HINH_TAM_GIAC_DEU, 0, dang)
+    for i in ds[:min(socau, len(CAP))]:
+        v1, v2 = CAP[i]
+        g = _goc2(TD, v1, v2)
+        dung = r"$%d^{\circ}$" % g
+        uu_tien = [x for x in (180 - g,) if x != g and x in GOC]
+        con = [x for x in GOC if x != g and x not in uu_tien]
+        random.shuffle(con)
+        nhieu = [r"$%d^{\circ}$" % x for x in (uu_tien + con)[:3]]
+        debai = (r"Cho %s như hình vẽ. Góc giữa hai vectơ $%s$ và $%s$ bằng"
+                 % (ten_hinh, _vt(*v1), _vt(*v2)))
+        giai = _loi_giai_goc(TD, v1, v2, g)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, hinh, 0, dang)
     return cauTN
 
+
+_TEN_TG = r"tam giác đều $ABC$ có $H$ là trung điểm của $BC$"
+_TEN_HV = r"hình vuông $ABCD$ có $O$ là giao điểm hai đường chéo"
+
+
+def L10_C4_B11_NB057_MC_A_01(socau, dang=1):
+    r"""Góc giữa hai vectơ CHUNG ĐIỂM ĐẦU - tam giác đều (mức NB).
+
+    CLAUDE SUA 29/09/2026 (co Lan: tach theo muc do): chi con cac cap chung
+    diem dau, doc thang goc tren hinh. Cap khac diem dau chuyen sang
+    L10_C4_B11_TH057_MC_A, cap chung diem cuoi sang TH057_MC_B.
+    """
+    CAP = [("AB", "AC"), ("BA", "BC"), ("CA", "CB"), ("HB", "HC"),
+           ("HA", "HB"), ("HC", "HA"), ("BC", "BA"), ("AC", "AB")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG)
 
 
 def L10_C4_B11_NB057_MC_A_02(socau, dang=1):
-    r"""Xác định góc giữa hai vectơ - CÓ HÌNH VẼ (hình vuông).
+    r"""Góc giữa hai vectơ CHUNG ĐIỂM ĐẦU - hình vuông (mức NB).
 
-    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (mapping: "Xac
-    dinh goc giua hai vecto"). _01 dung tam giac deu (60, 120 do); _02 dung
-    hinh vuong nen gap du cac goc 0, 45, 90, 135, 180 do - co ca truong hop
-    cung huong / nguoc huong. Goc tinh bang toa do (khong go tay). Co Lan duyet.
+    CLAUDE THEM 29/09/2026, sua cung ngay: chi cap chung diem dau.
     """
-    # A tren trai, B tren phai, C duoi phai, D duoi trai (khop _hinh_tu_giac)
-    TD = {"A": (0, 3), "B": (3, 3), "C": (3, 0), "D": (0, 0)}
-    hinh = _hinh_tu_giac("ABCD", [TD["A"], TD["B"], TD["C"], TD["D"]])
-    CAP = [("AB", "AD"), ("AB", "AC"), ("AB", "DC"), ("AB", "CD"),
-           ("AC", "BD"), ("AB", "CA"), ("DA", "DB"), ("BA", "CB"),
-           ("AD", "CB"), ("AC", "DB")]
-
-    def goc(v1, v2):
-        x1 = TD[v1[1]][0] - TD[v1[0]][0]; y1 = TD[v1[1]][1] - TD[v1[0]][1]
-        x2 = TD[v2[1]][0] - TD[v2[0]][0]; y2 = TD[v2[1]][1] - TD[v2[0]][1]
-        c = (x1 * x2 + y1 * y2) / math.hypot(x1, y1) / math.hypot(x2, y2)
-        return round(math.degrees(math.acos(max(-1.0, min(1.0, c)))))
-
-    LY_DO = {
-        0: r"Hai vectơ \textbf{cùng hướng} nên góc giữa chúng bằng $0^{\circ}$.",
-        180: r"Hai vectơ \textbf{ngược hướng} nên góc giữa chúng bằng $180^{\circ}$.",
-        90: r"Giá của hai vectơ vuông góc với nhau nên góc giữa chúng bằng $90^{\circ}$.",
-        45: r"Đường chéo hình vuông tạo với cạnh một góc $45^{\circ}$.",
-        135: r"Dời về chung điểm đầu thì góc tạo bởi cạnh và đường chéo là "
-             r"$180^{\circ} - 45^{\circ} = 135^{\circ}$.",
-    }
-    ds = list(range(len(CAP)))
-    random.shuffle(ds)
-    gt = ds[:min(socau, len(CAP))]
-
-    cauTN = ""
-    for i in gt:
-        v1, v2 = CAP[i]
-        g = goc(v1, v2)
-        dung = r"$%d^{\circ}$" % g
-        nhieu = [r"$%d^{\circ}$" % x for x in (0, 45, 90, 135, 180) if x != g]
-        random.shuffle(nhieu)
-        debai = (r"Cho hình vuông $ABCD$ như hình vẽ. Góc giữa hai vectơ $%s$ "
-                 r"và $%s$ bằng" % (_vt(*v1), _vt(*v2)))
-        chung = v1[0] == v2[0]
-        giai = ((r"Hai vectơ có chung điểm đầu $%s$." % v1[0]) if chung else
-                r"Hai vectơ chưa chung điểm đầu: dời một vectơ để hai vectơ "
-                r"có chung điểm đầu rồi đọc góc tạo thành.")
-        if g in (0, 180):
-            giai = ""   # cung/nguoc huong: doc thang, khong can doi goc
-        else:
-            giai += "\\\\\n"
-        giai += LY_DO[g] + "\\\\\n" + r"Vậy góc cần tìm bằng $%d^{\circ}$." % g
-        cauTN += MC_SA_answer_text(debai, dung, nhieu[:3], giai, hinh, 0, dang)
-    return cauTN
+    CAP = [("AB", "AD"), ("AB", "AC"), ("DA", "DB"), ("BA", "BD"),
+           ("CB", "CD"), ("OA", "OB"), ("OA", "OC"), ("CA", "CD")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV)
 
 
 def L10_C4_B11_NB057_MC_A_03(socau, dang=1):
-    r"""Xác định góc giữa hai vectơ cùng phương (cùng hướng -> 0 độ, ngược
-    hướng -> 180 độ) - cho bằng hệ thức hoặc trung điểm, không có hình.
+    r"""Góc giữa hai vectơ cùng hướng / ngược hướng (0 hoặc 180 độ) - cho
+    bằng hệ thức $\vec a = k\vec b$ hoặc trung điểm, CHUNG ĐIỂM ĐẦU.
 
-    CLAUDE THEM 29/09/2026 - bien the 03, cung dang voi _01. Loi dan khac
-    han: khong cho hinh ma cho quan he giua hai vecto. Co Lan duyet.
+    CLAUDE THEM 29/09/2026, sua cung ngay: trung diem chi con cap chung
+    diem dau.
     """
     a = r"\overrightarrow{a}"
     b = r"\overrightarrow{b}"
+    VI_TRI = {"A": 0, "M": 1, "B": 2}
+    CAP_TD = [("MA", "MB"), ("AM", "AB"), ("BM", "BA"), ("MB", "MA")]
     gt = []
     lan = 0
     while len(gt) < socau and lan < 500:
         lan += 1
-        kieu = random.choice(["he_thuc", "trung_diem"])
-        if kieu == "he_thuc":
-            k = random.choice([-3, -2, 2, 3, 4, -4, 5, -5])
-            muc = ("he_thuc", k)
+        if random.random() < 0.5:
+            muc = ("he_thuc", random.choice([-5, -4, -3, -2, 2, 3, 4, 5]))
         else:
-            muc = ("trung_diem", random.randrange(4))
+            muc = ("trung_diem", random.randrange(len(CAP_TD)))
         if muc not in gt:
             gt.append(muc)
-
-    # trung diem M cua AB: A=0, M=1, B=2 tren mot duong thang
-    VI_TRI = {"A": 0, "M": 1, "B": 2}
-    CAP_TD = [("MA", "MB"), ("AM", "AB"), ("AM", "MB"), ("MA", "AB")]
 
     cauTN = ""
     for kieu, t in gt:
         if kieu == "he_thuc":
-            k = t
-            g = 0 if k > 0 else 180
+            g = 0 if t > 0 else 180
             debai = (r"Cho hai vectơ $%s$, $%s$ khác vectơ $\overrightarrow{0}$ "
                      r"thoả mãn $%s = %d%s$. Góc giữa hai vectơ $%s$ và $%s$ bằng"
-                     % (a, b, a, k, b, a, b))
+                     % (a, b, a, t, b, a, b))
             giai = (r"Vì $%s = %d%s$ với $%d %s 0$ nên $%s$ và $%s$ "
-                    % (a, k, b, k, ">" if k > 0 else "<", a, b) +
-                    (r"\textbf{cùng hướng}" if k > 0 else r"\textbf{ngược hướng}") +
+                    % (a, t, b, t, ">" if t > 0 else "<", a, b) +
+                    (r"\textbf{cùng hướng}" if t > 0 else r"\textbf{ngược hướng}") +
                     r", do đó góc giữa chúng bằng $%d^{\circ}$." % g)
         else:
             v1, v2 = CAP_TD[t]
@@ -1851,14 +1909,57 @@ def L10_C4_B11_NB057_MC_A_03(socau, dang=1):
             g = 0 if h1 * h2 > 0 else 180
             debai = (r"Cho đoạn thẳng $AB$ có trung điểm $M$. Góc giữa hai vectơ "
                      r"$%s$ và $%s$ bằng" % (_vt(*v1), _vt(*v2)))
-            giai = (r"Ba điểm $A$, $M$, $B$ thẳng hàng theo thứ tự đó nên $%s$ "
-                    r"và $%s$ " % (_vt(*v1), _vt(*v2)) +
+            giai = (r"Hai vectơ chung điểm đầu $%s$; ba điểm $A$, $M$, $B$ thẳng "
+                    r"hàng nên $%s$ và $%s$ " % (v1[0], _vt(*v1), _vt(*v2)) +
                     (r"\textbf{cùng hướng}" if g == 0 else r"\textbf{ngược hướng}") +
                     r", do đó góc giữa chúng bằng $%d^{\circ}$." % g)
         dung = r"$%d^{\circ}$" % g
         nhieu = [r"$%d^{\circ}$" % x for x in (0, 90, 180, 45) if x != g][:3]
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
+
+
+def L10_C4_B11_TH057_MC_A_01(socau, dang=1):
+    r"""Góc giữa hai vectơ KHÔNG chung điểm đầu - tam giác đều (mức TH).
+
+    CLAUDE THEM 29/09/2026 (co Lan: "chi xet nhung vecto luon khac dinh
+    (TH)"). Phai doi vecto / doi huong moi doc duoc goc. Co Lan duyet.
+    """
+    CAP = [("AB", "BC"), ("AB", "CA"), ("BC", "CA"), ("AH", "BC"),
+           ("AB", "HC"), ("HA", "BC"), ("BH", "CA"), ("AC", "HB")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG)
+
+
+def L10_C4_B11_TH057_MC_A_02(socau, dang=1):
+    r"""Góc giữa hai vectơ KHÔNG chung điểm đầu - hình vuông (mức TH).
+
+    CLAUDE THEM 29/09/2026. Co Lan duyet.
+    """
+    CAP = [("AB", "CD"), ("AB", "DC"), ("AC", "BD"), ("AB", "CA"),
+           ("AD", "CB"), ("AB", "BD"), ("AO", "BC"), ("DO", "AB")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV)
+
+
+def L10_C4_B11_TH057_MC_B_01(socau, dang=1):
+    r"""Góc giữa hai vectơ CHUNG ĐIỂM CUỐI - tam giác đều (mức TH).
+
+    CLAUDE THEM 29/09/2026 (co Lan: "chi lay nhung vecto luon cung ngon").
+    Doi huong ca hai vecto de ve chung diem dau. Co Lan duyet muc do.
+    """
+    CAP = [("AB", "CB"), ("BA", "CA"), ("AC", "BC"), ("AH", "BH"),
+           ("BH", "CH"), ("AB", "HB"), ("HC", "AC"), ("CH", "AH")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG)
+
+
+def L10_C4_B11_TH057_MC_B_02(socau, dang=1):
+    r"""Góc giữa hai vectơ CHUNG ĐIỂM CUỐI - hình vuông (mức TH).
+
+    CLAUDE THEM 29/09/2026. Co Lan duyet muc do.
+    """
+    CAP = [("AB", "CB"), ("AC", "BC"), ("AC", "DC"), ("BD", "AD"),
+           ("AB", "DB"), ("AO", "CO"), ("AO", "BO"), ("DC", "BC")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV)
+
 
 def L10_C4_B11_TH058_MC_A_01(socau, dang=1):
     r"""Tính tích vô hướng của hai vectơ theo định nghĩa.

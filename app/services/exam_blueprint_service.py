@@ -304,6 +304,62 @@ def _phan_bo_vd_vdc(
     return {c: v for c, v in ket_qua.items() if v["vd"] > 0 or v["vdc"] > 0}
 
 
+def _tach_theo_ti_le(n: int, ti_le: list[float]) -> list[int]:
+    """Chia n câu cho các nhóm theo tỉ lệ (vd [0.3, 0.7]).
+
+    Phần lẻ bốc NGẪU NHIÊN theo đúng xác suất (làm tròn ngẫu nhiên): trung
+    bình qua nhiều đề thì mỗi nhóm được đúng tỉ lệ, còn từng đề vẫn là số
+    nguyên. Tổng luôn bằng n.
+    """
+    if n <= 0:
+        return [0] * len(ti_le)
+    tong = sum(ti_le) or 1
+    ket = [math.floor(n * t / tong) for t in ti_le]
+    du = [n * t / tong - k for t, k in zip(ti_le, ket)]
+    con = n - sum(ket)
+    while con > 0:
+        # chọn nhóm theo trọng số phần dư
+        r = random.random() * sum(du)
+        chon = len(du) - 1
+        for i, d in enumerate(du):
+            if r < d:
+                chon = i
+                break
+            r -= d
+        ket[chon] += 1
+        du[chon] = 0
+        con -= 1
+    return ket
+
+
+def _chuong_cua_bai(bai_id: str):
+    cb = _tach_chuong_bai(bai_id)
+    return cb[0] if cb else None
+
+
+def _bai_cho_dung_sai(nhom_bai: list[tuple[float, list[str]]],
+                      danh_sach_bai: list[str], so_cau_lon: int) -> list[str]:
+    """Bài được phép đặt câu Đúng/Sai.
+
+    Cô Lan chốt 29/09/2026: đề CUỐI KỲ thì câu Đúng/Sai chỉ đặt ở CHƯƠNG
+    CHƯA KIỂM TRA ở thi giữa kỳ. Ưu tiên chương mà MỌI bài đều sau giữa
+    kỳ; nếu số chương ấy ít hơn số câu Đúng/Sai (hai câu Đúng/Sai phải ở
+    hai chương khác nhau) thì mới lấy thêm chương có một phần sau giữa kỳ,
+    và chỉ lấy các bài SAU giữa kỳ của chương đó.
+    Đề không chia hai phần (giữa kỳ, hệ số 1) -> mọi bài.
+    """
+    if len(nhom_bai) < 2:
+        return list(danh_sach_bai)
+    truoc = set(nhom_bai[0][1])
+    sau = [b for b in danh_sach_bai if b not in truoc]
+    chuong_truoc = {_chuong_cua_bai(b) for b in truoc}
+    sach = [b for b in sau if _chuong_cua_bai(b) not in chuong_truoc]
+    so_chuong_sach = len({_chuong_cua_bai(b) for b in sach})
+    if so_chuong_sach >= so_cau_lon and sach:
+        return sach
+    return sau or list(danh_sach_bai)
+
+
 _DON_VI_PATTERN = re.compile(r"_(?:NB|TH|VD|VDC)(\d+[A-Z]?)$")
 
 
@@ -519,6 +575,21 @@ def build_blueprint(
     so_tiet_theo_bai = {b: so_tiet_theo_bai.get(b, 1) for b in pham_vi_bai}
     danh_sach_bai = list(so_tiet_theo_bai.keys())
 
+    # Đề CUỐI KỲ: 30% số câu lấy từ phần trước giữa kỳ, 70% từ phần sau
+    # (CN_LoadExamScope đã tách sẵn trong phan_bo_ty_le). SỬA 29/09/2026:
+    # trước đây blueprint BỎ QUA phan_bo_ty_le, chia theo số tiết cả học
+    # kỳ - đo được đề cuối kỳ 1 lớp 10 lấy 60% số câu ở phần trước giữa kỳ.
+    # Đề giữa kỳ / hệ số 1: một nhóm duy nhất, tỉ lệ 1.
+    pbtl = scope.get("phan_bo_ty_le") if isinstance(scope, dict) else None
+    if pbtl:
+        nhom_bai = []
+        for khoa in ("truoc_giua_ky", "sau_giua_ky"):
+            ds = [b for b in pbtl[khoa]["pham_vi_bai"] if b in so_tiet_theo_bai]
+            if ds:
+                nhom_bai.append((float(pbtl[khoa]["ti_le"]), ds))
+    else:
+        nhom_bai = [(1.0, danh_sach_bai)]
+
     # BƯỚC 2 — số câu mỗi mức độ theo hệ số (bảng exam_rules.json)
     try:
         rules_result = resolve_cau_truc_de(loai_he_so, cau_truc_tu_hoc_sinh)
@@ -552,7 +623,20 @@ def build_blueprint(
     # 1 NB + 1 TH + 1 VD + 1 VDC ngay tại bài đó; các phần còn lại chia
     # sau và phải trừ đi phần đã bị chiếm này.
     so_cau_lon = phan_bo_muc_do.get("dung_sai_cau_lon", {}).get("NB", 0)  # 4 mức bằng nhau
-    phan_bo_bai_ds = _chon_bai_dung_sai(so_tiet_theo_bai, so_cau_lon)
+    bai_ds_hop_le = _bai_cho_dung_sai(nhom_bai, danh_sach_bai, so_cau_lon)
+    # Câu Đúng/Sai của đề cuối kỳ nằm hết ở phần SAU giữa kỳ, nên nâng nhẹ
+    # tỉ lệ phần TRƯỚC ở các phần còn lại để CẢ ĐỀ (tính theo số câu) vẫn
+    # đúng 30/70.
+    if len(nhom_bai) == 2 and so_cau_lon > 0:
+        tong_cau = so_cau_lon + sum(
+            sum(v for k, v in phan_bo_muc_do.get(l, {}).items())
+            for l in ("trac_nghiem", "tra_loi_ngan", "tu_luan"))
+        con_lai = tong_cau - so_cau_lon
+        if con_lai > 0:
+            t0 = min(1.0, nhom_bai[0][0] * tong_cau / con_lai)
+            nhom_bai = [(t0, nhom_bai[0][1]), (1.0 - t0, nhom_bai[1][1])]
+    phan_bo_bai_ds = _chon_bai_dung_sai(
+        {b: so_tiet_theo_bai[b] for b in bai_ds_hop_le}, so_cau_lon)
     bao_cao_phan_bo["dung_sai_cau_lon"] = {"theo_bai": phan_bo_bai_ds}
     for bai_id, sl in phan_bo_bai_ds.items():
         cb = _tach_chuong_bai(bai_id)
@@ -566,16 +650,32 @@ def build_blueprint(
     # ---- BƯỚC 4b — trac_nghiem mức NB, TH: chia về BÀI theo TỈ LỆ SỐ TIẾT ----
     for muc_do in ("NB", "TH"):
         so_luong = phan_bo_muc_do.get("trac_nghiem", {}).get(muc_do, 0)
-        phan_bo_bai = _chia_theo_so_tiet(so_luong, so_tiet_theo_bai)
         # KHÔNG trừ phần Đúng/Sai ra khỏi ngân sách NB/TH của trắc nghiệm.
         # Cô Lan chốt 28/09/2026: "cứ làm theo đúng mức độ là được, vì mức độ
         # ảnh hưởng điểm số - mức độ khác đi sẽ làm điểm số không phản ánh
         # đúng cái người kiểm tra mong muốn". Mỗi phần phải ra ĐÚNG số câu
         # từng mức độ mà ma trận ghi, không bù trừ chéo giữa các phần.
         # (_tru_phan_dung_sai giữ lại để tham khảo, không còn được gọi.)
-        phan_bo_bai, mat_cau = _don_ve_bai_co_cau(
-            phan_bo_bai, theo_bai_muc_do, muc_do, danh_sach_bai,
-            so_tiet_theo_bai)
+        # Chia số câu cho từng NHÓM (30/70 với đề cuối kỳ), rồi trong
+        # nhóm chia theo tỉ lệ số tiết. Nhóm nào không có yêu cầu ở mức
+        # này thì phần của nó chuyển sang nhóm sau (không để rơi câu).
+        phan_bo_bai, mat_cau = {}, 0
+        chia_nhom = _tach_theo_ti_le(so_luong, [t for t, _ in nhom_bai])
+        for (_t, ds_bai_nhom), sl_nhom in zip(nhom_bai, chia_nhom):
+            sl_nhom += mat_cau
+            tiet_nhom = {b: so_tiet_theo_bai[b] for b in ds_bai_nhom}
+            pb = _chia_theo_so_tiet(sl_nhom, tiet_nhom)
+            pb, mat_cau = _don_ve_bai_co_cau(
+                pb, theo_bai_muc_do, muc_do, ds_bai_nhom, tiet_nhom)
+            for b, k in pb.items():
+                phan_bo_bai[b] = phan_bo_bai.get(b, 0) + k
+        if mat_cau:
+            # nhóm cuối cũng không có -> thử cả phạm vi như trước đây
+            pb, mat_cau = _don_ve_bai_co_cau(
+                _chia_theo_so_tiet(mat_cau, so_tiet_theo_bai), theo_bai_muc_do,
+                muc_do, danh_sach_bai, so_tiet_theo_bai)
+            for b, k in pb.items():
+                phan_bo_bai[b] = phan_bo_bai.get(b, 0) + k
         bao_cao_phan_bo.setdefault("trac_nghiem", {})[muc_do] = phan_bo_bai
         if mat_cau:
             bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
@@ -614,9 +714,36 @@ def build_blueprint(
 
         # Rải trên BÀI (đơn vị kiến thức) chứ không phải chương: mỗi bài
         # tối đa 1 câu VDC, câu VD ưu tiên bài chưa có VDC.
-        phan_bo_chuong_vdvdc = _phan_bo_vd_vdc(danh_sach_bai, so_vd, so_vdc, max_per_chuong=cap)
-        phan_bo_chuong_vdvdc, mat_vd = _don_vd_ve_bai_co_cau(
-            phan_bo_chuong_vdvdc, theo_bai_muc_do, danh_sach_bai, cap)
+        phan_bo_chuong_vdvdc, mat_vd = {}, 0
+        ti_le_nhom = [t for t, _ in nhom_bai]
+        chia_vd = _tach_theo_ti_le(so_vd, ti_le_nhom)
+        chia_vdc = _tach_theo_ti_le(so_vdc, ti_le_nhom)
+        du_vd = du_vdc = 0
+        for (_t, ds_bai_nhom), vd_n, vdc_n in zip(nhom_bai, chia_vd, chia_vdc):
+            vd_n += du_vd
+            vdc_n += du_vdc
+            if vd_n <= 0 and vdc_n <= 0:
+                continue
+            pb = _phan_bo_vd_vdc(ds_bai_nhom, vd_n, vdc_n, max_per_chuong=cap)
+            pb, mat = _don_vd_ve_bai_co_cau(pb, theo_bai_muc_do, ds_bai_nhom, cap)
+            if mat and pb == {}:
+                # nhóm không có yêu cầu mức VD nào -> dồn sang nhóm sau
+                du_vd, du_vdc = vd_n, vdc_n
+                continue
+            du_vd = du_vdc = 0
+            mat_vd += mat
+            for b, v in pb.items():
+                cu = phan_bo_chuong_vdvdc.setdefault(b, {"vd": 0, "vdc": 0})
+                cu["vd"] += v["vd"]
+                cu["vdc"] += v["vdc"]
+        if du_vd or du_vdc:
+            pb = _phan_bo_vd_vdc(danh_sach_bai, du_vd, du_vdc, max_per_chuong=cap)
+            pb, mat = _don_vd_ve_bai_co_cau(pb, theo_bai_muc_do, danh_sach_bai, cap)
+            mat_vd += mat
+            for b, v in pb.items():
+                cu = phan_bo_chuong_vdvdc.setdefault(b, {"vd": 0, "vdc": 0})
+                cu["vd"] += v["vd"]
+                cu["vdc"] += v["vdc"]
         bao_cao_phan_bo.setdefault(loai_cau, {})["vd_vdc"] = phan_bo_chuong_vdvdc
         if mat_vd:
             bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(

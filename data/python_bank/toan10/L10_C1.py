@@ -7266,6 +7266,59 @@ def L10_C1_TF_B_01(socau, socot):
 
     return cauTF
 
+def _vd014_de_giai(a, dau, i_left, i_right, k_min_val, k_max_val):
+    r"""Đề + đáp số + lời giải chung cho L10_C1_B1_VD014_MC_A_01 và _SA_A_01.
+
+    CLAUDE THEM 29/09/2026 (co Lan duyet). P(x) đúng với mọi x thuộc R:
+      dấu >=, > : x^2 - 2ax + k  (hệ số x^2 dương)
+      dấu <, <= : -x^2 + 2ax + k (hệ số x^2 âm) - trước đây vẫn để hệ số
+                  dương nên đáp số luôn là 0.
+    k là số NGUYÊN trong một khoảng bị chặn nên đếm được.
+    """
+    k_lower = k_min_val if i_left == '[' else k_min_val + 1
+    k_upper = k_max_val if i_right == ']' else k_max_val - 1
+    khoang = r"\left%s%d;\ %d\right%s" % (i_left, k_min_val, k_max_val, i_right)
+    a2 = a ** 2
+    if dau in (r'\geq', '>'):
+        bt = r"x^2 - %dx + k" % (2 * a)
+        bien_doi = (r"x^2 - %dx + k %s 0 \Leftrightarrow \left(x - %d\right)^2 %s %d - k"
+                    % (2 * a, dau, a, dau, a2))
+        if dau == r'\geq':
+            dk = r"%d - k \leq 0 \Leftrightarrow k \geq %d" % (a2, a2)
+            k_dau, k_cuoi = max(k_lower, a2), k_upper
+        else:
+            dk = r"%d - k < 0 \Leftrightarrow k > %d" % (a2, a2)
+            k_dau, k_cuoi = max(k_lower, a2 + 1), k_upper
+        ly_do = (r"Vì $\left(x - %d\right)^2 \geq 0$ với mọi $x$ và bằng $0$ khi "
+                 r"$x = %d$ nên $P(x)$ đúng với mọi $x \in \mathbb{R}$ khi và chỉ "
+                 r"khi $%s$." % (a, a, dk))
+    else:
+        bt = r"-x^2 + %dx + k" % (2 * a)
+        dau_nguoc = '>' if dau == '<' else r'\geq'
+        bien_doi = (r"-x^2 + %dx + k %s 0 \Leftrightarrow \left(x - %d\right)^2 %s k + %d"
+                    % (2 * a, dau, a, dau_nguoc, a2))
+        if dau == '<':
+            dk = r"k + %d < 0 \Leftrightarrow k < -%d" % (a2, a2)
+            k_dau, k_cuoi = k_lower, min(k_upper, -a2 - 1)
+        else:
+            dk = r"k + %d \leq 0 \Leftrightarrow k \leq -%d" % (a2, a2)
+            k_dau, k_cuoi = k_lower, min(k_upper, -a2)
+        ly_do = (r"Vì $\left(x - %d\right)^2$ nhỏ nhất bằng $0$ (khi $x = %d$) nên "
+                 r"$P(x)$ đúng với mọi $x \in \mathbb{R}$ khi và chỉ khi $%s$."
+                 % (a, a, dk))
+    dapso_val = max(0, k_cuoi - k_dau + 1)
+    debai = (r"Cho mệnh đề chứa biến $P(x)\colon %s %s 0$ với $x \in \mathbb{R}$. "
+             r"Có tất cả bao nhiêu giá trị nguyên của tham số $k$ thuộc $%s$ để "
+             r"mệnh đề $P(x)$ đúng với mọi $x \in \mathbb{R}$?" % (bt, dau, khoang))
+    giai = (r"Ta có $%s$." % bien_doi + "\\\\\n" + ly_do + "\\\\\n" +
+            r"Kết hợp với $k \in %s$ và $k$ nguyên (một khoảng bị chặn nên chỉ "
+            r"có hữu hạn số nguyên): $k \in \left\{%d; %d; \ldots; %d\right\}$." % (khoang, k_dau, k_dau + 1, k_cuoi) +
+            "\\\\\n" +
+            r"Số giá trị nguyên của $k$ là $%d - %s + 1 = %d$."
+            % (k_cuoi, (r"\left(%d\right)" % k_dau) if k_dau < 0 else str(k_dau), dapso_val))
+    return debai, dapso_val, giai
+
+
 def L10_C1_B1_VD014_MC_A_01(socau, dang = 1):
     gt = []
     dem = 0
@@ -7288,33 +7341,13 @@ def L10_C1_B1_VD014_MC_A_01(socau, dang = 1):
     for v in gt:
         a, dau, i_left, i_right = v
 
-        # Xác định cận thực tế của k dựa trên ký hiệu khoảng/đoạn
-        # Cận dưới (k_lower): nếu là '[' thì k >= k_min_val, nếu '(' thì k >= k_min_val + 1
-        k_lower = k_min_val if i_left == '[' else k_min_val + 1
-        # Cận trên (k_upper): nếu là ']' thì k <= k_max_val, nếu ')' thì k <= k_max_val - 1
-        k_upper = k_max_val if i_right == ']' else k_max_val - 1
-
-        # Điều kiện cần để P(x) đúng với mọi x (dựa vào biến dau)
-        if dau == r'\geq':
-            # Cần k >= a^2
-            # Giao của [k_lower, k_upper] và [a^2, +inf)
-            start_k = max(k_lower, a ** 2)
-            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
-
-            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k \geq 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} \geq 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k \geq {a ** 2}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
-
-        elif dau == '>':
-            # Cần k > a^2 => k >= a^2 + 1
-            start_k = max(k_lower, a ** 2 + 1)
-            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
-
-            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k > 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} > 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k > {a ** 2}$, tức $k \geq {a ** 2 + 1}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
-        else:
-            dapso_val = 0
-            giai = rf"Ta có $P(n) = (n-{a})^2 + k - {a ** 2} {dau} 0$. Vì $(n-{a})^2 \geq 0$ nên biểu thức tiến tới $+\infty$. Không tồn tại $k$ để biểu thức luôn ${dau} 0$ với mọi $x$. Số giá trị là 0."
-
+        # SUA 29/09/2026 (co Lan): bien thuc thi goi la x (n de danh cho so
+        # tu nhien); dau < va <= truoc day luon ra 0 gia tri (he so x^2
+        # duong thi khong the am voi moi x) - nay doi he so x^2 thanh -1
+        # cho hai dau nay; khoang cua k viet trong che do toan.
+        debai, dapso_val, giai = _vd014_de_giai(a, dau, i_left, i_right,
+                                                k_min_val, k_max_val)
         dapso = str(dapso_val)
-        debai = rf"Cho mệnh đề chứa biến $P(n): n^2 - {2 * a}n + k {dau} 0$ với $n \in \mathbb{{R}}$. Có tất cả bao nhiêu giá trị nguyên của tham số $k$ thuộc tập {i_left}{k_min_val}; {k_max_val}{i_right} để mệnh đề $P(n)$ đúng với mọi $n \in \mathbb{{R}}$?"
 
         # FIX QUAN TRỌNG: Đảm bảo danh sách nhiễu luôn có 3 phần tử duy nhất
         # Sử dụng set để lọc trùng, sau đó đảm bảo đủ 3 phần tử bằng cách thêm giá trị dự phòng
@@ -7348,33 +7381,13 @@ def L10_C1_B1_VD014_SA_A_01(socau, dang = 2):
     for v in gt:
         a, dau, i_left, i_right = v
 
-        # Xác định cận thực tế của k dựa trên ký hiệu khoảng/đoạn
-        # Cận dưới (k_lower): nếu là '[' thì k >= k_min_val, nếu '(' thì k >= k_min_val + 1
-        k_lower = k_min_val if i_left == '[' else k_min_val + 1
-        # Cận trên (k_upper): nếu là ']' thì k <= k_max_val, nếu ')' thì k <= k_max_val - 1
-        k_upper = k_max_val if i_right == ']' else k_max_val - 1
-
-        # Điều kiện cần để P(x) đúng với mọi x (dựa vào biến dau)
-        if dau == r'\geq':
-            # Cần k >= a^2
-            # Giao của [k_lower, k_upper] và [a^2, +inf)
-            start_k = max(k_lower, a ** 2)
-            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
-
-            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k \geq 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} \geq 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k \geq {a ** 2}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
-
-        elif dau == '>':
-            # Cần k > a^2 => k >= a^2 + 1
-            start_k = max(k_lower, a ** 2 + 1)
-            dapso_val = max(0, k_upper - start_k + 1) if start_k <= k_upper else 0
-
-            giai = rf"Ta có $P(x): x^2 - {2 * a}x + k > 0 \Leftrightarrow (x-{a})^2 + k - {a ** 2} > 0$. Để đúng với mọi $x \in \mathbb{{R}}$, ta cần $k > {a ** 2}$, tức $k \geq {a ** 2 + 1}$. Kết hợp với $k \in {i_left}{k_min_val}; {k_max_val}{i_right}$, ta có $k \in [{start_k}; {k_upper}]$. Số giá trị nguyên $k$ là {dapso_val}."
-        else:
-            dapso_val = 0
-            giai = rf"Ta có $P(n) = (n-{a})^2 + k - {a ** 2} {dau} 0$. Vì $(n-{a})^2 \geq 0$ nên biểu thức tiến tới $+\infty$. Không tồn tại $k$ để biểu thức luôn ${dau} 0$ với mọi $x$. Số giá trị là 0."
-
+        # SUA 29/09/2026 (co Lan): bien thuc thi goi la x (n de danh cho so
+        # tu nhien); dau < va <= truoc day luon ra 0 gia tri (he so x^2
+        # duong thi khong the am voi moi x) - nay doi he so x^2 thanh -1
+        # cho hai dau nay; khoang cua k viet trong che do toan.
+        debai, dapso_val, giai = _vd014_de_giai(a, dau, i_left, i_right,
+                                                k_min_val, k_max_val)
         dapso = str(dapso_val)
-        debai = rf"Cho mệnh đề chứa biến $P(n): n^2 - {2 * a}n + k {dau} 0$ với $n \in \mathbb{{R}}$. Có tất cả bao nhiêu giá trị nguyên của tham số $k$ thuộc tập {i_left}{k_min_val}; {k_max_val}{i_right} để mệnh đề $P(n)$ đúng với mọi $n \in \mathbb{{R}}$?"
 
         # FIX QUAN TRỌNG: Đảm bảo danh sách nhiễu luôn có 3 phần tử duy nhất
         # Sử dụng set để lọc trùng, sau đó đảm bảo đủ 3 phần tử bằng cách thêm giá trị dự phòng

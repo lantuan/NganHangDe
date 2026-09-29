@@ -72,10 +72,18 @@
     "Dang": "Dùng máy tính cầm tay tính toán với số gần đúng"
   },
   {
+    "id": "L10_C5_B12_NB070_MC_A",
+    "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phát hiện số liệu vô lí dễ thấy trong bảng dữ liệu",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - truoc la L10_C5_B12_VD070_MC_A_01 (co Lan: qua ro, kiem tra lai muc do); co Lan duyet lai"
+  },
+  {
     "id": "L10_C5_B12_VD070_MC_A",
     "content": "Phát hiện và lí giải được số liệu không chính xác dựa trên mối liên hệ toán học đơn giản giữa các số liệu đã được biểu diễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phát hiện số liệu không hợp lí trong bảng dữ liệu"
+    "Dang": "Phát hiện số liệu không chính xác nhờ mối liên hệ giữa các số liệu (tổng các thành phần)",
+    "ghi_chu": "CLAUDE SUA 29/09/2026 - ham cu (so lieu vo li de thay) chuyen sang NB070_MC_A; VD070_MC_A_01 viet moi; co Lan duyet lai"
   },
   {
     "id": "L10_C5_B12_VD070_TL_A",
@@ -206,6 +214,13 @@
     "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính khoảng tứ phân vị của mẫu số liệu"
+  },
+  {
+    "id": "L10_C5_B14_TH080_MC_B",
+    "content": "Tính được các số đặc trưng đo độ phân tán cho mẫu số liệu không ghép nhóm: khoảng tứ phân vị.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm giá trị bất thường nằm sát ngưỡng nhờ khoảng tứ phân vị",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan: muc TH, gia tri bat thuong sat Q1-1,5DQ / Q3+1,5DQ, buoc phai tinh; co Lan duyet lai"
   },
   {
     "id": "L10_C5_B14_TH080_SA_A",
