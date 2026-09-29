@@ -482,6 +482,67 @@
         /* Mobile: sidebar ẩn khi cần */
         .sidebar.hidden-mobile { transform: translateX(-100%); }
 
+        /* =============================================================
+           DIEN THOAI (man hinh hep hon 768px) - co Lan 29/09/2026:
+           "web hien tren dien thoai bi thieu, tran man hinh".
+           Truoc day KHONG co mot quy tac @media nao: thanh ben rong co
+           dinh 280px luon chiem cho, dien thoai rong ~390px nen khung
+           chat chi con ~110px, chu bi bop thanh tung chu mot, o nhap
+           lieu bi day ra ngoai man hinh. Ham toggleSidebar() co san
+           nhung khong co nut nao goi toi.
+           Nay: thanh ben thanh ngan KEO RA (noi len tren, mac dinh an),
+           mo bang nut ba gach o dau trang; moi khoang dem thu gon.
+        ============================================================= */
+        .nut-menu { display: none; }
+        .man-che { display: none; }
+
+        @media (max-width: 767px) {
+            /* 100vh tren iPhone tinh ca thanh dia chi -> day mat phan
+               duoi (o nhap lieu). 100dvh la chieu cao THAT nhin thay. */
+            .app { height: 100vh; height: 100dvh; }
+
+            .sidebar {
+                position: fixed;
+                top: 0; bottom: 0; left: 0;
+                width: 84vw; max-width: 300px;
+                z-index: 60;
+            }
+            /* Bong chi khi MO - luc an ma de bong thi no loe mot vet mo
+               o mep trai man hinh. */
+            .sidebar:not(.hidden-mobile) { box-shadow: 0 0 40px rgba(15, 23, 42, .25); }
+            .man-che {
+                position: fixed; inset: 0; z-index: 55;
+                background: rgba(15, 23, 42, .35);
+            }
+            .sidebar:not(.hidden-mobile) ~ .man-che { display: block; }
+
+            .nut-menu {
+                display: inline-flex; align-items: center; justify-content: center;
+                width: 40px; height: 40px; flex-shrink: 0;
+                border: 1px solid var(--color-border); border-radius: 12px;
+                background: #fff; cursor: pointer; margin-right: 10px;
+            }
+
+            main { min-width: 0; width: 100%; }
+            header.h-16 { padding-left: 12px !important; padding-right: 12px !important; }
+            header .tieu-de-phu { display: none; }
+            .account-badge { padding: 6px 8px; max-width: 46vw; }
+            .account-badge-email { display: none; }
+
+            #chat-area { padding: 16px 12px !important; }
+            footer.p-6 { padding: 10px !important; }
+            #messages { gap: 16px; }
+            .chat-ai, .chat-user { max-width: 100% !important; }
+            .chat-ai { overflow-x: auto; }
+
+            textarea#message { padding: 12px !important; font-size: 16px; }
+            #send-btn { padding-left: 18px; padding-right: 18px; }
+            #nut-tao-de-moi, #nut-hoi-de-cu {
+                padding-left: 10px; padding-right: 10px;
+                font-size: 13px; white-space: nowrap;
+            }
+        }
+
     </style>
 
 </head>
@@ -554,6 +615,7 @@
             </div>
 
         </aside>
+        <div class="man-che" onclick="toggleSidebar()"></div>
 
         <!-- =========================
              MAIN
@@ -563,9 +625,14 @@
 
             <!-- Header -->
             <header class="h-16 bg-white border-b flex items-center justify-between px-8">
-                <div>
-                    <h2 class="font-bold text-lg" style="margin:0;">Chat AI</h2>
-                    <p class="text-xs text-slate-500" style="margin:0;">Tạo đề • Chấm bài • Phân tích học lực</p>
+                <div class="flex items-center">
+                    <button type="button" class="nut-menu" onclick="toggleSidebar()" aria-label="Mở menu">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <div>
+                        <h2 class="font-bold text-lg" style="margin:0;">Chat AI</h2>
+                        <p class="tieu-de-phu text-xs text-slate-500" style="margin:0;">Tạo đề • Chấm bài • Phân tích học lực</p>
+                    </div>
                 </div>
                 <div class="flex items-center gap-2">
                     <div class="account-badge" title="{{ user_email | default('') }}">
@@ -1594,6 +1661,11 @@ ${html}
         };
 
         // ===== TOGGLE SIDEBAR (mobile) =====
+        // Dien thoai: mo trang ra la thanh ben phai AN san, khong thi no
+        // de len khung chat ngay tu dau.
+        if (window.innerWidth < 768) {
+            document.getElementById("sidebar").classList.add("hidden-mobile");
+        }
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("hidden-mobile");
         }
@@ -1602,6 +1674,12 @@ ${html}
         document.addEventListener("click", function (e) {
             const sidebar = document.getElementById("sidebar");
             const menuBtn = e.target.closest("[onclick='toggleSidebar()']");
+            // Dien thoai: chon mot cuoc tro chuyen cu hoac bam "Chat moi"
+            // thi tu dong cat thanh ben di, cho hien ngay khung chat.
+            if (window.innerWidth < 768 && sidebar &&
+                e.target.closest(".history-item, #new-chat-btn")) {
+                setTimeout(function () { sidebar.classList.add("hidden-mobile"); }, 0);
+            }
             if (
                 window.innerWidth < 768 &&
                 sidebar &&
