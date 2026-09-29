@@ -8199,3 +8199,40 @@ Chua cai thi cau co hinh se hien trong tron tren web.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.27 - 2026-09-29
+
+## Them scripts/ma_moi.sh - tim ma moi giao vien dat tren VPS
+
+Co Lan quen ma moi dang ky tai khoan giao vien. Ma nay CO Y khong nam
+trong kho ma nguon, khong nam trong tai lieu, va cung khong nam trong
+.env tren may ca nhan - no chi nam trong .env TREN VPS (bien
+MA_MOI_GIAO_VIEN, doc o app/core/config.py, dung o app/routers/auth.py).
+De trong thi /register/teacher chan het, khong ai dang ky duoc giao vien.
+
+Nay co lenh xem nhanh, chay tren may ca nhan:
+
+    mamoi          # hoac:  bash scripts/ma_moi.sh
+
+Script mo MOT ket noi ssh, lan luot tim trong:
+  1. Environment= cua unit systemd,
+  2. cac tep EnvironmentFile= ma systemd dang doc,
+  3. /root/NganHangDe/.env.
+Chi DOC, khong sua gi. Khong thay thi in ra dung cho da tim de do tiep.
+
+Dat loi tat mot lan tren may ca nhan:
+
+    echo 'alias mamoi="bash /Users/mailan/Desktop/NganHangDe_Lan/web/NganHangDe/scripts/ma_moi.sh"' >> ~/.zshrc
+    source ~/.zshrc
+
+Da bo sung muc "Quen ma moi thi tim o dau" vao
+docs/21_TAI_KHOAN_GIAO_VIEN.md.
+
+Doi ma moi: sua dong MA_MOI_GIAO_VIEN trong .env tren VPS roi
+systemctl restart nganhangde - khong can day ma nguon.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

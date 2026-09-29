@@ -98,6 +98,36 @@ nhận 403. Đây là bước quan trọng nhất của cả tài liệu này.
   luồng duyệt tài khoản phức tạp.
 - Sau khi tạo tài khoản, đặt `vai_tro = 'giao_vien'`.
 
+### Quên mã mời thì tìm ở đâu
+
+Mã mời **chỉ nằm trong `.env` trên VPS** (biến `MA_MOI_GIAO_VIEN`). Cố ý như
+vậy: nó không có trong kho mã nguồn, không có trong tài liệu, và cũng không
+có trong `.env` trên máy cá nhân. `app/core/config.py` đọc biến này; nếu để
+trống thì `app/routers/auth.py` chặn hết, **không ai đăng ký được giáo viên**
+— an toàn mặc định, tránh trường hợp quên đặt biến là ai cũng tự nâng mình
+lên giáo viên.
+
+Xem mã đang đặt, chạy trên máy cá nhân:
+
+```bash
+mamoi
+```
+
+(hoặc `bash scripts/ma_moi.sh` nếu chưa đặt lối tắt). Script mở **một** kết
+nối ssh, lần lượt tìm trong `Environment=` của unit systemd, rồi tới các tệp
+`EnvironmentFile=` mà systemd đang đọc, cuối cùng là `/root/NganHangDe/.env`.
+Nó chỉ ĐỌC, không sửa gì.
+
+Đặt lối tắt `mamoi` một lần trên máy cá nhân:
+
+```bash
+echo 'alias mamoi="bash /Users/mailan/Desktop/NganHangDe_Lan/web/NganHangDe/scripts/ma_moi.sh"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+**Đổi mã mời:** sửa dòng `MA_MOI_GIAO_VIEN` trong `.env` trên VPS rồi
+`systemctl restart nganhangde`. Không cần đẩy mã nguồn, không cần `day web`.
+
 Nhớ cập nhật trigger `handle_new_user` (xem docs/12 và Version 2.15) để nó
 nhận thêm khóa `vai_tro` từ metadata lúc đăng ký.
 
