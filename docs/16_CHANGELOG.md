@@ -8819,3 +8819,37 @@ tests/test_nhan_cac_y.py. 2963 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.42 - 2026-09-29
+
+## Bien the _02, _03 - dot 1 (4 ID ra day nhat o de giua/cuoi ky lop 10)
+
+Co Lan: moi Generator ID can nhieu bien the de khong lap; bien the phai
+CUNG dang theo mapping, KHAC loi dan / kieu cau; "don vi kien thuc nao ra
+duoc nhieu bien the thi lam nhieu, it thi lam it" - khong ep so luong.
+
+Xep hang do lap (mo phong 60 de moi ki thi + 40 de moi chuong he so 1):
+84 ID co mat trong >= 50% so de, 27 ID co mat trong 100% so de.
+
+Dot 1 (moi ID them _02, _03):
+  L10_C2_B4_NB026_MC_A  _01 he nao LA; _02 he nao KHONG PHAI (nhieu co ca
+                        he khuyet an); _03 ghep bpt khuyet an voi bpt nao
+                        (nhieu: 1/x, can y, x^2, xy, z)
+  L10_C4_B10_NB049_MC_A _01 xi+yj -> toa do; _02 toa do -> xi+yj; _03 vecto
+                        thieu mot thanh phan (3j, -2i) hoac viet dao hang tu
+  L10_C4_B11_NB057_MC_A _01 tam giac deu; _02 hinh vuong (0/45/90/135/180
+                        do, goc tinh tu toa do); _03 cung/nguoc huong (a = kb,
+                        trung diem)
+  L10_C5_B14_NB085_MC_A _01 khang dinh dung; _02 khang dinh SAI; _03 tinh
+                        huong nao can dung thong ke (phuong an nhieu viet dai
+                        tuong duong de khong doan theo do dai)
+Sua kem: NB049_MC_A_01 in "-5i - 1j" (he so 1) -> them _bt_ij.
+Kiem: 300 seed moi ham, bien dich PDF (0 loi), xem hinh hinh vuong.
+tests/test_mot_id_mot_dang.py: them 4 ID vao danh sach duoc phep nhieu ham.
+2987 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

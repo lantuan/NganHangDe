@@ -38,6 +38,12 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an
     "L10_C2_B3_TH024_MC_A",   # ca hai deu: hinh nao bieu dien mien nghiem
     "L10_C3_B6_TH032_MC_A",   # ca hai deu: dinh li cosin tinh canh con lai
+    # Bien the _02, _03 (co Lan yeu cau 29/09/2026: cung dang theo mapping,
+    # khac loi dan / kieu cau):
+    "L10_C2_B4_NB026_MC_A",   # he nao LA / he nao KHONG PHAI / ghep bpt khuyet an
+    "L10_C4_B10_NB049_MC_A",  # xi+yj -> toa do / toa do -> xi+yj / thieu, dao hang tu
+    "L10_C4_B11_NB057_MC_A",  # tam giac deu / hinh vuong / cung-nguoc huong
+    "L10_C5_B14_NB085_MC_A",  # khang dinh dung / khang dinh sai / tinh huong can thong ke
 }
 
 

@@ -69,6 +69,27 @@ def _toado(x, y):
     return r"\left(%s;\ %s\right)" % (_xx4(x), _xx4(y))
 
 
+def _bt_ij(x, y, i=r"\overrightarrow{i}", j=r"\overrightarrow{j}"):
+    r"""Viết x.i + y.j cho đẹp: bỏ hệ số 1, bỏ hạng tử 0, dấu trừ gọn.
+
+    CLAUDE THEM 29/09/2026. _bt_ij(-5, -1) -> "-5\overrightarrow{i} - \overrightarrow{j}";
+    _bt_ij(0, 3) -> "3\overrightarrow{j}"; _bt_ij(0, 0) -> "\overrightarrow{0}".
+    """
+    def hang(h, vt):
+        if h == 1:
+            return vt
+        if h == -1:
+            return "-" + vt
+        return "%s%s" % (_xx4(h), vt)
+    phan = [(h, vt) for h, vt in ((x, i), (y, j)) if h != 0]
+    if not phan:
+        return r"\overrightarrow{0}"
+    kq = hang(*phan[0])
+    for h, vt in phan[1:]:
+        kq += (" - " if h < 0 else " + ") + hang(abs(h), vt)
+    return kq
+
+
 # ---------------------------------------------------------------------
 # HÌNH VẼ. Mọi hình đều là TikZ thuần để đường ra hình cho web dịch được.
 # ---------------------------------------------------------------------
@@ -960,10 +981,10 @@ def L10_C4_B10_NB049_MC_A_01(socau, dang=1):
                  r"$%s = %s$" % (u, _toado(-p, q)),
                  r"$%s = %s$" % (u, _toado(p, -q)),
                  r"$%s = %s$" % (u, _toado(-p, -q))]
-        dau = "+" if q > 0 else "-"
+        # SUA 29/09/2026: truoc in "-5\vec i - 1\vec j" (he so 1) -> dung _bt_ij
         debai = (r"Trong mặt phẳng toạ độ $Oxy$ với hai vectơ đơn vị $%s$, "
-                 r"$%s$, cho vectơ $%s = %d%s %s %d%s$. Khẳng định nào sau "
-                 r"đây \textbf{đúng}?" % (i, j, u, p, i, dau, abs(q), j))
+                 r"$%s$, cho vectơ $%s = %s$. Khẳng định nào sau "
+                 r"đây \textbf{đúng}?" % (i, j, u, _bt_ij(p, q)))
         giai = (r"Nếu $%s = x%s + y%s$ thì cặp số $\left(x;\ y\right)$ gọi "
                 r"là \textbf{toạ độ} của $%s$, viết $%s = \left(x;\ y\right)$."
                 % (u, i, j, u, u) +
@@ -973,6 +994,110 @@ def L10_C4_B10_NB049_MC_A_01(socau, dang=1):
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
+
+
+def L10_C4_B10_NB049_MC_A_02(socau, dang=1):
+    r"""Nhận ra toạ độ của vectơ - HỎI NGƯỢC: cho toạ độ, chọn cách biểu
+    diễn qua hai vectơ đơn vị.
+
+    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (mapping:
+    "Nhan ra toa do cua vecto trong he truc toa do"), khac loi dan: _01
+    cho u = xi + yj hoi toa do; _02 cho toa do hoi bieu dien. Co Lan duyet.
+    """
+    i = r"\overrightarrow{i}"
+    j = r"\overrightarrow{j}"
+    gt = []
+    while len(gt) < socau:
+        p = random.randint(-6, 6)
+        q = random.randint(-6, 6)
+        if 0 in (p, q) or abs(p) == abs(q) or (p, q) in gt:
+            continue
+        gt.append((p, q))
+
+    cauTN = ""
+    for p, q in gt:
+        ten = random.choice(["a", "u", "v", "m"])
+        vt = r"\overrightarrow{%s}" % ten
+        dung = r"$%s = %s$" % (vt, _bt_ij(p, q))
+        nhieu = _ba_nhieu4(dung, [
+            r"$%s = %s$" % (vt, _bt_ij(q, p)),      # dao thu tu hoanh/tung
+            r"$%s = %s$" % (vt, _bt_ij(p, -q)),
+            r"$%s = %s$" % (vt, _bt_ij(-p, q)),
+            r"$%s = %s$" % (vt, _bt_ij(-p, -q))])
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$ với hai vectơ đơn vị $%s$, $%s$, "
+                 r"cho vectơ $%s = %s$. Khẳng định nào sau đây \textbf{đúng}?"
+                 % (i, j, vt, _toado(p, q)))
+        giai = (r"Theo định nghĩa, $%s = \left(x;\ y\right)$ khi và chỉ khi "
+                r"$%s = x%s + y%s$: hoành độ là hệ số của $%s$, tung độ là "
+                r"hệ số của $%s$." % (vt, vt, i, j, i, j) +
+                "\\\\\n"
+                r"Vì $%s = %s$ nên $%s = %s$." % (vt, _toado(p, q), vt, _bt_ij(p, q)))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C4_B10_NB049_MC_A_03(socau, dang=1):
+    r"""Nhận ra toạ độ của vectơ - vectơ viết thiếu một thành phần hoặc viết
+    đảo thứ tự ($3\vec{j}$, $-2\vec{i}$, $4\vec{j} - \vec{i}$...).
+
+    CLAUDE THEM 29/09/2026 - bien the 03, cung dang voi _01. Kiem tra dung
+    y "hoanh do la he so cua i, tung do la he so cua j" o cac cach viet de
+    nham. Co Lan duyet.
+    """
+    i = r"\overrightarrow{i}"
+    j = r"\overrightarrow{j}"
+    gt = []
+    while len(gt) < socau:
+        kieu = random.choice(["chi_i", "chi_j", "dao"])
+        p = random.choice([k for k in range(-6, 7) if k not in (0, 1)])
+        q = random.choice([k for k in range(-6, 7) if k not in (0,)])
+        if kieu == "chi_i":
+            x, y = p, 0
+        elif kieu == "chi_j":
+            x, y = 0, p
+        else:
+            x, y = p, q
+            if abs(x) == abs(y):
+                continue
+        if (kieu, x, y) not in gt:
+            gt.append((kieu, x, y))
+
+    cauTN = ""
+    for kieu, x, y in gt:
+        ten = random.choice(["a", "b", "u", "w"])
+        vt = r"\overrightarrow{%s}" % ten
+        if kieu == "dao":
+            # viet hang tu j TRUOC: y.j + x.i
+            bieu_dien = _bt_ij(y, x, i=j, j=i)
+        else:
+            bieu_dien = _bt_ij(x, y)
+        dung = "$%s$" % _toado(x, y)
+        ung_vien = ["$%s$" % _toado(y, x)]
+        if kieu == "dao":
+            ung_vien += ["$%s$" % _toado(-x, y), "$%s$" % _toado(x, -y)]
+        else:
+            k = x if y == 0 else y
+            ung_vien += ["$%s$" % _toado(k, k), "$%s$" % _toado(1, k),
+                         "$%s$" % _toado(k, 1)]
+        nhieu = _ba_nhieu4(dung, ung_vien)
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$ với hai vectơ đơn vị $%s$, $%s$, "
+                 r"toạ độ của vectơ $%s = %s$ là" % (i, j, vt, bieu_dien))
+        if kieu == "dao":
+            them = (r"Viết lại theo đúng thứ tự: $%s = %s$ (thứ tự các hạng tử "
+                    r"trong tổng không quan trọng)." % (vt, _bt_ij(x, y)))
+        elif kieu == "chi_i":
+            them = (r"Không có hạng tử chứa $%s$, tức là hệ số của $%s$ bằng "
+                    r"$0$: $%s = %s$." % (j, j, vt, _bt_ij(x, 0) + " + 0" + j))
+        else:
+            them = (r"Không có hạng tử chứa $%s$, tức là hệ số của $%s$ bằng "
+                    r"$0$: $%s = 0%s + %s$." % (i, i, vt, i, _bt_ij(0, y)))
+        giai = (r"Toạ độ của vectơ: hoành độ là hệ số của $%s$, tung độ là hệ "
+                r"số của $%s$." % (i, j) +
+                "\\\\\n" + them +
+                "\\\\\n"
+                r"Vậy $%s = %s$." % (vt, _toado(x, y)))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
 
 def L10_C4_B10_TH050_MC_A_01(socau, dang=1):
     """Tìm toạ độ vectơ, toạ độ điểm trong hệ trục.
@@ -1624,6 +1749,116 @@ def L10_C4_B11_NB057_MC_A_01(socau, dang=1):
                                    HINH_TAM_GIAC_DEU, 0, dang)
     return cauTN
 
+
+
+def L10_C4_B11_NB057_MC_A_02(socau, dang=1):
+    r"""Xác định góc giữa hai vectơ - CÓ HÌNH VẼ (hình vuông).
+
+    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (mapping: "Xac
+    dinh goc giua hai vecto"). _01 dung tam giac deu (60, 120 do); _02 dung
+    hinh vuong nen gap du cac goc 0, 45, 90, 135, 180 do - co ca truong hop
+    cung huong / nguoc huong. Goc tinh bang toa do (khong go tay). Co Lan duyet.
+    """
+    # A tren trai, B tren phai, C duoi phai, D duoi trai (khop _hinh_tu_giac)
+    TD = {"A": (0, 3), "B": (3, 3), "C": (3, 0), "D": (0, 0)}
+    hinh = _hinh_tu_giac("ABCD", [TD["A"], TD["B"], TD["C"], TD["D"]])
+    CAP = [("AB", "AD"), ("AB", "AC"), ("AB", "DC"), ("AB", "CD"),
+           ("AC", "BD"), ("AB", "CA"), ("DA", "DB"), ("BA", "CB"),
+           ("AD", "CB"), ("AC", "DB")]
+
+    def goc(v1, v2):
+        x1 = TD[v1[1]][0] - TD[v1[0]][0]; y1 = TD[v1[1]][1] - TD[v1[0]][1]
+        x2 = TD[v2[1]][0] - TD[v2[0]][0]; y2 = TD[v2[1]][1] - TD[v2[0]][1]
+        c = (x1 * x2 + y1 * y2) / math.hypot(x1, y1) / math.hypot(x2, y2)
+        return round(math.degrees(math.acos(max(-1.0, min(1.0, c)))))
+
+    LY_DO = {
+        0: r"Hai vectơ \textbf{cùng hướng} nên góc giữa chúng bằng $0^{\circ}$.",
+        180: r"Hai vectơ \textbf{ngược hướng} nên góc giữa chúng bằng $180^{\circ}$.",
+        90: r"Giá của hai vectơ vuông góc với nhau nên góc giữa chúng bằng $90^{\circ}$.",
+        45: r"Đường chéo hình vuông tạo với cạnh một góc $45^{\circ}$.",
+        135: r"Dời về chung điểm đầu thì góc tạo bởi cạnh và đường chéo là "
+             r"$180^{\circ} - 45^{\circ} = 135^{\circ}$.",
+    }
+    ds = list(range(len(CAP)))
+    random.shuffle(ds)
+    gt = ds[:min(socau, len(CAP))]
+
+    cauTN = ""
+    for i in gt:
+        v1, v2 = CAP[i]
+        g = goc(v1, v2)
+        dung = r"$%d^{\circ}$" % g
+        nhieu = [r"$%d^{\circ}$" % x for x in (0, 45, 90, 135, 180) if x != g]
+        random.shuffle(nhieu)
+        debai = (r"Cho hình vuông $ABCD$ như hình vẽ. Góc giữa hai vectơ $%s$ "
+                 r"và $%s$ bằng" % (_vt(*v1), _vt(*v2)))
+        chung = v1[0] == v2[0]
+        giai = ((r"Hai vectơ có chung điểm đầu $%s$." % v1[0]) if chung else
+                r"Hai vectơ chưa chung điểm đầu: dời một vectơ để hai vectơ "
+                r"có chung điểm đầu rồi đọc góc tạo thành.")
+        if g in (0, 180):
+            giai = ""   # cung/nguoc huong: doc thang, khong can doi goc
+        else:
+            giai += "\\\\\n"
+        giai += LY_DO[g] + "\\\\\n" + r"Vậy góc cần tìm bằng $%d^{\circ}$." % g
+        cauTN += MC_SA_answer_text(debai, dung, nhieu[:3], giai, hinh, 0, dang)
+    return cauTN
+
+
+def L10_C4_B11_NB057_MC_A_03(socau, dang=1):
+    r"""Xác định góc giữa hai vectơ cùng phương (cùng hướng -> 0 độ, ngược
+    hướng -> 180 độ) - cho bằng hệ thức hoặc trung điểm, không có hình.
+
+    CLAUDE THEM 29/09/2026 - bien the 03, cung dang voi _01. Loi dan khac
+    han: khong cho hinh ma cho quan he giua hai vecto. Co Lan duyet.
+    """
+    a = r"\overrightarrow{a}"
+    b = r"\overrightarrow{b}"
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        kieu = random.choice(["he_thuc", "trung_diem"])
+        if kieu == "he_thuc":
+            k = random.choice([-3, -2, 2, 3, 4, -4, 5, -5])
+            muc = ("he_thuc", k)
+        else:
+            muc = ("trung_diem", random.randrange(4))
+        if muc not in gt:
+            gt.append(muc)
+
+    # trung diem M cua AB: A=0, M=1, B=2 tren mot duong thang
+    VI_TRI = {"A": 0, "M": 1, "B": 2}
+    CAP_TD = [("MA", "MB"), ("AM", "AB"), ("AM", "MB"), ("MA", "AB")]
+
+    cauTN = ""
+    for kieu, t in gt:
+        if kieu == "he_thuc":
+            k = t
+            g = 0 if k > 0 else 180
+            debai = (r"Cho hai vectơ $%s$, $%s$ khác vectơ $\overrightarrow{0}$ "
+                     r"thoả mãn $%s = %d%s$. Góc giữa hai vectơ $%s$ và $%s$ bằng"
+                     % (a, b, a, k, b, a, b))
+            giai = (r"Vì $%s = %d%s$ với $%d %s 0$ nên $%s$ và $%s$ "
+                    % (a, k, b, k, ">" if k > 0 else "<", a, b) +
+                    (r"\textbf{cùng hướng}" if k > 0 else r"\textbf{ngược hướng}") +
+                    r", do đó góc giữa chúng bằng $%d^{\circ}$." % g)
+        else:
+            v1, v2 = CAP_TD[t]
+            h1 = VI_TRI[v1[1]] - VI_TRI[v1[0]]
+            h2 = VI_TRI[v2[1]] - VI_TRI[v2[0]]
+            g = 0 if h1 * h2 > 0 else 180
+            debai = (r"Cho đoạn thẳng $AB$ có trung điểm $M$. Góc giữa hai vectơ "
+                     r"$%s$ và $%s$ bằng" % (_vt(*v1), _vt(*v2)))
+            giai = (r"Ba điểm $A$, $M$, $B$ thẳng hàng theo thứ tự đó nên $%s$ "
+                    r"và $%s$ " % (_vt(*v1), _vt(*v2)) +
+                    (r"\textbf{cùng hướng}" if g == 0 else r"\textbf{ngược hướng}") +
+                    r", do đó góc giữa chúng bằng $%d^{\circ}$." % g)
+        dung = r"$%d^{\circ}$" % g
+        nhieu = [r"$%d^{\circ}$" % x for x in (0, 90, 180, 45) if x != g][:3]
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
 
 def L10_C4_B11_TH058_MC_A_01(socau, dang=1):
     r"""Tính tích vô hướng của hai vectơ theo định nghĩa.

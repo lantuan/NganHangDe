@@ -1393,6 +1393,148 @@ def L10_C5_B14_NB085_MC_A_01(socau, dang=1):
     return cauTN
 
 
+
+# CLAUDE THEM 29/09/2026 - kho cau cho cac bien the 02, 03 cua NB085.
+_UD_DUNG = [
+    (r"Trong môn Địa lí, người ta dùng số trung bình để mô tả lượng mưa "
+     r"trung bình năm của một vùng",
+     r"lượng mưa mỗi năm một khác, số trung bình cho biết mức chung"),
+    (r"Trong môn Sinh học, người ta dùng độ lệch chuẩn để so sánh mức độ "
+     r"đồng đều về chiều cao của hai giống cây",
+     r"độ lệch chuẩn đo độ phân tán của số liệu"),
+    (r"Trong sản xuất, người ta theo dõi độ lệch chuẩn khối lượng sản phẩm "
+     r"để đánh giá độ ổn định của dây chuyền",
+     r"khối lượng càng ít chênh lệch thì dây chuyền càng ổn định"),
+    (r"Trong môn Vật lí, người ta đo một đại lượng nhiều lần rồi lấy giá trị "
+     r"trung bình để giảm sai số của phép đo",
+     r"các lần đo lệch lên, lệch xuống bù trừ cho nhau"),
+    (r"Trong y tế, người ta thống kê số ca bệnh theo từng tuần để kịp thời "
+     r"phát hiện dấu hiệu bùng phát dịch",
+     r"số liệu theo thời gian cho thấy xu hướng tăng bất thường"),
+    (r"Một cửa hàng thống kê số áo bán được theo từng cỡ và dựa vào mốt để "
+     r"quyết định nhập thêm cỡ nào",
+     r"mốt là cỡ áo bán được nhiều nhất"),
+    (r"Để so sánh kết quả học tập của hai lớp, người ta dùng cả điểm trung "
+     r"bình và độ lệch chuẩn của điểm số",
+     r"điểm trung bình cho mức chung, độ lệch chuẩn cho độ đồng đều"),
+]
+_UD_SAI = [
+    (r"Trong sản xuất, dây chuyền có độ lệch chuẩn khối lượng sản phẩm "
+     r"càng lớn thì hoạt động càng ổn định",
+     r"độ lệch chuẩn lớn nghĩa là khối lượng chênh lệch nhiều, dây chuyền "
+     r"kém ổn định"),
+    (r"Trong môn Sinh học, muốn biết giống cây nào có chiều cao đồng đều "
+     r"hơn thì chỉ cần so sánh chiều cao trung bình của hai giống",
+     r"số trung bình chỉ cho mức chung; độ đồng đều phải xét phương sai, độ "
+     r"lệch chuẩn"),
+    (r"Trong môn Địa lí, khoảng biến thiên của nhiệt độ các tháng trong năm "
+     r"cho biết nhiệt độ trung bình năm của một địa phương",
+     r"khoảng biến thiên chỉ đo độ chênh lệch giữa tháng nóng nhất và tháng "
+     r"lạnh nhất"),
+    (r"Trong môn Vật lí, đo một đại lượng càng nhiều lần thì giá trị trung "
+     r"bình của các lần đo càng kém tin cậy",
+     r"đo nhiều lần rồi lấy trung bình giúp giảm sai số ngẫu nhiên"),
+    (r"Khi so sánh hai vận động viên bắn súng có cùng điểm trung bình, người "
+     r"có phương sai điểm số lớn hơn là người bắn ổn định hơn",
+     r"phương sai lớn nghĩa là điểm số phân tán nhiều, bắn kém ổn định hơn"),
+]
+
+
+def L10_C5_B14_NB085_MC_A_02(socau, dang=1):
+    r"""Liên hệ giữa thống kê với môn học khác và thực tiễn - HỎI NGƯỢC:
+    khẳng định nào SAI.
+
+    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (mapping: "Lien
+    he giua thong ke voi mon hoc khac va thuc tien"). _01 hoi khang dinh
+    DUNG; _02 cho ba ung dung dung va mot ung dung sai. Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 200:
+        lan += 1
+        i = random.randrange(len(_UD_SAI))
+        if i not in gt:
+            gt.append(i)
+
+    cauTN = ""
+    for i in gt:
+        sai, ly_do = _UD_SAI[i]
+        ba_dung = random.sample(_UD_DUNG, 3)
+        debai = (r"Khẳng định nào sau đây về ứng dụng của thống kê trong thực "
+                 r"tiễn và trong các môn học khác là \textbf{sai}?")
+        giai = (r"``%s'' là sai, vì %s." % (sai, ly_do) +
+                "".join("\\\\\n" + r"- ``%s'': đúng, vì %s." % (t, ld)
+                        for t, ld in ba_dung))
+        cauTN += MC_SA_answer_text(debai, "%s." % sai,
+                                   ["%s." % t for t, _ in ba_dung], giai, 0, 0, dang)
+    return cauTN
+
+
+_TH_CO_THONG_KE = [
+    (r"Một trạm khí tượng ghi nhiệt độ lúc 12 giờ trưa của cả 30 ngày trong "
+     r"tháng để biết nhiệt độ trung bình của tháng đó",
+     r"phải thu thập 30 số liệu rồi tính số trung bình"),
+    (r"Lớp trưởng hỏi thời gian tự học mỗi ngày của từng bạn trong lớp rồi "
+     r"lập bảng tần số",
+     r"thu thập số liệu của nhiều bạn và trình bày thành bảng tần số"),
+    (r"Một cửa hàng ghi lại số đôi giày bán được theo từng cỡ trong tháng "
+     r"để quyết định nhập thêm cỡ nào",
+     r"thu thập số liệu bán hàng rồi tìm cỡ bán chạy nhất (mốt)"),
+    (r"Trong giờ Vật lí, một nhóm học sinh đo chu kì dao động của con lắc 5 "
+     r"lần rồi lấy giá trị trung bình",
+     r"xử lí 5 số liệu đo được bằng số trung bình"),
+    (r"Một bác sĩ ghi huyết áp của bệnh nhân mỗi sáng trong hai tuần để xem "
+     r"huyết áp dao động nhiều hay ít",
+     r"thu thập nhiều số liệu rồi xét độ phân tán của chúng"),
+]
+_TH_KHONG_THONG_KE = [
+    # Viet dai tuong duong phuong an dung de hoc sinh khong doan theo do dai
+    r"Một bác nông dân tính diện tích mảnh vườn hình chữ nhật dài $20$ m, "
+    r"rộng $12$ m để biết cần mua bao nhiêu phân bón",
+    r"Một tài xế tính quãng đường ô tô đi được trong $2$ giờ khi chạy với "
+    r"vận tốc không đổi $50$ km/h",
+    r"Trong giờ Toán, một học sinh giải phương trình $2x - 6 = 0$ để tìm "
+    r"chiều dài còn thiếu của một đoạn dây",
+    r"Một kĩ sư tính số đo góc còn lại của một khung tam giác khi đã biết "
+    r"số đo của hai góc kia",
+    r"Một người thợ tính chu vi của một nắp bể hình tròn bán kính $3$ dm để "
+    r"cắt gioăng cao su vừa khít",
+    r"Trong giờ Hoá học, một học sinh tính khối lượng mol của phân tử nước "
+    r"từ khối lượng mol của hiđro và oxi",
+]
+
+
+def L10_C5_B14_NB085_MC_A_03(socau, dang=1):
+    r"""Liên hệ giữa thống kê với thực tiễn - nhận ra tình huống nào CẦN
+    dùng kiến thức thống kê (thu thập, xử lí số liệu).
+
+    CLAUDE THEM 29/09/2026 - bien the 03, cung dang voi _01. Kieu cau khac:
+    phan biet tinh huong thong ke (nhieu so lieu quan sat) voi tinh huong
+    chi la mot phep tinh theo cong thuc. Co Lan duyet.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 200:
+        lan += 1
+        i = random.randrange(len(_TH_CO_THONG_KE))
+        if i not in gt:
+            gt.append(i)
+
+    cauTN = ""
+    for i in gt:
+        co, ly_do = _TH_CO_THONG_KE[i]
+        ba_khong = random.sample(_TH_KHONG_THONG_KE, 3)
+        debai = (r"Tình huống nào sau đây cần dùng đến kiến thức thống kê (thu "
+                 r"thập, xử lí số liệu)?")
+        giai = (r"``%s'': cần dùng thống kê, vì %s." % (co, ly_do) +
+                "\\\\\n"
+                r"Ba tình huống còn lại chỉ là một phép tính theo công thức "
+                r"(hoặc giải phương trình) với số liệu cho sẵn, không cần thu "
+                r"thập hay xử lí một mẫu số liệu.")
+        cauTN += MC_SA_answer_text(debai, "%s." % co,
+                                   ["%s." % t for t in ba_khong], giai, 0, 0, dang)
+    return cauTN
+
 def L10_C5_B14_TH079_MC_A_01(socau, dang=1):
     r"""Tính khoảng biến thiên của mẫu số liệu.
 

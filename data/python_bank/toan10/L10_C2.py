@@ -2005,6 +2005,8 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
 import math as _math
 import random as _rd
 
+from DefChung import bt as _bt   # viet bieu thuc gon (bo he so 1, dau)
+
 
 def _xx2(gt, n=2):
     """Làm tròn rồi viết theo kiểu Việt Nam (dấu phẩy thập phân)."""
@@ -2217,6 +2219,126 @@ def L10_C2_B4_NB026_MC_A_01(socau, dang=1):
         cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
     return cauTN
 
+
+
+_DAU_BPT = [r"\le", r"<", r"\ge", r">"]
+
+
+def _bpt_bac_nhat(a, b, c, dau):
+    """ax + by (dau) c, viết gọn; a hoặc b có thể bằng 0 (bpt khuyết ẩn)."""
+    return r"%s %s %d" % (_bt((a, "x"), (b, "y")), dau, c)
+
+
+def _bpt_khong_bac_nhat(kieu, a, b, c, dau):
+    """Một bất phương trình KHÔNG phải bậc nhất hai ẩn, theo kiểu lỗi."""
+    if kieu == "x2":
+        return r"%s %s %d" % (_bt((a, "x^{2}"), (b, "y")), dau, c), \
+            r"có số hạng $x^{2}$ (bậc hai)"
+    if kieu == "xy":
+        return r"%s %s %d" % (_bt((a, "xy"), (b, "y")), dau, c), \
+            r"có tích $xy$ (bậc hai)"
+    if kieu == "z":
+        return r"%s %s %d" % (_bt((a, "x"), (b, "y"), (-1, "z")), dau, c), \
+            r"có ẩn thứ ba $z$"
+    if kieu == "phan_so":
+        # a, b > 0 (noi goi truyen so duong)
+        return r"\dfrac{%d}{x} + %s %s %d" % (a, _bt((b, "y")), dau, c), \
+            r"có ẩn $x$ ở mẫu"
+    return r"%s %s %d" % (_bt((a, "x"), (b, r"\sqrt{y}")), dau, c), \
+        r"có căn thức $\sqrt{y}$"
+
+
+def _he2(t1, t2):
+    return r"$\heva{& %s \\ & %s}$" % (t1, t2)
+
+
+def L10_C2_B4_NB026_MC_A_02(socau, dang=1):
+    r"""Nhận ra hệ bất phương trình bậc nhất hai ẩn - HỎI NGƯỢC: hệ nào
+    KHÔNG phải.
+
+    CLAUDE THEM 29/09/2026 - bien the 02, cung dang voi _01 (mapping: "Nhan
+    ra he bat phuong trinh bac nhat hai an"). _01 hoi he nao LA; _02 hoi he
+    nao KHONG PHAI: ba phuong an nhieu la ba he dung (co ca he khuyet an),
+    dap an la he co mot bat phuong trinh sai dang. Co Lan duyet.
+    """
+    gt = []
+    while len(gt) < socau:
+        kieu = _rd.choice(["x2", "xy", "z", "phan_so", "can"])
+        v = (kieu, _rd.randint(1, 6), _rd.randint(1, 6), _rd.randint(2, 12))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for kieu, a, b, c in gt:
+        d = _rd.sample(_DAU_BPT, 4)
+        sai, ly_do = _bpt_khong_bac_nhat(kieu, a, b, c, d[0])
+        dung = _he2(sai, _bpt_bac_nhat(1, -b, c + 1, d[1]))
+        ba_he = [
+            _he2(_bpt_bac_nhat(a, b, c, d[1]), _bpt_bac_nhat(b, -a, 1, d[2])),
+            _he2(_bpt_bac_nhat(1, 0, 0, r"\ge"), _bpt_bac_nhat(0, 1, 0, r"\ge")),
+            _he2(_bpt_bac_nhat(0, b, c, d[3]), _bpt_bac_nhat(a, 1, c + a, d[0])),
+        ]
+        nhieu = _ba_nhieu2(dung, ba_he)
+        debai = (r"Hệ nào sau đây \textbf{không} phải là hệ bất phương trình bậc "
+                 r"nhất hai ẩn?")
+        giai = (r"Hệ bất phương trình bậc nhất hai ẩn gồm các bất phương trình "
+                r"dạng $ax + by \le c$ (hoặc $<, \ge, >$) với $a$, $b$ không đồng "
+                r"thời bằng $0$. Bất phương trình khuyết một ẩn như $x \ge 0$ hay "
+                r"$%s$ vẫn đúng dạng (hệ số của ẩn kia bằng $0$)." % _bpt_bac_nhat(0, b, c, d[3]) +
+                "\\\\\n"
+                r"Hệ %s không phải vì bất phương trình $%s$ %s." % (dung, sai, ly_do))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_NB026_MC_A_03(socau, dang=1):
+    r"""Nhận ra hệ bất phương trình bậc nhất hai ẩn - đáp án là hệ có bất
+    phương trình KHUYẾT ẨN ($x \ge 0$, $y < 3$...), nhiễu là các hệ có
+    $\dfrac{1}{x}$, $\sqrt{y}$, $x^2$, $xy$, ẩn $z$.
+
+    CLAUDE THEM 29/09/2026 - bien the 03, cung dang voi _01. Loi dan khac
+    (ghep cap bat phuong trinh thanh he) va kiem tra y "khuyet an van la bac
+    nhat hai an" ma _01 khong co. Co Lan duyet.
+    """
+    gt = []
+    while len(gt) < socau:
+        v = (_rd.randint(1, 6), _rd.randint(1, 6), _rd.randint(2, 12),
+             _rd.randrange(3))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for a, b, c, kieu_dung in gt:
+        d = _rd.sample(_DAU_BPT, 4)
+        if kieu_dung == 0:
+            khuyet = _bpt_bac_nhat(1, 0, _rd.randint(-3, 3), d[0])       # x ... k
+        elif kieu_dung == 1:
+            khuyet = _bpt_bac_nhat(0, 1, _rd.randint(-3, 3), d[0])       # y ... k
+        else:
+            khuyet = _bpt_bac_nhat(0, -1, _rd.randint(-3, 3), d[0])      # -y ... k
+        dung = "$%s$" % _bpt_bac_nhat(a, -b, c, d[1])
+        loai_sai = _rd.sample(["x2", "xy", "z", "phan_so", "can"], 3)
+        ba_he = []
+        ly_do = []
+        for k, ks in enumerate(loai_sai):
+            t, ld = _bpt_khong_bac_nhat(ks, a, b, c, d[(k + 2) % 4])
+            ba_he.append("$%s$" % t)
+            ly_do.append(r"$%s$ %s" % (t, ld))
+        nhieu = _ba_nhieu2(dung, ba_he)
+        debai = (r"Ghép bất phương trình $%s$ với bất phương trình nào dưới đây "
+                 r"thì được một hệ bất phương trình bậc nhất hai ẩn $x$, $y$?"
+                 % khuyet)
+        giai = (r"Bất phương trình $%s$ là bất phương trình bậc nhất hai ẩn "
+                r"(hệ số của một ẩn bằng $0$)." % khuyet +
+                "\\\\\n"
+                r"Trong các bất phương trình ghép thêm: " + "; ".join(ly_do) +
+                r" nên không phải bậc nhất hai ẩn." +
+                "\\\\\n"
+                r"Chỉ $%s$ là bất phương trình bậc nhất hai ẩn; hệ thu được "
+                r"là %s." % (_bpt_bac_nhat(a, -b, c, d[1]),
+                                  _he2(khuyet, _bpt_bac_nhat(a, -b, c, d[1]))))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
 
 def L10_C2_B4_TH027_TL_A_01(socau, dong=1):
     """Tự luận: miền nghiệm của hệ là tam giác vuông - tìm đỉnh và tính diện tích."""
