@@ -536,11 +536,27 @@
             .chat-ai { overflow-x: auto; }
 
             textarea#message { padding: 12px !important; font-size: 16px; }
-            #send-btn { padding-left: 18px; padding-right: 18px; }
-            #nut-tao-de-moi, #nut-hoi-de-cu {
-                padding-left: 10px; padding-right: 10px;
-                font-size: 13px; white-space: nowrap;
+            /* Hang nut duoi o nhap: CHIA CHO bang luoi 3 cot, nut "Gui" giu
+               nguyen be ngang, hai nut phu co lai. Ban truoc de hai nut
+               phu "khong xuong dong" nen chung day nut Gui ra ngoai mep
+               phai - dien thoai Android chi con thay chu "Gu" va khong
+               cuon ngang de thay duoc (co Lan bao 29/09/2026). */
+            #hang-nut-gui {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 8px; padding: 8px !important;
             }
+            #nhom-nut-phu {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                gap: 6px; min-width: 0;
+            }
+            #nut-tao-de-moi, #nut-hoi-de-cu {
+                padding-left: 6px; padding-right: 6px;
+                font-size: 13px; white-space: nowrap;
+                overflow: hidden; text-overflow: ellipsis; min-width: 0;
+            }
+            #send-btn { padding-left: 16px !important; padding-right: 16px !important; }
         }
 
     </style>
@@ -680,8 +696,8 @@
                              xong thi trong dau da co ngu canh roi, khong ai nghi
                              phai go lai "cau 3 cua de vua nay" - bam nut thi may
                              chu BIET CHAC de nao, cau nao. -->
-                        <div class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
-                            <div class="flex items-center gap-2 flex-wrap">
+                        <div id="hang-nut-gui" class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
+                            <div id="nhom-nut-phu" class="flex items-center gap-2 flex-wrap">
                                 <button type="button" id="nut-tao-de-moi" onclick="moFormTaoDe()"
                                     class="px-4 h-10 rounded-xl border font-semibold text-sm">
                                     📝 Tạo đề mới

@@ -36,3 +36,13 @@ def test_thanh_ben_an_san_khi_mo_tren_dien_thoai():
 
 def test_dung_chieu_cao_that_cua_man_hinh():
     assert "100dvh" in CHAT
+
+
+def test_nut_gui_khong_bi_day_ra_ngoai():
+    """Hang nut duoi o nhap phai chia cho bang luoi, nut Gui giu be ngang.
+
+    Ban truoc: hai nut phu "khong xuong dong" day nut Gui ra ngoai mep
+    phai man hinh Android, chi con thay chu "Gu" (co Lan 29/09/2026).
+    """
+    assert 'id="hang-nut-gui"' in CHAT
+    assert "grid-template-columns: minmax(0, 1fr) auto" in CHAT

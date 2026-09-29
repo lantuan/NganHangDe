@@ -139,6 +139,10 @@
 
         /* Hinh ve cua cau hoi, da dich san tu TikZ ra anh */
         .hinh-ve { margin: 12px 0; text-align: center; }
+        .can-giua { text-align: center; margin: 10px 0; line-height: 2; }
+        .bang-lx { border-collapse: collapse; margin: 10px auto; max-width: 100%; }
+        .bang-lx td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: center; }
+        .bang-lx tr:first-child td { background: #f1f5f9; font-weight: 600; }
         .hinh-ve img {
             max-width: 100%; height: auto; background: #fff;
             border-radius: var(--radius-xl); padding: 8px;
@@ -328,6 +332,30 @@ function renderXuongDong(raw) {
     return renderLatexText(raw);
 }
 
+// Moi truong "center" va "tabular" MathJax KHONG hieu. Truoc 29/09/2026
+// cau thong ke (bang so lieu dat trong \begin{center}) hien ra dong chu
+// do "Unknown environment 'center'" - hoc sinh khong thay so lieu nao ca
+// (25 ham lop 10 chuong 5 dinh). Doi ra HTML truoc khi tach vung toan;
+// phan $...$ ben trong o bang van de nguyen cho MathJax.
+// (Dung \x7d thay cho dau dong ngoac trong [^...] de so ngoac luon can,
+//  cong cu doc ma va bai kiem tra dem ngoac khong bi lech.)
+function xuLyCanGiuaVaBang(s) {
+    s = s.replace(/\\begin\{tabular\}\s*\{[^\x7d]*\}([\s\S]*?)\\end\{tabular\}/g, function (m, than) {
+        const hang = than.replace(/\\hline/g, '').split(/\\\\/)
+            .map(function (h) { return h.trim(); }).filter(Boolean);
+        const tr = hang.map(function (h) {
+            return '<tr>' + h.split('&').map(function (o) {
+                return '<td>' + o.trim() + '</td>';
+            }).join('') + '</tr>';
+        }).join('');
+        return '<table class="bang-lx">' + tr + '</table>';
+    });
+    s = s.replace(/\\begin\{center\}([\s\S]*?)\\end\{center\}/g, function (m, than) {
+        return '<div class="can-giua">' + than.trim() + '</div>';
+    });
+    return s;
+}
+
 function renderLatexText(raw) {
     if (!raw) return "";
     let s = String(raw);
@@ -337,6 +365,7 @@ function renderLatexText(raw) {
     s = xuLyDanhSach(s, 'ol', 'enumerate');
     s = xuLyDanhSach(s, 'ul', 'itemize');
     s = xuLyDanhSach(s, 'ol', 'listEX');
+    s = xuLyCanGiuaVaBang(s);
     return tachDoanToan(s).map(function (d) {
         // Doan toan GIU NGUYEN TUNG KY TU cho MathJax tu render.
         // Ngoai le DUY NHAT: dau phay THAP PHAN. Trong che do toan,
@@ -348,6 +377,11 @@ function renderLatexText(raw) {
         let t = d.chu;
         t = t.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
         t = t.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');
+        // \quad o NGOAI vung toan truoc day hien nguyen chu "\quad".
+        t = t.replace(/\\qquad\b/g, '&emsp;&emsp;').replace(/\\quad\b/g, '&emsp;');
+        // Ngoac kep kieu LaTeX ``...'' -> “...”. Truoc day web in nguyen
+        // hai dau huyen: ``Neu hai goc ... ''.
+        t = t.replace(/``/g, '“').replace(/''/g, '”');
         t = t.replace(/\\\\/g, '<br>');
         // Xuong dong THAT cung phai thanh <br>. Bo phan tich de bai da
         // doi \item thanh "\n- " (xem answer_parser_service.py), truoc

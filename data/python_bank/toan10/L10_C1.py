@@ -2560,41 +2560,54 @@ def L10_C1_B1_NB010_MC_A_02(socau, dang=1):
     for v in gt:
         goc1, goc2, loai_tinh_chat = v[0], v[1], v[2]
 
-        # Thiết lập cụm từ tiếng Việt chuẩn xác theo từng loại tính chất hình học
+        # SUA 29/09/2026 (co Lan): ve nao dung SAU chu "Neu" thi ve do phai
+        # GOI TEN hai goc. Truoc day menh de dao ra kieu "Neu tong so do
+        # cua CHUNG bang 90 do thi hai goc M va N phu nhau" - "chung" la ai
+        # thi chua he duoc noi toi. Nay moi ve co hai cach viet:
+        #   _ten : goi ten day du  (dung khi ve do dung sau "Neu")
+        #   _tro : noi lai "hai goc do" / "chung" (dung sau "thi")
+        cap = r"hai góc $\widehat{%s}$ và $\widehat{%s}$" % (goc1, goc2)
         if loai_tinh_chat == 0:
-            P_text = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ phụ nhau"
-            Q_text = f"tổng số đo của chúng bằng $90^\\circ$"
-
-            P_phu_dinh = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ không phụ nhau"
-            Q_phu_dinh = f"tổng số đo của chúng khác $90^\\circ$"
-            P_sai_tinh_chat = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ bù nhau"
-            Q_sai_tinh_chat = f"tổng số đo của chúng bằng $180^\\circ$"
+            dung_goc, sai_goc, k_dung, k_sai = "phụ nhau", "bù nhau", 90, 180
         else:
-            P_text = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ bù nhau"
-            Q_text = f"tổng số đo của chúng bằng $180^\\circ$"
+            dung_goc, sai_goc, k_dung, k_sai = "bù nhau", "phụ nhau", 180, 90
+        khong_goc = "không " + dung_goc
 
-            P_phu_dinh = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ không bù nhau"
-            Q_phu_dinh = f"tổng số đo của chúng khác $180^\\circ$"
-            P_sai_tinh_chat = f"hai góc $\\widehat{{{goc1}}}$ và $\\widehat{{{goc2}}}$ phụ nhau"
-            Q_sai_tinh_chat = f"tổng số đo của chúng bằng $90^\\circ$"
+        def tc_ten(tc):            # P goi ten: "hai goc M va N phu nhau"
+            return "%s %s" % (cap, tc)
 
+        def tc_tro(tc):            # P noi lai: "hai goc do phu nhau"
+            return "hai góc đó %s" % tc
+
+        def tong_ten(dk):          # Q goi ten: "tong so do cua hai goc M va N bang 90"
+            return "tổng số đo của %s %s" % (cap, dk)
+
+        def tong_tro(dk):          # Q noi lai: "tong so do cua chung bang 90"
+            return "tổng số đo của chúng %s" % dk
+
+        bang = r"bằng $%d^\circ$" % k_dung
+        khac = r"khác $%d^\circ$" % k_dung
+        bang_sai = r"bằng $%d^\circ$" % k_sai
+
+        # Menh de goc P => Q: P dung sau "Neu" nen P goi ten.
+        P_text, Q_text = tc_ten(dung_goc), tong_tro(bang)
         debai = f"""Hãy phát biểu mệnh đề đảo của mệnh đề: ``Nếu {P_text} thì {Q_text}''."""
 
-        # Mệnh đề đảo chuẩn mực: Nếu Q thì P
-        dapso = f"""Nếu {Q_text} thì {P_text}."""
+        # Menh de dao Q => P: bay gio Q dung sau "Neu" nen Q goi ten.
+        dapso = f"""Nếu {tong_ten(bang)} thì {tc_tro(dung_goc)}."""
 
-        # Sinh các phương án nhiễu logic
+        # Phuong an nhieu - cung quy tac goi ten nhu vay.
         dsnhieu = [
-            f"""Nếu {P_phu_dinh} thì {Q_phu_dinh}.""",
-            f"""Nếu {Q_phu_dinh} thì {P_phu_dinh}.""",
-            f"""Nếu {Q_sai_tinh_chat} thì {P_sai_tinh_chat}."""
+            f"""Nếu {tc_ten(khong_goc)} thì {tong_tro(khac)}.""",     # phu dinh
+            f"""Nếu {tong_ten(khac)} thì {tc_tro(khong_goc)}.""",     # phan dao
+            f"""Nếu {tong_ten(bang_sai)} thì {tc_tro(sai_goc)}.""",   # nham tinh chat
         ]
 
         giai = f"""Xét mệnh đề kéo theo đã cho có cấu trúc: ``Nếu $P$ thì $Q$'' (ký hiệu là $P \\Rightarrow Q$), trong đó:\\\\
-        - $P$: ``{P_text}''\\\\
-        - $Q$: ``{Q_text}''\\\\
-        Theo định nghĩa toán học, mệnh đề đảo của mệnh đề $P \\Rightarrow Q$ là mệnh đề $Q \\Rightarrow P$, phát biểu dưới dạng ngôn ngữ là: ``Nếu $Q$ thì $P$''.\\\\
-        Do đó, mệnh đề đảo của mệnh đề trên là: ``Nếu {Q_text} thì {P_text}''. """
+        - $P$: ``{tc_ten(dung_goc)}''\\\\
+        - $Q$: ``{tong_ten(bang)}''\\\\
+        Theo định nghĩa, mệnh đề đảo của mệnh đề $P \\Rightarrow Q$ là mệnh đề $Q \\Rightarrow P$, phát biểu dưới dạng: ``Nếu $Q$ thì $P$''.\\\\
+        Do đó, mệnh đề đảo của mệnh đề trên là: ``{dapso[:-1]}''. """
 
         cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
 

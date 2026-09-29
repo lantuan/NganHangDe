@@ -199,7 +199,7 @@ const lay = (ten) => { const i = js.indexOf('function ' + ten + '(');
   let d = 0, j = js.indexOf('{', i);
   for (let k = j; k < js.length; k++) { if (js[k] === '{') d++;
     else if (js[k] === '}') { d--; if (!d) return js.slice(i, k + 1); } } };
-eval(lay('xuLyDanhSach') + '\n' + lay('tachDoanToan') + '\n' + lay('renderLatexText'));
+eval(lay('xuLyDanhSach') + '\n' + lay('tachDoanToan') + '\n' + lay('xuLyCanGiuaVaBang') + '\n' + lay('renderLatexText'));
 const mau = JSON.parse(fs.readFileSync('%s', 'utf8'));
 let loi = 0;
 for (const [ten, de] of mau) {
