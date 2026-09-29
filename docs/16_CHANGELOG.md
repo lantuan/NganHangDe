@@ -8941,3 +8941,13 @@ dung_sai, test_dung_sai_khac_chuong. 3011 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+## VD070 (so lieu khong chinh xac): muc van dung hoi "CO BAO NHIEU"
+
+Co Lan: "la dang van dung. vay khong hoi kieu so nao, ma phai la co bao
+nhieu so". VD070_MC_A_01, VD070_SA_A_01, VD070_TL_A_01 viet lai tren cung
+mot kieu bang: 5-6 dong, moi dong hai thanh phan va cot tong (Nam/Nu/Si so,
+Dat/Khong dat/Tong, ve nguoi lon/tre em/Tong), mot so dong tong ghi sai ->
+phai kiem tra tung dong moi dem duoc. TL them y b) tinh lai tong dung cua
+ca bang. Ban cu cua SA/TL (chieu cao 15 cm, 1700 cm) bo, vi nhin la thay -
+kieu de thay da co o NB070_MC_A_01.

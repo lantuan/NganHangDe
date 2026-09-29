@@ -586,6 +586,62 @@ def L10_C5_B12_TH071_MC_A_01(socau, dang=1):
     return cauTN
 
 
+# CLAUDE THEM 29/09/2026 - VD070 (co Lan: "la dang van dung. vay khong hoi
+# kieu so nao, ma phai la co bao nhieu so"). Bang nhieu dong, moi dong co
+# hai thanh phan va cot tong; MOT SO dong tong bi ghi sai - hoc sinh phai
+# kiem tra tung dong moi dem duoc.
+_BOI_CANH_TONG = [
+    ("Bảng sau ghi số học sinh nam, nữ và sĩ số của các lớp khối 10:",
+     ("Lớp", "Nam", "Nữ", "Sĩ số"), ["10A1", "10A2", "10A3", "10A4", "10A5", "10A6"],
+     (14, 24), "lớp", "sĩ số"),
+    ("Bảng sau ghi số sản phẩm đạt chuẩn, không đạt chuẩn và tổng số sản phẩm "
+     "của các tổ trong một ngày:",
+     ("Tổ", "Đạt", "Không đạt", "Tổng"), ["Tổ 1", "Tổ 2", "Tổ 3", "Tổ 4", "Tổ 5", "Tổ 6"],
+     (40, 70), "tổ", "tổng số sản phẩm"),
+    ("Bảng sau ghi số vé người lớn, vé trẻ em và tổng số vé một rạp chiếu phim "
+     "bán được trong các ngày:",
+     ("Ngày", "Người lớn", "Trẻ em", "Tổng"), ["Thứ Hai", "Thứ Ba", "Thứ Tư",
+                                             "Thứ Năm", "Thứ Sáu", "Thứ Bảy"],
+     (60, 150), "ngày", "tổng số vé"),
+]
+
+
+def _bang_tong_co_dong_sai(so_dong, so_sai):
+    """Trả về (bối cảnh, các dòng (a, b, tổng ghi), chỉ số dòng sai)."""
+    bc = random.choice(_BOI_CANH_TONG)
+    lo, hi = bc[3]
+    hang = [(random.randint(lo, hi), random.randint(lo // 2, hi)) for _ in range(so_dong)]
+    sai = sorted(random.sample(range(so_dong), so_sai))
+    dong = []
+    for k, (a, b) in enumerate(hang):
+        t = a + b
+        if k in sai:
+            t += random.choice([-10, -2, -1, 1, 2, 10])
+        dong.append((a, b, t))
+    return bc, dong, sai
+
+
+def _tex_bang_tong(bc, dong):
+    cot, ten = bc[1], bc[2]
+    than = " ".join(r"%s & $%d$ & $%d$ & $%d$ \\ \hline" % (ten[k], a, b, t)
+                    for k, (a, b, t) in enumerate(dong))
+    return (r"\begin{center}\begin{tabular}{|c|c|c|c|}\hline " + " & ".join(cot) +
+            r" \\ \hline " + than + r"\end{tabular}\end{center}")
+
+
+def _giai_bang_tong(bc, dong, sai):
+    cot, ten, don_vi = bc[1], bc[2], bc[4]
+    kiem = "; ".join(r"%s: $%d + %d = %d$%s" % (ten[k], a, b, a + b,
+                                                  (r" $\ne %d$" % t) if a + b != t else "")
+                     for k, (a, b, t) in enumerate(dong))
+    return (r"Với mỗi %s, cột ``%s'' phải bằng tổng hai cột ``%s'' và ``%s''."
+            % (don_vi, cot[3], cot[1], cot[2]) +
+            "\\\\\n" + r"Kiểm tra từng dòng: " + kiem + "." +
+            "\\\\\n" +
+            r"Các %s ghi sai: %s. Vậy có $%d$ %s có số liệu không chính xác."
+            % (don_vi, ", ".join(ten[k] for k in sai), len(sai), don_vi))
+
+
 def L10_C5_B12_NB070_MC_A_01(socau, dang=1):
     r"""Phát hiện số liệu VÔ LÍ DỄ THẤY trong bảng dữ liệu (mức NB).
 
@@ -641,123 +697,56 @@ def L10_C5_B12_NB070_MC_A_01(socau, dang=1):
 
 def L10_C5_B12_VD070_MC_A_01(socau, dang=1):
     r"""Phát hiện số liệu KHÔNG CHÍNH XÁC dựa trên mối liên hệ toán học đơn
-    giản giữa các số liệu (tổng các thành phần phải bằng số tổng).
+    giản (tổng các thành phần phải bằng số tổng) - hỏi CÓ BAO NHIÊU dòng sai.
 
-    CLAUDE THEM 29/09/2026 (co Lan duyet): ban VD that su cua VD070 - moi
-    so lieu deu "trong co ve hop li", chi khi cong lai moi phat hien dong
-    sai. Ban de thay chuyen sang L10_C5_B12_NB070_MC_A_01.
+    CLAUDE THEM 29/09/2026, sua cung ngay theo co Lan: muc van dung thi hoi
+    "co bao nhieu", khong hoi "so nao". Ban de thay (so lieu vo li nhin la
+    thay) o L10_C5_B12_NB070_MC_A_01.
     """
-    BOI_CANH = [
-        ("Bảng sau ghi số học sinh nam, nữ và sĩ số của bốn lớp:",
-         ("Lớp", "Nam", "Nữ", "Sĩ số"), ["10A1", "10A2", "10A3", "10A4"],
-         (15, 25), "lớp"),
-        ("Bảng sau ghi số sản phẩm đạt và không đạt chuẩn cùng tổng số sản "
-         "phẩm của bốn tổ trong một ngày:",
-         ("Tổ", "Đạt", "Không đạt", "Tổng"), ["Tổ 1", "Tổ 2", "Tổ 3", "Tổ 4"],
-         (40, 70), "tổ"),
-        ("Bảng sau ghi số vé người lớn, vé trẻ em và tổng số vé bán được của "
-         "một rạp chiếu phim trong bốn ngày:",
-         ("Ngày", "Người lớn", "Trẻ em", "Tổng"), ["Thứ Sáu", "Thứ Bảy",
-                                                 "Chủ nhật", "Thứ Hai"],
-         (60, 150), "ngày"),
-    ]
-    gt = []
-    lan = 0
-    while len(gt) < socau and lan < 200:
-        lan += 1
-        i = random.randrange(len(BOI_CANH))
-        lo, hi = BOI_CANH[i][3]
-        hang = [(random.randint(lo, hi), random.randint(lo // 3, hi)) for _ in range(4)]
-        sai = random.randrange(4)
-        lech = random.choice([-3, -2, -1, 1, 2, 3, 10, -10])
-        v = (i, tuple(hang), sai, lech)
-        if v not in gt:
-            gt.append(v)
-
     cauTN = ""
-    for i, hang, sai, lech in gt:
-        mo_dau, cot, ten_hang, _khoang, don_vi = BOI_CANH[i]
-        tong = [a + b + (lech if k == sai else 0) for k, (a, b) in enumerate(hang)]
-        dong = [r"%s & $%d$ & $%d$ & $%d$ \\ \hline" % (ten_hang[k], a, b, tong[k])
-                for k, (a, b) in enumerate(hang)]
-        bang = (r"\begin{center}\begin{tabular}{|c|c|c|c|}\hline " +
-                " & ".join(cot) + r" \\ \hline " + " ".join(dong) +
-                r"\end{tabular}\end{center}")
-        dung = ten_hang[sai]
-        nhieu = [t for k, t in enumerate(ten_hang) if k != sai]
-        debai = (mo_dau + "\n" + bang + "\n" +
-                 r"Biết rằng chỉ có một %s bị ghi sai số liệu. Đó là %s nào?"
-                 % (don_vi, don_vi))
-        kiem = "; ".join(r"%s: $%d + %d = %d$" % (ten_hang[k], a, b, a + b)
-                         for k, (a, b) in enumerate(hang))
-        giai = (r"Với mỗi %s, cột ``%s'' phải bằng tổng hai cột ``%s'' và ``%s''."
-                % (don_vi, cot[3], cot[1], cot[2]) +
-                "\\\\\n" + r"Kiểm tra: " + kiem + "." +
-                "\\\\\n" +
-                r"Chỉ %s ghi $%d$ trong khi tổng đúng là $%d$, nên số liệu của "
-                r"%s không chính xác." % (dung, tong[sai], hang[sai][0] + hang[sai][1], dung))
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    for _ in range(socau):
+        so_dong = random.choice([5, 6])
+        bc, dong, sai = _bang_tong_co_dong_sai(so_dong, random.choice([1, 2, 3]))
+        dung = "$%d$" % len(sai)
+        nhieu = ["$%d$" % x for x in random.sample([x for x in range(0, 5) if x != len(sai)], 3)]
+        debai = (bc[0] + "\n" + _tex_bang_tong(bc, dong) + "\n" +
+                 r"Có bao nhiêu %s có số liệu \textbf{không chính xác}?" % bc[4])
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, _giai_bang_tong(bc, dong, sai), 0, 0, dang)
     return cauTN
 
+
 def L10_C5_B12_VD070_TL_A_01(socau, dong=1):
-    r"""Tự luận: lí giải số liệu không chính xác trong bảng.
+    r"""Tự luận: đếm số dòng có số liệu không chính xác và tính lại tổng đúng.
 
-    CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    SUA 29/09/2026 (co Lan: muc van dung thi hoi "co bao nhieu"): ban cu hoi
+    "chi ra so lieu khong hop li" voi chieu cao 15 cm - nhin la thay.
     """
-    gt = []
-    while len(gt) < socau:
-        nen = [random.randint(150, 175) for _ in range(5)]
-        la = random.choice([15, 1700, -160])
-        vi_tri = random.randrange(6)
-        v = (tuple(nen), la, vi_tri)
-        if v not in gt:
-            gt.append(v)
-
     cauTN = ""
-    for nen, la, vi_tri in gt:
-        nen = list(nen)
-        X = nen[:vi_tri] + [la] + nen[vi_tri:]
-        tb_sai = _so_trung_binh(X)
-        tb_dung = _so_trung_binh(nen)
-
-        debai = (r"Bảng sau ghi chiều cao (đơn vị: cm) của $6$ học sinh lớp "
-                 r"10, trong đó có một số liệu bị ghi nhầm:"
-                 "\\\\\n" + r"\begin{center}" + _bang(X) + r"\end{center}")
-
-        hoi_a = r"Chỉ ra số liệu không hợp lí và giải thích."
-        giai_a = (r"Chiều cao của học sinh lớp 10 thường nằm trong khoảng "
-                  r"$140$ cm đến $190$ cm."
-                  "\\\\\n"
-                  r"Số liệu $%s$ cm nằm ngoài khoảng ấy nên không hợp lí - "
-                  r"nhiều khả năng do ghi nhầm khi nhập số liệu."
-                  % _xx5(la))
-
-        hoi_b = (r"Tính số trung bình của mẫu \textbf{khi còn} số liệu sai "
-                 r"và \textbf{sau khi} bỏ số liệu ấy đi. So sánh hai kết "
-                 r"quả.")
-        giai_b = (r"Khi còn số liệu sai: "
-                  r"$\overline{x} = \dfrac{%s}{6} = %s$ (cm)."
-                  % (_xx5(sum(X)), _xx5(tb_sai)) +
-                  "\\\\\n"
-                  r"Sau khi bỏ số liệu sai, còn $5$ số liệu: "
-                  r"$\overline{x} = \dfrac{%s}{5} = %s$ (cm)."
-                  % (_xx5(sum(nen)), _xx5(tb_dung)) +
-                  "\\\\\n"
-                  r"Hai kết quả lệch nhau $%s$ cm. Một số liệu sai đã kéo "
-                  r"số trung bình đi rất xa, cho thấy số trung bình "
-                  r"\textbf{rất nhạy} với giá trị bất thường."
-                  % _xx5(abs(tb_sai - tb_dung)))
-
-        ds_abcd = [(hoi_a, r"%s\ \text{cm}" % _xx5(la), giai_a),
-                   (hoi_b, r"\overline{x} = %s \to %s"
-                    % (_xx5(tb_sai), _xx5(tb_dung)), giai_b)]
+    for _ in range(socau):
+        bc, hang, sai = _bang_tong_co_dong_sai(6, random.choice([1, 2, 3]))
+        cot, ten, don_vi, tong_ten = bc[1], bc[2], bc[4], bc[5]
+        tong_ghi = sum(t for _a, _b, t in hang)
+        tong_dung = sum(a + b for a, b, _t in hang)
+        debai = (bc[0] + "\n" + _tex_bang_tong(bc, hang) +
+                 "\n" + r"Biết rằng hai cột ``%s'' và ``%s'' được ghi đúng." % (cot[1], cot[2]))
+        hoi_a = r"Có bao nhiêu %s có số liệu không chính xác? Đó là những %s nào?" % (don_vi, don_vi)
+        giai_a = _giai_bang_tong(bc, hang, sai)
+        hoi_b = (r"Nếu cộng cột ``%s'' như trong bảng thì được bao nhiêu? Tính lại "
+                 r"%s đúng của cả bảng." % (cot[3], tong_ten))
+        giai_b = (r"Cộng cột ``%s'' như trong bảng: $%s = %d$." %
+                  (cot[3], " + ".join(str(t) for _a, _b, t in hang), tong_ghi) +
+                  "\\\\\n" +
+                  r"Vì hai cột ``%s'', ``%s'' đúng nên %s đúng là "
+                  r"$%d + %d = %d$." % (cot[1], cot[2], tong_ten,
+                                        sum(a for a, _b, _t in hang),
+                                        sum(b for _a, b, _t in hang), tong_dung) +
+                  "\\\\\n" +
+                  r"Số liệu trong bảng lệch $%d$ so với thực tế." % abs(tong_ghi - tong_dung))
+        ds_abcd = [(hoi_a, r"%d" % len(sai), giai_a),
+                   (hoi_b, r"%d" % tong_dung, giai_b)]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
 
-
-# =====================================================================
-# BÀI 13. CÁC SỐ ĐẶC TRƯNG ĐO XU THẾ TRUNG TÂM
-# =====================================================================
 
 def _mau_so_lieu(n, lo, hi, dieu_kien=None, lan_thu=300):
     """Sinh một mẫu n số nguyên trong [lo; hi] thoả điều kiện cho trước.
@@ -2322,32 +2311,20 @@ def L10_C5_TF_B_01(socau, socot=1):
 # ---------------------------------------------------------------------
 
 def L10_C5_B12_VD070_SA_A_01(socau):
-    """Trả lời ngắn: số liệu không hợp lí trong bảng dữ liệu."""
-    gt = []
-    while len(gt) < socau:
-        nen = [random.randint(150, 175) for _ in range(5)]
-        la = random.choice([15, 1700, 17])
-        vi_tri = random.randrange(6)
-        v = (tuple(nen), la, vi_tri)
-        if v not in gt:
-            gt.append(v)
+    r"""Trả lời ngắn: có bao nhiêu dòng của bảng có số liệu không chính xác
+    (dựa vào quan hệ tổng).
 
+    SUA 29/09/2026 (co Lan: muc van dung thi hoi "co bao nhieu"): ban cu hoi
+    "so lieu nao khong hop li" voi chieu cao 15 cm / 1700 cm - nhin la thay.
+    """
     cau = ""
-    for nen, la, vi_tri in gt:
-        nen = list(nen)
-        X = nen[:vi_tri] + [la] + nen[vi_tri:]
-        debai = (r"Bảng sau ghi chiều cao (đơn vị: cm) của $6$ học sinh lớp "
-                 r"10:"
-                 "\\\\\n" + r"\begin{center}" + _bang(X) + r"\end{center}" +
-                 "\n" + r"Số liệu nào trong bảng là không hợp lí?")
-        giai = (r"Chiều cao học sinh lớp 10 thường nằm trong khoảng $140$ cm "
-                r"đến $190$ cm."
-                "\\\\\n"
-                r"Số liệu $%s$ nằm ngoài khoảng ấy nên không hợp lí."
-                % _xx5(la))
-        nhieu = _ba_nhieu5(_xx5(la), [_xx5(v) for v in nen],
-                           buoc=lambda t: _xx5(150 + t))
-        cau += MC_SA_answer_text(debai, _xx5(la), nhieu, giai, 0, 0, 2)
+    for _ in range(socau):
+        bc, dong, sai = _bang_tong_co_dong_sai(6, random.choice([1, 2, 3, 4]))
+        debai = (bc[0] + "\n" + _tex_bang_tong(bc, dong) + "\n" +
+                 r"Có bao nhiêu %s có số liệu không chính xác?" % bc[4])
+        dap = str(len(sai))
+        nhieu = [str(x) for x in range(0, 6) if x != len(sai)][:3]
+        cau += MC_SA_answer_text(debai, dap, nhieu, _giai_bang_tong(bc, dong, sai), 0, 0, 2)
     return cau
 
 
