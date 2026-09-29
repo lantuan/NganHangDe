@@ -8528,3 +8528,80 @@ Ca hai da dich that bang xelatex, ra anh dung.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.33 - 2026-09-29
+
+## Trang chat chay duoc tren dien thoai
+
+chat.html truoc day KHONG co mot quy tac @media nao: thanh ben rong co
+dinh 280px chiem gan het man hinh dien thoai (~390px), khung chat con
+~110px, chu bi bop thanh tung chu mot, o nhap lieu bi day ra ngoai. Ham
+toggleSidebar() co san nhung khong co nut nao goi toi. Nay man hinh hep
+hon 768px: thanh ben thanh ngan keo ra (mac dinh an), nut ba gach o dau
+trang, man che mo phia sau; thu gon khoang dem; 100dvh thay 100vh de
+iPhone khong lam mat o nhap lieu. Da gia lap 390px soi 12 trang: khong
+trang nao tran ngang. tests/test_chat_dien_thoai.py.
+
+Phat hien kem (CHUA SUA - cho co Lan quyet): teacher/thong_ke.html tu
+luc tao chi la tep 268 byte, khong co giao dien.
+
+## Web: cau Dung/Sai co hinh khong con bi mat hinh
+
+Hinh cua cau Dung/Sai nam SAU \choiceTFt (kieu xep cua TF_baitoan_du),
+ma answer_parser_service cat de bai ngay tai \choiceTFt -> 9 cau Dung/Sai
+co hinh trong ca ngan hang deu mat hinh tren trang lam bai. Nay tim hinh
+trong ca phan cau hoi (truoc \loigiai). tests/test_hinh_cau_dung_sai_len_web.py.
+
+## LOP 12 - CHUONG 6 (Xac suat co dieu kien): 13/13 dang
+
+PPCT: B18 Xac suat co dieu kien; B19 Cong thuc xac suat toan phan va
+cong thuc Bayes. Curriculum khop san.
+
+Mapping: 12 -> 13 dong. O tra loi ngan muc VD chi co mot dong nen de he
+so 1 van hut cau; them L12_C6_B19_VD058_SA_A (doc so do hinh cay) kem
+ghi_chu de co Lan duyet.
+
+### Bai toan luon dung tu SO DEM, khong tu so thap phan
+
+Tra loi ngan cham bang so khop chuoi va o tra loi chi 4 ky tu. Tha so
+thap phan tuy y vao so do cay thi Bayes hay ra so vo han tuan hoan.
+  - Bang 2x2: dung sao cho CA BON tong le va tong chung deu la UOC CUA
+    1000 -> moi xac suat doc tu bang toi da 3 chu so thap phan.
+  - Bai hai nguon: dung NGUOC tu tong so san pham dac biet, roi KIEM
+    tung xac suat se xuat hien (tren cay, trong de, trong loi giai).
+  - Cau tra loi ngan: dai luong duoc hoi toi da 2 chu so thap phan.
+    Soi 1800 dap so: tat ca dai 3-4 ky tu, vua o.
+  - _ps() chia bang so hoc so nguyen, KHONG qua float; can qua 3 chu so
+    thi vang loi ngay luc sinh cau.
+
+### Hinh ve (TikZ, co ca tren web)
+
+  _hinh_bang2x2  bang so lieu 2x2 - ve bang TikZ vi MathJax tren web
+                 KHONG dung duoc tabular
+  _hinh_cay      so do hinh cay hai tang, ghi xac suat tren nhanh
+Loi gap khi ve thu: bo ten tieng Viet trong $...$ lam mat dau ("Phan
+xuong" thanh "Phn xng") - da sua, nhan de ngoai che do toan.
+
+### Kiem toan doc lap bat duoc 4 loi THAT (da sua)
+
+1. Mau so 128: 15/128 = 0,1171875 bi in thanh 0,117188 - LAM TRON NGAM.
+   Da bo 16, 32, 64, 80, 128... khoi MAU_DEP, _ps() chia chinh xac.
+2. Hai nguon trung ti le (16/160 va 34/340): A va B doc lap, bai Bayes
+   tam thuong. Nay bat buoc hai ti le khac nhau.
+3. Menh de SAI co y "P(B) = ti le loi" o cau Dung/Sai hoa DUNG khi
+   P(B) tinh co bang P(A|B) - 3 cau. Nay loai bo so lieu do.
+4. Menh de sai co y "P(B|A) = P(A|B)" hoa dung khi b = c (bang) hoac
+   T = n1 (hai nguon). Nay loai bo so lieu do.
+
+Sau khi sua: soi 10750 dap an + 4000 y Dung/Sai (250 seed) - doc so lieu
+TU CHINH DE BAI va TU HINH VE (so trong bang, so tren nhanh cay), tinh lai
+bang Fraction. 0 cho sai.
+
+20 de he so 1 chuong 6: du 12 cau, khong con cho nao thieu.
+2925 bai test qua, 8 bo qua (truoc: 2868).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
