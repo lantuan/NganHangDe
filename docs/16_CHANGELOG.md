@@ -8722,3 +8722,22 @@ khac la dung?". Dap an dung (3 cau DUNG) giu nguyen.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.38 - 2026-09-29
+
+## Cong cu chay nhap mot ham: scripts/nhap.py
+
+    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01            (5 cau)
+    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01 -n 10 --seed 7
+    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C               (moi bien the)
+
+Ghi nhap/<TEN>_dethi.tex|pdf va nhap/<TEN>_loigiai.tex|pdf. Sinh cau y
+nhu tren web (cung cach goi ham, bo loc lam_dep, khung latex_template.tex,
+ex_test.sty, pdflatex 2 lan). Chi doc, khong sua ngan hang. nhap/ nam
+trong .gitignore.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

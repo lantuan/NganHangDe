@@ -70,3 +70,6 @@ _to_delete/
 
 # Thu muc do ung dung Claude tu tao khi gui tep - khong thuoc ma nguon
 Claude outputs/
+
+# Chay nhap mot ham (scripts/nhap.py)
+nhap/
