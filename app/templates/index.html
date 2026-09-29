@@ -208,12 +208,12 @@
 <!-- Hero Section -->
 <section class="relative overflow-hidden pt-20 pb-32">
 <div class="max-w-[1200px] mx-auto px-margin-desktop relative z-10 text-center">
-<span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-bold mb-6">Trí Tuệ Nhân Tạo Đồng Hành</span>
+<span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-bold mb-6">Đề chuẩn chương trình · AI dẫn đường</span>
 <h2 class="font-display-lg text-display-lg text-on-surface mb-6 max-w-3xl mx-auto">
                     Ngân Hàng Đề AI
                 </h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
-                    Học tập thông minh. Luyện đề theo năng lực. AI đồng hành cùng em đến khi thành thạo mọi kiến thức toán học.
+                    Luyện đề Toán bám đúng chương trình. Đề và đáp án lấy từ ngân hàng câu hỏi soạn sẵn, AI đồng hành hướng dẫn em từng bước.
                 </p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
 {% if da_dang_nhap %}
@@ -255,18 +255,35 @@
 <p class="font-body-lg text-on-surface-variant mb-8">
     Ngân Hàng Đề AI là nền tảng học tập và ôn luyện môn Toán, do cô Mai Hà Lan
     (Trường THPT Chuyên Hùng Vương, Gia Lai) xây dựng — dành cho học sinh của
-    trường nói riêng và học sinh THPT nói chung. Hệ thống dùng AI để tự động
-    sinh đề bám sát chương trình học, chấm bài trắc nghiệm và tự luận qua ảnh
-    chụp, và phân tích năng lực ngay trong khung chat.
+    trường nói riêng và học sinh THPT nói chung. Mọi câu hỏi, đáp án và lời
+    giải đều được sinh từ ngân hàng đề viết bằng Python, bám theo phân phối
+    chương trình và yêu cầu cần đạt của từng bài. AI chỉ làm người dẫn đường:
+    hiểu yêu cầu để chọn đúng đề, giải thích lời giải khi em chưa hiểu, và hỗ
+    trợ chấm bài tự luận dựa trên đáp án có sẵn.
 </p>
-<div class="grid grid-cols-2 gap-4">
+{# Co Lan chot 29/09/2026: AI KHONG ra de. De do AI tu nghi rat de vuot
+   khung chuong trinh va ngo nhan sai kien thuc, nen phai noi ro cho nguoi
+   dung. Khong viet lai cau "AI sinh de" o bat ky dau. #}
+<div class="bg-surface-container-lowest border-l-4 border-primary rounded-xl p-4 mb-8">
+<p class="font-label-md text-on-surface mb-1">Vì sao AI không ra đề?</p>
+<p class="font-body-md text-on-surface-variant">
+    Đề do AI tự nghĩ rất dễ vượt khung chương trình hoặc ngộ nhận sai kiến
+    thức. Vì vậy đề được sinh bằng Python từ ngân hàng câu hỏi do giáo viên
+    biên soạn và kiểm tra, AI không tự tính đáp án.
+</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
 <p class="font-headline-md text-headline-md text-primary">100%</p>
 <p class="font-body-md text-on-surface-variant">Miễn phí cho học sinh nhà trường</p>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
+<p class="font-headline-md text-headline-md text-primary">Python</p>
+<p class="font-body-md text-on-surface-variant">Sinh đề &amp; đáp án đúng chương trình</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
 <p class="font-headline-md text-headline-md text-primary">AI</p>
-<p class="font-body-md text-on-surface-variant">Sinh đề &amp; chấm bài tự động</p>
+<p class="font-body-md text-on-surface-variant">Dẫn đường &amp; giải thích lời giải</p>
 </div>
 </div>
 </div>
@@ -312,7 +329,7 @@
 <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
 <span class="material-symbols-outlined text-3xl">auto_awesome</span>
 </div>
-<span class="font-label-md text-center">AI chấm bài</span>
+<span class="font-label-md text-center">Chấm bài</span>
 </div>
 <div class="workflow-step relative flex flex-col items-center group w-full">
 <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-4 transition-transform group-hover:scale-110">

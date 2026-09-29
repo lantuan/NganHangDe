@@ -8647,3 +8647,35 @@ quet ca ngan hang, gom ca mau "co so am thieu ngoac").
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.35 - 2026-09-29
+
+## Thong diep tren web: AI KHONG ra de
+
+Co Lan chot: de sinh bang Python tu ngan hang de; AI chi la nguoi dan
+duong. De do AI tu nghi rat de vuot khung chuong trinh va ngo nhan sai
+kien thuc, nen phai noi ro cho nguoi dung.
+
+  - Trang chu: nhan dau trang "Tri Tue Nhan Tao Dong Hanh" -> "De chuan
+    chuong trinh · AI dan duong"; doan "Ngan Hang De AI la gi?" viet lai
+    (de, dap an, loi giai sinh tu ngan hang de Python theo PPCT va yeu
+    cau can dat; AI chon dung de, giai thich, ho tro cham tu luan theo
+    dap an co san); them o "Vi sao AI khong ra de?"; the "AI - Sinh de &
+    cham bai tu dong" tach thanh "Python - Sinh de & dap an" va "AI - Dan
+    duong & giai thich"; buoc "AI cham bai" -> "Cham bai". Bo cau "phan
+    tich nang luc ngay trong khung chat" (chuc nang chua co).
+  - Dang nhap / Dang ky: bo "Toan hoc thong minh hon voi AI", "toi uu hoa
+    boi tri tue nhan tao", "Nang tam tri tue voi AI", "cham bai AI".
+  - Chat: dong chao "AI tao de" -> "AI se lay de phu hop tu ngan hang de";
+    ca 4 loi chao mo dau them dong "Minh KHONG tu nghi ra de...".
+Tro giang AI (gia_su_service) tu truoc da chi DIEN DAT LAI loi giai co
+san - khong doi.
+
+tests/test_thong_diep_ai_khong_ra_de.py: khong trang nao duoc noi "AI
+sinh de / AI tao de". 2953 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
