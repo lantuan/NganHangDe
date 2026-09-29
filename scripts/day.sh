@@ -191,7 +191,18 @@ fi
 # ---------- 7. Kiem tra web con song ----------
 echo
 echo "Dang kiem tra web..."
-MA="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://$DOMAIN" || echo 000)"
+# Thu lai vai lan chu khong ket luan ngay: vua restart xong, uvicorn phai
+# nap ca ngan hang de nen mat vai giay moi nhan cong. Kiem dung mot phat
+# la co luc bat duoc dung khoang do va bao "502 - co the dang loi" trong
+# khi web hoan toan binh thuong (co Lan gap 29/09/2026).
+MA=000
+for lan in 1 2 3 4 5 6; do
+  MA="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://$DOMAIN" || echo 000)"
+  case "$MA" in
+    200|302|307) break ;;
+  esac
+  [ "$lan" = 6 ] || { echo "   lan $lan: $MA - cho them 5 giay roi thu lai..."; sleep 5; }
+done
 if [ "$MA" = "200" ] || [ "$MA" = "302" ] || [ "$MA" = "307" ]; then
   xanh "Web tra ve $MA -- dang chay binh thuong."
   if [ "$CAN_SUA" = 1 ]; then

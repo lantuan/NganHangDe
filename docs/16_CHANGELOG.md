@@ -8236,3 +8236,44 @@ systemctl restart nganhangde - khong can day ma nguon.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.28 - 2026-09-29
+
+## day.sh: kiem tra web phai thu lai, khong ket luan ngay
+
+Lan chay `day web` dau tien sau khi sua doan do python, ket qua:
+"Web tra ve 502 -- co the dang loi". Kiem lai thi web hoan toan binh
+thuong (trang chu 200, /chat chuyen huong ve /login dung nhu thiet ke).
+
+Nguyen nhan: vua `systemctl restart` xong, uvicorn phai nap ca ngan hang
+de moi nhan cong. Kiem dung mot phat la co luc bat trung dung khoang do
+-> nginx tra 502 -> script bao do om trong khi khong co gi hong. Nay thu
+toi 6 lan, moi lan cach nhau 5 giay, co ket qua tot la dung ngay.
+
+## Xac nhan ban va day.sh 3.26 chay dung
+
+Truoc: "Thu vien THIEU HAN 33 goi" (ke ca fastapi, uvicorn - bao dong
+nham, vi do nham python he thong).
+Nay:   "python cua dich vu: /root/NganHangDe/venv/bin/python"
+       "Thu vien THIEU HAN 1 goi: num2words==0.5.14"
+
+Mot goi ay la THAT. `data/python_bank/toan10/L10_C8.py` va `L10_C9.py`
+`import num2words` ngay dau tep (viet so bang chu tieng Viet). Thieu no
+thi hai chuong 8 va 9 cua lop 10 KHONG ra de duoc - `generator_service`
+se bao khong nap duoc tep chuong. Cac chuong khac khong anh huong, va
+web van chay binh thuong vi tep chuong chi duoc nap khi can den.
+
+Cai tren VPS:
+
+    ssh root@nganhangdechv.tech
+    /root/NganHangDe/venv/bin/python -m pip install num2words==0.5.14
+    systemctl restart nganhangde
+
+Bon goi "lech ban" (cffi, charset-normalizer, numpy, uvicorn) chenh nhau
+ban vá, DE YEN.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
