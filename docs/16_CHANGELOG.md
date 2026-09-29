@@ -8998,3 +8998,28 @@ mat 100% de:
   VD036_SA_B  _02 hai canh va goc xen giua (goc 30/150 -> so nguyen, goc
               45/60/120/135 -> lam tron); _03 manh dat TU GIAC: duong cheo
               chia hai tam giac Heron, cong hai dien tich.
+
+===============================================================================
+
+# Version 3.46 - 2026-09-29
+
+## Bien the lay tu giao an Bai 5 (Gia tri luong giac 0-180 do) cua co Lan
+
+Doi chieu tung cau trong giao an voi mapping L10_C3_B5 (curriculum Bai 5
+chi co NB029, TH030, TH031 - KHONG co muc VD). Cac cau khop dang san co
+thanh bien the moi (so lieu tu sinh, dap an sympy chinh xac):
+  NB029_MC_A_02  bieu thuc 3-4 gia tri luong giac goc dac biet (huu ti)
+  NB029_MC_E_02  goc tu: tich/thuong hai gia tri nao luon am (duong)
+  NB029_MC_G_02  dau cua tich (sin.cos < 0...) -> goc nhon / tu
+  TH031_MC_A_02  trong tam giac: sin(B+C) = sin A, cos(B+C) = -cos A...
+  TH031_SA_A_02  tam giac biet hai goc, T = cos C . tan(A+B)... (dap so
+                 thap phan huu han <= 4 ki tu)
+  TH031_SA_B_02  tong binh phuong sin/cos cac goc cach deu, ghep cap phu nhau
+  L10_C3_TF_A_02 sin alpha = bo ba Pythagore, goc nhon/tu: sin(180-a), cos,
+                 tan, (sin+cos)/(sin-cos)
+Kiem: 200 seed moi ham, bien dich PDF 4 bo nhap (0 loi). 3096 bai test qua.
+
+CHUA LAM - cho co Lan quyet (cac cau co danh dau [VD]/[VDC]): biet tan tinh
+bieu thuc dang cap, sin - cos = k, tan + cot = k, phuong trinh bac hai theo
+sin/cos, dem so goc thoa sin = k, hop luc. Bai 5 khong co yeu cau cap do VD
+nen can them dong curriculum (vd L10_C3_B5_VD030 cung don vi voi TH030).

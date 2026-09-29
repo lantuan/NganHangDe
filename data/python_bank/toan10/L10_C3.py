@@ -3465,3 +3465,345 @@ def L10_C3_B6_VD036_TL_D_01(socau, dong=1):
                    (hoi_c, "%s^{\\circ}" % _xx(goc_A, 1), giai_c)]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
+
+
+# =====================================================================
+# BIẾN THỂ LẤY TỪ GIÁO ÁN BÀI 5 CỦA CÔ LAN (29/09/2026)
+# Nguồn: giáo án "Bài 5. Giá trị lượng giác của một góc từ 0 đến 180 độ"
+# (dự án giáo án). Mỗi hàm là một biến thể CÙNG DẠNG với ID đã có trong
+# mapping, số liệu sinh tự động, đáp án tính bằng sympy (chính xác).
+# =====================================================================
+
+def _gtlg(ham, d):
+    """Giá trị lượng giác (sympy) của góc đặc biệt d; None nếu không xác định."""
+    hang = [r for r in BANG_GTLG if r[0] == d][0]
+    return hang[{"sin": 1, "cos": 2, "tan": 3, "cot": 4}[ham]]
+
+
+def _so_thap_phan_gon(v, toi_da=4):
+    """Chuỗi số thập phân hữu hạn (dấu phẩy) nếu v hữu tỉ viết được gọn
+    trong toi_da kí tự; không được thì None."""
+    v = nsimplify(v)
+    if not v.is_Rational:
+        return None
+    q = int(v.q)
+    while q % 2 == 0:
+        q //= 2
+    while q % 5 == 0:
+        q //= 5
+    if q != 1:
+        return None
+    x = float(v)
+    t = ("%.4f" % x).rstrip("0").rstrip(".")
+    if t in ("-0", ""):
+        t = "0"
+    t = t.replace(".", DAU_THAP_PHAN)
+    return t if len(t) <= toi_da else None
+
+
+def L10_C3_B5_NB029_MC_A_02(socau, dang=1):
+    r"""Giá trị lượng giác của góc đặc biệt - tính BIỂU THỨC gồm ba, bốn giá
+    trị lượng giác của các góc đặc biệt (kể cả góc tù).
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua NB029_MC_A, lay theo bai tap
+    [NB] trong giao an Bai 5 cua co Lan ("A = 2sin30 + 3tan45 - 4cos60 +
+    cot135"). Chi dung cac gia tri HUU TI de ket qua gon. Co Lan duyet.
+    """
+    HUU_TI = [(h, d) for d in (0, 30, 45, 60, 90, 120, 135, 150, 180)
+              for h in ("sin", "cos", "tan", "cot")
+              if _gtlg(h, d) is not None and _gtlg(h, d).is_Rational]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 300:
+        lan += 1
+        hang = random.sample(HUU_TI, random.choice([3, 4]))
+        he = [random.choice([1, 2, 3, 4, -1, -2, -3]) for _ in hang]
+        if any(_gtlg(h, d) == 0 for h, d in hang):
+            continue
+        key = tuple(sorted(zip(he, hang)))
+        if key in gt:
+            continue
+        gt.append(key)
+    cauTN = ""
+    for key in gt:
+        key = list(key)
+        random.shuffle(key)
+        tong = sum(k * _gtlg(h, d) for k, (h, d) in key)
+        bt = ""
+        thay = ""
+        for i, (k, (h, d)) in enumerate(key):
+            dau = ("-" if k < 0 else "") if i == 0 else (" - " if k < 0 else " + ")
+            so = "" if abs(k) == 1 else str(abs(k))
+            bt += r"%s%s\%s %s" % (dau, so, h, _goc(d))
+            v = _gtlg(h, d)
+            thay += r"%s%s%s" % (dau, (so + r"\cdot ") if so else "",
+                                  (r"\left(%s\right)" % _L(v)) if v < 0 else _L(v))
+        # nhieu: quen doi dau o goc tu / nham sin-cos / cong sai dau
+        sai1 = sum(k * abs(_gtlg(h, d)) for k, (h, d) in key)
+        sai2 = sum(k * (_gtlg({"sin": "cos", "cos": "sin", "tan": "cot", "cot": "tan"}[h], d)
+                        if _gtlg({"sin": "cos", "cos": "sin", "tan": "cot", "cot": "tan"}[h], d)
+                        is not None else 0) for k, (h, d) in key)
+        dung = "$%s$" % _L(tong)
+        nhieu = _ba_nhieu(dung, ["$%s$" % _L(simplify(x)) for x in (sai1, sai2, -tong, tong + 1)],
+                          buoc=lambda t: "$%s$" % _L(tong + t + 1))
+        debai = r"Giá trị của biểu thức $A = %s$ bằng" % bt
+        giai = (r"Tra bảng giá trị lượng giác của các góc đặc biệt (góc tù dùng quan hệ "
+                r"hai góc bù nhau):\\ $A = %s = %s$." % (thay, _L(tong)))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_NB029_MC_E_02(socau, dang=1):
+    r"""Xét dấu - biết $\alpha$ là góc tù, chọn BIỂU THỨC (tích hoặc thương hai
+    giá trị lượng giác) luôn âm / luôn dương.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua NB029_MC_E, theo vi du trong
+    giao an Bai 5 ("phi tu, xet dau T = sin phi . cot phi"). Co Lan duyet.
+    """
+    DAU = DAU_GTLG["tu"]
+    ten = [r"\sin", r"\cos", r"\tan", r"\cot"]
+    cap = [(a, b, phep) for i, a in enumerate(ten) for b in ten[i + 1:]
+           for phep in ("nhan", "chia")]
+    def viet(a, b, phep):
+        return (r"%s\alpha\cdot %s\alpha" % (a, b)) if phep == "nhan" else \
+            (r"\dfrac{%s\alpha}{%s\alpha}" % (a, b))
+    def dau(a, b, phep):
+        return DAU[a] * DAU[b]
+    cauTN = ""
+    for _ in range(socau):
+        hoi_am = random.random() < 0.5
+        muc = -1 if hoi_am else 1
+        dung_ds = [c for c in cap if dau(*c) == muc]
+        sai_ds = [c for c in cap if dau(*c) != muc]
+        d = random.choice(dung_ds)
+        sai = random.sample(sai_ds, 3)
+        dung = "$%s$" % viet(*d)
+        nhieu = ["$%s$" % viet(*c) for c in sai]
+        debai = (r"Cho góc $\alpha$ thoả mãn $90^{\circ} < \alpha < 180^{\circ}$. Biểu thức nào "
+                 r"sau đây luôn \textbf{%s}?" % ("âm" if hoi_am else "dương"))
+        giai = (r"Góc $\alpha$ tù nên $\sin\alpha > 0$, còn $\cos\alpha < 0$, $\tan\alpha < 0$, "
+                r"$\cot\alpha < 0$." + "\\\\\n" +
+                r"Tích (thương) của hai số cùng dấu thì dương, trái dấu thì âm. Do đó "
+                r"$%s$ %s." % (viet(*d), "âm" if hoi_am else "dương") + "\\\\\n" +
+                r"Ba biểu thức còn lại đều %s." % ("dương" if hoi_am else "âm"))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_NB029_MC_G_02(socau, dang=1):
+    r"""Biết dấu của một TÍCH hai giá trị lượng giác, suy ra loại góc.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua NB029_MC_G, theo vi du trong
+    giao an Bai 5 ("sin alpha . cos alpha < 0 thi alpha nhon, vuong hay
+    tu?"). Co Lan duyet.
+    """
+    TH = [(r"\sin\alpha\cdot\cos\alpha < 0", "tu", r"\cos\alpha < 0"),
+          (r"\sin\alpha\cdot\cos\alpha > 0", "nhon", r"\cos\alpha > 0"),
+          (r"\sin\alpha\cdot\tan\alpha < 0", "tu", r"\tan\alpha < 0"),
+          (r"\sin\alpha\cdot\tan\alpha > 0", "nhon", r"\tan\alpha > 0"),
+          (r"\sin\alpha\cdot\cot\alpha < 0", "tu", r"\cot\alpha < 0"),
+          (r"\sin\alpha\cdot\cot\alpha > 0", "nhon", r"\cot\alpha > 0")]
+    PA = {"nhon": r"$\alpha$ là góc nhọn", "tu": r"$\alpha$ là góc tù",
+          "vuong": r"$\alpha = 90^{\circ}$", "bet": r"$\alpha = 0^{\circ}$ hoặc $\alpha = 180^{\circ}$"}
+    ds = list(range(len(TH)))
+    random.shuffle(ds)
+    cauTN = ""
+    for i in ds[:min(socau, len(ds))]:
+        dk, loai, suy = TH[i]
+        dung = PA[loai]
+        nhieu = [PA[k] for k in PA if k != loai]
+        debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
+                 r"$%s$. Khẳng định nào sau đây \textbf{đúng}?" % dk)
+        giai = (r"Vì $0^{\circ} \le \alpha \le 180^{\circ}$ nên $\sin\alpha \ge 0$. Tích khác $0$ nên "
+                r"$\sin\alpha > 0$, tức $\alpha \ne 0^{\circ}$, $\alpha \ne 180^{\circ}$ (và các giá trị "
+                r"trong tích xác định nên $\alpha \ne 90^{\circ}$)." + "\\\\\n" +
+                r"Do đó $%s$, suy ra %s." % (suy, dung))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_TH031_MC_A_02(socau, dang=1):
+    r"""Quan hệ giữa giá trị lượng giác của hai góc bù nhau - TRONG TAM GIÁC
+    ($B + C = 180^{\circ} - A$).
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua TH031_MC_A, theo giao an Bai 5
+    ("cos A + cos(B + C) = 0", "sin A = sin(B + C)"). Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        X, Y, Z = random.sample("ABC", 3)
+        tong = r"%s + %s" % tuple(sorted([Y, Z]))
+        DUNG = [r"\sin\left(%s\right) = \sin %s" % (tong, X),
+                r"\cos\left(%s\right) = -\cos %s" % (tong, X),
+                r"\tan\left(%s\right) = -\tan %s" % (tong, X),
+                r"\cos %s + \cos\left(%s\right) = 0" % (X, tong)]
+        SAI = [r"\sin\left(%s\right) = -\sin %s" % (tong, X),
+               r"\cos\left(%s\right) = \cos %s" % (tong, X),
+               r"\tan\left(%s\right) = \tan %s" % (tong, X),
+               r"\sin %s + \sin\left(%s\right) = 0" % (X, tong),
+               r"\cos\left(%s\right) = \sin %s" % (tong, X)]
+        k = random.randrange(len(DUNG))
+        dung = "$%s$" % DUNG[k]
+        nhieu = ["$%s$" % t for t in random.sample(SAI, 3)]
+        debai = r"Cho tam giác $ABC$. Khẳng định nào sau đây \textbf{đúng}?"
+        giai = (r"Vì $A + B + C = 180^{\circ}$ nên $%s = 180^{\circ} - %s$: hai góc $%s$ và $%s$ "
+                r"bù nhau." % (tong, X, tong, X) + "\\\\\n" +
+                r"Hai góc bù nhau có sin bằng nhau; côsin, tang đối nhau. Do đó "
+                r"$\sin\left(%s\right) = \sin %s$, $\cos\left(%s\right) = -\cos %s$, "
+                r"$\tan\left(%s\right) = -\tan %s$." % (tong, X, tong, X, tong, X) + "\\\\\n" +
+                r"Vậy khẳng định đúng là %s." % dung)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C3_B5_TH031_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn: tam giác biết hai góc; tính biểu thức dùng quan hệ hai
+    góc bù nhau (vd $T = \cos C\cdot\tan\left(A + B\right)$).
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua TH031_SA_A, theo bai tap trong
+    giao an Bai 5. Chi giu bo so cho dap so thap phan huu han, toi da 4 ki
+    tu. Co Lan duyet.
+    """
+    GOC = [30, 45, 60, 90, 120, 135, 150]
+    MAU = [("cos", "tan"), ("sin", "cot"), ("tan", "cos"), ("cot", "sin"),
+           ("sin", "sin"), ("cos", "cos"), ("tan", "tan")]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 2000:
+        lan += 1
+        C = random.choice([30, 45, 60, 90, 120])
+        A = random.choice([g for g in range(15, 180 - C, 15)])
+        B = 180 - A - C
+        if B <= 0 or 180 - C not in GOC:
+            continue
+        h1, h2 = random.choice(MAU)
+        v1, v2 = _gtlg(h1, C), _gtlg(h2, 180 - C)
+        if v1 is None or v2 is None:
+            continue
+        T = simplify(v1 * v2)
+        dap = _so_thap_phan_gon(T)
+        if dap is None or T == 0 or (A, B, h1, h2) in gt:
+            continue
+        gt.append((A, B, h1, h2))
+    cau = ""
+    for A, B, h1, h2 in gt:
+        C = 180 - A - B
+        v1, v2 = _gtlg(h1, C), _gtlg(h2, 180 - C)
+        T = simplify(v1 * v2)
+        dap = _so_thap_phan_gon(T)
+        debai = (r"Cho tam giác $ABC$ có $\widehat{A} = %s$, $\widehat{B} = %s$. Tính giá trị "
+                 r"của biểu thức $T = \%s C\cdot\%s\left(A + B\right)$."
+                 % (_goc(A), _goc(B), h1, h2))
+        giai = (r"$\widehat{C} = 180^{\circ} - %s - %s = %s$ nên $\%s C = \%s %s = %s$.\\ "
+                r"$A + B = 180^{\circ} - C = %s$, nên $\%s\left(A + B\right) = \%s %s = %s$.\\ "
+                r"Vậy $T = %s\cdot %s = %s$."
+                % (_goc(A), _goc(B), _goc(C), h1, h1, _goc(C), _L(v1),
+                   _goc(180 - C), h2, h2, _goc(180 - C), _L(v2),
+                   (r"\left(%s\right)" % _L(v1)) if v1 < 0 else _L(v1),
+                   (r"\left(%s\right)" % _L(v2)) if v2 < 0 else _L(v2), dap))
+        nguoc = _so_thap_phan_gon(-T) or "0"
+        ds = _ba_nhieu(dap, [nguoc, "1", "-1", "0"], buoc=lambda t: str(t + 1))
+        cau += MC_SA_answer_const(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_SA_B_02(socau, dang=2):
+    r"""Trả lời ngắn: tổng bình phương sin (hoặc côsin) của các góc cách đều,
+    ghép cặp hai góc PHỤ nhau ($\cos(90^{\circ} - x) = \sin x$) rồi dùng
+    $\sin^2 x + \cos^2 x = 1$.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua TH031_SA_B, theo bai
+    "S = cos^2 5 + cos^2 10 + ... + cos^2 85" trong giao an Bai 5 (nguon: de
+    on theo bai). Buoc goc va goc dau thay doi. Co Lan duyet.
+    """
+    BO = [(b, d) for d in (5, 10, 15, 18, 30) for b in range(d, 45, d)
+          if (90 - b) % d == 0 and b < 45 and len(range(b, 90 - b + 1, d)) >= 5]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 300:
+        lan += 1
+        b, d = random.choice(BO)
+        ham = random.choice(["sin", "cos"])
+        k = random.choice([1, 1, 2, 4])
+        if (b, d, ham, k) in gt:
+            continue
+        gt.append((b, d, ham, k))
+    cau = ""
+    for b, d, ham, k in gt:
+        goc = list(range(b, 90 - b + 1, d))
+        n = len(goc)
+        co45 = 45 in goc
+        so_cap = (n - 1) // 2 if co45 else n // 2
+        S = Rational(so_cap) + (Rational(1, 2) if co45 else 0)
+        S = S * k
+        dap = _so_thap_phan_gon(S)
+        if dap is None:
+            dap = str(S)
+        he = "" if k == 1 else "%d" % k
+        day = r"\%s^{2}%s + \%s^{2}%s + \%s^{2}%s + \cdots + \%s^{2}%s" % (
+            ham, _goc(goc[0]), ham, _goc(goc[1]), ham, _goc(goc[2]), ham, _goc(goc[-1]))
+        debai = (r"Tính $S = %s\left(%s\right)$, trong đó các góc tăng đều mỗi lần $%s$."
+                 % (he, day, _goc(d))) if k != 1 else \
+            (r"Tính $S = %s$, trong đó các góc tăng đều mỗi lần $%s$." % (day, _goc(d)))
+        phu = "sin" if ham == "cos" else "cos"
+        giai = (r"Dãy góc $%s, %s, \ldots, %s$ có $\dfrac{%d - %d}{%d} + 1 = %d$ góc."
+                % (_goc(goc[0]), _goc(goc[1]), _goc(goc[-1]), goc[-1], goc[0], d, n) + "\\\\\n" +
+                r"Ghép hai góc phụ nhau $x$ và $90^{\circ} - x$: $\%s^{2}\left(90^{\circ} - x\right) = "
+                r"\%s^{2}x$ nên mỗi cặp $\%s^{2}x + \%s^{2}\left(90^{\circ} - x\right) = 1$."
+                % (ham, phu, ham, ham) + "\\\\\n" +
+                (r"Có $%d$ cặp, còn lại góc $45^{\circ}$ với $\%s^{2}45^{\circ} = \dfrac{1}{2}$."
+                 % (so_cap, ham) if co45 else r"Có $%d$ cặp." % so_cap) + "\\\\\n" +
+                r"Vậy $S = %s%s$." % (("%d\\cdot " % k) if k != 1 else "",
+                                       (r"\left(%d + \dfrac{1}{2}\right) = %s" % (so_cap, dap)) if co45
+                                       else (r"%d = %s" % (so_cap, dap)) if k != 1 else dap))
+        ds = _ba_nhieu(dap, [str(n), str(so_cap * k), _so_thap_phan_gon(S + k) or str(S + k)],
+                       buoc=lambda t: str(n + t))
+        cau += MC_SA_answer_const(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_TF_A_02(socau, socot=1):
+    r"""Đúng/Sai - biết $\sin\alpha$ (bộ ba Pythagore) và loại góc (nhọn/tù):
+    tính $\cos$, $\tan$, $\cot$ và $\sin\left(180^{\circ} - \alpha\right)$.
+
+    CLAUDE THEM 29/09/2026 - bien the 02 cua L10_C3_TF_A, theo cau Dung/Sai
+    trong giao an Bai 5 ("sin alpha = 3/5, 0 < alpha < 90"). Moi y co ban
+    dung va ban sai (sai dau / dao tu mau). Co Lan duyet.
+    """
+    BO = [(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25), (4, 3, 5), (12, 5, 13)]
+    cauTF = ""
+    for _ in range(socau):
+        a, b, c = random.choice(BO)
+        tu = random.random() < 0.5
+        sn = Rational(a, c)
+        cs = Rational(-b, c) if tu else Rational(b, c)
+        tn, ct = sn / cs, cs / sn
+        khoang = r"90^{\circ} < \alpha < 180^{\circ}" if tu else r"0^{\circ} < \alpha < 90^{\circ}"
+        debai = (r"Cho góc $\alpha$ thoả mãn $\sin\alpha = %s$ và $%s$. Xét tính đúng sai của "
+                 r"các khẳng định sau:" % (_L(sn), khoang))
+        # a) NB - quan he hai goc bu nhau
+        y1 = [(r"{\True $\sin\left(180^{\circ} - \alpha\right) = %s$}" % _L(sn),
+               r"Đúng. Hai góc bù nhau có sin bằng nhau."),
+              (r"{$\sin\left(180^{\circ} - \alpha\right) = %s$}" % _L(-sn),
+               r"Sai. $\sin\left(180^{\circ} - \alpha\right) = \sin\alpha = %s$." % _L(sn))]
+        # b) TH - he thuc co ban va xet dau cos theo loai goc
+        ly_cos = (r"$\cos^{2}\alpha = 1 - \left(%s\right)^{2} = %s$, và vì $\alpha$ %s nên "
+                  r"$\cos\alpha %s 0$, do đó $\cos\alpha = %s$."
+                  % (_L(sn), _L(1 - sn ** 2), "tù" if tu else "nhọn", "<" if tu else ">", _L(cs)))
+        y2 = [(r"{\True $\cos\alpha = %s$}" % _L(cs), r"Đúng. " + ly_cos),
+              (r"{$\cos\alpha = %s$}" % _L(-cs), r"Sai (sai dấu). " + ly_cos)]
+        # c) VD - dung ket qua cua b) de tinh tan
+        y3 = [(r"{\True $\tan\alpha = %s$}" % _L(tn),
+               r"Đúng. $\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = %s$." % _L(tn)),
+              (r"{$\tan\alpha = %s$}" % _L(1 / tn),
+               r"Sai (đảo tử và mẫu). $\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = %s$." % _L(tn))]
+        # d) VDC - thay ca sin va cos vao bieu thuc
+        P = simplify((sn + cs) / (sn - cs))
+        P_sai = simplify((sn - cs) / (sn + cs))
+        y4 = [(r"{\True $\dfrac{\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha} = %s$}" % _L(P),
+               r"Đúng. Thay $\sin\alpha = %s$, $\cos\alpha = %s$ được $%s$." % (_L(sn), _L(cs), _L(P))),
+              (r"{$\dfrac{\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha} = %s$}" % _L(P_sai),
+               r"Sai. Thay $\sin\alpha = %s$, $\cos\alpha = %s$ được $%s$." % (_L(sn), _L(cs), _L(P)))]
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
