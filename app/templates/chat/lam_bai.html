@@ -140,6 +140,15 @@
         /* Hinh ve cua cau hoi, da dich san tu TikZ ra anh */
         .hinh-ve { margin: 12px 0; text-align: center; }
         .can-giua { text-align: center; margin: 10px 0; line-height: 2; }
+        /* Nhan danh sach: listEX -> a) b) ; enumerate -> 1. 2. (dam, giong PDF) */
+        ol.ds-chu, ol.ds-so { list-style: none; padding-left: 2em; margin: 8px 0; }
+        ol.ds-chu > li, ol.ds-so > li { position: relative; margin: 6px 0; }
+        ol.ds-chu { counter-reset: y-chu; }
+        ol.ds-chu > li { counter-increment: y-chu; }
+        ol.ds-chu > li::before { content: counter(y-chu, lower-alpha) ")"; font-weight: 700; position: absolute; left: -1.8em; }
+        ol.ds-so { counter-reset: y-so; }
+        ol.ds-so > li { counter-increment: y-so; }
+        ol.ds-so > li::before { content: counter(y-so) "."; font-weight: 700; position: absolute; left: -1.8em; }
         .bang-lx { border-collapse: collapse; margin: 10px auto; max-width: 100%; }
         .bang-lx td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: center; }
         .bang-lx tr:first-child td { background: #f1f5f9; font-weight: 600; }
@@ -282,6 +291,9 @@ if (CID_TU_URL) {
 // Khong xu ly het moi macro LaTeX - chi cover cac truong hop hay gap
 // trong ngan hang de hien tai.
 // ============================================================
+// Nhan danh sach (co Lan chot 29/09/2026): cac y cua cau tu luan (listEX)
+// la a), b), c)...; cac y liet ke trong cau trac nghiem (enumerate) la
+// 1., 2., ...; itemize la dau cham tron. KHONG dung gach dau dong "-".
 function xuLyDanhSach(text, theBao, cheDo) {
     const re = new RegExp('\\\\begin\\{' + cheDo + '\\}([\\s\\S]*?)\\\\end\\{' + cheDo + '\\}', 'g');
     return text.replace(re, function (match, noiDung) {
@@ -291,7 +303,8 @@ function xuLyDanhSach(text, theBao, cheDo) {
         noiDung = noiDung.replace(/^\s*\[[^\]]*\]/, '');
         const items = noiDung.split('\\item').map(function (x) { return x.trim(); }).filter(Boolean);
         const lis = items.map(function (it) { return '<li>' + it + '</li>'; }).join('');
-        return '<' + theBao + '>' + lis + '</' + theBao + '>';
+        const lop = cheDo === 'listEX' ? ' class="ds-chu"' : (cheDo === 'enumerate' ? ' class="ds-so"' : '');
+        return '<' + theBao + lop + '>' + lis + '</' + theBao + '>';
     });
 }
 

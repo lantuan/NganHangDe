@@ -7442,13 +7442,37 @@ def L10_C1_B1_VD014_MC_B_01(socau, dang=1):
         dapso = f"${so_menh_de_dung}$"
         dsnhieu = [f"${i}$" for i in range(5) if i != so_menh_de_dung]
 
+        # SUA 29/09/2026 (co Lan: gach dau dong khong dat, cac y danh so
+        # 1., 2., ...): loi giai cu viet "- P(3) la Sai. - ..." dinh lien
+        # mot mach tren PDF va khong neu ly do. Nay danh so tung y, moi y
+        # mot dong, kem phep thu cu the.
+        def dung_sai(b):
+            return "đúng" if b else "sai"
+
+        phan_so = f"\\dfrac{{{p}}}{{{q}}}"
+        mu_ps = f"\\dfrac{{{p ** n}}}{{{q ** n}}}"
+        # phan vi du nho nhat trong N (0, 1, 2, ...) lam P(x) sai
+        phan_vd = next((x for x in range(5) if not check(x)), None)
+        if phan_vd is None:
+            ly_do_3 = (f"đúng: với $x \\in \\left\\{{0; 1\\right\\}}$ thì $x = x^{{{n}}}$, "
+                       f"với $x \\ge 2$ thì $x < x^{{{n}}}$")
+            ly_do_4 = f"sai, vì $P(x)$ đúng với mọi $x \\in \\mathbb{{N}}$ (ý 3)"
+        else:
+            ly_do_3 = (f"sai, vì với $x = {phan_vd}$ thì ${phan_vd} {dau_tex} "
+                       f"{phan_vd}^{{{n}}} = {phan_vd ** n}$ sai")
+            ly_do_4 = f"đúng, vì $x = {phan_vd}$ làm $P(x)$ sai"
         giai = (
-            f"Xét mệnh đề $P(x)\\colon x {dau_tex} x^{{{n}}}$.\n"
-            f"- $P({a})$ là {'Đúng' if p1 else 'Sai'}.\n"
-            f"- $P\\left({frac_str}\\right)$ là {'Đúng' if p2 else 'Sai'}.\n"
-            f"- $\\forall x\\in \\mathbb{{N}}, P(x)$ là {'Đúng' if p3 else 'Sai'}.\n"
-            f"- $\\exists x\\in \\mathbb{{N}}, \\overline{{P(x)}}$ là {'Đúng' if p4 else 'Sai'}.\n"
-            f"Tổng cộng có $\\mathbf{{{so_menh_de_dung}}}$ mệnh đề đúng."
+            f"Xét mệnh đề chứa biến $P(x)\\colon x {dau_tex} x^{{{n}}}$.\n"
+            f"\\begin{{enumerate}}\n"
+            f"\\item $P({a})\\colon {a} {dau_tex} {a}^{{{n}}} = {a ** n}$ là mệnh đề "
+            f"{dung_sai(p1)}.\n"
+            f"\\item $P\\left({phan_so}\\right)\\colon {phan_so} {dau_tex} "
+            f"\\left({phan_so}\\right)^{{{n}}} = {mu_ps}$ là mệnh đề {dung_sai(p2)}.\n"
+            f"\\item $\\forall x\\in \\mathbb{{N}}, P(x)$ là mệnh đề {ly_do_3}.\n"
+            f"\\item $\\exists x\\in \\mathbb{{N}}, \\overline{{P(x)}}$ là mệnh đề "
+            f"{ly_do_4}.\n"
+            f"\\end{{enumerate}}\n"
+            f"Vậy có $\\mathbf{{{so_menh_de_dung}}}$ mệnh đề đúng."
         )
 
         cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)

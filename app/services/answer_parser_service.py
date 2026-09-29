@@ -296,10 +296,17 @@ def trich_de_bai(latex_block: str) -> dict:
     # khong lo tung dap an con:
     de_bai = _xoa_khoi_dap_an_an(de_bai, r"\SA")
     de_bai = _xoa_khoi_dap_an_an(de_bai, r"\shortans")
-    de_bai = re.sub(r"\\begin\{listEXV?\}(?:\[[^\]]*\])*", "", de_bai)
-    de_bai = re.sub(r"\\end\{listEXV?\}", "", de_bai)
+    # SUA 29/09/2026 (co Lan: "gach dau dong cac y van khong dat. Cac y
+    # thi tung y la 1., 2., ... con tu luan thi cac cau la a), b)"):
+    # truoc day o day xoa \begin{listEX} va doi MOI \item thanh "- " ->
+    # tren web y tu luan hien "- Tim toa do...", cau trac nghiem liet ke
+    # menh de (enumerate) hien "1. - P(3). - P(1/5)..." dinh mot muc.
+    # Nay GIU NGUYEN moi truong danh sach; lam_bai.html (xuLyDanhSach) tu
+    # danh nhan: listEX -> a), b), ...; enumerate -> 1., 2., ...;
+    # itemize -> dau cham tron (giong PDF).
+    de_bai = re.sub(r"\\begin\{listEXV\}", r"\\begin{listEX}", de_bai)
+    de_bai = re.sub(r"\\end\{listEXV\}", r"\\end{listEX}", de_bai)
     de_bai = _rut_gon_immini(de_bai)
-    de_bai = re.sub(r"\\item\b", "\n- ", de_bai)
     de_bai = de_bai.strip()
 
     return {"de_bai": de_bai, "co_hinh_ve": co_hinh_ve, "hinh_tikz": hinh_tikz}

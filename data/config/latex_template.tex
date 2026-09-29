@@ -57,6 +57,15 @@
 % Dap an tu luan van hien day du trong phan \loigiai.
 \renewcommand{\SA}[2][]{}
 
+% Cac y cua cau TU LUAN phai la a), b), c)... (co Lan chot 29/09/2026).
+% TL_answer_const / TL_answer_text (math_type.py - KHONG sua) viet
+% \begin{listEX}[dong]; trong ex_test.sty so 1 o day lai nghia la "danh so
+% 1, 2, 3" (dong=1 -> "1", "2") con so khac la so COT voi nhan a). Hai y
+% nghia chong nhau nen tu luan 1 cot bi danh so 1, 2. Dinh nghia lai: doi
+% so dau = so cot, nhan luon la a), b) in dam. listEX chi co math_type
+% dung (cau tu luan + loi giai cua no) nen khong anh huong cau khac.
+\RenewDocumentEnvironment{listEX}{ O{1} O{} }{\GiamKhoangTrangThua\begin{taskEX}[counter-format=tsk[a]), label-bold](#1)}{\end{taskEX}}
+
 \newcommand{\hetde}{\centerline{\rule[0.5ex]{2cm}{1pt} HẾT \rule[0.5ex]{2cm}{1pt}}}
 
 %Tieu de - ban rut gon cho web tu dong sinh de

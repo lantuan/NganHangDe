@@ -8783,3 +8783,39 @@ bat loi doi ID ma quen doi ten ham. 2959 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.41 - 2026-09-29
+
+## Nhan cac y: tu luan a), b); trac nghiem liet ke 1., 2. - bo gach dau dong
+
+Co Lan: "gach dau hang cac y van khong dat. Cac y thi tung y la 1., 2.,
+... con tu luan thi cac cau la a), b)".
+
+Ba cho gay loi:
+1. answer_parser_service.trich_de_bai xoa \begin{listEX} va doi MOI \item
+   thanh "- " -> web: y tu luan hien "- Tim toa do...", cau trac nghiem
+   (enumerate) hien "1. - P(3). - P(1/5)..." dinh mot muc. Nay GIU
+   NGUYEN moi truong danh sach (van xoa \SA de khong lo dap an).
+2. lam_bai.html xuLyDanhSach: listEX -> <ol class="ds-chu"> nhan a) b)
+   dam; enumerate -> <ol class="ds-so"> nhan 1. 2. dam; itemize -> cham
+   tron. Ap dung ca de bai lan loi giai.
+3. PDF: ex_test.sty hieu \begin{listEX}[1] la "danh so 1, 2" (so khac la
+   so cot, nhan a)) - ma math_type viet [dong] voi dong=1 -> tu luan 1 cot
+   bi danh 1, 2. Dinh nghia lai listEX trong latex_template.tex: doi so =
+   so cot, nhan luon a), b) in dam. Khong sua math_type, khong sua
+   ex_test.sty. Chi math_type dung listEX nen khong dung cau khac.
+   Da bien dich thu va xem PDF: "a) Tim toa do...", "b) Hoi moi ngay...",
+   loi giai cung a), b).
+
+L10_C1_B1_VD014_MC_B_01: loi giai cu "- P(3) la Sai. - P(1/2) la Dung..."
+dinh mot mach, khong co ly do. Nay \begin{enumerate} danh so 1-4, moi y
+mot dong kem phep thu (vd "P(3): 3 >= 3^2 = 9 la menh de sai"; y "moi x"
+chi ra phan vi du nho nhat). 300 seed khong loi.
+
+tests/test_nhan_cac_y.py. 2963 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
