@@ -4,11 +4,11 @@
 
 Dung (dung o thu muc goc cua du an):
 
-    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01
-    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01 -n 10
-    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01 --seed 7
-    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C          (moi bien the _01, _02...)
-    python3 scripts/nhap.py L10_C1_B2_NB017_SA_C_01 --khong-pdf
+    python3 scripts/nhap.py L10_C1_B2_VD021_SA_B_01
+    python3 scripts/nhap.py L10_C1_B2_VD021_SA_B_01 -n 10
+    python3 scripts/nhap.py L10_C1_B2_VD021_SA_B_01 --seed 7
+    python3 scripts/nhap.py L10_C1_B2_VD021_SA_B          (moi bien the _01, _02...)
+    python3 scripts/nhap.py L10_C1_B2_VD021_SA_B_01 --khong-pdf
 
 Ket qua nam trong thu muc nhap/ (khong day len GitHub):
     nhap/<TEN>_dethi.tex    nhap/<TEN>_dethi.pdf     de, khong loi giai
@@ -85,7 +85,7 @@ def main():
 
     m = re.match(r"^L(\d+)_C(\d+)_", ts.ten)
     if not m:
-        sys.exit("Ten ham phai bat dau bang L<lop>_C<chuong>_ , vi du L10_C1_B2_NB017_SA_C_01")
+        sys.exit("Ten ham phai bat dau bang L<lop>_C<chuong>_ , vi du L10_C1_B2_VD021_SA_B_01")
     lop, chuong = int(m.group(1)), int(m.group(2))
     module = _load_chapter_module(lop, chuong)
 

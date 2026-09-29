@@ -8741,3 +8741,26 @@ trong .gitignore.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.39 - 2026-09-29
+
+## L10_C1_B2_NB017_SA_C_01 -> L10_C1_B2_VD021_SA_B_01 (co Lan chot)
+
+"Tim so nguyen m de khoang (a;m] chua dung k so nguyen duong/am/..." phai
+liet ke theo kieu ngoac, loc theo loai roi suy nguoc ra tham so -> KHONG
+phai NB. Chuyen sang L10_C1_B2_VD021 (khoang, doan, nua khoang tren truc
+so): doi ten ham, dong mapping doi id + content (ghi_chu de co Lan duyet).
+Tra loi ngan trong de chi lay VD/VDC (exam_rules) nen dong NB cu thuc ra
+chua bao gio duoc rut vao de.
+
+Loi giai cu viet "(-23;-19] = {-22; -21; -20; -19}" - SAI (nua khoang la
+tap so thuc). Nay: liet ke cac so cung loai ke tu dau mut trai, tap chua
+dung k so khi chua so thu k ma khong chua so thu k+1 -> bat dang thuc cho
+m -> m nguyen duy nhat. De bai them "(voi m > a)". Dap so khong doi.
+500 seed khong loi. 2957 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

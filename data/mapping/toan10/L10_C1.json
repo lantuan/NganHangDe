@@ -202,10 +202,11 @@
     "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê"
   },
   {
-    "id": "L10_C1_B2_NB017_SA_C",
-    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "id": "L10_C1_B2_VD021_SA_B",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên"
+    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên",
+    "ghi_chu": "CLAUDE SUA 29/09/2026 - truoc la L10_C1_B2_NB017_SA_C; co Lan chot khong phai NB, chuyen sang VD021; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_TH018_MC_A",

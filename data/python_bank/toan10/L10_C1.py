@@ -7570,7 +7570,14 @@ def L10_C1_B2_TH019_TL_A_01(socau, dong=1):
 
     return cauTL
 
-def L10_C1_B2_NB017_SA_C_01(socau, dang=2):
+def L10_C1_B2_VD021_SA_B_01(socau, dang=2):
+    r"""Tìm tham số m để khoảng/đoạn chứa đúng k số nguyên (dương, âm...).
+
+    SUA 29/09/2026 (co Lan: "cau nay khong the la muc do NB duoc"): truoc
+    day la L10_C1_B2_NB017_SA_C_01. Phai liet ke so nguyen theo kieu ngoac,
+    loc theo loai roi suy nguoc ra tham so -> muc VD, doi sang
+    L10_C1_B2_VD021 (khoang, doan, nua khoang tren truc so).
+    """
 
     BIEN = 60          # miền quét tham số m để kiểm tra tính duy nhất
     A_MIN, A_MAX = -30, 30
@@ -7654,33 +7661,42 @@ def L10_C1_B2_NB017_SA_C_01(socau, dang=2):
         ten = ten_loai[loai]
 
         debai = (
-            f"Tìm giá trị nguyên của tham số $m$ để tập hợp "
+            f"Tìm giá trị nguyên của tham số $m$ (với $m > {a}$) để tập hợp "
             f"$\\left{trai}{a};m\\right{phai}$ "
             f"chứa đúng {so_luong} {ten}."
         )
 
+        # SUA 29/09/2026 (co Lan duyet): loi giai cu viet
+        # "(a;m] = {cac so nguyen}" - SAI, vi nua khoang la tap so THUC,
+        # khong bang tap may so nguyen; hon nua khi hoi so nguyen duong/am
+        # thi danh sach chi la cac so da loc. Nay giai theo huong van dung:
+        # tim so thu k va so thu k+1 cung loai, dat dieu kien cho m.
+        def dung_loai(x):
+            return {"duong": x > 0, "am": x < 0, "khong_am": x >= 0,
+                    "khong_duong": x <= 0, "nguyen": True}[loai]
+
         lo = a if trai == "[" else a + 1
-        hi = m if phai == "]" else m - 1
-        tap = list(range(lo, hi + 1)) if lo <= hi else []
-
-        if loai == "duong":
-            ds = [x for x in tap if x > 0]
-        elif loai == "am":
-            ds = [x for x in tap if x < 0]
-        elif loai == "khong_am":
-            ds = [x for x in tap if x >= 0]
-        elif loai == "khong_duong":
-            ds = [x for x in tap if x <= 0]
+        day_so = [x for x in range(lo, lo + 200) if dung_loai(x)][:so_luong + 1]
+        t_k, t_sau = day_so[so_luong - 1], day_so[so_luong]
+        # m duy nhat (da loc o tren) nen hai so nay lien tiep nhau
+        assert t_sau == t_k + 1
+        if phai == "]":
+            dk = f"{t_k} \\le m < {t_sau}"
+            assert m == t_k
         else:
-            ds = tap
-
-        lietke = r"\varnothing" if len(ds) == 0 else "; ".join(str(x) for x in ds)
+            dk = f"{t_k} < m \\le {t_sau}"
+            assert m == t_sau
+        ds = day_so[:so_luong]
+        lietke = "; ".join(str(x) for x in ds)
+        khoang = f"\\left{trai}{a};m\\right{phai}"
 
         giai = (
-            f"Ta có\n"
-            f"$$\\left{trai}{a};{m}\\right{phai}=\\{{{lietke}\\}}.$$\n"
-            f"Trong khoảng trên có đúng {so_luong} {ten}. "
-            f"Vậy $m={m}$."
+            f"Kể từ đầu mút trái, các {ten} có thể thuộc ${khoang}$ lần lượt "
+            f"là ${'; '.join(str(x) for x in day_so)}; \\ldots$\\\\\n"
+            f"Tập hợp chứa đúng {so_luong} {ten} khi và chỉ khi nó chứa "
+            f"${t_k}$ nhưng không chứa ${t_sau}$, tức là ${dk}$.\\\\\n"
+            f"Vì $m$ nguyên nên $m = {m}$. Khi đó các {ten} thuộc "
+            f"$\\left{trai}{a};{m}\\right{phai}$ là ${lietke}$."
         )
 
         dsnhieu = []
