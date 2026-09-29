@@ -8374,6 +8374,17 @@ vua man hinh dien thoai.
 Chong tai phat: `tests/test_trang_chu_nut_dang_ky.py` - soi nut
 /register con do, dung truoc nut /login, va khong hien khi da dang nhap.
 
+## Ca nut to giua trang cung doi
+
+Nut xanh to giua trang - thu bat mat nhat, nguoi moi nhin vao do truoc -
+truoc day ghi "Dang nhap ngay", dan nham nguoi chua co tai khoan. Nay:
+
+    [ Dang ky ngay ] -> /register   (nen xanh, noi bat nhat)
+    [ Dang nhap ]    -> /login      (nut vien)
+    [ Gioi thieu chi tiet ]         (giu nguyen)
+
+Man hinh hep thi ba nut xep doc (flex-col sm:flex-row co san).
+
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)

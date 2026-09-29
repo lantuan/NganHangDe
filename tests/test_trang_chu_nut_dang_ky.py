@@ -51,3 +51,21 @@ def test_da_dang_nhap_thi_khong_con_moi_dang_ky():
         "Dang nhap roi ma thanh tieu de van moi Dang ky."
     )
     assert "Vào Chat" in tieu_de
+
+
+def test_nut_to_giua_trang_moi_dang_ky_truoc():
+    """Nut to nhat giua trang phai la "Dang ky ngay", khong phai dang nhap.
+
+    Do la thu bat mat nhat; nguoi chua co tai khoan nhin vao day truoc.
+    """
+    ra = _dich(False)
+    i = ra.index("<section")           # dau khoi hero
+    j = ra.index("gioi-thieu\" class=")  # het khoi ba nut
+    hero = ra[i:j]
+    assert "Đăng ký ngay" in hero, "Khoi giua trang thieu nut Dang ky ngay."
+    assert hero.index("/register'") < hero.index("/login'"), (
+        "Trong khoi giua trang, nut Dang ky phai dung TRUOC nut Dang nhap."
+    )
+    assert "bg-primary text-on-primary" in hero.split("Đăng ký ngay")[0][-400:], (
+        "Nut Dang ky ngay phai la nut nen xanh (noi bat nhat)."
+    )

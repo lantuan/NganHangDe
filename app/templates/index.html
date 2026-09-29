@@ -221,10 +221,19 @@
     Vào Chat
 </button>
 {% else %}
+{# Nut to giua trang la thu bat mat nhat, nguoi moi nhin vao day truoc.
+   Truoc day no ghi "Dang nhap ngay" nen nguoi chua co tai khoan bi dan
+   nham. Nay Dang ky dung truoc va to nhat, Dang nhap lui ve nut vien
+   (co Lan chot 29/09/2026). #}
+<button
+    onclick="window.location.href='/register'"
+    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow active:scale-95 duration-150 text-lg">
+    Đăng ký ngay
+</button>
 <button
     onclick="window.location.href='/login'"
-    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow text-lg">
-    Đăng nhập ngay
+    class="px-8 py-4 bg-surface-container-low text-primary border border-primary/40 rounded-xl font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150 text-lg">
+    Đăng nhập
 </button>
 {% endif %}
 <a href="#gioi-thieu" class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high transition-all text-lg inline-block text-center">Giới thiệu chi tiết</a>
