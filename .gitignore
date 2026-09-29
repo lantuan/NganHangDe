@@ -67,3 +67,6 @@ data/hinh_cache/
 # KHONG cho xoa tep). Claude chuyen chung vao day de git chay tiep duoc;
 # co Lan xoa thu muc nay luc nao cung duoc.
 _to_delete/
+
+# Thu muc do ung dung Claude tu tao khi gui tep - khong thuoc ma nguon
+Claude outputs/
