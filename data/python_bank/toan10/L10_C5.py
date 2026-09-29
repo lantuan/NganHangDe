@@ -1339,12 +1339,34 @@ def L10_C5_B14_NB085_MC_A_01(socau, dang=1):
          r"dây chuyền ổn định thì khối lượng các sản phẩm ít chênh lệch, tức "
          r"độ lệch chuẩn nhỏ"),
     ]
+    # SUA 29/09/2026 (co Lan bao loi): cau dan hoi ve UNG DUNG thong ke
+    # trong mon hoc khac va thuc tien, nhung 4 phuong an nhieu cu lai la
+    # cau LI THUYET thuan ("Phuong sai co the am"...) -> chi mot phuong an
+    # noi ve ung dung, hoc sinh loai tru la ra dap an. Nay moi phuong an
+    # nhieu cung la mot tinh huong ung dung, nhung dung SAI so dac trung
+    # hoac hieu SAI y nghia cua no. Moi cau sai kem ly do de loi giai giai
+    # thich dung ba phuong an nhieu xuat hien trong cau.
     SAI = [
-        r"Độ lệch chuẩn càng lớn thì mẫu số liệu càng đồng đều",
-        r"Khoảng biến thiên không thay đổi khi mẫu có thêm một giá trị "
-        r"ngoại lệ rất lớn",
-        r"Phương sai có thể nhận giá trị âm",
-        r"Số trung bình luôn là một giá trị có mặt trong mẫu số liệu",
+        (r"Trong sản xuất, dây chuyền có độ lệch chuẩn khối lượng sản phẩm "
+         r"càng lớn thì hoạt động càng ổn định",
+         r"độ lệch chuẩn lớn nghĩa là khối lượng các sản phẩm chênh lệch "
+         r"nhiều, dây chuyền kém ổn định"),
+        (r"Trong môn Sinh học, muốn biết giống cây nào có chiều cao đồng đều "
+         r"hơn thì chỉ cần so sánh chiều cao trung bình của hai giống",
+         r"số trung bình chỉ cho biết mức chung; muốn so sánh độ đồng đều "
+         r"phải dùng số đo độ phân tán như phương sai, độ lệch chuẩn"),
+        (r"Trong môn Địa lí, khoảng biến thiên của nhiệt độ các tháng trong "
+         r"năm cho biết nhiệt độ trung bình năm của một địa phương",
+         r"khoảng biến thiên $R = x_{\max} - x_{\min}$ chỉ đo độ chênh lệch "
+         r"giữa tháng nóng nhất và tháng lạnh nhất, không phải mức trung bình"),
+        (r"Khi so sánh hai vận động viên bắn súng có cùng điểm trung bình, "
+         r"người có phương sai điểm số lớn hơn là người bắn ổn định hơn",
+         r"phương sai lớn nghĩa là điểm số phân tán nhiều, người đó bắn "
+         r"kém ổn định hơn"),
+        (r"Khi khảo sát thu nhập ở một khu phố có vài hộ thu nhập rất cao, "
+         r"số trung bình luôn phản ánh mức thu nhập phổ biến tốt hơn trung vị",
+         r"số trung bình bị kéo lên bởi các giá trị ngoại lệ, lúc này trung "
+         r"vị phản ánh mức phổ biến tốt hơn"),
     ]
     gt = []
     while len(gt) < socau:
@@ -1357,18 +1379,17 @@ def L10_C5_B14_NB085_MC_A_01(socau, dang=1):
     cauTN = ""
     for i in gt:
         mo_ta, ly_do = DUNG[i]
-        debai = (r"Khẳng định nào sau đây về việc dùng thống kê trong các "
-                 r"môn học khác và trong thực tiễn là \textbf{đúng}?")
+        ba_sai = random.sample(SAI, 3)
+        debai = (r"Khẳng định nào sau đây về ứng dụng của thống kê trong "
+                 r"thực tiễn và trong các môn học khác là \textbf{đúng}?")
         giai = (r"``%s'' là đúng, vì %s." % (mo_ta, ly_do) +
                 "\\\\\n"
-                r"Các khẳng định còn lại đều sai: độ lệch chuẩn càng "
-                r"\textbf{nhỏ} thì mẫu càng đồng đều; khoảng biến thiên "
-                r"$R = x_{\max} - x_{\min}$ nên rất nhạy với giá trị ngoại "
-                r"lệ; phương sai là trung bình của các bình phương nên "
-                r"\textbf{luôn không âm}; và số trung bình có thể không "
-                r"trùng với số liệu nào trong mẫu.")
+                r"Các khẳng định còn lại đều sai:" +
+                "".join("\\\\\n" + r"- ``%s'': sai, vì %s." % (t, ld)
+                        for t, ld in ba_sai))
         cauTN += MC_SA_answer_text(debai, "%s." % mo_ta,
-                                   ["%s." % t for t in SAI], giai, 0, 0, dang)
+                                   ["%s." % t for t, _ in ba_sai],
+                                   giai, 0, 0, dang)
     return cauTN
 
 

@@ -8701,3 +8701,24 @@ tests/test_tap_hop_dau_cham_phay.py. 2956 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.37 - 2026-09-29
+
+## L10_C5_B14_NB085_MC_A_01: phuong an nhieu lech cau dan (co Lan bao)
+
+Cau dan hoi ve UNG DUNG thong ke trong mon hoc khac va thuc tien, nhung
+4 phuong an nhieu la cau LI THUYET thuan ("Phuong sai co the nhan gia tri
+am"...). Chi dap an dung noi ve ung dung -> loai tru la ra.
+
+Nay 5 phuong an nhieu deu la tinh huong ung dung (san xuat, Sinh hoc,
+Dia li, ban sung, thu nhap khu pho) nhung dung SAI so dac trung hoac hieu
+sai y nghia. Moi cau rut ngau nhien 3 nhieu; loi giai giai thich dung 3
+phuong an nhieu co mat trong cau. Cau dan viet gon lai: "Khang dinh nao
+sau day ve ung dung cua thong ke trong thuc tien va trong cac mon hoc
+khac la dung?". Dap an dung (3 cau DUNG) giu nguyen.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
