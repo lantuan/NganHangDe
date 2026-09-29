@@ -8385,6 +8385,11 @@ truoc day ghi "Dang nhap ngay", dan nham nguoi chua co tai khoan. Nay:
 
 Man hinh hep thi ba nut xep doc (flex-col sm:flex-row co san).
 
+Co Lan xem xong: "moi ben 1 mau nhin buon cuoi qua, xanh het di" - nay
+ca hai nut Dang ky va Dang nhap deu la nut NEN XANH, cung co chu, cung
+padding, o ca goc phai lan giua trang. Rieng "Gioi thieu chi tiet" giu
+nut nhat vi no khong phai loi vao tai khoan.
+
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)

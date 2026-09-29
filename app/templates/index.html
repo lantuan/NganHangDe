@@ -187,10 +187,12 @@
    loi vao nao ca - phai bam Dang nhap roi moi tim thay dong chu nho
    "Chua co tai khoan? Dang ky ngay" o cuoi trang. Nay tach hai nut
    ro rang: Dang ky di thang toi /register (trang chon hoc sinh /
-   giao vien), Dang nhap giu nguyen. #}
+   giao vien), Dang nhap giu nguyen duong dan cu.
+   Hai nut de CUNG mot mau xanh cho can doi (co Lan: "moi ben 1 mau
+   nhin buon cuoi qua, xanh het di"). #}
 <button
     onclick="window.location.href='/register'"
-    class="px-4 sm:px-5 py-2 bg-surface-container-low text-primary border border-primary/40 rounded-lg font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150">
+    class="px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Đăng ký
 </button>
 <button
@@ -223,8 +225,9 @@
 {% else %}
 {# Nut to giua trang la thu bat mat nhat, nguoi moi nhin vao day truoc.
    Truoc day no ghi "Dang nhap ngay" nen nguoi chua co tai khoan bi dan
-   nham. Nay Dang ky dung truoc va to nhat, Dang nhap lui ve nut vien
-   (co Lan chot 29/09/2026). #}
+   nham. Nay Dang ky dung TRUOC, Dang nhap dung sau, hai nut cung mot
+   mau xanh (co Lan chot 29/09/2026). Rieng "Gioi thieu chi tiet" van
+   la nut nhat - no khong phai loi vao tai khoan. #}
 <button
     onclick="window.location.href='/register'"
     class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow active:scale-95 duration-150 text-lg">
@@ -232,7 +235,7 @@
 </button>
 <button
     onclick="window.location.href='/login'"
-    class="px-8 py-4 bg-surface-container-low text-primary border border-primary/40 rounded-xl font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150 text-lg">
+    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow active:scale-95 duration-150 text-lg">
     Đăng nhập
 </button>
 {% endif %}
