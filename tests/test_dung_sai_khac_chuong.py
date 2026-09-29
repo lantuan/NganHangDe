@@ -54,37 +54,41 @@ def test_de_giua_ky_cuoi_ky_khong_co_hai_cau_dung_sai_cung_chuong(ki_thi, seed):
 
 
 def test_rai_moi_chuong_mot_cau_truoc_khi_quay_vong():
-    """Chỉ được dùng lại một chương khi đã hết chương trong phạm vi."""
+    """Chỉ được dùng lại một chương khi đã hết chương trong phạm vi.
+    (Từ 29/09/2026 bài bốc NGẪU NHIÊN có trọng số - kiểm bằng nhiều seed.)"""
     tiet = {
-        "L10_C1_B1": 8, "L10_C1_B2": 7,   # chương 1: hai bài nhiều tiết nhất
+        "L10_C1_B1": 8, "L10_C1_B2": 7,
         "L10_C2_B4": 6, "L10_C2_B3": 3,
         "L10_C3_B5": 5,
     }
-    # 1 câu -> bài nhiều tiết nhất
-    assert _chon_bai_dung_sai(tiet, 1) == {"L10_C1_B1": 1}
-    # 2 câu -> KHÔNG được lấy cả hai bài của chương 1
-    hai = _chon_bai_dung_sai(tiet, 2)
-    assert hai == {"L10_C1_B1": 1, "L10_C2_B4": 1}, hai
-    # 3 câu -> đủ ba chương
-    ba = _chon_bai_dung_sai(tiet, 3)
-    assert sorted(ba) == ["L10_C1_B1", "L10_C2_B4", "L10_C3_B5"], ba
-    # 4 câu -> hết chương mới quay vòng, và phải sang BÀI KHÁC của chương 1
-    bon = _chon_bai_dung_sai(tiet, 4)
-    assert bon.get("L10_C1_B2") == 1, bon
-    assert bon.get("L10_C1_B1") == 1, bon
-    assert sum(bon.values()) == 4
+    chuong = lambda kq: [b.split("_")[1] for b, n in kq.items() for _ in range(n)]
+    for s in range(200):
+        random.seed(s)
+        hai = _chon_bai_dung_sai(tiet, 2)
+        assert len(set(chuong(hai))) == 2, hai
+        ba = _chon_bai_dung_sai(tiet, 3)
+        assert sorted(set(chuong(ba))) == ["C1", "C2", "C3"], ba
+        bon = _chon_bai_dung_sai(tiet, 4)
+        assert sum(bon.values()) == 4 and max(bon.values()) == 1, bon
 
 
 def test_van_uu_tien_bai_nhieu_tiet_trong_moi_chuong():
-    """Sửa luật chương nhưng KHÔNG được bỏ quy định ưu tiên số tiết."""
+    """Chọn ngẫu nhiên nhưng KHÔNG bỏ quy định ưu tiên số tiết: bài nhiều
+    tiết được chọn nhiều hơn (tính trên nhiều đề)."""
     tiet = {"L10_C1_B1": 2, "L10_C1_B2": 9, "L10_C2_B3": 4}
-    assert _chon_bai_dung_sai(tiet, 1) == {"L10_C1_B2": 1}
-    assert _chon_bai_dung_sai(tiet, 2) == {"L10_C1_B2": 1, "L10_C2_B3": 1}
+    dem = collections.Counter()
+    for s in range(3000):
+        random.seed(s)
+        dem.update(_chon_bai_dung_sai(tiet, 1))
+    assert dem["L10_C1_B2"] > dem["L10_C2_B3"] > dem["L10_C1_B1"] > 0, dem
 
 
-def test_bai_id_khong_doc_duoc_chuong_thi_van_chay_nhu_cu():
-    """Bài không theo khuôn L<lớp>_C<chương>_B<bài> thì coi như một nhóm."""
-    tiet = {"B1": 2, "B2": 6, "B3": 4}
-    assert _chon_bai_dung_sai(tiet, 1) == {"B2": 1}
-    assert _chon_bai_dung_sai(tiet, 2) == {"B2": 1, "B3": 1}
-    assert _chon_bai_dung_sai(tiet, 4) == {"B2": 2, "B3": 1, "B1": 1}
+def test_moi_de_khong_con_giong_het_nhau():
+    """Cô Lan 29/09/2026: chia xong phải chọn ngẫu nhiên - không được đề nào
+    cũng rơi đúng một bài."""
+    tiet = {"L10_C1_B1": 4, "L10_C1_B2": 4, "L10_C2_B3": 2, "L10_C2_B4": 3}
+    ket = set()
+    for s in range(50):
+        random.seed(s)
+        ket.add(tuple(sorted(_chon_bai_dung_sai(tiet, 2))))
+    assert len(ket) >= 3, ket

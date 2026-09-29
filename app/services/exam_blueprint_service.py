@@ -83,6 +83,48 @@ def _tach_chuong_bai(bai_id: str) -> tuple[int, int] | None:
     return int(m.group(1)), int(m.group(2))
 
 
+def _lam_tron_ngau_nhien(phan: dict, so_luong: int) -> dict:
+    """Làm tròn các phần (số thực, tổng = so_luong) thành số nguyên, tổng
+    vẫn đúng so_luong, và MỖI phần được làm tròn lên với xác suất ĐÚNG BẰNG
+    phần lẻ của nó (lấy mẫu hệ thống, thứ tự ngẫu nhiên).
+
+    Nhờ vậy tính trung bình nhiều đề, mỗi bài được đúng tỉ lệ số tiết,
+    nhưng mỗi đề chia khác nhau - không bài nào bị bỏ rơi mãi.
+    """
+    ket = {k: math.floor(v + 1e-9) for k, v in phan.items()}
+    con = so_luong - sum(ket.values())
+    if con <= 0:
+        return ket
+    khoa = list(phan.keys())
+    random.shuffle(khoa)
+    le = [(k, phan[k] - ket[k]) for k in khoa]
+    tong_le = sum(x for _k, x in le)
+    if tong_le <= 1e-9:
+        for k in khoa[:con]:
+            ket[k] += 1
+        return ket
+    # dieu chinh cho tong phan le dung bang so cau con thieu
+    he = con / tong_le
+    u = random.random()
+    tich = 0.0
+    for k, x in le:
+        truoc = tich
+        tich += x * he
+        # so diem u, u+1, u+2... roi vao [truoc; tich)
+        ket[k] += math.floor(tich - u + 1) - math.floor(truoc - u + 1)
+    # an toan so hoc: bu/tru cho dung tong
+    chenh = so_luong - sum(ket.values())
+    while chenh > 0:
+        ket[random.choice(khoa)] += 1
+        chenh -= 1
+    while chenh < 0:
+        k = random.choice([k for k in khoa if ket[k] > math.floor(phan[k] + 1e-9)] or khoa)
+        if ket[k] > 0:
+            ket[k] -= 1
+            chenh += 1
+    return ket
+
+
 def _chia_theo_so_tiet(so_luong: int, so_tiet_theo_bai: dict[str, int]) -> dict[str, int]:
     """Chia so_luong câu về TỪNG BÀI theo TỈ LỆ SỐ TIẾT của bài đó.
 
@@ -98,38 +140,15 @@ def _chia_theo_so_tiet(so_luong: int, so_tiet_theo_bai: dict[str, int]) -> dict[
     if tong_tiet <= 0:
         return {}
 
-    ket_qua = {
-        bai_id: math.floor(so_luong * so_tiet / tong_tiet)
-        for bai_id, so_tiet in so_tiet_theo_bai.items()
-    }
-    con_thieu = so_luong - sum(ket_qua.values())
-
-    # Phần dư chia theo PHẦN DƯ LỚN NHẤT (largest remainder), không dồn
-    # cho bài nhiều tiết nhất nữa.
-    #
-    # SỬA 28/09/2026. Cách cũ xếp bài theo (-số tiết, tên) rồi rải phần
-    # dư theo đúng thứ tự ấy - nghĩa là LẦN NÀO CŨNG cùng một thứ tự.
-    # Với đề giữa kỳ, mỗi loại câu chia riêng một lần, nên hai bài nhiều
-    # tiết nhất thắng ở MỌI loại câu và các bài còn lại không bao giờ
-    # tới lượt.
-    #
-    # Đo được: đề giữa kỳ 1 lớp 10 có phạm vi 8 bài thuộc 4 chương,
-    # nhưng ra đề thì 20 câu rơi hết vào chương 1 và chương 2; chương 3
-    # và chương 4 KHÔNG có câu nào.
-    #
-    # Chia theo phần dư lớn nhất thì bài bị làm tròn xuống nhiều nhất
-    # được ưu tiên, nên các bài ít tiết vẫn có phần. Bài bằng phần dư
-    # thì bốc ngẫu nhiên (random đã được gieo hạt theo từng đề) để các
-    # loại câu khác nhau không cùng chọn một bài.
-    if con_thieu > 0:
-        du = []
-        for bai_id, so_tiet in so_tiet_theo_bai.items():
-            phan_le = so_luong * so_tiet / tong_tiet - ket_qua[bai_id]
-            du.append((phan_le, random.random(), bai_id))
-        du.sort(key=lambda t: (-t[0], t[1]))
-        for _phan_le, _rnd, bai_id in du[:con_thieu]:
-            ket_qua[bai_id] += 1
-
+    # SUA 29/09/2026 (co Lan: "neu da chia xong thi phai chon ngau nhien"):
+    # truoc day phan du chia theo PHAN DU LON NHAT - bai nao phan le lon
+    # hon thi LAN NAO cung thang, bai phan le nho KHONG BAO GIO duoc chia.
+    # Do duoc: de giua ky 1 lop 10, bai 7 va bai 8 khong duoc cau trac
+    # nghiem TH nao o ca 80/80 de. Nay bai duoc lam tron len voi xac suat
+    # dung bang phan le cua no (_lam_tron_ngau_nhien): trung binh nhieu de
+    # van dung ti le so tiet, moi de chia mot khac.
+    ket_qua = _lam_tron_ngau_nhien(
+        {b: so_luong * t / tong_tiet for b, t in so_tiet_theo_bai.items()}, so_luong)
     return {b: sl for b, sl in ket_qua.items() if sl > 0}
 
 
@@ -161,31 +180,44 @@ def _chon_bai_dung_sai(so_tiet_theo_bai: dict[str, int], so_cau_lon: int) -> dic
     if so_cau_lon <= 0 or not so_tiet_theo_bai:
         return {}
 
-    bai_sap_xep = sorted(so_tiet_theo_bai, key=lambda b: (-so_tiet_theo_bai[b], b))
-
+    # SUA 29/09/2026 (co Lan: chia xong phai chon NGAU NHIEN): truoc day
+    # xep chuong/bai theo so tiet giam dan roi lay dau danh sach - de nao
+    # cung dung chuong ay, bai ay. Nay boc NGAU NHIEN, trong so = so tiet
+    # (bai nhieu tiet van de duoc chon hon), khong lap chuong khi con
+    # chuong khac (hai cau Dung/Sai phai khac chuong).
     def _chuong_cua(bai_id: str):
         cb = _tach_chuong_bai(bai_id)
         return cb[0] if cb else None
 
-    # Gom bài theo chương; trong mỗi chương, bài nhiều tiết đứng trước.
     theo_chuong: dict = {}
-    for bai_id in bai_sap_xep:
+    for bai_id in so_tiet_theo_bai:
         theo_chuong.setdefault(_chuong_cua(bai_id), []).append(bai_id)
 
-    # Chương nào có bài nhiều tiết nhất thì đứng trước.
-    chuong_sap_xep = sorted(
-        theo_chuong,
-        key=lambda c: (-so_tiet_theo_bai[theo_chuong[c][0]], str(c)))
+    def _boc(ds, trong_so):
+        tong = sum(trong_so[x] for x in ds)
+        r = random.random() * tong
+        for x in ds:
+            r -= trong_so[x]
+            if r < 0:
+                return x
+        return ds[-1]
 
+    tiet_chuong = {c: sum(so_tiet_theo_bai[b] for b in ds) for c, ds in theo_chuong.items()}
     ket_qua: dict[str, int] = {}
-    for i in range(so_cau_lon):
-        chuong = chuong_sap_xep[i % len(chuong_sap_xep)]
-        ds_bai = theo_chuong[chuong]
-        # Vòng thứ mấy -> lấy bài thứ mấy của chương, để khi buộc phải
-        # quay lại một chương thì không rơi trúng đúng bài đã dùng.
-        vong = i // len(chuong_sap_xep)
-        bai_id = ds_bai[vong % len(ds_bai)]
-        ket_qua[bai_id] = ket_qua.get(bai_id, 0) + 1
+    chuong_con = list(theo_chuong)
+    bai_da_dung: set = set()
+    for _ in range(so_cau_lon):
+        if not chuong_con:
+            # het chuong moi quay vong - uu tien chuong con bai chua dung
+            chuong_con = [c for c in theo_chuong
+                          if any(b not in bai_da_dung for b in theo_chuong[c])] \
+                or list(theo_chuong)
+        c = _boc(chuong_con, tiet_chuong)
+        chuong_con.remove(c)
+        ds = [b for b in theo_chuong[c] if b not in bai_da_dung] or theo_chuong[c]
+        b = _boc(ds, so_tiet_theo_bai)
+        bai_da_dung.add(b)
+        ket_qua[b] = ket_qua.get(b, 0) + 1
     return ket_qua
 
 
@@ -305,31 +337,13 @@ def _phan_bo_vd_vdc(
 
 
 def _tach_theo_ti_le(n: int, ti_le: list[float]) -> list[int]:
-    """Chia n câu cho các nhóm theo tỉ lệ (vd [0.3, 0.7]).
-
-    Phần lẻ bốc NGẪU NHIÊN theo đúng xác suất (làm tròn ngẫu nhiên): trung
-    bình qua nhiều đề thì mỗi nhóm được đúng tỉ lệ, còn từng đề vẫn là số
-    nguyên. Tổng luôn bằng n.
-    """
+    """Chia n câu cho các nhóm theo tỉ lệ (vd [0.3, 0.7]), làm tròn ngẫu
+    nhiên (trung bình nhiều đề đúng tỉ lệ). Tổng luôn bằng n."""
     if n <= 0:
         return [0] * len(ti_le)
     tong = sum(ti_le) or 1
-    ket = [math.floor(n * t / tong) for t in ti_le]
-    du = [n * t / tong - k for t, k in zip(ti_le, ket)]
-    con = n - sum(ket)
-    while con > 0:
-        # chọn nhóm theo trọng số phần dư
-        r = random.random() * sum(du)
-        chon = len(du) - 1
-        for i, d in enumerate(du):
-            if r < d:
-                chon = i
-                break
-            r -= d
-        ket[chon] += 1
-        du[chon] = 0
-        con -= 1
-    return ket
+    kq = _lam_tron_ngau_nhien({i: n * t / tong for i, t in enumerate(ti_le)}, n)
+    return [kq[i] for i in range(len(ti_le))]
 
 
 def _chuong_cua_bai(bai_id: str):

@@ -8912,3 +8912,32 @@ tests/test_sua_29_09_dot2.py. 3011 bai test qua, 8 bo qua.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.44 - 2026-09-29
+
+## Chia cau xong phai chon NGAU NHIEN (co Lan chot)
+
+Co Lan: "neu da chia xong thi phai chon ngau nhien. toi cam giac cu lay
+cai dau tien". Dung vay, hai cho khong ngau nhien:
+1. _chia_theo_so_tiet: phan du chia theo PHAN DU LON NHAT - bai phan le
+   lon thang MOI lan, bai phan le nho khong bao gio duoc chia. Do duoc: de
+   giua ky 1 lop 10, bai 7-8 khong co cau trac nghiem TH nao o 80/80 de.
+   Nay _lam_tron_ngau_nhien: moi bai duoc lam tron len voi xac suat DUNG
+   BANG phan le cua no (lay mau he thong). Trung binh 4000 de: bai 4 tiet
+   0,72 cau (ky vong 0,727), bai 2 tiet 0,36 (ky vong 0,364).
+2. _chon_bai_dung_sai: xep theo so tiet roi lay dau danh sach -> de nao
+   cung mot chuong mot bai. Nay boc ngau nhien co trong so = so tiet, van
+   giu hai cau Dung/Sai khac chuong, het chuong moi quay vong.
+Ket qua de giua ky 1 lop 10: cau trac nghiem TH chuong 4 tu 0 -> 47/80 de;
+cau Dung/Sai rai du 4 chuong (57/32/46/25) thay vi luon chuong 1, 2.
+Van con ID co mat 100% de he so 1 vi CHUONG DO chi co mot yeu cau cap do
+ay (vd chuong 2 chi co VD028) - cach duy nhat la them bien the _02, _03.
+
+Test cap nhat theo quy tac moi (kiem bang nhieu seed): test_blueprint_
+dung_sai, test_dung_sai_khac_chuong. 3011 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

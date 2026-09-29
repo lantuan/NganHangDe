@@ -43,12 +43,24 @@ def test_chia_theo_ti_le_so_tiet():
 
 
 def test_chon_bai_dung_sai_uu_tien_nhieu_tiet():
+    """SUA 29/09/2026 (co Lan: chon NGAU NHIEN): bai boc ngau nhien, trong
+    so = so tiet -> bai nhieu tiet duoc chon NHIEU HON nhung khong phai lan
+    nao cung la no."""
+    import collections
+    import random
     tiet = {"B1": 2, "B2": 6, "B3": 4}
-    assert _chon_bai_dung_sai(tiet, 1) == {"B2": 1}
-    assert _chon_bai_dung_sai(tiet, 2) == {"B2": 1, "B3": 1}
-    # Nhieu cau hon so bai -> moi quay vong
-    assert _chon_bai_dung_sai(tiet, 4) == {"B2": 2, "B3": 1, "B1": 1}
-    print("OK chon bai Dung/Sai theo so tiet giam dan")
+    dem = collections.Counter()
+    for s in range(3000):
+        random.seed(s)
+        kq = _chon_bai_dung_sai(tiet, 1)
+        assert sum(kq.values()) == 1
+        dem.update(kq)
+    assert dem["B2"] > dem["B3"] > dem["B1"] > 0, dem
+    # Nhieu cau hon so bai -> dung het cac bai roi moi lap lai
+    random.seed(1)
+    kq = _chon_bai_dung_sai(tiet, 4)
+    assert sum(kq.values()) == 4 and set(kq) == {"B1", "B2", "B3"}
+    print("OK chon bai Dung/Sai ngau nhien, trong so theo so tiet")
 
 
 def test_tru_ngay_tai_bai_dung_sai():
