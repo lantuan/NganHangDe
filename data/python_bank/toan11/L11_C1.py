@@ -900,6 +900,134 @@ def _bo_guong_nuoc():
     return a, b, T, k
 
 
+
+def _hinh_guong_nuoc(a, b, goc=40):
+    r"""Hình guồng nước cho các câu thực tiễn
+    $h\left(t\right) = a + b\sin\dfrac{2\pi t}{T}$.
+
+    Vẽ đúng ba thứ mà học sinh cần nhìn thấy để hiểu công thức:
+      - trục guồng cách mặt nước $a$ mét (đó chính là số hạng tự do),
+      - bán kính guồng $b$ mét (đó là biên độ),
+      - góc $\alpha = \dfrac{2\pi t}{T}$ tính từ ĐƯỜNG NGANG qua trục,
+        nên $b\sin\alpha$ là phần gàu nhô lên so với trục; $\alpha$ âm
+        thì gàu chìm xuống.
+    Nhờ vậy $h = a + b\sin\alpha$ đọc thẳng được trên hình.
+
+    Khi $b > a$ thì guồng ngập một phần xuống nước - đúng như guồng
+    thật, vì gàu phải chìm xuống mới múc được nước. Hình vẽ luôn đào
+    vùng nước đủ sâu để chứa phần ngập đó.
+
+    CLAUDE THEM 29/09/2026 - co Lan yeu cau ve hinh cho de de hinh dung.
+    """
+    # Co chu: quy doi 1 met ra bao nhieu cm tren giay, sao cho hinh nao
+    # cung cao chung chung 4,5 cm du a, b to nho khac nhau.
+    u = min(max(4.8 / (a + b + 1.0), 0.45), 1.05)
+    rad = math.radians(goc)
+    gx = b * math.cos(rad)
+    gy = a + b * math.sin(rad)
+    xn = b + 2.1                       # nua be ngang mat nuoc
+    xa = -(b + 1.15)                   # cot ghi do cao a
+    xh = b + 1.15                      # cot ghi do cao h
+    sau = min(-0.9, a - b - 0.7)       # day vung nuoc
+    r_goc = max(0.45, 0.32 * b)        # ban kinh cung ve goc alpha
+
+    ra = ["\\begin{tikzpicture}[>=stealth,line join=round,line cap=round,"
+          "x=%scm,y=%scm,font=\\footnotesize]" % (_toa(u), _toa(u))]
+
+    # ----- nuoc -----
+    ra.append("\\fill[cyan!12] (%s,%s) rectangle (%s,0);"
+              % (_toa(-xn), _toa(sau), _toa(xn)))
+    ra.append("\\draw[cyan!60!blue,line width=0.9pt] (%s,0) -- (%s,0);"
+              % (_toa(-xn), _toa(xn)))
+    buoc_song = max(0.5, (2 * xn) / 16.0)
+    x = -xn + buoc_song * 0.4
+    while x < xn - buoc_song:
+        ra.append("\\draw[cyan!45] (%s,%s) -- (%s,%s);"
+                  % (_toa(x), _toa(-0.18), _toa(x - buoc_song * 0.45),
+                     _toa(-0.55)))
+        x += buoc_song
+    ra.append("\\node[cyan!45!black,anchor=north east] at (%s,%s) "
+              "{mặt nước};" % (_toa(xn), _toa(-0.1)))
+
+    # ----- gia do truc -----
+    # Hai cot dung o HAI BEN, khong cat ngang mat guong (ve chong len
+    # nan hoa thi nhin rat roi). Thanh truc chi ve doan nho ngoai vanh.
+    xc = b + 0.45
+    for dau in (-1, 1):
+        ra.append("\\draw[brown!55!black,line width=1.1pt] (%s,0) -- "
+                  "(%s,%s);" % (_toa(dau * xc), _toa(dau * xc), _toa(a)))
+        ra.append("\\draw[brown!55!black,line width=1.1pt] (%s,%s) -- "
+                  "(%s,%s);" % (_toa(dau * xc), _toa(a),
+                                _toa(dau * b), _toa(a)))
+
+    # ----- banh guong -----
+    ra.append("\\draw[black!70,line width=0.9pt] (0,%s) circle (%s);"
+              % (_toa(a), _toa(b)))
+    ra.append("\\draw[black!30] (0,%s) circle (%s);"
+              % (_toa(a), _toa(0.72 * b)))
+    for i in range(8):
+        g = goc + 45 * i
+        r = math.radians(g)
+        ex, ey = b * math.cos(r), a + b * math.sin(r)
+        ra.append("\\draw[black!45] (0,%s) -- (%s,%s);"
+                  % (_toa(a), _toa(ex), _toa(ey)))
+        if i:                                   # gau thuong
+            ra.append("\\fill[orange!75!black] (%s,%s) circle (1.4mm);"
+                      % (_toa(ex), _toa(ey)))
+
+    # ----- chieu quay -----
+    ra.append("\\draw[->,black!55,line width=0.8pt] (%s,%s) arc[start "
+              "angle=118,end angle=62,radius=%s];"
+              % (_toa(1.22 * b * math.cos(math.radians(118))),
+                 _toa(a + 1.22 * b * math.sin(math.radians(118))),
+                 _toa(1.22 * b)))
+
+    # ----- duong ngang moc qua truc + goc alpha -----
+    ra.append("\\draw[dashed,black!45] (0,%s) -- (%s,%s);"
+              % (_toa(a), _toa(0.82 * b), _toa(a)))
+    ra.append("\\draw[->,red!70!black,line width=0.7pt] (%s,%s) arc[start "
+              "angle=0,end angle=%d,radius=%s];"
+              % (_toa(r_goc), _toa(a), goc, _toa(r_goc)))
+    ra.append("\\node[red!70!black] at (%s,%s) "
+              "{$\\alpha$};"
+              % (_toa((r_goc + 0.55) * math.cos(math.radians(goc / 2.0))),
+                 _toa(a + (r_goc + 0.55) * math.sin(math.radians(goc / 2.0)))))
+
+    # ----- ban kinh toi gau duoc hoi -----
+    ra.append("\\draw[red!75!black,line width=1pt] (0,%s) -- (%s,%s);"
+              % (_toa(a), _toa(gx), _toa(gy)))
+    ra.append("\\node[red!75!black,anchor=south east] at (%s,%s) {$%d$};"
+              % (_toa(0.5 * gx), _toa(a + 0.5 * (gy - a) + 0.1), b))
+    ra.append("\\fill[red!75!black] (%s,%s) circle (1.9mm);"
+              % (_toa(gx), _toa(gy)))
+    ra.append("\\node[red!70!black,anchor=south west] at (%s,%s) {gàu};"
+              % (_toa(gx + 0.12), _toa(gy + 0.12)))
+
+    # ----- truc -----
+    ra.append("\\fill[black] (0,%s) circle (1.1mm);" % _toa(a))
+    ra.append("\\node[anchor=north east] at (%s,%s) {$O$};"
+              % (_toa(-0.12), _toa(a - 0.05)))
+
+    # ----- do cao a cua truc -----
+    ra.append("\\draw[dashed,black!45] (%s,%s) -- (0,%s);"
+              % (_toa(xa - 0.25), _toa(a), _toa(a)))
+    ra.append("\\draw[<->,blue!65!black,line width=0.7pt] (%s,0) -- "
+              "(%s,%s);" % (_toa(xa), _toa(xa), _toa(a)))
+    ra.append("\\node[blue!65!black,anchor=east] at (%s,%s) {$%d$};"
+              % (_toa(xa - 0.12), _toa(a / 2.0), a))
+
+    # ----- do cao h cua gau -----
+    ra.append("\\draw[dashed,black!45] (%s,%s) -- (%s,%s);"
+              % (_toa(gx), _toa(gy), _toa(xh + 0.25), _toa(gy)))
+    ra.append("\\draw[<->,green!45!black,line width=0.7pt] (%s,0) -- "
+              "(%s,%s);" % (_toa(xh), _toa(xh), _toa(gy)))
+    ra.append("\\node[green!40!black,anchor=west] at (%s,%s) "
+              "{$h\\left(t\\right)$};"
+              % (_toa(xh + 0.12), _toa(gy / 2.0)))
+
+    ra.append("\\end{tikzpicture}")
+    return "\n".join(ra)
+
 def L11_C1_B2_VD014_MC_A_01(socau, dang=1):
     r"""Vấn đề thực tiễn gắn với giá trị lượng giác - guồng nước.
 
@@ -923,12 +1051,14 @@ def L11_C1_B2_VD014_MC_A_01(socau, dang=1):
              "$%s$ mét" % _xx(Fraction(a + b)),
              "$%s$ mét" % _xx(2 * Fraction(a) - h)],
             buoc=lambda x: "$%s$ mét" % _xx(float(h) + x))
-        debai = (r"Một chiếc guồng nước quay đều. Khoảng cách từ một chiếc "
-                 r"gàu đến mặt nước (tính bằng mét) ở thời điểm $t$ phút "
-                 r"được cho bởi $h\left(t\right) = %d + %d"
-                 r"\sin\dfrac{2\pi t}{%d}$. Tính khoảng cách đó tại thời "
+        debai = (r"Một chiếc guồng nước quay đều, trục của guồng cách mặt "
+                 r"nước $%d$ mét, bán kính guồng bằng $%d$ mét (xem hình). "
+                 r"Độ cao của một chiếc gàu so với mặt nước (tính bằng mét, "
+                 r"quy ước âm khi gàu ở dưới mặt nước) tại thời điểm $t$ "
+                 r"phút được cho bởi $h\left(t\right) = %d + %d"
+                 r"\sin\dfrac{2\pi t}{%d}$. Tính độ cao đó tại thời "
                  r"điểm $t = %s$ phút."
-                 % (a, b, T, _ps1(t.numerator, t.denominator)))
+                 % (a, b, a, b, T, _ps1(t.numerator, t.denominator)))
         giai = (r"Thay $t = %s$ vào công thức:"
                 % _ps1(t.numerator, t.denominator) +
                 "\\\\\n"
@@ -939,7 +1069,8 @@ def L11_C1_B2_VD014_MC_A_01(socau, dang=1):
                 "\\\\\n"
                 r"$h = %d + %d\cdot\left(%s\right) = %s$ (mét)."
                 % (a, b, _sin_dep(k), _xx(h)))
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai,
+                                   _hinh_guong_nuoc(a, b), 0, dang)
     return cauTN
 
 
@@ -960,11 +1091,14 @@ def L11_C1_B2_VD014_SA_A_01(socau):
         s = math.sin(k * math.pi / 12)
         h = Fraction(a) + Fraction(b) * Fraction(round(s * 2), 2)
         dapso = _xx(h)
-        debai = (r"Khoảng cách từ một chiếc gàu của guồng nước đến mặt "
-                 r"nước (tính bằng mét) ở thời điểm $t$ phút được cho bởi "
-                 r"$h\left(t\right) = %d + %d\sin\dfrac{2\pi t}{%d}$. "
-                 r"Tính $h$ tại thời điểm $t = %s$ phút (đơn vị: mét)."
-                 % (a, b, T, _ps1(t.numerator, t.denominator)))
+        debai = (r"Một chiếc guồng nước quay đều, trục của guồng cách mặt "
+                 r"nước $%d$ mét, bán kính guồng bằng $%d$ mét (xem hình). "
+                 r"Độ cao của một chiếc gàu so với mặt nước (tính bằng mét, "
+                 r"quy ước âm khi gàu ở dưới mặt nước) tại thời điểm $t$ "
+                 r"phút được cho bởi $h\left(t\right) = %d + %d"
+                 r"\sin\dfrac{2\pi t}{%d}$. Tính $h$ tại thời điểm "
+                 r"$t = %s$ phút (đơn vị: mét)."
+                 % (a, b, a, b, T, _ps1(t.numerator, t.denominator)))
         giai = (r"$\dfrac{2\pi}{%d}\cdot %s = %s$ và $\sin %s = %s$."
                 % (T, _ps1(t.numerator, t.denominator), _pi_ps(k),
                    _pi_ps(k), _sin_dep(k)) +
@@ -975,7 +1109,8 @@ def L11_C1_B2_VD014_SA_A_01(socau):
                            [_xx(Fraction(a)), _xx(Fraction(a + b)),
                             _xx(2 * Fraction(a) - h)],
                            buoc=lambda x: _xx(float(h) + x))
-        cau += MC_SA_answer_const(debai, dapso, nhieu, giai, 0, 0, 2)
+        cau += MC_SA_answer_const(debai, dapso, nhieu, giai,
+                                  _hinh_guong_nuoc(a, b), 0, 2)
     return cau
 
 
@@ -998,19 +1133,22 @@ def L11_C1_B2_VD014_TL_A_01(socau, dong=1):
         t2 = Fraction(T, 12)         # goc pi/6 -> sin = 1/2
         h1 = a + b
         h2 = Fraction(a) + Fraction(b, 2)
-        debai = (r"Một chiếc guồng nước quay đều. Khoảng cách từ một chiếc "
-                 r"gàu đến mặt nước (tính bằng mét) ở thời điểm $t$ phút "
-                 r"được cho bởi $h\left(t\right) = %d + %d"
-                 r"\sin\dfrac{2\pi t}{%d}$ với $t \geq 0$." % (a, b, T))
+        debai = (r"Một chiếc guồng nước quay đều, trục của guồng cách mặt "
+                 r"nước $%d$ mét, bán kính guồng bằng $%d$ mét (xem hình). "
+                 r"Độ cao của một chiếc gàu so với mặt nước (tính bằng mét, "
+                 r"quy ước âm khi gàu ở dưới mặt nước) tại thời điểm $t$ "
+                 r"phút được cho bởi $h\left(t\right) = %d + %d"
+                 r"\sin\dfrac{2\pi t}{%d}$ với $t \geq 0$."
+                 % (a, b, a, b, T))
 
         hoi_a = r"Tính $h\left(0\right)$ và cho biết ý nghĩa của nó."
         giai_a = (r"$h\left(0\right) = %d + %d\sin 0 = %d + 0 = %d$ (mét)."
                   % (a, b, a, a) +
                   "\\\\\n"
-                  r"Đây là khoảng cách từ gàu đến mặt nước ở thời điểm bắt "
-                  r"đầu quan sát.")
+                  r"Đây là độ cao của gàu so với mặt nước ở thời điểm "
+                  r"bắt đầu quan sát.")
 
-        hoi_b = (r"Tìm khoảng cách LỚN NHẤT và NHỎ NHẤT từ gàu đến mặt "
+        hoi_b = (r"Tìm độ cao LỚN NHẤT và NHỎ NHẤT của gàu so với mặt "
                  r"nước.")
         giai_b = (r"Vì $-1 \leq \sin\dfrac{2\pi t}{%d} \leq 1$ nên" % T +
                   "\\\\\n"
@@ -1018,10 +1156,17 @@ def L11_C1_B2_VD014_TL_A_01(socau, dong=1):
                   r"$%d \leq h\left(t\right) \leq %d$."
                   % (a, b, a, b, a - b, a + b) +
                   "\\\\\n"
-                  r"Khoảng cách lớn nhất là $%d$ mét (khi "
+                  r"Độ cao lớn nhất là $%d$ mét (khi "
                   r"$\sin\dfrac{2\pi t}{%d} = 1$), nhỏ nhất là $%d$ mét "
                   r"(khi $\sin\dfrac{2\pi t}{%d} = -1$)."
-                  % (a + b, T, a - b, T))
+                  % (a + b, T, a - b, T) +
+                  # b > a thi guong ngap mot phan xuong nuoc - dung nhu
+                  # guong that. Noi ro cho hoc sinh khoi tuong la ra am
+                  # la sai.
+                  ("" if a - b >= 0 else
+                   "\\\\\n" +
+                   r"Số âm ở đây có nghĩa là gàu chìm xuống dưới mặt "
+                   r"nước, sâu nhất là $%d$ mét." % (b - a)))
 
         hoi_c = r"Tính $h$ tại thời điểm $t = %s$ phút." % \
             _ps1(t2.numerator, t2.denominator)
@@ -1035,7 +1180,8 @@ def L11_C1_B2_VD014_TL_A_01(socau, dong=1):
         ds_abcd = [(hoi_a, r"h\left(0\right) = %d \text{ mét}" % a, giai_a),
                    (hoi_b, r"%d \leq h \leq %d" % (a - b, a + b), giai_b),
                    (hoi_c, r"h = %s \text{ mét}" % _xx(h2), giai_c)]
-        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+        cauTN += TL_answer_text(debai, ds_abcd,
+                                _hinh_guong_nuoc(a, b), 0, dong)
     return cauTN
 
 
@@ -1843,11 +1989,14 @@ def L11_C1_B4_VD028_MC_A_01(socau, dang=1):
              "$%s$ phút" % _xx(Fraction(T, 6)),
              "$%s$ phút" % _xx(Fraction(T))],
             buoc=lambda u: "$%s$ phút" % _xx(float(t) + u))
-        debai = (r"Khoảng cách từ một chiếc gàu của guồng nước đến mặt "
-                 r"nước (tính bằng mét) ở thời điểm $t$ phút được cho bởi "
-                 r"$h\left(t\right) = %d + %d\sin\dfrac{2\pi t}{%d}$. Hỏi "
-                 r"LẦN ĐẦU TIÊN khoảng cách đó bằng $%s$ mét là ở thời "
-                 r"điểm nào?" % (a, b, T, _xx(h)))
+        debai = (r"Một chiếc guồng nước quay đều, trục của guồng cách mặt "
+                 r"nước $%d$ mét, bán kính guồng bằng $%d$ mét (xem hình). "
+                 r"Độ cao của một chiếc gàu so với mặt nước (tính bằng mét, "
+                 r"quy ước âm khi gàu ở dưới mặt nước) tại thời điểm $t$ "
+                 r"phút được cho bởi $h\left(t\right) = %d + %d"
+                 r"\sin\dfrac{2\pi t}{%d}$. Hỏi LẦN ĐẦU TIÊN độ cao đó "
+                 r"bằng $%s$ mét là ở thời điểm nào?"
+                 % (a, b, a, b, T, _xx(h)))
         giai = (r"Giải phương trình $%d + %d\sin\dfrac{2\pi t}{%d} = %s$."
                 % (a, b, T, _xx(h)) +
                 "\\\\\n"
@@ -1866,7 +2015,8 @@ def L11_C1_B4_VD028_MC_A_01(socau, dang=1):
                 % (T, _xx(t), T, _xx(Fraction(5 * T, 12))) +
                 "\\\\\n"
                 r"Thời điểm nhỏ nhất dương là $t = %s$ phút." % _xx(t))
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai,
+                                   _hinh_guong_nuoc(a, b), 0, dang)
     return cauTN
 
 
@@ -1930,13 +2080,16 @@ def L11_C1_B4_VD028_TL_A_01(socau, dong=1):
         h = Fraction(a) + Fraction(b, 2)
         t1 = Fraction(T, 12)
         t2 = Fraction(5 * T, 12)
-        debai = (r"Khoảng cách từ một chiếc gàu của guồng nước đến mặt "
-                 r"nước (tính bằng mét) ở thời điểm $t$ phút được cho bởi "
-                 r"$h\left(t\right) = %d + %d\sin\dfrac{2\pi t}{%d}$ với "
-                 r"$t \geq 0$." % (a, b, T))
+        debai = (r"Một chiếc guồng nước quay đều, trục của guồng cách mặt "
+                 r"nước $%d$ mét, bán kính guồng bằng $%d$ mét (xem hình). "
+                 r"Độ cao của một chiếc gàu so với mặt nước (tính bằng mét, "
+                 r"quy ước âm khi gàu ở dưới mặt nước) tại thời điểm $t$ "
+                 r"phút được cho bởi $h\left(t\right) = %d + %d"
+                 r"\sin\dfrac{2\pi t}{%d}$ với $t \geq 0$."
+                 % (a, b, a, b, T))
 
-        hoi_a = (r"Viết phương trình để tìm thời điểm gàu cách mặt nước "
-                 r"$%s$ mét." % _xx(h))
+        hoi_a = (r"Viết phương trình để tìm thời điểm gàu ở độ cao "
+                 r"$%s$ mét so với mặt nước." % _xx(h))
         giai_a = (r"Cho $h\left(t\right) = %s$ ta được phương trình"
                   % _xx(h) +
                   "\\\\\n"
@@ -1960,7 +2113,7 @@ def L11_C1_B4_VD028_TL_A_01(socau, dong=1):
                   % (_xx(t1), T, _xx(t2), T))
 
         hoi_c = (r"Tìm hai thời điểm đầu tiên (kể từ lúc $t = 0$) mà gàu "
-                 r"cách mặt nước $%s$ mét." % _xx(h))
+                 r"ở độ cao $%s$ mét so với mặt nước." % _xx(h))
         giai_c = (r"Lấy $k = 0$ ở cả hai họ nghiệm được $t = %s$ và "
                   r"$t = %s$ (phút)." % (_xx(t1), _xx(t2)) +
                   "\\\\\n"
@@ -1976,7 +2129,8 @@ def L11_C1_B4_VD028_TL_A_01(socau, dong=1):
                     % (_xx(t1), T, _xx(t2), T), giai_b),
                    (hoi_c, r"t = %s \text{ và } t = %s"
                     % (_xx(t1), _xx(t2)), giai_c)]
-        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+        cauTN += TL_answer_text(debai, ds_abcd,
+                                _hinh_guong_nuoc(a, b), 0, dong)
     return cauTN
 
 

@@ -8277,3 +8277,73 @@ ban vá, DE YEN.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.29 - 2026-09-29
+
+## Ve hinh guong nuoc bang TikZ (lop 11 chuong 1)
+
+Co Lan: "can phai ve cai guong nuoc nay, chu ko se rat kho hinh dung".
+
+Them ham `_hinh_guong_nuoc(a, b, goc=40)` trong
+`data/python_bank/toan11/L11_C1.py`. Hinh ve dung ba thu hoc sinh can
+nhin thay de DOC RA cong thuc:
+
+  - truc guong cach mat nuoc `a` met  -> so hang tu do,
+  - ban kinh guong `b` met            -> bien do,
+  - goc alpha tinh tu DUONG NGANG qua truc -> `b sin(alpha)` la phan gau
+    nho len so voi truc.
+
+Nho vay `h = a + b sin(alpha)` doc thang duoc tren hinh, chu khong phai
+hoc thuoc.
+
+Chi tiet ve: mat nuoc co gach song, hai cot do o hai ben (khong cat
+ngang mat guong cho khoi roi), vanh guong + 8 nan hoa + 8 gau, mui ten
+chieu quay, gau duoc hoi to mau do, cung ghi goc alpha, cot do `a` ben
+trai va cot do `h(t)` ben phai. Co chu tu dieu chinh theo `a` va `b` nen
+hinh nao cung cao chung chung 4,5 cm.
+
+Gan hinh vao DE (khong phai loi giai) cua ca 5 ham guong nuoc:
+`L11_C1_B2_VD014_MC_A_01`, `_SA_A_01`, `_TL_A_01`,
+`L11_C1_B4_VD028_MC_A_01`, `_TL_A_01`.
+
+## Sua mot loi THAT phat hien luc ve hinh: "khoang cach" am
+
+Bo so cho `a` thuoc {2,3,4,5}, `b` thuoc {2,4,6} nen rat hay gap
+`b > a`. Khi do `h = a + b sin` CO THE AM - vi du `a=2, b=6, sin=-1`
+cho `h = -4`. Ma de lai goi `h` la "KHOANG CACH tu gau den mat nuoc":
+khong co khoang cach nao am ca, va ham tu luan con in ra "khoang cach
+nho nhat la -4 met".
+
+Cai sai nam o CHU chu khong o so: guong nuoc that thi banh guong PHAI
+ngap mot phan xuong nuoc moi muc duoc nuoc, nen `b > a` moi dung thuc
+te (SGK KNTT lay ban kinh 2,5 m, truc cach mat nuoc 2 m). Ve hinh ra la
+thay ngay.
+
+Nay ca 5 ham doi sang:
+
+    "Mot chiec guong nuoc quay deu, truc cua guong cach mat nuoc <a>
+     met, ban kinh guong bang <b> met (xem hinh). DO CAO cua mot chiec
+     gau so voi mat nuoc (tinh bang met, quy uoc am khi gau o duoi mat
+     nuoc) tai thoi diem t phut duoc cho boi h(t) = ..."
+
+De cung neu ro `a` va `b` - vua dung voi hinh, vua cho hoc sinh hieu
+hai so trong cong thuc tu dau ma ra. Rieng cau tu luan, khi `a - b < 0`
+loi giai noi them: "So am o day co nghia la gau chim xuong duoi mat
+nuoc, sau nhat la <b-a> met."
+
+## Da kiem chung the nao
+
+1. Dich that bang xelatex cho ca truong hop `b <= a` (guong nam han
+   tren nuoc) va `b > a` (guong ngap mot phan) - ra hinh dung.
+2. 5 ham x 40 seed x 2 cau: 400/400 cau deu trich duoc hinh TikZ qua
+   `answer_parser_service.trich_dap_an` -> web se hien duoc hinh.
+3. 2815 bai test qua, 8 bo qua (truoc: 2813).
+
+LUU Y: hinh chi hien tren web sau khi VPS co xelatex
+(`bash scripts/cai_xelatex_vps.sh`).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
