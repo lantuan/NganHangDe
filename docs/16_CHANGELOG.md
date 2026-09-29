@@ -8451,3 +8451,80 @@ ghi ma moi vao bo nho trinh duyet.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.32 - 2026-09-29
+
+## LOP 12 - CHUONG 2 (Vecto va he truc toa do trong khong gian): 11/11 dang
+
+Bat dau ngan hang de LOP 12. Co Lan chot lam CHUONG NHO TRUOC:
+C2 (10 dong) -> C6 (12) -> C3 (14) -> C4 (21) -> C1 (22) -> C5 (34).
+Va lam DAY DU tung tang mot: PPCT -> curriculum -> mapping -> ham.
+
+### Tang PPCT va curriculum: da khop san
+
+PPCT lop 12 co 19 bai / 6 chuong; curriculum lop 12 danh so theo dung
+PPCT tu Version 2.79 (xem docs/25_LECH_PPCT_CURRICULUM.md). Chay
+tests/test_ppct_curriculum.py va test_mapping_curriculum.py: 131 bai
+qua, khong co cho nao lech. Chuong 2 ung voi ba bai:
+
+    B6 Vecto trong khong gian
+    B7 He truc toa do trong khong gian
+    B8 Bieu thuc toa do cua cac phep toan vecto
+
+### Tang mapping: bit mot lo ma tran
+
+Chuong 2 co 10 dong nhung O TRA LOI NGAN MUC VD BO TRONG, nen ra de he
+so 1 chuong nay LUON hut cau. Da them:
+
+    L12_C2_B8_VD017_SA_A  Do lon hop luc trong bai toan thuc tien
+
+kem ghi_chu de co Lan duyet lai. Mapping: 10 -> 11 dong.
+
+### Tang ham Python: 11/11
+
+    B6_NB013_MC_A   Quy tac hinh hop (co HINH VE)
+    B7_NB014_MC_A   Toa do vecto tu a1.i + a2.j + a3.k (co HINH VE)
+    B7_TH015_MC_A   Do dai doan thang khi biet toa do hai dau mut
+    B7_TH015_SA_A   Do dai doan thang - tra loi ngan
+    B8_TH016_MC_A   Toa do cua m.a + n.b
+    B8_TH016_SA_A   Mot thanh phan toa do sau phep toan
+    B8_VD017_MC_A   Do lon hop luc ba day cap keo (thuc tien)
+    B8_VD017_SA_A   Do lon hop luc - tra loi ngan  (MOI)
+    B8_VD017_TL_A   Tu luan 3 y: hop luc -> do lon -> luc can bang
+    TF_A            Dung/Sai: toa do vecto, do dai, tich vo huong,
+                    quy tac hinh binh hanh trong khong gian
+    TF_B            Dung/Sai: cong, nhan voi mot so, tich vo huong,
+                    do dai cua 2a - b
+
+### Bao dam DAP SO DEP
+
+Tra loi ngan cham bang SO KHOP CHUOI nen dap so phai viet duoc chinh
+xac. Moi cau hoi do dai deu lay HIEU toa do tu BO_PYTAGO3 - 15 bo ba
+(a,b,c) co a^2+b^2+c^2 la so chinh phuong - nen can ra so NGUYEN,
+khong phai lam tron, khong co can thuc xau. Bai hop luc dung NGUOC:
+chon truoc vector tong roi moi chia ra ba luc thanh phan.
+
+### Hinh ve
+
+Hai ham ve bang TikZ thuan:
+  _hinh_hop()   hinh hop ABCD.A'B'C'D', ba canh qua dinh D ve net dut
+                (dinh khuat) - dung cach nhin hinh khong gian cua SGK
+  _hinh_oxyz()  he truc Oxyz
+Ca hai da dich that bang xelatex, ra anh dung.
+
+### Da kiem chung the nao
+
+1. 11 ham x 3 muc socau x 12 seed: chay sach, khong treo, dung loai cau.
+2. KIEM TOAN DOC LAP 1740 cau: doc lai so lieu TU CHINH DE BAI bang
+   bieu thuc chinh quy roi tinh lai tu dau bang Python thuan, doi chieu
+   voi dap an da danh dau. Phan Dung/Sai soi ca 1760 y - kiem CA y dung
+   LAN y sai (y sai phai that su sai). 0 cho sai.
+3. 20 de he so 1 chuong 2: du 12 cau, KHONG CON CHO NAO THIEU, sinh cau
+   that khong loi.
+4. 2868 bai test qua, 8 bo qua (truoc: 2820).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
