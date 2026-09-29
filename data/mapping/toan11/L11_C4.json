@@ -48,6 +48,13 @@
     "Dang": "Tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường"
   },
   {
+    "id": "L11_C4_B10_VD052_SA_A",
+    "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm cạnh chéo nhau, mặt phẳng trong hình không gian",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C4_B10_VD052_TL_A",
     "content": "Vận dụng được các tính chất về giao tuyến của hai mặt phẳng, giao điểm của đường thẳng và mặt phẳng vào giải bài tập.",
     "Loai": "Tự luận",
@@ -58,6 +65,20 @@
     "content": "Vận dụng được kiến thức về đường thẳng, mặt phẳng trong không gian để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về đường thẳng, mặt phẳng trong không gian"
+  },
+  {
+    "id": "L11_C4_B10_VD054_SA_A",
+    "content": "Vận dụng được kiến thức về đường thẳng, mặt phẳng trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số mặt phẳng đi qua ba trong n điểm",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C4_B10_VD054_TL_A",
+    "content": "Vận dụng được kiến thức về đường thẳng, mặt phẳng trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán tổng hợp về đường thẳng và mặt phẳng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C4_B11_NB055_MC_A",
@@ -76,6 +97,20 @@
     "content": "Vận dụng được kiến thức về hai đường thẳng song song để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về hai đường thẳng song song"
+  },
+  {
+    "id": "L11_C4_B11_VD057_SA_A",
+    "content": "Vận dụng được kiến thức về hai đường thẳng song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài đoạn nối trung điểm trong tứ diện",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C4_B11_VD057_TL_A",
+    "content": "Vận dụng được kiến thức về hai đường thẳng song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Chứng minh hai đường thẳng song song trong không gian",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C4_B12_NB058_MC_A",
@@ -106,6 +141,20 @@
     "content": "Vận dụng được kiến thức về đường thẳng song song với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về đường thẳng song song với mặt phẳng"
+  },
+  {
+    "id": "L11_C4_B12_VD061_SA_A",
+    "content": "Vận dụng được kiến thức về đường thẳng song song với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài giao tuyến song song với cạnh đáy",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C4_B12_VD061_TL_A",
+    "content": "Vận dụng được kiến thức về đường thẳng song song với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Vận dụng đường thẳng song song với mặt phẳng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C4_B13_NB062_MC_A",
@@ -156,6 +205,20 @@
     "Dang": "Kiến thức về quan hệ song song"
   },
   {
+    "id": "L11_C4_B13_VD067_SA_A",
+    "content": "Vận dụng được kiến thức về quan hệ song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài trong thiết diện song song với đáy",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C4_B13_VD067_TL_A",
+    "content": "Vận dụng được kiến thức về quan hệ song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Thiết diện song song với mặt đáy của hình chóp",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C4_B14_NB068_MC_A",
     "content": "Nhận biết được khái niệm và các tính chất cơ bản về phép chiếu song song.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -178,6 +241,20 @@
     "content": "Sử dụng được kiến thức về phép chiếu song song để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về phép chiếu song song"
+  },
+  {
+    "id": "L11_C4_B14_VD071_SA_A",
+    "content": "Sử dụng được kiến thức về phép chiếu song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài ảnh qua phép chiếu song song",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C4_B14_VD071_TL_A",
+    "content": "Sử dụng được kiến thức về phép chiếu song song để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Vận dụng tính chất của phép chiếu song song",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C4_TF_A",

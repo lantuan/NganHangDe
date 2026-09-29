@@ -7844,3 +7844,63 @@ Da xong 184/261 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.22 - 2026-09-29
+
+## Lop 11 chuong 4 (Quan he song song trong khong gian): 43/43 dang
+
+Viet moi data/python_bank/toan11/L11_C4.py.
+
+Bai 10 (duong thang va mat phang): quan he lien thuoc, hinh chop - tu
+dien, ba cach xac dinh mat phang, giao tuyen, giao diem, thiet dien,
+dem mat phang qua ba trong n diem (MC + SA + TL).
+Bai 11 (hai duong thang song song): vi tri tuong doi, tinh chat bac
+cau, duong trung binh trong tu dien (MC + SA + TL).
+Bai 12 (duong thang song song mat phang): dinh nghia, dieu kien du,
+tinh chat giao tuyen, do dai giao tuyen (MC + SA + TL).
+Bai 13 (hai mat phang song song): dinh nghia, dieu kien du, tinh chat,
+DINH LI THALES trong khong gian, lang tru va hinh hop, thiet dien song
+song day (MC + SA + TL).
+Bai 14 (phep chieu song song): tinh chat bao toan, anh cua diem - doan
+thang - tam giac, hinh bieu dien, ti so do dai (MC + SA + TL).
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+BA HINH KHONG GIAN VE BANG TIKZ THUAN, dung chung cho ca chuong:
+  _hinh_chop_tu_giac()  - hinh chop S.ABCD day hinh binh hanh
+  _hinh_tu_dien()       - tu dien ABCD
+  _hinh_hop()           - hinh hop ABCD.A'B'C'D'
+Quy uoc: canh nhin thay net lien, canh khuat net dut (AD, DC, SD o hinh
+chop; cac canh qua C o tu dien; cac canh qua D o hinh hop). Da dich thu
+ca ba ra anh PNG va xem lai bang mat.
+
+So lieu chon de DAP SO DEP: moi cau SA deu la do dai duong trung binh
+(nua canh) hoac ti so Thales voi mau nho, nen ket qua luon viet duoc
+dung hai chu so thap phan.
+
+## Bo sung 11 dang con thieu cua chuong 4
+
+VD052 SA; VD054 SA + TL; VD057 SA + TL; VD061 SA + TL; VD067 SA + TL;
+VD071 SA + TL. Nho vay de he so 1 chuong 4 khong con o trong nao.
+
+## Da kiem chung the nao
+
+1. 43/43 ham chay sach 3 muc socau x 40 seed.
+2. Kiem toan DOC LAP 2700 cau: doc lai so lieu TU CHINH DE BAI bang bieu
+   thuc chinh quy roi tu tinh lai bang phan so huu ti - 0 cho sai.
+3. Ba hinh khong gian da dich thanh anh PNG, xem lai bang mat: dung net
+   lien - net dut, du nhan dinh.
+4. De he so 1 chuong 4 lop 11: 20/20 de du ma tran 6-1-2-3.
+5. Quet 20 de x 9 chuong x 2 lop: CHI CON THIEU O CHUONG 7 LOP 11.
+6. 2546 bai test qua, 8 bo qua (truoc: 2395).
+
+## Hien trang lop 11
+
+    C1 42/42   C4 43/43          C7  0/45 (hinh)
+    C2 22/22   C5 23/23          C8 23/23
+    C3 16/16   C6 33/33          C9 25/25
+
+Da xong 227/272 dang. Chi con chuong 7.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
