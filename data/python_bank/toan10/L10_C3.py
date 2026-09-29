@@ -986,7 +986,7 @@ def L10_C3_B5_TH031_MC_B_01(socau, dang=1):
     return cauTN
 
 
-def L10_C3_B5_TH030_MC_A_02(socau, dang=1):
+def L10_C3_B5_TH030_MC_C_01(socau, dang=1):
     """Dùng máy tính cầm tay tính giá trị lượng giác của một góc bất kì.
 
     Bản cũ (nhánh cos) đưa cùng một giá trị vào HAI phương án nhiễu nên

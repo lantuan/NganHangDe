@@ -12,6 +12,13 @@
     "Dang": "Tính giá trị lượng giác bằng máy tính cầm tay"
   },
   {
+    "id": "L10_C3_B5_TH030_MC_C",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn khẳng định đúng về giá trị lượng giác tra bằng máy tính cầm tay",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C3_B5_TH031_MC_A",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

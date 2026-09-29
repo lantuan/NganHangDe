@@ -82,7 +82,7 @@ def L10_C1_B1_NB001_MC_A_01(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B1_NB001_MC_A_02(socau, dang=1):
+def L10_C1_B1_NB001_MC_B_01(socau, dang=1):
 
     # Danh sách các mệnh đề
     ds_menhde = [
@@ -335,7 +335,7 @@ def L10_C1_B1_TH003_MC_A_01(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B1_TH003_MC_A_02(socau, dang=1):
+def L10_C1_B1_TH003_MC_B_01(socau, dang=1):
 
     # Danh sách các mệnh đề đúng
     ds_dung = [
@@ -622,7 +622,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
     return cauTN
 
-def L10_C1_B1_TH003_TL_A_02(socau, dong=1):
+def L10_C1_B1_TH003_TL_B_01(socau, dong=1):
 
     gt = []
     dem = len(gt)
@@ -1441,7 +1441,7 @@ def L10_C1_B1_NB007_MC_A_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B1_NB007_MC_A_02(socau, dang=1):
+def L10_C1_B1_NB007_MC_C_01(socau, dang=1):
     # Danh sách các mệnh đề kéo theo
     ds_keotheo = [
         r'Nếu một số chia hết cho $10$ thì số đó chia hết cho $5$.',
@@ -1777,7 +1777,7 @@ def L10_C1_B1_NB007_MC_B_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B1_NB007_MC_B_02(socau, dang=1):
+def L10_C1_B1_NB007_MC_D_01(socau, dang=1):
 
     # Danh sách các mệnh đề kéo theo
     # Nội dung thực tế, liên môn, kiến thức THCS trở xuống
@@ -3569,7 +3569,7 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B1_TH014_MC_A_02(socau, dang=1): ####### kiểm tra lại nội dung câu hỏi, các phương án.
+def L10_C1_B1_TH014_MC_B_01(socau, dang=1): ####### kiểm tra lại nội dung câu hỏi, các phương án.
 
     gt = []
     dem = 0
@@ -5471,7 +5471,7 @@ def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B2_NB017_MC_A_02(socau, dang=1):
+def L10_C1_B2_NB017_MC_D_01(socau, dang=1):
 
     x = Symbol('x')
     y = Symbol('y')
@@ -5943,7 +5943,7 @@ def L10_C1_B2_NB017_MC_B_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
+def L10_C1_B2_NB017_MC_E_01(socau, dang=1):
 
     gt = []
     dem = len(gt)
@@ -5951,49 +5951,29 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
     while dem < socau:
 
         # =====================================================
-        # TẠO TẬP HỢP A
+        # TẠO TẬP HỢP A BẰNG KÍ HIỆU CHỮ
         # =====================================================
+        # SUA 29/09/2026 (co Lan bao): truoc day tap A la tap SO
+        # (vi du $A=\{-9;-1;2;4;12\}$) nhung cac khang dinh ben duoi
+        # lai viet bang chu z, w, v - ma de KHONG he cho biet z, w, v
+        # la gi. Hoc sinh khong co cach nao lam duoc, chi loi giai moi
+        # lo ra "Ta gan z = -9".
+        # Nguyen tac co Lan chot: DE CHU THI CHU HET, DE SO THI SO HET.
+        # Nay A cung la tap ki hieu chu, moi khang dinh doc thang tren
+        # A, khong con phep gan ngam nao nua. Ban dung SO la ham
+        # L10_C1_B2_NB017_MC_B_01, de rieng - hai ban khong tron nhau.
 
-        A_list = []
+        ds_ki_hieu = random.choice([
+            ['a', 'b', 'c', 'd', 'e', 'f'],
+            ['m', 'n', 'p', 'q', 'r', 's'],
+            ['u', 'v', 'w', 'x', 'y', 'z'],
+        ])
 
         k = np.random.randint(4, 7)
 
-        for i in range(k):
+        A_list = sorted(random.sample(ds_ki_hieu, k))
 
-            a_val = np.random.randint(-12, 13)
-
-            while a_val in A_list:
-
-                a_val = np.random.randint(-12, 13)
-
-            A_list.append(a_val)
-
-        A_list.sort()
-
-        # =====================================================
-        # TẠO KÍ HIỆU
-        # =====================================================
-
-        ds_ki_hieu = random.choice([
-
-            ['a', 'b', 'c', 'd'],
-
-            ['x', 'y', 'z', 't'],
-
-            ['m', 'n', 'p', 'q'],
-
-            ['u', 'v', 'w', 'z']
-        ])
-
-        pt1, pt2, pt3, pt4 = ds_ki_hieu
-
-        # =====================================================
-        # GHÉP KÍ HIỆU VỚI PHẦN TỬ THẬT
-        # =====================================================
-
-        gia_tri = random.sample(A_list, 4)
-
-        phan_tu_map = dict(zip(ds_ki_hieu, gia_tri))
+        pt1, pt2, pt3, pt4 = random.sample(A_list, 4)
 
         # =====================================================
         # HIỂN THỊ TẬP HỢP
@@ -6058,8 +6038,7 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
 
                 True,
 
-                f"Ta gán ${pt1} = {phan_tu_map[pt1]}$. "
-                f"Vì ${phan_tu_map[pt1]} \\in A$ nên "
+                f"Vì ${pt1}$ là một phần tử của $A$ nên "
                 f"${pt1} \\in A$ là đúng."
             ),
 
@@ -6068,7 +6047,6 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
 
                 False,
 
-                f"Ta gán ${pt2} = {phan_tu_map[pt2]}$. "
                 f"${pt2}$ là phần tử nên không dùng kí hiệu "
                 f"$\\subset$."
             ),
@@ -6078,9 +6056,8 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
 
                 False,
 
-                f"Ta gán ${pt3} = {phan_tu_map[pt3]}$. "
                 f"$A$ không chứa phần tử "
-                f"$\\left\\{{ {phan_tu_map[pt3]} \\right\\}}$."
+                f"$\\left\\{{ {pt3} \\right\\}}$."
             ),
 
             (
@@ -6088,9 +6065,8 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
 
                 True,
 
-                f"Ta gán ${pt4} = {phan_tu_map[pt4]}$. "
                 f"Mọi phần tử của "
-                f"$\\left\\{{ {phan_tu_map[pt4]} \\right\\}}$ đều thuộc $A$."
+                f"$\\left\\{{ {pt4} \\right\\}}$ đều thuộc $A$."
             )
         ]
 
@@ -6273,7 +6249,7 @@ def L10_C1_B2_NB017_MC_B_02(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B2_NB017_MC_B_03(socau, dang=1):
+def L10_C1_B2_NB017_MC_F_01(socau, dang=1):
 
     # Danh sách các chữ cái hoa đặt tên cho tập hợp và chữ thường đặt tên cho phần tử
     chu_hoa = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'M', 'N', 'P', 'Q', 'S', 'T', 'V', 'X', 'Y', 'Z']
@@ -7397,7 +7373,7 @@ def L10_C1_B1_VD014_SA_A_01(socau, dang = 2):
     return cauTN
 
 
-def L10_C1_B1_VD014_MC_A_02(socau, dang=1):
+def L10_C1_B1_VD014_MC_B_01(socau, dang=1):
     """
     Thông hiểu: Mệnh đề chứa biến P(x): x [dau] x^n.
     Sử dụng SymPy để kiểm tra chân trị cho mỗi cặp tham số ngẫu nhiên.

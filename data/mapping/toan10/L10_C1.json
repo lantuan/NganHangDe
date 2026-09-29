@@ -6,6 +6,13 @@
     "Dang": "Mệnh đề bất kỳ"
   },
   {
+    "id": "L10_C1_B1_NB001_MC_B",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số câu không phải là mệnh đề trong một danh sách",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C1_B1_NB005_MC_A",
     "content": "Nhận biết được mệnh đề phủ định.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -30,10 +37,24 @@
     "Dang": "Mệnh đề kéo theo toán"
   },
   {
+    "id": "L10_C1_B1_NB007_MC_C",
+    "content": "Nhận biết được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số mệnh đề không phải mệnh đề kéo theo (mệnh đề toán)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C1_B1_NB007_MC_B",
     "content": "Nhận biết được mệnh đề kéo theo.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Mệnh đề kéo theo thực tế"
+  },
+  {
+    "id": "L10_C1_B1_NB007_MC_D",
+    "content": "Nhận biết được mệnh đề kéo theo.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số mệnh đề không phải mệnh đề kéo theo (mệnh đề thực tế)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
     "id": "L10_C1_B1_NB008_MC_A",
@@ -90,10 +111,24 @@
     "Dang": "Mệnh đề toán học"
   },
   {
+    "id": "L10_C1_B1_TH003_MC_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số mệnh đề sai trong một danh sách",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C1_B1_TH003_TL_A",
     "content": "Xác định được tính đúng sai của các mệnh đề.",
     "Loai": "Tự luận",
     "Dang": "Xét tính đúng sai mệnh đề chứa kí hiệu với mọi, tồn tại"
+  },
+  {
+    "id": "L10_C1_B1_TH003_TL_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Tự luận",
+    "Dang": "Phát biểu mệnh đề phủ định và xét tính đúng sai của mệnh đề phủ định",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
     "id": "L10_C1_B1_TH014_MC_A",
@@ -102,10 +137,24 @@
     "Dang": "kí hiệu tồn tại, với mọi"
   },
   {
+    "id": "L10_C1_B1_TH014_MC_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn khẳng định sai về quan hệ chia hết viết bằng kí hiệu với mọi, tồn tại",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C1_B1_VD014_MC_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Mệnh đề chưa biến"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số mệnh đề đúng khi thay giá trị vào mệnh đề chứa biến",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
     "id": "L10_C1_B1_VD014_SA_A",
@@ -120,10 +169,31 @@
     "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con"
   },
   {
+    "id": "L10_C1_B2_NB017_MC_D",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tập không phải tập con, tập hợp cho bằng kí hiệu chữ",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
     "id": "L10_C1_B2_NB017_MC_B",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "phân biệt thuộc/tập con"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_F",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Quan hệ phần tử và tập con giữa hai tập hợp lồng nhau",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_E",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phân biệt thuộc/tập con, tập hợp cho bằng kí hiệu chữ",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
     "id": "L10_C1_B2_NB017_MC_C",

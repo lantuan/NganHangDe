@@ -126,7 +126,13 @@ echo "--- thu vien Python can thiet ---"
 # Phai kiem bang DUNG con python ma dich vu dang chay, khong phai python3
 # he thong: neu dich vu chay trong venv thi hai con nay khac nhau han.
 PY="\$(systemctl show -p ExecStart --value $SERVICE 2>/dev/null \
-       | tr ' ' '\n' | grep -m1 -E '(python|uvicorn)\$' || true)"
+       | tr ' ' '\n' | grep -m1 -E '(python[0-9.]*|uvicorn)\$' || true)"
+# systemctl in ExecStart ra dang "path=/duong/dan/uvicorn" chu KHONG phai
+# duong dan tran. Khong cat chu "path=" di thi test -x luon that bai,
+# roi ve python3 he thong, roi bao "THIEU HAN 33 goi" - trong khi dich vu
+# van chay ngon lanh bang python trong venv. Co Lan suyt chay lenh pip do
+# len python he thong ngay 29/09/2026; lam vay la hong ca cong cu Ubuntu.
+PY="\${PY##*=}"
 case "\$PY" in
   */uvicorn) PY="\$(dirname "\$PY")/python" ;;
 esac
@@ -177,7 +183,8 @@ if echo "$KQ_VPS" | grep -q "Du do nghe"; then
   xanh "Hinh ve: du do nghe, hoc sinh xem duoc hinh tren web."
 else
   vang "Hinh ve: VPS CHUA du do nghe -- cau co hinh se khong hien tren web."
-  vang "   Sua:  ssh $VPS_USER@$DOMAIN  roi  apt-get install -y poppler-utils"
+  vang "   Sua:  ssh $VPS_USER@$DOMAIN  roi chay:"
+  vang "         bash $VPS_DIR/scripts/cai_xelatex_vps.sh"
   CAN_SUA=1
 fi
 

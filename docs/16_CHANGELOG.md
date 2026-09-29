@@ -8069,3 +8069,133 @@ tep D12.py de co Lan duyet lai.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.26 - 2026-09-29
+
+## Trang chat ra TRANG TRON - da sua
+
+Trieu chung: vao trang chu thi duoc, bam vao Chat AI thi ra mot trang
+trang hoan toan. Nhat ky may chu KHONG he bao loi: `GET /chat 200 OK`.
+
+Nguyen nhan: trong khoi cau hinh MathJax them hom 29/09 co dong
+
+    vv: ['\\overrightarrow{#1}', 1]
+
+Hai ky tu `{#` viet lien nhau chinh la DAU MO CHU THICH cua Jinja. Jinja
+nuot sach tu cho do cho toi dau dong chu thich gan nhat (mai tan trong
+thanh ben) - mat luon `</script>`, mat ca khoi `<style>`, mat `<body>`,
+mat toan bo thanh ben. Trinh duyet nhan ve mot the `<script>` khong bao
+gio dong nen nuot not phan con lai cua trang thanh ma JS -> khong ve
+duoc gi ca. Tep `lam_bai.html` con nang hon: Jinja khong dich noi
+(TemplateSyntaxError).
+
+Cach sua: boc khoi cau hinh MathJax trong `{% raw %}...{% endraw %}` o ca
+`chat/chat.html` va `chat/lam_bai.html`.
+
+Chong tai phat: `tests/test_template_khong_bi_nuot.py` - dung Jinja dich
+THAT moi template roi dem the mo/the dong, va kiem `<body>`, `</head>`
+con nguyen sau khi dich. 26 bai.
+
+## Cau tu luan khong con o dien dap an
+
+`math_type.py` gan `\SA[4]{...}` vao sau moi y cua cau tu luan;
+`ex_test.sty` dinh nghia `\SA = \shortans` nen cau tu luan moc ra o vuong
+"KQ: [][][][]" - thu von chi danh cho cau TRA LOI NGAN. Hoc sinh lam tu
+luan tren giay, khong dien vao o; hon nua dap an tu luan hay la chu
+("Dung", "Sai", mot tap hop) ma o vuong thi chi vua may chu so.
+
+KHONG sua `math_type.py` (quy tac cua co Lan). Chi them mot dong vao
+`data/config/latex_template.tex`:
+
+    \renewcommand{\SA}[2][]{}
+
+- `\shortans` van nguyen ven -> PHAN III (tra loi ngan) van co o nhu cu.
+- Chuoi `\SA[4]{...}` van con trong tep .tex nen web va bo cham bai
+  (`answer_parser_service.py`) van doc duoc dap an.
+- Dap an tu luan van hien day du trong phan `\loigiai`.
+
+## Moi ID mapping chi ung voi MOT dang cau hoi
+
+Co Lan soi de that va phat hien: sau ma de cua cung mot bai thi ma cau 3
+ra BA kieu khac han nhau, lech han muc do.
+
+Truy ra: `exam_assembler_service.py` cap cho MOI MA DE mot bo
+`used_variants` rieng, nen hai ma de cua cung mot bai co the roi vao hai
+ham Python khac nhau. Dieu do chi dung neu cac ham duoi cung mot ID deu
+ra CUNG MOT DANG. Thuc te ID `L10_C1_B2_NB017_MC_B` co ba ham ba dang:
+
+  _01  dem khang dinh sai tren tap SO            -> dung de
+  _02  dem khang dinh sai nhung viet bang CHU z, w, v ma de KHONG he
+       dinh nghia -> HOC SINH KHONG THE LAM DUOC, chi loi giai moi lo ra
+       "Ta gan z = -9"
+  _03  hoi quan he phan tu - tap con giua hai tap long nhau -> dang khac
+
+Da xu ly:
+
+1. Sua `L10_C1_B2_NB017_MC_B_02` theo nguyen tac co Lan chot - DE CHU
+   THI CHU HET, DE SO THI SO HET: tap A cung la tap ki hieu chu, moi
+   khang dinh doc thang tren A, khong con phep gan ngam nao.
+
+2. Tach 11 ham lech dang ra ID rieng, giu het cau, khong bo cau nao:
+
+   L10_C1_B1_NB001_MC_A_02 -> L10_C1_B1_NB001_MC_B_01
+   L10_C1_B1_NB007_MC_A_02 -> L10_C1_B1_NB007_MC_C_01
+   L10_C1_B1_NB007_MC_B_02 -> L10_C1_B1_NB007_MC_D_01
+   L10_C1_B1_TH003_MC_A_02 -> L10_C1_B1_TH003_MC_B_01
+   L10_C1_B1_TH003_TL_A_02 -> L10_C1_B1_TH003_TL_B_01
+   L10_C1_B1_TH014_MC_A_02 -> L10_C1_B1_TH014_MC_B_01
+   L10_C1_B1_VD014_MC_A_02 -> L10_C1_B1_VD014_MC_B_01
+   L10_C1_B2_NB017_MC_A_02 -> L10_C1_B2_NB017_MC_D_01
+   L10_C1_B2_NB017_MC_B_02 -> L10_C1_B2_NB017_MC_E_01
+   L10_C1_B2_NB017_MC_B_03 -> L10_C1_B2_NB017_MC_F_01
+   L10_C3_B5_TH030_MC_A_02 -> L10_C3_B5_TH030_MC_C_01
+
+   Mapping L10_C1: +10 dong, L10_C3: +1 dong. Moi dong deu co ghi_chu
+   "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang" de co Lan
+   duyet lai mo ta dang va muc do.
+
+3. Con dung 5 ID co hai ham, deu da soi tay va CUNG dang (chi khac ngu
+   lieu): NB010_MC_A, NB015_MC_A (lop 10 C1), NB022_MC_A, TH024_MC_A
+   (C2), TH032_MC_A (C3).
+
+Chong tai phat: `tests/test_mot_id_mot_dang.py` giu danh sach trang 5 ID
+ay. Them ham thu hai cho bat ki ID nao khac la bai test do ngay, buoc
+nguoi sua phai can nhac: tach ID rieng hay giu chung.
+
+## Hai loi trong bo cong cu trien khai
+
+- `scripts/day.sh` bao "Thu vien THIEU HAN 33 goi" moi lan chay `day web`,
+  ke ca fastapi va uvicorn - trong khi web van tra 200. Bao dong nham:
+  `systemctl show -p ExecStart --value` in ra dang `path=/duong/dan/uvicorn`
+  chu khong phai duong dan tran, nen `test -x` luon that bai va roi ve
+  python3 HE THONG thay vi python trong venv. Da them `PY="${PY##*=}"`.
+  Lenh pip ma no in ra truoc day la NGUY HIEM: cai len python he thong
+  co the lam hong cong cu Ubuntu.
+- Goi y sua thieu xelatex ghi `apt-get install -y poppler-utils` - sai,
+  poppler khong cai xelatex. Nay tro sang `scripts/cai_xelatex_vps.sh`.
+
+## Them scripts/cai_xelatex_vps.sh
+
+Cai ban GON (khoang 2,5 GB, khong phai texlive-full 5,5 GB) du cho
+`latex_template.tex` va `ex_test.sty`. Co hoi truoc khi cai va in cho
+trong o dia. Chay tren VPS:
+
+    bash /root/NganHangDe/scripts/cai_xelatex_vps.sh
+
+Chua cai thi cau co hinh se hien trong tron tren web.
+
+## Da kiem chung the nao
+
+1. Dung lai loi trang trang bang Chromium khong nuoc doi:
+   `document.body` rong hoan toan, kem loi "Invalid or unexpected token".
+   Sau khi sua: trang hien day du, khong con loi JS.
+2. 12 lan ra de giua ky 1 lop 10: chi con 1 ID ra khac bien the giua cac
+   ma de, va hai bien the do cung mot dang.
+3. Doi chieu mapping <-> ham 1:1 ca hai lop: khong thieu, khong thua.
+4. 2811 bai test qua, 8 bo qua (truoc: 2779).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

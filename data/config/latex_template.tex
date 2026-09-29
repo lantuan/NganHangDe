@@ -41,6 +41,22 @@
 %Goi ex_test - option truyen dong theo yeu cau (dethi | loigiai)
 \usepackage[__EX_TEST_OPTION__]{ex_test}
 
+% Cau TU LUAN khong duoc co o dien dap an.
+% ex_test dinh nghia \SA[n]{dapan} = \shortans[n]{dapan}, tuc la ve ra
+% day o vuong "KQ: []{}[][]" - thu do chi danh cho cau TRA LOI NGAN.
+% Nhung TL_answer_const / TL_answer_text trong data/python_bank/math_type.py
+% lai gan \SA[4]{...} vao sau moi y cua cau tu luan, nen cau tu luan cung
+% moc ra cai o ay (co Lan bao 29/09/2026). Hoc sinh lam tu luan tren giay,
+% khong dien vao o; hon nua dap an tu luan hay la chu ("Dung", "Sai", mot
+% tap hop) ma o vuong thi chi vua may chu so - nhin rat sai.
+% KHONG sua math_type.py (quy tac cua co Lan). Chi can o DAY bao LaTeX
+% nuot lenh \SA di la xong, ca de lan ban co loi giai:
+%   - \shortans van nguyen ven -> PHAN III (tra loi ngan) van co o nhu cu.
+%   - Chuoi "\SA[4]{...}" van con trong tep .tex nen web va bo cham bai
+%     (app/services/answer_parser_service.py) van doc duoc dap an.
+% Dap an tu luan van hien day du trong phan \loigiai.
+\renewcommand{\SA}[2][]{}
+
 \newcommand{\hetde}{\centerline{\rule[0.5ex]{2cm}{1pt} HẾT \rule[0.5ex]{2cm}{1pt}}}
 
 %Tieu de - ban rut gon cho web tu dong sinh de
