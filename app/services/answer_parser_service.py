@@ -275,7 +275,19 @@ def trich_de_bai(latex_block: str) -> dict:
     # "web chua hien duoc" - nhung bo hinh la doi luon MUC DO cua cau (bai
     # do thi ham bac hai ma khong co do thi thi khong con la cau nhin hinh
     # doc dinh nua). Nay giu lai de dich ra anh cho web.
-    hinh_tikz = re.findall(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", de_bai, flags=re.S)
+    #
+    # SUA 29/09/2026: hinh phai tim trong CA PHAN CAU HOI (tu dau cau toi
+    # truoc \loigiai), khong chi trong de_bai. Cau Dung/Sai co hinh duoc
+    # math_type.TF_baitoan_du xep theo kieu
+    #     \immini[thm]{ de ... \choiceTFt{a}{b}{c}{d} }{ HINH }
+    # tuc HINH nam SAU \choiceTFt - ma de_bai bi cat ngay tai \choiceTFt,
+    # nen moi cau Dung/Sai co hinh deu MAT HINH tren web (lop 12 chuong 6
+    # la noi phat hien; cac cau hinh hoc Dung/Sai lop 11 cung dinh).
+    # Hinh cua LOI GIAI nam sau \loigiai nen van khong bi lay nham.
+    m_lg = re.search(r"\\loigiai", latex_block[bat_dau:])
+    phan_cau_hoi = latex_block[bat_dau: bat_dau + m_lg.start()] if m_lg else latex_block[bat_dau:]
+    hinh_tikz = re.findall(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", phan_cau_hoi, flags=re.S)
+    co_hinh_ve = co_hinh_ve or bool(hinh_tikz)
 
     # Cau TL nhieu y ngan (\begin{listEX}...\item... \SA[..]{..}...\end{listEX}
     # - xem TL_answer_const/TL_answer_text) khong bi chan boi cac moc o
