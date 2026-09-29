@@ -144,6 +144,13 @@
     "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
+    "id": "L10_C1_B1_TH014_MC_C",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định tính đúng sai của mệnh đề kéo theo",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 1 cua co Lan; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B1_VD014_MC_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

@@ -9070,3 +9070,20 @@ Helper: _huong_sang_phuong_vi, _hai_chang, _giai_goc_doi_huong, _cong_goc,
 _chon_hai_chang, _mot_le_m.
 Khong dua vao: cau chung minh dang thuc, bien doi he thuc bac ba (muc VD/VDC,
 curriculum Bai 6 khong co).
+
+# Version 3.49 - 2026-09-29
+
+## Bien the lay tu giao an Bai 1 (Menh de) cua co Lan
+
+Chan tri moi menh de do Python tinh (chia het, so nguyen to, delta, nghiem
+nguyen...). Helper moi: _md_so(loai) (9 kieu menh de ve so, kem phu dinh va
+li do), _keo_theo, _tex_so, _tex_bac2, _la_nguyen_to, _ba_nhieu_so.
+Bien the moi (cung Dang voi _01):
+  NB001_MC_A_02  cau nao la / khong la menh de - co menh de chua bien
+  TH003_MC_A_02  menh de ve so nao dung / sai
+  TH003_TL_A_02  viet bang ki hieu forall/exists roi xet dung sai (3 y)
+  TH003_TL_B_02  lap phu dinh ba menh de ve so, xet dung sai phu dinh
+  VD014_MC_B_02  dem n trong [1; N] de "2^n + k" / "n^2 + n + k" nguyen to
+  TF_A_02        P: "forall x, x^2 + 2px + q > 0": phu dinh, dung sai,
+                 dem so nguyen, dem tham so m
+Dang MOI (mapping co ghi chu): TH014_MC_C_01 - chon menh de keo theo dung/sai.

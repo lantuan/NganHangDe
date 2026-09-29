@@ -35,6 +35,13 @@ GOC = Path(__file__).resolve().parents[1]
 CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_NB010_MC_A",   # ca hai deu: phat bieu menh de dao
     "L10_C1_B1_NB015_MC_A",   # ca hai deu: dieu kien can va du
+    # tu giao an Bai 1 (Menh de):
+    "L10_C1_B1_NB001_MC_A",   # danh sach co dinh / co menh de chua bien va menh de so
+    "L10_C1_B1_TH003_MC_A",   # menh de hinh hoc co dinh / menh de so (Python tinh chan tri)
+    "L10_C1_B1_TH003_TL_A",   # menh de dao voi |x| / viet bang ki hieu roi xet dung sai
+    "L10_C1_B1_TH003_TL_B",   # phu dinh menh de luong tu / phu dinh menh de ve so
+    "L10_C1_B1_VD014_MC_B",   # thay gia tri vao P(x) / dem n de 2^n + k nguyen to
+    "L10_C1_TF_A",            # day so n / menh de voi moi x, x^2 + 2px + q > 0
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an
     "L10_C2_B3_TH024_MC_A",   # ca hai deu: hinh nao bieu dien mien nghiem
     "L10_C3_B6_TH032_MC_A",   # ca hai deu: dinh li cosin tinh canh con lai
