@@ -7904,3 +7904,71 @@ Da xong 227/272 dang. Chi con chuong 7.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.23 - 2026-09-29
+
+## Lop 11 chuong 7 (Quan he vuong goc trong khong gian): 57/57 dang
+
+Viet moi data/python_bank/toan11/L11_C7.py. DAY LA CHUONG CUOI CUNG CUA
+LOP 11 - tu ban nay LOP 10 VA LOP 11 DEU DAY DU.
+
+Bai 22 (hai duong thang vuong goc): goc giua hai duong thang, hai duong
+thang vuong goc, goc trong hinh lap phuong (MC + SA + TL).
+Bai 23 (duong thang vuong goc mat phang): dinh nghia, dieu kien du,
+DINH LI BA DUONG VUONG GOC, lien he song song - vuong goc (MC + SA + TL).
+Bai 24 (phep chieu vuong goc): hinh chieu cua diem - duong thang, goc
+giua duong thang va mat phang.
+Bai 25 (hai mat phang vuong goc): dieu kien du, tinh chat, lang tru dung
+- lang tru deu - hinh hop, GOC NHI DIEN va goc phang nhi dien
+(MC + SA + TL).
+Bai 26 (khoang cach): tu diem den duong thang, giua hai duong song song,
+duong vuong goc chung, tu diem den mat phang, giua hai duong cheo nhau
+(MC + SA + TL).
+Bai 27 (the tich): cong thuc khoi chop - lang tru - hinh hop, hinh chop
+cut deu va the tich khoi chop cut deu (MC + SA + TL).
+Hai cau Dung/Sai cap chuong theo thang a) NB - b) TH - c) VD - d) VDC.
+
+BA HINH KHONG GIAN VE BANG TIKZ THUAN dung chung ca chuong:
+  _hinh_chop_vuong()  - hinh chop S.ABCD co SA vuong goc day (co ki hieu
+                        goc vuong tai A)
+  _hinh_lap_phuong()  - hinh lap phuong / hinh hop chu nhat
+  _hinh_chop_deu()    - hinh chop tam giac deu co duong cao SO
+
+So lieu chon de DAP SO DEP: moi goc deu roi vao 0, 30, 45, 60 hoac 90 do;
+moi khoang cach dung bo ba Pytago va con LOC THEM dieu kien
+(SA.AB/SB).100 nguyen nen ket qua la so thap phan huu han; moi the tich
+deu nguyen hoac thap phan huu han. Da kiem chung dang thuc
+V_lon - V_nho = V_chop_cut cho moi bo so.
+
+## Bo sung 12 dang con thieu cua chuong 7
+
+VD103 SA + TL, VD108 SA + TL, VD119 SA + TL, VD123 SA + TL,
+VD124 SA + TL, VD129 SA + TL.
+
+## Da kiem chung the nao
+
+1. 57/57 ham chay sach 3 muc socau x 30 seed.
+2. Kiem toan DOC LAP 2160 cau: doc lai so lieu TU CHINH DE BAI bang bieu
+   thuc chinh quy roi tu tinh lai (Pytago, he thuc luong, the tich chop
+   cut) - 0 cho sai.
+3. Ba hinh khong gian da dich thanh anh PNG, xem lai bang mat.
+4. De he so 1 chuong 7 lop 11: 20/20 de du ma tran 6-1-2-3.
+5. QUET TOAN BO: 20 de x 9 chuong x 2 lop - KHONG CON CHO NAO THIEU.
+6. QUET DE GIUA KY / CUOI KY: 10 de x 4 ki thi x 2 lop = 80 de, tat ca
+   dung ma tran 12-2-4-3 va khong thieu cho nao.
+7. 2747 bai test qua, 8 bo qua (truoc: 2546).
+
+## Hien trang
+
+    LOP 10: 9/9 chuong - DAY DU
+    LOP 11: 9/9 chuong - DAY DU
+
+    C1 42/42   C4 43/43   C7 57/57
+    C2 22/22   C5 23/23   C8 23/23
+    C3 16/16   C6 33/33   C9 25/25
+
+Lop 11 da xong 284/284 dang.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

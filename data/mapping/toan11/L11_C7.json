@@ -30,6 +30,20 @@
     "Dang": "Kiến thức về hai đường thẳng vuông góc"
   },
   {
+    "id": "L11_C7_B22_VD103_SA_A",
+    "content": "Sử dụng được kiến thức về hai đường thẳng vuông góc để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đo góc giữa hai đường thẳng trong hình lập phương",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B22_VD103_TL_A",
+    "content": "Sử dụng được kiến thức về hai đường thẳng vuông góc để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Tính góc giữa hai đường thẳng trong không gian",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C7_B23_NB104_MC_A",
     "content": "Nhận biết được đường thẳng vuông góc với mặt phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -64,6 +78,20 @@
     "content": "Vận dụng được kiến thức về đường thẳng vuông góc với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về đường thẳng vuông góc với mặt phẳng"
+  },
+  {
+    "id": "L11_C7_B23_VD108_SA_A",
+    "content": "Vận dụng được kiến thức về đường thẳng vuông góc với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài cạnh bên của hình chóp có cạnh vuông góc đáy",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B23_VD108_TL_A",
+    "content": "Vận dụng được kiến thức về đường thẳng vuông góc với mặt phẳng để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Vận dụng đường thẳng vuông góc với mặt phẳng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C7_B24_NB109_MC_A",
@@ -150,6 +178,20 @@
     "Dang": "Kiến thức về góc giữa đường thẳng và mặt phẳng, góc nhị diện"
   },
   {
+    "id": "L11_C7_B25_VD119_SA_A",
+    "content": "Sử dụng được kiến thức về góc giữa đường thẳng và mặt phẳng, góc nhị diện để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số đo góc giữa đường thẳng và mặt phẳng, góc nhị diện",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B25_VD119_TL_A",
+    "content": "Sử dụng được kiến thức về góc giữa đường thẳng và mặt phẳng, góc nhị diện để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Tính góc giữa đường thẳng và mặt phẳng, góc nhị diện",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C7_B26_TH120_MC_A",
     "content": "Xác định được khoảng cách từ một điểm đến một đường thẳng; khoảng cách từ một điểm đến một mặt phẳng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -198,10 +240,38 @@
     "Dang": "Khoảng cách giữa hai đường thẳng chéo nhau"
   },
   {
+    "id": "L11_C7_B26_VD123_SA_A",
+    "content": "Tính được khoảng cách giữa hai đường thẳng chéo nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách giữa hai đường thẳng chéo nhau",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B26_VD123_TL_A",
+    "content": "Tính được khoảng cách giữa hai đường thẳng chéo nhau.",
+    "Loai": "Tự luận",
+    "Dang": "Xác định đoạn vuông góc chung và tính khoảng cách",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L11_C7_B26_VD124_MC_A",
     "content": "Sử dụng được kiến thức về khoảng cách trong không gian để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về khoảng cách trong không gian"
+  },
+  {
+    "id": "L11_C7_B26_VD124_SA_A",
+    "content": "Sử dụng được kiến thức về khoảng cách trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Khoảng cách trong hình lập phương",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B26_VD124_TL_A",
+    "content": "Sử dụng được kiến thức về khoảng cách trong không gian để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán tổng hợp về khoảng cách trong không gian",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C7_B27_NB125_MC_A",
@@ -256,6 +326,20 @@
     "content": "Vận dụng được kiến thức về hình chóp cụt đều để mô tả một số hình ảnh trong thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Kiến thức về hình chóp cụt đều"
+  },
+  {
+    "id": "L11_C7_B27_VD129_SA_A",
+    "content": "Vận dụng được kiến thức về hình chóp cụt đều để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Thể tích khối chóp cụt đều",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L11_C7_B27_VD129_TL_A",
+    "content": "Vận dụng được kiến thức về hình chóp cụt đều để mô tả một số hình ảnh trong thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán về hình chóp cụt đều và khối chóp ban đầu",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L11_C7_TF_A",
