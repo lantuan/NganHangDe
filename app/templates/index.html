@@ -225,17 +225,19 @@
 {% else %}
 {# Nut to giua trang la thu bat mat nhat, nguoi moi nhin vao day truoc.
    Truoc day no ghi "Dang nhap ngay" nen nguoi chua co tai khoan bi dan
-   nham. Nay Dang ky dung TRUOC, Dang nhap dung sau, hai nut cung mot
-   mau xanh (co Lan chot 29/09/2026). Rieng "Gioi thieu chi tiet" van
-   la nut nhat - no khong phai loi vao tai khoan. #}
+   nham. Nay Dang ky dung TRUOC, Dang nhap dung sau.
+   Ca hang ba nut nay deu di theo kieu cua "Gioi thieu chi tiet" - nen
+   nhat, chu xanh, vien mo (co Lan chot 29/09/2026: "2 nut duoi cung
+   hang voi nut gioi thieu chi tiet thi kieu nhu gioi thieu chi tiet
+   di"). Rieng goc phai tren cung thi hai nut van nen xanh. #}
 <button
     onclick="window.location.href='/register'"
-    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow active:scale-95 duration-150 text-lg">
+    class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150 text-lg">
     Đăng ký ngay
 </button>
 <button
     onclick="window.location.href='/login'"
-    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md btn-shadow active:scale-95 duration-150 text-lg">
+    class="px-8 py-4 bg-surface-container-low text-primary border border-outline-variant/30 rounded-xl font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150 text-lg">
     Đăng nhập
 </button>
 {% endif %}

@@ -8385,10 +8385,18 @@ truoc day ghi "Dang nhap ngay", dan nham nguoi chua co tai khoan. Nay:
 
 Man hinh hep thi ba nut xep doc (flex-col sm:flex-row co san).
 
-Co Lan xem xong: "moi ben 1 mau nhin buon cuoi qua, xanh het di" - nay
-ca hai nut Dang ky va Dang nhap deu la nut NEN XANH, cung co chu, cung
-padding, o ca goc phai lan giua trang. Rieng "Gioi thieu chi tiet" giu
-nut nhat vi no khong phai loi vao tai khoan.
+Co Lan xem xong, chot lam hai tang ro rang:
+
+  - GOC PHAI tren cung: hai nut "Dang ky" va "Dang nhap" deu NEN XANH,
+    cung co chu, cung padding.
+  - HANG GIUA TRANG: ca ba nut "Dang ky ngay", "Dang nhap",
+    "Gioi thieu chi tiet" di CUNG MOT KIEU - nen nhat, chu xanh, vien
+    mo ("2 nut duoi cung hang voi nut gioi thieu chi tiet thi kieu nhu
+    gioi thieu chi tiet di"). Mot hang ba nut cung kieu nhin gon, khong
+    con canh mot nut xanh dam ben canh hai nut nhat.
+
+Khi DA dang nhap thi hang giua trang van la nut "Vao Chat" nen xanh -
+luc do no la viec duy nhat can lam nen de noi bat.
 
 ## Nguoi thuc hien
 

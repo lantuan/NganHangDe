@@ -66,6 +66,12 @@ def test_nut_to_giua_trang_moi_dang_ky_truoc():
     assert hero.index("/register'") < hero.index("/login'"), (
         "Trong khoi giua trang, nut Dang ky phai dung TRUOC nut Dang nhap."
     )
-    assert "bg-primary text-on-primary" in hero.split("Đăng ký ngay")[0][-400:], (
-        "Nut Dang ky ngay phai la nut nen xanh (noi bat nhat)."
-    )
+    # Ba nut trong hang nay di CUNG MOT KIEU: nen nhat, chu xanh, vien mo
+    # - giong "Gioi thieu chi tiet" (co Lan chot 29/09/2026). Rieng hai
+    # nut o goc phai tren cung moi la nut nen xanh.
+    kieu = "bg-surface-container-low text-primary"
+    for nhan in ("Đăng ký ngay", "Đăng nhập", "Giới thiệu chi tiết"):
+        assert kieu in hero.split(nhan)[0][-500:], (
+            "Nút '%s' trong hàng giữa trang phải đi cùng kiểu với các nút "
+            "còn lại (nền nhạt, chữ xanh)." % nhan
+        )
