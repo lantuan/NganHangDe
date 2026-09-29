@@ -173,7 +173,7 @@
 <a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary" href="/">Trang chủ</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#gioi-thieu">Giới thiệu</a>
 </nav>
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 sm:gap-3">
 {% if da_dang_nhap %}
 <span class="hidden md:inline font-body-md text-body-md text-on-surface-variant">Xin chào, {{ user_display_name }}</span>
 <button
@@ -182,9 +182,20 @@
     Vào Chat
 </button>
 {% else %}
+{# Co Lan 29/09/2026: "nhieu nguoi vao khong biet nut dang ky o dau".
+   Truoc day goc phai chi co MOT nut "Dang nhap", nguoi moi khong thay
+   loi vao nao ca - phai bam Dang nhap roi moi tim thay dong chu nho
+   "Chua co tai khoan? Dang ky ngay" o cuoi trang. Nay tach hai nut
+   ro rang: Dang ky di thang toi /register (trang chon hoc sinh /
+   giao vien), Dang nhap giu nguyen. #}
+<button
+    onclick="window.location.href='/register'"
+    class="px-4 sm:px-5 py-2 bg-surface-container-low text-primary border border-primary/40 rounded-lg font-label-md hover:bg-surface-container-high active:scale-95 transition-all duration-150">
+    Đăng ký
+</button>
 <button
     onclick="window.location.href='/login'"
-    class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
+    class="px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Đăng nhập
 </button>
 {% endif %}

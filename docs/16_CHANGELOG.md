@@ -8347,3 +8347,33 @@ LUU Y: hinh chi hien tren web sau khi VPS co xelatex
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.30 - 2026-09-29
+
+## Trang chu: tach nut "Dang ky" ra khoi nut "Dang nhap"
+
+Co Lan: "nhieu nguoi vao khong biet nut dang ky o dau".
+
+Truoc day goc phai thanh tieu de chi co MOT nut "Dang nhap". Nguoi chua
+co tai khoan khong thay loi vao nao: phai doan ra la bam "Dang nhap",
+roi tim dong chu nho "Chua co tai khoan? Dang ky ngay" o cuoi trang
+dang nhap moi vao duoc. Trang /register (chon Hoc sinh / Giao vien) da
+co san nhung khong co duong nao dan toi tu trang chu.
+
+Nay thanh tieu de co hai nut ro rang khi CHUA dang nhap:
+
+    [ Dang ky ]  ->  /register     (nut vien, mau chu xanh)
+    [ Dang nhap ] ->  /login       (nut nen xanh nhu cu)
+
+Dang nhap roi thi van chi mot nut "Vao Chat" nhu truoc, khong moi dang
+ky nua. Khoang cach giua cac nut thu gon tu gap-4 xuong gap-2/gap-3 cho
+vua man hinh dien thoai.
+
+Chong tai phat: `tests/test_trang_chu_nut_dang_ky.py` - soi nut
+/register con do, dung truoc nut /login, va khong hien khi da dang nhap.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
