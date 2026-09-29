@@ -1834,7 +1834,7 @@ def L10_C6_TF_A_01(socau, socot=1):
                  r"bằng hoành độ đỉnh - phù hợp với tính đối xứng của "
                  r"parabol." % _xx6(xi)),
                 (r"{Đồ thị hàm số không cắt trục hoành}",
-                 r"Sai. $\Delta = %d^2 - 4\cdot %d\cdot %d = %d > 0$ nên "
+                 r"Sai. $\Delta = \left(%d\right)^2 - 4\cdot %d\cdot %d = %d > 0$ nên "
                  r"phương trình $f(x) = 0$ có hai nghiệm phân biệt, đồ thị "
                  r"cắt trục hoành tại hai điểm."
                  % (b, a, c, b * b - 4 * a * c)),

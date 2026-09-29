@@ -103,6 +103,7 @@ def resolve_socau(role: str, socau_yeu_cau: int | None) -> int:
 # hàm và lúc ra đề) cùng ném MỘT loại lỗi - nếu tách thành hai lớp khác nhau thì
 # bộ ráp đề chỉ bắt được một nửa, nửa còn lại vẫn làm vỡ cả đề.
 from math_type import CauHongError, LoaiCauSaiError  # noqa: E402
+from app.services.lam_dep_bieu_thuc import lam_dep  # noqa: E402
 
 
 def kiem_tra_dung_loai_cau(generator_id: str, latex_block: str) -> None:
@@ -186,6 +187,8 @@ def call_generator(
 
     socau = resolve_socau(role, socau_yeu_cau)
     latex_block = _call_generator_function(func, socau, socot, dong)
+    # Bo loc chung: 1x -> x, + -5 -> - 5... (xem lam_dep_bieu_thuc.py)
+    latex_block = lam_dep(latex_block)
     kiem_tra_dung_loai_cau(generator_id, latex_block)
 
     return {
@@ -233,5 +236,7 @@ def call_locked_variant(
     module = _load_chapter_module(lop, chuong_so)
     func = getattr(module, variant_name)
     latex_block = _call_generator_function(func, 1, socot, dong)
+    # Bo loc chung: 1x -> x, + -5 -> - 5... (xem lam_dep_bieu_thuc.py)
+    latex_block = lam_dep(latex_block)
     kiem_tra_dung_loai_cau(generator_id, latex_block)
     return latex_block

@@ -33,6 +33,8 @@ nhiễu đều đi qua _ba_nhieu9.
 import math
 import random
 
+from DefChung import ngoac       # so am lam co so luy thua phai co ngoac
+
 from math_type import *          # noqa: F401,F403
 
 DAU_THAP_PHAN = ","
@@ -657,18 +659,19 @@ def L11_C9_B32_TH144_SA_A_01(socau):
     for a, b, n, x0 in gt:
         u0 = a * x0 + b
         k = n * u0 ** (n - 1) * a
+        mu = "" if n - 1 == 1 else "^{%d}" % (n - 1)   # so mu 1 thi khong viet
         debai = (r"Cho hàm số $y = f(x) = \left(%s\right)^{%d}$. Tính "
                  r"$f'\left(%d\right)$." % (_da_thuc([a, b]), n, x0))
         giai = (r"Đặt $u = %s$ thì $y = u^{%d}$, $u' = %d$."
                 % (_da_thuc([a, b]), n, a) +
                 "\\\\\n"
-                r"Đạo hàm hàm hợp: $y' = %du^{%d}\cdot u' "
-                r"= %d\left(%s\right)^{%d}\cdot %d$."
-                % (n, n - 1, n, _da_thuc([a, b]), n - 1, a) +
+                r"Đạo hàm hàm hợp: $y' = %du%s\cdot u' "
+                r"= %d\left(%s\right)%s\cdot %d$."
+                % (n, mu, n, _da_thuc([a, b]), mu, a) +
                 "\\\\\n"
                 r"Thay $x = %d$: $u = %d$ nên "
-                r"$f'\left(%d\right) = %d\cdot %d^{%d}\cdot %d = %d$."
-                % (x0, u0, x0, n, u0, n - 1, a, k))
+                r"$f'\left(%d\right) = %d\cdot %s%s\cdot %d = %d$."
+                % (x0, u0, x0, n, ngoac(u0), mu, a, k))
         nhieu = _ba_nhieu9(str(k), [str(n * u0 ** (n - 1)), str(u0 ** n),
                                     str(k + a)],
                            buoc=lambda t: str(k + t + 1))

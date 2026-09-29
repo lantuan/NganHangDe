@@ -26,6 +26,7 @@ import math
 import random
 
 from math_type import *          # noqa: F401,F403
+from DefChung import ngoac       # so am lam co so luy thua phai co ngoac
 
 DAU_THAP_PHAN = ","
 
@@ -665,8 +666,8 @@ def L11_C2_B7_NB036_TL_A_01(socau, dong=1):
 
         hoi_c = r"Tính $u_{%d}$." % k
         giai_c = (r"$u_n = u_1q^{\,n-1}$ nên "
-                  r"$u_{%d} = %d\cdot %d^{\,%d} = %d$."
-                  % (k, u1, q, k - 1, uk))
+                  r"$u_{%d} = %d\cdot %s^{\,%d} = %d$."
+                  % (k, u1, ngoac(q), k - 1, uk))
 
         ds_abcd = [(hoi_a, _liet_ke(ds).strip("$"), giai_a),
                    (hoi_b, r"q = %d" % q, giai_b),
@@ -704,8 +705,8 @@ def L11_C2_B7_TH037_MC_A_01(socau, dang=1):
                  r"bội $q = %d$. Tính $u_{%d}$." % (u1, q, k))
         giai = (r"Số hạng tổng quát của cấp số nhân: $u_n = u_1q^{\,n-1}$."
                 "\\\\\n"
-                r"$u_{%d} = %d\cdot %d^{\,%d} = %d\cdot %d = %d$."
-                % (k, u1, q, k - 1, u1, q ** (k - 1), uk) +
+                r"$u_{%d} = %d\cdot %s^{\,%d} = %d\cdot %s = %d$."
+                % (k, u1, ngoac(q), k - 1, u1, ngoac(q ** (k - 1)), uk) +
                 "\\\\\n"
                 r"Chú ý số mũ là $n - 1$ chứ không phải $n$.")
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
@@ -744,9 +745,9 @@ def L11_C2_B7_TH038_MC_A_01(socau, dang=1):
         giai = (r"$S_n = u_1\cdot\dfrac{1 - q^{\,n}}{1 - q}$ (với "
                 r"$q \ne 1$)."
                 "\\\\\n"
-                r"$S_{%d} = %d\cdot\dfrac{1 - %d^{\,%d}}{1 - %d} "
+                r"$S_{%d} = %d\cdot\dfrac{1 - %s^{\,%d}}{1 - %s} "
                 r"= %d\cdot\dfrac{%d}{%d} = %d$."
-                % (n, u1, q, n, q, u1, 1 - q ** n, 1 - q, S))
+                % (n, u1, ngoac(q), n, ngoac(q), u1, 1 - q ** n, 1 - q, S))
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
@@ -770,8 +771,8 @@ def L11_C2_B7_TH038_SA_A_01(socau):
         uk = _csn(u1, q, k)
         debai = (r"Cho cấp số nhân $\left(u_n\right)$ có $u_1 = %d$ và công "
                  r"bội $q = %d$. Tính $u_{%d}$." % (u1, q, k))
-        giai = (r"$u_{%d} = u_1q^{\,%d} = %d\cdot %d^{\,%d} = %d$."
-                % (k, k - 1, u1, q, k - 1, uk))
+        giai = (r"$u_{%d} = u_1q^{\,%d} = %d\cdot %s^{\,%d} = %d$."
+                % (k, k - 1, u1, ngoac(q), k - 1, uk))
         nhieu = _ba_nhieu2(str(uk),
                            [str(_csn(u1, q, k + 1)), str(_csn(u1, q, k - 1)),
                             str(u1 * k * q)],
@@ -1023,8 +1024,8 @@ def L11_C2_TF_B_01(socau, socot=1):
             [
                 (r"{\True $u_{%d} = %d$}" % (n, un),
                  r"Đúng. $u_n = u_1q^{\,n-1}$ nên "
-                 r"$u_{%d} = %d\cdot %d^{\,%d} = %d$."
-                 % (n, u1, q, n - 1, un)),
+                 r"$u_{%d} = %d\cdot %s^{\,%d} = %d$."
+                 % (n, u1, ngoac(q), n - 1, un)),
                 (r"{$u_{%d} = %d$}" % (n, _csn(u1, q, n + 1)),
                  r"Sai. Số mũ là $n - 1$ chứ không phải $n$; tính đúng ra "
                  r"$u_{%d} = %d$." % (n, un)),
@@ -1033,8 +1034,8 @@ def L11_C2_TF_B_01(socau, socot=1):
             [
                 (r"{\True $S_{%d} = %d$}" % (n, S),
                  r"Đúng. $S_n = u_1\cdot\dfrac{1 - q^{\,n}}{1 - q} "
-                 r"= %d\cdot\dfrac{1 - %d^{\,%d}}{1 - %d} = %d$."
-                 % (u1, q, n, q, S)),
+                 r"= %d\cdot\dfrac{1 - %s^{\,%d}}{1 - %s} = %d$."
+                 % (u1, ngoac(q), n, ngoac(q), S)),
                 (r"{$S_{%d} = %d$}" % (n, _tong_csc(u1, q, n)),
                  r"Sai. Đó là công thức tổng của CẤP SỐ CỘNG. Cấp số nhân "
                  r"dùng $S_n = u_1\dfrac{1 - q^{\,n}}{1 - q}$, ra $%d$."

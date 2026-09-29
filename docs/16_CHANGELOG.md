@@ -8605,3 +8605,45 @@ bang Fraction. 0 cho sai.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.34 - 2026-09-29
+
+## Bo loc chung lam dep bieu thuc (co Lan chon "Mot bo loc chung")
+
+Truoc day de tu sinh con in "1x", "2x + -3", "5 - -3", "2\cdot -3",
+"x^2 + 0x + 1". Quet ca ngan hang (moi ham x 20 seed): 56 ham dinh.
+
+Moi: app/services/lam_dep_bieu_thuc.py - ham lam_dep(latex), goi trong
+generator_service NGAY SAU moi lan goi ham sinh cau (ca 2 cho).
+  - Chi sua TRONG $...$, khong dung vao tikzpicture, khong dung chu
+    ngoai cong thuc.
+  - 1x -> x ; -1x -> -x ; + -3 -> - 3 ; - -3 -> + 3 ;
+    \cdot -3 -> \cdot \left(-3\right) ; bo hang "+ 0x" o giua.
+  - GIU NGUYEN: hon so 1\dfrac{1}{2}, "1\cdot x" (co y viet), 21x, 0{,}1x,
+    x_1x_2, va moi so am dang lam CO SO luy thua (khong doan thay nguon).
+  - Khong viet lai math_type; dap an van la dap an python (bo loc chi
+    doi cach VIET, khong doi gia tri).
+
+DefChung.py them ham tien ich cho ham moi: bt_hang, bt, ngoac, cong,
+tru, thay_so, luy_thua (luy_thua(-3, 8) -> \left(-3\right)^{8}).
+
+### Sau bo loc con 7 ham - deu la loi SAI TOAN o nguon (da sua)
+
+Co so am thieu ngoac: "-3^{8}" nghia la -(3^8) = -6561, KHONG phai
+(-3)^8 = 6561. Loi giai in "1\cdot -2^{\,8} = 256" la sai.
+  - L11_C2_B7_NB036_TL_A_01, B7_TH037_MC_A_01, B7_TH038_MC_A_01,
+    B7_TH038_SA_A_01, L11_C2_TF_B_01 (cap so nhan, cong boi am)
+  - L11_C9_B32_TH144_SA_A_01 (dao ham ham hop; bo luon "^{1}")
+  - L10_C6_TF_A_01: "\Delta = -10^2 - ..." -> "\left(-10\right)^2"
+L11_C9_B31_NB137_MC_A_01 ("+ 1 t") do bo loc xu ly.
+Ham y = -2^{x} o L11_C6 la phuong an nhieu CO Y (ham -(2^x)) - giu nguyen.
+
+Quet lai 20 seed: 0 ham. tests/test_lam_dep_bieu_thuc.py (quy tac +
+quet ca ngan hang, gom ca mau "co so am thieu ngoac").
+2949 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)
