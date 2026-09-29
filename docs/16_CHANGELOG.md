@@ -8016,3 +8016,56 @@ truoc) de sau nay viet lai khong bi mat cau.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.25 - 2026-09-29
+
+## Bo sung 9 dang cho lop 10 chuong 8 (Dai so to hop)
+
+Rut tu tep `D12.py` (SGK cu) co Lan gui. Nguyen tac: CHI lay dang nam
+trong yeu cau can dat DA CO, dang nao trung voi dang san co thi bo qua.
+Moi dang moi gan vao mot Curriculum ID DA TON TAI nen khong phai them
+yeu cau can dat nao.
+
+Bai 23 (quy tac dem):
+  TH128_MC_B  Dem so tu nhien co n chu so (bat ki / chan / le)
+  TH128_SA_B  Lap so tu nhien tu mot tap chu so (co / khong lap lai)
+  VD130_MC_B  So ba chu so doi mot khac nhau va chia het cho 5
+  VD130_SA_B  So doi xung dang abcba; hang chuc lon hon hang don vi
+
+Bai 24 (hoan vi - chinh hop - to hop):
+  TH134_MC_B  Dung tinh chat C(n,k) = C(n,n-k) de tim n roi tinh
+  VD138_MC_B  So duong cheo cua da giac loi n canh
+  VD138_SA_B  Dem tam giac tu tap diem co diem thang hang
+  VD138_TL_B  Giai dau vong tron hai luot (to hop thuc tien)
+
+Bai 25 (nhi thuc Newton):
+  TH139_MC_B  So so hang va so hang dung giua cua (a+b)^4, (a+b)^5
+              - VAN GIU RANG BUOC n = 4 hoac n = 5 cua SGK lop 10
+
+Mapping L10_C8: 30 -> 39 dong. Moi dong moi co ghi_chu ghi ro lay tu
+tep D12.py de co Lan duyet lai.
+
+## Nhung dang DA BO QUA (va ly do)
+
+- Trung voi dang san co: quy tac cong / nhan thuc tien, xep n cuon sach,
+  chon but chi, phan cong truc nhat, xep be trai - be gai.
+- Ngoai yeu cau can dat lop 10: giai phuong trinh chua C(n,k) va A(n,k);
+  xep quanh BAN TRON; tim he so trong khai trien voi n = 20, 21, 2009
+  (SGK lop 10 chi khai trien toi n = 5); tinh tong cac C(n,k) co dau.
+- Thuoc chuong 9 (xac suat) chu khong phai chuong 8: rut bai tu lo kho,
+  chon so nguyen to.
+
+## Da kiem chung the nao
+
+1. 9 ham moi chay sach 3 muc socau x 40 seed.
+2. Kiem toan DOC LAP 2250 cau: doc lai so lieu TU CHINH DE BAI roi DEM
+   TRUC TIEP bang vong lap (vi du duyet het cac bo ba chu so de dem so
+   chia het cho 5) - 0 cho sai. Cau dem tam giac con doi chieu hai cach
+   tinh khac nhau.
+3. De he so 1 chuong 8 lop 10: 20/20 de du ma tran.
+4. Quet lai 15 de x 9 chuong x 2 lop: khong con cho nao thieu.
+5. 2779 bai test qua, 8 bo qua (truoc: 2748).
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

@@ -30,10 +30,24 @@
     "Dang": "Đếm số cách chọn bằng quy tắc nhân"
   },
   {
+    "id": "L10_C8_B23_TH128_MC_B",
+    "content": "Sử dụng được quy tắc nhân để giải bài toán đếm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số tự nhiên có n chữ số bằng quy tắc nhân",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C8_B23_TH128_SA_A",
     "content": "Sử dụng được quy tắc nhân để giải bài toán đếm.",
     "Loai": "Trả lời ngắn",
     "Dang": "Số cách chọn theo quy tắc nhân"
+  },
+  {
+    "id": "L10_C8_B23_TH128_SA_B",
+    "content": "Sử dụng được quy tắc nhân để giải bài toán đếm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Lập số tự nhiên từ một tập chữ số cho trước",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C8_B23_TH129_MC_A",
@@ -48,10 +62,11 @@
     "Dang": "Bài toán đếm thực tiễn dùng quy tắc cộng và nhân"
   },
   {
-    "id": "L10_C8_B23_VD130_TL_A",
+    "id": "L10_C8_B23_VD130_MC_B",
     "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán đếm có nội dung thực tiễn"
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số tự nhiên có chữ số khác nhau và chia hết cho 5",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C8_B23_VD130_SA_A",
@@ -59,6 +74,19 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Bài toán đếm thực tiễn dùng quy tắc cộng và nhân",
     "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C8_B23_VD130_SA_B",
+    "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số tự nhiên có ràng buộc về vị trí chữ số",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L10_C8_B23_VD130_TL_A",
+    "content": "Vận dụng được quy tắc cộng và quy tắc nhân trong một số tình huống thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán đếm có nội dung thực tiễn"
   },
   {
     "id": "L10_C8_B24_NB131_MC_A",
@@ -83,6 +111,13 @@
     "content": "Tính được số các hoán vị, chỉnh hợp, tổ hợp bằng công thức.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính số hoán vị, chỉnh hợp, tổ hợp bằng công thức"
+  },
+  {
+    "id": "L10_C8_B24_TH134_MC_B",
+    "content": "Tính được số các hoán vị, chỉnh hợp, tổ hợp bằng công thức.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Dùng tính chất C(n,k) = C(n,n-k) để tính giá trị",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C8_B24_TH134_SA_A",
@@ -115,10 +150,11 @@
     "Dang": "Bài toán đếm thực tiễn dùng hoán vị, chỉnh hợp, tổ hợp"
   },
   {
-    "id": "L10_C8_B24_VD138_TL_A",
+    "id": "L10_C8_B24_VD138_MC_B",
     "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
-    "Loai": "Tự luận",
-    "Dang": "Bài toán đếm có điều kiện ràng buộc"
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Số đường chéo của đa giác lồi",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C8_B24_VD138_SA_A",
@@ -128,10 +164,37 @@
     "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
+    "id": "L10_C8_B24_VD138_SA_B",
+    "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm tam giác từ tập điểm có điểm thẳng hàng",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
+    "id": "L10_C8_B24_VD138_TL_A",
+    "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán đếm có điều kiện ràng buộc"
+  },
+  {
+    "id": "L10_C8_B24_VD138_TL_B",
+    "content": "Vận dụng được kiến thức về hoán vị, chỉnh hợp, tổ hợp vào giải các bài toán đếm trong các tình huống thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán đếm thực tiễn dùng tổ hợp (giải đấu vòng tròn)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
+  },
+  {
     "id": "L10_C8_B25_TH139_MC_A",
     "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 4.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Khai triển nhị thức Newton với n = 4"
+  },
+  {
+    "id": "L10_C8_B25_TH139_MC_B",
+    "content": "Khai triển được nhị thức Newton (a + b)^n với số mũ n = 4.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Số số hạng và số hạng đứng giữa trong khai triển",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - dang rut tu tep D12.py (SGK cu) cua co Lan, co Lan duyet lai noi dung yeu cau can dat"
   },
   {
     "id": "L10_C8_B25_TH139_SA_A",

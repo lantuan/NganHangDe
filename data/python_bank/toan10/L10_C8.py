@@ -1264,3 +1264,488 @@ def L10_C8_B25_VD141_TL_A_01(socau, dong=1):
                    (hoi_c, "%d" % tong, giai_c)]
         cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
     return cauTN
+
+
+# =====================================================================
+# BỔ SUNG 29/09/2026 - các dạng rút từ tệp D12.py (SGK cũ) của cô Lan.
+# Chỉ lấy những dạng NẰM TRONG yêu cầu cần đạt đã có; dạng nào trùng với
+# dạng sẵn có thì bỏ qua. Nhị thức Newton vẫn CHỈ tới n = 4, n = 5.
+# CLAUDE THEM 29/09/2026 - co Lan duyet lai noi dung toan.
+# =====================================================================
+
+def _to_hop8(n, k):
+    if k < 0 or k > n:
+        return 0
+    return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
+
+
+def _chon_chi_muc8(n, socau):
+    r"""Chọn socau chỉ mục trong 0..n-1, không trùng chừng nào còn đủ."""
+    ds = []
+    while len(ds) < socau:
+        ds += random.sample(range(n), min(n, socau - len(ds)))
+    return ds
+
+
+def L10_C8_B23_TH128_MC_B_01(socau, dang=1):
+    r"""Đếm số tự nhiên có n chữ số bằng quy tắc nhân.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12B1_6, D12B1_6_1).
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([3, 4, 5])
+        loai = random.choice(["bat_ki", "chan", "le"])
+        if (n, loai) not in gt:
+            gt.append((n, loai))
+
+    cauTN = ""
+    for n, loai in gt:
+        if loai == "bat_ki":
+            so = 9 * 10 ** (n - 1)
+            mo_ta = ""
+            lap_luan = (r"Chữ số đầu khác $0$ nên có $9$ cách chọn." +
+                        "\\\\\n"
+                        r"Mỗi chữ số còn lại có $10$ cách chọn, có $%d$ "
+                        r"chữ số như vậy." % (n - 1) +
+                        "\\\\\n"
+                        r"Theo quy tắc nhân: $9\cdot 10^{%d} = %d$."
+                        % (n - 1, so))
+        elif loai == "chan":
+            so = 9 * 10 ** (n - 2) * 5
+            mo_ta = " CHẴN"
+            lap_luan = (r"Chữ số cuối phải chẵn nên thuộc "
+                        r"$\left\{0; 2; 4; 6; 8\right\}$: $5$ cách." +
+                        "\\\\\n"
+                        r"Chữ số đầu khác $0$: $9$ cách." +
+                        "\\\\\n"
+                        r"Mỗi chữ số ở giữa có $10$ cách, có $%d$ chữ "
+                        r"số như vậy." % (n - 2) +
+                        "\\\\\n"
+                        r"Theo quy tắc nhân: $9\cdot 10^{%d}\cdot 5 "
+                        r"= %d$." % (n - 2, so))
+        else:
+            so = 9 * 10 ** (n - 2) * 5
+            mo_ta = " LẺ"
+            lap_luan = (r"Chữ số cuối phải lẻ nên thuộc "
+                        r"$\left\{1; 3; 5; 7; 9\right\}$: $5$ cách." +
+                        "\\\\\n"
+                        r"Chữ số đầu khác $0$: $9$ cách." +
+                        "\\\\\n"
+                        r"Mỗi chữ số ở giữa có $10$ cách, có $%d$ chữ "
+                        r"số như vậy." % (n - 2) +
+                        "\\\\\n"
+                        r"Theo quy tắc nhân: $9\cdot 10^{%d}\cdot 5 "
+                        r"= %d$." % (n - 2, so))
+        dung = "$%d$" % so
+        nhieu = _ba_nhieu8(dung,
+                           ["$%d$" % (10 ** n), "$%d$" % (9 * 10 ** n),
+                            "$%d$" % (10 ** (n - 1) * 5)],
+                           buoc=lambda t: "$%d$" % (so + t))
+        debai = (r"Có bao nhiêu số tự nhiên%s có $%d$ chữ số?"
+                 % (mo_ta, n))
+        giai = (r"Gọi số cần tìm là $\overline{a_1a_2\ldots a_{%d}}$ "
+                r"với $a_1 \neq 0$." % n +
+                "\\\\\n" + lap_luan)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C8_B23_TH128_SA_B_01(socau):
+    r"""Lập số tự nhiên từ một tập chữ số - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12Y1_5, D12K1_10).
+    """
+    gt = []
+    while len(gt) < socau:
+        m = random.choice([4, 5, 6])      # so chu so trong tap, khong co 0
+        k = random.choice([2, 3])         # so chu so cua so can lap
+        khac = random.choice([True, False])
+        if (m, k, khac) not in gt:
+            gt.append((m, k, khac))
+
+    cau = ""
+    for m, k, khac in gt:
+        tap = ", ".join("$%d$" % (i + 1) for i in range(m))
+        if khac:
+            so = math.factorial(m) // math.factorial(m - k)
+            mo_ta = "đôi một khác nhau"
+            lap_luan = (r"Chọn có thứ tự $%d$ chữ số trong $%d$ chữ số "
+                        r"nên đây là CHỈNH HỢP chập $%d$ của $%d$."
+                        % (k, m, k, m) +
+                        "\\\\\n"
+                        r"$A_{%d}^{%d} = \dfrac{%d!}{\left(%d - %d"
+                        r"\right)!} = %d$." % (m, k, m, m, k, so))
+        else:
+            so = m ** k
+            mo_ta = "không nhất thiết khác nhau"
+            lap_luan = (r"Mỗi chữ số đều có $%d$ cách chọn (được lặp "
+                        r"lại), có $%d$ vị trí." % (m, k) +
+                        "\\\\\n"
+                        r"Theo quy tắc nhân: $%d^{%d} = %d$."
+                        % (m, k, so))
+        debai = (r"Từ các chữ số %s có thể lập được bao nhiêu số tự "
+                 r"nhiên gồm $%d$ chữ số %s?" % (tap, k, mo_ta))
+        giai = lap_luan
+        nhieu = _ba_nhieu8(str(so), [str(m ** k), str(m * k),
+                                     str(math.factorial(m))],
+                           buoc=lambda t: str(so + t))
+        cau += MC_SA_answer_const(debai, str(so), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C8_B23_VD130_MC_B_01(socau, dang=1):
+    r"""Đếm số tự nhiên thoả điều kiện chia hết.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12K1_13).
+    """
+    gt = []
+    while len(gt) < socau:
+        m = random.choice([5, 6, 7])
+        if m not in gt:
+            gt.append(m)
+
+    cauTN = ""
+    for m in gt:
+        # tap {0, 1, ..., m-1}; so co 3 chu so doi mot khac nhau chia het 5
+        # TH1: chu so cuoi = 0 -> (m-1)(m-2)
+        # TH2: chu so cuoi = 5 (neu 5 < m) -> (m-2)(m-2)
+        th1 = (m - 1) * (m - 2)
+        th2 = (m - 2) * (m - 2) if m > 5 else 0
+        so = th1 + th2
+        tap = "; ".join("$%d$" % i for i in range(m))
+        dung = "$%d$" % so
+        nhieu = _ba_nhieu8(dung, ["$%d$" % th1, "$%d$" % (th1 + th1),
+                                  "$%d$" % ((m - 1) * (m - 1))],
+                           buoc=lambda t: "$%d$" % (so + t))
+        debai = (r"Từ các chữ số %s, lập được bao nhiêu số tự nhiên có "
+                 r"ba chữ số ĐÔI MỘT KHÁC NHAU và chia hết cho $5$?"
+                 % tap)
+        if th2:
+            giai = (r"Số chia hết cho $5$ có chữ số hàng đơn vị là $0$ "
+                    r"hoặc $5$; ta chia hai trường hợp RỜI NHAU rồi "
+                    r"CỘNG lại." +
+                    "\\\\\n"
+                    r"Trường hợp 1 - tận cùng là $0$: hàng trăm có "
+                    r"$%d$ cách (khác $0$), hàng chục có $%d$ cách, "
+                    r"được $%d\cdot %d = %d$ số."
+                    % (m - 1, m - 2, m - 1, m - 2, th1) +
+                    "\\\\\n"
+                    r"Trường hợp 2 - tận cùng là $5$: hàng trăm khác "
+                    r"$0$ và khác $5$ nên có $%d$ cách, hàng chục có "
+                    r"$%d$ cách, được $%d\cdot %d = %d$ số."
+                    % (m - 2, m - 2, m - 2, m - 2, th2) +
+                    "\\\\\n"
+                    r"Theo quy tắc cộng: $%d + %d = %d$ số."
+                    % (th1, th2, so))
+        else:
+            giai = (r"Số chia hết cho $5$ có chữ số hàng đơn vị là $0$ "
+                    r"hoặc $5$; ở đây tập đã cho không có chữ số $5$ "
+                    r"nên chỉ còn trường hợp tận cùng là $0$." +
+                    "\\\\\n"
+                    r"Hàng trăm có $%d$ cách (khác $0$ đã dùng), hàng "
+                    r"chục có $%d$ cách." % (m - 1, m - 2) +
+                    "\\\\\n"
+                    r"Theo quy tắc nhân: $%d\cdot %d = %d$ số."
+                    % (m - 1, m - 2, so))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C8_B23_VD130_SA_B_01(socau):
+    r"""Đếm số tự nhiên có ràng buộc về vị trí chữ số - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12B1_8, D12K1_9).
+    """
+    MAU = [
+        (r"Có bao nhiêu số tự nhiên có $5$ chữ số mà các chữ số cách "
+         r"đều chữ số đứng giữa thì giống nhau?", 900,
+         r"Số có dạng $\overline{abcba}$ với $a \neq 0$." + "\\\\\n" +
+         r"$a$ có $9$ cách chọn (khác $0$), $b$ có $10$ cách, $c$ có "
+         r"$10$ cách." + "\\\\\n" +
+         r"Hai chữ số còn lại bị ÉP theo $a$ và $b$ nên không có thêm "
+         r"lựa chọn nào." + "\\\\\n" +
+         r"Theo quy tắc nhân: $9\cdot 10\cdot 10 = 900$ số."),
+        (r"Có bao nhiêu số tự nhiên có hai chữ số mà chữ số hàng chục "
+         r"LỚN HƠN chữ số hàng đơn vị?", 45,
+         r"Gọi số đó là $\overline{ab}$ với $a > b$ và $a \neq 0$." +
+         "\\\\\n" +
+         r"Ứng với mỗi $a$ từ $1$ đến $9$, chữ số $b$ chỉ được lấy "
+         r"trong $\left\{0; 1; \ldots; a-1\right\}$, tức có đúng $a$ "
+         r"cách." + "\\\\\n" +
+         r"Tổng số cách là $1 + 2 + \cdots + 9 = "
+         r"\dfrac{9\cdot 10}{2} = 45$."),
+        (r"Có bao nhiêu số tự nhiên có hai chữ số mà chữ số hàng chục "
+         r"NHỎ HƠN chữ số hàng đơn vị?", 36,
+         r"Gọi số đó là $\overline{ab}$ với $a < b$ và $a \neq 0$." +
+         "\\\\\n" +
+         r"Ứng với mỗi $a$ từ $1$ đến $8$, chữ số $b$ lấy trong "
+         r"$\left\{a+1; \ldots; 9\right\}$, tức có $9 - a$ cách." +
+         "\\\\\n" +
+         r"Tổng số cách là $8 + 7 + \cdots + 1 = "
+         r"\dfrac{8\cdot 9}{2} = 36$."),
+    ]
+    gt = _chon_chi_muc8(len(MAU), socau)
+
+    cau = ""
+    for i in gt:
+        hoi, dap, giai = MAU[i]
+        nhieu = _ba_nhieu8(str(dap), [str(dap + 10), str(dap * 2),
+                                      str(90)],
+                           buoc=lambda t: str(dap + t))
+        cau += MC_SA_answer_const(hoi, str(dap), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C8_B24_TH134_MC_B_01(socau, dang=1):
+    r"""Tính chất $C_n^k = C_n^{\,n-k}$ trong tính toán.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12B2_9).
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([8, 9, 10, 11, 12])
+        a = random.randint(2, n // 2 - 1)
+        b = n - a
+        c = random.randint(2, n - 2)
+        if a == b or (n, a, b, c) in gt:
+            continue
+        gt.append((n, a, b, c))
+
+    cauTN = ""
+    for n, a, b, c in gt:
+        kq = _to_hop8(n, c)
+        dung = "$%d$" % kq
+        nhieu = _ba_nhieu8(dung,
+                           ["$%d$" % _to_hop8(n, a),
+                            "$%d$" % _to_hop8(n + 1, c),
+                            "$%d$" % (n * c)],
+                           buoc=lambda t: "$%d$" % (kq + t))
+        debai = (r"Biết $C_{n}^{%d} = C_{n}^{%d}$. Tính $C_{n}^{%d}$."
+                 % (a, b, c))
+        giai = (r"Tính chất $C_{n}^{k} = C_{n}^{\,n-k}$ cho biết: "
+                r"$C_{n}^{%d} = C_{n}^{%d}$ khi $%d = %d$ hoặc "
+                r"$%d = n - %d$." % (a, b, a, b, a, b) +
+                "\\\\\n"
+                r"Vì $%d \neq %d$ nên $%d = n - %d$, suy ra "
+                r"$n = %d + %d = %d$." % (a, b, a, b, a, b, n) +
+                "\\\\\n"
+                r"$C_{%d}^{%d} = \dfrac{%d!}{%d!\left(%d - %d\right)!} "
+                r"= %d$." % (n, c, n, c, n, c, kq))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C8_B24_VD138_MC_B_01(socau, dang=1):
+    r"""Số đường chéo của đa giác lồi.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12K2_4).
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([6, 7, 8, 9, 10, 12, 15, 20])
+        if n not in gt:
+            gt.append(n)
+
+    cauTN = ""
+    for n in gt:
+        so = _to_hop8(n, 2) - n
+        dung = "$%d$" % so
+        nhieu = _ba_nhieu8(dung,
+                           ["$%d$" % _to_hop8(n, 2), "$%d$" % n,
+                            "$%d$" % (n * (n - 3))],
+                           buoc=lambda t: "$%d$" % (so + t))
+        debai = (r"Một đa giác lồi có $%d$ cạnh thì có bao nhiêu đường "
+                 r"chéo?" % n)
+        giai = (r"Mỗi đoạn thẳng nối hai đỉnh của đa giác hoặc là một "
+                r"CẠNH, hoặc là một ĐƯỜNG CHÉO." +
+                "\\\\\n"
+                r"Số đoạn thẳng nối hai trong $%d$ đỉnh là "
+                r"$C_{%d}^{2} = %d$." % (n, n, _to_hop8(n, 2)) +
+                "\\\\\n"
+                r"Trong đó có đúng $%d$ đoạn là cạnh của đa giác." % n +
+                "\\\\\n"
+                r"Số đường chéo $= %d - %d = %d$."
+                % (_to_hop8(n, 2), n, so) +
+                "\\\\\n"
+                r"(Công thức chung: $\dfrac{n\left(n-3\right)}{2} = "
+                r"\dfrac{%d\cdot %d}{2} = %d$.)" % (n, n - 3, so))
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C8_B24_VD138_SA_B_01(socau):
+    r"""Đếm tam giác từ một tập điểm có điểm thẳng hàng - trả lời ngắn.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12K2_10, D12K2_16).
+    """
+    gt = []
+    while len(gt) < socau:
+        p = random.choice([4, 5, 6])      # so diem tren duong thang a
+        q = random.choice([3, 4, 5])      # so diem tren duong thang b
+        if (p, q) not in gt:
+            gt.append((p, q))
+
+    cau = ""
+    for p, q in gt:
+        n = p + q
+        so = _to_hop8(n, 3) - _to_hop8(p, 3) - _to_hop8(q, 3)
+        debai = (r"Cho hai đường thẳng song song $a$ và $b$. Trên đường "
+                 r"thẳng $a$ lấy $%d$ điểm phân biệt, trên đường thẳng "
+                 r"$b$ lấy $%d$ điểm phân biệt. Hỏi có bao nhiêu tam "
+                 r"giác mà ba đỉnh là ba trong các điểm đó?" % (p, q))
+        giai = (r"Chọn $3$ điểm bất kì trong $%d$ điểm: "
+                r"$C_{%d}^{3} = %d$ cách." % (n, n, _to_hop8(n, 3)) +
+                "\\\\\n"
+                r"Ba điểm KHÔNG tạo thành tam giác khi chúng thẳng "
+                r"hàng, tức cùng nằm trên $a$ hoặc cùng nằm trên $b$." +
+                "\\\\\n"
+                r"Số bộ ba thẳng hàng: $C_{%d}^{3} + C_{%d}^{3} = "
+                r"%d + %d = %d$."
+                % (p, q, _to_hop8(p, 3), _to_hop8(q, 3),
+                   _to_hop8(p, 3) + _to_hop8(q, 3)) +
+                "\\\\\n"
+                r"Số tam giác $= %d - %d = %d$."
+                % (_to_hop8(n, 3),
+                   _to_hop8(p, 3) + _to_hop8(q, 3), so) +
+                "\\\\\n"
+                r"Cách khác: tam giác có $2$ đỉnh trên $a$ và $1$ đỉnh "
+                r"trên $b$, hoặc ngược lại: "
+                r"$C_{%d}^{2}C_{%d}^{1} + C_{%d}^{1}C_{%d}^{2} = %d$."
+                % (p, q, p, q, so))
+        nhieu = _ba_nhieu8(str(so), [str(_to_hop8(n, 3)), str(p * q),
+                                     str(_to_hop8(p, 3) + _to_hop8(q, 3))],
+                           buoc=lambda t: str(so + t))
+        cau += MC_SA_answer_const(debai, str(so), nhieu, giai, 0, 0, 2)
+    return cau
+
+
+def L10_C8_B24_VD138_TL_B_01(socau, dong=1):
+    r"""Tự luận: bài toán đếm thực tiễn dùng tổ hợp.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12K2_2, D12B2_14).
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([8, 10, 12, 14, 16])
+        if n not in gt:
+            gt.append(n)
+
+    cauTN = ""
+    for n in gt:
+        luot_di = _to_hop8(n, 2)
+        ca_mua = 2 * luot_di
+        debai = (r"Một giải bóng đá vô địch quốc gia có $%d$ câu lạc bộ "
+                 r"tham gia. Các đội thi đấu vòng tròn hai lượt: lượt "
+                 r"đi và lượt về, hai đội bất kì gặp nhau đúng một lần "
+                 r"ở mỗi lượt." % n)
+
+        hoi_a = r"Tính số trận đấu của LƯỢT ĐI."
+        giai_a = (r"Mỗi trận lượt đi ứng với một cách chọn $2$ đội "
+                  r"trong $%d$ đội, KHÔNG kể thứ tự." % n +
+                  "\\\\\n"
+                  r"Số trận là $C_{%d}^{2} = "
+                  r"\dfrac{%d\cdot %d}{2} = %d$."
+                  % (n, n, n - 1, luot_di))
+
+        hoi_b = r"Tính tổng số trận đấu của CẢ MÙA GIẢI."
+        giai_b = (r"Lượt về có số trận bằng lượt đi." +
+                  "\\\\\n"
+                  r"Tổng số trận $= 2\cdot %d = %d$."
+                  % (luot_di, ca_mua))
+
+        hoi_c = (r"Giải thích vì sao ở câu a phải dùng TỔ HỢP chứ không "
+                 r"phải chỉnh hợp.")
+        giai_c = (r"Trận đấu giữa đội $X$ và đội $Y$ cũng chính là trận "
+                  r"giữa $Y$ và $X$ - thứ tự KHÔNG quan trọng." +
+                  "\\\\\n"
+                  r"Vì vậy đây là bài toán TỔ HỢP." +
+                  "\\\\\n"
+                  r"Nếu dùng chỉnh hợp $A_{%d}^{2} = %d$ thì mỗi trận "
+                  r"bị đếm hai lần; con số đó lại đúng bằng tổng số "
+                  r"trận CẢ MÙA (vì lượt đi và lượt về phân biệt sân "
+                  r"nhà - sân khách)." % (n, ca_mua))
+
+        ds_abcd = [(hoi_a, r"C_{%d}^{2} = %d" % (n, luot_di), giai_a),
+                   (hoi_b, r"%d \text{ trận}" % ca_mua, giai_b),
+                   (hoi_c, r"\text{Vì thứ tự không quan trọng}", giai_c)]
+        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+def L10_C8_B25_TH139_MC_B_01(socau, dang=1):
+    r"""Số số hạng và số hạng đứng giữa trong khai triển nhị thức Newton.
+
+    CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta.
+    Ý tưởng lấy từ tệp D12.py cũ của cô (D12B3_15, D12B3_18).
+    RÀNG BUỘC: lớp 10 chỉ khai triển tới n = 4 và n = 5.
+    """
+    gt = []
+    while len(gt) < socau:
+        n = random.choice([4, 5])
+        hoi = random.choice(["so_hang", "dung_giua"])
+        if (n, hoi) not in gt:
+            gt.append((n, hoi))
+
+    cauTN = ""
+    for n, hoi in gt:
+        if hoi == "so_hang":
+            so = n + 1
+            dung = "$%d$" % so
+            nhieu = _ba_nhieu8(dung, ["$%d$" % n, "$%d$" % (n - 1),
+                                      "$%d$" % (2 * n)],
+                               buoc=lambda t: "$%d$" % (so + t + 1))
+            debai = (r"Khai triển $\left(a + b\right)^{%d}$ có tất cả "
+                     r"bao nhiêu số hạng?" % n)
+            giai = (r"Khai triển nhị thức Newton "
+                    r"$\left(a + b\right)^{n}$ có các số hạng ứng với "
+                    r"$k = 0, 1, \ldots, n$." +
+                    "\\\\\n"
+                    r"Vậy số số hạng là $n + 1 = %d + 1 = %d$."
+                    % (n, so) +
+                    "\\\\\n"
+                    r"Đây là chỗ hay nhầm: số số hạng nhiều hơn số mũ "
+                    r"đúng MỘT đơn vị.")
+        else:
+            if n == 4:
+                dung = r"$C_{4}^{2}a^{2}b^{2}$"
+                nhieu = [r"$C_{4}^{2}a^{3}b$", r"$C_{4}^{1}a^{3}b$",
+                         r"$C_{4}^{3}ab^{3}$"]
+                giai = (r"Khai triển $\left(a + b\right)^{4}$ có $5$ số "
+                        r"hạng nên số hạng ĐỨNG GIỮA là số hạng thứ "
+                        r"$3$." +
+                        "\\\\\n"
+                        r"Số hạng thứ $3$ ứng với $k = 2$: "
+                        r"$C_{4}^{2}a^{4-2}b^{2} = C_{4}^{2}a^{2}b^{2} "
+                        r"= 6a^{2}b^{2}$.")
+                debai = (r"Trong khai triển $\left(a + b\right)^{4}$ "
+                         r"theo luỹ thừa giảm dần của $a$, số hạng "
+                         r"đứng giữa là")
+            else:
+                dung = (r"$C_{5}^{2}a^{3}b^{2}$ và $C_{5}^{3}a^{2}b^{3}$")
+                nhieu = [r"chỉ có $C_{5}^{2}a^{3}b^{2}$",
+                         r"chỉ có $C_{5}^{3}a^{2}b^{3}$",
+                         r"$C_{5}^{1}a^{4}b$ và $C_{5}^{4}ab^{4}$"]
+                giai = (r"Khai triển $\left(a + b\right)^{5}$ có $6$ số "
+                        r"hạng - là số CHẴN nên KHÔNG có một số hạng "
+                        r"đứng giữa duy nhất." +
+                        "\\\\\n"
+                        r"Hai số hạng ở giữa là số hạng thứ $3$ và thứ "
+                        r"$4$, ứng với $k = 2$ và $k = 3$:" +
+                        "\\\\\n"
+                        r"$C_{5}^{2}a^{3}b^{2} = 10a^{3}b^{2}$ và "
+                        r"$C_{5}^{3}a^{2}b^{3} = 10a^{2}b^{3}$.")
+                debai = (r"Trong khai triển $\left(a + b\right)^{5}$ "
+                         r"theo luỹ thừa giảm dần của $a$, số hạng "
+                         r"đứng giữa là")
+        cauTN += MC_SA_answer_text(debai, dung, list(nhieu), giai, 0, 0,
+                                   dang)
+    return cauTN
