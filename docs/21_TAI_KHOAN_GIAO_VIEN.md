@@ -98,6 +98,34 @@ nhận 403. Đây là bước quan trọng nhất của cả tài liệu này.
   luồng duyệt tài khoản phức tạp.
 - Sau khi tạo tài khoản, đặt `vai_tro = 'giao_vien'`.
 
+### Đăng ký giáo viên bằng Google
+
+Trang `/register/teacher` có nút **"Đăng ký bằng Google"** giống trang học
+sinh (cô Lan yêu cầu 29/09/2026). Nhưng luồng Google **không mang theo
+được mã mời**, mà mã mời thì tuyệt đối không được lọt ra trình duyệt — nó
+chỉ nằm trong `.env` trên VPS và chỉ máy chủ được kiểm. Nên luồng chạy
+như sau:
+
+1. Bấm "Đăng ký bằng Google" → trang ghi vào `sessionStorage` **một
+   đường dẫn** `nhd_sau_dang_nhap = "/toi-la-giao-vien"`. Chỉ đường dẫn,
+   **không bao giờ** là mã mời.
+2. Đăng nhập Google xong → `auth/callback.html` đọc đường dẫn đó. Nó chỉ
+   nhận những đường dẫn trong danh sách cho phép (`/toi-la-giao-vien`,
+   `/chon-vai-tro`, `/chat`) — tránh việc ai đó sửa `sessionStorage`
+   thành trang ngoài rồi lừa người khác bấm vào.
+3. Sang `/toi-la-giao-vien`, người dùng nhập mã mời **một lần**, máy chủ
+   kiểm (`app/routers/auth.py`), đúng thì nâng `vai_tro = 'giao_vien'`.
+
+Trình duyệt chặn `sessionStorage` thì vẫn đăng ký được: vào `/chat` sẽ bị
+hỏi chọn vai trò rồi cũng ra đúng chỗ đó.
+
+Đăng ký bằng email + mật khẩu thì nhập mã mời ngay trên biểu mẫu, máy chủ
+kiểm trong `POST /register/teacher` — không đổi gì.
+
+`tests/test_dang_ky_gv_bang_google.py` giữ cho nút này không bị gỡ, giữ
+cho trang được cấp khoá Supabase, và soi rằng không chỗ nào ghi mã mời
+vào bộ nhớ trình duyệt.
+
 ### Quên mã mời thì tìm ở đâu
 
 Mã mời **chỉ nằm trong `.env` trên VPS** (biến `MA_MOI_GIAO_VIEN`). Cố ý như

@@ -8393,3 +8393,53 @@ nut nhat vi no khong phai loi vao tai khoan.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.31 - 2026-09-29
+
+## Trang dang ky GIAO VIEN co nut "Dang ky bang Google"
+
+Co Lan: "toi can trang dang ky cua giao vien cung co nut dang ky bang
+gmail nhu ben hoc sinh".
+
+Truoc day co y KHONG lam, ly do ghi ngay trong auth.py: luong Google
+khong mang theo duoc ma moi. Nhung khong lam thi giao vien phai tu doan
+ra duong vong (dang nhap Google -> /chon-vai-tro -> chon Giao vien ->
+/toi-la-giao-vien), ma khong ai doan ra ca.
+
+Nay lam, van giu nguyen cho chan: ma moi TUYET DOI khong lot ra trinh
+duyet, chi may chu duoc kiem.
+
+Luong moi:
+
+1. Bam nut -> trang ghi vao sessionStorage MOT DUONG DAN
+   `nhd_sau_dang_nhap = "/toi-la-giao-vien"`. Chi duong dan, khong bao
+   gio la ma moi.
+2. Dang nhap Google xong -> `auth/callback.html` doc duong dan do. No
+   chi nhan duong dan trong DANH SACH CHO PHEP (/toi-la-giao-vien,
+   /chon-vai-tro, /chat) - de khong ai sua sessionStorage thanh trang
+   ngoai roi lua nguoi khac bam vao.
+3. Sang /toi-la-giao-vien, nhap ma moi MOT lan, may chu kiem, dung thi
+   nang vai_tro = 'giao_vien'.
+
+Trinh duyet chan sessionStorage thi van dang ky duoc: vao /chat se bi
+hoi chon vai tro roi cung ra dung cho do.
+
+Sua kem:
+- `register_teacher_page` truoc day KHONG truyen supabase_url /
+  supabase_anon_key xuong trang. Nhanh bao loi cua `POST /register/
+  teacher` cung khong truyen. Thieu hai khoa nay thi nut Google chet
+  lang, bam khong an. Da them vao ca hai cho.
+- Khoi chu thich trong auth.py noi "Khong co nut Dang ky bang Google"
+  da lac hau - viet lai cho dung.
+- docs/21_TAI_KHOAN_GIAO_VIEN.md them muc "Dang ky giao vien bang
+  Google".
+
+Chong tai phat: `tests/test_dang_ky_gv_bang_google.py` - soi nut con do,
+trang duoc cap khoa Supabase, callback loc duong dan, va KHONG cho nao
+ghi ma moi vao bo nho trinh duyet.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

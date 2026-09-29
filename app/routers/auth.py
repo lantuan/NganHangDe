@@ -322,10 +322,13 @@ async def register_student(
 #   1. Phai nhap dung MA MOI (bien moi truong MA_MOI_GIAO_VIEN trong
 #      .env tren VPS). Day la cach don gian nhat de hoc sinh khong tu
 #      dang ky thanh giao vien ma khong phai dung luong duyet tai khoan.
-#   2. Khong co nut "Dang ky bang Google": luong Google khong mang theo
-#      duoc ma moi, nen tai khoan giao vien phai tao bang email + mat khau.
-#      Sau khi co tai khoan, van dang nhap bang Google binh thuong neu
-#      email trung.
+#   2. Co nut "Dang ky bang Google" (co Lan yeu cau 29/09/2026), nhung
+#      luong Google KHONG mang theo ma moi - ma moi phai do may chu kiem,
+#      khong duoc de lot ra trinh duyet. Nen nut do chi danh dau
+#      sessionStorage['nhd_sau_dang_nhap'] = '/toi-la-giao-vien' roi goi
+#      Google; xong dang nhap, callback.html dua thang toi trang do de
+#      nhap ma moi MOT lan, may chu kiem roi moi nang vai tro.
+#      Luu y: chi luu DUONG DAN (vo hai), tuyet doi khong luu ma moi.
 # Xem docs/21_TAI_KHOAN_GIAO_VIEN.md.
 # ======================================================
 
@@ -335,6 +338,10 @@ async def register_teacher_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/register_teacher.html",
+        context={
+            "supabase_url": SUPABASE_URL,
+            "supabase_anon_key": SUPABASE_KEY,
+        },
     )
 
 
@@ -360,6 +367,10 @@ async def register_teacher(
                 "email": email,
                 "truong": truong,
                 "to_chuyen_mon": to_chuyen_mon,
+                # Thieu hai khoa nay thi sau khi bao loi, nut "Dang ky
+                # bang Google" tren trang se chet lang khong bam duoc.
+                "supabase_url": SUPABASE_URL,
+                "supabase_anon_key": SUPABASE_KEY,
             },
         )
 

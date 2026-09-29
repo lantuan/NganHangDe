@@ -49,7 +49,19 @@
         })
             .then(function (res) {
                 if (res.ok) {
-                    window.location.href = '/chat';
+                    // Bam "Dang ky bang Google" o trang giao vien thi
+                    // trang do da danh dau san cho can di toi. Chi nhan
+                    // nhung duong dan TRONG DANH SACH duoi day - de
+                    // khong ai sua sessionStorage thanh trang ngoai
+                    // roi lua nguoi khac bam vao.
+                    var CHO_PHEP = ['/toi-la-giao-vien', '/chon-vai-tro', '/chat'];
+                    var di = '/chat';
+                    try {
+                        var luu = sessionStorage.getItem('nhd_sau_dang_nhap');
+                        sessionStorage.removeItem('nhd_sau_dang_nhap');
+                        if (CHO_PHEP.indexOf(luu) !== -1) { di = luu; }
+                    } catch (e) { /* trinh duyet chan bo nho thi vao /chat */ }
+                    window.location.href = di;
                 } else {
                     baoLoi('Không xác thực được tài khoản Google.');
                 }
