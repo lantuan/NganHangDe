@@ -42,6 +42,8 @@ Version: 1.0
 
 18_PROMPT_LIBRARY.md
 
+26_CHAY_NHAP_VA_SUA_CAU.md  (so tay: tim ham tu cau tren web, chay nhap ra PDF, sua, doi ID)
+
 ---
 
 Quy tắc:

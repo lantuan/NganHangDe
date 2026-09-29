@@ -8764,3 +8764,22 @@ m -> m nguyen duy nhat. De bai them "(voi m > a)". Dap so khong doi.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+===============================================================================
+
+# Version 3.40 - 2026-09-29
+
+## So tay docs/26_CHAY_NHAP_VA_SUA_CAU.md (co Lan de nghi)
+
+Huong dan tung buoc de sau nay tu lam: tim ham tu mot cau tren web (grep
+cum chu), doc ten ham, chay nhap scripts/nhap.py ra .tex/.pdf, bang loi
+LaTeX hay gap, danh sach soi cau, sua noi dung, doi ID khi sai muc do
+(vi du that NB017_SA_C -> VD021_SA_B), kiem tra va day len web; loi tat
+"nhap" tuy chon. Them vao docs/README.md.
+
+tests/test_mapping_co_ham.py: moi dong mapping phai co ham <id>_01... -
+bat loi doi ID ma quen doi ten ham. 2959 bai test qua, 8 bo qua.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

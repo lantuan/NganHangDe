@@ -10,6 +10,8 @@ Dung (dung o thu muc goc cua du an):
     python3 scripts/nhap.py L10_C1_B2_VD021_SA_B          (moi bien the _01, _02...)
     python3 scripts/nhap.py L10_C1_B2_VD021_SA_B_01 --khong-pdf
 
+Huong dan day du tung buoc: docs/26_CHAY_NHAP_VA_SUA_CAU.md
+
 Ket qua nam trong thu muc nhap/ (khong day len GitHub):
     nhap/<TEN>_dethi.tex    nhap/<TEN>_dethi.pdf     de, khong loi giai
     nhap/<TEN>_loigiai.tex  nhap/<TEN>_loigiai.pdf   de kem dap an, loi giai
