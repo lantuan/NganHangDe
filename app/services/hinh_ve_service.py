@@ -49,7 +49,9 @@ def tim_tikz(latex_block: str) -> list[str]:
 
 
 # Doi so nay khi cach dung hinh thay doi, de anh cu bi dich lai.
-PHIEN_BAN = "v1"
+# v2 (29/09/2026): them goi icomma nen dau phay thap phan doi cach
+# hien thi -> phai doi phien ban de moi hinh cu deu duoc dich lai.
+PHIEN_BAN = "v2"
 
 # Phan dau RUT GON: chi nhung goi ma hinh ve thuc su can. Dung khi may
 # khong co du goi cua khung de day du (may ao cua Claude thieu tabvar,
@@ -61,6 +63,9 @@ PREAMBLE_GON = r"""\documentclass[12pt]{standalone}
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{shapes.geometric,arrows,snakes,calc,intersections,angles,patterns}
 \pgfplotsset{compat=1.9}
+% Dau phay thap phan kieu Viet Nam, giong het trong latex_template.tex:
+% $0,7$ phai in ra "0,7" chu khong phai "0, 7".
+\IfFileExists{icomma.sty}{\usepackage{icomma}}{}
 """
 
 

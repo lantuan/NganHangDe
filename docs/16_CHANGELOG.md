@@ -7972,3 +7972,47 @@ Lop 11 da xong 284/284 dang.
 ## Nguoi thuc hien
 
 Mai Ha Lan (cung Claude)
+
+# Version 3.24 - 2026-09-29
+
+## Sua dau phay thap phan (co Lan duyet)
+
+Trong che do toan, dau phay la DAU NGAN CACH nen $0,7$ bi in ra thanh
+"0, 7" - sai kieu viet so thap phan Viet Nam. Loi nay anh huong MOI so
+thap phan cua ca ngan hang, ca lop 10 lan lop 11, ca PDF lan web.
+
+Da sua o ba cho:
+
+1. `data/config/latex_template.tex` - nap goi `icomma` (bo 'was' cua TeX
+   Live), boc trong `\IfFileExists` nen may nao thieu goi van dich duoc
+   de binh thuong.
+2. `app/services/hinh_ve_service.py` - phan dau RUT GON (dung khi may
+   thieu goi cua khung de, nhu may cua co) cung nap icomma, de hinh tren
+   web giong het hinh trong PDF. Doi `PHIEN_BAN` tu "v1" sang "v2" nen
+   moi anh cu trong `data/hinh_cache/` deu duoc dich lai.
+3. `app/templates/chat/lam_bai.html` - MathJax khong co icomma nen boc
+   dau phay thanh `{,}`: `(\d),(?=\d)` -> `$1{,}`. CHI doi cach hien thi,
+   khong dong den chuoi dap an hoc sinh go nen cham diem khong doi.
+
+Da xem lai bang mat: anh so do hinh cay truoc khi sua in ra "0, 7", sau
+khi sua in ra "0,7".
+
+## Cat 4 tep SGK cu cho ngan hang de CHUYEN DE HOC TAP
+
+Theo y co Lan: phan phep bien hinh khong bi bo han ma nam trong CHUYEN
+DE HOC TAP, nen giu lai lam nguon.
+
+Da cat 4 tep nguyen ban vao `data/chuyen_de_hoc_tap/nguon_sgk_cu/` kem
+README giai thich: H11.py (13 ham, phep bien hinh), D11.py (48 ham,
+luong giac), D12.py (67 ham, to hop - xac suat), H12.py (4 ham, quan he
+song song).
+
+CHUA NOI VAO HE THONG - khong tep nao duoc import, khong dong Mapping
+nao tro toi. 2748 test van qua binh thuong.
+
+README co ghi ro 4 cap ham TRUNG TEN trong D12.py (ham sau ghi de ham
+truoc) de sau nay viet lai khong bi mat cau.
+
+## Nguoi thuc hien
+
+Mai Ha Lan (cung Claude)

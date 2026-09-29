@@ -11,6 +11,10 @@
 \pgfplotsset{compat=1.9}
 \usepackage[top=1cm, bottom=1.5cm, left=1cm, right=1cm]{geometry}
 \usepackage[hidelinks,unicode]{hyperref}
+% Dau phay thap phan kieu Viet Nam: $0,7$ in ra "0,7" chu khong
+% phai "0, 7". Goi icomma thuoc bo 'was' cua TeX Live.
+% Boc trong IfFileExists de neu may nao thieu goi thi van dich duoc.
+\IfFileExists{icomma.sty}{\usepackage{icomma}}{}
 \usepackage{esvect}
 \def\vec{\vv}
 \def\overrightarrow{\vv}

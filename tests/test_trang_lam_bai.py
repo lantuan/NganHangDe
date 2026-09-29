@@ -103,3 +103,40 @@ def test_api_lam_bai_tra_ve_du_thong_tin_phan():
     nguon = (GOC / "app/routers/exam.py").read_text(encoding="utf-8")
     for truong in ('"ma_phan"', '"ten_phan"', '"so_trong_phan"'):
         assert truong in nguon, "API trang làm bài còn thiếu trường %s" % truong
+
+
+def test_dau_phay_thap_phan_khong_bi_chen_khoang_trang():
+    r"""Trong chế độ toán, dấu phẩy là dấu NGĂN CÁCH nên $0,7$ bị in ra
+    thành "0, 7". Cả PDF lẫn web đều phải xử lí, nếu không số thập phân
+    của cả ngân hàng đều hiển thị sai kiểu Việt Nam.
+
+    CLAUDE THEM 29/09/2026 - co Lan da duyet cach sua nay.
+    """
+    # 1. PDF: khung đề phải nạp gói icomma (bọc IfFileExists để máy nào
+    #    thiếu gói vẫn dịch được).
+    tpl = (GOC / "data/config/latex_template.tex").read_text(encoding="utf-8")
+    assert "icomma" in tpl, (
+        "latex_template.tex chưa nạp icomma - số thập phân trong PDF sẽ "
+        "in ra kiểu '0, 7'"
+    )
+    assert "IfFileExists" in tpl, (
+        "Phải bọc icomma trong IfFileExists, nếu không máy thiếu gói sẽ "
+        "không dịch được đề nào"
+    )
+
+    # 2. Hình vẽ: phần đầu RÚT GỌN (dùng khi máy thiếu gói của khung đề)
+    #    cũng phải có icomma, nếu không hình trên web lệch với hình trong
+    #    PDF.
+    hv = (GOC / "app/services/hinh_ve_service.py").read_text(encoding="utf-8")
+    assert "icomma" in hv, "Phần đầu rút gọn của hình vẽ chưa có icomma"
+    assert 'PHIEN_BAN = "v2"' in hv, (
+        "Đổi cách hiển thị dấu phẩy thì phải đổi PHIEN_BAN, nếu không "
+        "ảnh cũ trong kho vẫn giữ kiểu '0, 7'"
+    )
+
+    # 3. Web: MathJax không có icomma nên phải bọc dấu phẩy thành {,}.
+    html = (GOC / "app/templates/chat/lam_bai.html").read_text(encoding="utf-8")
+    assert "{,}" in html, (
+        "Trang làm bài chưa bọc dấu phẩy thập phân - MathJax sẽ hiển thị "
+        "'0, 7'"
+    )

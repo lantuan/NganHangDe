@@ -337,7 +337,12 @@ function renderLatexText(raw) {
     s = xuLyDanhSach(s, 'ol', 'listEX');
     return tachDoanToan(s).map(function (d) {
         // Doan toan GIU NGUYEN TUNG KY TU cho MathJax tu render.
-        if (d.toan) return d.chu;
+        // Ngoai le DUY NHAT: dau phay THAP PHAN. Trong che do toan,
+        // MathJax hieu dau phay la dau ngan cach nen chen them khoang
+        // trang, "0,7" bi in thanh "0, 7". Boc lai thanh "0{,}7" thi
+        // MathJax coi la mot ky tu thuong, khong chen khoang trang.
+        // Chi doi CACH HIEN THI, khong dong den chuoi dap an hoc sinh go.
+        if (d.toan) return d.chu.replace(/(\d),(?=\d)/g, '$1{,}');
         let t = d.chu;
         t = t.replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>');
         t = t.replace(/\\textit\{([^{}]*)\}/g, '<em>$1</em>');
