@@ -9044,3 +9044,29 @@ Dang MOI (mapping ghi_chu "CLAUDE THEM ... co Lan duyet lai"):
   TH032_MC_C_01  do dai trung tuyen tu ba canh
   TH032_SA_C_01  do dai trung tuyen (so nguyen)
   TH034_MC_C_01  biet S va hai canh, tim goc xen giua (nhon / tu)
+
+# Version 3.48 - 2026-09-29
+
+## Bien the lay tu giao an Bai 6 - dot 2 (ban "He thuc luong. Giai tam giac")
+
+Bien the moi (cung Dang voi _01):
+  TH032_TL_A_02  b, c, cos A phan so -> a, cos B, cos C
+  TH032_MC_B_02  ba canh -> cosin cua goc LON NHAT
+  TH033_TL_A_02  cho BC, B, C (tu tinh A) -> AC, R
+  TH034_MC_A_02  cong thuc dien tich nao dung / nao sai
+  TF_C_02        tau hai chang theo huong la ban (cho quang duong): goc B, AC,
+                 goc BAC, huong A -> C
+  TF_E_03        hai canh + goc xen giua: S, h_a, canh thu ba, R
+  VD036_MC_C_02  hai may bay / hai tau cung xuat phat, hai huong la ban
+  VD036_TL_D_02  tau hai chang (van toc, thoi gian), hoi huong A -> C
+  VD036_TL_A_02  cot ang-ten tren noc nha: goc tam giac, AC, chieu cao nha
+  VD036_MC_D_02  thap tren dinh doi: chieu cao ngon doi
+  VD036_MC_D_03  chiec dieu (nho cong tam mat 1,5 m)
+  VD036_SA_A_04  duong ham xuyen nui: duong moi ngan hon bao nhieu km
+Dang MOI (ha muc tu cau bien doi he thuc VD trong giao an):
+  TH032_MC_D_01/_02  he thuc giua cac canh -> so do goc (dang khai trien /
+                     dang tich (b + c + a)(b + c - a) = k.bc)
+Helper: _huong_sang_phuong_vi, _hai_chang, _giai_goc_doi_huong, _cong_goc,
+_chon_hai_chang, _mot_le_m.
+Khong dua vao: cau chung minh dang thuc, bien doi he thuc bac ba (muc VD/VDC,
+curriculum Bai 6 khong co).
