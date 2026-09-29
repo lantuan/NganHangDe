@@ -9023,3 +9023,24 @@ CHUA LAM - cho co Lan quyet (cac cau co danh dau [VD]/[VDC]): biet tan tinh
 bieu thuc dang cap, sin - cos = k, tan + cot = k, phuong trinh bac hai theo
 sin/cos, dem so goc thoa sin = k, hop luc. Bai 5 khong co yeu cau cap do VD
 nen can them dong curriculum (vd L10_C3_B5_VD030 cung don vi voi TH030).
+
+# Version 3.47 - 2026-09-29
+
+## Bien the lay tu giao an Bai 6 (He thuc luong trong tam giac) - dot 1
+
+Nguyen tac cua co Lan: curriculum la cua Bo, chi duoc de muc do THAP hon,
+khong nang len. Bai tap dang VD thuc te -> VD036; bai 1-2 buoc cong thuc
+-> TH032..TH035.
+Bien the moi (cung Dang voi _01, khac loi dan/so lieu):
+  TH032_MC_A_03  cos A cho bang phan so, tinh canh con lai
+  TH033_MC_A_02  biet R va hai goc, tinh canh doi goc thu ba
+  TH033_SA_A_02  tam giac vuong (bo Pythagore): R = canh huyen / 2
+  TH034_TL_A_02  Heron -> S, R, h_a
+  TH035_MC_C_02  tam giac vuong tai dinh nao (a^2 = b^2 + c^2)
+  TF_B_02        b, c, cos A phan so: sin A, BC, S, R
+  TF_E_02        tam giac vuong tai B co goc 30/60: goc C, R, AB, S
+  VD036_TL_C_02  rao manh dat: canh BC, chi phi (trieu dong), dien tich
+Dang MOI (mapping ghi_chu "CLAUDE THEM ... co Lan duyet lai"):
+  TH032_MC_C_01  do dai trung tuyen tu ba canh
+  TH032_SA_C_01  do dai trung tuyen (so nguyen)
+  TH034_MC_C_01  biet S va hai canh, tim goc xen giua (nhon / tu)

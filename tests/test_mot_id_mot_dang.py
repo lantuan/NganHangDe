@@ -62,6 +62,15 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_SA_A",   # rut gon voi goc bu / tam giac biet hai goc
     "L10_C3_B5_TH031_SA_B",   # he thuc co ban + goc bu / tong binh phuong goc phu nhau
     "L10_C3_TF_A",            # alpha dac biet / sin alpha = bo ba Pythagore
+    # tu giao an Bai 6:
+    "L10_C3_B6_TH032_MC_A",   # (da co 2) + cos A cho bang phan so
+    "L10_C3_B6_TH033_MC_A",   # biet mot canh hai goc / noi tiep duong tron R, tinh canh goc thu ba
+    "L10_C3_B6_TH033_SA_A",   # R tu mot canh va goc doi / R cua tam giac vuong (bo Pythagore)
+    "L10_C3_B6_TH034_TL_A",   # Heron roi r / Heron roi R va h_a
+    "L10_C3_B6_TH035_MC_C",   # nhon-vuong-tu / vuong tai dinh nao
+    "L10_C3_TF_B",            # goc dac biet / cos A phan so
+    "L10_C3_TF_E",            # Heron S-R-r / tam giac vuong co goc 30-60
+    "L10_C3_B6_VD036_TL_C",   # canh con lai + dien tich / rao dat: chu vi, chi phi, dien tich
 }
 
 
