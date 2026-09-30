@@ -77,13 +77,16 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_VD036_SA_A",   # vat can: dam lay / duong ham-ho-nha (cosin) / ben kia song (sin)
     "L10_C3_B6_VD036_SA_B",   # dien tich manh dat: Heron / hai canh-goc xen giua / tu giac = 2 Heron
     # tu giao an Bai 5 cua co Lan (29/09/2026):
-    "L10_C3_B5_NB029_MC_A",   # mot gia tri goc dac biet / bieu thuc nhieu gia tri
+    "L10_C3_B5_NB029_MC_A",   # mot gia tri goc dac biet / bieu thuc nhieu gia tri / tong-hieu hai gia tri co can
     "L10_C3_B5_NB029_MC_E",   # dau mot gia tri / dau tich-thuong hai gia tri (goc tu)
     "L10_C3_B5_NB029_MC_G",   # dau mot gia tri -> khoang / dau mot tich -> loai goc
     "L10_C3_B5_TH031_MC_A",   # hai goc bu nhau / trong tam giac (B + C = 180 - A)
     "L10_C3_B5_TH031_SA_A",   # rut gon voi goc bu / tam giac biet hai goc
     "L10_C3_B5_TH031_SA_B",   # he thuc co ban + goc bu / tong binh phuong goc phu nhau
-    "L10_C3_TF_A",            # alpha dac biet / sin alpha = bo ba Pythagore
+    "L10_C3_TF_A",            # alpha dac biet / sin alpha = bo ba Pythagore / sin hoac cos co can thuc
+    # tu bai tap trac nghiem Bai 5 (30/09/2026):
+    "L10_C3_B5_TH031_MC_B",   # M doi xung N qua Oy: toa do bang chu / so do goc xOM
+    "L10_C3_TF_D",            # M cho bang toa do thap phan / cho bang so do goc (co hinh, dien tich MAN)
     # tu giao an Bai 6:
     "L10_C3_B6_TH032_MC_A",   # (da co 2) + cos A cho bang phan so
     "L10_C3_B6_TH033_MC_A",   # biet mot canh hai goc / noi tiep duong tron R, tinh canh goc thu ba

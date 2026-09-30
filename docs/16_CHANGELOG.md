@@ -9226,3 +9226,24 @@ _DAU_KT de khong de ten cu.
   L11_C6, L11_C8.
 - tests/test_xuat_word.py: quad khong lam dinh so; quet moi ham _MC_ khong co
   phuong an tu cham cuoi.
+
+# Version 3.57 - 2026-09-30
+
+## Bai 5 (GTLG goc 0-180): bai tap trac nghiem cua co Lan -> bien the va dang moi
+
+- data/python_bank/toan10/L10_C3.py - bien the (cung dang voi ID da co):
+  NB029_MC_A_03 (tong/hieu hai GTLG co can), TH031_MC_B_02 (xOM cho bang so do),
+  TF_A_03 (sin hoac cos co can thuc: goc phu, gia tri con lai, tan, goc bu),
+  TF_D_02 (xOM goc tu, N doi xung qua Oy, dien tich MAN, co hinh).
+- Dang moi (dong mapping moi, "CLAUDE THEM 30/09/2026 ... co Lan duyet lai"):
+  NB029_MC_H (dang thuc dung/sai cua mot goc dac biet), NB029_SA_B (biet xOM,
+  tinh bieu thuc toa do M), TH030_MC_D (sin + cos = so -> sin.cos; giao an muc
+  VD, ha xuong TH vi Bai 5 khong co VD), TH030_SA_B (cos xOM -> dien tich AOM,
+  co hinh), TH031_MC_C (tich sin, cos hai goc phu/bu), TH031_SA_C
+  (alpha + beta = 90/180, tinh bieu thuc), TH031_MC_D (dang thuc giua hai goc
+  dac biet phu/bu), TH031_MC_E (cong thuc tong quat goc phu/bu), TH031_MC_F
+  (tam giac vuong biet mot goc nhon), TF_F (tam giac biet goc tu/nhon).
+- Cau 6 (alpha tu, xet dau) va cau 10 (biet sin, tim cos) da co san:
+  NB029_MC_E_01, TH030_MC_B_01 - khong them.
+- Sua TH030_MC_A_01: so thap phan viet dau phay (0,34) theo SGK, truoc la dau cham.
+- tests/test_mot_id_mot_dang.py: them TH031_MC_B, TF_D vao danh sach cho phep.
