@@ -154,6 +154,17 @@ mức độ và đơn vị của nó. CN_QuestionSelector ghép các suất tự
 luận thường. Cả hai đơn vị phải nằm trong phạm vi bài của đề. Điểm phần Tự luận
 chia theo suất (diem_service: câu hai ý = hai suất).
 
+Mỗi câu tự luận gồm HAI ý (hai suất) - chốt 30/09/2026:
+- câu hai đơn vị: mỗi ý một suất ở mức của đơn vị đó (như trên);
+- câu một đơn vị mức VD: ý a) mức VD, ý b) mức VDC;
+- câu một đơn vị mức NB/TH (loại cũ, chuyển dần sang hai đơn vị): hai ý cùng mức.
+exam_rules.json: tu_luan.so_luong là số CÂU, so_y_moi_cau = 2, ty_le_muc_do chia
+trên số ý (mặc định VD 50%, VDC 50%: 3 câu = 3 ý VD + 3 ý VDC).
+
+Thứ tự chọn câu (cả Blueprint lẫn Selector): Đúng/Sai -> Tự luận -> Trắc
+nghiệm nhiều lựa chọn -> Trả lời ngắn; phần sau tránh đơn vị kiến thức phần
+trước đã dùng.
+
 Mã nguồn: mapping_service.cac_y_tu_luan / so_suat_tu_luan,
 question_selector_service._ghep_tu_luan_nhieu_y. Kiểm thử:
 tests/test_tu_luan_nhieu_y.py, tests/test_mapping_curriculum.py.

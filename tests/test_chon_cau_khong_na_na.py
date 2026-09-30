@@ -17,7 +17,7 @@ GOC = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(GOC))
 
 from app.services.exam_blueprint_service import _chon_curriculum_id, build_blueprint  # noqa: E402
-from app.services.question_selector_service import _xoay_vong_bien_the  # noqa: E402
+from app.services.question_selector_service import _xoay_vong_bien_the, select_questions  # noqa: E402
 from app.services.generator_service import _chon_bien_the  # noqa: E402
 
 
@@ -83,7 +83,10 @@ def test_ma_tran_co_sa_tl_muc_th_khong_bi_bo_mat():
     bp = build_blueprint(lop=10, loai_he_so="HeSo1", pham_vi_chuong="1", cau_truc_tu_hoc_sinh=ct)
     assert sum(x["tong_so_cau"] for x in bp["trac_nghiem"]) == 5
     assert [x["muc_do"] for x in bp["tra_loi_ngan"]] == ["TH"]
-    assert [x["muc_do"] for x in bp["tu_luan"]] == ["TH"]
+    # 1 cau tu luan = 2 y (2 suat TH) - co Lan 30/09/2026
+    assert [x["muc_do"] for x in bp["tu_luan"]] == ["TH", "TH"]
+    kq = select_questions(10, bp)
+    assert len([c for c in kq if c["loai_cau"] == "tu_luan"]) == 1
 
 
 def test_khong_chon_hai_dang_cung_mo_ta_o_hai_loai_cau():

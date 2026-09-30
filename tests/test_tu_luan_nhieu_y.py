@@ -40,7 +40,8 @@ def test_doc_id_nhieu_y():
     assert cac_y_tu_luan("L10_C3_B6_TH032_TL_A") is None
     assert cac_y_tu_luan("L10_C3_TF_A") is None
     assert so_suat_tu_luan("L10_C3_TH031_TH033_TL_A") == 2
-    assert so_suat_tu_luan("L10_C3_B6_TH032_TL_A") == 1
+    assert so_suat_tu_luan("L10_C3_B6_TH032_TL_A") == 2
+    assert so_suat_tu_luan("L10_C3_B6_VD036_TL_A") == 2
 
 
 def test_hai_suat_TH_thi_chon_cau_hai_y():
@@ -87,10 +88,10 @@ def test_diem_tu_luan_chia_theo_suat():
     de = [{"so_thu_tu": 1, "loai_cau": "TL", "generator_id": "L10_C3_TH031_TH032_TL_A"},
           {"so_thu_tu": 2, "loai_cau": "TL", "generator_id": "L10_C3_B6_TH032_TL_A"}]
     t = diem_service.tinh_thang_diem(de)
-    assert t["theo_phan"]["TL"]["so_cau"] == 2 and t["theo_phan"]["TL"]["so_suat"] == 3
-    assert diem_service.diem_toi_da_cua_cau_theo_id(t, "TL", de[0]["generator_id"]) == 2.0
-    assert diem_service.diem_toi_da_cua_cau_theo_id(t, "TL", de[1]["generator_id"]) == 1.0
-    assert "2 câu, 3 ý" in diem_service.mo_ta_thang_diem(t)
+    assert t["theo_phan"]["TL"]["so_cau"] == 2 and t["theo_phan"]["TL"]["so_suat"] == 4
+    assert diem_service.diem_toi_da_cua_cau_theo_id(t, "TL", de[0]["generator_id"]) == 1.5
+    assert diem_service.diem_toi_da_cua_cau_theo_id(t, "TL", de[1]["generator_id"]) == 1.5
+    assert "2 câu, 4 ý" in diem_service.mo_ta_thang_diem(t)
 
 
 def test_ham_sinh_cau_nhieu_y_chay_va_co_du_y():
@@ -105,3 +106,40 @@ def test_ham_sinh_cau_nhieu_y_chay_va_co_du_y():
                 random.seed(sd)
                 t = f(1)
                 assert t.count(r"\item") >= 2 * len(cac_y_tu_luan(gid)), (gid, t)
+
+
+def test_mac_dinh_moi_cau_tu_luan_vd_gom_y_a_vd_y_b_vdc():
+    """Hệ số 1 mặc định: 3 câu tự luận = 6 ý; mỗi câu ý a) VD, ý b) VDC."""
+    from app.services.exam_blueprint_service import build_blueprint
+    for chuong in (1, 3, 6):
+        for sd in range(5):
+            random.seed(sd)
+            bp = build_blueprint(10, "HeSo1", pham_vi_chuong=str(chuong))
+            assert sum(x["tong_so_cau"] for x in bp["tu_luan"]) == 6
+            kq = select_questions(10, bp)
+            tl = [c for c in kq if c["loai_cau"] == "tu_luan"]
+            assert len(tl) == 3, (chuong, sd, tl)
+            assert all(c.get("cac_muc_do") == ["VD", "VDC"] for c in tl), tl
+            assert sum(so_suat_tu_luan(c["generator_id"]) for c in tl) == 6
+
+
+def test_thu_tu_chon_dung_sai_tu_luan_roi_moi_mc_sa():
+    """Blueprint chia đơn vị cho TỰ LUẬN trước MC, SA: gọi hàm chọn curriculum
+    theo thứ tự tu_luan -> trac_nghiem -> tra_loi_ngan."""
+    import app.services.exam_blueprint_service as B
+    thu_tu = []
+    goc = B._chon_curriculum_id
+
+    def ghi(entries, so_luong, da_dung, dem_dung):
+        kq = goc(entries, so_luong, da_dung, dem_dung)
+        thu_tu.append(entries[0]["id"] if entries else None)
+        return kq
+    B._chon_curriculum_id = ghi
+    try:
+        random.seed(0)
+        bp = B.build_blueprint(10, "HeSo1", pham_vi_chuong="3")
+    finally:
+        B._chon_curriculum_id = goc
+    assert bp["tu_luan"] and bp["trac_nghiem"]
+    # lượt đầu tiên gọi cho tự luận (mức VD của chương 3 chỉ có VD036)
+    assert "VD036" in thu_tu[0], thu_tu

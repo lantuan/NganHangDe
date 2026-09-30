@@ -9488,3 +9488,16 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - diem_service: diem phan Tu luan chia theo SUAT (cau hai y = hai suat);
   diem_toi_da_cua_cau_theo_id dung o cham bai (exam.py, grade_photo_service).
 - Test: tests/test_tu_luan_nhieu_y.py; test_mapping_curriculum kiem ID nhieu y khop curriculum.
+
+# Version 3.76 - 2026-09-30
+
+## Thu tu chon cau TF -> TL -> MC -> SA; moi cau tu luan hai y (VD: y a VD, y b VDC)
+
+- exam_blueprint_service.build_blueprint: tach _lam_nb_th / _lam_vd_vdc, goi theo thu tu
+  tu_luan -> trac_nghiem -> tra_loi_ngan (sau Dung/Sai). Tu luan muc VD: ghep cap suat
+  VD + VDC tren cung curriculum (mot cau). question_selector_service cung thu tu do.
+- exam_rules.json: tu_luan them so_y_moi_cau = 2, ty_le VD 0,5 / VDC 0,5 (3 cau = 6 y);
+  exam_rules_service chia ty le tren so y.
+- _ghep_tu_luan_nhieu_y: sau cau nhieu don vi, cac suat con lai ghep cap thanh cau mot
+  don vi (NB/TH: hai y cung muc; VD + VDC). so_suat_tu_luan: cau mot don vi = 2.
+- Diem tu luan chia theo y: de mac dinh 3 cau x 2 y -> 0,5 diem/y, 1 diem/cau.

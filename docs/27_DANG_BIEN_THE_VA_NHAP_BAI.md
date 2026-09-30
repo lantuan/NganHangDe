@@ -176,7 +176,7 @@ Chốt 30/09/2026 (cô Lan). Ví dụ: mức TH của bài 1, ma trận có 5 MC
 1. **Đơn vị kiến thức** (`exam_blueprint_service._chon_curriculum_id`): lọc trong
    toàn bộ yêu cầu TH của bài 1. Tập "đã dùng" **chung cho MC, SA, TL**: MC đã
    lấy 014 thì SA, TL lấy đơn vị khác, trừ khi hết. Buộc phải lặp thì lấy đơn
-   vị **đang dùng ít nhất**. Thứ tự chọn: MC → SA → TL.
+   vị **đang dùng ít nhất**. Thứ tự chọn (sửa 30/09/2026): Đúng/Sai → TL → MC → SA.
 2. **Dạng** (`question_selector_service._xoay_vong_bien_the`): các câu cùng
    đơn vị lấy chữ cái khác nhau (A, B, D…); hết chữ cái thì lấy dạng dùng ít
    nhất (chỉ có A, B mà cần 3 câu → 2 A + 1 B, không bao giờ 3 A). Đơn vị
@@ -241,3 +241,6 @@ nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câ
    TH031 + TH033 (sin của tổng -> bán kính ngoại tiếp; tam giác vuông -> cạnh),
    TH031 + TH034 (sin của tổng -> diện tích). Các câu tự luận khác sẽ chuyển dần.
 
+6. Mỗi câu tự luận gồm hai ý (hai suất trong ma trận). Mức VD mặc định ý a) VD,
+   ý b) VDC. Ma trận mặc định: 3 câu tự luận = 6 ý (3 VD + 3 VDC). Thứ tự chọn
+   câu: Đúng/Sai → Tự luận → Trắc nghiệm → Trả lời ngắn.

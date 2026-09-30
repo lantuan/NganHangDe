@@ -37,10 +37,12 @@ def cac_y_tu_luan(generator_id: str | None) -> list[tuple[str, str]] | None:
 
 
 def so_suat_tu_luan(generator_id: str | None) -> int:
-    """So suat (y) mot cau tu luan chiem trong ma tran / thang diem: cau nhieu
-    don vi = so don vi, cau thuong = 1."""
+    """So suat (y) mot cau tu luan chiem trong ma tran / thang diem
+    (co Lan 30/09/2026 - moi cau tu luan gom HAI y):
+    - cau nhieu don vi kien thuc: so don vi trong ID (moi y mot suat);
+    - cau mot don vi: 2 (muc VD: y a VD + y b VDC; muc NB/TH: hai y cung muc)."""
     y = cac_y_tu_luan(generator_id)
-    return len(y) if y else 1
+    return len(y) if y else 2
 
 
 def load_mapping(lop: int, chuong_so: int) -> list[dict]:

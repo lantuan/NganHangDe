@@ -681,13 +681,11 @@ def build_blueprint(
     # ---- BƯỚC 4b — mức NB, TH của MC, SA, TL: chia về BÀI theo TỈ LỆ SỐ TIẾT ----
     # SỬA 30/09/2026: trước đây chỉ làm cho trắc nghiệm, nên ma trận ghi câu
     # trả lời ngắn / tự luận ở mức NB, TH (vd 1 SA + 1 TL mức TH) bị BỎ MẤT,
-    # đề ra thiếu câu mà không báo. Thứ tự MC -> SA -> TL để SA, TL tránh
-    # các đơn vị kiến thức MC đã lấy.
-    for muc_do, loai_nbth in [(m, l) for m in ("NB", "TH")
-                              for l in ("trac_nghiem", "tra_loi_ngan", "tu_luan")]:
+    # đề ra thiếu câu mà không báo. Thứ tự: xem vòng lặp cuối hàm (TL -> MC -> SA).
+    def _lam_nb_th(muc_do: str, loai_nbth: str) -> None:
         so_luong = phan_bo_muc_do.get(loai_nbth, {}).get(muc_do, 0)
         if so_luong <= 0 and loai_nbth != "trac_nghiem":
-            continue
+            return
         # KHÔNG trừ phần Đúng/Sai ra khỏi ngân sách NB/TH của trắc nghiệm.
         # Cô Lan chốt 28/09/2026: "cứ làm theo đúng mức độ là được, vì mức độ
         # ảnh hưởng điểm số - mức độ khác đi sẽ làm điểm số không phản ánh
@@ -731,6 +729,7 @@ def build_blueprint(
                     "tong_so_cau": 1,
                 })
 
+
     # ---- trac_nghiem / tra_loi_ngan / tu_luan mức VD (+VDC dùng chung
     # curriculum_id mức VD — Ngoại lệ 2, doc 04) ----
     gioi_han_theo_loai = {
@@ -743,12 +742,19 @@ def build_blueprint(
     # đúng số câu từng mức độ ma trận ghi. Trước đây mỗi câu Đúng/Sai ăn
     # 1 suất VD + 1 suất VDC của phần đứng trước, làm đề chương 3 mất cả
     # câu trắc nghiệm mức VD lẫn câu trả lời ngắn mức VDC.
-    for loai_cau, cap in gioi_han_theo_loai.items():
+    def _lam_vd_vdc(loai_cau: str, cap) -> None:
         so_vd = phan_bo_muc_do.get(loai_cau, {}).get("VD", 0)
         so_vdc = phan_bo_muc_do.get(loai_cau, {}).get("VDC", 0)
 
         if so_vd <= 0 and so_vdc <= 0:
-            continue
+            return
+        # Tự luận mức VD (cô Lan 30/09/2026): mặc định ý a) mức VD, ý b) mức VDC
+        # trên CÙNG một câu. Ghép từng cặp suất VD + VDC thành một câu: chia
+        # câu về bài như câu VD, rồi gắn thêm suất VDC vào đúng curriculum đó.
+        doi_con = [0]
+        if loai_cau == "tu_luan":
+            doi_con[0] = min(so_vd, so_vdc)
+            so_vdc -= doi_con[0]
 
         # Rải trên BÀI (đơn vị kiến thức) chứ không phải chương: mỗi bài
         # tối đa 1 câu VDC, câu VD ưu tiên bài chưa có VDC.
@@ -807,15 +813,26 @@ def build_blueprint(
                 vdc_con -= so_vdc_id
                 so_vd_id = so_luong_id - so_vdc_id
                 vd_con -= so_vd_id
+                them = min(so_vd_id, doi_con[0])     # suất VDC (ý b) của câu tự luận
+                doi_con[0] -= them
                 blueprint[loai_cau].append({
                     "curriculum_id": curriculum_id,
                     "chuong_so": chuong_so,
                     "bai_so": cb[1] if cb else None,
                     "muc_do": "VD",
-                    "tong_so_cau": so_luong_id,
+                    "tong_so_cau": so_luong_id + them,
                     "so_cau_VD": so_vd_id,
-                    "so_cau_VDC": so_vdc_id,
+                    "so_cau_VDC": so_vdc_id + them,
                 })
+
+
+    # THỨ TỰ CHỌN (cô Lan 30/09/2026): Đúng/Sai trước tiên (bước 4a ở trên), rồi
+    # TỰ LUẬN, rồi mới đến trắc nghiệm nhiều lựa chọn và trả lời ngắn - câu tự
+    # luận lấy đơn vị kiến thức trước, MC/SA tránh các đơn vị đó.
+    for loai in ("tu_luan", "trac_nghiem", "tra_loi_ngan"):
+        for md in ("NB", "TH"):
+            _lam_nb_th(md, loai)
+        _lam_vd_vdc(loai, gioi_han_theo_loai[loai])
 
     return {
         "pham_vi_bai": pham_vi_bai,

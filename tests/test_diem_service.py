@@ -37,7 +37,9 @@ def test_du_4_phan():
     assert t["theo_phan"]["TF"]["diem_moi_cau"] == 1.0
     assert t["theo_phan"]["TF"]["diem_moi_y"] == 0.25
     assert t["theo_phan"]["SA"]["diem_moi_cau"] == 0.67
-    assert t["theo_phan"]["TL"]["diem_moi_cau"] == 1.0
+    # tu luan chia theo SUAT (y): 3 cau x 2 y -> 0,5 diem mot y, 1 diem mot cau
+    assert t["theo_phan"]["TL"]["diem_moi_cau"] == 0.5
+    assert ds.diem_toi_da_cua_cau_theo_id(t, "TL", "L10_C1_B2_VD020_TL_A") == 1.0
     print("OK du 4 phan: tong 10, tu dong 7")
 
 

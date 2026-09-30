@@ -103,7 +103,11 @@ def resolve_cau_truc_de(
                 da_dung_bang = True
             else:
                 da_dung_yeu_cau = True
-            phan_bo_muc_do[loai_cau] = _chia_theo_ty_le(so_luong, ty_le)
+            # Tự luận (cô Lan 30/09/2026): so_luong là số CÂU, mỗi câu gồm
+            # so_y_moi_cau ý (mặc định 2: ý a mức VD, ý b mức VDC). Ma trận
+            # tính theo TỪNG Ý (suất) - phan_bo_muc_do["tu_luan"] đếm suất.
+            so_y = mac_dinh[loai_cau].get("so_y_moi_cau", 1) if loai_cau == "tu_luan" else 1
+            phan_bo_muc_do[loai_cau] = _chia_theo_ty_le(so_luong * so_y, ty_le)
 
     if da_dung_bang and da_dung_yeu_cau:
         nguon_cau_truc = "mixed"

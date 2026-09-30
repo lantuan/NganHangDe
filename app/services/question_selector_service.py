@@ -173,12 +173,13 @@ def _ghep_tu_luan_nhieu_y(items: list[dict], mapping_chuong, pham_vi_bai,
     Ghép các suất tự luận của Blueprint (cùng chương, đúng mức độ) vào các câu
     nhiều ý có trong Mapping; ưu tiên câu chưa dùng, có đơn vị kiến thức đang
     được dùng ít nhất trong đề (tránh trùng với câu MC / SA). Hai đơn vị của câu
-    phải nằm trong phạm vi bài của đề. Trả về (các mục tu_luan còn lại, các câu
-    đã chọn).
+    phải nằm trong phạm vi bài của đề. Suất còn lại ghép cặp thành câu một đơn
+    vị. Trả về (các mục tu_luan tính theo CÂU - mỗi mục một câu, các câu nhiều
+    ý đã chọn).
     """
     suat = _tach_suat_tu_luan(items)
     if not suat:
-        return items, []
+        return [], []
     bai_trong_de = set(pham_vi_bai) if pham_vi_bai else None
     da_lay = [False] * len(suat)
     chon = []
@@ -222,23 +223,37 @@ def _ghep_tu_luan_nhieu_y(items: list[dict], mapping_chuong, pham_vi_bai,
                 "loai": r.get("Loai"),
                 "dang": r.get("Dang"),
             })
-    if not chon:
-        return items, []
-    # dựng lại các mục tu_luan còn lại từ các suất chưa lấy
-    con = {}
-    for i, s_ in enumerate(suat):
-        if da_lay[i]:
-            continue
-        con.setdefault(id(s_["item"]), (s_["item"], []))[1].append(s_["muc_do"])
-    con_lai = []
-    for it, cac_muc in con.values():
-        moi = dict(it)
-        moi["tong_so_cau"] = len(cac_muc)
-        if "so_cau_VDC" in it:
-            moi["so_cau_VD"] = cac_muc.count("VD")
-            moi["so_cau_VDC"] = cac_muc.count("VDC")
-        con_lai.append(moi)
-    return con_lai, chon
+    # Các suất còn lại: MỖI CÂU tự luận một đơn vị cũng gồm HAI ý (hai suất):
+    # mức NB/TH - hai ý cùng mức; mức VD - ý a) VD + ý b) VDC (cô Lan
+    # 30/09/2026). Ghép cặp suất (ưu tiên cùng curriculum_id), mỗi cặp là một
+    # câu; suất lẻ không ghép được thành một câu riêng.
+    thu_tu = {"NB": 0, "TH": 1, "VD": 2, "VDC": 3}
+    con = sorted((i for i in range(len(suat)) if not da_lay[i]),
+                 key=lambda i: thu_tu.get(suat[i]["muc_do"], 9))
+    cau_con_lai = []
+    while con:
+        i = con.pop(0)
+        s_ = suat[i]
+        md = s_["muc_do"]
+        can = {"VD": "VDC", "VDC": "VD"}.get(md, md)
+        ung = [j for j in con if suat[j]["chuong_so"] == s_["chuong_so"] and suat[j]["muc_do"] == can]
+        ung.sort(key=lambda j: suat[j]["curriculum_id"] != s_["curriculum_id"])
+        cid = s_["curriculum_id"]
+        if ung:
+            j = ung[0]
+            con.remove(j)
+            cac_muc = [md, can] if thu_tu.get(md, 9) <= thu_tu.get(can, 9) else [can, md]
+            if suat[j]["curriculum_id"] != cid:
+                dem_don_vi[_don_vi(suat[j]["curriculum_id"])] -= 1
+                dem_don_vi[_don_vi(cid)] += 1
+        else:
+            cac_muc = [md]
+        moi = {k: v for k, v in s_["item"].items() if k not in ("so_cau_VD", "so_cau_VDC")}
+        moi.update({"curriculum_id": cid, "tong_so_cau": 1,
+                    "muc_do": "VD" if md in ("VD", "VDC") else md,
+                    "cac_muc_do": cac_muc, "so_suat": len(cac_muc)})
+        cau_con_lai.append(moi)
+    return cau_con_lai, chon
 
 
 def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None,
@@ -334,7 +349,8 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
     # Tự luận: ghép trước các suất vào câu nhiều ý (Ngoại lệ 3, doc 04). Làm SAU
     # khi MC, SA đã chọn thì mới biết đơn vị nào đã dùng - nên chỉ tách ra ở đây,
     # ghép ngay trước lượt tu_luan bên dưới.
-    for loai_cau in ("trac_nghiem", "tra_loi_ngan", "tu_luan"):
+    # THỨ TỰ (cô Lan 30/09/2026): Đúng/Sai (ở trên) -> Tự luận -> MC -> SA.
+    for loai_cau in ("tu_luan", "trac_nghiem", "tra_loi_ngan"):
         cac_muc = blueprint.get(loai_cau, [])
         if loai_cau == "tu_luan":
             cac_muc, cau_nhieu_y = _ghep_tu_luan_nhieu_y(
@@ -372,8 +388,8 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                 raise SelectorError(ghi_chu)
 
             chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung[loai_cau], mo_ta_da_dung)
-            for c in chosen:
-                ket_qua.append({
+            for k, c in enumerate(chosen):
+                muc = {
                     "generator_id": c["id"],
                     "chuong_so": chuong_so,
                     "curriculum_id": curriculum_id,
@@ -381,7 +397,10 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                     "muc_do": item.get("muc_do"),
                     "loai": c.get("Loai"),
                     "dang": c.get("Dang"),
-                })
+                }
+                if "so_suat" in item:
+                    muc.update({"cac_muc_do": item["cac_muc_do"], "so_suat": item["so_suat"]})
+                ket_qua.append(muc)
 
     # Sap xep lai theo dung thu tu Phan I/II/III/IV cua Phieu TLTN chuan
     # (Bo GD&DT) va mau de cua giao vien: MC -> TF -> SA -> TL. sorted() on
