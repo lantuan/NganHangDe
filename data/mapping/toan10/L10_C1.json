@@ -241,7 +241,14 @@
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tập hợp cho bởi tính chất đặc trưng: đếm số phần tử / tính tổng các phần tử",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, ban tra loi ngan cua NB017_MC_G (theo bai Sach bai tap, phuong trinh tich chi nhan tu bac nhat va x^2 - k de giu muc NB); co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, ban tra loi ngan cua NB017_MC_G (theo bai Sach bai tap, ha ve NB: phuong trinh tich 2-3 nhan tu bac nhat); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_NB017_TL_A",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Tự luận",
+    "Dang": "Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (tự luận)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, ban tu luan cua NB017_MC_G (phuong trinh tich 2-3 nhan tu bac nhat tren hai tap so, tap tren N cho boi hai dieu kien); co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_VD021_SA_B",

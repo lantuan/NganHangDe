@@ -9391,3 +9391,13 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   trung (cung phuong trinh tren N/Z/Q/R, cung dieu kien voi dau < / <= khac nhau).
 - NB017_SA_A (dang moi, Mapping co ghi chu): _01 dem so phan tu, _02 tinh tong cac
   phan tu (dap so thap phan huu han, toi da 4 ki tu).
+
+# Version 3.68 - 2026-09-30
+
+## NB017 liet ke: ha ve dung muc NB, them tu luan (theo co Lan)
+
+- _pt_tich_bo: phuong trinh tich chi 2 hoac 3 nhan tu, moi nhan tu BAC NHAT (bo x^2 - k,
+  x^2 + k). NB017_MC_G_02 khong dua R vao phuong an (nghiem huu ti nen Q va R la mot tap),
+  phuong an thu tu la phuong trinh doi dau mot nhan tu.
+- NB017_TL_A_01 (dang moi, Mapping co ghi chu): liet ke ba tap - a), b) cung phuong trinh
+  tich tren hai tap so khac nhau, c) tap tren N cho boi hai dieu kien.
