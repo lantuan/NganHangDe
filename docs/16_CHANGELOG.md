@@ -9325,3 +9325,17 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   so) -> mot de co the co hai cau giong nhau. question_selector_service: hai dang
   cung don vi, cung mo ta "Dang" thi khong lay ca hai neu con dang khac.
 - docs/27 muc 7.5; test moi trong tests/test_chon_cau_khong_na_na.py.
+
+# Version 3.63 - 2026-09-30
+
+## VD020_TL_A_01: loi dan tu chon ngau nhien nhieu linh vuc (co Lan)
+
+- L10_C1_B2_VD020_TL_A_01 viet lai: _BOI_CANH_HAI_TAP gom (1) so thich doc sach cua
+  mot lop THPT chuyen Hung Vuong (13 lop 10C1A ... 10C9, co dinh 35 hoc sinh;
+  truyen tranh/tieu thuyet, khoa hoc vien tuong/trinh tham, lich su/doanh nhan,
+  tho/truyen ngan), (2) phu nu tren pho di bo Gia Lai thich duoc tang hoa (hong/cam
+  chuong, tuoi/kho, lan/huong duong), (3) quan li tai chinh ca nhan (tiet kiem/co
+  phieu, tai khoan ngan hang/chung chi quy, trai phieu/co phieu).
+- So lieu hop li theo boi canh (_so_lieu_hai_tap): ti le moi tap, ti le phan giao
+  (vd nguoi dau tu chung chi quy phan lon da co tai khoan ngan hang), it nhat 2 nguoi
+  khong thuoc tap nao. So viet trong $...$.

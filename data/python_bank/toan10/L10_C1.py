@@ -7602,58 +7602,95 @@ def L10_C1_B1_VD014_MC_B_01(socau, dang=1):
 
     return cauTN
 
+# (loi mo dau co {N}, don vi, [(tap A, tap B)], khoang ti le n(A), khoang ti le n(B), N co dinh hay chon)
+_BOI_CANH_HAI_TAP = [
+    {"mo": r"Lớp %s của trường THPT chuyên Hùng Vương có $%d$ học sinh. Trong một cuộc khảo sát về sở thích đọc sách "
+           r"của lớp,",
+     "dv": "học sinh", "tap": "các học sinh", "lop": True, "N": [35], "giao": (0.2, 0.7),
+     "cap": [("thích đọc truyện tranh", "thích đọc tiểu thuyết", "thể loại"),
+             ("thích đọc truyện khoa học viễn tưởng", "thích đọc truyện trinh thám", "thể loại"),
+             ("thích đọc sách về các câu chuyện lịch sử", "thích đọc sách về các doanh nhân", "loại sách"),
+             ("thích đọc thơ", "thích đọc truyện ngắn", "thể loại")],
+     "tA": (0.35, 0.65), "tB": (0.3, 0.6)},
+    {"mo": r"Trong một cuộc khảo sát $%d$ người phụ nữ bất kì trên phố đi bộ ở Gia Lai về loại hoa thích được tặng,",
+     "dv": "người", "tap": "những người", "lop": False, "N": [80, 100, 120, 150, 200], "giao": (0.1, 0.5),
+     "cap": [("thích được tặng hoa hồng", "thích được tặng hoa cẩm chướng", "loại hoa"),
+             ("thích được tặng hoa tươi", "thích được tặng hoa khô", "loại hoa"),
+             ("thích được tặng hoa lan", "thích được tặng hoa hướng dương", "loại hoa")],
+     "tA": (0.45, 0.75), "tB": (0.25, 0.5)},
+    {"mo": r"Trong một cuộc khảo sát về mức độ am hiểu và quản lí tài chính cá nhân của $%d$ người đi làm,",
+     "dv": "người", "tap": "những người", "lop": False, "N": [100, 120, 150, 200, 250], "giao": (0.6, 0.95),
+     "cap": [("có tài khoản tiết kiệm ở ngân hàng", "có đầu tư cổ phiếu", "hình thức"),
+             ("có tài khoản ngân hàng", "có đầu tư chứng chỉ quỹ", "hình thức"),
+             ("có đầu tư trái phiếu", "có đầu tư cổ phiếu", "hình thức")],
+     "tA": (0.5, 0.8), "tB": (0.2, 0.45)},
+]
+_LOP_CHV = ["10C1A", "10C1B", "10C2A", "10C2B", "10C3A", "10C3B", "10C4", "10C5A", "10C5B", "10C6", "10C7",
+            "10C8", "10C9"]
+
+
+def _so_lieu_hai_tap(N, tA, tB, tg):
+    """n(A), n(B), n(A giao B) hop li: moi tap nam trong khoang ti le cua boi canh,
+    phan giao chiem ti le tg cua tap nho hon (vd nguoi dau tu chung chi quy phan lon
+    da co tai khoan ngan hang), it nhat 2 nguoi khong thuoc tap nao."""
+    while True:
+        nA = random.randint(max(2, int(N * tA[0])), max(3, int(N * tA[1])))
+        nB = random.randint(max(2, int(N * tB[0])), max(3, int(N * tB[1])))
+        nho = min(nA, nB)
+        lo = max(1, nA + nB - (N - 2), int(nho * tg[0]))
+        hi = min(nho - 1, int(nho * tg[1]))
+        if lo <= hi:
+            return nA, nB, random.randint(lo, hi)
+
+
 def L10_C1_B2_VD020_TL_A_01(socau, dong=1):
-    """
-    Sinh bài toán tự luận về tập hợp với điều kiện:
-    Số người không chọn sản phẩm nào >= 10.
+    r"""Tự luận - bài toán thực tế về hai tập hợp: số người thuộc ít nhất một
+    tập, số người không thuộc tập nào ($n(A \cup B) = n(A) + n(B) - n(A \cap B)$).
+
+    SUA 30/09/2026 theo co Lan: LOI DAN TU CHON NGAU NHIEN trong nhieu linh vuc
+    (so thich doc sach cua mot lop THPT chuyen Hung Vuong - 35 hoc sinh; hoa
+    thich duoc tang cua phu nu tren pho di bo Gia Lai; quan li tai chinh ca
+    nhan) de tranh nham chan. So lieu rang buoc hop li theo tung boi canh.
     """
     gt = []
-    dem = 0
-    while dem < socau:
-        tong = 100
-        # Để đảm bảo (tong - n_AUB) >= 10, thì n_AUB <= 90
-        # n_AUB = n_A + n_B - n_AB <= 90
-        n_A = random.randint(50, 70)
-        n_B = random.randint(50, 70)
-        # Đảm bảo n_AB đủ lớn để n_AUB không vượt quá 90
-        # n_AB >= n_A + n_B - 90
-        min_n_AB = max(20, n_A + n_B - 90)
-        n_AB = random.randint(min_n_AB, min(n_A, n_B) - 5)
-
-        v = [tong, n_A, n_B, n_AB]
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        bc = random.choice(_BOI_CANH_HAI_TAP)
+        A, B, loai = random.choice(bc["cap"])
+        N = random.choice(bc["N"])
+        nA, nB, nAB = _so_lieu_hai_tap(N, bc["tA"], bc["tB"], bc["giao"])
+        lop = random.choice(_LOP_CHV) if bc["lop"] else None
+        v = (A, B, N, nA, nB, nAB, lop)
         if v not in gt:
-            gt.append(v)
-            dem += 1
-
-    cauTL = ''
-    for v in gt:
-        tong, n_A, n_B, n_AB = v
-
-        n_AUB = n_A + n_B - n_AB
-        n_none = tong - n_AUB
-
-        debai = (
-            f"Tại một sự kiện có {tong} người tham gia khảo sát về hai sản phẩm A và B. "
-            f"Biết có {n_A} người chọn sản phẩm A, {n_B} người chọn sản phẩm B và {n_AB} người chọn cả hai sản phẩm. "
-            f"Tính:"
-        )
-
+            gt.append((bc, A, B, loai, N, nA, nB, nAB, lop))
+    cauTL = ""
+    for bc, A, B, loai, N, nA, nB, nAB, lop in gt:
+        dv = bc["dv"]
+        nAuB = nA + nB - nAB
+        khong = N - nAuB
+        mo = bc["mo"] % ((lop, N) if bc["lop"] else (N,))
+        debai = (mo + r" có $%d$ %s %s, $%d$ %s %s và $%d$ %s %s cả hai. Hỏi:"
+                 % (nA, dv, A, nB, dv, B, nAB, dv, _dong_tu(A, B)))
         ds_abcd = [
-            (
-                "Số người đã chọn ít nhất một sản phẩm?",
-                n_AUB,
-                f"Theo nguyên lý bù trừ, số người chọn ít nhất một sản phẩm là: {n_A} + {n_B} - {n_AB} = {n_AUB} (người)."
-            ),
-            (
-                "Số người không chọn sản phẩm nào?",
-                n_none,
-                f"Số người không chọn sản phẩm nào là: {tong} - {n_AUB} = {n_none} (người)."
-            )
+            (r"Có bao nhiêu %s %s ít nhất một trong hai %s trên?" % (dv, _dong_tu(A, B), loai), nAuB,
+             r"Gọi $A$ là tập hợp %s %s, $B$ là tập hợp %s %s. Khi đó $n(A) = %d$, $n(B) = %d$, "
+             r"$n(A \cap B) = %d$.\\ Số %s %s ít nhất một trong hai %s là $n(A \cup B) = n(A) + n(B) - n(A \cap B)"
+             r" = %d + %d - %d = %d$." % (bc["tap"], A, bc["tap"], B, nA, nB, nAB, dv, _dong_tu(A, B), loai, nA, nB, nAB, nAuB)),
+            (r"Có bao nhiêu %s không %s %s nào trong hai %s trên?" % (dv, _dong_tu(A, B), loai, loai), khong,
+             r"Số %s không %s %s nào là $%d - n(A \cup B) = %d - %d = %d$." % (dv, _dong_tu(A, B), loai, N, N, nAuB, khong)),
         ]
-
         cauTL += TL_answer_const(debai, ds_abcd, 0, 0, dong)
-
     return cauTL
+
+
+def _dong_tu(A, B):
+    """Động từ chung của hai tập: 'thích đọc', 'thích được tặng', 'có'."""
+    for dt in ("thích đọc", "thích được tặng", "có"):
+        if A.startswith(dt) and B.startswith(dt):
+            return dt
+    return "thuộc"
+
 
 
 def L10_C1_B2_TH019_TL_A_01(socau, dong=1):
