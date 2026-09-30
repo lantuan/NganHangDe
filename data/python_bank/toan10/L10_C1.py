@@ -8442,7 +8442,8 @@ def _tap_dac_trung(loai):
                 % (k, can, "; ".join(map(str, dung))))
         return de, dung, sai, giai
     # Phương trình tích trên N, Z, Q, R (giáo án ghi mức B - thông hiểu) KHÔNG
-    # đưa vào đây vì NB017 chỉ là mức nhận biết.
+    # đưa vào đây vì NB017 chỉ là mức nhận biết. Bản HẠ MỨC (chỉ nhân tử bậc nhất
+    # và x^2 - k, x^2 + k) ở _tap_dac_trung_4 bên dưới (30/09/2026, chờ cô Lan duyệt).
     raise ValueError(loai)
 
 
@@ -8458,7 +8459,7 @@ def L10_C1_B2_NB017_MC_G_01(socau, dang=1):
     cauTN = ""
     so = 0
     while so < socau:
-        de, dung, sai, giai = _tap_dac_trung(random.randint(0, 3))
+        de, dung, sai, giai = _chon_tap_dac_trung()   # loai 0-3 cu + phuong trinh tich don gian, hai dieu kien tren N
         dap = "$%s$" % _tap(dung)
         ung = []
         for s_ in sai:
@@ -10160,3 +10161,212 @@ def L10_C1_B2_VD020_MC_A_04(socau, dang=1):
     CLAUDE THEM 30/09/2026 - bien the 04 cua VD020_MC_A. Co Lan duyet lai.
     """
     return _cau_hai_tap(socau, dang, ["ca_hai"], "mc", du_het_khi_ca_hai=0.5)
+
+
+# =====================================================================
+# LIỆT KÊ <-> TÍNH CHẤT ĐẶC TRƯNG (NB017) - bổ sung 30/09/2026 (cô Lan)
+# ---------------------------------------------------------------------
+# Theo bài Sách bài tập: A = {x ∈ Q | (2x + 1)(x^2 + x - 1)(2x^2 - 3x + 1) = 0},
+# B = {x ∈ N | x^2 > 2 và x < 4}. NB017 là mức NHẬN BIẾT nên phương trình tích
+# chỉ gồm nhân tử bậc nhất và nhân tử x^2 - k / x^2 + k (nghiệm đọc ngay được);
+# cái cần nhận biết là tập số N, Z, Q, R lọc nghiệm nào.
+# Ba cách hỏi của cùng một dạng:
+#   NB017_MC_G_01  cho tính chất đặc trưng, chọn cách liệt kê đúng
+#   NB017_MC_G_02  cho tập liệt kê, chọn cách viết bằng tính chất đặc trưng đúng
+#   NB017_SA_A_01  cho tính chất đặc trưng, hỏi tập có bao nhiêu phần tử
+#   NB017_SA_A_02  cho tính chất đặc trưng, hỏi tổng các phần tử
+# =====================================================================
+
+from sympy import Integer, nsimplify
+
+_TAP_SO = [(r"\mathbb{N}", "tự nhiên"), (r"\mathbb{Z}", "nguyên"), (r"\mathbb{Q}", "hữu tỉ"), (r"\mathbb{R}", "thực")]
+
+
+def _nhan_tu_bac_nhat(r):
+    """(px - q) với nghiệm r = q/p, viết gọn: x - 2, x + 3, 2x - 1, 3x + 2."""
+    r = Rational(r)
+    p, q = r.q, r.p
+    he = "" if p == 1 else "%d" % p
+    if q == 0:
+        return r"%sx" % he
+    return r"\left(%sx %s %d\right)" % (he, "-" if q > 0 else "+", abs(q))
+
+
+def _pt_tich_bo():
+    """Phương trình tích và nghiệm trên từng tập số N, Z, Q, R (bốn tập nghiệm khác nhau)."""
+    r1 = random.randint(1, 4)
+    r2 = -random.randint(1, 4)
+    p = random.choice([2, 3])
+    q = random.choice([v for v in (-2, -1, 1, 2) if math.gcd(abs(v), p) == 1])
+    r3 = Rational(q, p)
+    k = random.choice([2, 3, 5, 6, 7])
+    nt = [(_nhan_tu_bac_nhat(r1), [Integer(r1)]), (_nhan_tu_bac_nhat(r2), [Integer(r2)]),
+          (_nhan_tu_bac_nhat(r3), [r3]), (r"\left(x^{2} - %d\right)" % k, [-sqrt(k), sqrt(k)])]
+    if random.random() < 0.4:
+        nt.append((r"\left(x^{2} + %d\right)" % random.choice([1, 2, 4]), []))
+    random.shuffle(nt)
+    pt = "".join(t for t, _ in nt) + " = 0"
+    nghiem = [v for _, ds in nt for v in ds]
+    theo_tap = {
+        r"\mathbb{N}": [v for v in nghiem if v.is_Integer and v >= 0],
+        r"\mathbb{Z}": [v for v in nghiem if v.is_Integer],
+        r"\mathbb{Q}": [v for v in nghiem if v.is_Rational],
+        r"\mathbb{R}": list(nghiem),
+    }
+    giai_nt = "; ".join(r"$%s = 0 \Leftrightarrow %s$" % (t.replace(r"\left(", "").replace(r"\right)", ""),
+                                                        (r"x = %s" % r" \text{ hoặc } x = ".join(_tex_gt(v) for v in ds))
+                                                        if ds else r"\text{vô nghiệm}")
+                        for t, ds in nt)
+    return pt, theo_tap, giai_nt
+
+
+def _hai_dieu_kien_bo():
+    """Tập trên N cho bởi hai điều kiện (x^2 > a và x < b ...) cùng vài cách viết gần giống."""
+    a_ = random.randint(1, 10)
+    b_ = random.randint(math.isqrt(a_) + 2, math.isqrt(a_) + 5)
+    mau = [(r"x^{2} > %d \text{ và } x < %d" % (a_, b_), lambda t: t * t > a_ and t < b_),
+           (r"x^{2} \ge %d \text{ và } x < %d" % (a_, b_), lambda t: t * t >= a_ and t < b_),
+           (r"x^{2} > %d \text{ và } x \le %d" % (a_, b_), lambda t: t * t > a_ and t <= b_),
+           (r"x^{2} \ge %d \text{ và } x \le %d" % (a_, b_), lambda t: t * t >= a_ and t <= b_),
+           (r"x^{2} < %d \text{ và } x < %d" % (a_, b_), lambda t: t * t < a_ and t < b_)]
+    return [(r"\left\{x \in \mathbb{N} \mid %s\right\}" % m, [t for t in range(0, 30) if f(t)]) for m, f in mau]
+
+
+def _tap_dac_trung_4(tap):
+    pt, theo_tap, giai_nt = _pt_tich_bo()
+    dung = theo_tap[tap]
+    sai = [theo_tap[t] for t in theo_tap if t != tap]
+    ten = dict(_TAP_SO)[tap]
+    de = r"\left\{x \in %s \mid %s\right\}" % (tap, pt)
+    giai = (r"Giải phương trình: %s. Chỉ giữ các nghiệm là số %s: $%s$."
+            % (giai_nt, ten, "; ".join(_tex_gt(v) for v in sorted(dung, key=float)) if dung else r"\text{không có}"))
+    return de, dung, sai, giai
+
+
+def _chon_tap_dac_trung():
+    """Chọn ngẫu nhiên một tập cho bởi tính chất đặc trưng (các loại cũ 0-3 và loại mới)."""
+    loai = random.randint(0, 5)
+    if loai <= 3:
+        return _tap_dac_trung(loai)
+    if loai == 4:
+        return _tap_dac_trung_4(random.choice([r"\mathbb{N}", r"\mathbb{Z}", r"\mathbb{Q}", r"\mathbb{R}"]))
+    bo = _hai_dieu_kien_bo()
+    i = random.randrange(len(bo))
+    de, dung = bo[i]
+    sai = [s for j, (_, s) in enumerate(bo) if j != i]
+    dk = de.split(r"\mid ")[1].replace(r"\right\}", "")
+    return de, dung, sai, r"Các số tự nhiên $x$ thoả mãn đồng thời $%s$ là $%s$." % (
+        dk.replace(r" \text{ và } ", r"$ và $"), "; ".join(map(str, dung)) if dung else r"\text{không có}")
+
+
+def L10_C1_B2_NB017_MC_G_02(socau, dang=1):
+    r"""Hỏi NGƯỢC của _01: cho tập hợp dạng LIỆT KÊ, chọn cách viết bằng TÍNH CHẤT
+    ĐẶC TRƯNG đúng (các phương án là tập cho bằng tính chất: cùng phương trình trên
+    N, Z, Q, R; hoặc cùng điều kiện với dấu < / ≤ khác nhau).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_MC_G, theo bai Sach bai tap
+    (A = {x thuoc Q | (2x + 1)(...)(...) = 0}, B = {x thuoc N | x^2 > 2 va x < 4}).
+    Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        kieu = random.randrange(3)
+        if kieu == 0:
+            pt, theo_tap, giai_nt = _pt_tich_bo()
+            bo = [(r"\left\{x \in %s \mid %s\right\}" % (t, pt), theo_tap[t]) for t in theo_tap]
+            ly = r"Giải phương trình: %s." % giai_nt
+        elif kieu == 1:
+            bo = _hai_dieu_kien_bo()
+            ly = r"Lần lượt tìm các số tự nhiên thoả mãn từng điều kiện."
+        else:
+            a_ = random.randint(-6, 0)
+            b_ = a_ + random.randint(3, 6)
+            tap = random.choice([r"\mathbb{Z}", r"\mathbb{Z}", r"\mathbb{N}"])
+            bo = []
+            for tr in (True, False):
+                for ph in (True, False):
+                    lo = a_ if tr else a_ + 1
+                    hi = b_ if ph else b_ - 1
+                    ds = [t for t in range(lo, hi + 1) if tap != r"\mathbb{N}" or t >= 0]
+                    bo.append((r"\left\{x \in %s \mid %d %s x %s %d\right\}" % (tap, a_, r"\le" if tr else "<",
+                                                                                r"\le" if ph else "<", b_), ds))
+            ly = r"Viết ra các số %s trong từng khoảng rồi so sánh." % ("tự nhiên" if tap == r"\mathbb{N}" else "nguyên")
+        # chi giu cac tap doi mot khac nhau
+        rieng = []
+        for de, ds in bo:
+            if all(set(map(str, ds)) != set(map(str, d2)) for _, d2 in rieng):
+                rieng.append((de, ds))
+        if len(rieng) < 4 or not all(rieng[i][1] for i in range(len(rieng))):
+            continue
+        random.shuffle(rieng)
+        de0, ds0 = rieng[0]
+        so += 1
+        debai = r"Tập hợp $A = %s$ được viết dưới dạng chỉ ra tính chất đặc trưng của các phần tử là" % _tap(ds0)
+        giai = (ly + "\\\\\n" + "\\\\\n".join(r"$%s = %s$" % (d_, _tap(s_)) for d_, s_ in rieng[:4]) + ".\\\\\n" +
+                r"Vậy $A = %s$." % de0)
+        cau += MC_SA_answer_text(debai, "$A = %s$" % de0, ["$A = %s$" % d_ for d_, _ in rieng[1:4]], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_NB017_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - cho tập hợp bằng tính chất đặc trưng (phương trình tích trên
+    N, Z, Q, R; hai điều kiện trên N; số nguyên tố, ước, $x^2 < k$...), hỏi tập có
+    bao nhiêu phần tử.
+
+    CLAUDE THEM 30/09/2026 - dang moi (ban tra loi ngan cua NB017_MC_G). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        de, dung, sai, giai = _chon_tap_dac_trung()
+        if not dung:
+            continue
+        dap = len(set(map(str, dung)))
+        so += 1
+        debai = r"Cho tập hợp $A = %s$. Tập hợp $A$ có bao nhiêu phần tử?" % de
+        g = giai + "\\\\\n" + r"Vậy $A = %s$ có $%d$ phần tử." % (_tap(dung), dap)
+        ds = [str(len(set(map(str, s)))) for s in sai] + [str(dap + 1), str(dap + 2), str(max(dap - 1, 0))]
+        cau += MC_SA_answer_const(debai, str(dap), [v for v in dict.fromkeys(ds) if v != str(dap)], g, 0, 0, dang)
+    return cau
+
+
+def _thap_phan_ngan(v):
+    """Số hữu tỉ viết thập phân hữu hạn (dấu phẩy) tối đa 4 kí tự; không được thì None."""
+    v = Rational(v)
+    q = v.q
+    for p_ in (2, 5):
+        while q % p_ == 0:
+            q //= p_
+    if q != 1:
+        return None
+    s = ("%.4f" % float(v)).rstrip("0").rstrip(".").replace(".", ",")
+    return s if len(s) <= 4 and s != "-0" else None
+
+
+def L10_C1_B2_NB017_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn - cách hỏi khác của _01: cho tập bằng tính chất đặc trưng, hỏi
+    TỔNG các phần tử của tập (phải liệt kê đúng mới tính được).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_SA_A. Dap so thap phan huu han,
+    toi da 4 ki tu. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        de, dung, sai, giai = _chon_tap_dac_trung()
+        if not dung:
+            continue
+        tong = sum(dung)
+        dap = _thap_phan_ngan(nsimplify(tong))
+        if dap is None:
+            continue
+        so += 1
+        debai = r"Cho tập hợp $A = %s$. Tính tổng tất cả các phần tử của tập hợp $A$." % de
+        g = (giai + "\\\\\n" + r"Vậy $A = %s$, tổng các phần tử là $%s = %s$."
+             % (_tap(dung), " + ".join(("(%s)" % _tex_gt(v)) if float(v) < 0 else _tex_gt(v)
+                                         for v in sorted(dung, key=float)), dap))
+        ds = [s_ for s_ in (_thap_phan_ngan(nsimplify(sum(s))) for s in sai if s) if s_ and s_ != dap]
+        ds += [v_ for v_ in (_thap_phan_ngan(nsimplify(tong) + d_) for d_ in (1, -1, 2, -2, 3)) if v_]
+        cau += MC_SA_answer_const(debai, dap, [v for v in dict.fromkeys(ds) if v != dap], g, 0, 0, dang)
+    return cau

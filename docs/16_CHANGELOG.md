@@ -9377,3 +9377,17 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - _vung_hai_tap: chon truoc so phan tu tung vung theo ti le boi canh roi suy ra du kien.
   _hoi_hai_tap / _cau_hai_tap: moi cau chon ngau nhien noi dung hoi (ca hai, khong thuoc
   nao, it nhat mot, chi A, chi B). Ap dung cho VD020_SA_A_01/_02/_03, VD020_MC_A_01/_03/_04.
+
+# Version 3.67 - 2026-09-30
+
+## Liet ke tap hop <-> tinh chat dac trung (NB017), theo bai Sach bai tap
+
+- Them loai tap cho _tap_dac_trung (qua _chon_tap_dac_trung): phuong trinh tich tren
+  N, Z, Q, R (_pt_tich_bo: chi nhan tu bac nhat co nghiem nguyen duong, nguyen am,
+  phan so va x^2 - k, x^2 + k; KHONG dung Delta de giu muc NB) va tap tren N cho boi
+  hai dieu kien (x^2 > a va x < b ...).
+- NB017_MC_G_01 (tinh chat -> liet ke) dung them hai loai tren.
+- NB017_MC_G_02 (moi, hoi nguoc): cho tap liet ke, chon cach viet bang tinh chat dac
+  trung (cung phuong trinh tren N/Z/Q/R, cung dieu kien voi dau < / <= khac nhau).
+- NB017_SA_A (dang moi, Mapping co ghi chu): _01 dem so phan tu, _02 tinh tong cac
+  phan tu (dap so thap phan huu han, toi da 4 ki tu).

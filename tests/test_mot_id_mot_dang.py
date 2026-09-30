@@ -101,6 +101,8 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_VD020_TL_A",   # it nhat mot / khong thuoc nao  -  biet so khong thuoc, tinh ca hai, chi A (kho boi canh)
     # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
     "L10_C1_B1_VD014_SA_B",   # dem so menh de dung / dem n lam keo theo sai
+    "L10_C1_B2_NB017_MC_G",   # tinh chat -> liet ke / liet ke -> tinh chat (hoi nguoc)
+    "L10_C1_B2_NB017_SA_A",   # dem so phan tu / tong cac phan tu
     "L10_C1_B1_VD014_MC_D",   # keo theo tren R co tham so / keo theo chia het
     "L10_C1_B1_VD014_TL_B",   # phu dinh menh de voi moi (bat dang thuc) / ton tai (chia het)
     # tu bai tap trac nghiem Bai 6 (30/09/2026), _02 hoi theo cach khac:
