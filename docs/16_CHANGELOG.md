@@ -9276,3 +9276,24 @@ Co Lan: "_02 phai la cach hoi khac di, nhung cung ve mot don vi kien thuc".
   khong cham cuoi, SA <= 4 ki tu, mien nghiem theo SGK...); hinh trong tung
   phuong an (3.55); xuat Word (3.54 - 3.56).
 - docs/README.md, 04_ID_STANDARD.md, 10_PYTHON_GENERATOR.md: tro sang tai lieu moi.
+
+# Version 3.60 - 2026-09-30
+
+## Bai 6 (He thuc luong): bai tap trac nghiem cua co Lan
+
+Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac).
+- Bien the cua ID da co: TH032_MC_B_03 (biet ba canh hoi SO DO goc),
+  TH033_MC_A_03 (phai tinh goc thu ba truoc khi dung dinh li sin),
+  VD036_MC_B_02 (ve tinh, hai tram quan sat, co hinh), TF_E_04 (ba canh: goc tu,
+  cos, Heron, R), TF_E_05 (cong thuc S, S, h_b, tru dien cach deu ba ho dan).
+- Dang moi: TH032_MC_E (he thuc dinh li cosin: bang chu / da thay so),
+  TH033_MC_C (he thuc dinh li sin / ti so hai canh), TH034_MC_D (S biet hai canh va
+  goc xen / cos goc xen), TH034_MC_E (Heron roi r / R), TH034_MC_F (duong cao: hai
+  canh + goc / ba canh), VD036_SA_C (hai tau: khoang cach / thoi gian),
+  VD036_SA_D (hai dang, cay, ang-ten - co hinh), VD036_SA_E (hai ban di hai huong:
+  quang duong con lai / dien tich tu giac - co hinh), TF_G (con doc), TF_H (manh dat
+  tu giac, chi phi).
+- Da co san, khong them: cau 1 (TH034_MC_A_02), cau 4 (TH033_MC_A_01), cau 6
+  (TH033_SA_A_01), cau 9 (TH034_MC_B_01), Phan III cau 1 (VD036_SA_A_01).
+- Lam tron theo SGK: _lt (0,5 lam tron len, round() cua Python lam tron ve so chan),
+  _x1 giu chu so 0 cuoi; bo cac bo so sat ranh gioi lam tron.
