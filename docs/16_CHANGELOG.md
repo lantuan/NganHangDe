@@ -9412,3 +9412,17 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   hai y - de khong vuot muc khi ma tran chon TL.
 - NB017_SA_A_02: tap doi xung (x^2 < k, khoang doi xung...) co tong luon bang 0 nen doi
   sang hoi tich cac phan tu khac 0 hoac hieu phan tu lon nhat - nho nhat.
+
+# Version 3.70 - 2026-09-30
+
+## NB017 liet ke: them tap luy thua, nghiem nguyen khong lien tiep, hoi a thuoc A (theo co Lan)
+
+- _pt_tich_bo: them kieu chi co 2-3 nghiem nguyen khong can lien tiep (-3; 1; 2 <->
+  (x + 3)(x - 1)(x - 2) = 0); khong co cap nghiem doi nhau (doi dau nhan tu khong trung).
+- Tap luy thua moi (_luy_thua_bo): {x | x = a^n, n thuoc N, ...} voi a = 2, 3, -2, -3;
+  phuong an nhieu: n < thay n <=, lech n bat dau tu 0/1, doi dau co so, thua mot phan tu.
+  Dung cho MC_G_01, MC_G_02, SA_A_01/_02 va y a) cua TH018_TL_A_01.
+- MC_G_02: phuong trinh tich co them phuong an doi dau tat ca nhan tu; tap A dua ra luon
+  co it nhat hai phan tu.
+- NB017_MC_G_03 (moi): cho A bang tinh chat dac trung, hoi khang dinh "a thuoc A" /
+  "a khong thuoc A" nao dung (sai); khong dua ca hai khang dinh ve cung mot so vao mot cau.

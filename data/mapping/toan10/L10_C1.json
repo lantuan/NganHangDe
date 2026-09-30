@@ -219,8 +219,8 @@
     "id": "L10_C1_B2_NB017_MC_G",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (và ngược lại: chọn cách viết bằng tính chất đặc trưng của tập liệt kê)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu giao an Bai 2 cua co Lan; _02 hoi nguoc (theo bai Sach bai tap); co Lan duyet lai"
+    "Dang": "Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (và ngược lại; xét phần tử thuộc/không thuộc tập cho bởi tính chất)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu giao an Bai 2 cua co Lan; _02 hoi nguoc (theo bai Sach bai tap), _03 hoi a thuoc A khong (theo co Lan); co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_NB017_MC_H",

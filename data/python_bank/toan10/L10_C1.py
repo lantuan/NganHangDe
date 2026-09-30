@@ -10174,6 +10174,7 @@ def L10_C1_B2_VD020_MC_A_04(socau, dang=1):
 # Cùng một dạng, các cách hỏi:
 #   NB017_MC_G_01  cho tính chất đặc trưng, chọn cách liệt kê đúng
 #   NB017_MC_G_02  cho tập liệt kê, chọn cách viết bằng tính chất đặc trưng đúng
+#   NB017_MC_G_03  hỏi phần tử a thuộc / không thuộc tập cho bởi tính chất
 #   NB017_SA_A_01  cho tính chất đặc trưng, hỏi tập có bao nhiêu phần tử
 #   NB017_SA_A_02  hỏi tổng các phần tử (tập đối xứng tổng = 0: hỏi tích/hiệu)
 #   TH018_TL_A_01  tự luận: a) liệt kê A (NB017), b) giao/hợp/hiệu với B (TH018)
@@ -10211,21 +10212,32 @@ def _viet_pt_tich(nghiem):
 
 
 def _pt_tich_bo():
-    """Nghiệm của phương trình tích 2 hoặc 3 nhân tử bậc nhất (mức NB).
-    3 nhân tử: đủ ba loại nghiệm (số tự nhiên, số nguyên âm, phân số)."""
-    loai = ["tu_nhien", "am", "phan_so"]
+    """Nghiệm của phương trình tích 2 hoặc 3 nhân tử bậc nhất (mức NB). Hai kiểu:
+    - chỉ có nghiệm nguyên, không cần liên tiếp (như -3; 1; 2 <-> (x + 3)(x - 1)(x - 2) = 0);
+    - có nghiệm phân số: 3 nhân tử đủ ba loại nghiệm (số tự nhiên, số nguyên âm, phân số)
+      hoặc 2 nhân tử lấy 2 trong 3 loại."""
     if random.random() < 0.4:
-        loai = random.sample(loai, 2)
-    nghiem = []
-    for l_ in loai:
-        if l_ == "tu_nhien":
-            nghiem.append(Integer(random.randint(0, 5)))
-        elif l_ == "am":
-            nghiem.append(Integer(-random.randint(1, 5)))
-        else:
-            p = random.choice([2, 3])
-            q = random.choice([v for v in (-2, -1, 1, 2) if math.gcd(abs(v), p) == 1])
-            nghiem.append(Rational(q, p))
+        n = random.choice([2, 3, 3])
+        while True:
+            nghiem = [Integer(v) for v in random.sample(range(-5, 6), n)]
+            if any(v >= 0 for v in nghiem) and any(v < 0 for v in nghiem):
+                break
+    else:
+        loai = ["tu_nhien", "am", "phan_so"]
+        if random.random() < 0.4:
+            loai = random.sample(loai, 2)
+        nghiem = []
+        for l_ in loai:
+            if l_ == "tu_nhien":
+                nghiem.append(Integer(random.randint(0, 5)))
+            elif l_ == "am":
+                nghiem.append(Integer(-random.randint(1, 5)))
+            else:
+                p = random.choice([2, 3])
+                q = random.choice([v for v in (-2, -1, 1, 2) if math.gcd(abs(v), p) == 1])
+                nghiem.append(Rational(q, p))
+    if any(-v in nghiem for v in nghiem if v != 0):
+        return _pt_tich_bo()                   # khong co cap nghiem doi nhau (doi dau nhan tu se trung nhan tu)
     random.shuffle(nghiem)
     nghiem.sort(key=lambda v: v != 0)          # nhân tử x (nghiệm 0) viết đầu: x(x + 3)(2x - 1)
     return nghiem
@@ -10267,13 +10279,50 @@ def _loi_giai_hai_dieu_kien(de, dung):
         dk.replace(r" \text{ và } ", r"$ và $"), "; ".join(map(str, dung)) if dung else r"\text{không có}")
 
 
+def _luy_thua_mo_ta(co_so, lo, hi, chat_tren=False):
+    """Tập {x | x = a^n, n ∈ N, lo ≤ n ≤ hi} (hoặc n < hi) -> (đề, danh sách phần tử, lời giải)."""
+    cs = ("(%d)" % co_so) if co_so < 0 else "%d" % co_so
+    tren = "<" if chat_tren else r"\le"
+    dk = (r"n %s %d" % (tren, hi)) if lo == 0 else (r"%d \le n %s %d" % (lo, tren, hi))
+    de = r"\left\{x \mid x = %s^{n},\ n \in \mathbb{N},\ %s\right\}" % (cs, dk)
+    cac_n = list(range(lo, (hi - 1 if chat_tren else hi) + 1))
+    ds = [Integer(co_so) ** k for k in cac_n]
+    giai = (r"Với $n \in \mathbb{N}$, $%s$ thì $n \in \left\{%s\right\}$, ta được $x$ lần lượt là $%s$."
+            % (dk, "; ".join(map(str, cac_n)), "; ".join(r"%s^{%d} = %d" % (cs, k, v) for k, v in zip(cac_n, ds))))
+    return de, ds, giai
+
+
+def _luy_thua_bo():
+    """Tập lũy thừa 2^n, 3^n, (-2)^n, (-3)^n và các cách viết gần giống; tập đúng đứng đầu.
+    Mỗi phần tử: (đề, danh sách phần tử, lời giải)."""
+    co_so = random.choice([2, 3, -2, -3])
+    so_pt = {2: random.choice([3, 4, 5]), -2: random.choice([3, 4]), 3: random.choice([3, 4]), -3: 3}[co_so]
+    lo = random.choice([1, 1, 0])
+    hi = lo + so_pt - 1
+    lo2 = 1 - lo
+    return [_luy_thua_mo_ta(co_so, lo, hi),
+            _luy_thua_mo_ta(co_so, lo, hi, True),               # n < hi: thiếu phần tử cuối
+            _luy_thua_mo_ta(co_so, lo2, lo2 + so_pt - 1),       # lệch n bắt đầu từ 0 / 1
+            _luy_thua_mo_ta(-co_so, lo, hi),                    # đổi dấu cơ số
+            _luy_thua_mo_ta(co_so, lo, hi + 1)]                 # thừa một phần tử
+
+
+def _tap_luy_thua():
+    bo = _luy_thua_bo()
+    de, dung, giai = bo[0]
+    return de, dung, [s for _, s, _ in bo[1:]], giai
+
+
 def _chon_tap_dac_trung():
-    """Chọn ngẫu nhiên một tập cho bởi tính chất đặc trưng (các loại cũ 0-3 và hai loại mới)."""
-    loai = random.randint(0, 5)
+    """Chọn ngẫu nhiên một tập cho bởi tính chất đặc trưng: các loại cũ 0-3, phương trình
+    tích bậc nhất, hai điều kiện trên N, lũy thừa 2^n, 3^n, (-2)^n, (-3)^n."""
+    loai = random.randint(0, 6)
     if loai <= 3:
         return _tap_dac_trung(loai)
     if loai == 4:
         return _tap_dac_trung_4(random.choice(list(_TAP_SO)))
+    if loai == 6:
+        return _tap_luy_thua()
     bo = _hai_dieu_kien_bo()
     i = random.randrange(len(bo))
     de, dung = bo[i]
@@ -10282,60 +10331,121 @@ def _chon_tap_dac_trung():
 
 
 def L10_C1_B2_NB017_MC_G_02(socau, dang=1):
-    r"""Hỏi NGƯỢC của _01: cho tập hợp dạng LIỆT KÊ, chọn cách viết bằng TÍNH CHẤT
-    ĐẶC TRƯNG đúng (phương án: cùng phương trình tích bậc nhất trên N, Z, Q và
-    một phương trình sai dấu; hoặc cùng điều kiện với dấu < / ≤ khác nhau).
+    r"""Hỏi NGƯỢC của _01: cho tập hợp dạng LIỆT KÊ (như $\{-3; 1; 2\}$, $\{2; 4; 8; 16\}$),
+    chọn cách viết bằng TÍNH CHẤT ĐẶC TRƯNG đúng. Phương án: cùng phương trình tích
+    bậc nhất trên các tập số khác nhau / đổi dấu nhân tử; lũy thừa $2^n, 3^n, (-2)^n,
+    (-3)^n$ lệch điều kiện của $n$ hoặc dấu cơ số; cùng điều kiện với dấu < / ≤ khác nhau.
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_MC_G, theo bai Sach bai tap
     (da ha ve muc NB: 2-3 nhan tu bac nhat). Co Lan duyet lai.
     """
+    N_, Z_ = r"\mathbb{N}", r"\mathbb{Z}"
     cau = ""
     so = 0
     while so < socau:
-        kieu = random.randrange(3)
+        kieu = random.randrange(4)
         if kieu == 0:
             nghiem = _pt_tich_bo()
-            pt, giai_pt = _viet_pt_tich(nghiem)
-            # Khong dua R vao phuong an: nghiem deu huu ti nen tren Q va R la mot tap
-            bo = [(r"\left\{x \in %s \mid %s\right\}" % (t, pt), _loc_tap_so(nghiem, t))
-                  for t in (r"\mathbb{N}", r"\mathbb{Z}", r"\mathbb{Q}")]
+            # Nghiem deu huu ti nen tren Q va R la mot tap: chi dung MOT trong hai
+            tQR = random.choice([r"\mathbb{Q}", r"\mathbb{R}"])
             j = random.choice([i for i, v in enumerate(nghiem) if v != 0])
-            nghiem2 = [(-v if i == j else v) for i, v in enumerate(nghiem)]
-            pt2, giai_pt2 = _viet_pt_tich(nghiem2)
-            t2 = random.choice([r"\mathbb{Z}", r"\mathbb{Q}"])
-            bo.append((r"\left\{x \in %s \mid %s\right\}" % (t2, pt2), _loc_tap_so(nghiem2, t2)))
-            ly = r"Ta có %s; %s." % (giai_pt, giai_pt2)
+            cac_pt = [nghiem, [(-v if i == j else v) for i, v in enumerate(nghiem)], [-v for v in nghiem]]
+            viet = [_viet_pt_tich(n_) for n_ in cac_pt]
+            pt = viet[0][0]
+            bo = [(r"\left\{x \in %s \mid %s\right\}" % (tQR, pt), list(nghiem), viet[0][1]),
+                  (r"\left\{x \in %s \mid %s\right\}" % (N_, pt), _loc_tap_so(nghiem, N_), viet[0][1]),
+                  (r"\left\{x \in %s \mid %s\right\}" % (Z_, pt), _loc_tap_so(nghiem, Z_), viet[0][1]),
+                  (r"\left\{x \in %s \mid %s\right\}" % (tQR, viet[1][0]), list(cac_pt[1]), viet[1][1]),
+                  (r"\left\{x \in %s \mid %s\right\}" % (tQR, viet[2][0]), list(cac_pt[2]), viet[2][1])]
+            ly = r"Giải các phương trình:"
         elif kieu == 1:
-            bo = _hai_dieu_kien_bo()
+            bo = [(d_, s_, "") for d_, s_ in _hai_dieu_kien_bo()]
             ly = r"Lần lượt tìm các số tự nhiên thoả mãn từng điều kiện."
-        else:
+        elif kieu == 2:
             a_ = random.randint(-6, 0)
             b_ = a_ + random.randint(3, 6)
-            tap = random.choice([r"\mathbb{Z}", r"\mathbb{Z}", r"\mathbb{N}"])
+            tap = random.choice([Z_, Z_, N_])
             bo = []
             for tr in (True, False):
                 for ph in (True, False):
                     lo = a_ if tr else a_ + 1
                     hi = b_ if ph else b_ - 1
-                    ds = [t for t in range(lo, hi + 1) if tap != r"\mathbb{N}" or t >= 0]
+                    ds = [t for t in range(lo, hi + 1) if tap != N_ or t >= 0]
                     bo.append((r"\left\{x \in %s \mid %d %s x %s %d\right\}" % (tap, a_, r"\le" if tr else "<",
-                                                                                r"\le" if ph else "<", b_), ds))
-            ly = r"Viết ra các số %s trong từng khoảng rồi so sánh." % ("tự nhiên" if tap == r"\mathbb{N}" else "nguyên")
+                                                                                r"\le" if ph else "<", b_), ds, ""))
+            ly = r"Viết ra các số %s trong từng khoảng rồi so sánh." % ("tự nhiên" if tap == N_ else "nguyên")
+        else:
+            bo = _luy_thua_bo()
+            ly = r"Cho $n$ nhận lần lượt các giá trị thoả mãn điều kiện rồi tính $x$:"
         # chi giu cac tap khac rong, doi mot khac nhau
         rieng = []
-        for de, ds in bo:
-            if ds and all(set(map(str, ds)) != set(map(str, d2)) for _, d2 in rieng):
-                rieng.append((de, ds))
+        for de, ds, g_ in bo:
+            if ds and all(set(map(str, ds)) != set(map(str, d2)) for _, d2, _ in rieng):
+                rieng.append((de, ds, g_))
         if len(rieng) < 4:
             continue
         rieng = rieng[:4]
         random.shuffle(rieng)
-        de0, ds0 = rieng[0]
+        nhieu_pt = [i for i, r_ in enumerate(rieng) if len(r_[1]) >= 2]
+        if not nhieu_pt:
+            continue
+        i0 = random.choice(nhieu_pt)           # tap A dua ra co it nhat hai phan tu
+        rieng.insert(0, rieng.pop(i0))
+        de0, ds0, _ = rieng[0]
         so += 1
+        cac_ly = [g_ for g_ in dict.fromkeys(g_ for _, _, g_ in rieng) if g_]
         debai = r"Tập hợp $A = %s$ được viết dưới dạng chỉ ra tính chất đặc trưng của các phần tử là" % _tap(ds0)
-        giai = (ly + "\\\\\n" + "\\\\\n".join(r"$%s = %s$" % (d_, _tap(s_)) for d_, s_ in rieng) + ".\\\\\n" +
+        giai = ("\\\\\n".join([ly] + cac_ly) + "\\\\\n" +
+                "\\\\\n".join(r"$%s = %s$" % (d_, _tap(s_)) for d_, s_, _ in rieng) + ".\\\\\n" +
                 r"Vậy $A = %s$." % de0)
-        cau += MC_SA_answer_text(debai, "$A = %s$" % de0, ["$A = %s$" % d_ for d_, _ in rieng[1:4]], giai, 0, 0, dang)
+        cau += MC_SA_answer_text(debai, "$A = %s$" % de0, ["$A = %s$" % d_ for d_, _, _ in rieng[1:4]],
+                                 giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_NB017_MC_G_03(socau, dang=1):
+    r"""Cách hỏi thứ ba của NB017_MC_G: cho tập $A$ bằng tính chất đặc trưng (phương
+    trình tích bậc nhất, lũy thừa $2^n, 3^n, (-2)^n, (-3)^n$, số nguyên tố, ước...),
+    hỏi khẳng định ``$a \in A$'' / ``$a \notin A$'' nào đúng (hoặc sai). Các số đưa vào
+    phương án là các số dễ nhầm (sai dấu, lệch biên, ngoài tập số).
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua NB017_MC_G theo co Lan
+    ("hoi phan tu 3 co thuoc tap ... theo dang tinh chat khong"). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        de, dung, sai, giai = _chon_tap_dac_trung()
+        if not dung:
+            continue
+        trong = {str(nsimplify(v)): nsimplify(v) for v in dung}
+        ngoai = {}
+        for s_ in sai:
+            for v in s_:
+                v = nsimplify(v)
+                if str(v) not in trong:
+                    ngoai[str(v)] = v
+        if len(ngoai) < 2:
+            continue
+        hoi_dung = random.random() < 0.7
+        # (so, khang dinh): khong de cap "a thuoc A" / "a khong thuoc A" cung mot so a
+        # vao cung mot cau (hoc sinh se biet mot trong hai la dap an)
+        md_dung = ([(k, r"%s \in A" % _tex_gt(v)) for k, v in trong.items()] +
+                   [(k, r"%s \notin A" % _tex_gt(v)) for k, v in ngoai.items()])
+        md_sai = ([(k, r"%s \notin A" % _tex_gt(v)) for k, v in trong.items()] +
+                  [(k, r"%s \in A" % _tex_gt(v)) for k, v in ngoai.items()])
+        if not hoi_dung:
+            md_dung, md_sai = md_sai, md_dung
+        k0, chon = random.choice(md_dung)
+        con = [t_ for k, t_ in md_sai if k != k0]
+        if len(con) < 3:
+            continue
+        nhieu = random.sample(con, 3)
+        so += 1
+        debai = r"Cho tập hợp $A = %s$. Khẳng định nào sau đây %s?" % (de, "đúng" if hoi_dung else "sai")
+        g = (giai + r" Vậy $A = %s$." % _tap(dung) + "\\\\\n" +
+             r"Do đó khẳng định %s là $%s$." % ("đúng" if hoi_dung else "sai", chon))
+        cau += MC_SA_answer_text(debai, "$%s$" % chon, ["$%s$" % t_ for t_ in nhieu], g, 0, 0, dang)
     return cau
 
 
@@ -10433,43 +10543,48 @@ def L10_C1_B2_NB017_SA_A_02(socau, dang=2):
 def L10_C1_B2_TH018_TL_A_01(socau, dong=1):
     r"""Tự luận hai ý thuộc HAI đơn vị kiến thức (theo cô Lan):
     a) liệt kê tập $A$ cho bởi tính chất đặc trưng - phương trình tích 2-3 nhân tử
-       bậc nhất (nội dung NB017);
+       bậc nhất hoặc lũy thừa $2^n, 3^n, (-2)^n, (-3)^n$ (nội dung NB017);
     b) cho tập $B$ liệt kê đơn giản, tìm $A \cap B$, $A \cup B$, $A \setminus B$
        hoặc $B \setminus A$ (nội dung TH018).
     ID đặt ở TH018 (mức cao hơn của hai ý) để câu không vượt mức khi ma trận chọn TL.
 
     CLAUDE THEM 30/09/2026 - dang moi (thay NB017_TL_A cu). Co Lan duyet lai.
     """
-    PHEP = [(r"A \cap B", "giao", lambda A_, B_: [v for v in A_ if v in B_],
+    PHEP = [(r"A \cap B", lambda A_, B_: [v for v in A_ if v in B_],
              r"gồm các phần tử thuộc cả $A$ và $B$"),
-            (r"A \cup B", "hop", lambda A_, B_: list(A_) + [v for v in B_ if v not in A_],
+            (r"A \cup B", lambda A_, B_: list(A_) + [v for v in B_ if v not in A_],
              r"gồm các phần tử thuộc $A$ hoặc thuộc $B$"),
-            (r"A \setminus B", "hieu_AB", lambda A_, B_: [v for v in A_ if v not in B_],
+            (r"A \setminus B", lambda A_, B_: [v for v in A_ if v not in B_],
              r"gồm các phần tử thuộc $A$ nhưng không thuộc $B$"),
-            (r"B \setminus A", "hieu_BA", lambda A_, B_: [v for v in B_ if v not in A_],
+            (r"B \setminus A", lambda A_, B_: [v for v in B_ if v not in A_],
              r"gồm các phần tử thuộc $B$ nhưng không thuộc $A$")]
     cau = ""
     so = 0
     while so < socau:
-        nghiem = _pt_tich_bo()
-        pt, giai_pt = _viet_pt_tich(nghiem)
-        tap = random.choice([r"\mathbb{Z}", r"\mathbb{Q}", r"\mathbb{R}"])
-        A = _loc_tap_so(nghiem, tap)
+        if random.random() < 0.35:
+            de_a, A, giai_a = _luy_thua_bo()[0]
+            giai_a += r" Vậy $A = %s$." % _tap(A)
+        else:
+            nghiem = _pt_tich_bo()
+            pt, giai_pt = _viet_pt_tich(nghiem)
+            tap = random.choice([r"\mathbb{Z}", r"\mathbb{Q}", r"\mathbb{R}"])
+            A = _loc_tap_so(nghiem, tap)
+            de_a = r"\left\{x \in %s \mid %s\right\}" % (tap, pt)
+            giai_a = r"Ta có %s. Vì $x \in %s$ nên $A = %s$." % (giai_pt, tap, _tap(A))
         if len(A) < 2:
             continue
         # B: mot vai phan tu cua A va vai so nguyen nho khac - chon truoc de ket qua khong rong
         chung = random.sample(A, random.randint(1, len(A) - 1))
         khac = random.sample([Integer(v) for v in range(-5, 7) if Integer(v) not in A], random.randint(1, 3))
         B = chung + khac
-        ki_hieu, _, f, ly = random.choice(PHEP)
+        ki_hieu, f, ly = random.choice(PHEP)
         KQ = f(A, B)
         if not KQ:
             continue
         so += 1
-        debai = r"Cho tập hợp $A = \left\{x \in %s \mid %s\right\}$ và $B = %s$." % (tap, pt, _tap(B))
+        debai = r"Cho tập hợp $A = %s$ và $B = %s$." % (de_a, _tap(B))
         ds = [
-            (r"Liệt kê các phần tử của tập hợp $A$.", r"A = %s" % _tap(A),
-             r"Ta có %s. Vì $x \in %s$ nên $A = %s$." % (giai_pt, tap, _tap(A))),
+            (r"Liệt kê các phần tử của tập hợp $A$.", r"A = %s" % _tap(A), giai_a),
             (r"Tìm $%s$." % ki_hieu, r"%s = %s" % (ki_hieu, _tap(KQ)),
              r"Với $A = %s$ và $B = %s$, tập $%s$ %s nên $%s = %s$."
              % (_tap(A), _tap(B), ki_hieu, ly, ki_hieu, _tap(KQ))),
