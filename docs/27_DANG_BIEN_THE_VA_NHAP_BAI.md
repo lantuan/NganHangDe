@@ -201,8 +201,8 @@ Test: `tests/test_chon_cau_khong_na_na.py`.
 Chốt 30/09/2026 (cô Lan): lời dẫn bài toán thực tế tự chọn ngẫu nhiên trong
 nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câu không trùng bối cảnh**.
 
-- Kho `_BOI_CANH_HAI_TAP` trong `L10_C1.py` (bài toán hai tập hợp, VD020): 14 lĩnh
-  vực - đọc sách, thể thao, câu lạc bộ, học lực, văn nghệ (một lớp của trường THPT
+- Kho `_BOI_CANH_HAI_TAP` trong `L10_C1.py` (bài toán hai tập hợp, VD020): 15 lĩnh
+  vực - đọc sách, môn học yêu thích (Toán, Ngữ văn, Vật lí, Hoá học...), thể thao, câu lạc bộ, học lực, văn nghệ (một lớp của trường THPT
   chuyên Hùng Vương: 10C1A … 10C9, cố định 35 học sinh); hoa (phụ nữ trên phố đi bộ
   Gia Lai), tài chính cá nhân, mạng xã hội, du lịch Gia Lai, đồ uống, đặc sản, nông
   nghiệp (cà phê, hồ tiêu), ngoại ngữ, thể dục. Mỗi bối cảnh có tỉ lệ số liệu riêng
@@ -214,3 +214,6 @@ nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câ
 - Muốn thêm bối cảnh: thêm một phần tử vào `_BOI_CANH_HAI_TAP` (mo, dv, tap, cap =
   (A, B, động từ, động từ phủ định, loại), tỉ lệ tA, tB, giao; mo_an + hoi_tong nếu
   dùng được cho câu hỏi tổng số).
+- **Chỉ HAI tập hợp** (cô Lan 30/09/2026): SGK dừng bài toán thực tế ở hai tập hợp.
+  Các câu ba tập hợp chuyển sang `data/chuyen_de_hoc_tap/ba_tap_hop_L10_C1.py` để
+  dành cho ngân hàng chuyên đề học tập.

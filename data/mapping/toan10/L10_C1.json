@@ -28,7 +28,7 @@
     "id": "L10_C1_B1_NB005_MC_C",
     "content": "Nhận biết được mệnh đề phủ định.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phủ định có chứa dấu với mọi, tồn print"
+    "Dang": "Phủ định có chứa dấu với mọi, tồn tại"
   },
   {
     "id": "L10_C1_B1_NB007_MC_A",
@@ -260,12 +260,6 @@
     "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "A,B,C giao/hợp/hiệu"
-  },
-  {
-    "id": "L10_C1_B2_TH019_TL_A",
-    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
-    "Loai": "Tự luận",
-    "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
   },
   {
     "id": "L10_C1_B2_TH021_MC_A",

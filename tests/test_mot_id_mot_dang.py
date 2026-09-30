@@ -49,8 +49,8 @@ CHO_PHEP_NHIEU_HAM = {
     # tu giao an Bai 3 (Cac phep toan tren tap hop):
     "L10_C1_B2_TH021_MC_A",   # phan bu cua mot khoang / giao-hop-hieu-bu hai khoang (co dang {x | ...})
     "L10_C1_B2_VD021_MC_A",   # dem m nguyen / dieu kien cua m (hop = R, giao rong, giao khac rong)
-    "L10_C1_B2_VD020_SA_A",   # hai tap: khong thuoc tap nao / ba tap: dung hai mon -> ca ba
-    "L10_C1_B2_VD020_MC_A",   # hai tiet muc / nhom khong thuoc tap nao / ba tap: tinh hop
+    "L10_C1_B2_VD020_SA_A",   # hai tap: khong thuoc tap nao / chi thuoc A (kho boi canh)
+    "L10_C1_B2_VD020_MC_A",   # khong thuoc nao / tim tong so / tim so thuoc ca hai (kho boi canh)
     # tu de on tap cuoi chuong 1:
     "L10_C1_B1_TH014_MC_A",   # 17 nhom co dinh / menh de luong tu tham so do Python chon
     # tu bai tap trac nghiem Bai 3 chuong 2 (BPT bac nhat hai an):

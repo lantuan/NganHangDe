@@ -9352,3 +9352,14 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - generator_service: gan tap boi canh da dung cua ma de cho tep chuong
   (_DE_HIEN_TAI) -> cac cau cung kho khong trung boi canh trong mot de.
 - docs/27 muc 8; test trong tests/test_chon_cau_khong_na_na.py.
+
+# Version 3.65 - 2026-09-30
+
+## Bo bai toan BA tap hop khoi ngan hang (SGK chi den hai tap hop); them boi canh mon hoc
+
+- Chuyen VD020_MC_A_03, VD020_SA_A_02, TH019_TL_A_01 (va _BOI_CANH_BA_MON,
+  _BOI_CANH_BA_TAP) sang data/chuyen_de_hoc_tap/ba_tap_hop_L10_C1.py de danh cho
+  ngan hang chuyen de hoc tap; go dong Mapping L10_C1_B2_TH019_TL_A (ghi lai trong
+  tep chuyen de). data/chuyen_de_hoc_tap/README.md.
+- Kho _BOI_CANH_HAI_TAP them boi canh "mon_hoc" cho lop: thich hoc Toan/Ngu van,
+  Vat li/Hoa hoc, Sinh hoc/Dia li, Lich su/Tieng Anh, Tin hoc/Cong nghe, Toan/Vat li.
