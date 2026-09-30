@@ -262,6 +262,16 @@ def _sinh_pdf_tu_danh_sach(
                     if dap_an.get("hinh_tikz"):
                         dap_an["hinh"] = dich_hinh_trong_khoi(
                             "\n".join(dap_an["hinh_tikz"]))
+                    # Hinh nam TRONG phuong an / y (cau "hinh nao bieu dien...")
+                    for khoa_tikz, khoa_ma in (("hinh_phuong_an_tikz", "hinh_phuong_an"),
+                                               ("hinh_phat_bieu_tikz", "hinh_phat_bieu")):
+                        if dap_an.get(khoa_tikz):
+                            ma_theo_o = {}
+                            for nhan_o, tikz_o in dap_an[khoa_tikz].items():
+                                ds_ma = dich_hinh_trong_khoi(tikz_o)
+                                if ds_ma:
+                                    ma_theo_o[nhan_o] = ds_ma[0]
+                            dap_an[khoa_ma] = ma_theo_o
                 except AnswerParseError as e:
                     dap_an = {
                         "loai_cau": None,

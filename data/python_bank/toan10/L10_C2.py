@@ -472,280 +472,194 @@ def L10_C2_B3_NB023_MC_A_01(socau, dang=1):
 
 # ---- Hinh nao bieu dien mien nghiem cua bat phuong trinh (co hinh) ----
 # (tên cũ của cô: K10_2_3_2_1_H)
+# ---------------------------------------------------------------------
+# MIEN NGHIEM CUA BAT PHUONG TRINH BAC NHAT HAI AN - VE HINH (TH024_MC_A)
+#
+# SUA 30/09/2026 (co Lan: "gach phai het khu vuc duoc tao boi 2 truc Ox va
+# Oy... cac hinh nay o moi phuong an chon"; "moi cai theo sach giao khoa hien
+# hanh"). Ban cu:
+#   - chi gach mot dai sat duong thang (lenh plot ... |- (diem goc));
+#   - boc them mot cap { } quanh moi hinh -> tren web phuong an hien
+#     "Unknown environment 'tikzpicture'";
+#   - loi giai co dong "Ket qua la hinh anh ${...}$ (sau khi bo cap dau...)".
+# Nay theo SGK hien hanh: MIEN NGHIEM LA PHAN KHONG BI GACH; bo d ve NET LIEN
+# neu co dau bang (<=, >=), NET DUT neu khong. Phan bi gach la TOAN BO phan
+# khung hinh nam o phia KHONG la nghiem (tinh dung da giac cat, khong uoc
+# luong), khung hinh la hinh chu nhat chua hai truc Ox, Oy.
+# ---------------------------------------------------------------------
+
+def _cat_nua_mat_phang(da_giac, a, b, c, giu_lon_hon):
+    """Cat da giac loi bang nua mat phang a x + b y >= c (giu_lon_hon) hoac <= c."""
+    trong = (lambda p: a * p[0] + b * p[1] - c >= -1e-12) if giu_lon_hon else \
+        (lambda p: a * p[0] + b * p[1] - c <= 1e-12)
+    ra = []
+    n = len(da_giac)
+    for i in range(n):
+        P, Q = da_giac[i], da_giac[(i + 1) % n]
+        tp, tq = trong(P), trong(Q)
+        if tp:
+            ra.append(P)
+        if tp != tq:
+            fp = a * P[0] + b * P[1] - c
+            fq = a * Q[0] + b * Q[1] - c
+            t = fp / (fp - fq)
+            ra.append((P[0] + t * (Q[0] - P[0]), P[1] + t * (Q[1] - P[1])))
+    return ra
+
+
+def _doan_trong_khung(a, b, c, khung):
+    """Hai dau mut cua duong a x + b y = c trong khung (x0, x1, y0, y1)."""
+    x0, x1, y0, y1 = khung
+    diem = []
+    if b != 0:
+        for X in (x0, x1):
+            Y = (c - a * X) / b
+            if y0 - 1e-9 <= Y <= y1 + 1e-9:
+                diem.append((X, Y))
+    if a != 0:
+        for Y in (y0, y1):
+            X = (c - b * Y) / a
+            if x0 - 1e-9 <= X <= x1 + 1e-9:
+                diem.append((X, Y))
+    duy_nhat = []
+    for p in diem:
+        if all(abs(p[0] - q[0]) > 1e-9 or abs(p[1] - q[1]) > 1e-9 for q in duy_nhat):
+            duy_nhat.append(p)
+    return duy_nhat[:2]
+
+
+def _so_tikz(v):
+    return ("%.3f" % v).rstrip("0").rstrip(".") if abs(v - round(v)) > 1e-9 else "%d" % round(v)
+
+
+def _hinh_mien_nghiem(a, b, c, dau, khung, nhan_truc):
+    r"""TikZ mien nghiem cua a x + b y (dau) c: GACH BO phan khong la nghiem.
+
+    khung = (x0, x1, y0, y1) (so nguyen, chua goc O); nhan_truc: cac diem can
+    ghi so tren truc [("x", 3), ("y", -2)...].
+    """
+    x0, x1, y0, y1 = khung
+    hcn = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    # tap nghiem la a x + b y > c (dau > / >=) hoac < c; phan bi gach la phia con lai
+    nghiem_lon = dau in (">", r"\ge")
+    gach = _cat_nua_mat_phang(hcn, a, b, c, giu_lon_hon=not nghiem_lon)
+    net = "" if dau in (r"\le", r"\ge") else "dashed,"
+    doan = _doan_trong_khung(a, b, c, khung)
+    s = [r"\begin{tikzpicture}[scale=0.5,font=\footnotesize,line join=round,>=stealth]"]
+    if len(gach) >= 3:
+        s.append(r"\fill[pattern=north east lines] " + " -- ".join(
+            "(%s,%s)" % (_so_tikz(p[0]), _so_tikz(p[1])) for p in gach) + " -- cycle;")
+    s.append(r"\draw[->] (%d,0)--(%s,0) node[below] {$x$};" % (x0, _so_tikz(x1 + 0.6)))
+    s.append(r"\draw[->] (0,%d)--(0,%s) node[left] {$y$};" % (y0, _so_tikz(y1 + 0.6)))
+    s.append(r"\node[below left,fill=white,inner sep=1pt] at (0,0) {$O$};")
+    for truc, v in nhan_truc:
+        if v == 0:
+            continue
+        if truc == "x":
+            s.append(r"\draw (%d,0.12)--(%d,-0.12) node[below,fill=white,inner sep=1pt] {$%d$};" % (v, v, v))
+        else:
+            s.append(r"\draw (0.12,%d)--(-0.12,%d) node[left,fill=white,inner sep=1pt] {$%d$};" % (v, v, v))
+    if len(doan) == 2:
+        s.append(r"\draw[%sthick] (%s,%s)--(%s,%s);" % (net, _so_tikz(doan[0][0]), _so_tikz(doan[0][1]),
+                                                         _so_tikz(doan[1][0]), _so_tikz(doan[1][1])))
+    s.append(r"\end{tikzpicture}")
+    return "\n".join(s)
+
+
+def _dau_nguoc(d):
+    return {">": "<", "<": ">", r"\ge": r"\le", r"\le": r"\ge"}[d]
+
+
+def _dau_doi_net(d):
+    return {">": r"\ge", r"\ge": ">", "<": r"\le", r"\le": "<"}[d]
+
+
+def _cau_mien_nghiem(a, b, c, dau, khung, nhan, duong_sai, diem_thu, dang):
+    """Ghep mot cau: 4 hinh (dung; sai phia; sai net; sai duong)."""
+    bt = latex(a * x + b * y)
+    dung = _hinh_mien_nghiem(a, b, c, dau, khung, nhan)
+    a2, b2, c2, nhan2 = duong_sai
+    nhieu = [_hinh_mien_nghiem(a, b, c, _dau_nguoc(dau), khung, nhan),
+             _hinh_mien_nghiem(a, b, c, _dau_doi_net(dau), khung, nhan),
+             _hinh_mien_nghiem(a2, b2, c2, dau, khung, nhan2)]
+    X, Y = diem_thu
+    vt = a * X + b * Y
+    ok = {">": vt > c, "<": vt < c, r"\ge": vt >= c, r"\le": vt <= c}[dau]
+    co_bang = dau in (r"\le", r"\ge")
+    debai = (r"Hình nào dưới đây biểu diễn miền nghiệm của bất phương trình $%s %s %d$ "
+             r"(miền nghiệm là phần \textbf{không bị gạch}%s)?"
+             % (bt, dau, c, ", kể cả bờ nếu bờ vẽ nét liền" if co_bang else ""))
+    giai = (r"Vẽ đường thẳng $d\colon %s = %d$ bằng nét %s (dấu $%s$ %s dấu bằng).\\ "
+            r"Thay điểm $(%d; %d)$ (không nằm trên $d$) vào vế trái: $%d %s %d$ là %s.\\ "
+            r"Vậy miền nghiệm là nửa mặt phẳng bờ $d$ %s điểm $(%d; %d)$ (%s bờ $d$); gạch bỏ nửa mặt phẳng còn lại. "
+            r"Hình đúng là hình có bờ $d$ vẽ nét %s và phần không bị gạch %s điểm $(%d; %d)$."
+            % (bt, c, "liền" if co_bang else "đứt", dau, "có" if co_bang else "không có",
+               X, Y, vt, dau, c, "đúng" if ok else "sai",
+               "chứa" if ok else "không chứa", X, Y, "kể cả" if co_bang else "không kể",
+               "liền" if co_bang else "đứt", "chứa" if ok else "không chứa", X, Y))
+    return MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+
+
 def L10_C2_B3_TH024_MC_A_01(socau, dang=1):
-    x = Symbol('x')
-    y = Symbol('y')
+    r"""Chọn hình biểu diễn miền nghiệm - bờ $d$ cắt hai trục tại $(p; 0)$, $(0; q)$.
 
-    gt = []
-    dem = len(gt)
-
-    # Định nghĩa NamedTuple cho điểm để dễ truy cập
-    Point = namedtuple('Point', ['x', 'y'])
-
-    while dem < socau:
-        # 1️⃣ Sinh dữ liệu ngẫu nhiên
-
-        # Thay thế np.choice, np.randint bằng np.random.choice, np.random.randint
-        dau_list = ['>', '<', '\\ge', '\\le']
-        dau = np.random.choice(dau_list)
-
-        point_values = [0, 0, 0]
-        # Vòng lặp để sinh 3 giá trị khác 0
-        while True:
-            point_values = np.random.randint(-4, 5, 3).tolist()
-            if all(v != 0 for v in point_values) and sum(abs(v) for v in point_values) >= 3:
-                # Điều kiện: không cùng dấu
-                if not (((point_values[0] > 0) and (point_values[1] > 0) and (point_values[2] > 0)) or \
-                        ((point_values[0] < 0) and (point_values[1] < 0) and (point_values[2] < 0))):
-                    break
-
-        point_values.sort()
-
-        choice = np.random.choice([0, 1, 2, 3])
-
-        A, B, C = Point(0, 0), Point(0, 0), Point(0, 0)
-        x_trai, x_phai, y_duoi, y_tren = 0, 0, 0, 0
-
-        if choice == 0:
-            A = Point(point_values[0], 0)
-            B = Point(0, point_values[1])
-            C = Point(point_values[2], 0)
-            x_trai = point_values[0] - 1
-            x_phai = point_values[2] + 1
-            if point_values[1] < 0:
-                y_duoi = point_values[1] - 1
-                y_tren = 1
-            else:
-                y_tren = point_values[1] + 1
-                y_duoi = -1
-
-        elif choice == 1:
-            A = Point(point_values[0], 0)
-            B = Point(0, -point_values[1])
-            C = Point(point_values[2], 0)
-            x_trai = point_values[0] - 1
-            x_phai = point_values[2] + 1
-            if -point_values[1] < 0:
-                y_duoi = -point_values[1] - 1
-                y_tren = 1
-            else:
-                y_tren = -point_values[1] + 1
-                y_duoi = -1
-
-        elif choice == 2:
-            A = Point(0, point_values[0])
-            B = Point(point_values[1], 0)
-            C = Point(0, point_values[2])
-            y_duoi = point_values[0] - 1
-            y_tren = point_values[2] + 1
-            if point_values[1] < 0:
-                x_trai = point_values[1] - 1
-                x_phai = 1
-            else:
-                x_phai = point_values[1] + 1
-                x_trai = -1
-
-        else:  # choice == 3
-            A = Point(0, point_values[0])
-            B = Point(-point_values[1], 0)
-            C = Point(0, point_values[2])
-            y_duoi = point_values[0] - 1
-            y_tren = point_values[2] + 1
-            if -point_values[1] < 0:
-                x_trai = -point_values[1] - 1
-                x_phai = 1
-            else:
-                x_phai = -point_values[1] + 1
-                x_trai = -1
-
-        # Hệ số của bất phương trình (AB[0] * x + AB[1] * y = c)
-        AB = [-B.y + A.y, B.x - A.x]  # vecto pháp tuyến của AB: (a, b)
-        c = AB[0] * A.x + AB[1] * A.y  # c
-
-        # Đường thẳng AB: y = m*x + n
-        m_AB = -AB[0] / AB[1] if AB[1] != 0 else float('inf')
-        n_AB = (AB[0] * A.x + AB[1] * A.y - AB[0] * A.x) / AB[1] if AB[1] != 0 else float('inf')
-
-        # Đường thẳng BC: (BC[0] * x + BC[1] * y = c_BC)
-        BC = [-C.y + B.y, C.x - B.x]  # vecto pháp tuyến của BC
-        c_BC = BC[0] * B.x + BC[1] * B.y
-        m_BC = -BC[0] / BC[1] if BC[1] != 0 else float('inf')
-        n_BC = (BC[0] * B.x + BC[1] * B.y - BC[0] * B.x) / BC[1] if BC[1] != 0 else float('inf')
-
-        # Hàm kiểm tra dấu
-        fx = lambda x, y: AB[0] * x + AB[1] * y
-
-        # Kiểm tra miền nghiệm (0,0) so với c
-        is_origin_in_solution = False
-        if (dau == '>') or (dau == '\\ge'):
-            is_origin_in_solution = (fx(0, 0) > c)
-        elif (dau == '<') or (dau == '\\le'):
-            is_origin_in_solution = (fx(0, 0) < c)
-
-        # Xác định điểm biên (x_bien, y_bien) cho miền nghiệm đúng (Dạng 1) và 3 miền nghiệm sai (Dạng 2, 3, 4)
-
-        x_bien, y_bien = 0, 0
-        x_bien_1, y_bien_1 = 0, 0
-        x_bien_2, y_bien_2 = 0, 0
-        x_bien_3, y_bien_3 = 0, 0
-
-        # Miền nghiệm đúng (Tùy theo choice và dấu)
-        if (choice == 0) or (choice == 1):
-            # Cắt trục x
-            if B.y > 0:
-                if is_origin_in_solution:
-                    x_bien, y_bien = x_trai - 1, y_duoi - 1  # Bên dưới
-                    x_bien_1, y_bien_1 = x_phai + 1, y_tren + 1  # Bên trên
-                else:  # (0,0) không thuộc miền nghiệm
-                    x_bien, y_bien = x_phai + 1, y_tren + 1  # Bên trên
-                    x_bien_1, y_bien_1 = x_trai - 1, y_duoi - 1  # Bên dưới
-            else:
-                if is_origin_in_solution:
-                    x_bien, y_bien = x_phai + 1, y_tren + 1  # Bên trên
-                    x_bien_1, y_bien_1 = x_trai - 1, y_duoi - 1  # Bên dưới
-                else:
-                    x_bien, y_bien = x_trai - 1, y_duoi - 1  # Bên dưới
-                    x_bien_1, y_bien_1 = x_phai + 1, y_tren + 1  # Bên trên
-
-            # Miền nghiệm sai: dùng đường BC
-            # Dạng 3: miền dưới (nếu C.x > B.x), miền trái (nếu C.y > B.y)
-            x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-            # Dạng 4: miền trên/phải
-            x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-
-        else:  # choice == 2 hoặc 3 (Cắt trục y)
-            if B.x > 0:
-                if is_origin_in_solution:
-                    x_bien, y_bien = x_trai - 1, y_tren + 1  # Bên trái
-                    x_bien_1, y_bien_1 = x_phai + 1, y_duoi - 1  # Bên phải
-                else:
-                    x_bien, y_bien = x_phai + 1, y_duoi - 1  # Bên phải
-                    x_bien_1, y_bien_1 = x_trai - 1, y_tren + 1  # Bên trái
-            else:
-                if is_origin_in_solution:
-                    x_bien, y_bien = x_trai - 1, y_duoi - 1  # Bên dưới
-                    x_bien_1, y_bien_1 = x_phai + 1, y_tren + 1  # Bên trên
-                else:
-                    x_bien, y_bien = x_phai + 1, y_tren + 1  # Bên trên
-                    x_bien_1, y_bien_1 = x_trai - 1, y_duoi - 1  # Bên dưới
-
-            # Miền nghiệm sai: dùng đường BC
-            # Dạng 3: miền trái/dưới
-            x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-            # Dạng 4: miền phải/trên
-            x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-
-        # 2️⃣ Đảm bảo mỗi câu sinh ra duy nhất
-        v = [AB, c, dau, choice, A, B, C, x_trai, x_phai, y_duoi, y_tren, x_bien, y_bien, x_bien_1, y_bien_1, x_bien_2,
-             y_bien_2, x_bien_3, y_bien_3, m_AB, n_AB, m_BC, n_BC]
-
-        if v not in gt:
-            gt.append(v)
-            dem += 1
-
+    VIET LAI 30/09/2026 (xem ghi chu dau khoi). Kiem tra bang diem O(0;0).
+    """
     cauTN = ""
-    for v in gt:
-        AB, c, dau, choice, A, B, C, x_trai, x_phai, y_duoi, y_tren, x_bien, y_bien, x_bien_1, y_bien_1, x_bien_2, y_bien_2, x_bien_3, y_bien_3, m_AB, n_AB, m_BC, n_BC = v
-
-        debai = f"Hình nào dưới đây biểu diễn miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$?"
-
-        is_dashed = True if (dau == '<') or (dau == '>') else False
-
-        # Hàm tạo chuỗi tikz
-        def generate_tikz(is_correct, is_dashed_line, use_BC_line, x_b, y_b):
-            line_style = "dashed, thick" if is_dashed_line else "thick"
-
-            # Chọn đường thẳng để vẽ (AB hoặc BC)
-            if not use_BC_line:
-                m_line, n_line = m_AB, n_AB
-            else:
-                m_line, n_line = m_BC, n_BC
-
-            line_plot = f"plot (\\x, {{({m_line})*\\x + {n_line}}})"
-            fill_plot = f"plot (\\x, {{({m_line})*\\x + {n_line}}}) |- ({x_b},{y_b})"
-
-            # Xử lý trường hợp đường thẳng đứng (AB[1] = 0 hoặc BC[1] = 0)
-            if AB[1] == 0:  # Đường thẳng đứng x = -c/AB[0] (cắt trục x)
-                line_plot = f"({-c / AB[0]}, {y_duoi - 1}) -- ({-c / AB[0]}, {y_tren + 1})"
-                if not use_BC_line:
-                    fill_plot = f"({-c / AB[0]}, {y_duoi - 1}) |- ({x_b}, {y_b})"
-                else:
-                    fill_plot = f"({-c_BC / BC[0]}, {y_duoi - 1}) |- ({x_b}, {y_b})"
-
-            elif BC[1] == 0 and use_BC_line:  # Đường thẳng đứng x = -c_BC/BC[0] (cắt trục x)
-                line_plot = f"({-c_BC / BC[0]}, {y_duoi - 1}) -- ({-c_BC / BC[0]}, {y_tren + 1})"
-                fill_plot = f"({-c_BC / BC[0]}, {y_duoi - 1}) |- ({x_b}, {y_b})"
-
-            # Dạng latex
-            tikzpicture = f"""
-                \\begin{{tikzpicture}}[scale=.5]
-                \\draw[->] ({x_trai - 0.7},0)--({x_phai + 0.7},0) node[below right] {{$x$}};
-                \\draw[->] (0,{y_duoi - 0.7})--(0,{y_tren + 0.7}) node[right] {{$y$}};
-                \\node (0,0) [below left] {{$ O $}};
-            """
-
-            if (choice == 0) or (choice == 1):
-                tikzpicture += f"""
-                    \\node at  ({A.x},0) [below left] {{$ {A.x} $}};
-                    \\node at ({C.x},0) [below left] {{$ {C.x} $}};
-                    \\node at (0,{B.y}) [above right] {{$ {B.y} $}};
-                """
-            else:
-                tikzpicture += f"""
-                    \\node at (0,{A.y}) [above right] {{$ {A.y} $}};
-                    \\node at (0,{C.y}) [above right] {{$ {C.y} $}};
-                    \\node at ({B.x},0) [below left] {{$ {B.x} $}};
-                """
-
-            tikzpicture += f"""
-                \\clip ({x_trai - 0.5},{y_duoi - 0.5}) rectangle ({x_phai + 0.5},{y_tren + 0.5});
-                \\foreach \\x in {{{x_trai},{x_trai + 1},...,{x_phai}}}
-                \\draw[shift={{(\\x,0)}},color=black] (0pt,2pt) -- (0pt,-2pt);
-                \\foreach \\y in {{{y_duoi},{y_duoi + 1},...,{y_tren}}}
-                \\draw[shift={{(0,\\y)}},color=black] (2pt,0pt) -- (-2pt,0pt);
-                \\draw [{line_style}, domain={x_trai - 1}:{x_phai + 1}, samples=100] {line_plot};
-                \\fill[pattern=north east lines,opacity=.7] {fill_plot};
-                \\end{{tikzpicture}}
-            """
-            return "{" + "".join(line.strip() for line in tikzpicture.splitlines()) + "}"
-
-        dapso = generate_tikz(True, is_dashed, False, x_bien,
-                              y_bien)  # Đáp án đúng: đường AB, miền nghiệm đúng (x_bien, y_bien)
-
-        nhieu1 = generate_tikz(False, is_dashed, False, x_bien_1,
-                               y_bien_1)  # Sai: đường AB, miền nghiệm sai (x_bien_1, y_bien_1)
-        nhieu2 = generate_tikz(False, True if (np.random.choice([0, 1]) == 0) else False, True, x_bien_2,
-                               y_bien_2)  # Sai: dùng đường BC, nét đứt ngẫu nhiên, miền sai (x_bien_2, y_bien_2)
-        nhieu3 = generate_tikz(False, True if (np.random.choice([0, 1]) == 0) else False, True, x_bien_3,
-                               y_bien_3)  # Sai: dùng đường BC, nét đứt ngẫu nhiên, miền sai (x_bien_3, y_bien_3)
-
-        dsnhieu = [nhieu1, nhieu2, nhieu3]
-
-        # Lời giải
-        giai = f"""
-            Bất phương trình đã cho là $${latex(AB[0] * x + AB[1] * y)} {dau} {c}$$
-            Bước 1: Vẽ đường thẳng $d: {latex(AB[0] * x + AB[1] * y)} = {c}$.
-            \\begin{{itemize}}
-                \\item Nếu dấu bất phương trình là $>$ hoặc $<$, ta vẽ $d$ bằng \\textbf{{nét đứt}}.
-                \\item Nếu dấu bất phương trình là $\\ge$ hoặc $\\le$, ta vẽ $d$ bằng \\textbf{{nét liền}}.
-            \\end{{itemize}}
-            Bước 2: Xét điểm $O(0;0)$.
-            Thay $x=0, y=0$ vào vế trái của bất phương trình, ta được: $VT = {AB[0]}(0) + {AB[1]}(0) = 0$.
-            Ta so sánh $VT$ với $c$: $0 {'>' if 0 > c else '<' if 0 < c else '='} {c}$.
-            \\begin{{itemize}}
-                \\item Nếu bất phương trình đúng (tức $0 {dau} {c}$ đúng) thì miền nghiệm là nửa mặt phẳng chứa gốc $O(0;0)$.
-                \\item Nếu bất phương trình sai (tức $0 {dau} {c}$ sai) thì miền nghiệm là nửa mặt phẳng không chứa gốc $O(0;0)$.
-            \\end{{itemize}}
-            Kết quả là hình ảnh ${dapso}$ (sau khi bỏ cặp dấu ${{...}}$).
-        """
-
-        # Đảm bảo các hình vẽ trong dsnhieu không trùng với dapso
-        # Do việc sinh hình phức tạp, ta chấp nhận có thể có trùng lặp nhẹ,
-        # nhưng logic sinh miền nghiệm sai khác biệt nên ít khi trùng hoàn toàn.
-
-        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
-
+    for _ in range(socau):
+        p = int(np.random.choice([-4, -3, -2, -1, 1, 2, 3, 4]))
+        q = int(np.random.choice([v for v in (-4, -3, -2, -1, 1, 2, 3, 4) if abs(v) != abs(p)]))
+        k = int(np.random.choice([1, -1]))
+        # x/p + y/q = 1  <=>  q x + p y = p q
+        a, b, c = k * q, k * p, k * p * q
+        dau = str(np.random.choice(["<", ">", r"\le", r"\ge"]))
+        # CUNG MOT khung cho ca 4 hinh, phai chua ca giao diem (0; -q) cua duong sai
+        khung = (min(0, p) - 2, max(0, p) + 2, -abs(q) - 1, abs(q) + 1)
+        nhan = [("x", p), ("y", q)]
+        # duong sai: doi dau giao diem voi Oy -> (p;0), (0;-q)
+        duong_sai = (-k * q, k * p, -k * p * q, [("x", p), ("y", -q)])
+        cauTN += _cau_mien_nghiem(a, b, c, dau, khung, nhan, duong_sai, (0, 0), dang)
     return cauTN
+
+
+def L10_C2_B3_TH024_MC_A_02(socau, dang=1):
+    r"""Chọn hình biểu diễn miền nghiệm - bờ $d$ song song trục toạ độ ($x \le a$,
+    $y > b$, kể cả trục $Oy$, $Ox$) hoặc đi qua gốc $O$ (phải thử điểm khác $O$).
+
+    VIET LAI 30/09/2026 (xem ghi chu dau khoi), theo cac cau "phan khong to va
+    ca truc Oy la mien nghiem cua x <= 0" trong phan bai tap trac nghiem Bai 3.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        kieu = int(np.random.randint(0, 3))
+        dau = str(np.random.choice(["<", ">", r"\le", r"\ge"]))
+        if kieu == 0:                       # x (dau) m
+            m = int(np.random.randint(-3, 4))
+            a, b, c = 1, 0, m
+            khung = (-abs(m) - 2, abs(m) + 2, -2, 3)
+            nhan = [("x", m), ("y", 2)]
+            m2 = -m if m else 2
+            duong_sai = (1, 0, m2, [("x", m2), ("y", 2)])
+            diem = (m + 1, 0)
+        elif kieu == 1:                     # y (dau) m
+            m = int(np.random.randint(-3, 4))
+            a, b, c = 0, 1, m
+            khung = (-2, 3, -abs(m) - 2, abs(m) + 2)
+            nhan = [("x", 2), ("y", m)]
+            m2 = -m if m else 2
+            duong_sai = (0, 1, m2, [("x", 2), ("y", m2)])
+            diem = (0, m + 1)
+        else:                               # a x + b y (dau) 0, bo qua O
+            a = int(np.random.choice([-3, -2, -1, 1, 2, 3]))
+            b = int(np.random.choice([-2, -1, 1, 2]))
+            c = 0
+            khung = (-3, 3, -3, 3)
+            nhan = [("x", 1), ("y", 1)]
+            duong_sai = (a, -b, 0, [("x", 1), ("y", 1)])
+            diem = (1, 0) if a != 0 else (0, 1)
+        cauTN += _cau_mien_nghiem(a, b, c, dau, khung, nhan, duong_sai, diem, dang)
+    return cauTN
+
 #print(K10_2_3_2_1_H(4,1))
 #
 # def K10_2_3_1_2_NB(): #DẠNG 1: nhận biết bpt, hệ bpt
@@ -843,226 +757,6 @@ def L10_C2_B3_TH024_MC_A_01(socau, dang=1):
 
 # ---- Hinh nao bieu dien mien nghiem (bien the, co hinh) ----
 # (tên cũ của cô: K10_2_3_2_1_TH)
-def L10_C2_B3_TH024_MC_A_02(socau, dang=1):
-    x = Symbol('x')
-    y = Symbol('y')
-
-    gt = []
-    dem = len(gt)
-
-    while dem < socau:
-        dau = np.random.choice(['>', '<', '\\ge', '\\le'])
-
-        point = [0, 0, 0]
-        while abs(point[0]) + abs(point[1]) < 3:
-            for i in range(3):
-                k = np.random.randint(-4, 5)
-                while k == 0:
-                    k = np.random.randint(-4, 5)
-                point.pop(0)
-                point.append(k)
-            while ((point[0] > 0) and (point[1] > 0) and (point[2] > 0)) or (
-                    (point[0] < 0) and (point[1] < 0) and (point[2] < 0)):
-                point.pop(-1)
-                k = np.random.randint(-4, 5)
-                while k == 0:
-                    k = np.random.randint(-4, 5)
-                point.append(k)
-            point.sort()
-
-        choice = np.random.choice([0, 1, 2, 3])
-        if choice == 0:
-            A = (point[0], 0)
-            B = (0, point[1])
-            C = (point[2], 0)
-            x_trai = point[0] - 1
-            x_phai = point[2] + 1
-            if point[1] < 0:
-                y_duoi = point[1] - 1
-                y_tren = 1
-            else:
-                y_tren = point[1] + 1
-                y_duoi = -1
-
-        elif choice == 1:
-            A = (point[0], 0)
-            B = (0, -point[1])
-            C = (point[2], 0)
-            x_trai = point[0] - 1
-            x_phai = point[2] + 1
-            if -point[1] < 0:
-                y_duoi = -point[1] - 1
-                y_tren = 1
-            else:
-                y_tren = -point[1] + 1
-                y_duoi = -1
-        elif choice == 2:
-            A = (0, point[0])
-            B = (point[1], 0)
-            C = (0, point[2])
-            y_duoi = point[0] - 1
-            y_tren = point[2] + 1
-            if point[1] < 0:
-                x_trai = point[1] - 1
-                x_phai = 1
-            else:
-                x_phai = point[1] + 1
-                x_trai = -1
-        else:
-            A = (0, point[0])
-            B = (-point[1], 0)
-            C = (0, point[2])
-            y_duoi = point[0] - 1
-            y_tren = point[2] + 1
-            if -point[1] < 0:
-                x_trai = -point[1] - 1
-                x_phai = 1
-            else:
-                x_phai = -point[1] + 1
-                x_trai = -1
-
-        AB = [-B[1] + A[1], B[0] - A[0]]
-        BC = [-C[1] + B[1], C[0] - B[0]]
-
-        fx = lambda x_val, y_val: AB[0] * x_val + AB[1] * y_val
-        c = AB[0] * A[0] + AB[1] * A[1]
-
-        if (((dau == '>') or (dau == '\\ge')) and (fx(0, 0) > c)) or ((dau == '<') or (dau == '\\le')) and (
-                fx(0, 0) < c):
-            if (choice == 0) or (choice == 1):
-                if B[1] > 0:
-                    x_bien, y_bien = x_trai - 1, y_tren + 1
-                    x_bien_1, y_bien_1 = x_phai + 1, y_duoi - 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-                else:
-                    x_bien, y_bien = x_trai - 1, y_duoi - 1
-                    x_bien_1, y_bien_1 = x_phai + 1, y_tren + 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_tren + 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_duoi - 1
-            else:
-                if B[0] > 0:
-                    x_bien, y_bien = x_phai + 1, y_duoi - 1
-                    x_bien_1, y_bien_1 = x_trai - 1, y_tren + 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-                else:
-                    x_bien, y_bien = x_trai - 1, y_duoi - 1
-                    x_bien_1, y_bien_1 = x_phai + 1, y_tren + 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_tren + 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_duoi - 1
-        else:
-            if (choice == 0) or (choice == 1):
-                if B[1] > 0:
-                    x_bien, y_bien = x_phai + 1, y_duoi - 1
-                    x_bien_1, y_bien_1 = x_trai - 1, y_tren + 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-                else:
-                    x_bien, y_bien = x_phai + 1, y_tren + 1
-                    x_bien_1, y_bien_1 = x_trai - 1, y_duoi - 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_tren + 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_duoi - 1
-            else:
-                if B[0] > 0:
-                    x_bien, y_bien = x_trai - 1, y_tren + 1
-                    x_bien_1, y_bien_1 = x_phai + 1, y_duoi - 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_duoi - 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_tren + 1
-                else:
-                    x_bien, y_bien = x_phai + 1, y_tren + 1
-                    x_bien_1, y_bien_1 = x_trai - 1, y_duoi - 1
-                    x_bien_2, y_bien_2 = x_trai - 1, y_tren + 1
-                    x_bien_3, y_bien_3 = x_phai + 1, y_duoi - 1
-
-        v = [AB, BC, dau, c, choice, A, B, C, x_trai, x_phai, y_duoi, y_tren, x_bien, y_bien, x_bien_1, y_bien_1,
-             x_bien_2, y_bien_2, x_bien_3, y_bien_3]
-        if v not in gt:
-            gt.append(v)
-            dem += 1
-
-    cauTN = ""
-    for v in gt:
-        AB, BC, dau, c, choice, A, B, C, x_trai, x_phai, y_duoi, y_tren, x_bien, y_bien, x_bien_1, y_bien_1, x_bien_2, y_bien_2, x_bien_3, y_bien_3 = v
-
-        label_nodes = ""
-        if (choice == 0) or (choice == 1):
-            label_nodes = f"""\\node at  ({A[0]},0) [below left] {{ $ {A[0]} $ }};
-            \\node at ({C[0]},0) [below left] {{ $ {C[0]} $ }};
-            \\node at (0,{B[1]}) [above right] {{ $ {B[1]} $ }};"""
-        else:
-            label_nodes = f"""\\node at (0,{A[1]}) [above right] {{ $ {A[1]} $ }};
-            \\node at (0,{C[1]}) [above right] {{ $ {C[1]} $ }};
-            \\node at ({B[0]},0) [below left] {{ $ {B[0]} $ }};"""
-
-        line_style = "dashed, thick" if (dau == '<' or dau == '>') else "thick"
-        line_style_3 = "dashed, thick" if (dau == '<' or dau == '>') else "thick"  # Đồng bộ theo gốc
-
-        # --- Tạo mã TikZ cho bốn phương án ---
-        dapso = f"""\\begin{{tikzpicture}}[scale=.5]
-        \\draw[->] ({x_trai - 0.7},0)--({x_phai + 0.7},0) node[below right] {{$x$}};
-        \\draw[->] (0,{y_duoi - 0.7})--(0,{y_tren + 0.7}) node[right] {{$y$}};
-        \\node (0,0) [below left] {{$ O $}};
-        {label_nodes}
-        \\clip ({x_trai - 0.5},{y_duoi - 0.5}) rectangle ({x_phai + 0.5},{y_tren + 0.5});
-        \\foreach \\x in {{{x_trai},{x_trai + 1},...,{x_phai}}} \\draw[shift={{(\\x,0)}},color=black] (0pt,2pt) -- (0pt,-2pt);
-        \\foreach \\y in {{{y_duoi},{y_duoi + 1},...,{y_tren}}} \\draw[shift={{(0,\\y)}},color=black] (2pt,0pt) -- (-2pt,0pt);
-        \\draw [{line_style}, domain={x_trai - 1}:{x_phai + 1}, samples=100] plot (\\x, {{({-(AB[0] / AB[1])})*\\x + {(AB[0] / AB[1]) * A[0] + A[1]}}});
-        \\fill[pattern=north east lines,opacity=.7] plot (\\x, {{({-(AB[0] / AB[1])})*\\x + {(AB[0] / AB[1]) * A[0] + A[1]}}}) |- ({x_bien},{y_bien});
-        \\end{{tikzpicture}}"""
-
-        nhieu1 = f"""\\begin{{tikzpicture}}[scale=.5]
-        \\draw[->] ({x_trai - 0.7},0)--({x_phai + 0.7},0) node[below right] {{$x$}};
-        \\draw[->] (0,{y_duoi - 0.7})--(0,{y_tren + 0.7}) node[right] {{$y$}};
-        \\node (0,0) [below left] {{$ O $}};
-        {label_nodes}
-        \\clip ({x_trai - 0.5},{y_duoi - 0.5}) rectangle ({x_phai + 0.5},{y_tren + 0.5});
-        \\foreach \\x in {{{x_trai},{x_trai + 1},...,{x_phai}}} \\draw[shift={{(\\x,0)}},color=black] (0pt,2pt) -- (0pt,-2pt);
-        \\foreach \\y in {{{y_duoi},{y_duoi + 1},...,{y_tren}}} \\draw[shift={{(0,\\y)}},color=black] (2pt,0pt) -- (-2pt,0pt);
-        \\draw [{line_style}, domain={x_trai - 1}:{x_phai + 1}, samples=100] plot (\\x, {{({-(AB[0] / AB[1])})*\\x + {(AB[0] / AB[1]) * A[0] + A[1]}}});
-        \\fill[pattern=north east lines,opacity=.7] plot (\\x, {{({-(AB[0] / AB[1])})*\\x + {(AB[0] / AB[1]) * A[0] + A[1]}}}) |- ({x_bien_1},{y_bien_1});
-        \\end{{tikzpicture}}"""
-
-        nhieu2 = f"""\\begin{{tikzpicture}}[scale=.5]
-        \\draw[->] ({x_trai - 0.7},0)--({x_phai + 0.7},0) node[below right] {{$x$}};
-        \\draw[->] (0,{y_duoi - 0.7})--(0,{y_tren + 0.7}) node[right] {{$y$}};
-        \\node (0,0) [below left] {{$ O $}};
-        {label_nodes}
-        \\clip ({x_trai - 0.5},{y_duoi - 0.5}) rectangle ({x_phai + 0.5},{y_tren + 0.5});
-        \\foreach \\x in {{{x_trai},{x_trai + 1},...,{x_phai}}} \\draw[shift={{(\\x,0)}},color=black] (0pt,2pt) -- (0pt,-2pt);
-        \\foreach \\y in {{{y_duoi},{y_duoi + 1},...,{y_tren}}} \\draw[shift={{(0,\\y)}},color=black] (2pt,0pt) -- (-2pt,0pt);
-        \\draw [{line_style}, domain={x_trai - 1}:{x_phai + 1}, samples=100] plot (\\x, {{({-(BC[0] / BC[1])})*\\x + {(BC[0] / BC[1]) * B[0] + B[1]}}});
-        \\fill[pattern=north east lines,opacity=.7] plot (\\x, {{({-(BC[0] / BC[1])})*\\x + {(BC[0] / BC[1]) * B[0] + B[1]}}}) |- ({x_bien_2},{y_bien_2});
-        \\end{{tikzpicture}}"""
-
-        nhieu3 = f"""\\begin{{tikzpicture}}[scale=.5]
-        \\draw[->] ({x_trai - 0.7},0)--({x_phai + 0.7},0) node[below right] {{$x$}};
-        \\draw[->] (0,{y_duoi - 0.7})--(0,{y_tren + 0.7}) node[right] {{$y$}};
-        \\node (0,0) [below left] {{$ O $}};
-        {label_nodes}
-        \\clip ({x_trai - 0.5},{y_duoi - 0.5}) rectangle ({x_phai + 0.5},{y_tren + 0.5});
-        \\foreach \\x in {{{x_trai},{x_trai + 1},...,{x_phai}}} \\draw[shift={{(\\x,0)}},color=black] (0pt,2pt) -- (0pt,-2pt);
-        \\foreach \\y in {{{y_duoi},{y_duoi + 1},...,{y_tren}}} \\draw[shift={{(0,\\y)}},color=black] (2pt,0pt) -- (-2pt,0pt);
-        \\draw [{line_style_3}, domain={x_trai - 1}:{x_phai + 1}, samples=100] plot (\\x, {{({-(BC[0] / BC[1])})*\\x + {(BC[0] / BC[1]) * B[0] + B[1]}}});
-        \\fill[pattern=north east lines,opacity=.7] plot (\\x, {{({-(BC[0] / BC[1])})*\\x + {(BC[0] / BC[1]) * B[0] + B[1]}}}) |- ({x_bien_3},{y_bien_3});
-        \\end{{tikzpicture}}"""
-
-        dsnhieu = [nhieu1, nhieu2, nhieu3]
-
-        debai = f"Hình nào dưới đây biểu diễn miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$?"
-
-        giai = f"""
-        Để xác định miền nghiệm của bất phương trình ${latex(AB[0] * x + AB[1] * y)} {dau} {c}$:\\\\
-        1. Vẽ đường thẳng d: ${latex(AB[0] * x + AB[1] * y)} = {c}$.\\\\
-        2. Chọn điểm gốc tọa độ $O(0;0)$, ta thấy giá trị vế trái tại $O$ là $0$.\\\\
-        3. So sánh kết quả để xác định nửa mặt phẳng bị gạch bỏ (không thuộc miền nghiệm).\\\\
-        Hình đúng biểu diễn chính xác phần miền nghiệm được giữ lại (không gạch chéo) phù hợp với dấu của bất phương trình.
-        """
-
-        # Sử dụng hàm MC_SA_answer_text vì phương án chứa mã TikZ (hình ảnh hình học trực quan)
-        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
-
-    return cauTN
 #
 # def K10_2_3_2_2_TH(): #DẠNG 2: miền nghiệm của bpt, hệ bpt
 #     with open(r"latex\data\de.tex", "a", encoding='utf-8') as de:

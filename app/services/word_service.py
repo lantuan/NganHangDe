@@ -287,11 +287,19 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list) -> s
     ten = "Bài" if loai == "TL" else "Câu"
     ra = ["\\textbf{%s %d.} %s" % (ten, so, de)]
     if loai == "MC":
+        hinh_pa = c.get("hinh_phuong_an_tikz") or {}
         for k in "ABCD":
-            ra.append("\\textbf{%s.} %s" % (k, _lam_sach(c["phuong_an"][k], None, anh)))
+            noi = _lam_sach(c["phuong_an"][k], None, anh)
+            if hinh_pa.get(k):
+                noi += "\n\n" + _lam_sach(hinh_pa[k], None, anh)
+            ra.append("\\textbf{%s.} %s" % (k, noi))
     elif loai == "TF":
+        hinh_y = c.get("hinh_phat_bieu_tikz") or {}
         for k in "abcd":
-            dong = "\\textbf{%s)} %s" % (k, _lam_sach(c["phat_bieu"][k], None, anh))
+            noi_y = _lam_sach(c["phat_bieu"][k], None, anh)
+            if hinh_y.get(k):
+                noi_y += "\n\n" + _lam_sach(hinh_y[k], None, anh)
+            dong = "\\textbf{%s)} %s" % (k, noi_y)
             if co_loi_giai:
                 dong += " \\quad \\textbf{(%s)}" % ("Đúng" if c["dap_an_dung"][k] else "Sai")
             ra.append(dong)

@@ -358,6 +358,36 @@ def chuan_hoa_dap_an_tf(gia_tri) -> bool | None:
     return None
 
 
+_TIKZ = re.compile(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", re.S)
+
+
+def _tach_hinh_khoi_chu(noi: str) -> tuple[str, list[str]]:
+    r"""Tach hinh TikZ ra khoi noi dung mot phuong an / mot y.
+
+    SUA 30/09/2026 (co Lan: "cac hinh nay o moi phuong an chon. nhung gio ko ra
+    theo phuong an duoc"): cau "Hinh nao bieu dien mien nghiem" co HINH LA
+    PHUONG AN. Truoc day ma TikZ nam nguyen trong chu phuong an -> web hien
+    "Unknown environment 'tikzpicture'", con hinh bi don len phan de bai.
+    Nay tach rieng de dich ra anh va dat dung vao o A/B/C/D. Ham sinh cu co
+    boc them { } quanh hinh -> bo luon cap ngoac rong con sot.
+    """
+    hinh = _TIKZ.findall(noi or "")
+    if not hinh:
+        return noi, []
+    chu = _TIKZ.sub("", noi)
+    while True:
+        moi = re.sub(r"\{\s*\}", "", chu)
+        if moi == chu:
+            break
+        chu = moi
+    return chu.strip(), hinh
+
+
+def _bo_hinh_da_nam_trong(hinh_de: list[str], cac_noi: list[str]) -> list[str]:
+    tat_ca = "\n".join(cac_noi)
+    return [h for h in hinh_de if h not in tat_ca]
+
+
 def trich_dap_an(latex_block: str) -> dict:
     r"""
     Ham tong hop dung cho 1 latex_block (1 cau hoi) — tu nhan dien loai cau:
@@ -373,22 +403,40 @@ def trich_dap_an(latex_block: str) -> dict:
 
     tf = trich_dap_an_tf(latex_block)
     if tf is not None:
-        return {
+        phat_bieu, hinh_y = {}, {}
+        for k, v in tf["phat_bieu"].items():
+            phat_bieu[k], h = _tach_hinh_khoi_chu(v)
+            if h:
+                hinh_y[k] = h[0]
+        kq = {
             "loai_cau": "TF",
             "dap_an_dung": tf["dap_an_dung"],
-            "phat_bieu": tf["phat_bieu"],
+            "phat_bieu": phat_bieu,
             "loi_giai": trich_loi_giai(latex_block),
             **de_bai,
         }
+        if hinh_y:
+            kq["hinh_phat_bieu_tikz"] = hinh_y
+            kq["hinh_tikz"] = _bo_hinh_da_nam_trong(de_bai["hinh_tikz"], list(tf["phat_bieu"].values()))
+        return kq
     choice = trich_dap_an_choice(latex_block)
     if choice is not None:
-        return {
+        phuong_an, hinh_pa = {}, {}
+        for k, v in choice["phuong_an"].items():
+            phuong_an[k], h = _tach_hinh_khoi_chu(v)
+            if h:
+                hinh_pa[k] = h[0]
+        kq = {
             "loai_cau": "MC",
             "dap_an_dung": choice["dap_an_dung"],
-            "phuong_an": choice["phuong_an"],
+            "phuong_an": phuong_an,
             "loi_giai": trich_loi_giai(latex_block),
             **de_bai,
         }
+        if hinh_pa:
+            kq["hinh_phuong_an_tikz"] = hinh_pa
+            kq["hinh_tikz"] = _bo_hinh_da_nam_trong(de_bai["hinh_tikz"], list(choice["phuong_an"].values()))
+        return kq
     shortans = trich_dap_an_shortans(latex_block)
     if shortans is not None:
         return {

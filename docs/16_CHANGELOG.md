@@ -9185,3 +9185,27 @@ _DAU_KT de khong de ten cu.
 - tests/test_xuat_word.py: cong thuc la <m:oMath>, ban de khong lo dap an,
   cau hong khong lam hong file, chi giao vien tai duoc, quet moi ham khong
   sot "%d"/"%s"/"\%%".
+
+# Version 3.55 - 2026-09-30
+
+## TH024 (ve mien nghiem BPT bac nhat hai an): hinh theo SGK + hinh hien o tung phuong an
+
+- data/python_bank/toan10/L10_C2.py: viet lai TH024_MC_A_01, TH024_MC_A_02
+  (giu nguyen dang, chi sua hinh va loi dan).
+  - Theo SGK hien hanh: mien nghiem la phan KHONG bi gach; phan bi gach phu HET
+    khung hinh o nua mat phang bi loai (cat khung bang Sutherland-Hodgman,
+    ham _cat_nua_mat_phang). Bo net lien voi <=, >=; net dut voi <, >.
+  - Nhan truc va O co nen trang de khong bi net gach de len.
+  - Phuong an nhieu: gach nguoc phia, sai kieu net bo, sai duong thang.
+  - Loi dan ghi ro "mien nghiem la phan khong bi gach".
+- app/services/answer_parser_service.py: hinh nam trong tung phuong an / tung y
+  Dung-Sai duoc tach rieng -> hinh_phuong_an_tikz {A..D}, hinh_phat_bieu_tikz
+  {a..d}; hinh_tikz cua de bai khong con chua hinh phuong an.
+- app/services/exam_assembler_service.py: dich cac hinh do -> dap_an["hinh_phuong_an"],
+  dap_an["hinh_phat_bieu"].
+- app/routers/exam.py (API lam bai) + app/templates/chat/lam_bai.html: hien anh
+  ngay trong o phuong an A-D / y a-d.
+- app/services/word_service.py: Word cung chen anh vao tung phuong an.
+- tests/test_hinh_phuong_an_len_web.py (moi).
+- Luu y: de DA TAO truoc ban nay van giu hinh cu (hinh luu theo de); tao de moi
+  de thay hinh moi.

@@ -152,6 +152,8 @@
         .bang-lx { border-collapse: collapse; margin: 10px auto; max-width: 100%; }
         .bang-lx td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: center; }
         .bang-lx tr:first-child td { background: #f1f5f9; font-weight: 600; }
+        .hinh-o { margin: 6px 0 0 0; text-align: left; }
+        .hinh-ve.hinh-o img { max-width: 240px; }
         .hinh-ve img {
             max-width: 100%; height: auto; background: #fff;
             border-radius: var(--radius-xl); padding: 8px;
@@ -462,6 +464,12 @@ function timCau(soThuTu) {
     return null;
 }
 
+// Cau co hinh nam TRONG tung phuong an / y (vd "Hinh nao bieu dien mien nghiem").
+function coAnhTrongO(cau) {
+    return Object.keys(cau.hinh_phuong_an || {}).length > 0 ||
+           Object.keys(cau.hinh_phat_bieu || {}).length > 0;
+}
+
 function veMotCau(cau) {
     let noiDung = '<div class="cau-hoi">';
     noiDung += '<div class="cau-hoi-so">Câu ' + soHienThi(cau) + '</div>';
@@ -476,18 +484,22 @@ function veMotCau(cau) {
         });
     }
 
-    if (cau.co_hinh_ve && !coAnh) {
+    if (cau.co_hinh_ve && !coAnh && !coAnhTrongO(cau)) {
         noiDung += '<div class="ghi-chu-hinh">📎 Câu này có hình vẽ, web chưa hiển thị được — xem trong file PDF đề nhé!</div>';
     } else if (cau.loai_cau === 'MC') {
         ['A', 'B', 'C', 'D'].forEach(function (nhan) {
             const noi = cau.phuong_an && cau.phuong_an[nhan] ? cau.phuong_an[nhan] : '';
-            noiDung += '<label class="lua-chon"><input type="radio" name="cau_' + cau.so_thu_tu + '" value="' + nhan + '"> ' + nhan + '. ' + renderLatexText(noi) + '</label>';
+            const anhO = cau.hinh_phuong_an && cau.hinh_phuong_an[nhan]
+                ? '<div class="hinh-ve hinh-o"><img src="' + cau.hinh_phuong_an[nhan] + '" alt="Hình phương án ' + nhan + '" loading="lazy" onerror="baoHinhHong(this)"></div>' : '';
+            noiDung += '<label class="lua-chon"><input type="radio" name="cau_' + cau.so_thu_tu + '" value="' + nhan + '"> ' + nhan + '. ' + renderLatexText(noi) + anhO + '</label>';
         });
     } else if (cau.loai_cau === 'TF') {
         ['a', 'b', 'c', 'd'].forEach(function (y) {
             const noi = cau.phat_bieu && cau.phat_bieu[y] ? cau.phat_bieu[y] : '';
             noiDung += '<div class="tf-hang">';
-            noiDung += '<div class="noi-dung">' + y + ') ' + renderLatexText(noi) + '</div>';
+            const anhY = cau.hinh_phat_bieu && cau.hinh_phat_bieu[y]
+                ? '<div class="hinh-ve hinh-o"><img src="' + cau.hinh_phat_bieu[y] + '" alt="Hình ý ' + y + '" loading="lazy" onerror="baoHinhHong(this)"></div>' : '';
+            noiDung += '<div class="noi-dung">' + y + ') ' + renderLatexText(noi) + anhY + '</div>';
             noiDung += '<div class="tf-nut">';
             noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="true"> Đúng</label>';
             noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="false"> Sai</label>';
@@ -519,7 +531,7 @@ function veTrangLamBai() {
     });
 
     const coTuLuan = DANH_SACH_CAU.some(function (cau) {
-        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length);
+        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length) && !coAnhTrongO(cau);
         return !chuaHienDuocHinh && ['MC', 'TF', 'SA'].indexOf(cau.loai_cau) === -1;
     });
     if (coTuLuan) {
@@ -560,7 +572,7 @@ function docFileBase64(file) {
 function thuThapBaiLam() {
     const baiLam = [];
     DANH_SACH_CAU.forEach(function (cau) {
-        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length);
+        const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length) && !coAnhTrongO(cau);
         if (chuaHienDuocHinh || cau.loai_cau === 'TL') return;
         if (cau.loai_cau === 'MC') {
             const checked = document.querySelector('input[name="cau_' + cau.so_thu_tu + '"]:checked');

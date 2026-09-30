@@ -1050,8 +1050,13 @@ def xem_de_lam_bai_endpoint(de_id: str):
         }
         if loai_cau == "MC":
             muc["phuong_an"] = cau.get("phuong_an") or {}
+            # anh hinh ve nam TRONG tung phuong an (vd "hinh nao bieu dien mien nghiem")
+            muc["hinh_phuong_an"] = {k: "/api/exam/hinh/%s" % m
+                                     for k, m in (cau.get("hinh_phuong_an") or {}).items()}
         elif loai_cau == "TF":
             muc["phat_bieu"] = cau.get("phat_bieu") or {}
+            muc["hinh_phat_bieu"] = {k: "/api/exam/hinh/%s" % m
+                                     for k, m in (cau.get("hinh_phat_bieu") or {}).items()}
         elif loai_cau == "SA":
             pass  # chi can de_bai, hoc sinh tu go dap an
         else:
