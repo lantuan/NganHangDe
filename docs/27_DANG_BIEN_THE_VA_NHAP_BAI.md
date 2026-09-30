@@ -193,3 +193,24 @@ Test: `tests/test_chon_cau_khong_na_na.py`.
    như cùng một bài toán) thì không lấy cả hai nếu còn dạng khác
    (`_khoa_mo_ta` trong question_selector_service). Vì vậy khi viết dạng SA/TL
    cho một đơn vị đã có MC, nên làm **bài toán khác** chứ không chép dạng MC.
+
+---
+
+## 8. Kho bối cảnh cho bài toán thực tế (không trùng bối cảnh trong một đề)
+
+Chốt 30/09/2026 (cô Lan): lời dẫn bài toán thực tế tự chọn ngẫu nhiên trong
+nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câu không trùng bối cảnh**.
+
+- Kho `_BOI_CANH_HAI_TAP` trong `L10_C1.py` (bài toán hai tập hợp, VD020): 14 lĩnh
+  vực - đọc sách, thể thao, câu lạc bộ, học lực, văn nghệ (một lớp của trường THPT
+  chuyên Hùng Vương: 10C1A … 10C9, cố định 35 học sinh); hoa (phụ nữ trên phố đi bộ
+  Gia Lai), tài chính cá nhân, mạng xã hội, du lịch Gia Lai, đồ uống, đặc sản, nông
+  nghiệp (cà phê, hồ tiêu), ngoại ngữ, thể dục. Mỗi bối cảnh có tỉ lệ số liệu riêng
+  cho HỢP LÍ (vd người đầu tư chứng chỉ quỹ phần lớn đã có tài khoản ngân hàng).
+- Không trùng trong một mã đề: tệp chương khai báo `_DE_HIEN_TAI = threading.local()`;
+  `generator_service.call_generator` gán `_DE_HIEN_TAI.da_dung` = tập bối cảnh đã
+  dùng của mã đề (lưu trong `used_variants["__boi_canh__"]`). Hàm chọn bối cảnh qua
+  `_bo_chon_boi_canh()`. Chạy nháp lẻ thì mỗi lần gọi hàm tự không lặp.
+- Muốn thêm bối cảnh: thêm một phần tử vào `_BOI_CANH_HAI_TAP` (mo, dv, tap, cap =
+  (A, B, động từ, động từ phủ định, loại), tỉ lệ tA, tB, giao; mo_an + hoi_tong nếu
+  dùng được cho câu hỏi tổng số).

@@ -99,3 +99,53 @@ def test_khong_chon_hai_dang_cung_mo_ta_o_hai_loai_cau():
         c = _xoay_vong_bien_the([{"id": "L10_C1_B1_VD014_SA_A", "Dang": "Mệnh đề chưa biến"},
                                  {"id": "L10_C1_B1_VD014_SA_B", "Dang": "Đếm số mệnh đề đúng"}], 1, set(), m)
         assert c[0]["id"].endswith("SA_B")
+
+
+def test_bai_toan_hai_tap_khong_trung_boi_canh_trong_mot_ma_de():
+    """Cô Lan 30/09/2026: các câu thực tế hai tập hợp trong cùng một đề không
+    được trùng bối cảnh (generator_service gán _DE_HIEN_TAI.da_dung theo mã đề)."""
+    from app.services.generator_service import call_generator
+    ids = ["L10_C1_B2_VD020_TL_A", "L10_C1_B2_VD020_SA_A", "L10_C1_B2_VD020_MC_A",
+           "L10_C1_B2_VD020_TL_A", "L10_C1_B2_VD020_MC_A", "L10_C1_B2_VD020_SA_A"]
+    for sd in range(20):
+        random.seed(sd)
+        used = {}
+        for g in ids:
+            call_generator(generator_id=g, lop=10, chuong_so=1, role="teacher", socau_yeu_cau=1,
+                           used_variants=used)
+        # moi cau dung kho boi canh them dung mot boi canh moi (tru bien the ba tap hop)
+        so_cau_hai_tap = len(used["__boi_canh__"])
+        assert so_cau_hai_tap >= 4, used
+
+
+def test_kho_boi_canh_so_lieu_hop_li():
+    import sys as _s
+    _s.path.insert(0, str(GOC / "data" / "python_bank"))
+    from toan10 import L10_C1 as M
+    for sd in range(300):
+        random.seed(sd)
+        chon = M._bo_chon_boi_canh()
+        d = M._de_hai_tap(chon)
+        assert 0 < d["nAB"] < min(d["nA"], d["nB"])
+        assert d["khong"] >= 2 and d["nAuB"] <= d["N"]
+        if d["bc"]["lop"]:
+            assert d["N"] == 35
+
+
+def test_tam_cau_hai_tap_trong_mot_de_la_tam_boi_canh_khac_nhau():
+    import sys as _s
+    _s.path.insert(0, str(GOC / "data" / "python_bank"))
+    from toan10 import L10_C1 as M
+    ham = [M.L10_C1_B2_VD020_TL_A_01, M.L10_C1_B2_VD020_TL_A_02, M.L10_C1_B2_VD020_SA_A_01,
+           M.L10_C1_B2_VD020_SA_A_03, M.L10_C1_B2_VD020_MC_A_01, M.L10_C1_B2_VD020_MC_A_02,
+           M.L10_C1_B2_VD020_MC_A_04, M.L10_C1_B2_VD020_TL_A_01]
+    for sd in range(20):
+        random.seed(sd)
+        s = set()
+        for f in ham:
+            M._DE_HIEN_TAI.da_dung = s
+            try:
+                f(1)
+            finally:
+                M._DE_HIEN_TAI.da_dung = None
+        assert len(s) == len(ham), s

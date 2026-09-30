@@ -193,7 +193,17 @@ def call_generator(
     func = getattr(module, chosen_name)
 
     socau = resolve_socau(role, socau_yeu_cau)
-    latex_block = _call_generator_function(func, socau, socot, dong)
+    # Bối cảnh đề đã dùng trong MÃ ĐỀ đang sinh (vd kho bối cảnh bài toán thực
+    # tế hai tập hợp của L10_C1): các câu cùng dùng một kho bối cảnh thì không
+    # trùng bối cảnh. Tệp chương khai báo _DE_HIEN_TAI = threading.local().
+    ngu_canh = getattr(module, "_DE_HIEN_TAI", None)
+    if ngu_canh is not None:
+        ngu_canh.da_dung = used_variants.setdefault("__boi_canh__", set()) if used_variants is not None else None
+    try:
+        latex_block = _call_generator_function(func, socau, socot, dong)
+    finally:
+        if ngu_canh is not None:
+            ngu_canh.da_dung = None
     # Bo loc chung: 1x -> x, + -5 -> - 5... (xem lam_dep_bieu_thuc.py)
     latex_block = lam_dep(latex_block)
     kiem_tra_dung_loai_cau(generator_id, latex_block)

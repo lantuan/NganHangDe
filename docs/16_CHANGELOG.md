@@ -9339,3 +9339,16 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - So lieu hop li theo boi canh (_so_lieu_hai_tap): ti le moi tap, ti le phan giao
   (vd nguoi dau tu chung chi quy phan lon da co tai khoan ngan hang), it nhat 2 nguoi
   khong thuoc tap nao. So viet trong $...$.
+
+# Version 3.64 - 2026-09-30
+
+## Bai toan thuc te hai tap hop: kho 14 boi canh, khong trung boi canh trong mot de
+
+- L10_C1: kho _BOI_CANH_HAI_TAP (14 linh vuc, so lieu hop li theo boi canh) dung chung
+  cho VD020_TL_A_01, VD020_SA_A_01, VD020_MC_A_01, VD020_MC_A_02 (viet lai: truoc
+  moi ham mot boi canh co dinh "lop 10A") va bien the moi VD020_TL_A_02 (biet so
+  khong thuoc nao: tinh it nhat mot, ca hai, chi A), VD020_SA_A_03 (chi thuoc A),
+  VD020_MC_A_04 (tinh so thuoc ca hai).
+- generator_service: gan tap boi canh da dung cua ma de cho tep chuong
+  (_DE_HIEN_TAI) -> cac cau cung kho khong trung boi canh trong mot de.
+- docs/27 muc 8; test trong tests/test_chon_cau_khong_na_na.py.

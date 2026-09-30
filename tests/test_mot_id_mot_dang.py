@@ -98,6 +98,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_E",   # chon cong thuc dung-sai / rut gon bieu thuc
     "L10_C3_B5_TH031_MC_F",   # biet so do goc / biet sin-cos phan so
     "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
+    "L10_C1_B2_VD020_TL_A",   # it nhat mot / khong thuoc nao  -  biet so khong thuoc, tinh ca hai, chi A (kho boi canh)
     # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
     "L10_C1_B1_VD014_SA_B",   # dem so menh de dung / dem n lam keo theo sai
     "L10_C1_B1_VD014_MC_D",   # keo theo tren R co tham so / keo theo chia het
