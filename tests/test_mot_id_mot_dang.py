@@ -87,6 +87,17 @@ CHO_PHEP_NHIEU_HAM = {
     # tu bai tap trac nghiem Bai 5 (30/09/2026):
     "L10_C3_B5_TH031_MC_B",   # M doi xung N qua Oy: toa do bang chu / so do goc xOM
     "L10_C3_TF_D",            # M cho bang toa do thap phan / cho bang so do goc (co hinh, dien tich MAN)
+    # 10 dang moi Bai 5, _02 hoi theo cach khac cung don vi kien thuc (co Lan 30/09/2026):
+    "L10_C3_B5_NB029_MC_H",   # dang thuc dung/sai cua mot goc / gia tri nao bang so cho truoc
+    "L10_C3_B5_NB029_SA_B",   # biet goc tinh toa do / biet toa do tim goc
+    "L10_C3_B5_TH030_MC_D",   # sin + cos -> sin.cos / sin.cos -> (sin +- cos)^2, sin^4 + cos^4
+    "L10_C3_B5_TH030_SA_B",   # cos -> dien tich AOM / dien tich AOM -> cos
+    "L10_C3_B5_TH031_MC_C",   # tich sin cos goc dac biet / goc le phai dung phu-bu
+    "L10_C3_B5_TH031_SA_C",   # cho alpha + beta / trong tam giac
+    "L10_C3_B5_TH031_MC_D",   # dang thuc giua hai goc dac biet / suy ra gia tri gan dung
+    "L10_C3_B5_TH031_MC_E",   # chon cong thuc dung-sai / rut gon bieu thuc
+    "L10_C3_B5_TH031_MC_F",   # biet so do goc / biet sin-cos phan so
+    "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
     # tu giao an Bai 6:
     "L10_C3_B6_TH032_MC_A",   # (da co 2) + cos A cho bang phan so
     "L10_C3_B6_TH033_MC_A",   # biet mot canh hai goc / noi tiep duong tron R, tinh canh goc thu ba

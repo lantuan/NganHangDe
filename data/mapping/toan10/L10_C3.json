@@ -392,70 +392,70 @@
     "id": "L10_C3_B5_NB029_MC_H",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn đẳng thức đúng/sai về sin, côsin, tang, côtang của cùng một góc đặc biệt",
+    "Dang": "Nhận ra giá trị lượng giác của góc đặc biệt: chọn đẳng thức đúng/sai, hoặc chọn giá trị bằng một số cho trước",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_NB029_SA_B",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết số đo góc xOM, tính biểu thức toạ độ của điểm M trên nửa đường tròn đơn vị",
+    "Dang": "Liên hệ số đo góc xOM với toạ độ điểm M trên nửa đường tròn đơn vị (biết góc tính toạ độ, hoặc biết toạ độ tìm góc)",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH030_MC_D",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết sin α + cos α (hoặc sin α − cos α) là một số, tính sin α.cos α",
+    "Dang": "Biến đổi nhờ sin²α + cos²α = 1: liên hệ giữa sin α ± cos α và sin α.cos α",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH030_SA_B",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết côsin góc xOM, tính diện tích tam giác AOM (có hình)",
+    "Dang": "Liên hệ côsin góc xOM với diện tích tam giác AOM (có hình)",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_MC_C",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính biểu thức tích sin, côsin của hai góc đặc biệt phụ nhau hoặc bù nhau",
+    "Dang": "Tính biểu thức nhờ quan hệ giá trị lượng giác của hai góc phụ nhau, bù nhau (góc đặc biệt hoặc góc bất kì)",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_SA_C",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Cho α + β = 90 độ hoặc 180 độ, tính biểu thức theo α, β",
+    "Dang": "Hai góc phụ nhau, bù nhau (cho sẵn α + β hoặc trong tam giác), tính biểu thức",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_MC_D",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn đẳng thức đúng/sai giữa giá trị lượng giác của hai góc đặc biệt phụ nhau, bù nhau",
+    "Dang": "Giá trị lượng giác của hai góc phụ nhau, bù nhau: chọn đẳng thức đúng/sai hoặc suy ra giá trị gần đúng",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_MC_E",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn công thức tổng quát đúng/sai về giá trị lượng giác của hai góc bù nhau, phụ nhau",
+    "Dang": "Công thức tổng quát về giá trị lượng giác của hai góc phụ nhau, bù nhau: chọn công thức đúng/sai hoặc rút gọn",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_MC_F",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tam giác vuông biết một góc nhọn đặc biệt: khẳng định về giá trị lượng giác của hai góc nhọn",
+    "Dang": "Hai góc nhọn của tam giác vuông phụ nhau: giá trị lượng giác của hai góc nhọn",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
     "id": "L10_C3_TF_F",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Đúng sai",
-    "Dang": "Giá trị lượng giác các góc của tam giác biết một góc tù hoặc nhọn (quan hệ bù)",
+    "Dang": "Giá trị lượng giác các góc của tam giác (quan hệ bù): biết góc tù/nhọn hoặc số đo một góc",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   }
 ]

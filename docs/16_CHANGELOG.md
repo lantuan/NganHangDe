@@ -9247,3 +9247,21 @@ _DAU_KT de khong de ten cu.
   NB029_MC_E_01, TH030_MC_B_01 - khong them.
 - Sua TH030_MC_A_01: so thap phan viet dau phay (0,34) theo SGK, truoc la dau cham.
 - tests/test_mot_id_mot_dang.py: them TH031_MC_B, TF_D vao danh sach cho phep.
+
+# Version 3.58 - 2026-09-30
+
+## Bai 5: bien the _02 cho 10 dang moi - HOI THEO CACH KHAC, cung don vi kien thuc
+
+Co Lan: "_02 phai la cach hoi khac di, nhung cung ve mot don vi kien thuc".
+- NB029_MC_H_02: gia tri nao bang mot so cho truoc (hoi nguoc _01).
+- NB029_SA_B_02: biet hoanh do / tung do cua M, tim so do goc xOM.
+- TH030_MC_D_02: biet sin.cos, tinh (sin +- cos)^2 hoac sin^4 + cos^4.
+- TH030_SA_B_02: biet dien tich AOM va phia cua M, tim cos xOM (co hinh).
+- TH031_MC_C_02: goc KHONG dac biet, bat buoc dung quan he phu/bu.
+- TH031_SA_C_02: trong tam giac (A va B + C bu nhau).
+- TH031_MC_D_02: biet gia tri gan dung, suy ra gia tri cua goc phu/bu.
+- TH031_MC_E_02: rut gon bieu thuc bang cong thuc goc phu/bu.
+- TH031_MC_F_02: tam giac vuong biet sin/cos (phan so) mot goc, tinh cua goc kia.
+- TF_F_02: tam giac cho so do mot goc, tinh gia tri cu the.
+- Mapping: mo ta "Dang" cua 10 ID viet lai theo don vi kien thuc (bao ca _01, _02).
+- tests/test_mot_id_mot_dang.py: them 10 ID vao danh sach cho phep nhieu ham.
