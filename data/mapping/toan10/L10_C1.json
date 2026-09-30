@@ -336,5 +336,26 @@
     "Loai": "Tự luận",
     "Dang": "Phép toán tập hợp chứa tham số trên trục số",
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số mệnh đề đúng (chứa ∀, ∃, kéo theo) hoặc số n làm mệnh đề kéo theo sai",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tham số để mệnh đề kéo theo chứa ∀ là mệnh đề đúng",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B1_VD014_TL_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Tự luận",
+    "Dang": "Lập mệnh đề phủ định của mệnh đề chứa ∀, ∃ và xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
   }
 ]

@@ -9730,3 +9730,273 @@ def _MC_khong_cham(debai, dung, nhieu, *con_lai):
     """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
     return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
                              [_bo_cham_cuoi(x) for x in nhieu], *con_lai)
+
+
+
+# =====================================================================
+# THÊM DẠNG CHO L10_C1_B1_VD014 (30/09/2026)
+# ---------------------------------------------------------------------
+# Bài 1 chỉ có MỘT đơn vị mức VD (VD014 - Curriculum của Bộ, không thêm
+# được đơn vị mới). Đề có VD ở bài 1 cho cả MC, SA, TL thì cả ba câu đều là
+# VD014, nên cần NHIỀU DẠNG khác hẳn nhau (cô Lan: "làm thêm VD của bài 1").
+#   SA_B  đếm số mệnh đề đúng / số n làm mệnh đề kéo theo sai
+#   MC_D  tham số để mệnh đề kéo theo chứa kí hiệu với mọi là mệnh đề đúng
+#   TL_B  lập mệnh đề phủ định của mệnh đề chứa kí hiệu với mọi, tồn tại và xét đúng sai
+# Mỗi dạng có _01 và _02 hỏi theo cách khác (docs/27).
+# =====================================================================
+
+def _md_luong_tu_vd():
+    """Một mệnh đề chứa kí hiệu với mọi / tồn tại, sinh ngẫu nhiên, kèm tính đúng
+    sai và lí do (tính bằng Python)."""
+    k = random.choice([1, 2, 3, 4, 5])
+    a = random.choice([-4, -3, -2, -1, 1, 2, 3, 4])
+    s = random.choice([2, 4, 6])
+    m = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16])
+    kieu = random.randrange(8)
+    if kieu == 0:
+        tex = r"\forall x \in \mathbb{R},\ x^{2} + %d > 0" % a if a > 0 else \
+              r"\forall x \in \mathbb{R},\ x^{2} - %d > 0" % (-a)
+        dung = a > 0
+        ly = (r"$x^{2} \ge 0$ nên $x^{2} + %d > 0$ với mọi $x$" % a) if a > 0 else \
+             (r"với $x = 0$ thì $0 - %d < 0$" % (-a))
+    elif kieu == 1:
+        tex = r"\exists x \in \mathbb{R},\ x^{2} = %d" % a
+        dung = a >= 0
+        ly = (r"lấy $x = \sqrt{%d}$" % a) if a >= 0 else r"$x^{2} \ge 0 > %d$ với mọi $x$" % a
+    elif kieu == 2:
+        tex = r"\forall x \in \mathbb{R},\ x^{2} - %dx + %d \ge 0" % (s, (s // 2) ** 2)
+        dung = True
+        ly = r"$x^{2} - %dx + %d = \left(x - %d\right)^{2} \ge 0$" % (s, (s // 2) ** 2, s // 2)
+    elif kieu == 3:
+        tex = r"\exists n \in \mathbb{N},\ n^{2} = %d" % m
+        r = math.isqrt(m)
+        dung = r * r == m
+        ly = (r"$n = %d$" % r) if dung else (r"$%d^{2} < %d < %d^{2}$" % (r, m, r + 1))
+    elif kieu == 4:
+        tex = r"\forall n \in \mathbb{N},\ n\left(n + 1\right) \text{ chia hết cho } %d" % random.choice([2, 3])
+        d = int(tex.split("cho } ")[1])
+        dung = d == 2
+        ly = (r"$n$, $n + 1$ là hai số tự nhiên liên tiếp nên có một số chẵn") if dung else \
+             r"với $n = 1$ thì $n\left(n + 1\right) = 2$ không chia hết cho $3$"
+    elif kieu == 5:
+        tex = r"\exists n \in \mathbb{N},\ n^{2} + n + 1 \text{ chia hết cho } 2"
+        dung = False
+        ly = r"$n^{2} + n = n\left(n + 1\right)$ luôn chẵn nên $n^{2} + n + 1$ luôn lẻ"
+    elif kieu == 6:
+        tex = r"\forall x \in \mathbb{R},\ x > %d \Rightarrow x^{2} > %d" % (a, a * a)
+        dung = a >= 0
+        ly = (r"$x > %d \ge 0$ thì $x^{2} > %d$" % (a, a * a)) if a >= 0 else \
+             (r"với $x = 0 > %d$ thì $x^{2} = 0 \not> %d$" % (a, a * a))
+    else:
+        tex = r"\forall n \in \mathbb{N},\ n\left(n + 1\right)\left(n + 2\right) \text{ chia hết cho } %d" % random.choice([6, 4])
+        d = int(tex.split("cho } ")[1])
+        dung = d == 6
+        ly = (r"tích ba số tự nhiên liên tiếp chia hết cho cả $2$ và $3$") if dung else \
+             r"với $n = 1$ thì tích bằng $6$, không chia hết cho $4$"
+    return kieu, tex, dung, ly
+
+
+def L10_C1_B1_VD014_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cho bốn mệnh đề chứa kí hiệu $\forall$, $\exists$ (cả trên
+    $\mathbb{R}$ và $\mathbb{N}$, có mệnh đề kéo theo); hỏi có bao nhiêu mệnh đề đúng.
+
+    CLAUDE THEM 30/09/2026 - dang moi cho VD014 (khac SA_A: SA_A tim tham so;
+    SA_B dem so menh de dung). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ds, kieu_da = [], set()
+        while len(ds) < 4:
+            k, tex, dung, ly = _md_luong_tu_vd()
+            if k in kieu_da:
+                continue
+            kieu_da.add(k)
+            ds.append((tex, dung, ly))
+        dap = str(sum(1 for _, d, _ in ds if d))
+        # tra loi ngan khong duoc dung \item (khoa cua math_type) - danh so 1., 2., ... bang tay
+        debai = (r"Cho các mệnh đề sau:" + "\\\\\n" +
+                 "\\\\\n".join(r"%d. $%s$." % (i + 1, t) for i, (t, _, _) in enumerate(ds)) + "\\\\\n" +
+                 r"Có bao nhiêu mệnh đề đúng?")
+        giai = "\\\\\n".join(r"%d. %s vì %s." % (i + 1, r"\textbf{Đúng}" if d else r"\textbf{Sai}", ly)
+                             for i, (t, d, ly) in enumerate(ds)) + "\\\\\n" + r"Vậy có $%s$ mệnh đề đúng." % dap
+        nhieu = [str(x) for x in range(5) if str(x) != dap]
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_SA_B_02(socau, dang=2):
+    r"""Trả lời ngắn - hỏi theo cách khác của _01: cho hai mệnh đề chứa biến về
+    chia hết, đếm số $n$ trong một đoạn làm cho mệnh đề KÉO THEO sai
+    (kéo theo sai khi $P$ đúng mà $Q$ sai).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD014_SA_B. Co Lan duyet lai.
+    """
+    CAP = [(a, b) for a in (2, 3, 4, 5, 6) for b in (3, 4, 6, 8, 9, 10, 12) if b % a != 0 and a % b != 0]
+    cau = ""
+    for _ in range(socau):
+        a, b = random.choice(CAP)
+        if random.random() < 0.5:
+            a, b = b, a
+        N = random.choice([30, 40, 50, 60, 100])
+        so_P = N // a
+        so_PQ = N // (a * b // math.gcd(a, b))
+        dap = str(so_P - so_PQ)
+        lcm = a * b // math.gcd(a, b)
+        debai = (r"Cho mệnh đề chứa biến $P(n)$: ``$n$ chia hết cho $%d$'' và $Q(n)$: ``$n$ chia hết cho $%d$'' với "
+                 r"$n$ là số nguyên dương. Có bao nhiêu số nguyên dương $n \le %d$ để mệnh đề $P(n) \Rightarrow Q(n)$ "
+                 r"là mệnh đề \textbf{sai}?" % (a, b, N))
+        giai = (r"$P(n) \Rightarrow Q(n)$ sai khi và chỉ khi $P(n)$ đúng và $Q(n)$ sai, tức $n$ chia hết cho $%d$ "
+                r"nhưng không chia hết cho $%d$." % (a, b) + "\\\\\n" +
+                r"Số các $n \le %d$ chia hết cho $%d$ là $%d$; trong đó số chia hết cho cả $%d$ và $%d$ (tức chia "
+                r"hết cho $%d$) là $%d$." % (N, a, so_P, a, b, lcm, so_PQ) + "\\\\\n" +
+                r"Vậy có $%d - %d = %s$ số." % (so_P, so_PQ, dap))
+        nhieu = [str(so_P), str(so_PQ), str(N - so_P), str(N // b)]
+        cau += MC_SA_answer_const(debai, dap, [x for x in dict.fromkeys(nhieu) if x != dap] + ["0", "1"],
+                                  giai, 0, 0, dang)
+    return cau
+
+
+_KEO_THEO_THAM_SO = [
+    # (dang tex voi m, c; dieu kien dung theo m; ly do)
+    (r"x > m \Rightarrow x > %d", lambda m, c: m >= c, r"mọi $x > m$ đều lớn hơn $%d$ khi và chỉ khi $m \ge %d$"),
+    (r"x < m \Rightarrow x < %d", lambda m, c: m <= c, r"mọi $x < m$ đều nhỏ hơn $%d$ khi và chỉ khi $m \le %d$"),
+    (r"x > %d \Rightarrow x > m", lambda m, c: m <= c, r"mọi $x > %d$ đều lớn hơn $m$ khi và chỉ khi $m \le %d$"),
+    (r"x \ge m \Rightarrow x > %d", lambda m, c: m > c, r"mọi $x \ge m$ đều lớn hơn $%d$ khi và chỉ khi $m > %d$"),
+    (r"x > m \Rightarrow x \ge %d", lambda m, c: m >= c, r"mọi $x > m$ đều không nhỏ hơn $%d$ khi và chỉ khi $m \ge %d$"),
+]
+
+
+def L10_C1_B1_VD014_MC_D_01(socau, dang=1):
+    r"""Tham số để mệnh đề KÉO THEO chứa kí hiệu $\forall$ là mệnh đề đúng
+    (vd $\forall x \in \mathbb{R},\ x > m \Rightarrow x > 3$): có bao nhiêu giá trị nguyên của $m$.
+
+    CLAUDE THEM 30/09/2026 - dang moi cho VD014 (khac MC_A: MC_A la bat phuong
+    trinh bac hai co tham so; MC_D la menh de keo theo). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        mau, dk, ly = random.choice(_KEO_THEO_THAM_SO)
+        c = random.randint(-6, 8)
+        L, U = random.choice([(-10, 10), (-20, 20), (-15, 15)])
+        dem = sum(1 for m in range(L, U + 1) if dk(m, c))
+        mde = mau % c
+        debai = (r"Có bao nhiêu giá trị nguyên của tham số $m$ thuộc đoạn $\left[%d;\ %d\right]$ để mệnh đề "
+                 r"``$\forall x \in \mathbb{R},\ %s$'' là mệnh đề đúng?" % (L, U, mde))
+        giai = (r"Mệnh đề đúng nghĩa là %s." % (ly % (c, c)) + "\\\\\n" +
+                r"Trên đoạn $\left[%d;\ %d\right]$ có $%d$ giá trị nguyên của $m$ thoả mãn." % (L, U, dem))
+        dung = "$%d$" % dem
+        nhieu = _ba_nhieu_dem(dem, [dem + 1, dem - 1, U - L + 1 - dem])
+        cau += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def _ba_nhieu_dem(dap, ung_vien):
+    ra = []
+    for x in ung_vien + [dap + 2, dap - 2, dap + 3]:
+        if x != dap and x >= 0 and "$%d$" % x not in ra:
+            ra.append("$%d$" % x)
+    return ra[:3]
+
+
+def L10_C1_B1_VD014_MC_D_02(socau, dang=1):
+    r"""Cách hỏi khác của _01: mệnh đề kéo theo về CHIA HẾT chứa tham số
+    ($\forall n \in \mathbb{N},\ n \text{ chia hết cho } m \Rightarrow n \text{ chia hết cho } c$
+    đúng khi $m$ là bội của $c$); đếm số $m$.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD014_MC_D. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        c = random.choice([2, 3, 4, 5, 6])
+        N = random.choice([30, 40, 50, 60])
+        nguoc = random.random() < 0.5
+        if nguoc:
+            # n chia het cho c => n chia het cho m  dung khi m la uoc cua c
+            dem = sum(1 for m in range(1, N + 1) if c % m == 0)
+            mde = r"n \text{ chia hết cho } %d \Rightarrow n \text{ chia hết cho } m" % c
+            ly = (r"Mệnh đề đúng khi và chỉ khi mọi bội của $%d$ đều là bội của $m$, tức $m$ là ước của $%d$." % (c, c)
+                  + "\\\\\n" + r"$%d$ có $%d$ ước nguyên dương." % (c, dem))
+        else:
+            dem = N // c
+            mde = r"n \text{ chia hết cho } m \Rightarrow n \text{ chia hết cho } %d" % c
+            ly = (r"Mệnh đề đúng khi và chỉ khi mọi bội của $m$ đều chia hết cho $%d$, tức $m$ chia hết cho $%d$."
+                  % (c, c) + "\\\\\n" + r"Từ $1$ đến $%d$ có $%d$ số chia hết cho $%d$." % (N, dem, c))
+        debai = (r"Có bao nhiêu số nguyên dương $m \le %d$ để mệnh đề ``$\forall n \in \mathbb{N},\ %s$'' là mệnh đề "
+                 r"đúng?" % (N, mde))
+        dung = "$%d$" % dem
+        nhieu = _ba_nhieu_dem(dem, [N - dem, dem + 1, N // (c + 1)])
+        cau += MC_SA_answer_text(debai, dung, nhieu, ly, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_TL_B_01(socau, dong=1):
+    r"""Tự luận - lập mệnh đề PHỦ ĐỊNH của mệnh đề chứa kí hiệu $\forall$ (bất
+    đẳng thức có tham số cụ thể) và xét tính đúng sai của mệnh đề phủ định.
+
+    CLAUDE THEM 30/09/2026 - dang moi cho VD014 (khac TL_A: TL_A la keo theo va
+    menh de dao). Co Lan duyet lai.
+    """
+    DAU = {">": r"\le", r"\ge": "<", "<": r"\ge", r"\le": ">"}
+    cau = ""
+    for _ in range(socau):
+        s = random.choice([2, 4, 6])
+        h = s // 2
+        a = random.randint(-3, h * h + 3)
+        dau = random.choice([">", r"\ge"])
+        # x^2 - s x + a = (x - h)^2 + a - h^2
+        du = a - h * h
+        P_dung = du > 0 if dau == ">" else du >= 0
+        P = r"\forall x \in \mathbb{R},\ x^{2} - %dx %s %d %s 0" % (s, "+" if a >= 0 else "-", abs(a), dau)
+        Pbar = r"\exists x \in \mathbb{R},\ x^{2} - %dx %s %d %s 0" % (s, "+" if a >= 0 else "-", abs(a), DAU[dau])
+        debai = r"Cho mệnh đề $P$: ``$%s$''." % P
+        bien_doi = r"$x^{2} - %dx %s %d = \left(x - %d\right)^{2}%s$" % (
+            s, "+" if a >= 0 else "-", abs(a), h, "" if du == 0 else (" %s %d" % ("+" if du > 0 else "-", abs(du))))
+        ds = [
+            (r"Phát biểu mệnh đề phủ định $\overline{P}$.", r"\overline{P}\colon %s" % Pbar,
+             r"Phủ định của ``$\forall x, A(x)$'' là ``$\exists x, \overline{A(x)}$'', nên $\overline{P}$: ``$%s$''." % Pbar),
+            (r"Xét tính đúng sai của mệnh đề $\overline{P}$.", r"\text{%s}" % ("Sai" if P_dung else "Đúng"),
+             bien_doi + ". " +
+             ((r"Vì $\left(x - %d\right)^{2} \ge 0$ nên biểu thức luôn $%s 0$: $P$ đúng, do đó $\overline{P}$ \textbf{sai}."
+               % (h, dau)) if P_dung else
+              (r"Với $x = %d$ biểu thức bằng $%d$, không thoả $%s 0$: $P$ sai, do đó $\overline{P}$ \textbf{đúng}."
+               % (h, du, dau)))),
+        ]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau
+
+
+def L10_C1_B1_VD014_TL_B_02(socau, dong=1):
+    r"""Tự luận - cách hỏi khác của _01: mệnh đề chứa kí hiệu $\exists$ trên
+    $\mathbb{N}$ về chia hết; lập mệnh đề phủ định và xét tính đúng sai của cả hai.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD014_TL_B. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        a = random.randint(1, 9)
+        k = random.choice([2, 3])
+        if k == 2:
+            P_dung = a % 2 == 0
+            ly = (r"$n^{2} + n = n\left(n + 1\right)$ luôn chẵn nên $n^{2} + n + %d$ %s với mọi $n$" %
+                  (a, "luôn chẵn" if P_dung else "luôn lẻ"))
+            bt = r"n^{2} + n + %d" % a
+        else:
+            # n(n+1)(n+2) chia het cho 3; n^3 - n = (n-1)n(n+1) chia het cho 3
+            P_dung = a % 3 == 0
+            ly = (r"$n^{3} - n = \left(n - 1\right)n\left(n + 1\right)$ luôn chia hết cho $3$ nên $n^{3} - n + %d$ "
+                  r"chia hết cho $3$ khi và chỉ khi $%d$ chia hết cho $3$" % (a, a))
+            bt = r"n^{3} - n + %d" % a
+        P = r"\exists n \in \mathbb{N},\ %s \text{ chia hết cho } %d" % (bt, k)
+        Pbar = r"\forall n \in \mathbb{N},\ %s \text{ không chia hết cho } %d" % (bt, k)
+        debai = r"Cho mệnh đề $P$: ``$%s$''." % P
+        ds = [
+            (r"Phát biểu mệnh đề phủ định $\overline{P}$.", r"\overline{P}\colon %s" % Pbar,
+             r"Phủ định của ``$\exists n, A(n)$'' là ``$\forall n, \overline{A(n)}$'', nên $\overline{P}$: ``$%s$''." % Pbar),
+            (r"Xét tính đúng sai của mệnh đề $P$.", r"\text{%s}" % ("Đúng" if P_dung else "Sai"),
+             ly + r". Do đó $P$ \textbf{%s}." % ("đúng" if P_dung else "sai")),
+            (r"Xét tính đúng sai của mệnh đề $\overline{P}$.", r"\text{%s}" % ("Sai" if P_dung else "Đúng"),
+             r"$\overline{P}$ là phủ định của $P$ nên có tính đúng sai ngược với $P$: $\overline{P}$ \textbf{%s}."
+             % ("sai" if P_dung else "đúng")),
+        ]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau

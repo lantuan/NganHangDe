@@ -53,7 +53,8 @@ def _chuong_tu_curriculum_id(curriculum_id: str) -> int:
     return int(match.group(1))
 
 
-def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) -> list[dict]:
+def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set,
+                        dang_da_dung: set | None = None) -> list[dict]:
     """
     Chọn so_luong Generator ID trong candidates (các phiên bản A/B/C của
     cùng 1 curriculum_id + loại câu). Ưu tiên phiên bản CHƯA dùng trong
@@ -70,6 +71,12 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) 
     chon = []
     for _ in range(so_luong):
         chua_dung = [c for c in candidates if c["id"] not in da_dung_id]
+        if dang_da_dung is not None:
+            # Uu tien dang ma MO TA ("Dang" trong Mapping) chua gap o loai cau khac
+            # cua cung don vi (vd VD014_MC_A va VD014_SA_A cung "Menh de chua bien"
+            # thi ra hai cau gan nhu giong het).
+            khac_mo_ta = [c for c in chua_dung if _khoa_mo_ta(c) not in dang_da_dung]
+            chua_dung = khac_mo_ta or chua_dung
         if chua_dung:
             item = random.choice(chua_dung)
         else:
@@ -78,8 +85,17 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) 
         chon.append(item)
         da_dung_id.add(item["id"])
         dem[item["id"]] += 1
+        if dang_da_dung is not None:
+            dang_da_dung.add(_khoa_mo_ta(item))
 
     return chon
+
+
+def _khoa_mo_ta(row: dict) -> tuple:
+    """(đơn vị kiến thức, mô tả dạng đã chuẩn hoá) của một dòng Mapping."""
+    g = _CURRICULUM_TU_GENERATOR.match(row.get("id", ""))
+    dv = _don_vi(g.group(1)) if g else row.get("id", "")
+    return dv, " ".join(str(row.get("Dang", "")).lower().split())
 
 
 # Đếm số lần mỗi dạng (Generator ID) đã được chọn, theo từng tập da_dung_id
@@ -168,6 +184,7 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
     }
     # đơn vị kiến thức đã dùng trong đề (chung cho MC / SA / TL)
     dem_don_vi: Counter = Counter()
+    mo_ta_da_dung: set = set()
     for loai in ("trac_nghiem", "tra_loi_ngan", "tu_luan"):
         for item in blueprint.get(loai, []):
             dem_don_vi[_don_vi(item["curriculum_id"])] += item.get("tong_so_cau", 1)
@@ -243,7 +260,7 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                     continue
                 raise SelectorError(ghi_chu)
 
-            chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung[loai_cau])
+            chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung[loai_cau], mo_ta_da_dung)
             for c in chosen:
                 ket_qua.append({
                     "generator_id": c["id"],

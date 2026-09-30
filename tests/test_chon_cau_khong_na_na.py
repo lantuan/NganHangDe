@@ -84,3 +84,18 @@ def test_ma_tran_co_sa_tl_muc_th_khong_bi_bo_mat():
     assert sum(x["tong_so_cau"] for x in bp["trac_nghiem"]) == 5
     assert [x["muc_do"] for x in bp["tra_loi_ngan"]] == ["TH"]
     assert [x["muc_do"] for x in bp["tu_luan"]] == ["TH"]
+
+
+def test_khong_chon_hai_dang_cung_mo_ta_o_hai_loai_cau():
+    """VD014_MC_A va VD014_SA_A cung mo ta 'Menh de chua bien' (cung mot bai toan):
+    MC da lay MC_A thi SA phai uu tien SA_B."""
+    from app.services.question_selector_service import _xoay_vong_bien_the
+    mo_ta = set()
+    random.seed(0)
+    _xoay_vong_bien_the([{"id": "L10_C1_B1_VD014_MC_A", "Dang": "Mệnh đề chưa biến"}], 1, set(), mo_ta)
+    for sd in range(30):
+        random.seed(sd)
+        m = set(mo_ta)
+        c = _xoay_vong_bien_the([{"id": "L10_C1_B1_VD014_SA_A", "Dang": "Mệnh đề chưa biến"},
+                                 {"id": "L10_C1_B1_VD014_SA_B", "Dang": "Đếm số mệnh đề đúng"}], 1, set(), m)
+        assert c[0]["id"].endswith("SA_B")

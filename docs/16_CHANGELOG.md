@@ -9312,3 +9312,16 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   muc (_thay_don_vi_khac).
 - generator_service._chon_bien_the: het bien the chua dung thi lay bien the dung it nhat.
 - docs/27 muc 7; tests/test_chon_cau_khong_na_na.py.
+
+# Version 3.62 - 2026-09-30
+
+## Them dang VD cho bai 1 chuong 1 (chi co mot don vi VD014)
+
+- L10_C1: VD014_SA_B_01/_02 (dem so menh de dung; dem n lam keo theo sai),
+  VD014_MC_D_01/_02 (tham so de keo theo chua voi moi dung: tren R / chia het),
+  VD014_TL_B_01/_02 (phu dinh menh de chua voi moi / ton tai va xet dung sai).
+  3 dong mapping moi.
+- Phat hien: VD014_SA_A_02/_03 ra CUNG bai toan voi VD014_MC_A_02/_03 (chi khac
+  so) -> mot de co the co hai cau giong nhau. question_selector_service: hai dang
+  cung don vi, cung mo ta "Dang" thi khong lay ca hai neu con dang khac.
+- docs/27 muc 7.5; test moi trong tests/test_chon_cau_khong_na_na.py.

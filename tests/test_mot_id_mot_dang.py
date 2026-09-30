@@ -98,6 +98,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_E",   # chon cong thuc dung-sai / rut gon bieu thuc
     "L10_C3_B5_TH031_MC_F",   # biet so do goc / biet sin-cos phan so
     "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
+    # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
+    "L10_C1_B1_VD014_SA_B",   # dem so menh de dung / dem n lam keo theo sai
+    "L10_C1_B1_VD014_MC_D",   # keo theo tren R co tham so / keo theo chia het
+    "L10_C1_B1_VD014_TL_B",   # phu dinh menh de voi moi (bat dang thuc) / ton tai (chia het)
     # tu bai tap trac nghiem Bai 6 (30/09/2026), _02 hoi theo cach khac:
     "L10_C3_B6_VD036_MC_B",   # qua dam lay (canh doi dien goc) / ve tinh (canh ke)
     "L10_C3_B6_TH032_MC_E",   # he thuc bang chu / he thuc da thay so

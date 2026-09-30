@@ -188,3 +188,8 @@ Chốt 30/09/2026 (cô Lan). Ví dụ: mức TH của bài 1, ma trận có 5 MC
    các câu này bị bỏ mất).
 
 Test: `tests/test_chon_cau_khong_na_na.py`.
+5. Hai dạng khác loại câu nhưng **cùng mô tả "Dang"** trong Mapping của cùng
+   một đơn vị (vd VD014_MC_A và VD014_SA_A đều là "Mệnh đề chưa biến", ra gần
+   như cùng một bài toán) thì không lấy cả hai nếu còn dạng khác
+   (`_khoa_mo_ta` trong question_selector_service). Vì vậy khi viết dạng SA/TL
+   cho một đơn vị đã có MC, nên làm **bài toán khác** chứ không chép dạng MC.
