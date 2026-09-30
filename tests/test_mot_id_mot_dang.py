@@ -139,8 +139,8 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH033_TL_A",   # cho A, B / cho B, C (tu tinh A) roi dinh li sin
     "L10_C3_B6_TH034_MC_A",   # chon cong thuc theo du kien / cong thuc nao dung-sai
     "L10_C3_TF_C",            # tau hai chang: van toc-thoi gian / quang duong + huong la ban
-    "L10_C3_B6_VD036_MC_C",   # tau doi huong / hai phuong tien cung xuat phat
-    "L10_C3_B6_VD036_TL_D",   # doi huong 60 do / hai huong la ban bat ki
+    "L10_C3_B6_VD036_MC_C",   # tau doi huong / hai phuong tien cung xuat phat / cho quang duong, hoi AC hoac huong
+    "L10_C3_B6_VD036_TL_D",   # doi huong 60 do / hai huong la ban bat ki / phuong dong roi E30S (cho quang duong)
     "L10_C3_B6_VD036_TL_A",   # hai goc nang 30-60 / ang-ten tren noc nha
     "L10_C3_B6_VD036_MC_D",   # hai goc nang tren mat dat / thap tren doi / dieu
 }

@@ -9501,3 +9501,15 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - _ghep_tu_luan_nhieu_y: sau cau nhieu don vi, cac suat con lai ghep cap thanh cau mot
   don vi (NB/TH: hai y cung muc; VD + VDC). so_suat_tu_luan: cau mot don vi = 2.
 - Diem tu luan chia theo y: de mac dinh 3 cau x 2 y -> 0,5 diem/y, 1 diem/cau.
+
+# Version 3.77 - 2026-09-30
+
+## VD036: bai toan suon doi do doc p% va tau doi huong theo huong la ban (theo co Lan)
+
+- Suon doi do doc p% (tang goc doc), cay moc thang dung, tu chan doi cach goc cay d m nhin
+  ngon cay duoi goc beta (co hinh): MC_E_01, SA_G_01 (chieu cao cay), TL_F_01 (a goc doc -
+  VD, b chieu cao - VDC). Bai goc 12%, 30 m, 45 do: alpha ~ 6,8 do, cay ~ 26 m.
+- Tau chay d1 km ve mot phuong roi doi sang huong X theta Y chay d2 km: MC_C_03, SA_F_01
+  (hoi ngau nhien AC hoac huong), TL_D_03 (a AC, b huong). Bai goc dong 15 km, E30S 20 km:
+  AC ~ 34 km, huong E17S. Phuong dau, huong doi, quang duong ngau nhien.
+- So lieu chon truoc (_bo_suon_doi, _bo_tau_doi_huong): dap so khong sat ranh gioi lam tron.

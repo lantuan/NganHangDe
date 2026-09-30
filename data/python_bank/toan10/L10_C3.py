@@ -8142,3 +8142,263 @@ def L10_C3_TH031_TH034_TL_A_01(socau, dong=1):
                % (XY, XZ, X, m_, n_, _tri(v), _tri(S)))]
         cau += TL_answer_text(debai, ds, 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# VD036 - hai bài toán thực tế cô Lan gửi 30/09/2026. SỐ LIỆU CHỌN TRƯỚC sao
+# cho đáp số làm tròn không sát ranh giới (_xa_bien) và hợp lí rồi mới ra đề.
+#  1) Sườn đồi độ dốc p% (tang góc dốc), cây mọc thẳng đứng; từ chân đồi cách
+#     gốc cây d m nhìn ngọn cây dưới góc beta so với phương nằm ngang.
+#     MC_E_01, SA_G_01 (chiều cao cây), TL_F_01 (a) góc dốc, b) chiều cao).
+#  2) Tàu chạy d1 km theo một phương (đông/tây/nam/bắc) rồi đổi sang hướng
+#     X theta Y chạy d2 km: khoảng cách AC và hướng từ A tới C.
+#     MC_C_03, SA_F_01 (hỏi ngẫu nhiên AC hoặc hướng), TL_D_03 (a) AC, b) hướng).
+# =====================================================================
+
+def _bo_suon_doi():
+    """(p, d, beta, alpha, h): độ dốc p%, AB = d (m) dọc sườn đồi, góc nhìn beta."""
+    while True:
+        p = random.choice([8, 10, 12, 15, 18, 20, 25])
+        d = random.choice([20, 24, 25, 30, 35, 40, 45, 50])
+        be = random.choice([35, 40, 45, 50, 55, 60])
+        al = math.degrees(math.atan(p / 100))
+        if be - al < 20:
+            continue
+        h = d * math.sin(math.radians(be - al)) / math.cos(math.radians(be))
+        if h < 5 or not _xa_bien(h) or not _xa_bien(al, 1):
+            continue
+        return p, d, be, al, h
+
+
+def _hinh_suon_doi(al, be):
+    """Sườn đồi AB (vẽ dốc hơn thật cho dễ nhìn), cây BC thẳng đứng, tia AC."""
+    a_v = min(max(al * 1.8, 10), 22)             # góc dốc khi vẽ
+    L = 3.2
+    bx, by = L * math.cos(math.radians(a_v)), L * math.sin(math.radians(a_v))
+    cy = bx * math.tan(math.radians(be))
+    return (
+        "\\begin{tikzpicture}[scale=0.95,font=\\footnotesize]\n"
+        "\\coordinate (A) at (0,0);\n\\coordinate (B) at (%.2f,%.2f);\n\\coordinate (C) at (%.2f,%.2f);\n"
+        % (bx, by, bx, cy)
+        + "\\draw[dashed] (A) -- (%.2f,0);\n" % (bx + 0.8)
+        + "\\draw[thick] (A) -- (%.2f,%.2f);\n" % (bx + 0.8, by + 0.8 * math.tan(math.radians(a_v)))
+        + "\\draw[thick,green!50!black] (B) -- (C);\n\\draw (A) -- (C);\n"
+        "\\draw (1.4,0) arc (0:%.1f:1.4);\n" % a_v
+        + "\\node at (%.1f:1.75) {$\\alpha$};\n" % (a_v / 2)
+        + "\\draw (0.5,0) arc (0:%.1f:0.5);\n" % be
+        + "\\node at (%.1f:0.85) {$%d^{\\circ}$};\n" % (max(be * 0.6, a_v + 14), be)
+        + "\\fill (A) circle (0.04) node[below left] {$A$};\n"
+        "\\fill (B) circle (0.04) node[below right] {$B$};\n"
+        "\\fill (C) circle (0.04) node[above] {$C$};\n"
+        "\\end{tikzpicture}"
+    )
+
+
+def _de_suon_doi(p, d, be):
+    return (r"Trên một sườn đồi có độ dốc $%d\%%$ (độ dốc của sườn đồi được tính bằng tang của góc tạo bởi "
+            r"sườn đồi với phương nằm ngang) có một cây cao $BC$ mọc thẳng đứng ($B$ là gốc cây). Ở phía chân "
+            r"đồi, tại điểm $A$ cách gốc cây $%d\,\text{m}$, người ta nhìn ngọn cây dưới một góc $%s$ so với "
+            r"phương nằm ngang (như hình vẽ)." % (p, d, _goc(be)))
+
+
+def _giai_suon_doi(p, d, be, al, h):
+    return (r"Gọi $\alpha$ là góc tạo bởi sườn đồi với phương nằm ngang: $\tan\alpha = %s$ nên "
+            r"$\alpha \approx %s^{\circ}$." % (_xx(p / 100), _x1(al)) + "\\\\\n" +
+            r"Trong tam giác $ABC$: $\widehat{BAC} = %s - \alpha$, $\widehat{ABC} = 90^{\circ} + \alpha$ "
+            r"(cây thẳng đứng), $\widehat{ACB} = 180^{\circ} - \widehat{BAC} - \widehat{ABC} = 90^{\circ} - %s = %s$."
+            % (_goc(be), _goc(be), _goc(90 - be)) + "\\\\\n" +
+            r"Định lí sin: $BC = \dfrac{AB\cdot\sin\widehat{BAC}}{\sin\widehat{ACB}} = "
+            r"\dfrac{%d\cdot\sin\left(%s - \alpha\right)}{\sin %s} \approx %s\,\text{m}$."
+            % (d, _goc(be), _goc(90 - be), _xx(h, 2)))
+
+
+def L10_C3_B6_VD036_MC_E_01(socau, dang=1):
+    r"""Sườn đồi độ dốc $p\%$ (tang góc dốc), cây mọc thẳng đứng trên sườn đồi; từ
+    chân đồi cách gốc cây $d$ m nhìn ngọn cây dưới góc $\beta$. Tính chiều cao cây
+    (làm tròn đến hàng đơn vị) - có hình.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo bai co Lan gui (do doc 12%, 30 m, 45 do).
+    So lieu chon truoc de dap so khong sat ranh gioi lam tron. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        p, d, be, al, h = _bo_suon_doi()
+        a_r = math.radians(al)
+        dap = str(_lt(h))
+        nhieu = _ba_nhieu(dap, [str(_lt(d * math.tan(math.radians(be)))),                     # bỏ qua độ dốc
+                                str(_lt(d * math.cos(a_r) * math.tan(math.radians(be)))),       # quên trừ độ cao gốc cây
+                                str(_lt(d * math.sin(math.radians(be + al)) / math.cos(math.radians(be)))),  # sai dấu
+                                str(_lt(h) + 2)],
+                          buoc=lambda t: str(_lt(h) + t))
+        debai = _de_suon_doi(p, d, be) + r" Chiều cao của cây (làm tròn đến hàng đơn vị, theo đơn vị mét) là"
+        giai = _giai_suon_doi(p, d, be, al, h) + "\\\\\n" + r"Vậy cây cao khoảng $%s\,\text{m}$." % dap
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, _hinh_suon_doi(al, be), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_G_01(socau, dang=2):
+    r"""Trả lời ngắn - sườn đồi độ dốc $p\%$, cây mọc thẳng đứng: tính chiều cao của
+    cây (làm tròn đến hàng đơn vị) - có hình.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo bai co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        p, d, be, al, h = _bo_suon_doi()
+        dap = str(_lt(h))
+        debai = _de_suon_doi(p, d, be) + r" Tính chiều cao của cây (làm tròn đến hàng đơn vị, theo đơn vị mét)."
+        giai = _giai_suon_doi(p, d, be, al, h) + "\\\\\n" + r"Vậy cây cao khoảng $%s\,\text{m}$." % dap
+        cau += MC_SA_answer_const(debai, dap, [str(_lt(h) + k) for k in (1, -1, 2)], giai,
+                                  _hinh_suon_doi(al, be), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_TL_F_01(socau, dong=1):
+    r"""Tự luận - sườn đồi độ dốc $p\%$, cây mọc thẳng đứng (có hình).
+    a) (VD) Tính góc tạo bởi sườn đồi với phương nằm ngang (làm tròn đến hàng phần mười của độ).
+    b) (VDC) Tính chiều cao của cây (làm tròn đến hàng đơn vị, theo đơn vị mét).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo bai co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        p, d, be, al, h = _bo_suon_doi()
+        debai = _de_suon_doi(p, d, be)
+        ds = [(r"Tính góc tạo bởi sườn đồi với phương nằm ngang (làm tròn đến hàng phần mười của độ).",
+               r"\alpha \approx %s^{\circ}" % _x1(al),
+               r"Gọi $\alpha$ là góc tạo bởi sườn đồi với phương nằm ngang. Độ dốc $%d\%%$ nên "
+               r"$\tan\alpha = %s$, suy ra $\alpha \approx %s^{\circ}$." % (p, _xx(p / 100), _x1(al))),
+              (r"Tính chiều cao của cây (làm tròn đến hàng đơn vị, theo đơn vị mét).",
+               r"BC \approx %d\,\text{m}" % _lt(h),
+               r"Trong tam giác $ABC$: $\widehat{BAC} = %s - \alpha$, $\widehat{ABC} = 90^{\circ} + \alpha$, "
+               r"$\widehat{ACB} = 90^{\circ} - %s = %s$.\\ Định lí sin: $BC = \dfrac{AB\cdot\sin\widehat{BAC}}"
+               r"{\sin\widehat{ACB}} = \dfrac{%d\cdot\sin\left(%s - \alpha\right)}{\sin %s} \approx %s$, "
+               r"tức cây cao khoảng $%d\,\text{m}$." % (_goc(be), _goc(be), _goc(90 - be), d, _goc(be),
+                                                         _goc(90 - be), _xx(h, 2), _lt(h)))]
+        cau += TL_answer_text(debai, ds, _hinh_suon_doi(al, be), 0, dong)
+    return cau
+
+
+_PHUONG = {"E": "đông", "W": "tây", "N": "bắc", "S": "nam"}
+_VUONG_GOC = {"E": "NS", "W": "NS", "N": "EW", "S": "EW"}
+
+
+def _huong_la_ban(X, g, Y):
+    """Hướng kiểu E 30° S: từ phương X quay về phía Y một góc g."""
+    return r"$\mathrm{%s}\,%d^{\circ}\,\mathrm{%s}$" % (X, g, Y)
+
+
+def _bo_tau_doi_huong():
+    """(X, Y, theta, d1, d2, AC, phi): tàu chạy d1 km về phương X tới B, đổi sang
+    hướng X theta Y chạy d2 km tới C; AC và góc phi = BAC (hướng AC là X phi Y)."""
+    while True:
+        X = random.choice("EWNS")
+        Y = random.choice(_VUONG_GOC[X])
+        th = random.choice([20, 25, 30, 35, 40, 45, 50, 55, 60])
+        d1, d2 = random.randint(6, 30), random.randint(6, 30)
+        AC = math.sqrt(d1 * d1 + d2 * d2 + 2 * d1 * d2 * math.cos(math.radians(th)))
+        phi = math.degrees(math.asin(d2 * math.sin(math.radians(th)) / AC))
+        if not _xa_bien(AC) or not _xa_bien(phi) or not (1 <= _lt(phi) < th):
+            continue
+        return X, Y, th, d1, d2, AC, phi
+
+
+def _de_tau(X, Y, th, d1, d2):
+    return (r"Trên biển, một tàu cá xuất phát từ cảng $A$, chạy về phía %s $%d\,\text{km}$ tới $B$, rồi chuyển "
+            r"sang hướng %s chạy tiếp $%d\,\text{km}$ nữa tới đảo $C$." % (_PHUONG[X], d1, _huong_la_ban(X, th, Y), d2))
+
+
+def _giai_tau_AC(X, Y, th, d1, d2, AC):
+    return (r"Tàu chạy về phía %s rồi quay về phía %s một góc $%s$ nên $\widehat{ABC} = 180^{\circ} - %s = %s$."
+            % (_PHUONG[X], _PHUONG[Y], _goc(th), _goc(th), _goc(180 - th)) + "\\\\\n" +
+            r"Định lí côsin: $AC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\cos %s \approx %s$, nên "
+            r"$AC \approx %s\,\text{km}$." % (d1, d2, d1, d2, _goc(180 - th), _xx(AC * AC, 2), _xx(AC, 2)))
+
+
+def _giai_tau_huong(X, Y, th, d2, AC, phi):
+    return (r"Định lí sin: $\sin\widehat{BAC} = \dfrac{BC\cdot\sin\widehat{ABC}}{AC} = "
+            r"\dfrac{%d\cdot\sin %s}{AC} \approx %s$, góc $\widehat{BAC}$ nhọn nên $\widehat{BAC} \approx %s$."
+            % (d2, _goc(180 - th), _xx(math.sin(math.radians(phi)), 4), _goc(_lt(phi))) + "\\\\\n" +
+            r"Tia $AB$ chỉ hướng %s, điểm $C$ lệch về phía %s nên hướng từ $A$ tới $C$ là %s."
+            % (_PHUONG[X], _PHUONG[Y], _huong_la_ban(X, _lt(phi), Y)))
+
+
+def L10_C3_B6_VD036_MC_C_03(socau, dang=1):
+    r"""Tàu chạy $d_1$ km về một phương (đông/tây/nam/bắc) rồi đổi sang hướng
+    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: hỏi NGẪU NHIÊN khoảng cách $AC$ (hàng đơn vị)
+    hoặc hướng từ $A$ tới $C$ (độ, hàng đơn vị).
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua VD036_MC_C theo bai co Lan gui (dong
+    15 km, E30S 20 km). So lieu chon truoc. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
+        if random.random() < 0.5:
+            dap = str(_lt(AC))
+            nhieu = _ba_nhieu(dap, [str(_lt(math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * math.cos(math.radians(th))))),
+                                    str(_lt(math.sqrt(d1 * d1 + d2 * d2))), str(d1 + d2)],
+                              buoc=lambda t: str(_lt(AC) + t))
+            debai = _de_tau(X, Y, th, d1, d2) + (r" Khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, theo "
+                                                 r"đơn vị ki-lô-mét) là")
+            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
+            cau += MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
+        else:
+            g = _lt(phi)
+            Z = [c for c in _VUONG_GOC[X] if c != Y][0]
+            dung = _huong_la_ban(X, g, Y)
+            ung = [_huong_la_ban(X, g, Z), _huong_la_ban(X, th, Y), _huong_la_ban(X, th - g, Y)]
+            nhieu = [u for u in dict.fromkeys(ung) if u != dung][:3]
+            if len(nhieu) < 3:
+                nhieu.append(_huong_la_ban(X, g + 5, Y))
+            debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ (làm tròn số đo góc đến hàng đơn vị) là")
+            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
+            cau += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_F_01(socau, dang=2):
+    r"""Trả lời ngắn - tàu chạy $d_1$ km về một phương rồi đổi sang hướng
+    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: hỏi NGẪU NHIÊN khoảng cách $AC$ (km, hàng đơn
+    vị) hoặc số đo góc $x$ trong hướng $X\,x^{\circ}\,Y$ từ $A$ tới $C$.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo bai co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
+        if random.random() < 0.5:
+            dap = str(_lt(AC))
+            debai = _de_tau(X, Y, th, d1, d2) + (r" Tính khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, "
+                                                 r"theo đơn vị ki-lô-mét).")
+            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
+        else:
+            dap = str(_lt(phi))
+            debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ là $\mathrm{%s}\,x^{\circ}\,\mathrm{%s}$. "
+                                                 r"Tìm $x$ (làm tròn đến hàng đơn vị)." % (X, Y))
+            giai = (_giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
+                    + " Vậy $x = %s$." % dap)
+        cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_TL_D_03(socau, dong=1):
+    r"""Tự luận - tàu chạy $d_1$ km về một phương rồi đổi sang hướng $X\,\theta^{\circ}\,Y$
+    chạy $d_2$ km.
+    a) (VD) Tính khoảng cách từ $A$ đến $C$ (hàng đơn vị, km).
+    b) (VDC) Xác định hướng từ $A$ tới $C$ (hàng đơn vị, độ).
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua VD036_TL_D theo bai co Lan gui (dong 15 km,
+    E30S 20 km); so lieu, huong chon truoc de dap so hop li. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
+        ds = [(r"Tính khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, theo đơn vị ki-lô-mét).",
+               r"AC \approx %d\,\text{km}" % _lt(AC),
+               _giai_tau_AC(X, Y, th, d1, d2, AC) + r" Vậy $AC \approx %d\,\text{km}$." % _lt(AC)),
+              (r"Xác định hướng từ $A$ tới $C$ (làm tròn đến hàng đơn vị, theo đơn vị độ).",
+               r"\mathrm{%s}\,%d^{\circ}\,\mathrm{%s}" % (X, _lt(phi), Y),
+               _giai_tau_huong(X, Y, th, d2, AC, phi))]
+        cau += TL_answer_text(_de_tau(X, Y, th, d1, d2), ds, 0, 0, dong)
+    return cau
