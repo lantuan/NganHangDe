@@ -9143,3 +9143,20 @@ Dang MOI (mapping co ghi chu):
                  nhan so am, so duong, binh phuong) - chan tri tinh bang so
   VD021_MC_B_01  phep toan ket hop tren ba khoang: (A giao B) hop (A giao C),
                  A giao B giao C, (A hop B) giao C...
+
+# Version 3.53 - 2026-09-30
+
+## Bien the lay tu phan bai tap trac nghiem Bai 3 chuong 2 (BPT bac nhat hai an)
+
+Bien the moi (cung Dang voi _01):
+  NB022_MC_A_03  BPT nao KHONG phai bac nhat hai an (co dang khuyet y, dang
+                 phai khai trien / chuyen ve)
+  NB023_MC_A_02  cho diem M, chon BPT nhan (khong nhan) M lam nghiem
+  NB025_MC_A_02  viet BPT tu tinh huong: protein, cuoc goi, lam them, thue xe
+                 co phi co dinh; rut gon he so
+  TF_A_02        ax + by + c (dau bat ki): vo so nghiem, diem O, diem NAM
+                 TREN BO, mo ta mien nghiem ke / khong ke bo
+  TF_A_03        mien nghiem cho bang loi (bo d qua A(p; 0), B(0; q), chua /
+                 khong chua O): phuong trinh d, BPT, diem thuoc mien
+Luu y: ten _DAU_BPT da co san trong L10_C2 (list dau) - bang dau moi dat ten
+_DAU_KT de khong de ten cu.

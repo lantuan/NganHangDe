@@ -53,6 +53,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_VD020_MC_A",   # hai tiet muc / nhom khong thuoc tap nao / ba tap: tinh hop
     # tu de on tap cuoi chuong 1:
     "L10_C1_B1_TH014_MC_A",   # 17 nhom co dinh / menh de luong tu tham so do Python chon
+    # tu bai tap trac nghiem Bai 3 chuong 2 (BPT bac nhat hai an):
+    "L10_C2_B3_NB023_MC_A",   # chon diem thuoc mien nghiem / cho diem, chon bat phuong trinh
+    "L10_C2_B3_NB025_MC_A",   # tien - gio cong - khoi luong / protein, cuoc goi, lam them, thue xe
+    "L10_C2_TF_A",            # ax + by <= c dem diem nguyen / diem tren bo / mien nghiem mo ta bang loi
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an
     "L10_C2_B3_TH024_MC_A",   # ca hai deu: hinh nao bieu dien mien nghiem
     "L10_C3_B6_TH032_MC_A",   # ca hai deu: dinh li cosin tinh canh con lai

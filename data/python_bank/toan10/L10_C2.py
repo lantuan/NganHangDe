@@ -2883,3 +2883,301 @@ def L10_C2_TF_B_01(socau, socot=1):
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+
+
+# =====================================================================
+# BIẾN THỂ LẤY TỪ PHẦN "BÀI TẬP TRẮC NGHIỆM" BÀI 3 (BẤT PHƯƠNG TRÌNH BẬC
+# NHẤT HAI ẨN) CỦA CÔ LAN - CLAUDE THEM 30/09/2026, co Lan duyet lai.
+# Câu có hình (chọn hình miền nghiệm, đọc bất phương trình từ hình) đã có
+# TH024_MC_A; ở đây chỉ làm các câu KHÔNG cần hình, hoặc mô tả miền nghiệm
+# bằng lời để web hiện được.
+# =====================================================================
+
+def _bn_tex(a, b, c=0):
+    """ax + by + c viết gọn (bỏ hệ số 1, bỏ số hạng 0)."""
+    out = ""
+    for k, ten in ((a, "x"), (b, "y"), (c, "")):
+        if k == 0:
+            continue
+        so = ("" if abs(k) == 1 and ten else str(abs(k))) + ten
+        if not out:
+            out = ("-" if k < 0 else "") + so
+        else:
+            out += (" - " if k < 0 else " + ") + so
+    return out or "0"
+
+
+_DAU_KT = {"<": lambda v: v < 0, r"\le": lambda v: v <= 0, ">": lambda v: v > 0, r"\ge": lambda v: v >= 0}
+
+
+def L10_C2_B3_NB022_MC_A_03(socau, dang=1):
+    r"""Bất phương trình nào KHÔNG phải là bất phương trình bậc nhất hai ẩn?
+    (có cả dạng khuyết một ẩn $x + 2 \ge 0$ và dạng phải khai triển mới thấy).
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua NB022_MC_A, theo cac cau "x + y^2
+    <= 7 khong phai; x + 2 >= 0 van la" va "(x + y)(x - y) >= 0" trong phan
+    bai tap trac nghiem Bai 3. Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        a, b = random.choice([i for i in range(-6, 7) if i]), random.choice([i for i in range(-6, 7) if i])
+        c = random.randint(-9, 9)
+        d = random.choice(list(_DAU_KT))
+        khong = [(r"$%s %s %d$" % (_bn_tex(a, 0) + " + y^2" if a else "y^2", d, c), r"có $y^2$ (bậc hai)"),
+                 (r"$(x + y)(x - y) %s 0$" % d, r"khai triển được $x^2 - y^2$ (bậc hai)"),
+                 (r"$%sxy + y %s %d$" % ("" if abs(a) == 1 else a, d, c), r"có hạng tử $xy$ (bậc hai)"),
+                 (r"$%s + \dfrac{1}{y} %s %d$" % (_bn_tex(a, 0), d, c), r"có $\dfrac{1}{y}$, không phải đa thức bậc nhất"),
+                 (r"$x^3 %s %s %s %d$" % ("+" if b > 0 else "-", _bn_tex(0, abs(b)), d, c), r"có $x^3$")]
+        k = random.randint(2, 5)
+        la = [(r"$%s %s %d$" % (_bn_tex(a, b), d, c), "dạng $ax + by %s c$" % d),
+              (r"$%s %s 0$" % (_bn_tex(a, 0, c), d), r"khuyết $y$ (hệ số của $y$ bằng $0$) nhưng vẫn là bậc nhất hai ẩn"),
+              (r"$%dx - %d(y - x + %d) %s 0$" % (abs(a) + 1, k, abs(c) + 1, d),
+               r"khai triển được $%s %s 0$" % (_bn_tex(abs(a) + 1 + k, -k, -k * (abs(c) + 1)), d)),
+              (r"$%s %s %s$" % (_bn_tex(a, 0), d, _bn_tex(0, b, c)), r"chuyển vế được $%s %s 0$" % (_bn_tex(a, -b, -c), d))]
+        sai = random.choice(khong)
+        dung3 = random.sample(la, 3)
+        debai = r"Trong các bất phương trình sau, bất phương trình nào \textbf{không phải} là bất phương trình bậc nhất hai ẩn?"
+        giai = (r"%s không phải bất phương trình bậc nhất hai ẩn vì %s.\\ " % sai
+                + r"\\ ".join(r"%s là bất phương trình bậc nhất hai ẩn (%s)." % t for t in dung3))
+        cauTN += MC_SA_answer_text(debai, sai[0], [t[0] for t in dung3], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B3_NB023_MC_A_02(socau, dang=1):
+    r"""Cho một điểm $M(x_0; y_0)$, chọn bất phương trình nhận $M$ làm nghiệm
+    (hoặc KHÔNG nhận $M$ làm nghiệm).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB023_MC_A, theo cac cau "Diem
+    A(-1; 3) thuoc mien nghiem cua bat phuong trinh nao", "Cap so (-1; 4) la
+    nghiem cua bat phuong trinh" trong phan bai tap trac nghiem Bai 3.
+    Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        x0, y0 = random.randint(-4, 5), random.randint(-4, 5)
+        hoi_thuoc = random.random() < 0.7
+        dung_ds, sai_ds, da = [], [], set()
+        for _t in range(200):
+            a, b = random.choice([i for i in range(-5, 6) if i]), random.randint(-5, 5)
+            c = random.randint(-8, 8)
+            d = random.choice(list(_DAU_KT))
+            v = a * x0 + b * y0 + c
+            if v == 0 or (a, b, c) in da:
+                continue                       # tránh điểm nằm trên bờ cho câu nhận biết
+            da.add((a, b, c))
+            muc = (r"$%s %s 0$" % (_bn_tex(a, b, c), d), a, b, c, d, v)
+            (dung_ds if _DAU_KT[d](v) == hoi_thuoc else sai_ds).append(muc)
+        if not dung_ds or len(sai_ds) < 3:
+            continue
+        chon, khac = dung_ds[0], sai_ds[:3]
+        so += 1
+        debai = (r"Cặp số $\left(%d; %d\right)$ %s nghiệm của bất phương trình nào sau đây?"
+                 % (x0, y0, "là" if hoi_thuoc else r"\textbf{không} là"))
+
+        def thay(m):
+            _, a, b, c, d, v = m
+            return r"$%s %s 0$: vế trái bằng $%d$, mà $%d %s 0$ %s" % (
+                _bn_tex(a, b, c), d, v, v, d, "đúng" if _DAU_KT[d](v) else "sai")
+        giai = (r"Thay $x = %d$, $y = %d$ vào vế trái của từng bất phương trình:\\ " % (x0, y0)
+                + r"\\ ".join(thay(m) for m in [chon] + khac)
+                + r".\\ Vậy chọn %s." % chon[0])
+        cauTN += MC_SA_answer_text(debai, chon[0], [m[0] for m in khac], giai, 0, 0, dang)
+    return cauTN
+
+
+def _thuc_te_bpt():
+    """Tình huống thực tế -> (đề, đáp án, nhiễu, lời giải). Bất phương trình đã rút gọn."""
+    kieu = random.randint(0, 3)
+    if kieu == 0:
+        p, q = random.choice([(26, 20), (24, 18), (22, 16), (30, 20), (28, 21)])
+        c = 2 * p
+        g = math.gcd(math.gcd(p, q), c)
+        de = (r"Trong $1$ lạng thịt bò có khoảng $%d$ g protein, trong $1$ lạng cá rô phi có khoảng $%d$ g "
+              r"protein. Mỗi ngày một người cần tối thiểu $%d$ g protein. Gọi $x$, $y$ lần lượt là số lạng thịt bò "
+              r"và số lạng cá rô phi người đó ăn trong một ngày. Bất phương trình mô tả lượng protein cần thiết là"
+              % (p, q, c))
+        dau, P, Q, C = r"\ge", p // g, q // g, c // g
+        giai = (r"Lượng protein là $%dx + %dy$ (g). ``Tối thiểu $%d$ g'' nghĩa là $%dx + %dy \ge %d$, chia hai vế cho "
+                r"$%d$ được $%dx + %dy \ge %d$." % (p, q, c, p, q, c, g, P, Q, C))
+        sai = [(P, Q, ">", C), (P, Q, r"\le", C), (Q, P, r"\ge", C)]
+    elif kieu == 1:
+        p, q = random.choice([(1190, 1390), (1100, 1500), (1200, 1400), (990, 1290)])
+        T = random.choice([100, 150, 200])
+        g = math.gcd(math.gcd(p, q), 1000 * T)
+        de = (r"Một gói cước điện thoại tính $%d$ đồng mỗi phút gọi nội mạng và $%d$ đồng mỗi phút gọi ngoại mạng. "
+              r"Gọi $x$, $y$ lần lượt là số phút gọi nội mạng, ngoại mạng trong một tháng. Bất phương trình mô tả "
+              r"số tiền phải trả trong tháng ít hơn $%d$ nghìn đồng là" % (p, q, T))
+        dau, P, Q, C = "<", p // g, q // g, 1000 * T // g
+        giai = (r"Số tiền là $%dx + %dy$ (đồng). ``Ít hơn $%d$ nghìn đồng'' nghĩa là $%dx + %dy < %d$, chia hai vế cho "
+                r"$%d$ được $%dx + %dy < %d$." % (p, q, T, p, q, 1000 * T, g, P, Q, C))
+        sai = [(P, Q, r"\le", C), (Q, P, "<", C), (P, Q, "<", T)]
+    elif kieu == 2:
+        p, q = random.choice([(15, 10), (20, 15), (25, 20), (30, 20), (18, 12)])
+        c = random.choice([600, 900, 1200])
+        g = math.gcd(math.gcd(p, q), c)
+        de = (r"Ngoài giờ học, bạn Nam phụ bán cơm được $%d$ nghìn đồng một giờ và phụ bán tạp hoá được $%d$ nghìn "
+              r"đồng một giờ. Gọi $x$, $y$ lần lượt là số giờ phụ bán cơm và phụ bán tạp hoá mỗi tuần. Bất phương "
+              r"trình để Nam kiếm được ít nhất $%d$ nghìn đồng mỗi tuần là" % (p, q, c))
+        dau, P, Q, C = r"\ge", p // g, q // g, c // g
+        giai = (r"Số tiền kiếm được là $%dx + %dy$ (nghìn đồng). ``Ít nhất $%d$'' nghĩa là $%dx + %dy \ge %d$, chia hai "
+                r"vế cho $%d$ được $%dx + %dy \ge %d$." % (p, q, c, p, q, c, g, P, Q, C))
+        sai = [(P, Q, ">", C), (P, Q, r"\le", C), (Q, P, r"\ge", C)]
+    else:
+        F1, F2 = random.choice([(900, 1200), (800, 1000), (1000, 1500)])
+        p, q = random.choice([(10, 15), (8, 12), (12, 18)])
+        T = random.choice([20000, 25000, 30000])
+        con = T - 5 * F1 - 2 * F2
+        g = math.gcd(math.gcd(p, q), con)
+        de = (r"Anh A thuê một chiếc ô tô trong một tuần. Từ thứ hai đến thứ sáu phí cố định là $%d$ nghìn đồng/ngày và "
+              r"$%d$ nghìn đồng/km; thứ bảy và chủ nhật phí cố định là $%d$ nghìn đồng/ngày và $%d$ nghìn đồng/km. Gọi "
+              r"$x$, $y$ lần lượt là số km anh A đi trong các ngày từ thứ hai đến thứ sáu và trong hai ngày cuối tuần. "
+              r"Bất phương trình để tổng số tiền không quá $%d$ triệu đồng là" % (F1, p, F2, q, T // 1000))
+        dau, P, Q, C = r"\le", p // g, q // g, con // g
+        giai = (r"Tổng số tiền (nghìn đồng) là $5\cdot %d + %dx + 2\cdot %d + %dy$. ``Không quá $%d$ triệu'' nghĩa là "
+                r"$%d + %dx + %dy \le %d$, tức là $%dx + %dy \le %d$; chia hai vế cho $%d$ được $%dx + %dy \le %d$."
+                % (F1, p, F2, q, T // 1000, 5 * F1 + 2 * F2, p, q, T, p, q, con, g, P, Q, C))
+        sai = [(P, Q, r"\ge", C), (P, Q, r"\le", T // g), (Q, P, r"\le", C)]
+    dap = r"$%dx + %dy %s %d$" % (P, Q, dau, C)
+    nhieu = [r"$%dx + %dy %s %d$" % s for s in sai]
+    return de, dap, nhieu, giai
+
+
+def L10_C2_B3_NB025_MC_A_02(socau, dang=1):
+    r"""Viết bất phương trình mô tả tình huống thực tế (tối thiểu / ít nhất /
+    ít hơn / không quá; có phí cố định; rút gọn hệ số).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB025_MC_A, theo cac cau "protein
+    thit bo - ca ro phi", "goi cuoc noi mang - ngoai mang", "Nam lam them",
+    "thue o to" trong phan bai tap trac nghiem Bai 3. Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        de, dap, nhieu, giai = _thuc_te_bpt()
+        cauTN += MC_SA_answer_text(de, dap, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_TF_A_02(socau, socot=1):
+    r"""Đúng/Sai - bất phương trình $ax + by + c > 0$ (dấu bất kì): số nghiệm,
+    điểm $O$, một điểm NẰM TRÊN BỜ, mô tả miền nghiệm (kể / không kể bờ, chứa /
+    không chứa $O$).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C2_TF_A, theo cau "x - 2y + 6 >
+    0: vo so nghiem; (0; 0); (0; 3); mien nghiem" trong phan bai tap Bai 3.
+    Co Lan duyet.
+    """
+    cauTF = ""
+    for _ in range(socau):
+        a = random.choice([i for i in range(-4, 5) if i])
+        b = random.choice([i for i in range(-4, 5) if i])
+        c = random.choice([i for i in range(-9, 10) if i])
+        # điểm trên bờ: a*x1 + b*y1 + c = 0, chọn x1 = 0 nếu b | c, ngược lại y1 = 0 nếu a | c
+        if c % b == 0:
+            P = (0, -c // b)
+        elif c % a == 0:
+            P = (-c // a, 0)
+        else:
+            c = b * random.choice([1, 2, 3, -1, -2])
+            P = (0, -c // b)
+        d = random.choice(list(_DAU_KT))
+        f = _DAU_KT[d]
+        bt = _bn_tex(a, b, c)
+        O_ok = f(c)
+        ke_bo = d in (r"\le", r"\ge")
+        debai = r"Cho bất phương trình $%s %s 0$. Xét tính đúng sai của các khẳng định sau:" % (bt, d)
+        # a) NB
+        y1 = [(r"{\True Bất phương trình có vô số nghiệm}",
+               r"Đúng. Miền nghiệm là cả một nửa mặt phẳng nên có vô số nghiệm."),
+              (r"{Bất phương trình có đúng một nghiệm}",
+               r"Sai. Miền nghiệm là một nửa mặt phẳng nên có vô số nghiệm.")]
+        # b) TH
+        gb = r"Thay $(0; 0)$: vế trái bằng $%d$, và $%d %s 0$ %s." % (c, c, d, "đúng" if O_ok else "sai")
+        y2 = [((r"{\True " if O_ok else "{") + r"Cặp số $(0; 0)$ là một nghiệm của bất phương trình}",
+               ("Đúng. " if O_ok else "Sai. ") + gb),
+              ((r"{" if O_ok else r"{\True ") + r"Cặp số $(0; 0)$ không là nghiệm của bất phương trình}",
+               ("Sai. " if O_ok else "Đúng. ") + gb)]
+        # c) VD - điểm nằm trên bờ
+        gc = (r"Thay $(%d; %d)$: vế trái bằng $0$, điểm nằm trên bờ $%s = 0$; %s."
+              % (P[0], P[1], bt, "dấu có bằng nên vẫn là nghiệm" if ke_bo else "dấu không có bằng nên không là nghiệm"))
+        y3 = [((r"{\True " if ke_bo else "{") + r"Cặp số $(%d; %d)$ là một nghiệm của bất phương trình}" % P,
+               ("Đúng. " if ke_bo else "Sai. ") + gc),
+              ((r"{" if ke_bo else r"{\True ") + r"Cặp số $(%d; %d)$ không là nghiệm của bất phương trình}" % P,
+               ("Sai. " if ke_bo else "Đúng. ") + gc)]
+        # d) VDC - mô tả miền nghiệm
+        mo_ta = lambda ke, chua: (r"Miền nghiệm là nửa mặt phẳng bờ $\Delta\colon %s = 0$ %s gốc toạ độ $O$ (%s bờ $\Delta$)"
+                                  % (bt, "chứa" if chua else "không chứa", "kể cả" if ke else "không kể"))
+        gd = (r"$O$ %s thuộc miền nghiệm (câu b) và dấu $%s$ %s nên miền nghiệm là nửa mặt phẳng bờ $\Delta$ %s $O$, %s bờ."
+              % ("" if O_ok else "không", d, "có bằng" if ke_bo else "không có bằng",
+                 "chứa" if O_ok else "không chứa", "kể cả" if ke_bo else "không kể"))
+        sai_ke, sai_chua = random.choice([(not ke_bo, O_ok), (ke_bo, not O_ok)])
+        y4 = [(r"{\True %s}" % mo_ta(ke_bo, O_ok), "Đúng. " + gd),
+              (r"{%s}" % mo_ta(sai_ke, sai_chua), "Sai. " + gd)]
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+
+def L10_C2_TF_A_03(socau, socot=1):
+    r"""Đúng/Sai - biết miền nghiệm (mô tả bằng lời): bờ $d$ đi qua $A(p; 0)$,
+    $B(0; q)$, có / không chứa $O$, kể / không kể bờ. Xét điểm thuộc miền,
+    phương trình $d$, bất phương trình.
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua L10_C2_TF_A, theo hai cau "mien
+    nghiem khong gach cheo, bo d qua (-5; 0), (0; 2)" va "qua (3; 0), (0; 2)"
+    trong phan bai tap Bai 3. Hinh duoc thay bang mo ta bang loi de web hien
+    duoc. Co Lan duyet.
+    """
+    cauTF = ""
+    for _ in range(socau):
+        p = random.choice([i for i in range(-6, 7) if abs(i) >= 2])
+        q = random.choice([i for i in range(-6, 7) if abs(i) >= 2])
+        # d: x/p + y/q = 1  <=>  q x + p y - p q = 0
+        g = math.gcd(math.gcd(abs(q), abs(p)), abs(p * q))
+        A_, B_, C_ = q // g, p // g, -p * q // g
+        if A_ < 0:                      # cho hệ số của x dương, đề nhìn gọn hơn
+            A_, B_, C_ = -A_, -B_, -C_
+        chua_O = random.random() < 0.5
+        ke = random.random() < 0.5
+        # dấu sao cho O thỏa mãn khi chua_O: tại O vế trái bằng C_
+        if (C_ < 0) == chua_O:
+            dau = r"\le" if ke else "<"
+        else:
+            dau = r"\ge" if ke else ">"
+        f = _DAU_KT[dau]
+        bt = _bn_tex(A_, B_, C_)
+        # một điểm kiểm tra không nằm trên bờ
+        while True:
+            X, Y = random.randint(-6, 6), random.randint(-6, 6)
+            if A_ * X + B_ * Y + C_ != 0:
+                break
+        X_ok = f(A_ * X + B_ * Y + C_)
+        debai = (r"Cho một bất phương trình bậc nhất hai ẩn có miền nghiệm là nửa mặt phẳng %s gốc toạ độ $O$ (%s bờ $d$), "
+                 r"trong đó đường thẳng $d$ đi qua hai điểm $A(%d; 0)$ và $B(0; %d)$. Xét tính đúng sai của các khẳng "
+                 r"định sau:" % ("chứa" if chua_O else "không chứa", "kể cả" if ke else "không kể", p, q))
+        # a) NB
+        y1 = [((r"{\True " if chua_O else "{") + r"Điểm $O(0; 0)$ thuộc miền nghiệm của bất phương trình}",
+               ("Đúng" if chua_O else "Sai") + r" theo giả thiết: miền nghiệm %s $O$." % ("chứa" if chua_O else "không chứa")),
+              ((r"{" if chua_O else r"{\True ") + r"Điểm $O(0; 0)$ không thuộc miền nghiệm của bất phương trình}",
+               ("Sai" if chua_O else "Đúng") + r" theo giả thiết: miền nghiệm %s $O$." % ("chứa" if chua_O else "không chứa"))]
+        # b) TH
+        gb = (r"$d$ đi qua $A(%d; 0)$, $B(0; %d)$ nên $d\colon \dfrac{x}{%d} + \dfrac{y}{%d} = 1 \Leftrightarrow %s = 0$."
+              % (p, q, p, q, bt))
+        sai_d = _bn_tex(B_, A_, C_) if A_ != B_ else _bn_tex(A_, -B_, C_)
+        y2 = [(r"{\True Phương trình đường thẳng $d$ là $%s = 0$}" % bt, "Đúng. " + gb),
+              (r"{Phương trình đường thẳng $d$ là $%s = 0$}" % sai_d, "Sai. " + gb)]
+        # c) VD
+        gc = (r"Tại $O$ vế trái $%s$ bằng $%d$; miền nghiệm %s $O$ và %s bờ nên bất phương trình là $%s %s 0$."
+              % (bt, C_, "chứa" if chua_O else "không chứa", "kể cả" if ke else "không kể", bt, dau))
+        doi = {"<": ">", ">": "<", r"\le": r"\ge", r"\ge": r"\le"}[dau]
+        bo = {"<": r"\le", r"\le": "<", ">": r"\ge", r"\ge": ">"}[dau]
+        y3 = [(r"{\True Bất phương trình đã cho là $%s %s 0$}" % (bt, dau), "Đúng. " + gc),
+              (r"{Bất phương trình đã cho là $%s %s 0$}" % (bt, random.choice([doi, bo])), "Sai. " + gc)]
+        # d) VDC
+        gd = (r"Thay $(%d; %d)$ vào vế trái được $%d$, và $%d %s 0$ %s." %
+              (X, Y, A_ * X + B_ * Y + C_, A_ * X + B_ * Y + C_, dau, "đúng" if X_ok else "sai"))
+        y4 = [((r"{\True " if X_ok else "{") + r"Điểm $(%d; %d)$ thuộc miền nghiệm của bất phương trình}" % (X, Y),
+               ("Đúng. " if X_ok else "Sai. ") + gd),
+              ((r"{" if X_ok else r"{\True ") + r"Điểm $(%d; %d)$ không thuộc miền nghiệm của bất phương trình}" % (X, Y),
+               ("Sai. " if X_ok else "Đúng. ") + gd)]
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
