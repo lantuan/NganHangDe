@@ -9450,3 +9450,14 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   vao mot de.
 - TL_A (_01 goc bu, _02 goc phu) va TL_B co hinh (_01 goc bet, _02 goc vuong): y a) quan he
   goc phu/bu (TH031), y b) tinh GTLG con lai bang sin^2 + cos^2 = 1 (TH030), y c) ket hop.
+
+# Version 3.73 - 2026-09-30
+
+## TH031: bien the trong tam giac cho goc bu, goc phu (theo co Lan)
+
+- MC_G_03 / SA_D_03: tam giac ABC biet GTLG cua (A + B) (cap goc ngau nhien, so dep / so
+  thap phan), tim GTLG cung ten cua C (hoac nguoc lai).
+- MC_H_03 / SA_E_03: tam giac ABC vuong tai A, biet GTLG cua B hoac C, tim GTLG cua goc con
+  lai (cos C = sin B, cot C = tan B...). Khac MC_F_02 (bo ba Py-ta-go, co cau can them
+  sin^2 + cos^2 = 1).
+- Mapping: mo ta dang MC_G/SA_D, MC_H/SA_E them phan "trong tam giac".

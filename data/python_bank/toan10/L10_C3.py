@@ -8018,3 +8018,119 @@ def L10_C3_B5_TH031_TL_B_02(socau, dong=1):
                % (_tri(c), _tri(tanb)))]
         cau += TL_answer_text(debai, ds, _hinh_goc_vuong(a), 0, dong)
     return cau
+
+
+# ---------------------------------------------------------------------
+# TH031 - biến thể TRONG TAM GIÁC của các dạng góc bù / góc phụ (theo cô Lan 30/09/2026)
+#   MC_G_03, SA_D_03: tam giác ABC biết GTLG của (A + B) -> GTLG của C (bù nhau)
+#   MC_H_03, SA_E_03: tam giác ABC vuông tại A biết GTLG của B (hoặc C) -> GTLG của góc kia
+# ---------------------------------------------------------------------
+
+def _tam_giac_bu(ham):
+    """(X, tổng hai góc còn lại, dấu): ham(Y + Z) = dấu * ham(X) vì Y + Z = 180° - X."""
+    X, Y, Z = random.sample("ABC", 3)
+    tong = r"%s + %s" % tuple(sorted([Y, Z]))
+    return X, tong, (1 if ham == "sin" else -1)
+
+
+def _giai_tam_giac_bu(ham, X, tong, cho_tong, dap_tex):
+    bt = r"\%s\left(%s\right) = %s\%s %s" % (ham, tong, "" if ham == "sin" else "-", ham, X)
+    hoi = (r"\%s %s" % (ham, X)) if cho_tong else (r"\%s\left(%s\right)" % (ham, tong))
+    return (r"Vì $A + B + C = 180^{\circ}$ nên $%s = 180^{\circ} - %s$, hai góc $%s$ và $%s$ bù nhau."
+            % (tong, X, tong, X) + "\\\\\n" + r"Do đó $%s$, suy ra $%s = %s$." % (bt, hoi, dap_tex))
+
+
+def L10_C3_B5_TH031_MC_G_03(socau, dang=1):
+    r"""Biến thể TRONG TAM GIÁC của TH031_MC_G: tam giác $ABC$ biết một giá trị lượng
+    giác của $A + B$ (số đẹp, vd $\cos\left(A + B\right) = -\dfrac{1}{5}$), tìm giá trị
+    lượng giác cùng tên của $C$ (hoặc ngược lại). Cặp góc, hàm chọn ngẫu nhiên.
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua TH031_MC_G theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, True)
+        X, tong, dau = _tam_giac_bu(ham)
+        dap = dau * v
+        cho_tong = random.random() < 0.7
+        cho, hoi = ((r"\%s\left(%s\right)" % (ham, tong), r"\%s %s" % (ham, X)) if cho_tong
+                    else (r"\%s %s" % (ham, X), r"\%s\left(%s\right)" % (ham, tong)))
+        debai = r"Cho tam giác $ABC$ có $%s = %s$. Giá trị của $%s$ bằng" % (cho, _tri(v), hoi)
+        giai = _giai_tam_giac_bu(ham, X, tong, cho_tong, _tri(dap))
+        cau += MC_SA_answer_const(debai, _tri(dap), _nhieu_phu_bu(ham, dap, v), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_SA_D_03(socau, dang=2):
+    r"""Trả lời ngắn - biến thể trong tam giác của SA_D: biết giá trị lượng giác của
+    $A + B$ (số thập phân), tính giá trị lượng giác cùng tên của $C$ (hoặc ngược lại).
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua TH031_SA_D theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        ham = random.choice(_HAM4)
+        v = _tp_dep(ham, True)
+        X, tong, dau = _tam_giac_bu(ham)
+        dap = dau * v
+        if len(_tp(dap)) > 4:
+            continue
+        so += 1
+        cho_tong = random.random() < 0.7
+        cho, hoi = ((r"\%s\left(%s\right)" % (ham, tong), r"\%s %s" % (ham, X)) if cho_tong
+                    else (r"\%s %s" % (ham, X), r"\%s\left(%s\right)" % (ham, tong)))
+        debai = r"Cho tam giác $ABC$ có $%s = %s$. Tính $%s$." % (cho, _tp(v), hoi)
+        giai = _giai_tam_giac_bu(ham, X, tong, cho_tong, _tp(dap))
+        cau += MC_SA_answer_const(debai, _tp(dap), _nhieu_tp(dap), giai, 0, 0, dang)
+    return cau
+
+
+def _giai_tam_giac_vuong(Y, Z, ham, dap_tex):
+    hoi = _DOI_HAM[ham]
+    return (r"Tam giác $ABC$ vuông tại $A$ nên $\widehat{B} + \widehat{C} = 90^{\circ}$, hai góc $B$ và $C$ "
+            r"phụ nhau." + "\\\\\n" + r"Do đó $\%s %s = \%s %s = %s$." % (hoi, Z, ham, Y, dap_tex))
+
+
+def L10_C3_B5_TH031_MC_H_03(socau, dang=1):
+    r"""Biến thể TRONG TAM GIÁC VUÔNG của TH031_MC_H: tam giác $ABC$ vuông tại $A$, biết
+    một giá trị lượng giác của góc $B$ (hoặc $C$, chọn ngẫu nhiên) là số đẹp, tìm giá trị
+    lượng giác của góc còn lại ($\cos C = \sin B$, $\cot C = \tan B$, ...).
+    (Khác TH031_MC_F_02: F_02 chỉ dùng bộ ba Py-ta-go và có câu phải tính thêm bằng
+    $\sin^2 + \cos^2 = 1$; H_03 chỉ dùng quan hệ hai góc phụ nhau.)
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua TH031_MC_H theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, False)
+        Y, Z = random.sample("BC", 2)
+        debai = (r"Cho tam giác $ABC$ vuông tại $A$ có $\%s %s = %s$. Giá trị của $\%s %s$ bằng"
+                 % (ham, Y, _tri(v), _DOI_HAM[ham], Z))
+        giai = _giai_tam_giac_vuong(Y, Z, ham, _tri(v))
+        cau += MC_SA_answer_const(debai, _tri(v), _nhieu_phu_bu(ham, v, v), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_SA_E_03(socau, dang=2):
+    r"""Trả lời ngắn - biến thể trong tam giác vuông của SA_E: tam giác $ABC$ vuông tại
+    $A$ biết giá trị lượng giác (số thập phân) của $B$ hoặc $C$, tính của góc còn lại.
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua TH031_SA_E theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        ham = random.choice(_HAM4)
+        v = _tp_dep(ham, False)
+        if len(_tp(v)) > 4:
+            continue
+        so += 1
+        Y, Z = random.sample("BC", 2)
+        debai = (r"Cho tam giác $ABC$ vuông tại $A$ có $\%s %s = %s$. Tính $\%s %s$."
+                 % (ham, Y, _tp(v), _DOI_HAM[ham], Z))
+        giai = _giai_tam_giac_vuong(Y, Z, ham, _tp(v))
+        cau += MC_SA_answer_const(debai, _tp(v), _nhieu_tp(v), giai, 0, 0, dang)
+    return cau
