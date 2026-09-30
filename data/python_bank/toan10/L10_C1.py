@@ -10175,8 +10175,8 @@ def L10_C1_B2_VD020_MC_A_04(socau, dang=1):
 #   NB017_MC_G_01  cho tính chất đặc trưng, chọn cách liệt kê đúng
 #   NB017_MC_G_02  cho tập liệt kê, chọn cách viết bằng tính chất đặc trưng đúng
 #   NB017_SA_A_01  cho tính chất đặc trưng, hỏi tập có bao nhiêu phần tử
-#   NB017_SA_A_02  cho tính chất đặc trưng, hỏi tổng các phần tử
-#   NB017_TL_A_01  tự luận: liệt kê các phần tử của ba tập hợp
+#   NB017_SA_A_02  hỏi tổng các phần tử (tập đối xứng tổng = 0: hỏi tích/hiệu)
+#   TH018_TL_A_01  tự luận: a) liệt kê A (NB017), b) giao/hợp/hiệu với B (TH018)
 # =====================================================================
 
 from sympy import Integer, nsimplify
@@ -10377,60 +10377,102 @@ def _thap_phan_ngan(v):
 def L10_C1_B2_NB017_SA_A_02(socau, dang=2):
     r"""Trả lời ngắn - cách hỏi khác của _01: cho tập bằng tính chất đặc trưng, hỏi
     TỔNG các phần tử của tập (phải liệt kê đúng mới tính được).
+    Tập đối xứng (như $\{x \in \mathbb{Z} \mid x^2 < k\}$) có tổng luôn bằng 0, học
+    sinh đoán được - khi đó hỏi TÍCH các phần tử khác 0 hoặc HIỆU giữa phần tử lớn
+    nhất và phần tử nhỏ nhất (theo cô Lan 30/09/2026).
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_SA_A. Dap so thap phan huu han,
     toi da 4 ki tu. Co Lan duyet lai.
     """
+    def _ngoac(v):
+        return ("(%s)" % _tex_gt(v)) if float(v) < 0 else _tex_gt(v)
+
     cau = ""
     so = 0
     while so < socau:
         de, dung, sai, giai = _chon_tap_dac_trung()
-        if not dung:
+        if len(dung) < 2:
             continue
-        tong = nsimplify(sum(dung))
-        dap = _thap_phan_ngan(tong)
+        ds_ = sorted(set(nsimplify(v) for v in dung), key=float)
+        tong = sum(ds_)
+        if tong != 0:
+            hoi, gia_tri = "tong", tong
+        else:
+            khac0 = [v for v in ds_ if v != 0]
+            hoi = random.choice(["tich", "hieu"]) if len(khac0) >= 2 else "hieu"
+            if hoi == "tich":
+                gia_tri = 1
+                for v in khac0:
+                    gia_tri *= v
+            else:
+                gia_tri = ds_[-1] - ds_[0]
+        dap = _thap_phan_ngan(gia_tri)
         if dap is None:
             continue
         so += 1
-        debai = r"Cho tập hợp $A = %s$. Tính tổng tất cả các phần tử của tập hợp $A$." % de
-        g = (giai + "\\\\\n" + r"Vậy $A = %s$, tổng các phần tử là $%s = %s$."
-             % (_tap(dung), " + ".join(("(%s)" % _tex_gt(v)) if float(v) < 0 else _tex_gt(v)
-                                         for v in sorted(dung, key=float)), dap))
-        ds = [s_ for s_ in (_thap_phan_ngan(nsimplify(sum(s))) for s in sai if s) if s_ and s_ != dap]
-        ds += [v_ for v_ in (_thap_phan_ngan(tong + d_) for d_ in (1, -1, 2, -2, 3)) if v_]
-        cau += MC_SA_answer_const(debai, dap, [v for v in dict.fromkeys(ds) if v != dap], g, 0, 0, dang)
+        tap_tex = _tap(dung)
+        if hoi == "tong":
+            debai = r"Cho tập hợp $A = %s$. Tính tổng tất cả các phần tử của tập hợp $A$." % de
+            g = r"Vậy $A = %s$, tổng các phần tử là $%s = %s$." % (tap_tex, " + ".join(_ngoac(v) for v in ds_), dap)
+        elif hoi == "tich":
+            debai = r"Cho tập hợp $A = %s$. Tính tích tất cả các phần tử khác $0$ của tập hợp $A$." % de
+            g = r"Vậy $A = %s$, tích các phần tử khác $0$ là $%s = %s$." % (
+                tap_tex, r" \cdot ".join(_ngoac(v) for v in ds_ if v != 0), dap)
+        else:
+            debai = (r"Cho tập hợp $A = %s$. Tính hiệu giữa phần tử lớn nhất và phần tử nhỏ nhất "
+                     r"của tập hợp $A$." % de)
+            g = r"Vậy $A = %s$, phần tử lớn nhất là $%s$, nhỏ nhất là $%s$; hiệu bằng $%s - %s = %s$." % (
+                tap_tex, _tex_gt(ds_[-1]), _tex_gt(ds_[0]), _tex_gt(ds_[-1]), _ngoac(ds_[0]), dap)
+        g = giai + "\\\\\n" + g
+        nhieu = [v_ for v_ in (_thap_phan_ngan(gia_tri + d_) for d_ in (1, -1, 2, -2, 3, 4)) if v_ and v_ != dap]
+        nhieu += [v_ for v_ in (_thap_phan_ngan(-gia_tri), "0") if v_ and v_ != dap]
+        cau += MC_SA_answer_const(debai, dap, list(dict.fromkeys(nhieu)), g, 0, 0, dang)
     return cau
 
 
-def L10_C1_B2_NB017_TL_A_01(socau, dong=1):
-    r"""Tự luận - liệt kê các phần tử của ba tập hợp cho bởi tính chất đặc trưng
-    (như bài Sách bài tập): a) và b) cùng một phương trình tích 2-3 nhân tử bậc
-    nhất nhưng xét trên hai tập số khác nhau; c) tập trên N cho bởi hai điều kiện.
+def L10_C1_B2_TH018_TL_A_01(socau, dong=1):
+    r"""Tự luận hai ý thuộc HAI đơn vị kiến thức (theo cô Lan):
+    a) liệt kê tập $A$ cho bởi tính chất đặc trưng - phương trình tích 2-3 nhân tử
+       bậc nhất (nội dung NB017);
+    b) cho tập $B$ liệt kê đơn giản, tìm $A \cap B$, $A \cup B$, $A \setminus B$
+       hoặc $B \setminus A$ (nội dung TH018).
+    ID đặt ở TH018 (mức cao hơn của hai ý) để câu không vượt mức khi ma trận chọn TL.
 
-    CLAUDE THEM 30/09/2026 - dang moi (ban tu luan cua NB017_MC_G), muc NB.
-    Co Lan duyet lai.
+    CLAUDE THEM 30/09/2026 - dang moi (thay NB017_TL_A cu). Co Lan duyet lai.
     """
+    PHEP = [(r"A \cap B", "giao", lambda A_, B_: [v for v in A_ if v in B_],
+             r"gồm các phần tử thuộc cả $A$ và $B$"),
+            (r"A \cup B", "hop", lambda A_, B_: list(A_) + [v for v in B_ if v not in A_],
+             r"gồm các phần tử thuộc $A$ hoặc thuộc $B$"),
+            (r"A \setminus B", "hieu_AB", lambda A_, B_: [v for v in A_ if v not in B_],
+             r"gồm các phần tử thuộc $A$ nhưng không thuộc $B$"),
+            (r"B \setminus A", "hieu_BA", lambda A_, B_: [v for v in B_ if v not in A_],
+             r"gồm các phần tử thuộc $B$ nhưng không thuộc $A$")]
     cau = ""
     so = 0
     while so < socau:
         nghiem = _pt_tich_bo()
         pt, giai_pt = _viet_pt_tich(nghiem)
-        t1 = random.choice([r"\mathbb{N}", r"\mathbb{Z}"])
-        t2 = random.choice([r"\mathbb{Q}", r"\mathbb{R}"])
-        A, B = _loc_tap_so(nghiem, t1), _loc_tap_so(nghiem, t2)
-        de_c, C = random.choice(_hai_dieu_kien_bo()[:4])
-        if not C or set(map(str, A)) == set(map(str, B)):
+        tap = random.choice([r"\mathbb{Z}", r"\mathbb{Q}", r"\mathbb{R}"])
+        A = _loc_tap_so(nghiem, tap)
+        if len(A) < 2:
+            continue
+        # B: mot vai phan tu cua A va vai so nguyen nho khac - chon truoc de ket qua khong rong
+        chung = random.sample(A, random.randint(1, len(A) - 1))
+        khac = random.sample([Integer(v) for v in range(-5, 7) if Integer(v) not in A], random.randint(1, 3))
+        B = chung + khac
+        ki_hieu, _, f, ly = random.choice(PHEP)
+        KQ = f(A, B)
+        if not KQ:
             continue
         so += 1
-        debai = r"Liệt kê các phần tử của mỗi tập hợp sau:"
+        debai = r"Cho tập hợp $A = \left\{x \in %s \mid %s\right\}$ và $B = %s$." % (tap, pt, _tap(B))
         ds = [
-            (r"$A = \left\{x \in %s \mid %s\right\}$." % (t1, pt), r"A = %s" % _tap(A),
-             r"Ta có %s. Vì $x \in %s$ nên $A = %s$." % (giai_pt, t1, _tap(A))),
-            (r"$B = \left\{x \in %s \mid %s\right\}$." % (t2, pt), r"B = %s" % _tap(B),
-             r"Phương trình có các nghiệm $%s$ (câu a), đều là số %s nên $B = %s$."
-             % ("; ".join(_tex_gt(v) for v in sorted(nghiem, key=float)), _TAP_SO[t2], _tap(B))),
-            (r"$C = %s$." % de_c, r"C = %s" % _tap(C),
-             _loi_giai_hai_dieu_kien(de_c, C) + r" Vậy $C = %s$." % _tap(C)),
+            (r"Liệt kê các phần tử của tập hợp $A$.", r"A = %s" % _tap(A),
+             r"Ta có %s. Vì $x \in %s$ nên $A = %s$." % (giai_pt, tap, _tap(A))),
+            (r"Tìm $%s$." % ki_hieu, r"%s = %s" % (ki_hieu, _tap(KQ)),
+             r"Với $A = %s$ và $B = %s$, tập $%s$ %s nên $%s = %s$."
+             % (_tap(A), _tap(B), ki_hieu, ly, ki_hieu, _tap(KQ))),
         ]
         cau += TL_answer_text(debai, ds, 0, 0, dong)
     return cau

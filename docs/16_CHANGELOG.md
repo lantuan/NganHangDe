@@ -9401,3 +9401,14 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   phuong an thu tu la phuong trinh doi dau mot nhan tu.
 - NB017_TL_A_01 (dang moi, Mapping co ghi chu): liet ke ba tap - a), b) cung phuong trinh
   tich tren hai tap so khac nhau, c) tap tren N cho boi hai dieu kien.
+
+# Version 3.69 - 2026-09-30
+
+## Tu luan liet ke chuyen sang TH018; SA tong khong con dap so 0 doan duoc (theo co Lan)
+
+- Bo NB017_TL_A (hai y cung mot don vi kien thuc). Thay bang TH018_TL_A_01: y a) liet ke
+  tap A cho boi phuong trinh tich 2-3 nhan tu bac nhat (noi dung NB017), y b) cho B liet ke
+  don gian, tim giao / hop / A \ B / B \ A (noi dung TH018). ID o TH018 - muc cao hon cua
+  hai y - de khong vuot muc khi ma tran chon TL.
+- NB017_SA_A_02: tap doi xung (x^2 < k, khoang doi xung...) co tong luon bang 0 nen doi
+  sang hoi tich cac phan tu khac 0 hoac hieu phan tu lon nhat - nho nhat.
