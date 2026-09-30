@@ -27,6 +27,7 @@ File này có 2 chế độ:
 """
 
 import random
+from collections import Counter
 import re
 
 from app.services.mapping_service import load_mapping, phan_loai_cau
@@ -62,22 +63,64 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set) 
     if not candidates:
         return []
 
-    chua_dung = [c for c in candidates if c["id"] not in da_dung_id]
-    random.shuffle(chua_dung)
-
+    # SỬA 30/09/2026 (cô Lan): hết dạng chưa dùng thì lấy dạng DÙNG ÍT NHẤT
+    # trong đề (vd chỉ có A, B mà cần 3 câu thì ra A, B rồi A hoặc B - không
+    # bao giờ A, A, A). Số lần dùng đếm trong _DEM_DANG gắn với da_dung_id.
+    dem = _DEM_DANG.setdefault(id(da_dung_id), Counter())
     chon = []
-    con_thieu = so_luong
-    pool = chua_dung[:]
-    while con_thieu > 0:
-        if not pool:
-            pool = candidates[:]
-            random.shuffle(pool)
-        item = pool.pop()
+    for _ in range(so_luong):
+        chua_dung = [c for c in candidates if c["id"] not in da_dung_id]
+        if chua_dung:
+            item = random.choice(chua_dung)
+        else:
+            it_nhat = min(dem[c["id"]] for c in candidates)
+            item = random.choice([c for c in candidates if dem[c["id"]] == it_nhat])
         chon.append(item)
         da_dung_id.add(item["id"])
-        con_thieu -= 1
+        dem[item["id"]] += 1
 
     return chon
+
+
+# Đếm số lần mỗi dạng (Generator ID) đã được chọn, theo từng tập da_dung_id
+# của một lần chọn đề (khoá = id() của tập). select_questions xoá khi xong.
+_DEM_DANG: dict[int, Counter] = {}
+
+
+_CURRICULUM_TU_GENERATOR = re.compile(r"^(L\d+_C\d+_B\d+_(NB|TH|VD|VDC)\d+[A-Z]?)_(MC|SA|TL)_[A-Z]+$")
+_DON_VI = re.compile(r"_(?:NB|TH|VD|VDC)(\d+[A-Z]?)$")
+
+
+def _don_vi(curriculum_id: str) -> str:
+    """L10_C1_B1_TH014 -> L10_C1_B1_014 (bỏ mức độ, như exam_blueprint_service)."""
+    return _DON_VI.sub(lambda m: "_" + m.group(1), curriculum_id)
+
+
+def _thay_don_vi_khac(curriculum_id: str, loai_cau: str, mapping: list[dict],
+                      dem_don_vi: Counter) -> tuple[str, list[dict]] | None:
+    """Curriculum ID được chia chưa có dạng nào cho loại câu này trong Mapping:
+    đổi sang một đơn vị kiến thức KHÁC của CÙNG bài, CÙNG mức độ có dạng cho
+    loại câu đó - ưu tiên đơn vị chưa dùng / dùng ít nhất trong đề.
+
+    Cô Lan 30/09/2026: "lọc trong toàn bộ TH của bài 1 ... phải chọn SA khác
+    014 (trừ khi đã chọn hết)". Không có đơn vị nào thay được thì trả None.
+    """
+    m = re.match(r"^(L\d+_C\d+_B\d+_)(NB|TH|VD|VDC)\d+[A-Z]?$", curriculum_id)
+    if not m:
+        return None
+    theo_cid: dict[str, list[dict]] = {}
+    for row in mapping:
+        g = _CURRICULUM_TU_GENERATOR.match(row["id"])
+        if not g or phan_loai_cau(row) != loai_cau:
+            continue
+        cid = g.group(1)
+        if cid.startswith(m.group(1) + m.group(2)) and re.match(r"^\d", cid[len(m.group(1) + m.group(2)):]):
+            theo_cid.setdefault(cid, []).append(row)
+    if not theo_cid:
+        return None
+    it_nhat = min(dem_don_vi[_don_vi(c)] for c in theo_cid)
+    cid = random.choice([c for c in theo_cid if dem_don_vi[_don_vi(c)] == it_nhat])
+    return cid, theo_cid[cid]
 
 
 def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None,
@@ -123,6 +166,11 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
         "trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set(),
         "dung_sai_cau_lon": set(),
     }
+    # đơn vị kiến thức đã dùng trong đề (chung cho MC / SA / TL)
+    dem_don_vi: Counter = Counter()
+    for loai in ("trac_nghiem", "tra_loi_ngan", "tu_luan"):
+        for item in blueprint.get(loai, []):
+            dem_don_vi[_don_vi(item["curriculum_id"])] += item.get("tong_so_cau", 1)
     ket_qua = []
 
     def _mapping_chuong(chuong_so: int) -> list[dict]:
@@ -178,6 +226,13 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                 if m["id"].startswith(curriculum_id + "_") and phan_loai_cau(m) == loai_cau
             ]
             if not candidates:
+                # thử đơn vị kiến thức khác cùng bài, cùng mức độ có dạng câu này
+                thay = _thay_don_vi_khac(curriculum_id, loai_cau, _mapping_chuong(chuong_so), dem_don_vi)
+                if thay:
+                    dem_don_vi[_don_vi(curriculum_id)] -= so_luong
+                    curriculum_id, candidates = thay
+                    dem_don_vi[_don_vi(curriculum_id)] += so_luong
+            if not candidates:
                 ma = f"{curriculum_id}_{LOAI_KY_HIEU[loai_cau]}_A"
                 ghi_chu = f"Chưa khai dạng {LOAI_KY_HIEU[loai_cau]} nào cho {curriculum_id} trong Mapping."
                 if cho_phep_thieu:
@@ -209,6 +264,8 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
         "tra_loi_ngan": 2,
         "tu_luan": 3,
     }
+    for s in da_dung.values():
+        _DEM_DANG.pop(id(s), None)
     return sorted(ket_qua, key=lambda c: _THU_TU_LOAI.get(c["loai_cau"], 99))
 
 

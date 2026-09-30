@@ -166,3 +166,25 @@ Chi tiết cài đặt ở `14_DEPLOYMENT.md` và `21_TAI_KHOAN_GIAO_VIEN.md`
 - Chạy nháp PDF cho câu có hình: `python3 scripts/nhap.py <hàm> -n 2 --seed 3`.
 - Toàn bộ pytest đạt.
 - Changelog, commit có dòng `Co-Authored-By` và `Claude-Session`.
+
+---
+
+## 7. Quy tắc chọn câu khi ra đề (chống đề na ná nhau)
+
+Chốt 30/09/2026 (cô Lan). Ví dụ: mức TH của bài 1, ma trận có 5 MC, 1 SA, 1 TL.
+
+1. **Đơn vị kiến thức** (`exam_blueprint_service._chon_curriculum_id`): lọc trong
+   toàn bộ yêu cầu TH của bài 1. Tập "đã dùng" **chung cho MC, SA, TL**: MC đã
+   lấy 014 thì SA, TL lấy đơn vị khác, trừ khi hết. Buộc phải lặp thì lấy đơn
+   vị **đang dùng ít nhất**. Thứ tự chọn: MC → SA → TL.
+2. **Dạng** (`question_selector_service._xoay_vong_bien_the`): các câu cùng
+   đơn vị lấy chữ cái khác nhau (A, B, D…); hết chữ cái thì lấy dạng dùng ít
+   nhất (chỉ có A, B mà cần 3 câu → 2 A + 1 B, không bao giờ 3 A). Đơn vị
+   được chia chưa có dạng cho loại câu đó → đổi sang đơn vị khác cùng bài,
+   cùng mức có dạng đó (`_thay_don_vi_khac`).
+3. **Biến thể** (`generator_service._chon_bien_the`): cùng dạng A hai lần thì
+   khác biến thể (A_01, A_04); hết biến thể thì lấy biến thể dùng ít nhất.
+4. Ma trận có SA, TL ở mức NB, TH được chia như trắc nghiệm (trước 30/09/2026
+   các câu này bị bỏ mất).
+
+Test: `tests/test_chon_cau_khong_na_na.py`.

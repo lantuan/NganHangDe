@@ -9297,3 +9297,18 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   (TH033_SA_A_01), cau 9 (TH034_MC_B_01), Phan III cau 1 (VD036_SA_A_01).
 - Lam tron theo SGK: _lt (0,5 lam tron len, round() cua Python lam tron ve so chan),
   _x1 giu chu so 0 cuoi; bo cac bo so sat ranh gioi lam tron.
+
+# Version 3.61 - 2026-09-30
+
+## Chon cau ra de: khong de na na nhau (quy tac co Lan)
+
+- exam_blueprint_service: tap "da dung" don vi kien thuc DUNG CHUNG cho MC / SA / TL
+  (truoc tach rieng nen SA hay lay lai dung don vi cua MC); vong 2 lay don vi dung
+  it nhat thay vi random.
+- exam_blueprint_service: SUA LOI ma tran co SA / TL o muc NB, TH bi BO MAT (chi
+  truoc nghiem duoc chia o NB, TH). Nay chia ca ba loai, thu tu MC -> SA -> TL.
+- question_selector_service: het dang chua dung thi lay dang dung it nhat; don vi
+  duoc chia chua co dang cho loai cau do thi doi sang don vi khac cung bai, cung
+  muc (_thay_don_vi_khac).
+- generator_service._chon_bien_the: het bien the chua dung thi lay bien the dung it nhat.
+- docs/27 muc 7; tests/test_chon_cau_khong_na_na.py.

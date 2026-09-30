@@ -497,7 +497,8 @@ def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
     return moi_phan_bo, (tong_vd + tong_vdc) - da_xep
 
 
-def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set) -> list[dict]:
+def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set,
+                        dem_dung: Counter | None = None) -> list[dict]:
     """
     Chọn so_luong Curriculum entries (không nhất thiết distinct nếu hết
     lựa chọn) từ danh sách entries CÙNG 1 mức độ trong 1 chương.
@@ -508,7 +509,13 @@ def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set)
       khi hai bản ghi khác mức độ nhưng cùng số (L10_C1_B2_TH021 và
       L10_C1_B2_VD021 là cùng một đơn vị, không lấy cả hai).
     - Chỉ lặp khi đã dùng hết toàn bộ competency khác trong đề hiện tại.
+    - SỬA 30/09/2026 (cô Lan): da_dung và dem_dung DÙNG CHUNG cho cả ba loại
+      câu MC / SA / TL. MC đã lấy đơn vị 014 thì SA phải lấy đơn vị khác, trừ
+      khi hết. Khi buộc phải lặp (vòng 2) thì lấy đơn vị ĐANG DÙNG ÍT NHẤT
+      (ngẫu nhiên giữa các đơn vị bằng nhau), không dồn vào một đơn vị.
     """
+    if dem_dung is None:
+        dem_dung = Counter()
     if so_luong <= 0 or not entries_muc_do:
         return []
 
@@ -538,14 +545,19 @@ def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set)
                 e = ung_vien[0]
                 chon.append(e)
                 da_dung.add(_don_vi_kien_thuc(e["id"]))
+                dem_dung[_don_vi_kien_thuc(e["id"])] += 1
                 con_thieu -= 1
                 lay_duoc_vong_nay = True
         if not lay_duoc_vong_nay:
             break  # hết competency chưa dùng ở mức này -> sang vòng 2
 
-    # Vòng 2 — hết lựa chọn mới, chấp nhận lặp lại (ngẫu nhiên)
+    # Vòng 2 — hết lựa chọn mới, chấp nhận lặp lại: lấy đơn vị DÙNG ÍT NHẤT
     while con_thieu > 0:
-        chon.append(random.choice(entries_muc_do))
+        it_nhat = min(dem_dung[_don_vi_kien_thuc(e["id"])] for e in entries_muc_do)
+        e = random.choice([e for e in entries_muc_do
+                           if dem_dung[_don_vi_kien_thuc(e["id"])] == it_nhat])
+        chon.append(e)
+        dem_dung[_don_vi_kien_thuc(e["id"])] += 1
         con_thieu -= 1
 
     return chon
@@ -627,8 +639,13 @@ def build_blueprint(
         bai_id = f"L{lop}_C{int(e['chuong_so'])}_B{int(e['bai_so'])}"
         theo_bai_muc_do.setdefault((bai_id, e["MucDo"]), []).append(e)
 
-    # "chưa dùng" tách riêng theo loại câu (MC/SA/TL không đụng nhau)
-    da_dung: dict[str, set] = {"trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set()}
+    # "Đã dùng" DÙNG CHUNG cho MC / SA / TL (sửa 30/09/2026, cô Lan): MC đã lấy
+    # đơn vị kiến thức 014 thì SA, TL phải lấy đơn vị khác, trừ khi hết lựa
+    # chọn. Trước đây tách riêng theo loại câu nên SA hay lấy lại đúng đơn vị
+    # của MC, đề ra nhiều câu na ná nhau.
+    _chung, _dem = set(), Counter()
+    da_dung: dict[str, set] = {"trac_nghiem": _chung, "tra_loi_ngan": _chung, "tu_luan": _chung}
+    dem_dung: Counter = _dem
     blueprint = {"dung_sai": [], "trac_nghiem": [], "tra_loi_ngan": [], "tu_luan": []}
     bao_cao_phan_bo: dict = {}
 
@@ -661,9 +678,16 @@ def build_blueprint(
             "so_cau": sl,
         })
 
-    # ---- BƯỚC 4b — trac_nghiem mức NB, TH: chia về BÀI theo TỈ LỆ SỐ TIẾT ----
-    for muc_do in ("NB", "TH"):
-        so_luong = phan_bo_muc_do.get("trac_nghiem", {}).get(muc_do, 0)
+    # ---- BƯỚC 4b — mức NB, TH của MC, SA, TL: chia về BÀI theo TỈ LỆ SỐ TIẾT ----
+    # SỬA 30/09/2026: trước đây chỉ làm cho trắc nghiệm, nên ma trận ghi câu
+    # trả lời ngắn / tự luận ở mức NB, TH (vd 1 SA + 1 TL mức TH) bị BỎ MẤT,
+    # đề ra thiếu câu mà không báo. Thứ tự MC -> SA -> TL để SA, TL tránh
+    # các đơn vị kiến thức MC đã lấy.
+    for muc_do, loai_nbth in [(m, l) for m in ("NB", "TH")
+                              for l in ("trac_nghiem", "tra_loi_ngan", "tu_luan")]:
+        so_luong = phan_bo_muc_do.get(loai_nbth, {}).get(muc_do, 0)
+        if so_luong <= 0 and loai_nbth != "trac_nghiem":
+            continue
         # KHÔNG trừ phần Đúng/Sai ra khỏi ngân sách NB/TH của trắc nghiệm.
         # Cô Lan chốt 28/09/2026: "cứ làm theo đúng mức độ là được, vì mức độ
         # ảnh hưởng điểm số - mức độ khác đi sẽ làm điểm số không phản ánh
@@ -690,16 +714,16 @@ def build_blueprint(
                 muc_do, danh_sach_bai, so_tiet_theo_bai)
             for b, k in pb.items():
                 phan_bo_bai[b] = phan_bo_bai.get(b, 0) + k
-        bao_cao_phan_bo.setdefault("trac_nghiem", {})[muc_do] = phan_bo_bai
+        bao_cao_phan_bo.setdefault(loai_nbth, {})[muc_do] = phan_bo_bai
         if mat_cau:
             bao_cao_phan_bo.setdefault("khong_du_yeu_cau", []).append(
-                {"loai_cau": "trac_nghiem", "muc_do": muc_do, "so_cau_mat": mat_cau})
+                {"loai_cau": loai_nbth, "muc_do": muc_do, "so_cau_mat": mat_cau})
         for bai_id, sl in phan_bo_bai.items():
             cb = _tach_chuong_bai(bai_id)
             entries = theo_bai_muc_do.get((bai_id, muc_do), [])
-            chon = _chon_curriculum_id(entries, sl, da_dung["trac_nghiem"])
+            chon = _chon_curriculum_id(entries, sl, da_dung[loai_nbth], dem_dung)
             for e in chon:
-                blueprint["trac_nghiem"].append({
+                blueprint[loai_nbth].append({
                     "curriculum_id": e["id"],
                     "chuong_so": cb[0] if cb else None,
                     "bai_so": cb[1] if cb else None,
@@ -771,7 +795,7 @@ def build_blueprint(
                 continue
 
             entries_vd = theo_bai_muc_do.get((bai_id, "VD"), [])
-            chon = _chon_curriculum_id(entries_vd, tong, da_dung[loai_cau])
+            chon = _chon_curriculum_id(entries_vd, tong, da_dung[loai_cau], dem_dung)
 
             # Gộp theo curriculum_id (nếu vòng lặp bên trên phải lặp lại
             # 1 competency do hết lựa chọn khác), rồi chia VD/VDC theo

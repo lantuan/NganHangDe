@@ -64,9 +64,16 @@ def _chon_bien_the(variants: list[str], used_variants: dict | None, generator_id
 
     da_dung = used_variants.setdefault(generator_id, set())
     chua_dung = [v for v in variants if v not in da_dung]
-
-    chosen = random.choice(chua_dung) if chua_dung else random.choice(variants)
+    # SỬA 30/09/2026: hết biến thể chưa dùng thì lấy biến thể DÙNG ÍT NHẤT
+    # (đếm trong used_variants["__dem__"]), không random thuần.
+    dem = used_variants.setdefault("__dem__", {})
+    if chua_dung:
+        chosen = random.choice(chua_dung)
+    else:
+        it_nhat = min(dem.get(v, 0) for v in variants)
+        chosen = random.choice([v for v in variants if dem.get(v, 0) == it_nhat])
     da_dung.add(chosen)
+    dem[chosen] = dem.get(chosen, 0) + 1
     return chosen
 
 
