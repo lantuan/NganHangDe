@@ -37,7 +37,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_NB015_MC_A",   # ca hai deu: dieu kien can va du
     # tu giao an Bai 1 (Menh de):
     "L10_C1_B1_NB001_MC_A",   # danh sach co dinh / co menh de chua bien va menh de so
-    "L10_C1_B1_TH003_MC_A",   # menh de hinh hoc co dinh / menh de so (Python tinh chan tri)
+    "L10_C1_B1_TH003_MC_A",   # menh de hinh hoc co dinh / menh de so / thay gia tri vao P(x)
     "L10_C1_B1_TH003_TL_A",   # menh de dao voi |x| / viet bang ki hieu roi xet dung sai
     "L10_C1_B1_TH003_TL_B",   # phu dinh menh de luong tu / phu dinh menh de ve so
     "L10_C1_B1_VD014_MC_B",   # thay gia tri vao P(x) / dem n de 2^n + k nguyen to
@@ -50,7 +50,9 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_TH021_MC_A",   # phan bu cua mot khoang / giao-hop-hieu-bu hai khoang (co dang {x | ...})
     "L10_C1_B2_VD021_MC_A",   # dem m nguyen / dieu kien cua m (hop = R, giao rong, giao khac rong)
     "L10_C1_B2_VD020_SA_A",   # hai tap: khong thuoc tap nao / ba tap: dung hai mon -> ca ba
-    "L10_C1_B2_VD020_MC_A",   # hai tiet muc / hai tap co nhom khong thuoc tap nao
+    "L10_C1_B2_VD020_MC_A",   # hai tiet muc / nhom khong thuoc tap nao / ba tap: tinh hop
+    # tu de on tap cuoi chuong 1:
+    "L10_C1_B1_TH014_MC_A",   # 17 nhom co dinh / menh de luong tu tham so do Python chon
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an
     "L10_C2_B3_TH024_MC_A",   # ca hai deu: hinh nao bieu dien mien nghiem
     "L10_C3_B6_TH032_MC_A",   # ca hai deu: dinh li cosin tinh canh con lai

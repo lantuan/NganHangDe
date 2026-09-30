@@ -9124,3 +9124,22 @@ Bien the moi (cung Dang voi _01):
                  km + b]); A giao B khac rong
   VD020_SA_A_02  ba tap: biet so thuoc DUNG hai tap -> so thuoc ca ba tap
   VD020_MC_A_02  hai tap co nhom "khong thuoc tap nao": tim ca hai / tong so
+
+# Version 3.52 - 2026-09-30
+
+## Bien the lay tu de trac nghiem on tap cuoi chuong 1 cua co Lan
+
+Bien the moi (cung Dang voi _01):
+  TH003_MC_A_03  P(x): "x + k <= x^2" (dau ngau nhien) - thay gia tri, chon
+                 P(a) dung / sai
+  TH014_MC_A_02  menh de forall / exists tren N, N*, Z, R, tham so do Python chon
+  VD020_MC_A_03  ba tap: biet n(A), n(B), n(C), cac giao -> n(A hop B hop C)
+  VD021_MC_A_02  them kieu 4: hai tap khac rong A = (m + p; a], B = (b; km + q),
+                 tim m de A giao B khac rong (doi chieu bo may tren luoi m)
+  TH014_MC_C_01  them 3 menh de ve hai tam giac bang nhau / dong dang
+Dang MOI (mapping co ghi chu):
+  NB017_MC_I_01  viet {x thuoc R | ...} thanh khoang, doan, nua khoang va nguoc lai
+  VD014_MC_C_01  dung sai cua P => Q, P <=> Q giua hai bat dang thuc so (can, pi;
+                 nhan so am, so duong, binh phuong) - chan tri tinh bang so
+  VD021_MC_B_01  phep toan ket hop tren ba khoang: (A giao B) hop (A giao C),
+                 A giao B giao C, (A hop B) giao C...
