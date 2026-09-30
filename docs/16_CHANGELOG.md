@@ -9087,3 +9087,22 @@ Bien the moi (cung Dang voi _01):
   TF_A_02        P: "forall x, x^2 + 2px + q > 0": phu dinh, dung sai,
                  dem so nguyen, dem tham so m
 Dang MOI (mapping co ghi chu): TH014_MC_C_01 - chon menh de keo theo dung/sai.
+
+# Version 3.50 - 2026-09-30
+
+## Bien the lay tu giao an Bai 2 (Tap hop) cua co Lan
+
+Helper moi: _tex_gt, _tap (liet ke, dau ";"), _tap_dac_trung, _tap_rong_hay_khong.
+Bien the moi (cung Dang voi _01):
+  TH018_MC_B_02  M nhieu phan tu nhat thoa M con A va M con B (= A giao B)
+  VD021_SA_A_02  dem so nguyen m de A giao B = A, A = [m; m + k] (dau mo /
+                 dong ngau nhien), B cho truoc
+  TF_B_02        A = {x thuoc Z | (x + k)/(x - c) nguyen}: phan tu, liet ke,
+                 so tap con 2^n, so m nguyen de B = {r; m} con A
+Dang MOI (mapping co ghi chu, muc NB - khong dung Delta, khong giai phuong
+trinh):
+  NB017_MC_G_01  liet ke phan tu tap cho boi tinh chat dac trung
+  NB017_MC_H_01  nhan biet tap rong
+Khong dua vao NB017: cau liet ke tu phuong trinh tich tren N/Z/Q/R (giao an
+ghi muc B - thong hieu, curriculum Bai 2 khong co muc TH cho "xac dinh tap
+hop").

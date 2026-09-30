@@ -8586,3 +8586,298 @@ def L10_C1_TF_A_02(socau, socot=1):
                r"%s > 0$'' đúng}" % (K + 1, bt_m), r"Sai (tính cả $m = %d$). " % (p * p) + ly_d)]
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+
+
+# =====================================================================
+# BIẾN THỂ LẤY TỪ GIÁO ÁN BÀI 2 (TẬP HỢP) CỦA CÔ LAN (30/09/2026)
+# CLAUDE THEM 30/09/2026 - co Lan duyet lai. Phan tu cua tap hop do Python
+# tinh (nghiem, uoc, so nguyen to...); phan tu cach nhau bang dau ";".
+# =====================================================================
+
+def _tex_gt(v):
+    """Số (hữu tỉ hoặc căn) viết kiểu đề thi."""
+    from sympy import latex as _latex, nsimplify as _ns
+    v = _ns(v)
+    if v.is_Rational:
+        return _tex_so(v)
+    return _latex(v).replace(r"\frac", r"\dfrac")
+
+
+def _tap(ds):
+    """Tập liệt kê, sắp tăng dần, cách nhau bằng dấu chấm phẩy."""
+    ds = sorted(set(ds), key=float)
+    if not ds:
+        return r"\varnothing"
+    return r"\left\{%s\right\}" % "; ".join(_tex_gt(v) for v in ds)
+
+
+def _tap_dac_trung(loai):
+    """Một tập cho bởi tính chất đặc trưng: (đề, đáp án (list), các list sai, lời giải)."""
+    if loai == 0:
+        a = random.randint(1, 10)
+        b = a + random.randint(9, 16)
+        dung = [n for n in range(a + 1, b) if _la_nguyen_to(n)]
+        sai = [[n for n in range(a, b + 1) if _la_nguyen_to(n)],
+               [n for n in range(a + 1, b) if n % 2 == 1],
+               dung[1:], dung + [n for n in (a, b) if n % 2 and not _la_nguyen_to(n)][:1]]
+        de = r"\left\{n \in \mathbb{N} \mid n \text{ là số nguyên tố, } %d < n < %d\right\}" % (a, b)
+        giai = r"Các số nguyên tố lớn hơn $%d$ và nhỏ hơn $%d$ là $%s$." % (a, b, "; ".join(map(str, dung)))
+        return de, dung, sai, giai
+    if loai == 1:
+        a = random.randint(-6, 0)
+        b = a + random.randint(3, 6)
+        tr, ph = random.choice([(True, False), (False, True), (True, True), (False, False)])
+        tap_so = random.choice([r"\mathbb{Z}", r"\mathbb{Z}", r"\mathbb{N}"])
+        lo = a if tr else a + 1
+        hi = b if ph else b - 1
+        if tap_so == r"\mathbb{N}":
+            lo = max(lo, 0)
+        dung = list(range(lo, hi + 1))
+        if not dung:
+            return _tap_dac_trung(0)
+        dt, dp = (r"\le" if tr else "<"), (r"\le" if ph else "<")
+        sai = [list(range(a if not tr else a + 1, (b - 1 if ph else b) + 1)),
+               list(range(a, b + 1)), list(range(a + 1, b)), [v for v in dung if v >= 0] if tap_so != r"\mathbb{N}"
+               else list(range(1, hi + 1))]
+        sai = [[v for v in s if tap_so != r"\mathbb{N}" or v >= 0] for s in sai]
+        de = r"\left\{x \in %s \mid %d %s x %s %d\right\}" % (tap_so, a, dt, dp, b)
+        giai = (r"Các số %s $x$ thoả mãn $%d %s x %s %d$ là $%s$."
+                % ("tự nhiên" if tap_so == r"\mathbb{N}" else "nguyên", a, dt, dp, b, "; ".join(map(str, dung))))
+        return de, dung, sai, giai
+    if loai == 2:
+        k = random.choice([12, 18, 20, 24, 28, 30, 36, 40])
+        dung = [d for d in range(1, k + 1) if k % d == 0]
+        sai = [dung[1:-1], dung[1:], [d for d in dung if d != k], [k * i for i in range(1, 5)]]
+        de = r"\left\{n \in \mathbb{N} \mid n \text{ là ước của } %d\right\}" % k
+        giai = r"Các ước tự nhiên của $%d$ là $%s$ (kể cả $1$ và $%d$)." % (k, "; ".join(map(str, dung)), k)
+        return de, dung, sai, giai
+    if loai == 3:
+        k = random.choice([5, 9, 10, 16, 17, 20, 25])
+        dung = [x_ for x_ in range(-10, 11) if x_ * x_ < k]
+        sai = [[v for v in dung if v >= 0], [x_ for x_ in range(-10, 11) if x_ * x_ <= k],
+               [x_ for x_ in range(-10, 11) if abs(x_) < k and abs(x_) <= 5][:0] or list(range(0, k)),
+               [v for v in dung if v > 0]]
+        de = r"\left\{x \in \mathbb{Z} \mid x^2 < %d\right\}" % k
+        can = math.isqrt(k - 1)
+        giai = (r"$x^2 < %d$ với $x$ nguyên $\Leftrightarrow |x| \le %d$, nên $x \in \left\{%s\right\}$."
+                % (k, can, "; ".join(map(str, dung))))
+        return de, dung, sai, giai
+    # Phương trình tích trên N, Z, Q, R (giáo án ghi mức B - thông hiểu) KHÔNG
+    # đưa vào đây vì NB017 chỉ là mức nhận biết.
+    raise ValueError(loai)
+
+
+def L10_C1_B2_NB017_MC_G_01(socau, dang=1):
+    r"""Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (số
+    nguyên tố, số nguyên trong khoảng, ước, $x^2 < k$) - mức nhận biết.
+
+    CLAUDE THEM 30/09/2026 - dang MOI (mapping co ghi chu), theo cac vi du
+    "D = {n thuoc N | n nguyen to, 5 < n < 20}", "B = {x thuoc Z | -3 < x <=
+    2}", "C = {x thuoc Z | x^2 < 9}" trong giao an Bai 2.
+    Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        de, dung, sai, giai = _tap_dac_trung(random.randint(0, 3))
+        dap = "$%s$" % _tap(dung)
+        ung = []
+        for s_ in sai:
+            t_ = "$%s$" % _tap(s_)
+            if t_ != dap and t_ not in ung:
+                ung.append(t_)
+        if len(ung) < 3:
+            continue
+        so += 1
+        debai = r"Liệt kê các phần tử của tập hợp $A = %s$, ta được" % de
+        cauTN += MC_SA_answer_text(debai, "$A = %s$" % _tap(dung), ["$A = %s$" % t_[1:-1] for t_ in ung[:3]],
+                                   giai + r" Vậy $A = %s$." % _tap(dung), 0, 0, dang)
+    return cauTN
+
+
+def _tap_rong_hay_khong():
+    """(đề tập hợp, rỗng hay không, lí do) - do Python kiểm tra."""
+    loai = random.randint(1, 5)   # không dùng Delta: NB017 chỉ là mức nhận biết
+    if loai == 1:
+        k = random.choice([2, 3, 5, 6, 7, 4, 9, 16, 25])
+        chinh = math.isqrt(k) ** 2 == k
+        return (r"\left\{x \in \mathbb{Q} \mid x^2 = %d\right\}" % k, not chinh,
+                (r"$x = \pm %d$ là số hữu tỉ" % math.isqrt(k)) if chinh else
+                (r"$x = \pm\sqrt{%d}$ là số vô tỉ" % k))
+    if loai == 2:
+        a_ = random.randint(2, 6)
+        b_ = random.choice([i for i in range(-15, 16) if i])
+        chia = b_ % a_ == 0
+        return (r"\left\{x \in \mathbb{Z} \mid %dx %s %d = 0\right\}" % (a_, "+" if b_ > 0 else "-", abs(b_)),
+                not chia, r"nghiệm $x = %s$ %s số nguyên" % (_tex_so(Rational(-b_, a_)), "là" if chia else "không là"))
+    if loai == 3:
+        k = random.randint(1, 3)
+        return (r"\left\{x \in \mathbb{Z} \mid |x| < %d\right\}" % k, False, r"$x = 0$ thoả mãn")
+    if loai == 4:
+        a_ = random.randint(-5, 8)
+        if random.random() < 0.5:
+            return (r"\left\{x \in \mathbb{Z} \mid %d < x < %d\right\}" % (a_, a_ + 1), True,
+                    r"không có số nguyên nào nằm giữa hai số nguyên liên tiếp $%d$ và $%d$" % (a_, a_ + 1))
+        return (r"\left\{x \in \mathbb{R} \mid %d < x < %d\right\}" % (a_, a_ + 1), False,
+                r"chẳng hạn $x = %s$ thoả mãn" % _tex_so(Rational(2 * a_ + 1, 2)))
+    k = random.randint(1, 9)
+    if random.random() < 0.5:
+        return (r"\left\{x \in \mathbb{N} \mid x < 0\right\}", True, r"không có số tự nhiên nào âm")
+    return (r"\left\{x \in \mathbb{N} \mid x < %d\right\}" % k, False, r"$x = 0$ thoả mãn")
+
+
+def L10_C1_B2_NB017_MC_H_01(socau, dang=1):
+    r"""Nhận biết tập rỗng: trong bốn tập hợp cho bởi tính chất đặc trưng, tập
+    nào rỗng (khác rỗng)?
+
+    CLAUDE THEM 30/09/2026 - dang MOI (mapping co ghi chu), theo vi du "A =
+    {x thuoc R | x^2 - x + 1 = 0}, B = {x thuoc Q | x^2 - 4x + 2 = 0}..." trong
+    giao an Bai 2. Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        hoi_rong = random.choice([True, False])
+        chon, cung, da = None, [], set()
+        for _t in range(500):
+            de, rong, ly = _tap_rong_hay_khong()
+            khoa = de[:30]
+            if khoa in da:
+                continue
+            if rong == hoi_rong and chon is None:
+                chon = (de, rong, ly); da.add(khoa)
+            elif rong != hoi_rong and len(cung) < 3:
+                cung.append((de, rong, ly)); da.add(khoa)
+            if chon and len(cung) == 3:
+                break
+        debai = r"Tập hợp nào sau đây %s?" % ("là tập rỗng" if hoi_rong else r"\textbf{khác} tập rỗng")
+        giai = (r"$%s$ %s vì %s.\\ " % (chon[0], r"$= \varnothing$" if hoi_rong else r"$\ne \varnothing$", chon[2])
+                + r"\\ ".join(r"$%s$ %s vì %s." % (d_, r"$= \varnothing$" if r_ else r"$\ne \varnothing$", l_)
+                              for d_, r_, l_ in cung))
+        cauTN += MC_SA_answer_text(debai, "$%s$" % chon[0], ["$%s$" % c_[0] for c_ in cung], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C1_B2_TH018_MC_B_02(socau, dang=1):
+    r"""Tập hợp $M$ có nhiều phần tử nhất thoả mãn $M \subset A$ và $M \subset B$
+    (tức là $A \cap B$), hai tập cho dạng liệt kê.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH018_MC_B, theo bai "A = {1; 2;
+    3; 4; 5}, B = {1; 3; 5; 7; 9}, tim M nhieu phan tu nhat" trong giao an
+    Bai 2. Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        A = sorted(random.sample(range(0, 13), random.randint(4, 6)))
+        B = sorted(random.sample(range(0, 13), random.randint(4, 6)))
+        giao = sorted(set(A) & set(B))
+        if len(giao) < 2 or set(A) <= set(B) or set(B) <= set(A):
+            continue
+        dap = "$M = %s$" % _tap(giao)
+        ung = []
+        for s_ in (sorted(set(A) | set(B)), sorted(set(A) - set(B)), sorted(set(B) - set(A)), giao[1:], giao[:-1]):
+            t_ = "$M = %s$" % _tap(s_)
+            if t_ != dap and t_ not in ung:
+                ung.append(t_)
+        if len(ung) < 3:
+            continue
+        so += 1
+        debai = (r"Cho hai tập hợp $A = %s$ và $B = %s$. Tập hợp $M$ có nhiều phần tử nhất thoả mãn "
+                 r"$M \subset A$ và $M \subset B$ là" % (_tap(A), _tap(B)))
+        giai = (r"$M \subset A$ và $M \subset B$ nghĩa là mọi phần tử của $M$ đều thuộc cả $A$ và $B$, tức là "
+                r"$M \subset A \cap B = %s$. Tập $M$ nhiều phần tử nhất là $M = A \cap B = %s$."
+                % (_tap(giao), _tap(giao)))
+        cauTN += MC_SA_answer_text(debai, dap, ung[:3], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C1_B2_VD021_SA_A_02(socau, dang=2):
+    r"""Đếm số nguyên $m$ để $A \cap B = A$ với $A$ là đoạn / khoảng độ dài cố
+    định chứa tham số, $B$ là đoạn / khoảng / nửa khoảng cho trước.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD021_SA_A, theo cac bai "A = [m;
+    m + 2] con cua B = [-1; 2]", "B = [a; a + 2] con cua A = [0; 3]" trong
+    giao an Bai 2. Hoi dang "A giao B = A" (dung Dang cua ID). Co Lan duyet.
+    """
+    def khoang(trai, a_, b_, phai):
+        return r"%s%s;\ %s%s" % ("[" if trai else "(", a_, b_, "]" if phai else ")")
+
+    cau = ""
+    so = 0
+    while so < socau:
+        a = random.randint(-10, 3)
+        b = a + random.randint(8, 20)
+        k = random.randint(1, 5)
+        tA, pA = random.choice([True, False]), random.choice([True, False])
+        tB, pB = random.choice([True, False]), random.choice([True, False])
+
+        def con(m):
+            l_ok = m > a or (m == a and (tB or not tA))
+            r_ok = m + k < b or (m + k == b and (pB or not pA))
+            return l_ok and r_ok
+        dem = sum(1 for m in range(a - 30, b + 30) if con(m))
+        if dem < 1 or dem > 99:
+            continue
+        so += 1
+        dau_l = ">" if (tA and not tB) else r"\ge"
+        dau_r = "<" if (pA and not pB) else r"\le"
+        A_tex = khoang(tA, "m", "m + %d" % k, pA)
+        B_tex = khoang(tB, a, b, pB)
+        debai = (r"Cho hai tập hợp $A = %s$ và $B = %s$ với $m$ là tham số. Có bao nhiêu số nguyên $m$ để "
+                 r"$A \cap B = A$?" % (A_tex, B_tex))
+        lo = a if dau_l == r"\ge" else a + 1
+        hi = b - k if dau_r == r"\le" else b - k - 1
+        giai = (r"$A \cap B = A \Leftrightarrow A \subset B \Leftrightarrow \begin{cases} m %s %d \\ m + %d %s %d "
+                r"\end{cases} \Leftrightarrow %d \le m \le %d$ (với $m$ nguyên).\\ Có $%d - (%d) + 1 = %d$ số nguyên $m$."
+                % (dau_l, a, k, dau_r, b, lo, hi, hi, lo, dem))
+        cau += MC_SA_answer_text(debai, str(dem), [str(dem + 1), str(dem - 1), str(dem + 2)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_TF_B_02(socau, socot=1):
+    r"""Đúng/Sai - tập $A = \{x \in \mathbb{Z} \mid \frac{x + k}{x - c} \in \mathbb{Z}\}$:
+    phần tử, liệt kê, số tập con, tham số để $B \subset A$.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C1_TF_B, theo cac bai "A = {x
+    thuoc Z | (2x + 3)/(x - 1) thuoc Z}, B = {x | x^2 - (m + 2)x + 2m = 0},
+    tim m nguyen de B con A" trong giao an Bai 2. Co Lan duyet.
+    """
+    cauTF = ""
+    for _ in range(socau):
+        c = random.choice([i for i in range(-3, 4) if i])
+        d = random.choice([4, 5, 6, 7, 8, 9, 10, 12])          # d = k + c
+        k = d - c
+        uoc = [u for u in range(1, d + 1) if d % u == 0]
+        A = sorted([c + u for u in uoc] + [c - u for u in uoc])
+        N = len(A)
+        r = random.choice(A)
+        tu = r"x %s %d" % ("+" if k > 0 else "-", abs(k)) if k else "x"
+        mau = r"x %s %d" % ("-" if c > 0 else "+", abs(c))
+        debai = (r"Cho tập hợp $A = \left\{x \in \mathbb{Z} \mathrel{\Big|} \dfrac{%s}{%s} \in \mathbb{Z}\right\}$ và "
+                 r"$B = \left\{x \in \mathbb{R} \mid %s = 0\right\}$ với $m$ là tham số. Xét tính đúng sai "
+                 r"của các khẳng định sau:"
+                 % (tu, mau, (r"(x - m)(x %s %d)" % ("-" if r > 0 else "+", abs(r))) if r else r"x(x - m)"))
+        tach = r"\dfrac{%s}{%s} = 1 + \dfrac{%d}{%s}" % (tu, mau, d, mau)
+        # a) NB
+        y1 = [(r"{\True $%d \in A$}" % (c + 1),
+               r"Đúng. Với $x = %d$: $\dfrac{%d}{1} = %d \in \mathbb{Z}$." % (c + 1, c + 1 + k, c + 1 + k)),
+              (r"{$%d \in A$}" % c, r"Sai. Với $x = %d$ mẫu bằng $0$, biểu thức không xác định." % c)]
+        # b) TH
+        ly_b = (r"$%s$, nên $x %s %d$ là ước của $%d$: $x %s %d \in \left\{%s\right\}$, do đó $A = %s$."
+                % (tach, "-" if c > 0 else "+", abs(c), d, "-" if c > 0 else "+", abs(c),
+                   "; ".join(str(v) for v in sorted([-u for u in uoc] + uoc)), _tap(A)))
+        y2 = [(r"{\True $A = %s$}" % _tap(A), r"Đúng. " + ly_b),
+              (r"{$A = %s$}" % _tap([c + u for u in uoc]), r"Sai (thiếu các ước âm). " + ly_b)]
+        # c) VD
+        y3 = [(r"{\True Tập hợp $A$ có đúng $%d$ tập con}" % (2 ** N),
+               r"Đúng. $A$ có $%d$ phần tử nên có $2^{%d} = %d$ tập con." % (N, N, 2 ** N)),
+              (r"{Tập hợp $A$ có đúng $%d$ tập con}" % (2 ** N - 1),
+               r"Sai. $A$ có $%d$ phần tử nên có $2^{%d} = %d$ tập con (kể cả $\varnothing$ và $A$)." % (N, N, 2 ** N))]
+        # d) VDC
+        ly_d = (r"$B = \left\{%d; m\right\}$ (hoặc $B = \left\{%d\right\}$ khi $m = %d$). Vì $%d \in A$ nên "
+                r"$B \subset A \Leftrightarrow m \in A$: có $%d$ số nguyên $m$." % (r, r, r, r, N))
+        y4 = [(r"{\True Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % N, r"Đúng. " + ly_d),
+              (r"{Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % (N - 1),
+               r"Sai (bỏ sót trường hợp $m = %d$). " % r + ly_d)]
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
