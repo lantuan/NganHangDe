@@ -7469,3 +7469,244 @@ def L10_C3_TF_H_02(socau, socot=1):
               (r"{Chi phí làm cỏ toàn bộ mảnh đất lớn hơn $%d$ triệu đồng}" % (T + 1), r"Sai. " + ly_d)]
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_tu_giac(Ap, Bp, Cp, Dp), 0, socot)
     return cauTF
+
+
+# =====================================================================
+# TH031 - GÓC PHỤ NHAU, BÙ NHAU VỚI GIÁ TRỊ LƯỢNG GIÁC "ĐẸP" KHÔNG ĐẶC BIỆT
+# CLAUDE THEM 30/09/2026 theo cô Lan:
+#   TH031_MC_G  biết một GTLG của α (vd cos α = 1/5), tìm GTLG của 180° - α (và ngược lại)
+#   TH031_MC_H  như G với góc phụ 90° - α (α nhọn)
+#   TH031_MC_I  có hình: góc bẹt (_01) / góc vuông (_02) chia bởi một tia
+# Giá trị chọn trước (phân số, căn bậc hai ghi ra được), KHÔNG phải của góc đặc
+# biệt; số đo góc để vẽ hình tính ngược từ giá trị đó.
+# =====================================================================
+
+_DAC_BIET_SC = {Rational(1, 2), sqrt(2) / 2, sqrt(3) / 2}
+_DAC_BIET_TC = {Integer(1), sqrt(3), sqrt(3) / 3}
+_SC_DEP = ([Rational(p, q) for q in range(3, 10) for p in range(1, q) if math.gcd(p, q) == 1] +
+           [sqrt(2) / 3, 2 * sqrt(2) / 3, sqrt(2) / 4, 3 * sqrt(2) / 5, sqrt(3) / 3, sqrt(3) / 4, sqrt(3) / 5,
+            sqrt(5) / 3, sqrt(5) / 4, sqrt(5) / 5, 2 * sqrt(5) / 5, sqrt(6) / 3, sqrt(6) / 4, sqrt(7) / 3,
+            sqrt(7) / 4])
+_TC_DEP = ([Rational(p, q) for q in range(2, 6) for p in range(1, 3 * q) if math.gcd(p, q) == 1 and p != q] +
+           [Integer(k) for k in (2, 3, 4, 5)] +
+           [sqrt(2), sqrt(5), 2 * sqrt(2), sqrt(2) / 2, sqrt(6) / 2, sqrt(3) / 2, sqrt(5) / 2, 2 * sqrt(3)])
+_BIEU_BU = {"sin": r"\sin\left(180^{\circ} - \alpha\right) = \sin\alpha",
+            "cos": r"\cos\left(180^{\circ} - \alpha\right) = -\cos\alpha",
+            "tan": r"\tan\left(180^{\circ} - \alpha\right) = -\tan\alpha",
+            "cot": r"\cot\left(180^{\circ} - \alpha\right) = -\cot\alpha"}
+_BIEU_PHU = {"sin": r"\cos\left(90^{\circ} - \alpha\right) = \sin\alpha",
+             "cos": r"\sin\left(90^{\circ} - \alpha\right) = \cos\alpha",
+             "tan": r"\cot\left(90^{\circ} - \alpha\right) = \tan\alpha",
+             "cot": r"\tan\left(90^{\circ} - \alpha\right) = \cot\alpha"}
+_MIEN_GOC = {"sin": r"$0^{\circ} < \alpha < 180^{\circ}$", "cos": r"$0^{\circ} < \alpha < 180^{\circ}$",
+             "tan": r"$0^{\circ} < \alpha < 180^{\circ}$, $\alpha \ne 90^{\circ}$",
+             "cot": r"$0^{\circ} < \alpha < 180^{\circ}$"}
+
+
+def _gtlg_dep(ham, am_duoc):
+    """Giá trị 'đẹp' của hàm ham (sin, cos, tan, cot), không phải giá trị của góc đặc biệt.
+    sin luôn dương (góc từ 0° đến 180°); am_duoc=True cho phép cos, tan, cot âm."""
+    if ham in ("sin", "cos"):
+        v = random.choice([t for t in _SC_DEP if t not in _DAC_BIET_SC])
+    else:
+        v = random.choice([t for t in _TC_DEP if t not in _DAC_BIET_TC])
+    if am_duoc and ham != "sin" and random.random() < 0.5:
+        v = -v
+    return v
+
+
+def _goc_tu_gtlg(ham, v, tu_duoc=True):
+    """Số đo (độ) của góc α trong (0°; 180°) có ham(α) = v - dùng để vẽ hình.
+    Với sin có hai góc: chọn ngẫu nhiên góc nhọn hoặc góc tù nếu tu_duoc."""
+    x = float(v)
+    if ham == "sin":
+        a = math.degrees(math.asin(x))
+        return 180 - a if (tu_duoc and random.random() < 0.5) else a
+    if ham == "cos":
+        return math.degrees(math.acos(x))
+    t = x if ham == "tan" else 1 / x
+    a = math.degrees(math.atan(t))
+    return a + 180 if a < 0 else a
+
+
+def _nhieu_phu_bu(ham, dap, v):
+    """Ba phương án nhiễu: sai dấu, nghịch đảo, nhầm sang GTLG còn lại (căn(1 - v^2))."""
+    ung = [_tri(-dap)]
+    if ham in ("sin", "cos"):
+        con = sqrt(1 - v ** 2)
+        ung += [_tri(con), _tri(-con), _tri(1 / dap)]
+    else:
+        ung += [_tri(1 / dap), _tri(-1 / dap)]
+    return _ba_nhieu(_tri(dap), ung, buoc=lambda t: _tri(dap + Rational(t, 5)))
+
+
+def L10_C3_B5_TH031_MC_G_01(socau, dang=1):
+    r"""Biết một giá trị lượng giác của $\alpha$ (số đẹp không phải của góc đặc
+    biệt, vd $\cos\alpha = \dfrac{1}{5}$), tìm giá trị lượng giác CÙNG TÊN của góc bù
+    $180^{\circ} - \alpha$. Hàm sin, cos, tan, cot chọn ngẫu nhiên.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, True)
+        dap = v if ham == "sin" else -v
+        debai = (r"Cho góc $\alpha$ với %s và $\%s\alpha = %s$. Giá trị của $\%s\left(180^{\circ} - \alpha\right)$ bằng"
+                 % (_MIEN_GOC[ham], ham, _tri(v), ham))
+        giai = (r"Hai góc $\alpha$ và $180^{\circ} - \alpha$ bù nhau nên $%s = %s$."
+                % (_BIEU_BU[ham], _tri(dap)))
+        cau += MC_SA_answer_const(debai, _tri(dap), _nhieu_phu_bu(ham, dap, v), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_MC_G_02(socau, dang=1):
+    r"""Hỏi NGƯỢC của _01: biết giá trị lượng giác của góc $180^{\circ} - \alpha$
+    (vd $\cos\left(180^{\circ} - \alpha\right) = -\dfrac{\sqrt{2}}{4}$), tìm giá trị lượng
+    giác cùng tên của $\alpha$.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH031_MC_G theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, True)                  # v = ham(180° - α)
+        dap = v if ham == "sin" else -v           # ham(α)
+        debai = (r"Cho góc $\alpha$ với %s và $\%s\left(180^{\circ} - \alpha\right) = %s$. Giá trị của $\%s\alpha$ bằng"
+                 % (_MIEN_GOC[ham], ham, _tri(v), ham))
+        giai = (r"Hai góc $\alpha$ và $180^{\circ} - \alpha$ bù nhau nên $%s$, suy ra $\%s\alpha = %s$."
+                % (_BIEU_BU[ham], ham, _tri(dap)))
+        cau += MC_SA_answer_const(debai, _tri(dap), _nhieu_phu_bu(ham, dap, v), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_MC_H_01(socau, dang=1):
+    r"""Góc nhọn $\alpha$ biết một giá trị lượng giác (số đẹp, không đặc biệt, vd
+    $\sin\alpha = \dfrac{1}{3}$), tìm giá trị lượng giác của góc phụ $90^{\circ} - \alpha$
+    ($\cos\left(90^{\circ} - \alpha\right) = \sin\alpha$, ...).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, False)
+        hoi = _DOI_HAM[ham]
+        debai = (r"Cho góc nhọn $\alpha$ có $\%s\alpha = %s$. Giá trị của $\%s\left(90^{\circ} - \alpha\right)$ bằng"
+                 % (ham, _tri(v), hoi))
+        giai = (r"Hai góc $\alpha$ và $90^{\circ} - \alpha$ phụ nhau nên $%s = %s$."
+                % (_BIEU_PHU[ham], _tri(v)))
+        cau += MC_SA_answer_const(debai, _tri(v), _nhieu_phu_bu(ham, v, v), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_MC_H_02(socau, dang=1):
+    r"""Hỏi NGƯỢC của _01: biết giá trị lượng giác của góc $90^{\circ} - \alpha$
+    ($\alpha$ nhọn), tìm giá trị lượng giác của $\alpha$ (vd biết
+    $\sin\left(90^{\circ} - \alpha\right) = \dfrac{2}{7}$, tìm $\cos\alpha$).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH031_MC_H theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ham = random.choice(_HAM4)                # hỏi ham(α)
+        cho = _DOI_HAM[ham]                        # cho cho(90° - α) = ham(α)
+        v = _gtlg_dep(ham, False)
+        debai = (r"Cho góc nhọn $\alpha$ có $\%s\left(90^{\circ} - \alpha\right) = %s$. Giá trị của $\%s\alpha$ bằng"
+                 % (cho, _tri(v), ham))
+        giai = (r"Hai góc $\alpha$ và $90^{\circ} - \alpha$ phụ nhau nên $%s$, suy ra $\%s\alpha = %s$."
+                % (_BIEU_PHU[ham], ham, _tri(v)))
+        cau += MC_SA_answer_const(debai, _tri(v), _nhieu_phu_bu(ham, v, v), giai, 0, 0, dang)
+    return cau
+
+
+def _hinh_goc_bet(a):
+    """Góc bẹt AOB (A bên phải, B bên trái), tia OC tạo với OA góc a độ; ghi α, β."""
+    return (
+        "\\begin{tikzpicture}[scale=1,font=\\footnotesize]\n"
+        "\\coordinate (O) at (0,0);\n\\coordinate (A) at (2.4,0);\n\\coordinate (B) at (-2.4,0);\n"
+        "\\coordinate (C) at (%.1f:2.2);\n" % a
+        + "\\draw[thick] (B) -- (A);\n\\draw[thick] (O) -- (C);\n"
+        "\\draw (0.5,0) arc (0:%.1f:0.5);\n" % a
+        + "\\draw (%.1f:0.7) arc (%.1f:180:0.7);\n" % (a, a)
+        + "\\node at (%.1f:0.85) {$\\alpha$};\n" % (a / 2)
+        + "\\node at (%.1f:1.05) {$\\beta$};\n" % ((a + 180) / 2)
+        + "\\fill (O) circle (0.03) node[below] {$O$};\n"
+        "\\fill (A) circle (0.03) node[below] {$A$};\n"
+        "\\fill (B) circle (0.03) node[below] {$B$};\n"
+        "\\fill (C) circle (0.03) node[%s] {$C$};\n" % ("above left" if a > 90 else "above right")
+        + "\\end{tikzpicture}"
+    )
+
+
+def _hinh_goc_vuong(a):
+    """Góc vuông xOy, tia Oz nằm giữa tạo với Ox góc a độ; ghi α, β."""
+    return (
+        "\\begin{tikzpicture}[scale=1,font=\\footnotesize]\n"
+        "\\coordinate (O) at (0,0);\n"
+        "\\draw[thick] (0,0) -- (2.4,0) node[below] {$x$};\n"
+        "\\draw[thick] (0,0) -- (0,2.4) node[left] {$y$};\n"
+        "\\draw[thick] (0,0) -- (%.1f:2.4) node[above right] {$z$};\n" % a
+        + "\\draw (0.6,0) arc (0:%.1f:0.6);\n" % a
+        + "\\draw (%.1f:0.85) arc (%.1f:90:0.85);\n" % (a, a)
+        + "\\node at (%.1f:0.95) {$\\alpha$};\n" % (a / 2)
+        + "\\node at (%.1f:1.2) {$\\beta$};\n" % ((a + 90) / 2)
+        + "\\fill (O) circle (0.03) node[below left] {$O$};\n"
+        "\\end{tikzpicture}"
+    )
+
+
+def L10_C3_B5_TH031_MC_I_01(socau, dang=1):
+    r"""Có hình: góc bẹt $\widehat{AOB}$, tia $OC$ chia thành hai góc kề bù
+    $\alpha = \widehat{AOC}$, $\beta = \widehat{BOC}$. Biết một giá trị lượng giác
+    của $\alpha$ (số đẹp), tìm giá trị lượng giác cùng tên của $\beta = 180^{\circ} - \alpha$.
+    Giá trị chọn trước, số đo góc tính ngược để vẽ đúng hình.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, True)
+        a = _goc_tu_gtlg(ham, v)
+        if not (20 <= a <= 160) or abs(a - 90) < 10:
+            continue
+        so += 1
+        dap = v if ham == "sin" else -v
+        debai = (r"Cho hình vẽ bên, trong đó ba điểm $A$, $O$, $B$ thẳng hàng, $\widehat{AOC} = \alpha$, "
+                 r"$\widehat{BOC} = \beta$. Biết $\%s\alpha = %s$. Giá trị của $\%s\beta$ bằng"
+                 % (ham, _tri(v), ham))
+        giai = (r"Vì $A$, $O$, $B$ thẳng hàng nên $\alpha + \beta = 180^{\circ}$, tức $\beta = 180^{\circ} - \alpha$."
+                + "\\\\\n" + r"Do đó $\%s\beta = %s = %s$."
+                % (ham, _BIEU_BU[ham].split("= ")[1], _tri(dap)))
+        cau += MC_SA_answer_const(debai, _tri(dap), _nhieu_phu_bu(ham, dap, v), giai, _hinh_goc_bet(a), 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH031_MC_I_02(socau, dang=1):
+    r"""Có hình (thay góc bẹt của _01 bằng GÓC VUÔNG): $\widehat{xOy} = 90^{\circ}$, tia
+    $Oz$ nằm giữa, $\alpha = \widehat{xOz}$, $\beta = \widehat{zOy}$ phụ nhau. Biết một
+    giá trị lượng giác của $\alpha$, tìm giá trị lượng giác của $\beta$
+    ($\cos\beta = \sin\alpha$, ...).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH031_MC_I theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        ham = random.choice(_HAM4)
+        v = _gtlg_dep(ham, False)
+        a = _goc_tu_gtlg(ham, v, tu_duoc=False)
+        if not (20 <= a <= 70):
+            continue
+        so += 1
+        hoi = _DOI_HAM[ham]
+        debai = (r"Cho hình vẽ bên, trong đó $\widehat{xOy} = 90^{\circ}$, tia $Oz$ nằm giữa hai tia $Ox$, $Oy$, "
+                 r"$\widehat{xOz} = \alpha$, $\widehat{zOy} = \beta$. Biết $\%s\alpha = %s$. Giá trị của $\%s\beta$ bằng"
+                 % (ham, _tri(v), hoi))
+        giai = (r"Vì tia $Oz$ nằm giữa hai tia $Ox$, $Oy$ nên $\alpha + \beta = 90^{\circ}$, tức "
+                r"$\beta = 90^{\circ} - \alpha$." + "\\\\\n" +
+                r"Do đó $\%s\beta = \%s\left(90^{\circ} - \alpha\right) = \%s\alpha = %s$." % (hoi, hoi, ham, _tri(v)))
+        cau += MC_SA_answer_const(debai, _tri(v), _nhieu_phu_bu(ham, v, v), giai, _hinh_goc_vuong(a), 0, dang)
+    return cau

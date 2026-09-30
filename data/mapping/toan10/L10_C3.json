@@ -452,6 +452,27 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B5_TH031_MC_G",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một giá trị lượng giác (số không đặc biệt) của α, tìm giá trị lượng giác của góc bù 180° − α (và ngược lại)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (phan dang TH031); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_H",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một giá trị lượng giác (số không đặc biệt) của góc nhọn α, tìm giá trị lượng giác của góc phụ 90° − α (và ngược lại)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (phan dang TH031); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_I",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Có hình: góc bẹt (hai góc kề bù) hoặc góc vuông (hai góc phụ nhau) chia bởi một tia, biết giá trị lượng giác của góc này tìm của góc kia",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (phan dang TH031); co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_TF_F",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Đúng sai",

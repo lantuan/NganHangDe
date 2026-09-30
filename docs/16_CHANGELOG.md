@@ -9426,3 +9426,16 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   co it nhat hai phan tu.
 - NB017_MC_G_03 (moi): cho A bang tinh chat dac trung, hoi khang dinh "a thuoc A" /
   "a khong thuoc A" nao dung (sai); khong dua ca hai khang dinh ve cung mot so vao mot cau.
+
+# Version 3.71 - 2026-09-30
+
+## TH031 (goc phu nhau, bu nhau): them dang G, H, I theo phan dang cua co Lan
+
+- Kho gia tri "dep" khong phai cua goc dac biet (_SC_DEP cho sin/cos, _TC_DEP cho tan/cot):
+  phan so, can bac hai ghi ra duoc (1/5, sqrt(2)/4, 2sqrt(5)/5, ...). Bo 1/2, sqrt2/2, sqrt3/2,
+  1, sqrt3, sqrt3/3.
+- TH031_MC_G: _01 biet GTLG cua alpha tim GTLG cung ten cua 180 - alpha; _02 nguoc lai.
+- TH031_MC_H: _01 goc nhon alpha, tim GTLG cua 90 - alpha (cos(90 - a) = sin a ...); _02 nguoc lai.
+- TH031_MC_I (co hinh): _01 goc bet AOB, tia OC chia thanh alpha, beta ke bu; _02 goc vuong
+  xOy, tia Oz chia thanh alpha, beta phu nhau. Gia tri chon truoc, so do goc tinh nguoc de ve.
+- Nhieu: sai dau, nghich dao, nham sang GTLG con lai (can(1 - v^2)).
