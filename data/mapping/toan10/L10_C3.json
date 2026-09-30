@@ -473,6 +473,41 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (phan dang TH031); co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B5_TH031_SA_D",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết một giá trị lượng giác (số không đặc biệt) của α, tìm giá trị lượng giác của góc bù 180° − α (và ngược lại)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - ban tra loi ngan (so thap phan) cua MC_G, cung mo ta dang de khong vao cung mot de theo co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_E",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết một giá trị lượng giác (số không đặc biệt) của góc nhọn α, tìm giá trị lượng giác của góc phụ 90° − α (và ngược lại)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - ban tra loi ngan (so thap phan) cua MC_H, cung mo ta dang de khong vao cung mot de theo co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_F",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Có hình: góc bẹt (hai góc kề bù) hoặc góc vuông (hai góc phụ nhau) chia bởi một tia, biết giá trị lượng giác của góc này tìm của góc kia",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - ban tra loi ngan (so thap phan) cua MC_I, cung mo ta dang de khong vao cung mot de theo co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_TL_A",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Tự luận",
+    "Dang": "Tự luận: biết sin hoặc côsin của α, tính giá trị lượng giác của góc bù 180° − α / góc phụ 90° − α và giá trị lượng giác còn lại (sin²α + cos²α = 1)",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, y a) TH031, y b) TH030 - hai don vi kien thuc theo co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_TL_B",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Tự luận",
+    "Dang": "Tự luận có hình: góc bẹt / góc vuông chia bởi một tia, tính giá trị lượng giác của hai góc kề bù / phụ nhau và giá trị lượng giác còn lại",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, y a) TH031, y b) TH030 - hai don vi kien thuc theo co Lan; co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_TF_F",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Đúng sai",

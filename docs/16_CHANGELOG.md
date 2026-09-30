@@ -9439,3 +9439,14 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - TH031_MC_I (co hinh): _01 goc bet AOB, tia OC chia thanh alpha, beta ke bu; _02 goc vuong
   xOy, tia Oz chia thanh alpha, beta phu nhau. Gia tri chon truoc, so do goc tinh nguoc de ve.
 - Nhieu: sai dau, nghich dao, nham sang GTLG con lai (can(1 - v^2)).
+
+# Version 3.72 - 2026-09-30
+
+## TH031: ban tra loi ngan va tu luan cho cac dang goc phu, goc bu moi (theo co Lan)
+
+- SA_D (~MC_G, goc bu), SA_E (~MC_H, goc phu), SA_F (~MC_I, co hinh): so thap phan
+  (_TP_SC, _TP_TC), dap so toi da 4 ki tu; _01 xuoi, _02 nguoc (SA_F: _01 goc bet, _02 goc
+  vuong). Mo ta dang trong Mapping trung voi MC tuong ung de bo chon cau khong dua ca hai
+  vao mot de.
+- TL_A (_01 goc bu, _02 goc phu) va TL_B co hinh (_01 goc bet, _02 goc vuong): y a) quan he
+  goc phu/bu (TH031), y b) tinh GTLG con lai bang sin^2 + cos^2 = 1 (TH030), y c) ket hop.

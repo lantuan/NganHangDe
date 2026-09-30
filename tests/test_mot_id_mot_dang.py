@@ -100,6 +100,11 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_G",   # cho alpha tim 180 - alpha / cho 180 - alpha tim alpha
     "L10_C3_B5_TH031_MC_H",   # cho alpha tim 90 - alpha / nguoc lai
     "L10_C3_B5_TH031_MC_I",   # hinh goc bet / hinh goc vuong
+    "L10_C3_B5_TH031_SA_D",   # goc bu so thap phan: xuoi / nguoc
+    "L10_C3_B5_TH031_SA_E",   # goc phu so thap phan: xuoi / nguoc
+    "L10_C3_B5_TH031_SA_F",   # hinh goc bet / goc vuong, so thap phan
+    "L10_C3_B5_TH031_TL_A",   # tu luan goc bu / goc phu
+    "L10_C3_B5_TH031_TL_B",   # tu luan hinh goc bet / goc vuong
     "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
     "L10_C1_B2_VD020_TL_A",   # it nhat mot / khong thuoc nao  -  biet so khong thuoc, tinh ca hai, chi A (kho boi canh)
     # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
