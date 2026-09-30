@@ -8881,3 +8881,431 @@ def L10_C1_TF_B_02(socau, socot=1):
                r"Sai (bỏ sót trường hợp $m = %d$). " % r + ly_d)]
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+
+
+# =====================================================================
+# BIẾN THỂ LẤY TỪ GIÁO ÁN BÀI 3 (CÁC PHÉP TOÁN TRÊN TẬP HỢP) CỦA CÔ LAN
+# CLAUDE THEM 30/09/2026 - co Lan duyet lai. Moi ket qua phep toan tren
+# khoang / doan do mot bo may nho tinh (_k_*): xet tung diem mut va tung
+# khoang giua hai diem mut, khong suy tay.
+# =====================================================================
+from fractions import Fraction as _Fr
+
+_VC = float("inf")
+
+
+def _k_thuoc(S, x):
+    """x có thuộc hợp các khoảng S không; mỗi khoảng (lo, lo_dong, hi, hi_dong)."""
+    for lo, lc, hi, hc in S:
+        if lo < x < hi or (x == lo and lc) or (x == hi and hc):
+            return True
+    return False
+
+
+def _k_dung(thuoc, diem):
+    """Dựng lại tập (hợp các khoảng rời nhau) từ hàm thuộc và các điểm mút."""
+    pts = sorted(set(p for p in diem if p not in (_VC, -_VC)))
+    manh = []
+    bien = [-_VC] + pts + [_VC]
+    for i in range(len(bien) - 1):
+        a, b = bien[i], bien[i + 1]
+        if i > 0:
+            manh.append(("d", a, thuoc(a)))
+        if a == -_VC and b == _VC:
+            giua = 0
+        elif a == -_VC:
+            giua = b - 1
+        elif b == _VC:
+            giua = a + 1
+        else:
+            giua = _Fr(a) / 2 + _Fr(b) / 2
+        manh.append(("k", a, b, thuoc(giua)))
+    kq, cur = [], None
+    for m in manh:
+        if m[0] == "d":
+            _, p, vao = m
+            if vao and cur is None:
+                cur = [p, True]
+            elif not vao and cur is not None:
+                kq.append((cur[0], cur[1], p, False)); cur = None
+        else:
+            _, a, b, vao = m
+            if vao and cur is None:
+                cur = [a, False]
+            elif not vao and cur is not None:
+                kq.append((cur[0], cur[1], a, True)); cur = None
+    if cur is not None:
+        kq.append((cur[0], cur[1], _VC, False))
+    return kq
+
+
+def _k_phep(A, B, phep):
+    diem = [p for S in (A, B) for k in S for p in (k[0], k[2])]
+    f = {"giao": lambda x: _k_thuoc(A, x) and _k_thuoc(B, x),
+         "hop": lambda x: _k_thuoc(A, x) or _k_thuoc(B, x),
+         "hieu": lambda x: _k_thuoc(A, x) and not _k_thuoc(B, x),
+         "bu": lambda x: not _k_thuoc(A, x)}[phep]
+    return _k_dung(f, diem)
+
+
+def _k_so(v):
+    v = _Fr(v)
+    if v.denominator == 1:
+        return "%d" % v.numerator
+    return (r"-\dfrac{%d}{%d}" if v < 0 else r"\dfrac{%d}{%d}") % (abs(v.numerator), v.denominator)
+
+
+def _k_tex(S):
+    if not S:
+        return r"\varnothing"
+    if len(S) == 1 and S[0][0] == -_VC and S[0][2] == _VC:
+        return r"\mathbb{R}"
+    phan = []
+    for lo, lc, hi, hc in S:
+        if lo == hi:
+            phan.append(r"\left\{%s\right\}" % _k_so(lo))
+            continue
+        trai = r"\left(-\infty" if lo == -_VC else (r"\left[" if lc else r"\left(") + _k_so(lo)
+        phai = r"+\infty\right)" if hi == _VC else _k_so(hi) + (r"\right]" if hc else r"\right)")
+        phan.append(trai + ";\\ " + phai)
+    return r" \cup ".join(phan)
+
+
+def _k_lat(S, i, dau):
+    """Đổi đóng/mở ở đầu mút (khoảng thứ i, đầu trái/phải) - làm phương án nhiễu."""
+    S = [list(k) for k in S]
+    if dau == 0 and S[i][0] != -_VC:
+        S[i][1] = not S[i][1]
+    elif dau == 1 and S[i][2] != _VC:
+        S[i][3] = not S[i][3]
+    return [tuple(k) for k in S]
+
+
+def L10_C1_B2_TH018_MC_B_03(socau, dang=1):
+    r"""Phần bù trong tập $E$ (liệt kê): $C_EA$, $C_E(A \cup B)$, $C_EA \cap C_EB$...
+
+    CLAUDE THEM 30/09/2026 - bien the 03 cua TH018_MC_B, theo vi du "E = {1;
+    ...; 9}, A = {1; 2; 3; 4}, B = {2; 4; 6; 8}, xac dinh C_E A, C_E(A hop B),
+    C_E A giao C_E B" trong giao an Bai 3. Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        n = random.randint(8, 12)
+        E = set(range(1, n + 1))
+        A = set(random.sample(sorted(E), random.randint(3, 5)))
+        B = set(random.sample(sorted(E), random.randint(3, 5)))
+        if not (A & B) or A <= B or B <= A or len(A | B) >= n:
+            continue
+        PHEP = [(r"C_EA", E - A, r"E \setminus A"), (r"C_EB", E - B, r"E \setminus B"),
+                (r"C_E(A \cup B)", E - (A | B), r"E \setminus (A \cup B)"),
+                (r"C_E(A \cap B)", E - (A & B), r"E \setminus (A \cap B)"),
+                (r"C_EA \cap C_EB", (E - A) & (E - B), r"(E \setminus A) \cap (E \setminus B)"),
+                (r"C_EA \cup C_EB", (E - A) | (E - B), r"(E \setminus A) \cup (E \setminus B)")]
+        i = random.randrange(len(PHEP))
+        ten, kq, cach = PHEP[i]
+        dap = "$%s = %s$" % (ten, _tap(kq))
+        ung = []
+        for j, (_, k2, _) in enumerate(PHEP):
+            t_ = "$%s = %s$" % (ten, _tap(k2))
+            if j != i and t_ != dap and t_ not in ung:
+                ung.append(t_)
+        for k2 in (A, B, A | B, A & B):
+            t_ = "$%s = %s$" % (ten, _tap(k2))
+            if t_ != dap and t_ not in ung:
+                ung.append(t_)
+        random.shuffle(ung)
+        so += 1
+        debai = (r"Cho tập hợp $E = %s$ và các tập con $A = %s$, $B = %s$ của $E$. Tập hợp $%s$ là"
+                 % (_tap(E), _tap(A), _tap(B), ten))
+        giai = (r"$C_EA = %s$, $C_EB = %s$, $A \cup B = %s$, $A \cap B = %s$.\\ $%s = %s = %s$."
+                % (_tap(E - A), _tap(E - B), _tap(A | B), _tap(A & B), ten, cach, _tap(kq)))
+        cauTN += MC_SA_answer_text(debai, dap, ung[:3], giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C1_B2_TH018_MC_B_04(socau, dang=1):
+    r"""Xác định lại tập $A$ (hoặc $B$, $A \cup B$) khi biết $A \setminus B$,
+    $B \setminus A$ và $A \cap B$.
+
+    CLAUDE THEM 30/09/2026 - bien the 04 cua TH018_MC_B, theo vi du "A \\ B =
+    {1; 5; 7; 8}, B \\ A = {2; 10}, A giao B = {3; 6; 9}" trong giao an Bai 3.
+    Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        so_ = random.sample(range(0, 16), random.randint(7, 10))
+        k1, k2 = random.randint(2, 4), random.randint(2, 3)
+        AB, BA, G = set(so_[:k1]), set(so_[k1:k1 + k2]), set(so_[k1 + k2:])
+        if len(G) < 2:
+            continue
+        hoi = random.choice(["A", "B", r"A \cup B"])
+        kq = {"A": AB | G, "B": BA | G, r"A \cup B": AB | BA | G}[hoi]
+        dap = "$%s = %s$" % (hoi, _tap(kq))
+        ung = []
+        for k_ in (AB | G, BA | G, AB | BA | G, AB | BA, AB, G):
+            t_ = "$%s = %s$" % (hoi, _tap(k_))
+            if t_ != dap and t_ not in ung:
+                ung.append(t_)
+        so += 1
+        debai = (r"Cho hai tập hợp $A$, $B$ thoả mãn $A \setminus B = %s$, $B \setminus A = %s$ và "
+                 r"$A \cap B = %s$. Tập hợp $%s$ là" % (_tap(AB), _tap(BA), _tap(G), hoi))
+        cach = {"A": r"(A \setminus B) \cup (A \cap B)", "B": r"(B \setminus A) \cup (A \cap B)",
+                r"A \cup B": r"(A \setminus B) \cup (B \setminus A) \cup (A \cap B)"}[hoi]
+        giai = (r"Mỗi phần tử của $A \cup B$ thuộc đúng một trong ba phần rời nhau: chỉ thuộc $A$, chỉ thuộc "
+                r"$B$, thuộc cả hai. Do đó $%s = %s = %s$." % (hoi, cach, _tap(kq)))
+        cauTN += MC_SA_answer_text(debai, dap, ung[:3], giai, 0, 0, dang)
+    return cauTN
+
+
+def _k_tap_de(S_lo, lc, S_hi, hc, cho_tinh_chat):
+    """Viết một khoảng: dạng kí hiệu khoảng hoặc dạng {x thuộc R | ...}."""
+    S = [(S_lo, lc, S_hi, hc)]
+    if not cho_tinh_chat:
+        return _k_tex(S), None
+    if S_lo == -_VC:
+        return r"\left\{x \in \mathbb{R} \mid x %s %s\right\}" % (r"\le" if hc else "<", _k_so(S_hi)), _k_tex(S)
+    if S_hi == _VC:
+        return r"\left\{x \in \mathbb{R} \mid x %s %s\right\}" % (r"\ge" if lc else ">", _k_so(S_lo)), _k_tex(S)
+    if lc == hc and random.random() < 0.4 and (S_lo + S_hi) % 2 == 0:
+        c, r = (S_lo + S_hi) // 2, (S_hi - S_lo) // 2
+        tt = r"|x|" if c == 0 else r"|x %s %d|" % ("-" if c > 0 else "+", abs(c))
+        return r"\left\{x \in \mathbb{R} \mid %s %s %d\right\}" % (tt, r"\le" if lc else "<", r), _k_tex(S)
+    return (r"\left\{x \in \mathbb{R} \mid %s %s x %s %s\right\}"
+            % (_k_so(S_lo), r"\le" if lc else "<", r"\le" if hc else "<", _k_so(S_hi)), _k_tex(S))
+
+
+def L10_C1_B2_TH021_MC_A_02(socau, dang=1):
+    r"""Giao, hợp, hiệu, phần bù của hai khoảng / đoạn / nửa khoảng (có thể cho
+    dưới dạng $\{x \in \mathbb{R} \mid \dots\}$, kể cả $|x - c| \le k$).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH021_MC_A, theo cac vi du "A =
+    {x | -1 <= x <= 3}, B = {x | -2 < x < 2}", "A = {x | x^2 <= 4}, B = {x | x
+    < 1}", "[-5; 1] va (-3; 2)" trong giao an Bai 3. Co Lan duyet.
+    """
+    cauTN = ""
+    so = 0
+    while so < socau:
+        p = sorted(random.sample(range(-9, 10), 4))
+        kieu = random.randint(0, 2)
+        if kieu == 0:          # hai khoảng bị chặn chồng nhau
+            A = (p[0], random.random() < .5, p[2], random.random() < .5)
+            B = (p[1], random.random() < .5, p[3], random.random() < .5)
+        elif kieu == 1:        # một khoảng bị chặn, một tia
+            A = (p[0], random.random() < .5, p[2], random.random() < .5)
+            B = random.choice([(-_VC, False, p[1], random.random() < .5), (p[1], random.random() < .5, _VC, False)])
+        else:                  # hai tia ngược chiều chồng nhau
+            A = (-_VC, False, p[2], random.random() < .5)
+            B = (p[1], random.random() < .5, _VC, False)
+        if random.random() < 0.5:
+            A, B = B, A
+        tcA, tcB = random.random() < 0.5, random.random() < 0.5
+        deA, lai_A = _k_tap_de(*A, tcA)
+        deB, lai_B = _k_tap_de(*B, tcB)
+        phep = random.choice(["giao", "hop", "hieu", "hieu_nguoc", "bu"])
+        SA, SB = [A], [B]
+        if phep == "hieu_nguoc":
+            kq, ten = _k_phep(SB, SA, "hieu"), r"B \setminus A"
+        elif phep == "bu":
+            kq, ten = _k_phep(SB, SA, "bu"), r"C_{\mathbb{R}}B"
+        else:
+            kq = _k_phep(SA, SB, phep)
+            ten = {"giao": r"A \cap B", "hop": r"A \cup B", "hieu": r"A \setminus B"}[phep]
+        if not kq:
+            continue
+        dap = "$%s$" % _k_tex(kq)
+        ung = []
+        for i in range(len(kq)):
+            for d_ in (0, 1):
+                t_ = "$%s$" % _k_tex(_k_lat(kq, i, d_))
+                if t_ != dap and t_ not in ung:
+                    ung.append(t_)
+        random.shuffle(ung)
+        khac = [_k_phep(SA, SB, "giao"), _k_phep(SA, SB, "hop"), _k_phep(SA, SB, "hieu"), _k_phep(SB, SA, "hieu")]
+        for S_ in khac:
+            t_ = "$%s$" % _k_tex(S_)
+            if t_ != dap and t_ not in ung:
+                ung.insert(1, t_)
+        ung = [u for u in dict.fromkeys(ung)][:3]
+        if len(ung) < 3:
+            continue
+        so += 1
+        debai = r"Cho hai tập hợp $A = %s$ và $B = %s$. Tập hợp $%s$ là" % (deA, deB, ten)
+        viet_lai = []
+        if lai_A:
+            viet_lai.append(r"$A = %s$" % lai_A)
+        if lai_B:
+            viet_lai.append(r"$B = %s$" % lai_B)
+        giai = ((r"Viết lại: " + ", ".join(viet_lai) + r".\\ " if viet_lai else "")
+                + r"Biểu diễn $A$, $B$ trên trục số, ta được $%s = %s$." % (ten, _k_tex(kq)))
+        cauTN += MC_SA_answer_text(debai, dap, ung, giai, 0, 0, dang)
+    return cauTN
+
+
+def _vd021_tham_so():
+    """Một câu tham số: (đề, đáp án tex, 3 nhiễu tex, lời giải, hàm kiểm tra theo bộ máy, hàm theo đáp án)."""
+    kieu = random.randint(0, 2)
+    if kieu == 0:
+        p, q = random.randint(-5, 5), random.randint(-5, 5)
+        dA, dB = random.random() < .5, random.random() < .5
+        t = q - p
+        dau = r"\ge" if (dA or dB) else ">"
+        A = lambda m: [(-_VC, False, m + p, dA)]
+        B = [(q, dB, _VC, False)]
+        kiem = lambda m: _k_phep(A(m), B, "hop") == [(-_VC, False, _VC, False)]
+        theo = (lambda m: m >= t) if dau == r"\ge" else (lambda m: m > t)
+        mp = r"m %s %d" % ("+" if p >= 0 else "-", abs(p)) if p else "m"
+        de = (r"Cho hai tập hợp $A = \left(-\infty;\ %s\right%s$ và $B = \left%s%d;\ +\infty\right)$. Tìm tất cả "
+              r"các giá trị của tham số $m$ để $A \cup B = \mathbb{R}$."
+              % (mp, "]" if dA else ")", "[" if dB else "(", q))
+        giai = (r"$A \cup B = \mathbb{R} \Leftrightarrow %s %s %d$ (%s) $\Leftrightarrow m %s %d$."
+                % (mp, dau, q, "chỉ cần một trong hai đầu mút được lấy" if dau == r"\ge" else
+                   r"hai đầu mút đều không được lấy nên phải có phần chồng lên nhau", dau, t))
+        dap = r"$m %s %d$" % (dau, t)
+        doi = {r"\ge": ">", ">": r"\ge"}[dau]
+        nhieu = [r"$m %s %d$" % (doi, t), r"$m \le %d$" % t, r"$m < %d$" % t]
+        return de, dap, nhieu, giai, kiem, theo
+    if kieu == 1:
+        k = random.choice([2, 3])
+        a = random.choice([i for i in range(-7, 8) if i])
+        b = a + random.randint(2, 5)
+        dong = random.random() < .5                 # A = (-inf; m] hay (-inf; m)
+        t = _Fr(-a, k - 1)
+        dau = ">" if dong else r"\ge"
+        A = lambda m: [(-_VC, False, m, dong)]
+        B = lambda m: [(k * m + a, True, k * m + b, True)]
+        kiem = lambda m: _k_phep(A(m), B(m), "giao") == []
+        theo = (lambda m: m > t) if dong else (lambda m: m >= t)
+        ka = lambda c: r"%dm %s %d" % (k, "+" if c > 0 else "-", abs(c))
+        de = (r"Cho hai tập hợp $A = \left(-\infty;\ m\right%s$ và $B = \left[%s;\ %s\right]$. Tìm tất cả các giá "
+              r"trị của tham số $m$ để $A \cap B = \varnothing$." % ("]" if dong else ")", ka(a), ka(b)))
+        giai = (r"$A \cap B = \varnothing \Leftrightarrow m %s %s \Leftrightarrow %dm %s %d \Leftrightarrow m %s %s$."
+                % ("<" if dong else r"\le", ka(a), k - 1, ">" if dong else r"\ge", -a, dau, _k_so(t)))
+        dap = r"$m %s %s$" % (dau, _k_so(t))
+        doi = {r"\ge": ">", ">": r"\ge"}[dau]
+        nhieu = [r"$m %s %s$" % (doi, _k_so(t)), r"$m \le %s$" % _k_so(t), r"$m < %s$" % _k_so(t)]
+        return de, dap, nhieu, giai, kiem, theo
+    d = random.randint(1, 4)
+    a = random.randint(-6, 2)
+    b = a + random.randint(3, 7)
+    lcA, hcA = random.random() < .5, random.random() < .5
+    lcB, hcB = random.random() < .5, random.random() < .5
+    A = lambda m: [(m, lcA, m + d, hcA)]
+    B = [(a, lcB, b, hcB)]
+    kiem = lambda m: _k_phep(A(m), B, "giao") != []
+    d1 = r"\ge" if (hcA and lcB) else ">"          # m + d ... a
+    d2 = r"\le" if (lcA and hcB) else "<"          # m ... b
+    theo = lambda m: ((m + d >= a) if d1 == r"\ge" else (m + d > a)) and ((m <= b) if d2 == r"\le" else (m < b))
+    de = (r"Cho hai tập hợp $A = \left%sm;\ m + %d\right%s$ và $B = \left%s%d;\ %d\right%s$. Tìm tất cả các giá trị "
+          r"của tham số $m$ để $A \cap B \ne \varnothing$."
+          % ("[" if lcA else "(", d, "]" if hcA else ")", "[" if lcB else "(", a, b, "]" if hcB else ")"))
+    lt = {r"\ge": r"\le", ">": "<"}[d1]
+    giai = (r"$A \cap B \ne \varnothing \Leftrightarrow \begin{cases} m + %d %s %d \\ m %s %d \end{cases} "
+            r"\Leftrightarrow %d %s m %s %d$." % (d, d1, a, d2, b, a - d, lt, d2, b))
+    dap = r"$%d %s m %s %d$" % (a - d, lt, d2, b)
+    lt2 = {r"\le": "<", "<": r"\le"}[lt]
+    d22 = {r"\le": "<", "<": r"\le"}[d2]
+    nhieu = [r"$%d %s m %s %d$" % (a - d, lt2, d2, b), r"$%d %s m %s %d$" % (a - d, lt, d22, b),
+             r"$%d %s m %s %d$" % (a, lt, d2, b - d)]
+    return de, dap, nhieu, giai, kiem, theo
+
+
+def L10_C1_B2_VD021_MC_A_02(socau, dang=1):
+    r"""Tham số: tìm điều kiện của $m$ (đáp án là một bất phương trình / khoảng
+    của $m$) để $A \cup B = \mathbb{R}$, $A \cap B = \varnothing$ hoặc
+    $A \cap B \ne \varnothing$.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD021_MC_A, theo cac vi du "A =
+    (-inf; m + 1], B = (-1; +inf), A hop B = R", "A = (-inf; m), B = [3m - 1;
+    3m + 3], A giao B rong", "A = [a; a + 2], B = [b; b + 1], giao khac rong"
+    trong giao an Bai 3. Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        de, dap, nhieu, giai, _k, _t = _vd021_tham_so()
+        cauTN += MC_SA_answer_text(de, dap, nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+_BOI_CANH_BA_MON = [("Có", "học sinh giỏi", "em", ("Văn", "Toán", "Anh"), "giỏi"),
+                    ("Một câu lạc bộ thể thao có", "thành viên", "bạn", ("bóng đá", "cầu lông", "bơi"), "chơi"),
+                    ("Một lớp có", "học sinh tham gia câu lạc bộ", "bạn", ("Âm nhạc", "Hội hoạ", "Tin học"),
+                     "tham gia câu lạc bộ")]
+
+
+def L10_C1_B2_VD020_SA_A_02(socau, dang=2):
+    r"""Ba tập hợp: biết tổng số, số phần tử mỗi tập và số phần tử thuộc ĐÚNG hai
+    tập; tìm số phần tử thuộc cả ba tập.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD020_SA_A, theo bai "44 hoc sinh
+    gioi, 22 Van, 25 Toan, 20 Anh, 8 dung Van-Toan, 7 dung Toan-Anh, 6 dung
+    Anh-Van" trong giao an Bai 3. Co Lan duyet.
+    """
+    cau = ""
+    for _ in range(socau):
+        x = random.randint(1, 5)
+        ab, bc, ca = (random.randint(2, 9) for _ in range(3))
+        a1, b1, c1 = (random.randint(3, 12) for _ in range(3))
+        nA, nB, nC = a1 + ab + ca + x, b1 + ab + bc + x, c1 + bc + ca + x
+        N = a1 + b1 + c1 + ab + bc + ca + x
+        mo, dt, dv, (M1, M2, M3), dong = random.choice(_BOI_CANH_BA_MON)
+        debai = (r"%s $%d$ %s, mỗi %s %s ít nhất một môn trong ba môn %s, %s, %s. Có $%d$ %s %s %s, $%d$ %s %s "
+                 r"%s, $%d$ %s %s %s. Có $%d$ %s %s đúng hai môn %s và %s; $%d$ %s %s đúng hai môn %s và %s; "
+                 r"$%d$ %s %s đúng hai môn %s và %s. Hỏi có bao nhiêu %s %s cả ba môn?"
+                 % (mo, N, dt, dv, dong, M1, M2, M3, nA, dv, dong, M1, nB, dv, dong, M2, nC, dv, dong, M3,
+                    ab, dv, dong, M1, M2, bc, dv, dong, M2, M3, ca, dv, dong, M3, M1, dv, dong))
+        giai = (r"Gọi $x$ là số %s %s cả ba môn. Số %s chỉ %s một môn: %s: $%d - %d - %d - x = %d - x$; "
+                r"%s: $%d - %d - %d - x = %d - x$; %s: $%d - %d - %d - x = %d - x$.\\ "
+                r"Cộng tất cả các phần của biểu đồ Ven: $(%d - x) + (%d - x) + (%d - x) + %d + %d + %d + x = %d$\\ "
+                r"$\Leftrightarrow %d - 2x = %d \Leftrightarrow x = %d$."
+                % (dv, dong, dv, dong, M1, nA, ab, ca, nA - ab - ca, M2, nB, ab, bc, nB - ab - bc,
+                   M3, nC, bc, ca, nC - bc - ca, nA - ab - ca, nB - ab - bc, nC - bc - ca, ab, bc, ca, N,
+                   nA + nB + nC - ab - bc - ca, N, x))
+        cau += MC_SA_answer_text(debai, str(x), [str(x + 1), str(x + 2), str(x + 3)], giai, 0, 0, dang)
+    return cau
+
+
+_BOI_CANH_HAI_MON = [("Lớp 10A", "học sinh", "giỏi Văn", "giỏi Toán", "không đạt học sinh giỏi môn nào"),
+                     ("Một lớp học", "học sinh", "biết chơi bóng chuyền", "biết chơi bóng đá",
+                      "không biết chơi môn nào trong hai môn đó"),
+                     ("Một nhóm khách du lịch", "người", "đã đến Huế", "đã đến Hội An",
+                      "chưa đến nơi nào trong hai nơi đó")]
+
+
+def L10_C1_B2_VD020_MC_A_02(socau, dang=1):
+    r"""Hai tập hợp thực tế có thêm nhóm "không thuộc tập nào": tìm số phần tử
+    thuộc cả hai tập, hoặc tìm tổng số.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua VD020_MC_A, theo cac bai "45 hoc
+    sinh, 17 gioi Van, 25 gioi Toan, 13 khong dat" va "15 thich Van, 20 thich
+    Toan, 8 thich ca hai, 10 khong thich mon nao" trong giao an Bai 3.
+    Co Lan duyet.
+    """
+    cauTN = ""
+    for _ in range(socau):
+        ab = random.randint(3, 12)
+        a, b = ab + random.randint(4, 15), ab + random.randint(4, 15)
+        khong = random.randint(2, 12)
+        N = a + b - ab + khong
+        noi, dv, t1, t2, t0 = random.choice(_BOI_CANH_HAI_MON)
+        if random.random() < 0.5:
+            debai = (r"%s có $%d$ %s, trong đó có $%d$ %s %s, $%d$ %s %s và $%d$ %s %s. Số %s vừa %s vừa %s là"
+                     % (noi, N, dv, a, dv, t1, b, dv, t2, khong, dv, t0, dv, t1, t2))
+            dung = ab
+            ung = [a + b - N, a + b - (N - khong) + khong, N - khong]
+            giai = (r"Gọi $A$, $B$ là tập các %s %s, %s. Số %s thuộc ít nhất một tập là $|A \cup B| = %d - %d = %d$.\\ "
+                    r"$|A \cap B| = |A| + |B| - |A \cup B| = %d + %d - %d = %d$."
+                    % (dv, t1, t2, dv, N, khong, N - khong, a, b, N - khong, ab))
+        else:
+            debai = (r"%s có $%d$ %s %s, $%d$ %s %s, trong đó $%d$ %s vừa %s vừa %s; ngoài ra còn $%d$ %s %s. "
+                     r"Hỏi %s có tất cả bao nhiêu %s?"
+                     % (noi, a, dv, t1, b, dv, t2, ab, dv, t1, t2, khong, dv, t0, noi[0].lower() + noi[1:], dv))
+            dung = N
+            ung = [a + b + khong, a + b - ab, a + b - khong]
+            giai = (r"Số %s thuộc ít nhất một trong hai nhóm là $%d + %d - %d = %d$. Cộng thêm $%d$ %s %s: "
+                    r"$%d + %d = %d$." % (dv, a, b, ab, a + b - ab, khong, dv, t0, a + b - ab, khong, N))
+        nhieu = _ba_nhieu("$%d$" % dung, ["$%d$" % v for v in ung if v > 0],
+                          buoc=lambda k: "$%d$" % (dung + k))
+        cauTN += MC_SA_answer_text(debai, "$%d$" % dung, nhieu, giai, 0, 0, dang)
+    return cauTN

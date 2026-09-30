@@ -46,6 +46,11 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_TH018_MC_B",   # phep toan liet ke / M nhieu phan tu nhat, M con A va M con B
     "L10_C1_B2_VD021_SA_A",   # tham so de hop, giao thoa dieu kien / dem m de A giao B = A
     "L10_C1_TF_B",            # khoang va tap liet ke / A = {x | (x + k)/(x - c) nguyen}
+    # tu giao an Bai 3 (Cac phep toan tren tap hop):
+    "L10_C1_B2_TH021_MC_A",   # phan bu cua mot khoang / giao-hop-hieu-bu hai khoang (co dang {x | ...})
+    "L10_C1_B2_VD021_MC_A",   # dem m nguyen / dieu kien cua m (hop = R, giao rong, giao khac rong)
+    "L10_C1_B2_VD020_SA_A",   # hai tap: khong thuoc tap nao / ba tap: dung hai mon -> ca ba
+    "L10_C1_B2_VD020_MC_A",   # hai tiet muc / hai tap co nhom khong thuoc tap nao
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an
     "L10_C2_B3_TH024_MC_A",   # ca hai deu: hinh nao bieu dien mien nghiem
     "L10_C3_B6_TH032_MC_A",   # ca hai deu: dinh li cosin tinh canh con lai

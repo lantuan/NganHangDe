@@ -9106,3 +9106,21 @@ trinh):
 Khong dua vao NB017: cau liet ke tu phuong trinh tich tren N/Z/Q/R (giao an
 ghi muc B - thong hieu, curriculum Bai 2 khong co muc TH cho "xac dinh tap
 hop").
+
+# Version 3.51 - 2026-09-30
+
+## Bien the lay tu giao an Bai 3 (Cac phep toan tren tap hop) cua co Lan
+
+Bo may khoang nho (_k_thuoc, _k_dung, _k_phep, _k_tex, _k_lat): ket qua giao,
+hop, hieu, phan bu cua cac khoang / doan / nua khoang duoc tinh bang cach xet
+tung diem mut va tung khoang giua hai diem mut - khong suy tay. Dap an cau
+tham so (VD021_MC_A_02) duoc doi chieu voi bo may tren luoi m buoc 1/4.
+Bien the moi (cung Dang voi _01):
+  TH018_MC_B_03  phan bu trong E: C_E A, C_E(A hop B), C_E A giao C_E B...
+  TH018_MC_B_04  biet A \ B, B \ A, A giao B -> tim A, B, A hop B
+  TH021_MC_A_02  giao / hop / hieu / phan bu hai khoang, co cho dang
+                 {x | a <= x < b}, {x | |x - c| <= k}
+  VD021_MC_A_02  dieu kien cua m: A hop B = R; A giao B rong (B = [km + a;
+                 km + b]); A giao B khac rong
+  VD020_SA_A_02  ba tap: biet so thuoc DUNG hai tap -> so thuoc ca ba tap
+  VD020_MC_A_02  hai tap co nhom "khong thuoc tap nao": tim ca hai / tong so
