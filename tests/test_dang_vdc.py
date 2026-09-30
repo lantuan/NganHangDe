@@ -52,6 +52,6 @@ def test_suat_vdc_lay_dang_vdc_truoc():
 
 
 def test_mc_sa_tl_cung_boi_canh_cung_mo_ta():
-    rows = [r for r in load_mapping(10, 3) if r["id"].startswith("L10_C3_B6_VD036_") and r.get("muc_do_dang") == "VDC"]
-    assert {r["Dang"] for r in rows} and len({r["Dang"] for r in rows}) == 1
+    rows = [r for r in load_mapping(10, 3) if r.get("Dang", "").startswith("Khinh khí cầu")]
+    assert len({r["Dang"] for r in rows}) == 1 and all(r.get("muc_do_dang") == "VDC" for r in rows)
     assert {r["Loai"] for r in rows} == {"Trắc nghiệm nhiều lựa chọn", "Trả lời ngắn", "Tự luận"}

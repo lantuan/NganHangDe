@@ -8545,3 +8545,513 @@ def L10_C3_B6_VD036_TL_G_01(socau, dong=1):
                _giai_kc_khinh_khi_cau(tu, s, a, b, d, kc) + r" Vậy khoảng cách khoảng $%d\,\text{m}$." % _lt(kc))]
         cau += TL_answer_text(_de_khinh_khi_cau(s, a, b, d), ds, _hinh_khinh_khi_cau(s, d), 0, dong)
     return cau
+
+
+# =====================================================================
+# BÀI 6 - CÔNG THỨC DIỆN TÍCH, BÁN KÍNH, TRUNG TUYẾN, PHÂN GIÁC (cô Lan 30/09/2026)
+#   TH032_MC_F   công thức độ dài đường trung tuyến (lí thuyết)
+#   TH034_MC_G   công thức diện tích theo R, r, Heron; công thức R, r (lí thuyết)
+#   TH035_MC_D / SA_C   giải tam giác nhỏ: trung tuyến AM (_01), phân giác AD (_02)
+#   TH034_MC_H / SA_C   diện tích khi dữ kiện ứng đúng một công thức (h, R, r, Heron)
+#   TH034_MC_I / SA_D   bán kính R, r "nhìn là thấy": đã cho sẵn diện tích
+#   VD036_MC_G / SA_I   (VD) mảnh vườn tam giác: Heron rồi r, R hoặc đường cao
+#   VD036_MC_H / SA_J   (VDC, nhiều bước) biết hai cạnh + góc: côsin -> diện tích -> r
+#   L10_C3_TH032_VD036_TL_A, L10_C3_TH034_VD036_TL_A: a) TH, b) VD (thực tiễn)
+# Mức VD/VDC đặt ở VD036 (bối cảnh thực tiễn) vì Curriculum Bài 6 chỉ có VD ở đó.
+# =====================================================================
+
+def _dap_gon(x):
+    """(chuỗi đáp số, câu làm tròn): số nguyên -> không cần làm tròn; còn lại làm tròn
+    hàng phần mười (None nếu x sát ranh giới làm tròn)."""
+    if abs(x - round(x)) < 1e-9:
+        return str(int(round(x))), ""
+    if not _xa_bien(x, 1):
+        return None, None
+    return _x1(x), " (làm tròn đến hàng phần mười)"
+
+
+def _heron_mot():
+    a, b, c, S, p = random.choice(HERON_NGUYEN)
+    ds = [a, b, c]
+    random.shuffle(ds)
+    return ds[0], ds[1], ds[2], S, p
+
+
+_TEN_CANH = [("a", "b", "c", "A", "B", "C"), ("b", "c", "a", "B", "C", "A"), ("c", "a", "b", "C", "A", "B")]
+
+
+def L10_C3_B6_TH032_MC_F_01(socau, dang=1):
+    r"""Lí thuyết - chọn công thức ĐÚNG tính độ dài đường trung tuyến ($m_a$, $m_b$ hoặc $m_c$).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("hoi cac cong thuc"). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        x, y, z, X, _, _ = random.choice(_TEN_CANH)
+        dung = r"$m_{%s}^{2} = \dfrac{%s^{2} + %s^{2}}{2} - \dfrac{%s^{2}}{4}$" % (x, y, z, x)
+        sai = [r"$m_{%s}^{2} = \dfrac{%s^{2} + %s^{2}}{2} + \dfrac{%s^{2}}{4}$" % (x, y, z, x),
+               r"$m_{%s}^{2} = \dfrac{%s^{2} + %s^{2}}{4} - \dfrac{%s^{2}}{2}$" % (x, y, z, x),
+               r"$m_{%s}^{2} = \dfrac{%s^{2} + %s^{2} - %s^{2}}{2}$" % (x, y, z, x),
+               r"$m_{%s}^{2} = %s^{2} + %s^{2} - \dfrac{%s^{2}}{4}$" % (x, y, z, x)]
+        debai = (r"Cho tam giác $ABC$ có $BC = a$, $CA = b$, $AB = c$ và $m_{%s}$ là độ dài đường trung tuyến "
+                 r"kẻ từ đỉnh $%s$. Công thức nào sau đây đúng?" % (x, X))
+        giai = (r"Công thức độ dài đường trung tuyến: $m_{%s}^{2} = \dfrac{%s^{2} + %s^{2}}{2} - \dfrac{%s^{2}}{4}"
+                r" = \dfrac{2\left(%s^{2} + %s^{2}\right) - %s^{2}}{4}$." % (x, y, z, x, y, z, x))
+        cau += MC_SA_answer_text(debai, dung, random.sample(sai, 3), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH032_MC_F_02(socau, dang=1):
+    r"""Lí thuyết - cách hỏi khác của _01: trong bốn hệ thức về ba đường trung tuyến
+    $m_a$, $m_b$, $m_c$, chọn hệ thức SAI.
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH032_MC_F. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        x, y, z, _, _, _ = random.choice(_TEN_CANH)
+        # ba hệ thức đúng KHÔNG nói về m_x (tránh hai phương án cùng m_x, đoán được đáp án)
+        dung_ds = [r"$m_{%s}^{2} = \dfrac{2\left(%s^{2} + %s^{2}\right) - %s^{2}}{4}$" % (u, v, w, u)
+                   for u, v, w, _, _, _ in _TEN_CANH if u != x]
+        dung_ds.append(r"$m_{a}^{2} + m_{b}^{2} + m_{c}^{2} = \dfrac{3}{4}\left(a^{2} + b^{2} + c^{2}\right)$")
+        sai = random.choice([r"$m_{%s}^{2} = \dfrac{2\left(%s^{2} + %s^{2}\right) + %s^{2}}{4}$" % (x, y, z, x),
+                             r"$m_{%s}^{2} = \dfrac{%s^{2} + %s^{2} - %s^{2}}{4}$" % (x, y, z, x),
+                             r"$m_{%s}^{2} = \dfrac{2\left(%s^{2} + %s^{2}\right) - %s^{2}}{2}$" % (x, y, z, x)])
+        debai = (r"Cho tam giác $ABC$ có $BC = a$, $CA = b$, $AB = c$; $m_a$, $m_b$, $m_c$ lần lượt là độ dài các "
+                 r"đường trung tuyến kẻ từ $A$, $B$, $C$. Hệ thức nào sau đây \textbf{sai}?")
+        giai = (r"Theo công thức đường trung tuyến $m_{a}^{2} = \dfrac{2\left(b^{2} + c^{2}\right) - a^{2}}{4}$ "
+                r"(tương tự cho $m_b$, $m_c$); cộng ba đẳng thức được "
+                r"$m_{a}^{2} + m_{b}^{2} + m_{c}^{2} = \dfrac{3}{4}\left(a^{2} + b^{2} + c^{2}\right)$. "
+                r"Vậy hệ thức sai là %s." % sai)
+        cau += MC_SA_answer_text(debai, sai, random.sample(dung_ds, 3), giai, 0, 0, dang)
+    return cau
+
+
+_CT_BAN_KINH_DUNG = [r"$S = \dfrac{abc}{4R}$", r"$S = pr$", r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$",
+                     r"$R = \dfrac{abc}{4S}$", r"$r = \dfrac{S}{p}$", r"$S = \dfrac{1}{2}a\cdot h_a$"]
+_CT_BAN_KINH_SAI = [r"$S = \dfrac{abc}{2R}$", r"$S = 2pr$", r"$S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}$",
+                    r"$R = \dfrac{4S}{abc}$", r"$r = \dfrac{p}{S}$", r"$S = a\cdot h_a$", r"$S = \dfrac{abc}{4r}$",
+                    r"$S = \left(p - a\right)\left(p - b\right)\left(p - c\right)$"]
+_CAC_KI_HIEU = (r"Cho tam giác $ABC$ có $BC = a$, $CA = b$, $AB = c$, diện tích $S$, nửa chu vi $p$, đường cao "
+                r"$h_a$ kẻ từ $A$; $R$, $r$ lần lượt là bán kính đường tròn ngoại tiếp, nội tiếp tam giác.")
+
+
+def L10_C3_B6_TH034_MC_G_01(socau, dang=1):
+    r"""Lí thuyết - chọn công thức ĐÚNG về diện tích và bán kính ($S = \dfrac{abc}{4R}$,
+    $S = pr$, Heron, $R = \dfrac{abc}{4S}$, $r = \dfrac{S}{p}$).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("hoi cac cong thuc"). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        dung = random.choice(_CT_BAN_KINH_DUNG)
+        debai = _CAC_KI_HIEU + " Công thức nào sau đây đúng?"
+        giai = (r"Các công thức: $S = \dfrac{1}{2}a\cdot h_a = \dfrac{abc}{4R} = pr = "
+                r"\sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$, suy ra $R = \dfrac{abc}{4S}$, "
+                r"$r = \dfrac{S}{p}$. Vậy công thức đúng là %s." % dung)
+        cau += MC_SA_answer_text(debai, dung, random.sample(_CT_BAN_KINH_SAI, 3), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH034_MC_G_02(socau, dang=1):
+    r"""Lí thuyết - cách hỏi khác của _01: chọn công thức SAI (ba phương án đúng).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH034_MC_G. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        sai = random.choice(_CT_BAN_KINH_SAI)
+        debai = _CAC_KI_HIEU + r" Công thức nào sau đây \textbf{sai}?"
+        giai = (r"Các công thức đúng: $S = \dfrac{1}{2}a\cdot h_a = \dfrac{abc}{4R} = pr = "
+                r"\sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$, $R = \dfrac{abc}{4S}$, "
+                r"$r = \dfrac{S}{p}$. Vậy công thức sai là %s." % sai)
+        cau += MC_SA_answer_text(debai, sai, random.sample(_CT_BAN_KINH_DUNG, 3), giai, 0, 0, dang)
+    return cau
+
+
+def _bo_tt_tam_giac_nho():
+    """(AB, BM, góc B, AM): AM^2 = AB^2 + BM^2 - 2 AB.BM cos B, AM nguyên (bộ số chọn trước)."""
+    cB, c, k, m_ = random.choice([t for t in _BO_COSIN_TL if abs(t[0]) == Rational(1, 2)])
+    if random.random() < 0.5:
+        c, k = k, c
+    return c, k, (60 if cB > 0 else 120), m_
+
+
+def _bo_phan_giac():
+    """(AB, AD, BD) với góc BAD = 60 độ (góc A = 120 độ), AB > AD, BD nguyên."""
+    while True:
+        cA, x, y, z = random.choice([t for t in _BO_COSIN_TL if t[0] == Rational(1, 2)])
+        AB, AD = max(x, y), min(x, y)
+        if AB > AD:
+            return AB, AD, z
+
+
+def _de_tam_giac_nho(bien):
+    if bien == 1:
+        c, k, B, m_ = _bo_tt_tam_giac_nho()
+        de = (r"Cho tam giác $ABC$ có $AB = %d$, $BC = %d$, $\widehat{ABC} = %s$. Gọi $M$ là trung điểm của $BC$."
+              % (c, 2 * k, _goc(B)))
+        hoi, dap = r"độ dài đường trung tuyến $AM$", m_
+        giai = (r"$M$ là trung điểm $BC$ nên $BM = %d$. Trong tam giác $ABM$, theo định lí côsin: "
+                r"$AM^{2} = AB^{2} + BM^{2} - 2\cdot AB\cdot BM\cdot\cos %s = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot %s "
+                r"= %d$, nên $AM = %d$." % (k, _goc(B), c, k, c, k, "\\dfrac{1}{2}" if B == 60 else "\\left(-\\dfrac{1}{2}\\right)",
+                                          m_ * m_, m_))
+        sai = [round(math.sqrt(c * c + 4 * k * k - 2 * c * 2 * k * math.cos(math.radians(B)))), m_ + 1, 2 * m_,
+               round(math.sqrt(c * c + k * k)) ]
+        return de, hoi, dap, giai, sai
+    AB, AD, BD = _bo_phan_giac()
+    de = (r"Cho tam giác $ABC$ có $\widehat{BAC} = 120^{\circ}$, $AB = %d$. Đường phân giác trong của góc $A$ cắt "
+          r"$BC$ tại $D$ và $AD = %d$." % (AB, AD))
+    hoi, dap = r"độ dài đoạn thẳng $BD$", BD
+    giai = (r"$AD$ là phân giác nên $\widehat{BAD} = \dfrac{120^{\circ}}{2} = 60^{\circ}$. Trong tam giác $ABD$, theo "
+            r"định lí côsin: $BD^{2} = AB^{2} + AD^{2} - 2\cdot AB\cdot AD\cdot\cos 60^{\circ} = %d^{2} + %d^{2} - %d\cdot %d "
+            r"= %d$, nên $BD = %d$." % (AB, AD, AB, AD, BD * BD, BD))
+    sai = [round(math.sqrt(AB * AB + AD * AD + AB * AD)), round(math.sqrt(AB * AB + AD * AD)), BD + 1, AB + AD - BD]
+    return de, hoi, dap, giai, sai
+
+
+def L10_C3_B6_TH035_MC_D_01(socau, dang=1):
+    r"""Giải tam giác nhỏ - đường TRUNG TUYẾN: biết $AB$, $BC$, góc $B$, tính trung tuyến $AM$
+    bằng định lí côsin trong tam giác $ABM$ (mức TH, đáp số nguyên).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, hoi, dap, giai, sai = _de_tam_giac_nho(1)
+        nhieu = _ba_nhieu(str(dap), [str(v) for v in sai], buoc=lambda t: str(dap + t))
+        cau += MC_SA_answer_const(de + r" Tính %s." % hoi, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH035_MC_D_02(socau, dang=1):
+    r"""Giải tam giác nhỏ - đường PHÂN GIÁC: góc $A = 120^{\circ}$, biết $AB$ và phân giác $AD$,
+    tính $BD$ bằng định lí côsin trong tam giác $ABD$ (mức TH, đáp số nguyên).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH035_MC_D. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, hoi, dap, giai, sai = _de_tam_giac_nho(2)
+        nhieu = _ba_nhieu(str(dap), [str(v) for v in sai], buoc=lambda t: str(dap + t))
+        cau += MC_SA_answer_const(de + r" Tính %s." % hoi, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH035_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - giải tam giác nhỏ với đường TRUNG TUYẾN (như TH035_MC_D_01).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, hoi, dap, giai, sai = _de_tam_giac_nho(1)
+        cau += MC_SA_answer_const(de + r" Tính %s." % hoi, str(dap), [str(dap + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH035_SA_C_02(socau, dang=2):
+    r"""Trả lời ngắn - giải tam giác nhỏ với đường PHÂN GIÁC (như TH035_MC_D_02).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH035_SA_C. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, hoi, dap, giai, sai = _de_tam_giac_nho(2)
+        cau += MC_SA_answer_const(de + r" Tính %s." % hoi, str(dap), [str(dap + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+def _so_gon(v):
+    """Số hữu tỉ viết gọn: số nguyên, thập phân hữu hạn ngắn, hoặc phân số."""
+    return _so_thap_phan_gon(v) or _tri(v)
+
+
+def _dien_tich_mot_cong_thuc():
+    """(đề, S, lời giải, nhiễu) - dữ kiện ứng đúng MỘT công thức diện tích (mức TH)."""
+    while True:
+        a, b, c, S, p = _heron_mot()
+        kieu = random.choice(["h", "R", "r", "heron"])
+        if kieu == "h":
+            h = Rational(2 * S, a)
+            if _so_thap_phan_gon(h) is None:
+                continue
+            de = r"Cho tam giác $ABC$ có $BC = %d$ và đường cao kẻ từ $A$ là $h_a = %s$." % (a, _so_gon(h))
+            giai = r"$S = \dfrac{1}{2}BC\cdot h_a = \dfrac{1}{2}\cdot %d\cdot %s = %d$." % (a, _so_gon(h), S)
+            return de, S, giai, [a * h, S * 2, S // 2 if S % 2 == 0 else S + 3]
+        if kieu == "R":
+            R = Rational(a * b * c, 4 * S)
+            de = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$ và bán kính đường tròn ngoại tiếp "
+                  r"$R = %s$." % (a, b, c, _so_gon(R)))
+            giai = (r"$S = \dfrac{abc}{4R} = \dfrac{%d\cdot %d\cdot %d}{4\cdot %s} = %d$." % (a, b, c, _so_gon(R), S))
+            return de, S, giai, [2 * S, S * 4, round(a * b * c / float(R))]
+        if kieu == "r":
+            r_ = Rational(S, p)
+            if _so_thap_phan_gon(r_) is None:
+                continue
+            de = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$ và bán kính đường tròn nội tiếp $r = %s$."
+                  % (a, b, c, _so_gon(r_)))
+            giai = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d$, nên $S = pr = %d\cdot %s = %d$."
+                    % (a, b, c, p, p, _so_gon(r_), S))
+            return de, S, giai, [2 * S, (a + b + c) * r_ * 2, S + p]
+        de = r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$." % (a, b, c)
+        giai = (r"Nửa chu vi $p = %d$. Công thức Heron: $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$."
+                % (p, p, p - a, p - b, p - c, S))
+        return de, S, giai, [S * S, 2 * S, p * (p - a)]
+
+
+def L10_C3_B6_TH034_MC_H_01(socau, dang=1):
+    r"""Tính diện tích tam giác khi dữ kiện ứng ĐÚNG MỘT công thức: cạnh và đường cao, ba cạnh
+    và $R$, ba cạnh và $r$, hoặc ba cạnh (Heron) - chọn ngẫu nhiên (mức TH).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("cac truong hop de ra duoc dien tich luon"). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, S, giai, sai = _dien_tich_mot_cong_thuc()
+        nhieu = _ba_nhieu(str(S), [_so_gon(nsimplify(v)) for v in sai], buoc=lambda t: str(S + 2 * t))
+        cau += MC_SA_answer_const(de + " Diện tích tam giác $ABC$ bằng", str(S), nhieu,
+                                  giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH034_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - diện tích tam giác khi dữ kiện ứng đúng một công thức (như TH034_MC_H_01).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        de, S, giai, sai = _dien_tich_mot_cong_thuc()
+        if len(str(S)) > 4:
+            continue
+        so += 1
+        cau += MC_SA_answer_const(de + " Tính diện tích tam giác $ABC$.", str(S), [str(S + k) for k in (1, -1, 2)],
+                                  giai, 0, 0, dang)
+    return cau
+
+
+def _ban_kinh_nhin_la_thay():
+    """TH cực đơn giản: đã cho diện tích, tính r = S/p hoặc R = abc/(4S)."""
+    while True:
+        a, b, c, S, p = _heron_mot()
+        if random.random() < 0.5:
+            r_ = Rational(S, p)
+            if _so_thap_phan_gon(r_) is None:
+                continue
+            de = (r"Cho tam giác $ABC$ có diện tích $S = %d$ và chu vi bằng $%d$. Bán kính $r$ của đường tròn nội tiếp "
+                  r"tam giác $ABC$" % (S, 2 * p))
+            giai = r"Nửa chu vi $p = %d$, nên $r = \dfrac{S}{p} = \dfrac{%d}{%d} = %s$." % (p, S, p, _so_thap_phan_gon(r_))
+            return de, r_, giai, [Rational(S, 2 * p), Rational(2 * S, p), Rational(p, S)]
+        R = Rational(a * b * c, 4 * S)
+        if _so_thap_phan_gon(R) is None:
+            continue
+        de = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$ và diện tích $S = %d$. Bán kính $R$ của đường "
+              r"tròn ngoại tiếp tam giác $ABC$" % (a, b, c, S))
+        giai = r"$R = \dfrac{abc}{4S} = \dfrac{%d\cdot %d\cdot %d}{4\cdot %d} = %s$." % (a, b, c, S, _so_thap_phan_gon(R))
+        return de, R, giai, [Rational(a * b * c, 2 * S), Rational(a * b * c, S), Rational(4 * S, a * b * c)]
+
+
+def L10_C3_B6_TH034_MC_I_01(socau, dang=1):
+    r"""Bán kính đường tròn nội tiếp / ngoại tiếp khi ĐÃ CHO diện tích: $r = \dfrac{S}{p}$,
+    $R = \dfrac{abc}{4S}$ - mức TH rất đơn giản (thay thẳng công thức).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("TH cuc ki don gian, nhin la thay luon"). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, v, giai, sai = _ban_kinh_nhin_la_thay()
+        dap = _so_thap_phan_gon(v)
+        nhieu = _ba_nhieu(dap, [_so_gon(t) for t in sai], buoc=lambda t: _so_gon(v + t))
+        cau += MC_SA_answer_const(de + " bằng", dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_TH034_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - bán kính $r$ hoặc $R$ khi đã cho diện tích (như TH034_MC_I_01).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        de, v, giai, sai = _ban_kinh_nhin_la_thay()
+        dap = _so_thap_phan_gon(v)
+        if dap is None or len(dap) > 4:
+            continue
+        so += 1
+        cau += MC_SA_answer_const(de.replace("Bán kính", "Tính bán kính") + ".", dap,
+                                  [_so_gon(v + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+# ---- VD036 (VD): mảnh vườn tam giác, Heron rồi suy ra r, R hoặc đường cao ----
+_HOI_VUON = {
+    "r": (r"Người ta đặt một vòi phun nước tự động tại tâm đường tròn nội tiếp tam giác $ABC$ để tưới "
+          r"được phần vườn hình tròn lớn nhất mà nước không phun ra ngoài bờ. Tính khoảng cách từ vòi phun đến "
+          r"mỗi bờ vườn (đơn vị mét%s)."),
+    "R": (r"Người ta dựng một cột đèn tại điểm cách đều ba góc vườn $A$, $B$, $C$. Tính khoảng cách từ cột đèn "
+          r"đến mỗi góc vườn (đơn vị mét%s)."),
+    "h": (r"Người ta làm một lối đi thẳng ngắn nhất từ góc $A$ tới bờ $BC$. Tính độ dài lối đi đó "
+          r"(đơn vị mét%s)."),
+}
+
+
+def _bo_vuon_heron():
+    """(đề, đáp số (chuỗi), lời giải) - chọn trước tam giác Heron và đại lượng hỏi."""
+    while True:
+        a, b, c, S, p = _heron_mot()
+        k = random.choice([1, 2, 3])
+        a, b, c, S, p = a * k, b * k, c * k, S * k * k, p * k
+        hoi = random.choice(["r", "R", "h"])
+        gt = {"r": S / p, "R": a * b * c / (4 * S), "h": 2 * S / a}[hoi]
+        dap, lam_tron = _dap_gon(gt)
+        if dap is None or len(dap) > 4:
+            continue
+        de = (r"Một mảnh vườn hình tam giác $ABC$ có $BC = %d\,\text{m}$, $CA = %d\,\text{m}$, $AB = %d\,\text{m}$. "
+              % (a, b, c) + _HOI_VUON[hoi] % (", làm tròn đến hàng phần mười" if lam_tron else ""))
+        giai = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %d$. Công thức Heron: "
+                r"$S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d\,\left(\text{m}^{2}\right)$.\\ " % (a, b, c, p, p, p - a, p - b, p - c, S))
+        giai += {"r": r"Khoảng cách cần tìm là bán kính đường tròn nội tiếp: $r = \dfrac{S}{p} = \dfrac{%d}{%d}" % (S, p),
+                 "R": r"Điểm cách đều ba đỉnh là tâm đường tròn ngoại tiếp: $R = \dfrac{abc}{4S} = \dfrac{%d\cdot %d\cdot %d}{4\cdot %d}" % (a, b, c, S),
+                 "h": r"Lối đi ngắn nhất là đường cao $h_a$: $S = \dfrac{1}{2}BC\cdot h_a$ nên $h_a = \dfrac{2S}{BC} = \dfrac{2\cdot %d}{%d}" % (S, a)}[hoi]
+        giai += (r" \approx %s\,\text{m}$." if lam_tron else r" = %s\,\text{m}$.") % dap
+        return de, dap, giai, gt
+
+
+def L10_C3_B6_VD036_MC_G_01(socau, dang=1):
+    r"""VD - mảnh vườn tam giác biết ba cạnh: tính diện tích (Heron) rồi suy ra bán kính nội tiếp
+    (vòi phun), ngoại tiếp (cột đèn) hoặc đường cao (lối đi) từ công thức diện tích khác.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (dang cau b tu luan). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, giai, gt = _bo_vuon_heron()
+        nhieu = _ba_nhieu(dap, [_x1(gt * 2), _x1(gt / 2), _x1(gt + 1)], buoc=lambda t: _x1(gt + t))
+        cau += MC_SA_answer_const(de.replace("Tính khoảng", "Khoảng").replace("Tính độ dài", "Độ dài").rstrip(".") + " là",
+                                  dap, [x.replace(",0", "") for x in nhieu], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_I_01(socau, dang=2):
+    r"""Trả lời ngắn - VD: mảnh vườn tam giác biết ba cạnh, tính $r$, $R$ hoặc đường cao qua diện tích.
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, giai, gt = _bo_vuon_heron()
+        cau += MC_SA_answer_const(de, dap, [_x1(gt + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+# ---- VD036 (VDC, nhiều bước): hai cạnh + góc xen giữa -> cạnh thứ ba -> diện tích -> r ----
+def _bo_vuon_vdc():
+    while True:
+        cA, b, c, a = random.choice([t for t in _BO_COSIN_TL if abs(t[0]) == Rational(1, 2)])
+        A = 60 if cA > 0 else 120
+        k = random.choice([1, 2, 3])
+        a, b, c = a * k, b * k, c * k
+        S = b * c * math.sqrt(3) / 4
+        p = (a + b + c) / 2
+        r_ = S / p
+        dap, lam_tron = _dap_gon(r_)
+        if dap is None or len(dap) > 4 or not lam_tron:
+            continue
+        de = (r"Một mảnh vườn hình tam giác $ABC$ có $AB = %d\,\text{m}$, $AC = %d\,\text{m}$ và góc $\widehat{BAC} = %s$. "
+              r"Người ta đặt một vòi phun nước tự động tại tâm đường tròn nội tiếp tam giác $ABC$. Tính khoảng cách "
+              r"từ vòi phun đến mỗi bờ vườn (đơn vị mét, làm tròn đến hàng phần mười)." % (c, b, _goc(A)))
+        giai = (r"Định lí côsin: $BC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\cos %s = %d$, nên $BC = %d$.\\ "
+                r"Diện tích $S = \dfrac{1}{2}AB\cdot AC\cdot\sin %s = %s\sqrt{3}$; nửa chu vi $p = %s$.\\ "
+                r"Khoảng cách cần tìm là $r = \dfrac{S}{p} = \dfrac{%s\sqrt{3}}{%s} \approx %s\,\text{m}$."
+                % (c, b, c, b, _goc(A), a * a, a, _goc(A), _so_gon(Rational(b * c, 4)), _so_gon(Rational(a + b + c, 2)),
+                   _so_gon(Rational(b * c, 4)), _so_gon(Rational(a + b + c, 2)), dap))
+        return de, dap, giai, r_
+
+
+def L10_C3_B6_VD036_MC_H_01(socau, dang=1):
+    r"""VẬN DỤNG CAO (nhiều bước) - mảnh vườn tam giác biết hai cạnh và góc xen giữa: định lí côsin
+    tính cạnh thứ ba, tính diện tích, nửa chu vi rồi bán kính nội tiếp (vòi phun).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("VDC tim thong qua nhieu buoc"). Mapping danh dau VDC.
+    Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, giai, r_ = _bo_vuon_vdc()
+        nhieu = _ba_nhieu(dap, [_x1(2 * r_), _x1(r_ * 2 / math.sqrt(3)), _x1(r_ + 0.5)], buoc=lambda t: _x1(r_ + t / 10))
+        cau += MC_SA_answer_const(de.replace("Tính khoảng", "Khoảng").rstrip(".") + " là", dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_J_01(socau, dang=2):
+    r"""Trả lời ngắn - VẬN DỤNG CAO (như VD036_MC_H_01).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Mapping danh dau VDC. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, giai, r_ = _bo_vuon_vdc()
+        cau += MC_SA_answer_const(de, dap, [_x1(r_ + k / 10) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_TH032_VD036_TL_A_01(socau, dong=1):
+    r"""Tự luận hai ý hai đơn vị: mảnh vườn tam giác biết hai cạnh và góc xen giữa.
+    a) (TH032) Tính cạnh thứ ba bằng định lí côsin.
+    b) (VD036) Tính diện tích rồi suy ra bán kính nội tiếp (vòi phun) hoặc ngoại tiếp (cột đèn).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        cA, b, c, a = random.choice([t for t in _BO_COSIN_TL if abs(t[0]) == Rational(1, 2)])
+        A = 60 if cA > 0 else 120
+        S = b * c * math.sqrt(3) / 4
+        p = (a + b + c) / 2
+        hoi = random.choice(["r", "R"])
+        gt = S / p if hoi == "r" else a * b * c / (4 * S)
+        dap, lam_tron = _dap_gon(gt)
+        if dap is None:
+            continue
+        so += 1
+        de = (r"Một mảnh vườn hình tam giác $ABC$ có $AB = %d\,\text{m}$, $AC = %d\,\text{m}$ và góc $\widehat{BAC} = %s$."
+              % (c, b, _goc(A)))
+        cau_b = (r"Người ta đặt một vòi phun nước tự động tại tâm đường tròn nội tiếp tam giác $ABC$. Tính khoảng cách "
+                 r"từ vòi phun đến mỗi bờ vườn" if hoi == "r" else
+                 r"Người ta dựng một cột đèn tại điểm cách đều ba góc vườn. Tính khoảng cách từ cột đèn đến mỗi góc vườn")
+        giai_b = (r"Diện tích $S = \dfrac{1}{2}AB\cdot AC\cdot\sin %s = %s\sqrt{3}\,\text{m}^{2}$. " % (_goc(A), _so_gon(Rational(b * c, 4))))
+        giai_b += (r"Nửa chu vi $p = %s$, khoảng cách cần tìm là $r = \dfrac{S}{p} %s %s\,\text{m}$."
+                   % (_so_gon(Rational(a + b + c, 2)), r"\approx" if lam_tron else "=", dap) if hoi == "r" else
+                   r"Khoảng cách cần tìm là $R = \dfrac{abc}{4S} = \dfrac{%d\cdot %d\cdot %d}{4\cdot %s\sqrt{3}} %s %s\,\text{m}$."
+                   % (a, b, c, _so_gon(Rational(b * c, 4)), r"\approx" if lam_tron else "=", dap))
+        ds = [(r"Tính độ dài cạnh $BC$.", r"BC = %d\,\text{m}" % a,
+               r"Định lí côsin: $BC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\cos %s = %d$, nên $BC = %d\,\text{m}$."
+               % (c, b, c, b, _goc(A), a * a, a)),
+              (cau_b + r" (đơn vị mét%s)." % (", làm tròn đến hàng phần mười" if lam_tron else ""),
+               r"%s \approx %s\,\text{m}" % (hoi, dap) if lam_tron else r"%s = %s\,\text{m}" % (hoi, dap), giai_b)]
+        cau += TL_answer_text(de, ds, 0, 0, dong)
+    return cau
+
+
+def L10_C3_TH034_VD036_TL_A_01(socau, dong=1):
+    r"""Tự luận hai ý hai đơn vị: mảnh vườn tam giác biết ba cạnh.
+    a) (TH034) Tính diện tích bằng công thức Heron.
+    b) (VD036) Từ diện tích, suy ra bán kính nội tiếp, ngoại tiếp hoặc đường cao (công thức diện tích khác).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, giai, gt = _bo_vuon_heron()
+        tach = de.index("Người ta")
+        than, hoi_b = de[:tach].strip(), de[tach:]
+        g_a, g_b = giai.split(r"\\ ", 1)
+        S = re.search(r"= (\d+)\\,\\left", g_a).group(1)
+        ds = [(r"Tính diện tích mảnh vườn.", r"S = %s\,\text{m}^{2}" % S, g_a),
+              (hoi_b, r"\approx %s\,\text{m}" % dap if "làm tròn" in hoi_b else r"%s\,\text{m}" % dap, g_b)]
+        cau += TL_answer_text(than, ds, 0, 0, dong)
+    return cau

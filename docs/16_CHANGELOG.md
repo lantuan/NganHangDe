@@ -9526,3 +9526,20 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   TL_G_01 (a goc tam giac OPQ - tien de, b khoang cach). Bai goc 32, 62, 71 do, 50 m:
   OP ~ 201 m, OQ ~ 160 m. Ba dong Mapping cung mo ta "Dang".
 - Test: tests/test_dang_vdc.py.
+
+# Version 3.79 - 2026-09-30
+
+## Bai 6: cong thuc, dien tich, ban kinh, trung tuyen, phan giac (theo co Lan)
+
+- Li thuyet: TH032_MC_F (cong thuc trung tuyen: chon dung / chon sai), TH034_MC_G (S = abc/4R,
+  S = pr, Heron, R = abc/4S, r = S/p: chon dung / chon sai).
+- TH: TH035_MC_D, SA_C (tam giac nho: trung tuyen AM, phan giac AD cua goc 120 do - dinh li
+  cosin, dap so nguyen); TH034_MC_H, SA_C (dien tich khi du kien ung dung mot cong thuc: duong
+  cao, R, r, Heron); TH034_MC_I, SA_D (ban kinh r, R khi da cho dien tich - "nhin la thay").
+- VD036 (boi canh thuc tien vi curriculum Bai 6 chi co VD o day): MC_G, SA_I (manh vuon biet ba
+  canh: Heron roi r, R hoac duong cao); MC_H, SA_J (VDC, danh dau muc_do_dang: hai canh + goc ->
+  canh thu ba -> dien tich -> r).
+- Tu luan hai y: L10_C3_TH032_VD036_TL_A (a canh bang dinh li cosin, b R hoac r),
+  L10_C3_TH034_VD036_TL_A (a dien tich Heron, b r, R hoac duong cao). Cung mo ta dang voi
+  MC/SA cung boi canh; _khoa_mo_ta cua cau nhieu y tinh theo don vi y cuoi.
+- Sua trung ten: _bo_trung_tuyen moi doi thanh _bo_tt_tam_giac_nho (khong de ham cu).

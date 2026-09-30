@@ -65,14 +65,18 @@ def test_mot_suat_thi_khong_dung_cau_hai_y():
 
 
 def test_khac_muc_do_thi_khong_ghep():
-    """Một suất TH và một suất VD: câu TH + TH không được lấp (sai % mức độ)."""
+    """Một suất TH và một suất VD: câu TH + TH không được lấp (sai % mức độ); chỉ câu
+    ý a) TH + ý b) VD (vd L10_C3_TH032_VD036_TL_A) mới được lấp."""
     for sd in range(20):
         random.seed(sd)
         bp = _bp([_suat("L10_C3_B5_TH031"),
                   {"curriculum_id": "L10_C3_B6_VD036", "chuong_so": 3, "muc_do": "VD",
                    "tong_so_cau": 1, "so_cau_VD": 1, "so_cau_VDC": 0}])
         kq = select_questions(10, bp)
-        assert all(cac_y_tu_luan(c["generator_id"] or "") is None for c in kq)
+        for c in kq:
+            y = cac_y_tu_luan(c["generator_id"] or "")
+            if y:
+                assert [md for md, _ in y] == ["TH", "VD"], c
 
 
 def test_don_vi_ngoai_pham_vi_bai_thi_khong_ghep():

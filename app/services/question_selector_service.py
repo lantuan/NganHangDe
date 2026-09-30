@@ -94,7 +94,14 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set,
 def _khoa_mo_ta(row: dict) -> tuple:
     """(đơn vị kiến thức, mô tả dạng đã chuẩn hoá) của một dòng Mapping."""
     g = _CURRICULUM_TU_GENERATOR.match(row.get("id", ""))
-    dv = _don_vi(g.group(1)) if g else row.get("id", "")
+    if g:
+        dv = _don_vi(g.group(1))
+    elif row.get("cac_y"):
+        # câu tự luận nhiều ý: tính theo đơn vị của ý cuối (ý chính) để tránh trùng
+        # bối cảnh với câu MC/SA cùng mô tả dạng của đơn vị đó
+        dv = _don_vi(row["cac_y"][-1]["curriculum_id"])
+    else:
+        dv = row.get("id", "")
     return dv, " ".join(str(row.get("Dang", "")).lower().split())
 
 
