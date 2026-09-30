@@ -237,6 +237,11 @@ cách ra đề khác nhau (bối cảnh khác, dạng số liệu khác) cho cù
 năng lực/dạng bài. Đây là cách bổ sung dần độ phong phú của ngân hàng đề
 mà không cần tạo ID mới.
 
+Chốt 30/09/2026 (cô Lan): biến thể `_02` phải có **cách hỏi khác** `_01`
+(hỏi ngược, đổi đại lượng cho/hỏi, đổi bối cảnh…), cùng đơn vị kiến thức và
+cùng mức độ; còn chữ cái `_A`, `_B` là các dạng toán khác nhau. Xem
+`27_DANG_BIEN_THE_VA_NHAP_BAI.md`.
+
 Quy tắc đặt tên hàm
 {Generator_ID}_{số thứ tự 2 chữ số}
 

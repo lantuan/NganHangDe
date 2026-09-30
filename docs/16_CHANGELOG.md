@@ -9265,3 +9265,14 @@ Co Lan: "_02 phai la cach hoi khac di, nhung cung ve mot don vi kien thuc".
 - TF_F_02: tam giac cho so do mot goc, tinh gia tri cu the.
 - Mapping: mo ta "Dang" cua 10 ID viet lai theo don vi kien thuc (bao ca _01, _02).
 - tests/test_mot_id_mot_dang.py: them 10 ID vao danh sach cho phep nhieu ham.
+
+# Version 3.59 - 2026-09-30
+
+## So tay: dang (A, B...) va bien the (_01, _02...), quy trinh nhap bai
+
+- docs/27_DANG_BIEN_THE_VA_NHAP_BAI.md (moi): ba tang don vi kien thuc -> dang
+  -> bien the; "_02 phai hoi theo cach khac, cung don vi kien thuc" (co Lan
+  30/09/2026); quy trinh nhap bai tu giao an; quy uoc viet ham (phuong an
+  khong cham cuoi, SA <= 4 ki tu, mien nghiem theo SGK...); hinh trong tung
+  phuong an (3.55); xuat Word (3.54 - 3.56).
+- docs/README.md, 04_ID_STANDARD.md, 10_PYTHON_GENERATOR.md: tro sang tai lieu moi.

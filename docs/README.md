@@ -44,6 +44,8 @@ Version: 1.0
 
 26_CHAY_NHAP_VA_SUA_CAU.md  (so tay: tim ham tu cau tren web, chay nhap ra PDF, sua, doi ID)
 
+27_DANG_BIEN_THE_VA_NHAP_BAI.md  (so tay: dang A/B/C va bien the _01/_02 khac nhau the nao; quy trinh nhap bai tu giao an; hinh trong phuong an; xuat Word)
+
 ---
 
 Quy tắc:

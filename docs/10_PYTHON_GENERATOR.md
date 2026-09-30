@@ -219,6 +219,10 @@ Logic phân biệt vai trò này thuộc về Business Logic ở FastAPI/n8n
 
 Xem chi tiết tại `04_ID_STANDARD.md` (mục "Biến thể nội dung trong Python").
 
+**Chốt 30/09/2026 (cô Lan):** dạng `_A`, `_B`… là các dạng toán khác nhau cùng một
+đơn vị kiến thức; biến thể `_01`, `_02`… là cùng dạng nhưng **cách hỏi phải khác đi**
+(không chỉ đổi số). Xem đầy đủ và ví dụ ở `27_DANG_BIEN_THE_VA_NHAP_BAI.md`.
+
 Tóm tắt
 1 Generator ID  →  có thể có NHIỀU hàm Python (biến thể _01, _02, ...)
 1 hàm Python    →  vẫn tuân thủ mô hình sinh nhiều mã đề (tham số socau)
