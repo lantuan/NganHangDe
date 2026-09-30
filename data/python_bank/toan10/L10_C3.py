@@ -7717,9 +7717,7 @@ def L10_C3_B5_TH031_MC_I_02(socau, dang=1):
 # CLAUDE THEM 30/09/2026 theo cô Lan.
 #   SA_D ~ MC_G (góc bù), SA_E ~ MC_H (góc phụ), SA_F ~ MC_I (có hình): cùng mô tả
 #   dạng trong Mapping để bộ chọn câu không đưa cả MC lẫn SA cùng dạng vào một đề.
-#   TL_A (không hình), TL_B (có hình): ý a) quan hệ góc phụ/bù (TH031), ý b) tính
-#   giá trị lượng giác còn lại bằng sin^2 + cos^2 = 1 (nội dung TH030) - hai ý hai
-#   đơn vị kiến thức.
+#   Tự luận: xem TH032_TL_B, TH033_TL_B, TH034_TL_B (ý a TH031, ý b Bài 6).
 # ---------------------------------------------------------------------
 
 _TP_SC = [Rational(k, 100) for k in range(5, 100, 5) if k != 50]
@@ -7884,142 +7882,6 @@ def L10_C3_B5_TH031_SA_F_02(socau, dang=2):
     return cau
 
 
-def _con_lai_sc(ham, v, tu):
-    """Giá trị còn lại (cos nếu ham = sin, sin nếu ham = cos) và lời giải dùng sin^2 + cos^2 = 1."""
-    kia = "cos" if ham == "sin" else "sin"
-    w = sqrt(1 - v ** 2)
-    if kia == "cos" and tu:
-        w = -w
-    ly = (r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ ta có $\%s^{2}\alpha = 1 - \left(%s\right)^{2} = %s$. "
-          % (kia, _tri(v), _tri(1 - v ** 2)))
-    if kia == "sin":
-        ly += r"Vì $0^{\circ} < \alpha < 180^{\circ}$ nên $\sin\alpha > 0$, do đó $\sin\alpha = %s$." % _tri(w)
-    else:
-        ly += (r"Vì $\alpha$ là góc %s nên $\cos\alpha %s 0$, do đó $\cos\alpha = %s$."
-               % ("tù" if tu else "nhọn", "<" if tu else ">", _tri(w)))
-    return kia, w, ly
-
-
-def L10_C3_B5_TH031_TL_A_01(socau, dong=1):
-    r"""Tự luận - góc BÙ: cho $\sin\alpha$ (kèm góc nhọn / tù) hoặc $\cos\alpha$ (số đẹp).
-    a) Tính giá trị lượng giác cùng tên của $180^{\circ} - \alpha$ (TH031).
-    b) Tính giá trị lượng giác còn lại của $\alpha$ bằng $\sin^2\alpha + \cos^2\alpha = 1$ (TH030).
-    c) Tính giá trị lượng giác đó của $180^{\circ} - \alpha$.
-
-    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (hai don vi kien thuc). Co Lan duyet lai.
-    """
-    cau = ""
-    for _ in range(socau):
-        ham = random.choice(["sin", "cos"])
-        v = _gtlg_dep(ham, True)
-        if ham == "sin":
-            tu = random.random() < 0.5
-            mien = r"$90^{\circ} < \alpha < 180^{\circ}$" if tu else r"$0^{\circ} < \alpha < 90^{\circ}$"
-        else:
-            tu = v < 0
-            mien = r"$0^{\circ} < \alpha < 180^{\circ}$"
-        kia, w, ly = _con_lai_sc(ham, v, tu)
-        a_ = v if ham == "sin" else -v
-        c_ = w if kia == "sin" else -w
-        debai = r"Cho góc $\alpha$ với %s và $\%s\alpha = %s$." % (mien, ham, _tri(v))
-        ds = [(r"Tính $\%s\left(180^{\circ} - \alpha\right)$." % ham,
-               r"\%s\left(180^{\circ} - \alpha\right) = %s" % (ham, _tri(a_)),
-               r"Hai góc $\alpha$ và $180^{\circ} - \alpha$ bù nhau nên $%s = %s$." % (_BIEU_BU[ham], _tri(a_))),
-              (r"Tính $\%s\alpha$." % kia, r"\%s\alpha = %s" % (kia, _tri(w)), ly),
-              (r"Tính $\%s\left(180^{\circ} - \alpha\right)$." % kia,
-               r"\%s\left(180^{\circ} - \alpha\right) = %s" % (kia, _tri(c_)),
-               r"$%s = %s$." % (_BIEU_BU[kia], _tri(c_)))]
-        cau += TL_answer_text(debai, ds, 0, 0, dong)
-    return cau
-
-
-def L10_C3_B5_TH031_TL_A_02(socau, dong=1):
-    r"""Tự luận - góc PHỤ ($\alpha$ nhọn): cho $\sin\alpha$ hoặc $\cos\alpha$ (số đẹp).
-    a) Tính giá trị lượng giác của $90^{\circ} - \alpha$ bằng đúng giá trị đã cho (TH031).
-    b) Tính giá trị lượng giác còn lại của $\alpha$ (TH030).
-    c) Tính giá trị lượng giác còn lại của $90^{\circ} - \alpha$.
-
-    CLAUDE THEM 30/09/2026 - bien the 02 cua TH031_TL_A. Co Lan duyet lai.
-    """
-    cau = ""
-    for _ in range(socau):
-        ham = random.choice(["sin", "cos"])
-        v = _gtlg_dep(ham, False)
-        kia, w, ly = _con_lai_sc(ham, v, False)
-        debai = r"Cho góc nhọn $\alpha$ có $\%s\alpha = %s$." % (ham, _tri(v))
-        ds = [(r"Tính $\%s\left(90^{\circ} - \alpha\right)$." % kia,
-               r"\%s\left(90^{\circ} - \alpha\right) = %s" % (kia, _tri(v)),
-               r"Hai góc $\alpha$ và $90^{\circ} - \alpha$ phụ nhau nên $%s = %s$." % (_BIEU_PHU[ham], _tri(v))),
-              (r"Tính $\%s\alpha$." % kia, r"\%s\alpha = %s" % (kia, _tri(w)), ly),
-              (r"Tính $\%s\left(90^{\circ} - \alpha\right)$." % ham,
-               r"\%s\left(90^{\circ} - \alpha\right) = %s" % (ham, _tri(w)),
-               r"$%s = %s$." % (_BIEU_PHU[kia], _tri(w)))]
-        cau += TL_answer_text(debai, ds, 0, 0, dong)
-    return cau
-
-
-def L10_C3_B5_TH031_TL_B_01(socau, dong=1):
-    r"""Tự luận có hình - góc bẹt $\widehat{AOB}$, tia $OC$, $\alpha = \widehat{AOC}$,
-    $\beta = \widehat{BOC}$. Cho $\cos\alpha$ (số đẹp).
-    a) Tính $\cos\beta$ (hai góc kề bù - TH031).  b) Tính $\sin\alpha$ (TH030).
-    c) Tính $\sin\beta$ và $\tan\beta$.
-
-    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (hai don vi kien thuc). Co Lan duyet lai.
-    """
-    cau = ""
-    so = 0
-    while so < socau:
-        v = _gtlg_dep("cos", True)
-        a = _goc_tu_gtlg("cos", v)
-        if not (20 <= a <= 160) or abs(a - 90) < 10:
-            continue
-        so += 1
-        _, s, ly = _con_lai_sc("cos", v, v < 0)
-        tanb = simplify(s / (-v))
-        debai = (r"Cho hình vẽ bên, trong đó ba điểm $A$, $O$, $B$ thẳng hàng, $\widehat{AOC} = \alpha$, "
-                 r"$\widehat{BOC} = \beta$ và $\cos\alpha = %s$." % _tri(v))
-        ds = [(r"Tính $\cos\beta$.", r"\cos\beta = %s" % _tri(-v),
-               r"Vì $A$, $O$, $B$ thẳng hàng nên $\beta = 180^{\circ} - \alpha$, do đó "
-               r"$\cos\beta = -\cos\alpha = %s$." % _tri(-v)),
-              (r"Tính $\sin\alpha$.", r"\sin\alpha = %s" % _tri(s), ly),
-              (r"Tính $\sin\beta$ và $\tan\beta$.", r"\sin\beta = %s;\ \tan\beta = %s" % (_tri(s), _tri(tanb)),
-               r"$\sin\beta = \sin\alpha = %s$, $\tan\beta = \dfrac{\sin\beta}{\cos\beta} = %s$."
-               % (_tri(s), _tri(tanb)))]
-        cau += TL_answer_text(debai, ds, _hinh_goc_bet(a), 0, dong)
-    return cau
-
-
-def L10_C3_B5_TH031_TL_B_02(socau, dong=1):
-    r"""Tự luận có hình - thay góc bẹt bằng GÓC VUÔNG $\widehat{xOy}$, tia $Oz$ nằm giữa,
-    $\alpha = \widehat{xOz}$, $\beta = \widehat{zOy}$. Cho $\sin\alpha$ (số đẹp).
-    a) Tính $\cos\beta$ (hai góc phụ nhau - TH031).  b) Tính $\cos\alpha$ (TH030).
-    c) Tính $\sin\beta$ và $\tan\beta$.
-
-    CLAUDE THEM 30/09/2026 - bien the 02 cua TH031_TL_B. Co Lan duyet lai.
-    """
-    cau = ""
-    so = 0
-    while so < socau:
-        v = _gtlg_dep("sin", False)
-        a = _goc_tu_gtlg("sin", v, tu_duoc=False)
-        if not (20 <= a <= 70):
-            continue
-        so += 1
-        _, c, ly = _con_lai_sc("sin", v, False)
-        tanb = simplify(c / v)
-        debai = (r"Cho hình vẽ bên, trong đó $\widehat{xOy} = 90^{\circ}$, tia $Oz$ nằm giữa hai tia $Ox$, $Oy$, "
-                 r"$\widehat{xOz} = \alpha$, $\widehat{zOy} = \beta$ và $\sin\alpha = %s$." % _tri(v))
-        ds = [(r"Tính $\cos\beta$.", r"\cos\beta = %s" % _tri(v),
-               r"Vì tia $Oz$ nằm giữa hai tia $Ox$, $Oy$ nên $\beta = 90^{\circ} - \alpha$, do đó "
-               r"$\cos\beta = \sin\alpha = %s$." % _tri(v)),
-              (r"Tính $\cos\alpha$.", r"\cos\alpha = %s" % _tri(c), ly),
-              (r"Tính $\sin\beta$ và $\tan\beta$.", r"\sin\beta = %s;\ \tan\beta = %s" % (_tri(c), _tri(tanb)),
-               r"$\sin\beta = \cos\alpha = %s$, $\tan\beta = \dfrac{\sin\beta}{\cos\beta} = %s$."
-               % (_tri(c), _tri(tanb)))]
-        cau += TL_answer_text(debai, ds, _hinh_goc_vuong(a), 0, dong)
-    return cau
-
-
 # ---------------------------------------------------------------------
 # TH031 - biến thể TRONG TAM GIÁC của các dạng góc bù / góc phụ (theo cô Lan 30/09/2026)
 #   MC_G_03, SA_D_03: tam giác ABC biết GTLG của (A + B) -> GTLG của C (bù nhau)
@@ -8133,4 +7995,148 @@ def L10_C3_B5_TH031_SA_E_03(socau, dang=2):
                  % (ham, Y, _tp(v), _DOI_HAM[ham], Z))
         giai = _giai_tam_giac_vuong(Y, Z, ham, _tp(v))
         cau += MC_SA_answer_const(debai, _tp(v), _nhieu_tp(v), giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TỰ LUẬN hai ý hai đơn vị kiến thức (theo cô Lan 30/09/2026):
+#   ý a) quan hệ góc bù / góc phụ trong tam giác (TH031, Bài 5)
+#   ý b) một phép tính đơn giản bằng hệ thức lượng trong tam giác (Bài 6):
+#        định lí côsin (TH032), định lí sin (TH033), công thức diện tích (TH034).
+# ID đặt ở đơn vị của ý b) (Bài 6) để câu không ra trong đề chỉ kiểm tra Bài 5.
+# ---------------------------------------------------------------------
+
+_PS_TL = [Rational(p, q) for q in range(3, 9) for p in range(1, q) if math.gcd(p, q) == 1]
+# (cos C, a, b, c) với c^2 = a^2 + b^2 - 2ab cos C là số chính phương: cạnh thứ ba nguyên (mức TH)
+_BO_COSIN_TL = [(c_, m_, n_, math.isqrt(int(m_ * m_ + n_ * n_ - 2 * m_ * n_ * c_)))
+                for c_ in [s_ * Rational(p, q) for q in range(2, 9) for p in range(1, q)
+                           if math.gcd(p, q) == 1 for s_ in (1, -1)]
+                for m_ in range(2, 11) for n_ in range(m_ + 1, 11)
+                if (m_ * m_ + n_ * n_ - 2 * m_ * n_ * c_).q == 1
+                and math.isqrt(int(m_ * m_ + n_ * n_ - 2 * m_ * n_ * c_)) ** 2 == m_ * m_ + n_ * n_ - 2 * m_ * n_ * c_]
+
+
+def _tam_giac_ba_dinh():
+    """(X, Y, Z, tổng): góc X, hai góc còn lại Y + Z = 180° - X."""
+    X, Y, Z = random.sample("ABC", 3)
+    Y, Z = sorted([Y, Z])
+    return X, Y, Z, r"%s + %s" % (Y, Z)
+
+
+def _canh(P, Q):
+    return "".join(sorted([P, Q]))
+
+
+def L10_C3_B6_TH032_TL_B_01(socau, dong=1):
+    r"""Tự luận: tam giác $ABC$ biết $\cos\left(A + B\right)$ (số đẹp) và hai cạnh kề góc $C$.
+    a) Tính $\cos C$ (hai góc bù nhau - TH031).
+    b) Tính cạnh $AB$ bằng định lí côsin (TH032).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (y a TH031, y b TH032). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        # muc TH: chon san bo (cos C, a, b) de canh thu ba la SO NGUYEN
+        cX, m_, n_, _ = random.choice(_BO_COSIN_TL)
+        if random.random() < 0.5:
+            m_, n_ = n_, m_
+        v = -cX
+        X, Y, Z, tong = _tam_giac_ba_dinh()
+        c2 = m_ ** 2 + n_ ** 2 - 2 * m_ * n_ * cX
+        so += 1
+        XY, XZ, YZ = _canh(X, Y), _canh(X, Z), _canh(Y, Z)
+        debai = (r"Cho tam giác $ABC$ có $%s = %d$, $%s = %d$ và $\cos\left(%s\right) = %s$."
+                 % (XY, m_, XZ, n_, tong, _tri(v)))
+        ds = [(r"Tính $\cos %s$." % X, r"\cos %s = %s" % (X, _tri(cX)),
+               r"Vì $A + B + C = 180^{\circ}$ nên $%s = 180^{\circ} - %s$, hai góc bù nhau. Do đó "
+               r"$\cos %s = -\cos\left(%s\right) = %s$." % (tong, X, X, tong, _tri(cX))),
+              (r"Tính độ dài cạnh $%s$." % YZ, r"%s = %s" % (YZ, _tri(sqrt(c2))),
+               r"Theo định lí côsin: $%s^{2} = %s^{2} + %s^{2} - 2\cdot %s\cdot %s\cdot\cos %s "
+               r"= %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot %s = %s$." % (
+                   YZ, XY, XZ, XY, XZ, X, m_, n_, m_, n_, _ngoac(cX), _tri(c2)) + "\\\\\n" +
+               r"Vậy $%s = %s$." % (YZ, _tri(sqrt(c2))))]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau
+
+
+def L10_C3_B6_TH033_TL_B_01(socau, dong=1):
+    r"""Tự luận: tam giác $ABC$ biết $\sin\left(A + B\right)$ (số đẹp) và cạnh $AB$.
+    a) Tính $\sin C$ (hai góc bù nhau - TH031).
+    b) Tính bán kính $R$ đường tròn ngoại tiếp bằng định lí sin (TH033).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (y a TH031, y b TH033). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        v = random.choice(_PS_TL)
+        X, Y, Z, tong = _tam_giac_ba_dinh()
+        YZ = _canh(Y, Z)
+        a_ = 2 * v.p * random.randint(1, 4)
+        R = a_ / (2 * v)
+        debai = (r"Cho tam giác $ABC$ có $%s = %d$ và $\sin\left(%s\right) = %s$."
+                 % (YZ, a_, tong, _tri(v)))
+        ds = [(r"Tính $\sin %s$." % X, r"\sin %s = %s" % (X, _tri(v)),
+               r"Vì $A + B + C = 180^{\circ}$ nên $%s = 180^{\circ} - %s$, hai góc bù nhau. Do đó "
+               r"$\sin %s = \sin\left(%s\right) = %s$." % (tong, X, X, tong, _tri(v))),
+              (r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.", r"R = %s" % _tri(R),
+               r"Theo định lí sin: $\dfrac{%s}{\sin %s} = 2R$, suy ra $R = \dfrac{%s}{2\sin %s} "
+               r"= \dfrac{%d}{2\cdot %s} = %s$." % (YZ, X, YZ, X, a_, _tri(v), _tri(R)))]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau
+
+
+def L10_C3_B6_TH033_TL_B_02(socau, dong=1):
+    r"""Tự luận: tam giác $ABC$ VUÔNG tại $A$, biết cạnh huyền $BC$ và côsin của một góc
+    nhọn (số đẹp).
+    a) Tính sin của góc nhọn còn lại (hai góc phụ nhau - TH031).
+    b) Tính cạnh đối diện góc đó bằng định lí sin (TH033).
+
+    CLAUDE THEM 30/09/2026 - bien the 02 cua TH033_TL_B theo co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        v = random.choice(_PS_TL)
+        Y, Z = random.sample("BC", 2)             # cho cos Z, hoi sin Y
+        a_ = v.q * random.randint(1, 4)
+        doi = _canh("A", Z)                        # canh doi dien goc Y
+        canh = a_ * v
+        debai = r"Cho tam giác $ABC$ vuông tại $A$ có $BC = %d$ và $\cos %s = %s$." % (a_, Z, _tri(v))
+        ds = [(r"Tính $\sin %s$." % Y, r"\sin %s = %s" % (Y, _tri(v)),
+               r"Tam giác $ABC$ vuông tại $A$ nên $\widehat{B} + \widehat{C} = 90^{\circ}$, hai góc phụ nhau. "
+               r"Do đó $\sin %s = \cos %s = %s$." % (Y, Z, _tri(v))),
+              (r"Tính độ dài cạnh $%s$." % doi, r"%s = %s" % (doi, _tri(canh)),
+               r"Theo định lí sin: $\dfrac{%s}{\sin %s} = \dfrac{BC}{\sin A}$, với $\sin A = \sin 90^{\circ} = 1$ "
+               r"nên $%s = BC\cdot\sin %s = %d\cdot %s = %s$." % (doi, Y, doi, Y, a_, _tri(v), _tri(canh)))]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau
+
+
+def L10_C3_B6_TH034_TL_B_01(socau, dong=1):
+    r"""Tự luận: tam giác $ABC$ biết $\sin\left(A + B\right)$ (số đẹp) và hai cạnh kề góc $C$.
+    a) Tính $\sin C$ (hai góc bù nhau - TH031).
+    b) Tính diện tích tam giác bằng $S = \dfrac{1}{2}ab\sin C$ (TH034).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo co Lan (y a TH031, y b TH034). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        v = random.choice(_PS_TL)
+        X, Y, Z, tong = _tam_giac_ba_dinh()
+        m_, n_ = random.randint(2, 12), random.randint(2, 12)
+        S = Rational(m_ * n_, 2) * v
+        if S.q != 1 or m_ == n_:
+            continue
+        so += 1
+        XY, XZ = _canh(X, Y), _canh(X, Z)
+        debai = (r"Cho tam giác $ABC$ có $%s = %d$, $%s = %d$ và $\sin\left(%s\right) = %s$."
+                 % (XY, m_, XZ, n_, tong, _tri(v)))
+        ds = [(r"Tính $\sin %s$." % X, r"\sin %s = %s" % (X, _tri(v)),
+               r"Vì $A + B + C = 180^{\circ}$ nên $%s = 180^{\circ} - %s$, hai góc bù nhau. Do đó "
+               r"$\sin %s = \sin\left(%s\right) = %s$." % (tong, X, X, tong, _tri(v))),
+              (r"Tính diện tích tam giác $ABC$.", r"S = %s" % _tri(S),
+               r"$S = \dfrac{1}{2}\cdot %s\cdot %s\cdot\sin %s = \dfrac{1}{2}\cdot %d\cdot %d\cdot %s = %s$."
+               % (XY, XZ, X, m_, n_, _tri(v), _tri(S)))]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
     return cau

@@ -9461,3 +9461,15 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   lai (cos C = sin B, cot C = tan B...). Khac MC_F_02 (bo ba Py-ta-go, co cau can them
   sin^2 + cos^2 = 1).
 - Mapping: mo ta dang MC_G/SA_D, MC_H/SA_E them phan "trong tam giac".
+
+# Version 3.74 - 2026-09-30
+
+## Tu luan goc bu/phu chuyen sang tam giac: y a) TH031, y b) Bai 6 (theo co Lan)
+
+- Bo TH031_TL_A, TH031_TL_B (y b dung sin^2 + cos^2 = 1, khong phai Bai 6).
+- Them TH032_TL_B_01 (cos(A + B) -> cos C, roi dinh li cosin; bo so _BO_COSIN_TL chon
+  san de canh thu ba nguyen), TH033_TL_B_01 (sin(A + B) -> sin C, roi R = a / (2 sin A)),
+  TH033_TL_B_02 (tam giac vuong tai A: cos C -> sin B, roi dinh li sin tinh canh),
+  TH034_TL_B_01 (sin(A + B) -> sin C, roi S = ab sin C / 2). Dap so y b) la so nguyen.
+- ID dat o don vi cua y b) (Bai 6) de cau khong ra trong de chi kiem tra Bai 5. Muc TH:
+  moi y mot buoc; giai tam giac (nhieu buoc) de danh cho muc VD.
