@@ -225,3 +225,19 @@ nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câ
   nhiên hỏi cả hai / không thuộc tập nào / ít nhất một / chỉ A / chỉ B (mỗi biến thể
   có một nhóm nội dung hỏi riêng); câu "cả hai" có thể cho "mỗi người đều thuộc ít
   nhất một tập".
+
+## 9. Câu tự luận: hai ý, hai đơn vị kiến thức (chốt 30/09/2026)
+
+1. Mỗi câu tự luận hỏi về HAI đơn vị kiến thức khác nhau của CÙNG một chương:
+   ý a) một đơn vị, ý b) đơn vị khác. Không để cả câu cùng một đơn vị.
+2. ID ghi cả hai đơn vị theo thứ tự ý: `L10_C3_TH031_TH032_TL_A` (không ghi bài,
+   như câu Đúng/Sai). Dòng Mapping có `cac_y` và content nối bằng " | "
+   (docs/04, Ngoại lệ 3).
+3. Ma trận tính theo từng ý: câu TH031 + TH032 chiếm hai suất tự luận mức TH.
+   Ma trận chỉ có một suất tự luận TH thì câu này không được chọn.
+4. Mức TH: mỗi ý một bước, số đẹp, đáp số nguyên. Giải tam giác (nhiều bước)
+   để dành cho đề vận dụng.
+5. Đã làm (Chương 3): TH031 + TH032 (côsin của tổng hai góc -> định lí côsin),
+   TH031 + TH033 (sin của tổng -> bán kính ngoại tiếp; tam giác vuông -> cạnh),
+   TH031 + TH034 (sin của tổng -> diện tích). Các câu tự luận khác sẽ chuyển dần.
+

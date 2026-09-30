@@ -9473,3 +9473,18 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   TH034_TL_B_01 (sin(A + B) -> sin C, roi S = ab sin C / 2). Dap so y b) la so nguyen.
 - ID dat o don vi cua y b) (Bai 6) de cau khong ra trong de chi kiem tra Bai 5. Muc TH:
   moi y mot buoc; giai tam giac (nhieu buoc) de danh cho muc VD.
+
+# Version 3.75 - 2026-09-30
+
+## Tu luan hai don vi kien thuc: ID ghi ca hai don vi, ma tran tinh theo tung y (theo co Lan)
+
+- Ngoai le 3 (docs/04): ID L<khoi>_C<chuong>_<y a>_<y b>_TL_<X>, vd L10_C3_TH031_TH032_TL_A;
+  dong Mapping co cac_y [{y, curriculum_id, muc_do}], content noi bang " | ".
+- Doi ten: L10_C3_B6_TH032_TL_B -> L10_C3_TH031_TH032_TL_A, TH033_TL_B -> L10_C3_TH031_TH033_TL_A,
+  TH034_TL_B -> L10_C3_TH031_TH034_TL_A.
+- mapping_service: cac_y_tu_luan, so_suat_tu_luan. question_selector_service:
+  _ghep_tu_luan_nhieu_y - ghep cac suat tu luan (cung chuong, dung muc do) vao cau nhieu
+  y truoc; hai don vi phai trong pham vi bai; uu tien cau chua dung, don vi dung it nhat.
+- diem_service: diem phan Tu luan chia theo SUAT (cau hai y = hai suat);
+  diem_toi_da_cua_cau_theo_id dung o cham bai (exam.py, grade_photo_service).
+- Test: tests/test_tu_luan_nhieu_y.py; test_mapping_curriculum kiem ID nhieu y khop curriculum.

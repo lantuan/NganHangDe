@@ -925,7 +925,7 @@ def grade_endpoint(payload: ChamBaiRequest):
                 "question_id": generator_id,
                 "loai_cau": loai_chuan,
                 "dung_sai_hoac_diem": None,
-                "diem_toi_da": diem_service.diem_toi_da_cua_cau(thang, loai_chuan),
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau_theo_id(thang, loai_chuan, generator_id),
                 "nhan_xet": nhan_xet_cau,
                 "chuong": chuong,
                 "bai": bai_so,

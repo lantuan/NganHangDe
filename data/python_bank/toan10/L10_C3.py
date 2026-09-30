@@ -7717,7 +7717,7 @@ def L10_C3_B5_TH031_MC_I_02(socau, dang=1):
 # CLAUDE THEM 30/09/2026 theo cô Lan.
 #   SA_D ~ MC_G (góc bù), SA_E ~ MC_H (góc phụ), SA_F ~ MC_I (có hình): cùng mô tả
 #   dạng trong Mapping để bộ chọn câu không đưa cả MC lẫn SA cùng dạng vào một đề.
-#   Tự luận: xem TH032_TL_B, TH033_TL_B, TH034_TL_B (ý a TH031, ý b Bài 6).
+#   Tự luận: xem L10_C3_TH031_TH032/TH033/TH034_TL_A (ý a TH031, ý b Bài 6).
 # ---------------------------------------------------------------------
 
 _TP_SC = [Rational(k, 100) for k in range(5, 100, 5) if k != 50]
@@ -8003,7 +8003,9 @@ def L10_C3_B5_TH031_SA_E_03(socau, dang=2):
 #   ý a) quan hệ góc bù / góc phụ trong tam giác (TH031, Bài 5)
 #   ý b) một phép tính đơn giản bằng hệ thức lượng trong tam giác (Bài 6):
 #        định lí côsin (TH032), định lí sin (TH033), công thức diện tích (TH034).
-# ID đặt ở đơn vị của ý b) (Bài 6) để câu không ra trong đề chỉ kiểm tra Bài 5.
+# ID ghi CẢ HAI đơn vị (như câu Đúng/Sai, theo chương, không ghi bài):
+#   L10_C3_TH031_TH032_TL_A = ý a) TH031, ý b) TH032. Ma trận tính theo TỪNG Ý
+#   (mỗi ý một suất ở đúng mức độ, đơn vị của nó) - xem docs/04 Ngoại lệ 3.
 # ---------------------------------------------------------------------
 
 _PS_TL = [Rational(p, q) for q in range(3, 9) for p in range(1, q) if math.gcd(p, q) == 1]
@@ -8027,7 +8029,7 @@ def _canh(P, Q):
     return "".join(sorted([P, Q]))
 
 
-def L10_C3_B6_TH032_TL_B_01(socau, dong=1):
+def L10_C3_TH031_TH032_TL_A_01(socau, dong=1):
     r"""Tự luận: tam giác $ABC$ biết $\cos\left(A + B\right)$ (số đẹp) và hai cạnh kề góc $C$.
     a) Tính $\cos C$ (hai góc bù nhau - TH031).
     b) Tính cạnh $AB$ bằng định lí côsin (TH032).
@@ -8060,7 +8062,7 @@ def L10_C3_B6_TH032_TL_B_01(socau, dong=1):
     return cau
 
 
-def L10_C3_B6_TH033_TL_B_01(socau, dong=1):
+def L10_C3_TH031_TH033_TL_A_01(socau, dong=1):
     r"""Tự luận: tam giác $ABC$ biết $\sin\left(A + B\right)$ (số đẹp) và cạnh $AB$.
     a) Tính $\sin C$ (hai góc bù nhau - TH031).
     b) Tính bán kính $R$ đường tròn ngoại tiếp bằng định lí sin (TH033).
@@ -8086,13 +8088,13 @@ def L10_C3_B6_TH033_TL_B_01(socau, dong=1):
     return cau
 
 
-def L10_C3_B6_TH033_TL_B_02(socau, dong=1):
+def L10_C3_TH031_TH033_TL_A_02(socau, dong=1):
     r"""Tự luận: tam giác $ABC$ VUÔNG tại $A$, biết cạnh huyền $BC$ và côsin của một góc
     nhọn (số đẹp).
     a) Tính sin của góc nhọn còn lại (hai góc phụ nhau - TH031).
     b) Tính cạnh đối diện góc đó bằng định lí sin (TH033).
 
-    CLAUDE THEM 30/09/2026 - bien the 02 cua TH033_TL_B theo co Lan. Co Lan duyet lai.
+    CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C3_TH031_TH033_TL_A theo co Lan. Co Lan duyet lai.
     """
     cau = ""
     for _ in range(socau):
@@ -8112,7 +8114,7 @@ def L10_C3_B6_TH033_TL_B_02(socau, dong=1):
     return cau
 
 
-def L10_C3_B6_TH034_TL_B_01(socau, dong=1):
+def L10_C3_TH031_TH034_TL_A_01(socau, dong=1):
     r"""Tự luận: tam giác $ABC$ biết $\sin\left(A + B\right)$ (số đẹp) và hai cạnh kề góc $C$.
     a) Tính $\sin C$ (hai góc bù nhau - TH031).
     b) Tính diện tích tam giác bằng $S = \dfrac{1}{2}ab\sin C$ (TH034).

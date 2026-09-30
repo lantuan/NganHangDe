@@ -16,7 +16,7 @@ import re
 
 import pytest
 
-from app.services.mapping_service import load_mapping, dem_dang_co_ham
+from app.services.mapping_service import load_mapping, dem_dang_co_ham, cac_y_tu_luan
 
 SO_CHUONG = {10: 9, 11: 9, 12: 6}
 KHOI = [(lop, c) for lop, n in SO_CHUONG.items() for c in range(1, n + 1)]
@@ -35,10 +35,38 @@ def _curriculum():
 CUR = _curriculum()
 
 
+def _nhieu_y(m):
+    """Cau tu luan nhieu y (Ngoai le 3, doc 04) - kiem rieng o test_tu_luan_nhieu_y."""
+    return cac_y_tu_luan(m["id"]) is not None
+
+
+@pytest.mark.parametrize("lop,chuong", KHOI)
+def test_tu_luan_nhieu_y_khop_curriculum(lop, chuong):
+    """ID L10_C3_TH031_TH032_TL_A: moi don vi trong ID phai la mot yeu cau co that
+    cua CUNG chuong, dung muc do, dung thu tu y; cac_y trong Mapping khop ID;
+    hai don vi khac nhau; content = content cac yeu cau noi bang ' | '."""
+    for m in load_mapping(lop, chuong):
+        y_id = cac_y_tu_luan(m["id"])
+        if y_id is None:
+            assert not m.get("cac_y"), "%s co cac_y nhung ID khong theo dang nhieu y" % m["id"]
+            continue
+        assert "Tự luận" in m["Loai"], m["id"]
+        cac_y = m.get("cac_y") or []
+        assert len(cac_y) == len(y_id) >= 2, m["id"]
+        so = [s for _, s in y_id]
+        assert len(set(so)) == len(so), "%s: hai y cung mot don vi kien thuc" % m["id"]
+        for (md, s), y in zip(y_id, cac_y):
+            cid = y["curriculum_id"]
+            assert cid in CUR, "%s tro vao yeu cau khong ton tai: %s" % (m["id"], cid)
+            assert cid.startswith("L%d_C%d_B" % (lop, chuong)) and cid.endswith(md + s), (m["id"], cid)
+            assert CUR[cid]["MucDo"] == md == y["muc_do"], (m["id"], cid)
+        assert m["content"] == " | ".join(CUR[y["curriculum_id"]]["content"] for y in cac_y), m["id"]
+
+
 @pytest.mark.parametrize("lop,chuong", KHOI)
 def test_moi_dong_mapping_tro_vao_yeu_cau_co_that(lop, chuong):
     for m in load_mapping(lop, chuong):
-        if m["id"].startswith("L%d_C%d_TF_" % (lop, chuong)):
+        if m["id"].startswith("L%d_C%d_TF_" % (lop, chuong)) or _nhieu_y(m):
             continue                      # cau Dung/Sai ra theo chuong, khong gan bai
         goc = HAU_TO.sub("", m["id"])
         assert goc in CUR, "%s tro vao yeu cau khong ton tai: %s" % (m["id"], goc)
@@ -47,7 +75,7 @@ def test_moi_dong_mapping_tro_vao_yeu_cau_co_that(lop, chuong):
 @pytest.mark.parametrize("lop,chuong", KHOI)
 def test_content_mapping_khop_curriculum(lop, chuong):
     for m in load_mapping(lop, chuong):
-        if m["id"].startswith("L%d_C%d_TF_" % (lop, chuong)):
+        if m["id"].startswith("L%d_C%d_TF_" % (lop, chuong)) or _nhieu_y(m):
             continue
         goc = HAU_TO.sub("", m["id"])
         assert m["content"] == CUR[goc]["content"], (

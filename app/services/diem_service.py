@@ -27,6 +27,8 @@ Lam tron:
 import json
 from pathlib import Path
 
+from app.services.mapping_service import so_suat_tu_luan
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 RULES_FILE = BASE_DIR / "data" / "config" / "diem_rules.json"
 
@@ -94,8 +96,14 @@ def tinh_thang_diem(danh_sach_dap_an: list[dict]) -> dict:
     lam_tron = rules.get("lam_tron", 2)
 
     so_cau_theo_phan = {loai: 0 for loai in CAC_LOAI_CAU}
+    # Tu luan chia diem theo SUAT (y), khong theo cau: cau tu luan hai don vi
+    # kien thuc (L10_C3_TH031_TH032_TL_A) chiem hai suat - doc 04 Ngoai le 3.
+    so_suat_tl = 0
     for cau in danh_sach_dap_an:
-        so_cau_theo_phan[loai_cau_chuan(cau)] += 1
+        loai_c = loai_cau_chuan(cau)
+        so_cau_theo_phan[loai_c] += 1
+        if loai_c == "TL":
+            so_suat_tl += so_suat_tu_luan(cau.get("generator_id"))
 
     theo_phan = {}
     diem_toi_da_tong = 0.0
@@ -111,6 +119,7 @@ def tinh_thang_diem(danh_sach_dap_an: list[dict]) -> dict:
             theo_phan[loai] = {
                 "ten": ten_phan.get(loai, loai),
                 "so_cau": 0,
+                "so_suat": 0,
                 "diem_phan": 0.0,
                 "diem_moi_cau": 0.0,
                 "diem_moi_cau_goc": 0.0,
@@ -118,10 +127,13 @@ def tinh_thang_diem(danh_sach_dap_an: list[dict]) -> dict:
             }
             continue
 
-        diem_moi_cau_goc = diem_phan / so_cau
+        # TL: "diem_moi_cau" la diem MOT SUAT (cau thuong = 1 suat)
+        so_chia = so_suat_tl if loai == "TL" else so_cau
+        diem_moi_cau_goc = diem_phan / so_chia
         theo_phan[loai] = {
             "ten": ten_phan.get(loai, loai),
             "so_cau": so_cau,
+            "so_suat": so_chia,
             "diem_phan": diem_phan,
             "diem_moi_cau": round(diem_moi_cau_goc, lam_tron),
             "diem_moi_cau_goc": diem_moi_cau_goc,
@@ -148,6 +160,15 @@ def tinh_thang_diem(danh_sach_dap_an: list[dict]) -> dict:
 def diem_toi_da_cua_cau(thang: dict, loai: str) -> float:
     """Diem toi da cua 1 cau (da lam tron, dung de HIEN THI)."""
     return thang["theo_phan"].get(loai, {}).get("diem_moi_cau", 0.0)
+
+
+def diem_toi_da_cua_cau_theo_id(thang: dict, loai: str, generator_id: str | None) -> float:
+    """Diem toi da cua MOT cau cu the (da lam tron). Khac diem_toi_da_cua_cau o
+    cau tu luan nhieu don vi kien thuc: cau do chiem so_suat_tu_luan() suat."""
+    if loai != "TL":
+        return diem_toi_da_cua_cau(thang, loai)
+    goc = diem_toi_da_cua_cau_goc(thang, "TL") * so_suat_tu_luan(generator_id)
+    return round(goc, thang.get("lam_tron", 2))
 
 
 def diem_toi_da_cua_cau_goc(thang: dict, loai: str) -> float:
@@ -179,6 +200,12 @@ def mo_ta_thang_diem(thang: dict) -> str:
     for loai in CAC_LOAI_CAU:
         tp = thang["theo_phan"][loai]
         if tp["so_cau"] == 0:
+            continue
+        if tp.get("so_suat", tp["so_cau"]) != tp["so_cau"]:
+            phan.append(
+                f"{tp['ten']} {so_dep(tp['diem_phan'])}đ "
+                f"({tp['so_cau']} câu, {tp['so_suat']} ý × {so_dep(tp['diem_moi_cau'])}đ)"
+            )
             continue
         phan.append(
             f"{tp['ten']} {so_dep(tp['diem_phan'])}đ "

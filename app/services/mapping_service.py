@@ -18,6 +18,31 @@ def _extract_muc_do(generator_id: str) -> str | None:
     return match.group(1) if match else None
 
 
+# Ngoai le 3 (doc 04): cau TU LUAN hai y thuoc HAI don vi kien thuc cua cung mot
+# chuong. ID ghi ca hai don vi theo thu tu y a) -> y b), khong ghi bai (nhu TF):
+#     L10_C3_TH031_TH032_TL_A   (y a: TH031 o Bai 5, y b: TH032 o Bai 6)
+# Ma tran tinh theo TUNG Y: moi y la mot "suat" o dung muc do + don vi cua no.
+TL_NHIEU_Y_PATTERN = re.compile(
+    r"^L(\d+)_C(\d+)_((?:NB|TH|VD|VDC)\d+(?:_(?:NB|TH|VD|VDC)\d+)+)_TL_[A-Z]+(?:_\d{2})?$")
+_MOT_Y = re.compile(r"(NB|TH|VD|VDC)(\d+)")
+
+
+def cac_y_tu_luan(generator_id: str | None) -> list[tuple[str, str]] | None:
+    """Cau tu luan nhieu y -> [(muc_do, so don vi), ...] theo thu tu y; cau khac -> None.
+    VD: L10_C3_TH031_TH032_TL_A -> [("TH", "031"), ("TH", "032")]."""
+    m = TL_NHIEU_Y_PATTERN.match(generator_id or "")
+    if not m:
+        return None
+    return _MOT_Y.findall(m.group(3))
+
+
+def so_suat_tu_luan(generator_id: str | None) -> int:
+    """So suat (y) mot cau tu luan chiem trong ma tran / thang diem: cau nhieu
+    don vi = so don vi, cau thuong = 1."""
+    y = cac_y_tu_luan(generator_id)
+    return len(y) if y else 1
+
+
 def load_mapping(lop: int, chuong_so: int) -> list[dict]:
     file = MAPPING_DIR / f"toan{lop}" / f"L{lop}_C{chuong_so}.json"
     if not file.exists():

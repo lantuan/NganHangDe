@@ -139,6 +139,108 @@ def _thay_don_vi_khac(curriculum_id: str, loai_cau: str, mapping: list[dict],
     return cid, theo_cid[cid]
 
 
+def _bai_cua(curriculum_id: str) -> str:
+    """L10_C3_B5_TH031 -> L10_C3_B5."""
+    m = re.match(r"^(L\d+_C\d+_B\d+)_", curriculum_id)
+    return m.group(1) if m else curriculum_id
+
+
+def _tach_suat_tu_luan(items: list[dict]) -> list[dict]:
+    """Mỗi mục tu_luan của Blueprint -> các SUẤT (1 suất = 1 ý ở 1 mức độ)."""
+    suat = []
+    for it in items:
+        n = it.get("tong_so_cau", 1)
+        if n <= 0:
+            continue
+        if it.get("muc_do") == "VD" and "so_cau_VDC" in it:
+            cac_muc = ["VD"] * it.get("so_cau_VD", n - it["so_cau_VDC"]) + ["VDC"] * it["so_cau_VDC"]
+        else:
+            cac_muc = [it.get("muc_do")] * n
+        chuong = it.get("chuong_so") or _chuong_tu_curriculum_id(it["curriculum_id"])
+        for md in cac_muc:
+            suat.append({"item": it, "muc_do": md, "chuong_so": chuong,
+                         "curriculum_id": it["curriculum_id"]})
+    return suat
+
+
+def _ghep_tu_luan_nhieu_y(items: list[dict], mapping_chuong, pham_vi_bai,
+                          da_dung_id: set, mo_ta_da_dung: set,
+                          dem_don_vi: Counter) -> tuple[list[dict], list[dict]]:
+    """Ngoại lệ 3 (doc 04): câu tự luận NHIỀU Ý thuộc nhiều đơn vị kiến thức
+    (L10_C3_TH031_TH032_TL_A). Ma trận tính theo TỪNG Ý: câu này chiếm một suất
+    tự luận cho mỗi ý, ở ĐÚNG mức độ của ý đó (cô Lan 30/09/2026).
+
+    Ghép các suất tự luận của Blueprint (cùng chương, đúng mức độ) vào các câu
+    nhiều ý có trong Mapping; ưu tiên câu chưa dùng, có đơn vị kiến thức đang
+    được dùng ít nhất trong đề (tránh trùng với câu MC / SA). Hai đơn vị của câu
+    phải nằm trong phạm vi bài của đề. Trả về (các mục tu_luan còn lại, các câu
+    đã chọn).
+    """
+    suat = _tach_suat_tu_luan(items)
+    if not suat:
+        return items, []
+    bai_trong_de = set(pham_vi_bai) if pham_vi_bai else None
+    da_lay = [False] * len(suat)
+    chon = []
+    for chuong in sorted({s_["chuong_so"] for s_ in suat}):
+        rows = [r for r in mapping_chuong(chuong)
+                if phan_loai_cau(r) == "tu_luan" and r.get("cac_y")]
+        rows = [r for r in rows if bai_trong_de is None
+                or all(_bai_cua(y["curriculum_id"]) in bai_trong_de for y in r["cac_y"])]
+        random.shuffle(rows)
+        rows.sort(key=lambda r: (r["id"] in da_dung_id, _khoa_mo_ta(r) in mo_ta_da_dung,
+                                 sum(dem_don_vi[_don_vi(y["curriculum_id"])] for y in r["cac_y"])))
+        for r in rows:
+            if r["id"] in da_dung_id:
+                continue
+            lay = []
+            for y in r["cac_y"]:
+                ung = [i for i, s_ in enumerate(suat) if not da_lay[i] and i not in lay
+                       and s_["chuong_so"] == chuong and s_["muc_do"] == y["muc_do"]]
+                if not ung:
+                    break
+                ung.sort(key=lambda i: suat[i]["curriculum_id"] != y["curriculum_id"])
+                lay.append(ung[0])
+            if len(lay) != len(r["cac_y"]):
+                continue
+            for i, y in zip(lay, r["cac_y"]):
+                da_lay[i] = True
+                dem_don_vi[_don_vi(suat[i]["curriculum_id"])] -= 1
+                dem_don_vi[_don_vi(y["curriculum_id"])] += 1
+            da_dung_id.add(r["id"])
+            _DEM_DANG.setdefault(id(da_dung_id), Counter())[r["id"]] += 1
+            mo_ta_da_dung.add(_khoa_mo_ta(r))
+            chon.append({
+                "generator_id": r["id"],
+                "chuong_so": chuong,
+                "curriculum_id": r["cac_y"][0]["curriculum_id"],
+                "cac_curriculum_id": [y["curriculum_id"] for y in r["cac_y"]],
+                "loai_cau": "tu_luan",
+                "muc_do": r["cac_y"][0]["muc_do"],
+                "cac_muc_do": [y["muc_do"] for y in r["cac_y"]],
+                "so_suat": len(r["cac_y"]),
+                "loai": r.get("Loai"),
+                "dang": r.get("Dang"),
+            })
+    if not chon:
+        return items, []
+    # dựng lại các mục tu_luan còn lại từ các suất chưa lấy
+    con = {}
+    for i, s_ in enumerate(suat):
+        if da_lay[i]:
+            continue
+        con.setdefault(id(s_["item"]), (s_["item"], []))[1].append(s_["muc_do"])
+    con_lai = []
+    for it, cac_muc in con.values():
+        moi = dict(it)
+        moi["tong_so_cau"] = len(cac_muc)
+        if "so_cau_VDC" in it:
+            moi["so_cau_VD"] = cac_muc.count("VD")
+            moi["so_cau_VDC"] = cac_muc.count("VDC")
+        con_lai.append(moi)
+    return con_lai, chon
+
+
 def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str | None,
                      ghi_chu: str, thieu_o: str = "mapping", ma_thieu: str | None = None) -> dict:
     """
@@ -229,8 +331,17 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
             })
 
     # ---- MC / SA / TL — theo curriculum_id ----
+    # Tự luận: ghép trước các suất vào câu nhiều ý (Ngoại lệ 3, doc 04). Làm SAU
+    # khi MC, SA đã chọn thì mới biết đơn vị nào đã dùng - nên chỉ tách ra ở đây,
+    # ghép ngay trước lượt tu_luan bên dưới.
     for loai_cau in ("trac_nghiem", "tra_loi_ngan", "tu_luan"):
-        for item in blueprint.get(loai_cau, []):
+        cac_muc = blueprint.get(loai_cau, [])
+        if loai_cau == "tu_luan":
+            cac_muc, cau_nhieu_y = _ghep_tu_luan_nhieu_y(
+                cac_muc, _mapping_chuong, blueprint.get("pham_vi_bai"),
+                da_dung[loai_cau], mo_ta_da_dung, dem_don_vi)
+            ket_qua.extend(cau_nhieu_y)
+        for item in cac_muc:
             curriculum_id = item["curriculum_id"]
             so_luong = item.get("tong_so_cau", 1)
             if so_luong <= 0:

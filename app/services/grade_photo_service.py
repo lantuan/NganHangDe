@@ -64,7 +64,6 @@ def cham_bai_bang_anh(
     diem_mc = diem_service.diem_toi_da_cua_cau(thang, "MC")
     diem_sa = diem_service.diem_toi_da_cua_cau(thang, "SA")
     diem_tf = diem_service.diem_toi_da_cua_cau(thang, "TF")
-    diem_tl = diem_service.diem_toi_da_cua_cau(thang, "TL")
 
     mc_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "MC"]
     sa_list = [c for c in danh_sach_dap_an if diem_service.loai_cau_chuan(c) == "SA"]
@@ -158,7 +157,7 @@ def cham_bai_bang_anh(
             danh_sach_cau_tl.append({
                 "question_id": generator_id,
                 "bai": bai_so,
-                "diem_toi_da": diem_tl,
+                "diem_toi_da": diem_service.diem_toi_da_cua_cau_theo_id(thang, "TL", generator_id),
                 "dap_an_mau": cau.get("loi_giai") or "",
                 "chuong": chuong,
             })
@@ -178,7 +177,7 @@ def cham_bai_bang_anh(
                     "question_id": generator_id,
                     "loai_cau": "TL",
                     "dung_sai_hoac_diem": None,
-                    "diem_toi_da": diem_tl,
+                    "diem_toi_da": diem_service.diem_toi_da_cua_cau_theo_id(thang, "TL", generator_id),
                     "nhan_xet": "CHV_Grader khong tra ve ket qua cho cau nay.",
                     "chuong": chuong,
                     "bai": bai_so,

@@ -126,6 +126,40 @@ curriculum_id không đổi, không thêm hậu tố VDC.
 
 ---
 
+# Ngoại lệ 3: Câu Tự luận nhiều ý thuộc nhiều đơn vị kiến thức
+
+Chốt 30/09/2026 (cô Lan): câu tự luận phải hỏi về HAI đơn vị kiến thức khác
+nhau của cùng một chương, và ID phải thể hiện rõ hai đơn vị đó, để ma trận tính
+đúng % mức độ và để tránh trùng với câu trắc nghiệm, trả lời ngắn.
+
+ID (theo chương như câu TF, không ghi bài; đơn vị viết theo thứ tự ý a → ý b):
+
+L<khối>_C<chương>_<ý a>_<ý b>_TL_<phiên bản>
+
+Ví dụ
+
+L10_C3_TH031_TH032_TL_A   ý a) TH031 (Bài 5), ý b) TH032 (Bài 6)
+L10_C1_NB017_TH018_TL_A   ý a) NB017, ý b) TH018 (mức khác nhau)
+
+Dòng Mapping có thêm trường cac_y:
+
+"cac_y": [{"y": "a", "curriculum_id": "L10_C3_B5_TH031", "muc_do": "TH"},
+          {"y": "b", "curriculum_id": "L10_C3_B6_TH032", "muc_do": "TH"}]
+
+content = content các yêu cầu cần đạt nối bằng " | ".
+
+Ma trận tính theo TỪNG Ý (như câu TF): mỗi ý chiếm một suất tự luận ở đúng
+mức độ và đơn vị của nó. CN_QuestionSelector ghép các suất tự luận của Blueprint
+(cùng chương, đúng mức độ) vào câu nhiều ý trước, suất còn thừa mới dùng câu tự
+luận thường. Cả hai đơn vị phải nằm trong phạm vi bài của đề. Điểm phần Tự luận
+chia theo suất (diem_service: câu hai ý = hai suất).
+
+Mã nguồn: mapping_service.cac_y_tu_luan / so_suat_tu_luan,
+question_selector_service._ghep_tu_luan_nhieu_y. Kiểm thử:
+tests/test_tu_luan_nhieu_y.py, tests/test_mapping_curriculum.py.
+
+---
+
 # PPCT
 
 Dùng ID dạng L10_C1_B2. Không cần mức độ, không cần loại câu.
