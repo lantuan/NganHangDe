@@ -7,10 +7,9 @@ Chuyển nguyên từ data/python_bank/toan10/L10_C1.py (cùng hằng số bối
 
     L10_C1_B2_VD020_MC_A_03   số người dùng ít nhất một trong ba ứng dụng
     L10_C1_B2_VD020_SA_A_02   ba câu lạc bộ, biết số tham gia đúng hai -> cả ba
-    L10_C1_B2_TH019_TL_A_01   biểu đồ Ven ba tập hợp, chỉ thích một môn
 
-Dòng Mapping cũ đã gỡ khỏi data/mapping/toan10/L10_C1.json:
-    {"id": "L10_C1_B2_TH019_TL_A", "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.", "Loai": "Tự luận", "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"}
+(TH019_TL_A_01 - biểu đồ Ven ba tập hợp - cô Lan cho GIỮ LẠI trong ngân hàng, đã trả về L10_C1.)
+Trong ngân hàng, VD020_MC_A_03 và VD020_SA_A_02 đã viết lại thành HAI tập hợp.
 
 CHƯA nối vào hệ thống (không có Mapping trỏ tới). Khi làm ngân hàng chuyên đề thì
 đổi tên hàm theo ID của chuyên đề và thêm dòng Mapping tương ứng.
@@ -40,68 +39,6 @@ def _ba_nhieu(dung, ung_vien, buoc=None):
             ds.append(v)
         k += 1
     return ds
-
-
-def L10_C1_B2_TH019_TL_A_01(socau, dong=1):
-    gt = []
-    dem = len(gt)
-    while dem < socau:
-        # Giả lập các số học sinh
-        x = np.random.randint(25, 35)  # Bóng đá
-        y = np.random.randint(20, 30)  # Bóng bàn
-        z = np.random.randint(15, 25)  # Cầu lông
-        abc = np.random.randint(3, 8)
-        ab = np.random.randint(abc + 5, abc + 12)
-        bc = np.random.randint(abc + 3, abc + 8)
-        ac = np.random.randint(abc + 3, abc + 8)
-
-        # Số học sinh chỉ thích 1 môn
-        m = x - (ab - abc) - (ac - abc) - abc
-        n = y - (ab - abc) - (bc - abc) - abc
-        p = z - (ac - abc) - (bc - abc) - abc
-
-        if ab < x and ab < y and bc < y and bc < z and ac < x and ac < z and m > 0 and n > 0 and p > 0:
-            v = (x, y, z, ab, bc, ac, abc, m, n, p)
-            if v not in gt:
-                gt.append(v)
-                dem += 1
-
-    cauTL = ''
-    for v in gt:
-        x, y, z, ab, bc, ac, abc, m, n, p = v
-
-        debai = f"Câu lạc bộ thể thao có {x} học sinh yêu thích bóng đá, {y} học sinh yêu thích bóng bàn, {z} học sinh yêu thích cầu lông. Có {ab} học sinh thích cả bóng đá và bóng bàn, {bc} học sinh thích cả bóng bàn và cầu lông, {ac} học sinh thích cả bóng đá và cầu lông, và {abc} học sinh thích cả ba môn."
-
-        # Code TikZ cho biểu đồ Venn 3 tập hợp
-        tikz_venn = f"""
-        \\begin{{tikzpicture}}
-            \\def\\firstcircle{{(0,0) circle (1.5cm)}}
-            \\def\\secondcircle{{(60:2cm) circle (1.5cm)}}
-            \\def\\thirdcircle{{(0:2cm) circle (1.5cm)}}
-            \\draw \\firstcircle node[below left] {{BĐ}};
-            \\draw \\secondcircle node[above] {{BB}};
-            \\draw \\thirdcircle node[below right] {{CL}};
-            \\node at (1,0.6) {{{abc}}}; 
-            \\node at (-0.3,0.3) {{{m}}};
-            \\node at (2.3,0.3) {{{p}}};
-            \\node at (1,1.5) {{{n}}};
-        \\end{{tikzpicture}}"""
-
-        hoi_a = f"Vẽ biểu đồ Venn biểu diễn các tập hợp trên."
-        giai_a = f"Biểu đồ Venn được vẽ bằng TikZ như sau: \\n {tikz_venn}"
-
-        hoi_b = f"Tính tổng số học sinh chỉ thích duy nhất một môn."
-        dap_b = m + n + p
-        giai_b = f"Tổng số học sinh chỉ thích một môn là: $S = {m} + {n} + {p} = {dap_b}$."
-
-        ds_abcd = [
-            (hoi_a, "\\text{Hình vẽ}", giai_a),
-            (hoi_b, dap_b, giai_b)
-        ]
-
-        cauTL += TL_answer_text(debai, ds_abcd, 0, 0, dong)
-
-    return cauTL
 
 
 _BOI_CANH_BA_MON = [("Có", "học sinh giỏi", "em", ("Văn", "Toán", "Anh"), "giỏi"),

@@ -351,5 +351,11 @@
     "Loai": "Tự luận",
     "Dang": "Lập mệnh đề phủ định của mệnh đề chứa ∀, ∃ và xét tính đúng sai",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_TH019_TL_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Tự luận",
+    "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
   }
 ]

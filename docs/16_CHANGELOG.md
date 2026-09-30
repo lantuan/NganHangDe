@@ -9363,3 +9363,17 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   tep chuyen de). data/chuyen_de_hoc_tap/README.md.
 - Kho _BOI_CANH_HAI_TAP them boi canh "mon_hoc" cho lop: thich hoc Toan/Ngu van,
   Vat li/Hoa hoc, Sinh hoc/Dia li, Lich su/Tieng Anh, Tin hoc/Cong nghe, Toan/Vat li.
+
+# Version 3.66 - 2026-09-30
+
+## Hai tap hop: bo bot mot tap (khong chuyen di), chon dap an truoc, noi dung hoi ngau nhien
+
+- Theo co Lan: VD020_MC_A_03, VD020_SA_A_02 viet lai thanh HAI tap hop (ban ba tap van de
+  danh o data/chuyen_de_hoc_tap); TH019_TL_A_01 (bieu do Ven ba tap, tu luan) tra lai ngan
+  hang nguyen ban, khoi phuc dong Mapping.
+- Kho boi canh them: thoi tiet (dai khi tuong thuy van Gia Lai: mua, gio manh, suong mu, lanh),
+  CLB Am nhac/Hoi hoa/Tin hoc, Facebook/TikTok, Zalo/TikTok, diem Toan/Tieng Anh,
+  bong da/boi loi.
+- _vung_hai_tap: chon truoc so phan tu tung vung theo ti le boi canh roi suy ra du kien.
+  _hoi_hai_tap / _cau_hai_tap: moi cau chon ngau nhien noi dung hoi (ca hai, khong thuoc
+  nao, it nhat mot, chi A, chi B). Ap dung cho VD020_SA_A_01/_02/_03, VD020_MC_A_01/_03/_04.

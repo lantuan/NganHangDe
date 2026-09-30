@@ -215,5 +215,13 @@ nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câ
   (A, B, động từ, động từ phủ định, loại), tỉ lệ tA, tB, giao; mo_an + hoi_tong nếu
   dùng được cho câu hỏi tổng số).
 - **Chỉ HAI tập hợp** (cô Lan 30/09/2026): SGK dừng bài toán thực tế ở hai tập hợp.
-  Các câu ba tập hợp chuyển sang `data/chuyen_de_hoc_tap/ba_tap_hop_L10_C1.py` để
-  dành cho ngân hàng chuyên đề học tập.
+  Câu ba tập hợp (MC_A_03, SA_A_02) đã bỏ bớt một tập cho thành hai tập; bản ba
+  tập để dành ở `data/chuyen_de_hoc_tap/ba_tap_hop_L10_C1.py`. Riêng câu tự luận
+  biểu đồ Ven ba tập TH019_TL_A_01 giữ nguyên trong ngân hàng.
+- **Chọn đáp án trước** (`_vung_hai_tap`): chọn số phần tử từng vùng (chỉ A, chỉ B,
+  cả hai, không thuộc tập nào) theo tỉ lệ của bối cảnh, rồi mới suy ra dữ kiện -
+  đề không bao giờ vô lí.
+- **Nội dung hỏi ngẫu nhiên** (`_hoi_hai_tap`, `_cau_hai_tap`): mỗi câu chọn ngẫu
+  nhiên hỏi cả hai / không thuộc tập nào / ít nhất một / chỉ A / chỉ B (mỗi biến thể
+  có một nhóm nội dung hỏi riêng); câu "cả hai" có thể cho "mỗi người đều thuộc ít
+  nhất một tập".

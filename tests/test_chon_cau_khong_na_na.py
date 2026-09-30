@@ -138,7 +138,8 @@ def test_tam_cau_hai_tap_trong_mot_de_la_tam_boi_canh_khac_nhau():
     from toan10 import L10_C1 as M
     ham = [M.L10_C1_B2_VD020_TL_A_01, M.L10_C1_B2_VD020_TL_A_02, M.L10_C1_B2_VD020_SA_A_01,
            M.L10_C1_B2_VD020_SA_A_03, M.L10_C1_B2_VD020_MC_A_01, M.L10_C1_B2_VD020_MC_A_02,
-           M.L10_C1_B2_VD020_MC_A_04, M.L10_C1_B2_VD020_TL_A_01]
+           M.L10_C1_B2_VD020_MC_A_04, M.L10_C1_B2_VD020_TL_A_01, M.L10_C1_B2_VD020_MC_A_03,
+           M.L10_C1_B2_VD020_SA_A_02]
     for sd in range(20):
         random.seed(sd)
         s = set()
