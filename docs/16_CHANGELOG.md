@@ -9513,3 +9513,16 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   (hoi ngau nhien AC hoac huong), TL_D_03 (a AC, b huong). Bai goc dong 15 km, E30S 20 km:
   AC ~ 34 km, huong E17S. Phuong dau, huong doi, quang duong ngau nhien.
 - So lieu chon truoc (_bo_suon_doi, _bo_tau_doi_huong): dap so khong sat ranh gioi lam tron.
+
+# Version 3.78 - 2026-09-30
+
+## Danh dau dang van dung cao ("muc_do_dang": "VDC"); bai khinh khi cau tren suon doi
+
+- Mapping: truong "muc_do_dang": "VDC" cho dang van dung cao (ID van mang VD - Ngoai le 2).
+  question_selector_service._chon_theo_muc_vdc: muc VD co so_cau_VDC > 0 (MC, SA) lay
+  suat VDC trong dang VDC truoc, suat VD trong dang con lai; moi cau co "muc_do_cau".
+- VD036 (VDC): hai nguoi o P, Q tren suon doi nghieng s do cung nhin khinh khi cau O
+  (goc a tai P, b tai Q, PQ = d): MC_F_01, SA_H_01 (khoang cach tu P hoac Q, ngau nhien),
+  TL_G_01 (a goc tam giac OPQ - tien de, b khoang cach). Bai goc 32, 62, 71 do, 50 m:
+  OP ~ 201 m, OQ ~ 160 m. Ba dong Mapping cung mo ta "Dang".
+- Test: tests/test_dang_vdc.py.

@@ -8402,3 +8402,146 @@ def L10_C3_B6_VD036_TL_D_03(socau, dong=1):
                _giai_tau_huong(X, Y, th, d2, AC, phi))]
         cau += TL_answer_text(_de_tau(X, Y, th, d1, d2), ds, 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# VD036 - VẬN DỤNG CAO (cô Lan 30/09/2026): hai người quan sát P, Q trên sườn đồi
+# nghiêng s độ, cùng nhìn khinh khí cầu O dưới các góc a (tại P), b (tại Q) so với
+# phương nằm ngang, PQ = d m dọc sườn đồi. Hỏi khoảng cách từ P (hoặc Q) tới O.
+#   OPQ = a - s, OQP = 180 - (b - s), POQ = b - a; định lí sin.
+# Mapping đánh dấu "muc_do_dang": "VDC" - bộ chọn câu dùng cho suất VDC trước.
+# MC_F_01, SA_H_01, TL_G_01 cùng mô tả dạng -> không ra hai câu cùng bối cảnh
+# trong một đề (trừ khi không còn dạng nào khác).
+# =====================================================================
+
+def _bo_khinh_khi_cau():
+    """(s, a, b, d, OP, OQ) chọn trước: góc hợp lí, khoảng cách không quá xa, đáp số
+    không sát ranh giới làm tròn."""
+    while True:
+        s = random.randint(15, 35)
+        a = random.randint(s + 15, 75)
+        b = a + random.randint(6, 15)
+        if b > 85:
+            continue
+        d = random.choice([30, 40, 50, 60, 80, 100])
+        O = b - a
+        OP = d * _sin_d(180 - b + s) / _sin_d(O)
+        OQ = d * _sin_d(a - s) / _sin_d(O)
+        if not (40 <= OQ <= 800 and 40 <= OP <= 800) or not _xa_bien(OP) or not _xa_bien(OQ):
+            continue
+        return s, a, b, d, OP, OQ
+
+
+def _hinh_khinh_khi_cau(s, d):
+    """Hình minh hoạ (không đúng tỉ lệ): sườn đồi nghiêng s độ, P, Q trên sườn, khinh khí cầu O."""
+    t = math.tan(math.radians(s))
+    Bx = 3.0
+    P, Q = (1.0, 1.0 * t), (2.3, 2.3 * t)
+    return (
+        "\\begin{tikzpicture}[scale=1.2,font=\\footnotesize]\n"
+        "\\fill[black!15] (0,0) -- (%.2f,%.2f) -- (%.2f,0) -- cycle;\n" % (Bx, Bx * t, Bx)
+        + "\\draw[very thick] (-0.8,0) -- (%.2f,0);\n" % (Bx + 0.3)
+        + "\\draw[thick] (0,0) -- (%.2f,%.2f);\n" % (Bx, Bx * t)
+        + "\\coordinate (O) at (2.6,3.3);\n\\coordinate (P) at (%.2f,%.2f);\n\\coordinate (Q) at (%.2f,%.2f);\n"
+        % (P + Q)
+        + "\\draw[dashed] (P) -- (O) (Q) -- (O);\n"
+        "\\draw (0.6,0) arc (0:%.1f:0.6);\n\\node at (%.1f:0.9) {$%d^{\\circ}$};\n" % (s, s / 2, s)
+        + "\\node[below right] at (%.2f,%.2f) {$%d$ m};\n" % ((P[0] + Q[0]) / 2, (P[1] + Q[1]) / 2, d)
+        + "\\fill (P) circle (0.04) node[above left] {$P$};\n"
+        "\\fill (Q) circle (0.04) node[above left] {$Q$};\n"
+        "\\fill[yellow!80!orange] (2.6,3.62) circle (0.25);\n"
+        "\\draw (2.6,3.62) circle (0.25);\n"
+        "\\draw (2.38,3.5) -- (2.52,3.3) (2.82,3.5) -- (2.68,3.3);\n"
+        "\\fill[brown] (2.52,3.2) rectangle (2.68,3.3);\n"
+        "\\node[right] at (2.9,3.4) {$O$};\n"
+        "\\end{tikzpicture}"
+    )
+
+
+def _de_khinh_khi_cau(s, a, b, d):
+    return (r"Hai người quan sát tại $P$ và $Q$ đứng trên sườn của một ngọn đồi có độ nghiêng $%s$ so với mặt "
+            r"phẳng ngang, như hình. Người quan sát tại $P$ nhìn một chiếc khinh khí cầu (điểm $O$) dưới một góc "
+            r"$%s$ so với phương nằm ngang. Cùng lúc đó, người quan sát tại $Q$ nhìn khinh khí cầu này dưới một "
+            r"góc $%s$ so với phương nằm ngang. Biết rằng $P$ và $Q$ cách nhau $%d\,\text{m}$ dọc theo sườn đồi."
+            % (_goc(s), _goc(a), _goc(b), d))
+
+
+def _giai_goc_khinh_khi_cau(s, a, b):
+    return (r"Gọi $A$ là giao điểm của đường thẳng $PQ$ với đường nằm ngang, $P'$ là giao điểm của $OP$ với "
+            r"đường nằm ngang. Góc ngoài của tam giác $APP'$: $\widehat{OPQ} = %s - %s = %s$." % (
+                _goc(a), _goc(s), _goc(a - s)) + "\\\\\n" +
+            r"Tương tự, $\widehat{OQP} = 180^{\circ} - \left(%s - %s\right) = %s$." % (_goc(b), _goc(s), _goc(180 - b + s))
+            + "\\\\\n" + r"Do đó $\widehat{POQ} = 180^{\circ} - %s - %s = %s$." % (_goc(a - s), _goc(180 - b + s), _goc(b - a)))
+
+
+def _giai_kc_khinh_khi_cau(tu, s, a, b, d, kc):
+    if tu == "P":
+        return (r"Định lí sin trong tam giác $OPQ$: $OP = \dfrac{PQ\cdot\sin\widehat{OQP}}{\sin\widehat{POQ}} = "
+                r"\dfrac{%d\cdot\sin %s}{\sin %s} \approx %s\,\text{m}$." % (d, _goc(180 - b + s), _goc(b - a), _xx(kc, 2)))
+    return (r"Định lí sin trong tam giác $OPQ$: $OQ = \dfrac{PQ\cdot\sin\widehat{OPQ}}{\sin\widehat{POQ}} = "
+            r"\dfrac{%d\cdot\sin %s}{\sin %s} \approx %s\,\text{m}$." % (d, _goc(a - s), _goc(b - a), _xx(kc, 2)))
+
+
+def L10_C3_B6_VD036_MC_F_01(socau, dang=1):
+    r"""VẬN DỤNG CAO - khinh khí cầu nhìn từ hai điểm $P$, $Q$ trên sườn đồi nghiêng: tính
+    khoảng cách từ $P$ (hoặc $Q$, chọn ngẫu nhiên) tới khinh khí cầu (có hình).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo de co Lan gui (32, 62, 71 do, 50 m -> OP ~ 201 m).
+    So lieu chon truoc. Mapping danh dau muc_do_dang VDC. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        s, a, b, d, OP, OQ = _bo_khinh_khi_cau()
+        tu = random.choice("PQ")
+        kc, kia = (OP, OQ) if tu == "P" else (OQ, OP)
+        dap = str(_lt(kc))
+        sai_Q = d * _sin_d(b - s) / _sin_d(b - a)          # quên lấy góc bù tại Q
+        nhieu = _ba_nhieu(dap, [str(_lt(kia)), str(_lt(sai_Q)), str(_lt(d * _sin_d(a) / _sin_d(b - a)))],
+                          buoc=lambda t: str(_lt(kc) + 5 * t))
+        debai = (_de_khinh_khi_cau(s, a, b, d) + r" Khoảng cách từ $%s$ đến khinh khí cầu (đơn vị mét, làm tròn "
+                 r"đến hàng đơn vị) là" % tu)
+        giai = (_giai_goc_khinh_khi_cau(s, a, b) + "\\\\\n" + _giai_kc_khinh_khi_cau(tu, s, a, b, d, kc))
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, _hinh_khinh_khi_cau(s, d), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_H_01(socau, dang=2):
+    r"""Trả lời ngắn - VẬN DỤNG CAO: khinh khí cầu nhìn từ hai điểm trên sườn đồi nghiêng;
+    tính khoảng cách từ $P$ (hoặc $Q$) tới khinh khí cầu (có hình).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo de co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        s, a, b, d, OP, OQ = _bo_khinh_khi_cau()
+        tu = random.choice("PQ")
+        kc = OP if tu == "P" else OQ
+        dap = str(_lt(kc))
+        debai = (_de_khinh_khi_cau(s, a, b, d) + r" Tính khoảng cách từ $%s$ đến khinh khí cầu (đơn vị mét, làm "
+                 r"tròn đến hàng đơn vị)." % tu)
+        giai = _giai_goc_khinh_khi_cau(s, a, b) + "\\\\\n" + _giai_kc_khinh_khi_cau(tu, s, a, b, d, kc)
+        cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai,
+                                  _hinh_khinh_khi_cau(s, d), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_TL_G_01(socau, dong=1):
+    r"""Tự luận - khinh khí cầu nhìn từ hai điểm trên sườn đồi nghiêng (có hình).
+    a) (VD, tiền đề) Tính số đo các góc của tam giác $OPQ$.
+    b) (VDC) Tính khoảng cách từ $P$ (hoặc $Q$) đến khinh khí cầu (hàng đơn vị).
+
+    CLAUDE THEM 30/09/2026 - dang moi theo de co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        s, a, b, d, OP, OQ = _bo_khinh_khi_cau()
+        tu = random.choice("PQ")
+        kc = OP if tu == "P" else OQ
+        ds = [(r"Tính số đo các góc của tam giác $OPQ$.",
+               r"\widehat{OPQ} = %s,\ \widehat{OQP} = %s,\ \widehat{POQ} = %s" % (_goc(a - s), _goc(180 - b + s), _goc(b - a)),
+               _giai_goc_khinh_khi_cau(s, a, b)),
+              (r"Tính khoảng cách từ $%s$ đến khinh khí cầu (đơn vị mét, làm tròn đến hàng đơn vị)." % tu,
+               r"O%s \approx %d\,\text{m}" % (tu, _lt(kc)),
+               _giai_kc_khinh_khi_cau(tu, s, a, b, d, kc) + r" Vậy khoảng cách khoảng $%d\,\text{m}$." % _lt(kc))]
+        cau += TL_answer_text(_de_khinh_khi_cau(s, a, b, d), ds, _hinh_khinh_khi_cau(s, d), 0, dong)
+    return cau

@@ -139,6 +139,32 @@ def _thay_don_vi_khac(curriculum_id: str, loai_cau: str, mapping: list[dict],
     return cid, theo_cid[cid]
 
 
+def _la_dang_vdc(row: dict) -> bool:
+    """Dạng câu hỏi được đánh dấu mức VẬN DỤNG CAO trong Mapping ("muc_do_dang":
+    "VDC"). Curriculum chỉ có mức VD (Ngoại lệ 2, doc 04) nên ID vẫn mang VD;
+    trường này cho bộ chọn biết dạng nào dành cho suất VDC (cô Lan 30/09/2026)."""
+    return str(row.get("muc_do_dang", "")).upper() == "VDC"
+
+
+def _chon_theo_muc_vdc(candidates: list[dict], item: dict, so_luong: int, loai_cau: str,
+                       da_dung_id: set, mo_ta_da_dung: set) -> list[tuple[dict, str | None]]:
+    """Chọn so_luong dạng cho một mục Blueprint. Mục mức VD có so_cau_VDC > 0 (MC,
+    SA): chọn các suất VDC TRƯỚC trong các dạng đánh dấu VDC, rồi mới chọn suất VD
+    trong các dạng còn lại; nhóm nào không có dạng thì lấy chung. Trả về
+    [(dòng Mapping, "VD" | "VDC" | mức của mục)]."""
+    so_vdc = item.get("so_cau_VDC", 0) if item.get("muc_do") == "VD" and loai_cau != "tu_luan" else 0
+    so_vdc = min(so_vdc, so_luong)
+    if so_vdc <= 0:
+        return [(c, item.get("muc_do")) for c in
+                _xoay_vong_bien_the(candidates, so_luong, da_dung_id, mo_ta_da_dung)]
+    dang_vdc = [c for c in candidates if _la_dang_vdc(c)]
+    dang_vd = [c for c in candidates if not _la_dang_vdc(c)]
+    ra = [(c, "VDC") for c in _xoay_vong_bien_the(dang_vdc or candidates, so_vdc, da_dung_id, mo_ta_da_dung)]
+    ra += [(c, "VD") for c in _xoay_vong_bien_the(dang_vd or candidates, so_luong - so_vdc,
+                                                  da_dung_id, mo_ta_da_dung)]
+    return ra
+
+
 def _bai_cua(curriculum_id: str) -> str:
     """L10_C3_B5_TH031 -> L10_C3_B5."""
     m = re.match(r"^(L\d+_C\d+_B\d+)_", curriculum_id)
@@ -387,14 +413,16 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                     continue
                 raise SelectorError(ghi_chu)
 
-            chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung[loai_cau], mo_ta_da_dung)
-            for k, c in enumerate(chosen):
+            cac_lan = _chon_theo_muc_vdc(candidates, item, so_luong, loai_cau,
+                                         da_dung[loai_cau], mo_ta_da_dung)
+            for k, (c, muc_cau) in enumerate(cac_lan):
                 muc = {
                     "generator_id": c["id"],
                     "chuong_so": chuong_so,
                     "curriculum_id": curriculum_id,
                     "loai_cau": loai_cau,
                     "muc_do": item.get("muc_do"),
+                    "muc_do_cau": muc_cau,
                     "loai": c.get("Loai"),
                     "dang": c.get("Dang"),
                 }

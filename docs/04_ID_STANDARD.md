@@ -124,6 +124,20 @@ có thể phân bổ: tong_so_cau=3, so_cau_VD=2, so_cau_VDC=1.
 
 curriculum_id không đổi, không thêm hậu tố VDC.
 
+Đánh dấu DẠNG vận dụng cao (chốt 30/09/2026, cô Lan): ID dạng câu vẫn mang VD
+(vì Curriculum không có VDC), nhưng dòng Mapping ghi thêm
+
+"muc_do_dang": "VDC"
+
+Ví dụ L10_C3_B6_VD036_MC_F (khinh khí cầu nhìn từ sườn đồi). Khi một mục
+Blueprint mức VD có so_cau_VDC > 0 (MC, SA), CN_QuestionSelector lấy các suất
+VDC trong các dạng đánh dấu VDC TRƯỚC, rồi mới lấy suất VD trong các dạng còn
+lại; nhóm nào chưa có dạng thì lấy chung. Mỗi câu ra có "muc_do_cau" = VD/VDC.
+Câu tự luận mức VD luôn là ý a) VD + ý b) VDC nên không cần đánh dấu.
+
+Cùng một bối cảnh ra ở MC, SA, TL thì ghi CÙNG mô tả "Dang": bộ chọn câu tránh
+hai dạng cùng mô tả trong một đề, trừ khi không còn dạng nào khác.
+
 ---
 
 # Ngoại lệ 3: Câu Tự luận nhiều ý thuộc nhiều đơn vị kiến thức

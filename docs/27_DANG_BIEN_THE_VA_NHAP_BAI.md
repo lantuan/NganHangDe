@@ -244,3 +244,6 @@ nhiều lĩnh vực để đề không nhàm chán; **trong một đề các câ
 6. Mỗi câu tự luận gồm hai ý (hai suất trong ma trận). Mức VD mặc định ý a) VD,
    ý b) VDC. Ma trận mặc định: 3 câu tự luận = 6 ý (3 VD + 3 VDC). Thứ tự chọn
    câu: Đúng/Sai → Tự luận → Trắc nghiệm → Trả lời ngắn.
+7. Dạng vận dụng cao: ID vẫn mang VD, dòng Mapping ghi `"muc_do_dang": "VDC"`
+   (docs/04, Ngoại lệ 2). Suất VDC chọn dạng VDC trước, suất VD chọn dạng còn lại.
+   Cùng bối cảnh ở MC/SA/TL thì ghi cùng mô tả "Dang" để không ra chung một đề.
