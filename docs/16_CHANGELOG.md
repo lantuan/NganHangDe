@@ -9209,3 +9209,20 @@ _DAU_KT de khong de ten cu.
 - tests/test_hinh_phuong_an_len_web.py (moi).
 - Luu y: de DA TAO truoc ban nay van giu hinh cu (hinh luu theo de); tao de moi
   de thay hinh moi.
+
+# Version 3.56 - 2026-09-30
+
+## Word: so lieu thong ke khong con dinh nhau; PDF: phuong an trac nghiem het ".."
+
+- app/services/word_service.py: _khoang_trang_ngoai_toan - \quad, \qquad,
+  \enspace, \; \, o NGOAI cong thuc doi thanh khoang trang Unicode (pandoc 2.9
+  bo mat \quad o ngoai cong thuc -> mau "$5$\quad $8$\quad $9$" ra "589").
+  Trong cong thuc giu nguyen.
+- word_service: phuong an A-D them dau "." o cuoi giong goi ex_test tren PDF.
+- Goi ex_test TU THEM "." sau moi phuong an \choice. 21 ham trac nghiem co
+  phuong an la cau van tu cham cuoi -> PDF ra "..". Them _bo_cham_cuoi,
+  _MC_khong_cham (goi MC_SA_answer_text sau khi bo dau "." cuoi; math_type giu
+  nguyen) o L10_C1, L10_C4, L10_C5, L10_C6, L10_C8, L11_C2, L11_C3, L11_C4,
+  L11_C6, L11_C8.
+- tests/test_xuat_word.py: quad khong lam dinh so; quet moi ham _MC_ khong co
+  phuong an tu cham cuoi.

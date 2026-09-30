@@ -322,7 +322,7 @@ def L10_C1_B1_TH003_MC_A_01(socau, dang=1):
 
     for dsnhieu, dapso, debai, giai in gt:
 
-        cauTN += MC_SA_answer_text(
+        cauTN += _MC_khong_cham(
             debai,
             dapso,
             dsnhieu,
@@ -2609,7 +2609,7 @@ def L10_C1_B1_NB010_MC_A_02(socau, dang=1):
         Theo định nghĩa, mệnh đề đảo của mệnh đề $P \\Rightarrow Q$ là mệnh đề $Q \\Rightarrow P$, phát biểu dưới dạng: ``Nếu $Q$ thì $P$''.\\\\
         Do đó, mệnh đề đảo của mệnh đề trên là: ``{dapso[:-1]}''. """
 
-        cauTN += MC_SA_answer_text(debai, dapso, dsnhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dapso, dsnhieu, giai, 0, 0, dang)
 
     return cauTN
 
@@ -9710,3 +9710,23 @@ def L10_C1_B2_VD020_MC_A_03(socau, dang=1):
         nhieu = _ba_nhieu("$%d$" % hop, ["$%d$" % v for v in ung if v > 0], buoc=lambda k: "$%d$" % (hop + k + 1))
         cauTN += MC_SA_answer_text(debai, "$%d$" % hop, nhieu, giai, 0, 0, dang)
     return cauTN
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

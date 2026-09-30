@@ -207,7 +207,41 @@ def _lam_sach(text: str, thu_muc_anh: Path | None, anh: list) -> str:
     t = t.replace(r"\dotfill", "..........")
     t = re.sub(r"%%\[\?\]", "", t)
     t = _doi_danh_sach(t)
+    t = _khoang_trang_ngoai_toan(t)
     return t.strip()
+
+
+# Phan cong thuc: $..$, $$..$$, \(..\), \[..\] va cac moi truong toan hien thi.
+_DOAN_TOAN = re.compile(
+    r"(\$\$.*?\$\$|(?<!\\)\$.*?(?<!\\)\$|\\\(.*?\\\)|\\\[.*?\\\]"
+    r"|\\begin\{(align|equation|gather|eqnarray|multline)\*?\}.*?\\end\{\2\*?\})",
+    re.S)
+# Lenh cach chu NGOAI cong thuc -> ki tu cach Unicode (pandoc 2.9 bo mat
+# \quad o ngoai cong thuc, nen mau so lieu "$5$\quad $8$\quad $9$" bi dinh
+# thanh "589" trong Word - loi co Lan bao 30/09/2026 o bai thong ke).
+_CACH_CHU = (
+    (re.compile(r"(?<!\\)\\qquad(?![A-Za-z])\s*"), "\u2003\u2003"),
+    (re.compile(r"(?<!\\)\\quad(?![A-Za-z])\s*"), "\u2003"),
+    (re.compile(r"(?<!\\)\\enspace(?![A-Za-z])\s*"), "\u2002"),
+    (re.compile(r"(?<!\\)\\[;:>]\s*"), "\u2005"),
+    (re.compile(r"(?<!\\)\\,\s*"), "\u2009"),
+)
+
+
+def _khoang_trang_ngoai_toan(t: str) -> str:
+    r"""Doi \quad, \qquad, \enspace, \; \, o NGOAI cong thuc thanh khoang
+    trang Unicode; ben trong cong thuc giu nguyen (pandoc doi dung sang OMML)."""
+    manh = _DOAN_TOAN.split(t)
+    ra = []
+    # split voi 2 nhom bat: [chu, cong_thuc, ten_moi_truong, chu, cong_thuc, ...]
+    for i in range(0, len(manh), 3):
+        doan = manh[i]
+        for mau, thay in _CACH_CHU:
+            doan = mau.sub(thay, doan)
+        ra.append(doan)
+        if i + 1 < len(manh):
+            ra.append(manh[i + 1])
+    return "".join(ra)
 
 
 # ----------------------------------------------------------------------
@@ -290,6 +324,9 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list) -> s
         hinh_pa = c.get("hinh_phuong_an_tikz") or {}
         for k in "ABCD":
             noi = _lam_sach(c["phuong_an"][k], None, anh)
+            # goi ex_test tu them "." sau moi phuong an tren PDF -> Word lam giong
+            if noi and "\\includegraphics" not in noi and not noi.endswith((".", "?", "!", ":")):
+                noi += "."
             if hinh_pa.get(k):
                 noi += "\n\n" + _lam_sach(hinh_pa[k], None, anh)
             ra.append("\\textbf{%s.} %s" % (k, noi))

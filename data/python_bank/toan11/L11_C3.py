@@ -718,7 +718,7 @@ def L11_C3_B9_TH045_MC_A_01(socau, dang=1):
                 r"trung bình cho mức chung, trung vị cho vị trí giữa và "
                 r"không bị giá trị bất thường kéo lệch, còn mốt cho biết "
                 r"chỗ số liệu tập trung đông nhất.")
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -807,7 +807,7 @@ def L11_C3_B9_VD046_MC_A_01(socau, dang=1):
                 "\\\\\n"
                 r"Chú ý hai nhóm có cỡ mẫu khác nhau vẫn so sánh được, vì số "
                 r"trung bình đã chia cho cỡ mẫu của chính nhóm đó.")
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -1064,3 +1064,23 @@ def L11_C3_B9_VD046_SA_A_01(socau):
                             buoc=lambda t: _xx(lech + t))
         cau += MC_SA_answer_const(debai, _xx(lech), nhieu, giai, 0, 0, 2)
     return cau
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

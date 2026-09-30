@@ -167,7 +167,7 @@ def L10_C5_B12_NB062_MC_A_01(socau, dang=1):
                 r"``%s'' có được từ đo đạc/ước lượng nên là số gần đúng; còn "
                 r"số học sinh, số ngày trong tuần, số cạnh hình lập phương, "
                 r"số phút trong một giờ đều là số đúng." % GAN_DUNG[i])
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -1440,7 +1440,7 @@ def L10_C5_B14_NB085_MC_A_01(socau, dang=1):
                 r"Các khẳng định còn lại đều sai:" +
                 "".join("\\\\\n" + r"- ``%s'': sai, vì %s." % (t, ld)
                         for t, ld in ba_sai))
-        cauTN += MC_SA_answer_text(debai, "%s." % mo_ta,
+        cauTN += _MC_khong_cham(debai, "%s." % mo_ta,
                                    ["%s." % t for t, _ in ba_sai],
                                    giai, 0, 0, dang)
     return cauTN
@@ -1518,7 +1518,7 @@ def L10_C5_B14_NB085_MC_A_02(socau, dang=1):
         giai = (r"``%s'' là sai, vì %s." % (sai, ly_do) +
                 "".join("\\\\\n" + r"- ``%s'': đúng, vì %s." % (t, ld)
                         for t, ld in ba_dung))
-        cauTN += MC_SA_answer_text(debai, "%s." % sai,
+        cauTN += _MC_khong_cham(debai, "%s." % sai,
                                    ["%s." % t for t, _ in ba_dung], giai, 0, 0, dang)
     return cauTN
 
@@ -1584,7 +1584,7 @@ def L10_C5_B14_NB085_MC_A_03(socau, dang=1):
                 r"Ba tình huống còn lại chỉ là một phép tính theo công thức "
                 r"(hoặc giải phương trình) với số liệu cho sẵn, không cần thu "
                 r"thập hay xử lí một mẫu số liệu.")
-        cauTN += MC_SA_answer_text(debai, "%s." % co,
+        cauTN += _MC_khong_cham(debai, "%s." % co,
                                    ["%s." % t for t in ba_khong], giai, 0, 0, dang)
     return cauTN
 
@@ -1930,7 +1930,7 @@ def L10_C5_B14_TH083_MC_A_01(socau, dang=1):
                 r"vị là \textbf{bình phương} đơn vị số liệu, chỉ có độ lệch "
                 r"chuẩn mới cùng đơn vị với số liệu; và hai mẫu cùng số "
                 r"trung bình vẫn có thể phân tán rất khác nhau.")
-        cauTN += MC_SA_answer_text(debai, "%s." % mo_ta,
+        cauTN += _MC_khong_cham(debai, "%s." % mo_ta,
                                    ["%s." % t for t in SAI], giai, 0, 0, dang)
     return cauTN
 
@@ -2722,3 +2722,23 @@ def L10_C5_B14_VD084_SA_A_01(socau):
                            buoc=lambda t: _xx5(kq + t))
         cau += MC_SA_answer_text(debai, _xx5(kq), nhieu, giai, 0, 0, 2)
     return cau
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

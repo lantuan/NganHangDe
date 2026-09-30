@@ -99,7 +99,7 @@ def L10_C8_B23_TH125_MC_A_01(socau, dang=1):
                 "\\\\\n"
                 r"Tình huống ``%s'' cho hai phương án loại trừ nhau nên "
                 r"dùng quy tắc cộng." % TINH_HUONG_CONG[i])
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -128,7 +128,7 @@ def L10_C8_B23_TH126_MC_A_01(socau, dang=1):
                 "\\\\\n"
                 r"Tình huống ``%s'' bắt buộc phải làm đủ các công đoạn nên "
                 r"dùng quy tắc nhân." % TINH_HUONG_NHAN[i])
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -440,7 +440,7 @@ def _nhan_biet_PAC(socau, dang, nhom_dung, nhom_khac, ten, ly_do):
         giai = (ly_do + "\\\\\n" +
                 r"Tình huống ``%s'' đúng là bài toán %s."
                 % (nhom_dung[i], ten))
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -1750,3 +1750,23 @@ def L10_C8_B25_TH139_MC_B_01(socau, dang=1):
         cauTN += MC_SA_answer_text(debai, dung, list(nhieu), giai, 0, 0,
                                    dang)
     return cauTN
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

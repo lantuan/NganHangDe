@@ -283,7 +283,7 @@ def L10_C6_B15_NB086_MC_A_01(socau, dang=1):
                 r"của đại lượng thứ nhất ứng với \textbf{nhiều} giá trị của "
                 r"đại lượng thứ hai (chẳng hạn $y^2 = x$ với $x > 0$ cho "
                 r"\textbf{hai} giá trị $y$).")
-        cauTN += MC_SA_answer_text(debai, "%s." % mo_ta,
+        cauTN += _MC_khong_cham(debai, "%s." % mo_ta,
                                    ["%s." % t for t in KHONG_HAM],
                                    giai, 0, 0, dang)
     return cauTN
@@ -2041,3 +2041,23 @@ def L10_C6_B17_VD103_SA_A_01(socau):
                            buoc=lambda t: kq + t)
         cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
     return cau
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

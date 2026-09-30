@@ -267,7 +267,7 @@ def L11_C8_B28_NB132_MC_A_01(socau, dang=1):
                 r"Hai biến cố này vẫn có thể CÙNG xảy ra nên không xung "
                 r"khắc; và cũng có thể cùng KHÔNG xảy ra nên không đối "
                 r"nhau.")
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        cauTN += _MC_khong_cham(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
@@ -1378,3 +1378,23 @@ def L11_C8_TF_B_01(socau, socot=1):
             ])
         cauTF += TF_baitoan_du(debai, ds_abcd, 0, 0, socot)
     return cauTF
+
+
+# ----------------------------------------------------------------------
+# CLAUDE THEM 30/09/2026 - goi ex_test TU THEM dau "." sau moi phuong an
+# \choice, nen phuong an KHONG duoc tu cham cuoi (neu co se ra ".." tren PDF).
+# Cac ham trac nghiem co phuong an la cau van (vd "Mot tuan co $7$ ngay.")
+# goi _MC_khong_cham thay cho MC_SA_answer_text; math_type giu nguyen.
+# ----------------------------------------------------------------------
+def _bo_cham_cuoi(s):
+    """Bo dau "." o cuoi phuong an (giu "\\right." cua he/tuyen va "...")."""
+    s = str(s).rstrip()
+    while s.endswith(".") and not s.endswith(r"\right.") and not s.endswith("..."):
+        s = s[:-1].rstrip()
+    return s
+
+
+def _MC_khong_cham(debai, dung, nhieu, *con_lai):
+    """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
+    return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
+                             [_bo_cham_cuoi(x) for x in nhieu], *con_lai)

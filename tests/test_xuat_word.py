@@ -168,3 +168,54 @@ def test_khong_ham_nao_sot_ma_dinh_dang():
                         loi.append((ten, out[max(0, m.start() - 40): m.end() + 20]))
                         break
     assert not loi, loi
+
+
+def test_quad_ngoai_cong_thuc_khong_lam_dinh_so():
+    r"""Mau so lieu "$5$\quad $8$\quad $9$" (bai thong ke L10_C5) bi pandoc 2.9 bo
+    mat \quad -> Word hien "589" (co Lan bao 30/09/2026)."""
+    from app.services.word_service import _khoang_trang_ngoai_toan as k
+    ra = k(r"An: \quad $5$\quad $8$\qquad $9$ và $a\quad b$ \\ x")
+    assert "$5$\u2003$8$\u2003\u2003$9$" in ra
+    assert r"$a\quad b$" in ra                 # trong cong thuc giu nguyen
+    assert r"\\ x" in ra                        # xuong dong khong bi dong vao
+
+
+@co_pandoc
+def test_mau_so_lieu_tach_so_va_phuong_an_co_cham(tmp_path):
+    from app.services import word_service as w
+    cau = CAU_MC.replace("Khẳng định nào đúng?",
+                         r"Điểm: \quad $5$\quad $8$\quad $9$\quad $10$. Khẳng định nào đúng?")
+    ra = w.xuat_word(_tep_de(tmp_path, cau_mc=cau, so_ma=1), False, "test_word_quad")
+    xml = _xml(ra)[0]
+    # giua hai cong thuc $5$ va $8$ phai co ki tu cach (khong dinh thanh "58")
+    assert re.search(r"<m:t>5</m:t>(?:(?!<m:t>).)*?</m:oMath>(?:(?!<m:oMath>).)*?\u2003"
+                     r"(?:(?!<m:oMath>).)*?<m:oMath>(?:(?!</m:oMath>).)*?<m:t>8</m:t>", xml, re.S)
+    ra.unlink()
+
+
+def test_phuong_an_trac_nghiem_khong_tu_cham_cuoi():
+    r"""Goi ex_test TU THEM "." sau moi phuong an \choice; ham sinh cau ma tu
+    cham cuoi se ra ".." tren PDF (co Lan bao 30/09/2026)."""
+    from app.services.answer_parser_service import trich_dap_an
+    loi = []
+    for lop in ("toan10", "toan11", "toan12"):
+        for mi in pkgutil.iter_modules([str(GOC / "data" / "python_bank" / lop)]):
+            M = importlib.import_module(lop + "." + mi.name)
+            for ten in sorted(n for n in dir(M) if re.match(r"L1\d_C\d+_.*_MC_.*_\d\d$", n)):
+                f = getattr(M, ten)
+                for sd in range(2):
+                    random.seed(sd)
+                    np.random.seed(sd)
+                    try:
+                        out = f(2)
+                    except TypeError:
+                        out = f(2, 1)
+                    for k in re.findall(r"\\begin\{ex\}.*?\\end\{ex\}", out, re.S):
+                        d = trich_dap_an(k)
+                        if d.get("loai_cau") != "MC":
+                            continue
+                        for v in d["phuong_an"].values():
+                            s = re.sub(r"\$\s*$", "", v.strip()).rstrip()
+                            if s.endswith(".") and not s.endswith(r"\right."):
+                                loi.append((ten, v.strip()[-40:]))
+    assert not loi, loi[:10]
