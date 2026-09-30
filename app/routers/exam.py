@@ -536,6 +536,50 @@ def tai_tex_endpoint(de_id: str, request: Request):
 
 
 # ======================================================
+# TAI DE / LOI GIAI DANG WORD (.docx) - CHI GIAO VIEN
+#
+# Doi chinh tep .tex da luu cua de (khong sinh lai de) sang Word bang
+# pandoc; cong thuc la phuong trinh goc cua Word (Office Math) nen giao
+# vien bam vao sua duoc. KHONG goi AI. Xem app/services/word_service.py
+# va docs/21_TAI_KHOAN_GIAO_VIEN.md Buoc 6.
+#   ban=de      : de thi (khong dap an, khong loi giai)
+#   ban=loigiai : de + dap an + loi giai chi tiet
+# ======================================================
+
+@router.get("/tai-word/{de_id}")
+def tai_word_endpoint(de_id: str, request: Request, ban: str = "de"):
+    chan = yeu_cau_giao_vien(request)
+    if chan is not None:
+        return chan
+    if ban not in ("de", "loigiai"):
+        raise HTTPException(400, "ban phai la 'de' hoac 'loigiai'.")
+
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+    duong_dan = de.get("files", {}).get("tex")
+    if not duong_dan or not Path(duong_dan).exists():
+        raise HTTPException(
+            410,
+            "File .tex cua de nay da bi don (cron xoa sau 1 ngay). "
+            "Tao lai de roi tai Word ngay trong phien do.",
+        )
+
+    from app.services.word_service import xuat_word, WordExportError
+    try:
+        ra = xuat_word(Path(duong_dan), ban == "loigiai",
+                       "%s_%s" % ("loigiai" if ban == "loigiai" else "de", de_id[:8]))
+    except WordExportError as e:
+        raise HTTPException(500, detail=f"Loi xuat Word: {e}")
+
+    return FileResponse(
+        path=str(ra),
+        filename="%s_%s.docx" % ("loigiai" if ban == "loigiai" else "de", de_id[:8]),
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    )
+
+
+# ======================================================
 # DANH SACH CHUONG THEO LOP (theo dung phan phoi chuong trinh that
 # trong data/ppct/), kem co_du_cau de FE biet chuong nao da co
 # ngan hang cau hoi that (data/mapping/) va chuong nao chua co

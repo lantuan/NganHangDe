@@ -545,7 +545,9 @@ def L11_C9_B32_TH143_MC_A_01(socau, dang=1):
         else:
             f = ham
             d = dh
-            sai = [x[1] for x in SO_CAP if x[1] != d][:3]
+            # bo mau "%dx^{%d}" cua dong luy thua (chua dien so) - truoc day no
+            # lot vao phuong an nhieu nguyen chu "%dx^{%d}"
+            sai = [x[1] for x in SO_CAP if x[1] != d and "%" not in x[1]][:3]
             vi_sao = r"Đây là công thức đạo hàm cơ bản cần thuộc."
         dung = r"$%s$" % d
         nhieu = _ba_nhieu9(dung, [r"$%s$" % x for x in sai],

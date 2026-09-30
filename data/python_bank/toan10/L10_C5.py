@@ -1684,7 +1684,7 @@ def L10_C5_B14_TH080_MC_A_01(socau, dang=1):
                 % (_xx5(q3), _xx5(q1), _xx5(delta)) +
                 "\\\\\n"
                 r"Khác với khoảng biến thiên, $\Delta_Q$ chỉ đo độ trải của "
-                r"$50\%%$ số liệu ở giữa nên \textbf{không} bị giá trị ngoại "
+                r"$50\%$ số liệu ở giữa nên \textbf{không} bị giá trị ngoại "
                 r"lệ làm lệch.")
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN

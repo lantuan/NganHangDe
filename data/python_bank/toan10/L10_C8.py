@@ -1237,7 +1237,8 @@ def L10_C8_B25_VD141_TL_A_01(socau, dong=1):
                  % (dau, abs(a), n))
 
         hoi_a = r"Viết khai triển nhị thức Newton của $P(x)$."
-        giai_a = (r"$P(x) = %s$." % _da_thuc(list(reversed(cac_hs))) +
+        # _da_thuc da tu boc $...$ - bo ra de khong thanh "$P(x) = $...$$"
+        giai_a = (r"$P(x) = %s$." % _da_thuc(list(reversed(cac_hs))).strip("$") +
                   "\\\\\n"
                   r"(Số hạng chứa $x^{j}$ có hệ số $C_{%d}^{j}\cdot "
                   r"\left(%d\right)^{j}$.)" % (n, a))

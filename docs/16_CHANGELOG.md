@@ -9160,3 +9160,28 @@ Bien the moi (cung Dang voi _01):
                  khong chua O): phuong trinh d, BPT, diem thuoc mien
 Luu y: ten _DAU_BPT da co san trong L10_C2 (list dau) - bang dau moi dat ten
 _DAU_KT de khong de ten cu.
+
+# Version 3.54 - 2026-09-30
+
+## Giao vien tai de / loi giai dang Word (.docx), cong thuc la phuong trinh Word
+
+- app/services/word_service.py (moi): doi tep .tex da luu -> .docx bang pandoc.
+  Cong thuc -> Office Math (OMML), hinh TikZ -> anh PNG, Times New Roman 12,
+  ngat trang giua cac ma de, cau hong thay bang dong bao "xem ban PDF".
+  KHONG goi AI, khong ton token.
+- app/routers/exam.py: GET /api/exam/tai-word/{de_id}?ban=de|loigiai (chi giao vien).
+- Templates teacher/khu_lam_viec.html, teacher/de_da_tao.html: them "Word de",
+  "Word loi giai".
+- hinh_ve_service.dich_hinh(tikz, chi_png=True): bat buoc ra PNG cho Word.
+- scripts/cai_xelatex_vps.sh + docs/14: them pandoc.
+- docs/21 Buoc 6.
+- Sua 3 loi go o ham sinh cau (lo ra khi chay thu xuat Word ca ngan hang,
+  PDF cung bi anh huong):
+    L10_C5 TH080_MC_A_01: "$50\%%$" (dau % thu hai la chu thich, nuot mat dau
+      $ dong -> ca doan sau thanh cong thuc) -> "$50\%$".
+    L10_C8 VD141_TL_A_01: "$P(x) = $16x^4...$$" (boc $ hai lan) -> bo $ thua.
+    L11_C9 TH143_MC_A_01: phuong an nhieu "%dx^{%d}" chua dien so -> loai mau
+      luy thua khoi danh sach nhieu cua cac ham khac.
+- tests/test_xuat_word.py: cong thuc la <m:oMath>, ban de khong lo dap an,
+  cau hong khong lam hong file, chi giao vien tai duoc, quet moi ham khong
+  sot "%d"/"%s"/"\%%".

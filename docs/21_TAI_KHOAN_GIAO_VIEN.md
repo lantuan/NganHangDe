@@ -355,3 +355,39 @@ hỏi đầu tiên khi bị chặn. Nay `_base_gv.html` hiện email cạnh nút
 `teacher.py::_ngu_canh_chung(user)` gom thứ phải có ở **mọi** trang `/gv`, mỗi
 route trải vào context của mình. `test_moi_trang_gv_deu_truyen_email` đọc chính
 mã nguồn và bắt lỗi nếu có trang nào quên — để lần sau thêm trang mới không sót.
+
+
+---
+
+## Bước 6 — Tải đề / lời giải dạng Word (30/09/2026)
+
+Cô Lan: *"tài khoản gv được xuất thêm dạng word. công thức thì ra công thức của
+word"*.
+
+- `GET /api/exam/tai-word/{de_id}?ban=de` — đề (không đáp án, không lời giải).
+- `GET /api/exam/tai-word/{de_id}?ban=loigiai` — đề + đáp án (Chọn đáp án B,
+  (Đúng)/(Sai) từng ý, Đáp số) + lời giải chi tiết.
+- Chỉ `giao_vien` / `quan_tri` (dùng `yeu_cau_giao_vien` như `/tai-tex`).
+- Nút "Word đề", "Word lời giải" ở *Khu làm việc* và *Đề đã tạo*.
+
+Cách làm (`app/services/word_service.py`):
+
+1. Lấy tệp `.tex` **đã lưu** lúc sinh đề — không sinh lại, nên Word khớp PDF.
+2. Tách từng mã đề (`\tieude`), từng PHẦN và từng `\begin{ex}`; mỗi câu đọc bằng
+   `answer_parser_service.trich_dap_an` (dùng chung với trang làm bài web).
+3. Đổi lệnh riêng sang LaTeX chuẩn: `\heva`/`\hoac` → `cases`/ngoặc vuông,
+   `\vv` → `\overrightarrow`, `listEX`/`itemchoice` → a), b); `enumerate` → 1., 2.;
+   `\immini{chữ}{hình}` → chữ rồi hình.
+4. Hình TikZ / bảng biến thiên → ảnh PNG (dùng lại `hinh_ve_service`, có bộ nhớ đệm).
+5. `pandoc -f latex -t docx`: công thức ra **phương trình gốc của Word (Office
+   Math)** — bấm vào sửa được bằng Equation, không phải ảnh.
+6. Sửa lại file: Times New Roman 12, căn giữa tiêu đề, ngắt trang giữa các mã đề.
+
+**Không tốn token AI**: chỉ Python + pandoc chạy trên VPS, mỗi đề 1–5 giây (lần
+đầu có hình thì lâu hơn do phải dịch hình). VPS cần `apt-get install -y pandoc`.
+
+Câu nào LaTeX hỏng (thiếu `$`...) thì pandoc bỏ cả file — nên khi lỗi, hệ thống dò
+từng câu, câu hỏng được thay bằng dòng *"[Câu này chưa chuyển được sang Word - xem
+bản PDF.]"*, các câu khác vẫn ra đủ. Khi chạy thử toàn bộ ngân hàng (lớp 10, 11,
+12) đã tìm và sửa 3 lỗi gõ ở hàm sinh câu (xem CHANGELOG 3.54);
+`tests/test_xuat_word.py` quét mọi hàm để không lọt lại `%d`, `%s`, `\%%`.

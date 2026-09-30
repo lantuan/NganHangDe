@@ -105,12 +105,22 @@ def duong_dan_anh(ma: str) -> Path | None:
     return None
 
 
-def dich_hinh(tikz: str) -> Path:
-    """Dich mot doan TikZ ra anh, tra ve duong dan. Co san thi dung lai."""
+def dich_hinh(tikz: str, chi_png: bool = False) -> Path:
+    """Dich mot doan TikZ ra anh, tra ve duong dan. Co san thi dung lai.
+
+    chi_png=True: bat buoc ra PNG (dung cho file Word - Word cu khong doc
+    duoc SVG). Anh PNG luu rieng voi duoi .png nen khong dung cham anh
+    SVG cua web.
+    """
     ma = ma_hinh(tikz)
-    da_co = duong_dan_anh(ma)
-    if da_co:
-        return da_co
+    if chi_png:
+        p = KHO_ANH / ("%s.png" % ma)
+        if p.exists() and p.stat().st_size > 0:
+            return p
+    else:
+        da_co = duong_dan_anh(ma)
+        if da_co:
+            return da_co
 
     KHO_ANH.mkdir(parents=True, exist_ok=True)
     import os
@@ -155,6 +165,8 @@ def dich_hinh(tikz: str) -> Path:
         # hoc sinh thuong mo bang 3G tren dien thoai.
         ung_vien = []
         for duoi, lenh in BO_DOI:
+            if chi_png and duoi != "png":
+                continue
             if not shutil.which(lenh(pdf, tm / "x")[0]):
                 continue
             ra = tm / ("ket_qua_%d.%s" % (len(ung_vien), duoi))

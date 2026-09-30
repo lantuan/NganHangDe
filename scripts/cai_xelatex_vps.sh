@@ -21,6 +21,8 @@
 #                             fontawesome
 #   texlive-extra-utils       pdfcrop
 #   poppler-utils             pdftocairo, pdftoppm (doi PDF sang anh)
+#   pandoc                    xuat de / loi giai ra Word cho giao vien
+#                             (app/services/word_service.py), ~100 MB
 set -e
 
 echo "=== Cho trong o dia truoc da ==="
@@ -45,11 +47,12 @@ apt-get install -y --no-install-recommends \
   texlive-fonts-recommended \
   texlive-fonts-extra \
   texlive-extra-utils \
-  poppler-utils
+  poppler-utils \
+  pandoc
 
 echo
 echo "=== Kiem tra lai ==="
-for lenh in xelatex pdfcrop pdftocairo pdftoppm; do
+for lenh in xelatex pdfcrop pdftocairo pdftoppm pandoc; do
   if command -v "$lenh" >/dev/null 2>&1; then
     echo "  $lenh   co"
   else

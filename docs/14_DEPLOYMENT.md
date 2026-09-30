@@ -425,4 +425,11 @@ cong cu doi PDF sang anh:
     apt-get install -y poppler-utils        (cho pdftocairo, pdftoppm)
 
 Kiem tra:  bash scripts/kiem_tra_hinh.sh   (chay trong /root/NganHangDe)
+
+XUAT WORD CHO GIAO VIEN (tu 30/09/2026) can them pandoc tren VPS:
+
+    apt-get install -y pandoc
+
+(scripts/cai_xelatex_vps.sh da gom san pandoc.) Thieu pandoc thi nut
+"Word de" / "Word loi giai" bao loi 500 "May chu chua cai pandoc".
 Hoac cu chay "day web" o may Mac, no tu kiem va bao.
