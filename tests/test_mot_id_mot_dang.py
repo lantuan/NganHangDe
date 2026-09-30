@@ -98,6 +98,18 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_E",   # chon cong thuc dung-sai / rut gon bieu thuc
     "L10_C3_B5_TH031_MC_F",   # biet so do goc / biet sin-cos phan so
     "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
+    # tu bai tap trac nghiem Bai 6 (30/09/2026), _02 hoi theo cach khac:
+    "L10_C3_B6_VD036_MC_B",   # qua dam lay (canh doi dien goc) / ve tinh (canh ke)
+    "L10_C3_B6_TH032_MC_E",   # he thuc bang chu / he thuc da thay so
+    "L10_C3_B6_TH033_MC_C",   # chon he thuc dinh li sin / ti so hai canh
+    "L10_C3_B6_TH034_MC_D",   # cho so do goc / cho cos goc
+    "L10_C3_B6_TH034_MC_E",   # Heron roi r / Heron roi R
+    "L10_C3_B6_TH034_MC_F",   # hai canh + goc xen / ba canh
+    "L10_C3_B6_VD036_SA_C",   # biet thoi gian tinh khoang cach / nguoc lai
+    "L10_C3_B6_VD036_SA_D",   # hai dang / cay (AH, HB) / ang-ten tren noc nha
+    "L10_C3_B6_VD036_SA_E",   # quang duong con lai / dien tich tu giac
+    "L10_C3_TF_G",            # cho doan len doc / cho do cao doc
+    "L10_C3_TF_H",            # BC = CD, hai goc / goc A va bon canh
     # tu giao an Bai 6:
     "L10_C3_B6_TH032_MC_A",   # (da co 2) + cos A cho bang phan so
     "L10_C3_B6_TH033_MC_A",   # biet mot canh hai goc / noi tiep duong tron R, tinh canh goc thu ba
