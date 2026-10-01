@@ -152,6 +152,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_VD036_MC_P",   # duong tron qua 3 diem (VD): _01 dia co, _02 ho nuoc
     "L10_C3_B6_VD036_MC_Q",   # duong tron qua 3 diem (VDC): _01 dia co, _02 ho nuoc
     "L10_C3_B6_VD036_TL_K",   # duong tron qua 3 diem: _01 dia co, _02 ho nuoc
+    "L10_C3_TF_O",            # duong tron qua 3 diem: _01 dia co, _02 ho nuoc
     "L10_C6_B15_VD092_MC_B",  # cuoc dien thoai VDC: biet tien tim phut / hai goi / bac thang 3 muc
     "L10_C6_B15_VD092_SA_B",  # nhu MC_B (ban tra loi ngan)
     "L10_C6_B15_VD092_TL_B",  # a) ham tren mot khoang, b) dung ham tren tung khoang: hai goi / bac thang

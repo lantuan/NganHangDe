@@ -7674,6 +7674,395 @@ def L10_C3_B6_VD036_SA_D_04(socau, dang=2):
 
 
 # =====================================================================
+# ĐÚNG/SAI CHƯƠNG 3 - MỞ RỘNG (CLAUDE THEM 01/10/2026, co Lan chon dang).
+# Moi cau: a) NB, b) TH, c) VD, d) VDC. Cau co boi canh thuc tien ghi
+# "boi_canh" o Mapping trung voi MC/SA/TL cung boi canh -> mot de khong ra
+# hai cau cung boi canh (o moi chuong, docs/04).
+# =====================================================================
+
+def _y_ds(dung, sai, ly):
+    """Một ý đúng/sai: phát biểu đúng (dung) hoặc sai (sai), cùng lời giải."""
+    if sai == dung:
+        sai = None
+    ds = [(r"{\True %s}" % dung, "Đúng. " + ly)]
+    if sai is not None:
+        ds.append((r"{%s}" % sai, "Sai. " + ly))
+    return ds
+
+
+def _sai_so(x, n, buoc):
+    """Một số sai khác hẳn x sau khi làm tròn n chữ số (n = 0: hàng đơn vị)."""
+    while True:
+        y = x + random.choice([-1, 1]) * buoc * random.choice([1, 2, 3])
+        if (_lt(y) if n == 0 else _x1(y, n)) != (_lt(x) if n == 0 else _x1(x, n)) and y > 0:
+            return y
+
+
+def _sm(x, n=1, dv=r"\,\text{m}"):
+    return (str(_lt(x)) if n == 0 else _x1(x, n)) + dv
+
+
+def L10_C3_TF_J_01(socau, socot=1):
+    r"""Đúng/Sai - biết $\tan\alpha$ (hoặc $\cot\alpha$) là phân số của bộ ba Pythagore và $0^{\circ} < \alpha < 180^{\circ}$:
+    dấu của $\cos\alpha$, giá trị $\cos\alpha$ (qua $1 + \tan^{2}\alpha = \dfrac{1}{\cos^{2}\alpha}$), $\sin\alpha$, số đo góc
+    $\alpha$ bằng máy tính cầm tay.
+
+    CLAUDE THEM 01/10/2026 - theo phan Dung/Sai tai lieu C3-B1 (tan = -5/12, tan = -3/4, cot = -can 2). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+        if random.random() < 0.5:
+            doi, ke = ke, doi
+        tu = random.random() < 0.6
+        cho_tan = random.random() < 0.6
+        dau = -1 if tu else 1
+        t = Rational(dau * doi, ke)
+        cs, sn = Rational(dau * ke, huyen), Rational(doi, huyen)
+        goc = math.degrees(math.atan2(float(sn), float(cs)))
+        if not _xa_bien(goc, 1):
+            continue
+        so += 1
+        if cho_tan:
+            gia = r"$\tan\alpha = %s$" % _L(t)
+        else:
+            gia = r"$\cot\alpha = %s$" % _L(1 / t)
+        debai = r"Cho góc $\alpha$ với $0^{\circ} < \alpha < 180^{\circ}$ thoả mãn %s. Xét tính đúng, sai của các mệnh đề sau." % gia
+        ly_a = (r"Với $0^{\circ} < \alpha < 180^{\circ}$ thì $\sin\alpha > 0$, mà $%s %s 0$ nên $\cos\alpha %s 0$ "
+                r"(góc $\alpha$ %s)." % (r"\tan\alpha" if cho_tan else r"\cot\alpha", "<" if tu else ">",
+                                          "<" if tu else ">", "tù" if tu else "nhọn"))
+        # a) NB
+        y1 = _y_ds(r"$\cos\alpha %s 0$" % ("<" if tu else ">"), r"$\cos\alpha %s 0$" % (">" if tu else "<"), ly_a)
+        doi_tan = "" if cho_tan else r"$\tan\alpha = \dfrac{1}{\cot\alpha} = %s$; " % _L(t)
+        ly_b = doi_tan + (r"$\dfrac{1}{\cos^{2}\alpha} = 1 + \tan^{2}\alpha = 1 + %s = %s$ nên $\cos^{2}\alpha = %s$; vì "
+                r"$\cos\alpha %s 0$ nên $\cos\alpha = %s$." % (_L(t ** 2), _L(1 + t ** 2), _L(cs ** 2), "<" if tu else ">", _L(cs)))
+        # b) TH
+        y2 = _y_ds(r"$\cos\alpha = %s$" % _L(cs), r"$\cos\alpha = %s$" % _L(-cs), ly_b)
+        ly_c = r"$\sin\alpha = \tan\alpha\cdot\cos\alpha = %s\cdot\left(%s\right) = %s$." % (_L(t), _L(cs), _L(sn))
+        # c) VD
+        y3 = _y_ds(r"$\sin\alpha = %s$" % _L(sn), r"$\sin\alpha = %s$" % random.choice([_L(-sn), _L(Rational(ke, huyen))]), ly_c)
+        ly_d = (r"Từ $\cos\alpha = %s$, bấm máy $\alpha = \cos^{-1}\left(%s\right) \approx %s^{\circ}$ (đúng là góc %s)."
+                % (_L(cs), _L(cs), _x1(goc, 1), "tù" if tu else "nhọn"))
+        # d) VDC
+        y4 = _y_ds(r"$\alpha \approx %s^{\circ}$ (làm tròn đến hàng phần mười)" % _x1(goc, 1),
+                   r"$\alpha \approx %s^{\circ}$ (làm tròn đến hàng phần mười)" % _x1(180 - goc, 1), ly_d)
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cau
+
+
+def L10_C3_TF_K_01(socau, socot=1):
+    r"""Đúng/Sai - hỏi ngược định lí sin: biết $BC$ và $R$ (góc $A$ nhọn hoặc tù), biết thêm góc $B$:
+    hệ thức định lí sin, số đo góc $A$, cạnh $CA$, diện tích tam giác.
+
+    CLAUDE THEM 01/10/2026 - theo cau 36, 39 tai lieu C3-B2. Co Lan duyet lai.
+    """
+    cau = ""
+    n = 0
+    while n < socau:
+        sA, A, nhon, R, a = _bo_nguoc_sin(True)
+        B = random.choice([g for g in (15, 20, 30, 45, 60) if g + A < 170])
+        C = 180 - A - B
+        b = 2 * R * _sin_d(B)
+        S = 2 * R * R * _sin_d(A) * _sin_d(B) * _sin_d(C)
+        if not (_xa_bien(b, 1) and _xa_bien(S, 1)):
+            continue
+        n += 1
+        loai = "nhọn" if nhon else "tù"
+        debai = (r"Cho tam giác $ABC$ có góc $A$ %s, $BC = %s$, $\widehat{B} = %s$ và bán kính đường tròn ngoại tiếp "
+                 r"$R = %d$. Xét tính đúng, sai của các mệnh đề sau." % (loai, _L(a), _goc(B), R))
+        # a) NB
+        y1 = _y_ds(r"$\dfrac{BC}{\sin A} = 2R$", r"$\dfrac{BC}{\sin A} = R$",
+                   r"Định lí sin: $\dfrac{BC}{\sin A} = \dfrac{CA}{\sin B} = \dfrac{AB}{\sin C} = 2R$.")
+        # b) TH
+        ly_b = r"$\sin A = \dfrac{BC}{2R} = %s$; góc $A$ %s nên $\widehat{A} = %s$." % (_L(sA), loai, _goc(A))
+        # b) TH
+        y2 = _y_ds(r"$\widehat{A} = %s$" % _goc(A), r"$\widehat{A} = %s$" % _goc(180 - A), ly_b)
+        # c) VD
+        ly_c = r"$CA = 2R\sin B = %d\cdot\sin %s \approx %s$." % (2 * R, _goc(B), _x1(b, 2))
+        # c) VD
+        y3 = _y_ds(r"$CA \approx %s$ (làm tròn đến hàng phần mười)" % _x1(b, 1),
+                   r"$CA \approx %s$ (làm tròn đến hàng phần mười)" % _x1(_sai_so(b, 1, 0.6), 1), ly_c)
+        # d) VDC
+        ly_d = (r"$\widehat{C} = 180^{\circ} - %s - %s = %s$, $AB = 2R\sin C$, nên "
+                r"$S = \dfrac{1}{2}\cdot BC\cdot CA\cdot\sin C = 2R^{2}\sin A\sin B\sin C \approx %s$."
+                % (_goc(A), _goc(B), _goc(C), _x1(S, 2)))
+        # d) VDC
+        y4 = _y_ds(r"Diện tích tam giác $ABC$ xấp xỉ $%s$ (làm tròn đến hàng phần mười)" % _x1(S, 1),
+                   r"Diện tích tam giác $ABC$ xấp xỉ $%s$ (làm tròn đến hàng phần mười)" % _x1(S * 2, 1), ly_d)
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cau
+
+
+def L10_C3_TF_L_01(socau, socot=1):
+    r"""Đúng/Sai - biết ba cạnh (tam giác cạnh nguyên, diện tích nguyên): công thức trung tuyến, độ dài
+    trung tuyến $m_a$, đường cao $h_a$ qua diện tích, bán kính đường tròn nội tiếp hoặc ngoại tiếp.
+
+    CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 (cau 52, 56 phan III). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        x, y, z, S, p = random.choice([t for t in HERON_NGUYEN if t[2] <= 20])
+        a, b, c = random.sample([x, y, z], 3)
+        ma2 = Rational(2 * b * b + 2 * c * c - a * a, 4)
+        ha = Rational(2 * S, a)
+        debai = r"Cho tam giác $ABC$ có $BC = a = %d$, $CA = b = %d$, $AB = c = %d$. Xét tính đúng, sai của các mệnh đề sau." % (a, b, c)
+        # a) NB
+        y1 = _y_ds(r"$m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{4}$", r"$m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{2}$",
+                   r"Công thức độ dài đường trung tuyến: $m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{4}$.")
+        ly_b = r"$m_a^{2} = \dfrac{%d + %d}{2} - \dfrac{%d}{4} = %s$ nên $m_a = %s$." % (b * b, c * c, a * a, _L(ma2), _L(sqrt(ma2)))
+        # b) TH
+        y2 = _y_ds(r"$m_a = %s$" % _L(sqrt(ma2)), r"$m_a = %s$" % _L(sqrt(ma2 + 1)), ly_b)
+        ly_c = (r"$p = %d$, $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$; $S = \dfrac{1}{2}a h_a \Rightarrow h_a = \dfrac{2S}{a} = %s$."
+                % (p, p, p - a, p - b, p - c, S, _L(ha)))
+        # c) VD
+        y3 = _y_ds(r"$h_a = %s$" % _L(ha), r"$h_a = %s$" % _L(ha / 2), ly_c)
+        if random.random() < 0.5:
+            r_ = Rational(S, p)
+            # d) VDC
+            y4 = _y_ds(r"Bán kính đường tròn nội tiếp $r = %s$" % _L(r_), r"Bán kính đường tròn nội tiếp $r = %s$" % _L(2 * r_),
+                       r"$S = pr \Rightarrow r = \dfrac{S}{p} = \dfrac{%d}{%d} = %s$." % (S, p, _L(r_)))
+        else:
+            R_ = Rational(a * b * c, 4 * S)
+            # d) VDC
+            y4 = _y_ds(r"Bán kính đường tròn ngoại tiếp $R = %s$" % _L(R_), r"Bán kính đường tròn ngoại tiếp $R = %s$" % _L(2 * R_),
+                       r"$S = \dfrac{abc}{4R} \Rightarrow R = \dfrac{abc}{4S} = \dfrac{%d}{%d} = %s$." % (a * b * c, 4 * S, _L(R_)))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cau
+
+
+def L10_C3_TF_M_01(socau, socot=1):
+    r"""Đúng/Sai - hình bình hành $ABCD$ biết hai cạnh kề và góc $A$ ($60^{\circ}$ hoặc $120^{\circ}$): góc kề bù,
+    đường chéo $BD$, đường chéo $AC$, côsin góc giữa hai đường chéo (tam giác $OAB$).
+
+    CLAUDE THEM 01/10/2026 - theo phan III tai lieu C3-B2. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        A = random.choice([60, 120])
+        m, n = random.sample(range(2, 10), 2)
+        cs = Rational(1, 2) if A == 60 else Rational(-1, 2)
+        BD2, AC2 = m * m + n * n - 2 * m * n * cs, m * m + n * n + 2 * m * n * cs
+        OA2, OB2 = AC2 / 4, BD2 / 4
+        cosO = float((OA2 + OB2 - m * m) / (2 * sqrt(OA2) * sqrt(OB2)))
+        if not _xa_bien(cosO * 100) or m == n:
+            continue
+        so += 1
+        debai = (r"Cho hình bình hành $ABCD$ có $AB = %d$, $AD = %d$, $\widehat{BAD} = %s$; $O$ là giao điểm hai đường chéo. "
+                 r"Xét tính đúng, sai của các mệnh đề sau." % (m, n, _goc(A)))
+        # a) NB
+        y1 = _y_ds(r"$\widehat{ABC} = %s$" % _goc(180 - A), r"$\widehat{ABC} = %s$" % _goc(A),
+                   r"Hai góc kề một cạnh của hình bình hành bù nhau: $\widehat{ABC} = 180^{\circ} - %s = %s$." % (_goc(A), _goc(180 - A)))
+        ly_b = r"Trong tam giác $ABD$: $BD^{2} = %d + %d - 2\cdot %d\cdot %d\cdot\cos %s = %s$." % (m * m, n * n, m, n, _goc(A), _L(BD2))
+        # b) TH
+        y2 = _y_ds(r"$BD = %s$" % _L(sqrt(BD2)), r"$BD = %s$" % _L(sqrt(AC2)), ly_b)
+        ly_c = (r"$BC = AD = %d$, $\widehat{ABC} = %s$; trong tam giác $ABC$: $AC^{2} = %d + %d - 2\cdot %d\cdot %d\cdot\cos %s = %s$."
+                % (n, _goc(180 - A), m * m, n * n, m, n, _goc(180 - A), _L(AC2)))
+        # c) VD
+        y3 = _y_ds(r"$AC = %s$" % _L(sqrt(AC2)), r"$AC = %s$" % _L(sqrt(AC2 + 2)), ly_c)
+        ly_d = (r"$OA = \dfrac{AC}{2} = %s$, $OB = \dfrac{BD}{2} = %s$; trong tam giác $OAB$: "
+                r"$\cos\widehat{AOB} = \dfrac{OA^{2} + OB^{2} - AB^{2}}{2\cdot OA\cdot OB} \approx %s$."
+                % (_L(sqrt(OA2)), _L(sqrt(OB2)), _x1(cosO, 3)))
+        # d) VDC
+        y4 = _y_ds(r"$\cos\widehat{AOB} \approx %s$ (làm tròn đến hàng phần trăm)" % _x1(cosO, 2),
+                   r"$\cos\widehat{AOB} \approx %s$ (làm tròn đến hàng phần trăm)" % _x1(-cosO, 2), ly_d)
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cau
+
+
+def L10_C3_TF_N_01(socau, socot=1):
+    r"""Đúng/Sai - ngọn núi quan sát từ chân và nóc toà nhà (có hình): a) góc $BAC$, b) góc $ACB$,
+    c) khoảng cách $AC$, d) chiều cao ngọn núi.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_MC_N/MC_O/SA_P/SA_Q/TL_J. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        h, al, be, AC, CH = _bo_nui_toa_nha()
+        debai = _de_nui_toa_nha(h, al, be) + " Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB
+        y1 = _y_ds(r"$\widehat{BAC} = %s$" % _goc(90 - al), r"$\widehat{BAC} = %s$" % _goc(al),
+                   r"$AB$ thẳng đứng, $AC$ hợp với phương ngang góc $%s$ nên $\widehat{BAC} = 90^{\circ} - %s = %s$." % (_goc(al), _goc(al), _goc(90 - al)))
+        # b) TH
+        y2 = _y_ds(r"$\widehat{ACB} = %s$" % _goc(al - be), r"$\widehat{ACB} = %s$" % _goc(al + be),
+                   r"$\widehat{ABC} = 90^{\circ} + %s = %s$ nên $\widehat{ACB} = 180^{\circ} - %s - %s = %s$."
+                   % (_goc(be), _goc(90 + be), _goc(90 - al), _goc(90 + be), _goc(al - be)))
+        # c) VD
+        y3 = _y_ds(r"$AC \approx %s$ (làm tròn đến hàng đơn vị)" % _sm(AC, 0),
+                   r"$AC \approx %s$ (làm tròn đến hàng đơn vị)" % _sm(h * _cos_d(be) / _sin_d(al + be), 0),
+                   _giai_goc_nui(h, al, be, AC).split("\\\\\n")[-1])
+        # d) VDC
+        y4 = _y_ds(r"Ngọn núi cao khoảng $%s$ so với mặt đất (làm tròn đến hàng đơn vị)" % _sm(CH, 0),
+                   r"Ngọn núi cao khoảng $%s$ so với mặt đất (làm tròn đến hàng đơn vị)" % _sm(CH + h, 0),
+                   _giai_cao_nui(al, CH, AC))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_nui_toa_nha(h, al, be, CH), 0, socot)
+    return cau
+
+
+def L10_C3_TF_O_01(socau, socot=1):
+    r"""Đúng/Sai - đĩa cổ bị vỡ (có hình): a) nửa chu vi, b) diện tích (Heron), c) góc lớn nhất, d) bán kính đĩa.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_MC_P/MC_Q/SA_R/SA_S/TL_K. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        a, b, c, p, S, R, dinh, g = _bo_dia_co()
+        debai = _de_dia_co(a, b, c) + " Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB
+        y1 = _y_ds(r"Nửa chu vi tam giác $ABC$ là $p = %s\,\text{cm}$" % _xx(p, 2),
+                   r"Nửa chu vi tam giác $ABC$ là $p = %s\,\text{cm}$" % _xx(2 * p, 2),
+                   r"$p = \dfrac{%s + %s + %s}{2} = %s$." % (_x1(a, 1), _x1(b, 1), _x1(c, 1), _xx(p, 2)))
+        # b) TH
+        y2 = _y_ds(r"$S_{ABC} \approx %s\,\text{cm}^{2}$ (làm tròn đến hàng phần mười)" % _x1(S, 1),
+                   r"$S_{ABC} \approx %s\,\text{cm}^{2}$ (làm tròn đến hàng phần mười)" % _x1(_sai_so(S, 1, 2.5), 1),
+                   r"Theo công thức Heron: $S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)} \approx %s$." % _x1(S, 2))
+        doi = {"A": "BC", "B": "CA", "C": "AB"}[dinh]
+        # c) VD
+        y3 = _y_ds(r"Góc lớn nhất của tam giác $ABC$ xấp xỉ $%d^{\circ}$" % _lt(g),
+                   r"Góc lớn nhất của tam giác $ABC$ xấp xỉ $%d^{\circ}$" % _lt(180 - g),
+                   r"Góc lớn nhất là góc $%s$ đối diện cạnh lớn nhất $%s$; $\cos %s \approx %s$ nên $\widehat{%s} \approx %d^{\circ}$."
+                   % (dinh, doi, dinh, _xx(math.cos(math.radians(g)), 4), dinh, _lt(g)))
+        # d) VDC
+        y4 = _y_ds(r"Bán kính chiếc đĩa xấp xỉ $%s\,\text{cm}$ (làm tròn đến hàng phần mười)" % _x1(R, 1),
+                   r"Bán kính chiếc đĩa xấp xỉ $%s\,\text{cm}$ (làm tròn đến hàng phần mười)" % _x1(2 * R, 1),
+                   r"$R = \dfrac{abc}{4S} \approx %s\,\text{(cm)}$." % _x1(R, 1))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem([100, 220, 330], "ABC"), 0, socot)
+    return cau
+
+
+def L10_C3_TF_O_02(socau, socot=1):
+    r"""Đúng/Sai - hồ nước hình tròn (có hình): a) công thức côsin cho $BC$, b) $BC$, c) định lí sin cho
+    đường kính, d) đường kính hồ.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_MC_P/MC_Q/SA_R/SA_S/TL_K. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        A, AB, AC, BC, d = _bo_ho_tron()
+        debai = _de_ho_tron(A, AB, AC) + " Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB
+        y1 = _y_ds(r"$BC^{2} = AB^{2} + AC^{2} - 2\cdot AB\cdot AC\cdot\cos %s$" % _goc(A),
+                   r"$BC^{2} = AB^{2} + AC^{2} + 2\cdot AB\cdot AC\cdot\cos %s$" % _goc(A),
+                   r"Định lí côsin trong tam giác $ABC$ cho cạnh $BC$ đối diện góc $A$.")
+        # b) TH
+        y2 = _y_ds(r"$BC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(BC, 1),
+                   r"$BC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(math.sqrt(AB * AB + AC * AC), 1),
+                   _giai_ho_bc(A, AB, AC, BC))
+        # c) VD
+        y3 = _y_ds(r"Đường kính hồ bằng $\dfrac{BC}{\sin\widehat{BAC}}$", r"Đường kính hồ bằng $\dfrac{BC}{2\sin\widehat{BAC}}$",
+                   r"Bờ hồ là đường tròn ngoại tiếp tam giác $ABC$; theo định lí sin $\dfrac{BC}{\sin A} = 2R$ chính là đường kính.")
+        # d) VDC
+        y4 = _y_ds(r"Đường kính hồ xấp xỉ $%s$ (làm tròn đến hàng đơn vị)" % _sm(d, 0),
+                   r"Đường kính hồ xấp xỉ $%s$ (làm tròn đến hàng đơn vị)" % _sm(d / 2, 0), _giai_ho_d(A, BC, d))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, socot)
+    return cau
+
+
+def L10_C3_TF_P_01(socau, socot=1):
+    r"""Đúng/Sai - cây bị gãy (có hình): a) góc $ACB$, b) đoạn $AC$, c) đoạn $BC$, d) chiều cao cây trước khi gãy.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_MC_R/MC_S/SA_T/SA_U/TL_L. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        AB, A, B, C, AC, BC, H = _bo_cay_gay()
+        debai = _de_cay_gay(AB, A, B) + " Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB
+        y1 = _y_ds(r"$\widehat{ACB} = %s$" % _goc(C), r"$\widehat{ACB} = %s$" % _goc(C + 10),
+                   r"$\widehat{ACB} = 180^{\circ} - %s - %s = %s$." % (_goc(A), _goc(B), _goc(C)))
+        # b) TH
+        y2 = _y_ds(r"$AC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(AC), r"$AC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(BC),
+                   r"Định lí sin: $AC = \dfrac{AB\cdot\sin B}{\sin C} = \dfrac{%s\cdot\sin %s}{\sin %s} \approx %s$." % (_xx(AB, 1), _goc(B), _goc(C), _x1(AC, 2)))
+        # c) VD
+        y3 = _y_ds(r"$BC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(BC),
+                   r"$BC \approx %s$ (làm tròn đến hàng phần mười)" % _sm(_sai_so(BC, 1, 0.5)),
+                   r"$BC = \dfrac{AB\cdot\sin A}{\sin C} = \dfrac{%s\cdot\sin %s}{\sin %s} \approx %s$." % (_xx(AB, 1), _goc(A), _goc(C), _x1(BC, 2)))
+        # d) VDC
+        y4 = _y_ds(r"Trước khi gãy, cây cao khoảng $%s$ (làm tròn đến hàng phần mười)" % _sm(H),
+                   r"Trước khi gãy, cây cao khoảng $%s$ (làm tròn đến hàng phần mười)" % _sm(AC + AB),
+                   r"Chiều cao cây trước khi gãy là $AC + BC \approx %s$." % _x1(H, 1))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_cay_gay(AB, A, B, AC), 0, socot)
+    return cau
+
+
+def L10_C3_TF_Q_01(socau, socot=1):
+    r"""Đúng/Sai - đo chiều cao tháp chính Pô Klông Garai bằng hai giác kế (có hình): a) góc $A_1DB_1$, b) $B_1D$,
+    c) $C_1D$, d) chiều cao tháp.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_MC_D_04/SA_D_04. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        h, al, be, AB, BD, C1D, CD = _bo_thap_cham()
+        debai = _de_thap_cham(h, al, be, AB) + " Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB
+        y1 = _y_ds(r"$\widehat{A_1DB_1} = %s$" % _goc(al - be), r"$\widehat{A_1DB_1} = %s$" % _goc(180 - al - be),
+                   r"Góc $\widehat{DA_1C_1}$ là góc ngoài của tam giác $A_1DB_1$ nên $\widehat{A_1DB_1} = %s - %s = %s$." % (_goc(al), _goc(be), _goc(al - be)))
+        # b) TH
+        y2 = _y_ds(r"$B_1D \approx %s$ (làm tròn đến hàng phần mười)" % _sm(BD),
+                   r"$B_1D \approx %s$ (làm tròn đến hàng phần mười)" % _sm(AB * _sin_d(be) / _sin_d(al - be)),
+                   r"Định lí sin: $B_1D = \dfrac{A_1B_1\cdot\sin\left(180^{\circ} - %s\right)}{\sin %s} \approx %s$." % (_goc(al), _goc(al - be), _x1(BD, 2)))
+        # c) VD
+        y3 = _y_ds(r"$C_1D \approx %s$ (làm tròn đến hàng phần mười)" % _sm(C1D),
+                   r"$C_1D \approx %s$ (làm tròn đến hàng phần mười)" % _sm(BD * _cos_d(be)),
+                   r"Tam giác $B_1C_1D$ vuông tại $C_1$: $C_1D = B_1D\cdot\sin %s \approx %s$." % (_goc(be), _x1(C1D, 2)))
+        # d) VDC
+        y4 = _y_ds(r"Tháp cao khoảng $%s$ (làm tròn đến hàng phần mười)" % _sm(CD),
+                   r"Tháp cao khoảng $%s$ (làm tròn đến hàng phần mười)" % _sm(C1D),
+                   r"$CD = C_1D + CC_1 \approx %s + %s \approx %s$ (phải cộng chiều cao giác kế)." % (_x1(C1D, 2), _xx(h, 1), _x1(CD, 1)))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_thap_cham(h, al, be, AB, CD), 0, socot)
+    return cau
+
+
+def L10_C3_TF_R_01(socau, socot=1):
+    r"""Đúng/Sai - hai tàu cùng xuất phát từ một bến theo hai hướng hợp góc $\varphi$ (có hình): a) quãng
+    đường tàu thứ nhất sau $t$ giờ, b) khoảng cách hai tàu sau $t$ giờ, c) côsin góc tại vị trí tàu thứ
+    nhất, d) sau bao lâu hai tàu cách nhau $D$ hải lí.
+
+    CLAUDE THEM 01/10/2026 - cung boi canh VD036_SA_C ("hai tau cung xuat phat"); theo phan III tai lieu
+    C3-B2 (120 do, 8 va 10 hai li/gio, cach 60 hai li). Co Lan duyet lai.
+    """
+    cau = ""
+    n = 0
+    while n < socau:
+        g = random.choice([60, 75, 100, 110, 120])
+        v1, v2 = random.sample(range(6, 15), 2)
+        t = random.choice([1.5, 2, 2.5, 3])
+        D = random.choice([30, 40, 50, 60, 80])
+        b, c = v1 * t, v2 * t
+        k = math.sqrt(v1 * v1 + v2 * v2 - 2 * v1 * v2 * _cos_d(g))
+        d = k * t
+        cosB = (b * b + d * d - c * c) / (2 * b * d)
+        T = D / k
+        if not (_xa_bien(d, 1) and _xa_bien(T, 1) and _xa_bien(cosB * 100, 0) and 1 < T < 8):
+            continue
+        n += 1
+        debai = (r"Hai tàu đánh cá cùng xuất phát từ bến $A$, đi thẳng đều theo hai hướng hợp với nhau góc $%s$. "
+                 r"Tàu thứ nhất đi với tốc độ $%d$ hải lí/giờ, tàu thứ hai đi với tốc độ $%d$ hải lí/giờ. Gọi $B$, $C$ "
+                 r"là vị trí hai tàu sau $%s$ giờ. Xét tính đúng, sai của các mệnh đề sau." % (_goc(g), v1, v2, _xx(t, 1)))
+        # a) NB
+        y1 = _y_ds(r"$AB = %s$ hải lí" % _xx(b, 1), r"$AB = %s$ hải lí" % _xx(v1 + t, 1),
+                   r"$AB = %d\cdot %s = %s$ (hải lí)." % (v1, _xx(t, 1), _xx(b, 1)))
+        # b) TH
+        y2 = _y_ds(r"$BC \approx %s$ hải lí (làm tròn đến hàng phần mười)" % _x1(d, 1),
+                   r"$BC \approx %s$ hải lí (làm tròn đến hàng phần mười)" % _x1(math.sqrt(b * b + c * c), 1),
+                   r"$BC^{2} = %s^{2} + %s^{2} - 2\cdot %s\cdot %s\cdot\cos %s$ nên $BC \approx %s$." % (_xx(b, 1), _xx(c, 1), _xx(b, 1), _xx(c, 1), _goc(g), _x1(d, 2)))
+        # c) VD
+        y3 = _y_ds(r"$\cos\widehat{ABC} \approx %s$ (làm tròn đến hàng phần trăm)" % _x1(cosB, 2),
+                   r"$\cos\widehat{ABC} \approx %s$ (làm tròn đến hàng phần trăm)" % _x1(-cosB, 2),
+                   r"$\cos\widehat{ABC} = \dfrac{AB^{2} + BC^{2} - AC^{2}}{2\cdot AB\cdot BC} \approx %s$." % _x1(cosB, 3))
+        # d) VDC
+        y4 = _y_ds(r"Sau khoảng $%s$ giờ (làm tròn đến hàng phần mười) kể từ lúc xuất phát, hai tàu cách nhau $%d$ hải lí" % (_x1(T, 1), D),
+                   r"Sau khoảng $%s$ giờ (làm tròn đến hàng phần mười) kể từ lúc xuất phát, hai tàu cách nhau $%d$ hải lí" % (_x1(D / (v1 + v2), 1), D),
+                   r"Sau $x$ giờ: $AB = %dx$, $AC = %dx$, $BC^{2} = x^{2}\left(%d + %d - 2\cdot %d\cdot %d\cdot\cos %s\right)$, nên "
+                   r"$BC = x\cdot %s$. Giải $x\cdot %s = %d$ được $x \approx %s$ (giờ)."
+                   % (v1, v2, v1 * v1, v2 * v2, v1, v2, _goc(g), _xx(k, 3), _xx(k, 3), D, _x1(T, 1)))
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_hai_tau(g), 0, socot)
+    return cau
+
+
+# =====================================================================
 # BIẾN THỂ _02 CHO 10 DẠNG MỚI CỦA BÀI 5 (30/09/2026)
 # ---------------------------------------------------------------------
 # Cô Lan: "_02 phải là cách hỏi khác đi, nhưng cùng về một đơn vị kiến

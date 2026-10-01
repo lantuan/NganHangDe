@@ -9651,3 +9651,15 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 - C3-B2 câu 4: đề C = 153° nhưng lời giải dùng 135°. Câu 20: lời giải viết -2ab.cosA (đúng là -2bc.cosA).
 - C3-B2 phần III, tháp CD (AB = 24 m, 63°, 48°): kết quả đúng ≈ 61,4 m, lời giải ghi 68,91 m (lấy nhầm AD). Phân giác AB = 2, AC = 3, A = 60°: AD = 6√3/5, tài liệu ghi √3/5. Trạm nước sạch: hai lời giải (MC và TLN) cho hai số khác nhau (15,56 và 20,12 km).
 - C3-B2 phần Đúng/Sai: lẫn đơn vị (a = 6 m nhưng p = 16 cm; a = 8 dm nhưng b ≈ 5,26 cm).
+
+# Version 3.90 - 2026-10-01
+
+## Đúng/Sai chương 3 lớp 10: thêm 9 dạng (a NB, b TH, c VD, d VDC)
+- TF_J biết tan/cot -> dấu cos, cos, sin, số đo góc (máy tính). TF_K ngược định lí sin (góc A, cạnh, diện tích). TF_L biết ba cạnh: trung tuyến, đường cao, r hoặc R. TF_M hình bình hành: góc kề bù, hai đường chéo, cos góc giữa hai đường chéo.
+- Thực tiễn (có hình): TF_N núi - toà nhà; TF_O (_01 đĩa cổ, _02 hồ tròn); TF_P cây gãy; TF_Q tháp Chăm Pô Klông Garai; TF_R hai tàu cùng xuất phát (thời gian cách nhau d hải lí).
+- Chương 3 nay có 18 dạng Đúng/Sai (TF_A -> TF_R).
+
+## Lọc trùng bối cảnh trong một đề (mọi chương, mọi loại câu)
+- Mapping "boi_canh" (docs/04 - Quy tắc bối cảnh). question_selector: _khoa_boi_canh, _trung_boi_canh; TF chọn trước đưa bối cảnh vào tập đã dùng, TL/MC/SA tránh theo; câu tự luận nhiều ý cũng xét.
+- Đã gắn boi_canh: chương 3 (tàu đổi hướng, hai tàu, Trái Đất, sườn đồi, khinh khí cầu, mảnh vườn, tháp trên đồi, Cổng Trời, núi - toà nhà, đường tròn qua ba điểm, cây gãy, cây cao, tháp Chăm, con dốc, mảnh đất tứ giác), chương 6 (cước điện thoại), chương 9 (quay bánh xe).
+- Test: tests/test_boi_canh.py.

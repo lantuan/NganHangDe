@@ -51,21 +51,24 @@
     "id": "L10_C6_B15_VD092_MC_A",
     "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại"
+    "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B15_VD092_TL_A",
     "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
-    "ghi_chu": "01/10/2026 doi mo ta Dang cho trung MC_A (cung boi canh cuoc dien thoai)"
+    "ghi_chu": "01/10/2026 doi mo ta Dang cho trung MC_A (cung boi canh cuoc dien thoai)",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B15_VD092_SA_A",
     "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
-    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 01/10/2026 doi mo ta Dang cho trung MC_A (cung boi canh cuoc dien thoai); dap so doi sang nghin dong (<= 4 ki tu)"
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 01/10/2026 doi mo ta Dang cho trung MC_A (cung boi canh cuoc dien thoai); dap so doi sang nghin dong (<= 4 ki tu)",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B15_VD092_MC_B",
@@ -73,7 +76,8 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
     "muc_do_dang": "VDC",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan (toi da 3 muc gia): _01 biet tien tim so phut, _02 so sanh hai goi, _03 gia bac thang 3 muc; cung mo ta Dang voi MC_A/SA_A/TL_A; co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan (toi da 3 muc gia): _01 biet tien tim so phut, _02 so sanh hai goi, _03 gia bac thang 3 muc; cung mo ta Dang voi MC_A/SA_A/TL_A; co Lan duyet lai",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B15_VD092_SA_B",
@@ -81,14 +85,16 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
     "muc_do_dang": "VDC",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan (toi da 3 muc gia): _01 biet tien tim so phut, _02 so sanh hai goi, _03 gia bac thang 3 muc; cung mo ta Dang voi MC_A/SA_A/TL_A; co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan (toi da 3 muc gia): _01 biet tien tim so phut, _02 so sanh hai goi, _03 gia bac thang 3 muc; cung mo ta Dang voi MC_A/SA_A/TL_A; co Lan duyet lai",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B15_VD092_TL_B",
     "content": "Vận dụng được kiến thức của hàm số vào giải quyết bài toán thực tiễn.",
     "Loai": "Tự luận",
     "Dang": "Hàm số bậc nhất trên từng khoảng: bài toán cước điện thoại",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - a) (VD) viet ham tren mot khoang, b) (VDC) buoc dung ham tren tung khoang: _01 hai goi cuoc, _02 bac thang 3 muc; co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - a) (VD) viet ham tren mot khoang, b) (VDC) buoc dung ham tren tung khoang: _01 hai goi cuoc, _02 bac thang 3 muc; co Lan duyet lai",
+    "boi_canh": "cuoc_dien_thoai"
   },
   {
     "id": "L10_C6_B16_NB096_MC_A",

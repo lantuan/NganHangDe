@@ -150,14 +150,16 @@
     "content": "Tính xác suất theo định nghĩa cổ điển.",
     "Loai": "Đúng sai",
     "Dang": "Trò chơi quay bánh xe nhiều lần (vận dụng cao)",
-    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta",
+    "boi_canh": "quay_banh_xe"
   },
   {
     "id": "L10_C9_TF_D",
     "content": "Tính xác suất theo định nghĩa cổ điển.",
     "Loai": "Đúng sai",
     "Dang": "Trò chơi quay bánh xe nhiều lần",
-    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta",
+    "boi_canh": "quay_banh_xe"
   },
   {
     "id": "L10_C9_TF_E",

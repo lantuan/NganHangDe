@@ -77,16 +77,22 @@ def _xoay_vong_bien_the(candidates: list[dict], so_luong: int, da_dung_id: set,
             # thi ra hai cau gan nhu giong het).
             khac_mo_ta = [c for c in chua_dung if _khoa_mo_ta(c) not in dang_da_dung]
             chua_dung = khac_mo_ta or chua_dung
+            # va BOI CANH ("boi_canh") chua gap o bat ky cau nao cua de (moi chuong)
+            khac_bc = [c for c in chua_dung if not _trung_boi_canh(c, dang_da_dung)]
+            chua_dung = khac_bc or chua_dung
         if chua_dung:
             item = random.choice(chua_dung)
         else:
             it_nhat = min(dem[c["id"]] for c in candidates)
-            item = random.choice([c for c in candidates if dem[c["id"]] == it_nhat])
+            ung = [c for c in candidates if dem[c["id"]] == it_nhat]
+            ung = [c for c in ung if not _trung_boi_canh(c, dang_da_dung)] or ung
+            item = random.choice(ung)
         chon.append(item)
         da_dung_id.add(item["id"])
         dem[item["id"]] += 1
         if dang_da_dung is not None:
             dang_da_dung.add(_khoa_mo_ta(item))
+            dang_da_dung.update(_khoa_boi_canh(item))
 
     return chon
 
@@ -103,6 +109,23 @@ def _khoa_mo_ta(row: dict) -> tuple:
     else:
         dv = row.get("id", "")
     return dv, " ".join(str(row.get("Dang", "")).lower().split())
+
+
+def _khoa_boi_canh(row: dict) -> list[tuple]:
+    """Các BỐI CẢNH (Mapping "boi_canh": chuỗi hoặc danh sách) của một dòng, dạng
+    ("BOI_CANH", ten). Một đề không ra hai câu cùng bối cảnh ở MỌI chương, mọi loại
+    câu (cô Lan 01/10/2026, docs/04): bộ chọn ưu tiên dạng có bối cảnh chưa gặp,
+    chỉ dùng lại khi không còn dạng nào khác."""
+    bc = row.get("boi_canh")
+    if not bc:
+        return []
+    if isinstance(bc, str):
+        bc = [bc]
+    return [("BOI_CANH", str(x).strip().lower()) for x in bc]
+
+
+def _trung_boi_canh(row: dict, da_dung: set | None) -> bool:
+    return bool(da_dung) and any(k in da_dung for k in _khoa_boi_canh(row))
 
 
 # Đếm số lần mỗi dạng (Generator ID) đã được chọn, theo từng tập da_dung_id
@@ -222,7 +245,8 @@ def _ghep_tu_luan_nhieu_y(items: list[dict], mapping_chuong, pham_vi_bai,
         rows = [r for r in rows if bai_trong_de is None
                 or all(_bai_cua(y["curriculum_id"]) in bai_trong_de for y in r["cac_y"])]
         random.shuffle(rows)
-        rows.sort(key=lambda r: (r["id"] in da_dung_id, _khoa_mo_ta(r) in mo_ta_da_dung,
+        rows.sort(key=lambda r: (r["id"] in da_dung_id, _trung_boi_canh(r, mo_ta_da_dung),
+                                 _khoa_mo_ta(r) in mo_ta_da_dung,
                                  sum(dem_don_vi[_don_vi(y["curriculum_id"])] for y in r["cac_y"])))
         for r in rows:
             if r["id"] in da_dung_id:
@@ -244,6 +268,7 @@ def _ghep_tu_luan_nhieu_y(items: list[dict], mapping_chuong, pham_vi_bai,
             da_dung_id.add(r["id"])
             _DEM_DANG.setdefault(id(da_dung_id), Counter())[r["id"]] += 1
             mo_ta_da_dung.add(_khoa_mo_ta(r))
+            mo_ta_da_dung.update(_khoa_boi_canh(r))
             chon.append({
                 "generator_id": r["id"],
                 "chuong_so": chuong,
@@ -367,7 +392,8 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                 continue
             raise SelectorError(ghi_chu)
 
-        chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung["dung_sai_cau_lon"])
+        # TF chon TRUOC nen boi canh cua TF vao mo_ta_da_dung, MC/SA/TL tranh theo.
+        chosen = _xoay_vong_bien_the(candidates, so_luong, da_dung["dung_sai_cau_lon"], mo_ta_da_dung)
         for c in chosen:
             ket_qua.append({
                 "generator_id": c["id"],

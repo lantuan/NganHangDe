@@ -190,6 +190,17 @@ Mã nguồn: mapping_service.cac_y_tu_luan / so_suat_tu_luan,
 question_selector_service._ghep_tu_luan_nhieu_y. Kiểm thử:
 tests/test_tu_luan_nhieu_y.py, tests/test_mapping_curriculum.py.
 
+# Quy tắc bối cảnh: một đề không trùng bối cảnh (mọi chương, mọi loại câu)
+
+Chốt 01/10/2026 (cô Lan). Dòng Mapping của các dạng dùng chung một bối cảnh
+thực tiễn (MC, SA, TL và cả Đúng/Sai) ghi cùng "boi_canh" (chuỗi, hoặc danh
+sách nếu một dạng có nhiều bối cảnh), ví dụ "nui_toa_nha", "cong_troi",
+"cuoc_dien_thoai". Bộ chọn câu (question_selector_service._khoa_boi_canh)
+gom bối cảnh của MỌI câu đã chọn trong đề - Đúng/Sai chọn trước, rồi Tự luận,
+MC, SA - và ưu tiên dạng có bối cảnh chưa gặp; chỉ dùng lại khi không còn
+dạng nào khác. Làm dạng mới có bối cảnh thực tiễn thì PHẢI ghi "boi_canh".
+Kiểm thử: tests/test_boi_canh.py.
+
 # Ngoại lệ 4: Dạng "luyện tập thêm" - ngoài yêu cầu cần đạt (YCCĐ)
 
 Chốt 01/10/2026 (cô Lan): bài toán hay nhưng YCCĐ của Bộ không có thì VẪN đưa
