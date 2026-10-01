@@ -9616,3 +9616,7 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   - VD092_MC_B / SA_B: _01 biết tiền tìm số phút, _02 so sánh hai gói (số phút để bằng tiền, khoảng đầu cho nghiệm loại), _03 giá bậc thang 3 mức.
   - VD092_TL_B: a) (VD) viết hàm trên một khoảng, b) (VDC) buộc dùng hàm trên từng khoảng; _01 hai gói, _02 bậc thang.
 - Thống nhất mô tả "Dang" của MC_A, SA_A, TL_A, MC_B, SA_B, TL_B (cùng bối cảnh) để không ra chung một đề.
+
+# Version 3.88 - 2026-10-01
+
+- Hình cù lao (L10_C3_B6_VD036_TL_B_01, `_hinh_cu_lao`): nhãn số đo góc A, B đặt trên đường phân giác nên luôn nằm giữa góc khi đổi số liệu (trước đây dùng độ lệch cố định nên bị lệch). Tam giác vẽ theo góc "thu nhỏ" 47 + 0,5(góc − 60) độ: góc lớn hơn thì vẽ lớn hơn, nhưng không quá hẹp để còn chỗ ghi nhãn (hình minh hoạ).

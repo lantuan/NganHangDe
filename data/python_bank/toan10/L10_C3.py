@@ -1021,6 +1021,39 @@ HINH_DAM_LAY = r"""\begin{tikzpicture}[scale=1, font=\footnotesize, line join=ro
 \end{tikzpicture}"""
 
 
+def _tam_giac_cu_lao(c, A, B):
+    """Phần tam giác ABC của hình cù lao (cô Lan 01/10/2026: số đo góc phải nằm giữa góc
+    khi đổi số liệu). C cố định ở gốc cây, A và B trên bờ y = -3; nhãn góc đặt trên
+    đường phân giác, nhãn cạnh ở dưới trung điểm AB.
+    Góc thật (60-85 độ) vẽ đúng thì tam giác quá hẹp, không đặt được nhãn, nên vẽ góc
+    "thu nhỏ" g = 47 + 0.5(góc - 60): vẫn giữ góc lớn hơn thì vẽ lớn hơn (hình minh hoạ)."""
+    Cx, Cy, y0 = -1.38, -0.13, -3.0
+    h = Cy - y0
+    gA, gB = 47 + 0.5 * (A - 60), 47 + 0.5 * (B - 60)
+    Bx = Cx - h / math.tan(math.radians(gB))
+    Ax = Cx + h / math.tan(math.radians(gA))
+
+    def _nhan(Px, Py, Qx, Qy, Rx, Ry, r):
+        # điểm cách đỉnh P một đoạn r trên phân giác góc QPR
+        u = [Qx - Px, Qy - Py]
+        v = [Rx - Px, Ry - Py]
+        lu, lv = math.hypot(*u), math.hypot(*v)
+        w = [u[0] / lu + v[0] / lv, u[1] / lu + v[1] / lv]
+        lw = math.hypot(*w)
+        return Px + r * w[0] / lw, Py + r * w[1] / lw
+
+    xa, ya = _nhan(Ax, y0, Cx, Cy, Bx, y0, 1.55)
+    xb, yb = _nhan(Bx, y0, Ax, y0, Cx, Cy, 1.4)
+    return ("\\tkzDefPoints{%.3f/%.3f/C,%.3f/%.3f/B,%.3f/%.3f/A}\n" % (Cx, Cy, Bx, y0, Ax, y0)
+            + "\\tkzDrawPoints[fill=black](A,B,C)\n\\tkzDrawPolygon[very thick](A,B,C)\n"
+            + "\\node[below] at (%.3f,%.3f) {$%d$};\n" % ((Ax + Bx) / 2, y0, c)
+            + "\\tkzLabelPoints[below](A,B)\n\\tkzLabelPoints[above right](C)\n"
+            + "\\tkzMarkAngles[size=.7cm,arc=l,mark=|](C,A,B)\n"
+            + "\\tkzMarkAngles[size=.6cm,arc=l,mark=||](A,B,C)\n"
+            + "\\node at (%.3f,%.3f) {$%d^{\\circ}$};\n" % (xa, ya, A)
+            + "\\node at (%.3f,%.3f) {$%d^{\\circ}$};\n" % (xb, yb, B))
+
+
 def _hinh_cu_lao(c, A, B):
     """Hình con sông và cù lao; nhãn cạnh AB và hai góc lấy theo số liệu đề."""
     return r"""\begin{tikzpicture}[scale=.7, font=\footnotesize, line join = round, line cap = round,>=stealth]
@@ -1030,18 +1063,7 @@ def _hinh_cu_lao(c, A, B):
 \draw[fill=white] plot[smooth  cycle] coordinates{(-2.75,-0.08)(-1.83,0.32) (-0.03,0.42) (1,0) (0.24,-0.48)(-0.58,-0.79)(-1.38,-0.77)(-1.91,-0.71)};
 \draw[fill=black!70]  plot[smooth  cycle] coordinates{(-2.14,0.58)(-2.09,0.24)(-2.33,-0.13) (-1.19,-0.13) (-1.38,-0.13) (-1.69,0.21)(-1.75,0.53)};
 \draw[fill=blue!30]  plot[smooth  cycle] coordinates{(-1.75,0.53)(-1.46,0.79) (-1.01,0.58) (-1.08,1.06) (-0.64,1.08)(-0.93,1.59)(-0.53,1.85)(-0.93,2.2)(-1.38,2.7)(-2.04,3.18)(-2.49,2.91)(-3.07,2.91)(-3.2,2.22)(-3.73,1.96)(-3.1,1.3)(-3.31,1.01)(-2.83,1.01)(-2.99,0.69)(-2.14,0.58)};
-\tkzDefPoints{-1.38/-0.13/C,-2/-3/B,3/-2/A}
-\tkzDrawPoints[fill=black](A,B,C)
-\tkzDrawPolygon[very thick](A,B,C)
-\tkzDefMidPoint(A,B) \tkzGetPoint{M}
-\node at (M) [below] {$ %d $ };
-\tkzLabelPoints[below](A,B)
-\tkzLabelPoints[above right](C)
-\tkzMarkAngles[size=.7cm,arc=l,mark=|](C,A,B)
-\tkzMarkAngles[size=.5cm,arc=l,mark=||](A,B,C)
-\tkzLabelAngles[left=.8cm,pos=0.4,rotate=-20](B,A,C){\footnotesize$%d ^{\circ}$}
-\tkzLabelAngles[right=.5cm,pos=0.3](A,B,C){$%d ^{\circ}$}
-\end{tikzpicture}""" % (c, A, B)
+%s\end{tikzpicture}""" % _tam_giac_cu_lao(c, A, B)
 
 
 def L10_C3_B5_TH031_MC_B_01(socau, dang=1):
