@@ -137,6 +137,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH032_MC_B",   # biet ba canh tinh cos mot goc / cos goc lon nhat
     "L10_C3_B6_TH032_MC_D",   # he thuc canh -> goc: dang khai trien / dang tich
     "L10_C3_B6_TH033_TL_A",   # cho A, B / cho B, C (tu tinh A) roi dinh li sin
+    "L10_C1_B1_TH014_MC_D",   # _01 menh de va menh de dao, _02 menh de tuong duong
+    "L10_C1_B1_TH014_MC_F",   # _01 dung sai cua P va phu dinh, _02 chon menh de dung/sai
+    "L10_C1_B1_TH014_MC_G",   # _01 cho san dung/sai, _02 menh de cu the
+    "L10_C1_B1_TH014_SA_C",   # _01 cho san dung/sai, _02 menh de cu the
     "L10_C3_B6_TH034_MC_A",   # chon cong thuc theo du kien / cong thuc nao dung-sai
     "L10_C3_TF_C",            # tau hai chang: van toc-thoi gian / quang duong + huong la ban
     "L10_C3_B6_TH032_MC_F",   # cong thuc trung tuyen: chon dung / chon sai

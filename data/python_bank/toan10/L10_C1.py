@@ -508,7 +508,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
             giai_dung_sai = (
                 f"Mệnh đề đảo là "
-                f"\"${luong_tu_tex}: x > {a_val} \\Rightarrow |x| > {a_val}$\". "
+                f"``${luong_tu_tex}: x > {a_val} \\Rightarrow |x| > {a_val}$''. "
                 f"Nếu $x>{a_val}$ thì do ${a_val}>0$ nên $x>0$. "
                 f"Suy ra $|x|=x>{a_val}$. "
                 f"Do đó mệnh đề đảo là mệnh đề đúng."
@@ -521,7 +521,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
             giai_dung_sai = (
                 f"Mệnh đề đảo là "
-                f"\"${luong_tu_tex}: x \\ge {a_val} \\Rightarrow |x| \\ge {a_val}$\". "
+                f"``${luong_tu_tex}: x \\ge {a_val} \\Rightarrow |x| \\ge {a_val}$''. "
                 f"Nếu $x\\ge {a_val}$ thì do ${a_val}>0$ nên $x\\ge0$. "
                 f"Suy ra $|x|=x\\ge {a_val}$. "
                 f"Do đó mệnh đề đảo là mệnh đề đúng."
@@ -538,7 +538,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
                 giai_dung_sai = (
                     f"Mệnh đề đảo là "
-                    f"\"$\\forall x \\in \\mathbb{{R}}: x < {a_val} \\Rightarrow |x| < {a_val}$\". "
+                    f"``$\\forall x \\in \\mathbb{{R}}: x < {a_val} \\Rightarrow |x| < {a_val}$''. "
                     f"Mệnh đề này sai. "
                     f"Thật vậy, lấy $x={phan_vi_du}$ thì "
                     f"$x<{a_val}$ nhưng "
@@ -552,7 +552,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
                 giai_dung_sai = (
                     f"Mệnh đề đảo là "
-                    f"\"$\\exists x \\in \\mathbb{{R}}: x < {a_val} \\Rightarrow |x| < {a_val}$\". "
+                    f"``$\\exists x \\in \\mathbb{{R}}: x < {a_val} \\Rightarrow |x| < {a_val}$''. "
                     f"Lấy $x=0$ thì $0<{a_val}$ và $|0|=0<{a_val}$. "
                     f"Do đó tồn tại một số thực thỏa mãn mệnh đề, nên mệnh đề đảo đúng."
                 )
@@ -568,7 +568,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
                 giai_dung_sai = (
                     f"Mệnh đề đảo là "
-                    f"\"$\\forall x \\in \\mathbb{{R}}: x \\le {a_val} \\Rightarrow |x| \\le {a_val}$\". "
+                    f"``$\\forall x \\in \\mathbb{{R}}: x \\le {a_val} \\Rightarrow |x| \\le {a_val}$''. "
                     f"Mệnh đề này sai. "
                     f"Thật vậy, lấy $x={phan_vi_du}$ thì "
                     f"$x\\le {a_val}$ nhưng "
@@ -582,13 +582,13 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
                 giai_dung_sai = (
                     f"Mệnh đề đảo là "
-                    f"\"$\\exists x \\in \\mathbb{{R}}: x \\le {a_val} \\Rightarrow |x| \\le {a_val}$\". "
+                    f"``$\\exists x \\in \\mathbb{{R}}: x \\le {a_val} \\Rightarrow |x| \\le {a_val}$''. "
                     f"Lấy $x=0$ thì $0\\le {a_val}$ và $|0|=0\\le {a_val}$. "
                     f"Do đó tồn tại một số thực thỏa mãn mệnh đề, nên mệnh đề đảo đúng."
                 )
 
         debai = (
-            f"""Cho mệnh đề $P \\colon ``{luong_tu_tex}: |x| {dau} {a_val} """
+            f"""Cho mệnh đề $P$: ``${luong_tu_tex}: |x| {dau} {a_val} """
             f"""\\Rightarrow x {dau} {a_val}$''."""
         )
 
@@ -598,7 +598,7 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
                 "Phát biểu mệnh đề đảo của mệnh đề đã cho.",
                 f"${luong_tu_tex}: x {dau} {a_val} \\Rightarrow |x| {dau} {a_val}$",
                 f"Mệnh đề đảo của mệnh đề $P$ là "
-                f"\"${luong_tu_tex}: x {dau} {a_val} \\Rightarrow |x| {dau} {a_val}$\"."
+                f"``${luong_tu_tex}: x {dau} {a_val} \\Rightarrow |x| {dau} {a_val}$''."
             ],
 
             [
@@ -609,9 +609,9 @@ def L10_C1_B1_TH003_TL_A_01(socau, dong=1):
 
         ]
 
-        cauTN += TL_answer_const(
+        cauTN += TL_answer_text(
             debai,
-            ds_abcd,
+            _c1_ds_tl(ds_abcd),
             0,
             0,
             dong
@@ -867,9 +867,9 @@ def L10_C1_B1_TH003_TL_B_01(socau, dong=1):
 
             ]
 
-        cauTN += TL_answer_const(
+        cauTN += TL_answer_text(
             debai,
-            ds_abcd,
+            _c1_ds_tl(ds_abcd),
             0,
             0,
             dong
@@ -3553,7 +3553,7 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
         khoa = dapso
 
         if khoa not in [u["dapso"] for u in gt]:
-            gt.append({"dapso": dapso, "dsnhieu": dsnhieu})
+            gt.append({"dapso": dapso, "dsnhieu": dsnhieu, "ly": _c1_ly_th014_dung(nhom, locals())})
             dem += 1
 
     cauTN = ""
@@ -3561,7 +3561,7 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
     for v in gt:
 
         debai = "Trong các khẳng định sau, khẳng định nào đúng?"
-        giai = "Khẳng định đúng là phương án đã chọn."
+        giai = v["ly"]
 
         cauTN += MC_SA_answer_text(
             debai,
@@ -3803,7 +3803,7 @@ def L10_C1_B1_TH014_MC_B_01(socau, dang=1): ####### kiểm tra lại nội dung 
         khoa = dapso
 
         if khoa not in [u["dapso"] for u in gt]:
-            gt.append({"dapso": dapso, "dsnhieu": dsnhieu})
+            gt.append({"dapso": dapso, "dsnhieu": dsnhieu, "ly": _c1_ly_th014_sai(nhom, locals())})
             dem += 1
 
     cauTN = ""
@@ -3811,7 +3811,7 @@ def L10_C1_B1_TH014_MC_B_01(socau, dang=1): ####### kiểm tra lại nội dung 
     for v in gt:
 
         debai = "Trong các khẳng định sau, khẳng định nào \\textbf{sai}?"
-        giai = "Khẳng định đúng là phương án đã chọn."
+        giai = v["ly"]
 
         cauTN += MC_SA_answer_text(
             debai,
@@ -10591,3 +10591,729 @@ def L10_C1_B2_TH018_TL_A_01(socau, dong=1):
         ]
         cau += TL_answer_text(debai, ds, 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# L10_C1_B1_TH014 - XÁC ĐỊNH TÍNH ĐÚNG SAI CỦA MỆNH ĐỀ TRONG TRƯỜNG HỢP ĐƠN GIẢN (01/10/2026)
+# ---------------------------------------------------------------------
+# Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề toán học trong những trường hợp đơn giản"
+# -> CHỈ mức TH. Ba dạng lớn, mỗi dạng có MC, SA, TL:
+#   1) kéo theo, mệnh đề đảo, tương đương, phủ định của các mệnh đề toán học đã học
+#        MC_D (mệnh đề và mệnh đề đảo), MC_E (chọn mệnh đề đúng/sai), SA_A (đếm), TL L10_C1_NB010_TH014_TL_A
+#   2) mệnh đề chứa kí hiệu với mọi, tồn tại
+#        MC_F (đúng sai của P và của mệnh đề phủ định), SA_B (đếm), TL L10_C1_NB013_TH014_TL_A
+#   3) biết A, B, C đúng/sai, xét tính đúng sai của mệnh đề kéo theo, tương đương ghép từ A, B, C
+#        MC_G, SA_C (_01 cho sẵn đúng/sai, _02 cho mệnh đề cụ thể), TL L10_C1_TH003_TH014_TL_A
+# Hạn chế trùng ngữ cảnh: mỗi kho mệnh đề được lấy XOAY VÒNG (_c1_xoay) - chỉ dùng lại một mệnh đề
+# khi cả kho đã được dùng hết (giữ qua các lần gọi hàm trong cùng tiến trình máy chủ).
+# =====================================================================
+import sys as _sys
+import types as _types
+
+_C1_XV = _sys.modules.setdefault("_ngan_hang_xoay_vong", _types.ModuleType("_ngan_hang_xoay_vong"))
+if not hasattr(_C1_XV, "da_dung"):
+    _C1_XV.da_dung = {}
+
+
+def _c1_xoay(ten, n, k=1, tru=()):
+    """Chọn k chỉ số khác nhau trong range(n), ưu tiên chỉ số CHƯA dùng của kho 'ten'.
+    Kho được nhớ trong sys.modules nên vẫn còn khi tệp chương được nạp lại ở lần ra đề sau;
+    hết chỉ số chưa dùng thì xoá sổ, bắt đầu vòng mới."""
+    da = _C1_XV.da_dung.setdefault(ten, set())
+    con = [i for i in range(n) if i not in da and i not in tru]
+    if len(con) < k:
+        da.clear()
+        con = [i for i in range(n) if i not in tru]
+    chon = random.sample(con, k)
+    da.update(chon)
+    return chon
+
+
+def _c1_tl_dap(s):
+    """Đáp án tự luận đặt trong $...$ (TL_answer_text): phần chữ bọc \\text{}, phần công thức giữ nguyên."""
+    ra = []
+    for i, phan in enumerate(s.split("$")):
+        if i % 2 == 0:
+            if phan:
+                ra.append(r"\text{%s}" % phan)
+        else:
+            ra.append(phan)
+    return "".join(ra)
+
+
+def _c1_hoa(s):
+    """Viết hoa chữ cái đầu (bỏ qua công thức $...$ ở đầu câu)."""
+    return s[0].upper() + s[1:] if s and s[0] != "$" else s
+
+
+# ---------------------------------------------------------------------
+# Kho 1: cặp mệnh đề P, Q từ kiến thức đã học (THCS, đầu lớp 10).
+# Mỗi phần tử là hàm trả về (P, Q, P=>Q đúng?, Q=>P đúng?, lí do P=>Q, lí do Q=>P).
+# ---------------------------------------------------------------------
+def _dl_chia_het():
+    m = random.choice([6, 8, 10, 12, 14, 15, 18, 20, 21, 24, 30])
+    d = random.choice([u for u in range(2, m) if m % u == 0])
+    return (r"số tự nhiên $n$ chia hết cho $%d$" % m, r"$n$ chia hết cho $%d$" % d, True, False,
+            r"$%d = %d\cdot %d$ nên mọi bội của $%d$ đều là bội của $%d$" % (m, d, m // d, m, d),
+            r"$n = %d$ chia hết cho $%d$ nhưng không chia hết cho $%d$" % (d, d, m))
+
+
+def _dl_hai_uoc():
+    p, q = random.choice([(2, 3), (3, 4), (2, 5), (3, 5), (4, 5), (2, 7), (3, 7), (4, 7), (5, 6)])
+    return (r"số tự nhiên $n$ chia hết cho cả $%d$ và $%d$" % (p, q), r"$n$ chia hết cho $%d$" % (p * q), True, True,
+            r"$%d$ và $%d$ nguyên tố cùng nhau nên $n$ chia hết cho $%d\cdot %d = %d$" % (p, q, p, q, p * q),
+            r"$%d$ chia hết cho cả $%d$ và $%d$ nên mọi bội của $%d$ cũng vậy" % (p * q, p, q, p * q))
+
+
+def _dl_tong_chu_so():
+    k = random.choice([3, 9])
+    return (r"số tự nhiên $n$ chia hết cho $%d$" % k, r"tổng các chữ số của $n$ chia hết cho $%d$" % k, True, True,
+            r"dấu hiệu chia hết cho $%d$" % k, r"dấu hiệu chia hết cho $%d$" % k)
+
+
+def _dl_tan_cung():
+    k = random.choice([2, 5])
+    return (r"số tự nhiên $n$ có chữ số tận cùng là $0$", r"$n$ chia hết cho $%d$" % k, True, False,
+            r"số có chữ số tận cùng là $0$ chia hết cho $10$, do đó chia hết cho $%d$" % k,
+            r"$n = %d$ chia hết cho $%d$ nhưng có chữ số tận cùng là $%d$" % (k, k, k))
+
+
+def _dl_x_bang_k():
+    k = random.randint(2, 9)
+    return (r"$x = %d$" % k, r"$x^{2} = %d$" % (k * k), True, False,
+            r"$%d^{2} = %d$" % (k, k * k), r"$x = -%d$ cũng có $x^{2} = %d$" % (k, k * k))
+
+
+def _dl_nghiem():
+    r1, r2 = random.sample(range(-5, 7), 2)
+    S, P = r1 + r2, r1 * r2
+    pt = "x^{2}"
+    if S:
+        pt += (" - %dx" % S if S > 0 else " + %dx" % -S) if abs(S) != 1 else (" - x" if S > 0 else " + x")
+    if P:
+        pt += " + %d" % P if P > 0 else " - %d" % -P
+    return (r"$x = %d$" % r1, r"$%s = 0$" % pt, True, False,
+            r"thay $x = %d$ vào vế trái được $0$" % r1,
+            r"phương trình còn có nghiệm $x = %d \ne %d$" % (r2, r1))
+
+
+def _dl_lon_hon():
+    b = random.randint(1, 6)
+    a = b + random.randint(1, 5)
+    return (r"$x > %d$" % a, r"$x > %d$" % b, True, False,
+            r"$x > %d > %d$" % (a, b), r"$x = %d$ thoả mãn $x > %d$ nhưng $x \le %d$" % (a, b, a))
+
+
+def _dl_tri_tuyet_doi():
+    k = random.randint(2, 9)
+    return (r"$\left|x\right| < %d$" % k, r"$-%d < x < %d$" % (k, k), True, True,
+            r"định nghĩa giá trị tuyệt đối", r"định nghĩa giá trị tuyệt đối")
+
+
+_KHO_DL = [
+    lambda: (r"tứ giác $ABCD$ là hình vuông", r"tứ giác $ABCD$ có bốn cạnh bằng nhau", True, False,
+             r"hình vuông có bốn cạnh bằng nhau", r"hình thoi có bốn cạnh bằng nhau nhưng chưa chắc là hình vuông"),
+    lambda: (r"tứ giác $ABCD$ là hình chữ nhật", r"tứ giác $ABCD$ có hai đường chéo bằng nhau", True, False,
+             r"hình chữ nhật có hai đường chéo bằng nhau", r"hình thang cân có hai đường chéo bằng nhau nhưng không là hình chữ nhật"),
+    lambda: (r"tứ giác $ABCD$ là hình bình hành", r"hai đường chéo của tứ giác $ABCD$ cắt nhau tại trung điểm của mỗi đường",
+             True, True, r"tính chất của hình bình hành", r"dấu hiệu nhận biết hình bình hành"),
+    lambda: (r"tứ giác $ABCD$ là hình bình hành", r"tứ giác $ABCD$ có hai cạnh đối song song", True, False,
+             r"hình bình hành có các cạnh đối song song", r"hình thang có hai cạnh đối song song nhưng chưa chắc là hình bình hành"),
+    lambda: (r"tam giác $ABC$ là tam giác đều", r"tam giác $ABC$ có ba góc bằng nhau", True, True,
+             r"tam giác đều có ba góc bằng $60^{\circ}$", r"tam giác có ba góc bằng nhau là tam giác đều"),
+    lambda: (r"tam giác $ABC$ cân tại $A$", r"tam giác $ABC$ có $AB = AC$", True, True,
+             r"định nghĩa tam giác cân", r"định nghĩa tam giác cân"),
+    lambda: (r"tam giác $ABC$ vuông tại $A$", r"tam giác $ABC$ có $AB^{2} + AC^{2} = BC^{2}$", True, True,
+             r"định lí Pythagore", r"định lí Pythagore đảo"),
+    lambda: (r"tam giác $ABC$ là tam giác đều", r"tam giác $ABC$ là tam giác cân", True, False,
+             r"tam giác đều là tam giác cân", r"tam giác cân có góc ở đỉnh $120^{\circ}$ không là tam giác đều"),
+    lambda: (r"tam giác $ABC$ có hai góc bằng $60^{\circ}$", r"tam giác $ABC$ là tam giác đều", True, True,
+             r"góc còn lại bằng $180^{\circ} - 120^{\circ} = 60^{\circ}$", r"tam giác đều có ba góc bằng $60^{\circ}$"),
+    lambda: (r"tam giác $ABC$ vuông cân tại $A$", r"tam giác $ABC$ có $\widehat{B} = \widehat{C} = 45^{\circ}$", True, True,
+             r"hai góc nhọn của tam giác vuông cân bằng $45^{\circ}$", r"khi đó $\widehat{A} = 90^{\circ}$ và $AB = AC$"),
+    lambda: (r"hai góc là hai góc đối đỉnh", r"hai góc bằng nhau", True, False,
+             r"hai góc đối đỉnh thì bằng nhau", r"hai góc ở hai đáy của một tam giác cân bằng nhau nhưng không đối đỉnh"),
+    lambda: (r"hai tam giác bằng nhau", r"hai tam giác có diện tích bằng nhau", True, False,
+             r"hai tam giác bằng nhau thì diện tích bằng nhau",
+             r"tam giác vuông có hai cạnh góc vuông $2$, $6$ và tam giác vuông có hai cạnh góc vuông $3$, $4$ cùng diện tích $6$ nhưng không bằng nhau"),
+    lambda: (r"tứ giác $ABCD$ nội tiếp đường tròn", r"tứ giác $ABCD$ có tổng hai góc đối bằng $180^{\circ}$", True, True,
+             r"tính chất tứ giác nội tiếp", r"dấu hiệu nhận biết tứ giác nội tiếp"),
+    lambda: (r"$a$ và $b$ là hai số tự nhiên chẵn", r"$a + b$ là số chẵn", True, False,
+             r"tổng hai số chẵn là số chẵn", r"$a = 1$, $b = 3$ có $a + b = 4$ chẵn nhưng $a$, $b$ lẻ"),
+    lambda: (r"số nguyên $n$ là số lẻ", r"$n^{2}$ là số lẻ", True, True,
+             r"tích hai số lẻ là số lẻ", r"nếu $n$ chẵn thì $n^{2}$ chẵn"),
+    lambda: (r"phương trình bậc hai $ax^{2} + bx + c = 0$ có $a$ và $c$ trái dấu",
+             r"phương trình $ax^{2} + bx + c = 0$ có hai nghiệm phân biệt", True, False,
+             r"$ac < 0$ nên $\Delta = b^{2} - 4ac > 0$",
+             r"phương trình $x^{2} - 3x + 2 = 0$ có hai nghiệm $1$, $2$ nhưng $a = 1$, $c = 2$ cùng dấu"),
+    lambda: (r"$a > b$", r"$a^{2} > b^{2}$", False, False,
+             r"$a = 1$, $b = -2$ có $a > b$ nhưng $a^{2} = 1 < 4 = b^{2}$",
+             r"$a = -3$, $b = 1$ có $a^{2} > b^{2}$ nhưng $a < b$"),
+    lambda: (r"số tự nhiên $n$ là số nguyên tố", r"$n$ là số lẻ", False, False,
+             r"$2$ là số nguyên tố nhưng là số chẵn", r"$9$ là số lẻ nhưng không là số nguyên tố"),
+    lambda: (r"$x^{2} > 0$", r"$x \ne 0$", True, True,
+             r"nếu $x = 0$ thì $x^{2} = 0$", r"$x \ne 0$ thì $x^{2} > 0$"),
+    lambda: (r"$a = b$", r"$a^{2} = b^{2}$", True, False,
+             r"bình phương hai vế", r"$a = 2$, $b = -2$ có $a^{2} = b^{2}$ nhưng $a \ne b$"),
+    _dl_chia_het, _dl_hai_uoc, _dl_tong_chu_so, _dl_tan_cung, _dl_x_bang_k, _dl_nghiem, _dl_lon_hon, _dl_tri_tuyet_doi,
+]
+
+
+def _c1_dl(i, dao=None):
+    """Phần tử thứ i của kho 1, có thể đổi vai P, Q (để có cả mệnh đề sai và mệnh đề đảo)."""
+    P, Q, pq, qp, l_pq, l_qp = _KHO_DL[i]()
+    if dao is None:
+        dao = random.random() < 0.35
+    if dao:
+        P, Q, pq, qp, l_pq, l_qp = Q, P, qp, pq, l_qp, l_pq
+    # "Nếu $n$ chia hết cho 3 thì số tự nhiên $n$ ..." -> đưa "số tự nhiên" lên mệnh đề đứng trước
+    for ten in ("số tự nhiên ", "số nguyên ", "số thực "):
+        if P.startswith("$n$") and (ten + "$n$") in Q:
+            P, Q = ten + P, Q.replace(ten + "$n$", "$n$", 1)
+    return P, Q, pq, qp, l_pq, l_qp
+
+
+def _c1_cau_dl(i, kieu=None):
+    """Một mệnh đề (kéo theo / đảo / tương đương) dựng từ phần tử i của kho 1: (nội dung, đúng?, lí do)."""
+    P, Q, pq, qp, l_pq, l_qp = _c1_dl(i)
+    kieu = kieu or random.choice(["keo", "keo", "tuong"])
+    if kieu == "keo":
+        return r"Nếu %s thì %s" % (P, Q), pq, (l_pq if pq else r"phản ví dụ: " + l_pq)
+    ly = (r"cả hai mệnh đề ``Nếu %s thì %s'' và ``Nếu %s thì %s'' đều đúng (%s; %s)" % (P, Q, Q, P, l_pq, l_qp)
+          if pq and qp else
+          r"mệnh đề ``Nếu %s thì %s'' sai (%s)" % ((P, Q, l_pq) if not pq else (Q, P, l_qp)))
+    return _c1_hoa(r"%s khi và chỉ khi %s" % (P, Q)), pq and qp, ly
+
+
+def _c1_cau_phu_dinh():
+    """Một mệnh đề phủ định của một mệnh đề về số (_md_so): (nội dung, đúng?, lí do)."""
+    d = _md_so()
+    return (r"Mệnh đề phủ định của mệnh đề ``%s'' là mệnh đề đúng" % d["p"], not d["dung"],
+            r"mệnh đề ``%s'' %s (%s) nên mệnh đề phủ định của nó %s" % (d["p"], "đúng" if d["dung"] else "sai", d["ly_do"],
+                                                                         "sai" if d["dung"] else "đúng"))
+
+
+# ---------------------- Dạng 1: kéo theo, đảo, tương đương, phủ định ----------------------
+def L10_C1_B1_TH014_MC_D_01(socau, dang=1):
+    r"""Cho mệnh đề kéo theo ``Nếu P thì Q'' (định lí, tính chất đã học): chọn khẳng định đúng về tính
+    đúng sai của mệnh đề đó và của mệnh đề đảo ``Nếu Q thì P''.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 1: keo theo, dao, tuong duong). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        i, = _c1_xoay("c1_dl", len(_KHO_DL))
+        P, Q, pq, qp, l_pq, l_qp = _c1_dl(i)
+        de = (r"Cho mệnh đề ``Nếu %s thì %s''. Khẳng định nào sau đây đúng?" % (P, Q))
+        tt = {True: "đúng", False: "sai"}
+        pa = {(a, b): r"Mệnh đề đã cho %s, mệnh đề đảo của nó %s" % (tt[a], tt[b]) for a in (True, False) for b in (True, False)}
+        giai = (r"Mệnh đề đã cho %s vì %s.\\ Mệnh đề đảo ``Nếu %s thì %s'' %s vì %s."
+                % (tt[pq], l_pq, Q, P, tt[qp], l_qp))
+        cau += _MC_khong_cham(de, pa[(pq, qp)], [v for k, v in pa.items() if k != (pq, qp)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH014_MC_D_02(socau, dang=1):
+    r"""Cách hỏi khác của _01: cho mệnh đề tương đương ``P khi và chỉ khi Q'', chọn khẳng định đúng
+    (đúng hay sai và vì sao: xét hai mệnh đề kéo theo P => Q, Q => P).
+
+    CLAUDE THEM 01/10/2026 - bien the 02 cua TH014_MC_D. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        i, = _c1_xoay("c1_dl", len(_KHO_DL))
+        P, Q, pq, qp, l_pq, l_qp = _c1_dl(i, dao=random.random() < 0.5)
+        de = (r"Cho mệnh đề ``%s khi và chỉ khi %s''. Khẳng định nào sau đây đúng?" % (_c1_hoa(P), Q))
+        k1, k2 = r"``Nếu %s thì %s''" % (P, Q), r"``Nếu %s thì %s''" % (Q, P)
+        pa = {(True, True): r"Mệnh đề đã cho đúng vì %s và %s đều đúng" % (k1, k2),
+              (True, False): r"Mệnh đề đã cho sai vì %s đúng nhưng %s sai" % (k1, k2),
+              (False, True): r"Mệnh đề đã cho sai vì %s sai nhưng %s đúng" % (k1, k2),
+              (False, False): r"Mệnh đề đã cho sai vì %s và %s đều sai" % (k1, k2)}
+        tt = {True: "đúng", False: "sai"}
+        giai = (r"%s %s vì %s.\\ %s %s vì %s.\\ Mệnh đề tương đương chỉ đúng khi cả hai mệnh đề kéo theo đều đúng."
+                % (k1, tt[pq], l_pq, k2, tt[qp], l_qp))
+        cau += _MC_khong_cham(de, pa[(pq, qp)], [v for k, v in pa.items() if k != (pq, qp)], giai, 0, 0, dang)
+    return cau
+
+
+def _c1_bon_cau_dl(hoi_dung):
+    """Bốn mệnh đề (kéo theo, tương đương, phủ định) từ các phần tử KHÁC NHAU của kho: một mệnh đề có
+    tính đúng sai = hoi_dung, ba mệnh đề còn lại ngược lại."""
+    chon, khac = None, []
+    for _t in range(400):
+        if random.random() < 0.2:
+            t, d, l = _c1_cau_phu_dinh()
+            khoa = "pd" + t[:60]
+        else:
+            i, = _c1_xoay("c1_dl", len(_KHO_DL))
+            t, d, l = _c1_cau_dl(i)
+            khoa = "dl%d" % i
+        if khoa in [k for k, *_ in khac] or (chon and chon[0] == khoa):
+            continue
+        if d == hoi_dung and chon is None:
+            chon = (khoa, t, d, l)
+        elif d != hoi_dung and len(khac) < 3:
+            khac.append((khoa, t, d, l))
+        if chon and len(khac) == 3:
+            return chon[1:], [c[1:] for c in khac]
+    raise CauHongError("khong du menh de")
+
+
+def L10_C1_B1_TH014_MC_E_01(socau, dang=1):
+    r"""Chọn mệnh đề đúng (sai) trong bốn mệnh đề kéo theo, tương đương, phủ định dựng từ các định lí,
+    tính chất đã học (THCS) và mệnh đề về số.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 1). Khac MC_C (chi co keo theo). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        hoi_dung = random.choice([True, False])
+        (t, d, l), khac = _c1_bon_cau_dl(hoi_dung)
+        de = r"Mệnh đề nào sau đây là mệnh đề %s?" % ("đúng" if hoi_dung else r"\textbf{sai}")
+        giai = (r"``%s'' %s vì %s.\\ " % (t, "đúng" if d else "sai", l) +
+                r"\\ ".join(r"``%s'' %s vì %s." % (t2, "đúng" if d2 else "sai", l2) for t2, d2, l2 in khac))
+        cau += _MC_khong_cham(de, t, [c[0] for c in khac], giai, 0, 0, dang)
+    return cau
+
+
+def _c1_danh_sach(ds):
+    """Liệt kê mệnh đề trong đề bài, đánh số 1., 2., ... (không dùng \\item, không gạch đầu dòng)."""
+    return "\\\\\n".join(r"%d. %s." % (i + 1, t) for i, (t, _, _) in enumerate(ds))
+
+
+def _c1_giai_dem(ds):
+    return "\\\\\n".join(r"%d. %s vì %s." % (i + 1, r"\textbf{Đúng}" if d else r"\textbf{Sai}", l)
+                         for i, (t, d, l) in enumerate(ds))
+
+
+def L10_C1_B1_TH014_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - cho bốn mệnh đề kéo theo, tương đương, phủ định (định lí, tính chất đã học,
+    mệnh đề về số); hỏi có bao nhiêu mệnh đề đúng.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 1). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ds = []
+        for i in _c1_xoay("c1_dl", len(_KHO_DL), 3):
+            ds.append(_c1_cau_dl(i))
+        ds.insert(random.randint(0, 3), _c1_cau_phu_dinh())
+        dap = sum(1 for _, d, _ in ds if d)
+        de = r"Cho các mệnh đề sau:" + "\\\\\n" + _c1_danh_sach(ds) + "\\\\\n" + r"Có bao nhiêu mệnh đề đúng?"
+        giai = _c1_giai_dem(ds) + "\\\\\n" + r"Vậy có $%d$ mệnh đề đúng." % dap
+        cau += MC_SA_answer_const(de, str(dap), [str(v) for v in range(5) if v != dap], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_NB010_TH014_TL_A_01(socau, dong=1):
+    r"""Tự luận - cho mệnh đề ``Nếu P thì Q'' (định lí, tính chất đã học).
+    a) (NB010) Phát biểu mệnh đề đảo.
+    b) (TH014) Xét tính đúng sai của mệnh đề đã cho và của mệnh đề đảo; từ đó cho biết mệnh đề
+       ``P khi và chỉ khi Q'' đúng hay sai.
+
+    CLAUDE THEM 01/10/2026 - tu luan hai y hai don vi (NB010, TH014) theo co Lan (dang 1). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        i, = _c1_xoay("c1_dl", len(_KHO_DL))
+        P, Q, pq, qp, l_pq, l_qp = _c1_dl(i)
+        tt = {True: "đúng", False: "sai"}
+        de = r"Cho mệnh đề ``Nếu %s thì %s''." % (P, Q)
+        ds = [(r"Phát biểu mệnh đề đảo của mệnh đề đã cho.", _c1_tl_dap(r"Nếu %s thì %s" % (Q, P)),
+               r"Mệnh đề đảo: ``Nếu %s thì %s''." % (Q, P)),
+              (r"Xét tính đúng sai của mệnh đề đã cho và của mệnh đề đảo. Mệnh đề ``%s khi và chỉ khi %s'' đúng hay sai?" % (_c1_hoa(P), Q),
+               r"\text{Mệnh đề %s, mệnh đề đảo %s, mệnh đề tương đương %s}" % (tt[pq], tt[qp], tt[pq and qp]),
+               r"Mệnh đề đã cho %s vì %s.\\ Mệnh đề đảo %s vì %s.\\ Do đó mệnh đề ``%s khi và chỉ khi %s'' %s."
+               % (tt[pq], l_pq, tt[qp], l_qp, _c1_hoa(P), Q, tt[pq and qp]))]
+        cau += TL_answer_text(de, ds, 0, 0, dong)
+    return cau
+
+
+# ---------------------- Dạng 2: mệnh đề chứa kí hiệu với mọi, tồn tại ----------------------
+def _lt_kho():
+    """Kho mệnh đề chứa $\\forall$, $\\exists$ ở mức đơn giản: hàm trả về
+    (lượng từ, tập, mệnh đề chứa biến, mệnh đề chứa biến phủ định, đúng?, lí do, cách đọc bằng lời)."""
+    c = random.randint(1, 9)
+    a = random.randint(2, 9)
+    s = random.randint(2, 9)
+    k = random.choice([s * s, s * s + random.choice([1, 2, -1])])
+    can = math.isqrt(k)
+    return [
+        ("A", r"x \in \mathbb{R}", r"x^{2} + %d > 0" % c, r"x^{2} + %d \le 0" % c, True,
+         r"$x^{2} \ge 0$ nên $x^{2} + %d \ge %d > 0$" % (c, c), r"Với mọi số thực $x$, $x^{2} + %d > 0$" % c),
+        ("A", r"x \in \mathbb{R}", r"x^{2} - %d > 0" % c, r"x^{2} - %d \le 0" % c, False,
+         r"với $x = 0$ thì $x^{2} - %d = -%d < 0$" % (c, c), r"Với mọi số thực $x$, $x^{2} - %d > 0$" % c),
+        ("E", r"x \in \mathbb{R}", r"x^{2} + %d = 0" % c, r"x^{2} + %d \ne 0" % c, False,
+         r"$x^{2} + %d \ge %d > 0$ với mọi $x$" % (c, c), r"Tồn tại số thực $x$ sao cho $x^{2} + %d = 0$" % c),
+        ("E", r"x \in \mathbb{R}", r"x^{2} = %d" % c, r"x^{2} \ne %d" % c, True,
+         r"với $x = \sqrt{%d}$ thì $x^{2} = %d$" % (c, c), r"Tồn tại số thực $x$ sao cho $x^{2} = %d$" % c),
+        ("E", r"n \in \mathbb{N}", r"n^{2} = %d" % k, r"n^{2} \ne %d" % k, can * can == k,
+         (r"với $n = %d$ thì $n^{2} = %d$" % (can, k)) if can * can == k else
+         (r"$%d^{2} < %d < %d^{2}$ nên không có số tự nhiên nào" % (can, k, can + 1)),
+         r"Tồn tại số tự nhiên $n$ sao cho $n^{2} = %d$" % k),
+        ("A", r"n \in \mathbb{N}", r"n^{2} \ge n", r"n^{2} < n", True,
+         r"$n^{2} - n = n\left(n - 1\right) \ge 0$ với mọi số tự nhiên $n$", r"Với mọi số tự nhiên $n$, $n^{2} \ge n$"),
+        ("A", r"x \in \mathbb{R}", r"x^{2} \ge x", r"x^{2} < x", False,
+         r"với $x = \dfrac{1}{2}$ thì $x^{2} = \dfrac{1}{4} < \dfrac{1}{2}$", r"Với mọi số thực $x$, $x^{2} \ge x$"),
+        ("A", r"n \in \mathbb{N}", r"n\left(n + 1\right) \text{ chia hết cho } 2", r"n\left(n + 1\right) \text{ không chia hết cho } 2", True,
+         r"$n\left(n + 1\right)$ là tích hai số tự nhiên liên tiếp nên có một thừa số chẵn",
+         r"Với mọi số tự nhiên $n$, $n\left(n + 1\right)$ chia hết cho $2$"),
+        ("A", r"n \in \mathbb{N}", r"n^{2} + 1 \text{ là số lẻ}", r"n^{2} + 1 \text{ không là số lẻ}", False,
+         r"với $n = 1$ thì $n^{2} + 1 = 2$ là số chẵn", r"Với mọi số tự nhiên $n$, $n^{2} + 1$ là số lẻ"),
+        ("E", r"n \in \mathbb{Z}", r"%dn = %d" % (a, a * c), r"%dn \ne %d" % (a, a * c), True,
+         r"với $n = %d$ thì $%d\cdot %d = %d$" % (c, a, c, a * c), r"Tồn tại số nguyên $n$ sao cho $%dn = %d$" % (a, a * c)),
+        ("E", r"n \in \mathbb{Z}", r"%dn = %d" % (a, a * c + 1), r"%dn \ne %d" % (a, a * c + 1), False,
+         r"$n = \dfrac{%d}{%d}$ không là số nguyên" % (a * c + 1, a), r"Tồn tại số nguyên $n$ sao cho $%dn = %d$" % (a, a * c + 1)),
+        ("A", r"x \in \mathbb{R}", r"\left|x\right| \ge 0", r"\left|x\right| < 0", True,
+         r"giá trị tuyệt đối của mọi số thực đều không âm", r"Với mọi số thực $x$, $\left|x\right| \ge 0$"),
+        ("A", r"x \in \mathbb{R}", r"\left|x\right| > 0", r"\left|x\right| \le 0", False,
+         r"với $x = 0$ thì $\left|x\right| = 0$", r"Với mọi số thực $x$, $\left|x\right| > 0$"),
+        ("A", r"x \in \mathbb{R}", r"\left(x - %d\right)^{2} > 0" % a, r"\left(x - %d\right)^{2} \le 0" % a, False,
+         r"với $x = %d$ thì $\left(x - %d\right)^{2} = 0$" % (a, a), r"Với mọi số thực $x$, $\left(x - %d\right)^{2} > 0$" % a),
+        ("A", r"x \in \mathbb{R}", r"\left(x - %d\right)^{2} \ge 0" % a, r"\left(x - %d\right)^{2} < 0" % a, True,
+         r"bình phương của mọi số thực đều không âm", r"Với mọi số thực $x$, $\left(x - %d\right)^{2} \ge 0$" % a),
+        ("E", r"x \in \mathbb{Q}", r"x^{2} = 2", r"x^{2} \ne 2", False,
+         r"$x^{2} = 2$ chỉ có nghiệm $x = \pm\sqrt{2}$ là các số vô tỉ", r"Tồn tại số hữu tỉ $x$ sao cho $x^{2} = 2$"),
+        ("A", r"n \in \mathbb{N}", r"2n + 1 \text{ là số lẻ}", r"2n + 1 \text{ không là số lẻ}", True,
+         r"$2n$ chẵn nên $2n + 1$ lẻ", r"Với mọi số tự nhiên $n$, $2n + 1$ là số lẻ"),
+        ("E", r"x \in \mathbb{R}", r"x > x^{2}", r"x \le x^{2}", True,
+         r"với $x = \dfrac{1}{2}$ thì $\dfrac{1}{2} > \dfrac{1}{4}$", r"Tồn tại số thực $x$ sao cho $x > x^{2}$"),
+        ("E", r"x \in \mathbb{Z}", r"x^{2} < 0", r"x^{2} \ge 0", False,
+         r"$x^{2} \ge 0$ với mọi số nguyên $x$", r"Tồn tại số nguyên $x$ sao cho $x^{2} < 0$"),
+        ("A", r"x \in \mathbb{R}", r"x + %d > x" % c, r"x + %d \le x" % c, True,
+         r"$x + %d - x = %d > 0$" % (c, c), r"Với mọi số thực $x$, $x + %d > x$" % c),
+        ("E", r"n \in \mathbb{N}", r"n \text{ là số nguyên tố chẵn}", r"n \text{ không là số nguyên tố chẵn}", True,
+         r"$n = 2$ là số nguyên tố chẵn", r"Tồn tại số tự nhiên $n$ là số nguyên tố chẵn"),
+    ]
+
+
+_SO_LT = len(_lt_kho())
+
+
+def _lt_tex(q, tap, p):
+    return r"%s %s,\ %s" % (r"\forall" if q == "A" else r"\exists", tap, p)
+
+
+def _lt(i):
+    q, tap, p, np_, d, ly, loi = _lt_kho()[i]
+    return dict(q=q, tap=tap, p=p, np=np_, dung=d, ly=ly, loi=loi, tex=_lt_tex(q, tap, p),
+                phu=_lt_tex("E" if q == "A" else "A", tap, np_), phu_sai=_lt_tex(q, tap, np_))
+
+
+def L10_C1_B1_TH014_MC_F_01(socau, dang=1):
+    r"""Cho mệnh đề $P$ chứa kí hiệu $\forall$ hoặc $\exists$ (mức đơn giản): chọn khẳng định đúng về tính
+    đúng sai của $P$ và mệnh đề phủ định $\overline{P}$.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 2: voi moi, ton tai). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        i, = _c1_xoay("c1_lt", _SO_LT)
+        m = _lt(i)
+        tt = {True: "đúng", False: "sai"}
+        de = r"Cho mệnh đề $P$: ``$%s$''. Khẳng định nào sau đây đúng?" % m["tex"]
+        pa = {(d, phu): r"$P$ là mệnh đề %s và $\overline{P}$: ``$%s$''" % (tt[d], phu)
+              for d in (True, False) for phu in (m["phu"], m["phu_sai"])}
+        dung = pa[(m["dung"], m["phu"])]
+        giai = (r"$P$ %s vì %s.\\ Phủ định của $\forall$ là $\exists$, phủ định của $\exists$ là $\forall$ và phủ định "
+                r"mệnh đề chứa biến, nên $\overline{P}$: ``$%s$''." % (tt[m["dung"]], m["ly"], m["phu"]))
+        cau += _MC_khong_cham(de, dung, [v for v in pa.values() if v != dung], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH014_MC_F_02(socau, dang=1):
+    r"""Cách hỏi khác của _01: chọn mệnh đề ĐÚNG (SAI) trong bốn mệnh đề chứa $\forall$, $\exists$ mà có
+    cả mệnh đề phủ định của một mệnh đề khác.
+
+    CLAUDE THEM 01/10/2026 - bien the 02 cua TH014_MC_F. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        hoi_dung = random.choice([True, False])
+        chon, khac, da = None, [], set()
+        for _t in range(300):
+            i, = _c1_xoay("c1_lt", _SO_LT)
+            m = _lt(i)
+            if random.random() < 0.4:
+                t, d, l = m["phu"], not m["dung"], r"đây là phủ định của $%s$, mà mệnh đề này %s (%s)" % (
+                    m["tex"], "đúng" if m["dung"] else "sai", m["ly"])
+            else:
+                t, d, l = m["tex"], m["dung"], m["ly"]
+            if i in da:
+                continue
+            if d == hoi_dung and chon is None:
+                chon = (t, d, l); da.add(i)
+            elif d != hoi_dung and len(khac) < 3:
+                khac.append((t, d, l)); da.add(i)
+            if chon and len(khac) == 3:
+                break
+        de = r"Mệnh đề nào sau đây %s?" % ("đúng" if hoi_dung else r"\textbf{sai}")
+        giai = "\\\\ ".join(r"$%s$ %s vì %s." % (t, "đúng" if d else "sai", l) for t, d, l in [chon] + khac)
+        cau += _MC_khong_cham(de, "$%s$" % chon[0], ["$%s$" % c[0] for c in khac], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH014_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cho bốn mệnh đề chứa $\forall$, $\exists$ ở mức đơn giản (có thể có mệnh đề phủ
+    định); hỏi có bao nhiêu mệnh đề đúng.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 2). Khac VD014_SA_B (menh de muc VD). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        ds = []
+        for i in _c1_xoay("c1_lt", _SO_LT, 4):
+            m = _lt(i)
+            if random.random() < 0.3:
+                ds.append((r"$\overline{P}$ với $P$: ``$%s$''" % m["tex"], not m["dung"],
+                           r"$P$ %s (%s) nên $\overline{P}$ %s" % ("đúng" if m["dung"] else "sai", m["ly"],
+                                                                  "sai" if m["dung"] else "đúng")))
+            else:
+                ds.append(("$%s$" % m["tex"], m["dung"], m["ly"]))
+        dap = sum(1 for _, d, _ in ds if d)
+        de = r"Cho các mệnh đề sau:" + "\\\\\n" + _c1_danh_sach(ds) + "\\\\\n" + r"Có bao nhiêu mệnh đề đúng?"
+        giai = _c1_giai_dem(ds) + "\\\\\n" + r"Vậy có $%d$ mệnh đề đúng." % dap
+        cau += MC_SA_answer_const(de, str(dap), [str(v) for v in range(5) if v != dap], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_NB013_TH014_TL_A_01(socau, dong=1):
+    r"""Tự luận - cho mệnh đề $P$ viết bằng kí hiệu $\forall$ hoặc $\exists$.
+    a) (NB013) Phát biểu mệnh đề $P$ bằng lời.
+    b) (TH014) Xét tính đúng sai của mệnh đề $P$ (giải thích).
+
+    CLAUDE THEM 01/10/2026 - tu luan hai y hai don vi (NB013, TH014) theo co Lan (dang 2). Khac TH003_TL_A_02
+    (viet bang ki hieu) va VD014_TL_B (lap menh de phu dinh). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        i, = _c1_xoay("c1_lt", _SO_LT)
+        m = _lt(i)
+        de = r"Cho mệnh đề $P$: ``$%s$''." % m["tex"]
+        ds = [(r"Phát biểu mệnh đề $P$ bằng lời.", _c1_tl_dap(m["loi"]),
+               r"$P$: ``%s''." % m["loi"]),
+              (r"Xét tính đúng sai của mệnh đề $P$.", r"\text{%s}" % ("Đúng" if m["dung"] else "Sai"),
+               r"Mệnh đề $P$ %s vì %s." % ("đúng" if m["dung"] else "sai", m["ly"]))]
+        cau += TL_answer_text(de, ds, 0, 0, dong)
+    return cau
+
+
+# ---------------------- Dạng 3: biết A, B, C đúng/sai, xét mệnh đề ghép ----------------------
+def _ghep(X, Y, vX, vY):
+    """Các mệnh đề ghép đơn giản từ X, Y: (LaTeX, đúng?, cách tính)."""
+    tt = lambda v: "đúng" if v else "sai"
+    gn = lambda t: r"\overline{%s}" % t
+    cX, cY = r"$%s$ %s" % (X, tt(vX)), r"$%s$ %s" % (Y, tt(vY))
+    nX, nY = r"$\overline{%s}$ %s" % (X, tt(not vX)), r"$\overline{%s}$ %s" % (Y, tt(not vY))
+    return [
+        (r"%s \Rightarrow %s" % (X, Y), (not vX) or vY, cX + ", " + cY),
+        (r"%s \Rightarrow %s" % (Y, X), (not vY) or vX, cY + ", " + cX),
+        (r"%s \Leftrightarrow %s" % (X, Y), vX == vY, cX + ", " + cY),
+        (r"%s \Rightarrow %s" % (gn(X), Y), vX or vY, nX + ", " + cY),
+        (r"%s \Rightarrow %s" % (X, gn(Y)), (not vX) or (not vY), cX + ", " + nY),
+        (r"%s \Leftrightarrow %s" % (gn(X), Y), (not vX) == vY, nX + ", " + cY),
+    ]
+
+
+def _c1_ly_ghep(t, d, gt):
+    return r"$%s$ %s (%s)" % (t, "đúng" if d else "sai", gt)
+
+
+def _c1_ba_md(cu_the):
+    """Ba mệnh đề A, B, C: chân trị và đoạn giới thiệu. cu_the=True: mệnh đề về số cụ thể (_md_so)."""
+    while True:
+        v = [random.choice([True, False]) for _ in range(3)]
+        if len(set(v)) == 2:
+            break
+    if not cu_the:
+        tt = lambda x: "đúng" if x else "sai"
+        gt = r"$A$ %s, $B$ %s, $C$ %s" % (tt(v[0]), tt(v[1]), tt(v[2]))
+        return v, r"Cho ba mệnh đề $A$, $B$, $C$, trong đó $A$ là mệnh đề %s, $B$ là mệnh đề %s và $C$ là mệnh đề %s." % (
+            tt(v[0]), tt(v[1]), tt(v[2])), gt, None
+    md, loai_da = [], set()
+    for vi in v:
+        while True:
+            loai = random.randint(0, 8)
+            if loai in loai_da:
+                continue
+            d = _md_so(loai)
+            if d["dung"] == vi:
+                loai_da.add(loai)
+                md.append(d)
+                break
+    gt = "; ".join(r"$%s$ %s vì %s" % (T, "đúng" if d["dung"] else "sai", d["ly_do"]) for T, d in zip("ABC", md))
+    gioi = (r"Cho ba mệnh đề $A$: ``%s'', $B$: ``%s'', $C$: ``%s''." % (md[0]["p"], md[1]["p"], md[2]["p"]))
+    return v, gioi, gt, md
+
+
+def _c1_cac_ghep(v):
+    """Mọi mệnh đề ghép đơn giản từ hai trong ba mệnh đề A, B, C."""
+    ten = "ABC"
+    ra = []
+    for i in range(3):
+        for j in range(3):
+            if i < j:
+                ra += _ghep(ten[i], ten[j], v[i], v[j])
+    random.shuffle(ra)
+    return ra
+
+
+def _c1_mc_g(socau, dang, cu_the):
+    cau = ""
+    for _ in range(socau):
+        v, gioi, gt, _md = _c1_ba_md(cu_the)
+        hoi_dung = random.choice([True, False])
+        ghep = _c1_cac_ghep(v)
+        dung = [g for g in ghep if g[1] == hoi_dung]
+        khac = [g for g in ghep if g[1] != hoi_dung]
+        if not dung or len(khac) < 3:
+            hoi_dung = not hoi_dung
+            dung, khac = khac, dung
+        chon = dung[0]
+        khac = khac[:3]
+        de = gioi + r" Mệnh đề nào sau đây là mệnh đề %s?" % ("đúng" if hoi_dung else r"\textbf{sai}")
+        giai = (gt + r".\\ Mệnh đề $X \Rightarrow Y$ chỉ sai khi $X$ đúng và $Y$ sai; mệnh đề $X \Leftrightarrow Y$ đúng khi $X$, "
+                r"$Y$ cùng đúng hoặc cùng sai; $\overline{X}$ có tính đúng sai ngược với $X$.\\ "
+                + r"\\ ".join(_c1_ly_ghep(t, d, w) + "." for t, d, w in [chon] + khac))
+        cau += _MC_khong_cham(de, "$%s$" % chon[0], ["$%s$" % c[0] for c in khac], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH014_MC_G_01(socau, dang=1):
+    r"""Cho ba mệnh đề $A$, $B$, $C$ đã biết tính đúng sai (ví dụ $A$ đúng, $B$ sai, $C$ đúng): chọn mệnh đề
+    kéo theo, tương đương (có thể có phủ định) đúng / sai ghép từ $A$, $B$, $C$.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 3). Co Lan duyet lai.
+    """
+    return _c1_mc_g(socau, dang, False)
+
+
+def L10_C1_B1_TH014_MC_G_02(socau, dang=1):
+    r"""Cách hỏi khác của _01: $A$, $B$, $C$ là ba mệnh đề cụ thể về số (học sinh tự xét tính đúng sai),
+    rồi chọn mệnh đề kéo theo, tương đương đúng / sai ghép từ chúng.
+
+    CLAUDE THEM 01/10/2026 - bien the 02 cua TH014_MC_G. Co Lan duyet lai.
+    """
+    return _c1_mc_g(socau, dang, True)
+
+
+def _c1_sa_c(socau, dang, cu_the):
+    cau = ""
+    for _ in range(socau):
+        v, gioi, gt, _md = _c1_ba_md(cu_the)
+        ghep = _c1_cac_ghep(v)[:4]
+        ds = [("$%s$" % t, d, w) for t, d, w in ghep]
+        dap = sum(1 for _, d, _ in ds if d)
+        de = gioi + r" Trong các mệnh đề sau, có bao nhiêu mệnh đề đúng?" + "\\\\\n" + _c1_danh_sach(ds)
+        giai = (gt + r".\\ " + "\\\\\n".join(r"%d. $%s$ %s vì %s." % (i + 1, t, r"\textbf{đúng}" if d else r"\textbf{sai}", w)
+                                             for i, (t, d, w) in enumerate(ghep)) + "\\\\\n" + r"Vậy có $%d$ mệnh đề đúng." % dap)
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in range(5) if x != dap], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH014_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - biết $A$, $B$, $C$ đúng hay sai; trong bốn mệnh đề kéo theo, tương đương ghép từ
+    $A$, $B$, $C$ có bao nhiêu mệnh đề đúng.
+
+    CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (dang 3). Co Lan duyet lai.
+    """
+    return _c1_sa_c(socau, dang, False)
+
+
+def L10_C1_B1_TH014_SA_C_02(socau, dang=2):
+    r"""Cách hỏi khác của _01: $A$, $B$, $C$ là ba mệnh đề cụ thể về số.
+
+    CLAUDE THEM 01/10/2026 - bien the 02 cua TH014_SA_C. Co Lan duyet lai.
+    """
+    return _c1_sa_c(socau, dang, True)
+
+
+def L10_C1_TH003_TH014_TL_A_01(socau, dong=1):
+    r"""Tự luận - ba mệnh đề cụ thể $A$, $B$, $C$ về số.
+    a) (TH003) Xét tính đúng sai của $A$, $B$, $C$.
+    b) (TH014) Xét tính đúng sai của hai mệnh đề kéo theo / tương đương ghép từ $A$, $B$, $C$.
+
+    CLAUDE THEM 01/10/2026 - tu luan hai y hai don vi (TH003, TH014) theo co Lan (dang 3). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        v, gioi, gt, md = _c1_ba_md(True)
+        ghep = _c1_cac_ghep(v)
+        g1 = ghep[0][:2]
+        g2 = next(g for g in ghep[1:] if ("Leftrightarrow" in g[0]) != ("Leftrightarrow" in g1[0]))[:2]
+        tt = lambda x: "đúng" if x else "sai"
+        ds = [(r"Xét tính đúng sai của các mệnh đề $A$, $B$, $C$.",
+               r"\text{A %s, B %s, C %s}" % (tt(v[0]), tt(v[1]), tt(v[2])), gt + "."),
+              (r"Xét tính đúng sai của các mệnh đề $%s$ và $%s$." % (g1[0], g2[0]),
+               r"\text{%s %s, %s %s}" % ("mệnh đề thứ nhất", tt(g1[1]), "mệnh đề thứ hai", tt(g2[1])),
+               r"Theo ý a): %s.\\ Mệnh đề $X \Rightarrow Y$ chỉ sai khi $X$ đúng và $Y$ sai; $X \Leftrightarrow Y$ đúng khi $X$, $Y$ "
+               r"cùng đúng hoặc cùng sai.\\ Do đó $%s$ %s, $%s$ %s."
+               % (r"$A$ %s, $B$ %s, $C$ %s" % (tt(v[0]), tt(v[1]), tt(v[2])), g1[0], tt(g1[1]), g2[0], tt(g2[1])))]
+        cau += TL_answer_text(gioi, ds, 0, 0, dong)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# Sửa các hàm cũ của TH003 / TH014 (kiểm tra 01/10/2026)
+# ---------------------------------------------------------------------
+def _c1_ds_tl(ds):
+    """Làm sạch đáp án tự luận cho TL_answer_text: bỏ cặp $...$ bao ngoài, 'Đúng'/'Sai' bọc \\text{}.
+    (Trước đây TL_answer_const đưa chuỗi qua vlatex nên đáp án bị in thành \\mathtt{\\text{\\$...}}.)"""
+    ra = []
+    for hoi, dap, giai in ds:
+        d = str(dap).strip()
+        if d.startswith("$") and d.endswith("$") and d.count("$") == 2:
+            d = d[1:-1]
+        if d in ("Đúng", "Sai"):
+            d = r"\text{%s}" % d
+        ra.append([hoi, d, giai])
+    return ra
+
+
+def _c1_ly_th014_dung(nhom, bien):
+    """Lời giải cho L10_C1_B1_TH014_MC_A_01 (chọn khẳng định ĐÚNG), theo nhóm."""
+    a, b, c = bien.get("a"), bien.get("b"), bien.get("c")
+    LY = {
+        1: r"$n^2 \ge 0$ nên $n^2 + %s \ge %s > 0$ với mọi số nguyên $n$" % (a, a),
+        2: r"$\left|x\right| \ge 0$ nên $\left|x\right| + %s \ge %s > 0$ với mọi số thực $x$" % (a, a),
+        3: r"phương trình có nghiệm $x = %s$" % (_tex_so(Rational(-(b or 0), a or 1)) if a else "0"),
+        4: r"$%s = %s\cdot %s$ nên mọi bội của $%s$ đều là bội của $%s$" % (a, b, (a // b) if a and b else "", a, b),
+        5: r"mọi số tự nhiên đều là số nguyên",
+        6: r"$p = 2$ là số nguyên tố chẵn",
+        7: r"$n = 2k$ thì $n^2 = 4k^2$ là số chẵn",
+        8: r"$n = 2k + 1$ thì $n^2 = 2\left(2k^2 + 2k\right) + 1$ là số lẻ",
+        9: r"$n = %s$ chia hết cho $%s$" % (a, a),
+        10: r"$x = -1 < 0$",
+        11: r"$x = 0$ có $\left|x\right| = 0$",
+        12: r"mọi số thực đều bằng chính nó",
+        13: r"$\left(n + 1\right) - n = 1 > 0$",
+        14: r"$x^2 \ge 0$ nên $x^2 + %s \ge %s > 0$" % (c, c),
+        15: r"$n = 2$ là số tự nhiên chẵn",
+        16: r"$n = 1$ là số tự nhiên lẻ",
+    }
+    ly = LY.get(nhom, r"$n = %s > %s$" % ((a or 0) + 1, a))
+    return r"Khẳng định đúng là phương án đã chọn vì %s. Các khẳng định còn lại đều sai." % ly
+
+
+def _c1_ly_th014_sai(nhom, bien):
+    """Lời giải cho L10_C1_B1_TH014_MC_B_01 (chọn khẳng định SAI), theo nhóm."""
+    a, b, c = bien.get("a"), bien.get("b"), bien.get("c")
+    LY = {
+        1: r"với $n = 0$ thì $n^2 + %s = %s > 0$" % (a, a),
+        2: r"$\left|x\right| + %s \ge %s > 0$ với mọi số thực $x$" % (a, a),
+        3: r"phương trình $%sx + \left(%s\right) = 0$ chỉ có một nghiệm nên không đúng với mọi số thực $x$" % (a, b),
+        4: r"$n = %s$ chia hết cho $%s$ nhưng không chia hết cho $%s$" % (b, b, a),
+        5: r"$p = 3$ là số nguyên tố nhưng là số lẻ",
+        6: r"$n = 2$ chẵn và $n^2 = 4$ cũng chẵn",
+        7: r"$n = 1$ lẻ và $n^2 = 1$ cũng lẻ",
+        8: r"$n = %s$ chia hết cho $%s$" % (a, a),
+        9: r"$x = 1 > 0$",
+        10: r"$x = 0$ có $\left|x\right| = 0$",
+        11: r"mọi số thực đều bằng chính nó",
+        12: r"$n + 1 > n$ với mọi số tự nhiên $n$",
+        13: r"$x^2 + %s \ge %s > 0$ với mọi số thực $x$" % (c, c),
+        14: r"$n = 1$ là số tự nhiên lẻ",
+        15: r"$n = 2$ là số tự nhiên chẵn",
+    }
+    ly = LY.get(nhom, r"$n = %s$ không lớn hơn $%s$" % (a, a))
+    return r"Khẳng định sai là phương án đã chọn vì %s. Các khẳng định còn lại đều đúng." % ly

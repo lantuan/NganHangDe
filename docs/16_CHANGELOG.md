@@ -9713,3 +9713,17 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 ## Tháp trên đồi: số liệu hợp lí (cô Lan: "đề phải hợp lí")
 - _bo_thap_doi (VD036_MC_I, SA_K, TL_H): sườn đồi dốc không quá 30° (góc so với phương thẳng đứng tại chân tháp từ 60° đến 75°), đồi cao ít nhất nửa tháp, chân đồi cách chân đường thẳng đứng qua tháp ít nhất 50 m. Trước đây có thể ra tháp 25 m trên "đồi" 12 m, chân đồi cách 13 m (dốc 43°).
 - VD036_MC_D_02: góc nâng tới chân tháp 15°-30°, đồi cao ít nhất nửa tháp, chân đồi cách ít nhất 50 m.
+
+# Version 3.97 - 2026-10-01
+
+## Chương 1 lớp 10: L10_C1_B1_TH014 - tính đúng sai của mệnh đề trong trường hợp đơn giản (chỉ mức TH)
+Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề toán học trong những trường hợp đơn giản" -> chỉ dừng ở TH; ba dạng lớn, đủ MC, SA, TL:
+- Dạng 1 - kéo theo, mệnh đề đảo, tương đương, phủ định của định lí, tính chất đã học (kho 28 cặp P, Q: hình học THCS, chia hết, phương trình, bất đẳng thức; có tham số): TH014_MC_D (_01 mệnh đề và mệnh đề đảo, _02 mệnh đề tương đương), MC_E, SA_A, TL L10_C1_NB010_TH014_TL_A (a phát biểu mệnh đề đảo, b xét đúng sai).
+- Dạng 2 - mệnh đề chứa ∀, ∃ mức đơn giản (kho 21 mệnh đề có sẵn phủ định): TH014_MC_F (_01 tính đúng sai của P và của mệnh đề phủ định, _02 chọn mệnh đề đúng/sai), SA_B, TL L10_C1_NB013_TH014_TL_A (a phát biểu bằng lời, b xét đúng sai).
+- Dạng 3 - biết A, B, C đúng/sai, xét mệnh đề kéo theo, tương đương (có phủ định) ghép từ A, B, C: TH014_MC_G, SA_C (_01 cho sẵn đúng/sai, _02 A, B, C là mệnh đề cụ thể về số), TL L10_C1_TH003_TH014_TL_A (a xét A, B, C - TH003; b xét mệnh đề ghép - TH014).
+- Mỗi dạng lớn dùng chung một mô tả "Dang" ở MC, SA, TL nên một đề không ra hai câu cùng dạng lớn (trừ khi hết dạng khác).
+- Hạn chế trùng ngữ cảnh: các kho mệnh đề lấy XOAY VÒNG (_c1_xoay) - một mệnh đề chỉ ra lại khi cả kho đã ra hết; sổ xoay vòng giữ trong sys.modules nên còn qua các lần nạp lại tệp chương trên máy chủ.
+
+## Kiểm tra các hàm cũ của TH003 / TH014
+- TH014_MC_A_01, MC_B_01: lời giải chỉ ghi "Khẳng định đúng là phương án đã chọn" (MC_B hỏi khẳng định SAI mà vẫn ghi vậy) -> nay có lời giải theo từng nhóm (_c1_ly_th014_dung / _c1_ly_th014_sai).
+- TH003_TL_A_01, TL_B_01: TL_answer_const đưa chuỗi qua vlatex nên đáp án in thành \mathtt{\text{\$...}} (rác trên web) -> dùng TL_answer_text với đáp án đã làm sạch (_c1_ds_tl). TL_A_01: ngoặc kép đặt trong $...$ in thành dấu phẩy trên -> đưa ra ngoài.
