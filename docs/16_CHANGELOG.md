@@ -9580,6 +9580,8 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   co hinh do math_type.TF_dothi_de sinh ra \immini[thm]{de ... \choiceTFt...}{HINH}); de bai bi
   cat giua \immini (dung tai \choiceTFt) thi bo lenh, giu phan chu. Truoc day "[thm]" lam ham
   dung lai nen MOI cau Dung/Sai co hinh deu hien "\immini[thm]{" tren web.
-- trich_loi_giai: loi giai co \immini[thm]{CHU}{HINH} giu phan chu, hinh TikZ thay bang
+- loi_giai_cho_web (moi): chi o tang web (exam.py, gia_su_service) - loi giai co \immini[thm]{CHU}{HINH} giu phan chu, hinh TikZ thay bang
   "(Hinh ve: xem ban PDF)".
 - Test: tests/test_hinh_cau_dung_sai_len_web.py (TF_G, TF_H, TF_I; loi giai co hinh).
+- (bo sung) trich_loi_giai GIU NGUYEN hinh vi word_service dung no de ve hinh loi giai vao file Word;
+  da kiem: TF_H, TF_I, TL_H, MC_I xuat Word khong con "\immini", hinh van co.

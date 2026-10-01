@@ -30,6 +30,7 @@ from app.services.answer_parser_service import (
     AnswerParseError,
     chuan_hoa_dap_an_ngan,
     chuan_hoa_dap_an_tf,
+    loi_giai_cho_web,
 )
 from app.services.hinh_ve_service import duong_dan_anh
 # Ten 4 phan lay tu gia_su_service de CHI CO MOT nguon - PDF, trang lam
@@ -933,7 +934,7 @@ def grade_endpoint(payload: ChamBaiRequest):
                 "so_thu_tu": bl.so_thu_tu,
                 "trang_thai": trang_thai_cau,
                 "dap_an_hoc_sinh": bl.cau_tra_loi,
-                "loi_giai": cau.get("loi_giai"),
+                "loi_giai": loi_giai_cho_web(cau.get("loi_giai")),
             })
 
     lam_tron = thang.get("lam_tron", 2)

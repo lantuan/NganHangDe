@@ -61,8 +61,10 @@ def test_de_bai_dung_sai_co_hinh_khong_con_lenh_immini():
 
 
 def test_loi_giai_co_hinh_khong_con_lenh_immini():
-    from app.services.answer_parser_service import trich_loi_giai
+    from app.services.answer_parser_service import trich_loi_giai, loi_giai_cho_web
     khoi = ("\\begin{ex}\nde\n\\loigiai{\n\\immini[thm]{\nGiai: $x = 1$.\n}{\n\\begin{tikzpicture}\\draw (0,0) -- (1,1);"
             "\\end{tikzpicture}\n}\n}\n\\end{ex}")
-    lg = trich_loi_giai(khoi)
+    goc = trich_loi_giai(khoi)
+    assert "tikzpicture" in goc            # Word can hinh trong loi giai - giu nguyen
+    lg = loi_giai_cho_web(goc)
     assert "\\immini" not in lg and "tikzpicture" not in lg and "x = 1" in lg

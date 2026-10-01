@@ -337,12 +337,19 @@ def trich_loi_giai(latex_block: str) -> str | None:
     if vi_tri >= len(latex_block) or latex_block[vi_tri] != "{":
         return None
     noi_dung, _ = _tim_khoi_dong(latex_block, vi_tri)
-    # SUA 01/10/2026: loi giai co hinh (\immini[thm]{CHU}{HINH}) - web khong ve
-    # duoc TikZ trong loi giai, giu phan chu, bo hinh (PDF van co du hinh).
-    noi_dung = _rut_gon_immini(noi_dung)
-    noi_dung = re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", "(Hình vẽ: xem bản PDF)",
-                      noi_dung, flags=re.S)
+    # GIU NGUYEN (ke ca hinh TikZ): word_service dung truong nay de ve hinh loi
+    # giai vao file Word. Ban cho web: loi_giai_cho_web() ben duoi.
     return noi_dung.strip()
+
+
+def loi_giai_cho_web(loi_giai: str | None) -> str | None:
+    r"""Loi giai dua len WEB (SUA 01/10/2026, co Lan): \immini[thm]{CHU}{HINH} -> CHU;
+    hinh TikZ con lai -> "(Hình vẽ: xem bản PDF)" (MathJax khong ve duoc TikZ).
+    Chi dung o tang hien thi web - PDF va Word van dung loi giai nguyen ban."""
+    if not loi_giai:
+        return loi_giai
+    t = _rut_gon_immini(loi_giai)
+    return re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", "(Hình vẽ: xem bản PDF)", t, flags=re.S)
 
 
 def chuan_hoa_dap_an_ngan(text: str | None) -> str:

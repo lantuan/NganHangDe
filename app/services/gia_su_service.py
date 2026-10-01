@@ -32,6 +32,7 @@ NGUON DU LIEU (theo thu tu uu tien):
 MUC B (chi dung cho hoc sinh van chua hieu -> tro ve dung cho trong tai
 lieu li thuyet .tex cua co) chua lam o ban nay, xem docs/23_GIA_SU_AI.md.
 """
+from app.services.answer_parser_service import loi_giai_cho_web
 import json
 import re
 import uuid
@@ -138,7 +139,7 @@ def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None) -> 
             return {
                 "de_bai": _lam_sach_latex(_mo_ta_de_bai(cau)),
                 "dap_an": _lam_sach_latex(_mo_ta_dap_an(cau)),
-                "loi_giai": _lam_sach_latex(loi_giai),
+                "loi_giai": _lam_sach_latex(loi_giai_cho_web(loi_giai)),
                 "question_id": cau.get("generator_id") or cau.get("question_id"),
                 "loai_cau": cau.get("loai_cau"),
                 "chuong": cau.get("chuong"),
@@ -186,7 +187,7 @@ def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
             # cho mo hinh la CHI duoc bam vao loi giai, khong doan de bai.
             "de_bai": "",
             "dap_an": _lam_sach_latex(str(cau.get("dap_an_dung") or "")),
-            "loi_giai": _lam_sach_latex(loi_giai),
+            "loi_giai": _lam_sach_latex(loi_giai_cho_web(loi_giai)),
             "question_id": cau.get("question_id"),
             "loai_cau": cau.get("loai_cau"),
             "chuong": cau.get("chuong"),
