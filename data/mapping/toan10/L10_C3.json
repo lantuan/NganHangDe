@@ -1310,5 +1310,13 @@
     "Dang": "Hai tàu cùng xuất phát theo hai hướng: quãng đường, khoảng cách, góc, thời gian cách nhau d hải lí (có hình)",
     "boi_canh": "hai_tau_xuat_phat",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - mo rong Dung/Sai chuong 3 theo dang co Lan chon; a) NB b) TH c) VD d) VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_TF_S",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Đúng sai",
+    "Dang": "Điểm M trên nửa đường tròn đơn vị xác định bởi góc alpha: lý thuyết, đổi một bước, biểu thức, giải tam giác OAM/OA'M/AMA' (có hình)",
+    "boi_canh": "nua_duong_tron_don_vi",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan; moi y nhieu phat bieu dung + nhieu phat bieu sai; a) NB b) TH c) VD d) VDC; co Lan duyet lai"
   }
 ]

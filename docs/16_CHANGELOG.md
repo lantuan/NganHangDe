@@ -9671,3 +9671,9 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 # Version 3.92 - 2026-10-01
 
 - L10_C3_TF_L làm lại theo ý cô Lan: bỏ công thức trung tuyến (chỉ có trong SBT, không có trong SGK). a) (NB) nhận ra một công thức của Bài 6, chọn ngẫu nhiên trong 8 nhóm (định lí côsin, hệ quả, định lí sin, S = ½bc sinA, S = abc/4R, S = pr, Heron, S = ½a.h_a), đỉnh hoán vị ngẫu nhiên, phương án sai là biến dạng hay gặp; b) (TH) rất đơn giản: nửa chu vi hoặc côsin một góc; c) (VD) diện tích Heron; d) (VDC) h_a, r hoặc R.
+
+# Version 3.93 - 2026-10-01
+
+- Thêm L10_C3_TF_S_01 (curriculum NB029, boi_canh nua_duong_tron_don_vi): điểm M trên nửa đường tròn đơn vị, góc xOM = α, A(1; 0), A'(-1; 0), có hình. Câu dẫn cho ngẫu nhiên: số đo góc α (góc đặc biệt), hoành độ, tung độ (kèm nhọn/tù), cos, sin (kèm nhọn/tù), tan hoặc cot.
+- Kiểu mới cho Đúng/Sai (theo ý cô Lan): mỗi ý là danh sách NHIỀU phát biểu đúng và NHIỀU phát biểu sai (lỗi khác nhau), mỗi lần chạy chọn ngẫu nhiên một phát biểu - helper _phat_bieu(dung_ds, sai_ds).
+- a) (NB) 9 phát biểu đúng / 9 sai về định nghĩa, dấu, miền giá trị; b) (TH) đổi một bước; c) (VD) 3 trong 6 dạng biểu thức (a sin + b cos, a tan + b cot, sin.cos, sin² - cos², 2sin² + cos², (sin + cos)/(sin - cos)); d) (VDC) giải tam giác OAM, OA'M, AMA' (AM, A'M theo định lí côsin, chu vi, đường cao, R, r) - không hỏi các yếu tố có sẵn từ đường tròn đơn vị.

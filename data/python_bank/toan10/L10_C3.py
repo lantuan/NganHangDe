@@ -8160,6 +8160,239 @@ def L10_C3_TF_R_01(socau, socot=1):
     return cau
 
 
+# ---------- TF_S: điểm M trên nửa đường tròn đơn vị xác định bởi góc alpha (có hình) ----------
+# Mỗi ý là một DANH SÁCH nhiều phát biểu ĐÚNG và nhiều phát biểu SAI (lỗi hay gặp khác nhau);
+# TF_baitoan_du chọn ngẫu nhiên một phát biểu cho mỗi ý -> mỗi lần chạy ra đề khác (cô Lan 01/10/2026).
+
+_GOC_DAC_BIET_TF_S = {30: (Rational(1, 2), sqrt(3) / 2), 45: (sqrt(2) / 2, sqrt(2) / 2), 60: (sqrt(3) / 2, Rational(1, 2)),
+                      120: (sqrt(3) / 2, Rational(-1, 2)), 135: (sqrt(2) / 2, -sqrt(2) / 2), 150: (Rational(1, 2), -sqrt(3) / 2)}
+
+
+def _hinh_nua_dtdv(goc):
+    """Nửa đường tròn đơn vị trong hệ trục Oxy, M ứng với góc xOM = goc (độ), hình chiếu của M lên hai trục,
+    cung góc alpha, A(1; 0), A'(-1; 0)."""
+    c, s = math.cos(math.radians(goc)), math.sin(math.radians(goc))
+    R = 1.8
+    xm, ym = R * c, R * s
+    return (
+        "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round,>=stealth]\n"
+        "\\draw[->] (-2.4,0) -- (2.5,0) node[below] {$x$};\n"
+        "\\draw[->] (0,-0.3) -- (0,2.4) node[left] {$y$};\n"
+        "\\draw (%.2f,0) arc (0:180:%.2f);\n" % (R, R)
+        + "\\draw[thick] (0,0) -- (%.3f,%.3f);\n" % (xm, ym)
+        + "\\draw[dashed] (%.3f,%.3f) -- (%.3f,0) (%.3f,%.3f) -- (0,%.3f);\n" % (xm, ym, xm, xm, ym, ym)
+        + "\\draw[->] (0.45,0) arc (0:%.1f:0.45);\n" % goc
+        + "\\node at (%.3f,%.3f) {$\\alpha$};\n" % (0.72 * math.cos(math.radians(goc / 2)), 0.72 * math.sin(math.radians(goc / 2)))
+        + "\\fill (%.3f,%.3f) circle (0.04) node[above %s] {$M$};\n" % (xm, ym, "right" if c >= 0 else "left")
+        + "\\node[below] at (%.3f,0) {$x_0$};\n" % xm
+        + "\\node[%s] at (0,%.3f) {$y_0$};\n" % ("left" if c >= 0 else "right", ym)
+        + "\\fill (%.2f,0) circle (0.03) node[below right] {$A$};\n" % R
+        + "\\fill (%.2f,0) circle (0.03) node[below left] {$A'$};\n" % (-R)
+        + "\\node[below left] at (0,0) {$O$};\n"
+        + "\\end{tikzpicture}"
+    )
+
+
+def _bo_tf_s():
+    """(kiểu cho, góc (độ, để vẽ), sin, cos) - sin, cos chính xác. Kiểu 'goc' luôn là góc đặc biệt."""
+    kieu = random.choice(["goc", "goc", "x", "y", "cos", "sin", "tan", "cot"])
+    if kieu == "goc" or random.random() < 0.3:
+        g = random.choice(list(_GOC_DAC_BIET_TF_S))
+        s, c = _GOC_DAC_BIET_TF_S[g]
+    else:
+        doi, ke, huyen = random.choice(BO_BA_PYTAGO)
+        if random.random() < 0.5:
+            doi, ke = ke, doi
+        s, c = Rational(doi, huyen), Rational(random.choice([1, -1]) * ke, huyen)
+        g = math.degrees(math.atan2(float(s), float(c)))
+    return kieu, g, s, c
+
+
+def _phat_bieu(dung_ds, sai_ds):
+    """Gộp nhiều phát biểu đúng [(nội dung, lời giải)] và sai [(nội dung, lời giải)] thành một ý TF;
+    bỏ phát biểu sai trùng nội dung với phát biểu đúng."""
+    noi_dung_dung = {d for d, _ in dung_ds}
+    y = [(r"{\True %s}" % d, "Đúng. " + l) for d, l in dung_ds]
+    da = set()
+    for d, l in sai_ds:
+        if d in noi_dung_dung or d in da:
+            continue
+        da.add(d)
+        y.append((r"{%s}" % d, "Sai. " + l))
+    return y
+
+
+def _so_tf(v, n=2):
+    """Giá trị đúng: dạng chính xác nếu gọn, không thì gần đúng n chữ số (kèm 'làm tròn')."""
+    v = simplify(v)
+    t = _gon(v)
+    if len(t) <= 24:
+        return "= " + t, None
+    return r"\approx " + _x1(float(v), n), "(làm tròn đến hàng phần trăm)"
+
+
+def L10_C3_TF_S_01(socau, socot=1):
+    r"""Đúng/Sai - điểm $M\left(x_0; y_0\right)$ trên nửa đường tròn đơn vị, $\widehat{xOM} = \alpha$, $A\left(1; 0\right)$,
+    $A'\left(-1; 0\right)$ (có hình). Câu dẫn cho NGẪU NHIÊN: số đo góc $\alpha$ (góc đặc biệt), hoành độ $x_0$, tung độ
+    $y_0$ (kèm nhọn/tù), $\cos\alpha$, $\sin\alpha$ (kèm nhọn/tù), $\tan\alpha$ hoặc $\cot\alpha$.
+    Mỗi ý có NHIỀU phát biểu đúng và NHIỀU phát biểu sai (lỗi khác nhau), mỗi lần chạy chọn ngẫu nhiên.
+    a) (NB) lý thuyết: định nghĩa theo toạ độ, dấu, miền giá trị, điều kiện xác định;
+    b) (TH) một bước: cho góc / toạ độ -> sin, cos, toạ độ; cos -> sin, sin -> cos, tan -> cot, cot -> tan;
+    c) (VD) biểu thức đơn giản (a sin + b cos, a tan + b cot, sin.cos, sin^2 - cos^2, ...);
+    d) (VDC) giải tam giác OAM, OA'M, AMA': cạnh AM, A'M (định lí côsin), chu vi, đường cao, bán kính
+       ngoại tiếp, bán kính nội tiếp (KHÔNG hỏi các yếu tố có ngay từ đường tròn đơn vị: OM = 1, AA' = 2,
+       góc AMA' vuông, diện tích = y_0/2...).
+
+    CLAUDE THEM 01/10/2026 - theo y co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        kieu, g, s, c = _bo_tf_s()
+        t, k = simplify(s / c), simplify(c / s)
+        tu = float(c) < 0
+        loai = "tù" if tu else "nhọn"
+        gi = int(round(g))
+        if kieu == "goc":
+            gia = r"$\alpha = %s$" % _goc(gi)
+        elif kieu == "x":
+            gia = r"điểm $M$ có hoành độ $x_0 = %s$" % _L(c)
+        elif kieu == "y":
+            gia = r"điểm $M$ có tung độ $y_0 = %s$ và góc $\alpha$ %s" % (_L(s), loai)
+        elif kieu == "cos":
+            gia = r"$\cos\alpha = %s$" % _L(c)
+        elif kieu == "sin":
+            gia = r"$\sin\alpha = %s$ và góc $\alpha$ %s" % (_L(s), loai)
+        elif kieu == "tan":
+            gia = r"$\tan\alpha = %s$" % _L(t)
+        else:
+            gia = r"$\cot\alpha = %s$" % _L(k)
+        debai = (r"Trong mặt phẳng toạ độ $Oxy$, cho điểm $M\left(x_0; y_0\right)$ thuộc nửa đường tròn đơn vị sao cho "
+                 r"$\widehat{xOM} = \alpha$, các điểm $A\left(1; 0\right)$, $A'\left(-1; 0\right)$ (hình vẽ). Biết %s. "
+                 r"Xét tính đúng, sai của các mệnh đề sau." % gia)
+        dau = "<" if tu else ">"
+        nguoc = ">" if tu else "<"
+
+        # a) NB - lý thuyết
+        DN = r"Theo định nghĩa: $\sin\alpha = y_0$, $\cos\alpha = x_0$, $\tan\alpha = \dfrac{y_0}{x_0}$, $\cot\alpha = \dfrac{x_0}{y_0}$."
+        DAU = r"Góc $\alpha$ %s nên $\cos\alpha %s 0$, $\tan\alpha %s 0$, $\cot\alpha %s 0$; luôn có $\sin\alpha \ge 0$ với $0^{\circ} \le \alpha \le 180^{\circ}$." % (loai, dau, dau, dau)
+        y1 = _phat_bieu(
+            [(r"$\sin\alpha = y_0$", DN), (r"$\cos\alpha = x_0$", DN), (r"$\tan\alpha = \dfrac{y_0}{x_0}$", DN),
+             (r"$\cot\alpha = \dfrac{x_0}{y_0}$", DN),
+             (r"$x_0^{2} + y_0^{2} = 1$", r"$M$ thuộc đường tròn đơn vị nên $OM^{2} = x_0^{2} + y_0^{2} = 1$."),
+             (r"$\cos\alpha %s 0$" % dau, DAU), (r"$\tan\alpha %s 0$" % dau, DAU), (r"$\sin\alpha > 0$", DAU),
+             (r"$-1 \le \cos\alpha \le 1$", r"$\cos\alpha = x_0$ với $-1 \le x_0 \le 1$.")],
+            [(r"$\sin\alpha = x_0$", DN), (r"$\cos\alpha = y_0$", DN), (r"$\tan\alpha = \dfrac{x_0}{y_0}$", DN),
+             (r"$\cot\alpha = \dfrac{y_0}{x_0}$", DN),
+             (r"$x_0 + y_0 = 1$", r"$M$ thuộc đường tròn đơn vị nên $x_0^{2} + y_0^{2} = 1$, không phải $x_0 + y_0 = 1$."),
+             (r"$\cos\alpha %s 0$" % nguoc, DAU), (r"$\tan\alpha %s 0$" % nguoc, DAU), (r"$\sin\alpha < 0$", DAU),
+             (r"$\tan\alpha\cdot\cot\alpha = -1$", r"$\tan\alpha\cdot\cot\alpha = \dfrac{y_0}{x_0}\cdot\dfrac{x_0}{y_0} = 1$.")])
+
+        # b) TH - một bước
+        if kieu == "goc":
+            ly = r"Bảng giá trị lượng giác: $\sin %s = %s$, $\cos %s = %s$, nên $M\left(%s; %s\right)$." % (
+                _goc(gi), _L(s), _goc(gi), _L(c), _L(c), _L(s))
+            dung = [(r"$\sin\alpha = %s$" % _L(s), ly), (r"$\cos\alpha = %s$" % _L(c), ly),
+                    (r"$M\left(%s; %s\right)$" % (_L(c), _L(s)), ly), (r"$x_0 = %s$" % _L(c), ly)]
+            sai = [(r"$\sin\alpha = %s$" % _L(c), ly), (r"$\cos\alpha = %s$" % _L(-c), ly),
+                   (r"$M\left(%s; %s\right)$" % (_L(s), _L(c)), ly), (r"$y_0 = %s$" % _L(c), ly)]
+        elif kieu in ("x", "y"):
+            ly = r"$\cos\alpha = x_0 = %s$." % _L(c) if kieu == "x" else r"$\sin\alpha = y_0 = %s$." % _L(s)
+            v, ham = (c, "cos") if kieu == "x" else (s, "sin")
+            khac = "sin" if ham == "cos" else "cos"
+            dung = [(r"$\%s\alpha = %s$" % (ham, _L(v)), ly)]
+            sai = [(r"$\%s\alpha = %s$" % (khac, _L(v)), ly), (r"$\%s\alpha = %s$" % (ham, _L(-v)), ly),
+                   (r"$\%s\alpha = %s$" % (ham, _L(1 - v)), ly)]
+        elif kieu == "cos":
+            ly = r"$\sin^{2}\alpha = 1 - \cos^{2}\alpha = %s$, mà $\sin\alpha \ge 0$ nên $\sin\alpha = %s$." % (_L(s ** 2), _L(s))
+            dung = [(r"$\sin\alpha = %s$" % _L(s), ly), (r"$\sin^{2}\alpha = %s$" % _L(s ** 2), ly)]
+            sai = [(r"$\sin\alpha = %s$" % _L(-s), ly), (r"$\sin\alpha = %s$" % _L(1 - c), ly), (r"$\sin^{2}\alpha = %s$" % _L(1 + c ** 2), ly)]
+        elif kieu == "sin":
+            ly = r"$\cos^{2}\alpha = 1 - \sin^{2}\alpha = %s$, góc $\alpha$ %s nên $\cos\alpha = %s$." % (_L(c ** 2), loai, _L(c))
+            dung = [(r"$\cos\alpha = %s$" % _L(c), ly), (r"$\cos^{2}\alpha = %s$" % _L(c ** 2), ly)]
+            sai = [(r"$\cos\alpha = %s$" % _L(-c), ly), (r"$\cos\alpha = %s$" % _L(1 - s), ly), (r"$\cos^{2}\alpha = %s$" % _L(1 + s ** 2), ly)]
+        elif kieu == "tan":
+            ly = r"$\cot\alpha = \dfrac{1}{\tan\alpha} = %s$." % _L(k)
+            dung = [(r"$\cot\alpha = %s$" % _L(k), ly), (r"$\tan\alpha\cdot\cot\alpha = 1$", ly)]
+            sai = [(r"$\cot\alpha = %s$" % _L(-k), ly), (r"$\cot\alpha = %s$" % _L(t), ly), (r"$\cot\alpha = %s$" % _L(-t), ly)]
+        else:
+            ly = r"$\tan\alpha = \dfrac{1}{\cot\alpha} = %s$." % _L(t)
+            dung = [(r"$\tan\alpha = %s$" % _L(t), ly), (r"$\tan\alpha\cdot\cot\alpha = 1$", ly)]
+            sai = [(r"$\tan\alpha = %s$" % _L(-t), ly), (r"$\tan\alpha = %s$" % _L(k), ly), (r"$\tan\alpha = %s$" % _L(-k), ly)]
+        y2 = _phat_bieu(dung, sai)
+
+        # c) VD - biểu thức đơn giản (nhiều dạng)
+        nen = r"Ta có $\sin\alpha = %s$, $\cos\alpha = %s$, $\tan\alpha = %s$, $\cot\alpha = %s$" % (_L(s), _L(c), _L(t), _L(k))
+        if kieu in ("tan", "cot"):
+            nen += r" (từ $1 + \tan^{2}\alpha = \dfrac{1}{\cos^{2}\alpha}$ và dấu của $\cos\alpha$)"
+        a_, b_ = random.choice([(1, 1), (2, 1), (1, 2), (2, -1), (1, -1), (3, 1), (1, 3), (3, -2)])
+
+        def _bt(x, y, u, v):
+            return ("" if x == 1 else str(x)) + u + (" + " if y > 0 else " - ") + ("" if abs(y) == 1 else str(abs(y))) + v
+
+        BT = [
+            (_bt(a_, b_, r"\sin\alpha", r"\cos\alpha"), a_ * s + b_ * c, [a_ * s - b_ * c, a_ * c + b_ * s]),
+            (_bt(a_, b_, r"\tan\alpha", r"\cot\alpha"), a_ * t + b_ * k, [a_ * t - b_ * k, a_ * k + b_ * t]),
+            (r"\sin\alpha\cdot\cos\alpha", s * c, [-s * c, s + c]),
+            (r"\sin^{2}\alpha - \cos^{2}\alpha", s ** 2 - c ** 2, [c ** 2 - s ** 2, s - c]),
+            (r"2\sin^{2}\alpha + \cos^{2}\alpha", 2 * s ** 2 + c ** 2, [2 * s ** 2 - c ** 2, s ** 2 + 2 * c ** 2]),
+            (r"\dfrac{\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha}", (s + c) / (s - c) if s != c else None,
+             [(s - c) / (s + c) if s != -c else None, -(s + c) / (s - c) if s != c else None]),
+        ]
+        dung, sai = [], []
+        for bt, P, Ps in random.sample(BT, 3):
+            if P is None:
+                continue
+            P = simplify(P)
+            ly = nen + r", nên $P = %s = %s$." % (bt, _gon(P))
+            dung.append((r"$P = %s = %s$" % (bt, _gon(P)), ly))
+            for Q in Ps:
+                if Q is not None and simplify(Q - P) != 0:
+                    sai.append((r"$P = %s = %s$" % (bt, _gon(simplify(Q))), ly))
+        y3 = _phat_bieu(dung, sai)
+
+        # d) VDC - giải tam giác OAM / OA'M / AMA'
+        cf, sf = float(c), float(s)
+        AM, AM_ = math.sqrt(2 - 2 * cf), math.sqrt(2 + 2 * cf)            # AM, A'M
+        S_OAM, S_AMA = sf / 2, sf                                         # diện tích
+        nen_d = (r"Tam giác $OAM$ có $OA = OM = 1$, $\widehat{AOM} = \alpha$; theo định lí côsin "
+                 r"$AM^{2} = 1 + 1 - 2\cos\alpha = 2 - 2\cdot\left(%s\right)$, nên $AM \approx %s$. "
+                 r"Tương tự trong tam giác $OA'M$ ($\widehat{A'OM} = 180^{\circ} - \alpha$): "
+                 r"$A'M^{2} = 2 + 2\cos\alpha$, $A'M \approx %s$." % (_L(c), _x1(AM, 3), _x1(AM_, 3)))
+        DL = [
+            (r"Chu vi tam giác $AMA'$", 2 + AM + AM_, nen_d + r" Chu vi tam giác $AMA'$ là $2 + AM + A'M$.", [AM + AM_, 1 + AM + AM_]),
+            (r"Bán kính đường tròn nội tiếp tam giác $AMA'$", S_AMA / ((2 + AM + AM_) / 2),
+             nen_d + r" $S_{AMA'} = \dfrac{1}{2}\cdot AA'\cdot y_0 = %s$, nửa chu vi $p = \dfrac{2 + AM + A'M}{2}$, "
+                     r"$r = \dfrac{S}{p}$." % _L(s), [S_AMA / (2 + AM + AM_), S_AMA * 2 / (2 + AM + AM_) * 2]),
+            (r"Đường cao kẻ từ $O$ của tam giác $OAM$", 2 * S_OAM / AM,
+             nen_d + r" $S_{OAM} = \dfrac{1}{2}\cdot OA\cdot OM\cdot\sin\alpha = %s$, đường cao $h = \dfrac{2S_{OAM}}{AM}$." % _L(s / 2),
+             [S_OAM / AM, AM / 2 + 0.1]),
+            (r"Đường cao kẻ từ $O$ của tam giác $OA'M$", 2 * (sf / 2) / AM_,
+             nen_d + r" $S_{OA'M} = \dfrac{1}{2}\sin\left(180^{\circ} - \alpha\right) = %s$, đường cao $h = \dfrac{2S_{OA'M}}{A'M}$." % _L(s / 2),
+             [(sf / 2) / AM_, AM_ / 2 + 0.1]),
+            (r"Bán kính đường tròn ngoại tiếp tam giác $OAM$", AM / (2 * sf),
+             nen_d + r" Theo định lí sin trong tam giác $OAM$: $\dfrac{AM}{\sin\widehat{AOM}} = 2R$, nên $R = \dfrac{AM}{2\sin\alpha}$.",
+             [AM / sf, AM * sf / 2]),
+            (r"Độ dài $AM$", AM, nen_d, [AM_, 2 - 2 * cf]),
+            (r"Độ dài $A'M$", AM_, nen_d, [AM, 2 + 2 * cf]),
+        ]
+        dung, sai = [], []
+        for ten, v, ly, vs in random.sample(DL, 3):
+            if not _xa_bien(v * 100):
+                continue
+            dung.append((r"%s xấp xỉ $%s$ (làm tròn đến hàng phần trăm)" % (ten, _x1(v, 2)), ly + r" Vậy giá trị $\approx %s$." % _x1(v, 3)))
+            for w in vs:
+                if _x1(w, 2) != _x1(v, 2) and w > 0:
+                    sai.append((r"%s xấp xỉ $%s$ (làm tròn đến hàng phần trăm)" % (ten, _x1(w, 2)),
+                                ly + r" Vậy giá trị $\approx %s$." % _x1(v, 3)))
+        if not dung or not sai:
+            continue
+        y4 = _phat_bieu(dung, sai)
+        so += 1
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_nua_dtdv(g), 0, socot)
+    return cau
+
+
 # =====================================================================
 # BIẾN THỂ _02 CHO 10 DẠNG MỚI CỦA BÀI 5 (30/09/2026)
 # ---------------------------------------------------------------------
