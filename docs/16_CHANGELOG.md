@@ -9677,3 +9677,12 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 - Thêm L10_C3_TF_S_01 (curriculum NB029, boi_canh nua_duong_tron_don_vi): điểm M trên nửa đường tròn đơn vị, góc xOM = α, A(1; 0), A'(-1; 0), có hình. Câu dẫn cho ngẫu nhiên: số đo góc α (góc đặc biệt), hoành độ, tung độ (kèm nhọn/tù), cos, sin (kèm nhọn/tù), tan hoặc cot.
 - Kiểu mới cho Đúng/Sai (theo ý cô Lan): mỗi ý là danh sách NHIỀU phát biểu đúng và NHIỀU phát biểu sai (lỗi khác nhau), mỗi lần chạy chọn ngẫu nhiên một phát biểu - helper _phat_bieu(dung_ds, sai_ds).
 - a) (NB) 9 phát biểu đúng / 9 sai về định nghĩa, dấu, miền giá trị; b) (TH) đổi một bước; c) (VD) 3 trong 6 dạng biểu thức (a sin + b cos, a tan + b cot, sin.cos, sin² - cos², 2sin² + cos², (sin + cos)/(sin - cos)); d) (VDC) giải tam giác OAM, OA'M, AMA' (AM, A'M theo định lí côsin, chu vi, đường cao, R, r) - không hỏi các yếu tố có sẵn từ đường tròn đơn vị.
+
+# Version 3.94 - 2026-10-01
+
+## Đúng/Sai chương 3: mỗi ý NHIỀU phát biểu đúng + NHIỀU phát biểu sai (ý cô Lan)
+- Làm lại 26 hàm Đúng/Sai chương 3 do Claude viết: TF_A_02, A_03, B_02, C_02, D_02, E_02 -> E_05, F_01, F_02, G_01, G_02, H_01, H_02, I_01, J_01 -> R_01 (giữ nguyên câu dẫn, hình, số liệu, mức a) NB b) TH c) VD d) VDC). Các hàm gốc của cô (TF_A_01 -> E_01) giữ nguyên.
+- Mỗi lần chạy, mỗi ý có ít nhất 2 phát biểu đúng khác nhau và ít nhất 2 phát biểu sai khác nhau; phát biểu sai là lỗi hay gặp (sai dấu, đảo tử mẫu, quên hệ số 1/2 hoặc 2, quên căn, nhầm sin/cos, nhầm góc bù/phụ, nhầm cạnh đối, cộng/quên chiều cao giác kế, làm tròn sai...), lời giải ghi rõ lỗi.
+- Tiện ích mới (L10_C3.py, cạnh _y_ds): _tf_so (giá trị gần đúng: làm tròn hai mức, so sánh với ngưỡng tròn, lỗi làm tròn), _tf_ct (giá trị chính xác), _tf_bdt, _tf_gop, _tf_nguong; dùng chung _phat_bieu của TF_S.
+- TF_S_01: ý b) thêm phát biểu đúng khi câu dẫn cho toạ độ (sin²/cos², góc bù); c) thêm lỗi cho góc 45°; d) luôn đủ 3 đại lượng.
+- Kiểm thử: 300 lần chạy mỗi hàm, mọi ý đều đủ >= 2 đúng và >= 2 sai; PDF nháp 27 hàm không lỗi LaTeX; tests/test_cau_dung_sai.py và các test liên quan đạt.
