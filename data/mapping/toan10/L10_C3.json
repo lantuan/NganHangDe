@@ -826,5 +826,33 @@
     "Dang": "Tháp trên đỉnh đồi, đỉnh và chân tháp nhìn điểm ở chân đồi dưới hai góc so với phương thẳng đứng: góc tam giác, định lí sin rồi tam giác vuông - vận dụng cao",
     "muc_do_dang": "VDC",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - dang VDC theo de co Lan gui (thap 100 m, 30 va 60 do -> CH = 50 m); cung mo ta o MC/SA/TL; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_J",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) chia bởi đường chéo thành hai tam giác biết ba cạnh (Heron hai lần)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_L",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) chia bởi đường chéo thành hai tam giác biết ba cạnh (Heron hai lần)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_I",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) chia bởi đường chéo thành hai tam giác biết ba cạnh (Heron hai lần)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_TF_I",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Đúng sai",
+    "Dang": "Cổng Trời - xã Dân Hóa: vùng đất tứ giác chia hai tam giác; hệ quả côsin, định lí sin, sin qua diện tích, ước lượng diện tích (có hình)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2); co Lan duyet lai"
   }
 ]

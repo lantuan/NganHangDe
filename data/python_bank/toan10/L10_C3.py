@@ -9202,3 +9202,223 @@ def L10_C3_B6_VD036_TL_H_01(socau, dong=1):
                _giai_hoi_thap_doi(hoi, ga, AC, gt) + r" Vậy $%s \approx %d\,\text{m}$." % (hoi, _lt(gt)))]
         cau += TL_answer_text(_de_thap_doi(h, be, ga), ds, _hinh_thap_doi(h, CH, AH, be, ga), 0, dong)
     return cau
+
+
+# =====================================================================
+# CỔNG TRỜI - XÃ DÂN HÓA (cô Lan 01/10/2026, đề giữa kì I 2025-2026): vùng đất tứ giác
+# ABCD được đường chéo BD chia thành hai tam giác BCD, ABD; đo các cạnh trên Google Maps.
+#   TF_I_01   Đúng/Sai: hệ quả côsin, định lí sin, sin qua diện tích, ước lượng diện tích
+#   VD036_MC_J_01 / SA_L_01   ước lượng diện tích vùng đất (Heron hai lần)
+#   VD036_TL_I_01   a) diện tích một tam giác (VD)  b) diện tích cả vùng (VDC)
+# Bài gốc: BC = 15, CD = 20, BD = 20, AB = 11, AD = 10 (km) -> 139,05 + 31,98 ~ 171 km^2.
+# Số đo chọn trước: hai tam giác không dẹt, tứ giác lồi, diện tích không sát ranh giới làm tròn.
+# =====================================================================
+
+_DOAN_CONG_TROI = (
+    r"Ở tỉnh Quảng Bình (cũ) có một di tích lịch sử đặc biệt mang tên Cổng Trời (còn gọi là Cổng Trời Cha Lo), "
+    r"với cảnh quan hùng vĩ gắn liền cùng những chiến công bất diệt của quân đội ta. Cổng Trời là con đường nối "
+    r"Trường Sơn Đông với Trường Sơn Tây, nằm trong khu vực xã Dân Hóa, huyện Minh Hóa. Sau sắp xếp đơn vị hành "
+    r"chính (từ ngày 01/7/2025), địa danh này thuộc xã Dân Hóa, tỉnh Quảng Trị.\\ "
+    r"Cổng Trời đứng sừng sững hiên ngang, như nghiêng mình bảo vệ từng đoàn quân, đoàn xe chi viện cho chiến "
+    r"trường miền Nam trong kháng chiến chống Mỹ cứu nước. Nơi đây được xem như là ``tọa độ lửa'' khi giặc Mỹ "
+    r"điên cuồng ném bom đánh phá nhằm cắt đứt tuyến đường chi viện này. Hình bên mô tả ranh giới xã Dân Hóa cũ "
+    r"thời kháng chiến. Một người sử dụng Google Maps để đo các khoảng cách như trong hình vẽ."
+)
+
+
+def _heron_f(a, b, c):
+    p = (a + b + c) / 2
+    return math.sqrt(max(p * (p - a) * (p - b) * (p - c), 0))
+
+
+def _goc_tam_giac(doi, k1, k2):
+    """Góc (độ) đối diện cạnh doi, kẹp giữa hai cạnh k1, k2."""
+    return math.degrees(math.acos((k1 * k1 + k2 * k2 - doi * doi) / (2 * k1 * k2)))
+
+
+def _bo_cong_troi():
+    """(BC, CD, BD, AB, AD, S_BCD, S_ABD) - số nguyên km, hai tam giác không dẹt, tứ giác lồi."""
+    while True:
+        BD = random.randint(12, 30)
+        BC = random.randint(max(5, BD // 2), BD + 4)
+        CD = random.randint(max(5, BD // 2), BD + 4)
+        AB = random.randint(max(4, BD // 3), BD - 2)
+        AD = random.randint(max(4, BD // 3), BD - 2)
+        if not (BC + CD > BD + 2 and AB + AD > BD + 1 and abs(BC - CD) < BD and abs(AB - AD) < BD):
+            continue
+        tam_giac = [(BC, CD, BD), (AB, AD, BD)]
+        goc = [_goc_tam_giac(x, y, z) for (u, v, w) in tam_giac
+               for x, y, z in ((u, v, w), (v, w, u), (w, u, v))]
+        if min(goc) < 15:
+            continue
+        # tứ giác lồi: góc tại B và tại D (tổng hai góc thành phần) nhỏ hơn 180 độ
+        gB = _goc_tam_giac(CD, BC, BD) + _goc_tam_giac(AD, AB, BD)
+        gD = _goc_tam_giac(BC, CD, BD) + _goc_tam_giac(AB, AD, BD)
+        if gB >= 170 or gD >= 170:
+            continue
+        S1, S2 = _heron_f(BC, CD, BD), _heron_f(AB, AD, BD)
+        if not (_xa_bien(S1 + S2) and _xa_bien(S1) and _xa_bien(S2)):
+            continue
+        return BC, CD, BD, AB, AD, S1, S2
+
+
+def _hinh_cong_troi(BC, CD, BD, AB, AD):
+    """Sơ đồ vùng đất tứ giác ABCD (đường chéo BD) vẽ theo số đo, ghi độ dài các đoạn."""
+    huong = 70.0
+    gC = _goc_tam_giac(BC, CD, BD)            # góc BDC
+    gA = _goc_tam_giac(AB, AD, BD)            # góc BDA
+    D = (0.0, 0.0)
+    B = (BD * math.cos(math.radians(huong)), BD * math.sin(math.radians(huong)))
+    C = (CD * math.cos(math.radians(huong + gC)), CD * math.sin(math.radians(huong + gC)))
+    A = (AD * math.cos(math.radians(huong - gA)), AD * math.sin(math.radians(huong - gA)))
+    xs, ys = [p[0] for p in (A, B, C, D)], [p[1] for p in (A, B, C, D)]
+    k = 3.6 / max(max(xs) - min(xs), max(ys) - min(ys))
+    P = {t: (p[0] * k, p[1] * k) for t, p in zip("ABCD", (A, B, C, D))}
+
+    cx = sum(p[0] for p in P.values()) / 4
+    cy = sum(p[1] for p in P.values()) / 4
+
+    def nhan_doan(u, v, phia=None):
+        """Vị trí ghi độ dài: trung điểm lệch ra ngoài tứ giác (đường chéo: lệch về phía A)."""
+        (x1, y1), (x2, y2) = P[u], P[v]
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+        nx, ny = -(y2 - y1), x2 - x1
+        dai = math.hypot(nx, ny) or 1
+        nx, ny = nx / dai, ny / dai
+        tx, ty = (P[phia] if phia else (cx, cy))
+        if (nx * (tx - mx) + ny * (ty - my) > 0) != bool(phia):
+            nx, ny = -nx, -ny
+        return mx + 0.32 * nx, my + 0.32 * ny
+    s = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s += "\\fill[green!12] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- cycle;\n" % (
+        P["A"] + P["B"] + P["C"] + P["D"])
+    s += "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- cycle;\n" % (
+        P["A"] + P["B"] + P["C"] + P["D"])
+    s += "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (P["B"] + P["D"])
+    for t, vt in zip("ABCD", ("right", "above right", "above left", "below")):
+        s += "\\fill (%.2f,%.2f) circle (0.06) node[%s] {$%s$};\n" % (P[t] + (vt, t))
+    for (u, v), d, phia in ((("B", "C"), BC, None), (("C", "D"), CD, None), (("B", "D"), BD, "A"),
+                            (("A", "B"), AB, None), (("A", "D"), AD, None)):
+        s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ km};\n" % (nhan_doan(u, v, phia) + (d,))
+    return s + "\\end{tikzpicture}"
+
+
+def _giai_heron(ten, a, b, c, S):
+    p = (a + b + c) / 2
+    return (r"Tam giác $%s$ có nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %s$, nên "
+            r"$S_{%s} = \sqrt{%s\cdot %s\cdot %s\cdot %s} \approx %s\,\left(\text{km}^{2}\right)$."
+            % (ten, a, b, c, _xx(p, 1), ten, _xx(p, 1), _xx(p - a, 1), _xx(p - b, 1), _xx(p - c, 1), _xx(S, 2)))
+
+
+def L10_C3_TF_I_01(socau, socot=1):
+    r"""Đúng/Sai - Cổng Trời, xã Dân Hóa: vùng đất tứ giác $ABCD$ chia bởi đường chéo $BD$, các cạnh đo
+    trên Google Maps (có hình). a) hệ quả định lí côsin; b) định lí sin; c) sin của góc qua diện tích;
+    d) ước lượng diện tích vùng đất (Heron hai lần).
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2). Bo hinh
+    Google Maps (ban quyen, khong khop so ngau nhien) - ve so do TikZ theo so lieu. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        S = S1 + S2
+        debai = _DOAN_CONG_TROI + r" Với $S_{ABD}$ là diện tích của tam giác $ABD$. Xét tính đúng, sai của các mệnh đề sau."
+        # a) NB - nhận ra hệ quả định lí côsin cho góc DBC
+        dung_a = r"$\cos\widehat{DBC} = \dfrac{BC^{2} + BD^{2} - CD^{2}}{2\cdot BC\cdot BD}$"
+        sai_a = random.choice([r"$\cos\widehat{DBC} = \dfrac{BC^{2} + BD^{2} - CD^{2}}{BC\cdot BD}$",
+                               r"$\cos\widehat{DBC} = \dfrac{BC^{2} + CD^{2} - BD^{2}}{2\cdot BC\cdot CD}$",
+                               r"$\cos\widehat{DBC} = \dfrac{BC^{2} - BD^{2} + CD^{2}}{2\cdot BC\cdot BD}$"])
+        ly_a = (r"Trong tam giác $BCD$, góc $\widehat{DBC}$ kẹp giữa hai cạnh $BC$, $BD$ nên theo hệ quả định lí "
+                r"côsin: %s." % dung_a)
+        y1 = [(r"{\True %s}" % dung_a, "Đúng. " + ly_a), (r"{%s}" % sai_a, "Sai. " + ly_a)]
+        # b) TH - định lí sin trong tam giác ABD (cạnh đối diện góc)
+        dung_b = r"$\dfrac{AD}{\sin\widehat{ABD}} = \dfrac{AB}{\sin\widehat{ADB}}$"
+        sai_b = random.choice([r"$\dfrac{AD}{\sin\widehat{ADB}} = \dfrac{AB}{\sin\widehat{ABD}}$",
+                               r"$\dfrac{AD}{\sin\widehat{ABD}} = \dfrac{BD}{\sin\widehat{ADB}}$"])
+        ly_b = (r"Định lí sin trong tam giác $ABD$: cạnh $AD$ đối diện góc $\widehat{ABD}$, cạnh $AB$ đối diện góc "
+                r"$\widehat{ADB}$, cạnh $BD$ đối diện góc $\widehat{BAD}$, nên %s." % dung_b)
+        y2 = [(r"{\True %s}" % dung_b, "Đúng. " + ly_b), (r"{%s}" % sai_b, "Sai. " + ly_b)]
+        # c) VD - suy ra sin của góc từ công thức diện tích
+        dung_c = r"$\sin\widehat{ABD} = \dfrac{2S_{ABD}}{AB\cdot BD}$"
+        sai_c = random.choice([r"$\sin\widehat{ABD} = \dfrac{S_{ABD}}{AB\cdot BD}$",
+                               r"$\sin\widehat{ABD} = \dfrac{2S_{ABD}}{AD\cdot BD}$"])
+        ly_c = (r"$S_{ABD} = \dfrac{1}{2}AB\cdot BD\cdot\sin\widehat{ABD}$ (góc $\widehat{ABD}$ kẹp giữa $AB$, $BD$) "
+                r"nên %s." % dung_c)
+        y3 = [(r"{\True %s}" % dung_c, "Đúng. " + ly_c), (r"{%s}" % sai_c, "Sai. " + ly_c)]
+        # d) VDC - ước lượng diện tích: Heron hai lần rồi cộng
+        dap = _lt(S)
+        sai_d = random.choice([_lt(S1), _lt(S) + random.choice([-6, -4, 4, 6]), _lt(2 * S)])
+        ly_d = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\ " + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\ "
+                r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD} \approx %s \approx %d\,\text{km}^{2}$."
+                % (_xx(S, 2), dap))
+        nd = r"Ước lượng diện tích của xã Dân Hóa cũ là $%d$ km$^{2}$ (làm tròn đến hàng đơn vị)"
+        y4 = [(r"{\True %s}" % (nd % dap), "Đúng. " + ly_d), (r"{%s}" % (nd % sai_d), "Sai. " + ly_d)]
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_cong_troi(BC, CD, BD, AB, AD), 0, socot)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_J_01(socau, dang=1):
+    r"""Ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) chia bởi một đường chéo thành hai
+    tam giác biết ba cạnh: Heron hai lần rồi cộng (có hình).
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de giua ki I cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        dap = str(_lt(S1 + S2))
+        nhieu = _ba_nhieu(dap, [str(_lt(S1)), str(_lt(S2)), str(_lt(2 * (S1 + S2)))],
+                          buoc=lambda t: str(_lt(S1 + S2) + 4 * t))
+        debai = (_DOAN_CONG_TROI + r" Ước lượng diện tích của xã Dân Hóa cũ (làm tròn đến hàng đơn vị, đơn vị "
+                 r"$\text{km}^{2}$) là")
+        giai = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
+                r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_L_01(socau, dang=2):
+    r"""Trả lời ngắn - ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) bằng Heron hai lần.
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de giua ki I cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        dap = str(_lt(S1 + S2))
+        if len(dap) > 4:
+            continue
+        so += 1
+        debai = (_DOAN_CONG_TROI + r" Ước lượng diện tích của xã Dân Hóa cũ (đơn vị $\text{km}^{2}$, làm tròn đến "
+                 r"hàng đơn vị).")
+        giai = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
+                r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
+        cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai,
+                                  _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_TL_I_01(socau, dong=1):
+    r"""Tự luận - Cổng Trời, xã Dân Hóa (có hình).
+    a) (VD) Tính diện tích tam giác $BCD$ (hoặc $ABD$).
+    b) (VDC) Ước lượng diện tích của xã Dân Hóa cũ (vùng tứ giác $ABCD$).
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de giua ki I cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        if random.random() < 0.5:
+            ten, ba, Sa, ten2, ba2, Sb = "BCD", (BC, CD, BD), S1, "ABD", (AB, AD, BD), S2
+        else:
+            ten, ba, Sa, ten2, ba2, Sb = "ABD", (AB, AD, BD), S2, "BCD", (BC, CD, BD), S1
+        ds = [(r"Tính diện tích tam giác $%s$ (làm tròn đến hàng phần mười, đơn vị $\text{km}^{2}$)." % ten,
+               r"S_{%s} \approx %s\,\text{km}^{2}" % (ten, _x1(Sa)), _giai_heron(ten, *ba, Sa)),
+              (r"Ước lượng diện tích của xã Dân Hóa cũ (làm tròn đến hàng đơn vị, đơn vị $\text{km}^{2}$).",
+               r"S \approx %d\,\text{km}^{2}" % _lt(S1 + S2),
+               _giai_heron(ten2, *ba2, Sb) + "\\\\ " +
+               r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD} \approx %s \approx %d\,\text{km}^{2}$."
+               % (_xx(S1 + S2, 2), _lt(S1 + S2)))]
+        cau += TL_answer_text(_DOAN_CONG_TROI, ds, _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dong)
+    return cau

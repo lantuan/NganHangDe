@@ -9552,3 +9552,15 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   voi phuong thang dung: MC_I_01, SA_K_01 (hoi ngau nhien chieu cao CH hoac khoang cach AH),
   TL_H_01 (a cac goc tam giac ABC va AC - tien de, b CH hoac AH). Co hinh ve theo so lieu.
   Bai goc 100 m, 30 va 60 do: AC = 100 m, CH = 50 m. Mapping danh dau VDC, cung mo ta dang.
+
+# Version 3.81 - 2026-10-01
+
+## Cong Troi - xa Dan Hoa (de giua ki I 2025-2026 cua co Lan, Phan II cau 2)
+
+- L10_C3_TF_I_01: vung dat tu giac ABCD chia boi duong cheo BD (so do ve theo so lieu, bo hinh
+  Google Maps): a) NB he qua dinh li cosin, b) TH dinh li sin, c) VD sin qua dien tich,
+  d) VDC uoc luong dien tich (Heron hai lan). Bai goc 15, 20, 20, 11, 10 km -> ~171 km^2.
+- VD036_MC_J_01, SA_L_01 (uoc luong dien tich), TL_I_01 (a dien tich mot tam giac, b ca vung);
+  cung mo ta dang.
+- Doan dan sua theo dia gioi hanh chinh moi: "thuoc xa Dan Hoa, tinh Quang Tri" (tu 01/7/2025
+  Quang Binh hop nhat vao Quang Tri, bo cap huyen); "sat nhap" -> "sap xep don vi hanh chinh".
