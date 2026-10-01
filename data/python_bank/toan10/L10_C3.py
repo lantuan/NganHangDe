@@ -7702,12 +7702,32 @@ def _sm(x, n=1, dv=r"\,\text{m}"):
     return (str(_lt(x)) if n == 0 else _x1(x, n)) + dv
 
 
-def L10_C3_TF_J_01(socau, socot=1):
-    r"""Đúng/Sai - biết $\tan\alpha$ (hoặc $\cot\alpha$) là phân số của bộ ba Pythagore và $0^{\circ} < \alpha < 180^{\circ}$:
-    dấu của $\cos\alpha$, giá trị $\cos\alpha$ (qua $1 + \tan^{2}\alpha = \dfrac{1}{\cos^{2}\alpha}$), $\sin\alpha$, số đo góc
-    $\alpha$ bằng máy tính cầm tay.
+# Các biểu thức góc bù, góc phụ dùng cho ý d) của TF_J: (LaTeX, giá trị theo (s, c, t, k), giá trị SAI hay gặp)
+_BU_PHU_TF_J = [
+    (r"\sin\left(180^{\circ} - \alpha\right)", lambda s, c, t, k: s, lambda s, c, t, k: -s),
+    (r"\cos\left(180^{\circ} - \alpha\right)", lambda s, c, t, k: -c, lambda s, c, t, k: c),
+    (r"\tan\left(180^{\circ} - \alpha\right)", lambda s, c, t, k: -t, lambda s, c, t, k: t),
+    (r"\cot\left(180^{\circ} - \alpha\right)", lambda s, c, t, k: -k, lambda s, c, t, k: k),
+    (r"\sin\left(90^{\circ} - \alpha\right)", lambda s, c, t, k: c, lambda s, c, t, k: s),
+    (r"\cos\left(90^{\circ} - \alpha\right)", lambda s, c, t, k: s, lambda s, c, t, k: c),
+    (r"\tan\left(90^{\circ} - \alpha\right)", lambda s, c, t, k: k, lambda s, c, t, k: t),
+    (r"\cot\left(90^{\circ} - \alpha\right)", lambda s, c, t, k: t, lambda s, c, t, k: k),
+]
+_TEN_BU_PHU = [r"\sin\alpha", r"-\cos\alpha", r"-\tan\alpha", r"-\cot\alpha",
+               r"\cos\alpha", r"\sin\alpha", r"\cot\alpha", r"\tan\alpha"]
 
-    CLAUDE THEM 01/10/2026 - theo phan Dung/Sai tai lieu C3-B1 (tan = -5/12, tan = -3/4, cot = -can 2). Co Lan duyet lai.
+
+def L10_C3_TF_J_01(socau, socot=1):
+    r"""Đúng/Sai - biết MỘT giá trị lượng giác ($\sin$, $\cos$, $\tan$ hoặc $\cot$, số của bộ ba Pythagore) và
+    góc nhọn / tù:
+    a) (NB) dấu của một giá trị lượng giác;
+    b) (TH) đổi một bước: từ $\cos$ tìm $\sin$, từ $\sin$ tìm $\cos$, từ $\tan$ tìm $\cot$, từ $\cot$ tìm $\tan$;
+    c) (VD) giá trị còn lại cần hai bước ($\tan = \dfrac{\sin}{\cos}$, hoặc $1 + \tan^{2}\alpha = \dfrac{1}{\cos^{2}\alpha}$,
+       $1 + \cot^{2}\alpha = \dfrac{1}{\sin^{2}\alpha}$);
+    d) (VDC) tính biểu thức chứa các góc bù, góc phụ của $\alpha$.
+
+    CLAUDE THEM 01/10/2026 - lam lai theo y co Lan ("cau b tu cos tim sin, tu tan tim cot...; cau b cu
+    chuyen thanh cau c; cau d tinh bieu thuc co goc bu phu"). Co Lan duyet lai.
     """
     cau = ""
     so = 0
@@ -7715,38 +7735,65 @@ def L10_C3_TF_J_01(socau, socot=1):
         doi, ke, huyen = random.choice(BO_BA_PYTAGO)
         if random.random() < 0.5:
             doi, ke = ke, doi
-        tu = random.random() < 0.6
-        cho_tan = random.random() < 0.6
+        tu = random.random() < 0.5
         dau = -1 if tu else 1
-        t = Rational(dau * doi, ke)
-        cs, sn = Rational(dau * ke, huyen), Rational(doi, huyen)
-        goc = math.degrees(math.atan2(float(sn), float(cs)))
-        if not _xa_bien(goc, 1):
+        s, c = Rational(doi, huyen), Rational(dau * ke, huyen)
+        t, k = s / c, c / s
+        cho = random.choice(["sin", "cos", "tan", "cot"])
+        gia = {"sin": s, "cos": c, "tan": t, "cot": k}[cho]
+        loai = "tù" if tu else "nhọn"
+        khoang = r"90^{\circ} < \alpha < 180^{\circ}" if tu else r"0^{\circ} < \alpha < 90^{\circ}"
+        terms = random.sample(range(len(_BU_PHU_TF_J)), 3)
+        hs = [random.choice([1, 2, 3, -1, -2]) for _ in terms]
+        P = sum(h * _BU_PHU_TF_J[i][1](s, c, t, k) for h, i in zip(hs, terms))
+        P_sai = sum(h * (_BU_PHU_TF_J[i][2] if j == 0 else _BU_PHU_TF_J[i][1])(s, c, t, k)
+                    for j, (h, i) in enumerate(zip(hs, terms)))
+        if P_sai == P:
             continue
         so += 1
-        if cho_tan:
-            gia = r"$\tan\alpha = %s$" % _L(t)
+        debai = (r"Cho góc $\alpha$ với $%s$ (góc $\alpha$ %s) và $\%s\alpha = %s$. Xét tính đúng, sai của các mệnh đề sau."
+                 % (khoang, loai, cho, _L(gia)))
+        # a) NB - dấu của một giá trị lượng giác (chọn giá trị chưa cho)
+        ham_a = random.choice([h for h in ("cos", "tan", "cot") if h != cho])
+        ly_a = r"Góc $\alpha$ %s nên $\cos\alpha %s 0$, $\tan\alpha %s 0$, $\cot\alpha %s 0$ (còn $\sin\alpha > 0$)." % (
+            loai, "<" if tu else ">", "<" if tu else ">", "<" if tu else ">")
+        y1 = _y_ds(r"$\%s\alpha %s 0$" % (ham_a, "<" if tu else ">"), r"$\%s\alpha %s 0$" % (ham_a, ">" if tu else "<"), ly_a)
+        # b) TH - đổi một bước
+        if cho == "cos":
+            ly_b = r"$\sin^{2}\alpha = 1 - \cos^{2}\alpha = 1 - %s = %s$, mà $\sin\alpha > 0$ nên $\sin\alpha = %s$." % (_L(c ** 2), _L(s ** 2), _L(s))
+            y2 = _y_ds(r"$\sin\alpha = %s$" % _L(s), r"$\sin\alpha = %s$" % _L(-s), ly_b)
+        elif cho == "sin":
+            ly_b = (r"$\cos^{2}\alpha = 1 - \sin^{2}\alpha = 1 - %s = %s$, góc $\alpha$ %s nên $\cos\alpha = %s$."
+                    % (_L(s ** 2), _L(c ** 2), loai, _L(c)))
+            y2 = _y_ds(r"$\cos\alpha = %s$" % _L(c), r"$\cos\alpha = %s$" % _L(-c), ly_b)
+        elif cho == "tan":
+            ly_b = r"$\cot\alpha = \dfrac{1}{\tan\alpha} = %s$." % _L(k)
+            y2 = _y_ds(r"$\cot\alpha = %s$" % _L(k), r"$\cot\alpha = %s$" % _L(-k), ly_b)
         else:
-            gia = r"$\cot\alpha = %s$" % _L(1 / t)
-        debai = r"Cho góc $\alpha$ với $0^{\circ} < \alpha < 180^{\circ}$ thoả mãn %s. Xét tính đúng, sai của các mệnh đề sau." % gia
-        ly_a = (r"Với $0^{\circ} < \alpha < 180^{\circ}$ thì $\sin\alpha > 0$, mà $%s %s 0$ nên $\cos\alpha %s 0$ "
-                r"(góc $\alpha$ %s)." % (r"\tan\alpha" if cho_tan else r"\cot\alpha", "<" if tu else ">",
-                                          "<" if tu else ">", "tù" if tu else "nhọn"))
-        # a) NB
-        y1 = _y_ds(r"$\cos\alpha %s 0$" % ("<" if tu else ">"), r"$\cos\alpha %s 0$" % (">" if tu else "<"), ly_a)
-        doi_tan = "" if cho_tan else r"$\tan\alpha = \dfrac{1}{\cot\alpha} = %s$; " % _L(t)
-        ly_b = doi_tan + (r"$\dfrac{1}{\cos^{2}\alpha} = 1 + \tan^{2}\alpha = 1 + %s = %s$ nên $\cos^{2}\alpha = %s$; vì "
-                r"$\cos\alpha %s 0$ nên $\cos\alpha = %s$." % (_L(t ** 2), _L(1 + t ** 2), _L(cs ** 2), "<" if tu else ">", _L(cs)))
-        # b) TH
-        y2 = _y_ds(r"$\cos\alpha = %s$" % _L(cs), r"$\cos\alpha = %s$" % _L(-cs), ly_b)
-        ly_c = r"$\sin\alpha = \tan\alpha\cdot\cos\alpha = %s\cdot\left(%s\right) = %s$." % (_L(t), _L(cs), _L(sn))
-        # c) VD
-        y3 = _y_ds(r"$\sin\alpha = %s$" % _L(sn), r"$\sin\alpha = %s$" % random.choice([_L(-sn), _L(Rational(ke, huyen))]), ly_c)
-        ly_d = (r"Từ $\cos\alpha = %s$, bấm máy $\alpha = \cos^{-1}\left(%s\right) \approx %s^{\circ}$ (đúng là góc %s)."
-                % (_L(cs), _L(cs), _x1(goc, 1), "tù" if tu else "nhọn"))
-        # d) VDC
-        y4 = _y_ds(r"$\alpha \approx %s^{\circ}$ (làm tròn đến hàng phần mười)" % _x1(goc, 1),
-                   r"$\alpha \approx %s^{\circ}$ (làm tròn đến hàng phần mười)" % _x1(180 - goc, 1), ly_d)
+            ly_b = r"$\tan\alpha = \dfrac{1}{\cot\alpha} = %s$." % _L(t)
+            y2 = _y_ds(r"$\tan\alpha = %s$" % _L(t), r"$\tan\alpha = %s$" % _L(-t), ly_b)
+        # c) VD - giá trị còn lại, hai bước
+        if cho in ("sin", "cos"):
+            ly_c = ly_b + r" Do đó $\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = %s$." % _L(t)
+            y3 = _y_ds(r"$\tan\alpha = %s$" % _L(t), r"$\tan\alpha = %s$" % _L(1 / t), ly_c)
+        elif cho == "tan":
+            ly_c = (r"$\dfrac{1}{\cos^{2}\alpha} = 1 + \tan^{2}\alpha = %s$ nên $\cos^{2}\alpha = %s$; góc $\alpha$ %s nên "
+                    r"$\cos\alpha = %s$." % (_L(1 + t ** 2), _L(c ** 2), loai, _L(c)))
+            y3 = _y_ds(r"$\cos\alpha = %s$" % _L(c), r"$\cos\alpha = %s$" % _L(-c), ly_c)
+        else:
+            ly_c = (r"$\dfrac{1}{\sin^{2}\alpha} = 1 + \cot^{2}\alpha = %s$ nên $\sin^{2}\alpha = %s$; vì $\sin\alpha > 0$ nên "
+                    r"$\sin\alpha = %s$." % (_L(1 + k ** 2), _L(s ** 2), _L(s)))
+            y3 = _y_ds(r"$\sin\alpha = %s$" % _L(s), r"$\sin\alpha = %s$" % _L(c if c > 0 else -c), ly_c)
+        # d) VDC - biểu thức chứa góc bù, góc phụ
+        bt = ""
+        for j, (h, i) in enumerate(zip(hs, terms)):
+            he = ("" if h == 1 else ("-" if h == -1 else str(h))) if j == 0 else \
+                 (" + " if h == 1 else (" - " if h == -1 else (" + %d" % h if h > 0 else " - %d" % -h)))
+            bt += he + _BU_PHU_TF_J[i][0]
+        doi_ra = ", ".join(r"$%s = %s$" % (_BU_PHU_TF_J[i][0], _TEN_BU_PHU[i]) for i in terms)
+        ly_d = (r"Theo quan hệ góc bù, góc phụ: %s. Với $\sin\alpha = %s$, $\cos\alpha = %s$, $\tan\alpha = %s$, "
+                r"$\cot\alpha = %s$ ta được $P = %s$." % (doi_ra, _L(s), _L(c), _L(t), _L(k), _L(P)))
+        y4 = _y_ds(r"$P = %s = %s$" % (bt, _L(P)), r"$P = %s = %s$" % (bt, _L(P_sai)), ly_d)
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cau
 

@@ -9663,3 +9663,7 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 - Mapping "boi_canh" (docs/04 - Quy tắc bối cảnh). question_selector: _khoa_boi_canh, _trung_boi_canh; TF chọn trước đưa bối cảnh vào tập đã dùng, TL/MC/SA tránh theo; câu tự luận nhiều ý cũng xét.
 - Đã gắn boi_canh: chương 3 (tàu đổi hướng, hai tàu, Trái Đất, sườn đồi, khinh khí cầu, mảnh vườn, tháp trên đồi, Cổng Trời, núi - toà nhà, đường tròn qua ba điểm, cây gãy, cây cao, tháp Chăm, con dốc, mảnh đất tứ giác), chương 6 (cước điện thoại), chương 9 (quay bánh xe).
 - Test: tests/test_boi_canh.py.
+
+# Version 3.91 - 2026-10-01
+
+- L10_C3_TF_J làm lại theo ý cô Lan: cho MỘT giá trị lượng giác (sin, cos, tan hoặc cot) và góc nhọn/tù; a) (NB) dấu; b) (TH) đổi một bước: cos -> sin, sin -> cos, tan -> cot, cot -> tan; c) (VD) giá trị còn lại hai bước (tan = sin/cos, 1 + tan² = 1/cos², 1 + cot² = 1/sin² - ý b cũ); d) (VDC) biểu thức chứa ba góc bù/phụ của α (giữ trong YCCĐ, không dùng biểu thức đồng bậc vì dạng đó đánh dấu ngoài YCCĐ). Mapping chuyển sang curriculum TH031.

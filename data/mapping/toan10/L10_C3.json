@@ -1245,10 +1245,10 @@
   },
   {
     "id": "L10_C3_TF_J",
-    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Đúng sai",
-    "Dang": "Biết tan hoặc cot và góc từ 0 đến 180 độ: dấu của cos, cos, sin, số đo góc bằng máy tính",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - mo rong Dung/Sai chuong 3 theo dang co Lan chon; a) NB b) TH c) VD d) VDC; co Lan duyet lai"
+    "Dang": "Biết một giá trị lượng giác và góc nhọn/tù: dấu, đổi một bước (sin-cos, tan-cot), giá trị còn lại, biểu thức chứa góc bù, góc phụ",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - mo rong Dung/Sai chuong 3 theo dang co Lan chon; a) NB b) TH c) VD d) VDC; co Lan duyet lai; 01/10/2026 lam lai theo y co Lan: b) doi mot buoc, c) hai buoc, d) bieu thuc goc bu phu"
   },
   {
     "id": "L10_C3_TF_K",
