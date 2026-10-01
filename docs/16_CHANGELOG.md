@@ -9608,3 +9608,11 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - Đánh dấu `muc_do_dang: "VDC"` cho các dạng làm mới: VD036_MC_E, SA_G (sườn đồi - chiều cao cây), VD036_MC_J, SA_L (Cổng Trời - Heron hai lần).
 - Tách câu hỏi lẫn VD/VDC: VD036_MC_C_03 và VD036_SA_F_01 chỉ còn hỏi khoảng cách AC (VD); câu hỏi hướng từ A tới C chuyển sang dạng mới VD036_MC_M, VD036_SA_O (VDC, cùng mô tả "Dang" với SA_F/TL_D).
 - docs/04: quy tắc mỗi dạng MC/SA mức VD làm mới phải đánh giá và đánh dấu VDC ngay khi tạo; không để một hàm hỏi lẫn VD và VDC. bang_duyet_VD_VDC.xlsx ghi chú các dòng đã xử lý.
+
+# Version 3.87 - 2026-10-01
+
+- Sửa lỗi L10_C6_B15_VD092_SA_A (cước điện thoại): đáp số 52000 quá 4 kí tự, đổi sang đơn vị nghìn đồng (ví dụ 52; 32,5).
+- Thêm dạng VDC (`muc_do_dang: "VDC"`) cho bối cảnh cước điện thoại, tối đa 3 mức giá (cô Lan):
+  - VD092_MC_B / SA_B: _01 biết tiền tìm số phút, _02 so sánh hai gói (số phút để bằng tiền, khoảng đầu cho nghiệm loại), _03 giá bậc thang 3 mức.
+  - VD092_TL_B: a) (VD) viết hàm trên một khoảng, b) (VDC) buộc dùng hàm trên từng khoảng; _01 hai gói, _02 bậc thang.
+- Thống nhất mô tả "Dang" của MC_A, SA_A, TL_A, MC_B, SA_B, TL_B (cùng bối cảnh) để không ra chung một đề.

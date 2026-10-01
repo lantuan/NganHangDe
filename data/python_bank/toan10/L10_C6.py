@@ -743,6 +743,297 @@ def L10_C6_B15_VD092_TL_A_01(socau, dong=1):
     return cauTN
 
 
+# ---------------------------------------------------------------------
+# Cước điện thoại - dạng VẬN DỤNG CAO (muc_do_dang VDC ở mapping) và tự luận
+# a) VD viết hàm trên một khoảng, b) VDC buộc phải dùng hàm trên từng khoảng.
+# CLAUDE THEM 01/10/2026 - theo y co Lan (toi da 3 muc gia; ba kieu hoi: biet
+# tien tim so phut, so sanh hai goi, gia bac thang). Co Lan duyet lai.
+# ---------------------------------------------------------------------
+
+def _tien6(x):
+    """Số tiền (đồng, số nguyên) viết có dấu cách nghìn: 52\\,000."""
+    return "{:,}".format(int(x)).replace(",", "\\,")
+
+
+def _nghin6(x_dong):
+    """Đổi đồng sang nghìn đồng, viết gọn (32,5)."""
+    return _xx6(x_dong / 1000, 3)
+
+
+def _bo_goi_tron():
+    """Gói trọn T nghìn đồng, miễn phí B phút, vượt c đồng/phút; chọn số phút vượt trước."""
+    T = random.choice([25, 30, 40, 50])
+    B = random.choice([100, 150, 200])
+    c = random.choice([200, 250, 300, 400])
+    vuot = random.choice([20, 30, 40, 50, 60, 80])
+    return T, B, c, vuot
+
+
+def _ham_goi_tron(T, B, c, bien="x"):
+    """Hàm tiền cước (đồng) của gói trọn, viết trên từng khoảng."""
+    return (r"$y = \begin{cases} %s & \text{nếu } 0 \le %s \le %d \\ "
+            r"%s + %d\left(%s - %d\right) & \text{nếu } %s > %d \end{cases}$"
+            % (_tien6(T * 1000), bien, B, _tien6(T * 1000), c, bien, B, bien, B))
+
+
+def _bo_hai_goi():
+    """Gói A: T nghìn, miễn phí B phút, vượt c đ/phút. Gói B: d đ/phút, không cước tháng.
+    Chọn sao cho hai gói bằng tiền tại x > B (giải nhầm ở khoảng đầu ra x0 = 1000T/d > B)."""
+    while True:
+        T = random.choice([60, 70, 80, 90, 100, 120])
+        B = random.choice([30, 40, 50, 60])
+        c = random.choice([200, 250, 300, 400, 500])
+        d = random.choice([800, 1000, 1200, 1500])
+        if d <= c or d * B >= 1000 * T:
+            continue
+        tu = 1000 * T - c * B
+        if tu % (d - c):
+            continue
+        x = tu // (d - c)
+        if B < x <= 400:
+            return T, B, c, d, x
+
+
+def _bo_bac_thang():
+    """Cước bậc thang 3 mức (cô Lan: không quá 3 mức): a phút đầu p1 đ/phút,
+    từ phút a+1 đến b: p2 đ/phút, từ phút b+1: p3 đ/phút. Chọn số phút x > b trước."""
+    while True:
+        a = random.choice([50, 100])
+        b = a + random.choice([50, 100])
+        p1 = random.choice([1000, 1200])
+        p2 = random.choice([800, 900])
+        p3 = random.choice([500, 600])
+        x = b + random.choice([20, 30, 40, 50, 60, 80, 100])
+        y = a * p1 + (b - a) * p2 + (x - b) * p3
+        if len(_nghin6(y)) <= 4:
+            return a, b, p1, p2, p3, x, y
+
+
+def _de_bac_thang(a, b, p1, p2, p3):
+    return (r"Một nhà mạng tính cước gọi điện theo ba mức: $%d$ phút đầu tiên giá $%s$ đồng/phút; "
+            r"từ phút thứ $%d$ đến phút thứ $%d$ giá $%s$ đồng/phút; từ phút thứ $%d$ trở đi giá "
+            r"$%s$ đồng/phút." % (a, _tien6(p1), a + 1, b, _tien6(p2), b + 1, _tien6(p3)))
+
+
+def _ham_bac_thang(a, b, p1, p2, p3):
+    f_a, f_b = a * p1, a * p1 + (b - a) * p2
+    return (r"$y = \begin{cases} %d x & \text{nếu } 0 \le x \le %d \\ "
+            r"%s + %d\left(x - %d\right) & \text{nếu } %d < x \le %d \\ "
+            r"%s + %d\left(x - %d\right) & \text{nếu } x > %d \end{cases}$"
+            % (p1, a, _tien6(f_a), p2, a, a, b, _tien6(f_b), p3, b, b))
+
+
+def _de_hai_goi(T, B, c, d):
+    return (r"Một nhà mạng có hai gói cước. Gói A: $%d$ nghìn đồng một tháng, được gọi miễn phí "
+            r"$%d$ phút, mỗi phút vượt quá $%d$ phút trả thêm $%d$ đồng. Gói B: không mất cước "
+            r"tháng, mỗi phút gọi trả $%s$ đồng." % (T, B, B, c, _tien6(d)))
+
+
+def _so_gon6(tu, mau):
+    """tu/mau viết gọn: số nguyên, số thập phân hữu hạn, hoặc phân số tối giản."""
+    from fractions import Fraction
+    f = Fraction(tu, mau)
+    if f.denominator == 1:
+        return str(f.numerator)
+    q = f.denominator
+    while q % 2 == 0:
+        q //= 2
+    while q % 5 == 0:
+        q //= 5
+    if q == 1:
+        return _xx6(float(f), 6)
+    return r"\dfrac{%d}{%d}" % (f.numerator, f.denominator)
+
+
+def _giai_hai_goi(T, B, c, d, x):
+    return (r"Gọi $x$ là số phút gọi trong tháng. Tiền gói A (đồng):" "\\\\\n"
+            + _ham_goi_tron(T, B, c) + "\\\\\n"
+            r"Tiền gói B: $y = %d x$." % d + "\\\\\n"
+            r"$\bullet$ Nếu $0 \le x \le %d$: $%d x = %s \Leftrightarrow x = %s > %d$, loại." "\\\\\n"
+            % (B, d, _tien6(T * 1000), _so_gon6(1000 * T, d), B)
+            + r"$\bullet$ Nếu $x > %d$: $%d x = %s + %d\left(x - %d\right) \Leftrightarrow %d x = %s "
+            r"\Leftrightarrow x = %d$ (thoả mãn)."
+            % (B, d, _tien6(T * 1000), c, B, d - c, _tien6(1000 * T - c * B), x))
+
+
+def _giai_bac_thang_tien(a, b, p1, p2, p3, x, y):
+    return (r"Gọi $x$ là số phút gọi, $y$ là tiền cước (đồng). Ta có hàm số trên từng khoảng:"
+            "\\\\\n" + _ham_bac_thang(a, b, p1, p2, p3) + "\\\\\n"
+            r"Vì $%d > %d$ nên $y = %s + %d\cdot\left(%d - %d\right) = %s$ (đồng), tức là "
+            r"$%s$ nghìn đồng."
+            % (x, b, _tien6(a * p1 + (b - a) * p2), p3, x, b, _tien6(y), _nghin6(y)))
+
+
+def _giai_bac_thang_phut(a, b, p1, p2, p3, x, y):
+    f_a, f_b = a * p1, a * p1 + (b - a) * p2
+    return (r"Gọi $x$ là số phút gọi, $y$ là tiền cước (đồng). Ta có hàm số trên từng khoảng:"
+            "\\\\\n" + _ham_bac_thang(a, b, p1, p2, p3) + "\\\\\n"
+            r"Gọi đủ $%d$ phút hết $%s$ đồng, gọi đủ $%d$ phút hết $%s$ đồng. Vì $%s > %s$ nên "
+            r"$x > %d$:" "\\\\\n"
+            r"$%s + %d\left(x - %d\right) = %s \Leftrightarrow x - %d = %d \Leftrightarrow x = %d$ (phút)."
+            % (a, _tien6(f_a), b, _tien6(f_b), _tien6(y), _tien6(f_b), b,
+               _tien6(f_b), p3, b, _tien6(y), b, x - b, x))
+
+
+def L10_C6_B15_VD092_MC_B_01(socau, dang=1):
+    r"""Cước điện thoại (VDC): biết số tiền phải trả, tìm số phút đã gọi - phải xét
+    số tiền thuộc khoảng nào của hàm số trên từng khoảng.
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        T, B, c, vuot = _bo_goi_tron()
+        M = T * 1000 + vuot * c
+        x = B + vuot
+        dap = r"$%d$ phút" % x
+        nhieu = [r"$%d$ phút" % v for v in _ba_nhieu6(x, [vuot, M // c, (M // c) + B, x + 10],
+                                                        buoc=lambda t: x + 10 * t)]
+        debai = (r"Một gói cước điện thoại giá $%d$ nghìn đồng một tháng, được gọi miễn phí $%d$ "
+                 r"phút; mỗi phút vượt quá $%d$ phút phải trả thêm $%d$ đồng. Tháng đó bạn An trả "
+                 r"tất cả $%s$ đồng tiền cước. Tháng đó An đã gọi bao nhiêu phút?"
+                 % (T, B, B, c, _tien6(M)))
+        giai = (r"Gọi $x$ là số phút gọi, $y$ là tiền cước (đồng):" "\\\\\n" + _ham_goi_tron(T, B, c)
+                + "\\\\\n"
+                r"Vì $%s > %s$ nên An đã gọi quá $%d$ phút:" "\\\\\n"
+                r"$%s + %d\left(x - %d\right) = %s \Leftrightarrow x - %d = %d \Leftrightarrow x = %d$."
+                % (_tien6(M), _tien6(T * 1000), B, _tien6(T * 1000), c, B, _tien6(M), B, vuot, x))
+        cau += MC_SA_answer_text(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_MC_B_02(socau, dang=1):
+    r"""Cước điện thoại (VDC): so sánh hai gói cước, tìm số phút để hai gói bằng tiền -
+    phải xét từng khoảng của hàm số gói trọn (khoảng đầu cho nghiệm bị loại).
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        T, B, c, d, x = _bo_hai_goi()
+        dap = r"$%d$ phút" % x
+        sai = [round(1000 * T / d), round(1000 * T / (d - c)), round((1000 * T + c * B) / (d - c))]
+        nhieu = [r"$%d$ phút" % v for v in _ba_nhieu6(x, sai, buoc=lambda t: x + 10 * t)]
+        debai = _de_hai_goi(T, B, c, d) + r" Trong một tháng, gọi bao nhiêu phút thì số tiền phải trả theo hai gói bằng nhau?"
+        cau += MC_SA_answer_text(debai, dap, nhieu, _giai_hai_goi(T, B, c, d, x), 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_MC_B_03(socau, dang=1):
+    r"""Cước điện thoại (VDC): giá bậc thang 3 mức, tính tiền khi gọi vào mức thứ ba.
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        a, b, p1, p2, p3, x, y = _bo_bac_thang()
+        dap = r"$%s$ nghìn đồng" % _nghin6(y)
+        sai = [x * p3, x * p1, a * p1 + (x - a) * p2]
+        nhieu = [r"$%s$ nghìn đồng" % _nghin6(v)
+                 for v in _ba_nhieu6(y, sai, buoc=lambda t: y + 5000 * t)]
+        debai = _de_bac_thang(a, b, p1, p2, p3) + r" Tháng đó bạn An gọi $%d$ phút. Số tiền cước An phải trả là" % x
+        cau += MC_SA_answer_text(debai, dap, nhieu, _giai_bac_thang_tien(a, b, p1, p2, p3, x, y), 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cước điện thoại (VDC): biết số tiền phải trả, tìm số phút đã gọi.
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        T, B, c, vuot = _bo_goi_tron()
+        M = T * 1000 + vuot * c
+        x = B + vuot
+        debai = (r"Một gói cước điện thoại giá $%d$ nghìn đồng một tháng, được gọi miễn phí $%d$ "
+                 r"phút; mỗi phút vượt quá $%d$ phút phải trả thêm $%d$ đồng. Tháng đó bạn An trả "
+                 r"tất cả $%s$ đồng tiền cước. Tính số phút An đã gọi trong tháng đó."
+                 % (T, B, B, c, _tien6(M)))
+        giai = (r"Gọi $x$ là số phút gọi, $y$ là tiền cước (đồng):" "\\\\\n" + _ham_goi_tron(T, B, c)
+                + "\\\\\n"
+                r"Vì $%s > %s$ nên An đã gọi quá $%d$ phút:" "\\\\\n"
+                r"$%s + %d\left(x - %d\right) = %s \Leftrightarrow x = %d$."
+                % (_tien6(M), _tien6(T * 1000), B, _tien6(T * 1000), c, B, _tien6(M), x))
+        cau += MC_SA_answer_const(debai, str(x), [str(x + k) for k in (10, -10, 20)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_SA_B_02(socau, dang=2):
+    r"""Trả lời ngắn - cước điện thoại (VDC): số phút để hai gói cước bằng tiền.
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        T, B, c, d, x = _bo_hai_goi()
+        debai = _de_hai_goi(T, B, c, d) + r" Tính số phút gọi trong một tháng để số tiền phải trả theo hai gói bằng nhau."
+        cau += MC_SA_answer_const(debai, str(x), [str(x + k) for k in (10, -10, 20)],
+                                  _giai_hai_goi(T, B, c, d, x), 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_SA_B_03(socau, dang=2):
+    r"""Trả lời ngắn - cước điện thoại (VDC): giá bậc thang 3 mức, tính tiền (nghìn đồng).
+
+    CLAUDE THEM 01/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        a, b, p1, p2, p3, x, y = _bo_bac_thang()
+        dap = _nghin6(y)
+        debai = (_de_bac_thang(a, b, p1, p2, p3) + r" Tháng đó bạn An gọi $%d$ phút. Tính số tiền cước "
+                 r"An phải trả (đơn vị: nghìn đồng)." % x)
+        cau += MC_SA_answer_const(debai, dap, [_nghin6(y + k) for k in (5000, -5000, 10000)],
+                                  _giai_bac_thang_tien(a, b, p1, p2, p3, x, y), 0, 0, dang)
+    return cau
+
+
+def L10_C6_B15_VD092_TL_B_01(socau, dong=1):
+    r"""Tự luận - hai gói cước điện thoại.
+    a) (VD) Viết công thức tiền gói A theo số phút $x$ khi $x > B$ (hàm trên một khoảng).
+    b) (VDC) Tìm số phút để hai gói bằng tiền (buộc xét hàm trên từng khoảng).
+
+    CLAUDE THEM 01/10/2026 - theo y co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        T, B, c, d, x = _bo_hai_goi()
+        hoi_a = (r"Gọi $x$ là số phút gọi trong tháng. Khi $x > %d$, viết công thức tính số tiền "
+                 r"$y$ (đồng) phải trả theo gói A." % B)
+        giai_a = (r"Khi $x > %d$, ngoài $%s$ đồng tiền gói còn phải trả cho $x - %d$ phút vượt, "
+                  r"nên $y = %s + %d\left(x - %d\right) = %d x + %s$."
+                  % (B, _tien6(T * 1000), B, _tien6(T * 1000), c, B, c, _tien6(T * 1000 - c * B)))
+        hoi_b = r"Trong một tháng, gọi bao nhiêu phút thì số tiền phải trả theo hai gói bằng nhau?"
+        ds = [(hoi_a, r"y = %d x + %s" % (c, _tien6(T * 1000 - c * B)), giai_a),
+              (hoi_b, r"x = %d" % x, _giai_hai_goi(T, B, c, d, x))]
+        cau += TL_answer_text(_de_hai_goi(T, B, c, d), ds, 0, 0, dong)
+    return cau
+
+
+def L10_C6_B15_VD092_TL_B_02(socau, dong=1):
+    r"""Tự luận - cước bậc thang 3 mức.
+    a) (VD) Viết công thức tiền cước khi số phút thuộc mức thứ hai (hàm trên một khoảng).
+    b) (VDC) Biết số tiền đã trả, tìm số phút (buộc xét hàm trên từng khoảng).
+
+    CLAUDE THEM 01/10/2026 - theo y co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        a, b, p1, p2, p3, x, y = _bo_bac_thang()
+        hoi_a = (r"Gọi $x$ là số phút gọi trong tháng. Khi $%d < x \le %d$, viết công thức tính số "
+                 r"tiền cước $y$ (đồng)." % (a, b))
+        giai_a = (r"Khi $%d < x \le %d$: $%d$ phút đầu hết $%d\cdot %s = %s$ đồng, $x - %d$ phút còn lại "
+                  r"giá $%s$ đồng/phút, nên $y = %s + %d\left(x - %d\right) = %d x + %s$."
+                  % (a, b, a, a, _tien6(p1), _tien6(a * p1), a, _tien6(p2), _tien6(a * p1), p2, a,
+                     p2, _tien6(a * (p1 - p2))))
+        hoi_b = r"Tháng đó bạn An trả $%s$ đồng tiền cước. Tính số phút An đã gọi." % _tien6(y)
+        ds = [(hoi_a, r"y = %d x + %s" % (p2, _tien6(a * (p1 - p2))), giai_a),
+              (hoi_b, r"x = %d" % x, _giai_bac_thang_phut(a, b, p1, p2, p3, x, y))]
+        cau += TL_answer_text(_de_bac_thang(a, b, p1, p2, p3), ds, 0, 0, dong)
+    return cau
+
+
 # =====================================================================
 # BÀI 16. HÀM SỐ BẬC HAI
 # =====================================================================
@@ -1936,8 +2227,10 @@ def L10_C6_TF_B_01(socau, socot=1):
 # CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
 # ---------------------------------------------------------------------
 
-def L10_C6_B15_VD092_SA_A_01(socau):
-    """Trả lời ngắn: tiền cước theo hàm số bậc nhất trên từng khoảng."""
+def L10_C6_B15_VD092_SA_A_01(socau, dang=2):
+    """Trả lời ngắn: tiền cước theo hàm số bậc nhất trên từng khoảng.
+
+    01/10/2026 (cô Lan báo lỗi): đáp số 52000 quá 4 kí tự - đổi sang đơn vị nghìn đồng."""
     gt = []
     while len(gt) < socau:
         tron = random.choice([20, 25, 30, 40])
@@ -1955,17 +2248,17 @@ def L10_C6_B15_VD092_SA_A_01(socau):
         debai = (r"Một gói cước điện thoại giá $%d$ nghìn đồng một tháng, "
                  r"được gọi miễn phí $%d$ phút; mỗi phút vượt quá $%d$ phút "
                  r"phải trả thêm $%d$ đồng. Tháng đó bạn An gọi $%d$ phút. "
-                 r"Tính số tiền cước An phải trả (đơn vị: đồng)."
+                 r"Tính số tiền cước An phải trả (đơn vị: nghìn đồng)."
                  % (tron, bao, bao, them, tong_phut))
         giai = (r"Số phút vượt: $%d - %d = %d$ (phút)."
                 % (tong_phut, bao, vuot) +
                 "\\\\\n"
-                r"Tiền cước $= %d\,000 + %d\cdot %d = %d$ (đồng)."
-                % (tron, them, vuot, kq))
-        nhieu = _ba_nhieu6(kq, [tron * 1000 + tong_phut * them, tron * 1000,
-                                vuot * them],
-                           buoc=lambda t: kq + 1000 * t)
-        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+                r"Tiền cước $= %d\,000 + %d\cdot %d = %s$ (đồng) $= %s$ (nghìn đồng)."
+                % (tron, them, vuot, _tien6(kq), _nghin6(kq)))
+        dap = _nghin6(kq)
+        nhieu = [_nghin6(v) for v in _ba_nhieu6(kq, [tron * 1000 + tong_phut * them, tron * 1000,
+                                                    vuot * them], buoc=lambda t: kq + 1000 * t)]
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
     return cau
 
 

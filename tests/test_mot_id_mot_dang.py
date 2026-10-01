@@ -143,6 +143,9 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH034_MC_G",   # cong thuc R, r, Heron: chon dung / chon sai
     "L10_C3_B6_TH035_MC_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B6_TH035_SA_C",   # tam giac nho: trung tuyen / phan giac
+    "L10_C6_B15_VD092_MC_B",  # cuoc dien thoai VDC: biet tien tim phut / hai goi / bac thang 3 muc
+    "L10_C6_B15_VD092_SA_B",  # nhu MC_B (ban tra loi ngan)
+    "L10_C6_B15_VD092_TL_B",  # a) ham tren mot khoang, b) dung ham tren tung khoang: hai goi / bac thang
     "L10_C3_B6_VD036_MC_C",   # tau doi huong / hai phuong tien cung xuat phat / cho quang duong, hoi AC (cau hoi huong VDC tach sang MC_M 01/10/2026)
     "L10_C3_B6_VD036_TL_D",   # doi huong 60 do / hai huong la ban bat ki / phuong dong roi E30S (cho quang duong)
     "L10_C3_B6_VD036_TL_A",   # hai goc nang 30-60 / ang-ten tren noc nha
