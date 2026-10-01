@@ -3417,6 +3417,7 @@ def L10_C1_B1_NB013_MC_B_01(socau, dang=1):
 
 
 def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
+    _SO_NHOM = "c1_th014_mc_a"
 
     import random
 
@@ -3425,7 +3426,9 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
 
     while dem < socau:
 
-        nhom = random.randint(1, 17)
+        # 01/10/2026: nhóm lấy xoay vòng - nhóm đã ra thì chỉ ra lại khi đã ra hết các nhóm
+        nhom = _c1_uu_tien(_SO_NHOM, 17)[0] + 1
+        _c1_danh_dau(_SO_NHOM, [nhom - 1])
 
         if nhom == 1:
             a = random.randint(1, 30)
@@ -3577,13 +3580,16 @@ def L10_C1_B1_TH014_MC_A_01(socau, dang=1):
 
 
 def L10_C1_B1_TH014_MC_B_01(socau, dang=1): ####### kiểm tra lại nội dung câu hỏi, các phương án.
+    _SO_NHOM = "c1_th014_mc_b"
 
     gt = []
     dem = 0
 
     while dem < socau:
 
-        nhom = random.randint(1, 17)
+        # 01/10/2026: nhóm lấy xoay vòng - nhóm đã ra thì chỉ ra lại khi đã ra hết các nhóm
+        nhom = _c1_uu_tien(_SO_NHOM, 17)[0] + 1
+        _c1_danh_dau(_SO_NHOM, [nhom - 1])
 
         if nhom == 1:
             a = random.randint(1, 30)
@@ -10776,6 +10782,21 @@ def _c1_uu_tien(ten, n):
     return chua + roi
 
 
+def _c1_bac_chon(ten, n, hoi_dung):
+    """Các bậc tìm mệnh đề cho câu bốn phương án (khoá 01/10/2026 theo cô Lan: "chọn câu này rồi thì câu khác
+    không chọn nữa, hết câu rồi mới quay lại"):
+      1) chỉ mệnh đề CHƯA dùng, hỏi theo chiều đã định; 2) chỉ mệnh đề chưa dùng, đổi chiều câu hỏi;
+      3) - 4) chỉ khi phần chưa dùng không đủ mới lấy thêm mệnh đề đã dùng."""
+    da = _C1_XV.da_dung.setdefault(ten, set())
+    if len(da) >= n:
+        da.clear()
+    chua = [i for i in range(n) if i not in da]
+    roi = [i for i in range(n) if i in da]
+    random.shuffle(chua)
+    random.shuffle(roi)
+    return [(chua, hoi_dung), (chua, not hoi_dung), (chua + roi, hoi_dung), (chua + roi, not hoi_dung)]
+
+
 def _c1_danh_dau(ten, ds):
     _C1_XV.da_dung.setdefault(ten, set()).update(ds)
 
@@ -10794,10 +10815,23 @@ def _c1_dl(chu_de, i, dao=None):
     return P, Q, pq, qp, l_pq, l_qp
 
 
+def _c1_chon_bat_ky(tien_to, phang):
+    """Chọn MỘT phần tử (chủ đề, chỉ số) trong cả kho, CHƯA dùng ở bất kì câu nào (cùng sổ với các câu
+    theo chủ đề, nên câu một mệnh đề và câu bốn mệnh đề không lấy trùng nhau). Hết thì xoá sổ, vòng mới."""
+    da = _C1_XV.da_dung
+    con = [(cd, i) for cd, i in phang if i not in da.get(tien_to + cd, set())]
+    if not con:
+        for cd in {cd for cd, _ in phang}:
+            da.get(tien_to + cd, set()).clear()
+        con = list(phang)
+    cd, i = random.choice(con)
+    _c1_danh_dau(tien_to + cd, [i])
+    return cd, i
+
+
 def _c1_dl_bat_ky(dao=None):
-    """Một phần tử bất kì của kho 1 (xoay vòng trên CẢ kho) - cho câu chỉ có MỘT mệnh đề."""
-    k, = _c1_xoay("c1_dl_tat_ca", len(_DL_PHANG))
-    cd, i = _DL_PHANG[k]
+    """Một phần tử bất kì của kho 1 - cho câu chỉ có MỘT mệnh đề (MC_D, tự luận NB010_TH014)."""
+    cd, i = _c1_chon_bat_ky("c1_dl_", _DL_PHANG)
     return _c1_dl(cd, i, dao)
 
 
@@ -10818,19 +10852,19 @@ def _c1_bon_cung_chu_de(chu_de, hoi_dung):
     ba mệnh đề còn lại ngược lại (đổi chiều câu hỏi nếu chủ đề không đủ)."""
     ten = "c1_dl_" + chu_de
     n = len(_KHO_DL[chu_de])
-    for _lan in range(60):
-        chon, khac, dung_i = None, [], []
-        for i in _c1_uu_tien(ten, n):
-            for _t in range(6):
-                t, d, l = _c1_cau_dl(chu_de, i)
-                if d == hoi_dung and chon is None:
-                    chon = (t, d, l); dung_i.append(i); break
-                if d != hoi_dung and len(khac) < 3:
-                    khac.append((t, d, l)); dung_i.append(i); break
-            if chon and len(khac) == 3:
-                _c1_danh_dau(ten, dung_i)
-                return hoi_dung, chon, khac
-        hoi_dung = not hoi_dung
+    for ds_i, hd in _c1_bac_chon(ten, n, hoi_dung):
+        for _lan in range(20):
+            chon, khac, dung_i = None, [], []
+            for i in ds_i:
+                for _t in range(6):
+                    t, d, l = _c1_cau_dl(chu_de, i)
+                    if d == hd and chon is None:
+                        chon = (t, d, l); dung_i.append(i); break
+                    if d != hd and len(khac) < 3:
+                        khac.append((t, d, l)); dung_i.append(i); break
+                if chon and len(khac) == 3:
+                    _c1_danh_dau(ten, dung_i)
+                    return hd, chon, khac
     raise CauHongError("chu de %s khong du menh de" % chu_de)
 
 
@@ -11148,8 +11182,8 @@ def _lt(chu_de, i):
 
 
 def _lt_bat_ky():
-    k, = _c1_xoay("c1_lt_tat_ca", len(_LT_PHANG))
-    return _lt(*_LT_PHANG[k])
+    """Một mệnh đề chứa kí hiệu bất kì - cho câu chỉ có MỘT mệnh đề (MC_F_01, tự luận NB013_TH014)."""
+    return _lt(*_c1_chon_bat_ky("c1_lt_", _LT_PHANG))
 
 
 def L10_C1_B1_TH014_MC_F_01(socau, dang=1):
@@ -11176,18 +11210,26 @@ def _lt_bon(chu_de, hoi_dung):
     """Bốn mệnh đề chứa $\\forall$, $\\exists$ từ bốn phần tử khác nhau của CÙNG một chủ đề."""
     ten = "c1_lt_" + chu_de
     kho = _KHO_LT[chu_de]()
-    for _lan in range(2):
+    bang = {i: _lt(chu_de, i) for i in range(len(kho))}     # một lần sinh số liệu cho cả câu
+    bac = _c1_bac_chon(ten, len(kho), hoi_dung)
+    chua = bac[0][0]
+    so_dung = sum(1 for i in chua if bang[i]["dung"])
+    so_sai = len(chua) - so_dung
+    # chọn chiều câu hỏi để ba phương án nhiễu lấy ở nhóm còn NHIỀU mệnh đề chưa dùng hơn
+    if (hoi_dung and so_sai < 3 <= so_dung) or (not hoi_dung and so_dung < 3 <= so_sai):
+        hoi_dung = not hoi_dung
+        bac = [(d, not h) for d, h in bac]
+    for ds_i, hd in bac:
         chon, khac, ids = None, [], []
-        for i in _c1_uu_tien(ten, len(kho)):
-            m = _lt(chu_de, i)
-            if m["dung"] == hoi_dung and chon is None:
+        for i in ds_i:
+            m = bang[i]
+            if m["dung"] == hd and chon is None:
                 chon = m; ids.append(i)
-            elif m["dung"] != hoi_dung and len(khac) < 3:
+            elif m["dung"] != hd and len(khac) < 3:
                 khac.append(m); ids.append(i)
             if chon and len(khac) == 3:
                 _c1_danh_dau(ten, ids)
-                return hoi_dung, chon, khac
-        hoi_dung = not hoi_dung
+                return hd, chon, khac
     raise CauHongError("chu de %s khong du menh de" % chu_de)
 
 

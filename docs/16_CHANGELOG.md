@@ -9738,3 +9738,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Bỏ các biến thể trộn chủ đề: TH014_MC_A_02, TH014_MC_F_02; TH014_MC_C_01 làm lại (chỉ chia hết, chẵn lẻ).
 - TH003_MC_A_02: bốn phương án cùng một loại mệnh đề về số.
 - Các câu chỉ có MỘT mệnh đề (MC_D, MC_F_01, TL NB010_TH014, TL NB013_TH014) lấy xoay vòng trên cả kho.
+
+# Version 3.99 - 2026-10-01
+
+## Khoá quy tắc "chọn mệnh đề này rồi thì câu khác không chọn nữa, hết mới quay lại" (chương 1, cô Lan)
+- Mỗi chủ đề có một sổ xoay vòng (_C1_XV.da_dung, giữ trong sys.modules nên còn qua các lần nạp lại tệp chương trên máy chủ). Câu bốn mệnh đề (MC, SA theo chủ đề) và câu một mệnh đề (MC_D, MC_F_01, tự luận NB010_TH014, NB013_TH014) dùng CHUNG sổ của chủ đề -> không lấy trùng mệnh đề của nhau.
+- _c1_bac_chon: chỉ lấy mệnh đề chưa dùng (đổi chiều câu hỏi "đúng/sai" nếu cần); chỉ khi phần còn lại không đủ ghép một câu mới lấy lại mệnh đề đã dùng. Câu ∀, ∃ chọn chiều câu hỏi theo số mệnh đề đúng/sai còn lại.
+- TH014_MC_A_01, MC_B_01 (hàm gốc của cô): nhóm lấy xoay vòng thay cho random.randint(1, 17).
+- Test mới tests/test_xoay_vong_c1.py: trong một vòng, mỗi câu phải lấy 4 mệnh đề mới (chỉ câu cuối vòng được dùng lại); câu một mệnh đề và câu theo chủ đề dùng chung sổ.
