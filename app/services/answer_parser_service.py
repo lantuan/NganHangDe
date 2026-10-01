@@ -215,11 +215,26 @@ def _rut_gon_immini(text: str) -> str:
         vi_tri = m.end()
         while vi_tri < len(text) and text[vi_tri] in " \t\r\n":
             vi_tri += 1
+        # SUA 01/10/2026 (co Lan): bo qua tham so tuy chon \immini[thm]{...}{...}
+        # (cau Dung/Sai co hinh do math_type.TF_dothi_de sinh ra) - truoc day
+        # "[thm]" lam ham dung lai, web hien nguyen chu "\immini[thm]{".
+        if vi_tri < len(text) and text[vi_tri] == "[":
+            dong = text.find("]", vi_tri)
+            if dong != -1:
+                vi_tri = dong + 1
+                while vi_tri < len(text) and text[vi_tri] in " \t\r\n":
+                    vi_tri += 1
         if vi_tri >= len(text) or text[vi_tri] != "{":
             ket_qua.append(text[m.start():vi_tri])
             i = vi_tri
             continue
-        noi_dung_chu, vi_tri2 = _tim_khoi_dong(text, vi_tri)
+        try:
+            noi_dung_chu, vi_tri2 = _tim_khoi_dong(text, vi_tri)
+        except AnswerParseError:
+            # de bai bi cat giua \immini{...} (cau Dung/Sai: de bai dung o
+            # \choiceTFt nam TRONG \immini) - bo lenh, giu phan chu con lai
+            ket_qua.append(text[vi_tri + 1:])
+            break
         while vi_tri2 < len(text) and text[vi_tri2] in " \t\r\n":
             vi_tri2 += 1
         if vi_tri2 < len(text) and text[vi_tri2] == "{":
@@ -322,6 +337,11 @@ def trich_loi_giai(latex_block: str) -> str | None:
     if vi_tri >= len(latex_block) or latex_block[vi_tri] != "{":
         return None
     noi_dung, _ = _tim_khoi_dong(latex_block, vi_tri)
+    # SUA 01/10/2026: loi giai co hinh (\immini[thm]{CHU}{HINH}) - web khong ve
+    # duoc TikZ trong loi giai, giu phan chu, bo hinh (PDF van co du hinh).
+    noi_dung = _rut_gon_immini(noi_dung)
+    noi_dung = re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", "(Hình vẽ: xem bản PDF)",
+                      noi_dung, flags=re.S)
     return noi_dung.strip()
 
 

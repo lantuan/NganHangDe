@@ -9571,3 +9571,15 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 
 - _bo_cong_troi: lay dung so do thuc te (15, 20, 20, 11, 10 km), moi doan chi lech toi da 1 km;
   dien tich uoc luong nam trong khoang 171 +- 15 km^2 (de khong khac xa thuc te).
+
+# Version 3.83 - 2026-10-01
+
+## Web hien nguyen chu "\immini[thm]{" o cau Dung/Sai co hinh (co Lan bao)
+
+- answer_parser_service._rut_gon_immini: bo qua tham so tuy chon [thm] cua \immini (cau Dung/Sai
+  co hinh do math_type.TF_dothi_de sinh ra \immini[thm]{de ... \choiceTFt...}{HINH}); de bai bi
+  cat giua \immini (dung tai \choiceTFt) thi bo lenh, giu phan chu. Truoc day "[thm]" lam ham
+  dung lai nen MOI cau Dung/Sai co hinh deu hien "\immini[thm]{" tren web.
+- trich_loi_giai: loi giai co \immini[thm]{CHU}{HINH} giu phan chu, hinh TikZ thay bang
+  "(Hinh ve: xem ban PDF)".
+- Test: tests/test_hinh_cau_dung_sai_len_web.py (TF_G, TF_H, TF_I; loi giai co hinh).

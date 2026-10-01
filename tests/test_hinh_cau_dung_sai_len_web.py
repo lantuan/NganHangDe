@@ -41,3 +41,28 @@ def test_khong_lay_nham_hinh_cua_loi_giai():
          "\\loigiai{\nGiai.\n\\begin{tikzpicture}\\draw (0,0)--(1,1);"
          "\\end{tikzpicture}\n}\n\\end{ex}")
     assert not trich_dap_an(k).get("hinh_tikz")
+
+
+def test_de_bai_dung_sai_co_hinh_khong_con_lenh_immini():
+    """Co Lan 01/10/2026: web hien nguyen chu "\\immini[thm]{" o moi cau Dung/Sai co hinh."""
+    import random as _r
+    import sys as _s
+    from pathlib import Path as _P
+    _g = _P(__file__).resolve().parents[1]
+    _s.path.insert(0, str(_g / "data" / "python_bank"))
+    _s.path.insert(0, str(_g / "data" / "python_bank" / "toan10"))
+    import L10_C3 as _m
+    from app.services.answer_parser_service import trich_de_bai
+    for ten in ("L10_C3_TF_H_01", "L10_C3_TF_I_01", "L10_C3_TF_G_01"):
+        _r.seed(1)
+        kq = trich_de_bai(getattr(_m, ten)(1, 1))
+        assert "\\immini" not in kq["de_bai"] and "[thm]" not in kq["de_bai"], (ten, kq["de_bai"][:120])
+        assert kq["hinh_tikz"], ten
+
+
+def test_loi_giai_co_hinh_khong_con_lenh_immini():
+    from app.services.answer_parser_service import trich_loi_giai
+    khoi = ("\\begin{ex}\nde\n\\loigiai{\n\\immini[thm]{\nGiai: $x = 1$.\n}{\n\\begin{tikzpicture}\\draw (0,0) -- (1,1);"
+            "\\end{tikzpicture}\n}\n}\n\\end{ex}")
+    lg = trich_loi_giai(khoi)
+    assert "\\immini" not in lg and "tikzpicture" not in lg and "x = 1" in lg
