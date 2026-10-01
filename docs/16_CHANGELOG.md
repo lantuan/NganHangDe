@@ -9593,3 +9593,12 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - Gắn vào generator_service (call_generator, call_locked_variant) và scripts/nhap.py. PDF và Word dùng chung latex_block nên đều 2 ý.
 - L10_C3_B6_VD036_TL_E_01 (bán kính Trái Đất): thêm hình `_hinh_trai_dat()` gồm Trái Đất, ngọn núi, tia nhìn tiếp tuyến tới đường chân trời, góc θ.
 - Test: tests/test_tu_luan_hai_y.py (125 hàm TL đều ra 2 ý).
+
+# Version 3.85 - 2026-10-01
+
+- Bài bán kính Trái Đất (đường chân trời) thêm MC, SA, tách mức VD và VDC (cô Lan duyệt cách hỏi). Curriculum vẫn VD036, dạng VDC ghi `muc_do_dang: "VDC"` ở mapping để bộ chọn lấy suất VDC trước:
+  - L10_C3_B6_VD036_MC_K (VD): biết R = 6371 km, h, tính góc hạ θ.
+  - L10_C3_B6_VD036_SA_M (VD): biết R, h, tính khoảng cách MT tới đường chân trời.
+  - L10_C3_B6_VD036_MC_L (VDC): biết h, θ, chọn công thức R = h·cosθ/(1 − cosθ).
+  - L10_C3_B6_VD036_SA_N (VDC): biết h, θ, tính R.
+- Cùng mô tả "Dang" với TL_E nên không ra chung một đề. Độ cao 10 ngọn núi lấy xấp xỉ số liệu thực tế; cả 4 hàm có hình `_hinh_trai_dat()`.
