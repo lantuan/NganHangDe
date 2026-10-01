@@ -9543,3 +9543,12 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   L10_C3_TH034_VD036_TL_A (a dien tich Heron, b r, R hoac duong cao). Cung mo ta dang voi
   MC/SA cung boi canh; _khoa_mo_ta cua cau nhieu y tinh theo don vi y cuoi.
 - Sua trung ten: _bo_trung_tuyen moi doi thanh _bo_tt_tam_giac_nho (khong de ham cu).
+
+# Version 3.80 - 2026-10-01
+
+## VD036 (VDC): thap tren dinh doi, hai goc so voi phuong thang dung (theo co Lan)
+
+- Thap BC cao h tren dinh doi; dinh B va chan C nhin diem A o chan doi duoi goc beta, gamma so
+  voi phuong thang dung: MC_I_01, SA_K_01 (hoi ngau nhien chieu cao CH hoac khoang cach AH),
+  TL_H_01 (a cac goc tam giac ABC va AC - tien de, b CH hoac AH). Co hinh ve theo so lieu.
+  Bai goc 100 m, 30 va 60 do: AC = 100 m, CH = 50 m. Mapping danh dau VDC, cung mo ta dang.

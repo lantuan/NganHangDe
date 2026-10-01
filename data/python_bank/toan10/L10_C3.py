@@ -9055,3 +9055,150 @@ def L10_C3_TH034_VD036_TL_A_01(socau, dong=1):
               (hoi_b, r"\approx %s\,\text{m}" % dap if "làm tròn" in hoi_b else r"%s\,\text{m}" % dap, g_b)]
         cau += TL_answer_text(than, ds, 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# VD036 - VẬN DỤNG CAO (cô Lan 01/10/2026): tháp BC cao h trên đỉnh đồi; đỉnh tháp B
+# và chân tháp C nhìn điểm A ở chân đồi dưới các góc beta, gamma so với PHƯƠNG THẲNG
+# ĐỨNG (gamma > beta). Hỏi chiều cao CH của ngọn đồi (hoặc khoảng cách nằm ngang AH).
+#   ABC = beta, ACB = 180 - gamma, BAC = gamma - beta; AC = h.sin(beta)/sin(gamma - beta);
+#   CH = AC.cos(gamma), AH = AC.sin(gamma).
+# Bài gốc: h = 100 m, 30 và 60 độ -> AC = 100 m, CH = 50 m.
+# MC_I_01, SA_K_01, TL_H_01 cùng mô tả dạng, Mapping đánh dấu "muc_do_dang": "VDC".
+# =====================================================================
+
+def _bo_thap_doi():
+    """(h, beta, gamma, AC, CH, AH) chọn trước: góc hợp lí, đáp số không sát ranh giới làm tròn."""
+    while True:
+        be = random.randint(15, 45)
+        ga = random.randint(be + 10, min(be + 40, 75))
+        h = random.choice([20, 25, 30, 40, 50, 60, 80, 100, 120])
+        AC = h * _sin_d(be) / _sin_d(ga - be)
+        CH, AH = AC * _cos_d(ga), AC * _sin_d(ga)
+        if CH < 10 or CH > 600 or AH > 900:
+            continue
+        if not (_xa_bien(CH) and _xa_bien(AH) and _xa_bien(AC)):
+            continue
+        return h, be, ga, AC, CH, AH
+
+
+def _hinh_thap_doi(h, CH, AH, be, ga):
+    """Hình vẽ theo số liệu (thu nhỏ cho vừa khung): đồi, tháp BC, điểm A ở chân đồi, H."""
+    k = 3.2 / max(AH, CH + h)
+    x, yc, yb = AH * k, CH * k, (CH + h) * k
+    huong_BA = math.degrees(math.atan2(-yb, -x)) % 360
+    huong_CA = math.degrees(math.atan2(-yc, -x)) % 360
+    return (
+        "\\begin{tikzpicture}[scale=1,font=\\footnotesize]\n"
+        "\\fill[black!12] (0,0) .. controls (%.2f,%.2f) and (%.2f,%.2f) .. (%.2f,%.2f) "
+        ".. controls (%.2f,%.2f) and (%.2f,%.2f) .. (%.2f,0) -- cycle;\n"
+        % (0.5 * x, 0.15 * yc, 0.75 * x, yc, x, yc, 1.25 * x, yc, 1.5 * x, 0.15 * yc, 2 * x)
+        + "\\draw (-0.3,0) -- (%.2f,0);\n" % (2 * x + 0.3)
+        + "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (x, yc, x, yb)
+        + "\\draw[dashed] (%.2f,%.2f) -- (%.2f,0);\n" % (x, yc, x)
+        + "\\draw[dashed] (0,0) -- (%.2f,%.2f) (0,0) -- (%.2f,%.2f);\n" % (x, yb, x, yc)
+        + "\\draw (%.2f,%.2f) arc (270:%.1f:0.45);\n" % (x, yb - 0.45, huong_BA)
+        + "\\draw (%.2f,%.2f) arc (270:%.1f:0.3);\n" % (x, yc - 0.3, huong_CA)
+        + "\\node[left] at (%.2f,%.2f) {$%d^{\\circ}$};\n" % (x - 0.15, yb - 0.6, be)
+        + "\\node[left] at (%.2f,%.2f) {$%d^{\\circ}$};\n" % (x - 0.12, yc - 0.42, ga)
+        + "\\draw (%.2f,0) rectangle (%.2f,0.15);\n" % (x - 0.15, x)
+        + "\\fill (0,0) circle (0.04) node[below left] {$A$};\n"
+        "\\fill (%.2f,0) circle (0.04) node[below] {$H$};\n" % x
+        + "\\fill (%.2f,%.2f) circle (0.04) node[right] {$C$};\n" % (x, yc)
+        + "\\fill (%.2f,%.2f) circle (0.04) node[right] {$B$};\n" % (x, yb)
+        + "\\end{tikzpicture}"
+    )
+
+
+def _de_thap_doi(h, be, ga):
+    return (r"Trên một ngọn đồi có một cái tháp cao $%d\,\text{m}$ (hình vẽ). Đỉnh tháp $B$ và chân tháp $C$ lần "
+            r"lượt nhìn điểm $A$ ở chân đồi dưới các góc tương ứng bằng $%s$ và $%s$ so với phương thẳng đứng. "
+            r"Gọi $H$ là hình chiếu vuông góc của $C$ trên mặt phẳng nằm ngang đi qua $A$." % (h, _goc(be), _goc(ga)))
+
+
+def _giai_goc_thap_doi(be, ga):
+    return (r"Theo đề: $\widehat{ABC} = %s$ (góc giữa $BA$ và phương thẳng đứng $BH$); $\widehat{ACH} = %s$ nên "
+            r"$\widehat{ACB} = 180^{\circ} - %s = %s$; do đó $\widehat{BAC} = 180^{\circ} - %s - %s = %s$."
+            % (_goc(be), _goc(ga), _goc(ga), _goc(180 - ga), _goc(be), _goc(180 - ga), _goc(ga - be)))
+
+
+def _giai_ac_thap_doi(h, be, ga, AC):
+    return (r"Định lí sin trong tam giác $ABC$: $AC = \dfrac{BC\cdot\sin\widehat{ABC}}{\sin\widehat{BAC}} = "
+            r"\dfrac{%d\cdot\sin %s}{\sin %s} \approx %s\,\text{m}$." % (h, _goc(be), _goc(ga - be), _xx(AC, 2)))
+
+
+def _giai_hoi_thap_doi(hoi, ga, AC, gt):
+    if hoi == "CH":
+        return (r"Tam giác $ACH$ vuông tại $H$: $CH = AC\cdot\cos\widehat{ACH} = AC\cdot\cos %s \approx %s\,\text{m}$."
+                % (_goc(ga), _xx(gt, 2)))
+    return (r"Tam giác $ACH$ vuông tại $H$: $AH = AC\cdot\sin\widehat{ACH} = AC\cdot\sin %s \approx %s\,\text{m}$."
+            % (_goc(ga), _xx(gt, 2)))
+
+
+_HOI_THAP = {"CH": r"chiều cao $CH$ của ngọn đồi", "AH": r"khoảng cách $AH$ từ $A$ đến chân đường thẳng đứng qua tháp"}
+
+
+def L10_C3_B6_VD036_MC_I_01(socau, dang=1):
+    r"""VẬN DỤNG CAO - tháp trên đỉnh đồi, đỉnh và chân tháp nhìn điểm $A$ ở chân đồi dưới hai góc so
+    với PHƯƠNG THẲNG ĐỨNG: tính chiều cao ngọn đồi (hoặc khoảng cách nằm ngang $AH$) - có hình.
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de co Lan gui (thap 100 m, 30 va 60 do -> CH = 50 m).
+    So lieu chon truoc. Mapping danh dau muc_do_dang VDC. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        h, be, ga, AC, CH, AH = _bo_thap_doi()
+        hoi = random.choice(["CH", "AH"])
+        gt, kia = (CH, AH) if hoi == "CH" else (AH, CH)
+        dap = str(_lt(gt))
+        nhieu = _ba_nhieu(dap, [str(_lt(kia)), str(_lt(AC)), str(_lt(gt + h * _cos_d(ga)))],
+                          buoc=lambda t: str(_lt(gt) + 3 * t))
+        debai = _de_thap_doi(h, be, ga) + r" Khi đó %s (làm tròn đến hàng đơn vị) xấp xỉ bằng" % _HOI_THAP[hoi]
+        giai = (_giai_goc_thap_doi(be, ga) + "\\\\\n" + _giai_ac_thap_doi(h, be, ga, AC) + "\\\\\n"
+                + _giai_hoi_thap_doi(hoi, ga, AC, gt))
+        cau += MC_SA_answer_const(debai, dap + r"\,\text{m}", [v + r"\,\text{m}" for v in nhieu], giai,
+                                  _hinh_thap_doi(h, CH, AH, be, ga), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_K_01(socau, dang=2):
+    r"""Trả lời ngắn - VẬN DỤNG CAO: tháp trên đỉnh đồi, hai góc so với phương thẳng đứng; tính chiều cao
+    ngọn đồi hoặc khoảng cách nằm ngang $AH$ (có hình).
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        h, be, ga, AC, CH, AH = _bo_thap_doi()
+        hoi = random.choice(["CH", "AH"])
+        gt = CH if hoi == "CH" else AH
+        dap = str(_lt(gt))
+        debai = (_de_thap_doi(h, be, ga) + r" Tính %s (đơn vị mét, làm tròn đến hàng đơn vị)." % _HOI_THAP[hoi])
+        giai = (_giai_goc_thap_doi(be, ga) + "\\\\\n" + _giai_ac_thap_doi(h, be, ga, AC) + "\\\\\n"
+                + _giai_hoi_thap_doi(hoi, ga, AC, gt))
+        cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai,
+                                  _hinh_thap_doi(h, CH, AH, be, ga), 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_TL_H_01(socau, dong=1):
+    r"""Tự luận - tháp trên đỉnh đồi (có hình).
+    a) (VD, tiền đề) Tính các góc của tam giác $ABC$ và độ dài $AC$.
+    b) (VDC) Tính chiều cao $CH$ của ngọn đồi (hoặc khoảng cách $AH$).
+
+    CLAUDE THEM 01/10/2026 - dang moi theo de co Lan gui. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        h, be, ga, AC, CH, AH = _bo_thap_doi()
+        hoi = random.choice(["CH", "AH"])
+        gt = CH if hoi == "CH" else AH
+        ds = [(r"Tính số đo các góc của tam giác $ABC$ và độ dài $AC$ (làm tròn đến hàng phần mười).",
+               r"\widehat{ABC} = %s,\ \widehat{ACB} = %s,\ \widehat{BAC} = %s;\ AC \approx %s\,\text{m}"
+               % (_goc(be), _goc(180 - ga), _goc(ga - be), _x1(AC)),
+               _giai_goc_thap_doi(be, ga) + "\\\\\n" + _giai_ac_thap_doi(h, be, ga, AC)),
+              (r"Tính %s (đơn vị mét, làm tròn đến hàng đơn vị)." % _HOI_THAP[hoi],
+               r"%s \approx %d\,\text{m}" % (hoi, _lt(gt)),
+               _giai_hoi_thap_doi(hoi, ga, AC, gt) + r" Vậy $%s \approx %d\,\text{m}$." % (hoi, _lt(gt)))]
+        cau += TL_answer_text(_de_thap_doi(h, be, ga), ds, _hinh_thap_doi(h, CH, AH, be, ga), 0, dong)
+    return cau
