@@ -9564,3 +9564,10 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   cung mo ta dang.
 - Doan dan sua theo dia gioi hanh chinh moi: "thuoc xa Dan Hoa, tinh Quang Tri" (tu 01/7/2025
   Quang Binh hop nhat vao Quang Tri, bo cap huyen); "sat nhap" -> "sap xep don vi hanh chinh".
+
+# Version 3.82 - 2026-10-01
+
+## Cong Troi: so do bam sat thuc te (theo co Lan)
+
+- _bo_cong_troi: lay dung so do thuc te (15, 20, 20, 11, 10 km), moi doan chi lech toi da 1 km;
+  dien tich uoc luong nam trong khoang 171 +- 15 km^2 (de khong khac xa thuc te).

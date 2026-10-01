@@ -9211,7 +9211,7 @@ def L10_C3_B6_VD036_TL_H_01(socau, dong=1):
 #   VD036_MC_J_01 / SA_L_01   ước lượng diện tích vùng đất (Heron hai lần)
 #   VD036_TL_I_01   a) diện tích một tam giác (VD)  b) diện tích cả vùng (VDC)
 # Bài gốc: BC = 15, CD = 20, BD = 20, AB = 11, AD = 10 (km) -> 139,05 + 31,98 ~ 171 km^2.
-# Số đo chọn trước: hai tam giác không dẹt, tứ giác lồi, diện tích không sát ranh giới làm tròn.
+# Số đo lấy theo số đo thực tế của cô, mỗi đoạn chỉ lệch tối đa 1 km (không khác xa thực tế).
 # =====================================================================
 
 _DOAN_CONG_TROI = (
@@ -9237,19 +9237,17 @@ def _goc_tam_giac(doi, k1, k2):
 
 
 def _bo_cong_troi():
-    """(BC, CD, BD, AB, AD, S_BCD, S_ABD) - số nguyên km, hai tam giác không dẹt, tứ giác lồi."""
+    """(BC, CD, BD, AB, AD, S_BCD, S_ABD) - số đo THỰC TẾ đo trên Google Maps (BC = 15, CD = 20,
+    BD = 20, AB = 11, AD = 10 km) chỉ xê dịch nhẹ (mỗi đoạn lệch tối đa 1 km) để đề vẫn đúng thực tế
+    (cô Lan 01/10/2026); hai tam giác không dẹt, tứ giác lồi."""
     while True:
-        BD = random.randint(12, 30)
-        BC = random.randint(max(5, BD // 2), BD + 4)
-        CD = random.randint(max(5, BD // 2), BD + 4)
-        AB = random.randint(max(4, BD // 3), BD - 2)
-        AD = random.randint(max(4, BD // 3), BD - 2)
-        if not (BC + CD > BD + 2 and AB + AD > BD + 1 and abs(BC - CD) < BD and abs(AB - AD) < BD):
+        BC, CD, BD, AB, AD = [g + random.choice([-1, 0, 0, 1]) for g in (15, 20, 20, 11, 10)]
+        if not (BC + CD > BD + 2 and AB + AD > BD + 0.5 and abs(BC - CD) < BD and abs(AB - AD) < BD):
             continue
         tam_giac = [(BC, CD, BD), (AB, AD, BD)]
         goc = [_goc_tam_giac(x, y, z) for (u, v, w) in tam_giac
                for x, y, z in ((u, v, w), (v, w, u), (w, u, v))]
-        if min(goc) < 15:
+        if min(goc) < 8:
             continue
         # tứ giác lồi: góc tại B và tại D (tổng hai góc thành phần) nhỏ hơn 180 độ
         gB = _goc_tam_giac(CD, BC, BD) + _goc_tam_giac(AD, AB, BD)
@@ -9257,6 +9255,8 @@ def _bo_cong_troi():
         if gB >= 170 or gD >= 170:
             continue
         S1, S2 = _heron_f(BC, CD, BD), _heron_f(AB, AD, BD)
+        if abs(S1 + S2 - 171) > 15:          # diện tích gần thực tế (khoảng 171 km^2)
+            continue
         if not (_xa_bien(S1 + S2) and _xa_bien(S1) and _xa_bien(S2)):
             continue
         return BC, CD, BD, AB, AD, S1, S2
