@@ -9602,3 +9602,9 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
   - L10_C3_B6_VD036_MC_L (VDC): biết h, θ, chọn công thức R = h·cosθ/(1 − cosθ).
   - L10_C3_B6_VD036_SA_N (VDC): biết h, θ, tính R.
 - Cùng mô tả "Dang" với TL_E nên không ra chung một đề. Độ cao 10 ngọn núi lấy xấp xỉ số liệu thực tế; cả 4 hàm có hình `_hinh_trai_dat()`.
+
+# Version 3.86 - 2026-10-01
+
+- Đánh dấu `muc_do_dang: "VDC"` cho các dạng làm mới: VD036_MC_E, SA_G (sườn đồi - chiều cao cây), VD036_MC_J, SA_L (Cổng Trời - Heron hai lần).
+- Tách câu hỏi lẫn VD/VDC: VD036_MC_C_03 và VD036_SA_F_01 chỉ còn hỏi khoảng cách AC (VD); câu hỏi hướng từ A tới C chuyển sang dạng mới VD036_MC_M, VD036_SA_O (VDC, cùng mô tả "Dang" với SA_F/TL_D).
+- docs/04: quy tắc mỗi dạng MC/SA mức VD làm mới phải đánh giá và đánh dấu VDC ngay khi tạo; không để một hàm hỏi lẫn VD và VDC. bang_duyet_VD_VDC.xlsx ghi chú các dòng đã xử lý.

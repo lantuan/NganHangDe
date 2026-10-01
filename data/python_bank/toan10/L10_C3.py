@@ -8504,8 +8504,8 @@ def _giai_tau_huong(X, Y, th, d2, AC, phi):
 
 def L10_C3_B6_VD036_MC_C_03(socau, dang=1):
     r"""Tàu chạy $d_1$ km về một phương (đông/tây/nam/bắc) rồi đổi sang hướng
-    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: hỏi NGẪU NHIÊN khoảng cách $AC$ (hàng đơn vị)
-    hoặc hướng từ $A$ tới $C$ (độ, hàng đơn vị).
+    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: hỏi khoảng cách $AC$ (hàng đơn vị) - mức VD.
+    Câu hỏi hướng từ $A$ tới $C$ (mức VDC) tách sang VD036_MC_M_01 (01/10/2026).
 
     CLAUDE THEM 30/09/2026 - bien the 03 cua VD036_MC_C theo bai co Lan gui (dong
     15 km, E30S 20 km). So lieu chon truoc. Co Lan duyet lai.
@@ -8513,50 +8513,71 @@ def L10_C3_B6_VD036_MC_C_03(socau, dang=1):
     cau = ""
     for _ in range(socau):
         X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
-        if random.random() < 0.5:
-            dap = str(_lt(AC))
-            nhieu = _ba_nhieu(dap, [str(_lt(math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * math.cos(math.radians(th))))),
-                                    str(_lt(math.sqrt(d1 * d1 + d2 * d2))), str(d1 + d2)],
-                              buoc=lambda t: str(_lt(AC) + t))
-            debai = _de_tau(X, Y, th, d1, d2) + (r" Khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, theo "
-                                                 r"đơn vị ki-lô-mét) là")
-            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
-            cau += MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
-        else:
-            g = _lt(phi)
-            Z = [c for c in _VUONG_GOC[X] if c != Y][0]
-            dung = _huong_la_ban(X, g, Y)
-            ung = [_huong_la_ban(X, g, Z), _huong_la_ban(X, th, Y), _huong_la_ban(X, th - g, Y)]
-            nhieu = [u for u in dict.fromkeys(ung) if u != dung][:3]
-            if len(nhieu) < 3:
-                nhieu.append(_huong_la_ban(X, g + 5, Y))
-            debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ (làm tròn số đo góc đến hàng đơn vị) là")
-            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
-            cau += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
+        dap = str(_lt(AC))
+        nhieu = _ba_nhieu(dap, [str(_lt(math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * math.cos(math.radians(th))))),
+                                str(_lt(math.sqrt(d1 * d1 + d2 * d2))), str(d1 + d2)],
+                          buoc=lambda t: str(_lt(AC) + t))
+        debai = _de_tau(X, Y, th, d1, d2) + (r" Khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, theo "
+                                             r"đơn vị ki-lô-mét) là")
+        giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_M_01(socau, dang=1):
+    r"""Tàu chạy $d_1$ km về một phương rồi đổi sang hướng $X\,\theta^{\circ}\,Y$ chạy $d_2$ km:
+    xác định hướng từ $A$ tới $C$ (côsin rồi sin) - mức VDC (muc_do_dang VDC ở mapping).
+
+    CLAUDE THEM 01/10/2026 - tach tu nhanh hoi huong cua VD036_MC_C_03. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
+        g = _lt(phi)
+        Z = [c for c in _VUONG_GOC[X] if c != Y][0]
+        dung = _huong_la_ban(X, g, Y)
+        ung = [_huong_la_ban(X, g, Z), _huong_la_ban(X, th, Y), _huong_la_ban(X, th - g, Y)]
+        nhieu = [u for u in dict.fromkeys(ung) if u != dung][:3]
+        if len(nhieu) < 3:
+            nhieu.append(_huong_la_ban(X, g + 5, Y))
+        debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ (làm tròn số đo góc đến hàng đơn vị) là")
+        giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
+        cau += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cau
 
 
 def L10_C3_B6_VD036_SA_F_01(socau, dang=2):
     r"""Trả lời ngắn - tàu chạy $d_1$ km về một phương rồi đổi sang hướng
-    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: hỏi NGẪU NHIÊN khoảng cách $AC$ (km, hàng đơn
-    vị) hoặc số đo góc $x$ trong hướng $X\,x^{\circ}\,Y$ từ $A$ tới $C$.
+    $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: tính khoảng cách $AC$ (km, hàng đơn vị) - mức VD.
+    Câu hỏi hướng (mức VDC) tách sang VD036_SA_O_01 (01/10/2026).
 
     CLAUDE THEM 30/09/2026 - dang moi theo bai co Lan gui. Co Lan duyet lai.
     """
     cau = ""
     for _ in range(socau):
         X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
-        if random.random() < 0.5:
-            dap = str(_lt(AC))
-            debai = _de_tau(X, Y, th, d1, d2) + (r" Tính khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, "
-                                                 r"theo đơn vị ki-lô-mét).")
-            giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
-        else:
-            dap = str(_lt(phi))
-            debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ là $\mathrm{%s}\,x^{\circ}\,\mathrm{%s}$. "
-                                                 r"Tìm $x$ (làm tròn đến hàng đơn vị)." % (X, Y))
-            giai = (_giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
-                    + " Vậy $x = %s$." % dap)
+        dap = str(_lt(AC))
+        debai = _de_tau(X, Y, th, d1, d2) + (r" Tính khoảng cách từ $A$ đến $C$ (làm tròn đến hàng đơn vị, "
+                                             r"theo đơn vị ki-lô-mét).")
+        giai = _giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + r"Vậy $AC \approx %s\,\text{km}$." % dap
+        cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_SA_O_01(socau, dang=2):
+    r"""Trả lời ngắn - tàu đổi hướng: tìm số đo $x$ trong hướng $X\,x^{\circ}\,Y$ từ $A$ tới $C$
+    (côsin rồi sin) - mức VDC (muc_do_dang VDC ở mapping).
+
+    CLAUDE THEM 01/10/2026 - tach tu nhanh hoi huong cua VD036_SA_F_01. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, th, d1, d2, AC, phi = _bo_tau_doi_huong()
+        dap = str(_lt(phi))
+        debai = _de_tau(X, Y, th, d1, d2) + (r" Hướng từ $A$ tới $C$ là $\mathrm{%s}\,x^{\circ}\,\mathrm{%s}$. "
+                                             r"Tìm $x$ (làm tròn đến hàng đơn vị)." % (X, Y))
+        giai = (_giai_tau_AC(X, Y, th, d1, d2, AC) + "\\\\\n" + _giai_tau_huong(X, Y, th, d2, AC, phi)
+                + " Vậy $x = %s$." % dap)
         cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai, 0, 0, dang)
     return cau
 

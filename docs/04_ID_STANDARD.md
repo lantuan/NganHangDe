@@ -135,6 +135,13 @@ VDC trong các dạng đánh dấu VDC TRƯỚC, rồi mới lấy suất VD tro
 lại; nhóm nào chưa có dạng thì lấy chung. Mỗi câu ra có "muc_do_cau" = VD/VDC.
 Câu tự luận mức VD luôn là ý a) VD + ý b) VDC nên không cần đánh dấu.
 
+Quy tắc khi tạo dạng MỚI (cô Lan, 01/10/2026): mỗi dạng MC/SA mức VD làm mới
+phải được đánh giá VD hay VDC NGAY lúc tạo và ghi "muc_do_dang": "VDC" nếu là
+VDC. Một hàm không được hỏi ngẫu nhiên lẫn câu VD và câu VDC: phải tách thành
+hai dạng (hai chữ cái), ví dụ VD036_SA_F (tính AC, VD) và VD036_SA_O (tìm hướng,
+VDC). Bối cảnh có câu tự luận a) VD, b) VDC thì MC/SA hỏi giống ý b) là VDC.
+Các dạng cũ duyệt dần theo docs/bang_duyet_VD_VDC.xlsx.
+
 Cùng một bối cảnh ra ở MC, SA, TL thì ghi CÙNG mô tả "Dang": bộ chọn câu tránh
 hai dạng cùng mô tả trong một đề, trừ khi không còn dạng nào khác.
 
