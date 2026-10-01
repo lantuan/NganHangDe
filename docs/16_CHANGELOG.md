@@ -9701,3 +9701,15 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 
 ## Bối cảnh
 - VD036_MC_D: boi_canh ["thap_cham", "thap_doi"] (biến thể _02 là tháp trên đỉnh đồi, cùng bối cảnh với VD036_MC_I/SA_K/TL_H - trước đây có thể vào cùng một đề).
+
+# Version 3.96 - 2026-10-01
+
+## Đúng/Sai chương 3: mỗi ý ít nhất 3 phát biểu đúng + 3 phát biểu sai (cô Lan: tránh học sinh học thuộc)
+- Áp dụng cho TẤT CẢ 32 hàm TF chương 3, kể cả các hàm gốc của cô (TF_A_01, B_01, C_01, D_01, E_01): giữ nguyên các phát biểu cũ của cô, chỉ BỔ SUNG phát biểu đúng/sai mới (helper _tf_them).
+- _tf_ct, _tf_so tự thêm phát biểu so sánh với số tròn (">", "<", "lớn hơn", "nhỏ hơn", "hơn", "chưa đến") và phát biểu gần đúng (khi giá trị là căn thức / phân số không viết gọn được); helper _tf_mau_bdt suy mẫu so sánh từ mẫu phát biểu.
+- Bổ sung riêng cho các ý còn ít phát biểu (lý thuyết, nhận dạng góc, quan hệ góc bù/phụ, vị trí đông/tây/bắc/nam...).
+- Test mới tests/test_tf_nhieu_dung_sai.py: 25 lần chạy mỗi hàm, mỗi ý phải có >= 3 phát biểu đúng và >= 3 phát biểu sai khác nhau, không phát biểu nào vừa đúng vừa sai.
+
+## Tháp trên đồi: số liệu hợp lí (cô Lan: "đề phải hợp lí")
+- _bo_thap_doi (VD036_MC_I, SA_K, TL_H): sườn đồi dốc không quá 30° (góc so với phương thẳng đứng tại chân tháp từ 60° đến 75°), đồi cao ít nhất nửa tháp, chân đồi cách chân đường thẳng đứng qua tháp ít nhất 50 m. Trước đây có thể ra tháp 25 m trên "đồi" 12 m, chân đồi cách 13 m (dốc 43°).
+- VD036_MC_D_02: góc nâng tới chân tháp 15°-30°, đồi cao ít nhất nửa tháp, chân đồi cách ít nhất 50 m.

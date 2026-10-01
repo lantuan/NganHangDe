@@ -704,6 +704,38 @@ def L10_C3_TF_A_01(socau, socot=1):
                r"mà góc tù có côsin âm nên $\cos\beta = -\dfrac{%d}{%d}$."
                % (ke, huyen, ke, huyen))]
 
+        # --- Bổ sung 01/10/2026 (cô Lan): mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai ---
+        s_d, t_d, k_d = hang[1], hang[3], hang[4]
+        B_, D_ = _goc(bu), _goc(d)
+        ly1 = r"Hai góc bù nhau có sin bằng nhau; côsin, tang, côtang đối nhau."
+        _tf_them(y1, [(r"$\cos %s = -\cos %s$" % (B_, D_), ly1), (r"$\tan %s = -\tan %s$" % (B_, D_), ly1),
+                      (r"$\cot %s = -\cot %s$" % (B_, D_), ly1)],
+                 [(r"$\cos %s = \cos %s$" % (B_, D_), ly1), (r"$\tan %s = \tan %s$" % (B_, D_), ly1),
+                  (r"$\sin %s = \cos %s$" % (B_, D_), ly1), (r"$\cot %s = \cot %s$" % (B_, D_), ly1)])
+        ly2 = (r"Hai góc bù nhau: $\sin %s = \sin %s = %s$, $\cos %s = -\cos %s = %s$, $\tan %s = -\tan %s = %s$."
+               % (B_, D_, _L(s_d), B_, D_, _L(-cos_d), B_, D_, _L(-t_d)))
+        d_, s_ = _tf_ct(r"$\sin %s = %s$" % (B_, "%s"), s_d, ly2, [(-s_d, "Sai dấu"), (cos_d, "Nhầm $\\sin$ với $\\cos$")])
+        d2, s2 = _tf_ct(r"$\tan %s = %s$" % (B_, "%s"), -t_d, ly2, [(t_d, "Quên đổi dấu"), (-k_d, "Nhầm $\\tan$ với $\\cot$")])
+        _tf_them(y2, d_ + d2, s_ + s2)
+        ly3 = (r"$\sin\left(180^{\circ}-\alpha\right) = \sin\alpha$, $\cos\left(180^{\circ}-\alpha\right) = -\cos\alpha$, "
+               r"$\tan\left(180^{\circ}-\alpha\right) = -\tan\alpha$, $\cot\left(180^{\circ}-\alpha\right) = -\cot\alpha$; với "
+               r"$\alpha = %s$: $\sin\alpha = %s$, $\cos\alpha = %s$, $\tan\alpha = %s$, $\cot\alpha = %s$."
+               % (D_, _L(s_d), _L(cos_d), _L(t_d), _L(k_d)))
+        Q = together(simplify(s_d + cos_d))
+        T = together(simplify(-t_d - k_d))
+        d1, s1 = _tf_ct(r"Giá trị của biểu thức $Q = \sin\left(180^{\circ} - \alpha\right) - \cos\left(180^{\circ} - \alpha\right)$ bằng $%s$",
+                        Q, ly3, [(together(simplify(s_d - cos_d)), "Quên đổi dấu côsin"), (together(simplify(-s_d - cos_d)), "Đổi dấu nhầm sin")])
+        d2, s2 = _tf_ct(r"Giá trị của biểu thức $T = \tan\left(180^{\circ} - \alpha\right) + \cot\left(180^{\circ} - \alpha\right)$ bằng $%s$",
+                        T, ly3, [(together(simplify(t_d + k_d)), "Quên đổi dấu"), (together(simplify(-t_d + k_d)), "Quên đổi dấu côtang")])
+        _tf_them(y3, d1 + d2, s1 + s2)
+        ly4 = (r"Vì $90^{\circ} < \beta < 180^{\circ}$ nên $\cos\beta = -\dfrac{%d}{%d}$, do đó "
+               r"$\tan\beta = \dfrac{\sin\beta}{\cos\beta} = -\dfrac{%d}{%d}$, $\cot\beta = -\dfrac{%d}{%d}$."
+               % (ke, huyen, doi, ke, ke, doi))
+        nd = r"Nếu $90^{\circ} < \beta < 180^{\circ}$ và $\sin\beta = \dfrac{%d}{%d}$ thì $%s = %s$"
+        tb, cb = Rational(-doi, ke), Rational(-ke, doi)
+        _tf_them(y4, [(nd % (doi, huyen, r"\tan\beta", _L(tb)), ly4), (nd % (doi, huyen, r"\cot\beta", _L(cb)), ly4)],
+                 [(nd % (doi, huyen, r"\tan\beta", _L(-tb)), "Sai dấu. " + ly4), (nd % (doi, huyen, r"\tan\beta", _L(cb)), "Đảo tử và mẫu. " + ly4),
+                  (nd % (doi, huyen, r"\cos\beta", _L(Rational(-doi, huyen))), "Nhầm $\\sin$ với $\\cos$. " + ly4)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -792,6 +824,28 @@ def L10_C3_TF_B_01(socau, socot=1):
                % (_goc(A), _goc(nua), _goc(nua), _L(sin_nua),
                   _L(sin_nua_lan), _L(AD)))]
 
+        # --- Bổ sung 01/10/2026 (cô Lan): mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai ---
+        ly1 = r"Định lí côsin, hệ quả của định lí côsin, định lí sin và công thức diện tích của tam giác $ABC$."
+        _tf_them(y1, [(r"$\cos A = \dfrac{AB^{2} + AC^{2} - BC^{2}}{2\cdot AB\cdot AC}$", ly1), (r"$\dfrac{BC}{\sin A} = 2R$", ly1),
+                      (r"$S_{ABC} = \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin A$", ly1)],
+                 [(r"$\cos A = \dfrac{AB^{2} + AC^{2} - BC^{2}}{AB\cdot AC}$", ly1), (r"$\dfrac{BC}{\sin A} = R$", ly1),
+                  (r"$S_{ABC} = AB\cdot AC\cdot\sin A$", ly1), (r"$BC^{2} = AC^{2} + AB^{2} - 2\cdot AC\cdot AB\cdot\sin A$", ly1)])
+        ly2 = (r"$BC^{2} = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot\left(%s\right) = %d$ nên $BC = %d$."
+               % (b, c, b, c, _L(cos_A), a2, a))
+        d_, s_ = _tf_ct(r"$BC = %s$", Integer(a), ly2,
+                        [(sqrt(Integer(b * b + c * c - dau * b * c)), "Sai dấu của $\\cos A$"), (sqrt(Integer(b * b + c * c)), "Quên số hạng chứa $\\cos A$"),
+                         (Integer(abs(b - c)), "Lấy hiệu hai cạnh")], them=[r"$BC^{2} = %d$" % a2])
+        _tf_them(y2, d_, s_)
+        ly3 = r"Định lí sin: $\dfrac{BC}{\sin A} = 2R$ nên $R = \dfrac{BC}{2\sin A} = %s$, đường kính $2R = %s$." % (_L(R), _L(simplify(2 * R)))
+        d_, s_ = _tf_ct(r"Bán kính đường tròn ngoại tiếp tam giác $ABC$ là $R = %s$", R, ly3,
+                        [(simplify(2 * R), "Đó là $2R$"), (simplify(Rational(a, 2) / abs(cos_A)), "Nhầm $\\sin A$ với $\\cos A$")])
+        d2, s2 = _tf_ct(r"Đường kính đường tròn ngoại tiếp tam giác $ABC$ bằng $%s$", simplify(2 * R), ly3, [(R, "Đó là bán kính")])
+        _tf_them(y3, d_ + d2, s_ + s2)
+        ly4 = r"Từ $S_{ABD} + S_{ACD} = S_{ABC}$ (ý d) được $AD = %s$." % _L(AD)
+        d_, s_ = _tf_ct(r"Đường phân giác trong $AD$ của góc $A$ có độ dài bằng $%s$", AD, ly4,
+                        [(AD_sai, "Lấy nhầm sin của nửa góc $A$"), (simplify(2 * AD), "Quên hệ số $\\dfrac{1}{2}$"),
+                         (Rational(b * c, b + c), "Bỏ sót các giá trị sin")])
+        _tf_them(y4, d_, s_)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -2018,6 +2072,27 @@ def L10_C3_TF_C_01(socau, socot):
              f"Hướng $AC$ là ${Huong_AC_str} \\ne N {goc1_f}^\\circ E$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
+        # --- Bổ sung 01/10/2026 (cô Lan): mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai ---
+        _tf_them(ds_a, [(r"Tổng quãng đường tàu đã chạy là $%s$ km" % f(a_val + c_val), giai_chung)],
+                 [(r"Độ dài đoạn $AB$ là $%s$ km" % f(vt1 * t1), "Quên đổi phút ra giờ. " + giai_chung),
+                  (r"Tổng quãng đường tàu đã chạy là $%s$ km" % f(abs(a_val - c_val)), giai_chung)])
+        loai_B = "nhọn" if Goc_B_deg < 90 else ("vuông" if Goc_B_deg == 90 else "tù")
+        _tf_them(ds_b, [(r"$\widehat{ABC} = %s^\circ + %s^\circ$" % (goc1_f, goc2_f), giai_chung), (r"Góc $\widehat{ABC}$ là góc %s" % loai_B, giai_chung)],
+                 [(r"Góc $\widehat{ABC}$ là góc %s" % w, giai_chung) for w in ("nhọn", "vuông", "tù") if w != loai_B] +
+                 ([(r"Góc $\widehat{ABC}$ bằng $%s^\circ$" % f(180 - Goc_B_deg), giai_chung)] if Goc_B_deg != 90 else []))
+        bt = b_val_high_precision
+        nb = 2 if _xa_bien(bt, 2) else 1
+        d_, s_ = _tf_so(r"Khoảng cách từ $A$ đến $C$ xấp xỉ $%s$", bt, nb, giai_chung,
+                        [(math.sqrt(a_val ** 2 + c_val ** 2), "Quên số hạng chứa $\\cos B$"),
+                         (math.sqrt(a_val ** 2 + c_val ** 2 + 2 * a_val * c_val * cos_B), "Sai dấu"), (a_val + c_val, "Cộng hai quãng đường")],
+                        dv=r"\,\text{km}")
+        _tf_them(ds_c, d_, s_)
+        az = round(goc1 + Goc_A_deg_high_precision, 1)
+        _tf_them(ds_d, [(r"Đảo $C$ nằm về phía đông của bãi biển $A$", giai_chung),
+                        (r"Hướng từ $A$ đến $C$ hợp với hướng bắc (theo chiều kim đồng hồ) một góc $%s^\circ$" % f(az, 1), giai_chung)],
+                 [(r"Đảo $C$ nằm về phía tây của bãi biển $A$", giai_chung),
+                  (r"Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng $S %s^\circ E$" % goc2_f, "Đó là hướng chặng thứ hai. " + giai_chung),
+                  (r"Hướng từ $A$ đến $C$ hợp với hướng bắc (theo chiều kim đồng hồ) một góc $%s^\circ$" % f(round(360 - az, 1), 1), giai_chung)])
         # Sắp xếp lại theo thứ tự: a, b, c (khoảng cách), d (hướng)
         ds_abcd = [ds_a, ds_b, ds_c, ds_d]
 
@@ -2842,6 +2917,30 @@ def L10_C3_TF_D_01(socau, socot=1):
                r"\textbf{bằng nhau} chứ không đối nhau; tổng của chúng bằng $2y_{0} = %s$."
                % _xx(2 * y0))]
 
+        # --- Bổ sung 01/10/2026 (cô Lan): mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai ---
+        ly1 = (r"Theo định nghĩa: $\sin\widehat{xOM} = y_{0}$, $\cos\widehat{xOM} = x_{0}$, $\tan\widehat{xOM} = \dfrac{y_{0}}{x_{0}}$; "
+               r"$M$ thuộc đường tròn đơn vị nên $x_{0}^{2} + y_{0}^{2} = 1$; $x_{0} < 0$ nên góc $\widehat{xOM}$ tù.")
+        _tf_them(y1, [(r"$\sin\widehat{xOM} = y_{0}$", ly1), (r"$\tan\widehat{xOM} = \dfrac{y_{0}}{x_{0}}$", ly1),
+                      (r"$x_{0}^{2} + y_{0}^{2} = 1$", ly1), (r"Góc $\widehat{xOM}$ là góc tù", ly1)],
+                 [(r"$\sin\widehat{xOM} = x_{0}$", ly1), (r"$\tan\widehat{xOM} = \dfrac{x_{0}}{y_{0}}$", ly1),
+                  (r"$x_{0} + y_{0} = 1$", ly1), (r"Góc $\widehat{xOM}$ là góc nhọn", ly1)])
+        ly2 = r"$\cos\widehat{xOM} = x_{0} = %s$, $\sin\widehat{xOM} = y_{0} = %s$." % (_xx(x0), _xx(y0))
+        _tf_them(y2, [(r"$\cos\widehat{xOM} = %s$" % _xx(x0), ly2), (r"$\sin^{2}\widehat{xOM} = %s$" % _xx(y0 * y0, 4), ly2)],
+                 [(r"$\cos\widehat{xOM} = %s$" % _xx(-x0), "Sai dấu. " + ly2), (r"$\sin\widehat{xOM} = %s$" % _xx(-y0), "Sai dấu. " + ly2),
+                  (r"$\cos\widehat{xOM} = %s$" % _xx(y0), "Nhầm hoành độ với tung độ. " + ly2)])
+        cot0 = x0 / y0
+        ly3 = (r"$\tan\widehat{xOM} = \dfrac{y_{0}}{x_{0}} \approx %s$, $\cot\widehat{xOM} = \dfrac{x_{0}}{y_{0}} \approx %s$."
+               % (_xx(tan0, 4), _xx(cot0, 4)))
+        _tf_them(y3, [(r"$\cot\widehat{xOM} = %s$" % _xx(cot0), ly3), (r"$\tan\widehat{xOM} < 0$", ly3)],
+                 [(r"$\cot\widehat{xOM} = %s$" % _xx(tan0), "Nhầm $\\cot$ với $\\tan$. " + ly3), (r"$\cot\widehat{xOM} = %s$" % _xx(-cot0), "Sai dấu. " + ly3),
+                  (r"$\tan\widehat{xOM} = %s$" % _xx(cot0), "Đảo tử và mẫu. " + ly3), (r"$\tan\widehat{xOM} > 0$", ly3)])
+        ly4 = (r"$N$ đối xứng với $M$ qua $Oy$ nên $N\left(-x_{0}; y_{0}\right)$: $\sin\widehat{xON} = \sin\widehat{xOM}$, "
+               r"$\cos\widehat{xON} = -x_{0} = %s$, $\tan\widehat{xON} = -\tan\widehat{xOM}$; hai góc $\widehat{xOM}$, $\widehat{xON}$ bù nhau." % _xx(-x0))
+        nd = r"Gọi $N$ là điểm đối xứng với $M$ qua trục $Oy$. Khi đó %s"
+        _tf_them(y4, [(nd % r"$\sin\widehat{xON} = \sin\widehat{xOM}$", ly4), (nd % (r"$\cos\widehat{xON} = %s$" % _xx(-x0)), ly4),
+                      (nd % r"$\widehat{xON} + \widehat{xOM} = 180^{\circ}$", ly4), (nd % r"$\tan\widehat{xON} + \tan\widehat{xOM} = 0$", ly4)],
+                 [(nd % (r"$\cos\widehat{xON} = %s$" % _xx(x0)), ly4), (nd % r"$\tan\widehat{xON} = \tan\widehat{xOM}$", ly4),
+                  (nd % r"$\widehat{xON} = \widehat{xOM}$", ly4), (nd % r"$\widehat{xON} + \widehat{xOM} = 90^{\circ}$", ly4)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -2888,6 +2987,24 @@ def L10_C3_TF_E_01(socau, socot=1):
               (r"{$R = %s$}" % _L(simplify(R * 2)),
                r"Sai. Từ $S = \dfrac{abc}{4R}$ ta được $R = \dfrac{abc}{4S} = %s$." % _L(R))]
 
+        # --- Bổ sung 01/10/2026 (cô Lan): mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai ---
+        ly1 = r"Các công thức diện tích tam giác: $S = pr = \dfrac{abc}{4R} = \dfrac{1}{2}a\cdot h_a = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$."
+        _tf_them(y1, [(r"$S = \dfrac{abc}{4R}$", ly1), (r"$S = \dfrac{1}{2}BC\cdot h_a$", ly1),
+                      (r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$", ly1)],
+                 [(r"$S = \dfrac{abc}{2R}$", ly1), (r"$S = BC\cdot h_a$", ly1), (r"$S = \dfrac{r}{p}$", ly1),
+                  (r"$S = \sqrt{\left(p - a\right)\left(p - b\right)\left(p - c\right)}$", ly1)])
+        ly2 = (r"$p = \dfrac{%d + %d + %d}{2} = %d$; Heron cho $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$."
+               % (a, b, c, p, p, p - a, p - b, p - c, S))
+        _tf_them(y2, [(r"$p = %d$" % p, ly2), (r"$S = %d$" % S, ly2), (r"Chu vi tam giác $ABC$ bằng $%d$" % (2 * p), ly2)],
+                 [(r"$p = %d$" % (2 * p), "Đó là chu vi. " + ly2), (r"$S = %d$" % (2 * S), ly2),
+                  (r"Chu vi tam giác $ABC$ bằng $%d$" % p, "Đó là nửa chu vi. " + ly2)])
+        ly3 = r"Từ $S = p\cdot r$ suy ra $r = \dfrac{S}{p} = \dfrac{%d}{%d} = %d$." % (S, p, r)
+        d_, s_ = _tf_ct(r"$r = %s$", Integer(r), ly3, [(Rational(S, 2 * p), "Chia cho chu vi"), (Rational(2 * S, p), "Nhầm $S = \\dfrac{1}{2}pr$"), (R, "Nhầm sang $R$")])
+        _tf_them(y3, d_, s_)
+        ly4 = r"$S = \dfrac{abc}{4R}$ nên $R = \dfrac{abc}{4S} = \dfrac{%d\cdot %d\cdot %d}{4\cdot %d} = %s$." % (a, b, c, S, _L(R))
+        d_, s_ = _tf_ct(r"$R = %s$", R, ly4, [(simplify(4 * R), "Quên chia 4"), (Integer(r), "Nhầm sang $r$"), (simplify(R / 2), "Chia thừa 2")],
+                        them=[r"$2R = %s$" % _L(simplify(2 * R))])
+        _tf_them(y4, d_, s_)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -4015,6 +4132,12 @@ def L10_C3_TF_A_02(socau, socot=1):
             dung += d_
             sai += s_
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lyq = r"Hai góc bù nhau có sin bằng nhau, côsin đối nhau; hai góc phụ nhau thì sin góc này bằng côsin góc kia."
+        _tf_them(y1, [(r"$\cos\left(180^{\circ} - \alpha\right) = -\cos\alpha$", _lyq), (r"$\sin\left(90^{\circ} - \alpha\right) = \cos\alpha$", _lyq),
+                      (r"$\tan\left(180^{\circ} - \alpha\right) = -\tan\alpha$", _lyq)],
+                 [(r"$\cos\left(180^{\circ} - \alpha\right) = \cos\alpha$", _lyq), (r"$\sin\left(90^{\circ} - \alpha\right) = \sin\alpha$", _lyq),
+                  (r"$\tan\left(180^{\circ} - \alpha\right) = \tan\alpha$", _lyq)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -4870,6 +4993,15 @@ def L10_C3_TF_C_02(socau, socot=1):
         sai.append((r"Hướng từ $A$ đến $C$ hợp với hướng bắc (theo chiều kim đồng hồ) một góc $%s$" % _goc((360 - hAC) % 360),
                     "Tính ngược chiều kim đồng hồ. " + giai_h))
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"Góc $\widehat{ABC}$ là góc tù", g_B), (r"$\widehat{ABC} + %s = 180^{\circ}$" % _goc(delta), g_B)],
+                 [(r"Góc $\widehat{ABC}$ là góc nhọn", g_B), (r"$\widehat{ABC} + %s = 90^{\circ}$" % _goc(delta), g_B)])
+        _bac = hAC < 90 or hAC > 270
+        _dong = hAC < 180
+        _tf_them(y4, [(r"Ngư trường $C$ nằm về phía %s của đảo $A$" % ("bắc" if _bac else "nam"), giai_h),
+                      (r"Ngư trường $C$ nằm về phía %s của đảo $A$" % ("đông" if _dong else "tây"), giai_h)],
+                 [(r"Ngư trường $C$ nằm về phía %s của đảo $A$" % ("nam" if _bac else "bắc"), giai_h),
+                  (r"Ngư trường $C$ nằm về phía %s của đảo $A$" % ("tây" if _dong else "đông"), giai_h)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -5035,12 +5167,14 @@ def L10_C3_B6_VD036_MC_D_02(socau, dang=1):
     so = 0
     while so < socau:
         h = random.choice(range(20, 131, 10))
-        be = random.choice([20, 25, 30, 35, 40])
-        al = be + random.choice([15, 20, 25, 30])
+        be = random.choice([15, 20, 25, 30])          # sườn đồi dốc không quá 30 độ (01/10/2026: đề phải hợp lí)
+        al = be + random.choice([10, 15, 20, 25, 30])
         if al > 70:
             continue
         AC = h * math.cos(math.radians(al)) / math.sin(math.radians(al - be))
         cao = AC * math.sin(math.radians(be))
+        if cao < h / 2 or AC * math.cos(math.radians(be)) < 50:   # đồi cao ít nhất nửa tháp, chân đồi đủ xa
+            continue
         dung = _mot_le_m(cao)
         ung = [_mot_le_m(AC), _mot_le_m(cao + h), _mot_le_m(AC * math.cos(math.radians(be))),
                _mot_le_m(h * math.sin(math.radians(al)) / math.sin(math.radians(al - be)) * math.sin(math.radians(be)))]
@@ -5752,6 +5886,12 @@ def L10_C3_TF_A_03(socau, socot=1):
             dung += d_
             sai += s_
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lyq = r"Hai góc bù nhau có sin bằng nhau, côsin đối nhau; hai góc phụ nhau thì sin góc này bằng côsin góc kia."
+        _tf_them(y1, [(r"$\cos\left(180^{\circ} - \alpha\right) = -\cos\alpha$", _lyq), (r"$\sin\left(90^{\circ} - \alpha\right) = \cos\alpha$", _lyq),
+                      (r"$\tan\left(180^{\circ} - \alpha\right) = -\tan\alpha$", _lyq)],
+                 [(r"$\cos\left(180^{\circ} - \alpha\right) = \cos\alpha$", _lyq), (r"$\sin\left(90^{\circ} - \alpha\right) = \sin\alpha$", _lyq),
+                  (r"$\tan\left(180^{\circ} - \alpha\right) = \tan\alpha$", _lyq)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -5814,6 +5954,10 @@ def L10_C3_TF_F_01(socau, socot=1):
             [(r"$\cos %s\cdot\cos\left(%s\right) > 0$" % (X, yz), ly_d), (r"$\tan %s\cdot\tan\left(%s\right) > 0$" % (X, yz), ly_d),
              (r"$\sin %s\cdot\sin\left(%s\right) < 0$" % (X, yz), ly_d),
              (r"$\sin\left(%s\right)\cdot\cos\left(%s\right) %s 0$" % (yz, yz, am), ly_d)])
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y3, [(r"$\cos\left(%s\right) = -\cos %s$" % (xy, Z), ly_c), (r"$\sin\left(%s\right) = \sin %s$" % (xy, Z), ly_c)],
+                 [(r"$\sin\left(%s\right) = -\sin %s$" % (xy, Z), ly_c + r" Mà $\sin %s > 0$." % Z),
+                  (r"$\cos\left(%s\right)\cdot\cos %s > 0$" % (xy, Z), ly_c + r" Do đó $\cos\left(%s\right)\cdot\cos %s = -\cos^{2} %s \le 0$." % (xy, Z, Z))])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -5891,6 +6035,9 @@ def L10_C3_TF_D_02(socau, socot=1):
                             them=[r"$S_{\triangle MAN} = S_{\triangle MON}$"]),
                      _tf_ct(r"$AM = %s$", sqrt(simplify(2 - 2 * c)), ly_d,
                             [(sqrt(simplify(2 + 2 * c)), "Đó là $AN$"), (simplify(1 - c), "Quên tung độ của $M$")]))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"Góc $\widehat{xON}$ là góc nhọn", ly_a), (r"$\widehat{xON} = 180^{\circ} - \widehat{xOM}$", ly_a)],
+                 [(r"Góc $\widehat{xON}$ là góc tù", ly_a), (r"$\widehat{xON} = \widehat{xOM}$", ly_a)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_MAN(a), 0, socot)
     return cauTF
 
@@ -7753,9 +7900,9 @@ _HANG_LT = {0: "hàng đơn vị", 1: "hàng phần mười", 2: "hàng phần t
 def _tf_nguong(v):
     """Hai ngưỡng 'tròn' lo < v < hi, cách v đủ xa (để phát biểu so sánh không sát biên)."""
     g = 10 ** math.floor(math.log10(abs(v)))
-    if v / g < 2:
+    if abs(v) / g < 2:
         g /= 5
-    elif v / g < 5:
+    elif abs(v) / g < 5:
         g /= 2
     lo = math.floor(v / g) * g
     if v - lo < 0.15 * g:
@@ -7764,6 +7911,20 @@ def _tf_nguong(v):
     if hi - v < 0.15 * g:
         hi += g
     return round(lo, 6), round(hi, 6)
+
+
+def _tf_mau_bdt(mau):
+    r"""Suy mẫu phát biểu SO SÁNH từ mẫu phát biểu giá trị (01/10/2026, cô Lan: mỗi ý phải nhiều đúng, nhiều sai).
+    '... = %s$' hoặc '... \approx %s$' -> '... > a$' / '... < b$'; '... xấp xỉ / bằng / là $%s$' -> 'lớn hơn / nhỏ hơn';
+    '... khoảng $%s$' -> 'hơn / chưa đến'. Trả về (mẫu có hai %s, (từ lớn, từ nhỏ)) hoặc None."""
+    for k in (r" \approx %s$", r" = %s$"):
+        if mau.count(k) == 1:
+            return mau.replace(k, r" %s %s$"), (">", "<")
+    for k, tu in (("xấp xỉ $%s$", ("lớn hơn", "nhỏ hơn")), ("bằng $%s$", ("lớn hơn", "nhỏ hơn")),
+                  ("là $%s$", ("lớn hơn", "nhỏ hơn")), ("khoảng $%s$", ("hơn", "chưa đến"))):
+        if mau.count(k) == 1:
+            return mau.replace(k, "%s $%s$"), tu
+    return None
 
 
 def _tf_so(mau, v, n, ly, sai, dv="", bdt=None, tu=("lớn hơn", "nhỏ hơn"), mien=(0, None)):
@@ -7799,7 +7960,9 @@ def _tf_so(mau, v, n, ly, sai, dv="", bdt=None, tu=("lớn hơn", "nhỏ hơn"),
         if so(w, n) != so(v, n):
             sai_ds.append((mau % so(w, n) + hang(n), "Làm tròn chưa đúng quy tắc. " + giai))
             break
-    if bdt:
+    if not bdt and _tf_mau_bdt(mau):
+        bdt, tu = _tf_mau_bdt(mau)
+    if bdt and abs(v) > 1e-9:
         lo, hi = _tf_nguong(v)
         f = lambda x: _so(x, 3) + dv
         dung += [(bdt % (tu[0], f(lo)), giai), (bdt % (tu[1], f(hi)), giai)]
@@ -7814,12 +7977,35 @@ def _tf_ct(mau, v, ly, sai, them=()):
     Trả về (dung_ds, sai_ds)."""
     dung = [(mau % _L(v), ly)] + [(t, ly) for t in them]
     sai_ds = []
+    sai_ok = []
     for w, ghi in sai:
         if w is None:
             continue
         if simplify(w - v) == 0:
             continue
+        sai_ok.append((simplify(w), ghi))
         sai_ds.append((mau % _L(simplify(w)), (ghi.rstrip(".") + ". " if ghi else "") + ly))
+    # 01/10/2026 (cô Lan): thêm phát biểu gần đúng và phát biểu so sánh để mỗi ý có nhiều đúng, nhiều sai
+    try:
+        vf = float(v)
+    except TypeError:
+        return dung, sai_ds
+    mau_xx = None
+    if mau.count(r" = %s$") == 1:
+        mau_xx = mau.replace(r" = %s$", r" \approx %s$")
+    elif mau.count("bằng $%s$") == 1:
+        mau_xx = mau.replace("bằng $%s$", "xấp xỉ $%s$")
+    hang = " (làm tròn đến hàng phần trăm)"
+    if mau_xx and not v.is_Integer and _so_thap_phan_gon(v) is None and _xa_bien(vf, 2) and _x1(vf, 2).rstrip("0").rstrip(",") != _L(v):
+        dung.append((mau_xx % _x1(vf, 2) + hang, ly + r" Ta có $%s \approx %s$." % (_L(v), _x1(vf, 3))))
+        for w, ghi in sai_ok:
+            if w.is_real and _x1(float(w), 2) != _x1(vf, 2):
+                sai_ds.append((mau_xx % _x1(float(w), 2) + hang, (ghi.rstrip(".") + ". " if ghi else "") + ly))
+    bd = _tf_mau_bdt(mau)
+    if bd and abs(vf) > 1e-9:
+        d_, s_ = _tf_bdt(bd[0], vf, ly + r" Ta có $%s \approx %s$." % (_L(v), _x1(vf, 3)), tu=bd[1])
+        dung += d_
+        sai_ds += s_
     return dung, sai_ds
 
 
@@ -7830,6 +8016,17 @@ def _tf_gop(*cap):
         d += a
         s += b
     return _phat_bieu(d, s)
+
+
+def _tf_them(y, dung, sai):
+    """Bổ sung vào một ý ĐÃ CÓ (danh sách của TF_baitoan_du) nhiều phát biểu đúng / sai mới,
+    bỏ những phát biểu trùng nội dung với phát biểu đã có (cô Lan 01/10/2026)."""
+    co = {t.replace("{\\True ", "{") for t, _ in y}
+    for t, l in _phat_bieu(dung, sai):
+        if t.replace("{\\True ", "{") not in co:
+            co.add(t.replace("{\\True ", "{"))
+            y.append((t, l))
+    return y
 
 
 def _tf_bdt(mau, v, ly, tu=("lớn hơn", "nhỏ hơn"), dv=""):
@@ -8104,6 +8301,10 @@ def L10_C3_TF_K_01(socau, socot=1):
             sai.append((2 * R * R * _sin_d(A) * _sin_d(B) * _sin_d(C_sai), "Lấy nhầm góc $A$ nhọn"))
         y4 = _tf_gop(_tf_so(r"Diện tích tam giác $ABC$ xấp xỉ $%s$", S, 1, ly_d, sai,
                             bdt=r"Diện tích tam giác $ABC$ %s $%s$"))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lyk = ly_b + r" Do đó $\widehat{C} = 180^{\circ} - %s - %s = %s$." % (_goc(A), _goc(B), _goc(C))
+        _tf_them(y2, [(r"$\widehat{C} = %s$" % _goc(C), _lyk)],
+                 [(r"$\widehat{C} = %s$" % _goc(w), _lyk) for w in (A - B, 180 - B, 90 - B) if 0 < w < 180 and w != C])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cau
 
@@ -8319,6 +8520,9 @@ def L10_C3_TF_N_01(socau, socot=1):
                             [(CH + h, "Cộng thừa chiều cao toà nhà"), (AC * _cos_d(al), "Nhầm $\\sin$ với $\\cos$"),
                              (AC * math.tan(math.radians(al)), "Nhầm $CH = AC\\cdot\\tan %s$" % _goc(al)), (CH - h, "Trừ nhầm chiều cao toà nhà")],
                             dv=r"\,\text{m}", bdt=r"Ngọn núi %s $%s$ so với mặt đất", tu=("cao hơn", "thấp hơn")))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lyn = ly_b + r" $\widehat{BCH} = 90^{\circ} - %s = %s$ ($CH$ thẳng đứng, $BC$ hợp với phương ngang góc $%s$)." % (_goc(be), _goc(90 - be), _goc(be))
+        _tf_them(y2, [(r"$\widehat{BCH} = %s$" % _goc(90 - be), _lyn)], [(r"$\widehat{BCH} = %s$" % _goc(be), _lyn), (r"$\widehat{BCH} = %s$" % _goc(90 + be), _lyn)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_nui_toa_nha(h, al, be, CH), 0, socot)
     return cau
 
@@ -8369,6 +8573,9 @@ def L10_C3_TF_O_01(socau, socot=1):
         d2, s2 = _tf_so(r"Đường kính chiếc đĩa xấp xỉ $%s$", 2 * R, 1, ly_d, [(R, "Đó là bán kính"), (4 * R, "Nhân thừa 2")], dv=cm) \
             if _xa_bien(2 * R, 1) else ([], [])
         y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _d1, _s1 = _tf_bdt(r"Nửa chu vi tam giác $ABC$ %s $%s$", p, ly_a, dv=cm)
+        _tf_them(y1, _d1, _s1)
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem([100, 220, 330], "ABC"), 0, socot)
     return cau
 
@@ -8414,6 +8621,9 @@ def L10_C3_TF_O_02(socau, socot=1):
                             [(d / 2, "Đó là bán kính"), (BC * _sin_d(A), "Nhầm $d = BC\\cdot\\sin A$"),
                              (math.sqrt(AB * AB + AC * AC) / _sin_d(A), "Tính sai $BC$ (quên số hạng chứa $\\cos A$)")],
                             dv=r"\,\text{m}", bdt=r"Đường kính hồ %s $%s$"))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"$AC^{2} = AB^{2} + BC^{2} - 2\cdot AB\cdot BC\cdot\cos\widehat{ABC}$", ly_a)],
+                 [(r"$AC^{2} = AB^{2} + BC^{2} - 2\cdot AB\cdot BC\cdot\cos %s$" % g, ly_a)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, socot)
     return cau
 
@@ -8452,6 +8662,9 @@ def L10_C3_TF_P_01(socau, socot=1):
                             [(AC + AB, "Cộng nhầm $AB$"), (AC, "Quên phần ngọn bị gãy $BC$"), (BC + AB, "Cộng nhầm $AB$"),
                              (math.sqrt(AB * AB + AC * AC) + AC, "Coi tam giác vuông tại $A$")],
                             dv=m, bdt=r"Trước khi gãy, cây %s $%s$", tu=("cao hơn", "thấp hơn")))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"Góc $\widehat{ACB}$ là góc %s" % ("nhọn" if C < 90 else "tù"), ly_a)],
+                 [(r"Góc $\widehat{ACB}$ là góc %s" % ("tù" if C < 90 else "nhọn"), ly_a)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_cay_gay(AB, A, B, AC), 0, socot)
     return cau
 
@@ -8492,6 +8705,8 @@ def L10_C3_TF_Q_01(socau, socot=1):
                             [(C1D, "Quên cộng chiều cao giác kế"), (C1D + 2 * h, "Cộng chiều cao giác kế hai lần"),
                              (BD * _cos_d(be) + h, "Nhầm $\\sin$ với $\\cos$")],
                             dv=m, bdt=r"Tháp %s $%s$", tu=("cao hơn", "thấp hơn")))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"$\widehat{DB_1A_1} = %s$" % _goc(be), ly_a)], [(r"$\widehat{DB_1A_1} = %s$" % _goc(180 - be), ly_a)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_thap_cham(h, al, be, AB, CD), 0, socot)
     return cau
 
@@ -8553,6 +8768,11 @@ def L10_C3_TF_R_01(socau, socot=1):
                              (D / math.sqrt(v1 * v1 + v2 * v2), "Quên số hạng chứa $\\cos$"),
                              (D / math.sqrt(v1 * v1 + v2 * v2 + 2 * v1 * v2 * _cos_d(g)), "Sai dấu")],
                             bdt=r"Hai tàu cách nhau $%d$ hải lí sau %s $%s$ giờ kể từ lúc xuất phát" % (D, "%s", "%s"), tu=("hơn", "chưa đến")))
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lyr = ly_a + r" Sau $%s$ giờ, hai tàu đi được tổng cộng $%s$ hải lí." % (_xx(t, 1), _xx(b + c, 1))
+        _tf_them(y1, [(r"Sau $%s$ giờ, hai tàu đi được tổng cộng $%s$ hải lí" % (_xx(t, 1), _xx(b + c, 1)), _lyr)],
+                 [(r"Sau $%s$ giờ, hai tàu đi được tổng cộng $%s$ hải lí" % (_xx(t, 1), _xx(v1 + v2 + t, 1)), _lyr),
+                  (r"Sau $%s$ giờ, hai tàu đi được tổng cộng $%s$ hải lí" % (_xx(t, 1), _xx(abs(c - b), 1)), _lyr)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_hai_tau(g), 0, socot)
     return cau
 
@@ -8744,9 +8964,11 @@ def L10_C3_TF_S_01(socau, socot=1):
              [(s - c) / (s + c) if s != -c else None, -(s + c) / (s - c) if s != c else None]),
         ]
         dung, sai = [], []
-        for bt, P, Ps in random.sample(BT, 3):
+        for bt, P, Ps in random.sample(BT, len(BT)):
             if P is None:
                 continue
+            if len(dung) == 3:
+                break
             P = simplify(P)
             ly = nen + r", nên $P = %s = %s$." % (bt, _gon(P))
             dung.append((r"$P = %s = %s$" % (bt, _gon(P)), ly))
@@ -8795,6 +9017,10 @@ def L10_C3_TF_S_01(socau, socot=1):
             continue
         y4 = _phat_bieu(dung, sai)
         so += 1
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _lys = r"Hai góc bù nhau: $\sin\left(180^{\circ} - \alpha\right) = \sin\alpha = %s$, $\cos\left(180^{\circ} - \alpha\right) = -\cos\alpha = %s$." % (_L(s), _L(-c))
+        _tf_them(y2, [(r"$\sin\left(180^{\circ} - \alpha\right) = %s$" % _L(s), _lys), (r"$\cos\left(180^{\circ} - \alpha\right) = %s$" % _L(-c), _lys)],
+                 [(r"$\sin\left(180^{\circ} - \alpha\right) = %s$" % _L(-s), _lys), (r"$\cos\left(180^{\circ} - \alpha\right) = %s$" % _L(c), _lys)])
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_nua_dtdv(g), 0, socot)
     return cau
 
@@ -9303,6 +9529,14 @@ def L10_C3_TF_F_02(socau, socot=1):
                 if simplify(Q - P) != 0:
                     sai.append(("$" + bt + " = %s$" % _tri(Q), ghi + ". " + ly_d))
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y2, [(r"$\sin\left(%s\right) = \sin %s$" % (yz, X), ly_b)],
+                 [(r"$\sin\left(%s\right) = -\sin %s$" % (yz, X), ly_b), (r"$\sin\left(%s\right) = \cos %s$" % (yz, X), ly_b)])
+        _lyd = r"%s nên $\cos\left(%s\right) = -\cos %s$, $\tan\left(%s\right) = -\tan %s$." % (ly, yz, X, yz, X)
+        _tf_them(y4, [(r"$\sin %s + \cos\left(%s\right) = \sin %s - \cos %s$" % (X, yz, X, X), _lyd),
+                      (r"$\tan %s + \tan\left(%s\right) = 0$" % (X, yz), _lyd)],
+                 [(r"$\sin %s + \cos\left(%s\right) = \sin %s + \cos %s$" % (X, yz, X, X), _lyd),
+                  (r"$\tan %s - \tan\left(%s\right) = 0$" % (X, yz), _lyd)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -10262,6 +10496,20 @@ def L10_C3_TF_E_04(socau, socot=1):
         sai += [(r"Bán kính đường tròn nội tiếp tam giác $ABC$ bằng $%s$" % _so_hoac_phan_so(w), ly_d)
                 for w in (Rational(S, 2 * p), Rational(2 * S, p), R) if w != Rational(S, p)]
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _nho = min(a, b, c)
+        if [a, b, c].count(_nho) == 1:
+            _tn = "ABC"[[a, b, c].index(_nho)]
+            _tf_them(y1, [(r"Góc nhỏ nhất của tam giác $ABC$ là góc $%s$" % _tn, ly_a)],
+                     [(r"Góc nhỏ nhất của tam giác $ABC$ là góc $%s$" % X, ly_a) for X, v in zip("ABC", (a, b, c)) if v != _nho])
+        else:
+            _tf_them(y1, [(r"Tam giác $ABC$ là tam giác cân", ly_a)], [(r"Tam giác $ABC$ là tam giác đều", ly_a)])
+        _cosC = Rational(a * a + b * b - c * c, 2 * a * b)
+        _lyC = r"$\cos C = \dfrac{a^{2} + b^{2} - c^{2}}{2ab} = %s$." % _so_hoac_phan_so(_cosC)
+        _tf_them(y2, [(r"$\cos C = %s$" % _so_hoac_phan_so(_cosC), _lyC)],
+                 [(r"$\cos C = %s$" % _so_hoac_phan_so(w), _lyC) for w in (-_cosC, 2 * _cosC) if w != _cosC])
+        _d1, _s1 = _tf_bdt(r"Bán kính đường tròn ngoại tiếp tam giác $ABC$ %s $%s$", float(R), ly_d)
+        _tf_them(y4, _d1, _s1)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -10316,6 +10564,11 @@ def L10_C3_TF_E_05(socau, socot=1):
                 sai.append((bai % _L(w), ghi + ". " + ly_d))
         sai.append((bai.replace("$DA = %s$", "$DB + DC = %s$") % _L(R), ly_d))
         y4 = _phat_bieu(dung, sai)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(mau % r"\dfrac{1}{2}AB\cdot h_c", ly_a)], [(mau % r"AB\cdot h_c", ly_a)])
+        _bd = _tf_mau_bdt(bai)
+        _d1, _s1 = _tf_bdt(_bd[0], float(R), ly_d, tu=_bd[1])
+        _tf_them(y4, _d1, _s1)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
@@ -10398,6 +10651,8 @@ def L10_C3_TF_G_01(socau, socot=1):
                         [(phut - CB / 1000 / v2, "Trừ lẫn phút với giờ"), (phut, "Quên trừ thời gian xuống dốc")]) \
             if _xa_bien(t_len * 60, 1) else ([], [])
         y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y1, [(r"Góc $\widehat{ACB}$ là góc tù", ly_a)], [(r"Góc $\widehat{ACB}$ là góc nhọn", ly_a), (r"$\widehat{ACB} = %d^{\circ}$" % (180 - al), ly_a)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_doc(), 0, socot)
     return cauTF
 
@@ -10533,6 +10788,9 @@ def L10_C3_TF_H_01(socau, socot=1):
                         [(S1 + 2 * S2, "Quên hệ số $\\dfrac{1}{2}$ ở $S_{ABD}$"), (S1 + 0.5 * p * q * _sin_d(b), "Dùng nhầm $\\widehat{ABC}$ cho tam giác $ABD$")],
                         dv=r"\,\text{m}^{2}")
         y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _tf_them(y2, [(r"Tam giác $BCD$ cân tại $C$", ly_b), (r"$\widehat{ABD} + \widehat{DBC} = %d^{\circ}$" % b, ly_b)],
+                 [(r"Tam giác $BCD$ cân tại $B$", ly_b), (r"$\widehat{ABD} + \widehat{DBC} = %d^{\circ}$" % (180 - b), ly_b)])
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_tu_giac(Ap, Bp, Cp, Dp), 0, socot)
     return cauTF
 
@@ -10608,6 +10866,9 @@ def L10_C3_TF_H_02(socau, socot=1):
                         [(S1 + 2 * S2, "Quên hệ số $\\dfrac{1}{2}$ ở $S_{BCD}$"), (S1 + 0.5 * x * y * abs(float(cosC)), "Nhầm $\\sin$ với $\\cos$")],
                         dv=r"\,\text{m}^{2}")
         y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
+        _d1, _s1 = _tf_bdt(r"$\cos\widehat{BCD} %s %s$", float(cosC), ly_b, tu=(">", "<"))
+        _tf_them(y2, _d1, _s1)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_tu_giac(Ap, Bp, Cp, Dp), 0, socot)
     return cauTF
 
@@ -12230,14 +12491,17 @@ def L10_C3_TH034_VD036_TL_A_01(socau, dong=1):
 # =====================================================================
 
 def _bo_thap_doi():
-    """(h, beta, gamma, AC, CH, AH) chọn trước: góc hợp lí, đáp số không sát ranh giới làm tròn."""
+    """(h, beta, gamma, AC, CH, AH) chọn trước: góc hợp lí, đáp số không sát ranh giới làm tròn.
+    01/10/2026 (cô Lan: đề phải hợp lí): sườn đồi AC dốc không quá 30 độ (gamma >= 60 độ so với phương thẳng đứng),
+    đồi cao ít nhất nửa tháp, chân đồi A cách chân đường thẳng đứng qua tháp ít nhất 50 m
+    (đề gốc của cô: tháp 100 m, 30 và 60 độ -> đồi 50 m)."""
     while True:
-        be = random.randint(15, 45)
-        ga = random.randint(be + 10, min(be + 40, 75))
+        ga = random.randint(60, 75)
+        be = random.randint(15, ga - 10)
         h = random.choice([20, 25, 30, 40, 50, 60, 80, 100, 120])
         AC = h * _sin_d(be) / _sin_d(ga - be)
         CH, AH = AC * _cos_d(ga), AC * _sin_d(ga)
-        if CH < 10 or CH > 600 or AH > 900:
+        if CH < max(10, h / 2) or CH > 600 or AH < 50 or AH > 900:
             continue
         if not (_xa_bien(CH) and _xa_bien(AH) and _xa_bien(AC)):
             continue
