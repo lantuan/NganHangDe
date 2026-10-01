@@ -9761,3 +9761,16 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - TF_B_01: lời giải ý d viết ``k·m'' -> thay bằng hệ số cụ thể.
 - tests/test_tf_nhieu_dung_sai.py mở rộng cho chương 1; whitelist TH014 MC_C, MC_E, MC_H, MC_I (_01 - _03).
 - Không đưa vào ngân hàng (vượt YCCĐ hoặc sai bài): mệnh đề hai lượng từ (∀x∃y...), câu đố thang máy, nguyên lí Dirichlet; các bài tập hợp nằm ở Bài 2 (đã có).
+
+# Version 4.01 - 2026-10-01
+
+## Chương 1 Bài 2 (Tập hợp): bổ sung từ tài liệu CĐ dạy thêm Toán 10 Bài 2 (file docx cô Lan gửi)
+- Đối chiếu khoảng 190 câu với YCCĐ; chỉ lấy dạng chưa có, mỗi câu một chủ đề, kho mệnh đề / bối cảnh xoay vòng, không lặp bối cảnh trong đề.
+- NB017: MC_J (_01 đếm tập con, _02 đếm X với A ⊂ X ⊂ B; lời giải liệt kê hết) + SA_B; MC_K (_01 chọn cặp tập bằng nhau, _02 tìm x, y, m để bằng nhau) + SA_D; MC_M (_01 chuỗi bao hàm tập số, _02 tập hình học); MC_G_04 ({f(k) | k ∈ Z, ...}, bẫy giá trị trùng), MC_G_05 (phương trình tích có nhân tử bậc hai trên N, Z, Q, R), SA_A_03; MC_H_02 (tập rỗng mô tả bằng lời, kho 22 tập xoay vòng).
+- TH018: MC_C (_01 tập bội: giao = bội BCNN, _02 tập ước) + SA_A (đếm phần tử nhỏ hơn N); MC_D (đọc bảng kết quả thực tế -> giao, hợp, hiệu).
+- TH021: SA_A (đếm số nguyên / số tự nhiên thuộc kết quả phép toán khoảng).
+- VD021: MC_C (biết phần bù từng tập, tìm giao, hợp, phần bù của giao, hợp); MC_A_03 (điều kiện m hỏi qua phần bù, hiệu); SA_A_03 (đếm m nguyên để A ⊂ B, A có độ dài thay đổi - phải kèm A khác rỗng); SA_C (A ∩ B có đúng một phần tử); TL_B (a VD: B ⊂ A; b VDC: giao khác rỗng nhưng không là tập con).
+- Đúng/Sai mới TF_H .. TF_N (tập con; phép toán liệt kê; phép toán khoảng; khoảng chứa tham số; tập bội; tập nghiệm chứa tham số; thực tế hai tập), mỗi ý ≥ 3 đúng, ≥ 3 sai.
+- Tự luận hai đơn vị: NB017_TH021_TL_A, TH019_VD020_TL_A (biểu đồ Ven TikZ).
+- Sửa hiển thị "1m" trong lời giải _vd021_tham_so (VD021_MC_A_02).
+- Không đưa vào: ba tập hợp (đã để ở chuyên đề), tổng ba phần tử phân biệt (ngoài YCCĐ), đếm cặp tập con có ràng buộc lực lượng (SA 24, vượt YCCĐ); các câu trả lời ngắn có đáp án là khoảng đã đổi sang hỏi "có bao nhiêu giá trị nguyên".

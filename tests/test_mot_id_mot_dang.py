@@ -108,7 +108,12 @@ CHO_PHEP_NHIEU_HAM = {
     # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
     "L10_C1_B1_VD014_SA_B",   # dem so menh de dung / dem n lam keo theo sai
     "L10_C1_B2_NB017_MC_G",   # tinh chat -> liet ke / liet ke -> tinh chat / a thuoc A khong
-    "L10_C1_B2_NB017_SA_A",   # dem so phan tu / tong cac phan tu
+    "L10_C1_B2_NB017_SA_A",   # dem so phan tu / tong cac phan tu / {f(k)} va phuong trinh tich bac hai
+    "L10_C1_B2_NB017_MC_H",   # tap rong cho boi tinh chat / mo ta bang loi
+    "L10_C1_B2_NB017_MC_J",   # dem tap con / dem tap X thoa A con X con B
+    "L10_C1_B2_NB017_MC_K",   # chon cap tap bang nhau / tim phan tu de hai tap bang nhau
+    "L10_C1_B2_NB017_MC_M",   # chuoi bao ham tap so / tap hinh hoc
+    "L10_C1_B2_TH018_MC_C",   # tap boi / tap uoc
     "L10_C1_B1_VD014_MC_D",   # keo theo tren R co tham so / keo theo chia het
     "L10_C1_B1_VD014_TL_B",   # phu dinh menh de voi moi (bat dang thuc) / ton tai (chia het)
     # tu bai tap trac nghiem Bai 6 (30/09/2026), _02 hoi theo cach khac:

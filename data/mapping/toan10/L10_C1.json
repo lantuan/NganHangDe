@@ -661,5 +661,176 @@
     "Loai": "Đúng sai",
     "Dang": "Mệnh đề về khái niệm mới: số hoàn hảo",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC, moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_J",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số tập con của tập hợp nhỏ; đếm số tập X thoả A ⊂ X ⊂ B",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 dem tap con, _02 dem tap X; loi giai liet ke het tap con (khong dung to hop)"
+  },
+  {
+    "id": "L10_C1_B2_NB017_SA_B",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số tập con của tập hợp nhỏ; đếm số tập X thoả A ⊂ X ⊂ B",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_J"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_K",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hai tập hợp bằng nhau: chọn cặp tập bằng nhau, tìm phần tử (tham số) để hai tập bằng nhau",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 chon cap bang nhau, _02 tim x, y (m) de bang nhau"
+  },
+  {
+    "id": "L10_C1_B2_NB017_SA_D",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hai tập hợp bằng nhau: chọn cặp tập bằng nhau, tìm phần tử (tham số) để hai tập bằng nhau",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_K"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_M",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Sắp xếp quan hệ bao hàm giữa ba tập hợp (tập số, tập hình học)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 tap so (boi, uoc, khoang), _02 tap hinh hoc; kho xoay vong"
+  },
+  {
+    "id": "L10_C1_B2_TH018_MC_C",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Phép toán trên tập bội số, tập ước",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 tap boi (giao = boi BCNN), _02 tap uoc"
+  },
+  {
+    "id": "L10_C1_B2_TH018_SA_A",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phép toán trên tập bội số, tập ước",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan: dem so phan tu nho hon N cua giao, hop, hieu hai tap boi"
+  },
+  {
+    "id": "L10_C1_B2_TH018_MC_D",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc bảng kết quả thực tế, xác định giao, hợp, hiệu của hai tập hợp",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; bang tabular; boi canh khong lap trong de"
+  },
+  {
+    "id": "L10_C1_B2_TH021_SA_A",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phép toán trên khoảng, đoạn, nửa khoảng: đếm số nguyên (số tự nhiên) thuộc kết quả",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_VD021_MC_C",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết phần bù của từng tập, tìm giao, hợp, phần bù của giao, hợp",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_VD021_SA_C",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tham số để giao của đoạn và nửa khoảng có đúng một phần tử",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_TF_H",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Tập hợp cho bởi tính chất đặc trưng, tập con, đếm tập con",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_I",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Phép toán trên tập hợp liệt kê (giao, hợp, hiệu, phần bù)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_J",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Phép toán trên khoảng, đoạn, nửa khoảng",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_K",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Khoảng, đoạn chứa tham số",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_L",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Phép toán trên tập bội số",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_M",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Tập nghiệm chứa tham số",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_N",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán thực tế hai tập hợp",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC; kho boi canh chung, khong lap trong de"
+  },
+  {
+    "id": "L10_C1_NB017_TH021_TL_A",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅. | Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Tự luận",
+    "Dang": "Viết tập con của R dưới dạng khoảng, đoạn rồi tìm giao, hợp, phần bù",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C1_B2_NB017",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C1_B2_TH021",
+        "muc_do": "TH"
+      }
+    ]
+  },
+  {
+    "id": "L10_C1_TH019_VD020_TL_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù. | Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
+    "Loai": "Tự luận",
+    "Dang": "Đọc biểu đồ Ven và bài toán thực tế hai tập hợp",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi; boi canh khong lap trong de",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C1_B2_TH019",
+        "muc_do": "TH"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C1_B2_VD020",
+        "muc_do": "VD"
+      }
+    ]
+  },
+  {
+    "id": "L10_C1_B2_VD021_TL_B",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Tự luận",
+    "Dang": "Khoảng chứa tham số: tìm m để tập con; tìm m để giao khác rỗng nhưng không là tập con",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; mot don vi VD021: a) VD, b) VDC"
   }
 ]
