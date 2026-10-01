@@ -35,6 +35,7 @@ from app.services.generator_service import (  # noqa: E402
     _call_generator_function, _find_variant_functions, _load_chapter_module,
     kiem_tra_dung_loai_cau)
 from app.services.lam_dep_bieu_thuc import lam_dep  # noqa: E402
+from app.services.tu_luan_hai_y import giu_hai_y  # noqa: E402
 from app.services.latex_service import build_latex_document  # noqa: E402
 
 CONFIG = GOC / "data" / "config"
@@ -104,6 +105,7 @@ def main():
     khoi = []
     for ten in cac_ham:
         latex = lam_dep(_call_generator_function(getattr(module, ten), ts.socau, None, None))
+        latex = giu_hai_y(latex, ten)
         try:
             kiem_tra_dung_loai_cau(generator_id, latex)
         except Exception as e:  # chi canh bao, van xuat nhap de soi

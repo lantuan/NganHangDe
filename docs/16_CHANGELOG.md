@@ -9585,3 +9585,11 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 - Test: tests/test_hinh_cau_dung_sai_len_web.py (TF_G, TF_H, TF_I; loi giai co hinh).
 - (bo sung) trich_loi_giai GIU NGUYEN hinh vi word_service dung no de ve hinh loi giai vao file Word;
   da kiem: TF_H, TF_I, TL_H, MC_I xuat Word khong con "\immini", hinh van co.
+
+# Version 3.84 - 2026-10-01
+
+- Mọi câu tự luận chỉ đưa ra đúng 2 ý: `app/services/tu_luan_hai_y.py` (`giu_hai_y`) rút các câu TL có 3+ ý về 2 ý, chọn ngẫu nhiên theo từng bài, giữ thứ tự a) < b). TL mức VD luôn giữ ý cuối (VDC); TL NB/TH chọn cặp bất kỳ. Không xoá ý trong ngân hàng, không đổi ID (ID đã thể hiện mức độ).
+- Lời giải của ý bị bỏ (đứng trước ý được giữ) được ghép vào đầu lời giải ý đó; bỏ tham chiếu "(câu a)", "Theo câu a)".
+- Gắn vào generator_service (call_generator, call_locked_variant) và scripts/nhap.py. PDF và Word dùng chung latex_block nên đều 2 ý.
+- L10_C3_B6_VD036_TL_E_01 (bán kính Trái Đất): thêm hình `_hinh_trai_dat()` gồm Trái Đất, ngọn núi, tia nhìn tiếp tuyến tới đường chân trời, góc θ.
+- Test: tests/test_tu_luan_hai_y.py (125 hàm TL đều ra 2 ý).

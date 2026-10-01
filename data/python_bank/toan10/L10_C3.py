@@ -3274,6 +3274,34 @@ def L10_C3_B6_VD036_MC_D_01(socau, dang=1):
     return cauTN
 
 
+def _hinh_trai_dat():
+    """Hình minh hoạ (KHÔNG đúng tỉ lệ - góc hạ thật chỉ khoảng 1-2 độ): Trái Đất tâm O, núi
+    tại M, tia nhìn MT tiếp xúc mặt biển tại T, góc hạ theta so với phương nằm ngang tại M
+    (cô Lan 01/10/2026: không có hình học sinh rất khó làm bài)."""
+    R, h = 2.0, 0.7
+    goc_T = math.degrees(math.acos(R / (R + h)))      # góc TOM
+    Tx, Ty = R * math.sin(math.radians(goc_T)), R * math.cos(math.radians(goc_T))
+    return (
+        "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+        "\\fill[blue!8] (0,0) circle (%.2f);\n\\draw[thick] (0,0) circle (%.2f);\n" % (R, R)
+        + "\\fill[brown!60] (-0.25,%.2f) -- (0,%.2f) -- (0.25,%.2f) -- cycle;\n" % (R - 0.02, R + h, R - 0.02)
+        + "\\draw[dashed] (0,0) -- (0,%.2f);\n" % (R + h)
+        + "\\draw (0,0) -- (%.3f,%.3f);\n" % (Tx, Ty)
+        + "\\draw[thick,red] (0,%.2f) -- (%.3f,%.3f);\n" % (
+            R + h, Tx + 0.35 * Tx / math.hypot(Tx, R + h - Ty), Ty - 0.35 * (R + h - Ty) / math.hypot(Tx, R + h - Ty))
+        + "\\draw[dashed] (-1.2,%.2f) -- (2.4,%.2f);\n" % (R + h, R + h)
+        + "\\draw (0.9,%.2f) arc (0:%.1f:0.9);\n" % (R + h, -(90 - goc_T))
+        + "\\node at (%.2f,%.2f) {$\\theta$};\n" % (1.15, R + h - 0.25)
+        + "\\fill (0,0) circle (0.03) node[below] {$O$};\n"
+        "\\fill (0,%.2f) circle (0.03) node[above] {$M$};\n" % (R + h)
+        + "\\fill (%.3f,%.3f) circle (0.03) node[right] {$T$};\n" % (Tx, Ty)
+        + "\\node[left] at (0,%.2f) {$h$};\n" % (R + h / 2)
+        + "\\node[left] at (0,%.2f) {$R$};\n" % (R / 2)
+        + "\\node[below right] at (%.3f,%.3f) {$R$};\n" % (Tx / 2, Ty / 2)
+        + "\\end{tikzpicture}"
+    )
+
+
 def L10_C3_B6_VD036_TL_E_01(socau, dong=1):
     r"""Đo bán kính Trái Đất bằng góc hạ tới đường chân trời.
 
@@ -3325,7 +3353,8 @@ def L10_C3_B6_VD036_TL_E_01(socau, dong=1):
                  r"chân trời. Tia nhìn tới đường chân trời tạo với phương nằm "
                  r"ngang một góc hạ $\theta = %s^{\circ}$. Coi Trái Đất là "
                  r"khối cầu tâm $O$ bán kính $R$; gọi $M$ là vị trí người quan "
-                 r"sát và $T$ là điểm mà tia nhìn chạm mặt biển."
+                 r"sát và $T$ là điểm mà tia nhìn chạm mặt biển (hình vẽ minh hoạ, "
+                 r"không đúng tỉ lệ)."
                  % (ten, _xx(h, 1), _xx(theta, 2)))
 
         hoi_a = (r"Chứng tỏ tam giác $OTM$ vuông tại $T$ và tính "
@@ -3376,7 +3405,7 @@ def L10_C3_B6_VD036_TL_E_01(socau, dong=1):
         ds_abcd = [(hoi_a, r"90^{\circ} - \theta", giai_a),
                    (hoi_b, r"\cos\theta = \dfrac{R}{R + h}", giai_b),
                    (hoi_c, r"R \approx %s\,\text{km}" % _xx(R, 0), giai_c)]
-        cauTN += TL_answer_text(debai, ds_abcd, 0, 0, dong)
+        cauTN += TL_answer_text(debai, ds_abcd, _hinh_trai_dat(), 0, dong)
     return cauTN
 
 
