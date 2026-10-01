@@ -7841,38 +7841,89 @@ def L10_C3_TF_K_01(socau, socot=1):
     return cau
 
 
-def L10_C3_TF_L_01(socau, socot=1):
-    r"""Đúng/Sai - biết ba cạnh (tam giác cạnh nguyên, diện tích nguyên): công thức trung tuyến, độ dài
-    trung tuyến $m_a$, đường cao $h_a$ qua diện tích, bán kính đường tròn nội tiếp hoặc ngoại tiếp.
+def _cong_thuc_tam_giac():
+    """Một công thức của chương 3 (Bài 6, SGK) cho tam giác ABC: (đúng, sai, lời giải).
+    Đỉnh được hoán vị ngẫu nhiên để công thức đa dạng. KHÔNG dùng công thức trung
+    tuyến (chỉ có trong SBT - cô Lan 01/10/2026)."""
+    X, Y, Z = random.sample("ABC", 3)
+    x, y, z = X.lower(), Y.lower(), Z.lower()
+    bo = [
+        (r"%s^{2} = %s^{2} + %s^{2} - 2%s%s\cos %s" % (x, y, z, y, z, X),
+         random.choice([r"%s^{2} = %s^{2} + %s^{2} + 2%s%s\cos %s" % (x, y, z, y, z, X),
+                        r"%s^{2} = %s^{2} + %s^{2} - %s%s\cos %s" % (x, y, z, y, z, X),
+                        r"%s^{2} = %s^{2} + %s^{2} - 2%s%s\cos %s" % (x, y, z, y, z, Y)]),
+         "Định lí côsin"),
+        (r"\cos %s = \dfrac{%s^{2} + %s^{2} - %s^{2}}{2%s%s}" % (X, y, z, x, y, z),
+         random.choice([r"\cos %s = \dfrac{%s^{2} + %s^{2} - %s^{2}}{%s%s}" % (X, y, z, x, y, z),
+                        r"\cos %s = \dfrac{%s^{2} + %s^{2} - %s^{2}}{2%s%s}" % (X, x, y, z, y, z)]),
+         "Hệ quả của định lí côsin"),
+        (r"\dfrac{%s}{\sin %s} = \dfrac{%s}{\sin %s} = 2R" % (x, X, y, Y),
+         random.choice([r"\dfrac{%s}{\sin %s} = \dfrac{%s}{\sin %s} = R" % (x, X, y, Y),
+                        r"\dfrac{%s}{\sin %s} = \dfrac{%s}{\sin %s} = 2R" % (x, Y, y, X)]),
+         r"Định lí sin ($R$ là bán kính đường tròn ngoại tiếp)"),
+        (r"S = \dfrac{1}{2}%s%s\sin %s" % (y, z, X),
+         random.choice([r"S = \dfrac{1}{2}%s%s\sin %s" % (y, z, Y), r"S = %s%s\sin %s" % (y, z, X)]),
+         r"Công thức diện tích theo hai cạnh và góc xen giữa"),
+        (r"S = \dfrac{abc}{4R}", random.choice([r"S = \dfrac{abc}{2R}", r"S = \dfrac{4R}{abc}"]),
+         r"Công thức diện tích theo bán kính đường tròn ngoại tiếp $R$"),
+        (r"S = pr", random.choice([r"S = 2pr", r"S = \dfrac{r}{p}"]),
+         r"Công thức diện tích theo nửa chu vi $p$ và bán kính đường tròn nội tiếp $r$"),
+        (r"S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}",
+         random.choice([r"S = \sqrt{\left(p - a\right)\left(p - b\right)\left(p - c\right)}",
+                        r"S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}"]),
+         r"Công thức Heron ($p$ là nửa chu vi)"),
+        (r"S = \dfrac{1}{2}%s\cdot h_%s" % (x, x), random.choice([r"S = %s\cdot h_%s" % (x, x), r"S = \dfrac{1}{2}%s\cdot h_%s" % (y, x)]),
+         r"Công thức diện tích theo cạnh và đường cao tương ứng"),
+    ]
+    dung, sai, ten = random.choice(bo)
+    return "$" + dung + "$", "$" + sai + "$", ten + r": $" + dung + "$."
 
-    CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 (cau 52, 56 phan III). Co Lan duyet lai.
+
+def L10_C3_TF_L_01(socau, socot=1):
+    r"""Đúng/Sai - tam giác biết BA CẠNH (cạnh nguyên, diện tích nguyên):
+    a) (NB) nhận ra một công thức của Bài 6 (chọn ngẫu nhiên trong định lí côsin, hệ quả, định lí sin, bốn
+       công thức diện tích, Heron; đỉnh hoán vị ngẫu nhiên) - KHÔNG dùng công thức trung tuyến (chỉ có ở SBT);
+    b) (TH) tính rất đơn giản: nửa chu vi $p$ hoặc côsin một góc (thay số một lần);
+    c) (VD) diện tích (Heron);
+    d) (VDC) đường cao, bán kính nội tiếp hoặc ngoại tiếp (qua diện tích).
+
+    CLAUDE THEM 01/10/2026 - lam lai theo y co Lan. Co Lan duyet lai.
     """
     cau = ""
     for _ in range(socau):
         x, y, z, S, p = random.choice([t for t in HERON_NGUYEN if t[2] <= 20])
         a, b, c = random.sample([x, y, z], 3)
-        ma2 = Rational(2 * b * b + 2 * c * c - a * a, 4)
-        ha = Rational(2 * S, a)
-        debai = r"Cho tam giác $ABC$ có $BC = a = %d$, $CA = b = %d$, $AB = c = %d$. Xét tính đúng, sai của các mệnh đề sau." % (a, b, c)
-        # a) NB
-        y1 = _y_ds(r"$m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{4}$", r"$m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{2}$",
-                   r"Công thức độ dài đường trung tuyến: $m_a^{2} = \dfrac{b^{2} + c^{2}}{2} - \dfrac{a^{2}}{4}$.")
-        ly_b = r"$m_a^{2} = \dfrac{%d + %d}{2} - \dfrac{%d}{4} = %s$ nên $m_a = %s$." % (b * b, c * c, a * a, _L(ma2), _L(sqrt(ma2)))
-        # b) TH
-        y2 = _y_ds(r"$m_a = %s$" % _L(sqrt(ma2)), r"$m_a = %s$" % _L(sqrt(ma2 + 1)), ly_b)
-        ly_c = (r"$p = %d$, $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$; $S = \dfrac{1}{2}a h_a \Rightarrow h_a = \dfrac{2S}{a} = %s$."
-                % (p, p, p - a, p - b, p - c, S, _L(ha)))
-        # c) VD
-        y3 = _y_ds(r"$h_a = %s$" % _L(ha), r"$h_a = %s$" % _L(ha / 2), ly_c)
+        debai = (r"Cho tam giác $ABC$ có $BC = a = %d$, $CA = b = %d$, $AB = c = %d$. Gọi $S$, $p$, $R$, $r$ lần lượt là "
+                 r"diện tích, nửa chu vi, bán kính đường tròn ngoại tiếp, nội tiếp của tam giác. Xét tính đúng, sai của các "
+                 r"mệnh đề sau." % (a, b, c))
+        # a) NB - nhận ra công thức
+        dung, sai, ly = _cong_thuc_tam_giac()
+        y1 = _y_ds(dung, sai, ly)
+        # b) TH - tính cực kì đơn giản
         if random.random() < 0.5:
+            y2 = _y_ds(r"$p = %s$" % _L(Rational(a + b + c, 2)), r"$p = %d$" % (a + b + c),
+                       r"$p = \dfrac{a + b + c}{2} = \dfrac{%d + %d + %d}{2} = %s$." % (a, b, c, _L(Rational(a + b + c, 2))))
+        else:
+            X, (u, v, w) = random.choice([("A", (b, c, a)), ("B", (a, c, b)), ("C", (a, b, c))])
+            cs = Rational(u * u + v * v - w * w, 2 * u * v)
+            y2 = _y_ds(r"$\cos %s = %s$" % (X, _L(cs)), r"$\cos %s = %s$" % (X, _L(-cs) if cs != 0 else "1"),
+                       r"$\cos %s = \dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$." % (X, u, v, w, u, v, _L(cs)))
+        # c) VD - diện tích (Heron)
+        y3 = _y_ds(r"$S = %d$" % S, r"$S = %d$" % (2 * S),
+                   r"$p = %d$, $S = \sqrt{%d\cdot %d\cdot %d\cdot %d} = %d$." % (p, p, p - a, p - b, p - c, S))
+        # d) VDC - đường cao / bán kính
+        chon = random.choice(["h", "r", "R"])
+        if chon == "h":
+            ha = Rational(2 * S, a)
+            y4 = _y_ds(r"Đường cao kẻ từ $A$ là $h_a = %s$" % _L(ha), r"Đường cao kẻ từ $A$ là $h_a = %s$" % _L(ha / 2),
+                       r"$S = \dfrac{1}{2}a h_a \Rightarrow h_a = \dfrac{2S}{a} = \dfrac{%d}{%d} = %s$." % (2 * S, a, _L(ha)))
+        elif chon == "r":
             r_ = Rational(S, p)
-            # d) VDC
-            y4 = _y_ds(r"Bán kính đường tròn nội tiếp $r = %s$" % _L(r_), r"Bán kính đường tròn nội tiếp $r = %s$" % _L(2 * r_),
+            y4 = _y_ds(r"$r = %s$" % _L(r_), r"$r = %s$" % _L(2 * r_),
                        r"$S = pr \Rightarrow r = \dfrac{S}{p} = \dfrac{%d}{%d} = %s$." % (S, p, _L(r_)))
         else:
             R_ = Rational(a * b * c, 4 * S)
-            # d) VDC
-            y4 = _y_ds(r"Bán kính đường tròn ngoại tiếp $R = %s$" % _L(R_), r"Bán kính đường tròn ngoại tiếp $R = %s$" % _L(2 * R_),
+            y4 = _y_ds(r"$R = %s$" % _L(R_), r"$R = %s$" % _L(2 * R_),
                        r"$S = \dfrac{abc}{4R} \Rightarrow R = \dfrac{abc}{4S} = \dfrac{%d}{%d} = %s$." % (a * b * c, 4 * S, _L(R_)))
         cau += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cau

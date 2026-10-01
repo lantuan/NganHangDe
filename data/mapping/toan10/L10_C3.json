@@ -1261,8 +1261,8 @@
     "id": "L10_C3_TF_L",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Đúng sai",
-    "Dang": "Biết ba cạnh: công thức và độ dài trung tuyến, đường cao, bán kính nội tiếp hoặc ngoại tiếp",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - mo rong Dung/Sai chuong 3 theo dang co Lan chon; a) NB b) TH c) VD d) VDC; co Lan duyet lai"
+    "Dang": "Biết ba cạnh: nhận ra công thức của Bài 6, nửa chu vi hoặc côsin, diện tích (Heron), đường cao hoặc bán kính",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - mo rong Dung/Sai chuong 3 theo dang co Lan chon; a) NB b) TH c) VD d) VDC; co Lan duyet lai; 01/10/2026 lam lai: bo cong thuc trung tuyen (chi co trong SBT), a) nhan ra cong thuc ngau nhien, b) tinh rat don gian"
   },
   {
     "id": "L10_C3_TF_M",

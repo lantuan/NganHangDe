@@ -9667,3 +9667,7 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 # Version 3.91 - 2026-10-01
 
 - L10_C3_TF_J làm lại theo ý cô Lan: cho MỘT giá trị lượng giác (sin, cos, tan hoặc cot) và góc nhọn/tù; a) (NB) dấu; b) (TH) đổi một bước: cos -> sin, sin -> cos, tan -> cot, cot -> tan; c) (VD) giá trị còn lại hai bước (tan = sin/cos, 1 + tan² = 1/cos², 1 + cot² = 1/sin² - ý b cũ); d) (VDC) biểu thức chứa ba góc bù/phụ của α (giữ trong YCCĐ, không dùng biểu thức đồng bậc vì dạng đó đánh dấu ngoài YCCĐ). Mapping chuyển sang curriculum TH031.
+
+# Version 3.92 - 2026-10-01
+
+- L10_C3_TF_L làm lại theo ý cô Lan: bỏ công thức trung tuyến (chỉ có trong SBT, không có trong SGK). a) (NB) nhận ra một công thức của Bài 6, chọn ngẫu nhiên trong 8 nhóm (định lí côsin, hệ quả, định lí sin, S = ½bc sinA, S = abc/4R, S = pr, Heron, S = ½a.h_a), đỉnh hoán vị ngẫu nhiên, phương án sai là biến dạng hay gặp; b) (TH) rất đơn giản: nửa chu vi hoặc côsin một góc; c) (VD) diện tích Heron; d) (VDC) h_a, r hoặc R.
