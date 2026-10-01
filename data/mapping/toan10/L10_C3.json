@@ -215,8 +215,9 @@
     "id": "L10_C3_B6_TH032_MC_C",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính độ dài đường trung tuyến khi biết ba cạnh",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 6 cua co Lan; co Lan duyet lai"
+    "Dang": "Tính độ dài đường trung tuyến khi biết ba cạnh - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 29/09/2026 - tu giao an Bai 6 cua co Lan; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH032_MC_D",
@@ -236,8 +237,9 @@
     "id": "L10_C3_B6_TH032_SA_C",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Độ dài đường trung tuyến",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 6 cua co Lan; co Lan duyet lai"
+    "Dang": "Độ dài đường trung tuyến - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 29/09/2026 - tu giao an Bai 6 cua co Lan; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH033_SA_B",
@@ -293,8 +295,12 @@
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đo chiều cao vật cao bằng hai góc nâng bất kì",
-    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m)",
-    "boi_canh": "thap_cham"
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m); 01/10/2026 danh VDC theo bang duyet VD-VDC (co Lan: cu danh, co coi lai sau); 01/10/2026 boi_canh them thap_doi (bien the _02 la thap tren dinh doi, cung boi canh VD036_MC_I/SA_K/TL_H)",
+    "boi_canh": [
+      "thap_cham",
+      "thap_doi"
+    ],
+    "muc_do_dang": "VDC"
   },
   {
     "id": "L10_C3_B6_VD036_TL_D",
@@ -682,15 +688,17 @@
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tính chiều cao, khoảng cách không đo trực tiếp được bằng định lí sin (có hình)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m)",
-    "boi_canh": "thap_cham"
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m); 01/10/2026 danh VDC theo bang duyet VD-VDC (co Lan: cu danh, co coi lai sau)",
+    "boi_canh": "thap_cham",
+    "muc_do_dang": "VDC"
   },
   {
     "id": "L10_C3_B6_VD036_SA_E",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hai người đi theo hai hướng tới cùng một đích: dùng định lí côsin nhiều lần (có hình)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai; 01/10/2026 danh VDC theo bang duyet VD-VDC (co Lan: cu danh, co coi lai sau)",
+    "muc_do_dang": "VDC"
   },
   {
     "id": "L10_C3_B6_VD036_MC_E",
@@ -848,29 +856,40 @@
     "id": "L10_C3_B6_TH032_MC_F",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra công thức độ dài đường trung tuyến",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai"
+    "Dang": "Nhận ra công thức độ dài đường trung tuyến - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH032_MC_G",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, mot cong thuc; co Lan duyet lai"
+    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, mot cong thuc; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH032_SA_D",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, dap so nguyen; co Lan duyet lai"
+    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, dap so nguyen; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH032_MC_I",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Định lí côsin trong hình bình hành: tính đường chéo, tính cạnh",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 biet hai canh va goc tinh duong cheo; _02 biet canh va hai duong cheo tinh canh ke; co Lan duyet lai"
+    "Dang": "Định lí côsin trong hình bình hành: biết hai cạnh và góc, tính đường chéo",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 biet hai canh va goc tinh duong cheo; _02 biet canh va hai duong cheo tinh canh ke; co Lan duyet lai; 01/10/2026 bien the _02 (dung cong thuc trung tuyen) tach sang TH032_MC_J (luyen tap them)"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_J",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hình bình hành biết một cạnh và hai đường chéo, tính cạnh kề (công thức trung tuyến) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 01/10/2026 - tach tu TH032_MC_I_02 (tai lieu C3-B2: mot canh 4, hai duong cheo 6 va 8); co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_TH032_SA_F",

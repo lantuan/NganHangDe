@@ -6857,13 +6857,13 @@ def _de_hbh(A, m, n, cs, hoi, X2):
     return de, giai
 
 
-def L10_C3_B6_TH032_MC_I_02(socau, dang=1):
-    r"""Định lí côsin trong hình bình hành, cách hỏi khác: biết một cạnh và hai đường chéo, tính
+def L10_C3_B6_TH032_MC_J_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (công thức trung tuyến - SBT). Hình bình hành, cách hỏi khác: biết một cạnh và hai đường chéo, tính
     cạnh kề. Dùng công thức trung tuyến trong tam giác $ABD$ (tâm $O$ là trung điểm $BD$):
     $AB^{2} + AD^{2} = \dfrac{AC^{2} + BD^{2}}{2}$.
 
     CLAUDE THEM 01/10/2026 - theo phan III tai lieu C3-B2 ("mot canh 4, hai duong cheo 6 va 8").
-    Co Lan duyet lai.
+    01/10/2026: tach tu TH032_MC_I_02 sang TH032_MC_J (ngoai YCCD). Co Lan duyet lai.
     """
     cau, gt = "", []
     while len(gt) < socau:

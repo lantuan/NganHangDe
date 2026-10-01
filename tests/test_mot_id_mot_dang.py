@@ -148,7 +148,6 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_J",   # luyen tap them: _01 tich tan ghep phu, _02 tong cos ghep bu
     "L10_C3_B6_TH033_MC_D",   # hoi nguoc dinh li sin: _01 biet a va R, _02 he thuc k.a.sinB = b.can n
     "L10_C3_B6_TH033_MC_E",   # ti le canh = ti le sin: _01 chu vi, _02 ti so duong cao
-    "L10_C3_B6_TH032_MC_I",   # hinh binh hanh: _01 duong cheo, _02 canh tu hai duong cheo
     "L10_C3_B6_VD036_MC_P",   # duong tron qua 3 diem (VD): _01 dia co, _02 ho nuoc
     "L10_C3_B6_VD036_MC_Q",   # duong tron qua 3 diem (VDC): _01 dia co, _02 ho nuoc
     "L10_C3_B6_VD036_TL_K",   # duong tron qua 3 diem: _01 dia co, _02 ho nuoc

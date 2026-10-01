@@ -9686,3 +9686,18 @@ Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá tr�
 - Tiện ích mới (L10_C3.py, cạnh _y_ds): _tf_so (giá trị gần đúng: làm tròn hai mức, so sánh với ngưỡng tròn, lỗi làm tròn), _tf_ct (giá trị chính xác), _tf_bdt, _tf_gop, _tf_nguong; dùng chung _phat_bieu của TF_S.
 - TF_S_01: ý b) thêm phát biểu đúng khi câu dẫn cho toạ độ (sin²/cos², góc bù); c) thêm lỗi cho góc 45°; d) luôn đủ 3 đại lượng.
 - Kiểm thử: 300 lần chạy mỗi hàm, mọi ý đều đủ >= 2 đúng và >= 2 sai; PDF nháp 27 hàm không lỗi LaTeX; tests/test_cau_dung_sai.py và các test liên quan đạt.
+
+# Version 3.95 - 2026-10-01
+
+## Dạng dùng công thức trung tuyến: đánh dấu "luyện tập thêm" (cô Lan: đánh dấu cho GV biết)
+- Công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và YCCĐ. Mapping L10_C3_B6_TH032_MC_C, SA_C, MC_F, MC_G, SA_D: "ngoai_yccd": true, ghi_chu "LUYEN TAP THEM ..."; curriculum TH032 có dang_luyen_tap_them + ghi_chu_luyen_tap_them. Khi vào đề, hệ thống cảnh báo giáo viên (docs/04 Ngoại lệ 4).
+- L10_C3_B6_TH032_MC_I_02 (hình bình hành biết một cạnh và hai đường chéo, giải bằng công thức trung tuyến) tách sang dạng mới L10_C3_B6_TH032_MC_J_01 (ngoai_yccd). TH032_MC_I chỉ còn _01 (biết hai cạnh và góc, tính đường chéo); bỏ khỏi CHO_PHEP_NHIEU_HAM.
+- TH035_MC_D/SA_C (trung tuyến AM tính bằng định lí côsin trong tam giác ABM) vẫn trong YCCĐ, giữ nguyên.
+
+## Đánh mức VDC theo bảng duyệt (cô Lan: "cứ đánh, cô coi lại sau")
+- muc_do_dang = "VDC": L10_C3_B6_VD036_MC_D, SA_D, SA_E; L10_C9_B27_VD155_MC_A, MC_B; L11_C4_B10_VD052_MC_A; L11_C7_B27_VD129_MC_A.
+- Không đánh VDC cho VD036_MC_C, SA_F (bảng đề xuất VDC nhưng ngày 01/10 phần hỏi hướng đã tách sang MC_M, SA_O mức VDC; MC_C, SA_F chỉ còn hỏi khoảng cách - giữ VD).
+- MC_E, SA_G, MC_F, SA_H đã là VDC từ trước.
+
+## Bối cảnh
+- VD036_MC_D: boi_canh ["thap_cham", "thap_doi"] (biến thể _02 là tháp trên đỉnh đồi, cùng bối cảnh với VD036_MC_I/SA_K/TL_H - trước đây có thể vào cùng một đề).

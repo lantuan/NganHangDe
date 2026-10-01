@@ -112,7 +112,36 @@
       "he_thuc_luong",
       "dinh_li_cosin"
     ],
-    "difficulty_rank": 2
+    "difficulty_rank": 2,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Độ dài đường trung tuyến khi biết ba cạnh (công thức trung tuyến - SBT)",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_C",
+          "L10_C3_B6_TH032_SA_C"
+        ]
+      },
+      {
+        "mo_ta": "Nhận ra công thức độ dài đường trung tuyến",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_F"
+        ]
+      },
+      {
+        "mo_ta": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_G",
+          "L10_C3_B6_TH032_SA_D"
+        ]
+      },
+      {
+        "mo_ta": "Hình bình hành biết một cạnh và hai đường chéo, tính cạnh kề",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_J"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C3_B6_TH033",
