@@ -1,4 +1,4 @@
-"""Câu Đúng/Sai chương 3 lớp 10: MỖI Ý phải có NHIỀU phát biểu đúng và NHIỀU phát biểu sai.
+"""Câu Đúng/Sai chương 1 và chương 3 lớp 10: MỖI Ý phải có NHIỀU phát biểu đúng và NHIỀU phát biểu sai.
 
 Cô Lan 01/10/2026: "để tránh học sinh học thuộc thì nhất định các câu a, b, c, d phải có nhiều đáp
 án đúng và nhiều đáp án sai trong chính câu đấy" - TF_baitoan_du (math_type.py) chọn ngẫu nhiên một
@@ -30,12 +30,15 @@ def _nap(tep):
     return mo
 
 
-MO = _nap(BANK / "toan10" / "L10_C3.py")
-HAM = sorted(t for t in dir(MO) if re.match(r"^L10_C3_TF_[A-Z]_\d{2}$", t))
+MO_CHUONG = {c: _nap(BANK / "toan10" / ("L10_C%d.py" % c)) for c in (1, 3)}
+HAM = sorted("%d:%s" % (c, t) for c, mo in MO_CHUONG.items()
+             for t in dir(mo) if re.match(r"^L10_C%d_TF_[A-Z]_\d{2}$" % c, t))
 
 
 @pytest.mark.parametrize("ten", HAM)
 def test_moi_y_nhieu_dung_nhieu_sai(ten, monkeypatch):
+    chuong, ten = ten.split(":")
+    MO = MO_CHUONG[int(chuong)]
     bat = []
     goc = MO.TF_baitoan_du
 

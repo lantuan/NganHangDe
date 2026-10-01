@@ -139,6 +139,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_TH014_MC_D",   # _01 menh de va menh de dao, _02 menh de tuong duong
     "L10_C1_B1_TH014_MC_G",   # _01 cho san dung/sai, _02 menh de cu the
     "L10_C1_B1_TH014_SA_C",   # _01 cho san dung/sai, _02 menh de cu the
+    "L10_C1_B1_TH014_MC_C",   # chia het: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
+    "L10_C1_B1_TH014_MC_E",   # tu giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
+    "L10_C1_B1_TH014_MC_H",   # tam giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
+    "L10_C1_B1_TH014_MC_I",   # so thuc: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C3_B6_TH034_MC_A",   # chon cong thuc theo du kien / cong thuc nao dung-sai
     "L10_C3_TF_C",            # tau hai chang: van toc-thoi gian / quang duong + huong la ban
     "L10_C3_B6_TH032_MC_F",   # cong thuc trung tuyen: chon dung / chon sai

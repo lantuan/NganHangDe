@@ -548,5 +548,118 @@
     "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
     "Loai": "Tự luận",
     "Dang": "Biểu đồ Ven ba tập hợp, bài toán thực tế"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_M",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chia hết: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; chu de chia het (cung SA_I), menh de lay xoay vong"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_I",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chia hết: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; chu de chia het (cung MC_M), menh de lay xoay vong"
+  },
+  {
+    "id": "L10_C1_B1_TH003_MC_C",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Số a = √m + k, b = √m − k: tính đúng sai của mệnh đề về số hữu tỉ, số tự nhiên",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_NB001_TH003_TL_A",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề). | Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Tự luận",
+    "Dang": "Câu chứa biến: có là mệnh đề không, thay giá trị của biến rồi xét đúng sai",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C1_B1_NB001",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C1_B1_TH003",
+        "muc_do": "TH"
+      }
+    ],
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi"
+  },
+  {
+    "id": "L10_C1_NB015_TH014_TL_A",
+    "content": "Nhận biết khái niệm định lí, giả thiết, kết luận, điều kiện cần, điều kiện đủ, điều kiện cần và đủ. | Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Tự luận",
+    "Dang": "Định lí: phát biểu bằng điều kiện cần, điều kiện đủ; mệnh đề đảo và tính đúng sai",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C1_B1_NB015",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C1_B1_TH014",
+        "muc_do": "TH"
+      }
+    ],
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi"
+  },
+  {
+    "id": "L10_C1_NB013_NB005_TL_A",
+    "content": "Phát biểu được mệnh đề có chứa kí hiệu ∀, ∃. | Nhận biết được mệnh đề phủ định.",
+    "Loai": "Tự luận",
+    "Dang": "Viết mệnh đề bằng kí hiệu với mọi, tồn tại và mệnh đề phủ định của nó",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C1_B1_NB013",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C1_B1_NB005",
+        "muc_do": "NB"
+      }
+    ],
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi (ban An phat bieu, ban Binh phu dinh)"
+  },
+  {
+    "id": "L10_C1_TF_C",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Hai mệnh đề P, Q cụ thể: phủ định, kéo theo, đảo, tương đương",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC, moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_D",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chia hết",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC (dem so n), moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_E",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Mệnh đề chứa biến P(x)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC, moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_F",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Mệnh đề về biểu thức P(n) = n² − an + b với n tự nhiên",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC, moi y nhieu phat bieu dung/sai"
+  },
+  {
+    "id": "L10_C1_TF_G",
+    "content": "Mệnh đề và tập hợp",
+    "Loai": "Đúng sai",
+    "Dang": "Mệnh đề về khái niệm mới: số hoàn hảo",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; a) NB b) TH c) VD d) VDC, moi y nhieu phat bieu dung/sai"
   }
 ]

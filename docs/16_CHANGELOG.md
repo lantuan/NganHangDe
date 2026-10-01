@@ -9746,3 +9746,18 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - _c1_bac_chon: chỉ lấy mệnh đề chưa dùng (đổi chiều câu hỏi "đúng/sai" nếu cần); chỉ khi phần còn lại không đủ ghép một câu mới lấy lại mệnh đề đã dùng. Câu ∀, ∃ chọn chiều câu hỏi theo số mệnh đề đúng/sai còn lại.
 - TH014_MC_A_01, MC_B_01 (hàm gốc của cô): nhóm lấy xoay vòng thay cho random.randint(1, 17).
 - Test mới tests/test_xoay_vong_c1.py: trong một vòng, mỗi câu phải lấy 4 mệnh đề mới (chỉ câu cuối vòng được dùng lại); câu một mệnh đề và câu theo chủ đề dùng chung sổ.
+
+# Version 4.00 - 2026-10-01
+
+## Chương 1 Bài 1 (Mệnh đề): bổ sung từ tài liệu CĐ dạy thêm Toán 10 (file docx cô Lan gửi)
+- Đối chiếu từng bài trong tài liệu với YCCĐ của Bộ; chỉ lấy dạng nằm trong YCCĐ, mỗi câu một chủ đề, mệnh đề xoay vòng như các hàm TH014 đã khoá.
+- TH014: biến thể hỏi khác _02 (mệnh đề nào có mệnh đề ĐẢO đúng/sai) và _03 (mệnh đề nào là ĐỊNH LÍ) cho MC_C (chia hết), MC_E (tứ giác), MC_H (tam giác), MC_I (số thực); bổ sung mệnh đề vào kho từng chủ đề (hình thang nội tiếp, hình vuông, góc bằng tổng hai góc còn lại, a + b > 2...).
+- TH014 chủ đề mới "∀, ∃ về chia hết" (13 mệnh đề): MC_M_01, SA_I_01 (cùng Dang).
+- TH003: MC_A_04 (``P(a) đúng và P(b) sai''), MC_C_01 (a = √m + k, b = √m − k).
+- Tự luận hai ý hai đơn vị: NB001_TH003_TL_A_01, NB015_TH014_TL_A_01, NB013_NB005_TL_A_01 (có cac_y).
+- Đúng/Sai mới (a NB, b TH, c VD, d VDC): TF_C (hai mệnh đề P, Q), TF_D (∀, ∃ về chia hết, d đếm số n), TF_E (mệnh đề chứa biến P(x)), TF_F (P(n) = n² − an + b), TF_G (số hoàn hảo).
+- Đúng/Sai cũ nâng lên mỗi ý ≥ 3 phát biểu đúng, ≥ 3 phát biểu sai: TF_A_02, TF_B_02, TF_B_01 ý d (đếm m không âm, m thuộc [−5; 20]).
+- SỬA LỖI TF_A_01 nhóm C: phát biểu ``∃n ∈ N, n(n + 1) là số chính phương'' bị đánh SAI (thực ra đúng, n = 0); lời giải các ý ``∀ ... không là số chính phương'' dẫn sai ví dụ; câu ``∀n ∈ N sao cho'' sai ngữ pháp. Nhóm C nay do Python tự xác định chân trị (4 đúng, 4 sai); nhóm hợp số trước chỉ có 3 phát biểu.
+- TF_B_01: lời giải ý d viết ``k·m'' -> thay bằng hệ số cụ thể.
+- tests/test_tf_nhieu_dung_sai.py mở rộng cho chương 1; whitelist TH014 MC_C, MC_E, MC_H, MC_I (_01 - _03).
+- Không đưa vào ngân hàng (vượt YCCĐ hoặc sai bài): mệnh đề hai lượng từ (∀x∃y...), câu đố thang máy, nguyên lí Dirichlet; các bài tập hợp nằm ở Bài 2 (đã có).
