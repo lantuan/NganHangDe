@@ -28,7 +28,18 @@ lần đầu có thể chờ vài giây. <strong>.tex</strong> tải về là b�
 {% for de in danh_sach_de %}
 {% set bp = de.blueprint or {} %}
 <tr class="border-t border-outline-variant">
-<td class="p-stack-md">{{ bp.get("tieu_de") or "Đề không tên" }}</td>
+<td class="p-stack-md">{{ bp.get("tieu_de") or "Đề không tên" }}
+{# Cau thuoc dang "luyen tap them, ngoai YCCD" (docs/04 Ngoai le 4): bao de
+   giao vien quyet dinh giu hay bam "Lam de khac"/tu sua file .tex. #}
+{% set cb = bp.get("canh_bao_ngoai_yccd") or [] %}
+{% if cb %}
+<div class="mt-1 text-sm" style="color:#b45309">
+⚠ Có {{ cb|length }} câu luyện tập thêm (không có trong yêu cầu cần đạt của Bộ):
+{% for c in cb %}Phần {{ c.phan }} câu {{ c.cau }}{% if c.dang %} ({{ c.dang }}){% endif %}{% if not loop.last %}; {% endif %}{% endfor %}.
+Thầy/cô cân nhắc giữ hoặc thay câu này.
+</div>
+{% endif %}
+</td>
 <td class="p-stack-md">{{ de.lop }}</td>
 <td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
 <td class="p-stack-md">{{ bp.get("socau_ma_de") or 1 }}</td>

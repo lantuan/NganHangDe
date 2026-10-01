@@ -45,6 +45,31 @@ def so_suat_tu_luan(generator_id: str | None) -> int:
     return len(y) if y else 2
 
 
+def la_ngoai_yccd(row: dict | None) -> bool:
+    """Dạng "luyện tập thêm" - KHÔNG có trong yêu cầu cần đạt của Bộ (cô Lan
+    01/10/2026). Dòng Mapping ghi "ngoai_yccd": true. Vẫn được chọn vào đề như
+    thường, nhưng đề sinh ra kèm cảnh báo để giáo viên quyết định giữ hay bỏ
+    (docs/04 - Ngoại lệ 4)."""
+    return bool(row) and row.get("ngoai_yccd") is True
+
+
+def tim_dang_ngoai_yccd(lop: int, chuong_so, generator_id: str | None) -> dict | None:
+    """Dòng Mapping của generator_id (bỏ hậu tố biến thể _NN) nếu dạng đó là
+    "luyện tập thêm, ngoài YCCĐ"; không phải thì trả None. Lỗi đọc Mapping
+    cũng trả None - cảnh báo không được làm hỏng việc sinh đề."""
+    if not generator_id or chuong_so in (None, ""):
+        return None
+    try:
+        dong = load_mapping(lop, int(chuong_so))
+    except Exception:
+        return None
+    for row in dong:
+        if generator_id == row["id"] or generator_id.startswith(row["id"] + "_"):
+            if la_ngoai_yccd(row):
+                return row
+    return None
+
+
 def load_mapping(lop: int, chuong_so: int) -> list[dict]:
     file = MAPPING_DIR / f"toan{lop}" / f"L{lop}_C{chuong_so}.json"
     if not file.exists():

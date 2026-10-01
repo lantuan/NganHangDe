@@ -288,7 +288,7 @@
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đo chiều cao vật cao bằng hai góc nâng bất kì",
-    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m)"
   },
   {
     "id": "L10_C3_B6_VD036_TL_D",
@@ -447,6 +447,54 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B5_TH030_MC_E",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết tan hoặc cot, tính biểu thức đồng bậc của sin, cos (chia tử và mẫu cho cos hoặc sin) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_C",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết tan hoặc cot, tính biểu thức đồng bậc của sin, cos (chia tử và mẫu cho cos hoặc sin) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_F",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết tan ± cot, tính tan² + cot² (dùng tan.cot = 1) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_D",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết tan ± cot, tính tan² + cot² (dùng tan.cot = 1) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_G",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết sin hoặc cos, tính biểu thức a.sin² + b.cos² - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_E",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết sin hoặc cos, tính biểu thức a.sin² + b.cos² - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_B5_TH031_MC_C",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -524,6 +572,22 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - ban tra loi ngan (so thap phan) cua MC_I, cung mo ta dang de khong vao cung mot de theo co Lan; co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B5_TH031_MC_J",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tích tan, tổng cos của nhiều góc cách đều: ghép cặp hai góc phụ nhau, bù nhau - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_G",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tích tan, tổng cos của nhiều góc cách đều: ghép cặp hai góc phụ nhau, bù nhau - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_TF_F",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Đúng sai",
@@ -543,6 +607,34 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Nhận ra và dùng hệ thức định lí sin (chọn hệ thức đúng/sai, tỉ số hai cạnh)",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hỏi ngược định lí sin: từ sin A = a/2R (hoặc a.sinB = b.sinA) suy ra số đo góc A",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 biet a va R; _02 he thuc k.a.sinB = b.can n; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hỏi ngược định lí sin: từ sin A = a/2R (hoặc a.sinB = b.sinA) suy ra số đo góc A",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; dap so la so do goc; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tỉ lệ cạnh bằng tỉ lệ sin các góc: tính chu vi, tỉ số hai đường cao",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 chu vi tu he thuc giua cac sin; _02 ti so h_a/h_b; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tỉ lệ cạnh bằng tỉ lệ sin các góc: tính chu vi, tỉ số hai đường cao",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; chu vi nguyen; co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_TH034_MC_D",
@@ -577,7 +669,7 @@
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tính chiều cao, khoảng cách không đo trực tiếp được bằng định lí sin (có hình)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai; 01/10/2026 them bien the 04: thap Cham Po Klong Garai (2 giac ke, thap that 20,5 m)"
   },
   {
     "id": "L10_C3_B6_VD036_SA_E",
@@ -735,6 +827,34 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B6_TH032_MC_G",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, mot cong thuc; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH, dap so nguyen; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_I",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Định lí côsin trong hình bình hành: tính đường chéo, tính cạnh",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 biet hai canh va goc tinh duong cheo; _02 biet canh va hai duong cheo tinh canh ke; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Định lí côsin trong hình bình hành: tính đường chéo, tính cạnh",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; dap so nguyen; co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_B6_TH034_MC_G",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -754,6 +874,20 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Giải tam giác nhỏ tạo bởi đường trung tuyến hoặc đường phân giác (định lí côsin)",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_MC_E",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải tam giác biết hai cạnh và một góc không xen giữa: định lí côsin ra phương trình bậc hai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc TH: phuong trinh bac hai nghiem nguyen, loai nghiem am; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_SA_D",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giải tam giác biết hai cạnh và một góc không xen giữa: định lí côsin ra phương trình bậc hai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; dap so nguyen; co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_TH034_MC_H",
@@ -782,6 +916,20 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Tính bán kính đường tròn nội tiếp, ngoại tiếp khi đã cho diện tích",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_J",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Diện tích hình bình hành, hình thoi theo hai cạnh và góc xen giữa",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; S = 2S_ABD = AB.AD.sinA; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Diện tích hình bình hành, hình thoi theo hai cạnh và góc xen giữa",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; goc 30/150 do de dap so huu han; co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_VD036_MC_G",
@@ -897,6 +1045,140 @@
     "Loai": "Tự luận",
     "Dang": "Ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) chia bởi đường chéo thành hai tam giác biết ba cạnh (Heron hai lần)",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_N",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ngọn núi quan sát từ chân và nóc toà nhà: định lí sin rồi tam giác vuông",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD: tinh AC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_O",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Ngọn núi quan sát từ chân và nóc toà nhà: định lí sin rồi tam giác vuông",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC: chieu cao nui; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_P",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Ngọn núi quan sát từ chân và nóc toà nhà: định lí sin rồi tam giác vuông",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD: tinh AC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_Q",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Ngọn núi quan sát từ chân và nóc toà nhà: định lí sin rồi tam giác vuông",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC: chieu cao nui; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_J",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Ngọn núi quan sát từ chân và nóc toà nhà: định lí sin rồi tam giác vuông",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; a) VD goc + AC, b) VDC chieu cao; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_P",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đường tròn qua ba điểm (đĩa cổ bị vỡ, hồ nước hình tròn): tính bán kính, đường kính",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD: _01 dia co goc lon nhat, _02 ho BC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_Q",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đường tròn qua ba điểm (đĩa cổ bị vỡ, hồ nước hình tròn): tính bán kính, đường kính",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC: _01 ban kinh dia, _02 duong kinh ho; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_R",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đường tròn qua ba điểm (đĩa cổ bị vỡ, hồ nước hình tròn): tính bán kính, đường kính",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_S",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đường tròn qua ba điểm (đĩa cổ bị vỡ, hồ nước hình tròn): tính bán kính, đường kính",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_K",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Đường tròn qua ba điểm (đĩa cổ bị vỡ, hồ nước hình tròn): tính bán kính, đường kính",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; _01 dia co, _02 ho; a) VD b) VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_R",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cây bị gãy, ngọn chạm đất: định lí sin tính các đoạn thân, chiều cao trước khi gãy",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD: doan AC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_S",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cây bị gãy, ngọn chạm đất: định lí sin tính các đoạn thân, chiều cao trước khi gãy",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC: chieu cao truoc khi gay; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_T",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cây bị gãy, ngọn chạm đất: định lí sin tính các đoạn thân, chiều cao trước khi gãy",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VD; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_U",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cây bị gãy, ngọn chạm đất: định lí sin tính các đoạn thân, chiều cao trước khi gãy",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_L",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Cây bị gãy, ngọn chạm đất: định lí sin tính các đoạn thân, chiều cao trước khi gãy",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; a) VD AC, b) VDC chieu cao; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_T",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cây cao nhìn từ một điểm trên cao: tam giác vuông rồi định lí sin",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC: chieu cao cay; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_V",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cây cao nhìn từ một điểm trên cao: tam giác vuông rồi định lí sin",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; muc VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_M",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Cây cao nhìn từ một điểm trên cao: tam giác vuông rồi định lí sin",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; a) VD AB va goc, b) VDC chieu cao; co Lan duyet lai"
   },
   {
     "id": "L10_C3_TF_I",

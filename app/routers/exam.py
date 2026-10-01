@@ -334,6 +334,9 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
                 # khe hon ca luong chat (form tao de nhanh gui true) -> de
                 # goc ra duoc ma bam "Lam de khac" lai bao loi.
                 "cho_phep_thieu": payload.cho_phep_thieu,
+                # Cau "luyen tap them, ngoai YCCD" (docs/04 Ngoai le 4) de
+                # trang De da tao / chat bao cho giao vien.
+                "canh_bao_ngoai_yccd": result.get("canh_bao_ngoai_yccd") or [],
             },
         )
         if de_id:
@@ -436,7 +439,8 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
         loai_he_so=de_cu.get("loai_he_so"),
         ki_thi=de_cu.get("ki_thi"),
         pham_vi_chuong=de_cu.get("pham_vi_chuong"),
-        blueprint=blueprint,
+        # De moi co bo cau khac -> canh bao "ngoai YCCD" tinh lai theo de moi.
+        blueprint={**blueprint, "canh_bao_ngoai_yccd": result.get("canh_bao_ngoai_yccd") or []},
     )
     if not de_id_moi:
         raise HTTPException(500, "Da sinh duoc de moi nhung khong luu duoc. Thu lai.")
@@ -455,6 +459,7 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
             "de_id": de_id_moi,
             "url_lam_bai": f"/lam-bai/{de_id_moi}",
             "so_cau_da_sinh": result.get("so_cau_da_sinh"),
+            "canh_bao_ngoai_yccd": result.get("canh_bao_ngoai_yccd") or [],
         },
     }
 
@@ -470,7 +475,11 @@ def de_gan_nhat_endpoint(conversation_id: str):
     de = history_service.lay_de_gan_nhat(conversation_id)
     if de is None or not de.get("id"):
         raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
-    return {"success": True, "de_id": de["id"]}
+    # Chi bao canh bao "ngoai YCCD" cho de cua giao vien - hoc sinh khong can.
+    canh_bao = []
+    if de.get("role") == "teacher":
+        canh_bao = (de.get("blueprint") or {}).get("canh_bao_ngoai_yccd") or []
+    return {"success": True, "de_id": de["id"], "canh_bao_ngoai_yccd": canh_bao}
 
 
 # ======================================================

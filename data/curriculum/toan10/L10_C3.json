@@ -37,7 +37,31 @@
       "gia_tri_luong_giac",
       "may_tinh_cam_tay"
     ],
-    "difficulty_rank": 2
+    "difficulty_rank": 2,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Biết tan hoặc cot, tính biểu thức đồng bậc của sin, cos (chia tử và mẫu cho cos hoặc sin)",
+        "mapping_id": [
+          "L10_C3_B5_TH030_MC_E",
+          "L10_C3_B5_TH030_SA_C"
+        ]
+      },
+      {
+        "mo_ta": "Biết tan ± cot, tính tan² + cot² (dùng tan.cot = 1)",
+        "mapping_id": [
+          "L10_C3_B5_TH030_MC_F",
+          "L10_C3_B5_TH030_SA_D"
+        ]
+      },
+      {
+        "mo_ta": "Biết sin hoặc cos, tính biểu thức a.sin² + b.cos²",
+        "mapping_id": [
+          "L10_C3_B5_TH030_MC_G",
+          "L10_C3_B5_TH030_SA_E"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C3_B5_TH031",
@@ -58,7 +82,17 @@
       "goc_phu_nhau",
       "goc_bu_nhau"
     ],
-    "difficulty_rank": 2
+    "difficulty_rank": 2,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Tích tan, tổng cos của nhiều góc cách đều: ghép cặp hai góc phụ nhau, bù nhau",
+        "mapping_id": [
+          "L10_C3_B5_TH031_MC_J",
+          "L10_C3_B5_TH031_SA_G"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C3_B6_TH032",

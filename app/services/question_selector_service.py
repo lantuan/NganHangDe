@@ -30,7 +30,7 @@ import random
 from collections import Counter
 import re
 
-from app.services.mapping_service import load_mapping, phan_loai_cau
+from app.services.mapping_service import la_ngoai_yccd, load_mapping, phan_loai_cau
 
 _CHUONG_PATTERN = re.compile(r"^L\d+_C(\d+)_")
 
@@ -435,6 +435,8 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
                 }
                 if "so_suat" in item:
                     muc.update({"cac_muc_do": item["cac_muc_do"], "so_suat": item["so_suat"]})
+                if la_ngoai_yccd(c):
+                    muc["ngoai_yccd"] = True
                 ket_qua.append(muc)
 
     # Sap xep lai theo dung thu tu Phan I/II/III/IV cua Phieu TLTN chuan

@@ -1070,6 +1070,14 @@ ${html}
 
         // Bam Co/Khong o khung "hoi lam bai truc tiep" - doi noi dung
         // ngay tai cho, khong goi lai server, khong tinh AI token.
+        // Canh bao cau "luyen tap them, ngoai YCCD" (docs/04 Ngoai le 4) - chi
+        // co du lieu khi de cua giao vien (may chu loc san o /de-gan-nhat).
+        function htmlCanhBaoNgoaiYCCD(ds) {
+            if (!ds || !ds.length) return "";
+            const cac = ds.map(c => "Phần " + c.phan + " câu " + c.cau + (c.dang ? " (" + c.dang + ")" : "")).join("; ");
+            return `<p style="color:#b45309">⚠ Đề có ${ds.length} câu luyện tập thêm (không có trong yêu cầu cần đạt của Bộ): ${cac}. Thầy/cô cân nhắc giữ hoặc làm đề khác.</p>`;
+        }
+
         function chonLamBai(idHoi, deId, dongY) {
             const box = document.getElementById(idHoi);
             if (!box) return;
@@ -1154,10 +1162,11 @@ ${html}
 
                 let htmlHoi = "";
                 let deId = null;
+                let canhBaoLT = [];
                 try {
                     const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
                     const dataDe = await deGanNhat.json();
-                    if (dataDe.success) deId = dataDe.de_id;
+                    if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; }
                 } catch (e) { /* bo qua, khong co nut lam bai truc tiep neu loi */ }
 
                 // Dung URL on dinh /api/exam/tai-de/{de_id} khi da co deId
@@ -1186,7 +1195,7 @@ ${html}
                 box.innerHTML =
                     `<p>${aiCaption}</p>` +
                     `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
-                    htmlHoi;
+                    htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi;
 
                 try {
                     await fetch("/api/chat/luu-de-truc-tiep", {
@@ -1370,10 +1379,11 @@ ${html}
 
                     let htmlHoi = "";
                     let deId = null;
+                    let canhBaoLT = [];
                     try {
                         const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
                         const dataDe = await deGanNhat.json();
-                        if (dataDe.success) deId = dataDe.de_id;
+                        if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; }
                     } catch (e) { /* bo qua */ }
 
                     // URL on dinh (song lai duoc sau reload) khi co deId,
@@ -1400,7 +1410,7 @@ ${html}
                     formEl.outerHTML =
                         `<div><p>${aiCaption}</p>` +
                         `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
-                        htmlHoi + `</div>`;
+                        htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi + `</div>`;
 
                     try {
                         await fetch("/api/chat/luu-de-truc-tiep", {

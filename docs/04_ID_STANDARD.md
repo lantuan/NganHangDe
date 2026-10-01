@@ -190,6 +190,27 @@ Mã nguồn: mapping_service.cac_y_tu_luan / so_suat_tu_luan,
 question_selector_service._ghep_tu_luan_nhieu_y. Kiểm thử:
 tests/test_tu_luan_nhieu_y.py, tests/test_mapping_curriculum.py.
 
+# Ngoại lệ 4: Dạng "luyện tập thêm" - ngoài yêu cầu cần đạt (YCCĐ)
+
+Chốt 01/10/2026 (cô Lan): bài toán hay nhưng YCCĐ của Bộ không có thì VẪN đưa
+vào ngân hàng, nhưng phải đánh dấu để giáo viên biết và tự quyết định.
+
+- KHÔNG tạo curriculum ID mới (số thứ tự NB/TH/VD nối liền giữa các chương, và
+  Blueprint sẽ tự chia suất cho mục mới). Dạng mới gắn vào mục Curriculum gần
+  nhất, giữ đúng mức độ của mục đó (thường là TH, số liệu đơn giản).
+- Dòng Mapping ghi thêm "ngoai_yccd": true và ghi_chu bắt đầu bằng
+  "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo ...".
+- Mục Curriculum tương ứng ghi "dang_luyen_tap_them": [{"mo_ta", "mapping_id"}]
+  và "ghi_chu_luyen_tap_them" (chỉ để tra cứu, Blueprint không đọc).
+- Khi ra đề: dạng này được chọn như thường. Kết quả sinh đề có
+  "canh_bao_ngoai_yccd": [{phan, cau, generator_id, dang}] (theo mã đề đầu),
+  lưu vào blueprint của de_da_sinh; trang "Đề đã tạo" và khung chat (đề của giáo
+  viên) hiện cảnh báo "câu luyện tập thêm"; file .tex bản giáo viên có dòng
+  chú thích "% LUU Y GIAO VIEN ..." trước câu đó (bản học sinh không có).
+- Hàm tra: mapping_service.la_ngoai_yccd(row), tim_dang_ngoai_yccd(lop, chuong, generator_id).
+- Ví dụ: L10_C3_B5_TH030_MC_E (biểu thức đồng bậc biết tan/cot), TH030_MC_F,
+  TH030_MC_G, TH031_MC_J và các bản SA tương ứng.
+
 ---
 
 # PPCT

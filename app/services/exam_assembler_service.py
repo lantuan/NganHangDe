@@ -30,6 +30,7 @@ from app.services.question_selector_service import (
 )
 from app.services.exam_blueprint_service import build_blueprint, BlueprintError
 from app.services.hinh_ve_service import dich_hinh_trong_khoi
+from app.services.mapping_service import tim_dang_ngoai_yccd
 from app.services.generator_service import (
     call_generator, GeneratorNotFoundError, LoaiCauSaiError, CauHongError,
 )
@@ -223,6 +224,11 @@ def _sinh_pdf_tu_danh_sach(
     cac_khoi_ma_de = []
     danh_sach_dap_an: list[dict] = []
     so_cau_thieu = 0
+    # Câu thuộc dạng "luyện tập thêm, ngoài YCCĐ" (cô Lan 01/10/2026): vẫn vào
+    # đề nhưng báo cho giáo viên (trang Đề đã tạo + dòng chú thích % trong .tex
+    # bản giáo viên) để họ quyết định giữ hay làm đề khác. Ghi theo mã đề đầu.
+    canh_bao_ngoai_yccd: list[dict] = []
+    so_la_ma = {ma: la for ma, la, _ in CAC_PHAN_DE}
 
     for chi_so in range(so_ma_de):
         ma_de = tinh_ma_de(lop, chi_so + 1)
@@ -254,6 +260,20 @@ def _sinh_pdf_tu_danh_sach(
                 )
                 theo_phan.setdefault(loai, []).append(ket_qua["latex_block"])
                 so_thu_tu += 1
+                dong_lt = tim_dang_ngoai_yccd(lop, item.get("chuong_so"), ket_qua["generator_id"])
+                if dong_lt:
+                    if role == "teacher":
+                        theo_phan[loai][-1] = (
+                            "% LUU Y GIAO VIEN: cau nay thuoc dang LUYEN TAP THEM - khong co trong "
+                            "yeu cau can dat cua Bo (" + dong_lt["id"] + "). Giu hoac thay tuy GV.\n"
+                            + theo_phan[loai][-1])
+                    if chi_so == 0:
+                        canh_bao_ngoai_yccd.append({
+                            "phan": so_la_ma.get(loai, loai),
+                            "cau": len(theo_phan[loai]),
+                            "generator_id": ket_qua["generator_id"],
+                            "dang": dong_lt.get("Dang"),
+                        })
                 try:
                     dap_an = trich_dap_an(ket_qua["latex_block"])
                     # Dich hinh ve ra anh NGAY LUC SINH DE (may dang chay
@@ -369,6 +389,7 @@ def _sinh_pdf_tu_danh_sach(
             "pdf_path": str(dethi_pdf_path),
             "pdf_loigiai_path": str(loigiai_pdf_path),
             "dap_an_json_path": str(dap_an_json_path),
+            "canh_bao_ngoai_yccd": canh_bao_ngoai_yccd,
         }
 
     # Học sinh: chỉ xuất đề thi, luôn ẩn lời giải
@@ -389,6 +410,7 @@ def _sinh_pdf_tu_danh_sach(
         "pdf_path": str(pdf_path),
         "pdf_loigiai_path": None,
         "dap_an_json_path": str(dap_an_json_path),
+        "canh_bao_ngoai_yccd": canh_bao_ngoai_yccd,
     }
 def generate_exam_pdf(
     lop: int,

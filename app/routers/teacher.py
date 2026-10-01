@@ -177,6 +177,7 @@ async def ra_de_submit(
             "cau_truc_tu_hoc_sinh": None,
             "socau_ma_de": socau_ma_de,
             "cho_phep_thieu": bool(cho_phep_thieu),
+            "canh_bao_ngoai_yccd": ket_qua.get("canh_bao_ngoai_yccd") or [],
         },
     )
     if not de_id:

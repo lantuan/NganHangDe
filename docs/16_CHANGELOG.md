@@ -9620,3 +9620,34 @@ Theo docs/27: moi dang moi co _01 (theo cau giao an) va _02 (hoi theo cach khac)
 # Version 3.88 - 2026-10-01
 
 - Hình cù lao (L10_C3_B6_VD036_TL_B_01, `_hinh_cu_lao`): nhãn số đo góc A, B đặt trên đường phân giác nên luôn nằm giữa góc khi đổi số liệu (trước đây dùng độ lệch cố định nên bị lệch). Tam giác vẽ theo góc "thu nhỏ" 47 + 0,5(góc − 60) độ: góc lớn hơn thì vẽ lớn hơn, nhưng không quá hẹp để còn chỗ ghi nhãn (hình minh hoạ).
+
+# Version 3.89 - 2026-10-01
+
+Bổ sung chương 3 lớp 10 theo hai tài liệu cô Lan gửi (C3-B1 Giá trị lượng giác, C3-B2 Hệ thức lượng).
+
+## Cơ chế "luyện tập thêm, ngoài YCCĐ" (docs/04 Ngoại lệ 4)
+- Mapping "ngoai_yccd": true + ghi_chu "LUYEN TAP THEM ..."; Curriculum "dang_luyen_tap_them" (không tạo ID mới, ma trận không đổi).
+- mapping_service.la_ngoai_yccd / tim_dang_ngoai_yccd; question_selector gắn cờ ngoai_yccd; exam_assembler trả "canh_bao_ngoai_yccd" và chèn chú thích % vào .tex bản giáo viên.
+- Lưu cảnh báo vào blueprint de_da_sinh (generate-pdf-auto, lam-de-khac, /gv/ra-de); /api/exam/de-gan-nhat trả cảnh báo cho đề giáo viên; trang "Đề đã tạo" và chat hiện cảnh báo.
+- Test: tests/test_ngoai_yccd.py.
+
+## Bài 5 - luyện tập thêm (ngoai_yccd)
+- TH030_MC_E (_01 tan, _02 cot) / SA_C: biểu thức đồng bậc. TH030_MC_F (_01, _02 hỏi ngược) / SA_D: tan ± cot -> tan² + cot². TH030_MC_G / SA_E: a.sin² + b.cos². TH031_MC_J (_01 tích tan, _02 tổng cos) / SA_G.
+
+## Bài 6 - mức TH (trong YCCĐ, số liệu đơn giản)
+- TH032_MC_G / SA_D ngược trung tuyến; TH033_MC_D (_01 a và R, _02 k.a.sinB = b.√n) / SA_C ngược định lí sin; TH035_MC_E / SA_D côsin ra phương trình bậc hai; TH033_MC_E (_01 chu vi, _02 h_a/h_b) / SA_D tỉ lệ sin; TH032_MC_I (_01 đường chéo, _02 cạnh từ hai đường chéo) / SA_F hình bình hành; TH034_MC_J / SA_E diện tích hình bình hành, hình thoi.
+
+## VD036 - thực tiễn (tách VD / VDC, có hình)
+- Núi nhìn từ chân và nóc toà nhà: MC_N, SA_P (VD), MC_O, SA_Q (VDC), TL_J.
+- Đường tròn qua ba điểm (đĩa cổ, hồ nước): MC_P, SA_R (VD), MC_Q, SA_S (VDC), TL_K (_01 đĩa, _02 hồ).
+- Cây bị gãy: MC_R, SA_T (VD), MC_S, SA_U (VDC), TL_L.
+- Cây cao nhìn từ điểm cao: MC_T, SA_V (VDC), TL_M.
+- Tháp chính Pô Klông Garai (cao thật 20,5 m - vietnamplus.vn): biến thể MC_D_04, SA_D_04 (có chiều cao giác kế).
+
+## Lỗi trong tài liệu gốc (đã báo cô Lan)
+- C3-B1 câu 35: cot α = -1/2 với 0° < α < 180° thì α tù, cos α = -√5/5 (tài liệu chọn ±√5/5). Câu 36: tan α = 3 thì α nhọn, cos α = √10/10 (tài liệu chọn ±).
+- C3-B1 câu 18: đáp án đúng là tan α < 0 (A), tài liệu chọn C. Câu 12, 15, 22: lời giải mâu thuẫn với đáp án đã chọn.
+- C3-B1 phần Đúng/Sai: "cos α = -3/4 (0° < α < 90°)" giả thiết mâu thuẫn; câu C = √(sin²+cos⁴)+... lời giải ra √193/8 nhưng mệnh đề ghi /9.
+- C3-B2 câu 4: đề C = 153° nhưng lời giải dùng 135°. Câu 20: lời giải viết -2ab.cosA (đúng là -2bc.cosA).
+- C3-B2 phần III, tháp CD (AB = 24 m, 63°, 48°): kết quả đúng ≈ 61,4 m, lời giải ghi 68,91 m (lấy nhầm AD). Phân giác AB = 2, AC = 3, A = 60°: AD = 6√3/5, tài liệu ghi √3/5. Trạm nước sạch: hai lời giải (MC và TLN) cho hai số khác nhau (15,56 và 20,12 km).
+- C3-B2 phần Đúng/Sai: lẫn đơn vị (a = 6 m nhưng p = 16 cm; a = 8 dm nhưng b ≈ 5,26 cm).
