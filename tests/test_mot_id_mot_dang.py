@@ -52,7 +52,6 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_VD020_SA_A",   # khong thuoc nao / moi nguoi thuoc it nhat mot -> ca hai / chi thuoc A (kho boi canh)
     "L10_C1_B2_VD020_MC_A",   # khong thuoc nao / tim tong so / it nhat mot / tim so thuoc ca hai (kho boi canh)
     # tu de on tap cuoi chuong 1:
-    "L10_C1_B1_TH014_MC_A",   # 17 nhom co dinh / menh de luong tu tham so do Python chon
     # tu bai tap trac nghiem Bai 3 chuong 2 (BPT bac nhat hai an):
     "L10_C2_B3_NB023_MC_A",   # chon diem thuoc mien nghiem / cho diem, chon bat phuong trinh
     "L10_C2_B3_NB025_MC_A",   # tien - gio cong - khoi luong / protein, cuoc goi, lam them, thue xe
@@ -138,7 +137,6 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH032_MC_D",   # he thuc canh -> goc: dang khai trien / dang tich
     "L10_C3_B6_TH033_TL_A",   # cho A, B / cho B, C (tu tinh A) roi dinh li sin
     "L10_C1_B1_TH014_MC_D",   # _01 menh de va menh de dao, _02 menh de tuong duong
-    "L10_C1_B1_TH014_MC_F",   # _01 dung sai cua P va phu dinh, _02 chon menh de dung/sai
     "L10_C1_B1_TH014_MC_G",   # _01 cho san dung/sai, _02 menh de cu the
     "L10_C1_B1_TH014_SA_C",   # _01 cho san dung/sai, _02 menh de cu the
     "L10_C3_B6_TH034_MC_A",   # chon cong thuc theo du kien / cong thuc nao dung-sai

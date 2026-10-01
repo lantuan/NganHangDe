@@ -9727,3 +9727,14 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 ## Kiểm tra các hàm cũ của TH003 / TH014
 - TH014_MC_A_01, MC_B_01: lời giải chỉ ghi "Khẳng định đúng là phương án đã chọn" (MC_B hỏi khẳng định SAI mà vẫn ghi vậy) -> nay có lời giải theo từng nhóm (_c1_ly_th014_dung / _c1_ly_th014_sai).
 - TH003_TL_A_01, TL_B_01: TL_answer_const đưa chuỗi qua vlatex nên đáp án in thành \mathtt{\text{\$...}} (rác trên web) -> dùng TL_answer_text với đáp án đã làm sạch (_c1_ds_tl). TL_A_01: ngoặc kép đặt trong $...$ in thành dấu phẩy trên -> đưa ra ngoài.
+
+# Version 3.98 - 2026-10-01
+
+## Chương 1 TH014: một câu chỉ hỏi MỘT chủ đề (cô Lan)
+"Trong một câu chỉ hỏi về một chủ đề duy nhất, biến thể của nó thôi... các đơn vị kiến thức khác nhau sẽ là các dạng A, B... khác nhau."
+- Kho mệnh đề kéo theo/tương đương chia theo chủ đề: tứ giác (MC_E, SA_A), tam giác (MC_H, SA_D), chia hết - chẵn lẻ (MC_C, SA_E), đẳng thức - bất đẳng thức - phương trình với số thực (MC_I, SA_F). MC và SA cùng chủ đề ghi cùng "Dang".
+- Kho mệnh đề chứa ∀, ∃ chia theo chủ đề: chẵn lẻ (MC_J, SA_B), bất đẳng thức trên R (MC_K, SA_G), nghiệm của phương trình trên tập số (MC_L, SA_H).
+- Dạng biết A, B, C đúng/sai bản mệnh đề cụ thể (MC_G_02, SA_C_02, TL TH003_TH014): A, B, C cùng một loại mệnh đề về số.
+- Bỏ các biến thể trộn chủ đề: TH014_MC_A_02, TH014_MC_F_02; TH014_MC_C_01 làm lại (chỉ chia hết, chẵn lẻ).
+- TH003_MC_A_02: bốn phương án cùng một loại mệnh đề về số.
+- Các câu chỉ có MỘT mệnh đề (MC_D, MC_F_01, TL NB010_TH014, TL NB013_TH014) lấy xoay vòng trên cả kho.

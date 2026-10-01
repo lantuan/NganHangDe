@@ -134,7 +134,8 @@
     "id": "L10_C1_B1_TH014_MC_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "kí hiệu tồn tại, với mọi"
+    "Dang": "kí hiệu tồn tại, với mọi",
+    "ghi_chu": "01/10/2026 bo bien the _02 (tron nhieu chu de - thay bang MC_J, MC_K, MC_L)"
   },
   {
     "id": "L10_C1_B1_TH014_MC_B",
@@ -147,8 +148,8 @@
     "id": "L10_C1_B1_TH014_MC_C",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định tính đúng sai của mệnh đề kéo theo",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 1 cua co Lan; co Lan duyet lai"
+    "Dang": "Mệnh đề kéo theo, tương đương về chia hết, chẵn lẻ của số tự nhiên: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 1 cua co Lan; co Lan duyet lai; 01/10/2026 lam lai: chi chu de chia het, chan le (truoc tron nhieu chu de)"
   },
   {
     "id": "L10_C1_B1_TH014_MC_D",
@@ -161,29 +162,29 @@
     "id": "L10_C1_B1_TH014_MC_E",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính đúng sai của mệnh đề kéo theo, mệnh đề đảo, tương đương, phủ định (định lí, tính chất đã học)",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; chon menh de dung/sai trong 4 menh de keo theo, tuong duong, phu dinh (khac MC_C chi co keo theo)"
+    "Dang": "Mệnh đề kéo theo, tương đương về tứ giác: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tu giac"
   },
   {
     "id": "L10_C1_B1_TH014_SA_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tính đúng sai của mệnh đề kéo theo, mệnh đề đảo, tương đương, phủ định (định lí, tính chất đã học)",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; dem so menh de dung"
+    "Dang": "Mệnh đề kéo theo, tương đương về tứ giác: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tu giac (cung MC_E)"
   },
   {
     "id": "L10_C1_B1_TH014_MC_F",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tính đúng sai của mệnh đề chứa kí hiệu với mọi, tồn tại và mệnh đề phủ định (mức đơn giản)",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; _01 tinh dung sai cua P va menh de phu dinh; _02 chon menh de dung/sai co ca menh de phu dinh"
+    "Dang": "Cho một mệnh đề chứa kí hiệu với mọi, tồn tại: tính đúng sai của mệnh đề và mệnh đề phủ định",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; chi con _01 (bo _02 tron chu de 01/10/2026)"
   },
   {
     "id": "L10_C1_B1_TH014_SA_B",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tính đúng sai của mệnh đề chứa kí hiệu với mọi, tồn tại và mệnh đề phủ định (mức đơn giản)",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; dem so menh de dung (khac VD014_SA_B: menh de muc VD)"
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chẵn lẻ: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de chan le (cung MC_J)"
   },
   {
     "id": "L10_C1_B1_TH014_MC_G",
@@ -198,6 +199,76 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Biết A, B, C đúng hay sai: tính đúng sai của mệnh đề kéo theo, tương đương ghép từ A, B, C",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; _01 cho san A, B, C dung/sai; _02 A, B, C la menh de cu the ve so; dem so menh de dung"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_H",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo, tương đương về tam giác: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tam giac"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề kéo theo, tương đương về tam giác: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tam giac"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_E",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề kéo theo, tương đương về chia hết, chẵn lẻ của số tự nhiên: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de chia het"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_I",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề kéo theo, tương đương về đẳng thức, bất đẳng thức, phương trình với số thực: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de so thuc"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_F",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề kéo theo, tương đương về đẳng thức, bất đẳng thức, phương trình với số thực: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de so thuc"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_J",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chẵn lẻ: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de chan le"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_K",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về bất đẳng thức trên R: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de bat dang thuc"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_G",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về bất đẳng thức trên R: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de bat dang thuc"
+  },
+  {
+    "id": "L10_C1_B1_TH014_MC_L",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về nghiệm của phương trình trên tập số: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de phuong trinh"
+  },
+  {
+    "id": "L10_C1_B1_TH014_SA_H",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về nghiệm của phương trình trên tập số: xét tính đúng sai",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de phuong trinh"
   },
   {
     "id": "L10_C1_NB010_TH014_TL_A",
