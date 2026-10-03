@@ -9854,3 +9854,9 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 
 - Sửa 03/10/2026 (trang làm bài tiếng Anh): nút Đúng/Sai ở câu Đúng/Sai hiện 'True / False' (từ không dấu 'Sai' nay được dịch khi cả đoạn khớp từ điển — i18n_service.dich_doan), kết quả từng ý hiện 'Part A, Part B...' thay vì 'ý A'.
 - Chốt lại 03/10/2026: nút ở câu Đúng/Sai hiện True / False (khớp đề bài "true or false"); kết quả từng câu vẫn 'Correct'. Nút Đúng có 1 ký tự rỗng U+200B ở cuối trong lam_bai.html để từ điển dịch riêng thành True.
+
+# Version 4.10 - 2026-10-03
+
+## PDF đề / lời giải tải về bằng tiếng Anh khi trang ở English
+- Trước đó nút tải PDF luôn trả bản tiếng Việt vì đề trực tuyến chỉ có bản Anh của đáp án. Nay `.tex` tiếng Anh cũng được ghi cạnh `.tex` tiếng Việt (cùng tên, data/temp_en/), và các đường dẫn /api/exam/tai-de, /tai-loigiai, /export-loigiai chọn bản Anh theo cookie `lang`, biên dịch PDF khi bấm tải lần đầu (không làm chậm lúc tạo đề). Đề cũ / chương chưa dịch: vẫn trả PDF tiếng Việt.
+- Test: test_tai_de_pdf_hoc_sinh_ra_ban_tieng_anh_khi_trang_english.

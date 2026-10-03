@@ -409,10 +409,19 @@ def _sinh_pdf_tu_danh_sach(
     )
 
     if chi_dap_an:
+        # Không biên dịch PDF (tốn thời gian): chỉ ghi .tex; PDF được biên dịch khi người dùng bấm tải
+        # (app/routers/exam.py, _pdf_en_tu_tex). Tên tệp .tex giống tệp .tex của bản Việt (xem _sinh_kem_tieng_anh).
+        gv = role == "teacher"
+        noi_tex = build_latex_document(
+            tieu_de_an_toan, noi_dung, lop=lop, role=role,
+            ex_test_option="loigiai" if gv else "dethi", lang=lang,
+        )
+        tex_chi = save_tex_file(noi_tex, f"{filename}_loigiai" if gv else filename, lang)
         return {
             "so_cau_da_sinh": len(danh_sach_id) - so_cau_thieu,
             "so_cau_thieu": so_cau_thieu,
             "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
+            "tex_path": str(tex_chi),
             "dap_an_json_path": str(dap_an_json_path),
             "seed": seed,
         }
@@ -478,6 +487,11 @@ def _sinh_pdf_tu_danh_sach(
     }
 
 
+def duong_tex_en(tex_vi) -> Path:
+    """Tệp .tex tiếng Anh ứng với tệp .tex tiếng Việt của đề (cùng tên, trong data/temp_en/)."""
+    return TEMP_DIR_EN / Path(tex_vi).name
+
+
 def duong_dapan_en(dapan_vi) -> Path:
     """Tệp đáp án tiếng Anh ứng với tệp đáp án tiếng Việt (cùng tên, nằm trong data/temp_en/).
     Không cần ghi vào cơ sở dữ liệu: trang làm bài suy ra đường dẫn từ tệp đáp án tiếng Việt của đề."""
@@ -508,6 +522,8 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
             dich.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(kq["tieng_anh"]["dap_an_json_path"], dich)
             kq["dapan_en_path"] = str(dich)
+            if kq["tieng_anh"].get("tex_path") and kq.get("tex_path"):
+                shutil.copyfile(kq["tieng_anh"]["tex_path"], duong_tex_en(kq["tex_path"]))
     except Exception as e:                           # noqa: BLE001
         kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
     finally:

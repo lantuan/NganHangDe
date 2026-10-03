@@ -35,6 +35,7 @@ parallel (collinear) / same direction / opposite direction.
 ## Trang làm bài trực tuyến của học sinh (03/10/2026)
 - Nền là tiếng Việt: đề luôn được CHỌN và SINH trên bản Việt (cùng ID hàm, cùng hạt giống). `/api/exam/generate-pdf-auto` và `/api/exam/lam-de-khac` gọi `generate_exam_pdf_auto(..., dapan_tieng_anh=True)`: sinh thêm bản Anh của đúng đề đó (cùng ID + seed), CHỈ lấy tệp đáp án (không biên dịch PDF), đặt ở `data/temp_en/<cùng tên tệp đáp án Việt>` (không ghi vào cơ sở dữ liệu nên không dính ràng buộc `file_de_loai_file_check`).
 - `GET /api/exam/quiz/{de_id}` và `POST /api/exam/grade`: cookie `lang=en` và có tệp đáp án Anh thì dùng bản Anh (đề, lời giải, tên phần "PART I..."), ngược lại dùng bản Việt (đề cũ, chương chưa dịch).
+- PDF tải về: `generate_exam_pdf_auto(dapan_tieng_anh=True)` còn ghi `.tex` tiếng Anh (chưa biên dịch) vào `data/temp_en/` CÙNG TÊN với `.tex` tiếng Việt (`duong_tex_en`). `GET /api/exam/tai-de/{id}`, `/tai-loigiai/{id}`, `/export-loigiai` khi cookie `lang=en` và có `.tex` tiếng Anh thì biên dịch (lần đầu bấm tải; cache ở `data/exports_en/`) và trả PDF tiếng Anh (`_pdf_en_tu_tex`: đổi `[dethi]`/`[loigiai]` của `ex_test_en`); không có thì trả bản Việt.
 - Đề tạo TRƯỚC khi có tính năng này không có bản Anh -> vẫn tiếng Việt; cần tạo đề mới / bấm "Làm đề khác".
 - Ô "Tạo kèm đề tiếng Anh tương ứng" (PDF cho giáo viên) giữ nguyên, giáo viên tự chọn.
 - Lưu ý: bản Anh dùng dấu thập phân "." nên đáp án SA của đề Anh là "3.5" (đề Việt "3,5").

@@ -39,8 +39,8 @@ from app.services.gia_su_service import TEN_PHAN, TEN_PHAN_EN
 from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dang_co_ham
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
-from app.services.pdf_service import compile_pdf, PdfCompileError
-from app.services.exam_assembler_service import duong_dapan_en
+from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
+from app.services.exam_assembler_service import duong_dapan_en, duong_tex_en
 from app.services.i18n_service import lay_ngon_ngu
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -505,11 +505,42 @@ def de_gan_nhat_endpoint(conversation_id: str):
 # (khac voi URL.createObjectURL truoc day, se mat khi reload).
 # ======================================================
 
+def _pdf_en_tu_tex(de: dict, ban: str) -> Path | None:
+    """PDF TIẾNG ANH của đề (ban = "de" | "loigiai") cho trang đang ở English, biên dịch khi cần từ .tex
+    tiếng Anh nằm cạnh .tex tiếng Việt (data/temp_en/, cùng tên) rồi lưu lại. Không có .tex tiếng Anh
+    (đề cũ, chương chưa dịch) -> None, nơi gọi dùng bản tiếng Việt."""
+    tex_vi = (de.get("files") or {}).get("tex")
+    if not tex_vi:
+        return None
+    tex_en = duong_tex_en(tex_vi)
+    if not tex_en.exists():
+        return None
+    goc = tex_en.stem[:-len("_loigiai")] if tex_en.stem.endswith("_loigiai") else tex_en.stem
+    ten = goc if ban == "de" else goc + "_loigiai"
+    pdf = EXPORTS_DIR_EN / (ten + ".pdf")
+    if pdf.exists():
+        return pdf
+    dang, can = ("[loigiai]{ex_test_en}", "[dethi]{ex_test_en}") if ban == "de" else ("[dethi]{ex_test_en}", "[loigiai]{ex_test_en}")
+    noi_dung = tex_en.read_text(encoding="utf-8").replace(dang, can)
+    if can not in noi_dung:
+        return None
+    tex_moi = save_tex_file(noi_dung, ten, "en")
+    try:
+        return compile_pdf(tex_moi, "en")
+    except PdfCompileError as e:
+        print("LOI BIEN DICH PDF TIENG ANH:", e)
+        return None
+
+
 @router.get("/tai-de/{de_id}")
-def tai_de_endpoint(de_id: str):
+def tai_de_endpoint(request: Request, de_id: str):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
+    if lay_ngon_ngu(request) == "en":
+        pdf_en = _pdf_en_tu_tex(de, "de")
+        if pdf_en is not None:
+            return FileResponse(path=str(pdf_en), filename="exam.pdf", media_type="application/pdf")
     duong_dan = de.get("files", {}).get("de")
     if not duong_dan or not Path(duong_dan).exists():
         raise HTTPException(404, "File de khong con ton tai (co the da bi xoa sau 10 ngay).")
@@ -702,7 +733,7 @@ class ExportLoiGiaiRequest(BaseModel):
     conversation_id: str
 
 
-def _xuat_loigiai(de: dict) -> FileResponse:
+def _xuat_loigiai(de: dict, lang: str = "vi") -> FileResponse:
     """Tra ve PDF loi giai cua 1 de. Neu chua co san thi bien dich tu file
     .tex da luu (doi [dethi] -> [loigiai] trong ex_test) roi luu lai de
     lan sau khoi dich lai.
@@ -714,6 +745,11 @@ def _xuat_loigiai(de: dict) -> FileResponse:
       de van xin dung loi giai cua de minh muon).
     """
     files = de.get("files", {})
+
+    if lang == "en":
+        pdf_en = _pdf_en_tu_tex(de, "loigiai")
+        if pdf_en is not None:
+            return FileResponse(path=str(pdf_en), filename="solutions.pdf", media_type="application/pdf")
 
     loigiai_path = files.get("loigiai")
     if loigiai_path and Path(loigiai_path).exists():
@@ -755,15 +791,15 @@ def _xuat_loigiai(de: dict) -> FileResponse:
 
 
 @router.post("/export-loigiai")
-def export_loigiai_endpoint(payload: ExportLoiGiaiRequest):
+def export_loigiai_endpoint(request: Request, payload: ExportLoiGiaiRequest):
     de = history_service.lay_de_gan_nhat(payload.conversation_id)
     if de is None:
         raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
-    return _xuat_loigiai(de)
+    return _xuat_loigiai(de, lay_ngon_ngu(request))
 
 
 @router.get("/tai-loigiai/{de_id}")
-def tai_loigiai_endpoint(de_id: str):
+def tai_loigiai_endpoint(request: Request, de_id: str):
     """URL on dinh cho nut "Loi giai" gan duoi TUNG de trong hoi thoai.
 
     Khac /export-loigiai o cho: chi dich danh 1 de theo de_id, khong lay
@@ -773,7 +809,7 @@ def tai_loigiai_endpoint(de_id: str):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    return _xuat_loigiai(de)
+    return _xuat_loigiai(de, lay_ngon_ngu(request))
 
 
 # ======================================================

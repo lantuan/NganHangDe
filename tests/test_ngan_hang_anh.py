@@ -203,3 +203,48 @@ def test_gia_su_ai_giang_bang_tieng_anh_tu_de_goc_tieng_anh(monkeypatch):
         assert GS.lay_ngu_canh_cau("de-thu", 1, None, "en")["de_bai"]
     finally:
         Path(de["files"]["dapan_json"]).unlink()
+
+
+def test_tai_de_pdf_hoc_sinh_ra_ban_tieng_anh_khi_trang_english(monkeypatch):
+    """Nút tải PDF đề / lời giải: trang English thì biên dịch và trả PDF TIẾNG ANH (từ .tex tiếng Anh cạnh .tex Việt)."""
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+    bien_dich = []
+
+    def gia(tex, lang="vi"):
+        from app.services.pdf_service import EXPORTS_DIR
+        out = (R.EXPORTS_DIR_EN if lang == "en" else EXPORTS_DIR)
+        out.mkdir(parents=True, exist_ok=True)
+        pdf = out / (Path(tex).stem + ".pdf")
+        pdf.write_bytes(b"%PDF-1.4 " + Path(tex).read_bytes()[:2000])
+        bien_dich.append((Path(tex).name, lang))
+        return pdf
+    monkeypatch.setattr(A, "compile_pdf", gia)
+    monkeypatch.setattr(R, "compile_pdf", gia)
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="1", dapan_tieng_anh=True)
+    assert Path(A.duong_tex_en(kq["tex_path"])).exists()
+    assert not any(l == "en" for _, l in bien_dich)         # lúc sinh đề CHƯA biên dịch PDF tiếng Anh
+    de = {"id": "de-thu", "files": {"dapan_json": kq["dap_an_json_path"], "tex": kq["tex_path"], "de": kq["pdf_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    monkeypatch.setattr(history_service, "luu_file_de", lambda *a, **k: None)
+    client = TestClient(app)
+    r_vi = client.get("/api/exam/tai-de/de-thu", cookies={"lang": "vi"})
+    r_en = client.get("/api/exam/tai-de/de-thu", cookies={"lang": "en"})
+    assert r_vi.status_code == r_en.status_code == 200
+    assert b"ex_test_en" in r_en.content and b"ex_test_en" not in r_vi.content   # PDF giả chứa đầu tệp .tex
+    en_tex = A.duong_tex_en(kq["tex_path"]).read_text(encoding="utf-8")
+    assert "[dethi]{ex_test_en}" in en_tex and "PART I." in en_tex
+    assert ("%s.tex" % Path(kq["tex_path"]).stem, "en") in bien_dich    # biên dịch khi bấm tải
+    # lời giải tiếng Anh: đổi [dethi] -> [loigiai] ở bản Anh, không đụng bản Việt
+    r_lg = client.get("/api/exam/tai-loigiai/de-thu", cookies={"lang": "en"})
+    assert r_lg.status_code == 200 and b"loigiai]{ex_test_en}" in r_lg.content
+    # đề cũ (không có .tex tiếng Anh) rơi về tiếng Việt
+    de["files"]["tex"] = str(Path(kq["tex_path"]).with_name("khong_co_ban_anh.tex"))
+    Path(de["files"]["tex"]).write_text(Path(kq["tex_path"]).read_text(encoding="utf-8"), encoding="utf-8")
+    try:
+        assert client.get("/api/exam/tai-de/de-thu", cookies={"lang": "en"}).status_code == 200
+    finally:
+        Path(de["files"]["tex"]).unlink()
