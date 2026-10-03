@@ -64,7 +64,7 @@ _CHU = {
     },
     "en": {
         "phan": "PART", "nam_hoc_re": r"SCHOOL YEAR ([0-9]{4}-[0-9]{4})", "ma_re": r"Exam code (\d+)",
-        "ma_de": "Exam code", "truong": "HUNG VUONG HIGH SCHOOL FOR THE GIFTED",
+        "ma_de": "Exam code", "truong": "HUNG VUONG GIFTED HIGH SCHOOL",
         "nam_hoc_dong": "SCHOOL YEAR %s -- MATHEMATICS, GRADE %s",
         "thi_sinh": "Name: ........................................ Class: .......... Room: ..........",
         "cau": "Question", "bai": "Problem", "dung": "True", "sai": "False", "chon_dap_an": "Correct answer:",
