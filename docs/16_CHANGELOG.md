@@ -9888,3 +9888,8 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 
 ## Sửa 3 liên kết tiếng Anh của giáo viên báo "không có bản tiếng Anh" (03/10/2026)
 - Nguyên nhân: file_de.loai_file có CHECK constraint, các dòng de_en/loigiai_en/tex_en bị từ chối âm thầm. Nay bản Anh tìm theo tên cạnh bản Việt (data/temp_en, data/exports_en), không dùng file_de. Bảng "Đề đã tạo" và Trang chính đều có 3 liên kết Anh cho đề tick tiếng Anh.
+
+## PDF lời giải tiếng Anh đúng bản, tạo đề đỡ chậm, đủ 5 file tiếng Anh (03/10/2026)
+- Sửa: PDF "lời giải" tiếng Anh thực ra là PDF đề (tên lưu thừa đuôi `_loigiai`).
+- Tạo đề kèm tiếng Anh không còn biên dịch 2 PDF Anh trong lúc chờ: chỉ ghi .tex Anh, PDF Anh biên dịch ở luồng nền ngay sau khi tạo (hoặc khi bấm tải lần đầu, có khoá chống biên dịch đè).
+- Bảng giáo viên: bản Anh đủ 5 liên kết (PDF đề, PDF lời giải, Word đề, Word lời giải, .tex).

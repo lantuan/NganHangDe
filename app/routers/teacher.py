@@ -34,7 +34,8 @@ from fastapi.templating import Jinja2Templates
 from app.core.deps import get_current_user, yeu_cau_giao_vien
 from app.core.lop_config import DANH_SACH_LOP, MA_LOP_CLASSROOM
 from app.services import classroom_service, gia_su_service, history_service, profile_service
-from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError
+import threading
+from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError, bien_dich_nen_tieng_anh
 from app.services.i18n_service import tieu_de_tieng_anh
 from app.services.ma_tran_service import doc_ma_tran_tu_form
 from app.services.exam_rules_service import ExamRulesError
@@ -221,6 +222,10 @@ async def ra_de_submit(
             history_service.luu_file_de(de_id, "dapan_json", ket_qua["dap_an_json_path"])
         # Đề tiếng Anh tương ứng KHÔNG ghi vào file_de (CHECK constraint từ chối loại lạ): bản Anh nằm cạnh
         # bản Việt, cùng tên (.tex ở data/temp_en/, PDF ở data/exports_en/), xem exam.py::_pdf_en_tu_tex.
+        # PDF Anh (đề + lời giải) biên dịch Ở NỀN sau khi trả lời giáo viên, để tạo đề không phải chờ thêm
+        # hai lần biên dịch; bấm tải đúng lúc đang biên dịch thì chỉ chờ cho xong.
+        if kem_tieng_anh and not ket_qua.get("tieng_anh_loi") and ket_qua.get("tex_path"):
+            threading.Thread(target=bien_dich_nen_tieng_anh, args=(ket_qua["tex_path"],), daemon=True).start()
 
     return RedirectResponse("/gv/de-da-tao", status_code=303)
 

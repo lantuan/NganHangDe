@@ -36,6 +36,7 @@ from app.services.generator_service import (
     chup_trang_thai_xoay, khoi_phuc_trang_thai_xoay, dat_hat_giong,
 )
 import secrets
+import threading
 import json
 import shutil
 from pathlib import Path
@@ -492,6 +493,53 @@ def duong_tex_en(tex_vi) -> Path:
     return TEMP_DIR_EN / Path(tex_vi).name
 
 
+_KHOA_BIEN_DICH_EN: dict = {}
+_KHOA_CHUNG = threading.Lock()
+
+
+def bien_dich_pdf_tieng_anh(tex_vi, ban: str):
+    """PDF TIẾNG ANH của đề (ban = "de" | "loigiai") từ .tex tiếng Anh nằm cạnh .tex tiếng Việt (data/temp_en/,
+    CÙNG TÊN). PDF đã có thì trả ngay (kể cả khi .tex đã bị dọn); chưa có thì biên dịch rồi lưu lại. Mỗi PDF
+    có một khoá riêng: lần tải bấm đúng lúc luồng nền đang biên dịch chỉ chờ rồi lấy kết quả, không biên dịch
+    hai lần đè lên nhau. Không có .tex tiếng Anh (đề cũ, chương chưa dịch, không tick) -> None."""
+    if not tex_vi:
+        return None
+    tex_en = duong_tex_en(tex_vi)
+    goc = tex_en.stem[:-len("_loigiai")] if tex_en.stem.endswith("_loigiai") else tex_en.stem
+    ten = goc if ban == "de" else goc + "_loigiai"
+    pdf = EXPORTS_DIR_EN / (ten + ".pdf")
+    if pdf.exists():
+        return pdf
+    if not tex_en.exists():
+        return None
+    with _KHOA_CHUNG:
+        khoa = _KHOA_BIEN_DICH_EN.setdefault(ten, threading.Lock())
+    with khoa:
+        if pdf.exists():                      # luồng khác vừa biên dịch xong
+            return pdf
+        dang, can = (("[loigiai]{ex_test_en}", "[dethi]{ex_test_en}") if ban == "de"
+                     else ("[dethi]{ex_test_en}", "[loigiai]{ex_test_en}"))
+        noi_dung = tex_en.read_text(encoding="utf-8").replace(dang, can)
+        if can not in noi_dung:
+            return None
+        tex_moi = save_tex_file(noi_dung, ten, "en")
+        try:
+            return compile_pdf(tex_moi, "en")
+        except PdfCompileError as e:
+            print("LOI BIEN DICH PDF TIENG ANH:", e)
+            return None
+
+
+def bien_dich_nen_tieng_anh(tex_vi) -> None:
+    """Chạy trong luồng nền sau khi giáo viên tạo đề kèm tiếng Anh: biên dịch PDF đề rồi PDF lời giải bản Anh,
+    để lúc giáo viên bấm tải thì đã có sẵn. Lỗi chỉ ghi log (bấm tải sẽ tự biên dịch lại)."""
+    for ban in ("de", "loigiai"):
+        try:
+            bien_dich_pdf_tieng_anh(tex_vi, ban)
+        except Exception as e:                # noqa: BLE001
+            print("LOI BIEN DICH NEN PDF TIENG ANH (%s): %s" % (ban, e))
+
+
 def duong_dapan_en(dapan_vi) -> Path:
     """Tệp đáp án tiếng Anh ứng với tệp đáp án tiếng Việt (cùng tên, nằm trong data/temp_en/).
     Không cần ghi vào cơ sở dữ liệu: trang làm bài suy ra đường dẫn từ tệp đáp án tiếng Việt của đề."""
@@ -514,7 +562,11 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
     try:
         kq["tieng_anh"] = _sinh_pdf_tu_danh_sach(
             lop, tieu_de_en or tieu_de, role, danh_sach_id, socau_ma_de,
-            cho_phep_thieu=True, lang="en", seed=seed, chi_dap_an=chi_dap_an_en)
+            cho_phep_thieu=True, lang="en", seed=seed,
+            # Bản Anh KHÔNG biên dịch PDF lúc tạo (mỗi PDF mất 30-60 giây, hai bản Việt + hai bản Anh làm
+            # người dùng chờ rất lâu, có lúc nginx cắt kết nối): chỉ ghi .tex + đáp án. PDF Anh được biên dịch
+            # ở nền ngay sau khi tạo (giáo viên) hoặc khi bấm tải lần đầu, xem bien_dich_pdf_tieng_anh.
+            chi_dap_an=True)
         # Bản Anh đủ câu (chương đã dịch) thì để đáp án Anh cạnh đáp án Việt cho trang làm bài; thiếu câu
         # thì thôi (trang làm bài rơi về tiếng Việt, không hiện dòng [MISSING]).
         if kq["tieng_anh"].get("so_cau_thieu", 0) == 0 and kq.get("dap_an_json_path"):
@@ -524,15 +576,6 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
             kq["dapan_en_path"] = str(dich)
             if kq["tieng_anh"].get("tex_path") and kq.get("tex_path"):
                 shutil.copyfile(kq["tieng_anh"]["tex_path"], duong_tex_en(kq["tex_path"]))
-                # PDF Anh đã biên dịch (đề + lời giải) lưu theo TÊN BẢN VIỆT để các nút tải tiếng Anh tìm ra
-                # mà không cần ghi cơ sở dữ liệu, và vẫn tải được sau khi .tex bị dọn.
-                goc = Path(kq["tex_path"]).stem
-                EXPORTS_DIR_EN.mkdir(parents=True, exist_ok=True)
-                for khoa, hau_to in (("pdf_path", ""), ("pdf_loigiai_path", "_loigiai")):
-                    nguon = kq["tieng_anh"].get(khoa)
-                    dich_pdf = EXPORTS_DIR_EN / (goc + hau_to + ".pdf")
-                    if nguon and Path(nguon).exists() and Path(nguon).resolve() != dich_pdf.resolve():
-                        shutil.copyfile(nguon, dich_pdf)
     except Exception as e:                           # noqa: BLE001
         kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
     finally:

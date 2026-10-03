@@ -41,7 +41,7 @@ from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dan
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
-from app.services.exam_assembler_service import duong_dapan_en, duong_tex_en
+from app.services.exam_assembler_service import duong_dapan_en, duong_tex_en, bien_dich_pdf_tieng_anh
 from app.services.i18n_service import lay_ngon_ngu
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -516,30 +516,9 @@ def de_gan_nhat_endpoint(conversation_id: str):
 # ======================================================
 
 def _pdf_en_tu_tex(de: dict, ban: str) -> Path | None:
-    """PDF TIẾNG ANH của đề (ban = "de" | "loigiai") cho trang đang ở English, biên dịch khi cần từ .tex
-    tiếng Anh nằm cạnh .tex tiếng Việt (data/temp_en/, cùng tên) rồi lưu lại. Không có .tex tiếng Anh
-    (đề cũ, chương chưa dịch) -> None, nơi gọi dùng bản tiếng Việt."""
-    tex_vi = (de.get("files") or {}).get("tex")
-    if not tex_vi:
-        return None
-    tex_en = duong_tex_en(tex_vi)
-    goc = tex_en.stem[:-len("_loigiai")] if tex_en.stem.endswith("_loigiai") else tex_en.stem
-    ten = goc if ban == "de" else goc + "_loigiai"
-    pdf = EXPORTS_DIR_EN / (ten + ".pdf")
-    if pdf.exists():
-        return pdf                      # PDF Anh đã có (giáo viên tick lúc tạo: lưu sẵn): .tex bị dọn cũng không sao
-    if not tex_en.exists():
-        return None
-    dang, can = ("[loigiai]{ex_test_en}", "[dethi]{ex_test_en}") if ban == "de" else ("[dethi]{ex_test_en}", "[loigiai]{ex_test_en}")
-    noi_dung = tex_en.read_text(encoding="utf-8").replace(dang, can)
-    if can not in noi_dung:
-        return None
-    tex_moi = save_tex_file(noi_dung, ten, "en")
-    try:
-        return compile_pdf(tex_moi, "en")
-    except PdfCompileError as e:
-        print("LOI BIEN DICH PDF TIENG ANH:", e)
-        return None
+    """PDF TIẾNG ANH của đề (ban = "de" | "loigiai"); logic ở exam_assembler_service.bien_dich_pdf_tieng_anh.
+    Không có bản Anh (đề cũ, chương chưa dịch, không tick) -> None, nơi gọi dùng bản tiếng Việt."""
+    return bien_dich_pdf_tieng_anh((de.get("files") or {}).get("tex"), ban)
 
 
 def _pdf_vi_de(de: dict) -> Path:
