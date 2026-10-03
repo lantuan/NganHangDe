@@ -48,11 +48,22 @@ from app.core.config import (
 )
 from app.core.supabase import supabase_admin as supabase
 from app.services import history_service
+from app.services.latex_service import TEMP_DIR_EN
 
 # Gio Viet Nam - dung de chot "ngay" cho han muc luot hoi. Neu dung UTC
 # thi tu 7h sang den 0h (gio VN) bi tinh sang ngay hom sau, hoc sinh mat
 # luot giua buoi hoc.
 MUI_GIO_VN = timezone(timedelta(hours=7))
+
+def _t(lang: str, vi: str, en: str) -> str:
+    """Thông báo cho học sinh theo ngôn ngữ trang (nền là tiếng Việt)."""
+    return en if lang == "en" else vi
+
+
+CAU_TU_CHOI_EN = (
+    "This question is outside what your teacher has prepared, so please ask your teacher directly. "
+    "Here your teacher only reviews the questions from the exam you just took."
+)
 
 CAU_TU_CHOI = (
     "Câu này nằm ngoài phần thầy/cô đã chuẩn bị nên em hỏi trực tiếp "
@@ -68,11 +79,14 @@ class GiaSuError(Exception):
 # 1. NGU CANH: de bai + dap an + loi giai CHUAN (do Python sinh)
 # ======================================================
 
-def _doc_dapan_json(de: dict) -> list[dict] | None:
+def _doc_dapan_json(de: dict, lang: str = "vi") -> list[dict] | None:
     duong_dan = (de.get("files") or {}).get("dapan_json")
     if not duong_dan:
         return None
     tep = Path(duong_dan)
+    # Nền là tiếng Việt; trang ở English thì lấy bản Anh của ĐÚNG đề đó (tệp cạnh, cùng tên) nếu có.
+    if lang == "en" and (TEMP_DIR_EN / tep.name).exists():
+        tep = TEMP_DIR_EN / tep.name
     if not tep.exists():
         return None
     try:
@@ -82,7 +96,7 @@ def _doc_dapan_json(de: dict) -> list[dict] | None:
         return None
 
 
-def _mo_ta_dap_an(cau: dict) -> str:
+def _mo_ta_dap_an(cau: dict, lang: str = "vi") -> str:
     """Bien dap an cua 1 cau thanh 1 dong chu de doc, dung cho ca 3 loai.
     KHONG tinh toan gi - chi doc lai nhung gi generator da ghi san."""
     loai = (cau.get("loai_cau") or "").upper()
@@ -95,7 +109,8 @@ def _mo_ta_dap_an(cau: dict) -> str:
         dap_an = cau.get("dap_an") or cau.get("dap_an_dung") or {}
         if isinstance(dap_an, dict):
             return "; ".join(
-                f"{y}) {'Đúng' if gt else 'Sai'}" for y, gt in sorted(dap_an.items())
+                f"{y}) {('True' if gt else 'False') if lang == 'en' else ('Đúng' if gt else 'Sai')}"
+                for y, gt in sorted(dap_an.items())
             )
         return str(dap_an)
     return str(cau.get("dap_an") or cau.get("dap_an_dung") or "")
@@ -114,7 +129,7 @@ def _mo_ta_de_bai(cau: dict) -> str:
     return "\n".join(p for p in phan if p)
 
 
-def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None) -> dict:
+def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None, lang: str = "vi") -> dict:
     """
     Tra ve {de_bai, dap_an, loi_giai, question_id, loai_cau, chuong, bai,
     nguon}. Nem GiaSuError neu khong du du lieu - KHONG BAO GIO tra ve
@@ -122,31 +137,35 @@ def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None) -> 
     """
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
-        raise GiaSuError("Không tìm thấy đề này. Em thử tạo đề mới rồi hỏi lại nhé.")
+        raise GiaSuError(_t(lang, "Không tìm thấy đề này. Em thử tạo đề mới rồi hỏi lại nhé.",
+                            "We could not find this exam. Please create a new one and ask again."))
 
     # --- Nguon 1: file dap an goc do Python sinh ---
-    danh_sach = _doc_dapan_json(de)
+    danh_sach = _doc_dapan_json(de, lang)
     if danh_sach:
         for cau in danh_sach:
             if int(cau.get("so_thu_tu") or 0) != int(so_thu_tu):
                 continue
             loi_giai = str(cau.get("loi_giai") or "").strip()
             if not loi_giai:
-                raise GiaSuError(
+                raise GiaSuError(_t(
+                    lang,
                     f"Câu {so_thu_tu} chưa có lời giải mẫu trong ngân hàng nên "
-                    "chưa giảng lại được. Em hỏi trực tiếp thầy/cô nhé."
-                )
+                    "chưa giảng lại được. Em hỏi trực tiếp thầy/cô nhé.",
+                    f"Question {so_thu_tu} has no model solution in the bank yet, so it cannot be "
+                    "reviewed here. Please ask your teacher directly."))
             return {
                 "de_bai": _lam_sach_latex(_mo_ta_de_bai(cau)),
-                "dap_an": _lam_sach_latex(_mo_ta_dap_an(cau)),
-                "loi_giai": _lam_sach_latex(loi_giai_cho_web(loi_giai)),
+                "dap_an": _lam_sach_latex(_mo_ta_dap_an(cau, lang)),
+                "loi_giai": _lam_sach_latex(loi_giai_cho_web(loi_giai, lang)),
                 "question_id": cau.get("generator_id") or cau.get("question_id"),
                 "loai_cau": cau.get("loai_cau"),
                 "chuong": cau.get("chuong"),
                 "bai": cau.get("bai"),
                 "nguon": "dapan_json",
             }
-        raise GiaSuError(f"Đề này không có câu {so_thu_tu}.")
+        raise GiaSuError(_t(lang, f"Đề này không có câu {so_thu_tu}.",
+                            f"This exam has no question {so_thu_tu}."))
 
     # --- Nguon 2: lich su cham bai (khi file dapan_json da bi don dep) ---
     if user_id:
@@ -154,10 +173,12 @@ def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None) -> 
         if cau:
             return cau
 
-    raise GiaSuError(
+    raise GiaSuError(_t(
+        lang,
         "Dữ liệu chi tiết của đề này đã được dọn dẹp (đề cũ hơn 1 ngày) nên "
-        "chưa giảng lại được. Em tạo đề mới cùng dạng rồi hỏi lại nhé."
-    )
+        "chưa giảng lại được. Em tạo đề mới cùng dạng rồi hỏi lại nhé.",
+        "The details of this exam have been cleaned up (exams older than 1 day), so it cannot be "
+        "reviewed. Please create a new exam of the same type and ask again."))
 
 
 def _tim_trong_lich_su(user_id: str, de_id: str, so_thu_tu: int) -> dict | None:
@@ -324,6 +345,12 @@ TEN_PHAN = {
     "SA": "PHẦN III. Trả lời ngắn",
     "TL": "PHẦN IV. Tự luận",
 }
+TEN_PHAN_EN = {
+    "MC": "PART I. Multiple choice",
+    "TF": "PART II. True/False",
+    "SA": "PART III. Short answer",
+    "TL": "PART IV. Free response",
+}
 THU_TU_PHAN = ["MC", "TF", "SA", "TL"]
 
 
@@ -355,7 +382,7 @@ def _cac_cau_da_lam(user_id: str, de_id: str) -> set[int]:
     return da_lam
 
 
-def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str) -> dict:
+def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str, lang: str = "vi") -> dict:
     """
     Tra ve de gan nhat trong 1 cuoc hoi thoai, chia thanh 4 phan, moi cau
     kem co hoi duoc hay khong.
@@ -364,16 +391,17 @@ def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str) -> dict:
     """
     de = history_service.lay_de_gan_nhat(conversation_id)
     if de is None:
-        raise GiaSuError(
-            "Cuộc trò chuyện này chưa có đề nào. Em tạo một đề rồi quay lại nhé."
-        )
+        raise GiaSuError(_t(lang, "Cuộc trò chuyện này chưa có đề nào. Em tạo một đề rồi quay lại nhé.",
+                            "This conversation has no exam yet. Create one and come back."))
 
-    danh_sach = _doc_dapan_json(de)
+    danh_sach = _doc_dapan_json(de, lang)
     if not danh_sach:
-        raise GiaSuError(
+        raise GiaSuError(_t(
+            lang,
             "Dữ liệu chi tiết của đề này đã được dọn dẹp (đề cũ hơn 1 ngày) nên "
-            "chưa hỏi lại được. Em tạo đề mới cùng dạng nhé."
-        )
+            "chưa hỏi lại được. Em tạo đề mới cùng dạng nhé.",
+            "The details of this exam have been cleaned up (exams older than 1 day). "
+            "Please create a new exam of the same type."))
 
     da_lam = _cac_cau_da_lam(user_id, de["id"])
 
@@ -407,7 +435,7 @@ def liet_ke_cau_de_gan_nhat(user_id: str, conversation_id: str) -> dict:
             cau["so_trong_phan"] = vi_tri
         cac_phan.append({
             "ma": ma,
-            "ten": TEN_PHAN[ma],
+            "ten": TEN_PHAN_EN[ma] if lang == "en" else TEN_PHAN[ma],
             "cau": cau_sap_xep,
         })
 
@@ -450,20 +478,52 @@ LỜI GIẢI MẪU (nguồn duy nhất bạn được dùng):
 {loi_giai}
 """
 
+LENH_HE_THONG_EN = """You are a math teaching assistant for a high school class, reviewing ONE specific
+question with a student who has just finished the exam.
+
+MANDATORY RULES - breaking any one of them means failing the task:
+1. DO NOT DO ANY CALCULATION YOURSELF. The correct answer and the model solution are given below.
+   Your job is to RE-EXPLAIN that solution so it is easy to understand, not to solve the problem again.
+2. NEVER give any number, intermediate result or conclusion that DIFFERS from the model solution. If the
+   model solution does not cover what the student asks, reply with exactly this sentence: "{cau_tu_choi}"
+3. Talk ONLY about this question. Do not mention other questions, do not go beyond the exam material, and
+   do not point to outside resources.
+4. Refer to yourself as "your teacher" and address the student as "you". Reply in ENGLISH (US math
+   terminology), short and friendly.
+5. Write formulas in LaTeX inside $...$ as in the model solution.
+6. If the student asks about anything outside math or outside this question, reply with exactly the
+   sentence in rule 2 and stop.
+
+QUESTION (verbatim):
+{de_bai}
+
+CORRECT ANSWER (computed by the Python generator - this is the only correct answer):
+{dap_an}
+
+MODEL SOLUTION (the only source you may use):
+{loi_giai}
+"""
+
+LENH_KHI_MAT_DE_BAI_EN = (
+    "(The original question text is no longer stored. NEVER guess the question; only re-explain "
+    "the steps of the model solution.)"
+)
+
 LENH_KHI_MAT_DE_BAI = (
     "(Không còn lưu đề bài gốc. TUYỆT ĐỐI không đoán lại đề bài; chỉ giảng "
     "lại các bước trong lời giải mẫu.)"
 )
 
 
-def dung_lenh(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = None) -> dict:
+def dung_lenh(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = None, lang: str = "vi") -> dict:
     """Dung payload gui sang n8n. Tach rieng ra 1 ham de test duoc ma
     khong can mang, va de doc lai duoc chinh xac cai gi da gui di."""
-    de_bai = ngu_canh.get("de_bai") or LENH_KHI_MAT_DE_BAI
-    he_thong = LENH_HE_THONG.format(
-        cau_tu_choi=CAU_TU_CHOI,
+    en = lang == "en"
+    de_bai = ngu_canh.get("de_bai") or (LENH_KHI_MAT_DE_BAI_EN if en else LENH_KHI_MAT_DE_BAI)
+    he_thong = (LENH_HE_THONG_EN if en else LENH_HE_THONG).format(
+        cau_tu_choi=CAU_TU_CHOI_EN if en else CAU_TU_CHOI,
         de_bai=de_bai,
-        dap_an=ngu_canh.get("dap_an") or "(không có)",
+        dap_an=ngu_canh.get("dap_an") or ("(none)" if en else "(không có)"),
         loi_giai=ngu_canh.get("loi_giai") or "",
     )
     return {
@@ -611,7 +671,7 @@ def _goi_mo_hinh(payload: dict) -> str:
 # ======================================================
 
 def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
-        lich_su: list[dict] | None = None) -> dict:
+        lich_su: list[dict] | None = None, lang: str = "vi") -> dict:
     """
     Tra ve dict san de tra thang cho Frontend:
       {tra_loi, dap_an_python, loi_giai_python, che_do, luot, trang_thai}
@@ -620,34 +680,40 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
     """
     cau_hoi = (cau_hoi or "").strip()
     if not cau_hoi:
-        raise GiaSuError("Em chưa nhập câu hỏi.")
+        raise GiaSuError(_t(lang, "Em chưa nhập câu hỏi.", "You have not typed a question."))
     if len(cau_hoi) > GIA_SU_DO_DAI_CAU_HOI:
-        raise GiaSuError(
+        raise GiaSuError(_t(
+            lang,
             f"Câu hỏi dài quá (tối đa {GIA_SU_DO_DAI_CAU_HOI} kí tự). "
-            "Em hỏi ngắn gọn một ý thôi nhé."
-        )
+            "Em hỏi ngắn gọn một ý thôi nhé.",
+            f"Your question is too long (at most {GIA_SU_DO_DAI_CAU_HOI} characters). "
+            "Please ask one short question at a time."))
 
     # Lay ngu canh TRUOC khi tru luot: khong du du lieu thi bao loi ngay,
     # hoc sinh khong mat luot.
-    ngu_canh = lay_ngu_canh_cau(de_id, so_thu_tu, user_id)
+    ngu_canh = lay_ngu_canh_cau(de_id, so_thu_tu, user_id, lang)
 
     # PHAI NOP BAI ROI MOI HOI DUOC (co Lan chot 17/09/2026). Chan o
     # TANG SERVER chu khong chi lam mo nut: chan o giao dien thi ai cung
     # goi thang API duoc. Neu khong chan, hoc sinh bam luot ca de de lay
     # loi giai ma khong chiu nghi - vi giang lai luon kem dap an chuan.
     if int(so_thu_tu) not in _cac_cau_da_lam(user_id, de_id):
-        raise GiaSuError(
+        raise GiaSuError(_t(
+            lang,
             f"Em làm và nộp bài câu {so_thu_tu} trước đã nhé, rồi thầy/cô "
-            "giảng lại cho. Tự nghĩ trước thì lúc nghe giảng mới vào đầu."
-        )
+            "giảng lại cho. Tự nghĩ trước thì lúc nghe giảng mới vào đầu.",
+            f"Please answer and submit question {so_thu_tu} first, then your teacher will go over it "
+            "with you. Thinking it through yourself first makes the explanation stick."))
 
     luot = lay_luot(user_id)
     if luot["con_lai"] <= 0:
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "het_luot")
-        raise GiaSuError(
+        raise GiaSuError(_t(
+            lang,
             f"Hôm nay em đã dùng hết {luot['gioi_han']} lượt hỏi rồi. "
-            "Em đọc lại lời giải mẫu bên dưới, mai có lượt mới nhé."
-        )
+            "Em đọc lại lời giải mẫu bên dưới, mai có lượt mới nhé.",
+            f"You have used all {luot['gioi_han']} questions for today. "
+            "Read the model solution below; you get new ones tomorrow."))
 
     # --- Che do khong AI: chua cau hinh webhook -> van tra loi giai chuan ---
     if not N8N_WEBHOOK_GIA_SU:
@@ -662,22 +728,24 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
             "trang_thai": "chua_cau_hinh",
         }
 
-    payload = dung_lenh(ngu_canh, cau_hoi, lich_su)
+    payload = dung_lenh(ngu_canh, cau_hoi, lich_su, lang)
     try:
         tra_loi = _goi_mo_hinh(payload)
     except httpx.HTTPError as e:
         print("LOI GOI WEBHOOK gia su:", e)
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "loi")
-        raise GiaSuError(
-            "Thầy/cô AI đang bận, em đọc tạm lời giải mẫu bên dưới rồi thử lại sau nhé."
-        )
+        raise GiaSuError(_t(
+            lang,
+            "Thầy/cô AI đang bận, em đọc tạm lời giải mẫu bên dưới rồi thử lại sau nhé.",
+            "The AI teacher is busy. Read the model solution below and try again later."))
 
     if not tra_loi:
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "loi")
-        raise GiaSuError("Chưa nhận được câu trả lời, em thử lại giúp thầy/cô nhé.")
+        raise GiaSuError(_t(lang, "Chưa nhận được câu trả lời, em thử lại giúp thầy/cô nhé.",
+                            "No answer was received. Please try again."))
 
     tru_luot(user_id)
-    trang_thai = "ngoai_pham_vi" if CAU_TU_CHOI[:30] in tra_loi else "ok"
+    trang_thai = "ngoai_pham_vi" if (CAU_TU_CHOI[:30] in tra_loi or CAU_TU_CHOI_EN[:30] in tra_loi) else "ok"
     ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, tra_loi, trang_thai)
 
     return {

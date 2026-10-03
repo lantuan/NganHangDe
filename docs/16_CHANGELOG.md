@@ -9838,3 +9838,10 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - 2 test mới trong tests/test_ngan_hang_anh.py.
 
 - Sửa nút Việt/Anh ở khu giáo viên (03/10/2026): body của _base_gv.html có data-chv-lang="duoi" -> nút đặt NGAY DƯỚI thanh đầu trang, sát mép phải (không che menu Thống kê / Gia sư AI).
+
+# Version 4.08 - 2026-10-03
+
+## Thầy/cô AI (gia sư) và lời giải mẫu bằng tiếng Anh khi trang ở English
+- gia_su_service: tham số `lang` cho lay_ngu_canh_cau / dung_lenh / hoi / liet_ke_cau_de_gan_nhat; đề bài, đáp án, LỜI GIẢI MẪU lấy từ tệp đáp án BẢN ANH của đúng đề đó (cạnh tệp Việt trong data/temp_en/); lệnh hệ thống tiếng Anh LENH_HE_THONG_EN (cùng quy tắc: không tự tính, chỉ diễn đạt lại lời giải mẫu, trả lời bằng tiếng Anh); thông báo lỗi, tên phần, "True/False" đều có bản Anh. Đề chưa có bản Anh thì rơi về tiếng Việt.
+- app/routers/gia_su.py truyền lay_ngon_ngu(request); answer_parser_service.loi_giai_cho_web(lang) ("(Figure: see the PDF version)").
+- Test mới: test_gia_su_ai_giang_bang_tieng_anh_tu_de_goc_tieng_anh.

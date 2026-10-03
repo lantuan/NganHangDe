@@ -293,7 +293,7 @@ def test_user_id_lay_tu_phien_chu_khong_lay_tu_body(client, monkeypatch):
     da_nhan = {}
     monkeypatch.setattr(R, "get_current_user", lambda request: _UserGia())
 
-    def _hoi(user_id, de_id, so_thu_tu, cau_hoi, lich_su=None):
+    def _hoi(user_id, de_id, so_thu_tu, cau_hoi, lich_su=None, lang="vi"):
         da_nhan["user_id"] = user_id
         return {"tra_loi": "ok", "che_do": "ai", "dap_an_python": "B",
                 "loi_giai_python": "...", "luot": {}, "trang_thai": "ok"}
@@ -315,7 +315,7 @@ def test_loi_doc_duoc_tra_200_kem_loi_giai_du_phong(client, monkeypatch):
         raise R.GiaSuError("Hôm nay em đã dùng hết lượt hỏi rồi.")
     monkeypatch.setattr(R.gia_su_service, "hoi", _hoi)
     monkeypatch.setattr(R.gia_su_service, "lay_ngu_canh_cau",
-                        lambda de_id, so_thu_tu, user_id: dict(NGU_CANH_MAU))
+                        lambda de_id, so_thu_tu, user_id, lang="vi": dict(NGU_CANH_MAU))
 
     r = client.post("/api/giasu/hoi",
                     json={"de_id": "d1", "so_thu_tu": 1, "cau_hoi": "em chưa hiểu"})
@@ -333,7 +333,7 @@ def test_khong_lay_duoc_loi_giai_du_phong_thi_van_bao_loi_binh_thuong(client, mo
         raise R.GiaSuError("Không tìm thấy đề này.")
     monkeypatch.setattr(R.gia_su_service, "hoi", _hoi)
 
-    def _hong(de_id, so_thu_tu, user_id):
+    def _hong(de_id, so_thu_tu, user_id, lang="vi"):
         raise RuntimeError("hong")
     monkeypatch.setattr(R.gia_su_service, "lay_ngu_canh_cau", _hong)
 
@@ -768,7 +768,7 @@ def test_du_phong_khi_loi_cung_co_de_bai(client, monkeypatch):
         raise R.GiaSuError("Hôm nay em đã dùng hết lượt hỏi rồi.")
     monkeypatch.setattr(R.gia_su_service, "hoi", _hoi)
     monkeypatch.setattr(R.gia_su_service, "lay_ngu_canh_cau",
-                        lambda de_id, so_thu_tu, user_id: dict(NGU_CANH_MAU))
+                        lambda de_id, so_thu_tu, user_id, lang="vi": dict(NGU_CANH_MAU))
 
     body = client.post("/api/giasu/hoi",
                        json={"de_id": "d1", "so_thu_tu": 1, "cau_hoi": "x"}).json()

@@ -342,14 +342,15 @@ def trich_loi_giai(latex_block: str) -> str | None:
     return noi_dung.strip()
 
 
-def loi_giai_cho_web(loi_giai: str | None) -> str | None:
+def loi_giai_cho_web(loi_giai: str | None, lang: str = "vi") -> str | None:
     r"""Loi giai dua len WEB (SUA 01/10/2026, co Lan): \immini[thm]{CHU}{HINH} -> CHU;
     hinh TikZ con lai -> "(Hình vẽ: xem bản PDF)" (MathJax khong ve duoc TikZ).
     Chi dung o tang hien thi web - PDF va Word van dung loi giai nguyen ban."""
     if not loi_giai:
         return loi_giai
     t = _rut_gon_immini(loi_giai)
-    return re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", "(Hình vẽ: xem bản PDF)", t, flags=re.S)
+    return re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}",
+                  "(Figure: see the PDF version)" if lang == "en" else "(Hình vẽ: xem bản PDF)", t, flags=re.S)
 
 
 def chuan_hoa_dap_an_ngan(text: str | None) -> str:

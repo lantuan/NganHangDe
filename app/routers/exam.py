@@ -35,7 +35,7 @@ from app.services.answer_parser_service import (
 from app.services.hinh_ve_service import duong_dan_anh
 # Ten 4 phan lay tu gia_su_service de CHI CO MOT nguon - PDF, trang lam
 # bai va bang chon cau cua gia su luon goi ten phan giong nhau.
-from app.services.gia_su_service import TEN_PHAN
+from app.services.gia_su_service import TEN_PHAN, TEN_PHAN_EN
 from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dang_co_ham
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
@@ -43,12 +43,6 @@ from app.services.pdf_service import compile_pdf, PdfCompileError
 from app.services.exam_assembler_service import duong_dapan_en
 from app.services.i18n_service import lay_ngon_ngu
 
-TEN_PHAN_EN = {
-    "MC": "PART I. Multiple choice",
-    "TF": "PART II. True/False",
-    "SA": "PART III. Short answer",
-    "TL": "PART IV. Free response",
-}
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
 

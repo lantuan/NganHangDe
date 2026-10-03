@@ -170,3 +170,36 @@ def test_trang_lam_bai_chuong_chua_dich_roi_ve_tieng_viet(monkeypatch):
     monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
     en = TestClient(app).get("/api/exam/quiz/de-thu", cookies={"lang": "en"}).json()["data"]
     assert en["tong_so_cau"] > 0
+
+
+def test_gia_su_ai_giang_bang_tieng_anh_tu_de_goc_tieng_anh(monkeypatch):
+    """Trang English: thầy/cô AI nhận đề bài, đáp án, lời giải mẫu BẢN ANH và lệnh hệ thống tiếng Anh."""
+    import app.services.exam_assembler_service as A
+    from app.services import gia_su_service as GS, history_service
+    monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="1", dapan_tieng_anh=True)
+    de = {"id": "de-thu", "files": {"dapan_json": kq["dap_an_json_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    co_dau = re.compile("[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]", re.I)
+    thu = 0
+    for stt in range(1, 13):
+        try:
+            vi = GS.lay_ngu_canh_cau("de-thu", stt, None, "vi")
+            en = GS.lay_ngu_canh_cau("de-thu", stt, None, "en")
+        except GS.GiaSuError:
+            continue
+        thu += 1
+        assert vi["de_bai"] != en["de_bai"]
+        for khoa in ("de_bai", "dap_an", "loi_giai"):
+            assert not co_dau.search(en[khoa]), (stt, khoa, en[khoa][:80])
+        lenh = GS.dung_lenh(en, "why am I wrong?", None, "en")["lenh_he_thong"]
+        assert "ENGLISH" in lenh and "thầy" not in lenh
+    assert thu >= 5
+    # đề chưa có bản Anh: rơi về tiếng Việt, không lỗi
+    de["files"]["dapan_json"] = str(Path(kq["dap_an_json_path"]).with_name("khong_co_ban_anh_dapan.json"))
+    import shutil
+    shutil.copyfile(kq["dap_an_json_path"], de["files"]["dapan_json"])
+    try:
+        assert GS.lay_ngu_canh_cau("de-thu", 1, None, "en")["de_bai"]
+    finally:
+        Path(de["files"]["dapan_json"]).unlink()
