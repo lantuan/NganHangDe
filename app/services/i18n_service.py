@@ -131,6 +131,13 @@ background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2)" role="group" aria-label="La
   function datViTri() {
     var W = window.innerWidth, trai = W, giua = null, duoi = 0;
     nut.style.right = '12px'; nut.style.top = '8px';
+    // Khu giao vien (thanh dau trang day chu): dat nut NGAY DUOI thanh dau trang, sat mep phai, khong che menu.
+    if (document.body && document.body.getAttribute('data-chv-lang') === 'duoi') {
+      var hd = document.querySelector('header');
+      nut.style.right = '12px';
+      nut.style.top = ((hd ? hd.getBoundingClientRect().bottom : 56) + 6) + 'px';
+      return;
+    }
     document.querySelectorAll('body *').forEach(function (el) {
       if (nut.contains(el) || el.contains(nut) || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
       var r = el.getBoundingClientRect(), cs = getComputedStyle(el);

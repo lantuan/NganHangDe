@@ -9836,3 +9836,5 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Đề vẫn chọn/sinh trên bản Việt; thêm bản Anh cùng ID + seed (chỉ đáp án, không PDF): exam_assembler_service.generate_exam_pdf_auto(dapan_tieng_anh=True), duong_dapan_en(), _sinh_pdf_tu_danh_sach(chi_dap_an=True).
 - /api/exam/quiz/{de_id} và /api/exam/grade chọn bản Anh theo cookie lang; tên phần và ghi chú tự luận có bản Anh. Không có bản Anh (đề cũ, chương chưa dịch) thì dùng bản Việt.
 - 2 test mới trong tests/test_ngan_hang_anh.py.
+
+- Sửa nút Việt/Anh ở khu giáo viên (03/10/2026): body của _base_gv.html có data-chv-lang="duoi" -> nút đặt NGAY DƯỚI thanh đầu trang, sát mép phải (không che menu Thống kê / Gia sư AI).
