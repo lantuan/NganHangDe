@@ -44,6 +44,10 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 
 <h2 class="font-headline-sm text-headline-sm mb-stack-md">Đề tạo gần đây</h2>
 {% if de_gan_day %}
+<label class="flex items-start gap-2 mb-stack-md font-body-md text-body-md text-on-surface-variant">
+<input type="checkbox" class="chk-ca-hai-gv mt-1"/>
+<span>Tải kèm bản tiếng Anh: tệp tải về là .zip có cả bản Việt và bản Anh (PDF đề, PDF lời giải, Word, .tex), áp dụng cho đề đã tạo kèm tiếng Anh.</span>
+</label>
 <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
 <table class="w-full text-left font-body-md text-body-md">
 <thead class="bg-surface-container-low">
@@ -59,10 +63,10 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 <td class="p-stack-md">{{ de.lop }}</td>
 <td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
 <td class="p-stack-md">
-<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}">Đề</a>
- · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">Lời giải</a>
- · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=de">Word đề</a>
- · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=loigiai">Word lời giải</a> · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>
+<a class="text-primary-container font-semibold" href="/api/exam/tai-de/{{ de.id }}" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Đề</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Lời giải</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=de" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Word đề</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=loigiai" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Word lời giải</a> · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>.tex</a>
 </td>
 </tr>
 {% endfor %}

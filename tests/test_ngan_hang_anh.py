@@ -170,6 +170,9 @@ def test_trang_lam_bai_chuong_chua_dich_roi_ve_tieng_viet(monkeypatch):
     monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
     en = TestClient(app).get("/api/exam/quiz/de-thu", cookies={"lang": "en"}).json()["data"]
     assert en["tong_so_cau"] > 0
+    # đề không có bản Anh: trang English báo rõ (không im lặng rơi về tiếng Việt); trang Việt không báo gì
+    assert "no English version" in en["thong_bao_ban_anh"]
+    assert TestClient(app).get("/api/exam/quiz/de-thu", cookies={"lang": "vi"}).json()["data"]["thong_bao_ban_anh"] == ""
 
 
 def test_gia_su_ai_giang_bang_tieng_anh_tu_de_goc_tieng_anh(monkeypatch):
@@ -251,7 +254,7 @@ def test_tai_de_pdf_hoc_sinh_ra_ban_tieng_anh_khi_trang_english(monkeypatch):
 
 
 def test_tai_de_hoc_sinh_tick_ca_hai_thu_tieng_ra_zip(monkeypatch):
-    """Học sinh tick "tải kèm cả hai thứ tiếng": /tai-de và /tai-loigiai?ban=ca-hai trả .zip có CẢ bản Việt lẫn bản
+    """Học sinh tick "tải kèm cả hai thứ tiếng": /tai-de và /tai-loigiai?ngon_ngu=ca-hai trả .zip có CẢ bản Việt lẫn bản
     Anh, bất kể trang đang ở ngôn ngữ nào; ban=vi ép bản Việt dù trang English; đề không có bản Anh -> zip chỉ có bản Việt."""
     import io
     import zipfile
@@ -277,21 +280,21 @@ def test_tai_de_hoc_sinh_tick_ca_hai_thu_tieng_ra_zip(monkeypatch):
     client = TestClient(app)
     for lang in ("vi", "en"):
         for duong in ("tai-de", "tai-loigiai"):
-            r = client.get("/api/exam/%s/de-thu-zip?ban=ca-hai" % duong, cookies={"lang": lang})
+            r = client.get("/api/exam/%s/de-thu-zip?ngon_ngu=ca-hai" % duong, cookies={"lang": lang})
             assert r.status_code == 200 and r.headers["content-type"] == "application/zip"
             z = zipfile.ZipFile(io.BytesIO(r.content))
             ten = sorted(z.namelist())
             assert len(ten) == 2 and ten[0].endswith("_English.pdf") and ten[1].endswith("_TiengViet.pdf")
             assert b"ex_test_en" in z.read(ten[0]) and b"ex_test_en" not in z.read(ten[1])
     # ban=vi ép tiếng Việt dù trang đang English; ban=en ép tiếng Anh dù trang đang Việt
-    assert b"ex_test_en" not in client.get("/api/exam/tai-de/de-thu-zip?ban=vi", cookies={"lang": "en"}).content
-    assert b"ex_test_en" in client.get("/api/exam/tai-de/de-thu-zip?ban=en", cookies={"lang": "vi"}).content
+    assert b"ex_test_en" not in client.get("/api/exam/tai-de/de-thu-zip?ngon_ngu=vi", cookies={"lang": "en"}).content
+    assert b"ex_test_en" in client.get("/api/exam/tai-de/de-thu-zip?ngon_ngu=en", cookies={"lang": "vi"}).content
     # đề không có bản Anh -> zip chỉ có bản Việt
     tex_cu = Path(kq["tex_path"]).with_name("de_cu_khong_co_ban_anh.tex")
     tex_cu.write_text(Path(kq["tex_path"]).read_text(encoding="utf-8"), encoding="utf-8")
     de["files"]["tex"] = str(tex_cu)
     try:
-        r = client.get("/api/exam/tai-de/de-thu-zip?ban=ca-hai", cookies={"lang": "en"})
+        r = client.get("/api/exam/tai-de/de-thu-zip?ngon_ngu=ca-hai", cookies={"lang": "en"})
         assert zipfile.ZipFile(io.BytesIO(r.content)).namelist() == ["de_TiengViet.pdf"]
     finally:
         tex_cu.unlink()
@@ -329,3 +332,35 @@ def test_word_tieng_anh_khi_trang_english(monkeypatch):
         assert not co_dau.search(en), co_dau.search(en).group(0) + " | " + en[max(0, co_dau.search(en).start() - 60):co_dau.search(en).start() + 60]
     assert "Solution." in en and "True" in en or "False" in en
     assert "Câu" in vi and "PHẦN" in vi and "Question" not in vi
+
+
+def test_giao_vien_tick_ca_hai_thu_tieng_word_va_tex_ra_zip(monkeypatch):
+    """Giáo viên tick "tải kèm bản tiếng Anh": Word và .tex (ngon_ngu=ca-hai) trả .zip có CẢ bản Việt lẫn bản Anh."""
+    import io
+    import shutil
+    import zipfile
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+    monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ KIỂM TRA", "teacher", "HeSo1", pham_vi_chuong="1",
+                                  kem_tieng_anh=True, tieu_de_en="QUIZ")
+    de = {"id": "de-thu-gv", "files": {"tex": kq["tex_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    monkeypatch.setattr(R, "yeu_cau_giao_vien", lambda request, user=None: None)
+    client = TestClient(app)
+    r = client.get("/api/exam/tai-tex/de-thu-gv?ngon_ngu=ca-hai", cookies={"lang": "vi"})
+    z = zipfile.ZipFile(io.BytesIO(r.content))
+    assert sorted(n.rsplit("_", 1)[1] for n in z.namelist()) == ["English.tex", "TiengViet.tex"]
+    en = [n for n in z.namelist() if n.endswith("English.tex")][0]
+    assert "ex_test_en" in z.read(en).decode("utf-8")
+    # không tick: vẫn là một tệp .tex tiếng Việt như cũ
+    assert b"ex_test_en" not in client.get("/api/exam/tai-tex/de-thu-gv").content
+    if shutil.which("pandoc"):
+        for ban in ("de", "loigiai"):
+            r = client.get("/api/exam/tai-word/de-thu-gv?ban=%s&ngon_ngu=ca-hai" % ban, cookies={"lang": "vi"})
+            assert r.status_code == 200 and r.headers["content-type"] == "application/zip"
+            ten = sorted(zipfile.ZipFile(io.BytesIO(r.content)).namelist())
+            assert [n.rsplit("_", 1)[1] for n in ten] == ["English.docx", "TiengViet.docx"]

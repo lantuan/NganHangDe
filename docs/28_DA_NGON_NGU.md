@@ -43,9 +43,23 @@ parallel (collinear) / same direction / opposite direction.
 
 ## Tải kèm cả hai thứ tiếng cho học sinh (03/10/2026)
 - Mặc định học sinh tải PDF đề / lời giải theo ngôn ngữ trang đang chọn (cookie `lang`). Làm bài trực tuyến luôn theo ngôn ngữ trang.
-- Trong chat, dưới link tải đề có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)" (lưu trong localStorage, mặc định tắt). Tick thì các link tải đề và lời giải gắn `?ban=ca-hai`.
-- `GET /api/exam/tai-de/{id}` và `/tai-loigiai/{id}` nhận `ban=vi|en|ca-hai`: `vi`/`en` ép một thứ tiếng bất kể trang; `ca-hai` trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (cùng đề, cùng số liệu, cùng đáp án). Đề cũ hoặc chương chưa dịch chỉ có bản Việt thì zip chỉ chứa bản Việt.
+- Trong chat, dưới link tải đề có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)" (lưu trong localStorage, mặc định tắt). Tick thì các link tải đề và lời giải gắn `?ngon_ngu=ca-hai`.
+- `GET /api/exam/tai-de/{id}` và `/tai-loigiai/{id}` nhận `ngon_ngu=vi|en|ca-hai`: `vi`/`en` ép một thứ tiếng bất kể trang; `ca-hai` trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (cùng đề, cùng số liệu, cùng đáp án). Đề cũ hoặc chương chưa dịch chỉ có bản Việt thì zip chỉ chứa bản Việt.
 - Test: test_tai_de_hoc_sinh_tick_ca_hai_thu_tieng_ra_zip.
+
+## Khi nào một đề có bản tiếng Anh (quan trọng với CHV_Fun)
+Bản Anh của đề (tệp đáp án + .tex tiếng Anh cạnh tệp Việt, `data/temp_en/`, cùng tên) chỉ có khi:
+- đề tạo bằng Chat AI / form tạo đề nhanh / "Làm đề khác" của học sinh (`dapan_tieng_anh=True`): LUÔN có, miễn chương đã dịch;
+- đề giáo viên tạo ở mục Ra đề (`/gv/ra-de`): CHỈ KHI tick "Tạo kèm đề tiếng Anh tương ứng" (`kem_tieng_anh`).
+Đề không có bản Anh: đề cũ trước 03/10/2026, chương chưa dịch (hiện mới Lớp 10 Chương 1, 2), hoặc giáo viên không tick. Trang làm bài ở English khi đó vẫn hiện tiếng Việt, kèm dòng chú thích vàng ở đầu đề (`thong_bao_ban_anh` trong /quiz). Muốn có bản Anh phải TẠO ĐỀ MỚI. Quy tắc này đã chép vào `data/prompts/CHV_Fun.md` (rule 5, task `help`): dán sang node CHV_Fun trên n8n thì CHV_Fun mới trả lời đúng khi người dùng hỏi.
+
+## Tải kèm cả hai thứ tiếng cho giáo viên (03/10/2026)
+- Ô tick "Tải kèm bản tiếng Anh" trên Trang chính và "Đề đã tạo" (`_base_gv.html` có script chung; liên kết có `data-ca-hai` chỉ khi đề có bản Anh). Tick thì PDF đề, PDF lời giải, Word đề/lời giải và `.tex` thêm `ngon_ngu=ca-hai` và trả `.zip` có `*_TiengViet` và `*_English`.
+- `GET /api/exam/tai-word/{id}?ban=de|loigiai&ngon_ngu=ca-hai`, `/tai-tex/{id}?ngon_ngu=ca-hai`. Đề không có bản Anh thì Word vẫn ra zip chỉ có bản Việt, `.tex` ra tệp Việt như cũ.
+- Test: test_giao_vien_tick_ca_hai_thu_tieng_word_va_tex_ra_zip.
+
+## Lỗi hiển thị công thức trong câu trả lời của AI (03/10/2026)
+Câu trả lời của AI là markdown nên qua `marked`; `marked` coi `\{` `\}` là ký tự thoát và bỏ dấu `\`, làm `\left\{ ... \right\}` thành `\left{ ... \right}` và MathJax báo "Missing or unrecognized delimiter for \left". Sửa: `markdownGiuCongThuc()` (chat.html, lam_bai.html) cắt công thức `$..$ $$..$$ \(..\) \[..\]` thành mốc trước khi qua marked rồi trả nguyên văn. Mọi chỗ hiển thị câu trả lời AI phải gọi `renderMarkdownAI`, không gọi `marked.parse` trực tiếp.
 
 ## Gia sư AI bằng tiếng Anh
 Xem docs/23 mục 8b: cùng cách chọn tệp đáp án bản Anh (`data/temp_en/`), lệnh `LENH_HE_THONG_EN`, thông báo lỗi tiếng Anh.

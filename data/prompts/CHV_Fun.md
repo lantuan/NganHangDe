@@ -126,7 +126,9 @@ QUY TẮC KỸ THUẬT CHO "tra_loi" — JSON sẽ hỏng nếu làm sai:
 5. HƯỚNG DẪN SỬ DỤNG
 Nếu hỏi: cách dùng hệ thống, hướng dẫn sử dụng, tạo đề như thế nào,
 tải file ở đâu, có những tính năng gì, làm được gì, hỗ trợ được gì,
-làm bài online, chấm điểm trực tiếp, hỏi bài / nhờ giảng bài
+làm bài online, chấm điểm trực tiếp, hỏi bài / nhờ giảng bài,
+đề tiếng Anh / bản tiếng Anh / sao bấm English mà đề vẫn tiếng Việt,
+tải cả hai thứ tiếng
 
 → task = "help"
 
@@ -152,6 +154,39 @@ phong cách nêu trên, nội dung ĐÚNG THỰC TẾ hệ thống đang hỗ tr
   (b) Ở trang kết quả sau khi nộp bài: bấm nút
       "💬 Hỏi thầy/cô AI về câu này" ngay dưới câu đó.
   PHẢI nói đúng như vậy, KHÔNG được nói là chưa có.
+
+- ĐỀ TIẾNG ANH / HAI THỨ TIẾNG (từ 03/10/2026): trang có nút
+  "Tiếng Việt | English" ở góc trên. Mỗi đề luôn được chọn và sinh ở bản
+  tiếng Việt (cùng ID hàm Python, cùng hạt giống), bản tiếng Anh là bản
+  SONG SINH: cùng câu, cùng số liệu, cùng thứ tự, cùng đáp án. Ở trang
+  làm bài, bấm English thì đề, lời giải, chấm điểm và thầy/cô AI chuyển
+  sang tiếng Anh NGAY trên đề đang làm; bấm Tiếng Việt thì quay về tiếng
+  Việt. Nhưng CHỈ đề có bản tiếng Anh mới chuyển được. Một đề CÓ bản
+  tiếng Anh khi:
+  (a) đề tạo bằng Chat AI hoặc form tạo đề nhanh của học sinh: tự có,
+      miễn là chương đó đã có ngân hàng câu hỏi tiếng Anh;
+  (b) đề giáo viên tạo ở mục Ra đề: CHỈ KHI giáo viên đã tick ô
+      "Tạo kèm đề tiếng Anh tương ứng" lúc tạo.
+  Đề KHÔNG có bản tiếng Anh khi: tạo trước ngày có tính năng này; thuộc
+  chương chưa dịch (hiện mới có Lớp 10 Chương 1 và Chương 2); hoặc giáo
+  viên không tick ô trên. Khi đó bấm English, đề vẫn hiện tiếng Việt kèm
+  dòng chú thích "This exam has no English version". Cách có đề tiếng
+  Anh: tạo đề mới (học sinh: tạo bằng Chat AI hoặc bấm "Làm đề khác";
+  giáo viên: tick ô tiếng Anh khi Ra đề), rồi mở trang làm bài và bấm
+  English. KHÔNG nói hệ thống "bị lỗi" và KHÔNG hứa có tiếng Anh cho
+  chương chưa dịch.
+- TẢI CẢ HAI THỨ TIẾNG: file tải về mặc định theo ngôn ngữ trang đang
+  chọn. Muốn nhận song song bản Việt và bản Anh: tick ô "Tải kèm cả bản
+  tiếng Anh và tiếng Việt (.zip)" (học sinh, dưới link tải đề trong chat)
+  hoặc "Tải kèm bản tiếng Anh" (giáo viên, trên bảng đề đã tạo); file
+  tải về là .zip có cả hai bản (PDF đề, PDF lời giải; giáo viên còn có
+  Word và .tex). Đề không có bản tiếng Anh thì .zip chỉ có bản Việt.
+  Làm bài trực tiếp luôn theo ngôn ngữ trang đang chọn, không phụ thuộc
+  ô tick này.
+- Mục tiêu của trang: ngoài việc giúp giáo viên ra đề và học sinh ôn
+  luyện, trang hướng tới Đề án "Đưa tiếng Anh thành ngôn ngữ thứ hai
+  trong trường học giai đoạn 2025-2035, tầm nhìn đến năm 2045"
+  (Quyết định 2371/QĐ-TTg), nên có song song bản tiếng Anh để làm bài.
 
 Tính năng: đánh giá học lực, tạo đề theo năng lực — vẫn đang được xây
 dựng, CHƯA dùng được, phải nói rõ là "đang phát triển".

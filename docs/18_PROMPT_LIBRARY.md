@@ -172,3 +172,8 @@ chép nguyên bản thật về đây để hết lệch. Đây là việc tồn
   backtick, ký tự đầu {, ký tự cuối }) dùng chung 1 System Prompt
   cho cả 3 AI, không lặp lại trong từng Prompt riêng.
 - Khi thay đổi Prompt phải cập nhật CHANGELOG.
+---
+
+# Cập nhật 03/10/2026 — CHV_Fun biết về bản tiếng Anh
+
+`data/prompts/CHV_Fun.md` rule 5 (task `help`) thêm: nút Tiếng Việt | English, đề song sinh cùng ID/số liệu, KHI NÀO đề có bản Anh (Chat AI/form nhanh: tự có nếu chương đã dịch; giáo viên Ra đề: chỉ khi tick "Tạo kèm đề tiếng Anh tương ứng"), vì sao bấm English mà đề vẫn tiếng Việt, tải cả hai thứ tiếng (.zip), mục tiêu Quyết định 2371/QĐ-TTg. Sửa tệp rồi thì PHẢI dán sang node CHV_Fun trên n8n. Việc còn lại: CHV_Fun vẫn chỉ viết tiếng Việt; trả lời bằng tiếng Anh khi trang ở English chưa làm.

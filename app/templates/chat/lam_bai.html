@@ -331,10 +331,24 @@ function tachDoanToan(s) {
 // Cau tra loi cua AI la MARKDOWN, KHAC voi loi giai chuan (LaTeX tu
 // Python). Hai loai noi dung, hai ham render khac nhau - dung nham thi
 // hoac hien ra chu tho (**dam**), hoac mat dinh dang.
+// Cong thuc ($...$, $$...$$, \(...\), \[...\]) PHAI duoc cat ra truoc khi qua marked: marked coi "\{" va "\}"
+// la ky tu thoat markdown va xoa dau "\", nen "\left\{ 3, 9 \right\}" thanh "\left{ 3, 9 \right}" va MathJax bao
+// "Missing or unrecognized delimiter for \left" (loi 03/10/2026 o cau tra loi cua gia su tieng Anh).
+// Cat cong thuc -> thay bang moc -> marked -> tra cong thuc nguyen ban (chi thoat & < >) vao cho cu.
+function markdownGiuCongThuc(raw) {
+    const kho = [];
+    const thoat = function (s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+    const t = String(raw).replace(/\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\\\([\s\S]+?\\\)|\$(?:\\.|[^$\\\n])+\$/g, function (m) {
+        kho.push(m);
+        return "@@TOAN" + (kho.length - 1) + "@@";
+    });
+    return window.marked.parse(t).replace(/@@TOAN(\d+)@@/g, function (_, i) { return thoat(kho[Number(i)]); });
+}
+
 function renderMarkdownAI(raw) {
     if (!raw) return "";
     if (window.marked && window.marked.parse) {
-        try { return window.marked.parse(String(raw)); } catch (e) { /* roi xuong duoi */ }
+        try { return markdownGiuCongThuc(raw); } catch (e) { /* roi xuong duoi */ }
     }
     // marked chua tai xong/chan mang: it nhat cung phai xuong dong duoc.
     return renderLatexText(raw).replace(/\n/g, "<br>");
@@ -429,6 +443,7 @@ async function taiDe() {
             return;
         }
         DANH_SACH_CAU = data.data.cau_hoi;
+        THONG_BAO_BAN_ANH = data.data.thong_bao_ban_anh || '';
         veTrangLamBai();
     } catch (e) {
         main.innerHTML = '<div class="loi">Lỗi kết nối, thử tải lại trang nhé.</div>';
@@ -517,9 +532,15 @@ function veMotCau(cau) {
     return noiDung;
 }
 
+// Trang English nhung de khong co ban Anh: chu thich mot dong o dau de (khong de nguoi dung tuong la loi).
+var THONG_BAO_BAN_ANH = '';
+
 function veTrangLamBai() {
     const main = document.getElementById('main');
     let html = '';
+    if (THONG_BAO_BAN_ANH) {
+        html += '<div style="background:#fffbeb;color:#92400e;border:1px solid #fcd34d;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:.92rem">' + THONG_BAO_BAN_ANH + '</div>';
+    }
     // In tieu de "PHAN I/II/III/IV" moi khi sang phan moi, giong het file
     // PDF. Truoc day trang nay chi in "Cau 1, Cau 2..." lien mach nen hoc
     // sinh khong biet cau nao thuoc phan nao, cach cham diem cung khac.

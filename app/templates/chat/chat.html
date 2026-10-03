@@ -744,10 +744,24 @@
         // phai doi sang HTML truoc, giong het lam_bai.html.
         // Cau tra loi cua AI la MARKDOWN, KHAC voi loi giai chuan (LaTeX
         // tu Python). Hai loai noi dung, hai ham render khac nhau.
+        // Cong thuc ($...$, $$...$$, \(...\), \[...\]) PHAI duoc cat ra truoc khi qua marked: marked coi "\{" va "\}"
+        // la ky tu thoat markdown va xoa dau "\", nen "\left\{ 3, 9 \right\}" thanh "\left{ 3, 9 \right}" va MathJax bao
+        // "Missing or unrecognized delimiter for \left" (loi 03/10/2026 o cau tra loi cua gia su tieng Anh).
+        // Cat cong thuc -> thay bang moc -> marked -> tra cong thuc nguyen ban (chi thoat & < >) vao cho cu.
+        function markdownGiuCongThuc(raw) {
+            const kho = [];
+            const thoat = function (s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+            const t = String(raw).replace(/\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\\\([\s\S]+?\\\)|\$(?:\\.|[^$\\\n])+\$/g, function (m) {
+                kho.push(m);
+                return "@@TOAN" + (kho.length - 1) + "@@";
+            });
+            return window.marked.parse(t).replace(/@@TOAN(\d+)@@/g, function (_, i) { return thoat(kho[Number(i)]); });
+        }
+
         function renderMarkdownAI(raw) {
             if (!raw) return "";
             if (window.marked && window.marked.parse) {
-                try { return window.marked.parse(String(raw)); } catch (e) { /* roi xuong duoi */ }
+                try { return markdownGiuCongThuc(raw); } catch (e) { /* roi xuong duoi */ }
             }
             return "<p>" + renderLatexText(raw).replace(/\n/g, "<br>") + "</p>";
         }
@@ -1512,7 +1526,7 @@ ${html}
                     } else if (msg.loai_phan_hoi === "error") {
                         addAIMessageLoi("Lỗi: " + (msg.noi_dung || "Có lỗi xảy ra."));
                     } else {
-                        addAIMessage(marked.parse(msg.noi_dung || ""));
+                        addAIMessage(renderMarkdownAI(msg.noi_dung || ""));
                     }
                 });
                 scrollBottom();
@@ -1579,9 +1593,9 @@ ${html}
         function taiTheoLuaChon(a) {
             const goc = a.getAttribute("href") || "";
             if (goc.indexOf("/api/exam/tai-de/") !== 0 && goc.indexOf("/api/exam/tai-loigiai/") !== 0) return true;
-            const sach = goc.replace(/[?&]ban=[^&]*/, "");
+            const sach = goc.replace(/[?&]ngon_ngu=[^&]*/, "");
             if (daTickCaHai()) {
-                a.setAttribute("href", sach + (sach.indexOf("?") < 0 ? "?" : "&") + "ban=ca-hai");
+                a.setAttribute("href", sach + (sach.indexOf("?") < 0 ? "?" : "&") + "ngon_ngu=ca-hai");
                 a.removeAttribute("download");      // tep .zip, tranh bi dat ten .pdf
             } else {
                 a.setAttribute("href", sach);
@@ -1631,7 +1645,7 @@ ${html}
                         // tra ve lop=null vi hoc sinh khong noi ro) - CHI hoi
                         // lai bang van ban thuong, KHONG hien nut xac nhan vi
                         // chua co gi de "dong y" - hoc sinh phai go lai lop.
-                        addAIMessage(marked.parse(data.data.tra_loi || data.message || "Bạn học lớp mấy vậy (10/11/12)? Nói rõ giúp mình để tạo đề đúng chương trình nhé!"));
+                        addAIMessage(renderMarkdownAI(data.data.tra_loi || data.message || "Bạn học lớp mấy vậy (10/11/12)? Nói rõ giúp mình để tạo đề đúng chương trình nhé!"));
                     } else if (data.data && data.data.type === "xac_nhan_de") {
                         const idHoi = "xac-nhan-de-" + Date.now();
                         const deXuatEncoded = encodeURIComponent(JSON.stringify(data.data));
@@ -1665,9 +1679,9 @@ ${html}
                             htmlHoi
                         );
                     } else if (data.reply) {
-                        addAIMessage(marked.parse(data.reply));
+                        addAIMessage(renderMarkdownAI(data.reply));
                     } else {
-                        addAIMessage(marked.parse(data.message || "Đã xử lý xong."));
+                        addAIMessage(renderMarkdownAI(data.message || "Đã xử lý xong."));
                     }
                 } else {
                     addAIMessageLoi("⚠️ " + (data.message || "Có lỗi xảy ra, vui lòng thử lại."));

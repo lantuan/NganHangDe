@@ -540,34 +540,39 @@ def _pdf_vi_de(de: dict) -> Path:
     return Path(duong_dan)
 
 
-def _chon_ban_ngon_ngu(request: Request, ban: str | None) -> str:
-    """ban = "vi" | "en" | "ca-hai" (hai ban cung luc, nen thanh .zip). Khong truyen -> theo ngon ngu cua trang."""
-    if ban in ("vi", "en", "ca-hai"):
-        return ban
+def _chon_ban_ngon_ngu(request: Request, ngon_ngu: str | None) -> str:
+    """ngon_ngu = "vi" | "en" | "ca-hai" (hai ban cung luc, nen thanh .zip). Khong truyen -> theo ngon ngu cua trang."""
+    if ngon_ngu in ("vi", "en", "ca-hai"):
+        return ngon_ngu
     return lay_ngon_ngu(request)
 
 
-def _zip_song_ngu(de_id: str, pdf_vi: Path, pdf_en: Path | None, ten: str) -> Response:
-    """Gom ban tieng Viet + ban tieng Anh (neu de co ban tieng Anh) vao MOT tep .zip. Hoc sinh tick
-    "tai kem ca hai thu tieng" thi nhan dung hai tep song song, cung de, cung so lieu, cung dap an."""
+def _zip_cac_tep(cac_tep: list, ten_zip: str) -> Response:
+    """Gom cac tep [(duong_dan, ten_trong_zip), ...] vao MOT .zip tra ve ngay (khong ghi ra dia)."""
     bo_nho = io.BytesIO()
     with zipfile.ZipFile(bo_nho, "w", zipfile.ZIP_DEFLATED) as z:
-        z.write(pdf_vi, "%s_TiengViet.pdf" % ten)
-        if pdf_en is not None:
-            z.write(pdf_en, "%s_English.pdf" % ten)
+        for duong, ten in cac_tep:
+            z.write(duong, ten)
     return Response(
         content=bo_nho.getvalue(), media_type="application/zip",
-        headers={"Content-Disposition": 'attachment; filename="%s_%s.zip"' % (ten, de_id[:8])},
+        headers={"Content-Disposition": 'attachment; filename="%s.zip"' % ten_zip},
     )
 
 
+def _zip_song_ngu(de_id: str, pdf_vi: Path, pdf_en: Path | None, ten: str) -> Response:
+    """Gom ban tieng Viet + ban tieng Anh (neu de co ban tieng Anh) vao MOT tep .zip. Nguoi dung tick
+    "tai kem ca hai thu tieng" thi nhan dung hai tep song song, cung de, cung so lieu, cung dap an."""
+    cac = [(pdf_vi, "%s_TiengViet.pdf" % ten)] + ([(pdf_en, "%s_English.pdf" % ten)] if pdf_en is not None else [])
+    return _zip_cac_tep(cac, "%s_%s" % (ten, de_id[:8]))
+
+
 @router.get("/tai-de/{de_id}")
-def tai_de_endpoint(request: Request, de_id: str, ban: str | None = None):
-    """ban=vi|en|ca-hai. Mac dinh theo ngon ngu trang dang chon (cookie lang); ca-hai -> .zip co ca hai ban."""
+def tai_de_endpoint(request: Request, de_id: str, ngon_ngu: str | None = None):
+    """ngon_ngu=vi|en|ca-hai. Mac dinh theo ngon ngu trang dang chon (cookie lang); ca-hai -> .zip co ca hai ban."""
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    chon = _chon_ban_ngon_ngu(request, ban)
+    chon = _chon_ban_ngon_ngu(request, ngon_ngu)
     if chon == "ca-hai":
         return _zip_song_ngu(de_id, _pdf_vi_de(de), _pdf_en_tu_tex(de, "de"), "de")
     if chon == "en":
@@ -639,7 +644,7 @@ def tai_tex_tieng_anh_endpoint(de_id: str, request: Request):
 # ======================================================
 
 @router.get("/tai-tex/{de_id}")
-def tai_tex_endpoint(de_id: str, request: Request):
+def tai_tex_endpoint(de_id: str, request: Request, ngon_ngu: str | None = None):
     chan = yeu_cau_giao_vien(request)
     if chan is not None:
         return chan
@@ -655,6 +660,13 @@ def tai_tex_endpoint(de_id: str, request: Request):
             "File .tex cua de nay da bi don (cron xoa sau 1 ngay). "
             "Tao lai de roi tai .tex ngay trong phien do.",
         )
+
+    if ngon_ngu == "ca-hai" and duong_tex_en(duong_dan).exists():
+        # Tick "kem tieng Anh": .zip co CA HAI tep .tex (Viet va Anh), cung de, cung so lieu.
+        return _zip_cac_tep(
+            [(Path(duong_dan), "de_%s_TiengViet.tex" % de_id[:8]),
+             (duong_tex_en(duong_dan), "de_%s_English.tex" % de_id[:8])],
+            "tex_%s" % de_id[:8])
 
     # MOT tep duy nhat. De sinh cho giao vien la ban LOI GIAI; muon ban de
     # thi doi [loigiai] thanh [dethi] o dong \usepackage{ex_test}. Hai ban
@@ -678,7 +690,7 @@ def tai_tex_endpoint(de_id: str, request: Request):
 # ======================================================
 
 @router.get("/tai-word/{de_id}")
-def tai_word_endpoint(de_id: str, request: Request, ban: str = "de"):
+def tai_word_endpoint(de_id: str, request: Request, ban: str = "de", ngon_ngu: str | None = None):
     chan = yeu_cau_giao_vien(request)
     if chan is not None:
         return chan
@@ -696,21 +708,29 @@ def tai_word_endpoint(de_id: str, request: Request, ban: str = "de"):
             "Tao lai de roi tai Word ngay trong phien do.",
         )
 
-    # Trang đang ở English và đề có .tex tiếng Anh (data/temp_en/, cùng tên): xuất Word TIẾNG ANH.
-    lang = "vi"
-    if lay_ngon_ngu(request) == "en" and duong_tex_en(duong_dan).exists():
-        lang, duong_dan = "en", str(duong_tex_en(duong_dan))
-    hau_to = "_en" if lang == "en" else ""
-    ten_goc = "%s%s_%s" % ("solutions" if lang == "en" and ban == "loigiai" else
-                           "exam" if lang == "en" else "loigiai" if ban == "loigiai" else "de",
-                           "", de_id[:8])
-
     from app.services.word_service import xuat_word, WordExportError
-    try:
-        ra = xuat_word(Path(duong_dan), ban == "loigiai", ten_goc + hau_to, lang)
-    except WordExportError as e:
-        raise HTTPException(500, detail=f"Loi xuat Word: {e}")
+    chon = _chon_ban_ngon_ngu(request, ngon_ngu)
+    co_en = duong_tex_en(duong_dan).exists()
 
+    def _xuat(lang: str, tex: str) -> tuple[Path, str]:
+        ten = "%s_%s" % ("solutions" if lang == "en" and ban == "loigiai" else
+                         "exam" if lang == "en" else "loigiai" if ban == "loigiai" else "de", de_id[:8])
+        try:
+            return xuat_word(Path(tex), ban == "loigiai", ten + ("_en" if lang == "en" else ""), lang), ten
+        except WordExportError as e:
+            raise HTTPException(500, detail=f"Loi xuat Word: {e}")
+
+    if chon == "ca-hai":
+        # Hai tep Word song song (Viet + Anh) gom trong mot .zip; de khong co ban Anh thi chi co ban Viet.
+        w_vi, ten_vi = _xuat("vi", duong_dan)
+        w_en = _xuat("en", str(duong_tex_en(duong_dan)))[0] if co_en else None
+        return _zip_cac_tep(
+            [(w_vi, "%s_TiengViet.docx" % ten_vi)] + ([(w_en, "%s_English.docx" % ten_vi)] if w_en else []),
+            "word_%s_%s" % (ban, de_id[:8]))
+
+    # Trang đang ở English và đề có .tex tiếng Anh (data/temp_en/, cùng tên): xuất Word TIẾNG ANH.
+    lang = "en" if (chon == "en" and co_en) else "vi"
+    ra, ten_goc = _xuat(lang, str(duong_tex_en(duong_dan)) if lang == "en" else duong_dan)
     return FileResponse(
         path=str(ra),
         filename="%s.docx" % ten_goc,
@@ -840,7 +860,7 @@ def export_loigiai_endpoint(request: Request, payload: ExportLoiGiaiRequest):
 
 
 @router.get("/tai-loigiai/{de_id}")
-def tai_loigiai_endpoint(request: Request, de_id: str, ban: str | None = None):
+def tai_loigiai_endpoint(request: Request, de_id: str, ngon_ngu: str | None = None):
     """URL on dinh cho nut "Loi giai" gan duoi TUNG de trong hoi thoai.
 
     Khac /export-loigiai o cho: chi dich danh 1 de theo de_id, khong lay
@@ -850,7 +870,7 @@ def tai_loigiai_endpoint(request: Request, de_id: str, ban: str | None = None):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, ban))
+    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, ngon_ngu))
 
 
 # ======================================================
@@ -1237,6 +1257,14 @@ def xem_de_lam_bai_endpoint(request: Request, de_id: str):
         "message": "",
         "data": {
             "de_id": de["id"],
+            # Trang đang ở English mà đề không có bản Anh: báo rõ để học sinh/giáo viên không tưởng là lỗi.
+            "thong_bao_ban_anh": (
+                "This exam has no English version, so it is shown in Vietnamese. Exams made before the "
+                "English version existed, exams from chapters not translated yet, and exams a teacher "
+                "created without ticking \"Also create the matching English exam\" have no English version. "
+                "Create a new exam from the Chat AI to get one."
+                if ngon_ngu == "en" and not dung_ban_anh else ""
+            ),
             "tong_so_cau": len(danh_sach_cau_hoi),
             "cau_hoi": danh_sach_cau_hoi,
         },

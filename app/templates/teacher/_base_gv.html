@@ -40,5 +40,30 @@
 Ngân Hàng Đề AI
 </div>
 </footer>
+<script>
+/* Tick "Tải kèm bản tiếng Anh": các liên kết có data-ca-hai (đề đã có bản tiếng Anh) trả về .zip gồm cả
+   bản Việt lẫn bản Anh (PDF đề, PDF lời giải, Word, .tex). Chỉ là tiện ích riêng của người dùng: lưu trong
+   localStorage, mặc định tắt, trình duyệt chặn localStorage thì vẫn chạy. */
+(function () {
+  function bat() { try { return localStorage.getItem("chv_gv_ca_hai") === "1"; } catch (e) { return false; } }
+  function dongBo() {
+    document.querySelectorAll(".chk-ca-hai-gv").forEach(function (c) { c.checked = bat(); });
+  }
+  document.addEventListener("DOMContentLoaded", dongBo);
+  document.addEventListener("change", function (e) {
+    const c = e.target;
+    if (!c || !c.classList || !c.classList.contains("chk-ca-hai-gv")) return;
+    try { localStorage.setItem("chv_gv_ca_hai", c.checked ? "1" : "0"); } catch (err) { /* bo qua */ }
+    document.querySelectorAll(".chk-ca-hai-gv").forEach(function (x) { x.checked = c.checked; });
+  });
+  document.addEventListener("click", function (e) {
+    const a = e.target.closest ? e.target.closest("a[data-ca-hai]") : null;
+    if (!a) return;
+    if (!a.dataset.goc) a.dataset.goc = a.getAttribute("href");
+    const goc = a.dataset.goc;
+    a.setAttribute("href", bat() ? goc + (goc.indexOf("?") < 0 ? "?" : "&") + "ngon_ngu=ca-hai" : goc);
+  });
+})();
+</script>
 </body>
 </html>

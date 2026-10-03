@@ -9871,4 +9871,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 
 ## Học sinh tải kèm cả hai thứ tiếng (03/10/2026)
 - Tên trường trên khung/Word/giao diện tiếng Anh theo Lan: HUNG VUONG GIFTED HIGH SCHOOL (thay cho cách ghi "HIGH SCHOOL FOR THE GIFTED").
-- /tai-de, /tai-loigiai nhận `ban=vi|en|ca-hai`; ca-hai trả .zip Việt + Anh. Chat có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)". Làm bài vẫn theo ngôn ngữ trang.
+- /tai-de, /tai-loigiai nhận `ngon_ngu=vi|en|ca-hai`; ca-hai trả .zip Việt + Anh. Chat có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)". Làm bài vẫn theo ngôn ngữ trang.
+
+## Bản Anh/Việt cho giáo viên, sửa công thức AI, giới thiệu trang (03/10/2026)
+- Đổi tên tham số tải đề thành `ngon_ngu=vi|en|ca-hai` (tránh trùng `ban=de|loigiai` của Word). Giáo viên có ô tick "Tải kèm bản tiếng Anh": Word, .tex, PDF đề/lời giải ra .zip có cả Việt và Anh.
+- Sửa lỗi "Missing or unrecognized delimiter for \left" trong câu trả lời AI: cắt công thức trước khi qua marked (`markdownGiuCongThuc`).
+- Trang chủ: thêm mục tiêu "tiếng Anh là ngôn ngữ thứ hai trong nhà trường" (Quyết định 2371/QĐ-TTg) + dòng "Dành cho ai?".
+- Trang làm bài ở English mà đề không có bản Anh: hiện chú thích vàng (`thong_bao_ban_anh`).
+- data/prompts/CHV_Fun.md rule 5: kiến thức về bản Anh/Việt, khi nào đề có bản Anh, tải cả hai thứ tiếng. PHẢI dán sang n8n.
