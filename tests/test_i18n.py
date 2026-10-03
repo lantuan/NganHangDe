@@ -77,7 +77,8 @@ def test_khong_dich_file_tinh_va_json_tieng_viet():
 def test_tu_khong_dau_va_chu_y_duoc_dich():
     """"Sai" (không dấu) chỉ dịch khi cả đoạn khớp từ điển; "ý" ở kết quả Đúng/Sai thành "Part"."""
     from app.services.i18n_service import dich_doan
-    assert dich_doan(" Sai", "en") == " Incorrect"
+    assert dich_doan(" Sai", "en") == " False"
+    assert dich_doan(" Đúng\u200b", "en") == " True"   # nút Đúng/Sai: True/False
     assert dich_doan(" ý ", "en") == " Part "
     assert dich_doan(" Đúng", "en") == " Correct"
     assert dich_doan("Saigon", "en") == "Saigon"

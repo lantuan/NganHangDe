@@ -501,7 +501,9 @@ function veMotCau(cau) {
                 ? '<div class="hinh-ve hinh-o"><img src="' + cau.hinh_phat_bieu[y] + '" alt="Hình ý ' + y + '" loading="lazy" onerror="baoHinhHong(this)"></div>' : '';
             noiDung += '<div class="noi-dung">' + y + ') ' + renderLatexText(noi) + anhY + '</div>';
             noiDung += '<div class="tf-nut">';
-            noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="true"> Đúng</label>';
+            // CHU Y: sau chu "Đúng" ben duoi co 1 ky tu rong U+200B (khong nhin thay) de tu dien i18n dich nut nay
+            // la "True" (cau Đúng/Sai) tach khoi chu "Đúng" o ket qua ("Correct"). Dung xoa.
+            noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="true"> Đúng​</label>';
             noiDung += '<label><input type="radio" name="cau_' + cau.so_thu_tu + '_' + y + '" value="false"> Sai</label>';
             noiDung += '</div></div>';
         });
