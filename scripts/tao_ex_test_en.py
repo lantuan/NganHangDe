@@ -52,7 +52,7 @@ THAY_MAU = [
     # Dấu thập phân kiểu Mỹ (0.7): bỏ gói icomma (gói đó là để in 0,7 kiểu Việt)
     (r"\IfFileExists{icomma.sty}{\usepackage{icomma}}{}", "", 1),
     (r"HẾT", "END", 1),
-    (r"TRƯỜNG THPT CHUYÊN HÙNG VƯƠNG", "HUNG VUONG SPECIALIZED HIGH SCHOOL", 1),
+    (r"TRƯỜNG THPT CHUYÊN HÙNG VƯƠNG", "HUNG VUONG HIGH SCHOOL FOR THE GIFTED", 1),
     (r"(\textit{Đề thi có #1\ trang})", r"(\textit{This exam has #1\ pages})", 1),
     (r"NĂM HỌC __NAM_HOC__", "SCHOOL YEAR __NAM_HOC__", 1),
     (r"MÔN TOÁN, LỚP #3", "MATHEMATICS, GRADE #3", 1),
