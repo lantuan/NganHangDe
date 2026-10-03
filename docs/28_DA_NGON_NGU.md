@@ -18,11 +18,11 @@ vectơ = vector; tập hợp = set; mệnh đề = statement; hình bình hành 
 hình thoi = rhombus; tam giác đều = equilateral triangle; trung điểm = midpoint; cùng phương / cùng hướng / ngược hướng =
 parallel (collinear) / same direction / opposite direction.
 
-## Ngân hàng câu hỏi tiếng Anh (làm xong Chương 1 Lớp 10, 03/10/2026)
-- Thư mục riêng `data/python_bank_en/toan10/L10_C1.py` (cùng tên hàm, tham số như bản Việt). KHÔNG sửa tay: sửa bản Việt (data/python_bank) rồi chạy lại
+## Ngân hàng câu hỏi tiếng Anh (đã xong Lớp 10 Chương 1 và Chương 2, 03/10/2026)
+- Thư mục riêng `data/python_bank_en/toan10/L10_C1.py`, `L10_C2.py`... (cùng tên hàm, tham số như bản Việt). KHÔNG sửa tay: sửa bản Việt (data/python_bank) rồi chạy lại
   `python3 scripts/dich_ngan_hang.py dich data/python_bank/toan10/L10_C1.py`.
 - Cách dịch: tách chuỗi hiển thị (str, f-string) trong cây cú pháp thành đơn vị; từ điển `data/i18n/bank/en_<tệp>.json` {nguồn Việt: nguồn Anh | "__GIU__"} (giữ nguyên toán, %s %d, {biểu thức}, thứ tự placeholder); `__GIU__` cho chuỗi mà mã dùng làm khoá logic.
-- Chỗ MÃ phụ thuộc chữ Việt không dấu (so sánh "sai", split("cho } "), "tham gia", dấu thập phân...) sửa bằng `data/i18n/bank/patch_<tệp>*.json`: [{"tim", "thay", "so_lan" | "tat_ca"}], áp dụng lần lượt lên bản Anh sau khi thay chuỗi.
+- Chỗ MÃ phụ thuộc chữ Việt không dấu (so sánh "sai", split("cho } "), "tham gia", dấu thập phân...) sửa bằng `data/i18n/bank/patch_<tệp>.json` và `patch_<tệp>_2.json`, `_3`...: [{"tim", "thay", "so_lan" | "tat_ca"}], áp dụng lần lượt lên bản Anh sau khi thay chuỗi.
 - Quy tắc bắt buộc khi dịch: hai chỗ cùng một câu tiếng Việt mà mã gộp / bỏ trùng (so sánh, set) PHẢI ra cùng một câu tiếng Anh; từ khoá mã dùng ("true", "false", "recorded that"...) không đổi tuỳ tiện.
 - Kiểm: `python3 scripts/kiem_tuong_duong.py L10_C1 8` so từng hàm bản Anh với bản Việt cùng hạt giống (cấu trúc, vị trí \True, mọi công thức). Phải 0 hàm lệch (ngoại lệ ghi trong tests/test_ngan_hang_anh.py). `python3 -m pytest tests/test_ngan_hang_anh.py`.
 - Quy trình thêm chương tiếp theo: (1) trích đơn vị `python3 scripts/dich_ngan_hang.py trich <tệp>`; (2) dịch hàng loạt, tách nhóm ~200 đơn vị cho các nhóm dịch song song, mỗi nhóm đọc mã quanh dòng đó; (3) chạy dich, kiem_tuong_duong, sửa patch; (4) rà mẫu đầu ra (grammar, "there are 1 ...", từ Việt không dấu sót như Sai, Cho, Do); (5) test.
@@ -36,5 +36,5 @@ parallel (collinear) / same direction / opposite direction.
 - Thông báo từ AI / n8n (Chat) vẫn tiếng Việt: cần truyền `lang` cho n8n.
 - Tên bài, yêu cầu cần đạt trong Curriculum (mới có tên chương).
 - Word tiếng Anh (word_service còn nhãn Việt).
-- Dịch ngân hàng các chương khác (Lớp 10 chương 2..9, Lớp 11, 12).
+- Dịch ngân hàng các chương khác (Lớp 10 chương 3..9, Lớp 11, 12).
 - Làm bài trực tuyến của học sinh bằng tiếng Anh (trang làm bài, chấm bài).

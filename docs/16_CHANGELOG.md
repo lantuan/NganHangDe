@@ -9821,3 +9821,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Test mới tests/test_ngan_hang_anh.py (tương đương Việt/Anh, bản Anh khớp kết quả dịch, không còn chữ Việt, khung Anh khớp bản sinh, đề Anh ghép đề Việt, chương chưa dịch).
 
 - Sửa bản Việt NB015_MC_B: phương án nhiễu dùng Q.lower() hạ chữ thường cả công thức ($ABCD$ -> $abcd$); nay dùng _c1_thuong (chỉ hạ chữ đầu câu).
+
+# Version 4.06 - 2026-10-03
+
+## Ngân hàng tiếng Anh: Lớp 10 Chương 2
+- Thêm `data/python_bank_en/toan10/L10_C2.py` (30 hàm, 231 đoạn chữ) sinh từ bản Việt bằng `scripts/dich_ngan_hang.py`: từ điển `data/i18n/bank/en_L10_C2.json`, patch `patch_L10_C2.json` ("sai" -> "false" mọi chỗ mã so sánh) và `patch_L10_C2_2.json` (40 sửa sau rà soát: số ít/số nhiều, "The number of ... is N", cách diễn đạt).
+- dich_ngan_hang.tai_dien nạp `patch_<tệp>.json` rồi `patch_<tệp>_*.json` theo thứ tự tên.
+- Kiểm: `python3 scripts/kiem_tuong_duong.py L10_C2 12` -> 30 hàm, 0 lệch.
+- tests/test_ngan_hang_anh.py chạy theo từng chương có thư mục tiếng Anh (tương đương Việt/Anh, khớp kết quả dịch, không còn chữ Việt).

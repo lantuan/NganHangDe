@@ -164,8 +164,10 @@ def tai_tu_dien(stem: str):
     td = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
     # patch_<stem>.json rồi patch_<stem>_2.json, _3... (áp dụng lần lượt, mỗi tệp một đợt rà soát)
     patch = []
-    for fp in sorted(TU_DIEN_DIR.glob("patch_%s*.json" % stem)):
-        patch += json.loads(fp.read_text(encoding="utf-8"))
+    ds = [TU_DIEN_DIR / ("patch_%s.json" % stem)] + sorted(TU_DIEN_DIR.glob("patch_%s_*.json" % stem))
+    for fp in ds:
+        if fp.exists():
+            patch += json.loads(fp.read_text(encoding="utf-8"))
     return td, patch
 
 

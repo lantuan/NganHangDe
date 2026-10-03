@@ -30,27 +30,38 @@ CHO_PHEP_LECH = {
 }
 
 
-def test_ban_anh_L10_C1_tuong_duong_ban_viet():
+def _cac_chuong_da_dich():
+    return sorted(p.stem for p in (GOC / "data" / "python_bank_en" / "toan10").glob("L10_C*.py"))
+
+
+def test_co_chuong_da_dich():
+    assert "L10_C1" in _cac_chuong_da_dich()
+
+
+@pytest.mark.parametrize("stem", _cac_chuong_da_dich())
+def test_ban_anh_tuong_duong_ban_viet(stem):
     kt = _nap_script("kiem_tuong_duong")
-    tong, bad = kt.so_sanh("L10_C1", n=4)
+    tong, bad = kt.so_sanh(stem, n=4)
     bad = {t: v for t, v in bad.items() if t not in CHO_PHEP_LECH}
-    assert tong >= 160
+    assert tong >= 20
     assert not bad, "Ban Anh lech ban Viet: %s" % list(bad.items())[:3]
 
 
-def test_ban_anh_sinh_ra_tu_ban_viet_khong_sua_tay():
+@pytest.mark.parametrize("stem", _cac_chuong_da_dich())
+def test_ban_anh_sinh_ra_tu_ban_viet_khong_sua_tay(stem):
     """data/python_bank_en/... phải đúng bằng kết quả của scripts/dich_ngan_hang.py (từ điển + patch)."""
     dich = _nap_script("dich_ngan_hang")
-    nguon = GOC / "data" / "python_bank" / "toan10" / "L10_C1.py"
+    nguon = GOC / "data" / "python_bank" / "toan10" / (stem + ".py")
     src, chua, loi = dich.dich_tep(nguon)
     assert not chua, "Con %d doan chua dich" % len(chua)
     assert not loi, "Loi dich: %s" % loi[:3]
-    hien_co = (GOC / "data" / "python_bank_en" / "toan10" / "L10_C1.py").read_text(encoding="utf-8")
+    hien_co = (GOC / "data" / "python_bank_en" / "toan10" / (stem + ".py")).read_text(encoding="utf-8")
     assert src == hien_co, "Ban Anh khac ket qua dich - chay: python3 scripts/dich_ngan_hang.py dich <tep>"
 
 
-def test_ban_anh_khong_con_chu_viet():
-    src = (GOC / "data" / "python_bank_en" / "toan10" / "L10_C1.py").read_text(encoding="utf-8")
+@pytest.mark.parametrize("stem", _cac_chuong_da_dich())
+def test_ban_anh_khong_con_chu_viet(stem):
+    src = (GOC / "data" / "python_bank_en" / "toan10" / (stem + ".py")).read_text(encoding="utf-8")
     # bỏ chú thích và docstring (còn tiếng Việt - dành cho cô); chỉ xét chuỗi hiển thị
     import ast
     tree = ast.parse(src)
