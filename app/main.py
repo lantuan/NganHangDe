@@ -62,6 +62,46 @@ app.include_router(gia_su.router)
 
 
 @app.middleware("http")
+async def ngon_ngu_viet_anh(request: Request, call_next):
+    """
+    Việt / Anh (cô Lan 03/10/2026): trang HTML được chèn nút "Tiếng Việt | English" ở
+    góc phải trên và, khi chọn tiếng Anh, dịch theo từ điển data/i18n (app/services/
+    i18n_service.py). Thông báo JSON (message, detail, tra_loi...) cũng được dịch.
+    Chữ chưa có trong từ điển giữ nguyên tiếng Việt.
+    """
+    from fastapi.responses import Response
+    from app.services import i18n_service as i18n
+
+    response = await call_next(request)
+    loai = response.headers.get("content-type", "")
+    la_html = loai.startswith("text/html")
+    la_json = loai.startswith("application/json")
+    if not (la_html or la_json) or request.url.path.startswith("/static"):
+        return response
+    ngon_ngu = i18n.lay_ngon_ngu(request)
+    if la_json and ngon_ngu == "vi":
+        return response
+
+    body = b"".join([chunk async for chunk in response.body_iterator])
+    try:
+        text = body.decode("utf-8")
+        if la_html:
+            text = i18n.chen_nut_chuyen(i18n.dich_html(text, ngon_ngu), ngon_ngu)
+        else:
+            import json as _json
+            text = _json.dumps(i18n.dich_json(_json.loads(text), ngon_ngu), ensure_ascii=False)
+        body = text.encode("utf-8")
+    except Exception as e:                       # khong bao gio lam hong trang vi dich loi
+        print("I18N: bo qua, loi dich:", e)
+    moi = Response(content=body, status_code=response.status_code)
+    moi.raw_headers = [(k, v) for k, v in response.raw_headers if k.lower() != b"content-length"]
+    moi.headers["content-length"] = str(len(body))
+    if request.query_params.get("lang") in i18n.NGON_NGU:
+        moi.set_cookie("lang", request.query_params["lang"], max_age=31536000, path="/", samesite="lax")
+    return moi
+
+
+@app.middleware("http")
 async def lam_moi_cookie_phien(request: Request, call_next):
     """
     app/core/deps.py::get_current_user() tu dong lam moi phien bang

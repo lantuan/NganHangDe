@@ -9797,3 +9797,12 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Câu Đúng/Sai GIỮ NGUYÊN cấu trúc 4 ý NB-TH-VD-VDC (theo cô Lan); số câu Đúng/Sai theo bảng mặc định.
 - Test mới tests/test_ma_tran_muc_do.py.
 - Ghi chú: bảng mặc định HeSo1 chia 6 MC theo 40/30/20/10 ra 4 NB, 1 TH, 1 VD, 0 VDC do quy tắc "làm tròn xuống, dư vào mức cao nhất" (chưa đổi, chờ cô quyết định).
+
+# Version 4.04 - 2026-10-03
+
+## Việt / Anh: nút chuyển ngôn ngữ và dịch giao diện web (giai đoạn 1)
+- Nút "Tiếng Việt | English" cố định ở góc phải trên mọi trang HTML; ngôn ngữ nhớ trong cookie `lang`.
+- Dịch theo từ điển (không sửa từng template): data/i18n/en_ui.json (569 đoạn chữ giao diện), en_curriculum.json (24 tên chương); app/services/i18n_service.py; middleware ngon_ngu_viet_anh trong app/main.py dịch trang HTML và các khoá thông báo JSON (message, detail, tra_loi, loi, error, thong_bao, ten_chuong). Chữ chưa có trong từ điển giữ tiếng Việt.
+- scripts/i18n_trich_chuoi.py: trích chữ Việt trong template, liệt kê đoạn chưa dịch (--chua-dich).
+- tests/test_i18n.py: mọi chữ Việt trong template phải có bản dịch; bản dịch không chứa ký tự phá HTML/JS.
+- Thuật ngữ Toán Mỹ (SAT); xem docs/28_DA_NGON_NGU.md. Chưa làm: Chat AI (n8n) trả lời tiếng Anh, tên bài, đề PDF/Word tiếng Anh, ngân hàng câu hỏi.
