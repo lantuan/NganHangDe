@@ -1123,6 +1123,19 @@ ${html}
             if (ct.dung_sai_cau_lon) cauTrucTuHocSinh.dung_sai_cau_lon = { so_luong: ct.dung_sai_cau_lon };
             if (ct.tra_loi_ngan) cauTrucTuHocSinh.tra_loi_ngan = { so_luong: ct.tra_loi_ngan };
             if (ct.tu_luan) cauTrucTuHocSinh.tu_luan = { so_luong: ct.tu_luan };
+            // Ty le muc do hoc sinh/giao vien da noi ("100% NB va TH") PHAI di tiep xuong
+            // may chu (co Lan 03/10/2026) - truoc day bi bo, de ra theo bang mac dinh
+            // (SA, TL mac dinh toan VD/VDC). Chi MC, SA, TL; Dung/Sai giu nguyen cau truc.
+            const tyLeGoc = deXuat.ty_le_muc_do_goc || deXuat.ty_le_muc_do || null;
+            if (tyLeGoc && typeof tyLeGoc === "object") {
+                const coKhoaMuc = Object.keys(tyLeGoc).some(k => ["NB", "TH", "VD", "VDC"].includes(k.toUpperCase()));
+                ["trac_nghiem", "tra_loi_ngan", "tu_luan"].forEach(loai => {
+                    const ty = coKhoaMuc ? tyLeGoc : tyLeGoc[loai];
+                    if (cauTrucTuHocSinh[loai] && ty && typeof ty === "object") {
+                        cauTrucTuHocSinh[loai].ty_le_muc_do = ty;
+                    }
+                });
+            }
 
             try {
                 const res = await fetch("/api/exam/generate-pdf-auto", {

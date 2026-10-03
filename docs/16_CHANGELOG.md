@@ -9786,3 +9786,14 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Tự luận hai đơn vị: NB037_NB038_TL_A (a NB037, b NB038), NB037_TH039_TL_A (a NB037, b TH039).
 - Không làm Đúng/Sai theo lựa chọn của cô. Whitelist NB037_MC_A, NB038_MC_A (_01, _02).
 - Lỗi trong tài liệu nguồn đã báo cô: TF 3c sai đáp án, TF 20 PQ ∥ SR, MC 1/23/25/34 hai đáp án đúng, MC 3 hai phương án giống nhau, SA 1 - 8 đáp án không phải số, SA 9 sai hướng "đông bắc", hình câu C15/C16.
+
+# Version 4.03 - 2026-10-03
+
+## Ma trận mức độ do người dùng đặt (MC, SA, TL)
+- LỖI (cô Lan test chương 3): chọn đề 100% NB, TH vẫn ra VD, nhất là SA và TL. Nguyên nhân: form giáo viên /gv/ra-de không có ô mức độ (truyền cau_truc_tu_hoc_sinh=None), nút "Đồng ý, tạo đề" của chat chỉ gửi số câu, bỏ tỉ lệ mức độ -> đề luôn theo bảng mặc định exam_rules.json (SA, TL mặc định 50% VD + 50% VDC). Bộ chọn câu (question_selector_service) đúng sẵn: có tỉ lệ thì ra đúng mức.
+- Form /gv/ra-de: ô "Tự đặt ma trận mức độ" - bảng số câu và % NB, TH, VD, VDC cho trắc nghiệm, trả lời ngắn, tự luận (điền sẵn theo bảng mặc định; hàng có số câu > 0 phải tổng 100%). API GET /api/exam/ma-tran-mac-dinh. Ma trận lưu trong blueprint nên "Làm đề khác" giữ đúng ma trận.
+- Chat: nút "Đồng ý, tạo đề" gửi kèm ty_le_muc_do nếu đề xuất của AI có (ty_le_muc_do_goc hoặc ty_le_muc_do; n8n không nằm trong repo nên chưa kiểm tra được khoá thật).
+- exam_rules_service: chuan_hoa_ty_le (nhận phân số hoặc %, tổng phải 100%); ma trận người dùng chia câu theo phần dư lớn nhất - mức tỉ lệ 0% không bao giờ nhận câu (bảng mặc định giữ cách làm tròn cũ). Service mới ma_tran_service.py.
+- Câu Đúng/Sai GIỮ NGUYÊN cấu trúc 4 ý NB-TH-VD-VDC (theo cô Lan); số câu Đúng/Sai theo bảng mặc định.
+- Test mới tests/test_ma_tran_muc_do.py.
+- Ghi chú: bảng mặc định HeSo1 chia 6 MC theo 40/30/20/10 ra 4 NB, 1 TH, 1 VD, 0 VDC do quy tắc "làm tròn xuống, dư vào mức cao nhất" (chưa đổi, chờ cô quyết định).

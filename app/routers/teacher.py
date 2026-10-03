@@ -35,6 +35,8 @@ from app.core.deps import get_current_user, yeu_cau_giao_vien
 from app.core.lop_config import DANH_SACH_LOP, MA_LOP_CLASSROOM
 from app.services import classroom_service, gia_su_service, history_service, profile_service
 from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError
+from app.services.ma_tran_service import doc_ma_tran_tu_form
+from app.services.exam_rules_service import ExamRulesError
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -112,6 +114,12 @@ async def ra_de_submit(
     if lop not in (10, 11, 12):
         return RedirectResponse("/gv/ra-de?loi=Lop+phai+la+10,+11+hoac+12.", status_code=303)
 
+    # Ma tran muc do tu dat (co Lan 03/10/2026): chi MC, SA, TL; Dung/Sai giu nguyen.
+    try:
+        cau_truc_tu_gv = doc_ma_tran_tu_form(await request.form())
+    except ExamRulesError as e:
+        return RedirectResponse("/gv/ra-de?loi=" + quote("Ma trận: " + str(e)), status_code=303)
+
     print(f"RA DE (GV): lop={lop} ki_thi={ki_thi} chuong={pham_vi_chuong} "
           f"so_ma_de={socau_ma_de} nhap={bool(cho_phep_thieu)}")
 
@@ -148,7 +156,7 @@ async def ra_de_submit(
             loai_he_so=loai_he_so,
             ki_thi=ki_thi_gui,
             pham_vi_chuong=pham_vi_chuong,
-            cau_truc_tu_hoc_sinh=None,
+            cau_truc_tu_hoc_sinh=cau_truc_tu_gv,
             socau_ma_de=socau_ma_de,
             cho_phep_thieu=bool(cho_phep_thieu),
         )
@@ -174,7 +182,7 @@ async def ra_de_submit(
         pham_vi_chuong=pham_vi_chuong,
         blueprint={
             "tieu_de": tieu_de,
-            "cau_truc_tu_hoc_sinh": None,
+            "cau_truc_tu_hoc_sinh": cau_truc_tu_gv,
             "socau_ma_de": socau_ma_de,
             "cho_phep_thieu": bool(cho_phep_thieu),
             "canh_bao_ngoai_yccd": ket_qua.get("canh_bao_ngoai_yccd") or [],

@@ -56,6 +56,37 @@ nhận nhiều đề cùng cấu trúc, cùng đơn vị kiến thức, chỉ kh
 <p class="text-sm text-on-surface-variant mt-unit">Chương chưa có ngân hàng câu hỏi sẽ được ghi chú trong danh sách.</p>
 </div>
 
+<div class="border border-outline-variant rounded-2xl p-stack-md">
+<div class="flex items-start gap-stack-sm">
+<input class="mt-1" id="tuy_chinh_ma_tran" name="tuy_chinh_ma_tran" type="checkbox" value="1"/>
+<label class="font-medium" for="tuy_chinh_ma_tran">Tự đặt ma trận mức độ (trắc nghiệm, trả lời ngắn, tự luận)</label>
+</div>
+<p class="text-sm text-on-surface-variant mt-unit">
+Không tích: lấy theo bảng mặc định. Tích: đề ra đúng số câu và tỉ lệ NB / TH / VD / VDC bên dưới
+(ô để 0% sẽ không có câu mức đó). Câu Đúng/Sai giữ nguyên cấu trúc, mỗi câu gồm 4 ý
+NB - TH - VD - VDC. Tự luận: số câu là số CÂU, mỗi câu 2 ý, tỉ lệ tính theo từng ý.
+</p>
+<div id="bang-ma-tran" class="mt-stack-md overflow-x-auto" style="display:none">
+<table class="w-full text-center">
+<thead><tr class="text-sm text-on-surface-variant">
+<th class="text-left py-1">Loại câu</th><th>Số câu</th><th>NB %</th><th>TH %</th><th>VD %</th><th>VDC %</th><th>Tổng</th></tr></thead>
+<tbody>
+{% for tt, ten in [("mc","Trắc nghiệm"),("sa","Trả lời ngắn"),("tl","Tự luận")] %}
+<tr data-loai="{{ tt }}">
+<td class="text-left py-1">{{ ten }}</td>
+<td><input class="w-16 px-2 py-1 border border-outline-variant rounded-lg text-center" name="{{ tt }}_so" id="{{ tt }}_so" type="number" min="0" max="60" value="0"/></td>
+{% for m in ["nb","th","vd","vdc"] %}
+<td><input class="w-16 px-2 py-1 border border-outline-variant rounded-lg text-center" name="{{ tt }}_{{ m }}" id="{{ tt }}_{{ m }}" type="number" min="0" max="100" step="5" value="0"/></td>
+{% endfor %}
+<td class="font-medium" id="{{ tt }}_tong">0%</td>
+</tr>
+{% endfor %}
+</tbody></table>
+<p class="text-sm text-on-surface-variant mt-unit">Mỗi hàng có số câu &gt; 0 phải có tổng 100%.</p>
+<p id="ma-tran-loi" class="text-sm text-red-700 mt-unit"></p>
+</div>
+</div>
+
 <div class="flex items-start gap-stack-sm">
 <input class="mt-1" id="cho_phep_thieu" name="cho_phep_thieu" type="checkbox" value="1" checked/>
 <label class="font-body-md text-body-md text-on-surface-variant" for="cho_phep_thieu">
@@ -116,11 +147,59 @@ selectLop.addEventListener('change', napDanhSachChuong);
 selectKiThi.addEventListener('change', capNhatHienThiChuong);
 
 // Chan bam nut 2 lan (moi lan bam la mot lan bien dich LaTeX).
-document.getElementById('form-ra-de').addEventListener('submit', () => {
+document.getElementById('form-ra-de').addEventListener('submit', (e) => {
+    if (chkMaTran.checked && !kiemTraMaTran()) {   // ma tran sai: khong gui, khong khoa nut
+        e.preventDefault();
+        document.getElementById('ma-tran-loi').scrollIntoView({behavior: 'smooth', block: 'center'});
+        return;
+    }
     const nut = document.getElementById('nut-tao');
     nut.disabled = true;
     nut.textContent = 'Đang tạo đề, vui lòng chờ…';
 });
+
+// ---- Ma tran muc do tu dat (co Lan 03/10/2026) ----
+const chkMaTran = document.getElementById('tuy_chinh_ma_tran');
+const bangMaTran = document.getElementById('bang-ma-tran');
+const LOAI_BANG = {mc: 'trac_nghiem', sa: 'tra_loi_ngan', tl: 'tu_luan'};
+const MUC = ['nb', 'th', 'vd', 'vdc'];
+
+function tongHang(tt) {
+    return MUC.reduce((t, m) => t + (parseFloat(document.getElementById(tt + '_' + m).value) || 0), 0);
+}
+function kiemTraMaTran() {
+    let loi = '';
+    Object.keys(LOAI_BANG).forEach(tt => {
+        const tong = tongHang(tt);
+        const so = parseInt(document.getElementById(tt + '_so').value) || 0;
+        const o = document.getElementById(tt + '_tong');
+        o.textContent = tong + '%';
+        const sai = so > 0 && Math.abs(tong - 100) > 0.5;
+        o.style.color = sai ? '#b91c1c' : '';
+        if (sai) loi = 'Hàng ' + tt.toUpperCase() + ' phải có tổng 100% (đang là ' + tong + '%).';
+    });
+    document.getElementById('ma-tran-loi').textContent = loi;
+    return loi === '';
+}
+async function napMaTranMacDinh() {
+    const heSo = (selectKiThi.value === 'thuong_xuyen') ? 'HeSo1' : 'HeSo2_HeSo3';
+    try {
+        const res = await fetch('/api/exam/ma-tran-mac-dinh?loai_he_so=' + heSo);
+        const d = (await res.json()).data || {};
+        Object.keys(LOAI_BANG).forEach(tt => {
+            const c = d[LOAI_BANG[tt]]; if (!c) return;
+            document.getElementById(tt + '_so').value = c.so_luong;
+            MUC.forEach(m => { document.getElementById(tt + '_' + m).value = c.ty_le_muc_do[m.toUpperCase()] || 0; });
+        });
+    } catch (e) { /* de trong, giao vien tu go */ }
+    kiemTraMaTran();
+}
+chkMaTran.addEventListener('change', () => {
+    bangMaTran.style.display = chkMaTran.checked ? '' : 'none';
+    if (chkMaTran.checked) napMaTranMacDinh();
+});
+selectKiThi.addEventListener('change', () => { if (chkMaTran.checked) napMaTranMacDinh(); });
+bangMaTran.addEventListener('input', kiemTraMaTran);
 
 capNhatHienThiChuong();
 napDanhSachChuong();

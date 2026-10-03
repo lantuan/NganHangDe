@@ -19,12 +19,51 @@ def _load_rules() -> dict:
         return json.load(f)
 
 
-def _chia_theo_ty_le(tong_so_cau: int, ty_le: dict) -> dict:
+MUC_DO = ("NB", "TH", "VD", "VDC")
+
+
+def chuan_hoa_ty_le(ty_le: dict, ten: str = "") -> dict:
+    """Tỉ lệ người dùng đặt (cô Lan 03/10/2026): chấp nhận phân số (0.5) hoặc
+    phần trăm (50); thiếu mức nào coi là 0; tổng phải bằng 100%. Trả về phân số."""
+    if not isinstance(ty_le, dict):
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten} không hợp lệ.")
+    thua = [k for k in ty_le if str(k).upper() not in MUC_DO]
+    if thua:
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten}: mức không hợp lệ {thua} (chỉ NB, TH, VD, VDC).")
+    try:
+        v = {m: float(ty_le.get(m, ty_le.get(m.lower(), 0)) or 0) for m in MUC_DO}
+    except (TypeError, ValueError):
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten} phải là số.")
+    if any(x < 0 for x in v.values()):
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten} không được âm.")
+    tong = sum(v.values())
+    if tong <= 0:
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten}: tổng bằng 0.")
+    if tong > 1.5:                      # phần trăm
+        v = {m: x / 100 for m, x in v.items()}
+        tong /= 100
+    if abs(tong - 1) > 0.005:
+        raise ExamRulesError(f"Tỉ lệ mức độ {ten} phải có tổng 100% (đang là {round(tong * 100, 1)}%).")
+    return v
+
+
+def _chia_theo_ty_le(tong_so_cau: int, ty_le: dict, chinh_xac: bool = False) -> dict:
     """
     Dùng cho trac_nghiem / tra_loi_ngan / tu_luan:
     chia tổng số câu theo tỉ lệ mức độ (NB/TH/VD/VDC).
-    Làm tròn xuống trước, phần dư cộng vào mức có tỉ lệ cao nhất.
+    Mặc định (bảng exam_rules.json): làm tròn xuống trước, phần dư cộng vào mức
+    có tỉ lệ cao nhất.
+    chinh_xac=True (ma trận do người dùng đặt): phương pháp phần dư lớn nhất -
+    mức có tỉ lệ 0 KHÔNG BAO GIỜ nhận câu; số câu mỗi mức lệch tỉ lệ không quá 1.
     """
+    if chinh_xac:
+        goc = {m: tong_so_cau * ty_le.get(m, 0) for m in ty_le}
+        ket_qua = {m: math.floor(x + 1e-9) for m, x in goc.items()}
+        con = tong_so_cau - sum(ket_qua.values())
+        theo_du = sorted((m for m in goc if ty_le[m] > 0), key=lambda m: -(goc[m] - ket_qua[m]))
+        for i in range(con):
+            ket_qua[theo_du[i % len(theo_du)]] += 1
+        return ket_qua
     ket_qua = {
         muc_do: math.floor(tong_so_cau * ty_le_muc_do)
         for muc_do, ty_le_muc_do in ty_le.items()
@@ -98,16 +137,18 @@ def resolve_cau_truc_de(
         if loai_cau == "dung_sai_cau_lon":
             phan_bo_muc_do[loai_cau] = _phan_bo_dung_sai(so_luong)
         else:
+            chinh_xac = ty_le is not None
             if ty_le is None:
                 ty_le = mac_dinh[loai_cau]["ty_le_muc_do"]
                 da_dung_bang = True
             else:
+                ty_le = chuan_hoa_ty_le(ty_le, loai_cau)
                 da_dung_yeu_cau = True
             # Tự luận (cô Lan 30/09/2026): so_luong là số CÂU, mỗi câu gồm
             # so_y_moi_cau ý (mặc định 2: ý a mức VD, ý b mức VDC). Ma trận
             # tính theo TỪNG Ý (suất) - phan_bo_muc_do["tu_luan"] đếm suất.
             so_y = mac_dinh[loai_cau].get("so_y_moi_cau", 1) if loai_cau == "tu_luan" else 1
-            phan_bo_muc_do[loai_cau] = _chia_theo_ty_le(so_luong * so_y, ty_le)
+            phan_bo_muc_do[loai_cau] = _chia_theo_ty_le(so_luong * so_y, ty_le, chinh_xac)
 
     if da_dung_bang and da_dung_yeu_cau:
         nguon_cau_truc = "mixed"

@@ -66,6 +66,17 @@ def get_exam_scope(
     raise HTTPException(400, "loai_he_so không hợp lệ")
 
 
+@router.get("/ma-tran-mac-dinh")
+def ma_tran_mac_dinh_api(loai_he_so: str = "HeSo2_HeSo3"):
+    """Bảng số câu / tỉ lệ mặc định, để form giáo viên điền sẵn ma trận."""
+    from app.services.ma_tran_service import ma_tran_mac_dinh
+    from app.services.exam_rules_service import ExamRulesError
+    try:
+        return {"success": True, "message": "", "data": ma_tran_mac_dinh(loai_he_so)}
+    except ExamRulesError as e:
+        raise HTTPException(400, detail=str(e))
+
+
 class YeuCauItem(BaseModel):
     chuong_so: int
     muc_do: str  # "NB" | "TH" | "VD" | "VDC"
