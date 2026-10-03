@@ -9774,3 +9774,15 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Tự luận hai đơn vị: NB017_TH021_TL_A, TH019_VD020_TL_A (biểu đồ Ven TikZ).
 - Sửa hiển thị "1m" trong lời giải _vd021_tham_so (VD021_MC_A_02).
 - Không đưa vào: ba tập hợp (đã để ở chuyên đề), tổng ba phần tử phân biệt (ngoài YCCĐ), đếm cặp tập con có ràng buộc lực lượng (SA 24, vượt YCCĐ); các câu trả lời ngắn có đáp án là khoảng đã đổi sang hỏi "có bao nhiêu giá trị nguyên".
+
+# Version 4.02 - 2026-10-02
+
+## Chương 4 Bài 1 (Khái niệm vectơ, L10_C4_B7): bổ sung từ tài liệu CĐ dạy thêm Toán 10 (file docx cô Lan gửi)
+- Đối chiếu từng câu với YCCĐ của Bộ: Bài 7 chỉ có NB037, NB038, TH039 (vectơ đối thuộc Bài 8, không đưa vào). Mỗi câu một chủ đề, kho hình / khẳng định xoay vòng, hình vẽ TikZ hiển thị cả trên web.
+- NB037: MC_A_02 (chọn khẳng định cùng phương / cùng hướng theo kho hình xoay vòng); MC_B + SA_A (đếm vectơ khác vectơ-không tạo từ n điểm); MC_C + SA_B (đếm vectơ cùng phương, cùng hướng, ngược hướng với vectơ cho trước trong hình); MC_D (kho 19 khẳng định về khái niệm vectơ).
+- NB037 MC_E + SA_C (độ dài vectơ trong hình chữ nhật, vuông, thoi, lục giác đều, tam giác đều): dùng Pythagore / đường cao tam giác đều nên đánh dấu ngoai_yccd (LUYỆN TẬP THÊM), thêm dang_luyen_tap_them vào Curriculum NB037.
+- NB038: MC_A_02 (đẳng thức vectơ bằng nhau theo kho hình); MC_B + SA_A (đếm vectơ bằng vectơ cho trước); MC_C (kho 18 khẳng định); MC_D (tìm điểm D từ đẳng thức vectơ).
+- TH039: MC_B (các lực trên lưới ô vuông), MC_C (vận tốc theo hướng đông, tây, nam, bắc trên lưới), MC_D (thuyền xuôi / ngược dòng, xe trên đường thẳng).
+- Tự luận hai đơn vị: NB037_NB038_TL_A (a NB037, b NB038), NB037_TH039_TL_A (a NB037, b TH039).
+- Không làm Đúng/Sai theo lựa chọn của cô. Whitelist NB037_MC_A, NB038_MC_A (_01, _02).
+- Lỗi trong tài liệu nguồn đã báo cô: TF 3c sai đáp án, TF 20 PQ ∥ SR, MC 1/23/25/34 hai đáp án đúng, MC 3 hai phương án giống nhau, SA 1 - 8 đáp án không phải số, SA 9 sai hướng "đông bắc", hình câu C15/C16.

@@ -2871,3 +2871,1005 @@ def _MC_khong_cham(debai, dung, nhieu, *con_lai):
     """Nhu MC_SA_answer_text nhung bo dau "." cuoi cua 4 phuong an."""
     return MC_SA_answer_text(debai, _bo_cham_cuoi(dung),
                              [_bo_cham_cuoi(x) for x in nhieu], *con_lai)
+
+
+# =====================================================================
+# BÀI 7 - BỔ SUNG TỪ TÀI LIỆU CĐ DẠY THÊM TOÁN 10 "KHÁI NIỆM VECTƠ" (file docx cô Lan gửi 01/10/2026)
+# CLAUDE THEM 01/10/2026 - co Lan duyet lai. Chỉ ba đơn vị NB037, NB038, TH039 (YCCĐ của Bộ):
+# không dùng tổng, hiệu, tích với số, vectơ đối (Bài 8). Mọi quan hệ cùng phương, cùng hướng, bằng nhau,
+# mọi số đếm đều do Python tính từ toạ độ của hình; hình là TikZ thuần (hiện cả trên web).
+# Kho hình lấy xoay vòng: hình đã ra thì chỉ ra lại khi đã dùng hết kho.
+# =====================================================================
+import sys as _sys4
+import types as _types4
+from sympy import sqrt as _sq4, nsimplify as _ns4, latex as _lx4, Symbol as _Sym4, Rational as _R4
+
+_C4_XV = _sys4.modules.setdefault("_ngan_hang_xoay_vong", _types4.ModuleType("_ngan_hang_xoay_vong"))
+if not hasattr(_C4_XV, "da_dung"):
+    _C4_XV.da_dung = {}
+
+
+def _c4_uu_tien(ten, ung):
+    """Thứ tự lấy các phần tử của kho 'ten' (danh sách khoá): CHƯA dùng trước, đã dùng sau; hết thì vòng mới."""
+    da = _C4_XV.da_dung.setdefault(ten, set())
+    if all(k in da for k in ung):
+        da.difference_update(ung)
+    chua = [k for k in ung if k not in da]
+    roi = [k for k in ung if k in da]
+    random.shuffle(chua)
+    random.shuffle(roi)
+    return chua + roi
+
+
+def _c4_danh_dau(ten, ds):
+    _C4_XV.da_dung.setdefault(ten, set()).update(ds)
+
+
+# ---------------------------------------------------------------------
+# KHO HÌNH: toạ độ vẽ (dùng luôn để xét phương, hướng, bằng nhau), đoạn cần vẽ, lời mô tả
+# ---------------------------------------------------------------------
+_C4_TU_GIAC_TEN = [("ABCD", "O"), ("MNPQ", "O"), ("ABCD", "I"), ("EFGH", "O")]
+
+
+def _c4_hinh(kieu):
+    """Một hình của kho. Trả về dict: P (tên -> (x, y)), canh (đoạn vẽ), mo (lời mô tả), kieu, tam (điểm giữa hình)."""
+    if kieu in ("hbh", "hcn", "thoi", "vuong"):
+        ten, o = random.choice(_C4_TU_GIAC_TEN)
+        A, B, C, D = ten
+        toa = {"hbh": [(0, 0), (4, 0), (5.2, 2.4), (1.2, 2.4)],
+               "hcn": [(0, 0), (4.4, 0), (4.4, 2.4), (0, 2.4)],
+               "thoi": [(0, 1.5), (2.4, 0), (4.8, 1.5), (2.4, 3)],
+               "vuong": [(0, 0), (3, 0), (3, 3), (0, 3)]}[kieu]
+        P = dict(zip(ten, toa))
+        P[o] = ((toa[0][0] + toa[2][0]) / 2, (toa[0][1] + toa[2][1]) / 2)
+        ten_hinh = {"hbh": "hình bình hành", "hcn": "hình chữ nhật", "thoi": "hình thoi", "vuong": "hình vuông"}[kieu]
+        return dict(kieu=kieu, P=P, canh=[(A, B), (B, C), (C, D), (D, A), (A, C), (B, D)], tam=o,
+                    mo=r"Cho %s $%s$ có hai đường chéo cắt nhau tại $%s$ (xem hình vẽ)." % (ten_hinh, ten, o),
+                    da_giac=list(ten))
+    if kieu == "luc_giac":
+        ten = "ABCDEF"
+        P = {ten[i]: (2 * math.cos(math.pi / 3 * i), 2 * math.sin(math.pi / 3 * i)) for i in range(6)}
+        P["O"] = (0.0, 0.0)
+        canh = [(ten[i], ten[(i + 1) % 6]) for i in range(6)] + [("A", "D"), ("B", "E"), ("C", "F")]
+        return dict(kieu=kieu, P=P, canh=canh, tam="O", da_giac=list(ten),
+                    mo=r"Cho lục giác đều $ABCDEF$ có tâm $O$ (xem hình vẽ).")
+    if kieu == "tg_trung_diem":
+        A, B, C = "ABC"
+        M, N, Q = random.choice([("M", "N", "P"), ("D", "E", "F"), ("I", "J", "K")])
+        P = {A: (1.4, 3.0), B: (0.0, 0.0), C: (4.8, 0.0)}
+        tb = lambda X, Y: ((P[X][0] + P[Y][0]) / 2, (P[X][1] + P[Y][1]) / 2)
+        P[M], P[N], P[Q] = tb(B, C), tb(C, A), tb(A, B)
+        return dict(kieu=kieu, P=P, canh=[(A, B), (B, C), (C, A), (M, N), (N, Q), (Q, M)], tam=None, da_giac=[A, B, C],
+                    mo=r"Cho tam giác $ABC$ có $%s$, $%s$, $%s$ lần lượt là trung điểm của các cạnh $BC$, $CA$, $AB$ "
+                       r"(xem hình vẽ)." % (M, N, Q))
+    if kieu == "thang":
+        ten = random.choice(["ABCD", "MNPQ"])
+        A, B, C, D = ten
+        E = "I" if ten == "ABCD" else "E"
+        P = {A: (1.0, 2.2), B: (3.2, 2.2), C: (4.4, 0.0), D: (0.0, 0.0), E: (2.2, 0.0)}
+        return dict(kieu=kieu, P=P, canh=[(A, B), (B, C), (C, D), (D, A), (A, E), (B, E)], tam=None, da_giac=[A, B, C, D],
+                    mo=r"Cho hình thang $%s$ có hai đáy $%s$, $%s$ với $%s = 2%s$; $%s$ là trung điểm của $%s$ (xem hình vẽ)."
+                       % (ten, A + B, D + C, D + C, A + B, E, D + C))
+    raise ValueError(kieu)
+
+
+_C4_KIEU_HINH = ["hbh", "hcn", "thoi", "vuong", "luc_giac", "tg_trung_diem", "thang"]
+
+
+def _c4_chon_hinh(ten_kho, cho_phep=None):
+    """Chọn một kiểu hình theo xoay vòng (chung cho cả Bài 7 nên trong một đề ít lặp hình)."""
+    ung = [k for k in _C4_KIEU_HINH if cho_phep is None or k in cho_phep]
+    k = _c4_uu_tien("c4_b7_hinh", ung)[0]
+    _c4_danh_dau("c4_b7_hinh", [k])
+    return _c4_hinh(k)
+
+
+def _c4_tikz(H, ve_vt=None):
+    """TikZ của hình H; nhãn đặt ra phía ngoài (theo hướng từ trọng tâm hình tới điểm)."""
+    P = H["P"]
+    cx = sum(x for x, _ in P.values()) / len(P)
+    cy = sum(y for _, y in P.values()) / len(P)
+    out = ["\\begin{tikzpicture}[>=stealth,x=1cm,y=1cm,thick,scale=0.85]"]
+    for t, (x, y) in P.items():
+        out.append("\\coordinate (%s) at (%s,%s);" % (t, _toa(x), _toa(y)))
+    out.append("\\draw " + " ".join("(%s) -- (%s)" % c for c in H["canh"]) + ";")
+    for t, (x, y) in P.items():
+        dx, dy = x - cx, y - cy
+        if abs(dx) < 1e-6 and abs(dy) < 1e-6 or t == H.get("tam"):
+            neo = "below"
+        else:
+            g = math.degrees(math.atan2(dy, dx)) % 360
+            neo = ["right", "above right", "above", "above left", "left", "below left", "below", "below right"][
+                int(((g + 22.5) % 360) // 45)]
+        out.append("\\fill[black] (%s) circle[radius=1.4pt] node[%s]{\\footnotesize $%s$};" % (t, neo, t))
+    out.append("\\end{tikzpicture}")
+    return "\n".join(out)
+
+
+def _c4_v(H, X, Y):
+    return (H["P"][Y][0] - H["P"][X][0], H["P"][Y][1] - H["P"][X][1])
+
+
+def _c4_cp(u, v):
+    return abs(u[0] * v[1] - u[1] * v[0]) < 1e-7
+
+
+def _c4_ch(u, v):
+    return _c4_cp(u, v) and u[0] * v[0] + u[1] * v[1] > 0
+
+
+def _c4_bang(u, v):
+    return abs(u[0] - v[0]) < 1e-7 and abs(u[1] - v[1]) < 1e-7
+
+
+def _c4_tat_ca_vt(H):
+    ds = list(H["P"])
+    return [(X, Y) for X in ds for Y in ds if X != Y]
+
+
+def _c4_loc(H, v, quan_he):
+    """Các vectơ (điểm đầu, cuối thuộc hình, khác v) có quan hệ quan_he với v."""
+    vv = _c4_v(H, *v)
+    f = {"cung_phuong": _c4_cp, "cung_huong": _c4_ch, "nguoc_huong": lambda a, b: _c4_cp(a, b) and not _c4_ch(a, b),
+         "bang": _c4_bang}[quan_he]
+    return [w for w in _c4_tat_ca_vt(H) if w != v and f(_c4_v(H, *w), vv)]
+
+
+def _c4_ds_vt(ds):
+    return ", ".join("$%s$" % _vt(*w) for w in ds)
+
+
+_C4_TEN_QH = {"cung_phuong": "cùng phương", "cung_huong": "cùng hướng", "nguoc_huong": "ngược hướng", "bang": "bằng"}
+
+
+def _c4_ly_qh(H, v, qh, ds):
+    """Lời giải liệt kê."""
+    vv = _vt(*v)
+    if qh == "bang":
+        dau = r"Các vectơ bằng $%s$ phải cùng hướng và cùng độ dài với $%s$" % (vv, vv)
+    elif qh == "cung_phuong":
+        dau = (r"Các vectơ cùng phương với $%s$ có giá song song hoặc trùng với đường thẳng $%s$"
+               % (vv, v[0] + v[1]))
+    else:
+        dau = (r"Các vectơ %s với $%s$ phải cùng phương với $%s$ (giá song song hoặc trùng với $%s$) và chỉ về %s phía"
+               % (_C4_TEN_QH[qh], vv, vv, v[0] + v[1], "cùng" if qh == "cung_huong" else "ngược"))
+    return dau + r": %s. Có $%d$ vectơ." % (_c4_ds_vt(ds) if ds else "không có", len(ds))
+
+
+def _c4_chon_vt(H, qh, lo=1, hi=12):
+    """Chọn vectơ v (cạnh, đường chéo, nửa đường chéo) sao cho số vectơ có quan hệ qh nằm trong [lo; hi]."""
+    ung = [c for c in H["canh"]] + [(c[1], c[0]) for c in H["canh"]]
+    if H.get("tam"):
+        ung += [(X, H["tam"]) for X in H["da_giac"]] + [(H["tam"], X) for X in H["da_giac"]]
+    random.shuffle(ung)
+    for v in ung:
+        if lo <= len(_c4_loc(H, v, qh)) <= hi:
+            return v
+    return None
+
+
+def _c4_nhieu_so(dap, ung):
+    ra = []
+    for x in list(ung) + [dap + 1, dap - 1, dap + 2, dap - 2, dap + 3, 2 * dap]:
+        if isinstance(x, int) and x >= 0 and x != dap and x not in ra:
+            ra.append(x)
+    return ra[:3]
+
+
+# ---------------------------------------------------------------------
+# NB037_MC_A_02: khẳng định đúng (sai) về cùng phương, cùng hướng, ngược hướng trong hình
+# ---------------------------------------------------------------------
+def _c4_pb_huong(H):
+    """Các phát biểu ``u và w <quan hệ>'' kèm chân trị, u, w có điểm mút thuộc hình."""
+    vts = [c for c in H["canh"]] + [(c[1], c[0]) for c in H["canh"]]
+    if H.get("tam"):
+        vts += [(X, H["tam"]) for X in H["da_giac"]]
+    ra = []
+    for u in vts:
+        for w in vts:
+            if u == w or set(u) == set(w):
+                continue
+            a, b = _c4_v(H, *u), _c4_v(H, *w)
+            cp, ch = _c4_cp(a, b), _c4_ch(a, b)
+            for qh, gt in (("cùng hướng", ch), ("ngược hướng", cp and not ch), ("cùng phương", cp),
+                           ("không cùng phương", not cp)):
+                ra.append((r"$%s$ và $%s$ %s" % (_vt(*u), _vt(*w), qh), gt, u, w, cp, ch))
+    return ra
+
+
+def L10_C4_B7_NB037_MC_A_02(socau, dang=1):
+    r"""Cách hỏi khác của NB037_MC_A_01 với KHO HÌNH xoay vòng (hình bình hành, hình chữ nhật, hình thoi, hình vuông
+    có tâm; lục giác đều có tâm; tam giác có ba trung điểm; hình thang có trung điểm đáy lớn): chọn khẳng định đúng
+    (hoặc sai) về hai vectơ cùng phương, cùng hướng, ngược hướng. Chân trị do Python tính từ toạ độ.
+
+    CLAUDE THEM 01/10/2026 - theo phan dang 2, MC 4, 6, 8, 9 tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H = _c4_chon_hinh("nb037_a")
+        pb = _c4_pb_huong(H)
+        hoi_dung = random.random() < 0.6
+        # ưu tiên các cặp cùng phương (dễ nhầm hướng)
+        dung = [p for p in pb if p[1] == hoi_dung and (p[4] or random.random() < 0.3)]
+        sai = [p for p in pb if p[1] != hoi_dung and p[4]]
+        random.shuffle(dung)
+        random.shuffle(sai)
+        chon = [dung[0]]
+        sai2 = [p for p in pb if p[1] != hoi_dung and not p[4]]
+        random.shuffle(sai2)
+        for p in sai + sai2:
+            khoa = lambda q: frozenset([q[2], q[3]])
+            if all(khoa(p) != khoa(q) for q in chon) and len(chon) < 4:
+                chon.append(p)
+        ly = []
+        for p in chon:
+            u, w = p[2], p[3]
+            mo_ta = ("cùng hướng" if p[5] else "ngược hướng") if p[4] else "không cùng phương (giá cắt nhau)"
+            ly.append(r"$%s$ và $%s$ %s nên khẳng định ``%s'' %s." % (_vt(*u), _vt(*w), mo_ta, p[0], "đúng" if p[1] else "sai"))
+        debai = H["mo"] + r" Khẳng định nào sau đây %s?" % (r"\textbf{đúng}" if hoi_dung else r"\textbf{sai}")
+        giai = (r"Hai vectơ cùng phương khi giá của chúng song song hoặc trùng nhau; hai vectơ cùng phương thì cùng hướng "
+                r"hoặc ngược hướng.\\ " + r"\\ ".join(ly))
+        cau += MC_SA_answer_text(debai, chon[0][0], [p[0] for p in chon[1:4]], giai, _c4_tikz(H), 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB037_MC_B / SA_A: đếm số vectơ khác vectơ-không tạo từ n điểm
+# ---------------------------------------------------------------------
+def _c4_dem_diem():
+    """(đề, đáp số, lời giải, nhiễu): n điểm phân biệt -> n(n - 1) vectơ; có điểm đầu cố định -> n - 1."""
+    kieu = random.randint(0, 2)
+    if kieu == 0:
+        k = random.choice([3, 4, 5, 6])
+        ten = {3: "tam giác $ABC$", 4: "tứ giác $ABCD$", 5: "ngũ giác $ABCDE$", 6: "lục giác $ABCDEF$"}[k]
+        dinh = "ABCDEF"[:k]
+        de = (r"Cho %s. Có bao nhiêu vectơ khác vectơ-không có điểm đầu và điểm cuối là các đỉnh của %s?"
+              % (ten, "tam giác" if k == 3 else "tứ giác" if k == 4 else "ngũ giác" if k == 5 else "lục giác"))
+        dap = k * (k - 1)
+        ly = (r"Mỗi vectơ khác vectơ-không được xác định bởi một cặp điểm đầu, điểm cuối khác nhau (có thứ tự). Điểm đầu có "
+              r"$%d$ cách chọn, điểm cuối có $%d$ cách chọn nên có $%d \cdot %d = %d$ vectơ" % (k, k - 1, k, k - 1, dap))
+        if k <= 4:
+            ly += ": " + _c4_ds_vt([(X, Y) for X in dinh for Y in dinh if X != Y])
+        return de, dap, ly + ".", [k * (k - 1) // 2, k, k * k, 2 * k]
+    if kieu == 1:
+        k = random.choice([4, 5, 6, 7])
+        ten = ", ".join("$%s$" % c for c in "ABCDEFG"[:k])
+        X = random.choice("ABCDEFG"[:k])
+        dau = random.random() < 0.5
+        de = (r"Cho $%d$ điểm phân biệt %s. Có bao nhiêu vectơ khác vectơ-không có %s là $%s$ và điểm %s là một trong các "
+              r"điểm đã cho?" % (k, ten, "điểm đầu" if dau else "điểm cuối", X, "cuối" if dau else "đầu"))
+        dap = k - 1
+        khac = [c for c in "ABCDEFG"[:k] if c != X]
+        ly = (r"Điểm %s phải khác $%s$ (vectơ khác vectơ-không) nên có $%d$ vectơ: %s."
+              % ("cuối" if dau else "đầu", X, dap, _c4_ds_vt([(X, Y) if dau else (Y, X) for Y in khac])))
+        return de, dap, ly, [k, 2 * (k - 1), k * (k - 1)]
+    k = random.choice([3, 4, 5])
+    de = (r"Cho $%d$ điểm phân biệt, trong đó không có ba điểm nào thẳng hàng. Có bao nhiêu vectơ khác vectơ-không có "
+          r"điểm đầu và điểm cuối thuộc các điểm đã cho?" % k)
+    dap = k * (k - 1)
+    ly = (r"Mỗi cặp hai điểm phân biệt $X$, $Y$ cho đúng hai vectơ $\overrightarrow{XY}$ và $\overrightarrow{YX}$. Có $%d$ "
+          r"cặp điểm nên có $2 \cdot %d = %d$ vectơ." % (k * (k - 1) // 2, k * (k - 1) // 2, dap))
+    return de, dap, ly, [k * (k - 1) // 2, k * k, 2 * k]
+
+
+def L10_C4_B7_NB037_MC_B_01(socau, dang=1):
+    r"""Đếm số vectơ khác vectơ-không có điểm đầu, điểm cuối thuộc $n$ điểm cho trước (các đỉnh của đa giác, $n$ điểm
+    không có ba điểm thẳng hàng; hoặc cố định điểm đầu / điểm cuối). Lời giải liệt kê khi $n \le 4$.
+
+    CLAUDE THEM 01/10/2026 - theo phan dang 1, MC 12, 14, 15, TL 4 tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, ly, ung = _c4_dem_diem()
+        cau += MC_SA_answer_text(de, "$%d$" % dap, ["$%d$" % x for x in _c4_nhieu_so(dap, ung)], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_B (cùng Dang).
+
+    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        de, dap, ly, ung = _c4_dem_diem()
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in _c4_nhieu_so(dap, ung)], ly, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB037_MC_C / SA_B: đếm vectơ cùng phương, cùng hướng, ngược hướng với một vectơ trong hình
+# ---------------------------------------------------------------------
+def _c4_cau_dem(qh_ds, ten_kho):
+    for _ in range(50):
+        H = _c4_chon_hinh(ten_kho)
+        qh = random.choice(qh_ds)
+        v = _c4_chon_vt(H, qh, 1, 12)
+        if v:
+            break
+    ds = _c4_loc(H, v, qh)
+    ten_diem = ", ".join("$%s$" % t for t in H["P"])
+    de = (H["mo"] + r" Có bao nhiêu vectơ khác vectơ $%s$, %s $%s$ và có điểm đầu, điểm cuối là hai trong các điểm %s?"
+          % (_vt(*v), "bằng vectơ" if qh == "bang" else _C4_TEN_QH[qh] + " với", _vt(*v), ten_diem))
+    ly = _c4_ly_qh(H, v, qh, ds)
+    khac = [len(_c4_loc(H, v, q)) for q in ("cung_phuong", "cung_huong", "nguoc_huong", "bang") if q != qh]
+    return H, de, len(ds), ly, khac + [len(ds) + 1]
+
+
+def L10_C4_B7_NB037_MC_C_01(socau, dang=1):
+    r"""Đếm số vectơ (điểm đầu, điểm cuối thuộc các điểm của hình, khác vectơ đã cho) cùng phương, cùng hướng hoặc
+    ngược hướng với một vectơ cho trước; kho hình xoay vòng; lời giải liệt kê các vectơ.
+
+    CLAUDE THEM 01/10/2026 - theo phan dang 2, MC 20, 21, 27, TF 1, 6, 7 tai lieu CĐ day them "Khai niem vecto"
+    (tai lieu khi tinh ca vecto da cho, khi khong - o day luon ghi ro "khac vecto da cho"). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H, de, dap, ly, ung = _c4_cau_dem(["cung_phuong", "cung_huong", "nguoc_huong"], "nb037_c")
+        cau += MC_SA_answer_text(de, "$%d$" % dap, ["$%d$" % x for x in _c4_nhieu_so(dap, ung)], ly, _c4_tikz(H), 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_C (cùng Dang).
+
+    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H, de, dap, ly, ung = _c4_cau_dem(["cung_phuong", "cung_huong", "nguoc_huong"], "nb037_c")
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in _c4_nhieu_so(dap, ung)], ly, _c4_tikz(H), 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB037_MC_D: khẳng định đúng / sai về khái niệm vectơ, cùng phương, cùng hướng (kho xoay vòng)
+# ---------------------------------------------------------------------
+_C4_KN_NB037 = [  # (phát biểu, đúng?, lí do)
+    (r"Vectơ là một đoạn thẳng có hướng", True, "đó là định nghĩa vectơ"),
+    (r"Vectơ $\overrightarrow{AB}$ có điểm đầu là $A$, điểm cuối là $B$", True, "theo kí hiệu vectơ"),
+    (r"Độ dài của vectơ $\overrightarrow{AB}$ bằng độ dài đoạn thẳng $AB$", True, "theo định nghĩa độ dài vectơ"),
+    (r"Hai vectơ $\overrightarrow{AB}$ và $\overrightarrow{BA}$ có cùng độ dài", True, "cả hai đều bằng $AB$"),
+    (r"Giá của vectơ $\overrightarrow{AB}$ là đường thẳng $AB$", True, "giá là đường thẳng đi qua điểm đầu và điểm cuối"),
+    (r"Hai vectơ cùng phương thì cùng hướng hoặc ngược hướng", True, "đó là nhận xét trong SGK"),
+    (r"Hai vectơ cùng hướng thì cùng phương", True, "cùng hướng được xét trong hai vectơ cùng phương"),
+    (r"Hai vectơ $\overrightarrow{AB}$ và $\overrightarrow{BA}$ ngược hướng", True, "hai vectơ có cùng giá, chỉ về hai phía ngược nhau"),
+    (r"Ba điểm phân biệt $A$, $B$, $C$ thẳng hàng khi và chỉ khi $\overrightarrow{AB}$ và $\overrightarrow{AC}$ cùng phương", True,
+     "hai vectơ có chung điểm đầu $A$ nên cùng phương khi và chỉ khi có cùng giá"),
+    (r"Nếu $\overrightarrow{a}$, $\overrightarrow{b}$ cùng hướng với $\overrightarrow{c}$ (đều khác $\overrightarrow{0}$) thì "
+     r"$\overrightarrow{a}$ cùng hướng với $\overrightarrow{b}$", True, "quan hệ cùng hướng có tính bắc cầu đối với các vectơ khác vectơ-không"),
+    (r"Hai vectơ cùng phương thì cùng hướng", False, "chúng có thể ngược hướng, chẳng hạn $\\overrightarrow{AB}$ và $\\overrightarrow{BA}$"),
+    (r"Hai vectơ có cùng độ dài thì cùng phương", False, "độ dài không cho biết phương, chẳng hạn hai cạnh kề của hình vuông"),
+    (r"Hai vectơ cùng phương thì có cùng giá", False, "giá của chúng có thể chỉ song song"),
+    (r"Hai vectơ $\overrightarrow{AB}$ và $\overrightarrow{BA}$ cùng hướng", False, "chúng ngược hướng"),
+    (r"Hai vectơ ngược hướng thì không cùng phương", False, "ngược hướng chỉ xét với hai vectơ cùng phương"),
+    (r"Độ dài của vectơ $\overrightarrow{AB}$ khác độ dài của vectơ $\overrightarrow{BA}$", False, "cả hai đều bằng $AB$"),
+    (r"Vectơ là một đoạn thẳng", False, "vectơ là đoạn thẳng CÓ HƯỚNG (phải chỉ rõ điểm đầu, điểm cuối)"),
+    (r"Hai vectơ cùng phương với một vectơ thứ ba (khác $\overrightarrow{0}$) thì cùng hướng", False,
+     "chúng chỉ cùng phương, có thể ngược hướng"),
+    (r"Ba điểm $A$, $B$, $C$ phân biệt thẳng hàng khi và chỉ khi $\overrightarrow{AB}$ và $\overrightarrow{AC}$ cùng hướng", False,
+     "nếu $A$ nằm giữa $B$ và $C$ thì hai vectơ ngược hướng mà ba điểm vẫn thẳng hàng"),
+]
+
+
+def _c4_mc_kho(kho, ten_kho, dang, debai_mo, giai_mo):
+    cau = ""
+    hoi = random.random() < 0.55
+    idx = _c4_uu_tien(ten_kho, list(range(len(kho))))
+    d = [i for i in idx if kho[i][1] == hoi][:1]
+    s = [i for i in idx if kho[i][1] != hoi][:3]
+    _c4_danh_dau(ten_kho, d + s)
+    debai = debai_mo + r" Khẳng định nào sau đây %s?" % (r"\textbf{đúng}" if hoi else r"\textbf{sai}")
+    giai = giai_mo + r"\\ ".join(r"``%s'' là khẳng định %s vì %s." % (kho[i][0], "đúng" if kho[i][1] else "sai", kho[i][2])
+                                 for i in d + s)
+    return _MC_khong_cham(debai, kho[d[0]][0], [kho[i][0] for i in s], giai, 0, 0, dang)
+
+
+def L10_C4_B7_NB037_MC_D_01(socau, dang=1):
+    r"""Khẳng định đúng (sai) về khái niệm vectơ, giá, độ dài, cùng phương, cùng hướng, ngược hướng; kho 19 khẳng
+    định lấy xoay vòng.
+
+    CLAUDE THEM 01/10/2026 - theo MC 1, 2, 5, 11, TL 13 tai lieu CĐ day them "Khai niem vecto" (MC 1 tai lieu co hai
+    phuong an dung). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        cau += _c4_mc_kho(_C4_KN_NB037, "c4_kn_nb037", dang, "", "")
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB037_MC_E / SA_C: độ dài vectơ trong hình đơn giản
+# ---------------------------------------------------------------------
+def _c4_do_dai(so):
+    """Một câu độ dài vectơ. so=True: số liệu bằng số (trả lời ngắn, làm tròn hàng phần mười); False: theo a.
+    Trả về (mô tả, vectơ, độ dài sympy, lời giải, các độ dài nhiễu, hình H)."""
+    a = random.choice([2, 3, 4, 5, 6, 8, 10]) if so else _Sym4("a", positive=True)
+    kieu = random.choice(["hcn", "vuong", "thoi", "luc_giac", "tg_deu"] if not so else ["hcn", "vuong", "thoi", "luc_giac", "tg_deu"])
+    if kieu == "hcn":
+        p, q = random.choice([(3, 4), (6, 8), (5, 12), (8, 6), (4, 3), (12, 5), (8, 15), (9, 12)])
+        if not so:
+            p, q = random.choice([(1, 2), (2, 1), (1, 3), (3, 1)])
+            p, q = p * a, q * a
+            if random.random() < 0.5:
+                p, q = a, a * _sq4(3)
+        H = _c4_hinh("hcn")
+        A, B, C, D = H["da_giac"]
+        tl = 4.4 / float(max(p, q) if so else max(p / a, q / a))
+        pp, qq = (float(p) * tl, float(q) * tl) if so else (float(p / a) * tl, float(q / a) * tl)
+        H["P"].update({A: (0, 0), B: (pp, 0), C: (pp, qq), D: (0, qq), H["tam"]: (pp / 2, qq / 2)})
+        O = H["tam"]
+        cheo = _sq4(p ** 2 + q ** 2)
+        mo = r"Cho hình chữ nhật $%s$ tâm $%s$ có $%s = %s$, $%s = %s$." % ("".join(H["da_giac"]), O, A + B, _c4_tx(p), A + D, _c4_tx(q))
+        v, L = random.choice([((A, C), cheo), ((B, D), cheo), ((O, A), cheo / 2), ((C, O), cheo / 2), ((D, B), cheo)])
+        ly = (r"$%s = %s = \sqrt{%s^{2} + %s^{2}} = %s$ (định lí Pythagore)" % (A + C, B + D, _c4_ng(p), _c4_ng(q), _c4_tx(cheo))
+              + ("" if O not in v else r", $%s$ là trung điểm của đường chéo nên $%s = \dfrac{%s}{2} = %s$" % (O, v[0] + v[1], A + C, _c4_tx(cheo / 2))))
+        return mo, v, L, ly, [p + q, cheo / 2 if O not in v else cheo, abs(q - p) if p != q else 2 * p], H
+    if kieu == "vuong":
+        H = _c4_hinh("vuong")
+        A, B, C, D = H["da_giac"]
+        O = H["tam"]
+        mo = r"Cho hình vuông $%s$ tâm $%s$ có cạnh bằng $%s$." % ("".join(H["da_giac"]), O, _c4_tx(a))
+        cheo = a * _sq4(2)
+        v, L = random.choice([((A, C), cheo), ((D, B), cheo), ((O, B), cheo / 2), ((A, O), cheo / 2), ((C, D), a)])
+        ly = r"$%s = %s\sqrt{2}$ (đường chéo hình vuông)" % (A + C, _c4_tx(a))
+        if O in v:
+            ly += r", $%s$ là trung điểm của đường chéo nên $%s = \dfrac{%s}{2} = %s$" % (O, v[0] + v[1], A + C, _c4_tx(cheo / 2))
+        elif v == (C, D):
+            ly = r"$%s = %s$ (cạnh hình vuông)" % (C + D, _c4_tx(a))
+        return mo, v, L, ly, [a, 2 * a, cheo / 2 if O not in v else cheo, a * _sq4(3)], H
+    if kieu == "thoi":
+        H = _c4_hinh("thoi")
+        A, B, C, D = H["da_giac"]
+        O = H["tam"]
+        if so:
+            d1, d2 = random.choice([(6, 8), (8, 6), (10, 24), (12, 16), (16, 12), (24, 10)])
+            tl = 4.8 / max(d1, d2)
+            H["P"].update({A: (0, d2 * tl / 2), B: (d1 * tl / 2, 0), C: (d1 * tl, d2 * tl / 2), D: (d1 * tl / 2, d2 * tl),
+                           O: (d1 * tl / 2, d2 * tl / 2)})
+            mo = r"Cho hình thoi $%s$ tâm $%s$ có $%s = %d$, $%s = %d$." % ("".join(H["da_giac"]), O, A + C, d1, B + D, d2)
+            canh = _sq4((d1 / _R4(2)) ** 2 + (d2 / _R4(2)) ** 2)
+            v, L = random.choice([((A, B), canh), ((C, D), canh), ((O, A), _R4(d1, 2)), ((B, O), _R4(d2, 2))])
+            ly = (r"Hai đường chéo vuông góc tại trung điểm $%s$: $%s = %s$, $%s = %s$; $%s = \sqrt{%s^{2} + %s^{2}} = %s$"
+                  % (O, O + A, _c4_tx(_R4(d1, 2)), O + B, _c4_tx(_R4(d2, 2)), A + B, _c4_tx(_R4(d1, 2)), _c4_tx(_R4(d2, 2)), _c4_tx(canh)))
+            return mo, v, L, ly, [d1, d2, _R4(d1 + d2, 2)], H
+        r3 = math.sqrt(3)
+        H["P"].update({A: (0, 1.2), B: (1.2 * r3, 0), C: (2.4 * r3, 1.2), D: (1.2 * r3, 2.4), O: (1.2 * r3, 1.2)})
+        mo = (r"Cho hình thoi $%s$ tâm $%s$ có cạnh bằng $%s$ và $\widehat{%s} = 60^{\circ}$."
+              % ("".join(H["da_giac"]), O, _c4_tx(a), B + A + D))
+        v, L = random.choice([((B, D), a), ((A, C), a * _sq4(3)), ((O, A), a * _sq4(3) / 2), ((D, O), a / 2)])
+        ly = (r"Tam giác $%s$ cân tại $%s$ có góc $60^{\circ}$ nên đều: $%s = %s$. $%s$ là đường cao của tam giác đều cạnh $%s$ "
+              r"nên $%s = \dfrac{%s\sqrt{3}}{2}$, $%s = 2%s = %s\sqrt{3}$" % (A + B + D, A, B + D, _c4_tx(a), A + O, _c4_tx(a), A + O,
+                                                                              _c4_tx(a), A + C, A + O, _c4_tx(a)))
+        return mo, v, L, ly, [a, a * _sq4(3), a * _sq4(3) / 2, a / 2, a * _sq4(2)], H
+    if kieu == "luc_giac":
+        H = _c4_hinh("luc_giac")
+        mo = r"Cho lục giác đều $ABCDEF$ tâm $O$ có cạnh bằng $%s$." % _c4_tx(a)
+        v, L = random.choice([(("A", "D"), 2 * a), (("B", "E"), 2 * a), (("O", "C"), a), (("A", "C"), a * _sq4(3)),
+                              (("F", "B"), a * _sq4(3)), (("E", "O"), a)])
+        ly = (r"Lục giác đều được chia thành sáu tam giác đều cạnh $%s$ chung đỉnh $O$ nên $OA = OB = \ldots = %s$, "
+              r"$AD = BE = CF = 2 \cdot %s$; $AC = BD = \ldots = 2 \cdot \dfrac{%s\sqrt{3}}{2} = %s\sqrt{3}$ (gấp đôi đường cao tam "
+              r"giác đều)" % (_c4_tx(a), _c4_tx(a), _c4_tx(a), _c4_tx(a), _c4_tx(a)))
+        return mo, v, L, ly, [a, 2 * a, a * _sq4(3), a * _sq4(3) / 2, a * _sq4(2)], H
+    H = _c4_hinh("tg_trung_diem")
+    M, N, Q = [t for t in H["P"] if t not in "ABC"]
+    r3 = math.sqrt(3)
+    H["P"].update({"A": (2.2, 2.2 * r3), "B": (0, 0), "C": (4.4, 0), M: (2.2, 0), N: (3.3, 1.1 * r3), Q: (1.1, 1.1 * r3)})
+    mo = (r"Cho tam giác đều $ABC$ có cạnh bằng $%s$; $%s$, $%s$, $%s$ lần lượt là trung điểm của $BC$, $CA$, $AB$."
+          % (_c4_tx(a), M, N, Q))
+    v, L = random.choice([(("A", M), a * _sq4(3) / 2), ((N, "B"), a * _sq4(3) / 2), ((M, N), a / 2), ((Q, "B"), a / 2)])
+    ly = (r"Đường trung tuyến của tam giác đều cũng là đường cao, có độ dài $\dfrac{%s\sqrt{3}}{2}$; đoạn nối hai trung điểm "
+          r"(đường trung bình) và nửa cạnh đều bằng $\dfrac{%s}{2}$" % (_c4_tx(a), _c4_tx(a)))
+    return mo, v, L, ly, [a, a * _sq4(3), a * _sq4(3) / 2, a / 2, a * _sq4(2) / 2], H
+
+
+def _c4_tx(x):
+    """Viết độ dài kiểu đề thi: a\\sqrt{3}, \\dfrac{a\\sqrt{3}}{2}, 2a, 10, 5\\sqrt{2}..."""
+    x = _ns4(x)
+    a = [t for t in x.free_symbols]
+    he = _ns4(x / a[0]) if a else x
+    c, r = he.as_coeff_Mul()
+    c = _R4(c)
+    can = "" if r == 1 else r"\sqrt{%s}" % _lx4(r ** 2)
+    if r != 1 and not (r ** 2).is_Integer:
+        return _lx4(x).replace(r"\frac", r"\dfrac")
+    chu = "a" if a else ""
+    tu = ("" if (c.p == 1 and (chu or can)) else "%d" % c.p) + chu + can
+    if c.p == 1 and not chu and not can:
+        tu = "1"
+    return tu if c.q == 1 else r"\dfrac{%s}{%d}" % (tu, c.q)
+
+
+def _c4_ng(x):
+    x = _ns4(x)
+    s = _c4_tx(x)
+    return s if x.is_Atom else r"\left(%s\right)" % s
+
+
+def L10_C4_B7_NB037_MC_E_01(socau, dang=1):
+    r"""Độ dài vectơ trong hình đơn giản (hình chữ nhật, hình vuông, hình thoi góc $60^{\circ}$, lục giác đều, tam giác
+    đều có trung điểm), độ dài theo $a$; một bước Pythagore hoặc đường cao tam giác đều.
+
+    CLAUDE THEM 01/10/2026 - theo phan dang 3, MC 29 - 36, TL 5, 6 tai lieu CĐ day them "Khai niem vecto" (chi lay cac
+    cau mot buoc tinh; cau trong tam, trung diem AG, phan giac... vuot muc NB037 nen khong lay). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        mo, v, L, ly, ung, H = _c4_do_dai(False)
+        dap = "$%s$" % _c4_tx(L)
+        nh = [u for u in dict.fromkeys("$%s$" % _c4_tx(x) for x in ung) if u != dap]
+        if len(nh) < 3:
+            continue
+        so += 1
+        debai = mo + r" Độ dài của vectơ $%s$ bằng" % _vt(*v)
+        giai = ly.replace(r"\frac", r"\dfrac") + r".\\ Vậy $\left|%s\right| = %s = %s$." % (_vt(*v), v[0] + v[1], dap.strip("$"))
+        cau += MC_SA_answer_text(debai, dap, nh[:3], giai, _c4_tikz(H), 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - độ dài vectơ trong hình đơn giản với số liệu bằng số; kết quả làm tròn đến hàng phần mười
+    (bản trả lời ngắn của NB037_MC_E, cùng Dang).
+
+    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        mo, v, L, ly, ung, H = _c4_do_dai(True)
+        gt = float(L)
+        s = _xx4(round(gt, 1), 1)
+        if len(s) > 4:
+            continue
+        so += 1
+        chinh_xac = abs(gt - round(gt, 1)) < 1e-9
+        debai = mo + r" Tính độ dài của vectơ $%s$%s." % (_vt(*v), "" if chinh_xac else " (làm tròn kết quả đến hàng phần mười)")
+        giai = ly + r".\\ Vậy $\left|%s\right| = %s %s %s$." % (_vt(*v), _c4_tx(L), "=" if chinh_xac else r"\approx", s)
+        nh = [_xx4(round(float(x), 1), 1) for x in ung]
+        nh = [x for x in dict.fromkeys(nh) if x != s and len(x) <= 4]
+        cau += MC_SA_answer_const(debai, s, (nh + ["1", "2", "3"])[:3] if len(nh) < 3 else nh[:3], giai, _c4_tikz(H), 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB038_MC_A_02: đẳng thức vectơ bằng nhau đúng / sai trong hình (kho hình)
+# ---------------------------------------------------------------------
+def L10_C4_B7_NB038_MC_A_02(socau, dang=1):
+    r"""Cách hỏi khác của NB038_MC_A_01 với KHO HÌNH xoay vòng: trong bốn đẳng thức $\overrightarrow{XY} =
+    \overrightarrow{ZT}$, chọn đẳng thức đúng (hoặc sai). Các đẳng thức sai đều là cặp dễ nhầm: cùng độ dài nhưng
+    ngược hướng, cùng hướng nhưng khác độ dài, cùng độ dài nhưng không cùng phương.
+
+    CLAUDE THEM 01/10/2026 - theo phan dang 2, MC 22 - 26, 41, TF 5, 8, 9 tai lieu CĐ day them "Khai niem vecto". Co Lan
+    duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        H = _c4_chon_hinh("nb038_a")
+        vts = _c4_tat_ca_vt(H)
+        do = lambda w: math.hypot(*_c4_v(H, *w))
+        dung, sai = [], []
+        for i, u in enumerate(vts):
+            for w in vts[i + 1:]:
+                if set(u) == set(w):
+                    continue
+                a, b = _c4_v(H, *u), _c4_v(H, *w)
+                cung_do = abs(do(u) - do(w)) < 1e-7
+                if _c4_bang(a, b):
+                    dung.append((u, w, "cùng hướng và cùng độ dài"))
+                elif cung_do and _c4_cp(a, b):
+                    sai.append((u, w, "ngược hướng"))
+                elif _c4_ch(a, b):
+                    sai.append((u, w, "cùng hướng nhưng khác độ dài"))
+                elif cung_do and not _c4_cp(a, b):
+                    sai.append((u, w, "cùng độ dài nhưng không cùng phương"))
+        hoi = random.random() < 0.55
+        A_, B_ = (dung, sai) if hoi else (sai, dung)
+        if not A_ or len(B_) < 3:
+            continue
+        random.shuffle(A_)
+        random.shuffle(B_)
+        chon = [A_[0]] + B_[:3]
+        so += 1
+        tex = lambda c: r"$%s = %s$" % (_vt(*c[0]), _vt(*c[1]))
+        debai = H["mo"] + r" Đẳng thức nào sau đây %s?" % (r"\textbf{đúng}" if hoi else r"\textbf{sai}")
+        giai = (r"Hai vectơ bằng nhau khi chúng cùng hướng và có cùng độ dài.\\ "
+                + r"\\ ".join(r"$%s$ và $%s$ %s nên %s %s." % (_vt(*c[0]), _vt(*c[1]), c[2], tex(c), "đúng" if c in dung else "sai")
+                              for c in chon))
+        cau += MC_SA_answer_text(debai, tex(chon[0]), [tex(c) for c in chon[1:]], giai, _c4_tikz(H), 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB038_MC_B / SA_A: đếm số vectơ bằng một vectơ cho trước
+# ---------------------------------------------------------------------
+def L10_C4_B7_NB038_MC_B_01(socau, dang=1):
+    r"""Đếm số vectơ (điểm đầu, điểm cuối thuộc các điểm của hình, khác vectơ đã cho) bằng một vectơ cho trước;
+    kho hình xoay vòng; lời giải liệt kê.
+
+    CLAUDE THEM 01/10/2026 - theo MC 20, 21, 37, 39, TF 7, 10, TL 18 tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H, de, dap, ly, ung = _c4_cau_dem(["bang"], "nb038_b")
+        cau += MC_SA_answer_text(de, "$%d$" % dap, ["$%d$" % x for x in _c4_nhieu_so(dap, ung)], ly, _c4_tikz(H), 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB038_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB038_MC_B (cùng Dang).
+
+    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H, de, dap, ly, ung = _c4_cau_dem(["bang"], "nb038_b")
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in _c4_nhieu_so(dap, ung)], ly, _c4_tikz(H), 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB038_MC_C: khẳng định về hai vectơ bằng nhau, vectơ-không (kho xoay vòng)
+# ---------------------------------------------------------------------
+_C4_KN_NB038 = [
+    (r"Hai vectơ bằng nhau thì có cùng độ dài", True, "hai vectơ bằng nhau là hai vectơ cùng hướng và cùng độ dài"),
+    (r"Hai vectơ bằng nhau thì cùng hướng", True, "theo định nghĩa hai vectơ bằng nhau"),
+    (r"Hai vectơ bằng nhau thì cùng phương", True, "chúng cùng hướng nên cùng phương"),
+    (r"Vectơ-không là vectơ có điểm đầu và điểm cuối trùng nhau", True, "đó là định nghĩa vectơ-không"),
+    (r"Vectơ-không có độ dài bằng $0$", True, "$\\left|\\overrightarrow{AA}\\right| = 0$"),
+    (r"Vectơ-không cùng phương, cùng hướng với mọi vectơ", True, "đó là quy ước trong SGK"),
+    (r"$\overrightarrow{AA} = \overrightarrow{BB}$ với mọi điểm $A$, $B$", True, "mọi vectơ-không đều bằng nhau và kí hiệu là $\\overrightarrow{0}$"),
+    (r"Nếu $\overrightarrow{a} = \overrightarrow{b}$ và $\overrightarrow{b} = \overrightarrow{c}$ thì $\overrightarrow{a} = \overrightarrow{c}$", True,
+     "ba vectơ cùng hướng và cùng độ dài"),
+    (r"Tứ giác $ABCD$ là hình bình hành khi và chỉ khi $\overrightarrow{AB} = \overrightarrow{DC}$ ($A$, $B$, $C$, $D$ không thẳng hàng)", True,
+     "$\\overrightarrow{AB} = \\overrightarrow{DC}$ nghĩa là $AB \\parallel DC$, $AB = DC$ và cùng hướng"),
+    (r"Hai vectơ có cùng độ dài thì bằng nhau", False, "chúng còn phải cùng hướng"),
+    (r"Hai vectơ cùng phương và có cùng độ dài thì bằng nhau", False, "chúng có thể ngược hướng, chẳng hạn $\\overrightarrow{AB}$ và $\\overrightarrow{BA}$"),
+    (r"Hai vectơ cùng hướng thì bằng nhau", False, "chúng còn phải có cùng độ dài"),
+    (r"$\overrightarrow{AB} = \overrightarrow{BA}$ với mọi điểm $A$, $B$", False, "khi $A \\ne B$ hai vectơ ngược hướng"),
+    (r"Vectơ-không không cùng phương với vectơ nào", False, "vectơ-không cùng phương với mọi vectơ"),
+    (r"Độ dài của vectơ-không bằng $1$", False, "độ dài vectơ-không bằng $0$"),
+    (r"$\overrightarrow{AB} = \overrightarrow{CD}$ khi và chỉ khi $AB = CD$", False, "$AB = CD$ chỉ cho biết hai vectơ cùng độ dài"),
+    (r"Nếu $\overrightarrow{AB} = \overrightarrow{CD}$ thì $A$, $B$, $C$, $D$ là bốn đỉnh của hình bình hành $ABCD$", False,
+     "khi đó $ABDC$ (hoặc bốn điểm thẳng hàng) mới đúng, không phải $ABCD$"),
+    (r"Nếu $\overrightarrow{AB} = \overrightarrow{AC}$ thì $B$ khác $C$", False, "hai vectơ chung điểm đầu bằng nhau thì $B \\equiv C$"),
+]
+
+
+def L10_C4_B7_NB038_MC_C_01(socau, dang=1):
+    r"""Khẳng định đúng (sai) về hai vectơ bằng nhau, vectơ-không; kho 18 khẳng định lấy xoay vòng.
+
+    CLAUDE THEM 01/10/2026 - theo MC 3, 7, 13, 16, 40 tai lieu CĐ day them "Khai niem vecto" (bo cac khang dinh ve vecto doi
+    nhau - thuoc Bai 8). Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        cau += _c4_mc_kho(_C4_KN_NB038, "c4_kn_nb038", dang, "", "")
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB038_MC_D: dựng điểm từ hai vectơ bằng nhau -> hình bình hành
+# ---------------------------------------------------------------------
+def L10_C4_B7_NB038_MC_D_01(socau, dang=1):
+    r"""Ba điểm $A$, $B$, $C$ không thẳng hàng và điểm $D$ thoả mãn một đẳng thức vectơ bằng nhau
+    ($\overrightarrow{AB} = \overrightarrow{DC}$, $\overrightarrow{AB} = \overrightarrow{CD}$, $\overrightarrow{AD} =
+    \overrightarrow{BC}$...): tứ giác nào là hình bình hành. Python kiểm tra bằng toạ độ.
+
+    CLAUDE THEM 01/10/2026 - theo MC 25, TF 9, 10, 19, TL 12, 15 tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    import itertools
+    cau = ""
+    for _ in range(socau):
+        ten = random.choice(["ABC", "MNP", "EFG"])
+        X, Y, Z = ten
+        T = {"ABC": "D", "MNP": "Q", "EFG": "H"}[ten]
+        P = {X: (0, 0), Y: (random.randint(3, 5), 0), Z: (random.randint(1, 4), random.randint(2, 4))}
+        cap = random.choice([((X, Y), (T, Z)), ((X, Y), (Z, T)), ((X, T), (Y, Z)), ((Y, X), (Z, T)), ((T, X), (Z, Y)),
+                             ((X, Z), (T, Y)), ((X, Z), (Y, T)), ((Z, Y), (T, X))])
+        (p1, p2), (q1, q2) = cap
+        # q2 - q1 = p2 - p1, T là q1 hoặc q2 hoặc p1, p2
+        ve = lambda a, b: (P[b][0] - P[a][0], P[b][1] - P[a][1])
+        if T in (q1, q2):
+            k = ve(p1, p2)
+            P[T] = (P[q2][0] - k[0], P[q2][1] - k[1]) if T == q1 else (P[q1][0] + k[0], P[q1][1] + k[1])
+        else:
+            k = ve(q1, q2)
+            P[T] = (P[p2][0] - k[0], P[p2][1] - k[1]) if T == p1 else (P[p1][0] + k[0], P[p1][1] + k[1])
+
+        def la_hbh(o):
+            a, b, c, d = (P[t] for t in o)
+            return abs(a[0] + c[0] - b[0] - d[0]) < 1e-9 and abs(a[1] + c[1] - b[1] - d[1]) < 1e-9
+        tu = [X + Y + Z + T, X + Y + T + Z, X + Z + Y + T]
+        dung = [o for o in tu if la_hbh(o)][0]
+        sai = [o for o in tu if o != dung]
+        pa_d = r"$%s$ là hình bình hành" % dung
+        nhieu = [r"$%s$ là hình bình hành" % o for o in sai] + [r"$%s$ là trung điểm của $%s$" % (T, X + Z)]
+        debai = (r"Cho ba điểm $%s$, $%s$, $%s$ không thẳng hàng và điểm $%s$ thoả mãn $%s = %s$. Khẳng định nào sau đây đúng?"
+                 % (X, Y, Z, T, _vt(p1, p2), _vt(q1, q2)))
+        giai = (r"$%s = %s$ nên hai đoạn $%s$, $%s$ song song (ba điểm không thẳng hàng), bằng nhau và hai vectơ cùng hướng. "
+                r"Do đó tứ giác $%s$ (đi theo thứ tự $%s \to %s \to %s \to %s$) là hình bình hành: hai cạnh đối $%s$ và $%s$ song song, "
+                r"bằng nhau." % (_vt(p1, p2), _vt(q1, q2), p1 + p2, q1 + q2, dung, *dung, dung[0] + dung[1], dung[3] + dung[2]))
+        cau += _MC_khong_cham(debai, pa_d, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH039: biểu diễn đại lượng thực tiễn bằng vectơ
+# ---------------------------------------------------------------------
+_C4_HUONG = {(1, 0): "đông", (-1, 0): "tây", (0, 1): "bắc", (0, -1): "nam",
+             (1, 1): "đông bắc", (-1, 1): "tây bắc", (1, -1): "đông nam", (-1, -1): "tây nam"}
+
+
+def _c4_luoi(ds, nhan, rong=10, cao=6, la_ban=False):
+    """Lưới ô vuông với các mũi tên ds = [(x0, y0, dx, dy)] và nhãn."""
+    out = ["\\begin{tikzpicture}[>=stealth,x=0.5cm,y=0.5cm,scale=1]",
+           "\\draw[gray!50, very thin] (0,0) grid (%d,%d);" % (rong, cao)]
+    for (x0, y0, dx, dy), t in zip(ds, nhan):
+        out.append("\\draw[->, very thick] (%d,%d) -- (%d,%d) node[midway, %s]{\\footnotesize $%s$};"
+                   % (x0, y0, x0 + dx, y0 + dy, "above" if dy == 0 else "right", t))
+    if la_ban:
+        out.append("\\draw[->] (%d,%d) -- (%d,%d) node[above]{\\scriptsize Bắc};" % (rong + 2, cao - 3, rong + 2, cao - 1))
+        out.append("\\draw[->] (%d,%d) -- (%d,%d) node[right]{\\scriptsize Đông};" % (rong + 2, cao - 3, rong + 4, cao - 3))
+    out.append("\\end{tikzpicture}")
+    return "\n".join(out)
+
+
+def _c4_dat_mui_ten(vec, rong=10, cao=6):
+    """Đặt các mũi tên (dx, dy) không chồng nhau trên lưới."""
+    for _ in range(500):
+        ds, chiem = [], set()
+        ok = True
+        for dx, dy in vec:
+            for _t in range(200):
+                x0 = random.randint(max(0, -dx), min(rong, rong - dx))
+                y0 = random.randint(max(0, -dy), min(cao, cao - dy))
+                o = {(x0 + round(dx * t / 4), y0 + round(dy * t / 4)) for t in range(5)}
+                vung = {(a + i, b + j) for a, b in o for i in (-1, 0, 1) for j in (-1, 0, 1)}
+                if not (vung & chiem):
+                    chiem |= o
+                    ds.append((x0, y0, dx, dy))
+                    break
+            else:
+                ok = False
+                break
+        if ok:
+            return ds
+    raise ValueError("khong dat duoc")
+
+
+def L10_C4_B7_TH039_MC_B_01(socau, dang=1):
+    r"""Các lực $\overrightarrow{F_1}, \ldots, \overrightarrow{F_4}$ được biểu diễn trên lưới ô vuông (mỗi cạnh ô ứng với
+    $10$ N): chọn cặp lực cùng hướng / ngược hướng / bằng nhau. Python xét bằng toạ độ.
+
+    CLAUDE THEM 01/10/2026 - theo TL 19 (Hinh 18), TL 14, 17 tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    import itertools
+    cau = ""
+    so = 0
+    while so < socau:
+        hoi = random.choice(["cùng hướng", "ngược hướng", "bằng nhau"])
+        goc = random.choice([(1, 0), (0, 1), (1, 1), (1, -1)])
+        k1 = random.randint(2, 3)
+        k2 = k1 if hoi == "bằng nhau" else random.choice([k for k in (1, 2, 3) if k != k1] if hoi == "cùng hướng" else [1, 2, 3])
+        s2 = -1 if hoi == "ngược hướng" else 1
+        v1 = (goc[0] * k1, goc[1] * k1)
+        v2 = (s2 * goc[0] * k2, s2 * goc[1] * k2)
+        khac = [d for d in _C4_HUONG if d != goc and d != (-goc[0], -goc[1])]
+        d3, d4 = random.sample(khac, 2)
+        v3 = (d3[0] * random.randint(1, 3), d3[1] * random.randint(1, 3))
+        v4 = (d4[0] * random.randint(1, 3), d4[1] * random.randint(1, 3))
+        if hoi != "bằng nhau":
+            v3 = (goc[0] * (-s2) * random.randint(1, 3), goc[1] * (-s2) * random.randint(1, 3)) if random.random() < .5 else v3
+        V = [v1, v2, v3, v4]
+        random.shuffle(V)
+        ten = [r"\overrightarrow{F_{%d}}" % (i + 1) for i in range(4)]
+        def qh(a, b):
+            if _c4_bang(a, b):
+                return "bằng nhau"
+            if _c4_ch(a, b):
+                return "cùng hướng"
+            if _c4_cp(a, b):
+                return "ngược hướng"
+            return "không cùng phương"
+        cap = list(itertools.combinations(range(4), 2))
+        dung = [c for c in cap if qh(V[c[0]], V[c[1]]) == hoi or (hoi == "cùng hướng" and qh(V[c[0]], V[c[1]]) == "bằng nhau")]
+        if len(dung) != 1:
+            continue
+        sai = [c for c in cap if c not in dung]
+        random.shuffle(sai)
+        try:
+            ds = _c4_dat_mui_ten(V)
+        except ValueError:
+            continue
+        so += 1
+        tx = lambda c: r"$%s$ và $%s$" % (ten[c[0]], ten[c[1]])
+        debai = (r"Các lực $%s$ tác dụng lên các vật được biểu diễn bằng các vectơ trên lưới ô vuông như hình vẽ. Cặp lực nào "
+                 r"sau đây \textbf{%s}?" % ("$, $".join(ten), hoi))
+        giai = r"\\ ".join(r"%s %s." % (tx(c), qh(V[c[0]], V[c[1]]) if qh(V[c[0]], V[c[1]]) != "không cùng phương" else
+                                        "không cùng phương (giá cắt nhau)") for c in dung + sai[:3])
+        giai = r"Đọc hướng và độ dài các vectơ trên lưới:\\ " + giai
+        cau += MC_SA_answer_text(debai, tx(dung[0]), [tx(c) for c in sai[:3]], giai, _c4_luoi(ds, ten), 0, dang)
+    return cau
+
+
+def L10_C4_B7_TH039_MC_C_01(socau, dang=1):
+    r"""Vận tốc trên lưới ô vuông có la bàn (mỗi cạnh ô ứng với $10$ km/h): vectơ nào biểu diễn vận tốc ``$v$ km/h theo
+    hướng đông / tây / nam / bắc''. Nhiễu: đúng hướng sai độ lớn, đúng độ lớn ngược hướng, đúng độ lớn vuông góc.
+
+    CLAUDE THEM 01/10/2026 - theo TL 9 (con bao di chuyen theo huong dong bac), TL 1 tai lieu CĐ day them "Khai niem vecto".
+    Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        huong = random.choice([(1, 0), (-1, 0), (0, 1), (0, -1)])
+        k = random.randint(2, 4)
+        k2 = random.choice([x for x in (1, 2, 3, 4, 5) if x != k])
+        vuong = (huong[1], huong[0])
+        V = [(huong[0] * k, huong[1] * k), (huong[0] * k2, huong[1] * k2), (-huong[0] * k, -huong[1] * k),
+             (vuong[0] * k, vuong[1] * k)]
+        thu_tu = list(range(4))
+        random.shuffle(thu_tu)
+        ten = [r"\overrightarrow{%s}" % c for c in "abcd"]
+        try:
+            ds = _c4_dat_mui_ten([V[i] for i in thu_tu], 10, 6)
+        except ValueError:
+            continue
+        so += 1
+        vi = {i: ten[thu_tu.index(i)] for i in range(4)}
+        vat = random.choice(["một chiếc thuyền", "một cơn bão", "một chiếc ô tô", "một đàn chim", "một chiếc máy bay"])
+        debai = (r"Trên lưới ô vuông (xem hình, phía trên là hướng bắc, bên phải là hướng đông), mỗi cạnh ô vuông ứng với "
+                 r"$10$ km/h. Vectơ nào biểu diễn vận tốc của %s đang di chuyển theo hướng %s với tốc độ $%d$ km/h?"
+                 % (vat, _C4_HUONG[huong], 10 * k))
+        giai = (r"Vectơ cần tìm chỉ về hướng %s và có độ dài $%d$ cạnh ô (ứng với $%d$ km/h): đó là $%s$.\\ $%s$ đúng hướng nhưng "
+                r"dài $%d$ ô; $%s$ dài $%d$ ô nhưng chỉ về hướng %s; $%s$ dài $%d$ ô nhưng chỉ về hướng %s."
+                % (_C4_HUONG[huong], k, 10 * k, vi[0], vi[1], k2, vi[2], k, _C4_HUONG[(-huong[0], -huong[1])], vi[3], k,
+                   _C4_HUONG[vuong]))
+        cau += MC_SA_answer_text(debai, "$%s$" % vi[0], ["$%s$" % vi[i] for i in (1, 2, 3)], giai,
+                                 _c4_luoi(ds, ten, la_ban=True), 0, dang)
+    return cau
+
+
+def _c4_kho_song():
+    """Khẳng định về vận tốc trên dòng sông / đường thẳng: [(phát biểu, đúng?, lí do)]."""
+    vn = random.randint(3, 6)
+    a = random.choice([12, 15, 18, 20])
+    b = random.choice([v for v in (12, 15, 18, 20) if v != a])
+    if random.random() < 0.5:
+        mo = (r"Một dòng sông chảy thẳng với vận tốc dòng nước là $\overrightarrow{v_n}$ ($%d$ km/h). Thuyền $A$ đi xuôi dòng, thuyền $B$ "
+              r"đi ngược dòng, thuyền $C$ đi xuôi dòng; vận tốc của các thuyền lần lượt là $\overrightarrow{v_A}$, $\overrightarrow{v_B}$, "
+              r"$\overrightarrow{v_C}$ với độ lớn $%d$ km/h, $%d$ km/h, $%d$ km/h." % (vn, a, a, b))
+        X = [(r"$\overrightarrow{v_A}$ cùng hướng với $\overrightarrow{v_n}$", True, "thuyền $A$ đi xuôi dòng"),
+             (r"$\overrightarrow{v_B}$ ngược hướng với $\overrightarrow{v_n}$", True, "thuyền $B$ đi ngược dòng"),
+             (r"$\overrightarrow{v_A}$ và $\overrightarrow{v_B}$ cùng phương", True, "cả hai cùng chuyển động dọc theo dòng sông"),
+             (r"$\overrightarrow{v_A}$ và $\overrightarrow{v_C}$ cùng hướng", True, "hai thuyền đều đi xuôi dòng"),
+             (r"$\overrightarrow{v_A} = \overrightarrow{v_B}$", False, "hai vectơ có cùng độ lớn nhưng ngược hướng"),
+             (r"$\overrightarrow{v_A} = \overrightarrow{v_C}$", False, "hai vectơ cùng hướng nhưng khác độ lớn ($%d \\ne %d$)" % (a, b)),
+             (r"$\overrightarrow{v_B}$ cùng hướng với $\overrightarrow{v_n}$", False, "thuyền $B$ đi ngược dòng"),
+             (r"$\overrightarrow{v_A}$ và $\overrightarrow{v_B}$ cùng hướng", False, "một thuyền xuôi dòng, một thuyền ngược dòng")]
+        return mo, X
+    mo = (r"Trên một đoạn đường thẳng theo hướng bắc - nam, xe $A$ chạy về phía bắc với tốc độ $%d$ km/h, xe $B$ chạy về phía nam "
+          r"với tốc độ $%d$ km/h, xe $C$ chạy về phía bắc với tốc độ $%d$ km/h. Gọi $\overrightarrow{v_A}$, $\overrightarrow{v_B}$, "
+          r"$\overrightarrow{v_C}$ là vectơ vận tốc của ba xe." % (a * 3, a * 3, b * 3))
+    X = [(r"$\overrightarrow{v_A}$ và $\overrightarrow{v_B}$ ngược hướng", True, "hai xe chạy theo hai hướng ngược nhau trên cùng một đường"),
+         (r"$\overrightarrow{v_A}$ và $\overrightarrow{v_C}$ cùng hướng", True, "hai xe cùng chạy về phía bắc"),
+         (r"$\overrightarrow{v_B}$ và $\overrightarrow{v_C}$ cùng phương", True, "các xe chuyển động trên cùng một đường thẳng"),
+         (r"$\left|\overrightarrow{v_A}\right| = \left|\overrightarrow{v_B}\right|$", True, "hai xe có cùng tốc độ $%d$ km/h" % (a * 3)),
+         (r"$\overrightarrow{v_A} = \overrightarrow{v_B}$", False, "hai vectơ cùng độ lớn nhưng ngược hướng"),
+         (r"$\overrightarrow{v_A} = \overrightarrow{v_C}$", False, "hai vectơ cùng hướng nhưng khác độ lớn"),
+         (r"$\overrightarrow{v_B}$ và $\overrightarrow{v_C}$ cùng hướng", False, "xe $B$ chạy về phía nam, xe $C$ chạy về phía bắc"),
+         (r"$\overrightarrow{v_A}$ và $\overrightarrow{v_B}$ không cùng phương", False, "hai xe chạy trên cùng một đường thẳng")]
+    return mo, X
+
+
+def L10_C4_B7_TH039_MC_D_01(socau, dang=1):
+    r"""Biểu diễn vận tốc bằng vectơ trong bối cảnh dòng sông (thuyền xuôi, ngược dòng) hoặc ba xe trên đường thẳng: chọn
+    khẳng định đúng (sai) về cùng hướng, ngược hướng, bằng nhau, độ lớn.
+
+    CLAUDE THEM 01/10/2026 - theo TL 1 (hai thuyen nguoc dong) tai lieu CĐ day them "Khai niem vecto". Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        mo, X = _c4_kho_song()
+        hoi = random.random() < 0.55
+        d = random.choice([x for x in X if x[1] == hoi])
+        s = random.sample([x for x in X if x[1] != hoi], 3)
+        debai = mo + r" Khẳng định nào sau đây %s?" % (r"\textbf{đúng}" if hoi else r"\textbf{sai}")
+        giai = r"\\ ".join(r"%s là khẳng định %s vì %s." % (x[0], "đúng" if x[1] else "sai", x[2]) for x in [d] + s)
+        cau += _MC_khong_cham(debai, d[0], [x[0] for x in s], giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TỰ LUẬN HAI ĐƠN VỊ
+# ---------------------------------------------------------------------
+def _c4_tl_ds(ds):
+    return r",\ ".join(_vt(*w) for w in ds) if ds else r"\text{không có}"
+
+
+def L10_C4_NB037_NB038_TL_A_01(socau, dong=1):
+    r"""Tự luận hai ý trong một hình (kho hình xoay vòng):
+    a) (NB037) Tìm các vectơ cùng hướng với $\overrightarrow{v}$ (khác $\overrightarrow{v}$, điểm mút thuộc hình);
+    b) (NB038) Tìm các vectơ bằng $\overrightarrow{v}$.
+
+    CLAUDE THEM 01/10/2026 - tu luan hai y hai don vi theo co Lan; theo TL 7, 10, 11, 18 tai lieu CĐ day them "Khai niem
+    vecto". Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        H = _c4_chon_hinh("tl_b7")
+        v = _c4_chon_vt(H, "bang", 1, 4)
+        if not v:
+            continue
+        ch = _c4_loc(H, v, "cung_huong")
+        bg = _c4_loc(H, v, "bang")
+        if len(ch) > 8 or len(ch) == len(bg):
+            continue
+        so += 1
+        de = H["mo"] + r" Xét các vectơ khác vectơ $%s$ có điểm đầu, điểm cuối là hai trong các điểm %s." % (
+            _vt(*v), ", ".join("$%s$" % t for t in H["P"]))
+        ds = [(r"Tìm các vectơ cùng hướng với vectơ $%s$." % _vt(*v), _c4_tl_ds(ch), _c4_ly_qh(H, v, "cung_huong", ch)),
+              (r"Tìm các vectơ bằng vectơ $%s$." % _vt(*v), _c4_tl_ds(bg),
+               _c4_ly_qh(H, v, "bang", bg) + r" (Trong các vectơ cùng hướng ở câu a), chỉ giữ các vectơ có độ dài bằng $%s$.)" % (v[0] + v[1]))]
+        cau += TL_answer_text(de, ds, _c4_tikz(H), 0, dong)
+    return cau
+
+
+def L10_C4_NB037_TH039_TL_A_01(socau, dong=1):
+    r"""Tự luận hai ý - các lực biểu diễn trên lưới ô vuông (mỗi cạnh ô ứng với $10$ N, các lực theo phương ngang hoặc dọc):
+    a) (NB037) Tìm các lực cùng hướng, ngược hướng với $\overrightarrow{F_1}$;
+    b) (TH039) Tính độ lớn và nêu hướng (đông, tây, nam, bắc) của từng lực.
+
+    CLAUDE THEM 01/10/2026 - tu luan hai y hai don vi theo co Lan; theo TL 9, 19 tai lieu CĐ day them "Khai niem vecto".
+    Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        H4 = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        h1 = random.choice(H4)
+        dirs = [h1, h1, (-h1[0], -h1[1]), random.choice([d for d in H4 if d not in (h1, (-h1[0], -h1[1]))])]
+        V = [(d[0] * random.randint(1, 4), d[1] * random.randint(1, 4)) for d in dirs]
+        thu = [0] + random.sample([1, 2, 3], 3)
+        V = [V[i] for i in thu]
+        try:
+            ds = _c4_dat_mui_ten(V)
+        except ValueError:
+            continue
+        so += 1
+        ten = [r"\overrightarrow{F_{%d}}" % (i + 1) for i in range(4)]
+        ch = [ten[i] for i in range(1, 4) if _c4_ch(V[i], V[0])]
+        ng = [ten[i] for i in range(1, 4) if _c4_cp(V[i], V[0]) and not _c4_ch(V[i], V[0])]
+        do = [abs(v[0]) + abs(v[1]) for v in V]
+        hg = [_C4_HUONG[(int(math.copysign(1, v[0])) if v[0] else 0, int(math.copysign(1, v[1])) if v[1] else 0)] for v in V]
+        de = (r"Bốn lực $%s$ được biểu diễn bằng các vectơ trên lưới ô vuông như hình bên (phía trên là hướng bắc, bên phải là "
+              r"hướng đông); mỗi cạnh ô vuông ứng với $10$ N." % "$, $".join(ten))
+        ys = [(r"Tìm các lực cùng hướng, các lực ngược hướng với $%s$." % ten[0],
+               _c4_tl_dap4(r"cùng hướng: $%s$; ngược hướng: $%s$" % (r",\ ".join(ch) or r"\text{không có}", r",\ ".join(ng) or r"\text{không có}")),
+               r"Các lực cùng phương với $%s$ là các lực có giá nằm ngang%s. Trong đó cùng hướng: $%s$; ngược hướng: $%s$."
+               % (ten[0], "" if V[0][1] == 0 else "" , r",\ ".join(ch) or r"\text{không có}", r",\ ".join(ng) or r"\text{không có}")
+               if V[0][1] == 0 else
+               r"Các lực cùng phương với $%s$ là các lực có giá thẳng đứng. Trong đó cùng hướng: $%s$; ngược hướng: $%s$."
+               % (ten[0], r",\ ".join(ch) or r"\text{không có}", r",\ ".join(ng) or r"\text{không có}")),
+              (r"Tính độ lớn và nêu hướng của mỗi lực.",
+               _c4_tl_dap4("; ".join(r"$\left|%s\right| = %d$ N (%s)" % (ten[i], 10 * do[i], hg[i]) for i in range(4))),
+               r"Đếm số cạnh ô của mỗi vectơ rồi nhân với $10$ N: " +
+               "; ".join(r"$%s$ dài $%d$ ô, hướng %s nên $\left|%s\right| = %d$ N" % (ten[i], do[i], hg[i], ten[i], 10 * do[i]) for i in range(4))
+               + ".")]
+        cau += TL_answer_text(de, ys, _c4_luoi(ds, ten, la_ban=True), 0, dong)
+    return cau
+
+
+def _c4_tl_dap4(s):
+    """Đáp án tự luận đặt trong $...$: phần chữ bọc \\text{}."""
+    ra = []
+    for i, phan in enumerate(s.split("$")):
+        if i % 2 == 0:
+            if phan:
+                ra.append(r"\text{%s}" % phan)
+        else:
+            ra.append(phan)
+    return "".join(ra)

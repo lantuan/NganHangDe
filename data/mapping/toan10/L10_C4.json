@@ -296,5 +296,143 @@
     "content": "Vectơ",
     "Loai": "Đúng sai",
     "Dang": "Vectơ trong mặt phẳng toạ độ; Tích vô hướng của hai vectơ"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_B",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm vectơ khác vectơ-không có điểm đầu, điểm cuối thuộc n điểm cho trước",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB037_SA_A",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm vectơ khác vectơ-không có điểm đầu, điểm cuối thuộc n điểm cho trước",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_C",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm vectơ cùng phương, cùng hướng, ngược hướng với một vectơ cho trước trong hình",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB037_SA_B",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm vectơ cùng phương, cùng hướng, ngược hướng với một vectơ cho trước trong hình",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_C"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_D",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn khẳng định đúng (sai) về vectơ, giá, độ dài, cùng phương, cùng hướng, ngược hướng",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_E",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tính độ dài vectơ trong hình đặc biệt (hình chữ nhật, hình vuông, hình thoi, lục giác đều, tam giác đều) - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - do dai vecto qua dinh li Pythagore / duong cao tam giac deu vuot muc nhan biet do dai vecto cua Bo; CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C4_B7_NB037_SA_C",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính độ dài vectơ trong hình đặc biệt (hình chữ nhật, hình vuông, hình thoi, lục giác đều, tam giác đều) - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - do dai vecto qua dinh li Pythagore / duong cao tam giac deu vuot muc nhan biet do dai vecto cua Bo; CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C4_B7_NB038_MC_B",
+    "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm vectơ bằng một vectơ cho trước trong hình",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB038_SA_A",
+    "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm vectơ bằng một vectơ cho trước trong hình",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B"
+  },
+  {
+    "id": "L10_C4_B7_NB038_MC_C",
+    "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn khẳng định đúng (sai) về hai vectơ bằng nhau, vectơ-không",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB038_MC_D",
+    "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm điểm D thoả mãn đẳng thức hai vectơ bằng nhau (hình bình hành)",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_TH039_MC_B",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu diễn các lực bằng vectơ trên lưới ô vuông: cùng hướng, ngược hướng, bằng nhau",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_TH039_MC_C",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu diễn vận tốc theo hướng và độ lớn trên lưới ô vuông có la bàn",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_TH039_MC_D",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vận tốc trong bối cảnh dòng sông, xe trên đường thẳng: cùng hướng, ngược hướng, độ lớn",
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_NB037_NB038_TL_A",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng. | Nhận biết được hai vectơ bằng nhau, vectơ-không.",
+    "Loai": "Tự luận",
+    "Dang": "Trong một hình: tìm các vectơ cùng hướng, ngược hướng với vectơ cho trước (a) và các vectơ bằng vectơ cho trước (b)",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C4_B7_NB037",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C4_B7_NB038",
+        "muc_do": "NB"
+      }
+    ],
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi"
+  },
+  {
+    "id": "L10_C4_NB037_TH039_TL_A",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng. | Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Tự luận",
+    "Dang": "Các lực biểu diễn trên lưới ô vuông: tìm lực cùng hướng, ngược hướng (a) và biểu diễn lực theo độ lớn, hướng (b)",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C4_B7_NB037",
+        "muc_do": "NB"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C4_B7_TH039",
+        "muc_do": "TH"
+      }
+    ],
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; tu luan hai y hai don vi"
   }
 ]

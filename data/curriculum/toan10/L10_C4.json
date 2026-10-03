@@ -20,7 +20,17 @@
       "cung_phuong",
       "cung_huong"
     ],
-    "difficulty_rank": 1
+    "difficulty_rank": 1,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Tính độ dài vectơ trong hình đặc biệt (hình chữ nhật, hình vuông, hình thoi, lục giác đều, tam giác đều) bằng định lí Pythagore hoặc đường cao tam giác đều",
+        "mapping_id": [
+          "L10_C4_B7_NB037_MC_E",
+          "L10_C4_B7_NB037_SA_C"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C4_B7_NB038",
