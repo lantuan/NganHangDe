@@ -25,8 +25,6 @@ def _nap_script(ten):
 
 # Hàm lệch do bản Việt có chỗ KHÔNG ĐÚNG mà bản Anh đã sửa (không phải lỗi dịch):
 CHO_PHEP_LECH = {
-    # bản Việt dùng Q.lower() lên cả LaTeX ($ABCD$ -> $abcd$ trong phương án nhiễu); bản Anh chỉ hạ chữ đầu câu
-    "L10_C1_B1_NB015_MC_B_01",
     # chữ \text{} cuối câu nằm khác chỗ do thứ tự câu tiếng Anh
     "L10_C1_NB015_TH014_TL_A_01",
 }
@@ -103,8 +101,7 @@ def test_de_tieng_anh_ghep_cung_de_viet(monkeypatch):
     assert "PHẦN I." in vi_tex
     assert kt.cau_truc(vi_tex) == kt.cau_truc(en_tex)
     assert kt.vi_tri_true(vi_tex) == kt.vi_tri_true(en_tex)
-    # so không phân biệt hoa/thường vì bản Việt hạ chữ thường cả LaTeX ở một phương án nhiễu (xem CHO_PHEP_LECH)
-    assert sorted(x.lower() for x in kt.toan(vi_tex)) == sorted(x.lower() for x in kt.toan(en_tex))
+    assert kt.toan(vi_tex) == kt.toan(en_tex)
     # không còn chữ Việt trong thân đề tiếng Anh (trừ tên người/địa danh không dấu)
     than = en_tex.split("\\begin{document}", 1)[1]
     assert not re.search("[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]", than, re.I)

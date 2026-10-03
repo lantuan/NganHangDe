@@ -5095,7 +5095,7 @@ def L10_C1_B1_NB015_MC_B_01(socau, dang=1):
 
                 f"Nếu {Q} thì {P}",
 
-                f"{P_hoa} và {Q.lower()}"
+                f"{P_hoa} và {_c1_thuong(Q)}"
             ]
 
             giai = (
@@ -5117,7 +5117,7 @@ def L10_C1_B1_NB015_MC_B_01(socau, dang=1):
 
                 f"Nếu {Q} thì {P}",
 
-                f"{P_hoa} và {Q.lower()}"
+                f"{P_hoa} và {_c1_thuong(Q)}"
             ]
 
             giai = (

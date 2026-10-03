@@ -931,7 +931,6 @@
  "f\"{P_hoa} là điều kiện đủ để có {Q}\"": "f\"``{P_hoa}'' is a sufficient condition for ``{Q}''\"",
  "f\"{P_hoa} nếu và chỉ nếu {Q}\"": "f\"{P_hoa} exactly when {Q}\"",
  "f\"{P_hoa} tương đương với {Q}\"": "f\"``{P_hoa}'' is equivalent to ``{Q}''\"",
- "f\"{P_hoa} và {Q.lower()}\"": "f\"{P_hoa} and {Q.lower()}\"",
  "f\"{Q_hoa} khi và chỉ khi {P}\"": "f\"{Q_hoa} if and only if {P}\"",
  "f\"{Q_hoa} là điều kiện cần để có {P}\"": "f\"``{Q_hoa}'' is a necessary condition for ``{P}''\"",
  "f\"{Q_hoa} là điều kiện đủ để có {P}\"": "f\"``{Q_hoa}'' is a sufficient condition for ``{P}''\"",
@@ -2474,5 +2473,6 @@
  "rf'Tồn tại số tự nhiên mà bình phương của nó {doc_dau(doi_dau(dau))} chính nó'": "rf'There exists a natural number whose square is {doc_dau(doi_dau(dau))} itself'",
  "rf'Tồn tại số tự nhiên mà nghịch đảo của nó {doc_thuoc(dau)} tập số tự nhiên'": "rf'There exists a natural number whose reciprocal {doc_thuoc(dau)} the set of natural numbers'",
  "rf'Tồn tại số tự nhiên mà nghịch đảo của nó {doc_thuoc(doi_thuoc(dau))} tập số tự nhiên'": "rf'There exists a natural number whose reciprocal {doc_thuoc(doi_thuoc(dau))} the set of natural numbers'",
- "rf'Tồn tại số tự nhiên mà nghịch đảo của nó {sp_thuoc(dau)} tập số tự nhiên'": "rf'There exists a natural number whose reciprocal {sp_thuoc(dau)} the set of natural numbers'"
+ "rf'Tồn tại số tự nhiên mà nghịch đảo của nó {sp_thuoc(dau)} tập số tự nhiên'": "rf'There exists a natural number whose reciprocal {sp_thuoc(dau)} the set of natural numbers'",
+ "f\"{P_hoa} và {_c1_thuong(Q)}\"": "f\"{P_hoa} and {_c1_thuong(Q)}\""
 }
