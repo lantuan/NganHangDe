@@ -1,3 +1,4 @@
+import io
 import json
 import zipfile
 from pathlib import Path
@@ -5,7 +6,7 @@ from pathlib import Path
 import re
 
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel
 
 from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23
@@ -532,20 +533,49 @@ def _pdf_en_tu_tex(de: dict, ban: str) -> Path | None:
         return None
 
 
-@router.get("/tai-de/{de_id}")
-def tai_de_endpoint(request: Request, de_id: str):
-    de = history_service.lay_de_theo_id(de_id)
-    if de is None:
-        raise HTTPException(404, "Khong tim thay de nay.")
-    if lay_ngon_ngu(request) == "en":
-        pdf_en = _pdf_en_tu_tex(de, "de")
-        if pdf_en is not None:
-            return FileResponse(path=str(pdf_en), filename="exam.pdf", media_type="application/pdf")
+def _pdf_vi_de(de: dict) -> Path:
     duong_dan = de.get("files", {}).get("de")
     if not duong_dan or not Path(duong_dan).exists():
         raise HTTPException(404, "File de khong con ton tai (co the da bi xoa sau 10 ngay).")
+    return Path(duong_dan)
+
+
+def _chon_ban_ngon_ngu(request: Request, ban: str | None) -> str:
+    """ban = "vi" | "en" | "ca-hai" (hai ban cung luc, nen thanh .zip). Khong truyen -> theo ngon ngu cua trang."""
+    if ban in ("vi", "en", "ca-hai"):
+        return ban
+    return lay_ngon_ngu(request)
+
+
+def _zip_song_ngu(de_id: str, pdf_vi: Path, pdf_en: Path | None, ten: str) -> Response:
+    """Gom ban tieng Viet + ban tieng Anh (neu de co ban tieng Anh) vao MOT tep .zip. Hoc sinh tick
+    "tai kem ca hai thu tieng" thi nhan dung hai tep song song, cung de, cung so lieu, cung dap an."""
+    bo_nho = io.BytesIO()
+    with zipfile.ZipFile(bo_nho, "w", zipfile.ZIP_DEFLATED) as z:
+        z.write(pdf_vi, "%s_TiengViet.pdf" % ten)
+        if pdf_en is not None:
+            z.write(pdf_en, "%s_English.pdf" % ten)
+    return Response(
+        content=bo_nho.getvalue(), media_type="application/zip",
+        headers={"Content-Disposition": 'attachment; filename="%s_%s.zip"' % (ten, de_id[:8])},
+    )
+
+
+@router.get("/tai-de/{de_id}")
+def tai_de_endpoint(request: Request, de_id: str, ban: str | None = None):
+    """ban=vi|en|ca-hai. Mac dinh theo ngon ngu trang dang chon (cookie lang); ca-hai -> .zip co ca hai ban."""
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+    chon = _chon_ban_ngon_ngu(request, ban)
+    if chon == "ca-hai":
+        return _zip_song_ngu(de_id, _pdf_vi_de(de), _pdf_en_tu_tex(de, "de"), "de")
+    if chon == "en":
+        pdf_en = _pdf_en_tu_tex(de, "de")
+        if pdf_en is not None:
+            return FileResponse(path=str(pdf_en), filename="exam.pdf", media_type="application/pdf")
     return FileResponse(
-        path=duong_dan,
+        path=str(_pdf_vi_de(de)),
         filename="de_thi.pdf",
         media_type="application/pdf",
     )
@@ -741,7 +771,7 @@ class ExportLoiGiaiRequest(BaseModel):
     conversation_id: str
 
 
-def _xuat_loigiai(de: dict, lang: str = "vi") -> FileResponse:
+def _xuat_loigiai(de: dict, lang: str = "vi") -> Response:
     """Tra ve PDF loi giai cua 1 de. Neu chua co san thi bien dich tu file
     .tex da luu (doi [dethi] -> [loigiai] trong ex_test) roi luu lai de
     lan sau khoi dich lai.
@@ -752,20 +782,27 @@ def _xuat_loigiai(de: dict, lang: str = "vi") -> FileResponse:
       "Loi giai" gan duoi tung de trong hoi thoai, de hoc sinh lam nhieu
       de van xin dung loi giai cua de minh muon).
     """
-    files = de.get("files", {})
+    if lang == "ca-hai":
+        return _zip_song_ngu(de["id"], _pdf_loigiai_vi(de), _pdf_en_tu_tex(de, "loigiai"), "loigiai")
 
     if lang == "en":
         pdf_en = _pdf_en_tu_tex(de, "loigiai")
         if pdf_en is not None:
             return FileResponse(path=str(pdf_en), filename="solutions.pdf", media_type="application/pdf")
 
+    return FileResponse(
+        path=str(_pdf_loigiai_vi(de)),
+        filename="loigiai.pdf",
+        media_type="application/pdf",
+    )
+
+
+def _pdf_loigiai_vi(de: dict) -> Path:
+    """PDF loi giai tieng Viet; chua co thi bien dich tu .tex da luu roi luu lai."""
+    files = de.get("files", {})
     loigiai_path = files.get("loigiai")
     if loigiai_path and Path(loigiai_path).exists():
-        return FileResponse(
-            path=loigiai_path,
-            filename="loigiai.pdf",
-            media_type="application/pdf",
-        )
+        return Path(loigiai_path)
 
     tex_path = files.get("tex")
     if not tex_path or not Path(tex_path).exists():
@@ -791,11 +828,7 @@ def _xuat_loigiai(de: dict, lang: str = "vi") -> FileResponse:
 
     history_service.luu_file_de(de["id"], "loigiai", str(pdf_path_moi))
 
-    return FileResponse(
-        path=str(pdf_path_moi),
-        filename="loigiai.pdf",
-        media_type="application/pdf",
-    )
+    return Path(pdf_path_moi)
 
 
 @router.post("/export-loigiai")
@@ -807,7 +840,7 @@ def export_loigiai_endpoint(request: Request, payload: ExportLoiGiaiRequest):
 
 
 @router.get("/tai-loigiai/{de_id}")
-def tai_loigiai_endpoint(request: Request, de_id: str):
+def tai_loigiai_endpoint(request: Request, de_id: str, ban: str | None = None):
     """URL on dinh cho nut "Loi giai" gan duoi TUNG de trong hoi thoai.
 
     Khac /export-loigiai o cho: chi dich danh 1 de theo de_id, khong lay
@@ -817,7 +850,7 @@ def tai_loigiai_endpoint(request: Request, de_id: str):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    return _xuat_loigiai(de, lay_ngon_ngu(request))
+    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, ban))
 
 
 # ======================================================

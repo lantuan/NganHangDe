@@ -1207,7 +1207,8 @@ ${html}
                 const aiCaption = "Đã tạo đề xong.";
                 box.innerHTML =
                     `<p>${aiCaption}</p>` +
-                    `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
+                    `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file: ${filename}</a></p>` +
+                    htmlChonCaHai(url) +
                     htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi;
 
                 try {
@@ -1422,7 +1423,8 @@ ${html}
                     const aiCaption = "Đã tạo đề xong.";
                     formEl.outerHTML =
                         `<div><p>${aiCaption}</p>` +
-                        `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
+                        `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file: ${filename}</a></p>` +
+                        htmlChonCaHai(url) +
                         htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi + `</div>`;
 
                     try {
@@ -1496,7 +1498,8 @@ ${html}
                     } else if (msg.loai_phan_hoi === "file" && msg.duong_dan_file) {
                         addAIMessage(
                             `<p>${msg.noi_dung || "Đã tạo đề xong."}</p>` +
-                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener">📄 Tải file</a></p>` +
+                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file</a></p>` +
+                            htmlChonCaHai(msg.duong_dan_file) +
                             htmlNutLoiGiai(msg.duong_dan_file)
                         );
                         // De MOI NHAT trong ca hoi thoai (khong chi trong
@@ -1555,10 +1558,41 @@ ${html}
             return m ? m[1] : null;
         }
 
+        // ===== TICK "TAI KEM CA HAI THU TIENG" (Viet + Anh) =====
+        // Hoc sinh tick thi cac link tai de / loi giai tren trang tra ve MOT tep .zip chua ca ban tieng Viet va
+        // ban tieng Anh (cung de, cung so lieu, cung dap an). Khong tick: tai ban theo ngon ngu trang dang chon.
+        // Chi la tien ich cua rieng nguoi dung nen luu trong localStorage (co the khong dung duoc -> mac dinh tat).
+        function daTickCaHai() {
+            try { return localStorage.getItem("chv_tai_ca_hai") === "1"; } catch (e) { return false; }
+        }
+        function datTickCaHai(bat) {
+            try { localStorage.setItem("chv_tai_ca_hai", bat ? "1" : "0"); } catch (e) { /* bo qua */ }
+            document.querySelectorAll(".chk-ca-hai").forEach(function (c) { c.checked = bat; });
+        }
+        function htmlChonCaHai(url) {
+            if (!url || url.indexOf("/api/exam/tai-de/") !== 0) return "";
+            return `<p class="chon-ca-hai"><label><input type="checkbox" class="chk-ca-hai" ` +
+                `${daTickCaHai() ? "checked" : ""} onchange="datTickCaHai(this.checked)"> ` +
+                `Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)</label></p>`;
+        }
+        // Gan vao onclick cua link: doc trang thai tick LUC BAM roi sua href truoc khi trinh duyet dieu huong.
+        function taiTheoLuaChon(a) {
+            const goc = a.getAttribute("href") || "";
+            if (goc.indexOf("/api/exam/tai-de/") !== 0 && goc.indexOf("/api/exam/tai-loigiai/") !== 0) return true;
+            const sach = goc.replace(/[?&]ban=[^&]*/, "");
+            if (daTickCaHai()) {
+                a.setAttribute("href", sach + (sach.indexOf("?") < 0 ? "?" : "&") + "ban=ca-hai");
+                a.removeAttribute("download");      // tep .zip, tranh bi dat ten .pdf
+            } else {
+                a.setAttribute("href", sach);
+            }
+            return true;
+        }
+
         function htmlNutLoiGiai(url) {
             const deId = layDeIdTuUrl(url);
             if (!deId) return "";
-            return `<p><a href="/api/exam/tai-loigiai/${deId}" download target="_blank" rel="noopener">📄 Lời giải của đề này</a></p>`;
+            return `<p><a href="/api/exam/tai-loigiai/${deId}" download target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Lời giải của đề này</a></p>`;
         }
 
         // ===== GỬI TIN NHẮN LÊN /chat =====
@@ -1624,8 +1658,9 @@ ${html}
                         }
                         addAIMessage(
                             `<p>${data.message || "Đã tạo đề xong."}</p>` +
-                            `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener">` +
+                            `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">` +
                             `📄 Tải file: ${filename}</a></p>` +
+                            htmlChonCaHai(url) +
                             htmlNutLoiGiai(url) +
                             htmlHoi
                         );

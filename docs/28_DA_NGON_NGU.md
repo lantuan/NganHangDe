@@ -41,6 +41,12 @@ parallel (collinear) / same direction / opposite direction.
 - Ô "Tạo kèm đề tiếng Anh tương ứng" (PDF cho giáo viên) giữ nguyên, giáo viên tự chọn.
 - Lưu ý: bản Anh dùng dấu thập phân "." nên đáp án SA của đề Anh là "3.5" (đề Việt "3,5").
 
+## Tải kèm cả hai thứ tiếng cho học sinh (03/10/2026)
+- Mặc định học sinh tải PDF đề / lời giải theo ngôn ngữ trang đang chọn (cookie `lang`). Làm bài trực tuyến luôn theo ngôn ngữ trang.
+- Trong chat, dưới link tải đề có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)" (lưu trong localStorage, mặc định tắt). Tick thì các link tải đề và lời giải gắn `?ban=ca-hai`.
+- `GET /api/exam/tai-de/{id}` và `/tai-loigiai/{id}` nhận `ban=vi|en|ca-hai`: `vi`/`en` ép một thứ tiếng bất kể trang; `ca-hai` trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (cùng đề, cùng số liệu, cùng đáp án). Đề cũ hoặc chương chưa dịch chỉ có bản Việt thì zip chỉ chứa bản Việt.
+- Test: test_tai_de_hoc_sinh_tick_ca_hai_thu_tieng_ra_zip.
+
 ## Gia sư AI bằng tiếng Anh
 Xem docs/23 mục 8b: cùng cách chọn tệp đáp án bản Anh (`data/temp_en/`), lệnh `LENH_HE_THONG_EN`, thông báo lỗi tiếng Anh.
 

@@ -9868,3 +9868,7 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Test: test_word_tieng_anh_khi_trang_english.
 
 - Sửa tên trường trên khung / Word tiếng Anh: HUNG VUONG GIFTED HIGH SCHOOL (trước đó ghi SPECIALIZED HIGH SCHOOL, sai).
+
+## Học sinh tải kèm cả hai thứ tiếng (03/10/2026)
+- Tên trường trên khung/Word/giao diện tiếng Anh theo Lan: HUNG VUONG GIFTED HIGH SCHOOL (thay cho cách ghi "HIGH SCHOOL FOR THE GIFTED").
+- /tai-de, /tai-loigiai nhận `ban=vi|en|ca-hai`; ca-hai trả .zip Việt + Anh. Chat có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)". Làm bài vẫn theo ngôn ngữ trang.
