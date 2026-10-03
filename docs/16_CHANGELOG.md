@@ -9829,3 +9829,10 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - dich_ngan_hang.tai_dien nạp `patch_<tệp>.json` rồi `patch_<tệp>_*.json` theo thứ tự tên.
 - Kiểm: `python3 scripts/kiem_tuong_duong.py L10_C2 12` -> 30 hàm, 0 lệch.
 - tests/test_ngan_hang_anh.py chạy theo từng chương có thư mục tiếng Anh (tương đương Việt/Anh, khớp kết quả dịch, không còn chữ Việt).
+
+# Version 4.07 - 2026-10-03
+
+## Trang làm bài của học sinh ra ĐỀ tiếng Anh khi trang ở English
+- Đề vẫn chọn/sinh trên bản Việt; thêm bản Anh cùng ID + seed (chỉ đáp án, không PDF): exam_assembler_service.generate_exam_pdf_auto(dapan_tieng_anh=True), duong_dapan_en(), _sinh_pdf_tu_danh_sach(chi_dap_an=True).
+- /api/exam/quiz/{de_id} và /api/exam/grade chọn bản Anh theo cookie lang; tên phần và ghi chú tự luận có bản Anh. Không có bản Anh (đề cũ, chương chưa dịch) thì dùng bản Việt.
+- 2 test mới trong tests/test_ngan_hang_anh.py.

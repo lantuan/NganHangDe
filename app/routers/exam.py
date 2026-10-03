@@ -40,6 +40,15 @@ from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dan
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError
+from app.services.exam_assembler_service import duong_dapan_en
+from app.services.i18n_service import lay_ngon_ngu
+
+TEN_PHAN_EN = {
+    "MC": "PART I. Multiple choice",
+    "TF": "PART II. True/False",
+    "SA": "PART III. Short answer",
+    "TL": "PART IV. Free response",
+}
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
 
@@ -320,6 +329,7 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
             socau_ma_de=payload.socau_ma_de,
             cho_phep_thieu=payload.cho_phep_thieu,
+            dapan_tieng_anh=True,     # trang làm bài bằng tiếng Anh lấy đề từ ngân hàng Anh (cùng ID, cùng seed)
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -436,6 +446,7 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
             # dinh True cho giong luong chat (form tao de nhanh), khong
             # khat khe hon de goc.
             cho_phep_thieu=bool(blueprint.get("cho_phep_thieu", True)),
+            dapan_tieng_anh=True,
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -830,7 +841,7 @@ class ChamBaiRequest(BaseModel):
 
 
 @router.post("/grade")
-def grade_endpoint(payload: ChamBaiRequest):
+def grade_endpoint(request: Request, payload: ChamBaiRequest):
     if not payload.de_id and not payload.conversation_id:
         raise HTTPException(400, "Can co de_id hoac conversation_id")
 
@@ -851,6 +862,11 @@ def grade_endpoint(payload: ChamBaiRequest):
             "sau 1 ngay, hoac de nay sinh truoc khi co tinh nang cham bai). "
             "Vui long tao de moi.",
         )
+
+    # Trang làm bài đang ở English thì đề hiển thị là bản Anh: chấm và hiện lời giải theo đúng bản đó
+    # (cùng câu, cùng đáp án với bản Việt; chỉ khác chữ và dấu thập phân).
+    if lay_ngon_ngu(request) == "en" and duong_dapan_en(dapan_path).exists():
+        dapan_path = str(duong_dapan_en(dapan_path))
 
     danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
     dap_an_theo_stt = {cau["so_thu_tu"]: cau for cau in danh_sach_dap_an}
@@ -1060,7 +1076,7 @@ def xem_hinh_ve_endpoint(ma: str):
 
 
 @router.get("/quiz/{de_id}")
-def xem_de_lam_bai_endpoint(de_id: str):
+def xem_de_lam_bai_endpoint(request: Request, de_id: str):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de.")
@@ -1073,6 +1089,17 @@ def xem_de_lam_bai_endpoint(de_id: str):
             "Khong tim thay du lieu cau hoi cua de nay (co the da bi don "
             "dep sau 1 ngay). Vui long tao de moi.",
         )
+
+    # Ngôn ngữ nền là TIẾNG VIỆT: đề luôn được chọn/sinh trên bản Việt (cùng ID hàm, cùng hạt giống).
+    # Trang đang ở English thì lấy bản Anh của đúng đề đó (tệp đáp án tiếng Anh nằm cạnh, tên giống bản Việt);
+    # không có (đề cũ, chương chưa dịch) thì dùng bản Việt.
+    ngon_ngu = lay_ngon_ngu(request)
+    dung_ban_anh = False
+    if ngon_ngu == "en":
+        duong_en = duong_dapan_en(dapan_path)
+        if duong_en.exists():
+            dapan_path = str(duong_en)
+            dung_ban_anh = True
 
     danh_sach_dap_an = json.loads(Path(dapan_path).read_text(encoding="utf-8"))
 
@@ -1099,7 +1126,7 @@ def xem_de_lam_bai_endpoint(de_id: str):
             # thu tu CUA CAU TRONG PHAN do - de trang lam bai in tieu de
             # phan va danh so cau y het file PDF.
             "ma_phan": ma_phan,
-            "ten_phan": TEN_PHAN[ma_phan],
+            "ten_phan": TEN_PHAN_EN[ma_phan] if ngon_ngu == "en" else TEN_PHAN[ma_phan],
             "so_trong_phan": dem_trong_phan[ma_phan],
             "de_bai": cau.get("de_bai") or "",
             "co_hinh_ve": bool(cau.get("co_hinh_ve")),
@@ -1126,6 +1153,9 @@ def xem_de_lam_bai_endpoint(de_id: str):
             pass  # chi can de_bai, hoc sinh tu go dap an
         else:
             muc["ghi_chu"] = (
+                "Free-response question: work it out on paper and hand it to your teacher. "
+                "Automatic grading of free-response questions is under construction."
+                if ngon_ngu == "en" else
                 "Câu tự luận — em làm ra giấy và nộp cho thầy/cô. "
                 "Chức năng chấm tự luận tự động đang được xây dựng."
             )

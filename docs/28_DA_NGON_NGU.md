@@ -32,9 +32,15 @@ parallel (collinear) / same direction / opposite direction.
 - Thư mục tiếng Anh riêng: `data/temp_en/` (.tex, đáp án json), `data/exports_en/` (PDF). Khung `ex_test_en.sty` và `latex_template_en.tex` do `scripts/tao_ex_test_en.py` sinh từ bản Việt (bảng thay nhãn trong script; ex_test.sty đổi làm mục nào không khớp thì script báo).
 - Giáo viên: form /gv/ra-de có ô "Tạo kèm đề tiếng Anh tương ứng"; /gv/de-da-tao có liên kết Tiếng Anh. API: /api/exam/tai-de-en, tai-loigiai-en, tai-tex-en (chỉ giáo viên).
 
+## Trang làm bài trực tuyến của học sinh (03/10/2026)
+- Nền là tiếng Việt: đề luôn được CHỌN và SINH trên bản Việt (cùng ID hàm, cùng hạt giống). `/api/exam/generate-pdf-auto` và `/api/exam/lam-de-khac` gọi `generate_exam_pdf_auto(..., dapan_tieng_anh=True)`: sinh thêm bản Anh của đúng đề đó (cùng ID + seed), CHỈ lấy tệp đáp án (không biên dịch PDF), đặt ở `data/temp_en/<cùng tên tệp đáp án Việt>` (không ghi vào cơ sở dữ liệu nên không dính ràng buộc `file_de_loai_file_check`).
+- `GET /api/exam/quiz/{de_id}` và `POST /api/exam/grade`: cookie `lang=en` và có tệp đáp án Anh thì dùng bản Anh (đề, lời giải, tên phần "PART I..."), ngược lại dùng bản Việt (đề cũ, chương chưa dịch).
+- Đề tạo TRƯỚC khi có tính năng này không có bản Anh -> vẫn tiếng Việt; cần tạo đề mới / bấm "Làm đề khác".
+- Ô "Tạo kèm đề tiếng Anh tương ứng" (PDF cho giáo viên) giữ nguyên, giáo viên tự chọn.
+- Lưu ý: bản Anh dùng dấu thập phân "." nên đáp án SA của đề Anh là "3.5" (đề Việt "3,5").
+
 ## Còn lại (chưa làm)
 - Thông báo từ AI / n8n (Chat) vẫn tiếng Việt: cần truyền `lang` cho n8n.
 - Tên bài, yêu cầu cần đạt trong Curriculum (mới có tên chương).
 - Word tiếng Anh (word_service còn nhãn Việt).
 - Dịch ngân hàng các chương khác (Lớp 10 chương 3..9, Lớp 11, 12).
-- Quyết định của cô Lan (03/10/2026): trang làm bài của học sinh chỉ cần giao diện tiếng Anh, ĐỀ vẫn tiếng Việt; ô "Tạo kèm đề tiếng Anh" của giáo viên giữ nguyên (giáo viên tự chọn). Không cần làm đề trực tuyến tiếng Anh.

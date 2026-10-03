@@ -128,3 +128,45 @@ def test_chuong_chua_dich_thanh_dong_thieu_tieng_anh(monkeypatch):
     assert "MISSING IN PYTHON" in en_tex
     assert kq["tieng_anh"]["so_cau_thieu"] > 0
     assert kq["so_cau_thieu"] == 0
+
+
+def test_trang_lam_bai_hoc_sinh_lay_de_tieng_anh_cung_de_viet(monkeypatch):
+    """Nền là tiếng Việt: đề chọn/sinh trên bản Việt; trang đang English thì /api/exam/quiz trả bản Anh
+    của ĐÚNG đề đó (cùng số câu, loại câu, đáp án), trang Việt thì trả bản Việt."""
+    from fastapi.testclient import TestClient
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+    monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="1", dapan_tieng_anh=True)
+    assert "tieng_anh" not in kq                       # chỉ có đáp án, không biên dịch PDF tiếng Anh
+    assert kq["dapan_en_path"] == str(A.duong_dapan_en(kq["dap_an_json_path"]))
+    assert Path(kq["dapan_en_path"]).exists()
+    de = {"id": "de-thu", "files": {"dapan_json": kq["dap_an_json_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    client = TestClient(app)
+    vi = client.get("/api/exam/quiz/de-thu", cookies={"lang": "vi"}).json()["data"]
+    en = client.get("/api/exam/quiz/de-thu", cookies={"lang": "en"}).json()["data"]
+    assert vi["tong_so_cau"] == en["tong_so_cau"] > 0
+    for cv, ce in zip(vi["cau_hoi"], en["cau_hoi"]):
+        assert (cv["so_thu_tu"], cv["loai_cau"]) == (ce["so_thu_tu"], ce["loai_cau"])
+        assert cv["de_bai"] != ce["de_bai"]
+    # bản Anh không còn chữ có dấu tiếng Việt trong đề bài
+    co_dau = re.compile("[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]", re.I)
+    assert not [c["de_bai"][:50] for c in en["cau_hoi"] if co_dau.search(c["de_bai"])]
+    assert en["cau_hoi"][0]["ten_phan"].startswith("PART I")
+    assert vi["cau_hoi"][0]["ten_phan"].startswith("PHẦN I")
+
+
+def test_trang_lam_bai_chuong_chua_dich_roi_ve_tieng_viet(monkeypatch):
+    from fastapi.testclient import TestClient
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+    monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="9", dapan_tieng_anh=True)
+    assert "dapan_en_path" not in kq
+    de = {"id": "de-thu", "files": {"dapan_json": kq["dap_an_json_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    en = TestClient(app).get("/api/exam/quiz/de-thu", cookies={"lang": "en"}).json()["data"]
+    assert en["tong_so_cau"] > 0

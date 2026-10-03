@@ -37,6 +37,8 @@ from app.services.generator_service import (
 )
 import secrets
 import json
+import shutil
+from pathlib import Path
 from app.services.latex_service import (
     build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR, TEMP_DIR_EN,
 )
@@ -237,8 +239,11 @@ def _sinh_pdf_tu_danh_sach(
     cho_phep_thieu: bool = True,
     lang: str = "vi",
     seed: int | None = None,
+    chi_dap_an: bool = False,
 ) -> dict:
     """
+    chi_dap_an=True: chỉ sinh câu hỏi + tệp đáp án json (không ghép LaTeX, không biên dịch PDF) - dùng cho
+    trang làm bài trực tuyến bằng tiếng Anh của học sinh.
     lang="en": sinh bản TIẾNG ANH (ngân hàng data/python_bank_en, khung ex_test_en, tệp vào data/temp_en
     và data/exports_en). seed: hạt giống; cùng seed + cùng danh_sach_id + cùng trạng thái xoay vòng thì đề
     tiếng Anh có CÙNG số liệu, cùng biến thể với đề tiếng Việt (đã kiểm bằng scripts/kiem_tuong_duong.py).
@@ -403,6 +408,15 @@ def _sinh_pdf_tu_danh_sach(
         encoding="utf-8",
     )
 
+    if chi_dap_an:
+        return {
+            "so_cau_da_sinh": len(danh_sach_id) - so_cau_thieu,
+            "so_cau_thieu": so_cau_thieu,
+            "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
+            "dap_an_json_path": str(dap_an_json_path),
+            "seed": seed,
+        }
+
     if role == "teacher":
         # Giáo viên: xuất CẢ đề thi (ẩn lời giải) VÀ lời giải (hiện lời
         # giải) — cùng 1 nội dung câu hỏi, chỉ khác option gọi ex_test.
@@ -464,8 +478,14 @@ def _sinh_pdf_tu_danh_sach(
     }
 
 
+def duong_dapan_en(dapan_vi) -> Path:
+    """Tệp đáp án tiếng Anh ứng với tệp đáp án tiếng Việt (cùng tên, nằm trong data/temp_en/).
+    Không cần ghi vào cơ sở dữ liệu: trang làm bài suy ra đường dẫn từ tệp đáp án tiếng Việt của đề."""
+    return TEMP_DIR_EN / Path(dapan_vi).name
+
+
 def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
-                        kem_tieng_anh, tieu_de_en=None) -> dict:
+                        kem_tieng_anh, tieu_de_en=None, chi_dap_an_en=False) -> dict:
     """Sinh đề tiếng Việt; nếu kem_tieng_anh thì sinh THÊM đề tiếng Anh tương ứng (cùng câu, cùng biến
     thể, cùng số liệu) vào thư mục tiếng Anh riêng. Bản Anh lỗi (vd chương chưa dịch) KHÔNG làm hỏng đề
     Việt: lỗi được ghi trong kết quả["tieng_anh_loi"]."""
@@ -480,7 +500,14 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
     try:
         kq["tieng_anh"] = _sinh_pdf_tu_danh_sach(
             lop, tieu_de_en or tieu_de, role, danh_sach_id, socau_ma_de,
-            cho_phep_thieu=True, lang="en", seed=seed)
+            cho_phep_thieu=True, lang="en", seed=seed, chi_dap_an=chi_dap_an_en)
+        # Bản Anh đủ câu (chương đã dịch) thì để đáp án Anh cạnh đáp án Việt cho trang làm bài; thiếu câu
+        # thì thôi (trang làm bài rơi về tiếng Việt, không hiện dòng [MISSING]).
+        if kq["tieng_anh"].get("so_cau_thieu", 0) == 0 and kq.get("dap_an_json_path"):
+            dich = duong_dapan_en(kq["dap_an_json_path"])
+            dich.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(kq["tieng_anh"]["dap_an_json_path"], dich)
+            kq["dapan_en_path"] = str(dich)
     except Exception as e:                           # noqa: BLE001
         kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
     finally:
@@ -513,8 +540,11 @@ def generate_exam_pdf_auto(
     cho_phep_thieu: bool = True,
     kem_tieng_anh: bool = False,
     tieu_de_en: str | None = None,
+    dapan_tieng_anh: bool = False,
 ) -> dict:
     """
+    dapan_tieng_anh=True: (đề trực tuyến của học sinh) sinh thêm đáp án tiếng Anh cùng câu, cùng số liệu
+    (không biên dịch PDF); kết quả["dapan_en_path"] nếu chương đã có bản Anh đủ câu.
     kem_tieng_anh=True: sinh THÊM đề tiếng Anh tương ứng (kết quả["tieng_anh"], thư mục tiếng Anh riêng).
 
     Chế độ CHÍNH THỨC (WF001): CN_LoadExamScope -> CN_LoadCurriculum ->
@@ -538,7 +568,10 @@ def generate_exam_pdf_auto(
         raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
     ket_qua = _sinh_kem_tieng_anh(
         lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
-        kem_tieng_anh, tieu_de_en,
+        kem_tieng_anh or dapan_tieng_anh, tieu_de_en,
+        chi_dap_an_en=dapan_tieng_anh and not kem_tieng_anh,
     )
+    if dapan_tieng_anh and not kem_tieng_anh:
+        ket_qua.pop("tieng_anh", None)              # chỉ có đáp án, không có PDF tiếng Anh
     ket_qua["blueprint"] = blueprint
     return ket_qua
