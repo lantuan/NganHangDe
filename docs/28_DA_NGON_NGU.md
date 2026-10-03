@@ -37,4 +37,4 @@ parallel (collinear) / same direction / opposite direction.
 - Tên bài, yêu cầu cần đạt trong Curriculum (mới có tên chương).
 - Word tiếng Anh (word_service còn nhãn Việt).
 - Dịch ngân hàng các chương khác (Lớp 10 chương 3..9, Lớp 11, 12).
-- Làm bài trực tuyến của học sinh bằng tiếng Anh (trang làm bài, chấm bài).
+- Quyết định của cô Lan (03/10/2026): trang làm bài của học sinh chỉ cần giao diện tiếng Anh, ĐỀ vẫn tiếng Việt; ô "Tạo kèm đề tiếng Anh" của giáo viên giữ nguyên (giáo viên tự chọn). Không cần làm đề trực tuyến tiếng Anh.
