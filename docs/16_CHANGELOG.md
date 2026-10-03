@@ -9851,3 +9851,5 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 ## Cập nhật sáng kiến kinh nghiệm và sổ tay kĩ thuật cho chế độ song ngữ
 - skkn/noidung/05_giai_phap.tex: thêm Giải pháp 9 (song ngữ Việt--Anh: tiếng Việt làm nền, bản Anh song sinh, dịch ở mức chương trình sinh câu hỏi, kiểm tương đương bằng máy, trang web / trợ giảng / giáo viên, hạn chế còn lại); 02_mo_dau.tex điểm mới thứ bảy; 06_huong_dan.tex mục "Chuyển sang tiếng Anh"; 08_huong_phat_trien.tex mục (7). Ảnh cần chụp thêm: 24, 25 (hinhanh/DANH_MUC_ANH_CAN_CHUP.md). Không điền số liệu thực nghiệm.
 - Sổ tay: docs/28 thêm bản đồ tệp + bảng chỗ dễ sai + gia sư tiếng Anh; docs/23 mục 8b; docs/02, 19, README cập nhật thư mục python_bank_en, i18n, temp_en, exports_en.
+
+- Sửa 03/10/2026 (trang làm bài tiếng Anh): nút Đúng/Sai ở câu Đúng/Sai hiện 'Correct / Incorrect' (từ không dấu 'Sai' nay được dịch khi cả đoạn khớp từ điển — i18n_service.dich_doan), kết quả từng ý hiện 'Part A, Part B...' thay vì 'ý A'.

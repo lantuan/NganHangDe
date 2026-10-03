@@ -70,9 +70,16 @@ def _dich_trong_doan(d: str, td: dict, khoa: tuple) -> str:
 def dich_doan(d: str, ngon_ngu: str) -> str:
     """Dịch một đoạn chữ (không chứa xuống dòng). Không có trong từ điển -> giữ nguyên."""
     td = tu_dien(ngon_ngu)
-    if not td or not CO_DAU.search(d):
+    if not td:
         return d
     gon = " ".join(d.split())
+    if not CO_DAU.search(d):
+        # từ không dấu (vd "Sai"): chỉ dịch khi CẢ đoạn khớp một mục trong từ điển, không dịch từng phần
+        if gon in td and td[gon] != gon:
+            dau = d[: len(d) - len(d.lstrip())]
+            cuoi = d[len(d.rstrip()):]
+            return dau + td[gon] + cuoi
+        return d
     if gon in td:
         dau = d[: len(d) - len(d.lstrip())]
         cuoi = d[len(d.rstrip()):]
