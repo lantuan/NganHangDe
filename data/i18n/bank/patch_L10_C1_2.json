@@ -1,0 +1,332 @@
+[
+ {
+  "tim": "People Armed Forces Hero",
+  "thay": "People\\'s Armed Forces Hero",
+  "so_lan": 2
+ },
+ {
+  "tim": "{md_goc}'' is ``{dapso}''.'",
+  "thay": "{md_goc}\\'\\' is ``{dapso}\\'\\'.'"
+ },
+ {
+  "tim": "of the statement: ``{md_goc}''.\"",
+  "thay": "of the statement: ``{md_goc}''?\""
+ },
+ {
+  "tim": "There are \" + str(dapso) + r\" true statement(s).\"",
+  "thay": "The number of true statements is \" + str(dapso) + r\".\""
+ },
+ {
+  "tim": "There are \" + str(dapso) + r\" false statement(s).\"",
+  "thay": "The number of false statements is \" + str(dapso) + r\".\""
+ },
+ {
+  "tim": "There are \" + str(dapso) + r\" conditional statement(s).\"",
+  "thay": "The number of conditional statements is \" + str(dapso) + r\".\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "There are \" + str(dapso) + r\" statement(s) that are not conditional statements.\"",
+  "thay": "The number of statements that are not conditional statements is \" + str(dapso) + r\".\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "Q.lower()",
+  "thay": "_c1_thuong(Q)",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"imperative sentence\"",
+  "thay": "\"an imperative sentence\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"interrogative sentence\"",
+  "thay": "\"an interrogative sentence\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"exclamatory sentence\"",
+  "thay": "\"an exclamatory sentence\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"%s statement\" % (\"true\" if md[\"dung\"] else \"false\")",
+  "thay": "\"a %s statement\" % (\"true\" if md[\"dung\"] else \"false\")"
+ },
+ {
+  "tim": "giai = (r\"%s is a %s statement because %s.\\\\ \" % (chon[\"p\"]",
+  "thay": "giai = (r\"The statement ``%s'' is %s because %s.\\\\ \" % (chon[\"p\"]"
+ },
+ {
+  "tim": "r\"$%d$ is %s prime\" % (v * v + v + 2 * c - 1, \"\" if _la_nguyen_to(v * v + v + 2 * c - 1) else \"not\")",
+  "thay": "r\"$%d$ %s prime\" % (v * v + v + 2 * c - 1, \"is\" if _la_nguyen_to(v * v + v + 2 * c - 1) else \"is not\")"
+ },
+ {
+  "tim": "then the two natural numbers $a$, $b$ are both divisible by",
+  "thay": "then the natural numbers $a$ and $b$ are both divisible by"
+ },
+ {
+  "tim": "two natural numbers $a$, $b$ are both divisible by $%d$",
+  "thay": "the natural numbers $a$ and $b$ are both divisible by $%d$",
+  "so_lan": 2
+ },
+ {
+  "tim": "but $a$, $b$ are not divisible by $%d$\" % (c - 1",
+  "thay": "but $a$ and $b$ are not divisible by $%d$\" % (c - 1"
+ },
+ {
+  "tim": "is true when $X$, $Y$ are both true or both false; $\\overline{X}$",
+  "thay": "is true when $X$ and $Y$ are both true or both false; $\\overline{X}$"
+ },
+ {
+  "tim": "r\"$%s$ %s because %s.\" % (m[\"tex\"]",
+  "thay": "r\"$%s$ is %s because %s.\" % (m[\"tex\"]",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"for $n = -%d$\" % c",
+  "thay": "r\"$n = -%d$ satisfies the equation\" % c",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"for $x = \\dfrac{%d}{%d}$, which is a rational number\"",
+  "thay": "r\"the solution $x = \\dfrac{%d}{%d}$ is a rational number\"",
+  "so_lan": 1
+ },
+ {
+  "tim": "cX, cY = r\"$%s$ %s\" % (X, tt(vX)), r\"$%s$ %s\" % (Y, tt(vY))",
+  "thay": "cX, cY = r\"$%s$ is %s\" % (X, tt(vX)), r\"$%s$ is %s\" % (Y, tt(vY))",
+  "so_lan": 1
+ },
+ {
+  "tim": "nX, nY = r\"$\\overline{%s}$ %s\" % (X, tt(not vX)), r\"$\\overline{%s}$ %s\" % (Y, tt(not vY))",
+  "thay": "nX, nY = r\"$\\overline{%s}$ is %s\" % (X, tt(not vX)), r\"$\\overline{%s}$ is %s\" % (Y, tt(not vY))",
+  "so_lan": 1
+ },
+ {
+  "tim": "return r\"$%s$ %s (%s)\" % (t, \"true\" if d else \"false\", gt)",
+  "thay": "return r\"$%s$ is %s (%s)\" % (t, \"true\" if d else \"false\", gt)",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"$A$ %s, $B$ %s, $C$ %s\" % (tt(v[0]), tt(v[1]), tt(v[2]))",
+  "thay": "r\"$A$ is %s, $B$ is %s, $C$ is %s\" % (tt(v[0]), tt(v[1]), tt(v[2]))",
+  "so_lan": 2
+ },
+ {
+  "tim": "r\"the two triangles are congruent\", r\"two triangles are similar\", True, False,",
+  "thay": "r\"the two triangles are congruent\", r\"the two triangles are similar\", True, False,",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"two equilateral triangles with sides $1$ and $2$ are similar but not congruent\"",
+  "thay": "r\"two equilateral triangles with side lengths $1$ and $2$ are similar but not congruent\"",
+  "so_lan": 1
+ },
+ {
+  "tim": "(hypotenuse-acute angle)",
+  "thay": "(hypotenuse-angle)",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"this is the divisibility rule for $%d$\" % k, r\"this is the divisibility rule for $%d$\" % k)",
+  "thay": "r\"this is the divisibility rule for $%d$\" % k, r\"the same rule for $%d$ applies in the other direction\" % k)",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"this is the divisibility rule for $4$\", r\"this is the divisibility rule for $4$\")",
+  "thay": "r\"this is the divisibility rule for $4$\", r\"the same rule for $4$ applies in the other direction\")",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"this is the definition of absolute value\", r\"this is the definition of absolute value\")",
+  "thay": "r\"this is the definition of absolute value\", r\"the same definition applies in the other direction\")",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"this is the definition of an isosceles triangle\", r\"this is the definition of an isosceles triangle\"",
+  "thay": "r\"this is the definition of an isosceles triangle\", r\"the same definition applies in the other direction\"",
+  "so_lan": 1
+ },
+ {
+  "tim": "r\"Therefore, there are $%d$ true statements.\" % dap",
+  "thay": "r\"Therefore, the number of true statements is $%d$.\" % dap",
+  "so_lan": 3
+ },
+ {
+  "tim": "Therefore, there are $%s$ true statements.",
+  "thay": "Therefore, the number of true statements is $%s$.",
+  "so_lan": 1
+ },
+ {
+  "tim": "Therefore, ${so_dung}$ statements are true.",
+  "thay": "Therefore, the number of true statements is ${so_dung}$.",
+  "so_lan": 2
+ },
+ {
+  "tim": "Therefore, ${so_sai}$ statements are false.",
+  "thay": "Therefore, the number of false statements is ${so_sai}$.",
+  "so_lan": 2
+ },
+ {
+  "tim": "There are $%d$ values of $n$ for which",
+  "thay": "There are $%d$ value(s) of $n$ for which",
+  "so_lan": 1
+ },
+ {
+  "tim": "The statement is true means that %s.",
+  "thay": "Observe that %s.",
+  "so_lan": 1
+ },
+ {
+  "tim": "\"is the empty set\" if kho[i][1] else \"is nonempty\", kho[i][2]",
+  "thay": "\"the empty set\" if kho[i][1] else \"nonempty\", kho[i][2]",
+  "so_lan": 1
+ },
+ {
+  "tim": "\"for example, the triangle with sides $2; 3; 4$\"",
+  "thay": "\"it contains, for example, the triangle with sides $2; 3; 4$\"",
+  "so_lan": 1
+ },
+ {
+  "tim": "if (i == 0) == hoi_bang else \"different from\",",
+  "thay": "if (i == 0) == hoi_bang else \"is different from\",",
+  "so_lan": 1
+ },
+ {
+  "tim": "_TAP_SO = {r\"\\mathbb{N}\": \"natural\", r\"\\mathbb{Z}\": \"integer\", r\"\\mathbb{Q}\": \"rational\", r\"\\mathbb{R}\": \"real\"}",
+  "thay": "_TAP_SO = {r\"\\mathbb{N}\": \"natural numbers\", r\"\\mathbb{Z}\": \"integers\", r\"\\mathbb{Q}\": \"rational numbers\", r\"\\mathbb{R}\": \"real numbers\"}",
+  "so_lan": 1
+ },
+ {
+  "tim": "Keep only the solutions that are %s numbers: $%s$.",
+  "thay": "Keep only the solutions that are %s: $%s$.",
+  "so_lan": 2
+ },
+ {
+  "tim": "r\"Write out the %s numbers in each interval, then compare.\" % (\"natural\" if tap == N_ else \"integer\")",
+  "thay": "r\"Write out the %s in each interval, then compare.\" % (\"natural numbers\" if tap == N_ else \"integers\")",
+  "so_lan": 1
+ },
+ {
+  "tim": "\"Standing long jump\", \"P\", \"C\",",
+  "thay": "\"Standing long jump\", \"P\", \"F\","
+ },
+ {
+  "tim": "\"Chess Club\", \"C\", \"K\",",
+  "thay": "\"Chess Club\", \"Y\", \"N\","
+ },
+ {
+  "tim": "hai_tap = r\"%s$%d$ %s %s, $%d$ %s %s\"",
+  "thay": "hai_tap = r\"%s$%d$ %s that %s, $%d$ %s that %s\""
+ },
+ {
+  "tim": "(r\" How many %s are there?\" % hoi",
+  "thay": "(r\" Find the number of %s.\" % hoi"
+ },
+ {
+  "tim": "In the set $%s$, how many %s are there?",
+  "thay": "In the set $%s$, how many %ss are there?"
+ },
+ {
+  "tim": "The %s in $%s$ are $%s$, so there are $%d$ of them.",
+  "thay": "The %ss in $%s$ are $%s$, for a total of $%d$."
+ },
+ {
+  "tim": "surveyed $%(N)d$ customers about their favorite drinks,",
+  "thay": "surveyed $%(N)d$ customers about their favorite drinks. Among them,"
+ },
+ {
+  "tim": "surveyed a group of customers about their favorite drinks,",
+  "thay": "surveyed a group of customers about their favorite drinks. Among them,"
+ },
+ {
+  "tim": "Therefore, there are ${dapso}$ integer values of the parameter $m$ that satisfy the problem.",
+  "thay": "Therefore, the number of integer values of the parameter $m$ that satisfy the problem is ${dapso}$.",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"real number\", r\"\\mathbb{Z}\": \"integer\", r\"\\mathbb{N}\": \"natural number\"}[tap]",
+  "thay": "\"a real number\", r\"\\mathbb{Z}\": \"an integer\", r\"\\mathbb{N}\": \"a natural number\"}[tap]"
+ },
+ {
+  "tim": "where $%s$ denotes a number of type: %s.",
+  "thay": "where $%s$ is %s."
+ },
+ {
+  "tim": "is %s divisible by $%d$\" % (_tex_so(v)",
+  "thay": "is%s divisible by $%d$\" % (_tex_so(v)"
+ },
+ {
+  "tim": "\"\" if (v * v - 1) % d == 0 else \"not\", d)",
+  "thay": "\"\" if (v * v - 1) % d == 0 else \" not\", d)"
+ },
+ {
+  "tim": "State the statement $P$ in words.",
+  "thay": "Write the statement $P$ in words."
+ },
+ {
+  "tim": "r\"%s is a sufficient condition for %s; %s is a necessary condition for %s\" %",
+  "thay": "r\"``%s'' is a sufficient condition for ``%s''; ``%s'' is a necessary condition for ``%s''\" %"
+ },
+ {
+  "tim": "``%s is a sufficient condition for %s''; ``%s is a necessary condition for %s''.",
+  "thay": "``%s'' is a sufficient condition for ``%s''; ``%s'' is a necessary condition for ``%s''."
+ },
+ {
+  "tim": "When asked about their favorite sports,",
+  "thay": "In a survey about the students' favorite sports,",
+  "so_lan": 1
+ },
+ {
+  "tim": "any %s from the two %s options above. Determine",
+  "thay": "any %s from the two %s above. Determine",
+  "so_lan": 1
+ },
+ {
+  "tim": "at least one of the two %s options above",
+  "thay": "at least one of the two %s above",
+  "so_lan": 1
+ },
+ {
+  "tim": "both of the two %s options above",
+  "thay": "both of the two %s above",
+  "so_lan": 1
+ },
+ {
+  "tim": "How many %s that %s any %s from the two %s options above? How many %s that %s exactly one of the two %s options above?",
+  "thay": "How many %s %s any %s from the two %s above? How many %s %s exactly one of the two %s above?",
+  "so_lan": 1
+ },
+ {
+  "tim": "exactly one of the two %s options above",
+  "thay": "exactly one of the two %s above",
+  "so_lan": 1
+ },
+ {
+  "tim": "exactly one of the two %s options is",
+  "thay": "exactly one of the two %s is",
+  "so_lan": 1
+ },
+ {
+  "tim": "there are $%d$ such integers $m$.",
+  "thay": "there are $%d$ such integer(s) $m$.",
+  "so_lan": 1
+ },
+ {
+  "tim": "Statement $A$ is stated as",
+  "thay": "Statement $A$ reads as",
+  "so_lan": 1
+ },
+ {
+  "tim": "Statement $B$ is stated as",
+  "thay": "Statement $B$ reads as",
+  "so_lan": 1
+ },
+ {
+  "tim": "$2^{k}$ has the sum of its proper divisors $1 + 2",
+  "thay": "the sum of the proper divisors of $2^{k}$ is $1 + 2",
+  "so_lan": 1
+ }
+]

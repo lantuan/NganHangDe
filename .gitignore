@@ -73,3 +73,5 @@ Claude outputs/
 
 # Chay nhap mot ham (scripts/nhap.py)
 nhap/
+data/exports_en/
+data/temp_en/

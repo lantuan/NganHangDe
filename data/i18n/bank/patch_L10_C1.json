@@ -1,0 +1,104 @@
+[
+ {
+  "tim": "\"$Sai$\"",
+  "thay": "\"$False$\"",
+  "so_lan": 4
+ },
+ {
+  "tim": "\"$Đúng$\"",
+  "thay": "\"$True$\"",
+  "so_lan": 8
+ },
+ {
+  "tim": "if d in (\"True\", \"Sai\"):",
+  "thay": "if d in (\"True\", \"False\"):"
+ },
+ {
+  "tim": "\"Sai\" if P_dung else \"True\"",
+  "thay": "\"False\" if P_dung else \"True\"",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"True\" if P_dung else \"Sai\"",
+  "thay": "\"True\" if P_dung else \"False\"",
+  "so_lan": 1
+ },
+ {
+  "tim": "tex.split(\"cho } \")",
+  "thay": "tex.split(\"by } \")",
+  "so_lan": 2
+ },
+ {
+  "tim": "mo.endswith(\"recorded\")",
+  "thay": "mo.endswith(\"recorded that\")",
+  "so_lan": 2
+ },
+ {
+  "tim": "\"sai\"",
+  "thay": "\"false\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"Sai\"",
+  "thay": "\"False\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "Sai. \"",
+  "thay": "False. \"",
+  "tat_ca": true
+ },
+ {
+  "tim": "\\textbf{Sai}",
+  "thay": "\\textbf{False}",
+  "tat_ca": true
+ },
+ {
+  "tim": "integers $m$ such that $B \\subset A$}",
+  "thay": "integers $m$ for which $B \\subset A$}",
+  "so_lan": 2
+ },
+ {
+  "tim": "\\textbf{sai}",
+  "thay": "\\textbf{false}",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"tham gia\"",
+  "thay": "\"participated in\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "(\"had rain\", \"have fog\",",
+  "thay": "(\"had rain\", \"had fog\","
+ },
+ {
+  "tim": "r\"have a temperature below $18^{\\circ}\\mathrm{C}$\"",
+  "thay": "r\"had a temperature below $18^{\\circ}\\mathrm{C}$\""
+ },
+ {
+  "tim": "employees, of whom\",",
+  "thay": "employees. Among them,\","
+ },
+ {
+  "tim": "\"liked soccer\", \"liked badminton\", \"liked\", \"did not like\", \"subjects\"",
+  "thay": "\"liked soccer\", \"liked badminton\", \"liked\", \"did not like\", \"sports\""
+ },
+ {
+  "tim": "\"liked swimming\", \"liked chess\", \"liked\", \"did not like\", \"subjects\"",
+  "thay": "\"liked swimming\", \"liked chess\", \"liked\", \"did not like\", \"sports\""
+ },
+ {
+  "tim": "\"liked basketball\", \"liked volleyball\", \"liked\", \"did not like\", \"subjects\"",
+  "thay": "\"liked basketball\", \"liked volleyball\", \"liked\", \"did not like\", \"sports\""
+ },
+ {
+  "tim": "\"liked soccer\", \"liked swimming\", \"liked\", \"did not like\", \"subjects\"",
+  "thay": "\"liked soccer\", \"liked swimming\", \"liked\", \"did not like\", \"sports\""
+ },
+ {
+  "tim": "\"exercise by\", \"do not exercise by\", \"subjects\"",
+  "thay": "\"exercise by\", \"do not exercise by\", \"methods\"",
+  "so_lan": 2
+ }
+]

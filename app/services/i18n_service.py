@@ -80,6 +80,12 @@ def dich_doan(d: str, ngon_ngu: str) -> str:
     return _dich_trong_doan(d, td, _khoa_theo_do_dai(ngon_ngu))
 
 
+def tieu_de_tieng_anh(tieu_de: str) -> str:
+    """Tiêu đề đề thi bản tiếng Anh: dịch theo từ điển giao diện; còn sót chữ Việt thì dùng tiêu đề chung."""
+    en = dich_doan(tieu_de or "", "en")
+    return en if en and not CO_DAU.search(en) else "MATHEMATICS TEST"
+
+
 def dich_html(html: str, ngon_ngu: str) -> str:
     if ngon_ngu == "vi" or not tu_dien(ngon_ngu):
         return html
@@ -111,13 +117,45 @@ background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2)" role="group" aria-label="La
 <a href="#" data-lang="en" style="padding:6px 10px;text-decoration:none;color:%(cen)s;background:%(ben)s">English</a>
 </div>
 <script>
-document.querySelectorAll('#chv-lang a').forEach(function (a) {
-  a.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.cookie = 'lang=' + a.dataset.lang + '; path=/; max-age=31536000; SameSite=Lax';
-    var u = new URL(location.href); u.searchParams.delete('lang'); location.href = u.toString();
+(function () {
+  var nut = document.getElementById('chv-lang');
+  nut.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.cookie = 'lang=' + a.dataset.lang + '; path=/; max-age=31536000; SameSite=Lax';
+      var u = new URL(location.href); u.searchParams.delete('lang'); location.href = u.toString();
+    });
   });
-});
+  // Tai khoan / Dang xuat o goc phai tren van o NGOAI CUNG; nut Viet-Anh xich sang trai
+  // (co Lan 03/10/2026). Tim cac phan tu o dai tren cung, sat mep phai, lay mep trai nhat.
+  function datViTri() {
+    var W = window.innerWidth, trai = W, giua = null, duoi = 0;
+    nut.style.right = '12px'; nut.style.top = '8px';
+    document.querySelectorAll('body *').forEach(function (el) {
+      if (nut.contains(el) || el.contains(nut) || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
+      var r = el.getBoundingClientRect(), cs = getComputedStyle(el);
+      if (r.width < 8 || r.height < 8 || r.width > Math.min(460, W * 0.7) || r.top > 70 || r.bottom < 0) return;
+      if (cs.visibility === 'hidden' || cs.display === 'none' || cs.opacity === '0') return;
+      if (r.left < W - 480 || r.right < W - 480) return;
+      if (el.children.length && !(el.childNodes.length && Array.prototype.some.call(el.childNodes,
+          function (n) { return n.nodeType === 3 && n.textContent.trim(); }))
+          && !/^(A|BUTTON|IMG|INPUT|SELECT)$/.test(el.tagName) && !/badge|account|user/i.test(el.className + '')) return;
+      if (r.left < trai) { trai = r.left; giua = (r.top + r.bottom) / 2; }
+      duoi = Math.max(duoi, r.bottom);
+    });
+    if (trai < W - 12 - 4) {
+      var phai = Math.max(12, W - trai + 10);
+      if (W - phai - nut.offsetWidth >= 8) {            // du cho: xich sang trai, canh giua theo hang
+        nut.style.right = phai + 'px';
+        if (giua !== null) nut.style.top = Math.max(4, giua - nut.offsetHeight / 2) + 'px';
+      } else {                                           // man hinh hep: dat ngay DUOI tai khoan
+        nut.style.top = (duoi + 4) + 'px';
+      }
+    }
+  }
+  window.addEventListener('load', function () { datViTri(); setTimeout(datViTri, 400); setTimeout(datViTri, 1500); });
+  window.addEventListener('resize', datViTri);
+})();
 </script>
 """
 

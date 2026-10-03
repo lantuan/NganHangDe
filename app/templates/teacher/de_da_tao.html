@@ -54,6 +54,18 @@ Thầy/cô cân nhắc giữ hoặc thay câu này.
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}">PDF lời giải</a>
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=de">Word đề</a>
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=loigiai">Word lời giải</a> · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}">.tex</a>
+{% if bp.get("kem_tieng_anh") %}
+<div class="mt-1">
+{% if bp.get("tieng_anh_loi") %}
+<span class="text-sm" style="color:#b45309">Đề tiếng Anh: không sinh được ({{ bp.get("tieng_anh_loi") }})</span>
+{% else %}
+<span class="text-sm text-on-surface-variant">Tiếng Anh:</span>
+<a class="text-primary-container font-semibold" href="/api/exam/tai-de-en/{{ de.id }}">PDF đề</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai-en/{{ de.id }}">PDF lời giải</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex-en/{{ de.id }}">.tex</a>
+{% endif %}
+</div>
+{% endif %}
 </td>
 </tr>
 {% endfor %}

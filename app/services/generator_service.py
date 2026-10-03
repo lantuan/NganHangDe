@@ -7,6 +7,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PYTHON_BANK_DIR = BASE_DIR / "data" / "python_bank"
+# Ngân hàng TIẾNG ANH (cô Lan 03/10/2026): thư mục RIÊNG, cùng cấu trúc toan10/L10_C1.py... với
+# ngân hàng tiếng Việt. Sinh ra từ ngân hàng Việt bằng scripts/dich_ngan_hang.py - KHÔNG sửa tay:
+# sửa ngân hàng Việt rồi dịch lại (xem docs/28_DA_NGON_NGU.md).
+PYTHON_BANK_EN_DIR = BASE_DIR / "data" / "python_bank_en"
 
 if str(PYTHON_BANK_DIR) not in sys.path:
     sys.path.insert(0, str(PYTHON_BANK_DIR))
@@ -16,13 +20,53 @@ class GeneratorNotFoundError(Exception):
     pass
 
 
-def _load_chapter_module(lop: int, chuong_so: int):
-    module_name = f"toan{lop}.L{lop}_C{chuong_so}"
-    file_path = PYTHON_BANK_DIR / f"toan{lop}" / f"L{lop}_C{chuong_so}.py"
+def _thu_muc_ngan_hang(lang: str) -> Path:
+    return PYTHON_BANK_EN_DIR if lang == "en" else PYTHON_BANK_DIR
+
+
+def sau_xu_ly_ngon_ngu(latex_block: str, lang: str) -> str:
+    """Bản Anh: dấu thập phân kiểu Việt `{,}` (vd 8{,}0) thành dấu chấm kiểu Mỹ (8.0)."""
+    if lang == "en":
+        return latex_block.replace("{,}", ".")
+    return latex_block
+
+
+def chup_trang_thai_xoay():
+    """Ảnh chụp bộ nhớ XOAY VÒNG ngữ cảnh (sys.modules['_ngan_hang_xoay_vong']). Đề tiếng Anh sinh
+    lại từ cùng hạt giống phải bắt đầu từ ĐÚNG trạng thái mà đề tiếng Việt đã bắt đầu."""
+    import copy
+    mod = sys.modules.get("_ngan_hang_xoay_vong")
+    return copy.deepcopy(getattr(mod, "da_dung", {})) if mod is not None else {}
+
+
+def khoi_phuc_trang_thai_xoay(anh) -> None:
+    import copy
+    mod = sys.modules.get("_ngan_hang_xoay_vong")
+    if mod is not None:
+        mod.da_dung = copy.deepcopy(anh)
+
+
+def dat_hat_giong(seed: int) -> None:
+    """Đặt hạt giống cho cả random lẫn numpy (nhiều hàm sinh câu dùng np.random)."""
+    random.seed(seed)
+    try:
+        import numpy as _np
+        _np.random.seed(seed % (2 ** 32))
+    except Exception:
+        pass
+
+
+def _load_chapter_module(lop: int, chuong_so: int, lang: str = "vi"):
+    # Tên module khác nhau theo ngôn ngữ để hai bản không đè nhau trong sys.modules.
+    module_name = (f"toan{lop}_en.L{lop}_C{chuong_so}" if lang == "en"
+                   else f"toan{lop}.L{lop}_C{chuong_so}")
+    file_path = _thu_muc_ngan_hang(lang) / f"toan{lop}" / f"L{lop}_C{chuong_so}.py"
 
     if not file_path.exists():
         raise GeneratorNotFoundError(
-            f"Không tìm thấy file Python cho khối {lop} chương {chuong_so}: {file_path}"
+            (f"Không tìm thấy file Python TIẾNG ANH cho khối {lop} chương {chuong_so} "
+             f"(chương này chưa được dịch): {file_path}" if lang == "en" else
+             f"Không tìm thấy file Python cho khối {lop} chương {chuong_so}: {file_path}")
         )
 
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -174,6 +218,7 @@ def call_generator(
     socot: int | None = None,
     dong: int | None = None,
     used_variants: dict | None = None,
+    lang: str = "vi",
 ) -> dict:
     """
     used_variants: dict dùng chung xuyên suốt 1 LẦN SINH ĐỀ (1 lần gọi
@@ -181,13 +226,13 @@ def call_generator(
     bị chọn nhiều lần (do Mapping thiếu ID khác). Truyền None nếu không cần
     theo dõi (gọi lẻ 1 câu độc lập).
     """
-    module = _load_chapter_module(lop, chuong_so)
+    module = _load_chapter_module(lop, chuong_so, lang)
     variants = _find_variant_functions(module, generator_id)
 
     if not variants:
         raise GeneratorNotFoundError(
             f"Generator ID '{generator_id}' không có biến thể nào trong "
-            f"toan{lop}/L{lop}_C{chuong_so}.py"
+            f"toan{lop}/L{lop}_C{chuong_so}.py" + (" (bản tiếng Anh)" if lang == "en" else "")
         )
 
     chosen_name = _chon_bien_the(variants, used_variants, generator_id)
@@ -205,6 +250,7 @@ def call_generator(
     finally:
         if ngu_canh is not None:
             ngu_canh.da_dung = None
+    latex_block = sau_xu_ly_ngon_ngu(latex_block, lang)
     # Bo loc chung: 1x -> x, + -5 -> - 5... (xem lam_dep_bieu_thuc.py)
     latex_block = lam_dep(latex_block)
     # Tự luận chỉ đưa ra HAI ý (cô Lan 01/10/2026) - xem tu_luan_hai_y.py
@@ -222,13 +268,13 @@ def call_generator(
         },
     }
 
-def resolve_variant(generator_id: str, lop: int, chuong_so: int) -> str:
+def resolve_variant(generator_id: str, lop: int, chuong_so: int, lang: str = "vi") -> str:
     """
     Chọn 1 biến thể Python duy nhất cho generator_id này.
     Gọi 1 LẦN DUY NHẤT cho mỗi generator_id trong 1 lần build đề,
     dùng chung cho mọi mã đề (không đổi biến thể giữa các mã đề).
     """
-    module = _load_chapter_module(lop, chuong_so)
+    module = _load_chapter_module(lop, chuong_so, lang)
     variants = _find_variant_functions(module, generator_id)
 
     if not variants:
@@ -247,15 +293,17 @@ def call_locked_variant(
     chuong_so: int,
     socot: int | None = None,
     dong: int | None = None,
+    lang: str = "vi",
 ) -> str:
     """
     Gọi ĐÚNG biến thể đã khóa (variant_name) với socau=1,
     dùng cho từng mã đề riêng lẻ. Mỗi lần gọi, hàm tự random số liệu
     bên trong nên nội dung khác nhau giữa các mã đề.
     """
-    module = _load_chapter_module(lop, chuong_so)
+    module = _load_chapter_module(lop, chuong_so, lang)
     func = getattr(module, variant_name)
     latex_block = _call_generator_function(func, 1, socot, dong)
+    latex_block = sau_xu_ly_ngon_ngu(latex_block, lang)
     # Bo loc chung: 1x -> x, + -5 -> - 5... (xem lam_dep_bieu_thuc.py)
     latex_block = lam_dep(latex_block)
     latex_block = giu_hai_y(latex_block, generator_id)

@@ -4,6 +4,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_FILE = BASE_DIR / "data" / "config" / "latex_template.tex"
 TEMP_DIR = BASE_DIR / "data" / "temp"
+# Đề TIẾNG ANH (cô Lan 03/10/2026): khung riêng (sinh từ khung Việt bằng scripts/tao_ex_test_en.py) và
+# thư mục riêng, để mỗi đề tiếng Việt có một đề tiếng Anh tương ứng mà không lẫn tệp vào nhau.
+TEMPLATE_FILE_EN = BASE_DIR / "data" / "config" / "latex_template_en.tex"
+TEMP_DIR_EN = BASE_DIR / "data" / "temp_en"
 
 
 def tinh_nam_hoc() -> str:
@@ -31,6 +35,7 @@ def build_latex_document(
     role: str,
     ex_test_option: str = "dethi",
     ma_de: str | None = None,
+    lang: str = "vi",
 ) -> str:
     """
     Ghep noi dung da dung san (co the gom NHIEU ma de) vao khung tai lieu.
@@ -43,7 +48,7 @@ def build_latex_document(
     Cac tham so tieu_de / lop / role / ma_de giu lai cho tuong thich nguoc
     (khong con dung den o day) - noi dung da duoc dung san o tang tren.
     """
-    template = TEMPLATE_FILE.read_text(encoding="utf-8")
+    template = (TEMPLATE_FILE_EN if lang == "en" else TEMPLATE_FILE).read_text(encoding="utf-8")
 
     return (
         template
@@ -53,8 +58,9 @@ def build_latex_document(
     )
 
 
-def save_tex_file(content: str, filename: str) -> Path:
-    TEMP_DIR.mkdir(parents=True, exist_ok=True)
-    tex_path = TEMP_DIR / f"{filename}.tex"
+def save_tex_file(content: str, filename: str, lang: str = "vi") -> Path:
+    thu_muc = TEMP_DIR_EN if lang == "en" else TEMP_DIR
+    thu_muc.mkdir(parents=True, exist_ok=True)
+    tex_path = thu_muc / f"{filename}.tex"
     tex_path.write_text(content, encoding="utf-8")
     return tex_path

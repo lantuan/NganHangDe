@@ -11,6 +11,8 @@ THOI_GIAN_GIU = 24 * 60 * 60  # 1 ngay (tinh bang giay)
 THU_MUC_CAN_DON = [
     BASE_DIR / "data" / "exports",
     BASE_DIR / "data" / "temp",
+    BASE_DIR / "data" / "exports_en",   # đề tiếng Anh
+    BASE_DIR / "data" / "temp_en",
     BASE_DIR / "app" / "static" / "downloads",
 ]
 

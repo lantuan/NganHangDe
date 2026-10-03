@@ -567,5 +567,10 @@
  "🔒 Mình KHÔNG tự nghĩ ra đề: câu hỏi và đáp án đều lấy từ ngân hàng đề soạn sẵn theo đúng chương trình, nên không lo vượt khung hay sai kiến thức.": "🔒 I do NOT make up exams: questions and answers all come from a prepared exam bank that follows the curriculum, so there is no worry about going beyond it or getting the content wrong.",
  "🚀 Bắt đầu làm bài": "🚀 Start the exam",
  "🚀 Tạo đề": "🚀 Create exam",
- "🚧 Chức năng chấm tự luận đang được xây dựng": "🚧 Essay grading is under construction"
+ "🚧 Chức năng chấm tự luận đang được xây dựng": "🚧 Essay grading is under construction",
+ "Tạo kèm đề tiếng Anh tương ứng: cùng câu hỏi, cùng số liệu, cùng thứ tự, lưu trong thư mục": "Also create the matching English exam: same questions, same numbers, same order, saved in a separate",
+ "tiếng Anh riêng. Chương nào chưa dịch sang tiếng Anh thì đề tiếng Anh hiện dòng": "English folder. For any chapter not yet translated into English, the English exam shows a line",
+ "ở câu đó.": "at that question.",
+ "Đề tiếng Anh: không sinh được (": "English exam could not be generated (",
+ "Tiếng Anh:": "English:"
 }

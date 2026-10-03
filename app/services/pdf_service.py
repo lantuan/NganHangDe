@@ -4,6 +4,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 EXPORTS_DIR = BASE_DIR / "data" / "exports"
+EXPORTS_DIR_EN = BASE_DIR / "data" / "exports_en"   # PDF của đề tiếng Anh
 CONFIG_DIR = BASE_DIR / "data" / "config"
 
 
@@ -23,12 +24,13 @@ def _texinputs_env() -> dict:
     return env
 
 
-def compile_pdf(tex_path: Path) -> Path:
+def compile_pdf(tex_path: Path, lang: str = "vi") -> Path:
     """
     Bien dich file .tex thanh .pdf bang pdflatex.
     Chay 2 lan de muc luc/tham chieu (neu co) duoc cap nhat du.
     """
-    EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    exports_dir = EXPORTS_DIR_EN if lang == "en" else EXPORTS_DIR
+    exports_dir.mkdir(parents=True, exist_ok=True)
     env = _texinputs_env()
 
     result = None
@@ -38,7 +40,7 @@ def compile_pdf(tex_path: Path) -> Path:
                 [
                     "pdflatex",
                     "-interaction=nonstopmode",
-                    "-output-directory", str(EXPORTS_DIR),
+                    "-output-directory", str(exports_dir),
                     str(tex_path),
                 ],
                 capture_output=True,
@@ -59,7 +61,7 @@ def compile_pdf(tex_path: Path) -> Path:
                 "bi treo (thieu package, loi cu phap gay vong lap...)."
             )
 
-    pdf_path = EXPORTS_DIR / f"{tex_path.stem}.pdf"
+    pdf_path = exports_dir / f"{tex_path.stem}.pdf"
 
     if not pdf_path.exists():
         log = result.stdout[-3000:] if result else "(khong chay duoc pdflatex)"

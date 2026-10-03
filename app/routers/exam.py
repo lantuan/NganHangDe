@@ -516,6 +516,50 @@ def tai_de_endpoint(de_id: str):
 
 
 # ======================================================
+# DE TIENG ANH TUONG UNG (co Lan 03/10/2026): sinh cung luc voi de tieng Viet khi giao vien tich
+# "Tao kem de tieng Anh". Tep nam trong thu muc tieng Anh rieng (data/exports_en, data/temp_en);
+# file_de ghi loai_file = de_en / loigiai_en / tex_en.
+# ======================================================
+
+def _tep_tieng_anh(de_id: str, khoa: str, mo_ta: str) -> str:
+    de = history_service.lay_de_theo_id(de_id)
+    if de is None:
+        raise HTTPException(404, "Khong tim thay de nay.")
+    duong_dan = de.get("files", {}).get(khoa)
+    if not duong_dan or not Path(duong_dan).exists():
+        raise HTTPException(
+            404, "De nay khong co ban tieng Anh (%s) hoac file da bi don dep." % mo_ta)
+    return duong_dan
+
+
+@router.get("/tai-de-en/{de_id}")
+def tai_de_tieng_anh_endpoint(de_id: str, request: Request):
+    chan = yeu_cau_giao_vien(request)
+    if chan is not None:
+        return chan
+    return FileResponse(path=_tep_tieng_anh(de_id, "de_en", "PDF de"),
+                        filename="exam_en_%s.pdf" % de_id[:8], media_type="application/pdf")
+
+
+@router.get("/tai-loigiai-en/{de_id}")
+def tai_loigiai_tieng_anh_endpoint(de_id: str, request: Request):
+    chan = yeu_cau_giao_vien(request)
+    if chan is not None:
+        return chan
+    return FileResponse(path=_tep_tieng_anh(de_id, "loigiai_en", "PDF loi giai"),
+                        filename="solutions_en_%s.pdf" % de_id[:8], media_type="application/pdf")
+
+
+@router.get("/tai-tex-en/{de_id}")
+def tai_tex_tieng_anh_endpoint(de_id: str, request: Request):
+    chan = yeu_cau_giao_vien(request)
+    if chan is not None:
+        return chan
+    return FileResponse(path=_tep_tieng_anh(de_id, "tex_en", ".tex"),
+                        filename="exam_en_%s.tex" % de_id[:8], media_type="application/x-tex")
+
+
+# ======================================================
 # TAI MA NGUON LATEX CUA DE (CHI GIAO VIEN)
 #
 # Giao vien quen dung LaTeX muon lay file .tex ve tu chinh: them mot cau

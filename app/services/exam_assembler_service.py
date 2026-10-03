@@ -33,15 +33,22 @@ from app.services.hinh_ve_service import dich_hinh_trong_khoi
 from app.services.mapping_service import tim_dang_ngoai_yccd
 from app.services.generator_service import (
     call_generator, GeneratorNotFoundError, LoaiCauSaiError, CauHongError,
+    chup_trang_thai_xoay, khoi_phuc_trang_thai_xoay, dat_hat_giong,
 )
+import secrets
 import json
 from app.services.latex_service import (
-    build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR,
+    build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR, TEMP_DIR_EN,
 )
 from app.services.answer_parser_service import trich_dap_an, AnswerParseError
 from app.services.pdf_service import compile_pdf, PdfCompileError
 class AssembleError(Exception):
     pass
+
+
+def _bien_dich(tex_path, lang: str = "vi"):
+    """Biên dịch PDF; bản tiếng Việt gọi compile_pdf(tex) như cũ, bản Anh thêm lang để ghi vào thư mục tiếng Anh."""
+    return compile_pdf(tex_path, lang) if lang == "en" else compile_pdf(tex_path)
 _LATEX_DAC_BIET = {
     "\\": r"\textbackslash{}",
     "&": r"\&",
@@ -70,7 +77,7 @@ def _escape_latex(text: str) -> str:
             continue
         ket_qua = ket_qua.replace(ky_tu, thay_the)
     return ket_qua.replace("\x00BACKSLASH\x00", r"\textbackslash{}")
-def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None) -> str:
+def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None, lang: str = "vi") -> str:
     """
     Dòng LaTeX hiển thị khi 1 câu bị THIẾU (không có Mapping hoặc không có
     hàm Python), dùng ở chế độ nháp (cho_phep_thieu=True). Chỉ dùng
@@ -84,7 +91,8 @@ def _dong_placeholder_thieu(item: dict, ghi_chu: str | None = None) -> str:
             or item.get("curriculum_id") or f"chương {item.get('chuong_so')}")
     chi_tiet = ghi_chu or item.get("ghi_chu") or ""
     dong = (
-        r"\begin{center}\fbox{\textbf{[THIẾU Ở " + o_dau + r" --- ID: " +
+        (r"\begin{center}\fbox{\textbf{[MISSING IN " + o_dau + r" --- ID: " if lang == "en"
+         else r"\begin{center}\fbox{\textbf{[THIẾU Ở " + o_dau + r" --- ID: ") +
         _escape_latex(str(nhan)) + r"]}}\end{center}"
     )
     if chi_tiet:
@@ -121,6 +129,16 @@ CAC_PHAN_DE = [
 ]
 
 
+# Bản tiếng Anh của khung đề (cùng thứ tự, cùng số La Mã).
+CAC_PHAN_DE_EN = [
+    ("MC", "I", "Answer questions 1 to {n}. For each question, choose only one option."),
+    ("TF", "II", "Answer questions 1 to {n}. In each statement "
+                 "\\textbf{{a), b), c), d)}} of each question, choose true or false."),
+    ("SA", "III", "Answer questions 1 to {n}."),
+    ("TL", "IV", "Write out full solutions for problems 1 to {n}."),
+]
+
+
 def _loai_cau_cua(item: dict) -> str:
     """
     Doc loai cau (MC/TF/SA/TL) tu item. Uu tien truong loai_cau; khong co
@@ -136,7 +154,7 @@ def _loai_cau_cua(item: dict) -> str:
     return "MC"
 
 
-def _ghep_4_phan(theo_phan: dict[str, list[str]]) -> str:
+def _ghep_4_phan(theo_phan: dict[str, list[str]], lang: str = "vi") -> str:
     """
     Ghep cac khoi LaTeX da gom theo dang cau thanh than mot ma de, co
     tieu de PHAN I/II/III/IV. So La Ma GAN CHET vao loai cau (xem
@@ -145,13 +163,14 @@ def _ghep_4_phan(theo_phan: dict[str, list[str]]) -> str:
     \\setcounter{ex}{0} truoc moi phan de moi phan danh so lai tu 1.
     """
     cac_khoi = []
-    for ma_loai, so_la_ma, loi_dan in CAC_PHAN_DE:
+    ten_phan = "PART" if lang == "en" else "PHẦN"
+    for ma_loai, so_la_ma, loi_dan in (CAC_PHAN_DE_EN if lang == "en" else CAC_PHAN_DE):
         khoi_cau = theo_phan.get(ma_loai) or []
         if not khoi_cau:
             continue
         cac_khoi.append(
             "\\setcounter{ex}{0}\n"
-            "\\noindent\\textbf{PHẦN " + so_la_ma + ".} "
+            "\\noindent\\textbf{" + ten_phan + " " + so_la_ma + ".} "
             + loi_dan.format(n=len(khoi_cau)) + "\n\n"
             + "\n".join(khoi_cau)
         )
@@ -159,7 +178,7 @@ def _ghep_4_phan(theo_phan: dict[str, list[str]]) -> str:
 
 
 def _khung_mot_ma_de(tieu_de: str, lop: int, role: str, ma_de: str,
-                     than_de: str) -> str:
+                     than_de: str, lang: str = "vi") -> str:
     """
     Mot ma de hoan chinh: tieu de truong/ky thi, o ho ten + ma de, chan
     trang, than de 4 phan, va dong "HET".
@@ -171,17 +190,30 @@ def _khung_mot_ma_de(tieu_de: str, lop: int, role: str, ma_de: str,
     nhan = f"made{ma_de}"
 
     if role == "teacher":
-        o_ho_ten = (
-            "\\noindent\n"
-            "\\begin{minipage}[b]{8.5cm}\n"
-            "\\fontsize{11}{0}\\selectfont Họ tên thí sinh:....................................... "
-            "Lớp:.......... Phòng kiểm tra:...........\n"
-            "\\end{minipage}\\hspace{1.5cm}\n"
-            "\\begin{minipage}[b]{4cm}\n"
-            f"\\hfill\\fbox{{\\bf Mã đề {ma_de}}}\n"
-            "\\end{minipage}\\vspace{4pt}\n"
-        )
-        chan_ma_de = f" $-$ Mã đề {ma_de}"
+        if lang == "en":
+            o_ho_ten = (
+                "\\noindent\n"
+                "\\begin{minipage}[b]{8.5cm}\n"
+                "\\fontsize{11}{0}\\selectfont Name:.................................. "
+                "Class:........ Room:........\n"
+                "\\end{minipage}\\hspace{1.5cm}\n"
+                "\\begin{minipage}[b]{4cm}\n"
+                f"\\hfill\\fbox{{\\bf Exam code {ma_de}}}\n"
+                "\\end{minipage}\\vspace{4pt}\n"
+            )
+            chan_ma_de = f" $-$ Exam code {ma_de}"
+        else:
+            o_ho_ten = (
+                "\\noindent\n"
+                "\\begin{minipage}[b]{8.5cm}\n"
+                "\\fontsize{11}{0}\\selectfont Họ tên thí sinh:....................................... "
+                "Lớp:.......... Phòng kiểm tra:...........\n"
+                "\\end{minipage}\\hspace{1.5cm}\n"
+                "\\begin{minipage}[b]{4cm}\n"
+                f"\\hfill\\fbox{{\\bf Mã đề {ma_de}}}\n"
+                "\\end{minipage}\\vspace{4pt}\n"
+            )
+            chan_ma_de = f" $-$ Mã đề {ma_de}"
     else:
         o_ho_ten = ""
         chan_ma_de = ""
@@ -203,8 +235,15 @@ def _sinh_pdf_tu_danh_sach(
     danh_sach_id: list[dict],
     socau_ma_de: int | None,
     cho_phep_thieu: bool = True,
+    lang: str = "vi",
+    seed: int | None = None,
 ) -> dict:
     """
+    lang="en": sinh bản TIẾNG ANH (ngân hàng data/python_bank_en, khung ex_test_en, tệp vào data/temp_en
+    và data/exports_en). seed: hạt giống; cùng seed + cùng danh_sach_id + cùng trạng thái xoay vòng thì đề
+    tiếng Anh có CÙNG số liệu, cùng biến thể với đề tiếng Việt (đã kiểm bằng scripts/kiem_tuong_duong.py).
+    seed=None: chọn ngẫu nhiên và trả về trong kết quả ("seed").
+
     Phần dùng chung: gọi Python Generator -> ghép LaTeX -> biên dịch PDF.
 
     SUA 2026-09-15 - hai thay doi lon:
@@ -220,6 +259,8 @@ def _sinh_pdf_tu_danh_sach(
     """
     tieu_de_an_toan = _escape_latex(tieu_de)
     so_ma_de = max(1, int(socau_ma_de or 1))
+    if seed is None:
+        seed = secrets.randbelow(2 ** 31)
 
     cac_khoi_ma_de = []
     danh_sach_dap_an: list[dict] = []
@@ -232,6 +273,8 @@ def _sinh_pdf_tu_danh_sach(
 
     for chi_so in range(so_ma_de):
         ma_de = tinh_ma_de(lop, chi_so + 1)
+        # Mỗi mã đề một hạt giống riêng, suy ra từ seed chung: bản Anh dùng lại đúng dãy này.
+        dat_hat_giong(seed + chi_so * 104729)
         # used_variants rieng cho tung ma de: trong CUNG mot ma de thi
         # khong lap lai bien the, nhung giua cac ma de thi duoc phep -
         # cac ma de von phai tuong duong nhau ve dang toan.
@@ -243,7 +286,7 @@ def _sinh_pdf_tu_danh_sach(
             loai = _loai_cau_cua(item)
 
             if item.get("thieu"):
-                theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(item))
+                theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(item, lang=lang))
                 so_cau_thieu += 1
                 continue
 
@@ -257,6 +300,7 @@ def _sinh_pdf_tu_danh_sach(
                     # lap ben ngoai, KHONG truyen xuong ham sinh nua.
                     socau_yeu_cau=1,
                     used_variants=used_variants,
+                    lang=lang,
                 )
                 theo_phan.setdefault(loai, []).append(ket_qua["latex_block"])
                 so_thu_tu += 1
@@ -316,7 +360,7 @@ def _sinh_pdf_tu_danh_sach(
                     ma = item.get("generator_id")
                     item = dict(item, thieu_o="python", ma_thieu=ma)
                     theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(
-                        item, ghi_chu=str(e)))
+                        item, ghi_chu=str(e), lang=lang))
                     so_cau_thieu += 1
                     continue
                 raise AssembleError(f"Câu sai loại: {e}")
@@ -326,14 +370,17 @@ def _sinh_pdf_tu_danh_sach(
                     ma = item.get("generator_id")
                     item = dict(item, thieu_o="python", ma_thieu=ma)
                     theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(
-                        item, ghi_chu="Đã khai dạng này trong Mapping nhưng chưa có hàm sinh trong ngân hàng Python."))
+                        item, lang=lang, ghi_chu=(
+                            "This question type has no English version yet (the chapter has not been translated)."
+                            if lang == "en" else
+                            "Đã khai dạng này trong Mapping nhưng chưa có hàm sinh trong ngân hàng Python.")))
                     so_cau_thieu += 1
                     continue
                 raise AssembleError(f"Lỗi sinh câu hỏi cho {item['generator_id']}: {e}")
             except Exception as e:
                 if cho_phep_thieu:
                     theo_phan.setdefault(loai, []).append(_dong_placeholder_thieu(
-                        item, ghi_chu=f"Lỗi khi chạy hàm sinh câu ({type(e).__name__}): {e}"))
+                        item, lang=lang, ghi_chu=f"Lỗi khi chạy hàm sinh câu ({type(e).__name__}): {e}"))
                     so_cau_thieu += 1
                     continue
                 raise AssembleError(
@@ -342,14 +389,15 @@ def _sinh_pdf_tu_danh_sach(
                 )
 
         cac_khoi_ma_de.append(_khung_mot_ma_de(
-            tieu_de_an_toan, lop, role, ma_de, _ghep_4_phan(theo_phan),
+            tieu_de_an_toan, lop, role, ma_de, _ghep_4_phan(theo_phan, lang), lang,
         ))
 
     # Moi ma de mot trang moi.
     noi_dung = "\n\\newpage\n\n".join(cac_khoi_ma_de)
     filename = f"exam_{uuid.uuid4().hex[:8]}"
-    TEMP_DIR.mkdir(parents=True, exist_ok=True)
-    dap_an_json_path = TEMP_DIR / f"{filename}_dapan.json"
+    thu_muc_tam = TEMP_DIR_EN if lang == "en" else TEMP_DIR
+    thu_muc_tam.mkdir(parents=True, exist_ok=True)
+    dap_an_json_path = thu_muc_tam / f"{filename}_dapan.json"
     dap_an_json_path.write_text(
         json.dumps(danh_sach_dap_an, ensure_ascii=False, indent=2),
         encoding="utf-8",
@@ -359,20 +407,20 @@ def _sinh_pdf_tu_danh_sach(
         # Giáo viên: xuất CẢ đề thi (ẩn lời giải) VÀ lời giải (hiện lời
         # giải) — cùng 1 nội dung câu hỏi, chỉ khác option gọi ex_test.
         loigiai_content = build_latex_document(
-            tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="loigiai",
+            tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="loigiai", lang=lang,
         )
-        loigiai_tex_path = save_tex_file(loigiai_content, f"{filename}_loigiai")
+        loigiai_tex_path = save_tex_file(loigiai_content, f"{filename}_loigiai", lang)
         try:
-            loigiai_pdf_path = compile_pdf(loigiai_tex_path)
+            loigiai_pdf_path = _bien_dich(loigiai_tex_path, lang)
         except PdfCompileError as e:
             raise AssembleError(str(e))
 
         dethi_content = build_latex_document(
-            tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="dethi",
+            tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="dethi", lang=lang,
         )
-        dethi_tex_path = save_tex_file(dethi_content, filename)
+        dethi_tex_path = save_tex_file(dethi_content, filename, lang)
         try:
-            dethi_pdf_path = compile_pdf(dethi_tex_path)
+            dethi_pdf_path = _bien_dich(dethi_tex_path, lang)
         except PdfCompileError as e:
             raise AssembleError(str(e))
 
@@ -390,15 +438,16 @@ def _sinh_pdf_tu_danh_sach(
             "pdf_loigiai_path": str(loigiai_pdf_path),
             "dap_an_json_path": str(dap_an_json_path),
             "canh_bao_ngoai_yccd": canh_bao_ngoai_yccd,
+            "seed": seed,
         }
 
     # Học sinh: chỉ xuất đề thi, luôn ẩn lời giải
     latex_content = build_latex_document(
-        tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="dethi",
+        tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="dethi", lang=lang,
     )
-    tex_path = save_tex_file(latex_content, filename)
+    tex_path = save_tex_file(latex_content, filename, lang)
     try:
-        pdf_path = compile_pdf(tex_path)
+        pdf_path = _bien_dich(tex_path, lang)
     except PdfCompileError as e:
         raise AssembleError(str(e))
 
@@ -411,7 +460,34 @@ def _sinh_pdf_tu_danh_sach(
         "pdf_loigiai_path": None,
         "dap_an_json_path": str(dap_an_json_path),
         "canh_bao_ngoai_yccd": canh_bao_ngoai_yccd,
+        "seed": seed,
     }
+
+
+def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
+                        kem_tieng_anh, tieu_de_en=None) -> dict:
+    """Sinh đề tiếng Việt; nếu kem_tieng_anh thì sinh THÊM đề tiếng Anh tương ứng (cùng câu, cùng biến
+    thể, cùng số liệu) vào thư mục tiếng Anh riêng. Bản Anh lỗi (vd chương chưa dịch) KHÔNG làm hỏng đề
+    Việt: lỗi được ghi trong kết quả["tieng_anh_loi"]."""
+    seed = secrets.randbelow(2 ** 31)
+    trang_thai_dau = chup_trang_thai_xoay() if kem_tieng_anh else None
+    kq = _sinh_pdf_tu_danh_sach(lop, tieu_de, role, danh_sach_id, socau_ma_de,
+                                cho_phep_thieu=cho_phep_thieu, lang="vi", seed=seed)
+    if not kem_tieng_anh:
+        return kq
+    trang_thai_sau = chup_trang_thai_xoay()
+    khoi_phuc_trang_thai_xoay(trang_thai_dau)      # bản Anh bắt đầu từ ĐÚNG trạng thái của bản Việt
+    try:
+        kq["tieng_anh"] = _sinh_pdf_tu_danh_sach(
+            lop, tieu_de_en or tieu_de, role, danh_sach_id, socau_ma_de,
+            cho_phep_thieu=True, lang="en", seed=seed)
+    except Exception as e:                           # noqa: BLE001
+        kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
+    finally:
+        khoi_phuc_trang_thai_xoay(trang_thai_sau)    # sau cùng như thể chỉ sinh bản Việt
+    return kq
+
+
 def generate_exam_pdf(
     lop: int,
     tieu_de: str,
@@ -435,8 +511,12 @@ def generate_exam_pdf_auto(
     cau_truc_tu_hoc_sinh: dict | None = None,
     socau_ma_de: int | None = None,
     cho_phep_thieu: bool = True,
+    kem_tieng_anh: bool = False,
+    tieu_de_en: str | None = None,
 ) -> dict:
     """
+    kem_tieng_anh=True: sinh THÊM đề tiếng Anh tương ứng (kết quả["tieng_anh"], thư mục tiếng Anh riêng).
+
     Chế độ CHÍNH THỨC (WF001): CN_LoadExamScope -> CN_LoadCurriculum ->
     CN_BuildBlueprint -> CN_QuestionSelector (theo curriculum_id) ->
     CN_CallPythonGenerator -> CN_ExamAssembler -> PDF.
@@ -456,8 +536,9 @@ def generate_exam_pdf_auto(
         danh_sach_id = select_questions(lop=lop, blueprint=blueprint, cho_phep_thieu=cho_phep_thieu)
     except SelectorError as e:
         raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
-    ket_qua = _sinh_pdf_tu_danh_sach(
-        lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu=cho_phep_thieu
+    ket_qua = _sinh_kem_tieng_anh(
+        lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
+        kem_tieng_anh, tieu_de_en,
     )
     ket_qua["blueprint"] = blueprint
     return ket_qua

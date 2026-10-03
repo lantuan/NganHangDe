@@ -35,6 +35,7 @@ from app.core.deps import get_current_user, yeu_cau_giao_vien
 from app.core.lop_config import DANH_SACH_LOP, MA_LOP_CLASSROOM
 from app.services import classroom_service, gia_su_service, history_service, profile_service
 from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError
+from app.services.i18n_service import tieu_de_tieng_anh
 from app.services.ma_tran_service import doc_ma_tran_tu_form
 from app.services.exam_rules_service import ExamRulesError
 
@@ -105,6 +106,7 @@ async def ra_de_submit(
     socau_ma_de: int = Form(default=1),
     tieu_de: str = Form(default="ĐỀ KIỂM TRA MÔN TOÁN"),
     cho_phep_thieu: str | None = Form(default=None),
+    kem_tieng_anh: str | None = Form(default=None),
 ):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
@@ -159,6 +161,8 @@ async def ra_de_submit(
             cau_truc_tu_hoc_sinh=cau_truc_tu_gv,
             socau_ma_de=socau_ma_de,
             cho_phep_thieu=bool(cho_phep_thieu),
+            kem_tieng_anh=bool(kem_tieng_anh),
+            tieu_de_en=tieu_de_tieng_anh(tieu_de) if kem_tieng_anh else None,
         )
     except AssembleError as e:
         return RedirectResponse("/gv/ra-de?loi=" + quote(str(e)), status_code=303)
@@ -186,6 +190,9 @@ async def ra_de_submit(
             "socau_ma_de": socau_ma_de,
             "cho_phep_thieu": bool(cho_phep_thieu),
             "canh_bao_ngoai_yccd": ket_qua.get("canh_bao_ngoai_yccd") or [],
+            "seed": ket_qua.get("seed"),
+            "kem_tieng_anh": bool(kem_tieng_anh),
+            "tieng_anh_loi": ket_qua.get("tieng_anh_loi"),
         },
     )
     if not de_id:
@@ -212,6 +219,13 @@ async def ra_de_submit(
             history_service.luu_file_de(de_id, "loigiai", ket_qua["pdf_loigiai_path"])
         if ket_qua.get("dap_an_json_path"):
             history_service.luu_file_de(de_id, "dapan_json", ket_qua["dap_an_json_path"])
+        # Đề tiếng Anh tương ứng (thư mục tiếng Anh riêng): de_en / loigiai_en / tex_en
+        kq_en = ket_qua.get("tieng_anh")
+        if kq_en:
+            history_service.luu_file_de(de_id, "de_en", kq_en["pdf_path"])
+            history_service.luu_file_de(de_id, "tex_en", kq_en["tex_path"])
+            if kq_en.get("pdf_loigiai_path"):
+                history_service.luu_file_de(de_id, "loigiai_en", kq_en["pdf_loigiai_path"])
 
     return RedirectResponse("/gv/de-da-tao", status_code=303)
 
