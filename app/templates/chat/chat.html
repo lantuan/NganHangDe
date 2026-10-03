@@ -696,6 +696,9 @@
                              xong thi trong dau da co ngu canh roi, khong ai nghi
                              phai go lai "cau 3 cua de vua nay" - bam nut thi may
                              chu BIET CHAC de nao, cau nao. -->
+                        <div class="px-4 py-2 border-t text-sm text-slate-600" id="hang-tick-anh">
+                            <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh (đề có cả Việt và Anh, tải về là .zip; không tick thì chỉ có bản tiếng Việt)</label>
+                        </div>
                         <div id="hang-nut-gui" class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
                             <div id="nhom-nut-phu" class="flex items-center gap-2 flex-wrap">
                                 <button type="button" id="nut-tao-de-moi" onclick="moFormTaoDe()"
@@ -1170,6 +1173,7 @@ ${html}
                         // ra de, cai nao chua co thi hien thong bao thieu").
                         cho_phep_thieu: true,
                         dinh_dang: "pdf",
+                        kem_tieng_anh: kemAnh(),
                         user_id: CURRENT_USER_ID || null,
                         conversation_id: conversationId,
                     }),
@@ -1221,8 +1225,7 @@ ${html}
                 const aiCaption = "Đã tạo đề xong.";
                 box.innerHTML =
                     `<p>${aiCaption}</p>` +
-                    `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file: ${filename}</a></p>` +
-                    htmlChonCaHai(url) +
+                    `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
                     htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi;
 
                 try {
@@ -1304,6 +1307,7 @@ ${html}
                 `<label>Ghi chú thêm (không bắt buộc)</label>` +
                 `<textarea id="${idForm}-ghichu" placeholder="Ví dụ: 40% nhận biết, 30% thông hiểu..."></textarea>` +
                 `</div>` +
+                `<div class="form-nhom">${htmlTickKemAnh()}</div>` +
                 `<button type="button" class="btn-submit-form" onclick="submitFormTaoDe('${idForm}')">🚀 Tạo đề</button>` +
                 `</div>`
             );
@@ -1388,6 +1392,8 @@ ${html}
                             // chat binh thuong qua n8n/Ghep_Tham_So.
                             cho_phep_thieu: true,
                             dinh_dang: "pdf",
+                            kem_tieng_anh: kemAnh(),
+                        kem_tieng_anh: kemAnh(),
                             user_id: CURRENT_USER_ID || null,
                             conversation_id: conversationId,
                         }),
@@ -1437,8 +1443,7 @@ ${html}
                     const aiCaption = "Đã tạo đề xong.";
                     formEl.outerHTML =
                         `<div><p>${aiCaption}</p>` +
-                        `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file: ${filename}</a></p>` +
-                        htmlChonCaHai(url) +
+                        `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
                         htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi + `</div>`;
 
                     try {
@@ -1512,8 +1517,7 @@ ${html}
                     } else if (msg.loai_phan_hoi === "file" && msg.duong_dan_file) {
                         addAIMessage(
                             `<p>${msg.noi_dung || "Đã tạo đề xong."}</p>` +
-                            `<p><a href="${msg.duong_dan_file}" download target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Tải file</a></p>` +
-                            htmlChonCaHai(msg.duong_dan_file) +
+                            `<p><a href="${msg.duong_dan_file}" target="_blank" rel="noopener">📄 Tải file</a></p>` +
                             htmlNutLoiGiai(msg.duong_dan_file)
                         );
                         // De MOI NHAT trong ca hoi thoai (khong chi trong
@@ -1572,41 +1576,33 @@ ${html}
             return m ? m[1] : null;
         }
 
-        // ===== TICK "TAI KEM CA HAI THU TIENG" (Viet + Anh) =====
-        // Hoc sinh tick thi cac link tai de / loi giai tren trang tra ve MOT tep .zip chua ca ban tieng Viet va
-        // ban tieng Anh (cung de, cung so lieu, cung dap an). Khong tick: tai ban theo ngon ngu trang dang chon.
-        // Chi la tien ich cua rieng nguoi dung nen luu trong localStorage (co the khong dung duoc -> mac dinh tat).
-        function daTickCaHai() {
-            try { return localStorage.getItem("chv_tai_ca_hai") === "1"; } catch (e) { return false; }
+        // ===== O TICK "KEM BAN TIENG ANH" LUC TAO DE =====
+        // Khong tick: de chi co ban tieng Viet (do ton cong sinh ban Anh, n8n do phai lam them buoc).
+        // Tick: de co CA ban Viet va ban Anh (cung cau, cung so lieu, cung dap an): tai ve la .zip co hai
+        // file, va trang lam bai doi qua lai Viet/Anh duoc. O nay luon hien o noi tao de, du trang dang o
+        // tieng Viet hay tieng Anh. Trang thai nho trong localStorage (tien ich rieng cua nguoi dung).
+        function kemAnh() {
+            try { return localStorage.getItem("chv_kem_anh") === "1"; } catch (e) { return false; }
         }
-        function datTickCaHai(bat) {
-            try { localStorage.setItem("chv_tai_ca_hai", bat ? "1" : "0"); } catch (e) { /* bo qua */ }
-            document.querySelectorAll(".chk-ca-hai").forEach(function (c) { c.checked = bat; });
+        function datKemAnh(bat) {
+            try { localStorage.setItem("chv_kem_anh", bat ? "1" : "0"); } catch (e) { /* bo qua */ }
+            document.querySelectorAll(".chk-kem-anh").forEach(function (c) { c.checked = bat; });
         }
-        function htmlChonCaHai(url) {
-            if (!url || url.indexOf("/api/exam/tai-de/") !== 0) return "";
-            return `<p class="chon-ca-hai"><label><input type="checkbox" class="chk-ca-hai" ` +
-                `${daTickCaHai() ? "checked" : ""} onchange="datTickCaHai(this.checked)"> ` +
-                `Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)</label></p>`;
+        function htmlTickKemAnh() {
+            return `<label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" ` +
+                `${kemAnh() ? "checked" : ""} onchange="datKemAnh(this.checked)"> ` +
+                `Kèm bản tiếng Anh (đề có cả Việt và Anh)</label>`;
         }
-        // Gan vao onclick cua link: doc trang thai tick LUC BAM roi sua href truoc khi trinh duyet dieu huong.
-        function taiTheoLuaChon(a) {
-            const goc = a.getAttribute("href") || "";
-            if (goc.indexOf("/api/exam/tai-de/") !== 0 && goc.indexOf("/api/exam/tai-loigiai/") !== 0) return true;
-            const sach = goc.replace(/[?&]ngon_ngu=[^&]*/, "");
-            if (daTickCaHai()) {
-                a.setAttribute("href", sach + (sach.indexOf("?") < 0 ? "?" : "&") + "ngon_ngu=ca-hai");
-                a.removeAttribute("download");      // tep .zip, tranh bi dat ten .pdf
-            } else {
-                a.setAttribute("href", sach);
-            }
-            return true;
+        // File tai ve la PDF hay .zip do may chu quyet dinh (Content-Disposition), nen link KHONG gan
+        // download="ten.pdf" (se doi ten .zip thanh .pdf). Chi link blob (khong qua may chu) moi can.
+        function attrTai(url, filename) {
+            return (url && url.indexOf("blob:") === 0) ? `download="${filename}"` : "";
         }
 
         function htmlNutLoiGiai(url) {
             const deId = layDeIdTuUrl(url);
             if (!deId) return "";
-            return `<p><a href="/api/exam/tai-loigiai/${deId}" download target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">📄 Lời giải của đề này</a></p>`;
+            return `<p><a href="/api/exam/tai-loigiai/${deId}" target="_blank" rel="noopener">📄 Lời giải của đề này</a></p>`;
         }
 
         // ===== GỬI TIN NHẮN LÊN /chat =====
@@ -1618,6 +1614,7 @@ ${html}
                 const formData = new FormData();
                 formData.append("message", text);
                 formData.append("conversation_id", conversationId);
+                formData.append("kem_tieng_anh", kemAnh() ? "1" : "0");
 
                 const response = await fetch("/chat", {
                     method: "POST",
@@ -1652,6 +1649,7 @@ ${html}
                         addAIMessage(
                             `<div class="xac-nhan-de" id="${idHoi}">` +
                             `<p>${marked.parseInline(data.data.tra_loi || data.message || "")}</p>` +
+                            `<p>${htmlTickKemAnh()}</p>` +
                             `<button class="btn-dong-y" onclick="xacNhanTaoDe('${idHoi}','${deXuatEncoded}')">✅ Đồng ý, tạo đề</button>` +
                             `<button class="btn-doi-y" onclick="doiYeuCauDe('${idHoi}')">✏️ Để mình nói cụ thể hơn</button>` +
                             `</div>`
@@ -1672,9 +1670,8 @@ ${html}
                         }
                         addAIMessage(
                             `<p>${data.message || "Đã tạo đề xong."}</p>` +
-                            `<p><a href="${url}" download="${filename}" target="_blank" rel="noopener" onclick="return taiTheoLuaChon(this)">` +
+                            `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">` +
                             `📄 Tải file: ${filename}</a></p>` +
-                            htmlChonCaHai(url) +
                             htmlNutLoiGiai(url) +
                             htmlHoi
                         );
@@ -1742,6 +1739,7 @@ ${html}
 
         // Focus khi mở trang
         window.onload = function () {
+            datKemAnh(kemAnh());      // dong bo o tick "Kem ban tieng Anh" voi lua chon da nho
             textarea.focus();
             taiDanhSachLichSu();
             if (_cidTuUrl) {

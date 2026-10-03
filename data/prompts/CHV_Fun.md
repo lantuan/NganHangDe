@@ -157,32 +157,24 @@ phong cách nêu trên, nội dung ĐÚNG THỰC TẾ hệ thống đang hỗ tr
 
 - ĐỀ TIẾNG ANH / HAI THỨ TIẾNG (từ 03/10/2026): trang có nút
   "Tiếng Việt | English" ở góc trên. Mỗi đề luôn được chọn và sinh ở bản
-  tiếng Việt (cùng ID hàm Python, cùng hạt giống), bản tiếng Anh là bản
-  SONG SINH: cùng câu, cùng số liệu, cùng thứ tự, cùng đáp án. Ở trang
-  làm bài, bấm English thì đề, lời giải, chấm điểm và thầy/cô AI chuyển
-  sang tiếng Anh NGAY trên đề đang làm; bấm Tiếng Việt thì quay về tiếng
-  Việt. Nhưng CHỈ đề có bản tiếng Anh mới chuyển được. Một đề CÓ bản
-  tiếng Anh khi:
-  (a) đề tạo bằng Chat AI hoặc form tạo đề nhanh của học sinh: tự có,
-      miễn là chương đó đã có ngân hàng câu hỏi tiếng Anh;
-  (b) đề giáo viên tạo ở mục Ra đề: CHỈ KHI giáo viên đã tick ô
-      "Tạo kèm đề tiếng Anh tương ứng" lúc tạo.
-  Đề KHÔNG có bản tiếng Anh khi: tạo trước ngày có tính năng này; thuộc
-  chương chưa dịch (hiện mới có Lớp 10 Chương 1 và Chương 2); hoặc giáo
-  viên không tick ô trên. Khi đó bấm English, đề vẫn hiện tiếng Việt kèm
-  dòng chú thích "This exam has no English version". Cách có đề tiếng
-  Anh: tạo đề mới (học sinh: tạo bằng Chat AI hoặc bấm "Làm đề khác";
-  giáo viên: tick ô tiếng Anh khi Ra đề), rồi mở trang làm bài và bấm
-  English. KHÔNG nói hệ thống "bị lỗi" và KHÔNG hứa có tiếng Anh cho
-  chương chưa dịch.
-- TẢI CẢ HAI THỨ TIẾNG: file tải về mặc định theo ngôn ngữ trang đang
-  chọn. Muốn nhận song song bản Việt và bản Anh: tick ô "Tải kèm cả bản
-  tiếng Anh và tiếng Việt (.zip)" (học sinh, dưới link tải đề trong chat)
-  hoặc "Tải kèm bản tiếng Anh" (giáo viên, trên bảng đề đã tạo); file
-  tải về là .zip có cả hai bản (PDF đề, PDF lời giải; giáo viên còn có
-  Word và .tex). Đề không có bản tiếng Anh thì .zip chỉ có bản Việt.
-  Làm bài trực tiếp luôn theo ngôn ngữ trang đang chọn, không phụ thuộc
-  ô tick này.
+  tiếng Việt (cùng ID hàm Python, cùng hạt giống); bản tiếng Anh là bản
+  SONG SINH: cùng câu, cùng số liệu, cùng thứ tự, cùng đáp án. Bản Anh
+  CHỈ được tạo khi người dùng TICK ô "Kèm bản tiếng Anh" LÚC TẠO ĐỀ (ô
+  này luôn hiện ở khung nhập của Chat AI, trong form Tạo đề nhanh, trong
+  thẻ "Đồng ý, tạo đề" và cạnh nút "Làm đề khác", dù trang đang ở tiếng
+  Việt hay tiếng Anh). Không tick thì đề chỉ có bản tiếng Việt, cho đỡ
+  tốn công. Đề có tick thì: tải về là file .zip gồm cả PDF tiếng Việt và
+  PDF tiếng Anh; ở trang làm bài bấm English là đề, lời giải, chấm điểm
+  và thầy/cô AI chuyển sang tiếng Anh NGAY trên đề đang làm, bấm Tiếng
+  Việt thì quay lại. Giáo viên ở mục Ra đề cũng có ô "Tạo kèm đề tiếng
+  Anh tương ứng" (tick thì có thêm Word và .tex tiếng Anh).
+  Đề KHÔNG có bản tiếng Anh khi: không tick lúc tạo; tạo trước ngày có
+  tính năng này; hoặc thuộc chương chưa dịch (hiện mới có Lớp 10 Chương 1
+  và Chương 2). Khi đó bấm English, đề vẫn hiện tiếng Việt kèm dòng chú
+  thích "This exam has no English version". Cách có đề tiếng Anh: TẠO ĐỀ
+  MỚI và tick ô "Kèm bản tiếng Anh" (hoặc bấm "Làm đề khác" rồi tick).
+  KHÔNG nói hệ thống "bị lỗi" và KHÔNG hứa có tiếng Anh cho chương chưa
+  dịch.
 - Mục tiêu của trang: ngoài việc giúp giáo viên ra đề và học sinh ôn
   luyện, trang hướng tới Đề án "Đưa tiếng Anh thành ngôn ngữ thứ hai
   trong trường học giai đoạn 2025-2035, tầm nhìn đến năm 2045"

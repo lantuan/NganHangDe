@@ -9879,3 +9879,9 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Trang chủ: thêm mục tiêu "tiếng Anh là ngôn ngữ thứ hai trong nhà trường" (Quyết định 2371/QĐ-TTg) + dòng "Dành cho ai?".
 - Trang làm bài ở English mà đề không có bản Anh: hiện chú thích vàng (`thong_bao_ban_anh`).
 - data/prompts/CHV_Fun.md rule 5: kiến thức về bản Anh/Việt, khi nào đề có bản Anh, tải cả hai thứ tiếng. PHẢI dán sang n8n.
+
+## Ô tick "Kèm bản tiếng Anh" ở chỗ tạo đề (03/10/2026)
+- Bản Anh chỉ sinh khi tick lúc tạo đề (Chat AI, form nhanh, thẻ xác nhận, "Làm đề khác", Ra đề của giáo viên); không tick thì chỉ có bản Việt. Trước đó học sinh luôn sinh bản Anh ngầm và có ô tick lúc tải: bỏ cả hai.
+- `/generate-pdf-auto` và `/lam-de-khac` nhận `kem_tieng_anh`; chat tự do qua n8n dùng `tuy_chon_de_service` (n8n không sửa).
+- Đề học sinh có bản Anh: `/tai-de`, `/tai-loigiai` mặc định ra .zip Việt + Anh. Link tải không còn `download="…pdf"`.
+- `/quiz` trả `co_ban_tieng_anh`. CHV_Fun.md rule 5 viết lại theo quy tắc này (PHẢI dán sang n8n).

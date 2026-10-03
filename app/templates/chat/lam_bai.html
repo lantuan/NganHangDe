@@ -444,6 +444,7 @@ async function taiDe() {
         }
         DANH_SACH_CAU = data.data.cau_hoi;
         THONG_BAO_BAN_ANH = data.data.thong_bao_ban_anh || '';
+        CO_BAN_ANH = !!data.data.co_ban_tieng_anh;
         veTrangLamBai();
     } catch (e) {
         main.innerHTML = '<div class="loi">Lỗi kết nối, thử tải lại trang nhé.</div>';
@@ -534,6 +535,7 @@ function veMotCau(cau) {
 
 // Trang English nhung de khong co ban Anh: chu thich mot dong o dau de (khong de nguoi dung tuong la loi).
 var THONG_BAO_BAN_ANH = '';
+var CO_BAN_ANH = false;      // de dang lam da co ban Anh song sinh: o tick "Lam de khac" mac dinh giu nguyen
 
 function veTrangLamBai() {
     const main = document.getElementById('main');
@@ -826,6 +828,11 @@ function veKetQua(ketQua) {
     // Nut lam de khac: goi thang POST /api/exam/lam-de-khac (khong qua
     // AI/n8n) de sinh 1 de moi cung cau truc voi de vua lam - hoc sinh
     // khong phai go "cho toi them de nua" roi bi CHV_Fun hieu nham.
+    // O tick "Kem ban tieng Anh": khong tick thi de moi chi co ban Viet (do ton cong sinh ban Anh).
+    // Mac dinh giu nhu de vua lam; hien o moi trang, du trang dang o tieng Viet hay tieng Anh.
+    html += '<label style="display:block;margin:12px 0 6px;font-size:.95rem;color:#475569">' +
+        '<input type="checkbox" id="chk-kem-anh-khac"' + (CO_BAN_ANH ? ' checked' : '') + '> ' +
+        'Kèm bản tiếng Anh (đề mới có cả Việt và Anh)</label>';
     html += '<button class="nut-nop" id="nut-de-khac" onclick="lamDeKhac()">' +
         '🔄 Làm đề khác cùng cấu trúc</button>';
     html += '<div id="loi-de-khac" class="ghi-chu-tl" style="display:none;margin-top:10px;"></div>';
@@ -850,7 +857,8 @@ async function lamDeKhac() {
             body: JSON.stringify({
                 de_id: DE_ID,
                 user_id: USER_ID,
-                conversation_id: CID_TU_URL || null
+                conversation_id: CID_TU_URL || null,
+                kem_tieng_anh: (document.getElementById('chk-kem-anh-khac') || {}).checked === true
             })
         });
         const data = await res.json();

@@ -11,7 +11,7 @@ import requests
 
 from app.core.deps import get_current_user
 from app.core.lop_config import DANH_SACH_LOP
-from app.services import history_service, profile_service
+from app.services import history_service, profile_service, tuy_chon_de_service
 from app.services import gia_su_service
 from app.services import supabase_service
 from app.services import classroom_service
@@ -337,6 +337,7 @@ async def chat_post(
     request: Request,
     message: str = Form(...),
     conversation_id: str = Form(...),
+    kem_tieng_anh: str | None = Form(default=None),
 ):
     user = get_current_user(request)
     if user is None:
@@ -348,6 +349,10 @@ async def chat_post(
         }
 
     vai_tro = profile_service.lay_vai_tro(user.id)
+
+    # Ô tick "Kèm bản tiếng Anh": n8n tự gọi /generate-pdf-auto nên không nhận được ô tick này; ghi lại theo
+    # hội thoại để /generate-pdf-auto tra lại (n8n không phải sửa gì). Không tick -> chỉ sinh bản Việt.
+    tuy_chon_de_service.dat_kem_tieng_anh(conversation_id, kem_tieng_anh == "1")
 
     print("========== CHAT ==========")
     print(f"[{vai_tro}] {message}")

@@ -24,7 +24,7 @@ from app.services.exam_assembler_service import (
 )
 
 from app.core.deps import yeu_cau_giao_vien
-from app.services import history_service, profile_service
+from app.services import history_service, profile_service, tuy_chon_de_service
 from app.services import diem_service
 from app.services.answer_parser_service import (
     trich_dap_an,
@@ -274,6 +274,10 @@ class GenerateExamAutoRequest(BaseModel):
     dinh_dang: str = "pdf"
     user_id: str | None = None
     conversation_id: str | None = None
+    # Người dùng tick "Kèm bản tiếng Anh" lúc tạo đề: sinh THÊM bản Anh song sinh (cùng câu, cùng số liệu, cùng
+    # đáp án). Không tick -> chỉ có bản Việt (đỡ tốn công). None = lời gọi không nói (n8n): tra lựa chọn đã ghi
+    # theo conversation_id (xem tuy_chon_de_service).
+    kem_tieng_anh: bool | None = None
 
 
 @router.post("/generate-pdf-auto")
@@ -324,7 +328,9 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             cau_truc_tu_hoc_sinh=payload.cau_truc_tu_hoc_sinh,
             socau_ma_de=payload.socau_ma_de,
             cho_phep_thieu=payload.cho_phep_thieu,
-            dapan_tieng_anh=True,     # trang làm bài bằng tiếng Anh lấy đề từ ngân hàng Anh (cùng ID, cùng seed)
+            # Chỉ sinh bản Anh song sinh (cùng ID, cùng seed) khi người dùng tick "Kèm bản tiếng Anh".
+            dapan_tieng_anh=(payload.kem_tieng_anh if payload.kem_tieng_anh is not None
+                             else tuy_chon_de_service.lay_kem_tieng_anh(payload.conversation_id)),
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -408,6 +414,8 @@ class LamDeKhacRequest(BaseModel):
     de_id: str
     user_id: str | None = None
     conversation_id: str | None = None
+    # None = giữ như đề gốc (đề gốc có bản Anh thì đề mới cũng có); True/False = theo ô tick của người dùng.
+    kem_tieng_anh: bool | None = None
 
 
 @router.post("/lam-de-khac")
@@ -441,7 +449,8 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
             # dinh True cho giong luong chat (form tao de nhanh), khong
             # khat khe hon de goc.
             cho_phep_thieu=bool(blueprint.get("cho_phep_thieu", True)),
-            dapan_tieng_anh=True,
+            dapan_tieng_anh=(payload.kem_tieng_anh if payload.kem_tieng_anh is not None
+                             else _de_co_ban_tieng_anh(de_cu)),
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -540,10 +549,20 @@ def _pdf_vi_de(de: dict) -> Path:
     return Path(duong_dan)
 
 
-def _chon_ban_ngon_ngu(request: Request, ngon_ngu: str | None) -> str:
+def _de_co_ban_tieng_anh(de: dict) -> bool:
+    """Đề có bản Anh song sinh (.tex tiếng Anh nằm cạnh .tex tiếng Việt, cùng tên)?"""
+    tex = (de.get("files") or {}).get("tex")
+    return bool(tex) and duong_tex_en(tex).exists()
+
+
+def _chon_ban_ngon_ngu(request: Request, ngon_ngu: str | None, de: dict | None = None) -> str:
     """ngon_ngu = "vi" | "en" | "ca-hai" (hai ban cung luc, nen thanh .zip). Khong truyen -> theo ngon ngu cua trang."""
     if ngon_ngu in ("vi", "en", "ca-hai"):
         return ngon_ngu
+    # Đề của HỌC SINH đã tick "Kèm bản tiếng Anh" lúc tạo: tải về là .zip có cả Việt và Anh, dù trang đang ở
+    # ngôn ngữ nào. Không tick thì đề chỉ có bản Việt nên tải ra PDF tiếng Việt như thường.
+    if de is not None and de.get("role") == "student" and _de_co_ban_tieng_anh(de):
+        return "ca-hai"
     return lay_ngon_ngu(request)
 
 
@@ -572,7 +591,7 @@ def tai_de_endpoint(request: Request, de_id: str, ngon_ngu: str | None = None):
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    chon = _chon_ban_ngon_ngu(request, ngon_ngu)
+    chon = _chon_ban_ngon_ngu(request, ngon_ngu, de)
     if chon == "ca-hai":
         return _zip_song_ngu(de_id, _pdf_vi_de(de), _pdf_en_tu_tex(de, "de"), "de")
     if chon == "en":
@@ -856,7 +875,7 @@ def export_loigiai_endpoint(request: Request, payload: ExportLoiGiaiRequest):
     de = history_service.lay_de_gan_nhat(payload.conversation_id)
     if de is None:
         raise HTTPException(404, "Chua co de nao duoc tao trong cuoc hoi thoai nay.")
-    return _xuat_loigiai(de, lay_ngon_ngu(request))
+    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, None, de))
 
 
 @router.get("/tai-loigiai/{de_id}")
@@ -870,7 +889,7 @@ def tai_loigiai_endpoint(request: Request, de_id: str, ngon_ngu: str | None = No
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, ngon_ngu))
+    return _xuat_loigiai(de, _chon_ban_ngon_ngu(request, ngon_ngu, de))
 
 
 # ======================================================
@@ -1259,12 +1278,13 @@ def xem_de_lam_bai_endpoint(request: Request, de_id: str):
             "de_id": de["id"],
             # Trang đang ở English mà đề không có bản Anh: báo rõ để học sinh/giáo viên không tưởng là lỗi.
             "thong_bao_ban_anh": (
-                "This exam has no English version, so it is shown in Vietnamese. Exams made before the "
-                "English version existed, exams from chapters not translated yet, and exams a teacher "
-                "created without ticking \"Also create the matching English exam\" have no English version. "
-                "Create a new exam from the Chat AI to get one."
+                "This exam has no English version, so it is shown in Vietnamese. An exam only has an English "
+                "version if \"Include the English version\" was ticked when it was created (and its chapter "
+                "is already translated). Create a new exam with that box ticked to get one."
                 if ngon_ngu == "en" and not dung_ban_anh else ""
             ),
+            # Đề này đã có bản Anh song sinh chưa (để nút "Làm đề khác" mặc định giữ nguyên lựa chọn đó).
+            "co_ban_tieng_anh": duong_dapan_en(files.get("dapan_json")).exists(),
             "tong_so_cau": len(danh_sach_cau_hoi),
             "cau_hoi": danh_sach_cau_hoi,
         },

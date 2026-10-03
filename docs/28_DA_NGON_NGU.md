@@ -41,17 +41,16 @@ parallel (collinear) / same direction / opposite direction.
 - Ô "Tạo kèm đề tiếng Anh tương ứng" (PDF cho giáo viên) giữ nguyên, giáo viên tự chọn.
 - Lưu ý: bản Anh dùng dấu thập phân "." nên đáp án SA của đề Anh là "3.5" (đề Việt "3,5").
 
-## Tải kèm cả hai thứ tiếng cho học sinh (03/10/2026)
-- Mặc định học sinh tải PDF đề / lời giải theo ngôn ngữ trang đang chọn (cookie `lang`). Làm bài trực tuyến luôn theo ngôn ngữ trang.
-- Trong chat, dưới link tải đề có ô tick "Tải kèm cả bản tiếng Anh và tiếng Việt (.zip)" (lưu trong localStorage, mặc định tắt). Tick thì các link tải đề và lời giải gắn `?ngon_ngu=ca-hai`.
-- `GET /api/exam/tai-de/{id}` và `/tai-loigiai/{id}` nhận `ngon_ngu=vi|en|ca-hai`: `vi`/`en` ép một thứ tiếng bất kể trang; `ca-hai` trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (cùng đề, cùng số liệu, cùng đáp án). Đề cũ hoặc chương chưa dịch chỉ có bản Việt thì zip chỉ chứa bản Việt.
-- Test: test_tai_de_hoc_sinh_tick_ca_hai_thu_tieng_ra_zip.
+## Ô tick "Kèm bản tiếng Anh" lúc tạo đề (03/10/2026, thay cho cơ chế tick lúc tải)
+- Nguyên tắc (cô Lan chốt): bản Anh chỉ sinh khi người dùng tick; không tick thì đề chỉ có bản Việt (đỡ tốn công sinh, n8n đỡ thêm bước). Ô tick luôn hiện ở nơi tạo đề, dù trang đang ở tiếng Việt hay tiếng Anh: hàng trên nút "Tạo đề mới" ở Chat AI, trong form "Tạo đề nhanh", trong thẻ "Đồng ý, tạo đề", và cạnh nút "Làm đề khác" ở trang làm bài (mặc định giữ như đề vừa làm). Giáo viên ở mục Ra đề có ô riêng (đã có từ trước).
+- Chat AI: một trạng thái chung `kemAnh()` (localStorage `chv_kem_anh`), các ô `.chk-kem-anh` đồng bộ nhau. Form nhanh và thẻ xác nhận gửi `kem_tieng_anh` thẳng vào `/api/exam/generate-pdf-auto`.
+- Chat tự do đi qua n8n: n8n tự gọi `/generate-pdf-auto` nên không nhận được ô tick. `/chat` nhận field `kem_tieng_anh` và ghi vào `app/services/tuy_chon_de_service.py` (tệp `data/temp/kem_tieng_anh_hoi_thoai.json`, theo conversation_id, hết hạn 6 giờ); `/generate-pdf-auto` đọc lại khi lời gọi không nói rõ (`kem_tieng_anh=None`). n8n không phải sửa gì.
+- Tải về: đề của HỌC SINH có bản Anh thì `/tai-de`, `/tai-loigiai` mặc định trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (dù trang ở ngôn ngữ nào); không có bản Anh thì PDF Việt thường. Link tải không gắn `download="…pdf"` (để tên `.zip` đúng); chỉ link blob mới gắn. `?ngon_ngu=vi|en|ca-hai` ép một thứ tiếng.
+- Làm bài trực tiếp luôn theo ngôn ngữ trang; đề không có bản Anh thì hiện tiếng Việt kèm chú thích vàng (`thong_bao_ban_anh`), `/quiz` trả thêm `co_ban_tieng_anh`.
+- Test: test_tick_kem_tieng_anh_luc_tao_de_quyet_dinh_co_ban_anh_hay_khong, test_tai_de_hoc_sinh_da_tick_anh_ra_zip_mac_dinh.
 
 ## Khi nào một đề có bản tiếng Anh (quan trọng với CHV_Fun)
-Bản Anh của đề (tệp đáp án + .tex tiếng Anh cạnh tệp Việt, `data/temp_en/`, cùng tên) chỉ có khi:
-- đề tạo bằng Chat AI / form tạo đề nhanh / "Làm đề khác" của học sinh (`dapan_tieng_anh=True`): LUÔN có, miễn chương đã dịch;
-- đề giáo viên tạo ở mục Ra đề (`/gv/ra-de`): CHỈ KHI tick "Tạo kèm đề tiếng Anh tương ứng" (`kem_tieng_anh`).
-Đề không có bản Anh: đề cũ trước 03/10/2026, chương chưa dịch (hiện mới Lớp 10 Chương 1, 2), hoặc giáo viên không tick. Trang làm bài ở English khi đó vẫn hiện tiếng Việt, kèm dòng chú thích vàng ở đầu đề (`thong_bao_ban_anh` trong /quiz). Muốn có bản Anh phải TẠO ĐỀ MỚI. Quy tắc này đã chép vào `data/prompts/CHV_Fun.md` (rule 5, task `help`): dán sang node CHV_Fun trên n8n thì CHV_Fun mới trả lời đúng khi người dùng hỏi.
+Bản Anh của đề (tệp đáp án + .tex tiếng Anh cạnh tệp Việt, `data/temp_en/`, cùng tên) CHỈ có khi người dùng tick "Kèm bản tiếng Anh" lúc tạo đề (học sinh: Chat AI, form nhanh, thẻ xác nhận, "Làm đề khác"; giáo viên: Ra đề, ô "Tạo kèm đề tiếng Anh tương ứng") VÀ chương đó đã có ngân hàng tiếng Anh (hiện Lớp 10 Chương 1, 2). Đề cũ trước 03/10/2026 không có. Trang làm bài ở English mà đề không có bản Anh vẫn hiện tiếng Việt kèm chú thích vàng. Muốn có bản Anh phải TẠO ĐỀ MỚI có tick. Quy tắc này đã chép vào `data/prompts/CHV_Fun.md` (rule 5, task `help`): dán sang node CHV_Fun trên n8n thì CHV_Fun mới trả lời đúng khi người dùng hỏi.
 
 ## Tải kèm cả hai thứ tiếng cho giáo viên (03/10/2026)
 - Ô tick "Tải kèm bản tiếng Anh" trên Trang chính và "Đề đã tạo" (`_base_gv.html` có script chung; liên kết có `data-ca-hai` chỉ khi đề có bản Anh). Tick thì PDF đề, PDF lời giải, Word đề/lời giải và `.tex` thêm `ngon_ngu=ca-hai` và trả `.zip` có `*_TiengViet` và `*_English`.

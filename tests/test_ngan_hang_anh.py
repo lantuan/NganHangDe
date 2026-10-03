@@ -364,3 +364,74 @@ def test_giao_vien_tick_ca_hai_thu_tieng_word_va_tex_ra_zip(monkeypatch):
             assert r.status_code == 200 and r.headers["content-type"] == "application/zip"
             ten = sorted(zipfile.ZipFile(io.BytesIO(r.content)).namelist())
             assert [n.rsplit("_", 1)[1] for n in ten] == ["English.docx", "TiengViet.docx"]
+
+
+def test_tick_kem_tieng_anh_luc_tao_de_quyet_dinh_co_ban_anh_hay_khong(monkeypatch, tmp_path):
+    """Ô tick "Kèm bản tiếng Anh" lúc tạo đề: không tick -> chỉ bản Việt (không sinh bản Anh); tick -> có cả hai.
+    Lời gọi không nói rõ (n8n) thì tra lựa chọn đã ghi theo conversation_id."""
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    from app.services import tuy_chon_de_service as T
+    from app.main import app
+    monkeypatch.setattr(T, "TEP", tmp_path / "kem.json")
+    goi = []
+
+    def gia(**kw):
+        goi.append(kw["dapan_tieng_anh"])
+        raise R.AssembleError("dừng sớm")
+    monkeypatch.setattr(R, "generate_exam_pdf_auto", gia)
+    client = TestClient(app)
+    base = {"lop": 10, "tieu_de": "ĐỀ", "role": "student", "loai_he_so": "HeSo1", "pham_vi_chuong": "chuong_1"}
+    client.post("/api/exam/generate-pdf-auto", json=base)                                      # n8n, chưa ghi nhận gì
+    client.post("/api/exam/generate-pdf-auto", json={**base, "kem_tieng_anh": True})           # người dùng tick
+    client.post("/api/exam/generate-pdf-auto", json={**base, "kem_tieng_anh": False})
+    T.dat_kem_tieng_anh("cuoc-1", True)
+    client.post("/api/exam/generate-pdf-auto", json={**base, "conversation_id": "cuoc-1"})     # n8n sau khi /chat ghi tick
+    T.dat_kem_tieng_anh("cuoc-1", False)
+    client.post("/api/exam/generate-pdf-auto", json={**base, "conversation_id": "cuoc-1"})
+    assert goi == [False, True, False, True, False]
+    assert T.lay_kem_tieng_anh("khong-co") is False and T.lay_kem_tieng_anh(None) is False
+
+
+def test_tai_de_hoc_sinh_da_tick_anh_ra_zip_mac_dinh(monkeypatch):
+    """Đề của học sinh có bản Anh song sinh: /tai-de và /tai-loigiai mặc định ra .zip Việt+Anh dù trang ở ngôn ngữ nào;
+    đề không có bản Anh ra PDF Việt thường; đề giáo viên vẫn theo ngôn ngữ trang."""
+    import io
+    import zipfile
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+
+    def gia(tex, lang="vi"):
+        from app.services.pdf_service import EXPORTS_DIR
+        out = (R.EXPORTS_DIR_EN if lang == "en" else EXPORTS_DIR)
+        out.mkdir(parents=True, exist_ok=True)
+        pdf = out / (Path(tex).stem + ".pdf")
+        pdf.write_bytes(b"%PDF-1.4 " + Path(tex).read_bytes()[:2000])
+        return pdf
+    monkeypatch.setattr(A, "compile_pdf", gia)
+    monkeypatch.setattr(R, "compile_pdf", gia)
+    co_anh = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="1", dapan_tieng_anh=True)
+    chi_viet = A.generate_exam_pdf_auto(10, "ĐỀ", "student", "HeSo1", pham_vi_chuong="1", dapan_tieng_anh=False)
+    assert not A.duong_tex_en(chi_viet["tex_path"]).exists()          # không tick: không sinh gì của bản Anh
+    de = {"id": "de-hs", "role": "student",
+          "files": {"dapan_json": co_anh["dap_an_json_path"], "tex": co_anh["tex_path"], "de": co_anh["pdf_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    monkeypatch.setattr(history_service, "luu_file_de", lambda *a, **k: None)
+    client = TestClient(app)
+    for lang in ("vi", "en"):
+        for duong in ("tai-de", "tai-loigiai"):
+            r = client.get("/api/exam/%s/de-hs" % duong, cookies={"lang": lang})
+            assert r.headers["content-type"] == "application/zip", (lang, duong)
+            assert len(zipfile.ZipFile(io.BytesIO(r.content)).namelist()) == 2
+    de["files"] = {"dapan_json": chi_viet["dap_an_json_path"], "tex": chi_viet["tex_path"], "de": chi_viet["pdf_path"]}
+    r = client.get("/api/exam/tai-de/de-hs", cookies={"lang": "en"})
+    assert r.headers["content-type"] == "application/pdf"             # không tick: chỉ có bản Việt
+    q = client.get("/api/exam/quiz/de-hs", cookies={"lang": "en"}).json()["data"]
+    assert q["co_ban_tieng_anh"] is False and "no English version" in q["thong_bao_ban_anh"]
+    de["files"] = {"dapan_json": co_anh["dap_an_json_path"], "tex": co_anh["tex_path"], "de": co_anh["pdf_path"]}
+    assert client.get("/api/exam/quiz/de-hs", cookies={"lang": "en"}).json()["data"]["co_ban_tieng_anh"] is True
+    de["role"] = "teacher"                                              # giáo viên: vẫn theo ngôn ngữ trang
+    assert client.get("/api/exam/tai-de/de-hs", cookies={"lang": "vi"}).headers["content-type"] == "application/pdf"
