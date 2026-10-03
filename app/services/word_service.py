@@ -50,6 +50,31 @@ class WordExportError(Exception):
     pass
 
 
+# Nhãn của khung đề theo ngôn ngữ (đề tiếng Anh: khung ex_test_en / latex_template_en, xem docs/28)
+_CHU = {
+    "vi": {
+        "phan": "PHẦN", "nam_hoc_re": r"NĂM HỌC ([0-9]{4}-[0-9]{4})", "ma_re": r"Mã đề (\d+)",
+        "ma_de": "Mã đề", "truong": "TRƯỜNG THPT CHUYÊN HÙNG VƯƠNG",
+        "nam_hoc_dong": "NĂM HỌC %s -- MÔN TOÁN, LỚP %s",
+        "thi_sinh": "Họ tên thí sinh: ........................................ Lớp: .......... Phòng kiểm tra: ..........",
+        "cau": "Câu", "bai": "Bài", "dung": "Đúng", "sai": "Sai", "chon_dap_an": "Chọn đáp án",
+        "dap_so": "Đáp số:", "loi_giai": "Lời giải.", "het": "--- HẾT ---",
+        "chua_chuyen": "[Câu này chưa chuyển được sang Word - xem bản PDF.]",
+        "loi_re": r"\\textbf\{(Câu|Bài) (\d+)",
+    },
+    "en": {
+        "phan": "PART", "nam_hoc_re": r"SCHOOL YEAR ([0-9]{4}-[0-9]{4})", "ma_re": r"Exam code (\d+)",
+        "ma_de": "Exam code", "truong": "HUNG VUONG SPECIALIZED HIGH SCHOOL",
+        "nam_hoc_dong": "SCHOOL YEAR %s -- MATHEMATICS, GRADE %s",
+        "thi_sinh": "Name: ........................................ Class: .......... Room: ..........",
+        "cau": "Question", "bai": "Problem", "dung": "True", "sai": "False", "chon_dap_an": "Correct answer:",
+        "dap_so": "Answer:", "loi_giai": "Solution.", "het": "--- END ---",
+        "chua_chuyen": "[This question could not be converted to Word - see the PDF version.]",
+        "loi_re": r"\\textbf\{(Question|Problem) (\d+)",
+    },
+}
+
+
 # ----------------------------------------------------------------------
 # 1. Doi lenh rieng sang LaTeX chuan
 # ----------------------------------------------------------------------
@@ -248,13 +273,15 @@ def _khoang_trang_ngoai_toan(t: str) -> str:
 # 2. Doc tep .tex -> cau truc
 # ----------------------------------------------------------------------
 
-_PHAN = re.compile(r"\\noindent\\textbf\{PHẦN ([IVX]+)\.\}\s*(.*?)\n")
+def _mau_phan(lang: str):
+    return re.compile(r"\\noindent\\textbf\{%s ([IVX]+)\.\}\s*(.*?)\n" % _CHU[lang]["phan"])
 _CAU = re.compile(r"\\begin\{ex\}.*?\\end\{ex\}", re.S)
 
 
-def _doc_nhom(tex: str) -> tuple[str, list[dict]]:
+def _doc_nhom(tex: str, lang: str = "vi") -> tuple[str, list[dict]]:
     """Tra ve (nam_hoc, [ma_de...]); moi ma de: tieu_de, lop, ma, cac_muc."""
-    m = re.search(r"NĂM HỌC ([0-9]{4}-[0-9]{4})", tex)
+    _PHAN = _mau_phan(lang)
+    m = re.search(_CHU[lang]["nam_hoc_re"], tex)
     nam_hoc = m.group(1) if m else ""
     than = tex[tex.index(r"\begin{document}") + len(r"\begin{document}"):]
     than = than[: than.rindex(r"\end{document}")] if r"\end{document}" in than else than
@@ -267,7 +294,7 @@ def _doc_nhom(tex: str) -> tuple[str, list[dict]]:
         _, j = _tim_khoi_dong(khuc, j)
         tieu_de, j = _tim_khoi_dong(khuc, j)
         lop, _ = _tim_khoi_dong(khuc, j)
-        mm = re.search(r"Mã đề (\d+)", khuc)
+        mm = re.search(_CHU[lang]["ma_re"], khuc)
         muc = []
         for mt in re.finditer(r"%s|%s" % (_PHAN.pattern, _CAU.pattern), khuc, flags=re.S):
             if mt.group(0).startswith(r"\begin{ex}"):
@@ -282,29 +309,29 @@ def _doc_nhom(tex: str) -> tuple[str, list[dict]]:
 # 3. Dung LaTeX chuan cho pandoc
 # ----------------------------------------------------------------------
 
-def _tieu_de_ma(ma: dict, nam_hoc: str) -> str:
+def _tieu_de_ma(ma: dict, nam_hoc: str, lang: str = "vi") -> str:
     g = DAU_GIUA
-    ma_de = ("\\quad\\textbf{Mã đề %s}" % ma["ma"]) if ma["ma"] else ""
+    c = _CHU[lang]
+    ma_de = ("\\quad\\textbf{%s %s}" % (c["ma_de"], ma["ma"])) if ma["ma"] else ""
     return (
-        "%s\\textbf{TRƯỜNG THPT CHUYÊN HÙNG VƯƠNG}\n\n"
         "%s\\textbf{%s}\n\n"
-        "%s\\textbf{NĂM HỌC %s -- MÔN TOÁN, LỚP %s}\n\n"
-        "Họ tên thí sinh: ........................................ Lớp: .......... "
-        "Phòng kiểm tra: ..........%s\n\n"
-        % (g, g, ma["tieu_de"], g, nam_hoc, ma["lop"], ma_de)
+        "%s\\textbf{%s}\n\n"
+        "%s\\textbf{%s}\n\n"
+        "%s%s\n\n"
+        % (g, c["truong"], g, ma["tieu_de"], g, c["nam_hoc_dong"] % (nam_hoc, ma["lop"]), c["thi_sinh"], ma_de)
     )
 
 
-def _cau_sang_latex(khoi: str, so: int, co_loi_giai: bool, anh: list) -> str:
+def _cau_sang_latex(khoi: str, so: int, co_loi_giai: bool, anh: list, lang: str = "vi") -> str:
     try:
-        return _cau_sang_latex_chinh(khoi, so, co_loi_giai, anh)
+        return _cau_sang_latex_chinh(khoi, so, co_loi_giai, anh, lang)
     except Exception:
         # "bao thieu, khong lam vo de": cau nao doi loi thi van co mat trong file
-        return ("\\textbf{Câu %d.} \\textit{[Câu này chưa chuyển được sang Word - "
-                "xem bản PDF.]}" % so)
+        return "\\textbf{%s %d.} \\textit{%s}" % (_CHU[lang]["cau"], so, _CHU[lang]["chua_chuyen"])
 
 
-def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list) -> str:
+def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list, lang: str = "vi") -> str:
+    ch = _CHU[lang]
     try:
         c = trich_dap_an(khoi)
     except Exception:
@@ -318,7 +345,7 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list) -> s
         for h in c["hinh_tikz"]:
             if h not in cho_khac:          # hinh nam trong phuong an thi de phuong an tu ve
                 de += "\n\n" + _lam_sach(h, None, anh)
-    ten = "Bài" if loai == "TL" else "Câu"
+    ten = ch["bai"] if loai == "TL" else ch["cau"]
     ra = ["\\textbf{%s %d.} %s" % (ten, so, de)]
     if loai == "MC":
         hinh_pa = c.get("hinh_phuong_an_tikz") or {}
@@ -338,35 +365,36 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list) -> s
                 noi_y += "\n\n" + _lam_sach(hinh_y[k], None, anh)
             dong = "\\textbf{%s)} %s" % (k, noi_y)
             if co_loi_giai:
-                dong += " \\quad \\textbf{(%s)}" % ("Đúng" if c["dap_an_dung"][k] else "Sai")
+                dong += " \\quad \\textbf{(%s)}" % (ch["dung"] if c["dap_an_dung"][k] else ch["sai"])
             ra.append(dong)
     if co_loi_giai:
         if loai == "MC":
-            ra.append("\\textbf{Chọn đáp án %s.}" % c["dap_an_dung"])
+            ra.append("\\textbf{%s %s.}" % (ch["chon_dap_an"], c["dap_an_dung"]))
         elif loai == "SA":
-            ra.append("\\textbf{Đáp số:} %s" % _lam_sach(c["dap_an_dung"] or "", None, anh))
+            ra.append("\\textbf{%s} %s" % (ch["dap_so"], _lam_sach(c["dap_an_dung"] or "", None, anh)))
         if c.get("loi_giai"):
-            ra.append("\\textit{Lời giải.}\n\n" + _lam_sach(c["loi_giai"], None, anh))
+            ra.append("\\textit{%s}\n\n" % ch["loi_giai"] + _lam_sach(c["loi_giai"], None, anh))
     return "\n\n".join(ra)
 
 
-def dung_latex_chuan(tex: str, co_loi_giai: bool, anh: list) -> str:
-    nam_hoc, cac_ma = _doc_nhom(tex)
+def dung_latex_chuan(tex: str, co_loi_giai: bool, anh: list, lang: str = "vi") -> str:
+    nam_hoc, cac_ma = _doc_nhom(tex, lang)
+    ch = _CHU[lang]
     if not cac_ma:
         raise WordExportError("Khong doc duoc ma de nao trong tep .tex.")
     phan_than = []
     for i, ma in enumerate(cac_ma):
-        khoi = [_tieu_de_ma(ma, nam_hoc)]
+        khoi = [_tieu_de_ma(ma, nam_hoc, lang)]
         so = 0
         for muc in ma["muc"]:
             if "phan" in muc:
                 so = 0
-                khoi.append("\\textbf{PHẦN %s.} %s" % (muc["phan"], muc["loi_dan"]))
+                khoi.append("\\textbf{%s %s.} %s" % (ch["phan"], muc["phan"], muc["loi_dan"]))
             else:
                 so += 1
-                khoi.append(_MOC_CAU + "\n" + _cau_sang_latex(muc["cau"], so, co_loi_giai, anh)
+                khoi.append(_MOC_CAU + "\n" + _cau_sang_latex(muc["cau"], so, co_loi_giai, anh, lang)
                             + "\n" + _MOC_CAU)
-        khoi.append(DAU_GIUA + "--- HẾT ---")
+        khoi.append(DAU_GIUA + ch["het"])
         if i < len(cac_ma) - 1:
             khoi.append(DAU_NGAT_TRANG)
         phan_than.append("\n\n".join(khoi))
@@ -416,7 +444,7 @@ def _pandoc_doc_duoc(doan: str, tm: str) -> bool:
     return chay.returncode == 0
 
 
-def xuat_word(tex_path: Path, co_loi_giai: bool, ten_ra: str) -> Path:
+def xuat_word(tex_path: Path, co_loi_giai: bool, ten_ra: str, lang: str = "vi") -> Path:
     """Doi tep .tex da luu cua de thanh .docx. Tra ve duong dan file Word."""
     if not shutil.which("pandoc"):
         raise WordExportError(
@@ -424,7 +452,7 @@ def xuat_word(tex_path: Path, co_loi_giai: bool, ten_ra: str) -> Path:
             "sudo apt install pandoc")
     tex = Path(tex_path).read_text(encoding="utf-8")
     anh: list = []
-    chuan = dung_latex_chuan(tex, co_loi_giai, anh)
+    chuan = dung_latex_chuan(tex, co_loi_giai, anh, lang)
     EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
     ra = EXPORTS_DIR / ("%s.docx" % ten_ra)
     with tempfile.TemporaryDirectory() as tm:
@@ -441,9 +469,9 @@ def xuat_word(tex_path: Path, co_loi_giai: bool, ten_ra: str) -> Path:
             manh = chuan.split(_MOC_CAU)
             for k in range(1, len(manh), 2):          # manh le = mot cau hoi
                 if not _pandoc_doc_duoc(manh[k], tm):
-                    so = re.search(r"\\textbf\{(Câu|Bài) (\d+)", manh[k])
-                    manh[k] = ("\n\\textbf{%s %s.} \\textit{[Câu này chưa chuyển được sang Word - "
-                               "xem bản PDF.]}\n" % (so.group(1), so.group(2)) if so else "\n")
+                    so = re.search(_CHU[lang]["loi_re"], manh[k])
+                    manh[k] = ("\n\\textbf{%s %s.} \\textit{%s}\n" % (so.group(1), so.group(2), _CHU[lang]["chua_chuyen"])
+                               if so else "\n")
             chay = chay_pandoc("".join(manh))
         if chay.returncode != 0 or not ra.exists():
             raise WordExportError("pandoc loi: %s" % (chay.stderr[-1500:] or "khong ro"))

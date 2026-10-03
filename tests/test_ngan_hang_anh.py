@@ -248,3 +248,37 @@ def test_tai_de_pdf_hoc_sinh_ra_ban_tieng_anh_khi_trang_english(monkeypatch):
         assert client.get("/api/exam/tai-de/de-thu", cookies={"lang": "en"}).status_code == 200
     finally:
         Path(de["files"]["tex"]).unlink()
+
+
+def test_word_tieng_anh_khi_trang_english(monkeypatch):
+    """Tải Word: trang English thì file Word là TIẾNG ANH (nhãn khung + đề + lời giải); trang Việt giữ bản Việt."""
+    import shutil
+    import zipfile
+    if not shutil.which("pandoc"):
+        pytest.skip("không có pandoc")
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.main import app
+    monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ KIỂM TRA", "teacher", "HeSo1", pham_vi_chuong="1",
+                                  kem_tieng_anh=True, tieu_de_en="QUIZ")
+    de = {"id": "de-thu-word", "files": {"tex": kq["tex_path"]}}
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    monkeypatch.setattr(R, "yeu_cau_giao_vien", lambda request, user=None: None)
+    client = TestClient(app)
+    co_dau = re.compile("[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]", re.I)
+
+    def chu(r):
+        import io
+        assert r.status_code == 200, r.text[:200]
+        x = zipfile.ZipFile(io.BytesIO(r.content)).read("word/document.xml").decode("utf-8")
+        return re.sub(r"<[^>]+>", " ", x)
+    vi = chu(client.get("/api/exam/tai-word/de-thu-word?ban=loigiai", cookies={"lang": "vi"}))
+    for ban in ("de", "loigiai"):
+        en = chu(client.get("/api/exam/tai-word/de-thu-word?ban=%s" % ban, cookies={"lang": "en"}))
+        assert "Question" in en and "PART" in en and "Exam code" in en
+        assert not co_dau.search(en), co_dau.search(en).group(0) + " | " + en[max(0, co_dau.search(en).start() - 60):co_dau.search(en).start() + 60]
+    assert "Solution." in en and "True" in en or "False" in en
+    assert "Câu" in vi and "PHẦN" in vi and "Question" not in vi

@@ -9860,3 +9860,9 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 ## PDF đề / lời giải tải về bằng tiếng Anh khi trang ở English
 - Trước đó nút tải PDF luôn trả bản tiếng Việt vì đề trực tuyến chỉ có bản Anh của đáp án. Nay `.tex` tiếng Anh cũng được ghi cạnh `.tex` tiếng Việt (cùng tên, data/temp_en/), và các đường dẫn /api/exam/tai-de, /tai-loigiai, /export-loigiai chọn bản Anh theo cookie `lang`, biên dịch PDF khi bấm tải lần đầu (không làm chậm lúc tạo đề). Đề cũ / chương chưa dịch: vẫn trả PDF tiếng Việt.
 - Test: test_tai_de_pdf_hoc_sinh_ra_ban_tieng_anh_khi_trang_english.
+
+# Version 4.11 - 2026-10-03
+
+## Tải Word bằng tiếng Anh khi trang ở English
+- word_service.xuat_word có tham số `lang`; bảng nhãn `_CHU` cho khung Việt và khung Anh (tên trường, năm học, mã đề, PART/PHẦN, Question/Câu, Problem/Bài, True/False, Correct answer, Answer, Solution). /api/exam/tai-word chọn bản Anh theo cookie `lang` khi đề có .tex tiếng Anh; không có thì xuất bản Việt như cũ.
+- Test: test_word_tieng_anh_khi_trang_english.

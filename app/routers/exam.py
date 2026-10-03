@@ -666,16 +666,24 @@ def tai_word_endpoint(de_id: str, request: Request, ban: str = "de"):
             "Tao lai de roi tai Word ngay trong phien do.",
         )
 
+    # Trang đang ở English và đề có .tex tiếng Anh (data/temp_en/, cùng tên): xuất Word TIẾNG ANH.
+    lang = "vi"
+    if lay_ngon_ngu(request) == "en" and duong_tex_en(duong_dan).exists():
+        lang, duong_dan = "en", str(duong_tex_en(duong_dan))
+    hau_to = "_en" if lang == "en" else ""
+    ten_goc = "%s%s_%s" % ("solutions" if lang == "en" and ban == "loigiai" else
+                           "exam" if lang == "en" else "loigiai" if ban == "loigiai" else "de",
+                           "", de_id[:8])
+
     from app.services.word_service import xuat_word, WordExportError
     try:
-        ra = xuat_word(Path(duong_dan), ban == "loigiai",
-                       "%s_%s" % ("loigiai" if ban == "loigiai" else "de", de_id[:8]))
+        ra = xuat_word(Path(duong_dan), ban == "loigiai", ten_goc + hau_to, lang)
     except WordExportError as e:
         raise HTTPException(500, detail=f"Loi xuat Word: {e}")
 
     return FileResponse(
         path=str(ra),
-        filename="%s_%s.docx" % ("loigiai" if ban == "loigiai" else "de", de_id[:8]),
+        filename="%s.docx" % ten_goc,
         media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     )
 
