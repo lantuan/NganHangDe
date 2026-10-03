@@ -82,6 +82,7 @@ User → Frontend → FastAPI → n8n → Python → LaTeX → PDF/Web Test
 # Python
 
 data/python_bank/ — mỗi chương một file, nhiều hàm mỗi file.
+data/python_bank_en/ — bản tiếng Anh của từng chương (sinh từ bản Việt bằng scripts/dich_ngan_hang.py, KHÔNG sửa tay; docs/28).
 
 ---
 

@@ -49,3 +49,10 @@ Tổng cộng 15 ảnh. Một số ảnh được dùng lại ở hai chỗ nên
 
 - **Che hết tên thật và email học sinh** trong mọi ảnh.
 - Ảnh 17 nếu dài quá một màn hình thì chụp hai lần rồi ghép, **đừng cắt mất khung xanh** — đó là phần có giá trị nhất.
+
+## Bổ sung 03/10/2026 — ảnh cho Giải pháp 9 (song ngữ Việt–Anh)
+
+| Tệp | Chụp ở đâu | Lưu ý |
+|---|---|---|
+| `24-song-ngu-viet-anh.png` | Trang làm bài `/lam-bai/...` của **cùng một đề**, lần 1 bấm *Tiếng Việt*, lần 2 bấm *English* | Phải tạo đề **mới** sau khi đã deploy bản mới (đề cũ không có bản tiếng Anh). Ghép hai ảnh cạnh nhau, cùng câu số 1; thấy nút ngôn ngữ ở góc phải trên. Che tên thật học sinh |
+| `25-de-pdf-viet-anh.png` | Biểu mẫu `/gv/ra-de` tick *Tạo kèm đề tiếng Anh tương ứng*, rồi mở hai PDF ở `/gv/de-da-tao` | Hai PDF cạnh nhau, khoanh vài số liệu giống nhau. Che email giáo viên ở thanh trên |

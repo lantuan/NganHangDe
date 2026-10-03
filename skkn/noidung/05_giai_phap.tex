@@ -7,6 +7,9 @@ Sáng kiến được thực hiện qua sáu giải pháp nối tiếp nhau, m�
 quyết một mắt xích của quy trình: từ cách \textit{đặt tên} câu hỏi, cách
 \textit{viết} câu hỏi, cách \textit{quy định} ma trận, cách \textit{chọn} câu,
 cách \textit{in} ra đề, đến cách \textit{tổ chức} cho học sinh làm bài.
+Ba giải pháp tiếp theo mở rộng hệ thống: khu làm việc riêng cho giáo viên
+(Giải pháp 7), trợ giảng trí tuệ nhân tạo bị khoá vào lời giải (Giải pháp 8) và
+chế độ song ngữ Việt--Anh (Giải pháp 9).
 
 \subsubsection{Giải pháp 1 --- Chuẩn hoá mã định danh câu hỏi}
 
@@ -386,6 +389,119 @@ trực quan cho lớp khoá thứ hai.}
 
 \ghichu{Ảnh 18: chụp trang \texttt{/gv/gia-su}, lấy đủ hai cột ``AI trả lời'' và
 ``Đáp án Python'' nằm cạnh nhau. Nhớ che tên thật của học sinh.}
+
+\subsubsection{Giải pháp 9 --- Chế độ song ngữ Việt--Anh: tiếng Việt làm nền, bản tiếng Anh là bản song sinh}
+
+\textbf{Vấn đề đặt ra.} Một bộ phận học sinh của tôi học Toán song song bằng
+tiếng Anh và ôn luyện để thi SAT, nên các em cần cùng một đề ở hai thứ tiếng,
+với thuật ngữ Toán tiếng Anh của Hoa Kì (\textit{statement}, \textit{negation},
+\textit{converse}, \textit{subset}, \textit{Law of Cosines}\dots). Có hai cách
+làm tưởng như tự nhiên nhưng đều không dùng được. Dịch tay từng câu thì không
+kham nổi với một ngân hàng câu hỏi lớn dần. Còn để trí tuệ nhân tạo dịch đề lúc
+học sinh bấm nút thì mỗi lần một khác, và nguy hiểm hơn: máy có thể dịch lệch
+một con số hay đổi một dấu, khiến đề tiếng Anh không còn là \textit{cùng một
+bài toán} với đề tiếng Việt, trong khi đáp án vẫn là đáp án của đề tiếng Việt.
+
+\textbf{Nguyên tắc: tiếng Việt là nền.} Mọi quyết định của hệ thống vẫn diễn ra
+trên bản tiếng Việt --- chọn câu theo ma trận, mã định danh hàm sinh, hạt giống
+ngẫu nhiên. Bản tiếng Anh \textit{không tự chọn gì cả}: nó nhận đúng danh sách
+mã định danh và đúng hạt giống mà bản tiếng Việt đã dùng, rồi gọi hàm có cùng
+tên trong một thư mục riêng (\texttt{data/python\_bank\_en/}, tách hẳn thư mục
+tiếng Việt). Nhờ vậy đề tiếng Anh và đề tiếng Việt luôn cùng câu, cùng số liệu,
+cùng thứ tự đáp án; chỉ khác chữ. Đây chính là nguyên tắc phân vai của Giải
+pháp 1 được kéo dài thêm một bước: \textit{máy không được quyết định nội dung
+toán học}.
+
+\textbf{Cách có bản tiếng Anh của ngân hàng.} Tôi không dịch từng đề mà dịch
+\textbf{chương trình sinh câu hỏi}, một lần cho mỗi chương, rồi để chương trình
+sinh ra vô số đề tiếng Anh:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+  \item Một công cụ do tôi viết đọc mã nguồn Python của chương, tách ra từng
+        \textit{đoạn chữ hiển thị} (câu dẫn, phương án, lời giải) và để nguyên
+        mọi công thức, mọi biến số. Mỗi đoạn được dịch một lần vào một từ điển
+        (tiếng Việt $\to$ tiếng Anh); công cụ thay các đoạn đó vào mã nguồn để
+        ra tệp tiếng Anh, \textbf{không ai sửa tay trên tệp này} --- muốn sửa thì
+        sửa từ điển hoặc bản tiếng Việt rồi sinh lại.
+  \item Công cụ tự kiểm từng bản dịch: số chỗ trống \texttt{\%s}, \texttt{\%d}
+        và thứ tự của chúng phải đúng như bản gốc, số dấu \texttt{\$} bằng nhau,
+        không còn chữ có dấu tiếng Việt. Bản dịch sai quy tắc bị trả lại.
+  \item Một số chỗ mã nguồn lại phụ thuộc vào chính chữ tiếng Việt (so sánh với
+        ``Sai'', cắt chuỗi tại một từ nối\dots). Những chỗ đó được vá riêng bằng
+        một tệp sửa lỗi, để bản tiếng Anh vẫn chạy đúng logic.
+\end{itemize}
+
+Phần dịch nghĩa được thực hiện với sự hỗ trợ của trợ lí trí tuệ nhân tạo, nhưng
+\textbf{kết quả không được tin mà phải được kiểm chứng bằng máy}, theo cách dưới
+đây.
+
+\textbf{Kiểm chứng tự động: cùng hạt giống thì bản Anh phải ra đúng bản Việt.}
+Tôi viết một chương trình chạy từng hàm sinh câu hỏi ở cả hai bản với cùng hạt
+giống, rồi so: số dòng và số ý, vị trí đáp án đúng, và \textbf{toàn bộ công thức
+toán} đặt giữa hai dấu \texttt{\$}. Bất kì hàm nào lệch dù một con số đều bị
+báo. Kết quả hiện nay: chương I lớp 10 (166 hàm) và chương II lớp 10 (30 hàm)
+đều khớp hoàn toàn. Chương trình so này nằm trong bộ kiểm thử tự động
+(Giải pháp 2), nên về sau mỗi lần sửa ngân hàng mà làm bản Anh lệch bản Việt là
+bị phát hiện ngay.
+
+Việc đối chiếu còn có một lợi ích phụ mà tôi không dự tính: nó \textbf{lộ ra
+một lỗi nằm sẵn trong bản tiếng Việt} --- một hàm hạ chữ thường cả công thức, làm
+$ABCD$ thành $abcd$ trong phương án nhiễu. Lỗi này chỉ lộ vì bản Anh (viết đúng)
+ra kết quả khác bản Việt. Tôi đã sửa ở bản Việt.
+
+\textbf{Chế độ song ngữ trên trang web.} Ở góc phải trên mỗi trang có nút
+\textit{Tiếng Việt $|$ English}, ngôn ngữ được nhớ cho lần sau:
+
+\begin{itemize}[leftmargin=1.2cm, itemsep=2pt]
+  \item \textbf{Giao diện}: toàn bộ chữ trên trang được chuyển theo một từ điển
+        giao diện; chữ nào chưa có bản dịch thì giữ tiếng Việt chứ không để
+        trống.
+  \item \textbf{Học sinh làm bài trực tuyến}: khi trang ở English, đề bài, các
+        phương án, lời giải sau khi nộp bài và tên từng phần (\textit{PART I.
+        Multiple choice}\dots) hiển thị bằng tiếng Anh. Mỗi lần tạo đề, hệ
+        thống sinh thêm bản tiếng Anh của \textit{đúng đề đó} (chỉ phần câu hỏi
+        và đáp án, không biên dịch thêm tệp PDF nên gần như không tốn thêm thời
+        gian). Chấm điểm vẫn theo đáp án của đề, vì hai bản có đáp án như nhau.
+  \item \textbf{Trợ giảng}: khi trang ở English, trợ giảng nhận đề bài, đáp án và
+        lời giải mẫu \textit{bản tiếng Anh} cùng một câu lệnh tiếng Anh, và giảng
+        lại bằng tiếng Anh. Ba lớp khoá của Giải pháp 8 giữ nguyên: máy vẫn bị
+        cấm tự tính, vẫn chỉ được diễn đạt lại lời giải mẫu.
+  \item \textbf{Giáo viên}: ở biểu mẫu ra đề có ô \textit{``Tạo kèm đề tiếng Anh
+        tương ứng''}. Giáo viên tự quyết định có dùng hay không. Khi chọn, hệ
+        thống trả thêm đề PDF, lời giải PDF và mã nguồn \LaTeX\ tiếng Anh cùng
+        hạt giống với đề tiếng Việt, đặt ở thư mục tiếng Anh riêng
+        (\texttt{data/exports\_en/}, \texttt{data/temp\_en/}). Khung trang đề
+        tiếng Anh (``Question'', ``Solution'', ``PART I--IV'', ``Exam code''\dots)
+        được sinh tự động từ khung tiếng Việt, nên khi tôi sửa khung tiếng Việt
+        thì khung tiếng Anh theo kịp.
+\end{itemize}
+
+\textbf{Khi chưa có bản tiếng Anh thì sao.} Hệ thống không báo lỗi mà rơi về tiếng
+Việt: trang làm bài hiện đề tiếng Việt; đề PDF tiếng Anh ghi rõ dòng
+\texttt{[MISSING IN PYTHON]} ở câu chưa có bản dịch, còn đề tiếng Việt vẫn bình
+thường. Cách này cho phép tôi dịch dần từng chương mà không phải chờ dịch xong
+cả ngân hàng mới đưa vào dùng.
+
+\textbf{Điều tôi chưa làm được và nói rõ để không gây hiểu nhầm.} Hiện chỉ chương I
+và chương II lớp 10 có bản tiếng Anh; các chương còn lại vẫn hiện tiếng Việt.
+Tệp Word tiếng Anh, tên bài và yêu cầu cần đạt bằng tiếng Anh, và Chat AI trả lời
+bằng tiếng Anh chưa làm. Ngoài ra bản tiếng Anh dùng dấu chấm thập phân (3.5)
+theo thông lệ quốc tế nên đáp án câu trả lời ngắn ở đề tiếng Anh viết \texttt{3.5}
+thay cho \texttt{3,5}.
+
+\chenanh[0.68]{24-song-ngu-viet-anh.png}{Cùng một câu hỏi, cùng số liệu và đáp án, ở hai chế độ ngôn ngữ của trang làm bài}
+
+\ghichu{Ảnh 24 (quan trọng): chụp \textbf{cùng một đề} ở trang làm bài lúc bấm
+\textit{Tiếng Việt} và lúc bấm \textit{English}, ghép hai ảnh cạnh nhau (cùng
+câu số 1 chẳng hạn), để thấy nút ngôn ngữ ở góc phải trên và nội dung toán giống
+hệt nhau. Cần tạo \textbf{đề mới} sau khi đã cập nhật hệ thống, vì đề cũ không có
+bản tiếng Anh.}
+
+\chenanh[0.68]{25-de-pdf-viet-anh.png}{Đề PDF tiếng Việt và đề PDF tiếng Anh cùng hạt giống, đặt cạnh nhau}
+
+\ghichu{Ảnh 25: ở biểu mẫu ra đề của giáo viên tick \textit{``Tạo kèm đề tiếng Anh
+tương ứng''}, mở hai tệp PDF cạnh nhau, khoanh vài chỗ số liệu giống nhau. Nhớ
+che email giáo viên ở thanh trên.}
 
 \subsubsection{Công cụ và hạ tầng đã sử dụng}
 

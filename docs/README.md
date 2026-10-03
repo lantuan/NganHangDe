@@ -46,6 +46,8 @@ Version: 1.0
 
 27_DANG_BIEN_THE_VA_NHAP_BAI.md  (so tay: dang A/B/C va bien the _01/_02 khac nhau the nao; quy trinh nhap bai tu giao an; hinh trong phuong an; xuat Word)
 
+28_DA_NGON_NGU.md  (so tay: web va de Viet/Anh; nut ngon ngu; dich ngan hang sang tieng Anh bang scripts/dich_ngan_hang.py; kiem tuong duong Viet/Anh; trang lam bai va gia su AI bang tieng Anh)
+
 ---
 
 Quy tắc:

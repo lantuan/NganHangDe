@@ -9845,3 +9845,9 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - gia_su_service: tham số `lang` cho lay_ngu_canh_cau / dung_lenh / hoi / liet_ke_cau_de_gan_nhat; đề bài, đáp án, LỜI GIẢI MẪU lấy từ tệp đáp án BẢN ANH của đúng đề đó (cạnh tệp Việt trong data/temp_en/); lệnh hệ thống tiếng Anh LENH_HE_THONG_EN (cùng quy tắc: không tự tính, chỉ diễn đạt lại lời giải mẫu, trả lời bằng tiếng Anh); thông báo lỗi, tên phần, "True/False" đều có bản Anh. Đề chưa có bản Anh thì rơi về tiếng Việt.
 - app/routers/gia_su.py truyền lay_ngon_ngu(request); answer_parser_service.loi_giai_cho_web(lang) ("(Figure: see the PDF version)").
 - Test mới: test_gia_su_ai_giang_bang_tieng_anh_tu_de_goc_tieng_anh.
+
+# Version 4.09 - 2026-10-03
+
+## Cập nhật sáng kiến kinh nghiệm và sổ tay kĩ thuật cho chế độ song ngữ
+- skkn/noidung/05_giai_phap.tex: thêm Giải pháp 9 (song ngữ Việt--Anh: tiếng Việt làm nền, bản Anh song sinh, dịch ở mức chương trình sinh câu hỏi, kiểm tương đương bằng máy, trang web / trợ giảng / giáo viên, hạn chế còn lại); 02_mo_dau.tex điểm mới thứ bảy; 06_huong_dan.tex mục "Chuyển sang tiếng Anh"; 08_huong_phat_trien.tex mục (7). Ảnh cần chụp thêm: 24, 25 (hinhanh/DANH_MUC_ANH_CAN_CHUP.md). Không điền số liệu thực nghiệm.
+- Sổ tay: docs/28 thêm bản đồ tệp + bảng chỗ dễ sai + gia sư tiếng Anh; docs/23 mục 8b; docs/02, 19, README cập nhật thư mục python_bank_en, i18n, temp_en, exports_en.

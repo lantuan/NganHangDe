@@ -415,6 +415,14 @@ Câu Đúng/Sai dùng `\itemch` đánh dấu từng ý a) b) c) d). Xoá hẳn t
 liền thành một đoạn dài khó đọc, nên đổi thành **xuống dòng** — vừa sạch chữ thô,
 vừa dễ đọc.
 
+## 8b. Gia sư bằng TIẾNG ANH (03/10/2026, docs/28)
+
+- Nền là tiếng Việt. Trang ở English (cookie `lang=en`) thì `app/routers/gia_su.py` truyền `lang="en"` xuống `gia_su_service`: `lay_ngu_canh_cau`, `dung_lenh`, `hoi`, `liet_ke_cau_de_gan_nhat`.
+- Đề bài, đáp án, lời giải mẫu lấy từ tệp đáp án BẢN ANH của ĐÚNG đề đó: `data/temp_en/<cùng tên tệp đáp án Việt>` (`_doc_dapan_json(de, lang)`). Không có (đề cũ, chương chưa dịch) thì dùng bản Việt.
+- Lệnh hệ thống: `LENH_HE_THONG_EN` — cùng 6 quy tắc khoá như bản Việt (không tự tính; không đưa số khác lời giải mẫu; chỉ nói câu này; xưng "your teacher"; LaTeX; ngoài phạm vi thì trả đúng `CAU_TU_CHOI_EN`). Sửa `LENH_HE_THONG` thì PHẢI sửa `LENH_HE_THONG_EN` tương ứng.
+- Thông báo lỗi dùng `_t(lang, vi, en)`; "Đúng/Sai" -> True/False; `loi_giai_cho_web(lang)` ghi "(Figure: see the PDF version)".
+- n8n không đổi: vẫn nhận `lenh_he_thong` + `cau_hoi`; ngôn ngữ trả lời do lệnh quyết định. Middleware dịch giao diện vẫn dịch khoá `tra_loi` theo từ điển nhưng câu trả lời tiếng Anh không khớp từ điển nên giữ nguyên.
+
 ## 9. Những chỗ dễ sai về sau
 
 | Chỗ | Vì sao dễ sai |
@@ -425,4 +433,5 @@ vừa dễ đọc.
 | Nhận `user_id` từ body | Ai cũng tiêu hết lượt của người khác. Luôn lấy từ cookie. |
 | Nối gia sư vào `CHV_Fun` → Switch | Tốn gấp đôi lượt gọi mô hình, và system prompt của `CHV_Fun` trộn với `lenh_he_thong` → phá lớp khoá 1. Gia sư phải là webhook riêng, đi thẳng (mục 6, bước 2). |
 | Thêm nút tra cứu vào nhánh n8n | Phá lớp khoá 1 (mục 6, bước 2). |
+| Sửa `LENH_HE_THONG` mà quên `LENH_HE_THONG_EN` | Trang English mất lớp khoá 1. `tests/test_ngan_hang_anh.py` kiểm lệnh tiếng Anh nhận đúng đề bài/đáp án/lời giải bản Anh. |
 | Dọn `data/temp/*_dapan.json` sớm hơn | Đó là nguồn lời giải chuẩn số 1. Dọn sớm thì Mức A phải lùi về `exam_history` (không còn đề bài gốc). |

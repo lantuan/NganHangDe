@@ -100,11 +100,15 @@ data/
 ├── mapping/
 ├── ppct/
 ├── python_bank/
+├── python_bank_en/      (bản TIẾNG ANH của ngân hàng, sinh từ python_bank/; xem docs/28)
+├── i18n/                (từ điển Việt -> Anh: giao diện, tên chương, bank/)
 ├── prompts/
 ├── config/
 ├── uploads/
 ├── exports/
-└── temp/
+├── exports_en/          (PDF đề tiếng Anh)
+├── temp/
+└── temp_en/             (.tex và tệp đáp án tiếng Anh)
 ```
 
 ---

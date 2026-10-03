@@ -39,6 +39,31 @@ parallel (collinear) / same direction / opposite direction.
 - Ô "Tạo kèm đề tiếng Anh tương ứng" (PDF cho giáo viên) giữ nguyên, giáo viên tự chọn.
 - Lưu ý: bản Anh dùng dấu thập phân "." nên đáp án SA của đề Anh là "3.5" (đề Việt "3,5").
 
+## Gia sư AI bằng tiếng Anh
+Xem docs/23 mục 8b: cùng cách chọn tệp đáp án bản Anh (`data/temp_en/`), lệnh `LENH_HE_THONG_EN`, thông báo lỗi tiếng Anh.
+
+## Bản đồ tệp
+| Việc | Tệp |
+|---|---|
+| Nút Việt/Anh, dịch giao diện | `app/services/i18n_service.py` (nút ở khu giáo viên đặt dưới thanh menu: `data-chv-lang="duoi"` trong `_base_gv.html`) |
+| Dịch ngân hàng (trích, dịch, kiểm) | `scripts/dich_ngan_hang.py`, từ điển `data/i18n/bank/en_<chương>.json`, vá `patch_<chương>*.json` |
+| Kiểm tương đương Việt/Anh | `scripts/kiem_tuong_duong.py <chương> [số_seed]` |
+| Khung LaTeX tiếng Anh | `scripts/tao_ex_test_en.py` -> `data/config/ex_test_en.sty`, `latex_template_en.tex` |
+| Sinh đề Anh cùng seed | `app/services/exam_assembler_service.py` (`_sinh_kem_tieng_anh`, `duong_dapan_en`), `generator_service.py` (`lang`, `dat_hat_giong`, `chup/khoi_phuc_trang_thai_xoay`) |
+| Trang làm bài, chấm bài | `app/routers/exam.py` (`/quiz`, `/grade` chọn bản Anh theo cookie) |
+| Test | `tests/test_ngan_hang_anh.py`, `tests/test_i18n.py` |
+
+## Những chỗ dễ sai về sau
+| Chỗ | Vì sao dễ sai |
+|---|---|
+| Sửa tay `data/python_bank_en/...` | Lần sinh lại sẽ mất; test "bản Anh sinh ra từ bản Việt" đỏ. Sửa bản Việt hoặc từ điển/patch rồi chạy lại `dich`. |
+| Sửa hàm bản Việt mà không dịch lại | Bản Anh lệch bản Việt (số liệu, đáp án). Chạy `dich` + `kiem_tuong_duong` + pytest. |
+| Hai câu Việt giống nhau mà bản Anh khác nhau | Mã gộp/bỏ trùng bằng so sánh chuỗi -> số câu/ phương án lệch. Dịch CÙNG một câu Anh. |
+| Chữ Việt không dấu làm khoá logic ("sai", "cho } ", "tham gia") | Không nằm trong từ điển nên không được dịch; vá bằng `patch_*`. |
+| Dịch chương mới mà quên đưa vào test | Test duyệt mọi `python_bank_en/toan10/L10_C*.py` nên tự có; chỉ cần có tệp. |
+| Đề cũ không có bản Anh | Trang English rơi về tiếng Việt, không lỗi. Muốn có bản Anh phải tạo đề mới. |
+| Đáp án SA bản Anh dùng dấu chấm thập phân | "3.5" thay "3,5"; chấm bài theo đúng bản đang hiển thị. |
+
 ## Còn lại (chưa làm)
 - Thông báo từ AI / n8n (Chat) vẫn tiếng Việt: cần truyền `lang` cho n8n.
 - Tên bài, yêu cầu cần đạt trong Curriculum (mới có tên chương).
