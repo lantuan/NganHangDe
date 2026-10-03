@@ -43,7 +43,7 @@ from app.services.latex_service import (
     build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR, TEMP_DIR_EN,
 )
 from app.services.answer_parser_service import trich_dap_an, AnswerParseError
-from app.services.pdf_service import compile_pdf, PdfCompileError
+from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
 class AssembleError(Exception):
     pass
 
@@ -524,6 +524,15 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
             kq["dapan_en_path"] = str(dich)
             if kq["tieng_anh"].get("tex_path") and kq.get("tex_path"):
                 shutil.copyfile(kq["tieng_anh"]["tex_path"], duong_tex_en(kq["tex_path"]))
+                # PDF Anh đã biên dịch (đề + lời giải) lưu theo TÊN BẢN VIỆT để các nút tải tiếng Anh tìm ra
+                # mà không cần ghi cơ sở dữ liệu, và vẫn tải được sau khi .tex bị dọn.
+                goc = Path(kq["tex_path"]).stem
+                EXPORTS_DIR_EN.mkdir(parents=True, exist_ok=True)
+                for khoa, hau_to in (("pdf_path", ""), ("pdf_loigiai_path", "_loigiai")):
+                    nguon = kq["tieng_anh"].get(khoa)
+                    dich_pdf = EXPORTS_DIR_EN / (goc + hau_to + ".pdf")
+                    if nguon and Path(nguon).exists() and Path(nguon).resolve() != dich_pdf.resolve():
+                        shutil.copyfile(nguon, dich_pdf)
     except Exception as e:                           # noqa: BLE001
         kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
     finally:

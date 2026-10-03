@@ -9885,3 +9885,6 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - `/generate-pdf-auto` và `/lam-de-khac` nhận `kem_tieng_anh`; chat tự do qua n8n dùng `tuy_chon_de_service` (n8n không sửa).
 - Đề học sinh có bản Anh: `/tai-de`, `/tai-loigiai` mặc định ra .zip Việt + Anh. Link tải không còn `download="…pdf"`.
 - `/quiz` trả `co_ban_tieng_anh`. CHV_Fun.md rule 5 viết lại theo quy tắc này (PHẢI dán sang n8n).
+
+## Sửa 3 liên kết tiếng Anh của giáo viên báo "không có bản tiếng Anh" (03/10/2026)
+- Nguyên nhân: file_de.loai_file có CHECK constraint, các dòng de_en/loigiai_en/tex_en bị từ chối âm thầm. Nay bản Anh tìm theo tên cạnh bản Việt (data/temp_en, data/exports_en), không dùng file_de. Bảng "Đề đã tạo" và Trang chính đều có 3 liên kết Anh cho đề tick tiếng Anh.

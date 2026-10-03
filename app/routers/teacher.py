@@ -219,13 +219,8 @@ async def ra_de_submit(
             history_service.luu_file_de(de_id, "loigiai", ket_qua["pdf_loigiai_path"])
         if ket_qua.get("dap_an_json_path"):
             history_service.luu_file_de(de_id, "dapan_json", ket_qua["dap_an_json_path"])
-        # Đề tiếng Anh tương ứng (thư mục tiếng Anh riêng): de_en / loigiai_en / tex_en
-        kq_en = ket_qua.get("tieng_anh")
-        if kq_en:
-            history_service.luu_file_de(de_id, "de_en", kq_en["pdf_path"])
-            history_service.luu_file_de(de_id, "tex_en", kq_en["tex_path"])
-            if kq_en.get("pdf_loigiai_path"):
-                history_service.luu_file_de(de_id, "loigiai_en", kq_en["pdf_loigiai_path"])
+        # Đề tiếng Anh tương ứng KHÔNG ghi vào file_de (CHECK constraint từ chối loại lạ): bản Anh nằm cạnh
+        # bản Việt, cùng tên (.tex ở data/temp_en/, PDF ở data/exports_en/), xem exam.py::_pdf_en_tu_tex.
 
     return RedirectResponse("/gv/de-da-tao", status_code=303)
 

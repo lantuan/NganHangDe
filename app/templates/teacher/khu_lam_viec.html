@@ -67,6 +67,15 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai/{{ de.id }}" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Lời giải</a>
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=de" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Word đề</a>
  · <a class="text-primary-container font-semibold" href="/api/exam/tai-word/{{ de.id }}?ban=loigiai" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>Word lời giải</a> · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex/{{ de.id }}" {% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}data-ca-hai="1"{% endif %}>.tex</a>
+
+{% if (de.blueprint or {}).get("kem_tieng_anh") and not (de.blueprint or {}).get("tieng_anh_loi") %}
+<div class="mt-1">
+<span class="text-sm text-on-surface-variant">Tiếng Anh:</span>
+<a class="text-primary-container font-semibold" href="/api/exam/tai-de-en/{{ de.id }}">PDF đề</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-loigiai-en/{{ de.id }}">PDF lời giải</a>
+ · <a class="text-primary-container font-semibold" href="/api/exam/tai-tex-en/{{ de.id }}">.tex</a>
+</div>
+{% endif %}
 </td>
 </tr>
 {% endfor %}

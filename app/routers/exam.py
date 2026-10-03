@@ -523,13 +523,13 @@ def _pdf_en_tu_tex(de: dict, ban: str) -> Path | None:
     if not tex_vi:
         return None
     tex_en = duong_tex_en(tex_vi)
-    if not tex_en.exists():
-        return None
     goc = tex_en.stem[:-len("_loigiai")] if tex_en.stem.endswith("_loigiai") else tex_en.stem
     ten = goc if ban == "de" else goc + "_loigiai"
     pdf = EXPORTS_DIR_EN / (ten + ".pdf")
     if pdf.exists():
-        return pdf
+        return pdf                      # PDF Anh đã có (giáo viên tick lúc tạo: lưu sẵn): .tex bị dọn cũng không sao
+    if not tex_en.exists():
+        return None
     dang, can = ("[loigiai]{ex_test_en}", "[dethi]{ex_test_en}") if ban == "de" else ("[dethi]{ex_test_en}", "[loigiai]{ex_test_en}")
     noi_dung = tex_en.read_text(encoding="utf-8").replace(dang, can)
     if can not in noi_dung:
@@ -606,20 +606,18 @@ def tai_de_endpoint(request: Request, de_id: str, ngon_ngu: str | None = None):
 
 
 # ======================================================
-# DE TIENG ANH TUONG UNG (co Lan 03/10/2026): sinh cung luc voi de tieng Viet khi giao vien tich
-# "Tao kem de tieng Anh". Tep nam trong thu muc tieng Anh rieng (data/exports_en, data/temp_en);
-# file_de ghi loai_file = de_en / loigiai_en / tex_en.
+# DE TIENG ANH TUONG UNG (co Lan 03/10/2026): sinh cung luc voi de tieng Viet khi nguoi dung tick
+# "Kem ban tieng Anh". KHONG ghi vao bang file_de: cot loai_file co CHECK constraint chi nhan cac loai cu
+# (de/loigiai/tex/dapan_json...) nen cac dong "de_en/loigiai_en/tex_en" bi tu choi am tham va cac lien ket
+# tieng Anh bao "khong co ban tieng Anh" (loi 03/10/2026). Thay vao do bien the tieng Anh nam CANH tep tieng
+# Viet, CUNG TEN: .tex trong data/temp_en/, PDF trong data/exports_en/ (xem _pdf_en_tu_tex, duong_tex_en).
 # ======================================================
 
-def _tep_tieng_anh(de_id: str, khoa: str, mo_ta: str) -> str:
+def _de_hoac_404(de_id: str) -> dict:
     de = history_service.lay_de_theo_id(de_id)
     if de is None:
         raise HTTPException(404, "Khong tim thay de nay.")
-    duong_dan = de.get("files", {}).get(khoa)
-    if not duong_dan or not Path(duong_dan).exists():
-        raise HTTPException(
-            404, "De nay khong co ban tieng Anh (%s) hoac file da bi don dep." % mo_ta)
-    return duong_dan
+    return de
 
 
 @router.get("/tai-de-en/{de_id}")
@@ -627,8 +625,10 @@ def tai_de_tieng_anh_endpoint(de_id: str, request: Request):
     chan = yeu_cau_giao_vien(request)
     if chan is not None:
         return chan
-    return FileResponse(path=_tep_tieng_anh(de_id, "de_en", "PDF de"),
-                        filename="exam_en_%s.pdf" % de_id[:8], media_type="application/pdf")
+    pdf = _pdf_en_tu_tex(_de_hoac_404(de_id), "de")
+    if pdf is None:
+        raise HTTPException(404, "De nay khong co ban tieng Anh (PDF de) hoac file da bi don dep.")
+    return FileResponse(path=str(pdf), filename="exam_en_%s.pdf" % de_id[:8], media_type="application/pdf")
 
 
 @router.get("/tai-loigiai-en/{de_id}")
@@ -636,8 +636,10 @@ def tai_loigiai_tieng_anh_endpoint(de_id: str, request: Request):
     chan = yeu_cau_giao_vien(request)
     if chan is not None:
         return chan
-    return FileResponse(path=_tep_tieng_anh(de_id, "loigiai_en", "PDF loi giai"),
-                        filename="solutions_en_%s.pdf" % de_id[:8], media_type="application/pdf")
+    pdf = _pdf_en_tu_tex(_de_hoac_404(de_id), "loigiai")
+    if pdf is None:
+        raise HTTPException(404, "De nay khong co ban tieng Anh (PDF loi giai) hoac file da bi don dep.")
+    return FileResponse(path=str(pdf), filename="solutions_en_%s.pdf" % de_id[:8], media_type="application/pdf")
 
 
 @router.get("/tai-tex-en/{de_id}")
@@ -645,8 +647,12 @@ def tai_tex_tieng_anh_endpoint(de_id: str, request: Request):
     chan = yeu_cau_giao_vien(request)
     if chan is not None:
         return chan
-    return FileResponse(path=_tep_tieng_anh(de_id, "tex_en", ".tex"),
-                        filename="exam_en_%s.tex" % de_id[:8], media_type="application/x-tex")
+    tex_vi = (_de_hoac_404(de_id).get("files") or {}).get("tex")
+    tex_en = duong_tex_en(tex_vi) if tex_vi else None
+    if tex_en is None or not tex_en.exists():
+        raise HTTPException(
+            404, "De nay khong co ban tieng Anh (.tex) hoac file .tex da bi don (cron xoa sau 1 ngay).")
+    return FileResponse(path=str(tex_en), filename="exam_en_%s.tex" % de_id[:8], media_type="application/x-tex")
 
 
 # ======================================================

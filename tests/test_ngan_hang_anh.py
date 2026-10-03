@@ -435,3 +435,43 @@ def test_tai_de_hoc_sinh_da_tick_anh_ra_zip_mac_dinh(monkeypatch):
     assert client.get("/api/exam/quiz/de-hs", cookies={"lang": "en"}).json()["data"]["co_ban_tieng_anh"] is True
     de["role"] = "teacher"                                              # giáo viên: vẫn theo ngôn ngữ trang
     assert client.get("/api/exam/tai-de/de-hs", cookies={"lang": "vi"}).headers["content-type"] == "application/pdf"
+
+
+def test_giao_vien_tick_tieng_anh_ba_lien_ket_tieng_anh_tai_duoc_khong_can_file_de(monkeypatch):
+    """Lỗi 03/10/2026: 3 liên kết tiếng Anh (PDF đề, PDF lời giải, .tex) báo "không có bản tiếng Anh" vì chúng
+    đọc loại tệp de_en/loigiai_en/tex_en trong bảng file_de mà CHECK constraint từ chối. Nay bản Anh nằm cạnh bản
+    Việt, cùng tên: chỉ cần files = {tex, de, ...} của đề (không có khoá *_en nào) là tải được."""
+    from fastapi.testclient import TestClient
+    import app.routers.exam as R
+    import app.services.exam_assembler_service as A
+    from app.services import history_service
+    from app.services.pdf_service import EXPORTS_DIR
+    from app.main import app
+
+    def gia(tex, lang="vi"):
+        out = (R.EXPORTS_DIR_EN if lang == "en" else EXPORTS_DIR)
+        out.mkdir(parents=True, exist_ok=True)
+        pdf = out / (Path(tex).stem + ".pdf")
+        pdf.write_bytes(b"%PDF-1.4 " + lang.encode() + b" " + Path(tex).read_bytes()[:1500])
+        return pdf
+    monkeypatch.setattr(A, "compile_pdf", gia)
+    monkeypatch.setattr(R, "compile_pdf", gia)
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ KIỂM TRA", "teacher", "HeSo1", pham_vi_chuong="1",
+                                  kem_tieng_anh=True, tieu_de_en="QUIZ")
+    files = {"de": kq["pdf_path"], "tex": kq["tex_path"]}
+    if kq.get("pdf_loigiai_path"):
+        files["loigiai"] = kq["pdf_loigiai_path"]
+    de = {"id": "de-gv-anh", "role": "teacher", "files": files}
+    assert not any(k.endswith("_en") for k in de["files"])
+    monkeypatch.setattr(history_service, "lay_de_theo_id", lambda de_id: de)
+    monkeypatch.setattr(history_service, "luu_file_de", lambda *a, **k: None)
+    monkeypatch.setattr(R, "yeu_cau_giao_vien", lambda request, user=None: None)
+    client = TestClient(app)
+    for duong in ("tai-de-en", "tai-loigiai-en", "tai-tex-en"):
+        r = client.get("/api/exam/%s/de-gv-anh" % duong)
+        assert r.status_code == 200, (duong, r.text[:200])
+    assert b"ex_test_en" in client.get("/api/exam/tai-tex-en/de-gv-anh").content
+    # .tex bị dọn sau 1 ngày: PDF Anh đã lưu sẵn vẫn tải được, còn .tex Anh thì báo rõ
+    A.duong_tex_en(kq["tex_path"]).unlink()
+    assert client.get("/api/exam/tai-de-en/de-gv-anh").status_code == 200
+    assert client.get("/api/exam/tai-tex-en/de-gv-anh").status_code == 404
