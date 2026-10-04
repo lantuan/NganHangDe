@@ -192,7 +192,7 @@ def _doi_danh_sach(text: str) -> str:
     return text
 
 
-def _lam_sach(text: str, thu_muc_anh: Path | None, anh: list) -> str:
+def _lam_sach(text: str, thu_muc_anh: Path | None, anh: list, lang: str = "vi") -> str:
     """Doi mot doan LaTeX cua cau hoi sang LaTeX chuan cho pandoc."""
     if not text:
         return ""
@@ -215,7 +215,8 @@ def _lam_sach(text: str, thu_muc_anh: Path | None, anh: list) -> str:
         try:
             duong = hinh_ve_service.dich_hinh(m.group(0), chi_png=True)
         except Exception:
-            return r"\textit{[Hình vẽ: xem bản PDF]}"
+            return (r"\textit{[Figure: see the PDF version]}" if lang == "en"
+                    else r"\textit{[Hình vẽ: xem bản PDF]}")
         anh.append(duong)
         return "\n\n\\includegraphics{%s}\n\n" % duong
     t = _MOI_TRUONG_HINH.sub(ve, t)
@@ -337,32 +338,32 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list, lang
     except Exception:
         c = {"loai_cau": "TL", "de_bai": khoi, "loi_giai": None}
     loai = c["loai_cau"]
-    de = _lam_sach(c.get("de_bai") or "", None, anh)
+    de = _lam_sach(c.get("de_bai") or "", None, anh, lang)
     # hinh cua de bai nam ngoai phan de_bai (cau Dung/Sai co \immini bao quanh)
     if c.get("hinh_tikz") and "\\includegraphics" not in de:
         cho_khac = " ".join(list((c.get("phuong_an") or {}).values())
                             + list((c.get("phat_bieu") or {}).values()))
         for h in c["hinh_tikz"]:
             if h not in cho_khac:          # hinh nam trong phuong an thi de phuong an tu ve
-                de += "\n\n" + _lam_sach(h, None, anh)
+                de += "\n\n" + _lam_sach(h, None, anh, lang)
     ten = ch["bai"] if loai == "TL" else ch["cau"]
     ra = ["\\textbf{%s %d.} %s" % (ten, so, de)]
     if loai == "MC":
         hinh_pa = c.get("hinh_phuong_an_tikz") or {}
         for k in "ABCD":
-            noi = _lam_sach(c["phuong_an"][k], None, anh)
+            noi = _lam_sach(c["phuong_an"][k], None, anh, lang)
             # goi ex_test tu them "." sau moi phuong an tren PDF -> Word lam giong
             if noi and "\\includegraphics" not in noi and not noi.endswith((".", "?", "!", ":")):
                 noi += "."
             if hinh_pa.get(k):
-                noi += "\n\n" + _lam_sach(hinh_pa[k], None, anh)
+                noi += "\n\n" + _lam_sach(hinh_pa[k], None, anh, lang)
             ra.append("\\textbf{%s.} %s" % (k, noi))
     elif loai == "TF":
         hinh_y = c.get("hinh_phat_bieu_tikz") or {}
         for k in "abcd":
-            noi_y = _lam_sach(c["phat_bieu"][k], None, anh)
+            noi_y = _lam_sach(c["phat_bieu"][k], None, anh, lang)
             if hinh_y.get(k):
-                noi_y += "\n\n" + _lam_sach(hinh_y[k], None, anh)
+                noi_y += "\n\n" + _lam_sach(hinh_y[k], None, anh, lang)
             dong = "\\textbf{%s)} %s" % (k, noi_y)
             if co_loi_giai:
                 dong += " \\quad \\textbf{(%s)}" % (ch["dung"] if c["dap_an_dung"][k] else ch["sai"])
@@ -371,9 +372,9 @@ def _cau_sang_latex_chinh(khoi: str, so: int, co_loi_giai: bool, anh: list, lang
         if loai == "MC":
             ra.append("\\textbf{%s %s.}" % (ch["chon_dap_an"], c["dap_an_dung"]))
         elif loai == "SA":
-            ra.append("\\textbf{%s} %s" % (ch["dap_so"], _lam_sach(c["dap_an_dung"] or "", None, anh)))
+            ra.append("\\textbf{%s} %s" % (ch["dap_so"], _lam_sach(c["dap_an_dung"] or "", None, anh, lang)))
         if c.get("loi_giai"):
-            ra.append("\\textit{%s}\n\n" % ch["loi_giai"] + _lam_sach(c["loi_giai"], None, anh))
+            ra.append("\\textit{%s}\n\n" % ch["loi_giai"] + _lam_sach(c["loi_giai"], None, anh, lang))
     return "\n\n".join(ra)
 
 

@@ -37,27 +37,47 @@
       "gia_tri_luong_giac",
       "may_tinh_cam_tay"
     ],
-    "difficulty_rank": 2,
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C3_B5_VD030",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Giá trị lượng giác của một góc từ 0 đến 180",
+    "bai_so": "5",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Tính được",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "examples": [],
+    "scope": "sử dụng máy tính cầm tay",
+    "tags": [
+      "gia_tri_luong_giac",
+      "may_tinh_cam_tay"
+    ],
+    "difficulty_rank": 3,
     "dang_luyen_tap_them": [
       {
         "mo_ta": "Biết tan hoặc cot, tính biểu thức đồng bậc của sin, cos (chia tử và mẫu cho cos hoặc sin)",
         "mapping_id": [
-          "L10_C3_B5_TH030_MC_E",
-          "L10_C3_B5_TH030_SA_C"
+          "L10_C3_B5_VD030_MC_A",
+          "L10_C3_B5_VD030_SA_A"
         ]
       },
       {
         "mo_ta": "Biết tan ± cot, tính tan² + cot² (dùng tan.cot = 1)",
         "mapping_id": [
-          "L10_C3_B5_TH030_MC_F",
-          "L10_C3_B5_TH030_SA_D"
+          "L10_C3_B5_VD030_MC_B",
+          "L10_C3_B5_VD030_SA_B"
         ]
       },
       {
         "mo_ta": "Biết sin hoặc cos, tính biểu thức a.sin² + b.cos²",
         "mapping_id": [
-          "L10_C3_B5_TH030_MC_G",
-          "L10_C3_B5_TH030_SA_E"
+          "L10_C3_B5_VD030_MC_C",
+          "L10_C3_B5_VD030_SA_C"
         ]
       }
     ],
@@ -82,13 +102,34 @@
       "goc_phu_nhau",
       "goc_bu_nhau"
     ],
-    "difficulty_rank": 2,
+    "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C3_B5_VD031",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Giá trị lượng giác của một góc từ 0 đến 180",
+    "bai_so": "5",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải thích được",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "gia_tri_luong_giac",
+      "goc_phu_nhau",
+      "goc_bu_nhau"
+    ],
+    "difficulty_rank": 3,
     "dang_luyen_tap_them": [
       {
         "mo_ta": "Tích tan, tổng cos của nhiều góc cách đều: ghép cặp hai góc phụ nhau, bù nhau",
         "mapping_id": [
-          "L10_C3_B5_TH031_MC_J",
-          "L10_C3_B5_TH031_SA_G"
+          "L10_C3_B5_VD031_MC_A",
+          "L10_C3_B5_VD031_SA_A"
         ]
       }
     ],
@@ -133,11 +174,34 @@
           "L10_C3_B6_TH032_MC_G",
           "L10_C3_B6_TH032_SA_D"
         ]
-      },
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+  },
+  {
+    "id": "L10_C3_B6_VD032",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Hệ thức lượng trong tam giác",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Giải thích được",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "he_thuc_luong",
+      "dinh_li_cosin"
+    ],
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
       {
         "mo_ta": "Hình bình hành biết một cạnh và hai đường chéo, tính cạnh kề",
         "mapping_id": [
-          "L10_C3_B6_TH032_MC_J"
+          "L10_C3_B6_VD032_MC_A"
         ]
       }
     ],

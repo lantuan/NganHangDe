@@ -497,6 +497,38 @@ def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
     return moi_phan_bo, (tong_vd + tong_vdc) - da_xep
 
 
+
+def _don_vi_co_loai(lop: int, chuong_so_list) -> dict[str, set]:
+    """Đơn vị kiến thức (curriculum_id) nào CÓ dạng của loại câu nào trong Mapping.
+
+    SỬA 04/10/2026 (cô Lan duyệt): ma trận chọn đơn vị theo Curriculum nhưng không
+    xem đơn vị có dạng MC / SA / TL hay không, nên khi một đơn vị chỉ có MC và SA
+    (như VD030, VD031, VD032 lớp 10 chương 3) mà bị chọn cho câu tự luận thì câu
+    bị thiếu. Trả về {loai_cau: {curriculum_id, ...}}; loại None nghĩa là không đọc
+    được Mapping của chương đó -> không lọc (giữ cách cũ).
+    Câu tự luận nhiều ý (cac_y) tính cho từng đơn vị nằm trong cac_y của nó.
+    """
+    from app.services.mapping_service import load_mapping, phan_loai_cau
+    co: dict[str, set] = {"trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set()}
+    khong_loc: set = set()
+    for c in set(chuong_so_list):
+        try:
+            rows = load_mapping(lop, int(c))
+        except (FileNotFoundError, ValueError):
+            khong_loc.add(int(c))
+            continue
+        for r in rows:
+            loai = phan_loai_cau(r)
+            if loai not in co:
+                continue
+            cid = "_".join(r["id"].split("_")[:4])
+            co[loai].add(cid)
+            for y in r.get("cac_y") or []:
+                co[loai].add(y.get("curriculum_id"))
+    co["__khong_loc_chuong__"] = khong_loc
+    return co
+
+
 def _chon_curriculum_id(entries_muc_do: list[dict], so_luong: int, da_dung: set,
                         dem_dung: Counter | None = None) -> list[dict]:
     """
@@ -639,6 +671,25 @@ def build_blueprint(
         bai_id = f"L{lop}_C{int(e['chuong_so'])}_B{int(e['bai_so'])}"
         theo_bai_muc_do.setdefault((bai_id, e["MucDo"]), []).append(e)
 
+    # Mỗi loại câu chỉ được chọn đơn vị thật sự có dạng loại đó trong Mapping.
+    _co_loai = _don_vi_co_loai(lop, {int(e["chuong_so"]) for e in curriculum_entries})
+    _khong_loc = _co_loai.pop("__khong_loc_chuong__")
+    _theo_bai_loai: dict[str, dict] = {}
+
+    def _theo_bai_cho_loai(loai_cau: str) -> dict:
+        if loai_cau not in _theo_bai_loai:
+            kq: dict[tuple, list[dict]] = {}
+            for (bai_id, md), ds in theo_bai_muc_do.items():
+                chuong = int(bai_id.split("_")[1][1:])
+                if chuong in _khong_loc:
+                    kq[(bai_id, md)] = ds
+                    continue
+                giu = [e for e in ds if e["id"] in _co_loai[loai_cau]]
+                if giu:
+                    kq[(bai_id, md)] = giu
+            _theo_bai_loai[loai_cau] = kq
+        return _theo_bai_loai[loai_cau]
+
     # "Đã dùng" DÙNG CHUNG cho MC / SA / TL (sửa 30/09/2026, cô Lan): MC đã lấy
     # đơn vị kiến thức 014 thì SA, TL phải lấy đơn vị khác, trừ khi hết lựa
     # chọn. Trước đây tách riêng theo loại câu nên SA hay lấy lại đúng đơn vị
@@ -683,6 +734,7 @@ def build_blueprint(
     # trả lời ngắn / tự luận ở mức NB, TH (vd 1 SA + 1 TL mức TH) bị BỎ MẤT,
     # đề ra thiếu câu mà không báo. Thứ tự: xem vòng lặp cuối hàm (TL -> MC -> SA).
     def _lam_nb_th(muc_do: str, loai_nbth: str) -> None:
+        theo_bai_muc_do = _theo_bai_cho_loai(loai_nbth)
         so_luong = phan_bo_muc_do.get(loai_nbth, {}).get(muc_do, 0)
         if so_luong <= 0 and loai_nbth != "trac_nghiem":
             return
@@ -743,6 +795,7 @@ def build_blueprint(
     # 1 suất VD + 1 suất VDC của phần đứng trước, làm đề chương 3 mất cả
     # câu trắc nghiệm mức VD lẫn câu trả lời ngắn mức VDC.
     def _lam_vd_vdc(loai_cau: str, cap) -> None:
+        theo_bai_muc_do = _theo_bai_cho_loai(loai_cau)
         so_vd = phan_bo_muc_do.get(loai_cau, {}).get("VD", 0)
         so_vdc = phan_bo_muc_do.get(loai_cau, {}).get("VDC", 0)
 

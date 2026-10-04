@@ -3386,7 +3386,7 @@ def _c4_ng(x):
     return s if x.is_Atom else r"\left(%s\right)" % s
 
 
-def L10_C4_B7_NB037_MC_E_01(socau, dang=1):
+def L10_C4_B7_TH037_MC_A_01(socau, dang=1):
     r"""Độ dài vectơ trong hình đơn giản (hình chữ nhật, hình vuông, hình thoi góc $60^{\circ}$, lục giác đều, tam giác
     đều có trung điểm), độ dài theo $a$; một bước Pythagore hoặc đường cao tam giác đều.
 
@@ -3408,7 +3408,7 @@ def L10_C4_B7_NB037_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C4_B7_NB037_SA_C_01(socau, dang=2):
+def L10_C4_B7_TH037_SA_A_01(socau, dang=2):
     r"""Trả lời ngắn - độ dài vectơ trong hình đơn giản với số liệu bằng số; kết quả làm tròn đến hàng phần mười
     (bản trả lời ngắn của NB037_MC_E, cùng Dang).
 

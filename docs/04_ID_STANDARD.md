@@ -219,8 +219,8 @@ vào ngân hàng, nhưng phải đánh dấu để giáo viên biết và tự q
   viên) hiện cảnh báo "câu luyện tập thêm"; file .tex bản giáo viên có dòng
   chú thích "% LUU Y GIAO VIEN ..." trước câu đó (bản học sinh không có).
 - Hàm tra: mapping_service.la_ngoai_yccd(row), tim_dang_ngoai_yccd(lop, chuong, generator_id).
-- Ví dụ: L10_C3_B5_TH030_MC_E (biểu thức đồng bậc biết tan/cot), TH030_MC_F,
-  TH030_MC_G, TH031_MC_J và các bản SA tương ứng.
+- Ví dụ: L10_C3_B5_VD030_MC_A (biểu thức đồng bậc biết tan/cot), VD030_MC_B,
+  VD030_MC_C, VD031_MC_A và các bản SA tương ứng.
 
 ---
 

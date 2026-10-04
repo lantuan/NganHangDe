@@ -9911,3 +9911,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - VD019 trong Curriculum có `dang_luyen_tap_them` cho hai nhóm dạng VD / VDC; khi vào đề giáo viên được cảnh báo "câu luyện tập thêm".
 - Đổi hẳn, không giữ ID cũ (NB017_MC_N, VD020_MC_B/C, VD020_SA_B/C, TH019_MC_A) theo ý cô Lan.
 - Hình TikZ do hàm sinh; đáp án và nhiễu tính theo TẬP CÁC VÙNG của ba tập (không bao giờ có hai phương án cùng đúng); tên tập đổi (A,B,C) / (M,N,P) / (X,Y,Z). Test: tests/test_ven_bon_muc.py đọc lại hình TikZ và tính độc lập. Bản Anh đã dịch lại.
+
+## Chuyển ID đúng mức độ cho 16 dạng luyện tập thêm lớp 10 chương 3, 4 (04/10/2026)
+- Theo quy ước cô Lan (cùng số đơn vị, đổi mức ở đầu): thêm mục Curriculum `L10_C3_B5_VD030`, `L10_C3_B5_VD031`, `L10_C3_B6_VD032`, `L10_C4_B7_TH037` (cùng nội dung YCCĐ với mục gốc, khác MucDo và difficulty_rank). Mọi dạng chuyển vẫn giữ `ngoai_yccd`; `dang_luyen_tap_them` chuyển theo.
+- TH030_MC_E/F/G -> VD030_MC_A/B/C; TH030_SA_C/D/E -> VD030_SA_A/B/C (biểu thức đồng bậc tan/cot, tan² + cot², a·sin² + b·cos²). TH031_MC_J -> VD031_MC_A, TH031_SA_G -> VD031_SA_A (ghép cặp góc phụ nhau, bù nhau). TH032_MC_J -> VD032_MC_A (hình bình hành, công thức trung tuyến). NB037_MC_E / SA_C -> TH037_MC_A / SA_A (độ dài vectơ qua Pythagore). Giữ nguyên các biến thể _01, _02.
+- Các dạng trung tuyến còn lại của TH032 (MC_C, F, G, SA_C, D) giữ mức TH vì chỉ ngoài YCCĐ chứ không cao hơn mức.
+- Đổi hẳn, không giữ ID cũ. Chương khác và lớp 11, 12 không có dạng nào lệch mức kiểu này. Ghi chú đổi ID nằm trong ghi_chu của từng dòng mapping. Bản Anh chương 3, 4 chưa dịch nên chưa có file để đổi.
+- Ma trận (exam_blueprint_service.py): mỗi loại câu MC / SA / TL chỉ chọn đơn vị kiến thức thật sự có dạng loại đó trong Mapping (`_don_vi_co_loai`, `_theo_bai_cho_loai`). Trước đây chọn theo Curriculum nên đơn vị chỉ có MC/SA (VD030, VD031, VD032) có thể bị chọn cho câu tự luận và đề bị thiếu câu. Chương không đọc được Mapping thì không lọc (giữ cách cũ). Câu tự luận nhiều ý tính cho các đơn vị trong cac_y.
+- Word tiếng Anh (word_service.py `_lam_sach`): khi không dựng được hình TikZ thành PNG, dòng thay thế nay là "[Figure: see the PDF version]" thay vì chữ tiếng Việt "[Hình vẽ: xem bản PDF]" lọt vào đề Anh (test test_word_tieng_anh_khi_trang_english hay đỏ khi bốc phải câu có hình).

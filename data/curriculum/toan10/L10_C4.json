@@ -20,13 +20,36 @@
       "cung_phuong",
       "cung_huong"
     ],
-    "difficulty_rank": 1,
+    "difficulty_rank": 1
+  },
+  {
+    "id": "L10_C4_B7_TH037",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Các khái niệm mở đầu",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "TH",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "vecto",
+      "khai_niem",
+      "do_dai",
+      "cung_phuong",
+      "cung_huong"
+    ],
+    "difficulty_rank": 2,
     "dang_luyen_tap_them": [
       {
         "mo_ta": "Tính độ dài vectơ trong hình đặc biệt (hình chữ nhật, hình vuông, hình thoi, lục giác đều, tam giác đều) bằng định lí Pythagore hoặc đường cao tam giác đều",
         "mapping_id": [
-          "L10_C4_B7_NB037_MC_E",
-          "L10_C4_B7_NB037_SA_C"
+          "L10_C4_B7_TH037_MC_A",
+          "L10_C4_B7_TH037_SA_A"
         ]
       }
     ],

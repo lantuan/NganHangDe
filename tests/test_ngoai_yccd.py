@@ -38,21 +38,21 @@ def test_dong_ngoai_yccd_co_ghi_chu_va_nam_trong_curriculum():
 
 
 def test_tim_dang_ngoai_yccd():
-    assert tim_dang_ngoai_yccd(10, 3, "L10_C3_B5_TH030_MC_E_02")["id"] == "L10_C3_B5_TH030_MC_E"
+    assert tim_dang_ngoai_yccd(10, 3, "L10_C3_B5_VD030_MC_A_02")["id"] == "L10_C3_B5_VD030_MC_A"
     assert tim_dang_ngoai_yccd(10, 3, "L10_C3_B5_TH030_MC_A_01") is None
-    assert tim_dang_ngoai_yccd(10, None, "L10_C3_B5_TH030_MC_E_01") is None
+    assert tim_dang_ngoai_yccd(10, None, "L10_C3_B5_VD030_MC_A_01") is None
 
 
 def test_bo_chon_gan_co(monkeypatch):
     from app.services import question_selector_service as q
-    bp = {"trac_nghiem": [{"curriculum_id": "L10_C3_B5_TH030", "muc_do": "TH", "tong_so_cau": 1,
+    bp = {"trac_nghiem": [{"curriculum_id": "L10_C3_B5_VD030", "muc_do": "VD", "tong_so_cau": 1,
                             "chuong_so": 3}]}
     thay = False
     for _ in range(60):
         ds = q.select_questions(lop=10, blueprint=bp, cho_phep_thieu=True)
         for c in ds:
-            if c["generator_id"].startswith(("L10_C3_B5_TH030_MC_E", "L10_C3_B5_TH030_MC_F",
-                                             "L10_C3_B5_TH030_MC_G")):
+            if c["generator_id"].startswith(("L10_C3_B5_VD030_MC_A", "L10_C3_B5_VD030_MC_B",
+                                             "L10_C3_B5_VD030_MC_C")):
                 assert c.get("ngoai_yccd") is True
                 thay = True
             else:
@@ -63,12 +63,12 @@ def test_bo_chon_gan_co(monkeypatch):
 def test_de_co_canh_bao_va_chu_thich_ban_gv(monkeypatch):
     from app.services import exam_assembler_service as a
     monkeypatch.setattr(a, "compile_pdf", lambda p: str(p).replace(".tex", ".pdf"))
-    ds = [{"generator_id": "L10_C3_B5_TH030_MC_E", "chuong_so": 3, "loai_cau": "trac_nghiem"},
+    ds = [{"generator_id": "L10_C3_B5_VD030_MC_A", "chuong_so": 3, "loai_cau": "trac_nghiem"},
           {"generator_id": "L10_C3_B5_TH030_MC_A", "chuong_so": 3, "loai_cau": "trac_nghiem"}]
     kq = a._sinh_pdf_tu_danh_sach(10, "De thu", "teacher", ds, 1)
     cb = kq["canh_bao_ngoai_yccd"]
     assert len(cb) == 1 and cb[0]["phan"] == "I" and cb[0]["cau"] == 1
-    assert cb[0]["generator_id"].startswith("L10_C3_B5_TH030_MC_E")
+    assert cb[0]["generator_id"].startswith("L10_C3_B5_VD030_MC_A")
     tex = Path(kq["tex_path"]).read_text(encoding="utf-8")
     assert tex.count("LUU Y GIAO VIEN") == 1
     kq_hs = a._sinh_pdf_tu_danh_sach(10, "De thu", "student", ds, 1)

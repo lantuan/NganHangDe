@@ -6248,7 +6248,7 @@ def _nhieu_dong_bac(t, a, b, c, d, P, cho_tan):
     return [x for x in ds if x is not None]
 
 
-def L10_C3_B5_TH030_MC_E_01(socau, dang=1):
+def L10_C3_B5_VD030_MC_A_01(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Biết $\tan\alpha$, tính
     $P = \dfrac{a\sin\alpha + b\cos\alpha}{c\sin\alpha + d\cos\alpha}$: chia tử, mẫu cho $\cos\alpha$.
 
@@ -6269,7 +6269,7 @@ def L10_C3_B5_TH030_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH030_MC_E_02(socau, dang=1):
+def L10_C3_B5_VD030_MC_A_02(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Như _01 nhưng cho $\cot\alpha$: chia tử, mẫu cho $\sin\alpha$.
 
     CLAUDE THEM 01/10/2026 - theo cau 44, phan III tai lieu C3-B1. Co Lan duyet lai.
@@ -6289,7 +6289,7 @@ def L10_C3_B5_TH030_MC_E_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH030_SA_C_01(socau, dang=2):
+def L10_C3_B5_VD030_SA_A_01(socau, dang=2):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ) - trả lời ngắn: biết $\tan\alpha$ (hoặc $\cot\alpha$), tính
     biểu thức đồng bậc bậc nhất của $\sin\alpha$, $\cos\alpha$. Đáp số thập phân hữu hạn.
 
@@ -6311,7 +6311,7 @@ def L10_C3_B5_TH030_SA_C_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH030_MC_F_01(socau, dang=1):
+def L10_C3_B5_VD030_MC_B_01(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Biết $\tan\alpha - \cot\alpha = m$ (hoặc
     $\tan\alpha + \cot\alpha = m$, $|m| \ge 2$), tính $\tan^{2}\alpha + \cot^{2}\alpha = m^{2} \pm 2$
     nhờ $\tan\alpha\cdot\cot\alpha = 1$.
@@ -6339,7 +6339,7 @@ def L10_C3_B5_TH030_MC_F_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH030_MC_F_02(socau, dang=1):
+def L10_C3_B5_VD030_MC_B_02(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Hỏi ngược của _01: biết $\tan^{2}\alpha + \cot^{2}\alpha = k$,
     tính $\left(\tan\alpha - \cot\alpha\right)^{2}$ hoặc $\left(\tan\alpha + \cot\alpha\right)^{2}$.
 
@@ -6364,7 +6364,7 @@ def L10_C3_B5_TH030_MC_F_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH030_SA_D_01(socau, dang=2):
+def L10_C3_B5_VD030_SA_B_01(socau, dang=2):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ) - trả lời ngắn: biết $\tan\alpha \pm \cot\alpha = m$, tính
     $\tan^{2}\alpha + \cot^{2}\alpha$.
 
@@ -6427,7 +6427,7 @@ def _de_giai_bac_hai(cho_cos, g, a, b, s2, c2, P):
     return de, giai
 
 
-def L10_C3_B5_TH030_MC_G_01(socau, dang=1):
+def L10_C3_B5_VD030_MC_C_01(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Biết $\sin\alpha$ hoặc $\cos\alpha$, tính
     $P = a\sin^{2}\alpha + b\cos^{2}\alpha$ (chỉ cần bình phương, không xét dấu).
 
@@ -6447,7 +6447,7 @@ def L10_C3_B5_TH030_MC_G_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH030_SA_E_01(socau, dang=2):
+def L10_C3_B5_VD030_SA_C_01(socau, dang=2):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ) - trả lời ngắn: biết $\sin\alpha$ hoặc $\cos\alpha$, tính
     $a\sin^{2}\alpha + b\cos^{2}\alpha$. Đáp số thập phân hữu hạn (tối đa 4 kí tự).
 
@@ -6476,7 +6476,7 @@ def _bo_tich_tan():
             return a, d
 
 
-def L10_C3_B5_TH031_MC_J_01(socau, dang=1):
+def L10_C3_B5_VD031_MC_A_01(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Tích nhiều $\tan$ của các góc cách đều đối xứng qua
     $45^{\circ}$: ghép cặp hai góc phụ nhau, $\tan x\cdot\tan\left(90^{\circ} - x\right) = 1$.
     $P = k\cdot\tan a^{\circ}\tan\left(a+d\right)^{\circ}\cdots\tan\left(90-a\right)^{\circ} + c$.
@@ -6525,7 +6525,7 @@ def _gia_tri_tong_cos(bat_dau, ket_thuc, d):
     return Integer(round(s)), goc
 
 
-def L10_C3_B5_TH031_MC_J_02(socau, dang=1):
+def L10_C3_B5_VD031_MC_A_02(socau, dang=1):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Tổng nhiều $\cos$ của các góc cách đều từ $0^{\circ}$ (hoặc
     $d^{\circ}$) đến $180^{\circ}$: ghép cặp hai góc bù nhau, $\cos x + \cos\left(180^{\circ} - x\right) = 0$.
 
@@ -6554,7 +6554,7 @@ def L10_C3_B5_TH031_MC_J_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH031_SA_G_01(socau, dang=2):
+def L10_C3_B5_VD031_SA_A_01(socau, dang=2):
     r"""LUYỆN TẬP THÊM (ngoài YCCĐ) - trả lời ngắn: hoặc tích $\tan$ các góc đối xứng qua
     $45^{\circ}$ (ghép phụ), hoặc tổng $\cos$ các góc từ $0^{\circ}$ đến $180^{\circ}$ (ghép bù),
     có nhân hệ số và cộng hằng số để đáp số thay đổi.
@@ -7004,7 +7004,7 @@ def _de_hbh(A, m, n, cs, hoi, X2):
     return de, giai
 
 
-def L10_C3_B6_TH032_MC_J_01(socau, dang=1):
+def L10_C3_B6_VD032_MC_A_01(socau, dang=1):
     r"""LUYỆN TẬP THÊM (công thức trung tuyến - SBT). Hình bình hành, cách hỏi khác: biết một cạnh và hai đường chéo, tính
     cạnh kề. Dùng công thức trung tuyến trong tam giác $ABD$ (tâm $O$ là trung điểm $BD$):
     $AB^{2} + AD^{2} = \dfrac{AC^{2} + BD^{2}}{2}$.
