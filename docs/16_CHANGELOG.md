@@ -9902,10 +9902,10 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - VDC (đếm số nguyên k thuộc [−năm; năm+1], năm = `datetime.datetime.now().year` nên TỰ ĐỔI theo năm thực): MC_F/SA_D (|px+q| = mk+c có nghiệm / hai nghiệm / vô nghiệm), MC_H/SA_F (|x−a| = k−c có hai nghiệm dương), MC_G/SA_E (x²+bx+k=0, dùng Δ), MC_I/SA_G (kx²−2ax+c=0 hai nghiệm phân biệt, nhớ k ≠ 0), MC_J/SA_H (x²−2kx+c=0, k² so với c). Bất phương trình giữ ở VD014_MC_A/SA_A (nay đánh dấu VDC).
 - Test mới: tests/test_menh_de_bon_muc.py (đáp số tính lại bằng vét cạn / sympy, giả lập năm 2026-2040, đúng một đáp án MC cho NB/TH). Bản Anh dịch xong, kiem_tuong_duong 0 hàm lệch.
 
-## Biểu đồ Ven bốn mức NB / VD / VDC (04/10/2026)
-- Curriculum Bài 2 chỉ có MỘT đơn vị về biểu đồ Ven: L10_C1_B2_TH019 (mức TH). Theo cô Lan: bám đúng YCCĐ của Bộ, mức THẤP hơn thì hợp lệ, mức CAO hơn phải ghi chú vào mapping. Không thêm đơn vị mới; mọi dạng gắn vào TH019.
-- NB `TH019_MC_B_01` (thấp hơn TH, hợp lệ): hai tập A, B - giao, hợp, hiệu A\B, B\A, phần bù C_E A (A ⊂ E), phần bù C_B A (A ⊂ B).
-- VD `TH019_MC_C_01` (cao hơn TH): ba tập - chỉ có A / B / C, giao của cả ba, hợp của cả ba, phần bù của hợp trong E. `TH019_SA_A_01`: biểu đồ ghi số phần tử từng vùng, tính n(...).
-- VDC `TH019_MC_D_01`: (A∪B)∩C, (A∪B)\C, (A∩B)∪C, A\(B∩C), A∪(B∩C), (A∪B∪C)\(A∩B∩C) và các hoán vị. `TH019_SA_B_01`: như trên có số phần tử.
-- VD / VDC đánh dấu `"ngoai_yccd": true` (docs/04 Ngoại lệ 4) + `"muc_do_thuc_te"`, mục TH019 trong Curriculum có `dang_luyen_tap_them`: khi vào đề giáo viên được cảnh báo "câu luyện tập thêm". NB chỉ ghi `muc_do_thuc_te: NB`.
+## Biểu đồ Ven bốn mức NB / VD / VDC - ID đúng mức độ (04/10/2026)
+- Cô Lan chốt: ID phải ĐÚNG MỨC ĐỘ để ma trận chọn đúng; dạng lệch mức LÊN so với YCCĐ thì ghi chú vào mapping, lệch xuống thì không cần. YCCĐ biểu đồ Ven duy nhất là L10_C1_B2_TH019 (mức TH) nên không gắn dạng nào vào TH019 nữa (TH019_MC_A, TH019_TL_A giữ nguyên).
+- NB `L10_C1_B2_NB017_MC_N_01`: hai tập A, B - giao, hợp, A\B, B\A, phần bù C_E A (A ⊂ E), C_B A (A ⊂ B). Thấp hơn YCCĐ nên không ghi chú.
+- VD `L10_C1_B2_VD020_MC_B_01` (chỉ có A / B / C, giao cả ba, hợp cả ba, phần bù của hợp) và `VD020_SA_B_01` (hình ghi số phần tử từng vùng, tính n(...)): `"ngoai_yccd": true`.
+- VDC `L10_C1_B2_VD020_MC_C_01` ((A∪B)∩C, (A∪B)\C, (A∩B)∪C, A\(B∩C), A∪(B∩C), (A∪B∪C)\(A∩B∩C) và hoán vị) và `VD020_SA_C_01`: `"muc_do_dang": "VDC"` + `"ngoai_yccd": true`.
+- VD020 trong Curriculum có `dang_luyen_tap_them` cho hai nhóm dạng này; khi vào đề giáo viên được cảnh báo "câu luyện tập thêm".
 - Hình TikZ do hàm sinh; đáp án và nhiễu tính theo TẬP CÁC VÙNG của ba tập (không bao giờ có hai phương án cùng đúng); tên tập đổi (A,B,C) / (M,N,P) / (X,Y,Z). Test: tests/test_ven_bon_muc.py đọc lại hình TikZ và tính độc lập. Bản Anh đã dịch.

@@ -282,24 +282,7 @@
       "tap_hop",
       "bieu_do_ven"
     ],
-    "difficulty_rank": 2,
-    "dang_luyen_tap_them": [
-      {
-        "mo_ta": "Biểu đồ Ven ba tập hợp mức VD: chỉ có A / B / C, giao của cả ba, hợp của cả ba, phần bù của hợp; ghi số phần tử từng vùng và tính n(...)",
-        "mapping_id": [
-          "L10_C1_B2_TH019_MC_C",
-          "L10_C1_B2_TH019_SA_A"
-        ]
-      },
-      {
-        "mo_ta": "Biểu đồ Ven ba tập hợp mức VDC: phép toán kết hợp như (A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C); ghi số phần tử từng vùng và tính n(...)",
-        "mapping_id": [
-          "L10_C1_B2_TH019_MC_D",
-          "L10_C1_B2_TH019_SA_B"
-        ]
-      }
-    ],
-    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: yêu cầu cần đạt của Bộ chỉ ở mức TH (dùng biểu đồ Ven biểu diễn hợp, giao, hiệu, phần bù), các dạng này ở mức VD / VDC cao hơn. Mapping ghi \"ngoai_yccd\": true và \"muc_do_thuc_te\"; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+    "difficulty_rank": 2
   },
   {
     "id": "L10_C1_B2_VD020",
@@ -320,7 +303,24 @@
       "dem_so_phan_tu",
       "bai_toan_thuc_tien"
     ],
-    "difficulty_rank": 3
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Biểu đồ Ven ba tập hợp mức VD: chỉ có A / B / C, giao của cả ba, hợp của cả ba, phần bù của hợp; ghi số phần tử từng vùng và tính n(...) (YCCĐ biểu đồ Ven TH019 chỉ ở mức TH)",
+        "mapping_id": [
+          "L10_C1_B2_VD020_MC_B",
+          "L10_C1_B2_VD020_SA_B"
+        ]
+      },
+      {
+        "mo_ta": "Biểu đồ Ven ba tập hợp mức VDC: phép toán kết hợp như (A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C); ghi số phần tử từng vùng và tính n(...) (YCCĐ biểu đồ Ven TH019 chỉ ở mức TH)",
+        "mapping_id": [
+          "L10_C1_B2_VD020_MC_C",
+          "L10_C1_B2_VD020_SA_C"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: biểu đồ Ven ba tập hợp mức VD / VDC cao hơn yêu cầu cần đạt của Bộ về biểu đồ Ven (TH019, mức TH). Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C1_B2_TH021",
