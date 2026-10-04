@@ -9901,3 +9901,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - VD014_MC_E_01 / SA_C_01 (VD, không tham số): phương trình bậc hai (nghiệm nguyên hoặc phân số), |px + q| = r, |x − a| = sx + t (loại nghiệm ngoại lai); MC hỏi tập nghiệm, SA hỏi tổng hoặc tích.
 - VDC (đếm số nguyên k thuộc [−năm; năm+1], năm = `datetime.datetime.now().year` nên TỰ ĐỔI theo năm thực): MC_F/SA_D (|px+q| = mk+c có nghiệm / hai nghiệm / vô nghiệm), MC_H/SA_F (|x−a| = k−c có hai nghiệm dương), MC_G/SA_E (x²+bx+k=0, dùng Δ), MC_I/SA_G (kx²−2ax+c=0 hai nghiệm phân biệt, nhớ k ≠ 0), MC_J/SA_H (x²−2kx+c=0, k² so với c). Bất phương trình giữ ở VD014_MC_A/SA_A (nay đánh dấu VDC).
 - Test mới: tests/test_menh_de_bon_muc.py (đáp số tính lại bằng vét cạn / sympy, giả lập năm 2026-2040, đúng một đáp án MC cho NB/TH). Bản Anh dịch xong, kiem_tuong_duong 0 hàm lệch.
+
+## Biểu đồ Ven bốn mức NB / VD / VDC (04/10/2026)
+- Curriculum Bài 2 chỉ có MỘT đơn vị về biểu đồ Ven: L10_C1_B2_TH019 (mức TH). Theo cô Lan: bám đúng YCCĐ của Bộ, mức THẤP hơn thì hợp lệ, mức CAO hơn phải ghi chú vào mapping. Không thêm đơn vị mới; mọi dạng gắn vào TH019.
+- NB `TH019_MC_B_01` (thấp hơn TH, hợp lệ): hai tập A, B - giao, hợp, hiệu A\B, B\A, phần bù C_E A (A ⊂ E), phần bù C_B A (A ⊂ B).
+- VD `TH019_MC_C_01` (cao hơn TH): ba tập - chỉ có A / B / C, giao của cả ba, hợp của cả ba, phần bù của hợp trong E. `TH019_SA_A_01`: biểu đồ ghi số phần tử từng vùng, tính n(...).
+- VDC `TH019_MC_D_01`: (A∪B)∩C, (A∪B)\C, (A∩B)∪C, A\(B∩C), A∪(B∩C), (A∪B∪C)\(A∩B∩C) và các hoán vị. `TH019_SA_B_01`: như trên có số phần tử.
+- VD / VDC đánh dấu `"ngoai_yccd": true` (docs/04 Ngoại lệ 4) + `"muc_do_thuc_te"`, mục TH019 trong Curriculum có `dang_luyen_tap_them`: khi vào đề giáo viên được cảnh báo "câu luyện tập thêm". NB chỉ ghi `muc_do_thuc_te: NB`.
+- Hình TikZ do hàm sinh; đáp án và nhiễu tính theo TẬP CÁC VÙNG của ba tập (không bao giờ có hai phương án cùng đúng); tên tập đổi (A,B,C) / (M,N,P) / (X,Y,Z). Test: tests/test_ven_bon_muc.py đọc lại hình TikZ và tính độc lập. Bản Anh đã dịch.

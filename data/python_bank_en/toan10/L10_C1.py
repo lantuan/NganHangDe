@@ -14417,3 +14417,372 @@ def L10_C1_B1_VD014_SA_E_02(socau, dang=2):
 def L10_C1_B1_VD014_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_J_01. CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_bac2("kep"), _de_giai_bac2("kep"), socau, dang)
+
+
+# =====================================================================
+# BIỂU ĐỒ VEN BỐN MỨC: NB (hai tập), VD, VDC (ba tập)  (cô Lan 04/10/2026)
+# ---------------------------------------------------------------------
+# Curriculum Bài 2 chỉ có MỘT đơn vị về biểu đồ Ven: L10_C1_B2_TH019 (mức TH) "Sử dụng được biểu
+# đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù". Theo docs/04 không thêm đơn vị mới và
+# giữ mức của đơn vị, nên mọi dạng dưới đây gắn vào TH019:
+#   TH019_MC_B  mức NB (thấp hơn TH nên hợp lệ): hai tập A, B - giao, hợp, hiệu, phần bù (SGK)
+#   TH019_MC_C  mức VD (CAO hơn TH): ba tập - chỉ có A / B / C, giao của cả ba, hợp của cả ba, phần bù của hợp
+#   TH019_MC_D  mức VDC (CAO hơn TH): ba tập - (A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...
+#   TH019_SA_A / SA_B  như MC_C / MC_D nhưng biểu đồ ghi số phần tử từng vùng, tính n(biểu thức)
+# Dạng cao hơn TH019 ghi "ngoai_yccd": true (docs/04 Ngoại lệ 4) để cảnh báo giáo viên.
+# Hình vẽ bằng TikZ: mỗi vùng gạch sọc là một scope (cắt theo các đường tròn); đáp án và phương án
+# nhiễu tính theo TẬP CÁC VÙNG (8 vùng của ba tập) nên không bao giờ có hai phương án cùng đúng.
+# =====================================================================
+import itertools as _it
+
+_VEN_THU_TU = [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (1, 0, 1), (0, 1, 1), (1, 1, 1), (0, 0, 0)]
+_VEN3_VONG = [((0.0, 0.5), 1.5), ((2.0, 0.5), 1.5), ((1.0, -0.7), 1.5)]
+_VEN3_NHAN = [(-1.4, 1.9), (3.4, 1.9), (1.0, -2.55)]
+_VEN3_E = ((-2.4, -3.1), (4.4, 2.9))
+_VEN3_NHAN_E = (-2.0, 2.55)
+_VEN3_NGOAI = (3.8, -2.4)
+
+
+def _ven_tam_cac_vung(vong, n, x0, x1, y0, y1):
+    """Điểm đặt số ở mỗi vùng: điểm trong vùng xa nhất các đường tròn (lấy mẫu lưới)."""
+    tot = {}
+    buoc = 0.05
+    nx, ny = int((x1 - x0) / buoc), int((y1 - y0) / buoc)
+    for i in range(nx + 1):
+        x = x0 + i * buoc
+        for j in range(ny + 1):
+            y = y0 + j * buoc
+            kc = [math.hypot(x - c[0], y - c[1]) - r for c, r in vong]
+            m = tuple(1 if d < 0 else 0 for d in kc)
+            if not any(m):
+                continue
+            le = min(abs(d) for d in kc)
+            if m not in tot or le > tot[m][0]:
+                tot[m] = (le, round(x, 2), round(y, 2))
+    return {m: (v[1], v[2]) for m, v in tot.items()}
+
+
+_VEN3_TAM = _ven_tam_cac_vung(_VEN3_VONG, 3, -1.6, 3.6, -2.3, 2.1)
+
+
+def _ven_tikz(vong, mask_gach, nhan, rect=None, nhan_E=None, so_dem=None, scale=0.5):
+    """Hình Ven TikZ. vong: [((cx, cy), r)]; mask_gach: các vùng (bộ 0/1 theo từng vòng) cần gạch sọc;
+    nhan: [(chữ, (x, y))]; rect: ((x0, y0), (x1, y1)) tập E; so_dem: {mask: (số, (x, y))} số phần tử."""
+    ten = "ABCDEF"
+    d = [r"\begin{tikzpicture}[scale=%s, font=\footnotesize, baseline=(current bounding box.center)]" % scale]
+    for i, (c, r) in enumerate(vong):
+        d.append(r"\def\vong%s{(%s,%s) circle (%s)}" % (ten[i], c[0], c[1], r))
+    for m in mask_gach:
+        d.append(r"\begin{scope}")
+        co = [i for i in range(len(vong)) if m[i]]
+        khong = [i for i in range(len(vong)) if not m[i]]
+        if not co and rect:
+            d.append(r"\clip (%s,%s) rectangle (%s,%s);" % (rect[0][0], rect[0][1], rect[1][0], rect[1][1]))
+        for i in co:
+            d.append(r"\clip \vong%s;" % ten[i])
+        for i in khong:
+            c, r = vong[i]
+            d.append(r"\clip[even odd rule] (-8,-8) rectangle (9,9) (%s,%s) circle (%s);" % (c[0], c[1], r))
+        d.append(r"\fill[pattern=north west lines, pattern color=black!70] (-8,-8) rectangle (9,9);")
+        d.append(r"\end{scope}")
+    if rect:
+        d.append(r"\draw (%s,%s) rectangle (%s,%s);" % (rect[0][0], rect[0][1], rect[1][0], rect[1][1]))
+    for i in range(len(vong)):
+        d.append(r"\draw \vong%s;" % ten[i])
+    for chu, (x, y) in nhan:
+        d.append(r"\node at (%s,%s) {$%s$};" % (x, y, chu))
+    if rect and nhan_E:
+        d.append(r"\node[fill=white, inner sep=1pt] at (%s,%s) {$E$};" % nhan_E)
+    for m, (so, (x, y)) in (so_dem or {}).items():
+        d.append(r"\node[fill=white, inner sep=0.5pt] at (%s,%s) {$%d$};" % (x, y, so))
+    d.append(r"\end{tikzpicture}")
+    return "\n".join(d)
+
+
+def _ven3_tikz(mask_gach, ten, so_dem=None, scale=0.5):
+    nhan = [(ten[i], _VEN3_NHAN[i]) for i in range(3)]
+    sd = None
+    if so_dem is not None:
+        sd = {m: (so_dem[m], _VEN3_TAM[m]) for m in _VEN_THU_TU[:7]}
+        sd[(0, 0, 0)] = (so_dem[(0, 0, 0)], _VEN3_NGOAI)
+    return _ven_tikz(_VEN3_VONG, mask_gach, nhan, _VEN3_E, _VEN3_NHAN_E, sd, scale)
+
+
+# ---------- biểu thức tập hợp: ('S', i) | ('cap'|'cup'|'minus', x, y) | ('comp', x) ----------
+def _bt_dung(e, m):
+    t = e[0]
+    if t == 'S':
+        return bool(m[e[1]])
+    if t == 'comp':
+        return not _bt_dung(e[1], m)
+    a, b = _bt_dung(e[1], m), _bt_dung(e[2], m)
+    return (a and b) if t == 'cap' else (a or b) if t == 'cup' else (a and not b)
+
+
+def _bt_vung(e):
+    return frozenset(m for m in _it.product((0, 1), repeat=3) if _bt_dung(e, m))
+
+
+def _bt_cac_tap(e):
+    if e[0] == 'S':
+        return {e[1]}
+    return set().union(*[_bt_cac_tap(c) for c in e[1:]])
+
+
+def _bt_tex(e, ten):
+    t = e[0]
+    if t == 'S':
+        return ten[e[1]]
+    if t == 'comp':
+        x = e[1]
+        return "C_E %s" % ten[x[1]] if x[0] == 'S' else "C_E(%s)" % _bt_tex(x, ten)
+    kh = {'cap': r"\cap", 'cup': r"\cup", 'minus': r"\setminus"}[t]
+
+    def con(c):
+        if c[0] == 'S':
+            return ten[c[1]]
+        if c[0] == t and t != 'minus':
+            return _bt_tex(c, ten)
+        return "(%s)" % _bt_tex(c, ten)
+    return "%s %s %s" % (con(e[1]), kh, con(e[2]))
+
+
+_VEN_S = [('S', 0), ('S', 1), ('S', 2)]
+_VEN_TEN0 = ["A", "B", "C"]
+_VEN_KHO = {}
+
+
+def _ven_thu_vien():
+    """{tập các vùng: biểu thức ngắn nhất} gồm các biểu thức ba tập (có dạng bù) làm phương án nhiễu."""
+    if _VEN_KHO:
+        return _VEN_KHO
+    S = _VEN_S
+    lv1 = []
+    for op in ('cap', 'cup', 'minus'):
+        for x in S:
+            for y in S:
+                if x != y and (op == 'minus' or x[1] < y[1]):
+                    lv1.append((op, x, y))
+    ds = list(S) + lv1
+    for e in lv1:
+        for s in S:
+            if s[1] in _bt_cac_tap(e):
+                continue
+            for op in ('cap', 'cup', 'minus'):
+                ds.append((op, e, s))
+                ds.append((op, s, e))
+    ds += [('comp', x) for x in S + lv1]
+    ds.append(('comp', ('cup', ('cup', S[0], S[1]), S[2])))
+    ds.append(('minus', ('cup', ('cup', S[0], S[1]), S[2]), ('cap', ('cap', S[0], S[1]), S[2])))
+    for e in ds:
+        v = _bt_vung(e)
+        if not v:
+            continue
+        cu = _VEN_KHO.get(v)
+        if cu is None or len(_bt_tex(e, _VEN_TEN0)) < len(_bt_tex(cu, _VEN_TEN0)):
+            _VEN_KHO[v] = e
+    return _VEN_KHO
+
+
+def _ven_muc_tieu(muc):
+    """Các biểu thức đáp án (dạng chuẩn) của mức VD hoặc VDC."""
+    S = _VEN_S
+    ra = []
+    cap3 = ('cap', ('cap', S[0], S[1]), S[2])
+    cup3 = ('cup', ('cup', S[0], S[1]), S[2])
+    if muc == "VD":
+        for x in range(3):
+            y, z = [i for i in range(3) if i != x]
+            ra.append(('minus', S[x], ('cup', S[y], S[z])))
+        ra += [cap3, cup3, ('comp', cup3)]
+        return ra
+    for z in range(3):
+        x, y = [i for i in range(3) if i != z]
+        ra.append(('cap', ('cup', S[x], S[y]), S[z]))
+        ra.append(('minus', ('cup', S[x], S[y]), S[z]))
+        ra.append(('cup', ('cap', S[x], S[y]), S[z]))
+        ra.append(('minus', S[z], ('cap', S[x], S[y])))
+    ra.append(('minus', cup3, cap3))
+    return ra
+
+
+def _ven_nhieu(dung, ten, so=3):
+    """Ba biểu thức nhiễu có tập vùng KHÁC đáp án, ưu tiên cái lệch ít vùng (giống thật)."""
+    kho = _ven_thu_vien()
+    vd = _bt_vung(dung)
+    gan, xa = [], []
+    for v, e in kho.items():
+        if v == vd:
+            continue
+        (gan if len(v ^ vd) <= 2 else xa).append(e)
+    random.shuffle(gan)
+    random.shuffle(xa)
+    return (gan + xa)[:so]
+
+
+def _ven_mo_ta_vung(m, ten):
+    co = [ten[i] for i in range(3) if m[i]]
+    khong = [ten[i] for i in range(3) if not m[i]]
+    if len(co) == 3:
+        return r"belonging to all of $%s$, $%s$ and $%s$" % tuple(co)
+    if not co:
+        return r"lying in $E$ but not belonging to $%s$, $%s$ or $%s$" % tuple(khong)
+    if len(co) == 1:
+        return r"belonging only to $%s$" % co[0]
+    return r"belonging to $%s$ and $%s$ but not to $%s$" % (co[0], co[1], khong[0])
+
+
+def _ven_liet_ke_vung(vung, ten):
+    return "; ".join(_ven_mo_ta_vung(m, ten) for m in _VEN_THU_TU if m in vung)
+
+
+_VEN_BO_TEN = [("A", "B", "C"), ("M", "N", "P"), ("X", "Y", "Z")]
+
+
+def _ven3_mc(muc, socau, dang):
+    muc_tieu = _ven_muc_tieu(muc)
+    da = set()
+    cau = ""
+    lan = 0
+    while len(da) < socau and lan < 500:
+        lan += 1
+        ib = random.randrange(len(muc_tieu))
+        ten = random.choice(_VEN_BO_TEN)
+        if (ib, ten) in da:
+            continue
+        da.add((ib, ten))
+        e = muc_tieu[ib]
+        vung = _bt_vung(e)
+        dap = _bt_tex(e, ten)
+        nhieu = [_bt_tex(x, ten) for x in _ven_nhieu(e, ten)]
+        hinh = _ven3_tikz(sorted(vung), ten)
+        debai = (r"\immini{Let $%s$, $%s$, $%s$ be subsets of the set $E$, represented by the Venn diagram on the right. The shaded region in the diagram represents which of the following sets?}{%s}"
+                 % (ten[0], ten[1], ten[2], hinh))
+        dong = [r"The shaded region consists of the elements: %s." % _ven_liet_ke_vung(vung, ten)]
+        if muc == "VDC" and e[0] != 'comp':
+            for c in e[1:]:
+                if c[0] != 'S':
+                    dong.append(r"We have that $%s$ consists of the elements: %s." % (_bt_tex(c, ten), _ven_liet_ke_vung(_bt_vung(c), ten)))
+        dong.append(r"Hence the shaded region represents the set $%s$." % dap)
+        cau += MC_SA_answer_text(debai, "$%s$" % dap, ["$%s$" % t for t in nhieu],
+                                 "\\\\\n".join(dong), 0, 0, dang)
+    return cau
+
+
+def _ven3_sa(muc, socau, dang):
+    muc_tieu = _ven_muc_tieu(muc)
+    if muc == "VD":     # thêm giao của hai tập (gồm cả vùng chung ba tập)
+        muc_tieu = muc_tieu + [('cap', _VEN_S[x], _VEN_S[y]) for x, y in ((0, 1), (0, 2), (1, 2))]
+    da = set()
+    cau = ""
+    lan = 0
+    while len(da) < socau and lan < 500:
+        lan += 1
+        ib = random.randrange(len(muc_tieu))
+        ten = random.choice(_VEN_BO_TEN)
+        so_dem = {m: random.randint(2, 9) for m in _VEN_THU_TU}
+        if (ib, ten) in da:
+            continue
+        da.add((ib, ten))
+        e = muc_tieu[ib]
+        vung = _bt_vung(e)
+        tong = sum(so_dem[m] for m in _VEN_THU_TU if m in vung)
+        bt = _bt_tex(e, ten)
+        hinh = _ven3_tikz([], ten, so_dem, 0.7)
+        debai = (r"\immini{Let $%s$, $%s$, $%s$ be subsets of the set $E$. The number of elements in each region is written on the Venn diagram on the right. Find the number of elements $n(%s)$ of the set $%s$.}{%s}"
+                 % (ten[0], ten[1], ten[2], bt, bt, hinh))
+        cac = [m for m in _VEN_THU_TU if m in vung]
+        phep = " + ".join(str(so_dem[m]) for m in cac)
+        dong = [r"The set $%s$ consists of the elements: %s." % (bt, _ven_liet_ke_vung(vung, ten)),
+                r"Hence $n(%s) = %s = %d$." % (bt, phep, tong)]
+        nhieu = [str(v) for v in dict.fromkeys([tong + 1, tong - 1, tong + 2, tong - 2, tong + 3]) if v > 0 and v != tong][:3]
+        cau += MC_SA_answer_const(debai, str(tong), nhieu, "\\\\\n".join(dong), 0, 0, dang)
+    return cau
+
+
+# ---------- NB: hai tập hợp (giao, hợp, hiệu, phần bù - sách giáo khoa) ----------
+_VEN2_VONG = [((0.0, 0.0), 1.4), ((1.8, 0.0), 1.4)]
+_VEN2_NHAN = [(-1.0, 1.45), (2.8, 1.45)]
+_VEN_BO_TEN2 = [("A", "B"), ("M", "N"), ("X", "Y")]
+
+
+def L10_C1_B2_TH019_MC_B_01(socau, dang=1):
+    r"""NB - Biểu đồ Ven hai tập hợp: phần gạch sọc là $A \cap B$, $A \cup B$, $A \setminus B$, $B \setminus A$,
+    hoặc phần bù ($C_E A$ khi $A \subset E$, $C_B A$ khi $A \subset B$) như sách giáo khoa.
+
+    CLAUDE THEM 04/10/2026 - dang NB cho TH019 theo yeu cau co Lan (muc thap hon TH nen hop le).
+    Co Lan duyet lai.
+    """
+    kieu_ds = ["giao", "hop", "hieu_ab", "hieu_ba", "bu_E", "bu_trong"]
+    da = set()
+    cau = ""
+    lan = 0
+    while len(da) < socau and lan < 500:
+        lan += 1
+        kieu = random.choice(kieu_ds)
+        ten = random.choice(_VEN_BO_TEN2)
+        if (kieu, ten) in da:
+            continue
+        da.add((kieu, ten))
+        p, q = ten
+        if kieu in ("giao", "hop", "hieu_ab", "hieu_ba"):
+            mask = {"giao": [(1, 1)], "hop": [(1, 0), (0, 1), (1, 1)], "hieu_ab": [(1, 0)], "hieu_ba": [(0, 1)]}[kieu]
+            hinh = _ven_tikz(_VEN2_VONG, mask, [(p, _VEN2_NHAN[0]), (q, _VEN2_NHAN[1])])
+            debai = (r"\immini{The two sets $%s$, $%s$ are represented by the Venn diagram on the right. The shaded region represents which of the following sets?}{%s}" % (p, q, hinh))
+            tat = [r"%s \cap %s" % (p, q), r"%s \cup %s" % (p, q), r"%s \setminus %s" % (p, q), r"%s \setminus %s" % (q, p)]
+            dap = {"giao": tat[0], "hop": tat[1], "hieu_ab": tat[2], "hieu_ba": tat[3]}[kieu]
+            nhieu = [t for t in tat if t != dap]
+            giai = {
+                "giao": r"The shaded region consists of the elements belonging to both $%s$ and $%s$, so it is the intersection of the two sets: $%s \cap %s$." % (p, q, p, q),
+                "hop": r"The shaded region consists of the elements belonging to $%s$ or to $%s$, so it is the union of the two sets: $%s \cup %s$." % (p, q, p, q),
+                "hieu_ab": r"The shaded region consists of the elements belonging to $%s$ but not to $%s$, so it is the difference of the two sets: $%s \setminus %s$." % (p, q, p, q),
+                "hieu_ba": r"The shaded region consists of the elements belonging to $%s$ but not to $%s$, so it is the difference of the two sets: $%s \setminus %s$." % (q, p, q, p),
+            }[kieu]
+        elif kieu == "bu_E":
+            rect = ((-2.2, -1.8), (2.2, 1.8))
+            hinh = _ven_tikz([((0.0, 0.0), 1.0)], [(0,)], [(p, (0.0, 0.0))], rect, (-1.8, 1.4))
+            debai = (r"\immini{Let $%s$ be a subset of the set $E$, represented by the Venn diagram on the right. The shaded region represents which of the following sets?}{%s}" % (p, hinh))
+            dap = "C_E %s" % p
+            nhieu = [p, "E", "C_%s E" % p]
+            giai = (r"The shaded region consists of the elements of $E$ that do not belong to $%s$; this is the complement of $%s$ in $E$, denoted $C_E %s$." % (p, p, p))
+        else:
+            hinh = _ven_tikz([((-0.4, 0.1), 0.8), ((0.0, 0.0), 1.6)], [(0, 1)],
+                             [(p, (-0.4, 0.1)), (q, (1.55, 1.5))])
+            debai = (r"\immini{The two sets $%s$, $%s$ with $%s \subset %s$ are represented by the Venn diagram on the right. The shaded region represents which of the following sets?}{%s}" % (p, q, p, q, hinh))
+            dap = "C_%s %s" % (q, p)
+            nhieu = [p, q, "C_%s %s" % (p, q)]
+            giai = (r"Since $%s \subset %s$, the shaded region consists of the elements of $%s$ that do not belong to $%s$; this is the complement of $%s$ in $%s$, denoted $C_%s %s$." % (p, q, q, p, p, q, q, p))
+        cau += MC_SA_answer_text(debai, "$%s$" % dap, ["$%s$" % t for t in nhieu], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_TH019_MC_C_01(socau, dang=1):
+    r"""VD - Biểu đồ Ven ba tập hợp: phần gạch sọc chỉ có một tập ($A \setminus (B \cup C)$...), giao của cả
+    ba tập, hợp của cả ba tập, hoặc phần bù của hợp ba tập trong $E$.
+
+    CLAUDE THEM 04/10/2026 - dang VD (cao hon muc TH cua TH019, ghi ngoai_yccd) theo yeu cau co Lan.
+    Co Lan duyet lai.
+    """
+    return _ven3_mc("VD", socau, dang)
+
+
+def L10_C1_B2_TH019_MC_D_01(socau, dang=1):
+    r"""VDC - Biểu đồ Ven ba tập hợp: phần gạch sọc là $(A \cup B) \cap C$, $(A \cup B) \setminus C$,
+    $(A \cap B) \cup C$, $A \setminus (B \cap C)$, $A \cup (B \cap C)$...
+
+    CLAUDE THEM 04/10/2026 - dang VDC (cao hon muc TH cua TH019, ghi ngoai_yccd) theo yeu cau co Lan.
+    Co Lan duyet lai.
+    """
+    return _ven3_mc("VDC", socau, dang)
+
+
+def L10_C1_B2_TH019_SA_A_01(socau, dang=2):
+    r"""VD - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n(A \setminus (B \cup C))$, $n(A \cap B \cap C)$,
+    $n(A \cup B \cup C)$, $n(A \cap B)$ hoặc $n(C_E(A \cup B \cup C))$. CLAUDE THEM 04/10/2026."""
+    return _ven3_sa("VD", socau, dang)
+
+
+def L10_C1_B2_TH019_SA_B_01(socau, dang=2):
+    r"""VDC - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n((A \cup B) \cap C)$, $n((A \cup B) \setminus C)$,
+    $n(A \setminus (B \cap C))$... CLAUDE THEM 04/10/2026."""
+    return _ven3_sa("VDC", socau, dang)

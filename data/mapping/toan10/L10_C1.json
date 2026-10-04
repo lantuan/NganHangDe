@@ -944,5 +944,49 @@
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình x² − 2kx + c = 0 có nghiệm hoặc có hai nghiệm phân biệt (k² so với c)",
     "muc_do_dang": "VDC",
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B2_TH019_MC_B",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu đồ Ven hai tập hợp: chọn tập hợp (giao, hợp, hiệu, phần bù) ứng với phần gạch sọc",
+    "muc_do_thuc_te": "NB",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan; MUC THUC TE NB (hai tap, giao/hop/hieu/phan bu nhu sach giao khoa), THAP HON muc TH cua don vi TH019 nen hop le, khong danh dau ngoai_yccd; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_TH019_MC_C",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu đồ Ven ba tập hợp: chọn tập hợp ứng với phần gạch sọc (chỉ có A, chỉ có B, chỉ có C, giao của cả ba, hợp của cả ba, phần bù của hợp)",
+    "muc_do_thuc_te": "VD",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: don vi TH019 chi o muc TH (dung bieu do Ven bieu dien hop, giao, hieu, phan bu); dang nay co MUC THUC TE VD, cao hon muc cua don vi (doc cac vung rieng le cua ba tap). Co Lan chot 04/10/2026: cao hon thi ghi chu vao mapping de giao vien quyet dinh giu/bo. CLAUDE THEM 04/10/2026; co Lan duyet lai muc do"
+  },
+  {
+    "id": "L10_C1_B2_TH019_MC_D",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu đồ Ven ba tập hợp: chọn tập hợp ứng với phần gạch sọc là phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
+    "muc_do_thuc_te": "VDC",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: don vi TH019 chi o muc TH (dung bieu do Ven bieu dien hop, giao, hieu, phan bu); dang nay co MUC THUC TE VDC, cao hon muc cua don vi (phep toan ket hop nhieu tap). Co Lan chot 04/10/2026: cao hon thi ghi chu vao mapping de giao vien quyet dinh giu/bo. CLAUDE THEM 04/10/2026; co Lan duyet lai muc do"
+  },
+  {
+    "id": "L10_C1_B2_TH019_SA_A",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu đồ Ven ba tập hợp ghi số phần tử từng vùng: tính số phần tử của tập chỉ có A, giao của cả ba, hợp của cả ba, giao của hai tập, phần bù của hợp",
+    "muc_do_thuc_te": "VD",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: don vi TH019 chi o muc TH (dung bieu do Ven bieu dien hop, giao, hieu, phan bu); dang nay co MUC THUC TE VD, cao hon muc cua don vi (dem so phan tu tren bieu do Ven ba tap). Co Lan chot 04/10/2026: cao hon thi ghi chu vao mapping de giao vien quyet dinh giu/bo. CLAUDE THEM 04/10/2026; co Lan duyet lai muc do"
+  },
+  {
+    "id": "L10_C1_B2_TH019_SA_B",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu đồ Ven ba tập hợp ghi số phần tử từng vùng: tính số phần tử của tập là phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
+    "muc_do_thuc_te": "VDC",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: don vi TH019 chi o muc TH (dung bieu do Ven bieu dien hop, giao, hieu, phan bu); dang nay co MUC THUC TE VDC, cao hon muc cua don vi (dem so phan tu cua phep toan ket hop nhieu tap). Co Lan chot 04/10/2026: cao hon thi ghi chu vao mapping de giao vien quyet dinh giu/bo. CLAUDE THEM 04/10/2026; co Lan duyet lai muc do"
   }
 ]
