@@ -9893,3 +9893,11 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Sửa: PDF "lời giải" tiếng Anh thực ra là PDF đề (tên lưu thừa đuôi `_loigiai`).
 - Tạo đề kèm tiếng Anh không còn biên dịch 2 PDF Anh trong lúc chờ: chỉ ghi .tex Anh, PDF Anh biên dịch ở luồng nền ngay sau khi tạo (hoặc khi bấm tải lần đầu, có khoá chống biên dịch đè).
 - Bảng giáo viên: bản Anh đủ 5 liên kết (PDF đề, PDF lời giải, Word đề, Word lời giải, .tex).
+
+## Mệnh đề chứa biến đủ bốn mức NB / TH / VD / VDC, khoảng k theo năm thực (04/10/2026)
+- Từ câu "đếm k thuộc [-2026; 2027] để tồn tại x, -x² + 42x + k ≥ 0" (VD014_MC_A/SA_A) cô Lan yêu cầu thêm nhiều dạng cùng chủ đề. Mọi dạng dùng ĐƠN VỊ CÓ SẴN của Bài 1 (Curriculum không thêm đơn vị, không có mức VDC riêng): NB001_MC_C, TH003_MC_D, VD014 (VD) và VD014 + `muc_do_dang: "VDC"` (VDC).
+- NB001_MC_C_01: "Với giá trị nào của x thì mệnh đề x ⋈ c là mệnh đề đúng (sai)" (dấu >, <, ≥, ≤, =, ≠ và số ngẫu nhiên; "=" chỉ hỏi đúng, "≠" chỉ hỏi sai để luôn có một đáp án).
+- TH003_MC_D_01: x², |x|, (x ± a)², x³ so với một số; _02: sin x, cos x, tan x của góc từ 0° đến 90°.
+- VD014_MC_E_01 / SA_C_01 (VD, không tham số): phương trình bậc hai (nghiệm nguyên hoặc phân số), |px + q| = r, |x − a| = sx + t (loại nghiệm ngoại lai); MC hỏi tập nghiệm, SA hỏi tổng hoặc tích.
+- VDC (đếm số nguyên k thuộc [−năm; năm+1], năm = `datetime.datetime.now().year` nên TỰ ĐỔI theo năm thực): MC_F/SA_D (|px+q| = mk+c có nghiệm / hai nghiệm / vô nghiệm), MC_H/SA_F (|x−a| = k−c có hai nghiệm dương), MC_G/SA_E (x²+bx+k=0, dùng Δ), MC_I/SA_G (kx²−2ax+c=0 hai nghiệm phân biệt, nhớ k ≠ 0), MC_J/SA_H (x²−2kx+c=0, k² so với c). Bất phương trình giữ ở VD014_MC_A/SA_A (nay đánh dấu VDC).
+- Test mới: tests/test_menh_de_bon_muc.py (đáp số tính lại bằng vét cạn / sympy, giả lập năm 2026-2040, đúng một đáp án MC cho NB/TH). Bản Anh dịch xong, kiem_tuong_duong 0 hàm lệch.

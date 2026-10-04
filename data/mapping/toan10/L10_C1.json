@@ -331,7 +331,9 @@
     "id": "L10_C1_B1_VD014_MC_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mệnh đề chưa biến"
+    "Dang": "Mệnh đề chưa biến",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - cau dem k theo nam thuc (bat phuong trinh bac hai co tham so) la muc VDC theo co Lan; danh dau muc_do_dang"
   },
   {
     "id": "L10_C1_B1_VD014_MC_B",
@@ -351,7 +353,9 @@
     "id": "L10_C1_B1_VD014_SA_A",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Mệnh đề chưa biến"
+    "Dang": "Mệnh đề chưa biến",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - cau dem k theo nam thuc (bat phuong trinh bac hai co tham so) la muc VDC theo co Lan; danh dau muc_do_dang"
   },
   {
     "id": "L10_C1_B2_NB017_MC_A",
@@ -832,5 +836,113 @@
     "Loai": "Tự luận",
     "Dang": "Khoảng chứa tham số: tìm m để tập con; tìm m để giao khác rỗng nhưng không là tập con",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; mot don vi VD021: a) VD, b) VDC"
+  },
+  {
+    "id": "L10_C1_B1_NB001_MC_C",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Với giá trị nào của x thì mệnh đề chứa biến (x so với một số: x > 3, x ≤ −2, x = 5, x ≠ 4) là mệnh đề đúng (sai)",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
+  },
+  {
+    "id": "L10_C1_B1_TH003_MC_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Với giá trị nào của x thì mệnh đề chứa biến (x², |x|, (x ± a)², x³ hoặc sin x, cos x, tan x của góc nhọn so với một số) là mệnh đề đúng (sai)",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_E",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập các giá trị x để mệnh đề chứa biến (phương trình bậc hai hoặc phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_C",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tập các giá trị x để mệnh đề chứa biến (phương trình bậc hai hoặc phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_F",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |px + q| = mk + c có nghiệm, hai nghiệm phân biệt hoặc vô nghiệm",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |px + q| = mk + c có nghiệm, hai nghiệm phân biệt hoặc vô nghiệm",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_G",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình bậc hai x² + bx + k = 0 có nghiệm hoặc vô nghiệm (dùng ∆)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_E",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình bậc hai x² + bx + k = 0 có nghiệm hoặc vô nghiệm (dùng ∆)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_H",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |x − a| = k − c có hai nghiệm dương phân biệt",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_F",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |x − a| = k − c có hai nghiệm dương phân biệt",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_I",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình kx² − 2ax + c = 0 có hai nghiệm phân biệt (chú ý k ≠ 0)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_G",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình kx² − 2ax + c = 0 có hai nghiệm phân biệt (chú ý k ≠ 0)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_MC_J",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình x² − 2kx + c = 0 có nghiệm hoặc có hai nghiệm phân biệt (k² so với c)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_H",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình x² − 2kx + c = 0 có nghiệm hoặc có hai nghiệm phân biệt (k² so với c)",
+    "muc_do_dang": "VDC",
+    "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   }
 ]

@@ -13696,3 +13696,724 @@ def L10_C1_TH019_VD020_TL_A_01(socau, dong=1):
                % (dv, d["phu"], loai, N, N, a + b + c, k, dv, dt, loai, a, b, a + b))]
         cau += TL_answer_text(de, ds, _b2_ven_tikz(a, c, b), 0, dong)
     return cau
+
+
+# =====================================================================
+# MỆNH ĐỀ CHỨA BIẾN THEO BỐN MỨC ĐỘ (cô Lan 04/10/2026)
+# ---------------------------------------------------------------------
+# Từ câu "đếm số nguyên k thuộc [-2026; 2027] để tồn tại x, -x^2 + 42x + k >= 0"
+# (VD014_MC_A/SA_A, mức VDC) cô Lan yêu cầu thêm bài cùng chủ đề "mệnh đề chứa biến"
+# ở đủ NB, TH, VD, VDC. Curriculum của Bộ không có đơn vị mới và không có mức VDC
+# riêng (docs/04), nên mỗi mức dùng ĐƠN VỊ CÓ SẴN của Bài 1:
+#   NB   NB001_MC_C   x so với một số (x > 3, x <= -2, x = 5, x != 4): chọn giá trị x để
+#                     mệnh đề đúng (sai)
+#   TH   TH003_MC_D   _01 x^2, |x|, (x-a)^2, x^3 so với một số; _02 sin x, cos x, tan x
+#                     của góc nhọn (các hàm học ở THCS)
+#   VD   VD014_MC_E / SA_C   phương trình bậc hai, phương trình có dấu giá trị tuyệt đối
+#                     (trong dấu là biểu thức bậc nhất), KHÔNG tham số
+#   VDC  VD014_MC_F / SA_D   tham số k, |px + q| = mk + c: có nghiệm / hai nghiệm / vô nghiệm
+#        VD014_MC_H / SA_F   tham số k, |x - a| = k - c có hai nghiệm DƯƠNG phân biệt
+#        VD014_MC_G / SA_E   tham số k, x^2 + bx + k = 0: có nghiệm / vô nghiệm (Delta)
+#        VD014_MC_I / SA_G   tham số k, kx^2 - 2ax + c = 0 hai nghiệm phân biệt (nhớ k khác 0)
+#        VD014_MC_J / SA_H   tham số k, x^2 - 2kx + c = 0 (k^2 so với c)
+#        (bất phương trình đã có ở VD014_MC_A / SA_A)
+# VDC đánh dấu "muc_do_dang": "VDC" trong Mapping (như docs/04, Ngoại lệ 2).
+# Khoảng của k luôn là [-năm; năm+1] với năm là NĂM THỰC (datetime.datetime.now().year).
+# =====================================================================
+from fractions import Fraction as _FM
+
+
+def _so_tex(v):
+    """Số nguyên / phân số -> LaTeX."""
+    v = _FM(v)
+    if v.denominator == 1:
+        return str(v.numerator)
+    return r"%s\dfrac{%d}{%d}" % ("-" if v < 0 else "", abs(v.numerator), v.denominator)
+
+
+def _so_ngoac(v):
+    """Số âm đặt trong ngoặc (dùng khi thay vào biểu thức)."""
+    t = _so_tex(v)
+    return r"\left(%s\right)" % t if _FM(v) < 0 else t
+
+
+def _bt_bac1(p, q, bien="x"):
+    """p*bien + q viết gọn: x + 3, -x, 2x - 5, 3x."""
+    s = {1: bien, -1: "-" + bien}.get(p, "%d%s" % (p, bien))
+    if q > 0:
+        s += " + %d" % q
+    elif q < 0:
+        s += " - %d" % -q
+    return s
+
+
+def _bt_bac2(A, B, C):
+    """Ax^2 + Bx + C viết gọn (A khác 0)."""
+    s = {1: "x^{2}", -1: "-x^{2}"}.get(A, "%dx^{2}" % A)
+    if B:
+        s += (" + " if B > 0 else " - ") + ("" if abs(B) == 1 else str(abs(B))) + "x"
+    if C:
+        s += (" + " if C > 0 else " - ") + str(abs(C))
+    return s
+
+
+_SO_SANH = {
+    '>': lambda v, c: v > c, '<': lambda v, c: v < c,
+    r'\geq': lambda v, c: v >= c, r'\leq': lambda v, c: v <= c,
+    '=': lambda v, c: v == c, r'\neq': lambda v, c: v != c,
+}
+
+
+def _chon_hoi(dau):
+    """True = hỏi mệnh đề ĐÚNG, False = hỏi mệnh đề SAI. Dấu = chỉ hỏi đúng (chỉ một giá trị
+    thoả), dấu != chỉ hỏi sai (chỉ một giá trị không thoả) để luôn có đúng một đáp án."""
+    if dau == '=':
+        return True
+    if dau == r'\neq':
+        return False
+    return random.random() < 0.5
+
+
+def _mot_dung_ba_nhieu(S, F, hoi_dung):
+    """Chọn 1 giá trị đúng với yêu cầu và 3 giá trị nhiễu. S: giá trị làm mệnh đề đúng,
+    F: giá trị làm mệnh đề sai. Hỏi đúng: 1 từ S + 3 từ F; hỏi sai: 1 từ F + 3 từ S."""
+    if hoi_dung:
+        dung = random.choice(S)
+        nhieu = random.sample(F, 3)
+    else:
+        dung = random.choice(F)
+        nhieu = random.sample(S, 3)
+    return dung, nhieu
+
+
+def _tu_dung_sai(hoi_dung):
+    return "true" if hoi_dung else r"\textbf{false}"
+
+
+def _thu_gia_tri(P, c, dau, pool, hoi_dung, tex_gt, dong_tinh):
+    """Thử một lượt: trả (dung, nhieu, giai) hoặc None nếu không đủ giá trị.
+    P(v) -> giá trị vế trái; tex_gt(v) -> (chuỗi thay v, giá trị tex); dong_tinh(v) dòng lời giải."""
+    ss = _SO_SANH[dau]
+    S = [v for v in pool if ss(P(v), c)]
+    F = [v for v in pool if not ss(P(v), c)]
+    if (hoi_dung and (len(S) < 1 or len(F) < 3)) or (not hoi_dung and (len(F) < 1 or len(S) < 3)):
+        return None
+    dung, nhieu = _mot_dung_ba_nhieu(S, F, hoi_dung)
+    return dung, nhieu, ss
+
+
+# ---------------------------------------------------------------------
+# NB001_MC_C - Với giá trị nào của x thì mệnh đề x so với một số là đúng (sai)?
+# ---------------------------------------------------------------------
+def L10_C1_B1_NB001_MC_C_01(socau, dang=1):
+    r"""Nhận biết - mệnh đề chứa biến cực đơn giản $P(x)\colon x > 3$: chọn giá trị của $x$
+    làm mệnh đề đúng (hoặc sai). Dấu $>, <, \geq, \leq, =, \neq$ và số vế phải ngẫu nhiên.
+
+    CLAUDE THEM 04/10/2026 - dang moi cho NB001 theo yeu cau co Lan ("Voi gia tri nao cua x
+    thi menh de sau la menh de dung (sai)"). Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 1000:
+        lan += 1
+        dau = random.choice(list(_SO_SANH))
+        c = random.randint(-9, 9)
+        hoi = _chon_hoi(dau)
+        if (dau, c, hoi) in da:
+            continue
+        pool = list(range(c - 7, c + 8))
+        kq = _thu_gia_tri(lambda v: v, c, dau, pool, hoi, None, None)
+        if kq is None:
+            continue
+        da.add((dau, c, hoi))
+        dung, nhieu, ss = kq
+        debai = (r"For which value of $x$ is the predicate $P(x)\colon x %s %d$ a %s statement?"
+                 % (dau, c, _tu_dung_sai(hoi)))
+        dong = [r"Substitute each value of $x$ into $P(x)\colon x %s %d$:" % (dau, c)]
+        for v in sorted(nhieu + [dung]):
+            dong.append(r"For $x = %d$, $%d %s %d$ is a %s statement."
+                        % (v, v, dau, c, _tu_dung_sai(ss(v, c))))
+        dong.append(r"Hence the answer is $x = %d$." % dung)
+        giai = "\\\\\n".join(dong)
+        cau += MC_SA_answer_text(debai, "$x = %d$" % dung, ["$x = %d$" % v for v in nhieu],
+                                 giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH003_MC_D - mệnh đề chứa biến với các hàm đã học ở THCS
+# ---------------------------------------------------------------------
+def L10_C1_B1_TH003_MC_D_01(socau, dang=1):
+    r"""Thông hiểu - $P(x)$ so sánh $x^{2}$, $\left|x\right|$, $\left(x \pm a\right)^{2}$, $x^{3}$ với một số:
+    chọn giá trị của $x$ làm mệnh đề đúng (hoặc sai).
+
+    CLAUDE THEM 04/10/2026 - dang moi cho TH003 theo yeu cau co Lan (cac ham cap 2 da hoc: x^2,
+    |x| ...). Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 2000:
+        lan += 1
+        kieu = random.choice(["bp", "gt", "lech", "lp"])
+        if kieu == "bp":
+            c = random.choice([4, 9, 16, 25, 36, 49])
+            bt = r"x^{2}"
+            tinh = lambda v: (r"%s^{2}" % _so_ngoac(v), v * v)
+            khoa_k = (kieu,)
+        elif kieu == "gt":
+            c = random.randint(1, 8)
+            bt = r"\left|x\right|"
+            tinh = lambda v: (r"\left|%d\right|" % v, abs(v))
+            khoa_k = (kieu,)
+        elif kieu == "lech":
+            a = random.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+            c = random.choice([1, 4, 9, 16, 25])
+            dau_a = "-" if a > 0 else "+"
+            bt = r"\left(x %s %d\right)^{2}" % (dau_a, abs(a))
+            tinh = lambda v, a=a, dau_a=dau_a: (r"\left(%d %s %d\right)^{2}" % (v, dau_a, abs(a)), (v - a) ** 2)
+            khoa_k = (kieu, a)
+        else:
+            c = random.choice([-27, -8, -1, 1, 8, 27])
+            bt = r"x^{3}"
+            tinh = lambda v: (r"%s^{3}" % _so_ngoac(v), v ** 3)
+            khoa_k = (kieu,)
+        dau = random.choice(list(_SO_SANH))
+        if dau == r'\neq':
+            dau = '='
+        hoi = _chon_hoi(dau)
+        khoa = khoa_k + (c, dau, hoi)
+        if khoa in da:
+            continue
+        pool = list(range(-9, 10))
+        kq = _thu_gia_tri(lambda v: tinh(v)[1], c, dau, pool, hoi, None, None)
+        if kq is None:
+            continue
+        da.add(khoa)
+        dung, nhieu, ss = kq
+        debai = (r"For which value of $x$ is the predicate $P(x)\colon %s %s %d$ a %s statement?"
+                 % (bt, dau, c, _tu_dung_sai(hoi)))
+        dong = [r"Substitute each value of $x$ into $P(x)\colon %s %s %d$:" % (bt, dau, c)]
+        for v in sorted(nhieu + [dung]):
+            sub, gt = tinh(v)
+            dong.append(r"For $x = %d$ we get $%s = %d$, so $%d %s %d$ is a %s statement."
+                        % (v, sub, gt, gt, dau, c, _tu_dung_sai(ss(gt, c))))
+        dong.append(r"Hence the answer is $x = %d$." % dung)
+        giai = "\\\\\n".join(dong)
+        cau += MC_SA_answer_text(debai, "$x = %d$" % dung, ["$x = %d$" % v for v in nhieu],
+                                 giai, 0, 0, dang)
+    return cau
+
+
+_LG_GOC = [0, 30, 45, 60, 90]
+_LG_BANG = {
+    # tên: {góc: (giá trị số, LaTeX)}
+    "sin": {0: (0.0, "0"), 30: (0.5, r"\dfrac{1}{2}"), 45: (math.sqrt(2) / 2, r"\dfrac{\sqrt{2}}{2}"),
+            60: (math.sqrt(3) / 2, r"\dfrac{\sqrt{3}}{2}"), 90: (1.0, "1")},
+    "cos": {0: (1.0, "1"), 30: (math.sqrt(3) / 2, r"\dfrac{\sqrt{3}}{2}"),
+            45: (math.sqrt(2) / 2, r"\dfrac{\sqrt{2}}{2}"), 60: (0.5, r"\dfrac{1}{2}"), 90: (0.0, "0")},
+    "tan": {0: (0.0, "0"), 30: (math.sqrt(3) / 3, r"\dfrac{\sqrt{3}}{3}"), 45: (1.0, "1"),
+            60: (math.sqrt(3), r"\sqrt{3}")},
+}
+_LG_SS = {
+    '=': lambda v, c: abs(v - c) < 1e-9,
+    '>': lambda v, c: v > c + 1e-9,
+    '<': lambda v, c: v < c - 1e-9,
+    r'\geq': lambda v, c: v >= c - 1e-9,
+    r'\leq': lambda v, c: v <= c + 1e-9,
+}
+
+
+def L10_C1_B1_TH003_MC_D_02(socau, dang=1):
+    r"""Thông hiểu - $P(x)\colon \sin x = \dfrac{1}{2}$ (hoặc $\cos$, $\tan$, dấu $=, >, <, \geq, \leq$) với $x$ là
+    góc từ $0^{\circ}$ đến $90^{\circ}$: chọn góc $x$ làm mệnh đề đúng (hoặc sai).
+
+    CLAUDE THEM 04/10/2026 - dang moi cho TH003 theo yeu cau co Lan (ti so luong giac cua goc
+    nhon da hoc o THCS). Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 3000:
+        lan += 1
+        ham = random.choice(["sin", "cos", "tan"])
+        bang = _LG_BANG[ham]
+        goc_ds = sorted(bang)
+        c_goc = random.choice(goc_ds)
+        c, c_tex = bang[c_goc]
+        dau = random.choice(list(_LG_SS))
+        hoi = _chon_hoi(dau)
+        khoa = (ham, c_goc, dau, hoi)
+        if khoa in da:
+            continue
+        ss = _LG_SS[dau]
+        S = [g for g in goc_ds if ss(bang[g][0], c)]
+        F = [g for g in goc_ds if not ss(bang[g][0], c)]
+        if (hoi and (len(S) < 1 or len(F) < 3)) or (not hoi and (len(F) < 1 or len(S) < 3)):
+            continue
+        da.add(khoa)
+        dung, nhieu = _mot_dung_ba_nhieu(S, F, hoi)
+        ten = "\\" + ham
+        mien = r"$0^{\circ} \leq x \leq 90^{\circ}$" if ham != "tan" else r"$0^{\circ} \leq x < 90^{\circ}$"
+        debai = (r"For which value of $x$ (%s) is the predicate $P(x)\colon %s x %s %s$ a %s statement?"
+                 % (mien, ten, dau, c_tex, _tu_dung_sai(hoi)))
+        dong = [r"Substitute each value of $x$ into $P(x)\colon %s x %s %s$:" % (ten, dau, c_tex)]
+        for g in sorted(nhieu + [dung]):
+            gt, gt_tex = bang[g]
+            dong.append(r"For $x = %d^{\circ}$ we get $%s %d^{\circ} = %s$, so $%s %s %s$ is a %s statement."
+                        % (g, ten, g, gt_tex, gt_tex, dau, c_tex, _tu_dung_sai(ss(gt, c))))
+        dong.append(r"Hence the answer is $x = %d^{\circ}$." % dung)
+        giai = "\\\\\n".join(dong)
+        cau += MC_SA_answer_text(debai, r"$x = %d^{\circ}$" % dung,
+                                 [r"$x = %d^{\circ}$" % g for g in nhieu], giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# VD014_MC_E / VD014_SA_C - phương trình bậc hai, phương trình chứa dấu giá trị tuyệt đối
+# (KHÔNG tham số): tìm các giá trị x để mệnh đề P(x) đúng
+# ---------------------------------------------------------------------
+def _pt_bac2():
+    """x1, x2 nguyên hoặc phân số, khác 0, |x1| khác |x2|: (A x^2 + B x + C = 0)."""
+    while True:
+        d1, d2 = random.choice([1, 1, 1, 2, 3]), random.choice([1, 1, 2, 3])
+        r1 = _FM(random.randint(-8, 8), d1)
+        r2 = _FM(random.randint(-8, 8), d2)
+        if r1 == 0 or r2 == 0 or abs(r1) == abs(r2):
+            continue
+        A = r1.denominator * r2.denominator
+        B = -(r1 + r2) * A
+        C = r1 * r2 * A
+        if B.denominator != 1 or C.denominator != 1:
+            continue
+        A, B, C = int(A), int(B), int(C)
+        if math.gcd(math.gcd(A, abs(B)), abs(C)) != 1:
+            continue
+        nghiem = sorted([r1, r2])
+        D = B * B - 4 * A * C
+        sq = math.isqrt(D)
+        eq = _bt_bac2(A, B, C)
+        giai = (r"The equation $%s = 0$ has $\Delta = %d$, so it has two roots $x = \dfrac{%d \pm %d}{%d}$, that is, $x = %s$ or $x = %s$."
+                % (eq, D, -B, sq, 2 * A, _so_tex(nghiem[0]), _so_tex(nghiem[1])))
+        return r"%s = 0" % eq, nghiem, giai
+
+
+def _pt_tri_tuyet_doi_1():
+    """|px + q| = r  (r > 0, q khác 0, r khác |q| nên hai nghiệm khác 0)."""
+    while True:
+        p = random.choice([1, 2, 3, 4])
+        q = random.choice([n for n in range(-9, 10) if n != 0])
+        r = random.randint(1, 12)
+        if r == abs(q):
+            continue
+        x1, x2 = _FM(-q + r, p), _FM(-q - r, p)
+        bt = _bt_bac1(p, q)
+        giai = (r"We have $\left|%s\right| = %d \Leftrightarrow %s = %d$ or $%s = -%d$." % (bt, r, bt, r, bt, r) +
+                "\\\\\n" +
+                r"$%s = %d \Leftrightarrow x = %s$; $%s = -%d \Leftrightarrow x = %s$."
+                % (bt, r, _so_tex(x1), bt, r, _so_tex(x2)))
+        return r"\left|%s\right| = %d" % (bt, r), sorted([x1, x2]), giai
+
+
+def _pt_tri_tuyet_doi_2():
+    """|x - a| = s x + t: giải hai nhánh rồi LOẠI nghiệm không thoả điều kiện s x + t >= 0."""
+    while True:
+        a = random.randint(-6, 6)
+        s = random.choice([2, 3, -2, -3])
+        t = random.randint(-6, 6)
+        # nhanh 1: x - a = s x + t ; nhanh 2: x - a = -(s x + t)
+        x1 = _FM(a + t, 1 - s)
+        x2 = _FM(a - t, 1 + s)
+        if x1 == x2:
+            continue
+        hop_le = [x for x in (x1, x2) if s * x + t >= 0]
+        if len(hop_le) < 1 or len(hop_le) == 2 and random.random() < 0.6:
+            continue
+        vt = _bt_bac1(s, t)
+        trong = _bt_bac1(1, -a)
+        dong = [r"We have $\left|%s\right| = %s \Leftrightarrow %s = %s$ or $%s = -\left(%s\right)$, with the condition $%s \geq 0$."
+                % (trong, vt, trong, vt, trong, vt, vt)]
+        dong.append(r"$%s = %s \Leftrightarrow x = %s$; $%s = -\left(%s\right) \Leftrightarrow x = %s$."
+                    % (trong, vt, _so_tex(x1), trong, vt, _so_tex(x2)))
+        for x in (x1, x2):
+            val = s * x + t
+            dong.append(r"For $x = %s$: $%s = %s$, %s." % (
+                _so_tex(x), vt, _so_tex(val),
+                r"the condition is satisfied" if val >= 0 else r"the condition is not satisfied, so it is rejected"))
+        return r"\left|%s\right| = %s" % (trong, vt), sorted(hop_le), "\\\\\n".join(dong)
+
+
+def _vd_tao_pt():
+    kieu = random.choices(["bac2", "td1", "td2"], weights=[4, 4, 3])[0]
+    if kieu == "bac2":
+        return (kieu,) + _pt_bac2()
+    if kieu == "td1":
+        return (kieu,) + _pt_tri_tuyet_doi_1()
+    return (kieu,) + _pt_tri_tuyet_doi_2()
+
+
+def _tap_tex(ds):
+    return r"$\left\{%s\right\}$" % "; ".join(_so_tex(v) for v in ds)
+
+
+def _tap_nhieu(dung, ung_vien):
+    """Ba tập nhiễu khác nhau và khác tập đúng (dung: list Fraction đã sắp)."""
+    dung = tuple(dung)
+    ra = []
+
+    def them(t):
+        t = tuple(sorted(t))
+        if t and t != dung and t not in ra:
+            ra.append(t)
+    for t in ung_vien:
+        them(t)
+    for d in (1, -1, 2, -2, 3):
+        them([v + d for v in dung])
+    return ra[:3]
+
+
+def L10_C1_B1_VD014_MC_E_01(socau, dang=1):
+    r"""Vận dụng - tìm TẬP các giá trị thực $x$ để mệnh đề chứa biến $P(x)$ (phương trình bậc hai, hoặc
+    phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng.
+
+    CLAUDE THEM 04/10/2026 - dang moi cho VD014 theo yeu cau co Lan (VD: phuong trinh bac hai,
+    phuong trinh co dau tri tuyet doi, khong tham so). Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 1000:
+        lan += 1
+        kieu, pt, nghiem, giai0 = _vd_tao_pt()
+        if pt in da:
+            continue
+        da.add(pt)
+        debai = (r"Find the set of all real values of $x$ for which the predicate $P(x)\colon %s$ is a true statement." % pt)
+        giai = giai0 + "\\\\\n" + r"Hence the required set is $\left\{%s\right\}$." % "; ".join(_so_tex(v) for v in nghiem)
+        ung_vien = []
+        # nhiễu tự nhiên: đổi dấu các nghiệm, đổi dấu một nghiệm
+        ung_vien.append([-v for v in nghiem])
+        if len(nghiem) == 2:
+            ung_vien.append([nghiem[0], -nghiem[1]])
+            ung_vien.append([-nghiem[0], nghiem[1]])
+        else:
+            ung_vien.append([nghiem[0] * 2])
+        nhieu = _tap_nhieu(nghiem, ung_vien)
+        cau += MC_SA_answer_text(debai, _tap_tex(nghiem), [_tap_tex(t) for t in nhieu], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - TỔNG (hoặc TÍCH) các giá trị thực $x$ để mệnh đề chứa biến $P(x)$ (phương trình bậc hai,
+    phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng. Đáp số là số nguyên.
+
+    CLAUDE THEM 04/10/2026 - cung dang voi VD014_MC_E (khac cach hoi: tong / tich thay vi tap
+    nghiem). Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 3000:
+        lan += 1
+        kieu, pt, nghiem, giai0 = _vd_tao_pt()
+        if pt in da:
+            continue
+        if len(nghiem) == 2 and random.random() < 0.5:
+            ten, dap = "product", nghiem[0] * nghiem[1]
+            cach = r"%s \cdot %s" % (_so_ngoac(nghiem[0]), _so_ngoac(nghiem[1]))
+        else:
+            ten, dap = "sum", sum(nghiem)
+            cach = " + ".join(_so_ngoac(v) if i else _so_tex(v) for i, v in enumerate(nghiem))
+        if dap.denominator != 1 or abs(dap) > 999:
+            continue
+        da.add(pt)
+        dap = int(dap)
+        debai = (r"Find the %s of all real values of $x$ for which the predicate $P(x)\colon %s$ is a true statement." % (ten, pt))
+        giai = giai0 + "\\\\\n" + (r"Hence the %s of the values of $x$ is $%s = %d$." % (ten, cach, dap))
+        nhieu = [str(v) for v in dict.fromkeys([-dap, dap + 1, dap - 1, dap + 2, dap - 2, dap + 3]) if v != dap][:3]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# VDC: tham số k nguyên trong [-năm; năm+1] (năm thực) - đếm số k
+# ---------------------------------------------------------------------
+def _khoang_k(nam, tr, ph):
+    k_min, k_max = -nam, nam + 1
+    k_lower = k_min if tr == '[' else k_min + 1
+    k_upper = k_max if ph == ']' else k_max - 1
+    return k_lower, k_upper, r"\left%s%d;\ %d\right%s" % (tr, k_min, k_max, ph)
+
+
+def _cat_doan(lo, hi, k_lower, k_upper):
+    """Đoạn nguyên [lo; hi] (None = vô hạn) cắt với [k_lower; k_upper]; None nếu rỗng."""
+    a = k_lower if lo is None else max(k_lower, lo)
+    b = k_upper if hi is None else min(k_upper, hi)
+    return (a, b) if a <= b else None
+
+
+def _a_ngoac(n):
+    return r"\left(%d\right)" % n if n < 0 else str(n)
+
+
+def _liet_ke_k(a, b):
+    if b - a + 1 <= 4:
+        return "; ".join(str(i) for i in range(a, b + 1))
+    return r"%d; %d; \ldots; %d" % (a, a + 1, b)
+
+
+def _ket_luan_k(khoang, doan, loai_0=False):
+    """doan: các đoạn nguyên (a, b) thoả điều kiện của k (đã cắt với khoảng đề cho).
+    Trả về (số giá trị, lời giải phần kết). loai_0: điều kiện k khác 0."""
+    cac = [d for d in doan if d]
+    if not cac:
+        return 0, r"Combining with $k \in %s$ and $k$ being an integer, no value satisfies the condition." % khoang
+    tap = r" \cup ".join(r"\left\{%s\right\}" % _liet_ke_k(a, b) for a, b in cac)
+    dong = [r"Combining with $k \in %s$ and $k$ being an integer (the interval is bounded, so there are only finitely many integers): $k \in %s$." % (khoang, tap)]
+    dem = sum(b - a + 1 for a, b in cac)
+    if len(cac) == 1:
+        a, b = cac[0]
+        dong.append(r"The number of integer values of $k$ is $%d - %s + 1 = %d$." % (b, _a_ngoac(a), dem))
+    else:
+        (a1, b1), (a2, b2) = cac
+        dong.append(r"The number of integer values of $k$ is $\left(%d - %s + 1\right) + \left(%d - %s + 1\right) = %d$."
+                    % (b1, _a_ngoac(a1), b2, _a_ngoac(a2), dem))
+    if loai_0 and any(a <= 0 <= b for a, b in cac):
+        dong.append(r"Since $k \neq 0$, we must exclude $k = 0$: this leaves $%d - 1 = %d$ values." % (dem, dem - 1))
+        dem -= 1
+    return dem, "\\\\\n".join(dong)
+
+
+def _nhieu_dem_k(dem):
+    ra = []
+    for v in (dem + 1, dem - 1, dem + 2, dem - 2, dem + 3, dem + 4, dem + 5):
+        if v >= 0 and v != dem and str(v) not in ra:
+            ra.append(str(v))
+    return ra[:3]
+
+
+def _vdc_ra_cau(sinh, de_giai, socau, dang):
+    """Sinh socau câu: sinh() -> bộ tham số; de_giai(nam, tr, ph, *tham_so) -> (đề, số k, giải)."""
+    nam = datetime.datetime.now().year
+    da = set()
+    cau = ""
+    lan = 0
+    while len(da) < socau and lan < 2000:
+        lan += 1
+        ts = sinh()
+        tr, ph = random.choice(['(', '[']), random.choice([')', ']'])
+        khoa = (ts, tr, ph)
+        if khoa in da:
+            continue
+        debai, dem, giai = de_giai(nam, tr, ph, *ts)
+        if dem <= 0:
+            continue
+        da.add(khoa)
+        cau += MC_SA_answer_const(debai, str(dem), _nhieu_dem_k(dem), giai, 0, 0, dang)
+    return cau
+
+
+# ---- VD014_MC_F / SA_D : phương trình chứa dấu giá trị tuyệt đối có tham số k ----
+def _sinh_abs(kieu):
+    def sinh():
+        if kieu == "duong":
+            return (random.randint(5, 40), random.choice([n for n in range(-60, 61) if n != 0]))
+        return (random.choice([1, 2, 3]), random.choice([n for n in range(-9, 10) if n != 0]),
+                random.choice([1, 1, 2, 3]), random.choice([n for n in range(-60, 61) if n != 0]))
+    return sinh
+
+
+def _de_giai_abs(kieu):
+    def f(nam, tr, ph, *ts):
+        k_lower, k_upper, khoang = _khoang_k(nam, tr, ph)
+        if kieu == "duong":
+            a, c = ts
+            trong = _bt_bac1(1, -a)
+            ve_phai = _bt_bac1(1, -c, "k")
+            pt = r"\left|%s\right| = %s" % (trong, ve_phai)
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the equation $%s$ has two distinct positive roots?" % (khoang, pt))
+            giai = (r"If $%s \leq 0$, the equation has no solution or only the solution $x = %d$ (never two distinct roots)."
+                    % (ve_phai, a) + "\\\\\n" +
+                    r"If $%s > 0$, the equation is equivalent to $x - %d = \pm\left(%s\right)$, that is, $x = %d + \left(%s\right)$ or $x = %d - \left(%s\right)$ (two distinct roots)." % (ve_phai, a, ve_phai, a, ve_phai, a, ve_phai) +
+                    "\\\\\n" +
+                    r"The root $x = %d + \left(%s\right)$ is always positive, so both roots are positive if and only if $%d - \left(%s\right) > 0 \Leftrightarrow k < %d$." % (a, ve_phai, a, ve_phai, c + a) + "\\\\\n" +
+                    r"Combining with $%s > 0 \Leftrightarrow k > %d$ gives $%d < k < %d$." % (ve_phai, c, c, c + a))
+            doan = [_cat_doan(c + 1, c + a - 1, k_lower, k_upper)]
+            dem, kl = _ket_luan_k(khoang, doan)
+            return debai, dem, giai + "\\\\\n" + kl
+        p, q, m, c = ts
+        vt = _bt_bac1(p, q)
+        vp = _bt_bac1(m, c, "k")
+        thr = _FM(-c, m)
+        nguong = _so_tex(thr)
+        if kieu == "co":
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the statement ``$\exists x \in \mathbb{R},\ \left|%s\right| = %s$'' is true?" % (khoang, vt, vp))
+            giai = (r"Since $\left|%s\right| \geq 0$ for all $x \in \mathbb{R}$, the equation $\left|%s\right| = %s$ has a solution if and only if $%s \geq 0 \Leftrightarrow k \geq %s$." % (vt, vt, vp, vp, nguong))
+            doan = [_cat_doan(math.ceil(thr), None, k_lower, k_upper)]
+        elif kieu == "hai":
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the equation $\left|%s\right| = %s$ has two distinct roots?" % (khoang, vt, vp))
+            giai = (r"The equation $\left|u\right| = t$ has two distinct roots if and only if $t > 0$ (for $t = 0$ it has one root, for $t < 0$ none)." + "\\\\\n" +
+                    r"Hence we need $%s > 0 \Leftrightarrow k > %s$." % (vp, nguong))
+            doan = [_cat_doan(math.floor(thr) + 1, None, k_lower, k_upper)]
+        else:
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the statement ``$\forall x \in \mathbb{R},\ \left|%s\right| \neq %s$'' is true?" % (khoang, vt, vp))
+            giai = (r"The statement is true if and only if the equation $\left|%s\right| = %s$ has no solution." % (vt, vp) + "\\\\\n" +
+                    r"Since $\left|%s\right| \geq 0$, this happens if and only if $%s < 0 \Leftrightarrow k < %s$."
+                    % (vt, vp, nguong))
+            doan = [_cat_doan(None, math.ceil(thr) - 1, k_lower, k_upper)]
+        dem, kl = _ket_luan_k(khoang, doan)
+        return debai, dem, giai + "\\\\\n" + kl
+    return f
+
+
+def L10_C1_B1_VD014_MC_F_01(socau, dang=1):
+    r"""VDC - đếm $k$ để mệnh đề $\exists x \in \mathbb{R},\ \left|px + q\right| = mk + c$ đúng (phương trình có nghiệm).
+
+    CLAUDE THEM 04/10/2026 - dang VDC moi cho VD014 theo yeu cau co Lan (tham so k, phuong trinh
+    chua dau tri tuyet doi; khoang k theo nam thuc). Co Lan duyet lai.
+    """
+    return _vdc_ra_cau(_sinh_abs("co"), _de_giai_abs("co"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_F_02(socau, dang=1):
+    r"""VDC - đếm $k$ để phương trình $\left|px + q\right| = mk + c$ có HAI nghiệm phân biệt. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("hai"), _de_giai_abs("hai"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_F_03(socau, dang=1):
+    r"""VDC - đếm $k$ để mệnh đề $\forall x \in \mathbb{R},\ \left|px + q\right| \neq mk + c$ đúng (vô nghiệm). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("vo"), _de_giai_abs("vo"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_H_01(socau, dang=1):
+    r"""VDC - đếm $k$ để $\left|x - a\right| = k - c$ có hai nghiệm DƯƠNG phân biệt. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("duong"), _de_giai_abs("duong"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_F_01 (tồn tại nghiệm). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("co"), _de_giai_abs("co"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_D_02(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_F_02 (hai nghiệm phân biệt). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("hai"), _de_giai_abs("hai"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_D_03(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_F_03 (vô nghiệm). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("vo"), _de_giai_abs("vo"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_F_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_H_01 (hai nghiệm dương). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_abs("duong"), _de_giai_abs("duong"), socau, dang)
+
+
+# ---- VD014_MC_G / SA_E : phương trình bậc hai có tham số k ----
+def _sinh_bac2(kieu):
+    def sinh():
+        if kieu in ("co", "vo"):
+            return (random.choice([n for n in range(-40, 41) if n != 0]),)
+        if kieu == "hesoa":
+            return (random.randint(1, 30), random.choice([n for n in range(-12, 13) if n != 0]))
+        return (random.randint(2, 150), random.choice([">", r"\geq"]))
+    return sinh
+
+
+def _de_giai_bac2(kieu):
+    def f(nam, tr, ph, *ts):
+        k_lower, k_upper, khoang = _khoang_k(nam, tr, ph)
+        if kieu in ("co", "vo"):
+            b, = ts
+            pt = r"x^{2} %s %dx + k" % ("+" if b > 0 else "-", abs(b)) if abs(b) != 1 else \
+                r"x^{2} %s x + k" % ("+" if b > 0 else "-")
+            thr = _FM(b * b, 4)
+            if kieu == "co":
+                debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the statement ``$\exists x \in \mathbb{R},\ %s = 0$'' is true?" % (khoang, pt))
+                giai = (r"The statement is true if and only if the equation $%s = 0$ has a real root, that is, $\Delta = %d - 4k \geq 0 \Leftrightarrow k \leq %s$." % (pt, b * b, _so_tex(thr)))
+                doan = [_cat_doan(None, math.floor(thr), k_lower, k_upper)]
+            else:
+                debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the statement ``$\forall x \in \mathbb{R},\ %s \neq 0$'' is true?" % (khoang, pt))
+                giai = (r"The statement is true if and only if the equation $%s = 0$ has no real root, that is, $\Delta = %d - 4k < 0 \Leftrightarrow k > %s$." % (pt, b * b, _so_tex(thr)))
+                doan = [_cat_doan(math.floor(thr) + 1, None, k_lower, k_upper)]
+            dem, kl = _ket_luan_k(khoang, doan)
+            return debai, dem, giai + "\\\\\n" + kl
+        if kieu == "hesoa":
+            a, c = ts
+            pt = r"kx^{2} - %dx %s %d" % (2 * a, "+" if c > 0 else "-", abs(c))
+            thr = _FM(a * a, c)
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the equation $%s = 0$ has two distinct roots?" % (khoang, pt))
+            if c > 0:
+                dk = r"%d - %sk > 0 \Leftrightarrow k < %s" % (a * a, "" if c == 1 else c, _so_tex(thr))
+                doan = [_cat_doan(None, math.ceil(thr) - 1, k_lower, k_upper)]
+            else:
+                dk = r"%d + %sk > 0 \Leftrightarrow k > %s" % (a * a, "" if c == -1 else -c, _so_tex(thr))
+                doan = [_cat_doan(math.floor(thr) + 1, None, k_lower, k_upper)]
+            giai = (r"The equation has two distinct roots if and only if $k \neq 0$ and $\Delta' = \left(-%d\right)^{2} - k \cdot %s > 0$, that is, $%s$." % (a, _a_ngoac(c), dk))
+            dem, kl = _ket_luan_k(khoang, doan, loai_0=True)
+            return debai, dem, giai + "\\\\\n" + kl
+        # kieu == "kep": x^2 - 2kx + c = 0 co nghiem / co hai nghiem phan biet
+        c, dau = ts
+        pt = r"x^{2} - 2kx + %d" % c
+        sq = math.isqrt(c)
+        if dau == r'\geq':
+            r = sq if sq * sq == c else sq + 1
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the statement ``$\exists x \in \mathbb{R},\ %s = 0$'' is true?" % (khoang, pt))
+            giai = (r"The statement is true if and only if the equation $%s = 0$ has a real root, that is, $\Delta' = k^{2} - %d \geq 0 \Leftrightarrow k \leq -\sqrt{%d}$ or $k \geq \sqrt{%d}$."
+                    % (pt, c, c, c))
+        else:
+            r = sq + 1
+            debai = (r"How many integer values of the parameter $k$ in $%s$ are there such that the equation $%s = 0$ has two distinct roots?" % (khoang, pt))
+            giai = (r"The equation has two distinct roots if and only if $\Delta' = k^{2} - %d > 0 \Leftrightarrow k < -\sqrt{%d}$ or $k > \sqrt{%d}$."
+                    % (c, c, c))
+        giai += "\\\\\n" + r"Since $k$ is an integer, the condition is $k \leq -%d$ or $k \geq %d$." % (r, r)
+        doan = [_cat_doan(None, -r, k_lower, k_upper), _cat_doan(r, None, k_lower, k_upper)]
+        dem, kl = _ket_luan_k(khoang, doan)
+        return debai, dem, giai + "\\\\\n" + kl
+    return f
+
+
+def L10_C1_B1_VD014_MC_G_01(socau, dang=1):
+    r"""VDC - đếm $k$ để mệnh đề $\exists x \in \mathbb{R},\ x^{2} + bx + k = 0$ đúng ($\Delta \geq 0$).
+
+    CLAUDE THEM 04/10/2026 - dang VDC moi cho VD014 theo yeu cau co Lan (tham so k, phuong trinh
+    bac hai). Co Lan duyet lai.
+    """
+    return _vdc_ra_cau(_sinh_bac2("co"), _de_giai_bac2("co"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_I_01(socau, dang=1):
+    r"""VDC - đếm $k$ để $kx^{2} - 2ax + c = 0$ có hai nghiệm phân biệt (nhớ điều kiện $k \neq 0$). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("hesoa"), _de_giai_bac2("hesoa"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_G_02(socau, dang=1):
+    r"""VDC - đếm $k$ để mệnh đề $\forall x \in \mathbb{R},\ x^{2} + bx + k \neq 0$ đúng ($\Delta < 0$). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("vo"), _de_giai_bac2("vo"), socau, dang)
+
+
+def L10_C1_B1_VD014_MC_J_01(socau, dang=1):
+    r"""VDC - đếm $k$ để $x^{2} - 2kx + c = 0$ có nghiệm / hai nghiệm phân biệt ($k^{2}$ so với $c$). CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("kep"), _de_giai_bac2("kep"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_E_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_G_01. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("co"), _de_giai_bac2("co"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_G_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_I_01. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("hesoa"), _de_giai_bac2("hesoa"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_E_02(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_G_02. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("vo"), _de_giai_bac2("vo"), socau, dang)
+
+
+def L10_C1_B1_VD014_SA_H_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng dạng VD014_MC_J_01. CLAUDE THEM 04/10/2026."""
+    return _vdc_ra_cau(_sinh_bac2("kep"), _de_giai_bac2("kep"), socau, dang)

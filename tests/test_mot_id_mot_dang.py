@@ -42,6 +42,12 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_TH003_TL_B",   # phu dinh menh de luong tu / phu dinh menh de ve so
     "L10_C1_B1_VD014_MC_B",   # thay gia tri vao P(x) / dem n de 2^n + k nguyen to
     "L10_C1_TF_A",            # day so n / menh de voi moi x, x^2 + 2px + q > 0
+    # menh de chua bien 4 muc (co Lan 04/10/2026):
+    "L10_C1_B1_TH003_MC_D",   # chon x lam menh de dung/sai: x^2, |x|, ... / sin x, cos x, tan x
+    "L10_C1_B1_VD014_MC_F",   # dem k: |px+q| = mk+c co nghiem / hai nghiem / vo nghiem
+    "L10_C1_B1_VD014_SA_D",   # nhu tren (tra loi ngan)
+    "L10_C1_B1_VD014_MC_G",   # dem k: x^2 + bx + k = 0 co nghiem / vo nghiem (Delta)
+    "L10_C1_B1_VD014_SA_E",   # nhu tren (tra loi ngan)
     # tu giao an Bai 2 (Tap hop):
     "L10_C1_B2_TH018_MC_B",   # phep toan liet ke / M nhieu phan tu nhat, M con A va M con B
     "L10_C1_B2_VD021_SA_A",   # tham so de hop, giao thoa dieu kien / dem m de A giao B = A
