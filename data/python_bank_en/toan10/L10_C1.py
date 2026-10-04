@@ -6517,7 +6517,7 @@ def L10_C1_B2_TH021_MC_A_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B2_TH019_MC_A_01(socau, dang=1):
+def L10_C1_B2_VD019_MC_A_01(socau, dang=1):
 
     # Sinh mảng cấu hình ngẫu nhiên theo số lượng câu hỏi để tránh lặp vô hạn
     gt = list(np.random.randint(0, 4, size=socau))
@@ -14420,15 +14420,15 @@ def L10_C1_B1_VD014_SA_H_01(socau, dang=2):
 
 
 # =====================================================================
-# BIỂU ĐỒ VEN BỐN MỨC: NB (hai tập), VD, VDC (ba tập)  (cô Lan 04/10/2026)
+# BIỂU ĐỒ VEN BỐN MỨC: NB, (TH), VD, VDC  (cô Lan 04/10/2026)
 # ---------------------------------------------------------------------
-# Cô Lan chốt 04/10/2026: ID phải ĐÚNG MỨC ĐỘ (để ma trận chọn đúng); dạng lệch mức LÊN so với YCCĐ thì
-# ghi chú vào mapping, lệch xuống thì không cần. YCCĐ về biểu đồ Ven là L10_C1_B2_TH019 (mức TH) nên:
-#   NB017_MC_N  mức NB (thấp hơn YCCĐ TH019, không cần ghi chú): hai tập A, B - giao, hợp, hiệu, phần bù
-#   VD020_MC_B / VD020_SA_B   mức VD (cao hơn YCCĐ -> ngoai_yccd): ba tập - chỉ có A / B / C, giao cả ba,
-#                             hợp cả ba, phần bù của hợp; SA ghi số phần tử từng vùng, tính n(...)
-#   VD020_MC_C / VD020_SA_C   mức VDC ("muc_do_dang": "VDC" + ngoai_yccd): (A hợp B) giao C, (A hợp B) trừ C,
-#                             A hợp (B giao C)...
+# Quy ước cô Lan chốt 04/10/2026: CÙNG một đơn vị kiến thức thì GIỮ NGUYÊN số (019); mỗi mức độ là một
+# mục Curriculum riêng NB019 / TH019 / VD019 (như TH021 / VD021). Dạng mức VDC dùng VD019 + "muc_do_dang":
+# "VDC". Dạng cao hơn YCCĐ (TH019) ghi "ngoai_yccd" trong mapping; thấp hơn thì không cần.
+#   NB019_MC_A            mức NB: hai tập A, B - giao, hợp, hiệu, phần bù (SGK)
+#   VD019_MC_A            (hàm có sẵn, trước là TH019_MC_A) ba tập: giao / hợp / hiệu kết hợp
+#   VD019_MC_B / SA_A     ba tập: chỉ có A / B / C, giao cả ba, hợp cả ba, phần bù; SA ghi số phần tử, tính n(...)
+#   VD019_MC_C / SA_B     mức VDC: (A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...
 # Hình vẽ bằng TikZ: mỗi vùng gạch sọc là một scope (cắt theo các đường tròn); đáp án và phương án
 # nhiễu tính theo TẬP CÁC VÙNG (8 vùng của ba tập) nên không bao giờ có hai phương án cùng đúng.
 # =====================================================================
@@ -14705,11 +14705,11 @@ _VEN2_NHAN = [(-1.0, 1.45), (2.8, 1.45)]
 _VEN_BO_TEN2 = [("A", "B"), ("M", "N"), ("X", "Y")]
 
 
-def L10_C1_B2_NB017_MC_N_01(socau, dang=1):
+def L10_C1_B2_NB019_MC_A_01(socau, dang=1):
     r"""NB - Biểu đồ Ven hai tập hợp: phần gạch sọc là $A \cap B$, $A \cup B$, $A \setminus B$, $B \setminus A$,
     hoặc phần bù ($C_E A$ khi $A \subset E$, $C_B A$ khi $A \subset B$) như sách giáo khoa.
 
-    CLAUDE THEM 04/10/2026 - dang NB (ID NB017 dung muc; thap hon YCCD TH019 nen khong ghi chu) theo yeu cau co Lan.
+    CLAUDE THEM 04/10/2026 - dang NB (ID NB019 dung muc; thap hon YCCD TH019 nen khong ghi chu) theo yeu cau co Lan.
     Co Lan duyet lai.
     """
     kieu_ds = ["giao", "hop", "hieu_ab", "hieu_ba", "bu_E", "bu_trong"]
@@ -14755,33 +14755,33 @@ def L10_C1_B2_NB017_MC_N_01(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_VD020_MC_B_01(socau, dang=1):
+def L10_C1_B2_VD019_MC_B_01(socau, dang=1):
     r"""VD - Biểu đồ Ven ba tập hợp: phần gạch sọc chỉ có một tập ($A \setminus (B \cup C)$...), giao của cả
     ba tập, hợp của cả ba tập, hoặc phần bù của hợp ba tập trong $E$.
 
-    CLAUDE THEM 04/10/2026 - dang VD (ID VD020; cao hon YCCD TH019 nen ghi ngoai_yccd) theo yeu cau co Lan.
+    CLAUDE THEM 04/10/2026 - dang VD (ID VD019; cao hon YCCD TH019 nen ghi ngoai_yccd) theo yeu cau co Lan.
     Co Lan duyet lai.
     """
     return _ven3_mc("VD", socau, dang)
 
 
-def L10_C1_B2_VD020_MC_C_01(socau, dang=1):
+def L10_C1_B2_VD019_MC_C_01(socau, dang=1):
     r"""VDC - Biểu đồ Ven ba tập hợp: phần gạch sọc là $(A \cup B) \cap C$, $(A \cup B) \setminus C$,
     $(A \cap B) \cup C$, $A \setminus (B \cap C)$, $A \cup (B \cap C)$...
 
-    CLAUDE THEM 04/10/2026 - dang VDC (ID VD020 + muc_do_dang VDC; cao hon YCCD TH019 nen ghi ngoai_yccd) theo yeu cau co Lan.
+    CLAUDE THEM 04/10/2026 - dang VDC (ID VD019 + muc_do_dang VDC; cao hon YCCD TH019 nen ghi ngoai_yccd) theo yeu cau co Lan.
     Co Lan duyet lai.
     """
     return _ven3_mc("VDC", socau, dang)
 
 
-def L10_C1_B2_VD020_SA_B_01(socau, dang=2):
+def L10_C1_B2_VD019_SA_A_01(socau, dang=2):
     r"""VD - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n(A \setminus (B \cup C))$, $n(A \cap B \cap C)$,
     $n(A \cup B \cup C)$, $n(A \cap B)$ hoặc $n(C_E(A \cup B \cup C))$. CLAUDE THEM 04/10/2026."""
     return _ven3_sa("VD", socau, dang)
 
 
-def L10_C1_B2_VD020_SA_C_01(socau, dang=2):
+def L10_C1_B2_VD019_SA_B_01(socau, dang=2):
     r"""VDC - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n((A \cup B) \cap C)$, $n((A \cup B) \setminus C)$,
     $n(A \setminus (B \cap C))$... CLAUDE THEM 04/10/2026."""
     return _ven3_sa("VDC", socau, dang)

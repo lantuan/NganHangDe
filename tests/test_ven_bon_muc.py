@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-r"""Biểu đồ Ven NB / VD / VDC (cô Lan 04/10/2026), ID đúng mức: NB017_MC_N (NB), VD020_MC_B/SA_B (VD), VD020_MC_C/SA_C (VDC).
+r"""Biểu đồ Ven NB / VD / VDC (cô Lan 04/10/2026), ID đúng mức: NB019_MC_A (NB), VD019_MC_B/SA_B (VD), VD019_MC_C/SA_C (VDC).
 
 Đọc lại HÌNH TikZ do hàm sinh (các scope gạch sọc, các đường tròn, số ghi trong vùng) và TÍNH ĐỘC LẬP:
 - đúng một phương án có tập vùng bằng vùng gạch sọc, và đó là phương án \True;
@@ -84,7 +84,7 @@ def _phuong_an(blk):
     return [(bool(t), x) for t, x in pa]
 
 
-@pytest.mark.parametrize("ten_ham", ["NB017_MC_N_01", "VD020_MC_B_01", "VD020_MC_C_01", "VD020_SA_B_01", "VD020_SA_C_01"])
+@pytest.mark.parametrize("ten_ham", ["NB019_MC_A_01", "VD019_MC_B_01", "VD019_MC_C_01", "VD019_SA_A_01", "VD019_SA_B_01"])
 def test_chay_nhieu_hat_giong(ten_ham):
     f = getattr(M, P + ten_ham)
     for s in range(150):
@@ -94,7 +94,7 @@ def test_chay_nhieu_hat_giong(ten_ham):
 
 
 @pytest.mark.parametrize("seed", range(150))
-@pytest.mark.parametrize("ten_ham", ["VD020_MC_B_01", "VD020_MC_C_01"])
+@pytest.mark.parametrize("ten_ham", ["VD019_MC_B_01", "VD019_MC_C_01"])
 def test_ba_tap_dung_mot_phuong_an(ten_ham, seed):
     random.seed(seed)
     for blk in _cau(getattr(M, P + ten_ham)(4)):
@@ -112,7 +112,7 @@ def test_ba_tap_dung_mot_phuong_an(ten_ham, seed):
 @pytest.mark.parametrize("seed", range(150))
 def test_hai_tap_nb_dung_mot_phuong_an(seed):
     random.seed(seed)
-    for blk in _cau(getattr(M, P + "NB017_MC_N_01")(4)):
+    for blk in _cau(getattr(M, P + "NB019_MC_A_01")(4)):
         tikz = _hinh(blk)
         gach = _mask_gach(tikz)
         vong = _vong(tikz)
@@ -144,7 +144,7 @@ def test_hai_tap_nb_dung_mot_phuong_an(seed):
 
 
 @pytest.mark.parametrize("seed", range(150))
-@pytest.mark.parametrize("ten_ham", ["VD020_SA_B_01", "VD020_SA_C_01"])
+@pytest.mark.parametrize("ten_ham", ["VD019_SA_A_01", "VD019_SA_B_01"])
 def test_sa_dem_dung_tong_cac_vung(ten_ham, seed):
     random.seed(seed)
     for blk in _cau(getattr(M, P + ten_ham)(4)):
@@ -173,7 +173,7 @@ def test_ba_tap_ten_khac_a_b_c_van_dung():
     random.seed(2)
     thay = set()
     for _ in range(40):
-        out = M.L10_C1_B2_VD020_MC_C_01(2)
+        out = M.L10_C1_B2_VD019_MC_C_01(2)
         thay.add(re.search(r"tập hợp \$(\w)\$", out).group(1))
     assert thay == {"A", "M", "X"}
 
@@ -186,13 +186,17 @@ def _mapping():
 def test_mapping_ven_id_dung_muc_va_danh_dau():
     mp = _mapping()
     cur = {r["id"]: r for r in json.load(open(GOC / "data" / "curriculum" / "toan10" / "L10_C1.json", encoding="utf-8"))}
-    assert cur["L10_C1_B2_NB017"]["MucDo"] == "NB" and cur["L10_C1_B2_VD020"]["MucDo"] == "VD"
-    nb = mp[P + "NB017_MC_N"]                                       # NB thấp hơn YCCĐ TH019: không ghi chú
+    # cùng đơn vị 019: mỗi mức một mục Curriculum, cùng nội dung YCCĐ
+    for muc in ("NB", "TH", "VD"):
+        assert cur["L10_C1_B2_%s019" % muc]["MucDo"] == muc
+    assert cur["L10_C1_B2_NB019"]["content"] == cur["L10_C1_B2_TH019"]["content"] == cur["L10_C1_B2_VD019"]["content"]
+    nb = mp[P + "NB019_MC_A"]                                       # NB thấp hơn YCCĐ TH019: không ghi chú
     assert "ngoai_yccd" not in nb and "muc_do_dang" not in nb
-    for i in ("VD020_MC_B", "VD020_SA_B", "VD020_MC_C", "VD020_SA_C"):   # VD/VDC cao hơn YCCĐ: ghi chú
+    moi = ("VD019_MC_A", "VD019_MC_B", "VD019_SA_A", "VD019_MC_C", "VD019_SA_B")
+    for i in moi:                                                   # VD/VDC cao hơn YCCĐ: ghi chú
         r = mp[P + i]
         assert r["ngoai_yccd"] is True and r["ghi_chu"].startswith("LUYEN TAP THEM")
-        assert (r.get("muc_do_dang") == "VDC") == i.endswith(("MC_C", "SA_C")), i
-    dang = [g for d in cur["L10_C1_B2_VD020"]["dang_luyen_tap_them"] for g in d["mapping_id"]]
-    assert set(dang) == {P + i for i in ("VD020_MC_B", "VD020_SA_B", "VD020_MC_C", "VD020_SA_C")}
-    assert "dang_luyen_tap_them" not in cur["L10_C1_B2_TH019"]
+        assert (r.get("muc_do_dang") == "VDC") == i.endswith(("MC_C", "SA_B")), i
+    dang = [g for d in cur["L10_C1_B2_VD019"]["dang_luyen_tap_them"] for g in d["mapping_id"]]
+    assert set(dang) == {P + i for i in moi}
+    assert "L10_C1_B2_TH019_MC_A" not in mp and "dang_luyen_tap_them" not in cur["L10_C1_B2_VD020"]

@@ -9902,10 +9902,12 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - VDC (đếm số nguyên k thuộc [−năm; năm+1], năm = `datetime.datetime.now().year` nên TỰ ĐỔI theo năm thực): MC_F/SA_D (|px+q| = mk+c có nghiệm / hai nghiệm / vô nghiệm), MC_H/SA_F (|x−a| = k−c có hai nghiệm dương), MC_G/SA_E (x²+bx+k=0, dùng Δ), MC_I/SA_G (kx²−2ax+c=0 hai nghiệm phân biệt, nhớ k ≠ 0), MC_J/SA_H (x²−2kx+c=0, k² so với c). Bất phương trình giữ ở VD014_MC_A/SA_A (nay đánh dấu VDC).
 - Test mới: tests/test_menh_de_bon_muc.py (đáp số tính lại bằng vét cạn / sympy, giả lập năm 2026-2040, đúng một đáp án MC cho NB/TH). Bản Anh dịch xong, kiem_tuong_duong 0 hàm lệch.
 
-## Biểu đồ Ven bốn mức NB / VD / VDC - ID đúng mức độ (04/10/2026)
-- Cô Lan chốt: ID phải ĐÚNG MỨC ĐỘ để ma trận chọn đúng; dạng lệch mức LÊN so với YCCĐ thì ghi chú vào mapping, lệch xuống thì không cần. YCCĐ biểu đồ Ven duy nhất là L10_C1_B2_TH019 (mức TH) nên không gắn dạng nào vào TH019 nữa (TH019_MC_A, TH019_TL_A giữ nguyên).
-- NB `L10_C1_B2_NB017_MC_N_01`: hai tập A, B - giao, hợp, A\B, B\A, phần bù C_E A (A ⊂ E), C_B A (A ⊂ B). Thấp hơn YCCĐ nên không ghi chú.
-- VD `L10_C1_B2_VD020_MC_B_01` (chỉ có A / B / C, giao cả ba, hợp cả ba, phần bù của hợp) và `VD020_SA_B_01` (hình ghi số phần tử từng vùng, tính n(...)): `"ngoai_yccd": true`.
-- VDC `L10_C1_B2_VD020_MC_C_01` ((A∪B)∩C, (A∪B)\C, (A∩B)∪C, A\(B∩C), A∪(B∩C), (A∪B∪C)\(A∩B∩C) và hoán vị) và `VD020_SA_C_01`: `"muc_do_dang": "VDC"` + `"ngoai_yccd": true`.
-- VD020 trong Curriculum có `dang_luyen_tap_them` cho hai nhóm dạng này; khi vào đề giáo viên được cảnh báo "câu luyện tập thêm".
-- Hình TikZ do hàm sinh; đáp án và nhiễu tính theo TẬP CÁC VÙNG của ba tập (không bao giờ có hai phương án cùng đúng); tên tập đổi (A,B,C) / (M,N,P) / (X,Y,Z). Test: tests/test_ven_bon_muc.py đọc lại hình TikZ và tính độc lập. Bản Anh đã dịch.
+## Biểu đồ Ven bốn mức NB / VD / VDC - cùng số 019, ID đúng mức độ (04/10/2026)
+- Cô Lan chốt: ID phải ĐÚNG MỨC ĐỘ để ma trận chọn đúng; cùng một đơn vị kiến thức thì GIỮ NGUYÊN số (019) và đổi mức ở đầu (NB019 / TH019 / VD019), như TH021 / VD021. Dạng lệch mức LÊN so với YCCĐ (TH019) thì ghi chú vào mapping (`ngoai_yccd`), lệch xuống thì không cần.
+- Curriculum thêm `L10_C1_B2_NB019` và `L10_C1_B2_VD019` (cùng nội dung YCCĐ với TH019, khác MucDo và difficulty_rank). TH019 chỉ còn TL_A.
+- NB `L10_C1_B2_NB019_MC_A_01`: hai tập A, B - giao, hợp, A\B, B\A, phần bù C_E A (A ⊂ E), C_B A (A ⊂ B). Thấp hơn YCCĐ nên không ghi chú.
+- VD: `VD019_MC_A_01` (trước đây `TH019_MC_A_01`, ba tập kết hợp giao / hợp / hiệu; cô Lan chốt là mức VD), `VD019_MC_B_01` (chỉ có A / B / C, giao cả ba, hợp cả ba, phần bù của hợp) và `VD019_SA_A_01` (hình ghi số phần tử từng vùng, tính n(...)): `"ngoai_yccd": true`.
+- VDC: `VD019_MC_C_01` ((A∪B)∩C, (A∪B)\C, (A∩B)∪C, A\(B∩C), A∪(B∩C), (A∪B∪C)\(A∩B∩C) và hoán vị) và `VD019_SA_B_01`: `"muc_do_dang": "VDC"` + `"ngoai_yccd": true`.
+- VD019 trong Curriculum có `dang_luyen_tap_them` cho hai nhóm dạng VD / VDC; khi vào đề giáo viên được cảnh báo "câu luyện tập thêm".
+- Đổi hẳn, không giữ ID cũ (NB017_MC_N, VD020_MC_B/C, VD020_SA_B/C, TH019_MC_A) theo ý cô Lan.
+- Hình TikZ do hàm sinh; đáp án và nhiễu tính theo TẬP CÁC VÙNG của ba tập (không bao giờ có hai phương án cùng đúng); tên tập đổi (A,B,C) / (M,N,P) / (X,Y,Z). Test: tests/test_ven_bon_muc.py đọc lại hình TikZ và tính độc lập. Bản Anh đã dịch lại.
