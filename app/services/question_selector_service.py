@@ -143,7 +143,9 @@ def _don_vi(curriculum_id: str) -> str:
 
 
 def _thay_don_vi_khac(curriculum_id: str, loai_cau: str, mapping: list[dict],
-                      dem_don_vi: Counter) -> tuple[str, list[dict]] | None:
+                      dem_don_vi: Counter, bo_qua_cid: str | None = None,
+                      da_dung_id: set | None = None,
+                      toi_thieu: int = 0) -> tuple[str, list[dict]] | None:
     """Curriculum ID được chia chưa có dạng nào cho loại câu này trong Mapping:
     đổi sang một đơn vị kiến thức KHÁC của CÙNG bài, CÙNG mức độ có dạng cho
     loại câu đó - ưu tiên đơn vị chưa dùng / dùng ít nhất trong đề.
@@ -162,6 +164,13 @@ def _thay_don_vi_khac(curriculum_id: str, loai_cau: str, mapping: list[dict],
         cid = g.group(1)
         if cid.startswith(m.group(1) + m.group(2)) and re.match(r"^\d", cid[len(m.group(1) + m.group(2)):]):
             theo_cid.setdefault(cid, []).append(row)
+    # CLAUDE THEM 08/10/2026 (co Lan duyet): che do "het dang chua dung" - bo
+    # don vi dang xet, chi giu don vi con it nhat `toi_thieu` dang CHUA dung.
+    if bo_qua_cid is not None:
+        theo_cid.pop(bo_qua_cid, None)
+    if da_dung_id is not None:
+        theo_cid = {c: rows for c, rows in theo_cid.items()
+                    if sum(1 for r in rows if r["id"] not in da_dung_id) >= toi_thieu}
     if not theo_cid:
         return None
     it_nhat = min(dem_don_vi[_don_vi(c)] for c in theo_cid)
@@ -431,6 +440,18 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
             if not candidates:
                 # thử đơn vị kiến thức khác cùng bài, cùng mức độ có dạng câu này
                 thay = _thay_don_vi_khac(curriculum_id, loai_cau, _mapping_chuong(chuong_so), dem_don_vi)
+                if thay:
+                    dem_don_vi[_don_vi(curriculum_id)] -= so_luong
+                    curriculum_id, candidates = thay
+                    dem_don_vi[_don_vi(curriculum_id)] += so_luong
+            elif sum(1 for c in candidates if c["id"] not in da_dung[loai_cau]) < so_luong:
+                # CLAUDE THEM 08/10/2026 (co Lan duyet): don vi nay het dang CHUA
+                # dung trong de (vd chi co 1 dang ma da ra roi) -> doi sang don vi
+                # khac cung bai, cung muc do con dang chua dung, thay vi lap lai.
+                chua = sum(1 for c in candidates if c["id"] not in da_dung[loai_cau])
+                thay = _thay_don_vi_khac(curriculum_id, loai_cau, _mapping_chuong(chuong_so), dem_don_vi,
+                                         bo_qua_cid=curriculum_id, da_dung_id=da_dung[loai_cau],
+                                         toi_thieu=chua + 1)
                 if thay:
                     dem_don_vi[_don_vi(curriculum_id)] -= so_luong
                     curriculum_id, candidates = thay
