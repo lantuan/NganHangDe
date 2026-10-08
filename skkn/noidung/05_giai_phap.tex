@@ -638,4 +638,85 @@ nào}. Với đồng nghiệp muốn làm theo hướng này, điều kiện c�
 lập trình giỏi, mà là \textbf{có quy ước chuyên môn rõ ràng trước khi ngồi vào
 máy} --- vì đó chính là thứ mà công cụ không tự nghĩ ra được.
 
+\subsubsection{Quy trình phối hợp giữa giáo viên và trợ lí để tạo một dạng câu hỏi mới}
+
+Để đồng nghiệp có thể làm theo, tôi xin mô tả cụ thể cách tôi và trợ lí phối
+hợp mỗi khi cần thêm một dạng toán vào ngân hàng đề. Quy trình gồm sáu bước,
+lặp lại cho từng dạng. Điểm khác với cách dùng trí tuệ nhân tạo thông thường là
+\textbf{quy trình bắt đầu từ sản phẩm sẵn có của giáo viên} và \textbf{giáo
+viên là người đọc, bổ sung và duyệt ở mỗi vòng}, chứ không giao khoán cho máy.
+
+\begin{enumerate}[label=\textbf{Bước \arabic*.}, leftmargin=*, itemsep=6pt]
+  \item \textbf{Giáo viên đưa nguyên liệu.} Có hai cách. Cách thứ nhất, tôi
+  đưa một dạng toán cùng những gì đã có: hàm Python cũ trong ngân hàng đề do
+  chính tôi viết từ trước, đề Word hoặc \LaTeX{} đã soạn. Cách thứ hai, tôi chỉ
+  nêu tên dạng toán và nhờ trợ lí đề xuất cách ra đề. Ví dụ trong sáng kiến này:
+  tôi đưa hàm Python cũ của tôi về dạng Đúng/Sai ``bất phương trình bậc nhất hai
+  ẩn''.
+
+  \item \textbf{Trợ lí chuyển thành hàm Python mẫu đúng thể thức.} Ngân hàng đề
+  có bốn thể thức: trắc nghiệm nhiều lựa chọn, đúng/sai, trả lời ngắn và tự
+  luận; mỗi thể thức có quy ước riêng do tôi đặt (câu Đúng/Sai có bốn ý a, b,
+  c, d ở bốn mức độ nhận biết, thông hiểu, vận dụng, vận dụng cao; trả lời ngắn
+  chỉ một câu hỏi một đáp án; tự luận phải từ hai ý trở lên). Trợ lí viết lại
+  hàm cũ theo đúng thể thức đó, gắn mã định danh theo chuẩn của Giải pháp 1 và
+  khai báo vào bảng ánh xạ. Với ví dụ trên, kết quả là hàm
+  \texttt{L10\_C2\_TF\_A\_01}.
+
+  \item \textbf{Giáo viên đọc và bổ sung thêm nhiều phương án đúng/sai.} Tôi
+  đọc hàm trợ lí viết, rồi thêm vào \textit{từng ý a, b, c, d} nhiều cách phát
+  biểu khác nhau, cả khẳng định đúng lẫn khẳng định sai. Mỗi lần sinh đề, chương
+  trình bốc ngẫu nhiên một phương án cho mỗi ý nên học sinh khó đoán trước câu
+  trả lời. Chẳng hạn ý a) của hàm trên có sáu cách phát biểu, kể cả dạng phủ
+  định hai lần (``\dots\ không phải là \dots\ là mệnh đề sai'').
+
+  \item \textbf{Trợ lí nhận bản đã bổ sung và phát triển thêm các trường hợp tôi
+  yêu cầu.} Với hàm trên, tôi yêu cầu: các hệ số $a, b, c$ có cả số âm; dấu của
+  bất phương trình ngẫu nhiên trong $<$, $\le$, $>$, $\ge$; đường bờ luôn cắt
+  hai trục tạo thành tam giác vuông; điều kiện của $x, y$ ở ý d) thay đổi theo
+  góc phần tư chứa tam giác và theo các cách nói ``nguyên dương'', ``nguyên không
+  âm'', ``nguyên âm'', ``nguyên không dương''; khi miền nghiệm không chứa tam
+  giác thì đáp án đúng của ý d) là ``có vô số cặp số'' và phương án nhiễu là số
+  cặp đếm được ở nửa mặt phẳng bên kia --- để học sinh xét nhầm phía sẽ tưởng
+  mình đúng. Sau mỗi vòng, trợ lí tự kiểm tra trước khi trả bản mới: đối chiếu
+  kết quả của hàm với một cách đếm độc lập trên 20\,000 bộ tham số ngẫu nhiên
+  (hàm có 128 tổ hợp tham số khác nhau về góc phần tư, dấu bất phương trình,
+  miền nghiệm có chứa gốc toạ độ hay không và cách nói về $x, y$), rồi chạy bộ
+  kiểm thử tự động của dự án. Bước này có thể lặp nhiều vòng cho đến khi tôi
+  hài lòng.
+
+  Quy trình còn giúp \textit{phát hiện lỗi của chính các hàm cũ}. Khi rà lại
+  hàm ``miền nghiệm của hệ là đa giác gì'', trợ lí chạy thử 1\,500 lần và thấy
+  đáp án đúng chỉ rơi vào hai loại là miền tam giác (761 lần) và miền ngũ giác
+  (739 lần), không bao giờ ra miền tứ giác --- học sinh chỉ cần loại hai đáp án
+  còn lại là đã có một nửa cơ hội đoán đúng. Sau khi viết lại, trên 3\,000 câu
+  thử, ba loại đa giác ra gần đều nhau (1\,028; 969 và 1\,003 câu), đáp án luôn
+  khớp với phép cắt đa giác tính độc lập.
+
+  \item \textbf{Giáo viên tự chuyển sang tiếng Anh.} Bản tiếng Việt là bản gốc
+  (Giải pháp 9). Phần dịch sang tiếng Anh tôi tự làm rồi dán vào tệp ngân hàng
+  tiếng Anh, vì nhờ trợ lí dịch cần nhiều lượt trao đổi dài, tốn nhiều lượt xử
+  lí (token), còn tôi dạy song ngữ nên tự dịch vừa nhanh vừa chính xác về thuật
+  ngữ. Điều kiện duy nhất là bản tiếng Anh phải giữ đúng cách sinh tham số của
+  bản Việt, chỉ dịch phần chữ; bộ kiểm thử tự động so sánh cấu trúc hai bản và
+  báo ngay nếu có chỗ lệch.
+
+  \item \textbf{Trợ lí ghi lại nội dung công việc vào sổ tay kĩ thuật.} Mỗi lần
+  thay đổi đều được ghi vào nhật kí và tài liệu kĩ thuật của kho mã nguồn: sửa
+  hàm nào, mã định danh nào, vì sao sửa, đã kiểm tra bằng cách nào. Nhờ vậy
+  sau này tôi hoặc đồng nghiệp đọc lại là hiểu ngay hàm được sinh ra thế nào, và
+  công việc không phụ thuộc vào trí nhớ của bất kì ai.
+\end{enumerate}
+
+Nhìn lại, mỗi bên làm đúng phần mình giỏi. Phần cần chuyên môn sư phạm --- đưa
+dạng toán, bổ sung các cách phát biểu đúng sai, yêu cầu thêm trường hợp để học
+sinh khó đoán, quyết định mức độ của từng ý --- do tôi làm. Phần máy làm tốt hơn
+người --- viết mã, thử hàng chục nghìn trường hợp để tìm lỗi, ghi chép tài liệu
+--- giao cho trợ lí. Cách chia việc này giúp tôi thêm được nhiều dạng câu hỏi
+hơn mà chất lượng vẫn do mình kiểm soát.
+
+\ghichu{Nên chèn một ảnh chụp hai lần sinh khác nhau của cùng hàm
+\texttt{L10\_C2\_TF\_A\_01} (đề và lời giải), để thấy rõ các hệ số, dấu bất
+phương trình và cách nói về $x, y$ đã thay đổi giữa hai lần.}
+
 \bigskip

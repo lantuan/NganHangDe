@@ -1165,6 +1165,12 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
 # ---- Mien nghiem cua he la da giac gi (tam giac, tu giac, ngu giac...) ----
 # (tên cũ của cô: K10_2_3_3_2_VD)
 def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
+    # CLAUDE SUA 07/10/2026 (co Lan duyet): ban cu chi cho dap an tam giac / ngu giac
+    # (M, N luon nam tren hai canh KE NHAU nen khong bao gio ra tu giac).
+    # Ban moi chon truoc dang da giac (tam / tu / ngu, moi dang 1/3):
+    #   tu giac -> M, N tren hai canh DOI cua hinh chu nhat;
+    #   tam giac, ngu giac -> M, N tren hai canh KE nhau, lay phia co 1 hoac 3 dinh.
+    # Loi giai neu ro toa do M, N va thay tung dinh vao ve trai.
     x = Symbol('x')
     y = Symbol('y')
 
@@ -1195,21 +1201,29 @@ def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
         hx = y_center - K[2]
         kx = y_center + K[1]
 
-        # Sinh đường thẳng MN cắt hai cạnh của hình chữ nhật
-        x_M = np.random.randint(x_center - K[0] + 1, x_center + K[3])
-        y_N = np.random.randint(y_center - K[2] + 1, y_center + K[1])
-        y_M = int(np.random.choice([y_center - K[2], y_center + K[1]]))
-        x_N = int(np.random.choice([x_center - K[0], x_center + K[3]]))
+        hinh = str(np.random.choice(['tam', 'tu', 'ngu']))
+        if hinh == 'tu':
+            if np.random.rand() < 0.5:
+                # hai canh doi nam ngang: M tren canh tren, N tren canh duoi
+                xa = int(np.random.randint(fx + 1, gx))
+                xb = int(np.random.randint(fx + 1, gx))
+                while xb == xa:
+                    xb = int(np.random.randint(fx + 1, gx))
+                M = [xa, kx]
+                N = [xb, hx]
+            else:
+                # hai canh doi thang dung: M tren canh trai, N tren canh phai
+                ya = int(np.random.randint(hx + 1, kx))
+                yb = int(np.random.randint(hx + 1, kx))
+                while yb == ya:
+                    yb = int(np.random.randint(hx + 1, kx))
+                M = [fx, ya]
+                N = [gx, yb]
+        else:
+            # hai canh ke nhau: M tren canh ngang, N tren canh dung
+            M = [int(np.random.randint(fx + 1, gx)), int(np.random.choice([hx, kx]))]
+            N = [int(np.random.choice([fx, gx])), int(np.random.randint(hx + 1, kx))]
 
-        M = [x_M, y_M]
-        N = [x_N, y_N]
-        # Tránh trường hợp M trùng N gây ra lỗi đường thẳng không xác định
-        # (bản gốc dùng N ngay ở dòng while khi N CHƯA được gán -> UnboundLocalError)
-        while M == N:
-            x_N = int(np.random.choice([x_center - K[0], x_center + K[3]]))
-            N = [x_N, y_N]
-
-        # Thay thế hàm dc.pttq bằng tính toán đại số vectơ pháp tuyến cơ bản
         # Vectơ chỉ phương MN = (x_N - x_M, y_N - y_M) -> VTPT = (-(y_N - y_M), x_N - x_M)
         a_MN = -(N[1] - M[1])
         b_MN = N[0] - M[0]
@@ -1226,56 +1240,63 @@ def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
         VT_MN = a_MN * x + b_MN * y
         VP_MN = -c_MN
 
-        Duong = []
-        Am = []
-        for p, label in zip([A, B, C, D], ['A', 'B', 'C', 'D']):
-            if MN_func(p[0], p[1]) > 0:
-                Duong.append(label)
-            else:
-                Am.append(label)
+        dinh = list(zip(['A', 'B', 'C', 'D'], [A, B, C, D]))
+        gia_tri = [(ten, p, a_MN * p[0] + b_MN * p[1]) for ten, p in dinh]
+        Duong = [t for t, p, g in gia_tri if g > VP_MN]
+        Am = [t for t, p, g in gia_tri if g < VP_MN]
+        if len(Duong) + len(Am) != 4:       # duong thang di qua dinh -> bo
+            continue
 
-        Dau = np.random.choice(['Duong', 'Am'])
+        so_dinh = {'tam': 1, 'tu': 2, 'ngu': 3}[hinh]
+        if len(Duong) == so_dinh and len(Am) == so_dinh:
+            chon_duong = bool(np.random.rand() < 0.5)
+        elif len(Duong) == so_dinh:
+            chon_duong = True
+        elif len(Am) == so_dinh:
+            chon_duong = False
+        else:
+            continue
 
-        # Kiểm tra điều kiện để bài toán sinh ra đa giác hợp lệ (không lấy miền rỗng hoặc toàn bộ)
-        if (Dau == 'Duong' and len(Duong) in [1, 2, 3]) or (Dau == 'Am' and len(Am) in [1, 2, 3]):
-            if Dau == 'Duong':
-                dau = '\\ge'
-                count = len(Duong)
-            else:
-                dau = '\\le'
-                count = len(Am)
+        dau = '\\ge' if chon_duong else '\\le'
+        trong = Duong if chon_duong else Am
+        mien = {1: 'Triangular region', 2: 'Quadrilateral region', 3: 'Pentagonal region'}[so_dinh]
+        Mien_list = ['Triangular region', 'Quadrilateral region', 'Pentagonal region', 'Hexagonal region']
+        Mien_list.remove(mien)
 
-            if count == 1:
-                mien = 'Triangular region'
-            elif count == 2:
-                mien = 'Quadrilateral region'
-            else:
-                mien = 'Pentagonal region'
+        # Loi giai: neu ro hinh chu nhat, hai giao diem M, N, roi thay tung dinh vao ve trai
+        cac_dong = []
+        for ten, p, g in gia_tri:
+            thoa = (g >= VP_MN) if chon_duong else (g <= VP_MN)
+            ket = "true" if thoa else "false"
+            cac_dong.append(
+                f"${ten}\\left({p[0]};{p[1]}\\right)$: ${g} {dau} {VP_MN}$ {ket}")
+        so_canh = so_dinh + 2
+        giai = (
+            f"The inequalities ${fx} \\le x \\le {gx}$ and ${hx} \\le y \\le {kx}$ define "
+            f"the rectangle $ABCD$ with $A\\left({A[0]};{A[1]}\\right)$, $B\\left({B[0]};{B[1]}\\right)$, "
+            f"$C\\left({C[0]};{C[1]}\\right)$, $D\\left({D[0]};{D[1]}\\right)$.\\\\ "
+            f"The line $d \\colon {latex(VT_MN)} = {VP_MN}$ meets the rectangle at "
+            f"$M\\left({M[0]};{M[1]}\\right)$ and $N\\left({N[0]};{N[1]}\\right)$.\\\\ "
+            f"Substituting the coordinates of the vertices into the left-hand side ${latex(VT_MN)}$ and comparing with ${VP_MN}$:\\\\ "
+            + "; ".join(cac_dong) + ".\\\\ "
+            f"There are ${so_dinh}$ rectangle vertices that satisfy the inequality ({', '.join(trong)}), so the solution region "
+            f"is the polygon whose vertices are those {so_dinh} vertices together with the two points $M$, $N$, "
+            f"that is, a polygon with ${so_canh}$ vertices: \\textbf{{{mien.lower()}}}."
+        )
 
-            Mien_list = ['Triangular region', 'Quadrilateral region', 'Pentagonal region', 'Hexagonal region']
-            Mien_list.remove(mien)
-
-            v = [fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list]
-            if v not in gt:
-                gt.append(v)
-                dem += 1
+        v = [fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list, giai]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
 
     cauTN = ""
     for v in gt:
-        fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list = v
+        fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list, giai = v
 
         debai = f"The solution region of the system of inequalities $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ is"
 
         dapso = mien
         dsnhieu = [Mien_list[0], Mien_list[1], Mien_list[2]]
-
-        giai = f"""
-        The system of inequalities consists of:\\\\
-        * The inequalities ${fx} \\le x \\le {gx}$ and ${hx} \\le y \\le {kx}$ determine a rectangular solution region bounded by the boundary lines.\\\\
-        * The remaining inequality ${latex(VT_MN)} {dau} {VP_MN}$ is a half-plane whose boundary is the line $MN$, which cuts across the rectangle described above.\\\\
-        The intersection of these two solution regions cuts off part of the rectangle, forming a convex polygon.\\\\
-        Based on the number of rectangle vertices that satisfy the inequality, we conclude that the solution region is a \\textbf{{{mien.lower()}}}.
-        """
 
         # PHAI dung MC_SA_answer_text: dap an la CHU tieng Viet.
         # MC_SA_answer_const boc moi phuong an trong $...$, nen
@@ -1580,109 +1601,109 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
 
     return cauTN
 #print(K10_2_3_3_1_H(4,1))
-#
-# def K10_2_3_3_2_VD(): #Dạng 3: Tìm miền nghiệm của bất phương trình
-#     with open(r"latex\data\de.tex", "a", encoding='utf-8') as de:
-#         x = Symbol('x')
-#         y = Symbol('y')
-#
-#         x_center = np.randint(-2,2)
-#         y_center = np.randint(-2,2)
-#         K = []
-#         for i in range(0,4):
-#             k = np.randint(0,5)
-#             K.append(k)
-#         while (K[0] + K[3] <= 5):
-#             k0 = np.randint(0,10)
-#             k3 = np.randint(0,10)
-#             K.pop(3)
-#             K.insert(3,k3)
-#             K.pop(0)
-#             K.insert(0,k0)
-#         while (K[1] + K[2] <= 5):
-#             k1 = np.randint(0,10)
-#             k2 = np.randint(0,10)
-#             K.pop(2)
-#             K.insert(2,k2)
-#             K.pop(1)
-#             K.insert(1,k)
-#
-#         A = [x_center - K[0], y_center + K[1]] # đường thẳng AB song song vơi Ox có pt x = x_center - K[0]
-#         B = [x_center - K[0], y_center - K[2]]
-#         C = [x_center + K[3], y_center - K[2]] # đường thẳng CD song song vơi Ox có pt x = x_center + K[3]
-#         D = [x_center + K[3], y_center + K[1]]
-#         fx = x_center - K[0] # đường thẳng AB : x = fx
-#         gx = x_center + K[3] # đường thẳng CD: x = gx
-#         hx = y_center - K[2] # đường thẳng BC
-#         kx = y_center + K[1] # đường thẳng AD
-#
-#         # Đường thẳng MN với M,N nằm trên 2 cạnh bất kì của hình chữ nhật ABCD
-#         x_M = np.randint(x_center - K[0]+1, x_center + K[3]-1)
-#         y_N = np.randint(y_center - K[2]+1, y_center + K[1]-1)
-#         y_M = np.choice([y_center - K[2], y_center + K[1]])
-#         x_N = np.choice([x_center - K[0], x_center + K[3]])
-#         M = [x_M, y_M]
-#         N = [x_N, y_N]
-#         a_MN = dc.pttq(M[0],M[1],N[0],N[1])[0]
-#         b_MN = dc.pttq(M[0],M[1],N[0],N[1])[1]
-#         c_MN = dc.pttq(M[0],M[1],N[0],N[1])[2]
-#         MN = lambda x,y: a_MN * x + b_MN * y + c_MN # đường thẳng MN
-#         VT_MN = a_MN * x + b_MN * y
-#         VP_MN = - c_MN
-#
-#         Duong = []
-#         Am = []
-#         if MN(A[0],A[1]) > 0:
-#             Duong.append('A')
-#         else:
-#             Am.append('A')
-#         if MN(B[0],B[1]) > 0:
-#             Duong.append('B')
-#         else:
-#             Am.append('B')
-#         if MN(C[0],C[1]) > 0:
-#             Duong.append('C')
-#         else:
-#             Am.append('C')
-#         if MN(D[0],D[1]) > 0:
-#             Duong.append('D')
-#         else:
-#             Am.append('D')
-#         Dau = np.choice(['Duong', 'Am'])
-#         Mien = ['Miền tam giác', 'Miền tứ giác', 'Miền ngũ giác', 'Miền lục giác']
-#         if (Dau == 'Duong') and (len(Duong) == 1):
-#             dau = '\ge'
-#             mien = 'Miền tam giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Duong') and (len(Duong) == 2):
-#             dau = '\ge'
-#             mien = 'Miền tứ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Duong') and (len(Duong) == 3):
-#             dau = '\ge'
-#             mien = 'Miền ngũ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 1):
-#             dau = '\le'
-#             mien = 'Miền tam giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 2):
-#             dau = '\le'
-#             mien = 'Miền tứ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 3):
-#             dau = '\le'
-#             mien = 'Miền ngũ giác'
-#             Mien.remove(mien)
-#         de.write(r"\begin{ex}" + os.linesep)
-#         de.write(f"Miền nghiệm của hệ bất phương trình $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ là{os.linesep}")
-#         de.write(r"\choice"+ os.linesep)
-#         de.write(f"{{\\True {mien}}}{os.linesep}")
-#         de.write(f"{{{Mien[0]}}}{os.linesep}")
-#         de.write(f"{{{Mien[1]}}}{os.linesep}")
-#         de.write(f"{{{Mien[2]}}}{os.linesep}")
-#         de.write(r"\loigiai{}" + os.linesep)
-#         de.write(r"\end{ex}" + os.linesep)
+
+def K10_2_3_3_2_VD(): #Dạng 3: Tìm miền nghiệm của bất phương trình
+    with open(r"latex\data\de.tex", "a", encoding='utf-8') as de:
+        x = Symbol('x')
+        y = Symbol('y')
+
+        x_center = np.randint(-2,2)
+        y_center = np.randint(-2,2)
+        K = []
+        for i in range(0,4):
+            k = np.randint(0,5)
+            K.append(k)
+        while (K[0] + K[3] <= 5):
+            k0 = np.randint(0,10)
+            k3 = np.randint(0,10)
+            K.pop(3)
+            K.insert(3,k3)
+            K.pop(0)
+            K.insert(0,k0)
+        while (K[1] + K[2] <= 5):
+            k1 = np.randint(0,10)
+            k2 = np.randint(0,10)
+            K.pop(2)
+            K.insert(2,k2)
+            K.pop(1)
+            K.insert(1,k)
+
+        A = [x_center - K[0], y_center + K[1]] # đường thẳng AB song song vơi Ox có pt x = x_center - K[0]
+        B = [x_center - K[0], y_center - K[2]]
+        C = [x_center + K[3], y_center - K[2]] # đường thẳng CD song song vơi Ox có pt x = x_center + K[3]
+        D = [x_center + K[3], y_center + K[1]]
+        fx = x_center - K[0] # đường thẳng AB : x = fx
+        gx = x_center + K[3] # đường thẳng CD: x = gx
+        hx = y_center - K[2] # đường thẳng BC
+        kx = y_center + K[1] # đường thẳng AD
+
+        # Đường thẳng MN với M,N nằm trên 2 cạnh bất kì của hình chữ nhật ABCD
+        x_M = np.randint(x_center - K[0]+1, x_center + K[3]-1)
+        y_N = np.randint(y_center - K[2]+1, y_center + K[1]-1)
+        y_M = np.choice([y_center - K[2], y_center + K[1]])
+        x_N = np.choice([x_center - K[0], x_center + K[3]])
+        M = [x_M, y_M]
+        N = [x_N, y_N]
+        a_MN = dc.pttq(M[0],M[1],N[0],N[1])[0]
+        b_MN = dc.pttq(M[0],M[1],N[0],N[1])[1]
+        c_MN = dc.pttq(M[0],M[1],N[0],N[1])[2]
+        MN = lambda x,y: a_MN * x + b_MN * y + c_MN # đường thẳng MN
+        VT_MN = a_MN * x + b_MN * y
+        VP_MN = - c_MN
+
+        Duong = []
+        Am = []
+        if MN(A[0],A[1]) > 0:
+            Duong.append('A')
+        else:
+            Am.append('A')
+        if MN(B[0],B[1]) > 0:
+            Duong.append('B')
+        else:
+            Am.append('B')
+        if MN(C[0],C[1]) > 0:
+            Duong.append('C')
+        else:
+            Am.append('C')
+        if MN(D[0],D[1]) > 0:
+            Duong.append('D')
+        else:
+            Am.append('D')
+        Dau = np.choice(['Duong', 'Am'])
+        Mien = ['Triangular region', 'Quadrilateral region', 'Pentagonal region', 'Hexagonal region']
+        if (Dau == 'Duong') and (len(Duong) == 1):
+            dau = r'\ge'
+            mien = 'Triangular region'
+            Mien.remove(mien)
+        elif (Dau == 'Duong') and (len(Duong) == 2):
+            dau = r'\ge'
+            mien = 'Quadrilateral region'
+            Mien.remove(mien)
+        elif (Dau == 'Duong') and (len(Duong) == 3):
+            dau = r'\ge'
+            mien = 'Pentagonal region'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 1):
+            dau = r'\le'
+            mien = 'Triangular region'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 2):
+            dau = r'\le'
+            mien = 'Quadrilateral region'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 3):
+            dau = r'\le'
+            mien = 'Pentagonal region'
+            Mien.remove(mien)
+        de.write(r"\begin{ex}" + os.linesep)
+        de.write(f"The solution region of the system of inequalities $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ is{os.linesep}")
+        de.write(r"\choice"+ os.linesep)
+        de.write(f"{{\\True {mien}}}{os.linesep}")
+        de.write(f"{{{Mien[0]}}}{os.linesep}")
+        de.write(f"{{{Mien[1]}}}{os.linesep}")
+        de.write(f"{{{Mien[2]}}}{os.linesep}")
+        de.write(r"\loigiai{}" + os.linesep)
+        de.write(r"\end{ex}" + os.linesep)
 
 
 # =====================================================================
@@ -2446,55 +2467,213 @@ def L10_C2_B4_VD028_TL_A_03(socau, dong=1):
     return cauTN
 
 
+# ---------------------------------------------------------------------
+# CLAUDE SUA 07/10/2026 (co Lan duyet) - viet lai L10_C2_TF_A_01:
+#  * a, b, c co ca am; dau bat phuong trinh ngau nhien <, <=, >, >=.
+#  * Duong bo d luon cat hai truc tao tam giac vuong; tam giac o goc phan tu
+#    nao thi x, y mang dau tuong ung (nguyen duong / am / khong am / khong duong).
+#  * y d): bo rang buoc 0<=x<=k. Mien nghiem chua O -> dem so cap nguyen
+#    trong tam giac (nhieu: N+s). Mien nghiem khong chua O -> "co vo so cap"
+#    (nhieu: so cap trong tam giac o nua mat phang ben kia).
+# Ban cu luu o nhap/TF_A_01_ban_cu.py.
+# ---------------------------------------------------------------------
+
+_TFA_LATEX = {"<=": r"\le", "<": "<", ">=": r"\ge", ">": ">"}
+# Doi sang nua mat phang ben kia cua bo d, giu nguyen ngat / khong ngat:
+# dung de lam NHIEU cho y d) (hoc sinh xet lon ben).
+_TFA_DAO = {"<=": ">=", "<": ">", ">=": "<=", ">": "<"}
+
+
+def _tfa_thoa(v, ky, c):
+    """v ky c co dung khong (ky la mot trong <=, <, >=, >)."""
+    return {"<=": v <= c, "<": v < c, ">=": v >= c, ">": v > c}[ky]
+
+
+def _tfa_so(n):
+    """So nguyen dung trong tich: am thi boc ngoac."""
+    return "(%d)" % n if n < 0 else "%d" % n
+
+
+def _tfa_bieu_thuc(a, b):
+    """Ve trai ax + by viet gon (bo he so 1, xu ly dau)."""
+    t1 = "x" if a == 1 else ("-x" if a == -1 else "%dx" % a)
+    if b > 0:
+        t2 = "+ " + ("y" if b == 1 else "%dy" % b)
+    else:
+        t2 = "- " + ("y" if b == -1 else "%dy" % -b)
+    return t1 + " " + t2
+
+
+def _tfa_dieu_kien_xy(sx, sy, chat_x, chat_y):
+    """Cau chu dieu kien cua x, y. chat=True: nguyen duong/am; False: khong am/khong duong."""
+    def tu(sg, chat):
+        if sg > 0:
+            return "positive" if chat else "non-negative"
+        return "negative" if chat else "non-positive"
+    wx, wy = tu(sx, chat_x), tu(sy, chat_y)
+    if wx == wy:
+        return r"$x$, $y$ are both %s integers" % wx
+    return r"$x$ is a %s integer, $y$ is a %s integer" % (wx, wy)
+
+
+def _tfa_goc_phan_tu(sx, sy):
+    """Ten goc phan tu chua tam giac."""
+    return {(1, 1): "I", (-1, 1): "II", (-1, -1): "III", (1, -1): "IV"}[(sx, sy)]
+
+
+def _tfa_tao_tham_so():
+    """Sinh tham so mot cau. Tra ve dict.
+
+    Duong thang d: a x + b y = c cat Ox tai (sx*m; 0), cat Oy tai (0; sy*n)
+    (m, n nguyen duong) nen d cung hai truc luon tao tam giac vuong o goc
+    phan tu (sx, sy). Nhan ca ba he so voi -1 (ngau nhien) de a, b, c co ca am.
+    """
+    while True:
+        sx, sy = _rd.choice([1, -1]), _rd.choice([1, -1])
+        m, n = _rd.randint(2, 6), _rd.randint(2, 6)
+        p, q = sx * m, sy * n                      # hoanh do, tung do giao diem
+        g = _math.gcd(m, n)
+        a, b, c = q // g, p // g, (p * q) // g     # q*x + p*y = p*q, rut gon
+        if _rd.random() < 0.5:
+            a, b, c = -a, -b, -c
+        ky = _rd.choice(["<=", "<", ">=", ">"])
+        co_O = _tfa_thoa(0, ky, c)                     # nua mat phang nghiem co chua O?
+
+        chat_x, chat_y = _rd.choice([True, False]), _rd.choice([True, False])
+        xs = [sx * i for i in range(1 if chat_x else 0, m + 1)]
+        ys = [sy * j for j in range(1 if chat_y else 0, n + 1)]
+        theo_x = [(X, sum(1 for Y in ys if _tfa_thoa(a * X + b * Y, ky, c))) for X in xs]
+        dem = sum(k for _x, k in theo_x)           # dem trong hcn |x|<=m, |y|<=n
+        if co_O:
+            if dem < 3:                            # tam giac chua toi thieu 3 diem
+                continue
+            s = _rd.choice([t for t in (-3, -2, -1, 1, 2, 3) if dem + t >= 1])
+            T = None
+        else:
+            # nhieu: xet lon sang nua mat phang ben kia (chua O, tao tam giac voi hai truc)
+            ky_dao = _TFA_DAO[ky]
+            dem = sum(1 for X in xs for Y in ys if _tfa_thoa(a * X + b * Y, ky_dao, c))
+            if dem < 2:
+                continue
+            s = 0
+            T = next(t for t in range(1, 200) if _tfa_thoa(a * sx * t + b * sy * t, ky, c))
+        return dict(chat_x=chat_x, chat_y=chat_y, sx=sx, sy=sy, m=m, n=n, p=p, q=q, a=a, b=b, c=c, ky=ky,
+                    co_O=co_O, theo_x=theo_x, dem=dem, s=s, T=T)
+
+
 def L10_C2_TF_A_01(socau, socot=1):
-    """Đúng/Sai - bất phương trình bậc nhất hai ẩn."""
+    """Đúng/Sai - bất phương trình bậc nhất hai ẩn (bản nháp phát triển)."""
     cauTF = ''
     for _ in range(socau):
-        a = _rd.choice([1, 2, 3])
-        b = _rd.choice([1, 2, 3])
-        k = _rd.randint(2, 6)
-        c = a * b * k
-        x0, y0 = _rd.randint(0, 4), _rd.randint(0, 4)
-        ve_trai = a * x0 + b * y0
-        # dem diem nguyen trong hinh vuong 0..k thoa man
-        dem = sum(1 for X in range(0, k + 1) for Y in range(0, k + 1)
-                  if a * X + b * Y <= c)
+        t = _tfa_tao_tham_so()
+        sx, sy, a, b, c, ky = t["sx"], t["sy"], t["a"], t["b"], t["c"], t["ky"]
+        co_O, dem, s = t["co_O"], t["dem"], t["s"]
+        vt = _tfa_bieu_thuc(a, b)
+        ks = _TFA_LATEX[ky]
+        bpt = r"%s %s %d" % (vt, ks, c)
+        duong = r"d \colon %s = %d" % (vt, c)
+        ngat = ky in ("<", ">")
 
-        debai = (r"Consider the inequality $%dx + %dy \le %d$. Determine whether each of the following statements is true or false:" % (a, b, c))
+        debai = (r"Given the inequality $%s$. "
+                 r"Determine the truth value of each of the following statements:" % bpt)
 
         # a) NB - nhan dang
+        ly_do = (r"It is of the form $ax + by %s c$ with $a = %d$, $b = %d$ not both "
+                 r"$0$, and $x$, $y$ both being of the first degree." % (ks, a, b))
+        ten = r"``The inequality $%s$ %s a linear inequality with two variables''"
         y1 = [(r"{\True The given inequality is a linear inequality in two variables}",
-               r"True. It has the form $ax + by \le c$ with $a = %d$, $b = %d$ not both equal to $0$, and $x$, $y$ are both of degree one." % (a, b)),
+               r"True. " + ly_do),
               (r"{The given inequality is not a linear inequality in two variables}",
-               r"False. It has exactly the form $ax + by \le c$, so it is a linear inequality in two variables.")]
+               r"False. " + ly_do),
+              (r"{\True " + ten % (bpt, "is") + r" is a true proposition}", r"True. " + ly_do),
+              (r"{" + ten % (bpt, "is") + r" is a false proposition}", r"False. " + ly_do),
+              (r"{" + ten % (bpt, "is not") + r" is a true proposition}", r"False. " + ly_do),
+              (r"{\True " + ten % (bpt, "is not") + r" is a false proposition}", r"True. " + ly_do)]
 
         # b) TH - thay so kiem tra mot cap so
-        dung_b = ve_trai <= c
+        x0, y0 = _rd.randint(-4, 4), _rd.randint(-4, 4)
+        ve = a * x0 + b * y0
+        dung_b = _tfa_thoa(ve, ky, c)
+        thay = (r"Substituting into the left-hand side: $%s\cdot %s + %s\cdot %s = %d$. "
+                r"We have $%d %s %d$ which is a %s proposition, so this ordered pair %s a solution of the inequality."
+                % (_tfa_so(a), _tfa_so(x0), _tfa_so(b), _tfa_so(y0), ve, ve, ks, c,
+                   "true" if dung_b else "false", "is" if dung_b else "is not"))
+        cap = r"\left(%d; %d\right)" % (x0, y0)
         y2 = [((r"{\True " if dung_b else "{") +
-               r"The pair $\left(%d; %d\right)$ is a solution of the inequality}" % (x0, y0),
-               r"Substituting into the left side: $%d\cdot %d + %d\cdot %d = %d$, and the right side is $%d$, so the left side is %s the right side. Hence this pair is %sa solution."
-               % (a, x0, b, y0, ve_trai, c,
-                  "less than or equal to" if dung_b else "greater than",
-                  "" if dung_b else "not ")),
+               r"The ordered pair $%s$ is a solution of the inequality}" % cap,
+               ("True. " if dung_b else "False. ") + thay),
               ((r"{" if dung_b else r"{\True ") +
-               r"The pair $\left(%d; %d\right)$ is not a solution of the inequality}" % (x0, y0),
-               r"Substituting into the left side gives $%d$; the right side is $%d$, so the inequality is %s."
-               % (ve_trai, c, "satisfied" if dung_b else "not satisfied"))]
+               r"The ordered pair $%s$ is not a solution of the inequality}" % cap,
+               ("False. " if dung_b else "True. ") + thay),
+              ((r"{\True " if dung_b else "{") +
+               r"The point $%s$ belongs to the solution region of the inequality}" % cap,
+               ("True. " if dung_b else "False. ") + thay),
+              ((r"{" if dung_b else r"{\True ") +
+               r"The point $%s$ does not belong to the solution region of the inequality}" % cap,
+               ("False. " if dung_b else "True. ") + thay)]
 
-        # c) VD - phai hinh dung mien nghiem
-        y3 = [(r"{\True The solution region of the inequality is the half-plane bounded by the line $%dx + %dy = %d$ and containing the origin $O$}" % (a, b, c),
-               r"Substituting $O\left(0;0\right)$ into the left side gives $0$, and $0 \le %d$, so $O$ belongs to the solution region.\\ Therefore, the solution region is the half-plane bounded by the line $%dx + %dy = %d$ that contains $O$ (boundary included)."
-               % (c, a, b, c)),
-              (r"{The solution region of the inequality is the half-plane bounded by the line $%dx + %dy = %d$ and NOT containing the origin $O$}" % (a, b, c),
-               r"False. Substituting $O$ into the left side gives $0 \le %d$ (true), so $O$ belongs to the solution region."
-               % c)]
+        # c) VD - hinh dung nua mat phang nghiem
+        # Su that: co_O (chua O hay khong), ngat (khong ke bo d hay co ke bo d)
+        thu_O = (r"Substituting $O\left(0;0\right)$ into the left-hand side yields $0$; $0 %s %d$ is a %s proposition "
+                 r"so $O$ %s belong to the solution region.\\ The inequality is %s, so the line $d$ %s belong to the solution region."
+                 % (ks, c, "true" if co_O else "false", "belongs to" if co_O else "does not belong to",
+                    "strict" if ngat else "non-strict", "does not belong to" if ngat else "belongs to"))
 
-        # d) VDC - dem diem nguyen, phai ket hop mien nghiem voi rang buoc phu
-        y4 = [(r"{\True There are exactly $%d$ integer pairs $\left(x; y\right)$ satisfying the inequality and $0 \le x \le %d$, $0 \le y \le %d$}" % (dem, k, k),
-               r"For each integer $x$ from $0$ to $%d$, the condition $%dx + %dy \le %d$ gives $y \le \dfrac{%d - %dx}{%d}$; count the integers $y$ from $0$ to $%d$ that satisfy it and then sum over all values of $x$, giving $%d$ pairs in total."
-               % (k, a, b, c, c, a, b, k, dem)),
-              (r"{There are exactly $%d$ integer pairs $\left(x; y\right)$ satisfying the inequality and $0 \le x \le %d$, $0 \le y \le %d$}" % (dem + 2, k, k),
-               r"False. Counting the pairs for each value of $x$ gives $%d$ pairs." % dem)]
+        def mo_ta1(chua, ke_bo):
+            return (r"The solution region of the inequality is the half-plane bounded by the line "
+                    r"$%s$, %s containing the origin $O$ and %s including the line $d$"
+                    % (duong, "contains" if chua else "does not contain",
+                       "including" if ke_bo else "not including"))
+
+        def mo_ta2(chua, ke_bo):
+            return (r"The origin $O$ %s belong to the solution region of the inequality, while points "
+                    r"lying on the line $%s$ %s belong to the solution region"
+                    % ("belongs to" if chua else "does not belong to", duong,
+                       "belongs to" if ke_bo else "does not belong to"))
+
+        dung_O, dung_bo = co_O, (not ngat)
+        sai = _rd.choice([(not dung_O, dung_bo), (dung_O, not dung_bo),
+                          (not dung_O, not dung_bo)])
+        sai2 = _rd.choice([(not dung_O, dung_bo), (dung_O, not dung_bo),
+                           (not dung_O, not dung_bo)])
+        y3 = [(r"{\True " + mo_ta1(dung_O, dung_bo) + "}", "True. " + thu_O),
+              (r"{" + mo_ta1(*sai) + "}", "False. " + thu_O),
+              (r"{\True " + mo_ta2(dung_O, dung_bo) + "}", "True. " + thu_O),
+              (r"{" + mo_ta2(*sai2) + "}", "False. " + thu_O)]
+
+        # d) VDC - dem nghiem nguyen trong goc phan tu
+        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
+        giao = (r"The line $d$ intersects the $Ox$ axis at $\left(%d; 0\right)$ and the $Oy$ axis at "
+                r"$\left(0; %d\right)$, thus forming a right-angled triangle with both coordinate axes "
+                r"located in quadrant %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
+        if co_O:
+            chi_tiet = r"\\ ".join(
+                r"For $x = %d$ there are $%d$ integer values of $y$ satisfying" % (X, k)
+                for X, k in t["theo_x"])
+            giai_d = (giao + r"\\ The solution region contains $O$, so the pairs to be counted lie within that triangle "
+                      r"(%s the line $d$; points lying on the axes are only counted if the problem allows "
+                      r"$x$ or $y$ to be $0$).\\ %s\\ "
+                      r"Summing them up yields $%d$ pairs of numbers."
+                      % ("not including" if ngat else "including", chi_tiet, dem))
+            y4 = [(r"{\True There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem, dau), "True. " + giai_d),
+                  (r"{There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem + s, dau),
+                   "False. " + giai_d)]
+        else:
+            T = t["T"]
+            giai_d = (giao + r"\\ The solution region DOES NOT contain $O$, so it lies on the side far away from the triangle "
+                      r"and is unbounded.\\ For instance, all pairs of numbers "
+                      r"$\left(%s; %s\right)$ with $t$ a positive integer, $t \ge %d$ satisfy it "
+                      r"(the left-hand side is $%d t$ and $%d t %s %d$ for all $t \ge %d$).\\ "
+                      r"Thus, there are infinitely many pairs of numbers satisfying it.\\ If mistakenly considering the other half-plane "
+                      r"(containing $O$), only $%d$ pairs of numbers lying inside the aforementioned triangle would be counted, "
+                      r"which is the incorrect result."
+                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
+            y4 = [(r"{\True There are infinitely many pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % dau, "True. " + giai_d),
+                  (r"{There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem, dau), "False. " + giai_d)]
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
@@ -2844,3 +3023,148 @@ def L10_C2_TF_A_03(socau, socot=1):
                ("False. " if X_ok else "True. ") + gd)]
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+def L10_C2_TF_A_04(socau, socot=1):
+    r"""Đúng/Sai - bất phương trình bậc nhất hai ẩn KÈM BỐN ĐIỂM cho trước.
+
+    CLAUDE THEM 08/10/2026 (co Lan duyet) - theo y co Lan: cau dan "Cho bat
+    phuong trinh ... va bon diem A, B, C, D"; a) nhan dang va d) dem nghiem
+    nguyen y het L10_C2_TF_A_01; b) mot trong bon diem thuoc / khong thuoc mien
+    nghiem; c) trong bon diem co khong / 1 / 2 / 3 / 4 diem thuoc (khong thuoc)
+    mien nghiem.
+    """
+    cauTF = ''
+    for _ in range(socau):
+        t = _tfa_tao_tham_so()
+        sx, sy, a, b, c, ky = t["sx"], t["sy"], t["a"], t["b"], t["c"], t["ky"]
+        co_O, dem, s = t["co_O"], t["dem"], t["s"]
+        vt = _tfa_bieu_thuc(a, b)
+        ks = _TFA_LATEX[ky]
+        bpt = r"%s %s %d" % (vt, ks, c)
+        duong = r"d \colon %s = %d" % (vt, c)
+        ngat = ky in ("<", ">")
+
+        # bon diem cho truoc: n_in diem thuoc mien nghiem, con lai khong thuoc
+        luoi = [(X, Y) for X in range(-6, 7) for Y in range(-6, 7)]
+        trong = [p for p in luoi if _tfa_thoa(a * p[0] + b * p[1], ky, c)]
+        ngoai = [p for p in luoi if not _tfa_thoa(a * p[0] + b * p[1], ky, c)]
+        n_in = _rd.randint(0, 4)
+        diem = _rd.sample(trong, n_in) + _rd.sample(ngoai, 4 - n_in)
+        _rd.shuffle(diem)
+        TEN = "ABCD"
+        thuoc = [_tfa_thoa(a * p[0] + b * p[1], ky, c) for p in diem]
+        tex_d = [r"%s\left(%d; %d\right)" % (TEN[i], diem[i][0], diem[i][1]) for i in range(4)]
+        n_ngoai = 4 - n_in
+
+        debai = (r"Given the inequality $%s$ and four points $%s$, $%s$, $%s$, $%s$. "
+                 r"Determine the truth value of each of the following statements:" % ((bpt,) + tuple(tex_d)))
+
+        def thay(i):
+            X, Y = diem[i]
+            g = a * X + b * Y
+            return (r"Substituting the coordinates of point $%s$ into the left-hand side: "
+                    r"$%s\cdot %s + %s\cdot %s = %d$; $%d %s %d$ is a %s proposition, "
+                    r"so the point $%s$ %s the solution region."
+                    % (TEN[i], _tfa_so(a), _tfa_so(X), _tfa_so(b), _tfa_so(Y), g, g, ks, c,
+                       "true" if thuoc[i] else "false", TEN[i],
+                       "belongs to" if thuoc[i] else "does not belong to"))
+
+        # a) NB - nhan dang
+        ly_do = (r"It is of the form $ax + by %s c$ with $a = %d$, $b = %d$ not both "
+                 r"$0$, and $x$, $y$ both being of the first degree." % (ks, a, b))
+        ten = r"``The inequality $%s$ %s a linear inequality with two variables''"
+        y1 = [(r"{\True The given inequality is a linear inequality in two variables}",
+               r"True. " + ly_do),
+              (r"{The given inequality is not a linear inequality in two variables}",
+               r"False. " + ly_do),
+              (r"{\True " + ten % (bpt, "is") + r" is a true proposition}", r"True. " + ly_do),
+              (r"{" + ten % (bpt, "is") + r" is a false proposition}", r"False. " + ly_do),
+              (r"{" + ten % (bpt, "is not") + r" is a true proposition}", r"False. " + ly_do),
+              (r"{\True " + ten % (bpt, "is not") + r" is a false proposition}", r"True. " + ly_do)]
+
+        # b) TH - mot trong bon diem co thuoc mien nghiem khong
+        k = _rd.randrange(4)
+        dung_b = thuoc[k]
+        cap = tex_d[k]
+        gb = thay(k)
+        y2 = [((r"{\True " if dung_b else "{") +
+               r"The point $%s$ belongs to the solution region of the inequality}" % cap,
+               ("True. " if dung_b else "False. ") + gb),
+              ((r"{" if dung_b else r"{\True ") +
+               r"The point $%s$ does not belong to the solution region of the inequality}" % cap,
+               ("False. " if dung_b else "True. ") + gb),
+              ((r"{\True " if dung_b else "{") +
+               r"The coordinates of point $%s$ are a solution of the inequality}" % TEN[k],
+               ("True. " if dung_b else "False. ") + gb),
+              ((r"{" if dung_b else r"{\True ") +
+               r"The coordinates of point $%s$ are not a solution of the inequality}" % TEN[k],
+               ("False. " if dung_b else "True. ") + gb)]
+
+        # c) VD - dem so diem thuoc / khong thuoc mien nghiem trong bon diem
+        def cau_c(so, thuoc_mn):
+            if so == 0:
+                return (r"Among the given points, there is no point that belongs to the solution "
+                        r"region of the inequality" if thuoc_mn else
+                        r"Among the given points, there is no point that lies outside the solution "
+                        r"region of the inequality")
+            if so == 4:
+                return (r"Among the given points, all four points belong to the solution region "
+                        r"of the inequality" if thuoc_mn else
+                        r"Among the given points, all four points lie outside the solution region "
+                        r"of the inequality")
+            return ((r"Among the given points, the number of points belonging to the solution "
+                     r"region of the inequality is exactly $%d$" if thuoc_mn else
+                     r"Among the given points, the number of points lying outside the solution "
+                     r"region of the inequality is exactly $%d$") % so)
+
+        ds_in = ", ".join(TEN[i] for i in range(4) if thuoc[i])
+        ds_ngoai = ", ".join(TEN[i] for i in range(4) if not thuoc[i])
+        gc = (r"\\ ".join(thay(i) for i in range(4)) +
+              r"\\ Hence there are $%d$ point(s) belonging to the solution region%s and $%d$ "
+              r"point(s) not belonging to it%s."
+              % (n_in, " (%s)" % ds_in if ds_in else "",
+                 n_ngoai, " (%s)" % ds_ngoai if ds_ngoai else ""))
+        sai_in = _rd.choice([i for i in range(5) if i != n_in])
+        sai_ngoai = _rd.choice([i for i in range(5) if i != n_ngoai])
+        y3 = [(r"{\True " + cau_c(n_in, True) + "}", "True. " + gc),
+              (r"{" + cau_c(sai_in, True) + "}", "False. " + gc),
+              (r"{\True " + cau_c(n_ngoai, False) + "}", "True. " + gc),
+              (r"{" + cau_c(sai_ngoai, False) + "}", "False. " + gc)]
+
+        # d) VDC - dem nghiem nguyen trong goc phan tu
+        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
+        giao = (r"The line $d$ intersects the $Ox$ axis at $\left(%d; 0\right)$ and the $Oy$ axis at "
+                r"$\left(0; %d\right)$, thus forming a right-angled triangle with both coordinate axes "
+                r"located in quadrant %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
+        if co_O:
+            chi_tiet = r"\\ ".join(
+                r"For $x = %d$ there are $%d$ integer values of $y$ satisfying" % (X, k)
+                for X, k in t["theo_x"])
+            giai_d = (giao + r"\\ The solution region contains $O$, so the pairs to be counted lie within that triangle "
+                      r"(%s the line $d$; points lying on the axes are only counted if the problem allows "
+                      r"$x$ or $y$ to be $0$).\\ %s\\ "
+                      r"Summing them up yields $%d$ pairs of numbers."
+                      % ("not including" if ngat else "including", chi_tiet, dem))
+            y4 = [(r"{\True There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem, dau), "True. " + giai_d),
+                  (r"{There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem + s, dau),
+                   "False. " + giai_d)]
+        else:
+            T = t["T"]
+            giai_d = (giao + r"\\ The solution region DOES NOT contain $O$, so it lies on the side far away from the triangle "
+                      r"and is unbounded.\\ For instance, all pairs of numbers "
+                      r"$\left(%s; %s\right)$ with $t$ a positive integer, $t \ge %d$ satisfy it "
+                      r"(the left-hand side is $%d t$ and $%d t %s %d$ for all $t \ge %d$).\\ "
+                      r"Thus, there are infinitely many pairs of numbers satisfying it.\\ If mistakenly considering the other half-plane "
+                      r"(containing $O$), only $%d$ pairs of numbers lying inside the aforementioned triangle would be counted, "
+                      r"which is the incorrect result."
+                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
+            y4 = [(r"{\True There are infinitely many pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % dau, "True. " + giai_d),
+                  (r"{There are exactly $%d$ pairs of numbers $\left(x; y\right)$ satisfying the inequality, "
+                   r"where %s}" % (dem, dau), "False. " + giai_d)]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+

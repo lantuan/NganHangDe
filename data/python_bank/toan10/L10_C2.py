@@ -1165,6 +1165,12 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
 # ---- Mien nghiem cua he la da giac gi (tam giac, tu giac, ngu giac...) ----
 # (tên cũ của cô: K10_2_3_3_2_VD)
 def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
+    # CLAUDE SUA 07/10/2026 (co Lan duyet): ban cu chi cho dap an tam giac / ngu giac
+    # (M, N luon nam tren hai canh KE NHAU nen khong bao gio ra tu giac).
+    # Ban moi chon truoc dang da giac (tam / tu / ngu, moi dang 1/3):
+    #   tu giac -> M, N tren hai canh DOI cua hinh chu nhat;
+    #   tam giac, ngu giac -> M, N tren hai canh KE nhau, lay phia co 1 hoac 3 dinh.
+    # Loi giai neu ro toa do M, N va thay tung dinh vao ve trai.
     x = Symbol('x')
     y = Symbol('y')
 
@@ -1195,21 +1201,29 @@ def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
         hx = y_center - K[2]
         kx = y_center + K[1]
 
-        # Sinh đường thẳng MN cắt hai cạnh của hình chữ nhật
-        x_M = np.random.randint(x_center - K[0] + 1, x_center + K[3])
-        y_N = np.random.randint(y_center - K[2] + 1, y_center + K[1])
-        y_M = int(np.random.choice([y_center - K[2], y_center + K[1]]))
-        x_N = int(np.random.choice([x_center - K[0], x_center + K[3]]))
+        hinh = str(np.random.choice(['tam', 'tu', 'ngu']))
+        if hinh == 'tu':
+            if np.random.rand() < 0.5:
+                # hai canh doi nam ngang: M tren canh tren, N tren canh duoi
+                xa = int(np.random.randint(fx + 1, gx))
+                xb = int(np.random.randint(fx + 1, gx))
+                while xb == xa:
+                    xb = int(np.random.randint(fx + 1, gx))
+                M = [xa, kx]
+                N = [xb, hx]
+            else:
+                # hai canh doi thang dung: M tren canh trai, N tren canh phai
+                ya = int(np.random.randint(hx + 1, kx))
+                yb = int(np.random.randint(hx + 1, kx))
+                while yb == ya:
+                    yb = int(np.random.randint(hx + 1, kx))
+                M = [fx, ya]
+                N = [gx, yb]
+        else:
+            # hai canh ke nhau: M tren canh ngang, N tren canh dung
+            M = [int(np.random.randint(fx + 1, gx)), int(np.random.choice([hx, kx]))]
+            N = [int(np.random.choice([fx, gx])), int(np.random.randint(hx + 1, kx))]
 
-        M = [x_M, y_M]
-        N = [x_N, y_N]
-        # Tránh trường hợp M trùng N gây ra lỗi đường thẳng không xác định
-        # (bản gốc dùng N ngay ở dòng while khi N CHƯA được gán -> UnboundLocalError)
-        while M == N:
-            x_N = int(np.random.choice([x_center - K[0], x_center + K[3]]))
-            N = [x_N, y_N]
-
-        # Thay thế hàm dc.pttq bằng tính toán đại số vectơ pháp tuyến cơ bản
         # Vectơ chỉ phương MN = (x_N - x_M, y_N - y_M) -> VTPT = (-(y_N - y_M), x_N - x_M)
         a_MN = -(N[1] - M[1])
         b_MN = N[0] - M[0]
@@ -1226,56 +1240,63 @@ def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
         VT_MN = a_MN * x + b_MN * y
         VP_MN = -c_MN
 
-        Duong = []
-        Am = []
-        for p, label in zip([A, B, C, D], ['A', 'B', 'C', 'D']):
-            if MN_func(p[0], p[1]) > 0:
-                Duong.append(label)
-            else:
-                Am.append(label)
+        dinh = list(zip(['A', 'B', 'C', 'D'], [A, B, C, D]))
+        gia_tri = [(ten, p, a_MN * p[0] + b_MN * p[1]) for ten, p in dinh]
+        Duong = [t for t, p, g in gia_tri if g > VP_MN]
+        Am = [t for t, p, g in gia_tri if g < VP_MN]
+        if len(Duong) + len(Am) != 4:       # duong thang di qua dinh -> bo
+            continue
 
-        Dau = np.random.choice(['Duong', 'Am'])
+        so_dinh = {'tam': 1, 'tu': 2, 'ngu': 3}[hinh]
+        if len(Duong) == so_dinh and len(Am) == so_dinh:
+            chon_duong = bool(np.random.rand() < 0.5)
+        elif len(Duong) == so_dinh:
+            chon_duong = True
+        elif len(Am) == so_dinh:
+            chon_duong = False
+        else:
+            continue
 
-        # Kiểm tra điều kiện để bài toán sinh ra đa giác hợp lệ (không lấy miền rỗng hoặc toàn bộ)
-        if (Dau == 'Duong' and len(Duong) in [1, 2, 3]) or (Dau == 'Am' and len(Am) in [1, 2, 3]):
-            if Dau == 'Duong':
-                dau = '\\ge'
-                count = len(Duong)
-            else:
-                dau = '\\le'
-                count = len(Am)
+        dau = '\\ge' if chon_duong else '\\le'
+        trong = Duong if chon_duong else Am
+        mien = {1: 'Miền tam giác', 2: 'Miền tứ giác', 3: 'Miền ngũ giác'}[so_dinh]
+        Mien_list = ['Miền tam giác', 'Miền tứ giác', 'Miền ngũ giác', 'Miền lục giác']
+        Mien_list.remove(mien)
 
-            if count == 1:
-                mien = 'Miền tam giác'
-            elif count == 2:
-                mien = 'Miền tứ giác'
-            else:
-                mien = 'Miền ngũ giác'
+        # Loi giai: neu ro hinh chu nhat, hai giao diem M, N, roi thay tung dinh vao ve trai
+        cac_dong = []
+        for ten, p, g in gia_tri:
+            thoa = (g >= VP_MN) if chon_duong else (g <= VP_MN)
+            ket = "đúng" if thoa else "sai"
+            cac_dong.append(
+                f"${ten}\\left({p[0]};{p[1]}\\right)$: ${g} {dau} {VP_MN}$ {ket}")
+        so_canh = so_dinh + 2
+        giai = (
+            f"Các bất phương trình ${fx} \\le x \\le {gx}$ và ${hx} \\le y \\le {kx}$ xác định "
+            f"hình chữ nhật $ABCD$ với $A\\left({A[0]};{A[1]}\\right)$, $B\\left({B[0]};{B[1]}\\right)$, "
+            f"$C\\left({C[0]};{C[1]}\\right)$, $D\\left({D[0]};{D[1]}\\right)$.\\\\ "
+            f"Đường thẳng $d \\colon {latex(VT_MN)} = {VP_MN}$ cắt hình chữ nhật tại "
+            f"$M\\left({M[0]};{M[1]}\\right)$ và $N\\left({N[0]};{N[1]}\\right)$.\\\\ "
+            f"Thay toạ độ các đỉnh vào vế trái ${latex(VT_MN)}$ và so với ${VP_MN}$:\\\\ "
+            + "; ".join(cac_dong) + ".\\\\ "
+            f"Có ${so_dinh}$ đỉnh của hình chữ nhật thoả mãn ({', '.join(trong)}) nên miền nghiệm "
+            f"là đa giác có các đỉnh là {so_dinh} đỉnh đó cùng hai điểm $M$, $N$, "
+            f"tức là đa giác có ${so_canh}$ đỉnh: \\textbf{{{mien.lower()}}}."
+        )
 
-            Mien_list = ['Miền tam giác', 'Miền tứ giác', 'Miền ngũ giác', 'Miền lục giác']
-            Mien_list.remove(mien)
-
-            v = [fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list]
-            if v not in gt:
-                gt.append(v)
-                dem += 1
+        v = [fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list, giai]
+        if v not in gt:
+            gt.append(v)
+            dem += 1
 
     cauTN = ""
     for v in gt:
-        fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list = v
+        fx, gx, hx, kx, VT_MN, dau, VP_MN, mien, Mien_list, giai = v
 
         debai = f"Miền nghiệm của hệ bất phương trình $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ là"
 
         dapso = mien
         dsnhieu = [Mien_list[0], Mien_list[1], Mien_list[2]]
-
-        giai = f"""
-        Hệ bất phương trình gồm:\\\\
-        * Các bất phương trình ${fx} \\le x \\le {gx}$ và ${hx} \\le y \\le {kx}$ xác định miền nghiệm là một hình chữ nhật giới hạn bởi các đường biên.\\\\
-        * Bất phương trình còn lại ${latex(VT_MN)} {dau} {VP_MN}$ là một nửa mặt phẳng bờ là đường thẳng $MN$ cắt hình chữ nhật trên.\\\\
-        Giao của hai miền nghiệm này cắt bớt một phần góc của hình chữ nhật, tạo thành một đa giác lồi.\\\\
-        Dựa vào số đỉnh nằm trong miền thỏa mãn, ta xác định được miền nghiệm là \\textbf{{{mien.lower()}}}.
-        """
 
         # PHAI dung MC_SA_answer_text: dap an la CHU tieng Viet.
         # MC_SA_answer_const boc moi phuong an trong $...$, nen
@@ -1580,109 +1601,109 @@ def L10_C2_B4_VD028_MC_A_01(socau, dang=1):
 
     return cauTN
 #print(K10_2_3_3_1_H(4,1))
-#
-# def K10_2_3_3_2_VD(): #Dạng 3: Tìm miền nghiệm của bất phương trình
-#     with open(r"latex\data\de.tex", "a", encoding='utf-8') as de:
-#         x = Symbol('x')
-#         y = Symbol('y')
-#
-#         x_center = np.randint(-2,2)
-#         y_center = np.randint(-2,2)
-#         K = []
-#         for i in range(0,4):
-#             k = np.randint(0,5)
-#             K.append(k)
-#         while (K[0] + K[3] <= 5):
-#             k0 = np.randint(0,10)
-#             k3 = np.randint(0,10)
-#             K.pop(3)
-#             K.insert(3,k3)
-#             K.pop(0)
-#             K.insert(0,k0)
-#         while (K[1] + K[2] <= 5):
-#             k1 = np.randint(0,10)
-#             k2 = np.randint(0,10)
-#             K.pop(2)
-#             K.insert(2,k2)
-#             K.pop(1)
-#             K.insert(1,k)
-#
-#         A = [x_center - K[0], y_center + K[1]] # đường thẳng AB song song vơi Ox có pt x = x_center - K[0]
-#         B = [x_center - K[0], y_center - K[2]]
-#         C = [x_center + K[3], y_center - K[2]] # đường thẳng CD song song vơi Ox có pt x = x_center + K[3]
-#         D = [x_center + K[3], y_center + K[1]]
-#         fx = x_center - K[0] # đường thẳng AB : x = fx
-#         gx = x_center + K[3] # đường thẳng CD: x = gx
-#         hx = y_center - K[2] # đường thẳng BC
-#         kx = y_center + K[1] # đường thẳng AD
-#
-#         # Đường thẳng MN với M,N nằm trên 2 cạnh bất kì của hình chữ nhật ABCD
-#         x_M = np.randint(x_center - K[0]+1, x_center + K[3]-1)
-#         y_N = np.randint(y_center - K[2]+1, y_center + K[1]-1)
-#         y_M = np.choice([y_center - K[2], y_center + K[1]])
-#         x_N = np.choice([x_center - K[0], x_center + K[3]])
-#         M = [x_M, y_M]
-#         N = [x_N, y_N]
-#         a_MN = dc.pttq(M[0],M[1],N[0],N[1])[0]
-#         b_MN = dc.pttq(M[0],M[1],N[0],N[1])[1]
-#         c_MN = dc.pttq(M[0],M[1],N[0],N[1])[2]
-#         MN = lambda x,y: a_MN * x + b_MN * y + c_MN # đường thẳng MN
-#         VT_MN = a_MN * x + b_MN * y
-#         VP_MN = - c_MN
-#
-#         Duong = []
-#         Am = []
-#         if MN(A[0],A[1]) > 0:
-#             Duong.append('A')
-#         else:
-#             Am.append('A')
-#         if MN(B[0],B[1]) > 0:
-#             Duong.append('B')
-#         else:
-#             Am.append('B')
-#         if MN(C[0],C[1]) > 0:
-#             Duong.append('C')
-#         else:
-#             Am.append('C')
-#         if MN(D[0],D[1]) > 0:
-#             Duong.append('D')
-#         else:
-#             Am.append('D')
-#         Dau = np.choice(['Duong', 'Am'])
-#         Mien = ['Miền tam giác', 'Miền tứ giác', 'Miền ngũ giác', 'Miền lục giác']
-#         if (Dau == 'Duong') and (len(Duong) == 1):
-#             dau = '\ge'
-#             mien = 'Miền tam giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Duong') and (len(Duong) == 2):
-#             dau = '\ge'
-#             mien = 'Miền tứ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Duong') and (len(Duong) == 3):
-#             dau = '\ge'
-#             mien = 'Miền ngũ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 1):
-#             dau = '\le'
-#             mien = 'Miền tam giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 2):
-#             dau = '\le'
-#             mien = 'Miền tứ giác'
-#             Mien.remove(mien)
-#         elif (Dau == 'Am') and (len(Am) == 3):
-#             dau = '\le'
-#             mien = 'Miền ngũ giác'
-#             Mien.remove(mien)
-#         de.write(r"\begin{ex}" + os.linesep)
-#         de.write(f"Miền nghiệm của hệ bất phương trình $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ là{os.linesep}")
-#         de.write(r"\choice"+ os.linesep)
-#         de.write(f"{{\\True {mien}}}{os.linesep}")
-#         de.write(f"{{{Mien[0]}}}{os.linesep}")
-#         de.write(f"{{{Mien[1]}}}{os.linesep}")
-#         de.write(f"{{{Mien[2]}}}{os.linesep}")
-#         de.write(r"\loigiai{}" + os.linesep)
-#         de.write(r"\end{ex}" + os.linesep)
+
+def K10_2_3_3_2_VD(): #Dạng 3: Tìm miền nghiệm của bất phương trình
+    with open(r"latex\data\de.tex", "a", encoding='utf-8') as de:
+        x = Symbol('x')
+        y = Symbol('y')
+
+        x_center = np.randint(-2,2)
+        y_center = np.randint(-2,2)
+        K = []
+        for i in range(0,4):
+            k = np.randint(0,5)
+            K.append(k)
+        while (K[0] + K[3] <= 5):
+            k0 = np.randint(0,10)
+            k3 = np.randint(0,10)
+            K.pop(3)
+            K.insert(3,k3)
+            K.pop(0)
+            K.insert(0,k0)
+        while (K[1] + K[2] <= 5):
+            k1 = np.randint(0,10)
+            k2 = np.randint(0,10)
+            K.pop(2)
+            K.insert(2,k2)
+            K.pop(1)
+            K.insert(1,k)
+
+        A = [x_center - K[0], y_center + K[1]] # đường thẳng AB song song vơi Ox có pt x = x_center - K[0]
+        B = [x_center - K[0], y_center - K[2]]
+        C = [x_center + K[3], y_center - K[2]] # đường thẳng CD song song vơi Ox có pt x = x_center + K[3]
+        D = [x_center + K[3], y_center + K[1]]
+        fx = x_center - K[0] # đường thẳng AB : x = fx
+        gx = x_center + K[3] # đường thẳng CD: x = gx
+        hx = y_center - K[2] # đường thẳng BC
+        kx = y_center + K[1] # đường thẳng AD
+
+        # Đường thẳng MN với M,N nằm trên 2 cạnh bất kì của hình chữ nhật ABCD
+        x_M = np.randint(x_center - K[0]+1, x_center + K[3]-1)
+        y_N = np.randint(y_center - K[2]+1, y_center + K[1]-1)
+        y_M = np.choice([y_center - K[2], y_center + K[1]])
+        x_N = np.choice([x_center - K[0], x_center + K[3]])
+        M = [x_M, y_M]
+        N = [x_N, y_N]
+        a_MN = dc.pttq(M[0],M[1],N[0],N[1])[0]
+        b_MN = dc.pttq(M[0],M[1],N[0],N[1])[1]
+        c_MN = dc.pttq(M[0],M[1],N[0],N[1])[2]
+        MN = lambda x,y: a_MN * x + b_MN * y + c_MN # đường thẳng MN
+        VT_MN = a_MN * x + b_MN * y
+        VP_MN = - c_MN
+
+        Duong = []
+        Am = []
+        if MN(A[0],A[1]) > 0:
+            Duong.append('A')
+        else:
+            Am.append('A')
+        if MN(B[0],B[1]) > 0:
+            Duong.append('B')
+        else:
+            Am.append('B')
+        if MN(C[0],C[1]) > 0:
+            Duong.append('C')
+        else:
+            Am.append('C')
+        if MN(D[0],D[1]) > 0:
+            Duong.append('D')
+        else:
+            Am.append('D')
+        Dau = np.choice(['Duong', 'Am'])
+        Mien = ['Miền tam giác', 'Miền tứ giác', 'Miền ngũ giác', 'Miền lục giác']
+        if (Dau == 'Duong') and (len(Duong) == 1):
+            dau = r'\ge'
+            mien = 'Miền tam giác'
+            Mien.remove(mien)
+        elif (Dau == 'Duong') and (len(Duong) == 2):
+            dau = r'\ge'
+            mien = 'Miền tứ giác'
+            Mien.remove(mien)
+        elif (Dau == 'Duong') and (len(Duong) == 3):
+            dau = r'\ge'
+            mien = 'Miền ngũ giác'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 1):
+            dau = r'\le'
+            mien = 'Miền tam giác'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 2):
+            dau = r'\le'
+            mien = 'Miền tứ giác'
+            Mien.remove(mien)
+        elif (Dau == 'Am') and (len(Am) == 3):
+            dau = r'\le'
+            mien = 'Miền ngũ giác'
+            Mien.remove(mien)
+        de.write(r"\begin{ex}" + os.linesep)
+        de.write(f"Miền nghiệm của hệ bất phương trình $\\heva{{& {fx} \\le x \\le {gx} \\\\ & {hx} \\le y \\le {kx} \\\\ & {latex(VT_MN)} {dau} {VP_MN} }}$ là{os.linesep}")
+        de.write(r"\choice"+ os.linesep)
+        de.write(f"{{\\True {mien}}}{os.linesep}")
+        de.write(f"{{{Mien[0]}}}{os.linesep}")
+        de.write(f"{{{Mien[1]}}}{os.linesep}")
+        de.write(f"{{{Mien[2]}}}{os.linesep}")
+        de.write(r"\loigiai{}" + os.linesep)
+        de.write(r"\end{ex}" + os.linesep)
 
 
 # =====================================================================
@@ -2457,66 +2478,213 @@ def L10_C2_B4_VD028_TL_A_03(socau, dong=1):
     return cauTN
 
 
+# ---------------------------------------------------------------------
+# CLAUDE SUA 07/10/2026 (co Lan duyet) - viet lai L10_C2_TF_A_01:
+#  * a, b, c co ca am; dau bat phuong trinh ngau nhien <, <=, >, >=.
+#  * Duong bo d luon cat hai truc tao tam giac vuong; tam giac o goc phan tu
+#    nao thi x, y mang dau tuong ung (nguyen duong / am / khong am / khong duong).
+#  * y d): bo rang buoc 0<=x<=k. Mien nghiem chua O -> dem so cap nguyen
+#    trong tam giac (nhieu: N+s). Mien nghiem khong chua O -> "co vo so cap"
+#    (nhieu: so cap trong tam giac o nua mat phang ben kia).
+# Ban cu luu o nhap/TF_A_01_ban_cu.py.
+# ---------------------------------------------------------------------
+
+_TFA_LATEX = {"<=": r"\le", "<": "<", ">=": r"\ge", ">": ">"}
+# Doi sang nua mat phang ben kia cua bo d, giu nguyen ngat / khong ngat:
+# dung de lam NHIEU cho y d) (hoc sinh xet lon ben).
+_TFA_DAO = {"<=": ">=", "<": ">", ">=": "<=", ">": "<"}
+
+
+def _tfa_thoa(v, ky, c):
+    """v ky c co dung khong (ky la mot trong <=, <, >=, >)."""
+    return {"<=": v <= c, "<": v < c, ">=": v >= c, ">": v > c}[ky]
+
+
+def _tfa_so(n):
+    """So nguyen dung trong tich: am thi boc ngoac."""
+    return "(%d)" % n if n < 0 else "%d" % n
+
+
+def _tfa_bieu_thuc(a, b):
+    """Ve trai ax + by viet gon (bo he so 1, xu ly dau)."""
+    t1 = "x" if a == 1 else ("-x" if a == -1 else "%dx" % a)
+    if b > 0:
+        t2 = "+ " + ("y" if b == 1 else "%dy" % b)
+    else:
+        t2 = "- " + ("y" if b == -1 else "%dy" % -b)
+    return t1 + " " + t2
+
+
+def _tfa_dieu_kien_xy(sx, sy, chat_x, chat_y):
+    """Cau chu dieu kien cua x, y. chat=True: nguyen duong/am; False: khong am/khong duong."""
+    def tu(sg, chat):
+        if sg > 0:
+            return "dương" if chat else "không âm"
+        return "âm" if chat else "không dương"
+    wx, wy = tu(sx, chat_x), tu(sy, chat_y)
+    if wx == wy:
+        return r"$x$, $y$ đều là số nguyên %s" % wx
+    return r"$x$ là số nguyên %s, $y$ là số nguyên %s" % (wx, wy)
+
+
+def _tfa_goc_phan_tu(sx, sy):
+    """Ten goc phan tu chua tam giac."""
+    return {(1, 1): "I", (-1, 1): "II", (-1, -1): "III", (1, -1): "IV"}[(sx, sy)]
+
+
+def _tfa_tao_tham_so():
+    """Sinh tham so mot cau. Tra ve dict.
+
+    Duong thang d: a x + b y = c cat Ox tai (sx*m; 0), cat Oy tai (0; sy*n)
+    (m, n nguyen duong) nen d cung hai truc luon tao tam giac vuong o goc
+    phan tu (sx, sy). Nhan ca ba he so voi -1 (ngau nhien) de a, b, c co ca am.
+    """
+    while True:
+        sx, sy = _rd.choice([1, -1]), _rd.choice([1, -1])
+        m, n = _rd.randint(2, 6), _rd.randint(2, 6)
+        p, q = sx * m, sy * n                      # hoanh do, tung do giao diem
+        g = _math.gcd(m, n)
+        a, b, c = q // g, p // g, (p * q) // g     # q*x + p*y = p*q, rut gon
+        if _rd.random() < 0.5:
+            a, b, c = -a, -b, -c
+        ky = _rd.choice(["<=", "<", ">=", ">"])
+        co_O = _tfa_thoa(0, ky, c)                     # nua mat phang nghiem co chua O?
+
+        chat_x, chat_y = _rd.choice([True, False]), _rd.choice([True, False])
+        xs = [sx * i for i in range(1 if chat_x else 0, m + 1)]
+        ys = [sy * j for j in range(1 if chat_y else 0, n + 1)]
+        theo_x = [(X, sum(1 for Y in ys if _tfa_thoa(a * X + b * Y, ky, c))) for X in xs]
+        dem = sum(k for _x, k in theo_x)           # dem trong hcn |x|<=m, |y|<=n
+        if co_O:
+            if dem < 3:                            # tam giac chua toi thieu 3 diem
+                continue
+            s = _rd.choice([t for t in (-3, -2, -1, 1, 2, 3) if dem + t >= 1])
+            T = None
+        else:
+            # nhieu: xet lon sang nua mat phang ben kia (chua O, tao tam giac voi hai truc)
+            ky_dao = _TFA_DAO[ky]
+            dem = sum(1 for X in xs for Y in ys if _tfa_thoa(a * X + b * Y, ky_dao, c))
+            if dem < 2:
+                continue
+            s = 0
+            T = next(t for t in range(1, 200) if _tfa_thoa(a * sx * t + b * sy * t, ky, c))
+        return dict(chat_x=chat_x, chat_y=chat_y, sx=sx, sy=sy, m=m, n=n, p=p, q=q, a=a, b=b, c=c, ky=ky,
+                    co_O=co_O, theo_x=theo_x, dem=dem, s=s, T=T)
+
+
 def L10_C2_TF_A_01(socau, socot=1):
-    """Đúng/Sai - bất phương trình bậc nhất hai ẩn."""
+    """Đúng/Sai - bất phương trình bậc nhất hai ẩn (bản nháp phát triển)."""
     cauTF = ''
     for _ in range(socau):
-        a = _rd.choice([1, 2, 3])
-        b = _rd.choice([1, 2, 3])
-        k = _rd.randint(2, 6)
-        c = a * b * k
-        x0, y0 = _rd.randint(0, 4), _rd.randint(0, 4)
-        ve_trai = a * x0 + b * y0
-        # dem diem nguyen trong hinh vuong 0..k thoa man
-        dem = sum(1 for X in range(0, k + 1) for Y in range(0, k + 1)
-                  if a * X + b * Y <= c)
+        t = _tfa_tao_tham_so()
+        sx, sy, a, b, c, ky = t["sx"], t["sy"], t["a"], t["b"], t["c"], t["ky"]
+        co_O, dem, s = t["co_O"], t["dem"], t["s"]
+        vt = _tfa_bieu_thuc(a, b)
+        ks = _TFA_LATEX[ky]
+        bpt = r"%s %s %d" % (vt, ks, c)
+        duong = r"d \colon %s = %d" % (vt, c)
+        ngat = ky in ("<", ">")
 
-        debai = (r"Cho bất phương trình $%dx + %dy \le %d$. "
-                 r"Xét tính đúng sai của các khẳng định sau:" % (a, b, c))
+        debai = (r"Cho bất phương trình $%s$. "
+                 r"Xét tính đúng sai của các khẳng định sau:" % bpt)
 
         # a) NB - nhan dang
+        ly_do = (r"Nó có dạng $ax + by %s c$ với $a = %d$, $b = %d$ không đồng thời "
+                 r"bằng $0$, và $x$, $y$ đều bậc nhất." % (ks, a, b))
+        ten = r"``Bất phương trình $%s$ %s bất phương trình bậc nhất hai ẩn''"
         y1 = [(r"{\True Bất phương trình đã cho là bất phương trình bậc nhất hai ẩn}",
-               r"Đúng. Nó có dạng $ax + by \le c$ với $a = %d$, $b = %d$ không đồng thời "
-               r"bằng $0$, và $x$, $y$ đều bậc nhất." % (a, b)),
+               r"Đúng. " + ly_do),
               (r"{Bất phương trình đã cho không phải là bất phương trình bậc nhất hai ẩn}",
-               r"Sai. Nó đúng dạng $ax + by \le c$ nên là bất phương trình bậc nhất hai ẩn.")]
+               r"Sai. " + ly_do),
+              (r"{\True " + ten % (bpt, "là") + r" là mệnh đề đúng}", r"Đúng. " + ly_do),
+              (r"{" + ten % (bpt, "là") + r" là mệnh đề sai}", r"Sai. " + ly_do),
+              (r"{" + ten % (bpt, "không phải là") + r" là mệnh đề đúng}", r"Sai. " + ly_do),
+              (r"{\True " + ten % (bpt, "không phải là") + r" là mệnh đề sai}", r"Đúng. " + ly_do)]
 
         # b) TH - thay so kiem tra mot cap so
-        dung_b = ve_trai <= c
+        x0, y0 = _rd.randint(-4, 4), _rd.randint(-4, 4)
+        ve = a * x0 + b * y0
+        dung_b = _tfa_thoa(ve, ky, c)
+        thay = (r"Thay vào vế trái: $%s\cdot %s + %s\cdot %s = %d$. "
+                r"Ta có $%d %s %d$ là mệnh đề %s nên cặp số này %s nghiệm của bất phương trình."
+                % (_tfa_so(a), _tfa_so(x0), _tfa_so(b), _tfa_so(y0), ve, ve, ks, c,
+                   "đúng" if dung_b else "sai", "là" if dung_b else "không phải là"))
+        cap = r"\left(%d; %d\right)" % (x0, y0)
         y2 = [((r"{\True " if dung_b else "{") +
-               r"Cặp số $\left(%d; %d\right)$ là một nghiệm của bất phương trình}" % (x0, y0),
-               r"Thay vào vế trái: $%d\cdot %d + %d\cdot %d = %d$, so với $%d$ thì %s. "
-               r"Nên cặp số này %s một nghiệm."
-               % (a, x0, b, y0, ve_trai, c,
-                  "nhỏ hơn hoặc bằng" if dung_b else "lớn hơn",
-                  "" if dung_b else "không phải")),
+               r"Cặp số $%s$ là một nghiệm của bất phương trình}" % cap,
+               ("Đúng. " if dung_b else "Sai. ") + thay),
               ((r"{" if dung_b else r"{\True ") +
-               r"Cặp số $\left(%d; %d\right)$ không phải là nghiệm của bất phương trình}" % (x0, y0),
-               r"Thay vào vế trái được $%d$; so với $%d$ thì %s."
-               % (ve_trai, c, "thoả mãn" if dung_b else "không thoả mãn"))]
+               r"Cặp số $%s$ không phải là nghiệm của bất phương trình}" % cap,
+               ("Sai. " if dung_b else "Đúng. ") + thay),
+              ((r"{\True " if dung_b else "{") +
+               r"Điểm $%s$ thuộc miền nghiệm của bất phương trình}" % cap,
+               ("Đúng. " if dung_b else "Sai. ") + thay),
+              ((r"{" if dung_b else r"{\True ") +
+               r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình}" % cap,
+               ("Sai. " if dung_b else "Đúng. ") + thay)]
 
-        # c) VD - phai hinh dung mien nghiem
-        y3 = [(r"{\True Miền nghiệm của bất phương trình là nửa mặt phẳng bờ là đường "
-               r"thẳng $%dx + %dy = %d$ và có chứa gốc toạ độ $O$}" % (a, b, c),
-               r"Thay $O\left(0;0\right)$ vào vế trái được $0$, mà $0 \le %d$ nên $O$ "
-               r"thuộc miền nghiệm.\\ "
-               r"Vậy miền nghiệm là nửa mặt phẳng bờ $%dx + %dy = %d$ chứa $O$ (kể cả bờ)."
-               % (c, a, b, c)),
-              (r"{Miền nghiệm của bất phương trình là nửa mặt phẳng bờ là đường thẳng "
-               r"$%dx + %dy = %d$ và KHÔNG chứa gốc toạ độ $O$}" % (a, b, c),
-               r"Sai. Thay $O$ vào vế trái được $0 \le %d$ (đúng) nên $O$ thuộc miền nghiệm."
-               % c)]
+        # c) VD - hinh dung nua mat phang nghiem
+        # Su that: co_O (chua O hay khong), ngat (khong ke bo d hay co ke bo d)
+        thu_O = (r"Thay $O\left(0;0\right)$ vào vế trái được $0$; $0 %s %d$ là mệnh đề %s "
+                 r"nên $O$ %s miền nghiệm.\\ Bất phương trình %s nên đường thẳng $d$ %s miền nghiệm."
+                 % (ks, c, "đúng" if co_O else "sai", "thuộc" if co_O else "không thuộc",
+                    "ngặt" if ngat else "không ngặt", "không thuộc" if ngat else "thuộc"))
 
-        # d) VDC - dem diem nguyen, phai ket hop mien nghiem voi rang buoc phu
-        y4 = [(r"{\True Có đúng $%d$ cặp số nguyên $\left(x; y\right)$ thoả mãn bất phương "
-               r"trình và $0 \le x \le %d$, $0 \le y \le %d$}" % (dem, k, k),
-               r"Với mỗi $x$ nguyên từ $0$ đến $%d$, điều kiện $%dx + %dy \le %d$ cho "
-               r"$y \le \dfrac{%d - %dx}{%d}$; đếm số $y$ nguyên từ $0$ đến $%d$ thoả mãn "
-               r"rồi cộng lại theo từng $x$, ta được tất cả $%d$ cặp."
-               % (k, a, b, c, c, a, b, k, dem)),
-              (r"{Có đúng $%d$ cặp số nguyên $\left(x; y\right)$ thoả mãn bất phương trình "
-               r"và $0 \le x \le %d$, $0 \le y \le %d$}" % (dem + 2, k, k),
-               r"Sai. Đếm đầy đủ theo từng giá trị của $x$ thì được $%d$ cặp." % dem)]
+        def mo_ta1(chua, ke_bo):
+            return (r"Miền nghiệm của bất phương trình là nửa mặt phẳng bờ là đường thẳng "
+                    r"$%s$, %s gốc toạ độ $O$ và %s đường thẳng $d$"
+                    % (duong, "chứa" if chua else "không chứa",
+                       "kể cả" if ke_bo else "không kể"))
+
+        def mo_ta2(chua, ke_bo):
+            return (r"Gốc toạ độ $O$ %s miền nghiệm của bất phương trình, còn các điểm "
+                    r"nằm trên đường thẳng $%s$ %s miền nghiệm"
+                    % ("thuộc" if chua else "không thuộc", duong,
+                       "thuộc" if ke_bo else "không thuộc"))
+
+        dung_O, dung_bo = co_O, (not ngat)
+        sai = _rd.choice([(not dung_O, dung_bo), (dung_O, not dung_bo),
+                          (not dung_O, not dung_bo)])
+        sai2 = _rd.choice([(not dung_O, dung_bo), (dung_O, not dung_bo),
+                           (not dung_O, not dung_bo)])
+        y3 = [(r"{\True " + mo_ta1(dung_O, dung_bo) + "}", "Đúng. " + thu_O),
+              (r"{" + mo_ta1(*sai) + "}", "Sai. " + thu_O),
+              (r"{\True " + mo_ta2(dung_O, dung_bo) + "}", "Đúng. " + thu_O),
+              (r"{" + mo_ta2(*sai2) + "}", "Sai. " + thu_O)]
+
+        # d) VDC - dem nghiem nguyen trong goc phan tu
+        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
+        giao = (r"Đường thẳng $d$ cắt $Ox$ tại $\left(%d; 0\right)$ và cắt $Oy$ tại "
+                r"$\left(0; %d\right)$, nên cùng hai trục toạ độ tạo thành một tam giác vuông "
+                r"nằm ở góc phần tư thứ %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
+        if co_O:
+            chi_tiet = r"\\ ".join(
+                r"Với $x = %d$ có $%d$ giá trị nguyên $y$ thoả mãn" % (X, k)
+                for X, k in t["theo_x"])
+            giai_d = (giao + r"\\ Miền nghiệm chứa $O$ nên các cặp cần đếm nằm trong tam giác đó "
+                      r"(%s đường thẳng $d$; điểm nằm trên trục chỉ được tính khi đề cho phép "
+                      r"$x$ hoặc $y$ bằng $0$).\\ %s\\ "
+                      r"Cộng lại được $%d$ cặp số."
+                      % ("không kể" if ngat else "kể cả", chi_tiet, dem))
+            y4 = [(r"{\True Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem, dau), "Đúng. " + giai_d),
+                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem + s, dau),
+                   "Sai. " + giai_d)]
+        else:
+            T = t["T"]
+            giai_d = (giao + r"\\ Miền nghiệm KHÔNG chứa $O$, nên nó nằm về phía xa tam giác "
+                      r"và không bị chặn.\\ Chẳng hạn mọi cặp số "
+                      r"$\left(%s; %s\right)$ với $t$ nguyên dương, $t \ge %d$ đều thoả mãn "
+                      r"(vế trái là $%d t$ và $%d t %s %d$ với mọi $t \ge %d$).\\ "
+                      r"Vậy có vô số cặp số thoả mãn.\\ Nếu xét nhầm sang nửa mặt phẳng bên kia "
+                      r"(chứa $O$) thì chỉ đếm được $%d$ cặp số nằm trong tam giác nói trên, "
+                      r"đó là kết quả sai."
+                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
+            y4 = [(r"{\True Có vô số cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % dau, "Đúng. " + giai_d),
+                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem, dau), "Sai. " + giai_d)]
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
@@ -2875,3 +3043,146 @@ def L10_C2_TF_A_03(socau, socot=1):
                ("Sai. " if X_ok else "Đúng. ") + gd)]
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+def L10_C2_TF_A_04(socau, socot=1):
+    r"""Đúng/Sai - bất phương trình bậc nhất hai ẩn KÈM BỐN ĐIỂM cho trước.
+
+    CLAUDE THEM 08/10/2026 (co Lan duyet) - theo y co Lan: cau dan "Cho bat
+    phuong trinh ... va bon diem A, B, C, D"; a) nhan dang va d) dem nghiem
+    nguyen y het L10_C2_TF_A_01; b) mot trong bon diem thuoc / khong thuoc mien
+    nghiem; c) trong bon diem co khong / 1 / 2 / 3 / 4 diem thuoc (khong thuoc)
+    mien nghiem.
+    """
+    cauTF = ''
+    for _ in range(socau):
+        t = _tfa_tao_tham_so()
+        sx, sy, a, b, c, ky = t["sx"], t["sy"], t["a"], t["b"], t["c"], t["ky"]
+        co_O, dem, s = t["co_O"], t["dem"], t["s"]
+        vt = _tfa_bieu_thuc(a, b)
+        ks = _TFA_LATEX[ky]
+        bpt = r"%s %s %d" % (vt, ks, c)
+        duong = r"d \colon %s = %d" % (vt, c)
+        ngat = ky in ("<", ">")
+
+        # bon diem cho truoc: n_in diem thuoc mien nghiem, con lai khong thuoc
+        luoi = [(X, Y) for X in range(-6, 7) for Y in range(-6, 7)]
+        trong = [p for p in luoi if _tfa_thoa(a * p[0] + b * p[1], ky, c)]
+        ngoai = [p for p in luoi if not _tfa_thoa(a * p[0] + b * p[1], ky, c)]
+        n_in = _rd.randint(0, 4)
+        diem = _rd.sample(trong, n_in) + _rd.sample(ngoai, 4 - n_in)
+        _rd.shuffle(diem)
+        TEN = "ABCD"
+        thuoc = [_tfa_thoa(a * p[0] + b * p[1], ky, c) for p in diem]
+        tex_d = [r"%s\left(%d; %d\right)" % (TEN[i], diem[i][0], diem[i][1]) for i in range(4)]
+        n_ngoai = 4 - n_in
+
+        debai = (r"Cho bất phương trình $%s$ và bốn điểm $%s$, $%s$, $%s$, $%s$. "
+                 r"Xét tính đúng sai của các khẳng định sau:" % ((bpt,) + tuple(tex_d)))
+
+        def thay(i):
+            X, Y = diem[i]
+            g = a * X + b * Y
+            return (r"Thay toạ độ điểm $%s$ vào vế trái: $%s\cdot %s + %s\cdot %s = %d$; "
+                    r"$%d %s %d$ là mệnh đề %s nên điểm $%s$ %s miền nghiệm."
+                    % (TEN[i], _tfa_so(a), _tfa_so(X), _tfa_so(b), _tfa_so(Y), g, g, ks, c,
+                       "đúng" if thuoc[i] else "sai", TEN[i],
+                       "thuộc" if thuoc[i] else "không thuộc"))
+
+        # a) NB - nhan dang
+        ly_do = (r"Nó có dạng $ax + by %s c$ với $a = %d$, $b = %d$ không đồng thời "
+                 r"bằng $0$, và $x$, $y$ đều bậc nhất." % (ks, a, b))
+        ten = r"``Bất phương trình $%s$ %s bất phương trình bậc nhất hai ẩn''"
+        y1 = [(r"{\True Bất phương trình đã cho là bất phương trình bậc nhất hai ẩn}",
+               r"Đúng. " + ly_do),
+              (r"{Bất phương trình đã cho không phải là bất phương trình bậc nhất hai ẩn}",
+               r"Sai. " + ly_do),
+              (r"{\True " + ten % (bpt, "là") + r" là mệnh đề đúng}", r"Đúng. " + ly_do),
+              (r"{" + ten % (bpt, "là") + r" là mệnh đề sai}", r"Sai. " + ly_do),
+              (r"{" + ten % (bpt, "không phải là") + r" là mệnh đề đúng}", r"Sai. " + ly_do),
+              (r"{\True " + ten % (bpt, "không phải là") + r" là mệnh đề sai}", r"Đúng. " + ly_do)]
+
+        # b) TH - mot trong bon diem co thuoc mien nghiem khong
+        k = _rd.randrange(4)
+        dung_b = thuoc[k]
+        cap = tex_d[k]
+        gb = thay(k)
+        y2 = [((r"{\True " if dung_b else "{") +
+               r"Điểm $%s$ thuộc miền nghiệm của bất phương trình}" % cap,
+               ("Đúng. " if dung_b else "Sai. ") + gb),
+              ((r"{" if dung_b else r"{\True ") +
+               r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình}" % cap,
+               ("Sai. " if dung_b else "Đúng. ") + gb),
+              ((r"{\True " if dung_b else "{") +
+               r"Toạ độ của điểm $%s$ là một nghiệm của bất phương trình}" % TEN[k],
+               ("Đúng. " if dung_b else "Sai. ") + gb),
+              ((r"{" if dung_b else r"{\True ") +
+               r"Toạ độ của điểm $%s$ không phải là nghiệm của bất phương trình}" % TEN[k],
+               ("Sai. " if dung_b else "Đúng. ") + gb)]
+
+        # c) VD - dem so diem thuoc / khong thuoc mien nghiem trong bon diem
+        def cau_c(so, thuoc_mn):
+            if so == 0:
+                return (r"Trong các điểm đã cho, không có điểm nào thuộc miền nghiệm của "
+                        r"bất phương trình" if thuoc_mn else
+                        r"Trong các điểm đã cho, không có điểm nào không thuộc miền nghiệm của "
+                        r"bất phương trình")
+            if so == 4:
+                return (r"Trong các điểm đã cho, cả bốn điểm đều thuộc miền nghiệm của "
+                        r"bất phương trình" if thuoc_mn else
+                        r"Trong các điểm đã cho, cả bốn điểm đều không thuộc miền nghiệm của "
+                        r"bất phương trình")
+            return ((r"Trong các điểm đã cho, có đúng $%d$ điểm thuộc miền nghiệm của "
+                     r"bất phương trình" if thuoc_mn else
+                     r"Trong các điểm đã cho, có đúng $%d$ điểm không thuộc miền nghiệm của "
+                     r"bất phương trình") % so)
+
+        ds_in = ", ".join(TEN[i] for i in range(4) if thuoc[i])
+        ds_ngoai = ", ".join(TEN[i] for i in range(4) if not thuoc[i])
+        gc = (r"\\ ".join(thay(i) for i in range(4)) +
+              r"\\ Vậy có $%d$ điểm thuộc miền nghiệm%s và $%d$ điểm không thuộc miền nghiệm%s."
+              % (n_in, " (%s)" % ds_in if ds_in else "",
+                 n_ngoai, " (%s)" % ds_ngoai if ds_ngoai else ""))
+        sai_in = _rd.choice([i for i in range(5) if i != n_in])
+        sai_ngoai = _rd.choice([i for i in range(5) if i != n_ngoai])
+        y3 = [(r"{\True " + cau_c(n_in, True) + "}", "Đúng. " + gc),
+              (r"{" + cau_c(sai_in, True) + "}", "Sai. " + gc),
+              (r"{\True " + cau_c(n_ngoai, False) + "}", "Đúng. " + gc),
+              (r"{" + cau_c(sai_ngoai, False) + "}", "Sai. " + gc)]
+
+        # d) VDC - dem nghiem nguyen trong goc phan tu
+        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
+        giao = (r"Đường thẳng $d$ cắt $Ox$ tại $\left(%d; 0\right)$ và cắt $Oy$ tại "
+                r"$\left(0; %d\right)$, nên cùng hai trục toạ độ tạo thành một tam giác vuông "
+                r"nằm ở góc phần tư thứ %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
+        if co_O:
+            chi_tiet = r"\\ ".join(
+                r"Với $x = %d$ có $%d$ giá trị nguyên $y$ thoả mãn" % (X, k)
+                for X, k in t["theo_x"])
+            giai_d = (giao + r"\\ Miền nghiệm chứa $O$ nên các cặp cần đếm nằm trong tam giác đó "
+                      r"(%s đường thẳng $d$; điểm nằm trên trục chỉ được tính khi đề cho phép "
+                      r"$x$ hoặc $y$ bằng $0$).\\ %s\\ "
+                      r"Cộng lại được $%d$ cặp số."
+                      % ("không kể" if ngat else "kể cả", chi_tiet, dem))
+            y4 = [(r"{\True Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem, dau), "Đúng. " + giai_d),
+                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem + s, dau),
+                   "Sai. " + giai_d)]
+        else:
+            T = t["T"]
+            giai_d = (giao + r"\\ Miền nghiệm KHÔNG chứa $O$, nên nó nằm về phía xa tam giác "
+                      r"và không bị chặn.\\ Chẳng hạn mọi cặp số "
+                      r"$\left(%s; %s\right)$ với $t$ nguyên dương, $t \ge %d$ đều thoả mãn "
+                      r"(vế trái là $%d t$ và $%d t %s %d$ với mọi $t \ge %d$).\\ "
+                      r"Vậy có vô số cặp số thoả mãn.\\ Nếu xét nhầm sang nửa mặt phẳng bên kia "
+                      r"(chứa $O$) thì chỉ đếm được $%d$ cặp số nằm trong tam giác nói trên, "
+                      r"đó là kết quả sai."
+                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
+            y4 = [(r"{\True Có vô số cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % dau, "Đúng. " + giai_d),
+                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
+                   r"trong đó %s}" % (dem, dau), "Sai. " + giai_d)]
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+
