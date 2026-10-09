@@ -28,7 +28,7 @@ from urllib.parse import quote
 
 from fastapi import APIRouter, Request, Form
 from fastapi.concurrency import run_in_threadpool
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.responses import RedirectResponse, HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from app.core.deps import get_current_user, yeu_cau_giao_vien
@@ -243,6 +243,29 @@ async def de_da_tao(request: Request):
         context={
             **_ngu_canh_chung(user),"danh_sach_de": history_service.lay_de_cua_giao_vien(user.id)},
     )
+
+
+@router.post("/gv/de-da-tao/xoa")
+async def xoa_de_da_tao(request: Request):
+    """Giao vien tu xoa de da tao cua MINH. Body JSON: {"de_ids": [...]} xoa cac
+    de da chon, hoac {"tat_ca": true} xoa het (cuoi nam hoc). CLAUDE THEM 09/10/2026."""
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+    try:
+        du_lieu = await request.json()
+    except Exception:
+        du_lieu = {}
+    if not isinstance(du_lieu, dict):
+        du_lieu = {}
+    if du_lieu.get("tat_ca") is True:
+        ds = None
+    else:
+        ds = du_lieu.get("de_ids")
+        if not isinstance(ds, list) or not ds:
+            return JSONResponse({"detail": "Chưa chọn đề nào để xoá."}, status_code=400)
+    return await run_in_threadpool(history_service.xoa_de_cua_giao_vien, user.id, ds)
 
 
 @router.get("/gv/lop", response_class=HTMLResponse)

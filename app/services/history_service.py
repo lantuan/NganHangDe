@@ -282,3 +282,65 @@ def lay_de_cua_giao_vien(user_id, limit=50):
     except Exception as e:
         print("LOI LAY DE CUA GIAO VIEN:", e)
         return []
+
+
+# CLAUDE THEM 09/10/2026 (co Lan duyet): giao vien tu xoa de da tao (cuoi nam hoc).
+_GOC_DU_AN = __import__("pathlib").Path(__file__).resolve().parents[2]
+_THU_MUC_DUOC_XOA_FILE = (_GOC_DU_AN / "data", _GOC_DU_AN / "app" / "static" / "downloads")
+
+
+def _xoa_file_tren_dia(duong_dan) -> None:
+    """Xoa 1 file de/PDF/tex tren dia - CHI khi nam trong data/ hoac
+    app/static/downloads (khong bao gio xoa ngoai hai thu muc nay)."""
+    try:
+        f = __import__("pathlib").Path(duong_dan).resolve()
+        if f.is_file() and any(t in f.parents for t in _THU_MUC_DUOC_XOA_FILE):
+            f.unlink()
+    except Exception as e:
+        print("LOI XOA FILE DE:", e)
+
+
+def xoa_de_cua_giao_vien(user_id, de_ids=None) -> dict:
+    """
+    Xoa de da tao CUA CHINH giao vien nay (de_da_sinh.user_id = user_id).
+    de_ids=None -> xoa TAT CA de cua giao vien; co danh sach -> chi xoa cac de
+    do (de nao khong thuoc giao vien thi bi bo qua, khong bao gio xoa de cua
+    nguoi khac). Xoa ca dong file_de va file vat ly. Khong dong vao bai lam /
+    diem cua hoc sinh (exam_history).
+
+    De xoa khong duoc (vd da co hoc sinh lam bai, rang buoc khoa ngoai) thi
+    GIU NGUYEN de do (khoi phuc file_de) va tinh vao "khong_xoa_duoc".
+    Tra ve {"da_xoa": n, "khong_xoa_duoc": m}.
+    """
+    ket_qua = {"da_xoa": 0, "khong_xoa_duoc": 0}
+    try:
+        truy_van = supabase.table("de_da_sinh").select("id").eq("user_id", user_id)
+        if de_ids is not None:
+            de_ids = [str(x) for x in de_ids]
+            if not de_ids:
+                return ket_qua
+            truy_van = truy_van.in_("id", de_ids)
+        ids = [r["id"] for r in (truy_van.execute().data or [])]
+    except Exception as e:
+        print("LOI TIM DE CAN XOA:", e)
+        return ket_qua
+
+    for de_id in ids:
+        try:
+            cac_file = (supabase.table("file_de").select("*").eq("de_id", de_id).execute().data or [])
+            supabase.table("file_de").delete().eq("de_id", de_id).execute()
+            try:
+                supabase.table("de_da_sinh").delete().eq("id", de_id).eq("user_id", user_id).execute()
+            except Exception:
+                # khong xoa duoc de -> tra lai cac dong file_de vua xoa
+                if cac_file:
+                    supabase.table("file_de").insert(
+                        [{k: v for k, v in f.items() if k != "id"} for f in cac_file]).execute()
+                raise
+            for f in cac_file:
+                _xoa_file_tren_dia(f.get("duong_dan"))
+            ket_qua["da_xoa"] += 1
+        except Exception as e:
+            print("LOI XOA DE %s: %s" % (de_id, e))
+            ket_qua["khong_xoa_duoc"] += 1
+    return ket_qua
