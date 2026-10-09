@@ -40,6 +40,17 @@
 Ngân Hàng Đề AI
 </div>
 </footer>
+<!-- Hop thong bao giua man hinh khi tai tep that bai (CLAUDE THEM 09/10/2026, co Lan duyet).
+     Trang giu nguyen, khong chuyen sang trang JSON loi. -->
+<div id="hop-loi-tai" class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/40 px-margin-mobile" role="dialog" aria-modal="true" aria-labelledby="hop-loi-tai-tieu-de">
+<div class="bg-surface-container-lowest rounded-xl shadow-xl max-w-md w-full p-stack-lg">
+<h2 id="hop-loi-tai-tieu-de" class="font-headline-md text-headline-md font-bold text-primary-container mb-stack-sm">Không tải được tệp</h2>
+<p id="hop-loi-tai-noidung" class="font-body-md text-body-md text-on-surface mb-stack-lg"></p>
+<div class="text-right">
+<button type="button" id="hop-loi-tai-dong" class="px-stack-lg py-stack-sm bg-primary-container text-on-primary rounded-full font-label-md text-label-md">Đóng</button>
+</div>
+</div>
+</div>
 <script>
 /* Tick "Tải kèm bản tiếng Anh": các liên kết có data-ca-hai (đề đã có bản tiếng Anh) trả về .zip gồm cả
    bản Việt lẫn bản Anh (PDF đề, PDF lời giải, Word, .tex). Chỉ là tiện ích riêng của người dùng: lưu trong
@@ -62,6 +73,65 @@ Ngân Hàng Đề AI
     if (!a.dataset.goc) a.dataset.goc = a.getAttribute("href");
     const goc = a.dataset.goc;
     a.setAttribute("href", bat() ? goc + (goc.indexOf("?") < 0 ? "?" : "&") + "ngon_ngu=ca-hai" : goc);
+  });
+
+  /* ---- Tải tệp (PDF / Word / .tex / .zip): lỗi hiện HỘP THÔNG BÁO giữa màn hình, trang giữ nguyên ---- */
+  const hop = document.getElementById("hop-loi-tai");
+  function hienLoi(noiDung) {
+    document.getElementById("hop-loi-tai-noidung").textContent = noiDung;
+    hop.classList.remove("hidden");
+    hop.classList.add("flex");
+    document.getElementById("hop-loi-tai-dong").focus();
+  }
+  function dongLoi() { hop.classList.add("hidden"); hop.classList.remove("flex"); }
+  document.getElementById("hop-loi-tai-dong").addEventListener("click", dongLoi);
+  hop.addEventListener("click", function (e) { if (e.target === hop) dongLoi(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") dongLoi(); });
+
+  function tenTep(res, macDinh) {
+    const cd = res.headers.get("Content-Disposition") || "";
+    let m = cd.match(/filename\*=(?:UTF-8|utf-8)''([^;]+)/);
+    if (m) { try { return decodeURIComponent(m[1]); } catch (err) { /* bo qua */ } }
+    m = cd.match(/filename="?([^";]+)"?/);
+    return m ? m[1] : macDinh;
+  }
+  function thongBaoLoi(status, detail) {
+    if (status === 410) return "Tệp của đề này đã bị dọn (hệ thống tự xoá sau 1 ngày). Hãy tạo lại đề rồi tải ngay trong phiên đó.";
+    if (status === 404) return "Không tìm thấy đề hoặc tệp này.";
+    if (status === 401 || status === 403) return "Phiên đăng nhập đã hết hoặc tài khoản không có quyền tải. Hãy đăng nhập lại.";
+    return detail ? ("Máy chủ báo lỗi: " + detail) : ("Máy chủ báo lỗi (mã " + status + ").");
+  }
+  document.addEventListener("click", async function (e) {
+    const a = e.target.closest ? e.target.closest('a[href^="/api/exam/tai-"]') : null;
+    if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    if (a.dataset.dangTai === "1") return;
+    a.dataset.dangTai = "1";
+    const chuGoc = a.textContent;
+    a.textContent = "Đang tạo tệp…";
+    try {
+      const res = await fetch(a.getAttribute("href"), { credentials: "same-origin" });
+      if (!res.ok) {
+        let detail = "";
+        try { const j = await res.json(); detail = (j && j.detail) ? String(j.detail) : ""; } catch (err) { /* khong phai JSON */ }
+        hienLoi(thongBaoLoi(res.status, detail));
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const t = document.createElement("a");
+      t.href = url;
+      t.download = tenTep(res, "de_tai_ve");
+      document.body.appendChild(t);
+      t.click();
+      t.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+    } catch (err) {
+      hienLoi("Không kết nối được máy chủ. Hãy kiểm tra mạng rồi thử lại.");
+    } finally {
+      a.textContent = chuGoc;
+      delete a.dataset.dangTai;
+    }
   });
 })();
 </script>
