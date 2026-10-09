@@ -15,7 +15,17 @@
     "id": "L10_C2_B3_NB025_MC_A",
     "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn bất phương trình mô tả đúng tình huống thực tế"
+    "Dang": "Chọn bất phương trình mô tả đúng tình huống thực tế",
+    "boi_canh": [
+      "cua_hang_but",
+      "xuong_may",
+      "cho_hang",
+      "protein_thit_ca",
+      "cuoc_dien_thoai",
+      "lam_them",
+      "thue_o_to"
+    ],
+    "ghi_chu": "09/10/2026 sang loc cau thuc te chuong 2: them boi_canh"
   },
   {
     "id": "L10_C2_B3_TH024_MC_A",
@@ -63,19 +73,28 @@
     "id": "L10_C2_B4_VD028_TL_A",
     "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
     "Loai": "Tự luận",
-    "Dang": "Bài toán tối ưu thực tiễn dẫn đến hệ bất phương trình"
+    "Dang": "Bài toán tối ưu thực tiễn dẫn đến hệ bất phương trình",
+    "boi_canh": [
+      "xuong_san_xuat",
+      "xuong_may",
+      "nong_dan_ngo_khoai",
+      "tiem_banh",
+      "trai_ga",
+      "bep_an_rau"
+    ],
+    "ghi_chu": "09/10/2026 sang loc cau thuc te chuong 2: them boi_canh"
   },
   {
     "id": "L10_C2_TF_A",
     "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
     "Loai": "Đúng sai",
-    "Dang": "Bất phương trình bậc nhất 2 ẩn"
+    "Dang": "Câu dẫn là bất phương trình bậc nhất 2 ẩn"
   },
   {
     "id": "L10_C2_TF_B",
     "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
     "Loai": "Đúng sai",
-    "Dang": "Hệ bất phương trình bậc nhất hai ẩ"
+    "Dang": "Câu dẫn là hệ bất phương trình bậc nhất 2 ẩn"
   },
   {
     "id": "L10_C2_B4_TH027_MC_B",
@@ -90,5 +109,287 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Tính giá trị vế trái của bất phương trình tại một điểm",
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+  },
+  {
+    "id": "L10_C2_B3_NB025_MC_B",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_B",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_B",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_C",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_C",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_B",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che"
+  },
+  {
+    "id": "L10_C2_TF_C",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán thực tiễn pha chế nước giải khát: lập bất phương trình, hệ bất phương trình và tìm phương án có điểm thưởng cao nhất (ba điều kiện)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 1: pha che nuoc); boi_canh pha_che; so lieu ngau nhien cung cau truc",
+    "boi_canh": "pha_che"
+  },
+  {
+    "id": "L10_C2_B3_NB025_MC_C",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_D",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_D",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_E",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_E",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_C",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc"
+  },
+  {
+    "id": "L10_C2_TF_D",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán thực tiễn thức ăn gia súc: lập bất phương trình, hệ bất phương trình và tìm phương án trộn có chi phí thấp nhất (ba điều kiện dinh dưỡng)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 2); boi_canh thuc_an_gia_suc; so lieu ngau nhien cung cau truc",
+    "boi_canh": "thuc_an_gia_suc"
+  },
+  {
+    "id": "L10_C2_B3_NB025_MC_D",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_F",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_F",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_G",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_G",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_D",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may"
+  },
+  {
+    "id": "L10_C2_TF_E",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán thực tiễn phân xưởng hai máy sản xuất hai loại sản phẩm: lập bất phương trình, hệ bất phương trình và tìm phương án có lãi lớn nhất (hai máy)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 3); boi_canh phan_xuong_hai_may; so lieu ngau nhien cung cau truc",
+    "boi_canh": "phan_xuong_hai_may"
+  },
+  {
+    "id": "L10_C2_B3_NB025_MC_E",
+    "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_H",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_H",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_I",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_I",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng",
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_E",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng"
+  },
+  {
+    "id": "L10_C2_TF_F",
+    "content": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "Loai": "Đúng sai",
+    "Dang": "Bài toán thực tiễn đồ uống ăn kiêng: lập bất phương trình, hệ bất phương trình và tìm phương án có chi phí thấp nhất (calo và hai loại vitamin)",
+    "ghi_chu": "CLAUDE THEM 09/10/2026 - co Lan duyet (tinh huong thuc te 4); boi_canh do_uong_an_kieng; so lieu ngau nhien cung cau truc",
+    "boi_canh": "do_uong_an_kieng"
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_J",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Diện tích và toạ độ đỉnh của miền nghiệm là tam giác của hệ ba bất phương trình (một bất phương trình song song với trục toạ độ)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; MC _01 dien tich, _02 toa do dinh, _03 do dai canh",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_J",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Diện tích và toạ độ đỉnh của miền nghiệm là tam giác của hệ ba bất phương trình (một bất phương trình song song với trục toạ độ)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; SA _01 dien tich, _02 tong toa do ba dinh",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD028_MC_K",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tham số m khi biết diện tích tam giác là miền nghiệm của hệ ba bất phương trình (bất phương trình song song với trục chứa tham số)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; MC _01 tim m, _02 tap gia tri m; VDC",
+    "muc_do_dang": "VDC",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD028_SA_K",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tham số m khi biết diện tích tam giác là miền nghiệm của hệ ba bất phương trình (bất phương trình song song với trục chứa tham số)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; SA _01 tim m, _02 do dai canh; VDC",
+    "muc_do_dang": "VDC",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_F",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Diện tích và toạ độ đỉnh của miền nghiệm là tam giác của hệ ba bất phương trình (một bất phương trình song song với trục toạ độ)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; TL 2 y: a) toa do dinh, b) dien tich",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD028_TL_G",
+    "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Tìm tham số m khi biết diện tích tam giác là miền nghiệm của hệ ba bất phương trình (bất phương trình song song với trục chứa tham số)",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (dien tich mien nghiem la tam giac, he 3 bat phuong trinh co 1 bpt song song Ox hoac Oy). CLAUDE THEM 09/10/2026 - co Lan duyet; TL 2 y: a) S theo m, b) cho S tim m; y b VDC",
+    "ngoai_yccd": true
   }
 ]

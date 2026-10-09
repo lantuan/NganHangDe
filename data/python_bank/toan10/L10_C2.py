@@ -2572,6 +2572,139 @@ def _tfa_tao_tham_so():
                     co_O=co_O, theo_x=theo_x, dem=dem, s=s, T=T)
 
 
+def _tfa_ps(num, den=1):
+    """Phân số tối giản viết LaTeX (mẫu bằng 1 thì chỉ viết tử)."""
+    g = _math.gcd(abs(num), abs(den)) or 1
+    num, den = num // g, den // g
+    return "%d" % num if den == 1 else r"\dfrac{%d}{%d}" % (num, den)
+
+
+def _tfa_m(noi_dung, dung, ly):
+    r"""Một phát biểu của ý TF: (nội dung có \True nếu đúng, lời giải có Đúng./Sai.)."""
+    return ((r"{\True " if dung else "{") + noi_dung + "}", ("Đúng. " if dung else "Sai. ") + ly)
+
+
+def _tfa_ds(dung, sai):
+    """[(nội dung, lời giải)] phát biểu ĐÚNG + SAI -> danh sách của một ý (bỏ nội dung trùng)."""
+    y, da = [], set()
+    for d, l in dung:
+        if d not in da:
+            da.add(d)
+            y.append((r"{\True %s}" % d, "Đúng. " + l))
+    for d, l in sai:
+        if d not in da:
+            da.add(d)
+            y.append((r"{%s}" % d, "Sai. " + l))
+    return y
+
+
+def _tfa_thuoc_he(t, X, Y):
+    """(X; Y) có là nghiệm của hệ { bất phương trình ; x ⋈ 0 ; y ⋈ 0 } không."""
+    sx, sy = t["sx"], t["sy"]
+    ok_x = (X > 0 if sx > 0 else X < 0) if t["chat_x"] else (X >= 0 if sx > 0 else X <= 0)
+    ok_y = (Y > 0 if sy > 0 else Y < 0) if t["chat_y"] else (Y >= 0 if sy > 0 else Y <= 0)
+    return ok_x and ok_y and _tfa_thoa(t["a"] * X + t["b"] * Y, t["ky"], t["c"])
+
+
+def _tfa_y_d(t):
+    """Ý d) (VDC) của L10_C2_TF_A_01, _03, _04: khẳng định về HỆ bất phương trình gồm bất phương
+    trình đã cho cùng hai điều kiện x ⋈ 0, y ⋈ 0 (dấu theo góc phần tư, ngặt / không ngặt).
+    Đúng/sai tính bằng _tfa_thuoc_he (không gán nhãn tay). Mỗi ý có nhiều hơn 3 phát biểu đúng và 3 sai."""
+    sx, sy, a, b, c, ky = t["sx"], t["sy"], t["a"], t["b"], t["c"], t["ky"]
+    m, n, p, q = t["m"], t["n"], t["p"], t["q"]
+    co_O, dem, s = t["co_O"], t["dem"], t["s"]
+    vt = _tfa_bieu_thuc(a, b)
+    ks = _TFA_LATEX[ky]
+    dx = (">" if t["chat_x"] else r"\ge") if sx > 0 else ("<" if t["chat_x"] else r"\le")
+    dy = (">" if t["chat_y"] else r"\ge") if sy > 0 else ("<" if t["chat_y"] else r"\le")
+    he = r"\heva{& %s %s %d \\& x %s 0 \\& y %s 0}" % (vt, ks, c, dx, dy)
+    tien_to = r"Hệ bất phương trình $%s$ " % he
+    goc = _tfa_goc_phan_tu(sx, sy)
+    S_tex = _tfa_ps(m * n, 2)
+
+    giao = (r"Đường thẳng $d$ cắt $Ox$ tại $\left(%d; 0\right)$ và cắt $Oy$ tại "
+            r"$\left(0; %d\right)$, nên cùng hai trục toạ độ tạo thành một tam giác vuông "
+            r"nằm ở góc phần tư thứ %s." % (p, q, goc))
+    giai = giao + (r"\\ Các điều kiện $x %s 0$, $y %s 0$ giới hạn miền nghiệm trong góc phần tư thứ %s."
+                   % (dx, dy, goc))
+    if co_O:
+        chi_tiet = r"\\ ".join(r"Với $x = %d$ có $%d$ giá trị nguyên $y$ thoả mãn" % (X, k)
+                               for X, k in t["theo_x"])
+        giai += (r"\\ Nửa mặt phẳng nghiệm của bất phương trình đầu chứa $O$ nên miền nghiệm của hệ "
+                 r"là tam giác nói trên (miền bị chặn), có diện tích $\dfrac{1}{2}\cdot %d\cdot %d = %s$.\\ %s\\ "
+                 r"Cộng lại được $%d$ nghiệm nguyên." % (m, n, S_tex, chi_tiet, dem))
+    else:
+        T = t["T"]
+        giai += (r"\\ Nửa mặt phẳng nghiệm của bất phương trình đầu KHÔNG chứa $O$ nên miền nghiệm của hệ "
+                 r"nằm về phía xa tam giác nói trên: đó là miền không bị chặn. Chẳng hạn mọi cặp số "
+                 r"$\left(%s; %s\right)$ với $t$ nguyên, $t \ge %d$ đều là nghiệm, nên có vô số nghiệm nguyên.\\ "
+                 r"Nếu xét nhầm sang nửa mặt phẳng bên kia (chứa $O$) thì chỉ đếm được $%d$ nghiệm nguyên "
+                 r"nằm trong tam giác, đó là kết quả sai."
+                 % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, dem))
+
+    def giai_diem(X, Y):
+        v = a * X + b * Y
+        ok_bpt = _tfa_thoa(v, ky, c)
+        ok_x = (X > 0 if sx > 0 else X < 0) if t["chat_x"] else (X >= 0 if sx > 0 else X <= 0)
+        ok_y = (Y > 0 if sy > 0 else Y < 0) if t["chat_y"] else (Y >= 0 if sy > 0 else Y <= 0)
+        ket = lambda ok: "đúng" if ok else "sai"
+        return (r"Thay $x = %d$, $y = %d$: $%d %s %d$ là mệnh đề %s; $%d %s 0$ là mệnh đề %s; "
+                r"$%d %s 0$ là mệnh đề %s. Vậy cặp số $\left(%d; %d\right)$ %s nghiệm của hệ."
+                % (X, Y, v, ks, c, ket(ok_bpt), X, dx, ket(ok_x), Y, dy, ket(ok_y), X, Y,
+                   "là" if (ok_bpt and ok_x and ok_y) else "không phải là"))
+
+    dung, sai = [], []
+
+    def them(pred, truth, ly):
+        (dung if truth else sai).append((tien_to + pred, ly))
+
+    # miền nghiệm nằm ở góc phần tư nào
+    them(r"có miền nghiệm nằm trong góc phần tư thứ %s" % goc, True, giai)
+    for g2 in _rd.sample([x for x in ("I", "II", "III", "IV") if x != goc], 2):
+        them(r"có miền nghiệm nằm trong góc phần tư thứ %s" % g2, False, giai)
+    # bị chặn hay không, hình dạng
+    them(r"có miền nghiệm là một miền tam giác", co_O, giai)
+    them(r"có miền nghiệm là một miền tứ giác", False, giai)
+    them(r"có miền nghiệm là một miền bị chặn", co_O, giai)
+    them(r"có miền nghiệm là một miền không bị chặn", not co_O, giai)
+    # số nghiệm
+    them(r"có vô số nghiệm $\left(x; y\right)$", True, giai)
+    them(r"vô nghiệm", False, giai)
+    them(r"có đúng một nghiệm", False, giai)
+    if co_O:
+        # diện tích, số nghiệm nguyên
+        them(r"có miền nghiệm với diện tích bằng $%s$ (đơn vị diện tích)" % S_tex, True, giai)
+        da = {m * n}
+        for num, den in ((m * n, 1), (m * n, 4), (m + n, 2), (m + n, 1)):
+            if num * 2 != m * n * den and (num, den) not in da:        # khác m*n/2
+                da.add((num, den))
+                them(r"có miền nghiệm với diện tích bằng $%s$ (đơn vị diện tích)" % _tfa_ps(num, den), False, giai)
+        them(r"có đúng $%d$ nghiệm nguyên $\left(x; y\right)$" % dem, True, giai)
+        sai_dem = []
+        for d_ in (s, 1, -1, 2):
+            v = dem + d_
+            if v >= 1 and v != dem and v not in sai_dem:
+                sai_dem.append(v)
+        for v in sai_dem[:2]:
+            them(r"có đúng $%d$ nghiệm nguyên $\left(x; y\right)$" % v, False, giai)
+    else:
+        them(r"có vô số nghiệm nguyên $\left(x; y\right)$", True, giai)
+        them(r"có đúng $%d$ nghiệm nguyên $\left(x; y\right)$" % dem, False, giai)
+        them(r"không có nghiệm nguyên nào", False, giai)
+    # một số cặp số: nghiệm của hệ hay không (đúng / sai tính trực tiếp)
+    luoi = [(X, Y) for X in range(-8, 9) for Y in range(-8, 9)]
+    nghiem = [P for P in luoi if _tfa_thuoc_he(t, *P)]
+    pha_dk = [P for P in luoi if not _tfa_thuoc_he(t, *P) and _tfa_thoa(a * P[0] + b * P[1], ky, c)]
+    pha_bpt = [P for P in luoi if not _tfa_thuoc_he(t, *P) and not _tfa_thoa(a * P[0] + b * P[1], ky, c)]
+    diem = [(0, 0), _rd.choice(nghiem), _rd.choice(pha_dk or pha_bpt), _rd.choice(pha_bpt or pha_dk)]
+    for X, Y in dict.fromkeys(diem):
+        ok = _tfa_thuoc_he(t, X, Y)
+        gd = giai_diem(X, Y)
+        them(r"nhận cặp số $\left(%d; %d\right)$ làm một nghiệm" % (X, Y), ok, gd)
+        them(r"không nhận cặp số $\left(%d; %d\right)$ làm nghiệm" % (X, Y), not ok, gd)
+    return _tfa_ds(dung, sai)
+
+
 def L10_C2_TF_A_01(socau, socot=1):
     """Đúng/Sai - bất phương trình bậc nhất hai ẩn (bản nháp phát triển)."""
     cauTF = ''
@@ -2601,27 +2734,20 @@ def L10_C2_TF_A_01(socau, socot=1):
               (r"{" + ten % (bpt, "không phải là") + r" là mệnh đề đúng}", r"Sai. " + ly_do),
               (r"{\True " + ten % (bpt, "không phải là") + r" là mệnh đề sai}", r"Đúng. " + ly_do)]
 
-        # b) TH - thay so kiem tra mot cap so
-        x0, y0 = _rd.randint(-4, 4), _rd.randint(-4, 4)
-        ve = a * x0 + b * y0
-        dung_b = _tfa_thoa(ve, ky, c)
-        thay = (r"Thay vào vế trái: $%s\cdot %s + %s\cdot %s = %d$. "
-                r"Ta có $%d %s %d$ là mệnh đề %s nên cặp số này %s nghiệm của bất phương trình."
-                % (_tfa_so(a), _tfa_so(x0), _tfa_so(b), _tfa_so(y0), ve, ve, ks, c,
-                   "đúng" if dung_b else "sai", "là" if dung_b else "không phải là"))
-        cap = r"\left(%d; %d\right)" % (x0, y0)
-        y2 = [((r"{\True " if dung_b else "{") +
-               r"Cặp số $%s$ là một nghiệm của bất phương trình}" % cap,
-               ("Đúng. " if dung_b else "Sai. ") + thay),
-              ((r"{" if dung_b else r"{\True ") +
-               r"Cặp số $%s$ không phải là nghiệm của bất phương trình}" % cap,
-               ("Sai. " if dung_b else "Đúng. ") + thay),
-              ((r"{\True " if dung_b else "{") +
-               r"Điểm $%s$ thuộc miền nghiệm của bất phương trình}" % cap,
-               ("Đúng. " if dung_b else "Sai. ") + thay),
-              ((r"{" if dung_b else r"{\True ") +
-               r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình}" % cap,
-               ("Sai. " if dung_b else "Đúng. ") + thay)]
+        # b) TH - thay so kiem tra: mot cap bat ki va hai giao diem cua d voi hai truc
+        y2 = []
+        for x0, y0 in dict.fromkeys([(_rd.randint(-4, 4), _rd.randint(-4, 4)), (t["p"], 0), (0, t["q"])]):
+            ve = a * x0 + b * y0
+            dung_b = _tfa_thoa(ve, ky, c)
+            thay = (r"Thay vào vế trái: $%s\cdot %s + %s\cdot %s = %d$. "
+                    r"Ta có $%d %s %d$ là mệnh đề %s nên cặp số này %s nghiệm của bất phương trình."
+                    % (_tfa_so(a), _tfa_so(x0), _tfa_so(b), _tfa_so(y0), ve, ve, ks, c,
+                       "đúng" if dung_b else "sai", "là" if dung_b else "không phải là"))
+            cap = r"\left(%d; %d\right)" % (x0, y0)
+            y2 += [_tfa_m(r"Cặp số $%s$ là một nghiệm của bất phương trình" % cap, dung_b, thay),
+                   _tfa_m(r"Cặp số $%s$ không phải là nghiệm của bất phương trình" % cap, not dung_b, thay),
+                   _tfa_m(r"Điểm $%s$ thuộc miền nghiệm của bất phương trình" % cap, dung_b, thay),
+                   _tfa_m(r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình" % cap, not dung_b, thay)]
 
         # c) VD - hinh dung nua mat phang nghiem
         # Su that: co_O (chua O hay khong), ngat (khong ke bo d hay co ke bo d)
@@ -2652,46 +2778,31 @@ def L10_C2_TF_A_01(socau, socot=1):
               (r"{\True " + mo_ta2(dung_O, dung_bo) + "}", "Đúng. " + thu_O),
               (r"{" + mo_ta2(*sai2) + "}", "Sai. " + thu_O)]
 
-        # d) VDC - dem nghiem nguyen trong goc phan tu
-        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
-        giao = (r"Đường thẳng $d$ cắt $Ox$ tại $\left(%d; 0\right)$ và cắt $Oy$ tại "
-                r"$\left(0; %d\right)$, nên cùng hai trục toạ độ tạo thành một tam giác vuông "
-                r"nằm ở góc phần tư thứ %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
-        if co_O:
-            chi_tiet = r"\\ ".join(
-                r"Với $x = %d$ có $%d$ giá trị nguyên $y$ thoả mãn" % (X, k)
-                for X, k in t["theo_x"])
-            giai_d = (giao + r"\\ Miền nghiệm chứa $O$ nên các cặp cần đếm nằm trong tam giác đó "
-                      r"(%s đường thẳng $d$; điểm nằm trên trục chỉ được tính khi đề cho phép "
-                      r"$x$ hoặc $y$ bằng $0$).\\ %s\\ "
-                      r"Cộng lại được $%d$ cặp số."
-                      % ("không kể" if ngat else "kể cả", chi_tiet, dem))
-            y4 = [(r"{\True Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem, dau), "Đúng. " + giai_d),
-                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem + s, dau),
-                   "Sai. " + giai_d)]
-        else:
-            T = t["T"]
-            giai_d = (giao + r"\\ Miền nghiệm KHÔNG chứa $O$, nên nó nằm về phía xa tam giác "
-                      r"và không bị chặn.\\ Chẳng hạn mọi cặp số "
-                      r"$\left(%s; %s\right)$ với $t$ nguyên dương, $t \ge %d$ đều thoả mãn "
-                      r"(vế trái là $%d t$ và $%d t %s %d$ với mọi $t \ge %d$).\\ "
-                      r"Vậy có vô số cặp số thoả mãn.\\ Nếu xét nhầm sang nửa mặt phẳng bên kia "
-                      r"(chứa $O$) thì chỉ đếm được $%d$ cặp số nằm trong tam giác nói trên, "
-                      r"đó là kết quả sai."
-                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
-            y4 = [(r"{\True Có vô số cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % dau, "Đúng. " + giai_d),
-                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem, dau), "Sai. " + giai_d)]
+        y3 += [_tfa_m(r"Miền nghiệm của bất phương trình chứa gốc toạ độ $O$", co_O, thu_O),
+               _tfa_m(r"Miền nghiệm của bất phương trình không chứa gốc toạ độ $O$", not co_O, thu_O),
+               _tfa_m(r"Các điểm nằm trên đường thẳng $%s$ thuộc miền nghiệm của bất phương trình" % duong, not ngat, thu_O),
+               _tfa_m(r"Các điểm nằm trên đường thẳng $%s$ không thuộc miền nghiệm của bất phương trình" % duong, ngat, thu_O)]
+
+        # d) VDC - HE bat phuong trinh gom bat phuong trinh da cho va x ⋈ 0, y ⋈ 0 (xem _tfa_y_d)
+        y4 = _tfa_y_d(t)
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
 
+def _tfb_thuoc(bpt1, bpt2, X, Y):
+    """(X; Y) có thuộc miền nghiệm của hệ { x >= 0 ; y >= 0 ; bpt1 ; bpt2 } không."""
+    (a1, b1, c1), (a2, b2, c2) = bpt1, bpt2
+    return X >= 0 and Y >= 0 and a1 * X + b1 * Y <= c1 and a2 * X + b2 * Y <= c2
+
+
 def L10_C2_TF_B_01(socau, socot=1):
-    """Đúng/Sai - hệ bất phương trình bậc nhất hai ẩn và bài toán tối ưu."""
+    r"""Đúng/Sai - hệ bất phương trình bậc nhất hai ẩn $x \ge 0$, $y \ge 0$ và hai bất phương trình
+    khác (miền nghiệm là tứ giác nguyên đỉnh) kèm biểu thức $F = px + qy$.
+
+    NANG CAP 09/10/2026 (co Lan duyet): moi y co it nhat 3 phat bieu dung + 3 phat bieu sai
+    (truoc day moi y chi 1 dung + 1 sai). Dung/sai tinh truc tiep tu cac dinh, dien tich, F.
+    """
     cauTF = ''
     for _ in range(socau):
         while True:
@@ -2701,47 +2812,101 @@ def L10_C2_TF_B_01(socau, socot=1):
             if gtri.count(max(gtri)) == 1:
                 break
         (a1, b1, c1), (a2, b2, c2) = bpt1, bpt2
+        t1, t2 = _bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2)
         lon = max(gtri)
-        dinh_lon = [d for d in dinh if p * d[0] + q * d[1] == lon][0]
+        dinh_lon = dinh[gtri.index(lon)]
+        S2 = m * v + u * n                                   # hai lan dien tich tu giac OPQR
 
         debai = (r"Cho hệ bất phương trình $\heva{& x \ge 0 \\ & y \ge 0 \\ & %s \\ & %s}$ "
-                 r"và biểu thức $F\left(x; y\right) = %dx + %dy$. "
+                 r"và biểu thức $F\left(x; y\right) = %s$. "
                  r"Xét tính đúng sai của các khẳng định sau:"
-                 % (_bpt_tex(a1, b1, c1), _bpt_tex(a2, b2, c2), p, q))
+                 % (t1, t2, _F_tex(p, q)))
 
         # a) NB - nhan dang he
-        y1 = [(r"{\True Hệ đã cho là hệ bất phương trình bậc nhất hai ẩn}",
-               r"Đúng. Mỗi bất phương trình trong hệ đều có dạng bậc nhất đối với hai ẩn "
-               r"$x$ và $y$."),
-              (r"{Hệ đã cho không phải là hệ bất phương trình bậc nhất hai ẩn}",
-               r"Sai. Cả bốn bất phương trình đều bậc nhất đối với $x$ và $y$.")]
+        ly_a = (r"Bốn bất phương trình $x \ge 0$, $y \ge 0$, $%s$, $%s$ đều có dạng $ax + by \le c$ "
+                r"hoặc $ax + by \ge c$ với $a$, $b$ không đồng thời bằng $0$, nên hệ gồm $4$ bất "
+                r"phương trình bậc nhất hai ẩn." % (t1, t2))
+        y1 = _tfa_ds(
+            [(r"Hệ đã cho là hệ bất phương trình bậc nhất hai ẩn", ly_a),
+             (r"Hệ đã cho gồm $4$ bất phương trình", ly_a),
+             (r"Mỗi bất phương trình của hệ đều là bất phương trình bậc nhất hai ẩn", ly_a),
+             (r"Bất phương trình $%s$ có hệ số của $y$ bằng $%d$" % (t1, b1), ly_a)],
+            [(r"Hệ đã cho không phải là hệ bất phương trình bậc nhất hai ẩn", ly_a),
+             (r"Hệ đã cho gồm $3$ bất phương trình", ly_a),
+             (r"Hệ đã cho gồm $5$ bất phương trình", ly_a),
+             (r"Trong hệ có một bất phương trình không phải là bất phương trình bậc nhất hai ẩn", ly_a),
+             (r"Bất phương trình $%s$ có hệ số của $x$ bằng $%d$" % (t2, a2 + 1), ly_a)])
 
-        # b) TH - thay mot diem vao he
-        y2 = [(r"{\True Điểm $\left(%d; %d\right)$ thuộc miền nghiệm của hệ}" % (u, v),
-               r"Thay $x = %d$, $y = %d$ vào từng bất phương trình đều thấy thoả mãn "
-               r"(điểm này chính là giao điểm của hai đường bờ), nên nó thuộc miền nghiệm."
-               % (u, v)),
-              (r"{Điểm $\left(%d; %d\right)$ không thuộc miền nghiệm của hệ}" % (u, v),
-               r"Sai. Đó chính là một đỉnh của miền nghiệm nên nó thuộc miền nghiệm.")]
+        # b) TH - thay toa do mot so diem vao he (dung / sai tinh truc tiep)
+        luoi = [(X, Y) for X in range(-3, 15) for Y in range(-3, 15)]
+        trong = [P for P in luoi if _tfb_thuoc(bpt1, bpt2, *P) and P[0] > 0 and P[1] > 0
+                 and P not in dinh]
+        ra_bpt = [P for P in luoi if P[0] >= 0 and P[1] >= 0 and not _tfb_thuoc(bpt1, bpt2, *P)]
+        ra_truc = [P for P in luoi if (P[0] < 0 or P[1] < 0)
+                   and a1 * P[0] + b1 * P[1] <= c1 and a2 * P[0] + b2 * P[1] <= c2]
+        diem = [(u, v), (0, 0), _rd.choice(trong), _rd.choice(ra_bpt), _rd.choice(ra_truc)]
 
-        # c) VD - phai giai he de biet hinh dang mien nghiem
-        y3 = [(r"{\True Miền nghiệm của hệ là một miền tứ giác}",
-               r"Bốn bất phương trình cho bốn nửa mặt phẳng; giao của chúng là miền tứ "
-               r"giác với bốn đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
-               r"$\left(%d;%d\right)$, $\left(0;%d\right)$." % (m, u, v, n)),
-              (r"{Miền nghiệm của hệ là một miền tam giác}",
-               r"Sai. Giải các cặp đường bờ ta được BỐN đỉnh chứ không phải ba, nên miền "
-               r"nghiệm là tứ giác.")]
+        def giai_diem(X, Y):
+            kq = lambda ok: "đúng" if ok else "sai"
+            v1, v2 = a1 * X + b1 * Y, a2 * X + b2 * Y
+            return (r"Thay $x = %d$, $y = %d$: $%d \ge 0$ là mệnh đề %s; $%d \ge 0$ là mệnh đề %s; "
+                    r"$%d \le %d$ là mệnh đề %s; $%d \le %d$ là mệnh đề %s. Vậy điểm "
+                    r"$\left(%d; %d\right)$ %s miền nghiệm của hệ."
+                    % (X, Y, X, kq(X >= 0), Y, kq(Y >= 0), v1, c1, kq(v1 <= c1),
+                       v2, c2, kq(v2 <= c2), X, Y,
+                       "thuộc" if _tfb_thuoc(bpt1, bpt2, X, Y) else "không thuộc"))
+        dung_b, sai_b = [], []
+        for X, Y in dict.fromkeys(diem):
+            ok = _tfb_thuoc(bpt1, bpt2, X, Y)
+            gd = giai_diem(X, Y)
+            (dung_b if ok else sai_b).append((r"Điểm $\left(%d; %d\right)$ thuộc miền nghiệm của hệ" % (X, Y), gd))
+            (sai_b if ok else dung_b).append((r"Điểm $\left(%d; %d\right)$ không thuộc miền nghiệm của hệ" % (X, Y), gd))
+        y2 = _tfa_ds(dung_b, sai_b)
 
-        # d) VDC - tim gia tri lon nhat, phai co toa do cac dinh o y c)
-        y4 = [(r"{\True Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$}" % lon,
-               r"Biểu thức bậc nhất đạt giá trị lớn nhất tại một đỉnh của miền nghiệm. "
-               r"Tính $F$ tại bốn đỉnh:\\ %s.\\ Lớn nhất là $%d$, đạt tại "
-               r"$\left(%d; %d\right)$."
-               % (r"\\ ".join(r"$F\left(%d; %d\right) = %d$" % (X, Y, p * X + q * Y)
-                              for X, Y in dinh), lon, dinh_lon[0], dinh_lon[1])),
-              (r"{Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$}" % (lon + p + q),
-               r"Sai. So sánh $F$ tại bốn đỉnh thì giá trị lớn nhất là $%d$." % lon)]
+        # c) VD - giai he de biet hinh dang, dinh, dien tich cua mien nghiem
+        S_tex = _tfa_ps(S2, 2)
+        ly_c = (r"Giải các cặp đường bờ ta được bốn đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
+                r"$\left(%d;%d\right)$, $\left(0;%d\right)$; miền nghiệm là tứ giác lồi, bị chặn.\\ "
+                r"Chia tứ giác thành hai tam giác có chung cạnh nối gốc $O$ với $\left(%d;%d\right)$: "
+                r"$S = \dfrac{1}{2}\cdot %d\cdot %d + \dfrac{1}{2}\cdot %d\cdot %d = %s$."
+                % (m, u, v, n, u, v, m, v, n, u, S_tex))
+        sai_dt = []
+        for num in (S2 + 2, S2 - 2, S2 + 4, 2 * m * n):
+            if num > 0 and num != S2 and _tfa_ps(num, 2) not in sai_dt:
+                sai_dt.append(_tfa_ps(num, 2))
+        y3 = _tfa_ds(
+            [(r"Miền nghiệm của hệ là một miền tứ giác", ly_c),
+             (r"Miền nghiệm của hệ là một miền bị chặn", ly_c),
+             (r"Miền nghiệm của hệ có đúng $4$ đỉnh", ly_c),
+             (r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % (u, v), ly_c),
+             (r"Miền nghiệm có diện tích bằng $%s$ (đơn vị diện tích)" % S_tex, ly_c)],
+            [(r"Miền nghiệm của hệ là một miền tam giác", ly_c),
+             (r"Miền nghiệm của hệ là một miền không bị chặn", ly_c),
+             (r"Miền nghiệm của hệ có đúng $3$ đỉnh", ly_c),
+             (r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % (m, n), ly_c)]
+            + [(r"Miền nghiệm có diện tích bằng $%s$ (đơn vị diện tích)" % s, ly_c) for s in sai_dt[:2]])
+
+        # d) VDC - gia tri lon nhat / nho nhat cua F tren mien nghiem
+        ly_d = (r"Biểu thức bậc nhất $F$ đạt giá trị lớn nhất và nhỏ nhất tại các đỉnh của miền "
+                r"nghiệm. Tính $F$ tại bốn đỉnh:\\ %s.\\ Lớn nhất là $%d$, đạt tại "
+                r"$\left(%d; %d\right)$; nhỏ nhất là $0$, đạt tại gốc toạ độ $O$."
+                % (_bang_F(dinh, p, q), lon, dinh_lon[0], dinh_lon[1]))
+        khac = [d_ for d_ in dinh if d_ != dinh_lon]
+        thu_hai = max(g_ for g_ in gtri if g_ != lon)
+        nho_sai = min(g_ for g_ in gtri if g_ > 0)
+        y4 = _tfa_ds(
+            [(r"Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$" % lon, ly_d),
+             (r"$F$ đạt giá trị lớn nhất tại điểm $\left(%d; %d\right)$" % dinh_lon, ly_d),
+             (r"Giá trị nhỏ nhất của $F$ trên miền nghiệm bằng $0$", ly_d),
+             (r"$F$ đạt giá trị nhỏ nhất tại gốc toạ độ $O$", ly_d),
+             (r"Tại đỉnh $\left(%d; %d\right)$, biểu thức $F$ nhận giá trị $%d$"
+              % (u, v, p * u + q * v), ly_d)],
+            [(r"Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$" % (lon + p + q), ly_d),
+             (r"Giá trị lớn nhất của $F$ trên miền nghiệm bằng $%d$" % thu_hai, ly_d),
+             (r"$F$ đạt giá trị lớn nhất tại điểm $\left(%d; %d\right)$" % khac[0], ly_d),
+             (r"$F$ đạt giá trị lớn nhất tại điểm $\left(%d; %d\right)$" % khac[1], ly_d),
+             (r"Giá trị nhỏ nhất của $F$ trên miền nghiệm bằng $%d$" % nho_sai, ly_d),
+             (r"$F$ không có giá trị lớn nhất trên miền nghiệm", ly_d)])
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
@@ -2920,129 +3085,82 @@ def L10_C2_B3_NB025_MC_A_02(socau, dang=1):
     return cauTN
 
 
-def L10_C2_TF_A_02(socau, socot=1):
-    r"""Đúng/Sai - bất phương trình $ax + by + c > 0$ (dấu bất kì): số nghiệm,
-    điểm $O$, một điểm NẰM TRÊN BỜ, mô tả miền nghiệm (kể / không kể bờ, chứa /
-    không chứa $O$).
-
-    CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C2_TF_A, theo cau "x - 2y + 6 >
-    0: vo so nghiem; (0; 0); (0; 3); mien nghiem" trong phan bai tap Bai 3.
-    Co Lan duyet.
-    """
-    cauTF = ""
-    for _ in range(socau):
-        a = random.choice([i for i in range(-4, 5) if i])
-        b = random.choice([i for i in range(-4, 5) if i])
-        c = random.choice([i for i in range(-9, 10) if i])
-        # điểm trên bờ: a*x1 + b*y1 + c = 0, chọn x1 = 0 nếu b | c, ngược lại y1 = 0 nếu a | c
-        if c % b == 0:
-            P = (0, -c // b)
-        elif c % a == 0:
-            P = (-c // a, 0)
-        else:
-            c = b * random.choice([1, 2, 3, -1, -2])
-            P = (0, -c // b)
-        d = random.choice(list(_DAU_KT))
-        f = _DAU_KT[d]
-        bt = _bn_tex(a, b, c)
-        O_ok = f(c)
-        ke_bo = d in (r"\le", r"\ge")
-        debai = r"Cho bất phương trình $%s %s 0$. Xét tính đúng sai của các khẳng định sau:" % (bt, d)
-        # a) NB
-        y1 = [(r"{\True Bất phương trình có vô số nghiệm}",
-               r"Đúng. Miền nghiệm là cả một nửa mặt phẳng nên có vô số nghiệm."),
-              (r"{Bất phương trình có đúng một nghiệm}",
-               r"Sai. Miền nghiệm là một nửa mặt phẳng nên có vô số nghiệm.")]
-        # b) TH
-        gb = r"Thay $(0; 0)$: vế trái bằng $%d$, và $%d %s 0$ %s." % (c, c, d, "đúng" if O_ok else "sai")
-        y2 = [((r"{\True " if O_ok else "{") + r"Cặp số $(0; 0)$ là một nghiệm của bất phương trình}",
-               ("Đúng. " if O_ok else "Sai. ") + gb),
-              ((r"{" if O_ok else r"{\True ") + r"Cặp số $(0; 0)$ không là nghiệm của bất phương trình}",
-               ("Sai. " if O_ok else "Đúng. ") + gb)]
-        # c) VD - điểm nằm trên bờ
-        gc = (r"Thay $(%d; %d)$: vế trái bằng $0$, điểm nằm trên bờ $%s = 0$; %s."
-              % (P[0], P[1], bt, "dấu có bằng nên vẫn là nghiệm" if ke_bo else "dấu không có bằng nên không là nghiệm"))
-        y3 = [((r"{\True " if ke_bo else "{") + r"Cặp số $(%d; %d)$ là một nghiệm của bất phương trình}" % P,
-               ("Đúng. " if ke_bo else "Sai. ") + gc),
-              ((r"{" if ke_bo else r"{\True ") + r"Cặp số $(%d; %d)$ không là nghiệm của bất phương trình}" % P,
-               ("Sai. " if ke_bo else "Đúng. ") + gc)]
-        # d) VDC - mô tả miền nghiệm
-        mo_ta = lambda ke, chua: (r"Miền nghiệm là nửa mặt phẳng bờ $\Delta\colon %s = 0$ %s gốc toạ độ $O$ (%s bờ $\Delta$)"
-                                  % (bt, "chứa" if chua else "không chứa", "kể cả" if ke else "không kể"))
-        gd = (r"$O$ %s thuộc miền nghiệm (câu b) và dấu $%s$ %s nên miền nghiệm là nửa mặt phẳng bờ $\Delta$ %s $O$, %s bờ."
-              % ("" if O_ok else "không", d, "có bằng" if ke_bo else "không có bằng",
-                 "chứa" if O_ok else "không chứa", "kể cả" if ke_bo else "không kể"))
-        sai_ke, sai_chua = random.choice([(not ke_bo, O_ok), (ke_bo, not O_ok)])
-        y4 = [(r"{\True %s}" % mo_ta(ke_bo, O_ok), "Đúng. " + gd),
-              (r"{%s}" % mo_ta(sai_ke, sai_chua), "Sai. " + gd)]
-        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
-    return cauTF
-
-
 def L10_C2_TF_A_03(socau, socot=1):
-    r"""Đúng/Sai - biết miền nghiệm (mô tả bằng lời): bờ $d$ đi qua $A(p; 0)$,
-    $B(0; q)$, có / không chứa $O$, kể / không kể bờ. Xét điểm thuộc miền,
-    phương trình $d$, bất phương trình.
+    r"""Đúng/Sai - biết MIỀN NGHIỆM (mô tả bằng lời): bờ $d$ đi qua $A(p; 0)$, $B(0; q)$, miền nghiệm
+    chứa / không chứa $O$, kể / không kể bờ (góc phần tư và dấu ngẫu nhiên như TF_A_01). Xét điểm
+    $O$, $A$, $B$; phương trình $d$; bất phương trình; và (ý d) HỆ bất phương trình có thêm
+    $x \gtrless 0$, $y \gtrless 0$.
 
-    CLAUDE THEM 30/09/2026 - bien the 03 cua L10_C2_TF_A, theo hai cau "mien
-    nghiem khong gach cheo, bo d qua (-5; 0), (0; 2)" va "qua (3; 0), (0; 2)"
-    trong phan bai tap Bai 3. Hinh duoc thay bang mo ta bang loi de web hien
-    duoc. Co Lan duyet.
+    CLAUDE THEM 30/09/2026 - bien the 03 cua L10_C2_TF_A (theo hai cau "mien nghiem khong gach cheo,
+    bo d qua (-5; 0), (0; 2)" va "qua (3; 0), (0; 2)" trong bai tap Bai 3). NANG CAP 09/10/2026 (co
+    Lan duyet): phuc tap nhu TF_A_01/04, moi y it nhat 3 dung + 3 sai, y d) la HE bat phuong trinh.
     """
+    from fractions import Fraction as _Fr
     cauTF = ""
     for _ in range(socau):
-        p = random.choice([i for i in range(-6, 7) if abs(i) >= 2])
-        q = random.choice([i for i in range(-6, 7) if abs(i) >= 2])
-        # d: x/p + y/q = 1  <=>  q x + p y - p q = 0
-        g = math.gcd(math.gcd(abs(q), abs(p)), abs(p * q))
-        A_, B_, C_ = q // g, p // g, -p * q // g
-        if A_ < 0:                      # cho hệ số của x dương, đề nhìn gọn hơn
-            A_, B_, C_ = -A_, -B_, -C_
-        chua_O = random.random() < 0.5
-        ke = random.random() < 0.5
-        # dấu sao cho O thỏa mãn khi chua_O: tại O vế trái bằng C_
-        if (C_ < 0) == chua_O:
-            dau = r"\le" if ke else "<"
-        else:
-            dau = r"\ge" if ke else ">"
-        f = _DAU_KT[dau]
-        bt = _bn_tex(A_, B_, C_)
-        # một điểm kiểm tra không nằm trên bờ
-        while True:
-            X, Y = random.randint(-6, 6), random.randint(-6, 6)
-            if A_ * X + B_ * Y + C_ != 0:
-                break
-        X_ok = f(A_ * X + B_ * Y + C_)
-        debai = (r"Cho một bất phương trình bậc nhất hai ẩn có miền nghiệm là nửa mặt phẳng %s gốc toạ độ $O$ (%s bờ $d$), "
-                 r"trong đó đường thẳng $d$ đi qua hai điểm $A(%d; 0)$ và $B(0; %d)$. Xét tính đúng sai của các khẳng "
-                 r"định sau:" % ("chứa" if chua_O else "không chứa", "kể cả" if ke else "không kể", p, q))
-        # a) NB
-        y1 = [((r"{\True " if chua_O else "{") + r"Điểm $O(0; 0)$ thuộc miền nghiệm của bất phương trình}",
-               ("Đúng" if chua_O else "Sai") + r" theo giả thiết: miền nghiệm %s $O$." % ("chứa" if chua_O else "không chứa")),
-              ((r"{" if chua_O else r"{\True ") + r"Điểm $O(0; 0)$ không thuộc miền nghiệm của bất phương trình}",
-               ("Sai" if chua_O else "Đúng") + r" theo giả thiết: miền nghiệm %s $O$." % ("chứa" if chua_O else "không chứa"))]
-        # b) TH
-        gb = (r"$d$ đi qua $A(%d; 0)$, $B(0; %d)$ nên $d\colon \dfrac{x}{%d} + \dfrac{y}{%d} = 1 \Leftrightarrow %s = 0$."
-              % (p, q, p, q, bt))
-        sai_d = _bn_tex(B_, A_, C_) if A_ != B_ else _bn_tex(A_, -B_, C_)
-        y2 = [(r"{\True Phương trình đường thẳng $d$ là $%s = 0$}" % bt, "Đúng. " + gb),
-              (r"{Phương trình đường thẳng $d$ là $%s = 0$}" % sai_d, "Sai. " + gb)]
-        # c) VD
-        gc = (r"Tại $O$ vế trái $%s$ bằng $%d$; miền nghiệm %s $O$ và %s bờ nên bất phương trình là $%s %s 0$."
-              % (bt, C_, "chứa" if chua_O else "không chứa", "kể cả" if ke else "không kể", bt, dau))
-        doi = {"<": ">", ">": "<", r"\le": r"\ge", r"\ge": r"\le"}[dau]
-        bo = {"<": r"\le", r"\le": "<", ">": r"\ge", r"\ge": ">"}[dau]
-        y3 = [(r"{\True Bất phương trình đã cho là $%s %s 0$}" % (bt, dau), "Đúng. " + gc),
-              (r"{Bất phương trình đã cho là $%s %s 0$}" % (bt, random.choice([doi, bo])), "Sai. " + gc)]
-        # d) VDC
-        gd = (r"Thay $(%d; %d)$ vào vế trái được $%d$, và $%d %s 0$ %s." %
-              (X, Y, A_ * X + B_ * Y + C_, A_ * X + B_ * Y + C_, dau, "đúng" if X_ok else "sai"))
-        y4 = [((r"{\True " if X_ok else "{") + r"Điểm $(%d; %d)$ thuộc miền nghiệm của bất phương trình}" % (X, Y),
-               ("Đúng. " if X_ok else "Sai. ") + gd),
-              ((r"{" if X_ok else r"{\True ") + r"Điểm $(%d; %d)$ không thuộc miền nghiệm của bất phương trình}" % (X, Y),
-               ("Sai. " if X_ok else "Đúng. ") + gd)]
+        t = _tfa_tao_tham_so()
+        a, b, c, ky, p, q, co_O = t["a"], t["b"], t["c"], t["ky"], t["p"], t["q"], t["co_O"]
+        ke = ky in ("<=", ">=")
+        vt = _tfa_bieu_thuc(a, b)
+        ks = _TFA_LATEX[ky]
+        debai = (r"Cho một bất phương trình bậc nhất hai ẩn có miền nghiệm là nửa mặt phẳng %s gốc toạ độ $O$ "
+                 r"(%s bờ $d$), trong đó đường thẳng $d$ đi qua hai điểm $A\left(%d; 0\right)$ và "
+                 r"$B\left(0; %d\right)$. Xét tính đúng sai của các khẳng định sau:"
+                 % ("chứa" if co_O else "không chứa", "kể cả" if ke else "không kể", p, q))
+
+        # a) NB - O, A, B co thuoc mien nghiem khong (theo gia thiet)
+        ga = (r"Theo giả thiết miền nghiệm %s $O$ và %s bờ $d$; hai điểm $A$, $B$ nằm trên $d$ nên %s miền nghiệm."
+              % ("chứa" if co_O else "không chứa", "kể cả" if ke else "không kể", "thuộc" if ke else "không thuộc"))
+        y1 = []
+        for ten_d, dung_d in ((r"O\left(0; 0\right)", co_O), (r"A\left(%d; 0\right)" % p, ke), (r"B\left(0; %d\right)" % q, ke)):
+            y1 += [_tfa_m(r"Điểm $%s$ thuộc miền nghiệm của bất phương trình" % ten_d, dung_d, ga),
+                   _tfa_m(r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình" % ten_d, not dung_d, ga)]
+        y1 += [_tfa_m(r"Bất phương trình đã cho là bất phương trình ngặt", not ke, ga),
+               _tfa_m(r"Bất phương trình đã cho là bất phương trình không ngặt", ke, ga)]
+
+        # b) TH - phuong trinh duong thang d
+        gb = (r"$d$ đi qua $A\left(%d; 0\right)$, $B\left(0; %d\right)$ nên $d\colon \dfrac{x}{%d} + \dfrac{y}{%d} = 1$, "
+              r"tức là $d\colon %s = %d$ (hoặc phương trình tương đương)." % (p, q, p, q, vt, c))
+
+        def cung_duong(al, be, ga_):
+            return al * b == be * a and al * c == ga_ * a and be * c == ga_ * b and (al, be) != (0, 0)
+
+        y2 = []
+        for al, be, ga_ in dict.fromkeys([(a, b, c), (-a, -b, -c), (2 * a, 2 * b, 2 * c), (3 * a, 3 * b, 3 * c),
+                                          (a, b, -c), (a, -b, c), (b, a, c), (-a, b, c), (a, b, c + 1)]):
+            y2.append(_tfa_m(r"Đường thẳng $d$ có phương trình $%s = %d$" % (_tfa_bieu_thuc(al, be), ga_),
+                             cung_duong(al, be, ga_), gb))
+        y2.append(_tfa_m(r"Đường thẳng $d$ có phương trình $\dfrac{x}{%d} + \dfrac{y}{%d} = 1$" % (p, q), True, gb))
+        for X, Y in ((p, 0), (0, q), (-p, 0), (0, -q), (p, q)):
+            y2.append(_tfa_m(r"Đường thẳng $d$ đi qua điểm $\left(%d; %d\right)$" % (X, Y), a * X + b * Y == c, gb))
+
+        # c) VD - bat phuong trinh da cho
+        gc = (r"Tại $O$ vế trái $%s$ bằng $0$; $0 %s %d$ là mệnh đề %s mà miền nghiệm %s $O$, và %s bờ $d$, "
+              r"nên bất phương trình là $%s %s %d$ (hoặc bất phương trình tương đương)."
+              % (vt, ks, c, "đúng" if co_O else "sai", "chứa" if co_O else "không chứa", "kể cả" if ke else "không kể",
+                 vt, ks, c))
+        doi_huong = _TFA_DAO[ky]
+        doi_ngat = {"<=": "<", "<": "<=", ">=": ">", ">": ">="}[ky]
+
+        def tuong_duong(al, be, ga_, kp):
+            lam = _Fr(al, a) if a else _Fr(be, b)
+            if lam == 0 or be != lam * b or ga_ != lam * c:
+                return False
+            return kp == (ky if lam > 0 else _TFA_DAO[ky])
+
+        y3 = []
+        for al, be, ga_, kp in dict.fromkeys([
+                (a, b, c, ky), (-a, -b, -c, _TFA_DAO[ky]), (2 * a, 2 * b, 2 * c, ky), (-2 * a, -2 * b, -2 * c, _TFA_DAO[ky]),
+                (a, b, c, doi_huong), (a, b, c, doi_ngat), (-a, -b, -c, ky), (a, b, -c, ky), (b, a, c, ky)]):
+            y3.append(_tfa_m(r"Bất phương trình đã cho tương đương với bất phương trình $%s %s %d$"
+                             % (_tfa_bieu_thuc(al, be), _TFA_LATEX[kp], ga_), tuong_duong(al, be, ga_, kp), gc))
+
+        # d) VDC - HE bat phuong trinh gom bat phuong trinh da cho va x ⋈ 0, y ⋈ 0
+        y4 = _tfa_y_d(t)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
+
+
 def L10_C2_TF_A_04(socau, socot=1):
     r"""Đúng/Sai - bất phương trình bậc nhất hai ẩn KÈM BỐN ĐIỂM cho trước.
 
@@ -3100,23 +3218,14 @@ def L10_C2_TF_A_04(socau, socot=1):
               (r"{" + ten % (bpt, "không phải là") + r" là mệnh đề đúng}", r"Sai. " + ly_do),
               (r"{\True " + ten % (bpt, "không phải là") + r" là mệnh đề sai}", r"Đúng. " + ly_do)]
 
-        # b) TH - mot trong bon diem co thuoc mien nghiem khong
-        k = _rd.randrange(4)
-        dung_b = thuoc[k]
-        cap = tex_d[k]
-        gb = thay(k)
-        y2 = [((r"{\True " if dung_b else "{") +
-               r"Điểm $%s$ thuộc miền nghiệm của bất phương trình}" % cap,
-               ("Đúng. " if dung_b else "Sai. ") + gb),
-              ((r"{" if dung_b else r"{\True ") +
-               r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình}" % cap,
-               ("Sai. " if dung_b else "Đúng. ") + gb),
-              ((r"{\True " if dung_b else "{") +
-               r"Toạ độ của điểm $%s$ là một nghiệm của bất phương trình}" % TEN[k],
-               ("Đúng. " if dung_b else "Sai. ") + gb),
-              ((r"{" if dung_b else r"{\True ") +
-               r"Toạ độ của điểm $%s$ không phải là nghiệm của bất phương trình}" % TEN[k],
-               ("Sai. " if dung_b else "Đúng. ") + gb)]
+        # b) TH - cac diem co thuoc mien nghiem khong (moi diem 4 cach noi)
+        y2 = []
+        for k in range(4):
+            dung_b, cap, gb = thuoc[k], tex_d[k], thay(k)
+            y2 += [_tfa_m(r"Điểm $%s$ thuộc miền nghiệm của bất phương trình" % cap, dung_b, gb),
+                   _tfa_m(r"Điểm $%s$ không thuộc miền nghiệm của bất phương trình" % cap, not dung_b, gb),
+                   _tfa_m(r"Toạ độ của điểm $%s$ là một nghiệm của bất phương trình" % TEN[k], dung_b, gb),
+                   _tfa_m(r"Toạ độ của điểm $%s$ không phải là nghiệm của bất phương trình" % TEN[k], not dung_b, gb)]
 
         # c) VD - dem so diem thuoc / khong thuoc mien nghiem trong bon diem
         def cau_c(so, thuoc_mn):
@@ -3141,48 +3250,1598 @@ def L10_C2_TF_A_04(socau, socot=1):
               r"\\ Vậy có $%d$ điểm thuộc miền nghiệm%s và $%d$ điểm không thuộc miền nghiệm%s."
               % (n_in, " (%s)" % ds_in if ds_in else "",
                  n_ngoai, " (%s)" % ds_ngoai if ds_ngoai else ""))
-        sai_in = _rd.choice([i for i in range(5) if i != n_in])
-        sai_ngoai = _rd.choice([i for i in range(5) if i != n_ngoai])
-        y3 = [(r"{\True " + cau_c(n_in, True) + "}", "Đúng. " + gc),
-              (r"{" + cau_c(sai_in, True) + "}", "Sai. " + gc),
-              (r"{\True " + cau_c(n_ngoai, False) + "}", "Đúng. " + gc),
-              (r"{" + cau_c(sai_ngoai, False) + "}", "Sai. " + gc)]
+        tc = []
+        for k in range(5):
+            tc.append((cau_c(k, True), k == n_in))
+            tc.append((cau_c(k, False), k == n_ngoai))
+        for k in (1, 2, 3):
+            tc.append((r"Trong các điểm đã cho, có ít nhất $%d$ điểm thuộc miền nghiệm của "
+                       r"bất phương trình" % k, n_in >= k))
+        for k in (0, 1, 2, 3):
+            tc.append((r"Trong các điểm đã cho, có nhiều nhất $%d$ điểm thuộc miền nghiệm của "
+                       r"bất phương trình" % k, n_in <= k))
+        tc += [(r"Trong các điểm đã cho, số điểm thuộc miền nghiệm nhiều hơn số điểm không thuộc "
+                r"miền nghiệm của bất phương trình", n_in > n_ngoai),
+               (r"Trong các điểm đã cho, số điểm thuộc miền nghiệm bằng số điểm không thuộc "
+                r"miền nghiệm của bất phương trình", n_in == n_ngoai),
+               (r"Trong các điểm đã cho, số điểm thuộc miền nghiệm ít hơn số điểm không thuộc "
+                r"miền nghiệm của bất phương trình", n_in < n_ngoai)]
+        y3 = _tfa_ds([(x, gc) for x, ok in tc if ok], [(x, gc) for x, ok in tc if not ok])
 
-        # d) VDC - dem nghiem nguyen trong goc phan tu
-        dau = _tfa_dieu_kien_xy(sx, sy, t["chat_x"], t["chat_y"])
-        giao = (r"Đường thẳng $d$ cắt $Ox$ tại $\left(%d; 0\right)$ và cắt $Oy$ tại "
-                r"$\left(0; %d\right)$, nên cùng hai trục toạ độ tạo thành một tam giác vuông "
-                r"nằm ở góc phần tư thứ %s." % (t["p"], t["q"], _tfa_goc_phan_tu(sx, sy)))
-        if co_O:
-            chi_tiet = r"\\ ".join(
-                r"Với $x = %d$ có $%d$ giá trị nguyên $y$ thoả mãn" % (X, k)
-                for X, k in t["theo_x"])
-            giai_d = (giao + r"\\ Miền nghiệm chứa $O$ nên các cặp cần đếm nằm trong tam giác đó "
-                      r"(%s đường thẳng $d$; điểm nằm trên trục chỉ được tính khi đề cho phép "
-                      r"$x$ hoặc $y$ bằng $0$).\\ %s\\ "
-                      r"Cộng lại được $%d$ cặp số."
-                      % ("không kể" if ngat else "kể cả", chi_tiet, dem))
-            y4 = [(r"{\True Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem, dau), "Đúng. " + giai_d),
-                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem + s, dau),
-                   "Sai. " + giai_d)]
-        else:
-            T = t["T"]
-            giai_d = (giao + r"\\ Miền nghiệm KHÔNG chứa $O$, nên nó nằm về phía xa tam giác "
-                      r"và không bị chặn.\\ Chẳng hạn mọi cặp số "
-                      r"$\left(%s; %s\right)$ với $t$ nguyên dương, $t \ge %d$ đều thoả mãn "
-                      r"(vế trái là $%d t$ và $%d t %s %d$ với mọi $t \ge %d$).\\ "
-                      r"Vậy có vô số cặp số thoả mãn.\\ Nếu xét nhầm sang nửa mặt phẳng bên kia "
-                      r"(chứa $O$) thì chỉ đếm được $%d$ cặp số nằm trong tam giác nói trên, "
-                      r"đó là kết quả sai."
-                      % ("t" if sx > 0 else "-t", "t" if sy > 0 else "-t", T, a * sx + b * sy, a * sx + b * sy, ks, c, T, dem))
-            y4 = [(r"{\True Có vô số cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % dau, "Đúng. " + giai_d),
-                  (r"{Có đúng $%d$ cặp số $\left(x; y\right)$ thoả mãn bất phương trình, "
-                   r"trong đó %s}" % (dem, dau), "Sai. " + giai_d)]
+        # d) VDC - HE bat phuong trinh gom bat phuong trinh da cho va x ⋈ 0, y ⋈ 0 (xem _tfa_y_d)
+        y4 = _tfa_y_d(t)
 
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
     return cauTF
 
 
+
+
+# =====================================================================
+# CLAUDE THEM 09/10/2026 (co Lan duyet) - BAI TOAN THUC TIEN MOI, TINH HUONG 1: PHA CHE NUOC
+# (boi_canh "pha_che"). Moi lan sinh la mot bo so khac, cung cau truc:
+#   x lit nuoc A, y lit nuoc B; ba dieu kien (huong lieu, nuoc, duong) dang "<=";
+#   duong cua nuoc la x + y <= N; mien nghiem la NGU GIAC O(0;0), P(m;0), Q(u;N-u),
+#   R(u2;N-u2), S(0;n) voi dinh nguyen; diem thuong F = px + qy dat lon nhat DUY NHAT
+#   tai Q hoac R (khong phai P, S, O).
+# Phan ra: NB025_MC_B (1 bat phuong trinh), VD028_MC_B / SA_B (VD: lap he, phuong an kha thi),
+# VD028_MC_C / SA_C (VDC: toi uu), VD028_TL_B (2 y), TF_C (4 y).
+# Co Lan: so lieu cua co (12 g huong lieu, 9 lit nuoc, 315 g duong, 60/80 diem) la mot truong hop.
+# =====================================================================
+
+def _so_vn(v):
+    """Số thập phân hữu hạn viết kiểu Việt trong LaTeX (0{,}5; 1{,}95)."""
+    v = Fraction(v)
+    if v.denominator == 1:
+        return "%d" % v.numerator
+    return ("%.4f" % float(v)).rstrip("0").rstrip(".").replace(".", "{,}")
+
+
+def _pc_hs(v, ten):
+    return ten if Fraction(v) == 1 else _so_vn(v) + ten
+
+
+def _pc_lhs(a, b):
+    return "%s + %s" % (_pc_hs(a, "x"), _pc_hs(b, "y"))
+
+
+def _pc_sinh():
+    r"""Tham số bài toán pha chế (xem khối chú thích phía trên)."""
+    while True:
+        N = _rd.randint(7, 12)
+        m = _rd.randint(4, N - 1)
+        n = _rd.randint(4, N - 1)
+        u2 = _rd.randint(1, N - 3)
+        u = _rd.randint(2, N - 2)
+        if not (u2 < u < m and u2 > N - n):
+            continue
+        A1, B1, C1 = N - u, m - u, (N - u) * m                 # đường qua P và Q
+        g = _math.gcd(_math.gcd(A1, B1), C1)
+        A1, B1, C1 = A1 // g, B1 // g, C1 // g
+        A3, B3, C3 = u2 + n - N, u2, u2 * n                    # đường qua R và S
+        g = _math.gcd(_math.gcd(A3, B3), C3)
+        A3, B3, C3 = A3 // g, B3 // g, C3 // g
+        if max(A1, B1, A3, B3) > 9 or A1 == B1 or A3 == B3:
+            continue
+        dinh = [(0, 0), (m, 0), (u, N - u), (u2, N - u2), (0, n)]
+        loi = all((dinh[(i + 1) % 5][0] - dinh[i][0]) * (dinh[(i + 2) % 5][1] - dinh[(i + 1) % 5][1])
+                  - (dinh[(i + 1) % 5][1] - dinh[i][1]) * (dinh[(i + 2) % 5][0] - dinh[(i + 1) % 5][0]) > 0
+                  for i in range(5))
+        if not loi:
+            continue
+        kd = _rd.choice([5, 10, 15, 20])
+        kh = _rd.choice([Fraction(1, 2), Fraction(1)])
+        if max(A1, B1) * kd > 100:
+            continue
+        p, q = 10 * _rd.randint(2, 10), 10 * _rd.randint(2, 10)
+        if p == q:
+            continue
+        F = [p * X + q * Y for X, Y in dinh]
+        lon = max(F)
+        if F.count(lon) != 1 or F.index(lon) not in (2, 3):
+            continue
+        return dict(N=N, m=m, n=n, u=u, u2=u2, dinh=dinh, p=p, q=q, F=F, lon=lon,
+                    dl=dinh[F.index(lon)], ad=A1 * kd, bd=B1 * kd, D=C1 * kd,
+                    ah=A3 * kh, bh=B3 * kh, H=C3 * kh)
+
+
+def _pc_de(t):
+    return (r"Trong một cuộc thi pha chế, mỗi đội chơi được sử dụng tối đa $%s$ g hương liệu, $%d$ lít "
+            r"nước và $%s$ g đường để pha chế hai loại nước A và B. Để pha chế $1$ lít nước A cần $%s$ g "
+            r"đường, $1$ lít nước và $%s$ g hương liệu; để pha chế $1$ lít nước B cần $%s$ g đường, $1$ lít "
+            r"nước và $%s$ g hương liệu. Mỗi lít nước A nhận được $%d$ điểm thưởng, mỗi lít nước B nhận được "
+            r"$%d$ điểm thưởng. Gọi $x$, $y$ lần lượt là số lít nước A và số lít nước B mà một đội pha chế."
+            % (_so_vn(t["H"]), t["N"], _so_vn(t["D"]), _so_vn(t["ad"]), _so_vn(t["ah"]),
+               _so_vn(t["bd"]), _so_vn(t["bh"]), t["p"], t["q"]))
+
+
+def _pc_rang_buoc(t):
+    """[(a, b, c, tên, đơn vị)] theo thứ tự hương liệu, nước, đường."""
+    return [(t["ah"], t["bh"], t["H"], "hương liệu", "g"),
+            (1, 1, t["N"], "nước", "lít"),
+            (t["ad"], t["bd"], t["D"], "đường", "g")]
+
+
+def _pc_he_tex(dong):
+    """dong: [(a, b, c, dấu LaTeX)] ba bất phương trình -> hệ cùng x >= 0, y >= 0."""
+    return (r"\heva{& x \ge 0 \\ & y \ge 0 \\ & " +
+            r" \\ & ".join("%s %s %s" % (_pc_lhs(a, b), d, _so_vn(c)) for a, b, c, d in dong) + "}")
+
+
+def _pc_he_dung(t):
+    return [(a, b, c, r"\le") for a, b, c, _, _ in _pc_rang_buoc(t)]
+
+
+def _pc_thoa(t, X, Y):
+    """Danh sách chỉ số ràng buộc (0 hương liệu, 1 nước, 2 đường) bị vi phạm; X, Y < 0 coi là vi phạm -1."""
+    vp = [i for i, (a, b, c, _, _) in enumerate(_pc_rang_buoc(t)) if a * X + b * Y > c]
+    if X < 0 or Y < 0:
+        vp.append(-1)
+    return vp
+
+
+def _pc_giai_he(t):
+    s = r"Số lít không âm nên $x \ge 0$, $y \ge 0$.\\ "
+    for a, b, c, ten, dv in _pc_rang_buoc(t):
+        s += r"Lượng %s dùng là $%s$ (%s), không quá $%s$ nên $%s \le %s$.\\ " % (
+            ten, _pc_lhs(a, b), dv, _so_vn(c), _pc_lhs(a, b), _so_vn(c))
+    return s + r"Ta được hệ $%s$." % _pc_he_tex(_pc_he_dung(t))
+
+
+def _pc_giai_dinh(t):
+    m, n, u, u2, N = t["m"], t["n"], t["u"], t["u2"], t["N"]
+    return (r"Miền nghiệm là ngũ giác có các đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
+            r"$\left(%d;%d\right)$, $\left(%d;%d\right)$, $\left(0;%d\right)$.\\ " % (m, u, N - u, u2, N - u2, n))
+
+
+def _pc_giai_F(t):
+    return (r"Điểm thưởng $F\left(x; y\right) = %s$ đạt giá trị lớn nhất tại một đỉnh:\\ " % _F_tex(t["p"], t["q"]) +
+            _bang_F(t["dinh"], t["p"], t["q"]) + r".\\ " +
+            r"Lớn nhất là $%d$ tại $\left(%d; %d\right)$: pha chế $%d$ lít nước A và $%d$ lít nước B."
+            % (t["lon"], t["dl"][0], t["dl"][1], t["dl"][0], t["dl"][1]))
+
+
+def _pc_giai_toi_uu(t):
+    return _pc_giai_he(t) + "\\\\\n" + _pc_giai_dinh(t) + _pc_giai_F(t)
+
+
+# ---- NB025: bất phương trình của MỘT điều kiện -------------------------------------------------
+
+def _pc_mc_bpt(socau, dang, k):
+    cauTN = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        a, b, c, ten, dv = _pc_rang_buoc(t)[k]
+        dung = r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(c))
+        khac = _pc_rang_buoc(t)[(k + 1) % 3][2]
+        cands = [r"$%s \ge %s$" % (_pc_lhs(a, b), _so_vn(c)),
+                 r"$%s \le %s$" % (_pc_lhs(b, a), _so_vn(c)),
+                 r"$%s < %s$" % (_pc_lhs(a, b), _so_vn(c)),
+                 r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(khac))]
+        ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(c + j)))
+        debai = (_pc_de(t) + r" Bất phương trình nào sau đây biểu thị điều kiện về lượng %s mà một đội được "
+                 r"sử dụng?" % ten)
+        giai = (r"Pha $x$ lít nước A và $y$ lít nước B cần $%s$ (%s) %s, mà mỗi đội dùng \textbf{tối đa} "
+                r"$%s$ %s nên dấu là $\le$ (không loại trừ dấu bằng).\\ Vậy $%s \le %s$; lưu ý hệ số của $x$ là %s "
+                r"(nước A) và của $y$ là %s (nước B)."
+                % (_pc_lhs(a, b), dv, ten, _so_vn(c), dv, _pc_lhs(a, b), _so_vn(c),
+                   "$%s$" % _so_vn(a), "$%s$" % _so_vn(b)))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B3_NB025_MC_B_01(socau, dang=1):
+    """Pha chế: bất phương trình về lượng ĐƯỜNG."""
+    return _pc_mc_bpt(socau, dang, 2)
+
+
+def L10_C2_B3_NB025_MC_B_02(socau, dang=1):
+    """Pha chế: bất phương trình về lượng NƯỚC."""
+    return _pc_mc_bpt(socau, dang, 1)
+
+
+def L10_C2_B3_NB025_MC_B_03(socau, dang=1):
+    """Pha chế: bất phương trình về lượng HƯƠNG LIỆU."""
+    return _pc_mc_bpt(socau, dang, 0)
+
+
+# ---- VD028 (VD): lập hệ, phương án khả thi, điểm thưởng của một phương án --------------------
+
+def L10_C2_B4_VD028_MC_B_01(socau, dang=1):
+    """Pha chế: chọn hệ bất phương trình mô tả đúng các điều kiện."""
+    cauTN = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        dung_dong = _pc_he_dung(t)
+        d1 = [dict(zip("abcd", r)) for r in dung_dong]
+        he = lambda ds: "$%s$" % _pc_he_tex(ds)
+        sai1 = list(dung_dong); sai1[2] = (t["bd"], t["ad"], t["D"], r"\le")      # hoán đổi hệ số của đường
+        sai2 = list(dung_dong); sai2[0] = (t["ah"], t["bh"], t["H"], r"\ge")      # đổi dấu hương liệu
+        sai3 = list(dung_dong); sai3[1] = (1, 1, t["N"], r"\ge")                  # đổi dấu của nước
+        sai4 = list(dung_dong); sai4[0] = (t["bh"], t["ah"], t["H"], r"\le")      # hoán đổi hệ số hương liệu
+        ds = _ba_nhieu2(he(dung_dong), [he(sai1), he(sai2), he(sai3), he(sai4)])
+        debai = _pc_de(t) + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
+        cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _pc_giai_he(t), 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_VD028_MC_B_02(socau, dang=1):
+    """Pha chế: chọn cặp (x; y) là một phương án pha chế thoả mãn mọi điều kiện."""
+    cauTN = ""
+    dem = 0
+    while dem < socau:
+        t = _pc_sinh()
+        luoi = [(X, Y) for X in range(1, t["N"] + 3) for Y in range(1, t["N"] + 3)]
+        tot = [P for P in luoi if not _pc_thoa(t, *P)]
+        sai = [[P for P in luoi if _pc_thoa(t, *P) == [i]] for i in range(3)]
+        if not tot or not all(sai):
+            continue
+        dem += 1
+        dung_pt = _rd.choice(tot)
+        chon = [_rd.choice(s) for s in sai]
+        fmt = lambda P: r"$\left(%d; %d\right)$" % P
+        ten = ["hương liệu", "nước", "đường"]
+        gi = r"Thay từng cặp vào ba bất phương trình của hệ:\\ "
+        for X, Y in [dung_pt] + chon:
+            vp = _pc_thoa(t, X, Y)
+            gi += (r"Cặp $\left(%d; %d\right)$: lượng hương liệu $%s$, lượng nước $%d$, lượng đường $%s$ nên "
+                   % (X, Y, _so_vn(t["ah"] * X + t["bh"] * Y), X + Y, _so_vn(t["ad"] * X + t["bd"] * Y)))
+            gi += (r"thoả mãn cả ba điều kiện.\\ " if not vp else
+                   r"vi phạm điều kiện về %s.\\ " % ten[vp[0]])
+        gi += r"Vậy chọn cặp $\left(%d; %d\right)$." % dung_pt
+        debai = (_pc_de(t) + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án pha chế "
+                 r"thoả mãn mọi điều kiện của đội?")
+        cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_VD028_MC_B_03(socau, dang=1):
+    """Pha chế: số điểm thưởng của một phương án pha chế cho trước (phương án hợp lệ)."""
+    cauTN = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        luoi = [(X, Y) for X in range(1, t["N"]) for Y in range(1, t["N"]) if not _pc_thoa(t, X, Y)]
+        X, Y = _rd.choice(luoi)
+        p, q = t["p"], t["q"]
+        v = p * X + q * Y
+        ds = _ba_nhieu2("$%d$" % v, ["$%d$" % (p * Y + q * X), "$%d$" % (v + p), "$%d$" % (v - q),
+                                     "$%d$" % (p + q)], buoc=lambda k: "$%d$" % (v + 10 * k))
+        debai = (_pc_de(t) + r" Một đội pha chế $%d$ lít nước A và $%d$ lít nước B (thoả mãn mọi điều kiện). "
+                 r"Số điểm thưởng đội đó nhận được là" % (X, Y))
+        giai = (r"Điểm thưởng là $%d\cdot %d + %d\cdot %d = %d$ (mỗi lít nước A được $%d$ điểm, mỗi lít nước B "
+                r"được $%d$ điểm)." % (p, X, q, Y, v, p, q))
+        cauTN += MC_SA_answer_text(debai, "$%d$" % v, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+# ---- VD028 (VDC): tìm phương án tối ưu ------------------------------------------------------------
+
+def _pc_mc_toi_uu(socau, dang, hoi):
+    cauTN = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        dinh, F = t["dinh"], t["F"]
+        if hoi == "diem":
+            dap, khac = t["lon"], [g for g in F if g != t["lon"]]
+            cau = r"Số điểm thưởng cao nhất mà một đội có thể nhận được là"
+        elif hoi == "A":
+            dap, khac = t["dl"][0], [d[0] for d in dinh]
+            cau = r"Để nhận được số điểm thưởng cao nhất, đội chơi cần pha chế bao nhiêu lít nước A?"
+        else:
+            dap, khac = t["dl"][1], [d[1] for d in dinh]
+            cau = r"Để nhận được số điểm thưởng cao nhất, đội chơi cần pha chế bao nhiêu lít nước B?"
+        ds = _ba_nhieu2("$%d$" % dap, ["$%d$" % g for g in dict.fromkeys(khac) if g != dap],
+                        buoc=lambda k: "$%d$" % (dap + k))
+        cauTN += MC_SA_answer_text(_pc_de(t) + " " + cau, "$%d$" % dap, ds, _pc_giai_toi_uu(t), 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_VD028_MC_C_01(socau, dang=1):
+    """Pha chế (VDC): số điểm thưởng cao nhất."""
+    return _pc_mc_toi_uu(socau, dang, "diem")
+
+
+def L10_C2_B4_VD028_MC_C_02(socau, dang=1):
+    """Pha chế (VDC): số lít nước A ở phương án tối ưu."""
+    return _pc_mc_toi_uu(socau, dang, "A")
+
+
+def L10_C2_B4_VD028_MC_C_03(socau, dang=1):
+    """Pha chế (VDC): số lít nước B ở phương án tối ưu."""
+    return _pc_mc_toi_uu(socau, dang, "B")
+
+
+def _pc_sa(socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        dinh, N = t["dinh"], t["N"]
+        rb = _pc_rang_buoc(t)
+        if hoi == "dinh":
+            dap, khac = 5, [4, 6, 3]
+            hoi_cau = (r"Miền nghiệm của hệ bất phương trình mô tả các điều kiện của bài toán là một đa giác "
+                       r"có bao nhiêu đỉnh?")
+            giai = _pc_giai_he(t) + "\\\\\n" + _pc_giai_dinh(t)
+        elif hoi in ("xmax", "ymax"):
+            i = 0 if hoi == "xmax" else 1
+            ten = "A" if i == 0 else "B"
+            dap = t["m"] if i == 0 else t["n"]
+            khac = [dap + 1, dap - 1, dap + 2]
+            hoi_cau = (r"Nếu một đội chỉ pha chế nước %s (không pha nước %s) thì đội đó pha chế được tối đa "
+                       r"bao nhiêu lít nước %s?" % (ten, "B" if i == 0 else "A", ten))
+            gh = []
+            for a, b, c, nm, dv in rb:
+                he_so = a if i == 0 else b
+                gh.append(r"%s: $%s \le %s$, tức là $%s \le %s$" % (
+                    nm, _pc_hs(he_so, "x" if i == 0 else "y"), _so_vn(c), "x" if i == 0 else "y",
+                    _tfa_ps((Fraction(c) / Fraction(he_so)).numerator, (Fraction(c) / Fraction(he_so)).denominator)))
+            giai = (r"Chỉ pha nước %s nên số lít nước %s bằng $0$. Khi đó mỗi điều kiện cho một giới hạn:\\ " % (
+                ten, "B" if i == 0 else "A") + r"\\ ".join(gh) +
+                r".\\ Số lít lớn nhất thoả mãn cả ba giới hạn là giá trị nhỏ nhất, bằng $%d$." % dap)
+        elif hoi == "diem":
+            dap, khac = t["lon"], [g for g in t["F"] if g != t["lon"]]
+            hoi_cau = r"Số điểm thưởng cao nhất mà một đội có thể nhận được là bao nhiêu?"
+            giai = _pc_giai_toi_uu(t)
+        elif hoi == "A":
+            dap, khac = t["dl"][0], [d[0] for d in dinh]
+            hoi_cau = r"Để nhận được số điểm thưởng cao nhất, đội chơi cần pha chế bao nhiêu lít nước A?"
+            giai = _pc_giai_toi_uu(t)
+        else:
+            dap, khac = t["dl"][1], [d[1] for d in dinh]
+            hoi_cau = r"Để nhận được số điểm thưởng cao nhất, đội chơi cần pha chế bao nhiêu lít nước B?"
+            giai = _pc_giai_toi_uu(t)
+        ds = _ba_nhieu2(str(dap), [str(v) for v in dict.fromkeys(khac) if v != dap and v > 0],
+                        buoc=lambda k: str(dap + k + 2))
+        cau += MC_SA_answer_text(_pc_de(t) + " " + hoi_cau, str(dap), ds, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C2_B4_VD028_SA_B_01(socau, dang=2):
+    """Pha chế (VD): số đỉnh của miền nghiệm."""
+    return _pc_sa(socau, dang, "dinh")
+
+
+def L10_C2_B4_VD028_SA_B_02(socau, dang=2):
+    """Pha chế (VD): số lít nước A lớn nhất khi chỉ pha nước A."""
+    return _pc_sa(socau, dang, "xmax")
+
+
+def L10_C2_B4_VD028_SA_B_03(socau, dang=2):
+    """Pha chế (VD): số lít nước B lớn nhất khi chỉ pha nước B."""
+    return _pc_sa(socau, dang, "ymax")
+
+
+def L10_C2_B4_VD028_SA_C_01(socau, dang=2):
+    """Pha chế (VDC): số điểm thưởng cao nhất."""
+    return _pc_sa(socau, dang, "diem")
+
+
+def L10_C2_B4_VD028_SA_C_02(socau, dang=2):
+    """Pha chế (VDC): số lít nước A ở phương án tối ưu."""
+    return _pc_sa(socau, dang, "A")
+
+
+def L10_C2_B4_VD028_SA_C_03(socau, dang=2):
+    """Pha chế (VDC): số lít nước B ở phương án tối ưu."""
+    return _pc_sa(socau, dang, "B")
+
+
+def L10_C2_B4_VD028_TL_B_01(socau, dong=1):
+    r"""Tự luận (2 ý) - pha chế: a) lập hệ bất phương trình (VD); b) phương án có điểm thưởng cao nhất (VDC)."""
+    cauTN = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        ds_abcd = [
+            (r"Lập hệ bất phương trình mô tả các điều kiện của bài toán.",
+             _pc_he_tex(_pc_he_dung(t)), _pc_giai_he(t)),
+            (r"Đội chơi cần pha chế bao nhiêu lít nước mỗi loại để nhận được số điểm thưởng cao nhất? "
+             r"Số điểm thưởng cao nhất là bao nhiêu?",
+             r"\left(%d; %d\right)" % t["dl"], _pc_giai_dinh(t) + _pc_giai_F(t)),
+        ]
+        cauTN += TL_answer_text(_pc_de(t), ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+# ---- Đúng/Sai theo chương (TF_C): bốn ý, mỗi ý ít nhất 3 đúng + 3 sai -------------------------
+
+def _pc_giai_diem(t, X, Y):
+    ten = ["hương liệu", "nước", "đường"]
+    vp = _pc_thoa(t, X, Y)
+    s = (r"Với $x = %d$, $y = %d$: lượng hương liệu là $%s$ g, lượng nước là $%d$ lít, lượng đường là $%s$ g "
+         % (X, Y, _so_vn(t["ah"] * X + t["bh"] * Y), X + Y, _so_vn(t["ad"] * X + t["bd"] * Y)))
+    s += (r"nên phương án thoả mãn cả ba điều kiện." if not vp else
+          r"nên phương án vi phạm điều kiện về %s." % ten[vp[0]])
+    return s
+
+
+def L10_C2_TF_C_01(socau, socot=1):
+    r"""Đúng/Sai theo chương - tình huống pha chế nước (boi_canh pha_che); ý a NB, b TH, c VD, d VDC."""
+    cauTF = ""
+    for _ in range(socau):
+        t = _pc_sinh()
+        m, n, u, u2, N, p, q = t["m"], t["n"], t["u"], t["u2"], t["N"], t["p"], t["q"]
+        dinh, lon, dl = t["dinh"], t["lon"], t["dl"]
+        rb = _pc_rang_buoc(t)
+        debai = _pc_de(t) + r" Xét tính đúng sai của các khẳng định sau:"
+
+        # a) NB - bất phương trình của từng điều kiện
+        ly_a = _pc_giai_he(t)
+        dung_a = [(r"Điều kiện về lượng %s được biểu thị bởi bất phương trình $%s \le %s$"
+                   % (ten, _pc_lhs(a, b), _so_vn(c)), ly_a) for a, b, c, ten, dv in rb]
+        dung_a.append((r"Hai điều kiện $x \ge 0$, $y \ge 0$ xuất hiện vì số lít nước pha chế không âm", ly_a))
+        sai_a = [(r"Điều kiện về lượng %s được biểu thị bởi bất phương trình $%s \ge %s$"
+                  % (ten, _pc_lhs(a, b), _so_vn(c)), ly_a) for a, b, c, ten, dv in rb]
+        sai_a.append((r"Điều kiện về lượng nước được biểu thị bởi bất phương trình $x + y < %d$" % N, ly_a))
+        sai_a.append((r"Điều kiện về lượng đường được biểu thị bởi bất phương trình $%s \le %s$"
+                      % (_pc_lhs(t["bd"], t["ad"]), _so_vn(t["D"])), ly_a))
+        y1 = _tfa_ds(dung_a, sai_a)
+
+        # b) TH - phương án có thoả mãn mọi điều kiện không (tính trực tiếp)
+        luoi = [(X, Y) for X in range(1, N + 3) for Y in range(1, N + 3)]
+        tot = [P for P in luoi if not _pc_thoa(t, *P)]
+        sai_pt = [[P for P in luoi if _pc_thoa(t, *P) == [i]] for i in range(3)]
+        diem = [dinh[2], _rd.choice(tot)] + [_rd.choice(s) for s in sai_pt if s]
+        dung_b, sai_b = [], []
+        for X, Y in dict.fromkeys(diem):
+            ok = not _pc_thoa(t, X, Y)
+            gd = _pc_giai_diem(t, X, Y)
+            (dung_b if ok else sai_b).append(
+                (r"Phương án pha chế $%d$ lít nước A và $%d$ lít nước B thoả mãn mọi điều kiện của bài toán" % (X, Y), gd))
+            (sai_b if ok else dung_b).append(
+                (r"Phương án pha chế $%d$ lít nước A và $%d$ lít nước B không thoả mãn mọi điều kiện của bài toán"
+                 % (X, Y), gd))
+        y2 = _tfa_ds(dung_b, sai_b)
+
+        # c) VD - miền nghiệm
+        ly_c = (r"Giải các cặp đường biên ta được năm đỉnh $\left(0;0\right)$, $\left(%d;0\right)$, "
+                r"$\left(%d;%d\right)$, $\left(%d;%d\right)$, $\left(0;%d\right)$; miền nghiệm là ngũ giác lồi, bị chặn."
+                % (m, u, N - u, u2, N - u2, n))
+        y3 = _tfa_ds(
+            [(r"Miền nghiệm của hệ là một miền đa giác lồi có $5$ đỉnh", ly_c),
+             (r"Miền nghiệm của hệ là một miền bị chặn", ly_c),
+             (r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % (u, N - u), ly_c),
+             (r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % (u2, N - u2), ly_c),
+             (r"Điểm $\left(%d; 0\right)$ là một đỉnh của miền nghiệm" % m, ly_c)],
+            [(r"Miền nghiệm của hệ là một miền đa giác lồi có $4$ đỉnh", ly_c),
+             (r"Miền nghiệm của hệ là một miền đa giác lồi có $6$ đỉnh", ly_c),
+             (r"Miền nghiệm của hệ là một miền không bị chặn", ly_c),
+             (r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % (m, n), ly_c),
+             (r"Điểm $\left(%d; 0\right)$ là một đỉnh của miền nghiệm" % N, ly_c)])
+
+        # d) VDC - điểm thưởng lớn nhất
+        ly_d = _pc_giai_toi_uu(t)
+        ds_F = sorted(set(t["F"]))
+        hai = ds_F[-2]
+        sai_gt = [g for g in (lon + p + q, hai, p * m + q * n) if g != lon]
+        y4 = _tfa_ds(
+            [(r"Số điểm thưởng cao nhất mà một đội có thể nhận được bằng $%d$" % lon, ly_d),
+             (r"Số điểm thưởng cao nhất đạt được khi pha chế $%d$ lít nước A và $%d$ lít nước B" % dl, ly_d),
+             (r"Khi nhận được số điểm thưởng cao nhất, tổng lượng nước đã dùng là $%d$ lít" % N, ly_d),
+             (r"Pha chế $%d$ lít nước A và không pha nước B thì nhận được $%d$ điểm thưởng" % (m, p * m), ly_d),
+             (r"Pha chế $%d$ lít nước B và không pha nước A thì nhận được $%d$ điểm thưởng" % (n, q * n), ly_d)],
+            [(r"Số điểm thưởng cao nhất mà một đội có thể nhận được bằng $%d$" % g, ly_d) for g in sai_gt[:3]]
+            + [(r"Pha chế $%d$ lít nước A và không pha nước B thì nhận được số điểm thưởng cao nhất" % m, ly_d),
+               (r"Pha chế $%d$ lít nước B và không pha nước A thì nhận được số điểm thưởng cao nhất" % n, ly_d)])
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+
+# =====================================================================
+# CLAUDE THEM 09/10/2026 (co Lan duyet) - TINH HUONG THUC TE 2, 3, 4 (dung chung KHUNG "kb" cho moi tinh huong):
+#   2 thuc_an_gia_suc (min, 3 dieu kien >=, mien khong bi chan), 3 phan_xuong_hai_may (max, 2 dieu kien <=),
+#   4 do_uong_an_kieng (min, 3 dieu kien >=, calo: x + y >= N).
+# Moi tinh huong la mot ham sinh `t` (dict) ma cac ham hoi (NB025_MC, VD028_MC/SA/TL, TF) dung chung:
+#   t["de"] cau dan; t["rb"] cac dieu kien (a, b, c, dau); t["dinh"] cac dinh; t["cx"], t["cy"] he so cua F
+#   (nghin dong); t["kind"] max / min; cac cau chu mo ta (q_gt, q_x, q_y, ket, pa_xy ...).
+# Moi so tinh bang so nguyen / phan so; dung / sai cua dap an kiem lai doc lap trong
+# tests/test_l10_c2_tinh_huong_kb.py.
+# =====================================================================
+
+def _kb_dinh_that(rb):
+    """Đỉnh THẬT của miền {x >= 0, y >= 0, rb} (giao từng cặp đường biên), theo thứ tự quanh miền."""
+    duong = [(Fraction(1), Fraction(0), Fraction(0)), (Fraction(0), Fraction(1), Fraction(0))]
+    duong += [(Fraction(r["a"]), Fraction(r["b"]), Fraction(r["c"])) for r in rb]
+
+    def thoa(X, Y):
+        if X < 0 or Y < 0:
+            return False
+        return all((r["a"] * X + r["b"] * Y <= r["c"]) if r["dau"] == r"\le" else (r["a"] * X + r["b"] * Y >= r["c"])
+                   for r in rb)
+    kq = set()
+    for i in range(len(duong)):
+        for j in range(i + 1, len(duong)):
+            (a1, b1, c1), (a2, b2, c2) = duong[i], duong[j]
+            D = a1 * b2 - a2 * b1
+            if D == 0:
+                continue
+            X, Y = (c1 * b2 - c2 * b1) / D, (a1 * c2 - a2 * c1) / D
+            if thoa(X, Y):
+                kq.add((X, Y))
+    return sorted(kq)
+
+
+def _kb_thoa(t, X, Y):
+    """Chỉ số các điều kiện bị vi phạm (-1: số âm)."""
+    vp = [i for i, r in enumerate(t["rb"])
+          if not ((r["a"] * X + r["b"] * Y <= r["c"]) if r["dau"] == r"\le" else (r["a"] * X + r["b"] * Y >= r["c"]))]
+    if X < 0 or Y < 0:
+        vp.append(-1)
+    return vp
+
+
+def _hoa(s):
+    """Viết hoa chữ cái đầu của cả câu (không phụ thuộc ngôn ngữ)."""
+    return s[:1].upper() + s[1:]
+
+
+def _kb_hoan_tat(t):
+    """Điền các trường suy ra: giá trị F tại đỉnh, đỉnh tối ưu, miền bị chặn hay không."""
+    t["F"] = [t["cx"] * X + t["cy"] * Y for X, Y in t["dinh"]]
+    cuc = max(t["F"]) if t["kind"] == "max" else min(t["F"])
+    t["best"] = cuc
+    t["opt"] = t["dinh"][t["F"].index(cuc)]
+    t["cuc"] = "lớn nhất" if t["kind"] == "max" else "nhỏ nhất"
+    t["F_cuc"] = "tiền lãi lớn nhất" if t["kind"] == "max" else "chi phí nhỏ nhất"
+    return t
+
+
+def _kb_hien(t, v):
+    """Giá trị F (nghìn đồng, số nguyên) -> chuỗi hiển thị theo đơn vị của MC / TF."""
+    return "%s %s" % (_so_vn(Fraction(v, t["chia"])), t["dv_hien"])
+
+
+def _kb_dk_chu(t, i):
+    return t["rb"][i]["dk"]
+
+
+def _kb_sinh_max_tu_giac():
+    """Tình huống 3: tứ giác O, P(m;0), Q(u;v), R(0;n); hai điều kiện <=."""
+    while True:
+        m, n = _rd.randint(2, 6), _rd.randint(3, 8)
+        u, v = _rd.randint(1, m - 1), _rd.randint(1, n - 1)
+        if u * n + v * m <= m * n:
+            continue
+        L1, L2 = [v, m - u, v * m], [n - v, u, u * n]
+        for L in (L1, L2):
+            g = _math.gcd(_math.gcd(L[0], L[1]), L[2])
+            L[0], L[1], L[2] = L[0] // g, L[1] // g, L[2] // g
+        if max(L1[0], L1[1], L2[0], L2[1]) > 5 or max(L1[2], L2[2]) > 12:
+            continue
+        return m, n, u, v, L1, L2
+
+
+def _kb3_sinh():
+    while True:
+        m, n, u, v, L1, L2 = _kb_sinh_max_tu_giac()
+        p, q = 100 * _rd.randint(10, 30), 100 * _rd.randint(8, 30)
+        dinh = [(0, 0), (m, 0), (u, v), (0, n)]
+        F = [p * X + q * Y for X, Y in dinh]
+        if p == q or F.count(max(F)) != 1 or F.index(max(F)) != 2:
+            continue
+        rb = [dict(a=L1[0], b=L1[1], c=L1[2], dau=r"\le", dk="thời gian làm việc của máy M1 trong một ngày"),
+              dict(a=L2[0], b=L2[1], c=L2[2], dau=r"\le", dk="thời gian làm việc của máy M2 trong một ngày")]
+        for r_ in rb:
+            r_["dv"] = "giờ"
+        de = (r"Một phân xưởng có hai máy chuyên dụng M1 và M2 để sản xuất hai loại sản phẩm A và B theo đơn đặt "
+              r"hàng. Nếu sản xuất được một tấn sản phẩm loại A thì phân xưởng nhận được số tiền lãi là $%s$ triệu "
+              r"đồng; nếu sản xuất được một tấn sản phẩm loại B thì nhận được số tiền lãi là $%s$ triệu đồng. "
+              r"Muốn sản xuất một tấn sản phẩm loại A, người ta phải dùng máy M1 trong $%d$ giờ và máy M2 trong "
+              r"$%d$ giờ. Muốn sản xuất một tấn sản phẩm loại B, người ta phải dùng máy M1 trong $%d$ giờ và máy M2 "
+              r"trong $%d$ giờ. Một máy không thể dùng để sản xuất đồng thời hai loại sản phẩm này. Máy M1 làm việc "
+              r"không quá $%d$ giờ một ngày và máy M2 làm việc không quá $%d$ giờ một ngày. Gọi $x$, $y$ lần lượt "
+              r"là số tấn sản phẩm loại A và loại B mà phân xưởng sản xuất trong một ngày."
+              % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000)), L1[0], L2[0], L1[1], L2[1], L1[2], L2[2]))
+        t = dict(
+            de=de, kind="max", rb=rb, dinh=dinh, cx=p, cy=q, F_ten="tiền lãi", dv_hien="triệu đồng", chia=1000,
+            bi_chan=True, so_x="số tấn sản phẩm loại A", so_y="số tấn sản phẩm loại B",
+            pa_xy="sản xuất $%d$ tấn sản phẩm loại A và $%d$ tấn sản phẩm loại B",
+            pa_x="sản xuất $%d$ tấn sản phẩm loại A", pa_y="sản xuất $%d$ tấn sản phẩm loại B",
+            ket="cần sản xuất $%d$ tấn sản phẩm loại A và $%d$ tấn sản phẩm loại B",
+            q_gt=r"Số tiền lãi lớn nhất mà phân xưởng thu được trong một ngày là bao nhiêu?",
+            q_x=r"Để tiền lãi lớn nhất thì mỗi ngày phân xưởng cần sản xuất bao nhiêu tấn sản phẩm loại A?",
+            q_y=r"Để tiền lãi lớn nhất thì mỗi ngày phân xưởng cần sản xuất bao nhiêu tấn sản phẩm loại B?",
+            q_xcuc=r"Nếu phân xưởng chỉ sản xuất sản phẩm loại A (không sản xuất loại B) thì mỗi ngày sản xuất được tối "
+                   r"đa bao nhiêu tấn sản phẩm loại A?",
+            q_ycuc=r"Nếu phân xưởng chỉ sản xuất sản phẩm loại B (không sản xuất loại A) thì mỗi ngày sản xuất được tối "
+                   r"đa bao nhiêu tấn sản phẩm loại B?",
+            q_tl_b=r"Gọi $F$ (nghìn đồng) là số tiền lãi phân xưởng thu được trong một ngày. Biểu diễn $F$ theo $x$, $y$, "
+                   r"rồi tìm số tiền lãi lớn nhất và số tấn mỗi loại sản phẩm cần sản xuất.")
+        return _kb_hoan_tat(t)
+
+
+def _kb_sinh_min_chuoi(N=None):
+    """Chuỗi đỉnh S(0;n), Q1, Q2, P(m;0) lồi (đường biên ngày càng thoải); N != None: Q1, Q2 nằm trên x + y = N.
+    Trả về (n, Q1, Q2, m, [L1, L2, L3]) với L = [a, b, c] đã tối giản, hệ số <= 9."""
+    while True:
+        if N is None:
+            n, m = _rd.randint(6, 14), _rd.randint(8, 20)
+            u1, u2 = _rd.randint(1, 4), _rd.randint(2, 9)
+            v1, v2 = _rd.randint(2, n - 1), _rd.randint(1, 8)
+        else:
+            n, m = N + _rd.randint(1, 4), N + _rd.randint(2, 7)
+            u1, u2 = _rd.randint(1, N - 2), _rd.randint(2, N - 1)
+            v1, v2 = N - u1, N - u2
+        if not (0 < u1 < u2 < m and 0 < v2 < v1 < n):
+            continue
+        s1, s2, s3 = Fraction(v1 - n, u1), Fraction(v2 - v1, u2 - u1), Fraction(-v2, m - u2)
+        if not (s1 < s2 < s3 < 0):
+            continue
+        L1 = [n - v1, u1, u1 * n]
+        L2 = [v1 - v2, u2 - u1, (v1 - v2) * u1 + (u2 - u1) * v1]
+        L3 = [v2, m - u2, v2 * m]
+        for L in (L1, L2, L3):
+            g = _math.gcd(_math.gcd(L[0], L[1]), L[2])
+            L[0], L[1], L[2] = L[0] // g, L[1] // g, L[2] // g
+        if max(L1[0], L1[1], L2[0], L2[1], L3[0], L3[1]) > 9:
+            continue
+        return n, (u1, v1), (u2, v2), m, [L1, L2, L3]
+
+
+def _kb_chon_min(t_dinh, cx, cy):
+    F = [cx * X + cy * Y for X, Y in t_dinh]
+    return F.count(min(F)) == 1 and F.index(min(F)) in (1, 2)
+
+
+def _kb2_sinh():
+    while True:
+        n, Q1, Q2, m, Ls = _kb_sinh_min_chuoi()
+        cx, cy = 50 * _rd.randint(2, 8), 50 * _rd.randint(2, 8)
+        dinh = [(0, n), Q1, Q2, (m, 0)]
+        if cx == cy or not _kb_chon_min(dinh, cx, cy):
+            continue
+        hoan_vi = _rd.sample(range(3), 3)
+        rb = []
+        for ch, idx in zip("ABC", hoan_vi):
+            a, b, c = Ls[idx]
+            rb.append(dict(a=a, b=b, c=c, dau=r"\ge", dv="đơn vị",
+                           dk="lượng chất dinh dưỡng %s trong hỗn hợp" % ch, ten=ch))
+        if _kb_dinh_that(rb) != sorted((Fraction(X), Fraction(Y)) for X, Y in dinh):
+            continue
+        ax = [r["a"] for r in rb]
+        ay = [r["b"] for r in rb]
+        cc = [r["c"] for r in rb]
+        de = (r"Một hợp tác xã chăn nuôi dự định trộn hai loại thức ăn gia súc X và Y để tạo thành thức ăn hỗn hợp "
+              r"cho gia súc. Giá một bao loại X là $%d$ nghìn đồng, giá một bao loại Y là $%d$ nghìn đồng. Mỗi bao "
+              r"loại X chứa $%d$ đơn vị chất dinh dưỡng A, $%d$ đơn vị chất dinh dưỡng B và $%d$ đơn vị chất dinh "
+              r"dưỡng C. Mỗi bao loại Y chứa $%d$ đơn vị chất dinh dưỡng A, $%d$ đơn vị chất dinh dưỡng B và $%d$ "
+              r"đơn vị chất dinh dưỡng C. Hỗn hợp thu được phải chứa tối thiểu $%d$ đơn vị chất dinh dưỡng A, $%d$ "
+              r"đơn vị chất dinh dưỡng B và $%d$ đơn vị chất dinh dưỡng C. Gọi $x$, $y$ lần lượt là số bao thức ăn "
+              r"loại X và loại Y cần mua."
+              % (cx, cy, ax[0], ax[1], ax[2], ay[0], ay[1], ay[2], cc[0], cc[1], cc[2]))
+        t = dict(
+            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="triệu đồng", chia=1000,
+            bi_chan=False, so_x="số bao thức ăn loại X", so_y="số bao thức ăn loại Y",
+            pa_xy="mua $%d$ bao thức ăn loại X và $%d$ bao thức ăn loại Y",
+            pa_x="mua $%d$ bao thức ăn loại X", pa_y="mua $%d$ bao thức ăn loại Y",
+            ket="cần mua $%d$ bao thức ăn loại X và $%d$ bao thức ăn loại Y",
+            q_gt=r"Chi phí nhỏ nhất để mua hai loại thức ăn gia súc X và Y sao cho hỗn hợp thu được thoả mãn các yêu "
+                 r"cầu trên là bao nhiêu?",
+            q_x=r"Để chi phí nhỏ nhất thì cần mua bao nhiêu bao thức ăn loại X?",
+            q_y=r"Để chi phí nhỏ nhất thì cần mua bao nhiêu bao thức ăn loại Y?",
+            q_xcuc=r"Nếu chỉ mua thức ăn loại X (không mua loại Y) thì cần mua tối thiểu bao nhiêu bao loại X để hỗn "
+                   r"hợp thoả mãn cả ba yêu cầu?",
+            q_ycuc=r"Nếu chỉ mua thức ăn loại Y (không mua loại X) thì cần mua tối thiểu bao nhiêu bao loại Y để hỗn "
+                   r"hợp thoả mãn cả ba yêu cầu?",
+            q_tl_b=r"Gọi $F$ (nghìn đồng) là chi phí mua $x$ bao loại X và $y$ bao loại Y. Biểu diễn $F$ theo $x$, $y$, "
+                   r"rồi tìm chi phí nhỏ nhất và số bao mỗi loại cần mua.")
+        return _kb_hoan_tat(t)
+
+
+def _kb4_sinh():
+    while True:
+        N = _rd.randint(4, 7)
+        n, Q1, Q2, m, Ls = _kb_sinh_min_chuoi(N)
+        if Ls[1][:2] != [1, 1]:
+            continue
+        cx, cy = _rd.randint(8, 20), _rd.randint(8, 20)
+        dinh = [(0, n), Q1, Q2, (m, 0)]
+        if cx == cy or not _kb_chon_min(dinh, cx, cy):
+            continue
+        kc = _rd.choice([20, 30, 60])
+        va, vc = (Ls[0], Ls[2]) if _rd.random() < 0.5 else (Ls[2], Ls[0])
+        ka, kcv = _rd.choice([3, 6]), _rd.choice([5, 10])
+        rb = [dict(a=kc, b=kc, c=kc * N, dau=r"\ge", dv="calo", dk="lượng calo mỗi ngày"),
+              dict(a=ka * va[0], b=ka * va[1], c=ka * va[2], dau=r"\ge", dv="đơn vị",
+                   dk="lượng vitamin A mỗi ngày"),
+              dict(a=kcv * vc[0], b=kcv * vc[1], c=kcv * vc[2], dau=r"\ge", dv="đơn vị",
+                   dk="lượng vitamin C mỗi ngày")]
+        if _kb_dinh_that(rb) != sorted((Fraction(X), Fraction(Y)) for X, Y in dinh):
+            continue
+        de = (r"Một người ăn kiêng cần được cung cấp ít nhất $%d$ calo, $%d$ đơn vị vitamin A và $%d$ đơn vị "
+              r"vitamin C mỗi ngày từ hai loại đồ uống I và II. Mỗi cốc đồ uống I cung cấp $%d$ calo, $%d$ đơn vị "
+              r"vitamin A và $%d$ đơn vị vitamin C. Mỗi cốc đồ uống II cung cấp $%d$ calo, $%d$ đơn vị vitamin A và "
+              r"$%d$ đơn vị vitamin C. Biết rằng một cốc đồ uống I có giá $%d$ nghìn đồng và một cốc đồ uống II có "
+              r"giá $%d$ nghìn đồng. Gọi $x$, $y$ lần lượt là số cốc đồ uống I và II mà người đó uống mỗi ngày."
+              % (rb[0]["c"], rb[1]["c"], rb[2]["c"], rb[0]["a"], rb[1]["a"], rb[2]["a"],
+                 rb[0]["b"], rb[1]["b"], rb[2]["b"], cx, cy))
+        t = dict(
+            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="nghìn đồng", chia=1,
+            bi_chan=False, so_x="số cốc đồ uống I", so_y="số cốc đồ uống II",
+            pa_xy="uống $%d$ cốc đồ uống I và $%d$ cốc đồ uống II",
+            pa_x="uống $%d$ cốc đồ uống I", pa_y="uống $%d$ cốc đồ uống II",
+            ket="cần uống $%d$ cốc đồ uống I và $%d$ cốc đồ uống II",
+            q_gt=r"Chi phí nhỏ nhất mỗi ngày để người đó đáp ứng đủ các yêu cầu trên là bao nhiêu?",
+            q_x=r"Để chi phí nhỏ nhất mà vẫn đáp ứng đủ yêu cầu hằng ngày thì người đó cần uống bao nhiêu cốc đồ uống I?",
+            q_y=r"Để chi phí nhỏ nhất mà vẫn đáp ứng đủ yêu cầu hằng ngày thì người đó cần uống bao nhiêu cốc đồ uống II?",
+            q_xcuc=r"Nếu người đó chỉ uống đồ uống I (không uống đồ uống II) thì mỗi ngày cần uống tối thiểu bao nhiêu "
+                   r"cốc đồ uống I để đủ cả ba yêu cầu?",
+            q_ycuc=r"Nếu người đó chỉ uống đồ uống II (không uống đồ uống I) thì mỗi ngày cần uống tối thiểu bao nhiêu "
+                   r"cốc đồ uống II để đủ cả ba yêu cầu?",
+            q_tl_b=r"Gọi $F$ (nghìn đồng) là số tiền phải trả cho $x$ cốc đồ uống I và $y$ cốc đồ uống II. Biểu diễn $F$ "
+                   r"theo $x$, $y$, rồi tìm chi phí nhỏ nhất và số cốc mỗi loại cần uống.")
+        return _kb_hoan_tat(t)
+
+
+# ---- Lời giải dùng chung ------------------------------------------------------------------------
+
+_KB_TU_DAU = {r"\le": "không quá", r"\ge": "ít nhất"}
+
+
+def _kb_lhs(r):
+    return _pc_lhs(r["a"], r["b"])
+
+
+def _kb_he_tex(dong):
+    return (r"\heva{& x \ge 0 \\ & y \ge 0 \\ & " +
+            r" \\ & ".join("%s %s %s" % (_pc_lhs(a, b), d, _so_vn(c)) for a, b, c, d in dong) + "}")
+
+
+def _kb_he_dung(t):
+    return [(r["a"], r["b"], r["c"], r["dau"]) for r in t["rb"]]
+
+
+def _kb_giai_he(t):
+    s = r"Số lượng không âm nên $x \ge 0$, $y \ge 0$.\\ "
+    for r in t["rb"]:
+        s += r"%s là $%s$ (%s), %s $%s$ nên $%s %s %s$.\\ " % (
+            r["dk"][0].upper() + r["dk"][1:], _kb_lhs(r), r["dv"], _KB_TU_DAU[r["dau"]], _so_vn(r["c"]),
+            _kb_lhs(r), r["dau"], _so_vn(r["c"]))
+    return s + r"Ta được hệ $%s$." % _kb_he_tex(_kb_he_dung(t))
+
+
+def _kb_dinh_tex(t):
+    return ", ".join(r"$\left(%d;%d\right)$" % v for v in t["dinh"])
+
+
+def _kb_giai_dinh(t):
+    if t["bi_chan"]:
+        return r"Miền nghiệm là đa giác có %d đỉnh: %s.\\ " % (len(t["dinh"]), _kb_dinh_tex(t))
+    return (r"Miền nghiệm là miền không bị chặn, có %d đỉnh: %s.\\ " % (len(t["dinh"]), _kb_dinh_tex(t)))
+
+
+def _kb_F_tex(t):
+    return _F_tex(t["cx"], t["cy"])
+
+
+def _kb_giai_F(t):
+    bang = r"\\ ".join(r"$F\left(%d; %d\right) = %d$" % (X, Y, g) for (X, Y), g in zip(t["dinh"], t["F"]))
+    return (r"Gọi $F\left(x; y\right) = %s$ (nghìn đồng) là %s. $F$ đạt giá trị %s tại một đỉnh của miền nghiệm:\\ "
+            % (_kb_F_tex(t), t["F_ten"], t["cuc"]) + bang + r".\\ " +
+            r"Giá trị %s là $%d$ nghìn đồng, tại $\left(%d; %d\right)$, tức là %s."
+            % (t["cuc"], t["best"], t["opt"][0], t["opt"][1], t["ket"] % t["opt"]))
+
+
+def _kb_giai_toi_uu(t):
+    return _kb_giai_he(t) + "\\\\\n" + _kb_giai_dinh(t) + _kb_giai_F(t)
+
+
+def _kb_giai_diem(t, X, Y):
+    s = r"Với $x = %d$, $y = %d$: " % (X, Y)
+    s += ", ".join(r"%s bằng $%s$ %s" % (r["dk"], _so_vn(r["a"] * X + r["b"] * Y), r["dv"]) for r in t["rb"])
+    vp = _kb_thoa(t, X, Y)
+    return s + (r", nên phương án thoả mãn cả ba điều kiện." if not vp and len(t["rb"]) == 3 else
+                r", nên phương án thoả mãn mọi điều kiện." if not vp else
+                r", nên phương án vi phạm điều kiện về %s." % t["rb"][vp[0]]["dk"])
+
+
+def _kb_buoc(t):
+    return 50 if t["chia"] == 1000 else 2
+
+
+def _kb_so_hien(t, v):
+    return "$%s$ %s" % (_so_vn(Fraction(v, t["chia"])), t["dv_hien"])
+
+
+# ---- NB025: bất phương trình của MỘT điều kiện -----------------------------------------------
+
+def _kb_mc_bpt(KB, socau, dang, k):
+    cauTN = ""
+    for _ in range(socau):
+        t = KB()
+        r = t["rb"][k]
+        lhs = _kb_lhs(r)
+        dung = r"$%s %s %s$" % (lhs, r["dau"], _so_vn(r["c"]))
+        dao = r"\ge" if r["dau"] == r"\le" else r"\le"
+        ngat = "<" if r["dau"] == r"\le" else ">"
+        khac = t["rb"][(k + 1) % len(t["rb"])]["c"]
+        cands = [r"$%s %s %s$" % (lhs, dao, _so_vn(r["c"])),
+                 r"$%s %s %s$" % (_pc_lhs(r["b"], r["a"]), r["dau"], _so_vn(r["c"])),
+                 r"$%s %s %s$" % (lhs, ngat, _so_vn(r["c"])),
+                 r"$%s %s %s$" % (lhs, r["dau"], _so_vn(khac))]
+        ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s %s %s$" % (lhs, r["dau"], _so_vn(r["c"] + j)))
+        debai = t["de"] + r" Bất phương trình nào sau đây biểu thị điều kiện về %s?" % r["dk"]
+        giai = (r"%s là $%s$ (%s) và phải %s $%s$ (%s) nên dấu là $%s$ (có xét dấu bằng).\\ Vậy $%s %s %s$; lưu ý "
+                r"hệ số của $x$ là $%s$ và của $y$ là $%s$."
+                % (r["dk"][0].upper() + r["dk"][1:], lhs, r["dv"], _KB_TU_DAU[r["dau"]], _so_vn(r["c"]), r["dv"],
+                   r["dau"], lhs, r["dau"], _so_vn(r["c"]), _so_vn(r["a"]), _so_vn(r["b"])))
+        cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
+    return cauTN
+
+
+# ---- VD028 (VD): hệ, phương án khả thi, giá trị F của một phương án ---------------------------
+
+def _kb_mc_vd(KB, socau, dang, kieu):
+    cauTN = ""
+    dem = 0
+    while dem < socau:
+        t = KB()
+        if kieu == "he":
+            dung_dong = _kb_he_dung(t)
+            he = lambda ds: "$%s$" % _kb_he_tex(ds)
+            cands = []
+            for i, (a, b, c, d) in enumerate(dung_dong):
+                s = list(dung_dong); s[i] = (a, b, c, r"\ge" if d == r"\le" else r"\le"); cands.append(he(s))
+            for i, (a, b, c, d) in enumerate(dung_dong):
+                s = list(dung_dong); s[i] = (b, a, c, d); cands.append(he(s))
+            s = list(dung_dong); s[0] = (dung_dong[0][0], dung_dong[0][1], dung_dong[0][2], "<" if dung_dong[0][3] == r"\le" else ">")
+            cands.append(he(s))
+            ds = _ba_nhieu2(he(dung_dong), cands)
+            debai = t["de"] + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
+            cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _kb_giai_he(t), 0, 0, dang)
+            dem += 1
+            continue
+        K = max(max(v) for v in t["dinh"]) + 3
+        luoi = [(X, Y) for X in range(1, K) for Y in range(1, K)]
+        tot = [P for P in luoi if not _kb_thoa(t, *P)]
+        if kieu == "pa":
+            sai = [[P for P in luoi if _kb_thoa(t, *P) == [i]] for i in range(len(t["rb"]))]
+            ngoai = [P for P in luoi if _kb_thoa(t, *P)]
+            if not tot or not ngoai:
+                continue
+            chon = [_rd.choice(s) for s in sai if s]
+            while len(chon) < 3:
+                P = _rd.choice(ngoai)
+                if P not in chon:
+                    chon.append(P)
+            chon = chon[:3]
+            dung_pt = _rd.choice(tot)
+            fmt = lambda P: r"$\left(%d; %d\right)$" % P
+            gi = r"Thay từng cặp vào các bất phương trình của hệ:\\ " + r"\\ ".join(
+                r"Cặp $\left(%d; %d\right)$: %s" % (X, Y, _kb_giai_diem(t, X, Y)) for X, Y in [dung_pt] + chon)
+            gi += r"\\ Vậy chọn cặp $\left(%d; %d\right)$." % dung_pt
+            debai = (t["de"] + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án thoả mãn mọi điều "
+                     r"kiện của bài toán?")
+            cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
+            dem += 1
+        else:                                                                   # "gt": F tại một phương án khả thi
+            if not tot:
+                continue
+            X, Y = _rd.choice([P for P in tot if P[0] <= K - 3 and P[1] <= K - 3] or tot)
+            v = t["cx"] * X + t["cy"] * Y
+            st = _kb_buoc(t)
+            ds = _ba_nhieu2(_kb_so_hien(t, v), [_kb_so_hien(t, t["cx"] * Y + t["cy"] * X), _kb_so_hien(t, v + st),
+                                                 _kb_so_hien(t, v - st), _kb_so_hien(t, t["cx"] + t["cy"])],
+                            buoc=lambda k: _kb_so_hien(t, v + 2 * st * k))
+            debai = (t["de"] + r" Một phương án %s (thoả mãn mọi điều kiện của bài toán). "
+                     % (t["pa_xy"] % (X, Y)) + _hoa(r"%s của phương án đó là" % t["F_ten"]))
+            giai = _hoa(r"%s là $%d\cdot %d + %d\cdot %d = %d$ (nghìn đồng), tức là %s."
+                        % (t["F_ten"], t["cx"], X, t["cy"], Y, v, _kb_so_hien(t, v)))
+            cauTN += MC_SA_answer_text(debai, _kb_so_hien(t, v), ds, giai, 0, 0, dang)
+            dem += 1
+    return cauTN
+
+
+# ---- VD028 (VDC): giá trị tối ưu, số lượng ở phương án tối ưu (MC và SA) ----------------------
+
+def _kb_toi_uu(KB, socau, dang, hoi, sa):
+    cau = ""
+    for _ in range(socau):
+        t = KB()
+        dinh, F = t["dinh"], t["F"]
+        st = _kb_buoc(t)
+        if hoi == "gt":
+            dap = t["best"]
+            khac = [g for g in F if g != dap and g > 0] + [dap + st, dap - st, dap + 2 * st]
+            hien = (lambda v: str(v)) if sa else (lambda v: _kb_so_hien(t, v))
+            cau_hoi = t["q_gt"] + (r" (đơn vị: nghìn đồng)" if sa else "")
+        else:
+            i = 0 if hoi == "x" else 1
+            dap = t["opt"][i]
+            khac = [d[i] for d in dinh] + [dap + 1, dap + 2, dap + 3]
+            hien = (lambda v: str(v)) if sa else (lambda v: "$%d$" % v)
+            cau_hoi = t["q_x"] if hoi == "x" else t["q_y"]
+        ds = _ba_nhieu2(hien(dap), [hien(v) for v in dict.fromkeys(khac) if v != dap and v > 0],
+                        buoc=lambda k: hien(dap + k + 3))
+        cau += MC_SA_answer_text(t["de"] + " " + cau_hoi, hien(dap), ds, _kb_giai_toi_uu(t), 0, 0, dang)
+    return cau
+
+
+# ---- VD028 (VD) trả lời ngắn: số đỉnh, giới hạn khi chỉ dùng một loại ----------------------------
+
+def _kb_sa_vd(KB, socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        t = KB()
+        if hoi == "dinh":
+            dap = len(t["dinh"])
+            khac = [dap - 1, dap + 1, dap + 2]
+            cau_hoi = (r"Miền nghiệm của hệ bất phương trình mô tả các điều kiện của bài toán có bao nhiêu đỉnh?")
+            giai = _kb_giai_he(t) + "\\\\\n" + _kb_giai_dinh(t)
+        else:
+            i = 0 if hoi == "xcuc" else 1
+            dap = max(v[i] for v in t["dinh"])
+            khac = [dap + 1, dap - 1, dap + 2]
+            cau_hoi = t["q_xcuc"] if i == 0 else t["q_ycuc"]
+            bien = "x" if i == 0 else "y"
+            kho = t["so_y"] if i == 0 else t["so_x"]
+            gh = []
+            for r in t["rb"]:
+                he_so = r["a"] if i == 0 else r["b"]
+                fr = Fraction(r["c"]) / Fraction(he_so)
+                gh.append(r"$%s %s %s$, tức là $%s %s %s$"
+                          % (_pc_hs(he_so, bien), r["dau"], _so_vn(r["c"]), bien, r["dau"],
+                             _tfa_ps(fr.numerator, fr.denominator)))
+            giai = (r"Khi %s bằng $0$ thì mỗi điều kiện cho một giới hạn của $%s$:\\ " % (kho, bien) +
+                    r"\\ ".join(gh) + r".\\ " +
+                    (r"Giá trị thoả mãn cả ba giới hạn phải bé hơn hoặc bằng giới hạn nhỏ nhất, nên lớn nhất là $%d$."
+                     if t["kind"] == "max" else
+                     r"Giá trị thoả mãn cả ba giới hạn phải lớn hơn hoặc bằng giới hạn lớn nhất, nên nhỏ nhất là $%d$.")
+                    % dap)
+        ds = _ba_nhieu2(str(dap), [str(v) for v in khac if v != dap and v > 0], buoc=lambda k: str(dap + k + 2))
+        cau += MC_SA_answer_text(t["de"] + " " + cau_hoi, str(dap), ds, giai, 0, 0, dang)
+    return cau
+
+
+# ---- Tự luận 2 ý -------------------------------------------------------------------------------
+
+def _kb_tl(KB, socau, dong):
+    cauTN = ""
+    for _ in range(socau):
+        t = KB()
+        ds_abcd = [
+            (r"Lập hệ bất phương trình mô tả các điều kiện của bài toán.",
+             _kb_he_tex(_kb_he_dung(t)), _kb_giai_he(t)),
+            (t["q_tl_b"], r"\left(%d; %d\right)" % t["opt"], _kb_giai_dinh(t) + _kb_giai_F(t)),
+        ]
+        cauTN += TL_answer_text(t["de"], ds_abcd, 0, 0, dong)
+    return cauTN
+
+
+# ---- Đúng/Sai theo chương ----------------------------------------------------------------------
+
+def _kb_tf(KB, socau, socot):
+    cauTF = ""
+    for _ in range(socau):
+        t = KB()
+        rb, dinh, st = t["rb"], t["dinh"], _kb_buoc(t)
+        debai = t["de"] + r" Xét tính đúng sai của các khẳng định sau:"
+
+        # a) NB - bất phương trình của từng điều kiện
+        ly_a = _kb_giai_he(t)
+        dung_a = [(r"Điều kiện về %s được biểu thị bởi bất phương trình $%s %s %s$"
+                   % (r["dk"], _kb_lhs(r), r["dau"], _so_vn(r["c"])), ly_a) for r in rb]
+        dung_a.append((r"Hai điều kiện $x \ge 0$, $y \ge 0$ xuất hiện vì số lượng không âm", ly_a))
+        sai_a = [(r"Điều kiện về %s được biểu thị bởi bất phương trình $%s %s %s$"
+                  % (r["dk"], _kb_lhs(r), r"\ge" if r["dau"] == r"\le" else r"\le", _so_vn(r["c"])), ly_a) for r in rb]
+        sai_a.append((r"Điều kiện về %s được biểu thị bởi bất phương trình $%s %s %s$"
+                      % (rb[0]["dk"], _kb_lhs(rb[0]), "<" if rb[0]["dau"] == r"\le" else ">", _so_vn(rb[0]["c"])), ly_a))
+        sai_a.append((r"Điều kiện về %s được biểu thị bởi bất phương trình $%s %s %s$"
+                      % (rb[0]["dk"], _pc_lhs(rb[0]["b"], rb[0]["a"]), rb[0]["dau"], _so_vn(rb[0]["c"])), ly_a))
+        y1 = _tfa_ds(dung_a, sai_a)
+
+        # b) TH - phương án có thoả mãn mọi điều kiện không (tính trực tiếp)
+        K = max(max(v) for v in dinh) + 3
+        luoi = [(X, Y) for X in range(1, K) for Y in range(1, K)]
+        tot = [P for P in luoi if not _kb_thoa(t, *P)]
+        ngoai = [P for P in luoi if _kb_thoa(t, *P)]
+        sai_pt = [[P for P in luoi if _kb_thoa(t, *P) == [i]] for i in range(len(rb))]
+        diem = [t["opt"], _rd.choice(tot)] + [_rd.choice(s) for s in sai_pt if s] + [_rd.choice(ngoai)]
+        dung_b, sai_b = [], []
+        for X, Y in dict.fromkeys(diem):
+            ok = not _kb_thoa(t, X, Y)
+            gd = _kb_giai_diem(t, X, Y)
+            (dung_b if ok else sai_b).append((r"Phương án %s thoả mãn mọi điều kiện của bài toán" % (t["pa_xy"] % (X, Y)), gd))
+            (sai_b if ok else dung_b).append((r"Phương án %s không thoả mãn mọi điều kiện của bài toán" % (t["pa_xy"] % (X, Y)), gd))
+        y2 = _tfa_ds(dung_b, sai_b)
+
+        # c) VD - miền nghiệm: số đỉnh, bị chặn hay không, các đỉnh
+        ly_c = _kb_giai_dinh(t)
+        gia = [(vx + dx, vy + dy) for vx, vy in dinh for dx in (-1, 1) for dy in (-1, 1)
+               if vx + dx >= 0 and vy + dy >= 0 and (vx + dx, vy + dy) not in dinh]
+        gia = _rd.sample(list(dict.fromkeys(gia)), 3)
+        thuc = _rd.sample(dinh, 3)
+        k = len(dinh)
+        dung_c = [(r"Miền nghiệm của hệ có đúng $%d$ đỉnh" % k, ly_c),
+                  (r"Miền nghiệm của hệ là một miền %s" % ("bị chặn" if t["bi_chan"] else "không bị chặn"), ly_c)]
+        dung_c += [(r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % P, ly_c) for P in thuc]
+        sai_c = [(r"Miền nghiệm của hệ có đúng $%d$ đỉnh" % (k - 1), ly_c),
+                 (r"Miền nghiệm của hệ có đúng $%d$ đỉnh" % (k + 1), ly_c),
+                 (r"Miền nghiệm của hệ là một miền %s" % ("không bị chặn" if t["bi_chan"] else "bị chặn"), ly_c)]
+        sai_c += [(r"Điểm $\left(%d; %d\right)$ là một đỉnh của miền nghiệm" % P, ly_c) for P in gia]
+        y3 = _tfa_ds(dung_c, sai_c)
+
+        # d) VDC - giá trị tối ưu và phương án tối ưu
+        ly_d = _kb_giai_F(t)
+        xa = max(v[0] for v in dinh)
+        yb = max(v[1] for v in dinh)
+        khac_dinh = [v for v in dinh if v != t["opt"] and v != (0, 0)]
+        sai_gt = []
+        for g in [t["best"] + 2 * st] + [g for g in sorted(t["F"]) if g != t["best"] and g > 0] + [t["best"] - 2 * st]:
+            if g != t["best"] and g > 0 and g not in sai_gt:
+                sai_gt.append(g)
+        dung_d = [(_hoa(r"%s bằng %s" % (t["F_cuc"], _kb_so_hien(t, t["best"]))), ly_d),
+                  (_hoa(r"%s đạt được khi %s" % (t["F_cuc"], t["pa_xy"] % t["opt"])), ly_d),
+                  (r"Nếu chỉ %s thì %s là %s" % (t["pa_x"] % xa, t["F_ten"], _kb_so_hien(t, t["cx"] * xa)), ly_d),
+                  (r"Nếu chỉ %s thì %s là %s" % (t["pa_y"] % yb, t["F_ten"], _kb_so_hien(t, t["cy"] * yb)), ly_d)]
+        V = _rd.choice(khac_dinh)
+        dung_d.append((r"Nếu %s thì %s là %s" % (t["pa_xy"] % V, t["F_ten"], _kb_so_hien(t, t["cx"] * V[0] + t["cy"] * V[1])), ly_d))
+        sai_d = [(_hoa(r"%s bằng %s" % (t["F_cuc"], _kb_so_hien(t, g))), ly_d) for g in sai_gt[:2]]
+        sai_d += [(_hoa(r"%s đạt được khi %s" % (t["F_cuc"], t["pa_xy"] % W)), ly_d) for W in khac_dinh[:2]]
+        sai_d.append((r"Nếu chỉ %s thì %s là %s" % (t["pa_x"] % xa, t["F_ten"], _kb_so_hien(t, t["cx"] * xa + st)), ly_d))
+        y4 = _tfa_ds(dung_d, sai_d)
+
+        cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
+    return cauTF
+
+# ---- Tình huống 2: các hàm mỏng gọi khung chung ----
+def L10_C2_B3_NB025_MC_C_01(socau, dang=1):
+    """Tình huống 2: bất phương trình của điều kiện thứ 1."""
+    return _kb_mc_bpt(_kb2_sinh, socau, dang, 0)
+
+def L10_C2_B3_NB025_MC_C_02(socau, dang=1):
+    """Tình huống 2: bất phương trình của điều kiện thứ 2."""
+    return _kb_mc_bpt(_kb2_sinh, socau, dang, 1)
+
+def L10_C2_B3_NB025_MC_C_03(socau, dang=1):
+    """Tình huống 2: bất phương trình của điều kiện thứ 3."""
+    return _kb_mc_bpt(_kb2_sinh, socau, dang, 2)
+
+def L10_C2_B4_VD028_MC_D_01(socau, dang=1):
+    """Tình huống 2 (VD): chọn hệ bất phương trình."""
+    return _kb_mc_vd(_kb2_sinh, socau, dang, "he")
+
+def L10_C2_B4_VD028_MC_D_02(socau, dang=1):
+    """Tình huống 2 (VD): chọn phương án thoả mãn."""
+    return _kb_mc_vd(_kb2_sinh, socau, dang, "pa")
+
+def L10_C2_B4_VD028_MC_D_03(socau, dang=1):
+    """Tình huống 2 (VD): giá trị F của một phương án."""
+    return _kb_mc_vd(_kb2_sinh, socau, dang, "gt")
+
+def L10_C2_B4_VD028_SA_D_01(socau, dang=2):
+    """Tình huống 2 (VD): số đỉnh của miền nghiệm."""
+    return _kb_sa_vd(_kb2_sinh, socau, dang, "dinh")
+
+def L10_C2_B4_VD028_SA_D_02(socau, dang=2):
+    """Tình huống 2 (VD): giới hạn khi chỉ dùng loại thứ nhất."""
+    return _kb_sa_vd(_kb2_sinh, socau, dang, "xcuc")
+
+def L10_C2_B4_VD028_SA_D_03(socau, dang=2):
+    """Tình huống 2 (VD): giới hạn khi chỉ dùng loại thứ hai."""
+    return _kb_sa_vd(_kb2_sinh, socau, dang, "ycuc")
+
+def L10_C2_B4_VD028_MC_E_01(socau, dang=1):
+    """Tình huống 2 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "gt", False)
+
+def L10_C2_B4_VD028_MC_E_02(socau, dang=1):
+    """Tình huống 2 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "x", False)
+
+def L10_C2_B4_VD028_MC_E_03(socau, dang=1):
+    """Tình huống 2 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "y", False)
+
+def L10_C2_B4_VD028_SA_E_01(socau, dang=2):
+    """Tình huống 2 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "gt", True)
+
+def L10_C2_B4_VD028_SA_E_02(socau, dang=2):
+    """Tình huống 2 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "x", True)
+
+def L10_C2_B4_VD028_SA_E_03(socau, dang=2):
+    """Tình huống 2 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb2_sinh, socau, dang, "y", True)
+
+def L10_C2_B4_VD028_TL_C_01(socau, dong=1):
+    """Tình huống 2: tự luận 2 ý (a lập hệ, b tối ưu)."""
+    return _kb_tl(_kb2_sinh, socau, dong)
+
+def L10_C2_TF_D_01(socau, socot=1):
+    """Tình huống 2: đúng/sai theo chương, bốn ý."""
+    # Bốn ý tăng dần độ khó (xem _kb_tf):
+    # a) NB: bất phương trình của từng điều kiện
+    # b) TH: phương án có thoả mãn mọi điều kiện không
+    # c) VD: miền nghiệm (số đỉnh, bị chặn, các đỉnh)
+    # d) VDC: giá trị và phương án tối ưu
+    return _kb_tf(_kb2_sinh, socau, socot)
+
+
+# ---- Tình huống 3: các hàm mỏng gọi khung chung ----
+def L10_C2_B3_NB025_MC_D_01(socau, dang=1):
+    """Tình huống 3: bất phương trình của điều kiện thứ 1."""
+    return _kb_mc_bpt(_kb3_sinh, socau, dang, 0)
+
+def L10_C2_B3_NB025_MC_D_02(socau, dang=1):
+    """Tình huống 3: bất phương trình của điều kiện thứ 2."""
+    return _kb_mc_bpt(_kb3_sinh, socau, dang, 1)
+
+def L10_C2_B4_VD028_MC_F_01(socau, dang=1):
+    """Tình huống 3 (VD): chọn hệ bất phương trình."""
+    return _kb_mc_vd(_kb3_sinh, socau, dang, "he")
+
+def L10_C2_B4_VD028_MC_F_02(socau, dang=1):
+    """Tình huống 3 (VD): chọn phương án thoả mãn."""
+    return _kb_mc_vd(_kb3_sinh, socau, dang, "pa")
+
+def L10_C2_B4_VD028_MC_F_03(socau, dang=1):
+    """Tình huống 3 (VD): giá trị F của một phương án."""
+    return _kb_mc_vd(_kb3_sinh, socau, dang, "gt")
+
+def L10_C2_B4_VD028_SA_F_01(socau, dang=2):
+    """Tình huống 3 (VD): số đỉnh của miền nghiệm."""
+    return _kb_sa_vd(_kb3_sinh, socau, dang, "dinh")
+
+def L10_C2_B4_VD028_SA_F_02(socau, dang=2):
+    """Tình huống 3 (VD): giới hạn khi chỉ dùng loại thứ nhất."""
+    return _kb_sa_vd(_kb3_sinh, socau, dang, "xcuc")
+
+def L10_C2_B4_VD028_SA_F_03(socau, dang=2):
+    """Tình huống 3 (VD): giới hạn khi chỉ dùng loại thứ hai."""
+    return _kb_sa_vd(_kb3_sinh, socau, dang, "ycuc")
+
+def L10_C2_B4_VD028_MC_G_01(socau, dang=1):
+    """Tình huống 3 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "gt", False)
+
+def L10_C2_B4_VD028_MC_G_02(socau, dang=1):
+    """Tình huống 3 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "x", False)
+
+def L10_C2_B4_VD028_MC_G_03(socau, dang=1):
+    """Tình huống 3 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "y", False)
+
+def L10_C2_B4_VD028_SA_G_01(socau, dang=2):
+    """Tình huống 3 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "gt", True)
+
+def L10_C2_B4_VD028_SA_G_02(socau, dang=2):
+    """Tình huống 3 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "x", True)
+
+def L10_C2_B4_VD028_SA_G_03(socau, dang=2):
+    """Tình huống 3 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb3_sinh, socau, dang, "y", True)
+
+def L10_C2_B4_VD028_TL_D_01(socau, dong=1):
+    """Tình huống 3: tự luận 2 ý (a lập hệ, b tối ưu)."""
+    return _kb_tl(_kb3_sinh, socau, dong)
+
+def L10_C2_TF_E_01(socau, socot=1):
+    """Tình huống 3: đúng/sai theo chương, bốn ý."""
+    # Bốn ý tăng dần độ khó (xem _kb_tf):
+    # a) NB: bất phương trình của từng điều kiện
+    # b) TH: phương án có thoả mãn mọi điều kiện không
+    # c) VD: miền nghiệm (số đỉnh, bị chặn, các đỉnh)
+    # d) VDC: giá trị và phương án tối ưu
+    return _kb_tf(_kb3_sinh, socau, socot)
+
+
+# ---- Tình huống 4: các hàm mỏng gọi khung chung ----
+def L10_C2_B3_NB025_MC_E_01(socau, dang=1):
+    """Tình huống 4: bất phương trình của điều kiện thứ 1."""
+    return _kb_mc_bpt(_kb4_sinh, socau, dang, 0)
+
+def L10_C2_B3_NB025_MC_E_02(socau, dang=1):
+    """Tình huống 4: bất phương trình của điều kiện thứ 2."""
+    return _kb_mc_bpt(_kb4_sinh, socau, dang, 1)
+
+def L10_C2_B3_NB025_MC_E_03(socau, dang=1):
+    """Tình huống 4: bất phương trình của điều kiện thứ 3."""
+    return _kb_mc_bpt(_kb4_sinh, socau, dang, 2)
+
+def L10_C2_B4_VD028_MC_H_01(socau, dang=1):
+    """Tình huống 4 (VD): chọn hệ bất phương trình."""
+    return _kb_mc_vd(_kb4_sinh, socau, dang, "he")
+
+def L10_C2_B4_VD028_MC_H_02(socau, dang=1):
+    """Tình huống 4 (VD): chọn phương án thoả mãn."""
+    return _kb_mc_vd(_kb4_sinh, socau, dang, "pa")
+
+def L10_C2_B4_VD028_MC_H_03(socau, dang=1):
+    """Tình huống 4 (VD): giá trị F của một phương án."""
+    return _kb_mc_vd(_kb4_sinh, socau, dang, "gt")
+
+def L10_C2_B4_VD028_SA_H_01(socau, dang=2):
+    """Tình huống 4 (VD): số đỉnh của miền nghiệm."""
+    return _kb_sa_vd(_kb4_sinh, socau, dang, "dinh")
+
+def L10_C2_B4_VD028_SA_H_02(socau, dang=2):
+    """Tình huống 4 (VD): giới hạn khi chỉ dùng loại thứ nhất."""
+    return _kb_sa_vd(_kb4_sinh, socau, dang, "xcuc")
+
+def L10_C2_B4_VD028_SA_H_03(socau, dang=2):
+    """Tình huống 4 (VD): giới hạn khi chỉ dùng loại thứ hai."""
+    return _kb_sa_vd(_kb4_sinh, socau, dang, "ycuc")
+
+def L10_C2_B4_VD028_MC_I_01(socau, dang=1):
+    """Tình huống 4 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "gt", False)
+
+def L10_C2_B4_VD028_MC_I_02(socau, dang=1):
+    """Tình huống 4 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "x", False)
+
+def L10_C2_B4_VD028_MC_I_03(socau, dang=1):
+    """Tình huống 4 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "y", False)
+
+def L10_C2_B4_VD028_SA_I_01(socau, dang=2):
+    """Tình huống 4 (VDC): giá trị tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "gt", True)
+
+def L10_C2_B4_VD028_SA_I_02(socau, dang=2):
+    """Tình huống 4 (VDC): số lượng loại thứ nhất ở phương án tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "x", True)
+
+def L10_C2_B4_VD028_SA_I_03(socau, dang=2):
+    """Tình huống 4 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
+    return _kb_toi_uu(_kb4_sinh, socau, dang, "y", True)
+
+def L10_C2_B4_VD028_TL_E_01(socau, dong=1):
+    """Tình huống 4: tự luận 2 ý (a lập hệ, b tối ưu)."""
+    return _kb_tl(_kb4_sinh, socau, dong)
+
+def L10_C2_TF_F_01(socau, socot=1):
+    """Tình huống 4: đúng/sai theo chương, bốn ý."""
+    # Bốn ý tăng dần độ khó (xem _kb_tf):
+    # a) NB: bất phương trình của từng điều kiện
+    # b) TH: phương án có thoả mãn mọi điều kiện không
+    # c) VD: miền nghiệm (số đỉnh, bị chặn, các đỉnh)
+    # d) VDC: giá trị và phương án tối ưu
+    return _kb_tf(_kb4_sinh, socau, socot)
+
+
+# =============================================================================================
+# DIỆN TÍCH MIỀN NGHIỆM LÀ TAM GIÁC (VD028, ngoai_yccd) - cô Lan 09/10/2026
+# Hệ 3 bất phương trình: hai bất phương trình xiên + MỘT bất phương trình song song với Ox hoặc Oy.
+#   - Không tham số (VD): hỏi diện tích, toạ độ đỉnh, độ dài cạnh trên đường song song, ...
+#   - Có tham số m ở bất phương trình song song, cho diện tích, tìm m (VDC): chỉ một trong hai nghiệm
+#     của (m - m0)^2 = h^2 cho miền nghiệm là tam giác, nghiệm kia làm miền nghiệm rỗng.
+# Cách làm: chọn trước đỉnh A và hai đỉnh B, C trên đường thẳng song song, rồi viết hai đường thẳng AB, AC
+# (nên mọi đỉnh nguyên). Diện tích nguyên.
+# =============================================================================================
+
+def _dt_lhs(a, b):
+    """a x + b y (a khác 0) viết gọn, có xét dấu."""
+    s = ("-" if a < 0 else "") + _pc_hs(abs(a), "x")
+    if b:
+        s += (" - " if b < 0 else " + ") + _pc_hs(abs(b), "y")
+    return s
+
+
+def _dt_frac(f):
+    f = Fraction(f)
+    if f.denominator == 1:
+        return "%d" % f.numerator
+    return r"\dfrac{%d}{%d}" % (f.numerator, f.denominator)
+
+
+def _dt_cf(f, sep=""):
+    """Hệ số đứng trước biểu thức: bỏ nếu bằng 1."""
+    return "" if Fraction(f) == 1 else _dt_frac(f) + sep
+
+
+def _dt_sinh(tham):
+    """Sinh một hệ; trả dict mô tả (xem các khoá bên dưới)."""
+    while True:
+        xa, ya = _rd.randint(-3, 4), _rd.randint(-3, 3)
+        h = _rd.choice([-5, -4, -3, -2, 2, 3, 4, 5])
+        k = ya + h
+        p1, p2 = sorted(_rd.sample([p for p in range(-6, 7) if p], 2))
+        if (p2 - p1) * abs(h) % 2:
+            continue
+        S = (p2 - p1) * abs(h) // 2
+        if not 3 <= S <= 60:
+            continue
+        ds = []
+        for p in (p1, p2):
+            a, b, c = h, -p, h * xa - p * ya
+            g = _math.gcd(_math.gcd(abs(a), abs(b)), abs(c))
+            ds.append((a // g, b // g, c // g))
+        if max(max(abs(a), abs(b)) for a, b, c in ds) > 7 or max(abs(c) for a, b, c in ds) > 40:
+            continue
+        A, B, C = (xa, ya), (xa + p1, k), (xa + p2, k)
+        if max(max(abs(u), abs(v)) for u, v in (A, B, C)) > 12:
+            continue
+        par = "y"
+        if _rd.random() < 0.5:                                    # song song Oy: đổi vai trò x, y
+            par = "x"
+            ds = [(b, a, c) for a, b, c in ds]
+            A, B, C = (A[1], A[0]), (B[1], B[0]), (C[1], C[0])
+        ds = [(a, b, c) if a > 0 else (-a, -b, -c) for a, b, c in ds]
+        i = 1 if par == "y" else 0                                # chỉ số biến bị chặn bởi bất phương trình song song
+        G = [Fraction(A[j] + B[j] + C[j], 3) for j in (0, 1)]
+        lines = []
+        for a, b, c in ds:
+            v = a * G[0] + b * G[1] - c
+            lines.append((a, b, c, r"\le" if v < 0 else r"\ge"))
+        pdau = r"\le" if G[i] < k else r"\ge"
+        base = p2 - p1
+        return dict(tham=tham, par=par, i=i, k=k, pdau=pdau, lines=lines, A=A, B=B, C=C, S=S, base=base,
+                    h=abs(h), c0=Fraction(base, 2 * abs(h)), a_par=A[i], m_dung=k, m_sai=2 * A[i] - k)
+
+
+def _dt_par_tex(d, gtri):
+    return r"%s %s %s" % (d["par"], d["pdau"], gtri)
+
+
+def _dt_he(d, gtri=None, thutu=None):
+    """Hệ ba bất phương trình (thứ tự cố định theo d['thutu'] cho cả đề và lời giải)."""
+    gtri = _so_vn(d["k"]) if gtri is None else gtri
+    dong = ["%s %s %s" % (_dt_lhs(a, b), dau, _so_vn(c)) for a, b, c, dau in d["lines"]] + [_dt_par_tex(d, gtri)]
+    dong = [dong[j] for j in d["thutu"]]
+    return r"\heva{& " + r" \\ & ".join(dong) + "}"
+
+
+def _dt_chuan(d):
+    d["thutu"] = _rd.sample(range(3), 3)
+    return d
+
+
+def _dt_diem(P):
+    return r"\left(%d; %d\right)" % P
+
+
+def _dt_giai_vd(d):
+    """Lời giải chung cho hệ không tham số."""
+    (a1, b1, c1, _), (a2, b2, c2, _) = d["lines"]
+    var, other = ("y", "x") if d["par"] == "y" else ("x", "y")
+    j = 1 - d["i"]
+    return (r"Gọi hai đường thẳng $%s = %s$ và $%s = %s$ lần lượt là $(d_1)$, $(d_2)$, còn $%s = %s$ là $(\Delta)$.\\ "
+            % (_dt_lhs(a1, b1), _so_vn(c1), _dt_lhs(a2, b2), _so_vn(c2), var, _so_vn(d["k"])) +
+            r"$(d_1)$ cắt $(d_2)$ tại $A%s$; $(d_1)$ cắt $(\Delta)$ tại $B%s$; $(d_2)$ cắt $(\Delta)$ tại $C%s$.\\ "
+            % (_dt_diem(d["A"]), _dt_diem(d["B"]), _dt_diem(d["C"])) +
+            r"Miền nghiệm của hệ là tam giác $ABC$.\\ "
+            r"Cạnh $BC$ nằm trên $(\Delta)$ nên $BC = |%d - (%d)| = %d$; khoảng cách từ $A$ đến $(\Delta)$ là $|%d - %d| = %d$.\\ "
+            % (d["B"][j], d["C"][j], d["base"], d["A"][d["i"]], d["k"], d["h"]) +
+            r"Diện tích $S = \dfrac{1}{2}\cdot %d\cdot %d = %d$." % (d["base"], d["h"], d["S"]))
+
+
+def _dt_giai_tham(d):
+    """Lời giải chung cho hệ có tham số m."""
+    (a1, b1, c1, _), (a2, b2, c2, _) = d["lines"]
+    var = d["par"]
+    m0 = d["a_par"]
+    km = Fraction(d["base"], d["h"])
+    dm = ("m" if m0 == 0 else "m - %d" % m0 if m0 > 0 else "m + %d" % -m0)
+    dk = ("m > %d" if (d["pdau"] == r"\le") else "m < %d") % m0
+    return (r"Hai đường thẳng $%s = %s$ và $%s = %s$ cắt nhau tại $A%s$.\\ " % (
+                _dt_lhs(a1, b1), _so_vn(c1), _dt_lhs(a2, b2), _so_vn(c2), _dt_diem(d["A"])) +
+            r"Để miền nghiệm là tam giác thì đường thẳng $%s = m$ phải cắt hai đường thẳng trên và $A$ nằm cùng phía "
+            r"với miền nghiệm, tức là $%s$ (nếu không miền nghiệm rỗng hoặc chỉ là một điểm).\\ " % (var, dk) +
+            r"Khi đó đường thẳng $%s = m$ cắt hai đường thẳng tại $B$, $C$ với $BC = %s|%s|$ và khoảng cách từ $A$ đến "
+            r"đường thẳng đó là $|%s|$.\\ " % (var, _dt_cf(km, r"\,"), dm, dm) +
+            r"Diện tích $S = \dfrac{1}{2}\cdot BC\cdot |%s| = %s\left(%s\right)^2$." % (dm, _dt_cf(d["c0"]), dm))
+
+
+def _dt_giai_m(d):
+    m0 = d["a_par"]
+    dm = ("m" if m0 == 0 else "m - %d" % m0 if m0 > 0 else "m + %d" % -m0)
+    dk = ("m > %d" if (d["pdau"] == r"\le") else "m < %d") % m0
+    return (r"Theo đề, $%s\left(%s\right)^2 = %d$, suy ra $\left(%s\right)^2 = %d$, tức là $%s = \pm %d$.\\ "
+            % (_dt_cf(d["c0"]), dm, d["S"], dm, d["h"] ** 2, dm, d["h"]) +
+            r"Nghiệm $m = %d$ và $m = %d$. Điều kiện của tam giác là $%s$ nên chọn $m = %d$ (nghiệm $m = %d$ làm miền "
+            r"nghiệm rỗng)." % (d["m_dung"], d["m_sai"], dk, d["m_dung"], d["m_sai"]))
+
+
+def _dt_tex_he(d, tham):
+    gt = "m" if tham else None
+    return "$%s$" % _dt_he(d, gt)
+
+
+def _dt_de_vd(d):
+    return (r"Cho hệ bất phương trình $%s$. Biết miền nghiệm của hệ là một tam giác." % _dt_he(d))
+
+
+def _dt_de_tham(d):
+    return (r"Cho hệ bất phương trình $%s$ ($m$ là tham số). Biết miền nghiệm của hệ là một tam giác có diện tích "
+            r"bằng $%d$ (đơn vị diện tích)." % (_dt_he(d, "m"), d["S"]))
+
+
+def _dt_kt(tham):
+    return _dt_chuan(_dt_sinh(tham))
+
+
+def _dt_mc_vd(socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(False)
+        S = d["S"]
+        if hoi == "dt":
+            dap = str(S)
+            cands = [str(2 * S), str(S + 1), str(S - 1), str(S + 2)]
+            cauhoi = r" Diện tích của miền nghiệm đó bằng bao nhiêu (đơn vị diện tích)?"
+            bd = lambda k: str(S + k + 2)
+        elif hoi == "dinh":
+            A = d["A"]
+            dap = "$%s$" % _dt_diem(A)
+            cands = ["$%s$" % _dt_diem(P) for P in [(A[1], A[0]), (-A[0], A[1]), (A[0], -A[1]), d["B"], (A[0] + 1, A[1])]]
+            cauhoi = (r" Đỉnh của tam giác đó không nằm trên đường thẳng $%s = %s$ có toạ độ là" % (d["par"], _so_vn(d["k"])))
+            bd = lambda k: "$%s$" % _dt_diem((A[0] + k, A[1] - k))
+        else:                                                         # "canh": độ dài cạnh trên đường thẳng song song
+            dap = str(d["base"])
+            cands = [str(d["base"] + 1), str(d["base"] - 1), str(2 * d["base"]), str(d["h"])]
+            cauhoi = r" Độ dài cạnh của tam giác đó nằm trên đường thẳng $%s = %s$ bằng" % (d["par"], _so_vn(d["k"]))
+            bd = lambda k: str(d["base"] + k + 1)
+        ds = _ba_nhieu2(dap, [c for c in cands if c != dap and not c.startswith("0") and "-" not in c or c.startswith("$")],
+                        buoc=bd)
+        cau += MC_SA_answer_text(_dt_de_vd(d) + cauhoi, dap, ds, _dt_giai_vd(d), 0, 0, dang)
+    return cau
+
+
+def _dt_sa_vd(socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(False)
+        if hoi == "dt":
+            dap = d["S"]
+            cauhoi = r" Tính diện tích của miền nghiệm đó (đơn vị diện tích)."
+        else:
+            dap = sum(P[0] + P[1] for P in (d["A"], d["B"], d["C"]))
+            cauhoi = r" Tính tổng của tất cả các hoành độ và tung độ của ba đỉnh tam giác đó."
+        giai = _dt_giai_vd(d)
+        if hoi != "dt":
+            giai += (r"\\ Tổng cần tìm: $(%d + %d) + (%d + %d) + (%d + %d) = %d$."
+                     % (d["A"][0], d["A"][1], d["B"][0], d["B"][1], d["C"][0], d["C"][1], dap))
+        ds = _ba_nhieu2(str(dap), [str(dap + 1), str(dap - 1), str(2 * dap)], buoc=lambda k: str(dap + k + 2))
+        cau += MC_SA_answer_text(_dt_de_vd(d) + cauhoi, str(dap), ds, giai, 0, 0, dang)
+    return cau
+
+
+def _dt_mc_vdc(socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(True)
+        md, ms, h = d["m_dung"], d["m_sai"], d["h"]
+        if hoi == "m":
+            dap = "$m = %d$" % md
+            cands = ["$m = %d$" % v for v in (ms, d["a_par"] + 2 * h * (1 if md > d["a_par"] else -1), md + 1, md - 1)]
+            cauhoi = r" Giá trị của $m$ là"
+            bd = lambda k: "$m = %d$" % (md + k + 1)
+        else:                                                         # "tap": tập các giá trị m
+            dap = r"$m \in \left\{%d\right\}$" % md
+            both = sorted((md, ms))
+            cands = [r"$m \in \left\{%d; %d\right\}$" % tuple(both), r"$m \in \left\{%d\right\}$" % ms, r"$m \in \varnothing$"]
+            cauhoi = r" Tập hợp tất cả các giá trị của $m$ thoả mãn là"
+            bd = lambda k: r"$m \in \left\{%d\right\}$" % (md + k + 1)
+        ds = _ba_nhieu2(dap, cands, buoc=bd)
+        cau += MC_SA_answer_text(_dt_de_tham(d) + cauhoi, dap, ds, _dt_giai_tham(d) + "\\\\\n" + _dt_giai_m(d), 0, 0, dang)
+    return cau
+
+
+def _dt_sa_vdc(socau, dang, hoi):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(True)
+        if hoi == "m":
+            dap = d["m_dung"]
+            cauhoi = r" Tìm giá trị của $m$."
+            extra = ""
+        else:
+            dap = d["base"]
+            cauhoi = r" Tính độ dài cạnh của tam giác nằm trên đường thẳng $%s = m$." % d["par"]
+            extra = (r"\\ Với $m = %d$ thì $BC = %s|%d - %d| = %d$."
+                     % (d["m_dung"], _dt_cf(Fraction(d["base"], d["h"]), r"\,"), d["m_dung"], d["a_par"], dap))
+        ds = _ba_nhieu2(str(dap), [str(dap + 1), str(dap - 1), str(2 * dap)], buoc=lambda k: str(dap + k + 2))
+        cau += MC_SA_answer_text(_dt_de_tham(d) + cauhoi, str(dap), ds,
+                                 _dt_giai_tham(d) + "\\\\\n" + _dt_giai_m(d) + extra, 0, 0, dang)
+    return cau
+
+
+def _dt_tl_vd(socau, dong):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(False)
+        ds_abcd = [
+            (r"Xác định toạ độ các đỉnh của miền nghiệm của hệ.",
+             r"A%s,\ B%s,\ C%s" % (_dt_diem(d["A"]), _dt_diem(d["B"]), _dt_diem(d["C"])),
+             _dt_giai_dinh_vd(d)),
+            (r"Tính diện tích của miền nghiệm đó (đơn vị diện tích).", "%d" % d["S"], _dt_giai_dt_vd(d)),
+        ]
+        cau += TL_answer_text(r"Cho hệ bất phương trình $%s$. Biết miền nghiệm của hệ là một tam giác." % _dt_he(d),
+                              ds_abcd, 0, 0, dong)
+    return cau
+
+
+def _dt_giai_dinh_vd(d):
+    (a1, b1, c1, _), (a2, b2, c2, _) = d["lines"]
+    var = d["par"]
+    return (r"Gọi hai đường thẳng $%s = %s$ và $%s = %s$ lần lượt là $(d_1)$, $(d_2)$, còn $%s = %s$ là $(\Delta)$.\\ "
+            % (_dt_lhs(a1, b1), _so_vn(c1), _dt_lhs(a2, b2), _so_vn(c2), var, _so_vn(d["k"])) +
+            r"$(d_1)$ cắt $(d_2)$ tại $A%s$; $(d_1)$ cắt $(\Delta)$ tại $B%s$; $(d_2)$ cắt $(\Delta)$ tại $C%s$.\\ "
+            % (_dt_diem(d["A"]), _dt_diem(d["B"]), _dt_diem(d["C"])) +
+            r"Cả ba điểm đều thoả mãn hệ nên miền nghiệm là tam giác $ABC$.")
+
+
+def _dt_giai_dt_vd(d):
+    j = 1 - d["i"]
+    return (r"Cạnh $BC$ nằm trên $(\Delta)$ nên $BC = |%d - (%d)| = %d$; khoảng cách từ $A$ đến $(\Delta)$ là $|%d - %d| = %d$.\\ "
+            % (d["B"][j], d["C"][j], d["base"], d["A"][d["i"]], d["k"], d["h"]) +
+            r"Diện tích $S = \dfrac{1}{2}\cdot %d\cdot %d = %d$." % (d["base"], d["h"], d["S"]))
+
+
+def _dt_tl_vdc(socau, dong):
+    cau = ""
+    for _ in range(socau):
+        d = _dt_kt(True)
+        m0 = d["a_par"]
+        dm = ("m" if m0 == 0 else "m - %d" % m0 if m0 > 0 else "m + %d" % -m0)
+        dk = ("m > %d" if (d["pdau"] == r"\le") else "m < %d") % m0
+        ds_abcd = [
+            (r"Với điều kiện để miền nghiệm là một tam giác, hãy biểu diễn diện tích $S$ của tam giác đó theo $m$.",
+             r"S = %s\left(%s\right)^2\ \left(%s\right)" % (_dt_cf(d["c0"]), dm, dk), _dt_giai_tham(d)),
+            (r"Biết diện tích tam giác bằng $%d$ (đơn vị diện tích), tìm $m$." % d["S"],
+             r"m = %d" % d["m_dung"], _dt_giai_m(d)),
+        ]
+        cau += TL_answer_text(r"Cho hệ bất phương trình $%s$ ($m$ là tham số). Biết miền nghiệm của hệ là một tam giác."
+                              % _dt_he(d, "m"), ds_abcd, 0, 0, dong)
+    return cau
+
+
+def L10_C2_B4_VD028_MC_J_01(socau, dang=1):
+    """Diện tích miền nghiệm (tam giác) của hệ ba bất phương trình, một bất phương trình song song Ox hoặc Oy."""
+    return _dt_mc_vd(socau, dang, "dt")
+
+
+def L10_C2_B4_VD028_MC_J_02(socau, dang=1):
+    """Toạ độ đỉnh không nằm trên đường thẳng song song với trục."""
+    return _dt_mc_vd(socau, dang, "dinh")
+
+
+def L10_C2_B4_VD028_MC_J_03(socau, dang=1):
+    """Độ dài cạnh nằm trên đường thẳng song song với trục."""
+    return _dt_mc_vd(socau, dang, "canh")
+
+
+def L10_C2_B4_VD028_SA_J_01(socau, dang=2):
+    """Diện tích miền nghiệm (tam giác)."""
+    return _dt_sa_vd(socau, dang, "dt")
+
+
+def L10_C2_B4_VD028_SA_J_02(socau, dang=2):
+    """Tổng các toạ độ của ba đỉnh."""
+    return _dt_sa_vd(socau, dang, "tong")
+
+
+def L10_C2_B4_VD028_MC_K_01(socau, dang=1):
+    """Có tham số (VDC): biết diện tích tam giác, tìm m."""
+    return _dt_mc_vdc(socau, dang, "m")
+
+
+def L10_C2_B4_VD028_MC_K_02(socau, dang=1):
+    """Có tham số (VDC): tập các giá trị m."""
+    return _dt_mc_vdc(socau, dang, "tap")
+
+
+def L10_C2_B4_VD028_SA_K_01(socau, dang=2):
+    """Có tham số (VDC): tìm m."""
+    return _dt_sa_vdc(socau, dang, "m")
+
+
+def L10_C2_B4_VD028_SA_K_02(socau, dang=2):
+    """Có tham số (VDC): độ dài cạnh trên đường thẳng song song."""
+    return _dt_sa_vdc(socau, dang, "canh")
+
+
+def L10_C2_B4_VD028_TL_F_01(socau, dong=1):
+    """Tự luận 2 ý: a) toạ độ các đỉnh, b) diện tích tam giác miền nghiệm."""
+    return _dt_tl_vd(socau, dong)
+
+
+def L10_C2_B4_VD028_TL_G_01(socau, dong=1):
+    """Tự luận 2 ý có tham số: a) S theo m, b) cho S tìm m."""
+    return _dt_tl_vdc(socau, dong)

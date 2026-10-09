@@ -9926,3 +9926,30 @@ Cô Lan: YCCĐ "Xác định được tính đúng/sai của một mệnh đề 
 - Giới hạn: bài chỉ có đúng 1 đơn vị cho mức đó thì vẫn lặp (vd C4B10, C4B11, C5B14 chỉ có 1 đơn vị NB, 1 dạng MC; đề cuối kì 1 cần 2 câu NB nên ra 2 lần). Chỉ khắc phục được bằng viết thêm dạng.
 - Báo cáo nhap/bao_cao_thieu_dang_L10.md: 51/144 nhóm (bài, mức độ, loại) chỉ có 1 dạng và số ID đúng/sai từng chương, để ưu tiên viết thêm dạng. Không phải tài liệu chính thức.
 - Test: các test bộ chọn (test_chon_cau_khong_na_na.py, test_blueprint_dung_sai.py) qua.
+
+## L10_C2 đúng/sai TF_A, TF_B làm lại; xoá đề đã tạo; hộp thoại lỗi tải; L10_C3 TF_H (09/10/2026)
+- Đúng/sai theo CHƯƠNG, mỗi ý có ÍT NHẤT 3 phát biểu đúng và 3 phát biểu sai (cô Lan). Đo bằng bắt `TF_baitoan_du` qua nhiều lần sinh; test mới `tests/test_l10_c2_tf_a_he_bpt.py` và `tests/test_l10_c2_tf_b_he_bpt.py` kiểm lại đúng/sai ĐỘC LẬP (đọc hệ ngay trong câu, vét lưới số nguyên, đỉnh, diện tích, F tại các đỉnh), không tin nhãn gán tay.
+- `L10_C2_TF_A_02` BỎ. `TF_A_01`, `TF_A_03` (giữ, nâng cấp), `TF_A_04`: ý d) là HỆ bất phương trình gồm bất phương trình đã cho cùng x ⋈ 0, y ⋈ 0 (dùng chung `_tfa_y_d`); dấu và ngặt/không ngặt ngẫu nhiên. Bản cũ A_02 và A_03 lưu ở `nhap/TF_A_02_03_ban_cu.py`.
+- `L10_C2_TF_B_01`: trước đây mỗi ý 1 đúng + 1 sai, nay ý a) 4/5, b) 5/5, c) 5/6, d) 5/6 (nhận dạng hệ; điểm thuộc / không thuộc; hình dạng, đỉnh, diện tích tứ giác; max / min của F).
+- `L10_C3` TF_H_01, TF_H_02: ý d) luôn hỏi về chi phí, mỗi ý có ít nhất 3 đúng + 3 sai (`_n3_chi_phi` mở rộng).
+- Bản Anh L10_C2 sinh lại từ từ điển `data/i18n/bank/en_L10_C2.json` (bỏ mục và patch cũ của A_02, A_03 cũ, TF_B cũ).
+- Bộ chọn câu: khi hết dạng chưa dùng thì đổi đơn vị khác (đã ghi mục 08/10/2026); báo cáo thiếu dạng: nhap/bao_cao_thieu_dang_L10.md.
+- Giao diện giáo viên: hộp thoại giữa màn hình khi tải tệp đã bị dọn (không nhảy sang trang JSON); trang "Đề đã tạo" có nút xoá từng đề và "Xoá tất cả" (cần gõ XOA), `history_service.xoa_de_cua_giao_vien`, `POST /gv/de-da-tao/xoa`. Chữ mới đã thêm vào `data/i18n/en_ui.json` (27 đoạn).
+- Quản trị: `scripts/xoa_hoc_sinh.py` xoá sạch dữ liệu và tài khoản học sinh đã ra trường, chọn theo khối (và lớp), mặc định chỉ xem trước, `--xoa-that` phải gõ lại số lượng để xác nhận, không động vào giáo viên / quản trị.
+
+## L10_C2 bài toán thực tiễn: 4 tình huống tối ưu (pha chế, thức ăn gia súc, phân xưởng hai máy, đồ uống ăn kiêng) (09/10/2026)
+- Theo yêu cầu cô Lan, bốn tình huống thực tiễn của chương 2, mỗi tình huống giữ cấu trúc và ĐỔI SỐ NGẪU NHIÊN (tối ưu luôn duy nhất, tại một đỉnh): 1 pha chế nước giải khát (max, 3 điều kiện ≤), 2 thức ăn gia súc (min, 3 điều kiện dinh dưỡng ≥, chi phí hiển thị triệu đồng), 3 phân xưởng hai máy (max, 2 điều kiện ≤, lãi hiển thị triệu đồng), 4 đồ uống ăn kiêng (min, calo + vitamin A, C ≥, chi phí nghìn đồng).
+- Mỗi tình huống có `boi_canh` riêng (`pha_che`, `thuc_an_gia_suc`, `phan_xuong_hai_may`, `do_uong_an_kieng`) nên một đề chỉ có tối đa một câu thực tiễn trong cùng bối cảnh; cùng `Dang` cho mọi dòng của tình huống.
+- ID (bắt đầu `L10_C2_`): NB025_MC (A..E cũ + B pha chế, C thức ăn, D phân xưởng, E đồ uống; biến thể _01.. hỏi bất phương trình của từng điều kiện), VD028_MC / VD028_SA mức VD (B, D, F, H: chọn hệ, chọn phương án thoả mãn, giá trị F của một phương án; SA: số đỉnh, giới hạn khi chỉ dùng một loại) và mức VDC (C, E, G, I; `muc_do_dang: VDC`: giá trị tối ưu, số lượng loại thứ nhất / thứ hai ở phương án tối ưu), VD028_TL (B, C, D, E: 2 ý, a) lập hệ, b) F, tìm tối ưu), `TF_C`, `TF_D`, `TF_E`, `TF_F` (mỗi ý ≥ 3 đúng + 3 sai).
+- Khung chung `_kb_*` (thức ăn, phân xưởng, đồ uống dùng chung; pha chế có hàm riêng `_pc_*`). Các hàm `def` chỉ gọi khung nên chỉ cần thêm dòng mapping.
+- Sàng lọc toàn bộ câu thực tiễn chương 2: không có câu phi thực tế; thêm `boi_canh` cho NB025_MC_A và VD028_TL_A. Lưu ý các đơn vị lạ "trăm nghìn / chục nghìn đồng" trong `_BOI_CANH_SAN_XUAT` chưa đổi.
+- Test: `tests/test_l10_c2_pha_che.py` (16), `tests/test_l10_c2_tinh_huong_kb.py` (27): vét lưới số nguyên độc lập để kiểm tối ưu, đáp án MC/SA, đúng/sai TF. Bản Anh sinh lại từ `data/i18n/bank/en_L10_C2.json` (+ một patch "calo" -> "calories").
+
+## L10_C2 VD028: diện tích miền nghiệm là tam giác, hệ 3 bất phương trình có 1 bất phương trình song song Ox/Oy (09/10/2026)
+- Luyện tập thêm (`"ngoai_yccd": true`, gắn vào `L10_C2_B4_VD028`; Curriculum ghi `dang_luyen_tap_them` hai nhóm). Hệ gồm hai bất phương trình xiên và MỘT bất phương trình `y ⋈ k` hoặc `x ⋈ k` (ngẫu nhiên song song Ox hoặc Oy); đỉnh nguyên, diện tích nguyên (chọn trước 3 đỉnh rồi mới viết các đường thẳng).
+- VD (không tham số): `VD028_MC_J` (_01 diện tích, _02 toạ độ đỉnh không nằm trên đường song song, _03 độ dài cạnh trên đường song song), `VD028_SA_J` (_01 diện tích, _02 tổng các toạ độ ba đỉnh), `VD028_TL_F` (a) toạ độ các đỉnh, b) diện tích).
+- VDC (bất phương trình song song chứa tham số m, cho diện tích, tìm m): `VD028_MC_K` (_01 tìm m, _02 tập các giá trị m), `VD028_SA_K` (_01 tìm m, _02 độ dài cạnh trên đường song song), `muc_do_dang: VDC`; `VD028_TL_G` (a) S theo m kèm điều kiện, b) tìm m; ý b mức VDC). Phương trình (m − m0)² = h² có hai nghiệm nhưng chỉ một nghiệm cho tam giác, nghiệm còn lại làm miền nghiệm rỗng.
+- Test: `tests/test_l10_c2_dien_tich_tam_giac.py` (9): đọc lại chính hệ trong đề, tự giao các đường thẳng (phân số), tính diện tích bằng công thức đa giác, vét m nguyên để kiểm đáp án. Bản Anh sinh lại từ từ điển.
+
+## Ghi chu quy trinh tu lam ngan hang va ban tieng Anh (09/10/2026)
+- Chép chu trình vào `docs/26_CHAY_NHAP_VA_SUA_CAU.md` ("Chu trình tổng", bản Việt) và `docs/28_DA_NGON_NGU.md` ("Chu trình tự làm bản tiếng Anh", bảng lỗi thường gặp, cảnh báo chương chưa dịch). Theo yêu cầu cô Lan: tiếng Anh chỉ làm chương 1, 2 trước, chương 3, 4 làm khi có kinh phí.

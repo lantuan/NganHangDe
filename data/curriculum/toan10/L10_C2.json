@@ -144,6 +144,25 @@
       "bac_nhat_hai_an",
       "quy_hoach_tuyen_tinh"
     ],
-    "difficulty_rank": 3
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Diện tích và toạ độ đỉnh của miền nghiệm là tam giác của hệ ba bất phương trình, trong đó có một bất phương trình song song với Ox hoặc Oy",
+        "mapping_id": [
+          "L10_C2_B4_VD028_MC_J",
+          "L10_C2_B4_VD028_SA_J",
+          "L10_C2_B4_VD028_TL_F"
+        ]
+      },
+      {
+        "mo_ta": "Biết diện tích tam giác là miền nghiệm, tìm tham số m trong bất phương trình song song với trục (mức VDC)",
+        "mapping_id": [
+          "L10_C2_B4_VD028_MC_K",
+          "L10_C2_B4_VD028_SA_K",
+          "L10_C2_B4_VD028_TL_G"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   }
 ]

@@ -93,3 +93,38 @@ Xem docs/23 mục 8b: cùng cách chọn tệp đáp án bản Anh (`data/temp_e
 - Tên bài, yêu cầu cần đạt trong Curriculum (mới có tên chương).
 - Word tiếng Anh (word_service còn nhãn Việt).
 - Dịch ngân hàng các chương khác (Lớp 10 chương 3..9, Lớp 11, 12).
+
+---
+
+## Chu trình tự làm bản tiếng Anh của ngân hàng (cô Lan chốt 09/10/2026)
+
+Hiện chỉ có Lớp 10 Chương 1 và 2. Chương 3, 4... làm khi có kinh phí. Nguyên tắc: **chỉ sửa bản Việt; bản Anh (`data/python_bank_en/`) do máy sinh ra, KHÔNG sửa tay** (sửa tay sẽ bị ghi đè và test `test_ban_anh_sinh_ra_tu_ban_viet_khong_sua_tay` đỏ).
+
+### Khi có thay đổi ở bản Việt của chương đã có bản Anh
+1. Hoàn tất bản Việt trước, test bản Việt qua (xem docs/26 "Chu trình tổng").
+2. **Sinh thử**: `python3 scripts/dich_ngan_hang.py dich data/python_bank/toan10/L10_C2.py`. Dòng cuối: `chưa dịch: N | lỗi: M`; in 20 đoạn đầu chưa dịch. (`trich <tệp>` chỉ đếm đơn vị dịch.)
+3. **Dịch từng đoạn chưa có** vào `data/i18n/bank/en_L10_C2.json`:
+   - Khoá = ĐÚNG đoạn mã tiếng Việt (chép nguyên cả `r"` và dấu nháy). Giá trị = đoạn mã tiếng Anh tương ứng. Đoạn nhiều dòng thì giữ thụt lề dòng tiếp theo.
+   - Giữ nguyên số và thứ tự `%s`, `%d`, số dấu `$`, các lệnh LaTeX, biểu thức trong `{ }`. Bản Anh không còn chữ có dấu tiếng Việt.
+   - Chữ mà mã dùng để so sánh ("sai", "đúng"...) không dịch tuỳ tiện; sửa chỗ phụ thuộc chữ Việt bằng `patch_L10_C2.json`, `patch_L10_C2_2.json`... ([{"tim", "thay", "so_lan" | "tat_ca"}]). Tốt hơn: sửa mã Việt cho khỏi phụ thuộc chữ Việt (dùng khoá ASCII, không `.split` trên cụm tiếng Việt).
+   - Từ điển Việt-Anh: thuật ngữ Toán của MỸ (xem đầu file này).
+4. **Chạy lại bước 2** đến khi `chưa dịch: 0 | lỗi: 0`. Đồng thời xoá mục từ điển / patch không còn dùng (mã Việt đã đổi).
+5. **Kiểm tương đương**: `python3 scripts/kiem_tuong_duong.py L10_C2 8` (hạt giống giống nhau; phải 0 hàm lệch).
+6. **Đọc thử vài câu tiếng Anh** (ngữ pháp, "1 bags", "a unbounded", từ Việt sót).
+7. **Test**: `python3 -m pytest tests/test_ngan_hang_anh.py -q`, rồi chạy toàn bộ test như docs/26 bước 6.
+8. **Đẩy lên**: `day web`.
+
+### Lỗi thường gặp
+| Thông báo | Nghĩa là | Cách xử |
+|---|---|---|
+| `chưa dịch: N` | Bản Việt có chữ mới | Thêm vào từ điển (bước 3) |
+| `sửa tay: tìm thấy 0 chỗ` | Mã Việt đã đổi nên patch cũ không còn khớp | Xoá hoặc sửa patch đó |
+| `Ban Anh khac ket qua dich - chay: ... dich <tep>` | Đã sửa bản Việt / từ điển / patch mà chưa sinh lại, hoặc đã sửa tay tệp Anh | Chạy lại `dich` |
+| `Ban Anh lech ban Viet` | Công thức hay cấu trúc Anh khác Việt | Sửa giá trị trong từ điển cho đúng placeholder, `$`, LaTeX |
+| `khong con chu viet` | Còn chữ Việt (kể cả không dấu như `Sai`, `Cho`) trong bản Anh | Thêm vào từ điển hoặc patch |
+
+### Cảnh báo khi làm chương mới (chưa dịch)
+`tests/test_ngan_hang_anh.py` coi MỌI tệp `data/python_bank_en/toan10/L10_C*.py` là "đã dịch trọn" và bắt qua cả bốn test. Đừng tạo / để lại tệp tiếng Anh dịch dở của chương 3, 4... rồi đẩy lên. Chỉ cho tệp Anh vào khi đã đạt `chưa dịch: 0`, `lỗi: 0`, 0 hàm lệch.
+
+### Ghi chú môi trường
+Trong môi trường làm việc của Claude (không xoá được tệp), 4 test của `test_ngan_hang_anh.py` (tải đề: gia sư AI tiếng Anh, tải PDF học sinh, zip hai thứ tiếng, liên kết giáo viên) và 4 test của `test_xuat_word.py` đỏ vì `PermissionError`, không phải lỗi mã. Trên máy cô Lan phải qua.

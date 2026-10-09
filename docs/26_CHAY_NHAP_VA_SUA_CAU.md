@@ -169,3 +169,19 @@ source ~/.zshrc
 ```
 
 Sau đó gõ ở đâu cũng được: `nhap L10_C1_B2_VD021_SA_B_01 -n 10`.
+
+---
+
+## Chu trình tổng: tự làm thêm dạng câu mới cho ngân hàng (bản Việt) - chốt 09/10/2026
+
+Dùng khi cô Lan tự viết (hoặc nhờ AI viết) một dạng câu hỏi mới. Thứ tự:
+
+1. **Xem chỗ thiếu**: `python3 scripts/thieu.py 10 2` (lớp 10, chương 2) liệt kê dạng chưa có kèm mã cần bổ sung.
+2. **Chọn ID** theo `docs/04_ID_STANDARD.md`: `L10_C2_<bài>_<mức><mã>_<loại>_<chữ cái>`. Chữ cái mới = dạng mới; `_01`, `_02`... = biến thể (xem docs/27).
+3. **Viết hàm** `def <ID>_01(socau, ...)` trong `data/python_bank/toan10/L10_C2.py`. Đuôi `_01` bắt buộc. Câu đúng/sai phải có bốn dòng chú thích `# a) NB`, `# b) TH`, `# c) VD`, `# d) VDC` trong thân hàm, mỗi ý ít nhất 3 phát biểu đúng và 3 sai.
+4. **Thêm dòng mapping** vào `data/mapping/toan10/L10_C2.json`: `id` (bỏ `_01`), `content` (chép từ curriculum), `Loai`, `Dang`, `ghi_chu`. Thêm `boi_canh` nếu là bối cảnh thực tế, `"muc_do_dang": "VDC"` nếu dạng VDC, `"ngoai_yccd": true` (ghi_chu bắt đầu "LUYEN TAP THEM - ...") nếu là luyện tập thêm, kèm `dang_luyen_tap_them` ở mục Curriculum.
+5. **Chạy nháp**: `python3 scripts/nhap.py <ID>_01 -n 10` rồi mở PDF trong `nhap/` để soi (bước 2, 3 ở trên).
+6. **Test**: `python3 -m pytest tests -q --ignore=tests/test_supabase.py -p no:cacheprovider`. Dòng cuối phải là `passed`. Nên có thêm một file test kiểm đáp án ĐỘC LẬP cho dạng mới (đọc số trong đề, tự tính lại; xem `tests/test_l10_c2_pha_che.py`, `tests/test_l10_c2_dien_tich_tam_giac.py`).
+7. **Ghi `docs/16_CHANGELOG.md`** một mục ngắn.
+8. **Nếu chương đã có bản tiếng Anh (lớp 10 chương 1, 2): làm tiếp "Chu trình bản tiếng Anh" ở `docs/28_DA_NGON_NGU.md` NGAY**, không làm thì test bản Anh đỏ.
+9. **Đẩy lên**: `day` (GitHub) hoặc `day web` (GitHub + VPS).

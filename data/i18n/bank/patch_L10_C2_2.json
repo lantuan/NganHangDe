@@ -80,26 +80,6 @@
   "tat_ca": true
  },
  {
-  "tim": "the left side equals $0$, the point lies on the boundary line",
-  "thay": "the left side equals $0$, so the point lies on the boundary line",
-  "so_lan": 1
- },
- {
-  "tim": "debai = r\"Given the inequality $%s %s 0$. Determine",
-  "thay": "debai = r\"Consider the inequality $%s %s 0$. Determine",
-  "so_lan": 1
- },
- {
-  "tim": "debai = (r\"Given a linear inequality in two variables whose",
-  "thay": "debai = (r\"Consider a linear inequality in two variables whose",
-  "so_lan": 1
- },
- {
-  "tim": "Given the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ & %s \\\\ & %s}$ and the expression",
-  "thay": "Consider the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ & %s \\\\ & %s}$ and the expression",
-  "so_lan": 1
- },
- {
   "tim": "Given the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ \"",
   "thay": "Consider the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ \"",
   "so_lan": 1
@@ -107,11 +87,6 @@
  {
   "tim": "Given the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ & %s \\\\ & %s}$. \"",
   "thay": "Consider the system of inequalities $\\heva{& x \\ge 0 \\\\ & y \\ge 0 \\\\ & %s \\\\ & %s}$. \"",
-  "so_lan": 1
- },
- {
-  "tim": "False. It is exactly a vertex of the solution region",
-  "thay": "False. It is a vertex of the solution region",
   "so_lan": 1
  },
  {
@@ -157,6 +132,11 @@
  {
   "tim": "How many of each type should be bought to minimize the cost? Compute that cost.",
   "thay": "How many kilograms of each type should be bought to minimize the cost, and what is that minimum cost?",
+  "so_lan": 1
+ },
+ {
+  "tim": "dv=\"calo\"",
+  "thay": "dv=\"calories\"",
   "so_lan": 1
  }
 ]

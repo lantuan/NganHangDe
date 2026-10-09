@@ -8075,11 +8075,22 @@ def _n3_chi_phi(S, gia, ly, ten="lát gạch toàn bộ mảnh đất"):
     """Phát biểu về chi phí (triệu đồng) và diện tích cho TF_H."""
     tien = S * gia / 1000
     T = math.floor(tien)
+    R = math.floor(tien + 0.5)       # làm tròn đến hàng đơn vị (triệu đồng)
     mau = r"Chi phí để %s %s $%d$ triệu đồng"
     dung = [(mau % (ten, "lớn hơn", T), ly), (mau % (ten, "nhỏ hơn", T + 1), ly)]
     sai = [(mau % (ten, "lớn hơn", T + 1), ly), (mau % (ten, "nhỏ hơn", T), ly)]
     if T >= 2:
         sai.append((mau % (ten, "nhỏ hơn", T - 1), ly))
+    # CLAUDE THEM 09/10/2026 (co Lan duyet): ý d) phải LUÔN hỏi về tiền (câu dẫn có giá),
+    # mỗi ý ít nhất 3 phát biểu đúng, 3 sai -> thêm phát biểu "xấp xỉ" và "trong khoảng".
+    mau2 = r"Chi phí để %s xấp xỉ $%d$ triệu đồng (làm tròn đến hàng đơn vị)"
+    mau3 = r"Chi phí để %s nằm trong khoảng từ $%d$ đến $%d$ triệu đồng"
+    dung += [(mau2 % (ten, R), ly), (mau3 % (ten, T, T + 1), ly)]
+    sai += [(mau2 % (ten, R + 1), ly), (mau3 % (ten, T + 1, T + 2), ly)]
+    if R >= 2:
+        sai.append((mau2 % (ten, R - 1), ly))
+    if T >= 1:
+        sai.append((mau3 % (ten, T - 1, T), ly))
     return dung, sai
 
 
@@ -10787,7 +10798,9 @@ def L10_C3_TF_H_01(socau, socot=1):
         d2, s2 = _tf_so(r"Diện tích mảnh đất $ABCD$ xấp xỉ $%s$", S1 + S2, 1, ly_d,
                         [(S1 + 2 * S2, "Quên hệ số $\\dfrac{1}{2}$ ở $S_{ABD}$"), (S1 + 0.5 * p * q * _sin_d(b), "Dùng nhầm $\\widehat{ABC}$ cho tam giác $ABD$")],
                         dv=r"\,\text{m}^{2}")
-        y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # ý d) CHỈ hỏi về chi phí (khớp câu dẫn có giá); phát biểu về diện tích mảnh đất chuyển sang ý c)
+        y4 = _phat_bieu(d1, s1)
+        _tf_them(y3, d2, s2)
         # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
         _tf_them(y2, [(r"Tam giác $BCD$ cân tại $C$", ly_b), (r"$\widehat{ABD} + \widehat{DBC} = %d^{\circ}$" % b, ly_b)],
                  [(r"Tam giác $BCD$ cân tại $B$", ly_b), (r"$\widehat{ABD} + \widehat{DBC} = %d^{\circ}$" % (180 - b), ly_b)])
@@ -10865,7 +10878,9 @@ def L10_C3_TF_H_02(socau, socot=1):
         d2, s2 = _tf_so(r"Diện tích mảnh đất $ABCD$ xấp xỉ $%s$", S1 + S2, 1, ly_d,
                         [(S1 + 2 * S2, "Quên hệ số $\\dfrac{1}{2}$ ở $S_{BCD}$"), (S1 + 0.5 * x * y * abs(float(cosC)), "Nhầm $\\sin$ với $\\cos$")],
                         dv=r"\,\text{m}^{2}")
-        y4 = _phat_bieu(d1 + d2, s1 + s2)
+        # ý d) CHỈ hỏi về chi phí (khớp câu dẫn có giá); phát biểu về diện tích mảnh đất chuyển sang ý c)
+        y4 = _phat_bieu(d1, s1)
+        _tf_them(y3, d2, s2)
         # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
         _d1, _s1 = _tf_bdt(r"$\cos\widehat{BCD} %s %s$", float(cosC), ly_b, tu=(">", "<"))
         _tf_them(y2, _d1, _s1)
