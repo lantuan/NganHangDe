@@ -9983,3 +9983,15 @@ Cô Lan báo: câu "Cho $A$ là tập con của tập hợp $E$ … phần gạc
 - Sửa tận gốc: `_ven_tikz` đặt `[even odd rule]` ở `\begin{scope}[even odd rule]` và dùng `\clip` thường (kết quả hình giống hệt, chạy ở mọi bản TikZ). Đã kiểm hình phần bù: trong vòng tròn trắng, ngoài vòng tròn gạch sọc.
 - Chặn lỗi cùng loại về sau (`app/services/hinh_ve_service.py`): hàm mới `tuong_thich_tikz` tự đổi `\clip[tuỳ chọn] …` thành `\path[clip,tuỳ chọn] …` ở bước dịch ảnh (mã băm hình `ma_hinh` vẫn tính trên TikZ gốc nên ảnh đã cache không bị dịch lại; hình lỗi trước đây chưa từng được cache nên không cần đổi `PHIEN_BAN`). Thông báo lỗi `HinhVeError` nay ghi lỗi của CẢ HAI phần đầu (đầy đủ và rút gọn), trước đây chỉ ghi lỗi thiếu `tabvar.sty` của phần đầu đầy đủ nên che mất lỗi thật của hình.
 - Test mới `tests/test_hinh_ve_tuong_thich_tikz.py`: (1) mã nguồn bộ đề không được viết `\clip[` ; (2) `tuong_thich_tikz` đổi đúng; (3) dịch THẬT các hình Ven chương 1 (NB/TH/VD019) bằng phần đầu rút gọn mô phỏng TeX cũ (bỏ qua nếu máy không có xelatex). `tests/test_ven_bon_muc.py` đọc lại cấu trúc scope theo cách viết mới.
+
+## L10_C3 MC/SA/TL giải tam giác: câu dẫn không nêu dữ kiện không dùng (10/10/2026)
+
+Cô Lan góp ý từ câu `L10_C3_B5_NB029_MC_I` (chỉ hỏi loại góc A mà câu dẫn vẫn cho AB, AC): "không đưa các dữ liệu không sử dụng trong quá trình giải bài vào câu dẫn".
+- Rà soát mọi (đơn vị, cách cho) trong phần MC/SA/TL giải tam giác. Câu dẫn nay chỉ nêu dữ kiện lời giải thật sự dùng:
+  - cách cho A ở **NB029, TH031, TH030**: chỉ cho một giá trị lượng giác của góc A ("Cho tam giác $ABC$ có $\cos A = …$." / "$\sin A = …$ và góc $A$ là góc nhọn/tù" / "$\tan A = …$"), bỏ AB, AC;
+  - cách cho B ở **TH031, TH030**: chỉ cho hai góc, bỏ độ dài cạnh;
+  - cách cho D ở **TH034**: chỉ cho một cạnh và đường cao tương ứng (S = ½·a·h_a), bỏ cos B.
+  Các dạng còn lại (TH032, TH033, TH034 A/B/C, TH035, VD032) đã dùng hết dữ kiện nên giữ nguyên.
+- Code: `_MS_DE_GON` và tham số `dv` của `_ms_ctx`. Các câu dẫn rút gọn không cần tam giác thường (ba cạnh khác nhau) nữa; số câu dẫn khác nhau: NB029 ≈ 36, TH031/TH030 cách A ≈ 65–100, cách B ≈ 100, TH034 cách D ≈ 98 (trước đó TH034-D chỉ 10).
+- Mapping: cột `Dang` của các ID này đổi theo (ví dụ "Biết một giá trị lượng giác của góc A: …", "Biết hai góc: …", "Biết một cạnh và đường cao tương ứng: …"), `ghi_chu` thêm "cau dan RUT GON …"; docstring các hàm đổi tương ứng. ID không đổi.
+- Test `tests/test_l10_c3_mc_sa_tl_giai_tam_giac.py` (nay 212): đọc được câu dẫn rút gọn (dựng tam giác bất kỳ có góc A đó / hai góc đó / cạnh và đường cao đó) và thêm `test_cau_dan_khong_co_du_kien_thua` kiểm câu dẫn của 31 hàm trên không còn nhắc cạnh / cos B.

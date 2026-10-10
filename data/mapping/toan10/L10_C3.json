@@ -1349,64 +1349,64 @@
     "id": "L10_C3_B5_NB029_MC_I",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết hai cạnh và một giá trị lượng giác của góc A",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+    "Dang": "Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết một giá trị lượng giác của góc A",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH031_MC_K",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+    "Dang": "Biết một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH031_SA_H",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+    "Dang": "Biết một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH031_MC_L",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+    "Dang": "Biết hai góc: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH031_SA_I",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+    "Dang": "Biết hai góc: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH030_MC_H",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+    "Dang": "Biết một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH030_SA_F",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+    "Dang": "Biết một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH030_MC_I",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+    "Dang": "Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B5_TH030_SA_G",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+    "Dang": "Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B6_TH032_MC_K",
@@ -1605,15 +1605,15 @@
     "id": "L10_C3_B6_TH034_MC_N",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+    "Dang": "Biết một cạnh và đường cao tương ứng: tính diện tích tam giác (S = 1/2.a.h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B6_TH034_SA_I",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+    "Dang": "Biết một cạnh và đường cao tương ứng: tính diện tích tam giác (S = 1/2.a.h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
   },
   {
     "id": "L10_C3_B6_TH035_TL_B",

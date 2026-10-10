@@ -103,6 +103,15 @@ def dung_tg(de):
     """Doc cau dan, dung tam giac tu toa do. Tra ve (T, loai)."""
     de = de.replace("\n", " ")
     m = re.search(r"có \$AB = (\d+)\$, \$AC = (\d+)\$ và (.*?)\.", de)
+    gon = None
+    if not m:
+        # Cau dan RUT GON (co Lan 10/10/2026: khong neu du kien khong dung): chi cho gia tri luong giac cua goc A.
+        # Cac cau nay chi hoi dai luong phu thuoc goc A nen dung tam giac bat ky co goc A do (AB = 5, AC = 7).
+        mg = re.search(r"có (\$\\(?:cos|sin|tan) A = .*?)\.", de)
+        if mg:
+            gon = mg
+    if gon:
+        m = type("M", (), {"group": lambda self, i, _g=gon: {1: "5", 2: "7", 3: _g.group(1)}[i]})()
     if m and ("\\cos A" in m.group(3) or "\\sin A" in m.group(3) or "\\tan A" in m.group(3)):
         c, b, g = float(m.group(1)), float(m.group(2)), m.group(3)
         if "\\cos A" in g:
@@ -122,11 +131,24 @@ def dung_tg(de):
         x3 = [x for x in "ABC" if x not in goc_d][0]
         goc_d[x3] = 180 - sum(goc_d.values())
         cd = re.search(r"và \$(BC|CA|AB)\$? ?= (\d+)", de) or re.search(r"\$(BC|CA|AB) = (\d+)\$", de)
-        ten, val = cd.group(1), float(cd.group(2))
+        if cd:
+            ten, val = cd.group(1), float(cd.group(2))
+        else:
+            # cau dan rut gon: chi cho hai goc -> chon canh bat ky (BC = 10); cac cau chi hoi ti so luong giac cua goc
+            ten, val = "BC", 10.0
         doi = {"BC": "A", "CA": "B", "AB": "C"}[ten]
         k = val / math.sin(math.radians(goc_d[doi]))
         s = {x: k * math.sin(math.radians(goc_d[x])) for x in "ABC"}  # canh doi dien dinh x
         return tg_tu_ba_canh(s["A"], s["B"], s["C"]), "B"
+    # cau dan rut gon (TH034, cach cho D): chi co mot canh va duong cao tuong ung (cos B khong duoc nhac)
+    m = re.search(r"\$BC = (\d+)\$ và đường cao \$AH = (.*?)\$ \(", de)
+    if m:
+        a, h = float(m.group(1)), tex_so(m.group(2))
+        return dict(A=(0.0, h), B=(0.0, 0.0), C=(a, 0.0)), "D"
+    m = re.search(r"\$AB = (\d+)\$ và đường cao \$CK = (.*?)\$ \(", de)
+    if m:
+        c, h = float(m.group(1)), tex_so(m.group(2))
+        return dict(A=(c, 0.0), B=(0.0, 0.0), C=(0.0, h)), "D"
     m = re.search(r"\$BC = (\d+)\$, \$\\cos B = (.*?)\$ và đường cao \$AH = (.*?)\$", de)
     if m:
         a, cb, h = float(m.group(1)), tex_so(m.group(2)), tex_so(m.group(3))
@@ -422,3 +444,28 @@ def test_curriculum_co_nhom_luyen_tap_them():
             for i, r in mp.items():
                 if r.get("ngoai_yccd") and i.startswith(e["id"] + "_"):
                     assert i in ids, (e["id"], i)
+
+
+# ---------------------------------------------------------------- khong dua du kien khong dung vao cau dan
+# Quy tac co Lan 10/10/2026: "khong dua cac du lieu khong su dung trong qua trinh giai bai vao cau dan".
+#   NB029 / TH031 / TH030 (cach cho A): chi can mot gia tri luong giac cua goc A  -> khong neu AB, AC;
+#   TH031 / TH030 (cach cho B):         chi can hai goc                            -> khong neu do dai canh;
+#   TH034 (cach cho D):                 S = 1/2.a.h_a chi can canh va duong cao    -> khong neu cos B.
+_DE_GON = {("NB029", "A"), ("TH031", "A"), ("TH030", "A"), ("TH031", "B"), ("TH030", "B"), ("TH034", "D")}
+
+
+@pytest.mark.parametrize("ten", [n for n in HAM if KIEU[n][1:3] in _DE_GON])
+def test_cau_dan_khong_co_du_kien_thua(ten):
+    _, dv, cach, _ = KIEU[ten]
+    for seed in range(8):
+        random.seed(seed)
+        out = getattr(M, ten)(2)
+        for khoi in cac_cau(out):
+            de = lay_de(khoi).replace("\n", " ")
+            dau = de.split("Cho tam giác $ABC$ có", 1)[1].split("Khẳng định")[0].split("Tính")[0]
+            if cach == "A":
+                assert not re.search(r"\$(AB|AC|BC|CA) =", dau), (ten, dau)
+            elif cach == "B":
+                assert not re.search(r"\$(AB|AC|BC|CA) =", dau), (ten, dau)
+            else:
+                assert "\\cos B" not in dau, (ten, dau)
