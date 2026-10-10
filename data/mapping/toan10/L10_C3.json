@@ -1337,5 +1337,448 @@
     "Dang": "Điểm M trên nửa đường tròn đơn vị xác định bởi góc alpha: lý thuyết, đổi một bước, biểu thức, giải tam giác OAM/OA'M/AMA' (có hình)",
     "boi_canh": "nua_duong_tron_don_vi",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo y co Lan; moi y nhieu phat bieu dung + nhieu phat bieu sai; a) NB b) TH c) VD d) VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_TF_T",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Đúng sai",
+    "Dang": "Giải tam giác (phủ cả Bài 5 và Bài 6): biết 2 cạnh + 1 góc; 2 góc + 1 cạnh; 3 cạnh; 1 cạnh, 1 góc, 1 đường cao; 2 cạnh + trung tuyến; 3 cạnh + phân giác. Biến thể _01.._15 khác nhau ở cách cho và cách hỏi",
+    "ghi_chu": "CLAUDE THEM 10/10/2026 - theo y co Lan: moi cau phu ca Bai 5 va Bai 6, moi y >= 3 dung + >= 3 sai; a) NB b) TH c) VD d) VDC; co Lan duyet lai truoc khi dung"
+  },
+  {
+    "id": "L10_C3_B5_NB029_MC_I",
+    "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết hai cạnh và một giá trị lượng giác của góc A",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_K",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_H",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_MC_L",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH031_SA_I",
+    "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_H",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_F",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_I",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_G",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_K",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_G",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_TL_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_L",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_H",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_TL_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_M",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_I",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_TL_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_N",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho E); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_J",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho E); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C3_B6_TH032_MC_O",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - duong phan giac trong va cach tinh do dai duong phan giac khong co trong yeu cau can dat cua Bo (danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho F); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C3_B6_TH032_SA_K",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - duong phan giac trong va cach tinh do dai duong phan giac khong co trong yeu cau can dat cua Bo (danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho F); co Lan duyet lai",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_TL_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_MC_G",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_SA_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH033_TL_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_K",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_TL_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_L",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai góc và một cạnh: tính diện tích tam giác",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_G",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai góc và một cạnh: tính diện tích tam giác",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_M",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_H",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_TL_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_MC_N",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH034_SA_I",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_TL_B",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_MC_F",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_SA_E",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_TH035_TL_C",
+    "content": "Mô tả được cách giải tam giác.",
+    "Loai": "Tự luận",
+    "Dang": "Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_A",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_B",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_C",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho C); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_D",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho D); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho E); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho E); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_E",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho E); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C3_B6_VD032_MC_G",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - duong phan giac trong va cach tinh do dai duong phan giac khong co trong yeu cau can dat cua Bo (danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho F); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C3_B6_VD032_SA_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - duong phan giac trong va cach tinh do dai duong phan giac khong co trong yeu cau can dat cua Bo (danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho F); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
+  },
+  {
+    "id": "L10_C3_B6_VD032_TL_F",
+    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "Loai": "Tự luận",
+    "Dang": "Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm",
+    "ghi_chu": "LUYEN TAP THEM - duong phan giac trong va cach tinh do dai duong phan giac khong co trong yeu cau can dat cua Bo (danh dau de canh bao GV khi vao de). [MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho F); co Lan duyet lai",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC"
   }
 ]

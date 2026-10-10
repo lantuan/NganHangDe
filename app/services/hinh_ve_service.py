@@ -91,6 +91,20 @@ def _preamble_day() -> str:
     return van
 
 
+def tuong_thich_tikz(tikz: str) -> str:
+    r"""Doi cac cach viet chi TikZ MOI moi hieu sang cach viet TikZ CU cung hieu.
+
+    May dich hinh (VPS, may ao) co the dung TeX Live cu (pgf 3.1.9, 2021) trong
+    khi may Lan dung ban moi. Cach viet nao ban moi cho phep ma ban cu bao loi
+    thi file Word mat hinh (loi 10/10/2026: "\clip[even odd rule] ..." bao
+    "Extra options not allowed for clipping path command").
+
+    \clip[opts] <duong>;  ==  \path[clip, opts] <duong>;  (cach sau chay o moi ban).
+    Chi doi o buoc dich ra anh; ma bam (ma_hinh) van tinh tren TikZ goc.
+    """
+    return re.sub(r"\\clip\s*\[([^\]]*)\]", lambda m: r"\path[clip,%s]" % m.group(1), tikz)
+
+
 def ma_hinh(tikz: str) -> str:
     """Ma bam cua mot hinh, tinh tu chinh doan TikZ."""
     return hashlib.sha1((PHIEN_BAN + "\n" + tikz).encode("utf-8")).hexdigest()[:20]
@@ -132,13 +146,13 @@ def dich_hinh(tikz: str, chi_png: bool = False) -> Path:
     with tempfile.TemporaryDirectory() as thu_muc:
         tm = Path(thu_muc)
         pdf = None
-        loi_dau = ""
+        cac_loi = []
         # Thu phan dau DAY DU truoc (hinh giong het trong PDF); may nao
         # thieu goi thi lui ve phan dau RUT GON.
         for dau in (_preamble_day(), PREAMBLE_GON):
             (tm / "hinh.tex").write_text(
                 dau + "\n\\pagestyle{empty}\n\\begin{document}\n"
-                + tikz + "\n\\end{document}\n", encoding="utf-8")
+                + tuong_thich_tikz(tikz) + "\n\\end{document}\n", encoding="utf-8")
             for cu in tm.glob("hinh.pdf"):
                 cu.unlink()
             chay = subprocess.run(
@@ -147,11 +161,14 @@ def dich_hinh(tikz: str, chi_png: bool = False) -> Path:
             if (tm / "hinh.pdf").exists():
                 pdf = tm / "hinh.pdf"
                 break
-            if not loi_dau:
-                dong = [d for d in chay.stdout.splitlines() if d.startswith("!")]
-                loi_dau = dong[0] if dong else "khong ro"
+            dong = [d for d in chay.stdout.splitlines() if d.startswith("!")]
+            cac_loi.append(dong[0] if dong else "khong ro")
         if pdf is None:
-            raise HinhVeError("xelatex khong dich duoc hinh: %s" % loi_dau)
+            # bao loi cua CA HAI phan dau: loi thieu goi o phan dau day du hay
+            # che mat loi that cua hinh o phan dau rut gon (da mat cong chan doan
+            # loi \clip 10/10/2026)
+            raise HinhVeError("xelatex khong dich duoc hinh (phan dau day du: %s | phan dau rut gon: %s)"
+                              % (cac_loi[0], cac_loi[-1]))
         # cat trang cho vua hinh
         if shutil.which("pdfcrop"):
             subprocess.run(["pdfcrop", "hinh.pdf", "hinh-cat.pdf"],

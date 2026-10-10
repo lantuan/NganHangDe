@@ -14687,7 +14687,9 @@ def _ven_tikz(vong, mask_gach, nhan, rect=None, nhan_E=None, so_dem=None, scale=
     for i, (c, r) in enumerate(vong):
         d.append(r"\def\vong%s{(%s,%s) circle (%s)}" % (ten[i], c[0], c[1], r))
     for m in mask_gach:
-        d.append(r"\begin{scope}")
+        # [even odd rule] dat o MUC SCOPE chu KHONG dat tren \clip: TikZ cu (pgf 3.1.9, TeX Live 2021 tro xuong, vi du
+        # VPS) bao "Extra options not allowed for clipping path command" -> file Word mat hinh (Lan bao 10/10/2026).
+        d.append(r"\begin{scope}[even odd rule]")
         co = [i for i in range(len(vong)) if m[i]]
         khong = [i for i in range(len(vong)) if not m[i]]
         if not co and rect:
@@ -14696,7 +14698,7 @@ def _ven_tikz(vong, mask_gach, nhan, rect=None, nhan_E=None, so_dem=None, scale=
             d.append(r"\clip \vong%s;" % ten[i])
         for i in khong:
             c, r = vong[i]
-            d.append(r"\clip[even odd rule] (-8,-8) rectangle (9,9) (%s,%s) circle (%s);" % (c[0], c[1], r))
+            d.append(r"\clip (-8,-8) rectangle (9,9) (%s,%s) circle (%s);" % (c[0], c[1], r))
         d.append(r"\fill[pattern=north west lines, pattern color=black!70] (-8,-8) rectangle (9,9);")
         d.append(r"\end{scope}")
     if rect:

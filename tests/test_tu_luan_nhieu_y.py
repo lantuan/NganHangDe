@@ -145,5 +145,5 @@ def test_thu_tu_chon_dung_sai_tu_luan_roi_moi_mc_sa():
     finally:
         B._chon_curriculum_id = goc
     assert bp["tu_luan"] and bp["trac_nghiem"]
-    # lượt đầu tiên gọi cho tự luận (mức VD của chương 3 chỉ có VD036)
-    assert "VD036" in thu_tu[0], thu_tu
+    # lượt đầu tiên gọi cho tự luận (mức VD của chương 3 có tự luận ở VD032 và VD036; VD032 thêm 10/10/2026)
+    assert "VD036" in thu_tu[0] or "VD032" in thu_tu[0], thu_tu

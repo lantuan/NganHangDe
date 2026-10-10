@@ -174,9 +174,23 @@
           "L10_C3_B6_TH032_MC_G",
           "L10_C3_B6_TH032_SA_D"
         ]
+      },
+      {
+        "mo_ta": "Biết hai cạnh và đường trung tuyến, tính cạnh còn lại / côsin, R, diện tích (giải tam giác, cùng câu dẫn với TF_T)",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_N",
+          "L10_C3_B6_TH032_SA_J"
+        ]
+      },
+      {
+        "mo_ta": "Biết ba cạnh và đường phân giác trong, tính độ dài đường phân giác / diện tích tam giác chia bởi đường phân giác (giải tam giác, cùng câu dẫn với TF_T)",
+        "mapping_id": [
+          "L10_C3_B6_TH032_MC_O",
+          "L10_C3_B6_TH032_SA_K"
+        ]
       }
     ],
-    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ. Công thức độ dài đường phân giác trong cũng không có trong yêu cầu cần đạt."
   },
   {
     "id": "L10_C3_B6_VD032",
@@ -203,9 +217,25 @@
         "mapping_id": [
           "L10_C3_B6_VD032_MC_A"
         ]
+      },
+      {
+        "mo_ta": "Biết hai cạnh và đường trung tuyến, tính cạnh còn lại / côsin, R, diện tích (giải tam giác, cùng câu dẫn với TF_T)",
+        "mapping_id": [
+          "L10_C3_B6_VD032_MC_F",
+          "L10_C3_B6_VD032_SA_E",
+          "L10_C3_B6_VD032_TL_E"
+        ]
+      },
+      {
+        "mo_ta": "Biết ba cạnh và đường phân giác trong, tính độ dài đường phân giác / diện tích tam giác chia bởi đường phân giác (giải tam giác, cùng câu dẫn với TF_T)",
+        "mapping_id": [
+          "L10_C3_B6_VD032_MC_G",
+          "L10_C3_B6_VD032_SA_F",
+          "L10_C3_B6_VD032_TL_F"
+        ]
       }
     ],
-    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+    "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ. Công thức độ dài đường phân giác trong cũng không có trong yêu cầu cần đạt."
   },
   {
     "id": "L10_C3_B6_TH033",

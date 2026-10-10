@@ -38,17 +38,18 @@ def _vong(tikz):
             re.findall(r"\\def\\vong[A-F]\{\(([-\d.]+),([-\d.]+)\) circle \(([-\d.]+)\)\}", tikz)]
 
 
+# 10/10/2026: [even odd rule] chuyen len muc scope (TikZ cu khong cho tuy chon tren \clip) -> doc lai theo cach moi.
 def _mask_gach(tikz):
     vong = _vong(tikz)
     masks = set()
-    for sc in re.findall(r"\\begin\{scope\}(.*?)\\end\{scope\}", tikz, flags=re.S):
+    for sc in re.findall(r"\\begin\{scope\}(?:\[even odd rule\])?(.*?)\\end\{scope\}", tikz, flags=re.S):
         if r"\fill[pattern" not in sc:
             continue
         m = [None] * len(vong)
         for i, ch in enumerate("ABCDEF"[:len(vong)]):
             if r"\clip \vong%s;" % ch in sc:
                 m[i] = 1
-        for cx, cy, r in re.findall(r"\\clip\[even odd rule\].*?\(([-\d.]+),([-\d.]+)\) circle \(([-\d.]+)\);", sc):
+        for cx, cy, r in re.findall(r"\\clip \(-8,-8\) rectangle \(9,9\) \(([-\d.]+),([-\d.]+)\) circle \(([-\d.]+)\);", sc):
             i = vong.index((float(cx), float(cy), float(r)))
             assert m[i] is None
             m[i] = 0

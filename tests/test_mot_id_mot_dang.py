@@ -178,6 +178,74 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_VD036_TL_D",   # doi huong 60 do / hai huong la ban bat ki / phuong dong roi E30S (cho quang duong)
     "L10_C3_B6_VD036_TL_A",   # hai goc nang 30-60 / ang-ten tren noc nha
     "L10_C3_B6_VD036_MC_D",   # hai goc nang tren mat dat / thap tren doi / dieu
+    # giai tam giac phu ca Bai 5 va Bai 6 (co Lan 10/10/2026: gop thanh MOT ID, 15 bien the khac cach cho / cach hoi):
+    "L10_C3_TF_T",            # _01-03 2 canh + goc (cos/sin/tan); _04-06 2 goc + canh; _07-09 3 canh; _10-11 canh-goc-duong cao; _12-13 trung tuyen; _14-15 phan giac
+    # MC/SA/TL giai tam giac chuong 3 (co Lan 10/10/2026): moi ID = mot cach cho, cac bien the _01.._03 khac cach cho/cach hoi (cos/sin/tan, ...)
+    "L10_C3_B5_NB029_MC_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_SA_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_MC_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_MC_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_MC_M",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_I",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_TL_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_MC_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_J",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_MC_O",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_K",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_MC_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_SA_E",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_MC_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_MC_M",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_MC_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_I",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_MC_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_TL_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_MC_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_TL_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_MC_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_E",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_D",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_D",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_MC_G",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_TL_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
 }
 
 

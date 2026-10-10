@@ -8378,10 +8378,16 @@ def L10_C3_TF_L_01(socau, socot=1):
                  r"mệnh đề sau." % (a, b, c))
         # a) NB - nhận ra công thức (nhiều công thức đúng, nhiều biến dạng sai)
         dung, sai = [], []
-        for _k in range(6):
+        _da_co = set()  # không để hai phát biểu trùng nhau trong cùng một ý
+        for _k in range(60):
             d_, s_, ly = _cong_thuc_tam_giac()
+            if d_ in _da_co or s_ in _da_co:
+                continue
+            _da_co.update((d_, s_))
             dung.append((d_, ly))
             sai.append((s_, ly))
+            if len(dung) == 6:
+                break
         y1 = _phat_bieu(dung, sai)
         # b) TH - tính cực kì đơn giản: nửa chu vi hoặc côsin một góc
         ly_p = r"$p = \dfrac{a + b + c}{2} = \dfrac{%d + %d + %d}{2} = %s$." % (a, b, c, _L(Rational(a + b + c, 2)))
@@ -12865,3 +12871,2126 @@ def L10_C3_B6_VD036_TL_I_01(socau, dong=1):
                % (_xx(S1 + S2, 2), _lt(S1 + S2)))]
         cau += TL_answer_text(_DOAN_CONG_TROI, ds, _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dong)
     return cau
+
+
+# =====================================================================================================
+# ĐÚNG/SAI "GIẢI TAM GIÁC" PHỦ CẢ BÀI 5 VÀ BÀI 6 (cô Lan 10/10/2026)
+# Mỗi câu: a) NB, b) TH dùng giá trị lượng giác (Bài 5); c) VD, d) VDC dùng hệ thức lượng (Bài 6).
+# Tam giác sinh ra là tam giác HERON (cạnh nguyên, diện tích nguyên, không vuông) nên sin, cos, S, R, r, h đều
+# hữu tỉ; riêng TF_U (góc cho bằng số đo độ) dùng số gần đúng. Quy ước: a = BC, b = CA, c = AB.
+#   TF_T (MỘT ID duy nhất, 15 biến thể _01.._15; mọi biến thể cùng dạng "giải tam giác", chỉ khác cách cho và cách hỏi):
+#     _01.._03 biết 2 cạnh + 1 góc, góc cho bằng cos A / sin A (nhọn-tù) / tan A      (`_gt_sas`)
+#     _04.._06 biết 2 góc (số đo độ) + 1 cạnh: AAS BC, ASA (cạnh kẹp), AAS AB        (`_gu_goc`)
+#     _07.._09 biết 3 cạnh: cos-sin + Heron + R-r; cos-tan + h_a + m_a; cos-sin + h_c + R-m_c   (`_gt_sss`)
+#     _10, _11 biết 1 cạnh, cos B, 1 đường cao: (BC, AH), (AB, CK)                     (`_gt_cao`)
+#     _12, _13 biết 2 cạnh + trung tuyến AM: (BC, AB), (BC, AC)                        (`_gt_med`)
+#     _14, _15 biết 3 cạnh + phân giác AD: tính qua góc B, qua góc C                   (`_gt_pg`)
+# Một đại lượng = (mẫu phát biểu, giá trị, lời giải, [(giá trị sai, lỗi hay gặp)]) do `_gt_q` trả về; `_gt_gop_q`
+# ghép một danh sách đại lượng thành một ý (mỗi ý >= 3 phát biểu đúng và >= 3 phát biểu sai).
+# =====================================================================================================
+
+_GT_TEN_CANH = {"a": "BC", "b": "CA", "c": "AB"}
+_GT_NHO = {}  # bộ nhớ đệm các danh sách tam giác
+
+
+def _gt_ke(X):
+    """Hai cạnh kề đỉnh X, ví dụ "A" -> ("b", "c")."""
+    return tuple(k for k in "abc" if k != X.lower())
+
+
+def _gt_khac(X):
+    """Hai đỉnh còn lại, ví dụ "A" -> ("B", "C")."""
+    return tuple(k for k in "ABC" if k != X)
+
+
+def _gt_heron(a, b, c):
+    """(a, b, c) là tam giác Heron (diện tích nguyên) không vuông."""
+    if a + b <= c or a + c <= b or b + c <= a:
+        return False
+    if a * a + b * b == c * c or a * a + c * c == b * b or b * b + c * c == a * a:
+        return False
+    s = a + b + c
+    x = s * (s - 2 * a) * (s - 2 * b) * (s - 2 * c)
+    r = math.isqrt(x)
+    return r * r == x and r % 4 == 0
+
+
+def _gt_heron_ds():
+    """Các bộ ba cạnh nguyên a <= b <= c <= 52 của tam giác Heron."""
+    if "heron" not in _GT_NHO:
+        _GT_NHO["heron"] = [(a, b, c) for a in range(3, 53) for b in range(a, 53) for c in range(b, 53) if _gt_heron(a, b, c)]
+    return _GT_NHO["heron"]
+
+
+def _gt_binh_phuong(q):
+    """q (hữu tỉ không âm) là bình phương của một số hữu tỉ."""
+    q = Rational(q)
+    return math.isqrt(q.p) ** 2 == q.p and math.isqrt(q.q) ** 2 == q.q
+
+
+def _gt_med_ds():
+    """Tam giác Heron (b < c, cạnh <= 60) có trung tuyến m_a hữu tỉ."""
+    if "med" not in _GT_NHO:
+        _GT_NHO["med"] = [(a, b, c) for a in range(3, 61) for b in range(2, 61) for c in range(b + 1, 61)
+                          if _gt_heron(a, b, c) and _gt_binh_phuong(Rational(2 * b * b + 2 * c * c - a * a, 4))]
+    return _GT_NHO["med"]
+
+
+def _gt_dung(a, b, c):
+    """Mọi đại lượng của tam giác ABC (BC = a, CA = b, AB = c) dưới dạng chính xác."""
+    s = a + b + c
+    S = Rational(math.isqrt(s * (s - 2 * a) * (s - 2 * b) * (s - 2 * c)), 4)
+    p = Rational(s, 2)
+    return dict(
+        a=a, b=b, c=c, S=S, p=p, R=Rational(a * b * c) / (4 * S), r=S / p,
+        cos={"A": Rational(b * b + c * c - a * a, 2 * b * c), "B": Rational(a * a + c * c - b * b, 2 * a * c),
+             "C": Rational(a * a + b * b - c * c, 2 * a * b)},
+        sin={"A": 2 * S / (b * c), "B": 2 * S / (a * c), "C": 2 * S / (a * b)},
+        h={"a": 2 * S / a, "b": 2 * S / b, "c": 2 * S / c},
+        m2={"a": Rational(2 * b * b + 2 * c * c - a * a, 4), "b": Rational(2 * a * a + 2 * c * c - b * b, 4),
+            "c": Rational(2 * a * a + 2 * b * b - c * c, 4)},
+        BD=Rational(a * c, b + c), DC=Rational(a * b, b + c),
+        l2=Rational(b * c * ((b + c) ** 2 - a * a), (b + c) ** 2))
+
+
+def _gt_dang_dep(a, b, c):
+    """Loại tam giác quá dẹt (góc nhỏ dưới khoảng 16 độ hoặc góc tù quá lớn)."""
+    cs = [Rational(b * b + c * c - a * a, 2 * b * c), Rational(a * a + c * c - b * b, 2 * a * c), Rational(a * a + b * b - c * c, 2 * a * b)]
+    return max(cs) < Rational(24, 25) and min(cs) > Rational(-4, 5)
+
+
+def _gt_chon(dk=None, tran=40):
+    """Chọn ngẫu nhiên một tam giác Heron (nhân 1 hoặc 2, cạnh lớn nhất <= tran), gán nhãn ngẫu nhiên.
+    dk: hàm nhận dict của `_gt_dung` và trả về True nếu dùng được."""
+    ds = _gt_heron_ds()
+    for _ in range(4000):
+        x = list(random.choice(ds))
+        k = random.choice([1, 1, 2])
+        x = [v * k for v in x]
+        if max(x) > tran:
+            continue
+        random.shuffle(x)
+        if not _gt_dang_dep(*x):
+            continue
+        t = _gt_dung(*x)
+        if dk is None or dk(t):
+            return t
+    raise RuntimeError("không chọn được tam giác Heron thoả điều kiện")
+
+
+def _gt_ngoac(x):
+    """Số âm đặt trong ngoặc."""
+    return (r"\left(%s\right)" % _L(x)) if x < 0 else _L(x)
+
+
+def _gt_p(x):
+    """Ngoặc khi luỹ thừa: số âm hoặc phân số."""
+    x = sympify(x)
+    return (r"\left(%s\right)" % _L(x)) if (x < 0 or not x.is_Integer) else _L(x)
+
+
+def _gt_sai(lst, duong=True, gh1=False):
+    """Giữ các giá trị sai hợp lệ: thực, (dương nếu duong), (|x| < 1 nếu gh1); bỏ None."""
+    kq = []
+    for w, ghi in lst:
+        if w is None:
+            continue
+        try:
+            w = simplify(w)
+            if not w.is_real:
+                continue
+            f = float(w)
+        except (TypeError, ValueError):
+            continue
+        if (duong and f <= 0) or (gh1 and abs(f) >= 1):
+            continue
+        kq.append((w, ghi))
+    return kq
+
+
+def _gt_cos_m(t):
+    """cos của góc AMB (M là trung điểm BC) từ dữ liệu của dạng TF_X: t["m"] = AM, t["_med"] = "c" (cho AB) hoặc "b" (cho AC)."""
+    m, a = t["m"], t["a"]
+    cb = simplify(Rational(4 * m * m + a * a - 4 * t[t["_med"]] ** 2, 4) / (m * a))  # côsin của góc AMB (nếu cho AB) hoặc AMC (nếu cho AC)
+    return cb if t["_med"] == "c" else -cb
+
+
+def _gt_q(t, ten):
+    """Một đại lượng của tam giác t: (mẫu có 1 %s, giá trị, lời giải, [(giá trị sai, lỗi)]).
+    Tên: cosX sinX tanX (X = A, B, C), a b c, S, Sheron, p, R, r, ha hb hc, ma mb mc, BD DC, la laC (phân giác kẻ từ A, tính qua B hoặc C),
+    c_cao a_cao (cạnh AB / BC tính từ đường cao h_a / h_c và góc B), Sha Shc, cosAMB cosAMC sinAMB, b_med c_med (cạnh còn lại khi biết AM)."""
+    a, b, c, S, p = t["a"], t["b"], t["c"], t["S"], t["p"]
+    cs, sn = t["cos"], t["sin"]
+    kieu, X = ten[:3], ten[3:4]
+    if len(ten) == 4 and kieu in ("cos", "sin", "tan"):
+        o = X.lower()
+        s1, s2 = _gt_ke(X)
+        cd = (t[s1], t[s2], t[o])
+        if kieu == "cos":
+            v = cs[X]
+            ly = (r"Hệ quả của định lí côsin: $\cos %s = \dfrac{%s^{2} + %s^{2} - %s^{2}}{2\cdot %s\cdot %s} = "
+                  r"\dfrac{%d^{2} + %d^{2} - %d^{2}}{2\cdot %d\cdot %d} = %s$." % (X, s1, s2, o, s1, s2, cd[0], cd[1], cd[2], cd[0], cd[1], _L(v)))
+            sai = [(-v, "Sai dấu"), (sn[X], r"Nhầm $\cos %s$ với $\sin %s$" % (X, X)),
+                   (Rational(cd[0] ** 2 + cd[1] ** 2 + cd[2] ** 2, 2 * cd[0] * cd[1]), r"Sai dấu của $%s^{2}$" % o),
+                   (Rational(cd[0] ** 2 + cd[1] ** 2 - cd[2] ** 2, cd[0] * cd[1]), "Quên hệ số 2 ở mẫu")]
+            return r"$\cos %s = %%s$" % X, v, ly, _gt_sai(sai, duong=False, gh1=True)
+        if kieu == "sin":
+            v = sn[X]
+            ly = (r"Vì $0^{\circ} < %s < 180^{\circ}$ nên $\sin %s > 0$ và $\sin %s = \sqrt{1 - \cos^{2}%s} = \sqrt{1 - %s^{2}} = %s$."
+                  % (X, X, X, X, _gt_p(cs[X]), _L(v)))
+            sai = [(-v, r"Quên rằng $\sin %s > 0$" % X), (abs(cs[X]), r"Nhầm $\sin %s$ với $\cos %s$" % (X, X)),
+                   (1 - cs[X] ** 2, "Quên lấy căn"), (1 - abs(cs[X]), "Nhầm $\\sin^{2}+\\cos^{2}=1$")]
+            return r"$\sin %s = %%s$" % X, v, ly, _gt_sai(sai, duong=True, gh1=True)
+        v = sn[X] / cs[X]
+        ly = r"$\tan %s = \dfrac{\sin %s}{\cos %s} = \dfrac{%s}{%s} = %s$." % (X, X, X, _L(sn[X]), _gt_ngoac(cs[X]), _L(v))
+        sai = [(1 / v, "Đảo tử và mẫu"), (-v, "Sai dấu"), (sn[X] * cs[X], r"Nhầm $\tan = \sin\cdot\cos$")]
+        return r"$\tan %s = %%s$" % X, v, ly, _gt_sai(sai, duong=False)
+    if ten in ("a", "b", "c"):
+        X = ten.upper()
+        s1, s2 = _gt_ke(X)
+        n1, n2 = _GT_TEN_CANH[s1], _GT_TEN_CANH[s2]
+        v = t[ten]
+        tong = t[s1] ** 2 + t[s2] ** 2 - 2 * t[s1] * t[s2] * cs[X]
+        ly = (r"Định lí côsin: $%s^{2} = %s^{2} + %s^{2} - 2\cdot %s\cdot %s\cdot\cos %s = %d^{2} + %d^{2} - 2\cdot %d\cdot %d\cdot %s = %d$, "
+              r"suy ra $%s = %d$." % (_GT_TEN_CANH[ten], n1, n2, n1, n2, X, t[s1], t[s2], t[s1], t[s2], _gt_ngoac(cs[X]), tong, _GT_TEN_CANH[ten], v))
+        sai = [(sqrt(t[s1] ** 2 + t[s2] ** 2 + 2 * t[s1] * t[s2] * cs[X]), "Sai dấu của số hạng chứa côsin"),
+               (sqrt(t[s1] ** 2 + t[s2] ** 2), "Quên số hạng chứa côsin"),
+               (sqrt(t[s1] ** 2 + t[s2] ** 2 - t[s1] * t[s2] * cs[X]), "Quên hệ số 2"), (tong, "Quên lấy căn bậc hai")]
+        return r"$%s = %%s$" % _GT_TEN_CANH[ten], v, ly, _gt_sai(sai)
+    if ten == "S":
+        v = S
+        ly = (r"$S = \dfrac{1}{2}\cdot AB\cdot AC\cdot\sin A = \dfrac{1}{2}\cdot %d\cdot %d\cdot %s = %s$." % (c, b, _L(sn["A"]), _L(v)))
+        sai = [(2 * v, r"Quên hệ số $\dfrac{1}{2}$"), (Rational(1, 2) * b * c * abs(cs["A"]), r"Nhầm $\sin A$ với $\cos A$"),
+               (Rational(1, 2) * b * c * sn["A"] ** 2, r"Dùng nhầm $\sin^{2}A$"), (v / 2, r"Nhân thừa $\dfrac{1}{2}$")]
+        return r"Diện tích tam giác $ABC$ bằng $%s$", v, ly, _gt_sai(sai)
+    if ten == "Sheron":
+        v = S
+        ly = (r"Nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %s$. Công thức Heron: $S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)} "
+              r"= \sqrt{%s\cdot %s\cdot %s\cdot %s} = %s$." % (a, b, c, _L(p), _L(p), _L(p - a), _L(p - b), _L(p - c), _L(v)))
+        sai = [(2 * v, r"Quên hệ số $\dfrac{1}{2}$"), (sqrt(Integer(a + b + c) * (a + b + c - 2 * a) * (a + b + c - 2 * b) * (a + b + c - 2 * c)), "Dùng chu vi thay cho nửa chu vi"),
+               (sqrt((p - a) * (p - b) * (p - c)), "Quên thừa số $p$"), (v / 2, "Chia thừa cho 2")]
+        return r"Diện tích tam giác $ABC$ bằng $%s$", v, ly, _gt_sai(sai)
+    if ten == "p":
+        v = p
+        ly = r"Nửa chu vi $p = \dfrac{a + b + c}{2} = \dfrac{%d + %d + %d}{2} = %s$." % (a, b, c, _L(v))
+        sai = [(a + b + c, "Đó là chu vi"), (v / 2, "Chia thừa cho 2"), (Rational(a + b, 2), "Thiếu một cạnh")]
+        return r"Nửa chu vi tam giác $ABC$ bằng $%s$", v, ly, _gt_sai(sai)
+    if ten == "R":
+        v = t["R"]
+        ly = r"Định lí sin: $R = \dfrac{BC}{2\sin A} = \dfrac{%d}{2\cdot %s} = %s$." % (a, _L(sn["A"]), _L(v))
+        sai = [(2 * v, "Quên chia 2"), (v / 2, "Chia thừa cho 2"), (a / (2 * abs(cs["A"])), r"Nhầm $\sin A$ với $\cos A$"), (a / sn["A"] / 4, "Chia thừa")]
+        return r"Bán kính đường tròn ngoại tiếp tam giác $ABC$ bằng $%s$", v, ly, _gt_sai(sai)
+    if ten == "r":
+        v = t["r"]
+        ly = (r"Nửa chu vi $p = %s$, diện tích $S = %s$, nên $r = \dfrac{S}{p} = %s$." % (_L(p), _L(S), _L(v)))
+        sai = [(2 * v, "Nhân thừa 2"), (v / 2, "Dùng chu vi thay cho nửa chu vi"), (S * p, "Nhân thay vì chia"), (S / a, "Chia cho một cạnh")]
+        return r"Bán kính đường tròn nội tiếp tam giác $ABC$ bằng $%s$", v, ly, _gt_sai(sai)
+    if ten in ("ha", "hb", "hc"):
+        k = ten[1]
+        v = t["h"][k]
+        ly = r"$S = \dfrac{1}{2}\cdot %d\cdot h_%s$ nên $h_%s = \dfrac{2S}{%d} = %s$." % (t[k], k, k, t[k], _L(v))
+        sai = [(S / t[k], "Quên nhân 2"), (2 * v, "Nhân thừa 2"), (2 * S, "Quên chia cho cạnh"), (v / 2, "Chia thừa cho 2")]
+        return r"Đường cao $h_%s$ kẻ từ đỉnh $%s$ bằng $%%s$" % (k, k.upper()), v, ly, _gt_sai(sai)
+    if ten in ("ma", "mb", "mc"):
+        k = ten[1]
+        X = k.upper()
+        s1, s2 = _gt_ke(X)
+        v = sqrt(t["m2"][k])
+        ly = (r"Gọi $M$ là trung điểm cạnh đối diện đỉnh $%s$. Áp dụng định lí côsin cho hai tam giác có chung $%sM$, chú ý hai góc tại $M$ bù nhau "
+              r"(côsin đối nhau), rồi cộng hai vế: $m_%s^{2} = \dfrac{2%s^{2} + 2%s^{2} - %s^{2}}{4} = \dfrac{2\cdot %d^{2} + 2\cdot %d^{2} - %d^{2}}{4} = %s$, "
+              r"suy ra $m_%s = %s$." % (X, X, k, s1, s2, k, t[s1], t[s2], t[k], _L(t["m2"][k]), k, _L(v)))
+        m4 = 2 * t[s1] ** 2 + 2 * t[s2] ** 2 - t[k] ** 2
+        sai = [(sqrt(Rational(m4, 2)), "Chia 2 thay vì chia 4"), (sqrt(Integer(m4)), "Quên chia 4"),
+               (sqrt(Rational(2 * t[s1] ** 2 + 2 * t[s2] ** 2 + t[k] ** 2, 4)), "Sai dấu của $%s^{2}$" % k),
+               (sqrt(Rational(t[s1] ** 2 + t[s2] ** 2 - t[k] ** 2, 4)), "Thiếu hệ số 2")]
+        return r"Độ dài đường trung tuyến $m_%s$ kẻ từ $%s$ bằng $%%s$" % (k, X), v, ly, _gt_sai(sai)
+    if ten == "BD":
+        v = t["BD"]
+        ly = (r"$AD$ là phân giác nên $\dfrac{BD}{DC} = \dfrac{AB}{AC} = \dfrac{%d}{%d}$ và $BD + DC = %d$, suy ra $BD = \dfrac{%d\cdot %d}{%d + %d} = %s$."
+              % (c, b, a, a, c, b, c, _L(v)))
+        sai = [(t["DC"], "Nhầm $BD$ với $DC$"), (Rational(a, 2), "Nhầm với trung điểm"), (Rational(a * b, b + c) * b / c, "Sai tỉ số"),
+               (Rational(a * c, abs(b - c)) if b != c else None, "Dùng hiệu hai cạnh")]
+        return r"$BD = %s$", v, ly, _gt_sai(sai)
+    if ten == "DC":
+        v = t["DC"]
+        ly = (r"$AD$ là phân giác nên $\dfrac{BD}{DC} = \dfrac{AB}{AC}$ và $BD + DC = %d$, suy ra $DC = \dfrac{%d\cdot %d}{%d + %d} = %s$."
+              % (a, a, b, b, c, _L(v)))
+        sai = [(t["BD"], "Nhầm $DC$ với $BD$"), (Rational(a, 2), "Nhầm với trung điểm"), (Rational(a * c, b + c) * c / b, "Sai tỉ số")]
+        return r"$DC = %s$", v, ly, _gt_sai(sai)
+    if ten in ("la", "laC"):  # AD tính qua tam giác ABD (la) hoặc ACD (laC)
+        K, kc, x, Dn, tg, En = ("B", "c", t["BD"], "BD", "ABD", "AB") if ten == "la" else ("C", "b", t["DC"], "DC", "ACD", "AC")
+        ben, v = t[kc], sqrt(t["l2"])
+        ly = (r"$AD$ là phân giác nên $%s = \dfrac{%d\cdot %d}{%d + %d} = %s$. Định lí côsin trong tam giác $%s$: "
+              r"$AD^{2} = %s^{2} + %s^{2} - 2\cdot %s\cdot %s\cdot\cos %s = %d^{2} + %s^{2} - 2\cdot %d\cdot %s\cdot %s = %s$, nên $AD = %s$."
+              % (Dn, a, ben, b, c, _L(x), tg, En, Dn, En, Dn, K, ben, _gt_p(x), ben, _L(x), _gt_ngoac(cs[K]), _L(t["l2"]), _L(v)))
+        sai = [(sqrt(ben * ben + x ** 2 + 2 * ben * x * cs[K]), "Sai dấu của số hạng chứa côsin"),
+               (sqrt(ben * ben + x ** 2), "Quên số hạng chứa côsin"), (2 * v, "Nhân thừa 2"), (sqrt(Integer(b * c)), "Dùng nhầm $\\sqrt{AB\\cdot AC}$")]
+        return r"Độ dài đường phân giác $AD$ ($D$ thuộc $BC$) bằng $%s$", v, ly, _gt_sai(sai)
+    if ten in ("c_cao", "a_cao"):  # AB từ h_a (c_cao), BC từ h_c (a_cao), cùng với góc B
+        k, ten_c, h_t, dinh = ("a", "AB", "h_a", "AH") if ten == "c_cao" else ("c", "BC", "h_c", "CK")
+        v, hh = (c if ten == "c_cao" else a), t["h"][k]
+        ly = (r"Trong tam giác vuông tạo bởi đường cao %s: $%s = \dfrac{%s}{\sin B} = \dfrac{%s}{%s} = %d$." % (dinh, ten_c, h_t, _L(hh), _L(sn["B"]), v))
+        sai = [(hh * sn["B"], r"Dùng nhầm $%s\cdot\sin B$" % h_t), (hh / cs["B"] if cs["B"] != 0 else None, r"Nhầm $\sin B$ với $\cos B$"),
+               (hh * cs["B"], r"Dùng nhầm $%s\cdot\cos B$" % h_t), (hh, r"Nhầm cạnh với đường cao")]
+        return r"$%s = %%s$" % ten_c, Integer(v), ly, _gt_sai(sai)
+    if ten in ("Sha", "Shc"):
+        k = ten[2]
+        ly = r"$S = \dfrac{1}{2}\cdot %s\cdot h_%s = \dfrac{1}{2}\cdot %d\cdot %s = %s$." % (_GT_TEN_CANH[k], k, t[k], _L(t["h"][k]), _L(S))
+        sai = [(2 * S, r"Quên hệ số $\dfrac{1}{2}$"), (S / 2, "Nhân thêm một lần $\\dfrac{1}{2}$"), (t[k] + t["h"][k], "Cộng thay vì nhân")]
+        return r"Diện tích tam giác $ABC$ bằng $%s$", S, ly, _gt_sai(sai)
+    if ten in ("cosAMB", "cosAMC", "sinAMB"):  # trung tuyến AM, hai góc AMB và AMC bù nhau
+        dau, m = t["_med"], t["m"]
+        tg, gk, dinh = ("ABM", "AMB", "B") if dau == "c" else ("ACM", "AMC", "C")
+        cb = _gt_cos_m(t) if dau == "c" else -_gt_cos_m(t)  # côsin của góc tại M trong tam giác đã cho cạnh
+        ly0 = (r"Trong tam giác $%s$ (với $M$ là trung điểm $BC$, $BM = CM = \dfrac{%d}{2}$, $AM = %s$): $\cos\widehat{%s} = "
+               r"\dfrac{AM^{2} + BM^{2} - A%s^{2}}{2\cdot AM\cdot BM} = %s$." % (tg, a, _L(m), gk, dinh, _L(cb)))
+        if ten == "sinAMB":
+            v = simplify(sqrt(1 - _gt_cos_m(t) ** 2))
+            ly = r"$\sin\widehat{AMB} = \sqrt{1 - \cos^{2}\widehat{AMB}} = \sqrt{1 - %s^{2}} = %s$ (vì $0^{\circ} < \widehat{AMB} < 180^{\circ}$)." % (_gt_ngoac(_gt_cos_m(t)), _L(v))
+            sai = [(-v, r"Quên rằng $\sin > 0$"), (abs(_gt_cos_m(t)), r"Nhầm $\sin$ với $\cos$"), (1 - _gt_cos_m(t) ** 2, "Quên lấy căn")]
+            return r"$\sin\widehat{AMB} = %s$", v, ly, _gt_sai(sai, duong=True, gh1=True)
+        G, kia = ("B", "C") if ten == "cosAMB" else ("C", "B")
+        v = _gt_cos_m(t) if ten == "cosAMB" else -_gt_cos_m(t)
+        if dau != ("c" if G == "B" else "b"):
+            ly = ly0 + r" Hai góc $AMB$, $AMC$ bù nhau nên $\cos\widehat{AM%s} = -\cos\widehat{AM%s} = %s$." % (G, kia, _L(v))
+        else:
+            ly = ly0
+        sai = [(-v, "Quên rằng hai góc bù nhau có côsin đối nhau"), (simplify(v / 2), "Dùng nhầm $BM = a$ ở mẫu"), (simplify(v * 2), "Nhầm hệ số ở mẫu")]
+        return r"$\cos\widehat{AM%s} = %%s$" % G, v, ly, _gt_sai(sai, duong=False, gh1=True)
+    if ten in ("b_med", "c_med"):  # cạnh còn lại (AC hoặc AB) tính từ định lí côsin trong tam giác chứa M
+        m = t["m"]
+        G, ang, ten_c, v, co = ("C", "AMC", "AC", b, -_gt_cos_m(t)) if ten == "b_med" else ("B", "AMB", "AB", c, _gt_cos_m(t))
+        val = m * m + Rational(a * a, 4) - m * a * co
+        ly = (r"Trong tam giác $A%sM$: $%s^{2} = AM^{2} + %sM^{2} - 2\cdot AM\cdot %sM\cdot\cos\widehat{%s} = %s^{2} + %s^{2} - 2\cdot %s\cdot %s\cdot %s = %s$, nên $%s = %s$."
+              % (G, ten_c, G, G, ang, _gt_p(m), _gt_p(Rational(a, 2)), _L(m), _L(Rational(a, 2)), _gt_ngoac(co), _L(val), ten_c, _L(v)))
+        sai = [(sqrt(m * m + Rational(a * a, 4) + m * a * co), "Sai dấu của số hạng chứa côsin"), (sqrt(m * m + Rational(a * a, 4)), "Quên số hạng chứa côsin"),
+               (sqrt(m * m + Rational(a * a, 4) - 2 * m * a * co), "Nhân thừa 2"), (m * m + Rational(a * a, 4) - m * a * co, "Quên lấy căn bậc hai")]
+        return r"$%s = %%s$" % ten_c, Integer(v), ly, _gt_sai(sai)
+    raise KeyError(ten)
+
+
+def _gt_gop_q(t, ds_ten):
+    """Một ý gồm các đại lượng trong ds_ten."""
+    return _tf_gop(*[_tf_ct(mau, sympify(v), ly, sai) for mau, v, ly, sai in (_gt_q(t, ten) for ten in ds_ten)])
+
+
+def _gt_ya(t, X):
+    """Ý a (NB, Bài 5): hai góc bù nhau trong tam giác, hệ thức cơ bản, dấu theo loại góc."""
+    s, c = t["sin"][X], t["cos"][X]
+    nhon = c > 0
+    y, z = _gt_khac(X)
+    ly = (r"Trong tam giác $ABC$: $%s + %s = 180^{\circ} - %s$, nên $\sin\left(%s + %s\right) = \sin\left(180^{\circ} - %s\right) = \sin %s = %s$ và "
+          r"$\cos\left(%s + %s\right) = -\cos %s = %s$. Ngoài ra $\sin^{2}%s + \cos^{2}%s = 1$; góc $%s$ là góc %s nên $\cos %s %s 0$, $\tan %s %s 0$."
+          % (y, z, X, y, z, X, X, _L(s), y, z, X, _L(-c), X, X, X, "nhọn" if nhon else "tù", X, ">" if nhon else "<", X, ">" if nhon else "<"))
+    dung = [(r"$\sin\left(%s + %s\right) = %s$" % (y, z, _L(s)), ly), (r"$\sin\left(180^{\circ} - %s\right) = %s$" % (X, _L(s)), ly),
+            (r"$\cos\left(%s + %s\right) = %s$" % (y, z, _L(-c)), ly), (r"$\sin^{2}%s + \cos^{2}%s = 1$" % (X, X), ly),
+            (r"$\cos %s %s 0$" % (X, ">" if nhon else "<"), ly), (r"$\tan %s %s 0$" % (X, ">" if nhon else "<"), ly)]
+    sai = [(r"$\sin\left(%s + %s\right) = %s$" % (y, z, _L(-s)), ly), (r"$\sin\left(180^{\circ} - %s\right) = %s$" % (X, _L(c)), ly),
+           (r"$\cos\left(%s + %s\right) = %s$" % (y, z, _L(c)), ly), (r"$\sin^{2}%s + \cos^{2}%s = %s$" % (X, X, _L(s)), ly),
+           (r"$\cos %s %s 0$" % (X, "<" if nhon else ">"), ly), (r"$\tan %s %s 0$" % (X, "<" if nhon else ">"), ly)]
+    return _phat_bieu(dung, sai)
+
+
+def _gt_rut_goc(t, X, co):
+    """Ý b (TH, Bài 5): hai giá trị lượng giác còn lại của góc X khi đã cho một giá trị (co = "cos" | "sin" | "tan")."""
+    s, c = t["sin"][X], t["cos"][X]
+    nhon = c > 0
+    dau = ">" if nhon else "<"
+    cap = []
+    for ten in {"cos": ("sin", "tan"), "sin": ("cos", "tan"), "tan": ("cos", "sin")}[co]:
+        if ten == "sin":
+            ly = (r"Từ $\cos %s = %s$: $\sin^{2}%s = 1 - \cos^{2}%s = %s$, và $\sin %s > 0$ nên $\sin %s = %s$." % (X, _L(c), X, X, _L(1 - c * c), X, X, _L(s))
+                  if co != "tan" else r"$\sin %s = \tan %s\cdot\cos %s = %s$." % (X, X, X, _L(s)))
+            sai = [(-s, r"Quên rằng $\sin %s > 0$" % X), (c, r"Nhầm $\sin %s$ với $\cos %s$" % (X, X)), (1 - c * c, "Quên lấy căn")]
+            cap.append(_tf_ct(r"$\sin %s = %%s$" % X, s, ly, _gt_sai(sai, duong=True, gh1=True)))
+        elif ten == "cos":
+            if co == "sin":
+                ly = (r"$\cos^{2}%s = 1 - \sin^{2}%s = %s$; góc $%s$ là góc %s nên $\cos %s %s 0$, do đó $\cos %s = %s$."
+                      % (X, X, _L(1 - s * s), X, "nhọn" if nhon else "tù", X, dau, X, _L(c)))
+            else:
+                ly = (r"$\dfrac{1}{\cos^{2}%s} = 1 + \tan^{2}%s = %s$ nên $\cos^{2}%s = %s$; vì $\tan %s %s 0$ nên góc $%s$ là góc %s, "
+                      r"$\cos %s %s 0$ và $\cos %s = %s$."
+                      % (X, X, _L(1 + (s / c) ** 2), X, _L(c * c), X, dau, X, "nhọn" if nhon else "tù", X, dau, X, _L(c)))
+            sai = [(-c, "Sai dấu"), (c * c, "Quên lấy căn"), ((1 if nhon else -1) * (1 - s), "Quên bình phương")]
+            cap.append(_tf_ct(r"$\cos %s = %%s$" % X, c, ly, _gt_sai(sai, duong=False, gh1=True)))
+        else:
+            v = s / c
+            ly = r"$\tan %s = \dfrac{\sin %s}{\cos %s} = %s$." % (X, X, X, _L(v))
+            sai = [(1 / v, "Đảo tử và mẫu"), (-v, "Sai dấu"), (s * c, r"Nhầm $\tan = \sin\cdot\cos$")]
+            cap.append(_tf_ct(r"$\tan %s = %%s$" % X, v, ly, _gt_sai(sai, duong=False)))
+    return _tf_gop(*cap)
+
+
+def _gt_cau(socau, socot, tao):
+    """Ghép `socau` câu đúng/sai; `tao()` trả về (đề bài, [ý a, ý b, ý c, ý d])."""
+    cauTF = ""
+    for _ in range(socau):
+        debai, ys = tao()
+        cauTF += TF_baitoan_du(debai, ys, 0, 0, socot)
+    return cauTF
+
+
+# ---------- TF_T: biết hai cạnh kề và một giá trị lượng giác của góc A ----------
+
+def _gt_sas(co, hoi_c, hoi_d):
+    t = _gt_chon(dk=lambda t: t["b"] != t["c"], tran=30)
+    s, c = t["sin"]["A"], t["cos"]["A"]
+    cho = {"cos": r"$\cos A = %s$" % _L(c), "sin": r"$\sin A = %s$ và góc $A$ là góc %s" % (_L(s), "nhọn" if c > 0 else "tù"),
+           "tan": r"$\tan A = %s$" % _L(s / c)}[co]
+    debai = r"Cho tam giác $ABC$ có $AB = %d$, $AC = %d$ và %s. Xét tính đúng sai của các khẳng định sau:" % (t["c"], t["b"], cho)
+    return debai, [_gt_ya(t, "A"), _gt_rut_goc(t, "A", co), _gt_gop_q(t, hoi_c), _gt_gop_q(t, hoi_d)]
+
+
+def L10_C3_TF_T_01(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $AB$, $AC$ và $\cos A$ (phân số, có thể âm).
+    a) hai góc bù nhau, hệ thức cơ bản; b) $\sin A$, $\tan A$; c) $BC$, diện tích; d) $R$, $h_a$."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sas("cos", ["a", "S"], ["R", "ha"]))
+
+
+def L10_C3_TF_T_02(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù. b) cos A, tan A; c) BC, p; d) cos B, sin B."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sas("sin", ["a", "p"], ["cosB", "sinB"]))
+
+
+def L10_C3_TF_T_03(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $AB$, $AC$ và $\tan A$ (dấu cho biết nhọn / tù). b) cos A, sin A; c) BC, S; d) r, m_a."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sas("tan", ["a", "S"], ["r", "ma"]))
+
+
+# ---------- TF_V: biết ba cạnh ----------
+
+def _gt_sss(hoi_b, hoi_c, hoi_d):
+    t = _gt_chon(tran=40)
+    debai = r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. Xét tính đúng sai của các khẳng định sau:" % (t["a"], t["b"], t["c"])
+    X = random.choice(["A", "B", "C"])
+    return debai, [_gt_ya(t, X), _gt_gop_q(t, hoi_b), _gt_gop_q(t, hoi_c), _gt_gop_q(t, hoi_d)]
+
+
+def L10_C3_TF_T_07(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết ba cạnh. b) cos A, sin A; c) nửa chu vi, diện tích (Heron); d) R, r."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sss(["cosA", "sinA"], ["p", "Sheron"], ["R", "r"]))
+
+
+def L10_C3_TF_T_08(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết ba cạnh. b) cos B, tan B; c) diện tích (Heron), $h_a$; d) trung tuyến $m_a$, r."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sss(["cosB", "tanB"], ["Sheron", "ha"], ["ma", "r"]))
+
+
+def L10_C3_TF_T_09(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết ba cạnh. b) cos C, sin C; c) diện tích (Heron), $h_c$; d) R, trung tuyến $m_c$."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_sss(["cosC", "sinC"], ["Sheron", "hc"], ["R", "mc"]))
+
+
+# ---------- TF_W: biết một cạnh, cos B và một đường cao ----------
+
+def _gt_cao(loai):
+    ok = lambda t, k: (2 * t["S"]) % t[k] == 0 and 0 not in t["cos"].values()  # đường cao nguyên
+    if loai == "a":
+        t = _gt_chon(dk=lambda t: ok(t, "a"), tran=30)
+        debai = (r"Cho tam giác $ABC$ có $BC = %d$, $\cos B = %s$ và đường cao $AH = %s$ ($H$ thuộc đường thẳng $BC$). "
+                 r"Xét tính đúng sai của các khẳng định sau:" % (t["a"], _L(t["cos"]["B"]), _L(t["h"]["a"])))
+        y3, y4 = _gt_gop_q(t, ["c_cao", "Sha"]), _gt_gop_q(t, ["b", "cosC"])
+    else:
+        t = _gt_chon(dk=lambda t: ok(t, "c"), tran=30)
+        debai = (r"Cho tam giác $ABC$ có $AB = %d$, $\cos B = %s$ và đường cao $CK = %s$ ($K$ thuộc đường thẳng $AB$). "
+                 r"Xét tính đúng sai của các khẳng định sau:" % (t["c"], _L(t["cos"]["B"]), _L(t["h"]["c"])))
+        y3, y4 = _gt_gop_q(t, ["a_cao", "Shc"]), _gt_gop_q(t, ["b", "R"])
+    return debai, [_gt_ya(t, "B"), _gt_rut_goc(t, "B", "cos"), y3, y4]
+
+
+def L10_C3_TF_T_10(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $BC$, $\cos B$ và đường cao $AH$. b) sin B, tan B; c) AB, S; d) AC (định lí côsin), cos C."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_cao("a"))
+
+
+def L10_C3_TF_T_11(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $AB$, $\cos B$ và đường cao $CK$. b) sin B, tan B; c) BC, S; d) AC (định lí côsin), R."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_cao("c"))
+
+
+# ---------- TF_X: biết hai cạnh và đường trung tuyến AM ----------
+
+def _gt_chon_med(dau):
+    """Tam giác có trung tuyến m_a hữu tỉ (b khác c); dau = "c" (đề cho AB) hoặc "b" (đề cho AC)."""
+    for _ in range(500):
+        a, b, c = random.choice(_gt_med_ds())
+        if random.random() < 0.5:
+            b, c = c, b
+        if _gt_dang_dep(a, b, c):
+            break
+    t = _gt_dung(a, b, c)
+    t["m"], t["_med"] = sqrt(t["m2"]["a"]), dau
+    return t
+
+
+def _gt_ya_med(t):
+    """Ý a (NB, Bài 5): hai góc AMB và AMC bù nhau."""
+    nh = _gt_cos_m(t) > 0
+    ly = (r"$M$ nằm giữa $B$ và $C$ nên $\widehat{AMB} + \widehat{AMC} = 180^{\circ}$, do đó $\sin\widehat{AMB} = \sin\widehat{AMC}$ và "
+          r"$\cos\widehat{AMB} = -\cos\widehat{AMC}$; $BM = CM = \dfrac{%d}{2}$." % t["a"])
+    dung = [(r"$\widehat{AMB} + \widehat{AMC} = 180^{\circ}$", ly), (r"$\sin\widehat{AMB} = \sin\widehat{AMC}$", ly),
+            (r"$\cos\widehat{AMB} + \cos\widehat{AMC} = 0$", ly), (r"$\cos\widehat{AMC} = -\cos\widehat{AMB}$", ly),
+            (r"$BM = CM = %s$" % _L(Rational(t["a"], 2)), ly),
+            (r"Góc $\widehat{AMB}$ là góc %s" % ("nhọn" if nh else "tù"), ly + r" Mà $\cos\widehat{AMB} %s 0$ nên đúng." % (">" if nh else "<"))]
+    sai = [(r"$\cos\widehat{AMB} = \cos\widehat{AMC}$", ly), (r"$\sin\widehat{AMB} + \sin\widehat{AMC} = 0$", ly),
+           (r"$\widehat{AMB} = \widehat{AMC}$", ly + r" (Hai góc bằng nhau chỉ khi $AB = AC$.)"), (r"$\widehat{AMB} + \widehat{AMC} = 90^{\circ}$", ly),
+           (r"$BM = %s$" % _L(t["a"]), ly),
+           (r"Góc $\widehat{AMB}$ là góc %s" % ("tù" if nh else "nhọn"), ly + r" Mà $\cos\widehat{AMB} %s 0$ nên sai." % (">" if nh else "<"))]
+    return _phat_bieu(dung, sai)
+
+
+def _gt_med(dau):
+    t = _gt_chon_med(dau)
+    debai = (r"Cho tam giác $ABC$ có $BC = %d$, $%s = %d$ và đường trung tuyến $AM = %s$ ($M$ là trung điểm của $BC$). "
+             r"Xét tính đúng sai của các khẳng định sau:" % (t["a"], "AB" if dau == "c" else "AC", t[dau], _L(t["m"])))
+    return debai, [_gt_ya_med(t), _gt_gop_q(t, ["cosAMB", "cosAMC", "sinAMB"]), _gt_gop_q(t, ["c_med" if dau == "b" else "b_med"]),
+                   _gt_gop_q(t, ["cosA", "S"] if dau == "c" else ["R", "S"])]
+
+
+def L10_C3_TF_T_12(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $BC$, $AB$ và trung tuyến $AM$. a) $AMB$, $AMC$ bù nhau; b) cos, sin góc tại M;
+    c) AC (định lí côsin trong tam giác $AMC$); d) cos A, S."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_med("c"))
+
+
+def L10_C3_TF_T_13(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $BC$, $AC$ và trung tuyến $AM$. c) AB (định lí côsin trong tam giác $AMB$); d) R, S."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_med("b"))
+
+
+# ---------- TF_Y: biết ba cạnh và đường phân giác trong AD ----------
+
+def _gt_ya_pg():
+    """Ý a (NB, Bài 5): hai góc ADB, ADC bù nhau; AD chia đôi góc A."""
+    ly = (r"$D$ nằm giữa $B$ và $C$ nên $\widehat{ADB} + \widehat{ADC} = 180^{\circ}$, suy ra $\sin\widehat{ADB} = \sin\widehat{ADC}$ và "
+          r"$\cos\widehat{ADB} = -\cos\widehat{ADC}$; $AD$ là phân giác nên $\widehat{BAD} = \widehat{DAC} = \dfrac{\widehat{A}}{2}$.")
+    dung = [(r"$\widehat{ADB} + \widehat{ADC} = 180^{\circ}$", ly), (r"$\sin\widehat{ADB} = \sin\widehat{ADC}$", ly),
+            (r"$\cos\widehat{ADB} + \cos\widehat{ADC} = 0$", ly), (r"$\widehat{BAD} = \widehat{DAC}$", ly),
+            (r"$\sin\widehat{BAD} = \sin\widehat{DAC}$", ly), (r"$\widehat{BAD} = \dfrac{\widehat{BAC}}{2}$", ly)]
+    sai = [(r"$\cos\widehat{ADB} = \cos\widehat{ADC}$", ly), (r"$\sin\widehat{ADB} + \sin\widehat{ADC} = 0$", ly),
+           (r"$\widehat{ADB} = \widehat{ADC}$", ly + r" (Hai góc này bằng nhau chỉ khi $AB = AC$.)"), (r"$\widehat{ADB} + \widehat{ADC} = 90^{\circ}$", ly),
+           (r"$\widehat{BAD} = \widehat{BAC}$", ly), (r"$\cos\widehat{BAD} = -\cos\widehat{DAC}$", ly)]
+    return _phat_bieu(dung, sai)
+
+
+def _gt_pg(dinh):
+    t = _gt_chon(dk=lambda t: t["b"] != t["c"] and _gt_binh_phuong(t["l2"]), tran=60)
+    debai = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. Gọi $AD$ là đường phân giác trong của góc $A$ ($D$ thuộc cạnh $BC$). "
+             r"Xét tính đúng sai của các khẳng định sau:" % (t["a"], t["b"], t["c"]))
+    return debai, [_gt_ya_pg(), _gt_gop_q(t, ["cos" + dinh, "sin" + dinh]), _gt_gop_q(t, ["BD", "DC"]), _gt_gop_q(t, ["la" if dinh == "B" else "laC"])]
+
+
+def L10_C3_TF_T_14(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết ba cạnh và phân giác $AD$. b) cos B, sin B; c) BD, DC; d) AD (định lí côsin trong tam giác $ABD$)."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_pg("B"))
+
+
+def L10_C3_TF_T_15(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết ba cạnh và phân giác $AD$. b) cos C, sin C; c) BD, DC; d) AD (định lí côsin trong tam giác $ACD$)."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gt_pg("C"))
+
+
+# ---------- TF_U: biết hai góc (số đo độ) và một cạnh; các giá trị là số gần đúng ----------
+
+def _gu_dung(ang, cg, do_dai):
+    """ang: số đo ba góc (độ); cg: cạnh cho trước ("a" | "b" | "c") có độ dài do_dai. Mọi đại lượng tính bằng số thực."""
+    sin = {x: math.sin(math.radians(v)) for x, v in ang.items()}
+    G = cg.upper()
+    k = do_dai / sin[G]  # k = 2R
+    canh = {x.lower(): k * sin[x] for x in "ABC"}
+    S = 0.5 * canh["b"] * canh["c"] * sin["A"]
+    return dict(ang=ang, sin=sin, cos={x: math.cos(math.radians(v)) for x, v in ang.items()}, G=G, cg=cg, k=k, canh=canh, S=S, R=k / 2,
+                h={x: 2 * S / canh[x] for x in "abc"})
+
+
+def _gu_g(g):
+    """Độ dài cho trước: số nguyên thì không lấy chữ số thập phân."""
+    return _x1(g, 0) if abs(g - round(g)) < 1e-9 else _x1(g, 1)
+
+
+def _gu_ya(u, ten3, hai):
+    """Ý a (NB, Bài 5): góc thứ ba và các giá trị lượng giác theo cung bù."""
+    P, Q = hai
+    gp, gq, g3 = u["ang"][P], u["ang"][Q], u["ang"][ten3]
+    nh = g3 < 90
+    ly = (r"Tổng ba góc của tam giác bằng $180^{\circ}$ nên $\widehat{%s} = 180^{\circ} - %d^{\circ} - %d^{\circ} = %d^{\circ}$; "
+          r"vì $\widehat{%s} = 180^{\circ} - \left(\widehat{%s} + \widehat{%s}\right)$ nên $\sin\widehat{%s} = \sin\left(\widehat{%s} + \widehat{%s}\right)$ và "
+          r"$\cos\widehat{%s} = -\cos\left(\widehat{%s} + \widehat{%s}\right)$; góc $%s$ là góc %s." % (ten3, gp, gq, g3, ten3, P, Q, ten3, P, Q, ten3, P, Q, ten3, "nhọn" if nh else "tù"))
+    dung = [(r"$\widehat{%s} = %d^{\circ}$" % (ten3, g3), ly), (r"$\sin\widehat{%s} = \sin\left(\widehat{%s} + \widehat{%s}\right)$" % (ten3, P, Q), ly),
+            (r"$\cos\widehat{%s} = -\cos\left(\widehat{%s} + \widehat{%s}\right)$" % (ten3, P, Q), ly),
+            (r"Góc $\widehat{%s}$ là góc %s" % (ten3, "nhọn" if nh else "tù"), ly),
+            (r"$\cos\widehat{%s} %s 0$" % (ten3, ">" if nh else "<"), ly), (r"$\sin\widehat{%s} > 0$" % ten3, ly)]
+    sai = [(r"$\widehat{%s} = %d^{\circ}$" % (ten3, g3 + random.choice([5, 10, 15])), ly), (r"$\sin\widehat{%s} = -\sin\left(\widehat{%s} + \widehat{%s}\right)$" % (ten3, P, Q), ly),
+           (r"$\cos\widehat{%s} = \cos\left(\widehat{%s} + \widehat{%s}\right)$" % (ten3, P, Q), ly),
+           (r"Góc $\widehat{%s}$ là góc %s" % (ten3, "tù" if nh else "nhọn"), ly), (r"$\cos\widehat{%s} %s 0$" % (ten3, "<" if nh else ">"), ly),
+           (r"$\sin\widehat{%s} = \sin\widehat{%s} + \sin\widehat{%s}$" % (ten3, P, Q), ly)]
+    return _phat_bieu(dung, sai)
+
+
+def _gu_gtlg(u, ten3):
+    """Ý b (TH, Bài 5): sin và cos của góc thứ ba (làm tròn đến hàng phần trăm)."""
+    v_s, v_c, g = u["sin"][ten3], u["cos"][ten3], u["ang"][ten3]
+    ds, ss = _tf_so(r"$\sin\widehat{%s} \approx %%s$" % ten3, v_s, 2, r"$\sin\widehat{%s} = \sin %d^{\circ} \approx %s$." % (ten3, g, _x1(v_s, 3)),
+                    [(abs(v_c), r"Nhầm $\sin$ với $\cos$"), (1 - v_s, "Nhầm $1 - \\sin$"), (math.sin(g), "Để máy ở chế độ radian")], mien=(0, 1))
+    dc, sc = _tf_so(r"$\cos\widehat{%s} \approx %%s$" % ten3, v_c, 2, r"$\cos\widehat{%s} = \cos %d^{\circ} \approx %s$." % (ten3, g, _x1(v_c, 3)),
+                    [(-v_c, "Sai dấu"), (v_s, r"Nhầm $\cos$ với $\sin$"), (math.cos(g), "Để máy ở chế độ radian")], mien=(-1, 1))
+    return _tf_gop((ds, ss), (dc, sc))
+
+
+def _gu_canh(u, tc):
+    """Cạnh tc ("a" | "b" | "c") theo định lí sin (làm tròn đến hàng phần mười)."""
+    X, G, cg = tc.upper(), u["G"], u["cg"]
+    ang, sin, cos, g, v = u["ang"], u["sin"], u["cos"], u["canh"][u["cg"]], u["canh"][tc]
+    n_x, n_g = _GT_TEN_CANH[tc], _GT_TEN_CANH[cg]
+    ly = (r"Định lí sin: $\dfrac{%s}{\sin %s} = \dfrac{%s}{\sin %s}$ nên $%s = \dfrac{%s\cdot\sin %d^{\circ}}{\sin %d^{\circ}} \approx %s$."
+          % (n_x, X, n_g, G, n_x, _gu_g(g), ang[X], ang[G], _x1(v, 2)))
+    sai = [(g * sin[X], r"Quên chia cho $\sin %s$" % G), (g * sin[G] / sin[X], "Đảo tử và mẫu"),
+           (g * cos[X] / cos[G] if abs(cos[G]) > 1e-9 else None, r"Dùng $\cos$ thay cho $\sin$"), (g * ang[X] / ang[G], "Dùng tỉ số số đo góc")]
+    return _tf_so(r"$%s \approx %%s$" % n_x, v, 1, ly, [(w, s) for w, s in sai if w is not None and w > 0])
+
+
+def _gu_dtich(u, ten):
+    """ten: "S" (diện tích) | "R" (bán kính ngoại tiếp) | "h" (đường cao kẻ từ đỉnh đối diện cạnh cho trước)."""
+    cg, G = u["cg"], u["G"]
+    g = u["canh"][cg]
+    if ten == "S":
+        X = [x for x in "ABC" if x != G][0]
+        Y = [x for x in "ABC" if x not in (G, X)][0]
+        cx = X.lower()
+        v = 0.5 * g * u["canh"][cx] * u["sin"][Y]
+        ly = (r"Diện tích $S = \dfrac{1}{2}\cdot %s\cdot %s\cdot\sin %d^{\circ} \approx \dfrac{1}{2}\cdot %s\cdot %s\cdot %s \approx %s$ (dùng các cạnh vừa tính được)."
+              % (_GT_TEN_CANH[cg], _GT_TEN_CANH[cx], u["ang"][Y], _x1(g, 1), _x1(u["canh"][cx], 1), _x1(u["sin"][Y], 3), _x1(v, 1)))
+        sai = [(2 * v, r"Quên hệ số $\dfrac{1}{2}$"), (0.5 * g * u["canh"][cx] * u["cos"][Y] if u["cos"][Y] > 0 else None, r"Dùng $\cos$ thay cho $\sin$"),
+               (v / 2, r"Nhân thừa $\dfrac{1}{2}$"), (0.5 * g * u["canh"][cx], "Quên nhân với sin của góc xen giữa")]
+        mau = r"Diện tích tam giác $ABC$ xấp xỉ $%s$"
+    elif ten == "R":
+        v = u["R"]
+        ly = r"Định lí sin: $R = \dfrac{%s}{2\sin %d^{\circ}} \approx \dfrac{%s}{2\cdot %s} \approx %s$." % (_GT_TEN_CANH[cg], u["ang"][G], _gu_g(g), _x1(u["sin"][G], 3), _x1(v, 1))
+        sai = [(2 * v, "Quên chia 2"), (v / 2, "Chia thừa cho 2"), (g / (2 * abs(u["cos"][G])) if abs(u["cos"][G]) > 1e-9 else None, r"Dùng $\cos$ thay cho $\sin$")]
+        mau = r"Bán kính đường tròn ngoại tiếp tam giác $ABC$ xấp xỉ $%s$"
+    else:
+        v = u["h"][cg]
+        ly = r"$S \approx %s$ nên $h = \dfrac{2S}{%s} \approx %s$." % (_x1(u["S"], 1), _x1(g, 1), _x1(v, 1))
+        sai = [(u["S"] / g, "Quên nhân 2"), (2 * v, "Nhân thừa 2"), (v / 2, "Chia thừa cho 2")]
+        mau = r"Đường cao kẻ từ đỉnh $%s$ xấp xỉ $%%s$" % G
+    return _tf_so(mau, v, 1, ly, [(w, s) for w, s in sai if w is not None])
+
+
+def _gu_goc(hai, cg, hoi_d):
+    """hai: tên hai góc cho trước (vd "AB"); cg: cạnh cho trước; hoi_d: các đại lượng ở ý d."""
+    g1 = random.choice(range(35, 85, 5))
+    g2 = random.choice(range(35, 85, 5))
+    while g1 == g2 or (180 - g1 - g2) in (90,) or not 25 <= 180 - g1 - g2 <= 115:  # chọn lại cho đến khi góc thứ ba hợp lí
+        g1 = random.choice(range(35, 85, 5))
+        g2 = random.choice(range(35, 85, 5))
+    ten3 = [x for x in "ABC" if x not in hai][0]
+    ang = {hai[0]: g1, hai[1]: g2, ten3: 180 - g1 - g2}
+    do_dai = random.randint(10, 40)
+    u = _gu_dung(ang, cg, do_dai)
+    debai = (r"Cho tam giác $ABC$ có $\widehat{%s} = %d^{\circ}$, $\widehat{%s} = %d^{\circ}$ và $%s = %d$. Xét tính đúng sai của các khẳng định sau "
+             r"(các kết quả gần đúng lấy theo quy tắc làm tròn nêu trong từng khẳng định):" % (hai[0], g1, hai[1], g2, _GT_TEN_CANH[cg], do_dai))
+    return debai, [_gu_ya(u, ten3, hai), _gu_gtlg(u, ten3), _tf_gop(*[_gu_canh(u, x) for x in "abc" if x != cg]),
+                   _tf_gop(*[_gu_dtich(u, x) for x in hoi_d])]
+
+
+def L10_C3_TF_T_04(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $\widehat A$, $\widehat B$ và $BC$ (đối diện góc $A$). a) góc $C$, giá trị lượng giác theo cung bù;
+    b) $\sin C$, $\cos C$; c) $CA$, $AB$ (định lí sin); d) S, R."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gu_goc("AB", "a", ["S", "R"]))
+
+
+def L10_C3_TF_T_05(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc). b) $\sin A$, $\cos A$; c) $CA$, $AB$; d) S, đường cao từ $A$."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gu_goc("BC", "a", ["S", "h"]))
+
+
+def L10_C3_TF_T_06(socau, socot=1):
+    r"""Đúng/Sai - giải tam giác: biết $\widehat A$, $\widehat C$ và $AB$ (đối diện góc $C$). b) $\sin B$, $\cos B$; c) $BC$, $CA$; d) R, S."""
+    # a) NB (Bài 5) # b) TH (Bài 5) # c) VD (Bài 6) # d) VDC (Bài 6)
+    return _gt_cau(socau, socot, lambda: _gu_goc("AC", "c", ["R", "S"]))
+
+
+# ===== MS_BEGIN (MC/SA/TL giải tam giác, sinh bởi build) =====
+# =====================================================================
+# MC / SA / TL "GIẢI TAM GIÁC" (CLAUDE THEM 10/10/2026, theo bảng ID cô Lan đã duyệt)
+# ---------------------------------------------------------------------
+# Dùng lại CÙNG câu dẫn với đúng/sai TF_T (chương 3): mỗi ID là một đơn vị kiến thức, mỗi chữ cái là MỘT CÁCH CHO
+# (dạng), mỗi biến thể _01.._03 là một cách cho / cách hỏi khác:
+#   cách cho A: 2 cạnh + 1 góc (_01 cos A, _02 sin A nhọn/tù, _03 tan A)    B: 2 góc (độ) + 1 cạnh (_01 AAS BC, _02 ASA, _03 AAS AB)
+#   cách cho C: 3 cạnh (_01.._03 hỏi theo đỉnh A, B, C)                       D: 1 cạnh, cos B, 1 đường cao (_01 BC-AH, _02 AB-CK)
+#   cách cho E: 2 cạnh + trung tuyến AM (_01 cho AB, _02 cho AC)             F: 3 cạnh + phân giác AD (_01 qua B, _02 qua C)
+# E, F ngoài yêu cầu cần đạt (trung tuyến, phân giác) -> LUYEN TAP THEM.
+# Một đại lượng = dict(hoi, v, ly, sai, ...) do `_ms_q` trả về (dùng lại `_gt_q` của TF_T cho dạng chính xác, `_msu_q` cho dạng
+# góc cho bằng độ). Một câu = chuỗi các đại lượng (bước trung gian ... đại lượng cần hỏi); lời giải ghép các bước.
+# Hàm công khai chỉ là lớp mỏng: `_ms_sinh(loai, don_vi, cach_cho, bien_the, socau, dang)`.
+# =====================================================================
+
+_MS_MUC_HANG = {0: "hàng đơn vị", 1: "hàng phần mười", 2: "hàng phần trăm", 3: "hàng phần nghìn"}
+_MS_NOI = r"\\ "  # ngắt dòng trong lời giải
+
+
+def _ms_chuan(c, can_sin):
+    """Dòng lời giải đổi giá trị lượng giác cho trước của góc A sang cos A (và sin A nếu cần) - cách cho A."""
+    t, co = c["t"], c["co"]
+    cs, sn = t["cos"]["A"], t["sin"]["A"]
+    if co == "cos":
+        if not can_sin:
+            return ""
+        return (r"Vì $0^{\circ} < A < 180^{\circ}$ nên $\sin A > 0$ và $\sin A = \sqrt{1 - \cos^{2}A} = \sqrt{1 - %s^{2}} = %s$."
+                % (_gt_p(cs), _L(sn)))
+    if co == "sin":
+        loai = "nhọn" if cs > 0 else "tù"
+        return (r"Góc $A$ là góc %s nên $\cos A %s 0$ và $\cos A = %s\sqrt{1 - \sin^{2}A} = %s\sqrt{1 - %s^{2}} = %s$."
+                % (loai, ">" if cs > 0 else "<", "" if cs > 0 else "-", "" if cs > 0 else "-", _gt_p(sn), _L(cs)))
+    tg = sn / cs
+    return (r"Từ $1 + \tan^{2}A = \dfrac{1}{\cos^{2}A}$ suy ra $\cos^{2}A = \dfrac{1}{1 + %s^{2}} = %s$. Vì $\sin A > 0$ và $\tan A %s 0$ nên $\cos A %s 0$, "
+            r"do đó $\cos A = %s$ và $\sin A = \tan A\cdot\cos A = %s$." % (_gt_p(tg), _L(cs * cs), ">" if tg > 0 else "<", ">" if cs > 0 else "<", _L(cs), _L(sn)))
+
+
+def _ms_chuan_d(c):
+    """Cách cho D: sin B từ cos B."""
+    t = c["t"]
+    return (r"Vì $0^{\circ} < B < 180^{\circ}$ nên $\sin B > 0$ và $\sin B = \sqrt{1 - \cos^{2}B} = \sqrt{1 - %s^{2}} = %s$."
+            % (_gt_p(t["cos"]["B"]), _L(t["sin"]["B"])))
+
+
+# ---------- câu dẫn (đề) cho từng cách cho: trả về dict c ----------
+
+def _ms_le(t):
+    """Tam giác thường (ba cạnh khác nhau), để các đáp số không trùng nhau."""
+    return len({t["a"], t["b"], t["c"]}) == 3
+
+
+def _ms_ctx(cach, bt):
+    """Sinh dữ liệu một câu: c["de"] là câu dẫn (đã có dấu chấm), c["t"] / c["u"] là tam giác chính xác / gần đúng."""
+    if cach == "A":
+        co = ("cos", "sin", "tan")[bt - 1]
+        t = _gt_chon(dk=_ms_le, tran=30)
+        s, cc = t["sin"]["A"], t["cos"]["A"]
+        cho = {"cos": r"$\cos A = %s$" % _L(cc), "sin": r"$\sin A = %s$, góc $A$ là góc %s" % (_L(s), "nhọn" if cc > 0 else "tù"),
+               "tan": r"$\tan A = %s$" % _L(s / cc)}[co]
+        return dict(t=t, co=co, de=r"Cho tam giác $ABC$ có $AB = %d$, $AC = %d$ và %s." % (t["c"], t["b"], cho))
+    if cach == "B":
+        hai, cg = (("AB", "a"), ("BC", "a"), ("AC", "c"))[bt - 1]
+        g1 = random.choice(range(35, 80, 5))
+        g2 = random.choice(range(35, 80, 5))
+        while len({g1, g2, 180 - g1 - g2}) < 3 or not 25 <= 180 - g1 - g2 <= 115 or abs(180 - g1 - g2 - 90) < 10:
+            g1 = random.choice(range(35, 80, 5))
+            g2 = random.choice(range(35, 80, 5))
+        ten3 = [x for x in "ABC" if x not in hai][0]
+        ang = {hai[0]: g1, hai[1]: g2, ten3: 180 - g1 - g2}
+        do_dai = random.randint(10, 40)
+        u = _gu_dung(ang, cg, do_dai)
+        de = (r"Cho tam giác $ABC$ có $\widehat{%s} = %d^{\circ}$, $\widehat{%s} = %d^{\circ}$ và $%s = %d$."
+              % (hai[0], g1, hai[1], g2, _GT_TEN_CANH[cg], do_dai))
+        return dict(u=u, hai=hai, ten3=ten3, cg=cg, de=de)
+    if cach == "C":
+        t = _gt_chon(dk=_ms_le, tran=40)
+        return dict(t=t, X="ABC"[bt - 1], de=r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$." % (t["a"], t["b"], t["c"]))
+    if cach == "D":
+        k = "a" if bt == 1 else "c"
+        ok = lambda t: (2 * t["S"]) % t[k] == 0 and 0 not in t["cos"].values() and _ms_le(t)
+        t = _gt_chon(dk=ok, tran=30)
+        if k == "a":
+            de = (r"Cho tam giác $ABC$ có $BC = %d$, $\cos B = %s$ và đường cao $AH = %s$ ($H$ thuộc đường thẳng $BC$)."
+                  % (t["a"], _L(t["cos"]["B"]), _L(t["h"]["a"])))
+        else:
+            de = (r"Cho tam giác $ABC$ có $AB = %d$, $\cos B = %s$ và đường cao $CK = %s$ ($K$ thuộc đường thẳng $AB$)."
+                  % (t["c"], _L(t["cos"]["B"]), _L(t["h"]["c"])))
+        return dict(t=t, k=k, de=de)
+    if cach == "E":
+        dau = "c" if bt == 1 else "b"
+        t = _gt_chon_med(dau)
+        de = (r"Cho tam giác $ABC$ có $BC = %d$, $%s = %d$ và đường trung tuyến $AM = %s$ ($M$ là trung điểm của $BC$)."
+              % (t["a"], "AB" if dau == "c" else "AC", t[dau], _L(t["m"])))
+        return dict(t=t, dau=dau, de=de)
+    if cach == "F":
+        t = _gt_chon(dk=lambda t: _ms_le(t) and _gt_binh_phuong(t["l2"]), tran=60)
+        de = (r"Cho tam giác $ABC$ có $BC = %d$, $CA = %d$, $AB = %d$. Gọi $AD$ là đường phân giác trong của góc $A$ ($D$ thuộc cạnh $BC$)."
+              % (t["a"], t["b"], t["c"]))
+        return dict(t=t, V="B" if bt == 1 else "C", de=de)
+    raise KeyError(cach)
+
+
+# ---------- các đại lượng ----------
+
+def _ms_hoi(ten, c):
+    """Câu hỏi (có dấu chấm) cho đại lượng `ten`."""
+    k = ten[:3]
+    if ten == "sin3":
+        return r"Tính $\sin\widehat{%s}$." % c["ten3"]
+    if ten == "cos3":
+        return r"Tính $\cos\widehat{%s}$." % c["ten3"]
+    if len(ten) == 4 and k in ("cos", "sin", "tan") and ten[3] in "ABC":
+        return r"Tính $\%s %s$." % (k, ten[3])
+    if len(ten) == 5 and ten[:4] == "goc_":
+        return r"Tính số đo góc $\widehat{%s}$ (đơn vị độ)." % ten[4]
+    tb = {"a": r"Tính độ dài cạnh $BC$.", "b": r"Tính độ dài cạnh $AC$.", "c": r"Tính độ dài cạnh $AB$.",
+          "c_cao": r"Tính độ dài cạnh $AB$.", "a_cao": r"Tính độ dài cạnh $BC$.", "b_med": r"Tính độ dài cạnh $AC$.", "c_med": r"Tính độ dài cạnh $AB$.",
+          "S": r"Tính diện tích $S$ của tam giác $ABC$.", "Sheron": r"Tính diện tích $S$ của tam giác $ABC$.",
+          "Sha": r"Tính diện tích $S$ của tam giác $ABC$.", "Shc": r"Tính diện tích $S$ của tam giác $ABC$.",
+          "p": r"Tính nửa chu vi $p$ của tam giác $ABC$.",
+          "R": r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.",
+          "RA": r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.", "RB": r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.",
+          "RC": r"Tính bán kính $R$ của đường tròn ngoại tiếp tam giác $ABC$.",
+          "r": r"Tính bán kính $r$ của đường tròn nội tiếp tam giác $ABC$.",
+          "BD": r"Tính độ dài đoạn $BD$.", "DC": r"Tính độ dài đoạn $DC$.",
+          "la": r"Tính độ dài đường phân giác $AD$.", "laC": r"Tính độ dài đường phân giác $AD$.",
+          "SABD": r"Tính diện tích tam giác $ABD$.", "SACD": r"Tính diện tích tam giác $ACD$.",
+          "sinBC": r"Tính $\sin\left(B + C\right)$.", "cosBC": r"Tính $\cos\left(B + C\right)$.",
+          "sin180A": r"Tính $\sin\left(180^{\circ} - A\right)$.", "cos180A": r"Tính $\cos\left(180^{\circ} - A\right)$.",
+          "ha": r"Tính độ dài đường cao $h_a$ kẻ từ đỉnh $A$.", "hb": r"Tính độ dài đường cao $h_b$ kẻ từ đỉnh $B$.",
+          "hc": r"Tính độ dài đường cao $h_c$ kẻ từ đỉnh $C$.",
+          "ma": r"Tính độ dài đường trung tuyến $m_a$ kẻ từ đỉnh $A$.",
+          "cosAMB": r"Tính $\cos\widehat{AMB}$.", "cosAMC": r"Tính $\cos\widehat{AMC}$.", "sinAMB": r"Tính $\sin\widehat{AMB}$.",
+          "rut_sin": r"Tính $\sin A$.", "rut_cos": r"Tính $\cos A$.", "rut_tan": r"Tính $\tan A$."}
+    if ten in tb:
+        return tb[ten]
+    if ten in ("canh_a", "canh_b", "canh_c"):
+        return r"Tính độ dài cạnh $%s$." % _GT_TEN_CANH[ten[-1]]
+    if ten == "goc3":
+        return r"Tính số đo góc $\widehat{%s}$ (đơn vị độ)." % c["ten3"]
+    if ten == "sin3":
+        return r"Tính $\sin\widehat{%s}$." % c["ten3"]
+    if ten == "cos3":
+        return r"Tính $\cos\widehat{%s}$." % c["ten3"]
+    if ten == "sinPQ":
+        return r"Tính $\sin\left(\widehat{%s} + \widehat{%s}\right)$." % tuple(c["hai"])
+    if ten == "cosPQ":
+        return r"Tính $\cos\left(\widehat{%s} + \widehat{%s}\right)$." % tuple(c["hai"])
+    if ten == "chuvi":
+        return r"Tính chu vi của tam giác $ABC$."
+    if ten == "h":
+        return r"Tính độ dài đường cao kẻ từ đỉnh $%s$ của tam giác $ABC$." % c["u"]["G"]
+    raise KeyError(ten)
+
+
+def _ms_goc_t(t, X):
+    """Số đo (độ) của góc X từ cos X chính xác."""
+    return math.degrees(math.acos(float(t["cos"][X])))
+
+
+def _ms_q(c, ten):
+    """Một đại lượng: dict(hoi, v, ly, sai, xap, n, goc). Dạng góc cho bằng độ (c có "u") dùng `_msu_q`."""
+    if "u" in c:
+        return _msu_q(c, ten)
+    t = c["t"]
+    a, b, cc, S, p = t["a"], t["b"], t["c"], t["S"], t["p"]
+    cs, sn = t["cos"], t["sin"]
+    q = dict(hoi=_ms_hoi(ten, c), xap=False, goc=False, n=2 if ten[:3] in ("cos", "sin", "tan") else 1)
+    if ten in ("sinBC", "cosBC", "sin180A", "cos180A"):
+        if ten == "sinBC":
+            v, ly = sn["A"], (r"Trong tam giác $ABC$: $B + C = 180^{\circ} - A$ nên $\sin\left(B + C\right) = \sin\left(180^{\circ} - A\right) = \sin A = %s$." % _L(sn["A"]))
+            sai = [(-sn["A"], r"Nhầm dấu: $\sin$ của hai góc bù nhau bằng nhau"), (cs["A"], r"Nhầm $\sin A$ với $\cos A$"), (-cs["A"], r"Nhầm với $\cos\left(B + C\right)$")]
+        elif ten == "cosBC":
+            v, ly = -cs["A"], (r"Trong tam giác $ABC$: $B + C = 180^{\circ} - A$ nên $\cos\left(B + C\right) = \cos\left(180^{\circ} - A\right) = -\cos A = %s$." % _L(-cs["A"]))
+            sai = [(cs["A"], r"Quên dấu trừ: $\cos$ của hai góc bù nhau đối nhau"), (sn["A"], r"Nhầm $\cos$ với $\sin$"), (-sn["A"], r"Nhầm $\cos$ với $\sin$ và sai dấu")]
+        elif ten == "sin180A":
+            v, ly = sn["A"], r"$\sin\left(180^{\circ} - A\right) = \sin A = %s$ (hai góc bù nhau có sin bằng nhau)." % _L(sn["A"])
+            sai = [(-sn["A"], "Sai dấu"), (cs["A"], r"Nhầm $\sin A$ với $\cos A$"), (-cs["A"], r"Nhầm với $\cos\left(180^{\circ} - A\right)$")]
+        else:
+            v, ly = -cs["A"], r"$\cos\left(180^{\circ} - A\right) = -\cos A = %s$ (hai góc bù nhau có côsin đối nhau)." % _L(-cs["A"])
+            sai = [(cs["A"], "Quên dấu trừ"), (sn["A"], r"Nhầm $\cos$ với $\sin$"), (-sn["A"], "Nhầm $\\cos$ với $\\sin$ và sai dấu")]
+        q.update(v=v, ly=ly, sai=_gt_sai(sai, duong=False, gh1=True))
+        return q
+    if ten in ("rut_sin", "rut_cos", "rut_tan"):  # Bài 5: từ một giá trị lượng giác của A suy ra giá trị còn lại (không dùng cạnh)
+        co = c["co"]
+        s, k = sn["A"], cs["A"]
+        nhon = k > 0
+        dau = ">" if nhon else "<"
+        if ten == "rut_sin":
+            v = s
+            ly = (r"Từ $\cos A = %s$: $\sin^{2}A = 1 - \cos^{2}A = %s$, và $\sin A > 0$ nên $\sin A = %s$." % (_L(k), _L(1 - k * k), _L(s))
+                  if co == "cos" else r"$\sin A = \tan A\cdot\cos A = %s$." % _L(s))
+            sai = [(-s, r"Quên rằng $\sin A > 0$"), (k, r"Nhầm $\sin A$ với $\cos A$"), (1 - k * k, "Quên lấy căn")]
+            q.update(v=v, ly=ly, sai=_gt_sai(sai, duong=True, gh1=True))
+        elif ten == "rut_cos":
+            v = k
+            if co == "sin":
+                ly = (r"$\cos^{2}A = 1 - \sin^{2}A = %s$; góc $A$ là góc %s nên $\cos A %s 0$, do đó $\cos A = %s$." % (_L(1 - s * s), "nhọn" if nhon else "tù", dau, _L(k)))
+            else:
+                ly = (r"$\dfrac{1}{\cos^{2}A} = 1 + \tan^{2}A = %s$ nên $\cos^{2}A = %s$; vì $\tan A %s 0$ nên góc $A$ là góc %s, $\cos A %s 0$ và $\cos A = %s$."
+                      % (_L(1 + (s / k) ** 2), _L(k * k), dau, "nhọn" if nhon else "tù", dau, _L(k)))
+            sai = [(-k, "Sai dấu"), (k * k, "Quên lấy căn"), ((1 if nhon else -1) * (1 - s), "Quên bình phương")]
+            q.update(v=v, ly=ly, sai=_gt_sai(sai, duong=False, gh1=True))
+        else:
+            v = s / k
+            ly = r"$\tan A = \dfrac{\sin A}{\cos A} = \dfrac{%s}{%s} = %s$." % (_L(s), _gt_ngoac(k), _L(v))
+            sai = [(1 / v, "Đảo tử và mẫu"), (-v, "Sai dấu"), (s * k, r"Nhầm $\tan = \sin\cdot\cos$")]
+            q.update(v=v, ly=ly, sai=_gt_sai(sai, duong=False))
+        return q
+    if len(ten) == 5 and ten[:4] == "goc_":
+        X = ten[4]
+        g = _ms_goc_t(t, X)
+        v = cs[X]
+        ly = (r"Từ $\cos %s = %s$ suy ra $\widehat{%s} = \arccos\left(%s\right) \approx %s^{\circ}$ (bấm máy tính cầm tay, chế độ độ)." % (X, _L(v), X, _L(v), _x1(g, 2)))
+        sai = [(180 - g, "Nhầm với góc bù"), (math.degrees(math.asin(float(sn[X]))) if cs[X] < 0 else 90 - g, "Dùng nhầm $\\sin$ thay cho $\\cos$"), (g / 2, "Chia thừa cho 2")]
+        q.update(v=g, ly=ly, sai=[(w, l) for w, l in sai if 0 < w < 180], xap=True, goc=True, n=1)
+        return q
+    if len(ten) == 2 and ten[0] == "R" and ten[1] in "ABC":
+        X = ten[1]
+        x = t[X.lower()]
+        v = t["R"]
+        ly = r"Định lí sin: $R = \dfrac{%s}{2\sin %s} = \dfrac{%d}{2\cdot %s} = %s$." % (_GT_TEN_CANH[X.lower()], X, x, _L(sn[X]), _L(v))
+        sai = [(2 * v, "Quên chia 2"), (v / 2, "Chia thừa cho 2"), (x / (2 * abs(cs[X])), r"Nhầm $\sin %s$ với $\cos %s$" % (X, X)), (x / sn[X], "Quên hệ số 2 ở mẫu")]
+        q.update(v=v, ly=ly, sai=_gt_sai(sai))
+        return q
+    if ten in ("SABD", "SACD"):
+        ABD = ten == "SABD"
+        x = t["BD"] if ABD else t["DC"]
+        v = S * x / a
+        ly = (r"Hai tam giác $%s$ và $ABC$ có chung đường cao kẻ từ $A$ nên $S_{%s} = \dfrac{%s}{BC}\cdot S = \dfrac{%s}{%d}\cdot %s = %s$."
+              % ("ABD" if ABD else "ACD", "ABD" if ABD else "ACD", "BD" if ABD else "DC", _L(x), a, _L(S), _L(v)))
+        sai = [(S / 2, "Nhầm với nửa diện tích"), (S * (t["DC"] if ABD else t["BD"]) / a, "Nhầm hai tam giác $ABD$, $ACD$"), (S * x, "Quên chia cho $BC$"), (S * x / a / 2, "Chia thừa cho 2")]
+        q.update(v=v, ly=ly, sai=_gt_sai(sai))
+        return q
+    # còn lại: đại lượng đã có trong `_gt_q` (TF_T)
+    mau, v, ly, sai = _gt_q(t, ten)
+    q.update(v=sympify(v), ly=ly, sai=sai)
+    return q
+
+
+def _msu_q(c, ten):
+    """Đại lượng của tam giác cho bằng hai góc (độ) và một cạnh (cách cho B); giá trị gần đúng."""
+    u = c["u"]
+    ang, sin, cos = u["ang"], u["sin"], u["cos"]
+    G, cg, g = u["G"], u["cg"], u["canh"][u["cg"]]
+    P, Q = c["hai"]
+    R3 = c["ten3"]
+    g3 = ang[R3]
+    q = dict(hoi=_ms_hoi(ten, c), xap=True, goc=False, n=1)
+    if ten == "goc3":
+        gp, gq = ang[P], ang[Q]
+        ly = r"Tổng ba góc của tam giác bằng $180^{\circ}$ nên $\widehat{%s} = 180^{\circ} - %d^{\circ} - %d^{\circ} = %d^{\circ}$." % (R3, gp, gq, g3)
+        sai = [(g3 + 10, "Cộng nhầm"), (gp + gq, r"Quên trừ khỏi $180^{\circ}$"), (180 - g3, "Nhầm với góc bù")]
+        q.update(v=Integer(g3), ly=ly, sai=[(w, l) for w, l in sai if 0 < w < 180 and w != g3], xap=False, goc=True)
+        return q
+    if ten in ("canh_a", "canh_b", "canh_c"):
+        tc = ten[-1]
+        X = tc.upper()
+        n_x, n_g = _GT_TEN_CANH[tc], _GT_TEN_CANH[cg]
+        v = u["canh"][tc]
+        ly = (r"Định lí sin: $\dfrac{%s}{\sin %s} = \dfrac{%s}{\sin %s}$ nên $%s = \dfrac{%s\cdot\sin %d^{\circ}}{\sin %d^{\circ}} \approx %s$."
+              % (n_x, X, n_g, G, n_x, _gu_g(g), ang[X], ang[G], _x1(v, 2)))
+        sai = [(g * sin[X], r"Quên chia cho $\sin %s$" % G), (g * sin[G] / sin[X], "Đảo tử và mẫu"),
+               (g * cos[X] / cos[G] if abs(cos[G]) > 1e-9 else None, r"Dùng $\cos$ thay cho $\sin$"), (g * ang[X] / ang[G], "Dùng tỉ số số đo góc")]
+        q.update(v=v, ly=ly, sai=[(w, l) for w, l in sai if w is not None and w > 0])
+        return q
+    if ten == "S":
+        X = [x for x in "ABC" if x != G][0]
+        Y = [x for x in "ABC" if x not in (G, X)][0]
+        cx = X.lower()
+        v = 0.5 * g * u["canh"][cx] * sin[Y]
+        ly = (r"Diện tích $S = \dfrac{1}{2}\cdot %s\cdot %s\cdot\sin %d^{\circ} \approx \dfrac{1}{2}\cdot %s\cdot %s\cdot %s \approx %s$."
+              % (_GT_TEN_CANH[cg], _GT_TEN_CANH[cx], ang[Y], _x1(g, 2), _x1(u["canh"][cx], 2), _x1(sin[Y], 3), _x1(v, 2)))
+        sai = [(2 * v, r"Quên hệ số $\dfrac{1}{2}$"), (0.5 * g * u["canh"][cx] * cos[Y] if cos[Y] > 0 else None, r"Dùng $\cos$ thay cho $\sin$"),
+               (v / 2, r"Nhân thừa $\dfrac{1}{2}$"), (0.5 * g * u["canh"][cx], "Quên nhân với sin của góc xen giữa")]
+        q.update(v=v, ly=ly, sai=[(w, l) for w, l in sai if w is not None])
+        return q
+    if ten == "R":
+        v = u["R"]
+        ly = r"Định lí sin: $R = \dfrac{%s}{2\sin %d^{\circ}} \approx \dfrac{%s}{2\cdot %s} \approx %s$." % (_GT_TEN_CANH[cg], ang[G], _gu_g(g), _x1(sin[G], 3), _x1(v, 2))
+        sai = [(2 * v, "Quên chia 2"), (v / 2, "Chia thừa cho 2"), (g / (2 * abs(cos[G])) if abs(cos[G]) > 1e-9 else None, r"Dùng $\cos$ thay cho $\sin$")]
+        q.update(v=v, ly=ly, sai=[(w, l) for w, l in sai if w is not None])
+        return q
+    if ten == "h":
+        v = u["h"][cg]
+        ly = r"$S \approx %s$ nên đường cao kẻ từ $%s$ là $h = \dfrac{2S}{%s} \approx \dfrac{2\cdot %s}{%s} \approx %s$." % (_x1(u["S"], 2), G, _x1(g, 2), _x1(u["S"], 2), _x1(g, 2), _x1(v, 2))
+        sai = [(u["S"] / g, "Quên nhân 2"), (2 * v, "Nhân thừa 2"), (v / 2, "Chia thừa cho 2")]
+        q.update(v=v, ly=ly, sai=sai)
+        return q
+    if ten in ("sin3", "cos3"):
+        k = ten[:3]
+        v = sin[R3] if k == "sin" else cos[R3]
+        ly = r"$\%s\widehat{%s} = \%s %d^{\circ} \approx %s$ (bấm máy tính cầm tay, chế độ độ)." % (k, R3, k, g3, _x1(v, 3))
+        if k == "sin":
+            sai = [(abs(cos[R3]), r"Nhầm $\sin$ với $\cos$"), (1 - v, r"Nhầm $1 - \sin$"), (math.sin(g3), "Để máy ở chế độ radian")]
+        else:
+            sai = [(-v, "Sai dấu"), (sin[R3], r"Nhầm $\cos$ với $\sin$"), (math.cos(g3), "Để máy ở chế độ radian")]
+        q.update(v=v, ly=ly, sai=sai, n=2)
+        return q
+    if ten in ("sinPQ", "cosPQ"):
+        k = ten[:3]
+        tong = ang[P] + ang[Q]
+        v = math.sin(math.radians(tong)) if k == "sin" else math.cos(math.radians(tong))
+        cu = (r"$\widehat{%s} + \widehat{%s} = %d^{\circ} + %d^{\circ} = %d^{\circ}$, góc này bù với $\widehat{%s} = %d^{\circ}$ nên "
+              % (P, Q, ang[P], ang[Q], tong, R3, g3))
+        if k == "sin":
+            ly = cu + r"$\sin\left(\widehat{%s} + \widehat{%s}\right) = \sin\widehat{%s} = \sin %d^{\circ} \approx %s$." % (P, Q, R3, g3, _x1(v, 3))
+            sai = [(-v, "Sai dấu"), (math.cos(math.radians(tong)), r"Nhầm $\sin$ với $\cos$"), (math.sin(tong), "Để máy ở chế độ radian")]
+        else:
+            ly = cu + r"$\cos\left(\widehat{%s} + \widehat{%s}\right) = -\cos\widehat{%s} = -\cos %d^{\circ} \approx %s$." % (P, Q, R3, g3, _x1(v, 3))
+            sai = [(-v, "Quên dấu trừ của góc bù"), (math.sin(math.radians(tong)), r"Nhầm $\cos$ với $\sin$"), (math.cos(tong), "Để máy ở chế độ radian")]
+        q.update(v=v, ly=ly, sai=sai, n=2)
+        return q
+    if ten == "chuvi":
+        tong = sum(u["canh"].values())
+        ly = r"Chu vi $= BC + CA + AB \approx %s + %s + %s \approx %s$." % (_x1(u["canh"]["a"], 2), _x1(u["canh"]["b"], 2), _x1(u["canh"]["c"], 2), _x1(tong, 2))
+        sai = [(tong / 2, "Nhầm với nửa chu vi"), (tong - g, "Thiếu cạnh đã cho"), (tong + g, "Cộng thừa cạnh đã cho")]
+        q.update(v=tong, ly=ly, sai=sai)
+        return q
+    raise KeyError(ten)
+
+
+# ---------- chuỗi đại lượng cho từng (đơn vị, cách cho, biến thể) ----------
+
+def _ms_ten_y(c, bt):
+    """Ý thứ hai: một trong hai đỉnh còn lại ngoài đỉnh của biến thể (cách cho C)."""
+    return random.choice([x for x in "ABC" if x != c["X"]])
+
+
+def _ms_pool(dv, cach, bt, c):
+    """Trả về dict(mc=[chuỗi], tl=[(chuỗi ý a, chuỗi ý b)], sin=bool, hd=...).
+    - mc: các chuỗi (bước trung gian ... đại lượng hỏi) dùng cho MC và SA, chọn ngẫu nhiên một chuỗi;
+    - tl: các cặp chuỗi (ý a, ý b) dùng cho tự luận (đúng 2 ý);
+    - sin: lời giải cần sin A (cách cho A) để `_ms_chuan` biết có nêu dòng tính sin A hay không."""
+    k = (dv, cach)
+    t = c.get("t")
+    X = c.get("X")
+    if cach == "D":
+        xc = "c_cao" if bt == 1 else "a_cao"
+    if k == ("TH031", "A"):
+        return dict(mc=[["sinBC"], ["cosBC"], ["sin180A"]], sin=True)
+    if k == ("TH031", "B"):
+        return dict(mc=[["sinPQ"], ["cosPQ"]])
+    if k == ("TH030", "A"):
+        cap = {1: (["rut_sin"], ["rut_tan"]), 2: (["rut_cos"], ["rut_tan"]), 3: (["rut_cos"], ["rut_sin"])}[bt]
+        return dict(mc=[cap[0], cap[0] + cap[1]], tl=[cap], sin=True, chuan_khong=True)
+    if k == ("TH030", "B"):
+        return dict(mc=[["goc3", "sin3"], ["goc3", "cos3"]])
+    if k == ("TH032", "A"):
+        return dict(mc=[["a"]], tl=[(["a"], ["cosB"]), (["a"], ["cosC"])])
+    if k == ("TH032", "C"):
+        return dict(mc=[["cos" + X]], tl=[(["cos" + X], ["cos" + _ms_ten_y(c, bt)])])
+    if k == ("TH032", "D"):
+        return dict(mc=[[xc, "b"]], tl=[([xc], ["b"])], chuan_d=True)
+    if k == ("TH032", "E"):
+        cm, med = ("cosAMB", "b_med") if bt == 1 else ("cosAMC", "c_med")
+        return dict(mc=[[cm, med]], tl=[([cm], [med])])
+    if k == ("TH032", "F"):
+        bd, la = ("BD", "la") if bt == 1 else ("DC", "laC")
+        return dict(mc=[[la]], tl=[([bd], [la])])
+    if k == ("TH033", "B"):
+        cd = [x for x in "abc" if x != c["cg"]]
+        random.shuffle(cd)
+        return dict(mc=[["goc3", "canh_" + x] for x in cd], tl=[(["goc3", "canh_" + cd[0]], ["canh_" + cd[1]])])
+    if k == ("TH033", "C"):
+        return dict(mc=[["cos" + X, "sin" + X, "R" + X]], tl=[(["cos" + X, "sin" + X], ["R" + X])])
+    if k == ("TH034", "A"):
+        return dict(mc=[["S"]], tl=[(["S"], ["a", "ha"]), (["S"], ["a", "r"])], sin=True)
+    if k == ("TH034", "B"):
+        x = [y for y in "abc" if y.upper() != c["u"]["G"]][0]
+        return dict(mc=[["goc3", "canh_" + x, "S"]])
+    if k == ("TH034", "C"):
+        hk = "h" + random.choice("abc")
+        mc = {1: [["Sheron"]], 2: [["Sheron", "r"]], 3: [["Sheron", hk]]}[bt]
+        return dict(mc=mc, tl=[(["Sheron"], ["r"]), (["Sheron"], [hk])])
+    if k == ("TH034", "D"):
+        return dict(mc=[["Sha" if bt == 1 else "Shc"]])
+    if k == ("TH035", "A"):
+        Y = random.choice("BC")
+        return dict(mc=[["a", "cos" + Y, "goc_" + Y]], tl=[(["a"], ["cos" + Y, "goc_" + Y])])
+    if k == ("TH035", "B"):
+        cd = [x for x in "abc" if x != c["cg"]]
+        random.shuffle(cd)
+        return dict(mc=[["goc3", "canh_" + cd[0], "canh_" + cd[1], "chuvi"]], tl=[(["goc3", "canh_" + cd[0]], ["canh_" + cd[1], "chuvi"])])
+    if k == ("TH035", "C"):
+        Y = _ms_ten_y(c, bt)
+        return dict(mc=[["cos" + X, "goc_" + X]], tl=[(["cos" + X, "goc_" + X], ["cos" + Y, "goc_" + Y])])
+    if k == ("VD032", "A"):
+        return dict(mc=[["a", "R"], ["a", "S", "ha"]], tl=[(["a"], ["R"]), (["a"], ["S", "ha"])], sin=True)
+    if k == ("VD032", "B"):
+        x = [y for y in "abc" if y.upper() != c["u"]["G"]][0]
+        return dict(mc=[["goc3", "canh_" + x, "S"], ["goc3", "canh_" + x, "S", "h"]],
+                    tl=[(["goc3", "canh_" + x], ["S"]), (["goc3", "canh_" + x], ["S", "h"])])
+    if k == ("VD032", "C"):
+        hx = "h" + X.lower()
+        ch = [["Sheron", hx], ["Sheron", "r"], ["cos" + X, "sin" + X, "R" + X]]
+        return dict(mc=ch, tl=[(["Sheron"], ch[1]), (["Sheron"], ch[0]), (["cos" + X, "sin" + X], ["R" + X])])
+    if k == ("VD032", "D"):
+        return dict(mc=[[xc, "b", "cosC"], [xc, "b", "RB"]], tl=[([xc, "b"], ["cosC"]), ([xc, "b"], ["RB"])], chuan_d=True)
+    if k == ("VD032", "E"):
+        cm, med = ("cosAMB", "b_med") if bt == 1 else ("cosAMC", "c_med")
+        fin = [["cosA"], ["cosA", "sinA", "S"]] if bt == 1 else [["cosA", "sinA", "R"], ["cosA", "sinA", "S"]]
+        return dict(mc=[[cm, med] + f for f in fin], tl=[([cm, med], f) for f in fin])
+    if k == ("VD032", "F"):
+        bd, sq = ("BD", "SABD") if bt == 1 else ("DC", "SACD")
+        return dict(mc=[["Sheron", bd, sq]], tl=[([bd], ["Sheron", sq])])
+    raise KeyError(k)
+
+
+# ---------- định dạng đáp số, nhiễu, ghép câu ----------
+
+class _MsLai(Exception):
+    """Dữ liệu vừa sinh không dùng được (sát ranh giới làm tròn...): sinh lại."""
+
+
+def _ms_chon_n(q, loai):
+    """Số chữ số làm tròn cho đại lượng hỏi: None nếu giữ giá trị chính xác. Ném _MsLai nếu sát ranh giới làm tròn."""
+    v = q["v"]
+    if not q["xap"]:
+        if loai == "MC" or loai == "TL" or v.is_Integer:
+            return None
+        if (v * 100).is_Integer:  # thập phân hữu hạn (tối đa hai chữ số): đáp số viết đúng, không cần làm tròn
+            return None
+    f = float(v)
+    for n in (q["n"], q["n"] + 1, q["n"] + 2):
+        if _xa_bien(f, n):
+            return n
+    raise _MsLai()
+
+
+def _ms_so(q, w, n):
+    """Chuỗi số (không có $) của giá trị w."""
+    if n is None:
+        return _L(sympify(w))
+    return _x1(float(w), n)
+
+
+def _ms_mc_fmt(q, w, n):
+    return "$%s%s$" % (_ms_so(q, w, n), r"^{\circ}" if q["goc"] else "")
+
+
+def _ms_sa_fmt(q, w, n):
+    if n is None:
+        w = sympify(w)
+        return str(int(w)) if w.is_Integer else _xx(float(w), 2)
+    return _xx(float(w), n)
+
+
+def _ms_pad(q, n):
+    """Hàm sinh thêm phương án nhiễu khi chưa đủ ba: k = 1, 2, ... -> giá trị khác (sympy nếu chính xác, float nếu gần đúng)."""
+    v = q["v"]
+    f = float(v)
+    if q["goc"]:
+        return lambda k: (v if n is None else f) + (5 * k if f < 90 else -5 * k)
+    if n is None:
+        if abs(f) < 1:
+            return lambda k: v * Rational(k + 1, k + 2)
+        if v.is_Integer:
+            return lambda k: v + k
+        return lambda k: v * Rational(10 + k, 10)
+    if abs(f) < 1:
+        return lambda k: f * (1 - 0.07 * k)
+    return lambda k: f * (1 + 0.09 * k)
+
+
+def _ms_nhieu(q, n, dinh_dang):
+    """Đúng ba phương án nhiễu (chuỗi) khác nhau và khác đáp số."""
+    dung = dinh_dang(q, q["v"], n)
+    pad = _ms_pad(q, n)
+    f = float(q["v"])
+    uv = [dinh_dang(q, w, n) for w, _ in q["sai"] if not (q["xap"] and not q["goc"] and f > 0 and not f / 3 <= float(w) <= 3 * f)]
+    return dung, _ba_nhieu(dung, uv, buoc=lambda k: dinh_dang(q, pad(k), n))
+
+
+def _ms_lam_tron(hoi, n):
+    """Thêm yêu cầu làm tròn vào câu hỏi."""
+    if n is None:
+        return hoi
+    yc = "làm tròn đến %s" % _MS_MUC_HANG[n]
+    if hoi.endswith("(đơn vị độ)."):
+        return hoi[:-len("(đơn vị độ).")] + "(đơn vị độ, %s)." % yc
+    return hoi.rstrip(".") + " (%s)." % yc
+
+
+def _ms_giai(qs, chuan, n, loai=""):
+    """Lời giải: [dòng đổi giá trị lượng giác] + lời giải từng bước; câu chốt khi có làm tròn (hoặc đổi ra số thập phân ở câu trả lời ngắn)."""
+    buoc = ([chuan] if chuan else []) + [q["ly"] for q in qs]
+    s = _MS_NOI.join(buoc)
+    f = qs[-1]
+    if loai == "SA" and n is None and not f["v"].is_Integer:
+        s += r" Viết dưới dạng số thập phân: $%s$." % _xx(float(f["v"]), 2)
+    if n is not None:
+        s += r" Làm tròn đến %s ta được $%s%s$." % (_MS_MUC_HANG[n], _x1(float(f["v"]), n), r"^{\circ}" if f["goc"] else "")
+    return s
+
+
+def _ms_chuan_tong(c, pool, cach):
+    if pool.get("chuan_d"):
+        return _ms_chuan_d(c)
+    if cach == "A" and not pool.get("chuan_khong"):
+        return _ms_chuan(c, pool.get("sin", False))
+    return ""
+
+
+def _ms_tl_da(c, q, n):
+    if n is None:
+        return _L(q["v"]) + (r"^{\circ}" if q["goc"] else "")
+    return r"\approx %s%s" % (_x1(float(q["v"]), n), r"^{\circ}" if q["goc"] else "")
+
+
+def _ms_nb029(bt):
+    """NB029 (Bài 5): xét dấu / loại góc A từ cách cho A. Trả về (đề, đáp án, nhiễu, lời giải)."""
+    c = _ms_ctx("A", bt)
+    t, co = c["t"], c["co"]
+    cc, sn = t["cos"]["A"], t["sin"]["A"]
+    nhon = cc > 0
+    d, n_ = (">", "<") if nhon else ("<", ">")
+    loai, loai_n = ("nhọn", "tù") if nhon else ("tù", "nhọn")
+    dung = [r"$\cos A %s 0$" % d, r"$\tan A %s 0$" % d, r"$\sin A > 0$"]
+    sai = [r"$\cos A %s 0$" % n_, r"$\tan A %s 0$" % n_, r"$\sin A < 0$", r"$\cos A = 0$"]
+    if co != "sin":
+        dung.append(r"Góc $\widehat{A}$ là góc %s" % loai)
+        sai += [r"Góc $\widehat{A}$ là góc %s" % loai_n, r"Góc $\widehat{A}$ là góc vuông"]
+    dap = random.choice(dung)
+    nhieu = random.sample(sai, 3)
+    if co == "cos":
+        ly = (r"Vì $\cos A = %s %s 0$ nên góc $A$ là góc %s. Mà $\sin A > 0$ (góc của tam giác) nên $\tan A = \dfrac{\sin A}{\cos A} %s 0$."
+              % (_L(cc), d, loai, d))
+    elif co == "sin":
+        ly = (r"Góc $A$ là góc %s nên $\cos A %s 0$ và $\tan A = \dfrac{\sin A}{\cos A} %s 0$ (vì $\sin A > 0$)." % (loai, d, d))
+    else:
+        ly = (r"Vì $\sin A > 0$ (góc của tam giác) và $\tan A = %s %s 0$ nên $\cos A %s 0$, tức là góc $A$ là góc %s." % (_L(sn / cc), d, d, loai))
+    return c["de"] + r" Khẳng định nào sau đây đúng?", dap, nhieu, ly, c["de"]
+
+
+def _ms_sinh(loai, dv, cach, bt, socau, tham):
+    """Sinh `socau` câu khác nhau. loai: "MC" | "SA" | "TL"; tham: dang (MC=1, SA=2) hoặc dong (TL)."""
+    ket, da, lan = "", set(), 0
+    while len(da) < socau:
+        lan += 1
+        if lan > 800:
+            raise RuntimeError("không sinh đủ %d câu khác nhau cho %s %s %d" % (socau, dv, cach, bt))
+        try:
+            if dv == "NB029":
+                debai, dap, nhieu, giai, khoa = _ms_nb029(bt)
+                if khoa in da:
+                    continue
+                da.add(khoa)
+                ket += MC_SA_answer_text(debai, dap, nhieu, giai, 0, 0, tham)
+                continue
+            c = _ms_ctx(cach, bt)
+            pool = _ms_pool(dv, cach, bt, c)
+            chuan = _ms_chuan_tong(c, pool, cach)
+            if loai == "TL":
+                ca, cb = random.choice(pool["tl"])
+                qa = [_ms_q(c, x) for x in ca]
+                qb = [_ms_q(c, x) for x in cb]
+                na, nb = _ms_chon_n(qa[-1], "TL"), _ms_chon_n(qb[-1], "TL")
+                khoa = (c["de"], tuple(ca), tuple(cb))
+                if khoa in da:
+                    continue
+                ds = [(_ms_lam_tron(qa[-1]["hoi"], na), _ms_tl_da(c, qa[-1], na), _ms_giai(qa, chuan, na)),
+                      (_ms_lam_tron(qb[-1]["hoi"], nb), _ms_tl_da(c, qb[-1], nb), _ms_giai(qb, "", nb))]
+                da.add(khoa)
+                ket += TL_answer_text(c["de"], ds, 0, 0, tham)
+                continue
+            ch = random.choice(pool["mc"])
+            qs = [_ms_q(c, x) for x in ch]
+            f = qs[-1]
+            n = _ms_chon_n(f, loai)
+            khoa = (c["de"], tuple(ch))
+            if khoa in da:
+                continue
+            fmt = _ms_mc_fmt if loai == "MC" else _ms_sa_fmt
+            dap, nhieu = _ms_nhieu(f, n, fmt)
+            debai = c["de"] + " " + _ms_lam_tron(f["hoi"], n)
+            da.add(khoa)
+            ket += MC_SA_answer_text(debai, dap, nhieu, _ms_giai(qs, chuan, n, loai), 0, 0, tham)
+        except _MsLai:
+            continue
+    return ket
+
+
+# ---------- các hàm công khai (mỗi hàm = một biến thể; ID xem docs/04) ----------
+
+def L10_C3_B5_NB029_MC_I_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (NB029, A): biết $AB$, $AC$ và $\cos A$ - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết hai cạnh và một giá trị lượng giác của góc A"""
+    return _ms_sinh("MC", "NB029", "A", 1, socau, dang)
+
+
+def L10_C3_B5_NB029_MC_I_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (NB029, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết hai cạnh và một giá trị lượng giác của góc A"""
+    return _ms_sinh("MC", "NB029", "A", 2, socau, dang)
+
+
+def L10_C3_B5_NB029_MC_I_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (NB029, A): biết $AB$, $AC$ và $\tan A$ - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết hai cạnh và một giá trị lượng giác của góc A"""
+    return _ms_sinh("MC", "NB029", "A", 3, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_K_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("MC", "TH031", "A", 1, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_K_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("MC", "TH031", "A", 2, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_K_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("MC", "TH031", "A", 3, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_H_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("SA", "TH031", "A", 1, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_H_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("SA", "TH031", "A", 2, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_H_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
+    return _ms_sinh("SA", "TH031", "A", 3, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_L_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH031", "B", 1, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_L_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH031", "B", 2, socau, dang)
+
+
+def L10_C3_B5_TH031_MC_L_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH031", "B", 3, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_I_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH031", "B", 1, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_I_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH031", "B", 2, socau, dang)
+
+
+def L10_C3_B5_TH031_SA_I_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH031", "B", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_H_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("MC", "TH030", "A", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_H_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("MC", "TH030", "A", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_H_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("MC", "TH030", "A", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_F_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("SA", "TH030", "A", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_F_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("SA", "TH030", "A", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_F_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
+    return _ms_sinh("SA", "TH030", "A", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_I_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH030", "B", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_I_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH030", "B", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_I_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("MC", "TH030", "B", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_G_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH030", "B", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_G_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH030", "B", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_G_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
+    return _ms_sinh("SA", "TH030", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_K_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("MC", "TH032", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_K_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("MC", "TH032", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_K_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("MC", "TH032", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_G_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("SA", "TH032", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_G_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("SA", "TH032", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_G_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("SA", "TH032", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH032_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("TL", "TH032", "A", 1, socau, dong)
+
+
+def L10_C3_B6_TH032_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("TL", "TH032", "A", 2, socau, dong)
+
+
+def L10_C3_B6_TH032_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
+    return _ms_sinh("TL", "TH032", "A", 3, socau, dong)
+
+
+def L10_C3_B6_TH032_MC_L_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("MC", "TH032", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_L_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("MC", "TH032", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_L_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("MC", "TH032", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_H_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("SA", "TH032", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_H_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("SA", "TH032", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_H_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("SA", "TH032", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH032_TL_D_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("TL", "TH032", "C", 1, socau, dong)
+
+
+def L10_C3_B6_TH032_TL_D_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("TL", "TH032", "C", 2, socau, dong)
+
+
+def L10_C3_B6_TH032_TL_D_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
+    return _ms_sinh("TL", "TH032", "C", 3, socau, dong)
+
+
+def L10_C3_B6_TH032_MC_M_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("MC", "TH032", "D", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_M_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("MC", "TH032", "D", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_I_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("SA", "TH032", "D", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_I_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("SA", "TH032", "D", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_TL_E_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("TL", "TH032", "D", 1, socau, dong)
+
+
+def L10_C3_B6_TH032_TL_E_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
+    return _ms_sinh("TL", "TH032", "D", 2, socau, dong)
+
+
+def L10_C3_B6_TH032_MC_N_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("MC", "TH032", "E", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_N_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("MC", "TH032", "E", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_J_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("SA", "TH032", "E", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_J_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("SA", "TH032", "E", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_O_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("MC", "TH032", "F", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_MC_O_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("MC", "TH032", "F", 2, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_K_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("SA", "TH032", "F", 1, socau, dang)
+
+
+def L10_C3_B6_TH032_SA_K_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
+    return _ms_sinh("SA", "TH032", "F", 2, socau, dang)
+
+
+def L10_C3_B6_TH033_MC_F_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH033_MC_F_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH033_MC_F_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_E_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_E_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_E_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH033_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "B", 1, socau, dong)
+
+
+def L10_C3_B6_TH033_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "B", 2, socau, dong)
+
+
+def L10_C3_B6_TH033_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "B", 3, socau, dong)
+
+
+def L10_C3_B6_TH033_MC_G_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH033_MC_G_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH033_MC_G_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("MC", "TH033", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_F_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_F_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH033_SA_F_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("SA", "TH033", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH033_TL_D_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "C", 1, socau, dong)
+
+
+def L10_C3_B6_TH033_TL_D_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "C", 2, socau, dong)
+
+
+def L10_C3_B6_TH033_TL_D_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
+    return _ms_sinh("TL", "TH033", "C", 3, socau, dong)
+
+
+def L10_C3_B6_TH034_MC_K_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("MC", "TH034", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_K_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("MC", "TH034", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_K_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("MC", "TH034", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_F_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("SA", "TH034", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_F_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("SA", "TH034", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_F_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("SA", "TH034", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("TL", "TH034", "A", 1, socau, dong)
+
+
+def L10_C3_B6_TH034_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("TL", "TH034", "A", 2, socau, dong)
+
+
+def L10_C3_B6_TH034_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
+    return _ms_sinh("TL", "TH034", "A", 3, socau, dong)
+
+
+def L10_C3_B6_TH034_MC_L_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("MC", "TH034", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_L_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("MC", "TH034", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_L_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("MC", "TH034", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_G_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("SA", "TH034", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_G_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("SA", "TH034", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_G_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
+    return _ms_sinh("SA", "TH034", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_M_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("MC", "TH034", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_M_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("MC", "TH034", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_M_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("MC", "TH034", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_H_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("SA", "TH034", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_H_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("SA", "TH034", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_H_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("SA", "TH034", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH034_TL_D_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("TL", "TH034", "C", 1, socau, dong)
+
+
+def L10_C3_B6_TH034_TL_D_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("TL", "TH034", "C", 2, socau, dong)
+
+
+def L10_C3_B6_TH034_TL_D_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
+    return _ms_sinh("TL", "TH034", "C", 3, socau, dong)
+
+
+def L10_C3_B6_TH034_MC_N_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)"""
+    return _ms_sinh("MC", "TH034", "D", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_MC_N_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH034, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)"""
+    return _ms_sinh("MC", "TH034", "D", 2, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_I_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)"""
+    return _ms_sinh("SA", "TH034", "D", 1, socau, dang)
+
+
+def L10_C3_B6_TH034_SA_I_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH034, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính diện tích tam giác (S = 1/2.a.h_a)"""
+    return _ms_sinh("SA", "TH034", "D", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_A_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\cos A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("MC", "TH035", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_A_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("MC", "TH035", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_A_04(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\tan A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("MC", "TH035", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_B_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\cos A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("SA", "TH035", "A", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_B_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("SA", "TH035", "A", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_B_04(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\tan A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("SA", "TH035", "A", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_TL_B_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\cos A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("TL", "TH035", "A", 1, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_B_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("TL", "TH035", "A", 2, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_B_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, A): biết $AB$, $AC$ và $\tan A$ - Giải tam giác biết hai cạnh và một giá trị lượng giác của góc A: cạnh thứ ba và số đo góc còn lại"""
+    return _ms_sinh("TL", "TH035", "A", 3, socau, dong)
+
+
+def L10_C3_B6_TH035_MC_B_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("MC", "TH035", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_B_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("MC", "TH035", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_B_04(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("MC", "TH035", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_A_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("SA", "TH035", "B", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_A_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("SA", "TH035", "B", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_A_04(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("SA", "TH035", "B", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_TL_A_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("TL", "TH035", "B", 1, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_A_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("TL", "TH035", "B", 2, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_A_04(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Giải tam giác biết hai góc và một cạnh: góc thứ ba, hai cạnh còn lại, chu vi"""
+    return _ms_sinh("TL", "TH035", "B", 3, socau, dong)
+
+
+def L10_C3_B6_TH035_MC_F_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $A$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("MC", "TH035", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_F_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $B$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("MC", "TH035", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_MC_F_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $C$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("MC", "TH035", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_E_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $A$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("SA", "TH035", "C", 1, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_E_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $B$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("SA", "TH035", "C", 2, socau, dang)
+
+
+def L10_C3_B6_TH035_SA_E_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $C$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("SA", "TH035", "C", 3, socau, dang)
+
+
+def L10_C3_B6_TH035_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $A$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("TL", "TH035", "C", 1, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $B$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("TL", "TH035", "C", 2, socau, dong)
+
+
+def L10_C3_B6_TH035_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $C$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
+    return _ms_sinh("TL", "TH035", "C", 3, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_B_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("MC", "VD032", "A", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_B_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("MC", "VD032", "A", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_B_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("MC", "VD032", "A", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_A_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("SA", "VD032", "A", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_A_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("SA", "VD032", "A", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_A_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("SA", "VD032", "A", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_A_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("TL", "VD032", "A", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_A_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("TL", "VD032", "A", 2, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_A_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
+    return _ms_sinh("TL", "VD032", "A", 3, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_C_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("MC", "VD032", "B", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_C_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("MC", "VD032", "B", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_C_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("MC", "VD032", "B", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_B_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("SA", "VD032", "B", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_B_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("SA", "VD032", "B", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_B_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("SA", "VD032", "B", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_B_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("TL", "VD032", "B", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_B_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("TL", "VD032", "B", 2, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_B_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
+    return _ms_sinh("TL", "VD032", "B", 3, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_D_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("MC", "VD032", "C", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_D_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("MC", "VD032", "C", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_D_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("MC", "VD032", "C", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_C_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("SA", "VD032", "C", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_C_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("SA", "VD032", "C", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_C_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("SA", "VD032", "C", 3, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("TL", "VD032", "C", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("TL", "VD032", "C", 2, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
+    return _ms_sinh("TL", "VD032", "C", 3, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_E_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("MC", "VD032", "D", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_E_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("MC", "VD032", "D", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_D_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("SA", "VD032", "D", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_D_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("SA", "VD032", "D", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_D_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("TL", "VD032", "D", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_D_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
+    return _ms_sinh("TL", "VD032", "D", 2, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_F_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("MC", "VD032", "E", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_F_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("MC", "VD032", "E", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_E_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("SA", "VD032", "E", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_E_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("SA", "VD032", "E", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_E_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("TL", "VD032", "E", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_E_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
+    return _ms_sinh("TL", "VD032", "E", 2, socau, dong)
+
+
+def L10_C3_B6_VD032_MC_G_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("MC", "VD032", "F", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_MC_G_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("MC", "VD032", "F", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_F_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("SA", "VD032", "F", 1, socau, dang)
+
+
+def L10_C3_B6_VD032_SA_F_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("SA", "VD032", "F", 2, socau, dang)
+
+
+def L10_C3_B6_VD032_TL_F_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("TL", "VD032", "F", 1, socau, dong)
+
+
+def L10_C3_B6_VD032_TL_F_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
+    return _ms_sinh("TL", "VD032", "F", 2, socau, dong)
+
+# ===== MS_END =====
