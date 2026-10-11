@@ -281,15 +281,17 @@ def lay_de(khoi):
 
 
 SO_HAT = int(os.environ.get("MS_SEEDS", 3))  # chay kiem sau: MS_SEEDS=60 pytest ...
-HAM_MC = [n for n in HAM if KIEU[n][0] == "MC" and KIEU[n][1] != "NB029"]
-HAM_SA = [n for n in HAM if KIEU[n][0] == "SA"]
-HAM_TL = [n for n in HAM if KIEU[n][0] == "TL"]
+ALPHA = ("G", "H", "I", "J")  # cach cho Bai 5 (goc alpha): cho sin, cos, tan, cot
+HAM_ALPHA = [n for n in HAM if KIEU[n][2] in ALPHA]
+HAM_MC = [n for n in HAM if KIEU[n][0] == "MC" and KIEU[n][1] != "NB029" and KIEU[n][2] not in ALPHA]
+HAM_SA = [n for n in HAM if KIEU[n][0] == "SA" and KIEU[n][2] not in ALPHA]
+HAM_TL = [n for n in HAM if KIEU[n][0] == "TL" and KIEU[n][2] not in ALPHA]
 HAM_NB = [n for n in HAM if KIEU[n][1] == "NB029"]
 
 
 def test_co_du_ham():
-    assert len(HAM) == 177
-    assert len(set(HAM)) == 177
+    assert len(HAM) == 212
+    assert len(set(HAM)) == 212
 
 
 @pytest.mark.parametrize("ten", HAM_MC)
@@ -368,31 +370,113 @@ def test_tl(ten):
                 assert khop(dap, dich), (ten, de, hoi, dap, dich)
 
 
-def _menh_de_dung(ms, T):
-    gs = {x: goc(T, x) for x in "ABC"}
+def _menh_de_dung(ms, gs):
+    """Khang dinh '$\\sin A > 0$' co dung khong, theo so do goc (rad) cua tam giac dung tu toa do."""
     ms = ms.replace("\\True", "").strip()
-    m = re.fullmatch(r"\$\\(cos|sin|tan) A (>|<|=) 0\$", ms)
-    if m:
-        v = {"cos": math.cos, "sin": math.sin, "tan": math.tan}[m.group(1)](gs["A"])
-        return {">": v > 1e-9, "<": v < -1e-9, "=": abs(v) < 1e-9}[m.group(2)]
-    m = re.fullmatch(r"Góc \$\\widehat\{A\}\$ là góc (nhọn|tù|vuông)", ms)
-    if m:
-        g = math.degrees(gs["A"])
-        return {"nhọn": g < 90 - 1e-9, "tù": g > 90 + 1e-9, "vuông": abs(g - 90) < 1e-9}[m.group(1)]
-    raise AssertionError(ms)
+    m = re.fullmatch(r"\$\\(sin|cos|tan|cot) ([ABC]) (>|<) 0\$", ms)
+    assert m, ms
+    g = gs[m.group(2)]
+    v = {"sin": math.sin(g), "cos": math.cos(g), "tan": math.tan(g), "cot": 1 / math.tan(g)}[m.group(1)]
+    return v > 0 if m.group(3) == ">" else v < 0
+
+
+# tam giac nhon va tam giac tu tai A, dung bang toa do de lay so do cac goc (khong dung engine)
+_TG_NHON = dict(A=(0.0, 0.0), B=(4.0, 0.0), C=(1.5, 3.0))
+_TG_TU_A = dict(A=(0.0, 0.0), B=(4.0, 0.0), C=(-1.5, 2.0))
 
 
 @pytest.mark.parametrize("ten", HAM_NB)
 def test_nb029(ten):
     f = getattr(M, ten)
-    for seed in range(6):
+    bt = int(KIEU[ten][3])
+    tg = _TG_NHON if bt == 1 else _TG_TU_A
+    gs = {x: goc(tg, x) for x in "ABC"}
+    assert (math.degrees(gs["A"]) < 90) == (bt == 1)
+    thay = set()
+    for seed in range(12):
         random.seed(seed)
-        for k in cac_cau(f(3)):
+        for k in cac_cau(f(4)):
+            de = lay_de(k)
+            assert (("nhọn" in de) if bt == 1 else ("góc $A$ tù" in de)), de
             pa = lay_phuong_an(k)
             assert len(set(pa)) == 4 and sum("\\True" in x for x in pa) == 1
-            T, _ = dung_tg(lay_de(k))
+            hoi_dung = "\\textbf{đúng}" in de
+            assert hoi_dung or "\\textbf{sai}" in de
+            goc_hoi = set(re.findall(r"\\(?:sin|cos|tan|cot) ([ABC])", " ".join(pa)))
+            assert len(goc_hoi) == 1, pa  # ca bon phuong an cung noi ve MOT goc
+            assert len(set(re.findall(r"\\(sin|cos|tan|cot) ", " ".join(pa)))) == 4  # du sin, cos, tan, cot
+            thay.add((hoi_dung, goc_hoi.pop()))
             for x in pa:
-                assert _menh_de_dung(x, T) == ("\\True" in x), (lay_de(k), x)
+                dung = _menh_de_dung(x, gs)
+                # hoi dung: phuong an \True la khang dinh dung duy nhat; hoi sai: \True la khang dinh sai duy nhat
+                assert (dung == ("\\True" in x)) if hoi_dung else (dung != ("\\True" in x)), (de, x)
+    assert len(thay) == 6  # du hai kieu hoi (dung / sai) va ba goc A, B, C
+
+
+# ---------------------------------------------------------------- goc alpha: tu MOT gia tri luong giac tim MOT gia tri khac
+def _doc_alpha(de):
+    """Doc cau dan: (alpha bang rad, ten ham cho). Dung alpha tu gia tri cho truoc + khoang cua goc (doc lap voi engine)."""
+    m = re.search(r"\\(sin|cos|tan|cot)\\alpha = (.*?)\$", de)
+    ham, gt = m.group(1), tex_so(m.group(2))
+    if ham == "sin":
+        tu = "90^{\\circ} < \\alpha < 180^{\\circ}" in de
+        assert tu or "0^{\\circ} < \\alpha < 90^{\\circ}" in de
+        a = math.asin(gt)
+        return (math.pi - a if tu else a), ham
+    assert "0^{\\circ} < \\alpha < 180^{\\circ}" in de  # cac ham con lai: dau cua gia tri cho truoc da quyet dinh nhon / tu
+    if ham == "cos":
+        return math.acos(gt), ham
+    a = math.atan(gt) if ham == "tan" else math.atan(1 / gt)
+    return (a if a > 0 else a + math.pi), ham
+
+
+def _gt_alpha(ten, a):
+    return {"sin": math.sin(a), "cos": math.cos(a), "tan": math.tan(a), "cot": 1 / math.tan(a)}[ten]
+
+
+def _hoi_alpha(hoi):
+    return re.search(r"Tính \$\\(sin|cos|tan|cot)\\alpha\$", hoi).group(1)
+
+
+@pytest.mark.parametrize("ten", HAM_ALPHA)
+def test_alpha(ten):
+    loai, dv, cach, bt = KIEU[ten]
+    f = getattr(M, ten)
+    cho_dung = dict(zip(ALPHA, ("sin", "cos", "tan", "cot")))[cach]
+    for seed in range(max(SO_HAT, 4)):
+        random.seed(seed)
+        cac = cac_cau(f(3))
+        assert len(cac) == 3
+        assert len({lay_de(k) + (lay_phuong_an(k)[0] if loai == "MC" else "") for k in cac}) == 3
+        for k in cac:
+            de = lay_de(k)
+            a, ham = _doc_alpha(de)
+            assert ham == cho_dung
+            assert 0 < a < math.pi and abs(a - math.pi / 2) > 1e-6
+            if loai == "TL":
+                ds = re.findall(r"\\item (.*?) \\SA\[4\]\{\$(.*?)\$\}", k)
+                assert len(ds) == 2 and k.count("\\item") == 4
+                tens = [_hoi_alpha(h) for h, _ in ds]
+                assert tens[0] != tens[1] and cho_dung not in tens
+                for t_, (h, dap) in zip(tens, ds):
+                    assert khop(dap, _gt_alpha(t_, a)), (ten, de, h, dap)
+                continue
+            t_ = _hoi_alpha(de)
+            assert t_ != cho_dung
+            dich = _gt_alpha(t_, a)
+            if loai == "MC":
+                pa = lay_phuong_an(k)
+                assert len(set(pa)) == 4 and sum("\\True" in x for x in pa) == 1
+                for x in pa:  # ca bon phuong an cung la gia tri cua MOT gia tri luong giac (khong ghep nhieu gia tri)
+                    assert "," not in x and ";" not in x and "\\sin" not in x and "\\cos" not in x, x
+                    if "\\True" in x:
+                        assert khop(x.replace("\\True", ""), dich), (ten, de, x, dich)
+                    else:
+                        assert abs(tex_so(x) - dich) > 1e-6, (ten, de, x, dich)
+            else:
+                m = re.search(r"\\shortans\{ ?(.*?)\}\n", k)
+                n_de = n_lam_tron(de)
+                assert khop(m.group(1), dich, n_de), (ten, de, m.group(1), dich)
 
 
 # ---------------------------------------------------------------- mapping / curriculum
@@ -403,7 +487,7 @@ def _mapping():
 def test_mapping_moi_co_dong_va_co_ham():
     mp = _mapping()
     moi = [i for i, r in mp.items() if "[MSTL_C3]" in r.get("ghi_chu", "")]
-    assert len(moi) == 60
+    assert len(moi) == 72
     ham_goc = {n[:-3] for n in HAM}
     for i in moi:
         assert any(h == i for h in ham_goc), i
@@ -448,10 +532,10 @@ def test_curriculum_co_nhom_luyen_tap_them():
 
 # ---------------------------------------------------------------- khong dua du kien khong dung vao cau dan
 # Quy tac co Lan 10/10/2026: "khong dua cac du lieu khong su dung trong qua trinh giai bai vao cau dan".
-#   NB029 / TH031 / TH030 (cach cho A): chi can mot gia tri luong giac cua goc A  -> khong neu AB, AC;
+#   TH031 / TH030 (cach cho A): chi can mot gia tri luong giac cua goc A  -> khong neu AB, AC;
 #   TH031 / TH030 (cach cho B):         chi can hai goc                            -> khong neu do dai canh;
 #   TH034 (cach cho D):                 S = 1/2.a.h_a chi can canh va duong cao    -> khong neu cos B.
-_DE_GON = {("NB029", "A"), ("TH031", "A"), ("TH030", "A"), ("TH031", "B"), ("TH030", "B"), ("TH034", "D")}
+_DE_GON = {("TH031", "A"), ("TH030", "A"), ("TH031", "B"), ("TH030", "B"), ("TH034", "D")}
 
 
 @pytest.mark.parametrize("ten", [n for n in HAM if KIEU[n][1:3] in _DE_GON])

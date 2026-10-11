@@ -79,6 +79,31 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_VD014_SA_A",   # nhu MC_A, tra loi ngan
     "L10_C1_B1_VD014_TL_A",   # keo theo + menh de dao: chia het / hinh hoc / so thuc
     "L10_C2_B4_VD028_MC_A",   # GTLN-NN tu he / diem dat GTLN / mien cho bang hinh
+    # chuong 2 - cac kich ban thuc tien VD028 (co Lan: 'xu ly het' 11/10/2026; mapping Dang mo ta ca kich ban):
+    "L10_C2_B3_NB025_MC_B",   # pha che: BPT ve luong duong / nuoc / huong lieu (cung kich ban, doi dai luong)
+    "L10_C2_B3_NB025_MC_C",   # tinh huong thuc tien: lap bat phuong trinh cua dieu kien thu 1 / 2 / 3 (cung kich ban, doi dieu kien)
+    "L10_C2_B3_NB025_MC_D",   # tinh huong thuc tien: lap bat phuong trinh cua dieu kien thu 1 / 2 / 3 (cung kich ban, doi dieu kien)
+    "L10_C2_B3_NB025_MC_E",   # tinh huong thuc tien: lap bat phuong trinh cua dieu kien thu 1 / 2 / 3 (cung kich ban, doi dieu kien)
+    "L10_C2_B4_VD028_MC_B",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_B",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_C",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_C",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_D",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_D",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_E",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_E",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_F",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_F",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_G",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_G",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_H",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_H",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_I",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_I",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_J",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_J",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_MC_K",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
+    "L10_C2_B4_VD028_SA_K",   # cung kich ban thuc tien/ham muc tieu: chon he / chon phuong an / gia tri (mapping ghi dang tong the)
     "L10_C2_B4_VD028_SA_A",   # GTLN tu he / tu hinh / GTNN mien khong bi chan
     "L10_C2_B4_VD028_TL_A",   # cho san he / tu lap he (lai lon nhat) / chi phi nho nhat
     "L10_C3_B6_VD036_SA_A",   # vat can: dam lay / duong ham-ho-nha (cosin) / ben kia song (sin)
@@ -98,6 +123,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_NB029_MC_H",   # dang thuc dung/sai cua mot goc / gia tri nao bang so cho truoc
     "L10_C3_B5_NB029_SA_B",   # biet goc tinh toa do / biet toa do tim goc
     "L10_C3_B5_TH030_MC_D",   # sin + cos -> sin.cos / sin.cos -> (sin +- cos)^2, sin^4 + cos^4
+    "L10_C3_B5_TH030_SA_M",   # sin.cos = p (thap phan) -> (sin+cos)^2 / (sin-cos)^2 / sin^4 + cos^4 (cung dang, doi dai luong hoi)
     "L10_C3_B5_TH030_SA_B",   # cos -> dien tich AOM / dien tich AOM -> cos
     "L10_C3_B5_TH031_MC_C",   # tich sin cos goc dac biet / goc le phai dung phu-bu
     "L10_C3_B5_TH031_SA_C",   # cho alpha + beta / trong tam giac
@@ -246,6 +272,19 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_VD032_MC_G",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_SA_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    # Bai 5 (goc alpha): tu MOT gia tri luong giac tim MOT gia tri khac (co Lan 11/10/2026): moi ID = cho sin / cos / tan / cot, 3 bien the = 3 gia tri can tim
+    "L10_C3_B5_TH030_MC_J",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_MC_K",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_MC_L",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_MC_M",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_H",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_I",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_J",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_K",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_TL_B",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_TL_C",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_TL_D",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_TL_E",           # 3 bien the: cung dang, khac cach hoi
 }
 
 

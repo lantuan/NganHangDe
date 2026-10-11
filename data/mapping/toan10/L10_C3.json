@@ -465,6 +465,34 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
+    "id": "L10_C3_B5_TH030_SA_L",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết sin α + cos α (hoặc sin α − cos α) bằng một số thập phân: tính sin α.cos α",
+    "ghi_chu": "CLAUDE THEM 11/10/2026 - bo sung SA/TL cho dang sin +- cos <-> sin.cos (truoc chi co MC_D), muc do giu nhu TH030_MC_D; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_M",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết sin α.cos α (số thập phân): tính (sin α + cos α)², (sin α − cos α)² hoặc sin⁴α + cos⁴α",
+    "ghi_chu": "CLAUDE THEM 11/10/2026 - bo sung SA/TL cho dang sin +- cos <-> sin.cos (truoc chi co MC_D), muc do giu nhu TH030_MC_D; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_F",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết sin α + cos α (hoặc sin α − cos α): tính sin α.cos α rồi |sin α ∓ cos α| hoặc sin⁴α + cos⁴α",
+    "ghi_chu": "CLAUDE THEM 11/10/2026 - bo sung SA/TL cho dang sin +- cos <-> sin.cos (truoc chi co MC_D), muc do giu nhu TH030_MC_D; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_G",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết sin α.cos α < 0 (góc tù): tính (sin α ∓ cos α)² rồi sin α − cos α, hoặc (sin α + cos α)² rồi sin⁴α + cos⁴α",
+    "ghi_chu": "CLAUDE THEM 11/10/2026 - bo sung SA/TL cho dang sin +- cos <-> sin.cos (truoc chi co MC_D), muc do giu nhu TH030_MC_D; co Lan duyet lai"
+  },
+  {
     "id": "L10_C3_B5_VD030_MC_A",
     "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -1349,8 +1377,8 @@
     "id": "L10_C3_B5_NB029_MC_I",
     "content": "Nhận biết được giá trị lượng giác của một góc từ 0 độ đến 180 độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết một giá trị lượng giác của góc A",
-    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho A); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
+    "Dang": "Xét dấu sin, côsin, tang, côtang của một góc trong tam giác nhọn hoặc tam giác có góc A tù (chọn khẳng định đúng / sai)",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026, SUA 11/10/2026 theo co Lan - xet dau sin, cos, tan, cot cua MOT goc trong tam giac nhon / tam giac co goc A tu (chon khang dinh dung hoac sai); co Lan duyet lai"
   },
   {
     "id": "L10_C3_B5_TH031_MC_K",
@@ -1407,6 +1435,90 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay",
     "ghi_chu": "[MSTL_C3] CLAUDE THEM 10/10/2026 - MC/SA/TL giai tam giac, cung cau dan voi TF_T (cach cho B); co Lan duyet lai; cau dan RUT GON, chi neu du kien thuc su dung trong loi giai (quy tac co Lan 10/10/2026)"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_J",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho G = cho sin), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_H",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho G = cho sin), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_B",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho G = cho sin), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_K",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho H = cho cos), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_I",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho H = cho cos), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_C",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho H = cho cos), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_L",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho I = cho tan), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_J",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho I = cho tan), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_D",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho I = cho tan), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_MC_M",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho J = cho cot), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_SA_K",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho J = cho cot), theo yeu cau co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B5_TH030_TL_E",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Tự luận",
+    "Dang": "Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²",
+    "ghi_chu": "[MSTL_C3] CLAUDE THEM 11/10/2026 - Bai 5 goc alpha: tu MOT gia tri luong giac tim MOT gia tri luong giac khac (cach cho J = cho cot), theo yeu cau co Lan; co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_TH032_MC_K",

@@ -9995,3 +9995,35 @@ Cô Lan góp ý từ câu `L10_C3_B5_NB029_MC_I` (chỉ hỏi loại góc A mà 
 - Code: `_MS_DE_GON` và tham số `dv` của `_ms_ctx`. Các câu dẫn rút gọn không cần tam giác thường (ba cạnh khác nhau) nữa; số câu dẫn khác nhau: NB029 ≈ 36, TH031/TH030 cách A ≈ 65–100, cách B ≈ 100, TH034 cách D ≈ 98 (trước đó TH034-D chỉ 10).
 - Mapping: cột `Dang` của các ID này đổi theo (ví dụ "Biết một giá trị lượng giác của góc A: …", "Biết hai góc: …", "Biết một cạnh và đường cao tương ứng: …"), `ghi_chu` thêm "cau dan RUT GON …"; docstring các hàm đổi tương ứng. ID không đổi.
 - Test `tests/test_l10_c3_mc_sa_tl_giai_tam_giac.py` (nay 212): đọc được câu dẫn rút gọn (dựng tam giác bất kỳ có góc A đó / hai góc đó / cạnh và đường cao đó) và thêm `test_cau_dan_khong_co_du_kien_thua` kiểm câu dẫn của 31 hàm trên không còn nhắc cạnh / cos B.
+
+## Sửa nhãn hình `L10_C3_B5_NB029_MC_G_01` (11/10/2026)
+
+Cô Lan góp ý: câu dẫn gọi điểm là $M$ nhưng hình vẽ hai vị trí nên đặt tên $N$ không hợp lý. Đổi hai vị trí thành $M_1$, $M_2$ (hoành độ $x_{M_1}$, $x_{M_2}$) trong `_hinh_nua_duong_tron_hai_phia`, câu dẫn nay ghi "hai vị trí có thể có của $M$ là $M_1$ và $M_2$". Lời giải giữ nguyên ($M$ là điểm ứng với góc $\alpha$ nói chung).
+
+## L10_C3 Bài 5: NB029_MC_I viết lại + dạng "từ MỘT giá trị lượng giác tìm MỘT giá trị lượng giác khác" (11/10/2026)
+
+Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A" quá lộ liễu; chưa thấy dạng "từ giá trị lượng giác này tìm giá trị lượng giác kia" (chỉ thấy dạng tìm giá trị biểu thức); MC thì cả bốn phương án phải cùng là giá trị của MỘT đại lượng.
+- **`L10_C3_B5_NB029_MC_I` viết lại** (2 biến thể, thay cho 3 biến thể cos/sin/tan cũ): `_01` "Cho tam giác $ABC$ nhọn.", `_02` "Cho tam giác $ABC$ có góc $A$ tù." Bốn phương án là dấu của sin, côsin, tang, côtang của CÙNG MỘT góc (A, B hoặc C ngẫu nhiên); hỏi khẳng định đúng hoặc sai (ngẫu nhiên). 24 câu khác nhau mỗi biến thể. Bỏ NB029 khỏi quy tắc "câu dẫn rút gọn" (câu dẫn mới không có dữ kiện số).
+- **Đã có sẵn** (không làm lại): TH030_MC_B / SA_A / TL_A (góc $\alpha$: biết sin hoặc cos và khoảng của góc, tìm cos hoặc sin), TH030_MC_H / SA_F (tam giác $ABC$: biết cos A, sin A hoặc tan A, tìm giá trị còn lại). **Còn thiếu** nên bổ sung: tìm tan, cot; biết tan hoặc cot.
+- **Bổ sung 12 ID mới ở TH030 (MC_J..M, SA_H..K, TL_B..E), 36 hàm.** Mỗi ID một cách cho của góc $\alpha$ (G cho sin, H cho cos, I cho tan, J cho cot); ba biến thể `_01.._03` là ba giá trị cần tìm (G: cos, tan, cot; H: sin, tan, cot; I: cot, cos, sin; J: tan, sin, cos). Mỗi câu chỉ tìm MỘT giá trị lượng giác; bốn phương án MC cùng là giá trị của đại lượng đó (nhiễu: đổi dấu, nghịch đảo, nhầm hàm). Chỉ cho khoảng của góc khi giá trị cho trước là sin (vì sin luôn dương nên không cho biết nhọn hay tù); cos, tan, cot đã có dấu nên chỉ cho $0^{\circ} < \alpha < 180^{\circ}$ (không nêu dữ kiện thừa). Tự luận gồm hai ý a), b) là hai giá trị khác nhau; ý b) dùng lại kết quả ý a) nếu cần. Số liệu từ các bộ ba Pytago (3-4-5, 5-12-13, 8-15-17, 7-24-25, 20-21-29, 12-35-37, 9-40-41): mỗi cách cho có 28 câu dẫn khác nhau.
+- Mức độ: TH030, không ghi chú ngoài YCCĐ (cùng mức với TH030_MC_B / MC_H đã duyệt: dùng sin² + cos² = 1, tan = sin/cos, tan.cot = 1, 1 + tan² = 1/cos²).
+- Test: `tests/test_l10_c3_mc_sa_tl_giai_tam_giac.py` (nay 244): `test_nb029` đọc lại bằng tam giác dựng từ toạ độ (nhọn / tù tại A), kiểm đúng / sai và bốn phương án cùng một góc; `test_alpha` dựng $\alpha$ từ giá trị cho trước + khoảng góc rồi tự tính giá trị cần tìm, kiểm MC (bốn phương án, một đúng, không ghép nhiều giá trị), SA, TL. 12 ID mới đã thêm vào `CHO_PHEP_NHIEU_HAM`.
+
+## 11/10/2026 - Phương án nhiễu TH030_MC_D_01 / _02 phải nằm trong miền giá trị
+
+- Lỗi (cô Lan chỉ ra): câu hỏi $(\sin\alpha-\cos\alpha)^2$ mà có phương án nhiễu âm (hoặc $\sin^4\alpha+\cos^4\alpha>1$) → học sinh loại ngay, không cần tính.
+- Sửa: thêm hàm `_nhieu_trong_mien(dung, ung, thap, cao, buoc)` trong `L10_C3.py`; mọi phương án nhiễu bị lọc theo miền: $\sin\alpha\cos\alpha\in[-\tfrac12,\tfrac12]$, $(\sin\alpha\pm\cos\alpha)^2\in[0,2]$, $\sin^4\alpha+\cos^4\alpha\in[\tfrac12,1]$. Thiếu thì bù bằng giá trị lệch nhỏ quanh đáp số nhưng vẫn trong miền. Đáp án đúng không đổi.
+- Test mới: `tests/test_th030_mc_d_mien_gia_tri.py` (4 phương án khác nhau, đúng 1 đáp án, mọi phương án trong miền).
+- Chưa làm (chờ cô duyệt): SA và TL cho dạng sin±cos ↔ sin·cos (cả hai chiều).
+
+## 11/10/2026 - Bổ sung SA và TL cho dạng sin ± cos ↔ sin·cos; đồng bộ bản Anh chương 1; cho phép nhiều hàm cùng ID ở chương 2
+
+- Dạng sin ± cos ↔ sin·cos trước đây chỉ có MC (`TH030_MC_D_01/_02`). Nay có đủ cả hai chiều ở SA và TL (mức độ giữ như MC_D, không ghi chú LUYEN TAP THEM):
+  - `L10_C3_B5_TH030_SA_L_01`: biết sinα ± cosα = a (số thập phân) → sinα·cosα. a chọn trong [−1; √2] để góc tồn tại, đáp số thập phân ≤ 4 kí tự.
+  - `L10_C3_B5_TH030_SA_M_01/_02/_03`: biết sinα·cosα = p (thập phân) → (sinα+cosα)² / (sinα−cosα)² / sin⁴α+cos⁴α.
+  - `L10_C3_B5_TH030_TL_F_01`: biết sinα ± cosα = a (phân số, từ bộ ba Pythagore) → a) sinα·cosα; b) |sinα ∓ cosα| hoặc sin⁴α+cos⁴α (dùng kết quả ý a).
+  - `L10_C3_B5_TH030_TL_G_01`: biết sinα·cosα < 0 (góc tù) → a) (sinα−cosα)² rồi b) sinα−cosα (xét dấu: sin>0>cos), hoặc a) (sinα+cosα)² rồi b) sin⁴α+cos⁴α.
+  - Mapping: 4 dòng mới; `SA_M` vào `CHO_PHEP_NHIEU_HAM` (ba hàm cùng dạng, khác đại lượng được hỏi).
+- Test mới (trong `tests/test_th030_mc_d_mien_gia_tri.py`): với mỗi câu SA/TL, tìm MỌI góc α∈[0°;180°] thoả giả thiết rồi kiểm đáp số của từng ý ở mọi góc đó (bắt luôn lỗi dấu mơ hồ); SA ≤ 4 kí tự.
+- Bản Anh chương 1 (`data/python_bank_en/toan10/L10_C1.py`) được dịch lại bằng `scripts/dich_ngan_hang.py dich` vì sửa hình Ven 10/10 làm lệch bản Việt.
+- `tests/test_mot_id_mot_dang.py`: cho phép nhiều hàm cùng ID với `L10_C2_B3_NB025_MC_B..E` và `L10_C2_B4_VD028_MC/SA_B..K` (mapping đã mô tả "dạng" là cả kịch bản thực tiễn; các hàm chỉ khác đại lượng được hỏi) - cô Lan duyệt 11/10/2026.

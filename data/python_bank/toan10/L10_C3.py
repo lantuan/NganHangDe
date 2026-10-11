@@ -3108,11 +3108,11 @@ def _hinh_nua_duong_tron_hai_phia():
         "\\draw[dashed] (M) -- ({cos(55)*1.6},0);\n"
         "\\draw[dashed] (N) -- ({cos(130)*1.6},0);\n"
         "\\fill[black] (M) circle[radius=1.5pt] node[above right]"
-        "{\\footnotesize $M$};\n"
+        "{\\footnotesize $M_1$};\n"
         "\\fill[black] (N) circle[radius=1.5pt] node[above left]"
-        "{\\footnotesize $N$};\n"
-        "\\node[below] at ({cos(55)*1.6},0) {\\footnotesize $x_M$};\n"
-        "\\node[below] at ({cos(130)*1.6},0) {\\footnotesize $x_N$};\n"
+        "{\\footnotesize $M_2$};\n"
+        "\\node[below] at ({cos(55)*1.6},0) {\\footnotesize $x_{M_1}$};\n"
+        "\\node[below] at ({cos(130)*1.6},0) {\\footnotesize $x_{M_2}$};\n"
         "\\fill[black] (0,0) circle[radius=1.0pt] node[below left]"
         "{\\footnotesize $O$};\n"
         "\\end{tikzpicture}"
@@ -3284,7 +3284,7 @@ def L10_C3_B5_NB029_MC_G_01(socau, dang=1):
         gia_thiet, dung, nhieu, ly_do = TRUONG_HOP[chi_so]
         debai = (r"Cho góc $\alpha$ với $0^{\circ} \le \alpha \le 180^{\circ}$ "
                  r"và $M$ là điểm trên nửa đường tròn đơn vị ứng với góc "
-                 r"$\alpha$. Hình vẽ minh hoạ hai vị trí có thể có của $M$. "
+                 r"$\alpha$. Hình vẽ minh hoạ hai vị trí có thể có của $M$ là $M_1$ và $M_2$. "
                  r"Biết $%s$. Khẳng định nào sau đây \textbf{đúng}?"
                  % gia_thiet)
         giai = ly_do + "\\\\\n" + r"Vậy %s." % dung
@@ -5793,7 +5793,8 @@ def L10_C3_B5_TH030_MC_D_01(socau, dang=1):
             bt, bien = r"\sin\alpha - \cos\alpha", r"1 - 2\sin\alpha\cos\alpha"
             ket = r"\dfrac{1 - %s^{2}}{2}" % _ngoac_mu(a)
         dung = _L(P)
-        nhieu = _ba_nhieu(dung, [_L(x) for x in ung], buoc=lambda t: _L(P + Rational(t, 10)))
+        # sin.cos = sin(2α)/2 nằm trong [-1/2; 1/2]: phương án nhiễu ngoài miền này bị loại ngay
+        nhieu = _nhieu_trong_mien(P, ung, Rational(-1, 2), Rational(1, 2), Rational(1, 100))
         debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
                  r"$%s = %s$. Tính giá trị của $\sin\alpha\cos\alpha$." % (bt, _L(a)))
         giai = (r"Bình phương hai vế: $\left(%s\right)^{2} = %s^{2}$" % (bt, _ngoac_mu(a))
@@ -5804,6 +5805,26 @@ def L10_C3_B5_TH030_MC_D_01(socau, dang=1):
                 + "\\\\\n" + r"$\Leftrightarrow \sin\alpha\cos\alpha = %s = %s$." % (ket, dung))
         cau += MC_SA_answer_const(debai, dung, nhieu, giai, 0, 0, dang)
     return cau
+
+
+def _nhieu_trong_mien(dung, ung, thap, cao, buoc=Rational(1, 50), fmt=None):
+    """Ba phương án nhiễu (chuỗi LaTeX) mà giá trị PHẢI NẰM TRONG MIỀN GIÁ TRỊ CÓ THỂ của đại lượng được hỏi.
+
+    Cô Lan 11/10/2026: câu hỏi $(\\sin\\alpha - \\cos\\alpha)^{2}$ mà có phương án âm (hoặc $\\sin^{4}\\alpha + \\cos^{4}\\alpha > 1$)
+    thì học sinh loại ngay không cần tính. thap, cao: miền giá trị của đại lượng; ung: các giá trị sai hay gặp
+    (quên hệ số 2, nhầm dấu, ...); thiếu thì thêm các giá trị lệch nhỏ quanh đáp số nhưng vẫn trong miền."""
+    ds = []
+    for x in ung:
+        if thap <= x <= cao and x != dung and x not in ds:
+            ds.append(x)
+    t = 1
+    while len(ds) < 3 and t < 400:
+        for dau in (1, -1):
+            x = dung + dau * t * buoc
+            if thap <= x <= cao and x != dung and x not in ds and len(ds) < 3:
+                ds.append(x)
+        t += 1
+    return [(fmt or _L)(x) for x in ds[:3]]
 
 
 def _ngoac_mu(v):
@@ -9171,7 +9192,9 @@ def L10_C3_B5_TH030_MC_D_02(socau, dang=1):
             ung = [1 + 2 * p ** 2, 1 - p ** 2, 1 - 2 * p]
             thay = r"1 - 2\cdot\left(%s\right)^{2}" % _L(p)
         dung = _L(P)
-        nhieu = _ba_nhieu(dung, [_L(x) for x in ung], buoc=lambda t: _L(P + Rational(t, 25)))
+        # (sin ± cos)^2 nằm trong [0; 2] (không bao giờ âm); sin^4 + cos^4 nằm trong [1/2; 1]
+        thap, cao = (Rational(1, 2), Integer(1)) if k == 2 else (Integer(0), Integer(2))
+        nhieu = _nhieu_trong_mien(P, ung, thap, cao, Rational(1, 100))
         debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
                  r"$\sin\alpha\cos\alpha = %s$. Giá trị của $%s$ bằng" % (_L(p), hoi))
         giai = (r"Ta có $%s = %s$." % (hoi, bd) + "\\\\\n" +
@@ -13524,6 +13547,231 @@ def L10_C3_TF_T_06(socau, socot=1):
     return _gt_cau(socau, socot, lambda: _gu_goc("AC", "c", ["R", "S"]))
 
 
+# =====================================================================
+# SIN +- COS <-> SIN.COS: bản TRẢ LỜI NGẮN và TỰ LUẬN (cùng dạng với TH030_MC_D)
+# ---------------------------------------------------------------------
+# CLAUDE THEM 11/10/2026 - co Lan ("kiem tra xem co bai toan nguoc lai: tu tong
+# hoac hieu tim tich chua. da du MC, SA, TL chua" -> "ban xu ly het cho toi"):
+# truoc day dang nay chi co MC (TH030_MC_D_01 tong/hieu -> tich, _02 tich -> (sin +- cos)^2, sin^4 + cos^4).
+# Muc do giu dung nhu MC_D (TH030, khong ghi chu LUYEN TAP THEM). Dap so SA toi da 4 ky tu
+# (nhu cac cau SA khac) nen SA dung so thap phan; TL dung bo ba Pythagore nen dap so la phan so.
+# Co Lan duyet lai.
+# =====================================================================
+
+def _sa_sc_chuoi(x):
+    """Số thập phân hữu hạn (dấu phẩy), tối đa 4 kí tự (kể cả dấu); không gọn được thì None."""
+    return _so_thap_phan_gon(x, 4)
+
+
+def L10_C3_B5_TH030_SA_L_01(socau, dang=2):
+    r"""Trả lời ngắn: biết $\sin\alpha + \cos\alpha$ (hoặc $\sin\alpha - \cos\alpha$) bằng một số thập phân,
+    tính $\sin\alpha\cos\alpha$ (đáp số thập phân tối đa 4 kí tự)."""
+    # a nằm trong [-1; căn 2] để góc tồn tại; chỉ lấy a cho đáp số gọn (<= 4 kí tự).
+    CAC = [(Rational(k, 10), True) for k in (12, 14)] + \
+          [(Rational(k, 10), False) for k in (-8, -6, -4, -2, 2, 4, 6, 8)]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        v = random.choice(CAC)
+        if v not in gt:
+            gt.append(v)
+    cau = ""
+    for a, tong in gt:
+        P = (a ** 2 - 1) / 2 if tong else (1 - a ** 2) / 2
+        dap = _sa_sc_chuoi(P)
+        assert dap is not None and -Rational(1, 2) <= P <= Rational(1, 2)
+        bt = r"\sin\alpha + \cos\alpha" if tong else r"\sin\alpha - \cos\alpha"
+        dau = "+" if tong else "-"
+        debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
+                 r"$%s = %s$. Giá trị của $\sin\alpha\cos\alpha$ bằng bao nhiêu?" % (bt, _xx(a, 2)))
+        giai = (r"Bình phương hai vế: $\left(%s\right)^{2} = %s^{2}$" % (bt, _ngoac_dec(a)) + "\\\\\n" +
+                r"$\Leftrightarrow \sin^{2}\alpha + \cos^{2}\alpha %s 2\sin\alpha\cos\alpha = %s$"
+                % (dau, _xx(a ** 2, 4)) + "\\\\\n" +
+                r"$\Leftrightarrow 1 %s 2\sin\alpha\cos\alpha = %s$ (vì $\sin^{2}\alpha + \cos^{2}\alpha = 1$)"
+                % (dau, _xx(a ** 2, 4)) + "\\\\\n" +
+                r"$\Leftrightarrow \sin\alpha\cos\alpha = %s = %s$." % (
+                    (r"\dfrac{%s - 1}{2}" % _xx(a ** 2, 4)) if tong else (r"\dfrac{1 - %s}{2}" % _xx(a ** 2, 4)), dap))
+        ds = [_xx(P + d, 3) for d in (Rational(1, 10), -Rational(1, 10), Rational(1, 5))]
+        ds = [x for x in ds if x != dap][:3]
+        while len(ds) < 3:
+            ds.append(_xx(P + Rational(len(ds) + 3, 10), 3))
+        cau += MC_SA_answer_text(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
+def _ngoac_dec(a):
+    """Số thập phân đặt trong ngoặc khi nâng luỹ thừa nếu âm."""
+    return (r"\left(%s\right)" % _xx(a, 2)) if a < 0 else _xx(a, 2)
+
+
+def _sa_tich_hoi(socau, dang, loai):
+    """Biết tích sinα.cosα = p (số thập phân) -> loai: 'tong' (sin+cos)^2, 'hieu' (sin-cos)^2, 'bon' sin^4+cos^4."""
+    if loai == "bon":
+        CAC = [Rational(s * k, 10) for k in (1, 2, 3, 4, 5) for s in (1, -1)]
+    else:
+        CAC = [Rational(s * k, 100) for k in range(1, 50) for s in (1, -1)]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 800:
+        lan += 1
+        p = random.choice(CAC)
+        if p not in gt:
+            gt.append(p)
+    cau = ""
+    for p in gt:
+        if loai == "tong":
+            hoi, P = r"\left(\sin\alpha + \cos\alpha\right)^{2}", 1 + 2 * p
+            ket = r"1 + 2\cdot %s" % _ngoac_dec(p)
+            ds_u = [1 - 2 * p, 2 * p, 1 + p]
+            thap, cao = Integer(0), Integer(2)
+            giai = (r"Ta có $%s = \sin^{2}\alpha + \cos^{2}\alpha + 2\sin\alpha\cos\alpha = 1 + 2\sin\alpha\cos\alpha$.\\" % hoi
+                    + "\n" + r"Thay $\sin\alpha\cos\alpha = %s$ được $%s = %s = %s$." % (_xx(p, 2), hoi, ket, _sa_sc_chuoi(P)))
+        elif loai == "hieu":
+            hoi, P = r"\left(\sin\alpha - \cos\alpha\right)^{2}", 1 - 2 * p
+            ket = r"1 - 2\cdot %s" % _ngoac_dec(p)
+            ds_u = [1 + 2 * p, 2 * p, 1 - p]
+            thap, cao = Integer(0), Integer(2)
+            giai = (r"Ta có $%s = \sin^{2}\alpha + \cos^{2}\alpha - 2\sin\alpha\cos\alpha = 1 - 2\sin\alpha\cos\alpha$.\\" % hoi
+                    + "\n" + r"Thay $\sin\alpha\cos\alpha = %s$ được $%s = %s = %s$." % (_xx(p, 2), hoi, ket, _sa_sc_chuoi(P)))
+        else:
+            hoi, P = r"\sin^{4}\alpha + \cos^{4}\alpha", 1 - 2 * p ** 2
+            ket = r"1 - 2\cdot \left(%s\right)^{2}" % _xx(p, 2)
+            ds_u = [1 + 2 * p ** 2, 1 - p ** 2, 1 - 2 * p]
+            thap, cao = Rational(1, 2), Integer(1)
+            giai = (r"Ta có $\sin^{4}\alpha + \cos^{4}\alpha = \left(\sin^{2}\alpha + \cos^{2}\alpha\right)^{2} "
+                    r"- 2\sin^{2}\alpha\cos^{2}\alpha = 1 - 2\left(\sin\alpha\cos\alpha\right)^{2}$.\\" + "\n"
+                    + r"Thay $\sin\alpha\cos\alpha = %s$ được $%s = %s = %s$." % (_xx(p, 2), hoi, ket, _sa_sc_chuoi(P)))
+        dap = _sa_sc_chuoi(P)
+        assert dap is not None and thap <= P <= cao, (loai, p, P)
+        ds = _nhieu_trong_mien(P, ds_u, thap, cao, Rational(1, 100), fmt=lambda x: _xx(x, 4))
+        debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
+                 r"$\sin\alpha\cos\alpha = %s$. Giá trị của $%s$ bằng bao nhiêu?" % (_xx(p, 2), hoi))
+        cau += MC_SA_answer_text(debai, dap, ds, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_TH030_SA_M_01(socau, dang=2):
+    r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $(\sin\alpha + \cos\alpha)^{2}$."""
+    return _sa_tich_hoi(socau, dang, "tong")
+
+
+def L10_C3_B5_TH030_SA_M_02(socau, dang=2):
+    r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $(\sin\alpha - \cos\alpha)^{2}$."""
+    return _sa_tich_hoi(socau, dang, "hieu")
+
+
+def L10_C3_B5_TH030_SA_M_03(socau, dang=2):
+    r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $\sin^{4}\alpha + \cos^{4}\alpha$."""
+    return _sa_tich_hoi(socau, dang, "bon")
+
+
+# Bo ba Pythagore cho TL sin +- cos <-> sin.cos: them bon bo nho de nhieu de bai khac nhau (tich P khac nhau)
+_BO_TL_SC = BO_BA_PYTAGO + [(9, 40, 41), (12, 35, 37), (11, 60, 61), (16, 63, 65)]
+
+
+def L10_C3_B5_TH030_TL_F_01(socau, dong=1):
+    r"""Tự luận 2 ý: biết $\sin\alpha + \cos\alpha$ (hoặc hiệu) = a. a) Tính $\sin\alpha\cos\alpha$.
+    b) Tính $|\sin\alpha - \cos\alpha|$ (hoặc $|\sin\alpha + \cos\alpha|$) hay $\sin^{4}\alpha + \cos^{4}\alpha$,
+    dùng kết quả ý a)."""
+    BO = _BO_TL_SC + [(y, x, z) for x, y, z in _BO_TL_SC]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        p, q, r = random.choice(BO)
+        s = random.choice([1, -1])
+        tong = random.random() < 0.5
+        # sin^4 + cos^4 chi hoi voi bo (3,4,5): voi r lon dap so co tu so, mau so 4-5 chu so, qua cong kenh
+        kieu = random.choice(["tuyet_doi", "bon"]) if r == 5 else "tuyet_doi"
+        sn, cs = Rational(p, r), Rational(s * q, r)
+        a = sn + cs if tong else sn - cs
+        v = (a, tong, kieu)
+        if a == 0 or v in gt:
+            continue
+        gt.append(v)
+        gt[-1] = (a, tong, kieu, sn, cs)
+    cau = ""
+    for a, tong, kieu, sn, cs in gt:
+        P = sn * cs
+        assert P == (a ** 2 - 1) / 2 if tong else P == (1 - a ** 2) / 2
+        bt = r"\sin\alpha + \cos\alpha" if tong else r"\sin\alpha - \cos\alpha"
+        kia = r"\sin\alpha - \cos\alpha" if tong else r"\sin\alpha + \cos\alpha"
+        dau = "+" if tong else "-"
+        debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn $%s = %s$."
+                 % (bt, _L(a)))
+        giai_a = (r"Bình phương hai vế: $\left(%s\right)^{2} = %s^{2}$" % (bt, _ngoac_mu(a)) + "\\\\\n" +
+                  r"$\Leftrightarrow \sin^{2}\alpha + \cos^{2}\alpha %s 2\sin\alpha\cos\alpha = %s$" % (dau, _L(a ** 2))
+                  + "\\\\\n" +
+                  r"$\Leftrightarrow 1 %s 2\sin\alpha\cos\alpha = %s$ (vì $\sin^{2}\alpha + \cos^{2}\alpha = 1$)" % (dau, _L(a ** 2))
+                  + "\\\\\n" +
+                  r"$\Leftrightarrow \sin\alpha\cos\alpha = %s$." % _L(P))
+        y_a = (r"Tính $\sin\alpha\cos\alpha$.", _L(P), giai_a)
+        if kieu == "tuyet_doi":
+            Q = 1 - 2 * P if tong else 1 + 2 * P           # (kia)^2
+            kq = abs(sn - cs) if tong else abs(sn + cs)
+            assert kq ** 2 == Q
+            giai_b = (r"Ở câu a) đã có $\sin\alpha\cos\alpha = %s$." % _L(P) + "\\\\\n" +
+                      r"Ta có $\left(%s\right)^{2} = \sin^{2}\alpha + \cos^{2}\alpha %s 2\sin\alpha\cos\alpha = 1 %s 2\cdot %s = %s$."
+                      % (kia, "-" if tong else "+", "-" if tong else "+", _ngoac_mu(P), _L(Q)) + "\\\\\n" +
+                      r"Suy ra $\left|%s\right| = \sqrt{%s} = %s$." % (kia, _L(Q), _L(kq)))
+            y_b = (r"Tính $\left|%s\right|$." % kia, _L(kq), giai_b)
+        else:
+            Q = 1 - 2 * P ** 2
+            giai_b = (r"Ta có $\sin^{4}\alpha + \cos^{4}\alpha = \left(\sin^{2}\alpha + \cos^{2}\alpha\right)^{2} "
+                      r"- 2\sin^{2}\alpha\cos^{2}\alpha = 1 - 2\left(\sin\alpha\cos\alpha\right)^{2}$." + "\\\\\n" +
+                      r"Ở câu a) đã có $\sin\alpha\cos\alpha = %s$ nên $\sin^{4}\alpha + \cos^{4}\alpha = 1 - 2\cdot %s^{2} = %s$."
+                      % (_L(P), _ngoac_mu(P), _L(Q)))
+            y_b = (r"Tính $\sin^{4}\alpha + \cos^{4}\alpha$.", _L(Q), giai_b)
+        cau += TL_answer_text(debai, [y_a, y_b], 0, 0, dong)
+    return cau
+
+
+def L10_C3_B5_TH030_TL_G_01(socau, dong=1):
+    r"""Tự luận 2 ý: biết $\sin\alpha\cos\alpha = P < 0$ (góc tù). Hoặc a) $(\sin\alpha - \cos\alpha)^{2}$,
+    b) $\sin\alpha - \cos\alpha$ (xét dấu); hoặc a) $(\sin\alpha + \cos\alpha)^{2}$, b) $\sin^{4}\alpha + \cos^{4}\alpha$."""
+    BO = _BO_TL_SC + [(y, x, z) for x, y, z in _BO_TL_SC]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        p, q, r = random.choice(BO)
+        kieu = random.choice(["hieu", "bon"]) if r == 5 else "hieu"
+        v = (p, q, r, kieu)
+        if v not in gt:
+            gt.append(v)
+    cau = ""
+    for p, q, r, kieu in gt:
+        sn, cs = Rational(p, r), -Rational(q, r)     # góc tù: sin > 0 > cos
+        P = sn * cs
+        debai = (r"Cho góc $\alpha$ $\left(0^{\circ} \le \alpha \le 180^{\circ}\right)$ thoả mãn "
+                 r"$\sin\alpha\cos\alpha = %s$." % _L(P))
+        if kieu == "hieu":
+            Q = 1 - 2 * P
+            kq = sn - cs
+            assert kq ** 2 == Q and kq > 0
+            y_a = (r"Tính $\left(\sin\alpha - \cos\alpha\right)^{2}$.", _L(Q),
+                   r"Ta có $\left(\sin\alpha - \cos\alpha\right)^{2} = \sin^{2}\alpha + \cos^{2}\alpha - 2\sin\alpha\cos\alpha "
+                   r"= 1 - 2\sin\alpha\cos\alpha = 1 - 2\cdot %s = %s$." % (_ngoac_mu(P), _L(Q)))
+            y_b = (r"Tính $\sin\alpha - \cos\alpha$.", _L(kq),
+                   r"Vì $0^{\circ} \le \alpha \le 180^{\circ}$ nên $\sin\alpha \ge 0$; mà $\sin\alpha\cos\alpha = %s < 0$ nên $\sin\alpha > 0$ và "
+                   r"$\cos\alpha < 0$." % _L(P) + "\\\\\n" +
+                   r"Do đó $\sin\alpha - \cos\alpha > 0$. Từ câu a): $\sin\alpha - \cos\alpha = \sqrt{%s} = %s$." % (_L(Q), _L(kq)))
+        else:
+            Q1 = 1 + 2 * P
+            Q = 1 - 2 * P ** 2
+            assert (sn + cs) ** 2 == Q1
+            y_a = (r"Tính $\left(\sin\alpha + \cos\alpha\right)^{2}$.", _L(Q1),
+                   r"Ta có $\left(\sin\alpha + \cos\alpha\right)^{2} = \sin^{2}\alpha + \cos^{2}\alpha + 2\sin\alpha\cos\alpha "
+                   r"= 1 + 2\sin\alpha\cos\alpha = 1 + 2\cdot %s = %s$." % (_ngoac_mu(P), _L(Q1)))
+            y_b = (r"Tính $\sin^{4}\alpha + \cos^{4}\alpha$.", _L(Q),
+                   r"Ta có $\sin^{4}\alpha + \cos^{4}\alpha = \left(\sin^{2}\alpha + \cos^{2}\alpha\right)^{2} "
+                   r"- 2\sin^{2}\alpha\cos^{2}\alpha = 1 - 2\left(\sin\alpha\cos\alpha\right)^{2}$." + "\\\\\n" +
+                   r"Thay $\sin\alpha\cos\alpha = %s$ được $1 - 2\cdot %s^{2} = %s$." % (_L(P), _ngoac_mu(P), _L(Q)))
+        cau += TL_answer_text(debai, [y_a, y_b], 0, 0, dong)
+    return cau
+
+
 # ===== MS_BEGIN (MC/SA/TL giải tam giác, sinh bởi build) =====
 # =====================================================================
 # MC / SA / TL "GIẢI TAM GIÁC" (CLAUDE THEM 10/10/2026, theo bảng ID cô Lan đã duyệt)
@@ -13577,10 +13825,10 @@ def _ms_le(t):
 
 # Quy tắc cô Lan 10/10/2026: "không đưa các dữ liệu không sử dụng trong quá trình giải bài vào câu dẫn".
 # Các (đơn vị, cách cho) mà lời giải KHÔNG dùng hết dữ kiện của cách cho nguyên bản -> câu dẫn chỉ nêu dữ kiện thực sự dùng:
-#   A (NB029, TH031, TH030): chỉ cần một giá trị lượng giác của góc A -> không nêu AB, AC;
+#   A (TH031, TH030): chỉ cần một giá trị lượng giác của góc A -> không nêu AB, AC;
 #   B (TH031, TH030): chỉ cần hai góc -> không nêu độ dài cạnh;
 #   D (TH034): S = 1/2.a.h_a chỉ cần cạnh và đường cao -> không nêu cos B.
-_MS_DE_GON = {("NB029", "A"), ("TH031", "A"), ("TH030", "A"), ("TH031", "B"), ("TH030", "B"), ("TH034", "D")}
+_MS_DE_GON = {("TH031", "A"), ("TH030", "A"), ("TH031", "B"), ("TH030", "B"), ("TH034", "D")}
 
 
 def _ms_ctx(cach, bt, dv=""):
@@ -14064,32 +14312,177 @@ def _ms_tl_da(c, q, n):
 
 
 def _ms_nb029(bt):
-    """NB029 (Bài 5): xét dấu / loại góc A từ cách cho A. Trả về (đề, đáp án, nhiễu, lời giải)."""
-    c = _ms_ctx("A", bt, "NB029")
-    t, co = c["t"], c["co"]
-    cc, sn = t["cos"]["A"], t["sin"]["A"]
-    nhon = cc > 0
-    d, n_ = (">", "<") if nhon else ("<", ">")
-    loai, loai_n = ("nhọn", "tù") if nhon else ("tù", "nhọn")
-    dung = [r"$\cos A %s 0$" % d, r"$\tan A %s 0$" % d, r"$\sin A > 0$"]
-    sai = [r"$\cos A %s 0$" % n_, r"$\tan A %s 0$" % n_, r"$\sin A < 0$", r"$\cos A = 0$"]
-    if co != "sin":
-        dung.append(r"Góc $\widehat{A}$ là góc %s" % loai)
-        sai += [r"Góc $\widehat{A}$ là góc %s" % loai_n, r"Góc $\widehat{A}$ là góc vuông"]
-    dap = random.choice(dung)
-    nhieu = random.sample(sai, 3)
-    if co == "cos":
-        ly = (r"Vì $\cos A = %s %s 0$ nên góc $A$ là góc %s. Mà $\sin A > 0$ (góc của tam giác) nên $\tan A = \dfrac{\sin A}{\cos A} %s 0$."
-              % (_L(cc), d, loai, d))
-    elif co == "sin":
-        ly = (r"Góc $A$ là góc %s nên $\cos A %s 0$ và $\tan A = \dfrac{\sin A}{\cos A} %s 0$ (vì $\sin A > 0$)." % (loai, d, d))
+    """NB029 (Bài 5): dấu của sin, côsin, tang, côtang của MỘT góc trong tam giác (cô Lan 11/10/2026).
+    bt = 1: tam giác nhọn; bt = 2: tam giác có góc A tù. Bốn phương án cùng nói về một góc X (A, B hoặc C ngẫu nhiên),
+    mỗi phương án là dấu của một trong bốn giá trị lượng giác; hỏi khẳng định ĐÚNG hoặc SAI (ngẫu nhiên).
+    Trả về (đề, đáp án, nhiễu, lời giải, khoá)."""
+    X = random.choice("ABC")
+    tu = (bt == 2 and X == "A")  # góc X là góc tù
+    ham = ["sin", "cos", "tan", "cot"]
+    dau = {"sin": 1, "cos": -1 if tu else 1, "tan": -1 if tu else 1, "cot": -1 if tu else 1}  # dấu thật của từng giá trị lượng giác
+    hoi_dung = random.choice([True, False])
+    le = random.choice(ham)  # phương án "lẻ loi": là khẳng định đúng duy nhất (hỏi đúng) hoặc sai duy nhất (hỏi sai)
+    pa = {}
+    for f in ham:
+        la_dung = (f == le) if hoi_dung else (f != le)
+        pa[f] = r"$\%s %s %s 0$" % (f, X, ">" if (dau[f] if la_dung else -dau[f]) > 0 else "<")
+    dap = pa[le]
+    nhieu = [pa[f] for f in ham if f != le]
+    kq = r"khẳng định %s là %s" % ("đúng" if hoi_dung else "sai", dap)
+    bang = ", ".join(r"$\%s %s %s 0$" % (f, X, ">" if dau[f] > 0 else "<") for f in ham)
+    if bt == 1:
+        de = r"Cho tam giác $ABC$ nhọn."
+        ly = r"Tam giác $ABC$ nhọn nên góc $%s$ là góc nhọn, do đó %s." % (X, bang)
     else:
-        ly = (r"Vì $\sin A > 0$ (góc của tam giác) và $\tan A = %s %s 0$ nên $\cos A %s 0$, tức là góc $A$ là góc %s." % (_L(sn / cc), d, d, loai))
-    return c["de"] + r" Khẳng định nào sau đây đúng?", dap, nhieu, ly, c["de"]
+        de = r"Cho tam giác $ABC$ có góc $A$ tù."
+        if X == "A":
+            ly = r"Góc $A$ là góc tù nên %s." % bang
+        else:
+            ly = (r"Tam giác $ABC$ có góc $A$ tù nên hai góc còn lại đều nhọn (tổng ba góc bằng $180^{\circ}$); góc $%s$ là góc nhọn nên %s." % (X, bang))
+    ly += " Vậy " + kq + "."
+    debai = de + r" Khẳng định nào sau đây \textbf{%s}?" % ("đúng" if hoi_dung else "sai")
+    return debai, dap, nhieu, ly, (bt, X, hoi_dung, le)
+
+
+# ===== Bài 5: từ MỘT giá trị lượng giác của góc α tìm MỘT giá trị lượng giác khác (cô Lan 11/10/2026) =====
+# Cách cho G, H, I, J = cho sin, cos, tan, cot của α; biến thể = giá trị lượng giác cần tìm. Mỗi câu chỉ tìm MỘT giá trị
+# (cả bốn phương án MC cùng là giá trị của đại lượng đó), câu dẫn không nêu dữ kiện thừa.
+_MS_ALPHA_CHO = {"G": "sin", "H": "cos", "I": "tan", "J": "cot"}
+_MS_ALPHA_HOI = {"G": ["cos", "tan", "cot"], "H": ["sin", "tan", "cot"], "I": ["cot", "cos", "sin"], "J": ["tan", "sin", "cos"]}
+_MS_BA_PY = list(BO_BA_PYTAGO) + [(12, 35, 37), (9, 40, 41)]
+
+
+def _ms_ctx_alpha(cach):
+    d, k, h = random.choice(_MS_BA_PY)
+    if random.random() < 0.5:
+        d, k = k, d
+    tu = random.random() < 0.5  # góc tù
+    sn = Rational(d, h)
+    cs = (-1 if tu else 1) * Rational(k, h)
+    v = dict(sin=sn, cos=cs, tan=sn / cs, cot=cs / sn)
+    cho = _MS_ALPHA_CHO[cach]
+    if cho == "sin":  # sin luôn dương trên (0°; 180°) nên PHẢI cho khoảng của góc để biết dấu côsin
+        kh = r"$90^{\circ} < \alpha < 180^{\circ}$" if tu else r"$0^{\circ} < \alpha < 90^{\circ}$"
+        de = r"Cho góc $\alpha$ thoả mãn $\sin\alpha = %s$ và %s." % (_L(sn), kh)
+    else:  # dấu của giá trị cho trước đã cho biết góc nhọn hay tù
+        de = r"Cho góc $\alpha$ với $0^{\circ} < \alpha < 180^{\circ}$ và $\%s\alpha = %s$." % (cho, _L(v[cho]))
+    return dict(de=de, v=v, tu=tu, cho=cho, cach=cach)
+
+
+def _ms_alpha_cos_tu_sin(v, tu):
+    return (r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra $\cos^{2}\alpha = 1 - %s^{2} = %s$, nên $\cos\alpha = \pm %s$. "
+            r"Vì $\alpha$ là góc %s nên $\cos\alpha %s 0$, do đó $\cos\alpha = %s$."
+            % (_gt_p(v["sin"]), _L(v["cos"] ** 2), _L(abs(v["cos"])), "tù" if tu else "nhọn", "<" if tu else ">", _L(v["cos"])))
+
+
+def _ms_alpha_sin_tu_cos(v):
+    return (r"Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra $\sin^{2}\alpha = 1 - %s^{2} = %s$, nên $\sin\alpha = \pm %s$. "
+            r"Vì $0^{\circ} < \alpha < 180^{\circ}$ nên $\sin\alpha > 0$, do đó $\sin\alpha = %s$."
+            % (_gt_p(v["cos"]), _L(v["sin"] ** 2), _L(v["sin"]), _L(v["sin"])))
+
+
+def _ms_alpha_buoc(c, ten):
+    """Lời giải tìm `ten` từ giá trị cho trước, tách thành (trung_gian, phần_tính_trung_gian, dòng_cuối).
+    trung_gian: tên giá trị lượng giác phải tính trước (cos hoặc sin) hoặc None; khi không có thì phần tính trung gian là None."""
+    v, tu, cho = c["v"], c["tu"], c["cho"]
+    loai = "tù" if tu else "nhọn"
+    ngang = lambda k: (r"\dfrac{%s}{%s}" % (_L(v[k[0]]), _gt_ngoac(v[k[1]])))
+    if cho == "sin":
+        b = _ms_alpha_cos_tu_sin(v, tu)
+        if ten == "cos":
+            return None, None, b
+        if ten == "tan":
+            return "cos", b, r"$\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = \dfrac{%s}{%s} = %s$." % (_L(v["sin"]), _gt_ngoac(v["cos"]), _L(v["tan"]))
+        return "cos", b, r"$\cot\alpha = \dfrac{\cos\alpha}{\sin\alpha} = \dfrac{%s}{%s} = %s$." % (_gt_ngoac(v["cos"]), _L(v["sin"]), _L(v["cot"]))
+    if cho == "cos":
+        b = _ms_alpha_sin_tu_cos(v)
+        if ten == "sin":
+            return None, None, b
+        if ten == "tan":
+            return "sin", b, r"$\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = \dfrac{%s}{%s} = %s$." % (_L(v["sin"]), _gt_ngoac(v["cos"]), _L(v["tan"]))
+        return "sin", b, r"$\cot\alpha = \dfrac{\cos\alpha}{\sin\alpha} = \dfrac{%s}{%s} = %s$." % (_gt_ngoac(v["cos"]), _L(v["sin"]), _L(v["cot"]))
+    if cho == "tan":
+        if ten == "cot":
+            return None, None, r"Vì $\tan\alpha\cdot\cot\alpha = 1$ nên $\cot\alpha = \dfrac{1}{\tan\alpha} = \dfrac{1}{%s} = %s$." % (_gt_ngoac(v["tan"]), _L(v["cot"]))
+        b = (r"Từ $1 + \tan^{2}\alpha = \dfrac{1}{\cos^{2}\alpha}$ suy ra $\cos^{2}\alpha = \dfrac{1}{1 + %s^{2}} = %s$, nên $\cos\alpha = \pm %s$. "
+             r"Vì $\tan\alpha %s 0$ và $\sin\alpha > 0$ nên $\alpha$ là góc %s, $\cos\alpha %s 0$, do đó $\cos\alpha = %s$."
+             % (_gt_p(v["tan"]), _L(v["cos"] ** 2), _L(abs(v["cos"])), "<" if tu else ">", loai, "<" if tu else ">", _L(v["cos"])))
+        if ten == "cos":
+            return None, None, b
+        return "cos", b, r"$\sin\alpha = \tan\alpha\cdot\cos\alpha = %s\cdot %s = %s$." % (_gt_ngoac(v["tan"]), _gt_ngoac(v["cos"]), _L(v["sin"]))
+    # cho == "cot"
+    if ten == "tan":
+        return None, None, r"Vì $\tan\alpha\cdot\cot\alpha = 1$ nên $\tan\alpha = \dfrac{1}{\cot\alpha} = \dfrac{1}{%s} = %s$." % (_gt_ngoac(v["cot"]), _L(v["tan"]))
+    b = (r"Từ $1 + \cot^{2}\alpha = \dfrac{1}{\sin^{2}\alpha}$ suy ra $\sin^{2}\alpha = \dfrac{1}{1 + %s^{2}} = %s$, nên $\sin\alpha = \pm %s$. "
+         r"Vì $0^{\circ} < \alpha < 180^{\circ}$ nên $\sin\alpha > 0$, do đó $\sin\alpha = %s$." % (_gt_p(v["cot"]), _L(v["sin"] ** 2), _L(v["sin"]), _L(v["sin"])))
+    if ten == "sin":
+        return None, None, b
+    return "sin", b, r"$\cos\alpha = \cot\alpha\cdot\sin\alpha = %s\cdot %s = %s$." % (_gt_ngoac(v["cot"]), _L(v["sin"]), _L(v["cos"]))
+
+
+def _ms_alpha_ly(c, ten, biet=()):
+    """Lời giải; biet: các giá trị lượng giác đã tính ở ý trước (tự luận) -> không tính lại."""
+    trung, base, cuoi = _ms_alpha_buoc(c, ten)
+    if trung is None:
+        return cuoi
+    if trung in biet:
+        return r"Ở câu a) đã có $\%s\alpha = %s$." % (trung, _L(c["v"][trung])) + _MS_NOI + cuoi
+    return base + _MS_NOI + cuoi
+
+
+def _ms_q_alpha(c, ten, biet=()):
+    """Đại lượng (một giá trị lượng giác của α) ở dạng dict dùng chung với `_ms_chon_n`, `_ms_nhieu`, `_ms_giai`."""
+    v = c["v"]
+    x = v[ten]
+    sai = [(-x, "Nhầm dấu"), (1 / x, "Nhầm với giá trị nghịch đảo"), (-1 / x, "Nhầm dấu và nghịch đảo")]
+    sai += [(w, "Nhầm hàm số lượng giác") for f in ("sin", "cos", "tan", "cot") if f != ten for w in (v[f], -v[f])]
+    return dict(hoi=r"Tính $\%s\alpha$." % ten, v=x, ly=_ms_alpha_ly(c, ten, biet), sai=sai, xap=False, goc=False, n=2)
+
+
+def _ms_sinh_alpha(loai, cach, bt, socau, tham):
+    ket, da, lan = "", set(), 0
+    hoi = _MS_ALPHA_HOI[cach]
+    while len(da) < socau:
+        lan += 1
+        if lan > 800:
+            raise RuntimeError("không sinh đủ %d câu khác nhau cho TH030 %s %d" % (socau, cach, bt))
+        try:
+            c = _ms_ctx_alpha(cach)
+            if loai == "TL":
+                cap = [(0, 1), (0, 2), (1, 2)][bt - 1]
+                a, b = random.sample([hoi[cap[0]], hoi[cap[1]]], 2)
+                if _ms_alpha_buoc(c, a)[0] == b:  # ý a cần tính b trước: đặt b làm ý a để ý b dùng lại kết quả
+                    a, b = b, a
+                khoa = c["de"]  # mỗi câu dẫn chỉ ra một lần (kể cả khi hai ý đổi chỗ)
+                if khoa in da:
+                    continue
+                qa = _ms_q_alpha(c, a)
+                qb = _ms_q_alpha(c, b, biet={a, _ms_alpha_buoc(c, a)[0]})
+                na, nb = _ms_chon_n(qa, "TL"), _ms_chon_n(qb, "TL")
+                ds = [(_ms_lam_tron(qa["hoi"], na), _ms_tl_da(c, qa, na), _ms_giai([qa], "", na)),
+                      (_ms_lam_tron(qb["hoi"], nb), _ms_tl_da(c, qb, nb), _ms_giai([qb], "", nb))]
+                da.add(khoa)
+                ket += TL_answer_text(c["de"], ds, 0, 0, tham)
+                continue
+            ten = hoi[bt - 1]
+            khoa = (c["de"], ten)
+            if khoa in da:
+                continue
+            q = _ms_q_alpha(c, ten)
+            n = _ms_chon_n(q, loai)
+            fmt = _ms_mc_fmt if loai == "MC" else _ms_sa_fmt
+            dap, nhieu = _ms_nhieu(q, n, fmt)
+            da.add(khoa)
+            ket += MC_SA_answer_text(c["de"] + " " + _ms_lam_tron(q["hoi"], n), dap, nhieu, _ms_giai([q], "", n, loai), 0, 0, tham)
+        except _MsLai:
+            continue
+    return ket
 
 
 def _ms_sinh(loai, dv, cach, bt, socau, tham):
     """Sinh `socau` câu khác nhau. loai: "MC" | "SA" | "TL"; tham: dang (MC=1, SA=2) hoặc dong (TL)."""
+    if cach in _MS_ALPHA_CHO:
+        return _ms_sinh_alpha(loai, cach, bt, socau, tham)
     ket, da, lan = "", set(), 0
     while len(da) < socau:
         lan += 1
@@ -14139,18 +14532,13 @@ def _ms_sinh(loai, dv, cach, bt, socau, tham):
 # ---------- các hàm công khai (mỗi hàm = một biến thể; ID xem docs/04) ----------
 
 def L10_C3_B5_NB029_MC_I_01(socau, dang=1):
-    r"""MC/SA/TL giải tam giác (NB029, A): biết $\cos A$ - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết một giá trị lượng giác của góc A"""
+    r"""MC/SA/TL giải tam giác (NB029, A): tam giác nhọn, xét dấu sin, côsin, tang, côtang của một góc - Xét dấu sin, côsin, tang, côtang của một góc trong tam giác nhọn hoặc tam giác có góc A tù (chọn khẳng định đúng / sai)"""
     return _ms_sinh("MC", "NB029", "A", 1, socau, dang)
 
 
 def L10_C3_B5_NB029_MC_I_02(socau, dang=1):
-    r"""MC/SA/TL giải tam giác (NB029, A): biết $\sin A$ và góc $A$ nhọn / tù - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết một giá trị lượng giác của góc A"""
+    r"""MC/SA/TL giải tam giác (NB029, A): tam giác có góc $A$ tù, xét dấu sin, côsin, tang, côtang của một góc - Xét dấu sin, côsin, tang, côtang của một góc trong tam giác nhọn hoặc tam giác có góc A tù (chọn khẳng định đúng / sai)"""
     return _ms_sinh("MC", "NB029", "A", 2, socau, dang)
-
-
-def L10_C3_B5_NB029_MC_I_03(socau, dang=1):
-    r"""MC/SA/TL giải tam giác (NB029, A): biết $\tan A$ - Xác định loại góc A (nhọn, tù) và dấu của sin, côsin, tang khi biết một giá trị lượng giác của góc A"""
-    return _ms_sinh("MC", "NB029", "A", 3, socau, dang)
 
 
 def L10_C3_B5_TH031_MC_K_01(socau, dang=1):
@@ -14271,6 +14659,186 @@ def L10_C3_B5_TH030_SA_G_02(socau, dang=2):
 def L10_C3_B5_TH030_SA_G_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$ và $\widehat C$ - Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH030", "B", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_J_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cos\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "G", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_J_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\tan\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "G", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_J_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cot\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "G", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_H_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cos\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "G", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_H_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\tan\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "G", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_H_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cot\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "G", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_TL_B_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cos\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "G", 1, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_B_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\tan\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "G", 2, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_B_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cot\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "G", 3, socau, dong)
+
+
+def L10_C3_B5_TH030_MC_K_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\sin\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "H", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_K_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\tan\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "H", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_K_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\cot\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("MC", "TH030", "H", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_I_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\sin\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "H", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_I_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\tan\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "H", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_I_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\cot\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("SA", "TH030", "H", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_TL_C_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\sin\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "H", 1, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_C_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\tan\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "H", 2, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_C_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\cot\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
+    return _ms_sinh("TL", "TH030", "H", 3, socau, dong)
+
+
+def L10_C3_B5_TH030_MC_L_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cot\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("MC", "TH030", "I", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_L_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cos\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("MC", "TH030", "I", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_L_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\sin\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("MC", "TH030", "I", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_J_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cot\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("SA", "TH030", "I", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_J_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cos\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("SA", "TH030", "I", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_J_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\sin\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("SA", "TH030", "I", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_TL_D_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cot\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("TL", "TH030", "I", 1, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_D_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cos\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("TL", "TH030", "I", 2, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_D_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\sin\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
+    return _ms_sinh("TL", "TH030", "I", 3, socau, dong)
+
+
+def L10_C3_B5_TH030_MC_M_01(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\tan\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("MC", "TH030", "J", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_M_02(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\sin\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("MC", "TH030", "J", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_MC_M_03(socau, dang=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\cos\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("MC", "TH030", "J", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_K_01(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\tan\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("SA", "TH030", "J", 1, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_K_02(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\sin\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("SA", "TH030", "J", 2, socau, dang)
+
+
+def L10_C3_B5_TH030_SA_K_03(socau, dang=2):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\cos\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("SA", "TH030", "J", 3, socau, dang)
+
+
+def L10_C3_B5_TH030_TL_E_01(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\tan\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("TL", "TH030", "J", 1, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_E_02(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\sin\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("TL", "TH030", "J", 2, socau, dong)
+
+
+def L10_C3_B5_TH030_TL_E_03(socau, dong=1):
+    r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\cos\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
+    return _ms_sinh("TL", "TH030", "J", 3, socau, dong)
 
 
 def L10_C3_B6_TH032_MC_K_01(socau, dang=1):
