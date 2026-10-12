@@ -1143,7 +1143,12 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
 
         dsnhieu = [nhieu1, nhieu2, nhieu3]
 
-        debai = "The figure shows the solution region of which of the following systems of inequalities?"
+        # Ghi chú miền nghiệm như câu hình-nửa-mặt-phẳng (cô Lan 12/10/2026): phần KHÔNG bị gạch là miền nghiệm;
+        # có dấu bằng ở bất kì bất phương trình nào thì bờ vẽ nét liền thuộc miền nghiệm.
+        co_bang = not (dau1 in ("<", ">") and dau2 in ("<", ">"))
+        debai = (r"The figure shows the solution region of which of the following systems of inequalities "
+                 r"(the solution region is the \textbf{unshaded} part%s)?"
+                 % (", including the boundary if it is drawn as a solid line" if co_bang else ""))
 
         giai = f"""
         From the figure, we see that the solution region is bounded by two lines:\\\\
@@ -1794,29 +1799,45 @@ def _bpt_tex(a, b, c):
 # ---------------------------------------------------------------------
 
 def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
-    """Trả lời ngắn: tính giá trị vế trái của bất phương trình tại một điểm."""
+    r"""Trả lời ngắn: tính giá trị $F\left(x; y\right) = ax + by$ (đúng DẠNG này, không có hằng số) tại một nghiệm nguyên $M$
+    của bất phương trình $ax + by \;\square\; c$ (cùng $a$, $b$ với vế trái).
+
+    Cô Lan 12/10/2026: (1) $F$ chỉ có dạng $ax + by$; (2) điểm $M$ phải NẰM TRONG miền nghiệm (bản cũ cho điểm ngẫu nhiên,
+    có khi không thuộc miền nghiệm); (3) sinh miền nghiệm rồi mới CHỌN NGẪU NHIÊN một nghiệm nguyên trong miền đó.
+    """
+    DAU = [r"\le", r"\ge", "<", ">"]
+    thoa = {r"\le": lambda v, c: v <= c, r"\ge": lambda v, c: v >= c, "<": lambda v, c: v < c, ">": lambda v, c: v > c}
     gt = []
-    while len(gt) < socau:
-        v = (_rd.randint(-6, 6) or 2, _rd.randint(-6, 6) or 3, _rd.randint(-9, 9),
-             _rd.randint(-5, 5), _rd.randint(-5, 5))
+    lan = 0
+    while len(gt) < socau and lan < 2000:
+        lan += 1
+        a, b = _rd.choice([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6]), _rd.choice([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
+        if abs(a) == abs(b) and a == b:
+            continue
+        c = _rd.randint(-9, 9)
+        dau = _rd.choice(DAU)
+        # miền nghiệm (các điểm nguyên trong khung [-5; 5]^2 thoả bất phương trình), rồi chọn ngẫu nhiên một nghiệm
+        nghiem = [(x0, y0) for x0 in range(-5, 6) for y0 in range(-5, 6) if thoa[dau](a * x0 + b * y0, c)]
+        if len(nghiem) < 10:
+            continue
+        x0, y0 = _rd.choice(nghiem)
+        v = (a, b, c, dau, x0, y0)
         if v not in gt:
             gt.append(v)
 
     cauTN = ''
-    for a, b, c, x0, y0 in gt:
-        gt_ve_trai = a * x0 + b * y0 + c
-        debai = (r"Given the inequality $%s$, compute the value of the expression "
-                 r"$f\left(x; y\right) = %dx + %dy + %d$ at the point $M\left(%d; %d\right)$."
-                 % (_bpt_tex(a, b, -c), a, b, c, x0, y0))
+    for a, b, c, dau, x0, y0 in gt:
+        gia_tri = a * x0 + b * y0
+        debai = (r"Given the inequality $%s %s %d$. The point $M\left(%d; %d\right)$ is a solution of the given inequality. "
+                 r"Compute the value of the expression $F\left(x; y\right) = %s$ at the point $M$."
+                 % (_F_tex(a, b), dau, c, x0, y0, _F_tex(a, b)))
         giai = (r"Substitute $x = %d$ and $y = %d$ into the expression:\\ "
-                r"$f\left(%d; %d\right) = %d\cdot\left(%d\right) + %d\cdot\left(%d\right) + %d = %d$.\\ "
-                r"(This value is %s, so the point $M$ %s the solution region of the given inequality.)"
-                % (x0, y0, x0, y0, a, x0, b, y0, c, gt_ve_trai,
-                   "less than or equal to $0$" if gt_ve_trai <= 0 else "greater than $0$",
-                   "belongs to" if gt_ve_trai <= 0 else "does not belong to"))
-        dung = str(gt_ve_trai)
-        ds = _ba_nhieu2(dung, [str(a * x0 + b * y0), str(-gt_ve_trai), str(gt_ve_trai + c)],
-                        buoc=lambda k: str(gt_ve_trai + 2 * k + 1))
+                r"$F\left(%d; %d\right) = %d\cdot\left(%d\right) + %d\cdot\left(%d\right) = %d$.\\ "
+                r"(Check: $%d %s %d$, so $M$ belongs to the solution region of the given inequality.)"
+                % (x0, y0, x0, y0, a, x0, b, y0, gia_tri, gia_tri, dau, c))
+        dung = str(gia_tri)
+        ds = _ba_nhieu2(dung, [str(-gia_tri), str(a * x0 - b * y0), str(a * y0 + b * x0), str(gia_tri + c)],
+                        buoc=lambda k: str(gia_tri + 2 * k + 1))
         cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
     return cauTN
 
@@ -3336,13 +3357,25 @@ def _pc_sinh():
                     ah=A3 * kh, bh=B3 * kh, H=C3 * kh)
 
 
-def _pc_de(t):
-    return (r"In a mixology contest, each team may use at most $%s$ g of flavoring, $%d$ liters of water and $%s$ g of sugar to prepare two drinks, A and B. "
-            r"Preparing $1$ liter of drink A requires $%s$ g of sugar, $1$ liter of water and $%s$ g of flavoring; preparing $1$ liter of drink B requires $%s$ g of sugar, $1$ liter of "
-            r"water and $%s$ g of flavoring. Each liter of drink A earns $%d$ bonus points and each liter of drink B earns "
-            r"$%d$ bonus points. Let $x$, $y$ be the numbers of liters of drink A and drink B that a team prepares, respectively."
-            % (_so_vn(t["H"]), t["N"], _so_vn(t["D"]), _so_vn(t["ad"]), _so_vn(t["ah"]),
-               _so_vn(t["bd"]), _so_vn(t["bh"]), t["p"], t["q"]))
+def _pc_de(t, dk=None, gia=True):
+    r"""Câu dẫn pha chế chỉ gồm dữ kiện được dùng: dk = chỉ số điều kiện (0 hương liệu, 1 nước, 2 đường), gia = điểm thưởng."""
+    I = _chi_so_dk(dk, 3)
+    if not I:                                                    # chỉ cần điểm thưởng, không dùng điều kiện nào
+        return ("In a mixology contest, each team prepares two drinks, A and B."
+                + (" Each liter of drink A earns $%d$ bonus points and each liter of drink B earns $%d$ bonus points."
+                   % (t["p"], t["q"]) if gia else ""))
+    gioi_han = ["$%s$ g of flavoring" % _so_vn(t["H"]), "$%d$ liters of water" % t["N"], "$%s$ g of sugar" % _so_vn(t["D"])]
+    ca = ["$%s$ g of flavoring" % _so_vn(t["ah"]), "$1$ liter of water", "$%s$ g of sugar" % _so_vn(t["ad"])]
+    cb = ["$%s$ g of flavoring" % _so_vn(t["bh"]), "$1$ liter of water", "$%s$ g of sugar" % _so_vn(t["bd"])]
+    ngc = [i for i in (2, 1, 0) if i in I]                      # thứ tự nêu: đường, nước, hương liệu
+    x = ("In a mixology contest, each team may use at most %s to prepare two drinks, A and B."
+         % _noi([gioi_han[i] for i in I]))
+    x += " Preparing $1$ liter of drink A requires %s; preparing $1$ liter of drink B requires %s." % (
+        _noi([ca[i] for i in ngc]), _noi([cb[i] for i in ngc]))
+    if gia:
+        x += (" Each liter of drink A earns $%d$ bonus points and each liter of drink B earns $%d$ bonus points."
+              % (t["p"], t["q"]))
+    return x + " Let $x$, $y$ be the numbers of liters of drink A and drink B that a team prepares, respectively."
 
 
 def _pc_rang_buoc(t):
@@ -3409,7 +3442,7 @@ def _pc_mc_bpt(socau, dang, k):
                  r"$%s < %s$" % (_pc_lhs(a, b), _so_vn(c)),
                  r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(khac))]
         ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(c + j)))
-        debai = (_pc_de(t) + r" Which of the following inequalities expresses the condition on the amount of %s that a team may use?" % ten)
+        debai = (_pc_de(t, [k], False) + r" Which of the following inequalities expresses the condition on the amount of %s that a team may use?" % ten)
         giai = (r"Preparing $x$ liters of drink A and $y$ liters of drink B requires $%s$ (%s) of %s, and each team may use \textbf{at most} "
                 r"$%s$ %s, so the sign is $\le$ (equality is not excluded).\\ Hence $%s \le %s$; note that the coefficient of $x$ is %s "
                 r"(drink A) and that of $y$ is %s (drink B)."
@@ -3449,7 +3482,7 @@ def L10_C2_B4_VD028_MC_B_01(socau, dang=1):
         sai3 = list(dung_dong); sai3[1] = (1, 1, t["N"], r"\ge")                  # đổi dấu của nước
         sai4 = list(dung_dong); sai4[0] = (t["bh"], t["ah"], t["H"], r"\le")      # hoán đổi hệ số hương liệu
         ds = _ba_nhieu2(he(dung_dong), [he(sai1), he(sai2), he(sai3), he(sai4)])
-        debai = _pc_de(t) + r" Which of the following systems of inequalities correctly describes the conditions of the problem?"
+        debai = _pc_de(t, None, False) + r" Which of the following systems of inequalities correctly describes the conditions of the problem?"
         cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _pc_giai_he(t), 0, 0, dang)
     return cauTN
 
@@ -3478,7 +3511,7 @@ def L10_C2_B4_VD028_MC_B_02(socau, dang=1):
             gi += (r"it satisfies all three conditions.\\ " if not vp else
                    r"it violates the condition on %s.\\ " % ten[vp[0]])
         gi += r"Hence choose the pair $\left(%d; %d\right)$." % dung_pt
-        debai = (_pc_de(t) + r" Which of the following pairs $\left(x; y\right)$ represents a preparation plan "
+        debai = (_pc_de(t, None, False) + r" Which of the following pairs $\left(x; y\right)$ represents a preparation plan "
                  r"that satisfies all of the conditions of the team?")
         cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
     return cauTN
@@ -3495,8 +3528,7 @@ def L10_C2_B4_VD028_MC_B_03(socau, dang=1):
         v = p * X + q * Y
         ds = _ba_nhieu2("$%d$" % v, ["$%d$" % (p * Y + q * X), "$%d$" % (v + p), "$%d$" % (v - q),
                                      "$%d$" % (p + q)], buoc=lambda k: "$%d$" % (v + 10 * k))
-        debai = (_pc_de(t) + r" A team prepares $%d$ liters of drink A and $%d$ liters of drink B (satisfying all conditions). "
-                 r"The bonus score that team receives is" % (X, Y))
+        debai = (_pc_de(t, [], True) + " A team prepares $%d$ liters of drink A and $%d$ liters of drink B. The bonus score that team receives is" % (X, Y))
         giai = (r"The bonus score is $%d\cdot %d + %d\cdot %d = %d$ (each liter of drink A earns $%d$ points and each liter of drink B "
                 r"earns $%d$ points)." % (p, X, q, Y, v, p, q))
         cauTN += MC_SA_answer_text(debai, "$%d$" % v, ds, giai, 0, 0, dang)
@@ -3581,7 +3613,7 @@ def _pc_sa(socau, dang, hoi):
             giai = _pc_giai_toi_uu(t)
         ds = _ba_nhieu2(str(dap), [str(v) for v in dict.fromkeys(khac) if v != dap and v > 0],
                         buoc=lambda k: str(dap + k + 2))
-        cau += MC_SA_answer_text(_pc_de(t) + " " + hoi_cau, str(dap), ds, giai, 0, 0, dang)
+        cau += MC_SA_answer_text(_pc_de(t, None, hoi in ("diem", "A", "B")) + " " + hoi_cau, str(dap), ds, giai, 0, 0, dang)
     return cau
 
 
@@ -3727,6 +3759,22 @@ def L10_C2_TF_C_01(socau, socot=1):
 # tests/test_l10_c2_tinh_huong_kb.py.
 # =====================================================================
 
+def _noi(ds):
+    """Nối các cụm bằng dấu phẩy và chữ 'và': 'a, b và c'."""
+    return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + " and " + ds[-1]
+
+
+def _chi_so_dk(dk, n):
+    """dk = None -> mọi điều kiện; ngược lại danh sách chỉ số điều kiện được dùng (theo thứ tự tăng)."""
+    return list(range(n)) if dk is None else sorted(dk)
+
+
+def _de_dung(t, dk=None, gia=True):
+    r"""Câu dẫn CHỈ chứa dữ kiện được dùng để giải (cô Lan 11/10/2026: "câu hỏi ko có tiền thì đưa tiền vào làm gì").
+    dk: các điều kiện (chỉ số) được dùng, None = tất cả; gia: có dùng giá / tiền lãi / điểm thưởng hay không."""
+    return t["de_fn"](dk, gia) if "de_fn" in t else t["de"]
+
+
 def _kb_dinh_that(rb):
     """Đỉnh THẬT của miền {x >= 0, y >= 0, rb} (giao từng cặp đường biên), theo thứ tự quanh miền."""
     duong = [(Fraction(1), Fraction(0), Fraction(0)), (Fraction(0), Fraction(1), Fraction(0))]
@@ -3812,15 +3860,30 @@ def _kb3_sinh():
               dict(a=L2[0], b=L2[1], c=L2[2], dau=r"\le", dk=r"the working time of machine M2 per day")]
         for r_ in rb:
             r_["dv"] = r"hours"
-        de = (r"A workshop has two specialized machines, M1 and M2, to produce two kinds of products, A and B, according to an order. "
-              r"Producing one ton of product A earns the workshop a profit of $%s$ million VND; producing one ton of product B earns a profit "
-              r"of $%s$ million VND. To produce one ton of product A, machine M1 must be used for $%d$ hours and machine M2 for $%d$ hours. "
-              r"To produce one ton of product B, machine M1 must be used for $%d$ hours and machine M2 for $%d$ hours. A machine cannot be used "
-              r"to produce both kinds of products at the same time. Machine M1 works at most $%d$ hours a day and machine M2 works at most "
-              r"$%d$ hours a day. Let $x$, $y$ be the numbers of tons of product A and product B that the workshop produces in a day, respectively."
-              % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000)), L1[0], L2[0], L1[1], L2[1], L1[2], L2[2]))
+        def de_fn(dk=None, gia=True, L1=L1, L2=L2, p=p, q=q):
+            I = _chi_so_dk(dk, 2)
+            if not I:
+                return ("A workshop produces two kinds of products, A and B, according to an order."
+                        + (" Producing one ton of product A earns the workshop a profit of $%s$ million VND; producing one ton of product B earns a profit of $%s$ million VND." % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000))) if gia else ""))
+            L = [L1, L2]
+            may = ["M1", "M2"]
+            x = "A workshop has two specialized machines, M1 and M2, to produce two kinds of products, A and B, according to an order."
+            if len(I) < 2:
+                x = "A workshop has a specialized machine %s to produce two kinds of products, A and B, according to an order." % may[I[0]]
+            if gia:
+                x += (" Producing one ton of product A earns the workshop a profit of $%s$ million VND; producing one ton of product B earns a profit of $%s$ million VND."
+                      % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000))))
+            dung = lambda k: _noi(["machine %s for $%d$ hours" % (may[i], L[i][k]) for i in I])
+            x += " To produce one ton of product A, %s must be used." % dung(0)
+            x += " To produce one ton of product B, %s must be used." % dung(1)
+            if len(I) == 2:
+                x += " A machine cannot be used to produce both kinds of products at the same time."
+            x += " " + _hoa(_noi(["machine %s works at most $%d$ hours a day" % (may[i], L[i][2]) for i in I])) + "."
+            x += (" Let $x$, $y$ be the numbers of tons of product A and product B that the workshop produces in a day, respectively.")
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="max", rb=rb, dinh=dinh, cx=p, cy=q, F_ten=r"profit", dv_hien=r"million VND", chia=1000,
+            de=de, de_fn=de_fn, kind="max", rb=rb, dinh=dinh, cx=p, cy=q, F_ten=r"profit", dv_hien=r"million VND", chia=1000,
             bi_chan=True, so_x=r"the number of tons of product A", so_y=r"the number of tons of product B",
             pa_xy=r"produce $%d$ tons of product A and $%d$ tons of product B",
             pa_x=r"produce $%d$ tons of product A", pa_y=r"produce $%d$ tons of product B",
@@ -3886,14 +3949,24 @@ def _kb2_sinh():
         ax = [r["a"] for r in rb]
         ay = [r["b"] for r in rb]
         cc = [r["c"] for r in rb]
-        de = (r"A livestock cooperative plans to mix two kinds of animal feed, X and Y, to make a mixed feed for livestock. "
-              r"A bag of feed X costs $%d$ thousand VND and a bag of feed Y costs $%d$ thousand VND. Each bag of feed X contains "
-              r"$%d$ units of nutrient A, $%d$ units of nutrient B and $%d$ units of nutrient C. Each bag of feed Y contains $%d$ units of "
-              r"nutrient A, $%d$ units of nutrient B and $%d$ units of nutrient C. The mixture must contain at least $%d$ units of nutrient A, "
-              r"$%d$ units of nutrient B and $%d$ units of nutrient C. Let $x$, $y$ be the numbers of bags of feed X and feed Y to be bought, respectively."
-              % (cx, cy, ax[0], ax[1], ax[2], ay[0], ay[1], ay[2], cc[0], cc[1], cc[2]))
+        def de_fn(dk=None, gia=True, ax=ax, ay=ay, cc=cc, cx=cx, cy=cy, rb=rb):
+            I = _chi_so_dk(dk, 3)
+            if not I:
+                return ("A livestock cooperative mixes two kinds of animal feed, X and Y, to make a mixed feed for livestock."
+                        + (" A bag of feed X costs $%d$ thousand VND and a bag of feed Y costs $%d$ thousand VND."
+                           % (cx, cy) if gia else ""))
+            chat = lambda i, v: "$%d$ units of nutrient %s" % (v, rb[i]["ten"])
+            x = ("A livestock cooperative plans to mix two kinds of animal feed, X and Y, to make a mixed feed for livestock.")
+            if gia:
+                x += " A bag of feed X costs $%d$ thousand VND and a bag of feed Y costs $%d$ thousand VND." % (cx, cy)
+            x += " Each bag of feed X contains %s." % _noi([chat(i, ax[i]) for i in I])
+            x += " Each bag of feed Y contains %s." % _noi([chat(i, ay[i]) for i in I])
+            x += " The mixture must contain at least %s." % _noi([chat(i, cc[i]) for i in I])
+            x += " Let $x$, $y$ be the numbers of bags of feed X and feed Y to be bought, respectively."
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten=r"cost", dv_hien=r"million VND", chia=1000,
+            de=de, de_fn=de_fn, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten=r"cost", dv_hien=r"million VND", chia=1000,
             bi_chan=False, so_x=r"the number of bags of feed X", so_y=r"the number of bags of feed Y",
             pa_xy=r"buy $%d$ bags of feed X and $%d$ bags of feed Y",
             pa_x=r"buy $%d$ bags of feed X", pa_y=r"buy $%d$ bags of feed Y",
@@ -3928,15 +4001,24 @@ def _kb4_sinh():
                    dk=r"the daily amount of vitamin C")]
         if _kb_dinh_that(rb) != sorted((Fraction(X), Fraction(Y)) for X, Y in dinh):
             continue
-        de = (r"A person on a diet needs to be supplied with at least $%d$ calories, $%d$ units of vitamin A and $%d$ units of vitamin C "
-              r"each day from two kinds of drinks, I and II. Each cup of drink I provides $%d$ calories, $%d$ units of vitamin A and $%d$ units "
-              r"of vitamin C. Each cup of drink II provides $%d$ calories, $%d$ units of vitamin A and $%d$ units of vitamin C. A cup of drink I "
-              r"costs $%d$ thousand VND and a cup of drink II costs $%d$ thousand VND. Let $x$, $y$ be the numbers of cups of drink I and drink II "
-              r"that the person drinks each day, respectively."
-              % (rb[0]["c"], rb[1]["c"], rb[2]["c"], rb[0]["a"], rb[1]["a"], rb[2]["a"],
-                 rb[0]["b"], rb[1]["b"], rb[2]["b"], cx, cy))
+        def de_fn(dk=None, gia=True, rb=rb, cx=cx, cy=cy):
+            I = _chi_so_dk(dk, 3)
+            if not I:
+                return ("A person on a diet drinks two kinds of drinks, I and II, each day."
+                        + (" A cup of drink I costs $%d$ thousand VND and a cup of drink II costs $%d$ thousand VND." % (cx, cy) if gia else ""))
+            nhan = ["calo", "units of vitamin A", "vitamin C units"]
+            cum = lambda i, v: "$%d$ %s" % (v, nhan[i])
+            x = "A person on a diet needs to be supplied with at least %s each day from two kinds of drinks, I and II." % _noi(
+                [cum(i, rb[i]["c"]) for i in I])
+            x += " Each cup of drink I provides %s." % _noi([cum(i, rb[i]["a"]) for i in I])
+            x += " Each cup of drink II provides %s." % _noi([cum(i, rb[i]["b"]) for i in I])
+            if gia:
+                x += (" A cup of drink I costs $%d$ thousand VND and a cup of drink II costs $%d$ thousand VND." % (cx, cy))
+            x += " Let $x$, $y$ be the numbers of cups of drink I and drink II that the person drinks each day, respectively."
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten=r"cost", dv_hien="thousand VND", chia=1,
+            de=de, de_fn=de_fn, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten=r"cost", dv_hien="thousand VND", chia=1,
             bi_chan=False, so_x=r"the number of cups of drink I", so_y=r"the number of cups of drink II",
             pa_xy=r"drink $%d$ cups of drink I and $%d$ cups of drink II",
             pa_x=r"drink $%d$ cups of drink I", pa_y=r"drink $%d$ cups of drink II",
@@ -4038,7 +4120,7 @@ def _kb_mc_bpt(KB, socau, dang, k):
                  r"$%s %s %s$" % (lhs, ngat, _so_vn(r["c"])),
                  r"$%s %s %s$" % (lhs, r["dau"], _so_vn(khac))]
         ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s %s %s$" % (lhs, r["dau"], _so_vn(r["c"] + j)))
-        debai = t["de"] + r" Which of the following inequalities expresses the condition on %s?" % r["dk"]
+        debai = _de_dung(t, [k], False) + r" Which of the following inequalities expresses the condition on %s?" % r["dk"]
         giai = (r"%s is $%s$ (%s) and must be %s $%s$ (%s), so the sign is $%s$ (equality included).\\ Hence $%s %s %s$; note that the "
                 r"coefficient of $x$ is $%s$ and that of $y$ is $%s$."
                 % (r["dk"][0].upper() + r["dk"][1:], lhs, r["dv"], _KB_TU_DAU[r["dau"]], _so_vn(r["c"]), r["dv"],
@@ -4065,7 +4147,7 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             s = list(dung_dong); s[0] = (dung_dong[0][0], dung_dong[0][1], dung_dong[0][2], "<" if dung_dong[0][3] == r"\le" else ">")
             cands.append(he(s))
             ds = _ba_nhieu2(he(dung_dong), cands)
-            debai = t["de"] + r" Which of the following systems of inequalities correctly describes the conditions of the problem?"
+            debai = _de_dung(t, None, False) + r" Which of the following systems of inequalities correctly describes the conditions of the problem?"
             cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _kb_giai_he(t), 0, 0, dang)
             dem += 1
             continue
@@ -4078,17 +4160,22 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             if not tot or not ngoai:
                 continue
             chon = [_rd.choice(s) for s in sai if s]
-            while len(chon) < 3:
-                P = _rd.choice(ngoai)
-                if P not in chon:
-                    chon.append(P)
+            # Chọn thêm từ các cặp vi phạm CHƯA có trong chon; hết cặp mà chưa đủ 3 thì sinh lại tình huống
+            # (bản cũ vòng lặp vô hạn khi số cặp vi phạm ít, làm treo bộ sinh đề - phát hiện 12/10/2026).
+            con_lai = [P for P in ngoai if P not in chon]
+            while len(chon) < 3 and con_lai:
+                P = _rd.choice(con_lai)
+                con_lai.remove(P)
+                chon.append(P)
+            if len(chon) < 3:
+                continue
             chon = chon[:3]
             dung_pt = _rd.choice(tot)
             fmt = lambda P: r"$\left(%d; %d\right)$" % P
             gi = r"Substitute each pair into the inequalities of the system:\\ " + r"\\ ".join(
                 r"Pair $\left(%d; %d\right)$: %s" % (X, Y, _kb_giai_diem(t, X, Y)) for X, Y in [dung_pt] + chon)
             gi += r"\\ Hence choose the pair $\left(%d; %d\right)$." % dung_pt
-            debai = (t["de"] + r" Which of the following pairs $\left(x; y\right)$ represents a plan that satisfies all of the conditions of the problem?")
+            debai = (_de_dung(t, None, False) + r" Which of the following pairs $\left(x; y\right)$ represents a plan that satisfies all of the conditions of the problem?")
             cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
             dem += 1
         else:                                                                   # "gt": F tại một phương án khả thi
@@ -4100,7 +4187,7 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             ds = _ba_nhieu2(_kb_so_hien(t, v), [_kb_so_hien(t, t["cx"] * Y + t["cy"] * X), _kb_so_hien(t, v + st),
                                                  _kb_so_hien(t, v - st), _kb_so_hien(t, t["cx"] + t["cy"])],
                             buoc=lambda k: _kb_so_hien(t, v + 2 * st * k))
-            debai = (t["de"] + r" A plan to %s (satisfying all of the conditions of the problem) is given. "
+            debai = (_de_dung(t, [], True) + " A plan to %s is given. "
                      % (t["pa_xy"] % (X, Y)) + _hoa(r"the %s of that plan is" % t["F_ten"]))
             giai = _hoa(r"the %s is $%d\cdot %d + %d\cdot %d = %d$ (thousand VND), that is, %s."
                         % (t["F_ten"], t["cx"], X, t["cy"], Y, v, _kb_so_hien(t, v)))
@@ -4166,7 +4253,7 @@ def _kb_sa_vd(KB, socau, dang, hoi):
                      r"A value satisfying all three bounds must be at least the largest bound, so the smallest is $%d$.")
                     % dap)
         ds = _ba_nhieu2(str(dap), [str(v) for v in khac if v != dap and v > 0], buoc=lambda k: str(dap + k + 2))
-        cau += MC_SA_answer_text(t["de"] + " " + cau_hoi, str(dap), ds, giai, 0, 0, dang)
+        cau += MC_SA_answer_text(_de_dung(t, None, False) + " " + cau_hoi, str(dap), ds, giai, 0, 0, dang)
     return cau
 
 

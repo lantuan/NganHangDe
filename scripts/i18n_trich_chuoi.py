@@ -34,7 +34,9 @@ def trich_template() -> Counter:
         txt = re.sub(r"(?m)^\s*//.*$", "", txt)                       # bỏ chú thích JS dòng đầu
         txt = re.sub(r"(?<![:\"'])//[^\n]*", "", txt)                 # bỏ chú thích JS cuối dòng
         txt = re.sub(r"/\*.*?\*/", "", txt, flags=re.S)
-        txt = re.sub(r"\{#.*?#\}", "", txt, flags=re.S)               # chú thích Jinja
+        # chú thích Jinja "{# ... #}" (có khoảng trắng sau "{#"); KHÔNG ăn "{#1}" trong cấu hình MathJax: lỗi này làm
+        # bỏ sót cả sidebar chat.html ("+ Chat mới", "Lịch sử", "Đánh giá học lực") khỏi từ điển (cô Lan 12/10/2026)
+        txt = re.sub(r"\{#\s.*?#\}", "", txt, flags=re.S)
         c.update(trich_tu_van_ban(txt))
     return c
 

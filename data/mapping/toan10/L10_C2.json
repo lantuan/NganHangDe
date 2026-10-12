@@ -107,8 +107,8 @@
     "id": "L10_C2_B3_NB023_SA_A",
     "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tính giá trị vế trái của bất phương trình tại một điểm",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "Dang": "Cho bất phương trình ax + by ≤ c (hoặc ≥, <, >) và một nghiệm nguyên M thuộc miền nghiệm: tính giá trị biểu thức F(x; y) = ax + by tại M",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta; 12/10/2026 co Lan: F chi co dang ax + by, M phai thuoc mien nghiem (chon ngau nhien nghiem nguyen)"
   },
   {
     "id": "L10_C2_B3_NB025_MC_B",

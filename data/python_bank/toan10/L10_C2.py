@@ -1143,7 +1143,12 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
 
         dsnhieu = [nhieu1, nhieu2, nhieu3]
 
-        debai = "Hình bên là biểu diễn miền nghiệm của hệ bất phương trình nào sau đây?"
+        # Ghi chú miền nghiệm như câu hình-nửa-mặt-phẳng (cô Lan 12/10/2026): phần KHÔNG bị gạch là miền nghiệm;
+        # có dấu bằng ở bất kì bất phương trình nào thì bờ vẽ nét liền thuộc miền nghiệm.
+        co_bang = not (dau1 in ("<", ">") and dau2 in ("<", ">"))
+        debai = ("Hình bên là biểu diễn miền nghiệm của hệ bất phương trình nào sau đây "
+                 r"(miền nghiệm là phần \textbf{không bị gạch}%s)?"
+                 % (", kể cả bờ nếu bờ vẽ nét liền" if co_bang else ""))
 
         giai = f"""
         Dựa vào hình vẽ ta thấy miền nghiệm được giới hạn bởi hai đường thẳng:\\\\
@@ -1794,29 +1799,45 @@ def _bpt_tex(a, b, c):
 # ---------------------------------------------------------------------
 
 def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
-    """Trả lời ngắn: tính giá trị vế trái của bất phương trình tại một điểm."""
+    r"""Trả lời ngắn: tính giá trị $F\left(x; y\right) = ax + by$ (đúng DẠNG này, không có hằng số) tại một nghiệm nguyên $M$
+    của bất phương trình $ax + by \;\square\; c$ (cùng $a$, $b$ với vế trái).
+
+    Cô Lan 12/10/2026: (1) $F$ chỉ có dạng $ax + by$; (2) điểm $M$ phải NẰM TRONG miền nghiệm (bản cũ cho điểm ngẫu nhiên,
+    có khi không thuộc miền nghiệm); (3) sinh miền nghiệm rồi mới CHỌN NGẪU NHIÊN một nghiệm nguyên trong miền đó.
+    """
+    DAU = [r"\le", r"\ge", "<", ">"]
+    thoa = {r"\le": lambda v, c: v <= c, r"\ge": lambda v, c: v >= c, "<": lambda v, c: v < c, ">": lambda v, c: v > c}
     gt = []
-    while len(gt) < socau:
-        v = (_rd.randint(-6, 6) or 2, _rd.randint(-6, 6) or 3, _rd.randint(-9, 9),
-             _rd.randint(-5, 5), _rd.randint(-5, 5))
+    lan = 0
+    while len(gt) < socau and lan < 2000:
+        lan += 1
+        a, b = _rd.choice([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6]), _rd.choice([-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6])
+        if abs(a) == abs(b) and a == b:
+            continue
+        c = _rd.randint(-9, 9)
+        dau = _rd.choice(DAU)
+        # miền nghiệm (các điểm nguyên trong khung [-5; 5]^2 thoả bất phương trình), rồi chọn ngẫu nhiên một nghiệm
+        nghiem = [(x0, y0) for x0 in range(-5, 6) for y0 in range(-5, 6) if thoa[dau](a * x0 + b * y0, c)]
+        if len(nghiem) < 10:
+            continue
+        x0, y0 = _rd.choice(nghiem)
+        v = (a, b, c, dau, x0, y0)
         if v not in gt:
             gt.append(v)
 
     cauTN = ''
-    for a, b, c, x0, y0 in gt:
-        gt_ve_trai = a * x0 + b * y0 + c
-        debai = (r"Cho bất phương trình $%s$. Tính giá trị của biểu thức "
-                 r"$f\left(x; y\right) = %dx + %dy + %d$ tại điểm $M\left(%d; %d\right)$."
-                 % (_bpt_tex(a, b, -c), a, b, c, x0, y0))
+    for a, b, c, dau, x0, y0 in gt:
+        gia_tri = a * x0 + b * y0
+        debai = (r"Cho bất phương trình $%s %s %d$. Điểm $M\left(%d; %d\right)$ là một nghiệm của bất phương trình đã cho. "
+                 r"Tính giá trị của biểu thức $F\left(x; y\right) = %s$ tại điểm $M$."
+                 % (_F_tex(a, b), dau, c, x0, y0, _F_tex(a, b)))
         giai = (r"Thay $x = %d$ và $y = %d$ vào biểu thức:\\ "
-                r"$f\left(%d; %d\right) = %d\cdot\left(%d\right) + %d\cdot\left(%d\right) + %d = %d$.\\ "
-                r"(Giá trị này %s nên điểm $M$ %s miền nghiệm của bất phương trình đã cho.)"
-                % (x0, y0, x0, y0, a, x0, b, y0, c, gt_ve_trai,
-                   "nhỏ hơn hoặc bằng $0$" if gt_ve_trai <= 0 else "lớn hơn $0$",
-                   "thuộc" if gt_ve_trai <= 0 else "không thuộc"))
-        dung = str(gt_ve_trai)
-        ds = _ba_nhieu2(dung, [str(a * x0 + b * y0), str(-gt_ve_trai), str(gt_ve_trai + c)],
-                        buoc=lambda k: str(gt_ve_trai + 2 * k + 1))
+                r"$F\left(%d; %d\right) = %d\cdot\left(%d\right) + %d\cdot\left(%d\right) = %d$.\\ "
+                r"(Kiểm tra: $%d %s %d$ nên $M$ thuộc miền nghiệm của bất phương trình đã cho.)"
+                % (x0, y0, x0, y0, a, x0, b, y0, gia_tri, gia_tri, dau, c))
+        dung = str(gia_tri)
+        ds = _ba_nhieu2(dung, [str(-gia_tri), str(a * x0 - b * y0), str(a * y0 + b * x0), str(gia_tri + c)],
+                        buoc=lambda k: str(gia_tri + 2 * k + 1))
         cauTN += MC_SA_answer_text(debai, dung, ds, giai, 0, 0, dang)
     return cauTN
 
@@ -3345,14 +3366,25 @@ def _pc_sinh():
                     ah=A3 * kh, bh=B3 * kh, H=C3 * kh)
 
 
-def _pc_de(t):
-    return (r"Trong một cuộc thi pha chế, mỗi đội chơi được sử dụng tối đa $%s$ g hương liệu, $%d$ lít "
-            r"nước và $%s$ g đường để pha chế hai loại nước A và B. Để pha chế $1$ lít nước A cần $%s$ g "
-            r"đường, $1$ lít nước và $%s$ g hương liệu; để pha chế $1$ lít nước B cần $%s$ g đường, $1$ lít "
-            r"nước và $%s$ g hương liệu. Mỗi lít nước A nhận được $%d$ điểm thưởng, mỗi lít nước B nhận được "
-            r"$%d$ điểm thưởng. Gọi $x$, $y$ lần lượt là số lít nước A và số lít nước B mà một đội pha chế."
-            % (_so_vn(t["H"]), t["N"], _so_vn(t["D"]), _so_vn(t["ad"]), _so_vn(t["ah"]),
-               _so_vn(t["bd"]), _so_vn(t["bh"]), t["p"], t["q"]))
+def _pc_de(t, dk=None, gia=True):
+    r"""Câu dẫn pha chế chỉ gồm dữ kiện được dùng: dk = chỉ số điều kiện (0 hương liệu, 1 nước, 2 đường), gia = điểm thưởng."""
+    I = _chi_so_dk(dk, 3)
+    if not I:                                                    # chỉ cần điểm thưởng, không dùng điều kiện nào
+        return ("Trong một cuộc thi pha chế, mỗi đội chơi pha chế hai loại nước A và B."
+                + (" Mỗi lít nước A nhận được $%d$ điểm thưởng, mỗi lít nước B nhận được $%d$ điểm thưởng."
+                   % (t["p"], t["q"]) if gia else ""))
+    gioi_han = ["$%s$ g hương liệu" % _so_vn(t["H"]), "$%d$ lít nước" % t["N"], "$%s$ g đường" % _so_vn(t["D"])]
+    ca = ["$%s$ g hương liệu" % _so_vn(t["ah"]), "$1$ lít nước", "$%s$ g đường" % _so_vn(t["ad"])]
+    cb = ["$%s$ g hương liệu" % _so_vn(t["bh"]), "$1$ lít nước", "$%s$ g đường" % _so_vn(t["bd"])]
+    ngc = [i for i in (2, 1, 0) if i in I]                      # thứ tự nêu: đường, nước, hương liệu
+    x = ("Trong một cuộc thi pha chế, mỗi đội chơi được sử dụng tối đa %s để pha chế hai loại nước A và B."
+         % _noi([gioi_han[i] for i in I]))
+    x += " Để pha chế $1$ lít nước A cần %s; để pha chế $1$ lít nước B cần %s." % (
+        _noi([ca[i] for i in ngc]), _noi([cb[i] for i in ngc]))
+    if gia:
+        x += (" Mỗi lít nước A nhận được $%d$ điểm thưởng, mỗi lít nước B nhận được $%d$ điểm thưởng."
+              % (t["p"], t["q"]))
+    return x + " Gọi $x$, $y$ lần lượt là số lít nước A và số lít nước B mà một đội pha chế."
 
 
 def _pc_rang_buoc(t):
@@ -3419,7 +3451,7 @@ def _pc_mc_bpt(socau, dang, k):
                  r"$%s < %s$" % (_pc_lhs(a, b), _so_vn(c)),
                  r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(khac))]
         ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s \le %s$" % (_pc_lhs(a, b), _so_vn(c + j)))
-        debai = (_pc_de(t) + r" Bất phương trình nào sau đây biểu thị điều kiện về lượng %s mà một đội được "
+        debai = (_pc_de(t, [k], False) + r" Bất phương trình nào sau đây biểu thị điều kiện về lượng %s mà một đội được "
                  r"sử dụng?" % ten)
         giai = (r"Pha $x$ lít nước A và $y$ lít nước B cần $%s$ (%s) %s, mà mỗi đội dùng \textbf{tối đa} "
                 r"$%s$ %s nên dấu là $\le$ (không loại trừ dấu bằng).\\ Vậy $%s \le %s$; lưu ý hệ số của $x$ là %s "
@@ -3460,7 +3492,7 @@ def L10_C2_B4_VD028_MC_B_01(socau, dang=1):
         sai3 = list(dung_dong); sai3[1] = (1, 1, t["N"], r"\ge")                  # đổi dấu của nước
         sai4 = list(dung_dong); sai4[0] = (t["bh"], t["ah"], t["H"], r"\le")      # hoán đổi hệ số hương liệu
         ds = _ba_nhieu2(he(dung_dong), [he(sai1), he(sai2), he(sai3), he(sai4)])
-        debai = _pc_de(t) + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
+        debai = _pc_de(t, None, False) + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
         cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _pc_giai_he(t), 0, 0, dang)
     return cauTN
 
@@ -3489,7 +3521,7 @@ def L10_C2_B4_VD028_MC_B_02(socau, dang=1):
             gi += (r"thoả mãn cả ba điều kiện.\\ " if not vp else
                    r"vi phạm điều kiện về %s.\\ " % ten[vp[0]])
         gi += r"Vậy chọn cặp $\left(%d; %d\right)$." % dung_pt
-        debai = (_pc_de(t) + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án pha chế "
+        debai = (_pc_de(t, None, False) + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án pha chế "
                  r"thoả mãn mọi điều kiện của đội?")
         cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
     return cauTN
@@ -3506,7 +3538,7 @@ def L10_C2_B4_VD028_MC_B_03(socau, dang=1):
         v = p * X + q * Y
         ds = _ba_nhieu2("$%d$" % v, ["$%d$" % (p * Y + q * X), "$%d$" % (v + p), "$%d$" % (v - q),
                                      "$%d$" % (p + q)], buoc=lambda k: "$%d$" % (v + 10 * k))
-        debai = (_pc_de(t) + r" Một đội pha chế $%d$ lít nước A và $%d$ lít nước B (thoả mãn mọi điều kiện). "
+        debai = (_pc_de(t, [], True) + r" Một đội pha chế $%d$ lít nước A và $%d$ lít nước B. "
                  r"Số điểm thưởng đội đó nhận được là" % (X, Y))
         giai = (r"Điểm thưởng là $%d\cdot %d + %d\cdot %d = %d$ (mỗi lít nước A được $%d$ điểm, mỗi lít nước B "
                 r"được $%d$ điểm)." % (p, X, q, Y, v, p, q))
@@ -3592,7 +3624,7 @@ def _pc_sa(socau, dang, hoi):
             giai = _pc_giai_toi_uu(t)
         ds = _ba_nhieu2(str(dap), [str(v) for v in dict.fromkeys(khac) if v != dap and v > 0],
                         buoc=lambda k: str(dap + k + 2))
-        cau += MC_SA_answer_text(_pc_de(t) + " " + hoi_cau, str(dap), ds, giai, 0, 0, dang)
+        cau += MC_SA_answer_text(_pc_de(t, None, hoi in ("diem", "A", "B")) + " " + hoi_cau, str(dap), ds, giai, 0, 0, dang)
     return cau
 
 
@@ -3738,6 +3770,22 @@ def L10_C2_TF_C_01(socau, socot=1):
 # tests/test_l10_c2_tinh_huong_kb.py.
 # =====================================================================
 
+def _noi(ds):
+    """Nối các cụm bằng dấu phẩy và chữ 'và': 'a, b và c'."""
+    return ds[0] if len(ds) == 1 else ", ".join(ds[:-1]) + " và " + ds[-1]
+
+
+def _chi_so_dk(dk, n):
+    """dk = None -> mọi điều kiện; ngược lại danh sách chỉ số điều kiện được dùng (theo thứ tự tăng)."""
+    return list(range(n)) if dk is None else sorted(dk)
+
+
+def _de_dung(t, dk=None, gia=True):
+    r"""Câu dẫn CHỈ chứa dữ kiện được dùng để giải (cô Lan 11/10/2026: "câu hỏi ko có tiền thì đưa tiền vào làm gì").
+    dk: các điều kiện (chỉ số) được dùng, None = tất cả; gia: có dùng giá / tiền lãi / điểm thưởng hay không."""
+    return t["de_fn"](dk, gia) if "de_fn" in t else t["de"]
+
+
 def _kb_dinh_that(rb):
     """Đỉnh THẬT của miền {x >= 0, y >= 0, rb} (giao từng cặp đường biên), theo thứ tự quanh miền."""
     duong = [(Fraction(1), Fraction(0), Fraction(0)), (Fraction(0), Fraction(1), Fraction(0))]
@@ -3823,17 +3871,33 @@ def _kb3_sinh():
               dict(a=L2[0], b=L2[1], c=L2[2], dau=r"\le", dk="thời gian làm việc của máy M2 trong một ngày")]
         for r_ in rb:
             r_["dv"] = "giờ"
-        de = (r"Một phân xưởng có hai máy chuyên dụng M1 và M2 để sản xuất hai loại sản phẩm A và B theo đơn đặt "
-              r"hàng. Nếu sản xuất được một tấn sản phẩm loại A thì phân xưởng nhận được số tiền lãi là $%s$ triệu "
-              r"đồng; nếu sản xuất được một tấn sản phẩm loại B thì nhận được số tiền lãi là $%s$ triệu đồng. "
-              r"Muốn sản xuất một tấn sản phẩm loại A, người ta phải dùng máy M1 trong $%d$ giờ và máy M2 trong "
-              r"$%d$ giờ. Muốn sản xuất một tấn sản phẩm loại B, người ta phải dùng máy M1 trong $%d$ giờ và máy M2 "
-              r"trong $%d$ giờ. Một máy không thể dùng để sản xuất đồng thời hai loại sản phẩm này. Máy M1 làm việc "
-              r"không quá $%d$ giờ một ngày và máy M2 làm việc không quá $%d$ giờ một ngày. Gọi $x$, $y$ lần lượt "
-              r"là số tấn sản phẩm loại A và loại B mà phân xưởng sản xuất trong một ngày."
-              % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000)), L1[0], L2[0], L1[1], L2[1], L1[2], L2[2]))
+        def de_fn(dk=None, gia=True, L1=L1, L2=L2, p=p, q=q):
+            I = _chi_so_dk(dk, 2)
+            if not I:
+                return ("Một phân xưởng sản xuất hai loại sản phẩm A và B theo đơn đặt hàng."
+                        + (" Nếu sản xuất được một tấn sản phẩm loại A thì phân xưởng nhận được số tiền lãi là $%s$ "
+                           "triệu đồng; nếu sản xuất được một tấn sản phẩm loại B thì nhận được số tiền lãi là $%s$ "
+                           "triệu đồng." % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000))) if gia else ""))
+            L = [L1, L2]
+            may = ["M1", "M2"]
+            x = "Một phân xưởng có hai máy chuyên dụng M1 và M2 để sản xuất hai loại sản phẩm A và B theo đơn đặt hàng."
+            if len(I) < 2:
+                x = "Một phân xưởng có máy chuyên dụng %s để sản xuất hai loại sản phẩm A và B theo đơn đặt hàng." % may[I[0]]
+            if gia:
+                x += (" Nếu sản xuất được một tấn sản phẩm loại A thì phân xưởng nhận được số tiền lãi là $%s$ triệu "
+                      "đồng; nếu sản xuất được một tấn sản phẩm loại B thì nhận được số tiền lãi là $%s$ triệu đồng."
+                      % (_so_vn(Fraction(p, 1000)), _so_vn(Fraction(q, 1000))))
+            dung = lambda k: _noi(["máy %s trong $%d$ giờ" % (may[i], L[i][k]) for i in I])
+            x += " Muốn sản xuất một tấn sản phẩm loại A, người ta phải dùng %s." % dung(0)
+            x += " Muốn sản xuất một tấn sản phẩm loại B, người ta phải dùng %s." % dung(1)
+            if len(I) == 2:
+                x += " Một máy không thể dùng để sản xuất đồng thời hai loại sản phẩm này."
+            x += " " + _hoa(_noi(["máy %s làm việc không quá $%d$ giờ một ngày" % (may[i], L[i][2]) for i in I])) + "."
+            x += (" Gọi $x$, $y$ lần lượt là số tấn sản phẩm loại A và loại B mà phân xưởng sản xuất trong một ngày.")
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="max", rb=rb, dinh=dinh, cx=p, cy=q, F_ten="tiền lãi", dv_hien="triệu đồng", chia=1000,
+            de=de, de_fn=de_fn, kind="max", rb=rb, dinh=dinh, cx=p, cy=q, F_ten="tiền lãi", dv_hien="triệu đồng", chia=1000,
             bi_chan=True, so_x="số tấn sản phẩm loại A", so_y="số tấn sản phẩm loại B",
             pa_xy="sản xuất $%d$ tấn sản phẩm loại A và $%d$ tấn sản phẩm loại B",
             pa_x="sản xuất $%d$ tấn sản phẩm loại A", pa_y="sản xuất $%d$ tấn sản phẩm loại B",
@@ -3901,16 +3965,26 @@ def _kb2_sinh():
         ax = [r["a"] for r in rb]
         ay = [r["b"] for r in rb]
         cc = [r["c"] for r in rb]
-        de = (r"Một hợp tác xã chăn nuôi dự định trộn hai loại thức ăn gia súc X và Y để tạo thành thức ăn hỗn hợp "
-              r"cho gia súc. Giá một bao loại X là $%d$ nghìn đồng, giá một bao loại Y là $%d$ nghìn đồng. Mỗi bao "
-              r"loại X chứa $%d$ đơn vị chất dinh dưỡng A, $%d$ đơn vị chất dinh dưỡng B và $%d$ đơn vị chất dinh "
-              r"dưỡng C. Mỗi bao loại Y chứa $%d$ đơn vị chất dinh dưỡng A, $%d$ đơn vị chất dinh dưỡng B và $%d$ "
-              r"đơn vị chất dinh dưỡng C. Hỗn hợp thu được phải chứa tối thiểu $%d$ đơn vị chất dinh dưỡng A, $%d$ "
-              r"đơn vị chất dinh dưỡng B và $%d$ đơn vị chất dinh dưỡng C. Gọi $x$, $y$ lần lượt là số bao thức ăn "
-              r"loại X và loại Y cần mua."
-              % (cx, cy, ax[0], ax[1], ax[2], ay[0], ay[1], ay[2], cc[0], cc[1], cc[2]))
+        def de_fn(dk=None, gia=True, ax=ax, ay=ay, cc=cc, cx=cx, cy=cy, rb=rb):
+            I = _chi_so_dk(dk, 3)
+            if not I:
+                return ("Một hợp tác xã chăn nuôi trộn hai loại thức ăn gia súc X và Y để tạo thành thức ăn hỗn hợp "
+                        "cho gia súc."
+                        + (" Giá một bao loại X là $%d$ nghìn đồng, giá một bao loại Y là $%d$ nghìn đồng."
+                           % (cx, cy) if gia else ""))
+            chat = lambda i, v: "$%d$ đơn vị chất dinh dưỡng %s" % (v, rb[i]["ten"])
+            x = ("Một hợp tác xã chăn nuôi dự định trộn hai loại thức ăn gia súc X và Y để tạo thành thức ăn hỗn hợp "
+                 "cho gia súc.")
+            if gia:
+                x += " Giá một bao loại X là $%d$ nghìn đồng, giá một bao loại Y là $%d$ nghìn đồng." % (cx, cy)
+            x += " Mỗi bao loại X chứa %s." % _noi([chat(i, ax[i]) for i in I])
+            x += " Mỗi bao loại Y chứa %s." % _noi([chat(i, ay[i]) for i in I])
+            x += " Hỗn hợp thu được phải chứa tối thiểu %s." % _noi([chat(i, cc[i]) for i in I])
+            x += " Gọi $x$, $y$ lần lượt là số bao thức ăn loại X và loại Y cần mua."
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="triệu đồng", chia=1000,
+            de=de, de_fn=de_fn, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="triệu đồng", chia=1000,
             bi_chan=False, so_x="số bao thức ăn loại X", so_y="số bao thức ăn loại Y",
             pa_xy="mua $%d$ bao thức ăn loại X và $%d$ bao thức ăn loại Y",
             pa_x="mua $%d$ bao thức ăn loại X", pa_y="mua $%d$ bao thức ăn loại Y",
@@ -3948,15 +4022,26 @@ def _kb4_sinh():
                    dk="lượng vitamin C mỗi ngày")]
         if _kb_dinh_that(rb) != sorted((Fraction(X), Fraction(Y)) for X, Y in dinh):
             continue
-        de = (r"Một người ăn kiêng cần được cung cấp ít nhất $%d$ calo, $%d$ đơn vị vitamin A và $%d$ đơn vị "
-              r"vitamin C mỗi ngày từ hai loại đồ uống I và II. Mỗi cốc đồ uống I cung cấp $%d$ calo, $%d$ đơn vị "
-              r"vitamin A và $%d$ đơn vị vitamin C. Mỗi cốc đồ uống II cung cấp $%d$ calo, $%d$ đơn vị vitamin A và "
-              r"$%d$ đơn vị vitamin C. Biết rằng một cốc đồ uống I có giá $%d$ nghìn đồng và một cốc đồ uống II có "
-              r"giá $%d$ nghìn đồng. Gọi $x$, $y$ lần lượt là số cốc đồ uống I và II mà người đó uống mỗi ngày."
-              % (rb[0]["c"], rb[1]["c"], rb[2]["c"], rb[0]["a"], rb[1]["a"], rb[2]["a"],
-                 rb[0]["b"], rb[1]["b"], rb[2]["b"], cx, cy))
+        def de_fn(dk=None, gia=True, rb=rb, cx=cx, cy=cy):
+            I = _chi_so_dk(dk, 3)
+            if not I:
+                return ("Một người ăn kiêng uống hai loại đồ uống I và II mỗi ngày."
+                        + (" Biết rằng một cốc đồ uống I có giá $%d$ nghìn đồng và một cốc đồ uống II có giá $%d$ "
+                           "nghìn đồng." % (cx, cy) if gia else ""))
+            nhan = ["calo", "đơn vị vitamin A", "đơn vị vitamin C"]
+            cum = lambda i, v: "$%d$ %s" % (v, nhan[i])
+            x = "Một người ăn kiêng cần được cung cấp ít nhất %s mỗi ngày từ hai loại đồ uống I và II." % _noi(
+                [cum(i, rb[i]["c"]) for i in I])
+            x += " Mỗi cốc đồ uống I cung cấp %s." % _noi([cum(i, rb[i]["a"]) for i in I])
+            x += " Mỗi cốc đồ uống II cung cấp %s." % _noi([cum(i, rb[i]["b"]) for i in I])
+            if gia:
+                x += (" Biết rằng một cốc đồ uống I có giá $%d$ nghìn đồng và một cốc đồ uống II có giá $%d$ nghìn "
+                      "đồng." % (cx, cy))
+            x += " Gọi $x$, $y$ lần lượt là số cốc đồ uống I và II mà người đó uống mỗi ngày."
+            return x
+        de = de_fn()
         t = dict(
-            de=de, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="nghìn đồng", chia=1,
+            de=de, de_fn=de_fn, kind="min", rb=rb, dinh=dinh, cx=cx, cy=cy, F_ten="chi phí", dv_hien="nghìn đồng", chia=1,
             bi_chan=False, so_x="số cốc đồ uống I", so_y="số cốc đồ uống II",
             pa_xy="uống $%d$ cốc đồ uống I và $%d$ cốc đồ uống II",
             pa_x="uống $%d$ cốc đồ uống I", pa_y="uống $%d$ cốc đồ uống II",
@@ -4060,7 +4145,7 @@ def _kb_mc_bpt(KB, socau, dang, k):
                  r"$%s %s %s$" % (lhs, ngat, _so_vn(r["c"])),
                  r"$%s %s %s$" % (lhs, r["dau"], _so_vn(khac))]
         ds = _ba_nhieu2(dung, cands, buoc=lambda j: r"$%s %s %s$" % (lhs, r["dau"], _so_vn(r["c"] + j)))
-        debai = t["de"] + r" Bất phương trình nào sau đây biểu thị điều kiện về %s?" % r["dk"]
+        debai = _de_dung(t, [k], False) + r" Bất phương trình nào sau đây biểu thị điều kiện về %s?" % r["dk"]
         giai = (r"%s là $%s$ (%s) và phải %s $%s$ (%s) nên dấu là $%s$ (có xét dấu bằng).\\ Vậy $%s %s %s$; lưu ý "
                 r"hệ số của $x$ là $%s$ và của $y$ là $%s$."
                 % (r["dk"][0].upper() + r["dk"][1:], lhs, r["dv"], _KB_TU_DAU[r["dau"]], _so_vn(r["c"]), r["dv"],
@@ -4087,7 +4172,7 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             s = list(dung_dong); s[0] = (dung_dong[0][0], dung_dong[0][1], dung_dong[0][2], "<" if dung_dong[0][3] == r"\le" else ">")
             cands.append(he(s))
             ds = _ba_nhieu2(he(dung_dong), cands)
-            debai = t["de"] + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
+            debai = _de_dung(t, None, False) + r" Hệ bất phương trình nào sau đây mô tả đúng các điều kiện của bài toán?"
             cauTN += MC_SA_answer_text(debai, he(dung_dong), ds, _kb_giai_he(t), 0, 0, dang)
             dem += 1
             continue
@@ -4100,17 +4185,22 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             if not tot or not ngoai:
                 continue
             chon = [_rd.choice(s) for s in sai if s]
-            while len(chon) < 3:
-                P = _rd.choice(ngoai)
-                if P not in chon:
-                    chon.append(P)
+            # Chọn thêm từ các cặp vi phạm CHƯA có trong chon; hết cặp mà chưa đủ 3 thì sinh lại tình huống
+            # (bản cũ vòng lặp vô hạn khi số cặp vi phạm ít, làm treo bộ sinh đề - phát hiện 12/10/2026).
+            con_lai = [P for P in ngoai if P not in chon]
+            while len(chon) < 3 and con_lai:
+                P = _rd.choice(con_lai)
+                con_lai.remove(P)
+                chon.append(P)
+            if len(chon) < 3:
+                continue
             chon = chon[:3]
             dung_pt = _rd.choice(tot)
             fmt = lambda P: r"$\left(%d; %d\right)$" % P
             gi = r"Thay từng cặp vào các bất phương trình của hệ:\\ " + r"\\ ".join(
                 r"Cặp $\left(%d; %d\right)$: %s" % (X, Y, _kb_giai_diem(t, X, Y)) for X, Y in [dung_pt] + chon)
             gi += r"\\ Vậy chọn cặp $\left(%d; %d\right)$." % dung_pt
-            debai = (t["de"] + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án thoả mãn mọi điều "
+            debai = (_de_dung(t, None, False) + r" Cặp số $\left(x; y\right)$ nào sau đây biểu diễn một phương án thoả mãn mọi điều "
                      r"kiện của bài toán?")
             cauTN += MC_SA_answer_text(debai, fmt(dung_pt), [fmt(P) for P in chon], gi, 0, 0, dang)
             dem += 1
@@ -4123,7 +4213,7 @@ def _kb_mc_vd(KB, socau, dang, kieu):
             ds = _ba_nhieu2(_kb_so_hien(t, v), [_kb_so_hien(t, t["cx"] * Y + t["cy"] * X), _kb_so_hien(t, v + st),
                                                  _kb_so_hien(t, v - st), _kb_so_hien(t, t["cx"] + t["cy"])],
                             buoc=lambda k: _kb_so_hien(t, v + 2 * st * k))
-            debai = (t["de"] + r" Một phương án %s (thoả mãn mọi điều kiện của bài toán). "
+            debai = (_de_dung(t, [], True) + r" Một phương án %s. "
                      % (t["pa_xy"] % (X, Y)) + _hoa(r"%s của phương án đó là" % t["F_ten"]))
             giai = _hoa(r"%s là $%d\cdot %d + %d\cdot %d = %d$ (nghìn đồng), tức là %s."
                         % (t["F_ten"], t["cx"], X, t["cy"], Y, v, _kb_so_hien(t, v)))
@@ -4189,7 +4279,7 @@ def _kb_sa_vd(KB, socau, dang, hoi):
                      r"Giá trị thoả mãn cả ba giới hạn phải lớn hơn hoặc bằng giới hạn lớn nhất, nên nhỏ nhất là $%d$.")
                     % dap)
         ds = _ba_nhieu2(str(dap), [str(v) for v in khac if v != dap and v > 0], buoc=lambda k: str(dap + k + 2))
-        cau += MC_SA_answer_text(t["de"] + " " + cau_hoi, str(dap), ds, giai, 0, 0, dang)
+        cau += MC_SA_answer_text(_de_dung(t, None, False) + " " + cau_hoi, str(dap), ds, giai, 0, 0, dang)
     return cau
 
 

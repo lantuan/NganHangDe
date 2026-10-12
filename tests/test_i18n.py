@@ -82,3 +82,12 @@ def test_tu_khong_dau_va_chu_y_duoc_dich():
     assert dich_doan(" ý ", "en") == " Part "
     assert dich_doan(" Đúng", "en") == " Correct"
     assert dich_doan("Saigon", "en") == "Saigon"
+
+
+def test_bo_trich_khong_bo_sot_sidebar_chat():
+    """Cấu hình MathJax có '{#1}' từng bị hiểu nhầm là mở chú thích Jinja, nuốt ~19KB template chat.html
+    (cô Lan 12/10/2026: 'Đánh giá học lực' vẫn tiếng Việt khi chọn English). Các chữ ở sidebar phải được trích và có bản dịch."""
+    td = json.loads((GOC / "data" / "i18n" / "en_ui.json").read_text(encoding="utf-8"))
+    c = _trich()
+    for k in ("+ Chat mới", "Lịch sử", "Đánh giá học lực", "Đăng xuất"):
+        assert k in c and td.get(k), k

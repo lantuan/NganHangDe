@@ -50,19 +50,37 @@ def _so(s):
 
 
 def _doc(debai):
-    """-> dict(H, N, D, ad, ah, bd, bh, p, q) tu cau dan."""
+    """-> dict chi gom cac so CO TRONG cau dan: H, N, D (gioi han), ad, ah, bd, bh (he so), p, q (diem thuong).
+    Cau dan chi chua du kien duoc dung de giai (co Lan 11/10/2026), nen khong phai cau nao cung co du ca nam nhom."""
     n = r"(\d+(?:\{,\}\d+)?)"
-    r = re.search(r"tối đa \$%s\$ g hương liệu, \$%s\$ lít nước và \$%s\$ g đường" % (n, n, n), debai)
-    A = re.search(r"nước A cần \$%s\$ g đường, \$1\$ lít nước và \$%s\$ g hương liệu" % (n, n), debai)
-    B = re.search(r"nước B cần \$%s\$ g đường, \$1\$ lít nước và \$%s\$ g hương liệu" % (n, n), debai)
+    ten = {"hương liệu": "h", "lít nước": "n", "đường": "d"}
+    d = {}
+    gh = re.search(r"tối đa (.+?) để pha chế hai loại", debai)
+    if gh:
+        for v, t in re.findall(r"\$%s\$ (?:g )?(hương liệu|lít nước|đường)" % n, gh.group(1)):
+            d[{"hương liệu": "H", "lít nước": "N", "đường": "D"}[t]] = _so(v)
+    for loai, ky in (("A", "a"), ("B", "b")):
+        m = re.search(r"nước %s cần (.+?)(?:;|\. )" % loai, debai)
+        if m:
+            for v, t in re.findall(r"\$%s\$ (?:g )?(hương liệu|lít nước|đường)" % n, m.group(1)):
+                if t == "hương liệu":
+                    d[ky + "h"] = _so(v)
+                elif t == "đường":
+                    d[ky + "d"] = _so(v)
     P = re.search(r"nước A nhận được \$(\d+)\$ điểm thưởng, mỗi lít nước B nhận được \$(\d+)\$ điểm", debai)
-    assert r and A and B and P, debai
-    return dict(H=_so(r.group(1)), N=_so(r.group(2)), D=_so(r.group(3)), ad=_so(A.group(1)), ah=_so(A.group(2)),
-                bd=_so(B.group(1)), bh=_so(B.group(2)), p=int(P.group(1)), q=int(P.group(2)))
+    if P:
+        d["p"], d["q"] = int(P.group(1)), int(P.group(2))
+    return d
+
+
+def _day_du(d):
+    assert all(k in d for k in ("H", "N", "D", "ad", "ah", "bd", "bh")), d
+    return d
 
 
 def _giai(d):
     """Giao cac duong bien -> (ham thoa, dinh theo thu tu quanh, F tai dinh)."""
+    d = _day_du(d)
     duong = [(Fraction(1), Fraction(0), Fraction(0)), (Fraction(0), Fraction(1), Fraction(0)),
              (d["ah"], d["bh"], d["H"]), (Fraction(1), Fraction(1), d["N"]), (d["ad"], d["bd"], d["D"])]
     thoa = lambda X, Y: X >= 0 and Y >= 0 and all(a * X + b * Y <= c for a, b, c in duong[2:])
@@ -78,7 +96,7 @@ def _giai(d):
     cx = sum(v[0] for v in dinh) / len(dinh)
     cy = sum(v[1] for v in dinh) / len(dinh)
     dinh.sort(key=lambda v: math.atan2(v[1] - cy, v[0] - cx))
-    F = {v: d["p"] * v[0] + d["q"] * v[1] for v in dinh}
+    F = {v: d["p"] * v[0] + d["q"] * v[1] for v in dinh} if "p" in d else {}
     return thoa, dinh, F
 
 
@@ -103,8 +121,15 @@ def test_nb025_mot_bpt():
         for _ in _chay(ten):
             debai, dap, nhieu, _g = _cap["mc"][0]
             d = _doc(debai)
+            if k == "nước":
+                d.update(ad=0, ah=0)
             assert ("lượng %s" % k) in debai
-            exp = {"đường": (d["ad"], d["bd"], d["D"]), "nước": (1, 1, d["N"]), "hương liệu": (d["ah"], d["bh"], d["H"])}[k]
+            assert "điểm thưởng" not in debai                       # khong dung diem thuong de lap bpt
+            khac = [x for x in ("đường", "hương liệu", "lít nước") if x != ("lít nước" if k == "nước" else k)]
+            phan = debai.split("Gọi")[0].replace("nước A", "").replace("nước B", "")
+            assert not any(x in phan for x in khac), debai   # khong nhac dieu kien khac
+            exp = {"đường": lambda: (d["ad"], d["bd"], d["D"]), "nước": lambda: (1, 1, d["N"]),
+                   "hương liệu": lambda: (d["ah"], d["bh"], d["H"])}[k]()
             a, b, dau, c = _bpt(dap.strip("$"))
             assert (a, b, c) == tuple(Fraction(v) for v in exp) and dau == r"\le"
             assert len(set(nhieu + [dap])) == 4
@@ -121,7 +146,8 @@ def _he_tu_chuoi(s):
 def test_mc_b_01_he():
     for _ in _chay("L10_C2_B4_VD028_MC_B_01"):
         debai, dap, nhieu, _g = _cap["mc"][0]
-        d = _doc(debai)
+        d = _day_du(_doc(debai))
+        assert "điểm thưởng" not in debai
         dung = {(d["ah"], d["bh"], r"\le", d["H"]), (Fraction(1), Fraction(1), r"\le", d["N"]), (d["ad"], d["bd"], r"\le", d["D"])}
         assert set(_he_tu_chuoi(dap)) == dung
         for x in nhieu:
@@ -143,9 +169,8 @@ def test_mc_b_03_diem_thuong():
     for _ in _chay("L10_C2_B4_VD028_MC_B_03"):
         debai, dap, nhieu, _g = _cap["mc"][0]
         d = _doc(debai)
-        X, Y = (int(v) for v in re.search(r"pha chế \$(\d+)\$ lít nước A và \$(\d+)\$ lít nước B \(", debai).groups())
-        thoa, _, _ = _giai(d)
-        assert thoa(X, Y)
+        X, Y = (int(v) for v in re.search(r"Một đội pha chế \$(\d+)\$ lít nước A và \$(\d+)\$ lít nước B\. ", debai).groups())
+        assert set(d) == {"p", "q"}, debai                           # chi dua diem thuong, khong dua dieu kien nao
         assert int(dap.strip("$")) == d["p"] * X + d["q"] * Y
         assert all(int(x.strip("$")) != int(dap.strip("$")) for x in nhieu)
 

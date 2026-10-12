@@ -10027,3 +10027,29 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Test mới (trong `tests/test_th030_mc_d_mien_gia_tri.py`): với mỗi câu SA/TL, tìm MỌI góc α∈[0°;180°] thoả giả thiết rồi kiểm đáp số của từng ý ở mọi góc đó (bắt luôn lỗi dấu mơ hồ); SA ≤ 4 kí tự.
 - Bản Anh chương 1 (`data/python_bank_en/toan10/L10_C1.py`) được dịch lại bằng `scripts/dich_ngan_hang.py dich` vì sửa hình Ven 10/10 làm lệch bản Việt.
 - `tests/test_mot_id_mot_dang.py`: cho phép nhiều hàm cùng ID với `L10_C2_B3_NB025_MC_B..E` và `L10_C2_B4_VD028_MC/SA_B..K` (mapping đã mô tả "dạng" là cả kịch bản thực tiễn; các hàm chỉ khác đại lượng được hỏi) - cô Lan duyệt 11/10/2026.
+
+## 12/10/2026 - Giao diện English: "Đánh giá học lực" vẫn là tiếng Việt
+
+- Nguyên nhân: `scripts/i18n_trich_chuoi.py` bỏ chú thích Jinja bằng `\{#.*?#\}`; cấu hình MathJax trong `chat.html` có `{#1}` nên bị tính là mở chú thích, nuốt ~19KB template (cả sidebar). Các chữ "+ Chat mới", "Lịch sử", "Đánh giá học lực", "Về trang chủ" không được trích nên không có trong `data/i18n/en_ui.json` và test `test_moi_chu_trong_template_co_ban_dich` không báo thiếu.
+- Sửa: regex chú thích Jinja chỉ khớp `{#` + khoảng trắng; thêm 4 mục vào `en_ui.json` (New chat / History / Back to home / Performance assessment); test mới `test_bo_trich_khong_bo_sot_sidebar_chat`.
+- Lưu ý: tiêu đề các cuộc hội thoại trong "Lịch sử" (vd "Tạo đề nhanh: lớp 10, ...") là dữ liệu đã lưu, không phải chữ giao diện nên không tự dịch.
+
+## 12/10/2026 - Chương 2: câu dẫn chỉ chứa dữ kiện dùng để giải; ghi chú miền nghiệm ở câu hình hệ bất phương trình
+
+- Cô Lan: "câu hỏi ko có tiền thì đưa tiền vào làm gì. chỉ đưa dữ liệu có sử dụng để giải bài". Bốn tình huống thực tế (pha chế, thức ăn gia súc, phân xưởng hai máy, đồ uống ăn kiêng) nay dựng câu dẫn bằng `_pc_de(t, dk, gia)` / `t["de_fn"](dk, gia)` (`_de_dung`): `dk` = các điều kiện được dùng, `gia` = có giá / lãi / điểm thưởng hay không.
+  - NB025 (bất phương trình của MỘT điều kiện): chỉ còn đúng điều kiện đó (3 số: hệ số x, hệ số y, giới hạn), không có giá / lãi / điểm thưởng / điều kiện khác.
+  - Lập hệ, chọn phương án khả thi, số đỉnh, giới hạn khi chỉ dùng một loại: đủ các điều kiện, bỏ giá / lãi / điểm thưởng.
+  - Tính chi phí / tiền lãi / điểm thưởng của MỘT phương án cho sẵn (`VD028_MC_B_03`, `MC_x_03`...): chỉ còn giá + phương án, bỏ điều kiện và bỏ "Gọi x, y" (không dùng đến). Dạng này nay rất dễ - cần cô xem lại mức độ.
+  - Tối ưu, tự luận, đúng/sai: giữ nguyên câu dẫn đầy đủ.
+- Câu hình "Hình bên là biểu diễn miền nghiệm của hệ bất phương trình nào sau đây" (`TH027_MC_A_01`): thêm "(miền nghiệm là phần **không bị gạch**, kể cả bờ nếu bờ vẽ nét liền)" như câu hình nửa mặt phẳng (phần ", kể cả bờ..." chỉ có khi có dấu bằng).
+- Sửa lỗi treo bộ sinh: `_kb_mc_vd` (kiểu "pa") lặp vô hạn khi số cặp vi phạm ít hơn 3; nay chọn từ các cặp chưa dùng, thiếu thì sinh lại tình huống. Bản cũ treo ~1/4 lần chạy test.
+- Test: `tests/test_l10_c2_du_kien_thua.py` (59 test: không có dữ kiện thừa); `tests/test_l10_c2_pha_che.py` đọc được câu dẫn rút gọn.
+- Bản Anh: bổ sung bản dịch các cụm mới vào `data/i18n/bank/en_L10_C2.json`, dịch lại `data/python_bank_en/toan10/L10_C2.py`.
+- Còn tồn tại (không do thay đổi này): `tests/test_l10_c2_tinh_huong_kb.py::test_tf_it_nhat_3_dung_3_sai` thỉnh thoảng báo một ý chỉ có 2 mệnh đề đúng hoặc sai (tình huống 2, 3) - bộ sinh đúng/sai cần đảm bảo ít nhất 3 đúng và 3 sai.
+
+## 12/10/2026 - NB023_SA_A_01: F chỉ có dạng ax + by, M là nghiệm nguyên thuộc miền nghiệm
+
+- Cô Lan: (1) F(x; y) chỉ được phép có dạng ax + by; (2) kiểm tra điểm M có nằm trong miền nghiệm không; (3) sau khi có miền nghiệm, chọn ngẫu nhiên nghiệm nguyên trong đó.
+- Bản cũ: F = ax + by + c (có hằng số) và M ngẫu nhiên trong [−5; 5]², có khi KHÔNG thuộc miền nghiệm (lời giải còn nói "không thuộc").
+- Nay: chọn a, b, c và dấu (≤, ≥, <, >) ngẫu nhiên; liệt kê các điểm nguyên trong [−5; 5]² thoả bất phương trình (miền nghiệm, cần ≥ 10 điểm); chọn ngẫu nhiên M trong đó. Đề: "Cho bất phương trình ax + by ⋚ c. Điểm M là một nghiệm của bất phương trình đã cho. Tính giá trị của F(x; y) = ax + by tại M" (F cùng a, b với vế trái). Lời giải có dòng kiểm tra M thuộc miền nghiệm.
+- Mapping `NB023_SA_A` cập nhật mô tả dạng; test mới `tests/test_l10_c2_nb023_sa_a.py` (F đúng dạng ax + by, M thoả bất phương trình, đáp số đúng); bản dịch Anh cập nhật, bỏ một "patch" dịch tay đã hết đối tượng (`patch_L10_C2_2.json`).

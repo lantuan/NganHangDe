@@ -30,11 +30,6 @@
   "so_lan": 1
  },
  {
-  "tim": "Given the inequality $%s$. Compute the value of the expression",
-  "thay": "Given the inequality $%s$, compute the value of the expression",
-  "so_lan": 1
- },
- {
   "tim": "(\"A store sells two kinds of pens: pencils cost",
   "thay": "(\"A store sells two kinds of writing tools: pencils cost",
   "so_lan": 1
