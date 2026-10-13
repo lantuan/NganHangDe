@@ -4060,9 +4060,11 @@ def L10_C3_B5_TH031_SA_B_02(socau, dang=2):
         he = "" if k == 1 else "%d" % k
         day = r"\%s^{2}%s + \%s^{2}%s + \%s^{2}%s + \cdots + \%s^{2}%s" % (
             ham, _goc(goc[0]), ham, _goc(goc[1]), ham, _goc(goc[2]), ham, _goc(goc[-1]))
-        debai = (r"Tính $S = %s\left(%s\right)$, trong đó các góc tăng đều mỗi lần $%s$."
-                 % (he, day, _goc(d))) if k != 1 else \
-            (r"Tính $S = %s$, trong đó các góc tăng đều mỗi lần $%s$." % (day, _goc(d)))
+        gom = (r", trong đó tổng gồm bình phương %s của các góc $%s, %s, \ldots, %s$ "
+               r"(hai góc liên tiếp hơn kém nhau $%s$). Tính giá trị của $S$."
+               % ("sin" if ham == "sin" else "côsin", _goc(goc[0]), _goc(goc[1]), _goc(goc[-1]), _goc(d)))
+        debai = (r"Cho biểu thức $S = %s\left(%s\right)$" % (he, day) + gom) if k != 1 else \
+            (r"Cho biểu thức $S = %s$" % day + gom)
         phu = "sin" if ham == "cos" else "cos"
         giai = (r"Dãy góc $%s, %s, \ldots, %s$ có $\dfrac{%d - %d}{%d} + 1 = %d$ góc."
                 % (_goc(goc[0]), _goc(goc[1]), _goc(goc[-1]), goc[-1], goc[0], d, n) + "\\\\\n" +
@@ -6515,7 +6517,8 @@ def L10_C3_B5_VD031_MC_A_01(socau, dang=1):
         tich = r"\tan %d^{\circ}\cdot\tan %d^{\circ}\cdots\tan %d^{\circ}" % (a, a + d, b)
         bt = (("%d" % k if k > 1 else "") + tich + (" + %d" % c if c > 0 else (" - %d" % -c if c < 0 else "")))
         kq = k + c
-        de = r"Giá trị của biểu thức $P = %s$ (các góc tăng đều $%d^{\circ}$) bằng" % (bt, d)
+        de = (r"Cho biểu thức $P = %s$, trong đó tích gồm tang của các góc $%d^{\circ}, %d^{\circ}, \ldots, %d^{\circ}$ "
+              r"(hai góc liên tiếp hơn kém nhau $%d^{\circ}$). Giá trị của $P$ bằng" % (bt, a, a + d, b, d))
         giai = (r"Ghép các thừa số thành từng cặp hai góc phụ nhau: "
                 r"$\tan x^{\circ}\cdot\tan\left(90 - x\right)^{\circ} = \tan x^{\circ}\cdot\cot x^{\circ} = 1$, "
                 r"còn lại thừa số giữa $\tan 45^{\circ} = 1$." "\\\\\n"
@@ -6560,7 +6563,8 @@ def L10_C3_B5_VD031_MC_A_02(socau, dang=1):
     for bat_dau, ket_thuc, d in gt:
         S, goc = _gia_tri_tong_cos(bat_dau, ket_thuc, d)
         bt = r"\cos %d^{\circ} + \cos %d^{\circ} + \cdots + \cos %d^{\circ}" % (goc[0], goc[1], goc[-1])
-        de = r"Giá trị của biểu thức $S = %s$ (các góc tăng đều $%d^{\circ}$) bằng" % (bt, d)
+        de = (r"Cho biểu thức $S = %s$, trong đó tổng gồm côsin của các góc $%d^{\circ}, %d^{\circ}, \ldots, %d^{\circ}$ "
+              r"(hai góc liên tiếp hơn kém nhau $%d^{\circ}$). Giá trị của $S$ bằng" % (bt, goc[0], goc[1], goc[-1], d))
         le = [x for x in goc if 180 - x not in goc or x == 90]
         if le:
             con = (r"chỉ còn lại " + ", ".join(r"$\cos %d^{\circ} = %d$" % (x, round(math.cos(math.radians(x))))
@@ -6588,16 +6592,23 @@ def L10_C3_B5_VD031_SA_A_01(socau, dang=2):
             a, d = _bo_tich_tan()
             v = ("tan", a, d, random.choice([2, 3, 4, 5]), random.choice([1, 2, 3, -1]))
         else:
-            v = ("cos",) + _bo_tong_cos() + (random.choice([2, 3, 4, 5]), random.choice([1, 2, 3, 5]))
+            # Chỉ lấy dãy góc cho tổng KHÁC 0 (tổng = -1): nếu tổng = 0 thì P = hằng số cộng thêm,
+            # hệ số nhân không có tác dụng và đáp án đoán được (cô Lan duyệt 13/10/2026).
+            while True:
+                bd, kt, dd = _bo_tong_cos()
+                if _gia_tri_tong_cos(bd, kt, dd)[0] != 0:
+                    break
+            v = ("cos", bd, kt, dd, random.choice([2, 3, 4, 5]), random.choice([1, 2, 3, 5]))
         if v not in gt:
             gt.append(v)
     for v in gt:
         if v[0] == "tan":
             _, a, d, k, c = v
             kq = k + c
-            de = (r"Tính giá trị của biểu thức $P = %d\tan %d^{\circ}\cdot\tan %d^{\circ}\cdots\tan %d^{\circ} %s$ "
-                  r"(các góc tăng đều $%d^{\circ}$)."
-                  % (k, a, a + d, 90 - a, ("+ %d" % c) if c > 0 else ("- %d" % -c), d))
+            de = (r"Cho biểu thức $P = %d\tan %d^{\circ}\cdot\tan %d^{\circ}\cdots\tan %d^{\circ} %s$, "
+                  r"trong đó tích gồm tang của các góc $%d^{\circ}, %d^{\circ}, \ldots, %d^{\circ}$ "
+                  r"(hai góc liên tiếp hơn kém nhau $%d^{\circ}$). Tính giá trị của $P$."
+                  % (k, a, a + d, 90 - a, ("+ %d" % c) if c > 0 else ("- %d" % -c), a, a + d, 90 - a, d))
             giai = (r"Ghép từng cặp hai góc phụ nhau: $\tan x^{\circ}\cdot\tan\left(90 - x\right)^{\circ} = 1$, "
                     r"thừa số giữa là $\tan 45^{\circ} = 1$, nên tích bằng $1$. Vậy $P = %d + %d = %d$."
                     % (k, c, kq) if c > 0 else
@@ -6608,12 +6619,18 @@ def L10_C3_B5_VD031_SA_A_01(socau, dang=2):
             _, bat_dau, ket_thuc, d, k, c = v
             S, goc = _gia_tri_tong_cos(bat_dau, ket_thuc, d)
             kq = k * S + c
-            de = (r"Tính giá trị của biểu thức $P = %d\left(\cos %d^{\circ} + \cos %d^{\circ} + \cdots + "
-                  r"\cos %d^{\circ}\right) + %d$ (các góc tăng đều $%d^{\circ}$)."
-                  % (k, goc[0], goc[1], goc[-1], c, d))
-            giai = (r"Ghép từng cặp hai góc bù nhau: $\cos x + \cos\left(180^{\circ} - x\right) = 0$; tổng trong "
-                    r"ngoặc chỉ còn các số hạng không có cặp, bằng $%s$. Vậy $P = %d\cdot\left(%s\right) + %d = %s$."
-                    % (_L(S), k, _L(S), c, _L(kq)))
+            de = (r"Cho biểu thức $P = %d\left(\cos %d^{\circ} + \cos %d^{\circ} + \cdots + "
+                  r"\cos %d^{\circ}\right) + %d$, trong đó tổng gồm côsin của các góc "
+                  r"$%d^{\circ}, %d^{\circ}, \ldots, %d^{\circ}$ (hai góc liên tiếp hơn kém nhau $%d^{\circ}$). "
+                  r"Tính giá trị của $P$."
+                  % (k, goc[0], goc[1], goc[-1], c, goc[0], goc[1], goc[-1], d))
+            le = [x for x in goc if 180 - x not in goc or x == 90]   # số hạng không ghép được cặp bù
+            con = (r"chỉ còn lại " + ", ".join(r"$\cos %d^{\circ} = %d$" % (x, round(math.cos(math.radians(x))))
+                                              for x in le)) if le else r"mọi số hạng đều ghép được thành cặp"
+            giai = (r"Hai góc bù nhau có côsin đối nhau: $\cos x + \cos\left(180^{\circ} - x\right) = 0$. "
+                    r"Ghép các số hạng trong ngoặc thành từng cặp hai góc bù nhau, mỗi cặp có tổng bằng $0$; "
+                    + con + r", nên tổng trong ngoặc bằng $%s$." % _L(S) + "\\\\\n"
+                    + r"Vậy $P = %d\cdot\left(%s\right) + %d = %s$." % (k, _L(S), c, _L(kq)))
         dap = str(kq)
         cau += MC_SA_answer_const(de, dap, [str(kq + 1), str(kq - 1), str(kq + 2)], giai, 0, 0, dang)
     return cau
@@ -7350,9 +7367,19 @@ def _de_dia_co(a, b, c):
 def _hinh_duong_tron_ba_diem(goc, nhan, ho=False):
     """Ba điểm trên đường tròn ở các góc (độ, theo tâm) cho trước; ho=True tô màu hồ nước."""
     pts = [(1.5 * math.cos(math.radians(g)), 1.5 * math.sin(math.radians(g))) for g in goc]
-    hinh = ("\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
-            + ("\\fill[blue!12] (0,0) circle (1.5);\n\\draw (0,0) circle (1.5);\n" if ho else
-               "\\draw[dashed] (0,0) circle (1.5);\n\\draw[thick] (1.5,0) arc (0:250:1.5);\n"))
+    if ho:
+        mat = "\\fill[blue!12] (0,0) circle (1.5);\n\\draw (0,0) circle (1.5);\n"
+    else:
+        # Đĩa vỡ: phần MẤT (nét đứt) nằm giữa hai điểm liền kề cách xa nhau nhất, chừa mép 15 độ
+        # mỗi bên => cả ba điểm A, B, C luôn nằm trên phần đĩa còn nguyên (nét liền).
+        gs = sorted(g % 360 for g in goc)
+        khe = [((gs[(i + 1) % 3] - gs[i]) % 360 or 360, gs[i]) for i in range(3)]
+        rong, dau = max(khe)
+        le = min(15.0, rong / 4)
+        s0, e0 = dau + le, dau + rong - le          # cung đứt: s0 -> e0
+        mat = ("\\draw[dashed] (%.3f:1.5) arc (%.3f:%.3f:1.5);\n"
+               "\\draw[thick] (%.3f:1.5) arc (%.3f:%.3f:1.5);\n" % (s0, s0, e0, e0, e0, s0 + 360))
+    hinh = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n" + mat
     hinh += "\\draw[thick] (%.3f,%.3f) -- (%.3f,%.3f) -- (%.3f,%.3f)%s;\n" % (
         pts[1] + pts[0] + pts[2] + ("" if ho else " -- cycle",))
     for (x, y), t in zip(pts, nhan):
@@ -7397,10 +7424,16 @@ def _giai_ho_d(A, BC, d):
             r"kính $d = \dfrac{BC}{\sin %s} \approx %s\,\text{(m)}$." % (_goc(A), _x1(d, 1)))
 
 
-def _goc_ve_ho(A):
-    # đặt A ở trên, B, C phía dưới: cung BC (không chứa A) chắn góc 360 - 2A ở tâm
-    g = 360 - 2 * A
-    return [90, 270 - g / 2, 270 + g / 2]
+def _goc_ve_ho(A, AB, AC):
+    """Vị trí (độ, theo tâm) của A, B, C trên bờ hồ để HÌNH KHỚP SỐ LIỆU: góc BAC đúng bằng A và
+    tỉ lệ AB : AC đúng như đề (A đặt ở đỉnh, 90 độ).
+    Góc nội tiếp: dây đối diện góc X chắn cung 2X ở tâm => cung AB = 2C, cung AC = 2B,
+    cung BC (không chứa A) = 2A (A tù thì cung này > 180 độ, A nằm trên cung nhỏ BC)."""
+    BC2 = AB * AB + AC * AC - 2 * AB * AC * _cos_d(A)
+    BC = math.sqrt(BC2)
+    B = math.degrees(math.acos((AB * AB + BC2 - AC * AC) / (2 * AB * BC)))   # góc B (đối diện AC)
+    C = 180 - A - B
+    return [90, 90 + 2 * C, 90 - 2 * B]      # B ở bên trái, C ở bên phải (AB < AC thì B gần A hơn)
 
 
 def L10_C3_B6_VD036_MC_P_01(socau, dang=1):
@@ -7438,7 +7471,7 @@ def L10_C3_B6_VD036_MC_P_02(socau, dang=1):
         nh = _ba_nhieu(dap, [_m(x, 1) for x in sai], buoc=lambda t: _m(BC + 1.3 * t, 1))
         de = _de_ho_tron(A, AB, AC) + r" Khoảng cách $BC$ (làm tròn đến hàng phần mười) là"
         cau += MC_SA_answer_const(de, dap[1:-1], [x[1:-1] for x in nh], _giai_ho_bc(A, AB, AC, BC),
-                                  _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, dang)
+                                  _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True), 0, dang)
     return cau
 
 
@@ -7473,7 +7506,7 @@ def L10_C3_B6_VD036_MC_Q_02(socau, dang=1):
         de = _de_ho_tron(A, AB, AC) + r" Đường kính của hồ nước (làm tròn đến hàng đơn vị) là"
         cau += MC_SA_answer_const(de, dap[1:-1], [x[1:-1] for x in nh],
                                   _giai_ho_bc(A, AB, AC, BC) + "\\\\\n" + _giai_ho_d(A, BC, d),
-                                  _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, dang)
+                                  _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True), 0, dang)
     return cau
 
 
@@ -7497,7 +7530,7 @@ def L10_C3_B6_VD036_SA_R_01(socau, dang=2):
             dap = _so(BC, 1)
             de = _de_ho_tron(A, AB, AC) + r" Tính khoảng cách $BC$ (đơn vị mét, làm tròn đến hàng phần mười)."
             giai = _giai_ho_bc(A, AB, AC, BC)
-            hinh = _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True)
+            hinh = _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True)
         cau += MC_SA_answer_const(de, dap, [dap + "1", "1" + dap, "2" + dap], giai, hinh, 0, dang)
     return cau
 
@@ -7519,7 +7552,7 @@ def L10_C3_B6_VD036_SA_S_01(socau, dang=2):
             dap = _so(d)
             de = _de_ho_tron(A, AB, AC) + r" Tính đường kính của hồ nước (đơn vị mét, làm tròn đến hàng đơn vị)."
             giai = _giai_ho_bc(A, AB, AC, BC) + "\\\\\n" + _giai_ho_d(A, BC, d)
-            hinh = _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True)
+            hinh = _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True)
         cau += MC_SA_answer_const(de, dap, [dap + "1", "1" + dap, "2" + dap], giai, hinh, 0, dang)
     return cau
 
@@ -7555,7 +7588,7 @@ def L10_C3_B6_VD036_TL_K_02(socau, dong=1):
                r"BC \approx %s\,\text{m}" % _x1(BC, 1), _giai_ho_bc(A, AB, AC, BC)),
               (r"Tính đường kính của hồ nước (làm tròn đến hàng đơn vị, đơn vị mét).",
                r"d \approx %d\,\text{m}" % _lt(d), _giai_ho_d(A, BC, d))]
-        cau += TL_answer_text(_de_ho_tron(A, AB, AC), ds, _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, dong)
+        cau += TL_answer_text(_de_ho_tron(A, AB, AC), ds, _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True), 0, dong)
     return cau
 
 
@@ -8662,7 +8695,7 @@ def L10_C3_TF_O_02(socau, socot=1):
         # --- Bổ sung 01/10/2026 (cô Lan): ý nào cũng ít nhất 3 phát biểu đúng, 3 phát biểu sai ---
         _tf_them(y1, [(r"$AC^{2} = AB^{2} + BC^{2} - 2\cdot AB\cdot BC\cdot\cos\widehat{ABC}$", ly_a)],
                  [(r"$AC^{2} = AB^{2} + BC^{2} - 2\cdot AB\cdot BC\cdot\cos %s$" % g, ly_a)])
-        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem(_goc_ve_ho(A), "ABC", ho=True), 0, socot)
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_duong_tron_ba_diem(_goc_ve_ho(A, AB, AC), "ABC", ho=True), 0, socot)
     return cau
 
 
@@ -12706,12 +12739,19 @@ def _goc_tam_giac(doi, k1, k2):
     return math.degrees(math.acos((k1 * k1 + k2 * k2 - doi * doi) / (2 * k1 * k2)))
 
 
-def _bo_cong_troi():
+def _bo_cong_troi(ph="BD"):
     """(BC, CD, BD, AB, AD, S_BCD, S_ABD) - số đo THỰC TẾ đo trên Google Maps (BC = 15, CD = 20,
     BD = 20, AB = 11, AD = 10 km) chỉ xê dịch nhẹ (mỗi đoạn lệch tối đa 1 km) để đề vẫn đúng thực tế
-    (cô Lan 01/10/2026); hai tam giác không dẹt, tứ giác lồi."""
+    (cô Lan 01/10/2026); hai tam giác không dẹt, tứ giác lồi.
+
+    13/10/2026 (cô Lan): đường chéo được đo có thể là BD (ph = "BD", như trên) hoặc AC (ph = "AC").
+    Khung ABCD thật giữ nguyên, AC suy ra từ hình thật = 17,8 (làm tròn 18). Với ph = "AC" hàm trả về
+    các số theo VAI TRÒ (đỉnh A', B', C', D' = D, A, B, C thật; đường chéo B'D' = AC thật) để mọi
+    công thức bên dưới dùng lại nguyên; tên đỉnh thật được đổi lại bằng _dich_ten_ct(ph)."""
+    # (BC, CD, BD, AB, AD) theo vai trò:  BD -> thật;  AC -> (AB, BC, AC, DA, CD) thật = (11, 15, 18, 10, 20)
+    goc_so = (15, 20, 20, 11, 10) if ph == "BD" else (11, 15, 18, 10, 20)
     while True:
-        BC, CD, BD, AB, AD = [g + random.choice([-1, 0, 0, 1]) for g in (15, 20, 20, 11, 10)]
+        BC, CD, BD, AB, AD = [g + random.choice([-1, 0, 0, 1]) for g in goc_so]
         if not (BC + CD > BD + 2 and AB + AD > BD + 0.5 and abs(BC - CD) < BD and abs(AB - AD) < BD):
             continue
         tam_giac = [(BC, CD, BD), (AB, AD, BD)]
@@ -12773,6 +12813,84 @@ def _hinh_cong_troi(BC, CD, BD, AB, AD):
     return s + "\\end{tikzpicture}"
 
 
+_PH_CT = {"BD": {}, "AC": {"A": "D", "B": "A", "C": "B", "D": "C"}}
+
+
+def _dich_ten_ct(ph):
+    """Trả về hàm đổi TÊN ĐỈNH theo vai trò (A', B', C', D') về tên thật khi đường chéo đo là AC.
+    Chỉ đổi trong phần công thức giữa hai dấu $ (hoặc cả chuỗi nếu toan=True) nên không đụng chữ
+    ``Dân Hóa'', ``Diện tích''. Tên đoạn / tam giác viết theo thứ tự chữ cái (AD, ACD...); tên góc
+    giữ đỉnh ở giữa (BAC)."""
+    import re
+    ban_do = _PH_CT[ph]
+    mau = re.compile(r"\\widehat\{([A-D]+)\}|([A-D]+)")
+
+    def doi(m):
+        if m.group(1):
+            r = "".join(ban_do.get(c, c) for c in m.group(1))
+            if len(r) == 3:
+                a, b = sorted((r[0], r[2]))
+                r = a + r[1] + b
+            return "\\widehat{%s}" % r
+        r = "".join(ban_do.get(c, c) for c in m.group(2))
+        return "".join(sorted(r)) if len(r) > 1 else r
+
+    def dich(chuoi, toan=False):
+        if not ban_do:
+            return chuoi
+        if toan:
+            return mau.sub(doi, chuoi)
+        return re.sub(r"\$([^$]*)\$", lambda k: "$" + mau.sub(doi, k.group(1)) + "$", chuoi)
+    return dich
+
+
+def _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD):
+    """Hình vùng đất. ph = "BD": như cũ. ph = "AC": vẽ lại theo TÊN THẬT (đường chéo AC), các số
+    BC, CD, BD, AB, AD ở đây là số theo vai trò (xem _bo_cong_troi)."""
+    if ph == "BD":
+        return _hinh_cong_troi(BC, CD, BD, AB, AD)
+    # số đo thật: AB = BC(vt), BC = CD(vt), CD = AD(vt), DA = AB(vt), AC = BD(vt)
+    ab, bc, cd, da, ac = BC, CD, AD, AB, BD
+    x = (ab * ab + ac * ac - bc * bc) / (2 * ac)
+    B = (x, math.sqrt(ab * ab - x * x))
+    x = (da * da + ac * ac - cd * cd) / (2 * ac)
+    D = (x, -math.sqrt(da * da - x * x))
+    P = {"A": (0.0, 0.0), "B": B, "C": (float(ac), 0.0), "D": D}
+    if ((P["B"][0] - P["D"][0]) * (P["C"][1] - P["D"][1]) - (P["B"][1] - P["D"][1]) * (P["C"][0] - P["D"][0])) < 0:
+        P = {k: (v[0], -v[1]) for k, v in P.items()}
+    quay = math.radians(70) - math.atan2(P["B"][1] - P["D"][1], P["B"][0] - P["D"][0])
+    o = P["D"]
+    P = {k: ((v[0] - o[0]) * math.cos(quay) - (v[1] - o[1]) * math.sin(quay),
+             (v[0] - o[0]) * math.sin(quay) + (v[1] - o[1]) * math.cos(quay)) for k, v in P.items()}
+    xs, ys = [p[0] for p in P.values()], [p[1] for p in P.values()]
+    k = 3.6 / max(max(xs) - min(xs), max(ys) - min(ys))
+    P = {t: (p[0] * k, p[1] * k) for t, p in P.items()}
+    cx = sum(p[0] for p in P.values()) / 4
+    cy = sum(p[1] for p in P.values()) / 4
+
+    def nhan_doan(u, v, phia=None):
+        (x1, y1), (x2, y2) = P[u], P[v]
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+        nx, ny = -(y2 - y1), x2 - x1
+        dai = math.hypot(nx, ny) or 1
+        nx, ny = nx / dai, ny / dai
+        tx, ty = (P[phia] if phia else (cx, cy))
+        if (nx * (tx - mx) + ny * (ty - my) > 0) != bool(phia):
+            nx, ny = -nx, -ny
+        return mx + 0.32 * nx, my + 0.32 * ny
+    q = P["A"] + P["B"] + P["C"] + P["D"]
+    s = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s += "\\fill[green!12] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- cycle;\n" % q
+    s += "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- cycle;\n" % q
+    s += "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (P["A"] + P["C"])
+    for t, vt in zip("ABCD", ("right", "above right", "above left", "below")):
+        s += "\\fill (%.2f,%.2f) circle (0.06) node[%s] {$%s$};\n" % (P[t] + (vt, t))
+    for (u, v), d, phia in ((("B", "C"), bc, None), (("C", "D"), cd, None), (("A", "C"), ac, "D"),
+                            (("A", "B"), ab, None), (("A", "D"), da, None)):
+        s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ km};\n" % (nhan_doan(u, v, phia) + (d,))
+    return s + "\\end{tikzpicture}"
+
+
 def _giai_heron(ten, a, b, c, S):
     p = (a + b + c) / 2
     return (r"Tam giác $%s$ có nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %s$, nên "
@@ -12791,9 +12909,12 @@ def L10_C3_TF_I_01(socau, socot=1):
     """
     cau = ""
     for _ in range(socau):
-        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        ph = random.choice(["BD", "AC"])        # đường chéo được đo: BD hoặc AC (cô Lan 13/10/2026)
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi(ph)
+        _tn = _dich_ten_ct(ph)
+        _tl = lambda ds: [(_tn(a), _tn(b)) for a, b in ds]
         S = S1 + S2
-        debai = _DOAN_CONG_TROI + r" Với $S_{ABD}$ là diện tích của tam giác $ABD$. Xét tính đúng, sai của các mệnh đề sau."
+        debai = _DOAN_CONG_TROI + _tn(r" Với $S_{ABD}$ là diện tích của tam giác $ABD$. Xét tính đúng, sai của các mệnh đề sau.")
         # a) NB - nhận ra hệ quả định lí côsin trong tam giác BCD
         ly_a = r"Hệ quả định lí côsin: côsin của một góc bằng tổng bình phương hai cạnh kề trừ bình phương cạnh đối, chia cho hai lần tích hai cạnh kề."
         F = r"$\cos\widehat{%s} = \dfrac{%s^{2} + %s^{2} - %s^{2}}{%s\cdot %s\cdot %s}$"
@@ -12802,30 +12923,31 @@ def L10_C3_TF_I_01(socau, socot=1):
             dung.append((F % (g, k1, k2, d_, "2", k1, k2), ly_a))
             sai += [(F % (g, k1, k2, d_, "1", k1, k2), ly_a), (F % (g, k1, d_, k2, "2", k1, d_), ly_a),
                     (F % (g, k1, k2, d_, "2", k1, d_), ly_a)]
-        y1 = _phat_bieu([(t.replace(r"{1\cdot ", "{"), l) for t, l in dung], [(t.replace(r"{1\cdot ", "{"), l) for t, l in sai])
+        y1 = _phat_bieu(_tl([(t.replace(r"{1\cdot ", "{"), l) for t, l in dung]),
+                        _tl([(t.replace(r"{1\cdot ", "{"), l) for t, l in sai]))
         # b) TH - định lí sin trong tam giác ABD (cạnh đối diện góc)
         ly_b = (r"Định lí sin trong tam giác $ABD$: cạnh $AD$ đối diện góc $\widehat{ABD}$, cạnh $AB$ đối diện góc "
                 r"$\widehat{ADB}$, cạnh $BD$ đối diện góc $\widehat{BAD}$.")
         G = r"$\dfrac{%s}{\sin\widehat{%s}} = \dfrac{%s}{\sin\widehat{%s}}$"
         y2 = _phat_bieu(
-            [(G % ("AD", "ABD", "AB", "ADB"), ly_b), (G % ("BD", "BAD", "AD", "ABD"), ly_b), (G % ("AB", "ADB", "BD", "BAD"), ly_b)],
-            [(G % ("AD", "ADB", "AB", "ABD"), ly_b), (G % ("AD", "ABD", "BD", "ADB"), ly_b), (G % ("BD", "ABD", "AD", "BAD"), ly_b),
-             (G % ("AB", "ABD", "BD", "BAD"), ly_b)])
+            _tl([(G % ("AD", "ABD", "AB", "ADB"), ly_b), (G % ("BD", "BAD", "AD", "ABD"), ly_b), (G % ("AB", "ADB", "BD", "BAD"), ly_b)]),
+            _tl([(G % ("AD", "ADB", "AB", "ABD"), ly_b), (G % ("AD", "ABD", "BD", "ADB"), ly_b), (G % ("BD", "ABD", "AD", "BAD"), ly_b),
+                 (G % ("AB", "ABD", "BD", "BAD"), ly_b)]))
         # c) VD - suy ra sin của góc từ công thức diện tích
         ly_c = (r"$S_{ABD} = \dfrac{1}{2}AB\cdot BD\cdot\sin\widehat{ABD} = \dfrac{1}{2}AD\cdot BD\cdot\sin\widehat{ADB} = "
                 r"\dfrac{1}{2}AB\cdot AD\cdot\sin\widehat{BAD}$ (góc kẹp giữa hai cạnh).")
         H = r"$\sin\widehat{%s} = \dfrac{%sS_{ABD}}{%s\cdot %s}$"
         y3 = _phat_bieu(
-            [(H % ("ABD", "2", "AB", "BD"), ly_c), (H % ("ADB", "2", "AD", "BD"), ly_c), (H % ("BAD", "2", "AB", "AD"), ly_c)],
-            [(H % ("ABD", "", "AB", "BD"), ly_c), (H % ("ABD", "2", "AD", "BD"), ly_c), (H % ("ADB", "2", "AB", "BD"), ly_c),
-             (H % ("BAD", "", "AB", "AD"), ly_c), (H % ("BAD", "2", "AB", "BD"), ly_c)])
+            _tl([(H % ("ABD", "2", "AB", "BD"), ly_c), (H % ("ADB", "2", "AD", "BD"), ly_c), (H % ("BAD", "2", "AB", "AD"), ly_c)]),
+            _tl([(H % ("ABD", "", "AB", "BD"), ly_c), (H % ("ABD", "2", "AD", "BD"), ly_c), (H % ("ADB", "2", "AB", "BD"), ly_c),
+                 (H % ("BAD", "", "AB", "AD"), ly_c), (H % ("BAD", "2", "AB", "BD"), ly_c)]))
         # d) VDC - ước lượng diện tích: Heron hai lần rồi cộng
-        ly_d = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\ " + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\ "
-                r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD}$.")
+        ly_d = _tn(_giai_heron("BCD", BC, CD, BD, S1) + "\\\\ " + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\ "
+                   r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD}$.")
         y4 = _tf_gop(_tf_so(r"Ước lượng diện tích của xã Dân Hóa cũ là $%s$", S, 0, ly_d,
-                            [(S1, "Chỉ tính tam giác $BCD$"), (S2, "Chỉ tính tam giác $ABD$"), (2 * S, "Nhân thừa 2")],
+                            [(S1, _tn("Chỉ tính tam giác $BCD$")), (S2, _tn("Chỉ tính tam giác $ABD$")), (2 * S, "Nhân thừa 2")],
                             dv=r"\,\text{km}^{2}", bdt=r"Diện tích của xã Dân Hóa cũ %s $%s$"))
-        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_cong_troi(BC, CD, BD, AB, AD), 0, socot)
+        cau += TF_baitoan_du(debai, [y1, y2, y3, y4], _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD), 0, socot)
     return cau
 
 
@@ -12837,15 +12959,17 @@ def L10_C3_B6_VD036_MC_J_01(socau, dang=1):
     """
     cau = ""
     for _ in range(socau):
-        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        ph = random.choice(["BD", "AC"])
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi(ph)
+        _tn = _dich_ten_ct(ph)
         dap = str(_lt(S1 + S2))
         nhieu = _ba_nhieu(dap, [str(_lt(S1)), str(_lt(S2)), str(_lt(2 * (S1 + S2)))],
                           buoc=lambda t: str(_lt(S1 + S2) + 4 * t))
         debai = (_DOAN_CONG_TROI + r" Ước lượng diện tích của xã Dân Hóa cũ (làm tròn đến hàng đơn vị, đơn vị "
                  r"$\text{km}^{2}$) là")
-        giai = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
-                r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
-        cau += MC_SA_answer_const(debai, dap, nhieu, giai, _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dang)
+        giai = _tn(_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
+                   r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD), 0, dang)
     return cau
 
 
@@ -12857,17 +12981,19 @@ def L10_C3_B6_VD036_SA_L_01(socau, dang=2):
     cau = ""
     so = 0
     while so < socau:
-        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        ph = random.choice(["BD", "AC"])
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi(ph)
+        _tn = _dich_ten_ct(ph)
         dap = str(_lt(S1 + S2))
         if len(dap) > 4:
             continue
         so += 1
         debai = (_DOAN_CONG_TROI + r" Ước lượng diện tích của xã Dân Hóa cũ (đơn vị $\text{km}^{2}$, làm tròn đến "
                  r"hàng đơn vị).")
-        giai = (_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
-                r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
+        giai = _tn(_giai_heron("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron("ABD", AB, AD, BD, S2) + "\\\\\n"
+                   r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %s\,\text{km}^{2}$." % dap)
         cau += MC_SA_answer_const(debai, dap, [str(int(dap) + k) for k in (1, -1, 2)], giai,
-                                  _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dang)
+                                  _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD), 0, dang)
     return cau
 
 
@@ -12880,20 +13006,546 @@ def L10_C3_B6_VD036_TL_I_01(socau, dong=1):
     """
     cau = ""
     for _ in range(socau):
-        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi()
+        ph = random.choice(["BD", "AC"])
+        BC, CD, BD, AB, AD, S1, S2 = _bo_cong_troi(ph)
+        _tn = _dich_ten_ct(ph)
         if random.random() < 0.5:
             ten, ba, Sa, ten2, ba2, Sb = "BCD", (BC, CD, BD), S1, "ABD", (AB, AD, BD), S2
         else:
             ten, ba, Sa, ten2, ba2, Sb = "ABD", (AB, AD, BD), S2, "BCD", (BC, CD, BD), S1
-        ds = [(r"Tính diện tích tam giác $%s$ (làm tròn đến hàng phần mười, đơn vị $\text{km}^{2}$)." % ten,
-               r"S_{%s} \approx %s\,\text{km}^{2}" % (ten, _x1(Sa)), _giai_heron(ten, *ba, Sa)),
+        ds = [(_tn(r"Tính diện tích tam giác $%s$ (làm tròn đến hàng phần mười, đơn vị $\text{km}^{2}$)." % ten),
+               _tn(r"S_{%s} \approx %s\,\text{km}^{2}" % (ten, _x1(Sa)), True), _tn(_giai_heron(ten, *ba, Sa))),
               (r"Ước lượng diện tích của xã Dân Hóa cũ (làm tròn đến hàng đơn vị, đơn vị $\text{km}^{2}$).",
                r"S \approx %d\,\text{km}^{2}" % _lt(S1 + S2),
-               _giai_heron(ten2, *ba2, Sb) + "\\\\ " +
-               r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD} \approx %s \approx %d\,\text{km}^{2}$."
-               % (_xx(S1 + S2, 2), _lt(S1 + S2)))]
-        cau += TL_answer_text(_DOAN_CONG_TROI, ds, _hinh_cong_troi(BC, CD, BD, AB, AD), 0, dong)
+               _tn(_giai_heron(ten2, *ba2, Sb) + "\\\\ " +
+                   r"Diện tích xã Dân Hóa cũ khoảng $S_{BCD} + S_{ABD} \approx %s \approx %d\,\text{km}^{2}$."
+                   % (_xx(S1 + S2, 2), _lt(S1 + S2))))]
+        cau += TL_answer_text(_DOAN_CONG_TROI, ds, _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD), 0, dong)
     return cau
+
+
+# =====================================================================================================
+# BÀI TOÁN THỰC TIỄN GẮN VỚI ĐƯỜNG TRƯỜNG SƠN (cô Lan 13/10/2026)
+# Năm bối cảnh là NĂM BIẾN THỂ _01.._05 của CÙNG một dạng (cùng ID): chọn ID đó thì mỗi đề chỉ ra MỘT bối cảnh.
+#   _01 trạm bơm tiếp sức vượt đèo (tam giác vuông)          _02 bản đồ cố ý dịch vị trí >= 10 km (côsin, sin)
+#   _03 tổ khảo sát đi theo phương vị (côsin, sin)           _04 kéo ống vòng sau trận đánh phá (côsin)
+#   _05 rừng cháy sau trận B-52 ở suối Ra Vơ (Heron, đường cao)
+# Mỗi bối cảnh có hai câu hỏi: ý a) mức VD, ý b) mức VDC (đúng quy ước câu tự luận một đơn vị mức VD):
+#   TL_N: ý a) + ý b);  MC_U / SA_W: hỏi như ý a) (VD);  MC_V / SA_X: hỏi như ý b) (VDC, muc_do_dang = VDC).
+# Số liệu LẤY TỪ BÁO CHÍ chỉ có ở phần dẫn (tuyến ống 6/1968-2/1975, đèo Mụ Giạ 700 m, bản đồ 1:500 000 dịch >= 10 km,
+# trận B-52 ngày 6/9/1969 ở suối Ra Vơ, tổ khảo sát "cắt rừng theo phương vị"); mọi số đo trong đề là GIẢ SỬ.
+# Hình vẽ TikZ theo đúng số liệu của từng đề; đề không có dữ kiện góc đo bằng Google Maps.
+# =====================================================================================================
+
+# Phần dẫn chung (số liệu và lời nói có nguồn, cô Lan 13/10/2026): câu "huyền thoại trong huyền thoại" là lời Tư lệnh
+# Đồng Sỹ Nguyên (VINPA - Hiệp hội Xăng dầu Việt Nam, bài "Đường ống xăng dầu Trường Sơn - một dòng sông mang lửa");
+# "hàng trăm cán bộ, chiến sĩ đã ngã xuống", xăng dầu phục vụ Chiến dịch Hồ Chí Minh: cùng bài; đường Trường Sơn
+# gần 20 000 km, 1959-1975, "một trong những nhân tố chiến lược có ý nghĩa quyết định" (Đại tướng Võ Nguyên Giáp):
+# Báo Pháp Luật Việt Nam 18/5/2009. Chỉ chữ trong phần dẫn, không phải dữ kiện để tính.
+_TS_DAN_ONG = (r"Đường Trường Sơn được mệnh danh là con đường huyền thoại; còn đường ống xăng dầu Trường Sơn, theo lời "
+               r"Trung tướng Đồng Sỹ Nguyên, là ``huyền thoại trong huyền thoại''. Từ cuối năm 1968 đến năm 1975, dòng xăng dầu "
+               r"chảy qua rừng già, đèo cao, giữa bom đạn để đưa nhiên liệu vào chiến trường miền Nam, phục vụ cả Chiến dịch "
+               r"Hồ Chí Minh năm 1975; hàng trăm cán bộ, chiến sĩ đã ngã xuống trên tuyến ống ấy. Hôm nay, ngồi trong lớp học "
+               r"yên bình, chúng ta biết ơn những người đã hy sinh để có hoà bình, độc lập và thống nhất. ")
+_TS_DAN_DUONG = (r"Đường Trường Sơn dài gần $20\,000$ km, được mở và giữ vững suốt $16$ năm (1959-1975), được mệnh danh là con "
+                 r"đường huyền thoại; Đại tướng Võ Nguyên Giáp coi đây là một trong những nhân tố chiến lược có ý nghĩa quyết "
+                 r"định đưa cuộc kháng chiến đến thắng lợi. Biết bao cán bộ, chiến sĩ đã ngã xuống để con đường ấy thông suốt. "
+                 r"Hôm nay, ngồi trong lớp học yên bình, chúng ta biết ơn những người đã hy sinh để có hoà bình, độc lập và "
+                 r"thống nhất. ")
+
+
+def _ts_hinh_bom(H, al):
+    k = 7.0
+    y = k * math.tan(math.radians(al))
+    s = "\\begin{tikzpicture}[scale=0.8,font=\\footnotesize,line join=round]\n"
+    s += "\\draw[thick] (0,0) -- (%.2f,0) -- (%.2f,%.2f) -- cycle;\n" % (k, k, y)
+    for i in range(6):
+        x0, y0, x1, y1 = k * i / 6, y * i / 6, k * (i + 1) / 6, y * (i + 1) / 6
+        s += "\\draw[gray,dashed] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f);\n" % (x0, y0, x1, y0, x1, y1)
+    s += "\\draw (%.2f,0) -- (%.2f,0.3) -- (%.2f,0.3);\n" % (k - 0.3, k - 0.3, k)
+    s += "\\draw (1.5,0) arc (0:%.2f:1.5);\n" % al
+    s += "\\node at (%.2f,%.2f) {$%s$};\n" % (2.1 * math.cos(math.radians(al / 2)), 2.1 * math.sin(math.radians(al / 2)), _goc(al))
+    s += "\\fill (0,0) circle (0.06) node[left] {$A$};\n"
+    s += "\\fill (%.2f,0) circle (0.06) node[below] {$B$};\n" % k
+    s += "\\fill (%.2f,%.2f) circle (0.06) node[above] {$C$};\n" % (k, y)
+    s += "\\node[right] at (%.2f,%.2f) {$BC = %d$ m};\n" % (k, y / 2, H)
+    s += "\\node[gray,font=\\scriptsize] at (%.2f,-0.6) {nét đứt: sơ đồ bậc thang (minh hoạ)};\n" % (k / 2)
+    return s + "\\end{tikzpicture}"
+
+
+def _ts_bom():
+    """Trạm bơm tiếp sức: a) số trạm bơm tối thiểu; b) độ dài tối thiểu của ống bám sườn dốc AC."""
+    while True:
+        H = random.randrange(600, 801, 20)
+        al = random.randint(14, 22)
+        h = random.choice([100, 110, 120])
+        if H % h == 0:
+            continue
+        AC = H / _sin_d(al)
+        if _xa_bien(AC, 0) and len(str(_lt(AC))) <= 4:
+            break
+    n = -(-H // h)
+    intro = (_TS_DAN_ONG + r"Tuyến ống phải vượt nhiều đèo cao. Một máy bơm không đủ sức "
+             r"đẩy xăng một mạch lên đỉnh cao, nên bộ đội đặt các trạm bơm tiếp sức: ống đi lên một đoạn, rẽ ngang theo sườn núi "
+             r"để giảm áp lực, vào trạm bơm rồi mới đi lên tiếp, tạo thành hình bậc thang. Bằng trí tuệ và sức người, các chiến sĩ "
+             r"đã đưa dòng xăng vượt qua những ngọn núi tưởng chừng không thể. Giả sử mỗi trạm bơm chỉ đẩy được xăng lên cao thêm "
+             r"tối đa $%d$ m. Để đơn giản, ta bỏ qua các đoạn ống đi ngang và coi ống bám thẳng theo sườn dốc từ chân dốc $A$ lên "
+             r"đỉnh $C$ của một ngọn núi cao $%d$ m so với chân dốc ($BC = %d$ m, $B$ là hình chiếu của $C$ trên mặt phẳng ngang "
+             r"qua $A$), sườn núi nghiêng $%s$ so với mặt phẳng ngang (hình vẽ)." % (h, H, H, _goc(al)))
+    ga = (r"Mỗi trạm bơm đẩy xăng lên cao thêm tối đa $%d$ m nên cần $\dfrac{%d}{%d} \approx %s$ trạm; số trạm là số nguyên nên "
+          r"cần ít nhất $%d$ trạm bơm (với $%d$ trạm chỉ đẩy lên được tối đa $%d$ m, nhỏ hơn $%d$ m)."
+          % (h, H, h, _xx(H / h, 2), n, n - 1, (n - 1) * h, H))
+    gb = (r"Trong tam giác $ABC$ vuông tại $B$: $\sin\widehat{BAC} = \dfrac{BC}{AC}$, suy ra "
+          r"$AC = \dfrac{BC}{\sin %s} = \dfrac{%d}{\sin %s} \approx %d$ m. Đây là độ dài \textbf{tối thiểu}, vì thực tế ống còn "
+          r"có các đoạn đi ngang theo hình bậc thang." % (_goc(al), H, _goc(al), _lt(AC)))
+    return {
+        "intro": intro, "fig": _ts_hinh_bom(H, al),
+        "hoi": {"a": r"Cần ít nhất bao nhiêu trạm bơm để đưa xăng từ chân dốc lên đỉnh?",
+                "b": r"Tính độ dài tối thiểu của đoạn ống $AC$ (đơn vị mét, làm tròn đến hàng đơn vị)."},
+        "v": {"a": n, "b": AC}, "n": {"a": 0, "b": 0}, "buoc": {"a": 1, "b": 37},
+        "sai": {"a": [n - 1, n + 1, n + 2, round(H / h)], "b": [H * _sin_d(al), H / _sin_d(90 - al), H / math.tan(math.radians(al)), H * math.tan(math.radians(al))]},
+        "ga": ga, "gb": gb,
+        "ya": r"%d \text{ trạm}" % n, "yb": r"AC \approx %d\,\text{m}" % _lt(AC),
+    }
+
+
+def _ts_hinh_ban_do(d, th):
+    k = 5.0 / d
+    kx = d * k
+    p = (kx - 10 * k * math.cos(math.radians(th)), 10 * k * math.sin(math.radians(th)))
+    a0 = 180 - th
+    s = "\\begin{tikzpicture}[scale=0.9,font=\\footnotesize,line join=round]\n"
+    s += "\\draw[very thick] (0,0) -- (%.2f,0);\n" % kx
+    s += "\\draw[very thick] (%.2f,0) -- (%.2f,%.2f);\n" % (kx, p[0], p[1])
+    s += "\\draw[red!70!black,dashed,thick] (0,0) -- (%.2f,%.2f);\n" % p
+    s += "\\draw (%.2f,%.2f) arc (%d:180:0.8);\n" % (kx + 0.8 * math.cos(math.radians(a0)), 0.8 * math.sin(math.radians(a0)), a0)
+    s += "\\node at (%.2f,%.2f) {$%s$};\n" % (kx + 1.15 * math.cos(math.radians(a0 + th / 2)), 1.15 * math.sin(math.radians(a0 + th / 2)), _goc(th))
+    s += "\\fill (0,0) circle (0.06) node[left] {$O$ (sở chỉ huy)};\n"
+    s += "\\fill (%.2f,0) circle (0.06) node[below right] {$K$ (kho thật)};\n" % kx
+    s += "\\fill (%.2f,%.2f) circle (0.06) node[above] {$K'$ (trên bản đồ)};\n" % p
+    s += "\\node[below] at (%.2f,0) {$%d$ km};\n" % (kx / 2, d)
+    s += "\\node[right] at (%.2f,%.2f) {$10$ km};\n" % ((kx + p[0]) / 2 + 0.05, p[1] / 2)
+    return s + "\\end{tikzpicture}"
+
+
+def _ts_ban_do():
+    """Bản đồ cố ý dịch vị trí >= 10 km: a) OK' (định lí côsin); b) góc KOK' (định lí sin)."""
+    while True:
+        d = random.randint(18, 32)
+        th = random.randint(50, 130)
+        OK2 = d * d + 100 - 20 * d * math.cos(math.radians(th))
+        OKp = math.sqrt(OK2)
+        goc = math.degrees(math.asin(10 * _sin_d(th) / OKp))
+        if OKp > 10 and _xa_bien(OKp, 1) and _xa_bien(goc, 0) and len(_so(OKp, 1)) <= 4:
+            break
+    intro = (_TS_DAN_DUONG + r"Đầu năm 1969, bản đồ tác chiến đường Trường Sơn được vẽ ở tỉ lệ $1:500\,000$. Để phòng bản đồ lọt vào tay địch, "
+             r"cấp trên yêu cầu cố ý dịch vị trí các đơn vị đi ít nhất $10$ km rồi mới nộp. Một nét bút lệch có chủ ý có thể "
+             r"cứu cả một kho hàng khỏi bom đạn. Giả sử một kho xăng thật ở điểm $K$ cách sở chỉ huy $O$ một khoảng $OK = %d$ km; "
+             r"trên bản đồ nộp lên, kho được ghi ở điểm $K'$ với $KK' = 10$ km và $\widehat{OKK'} = %s$ (hình vẽ)."
+             % (d, _goc(th)))
+    ga = (r"Trong tam giác $OKK'$, theo định lí côsin: $OK'^{2} = OK^{2} + KK'^{2} - 2 \cdot OK \cdot KK' \cdot \cos\widehat{OKK'} "
+          r"= %d^{2} + 10^{2} - 2 \cdot %d \cdot 10 \cdot \cos %s \approx %s$, nên $OK' \approx %s$ km."
+          % (d, d, _goc(th), _xx(OK2, 2), _x1(OKp, 1)))
+    gb = (ga + "\\\\\n" + r"Theo định lí sin: $\dfrac{KK'}{\sin\widehat{KOK'}} = \dfrac{OK'}{\sin\widehat{OKK'}}$, suy ra "
+          r"$\sin\widehat{KOK'} = \dfrac{10 \cdot \sin %s}{OK'} \approx %s$, nên $\widehat{KOK'} \approx %d^{\circ}$ "
+          r"(góc nhọn vì $KK' < OK$)." % (_goc(th), _xx(10 * _sin_d(th) / OKp, 3), _lt(goc)))
+    gp = 180 - th - goc
+    return {
+        "intro": intro, "fig": _ts_hinh_ban_do(d, th),
+        "hoi": {"a": r"Tính khoảng cách $OK'$ từ sở chỉ huy đến vị trí ghi trên bản đồ (đơn vị ki-lô-mét, làm tròn đến hàng phần mười).",
+                "b": r"Nhìn từ $O$, hướng đến kho ghi trên bản đồ lệch so với hướng đến kho thật một góc $\widehat{KOK'}$ bằng bao nhiêu "
+                     r"độ (làm tròn đến hàng đơn vị)?"},
+        "v": {"a": OKp, "b": goc}, "n": {"a": 1, "b": 0}, "buoc": {"a": 0.7, "b": 3},
+        "sai": {"a": [math.sqrt(d * d + 100), d + 10, math.sqrt(d * d + 100 + 20 * d * math.cos(math.radians(th))), math.sqrt(abs(d * d - 100))],
+                "b": [gp, 180 - th, math.degrees(math.asin(10 * _sin_d(th) / d)), math.degrees(math.atan(10 * _sin_d(th) / d))]},
+        "ga": ga, "gb": gb,
+        "ya": r"OK' \approx %s\,\text{km}" % _x1(OKp, 1), "yb": r"\widehat{KOK'} \approx %d^{\circ}" % _lt(goc),
+    }
+
+
+def _ts_hinh_phuong_vi(d1, d2, a1, a2):
+    B = (d1 * math.sin(math.radians(a1)), d1 * math.cos(math.radians(a1)))
+    C = (B[0] + d2 * math.sin(math.radians(a2)), B[1] + d2 * math.cos(math.radians(a2)))
+    xs, ys = [0, B[0], C[0]], [0, B[1], C[1]]
+    k = 3.6 / max(max(xs) - min(xs), max(ys) - min(ys))
+    B, C = (B[0] * k, B[1] * k), (C[0] * k, C[1] * k)
+    r = 0.75
+
+    def cung(P, a, ten):
+        m = math.radians(90 - a / 2)
+        return ("\\draw[->] (%.2f,%.2f) arc (90:%.1f:%.2f);\n" % (P[0], P[1] + r, 90 - a, r)
+                + "\\node at (%.2f,%.2f) {$%s$};\n" % (P[0] + (r + 0.38) * math.cos(m), P[1] + (r + 0.38) * math.sin(m), ten))
+    s = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s += "\\draw[dashed,gray] (0,0) -- (0,1.35) node[above] {Bắc};\n"
+    s += "\\draw[dashed,gray] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (B[0], B[1], B[0], B[1] + 1.35)
+    s += "\\draw[very thick,blue!60!black] (0,0) -- (%.2f,%.2f) -- (%.2f,%.2f);\n" % (B + C)
+    s += "\\draw[dashed,red!70!black,thick] (0,0) -- (%.2f,%.2f);\n" % C
+    s += cung((0, 0), a1, _goc(a1)) + cung(B, a2, _goc(a2))
+    s += "\\fill (0,0) circle (0.06) node[below] {$A$};\n"
+    s += "\\fill (%.2f,%.2f) circle (0.06) node[above left] {$B$};\n" % B
+    s += "\\fill (%.2f,%.2f) circle (0.06) node[right] {$C$};\n" % C
+    # nhãn độ dài: AB nằm bên phải đoạn AB (trong tam giác), BC nằm phía ngoài (xa A)
+    n1 = (math.cos(math.radians(a1)), -math.sin(math.radians(a1)))
+    m2 = ((B[0] + C[0]) / 2, (B[1] + C[1]) / 2)
+    n2 = (math.cos(math.radians(a2)), -math.sin(math.radians(a2)))
+    if n2[0] * (0 - m2[0]) + n2[1] * (0 - m2[1]) > 0:
+        n2 = (-n2[0], -n2[1])
+    s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ km};\n" % (B[0] / 2 + 0.3 * n1[0], B[1] / 2 + 0.3 * n1[1], d1)
+    s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ km};\n" % (m2[0] + 0.32 * n2[0], m2[1] + 0.32 * n2[1], d2)
+    return s + "\\end{tikzpicture}"
+
+
+def _ts_phuong_vi():
+    """Tổ khảo sát đi theo phương vị: a) khoảng cách AC (côsin); b) phương vị của AC (sin/côsin)."""
+    while True:
+        a1 = random.randint(20, 70)
+        de = random.randint(40, 110)
+        a2 = a1 + de
+        d1, d2 = random.randint(4, 9), random.randint(4, 9)
+        AC2 = d1 * d1 + d2 * d2 + 2 * d1 * d2 * math.cos(math.radians(de))
+        AC = math.sqrt(AC2)
+        gam = math.degrees(math.acos((d1 * d1 + AC2 - d2 * d2) / (2 * d1 * AC)))
+        pv = a1 + gam
+        if _xa_bien(AC, 1) and _xa_bien(pv, 0) and len(_so(AC, 1)) <= 4:
+            break
+    intro = (_TS_DAN_ONG + r"Để mở tuyến ống xăng dầu qua rừng núi Trường Sơn, các tổ khảo sát phải ``cắt rừng theo phương vị'' hoặc men theo "
+             r"dòng suối, vượt đỉnh núi theo đường phân thuỷ. Những người kỹ sư, chiến sĩ khảo sát đã băng rừng, vượt suối để "
+             r"tìm đường cho dòng xăng đi qua. \textit{Phương vị} của một hướng là số đo góc từ hướng Bắc quay thuận chiều kim "
+             r"đồng hồ đến hướng đó. Giả sử một tổ khảo sát xuất phát từ $A$, đi $%d$ km theo phương vị $%s$ đến $B$, rồi đổi "
+             r"hướng, đi tiếp $%d$ km theo phương vị $%s$ đến $C$ (hình vẽ)." % (d1, _goc(a1), d2, _goc(a2)))
+    ga = (r"Phương vị hướng $BA$ là $%d^{\circ} + 180^{\circ}$, phương vị hướng $BC$ là $%s$, nên "
+          r"$\widehat{ABC} = 180^{\circ} - (%d^{\circ} - %d^{\circ}) = %d^{\circ}$." "\\\\\n"
+          r"Theo định lí côsin: $AC^{2} = %d^{2} + %d^{2} - 2 \cdot %d \cdot %d \cdot \cos %d^{\circ} \approx %s$, nên $AC \approx %s$ km."
+          % (a1, _goc(a2), a2, a1, 180 - de, d1, d2, d1, d2, 180 - de, _xx(AC2, 2), _x1(AC, 1)))
+    gb = (ga + "\\\\\n" + r"Trong tam giác $ABC$: $\cos\widehat{BAC} = \dfrac{AB^{2} + AC^{2} - BC^{2}}{2 \cdot AB \cdot AC} "
+          r"= \dfrac{%d^{2} + %s^{2} - %d^{2}}{2 \cdot %d \cdot %s} \approx %s$, nên $\widehat{BAC} \approx %s^{\circ}$." "\\\\\n"
+          r"Điểm $C$ nằm bên phải hướng $AB$ (đổi hướng sang phải) nên phương vị của $AC$ là "
+          r"$%d^{\circ} + \widehat{BAC} \approx %d^{\circ}$."
+          % (d1, _x1(AC, 1), d2, d1, _x1(AC, 1), _xx(math.cos(math.radians(gam)), 3), _xx(gam, 1), a1, _lt(pv)))
+    ac_sai = math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * math.cos(math.radians(de)))
+    return {
+        "intro": intro, "fig": _ts_hinh_phuong_vi(d1, d2, a1, a2),
+        "hoi": {"a": r"Tính khoảng cách $AC$ từ điểm xuất phát đến điểm cuối (đơn vị ki-lô-mét, làm tròn đến hàng phần mười).",
+                "b": r"Để từ $A$ đi thẳng đến $C$ thì phải đi theo phương vị bao nhiêu độ (làm tròn đến hàng đơn vị)?"},
+        "v": {"a": AC, "b": pv}, "n": {"a": 1, "b": 0}, "buoc": {"a": 0.6, "b": 4},
+        "sai": {"a": [d1 + d2, ac_sai, math.sqrt(d1 * d1 + d2 * d2), abs(d1 - d2) + 1.5],
+                "b": [a1 - gam, a2 - gam, a1 + (180 - de - gam), a1 + 180 - gam]},
+        "ga": ga, "gb": gb,
+        "ya": r"AC \approx %s\,\text{km}" % _x1(AC, 1), "yb": r"\text{phương vị} \approx %d^{\circ}" % _lt(pv),
+    }
+
+
+def _ts_hinh_ong_vong(AC, CB, ang):
+    AB2 = AC * AC + CB * CB - 2 * AC * CB * math.cos(math.radians(ang))
+    AB = math.sqrt(AB2)
+    k = 7.2 / AB
+    cx = (AC * AC + AB2 - CB * CB) / (2 * AB) * k
+    cy = math.sqrt(max(AC * AC * k * k - cx * cx, 0))
+    s = "\\begin{tikzpicture}[scale=0.9,font=\\footnotesize,line join=round]\n"
+    s += "\\fill[red!15] (%.2f,0.1) ellipse (0.9 and 0.45);\n" % (3.6)
+    s += "\\node[red!60!black,font=\\scriptsize] at (3.6,0.5) {bãi bom};\n"
+    s += "\\draw[dashed] (0,0) -- (7.2,0);\n"
+    s += "\\draw[very thick,blue!60!black] (0,0) -- (%.2f,%.2f) -- (7.2,0);\n" % (cx, cy)
+    s += "\\fill (0,0) circle (0.05) node[left] {$A$};\\fill (7.2,0) circle (0.05) node[right] {$B$};\n"
+    s += "\\fill (%.2f,%.2f) circle (0.05) node[above] {$C$};\n" % (cx, cy)
+    s += "\\node[above left] at (%.2f,%.2f) {$%d$ m}; \\node[above right] at (%.2f,%.2f) {$%d$ m};\n" % (cx / 2, cy / 2, AC, (cx + 7.2) / 2, cy / 2, CB)
+    t1 = math.degrees(math.atan2(-cy, -cx))
+    t2 = math.degrees(math.atan2(-cy, 7.2 - cx))
+    tm = math.radians((t1 + t2) / 2)
+    s += "\\draw (%.2f,%.2f) arc (%.1f:%.1f:0.6);\n" % (cx + 0.6 * math.cos(math.radians(t1)), cy + 0.6 * math.sin(math.radians(t1)), t1, t2)
+    s += "\\node at (%.2f,%.2f) {$%s$};\n" % (cx + 1.0 * math.cos(tm), cy + 1.0 * math.sin(tm), _goc(ang))
+    return s + "\\end{tikzpicture}"
+
+
+def _ts_ong_vong():
+    """Kéo ống vòng qua bãi bom: a) khoảng cách thẳng AB (côsin); b) số mét ống phải kéo thêm."""
+    while True:
+        AC = random.randrange(400, 501, 10)
+        CB = random.randrange(480, 561, 10)
+        ang = random.randint(105, 130)
+        AB = math.sqrt(AC * AC + CB * CB - 2 * AC * CB * math.cos(math.radians(ang)))
+        if _xa_bien(AB, 0):
+            break
+    them = AC + CB - AB
+    intro = (_TS_DAN_ONG + r"Tuyến ống thường xuyên bị máy bay Mỹ đánh phá; có trận làm cháy rừng hàng trăm héc-ta, hư hại "
+             r"cả kho và đường ống (như trận B-52 ném bom khu vực suối Ra Vơ ngày $6/9/1969$). Dù bị đánh phá ác liệt, các chiến sĩ "
+             r"vẫn kiên cường nối lại từng đoạn ống để dòng xăng không bị gián đoạn. Giả sử đoạn ống thẳng từ trạm $A$ đến trạm $B$ "
+             r"bị phá hỏng, giữa đường còn bãi bom nổ chậm; bộ đội phải kéo ống mới vòng qua điểm $C$ ngoài bãi bom, với "
+             r"$AC = %d$ m, $CB = %d$ m và $\widehat{ACB} = %s$ (hình vẽ)." % (AC, CB, _goc(ang)))
+    ga = (r"Theo định lí côsin trong tam giác $ABC$: $AB^{2} = %d^{2} + %d^{2} - 2 \cdot %d \cdot %d \cdot \cos %s \approx %s$, "
+          r"nên $AB \approx %d$ m." % (AC, CB, AC, CB, _goc(ang), _xx(AB * AB, 0), _lt(AB)))
+    gb = (ga + "\\\\\n" + r"Đường vòng dài $AC + CB = %d + %d = %d$ m, nên phải kéo thêm $%d - %d = %d$ m ống so với đi thẳng."
+          % (AC, CB, AC + CB, AC + CB, _lt(AB), AC + CB - _lt(AB)))
+    return {
+        "intro": intro, "fig": _ts_hinh_ong_vong(AC, CB, ang),
+        "hoi": {"a": r"Tính khoảng cách thẳng $AB$ (đơn vị mét, làm tròn đến hàng đơn vị).",
+                "b": r"Đường vòng qua $C$ dài hơn đường thẳng từ $A$ đến $B$ bao nhiêu mét ống (làm tròn đến hàng đơn vị)?"},
+        "v": {"a": AB, "b": them}, "n": {"a": 0, "b": 0}, "buoc": {"a": 9, "b": 9},
+        "sai": {"a": [AC + CB, math.sqrt(AC * AC + CB * CB), math.sqrt(AC * AC + CB * CB + 2 * AC * CB * math.cos(math.radians(ang))), AB * AB],
+                "b": [AB, AC + CB, AC + CB - math.sqrt(AC * AC + CB * CB), abs(AC - CB)]},
+        "ga": ga, "gb": gb,
+        "ya": r"AB \approx %d\,\text{m}" % _lt(AB), "yb": r"%d\,\text{m}" % (AC + CB - _lt(AB)),
+    }
+
+
+def _ts_hinh_rung_chay(a, b, c, S):
+    k = 4.8 / a
+    x = (a * a + c * c - b * b) / (2 * a) * k
+    y = math.sqrt(max(c * c * k * k - x * x, 0))
+    s = "\\begin{tikzpicture}[scale=0.9,font=\\footnotesize,line join=round]\n"
+    s += "\\fill[orange!25] (0,0) -- (%.2f,0) -- (%.2f,%.2f) -- cycle;\n" % (4.8, x, y)
+    s += "\\draw[very thick] (0,0) -- (%.2f,%.2f) -- (4.8,0);\n" % (x, y)
+    s += "\\draw[very thick,blue!60!black] (0,0) -- (4.8,0);\n"
+    s += "\\node[blue!60!black,font=\\scriptsize] at (2.4,-0.65) {đường ống $BC$};\n"
+    s += "\\fill (0,0) circle (0.05) node[below left] {$B$};\\fill (4.8,0) circle (0.05) node[below right] {$C$};\n"
+    s += "\\fill (%.2f,%.2f) circle (0.05) node[above] {$A$};\n" % (x, y)
+    s += "\\node at (%.2f,%.2f) {rừng cháy};\n" % ((x + 4.8) / 3, y / 3)
+    s += "\\node[left] at (%.2f,%.2f) {$%s$ km};\n" % (x / 2, y / 2, _xx(c, 1))
+    s += "\\node[right] at (%.2f,%.2f) {$%s$ km};\n" % ((x + 4.8) / 2, y / 2, _xx(b, 1))
+    s += "\\node[above] at (2.4,0) {$%s$ km};\n" % _xx(a, 1)
+    return s + "\\end{tikzpicture}"
+
+
+def _ts_rung_chay():
+    """Rừng cháy sau trận B-52: a) diện tích (Heron); b) đoạn đường ngắn nhất từ A đến đường ống BC (đường cao)."""
+    while True:
+        c = random.randint(18, 26) / 10
+        a = random.randint(20, 28) / 10
+        b = random.randint(24, 32) / 10
+        if not (a + b > c + 0.4 and a + c > b + 0.4 and b + c > a + 0.4):
+            continue
+        p = (a + b + c) / 2
+        S = math.sqrt(p * (p - a) * (p - b) * (p - c))
+        ha = 2 * S / a
+        if _xa_bien(S, 2) and _xa_bien(ha, 2) and S > 1.5:
+            break
+    intro = (_TS_DAN_ONG + r"Ngày $6/9/1969$, B-52 của Mỹ ném bom khu vực suối Ra Vơ, làm cháy rừng trên diện tích hàng trăm héc-ta và hư hại "
+             r"kho, đường ống xăng dầu nơi đây. Vậy mà các chiến sĩ vẫn kiên cường bám đường, giữ cho dòng xăng tiếp tục chảy. "
+             r"Giả sử vùng rừng cháy được khoanh là tam giác $ABC$ với $AB = %s$ km, $BC = %s$ km, $CA = %s$ km, trong đó cạnh $BC$ "
+             r"nằm dọc theo tuyến ống (hình vẽ)." % (_xx(c, 1), _xx(a, 1), _xx(b, 1)))
+    ga = (r"Nửa chu vi $p = \dfrac{%s + %s + %s}{2} = %s$ km. Theo công thức Heron: "
+          r"$S = \sqrt{%s \cdot %s \cdot %s \cdot %s} \approx %s\,\text{km}^{2}$."
+          % (_xx(c, 1), _xx(a, 1), _xx(b, 1), _xx(p, 2), _xx(p, 2), _xx(p - a, 2), _xx(p - b, 2), _xx(p - c, 2), _x1(S, 2)))
+    gb = (ga + "\\\\\n" + r"Đoạn đường ngắn nhất từ $A$ đến đường ống $BC$ là đường cao $h_a$ hạ từ $A$ xuống $BC$: "
+          r"$S = \dfrac{1}{2} \cdot BC \cdot h_a$, nên $h_a = \dfrac{2S}{BC} \approx \dfrac{2 \cdot %s}{%s} \approx %s$ km."
+          % (_x1(S, 2), _xx(a, 1), _x1(ha, 2)))
+    return {
+        "intro": intro, "fig": _ts_hinh_rung_chay(a, b, c, S),
+        "hoi": {"a": r"Tính diện tích vùng rừng cháy (đơn vị $\text{km}^{2}$, làm tròn đến hàng phần trăm).",
+                "b": r"Đội chữa cháy ở $A$ muốn ra tuyến ống $BC$ theo đường ngắn nhất. Tính độ dài đường đó (đơn vị ki-lô-mét, "
+                     r"làm tròn đến hàng phần trăm)."},
+        "v": {"a": S, "b": ha}, "n": {"a": 2, "b": 2}, "buoc": {"a": 0.13, "b": 0.11},
+        "sai": {"a": [S / 2, 2 * S, a * b / 2, a * c / 2],
+                "b": [S / a, 2 * S / b, 2 * S / c, S * a / 2]},
+        "ga": ga, "gb": gb,
+        "ya": r"S \approx %s\,\text{km}^{2}" % _x1(S, 2), "yb": r"h_a \approx %s\,\text{km}" % _x1(ha, 2),
+    }
+
+
+_TS_BOI_CANH = [_ts_bom, _ts_ban_do, _ts_phuong_vi, _ts_ong_vong, _ts_rung_chay]
+
+
+def _ts_dinh_dang(x, n):
+    return _x1(x, n) if n else str(_lt(x))
+
+
+def _ts_mc_sa(bien, ph, socau, dang):
+    """MC (dang = 1) / SA (dang = 2) của bối cảnh số `bien` (1..5); ph = "a" (VD) hoặc "b" (VDC)."""
+    cau = ""
+    for _ in range(socau):
+        c = _TS_BOI_CANH[bien - 1]()
+        n, v, st = c["n"][ph], c["v"][ph], c["buoc"][ph]
+        dap = _ts_dinh_dang(v, n) if dang == 1 else _so(v, n)
+        mau = _ts_dinh_dang if dang == 1 else _so
+        nh = _ba_nhieu(dap, [mau(x, n) for x in c["sai"][ph] if x > 0], buoc=lambda t: mau(v + t * st, n))
+        giai = c["ga"] if ph == "a" else c["gb"]
+        cau += MC_SA_answer_const(c["intro"] + " " + c["hoi"][ph], dap, nh, giai, c["fig"], 0, dang)
+    return cau
+
+
+def _ts_tl(bien, socau, dong):
+    cau = ""
+    for _ in range(socau):
+        c = _TS_BOI_CANH[bien - 1]()
+        ds = [(c["hoi"]["a"], c["ya"], c["ga"]), (c["hoi"]["b"], c["yb"], c["gb"])]
+        cau += TL_answer_text(c["intro"], ds, c["fig"], 0, dong)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_U_01(socau, dang=1):
+    r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VD, hỏi như ý a) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(1, "a", socau, 1)
+
+def L10_C3_B6_VD036_MC_U_02(socau, dang=1):
+    r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VD, hỏi như ý a) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(2, "a", socau, 1)
+
+def L10_C3_B6_VD036_MC_U_03(socau, dang=1):
+    r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VD, hỏi như ý a) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(3, "a", socau, 1)
+
+def L10_C3_B6_VD036_MC_U_04(socau, dang=1):
+    r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VD, hỏi như ý a) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(4, "a", socau, 1)
+
+def L10_C3_B6_VD036_MC_U_05(socau, dang=1):
+    r"""Trường Sơn - rừng cháy sau trận B-52 (mức VD, hỏi như ý a) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(5, "a", socau, 1)
+
+def L10_C3_B6_VD036_MC_V_01(socau, dang=1):
+    r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VDC, hỏi như ý b) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(1, "b", socau, 1)
+
+def L10_C3_B6_VD036_MC_V_02(socau, dang=1):
+    r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VDC, hỏi như ý b) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(2, "b", socau, 1)
+
+def L10_C3_B6_VD036_MC_V_03(socau, dang=1):
+    r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VDC, hỏi như ý b) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(3, "b", socau, 1)
+
+def L10_C3_B6_VD036_MC_V_04(socau, dang=1):
+    r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VDC, hỏi như ý b) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(4, "b", socau, 1)
+
+def L10_C3_B6_VD036_MC_V_05(socau, dang=1):
+    r"""Trường Sơn - rừng cháy sau trận B-52 (mức VDC, hỏi như ý b) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(5, "b", socau, 1)
+
+def L10_C3_B6_VD036_SA_W_01(socau, dang=2):
+    r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VD, hỏi như ý a) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(1, "a", socau, 2)
+
+def L10_C3_B6_VD036_SA_W_02(socau, dang=2):
+    r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VD, hỏi như ý a) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(2, "a", socau, 2)
+
+def L10_C3_B6_VD036_SA_W_03(socau, dang=2):
+    r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VD, hỏi như ý a) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(3, "a", socau, 2)
+
+def L10_C3_B6_VD036_SA_W_04(socau, dang=2):
+    r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VD, hỏi như ý a) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(4, "a", socau, 2)
+
+def L10_C3_B6_VD036_SA_W_05(socau, dang=2):
+    r"""Trường Sơn - rừng cháy sau trận B-52 (mức VD, hỏi như ý a) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(5, "a", socau, 2)
+
+def L10_C3_B6_VD036_SA_X_01(socau, dang=2):
+    r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VDC, hỏi như ý b) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(1, "b", socau, 2)
+
+def L10_C3_B6_VD036_SA_X_02(socau, dang=2):
+    r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VDC, hỏi như ý b) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(2, "b", socau, 2)
+
+def L10_C3_B6_VD036_SA_X_03(socau, dang=2):
+    r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VDC, hỏi như ý b) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(3, "b", socau, 2)
+
+def L10_C3_B6_VD036_SA_X_04(socau, dang=2):
+    r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VDC, hỏi như ý b) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(4, "b", socau, 2)
+
+def L10_C3_B6_VD036_SA_X_05(socau, dang=2):
+    r"""Trường Sơn - rừng cháy sau trận B-52 (mức VDC, hỏi như ý b) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_mc_sa(5, "b", socau, 2)
+
+def L10_C3_B6_VD036_TL_N_01(socau, dong=1):
+    r"""Trường Sơn - trạm bơm tiếp sức vượt đèo: a) (VD), b) (VDC) - biến thể 1/5 của dạng.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_tl(1, socau, dong)
+
+def L10_C3_B6_VD036_TL_N_02(socau, dong=1):
+    r"""Trường Sơn - bản đồ cố ý dịch vị trí: a) (VD), b) (VDC) - biến thể 2/5 của dạng.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_tl(2, socau, dong)
+
+def L10_C3_B6_VD036_TL_N_03(socau, dong=1):
+    r"""Trường Sơn - tổ khảo sát đi theo phương vị: a) (VD), b) (VDC) - biến thể 3/5 của dạng.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_tl(3, socau, dong)
+
+def L10_C3_B6_VD036_TL_N_04(socau, dong=1):
+    r"""Trường Sơn - kéo ống vòng sau trận đánh phá: a) (VD), b) (VDC) - biến thể 4/5 của dạng.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_tl(4, socau, dong)
+
+def L10_C3_B6_VD036_TL_N_05(socau, dong=1):
+    r"""Trường Sơn - rừng cháy sau trận B-52: a) (VD), b) (VDC) - biến thể 5/5 của dạng.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
+    """
+    return _ts_tl(5, socau, dong)
 
 
 # =====================================================================================================

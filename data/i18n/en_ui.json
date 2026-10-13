@@ -608,6 +608,7 @@
  "📝 Tạo đề: gõ yêu cầu là được, không cần đúng cú pháp gì cả.": "📝 Create an exam: just type your request — no special syntax is needed.",
  "📤 Chưa đăng được lên Classroom (lỗi kết nối).": "📤 Could not post to Classroom (connection error).",
  "📤 Chưa đăng được lên Classroom:": "📤 Could not post to Classroom:",
+ "📤 Chưa đăng được lên Classroom lần này (thầy/cô cần kiểm tra lại kết nối Classroom của lớp).": "📤 Could not post to Classroom this time (your teacher needs to check the Classroom connection for this class).",
  "📷 Đề có câu tự luận - chụp hoặc tải ảnh bài làm (viết tay) trước khi nộp để được chấm luôn:": "📷 This exam has essay questions — take or upload a photo of your handwritten work before submitting to have it graded right away:",
  "🔁 Mở lại form, thử lần nữa": "🔁 Reopen the form and try again",
  "🔄 Làm đề khác cùng cấu trúc": "🔄 Make another exam with the same structure",

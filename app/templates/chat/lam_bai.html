@@ -999,9 +999,11 @@ async function dangKetQuaLenClassroom(ketQua) {
         } else {
             // Day la tien ich THEM - dang that bai KHONG anh huong diem
             // da cham, nen chi bao nhe nhang, khong dung chu "Loi".
+            // Cau chi tiet tu may chu (vd "Khong lam moi duoc access token") la
+            // thong tin ky thuat cho giao vien -> chi ghi console, KHONG hien cho hoc sinh.
+            console.warn("Dang Classroom that bai:", data && (data.message || data.detail));
             hienTrangThaiClassroom(
-                '📤 Chưa đăng được lên Classroom: ' +
-                ((data && (data.message || data.detail)) || 'không rõ nguyên nhân') +
+                '📤 Chưa đăng được lên Classroom lần này (thầy/cô cần kiểm tra lại kết nối Classroom của lớp).' +
                 '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>'
             );
         }

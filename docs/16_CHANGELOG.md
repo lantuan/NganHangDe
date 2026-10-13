@@ -10078,3 +10078,53 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Tách hộp xác nhận + script xoá của `teacher/de_da_tao.html` ra `teacher/_hop_xoa_de.html`; hai trang cùng `include` (một nơi sửa duy nhất).
 - Chỉ xoá từng đề ở trang chính; nút "Xoá tất cả đề đã tạo" vẫn chỉ có ở trang "Đề đã tạo" (bảng ở trang chính chỉ hiện 5 đề gần nhất, đặt nút xoá hết ở đó dễ bấm nhầm).
 - Test mới `tests/test_nut_xoa_de_trang_chinh.py` (3 test).
+
+## 13/10/2026 - Sửa hình "đĩa cổ bị vỡ" (L10_C3 B6 VD036): ba điểm A, B, C phải nằm trên phần đĩa còn nguyên
+
+- Cô Lan báo: hình đĩa cổ bị vỡ vẽ điểm C trên phần bị mất (nét đứt) trong khi đề nói ba điểm lấy trên mép đĩa còn lại.
+- Nguyên nhân: `_hinh_duong_tron_ba_diem` (data/python_bank/toan10/L10_C3.py) vẽ cung liền cố định từ 0° đến 250°, còn ba điểm đặt ở 100°, 220°, 330° → điểm 330° rơi vào phần nét đứt.
+- Sửa: phần bị mất (nét đứt) nay được tính từ vị trí ba điểm — đặt vào khe rộng nhất giữa hai điểm liền kề, chừa mép 15° mỗi bên; cung còn lại vẽ nét liền, nên A, B, C luôn nằm trên phần nguyên. Hình hồ nước (ho=True) không đổi. Sửa một chỗ, ảnh hưởng mọi dạng đĩa cổ (MC, SA, TL, TF).
+- Chưa làm (chờ cô Lan duyệt): vị trí ba điểm vẫn cố định (100°, 220°, 330°), chưa khớp độ dài ba cạnh của từng đề.
+
+## 13/10/2026 - Viết lại câu dẫn dạng `L10_C3_B5_VD031_SA_A_01` (tổng cos / tích tan các góc cách đều)
+
+- Cô Lan báo câu "Tính giá trị của biểu thức $P = 3(\cos 1^\circ + \cdots + \cos 179^\circ) + 2$ (các góc tăng đều $1^\circ$)" đọc không hiểu. Câu dẫn cũ viết cụt, cụm "các góc tăng đều" không nói rõ tổng gồm những góc nào.
+- Sửa `L10_C3_B5_VD031_SA_A_01` (cả nhánh cos và nhánh tan): "Cho biểu thức $P = \dots$, trong đó tổng gồm côsin của các góc $1^\circ, 2^\circ, \ldots, 179^\circ$ (hai góc liên tiếp hơn kém nhau $1^\circ$). Tính giá trị của $P$." Số liệu, đáp án, lời giải giữ nguyên.
+- Chưa sửa (chờ cô Lan duyệt): cùng cụm "các góc tăng đều" còn ở `L10_C3_B5_VD031_MC_A_01`, `..._MC_A_02` và một dạng tự luận (khoảng dòng 4063).
+- (13/10, cô Lan duyệt) Áp dụng cùng cách viết cho 3 dạng còn lại có cụm "các góc tăng đều": `L10_C3_B5_VD031_MC_A_01` (tích tang), `L10_C3_B5_VD031_MC_A_02` (tổng côsin), `L10_C3_B5_TH031_SA_B_02` (tổng bình phương sin/côsin). Câu dẫn mới: "Cho biểu thức …, trong đó tổng/tích gồm … của các góc $a^\circ, b^\circ, \ldots, z^\circ$ (hai góc liên tiếp hơn kém nhau $d^\circ$). …". Số liệu, đáp án, lời giải giữ nguyên; trong `L10_C3.py` không còn cụm "tăng đều".
+- (13/10, cô Lan duyệt) `L10_C3_B5_VD031_SA_A_01`, nhánh tổng côsin: (1) chỉ lấy dãy góc có tổng khác 0 (tức dãy từ $d^\circ$ đến $180^\circ$, tổng $= -1$), vì tổng $= 0$ thì $P$ bằng đúng số cộng thêm, hệ số nhân vô tác dụng; (2) lời giải nay nêu rõ các số hạng không ghép được cặp bù (vd. $\cos 90^\circ = 0$, $\cos 180^\circ = -1$) rồi kết luận tổng trong ngoặc. Dạng MC_A_02 giữ nguyên (đã có lời giải đầy đủ). Kiểm tra 259 câu sinh ngẫu nhiên: đáp án khớp tính trực tiếp; 7 dãy góc ($d = 1, 2, 5, 10, 15, 20, 30$).
+
+## 13/10/2026 - Màn hình điểm: bỏ câu lỗi kỹ thuật "Không làm mới được access token" khỏi mắt học sinh
+
+- Cô Lan báo: sau khi nộp bài, học sinh thấy "Chưa đăng được lên Classroom: Không làm mới được access token." — chữ kỹ thuật, học sinh không hiểu và không làm gì được.
+- `app/templates/chat/lam_bai.html` (`dangKetQuaLenClassroom`): khi đăng Classroom thất bại, hiện câu cố định "📤 Chưa đăng được lên Classroom lần này (thầy/cô cần kiểm tra lại kết nối Classroom của lớp)." + dòng "Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì."; thông báo chi tiết từ máy chủ chỉ ghi vào console trình duyệt (`console.warn`) để giáo viên soi khi cần. Mọi câu lỗi máy chủ trả về (chưa kết nối Classroom, chưa có mã lớp, Google từ chối, không làm mới được token) đều là việc phía giáo viên nên dùng chung một câu.
+- `data/i18n/en_ui.json`: +1 khóa cho câu mới. `test_i18n.py` và các test trang làm bài vẫn đạt.
+- Nguyên nhân gốc chưa xử lý: máy chủ không làm mới được token Classroom của lớp (thường do refresh token hết hạn/bị thu hồi — vd. ứng dụng OAuth Google đang ở chế độ "Testing" thì token hết hạn sau 7 ngày). Cách khắc phục: giáo viên vào `/gv/classroom/connect` kết nối lại; xem log `LOI LAM MOI ACCESS TOKEN` trên VPS để biết lý do chính xác.
+
+## 13/10/2026 - Hình "hồ nước hình tròn" (L10_C3 B6 VD036): vẽ góc BAC và tỉ lệ AB : AC đúng số liệu
+
+- Cô Lan báo: đề cho $\widehat{BAC} = 125^\circ$ nhưng hình vẽ góc không đúng.
+- Nguyên nhân: `_goc_ve_ho(A)` coi cung $BC$ không chứa $A$ là $360^\circ - 2A$ (thực ra đó là cung CHỨA $A$) và đặt $A$ chính giữa, nên $B$, $C$ nằm sai chỗ và $AB = AC$ trên hình dù đề cho $AB \neq AC$.
+- Sửa: `_goc_ve_ho(A, AB, AC)` tính góc $B$, $C$ của tam giác rồi đặt $A$, $B$, $C$ theo góc nội tiếp (cung $AB = 2C$, cung $AC = 2B$, cung $BC$ không chứa $A$ $= 2A$). Hình nay có $\widehat{BAC}$ đúng bằng $A$ và $AB : AC$ đúng như đề. Cả 6 chỗ gọi (MC, SA, TL, TF) đã đổi theo.
+- Kiểm tra: 162 hình hồ sinh ngẫu nhiên, đo lại từ toạ độ TikZ: góc $BAC$ lệch dưới $0{,}3^\circ$ và tỉ lệ $AB : AC$ lệch dưới $0{,}01$ so với đề.
+- Còn mở: hình "đĩa cổ bị vỡ" vẫn đặt ba điểm ở góc cố định (100°, 220°, 330°), chưa khớp ba cạnh của từng đề — chờ cô Lan duyệt.
+
+## 13/10/2026 - Bài Cổng Trời (L10_C3 B6 VD036 / TF_I_01): đường chéo cho sẵn có thể là BD hoặc AC
+
+- Cô Lan yêu cầu: giữ khung ABCD "lỏng" (mỗi cạnh xê dịch ±1 km như trước), chỉ đổi dữ kiện đường chéo cho sẵn từ BD sang AC; giữ NGUYÊN các dạng câu hỏi, không thêm câu mới, không dữ kiện góc, không phần cảm xúc.
+- `L10_C3.py`: `_bo_cong_troi(ph)` (ph = "BD" hoặc "AC"; AC suy ra từ hình thật ≈ 17,8 ≈ 18 km, bốn cạnh gốc (11, 15, 18, 10, 20) theo vai trò, cùng ràng buộc lồi/không dẹt/diện tích 171±15). `_dich_ten_ct(ph)` đổi tên đỉnh theo vai trò về tên thật (ABD→ACD, BCD→ABC, góc giữ đỉnh ở giữa). `_hinh_cong_troi_ph(ph, ...)` vẽ hình theo tên thật cho cả hai trường hợp. Bốn hàm `L10_C3_TF_I_01`, `L10_C3_B6_VD036_MC_J_01`, `..._SA_L_01`, `..._TL_I_01` chọn ngẫu nhiên BD/AC (khoảng 50/50), giữ nguyên câu hỏi.
+- Kiểm tra: 385 test chương 3, hình vẽ, i18n đạt; sinh 200 đề mỗi dạng, cả hai trường hợp BD/AC đều xuất hiện, hình AC vẽ đúng chữ cái.
+
+## 13/10/2026 - Bài toán thực tiễn gắn với đường Trường Sơn (L10_C3, VD036): 5 bối cảnh = 5 biến thể của cùng một dạng
+
+- Cô Lan: ra ở MC, SA, TL, mức VD và VDC; các đề thực tế là BIẾN THỂ của cùng một dạng trong ID (chọn bối cảnh này thì không chọn bối cảnh kia); một đề không ra cùng một dữ kiện. Số liệu thật chỉ ở phần dẫn (báo chí), mọi số đo trong đề là giả sử; không dùng dữ kiện góc đo bằng Google Maps; câu cảm thán nằm ở phần dẫn, phần học sinh làm chỉ có toán. Bỏ bài "đo độ cao bằng hai điểm quan sát" (không có chứng thực bộ đội làm việc này).
+- ID mới (mỗi ID có `_01.._05` = 5 bối cảnh): `L10_C3_B6_VD036_MC_U` (hỏi như ý a, VD), `MC_V` (hỏi như ý b, `muc_do_dang` VDC), `SA_W` (VD), `SA_X` (VDC), `TL_N` (ý a VD + ý b VDC). Tất cả cùng "Dang" và `boi_canh: "truong_son"` nên một đề chỉ ra tối đa một bài Trường Sơn. Đã thêm vào `CHO_PHEP_NHIEU_HAM`.
+- Năm bối cảnh (`_01.._05`): trạm bơm tiếp sức vượt đèo (a: số trạm, b: độ dài tối thiểu ống AC = H / sin α); bản đồ cố ý dịch vị trí >= 10 km (a: OK' bằng côsin, b: góc KOK' bằng sin); tổ khảo sát đi theo phương vị (a: AC bằng côsin, b: phương vị của AC); kéo ống vòng sau trận đánh phá (a: AB, b: số mét ống kéo thêm); rừng cháy sau trận B-52 ở suối Ra Vơ (a: diện tích Heron, b: đường ngắn nhất từ A ra ống BC = đường cao).
+- `L10_C3.py`: `_ts_bom`, `_ts_ban_do`, `_ts_phuong_vi`, `_ts_ong_vong`, `_ts_rung_chay` (mỗi hàm sinh số liệu, hình TikZ theo đúng số liệu, lời giải, nhiễu theo lỗi hay gặp) + `_ts_mc_sa`, `_ts_tl` + 25 hàm mỏng; mapping +5 dòng trong `data/mapping/toan10/L10_C3.json`.
+- Test: `tests/test_l10_c3_truong_son.py` (17 test: đọc số trong đề, tự tính lại bằng toạ độ, so với SA / MC / TL; mapping; mỗi đề tối đa một bài Trường Sơn).
+
+## 13/10/2026 - Phần dẫn bài Trường Sơn: "huyền thoại trong huyền thoại", sứ mệnh, hy sinh, trân trọng hoà bình
+
+- Cô Lan: câu dẫn thêm ý đường Trường Sơn là con đường huyền thoại, đường ống xăng dầu là "huyền thoại trong huyền thoại" (tìm xác thực), nêu sứ mệnh lịch sử, tầm quan trọng, hy sinh, để học sinh yêu dân tộc và trân trọng hoà bình.
+- Nguồn xác thực: lời Tư lệnh (Trung tướng) Đồng Sỹ Nguyên "Nếu đường Trường Sơn là huyền thoại thì đường ống xăng dầu là huyền thoại trong huyền thoại đó"; "hàng trăm cán bộ, chiến sĩ đã ngã xuống"; xăng dầu phục vụ Chiến dịch Đường 9 - Nam Lào và Chiến dịch Hồ Chí Minh: Hiệp hội Xăng dầu Việt Nam (VINPA), bài "Đường ống xăng dầu Trường Sơn - một dòng sông mang lửa" (lời kể Thiếu tướng Hồ Sỹ Hậu). Đường Trường Sơn gần 20 000 km, 1959-1975, lời Đại tướng Võ Nguyên Giáp "một trong những nhân tố chiến lược có ý nghĩa quyết định": Báo Pháp Luật Việt Nam 18/5/2009 (diễn văn kỉ niệm 50 năm Bộ đội Trường Sơn).
+- `L10_C3.py`: hằng `_TS_DAN_ONG` (bối cảnh 1, 3, 4, 5) và `_TS_DAN_DUONG` (bối cảnh 2, bản đồ) đặt ở đầu phần dẫn; đã bỏ mốc "6/1968 - 2/1975" ở bối cảnh trạm bơm (các nguồn ghi mốc khác nhau) và thay bằng "từ cuối năm 1968 đến năm 1975". Chỉ là chữ trong phần dẫn, không phải dữ kiện để tính. Test liên quan đạt (276).
