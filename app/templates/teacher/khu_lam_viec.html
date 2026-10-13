@@ -54,11 +54,12 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 <tr>
 <th class="p-stack-md">Tiêu đề</th><th class="p-stack-md">Lớp</th>
 <th class="p-stack-md">Phạm vi</th><th class="p-stack-md">Tải về</th>
+<th class="p-stack-md"></th>
 </tr>
 </thead>
 <tbody>
 {% for de in de_gan_day %}
-<tr class="border-t border-outline-variant">
+<tr class="border-t border-outline-variant" data-de-id="{{ de.id }}">
 <td class="p-stack-md">{{ (de.blueprint or {}).get("tieu_de") or "Đề không tên" }}</td>
 <td class="p-stack-md">{{ de.lop }}</td>
 <td class="p-stack-md">{{ de.ki_thi or de.pham_vi_chuong or "—" }}</td>
@@ -79,6 +80,7 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 </div>
 {% endif %}
 </td>
+<td class="p-stack-md"><button type="button" class="nut-xoa-de text-error font-semibold hover:underline" data-ten="{{ (de.blueprint or {}).get('tieu_de') or 'Đề không tên' }}">Xoá</button></td>
 </tr>
 {% endfor %}
 </tbody>
@@ -88,5 +90,7 @@ Tài khoản này chưa kết nối Google Classroom, nên đề và điểm ch�
 {% else %}
 <p class="font-body-md text-body-md text-on-surface-variant">Chưa tạo đề nào. <a class="text-primary-container font-semibold" href="/gv/ra-de">Ra đề đầu tiên →</a></p>
 {% endif %}
+
+{% if de_gan_day %}{% include "teacher/_hop_xoa_de.html" %}{% endif %}
 
 {% endblock %}

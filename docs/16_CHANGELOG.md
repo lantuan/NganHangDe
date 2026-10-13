@@ -10071,3 +10071,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Mới: `scripts/sao_luu_rieng.sh` (kéo `.env`, service, nginx, crontab, danh sách tệp chưa có trên GitHub từ VPS về `~/NganHangDe_SaoLuu/<ngày>/`, KHÔNG lên GitHub); `scripts/chuyen_vps.sh` (cài phần mềm, clone, khôi phục `.env`, venv, systemd, nginx, xelatex, đợi DNS, xin HTTPS, kiểm tra); `1_SAO_LUU_VPS.command` và `2_CHUYEN_VPS.command` (bấm đúp trên Mac); `deploy/nganhangde.service` (mẫu, cổng 8000); `.env.example` (chỉ tên biến); `docs/29_CHUYEN_VPS.md` (hướng dẫn từng bước).
 - Đã thử bằng `ssh`/`apt`/`systemctl` giả: bản sao lưu đúng cấu trúc, chuyển VPS chạy hết các bước, nhận đúng venv `.venv` từ file service sao lưu; `shellcheck` sạch. CHƯA thử trên VPS thật.
 - Còn tồn tại: export workflow n8n vào `n8n/` (làm tay, xem docs/29 mục 4); thay IP cũ trong `docs/14_DEPLOYMENT.md` sau khi chuyển.
+
+## 13/10/2026 - Nút Xoá ngay ở "Đề tạo gần đây" trên trang chính
+
+- Cô Lan báo: phải bấm "Xem tất cả" mới thấy nút Xoá. Trang chính (`/gv`) nay có cột Xoá cho từng đề trong bảng "Đề tạo gần đây", cùng hộp xác nhận giữa màn hình và cùng endpoint `POST /gv/de-da-tao/xoa` như trang "Đề đã tạo".
+- Tách hộp xác nhận + script xoá của `teacher/de_da_tao.html` ra `teacher/_hop_xoa_de.html`; hai trang cùng `include` (một nơi sửa duy nhất).
+- Chỉ xoá từng đề ở trang chính; nút "Xoá tất cả đề đã tạo" vẫn chỉ có ở trang "Đề đã tạo" (bảng ở trang chính chỉ hiện 5 đề gần nhất, đặt nút xoá hết ở đó dễ bấm nhầm).
+- Test mới `tests/test_nut_xoa_de_trang_chinh.py` (3 test).
