@@ -10198,3 +10198,34 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `generator_service.call_generator` thay dấu `?` trong `\begin{ex}%%[?]` bằng TÊN HÀM đã sinh ra câu đó (có số biến thể), ví dụ `\begin{ex}%%[L10_C3_B6_VD036_MC_J_02]`. Tự luận: `\begin{bt}%%[L10_C3_B6_VD036_TL_I_03]` (ID đi theo qua bước đổi `ex` -> `bt` khi ghép đề). Là chú thích LaTeX nên không hiện trong PDF; khối chưa có dòng chú thích thì được thêm vào.
 - `answer_parser_service.trich_de_bai` bỏ dòng `%%[...]` với bất kỳ nội dung (trước chỉ bỏ `%%[?]`) để trang làm bài trên web không lẫn ID vào đề.
 - Test mới `tests/test_gan_id_vao_khoi.py` (ID đúng tên hàm cho MC_J / SA_L / TL_I, tự luận `bt` giữ ID, web vẫn cắt đúng đề bài).
+
+## 13/10/2026 (đêm, lần 3) - Dạng mới "Vầng trăng kháng chiến" (Cảnh khuya, Rằm tháng Giêng) (cô Lan duyệt)
+
+- Một DẠNG MỚI, hai biến thể, dùng các chữ cái đã trống sau khi gỡ Pác Bó: `L10_C3_B6_VD036_MC_W`, `SA_Y`, `TL_O` (mapping `boi_canh: "trang_viet_bac"`, mỗi đề tối đa một câu thuộc bối cảnh này; 3 ID đã vào `CHO_PHEP_NHIEU_HAM`).
+  - `_01`: tính ĐƯỜNG KÍNH MẶT TRĂNG từ khoảng cách Trái Đất - Mặt Trăng d (ngẫu nhiên từ 363 300 đến 405 500 km, bước 100) và góc nhìn θ (tính từ đường kính thật 3 476 km, làm tròn 0,01 độ): tam giác cân, nửa góc, AB = 2d·sin(θ/2); đáp số làm tròn hàng chục km. TL: a) đường kính, b) góc nhìn khi Mặt Trăng ở khoảng cách khác (dùng kết quả a).
+  - `_02`: tính CHIỀU CAO CÂY CỔ THỤ từ bóng trăng đổ trên sườn đồi dốc (định lí sin; α, β, độ dài bóng là số đo GIẢ SỬ, ghi rõ trong đề). TL: a) chiều cao AB, b) khoảng cách từ ngọn cây đến đầu bóng BC.
+- Số liệu thật (đã kiểm chứng): khoảng cách trung bình 384 400 km, cận điểm 363 300 km, viễn điểm 405 500 km, đường kính ≈ 3 474-3 476 km (bảng số liệu Mặt Trăng của NASA qua sites.uni.edu, space.fm). Đề không nêu đường kính thật (là đáp số). Hình sơ đồ ghi "không đúng tỉ lệ" (góc thật chỉ khoảng nửa độ).
+- Phần dẫn: hai bài thơ viết thời kháng chiến chống Pháp ở chiến khu Việt Bắc (theo cô Lan; luatminhkhue.vn ghi Cảnh khuya 1947 ở Việt Bắc, Rằm tháng Giêng đêm rằm năm Mậu Tý 1948, các nguồn không thống nhất nên KHÔNG ghi năm), không chép lời thơ.
+- Test mới `tests/test_l10_c3_trang_viet_bac.py` (tính lại bằng định lí côsin và bằng toạ độ giao điểm tia sáng - mặt dốc, đường kính nằm trong khoảng thực tế, dẫn không có năm, mapping). `tests/test_l10_c3_pac_bo.py` bỏ ý "không còn ID W/Y/O" vì các chữ cái này đã dùng lại.
+
+## 13/10/2026 (đêm, lần 4) - Dạng vầng trăng đổi sang bài thơ "Đồng chí"; bỏ "Địa dư nước ta"; khe dán thơ (cô Lan chốt)
+
+- Cô Lan: không tìm ra bài thơ "Cảnh khuya"/"Rằm tháng Giêng" để dùng, đổi sang bài thơ của người lính (hình ảnh vầng trăng nơi đầu mũi súng, bài \textit{Đồng chí} của Chính Hữu); ý chính: chiến tranh khốc liệt nhưng người lính Cụ Hồ vẫn yêu đời, yêu thiên nhiên. Bỏ bài "Địa dư nước ta" (nước ta không phải hình tứ giác; tứ giác bốn cực diện tích gấp đôi lãnh thổ thật).
+- Phần dẫn dạng `L10_C3_B6_VD036_MC_W / SA_Y / TL_O` (`_01` đường kính Mặt Trăng, `_02` cây cổ thụ trên sườn đồi) viết lại: Đồng chí (Chính Hữu) viết đầu năm 1948, sau chiến dịch Việt Bắc thu đông 1947, ca ngợi tình đồng đội trong kháng chiến chống Pháp (hoatieu.vn, luatminhkhue.vn); thêm ý khốc liệt - yêu đời - yêu thiên nhiên. `boi_canh` đổi `trang_viet_bac` -> `trang_dong_chi`; mapping `Dang` / `ghi_chu` cập nhật.
+- KHÔNG chép lời thơ vào mã (Claude không chép thơ): thêm hằng `_TR_THO` (bài Đồng chí) và dùng hằng `_PB_THO` có sẵn (bài Tức cảnh Pác Bó). Cô dán các câu thơ vào hằng; nhiều dòng được, các khổ cách nhau MỘT DÒNG TRỐNG; hàm `_tho_khoi` đổi thành khối trích căn giữa, nghiêng, mỗi dòng một dòng thơ (tự ngắt % và &). Để trống thì phần dẫn chỉ nêu tên bài thơ. Pác Bó: câu thơ nay nằm thành khối riêng sau câu "theo thể thất ngôn tứ tuyệt".
+- Test: `tests/test_l10_c3_trang_viet_bac.py` (dẫn mới, khe thơ), `tests/test_l10_c3_pac_bo.py` (khe thơ).
+
+## 2026-10-13 - Bỏ phần thơ, rút gọn phần dẫn Pác Bó, hình chỉ ghi tên điểm (cô Lan)
+- Đề quá dài nên bỏ hẳn phần thơ: xóa `_tho_khoi`, `_PB_THO`, `_TR_THO` (không còn chỗ dán thơ). Đồng chí vẫn giữ dẫn ngắn (tên bài, tác giả, năm viết, ý chính).
+- `_pb_dan` (MC_J/SA_L/TL_I `_04`): bỏ đoạn "hang Cốc Bó - suối Lê-nin - núi Các Mác - bài Tức cảnh Pác Bó - Hội nghị TW 8 - Việt Minh"; thay bằng một câu: "Sự kiện Người về nước mở ra thời kỳ mới của cách mạng Việt Nam." (thay câu "đưa cuộc kháng chiến đi đến thành công" vì không kiểm chứng được; ý lấy theo nhan đề bài Báo Văn hóa "Bác Hồ trở về Tổ quốc, mở ra thời kỳ mới của cách mạng", baovanhoa.vn/chinh-tri/bac-ho-tro-ve-to-quoc-mo-ra-thoi-ky-moi-cua-cach-mang-200739.html). Giữ câu Km 0 và câu kết.
+- Hình: điểm đã đặt tên A, B, C, D, E thì chỉ ghi tên điểm, bỏ chú thích kèm (Pác Bó: bỏ "(hang Cốc Bó)"...; Mặt Trăng: bỏ "(Trái Đất)").
+- Test: `tests/test_l10_c3_pac_bo.py`, `tests/test_l10_c3_trang_viet_bac.py` cập nhật.
+
+## 2026-10-13 - Pác Bó: bỏ nhiễu ±10 m, thêm đường chéo BD, điểm suối dịch ≤30 m (cô Lan)
+- Lán Khuổi Nặm, hang Cốc Bó, mốc 675, Km 0 giữ nguyên toạ độ; độ dài = khoảng cách thật làm tròn đến chục mét (bỏ cộng ngẫu nhiên ±10 m).
+- Điểm trên suối Lê-nin dịch ngẫu nhiên không quá 30 m (`_pb_toa_do`); đề ghi "một điểm gần suối Lê-nin" vì không kiểm chứng được điểm dịch vẫn nằm trên suối.
+- Mỗi đề ngẫu nhiên cho đường chéo AC (Heron: ABC + ACD) hoặc BD (Heron: ABD + BCD); lời giải, hình, đáp án đổi theo. Kiểm tứ giác lồi và đường chéo còn lại dựng từ số liệu lệch <15 m so với toạ độ thật.
+- Test `tests/test_l10_c3_pac_bo.py` viết lại phần đọc đề cho AC/BD và kiểm làm tròn thật.
+
+## 2026-10-13 - Hình cây cổ thụ: nhãn độ dài không đè nhãn góc (cô Lan)
+- `_tr_hinh2`: nhãn độ dài bóng cây (AC) đặt PHÍA TRÊN cạnh AC thay vì phía dưới, tránh trùng nhãn góc nghiêng sườn đồi ở A.

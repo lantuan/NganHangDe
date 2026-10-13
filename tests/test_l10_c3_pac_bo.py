@@ -83,15 +83,22 @@ def _doc(txt):
     names = re.findall(r"\$([ABCD])\$ \(([^()]*(?:\([^()]*\))?[^()]*)\)", de)
     assert [x[0] for x in names[:4]] == list("ABCD"), names
     ten = [_khoa(x[1]) for x in names[:4]]
-    ab, bc, cd, da, ac = (int(x) for x in re.search(
-        r"AB = (\d+)\$ m, \$BC = (\d+)\$ m, \$CD = (\d+)\$ m, \$DA = (\d+)\$ m và đường chéo \$AC = (\d+)\$ m", de).groups())
-    # A = (0,0), C = (ac,0); B tren, D duoi (tu giac loi) - dung bang toa do
-    bx = (ab * ab + ac * ac - bc * bc) / (2 * ac)
-    by = math.sqrt(ab * ab - bx * bx)
-    dx = (da * da + ac * ac - cd * cd) / (2 * ac)
-    dy = -math.sqrt(da * da - dx * dx)
-    A, B, C, D = (0.0, 0.0), (bx, by), (float(ac), 0.0), (dx, dy)
-    P = [A, B, C, D]
+    m = re.search(r"AB = (\d+)\$ m, \$BC = (\d+)\$ m, \$CD = (\d+)\$ m, \$DA = (\d+)\$ m và đường chéo \$(AC|BD) = (\d+)\$ m", de)
+    ab, bc, cd, da = (int(m.group(i)) for i in (1, 2, 3, 4))
+    cheo, dd = m.group(5), int(m.group(6))
+    # dung tu giac bang toa do: duong cheo cho truoc nam tren truc x; X (tam giac chua AB) o tren, Y o duoi
+    if cheo == "AC":
+        l1, l2 = (ab, bc), (da, cd)
+    else:
+        l1, l2 = (ab, da), (bc, cd)
+    xx = (l1[0] ** 2 + dd * dd - l1[1] ** 2) / (2 * dd)
+    X = (xx, math.sqrt(l1[0] ** 2 - xx * xx))
+    yy = (l2[0] ** 2 + dd * dd - l2[1] ** 2) / (2 * dd)
+    Y = (yy, -math.sqrt(l2[0] ** 2 - yy * yy))
+    E1, E2 = (0.0, 0.0), (float(dd), 0.0)
+    A, B, C, D = (E1, X, E2, Y) if cheo == "AC" else (X, E1, Y, E2)
+    P = [(q[0] - A[0], q[1] - A[1]) for q in (A, B, C, D)]            # dich de A la goc toa do
+    A, B, C, D = P
     S = 0.5 * abs(sum(P[i][0] * P[(i + 1) % 4][1] - P[(i + 1) % 4][0] * P[i][1] for i in range(4)))
     cr = [(P[(i + 1) % 4][0] - P[i][0]) * (P[(i + 2) % 4][1] - P[(i + 1) % 4][1]) -
           (P[(i + 1) % 4][1] - P[i][1]) * (P[(i + 2) % 4][0] - P[(i + 1) % 4][0]) for i in range(4)]
@@ -102,7 +109,7 @@ def _doc(txt):
     dAB = abs(B[0] * D[1] - B[1] * D[0]) / math.hypot(*B)                       # khoang cach D den duong thang AB
     sABD = 0.5 * abs(B[0] * D[1] - B[1] * D[0])                                   # dien tich tam giac ABD (A la goc toa do)
     gt = {"dt": (S / 1e4, 1), "goc": (gB, 0), "bd": (bd, 0), "kc": (dAB, 0), "dt3": (sABD / 1e4, 1)}
-    return (ten, (ab, bc, cd, da, ac)), loi, gt
+    return (ten, (ab, bc, cd, da, cheo, dd)), loi, gt
 
 
 def _sa(txt):
@@ -110,10 +117,15 @@ def _sa(txt):
 
 
 def _kiem_that(ten, so):
+    """Do dai trong de = khoang cach that lam tron chuc met; rieng cap co diem suoi (dich toi da 30 m) cho phep lech them 30 m."""
     P = [THAT[k] for k in ten]
-    that = [_hv(P[0], P[1]), _hv(P[1], P[2]), _hv(P[2], P[3]), _hv(P[3], P[0]), _hv(P[0], P[2])]
-    for t, s in zip(that, so):
-        assert abs(t - s) <= 15, (ten, that, so)
+    ab, bc, cd, da, cheo, dd = so
+    cap = [(0, 1, ab), (1, 2, bc), (2, 3, cd), (3, 0, da)] + [(0, 2, dd) if cheo == "AC" else (1, 3, dd)]
+    for i, j, s in cap:
+        sai = 5.01 + (30 if "suoi" in (ten[i], ten[j]) else 0)
+        assert abs(_hv(P[i], P[j]) - s) <= sai, (ten, i, j, s, _hv(P[i], P[j]))
+        if "suoi" not in (ten[i], ten[j]):
+            assert s % 10 == 0 and abs(_hv(P[i], P[j]) - s) <= 5.01        # khong cong nhieu: dung lam tron that
 
 
 def _mc_dung(txt):
@@ -154,16 +166,19 @@ def test_tl_hai_y_khop_doc_lap():
         assert loi
         _kiem_that(ten, so)
         _khong_goc(txt)
-        ab, bc, cd, da, ac = so
-        S1, S2 = M._pb_heron(ab, bc, ac), M._pb_heron(ac, cd, da)
+        ab, bc, cd, da, cheo, ac = so
+        if cheo == "AC":
+            n1, n2, S1, S2 = "ABC", "ACD", M._pb_heron(ab, bc, ac), M._pb_heron(ac, cd, da)
+        else:
+            n1, n2, S1, S2 = "ABD", "BCD", M._pb_heron(ab, da, ac), M._pb_heron(bc, cd, ac)
         ys = re.findall(r"\\SA\[4\]\{\$([^$]*)\$\}", txt)
         assert len(ys) == 2
         tg = re.search(r"Tính diện tích tam giác \$(\w+)\$", txt).group(1)
         a1 = re.search(r"approx (\d+)", ys[0]).group(1)
-        assert int(a1) == math.floor((S1 if tg == "ABC" else S2) + 0.5), (sd, ys, S1, S2)
+        assert int(a1) == math.floor((S1 if tg == n1 else S2) + 0.5), (sd, ys, S1, S2)
         assert _khop(gt["dt"][0], re.search(r"approx (\d+(?:,\d+)?)", ys[1]).group(1), gt["dt"][1]), (sd, ys, gt["dt"])
         b = txt.split("\\loigiai")[1].split("\\item")[2]
-        assert b.count("nửa chu vi") == 1 and ("Tam giác $%s$" % ("ACD" if tg == "ABC" else "ABC")) in b
+        assert b.count("nửa chu vi") == 1 and ("Tam giác $%s$" % (n2 if tg == n1 else n1)) in b
 
 
 def test_mapping_pac_bo_nam_trong_dang_dien_tich():
@@ -171,9 +186,7 @@ def test_mapping_pac_bo_nam_trong_dang_dien_tich():
     ids = ["L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_L", "L10_C3_B6_VD036_TL_I"]
     dang = {rows[i]["Dang"] for i in ids}
     assert len(dang) == 1 and "Pác Bó" in dang.pop()
-    # khong con ID rieng cho Pac Bo
-    for i in ("MC_W", "MC_X", "SA_Y", "SA_Z", "TL_O"):
-        assert "L10_C3_B6_VD036_" + i not in rows
+    # khong con ID rieng cho Pac Bo (cac chu cai W, Y, O da duoc dang trang Viet Bac dung lai - xem test_l10_c3_trang_viet_bac.py)
     assert not [r for r in rows.values() if r.get("boi_canh") == "pac_bo"]
 
 
@@ -188,8 +201,34 @@ def test_toa_do_trong_ma_nguon_khop_toa_do_that():
         assert _hv(p, q) < 1.0, (k, p, q)
 
 
-def test_dan_chi_nhac_su_kien_da_kiem_chung_va_khong_chep_tho():
+def test_dan_ngan_gon_khong_tho_khong_doan_hang_coc_bo():
     d = M._pb_dan()
-    for must in ("28/1/1941", "Tức cảnh Pác Bó", "Km $0$", "Việt Minh", "10$-$19/5/1941", "675"):
+    for must in ("28/1/1941", "Km $0$", "675", "$108$", "mở ra thời kỳ mới của cách mạng Việt Nam"):
         assert must in d, must
-    assert M._PB_THO == "" or "textit" in d
+    for khong in ("Tức cảnh Pác Bó", "textit", "begin{center}", "Việt Minh", "Cốc Bó bên", "Hội nghị", "thất ngôn"):
+        assert khong not in d, khong
+
+
+def test_hinh_chi_ghi_ten_diem_A_B_C_D():
+    random.seed(1)
+    h = M._pb_hinh(M._pb_bo())
+    nut = re.findall(r"node\[[a-z ]+\] \{([^}]*)\};\n", h)
+    assert sorted(nut) == sorted("$%s$" % c for c in "ABCD")
+    assert "(" not in "".join(nut)
+
+
+def test_duong_cheo_cho_truoc_la_AC_hoac_BD_va_chi_suoi_duoc_dich():
+    cheo = set()
+    for sd in range(80):
+        random.seed(sd)
+        c = M._pb_cau()
+        cheo.add(c["cheo"])
+        assert c["t1"][0] + c["t2"][0] in ("ABCACD", "ABDBCD")
+    assert cheo == {"AC", "BD"}
+    assert "gần suối Lê-nin" in M._PB_TEN["suoi"][0] and "trên suối" not in M._PB_TEN["suoi"][0]
+    for sd in range(40):                                             # toa do khong doi voi lan, hang, moc, Km 0
+        random.seed(sd)
+        for k in ("lan", "hang", "moc", "km0"):
+            assert M._pb_toa_do(k) == M._PB_TOA_DO[k]
+        p, q = M._pb_toa_do("suoi"), M._PB_TOA_DO["suoi"]
+        assert 0 < _hv(p, q) <= 30.5
