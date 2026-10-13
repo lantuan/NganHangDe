@@ -180,6 +180,7 @@ async def logout():
     )
     response.delete_cookie("sb_access_token")
     response.delete_cookie("sb_refresh_token")
+    response.delete_cookie("sb_ghi_nho")
     return response
 
 
@@ -226,6 +227,9 @@ async def auth_callback_page(request: Request):
 class SetSessionRequest(BaseModel):
     access_token: str
     refresh_token: str
+    # Lua chon "Ghi nho dang nhap" (trang /login mang sang qua /auth/callback).
+    # Mac dinh True de khong doi hanh vi cac luong khac (vd. dang ky Google).
+    remember: bool = True
 
 
 @router.post("/auth/set-session")
@@ -240,36 +244,27 @@ async def set_session(payload: SetSessionRequest):
         raise HTTPException(status_code=401, detail="Token không hợp lệ")
 
     response = JSONResponse({"success": True})
+    # Giong POST /login: tick -> 7/30 ngay; khong tick -> cookie phien
+    # (max_age=None) va sb_ghi_nho="0" de middleware lam_moi_cookie_phien
+    # (app/main.py) giu dung lua chon khi lam moi phien.
+    remember = payload.remember
     response.set_cookie(
         key="sb_access_token",
         value=payload.access_token,
-        httponly=True,
-        secure=True,
-        samesite="lax",
-        max_age=60 * 60 * 24 * 7,
+        httponly=True, secure=True, samesite="lax",
+        max_age=60 * 60 * 24 * 7 if remember else None,
     )
     response.set_cookie(
         key="sb_refresh_token",
         value=payload.refresh_token,
-        httponly=True,
-        secure=True,
-        samesite="lax",
-        max_age=60 * 60 * 24 * 30,
+        httponly=True, secure=True, samesite="lax",
+        max_age=60 * 60 * 24 * 30 if remember else None,
     )
-
-    # Dang nhap bang Google khong co o tick "Ghi nho dang nhap", va o tren
-    # da dat han 7/30 ngay - tuc la MAC DINH ghi nho. Phai ghi ca cookie
-    # sb_ghi_nho cho khop, neu khong middleware lam_moi_cookie_phien
-    # (app/main.py) se thay thieu cookie nay, hieu la "khong ghi nho", va
-    # bien 2 cookie tren thanh cookie phien ngay lan lam moi dau tien ->
-    # nguoi dang nhap bang Google bi dang xuat khi dong trinh duyet.
     response.set_cookie(
         key="sb_ghi_nho",
-        value="1",
-        httponly=True,
-        secure=True,
-        samesite="lax",
-        max_age=60 * 60 * 24 * 30,
+        value="1" if remember else "0",
+        httponly=True, secure=True, samesite="lax",
+        max_age=60 * 60 * 24 * 30 if remember else None,
     )
     return response
 

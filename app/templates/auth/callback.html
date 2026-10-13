@@ -38,6 +38,15 @@
             return;
         }
 
+        // Lua chon "Ghi nho dang nhap" tu trang /login (chi co khi bam nut
+        // Google o do). Khong co (vd. dang ky bang Google) -> ghi nho nhu cu.
+        var ghiNho = true;
+        try {
+            var co = sessionStorage.getItem('nhd_gg_ghi_nho');
+            sessionStorage.removeItem('nhd_gg_ghi_nho');
+            if (co === '0') { ghiNho = false; }
+        } catch (e) { /* mac dinh ghi nho */ }
+
         fetch('/auth/set-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -45,6 +54,7 @@
             body: JSON.stringify({
                 access_token: access_token,
                 refresh_token: refresh_token,
+                remember: ghiNho,
             }),
         })
             .then(function (res) {

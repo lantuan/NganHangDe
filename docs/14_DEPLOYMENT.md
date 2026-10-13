@@ -433,3 +433,12 @@ XUAT WORD CHO GIAO VIEN (tu 30/09/2026) can them pandoc tren VPS:
 (scripts/cai_xelatex_vps.sh da gom san pandoc.) Thieu pandoc thi nut
 "Word de" / "Word loi giai" bao loi 500 "May chu chua cai pandoc".
 Hoac cu chay "day web" o may Mac, no tu kiem va bao.
+
+===============================================================================
+
+# Chuyển sang VPS mới (12/10/2026)
+
+Toàn bộ quy trình, bản sao lưu riêng (`.env`, service, nginx) và hai nút bấm đúp
+`1_SAO_LUU_VPS.command` / `2_CHUYEN_VPS.command` được mô tả trong
+docs/29_CHUYEN_VPS.md. Mẫu dịch vụ systemd: deploy/nganhangde.service.
+Mẫu .env (chỉ tên biến): .env.example.

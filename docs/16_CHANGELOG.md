@@ -10053,3 +10053,21 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Bản cũ: F = ax + by + c (có hằng số) và M ngẫu nhiên trong [−5; 5]², có khi KHÔNG thuộc miền nghiệm (lời giải còn nói "không thuộc").
 - Nay: chọn a, b, c và dấu (≤, ≥, <, >) ngẫu nhiên; liệt kê các điểm nguyên trong [−5; 5]² thoả bất phương trình (miền nghiệm, cần ≥ 10 điểm); chọn ngẫu nhiên M trong đó. Đề: "Cho bất phương trình ax + by ⋚ c. Điểm M là một nghiệm của bất phương trình đã cho. Tính giá trị của F(x; y) = ax + by tại M" (F cùng a, b với vế trái). Lời giải có dòng kiểm tra M thuộc miền nghiệm.
 - Mapping `NB023_SA_A` cập nhật mô tả dạng; test mới `tests/test_l10_c2_nb023_sa_a.py` (F đúng dạng ax + by, M thoả bất phương trình, đáp số đúng); bản dịch Anh cập nhật, bỏ một "patch" dịch tay đã hết đối tượng (`patch_L10_C2_2.json`).
+
+## 12/10/2026 - Ô "Ghi nhớ đăng nhập": nhớ email, Google tôn trọng lựa chọn, thêm chú thích
+
+- Cô Lan báo ô "Ghi nhớ đăng nhập" ở màn hình đăng nhập "hình như chưa có tác dụng". Kiểm tra: `POST /login` đã đặt cookie đúng (tick → 7/30 ngày + `sb_ghi_nho=1`; không tick → cookie phiên + `sb_ghi_nho=0`), middleware `lam_moi_cookie_phien` giữ đúng lựa chọn. Cái "thiếu" là: (1) ô này không nhớ email; (2) đăng nhập Google luôn ghi nhớ 7/30 ngày, bỏ qua ô tick; (3) không có chú thích nên không biết ô làm gì.
+- `app/templates/auth/login.html`: thêm chú thích "Lưu email và giữ đăng nhập 7 ngày trên thiết bị này."; khi gửi form, nếu tick thì lưu email vào `localStorage` (khóa `nhd_email_ghi_nho`), không tick thì xóa; vào lại trang thì tự điền email và tick sẵn. KHÔNG bao giờ lưu mật khẩu. Bấm nút Google thì ghi lựa chọn vào `sessionStorage` (`nhd_gg_ghi_nho`).
+- `app/templates/auth/callback.html`: đọc `nhd_gg_ghi_nho`, gửi `remember` lên `/auth/set-session` (không có → ghi nhớ như cũ, vd. đăng ký bằng Google).
+- `app/routers/auth.py`: `SetSessionRequest.remember` (mặc định True); `/auth/set-session` đặt cookie 7/30 ngày hoặc cookie phiên + `sb_ghi_nho` theo lựa chọn; `/logout` xóa thêm `sb_ghi_nho`.
+- `data/i18n/en_ui.json`: +1 khóa cho chú thích mới.
+- Test mới `tests/test_ghi_nho_dang_nhap.py` (cookie /login có/không tick, Google 3 trường hợp, logout, trang login có chú thích + không lưu mật khẩu); `test_login_loi.py`, `test_i18n.py` vẫn đạt.
+- Lưu ý: không tick vẫn có thể "còn đăng nhập" sau khi tắt trình duyệt nếu Chrome/Edge bật "Tiếp tục từ nơi bạn đã dừng" hoặc "Chạy ứng dụng nền" — do trình duyệt giữ cookie phiên, code không can thiệp được.
+
+## 12/10/2026 - Bộ công cụ chuyển sang VPS mới (sao lưu riêng + một nút dựng lại)
+
+- Cô Lan hỏi: VPS hết hạn, mua VPS mới thì lấy nguồn ở đâu; yêu cầu lưu những gì thiếu, ghi chú để tự làm lại, có "nút bấm" đẩy toàn bộ lên VPS mới, và lưu riêng những gì không đưa lên GitHub.
+- Nguồn code: GitHub `lantuan/NganHangDe` (kho công khai). Không có trên GitHub: `.env`, file systemd `nganhangde.service`, cấu hình nginx thật, workflow n8n (thư mục `n8n/` đang trống), `output/`, `logs/`.
+- Mới: `scripts/sao_luu_rieng.sh` (kéo `.env`, service, nginx, crontab, danh sách tệp chưa có trên GitHub từ VPS về `~/NganHangDe_SaoLuu/<ngày>/`, KHÔNG lên GitHub); `scripts/chuyen_vps.sh` (cài phần mềm, clone, khôi phục `.env`, venv, systemd, nginx, xelatex, đợi DNS, xin HTTPS, kiểm tra); `1_SAO_LUU_VPS.command` và `2_CHUYEN_VPS.command` (bấm đúp trên Mac); `deploy/nganhangde.service` (mẫu, cổng 8000); `.env.example` (chỉ tên biến); `docs/29_CHUYEN_VPS.md` (hướng dẫn từng bước).
+- Đã thử bằng `ssh`/`apt`/`systemctl` giả: bản sao lưu đúng cấu trúc, chuyển VPS chạy hết các bước, nhận đúng venv `.venv` từ file service sao lưu; `shellcheck` sạch. CHƯA thử trên VPS thật.
+- Còn tồn tại: export workflow n8n vào `n8n/` (làm tay, xem docs/29 mục 4); thay IP cũ trong `docs/14_DEPLOYMENT.md` sau khi chuyển.

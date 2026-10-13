@@ -238,6 +238,7 @@
 </label>
 <a class="font-label-md text-label-md text-primary hover:underline" href="/forgot-password">Quên mật khẩu?</a>
 </div>
+<p class="font-label-sm text-label-sm text-outline -mt-2 mb-2">Lưu email và giữ đăng nhập 7 ngày trên thiết bị này.</p>
 <!-- Submit Button -->
  <button
     class="w-full h-14 bg-primary text-on-primary font-headline-sm text-headline-sm rounded-[16px]"
@@ -303,8 +304,40 @@
             "{{ supabase_anon_key }}"
         );
         var btn = document.getElementById('google-login-btn');
+        var oTick = document.getElementById('remember');
+        var oEmail = document.getElementById('email');
+        var KHOA_EMAIL = 'nhd_email_ghi_nho';
+
+        // Nho email (KHONG BAO GIO luu mat khau): vao lai trang thi tu dien
+        // san email va tick san o "Ghi nho dang nhap".
+        try {
+            var daLuu = localStorage.getItem(KHOA_EMAIL);
+            if (daLuu && oEmail && !oEmail.value) {
+                oEmail.value = daLuu;
+                if (oTick) { oTick.checked = true; }
+            }
+        } catch (e) { /* trinh duyet chan bo nho: bo qua */ }
+
+        var form = oEmail ? oEmail.form : null;
+        if (form) {
+            form.addEventListener('submit', function () {
+                try {
+                    if (oTick && oTick.checked && oEmail.value) {
+                        localStorage.setItem(KHOA_EMAIL, oEmail.value.trim());
+                    } else {
+                        localStorage.removeItem(KHOA_EMAIL);
+                    }
+                } catch (e) { /* bo qua */ }
+            });
+        }
+
         if (btn) {
             btn.addEventListener('click', async function () {
+                // Dang nhap Google di qua trang khac (/auth/callback) nen
+                // lua chon "Ghi nho dang nhap" phai duoc mang theo.
+                try {
+                    sessionStorage.setItem('nhd_gg_ghi_nho', oTick && oTick.checked ? '1' : '0');
+                } catch (e) { /* bo qua */ }
                 var result = await supabaseClient.auth.signInWithOAuth({
                     provider: 'google',
                     options: {

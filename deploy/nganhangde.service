@@ -1,0 +1,23 @@
+# MAU dich vu systemd cho Ngan Hang De AI.
+# Chi dung khi KHONG co ban sao luu file service that cua VPS cu.
+# Cai dat (script chuyen_vps.sh tu lam):
+#     cp deploy/nganhangde.service /etc/systemd/system/nganhangde.service
+#     systemctl daemon-reload && systemctl enable --now nganhangde
+# Cong 8000 khop voi proxy_pass trong deploy/nginx/*.conf.
+# Neu VPS cu co them tuy chon (so worker, bien moi truong...), uu tien
+# file that trong ban sao luu rieng (~/NganHangDe_SaoLuu/moi_nhat/).
+[Unit]
+Description=Ngan Hang De AI (FastAPI / uvicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/NganHangDe
+EnvironmentFile=-/root/NganHangDe/.env
+ExecStart=/root/NganHangDe/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
