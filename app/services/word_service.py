@@ -276,7 +276,8 @@ def _khoang_trang_ngoai_toan(t: str) -> str:
 
 def _mau_phan(lang: str):
     return re.compile(r"\\noindent\\textbf\{%s ([IVX]+)\.\}\s*(.*?)\n" % _CHU[lang]["phan"])
-_CAU = re.compile(r"\\begin\{ex\}.*?\\end\{ex\}", re.S)
+# cau thuong: moi truong ex; tu luan: moi truong bt (ex_test in "Bài") - co Lan 13/10/2026
+_CAU = re.compile(r"\\begin\{ex\}.*?\\end\{ex\}|\\begin\{bt\}.*?\\end\{bt\}", re.S)
 
 
 def _doc_nhom(tex: str, lang: str = "vi") -> tuple[str, list[dict]]:
@@ -298,7 +299,7 @@ def _doc_nhom(tex: str, lang: str = "vi") -> tuple[str, list[dict]]:
         mm = re.search(_CHU[lang]["ma_re"], khuc)
         muc = []
         for mt in re.finditer(r"%s|%s" % (_PHAN.pattern, _CAU.pattern), khuc, flags=re.S):
-            if mt.group(0).startswith(r"\begin{ex}"):
+            if mt.group(0).startswith((r"\begin{ex}", r"\begin{bt}")):
                 muc.append({"cau": mt.group(0)})
             else:
                 muc.append({"phan": mt.group(1), "loi_dan": mt.group(2)})

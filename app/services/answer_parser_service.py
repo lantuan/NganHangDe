@@ -261,7 +261,7 @@ def trich_de_bai(latex_block: str) -> dict:
     tach rieng phan de bai vi \choice/\shortans/\choiceTFn KHONG hien thi
     y nguyen, ma render lai thanh nut bam/o nhap).
 
-    Lay tu sau "\begin{ex}" (bo qua dong "%%[?]" neu co) den truoc lenh
+    Lay tu sau "\begin{ex}" (bo qua dong "%%[?]" hoac "%%[ID ham]" neu co) den truoc lenh
     dap an dau tien gap duoc (\choice, \shortans, \choiceTFn, \choiceTFt).
     \loigiai cung duoc tinh la 1 moc chan (an toan cho ca cau TL - khong
     co choice/shortans/choiceTFn nao ca - de khong bi loi nguyen phan loi
@@ -272,7 +272,7 @@ def trich_de_bai(latex_block: str) -> dict:
     TikZ qua \immini, \includegraphics...) — cau nay TAM THOI khong dua
     vao lam bai truc tiep tren web, chi xuat PDF nhu cu.
     """
-    m = re.search(r"\\begin\{ex\}", latex_block)
+    m = re.search(r"\\begin\{(?:ex|bt)\}", latex_block)   # bt = moi truong tu luan (13/10/2026)
     bat_dau = m.end() if m else 0
 
     vi_tri_dap_an = [
@@ -283,7 +283,7 @@ def trich_de_bai(latex_block: str) -> dict:
     ket_thuc = min(vi_tri_dap_an) if vi_tri_dap_an else len(latex_block)
 
     de_bai = latex_block[bat_dau:ket_thuc]
-    de_bai = re.sub(r"^\s*%%\[\?\]\s*\n?", "", de_bai).strip()
+    de_bai = re.sub(r"^\s*%%\[[^\]\n]*\]\s*\n?", "", de_bai).strip()   # %%[?] hoac %%[ID ham sinh cau]
 
     co_hinh_ve = bool(re.search(r"\\immini|\\includegraphics|\\begin\{tikzpicture\}", de_bai))
     # GIU LAI ma nguon hinh ve. Truoc day hinh bi vut di va cau bi danh dau

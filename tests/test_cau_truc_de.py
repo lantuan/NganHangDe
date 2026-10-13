@@ -33,7 +33,9 @@ def test_du_4_phan_dung_thu_tu():
 def test_moi_phan_danh_so_lai_tu_1():
     than = A._ghep_4_phan(_theo_phan_day_du())
     # Truoc MOI tieu de phan phai co \setcounter{ex}{0}
-    assert than.count(r"\setcounter{ex}{0}") == 4
+    # cau thuong (I, II, III) dung ex; tu luan (IV) dung bt -> in "Bai 1." (co Lan 13/10/2026)
+    assert than.count(r"\setcounter{ex}{0}") == 3
+    assert than.count(r"\setcounter{bt}{0}") == 1
 
 
 def test_so_cau_trong_loi_dan_khop_thuc_te():
@@ -241,3 +243,47 @@ def test_ra_de_luu_conversation_id_la_uuid_hop_le(monkeypatch, tmp_path):
     _uuid.UUID(da_luu["conversation_id"])
     assert da_luu["role"] == "teacher"
     assert da_luu["blueprint"]["socau_ma_de"] == 4
+
+
+def test_phan_chi_mot_cau_khong_ghi_tu_cau_1_den_cau_1():
+    """Co Lan 13/10/2026: phan chi co 1 cau thi ghi "cau 1" / "bai 1", nhieu cau moi "tu ... den ...". Ap dung ca PDF va Word."""
+    kh = {"MC": [_cau("a")], "TF": [_cau("b")], "SA": [_cau("c")], "TL": [_cau("d")]}
+    than = A._ghep_4_phan(kh)
+    assert "từ câu 1 đến câu 1" not in than and "từ bài 1 đến bài 1" not in than
+    assert "Thí sinh trả lời câu 1. Thí sinh chỉ chọn một phương án." in than
+    assert "Thí sinh trình bày tự luận bài 1." in than
+    assert "Thí sinh trả lời câu 1.\n" in than                      # phan tra loi ngan
+    en = A._ghep_4_phan(kh, "en")
+    assert "1 to 1" not in en and "Write out the full solution for problem 1." in en and "Answer question 1." in en
+    # nhieu cau thi giu "tu ... den ..."
+    nhieu = A._ghep_4_phan({"MC": [_cau("a"), _cau("b")], "TL": [_cau("c"), _cau("d"), _cau("e")]})
+    assert "từ câu 1 đến câu 2." in nhieu and "từ bài 1 đến bài 3." in nhieu
+
+
+def test_tu_luan_dung_moi_truong_bt_hien_chu_Bai():
+    """Co Lan 13/10/2026: tu luan la "Bai 1" chu khong phai "Cau 1" -> phan IV dung \\begin{bt} (ex_test in Bai)."""
+    kh = {"MC": [_cau("a")], "TL": [_cau("b"), _cau("c")]}
+    than = A._ghep_4_phan(kh)
+    iv = than[than.index("PHẦN IV."):]
+    assert iv.count(r"\begin{bt}") == 2 and iv.count(r"\end{bt}") == 2 and r"\begin{ex}" not in iv
+    i = than[:than.index("PHẦN IV.")]
+    assert r"\begin{ex}" in i and r"\begin{bt}" not in i
+    assert r"\setcounter{bt}{0}" + "\n" + r"\noindent\textbf{PHẦN IV.}" in than
+
+
+def test_sty_co_moi_truong_bt_hien_Bai():
+    from pathlib import Path
+    cfg = Path(__file__).resolve().parent.parent / "data" / "config"
+    assert r"\newtheorem{bt}{\namebt}" in (cfg / "ex_test.sty").read_text(encoding="utf-8")
+    assert r"\newtheorem{bt}{\namebt}" in (cfg / "ex_test_en.sty").read_text(encoding="utf-8")
+    assert r"\newcommand{\namebt}{Bài}" in (cfg / "ex_test.sty").read_text(encoding="utf-8")
+    assert r"\newcommand{\namebt}{Problem}" in (cfg / "ex_test_en.sty").read_text(encoding="utf-8")
+
+
+def test_word_doc_duoc_khoi_bt():
+    from app.services import word_service as W
+    tex = ("\\begin{document}\n\\tieude{a}{b}{c}\n\\noindent\\textbf{PHẦN I.} x\n\\begin{ex}c1\\end{ex}\n"
+           "\\noindent\\textbf{PHẦN IV.} Thí sinh trình bày tự luận bài 1.\n\\begin{bt}t1\\end{bt}\n\\end{document}")
+    muc = W._doc_nhom(tex)[1][0]["muc"]
+    assert [("cau" in m) for m in muc] == [False, True, False, True]
+    assert muc[3]["cau"].startswith(r"\begin{bt}")

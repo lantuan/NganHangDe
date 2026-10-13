@@ -10185,3 +10185,16 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
   - GỠ 5 ID riêng `VD036_MC_W`, `MC_X`, `SA_Y`, `SA_Z`, `TL_O` (hàm, dòng mapping, `boi_canh: "pac_bo"`) và các câu hỏi góc / khoảng cách / diện tích tam giác ABD. Bản cũ cất ở `nhap/pac_bo_nhieu_cau_hoi_cu.py` (file nháp, cô xoá được).
   - Từ nay MC_J / SA_L / TL_I có: `_01` Cổng Trời, `_02` công viên Lê Thị Riêng, `_03` khu vực rãnh mộ, `_04` Pác Bó; `Dang` của 3 dòng bao cả bốn; `boi_canh` vẫn `cong_troi` (một đề tối đa một câu dạng này).
   - `tests/test_l10_c3_pac_bo.py` viết lại cho `_04` (tính lại diện tích từ toạ độ, đề không có góc, số đo khớp khoảng cách thật ≤ 15 m, ba bộ tứ giác xuất hiện, mapping không còn ID Pác Bó riêng).
+
+## 13/10/2026 (đêm) - Lời dẫn phần chỉ có 1 câu; tự luận hiển thị "Bài" (cô Lan yêu cầu)
+
+- `exam_assembler_service.py`: phần chỉ có MỘT câu không còn ghi "từ câu 1 đến câu 1" / "từ bài 1 đến bài 1" mà ghi "Thí sinh trả lời câu 1." (Trắc nghiệm thêm "Thí sinh chỉ chọn một phương án."; Đúng/Sai: "Trong mỗi ý a), b), c), d), thí sinh chọn đúng hoặc sai."; Tự luận: "Thí sinh trình bày tự luận bài 1."). Bản tiếng Anh: "Answer question 1." / "Write out the full solution for problem 1.". Phần nhiều câu giữ nguyên "từ ... đến ...". Word đọc lời dẫn từ chính tệp .tex nên tự khớp, không cần sửa riêng.
+- Tự luận dùng môi trường `bt` thay `ex` ở bước ghép đề cuối (`_ghep_4_phan`): ex_test in "Bài 1." (tiếng Anh "Problem 1."), `\setcounter{bt}{0}` đầu phần IV. Ngân hàng, bộ phân tích đáp án, `tu_luan_hai_y` vẫn thấy `\begin{ex}` như cũ (chỉ đổi ở tệp .tex ghép cuối).
+- `data/config/ex_test.sty` và `ex_test_en.sty`: thêm `\newtheorem{bt}{\namebt}` (gói trong repo chưa định nghĩa `bt`; `\namebt` = "Bài" / "Problem" đã có sẵn). Đã biên dịch thử cả hai tuỳ chọn `[dethi]` và `[loigiai]`: "Bài 1.", lời giải ẩn/hiện đúng.
+- `word_service.py` (`_CAU`) và `answer_parser_service.py` nhận cả khối `bt`. Test mới trong `tests/test_cau_truc_de.py`.
+
+## 13/10/2026 (đêm, lần 2) - ID hàm sinh câu ghi vào dòng chú thích sau \begin{ex} / \begin{bt} (cô Lan yêu cầu)
+
+- `generator_service.call_generator` thay dấu `?` trong `\begin{ex}%%[?]` bằng TÊN HÀM đã sinh ra câu đó (có số biến thể), ví dụ `\begin{ex}%%[L10_C3_B6_VD036_MC_J_02]`. Tự luận: `\begin{bt}%%[L10_C3_B6_VD036_TL_I_03]` (ID đi theo qua bước đổi `ex` -> `bt` khi ghép đề). Là chú thích LaTeX nên không hiện trong PDF; khối chưa có dòng chú thích thì được thêm vào.
+- `answer_parser_service.trich_de_bai` bỏ dòng `%%[...]` với bất kỳ nội dung (trước chỉ bỏ `%%[?]`) để trang làm bài trên web không lẫn ID vào đề.
+- Test mới `tests/test_gan_id_vao_khoi.py` (ID đúng tên hàm cho MC_J / SA_L / TL_I, tự luận `bt` giữ ID, web vẫn cắt đúng đề bài).

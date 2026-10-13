@@ -142,6 +142,22 @@ CAC_PHAN_DE_EN = [
 ]
 
 
+# Phan CHI CO MOT CAU thi khong viet "tu cau 1 den cau 1" (co Lan 13/10/2026): ghi thang "cau 1" / "bai 1".
+# Phan nhieu cau van dung CAC_PHAN_DE o tren. Dung chung cho PDF/LaTeX va Word (Word doc loi dan tu chinh tep .tex).
+LOI_DAN_MOT_CAU = {
+    "MC": "Thí sinh trả lời câu 1. Thí sinh chỉ chọn một phương án.",
+    "TF": "Thí sinh trả lời câu 1. Trong mỗi ý \\textbf{a), b), c), d)}, thí sinh chọn đúng hoặc sai.",
+    "SA": "Thí sinh trả lời câu 1.",
+    "TL": "Thí sinh trình bày tự luận bài 1.",
+}
+LOI_DAN_MOT_CAU_EN = {
+    "MC": "Answer question 1. Choose only one option.",
+    "TF": "Answer question 1. In each statement \\textbf{a), b), c), d)}, choose true or false.",
+    "SA": "Answer question 1.",
+    "TL": "Write out the full solution for problem 1.",
+}
+
+
 def _loai_cau_cua(item: dict) -> str:
     """
     Doc loai cau (MC/TF/SA/TL) tu item. Uu tien truong loai_cau; khong co
@@ -157,13 +173,20 @@ def _loai_cau_cua(item: dict) -> str:
     return "MC"
 
 
+def _loi_dan_phan(ma_loai: str, loi_dan_nhieu: str, n: int, lang: str = "vi") -> str:
+    """Loi dan cua mot phan: n = 1 -> "cau 1" (khong "tu cau 1 den cau 1"); n > 1 -> "tu cau 1 den cau n"."""
+    if n == 1:
+        return (LOI_DAN_MOT_CAU_EN if lang == "en" else LOI_DAN_MOT_CAU)[ma_loai]
+    return loi_dan_nhieu.format(n=n)
+
+
 def _ghep_4_phan(theo_phan: dict[str, list[str]], lang: str = "vi") -> str:
     """
     Ghep cac khoi LaTeX da gom theo dang cau thanh than mot ma de, co
     tieu de PHAN I/II/III/IV. So La Ma GAN CHET vao loai cau (xem
     CAC_PHAN_DE): phan nao khong co cau nao thi bo han, nhung cac phan
     con lai VAN GIU dung so cua minh.
-    \\setcounter{ex}{0} truoc moi phan de moi phan danh so lai tu 1.
+    \\setcounter{ex}{0} (tu luan: \\setcounter{bt}{0}) truoc moi phan de moi phan danh so lai tu 1.
     """
     cac_khoi = []
     ten_phan = "PART" if lang == "en" else "PHẦN"
@@ -171,11 +194,17 @@ def _ghep_4_phan(theo_phan: dict[str, list[str]], lang: str = "vi") -> str:
         khoi_cau = theo_phan.get(ma_loai) or []
         if not khoi_cau:
             continue
+        # TU LUAN dung moi truong bt (ex_test in "Bài 1." / "Problem 1."), cac phan khac dung ex ("Câu 1.").
+        # Chuyen o day, o buoc ghep cuoi, de moi noi sinh/doc cau (generator, dap an, tu_luan_hai_y...) van thay \begin{ex}.
+        moi_truong = "bt" if ma_loai == "TL" else "ex"
+        than_phan = "\n".join(khoi_cau)
+        if moi_truong == "bt":
+            than_phan = than_phan.replace("\\begin{ex}", "\\begin{bt}").replace("\\end{ex}", "\\end{bt}")
         cac_khoi.append(
-            "\\setcounter{ex}{0}\n"
+            "\\setcounter{" + moi_truong + "}{0}\n"
             "\\noindent\\textbf{" + ten_phan + " " + so_la_ma + ".} "
-            + loi_dan.format(n=len(khoi_cau)) + "\n\n"
-            + "\n".join(khoi_cau)
+            + _loi_dan_phan(ma_loai, loi_dan, len(khoi_cau), lang) + "\n\n"
+            + than_phan
         )
     return "\n\n".join(cac_khoi)
 

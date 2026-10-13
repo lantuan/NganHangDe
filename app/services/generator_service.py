@@ -158,6 +158,15 @@ from app.services.lam_dep_bieu_thuc import lam_dep  # noqa: E402
 from app.services.tu_luan_hai_y import giu_hai_y  # noqa: E402
 
 
+_KHOI_MO = re.compile(r"(\\begin\{(?:ex|bt)\})(?:%%\[[^\]\n]*\])?")
+
+
+def gan_id_vao_khoi(latex_block: str, ten_ham: str) -> str:
+    """Thay dau hoi trong \\begin{ex}%%[?] (va \\begin{bt}%%[?]) bang ID cua ham sinh ra cau do.
+    Khoi nao chua co dong chu thich thi them vao."""
+    return _KHOI_MO.sub(lambda m: m.group(1) + "%%[" + ten_ham + "]", latex_block)
+
+
 def kiem_tra_dung_loai_cau(generator_id: str, latex_block: str) -> None:
     """
     Khoá loại câu theo TÊN HÀM. Quy ước của ngân hàng (chốt 27/09/2026):
@@ -256,6 +265,9 @@ def call_generator(
     # Tự luận chỉ đưa ra HAI ý (cô Lan 01/10/2026) - xem tu_luan_hai_y.py
     latex_block = giu_hai_y(latex_block, generator_id)
     kiem_tra_dung_loai_cau(generator_id, latex_block)
+    # Ghi ID cua HAM da sinh cau vao dong chu thich sau \begin{ex} / \begin{bt}: %%[?] -> %%[L10_C3_..._01]
+    # (co Lan 13/10/2026) - nhin tep .tex biet ngay cau nao do ham nao sinh ra. Chu thich LaTeX nen khong hien trong PDF.
+    latex_block = gan_id_vao_khoi(latex_block, chosen_name)
 
     return {
         "generator_id": generator_id,
