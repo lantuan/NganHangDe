@@ -12772,7 +12772,7 @@ def _bo_cong_troi(ph="BD"):
         return BC, CD, BD, AB, AD, S1, S2
 
 
-def _hinh_cong_troi(BC, CD, BD, AB, AD):
+def _hinh_cong_troi(BC, CD, BD, AB, AD, don_vi="km"):
     """Sơ đồ vùng đất tứ giác ABCD (đường chéo BD) vẽ theo số đo, ghi độ dài các đoạn."""
     huong = 70.0
     gC = _goc_tam_giac(BC, CD, BD)            # góc BDC
@@ -12809,7 +12809,7 @@ def _hinh_cong_troi(BC, CD, BD, AB, AD):
         s += "\\fill (%.2f,%.2f) circle (0.06) node[%s] {$%s$};\n" % (P[t] + (vt, t))
     for (u, v), d, phia in ((("B", "C"), BC, None), (("C", "D"), CD, None), (("B", "D"), BD, "A"),
                             (("A", "B"), AB, None), (("A", "D"), AD, None)):
-        s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ km};\n" % (nhan_doan(u, v, phia) + (d,))
+        s += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ %s};\n" % (nhan_doan(u, v, phia) + (d, don_vi))
     return s + "\\end{tikzpicture}"
 
 
@@ -13022,6 +13022,178 @@ def L10_C3_B6_VD036_TL_I_01(socau, dong=1):
                    % (_xx(S1 + S2, 2), _lt(S1 + S2))))]
         cau += TL_answer_text(_DOAN_CONG_TROI, ds, _hinh_cong_troi_ph(ph, BC, CD, BD, AB, AD), 0, dong)
     return cau
+
+
+# =====================================================================================================
+# CÔNG VIÊN LÊ THỊ RIÊNG - SỰ KIỆN NĂM 2026 (cô Lan 13/10/2026)
+# CÙNG DẠNG với Cổng Trời (ước lượng diện tích vùng đất tứ giác chia bởi một đường chéo thành hai tam giác biết ba cạnh,
+# Heron hai lần). Thêm HAI BIẾN THỂ _02, _03 vào chính các ID MC_J, SA_L, TL_I (không tạo dạng mới):
+#   _02: tìm diện tích CÔNG VIÊN (khoảng 75 000 m^2 = 7,5 ha; đáp số tính bằng ha)
+#   _03: tìm diện tích KHU VỰC rãnh mộ tập thể - mỗi câu ngẫu nhiên một trong bốn khu vực: Khu vực 1 (khoảng 800 m^2),
+#        Khu vực 2 (khoảng 1 200 m^2), Khu vực 3 (khoảng 500 m^2), khu vực tìm kiếm mở rộng (khoảng 5 800 m^2)
+# Số liệu THẬT (sơ đồ cô Lan gửi 13/10/2026 + báo Dân Việt, VietNamNet, Tuổi Trẻ, VietnamPlus, Báo Lào Cai): diện tích các khu vực
+# và công viên (sơ đồ hiện trạng ghi khoảng 75 000 m^2; báo ghi khoảng 8 ha), Tết Mậu Thân 1968, quy tập từ 6/7/2026, 731 bộ hài cốt
+# đến 11/10/2026, ước tính hơn 900 liệt sĩ, lễ viếng - truy điệu - an táng 14/10/2026. SỐ ĐO CÁC CẠNH là GIẢ ĐỊNH (nói rõ trong đề),
+# chọn ngẫu nhiên sao cho diện tích tứ giác sát số thật (lệch tối đa 3%). Đề KHÔNG nêu diện tích của chính đối tượng được hỏi.
+# =====================================================================================================
+
+_LTR_DAN = (r"Công viên Văn hóa Lê Thị Riêng (TP. Hồ Chí Minh) nằm trên một phần khu đất của nghĩa trang Đô Thành trước đây. Theo lời "
+            r"kể của nhân chứng, trong cuộc Tổng tiến công và nổi dậy Tết Mậu Thân (tháng $2/1968$), nhiều liệt sĩ đã được chôn tập thể "
+            r"trong những rãnh mộ ngay tại đây. Từ ngày $6/7/2026$ thành phố triển khai quy tập; đến ngày $11/10/2026$ đã tìm thấy "
+            r"$731$ bộ hài cốt và ước tính có hơn $900$ liệt sĩ nằm lại. %s Chỉ trong một khoảng đất nhỏ bé như thế, biết bao người con "
+            r"ưu tú của dân tộc đã nằm xuống; các anh đã nằm lại gần sáu mươi năm cho đến ngày $14/10/2026$, khi thành phố tổ chức lễ "
+            r"viếng, truy điệu và an táng. Đó là cái giá của hòa bình, để mỗi chúng ta thêm biết ơn sự hy sinh của ông cha. ")
+_LTR_SO_SANH_CV = r"Ba khu vực nghi có rãnh mộ tập thể đã được khoanh vùng chỉ có tổng diện tích khoảng $2\,500\ \text{m}^{2}$."
+_LTR_SO_SANH_KV = r"Cả công viên rộng khoảng $7,5$ ha, còn các khu vực nghi có rãnh mộ tập thể chỉ là một phần rất nhỏ trong đó."
+
+# (tên khu vực, diện tích thật m^2, bước làm tròn số đo cạnh m)
+_LTR_KHU_VUC = [("Khu vực số $1$", 800, 1), ("Khu vực số $2$", 1200, 1), ("Khu vực số $3$", 500, 1),
+                ("khu vực tìm kiếm mở rộng", 5800, 5)]
+
+
+def _ltr_bo(S0, buoc, ha):
+    """(BC, CD, BD, AB, AD, S_BCD, S_ABD): số đo GIẢ ĐỊNH (bội của `buoc` m), tứ giác ABCD lồi, diện tích sát S0 (lệch <= 3%)."""
+    L = math.sqrt(S0)
+    q = lambda x: int(round(x / buoc)) * buoc
+    while True:
+        BC, CD, AB, AD = (q(L * random.uniform(0.7, 1.3)) for _ in range(4))
+        BD = q(L * random.uniform(1.0, 1.7))
+        if min(BC, CD, AB, AD, BD) <= 0:
+            continue
+        if not (BC + CD > BD + buoc and AB + AD > BD + buoc and abs(BC - CD) < BD - buoc and abs(AB - AD) < BD - buoc):
+            continue
+        goc = [_goc_tam_giac(x, y, z) for (u, v, w) in ((BC, CD, BD), (AB, AD, BD)) for x, y, z in ((u, v, w), (v, w, u), (w, u, v))]
+        if min(goc) < 15:
+            continue
+        gB = _goc_tam_giac(CD, BC, BD) + _goc_tam_giac(AD, AB, BD)
+        gD = _goc_tam_giac(BC, CD, BD) + _goc_tam_giac(AB, AD, BD)
+        if gB >= 170 or gD >= 170:
+            continue
+        S1, S2 = _heron_f(BC, CD, BD), _heron_f(AB, AD, BD)
+        if abs(S1 + S2 - S0) > 0.03 * S0:
+            continue
+        if not (_xa_bien(S1) and _xa_bien(S2) and (_xa_bien((S1 + S2) / 1e4, 1) if ha else _xa_bien(S1 + S2))):
+            continue
+        return BC, CD, BD, AB, AD, S1, S2
+
+
+def _giai_heron_m(ten, a, b, c, S):
+    p = (a + b + c) / 2
+    return (r"Tam giác $%s$ có nửa chu vi $p = \dfrac{%d + %d + %d}{2} = %s$ (m), nên "
+            r"$S_{%s} = \sqrt{%s\cdot %s\cdot %s\cdot %s} \approx %d\,\left(\text{m}^{2}\right)$."
+            % (ten, a, b, c, _xx(p, 1), ten, _xx(p, 1), _xx(p - a, 1), _xx(p - b, 1), _xx(p - c, 1), _lt(S)))
+
+
+def _ltr_cau(cv):
+    """Một bộ dữ liệu: cv = True -> công viên (đáp số ha); False -> một khu vực ngẫu nhiên (đáp số m^2)."""
+    if cv:
+        ten, S0, buoc = "công viên Lê Thị Riêng", 75000, 10
+        mo = (_LTR_DAN % _LTR_SO_SANH_CV) + r"Người ta ước lượng diện tích toàn công viên bằng cách mô hình hóa gần đúng công viên"
+    else:
+        ten, S0, buoc = random.choice(_LTR_KHU_VUC)
+        mo = (_LTR_DAN % _LTR_SO_SANH_KV) + r"Người ta mô hình hóa gần đúng %s" % ten
+    BC, CD, BD, AB, AD, S1, S2 = _ltr_bo(S0, buoc, cv)
+    S = S1 + S2
+    f = (lambda x: _x1(x / 1e4, 1)) if cv else (lambda x: str(_lt(x)))
+    dv = r"\,\text{ha}" if cv else r"\,\text{m}^{2}"
+    intro = (mo + r" bởi tứ giác lồi $ABCD$ (các số đo là giả định) với $AB = %d$ m, $BC = %d$ m, $CD = %d$ m, $DA = %d$ m và "
+             r"đường chéo $BD = %d$ m (xem hình vẽ)." % (AB, BC, CD, AD, BD))
+    giai = _giai_heron_m("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron_m("ABD", AB, AD, BD, S2) + "\\\\\n"
+    duoi = ""
+    if cv:
+        duoi += (r"Diện tích khoảng $S_{BCD} + S_{ABD} \approx %d\,\text{m}^{2} \approx %s$ ha (vì $1\ \text{ha} = 10\,000\ \text{m}^{2}$)."
+                 % (_lt(S), f(S)))
+    else:
+        duoi += r"Vậy diện tích khoảng $S_{BCD} + S_{ABD} \approx %d\,\text{m}^{2}$." % _lt(S)
+    giai += duoi
+    donvi = r"đơn vị héc-ta, làm tròn đến hàng phần mười" if cv else r"đơn vị $\text{m}^{2}$, làm tròn đến hàng đơn vị"
+    return dict(ten=ten, cv=cv, dv=dv, f=f, intro=intro, giai=giai, duoi=duoi, donvi=donvi, S=S, S1=S1, S2=S2, BC=BC, CD=CD, BD=BD,
+                AB=AB, AD=AD, hinh=_hinh_cong_troi(BC, CD, BD, AB, AD, "m"))
+
+
+def _ltr_mc_sa(cv, socau, dang):
+    cau = ""
+    so = 0
+    while so < socau:
+        c = _ltr_cau(cv)
+        dap = c["f"](c["S"])
+        if dang == 2 and len(dap) > 4:
+            continue
+        so += 1
+        if dang == 1:
+            debai = c["intro"] + r" Diện tích của %s (%s) là" % (c["ten"], c["donvi"])
+            sai = [c["f"](c["S1"]), c["f"](c["S2"]), str(_lt(c["S"])) if cv else c["f"](2 * c["S"])]
+            nh = _ba_nhieu(dap, sai, buoc=lambda t: _x1(c["S"] / 1e4 + 0.1 * t, 1) if cv else str(_lt(c["S"]) + 5 * t))
+        else:
+            debai = c["intro"] + r" Tính diện tích của %s (%s)." % (c["ten"], c["donvi"])
+            nh = [_x1(c["S"] / 1e4 + 0.1 * d, 1) if cv else str(_lt(c["S"]) + d) for d in (1, -1, 2)]
+        cau += MC_SA_answer_const(debai, dap, nh, c["giai"], c["hinh"], 0, dang)
+    return cau
+
+
+def _ltr_tl(cv, socau, dong):
+    cau = ""
+    for _ in range(socau):
+        c = _ltr_cau(cv)
+        if random.random() < 0.5:
+            tg, ba, Sa, tg2, ba2, Sb = "BCD", (c["BC"], c["CD"], c["BD"]), c["S1"], "ABD", (c["AB"], c["AD"], c["BD"]), c["S2"]
+        else:
+            tg, ba, Sa, tg2, ba2, Sb = "ABD", (c["AB"], c["AD"], c["BD"]), c["S2"], "BCD", (c["BC"], c["CD"], c["BD"]), c["S1"]
+        ds = [(r"Tính diện tích tam giác $%s$ (đơn vị $\text{m}^{2}$, làm tròn đến hàng đơn vị)." % tg,
+               r"S_{%s} \approx %d\,\text{m}^{2}" % (tg, _lt(Sa)), _giai_heron_m(tg, *ba, Sa)),
+              (r"Tính diện tích của %s (%s)." % (c["ten"], c["donvi"]),
+               r"S \approx %s%s" % (c["f"](c["S"]), c["dv"]),
+               _giai_heron_m(tg2, *ba2, Sb) + "\\\\\n" + c["duoi"])]
+        cau += TL_answer_text(c["intro"], ds, c["hinh"], 0, dong)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_J_02(socau, dang=1):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_mc_sa(True, socau, 1)
+
+
+def L10_C3_B6_VD036_MC_J_03(socau, dang=1):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - khu vực rãnh mộ (ngẫu nhiên) (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_mc_sa(False, socau, 1)
+
+
+def L10_C3_B6_VD036_SA_L_02(socau, dang=2):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_mc_sa(True, socau, 2)
+
+
+def L10_C3_B6_VD036_SA_L_03(socau, dang=2):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - khu vực rãnh mộ (ngẫu nhiên) (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_mc_sa(False, socau, 2)
+
+
+def L10_C3_B6_VD036_TL_I_02(socau, dong=1):
+    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích công viên - Công viên Lê Thị Riêng (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_tl(True, socau, dong)
+
+
+def L10_C3_B6_VD036_TL_I_03(socau, dong=1):
+    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích khu vực rãnh mộ (ngẫu nhiên) - Công viên Lê Thị Riêng (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
+    """
+    return _ltr_tl(False, socau, dong)
 
 
 # =====================================================================================================
@@ -13546,6 +13718,221 @@ def L10_C3_B6_VD036_TL_N_05(socau, dong=1):
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_tl(5, socau, dong)
+
+
+# =====================================================================================================
+# PÁC BÓ - HÀNH TRÌNH VỀ NƯỚC CỦA BÁC (cô Lan 13/10/2026) - bản TỨ GIÁC
+# Năm địa danh thật ở khu di tích Pác Bó (Hà Quảng, Cao Bằng); mỗi đề lấy BỐN trong năm (chỉ các bộ tạo được tứ giác LỒI):
+#   km0  = cột mốc Km 0 đường Hồ Chí Minh   - Plus Code Google Maps X3H2+4F8 (tiền tố 7PJ8)   -> 22,97779; 106,05120
+#   hang = hang Cốc Bó                       - showcaves.com                                   -> 22,98728; 106,05027
+#   lan  = lán Khuổi Nặm                     - Plus Code Google Maps X2MV+9PF (tiền tố 7PJ8)   -> 22,98344; 106,04430
+#   moc  = cột mốc 675 (mốc 108 cũ)          - Plus Code Google Maps X3H3+P8 (tiền tố 7PJ8; ô ~14 m) -> 22,97931; 106,05331
+#   suoi = suối Lê-nin                       - điểm đánh dấu "suối Lê Nin" của Google Maps (cô Lan gửi liên kết) -> 22,97267; 106,04680
+# Plus Code do cô Lan chụp ảnh gửi 13/10/2026 (đã giải mã bằng bộ giải kiểm với ví dụ chuẩn của đặc tả Open Location Code).
+# Khoảng cách (đường chim bay) tính bằng haversine từ các toạ độ trên rồi làm tròn chục mét; đề giữ khung "lỏng": mỗi số đo
+# (4 cạnh và đường chéo AC) xê dịch -10, 0, +10 m. Bốn đỉnh A, B, C, D theo thứ tự vòng quanh, quay vòng ngẫu nhiên nên đường chéo
+# cho trước (AC) và đường chéo hỏi (BD) là hai đường chéo khác nhau tuỳ đề.
+# CÙNG DẠNG với Cổng Trời và Lê Thị Riêng (cô Lan 13/10/2026: đề thực tế chỉ tính chiều dài trên bản đồ, KHÔNG tính góc): thêm biến thể
+# _04 vào chính các ID MC_J, SA_L, TL_I (không còn ID riêng, không còn câu hỏi góc / khoảng cách). Mỗi đề lấy bốn địa danh (nhãn quay vòng),
+# cho AB, BC, CD, DA và đường chéo AC, hỏi diện tích tứ giác ABCD (héc-ta) bằng Heron hai lần; TL: a) diện tích một tam giác, b) cả tứ giác.
+# Thông tin ở phần dẫn (đã kiểm chứng): Bác về nước 28/1/1941 cùng 5 đồng chí qua mốc 108 (Báo Nhân Dân 30/1/2025; Google Maps ghi
+# "Mốc 675 = mốc 108 cũ"); sau 30 năm bôn ba; ở Pác Bó trong hang Cốc Bó, bên suối Lê-nin, khu vực núi Các Mác, thiếu thốn, gian
+# khổ (Luật Minh Khuê; Mia.vn); bài thơ "Tức cảnh Pác Bó" viết tháng 2/1941, thể thất ngôn tứ tuyệt (Luật Minh Khuê; Báo Pháp Luật);
+# Hội nghị Trung ương 8 họp tại lán Khuổi Nặm 10-19/5/1941, Bác chủ trì, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu, thành lập
+# Mặt trận Việt Minh (Vietnam News); Km 0 thứ hai của đường Hồ Chí Minh đặt ở Pác Bó (HTV). KHÔNG chép lời thơ: cô Lan dán vào
+# _PB_THO nếu muốn có vần thơ. Bản tam giác cũ (Km 0 - hang - lán) còn ở nhap/pac_bo_block_moi.py.
+# =====================================================================================================
+
+# Cô Lan dán (các) câu thơ muốn trích của bài "Tức cảnh Pác Bó" vào đây (để trống thì phần dẫn chỉ nêu tên bài thơ).
+_PB_THO = ""
+
+_PB_TOA_DO = {
+    "km0": (22.9777875, 106.051203125),
+    "hang": (22.9872767, 106.0502709),
+    "lan": (22.9834375, 106.044296875),
+    "moc": (22.9793125, 106.0533125),
+    "suoi": (22.9726677, 106.0467982),
+}
+# tên đầy đủ (trong đề) và tên hai dòng (trên hình)
+_PB_TEN = {
+    "km0": (r"cột mốc Km $0$ của đường Hồ Chí Minh", r"Km $0$"),
+    "hang": (r"hang Cốc Bó", r"hang\\Cốc Bó"),
+    "lan": (r"lán Khuổi Nặm", r"lán\\Khuổi Nặm"),
+    "moc": (r"cột mốc $675$ (mốc $108$ cũ)", r"mốc $675$"),
+    "suoi": (r"một điểm trên suối Lê-nin", r"suối\\Lê-nin"),
+}
+# các bộ bốn địa danh tạo tứ giác lồi, ghi theo thứ tự vòng quanh (đã kiểm bằng toạ độ)
+_PB_TU_GIAC = [("km0", "moc", "hang", "lan"), ("suoi", "km0", "hang", "lan"), ("suoi", "moc", "hang", "lan")]
+
+
+def _pb_hv(p, q):
+    R = 6371008.8
+    la1, lo1, la2, lo2 = (math.radians(x) for x in (p[0], p[1], q[0], q[1]))
+    h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
+    return 2 * R * math.asin(math.sqrt(h))
+
+
+def _pb_goc(a, b, c):
+    """Số đo góc (độ) đối diện cạnh a trong tam giác có ba cạnh a, b, c."""
+    return math.degrees(math.acos((b * b + c * c - a * a) / (2 * b * c)))
+
+
+def _pb_heron(a, b, c):
+    p = (a + b + c) / 2
+    return math.sqrt(p * (p - a) * (p - b) * (p - c))
+
+
+def _pb_dan():
+    tho = (r" với những vần thơ: \textit{%s}" % _PB_THO) if _PB_THO else ""
+    return (r"Ngày $28/1/1941$, sau $30$ năm bôn ba tìm đường cứu nước, Nguyễn Ái Quốc cùng $5$ đồng chí qua cột mốc biên giới số $108$ "
+            r"(nay là mốc $675$) trở về Tổ quốc, đặt chân đến Pác Bó (Hà Quảng, Cao Bằng), một bản nhỏ nơi biên cương. Người sống và làm "
+            r"việc trong hang Cốc Bó bên dòng suối Lê-nin, trong khu vực núi Các Mác, giữa cảnh thiếu thốn, gian khổ mà vẫn lạc quan; "
+            r"tháng $2/1941$ Người viết bài thơ \textit{Tức cảnh Pác Bó} theo thể thất ngôn tứ tuyệt" + tho + r". Từ lán Khuổi Nặm, Hội "
+            r"nghị Trung ương Đảng lần thứ $8$ ($10$-$19/5/1941$) do Người chủ trì đã đặt nhiệm vụ giải phóng dân tộc lên hàng đầu và "
+            r"thành lập Mặt trận Việt Minh. Ngày nay, Pác Bó còn là nơi đặt cột mốc Km $0$ của đường Hồ Chí Minh. Một vùng đất nhỏ bé đã "
+            r"làm nên bước ngoặt lịch sử của cả dân tộc, để mỗi chúng ta thêm tự hào về Bác, về non sông đất nước mình và thêm trân "
+            r"trọng cuộc sống hòa bình hôm nay. ")
+
+
+def _pb_bo():
+    """Chọn bộ bốn địa danh, quay vòng nhãn A, B, C, D; trả về dict gồm tên, AB, BC, CD, DA, AC (m) hợp lệ (lồi)."""
+    while True:
+        bo = random.choice(_PB_TU_GIAC)
+        r = random.randrange(4)
+        ten = [bo[(r + i) % 4] for i in range(4)]
+        P = [_PB_TOA_DO[k] for k in ten]
+        co = {}
+        for nm, i, j in (("AB", 0, 1), ("BC", 1, 2), ("CD", 2, 3), ("DA", 3, 0), ("AC", 0, 2)):
+            co[nm] = int(round(_pb_hv(P[i], P[j]) / 10.0)) * 10 + random.choice([-10, 0, 0, 10])
+        ab, bc, cd, da, ac = (co[k] for k in ("AB", "BC", "CD", "DA", "AC"))
+        if not (ab + ac > bc and bc + ac > ab and ab + bc > ac and cd + da > ac and da + ac > cd and cd + ac > da):
+            continue
+        bac, cad = _pb_goc(bc, ab, ac), _pb_goc(cd, da, ac)
+        bca, acd = _pb_goc(ab, bc, ac), _pb_goc(da, cd, ac)
+        if bac + cad > 175 or bca + acd > 175:                      # đòi tứ giác lồi, góc ở A và C nhọn hơn 175 độ
+            continue
+        bad = bac + cad
+        bd = math.sqrt(ab * ab + da * da - 2 * ab * da * math.cos(math.radians(bad)))
+        if abs(bd - _pb_hv(P[1], P[3])) > 12:                       # giữ BD sát khoảng cách thật (tránh khuếch đại sai số làm tròn)
+            continue
+        return {"ten": ten, "ab": ab, "bc": bc, "cd": cd, "da": da, "ac": ac, "bac": bac, "cad": cad, "bca": bca, "acd": acd,
+                "bad": bad, "bd": bd, "s1": _pb_heron(ab, bc, ac), "s2": _pb_heron(ac, cd, da)}
+
+
+def _pb_hinh(c):
+    ab, bc, cd, da, ac = c["ab"], c["bc"], c["cd"], c["da"], c["ac"]
+    k = 3.3 / ac
+    ax, ay, cx, cy = 0.0, 0.0, ac * k, 0.0
+    bx, by = ab * math.cos(math.radians(c["bac"])) * k, ab * math.sin(math.radians(c["bac"])) * k
+    dx, dy = da * math.cos(math.radians(c["cad"])) * k, -da * math.sin(math.radians(c["cad"])) * k
+    V = [(ax, ay), (bx, by), (cx, cy), (dx, dy)]
+    huong = ["left", "above", "right", "below"]
+    s = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s += "\\fill[green!12] " + " -- ".join("(%.2f,%.2f)" % p for p in V) + " -- cycle;\n"
+    s += "\\draw[very thick] " + " -- ".join("(%.2f,%.2f)" % p for p in V) + " -- cycle;\n"
+    s += "\\draw[dashed] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (ax, ay, cx, cy)
+    for i, (p, h, kd) in enumerate(zip(V, huong, c["ten"])):
+        s += "\\fill (%.2f,%.2f) circle (0.06) node[%s,align=center] {$%s$ (%s)};\n" % (p[0], p[1], h, "ABCD"[i], _PB_TEN[kd][1])
+    G = (sum(p[0] for p in V) / 4, sum(p[1] for p in V) / 4)
+
+    def nhan(P, Q, d, ra_ngoai=True):
+        mx, my = (P[0] + Q[0]) / 2, (P[1] + Q[1]) / 2
+        nx, ny = -(Q[1] - P[1]), Q[0] - P[0]
+        L = math.hypot(nx, ny)
+        nx, ny = nx / L, ny / L
+        if (nx * (G[0] - mx) + ny * (G[1] - my) > 0) == ra_ngoai:
+            nx, ny = -nx, -ny
+        return "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d$ m};\n" % (mx + 0.48 * nx, my + 0.48 * ny, d)
+    for (P, Q, d) in ((V[0], V[1], ab), (V[1], V[2], bc), (V[2], V[3], cd), (V[3], V[0], da)):
+        s += nhan(P, Q, d)
+    s += "\\node[font=\\scriptsize,fill=green!12,inner sep=1pt] at (%.2f,%.2f) {$%d$ m};\n" % (ac * k / 2, 0.0, ac)
+    return s + "\\end{tikzpicture}"
+
+
+def _pb_de(c):
+    ds = ", ".join(r"$%s$ (%s)" % ("ABCD"[i], _PB_TEN[k][0]) for i, k in enumerate(c["ten"]))
+    return (_pb_dan() + r"Theo vị trí đánh dấu trên bản đồ số, bốn địa điểm " + ds + r" là bốn đỉnh của tứ giác lồi $ABCD$ với "
+            r"$AB = %d$ m, $BC = %d$ m, $CD = %d$ m, $DA = %d$ m và đường chéo $AC = %d$ m (khoảng cách theo đường chim bay, "
+            r"làm tròn đến chục mét, xem hình vẽ)." % (c["ab"], c["bc"], c["cd"], c["da"], c["ac"]))
+
+
+def _pb_cau():
+    """Một bộ số đo Pác Bó: bốn địa danh (tứ giác lồi ABCD), AB, BC, CD, DA và đường chéo AC; diện tích hai tam giác ABC, ACD."""
+    while True:
+        c = _pb_bo()
+        S = c["s1"] + c["s2"]
+        if _xa_bien(c["s1"]) and _xa_bien(c["s2"]) and _xa_bien(S / 1e4, 1):
+            return c
+
+
+def _pb_giai(c):
+    """(lời giải hai tam giác + kết luận, phần chỉ tam giác ACD + kết luận, kết luận)."""
+    S = c["s1"] + c["s2"]
+    tg1 = _giai_heron_m("ABC", c["ab"], c["bc"], c["ac"], c["s1"])
+    tg2 = _giai_heron_m("ACD", c["ac"], c["cd"], c["da"], c["s2"])
+    duoi = (r"Vậy $S_{ABCD} = S_{ABC} + S_{ACD} \approx %d\,\text{m}^{2} \approx %s$ ha (vì $1\ \text{ha} = 10\,000\ \text{m}^{2}$)."
+            % (_lt(S), _x1(S / 1e4, 1)))
+    return tg1 + "\\\\\n" + tg2 + "\\\\\n" + duoi, tg1, tg2, duoi
+
+
+def _pb_mc_sa(socau, dang):
+    cau = ""
+    for _ in range(socau):
+        c = _pb_cau()
+        S = c["s1"] + c["s2"]
+        dap = _x1(S / 1e4, 1)
+        giai = _pb_giai(c)[0]
+        if dang == 1:
+            debai = _pb_de(c) + r" Diện tích của tứ giác $ABCD$ (đơn vị héc-ta, làm tròn đến hàng phần mười) là"
+            nh = _ba_nhieu(dap, [_x1(c["s1"] / 1e4, 1), _x1(c["s2"] / 1e4, 1), str(_lt(S)), _x1(S / 2e4, 1)],
+                           buoc=lambda t: _x1(S / 1e4 + 0.9 * t, 1))
+        else:
+            debai = _pb_de(c) + r" Tính diện tích của tứ giác $ABCD$ (đơn vị héc-ta, làm tròn đến hàng phần mười)."
+            nh = [_x1(S / 1e4 + 0.1 * d, 1) for d in (1, -1, 2)]
+        cau += MC_SA_answer_const(debai, dap, nh, giai, _pb_hinh(c), 0, dang)
+    return cau
+
+
+def _pb_tl(socau, dong):
+    cau = ""
+    for _ in range(socau):
+        c = _pb_cau()
+        S = c["s1"] + c["s2"]
+        _, tg1, tg2, duoi = _pb_giai(c)
+        if random.random() < 0.5:
+            ten, Sa, giai_a, giai_b = "ABC", c["s1"], tg1, tg2
+        else:
+            ten, Sa, giai_a, giai_b = "ACD", c["s2"], tg2, tg1
+        ds = [(r"Tính diện tích tam giác $%s$ (đơn vị $\text{m}^{2}$, làm tròn đến hàng đơn vị)." % ten,
+               r"S_{%s} \approx %d\,\text{m}^{2}" % (ten, _lt(Sa)), giai_a),
+              (r"Tính diện tích của tứ giác $ABCD$ (đơn vị héc-ta, làm tròn đến hàng phần mười).",
+               r"S_{ABCD} \approx %s\,\text{ha}" % _x1(S / 1e4, 1), giai_b + "\\\\\n" + duoi)]
+        cau += TL_answer_text(_pb_de(c), ds, _pb_hinh(c), 0, dong)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_J_04(socau, dang=1):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Pác Bó - bốn trong năm địa danh (biến thể cùng dạng với Cổng Trời, Lê Thị Riêng).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (Plus Code Google Maps cô gửi; khoảng cách haversine, khung lỏng ±10 m; chỉ tính chiều dài, không tính góc).
+    """
+    return _pb_mc_sa(socau, 1)
+
+
+def L10_C3_B6_VD036_SA_L_04(socau, dang=2):
+    r"""Diện tích vùng đất tứ giác, Heron hai lần: Pác Bó - bốn trong năm địa danh (biến thể cùng dạng với Cổng Trời, Lê Thị Riêng).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (Plus Code Google Maps cô gửi; khoảng cách haversine, khung lỏng ±10 m; chỉ tính chiều dài, không tính góc).
+    """
+    return _pb_mc_sa(socau, 2)
+
+
+def L10_C3_B6_VD036_TL_I_04(socau, dong=1):
+    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích tứ giác - Pác Bó, bốn trong năm địa danh (biến thể cùng dạng với Cổng Trời).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (Plus Code Google Maps cô gửi; khoảng cách haversine, khung lỏng ±10 m; chỉ tính chiều dài, không tính góc).
+    """
+    return _pb_tl(socau, dong)
 
 
 # =====================================================================================================

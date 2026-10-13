@@ -33,6 +33,10 @@ GOC = Path(__file__).resolve().parents[1]
 # ID duoc phep co nhieu ham - da soi tay, cac ham deu CUNG dang, chi khac
 # ngu lieu/con so (co Lan xem lai 29/09/2026).
 CHO_PHEP_NHIEU_HAM = {
+    # Cong Troi + cong vien Le Thi Rieng (co Lan 13/10/2026): cung dang dien tich vung dat tu giac (Heron hai lan); _01 Cong Troi, _02 cong vien, _03 khu vuc ranh mo
+    "L10_C3_B6_VD036_MC_J",
+    "L10_C3_B6_VD036_SA_L",
+    "L10_C3_B6_VD036_TL_I",
     # bai toan Truong Son (co Lan 13/10/2026): 5 boi canh = 5 bien the cung dang (tram bom / ban do dich vi tri / phuong vi / ong vong / rung chay)
     "L10_C3_B6_VD036_MC_U",   # hoi nhu y a) VD cua 5 boi canh
     "L10_C3_B6_VD036_MC_V",   # hoi nhu y b) VDC cua 5 boi canh

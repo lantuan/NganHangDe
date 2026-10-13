@@ -10128,3 +10128,60 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Cô Lan: câu dẫn thêm ý đường Trường Sơn là con đường huyền thoại, đường ống xăng dầu là "huyền thoại trong huyền thoại" (tìm xác thực), nêu sứ mệnh lịch sử, tầm quan trọng, hy sinh, để học sinh yêu dân tộc và trân trọng hoà bình.
 - Nguồn xác thực: lời Tư lệnh (Trung tướng) Đồng Sỹ Nguyên "Nếu đường Trường Sơn là huyền thoại thì đường ống xăng dầu là huyền thoại trong huyền thoại đó"; "hàng trăm cán bộ, chiến sĩ đã ngã xuống"; xăng dầu phục vụ Chiến dịch Đường 9 - Nam Lào và Chiến dịch Hồ Chí Minh: Hiệp hội Xăng dầu Việt Nam (VINPA), bài "Đường ống xăng dầu Trường Sơn - một dòng sông mang lửa" (lời kể Thiếu tướng Hồ Sỹ Hậu). Đường Trường Sơn gần 20 000 km, 1959-1975, lời Đại tướng Võ Nguyên Giáp "một trong những nhân tố chiến lược có ý nghĩa quyết định": Báo Pháp Luật Việt Nam 18/5/2009 (diễn văn kỉ niệm 50 năm Bộ đội Trường Sơn).
 - `L10_C3.py`: hằng `_TS_DAN_ONG` (bối cảnh 1, 3, 4, 5) và `_TS_DAN_DUONG` (bối cảnh 2, bản đồ) đặt ở đầu phần dẫn; đã bỏ mốc "6/1968 - 2/1975" ở bối cảnh trạm bơm (các nguồn ghi mốc khác nhau) và thay bằng "từ cuối năm 1968 đến năm 1975". Chỉ là chữ trong phần dẫn, không phải dữ kiện để tính. Test liên quan đạt (276).
+
+## 13/10/2026 - Pác Bó: hành trình về nước của Bác (L10_C3, VD036): 2 biến thể của cùng một dạng
+
+- Cô Lan chọn Pác Bó (thơ cách mạng, địa danh lịch sử) và gửi toạ độ: mốc 675 (cạnh mốc 108 cũ) 22,991135; 106,047854 - hang Cốc Bó 22,9875; 106,0503 - lán Khuổi Nặm 22,9841; 106,0435. Khoảng cách THẬT tính bằng haversine: AB (mốc 108 - hang Cốc Bó) = 475 m, BC (hang Cốc Bó - lán Khuổi Nặm) = 792 m, CA (lán Khuổi Nặm - mốc 108) = 900 m. Đề giữ khung "lỏng": mỗi cạnh làm tròn chục mét (480, 790, 900) rồi xê dịch -10, 0, +10 m; không dữ kiện góc.
+- Phần dẫn chung (có nguồn: Báo Nhân Dân 30/1/2025 - Bác về nước 28/1/1941 cùng 5 đồng chí qua mốc 108, Hội nghị Trung ương 8 họp 10-19/5/1941 tại Pác Bó): nêu tự hào về Bác, về một vùng đất nhỏ bé nhưng đầy ý nghĩa lịch sử.
+- ID mới (mỗi ID có `_01`, `_02`): `MC_W` (hỏi như ý a, VD), `MC_X` (như ý b, VDC), `SA_Y` (VD), `SA_Z` (VDC), `TL_O` (ý a VD + ý b VDC). Cùng "Dang", `boi_canh: "pac_bo"`, đã thêm vào `CHO_PHEP_NHIEU_HAM`. `_01`: a) diện tích tam giác (Heron, héc-ta); b) khoảng cách ngắn nhất từ hang Cốc Bó đến đường thẳng nối mốc 108 và lán Khuổi Nặm (đường cao). `_02`: a) góc lớn nhất (hệ quả côsin); b) khoảng cách từ hang Cốc Bó đến trung điểm M của AC (trung tuyến).
+- `L10_C3.py`: `_PB_DAN`, `_pb_bo`, `_pb_hinh`, `_pb_de`, `_pb_1`, `_pb_2`, `_pb_mc_sa`, `_pb_tl` + 15 hàm mỏng; mapping +5 dòng. Test: `tests/test_l10_c3_pac_bo.py` (đọc ba cạnh trong đề, dựng tam giác bằng toạ độ, tự tính lại; kiểm khoảng cách thật từ toạ độ).
+- CHƯA dùng: toạ độ Km 0 đường Hồ Chí Minh cô gửi (19,011681; 105,253018) nằm cách khu di tích Pác Bó khoảng 450 km nên không phải Km 0 ở Pác Bó (Báo Nhân Dân ghi Km 0 ở khu di tích); chờ cô lấy lại toạ độ chuột phải trên cột mốc Km 0 ở Pác Bó. Hang Cốc Bó (22,9875; 106,0503) cô ghi là "xấp xỉ vị trí cửa hang" nên cần kiểm lại trên Google Maps.
+
+## 13/10/2026 - GỠ bài Pác Bó khỏi ngân hàng (chưa kiểm chứng được toạ độ)
+
+- Cô Lan: cái nào không kiểm chứng được thì phải bỏ qua. Toạ độ hang Cốc Bó (22,9875; 106,0503, cô ghi "xấp xỉ vị trí cửa hang") và lán Khuổi Nặm (22,9841; 106,0435) không kiểm chứng được bằng nguồn nào ở đây (các bài báo không ghi toạ độ, không tra được bản đồ); toạ độ Km 0 (19,011681; 105,253018) cách Pác Bó khoảng 450 km nên sai.
+- Đã gỡ khỏi `data/python_bank/toan10/L10_C3.py` khối Pác Bó (15 hàm `L10_C3_B6_VD036_{MC_W,MC_X,SA_Y,SA_Z,TL_O}_0{1,2}`), 5 dòng mapping `boi_canh: "pac_bo"` và 5 ID trong `CHO_PHEP_NHIEU_HAM`. Mã và test cất ở `nhap/pac_bo_cho_kiem_toa_do.py`, `nhap/test_l10_c3_pac_bo_cho_kiem_toa_do.py` để dán lại khi có toạ độ chuẩn (mặc định 3 điểm mốc 108, hang Cốc Bó, lán Khuổi Nặm). Ngân hàng trở về như trước bài Pác Bó (414 test chương 3, ID, bối cảnh đạt).
+- Câu dẫn cần sửa khi dùng lại: bỏ ý "hoạch định đường lối" (chưa kiểm chứng), đổi "dưới chân núi Các Mác" thành "trong khu vực núi Các Mác" (theo Wikipedia).
+
+## 13/10/2026 (tối) - Bài Pác Bó trở lại ngân hàng với toạ độ đã kiểm chứng (cô Lan duyệt)
+
+- Cô Lan gửi ảnh Google Maps có Plus Code: Km 0 đường Hồ Chí Minh `X3H2+4F8`, Khu di tích `X3H2+44X`, lán Khuổi Nặm `X2MV+9PF` (tiền tố khu vực `7PJ8`). Giải mã Plus Code: Km 0 = 22,97779; 106,05120; lán Khuổi Nặm = 22,98344; 106,04430 (các toạ độ gõ tay trước đó lệch 80-400 m nên bỏ). Hang Cốc Bó dùng 22,98728; 106,05027 (showcaves.com, lệch toạ độ cô gửi ~25 m). Mốc 675 bỏ vì chưa có nguồn.
+- Tam giác thật: A = Km 0, B = hang Cốc Bó, C = lán Khuổi Nặm; AB ≈ 1060 m, BC ≈ 750 m, CA ≈ 950 m (haversine, đường chim bay), khung lỏng ±10 m.
+- Thêm vào `L10_C3.py` (trước mục ĐÚNG/SAI GIẢI TAM GIÁC): `L10_C3_B6_VD036_MC_W/MC_X/SA_Y/SA_Z/TL_O` (mỗi ID 2 biến thể `_01`, `_02`): _01 = diện tích Heron (ha) + khoảng cách ngắn nhất từ B đến AC; _02 = góc lớn nhất (góc C) + trung tuyến BM. Mapping `boi_canh: "pac_bo"`, a) VD, b) VDC; 5 ID đã vào `CHO_PHEP_NHIEU_HAM`.
+- Phần dẫn (đều có nguồn): Bác về nước 28/1/1941 qua mốc 108 sau 30 năm; ở hang Cốc Bó bên suối Lê-nin; bài thơ *Tức cảnh Pác Bó* (tháng 2/1941, thất ngôn tứ tuyệt); Hội nghị Trung ương 8 (10-19/5/1941) tại lán Khuổi Nặm, thành lập Mặt trận Việt Minh; Km 0 đường Hồ Chí Minh đặt ở Pác Bó. KHÔNG chép lời thơ: hằng `_PB_THO` (đầu khối) để trống, cô dán câu thơ muốn trích vào đó.
+- Test mới `tests/test_l10_c3_pac_bo.py` (giải mã Plus Code bằng bộ giải tự viết, kiểm với ví dụ chuẩn của đặc tả; dựng tam giác bằng toạ độ để tính lại đáp số SA/MC/TL; kiểm khoảng cách thật 1060/750/950; mapping).
+- Dọn: `nhap/pac_bo_cu_kiem_thu.py` (test cũ, toạ độ cũ) và `nhap/pac_bo_cho_kiem_toa_do.py`, `nhap/pac_bo_block_moi.py`, `nhap/pb_mau_ra.tex` là file nháp, cô xoá được.
+
+## 13/10/2026 (khuya) - Bài Pác Bó nâng từ tam giác lên TỨ GIÁC, 4 trong 5 địa danh (cô Lan duyệt)
+
+- Cô Lan gửi thêm Plus Code mốc 675 (= mốc 108 cũ, `X3H3+P8`, ô ~14 m) và liên kết Google Maps "suối Lê Nin" (ghim ở 22,97267; 106,04680 - lấy từ địa chỉ chuyển hướng của liên kết; ghim là MỘT điểm trên dòng suối, cách hang Cốc Bó ~1,7 km, nên đề ghi "một điểm trên suối Lê-nin"). Năm địa danh: Km 0, hang Cốc Bó, lán Khuổi Nặm, mốc 675, suối Lê-nin.
+- Thay khối tam giác trong `L10_C3.py` bằng khối tứ giác (cùng 5 ID `VD036_MC_W/MC_X/SA_Y/SA_Z/TL_O`, 2 biến thể `_01`, `_02`): mỗi đề chọn ngẫu nhiên một trong 3 bộ bốn địa danh tạo tứ giác LỒI (hai bộ còn lại lõm nên bỏ), nhãn A, B, C, D quay vòng; cho 4 cạnh và đường chéo AC (khung lỏng ±10 m, BD giữ trong 12 m so với khoảng cách thật).
+  - `_01`: a) diện tích tứ giác (hai tam giác, Heron, ha) - VD; b) khoảng cách giữa B và D (hai côsin, cộng góc, côsin) - VDC.
+  - `_02`: a) góc ABC (côsin) - VD; b) khoảng cách từ D đến đường thẳng AB (hai côsin, cộng góc, sin) - VDC.
+- Toạ độ năm địa danh nằm trong `_PB_TOA_DO` (có chú thích nguồn). `tests/test_l10_c3_pac_bo.py` được viết lại: giải mã Plus Code độc lập, dựng tứ giác bằng toạ độ để tính lại đáp số, so từng số đo trong đề với khoảng cách thật của ĐÚNG bốn địa danh nêu tên (lệch ≤ 15 m), kiểm tứ giác lồi, ba bộ đều xuất hiện, mapping, dẫn.
+- Bản tam giác cũ còn ở `nhap/pac_bo_block_moi.py` (file nháp, cô xoá được cùng `nhap/pac_bo_tu_giac.py`, `nhap/pb_mau_ra.tex`).
+
+## 13/10/2026 (khuya, lần 2) - Pác Bó tứ giác: câu hỏi chọn NGẪU NHIÊN, có câu tìm diện tích (cô Lan yêu cầu)
+
+- Mỗi ID `VD036_MC_W/MC_X/SA_Y/SA_Z/TL_O` nay chỉ còn MỘT hàm `_01` (bỏ `_02`), mỗi lần sinh chọn ngẫu nhiên câu hỏi: ý a) (VD) = diện tích tứ giác HOẶC góc ABC; ý b) (VDC) = BD HOẶC khoảng cách từ D đến AB HOẶC diện tích tam giác ABD (thêm để câu VDC cũng có thể hỏi diện tích). Bỏ 5 ID khỏi `CHO_PHEP_NHIEU_HAM` (mỗi ID một hàm).
+- `tests/test_l10_c3_pac_bo.py` nhận dạng câu hỏi trong đề rồi tính lại bằng toạ độ để so (SA, MC, TL, 120 seed mỗi loại) + test bắt buộc câu hỏi diện tích xuất hiện ở cả ý a) lẫn ý b).
+
+## 13/10/2026 (khuya, lần 3) - Công viên Lê Thị Riêng: HAI biến thể của dạng Cổng Trời (cô Lan duyệt)
+
+- Sự kiện năm nay (quy tập hài cốt liệt sĩ tại Công viên Văn hóa Lê Thị Riêng, lễ viếng - truy điệu - an táng 14/10/2026). Theo ý cô: đây là CÙNG MỘT DẠNG "tính diện tích vùng đất thực tế từ các cạnh" với Cổng Trời, chỉ khác cách hỏi, nên KHÔNG tạo chữ cái dạng mới mà thêm biến thể vào chính `L10_C3_B6_VD036_MC_J`, `SA_L`, `TL_I` (mỗi ID thêm `_02`, `_03`; `_01` vẫn là Cổng Trời).
+  - `_02`: tìm diện tích CÔNG VIÊN (đáp số ha, làm tròn 1 chữ số thập phân; dẫn nêu ba khu vực rãnh mộ chỉ khoảng 2 500 m²).
+  - `_03`: tìm diện tích KHU VỰC rãnh mộ - mỗi câu ngẫu nhiên một trong bốn khu vực (Khu vực 1 ≈ 800 m², Khu vực 2 ≈ 1 200 m², Khu vực 3 ≈ 500 m², khu vực tìm kiếm mở rộng ≈ 5 800 m²; đáp số m²; dẫn nêu công viên khoảng 7,5 ha).
+  - Tứ giác ABCD chia bởi BD, Heron hai lần; SỐ ĐO CÁC CẠNH LÀ GIẢ ĐỊNH (đề ghi rõ), chọn ngẫu nhiên sao cho diện tích lệch số thật ≤ 3%, tứ giác lồi, góc nhỏ nhất ≥ 15°. Đề không nêu diện tích của chính đối tượng được hỏi. TL: a) (VD) diện tích một tam giác, b) (VDC) diện tích cả vùng.
+- Số liệu thật dùng trong đề (chỉ những điều đã kiểm chứng): Tết Mậu Thân 1968, bắt đầu quy tập 6/7/2026, 731 bộ hài cốt đến 11/10/2026, ước tính hơn 900 liệt sĩ, lễ viếng - truy điệu - an táng 14/10/2026; diện tích các khu vực và công viên theo sơ đồ cô gửi (công viên ghi ≈ 75 000 m², báo ghi ≈ 8 ha). Nguồn của sơ đồ: cô Lan cho biết tên nguồn để ghi vào đây. Không dùng toạ độ, không nêu tên phường (chưa kiểm chứng).
+- `L10_C3.py`: `_hinh_cong_troi` thêm tham số `don_vi` (mặc định "km", Cổng Trời không đổi; Lê Thị Riêng ghi "m"). Khối mới đặt trước mục "BÀI TOÁN THỰC TIỄN GẮN VỚI ĐƯỜNG TRƯỜNG SƠN".
+- Mapping 3 dòng giữ cùng `Dang` (đã viết lại bao cả Cổng Trời và Lê Thị Riêng), `boi_canh` vẫn `cong_troi` (một đề chỉ có tối đa một câu thuộc dạng này). 3 ID thêm vào `CHO_PHEP_NHIEU_HAM`.
+- Test mới `tests/test_l10_c3_le_thi_rieng.py` (tính lại diện tích từ toạ độ dựng theo 5 số đo trong đề, so SA/MC/TL, diện tích sát số thật, đề không lộ đáp số, 4 phương án khác nhau, cả bốn khu vực xuất hiện, hình ghi m, Cổng Trời vẫn km, mapping).
+
+## 13/10/2026 (khuya, lần 4) - Pác Bó gộp vào CÙNG DẠNG diện tích; nguồn sơ đồ Lê Thị Riêng (cô Lan chốt)
+
+- Nguồn sơ đồ diện tích các khu vực / công viên Lê Thị Riêng: Cổng thông tin Chính phủ (baochinhphu.vn), bài "Thông tin mới về việc tìm kiếm, xác định rãnh mộ tập thể liệt sĩ tại Công viên Lê Thị Riêng": https://baochinhphu.vn/thong-tin-moi-ve-viec-tim-kiem-xac-dinh-ranh-mo-tap-the-liet-si-tai-cong-vien-le-thi-rieng-102260703163252822.htm
+- Cô Lan: đề thực tế chỉ tính chiều dài trên bản đồ, KHÔNG tính góc tam giác; diện tích Pác Bó cũng từ các cạnh nên cùng một dạng với Cổng Trời và Lê Thị Riêng. Đã làm:
+  - Pác Bó thành biến thể `_04` của `L10_C3_B6_VD036_MC_J`, `SA_L`, `TL_I` (hỏi diện tích tứ giác ABCD bằng Heron hai lần, đáp số ha; TL: a) diện tích một tam giác ABC hoặc ACD, b) cả tứ giác). Bốn địa danh, số đo, khung ±10 m giữ nguyên như bản đã duyệt.
+  - GỠ 5 ID riêng `VD036_MC_W`, `MC_X`, `SA_Y`, `SA_Z`, `TL_O` (hàm, dòng mapping, `boi_canh: "pac_bo"`) và các câu hỏi góc / khoảng cách / diện tích tam giác ABD. Bản cũ cất ở `nhap/pac_bo_nhieu_cau_hoi_cu.py` (file nháp, cô xoá được).
+  - Từ nay MC_J / SA_L / TL_I có: `_01` Cổng Trời, `_02` công viên Lê Thị Riêng, `_03` khu vực rãnh mộ, `_04` Pác Bó; `Dang` của 3 dòng bao cả bốn; `boi_canh` vẫn `cong_troi` (một đề tối đa một câu dạng này).
+  - `tests/test_l10_c3_pac_bo.py` viết lại cho `_04` (tính lại diện tích từ toạ độ, đề không có góc, số đo khớp khoảng cách thật ≤ 15 m, ba bộ tứ giác xuất hiện, mapping không còn ID Pác Bó riêng).
