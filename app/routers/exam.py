@@ -42,7 +42,7 @@ from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
 from app.services.exam_assembler_service import duong_dapan_en, duong_tex_en, bien_dich_pdf_tieng_anh
-from app.services.i18n_service import lay_ngon_ngu
+from app.services.i18n_service import lay_ngon_ngu, luu_y_pham_vi_tieng_anh, chuong_co_ban_tieng_anh
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
@@ -278,6 +278,13 @@ class GenerateExamAutoRequest(BaseModel):
     # đáp án). Không tick -> chỉ có bản Việt (đỡ tốn công). None = lời gọi không nói (n8n): tra lựa chọn đã ghi
     # theo conversation_id (xem tuy_chon_de_service).
     kem_tieng_anh: bool | None = None
+
+
+@router.get("/pham-vi-tieng-anh")
+def pham_vi_tieng_anh_endpoint(request: Request):
+    """Lưu ý cạnh ô "Kèm bản tiếng Anh": tiếng Anh mới có đến lớp / chương nào (theo ngôn ngữ trang đang xem)."""
+    return {"success": True, "luu_y": luu_y_pham_vi_tieng_anh(lay_ngon_ngu(request)),
+            "chuong": {str(lop): ds for lop, ds in chuong_co_ban_tieng_anh().items()}}
 
 
 @router.post("/generate-pdf-auto")

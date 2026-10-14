@@ -832,7 +832,8 @@ function veKetQua(ketQua) {
     // Mac dinh giu nhu de vua lam; hien o moi trang, du trang dang o tieng Viet hay tieng Anh.
     html += '<label style="display:block;margin:12px 0 6px;font-size:.95rem;color:#475569">' +
         '<input type="checkbox" id="chk-kem-anh-khac"' + (CO_BAN_ANH ? ' checked' : '') + '> ' +
-        'Kèm bản tiếng Anh (đề mới có cả Việt và Anh)</label>';
+        'Kèm bản tiếng Anh (đề mới có cả Việt và Anh)</label>' +
+        '<div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>';
     html += '<button class="nut-nop" id="nut-de-khac" onclick="lamDeKhac()">' +
         '🔄 Làm đề khác cùng cấu trúc</button>';
     html += '<div id="loi-de-khac" class="ghi-chu-tl" style="display:none;margin-top:10px;"></div>';
@@ -1129,5 +1130,6 @@ function gopKetQua(ketQuaChinh, ketQuaAnh) {
 taiDe();
 </script>
 
+<script src="/static/js/luu_y_tieng_anh.js"></script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+[
+ {
+  "tim": "DAU_THAP_PHAN = \",\"",
+  "thay": "DAU_THAP_PHAN = \".\""
+ },
+ {
+  "tim": "replace('.', ',')",
+  "thay": "replace('.', DAU_THAP_PHAN)",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"0,5\"]",
+  "thay": "\"0.5\"]"
+ },
+ {
+  "tim": ".rstrip(\"0\").rstrip(\",\") != _L(v)",
+  "thay": ".rstrip(\"0\").rstrip(\".\") != _L(v)"
+ },
+ {
+  "tim": "x.replace(\",0\", \"\")",
+  "thay": "x.replace(\".0\", \"\")"
+ },
+ {
+  "tim": "else \"sai\"",
+  "thay": "else \"false\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"Sai. \" +",
+  "thay": "\"False. \" +",
+  "tat_ca": true
+ },
+ {
+  "tim": "r\"Sai. $r =",
+  "thay": "r\"False. $r ="
+ },
+ {
+  "tim": "\"nam\"",
+  "thay": "\"south\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "tAC[6:]",
+  "thay": "tAC[8:]",
+  "tat_ca": true
+ },
+ {
+  "tim": "ts[6:]",
+  "thay": "ts[8:]",
+  "tat_ca": true
+ },
+ {
+  "tim": "len(\"equal to\")",
+  "thay": "len(\"is\")",
+  "tat_ca": true
+ },
+ {
+  "tim": "Heron cho",
+  "thay": "Heron gives",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"Chia cho chu vi\"",
+  "thay": "\"Divided by the perimeter\""
+ },
+ {
+  "tim": "(cm), chu vi $2p",
+  "thay": "(cm), perimeter $2p"
+ },
+ {
+  "tim": "r\"Suy ra $",
+  "thay": "r\"Hence $"
+ },
+ {
+  "tim": "r\"Chu vi $=",
+  "thay": "r\"Perimeter $="
+ },
+ {
+  "tim": "    for k, tu in ((\"approximately $%s$\", (\"greater than\", \"less than\")), (\"equal to $%s$\", (\"greater than\", \"less than\")),\n                  (\"equal to $%s$\", (\"greater than\", \"less than\")), (\"about $%s$\", (\"more than\", \"less than\"))):\n        if mau.count(k) == 1:\n            return mau.replace(k, \"%s $%s$\"), tu",
+  "thay": "    for k, rep, tu in ((\"approximately $%s$\", \"%s $%s$\", (\"greater than\", \"less than\")),\n                       (\"equals $%s$\", \"is %s $%s$\", (\"greater than\", \"less than\")),\n                       (\"is $%s$\", \"is %s $%s$\", (\"greater than\", \"less than\")),\n                       (\"about $%s$\", \"%s $%s$\", (\"more than\", \"less than\"))):\n        if mau.count(k) == 1:\n            return mau.replace(k, rep), tu"
+ },
+ {
+  "tim": "    elif mau.count(\"equal to $%s$\") == 1:\n        mau_xx = mau.replace(\"equal to $%s$\", \"approximately $%s$\")",
+  "thay": "    elif mau.count(\"equals $%s$\") == 1:\n        mau_xx = mau.replace(\"equals $%s$\", \"is approximately $%s$\")"
+ },
+ {
+  "tim": "\"\"\"Dữ liệu vừa sinh không dùng được (sát ranh giới làm tròn...): sinh lại.\"\"\"",
+  "thay": "\"\"\"The generated data is unusable (too close to a rounding boundary...): generate again.\"\"\"",
+  "tat_ca": true
+ }
+]

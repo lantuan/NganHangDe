@@ -697,7 +697,7 @@
                              phai go lai "cau 3 cua de vua nay" - bam nut thi may
                              chu BIET CHAC de nao, cau nao. -->
                         <div class="px-4 py-2 border-t text-sm text-slate-600" id="hang-tick-anh">
-                            <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh (đề có cả Việt và Anh, tải về là .zip; không tick thì chỉ có bản tiếng Việt)</label>
+                            <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh (đề có cả Việt và Anh, tải về là .zip; không tick thì chỉ có bản tiếng Việt)</label><div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>
                         </div>
                         <div id="hang-nut-gui" class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
                             <div id="nhom-nut-phu" class="flex items-center gap-2 flex-wrap">
@@ -1591,7 +1591,8 @@ ${html}
         function htmlTickKemAnh() {
             return `<label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" ` +
                 `${kemAnh() ? "checked" : ""} onchange="datKemAnh(this.checked)"> ` +
-                `Kèm bản tiếng Anh (đề có cả Việt và Anh)</label>`;
+                `Kèm bản tiếng Anh (đề có cả Việt và Anh)</label>` +
+                '<div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>';
         }
         // File tai ve la PDF hay .zip do may chu quyet dinh (Content-Disposition), nen link KHONG gan
         // download="ten.pdf" (se doi ten .zip thanh .pdf). Chi link blob (khong qua may chu) moi can.
@@ -1785,6 +1786,7 @@ ${html}
 
     </script>
 
+<script src="/static/js/luu_y_tieng_anh.js"></script>
 </body>
 
 </html>

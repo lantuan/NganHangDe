@@ -116,6 +116,45 @@ def lay_ngon_ngu(request) -> str:
     return ma if ma in NGON_NGU else MAC_DINH
 
 
+def chuong_co_ban_tieng_anh() -> dict:
+    """Các chương ĐÃ có ngân hàng câu hỏi tiếng Anh: {lớp: [số chương, ...]}. Đọc thẳng từ các tệp
+    data/python_bank_en/toan<lớp>/L<lớp>_C<chương>.py nên tự cập nhật khi thêm chương mới dịch."""
+    kq = {}
+    for f in (GOC / "data" / "python_bank_en").glob("toan*/L*_C*.py"):
+        m = re.fullmatch(r"L(\d+)_C(\d+)", f.stem)
+        if m:
+            kq.setdefault(int(m.group(1)), set()).add(int(m.group(2)))
+    return {lop: sorted(ds) for lop, ds in sorted(kq.items())}
+
+
+def _dai_chuong(ds: list) -> str:
+    """[1, 2, 3, 5] -> '1-3, 5' (số chương liên tiếp gộp thành khoảng)."""
+    khoang, i = [], 0
+    while i < len(ds):
+        j = i
+        while j + 1 < len(ds) and ds[j + 1] == ds[j] + 1:
+            j += 1
+        khoang.append(str(ds[i]) if i == j else "%d-%d" % (ds[i], ds[j]))
+        i = j + 1
+    return ", ".join(khoang)
+
+
+def luu_y_pham_vi_tieng_anh(ngon_ngu: str = "vi") -> str:
+    """Lưu ý hiện cạnh ô "Kèm bản tiếng Anh": tiếng Anh mới có đến lớp / chương nào."""
+    co = chuong_co_ban_tieng_anh()
+    if ngon_ngu == "en":
+        if not co:
+            return "Note: the English version is not available yet for any chapter."
+        ds = "; ".join("Grade %d: Chapter%s %s" % (lop, "s" if len(c) > 1 else "", _dai_chuong(c)) for lop, c in co.items())
+        return ("Note: the English version currently covers only %s. Questions from other chapters "
+                "are not available in English yet (the Vietnamese exam is always created)." % ds)
+    if not co:
+        return "Lưu ý: hiện chưa có chương nào có bản tiếng Anh."
+    ds = "; ".join("Lớp %d: Chương %s" % (lop, _dai_chuong(c)) for lop, c in co.items())
+    return ("Lưu ý: bản tiếng Anh hiện mới có đến %s. Các chương khác chưa có tiếng Anh "
+            "(bản tiếng Việt của đề vẫn được tạo đầy đủ)." % ds)
+
+
 NUT_CHUYEN = """
 <div id="chv-lang" style="position:fixed;top:8px;right:12px;z-index:2147483000;display:flex;gap:0;
 border:1px solid rgba(0,0,0,.25);border-radius:999px;overflow:hidden;font:600 12px/1 system-ui,sans-serif;

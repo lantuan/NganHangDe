@@ -18,7 +18,7 @@ vectơ = vector; tập hợp = set; mệnh đề = statement; hình bình hành 
 hình thoi = rhombus; tam giác đều = equilateral triangle; trung điểm = midpoint; cùng phương / cùng hướng / ngược hướng =
 parallel (collinear) / same direction / opposite direction.
 
-## Ngân hàng câu hỏi tiếng Anh (đã xong Lớp 10 Chương 1 và Chương 2, 03/10/2026)
+## Ngân hàng câu hỏi tiếng Anh (đã xong Lớp 10 Chương 1, 2 và 3; cô Lan chốt DỪNG ở Chương 3 ngày 14/10/2026)
 - Thư mục riêng `data/python_bank_en/toan10/L10_C1.py`, `L10_C2.py`... (cùng tên hàm, tham số như bản Việt). KHÔNG sửa tay: sửa bản Việt (data/python_bank) rồi chạy lại
   `python3 scripts/dich_ngan_hang.py dich data/python_bank/toan10/L10_C1.py`.
 - Cách dịch: tách chuỗi hiển thị (str, f-string) trong cây cú pháp thành đơn vị; từ điển `data/i18n/bank/en_<tệp>.json` {nguồn Việt: nguồn Anh | "__GIU__"} (giữ nguyên toán, %s %d, {biểu thức}, thứ tự placeholder); `__GIU__` cho chuỗi mà mã dùng làm khoá logic.
@@ -53,7 +53,7 @@ parallel (collinear) / same direction / opposite direction.
 Cột `file_de.loai_file` có CHECK constraint chỉ nhận các loại cũ (de, loigiai, tex, dapan_json...). Các dòng `de_en`, `loigiai_en`, `tex_en` từng được ghi cho đề giáo viên tick tiếng Anh bị từ chối âm thầm, nên ba liên kết tiếng Anh ở bảng "Đề đã tạo" đều báo "Đề này không có bản tiếng Anh". Nay bản Anh nằm cạnh bản Việt, CÙNG TÊN: `.tex` ở `data/temp_en/`, PDF ở `data/exports_en/`. Bản Anh KHÔNG biên dịch PDF lúc tạo đề (mỗi PDF 30-60 giây; Việt + Anh = 4 lần biên dịch làm giáo viên chờ rất lâu, có lúc nginx cắt kết nối): `_sinh_kem_tieng_anh` chỉ ghi `.tex` + đáp án Anh (`chi_dap_an=True`). Giáo viên tick thì `teacher.py` mở một luồng nền gọi `bien_dich_nen_tieng_anh` biên dịch PDF đề rồi PDF lời giải bản Anh; bấm tải trước khi xong thì `bien_dich_pdf_tieng_anh` chờ khoá của đúng PDF đó rồi trả (không biên dịch đè hai lần). PDF có sẵn thì trả ngay, kể cả khi `.tex` đã bị dọn. Quy tắc tên: `.tex` Anh tên `exam_x_loigiai.tex` (giáo viên) -> PDF đề `exam_x.pdf`, PDF lời giải `exam_x_loigiai.pdf`; BỎ đuôi `_loigiai` trước khi ghép tên, nếu không PDF lời giải thực ra là PDF đề (lỗi 03/10/2026). Bảng giáo viên với đề tick tiếng Anh có 10 liên kết: 5 bản Việt (PDF đề, PDF lời giải, Word đề, Word lời giải, .tex) + 5 bản Anh (cùng loại; Word Anh qua `tai-word?ngon_ngu=en`). Tuyệt đối không thêm loại tệp mới vào `file_de` nếu chưa sửa CHECK constraint trên Supabase. Test: test_giao_vien_tick_tieng_anh_cac_lien_ket_tieng_anh_tai_duoc_dung_ban.
 
 ## Khi nào một đề có bản tiếng Anh (quan trọng với CHV_Fun)
-Bản Anh của đề (tệp đáp án + .tex tiếng Anh cạnh tệp Việt, `data/temp_en/`, cùng tên) CHỈ có khi người dùng tick "Kèm bản tiếng Anh" lúc tạo đề (học sinh: Chat AI, form nhanh, thẻ xác nhận, "Làm đề khác"; giáo viên: Ra đề, ô "Tạo kèm đề tiếng Anh tương ứng") VÀ chương đó đã có ngân hàng tiếng Anh (hiện Lớp 10 Chương 1, 2). Đề cũ trước 03/10/2026 không có. Trang làm bài ở English mà đề không có bản Anh vẫn hiện tiếng Việt kèm chú thích vàng. Muốn có bản Anh phải TẠO ĐỀ MỚI có tick. Quy tắc này đã chép vào `data/prompts/CHV_Fun.md` (rule 5, task `help`): dán sang node CHV_Fun trên n8n thì CHV_Fun mới trả lời đúng khi người dùng hỏi.
+Bản Anh của đề (tệp đáp án + .tex tiếng Anh cạnh tệp Việt, `data/temp_en/`, cùng tên) CHỈ có khi người dùng tick "Kèm bản tiếng Anh" lúc tạo đề (học sinh: Chat AI, form nhanh, thẻ xác nhận, "Làm đề khác"; giáo viên: Ra đề, ô "Tạo kèm đề tiếng Anh tương ứng") VÀ chương đó đã có ngân hàng tiếng Anh (hiện Lớp 10 Chương 1, 2, 3). Đề cũ trước 03/10/2026 không có. Trang làm bài ở English mà đề không có bản Anh vẫn hiện tiếng Việt kèm chú thích vàng. Muốn có bản Anh phải TẠO ĐỀ MỚI có tick. Quy tắc này đã chép vào `data/prompts/CHV_Fun.md` (rule 5, task `help`): dán sang node CHV_Fun trên n8n thì CHV_Fun mới trả lời đúng khi người dùng hỏi.
 
 ## Tải kèm cả hai thứ tiếng cho giáo viên (03/10/2026)
 - Ô tick "Tải kèm bản tiếng Anh" trên Trang chính và "Đề đã tạo" (`_base_gv.html` có script chung; liên kết có `data-ca-hai` chỉ khi đề có bản Anh). Tick thì PDF đề, PDF lời giải, Word đề/lời giải và `.tex` thêm `ngon_ngu=ca-hai` và trả `.zip` có `*_TiengViet` và `*_English`.
@@ -98,7 +98,7 @@ Xem docs/23 mục 8b: cùng cách chọn tệp đáp án bản Anh (`data/temp_e
 
 ## Chu trình tự làm bản tiếng Anh của ngân hàng (cô Lan chốt 09/10/2026)
 
-Hiện chỉ có Lớp 10 Chương 1 và 2. Chương 3, 4... làm khi có kinh phí. Nguyên tắc: **chỉ sửa bản Việt; bản Anh (`data/python_bank_en/`) do máy sinh ra, KHÔNG sửa tay** (sửa tay sẽ bị ghi đè và test `test_ban_anh_sinh_ra_tu_ban_viet_khong_sua_tay` đỏ).
+Hiện có Lớp 10 Chương 1, 2 và 3. Cô Lan chốt (14/10/2026): DỪNG ở Chương 3 cho sản phẩm nộp, KHÔNG dịch Chương 4 trở đi (chương khác làm khi có kinh phí). Nguyên tắc: **chỉ sửa bản Việt; bản Anh (`data/python_bank_en/`) do máy sinh ra, KHÔNG sửa tay** (sửa tay sẽ bị ghi đè và test `test_ban_anh_sinh_ra_tu_ban_viet_khong_sua_tay` đỏ).
 
 ### Khi có thay đổi ở bản Việt của chương đã có bản Anh
 1. Hoàn tất bản Việt trước, test bản Việt qua (xem docs/26 "Chu trình tổng").
@@ -128,3 +128,8 @@ Hiện chỉ có Lớp 10 Chương 1 và 2. Chương 3, 4... làm khi có kinh p
 
 ### Ghi chú môi trường
 Trong môi trường làm việc của Claude (không xoá được tệp), 4 test của `test_ngan_hang_anh.py` (tải đề: gia sư AI tiếng Anh, tải PDF học sinh, zip hai thứ tiếng, liên kết giáo viên) và 4 test của `test_xuat_word.py` đỏ vì `PermissionError`, không phải lỗi mã. Trên máy cô Lan phải qua.
+
+## Lưu ý phạm vi tiếng Anh cho người dùng (cô Lan 14/10/2026)
+- Cạnh MỌI ô tick "Kèm bản tiếng Anh" (Chat AI `chat.html`, "Làm đề khác" ở `lam_bai.html`, Ra đề của giáo viên `ra_de.html`) có dòng lưu ý: "tiếng Anh hiện mới có đến Lớp 10: Chương 1-3" (bản Anh: "the English version currently covers only Grade 10: Chapters 1-3").
+- Dòng này KHÔNG viết tay: `app/services/i18n_service.py::luu_y_pham_vi_tieng_anh` đọc các tệp `data/python_bank_en/toan<lớp>/L<lớp>_C<chương>.py`, nên thêm chương mới dịch thì lưu ý tự cập nhật. Máy chủ trả chữ theo ngôn ngữ trang đang xem qua `GET /api/exam/pham-vi-tieng-anh`; `app/static/js/luu_y_tieng_anh.js` điền vào mọi phần tử có thuộc tính `data-pham-vi-anh` (kể cả HTML dựng bằng JS).
+- Test: `tests/test_pham_vi_tieng_anh.py`.

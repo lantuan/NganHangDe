@@ -10229,3 +10229,11 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 
 ## 2026-10-13 - Hình cây cổ thụ: nhãn độ dài không đè nhãn góc (cô Lan)
 - `_tr_hinh2`: nhãn độ dài bóng cây (AC) đặt PHÍA TRÊN cạnh AC thay vì phía dưới, tránh trùng nhãn góc nghiêng sườn đồi ở A.
+
+## 2026-10-14 - Tiếng Anh Lớp 10 Chương 3 + lưu ý phạm vi tiếng Anh (cô Lan)
+- Dừng làm đề mới; chỉ hoàn thiện sản phẩm nộp. Cô chốt DỪNG bản tiếng Anh ở Chương 3 (không dịch Chương 4).
+- Bản Anh `data/python_bank_en/toan10/L10_C3.py` (534 hàm) sinh bằng `scripts/dich_ngan_hang.py` từ từ điển `data/i18n/bank/en_L10_C3.json` + `patch_L10_C3.json` (dấu thập phân ".", "Sai"/"nam"/"sai" không dấu, cắt chuỗi "hướng "/"bằng", bảng mẫu so sánh `_tf_mau_bdt`/`_tf_ct`, chuỗi Việt không dấu). Ngày tháng giữ dạng `$d/m/yyyy$` (kèm "day/month/year") để toán khớp bản Việt.
+- `scripts/kiem_tuong_duong.py L10_C3 4`: 534 hàm, 0 hàm lệch.
+- Lưu ý "tiếng Anh mới có đến Lớp 10: Chương 1-3" cạnh mọi ô "Kèm bản tiếng Anh" (chat.html, lam_bai.html, ra_de.html); tự cập nhật theo thư mục `python_bank_en`: `GET /api/exam/pham-vi-tieng-anh`, `app/static/js/luu_y_tieng_anh.js`, `i18n_service.luu_y_pham_vi_tieng_anh`.
+- Test mới `tests/test_pham_vi_tieng_anh.py`; `test_chuong_chua_dich_thanh_dong_thieu_tieng_anh` đổi ví dụ "chương chưa dịch" từ Chương 3 sang Chương 4. Cập nhật `docs/28`, `docs/26`, `data/prompts/CHV_Fun.md`.
+

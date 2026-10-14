@@ -183,5 +183,5 @@ Dùng khi cô Lan tự viết (hoặc nhờ AI viết) một dạng câu hỏi m
 5. **Chạy nháp**: `python3 scripts/nhap.py <ID>_01 -n 10` rồi mở PDF trong `nhap/` để soi (bước 2, 3 ở trên).
 6. **Test**: `python3 -m pytest tests -q --ignore=tests/test_supabase.py -p no:cacheprovider`. Dòng cuối phải là `passed`. Nên có thêm một file test kiểm đáp án ĐỘC LẬP cho dạng mới (đọc số trong đề, tự tính lại; xem `tests/test_l10_c2_pha_che.py`, `tests/test_l10_c2_dien_tich_tam_giac.py`).
 7. **Ghi `docs/16_CHANGELOG.md`** một mục ngắn.
-8. **Nếu chương đã có bản tiếng Anh (lớp 10 chương 1, 2): làm tiếp "Chu trình bản tiếng Anh" ở `docs/28_DA_NGON_NGU.md` NGAY**, không làm thì test bản Anh đỏ.
+8. **Nếu chương đã có bản tiếng Anh (lớp 10 chương 1, 2, 3): làm tiếp "Chu trình bản tiếng Anh" ở `docs/28_DA_NGON_NGU.md` NGAY**, không làm thì test bản Anh đỏ.
 9. **Đẩy lên**: `day` (GitHub) hoặc `day web` (GitHub + VPS).

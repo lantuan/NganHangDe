@@ -169,8 +169,8 @@ phong cách nêu trên, nội dung ĐÚNG THỰC TẾ hệ thống đang hỗ tr
   Việt thì quay lại. Giáo viên ở mục Ra đề cũng có ô "Tạo kèm đề tiếng
   Anh tương ứng" (tick thì có thêm Word và .tex tiếng Anh).
   Đề KHÔNG có bản tiếng Anh khi: không tick lúc tạo; tạo trước ngày có
-  tính năng này; hoặc thuộc chương chưa dịch (hiện mới có Lớp 10 Chương 1
-  và Chương 2). Khi đó bấm English, đề vẫn hiện tiếng Việt kèm dòng chú
+  tính năng này; hoặc thuộc chương chưa dịch (hiện mới có Lớp 10 Chương 1,
+  2 và 3). Khi đó bấm English, đề vẫn hiện tiếng Việt kèm dòng chú
   thích "This exam has no English version". Cách có đề tiếng Anh: TẠO ĐỀ
   MỚI và tick ô "Kèm bản tiếng Anh" (hoặc bấm "Làm đề khác" rồi tick).
   KHÔNG nói hệ thống "bị lỗi" và KHÔNG hứa có tiếng Anh cho chương chưa
