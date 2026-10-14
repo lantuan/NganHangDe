@@ -194,6 +194,15 @@ Test: `tests/test_chon_cau_khong_na_na.py`.
    (`_khoa_mo_ta` trong question_selector_service). Vì vậy khi viết dạng SA/TL
    cho một đơn vị đã có MC, nên làm **bài toán khác** chứ không chép dạng MC.
 
+6. **Ma trận cụ thể theo bài** (trang Ra đề giáo viên, 14/10/2026, xem 16_CHANGELOG.md):
+   số câu "có sẵn" của mỗi ô (bài x MC/SA x NB/TH/VD; Đúng/Sai và Tự luận theo chương) là số
+   **HÀM thật** trong ngân hàng Python (dạng x biến thể `_01`, `_02`...), đếm trong
+   `ma_tran_bai_service.so_cau_ngan_hang`, KHÔNG đếm dòng Mapping (Mapping chỉ khai dạng, không có
+   biến thể). Dạng chỉ có trong Mapping mà chưa có hàm thì không tính. Ô đặt câu mà có 0 hàm thì chặn;
+   đặt nhiều hơn số hàm thì vẫn tạo đề, hết hàm thì áp dụng đúng các mục 2 và 3 ở trên (lấy dạng,
+   biến thể dùng ít nhất, số liệu ngẫu nhiên khác), giao diện chỉ báo vàng "sẽ lặp lại dạng".
+   Toàn bộ việc chọn, xoay vòng và random này nằm trong code FastAPI; n8n không tham gia.
+
 ---
 
 ## 8. Kho bối cảnh cho bài toán thực tế (không trùng bối cảnh trong một đề)

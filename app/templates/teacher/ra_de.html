@@ -95,9 +95,18 @@ NB - TH - VD - VDC. Tự luận: số câu là số CÂU, mỗi câu 2 ý, tỉ 
 <p class="text-sm text-on-surface-variant mt-unit">
 Khai báo tổng NB, TH, VD của cả đề (VD gồm cả VDC). Mỗi câu Đúng/Sai tự trừ 1 NB, 1 TH và 2 VD; mỗi câu tự luận
 tự trừ 2 VD (ý VD và ý VDC). Phần còn lại cô chia vào từng bài; phần VD của trắc nghiệm và trả lời ngắn được
-chia 2 VD : 1 VDC. Chỉ tạo đề được khi các số còn lại về 0 và mỗi ô không vượt quá số câu ngân hàng đang có.
+chia 2 VD : 1 VDC. Chỉ tạo đề được khi các số còn lại về 0 và mỗi ô đặt câu đều đã có hàm sinh trong ngân hàng.
 Không dùng chung với ô tự đặt tỉ lệ phần trăm ở trên.
 </p>
+<style>
+/* Ma tran theo bai: dong chan/le dam nhat de de phan biet (co Lan 14/10/2026) */
+#khung-ma-tran-bai tbody tr.mtb-dong:nth-child(odd) { background: rgba(100, 116, 139, 0.16); }
+#khung-ma-tran-bai tbody tr.mtb-dong:nth-child(even) { background: rgba(100, 116, 139, 0.04); }
+#khung-ma-tran-bai tbody tr.mtb-dong:hover { background: rgba(37, 99, 235, 0.14); }
+#khung-ma-tran-bai tbody tr.mtb-dong td { padding-top: 6px; padding-bottom: 6px; }
+#khung-ma-tran-bai tbody tr.mtb-dong td:first-child { border-radius: 10px 0 0 10px; }
+#khung-ma-tran-bai tbody tr.mtb-dong td:last-child { border-radius: 0 10px 10px 0; }
+</style>
 <div id="khung-ma-tran-bai" class="mt-stack-md" style="display:none">
 <div class="flex flex-wrap gap-stack-md items-end">
 <div><label class="block text-sm font-medium" for="mtb_tong_nb">Tổng NB</label>
@@ -119,10 +128,11 @@ Không dùng chung với ô tự đặt tỉ lệ phần trăm ở trên.
 <tr class="text-sm text-on-surface-variant"><th>NB</th><th>TH</th><th>VD</th><th>NB</th><th>TH</th><th>VD</th></tr>
 </thead>
 <tbody></tbody></table>
-<p class="text-sm text-on-surface-variant mt-unit">Số nhỏ bên dưới mỗi ô là số câu tối đa ngân hàng có; ô gạch ngang là ngân hàng chưa có câu loại đó.</p>
+<p class="text-sm text-on-surface-variant mt-unit">Số nhỏ bên dưới mỗi ô là số hàm sinh câu (dạng x biến thể) trong ngân hàng Python; ô gạch ngang là chưa có hàm. Đặt nhiều hơn số hàm vẫn tạo được đề, dạng sẽ lặp lại với số liệu khác.</p>
 </div>
 <p id="mtb-con-lai" class="mt-stack-md font-medium"></p>
 <p id="mtb-vdc" class="text-sm text-on-surface-variant mt-unit"></p>
+<p id="mtb-lap" class="text-sm mt-unit" style="color:#b45309"></p>
 <p id="mtb-loi" class="text-sm text-red-700 mt-unit"></p>
 </div>
 </div>
@@ -293,12 +303,18 @@ function kiemTraMtb() {
         if (!loi && cl[m] > 0) loi = 'Còn thiếu ' + cl[m] + ' câu ' + m.toUpperCase() + ' chưa phân vào bài.';
         if (!loi && cl[m] < 0) loi = 'Đã phân dư ' + (-cl[m]) + ' câu ' + m.toUpperCase() + ' so với tổng đã khai.';
     });
+    // Vuot so ham co san: VAN TAO DUOC DE (het ham thi lap lai bien the voi so lieu khac) -> chi bao vang.
+    const lap = [];
     document.querySelectorAll('#khung-ma-tran-bai input[data-toida]').forEach(i => {
         const n = parseInt(i.value) || 0, t = parseInt(i.dataset.toida);
         const vuot = n > t;
-        i.style.borderColor = vuot ? '#b91c1c' : '';
-        if (vuot && !loi) loi = 'Ô ' + i.dataset.ten + ': ngân hàng chỉ có ' + t + ' câu, cô đặt ' + n + '.';
+        i.style.borderColor = vuot ? '#d97706' : '';
+        i.style.backgroundColor = vuot ? 'rgba(245, 158, 11, 0.18)' : '';
+        if (vuot) lap.push(i.dataset.ten + ': có ' + t + ' hàm, đặt ' + n);
     });
+    document.getElementById('mtb-lap').textContent = lap.length
+        ? 'Các ô sau đặt nhiều hơn số hàm có sẵn nên sẽ lặp lại dạng với số liệu khác: ' + lap.join('; ') + '.'
+        : '';
     conLai.style.color = (cl.nb === 0 && cl.th === 0 && cl.vd === 0) ? '#15803d' : '#b45309';
     document.getElementById('mtb-loi').textContent = loi;
     return loi === '';
@@ -309,8 +325,9 @@ function dungKhungMtb(kh) {
     tbC.innerHTML = '';
     kh.chuong.forEach(c => {
         const tr = document.createElement('tr');
+        tr.className = 'mtb-dong';
         const ten = 'Chương ' + c.chuong_so + (c.ten_chuong ? '. ' + c.ten_chuong : '');
-        tr.innerHTML = '<td class="text-left py-1"></td>';
+        tr.innerHTML = '<td class="text-left py-1 px-2"></td>';
         tr.firstChild.textContent = ten;
         [['tf', c.tf_toi_da, 'Đúng/Sai'], ['tl', c.tl_toi_da, 'Tự luận']].forEach(([k, t, nhan]) => {
             const td = document.createElement('td');
@@ -319,7 +336,7 @@ function dungKhungMtb(kh) {
             const i = td.firstChild;
             i.name = 'mtb_' + k + '_' + c.chuong_so; i.dataset.k = k; i.dataset.toida = t; i.dataset.ten = ten + ', ' + nhan;
             if (!t) { i.disabled = true; i.value = 0; }
-            td.lastChild.textContent = t ? ('tối đa ' + t) : '–';
+            td.lastChild.textContent = t ? ('có ' + t + ' hàm') : '–';
             tr.appendChild(td);
         });
         tbC.appendChild(tr);
@@ -328,7 +345,8 @@ function dungKhungMtb(kh) {
     tbB.innerHTML = '';
     kh.bai.forEach(b => {
         const tr = document.createElement('tr');
-        tr.innerHTML = '<td class="text-left py-1"></td>';
+        tr.className = 'mtb-dong';
+        tr.innerHTML = '<td class="text-left py-1 px-2"></td>';
         tr.firstChild.textContent = 'Chương ' + b.chuong_so + ' - Bài ' + b.bai_so + (b.ten_bai ? '. ' + b.ten_bai : '');
         [['mc', 'trac_nghiem'], ['sa', 'tra_loi_ngan']].forEach(([lk, loai]) => {
             ['nb', 'th', 'vd'].forEach(m => {
@@ -340,7 +358,7 @@ function dungKhungMtb(kh) {
                 i.name = 'mtb_o_' + b.bai_id + '_' + lk + '_' + m; i.dataset.muc = m; i.dataset.toida = t;
                 i.dataset.ten = 'Bài ' + b.bai_so + ' ' + (lk === 'mc' ? 'trắc nghiệm' : 'trả lời ngắn') + ' ' + m.toUpperCase();
                 if (!t) { i.disabled = true; i.value = 0; }
-                td.lastChild.textContent = t ? ('≤ ' + t) : '–';
+                td.lastChild.textContent = t ? ('có ' + t) : '–';
                 tr.appendChild(td);
             });
         });

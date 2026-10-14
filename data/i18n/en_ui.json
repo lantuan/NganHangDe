@@ -646,5 +646,12 @@
  "tự trừ 2 VD (ý VD và ý VDC). Phần còn lại cô chia vào từng bài; phần VD của trắc nghiệm và trả lời ngắn được": "automatically uses 2 VD (one VD part and one VDC part). You assign the rest to lessons; the VD part of multiple-choice and short-answer is",
  "Đã phân dư": "Over-assigned by",
  "Đúng/Sai": "True/False",
- "Đặt số câu cụ thể theo bài (trắc nghiệm, trả lời ngắn; Đúng/Sai và tự luận chọn theo chương)": "Set exact question counts per lesson (multiple choice, short answer; True/False and essay chosen per chapter)"
+ "Đặt số câu cụ thể theo bài (trắc nghiệm, trả lời ngắn; Đúng/Sai và tự luận chọn theo chương)": "Set exact question counts per lesson (multiple choice, short answer; True/False and essay chosen per chapter)",
+ ": có": ": has",
+ "Các ô sau đặt nhiều hơn số hàm có sẵn nên sẽ lặp lại dạng với số liệu khác:": "These cells ask for more than the available generators, so types will repeat with different numbers:",
+ "Số nhỏ bên dưới mỗi ô là số hàm sinh câu (dạng x biến thể) trong ngân hàng Python; ô gạch ngang là chưa có hàm. Đặt nhiều hơn số hàm vẫn tạo được đề, dạng sẽ lặp lại với số liệu khác.": "The small number under each cell is the number of question generators (type x variant) in the Python bank; a dash means none yet. You can ask for more and the exam is still created; types will repeat with different numbers.",
+ "chia 2 VD : 1 VDC. Chỉ tạo đề được khi các số còn lại về 0 và mỗi ô đặt câu đều đã có hàm sinh trong ngân hàng.": "split 2 VD : 1 VDC. The exam can only be created when the remaining numbers reach 0 and every cell you fill has a generator in the bank.",
+ "có": "has",
+ "hàm": "generators",
+ "hàm, đặt": "generators, you set"
 }

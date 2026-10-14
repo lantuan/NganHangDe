@@ -50,11 +50,34 @@ def test_kiem_tra_bao_dung_o_lech():
     assert MTB.kiem_tra_ma_tran_bai({"tong": {"NB": 0, "TH": 0, "VD": 0}, "tf": {}, "tl": {}, "o": {}}, 10, pv)
     ngoai = {**MT, "o": {**MT["o"], "L10_C1_B1": {"trac_nghiem": {}}}}
     assert any("không nằm trong phạm vi" in x for x in MTB.kiem_tra_ma_tran_bai(ngoai, 10, pv))
-    # B6 chưa có câu MC mức NB trong ngân hàng -> chặn, nêu rõ ô
+    # B6 chưa có hàm MC mức NB trong ngân hàng Python -> chặn, nêu rõ ô
     mt = {"tong": {"NB": 1, "TH": 0, "VD": 0}, "tf": {}, "tl": {},
           "o": {"L10_C3_B6": {"trac_nghiem": {"NB": 1}}}}
     loi = MTB.kiem_tra_ma_tran_bai(mt, 10, pv)
-    assert loi and "L10_C3_B6" in loi[0] and "ngân hàng chỉ có" in loi[0]
+    assert loi and "L10_C3_B6" in loi[0] and "chưa có hàm" in loi[0]
+
+
+def test_dem_theo_ham_python_khong_theo_dong_mapping():
+    """Cô Lan 14/10/2026: số có sẵn = số hàm (dạng x biến thể) trong ngân hàng Python."""
+    import re
+    from app.services.mapping_service import PYTHON_BANK_DIR, load_mapping, phan_loai_cau
+    ng = MTB.so_cau_ngan_hang(10, ["L10_C3_B5"])
+    src = (PYTHON_BANK_DIR / "toan10" / "L10_C3.py").read_text(encoding="utf-8")
+    ham = Counter(re.findall(r"^def (L\d+_[A-Za-z0-9_]+?)_\d{2}\s*\(", src, re.M))
+    mong = sum(ham.get(r["id"], 0) for r in load_mapping(10, 3)
+               if r["id"].startswith("L10_C3_B5_") and phan_loai_cau(r) == "trac_nghiem" and r["muc_do"] == "NB")
+    assert ng["o"]["L10_C3_B5"]["trac_nghiem"]["NB"] == mong > 0
+    assert ng["tf"][3] == sum(ham.get(r["id"], 0) for r in load_mapping(10, 3) if phan_loai_cau(r) == "dung_sai_cau_lon")
+
+
+def test_dat_hon_so_ham_chi_canh_bao_khong_chan():
+    pv = ["L10_C3_B5"]
+    co = MTB.so_cau_ngan_hang(10, pv)["o"]["L10_C3_B5"]["tra_loi_ngan"]["NB"]
+    mt = {"tong": {"NB": co + 1, "TH": 0, "VD": 0}, "tf": {}, "tl": {},
+          "o": {"L10_C3_B5": {"tra_loi_ngan": {"NB": co + 1}}}}
+    assert MTB.kiem_tra_ma_tran_bai(mt, 10, pv) == []
+    cb = MTB.canh_bao_ma_tran_bai(mt, 10, pv)
+    assert len(cb) == 1 and "lặp lại" in cb[0]
 
 
 def test_khung_cho_form():

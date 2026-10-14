@@ -109,9 +109,26 @@ def cau_truc_tong_quat(mt: dict) -> dict:
 # ----------------------------------------------------------------------------------------
 # Số câu tối đa ngân hàng có (để hiện trên form và để chặn trước khi tạo đề)
 # ----------------------------------------------------------------------------------------
+def _dem_ham_theo_id(lop: int, chuong: int) -> dict[str, int]:
+    """{ID dạng (Generator ID trong Mapping): số HÀM (biến thể _01, _02...) thật trong ngân hàng Python}.
+    Đọc thẳng tệp .py bằng văn bản (không import). Dạng chỉ có trong Mapping mà chưa viết hàm thì không có."""
+    from app.services.mapping_service import PYTHON_BANK_DIR
+    f = PYTHON_BANK_DIR / f"toan{lop}" / f"L{lop}_C{chuong}.py"
+    if not f.exists():
+        return {}
+    try:
+        src = f.read_text(encoding="utf-8")
+    except OSError:
+        return {}
+    return dict(Counter(re.findall(r"^def (L\d+_[A-Za-z0-9_]+?)_\d{2}\s*\(", src, re.M)))
+
+
 def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
-    """{"o": {bai_id: {loai: {muc: n}}}, "tf": {chuong: n}, "tl": {chuong: n}} - đếm số dạng câu
-    trong Mapping (mức TL: số dạng TL mức VD)."""
+    """{"o": {bai_id: {loai: {muc: n}}}, "tf": {chuong: n}, "tl": {chuong: n}}.
+
+    n = số HÀM sinh câu thật trong ngân hàng Python (mỗi dạng x biến thể _01, _02... là một hàm),
+    không phải số dòng Mapping: Mapping chỉ khai dạng, biến thể chỉ có trong Python (cô Lan 14/10/2026).
+    Số này không phải trần cứng: đặt nhiều hơn thì bộ chọn dùng lại biến thể với số liệu khác."""
     from app.services.mapping_service import load_mapping, phan_loai_cau
     chuong = sorted({int(_BAI.match(b).group(2)) for b in pham_vi_bai if _BAI.match(b)})
     kq = {"o": {b: {l: {m: 0 for m in MUC} for l in LOAI_O.values()} for b in pham_vi_bai},
@@ -121,21 +138,25 @@ def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
             rows = load_mapping(lop, c)
         except (FileNotFoundError, ValueError):
             rows = []
+        ham = _dem_ham_theo_id(lop, c)
         kq["tf"][c] = 0
         kq["tl"][c] = 0
         for r in rows:
+            n_ham = ham.get(r["id"], 0)
+            if not n_ham:
+                continue
             loai = phan_loai_cau(r)
             if loai == "dung_sai_cau_lon":
-                kq["tf"][c] += 1
+                kq["tf"][c] += n_ham
                 continue
             m = _ROW_BAI.match(r["id"])
             bai_id = f"L{lop}_C{c}_B{int(m.group(1))}" if m else None
             if loai == "tu_luan":
                 if r.get("muc_do") == "VD":
-                    kq["tl"][c] += 1
+                    kq["tl"][c] += n_ham
                 continue
             if loai in TEN_LOAI and bai_id in kq["o"] and r.get("muc_do") in MUC:
-                kq["o"][bai_id][loai][r["muc_do"]] += 1
+                kq["o"][bai_id][loai][r["muc_do"]] += n_ham
     return kq
 
 
@@ -163,24 +184,36 @@ def kiem_tra_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str
                 loi.append(f"Chương {c} không nằm trong phạm vi đề.")
     if loi:
         return loi
-    ng = so_cau_ngan_hang(lop, pham_vi_bai)
-    for bai, loais in mt["o"].items():
-        for loai, muc in loais.items():
-            for m, n in muc.items():
-                co = ng["o"].get(bai, {}).get(loai, {}).get(m, 0)
-                if n > co:
-                    loi.append(f"{bai}, {TEN_LOAI[loai]} {m}: ngân hàng chỉ có {co} câu, cô đặt {n}.")
-    for c, n in mt["tf"].items():
-        if n > ng["tf"].get(c, 0):
-            loi.append(f"Chương {c}, Đúng/Sai: ngân hàng chỉ có {ng['tf'].get(c, 0)} câu, cô đặt {n}.")
-    for c, n in mt["tl"].items():
-        if n > ng["tl"].get(c, 0):
-            loi.append(f"Chương {c}, Tự luận: ngân hàng chỉ có {ng['tl'].get(c, 0)} câu, cô đặt {n}.")
+    for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai)):
+        if co == 0:
+            loi.append(f"{ten}: ngân hàng Python chưa có hàm sinh câu loại này, cô đặt {n}.")
     return loi
 
 
+def _o_dang_dat(mt: dict, ng: dict):
+    """(tên ô, số câu cô đặt, số hàm có sẵn) cho mọi ô cô đặt > 0."""
+    for bai, loais in mt["o"].items():
+        for loai, muc in loais.items():
+            for m, n in muc.items():
+                if n > 0:
+                    yield (f"{bai}, {TEN_LOAI[loai]} {m}", n, ng["o"].get(bai, {}).get(loai, {}).get(m, 0))
+    for c, n in mt["tf"].items():
+        if n > 0:
+            yield (f"Chương {c}, Đúng/Sai", n, ng["tf"].get(c, 0))
+    for c, n in mt["tl"].items():
+        if n > 0:
+            yield (f"Chương {c}, Tự luận", n, ng["tl"].get(c, 0))
+
+
+def canh_bao_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str]:
+    """Ô đặt NHIỀU HƠN số hàm có sẵn: vẫn tạo được đề (hết hàm thì bộ chọn dùng lại biến thể
+    với số liệu khác, quy định của cô Lan), chỉ báo để cô biết câu sẽ lặp dạng."""
+    return [f"{ten}: ngân hàng có {co} hàm, cô đặt {n} câu nên sẽ lặp lại dạng với số liệu khác."
+            for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai)) if 0 < co < n]
+
+
 # ----------------------------------------------------------------------------------------
-# Khung hiển thị cho form (danh sách bài, số câu tối đa)
+# Khung hiển thị cho form (danh sách bài, số hàm có sẵn)
 # ----------------------------------------------------------------------------------------
 def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chuong: str | None) -> dict:
     from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23, _load_ppct
