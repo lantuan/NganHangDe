@@ -122,7 +122,7 @@ def test_chuong_chua_dich_thanh_dong_thieu_tieng_anh(monkeypatch):
     """Chương chưa có bản Anh: đề tiếng Anh hiện dòng [MISSING ...], đề tiếng Việt vẫn bình thường."""
     import app.services.exam_assembler_service as A
     monkeypatch.setattr(A, "compile_pdf", lambda tex, lang="vi": Path(tex).with_suffix(".pdf"))
-    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "teacher", "HeSo1", pham_vi_chuong="4",
+    kq = A.generate_exam_pdf_auto(10, "ĐỀ", "teacher", "HeSo1", pham_vi_chuong="5",
                                   socau_ma_de=1, kem_tieng_anh=True, tieu_de_en="QUIZ")
     en_tex = Path(kq["tieng_anh"]["tex_path"]).read_text(encoding="utf-8")
     assert "MISSING IN PYTHON" in en_tex

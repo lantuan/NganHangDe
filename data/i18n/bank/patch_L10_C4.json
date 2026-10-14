@@ -1,0 +1,17 @@
+[
+ {
+  "tim": "else \"sai\"",
+  "thay": "else \"false\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "\"nam\"",
+  "thay": "\"south\"",
+  "tat_ca": true
+ },
+ {
+  "tim": "\\textbf{sai}",
+  "thay": "\\textbf{false}",
+  "tat_ca": true
+ }
+]

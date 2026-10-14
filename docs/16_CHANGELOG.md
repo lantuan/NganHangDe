@@ -10237,3 +10237,8 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Lưu ý "tiếng Anh mới có đến Lớp 10: Chương 1-3" cạnh mọi ô "Kèm bản tiếng Anh" (chat.html, lam_bai.html, ra_de.html); tự cập nhật theo thư mục `python_bank_en`: `GET /api/exam/pham-vi-tieng-anh`, `app/static/js/luu_y_tieng_anh.js`, `i18n_service.luu_y_pham_vi_tieng_anh`.
 - Test mới `tests/test_pham_vi_tieng_anh.py`; `test_chuong_chua_dich_thanh_dong_thieu_tieng_anh` đổi ví dụ "chương chưa dịch" từ Chương 3 sang Chương 4. Cập nhật `docs/28`, `docs/26`, `data/prompts/CHV_Fun.md`.
 
+## 2026-10-14 - Tiếng Anh Lớp 10 Chương 4 (cô Lan)
+- Lý do: phạm vi Giữa kỳ 1 / Cuối kỳ 1 lớp 10 gồm Chương 1-3 và Chương 4 (bài 7, 8), mà Chương 4 chưa có bản Anh nên đề tick "Kèm bản tiếng Anh" không ra bản Anh. Cô chốt thêm Chương 4 (dùng tạm để ra được bản tiếng Anh; cô chưa xem lại toàn bộ bản dịch).
+- `data/python_bank_en/toan10/L10_C4.py` (72 hàm) sinh từ từ điển `data/i18n/bank/en_L10_C4.json` (458 đoạn, 12 đoạn dùng lại từ C1-C3) + `patch_L10_C4.json` ("sai"/`\textbf{sai}` thành "false", "nam" thành "south"). Mã Việt có chỗ phụ thuộc chữ: `"dời" not in phu` nên bản Anh dùng "move" đúng một câu ("move $%s$ to the initial point").
+- `scripts/kiem_tuong_duong.py L10_C4 3`: 72 hàm, 0 lệch. Lưu ý "tiếng Anh mới có đến Lớp 10: Chương 1-4" tự cập nhật. Test "chương chưa dịch" đổi ví dụ sang Chương 5.
+

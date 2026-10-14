@@ -13,7 +13,7 @@ def test_chuong_co_ban_tieng_anh_doc_tu_thu_muc_ngan_hang_anh():
     co = I.chuong_co_ban_tieng_anh()
     tren_dia = sorted(int(p.stem.split("_C")[1]) for p in (GOC / "data" / "python_bank_en" / "toan10").glob("L10_C*.py"))
     assert co[10] == tren_dia
-    assert {1, 2, 3} <= set(co[10])
+    assert {1, 2, 3, 4} <= set(co[10])
 
 
 def test_dai_chuong_gop_khoang_lien_tiep():
