@@ -100,6 +100,8 @@ Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chi
 </p>
 <style>
 /* Ma tran theo bai (co Lan 14/10/2026): hang chuong dam, hang bai dam nhat xen ke */
+/* bat ma tran theo bai: form tran het chieu ngang trang de bang khong bi nho */
+#form-ra-de.mtb-rong { max-width: none !important; }
 #khung-ma-tran-bai table { border-collapse: separate; border-spacing: 0; font-size: 0.9rem; }
 #khung-ma-tran-bai th, #khung-ma-tran-bai td { border: 1px solid rgba(100, 116, 139, 0.35); padding: 4px 6px; }
 #khung-ma-tran-bai thead th { background: rgba(37, 99, 235, 0.12); }
@@ -116,7 +118,7 @@ Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chi
 </style>
 <div id="khung-ma-tran-bai" class="mt-stack-md" style="display:none">
 <div class="overflow-x-auto">
-<table class="text-center" id="mtb-bang" style="min-width: 62rem; width: 100%">
+<table class="text-center" id="mtb-bang" style="min-width: 60rem; width: 100%">
 <thead>
 <tr>
 <th class="mtb-tl" rowspan="2">Chương / Bài</th>
@@ -427,13 +429,17 @@ async function napKhungMtb() {
 }
 chkMtb.addEventListener('change', () => {
     khungMtb.style.display = chkMtb.checked ? '' : 'none';
+    document.getElementById('form-ra-de').classList.toggle('mtb-rong', chkMtb.checked);
     if (chkMtb.checked) {
         chkMaTran.checked = false; bangMaTran.style.display = 'none'; document.getElementById('ma-tran-loi').textContent = '';
         napKhungMtb();
     }
 });
 chkMaTran.addEventListener('change', () => {
-    if (chkMaTran.checked && chkMtb.checked) { chkMtb.checked = false; khungMtb.style.display = 'none'; }
+    if (chkMaTran.checked && chkMtb.checked) {
+        chkMtb.checked = false; khungMtb.style.display = 'none';
+        document.getElementById('form-ra-de').classList.remove('mtb-rong');
+    }
 });
 khungMtb.addEventListener('input', kiemTraMtb);
 selectKiThi.addEventListener('change', napKhungMtb);
