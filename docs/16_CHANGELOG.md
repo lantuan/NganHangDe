@@ -10256,3 +10256,8 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Mỗi chương có một hàng riêng: cô chọn số câu Đúng-Sai và Tự luận ngay ở hàng chương; các cột Biết/Hiểu/VD của hai loại này tự nhảy (mỗi câu Đúng-Sai = 1 Biết + 1 Hiểu + 2 VD, VDC tính vào VD; mỗi câu Tự luận = 2 VD, gồm ý VD và ý VDC). Trắc nghiệm và Trả lời ngắn nhập Biết/Hiểu/VD từng bài. Tổng theo hàng bài, hàng chương, cột và hàng cuối tự tính; dòng ghi VD của MC+SA chia ra bao nhiêu VD và VDC (2:1).
 - Backend: khi form không có `mtb_tong_*`, `doc_ma_tran_bai_tu_form` đặt tổng = đúng số đã điền (hết lỗi thiếu/dư). Server chỉ chặn khi bảng trống hoặc ô có 0 hàm sinh; vượt số hàm thì báo vàng.
 - Đã chạy thử JS bằng jsdom với khung thật (giữa kỳ 1 lớp 10): số nhảy và tổng khớp. Chưa thử trên trình duyệt thật.
+
+## 2026-10-14 - Bấm tải Word lúc hết phiên đăng nhập ra tệp "de_tai_ve.html" (cô Lan)
+- Nguyên nhân (tái hiện được): route `/api/exam/tai-word/...` có kiểm tra giáo viên; khi không còn phiên đăng nhập thì `yeu_cau_giao_vien` chuyển hướng 303 về `/login`, `fetch()` trong `_base_gv.html` theo chuyển hướng, nhận trang đăng nhập (HTML, không có Content-Disposition) rồi lưu với tên mặc định `de_tai_ve` + đuôi `.html`. `.tex` vẫn tải bình thường vì route `.tex` không kiểm tra đăng nhập.
+- Sửa: `app/core/deps.py` `yeu_cau_giao_vien` trả 401 JSON cho đường `/api/*` (trang `/gv/*` vẫn chuyển hướng); `_base_gv.html` không lưu khi bị chuyển hướng hoặc nhận `text/html`, hiện hộp thông báo "phiên đăng nhập đã hết". Test `tests/test_tai_tep_het_phien.py`.
+- Chưa rõ vì sao phiên của cô hết khi trang vẫn đang mở (nghi access_token Supabase hết hạn và làm mới phiên thất bại); cần xem log VPS (`LOI LAM MOI PHIEN`) nếu đăng nhập lại vẫn bị.

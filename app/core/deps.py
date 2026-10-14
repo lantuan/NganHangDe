@@ -95,6 +95,11 @@ def yeu_cau_giao_vien(request: Request, user=None):
     vai_tro = lay_vai_tro(request, user)
 
     if vai_tro == "khach":
+        # Duong /api/* (nut tai Word, PDF...) goi bang fetch(): chuyen huong ve /login se bi fetch
+        # theo luon va TAI NGUYEN TRANG DANG NHAP VE thanh "de_tai_ve.html" (cô Lan 14/10/2026).
+        # Tra 401 de giao dien hien hop thong bao "phien dang nhap het han".
+        if request.url.path.startswith("/api/"):
+            raise HTTPException(status_code=401, detail="Chua dang nhap hoac phien dang nhap da het han.")
         return RedirectResponse("/login", status_code=303)
 
     if vai_tro == profile_service.VAI_TRO_CHUA_CAU_HINH:
