@@ -653,5 +653,20 @@
  "chia 2 VD : 1 VDC. Chỉ tạo đề được khi các số còn lại về 0 và mỗi ô đặt câu đều đã có hàm sinh trong ngân hàng.": "split 2 VD : 1 VDC. The exam can only be created when the remaining numbers reach 0 and every cell you fill has a generator in the bank.",
  "có": "has",
  "hàm": "generators",
- "hàm, đặt": "generators, you set"
+ "hàm, đặt": "generators, you set",
+ ", Tự luận": ", Essay",
+ ", Đúng/Sai": ", True/False",
+ "Biết": "Know",
+ "Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chia 2 VD : 1 VDC. Các hàng tổng và cột tổng tự tính.": "Know, Understand, Apply for each lesson; the Apply part of these two types is split 2 VD : 1 VDC. Total rows and columns are computed automatically.",
+ "Chưa nhập số câu nào vào bảng.": "No question counts entered in the table yet.",
+ "Chương / Bài": "Chapter / Lesson",
+ "Cộng": "Sum",
+ "Giống bảng ma trận đề: cô chọn số câu Đúng/Sai và tự luận theo từng chương ở hàng tên chương (các cột Biết, Hiểu, VD của hai loại này": "Like the exam matrix table: choose the number of True/False and essay questions per chapter on the chapter row (the Know, Understand, Apply columns of these two types",
+ "Hiểu": "Understand",
+ "Trắc nghiệm nhiều lựa chọn": "Multiple choice",
+ "Trắc nghiệm Đúng - Sai": "True - False",
+ "Tổng số câu": "Total questions",
+ "tự nhảy: mỗi câu Đúng/Sai là 1 Biết, 1 Hiểu, 2 VD; mỗi câu tự luận là 2 VD gồm ý VD và ý VDC). Trắc nghiệm và trả lời ngắn cô nhập số câu": "fill in automatically: each True/False question is 1 Know, 1 Understand, 2 Apply; each essay question is 2 Apply, one VD part and one VDC part). For multiple choice and short answer, enter the number of questions",
+ "Ô đặt câu mà ngân hàng Python chưa có hàm sinh thì bị khóa. Không dùng chung với ô tự đặt tỉ lệ phần trăm ở trên.": "A cell whose type has no generator in the Python bank is locked. Cannot be combined with the custom percentage option above.",
+ "Đặt số câu cụ thể theo bài (bảng ma trận: Đúng/Sai và tự luận chọn theo chương)": "Set exact question counts per lesson (matrix table: True/False and essay chosen per chapter)"
 }

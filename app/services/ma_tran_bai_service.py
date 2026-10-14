@@ -66,6 +66,10 @@ def doc_ma_tran_bai_tu_form(form) -> dict | None:
             n = _so_nguyen(form.get(k), f"Ô {m.group(1)} {m.group(2).upper()} {m.group(3).upper()}")
             if n:
                 mt["o"].setdefault(m.group(1), {}).setdefault(LOAI_O[m.group(2)], {})[m.group(3).upper()] = n
+    if not any(f"mtb_tong_{m.lower()}" in form for m in MUC):
+        # Bảng kiểu ma trận đề (cô Lan 14/10/2026): không khai tổng riêng, tổng = đúng những gì
+        # cô đã điền (TF, TL theo chương tự trừ 1+1+2 và 0+0+2).
+        mt["tong"] = da_dung(mt)
     return mt
 
 
@@ -165,7 +169,7 @@ def kiem_tra_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str
     loi = []
     tong = mt["tong"]
     if sum(tong.values()) <= 0:
-        return ["Chưa khai báo tổng NB / TH / VD của đề."]
+        return ["Chưa nhập số câu nào vào bảng ma trận."]
     cl = con_lai(mt)
     for m in MUC:
         if cl[m] > 0:

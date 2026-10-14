@@ -34,6 +34,16 @@ def test_doc_form():
         MTB.doc_ma_tran_bai_tu_form({**FORM, "mtb_tong_nb": "abc"})
 
 
+def test_form_bang_ma_tran_khong_khai_tong_thi_tong_tu_tinh():
+    """Bảng kiểu ma trận đề (cô Lan 14/10/2026): không có ô khai tổng; tổng = những gì cô đã điền."""
+    form = {k: v for k, v in FORM.items() if not k.startswith("mtb_tong_")}
+    mt = MTB.doc_ma_tran_bai_tu_form(form)
+    assert mt["tong"] == {"NB": 2, "TH": 8, "VD": 8} and MTB.con_lai(mt) == {"NB": 0, "TH": 0, "VD": 0}
+    assert MTB.kiem_tra_ma_tran_bai(mt, 10, ["L10_C3_B5", "L10_C3_B6"]) == []
+    rong = MTB.doc_ma_tran_bai_tu_form({"ma_tran_bai": "1"})
+    assert MTB.kiem_tra_ma_tran_bai(rong, 10, ["L10_C3_B5"]) == ["Chưa nhập số câu nào vào bảng ma trận."]
+
+
 def test_tru_tf_tl_va_con_lai():
     assert MTB.da_dung(MT) == {"NB": 2, "TH": 8, "VD": 8}
     assert MTB.con_lai(MT) == {"NB": 0, "TH": 0, "VD": 0}
