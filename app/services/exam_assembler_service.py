@@ -638,8 +638,10 @@ def generate_exam_pdf_auto(
     kem_tieng_anh: bool = False,
     tieu_de_en: str | None = None,
     dapan_tieng_anh: bool = False,
+    ma_tran_bai: dict | None = None,
 ) -> dict:
     """
+    ma_tran_bai: ma trận cụ thể theo bài do giáo viên đặt (ma_tran_bai_service.py); None = như cũ.
     dapan_tieng_anh=True: (đề trực tuyến của học sinh) sinh thêm đáp án tiếng Anh cùng câu, cùng số liệu
     (không biên dịch PDF); kết quả["dapan_en_path"] nếu chương đã có bản Anh đủ câu.
     kem_tieng_anh=True: sinh THÊM đề tiếng Anh tương ứng (kết quả["tieng_anh"], thư mục tiếng Anh riêng).
@@ -655,6 +657,7 @@ def generate_exam_pdf_auto(
             ki_thi=ki_thi,
             pham_vi_chuong=pham_vi_chuong,
             cau_truc_tu_hoc_sinh=cau_truc_tu_hoc_sinh,
+            ma_tran_bai=ma_tran_bai,
         )
     except BlueprintError as e:
         raise AssembleError(f"Lỗi xây Blueprint: {e}")

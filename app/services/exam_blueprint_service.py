@@ -605,6 +605,7 @@ def build_blueprint(
     ki_thi: str | None = None,
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
+    ma_tran_bai: dict | None = None,
 ) -> dict:
     # BƯỚC 1 — xác định phạm vi bài (CN_LoadExamScope)
     if loai_he_so == "HeSo1":
@@ -699,6 +700,26 @@ def build_blueprint(
     dem_dung: Counter = _dem
     blueprint = {"dung_sai": [], "trac_nghiem": [], "tra_loi_ngan": [], "tu_luan": []}
     bao_cao_phan_bo: dict = {}
+
+    # Ma trận CỤ THỂ THEO BÀI do giáo viên đặt (cô Lan 14/10/2026): bỏ qua việc chia theo tỉ lệ /
+    # số tiết, dựng thẳng từ số câu từng bài (xem ma_tran_bai_service.py).
+    if ma_tran_bai:
+        from app.services import ma_tran_bai_service as MTB
+        loi_mt = MTB.kiem_tra_ma_tran_bai(ma_tran_bai, lop, pham_vi_bai)
+        if loi_mt:
+            raise BlueprintError("Ma trận theo bài: " + " ".join(loi_mt))
+        kq_mt = MTB.xay_blueprint(ma_tran_bai, pham_vi_bai, so_bai_theo_chuong, so_tiet_theo_bai,
+                                  _theo_bai_cho_loai, da_dung, dem_dung)
+        return {
+            "pham_vi_bai": pham_vi_bai,
+            "so_bai_theo_chuong": so_bai_theo_chuong,
+            "so_tiet_theo_bai": so_tiet_theo_bai,
+            "cau_truc_tong_quat": MTB.cau_truc_tong_quat(ma_tran_bai),
+            "nguon_cau_truc": "ma_tran_bai",
+            "bao_cao_phan_bo": kq_mt["bao_cao_phan_bo"],
+            "ma_tran_bai": ma_tran_bai,
+            **kq_mt["blueprint"],
+        }
 
     # ---- BƯỚC 4a — Đúng/Sai LÀM TRƯỚC TIÊN (quy định của giáo viên) ----
     # Chọn BÀI cho câu Đúng/Sai trước, vì mỗi câu Đúng/Sai chiếm sẵn

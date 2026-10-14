@@ -87,6 +87,46 @@ NB - TH - VD - VDC. Tự luận: số câu là số CÂU, mỗi câu 2 ý, tỉ 
 </div>
 </div>
 
+<div class="border border-outline-variant rounded-2xl p-stack-md">
+<div class="flex items-start gap-stack-sm">
+<input class="mt-1" id="ma_tran_bai" name="ma_tran_bai" type="checkbox" value="1"/>
+<label class="font-medium" for="ma_tran_bai">Đặt số câu cụ thể theo bài (trắc nghiệm, trả lời ngắn; Đúng/Sai và tự luận chọn theo chương)</label>
+</div>
+<p class="text-sm text-on-surface-variant mt-unit">
+Khai báo tổng NB, TH, VD của cả đề (VD gồm cả VDC). Mỗi câu Đúng/Sai tự trừ 1 NB, 1 TH và 2 VD; mỗi câu tự luận
+tự trừ 2 VD (ý VD và ý VDC). Phần còn lại cô chia vào từng bài; phần VD của trắc nghiệm và trả lời ngắn được
+chia 2 VD : 1 VDC. Chỉ tạo đề được khi các số còn lại về 0 và mỗi ô không vượt quá số câu ngân hàng đang có.
+Không dùng chung với ô tự đặt tỉ lệ phần trăm ở trên.
+</p>
+<div id="khung-ma-tran-bai" class="mt-stack-md" style="display:none">
+<div class="flex flex-wrap gap-stack-md items-end">
+<div><label class="block text-sm font-medium" for="mtb_tong_nb">Tổng NB</label>
+<input class="w-20 px-2 py-1 border border-outline-variant rounded-lg text-center" id="mtb_tong_nb" name="mtb_tong_nb" type="number" min="0" max="100" value="0"/></div>
+<div><label class="block text-sm font-medium" for="mtb_tong_th">Tổng TH</label>
+<input class="w-20 px-2 py-1 border border-outline-variant rounded-lg text-center" id="mtb_tong_th" name="mtb_tong_th" type="number" min="0" max="100" value="0"/></div>
+<div><label class="block text-sm font-medium" for="mtb_tong_vd">Tổng VD (gồm VDC)</label>
+<input class="w-20 px-2 py-1 border border-outline-variant rounded-lg text-center" id="mtb_tong_vd" name="mtb_tong_vd" type="number" min="0" max="100" value="0"/></div>
+</div>
+<div class="mt-stack-md overflow-x-auto">
+<table class="w-full text-center" id="mtb-bang-chuong">
+<thead><tr class="text-sm text-on-surface-variant"><th class="text-left py-1">Chương</th><th>Số câu Đúng/Sai</th><th>Số câu tự luận</th></tr></thead>
+<tbody></tbody></table>
+</div>
+<div class="mt-stack-md overflow-x-auto">
+<table class="w-full text-center" id="mtb-bang-bai">
+<thead>
+<tr class="text-sm text-on-surface-variant"><th class="text-left py-1" rowspan="2">Bài</th><th colspan="3">Trắc nghiệm</th><th colspan="3">Trả lời ngắn</th></tr>
+<tr class="text-sm text-on-surface-variant"><th>NB</th><th>TH</th><th>VD</th><th>NB</th><th>TH</th><th>VD</th></tr>
+</thead>
+<tbody></tbody></table>
+<p class="text-sm text-on-surface-variant mt-unit">Số nhỏ bên dưới mỗi ô là số câu tối đa ngân hàng có; ô gạch ngang là ngân hàng chưa có câu loại đó.</p>
+</div>
+<p id="mtb-con-lai" class="mt-stack-md font-medium"></p>
+<p id="mtb-vdc" class="text-sm text-on-surface-variant mt-unit"></p>
+<p id="mtb-loi" class="text-sm text-red-700 mt-unit"></p>
+</div>
+</div>
+
 <div class="flex items-start gap-stack-sm">
 <input class="mt-1" id="cho_phep_thieu" name="cho_phep_thieu" type="checkbox" value="1" checked/>
 <label class="font-body-md text-body-md text-on-surface-variant" for="cho_phep_thieu">
@@ -163,6 +203,11 @@ document.getElementById('form-ra-de').addEventListener('submit', (e) => {
         document.getElementById('ma-tran-loi').scrollIntoView({behavior: 'smooth', block: 'center'});
         return;
     }
+    if (chkMtb.checked && !kiemTraMtb()) {         // ma tran theo bai chua khop: khong gui
+        e.preventDefault();
+        document.getElementById('mtb-loi').scrollIntoView({behavior: 'smooth', block: 'center'});
+        return;
+    }
     const nut = document.getElementById('nut-tao');
     nut.disabled = true;
     nut.textContent = 'Đang tạo đề, vui lòng chờ…';
@@ -210,6 +255,128 @@ chkMaTran.addEventListener('change', () => {
 });
 selectKiThi.addEventListener('change', () => { if (chkMaTran.checked) napMaTranMacDinh(); });
 bangMaTran.addEventListener('input', kiemTraMaTran);
+
+
+// ---- Ma tran cu the THEO BAI (co Lan 14/10/2026) ----
+const chkMtb = document.getElementById('ma_tran_bai');
+const khungMtb = document.getElementById('khung-ma-tran-bai');
+let khungDuLieu = null;
+
+function soMtb(id) { return parseInt((document.getElementById(id) || {}).value) || 0; }
+function tinhMtb() {
+    // da dung = cac o MC+SA, cong TF (1 NB + 1 TH + 2 VD) va TL (2 VD) moi cau
+    const d = {nb: 0, th: 0, vd: 0};
+    let vdO = 0, tf = 0, tl = 0;
+    document.querySelectorAll('#mtb-bang-bai input').forEach(i => {
+        const m = i.dataset.muc, n = parseInt(i.value) || 0;
+        d[m] += n; if (m === 'vd') vdO += n;
+    });
+    document.querySelectorAll('#mtb-bang-chuong input[data-k="tf"]').forEach(i => { tf += parseInt(i.value) || 0; });
+    document.querySelectorAll('#mtb-bang-chuong input[data-k="tl"]').forEach(i => { tl += parseInt(i.value) || 0; });
+    d.nb += tf; d.th += tf; d.vd += 2 * tf + 2 * tl;
+    return {d, vdO, tf, tl};
+}
+function kiemTraMtb() {
+    if (!chkMtb.checked) return true;
+    const {d, vdO} = tinhMtb();
+    const tong = {nb: soMtb('mtb_tong_nb'), th: soMtb('mtb_tong_th'), vd: soMtb('mtb_tong_vd')};
+    const cl = {nb: tong.nb - d.nb, th: tong.th - d.th, vd: tong.vd - d.vd};
+    const vdc = Math.round(vdO / 3);
+    const dong = ['nb', 'th', 'vd'].map(m => m.toUpperCase() + ': ' + cl[m]).join('   ');
+    const conLai = document.getElementById('mtb-con-lai');
+    conLai.textContent = 'Còn lại chưa phân vào bài: ' + dong;
+    document.getElementById('mtb-vdc').textContent =
+        'VD của trắc nghiệm và trả lời ngắn: ' + vdO + ' câu, chia ra ' + (vdO - vdc) + ' VD và ' + vdc + ' VDC.';
+    let loi = '';
+    if (tong.nb + tong.th + tong.vd <= 0) loi = 'Chưa nhập tổng NB, TH, VD của đề.';
+    ['nb', 'th', 'vd'].forEach(m => {
+        if (!loi && cl[m] > 0) loi = 'Còn thiếu ' + cl[m] + ' câu ' + m.toUpperCase() + ' chưa phân vào bài.';
+        if (!loi && cl[m] < 0) loi = 'Đã phân dư ' + (-cl[m]) + ' câu ' + m.toUpperCase() + ' so với tổng đã khai.';
+    });
+    document.querySelectorAll('#khung-ma-tran-bai input[data-toida]').forEach(i => {
+        const n = parseInt(i.value) || 0, t = parseInt(i.dataset.toida);
+        const vuot = n > t;
+        i.style.borderColor = vuot ? '#b91c1c' : '';
+        if (vuot && !loi) loi = 'Ô ' + i.dataset.ten + ': ngân hàng chỉ có ' + t + ' câu, cô đặt ' + n + '.';
+    });
+    conLai.style.color = (cl.nb === 0 && cl.th === 0 && cl.vd === 0) ? '#15803d' : '#b45309';
+    document.getElementById('mtb-loi').textContent = loi;
+    return loi === '';
+}
+function dungKhungMtb(kh) {
+    khungDuLieu = kh;
+    const tbC = document.querySelector('#mtb-bang-chuong tbody');
+    tbC.innerHTML = '';
+    kh.chuong.forEach(c => {
+        const tr = document.createElement('tr');
+        const ten = 'Chương ' + c.chuong_so + (c.ten_chuong ? '. ' + c.ten_chuong : '');
+        tr.innerHTML = '<td class="text-left py-1"></td>';
+        tr.firstChild.textContent = ten;
+        [['tf', c.tf_toi_da, 'Đúng/Sai'], ['tl', c.tl_toi_da, 'Tự luận']].forEach(([k, t, nhan]) => {
+            const td = document.createElement('td');
+            td.innerHTML = '<input class="w-16 px-2 py-1 border border-outline-variant rounded-lg text-center" type="number" min="0" max="20" value="0"/>'
+                + '<div class="text-xs text-on-surface-variant"></div>';
+            const i = td.firstChild;
+            i.name = 'mtb_' + k + '_' + c.chuong_so; i.dataset.k = k; i.dataset.toida = t; i.dataset.ten = ten + ', ' + nhan;
+            if (!t) { i.disabled = true; i.value = 0; }
+            td.lastChild.textContent = t ? ('tối đa ' + t) : '–';
+            tr.appendChild(td);
+        });
+        tbC.appendChild(tr);
+    });
+    const tbB = document.querySelector('#mtb-bang-bai tbody');
+    tbB.innerHTML = '';
+    kh.bai.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td class="text-left py-1"></td>';
+        tr.firstChild.textContent = 'Chương ' + b.chuong_so + ' - Bài ' + b.bai_so + (b.ten_bai ? '. ' + b.ten_bai : '');
+        [['mc', 'trac_nghiem'], ['sa', 'tra_loi_ngan']].forEach(([lk, loai]) => {
+            ['nb', 'th', 'vd'].forEach(m => {
+                const t = (b.toi_da[loai] || {})[m.toUpperCase()] || 0;
+                const td = document.createElement('td');
+                td.innerHTML = '<input class="w-14 px-2 py-1 border border-outline-variant rounded-lg text-center" type="number" min="0" max="20" value="0"/>'
+                    + '<div class="text-xs text-on-surface-variant"></div>';
+                const i = td.firstChild;
+                i.name = 'mtb_o_' + b.bai_id + '_' + lk + '_' + m; i.dataset.muc = m; i.dataset.toida = t;
+                i.dataset.ten = 'Bài ' + b.bai_so + ' ' + (lk === 'mc' ? 'trắc nghiệm' : 'trả lời ngắn') + ' ' + m.toUpperCase();
+                if (!t) { i.disabled = true; i.value = 0; }
+                td.lastChild.textContent = t ? ('≤ ' + t) : '–';
+                tr.appendChild(td);
+            });
+        });
+        tbB.appendChild(tr);
+    });
+    kiemTraMtb();
+}
+async function napKhungMtb() {
+    if (!chkMtb.checked) return;
+    const q = new URLSearchParams({lop: selectLop.value, ki_thi: selectKiThi.value, pham_vi_chuong: selectChuong.value || ''});
+    document.getElementById('mtb-loi').textContent = '';
+    try {
+        const res = await fetch('/api/exam/ma-tran-bai-khung?' + q.toString());
+        const d = await res.json();
+        if (!res.ok) throw new Error(d.detail || 'Không tải được bảng.');
+        dungKhungMtb(d.data);
+    } catch (e) {
+        document.querySelector('#mtb-bang-chuong tbody').innerHTML = '';
+        document.querySelector('#mtb-bang-bai tbody').innerHTML = '';
+        document.getElementById('mtb-loi').textContent = 'Không tải được bảng bài: ' + e.message;
+    }
+}
+chkMtb.addEventListener('change', () => {
+    khungMtb.style.display = chkMtb.checked ? '' : 'none';
+    if (chkMtb.checked) {
+        chkMaTran.checked = false; bangMaTran.style.display = 'none'; document.getElementById('ma-tran-loi').textContent = '';
+        napKhungMtb();
+    }
+});
+chkMaTran.addEventListener('change', () => {
+    if (chkMaTran.checked && chkMtb.checked) { chkMtb.checked = false; khungMtb.style.display = 'none'; }
+});
+khungMtb.addEventListener('input', kiemTraMtb);
+selectKiThi.addEventListener('change', napKhungMtb);
+selectLop.addEventListener('change', () => setTimeout(napKhungMtb, 600));
+selectChuong.addEventListener('change', napKhungMtb);
 
 capNhatHienThiChuong();
 napDanhSachChuong();

@@ -280,8 +280,8 @@ xuất hiện hai lần. Khi thêm route trùng đường dẫn, luôn kiểm tr
 
 - Màn hình tự gán lớp cho giáo viên — hiện gán bằng SQL trong bảng
   `lop_giao_vien`.
-- Đặt ma trận chi tiết cho từng đề (hiện lấy theo bảng cấu hình chung của
-  loại bài kiểm tra).
+- Đặt ma trận chi tiết cho từng đề: ĐÃ CÓ chế độ "Đặt số câu cụ thể theo bài"
+  (xem docs/16_CHANGELOG.md, 14/10/2026).
 - Sinh một lượt nhiều mã đề thành **các đề riêng biệt**: ô "số mã đề" đã có
   và đã truyền xuống `socau_ma_de`, nhưng cách ghép hiện tại dồn nhiều khối
   `\begin{ex}` vào CÙNG một đề, nên ra một đề mà mỗi câu lặp lại N lần chứ

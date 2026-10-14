@@ -38,6 +38,7 @@ import threading
 from app.services.exam_assembler_service import generate_exam_pdf_auto, AssembleError, bien_dich_nen_tieng_anh
 from app.services.i18n_service import tieu_de_tieng_anh
 from app.services.ma_tran_service import doc_ma_tran_tu_form
+from app.services.ma_tran_bai_service import doc_ma_tran_bai_tu_form
 from app.services.exam_rules_service import ExamRulesError
 
 router = APIRouter()
@@ -119,7 +120,11 @@ async def ra_de_submit(
 
     # Ma tran muc do tu dat (co Lan 03/10/2026): chi MC, SA, TL; Dung/Sai giu nguyen.
     try:
-        cau_truc_tu_gv = doc_ma_tran_tu_form(await request.form())
+        form_ra_de = await request.form()
+        cau_truc_tu_gv = doc_ma_tran_tu_form(form_ra_de)
+        ma_tran_bai_gv = doc_ma_tran_bai_tu_form(form_ra_de)   # đặt số câu cụ thể theo bài (14/10/2026)
+        if cau_truc_tu_gv and ma_tran_bai_gv:
+            raise ExamRulesError("chỉ chọn MỘT trong hai cách đặt ma trận (tỉ lệ % hoặc số câu cụ thể theo bài).")
     except ExamRulesError as e:
         return RedirectResponse("/gv/ra-de?loi=" + quote("Ma trận: " + str(e)), status_code=303)
 
@@ -160,6 +165,7 @@ async def ra_de_submit(
             ki_thi=ki_thi_gui,
             pham_vi_chuong=pham_vi_chuong,
             cau_truc_tu_hoc_sinh=cau_truc_tu_gv,
+            ma_tran_bai=ma_tran_bai_gv,
             socau_ma_de=socau_ma_de,
             cho_phep_thieu=bool(cho_phep_thieu),
             kem_tieng_anh=bool(kem_tieng_anh),

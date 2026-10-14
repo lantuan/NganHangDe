@@ -178,7 +178,7 @@ giai đoạn ở trên nay đã có phần thật, không còn là TODO hoàn to
 |9.5|Tải mã nguồn `.tex` của đề|✅|
 |9.6|Sinh một lượt NHIỀU MÃ ĐỀ riêng biệt|🟡 ô nhập đã có, ghép đề còn sai|
 |9.7|Màn hình gán lớp cho giáo viên|⬜ hiện gán bằng SQL|
-|9.8|Đặt ma trận chi tiết cho từng đề|⬜|
+|9.8|Đặt ma trận chi tiết cho từng đề|✅ theo bài, trang Ra đề (14/10/2026)|
 
 ## Việc tiếp theo (thứ tự đề nghị)
 

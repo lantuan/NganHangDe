@@ -81,6 +81,22 @@ def ma_tran_mac_dinh_api(loai_he_so: str = "HeSo2_HeSo3"):
         raise HTTPException(400, detail=str(e))
 
 
+@router.get("/ma-tran-bai-khung")
+def ma_tran_bai_khung_api(lop: int = 10, ki_thi: str = "", pham_vi_chuong: str = ""):
+    """Khung bảng "đặt số câu cụ thể theo bài": danh sách bài trong phạm vi đề, số câu tối đa ngân hàng
+    có ở từng ô, số câu Đúng/Sai - Tự luận tối đa theo chương (cô Lan 14/10/2026)."""
+    from app.services.ma_tran_bai_service import khung_ma_tran_bai
+    from app.services.exam_rules_service import ExamRulesError
+    try:
+        if ki_thi in ("", "thuong_xuyen"):
+            kq = khung_ma_tran_bai(lop, "HeSo1", None, pham_vi_chuong or None)
+        else:
+            kq = khung_ma_tran_bai(lop, "HeSo2_HeSo3", ki_thi, None)
+    except (ExamRulesError, FileNotFoundError, ValueError) as e:
+        raise HTTPException(400, detail=str(e))
+    return {"success": True, "message": "", "data": kq}
+
+
 class YeuCauItem(BaseModel):
     chuong_so: int
     muc_do: str  # "NB" | "TH" | "VD" | "VDC"

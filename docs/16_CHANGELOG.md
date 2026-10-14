@@ -10242,3 +10242,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `data/python_bank_en/toan10/L10_C4.py` (72 hàm) sinh từ từ điển `data/i18n/bank/en_L10_C4.json` (458 đoạn, 12 đoạn dùng lại từ C1-C3) + `patch_L10_C4.json` ("sai"/`\textbf{sai}` thành "false", "nam" thành "south"). Mã Việt có chỗ phụ thuộc chữ: `"dời" not in phu` nên bản Anh dùng "move" đúng một câu ("move $%s$ to the initial point").
 - `scripts/kiem_tuong_duong.py L10_C4 3`: 72 hàm, 0 lệch. Lưu ý "tiếng Anh mới có đến Lớp 10: Chương 1-4" tự cập nhật. Test "chương chưa dịch" đổi ví dụ sang Chương 5.
 
+
+## 2026-10-14 - Ma trận cụ thể THEO BÀI ở trang Ra đề giáo viên (cô Lan)
+- Thêm chế độ "Đặt số câu cụ thể theo bài" (checkbox `ma_tran_bai`, loại trừ với ô tự đặt tỉ lệ %). Chỉ áp dụng trang `/gv/ra-de`; luồng chat/n8n giữ nguyên.
+- Cách khai báo: GV nhập TỔNG NB, TH, VD của đề (VD gồm cả VDC; mapping không có mức VDC riêng, VDC là suất của câu VD). Mỗi câu Đúng/Sai (chọn theo CHƯƠNG) tự trừ 1 NB + 1 TH + 2 VD; mỗi câu Tự luận (chọn theo CHƯƠNG) tự trừ 2 VD (ý VD + ý VDC). Phần còn lại GV chia vào từng bài cho trắc nghiệm và trả lời ngắn (bảng bài x MC/SA x NB/TH/VD).
+- VD của MC + SA chia 2 VD : 1 VDC (VDC = round(VD / 3), rải mỗi bài tối đa 1 trước); Tự luận giữ nguyên 1 VD + 1 VDC mỗi câu, không chia lại.
+- Chặn tạo đề khi các số còn lại khác 0 hoặc ô vượt số câu ngân hàng có, báo rõ ô nào lệch (cả ở trình duyệt lẫn ở server qua `ExamRulesError`).
+- Code: `app/services/ma_tran_bai_service.py` (đọc form, trừ TF/TL, kiểm tra, dựng blueprint); `build_blueprint(..., ma_tran_bai=)` và `generate_exam_pdf_auto(..., ma_tran_bai=)`; `GET /api/exam/ma-tran-bai-khung`; giao diện `app/templates/teacher/ra_de.html`; chuỗi tiếng Anh trong `data/i18n/en_ui.json`; test `tests/test_ma_tran_bai.py`.
