@@ -669,5 +669,7 @@
  "tự nhảy: mỗi câu Đúng/Sai là 1 Biết, 1 Hiểu, 2 VD; mỗi câu tự luận là 2 VD gồm ý VD và ý VDC). Trắc nghiệm và trả lời ngắn cô nhập số câu": "fill in automatically: each True/False question is 1 Know, 1 Understand, 2 Apply; each essay question is 2 Apply, one VD part and one VDC part). For multiple choice and short answer, enter the number of questions",
  "Ô đặt câu mà ngân hàng Python chưa có hàm sinh thì bị khóa. Không dùng chung với ô tự đặt tỉ lệ phần trăm ở trên.": "A cell whose type has no generator in the Python bank is locked. Cannot be combined with the custom percentage option above.",
  "Đặt số câu cụ thể theo bài (bảng ma trận: Đúng/Sai và tự luận chọn theo chương)": "Set exact question counts per lesson (matrix table: True/False and essay chosen per chapter)",
- "Phiên đăng nhập đã hết hoặc máy chủ không trả về tệp. Hãy đăng nhập lại rồi tải lại.": "Your session has expired or the server did not return a file. Please sign in again and retry."
+ "Phiên đăng nhập đã hết hoặc máy chủ không trả về tệp. Hãy đăng nhập lại rồi tải lại.": "Your session has expired or the server did not return a file. Please sign in again and retry.",
+ "Tỉ lệ % điểm": "% of marks",
+ "Tỉ lệ % điểm của mỗi chương tính theo thang 10 điểm và trọng số cố định của loại câu (trắc nghiệm 3, Đúng/Sai 2, trả lời ngắn 2, tự luận 3; điểm mỗi phần chia đều cho các câu cùng phần). Phần nào đề không có thì điểm tối đa của đề giảm đúng phần đó.": "The % of marks per chapter uses the 10-point scale and fixed weights per question type (multiple choice 3, True/False 2, short answer 2, essay 3; the marks of each part are split evenly among the questions of that part). A part the exam does not have lowers the maximum of the exam by exactly that part."
 }

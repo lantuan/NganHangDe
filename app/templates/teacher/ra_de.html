@@ -111,6 +111,8 @@ Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chi
 #khung-ma-tran-bai tr.mtb-bai:hover td { background: rgba(37, 99, 235, 0.10); }
 #khung-ma-tran-bai tr.mtb-tong td { background: rgba(22, 163, 74, 0.16); font-weight: 700; }
 #khung-ma-tran-bai td.mtb-so { min-width: 2.2rem; }
+/* cot Tong va Ti le % cung mau xanh voi hang Tong so cau */
+#khung-ma-tran-bai tr td.mtb-xanh, #khung-ma-tran-bai thead th.mtb-xanh { background: rgba(22, 163, 74, 0.16) !important; font-weight: 700; }
 #khung-ma-tran-bai td.mtb-tl { text-align: left; min-width: 11rem; }
 #khung-ma-tran-bai input { width: 3.2rem; padding: 2px 4px; text-align: center; border: 1px solid rgba(100, 116, 139, 0.6); border-radius: 8px; background: #fff; color: #111; }
 #khung-ma-tran-bai input:disabled { background: rgba(100, 116, 139, 0.2); }
@@ -118,7 +120,7 @@ Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chi
 </style>
 <div id="khung-ma-tran-bai" class="mt-stack-md" style="display:none">
 <div class="overflow-x-auto">
-<table class="text-center" id="mtb-bang" style="min-width: 60rem; width: 100%">
+<table class="text-center" id="mtb-bang" style="min-width: 64rem; width: 100%">
 <thead>
 <tr>
 <th class="mtb-tl" rowspan="2">Chương / Bài</th>
@@ -126,19 +128,21 @@ Biết, Hiểu, VD cho từng bài; phần VD của hai loại này được chi
 <th colspan="4">Trắc nghiệm Đúng - Sai</th>
 <th colspan="3">Trả lời ngắn</th>
 <th colspan="4">Tự luận</th>
-<th colspan="4">Tổng</th>
+<th colspan="4" class="mtb-xanh">Tổng</th>
+<th rowspan="2" class="mtb-xanh">Tỉ lệ % điểm</th>
 </tr>
 <tr>
 <th>Biết</th><th>Hiểu</th><th>VD</th>
 <th>Số câu</th><th>Biết</th><th>Hiểu</th><th>VD</th>
 <th>Biết</th><th>Hiểu</th><th>VD</th>
 <th>Số câu</th><th>Biết</th><th>Hiểu</th><th>VD</th>
-<th>Biết</th><th>Hiểu</th><th>VD</th><th>Cộng</th>
+<th class="mtb-xanh">Biết</th><th class="mtb-xanh">Hiểu</th><th class="mtb-xanh">VD</th><th class="mtb-xanh">Cộng</th>
 </tr>
 </thead>
 <tbody></tbody></table>
 </div>
 <p class="text-sm text-on-surface-variant mt-unit">Số nhỏ bên dưới mỗi ô là số hàm sinh câu (dạng x biến thể) trong ngân hàng Python; ô gạch ngang là chưa có hàm. Đặt nhiều hơn số hàm vẫn tạo được đề, dạng sẽ lặp lại với số liệu khác.</p>
+<p class="text-sm text-on-surface-variant mt-unit">Tỉ lệ % điểm của mỗi chương tính theo thang 10 điểm và trọng số cố định của loại câu (trắc nghiệm 3, Đúng/Sai 2, trả lời ngắn 2, tự luận 3; điểm mỗi phần chia đều cho các câu cùng phần). Phần nào đề không có thì điểm tối đa của đề giảm đúng phần đó.</p>
 <p id="mtb-vdc" class="text-sm text-on-surface-variant mt-unit"></p>
 <p id="mtb-lap" class="text-sm mt-unit" style="color:#b45309"></p>
 <p id="mtb-loi" class="text-sm text-red-700 mt-unit"></p>
@@ -281,6 +285,7 @@ const khungMtb = document.getElementById('khung-ma-tran-bai');
 const MUC3 = ['nb', 'th', 'vd'];
 const TF_MOI_CAU = {nb: 1, th: 1, vd: 2};   // 1 Biet, 1 Hieu, 2 VD (VDC tinh vao VD)
 const TL_MOI_CAU = {nb: 0, th: 0, vd: 2};   // 1 y VD + 1 y VDC
+let TRONG_SO = {MC: 3, TF: 2, SA: 2, TL: 3}, THANG_DIEM = 10;   // ghi de bang du lieu server (diem_rules.json)
 
 function soO(el) { return parseInt(el && el.value) || 0; }
 function oSo(text) { const td = document.createElement('td'); td.className = 'mtb-so'; td.textContent = text; return td; }
@@ -298,6 +303,7 @@ function oNhap(ten, toiDa, nhan, extra) {
     return td;
 }
 function dungKhungMtb(kh) {
+    if (kh.trong_so) { TRONG_SO = kh.trong_so; THANG_DIEM = kh.thang_diem || 10; }
     const tb = document.querySelector('#mtb-bang tbody');
     tb.innerHTML = '';
     let le = true;
@@ -314,6 +320,7 @@ function dungKhungMtb(kh) {
         MUC3.forEach(m => { const o = oSo('0'); o.dataset.o = 'tl_' + m; hc.appendChild(o); });
         MUC3.forEach(m => { const o = oSo('0'); o.dataset.o = 'tong_' + m; hc.appendChild(o); });
         { const o = oSo('0'); o.dataset.o = 'tong_cong'; hc.appendChild(o); }
+        { const o = oSo('0%'); o.dataset.o = 'ty_le'; hc.appendChild(o); }
         tb.appendChild(hc);
         kh.bai.filter(b => b.chuong_so === c.chuong_so).forEach(b => {
             const tr = document.createElement('tr');
@@ -336,6 +343,7 @@ function dungKhungMtb(kh) {
             });
             MUC3.forEach(m => { const o = oSo('0'); o.dataset.o = 'tong_' + m; tr.appendChild(o); });
             { const o = oSo('0'); o.dataset.o = 'tong_cong'; tr.appendChild(o); }
+            tr.appendChild(oSo(''));
             tb.appendChild(tr);
         });
     });
@@ -348,7 +356,14 @@ function dungKhungMtb(kh) {
     });
     MUC3.forEach(m => { const o = oSo('0'); o.dataset.o = 'tong_' + m; ht.appendChild(o); });
     { const o = oSo('0'); o.dataset.o = 'tong_cong'; ht.appendChild(o); }
+    { const o = oSo('0%'); o.dataset.o = 'ty_le'; ht.appendChild(o); }
     tb.appendChild(ht);
+    // cot Tong (4 cot) va Ti le %: cung mau xanh o MOI hang (bai, chuong, tong)
+    const cot = tb.closest('table').querySelectorAll('tbody tr');
+    cot.forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        for (let k = tds.length - 5; k < tds.length; k++) if (k >= 0) tds[k].classList.add('mtb-xanh');
+    });
     tinhMtb();
 }
 // Tinh lai moi o tu dong: tong chuong, tong bai, tong cuoi, VDC; tra ve tong so cau.
@@ -359,6 +374,7 @@ function tinhMtb() {
     const cuoi = {};
     const cong = (k, v) => { cuoi[k] = (cuoi[k] || 0) + v; };
     let vdO = 0;
+    const dem = [];   // so cau moi loai cua tung chuong, de tinh % diem
     tb.querySelectorAll('tr.mtb-chuong').forEach(hc => {
         const c = hc.dataset.chuong;
         const s = {};
@@ -387,9 +403,25 @@ function tinhMtb() {
         MUC3.forEach(m => { dat(hc, 'tong_' + m, tg[m]); cong('tong_' + m, tg[m]); });
         dat(hc, 'tong_cong', tg.nb + tg.th + tg.vd); cong('tong_cong', tg.nb + tg.th + tg.vd);
         cong('tf_n', nTf); cong('tl_n', nTl);
+        dem.push({hc: hc, MC: MUC3.reduce((a, m) => a + (s['mc_' + m] || 0), 0), TF: nTf,
+                  SA: MUC3.reduce((a, m) => a + (s['sa_' + m] || 0), 0), TL: nTl});
+    });
+    // Ti le % diem cua chuong = tong theo loai cau (trong so loai x so cau cua chuong / so cau loai do trong de) / thang diem.
+    // Diem moi phan chia deu cho cac cau cung phan; phan nao de khong co thi diem toi da giam (khong chia lai).
+    const tongLoai = {MC: 0, TF: 0, SA: 0, TL: 0};
+    dem.forEach(d => Object.keys(tongLoai).forEach(k => { tongLoai[k] += d[k]; }));
+    const dinh = v => (Math.round(v * 10) / 10).toString().replace('.', ',') + '%';
+    let tongTy = 0;
+    dem.forEach(d => {
+        let diem = 0;
+        Object.keys(tongLoai).forEach(k => { if (tongLoai[k]) diem += TRONG_SO[k] * d[k] / tongLoai[k]; });
+        const ty = diem / THANG_DIEM * 100;
+        tongTy += ty;
+        dat(d.hc, 'ty_le', dinh(ty));
     });
     const ht = document.getElementById('mtb-hang-tong');
     Object.keys(cuoi).forEach(k => dat(ht, k, cuoi[k]));
+    dat(ht, 'ty_le', dinh(tongTy));
     const vdc = Math.round(vdO / 3);
     document.getElementById('mtb-vdc').textContent = vdO
         ? ('VD của trắc nghiệm và trả lời ngắn: ' + vdO + ' câu, chia ra ' + (vdO - vdc) + ' VD và ' + vdc + ' VDC.') : '';

@@ -244,7 +244,11 @@ def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chu
     for c in sorted(ng["tf"]):
         ten_c = next((v[0] for k, v in ten.items() if k.startswith(f"L{lop}_C{c}_B")), None)
         chuong.append({"chuong_so": c, "ten_chuong": ten_c, "tf_toi_da": ng["tf"][c], "tl_toi_da": ng["tl"][c]})
-    return {"pham_vi_bai": pham_vi_bai, "bai": bai, "chuong": chuong}
+    # Trọng số điểm theo data/config/diem_rules.json (MC 3, TF 2, SA 2, TL 3 / thang 10): cột "Tỉ lệ % điểm"
+    from app.services.diem_service import _load_rules
+    quy_dinh = _load_rules()
+    return {"pham_vi_bai": pham_vi_bai, "bai": bai, "chuong": chuong,
+            "trong_so": quy_dinh["trong_so"], "thang_diem": quy_dinh["thang_diem"]}
 
 
 # ----------------------------------------------------------------------------------------

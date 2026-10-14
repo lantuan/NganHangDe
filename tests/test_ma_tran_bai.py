@@ -95,6 +95,7 @@ def test_khung_cho_form():
     assert [b["bai_id"] for b in kh["bai"]] == ["L10_C3_B5", "L10_C3_B6"]
     assert kh["chuong"][0]["chuong_so"] == 3 and kh["chuong"][0]["tf_toi_da"] > 0
     assert set(kh["bai"][0]["toi_da"]) == {"trac_nghiem", "tra_loi_ngan"}
+    assert kh["trong_so"] == {"MC": 3.0, "TF": 2.0, "SA": 2.0, "TL": 3.0} and kh["thang_diem"] == 10   # cột % điểm
     with pytest.raises(ExamRulesError):
         MTB.khung_ma_tran_bai(10, "HeSo1", None, None)
 
