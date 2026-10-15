@@ -405,7 +405,7 @@ def L10_C3_B6_TH033_SA_B_01(socau, dang=2):
     return cauTN
 
 
-def L10_C3_B6_TH034_MC_A_01(socau, dang=1):
+def L10_C3_B6_NB034_MC_B_01(socau, dang=1):
     """Chọn công thức tính diện tích tam giác phù hợp với dữ kiện cho trước."""
     BO = [
         ("two sides $b$, $c$ and the included angle $A$",
@@ -4829,7 +4829,7 @@ def L10_C3_B6_TH033_TL_A_02(socau, dong=1):
     return cauTN
 
 
-def L10_C3_B6_TH034_MC_A_02(socau, dang=1):
+def L10_C3_B6_NB034_MC_B_02(socau, dang=1):
     r"""Chọn công thức diện tích ĐÚNG (hoặc SAI) trong bốn công thức.
 
     CLAUDE THEM 29/09/2026 - bien the 02 cua TH034_MC_A, theo cac cau nhan
@@ -9721,7 +9721,7 @@ _CT_COSIN_SAI = [(r"a^{2} = b^{2} + c^{2} + 2bc\cos A", r"there must be a minus 
                  (r"c^{2} = a^{2} + b^{2} - ab\cos C", r"the factor $2$ is missing")]
 
 
-def L10_C3_B6_TH032_MC_E_01(socau, dang=1):
+def L10_C3_B6_NB032_MC_A_01(socau, dang=1):
     r"""Chọn hệ thức ĐÚNG (hoặc SAI) của định lí côsin và hệ quả.
 
     CLAUDE THEM 30/09/2026 - dang moi, theo cau 3 Phan I bai tap trac nghiem
@@ -9747,7 +9747,7 @@ def L10_C3_B6_TH032_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH032_MC_E_02(socau, dang=1):
+def L10_C3_B6_NB032_MC_A_02(socau, dang=1):
     r"""Cho SỐ ĐO ba cạnh; chọn biểu thức đã THAY SỐ đúng để tính côsin của một
     góc (nhận ra cạnh đối diện và hai cạnh kề).
 
@@ -9832,7 +9832,7 @@ _CT_SIN_SAI = [(r"b\sin B = 2R", r"the correct form is $\dfrac{b}{\sin B} = 2R$"
                (r"c = 2R\cos C", r"the correct form is $c = 2R\sin C$")]
 
 
-def L10_C3_B6_TH033_MC_C_01(socau, dang=1):
+def L10_C3_B6_NB033_MC_A_01(socau, dang=1):
     r"""Chọn khẳng định ĐÚNG (hoặc SAI) về định lí sin.
 
     CLAUDE THEM 30/09/2026 - dang moi, theo cau 2 Phan I bai tap trac nghiem
@@ -9859,7 +9859,7 @@ def L10_C3_B6_TH033_MC_C_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH033_MC_C_02(socau, dang=1):
+def L10_C3_B6_TH033_MC_C_01(socau, dang=1):
     r"""Định lí sin cho TỈ SỐ hai cạnh: biết hai góc, tính $\dfrac{BC}{CA}$
     (bằng $\dfrac{\sin A}{\sin B}$).
 
@@ -12084,7 +12084,7 @@ def _heron_mot():
 _TEN_CANH = [("a", "b", "c", "A", "B", "C"), ("b", "c", "a", "B", "C", "A"), ("c", "a", "b", "C", "A", "B")]
 
 
-def L10_C3_B6_TH032_MC_F_01(socau, dang=1):
+def L10_C3_B6_NB032_MC_B_01(socau, dang=1):
     r"""Lí thuyết - chọn công thức ĐÚNG tính độ dài đường trung tuyến ($m_a$, $m_b$ hoặc $m_c$).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("hoi cac cong thuc"). Co Lan duyet lai.
@@ -12105,7 +12105,7 @@ def L10_C3_B6_TH032_MC_F_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH032_MC_F_02(socau, dang=1):
+def L10_C3_B6_NB032_MC_B_02(socau, dang=1):
     r"""Lí thuyết - cách hỏi khác của _01: trong bốn hệ thức về ba đường trung tuyến
     $m_a$, $m_b$, $m_c$, chọn hệ thức SAI.
 
@@ -12140,7 +12140,7 @@ _CAC_KI_HIEU = (r"Triangle $ABC$ has $BC = a$, $CA = b$, $AB = c$, area $S$, sem
                 r"$h_a$ from $A$; $R$ and $r$ are the circumradius and the inradius of the triangle, respectively.")
 
 
-def L10_C3_B6_TH034_MC_G_01(socau, dang=1):
+def L10_C3_B6_NB034_MC_A_01(socau, dang=1):
     r"""Lí thuyết - chọn công thức ĐÚNG về diện tích và bán kính ($S = \dfrac{abc}{4R}$,
     $S = pr$, Heron, $R = \dfrac{abc}{4S}$, $r = \dfrac{S}{p}$).
 
@@ -12157,7 +12157,7 @@ def L10_C3_B6_TH034_MC_G_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH034_MC_G_02(socau, dang=1):
+def L10_C3_B6_NB034_MC_A_02(socau, dang=1):
     r"""Lí thuyết - cách hỏi khác của _01: chọn công thức SAI (ba phương án đúng).
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua TH034_MC_G. Co Lan duyet lai.
@@ -17459,7 +17459,7 @@ def L10_C3_B6_TH032_SA_D_02(socau, dang=2):
 _C3S_DINH = {"A": ("a", "b", "c"), "B": ("b", "c", "a"), "C": ("c", "a", "b")}   # góc: (cạnh đối, hai cạnh kề)
 
 
-def L10_C3_B6_TH032_SA_E_01(socau, dang=2):
+def L10_C3_B6_NB032_SA_A_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của TH032_MC_E (cùng Dang: nhận ra hệ thức định lí côsin): bốn hệ thức (dạng
     chữ); đếm số hệ thức đúng (sai). Chân trị thử bằng số trên nhiều tam giác ngẫu nhiên.
 
@@ -17497,7 +17497,7 @@ def L10_C3_B6_TH032_SA_E_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_TH032_SA_F_01(socau, dang=2):
+def L10_C3_B6_NB032_SA_B_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của TH032_MC_F (cùng Dang: nhận ra công thức độ dài đường trung tuyến - luyện
     tập thêm, công thức chỉ có trong SBT): bốn hệ thức; đếm số hệ thức đúng (sai). Chân trị thử bằng số.
 
@@ -17542,7 +17542,7 @@ def L10_C3_B6_TH032_SA_F_01(socau, dang=2):
 # ---------------------------------------------------------------------
 # TH033 (Bài 6): định lí sin
 # ---------------------------------------------------------------------
-def L10_C3_B6_TH033_SA_C_01(socau, dang=2):
+def L10_C3_B6_NB033_SA_A_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của TH033_MC_C (cùng Dang: nhận ra và dùng hệ thức định lí sin): bốn hệ thức
     (dạng chữ, $R$ là bán kính đường tròn ngoại tiếp); đếm số hệ thức đúng (sai). Chân trị thử bằng số.
 
@@ -17671,7 +17671,7 @@ def L10_C3_B6_TH034_SA_F_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_TH034_SA_G_01(socau, dang=2):
+def L10_C3_B6_NB034_SA_A_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của TH034_MC_G (cùng Dang: nhận ra công thức diện tích theo $R$, $r$, Heron
     và công thức tính $R$, $r$): bốn công thức; đếm số công thức đúng (sai). Chân trị thử bằng số.
 
@@ -17856,3 +17856,111 @@ def L10_C3_B6_VD036_MC_X_01(socau, dang=1):
 def L10_C3_B6_VD036_MC_X_02(socau, dang=1):
     r"""Trắc nghiệm cùng dạng với VD036_SA_X_02 (diện tích tứ giác). CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
     return L10_C3_B6_VD036_SA_X_02(socau, dang)
+
+
+# =====================================================================
+# BỔ SUNG 15/10/2026 (lần 2): MỨC NHẬN BIẾT BÀI 6 (cô Lan: "ra đề hỏi về nhận biết các công thức toán học trong bài
+# 6. MC là tìm công thức đúng/sai. SA là có bao nhiêu công thức đúng/sai"). Curriculum của Bộ không có NB ở Bài 6 nên
+# các dạng NB032, NB033, NB034 là LUYỆN TẬP THÊM (ngoai_yccd) - hệ thống cảnh báo giáo viên khi vào đề.
+# CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+# =====================================================================
+def L10_C3_B6_TH033_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH033_MC_C (cùng Dang: dùng định lí sin tính tỉ số hai cạnh khi biết hai
+    góc): $\dfrac{BC}{CA} = \dfrac{\sin A}{\sin B}$, làm tròn đến hàng phần trăm.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    CAP = [(A, B) for A in _GOC_TAM_GIAC for B in _GOC_TAM_GIAC if A != B and A + B < 180]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 300:
+        lan += 1
+        v = random.choice(CAP)
+        k = float(_gtlg("sin", v[0]) / _gtlg("sin", v[1]))
+        if v not in gt and abs(k * 100 - math.floor(k * 100) - 0.5) > 0.02:
+            gt.append(v)
+    cau = ""
+    for A, B in gt:
+        sA, sB = _gtlg("sin", A), _gtlg("sin", B)
+        k = float(sA / sB)
+        dap = _xx(k, 2)
+        debai = (r"Triangle $ABC$ has $\widehat{A} = %s$, $\widehat{B} = %s$. Find the ratio $\dfrac{BC}{CA}$ (round the result to the nearest hundredth)." % (_goc(A), _goc(B)))
+        giai = (r"By the Law of Sines, $\dfrac{BC}{\sin A} = \dfrac{CA}{\sin B}$, so $\dfrac{BC}{CA} = \dfrac{\sin A}{\sin B} = \dfrac{%s}{%s} \approx %s$." % (_L(sA), _L(sB), dap))
+        ung = [_xx(1 / k, 2), _xx(A / B, 2), _xx(k + 1, 2), _xx(abs(k - 1), 2)]
+        cau += MC_SA_answer_const(debai, dap, ung, giai, 0, 0, dang)
+    return cau
+
+
+# Dữ kiện (mô tả, các đại lượng biết) và công thức (tex, đại lượng dùng, hàm thử số, đúng?) cho NB034_SA_B.
+_C3S_DU_KIEN = [
+    (r"the three sides $a$, $b$, $c$", {"a", "b", "c", "p"}),
+    (r"the three sides $a$, $b$, $c$ and the circumradius $R$", {"a", "b", "c", "p", "R"}),
+    (r"the semi-perimeter $p$ and the inradius $r$", {"p", "r"}),
+    (r"two sides $b$, $c$ and angle $A$", {"b", "c", "A"}),
+    (r"two sides $a$, $b$ and angle $C$", {"a", "b", "C"}),
+    (r"side $a$ and the altitude $h_a$", {"a", "ha"}),
+]
+_C3S_CT_S = [
+    (r"S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}", {"p", "a", "b", "c"}),
+    (r"S = \dfrac{abc}{4R}", {"a", "b", "c", "R"}),
+    (r"S = pr", {"p", "r"}),
+    (r"S = \dfrac{1}{2}bc\sin A", {"b", "c", "A"}),
+    (r"S = \dfrac{1}{2}ab\sin C", {"a", "b", "C"}),
+    (r"S = \dfrac{1}{2}a\cdot h_a", {"a", "ha"}),
+    (r"S = \dfrac{abc}{2R}", {"a", "b", "c", "R"}),
+    (r"S = 2pr", {"p", "r"}),
+    (r"S = \dfrac{1}{2}bc\cos A", {"b", "c", "A"}),
+    (r"S = \dfrac{1}{2}ab\sin A", {"a", "b", "A"}),
+    (r"S = a\cdot h_a", {"a", "ha"}),
+    (r"S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}", {"p", "a", "b", "c"}),
+]
+
+
+def _c3s_ct_dung(tex):
+    """Công thức diện tích tex có đúng với mọi tam giác không (thử số)."""
+    f = {
+        r"S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}":
+            lambda T: math.sqrt(T["p"] * (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"])),
+        r"S = \dfrac{abc}{4R}": lambda T: T["a"] * T["b"] * T["c"] / (4 * T["R"]),
+        r"S = pr": lambda T: T["p"] * T["r"],
+        r"S = \dfrac{1}{2}bc\sin A": lambda T: 0.5 * T["b"] * T["c"] * math.sin(T["A"]),
+        r"S = \dfrac{1}{2}ab\sin C": lambda T: 0.5 * T["a"] * T["b"] * math.sin(T["C"]),
+        r"S = \dfrac{1}{2}a\cdot h_a": lambda T: 0.5 * T["a"] * T["ha"],
+        r"S = \dfrac{abc}{2R}": lambda T: T["a"] * T["b"] * T["c"] / (2 * T["R"]),
+        r"S = 2pr": lambda T: 2 * T["p"] * T["r"],
+        r"S = \dfrac{1}{2}bc\cos A": lambda T: 0.5 * T["b"] * T["c"] * math.cos(T["A"]),
+        r"S = \dfrac{1}{2}ab\sin A": lambda T: 0.5 * T["a"] * T["b"] * math.sin(T["A"]),
+        r"S = a\cdot h_a": lambda T: T["a"] * T["ha"],
+        r"S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}":
+            lambda T: math.sqrt(T["p"] * (T["p"] + T["a"]) * (T["p"] + T["b"]) * (T["p"] + T["c"])),
+    }[tex]
+    return _c3s_dung(lambda T: (T["S"], f(T)))
+
+
+def L10_C3_B6_NB034_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB034_MC_B (cùng Dang: chọn công thức diện tích phù hợp với dữ kiện):
+    bốn khẳng định ``Biết <dữ kiện> thì $S = \ldots$''; khẳng định đúng khi công thức đúng VÀ chỉ dùng các đại lượng
+    đã biết (biết ba cạnh thì biết nửa chu vi $p$). Đếm số khẳng định đúng (sai). Mức Nhận biết - LUYỆN TẬP THÊM
+    (ngoài YCCĐ).
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    ten_dai = {"a": "$a$", "b": "$b$", "c": "$c$", "p": "$p$", "R": "$R$", "r": "$r$", "A": "angle $A$", "C": "angle $C$",
+               "ha": "$h_a$"}
+    cau = ""
+    for _ in range(socau):
+        dung, sai = [], []
+        for mo_dk, biet in _C3S_DU_KIEN:
+            for tex, dung_dl in _C3S_CT_S:
+                ok_ct = _c3s_ct_dung(tex)
+                thieu = sorted(dung_dl - biet)
+                kd = r"Knowing %s, $%s$" % (mo_dk, tex)
+                if ok_ct and not thieu:
+                    dung.append((kd, r"this is an area formula and it uses only known quantities", tex))
+                elif ok_ct:
+                    sai.append((kd, r"the formula is correct but it also needs %s, which is not known" % ", ".join(ten_dai[x] for x in thieu), tex))
+                elif not thieu or random.random() < 0.3:
+                    sai.append((kd, r"the formula $%s$ is wrong" % tex, tex))
+        mo = (r"Given triangle $ABC$ with $BC = a$, $CA = b$, $AB = c$, area $S$, semi-perimeter $p$, altitude $h_a$ from $A$; $R$, $r$ are the circumradius and the inradius of the triangle.")
+        cau += _c3s_dem(mo, dung, sai, dang)
+    return cau

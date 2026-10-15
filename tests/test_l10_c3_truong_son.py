@@ -158,5 +158,8 @@ def test_moi_de_chi_mot_bai_truong_son():
     for sd in range(40):
         random.seed(sd)
         ds = select_questions(10, build_blueprint(10, "HeSo1", pham_vi_chuong="3"))
-        dem = collections.Counter(dong[c["generator_id"]].get("boi_canh") for c in ds if c.get("generator_id") in dong)
+        dem = collections.Counter()
+        for c in ds:                                   # boi_canh co the la chuoi hoac danh sach (vd VD036_MC_C, SA_C)
+            bc = dong.get(c.get("generator_id"), {}).get("boi_canh")
+            dem.update(bc if isinstance(bc, list) else [bc])
         assert dem.get("truong_son", 0) <= 1, (sd, [c.get("generator_id") for c in ds])

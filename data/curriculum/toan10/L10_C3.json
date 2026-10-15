@@ -136,6 +136,43 @@
     "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
+    "id": "L10_C3_B6_NB032",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Hệ thức lượng trong tam giác",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "he_thuc_luong",
+      "dinh_li_cosin"
+    ],
+    "difficulty_rank": 1,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Nhận ra hệ thức định lí côsin (dạng chữ hoặc đã thay số)",
+        "mapping_id": [
+          "L10_C3_B6_NB032_MC_A",
+          "L10_C3_B6_NB032_SA_A"
+        ]
+      },
+      {
+        "mo_ta": "Nhận ra công thức độ dài đường trung tuyến (công thức chỉ có trong SBT)",
+        "mapping_id": [
+          "L10_C3_B6_NB032_MC_B",
+          "L10_C3_B6_NB032_SA_B"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Mức NHẬN BIẾT của Bài 6 KHÔNG có trong yêu cầu cần đạt của Bộ (Bộ chỉ ghi \"Giải thích được\" - Thông hiểu). Cô Lan thêm 15/10/2026 để đề có câu nhận biết công thức: MC chọn công thức đúng/sai, SA đếm số công thức đúng/sai. Mọi dạng ở đây là LUYỆN TẬP THÊM, Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+  },
+  {
     "id": "L10_C3_B6_TH032",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
@@ -160,13 +197,6 @@
         "mapping_id": [
           "L10_C3_B6_TH032_MC_C",
           "L10_C3_B6_TH032_SA_C"
-        ]
-      },
-      {
-        "mo_ta": "Nhận ra công thức độ dài đường trung tuyến",
-        "mapping_id": [
-          "L10_C3_B6_TH032_MC_F",
-          "L10_C3_B6_TH032_SA_F"
         ]
       },
       {
@@ -240,6 +270,36 @@
     "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM: công thức đường trung tuyến chỉ có trong SBT, không có trong SGK và yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ. Công thức độ dài đường phân giác trong cũng không có trong yêu cầu cần đạt."
   },
   {
+    "id": "L10_C3_B6_NB033",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Hệ thức lượng trong tam giác",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "he_thuc_luong",
+      "dinh_li_sin"
+    ],
+    "difficulty_rank": 1,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Nhận ra hệ thức định lí sin",
+        "mapping_id": [
+          "L10_C3_B6_NB033_MC_A",
+          "L10_C3_B6_NB033_SA_A"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Mức NHẬN BIẾT của Bài 6 KHÔNG có trong yêu cầu cần đạt của Bộ (Bộ chỉ ghi \"Giải thích được\" - Thông hiểu). Cô Lan thêm 15/10/2026 để đề có câu nhận biết công thức: MC chọn công thức đúng/sai, SA đếm số công thức đúng/sai. Mọi dạng ở đây là LUYỆN TẬP THÊM, Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+  },
+  {
     "id": "L10_C3_B6_TH033",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
@@ -258,6 +318,43 @@
       "dinh_li_sin"
     ],
     "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C3_B6_NB034",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Hệ thức lượng trong tam giác",
+    "chuong_so": "3",
+    "bai": "Hệ thức lượng trong tam giác",
+    "bai_so": "6",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "he_thuc_luong",
+      "dien_tich_tam_giac"
+    ],
+    "difficulty_rank": 1,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r",
+        "mapping_id": [
+          "L10_C3_B6_NB034_MC_A",
+          "L10_C3_B6_NB034_SA_A"
+        ]
+      },
+      {
+        "mo_ta": "Chọn công thức diện tích phù hợp với dữ kiện",
+        "mapping_id": [
+          "L10_C3_B6_NB034_MC_B",
+          "L10_C3_B6_NB034_SA_B"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Mức NHẬN BIẾT của Bài 6 KHÔNG có trong yêu cầu cần đạt của Bộ (Bộ chỉ ghi \"Giải thích được\" - Thông hiểu). Cô Lan thêm 15/10/2026 để đề có câu nhận biết công thức: MC chọn công thức đúng/sai, SA đếm số công thức đúng/sai. Mọi dạng ở đây là LUYỆN TẬP THÊM, Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C3_B6_TH034",

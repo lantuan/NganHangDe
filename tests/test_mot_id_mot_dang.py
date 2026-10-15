@@ -170,8 +170,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_VD014_TL_B",   # phu dinh menh de voi moi (bat dang thuc) / ton tai (chia het)
     # tu bai tap trac nghiem Bai 6 (30/09/2026), _02 hoi theo cach khac:
     "L10_C3_B6_VD036_MC_B",   # qua dam lay (canh doi dien goc) / ve tinh (canh ke)
-    "L10_C3_B6_TH032_MC_E",   # he thuc bang chu / he thuc da thay so
-    "L10_C3_B6_TH033_MC_C",   # chon he thuc dinh li sin / ti so hai canh
+    "L10_C3_B6_NB032_MC_A",   # he thuc bang chu / he thuc da thay so
     "L10_C3_B6_TH034_MC_D",   # cho so do goc / cho cos goc
     "L10_C3_B6_TH034_MC_E",   # Heron roi r / Heron roi R
     "L10_C3_B6_TH034_MC_F",   # hai canh + goc xen / ba canh
@@ -200,10 +199,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_TH014_MC_E",   # tu giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_H",   # tam giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_I",   # so thuc: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
-    "L10_C3_B6_TH034_MC_A",   # chon cong thuc theo du kien / cong thuc nao dung-sai
+    "L10_C3_B6_NB034_MC_B",   # chon cong thuc theo du kien / cong thuc nao dung-sai
     "L10_C3_TF_C",            # tau hai chang: van toc-thoi gian / quang duong + huong la ban
-    "L10_C3_B6_TH032_MC_F",   # cong thuc trung tuyen: chon dung / chon sai
-    "L10_C3_B6_TH034_MC_G",   # cong thuc R, r, Heron: chon dung / chon sai
+    "L10_C3_B6_NB032_MC_B",   # cong thuc trung tuyen: chon dung / chon sai
+    "L10_C3_B6_NB034_MC_A",   # cong thuc R, r, Heron: chon dung / chon sai
     "L10_C3_B6_TH035_MC_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B6_TH035_SA_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B5_VD030_MC_A",   # luyen tap them: bieu thuc dong bac, _01 cho tan, _02 cho cot

@@ -79,10 +79,20 @@
     "ghi_chu": "15/10/2026 ghep cung Dang voi MC_B (cung dang, theo co Lan: ghep cac dang da thay giong)"
   },
   {
-    "id": "L10_C3_B6_TH034_MC_A",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "id": "L10_C3_B6_NB034_MC_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện"
+    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); "
+  },
+  {
+    "id": "L10_C3_B6_NB034_SA_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi NB034_MC_B: dem khang dinh 'biet du kien X thi S = cong thuc' dung/sai; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH034_SA_D",
@@ -765,32 +775,50 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 5, co Lan duyet lai"
   },
   {
-    "id": "L10_C3_B6_TH032_MC_E",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "id": "L10_C3_B6_NB032_MC_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra hệ thức định lí côsin (dạng chữ hoặc đã thay số)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai"
+    "Dang": "Nhận ra hệ thức định lí côsin (dạng chữ hoặc đã thay số) - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
-    "id": "L10_C3_B6_TH032_SA_E",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "id": "L10_C3_B6_NB032_SA_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra hệ thức định lí côsin (dạng chữ hoặc đã thay số)",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_E (cung chu, cung Dang); dem he thuc dung/sai (dinh li cosin); co Lan duyet lai"
+    "Dang": "Nhận ra hệ thức định lí côsin (dạng chữ hoặc đã thay số) - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_E (cung chu, cung Dang); dem he thuc dung/sai (dinh li cosin); co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH033_MC_C",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra và dùng hệ thức định lí sin (chọn hệ thức đúng/sai, tỉ số hai cạnh)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai"
+    "Dang": "Dùng định lí sin tính tỉ số hai cạnh khi biết hai góc",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu bai tap trac nghiem Bai 6, co Lan duyet lai; 15/10/2026 tach: _01 cu (chon he thuc) chuyen thanh NB033_MC_A_01; _02 cu (ti so hai canh) thanh TH033_MC_C_01; co Lan duyet"
   },
   {
     "id": "L10_C3_B6_TH033_SA_C",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra và dùng hệ thức định lí sin (chọn hệ thức đúng/sai, tỉ số hai cạnh)",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_C (cung chu, cung Dang); dem he thuc dung/sai (dinh li sin); co Lan duyet lai"
+    "Dang": "Dùng định lí sin tính tỉ số hai cạnh khi biết hai góc",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi TH033_MC_C (ti so hai canh, lam tron hang phan tram); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C3_B6_NB033_MC_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Nhận ra hệ thức định lí sin (chọn hệ thức đúng/sai) - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - truoc la TH033_MC_C_01 (chon he thuc dinh li sin dung/sai)",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C3_B6_NB033_SA_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí sin.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nhận ra hệ thức định lí sin (chọn hệ thức đúng/sai) - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_C (cung chu, cung Dang); dem he thuc dung/sai (dinh li sin); co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH033_MC_D",
@@ -1029,20 +1057,20 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu luan hai y hai don vi kien thuc theo co Lan (ID ghi ca hai don vi, ma tran tinh theo tung y); truoc la L10_C3_B6_TH034_TL_B; co Lan duyet lai"
   },
   {
-    "id": "L10_C3_B6_TH032_MC_F",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "id": "L10_C3_B6_NB032_MC_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra công thức độ dài đường trung tuyến - luyện tập thêm",
-    "ghi_chu": "LUYEN TAP THEM - cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai",
+    "Dang": "Nhận ra công thức độ dài đường trung tuyến - luyện tập thêm - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); cong thuc duong trung tuyen chi co trong SBT, khong co trong SGK va yeu cau can dat cua Bo (co Lan 01/10/2026: danh dau de canh bao GV khi vao de). CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai",
     "ngoai_yccd": true
   },
   {
-    "id": "L10_C3_B6_TH032_SA_F",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
+    "id": "L10_C3_B6_NB032_SA_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra công thức độ dài đường trung tuyến - luyện tập thêm",
+    "Dang": "Nhận ra công thức độ dài đường trung tuyến - luyện tập thêm - mức Nhận biết, ngoài YCCĐ",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_F (cung chu, cung Dang); dem he thuc dung/sai (cong thuc trung tuyen) - LUYEN TAP THEM; co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_F (cung chu, cung Dang); dem he thuc dung/sai (cong thuc trung tuyen) - LUYEN TAP THEM; co Lan duyet lai"
   },
   {
     "id": "L10_C3_B6_TH032_MC_G",
@@ -1091,18 +1119,20 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2 co Lan gui; dap so nguyen; co Lan duyet lai; 15/10/2026 ghep cung Dang voi MC_I (cung dang, theo co Lan: ghep cac dang da thay giong)"
   },
   {
-    "id": "L10_C3_B6_TH034_MC_G",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "id": "L10_C3_B6_NB034_MC_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai"
+    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
-    "id": "L10_C3_B6_TH034_SA_G",
-    "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "id": "L10_C3_B6_NB034_SA_A",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_G (cung chu, cung Dang); dem cong thuc dung/sai; co Lan duyet lai"
+    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_G (cung chu, cung Dang); dem cong thuc dung/sai; co Lan duyet lai",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_TH035_MC_D",
