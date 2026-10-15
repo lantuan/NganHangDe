@@ -498,7 +498,7 @@ def _don_vd_ve_bai_co_cau(phan_bo_vdvdc: dict[str, dict],
 
 
 
-def _don_vi_co_loai(lop: int, chuong_so_list) -> dict[str, set]:
+def _don_vi_co_loai(lop: int, chuong_so_list, chi_yccd: bool = False) -> dict[str, set]:
     """Đơn vị kiến thức (curriculum_id) nào CÓ dạng của loại câu nào trong Mapping.
 
     SỬA 04/10/2026 (cô Lan duyệt): ma trận chọn đơn vị theo Curriculum nhưng không
@@ -507,8 +507,10 @@ def _don_vi_co_loai(lop: int, chuong_so_list) -> dict[str, set]:
     bị thiếu. Trả về {loai_cau: {curriculum_id, ...}}; loại None nghĩa là không đọc
     được Mapping của chương đó -> không lọc (giữ cách cũ).
     Câu tự luận nhiều ý (cac_y) tính cho từng đơn vị nằm trong cac_y của nó.
+    chi_yccd=True (cô Lan 15/10/2026, giáo viên chọn "Chỉ theo YCCĐ"): bỏ các dòng luyện tập thêm
+    ("ngoai_yccd": true), nên đơn vị chỉ có dạng luyện tập thêm (vd VD030, NB032) không được chọn.
     """
-    from app.services.mapping_service import load_mapping, phan_loai_cau
+    from app.services.mapping_service import la_ngoai_yccd, load_mapping, phan_loai_cau
     co: dict[str, set] = {"trac_nghiem": set(), "tra_loi_ngan": set(), "tu_luan": set()}
     khong_loc: set = set()
     for c in set(chuong_so_list):
@@ -519,7 +521,7 @@ def _don_vi_co_loai(lop: int, chuong_so_list) -> dict[str, set]:
             continue
         for r in rows:
             loai = phan_loai_cau(r)
-            if loai not in co:
+            if loai not in co or (chi_yccd and la_ngoai_yccd(r)):
                 continue
             cid = "_".join(r["id"].split("_")[:4])
             co[loai].add(cid)
@@ -606,7 +608,10 @@ def build_blueprint(
     pham_vi_chuong: str | None = None,
     cau_truc_tu_hoc_sinh: dict | None = None,
     ma_tran_bai: dict | None = None,
+    chi_yccd: bool = False,
 ) -> dict:
+    """chi_yccd=True (cô Lan 15/10/2026): giáo viên chọn ra đề CHỈ THEO YCCĐ của Bộ - không lấy dạng luyện
+    tập thêm ("ngoai_yccd"). Cờ được ghi vào blueprint["chi_yccd"] để bộ chọn câu cũng loại các dạng đó."""
     # BƯỚC 1 — xác định phạm vi bài (CN_LoadExamScope)
     if loai_he_so == "HeSo1":
         if not pham_vi_chuong:
@@ -673,7 +678,7 @@ def build_blueprint(
         theo_bai_muc_do.setdefault((bai_id, e["MucDo"]), []).append(e)
 
     # Mỗi loại câu chỉ được chọn đơn vị thật sự có dạng loại đó trong Mapping.
-    _co_loai = _don_vi_co_loai(lop, {int(e["chuong_so"]) for e in curriculum_entries})
+    _co_loai = _don_vi_co_loai(lop, {int(e["chuong_so"]) for e in curriculum_entries}, chi_yccd)
     _khong_loc = _co_loai.pop("__khong_loc_chuong__")
     _theo_bai_loai: dict[str, dict] = {}
 
@@ -705,7 +710,7 @@ def build_blueprint(
     # số tiết, dựng thẳng từ số câu từng bài (xem ma_tran_bai_service.py).
     if ma_tran_bai:
         from app.services import ma_tran_bai_service as MTB
-        loi_mt = MTB.kiem_tra_ma_tran_bai(ma_tran_bai, lop, pham_vi_bai)
+        loi_mt = MTB.kiem_tra_ma_tran_bai(ma_tran_bai, lop, pham_vi_bai, chi_yccd)
         if loi_mt:
             raise BlueprintError("Ma trận theo bài: " + " ".join(loi_mt))
         kq_mt = MTB.xay_blueprint(ma_tran_bai, pham_vi_bai, so_bai_theo_chuong, so_tiet_theo_bai,
@@ -718,6 +723,7 @@ def build_blueprint(
             "nguon_cau_truc": "ma_tran_bai",
             "bao_cao_phan_bo": kq_mt["bao_cao_phan_bo"],
             "ma_tran_bai": ma_tran_bai,
+            "chi_yccd": bool(chi_yccd),
             **kq_mt["blueprint"],
         }
 
@@ -915,6 +921,7 @@ def build_blueprint(
         "cau_truc_tong_quat": rules_result["cau_truc_tong_quat"],
         "nguon_cau_truc": rules_result["nguon_cau_truc"],
         "bao_cao_phan_bo": bao_cao_phan_bo,
+        "chi_yccd": bool(chi_yccd),
         **blueprint,
     }
 

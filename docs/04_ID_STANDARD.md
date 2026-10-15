@@ -221,6 +221,16 @@ vào ngân hàng, nhưng phải đánh dấu để giáo viên biết và tự q
 - Hàm tra: mapping_service.la_ngoai_yccd(row), tim_dang_ngoai_yccd(lop, chuong, generator_id).
 - Ví dụ: L10_C3_B5_VD030_MC_A (biểu thức đồng bậc biết tan/cot), VD030_MC_B,
   VD030_MC_C, VD031_MC_A và các bản SA tương ứng.
+- Ngoại lệ cho mục Curriculum mới (cô Lan 15/10/2026): Bài 6 Chương 3 lớp 10 không có mức Nhận biết
+  trong YCCĐ của Bộ; cô yêu cầu thêm L10_C3_B6_NB032, NB033, NB034 (cùng số YCCĐ với TH, chỉ đổi mức)
+  cho dạng "nhận ra công thức". Mọi dòng Mapping của ba mục này đều "ngoai_yccd": true.
+- Nút "Phạm vi câu hỏi" ở trang Ra đề giáo viên (cô Lan 15/10/2026): mặc định "Cho thêm câu luyện tập
+  ngoài YCCĐ" (như trên). Chọn "Chỉ theo YCCĐ của Bộ" (form gửi chi_yccd=1) thì:
+  - bảng ma trận theo bài (API /api/exam/ma-tran-bai-khung?chi_yccd=1, ma_tran_bai_service.so_cau_ngan_hang)
+    KHÔNG đếm hàm của dạng ngoai_yccd; ô chỉ có dạng luyện tập thêm bị khóa (vd Bài 6 mức Biết, Bài 5 mức VD);
+  - build_blueprint(chi_yccd=True) bỏ đơn vị chỉ có dạng luyện tập thêm và ghi blueprint["chi_yccd"];
+  - select_questions đọc blueprint["chi_yccd"], lọc bỏ dòng Mapping ngoai_yccd khỏi mọi loại câu (TF, MC, SA, TL);
+  - de_da_sinh.blueprint lưu "chi_yccd" để tra lại.
 
 ---
 

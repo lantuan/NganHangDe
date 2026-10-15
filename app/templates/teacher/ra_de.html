@@ -56,6 +56,23 @@ nhận nhiều đề cùng cấu trúc, cùng đơn vị kiến thức, chỉ kh
 <p class="text-sm text-on-surface-variant mt-unit">Chương chưa có ngân hàng câu hỏi sẽ được ghi chú trong danh sách.</p>
 </div>
 
+<!-- Pham vi cau hoi theo YCCD (co Lan 15/10/2026) -->
+<div class="border border-outline-variant rounded-2xl p-stack-md">
+<span class="block font-medium mb-unit">Phạm vi câu hỏi</span>
+<div class="flex items-start gap-stack-sm">
+<input class="mt-1" id="chi_yccd_0" name="chi_yccd" type="radio" value="0" checked/>
+<label class="font-body-md text-body-md text-on-surface-variant" for="chi_yccd_0">
+Cho thêm câu luyện tập ngoài yêu cầu cần đạt (YCCĐ) của Bộ. Câu ngoài YCCĐ vào đề sẽ được ghi chú để cô giữ hoặc thay.
+</label>
+</div>
+<div class="flex items-start gap-stack-sm mt-unit">
+<input class="mt-1" id="chi_yccd_1" name="chi_yccd" type="radio" value="1"/>
+<label class="font-body-md text-body-md text-on-surface-variant" for="chi_yccd_1">
+Chỉ theo YCCĐ của Bộ: không lấy câu luyện tập thêm; số câu có sẵn trong bảng ma trận theo bài cũng không tính các câu này.
+</label>
+</div>
+</div>
+
 <div class="border border-outline-variant rounded-2xl p-stack-md">
 <div class="flex items-start gap-stack-sm">
 <input class="mt-1" id="tuy_chinh_ma_tran" name="tuy_chinh_ma_tran" type="checkbox" value="1"/>
@@ -447,13 +464,22 @@ function kiemTraMtb() {
 }
 async function napKhungMtb() {
     if (!chkMtb.checked) return;
-    const q = new URLSearchParams({lop: selectLop.value, ki_thi: selectKiThi.value, pham_vi_chuong: selectChuong.value || ''});
+    const chiYccd = document.getElementById('chi_yccd_1').checked ? '1' : '0';
+    const q = new URLSearchParams({lop: selectLop.value, ki_thi: selectKiThi.value, pham_vi_chuong: selectChuong.value || '',
+                                   chi_yccd: chiYccd});
     document.getElementById('mtb-loi').textContent = '';
     try {
         const res = await fetch('/api/exam/ma-tran-bai-khung?' + q.toString());
         const d = await res.json();
         if (!res.ok) throw new Error(d.detail || 'Không tải được bảng.');
+        // giu so cau co da nhap khi tai lai bang (vd doi "Chi theo YCCD"); o bi khoa thi ve 0
+        const cu = {};
+        document.querySelectorAll('#khung-ma-tran-bai input[name]').forEach(i => { cu[i.name] = i.value; });
         dungKhungMtb(d.data);
+        document.querySelectorAll('#khung-ma-tran-bai input[name]').forEach(i => {
+            if (cu[i.name] !== undefined && !i.disabled) i.value = cu[i.name];
+        });
+        kiemTraMtb();
     } catch (e) {
         document.querySelector('#mtb-bang tbody').innerHTML = '';
         document.getElementById('mtb-loi').textContent = 'Không tải được bảng bài: ' + e.message;
@@ -477,6 +503,7 @@ khungMtb.addEventListener('input', kiemTraMtb);
 selectKiThi.addEventListener('change', napKhungMtb);
 selectLop.addEventListener('change', () => setTimeout(napKhungMtb, 600));
 selectChuong.addEventListener('change', napKhungMtb);
+document.querySelectorAll('input[name="chi_yccd"]').forEach(r => r.addEventListener('change', napKhungMtb));
 
 capNhatHienThiChuong();
 napDanhSachChuong();

@@ -141,13 +141,14 @@ def _tl_co_vd_trong_pham_vi(r: dict, pham_vi: set) -> bool:
     return any(muc == "VD" and bai in pham_vi for bai, muc in cap)
 
 
-def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
+def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str], chi_yccd: bool = False) -> dict:
     """{"o": {bai_id: {loai: {muc: n}}}, "tf": {chuong: n}, "tl": {chuong: n}}.
 
     n = số HÀM sinh câu thật trong ngân hàng Python (mỗi dạng x biến thể _01, _02... là một hàm),
     không phải số dòng Mapping: Mapping chỉ khai dạng, biến thể chỉ có trong Python (cô Lan 14/10/2026).
-    Số này không phải trần cứng: đặt nhiều hơn thì bộ chọn dùng lại biến thể với số liệu khác."""
-    from app.services.mapping_service import load_mapping, phan_loai_cau
+    Số này không phải trần cứng: đặt nhiều hơn thì bộ chọn dùng lại biến thể với số liệu khác.
+    chi_yccd=True (giáo viên chọn "Chỉ theo YCCĐ", cô Lan 15/10/2026): KHÔNG đếm dạng luyện tập thêm ("ngoai_yccd")."""
+    from app.services.mapping_service import la_ngoai_yccd, load_mapping, phan_loai_cau
     chuong = sorted({int(_BAI.match(b).group(2)) for b in pham_vi_bai if _BAI.match(b)})
     kq = {"o": {b: {l: {m: 0 for m in MUC} for l in LOAI_O.values()} for b in pham_vi_bai},
           "tf": {}, "tl": {}}
@@ -161,7 +162,7 @@ def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
         kq["tl"][c] = 0
         for r in rows:
             n_ham = ham.get(r["id"], 0)
-            if not n_ham:
+            if not n_ham or (chi_yccd and la_ngoai_yccd(r)):
                 continue
             loai = phan_loai_cau(r)
             if loai == "dung_sai_cau_lon":
@@ -180,7 +181,7 @@ def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
     return kq
 
 
-def kiem_tra_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str]:
+def kiem_tra_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str], chi_yccd: bool = False) -> list[str]:
     """Danh sách lỗi tiếng Việt (rỗng = hợp lệ)."""
     loi = []
     tong = mt["tong"]
@@ -204,9 +205,10 @@ def kiem_tra_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str
                 loi.append(f"Chương {c} không nằm trong phạm vi đề.")
     if loi:
         return loi
-    for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai)):
+    for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai, chi_yccd)):
         if co == 0:
-            loi.append(f"{ten}: ngân hàng Python chưa có hàm sinh câu loại này, cô đặt {n}.")
+            loi.append(f"{ten}: ngân hàng Python chưa có hàm sinh câu loại này"
+                       + (" theo YCCĐ (chỉ có dạng luyện tập thêm)" if chi_yccd else "") + f", cô đặt {n}.")
     return loi
 
 
@@ -225,17 +227,18 @@ def _o_dang_dat(mt: dict, ng: dict):
             yield (f"Chương {c}, Tự luận", n, ng["tl"].get(c, 0))
 
 
-def canh_bao_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str]) -> list[str]:
+def canh_bao_ma_tran_bai(mt: dict, lop: int, pham_vi_bai: list[str], chi_yccd: bool = False) -> list[str]:
     """Ô đặt NHIỀU HƠN số hàm có sẵn: vẫn tạo được đề (hết hàm thì bộ chọn dùng lại biến thể
     với số liệu khác, quy định của cô Lan), chỉ báo để cô biết câu sẽ lặp dạng."""
     return [f"{ten}: ngân hàng có {co} hàm, cô đặt {n} câu nên sẽ lặp lại dạng với số liệu khác."
-            for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai)) if 0 < co < n]
+            for ten, n, co in _o_dang_dat(mt, so_cau_ngan_hang(lop, pham_vi_bai, chi_yccd)) if 0 < co < n]
 
 
 # ----------------------------------------------------------------------------------------
 # Khung hiển thị cho form (danh sách bài, số hàm có sẵn)
 # ----------------------------------------------------------------------------------------
-def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chuong: str | None) -> dict:
+def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chuong: str | None,
+                      chi_yccd: bool = False) -> dict:
     from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23, _load_ppct
     if loai_he_so == "HeSo1":
         if not pham_vi_chuong:
@@ -249,7 +252,7 @@ def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chu
     ten = {}
     for b in _load_ppct(lop):
         ten[f"L{lop}_C{int(b['chuong_so'])}_B{int(b['bai_so'])}"] = (b.get("chuong"), b.get("bai"))
-    ng = so_cau_ngan_hang(lop, pham_vi_bai)
+    ng = so_cau_ngan_hang(lop, pham_vi_bai, chi_yccd)
     bai = []
     for b in pham_vi_bai:
         m = _BAI.match(b)
@@ -263,7 +266,7 @@ def khung_ma_tran_bai(lop: int, loai_he_so: str, ki_thi: str | None, pham_vi_chu
     # Trọng số điểm theo data/config/diem_rules.json (MC 3, TF 2, SA 2, TL 3 / thang 10): cột "Tỉ lệ % điểm"
     from app.services.diem_service import _load_rules
     quy_dinh = _load_rules()
-    return {"pham_vi_bai": pham_vi_bai, "bai": bai, "chuong": chuong,
+    return {"pham_vi_bai": pham_vi_bai, "bai": bai, "chuong": chuong, "chi_yccd": bool(chi_yccd),
             "trong_so": quy_dinh["trong_so"], "thang_diem": quy_dinh["thang_diem"]}
 
 

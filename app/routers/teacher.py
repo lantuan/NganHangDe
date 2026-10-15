@@ -109,11 +109,14 @@ async def ra_de_submit(
     tieu_de: str = Form(default="ĐỀ KIỂM TRA MÔN TOÁN"),
     cho_phep_thieu: str | None = Form(default=None),
     kem_tieng_anh: str | None = Form(default=None),
+    chi_yccd: str | None = Form(default=None),
 ):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
         return chan
+    # "Chỉ theo YCCĐ" (cô Lan 15/10/2026): không lấy dạng luyện tập thêm ngoài YCCĐ; mặc định vẫn cho thêm.
+    chi_theo_yccd = chi_yccd == "1"
 
     if lop not in (10, 11, 12):
         return RedirectResponse("/gv/ra-de?loi=Lop+phai+la+10,+11+hoac+12.", status_code=303)
@@ -166,6 +169,7 @@ async def ra_de_submit(
             pham_vi_chuong=pham_vi_chuong,
             cau_truc_tu_hoc_sinh=cau_truc_tu_gv,
             ma_tran_bai=ma_tran_bai_gv,
+            chi_yccd=chi_theo_yccd,
             socau_ma_de=socau_ma_de,
             cho_phep_thieu=bool(cho_phep_thieu),
             kem_tieng_anh=bool(kem_tieng_anh),
@@ -196,6 +200,7 @@ async def ra_de_submit(
             "cau_truc_tu_hoc_sinh": cau_truc_tu_gv,
             "socau_ma_de": socau_ma_de,
             "cho_phep_thieu": bool(cho_phep_thieu),
+            "chi_yccd": chi_theo_yccd,
             "canh_bao_ngoai_yccd": ket_qua.get("canh_bao_ngoai_yccd") or [],
             "seed": ket_qua.get("seed"),
             "kem_tieng_anh": bool(kem_tieng_anh),

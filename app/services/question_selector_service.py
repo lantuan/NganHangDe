@@ -374,9 +374,13 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
             dem_don_vi[_don_vi(item["curriculum_id"])] += item.get("tong_so_cau", 1)
     ket_qua = []
 
+    chi_yccd = bool(blueprint.get("chi_yccd"))
+
     def _mapping_chuong(chuong_so: int) -> list[dict]:
         if chuong_so not in cache:
-            cache[chuong_so] = load_mapping(lop, chuong_so)
+            rows = load_mapping(lop, chuong_so)
+            # Giáo viên chọn "Chỉ theo YCCĐ" (cô Lan 15/10/2026): không chọn dạng luyện tập thêm.
+            cache[chuong_so] = [r for r in rows if not la_ngoai_yccd(r)] if chi_yccd else rows
         return cache[chuong_so]
 
     # ---- TF (Đúng/Sai) — theo chuong_so, KHÔNG qua Curriculum (Ngoại lệ 1, doc 04) ----
