@@ -360,6 +360,32 @@
     "boi_canh": "do_uong_an_kieng"
   },
   {
+    "id": "L10_C2_B3_VD025_MC_A",
+    "content": "Vận dụng được kiến thức về bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Toán thực tế: lập một bất phương trình bậc nhất hai ẩn từ tình huống, kết hợp điều kiện thêm (biết một ẩn, quan hệ giữa hai ẩn hoặc tổng số) để tìm giá trị nguyên lớn nhất",
+    "boi_canh": [
+      "thang_may",
+      "ve_xem_phim",
+      "quy_lop_lien_hoan",
+      "thu_vien_mua_sach"
+    ],
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan duyet them VD025 (Bai 3 muc VD, de thuc te); MC goi lai SA_A voi dang=1; dap so chon truoc, so lieu suy nguoc; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C2_B3_VD025_SA_A",
+    "content": "Vận dụng được kiến thức về bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Toán thực tế: lập một bất phương trình bậc nhất hai ẩn từ tình huống, kết hợp điều kiện thêm (biết một ẩn, quan hệ giữa hai ẩn hoặc tổng số) để tìm giá trị nguyên lớn nhất",
+    "boi_canh": [
+      "thang_may",
+      "ve_xem_phim",
+      "quy_lop_lien_hoan",
+      "thu_vien_mua_sach"
+    ],
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan duyet them VD025 (Bai 3 muc VD, de thuc te); ban tra loi ngan cua VD025_MC_A (cung Dang); co Lan duyet lai noi dung"
+  },
+  {
     "id": "L10_C2_B4_VD028_MC_H",
     "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

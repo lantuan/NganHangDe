@@ -105,6 +105,28 @@
     "difficulty_rank": 1
   },
   {
+    "id": "L10_C2_B3_VD025",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "chuong_so": "2",
+    "bai": "Bất phương trình bậc nhất 2 ẩn",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Vận dụng được kiến thức về bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
+    "examples": [],
+    "scope": "bài toán thực tiễn dẫn đến một bất phương trình bậc nhất hai ẩn",
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "thuc_tien"
+    ],
+    "difficulty_rank": 3,
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan duyet: Bai 3 co muc VD. YCCD VD cua Bo (\"Van dung duoc kien thuc ve bat phuong trinh, he bat phuong trinh bac nhat hai an vao giai quyet bai toan thuc tien\") nhac ca bat phuong trinh; phan MOT bat phuong trinh dat o Bai 3 voi ma 025 (cung don vi y nghia thuc tien cua bat phuong trinh). Trong YCCD."
+  },
+  {
     "id": "L10_C2_B4_NB026",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",

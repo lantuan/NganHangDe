@@ -5455,3 +5455,141 @@ def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
         cauTN += MC_SA_answer_const(debai, str(k), [str(j) for j in range(0, 6) if j != k], giai, hinh, 0, dang)
         da += 1
     return cauTN
+
+
+# =====================================================================
+# 15/10/2026 - BAI 3 MUC VAN DUNG: L10_C2_B3_VD025 (co Lan: "Them VD025, cau moi"; "lam bai VD theo de thuc te ay").
+# YCCD VD cua Bo "Van dung duoc kien thuc ve bat phuong trinh, he bat phuong trinh bac nhat hai an vao giai quyet bai
+# toan thuc tien" co nhac BAT PHUONG TRINH -> phan mot bat phuong trinh dat o Bai 3 (VD025, cung ma voi NB025 "y nghia
+# cua bat phuong trinh qua vi du thuc tien"), trong YCCD.
+# Dang A: lap MOT bat phuong trinh bac nhat hai an tu tinh huong, ket hop dieu kien them (biet mot an / quan he giua hai
+# an / tong so) de tim gia tri NGUYEN LON NHAT. Dap so chon truoc, so lieu suy nguoc nen luon hop li.
+# Boi canh moi, khong trung NB025 / VD028 / TF: thang_may, ve_xem_phim, quy_lop_lien_hoan, thu_vien_mua_sach.
+# =====================================================================
+
+_VD025_LOP = ["10C1A", "10C1B", "10C2A", "10C2B", "10C3A", "10C3B", "10C4", "10C5A", "10C5B", "10C6", "10C7", "10C8", "10C9"]
+
+
+def _vd025_so(v):
+    """Số nguyên có dấu cách hàng nghìn: 2\\,450."""
+    return "{:,}".format(v).replace(",", r"\,")
+
+
+def _vd025_sinh(boi_canh=None):
+    """Một tình huống: trả về (boi_canh, debai, dap_so, nhieu, giai)."""
+    bc = boi_canh or _rd.choice(["thang_may", "ve_xem_phim", "quy_lop_lien_hoan", "thu_vien_mua_sach"])
+    if bc == "thang_may":
+        T = _rd.choice([450, 630, 800, 1000])
+        p = _rd.choice([60, 65, 70, 75])
+        q = _rd.choice([15, 20, 25, 30])
+        if _rd.random() < 0.5:                                   # biet so thung hang
+            y0 = _rd.randint(2, 8)
+            con = T - q * y0
+            n = con // p
+            if not 3 <= n <= 13:
+                return None
+            debai = (r"Một thang máy chở người và hàng có tải trọng tối đa $%d$ kg. Coi mỗi người có khối lượng $%d$ kg, "
+                     r"mỗi thùng hàng có khối lượng $%d$ kg. Thang máy đang chở $%d$ thùng hàng. Hỏi thang máy chở thêm "
+                     r"được nhiều nhất bao nhiêu người?" % (T, p, q, y0))
+            giai = (r"Gọi $x$ là số người, $y$ là số thùng hàng ($x, y \in \mathbb{N}$). Thang máy chở được khi "
+                    r"$%dx + %dy \le %d$.\\ Với $y = %d$: $%dx \le %d - %d = %d \Leftrightarrow x \le \dfrac{%d}{%d}$.\\ "
+                    r"Vì $x$ là số tự nhiên nên $x$ lớn nhất bằng $%d$. Vậy thang máy chở thêm được nhiều nhất $%d$ người."
+                    % (p, q, T, y0, p, T, q * y0, con, con, p, n, n))
+            sai = T // p                                         # quen tru khoi luong hang
+        else:                                                    # moi nguoi mang k thung
+            k = _rd.choice([1, 2])
+            he = p + k * q
+            n = T // he
+            if not 3 <= n <= 13:
+                return None
+            debai = (r"Một thang máy chở người và hàng có tải trọng tối đa $%d$ kg. Coi mỗi người có khối lượng $%d$ kg, "
+                     r"mỗi thùng hàng có khối lượng $%d$ kg. Mỗi người vào thang máy mang theo %s thùng hàng. Hỏi "
+                     r"thang máy chở được nhiều nhất bao nhiêu người?" % (T, p, q, "một" if k == 1 else "hai"))
+            giai = (r"Gọi $x$ là số người, $y$ là số thùng hàng ($x, y \in \mathbb{N}$). Thang máy chở được khi "
+                    r"$%dx + %dy \le %d$.\\ Mỗi người mang $%d$ thùng nên $y = %dx$, suy ra $%dx \le %d "
+                    r"\Leftrightarrow x \le \dfrac{%d}{%d}$.\\ Vì $x$ là số tự nhiên nên $x$ lớn nhất bằng $%d$. "
+                    r"Vậy thang máy chở được nhiều nhất $%d$ người." % (p, q, T, k, k, he, T, T, he, n, n))
+            sai = T // p
+    elif bc == "ve_xem_phim":
+        a = _rd.choice([45, 50, 55, 60])
+        d = _rd.choice([20, 25, 30, 35])
+        b = a + d
+        N = _rd.choice([35, 40, 45])
+        n = _rd.randint(4, N - 6)
+        r = _rd.choice([x for x in range(d) if (a * N + d * n + x) % 10 == 0])
+        M = a * N + d * n + r
+        lop = _rd.choice(_VD025_LOP)
+        debai = (r"Lớp %s mua $%d$ vé xem phim, gồm vé thường giá $%d$ nghìn đồng/vé và vé VIP giá $%d$ nghìn đồng/vé. "
+                 r"Số tiền mua vé không vượt quá $%s$ nghìn đồng. Hỏi lớp mua được nhiều nhất bao nhiêu vé VIP?"
+                 % (lop, N, a, b, _vd025_so(M)))
+        giai = (r"Gọi $x$ là số vé thường, $y$ là số vé VIP ($x, y \in \mathbb{N}$). Ta có $%dx + %dy \le %s$ và "
+                r"$x + y = %d$.\\ Thay $x = %d - y$: $%d\left(%d - y\right) + %dy \le %s \Leftrightarrow %dy \le %s - %s = %d "
+                r"\Leftrightarrow y \le \dfrac{%d}{%d}$.\\ Vì $y$ là số tự nhiên nên $y$ lớn nhất bằng $%d$. "
+                r"Vậy lớp mua được nhiều nhất $%d$ vé VIP."
+                % (a, b, _vd025_so(M), N, N, a, N, b, _vd025_so(M), d, _vd025_so(M), _vd025_so(a * N), M - a * N,
+                   M - a * N, d, n, n))
+        sai = M // b                                             # quen dieu kien tong so ve
+    elif bc == "quy_lop_lien_hoan":
+        lop = _rd.choice(_VD025_LOP)
+        b = _rd.choice([8, 10, 12])
+        a = _rd.choice([35, 40, 45, 50])
+        n = _rd.randint(4, 12)
+        r = _rd.choice([x for x in range(a) if (35 * b + a * n + x) % 10 == 0])
+        M = 35 * b + a * n + r
+        debai = (r"Lớp %s có $35$ học sinh, dùng quỹ lớp không quá $%s$ nghìn đồng để mua nước và bánh cho buổi liên hoan: "
+                 r"nước giá $%d$ nghìn đồng/chai, bánh giá $%d$ nghìn đồng/hộp. Lớp mua cho mỗi bạn đúng một chai nước. "
+                 r"Hỏi lớp mua được nhiều nhất bao nhiêu hộp bánh?" % (lop, _vd025_so(M), b, a))
+        giai = (r"Gọi $x$ là số chai nước, $y$ là số hộp bánh ($x, y \in \mathbb{N}$). Ta có $%dx + %dy \le %s$.\\ "
+                r"Mỗi bạn một chai nước nên $x = 35$: $%dy \le %s - %d = %d \Leftrightarrow y \le \dfrac{%d}{%d}$.\\ "
+                r"Vì $y$ là số tự nhiên nên $y$ lớn nhất bằng $%d$. Vậy lớp mua được nhiều nhất $%d$ hộp bánh."
+                % (b, a, _vd025_so(M), a, _vd025_so(M), 35 * b, M - 35 * b, M - 35 * b, a, n, n))
+        sai = M // a
+    else:                                                        # thu_vien_mua_sach
+        a = _rd.choice(range(60, 125, 5))
+        b = _rd.choice([30, 35, 40, 45, 50])
+        d = a - b
+        N = _rd.choice([100, 120, 150])
+        n = _rd.randint(20, N - 20)
+        cho = [x for x in range(d) if (b * N + d * n + x) % 100 == 0]
+        if not cho:
+            return None
+        M = b * N + d * n + _rd.choice(cho)
+        debai = (r"Thư viện trường mua $%d$ cuốn sách, gồm sách tham khảo giá $%d$ nghìn đồng/cuốn và truyện giá $%d$ "
+                 r"nghìn đồng/cuốn, với kinh phí không quá $%s$ nghìn đồng. Hỏi thư viện mua được nhiều nhất bao nhiêu "
+                 r"cuốn sách tham khảo?" % (N, a, b, _vd025_so(M)))
+        giai = (r"Gọi $x$ là số sách tham khảo, $y$ là số truyện ($x, y \in \mathbb{N}$). Ta có $%dx + %dy \le %s$ và "
+                r"$x + y = %d$.\\ Thay $y = %d - x$: $%dx + %d\left(%d - x\right) \le %s \Leftrightarrow %dx \le %s - %s = %s "
+                r"\Leftrightarrow x \le \dfrac{%s}{%d}$.\\ Vì $x$ là số tự nhiên nên $x$ lớn nhất bằng $%d$. "
+                r"Vậy thư viện mua được nhiều nhất $%d$ cuốn sách tham khảo."
+                % (a, b, _vd025_so(M), N, N, a, b, N, _vd025_so(M), d, _vd025_so(M), _vd025_so(b * N), _vd025_so(M - b * N),
+                   _vd025_so(M - b * N), d, n, n))
+        sai = M // a
+    nhieu = [v for v in (n + 1, n - 1, sai, n + 2, n - 2) if v > 0 and v != n]
+    return bc, debai, n, nhieu, giai
+
+
+def L10_C2_B3_VD025_SA_A_01(socau, dang=2):
+    r"""Toán thực tế (VD): lập MỘT bất phương trình bậc nhất hai ẩn từ tình huống, kết hợp điều kiện thêm (biết một ẩn,
+    quan hệ giữa hai ẩn hoặc tổng số) để tìm giá trị nguyên lớn nhất. Bối cảnh: thang máy, vé xem phim, quỹ lớp liên
+    hoan, thư viện mua sách.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet them VD025 (Bai 3 muc VD, de thuc te); co Lan duyet lai noi dung."""
+    cauTN = ""
+    lan = da = 0
+    while da < socau and lan < 2000:
+        lan += 1
+        g = _vd025_sinh()
+        if g is None:
+            continue
+        bc, debai, n, nhieu, giai = g
+        cauTN += MC_SA_answer_const(debai, str(n), [str(v) for v in nhieu], giai, 0, 0, dang)
+        da += 1
+    return cauTN
+
+
+def L10_C2_B3_VD025_MC_A_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với VD025_SA_A_01 (toán thực tế: giá trị nguyên lớn nhất thoả một bất phương trình bậc
+    nhất hai ẩn và một điều kiện thêm). Nhiễu: lệch $1$, $2$ đơn vị và kết quả khi bỏ quên điều kiện thêm.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    return L10_C2_B3_VD025_SA_A_01(socau, dang)

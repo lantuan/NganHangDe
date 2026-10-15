@@ -5429,3 +5429,141 @@ def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
         cauTN += MC_SA_answer_const(debai, str(k), [str(j) for j in range(0, 6) if j != k], giai, hinh, 0, dang)
         da += 1
     return cauTN
+
+
+# =====================================================================
+# 15/10/2026 - BAI 3 MUC VAN DUNG: L10_C2_B3_VD025 (co Lan: "Them VD025, cau moi"; "lam bai VD theo de thuc te ay").
+# YCCD VD cua Bo "Van dung duoc kien thuc ve bat phuong trinh, he bat phuong trinh bac nhat hai an vao giai quyet bai
+# toan thuc tien" co nhac BAT PHUONG TRINH -> phan mot bat phuong trinh dat o Bai 3 (VD025, cung ma voi NB025 "y nghia
+# cua bat phuong trinh qua vi du thuc tien"), trong YCCD.
+# Dang A: lap MOT bat phuong trinh bac nhat hai an tu tinh huong, ket hop dieu kien them (biet mot an / quan he giua hai
+# an / tong so) de tim gia tri NGUYEN LON NHAT. Dap so chon truoc, so lieu suy nguoc nen luon hop li.
+# Boi canh moi, khong trung NB025 / VD028 / TF: thang_may, ve_xem_phim, quy_lop_lien_hoan, thu_vien_mua_sach.
+# =====================================================================
+
+_VD025_LOP = ["10C1A", "10C1B", "10C2A", "10C2B", "10C3A", "10C3B", "10C4", "10C5A", "10C5B", "10C6", "10C7", "10C8", "10C9"]
+
+
+def _vd025_so(v):
+    """Số nguyên có dấu cách hàng nghìn: 2\\,450."""
+    return "{:,}".format(v).replace(",", r"\,")
+
+
+def _vd025_sinh(boi_canh=None):
+    """Một tình huống: trả về (boi_canh, debai, dap_so, nhieu, giai)."""
+    bc = boi_canh or _rd.choice(["thang_may", "ve_xem_phim", "quy_lop_lien_hoan", "thu_vien_mua_sach"])
+    if bc == "thang_may":
+        T = _rd.choice([450, 630, 800, 1000])
+        p = _rd.choice([60, 65, 70, 75])
+        q = _rd.choice([15, 20, 25, 30])
+        if _rd.random() < 0.5:                                   # biet so thung hang
+            y0 = _rd.randint(2, 8)
+            con = T - q * y0
+            n = con // p
+            if not 3 <= n <= 13:
+                return None
+            debai = (r"An elevator for people and goods has a maximum load of $%d$ kg. Assume each person weighs $%d$ kg "
+                     r"and each box of goods weighs $%d$ kg. The elevator is already carrying $%d$ boxes. At most how many more "
+                     r"people can the elevator carry?" % (T, p, q, y0))
+            giai = (r"Let $x$ be the number of people and $y$ the number of boxes ($x, y \in \mathbb{N}$). The elevator can carry them when "
+                    r"$%dx + %dy \le %d$.\\ With $y = %d$: $%dx \le %d - %d = %d \Leftrightarrow x \le \dfrac{%d}{%d}$.\\ "
+                    r"Since $x$ is a natural number, the largest value of $x$ is $%d$. Therefore, the elevator can carry at most $%d$ more people."
+                    % (p, q, T, y0, p, T, q * y0, con, con, p, n, n))
+            sai = T // p                                         # quen tru khoi luong hang
+        else:                                                    # moi nguoi mang k thung
+            k = _rd.choice([1, 2])
+            he = p + k * q
+            n = T // he
+            if not 3 <= n <= 13:
+                return None
+            debai = (r"An elevator for people and goods has a maximum load of $%d$ kg. Assume each person weighs $%d$ kg "
+                     r"and each box of goods weighs $%d$ kg. Each person entering the elevator brings %s box(es) of goods. At most "
+                     r"how many people can the elevator carry?" % (T, p, q, "one" if k == 1 else "two"))
+            giai = (r"Let $x$ be the number of people and $y$ the number of boxes ($x, y \in \mathbb{N}$). The elevator can carry them when "
+                    r"$%dx + %dy \le %d$.\\ Each person brings $%d$ box(es), so $y = %dx$, hence $%dx \le %d "
+                    r"\Leftrightarrow x \le \dfrac{%d}{%d}$.\\ Since $x$ is a natural number, the largest value of $x$ is $%d$. "
+                    r"Therefore, the elevator can carry at most $%d$ people." % (p, q, T, k, k, he, T, T, he, n, n))
+            sai = T // p
+    elif bc == "ve_xem_phim":
+        a = _rd.choice([45, 50, 55, 60])
+        d = _rd.choice([20, 25, 30, 35])
+        b = a + d
+        N = _rd.choice([35, 40, 45])
+        n = _rd.randint(4, N - 6)
+        r = _rd.choice([x for x in range(d) if (a * N + d * n + x) % 10 == 0])
+        M = a * N + d * n + r
+        lop = _rd.choice(_VD025_LOP)
+        debai = (r"Class %s buys $%d$ movie tickets, consisting of regular tickets at $%d$ thousand VND each and VIP tickets at $%d$ thousand VND each. "
+                 r"The total cost of the tickets is at most $%s$ thousand VND. At most how many VIP tickets can the class buy?"
+                 % (lop, N, a, b, _vd025_so(M)))
+        giai = (r"Let $x$ be the number of regular tickets and $y$ the number of VIP tickets ($x, y \in \mathbb{N}$). We have $%dx + %dy \le %s$ and "
+                r"$x + y = %d$.\\ Substituting $x = %d - y$: $%d\left(%d - y\right) + %dy \le %s \Leftrightarrow %dy \le %s - %s = %d "
+                r"\Leftrightarrow y \le \dfrac{%d}{%d}$.\\ Since $y$ is a natural number, the largest value of $y$ is $%d$. "
+                r"Therefore, the class can buy at most $%d$ VIP tickets."
+                % (a, b, _vd025_so(M), N, N, a, N, b, _vd025_so(M), d, _vd025_so(M), _vd025_so(a * N), M - a * N,
+                   M - a * N, d, n, n))
+        sai = M // b                                             # quen dieu kien tong so ve
+    elif bc == "quy_lop_lien_hoan":
+        lop = _rd.choice(_VD025_LOP)
+        b = _rd.choice([8, 10, 12])
+        a = _rd.choice([35, 40, 45, 50])
+        n = _rd.randint(4, 12)
+        r = _rd.choice([x for x in range(a) if (35 * b + a * n + x) % 10 == 0])
+        M = 35 * b + a * n + r
+        debai = (r"Class %s has $35$ students and uses a class fund of at most $%s$ thousand VND to buy drinks and cakes for a party: "
+                 r"drinks cost $%d$ thousand VND per bottle and cakes cost $%d$ thousand VND per box. The class buys exactly one bottle of drink for each student. "
+                 r"At most how many boxes of cake can the class buy?" % (lop, _vd025_so(M), b, a))
+        giai = (r"Let $x$ be the number of bottles of drink and $y$ the number of boxes of cake ($x, y \in \mathbb{N}$). We have $%dx + %dy \le %s$.\\ "
+                r"Each student gets one bottle, so $x = 35$: $%dy \le %s - %d = %d \Leftrightarrow y \le \dfrac{%d}{%d}$.\\ "
+                r"Since $y$ is a natural number, the largest value of $y$ is $%d$. Therefore, the class can buy at most $%d$ boxes of cake."
+                % (b, a, _vd025_so(M), a, _vd025_so(M), 35 * b, M - 35 * b, M - 35 * b, a, n, n))
+        sai = M // a
+    else:                                                        # thu_vien_mua_sach
+        a = _rd.choice(range(60, 125, 5))
+        b = _rd.choice([30, 35, 40, 45, 50])
+        d = a - b
+        N = _rd.choice([100, 120, 150])
+        n = _rd.randint(20, N - 20)
+        cho = [x for x in range(d) if (b * N + d * n + x) % 100 == 0]
+        if not cho:
+            return None
+        M = b * N + d * n + _rd.choice(cho)
+        debai = (r"The school library buys $%d$ books, consisting of reference books at $%d$ thousand VND each and storybooks at $%d$ "
+                 r"thousand VND each, with a budget of at most $%s$ thousand VND. At most how many "
+                 r"reference books can the library buy?" % (N, a, b, _vd025_so(M)))
+        giai = (r"Let $x$ be the number of reference books and $y$ the number of storybooks ($x, y \in \mathbb{N}$). We have $%dx + %dy \le %s$ and "
+                r"$x + y = %d$.\\ Substituting $y = %d - x$: $%dx + %d\left(%d - x\right) \le %s \Leftrightarrow %dx \le %s - %s = %s "
+                r"\Leftrightarrow x \le \dfrac{%s}{%d}$.\\ Since $x$ is a natural number, the largest value of $x$ is $%d$. "
+                r"Therefore, the library can buy at most $%d$ reference books."
+                % (a, b, _vd025_so(M), N, N, a, b, N, _vd025_so(M), d, _vd025_so(M), _vd025_so(b * N), _vd025_so(M - b * N),
+                   _vd025_so(M - b * N), d, n, n))
+        sai = M // a
+    nhieu = [v for v in (n + 1, n - 1, sai, n + 2, n - 2) if v > 0 and v != n]
+    return bc, debai, n, nhieu, giai
+
+
+def L10_C2_B3_VD025_SA_A_01(socau, dang=2):
+    r"""Toán thực tế (VD): lập MỘT bất phương trình bậc nhất hai ẩn từ tình huống, kết hợp điều kiện thêm (biết một ẩn,
+    quan hệ giữa hai ẩn hoặc tổng số) để tìm giá trị nguyên lớn nhất. Bối cảnh: thang máy, vé xem phim, quỹ lớp liên
+    hoan, thư viện mua sách.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet them VD025 (Bai 3 muc VD, de thuc te); co Lan duyet lai noi dung."""
+    cauTN = ""
+    lan = da = 0
+    while da < socau and lan < 2000:
+        lan += 1
+        g = _vd025_sinh()
+        if g is None:
+            continue
+        bc, debai, n, nhieu, giai = g
+        cauTN += MC_SA_answer_const(debai, str(n), [str(v) for v in nhieu], giai, 0, 0, dang)
+        da += 1
+    return cauTN
+
+
+def L10_C2_B3_VD025_MC_A_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với VD025_SA_A_01 (toán thực tế: giá trị nguyên lớn nhất thoả một bất phương trình bậc
+    nhất hai ẩn và một điều kiện thêm). Nhiễu: lệch $1$, $2$ đơn vị và kết quả khi bỏ quên điều kiện thêm.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    return L10_C2_B3_VD025_SA_A_01(socau, dang)

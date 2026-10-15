@@ -133,5 +133,10 @@
   "tim": "dv=\"calo\"",
   "thay": "dv=\"calories\"",
   "so_lan": 1
+ },
+ {
+  "tim": "\"one\" if k == 1 else \"hai\"",
+  "thay": "\"one\" if k == 1 else \"two\"",
+  "so_lan": 1
  }
 ]
