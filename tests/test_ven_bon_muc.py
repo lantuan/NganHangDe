@@ -85,7 +85,7 @@ def _phuong_an(blk):
     return [(bool(t), x) for t, x in pa]
 
 
-@pytest.mark.parametrize("ten_ham", ["NB019_MC_A_01", "VD019_MC_B_01", "VD019_MC_C_01", "VD019_SA_A_01", "VD019_SA_B_01"])
+@pytest.mark.parametrize("ten_ham", ["NB019_MC_A_01", "VD019_MC_B_01", "VD019_MC_C_01", "VD019_SA_B_01", "VD019_SA_C_01"])
 def test_chay_nhieu_hat_giong(ten_ham):
     f = getattr(M, P + ten_ham)
     for s in range(150):
@@ -145,7 +145,7 @@ def test_hai_tap_nb_dung_mot_phuong_an(seed):
 
 
 @pytest.mark.parametrize("seed", range(150))
-@pytest.mark.parametrize("ten_ham", ["VD019_SA_A_01", "VD019_SA_B_01"])
+@pytest.mark.parametrize("ten_ham", ["VD019_SA_B_01", "VD019_SA_C_01"])
 def test_sa_dem_dung_tong_cac_vung(ten_ham, seed):
     random.seed(seed)
     for blk in _cau(getattr(M, P + ten_ham)(4)):
@@ -193,11 +193,11 @@ def test_mapping_ven_id_dung_muc_va_danh_dau():
     assert cur["L10_C1_B2_NB019"]["content"] == cur["L10_C1_B2_TH019"]["content"] == cur["L10_C1_B2_VD019"]["content"]
     nb = mp[P + "NB019_MC_A"]                                       # NB thấp hơn YCCĐ TH019: không ghi chú
     assert "ngoai_yccd" not in nb and "muc_do_dang" not in nb
-    moi = ("VD019_MC_A", "VD019_MC_B", "VD019_SA_A", "VD019_MC_C", "VD019_SA_B")
+    moi = ("VD019_MC_A", "VD019_MC_B", "VD019_SA_B", "VD019_MC_C", "VD019_SA_C")
     for i in moi:                                                   # VD/VDC cao hơn YCCĐ: ghi chú
         r = mp[P + i]
         assert r["ngoai_yccd"] is True and r["ghi_chu"].startswith("LUYEN TAP THEM")
-        assert (r.get("muc_do_dang") == "VDC") == i.endswith(("MC_C", "SA_B")), i
+        assert (r.get("muc_do_dang") == "VDC") == i.endswith(("MC_C", "SA_C")), i
     dang = [g for d in cur["L10_C1_B2_VD019"]["dang_luyen_tap_them"] for g in d["mapping_id"]]
     assert set(dang) == {P + i for i in moi}
     assert "L10_C1_B2_TH019_MC_A" not in mp and "dang_luyen_tap_them" not in cur["L10_C1_B2_VD020"]

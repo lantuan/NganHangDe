@@ -1,7 +1,7 @@
 """Pac Bo - hanh trinh ve nuoc cua Bac, TU GIAC 4 trong 5 dia danh (co Lan 13/10/2026): kiem lai DOC LAP.
 
 Doc ten bon dia danh va nam so do (AB, BC, CD, DA, AC) trong de, dung tu giac bang TOA DO roi tu tinh DIEN TICH va so voi SA / MC / TL
-(Pac Bo la bien the _04 cua dang dien tich MC_J / SA_L / TL_I; de thuc te khong tinh goc). Kiem them: moi so do trong de lech toi da 15 m so voi khoang cach THAT giua dung
+(Pac Bo la bien the _04 cua dang dien tich MC_J / SA_J / TL_I; de thuc te khong tinh goc). Kiem them: moi so do trong de lech toi da 15 m so voi khoang cach THAT giua dung
 bon dia danh do (toa do tu Plus Code Google Maps co Lan gui, giai ma bang bo giai kiem voi vi du chuan cua dac ta Open Location Code;
 hang Coc Bo: showcaves.com; suoi Le-nin: diem danh dau Google Maps), tu giac LOI, mapping.
 """
@@ -141,7 +141,7 @@ def _khong_goc(txt):
     assert "góc" not in de.replace("góc nhọn", "") and "widehat" not in de and "sin" not in de and "côsin" not in de
 
 
-@pytest.mark.parametrize("ham", ["SA_L", "MC_J"])
+@pytest.mark.parametrize("ham", ["SA_J", "MC_J"])
 def test_sa_mc_dap_so_khop_doc_lap(ham):
     gap = set()
     for sd in range(150):
@@ -183,7 +183,7 @@ def test_tl_hai_y_khop_doc_lap():
 
 def test_mapping_pac_bo_nam_trong_dang_dien_tich():
     rows = {r["id"]: r for r in json.load(open(GOC / "data" / "mapping" / "toan10" / "L10_C3.json", encoding="utf-8"))}
-    ids = ["L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_L", "L10_C3_B6_VD036_TL_I"]
+    ids = ["L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_J", "L10_C3_B6_VD036_TL_I"]
     dang = {rows[i]["Dang"] for i in ids}
     assert len(dang) == 1 and "Pác Bó" in dang.pop()
     # khong con ID rieng cho Pac Bo (cac chu cai W, Y, O da duoc dang trang Viet Bac dung lai - xem test_l10_c3_trang_viet_bac.py)

@@ -456,5 +456,14 @@
  "r\" Xét các vectơ khác vectơ $%s$ có điểm đầu, điểm cuối là hai trong các điểm %s.\"": "r\" Consider the vectors other than vector $%s$ whose initial and \" r\"terminal points are two of the points %s.\"",
  "r\"Tìm các lực cùng hướng, các lực ngược hướng với $%s$.\"": "r\"Find the forces with the same direction as $%s$ and the forces \" r\"with the opposite direction.\"",
  "r\"Tính độ lớn và nêu hướng của mỗi lực.\"": "r\"Find the magnitude and state the direction of each force.\"",
- "r\"Đếm số cạnh ô của mỗi vectơ rồi nhân với $10$ N: \"": "r\"Count the grid-square sides of each vector, then multiply by $10$ \" r\"N: \""
+ "r\"Đếm số cạnh ô của mỗi vectơ rồi nhân với $10$ N: \"": "r\"Count the grid-square sides of each vector, then multiply by $10$ \" r\"N: \"",
+ "r\"%d) $%s$ và $%s$\"": "r\"%d) $%s$ and $%s$\"",
+ "r\" Cho bốn cặp vectơ: \\\\ \"": "r\" Consider four pairs of vectors: \\\\ \"",
+ "r\"\\\\ Có bao nhiêu cặp vectơ %s?\"": "r\"\\\\ How many pairs of vectors have the %s?\"",
+ "r\"Cặp %d: $%s$ và $%s$ %s.\"": "r\"Pair %d: $%s$ and $%s$: %s.\"",
+ "r\"\\\\ Vậy có $%d$ cặp vectơ %s.\"": "r\"\\\\ So there are $%d$ pairs of vectors with the %s.\"",
+ "r\"Cho các khẳng định sau: \\\\ \"": "r\"Consider the following statements: \\\\ \"",
+ "r\"\\\\ Có bao nhiêu khẳng định đúng?\"": "r\"\\\\ How many of these statements are true?\"",
+ "r\"Khẳng định %d %s vì %s.\"": "r\"Statement %d is %s because %s.\"",
+ "r\"\\\\ Vậy có $%d$ khẳng định đúng.\"": "r\"\\\\ So there are $%d$ true statements.\""
 }

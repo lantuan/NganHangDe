@@ -127,6 +127,20 @@ def _dem_ham_theo_id(lop: int, chuong: int) -> dict[str, int]:
     return dict(Counter(re.findall(r"^def (L\d+_[A-Za-z0-9_]+?)_\d{2}\s*\(", src, re.M)))
 
 
+def _bai_tu_curriculum(cid: str):
+    m = re.match(r"^(L\d+_C\d+_B\d+)", cid or "")
+    return m.group(1) if m else None
+
+
+def _tl_co_vd_trong_pham_vi(r: dict, pham_vi: set) -> bool:
+    """Dòng Mapping Tự luận có ý mức VD ở bài nằm trong phạm vi đề."""
+    if r.get("cac_y"):
+        cap = [(_bai_tu_curriculum(y.get("curriculum_id", "")), y.get("muc_do")) for y in r["cac_y"]]
+    else:
+        cap = [(_bai_tu_curriculum(r["id"]), r.get("muc_do"))]
+    return any(muc == "VD" and bai in pham_vi for bai, muc in cap)
+
+
 def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
     """{"o": {bai_id: {loai: {muc: n}}}, "tf": {chuong: n}, "tl": {chuong: n}}.
 
@@ -156,7 +170,9 @@ def so_cau_ngan_hang(lop: int, pham_vi_bai: list[str]) -> dict:
             m = _ROW_BAI.match(r["id"])
             bai_id = f"L{lop}_C{c}_B{int(m.group(1))}" if m else None
             if loai == "tu_luan":
-                if r.get("muc_do") == "VD":
+                # Chỉ tính dạng Tự luận có ý mức VD thuộc BÀI TRONG PHẠM VI đề (bộ dựng blueprint cũng lọc
+                # theo bài): vd giữa kỳ 1 lớp 10 chỉ có Chương 4 bài 7, 8 nên TL VD của bài 10, 11 không tính.
+                if _tl_co_vd_trong_pham_vi(r, set(pham_vi_bai)):
                     kq["tl"][c] += n_ham
                 continue
             if loai in TEN_LOAI and bai_id in kq["o"] and r.get("muc_do") in MUC:

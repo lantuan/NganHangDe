@@ -6,6 +6,13 @@
     "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước"
   },
   {
+    "id": "L10_C4_B7_NB037_SA_A",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước",
+    "ghi_chu": "CLAUDE THEM 14/10/2026 theo quy uoc MC_x - SA_x cung kieu cung chu cai (ban tra loi ngan cua MC_A: dem so cap vecto cung huong/nguoc huong trong hinh); co Lan duyet"
+  },
+  {
     "id": "L10_C4_B7_NB037_MC_B",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -13,11 +20,11 @@
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
   },
   {
-    "id": "L10_C4_B7_NB037_SA_A",
+    "id": "L10_C4_B7_NB037_SA_B",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm vectơ khác vectơ-không có điểm đầu, điểm cuối thuộc n điểm cho trước",
-    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B"
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B. DOI ID 14/10/2026: C4_B7_NB037_SA_A -> C4_B7_NB037_SA_B (cung chu cai voi MC_B); co Lan duyet"
   },
   {
     "id": "L10_C4_B7_NB037_MC_C",
@@ -27,11 +34,11 @@
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
   },
   {
-    "id": "L10_C4_B7_NB037_SA_B",
+    "id": "L10_C4_B7_NB037_SA_C",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm vectơ cùng phương, cùng hướng, ngược hướng với một vectơ cho trước trong hình",
-    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_C"
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_C. DOI ID 14/10/2026: C4_B7_NB037_SA_B -> C4_B7_NB037_SA_C (cung chu cai voi MC_C); co Lan duyet"
   },
   {
     "id": "L10_C4_B7_NB037_MC_D",
@@ -39,6 +46,13 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Chọn khẳng định đúng (sai) về vectơ, giá, độ dài, cùng phương, cùng hướng, ngược hướng",
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_NB037_SA_D",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chọn khẳng định đúng (sai) về vectơ, giá, độ dài, cùng phương, cùng hướng, ngược hướng",
+    "ghi_chu": "CLAUDE THEM 14/10/2026 theo quy uoc MC_x - SA_x cung kieu cung chu cai (ban tra loi ngan cua MC_D: dem so khang dinh dung trong 4 khang dinh); co Lan duyet"
   },
   {
     "id": "L10_C4_B7_TH037_MC_A",
@@ -64,11 +78,11 @@
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
   },
   {
-    "id": "L10_C4_B7_NB038_SA_A",
+    "id": "L10_C4_B7_NB038_SA_B",
     "content": "Nhận biết được hai vectơ bằng nhau, vectơ-không.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm vectơ bằng một vectơ cho trước trong hình",
-    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B"
+    "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai; ban tra loi ngan cua MC_B. DOI ID 14/10/2026: C4_B7_NB037_SA_A -> C4_B7_NB037_SA_B (cung chu cai voi MC_B); co Lan duyet"
   },
   {
     "id": "L10_C4_B7_NB038_MC_C",
@@ -434,5 +448,5 @@
     "content": "Vectơ",
     "Loai": "Đúng sai",
     "Dang": "Vectơ trong mặt phẳng toạ độ; Tích vô hướng của hai vectơ"
-  },
+  }
 ]

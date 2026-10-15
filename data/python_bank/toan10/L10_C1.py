@@ -1591,7 +1591,7 @@ def L10_C1_B1_NB007_MC_C_01(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B1_NB007_MC_B_01(socau, dang=1):
+def L10_C1_B1_NB007_MC_A_02(socau, dang=1):
 
     # Danh sách các mệnh đề kéo theo
     # Nội dung thực tế, liên môn, kiến thức THCS trở xuống
@@ -1773,7 +1773,7 @@ def L10_C1_B1_NB007_MC_B_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B1_NB007_MC_D_01(socau, dang=1):
+def L10_C1_B1_NB007_MC_C_02(socau, dang=1):
 
     # Danh sách các mệnh đề kéo theo
     # Nội dung thực tế, liên môn, kiến thức THCS trở xuống
@@ -1976,6 +1976,29 @@ def L10_C1_B1_NB007_MC_D_01(socau, dang=1):
         )
 
     return cauTN
+
+
+def _nb007_sa(latex):
+    """Đổi khối TN (MC_SA_answer_text, dang=2) thành câu trả lời ngắn có đáp số trong $...$ như các hàm SA khác."""
+    return re.sub(r"\\shortans\{ ?(\d+)\}", r"\\shortans{ $\1$}", latex)
+
+
+def L10_C1_B1_NB007_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB007_MC_C_01 (mệnh đề toán học): đếm số mệnh đề kéo theo (hoặc không
+    phải kéo theo) trong 4 mệnh đề.
+
+    CLAUDE THEM 15/10/2026 theo bang duyet co Lan (MC_x va SA_x cung kieu, cung chu cai). Co Lan duyet.
+    """
+    return _nb007_sa(L10_C1_B1_NB007_MC_C_01(socau, dang))
+
+
+def L10_C1_B1_NB007_SA_C_02(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB007_MC_C_02 (mệnh đề thực tế, liên môn): đếm số mệnh đề kéo theo
+    (hoặc không phải kéo theo) trong 4 mệnh đề.
+
+    CLAUDE THEM 15/10/2026 theo bang duyet co Lan (MC_x va SA_x cung kieu, cung chu cai). Co Lan duyet.
+    """
+    return _nb007_sa(L10_C1_B1_NB007_MC_C_02(socau, dang))
 
 
 def L10_C1_B1_NB008_MC_A_01(socau, dang=1):
@@ -5137,7 +5160,7 @@ def L10_C1_B1_NB015_MC_B_01(socau, dang=1):
 
     return cauTN
 
-def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
+def L10_C1_B2_NB017_MC_G_01(socau, dang=1):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -7401,7 +7424,7 @@ def L10_C1_B1_VD014_MC_B_01(socau, dang=1):
     return cauTN
 
 
-def L10_C1_B2_VD021_SA_B_01(socau, dang=2):
+def L10_C1_B2_VD021_SA_D_01(socau, dang=2):
     r"""Tìm tham số m để khoảng/đoạn chứa đúng k số nguyên (dương, âm...).
 
     SUA 29/09/2026 (co Lan: "cau nay khong the la muc do NB duoc"): truoc
@@ -8308,7 +8331,7 @@ def _tap_dac_trung(loai):
     raise ValueError(loai)
 
 
-def L10_C1_B2_NB017_MC_G_01(socau, dang=1):
+def L10_C1_B2_NB017_MC_A_01(socau, dang=1):
     r"""Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (số
     nguyên tố, số nguyên trong khoảng, ước, $x^2 < k$) - mức nhận biết.
 
@@ -10025,9 +10048,9 @@ def L10_C1_B2_VD020_MC_A_04(socau, dang=1):
 # (nghiệm đọc ngay: số tự nhiên, số nguyên âm, phân số). Cái học sinh cần
 # nhận biết là tập số N, Z, Q, R giữ lại nghiệm nào.
 # Cùng một dạng, các cách hỏi:
-#   NB017_MC_G_01  cho tính chất đặc trưng, chọn cách liệt kê đúng
-#   NB017_MC_G_02  cho tập liệt kê, chọn cách viết bằng tính chất đặc trưng đúng
-#   NB017_MC_G_03  hỏi phần tử a thuộc / không thuộc tập cho bởi tính chất
+#   NB017_MC_A_01  cho tính chất đặc trưng, chọn cách liệt kê đúng
+#   NB017_MC_A_02  cho tập liệt kê, chọn cách viết bằng tính chất đặc trưng đúng
+#   NB017_MC_A_03  hỏi phần tử a thuộc / không thuộc tập cho bởi tính chất
 #   NB017_SA_A_01  cho tính chất đặc trưng, hỏi tập có bao nhiêu phần tử
 #   NB017_SA_A_02  hỏi tổng các phần tử (tập đối xứng tổng = 0: hỏi tích/hiệu)
 #   TH018_TL_A_01  tự luận: a) liệt kê A (NB017), b) giao/hợp/hiệu với B (TH018)
@@ -10183,13 +10206,13 @@ def _chon_tap_dac_trung():
     return de, dung, sai, _loi_giai_hai_dieu_kien(de, dung)
 
 
-def L10_C1_B2_NB017_MC_G_02(socau, dang=1):
+def L10_C1_B2_NB017_MC_A_02(socau, dang=1):
     r"""Hỏi NGƯỢC của _01: cho tập hợp dạng LIỆT KÊ (như $\{-3; 1; 2\}$, $\{2; 4; 8; 16\}$),
     chọn cách viết bằng TÍNH CHẤT ĐẶC TRƯNG đúng. Phương án: cùng phương trình tích
     bậc nhất trên các tập số khác nhau / đổi dấu nhân tử; lũy thừa $2^n, 3^n, (-2)^n,
     (-3)^n$ lệch điều kiện của $n$ hoặc dấu cơ số; cùng điều kiện với dấu < / ≤ khác nhau.
 
-    CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_MC_G, theo bai Sach bai tap
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB017_MC_A, theo bai Sach bai tap
     (da ha ve muc NB: 2-3 nhan tu bac nhat). Co Lan duyet lai.
     """
     N_, Z_ = r"\mathbb{N}", r"\mathbb{Z}"
@@ -10256,13 +10279,13 @@ def L10_C1_B2_NB017_MC_G_02(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_NB017_MC_G_03(socau, dang=1):
-    r"""Cách hỏi thứ ba của NB017_MC_G: cho tập $A$ bằng tính chất đặc trưng (phương
+def L10_C1_B2_NB017_MC_A_03(socau, dang=1):
+    r"""Cách hỏi thứ ba của NB017_MC_A: cho tập $A$ bằng tính chất đặc trưng (phương
     trình tích bậc nhất, lũy thừa $2^n, 3^n, (-2)^n, (-3)^n$, số nguyên tố, ước...),
     hỏi khẳng định ``$a \in A$'' / ``$a \notin A$'' nào đúng (hoặc sai). Các số đưa vào
     phương án là các số dễ nhầm (sai dấu, lệch biên, ngoài tập số).
 
-    CLAUDE THEM 30/09/2026 - bien the 03 cua NB017_MC_G theo co Lan
+    CLAUDE THEM 30/09/2026 - bien the 03 cua NB017_MC_A theo co Lan
     ("hoi phan tu 3 co thuoc tap ... theo dang tinh chat khong"). Co Lan duyet lai.
     """
     cau = ""
@@ -10307,7 +10330,7 @@ def L10_C1_B2_NB017_SA_A_01(socau, dang=2):
     nhất trên N, Z, Q, R; hai điều kiện trên N; số nguyên tố, ước, $x^2 < k$...),
     hỏi tập có bao nhiêu phần tử.
 
-    CLAUDE THEM 30/09/2026 - dang moi (ban tra loi ngan cua NB017_MC_G). Co Lan duyet lai.
+    CLAUDE THEM 30/09/2026 - dang moi (ban tra loi ngan cua NB017_MC_A). Co Lan duyet lai.
     """
     cau = ""
     so = 0
@@ -10834,7 +10857,7 @@ def L10_C1_B1_TH014_MC_I_01(socau, dang=1):
     return _c1_mc_chu_de(socau, dang, "so_thuc")
 
 
-def L10_C1_B1_TH014_SA_A_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề kéo theo, tương đương về tứ giác; có bao nhiêu mệnh đề đúng.
 
     CLAUDE THEM 01/10/2026 - lam lai theo co Lan: mot cau chi mot chu de (cung chu de voi MC_E). Co Lan duyet lai.
@@ -10842,7 +10865,7 @@ def L10_C1_B1_TH014_SA_A_01(socau, dang=2):
     return _c1_sa_chu_de(socau, dang, "tu_giac")
 
 
-def L10_C1_B1_TH014_SA_D_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề kéo theo, tương đương về tam giác; có bao nhiêu mệnh đề đúng.
 
     CLAUDE THEM 01/10/2026 - theo co Lan (cung chu de voi MC_H). Co Lan duyet lai.
@@ -10850,7 +10873,7 @@ def L10_C1_B1_TH014_SA_D_01(socau, dang=2):
     return _c1_sa_chu_de(socau, dang, "tam_giac")
 
 
-def L10_C1_B1_TH014_SA_E_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_C_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề kéo theo, tương đương về chia hết, chẵn lẻ; có bao nhiêu mệnh đề đúng.
 
     CLAUDE THEM 01/10/2026 - theo co Lan (cung chu de voi MC_C). Co Lan duyet lai.
@@ -10858,7 +10881,7 @@ def L10_C1_B1_TH014_SA_E_01(socau, dang=2):
     return _c1_sa_chu_de(socau, dang, "chia_het")
 
 
-def L10_C1_B1_TH014_SA_F_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_I_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề kéo theo, tương đương về đẳng thức, bất đẳng thức, phương trình với số thực;
     có bao nhiêu mệnh đề đúng.
 
@@ -11189,7 +11212,7 @@ def L10_C1_B1_TH014_MC_L_01(socau, dang=1):
     return _lt_mc_chu_de(socau, dang, "phuong_trinh")
 
 
-def L10_C1_B1_TH014_SA_B_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_J_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề chứa $\forall$, $\exists$ về chẵn lẻ; có bao nhiêu mệnh đề đúng.
 
     CLAUDE THEM 01/10/2026 - lam lai theo co Lan: mot cau chi mot chu de (cung chu de voi MC_J). Co Lan duyet lai.
@@ -11197,7 +11220,7 @@ def L10_C1_B1_TH014_SA_B_01(socau, dang=2):
     return _lt_sa_chu_de(socau, dang, "chan_le")
 
 
-def L10_C1_B1_TH014_SA_G_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_K_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề chứa $\forall$, $\exists$ về bất đẳng thức trên $\mathbb{R}$; có bao nhiêu
     mệnh đề đúng.
 
@@ -11206,7 +11229,7 @@ def L10_C1_B1_TH014_SA_G_01(socau, dang=2):
     return _lt_sa_chu_de(socau, dang, "bat_dang_thuc")
 
 
-def L10_C1_B1_TH014_SA_H_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_L_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề chứa $\forall$, $\exists$ về nghiệm của phương trình trên tập số; có bao nhiêu
     mệnh đề đúng.
 
@@ -11349,7 +11372,7 @@ def _c1_sa_c(socau, dang, cu_the):
     return cau
 
 
-def L10_C1_B1_TH014_SA_C_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_G_01(socau, dang=2):
     r"""Trả lời ngắn - biết $A$, $B$, $C$ đúng hay sai; trong bốn mệnh đề kéo theo, tương đương ghép từ
     $A$, $B$, $C$ có bao nhiêu mệnh đề đúng.
 
@@ -11358,7 +11381,7 @@ def L10_C1_B1_TH014_SA_C_01(socau, dang=2):
     return _c1_sa_c(socau, dang, False)
 
 
-def L10_C1_B1_TH014_SA_C_02(socau, dang=2):
+def L10_C1_B1_TH014_SA_G_02(socau, dang=2):
     r"""Cách hỏi khác của _01: $A$, $B$, $C$ là ba mệnh đề cụ thể về số.
 
     CLAUDE THEM 01/10/2026 - bien the 02 cua TH014_SA_C. Co Lan duyet lai.
@@ -11676,7 +11699,7 @@ def L10_C1_B1_TH014_MC_M_01(socau, dang=1):
     return _lt_mc_chu_de(socau, dang, "chia_het")
 
 
-def L10_C1_B1_TH014_SA_I_01(socau, dang=2):
+def L10_C1_B1_TH014_SA_M_01(socau, dang=2):
     r"""Trả lời ngắn - bốn mệnh đề chứa $\forall$, $\exists$ về chia hết; có bao nhiêu mệnh đề đúng.
 
     CLAUDE THEM 01/10/2026 - theo cau 44 tai lieu CĐ day them Bai 1 (cung chu de voi MC_M). Co Lan duyet lai.
@@ -11731,6 +11754,23 @@ def L10_C1_B1_TH003_MC_A_04(socau, dang=1):
     return cau
 
 
+def _th003_c_kho(m, k):
+    r"""Hai kho khẳng định về $a = \sqrt{m} + k$, $b = \sqrt{m} - k$: (đúng, sai), mỗi phần tử (khẳng định, lí do).
+    Dùng chung cho TH003_MC_C và TH003_SA_C."""
+    S2, P_, H = 2 * (m + k * k), m - k * k, 2 * k
+    dung_ds = [(r"$a^{2} + b^{2} = %d$" % S2, r"$a^{2} + b^{2} = \left(m + 2k\sqrt{m} + k^{2}\right) + \left(m - 2k\sqrt{m} + k^{2}\right)$"),
+               (r"$ab = %d$" % P_, r"$ab = \left(\sqrt{%d}\right)^{2} - %d^{2}$" % (m, k)),
+               (r"$a - b = %d$" % H, r"$a - b = 2\cdot %d$" % k),
+               (r"$\left(a + b\right)^{2} = %d$" % (4 * m), r"$a + b = 2\sqrt{%d}$" % m),
+               (r"$a^{2} + b^{2} \in \mathbb{N}$", r"$a^{2} + b^{2} = %d$" % S2)]
+    sai_ds = [(r"$a + b \in \mathbb{Q}$", r"$a + b = 2\sqrt{%d}$ là số vô tỉ" % m),
+              (r"$ab = %d$" % (m + k * k), r"$ab = %d - %d = %d$" % (m, k * k, P_)),
+              (r"$a^{2} + b^{2} = %d$" % (m + k * k), r"$a^{2} + b^{2} = 2\left(%d + %d\right) = %d$" % (m, k * k, S2)),
+              (r"$a - b = 2\sqrt{%d}$" % m, r"$a - b = %d$" % H),
+              (r"$\left(a - b\right)^{2} = %d$" % (4 * m), r"$\left(a - b\right)^{2} = %d$" % (H * H))]
+    return dung_ds, sai_ds
+
+
 def L10_C1_B1_TH003_MC_C_01(socau, dang=1):
     r"""Cho $a = \sqrt{m} + k$, $b = \sqrt{m} - k$ ($m$ không chính phương): chọn khẳng định đúng (sai) về
     $a + b$, $a - b$, $ab$, $a^{2} + b^{2}$, $\left(a + b\right)^{2}$ (số tự nhiên, số hữu tỉ, giá trị).
@@ -11744,17 +11784,7 @@ def L10_C1_B1_TH003_MC_C_01(socau, dang=1):
         if m == k * k:
             m += 1
         hoi_dung = random.choice([True, False])
-        S2, P_, H = 2 * (m + k * k), m - k * k, 2 * k
-        dung_ds = [(r"$a^{2} + b^{2} = %d$" % S2, r"$a^{2} + b^{2} = \left(m + 2k\sqrt{m} + k^{2}\right) + \left(m - 2k\sqrt{m} + k^{2}\right)$"),
-                   (r"$ab = %d$" % P_, r"$ab = \left(\sqrt{%d}\right)^{2} - %d^{2}$" % (m, k)),
-                   (r"$a - b = %d$" % H, r"$a - b = 2\cdot %d$" % k),
-                   (r"$\left(a + b\right)^{2} = %d$" % (4 * m), r"$a + b = 2\sqrt{%d}$" % m),
-                   (r"$a^{2} + b^{2} \in \mathbb{N}$", r"$a^{2} + b^{2} = %d$" % S2)]
-        sai_ds = [(r"$a + b \in \mathbb{Q}$", r"$a + b = 2\sqrt{%d}$ là số vô tỉ" % m),
-                  (r"$ab = %d$" % (m + k * k), r"$ab = %d - %d = %d$" % (m, k * k, P_)),
-                  (r"$a^{2} + b^{2} = %d$" % (m + k * k), r"$a^{2} + b^{2} = 2\left(%d + %d\right) = %d$" % (m, k * k, S2)),
-                  (r"$a - b = 2\sqrt{%d}$" % m, r"$a - b = %d$" % H),
-                  (r"$\left(a - b\right)^{2} = %d$" % (4 * m), r"$\left(a - b\right)^{2} = %d$" % (H * H))]
+        dung_ds, sai_ds = _th003_c_kho(m, k)
         if hoi_dung:
             chon, khac = random.choice(dung_ds), random.sample(sai_ds, 3)
         else:
@@ -12397,7 +12427,7 @@ def L10_C1_B2_NB017_MC_J_02(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_NB017_SA_B_01(socau, dang=2):
+def L10_C1_B2_NB017_SA_J_01(socau, dang=2):
     r"""Trả lời ngắn - đếm số tập con (như MC_J_01) hoặc số tập $X$ thoả $A \subset X \subset B$ (như MC_J_02).
 
     CLAUDE THEM 01/10/2026 - ban tra loi ngan cua NB017_MC_J (cung Dang). Co Lan duyet lai.
@@ -12525,7 +12555,7 @@ def L10_C1_B2_NB017_MC_K_02(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_NB017_SA_D_01(socau, dang=2):
+def L10_C1_B2_NB017_SA_K_01(socau, dang=2):
     r"""Trả lời ngắn - tìm $m$ để hai tập hợp bằng nhau ($A$ là tập nghiệm của phương trình bậc hai,
     $B = \{r; m + k\}$).
 
@@ -12540,7 +12570,7 @@ def L10_C1_B2_NB017_SA_D_01(socau, dang=2):
 
 
 # ---------------------------------------------------------------------
-# NB017_MC_G_04, _05, SA_A_03: liệt kê / đếm phần tử - tập {f(k) | k ...} và phương trình tích có nhân tử bậc hai
+# NB017_MC_A_04, _05, SA_A_03: liệt kê / đếm phần tử - tập {f(k) | k ...} và phương trình tích có nhân tử bậc hai
 # ---------------------------------------------------------------------
 def _b2_tap_anh():
     """Tập {f(k) | k thuộc Z (N), điều kiện}: (đề, danh sách phần tử đúng, các danh sách sai, lời giải).
@@ -12644,8 +12674,8 @@ def _b2_mc_liet_ke(de, dung, sai, giai, dang):
                              giai + r"\\ Vậy $A = %s$." % (_tap(dung) if dung else r"\varnothing"), 0, 0, dang)
 
 
-def L10_C1_B2_NB017_MC_G_04(socau, dang=1):
-    r"""Cách hỏi thứ tư của NB017_MC_G: liệt kê tập hợp cho dạng $\{f(k) \mid k \in \mathbb{Z},\ \ldots\}$
+def L10_C1_B2_NB017_MC_A_04(socau, dang=1):
+    r"""Cách hỏi thứ tư của NB017_MC_A: liệt kê tập hợp cho dạng $\{f(k) \mid k \in \mathbb{Z},\ \ldots\}$
     ($k^{2} + c$, $pk + q$, $k^{2} - ak$...): phải thay từng $k$, các giá trị trùng chỉ viết một lần.
 
     CLAUDE THEM 01/10/2026 - theo MC 1, MC 26 tai lieu CĐ day them Bai 2 (MC 1 tai lieu chon sai: dem so gia tri
@@ -12659,8 +12689,8 @@ def L10_C1_B2_NB017_MC_G_04(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_NB017_MC_G_05(socau, dang=1):
-    r"""Cách hỏi thứ năm của NB017_MC_G: liệt kê tập nghiệm của phương trình tích có nhân tử BẬC HAI
+def L10_C1_B2_NB017_MC_A_05(socau, dang=1):
+    r"""Cách hỏi thứ năm của NB017_MC_A: liệt kê tập nghiệm của phương trình tích có nhân tử BẬC HAI
     ($x^{2} - 4$, $x^{2} - 2$, $2x^{2} - 5x + 2$, $x^{2} + 1$...) trên $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$.
 
     CLAUDE THEM 01/10/2026 - theo MC 19, 27, 29, 30, 33, 34, 41, 42 tai lieu CĐ day them Bai 2 (MC 42 tai lieu
@@ -12911,7 +12941,7 @@ def L10_C1_B2_TH018_MC_C_02(socau, dang=1):
     return cau
 
 
-def L10_C1_B2_TH018_SA_A_01(socau, dang=2):
+def L10_C1_B2_TH018_SA_C_01(socau, dang=2):
     r"""Trả lời ngắn - tập bội số: có bao nhiêu số tự nhiên nhỏ hơn $N$ thuộc $A \cap B$ ($A \setminus B$,
     $A \cup B$) với $A$, $B$ là tập các số tự nhiên chia hết cho $a$, cho $b$ (kể cả số $0$).
 
@@ -13237,7 +13267,7 @@ def L10_C1_B2_VD021_SA_A_03(socau, dang=2):
 # ---------------------------------------------------------------------
 # VD021_SA_C: tìm m để A giao B có đúng một phần tử
 # ---------------------------------------------------------------------
-def L10_C1_B2_VD021_SA_C_01(socau, dang=2):
+def L10_C1_B2_VD021_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - $A = [\alpha m + \beta;\ \alpha m + \beta + L]$ (đoạn), $B$ là nửa khoảng có đúng một đầu
     mút được lấy; tìm $m$ để $A \cap B$ có đúng một phần tử (đáp số là số thập phân gọn).
 
@@ -14300,7 +14330,7 @@ def L10_C1_B1_VD014_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C1_B1_VD014_SA_C_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - TỔNG (hoặc TÍCH) các giá trị thực $x$ để mệnh đề chứa biến $P(x)$ (phương trình bậc hai,
     phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng. Đáp số là số nguyên.
 
@@ -14496,22 +14526,22 @@ def L10_C1_B1_VD014_MC_H_01(socau, dang=1):
     return _vdc_ra_cau(_sinh_abs("duong"), _de_giai_abs("duong"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_D_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_F_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_F_01 (tồn tại nghiệm). CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_abs("co"), _de_giai_abs("co"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_D_02(socau, dang=2):
+def L10_C1_B1_VD014_SA_F_02(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_F_02 (hai nghiệm phân biệt). CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_abs("hai"), _de_giai_abs("hai"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_D_03(socau, dang=2):
+def L10_C1_B1_VD014_SA_F_03(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_F_03 (vô nghiệm). CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_abs("vo"), _de_giai_abs("vo"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_F_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_H_01 (hai nghiệm dương). CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_abs("duong"), _de_giai_abs("duong"), socau, dang)
 
@@ -14614,22 +14644,22 @@ def L10_C1_B1_VD014_MC_J_01(socau, dang=1):
     return _vdc_ra_cau(_sinh_bac2("kep"), _de_giai_bac2("kep"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_E_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_G_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_G_01. CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_bac2("co"), _de_giai_bac2("co"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_G_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_I_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_I_01. CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_bac2("hesoa"), _de_giai_bac2("hesoa"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_E_02(socau, dang=2):
+def L10_C1_B1_VD014_SA_G_02(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_G_02. CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_bac2("vo"), _de_giai_bac2("vo"), socau, dang)
 
 
-def L10_C1_B1_VD014_SA_H_01(socau, dang=2):
+def L10_C1_B1_VD014_SA_J_01(socau, dang=2):
     r"""Trả lời ngắn - cùng dạng VD014_MC_J_01. CLAUDE THEM 04/10/2026."""
     return _vdc_ra_cau(_sinh_bac2("kep"), _de_giai_bac2("kep"), socau, dang)
 
@@ -14999,13 +15029,757 @@ def L10_C1_B2_VD019_MC_C_01(socau, dang=1):
     return _ven3_mc("VDC", socau, dang)
 
 
-def L10_C1_B2_VD019_SA_A_01(socau, dang=2):
+def L10_C1_B2_VD019_SA_B_01(socau, dang=2):
     r"""VD - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n(A \setminus (B \cup C))$, $n(A \cap B \cap C)$,
     $n(A \cup B \cup C)$, $n(A \cap B)$ hoặc $n(C_E(A \cup B \cup C))$. CLAUDE THEM 04/10/2026."""
     return _ven3_sa("VD", socau, dang)
 
 
-def L10_C1_B2_VD019_SA_B_01(socau, dang=2):
+def L10_C1_B2_VD019_SA_C_01(socau, dang=2):
     r"""VDC - biểu đồ Ven ba tập ghi số phần tử từng vùng, tính $n((A \cup B) \cap C)$, $n((A \cup B) \setminus C)$,
     $n(A \setminus (B \cap C))$... CLAUDE THEM 04/10/2026."""
     return _ven3_sa("VDC", socau, dang)
+
+
+# =====================================================================
+# BỔ SUNG TRẢ LỜI NGẮN (SA) CÙNG DẠNG VỚI MC - 15/10/2026 (cô Lan: "bạn cứ làm hết đi, thấy cái nào hợp lý thì làm")
+# ---------------------------------------------------------------------
+# Quy ước: SA_x cùng chữ, cùng "Dang" trong Mapping với MC_x. Câu MC đã là câu ĐẾM thì SA gọi lại đúng hàm MC
+# với dang=2; câu MC là câu CHỌN thì SA đổi thành câu ĐẾM ("có bao nhiêu ...").
+# =====================================================================
+def L10_C1_B1_NB001_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - trong bốn câu, có bao nhiêu câu là mệnh đề (không phải là mệnh đề). Cùng dạng NB001_MC_B
+    (MC_B đã là câu đếm nên SA dùng lại nội dung của MC_B_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    return L10_C1_B1_NB001_MC_B_01(socau, dang)
+
+
+def L10_C1_B1_NB001_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - mệnh đề chứa biến $P(x)\colon x > c$ (dấu $>, <, \geq, \leq$): trong một tập giá trị cho
+    trước của $x$ có bao nhiêu giá trị làm $P(x)$ là mệnh đề đúng (sai).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB001_MC_C (cung Dang: doi "chon gia tri x" thanh "dem so gia tri x"),
+    theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 2000:
+        lan += 1
+        dau = random.choice(['>', '<', r'\geq', r'\leq'])
+        c = random.randint(-9, 9)
+        hoi = random.random() < 0.5
+        n = random.randint(5, 7)
+        gt = sorted(random.sample(range(c - 7, c + 8), n))
+        ss = _SO_SANH[dau]
+        so_dung = sum(1 for v in gt if ss(v, c))
+        dap = so_dung if hoi else n - so_dung
+        if dap < 1 or dap > n - 1 or (dau, c, hoi, tuple(gt)) in da:
+            continue
+        da.add((dau, c, hoi, tuple(gt)))
+        tap = r"\left\{%s\right\}" % "; ".join(str(v) for v in gt)
+        debai = (r"Cho mệnh đề chứa biến $P(x)\colon x %s %d$. Trong các giá trị $x \in %s$, có bao nhiêu giá trị "
+                 r"của $x$ làm cho $P(x)$ là mệnh đề %s?" % (dau, c, tap, _tu_dung_sai(hoi)))
+        dong = [r"Thay lần lượt từng giá trị của $x$ vào $P(x)\colon x %s %d$:" % (dau, c)]
+        for v in gt:
+            dong.append(r"Với $x = %d$ thì $%d %s %d$ là mệnh đề %s." % (v, v, dau, c, _tu_dung_sai(ss(v, c))))
+        dong.append(r"Vậy có $%d$ giá trị của $x$ làm $P(x)$ là mệnh đề %s." % (dap, _tu_dung_sai(hoi)))
+        giai = "\\\\\n".join(dong)
+        nhieu = [str(x) for x in range(0, n + 1) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH003_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - trong bốn mệnh đề, có bao nhiêu mệnh đề đúng (sai). Cùng dạng TH003_MC_B (MC_B đã là câu đếm
+    nên SA dùng lại nội dung của MC_B_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    return L10_C1_B1_TH003_MC_B_01(socau, dang)
+
+
+def L10_C1_B1_TH003_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cho $a = \sqrt{m} + k$, $b = \sqrt{m} - k$ ($m$ không chính phương): trong bốn khẳng định về
+    $a + b$, $a - b$, $ab$, $a^{2} + b^{2}$, $\left(a + b\right)^{2}$... có bao nhiêu khẳng định đúng (sai).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_C (cung Dang: doi "chon khang dinh" thanh "dem khang dinh",
+    dung chung kho khang dinh voi MC_C), theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        m = random.choice([v for v in range(2, 40) if math.isqrt(v) ** 2 != v])
+        k = random.randint(1, 5)
+        hoi_dung = random.choice([True, False])
+        dung_ds, sai_ds = _th003_c_kho(m, k)
+        t = random.randint(1, 3)                                  # số khẳng định đúng trong bốn khẳng định
+        ds = ([(tx, ly, True) for tx, ly in random.sample(dung_ds, t)]
+              + [(tx, ly, False) for tx, ly in random.sample(sai_ds, 4 - t)])
+        random.shuffle(ds)
+        dap = t if hoi_dung else 4 - t
+        debai = (r"Cho hai số $a = \sqrt{%d} + %d$ và $b = \sqrt{%d} - %d$. Trong các khẳng định sau, có bao nhiêu "
+                 r"khẳng định %s?\\ " % (m, k, m, k, _tu_dung_sai(hoi_dung))
+                 + r"\\ ".join("%s) %s" % (chr(97 + i), d[0]) for i, d in enumerate(ds)))
+        giai = r"\\ ".join(r"%s) %s là khẳng định %s vì %s." % (chr(97 + i), d[0], "đúng" if d[2] else "sai", d[1])
+                           for i, d in enumerate(ds))
+        giai += r"\\ Vậy có $%d$ khẳng định %s." % (dap, _tu_dung_sai(hoi_dung))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH003_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - $P(x)$ so sánh $x^{2}$, $\left|x\right|$, $\left(x \pm a\right)^{2}$, $x^{3}$ với một số: trong
+    một tập giá trị cho trước của $x$ có bao nhiêu giá trị làm $P(x)$ là mệnh đề đúng (sai).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_D_01 (cung Dang), theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 3000:
+        lan += 1
+        kieu = random.choice(["bp", "gt", "lech", "lp"])
+        if kieu == "bp":
+            c = random.choice([4, 9, 16, 25, 36, 49])
+            bt = r"x^{2}"
+            tinh = lambda v: (r"%s^{2}" % _so_ngoac(v), v * v)
+        elif kieu == "gt":
+            c = random.randint(1, 8)
+            bt = r"\left|x\right|"
+            tinh = lambda v: (r"\left|%d\right|" % v, abs(v))
+        elif kieu == "lech":
+            a = random.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+            c = random.choice([1, 4, 9, 16, 25])
+            dau_a = "-" if a > 0 else "+"
+            bt = r"\left(x %s %d\right)^{2}" % (dau_a, abs(a))
+            tinh = lambda v, a=a, dau_a=dau_a: (r"\left(%d %s %d\right)^{2}" % (v, dau_a, abs(a)), (v - a) ** 2)
+        else:
+            c = random.choice([-27, -8, -1, 1, 8, 27])
+            bt = r"x^{3}"
+            tinh = lambda v: (r"%s^{3}" % _so_ngoac(v), v ** 3)
+        dau = random.choice(['>', '<', r'\geq', r'\leq', '='])
+        hoi = random.random() < 0.5
+        n = random.randint(5, 7)
+        gt = sorted(random.sample(range(-9, 10), n))
+        ss = _SO_SANH[dau]
+        so_dung = sum(1 for v in gt if ss(tinh(v)[1], c))
+        dap = so_dung if hoi else n - so_dung
+        khoa = (bt, c, dau, hoi, tuple(gt))
+        if dap < 1 or dap > n - 1 or khoa in da:
+            continue
+        da.add(khoa)
+        tap = r"\left\{%s\right\}" % "; ".join(str(v) for v in gt)
+        debai = (r"Cho mệnh đề chứa biến $P(x)\colon %s %s %d$. Trong các giá trị $x \in %s$, có bao nhiêu giá trị "
+                 r"của $x$ làm cho $P(x)$ là mệnh đề %s?" % (bt, dau, c, tap, _tu_dung_sai(hoi)))
+        dong = [r"Thay lần lượt từng giá trị của $x$ vào $P(x)\colon %s %s %d$:" % (bt, dau, c)]
+        for v in gt:
+            sub, gtri = tinh(v)
+            dong.append(r"Với $x = %d$ thì $%s = %d$, nên $%d %s %d$ là mệnh đề %s."
+                        % (v, sub, gtri, gtri, dau, c, _tu_dung_sai(ss(gtri, c))))
+        dong.append(r"Vậy có $%d$ giá trị của $x$ làm $P(x)$ là mệnh đề %s." % (dap, _tu_dung_sai(hoi)))
+        giai = "\\\\\n".join(dong)
+        nhieu = [str(x) for x in range(0, n + 1) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_TH003_SA_D_02(socau, dang=2):
+    r"""Trả lời ngắn - $P(x)\colon \sin x = \dfrac{1}{2}$ (hoặc $\cos$, $\tan$, dấu $=, >, <, \geq, \leq$) với $x$ là góc
+    từ $0^{\circ}$ đến $90^{\circ}$: có bao nhiêu góc trong bảng các góc đặc biệt làm $P(x)$ là mệnh đề đúng (sai).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_D_02 (cung Dang), theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 3000:
+        lan += 1
+        ham = random.choice(["sin", "cos", "tan"])
+        bang = _LG_BANG[ham]
+        goc_ds = sorted(bang)
+        c_goc = random.choice(goc_ds)
+        c, c_tex = bang[c_goc]
+        dau = random.choice(list(_LG_SS))
+        hoi = random.random() < 0.5
+        khoa = (ham, c_goc, dau, hoi)
+        if khoa in da:
+            continue
+        ss = _LG_SS[dau]
+        S = [g for g in goc_ds if ss(bang[g][0], c)]
+        dap = len(S) if hoi else len(goc_ds) - len(S)
+        if dap < 1 or dap > len(goc_ds) - 1:
+            continue
+        da.add(khoa)
+        ten = "\\" + ham
+        mien = r"$0^{\circ} \leq x \leq 90^{\circ}$" if ham != "tan" else r"$0^{\circ} \leq x < 90^{\circ}$"
+        tap = r"\left\{%s\right\}" % "; ".join(r"%d^{\circ}" % g for g in goc_ds)
+        debai = (r"Cho mệnh đề chứa biến $P(x)\colon %s x %s %s$ với $x$ là góc %s. Trong các giá trị $x \in %s$, có bao "
+                 r"nhiêu giá trị của $x$ làm cho $P(x)$ là mệnh đề %s?" % (ten, dau, c_tex, mien, tap, _tu_dung_sai(hoi)))
+        dong = [r"Thay lần lượt từng giá trị của $x$ vào $P(x)\colon %s x %s %s$:" % (ten, dau, c_tex)]
+        for g in goc_ds:
+            gt, gt_tex = bang[g]
+            dong.append(r"Với $x = %d^{\circ}$ thì $%s %d^{\circ} = %s$, nên $%s %s %s$ là mệnh đề %s."
+                        % (g, ten, g, gt_tex, gt_tex, dau, c_tex, _tu_dung_sai(ss(gt, c))))
+        dong.append(r"Vậy có $%d$ giá trị của $x$ làm $P(x)$ là mệnh đề %s." % (dap, _tu_dung_sai(hoi)))
+        giai = "\\\\\n".join(dong)
+        nhieu = [str(x) for x in range(0, len(goc_ds) + 1) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - bốn mệnh đề kéo theo / tương đương giữa hai bất đẳng thức số (có căn, có $\pi$): có bao nhiêu
+    mệnh đề đúng (sai).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD014_MC_C (cung Dang, dung chung bo sinh _md_bdt), theo bang duyet
+    cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        t = random.randint(1, 3)                                  # số mệnh đề đúng trong bốn mệnh đề
+        dung_l, sai_l, da = [], [], set()
+        for _t in range(800):
+            tx, d_, ly = _md_bdt()
+            if tx in da:
+                continue
+            if d_ and len(dung_l) < t:
+                dung_l.append((tx, True, ly)); da.add(tx)
+            elif (not d_) and len(sai_l) < 4 - t:
+                sai_l.append((tx, False, ly)); da.add(tx)
+            if len(dung_l) == t and len(sai_l) == 4 - t:
+                break
+        if len(dung_l) != t or len(sai_l) != 4 - t:
+            continue
+        so += 1
+        ds = dung_l + sai_l
+        random.shuffle(ds)
+        hoi_dung = random.choice([True, False])
+        dap = t if hoi_dung else 4 - t
+        debai = (r"Cho bốn mệnh đề sau:\\ " + r"\\ ".join("%s) $%s$" % (chr(97 + i), d[0]) for i, d in enumerate(ds))
+                 + r"\\ Có bao nhiêu mệnh đề %s?" % _tu_dung_sai(hoi_dung))
+        giai = (r"Mệnh đề $P \Rightarrow Q$ chỉ sai khi $P$ đúng và $Q$ sai; $P \Leftrightarrow Q$ đúng khi $P$, $Q$ "
+                r"cùng đúng hoặc cùng sai.\\ " + r"\\ ".join("%s) $%s$: %s." % (chr(97 + i), d[0], d[2]) for i, d in enumerate(ds))
+                + r"\\ Vậy có $%d$ mệnh đề %s." % (dap, _tu_dung_sai(hoi_dung)))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B1_VD014_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - có bao nhiêu giá trị nguyên của $m$ để mệnh đề kéo theo chứa $\forall$ là mệnh đề đúng. Cùng
+    dạng VD014_MC_D (MC_D đã là câu đếm nên SA dùng lại nội dung của MC_D_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    return L10_C1_B1_VD014_MC_D_01(socau, dang)
+
+
+def L10_C1_B1_VD014_SA_D_02(socau, dang=2):
+    r"""Trả lời ngắn - biến thể 02 (mệnh đề kéo theo về chia hết chứa tham số $m$). Dùng lại nội dung của
+    VD014_MC_D_02. CLAUDE THEM 15/10/2026."""
+    return L10_C1_B1_VD014_MC_D_02(socau, dang)
+
+
+def L10_C1_B2_NB017_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - tập $A$ liệt kê bằng số: trong bốn khẳng định về quan hệ thuộc / tập con, có bao nhiêu khẳng
+    định đúng (sai). Cùng dạng NB017_MC_B (MC_B đã là câu đếm nên SA dùng lại nội dung của MC_B_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Kieu cau hoi co bao nhieu khang dinh dung/sai"). Co Lan duyet lai.
+    """
+    return L10_C1_B2_NB017_MC_B_01(socau, dang)
+
+
+def L10_C1_B2_NB017_SA_E_01(socau, dang=2):
+    r"""Trả lời ngắn - tập $A$ viết bằng kí hiệu chữ: trong bốn khẳng định về quan hệ thuộc / tập con, có bao nhiêu
+    khẳng định đúng (sai). Cùng dạng NB017_MC_E (dùng lại nội dung của MC_E_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    return L10_C1_B2_NB017_MC_E_01(socau, dang)
+
+
+def L10_C1_B2_NB017_SA_H_01(socau, dang=2):
+    r"""Trả lời ngắn - bốn tập hợp cho bởi tính chất đặc trưng: có bao nhiêu tập hợp là tập rỗng (không phải tập rỗng).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_H_01 (cung Dang, dung chung bo sinh _tap_rong_hay_khong,
+    do Python kiem tra), theo bang duyet cua co Lan ("Co bao nhieu tap la tap rong / khong phai la tap rong").
+    Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        t = random.randint(1, 3)                                  # số tập rỗng trong bốn tập
+        rong_l, khac_l, da = [], [], set()
+        for _t in range(800):
+            de, rong, ly = _tap_rong_hay_khong()
+            khoa = de[:30]
+            if khoa in da:
+                continue
+            if rong and len(rong_l) < t:
+                rong_l.append((de, True, ly)); da.add(khoa)
+            elif (not rong) and len(khac_l) < 4 - t:
+                khac_l.append((de, False, ly)); da.add(khoa)
+            if len(rong_l) == t and len(khac_l) == 4 - t:
+                break
+        if len(rong_l) != t or len(khac_l) != 4 - t:
+            continue
+        so += 1
+        ds = rong_l + khac_l
+        random.shuffle(ds)
+        hoi_rong = random.choice([True, False])
+        dap = t if hoi_rong else 4 - t
+        debai = (r"Cho bốn tập hợp sau:\\ " + r"\\ ".join("%s) $%s$" % (chr(97 + i), d[0]) for i, d in enumerate(ds))
+                 + r"\\ Có bao nhiêu tập hợp %s?" % ("là tập hợp rỗng" if hoi_rong else r"\textbf{khác} tập hợp rỗng"))
+        giai = (r"\\ ".join(r"%s) $%s %s$ vì %s." % (chr(97 + i), d[0], r"= \varnothing" if d[1] else r"\ne \varnothing", d[2])
+                            for i, d in enumerate(ds))
+                + r"\\ Vậy có $%d$ tập hợp %s." % (dap, "là tập hợp rỗng" if hoi_rong else "khác tập hợp rỗng"))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_NB017_SA_H_02(socau, dang=2):
+    r"""Trả lời ngắn - bốn tập hợp MÔ TẢ BẰNG LỜI (tam giác có hai góc tù, số chính phương tận cùng là $2$...): có bao
+    nhiêu tập hợp là tập rỗng (không phải tập rỗng). Dùng chung kho `_B2_RONG_LOI` với NB017_MC_H_02 (xoay vòng, hết
+    kho mới lặp lại).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    kho = _B2_RONG_LOI
+    for _ in range(socau):
+        t = random.randint(1, 3)
+        R, K = [], []
+        for ung, _h in _c1_bac_chon("b2_rong_loi", len(kho), True):
+            R = [i for i in ung if kho[i][1]]
+            K = [i for i in ung if not kho[i][1]]
+            if len(R) >= t and len(K) >= 4 - t:
+                break
+        chon = R[:t] + K[:4 - t]
+        _c1_danh_dau("b2_rong_loi", chon)
+        random.shuffle(chon)
+        hoi_rong = random.choice([True, False])
+        dap = t if hoi_rong else 4 - t
+        debai = (r"Cho bốn tập hợp sau:\\ " + r"\\ ".join("%s) %s" % (chr(97 + j), kho[i][0]) for j, i in enumerate(chon))
+                 + r"\\ Có bao nhiêu tập hợp %s?" % ("là tập hợp rỗng" if hoi_rong else r"\textbf{khác} tập hợp rỗng"))
+        giai = (r"\\ ".join(r"%s) %s %s vì %s." % (chr(97 + j), mo_ta, "là tập rỗng" if rong_ else "khác rỗng", ly_)
+                            for j, (mo_ta, rong_, ly_) in enumerate(kho[i] for i in chon))
+                + r"\\ Vậy có $%d$ tập hợp %s." % (dap, "là tập hợp rỗng" if hoi_rong else "khác tập hợp rỗng"))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def _b2_khoang_con_cua(X, A):
+    r"""X, A = (đầu trái, trái đóng?, đầu phải, phải đóng?), đầu mút là số hoặc $\pm\infty$ (math.inf), X khác rỗng.
+    Trả về True nếu $X \subset A$ (so sánh đầu mút, tính cả đóng/mở)."""
+    lx, lxd, hx, hxd = X
+    la, lad, ha, had = A
+    trai = lx > la or (lx == la and (lad or not lxd))
+    phai = hx < ha or (hx == ha and (had or not hxd))
+    return trai and phai
+
+
+def _b2_khoang_tex(K):
+    lo, lc, hi, hc = K
+    s_lo = r"-\infty" if lo == -math.inf else str(lo)
+    s_hi = r"+\infty" if hi == math.inf else str(hi)
+    return "%s%s;\\ %s%s" % ("[" if lc else "(", s_lo, s_hi, "]" if hc else ")")
+
+
+def L10_C1_B2_NB017_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cho $A = [a; b)$ (hoặc đoạn, khoảng, nửa khoảng khác): trong bốn tập hợp (khoảng, đoạn, nửa
+    khoảng, có thể có $\pm\infty$), có bao nhiêu tập hợp là tập con của $A$. Quan hệ tập con do Python so sánh đầu mút.
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_C (cung Dang: doi "chon tap con" thanh "dem tap con"),
+    theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    lan = 0
+    while so < socau and lan < 5000:
+        lan += 1
+        a = random.randint(-9, 5)
+        b = a + random.randint(5, 12)
+        A = (a, random.random() < 0.5, b, random.random() < 0.5)
+        ds, da = [], set()
+        for _t in range(40):
+            lo = a + random.randint(-3, b - a - 1)
+            hi = lo + random.randint(1, 6)
+            X = [lo, random.random() < 0.5, hi, random.random() < 0.5]
+            u = random.random()
+            if u < 0.12:
+                X[0] = -math.inf; X[1] = False
+            elif u < 0.24:
+                X[2] = math.inf; X[3] = False
+            X = tuple(X)
+            if X in da:
+                continue
+            da.add(X)
+            ds.append(X)
+            if len(ds) == 4:
+                break
+        if len(ds) < 4:
+            continue
+        flags = [_b2_khoang_con_cua(X, A) for X in ds]
+        t = sum(flags)
+        if t < 1 or t > 3:
+            continue
+        so += 1
+        hoi_con = random.choice([True, False])
+        dap = t if hoi_con else 4 - t
+        debai = (r"Cho tập hợp $A = %s$. Trong các tập hợp sau:\\ " % _b2_khoang_tex(A)
+                 + r"\\ ".join("%s) $%s$" % (chr(97 + i), _b2_khoang_tex(X)) for i, X in enumerate(ds))
+                 + r"\\ có bao nhiêu tập hợp %s?" % ("là tập con của $A$" if hoi_con else r"\textbf{không phải} là tập con của $A$"))
+        giai = (r"$X$ là tập con của $A = %s$ khi mọi phần tử của $X$ đều thuộc $A$.\\ " % _b2_khoang_tex(A)
+                + r"\\ ".join(r"%s) $%s$ %s." % (chr(97 + i), _b2_khoang_tex(X), "là một tập con của $A$" if f else "không là tập con của $A$")
+                              for i, (X, f) in enumerate(zip(ds, flags)))
+                + r"\\ Vậy có $%d$ tập hợp %s." % (dap, "là tập con của $A$" if hoi_con else "không phải là tập con của $A$"))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_NB017_SA_G_01(socau, dang=2):
+    r"""Trả lời ngắn - tập $A$ cho ở dạng liệt kê ($3$ đến $5$ phần tử): $A$ có bao nhiêu tập con / tập con khác rỗng /
+    tập con có đúng $k$ phần tử.
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_G (cung Dang "Tap hop cho o dang liet ke, tim tap con"),
+    theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    import itertools
+    cau = ""
+    da = set()
+    lan = 0
+    while len(da) < socau and lan < 2000:
+        lan += 1
+        n = random.randint(3, 5)
+        A = sorted(random.sample(range(-12, 13), n))
+        kieu = random.choice(["tat_ca", "khac_rong", "k"])
+        k = random.randint(1, n - 1) if kieu == "k" else 0
+        khoa = (tuple(A), kieu, k)
+        if khoa in da:
+            continue
+        da.add(khoa)
+        tapA = r"\left\{%s\right\}" % "; ".join(str(v) for v in A)
+        if kieu == "tat_ca":
+            dap = 2 ** n
+            hoi = "có bao nhiêu tập con"
+            giai = (r"Mỗi phần tử của $A$ hoặc thuộc hoặc không thuộc một tập con, nên số tập con là $2^{%d} = %d$ "
+                    r"(kể cả tập rỗng và chính $A$)." % (n, dap))
+            ung = [2 ** n - 1, n, 2 * n, 2 ** (n - 1)]
+        elif kieu == "khac_rong":
+            dap = 2 ** n - 1
+            hoi = "có bao nhiêu tập con khác tập rỗng"
+            giai = (r"Số tập con của $A$ là $2^{%d} = %d$, bỏ đi tập rỗng còn $%d - 1 = %d$ tập con khác rỗng."
+                    % (n, 2 ** n, 2 ** n, dap))
+            ung = [2 ** n, n, 2 * n, 2 ** (n - 1)]
+        else:
+            con = list(itertools.combinations(A, k))
+            dap = len(con)
+            hoi = r"có bao nhiêu tập con gồm đúng $%d$ phần tử" % k
+            giai = (r"Các tập con có đúng $%d$ phần tử của $A$ là: %s.\\ Vậy có $%d$ tập con."
+                    % (k, "; ".join("$" + r"\left\{%s\right\}" % "; ".join(str(v) for v in c_) + "$" for c_ in con), dap))
+            ung = [2 ** n, 2 ** n - 1, n, n * k]
+        debai = r"Cho tập hợp $A = %s$. Tập hợp $A$ %s?" % (tapA, hoi)
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_TH018_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - hai tập cho dạng liệt kê, tập $A \cap B$ ($A \cup B$, $A \setminus B$, $B \setminus A$) có bao nhiêu
+    phần tử. Cùng dạng TH018_MC_B (MC_B_01 đã là câu đếm nên SA dùng lại nội dung của MC_B_01).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan ("Thieu: viet them"). Co Lan duyet lai.
+    """
+    return L10_C1_B2_TH018_MC_B_01(socau, dang)
+
+
+def L10_C1_B2_TH018_SA_B_02(socau, dang=2):
+    r"""Trả lời ngắn - tập $M$ có nhiều phần tử nhất thoả $M \subset A$ và $M \subset B$ (tức $A \cap B$) có bao nhiêu
+    phần tử. Biến thể 02 (như TH018_MC_B_02, hỏi số phần tử).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        A = sorted(random.sample(range(0, 13), random.randint(4, 6)))
+        B = sorted(random.sample(range(0, 13), random.randint(4, 6)))
+        giao = sorted(set(A) & set(B))
+        if len(giao) < 2 or set(A) <= set(B) or set(B) <= set(A):
+            continue
+        so += 1
+        dap = len(giao)
+        debai = (r"Cho hai tập hợp $A = %s$ và $B = %s$. Tập hợp $M$ có nhiều phần tử nhất thoả mãn $M \subset A$ và "
+                 r"$M \subset B$ có bao nhiêu phần tử?" % (_tap(A), _tap(B)))
+        giai = (r"$M \subset A$ và $M \subset B$ nghĩa là mọi phần tử của $M$ đều thuộc cả $A$ và $B$, tức là "
+                r"$M \subset A \cap B = %s$. Tập $M$ nhiều phần tử nhất là $M = A \cap B$, có $%d$ phần tử." % (_tap(giao), dap))
+        ung = [len(A), len(B), len(set(A) | set(B)), dap - 1, dap + 1]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_TH018_SA_B_03(socau, dang=2):
+    r"""Trả lời ngắn - phần bù trong tập $E$ (liệt kê): $C_EA$, $C_E(A \cup B)$, $C_EA \cap C_EB$... có bao nhiêu phần
+    tử. Biến thể 03 (như TH018_MC_B_03, hỏi số phần tử).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        n = random.randint(8, 12)
+        E = set(range(1, n + 1))
+        A = set(random.sample(sorted(E), random.randint(3, 5)))
+        B = set(random.sample(sorted(E), random.randint(3, 5)))
+        if not (A & B) or A <= B or B <= A or len(A | B) >= n:
+            continue
+        PHEP = [(r"C_EA", E - A, r"E \setminus A"), (r"C_EB", E - B, r"E \setminus B"),
+                (r"C_E(A \cup B)", E - (A | B), r"E \setminus (A \cup B)"),
+                (r"C_E(A \cap B)", E - (A & B), r"E \setminus (A \cap B)"),
+                (r"C_EA \cap C_EB", (E - A) & (E - B), r"(E \setminus A) \cap (E \setminus B)"),
+                (r"C_EA \cup C_EB", (E - A) | (E - B), r"(E \setminus A) \cup (E \setminus B)")]
+        ten, kq, cach = random.choice(PHEP)
+        so += 1
+        dap = len(kq)
+        debai = (r"Cho tập hợp $E = %s$ và các tập con $A = %s$, $B = %s$ của $E$. Tập hợp $%s$ có bao nhiêu phần tử?"
+                 % (_tap(E), _tap(A), _tap(B), ten))
+        giai = (r"$C_EA = %s$, $C_EB = %s$, $A \cup B = %s$, $A \cap B = %s$.\\ $%s = %s = %s$, có $%d$ phần tử."
+                % (_tap(E - A), _tap(E - B), _tap(A | B), _tap(A & B), ten, cach, _tap(kq), dap))
+        ung = [len(A), len(B), len(A | B), len(A & B), n - dap, dap + 1, dap - 1]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_TH018_SA_B_04(socau, dang=2):
+    r"""Trả lời ngắn - biết $A \setminus B$, $B \setminus A$ và $A \cap B$: tập $A$ (hoặc $B$, $A \cup B$) có bao nhiêu
+    phần tử. Biến thể 04 (như TH018_MC_B_04, hỏi số phần tử).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        so_ = random.sample(range(0, 16), random.randint(7, 10))
+        k1, k2 = random.randint(2, 4), random.randint(2, 3)
+        AB, BA, G = set(so_[:k1]), set(so_[k1:k1 + k2]), set(so_[k1 + k2:])
+        if len(G) < 2:
+            continue
+        so += 1
+        hoi = random.choice(["A", "B", r"A \cup B"])
+        kq = {"A": AB | G, "B": BA | G, r"A \cup B": AB | BA | G}[hoi]
+        dap = len(kq)
+        debai = (r"Cho hai tập hợp $A$, $B$ thoả mãn $A \setminus B = %s$, $B \setminus A = %s$ và $A \cap B = %s$. "
+                 r"Tập hợp $%s$ có bao nhiêu phần tử?" % (_tap(AB), _tap(BA), _tap(G), hoi))
+        cach = {"A": r"(A \setminus B) \cup (A \cap B)", "B": r"(B \setminus A) \cup (A \cap B)",
+                r"A \cup B": r"(A \setminus B) \cup (B \setminus A) \cup (A \cap B)"}[hoi]
+        giai = (r"Mỗi phần tử của $A \cup B$ thuộc đúng một trong ba phần rời nhau: chỉ thuộc $A$, chỉ thuộc $B$, thuộc "
+                r"cả hai. Do đó $%s = %s = %s$, có $%d$ phần tử." % (hoi, cach, _tap(kq), dap))
+        ung = [len(AB), len(BA), len(G), len(AB | BA), len(AB) + len(BA) + len(G), dap + 1, dap - 1]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_TH018_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - đọc bảng kết quả thực tế (phỏng vấn, kiểm tra thể lực, đăng kí câu lạc bộ, tiêm chủng): tập
+    $A \cap B$, $A \cup B$, $A \setminus B$ hoặc $B \setminus A$ có bao nhiêu phần tử. Bối cảnh không lặp lại trong một đề.
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH018_MC_D_01 (cung Dang, dung chung kho bang _B2_BANG), theo bang
+    duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        ten, mo, cot, ki, t1, t2, dat, khong, cum = _b2_chon_bang()
+        n = random.randint(7, 9)
+        h1 = [random.random() < 0.65 for _ in range(n)]
+        h2 = [random.random() < 0.55 for _ in range(n)]
+        A = [i + 1 for i in range(n) if h1[i]]
+        B = [i + 1 for i in range(n) if h2[i]]
+        if len(A) < 3 or len(B) < 3 or set(A) <= set(B) or set(B) <= set(A) or not set(A) & set(B):
+            continue
+        tex = lambda S: (r"\left\{%s\right\}" % "; ".join("%s_{%d}" % (ki, i) for i in sorted(S))) if S else r"\varnothing"
+        cac = {r"A \cap B": set(A) & set(B), r"A \cup B": set(A) | set(B), r"A \setminus B": set(A) - set(B),
+               r"B \setminus A": set(B) - set(A)}
+        hoi = random.choice(list(cac))
+        if not cac[hoi]:
+            continue
+        so += 1
+        dap = len(cac[hoi])
+        bang = (r"\begin{center}\begin{tabular}{|c|%s|}\hline %s & %s \\ \hline %s & %s \\ \hline %s & %s \\ \hline"
+                r"\end{tabular}\end{center}"
+                % ("c" * n, cot, " & ".join("$%s_{%d}$" % (ki, i + 1) for i in range(n)),
+                   t1, " & ".join(dat if v else khong for v in h1), t2, " & ".join(dat if v else khong for v in h2)))
+        doi = {"a": "ứng viên", "h": "học sinh", "s": "học sinh", "p": "người"}[ki]
+        debai = (mo % (n, n) + bang + r"Gọi $A$ là tập hợp những %s %s, $B$ là tập hợp những %s %s. Tập hợp $%s$ có bao nhiêu "
+                 r"phần tử?" % (doi, cum[0], doi, cum[1], hoi))
+        giai = (r"Từ bảng: $A = %s$, $B = %s$.\\ Do đó $%s = %s$, có $%d$ phần tử." % (tex(A), tex(B), hoi, tex(cac[hoi]), dap))
+        ung = [len(A), len(B), len(cac[r"A \cup B"]), len(cac[r"A \cap B"]), dap + 1, dap - 1]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# VD021 (15/10/2026): SA_B, SA_C là bản trả lời ngắn của MC_B, MC_C; "tìm m để khoảng chứa đúng k số nguyên" và
+# "tìm m để A giao B có đúng một phần tử" (trước là SA_B, SA_C) đổi chữ thành SA_D, SA_E và có thêm MC_D, MC_E.
+# ---------------------------------------------------------------------
+def L10_C1_B2_VD021_MC_D_01(socau, dang=1):
+    r"""Trắc nghiệm - tìm tham số $m$ để khoảng / đoạn chứa đúng $k$ số nguyên. Cùng dạng VD021_SA_D (SA_D đã cho đáp số
+    là số nên MC dùng lại nội dung của SA_D_01 với dang=1).
+
+    CLAUDE THEM 15/10/2026 - theo bang duyet cua co Lan (SA_C "Thieu: viet them" MC; SA_B/SA_C cu doi chu thanh
+    SA_D/SA_E de chu cai dai dien cho dang). Co Lan duyet lai.
+    """
+    return L10_C1_B2_VD021_SA_D_01(socau, dang)
+
+
+def L10_C1_B2_VD021_MC_E_01(socau, dang=1):
+    r"""Trắc nghiệm - tìm $m$ để $A \cap B$ có đúng một phần tử ($A$ là đoạn chứa $m$, $B$ là nửa khoảng). Cùng dạng
+    VD021_SA_E (dùng lại nội dung của SA_E_01 với dang=1).
+
+    CLAUDE THEM 15/10/2026 - xem VD021_MC_D_01. Co Lan duyet lai.
+    """
+    return L10_C1_B2_VD021_SA_E_01(socau, dang)
+
+
+def L10_C1_B2_VD021_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - phép toán kết hợp trên BA đoạn / khoảng / nửa khoảng bị chặn ($(A \cap B) \cup (A \cap C)$,
+    $A \cap B \cap C$, $(A \cup B) \setminus C$...): tập kết quả có bao nhiêu số nguyên.
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD021_MC_B (cung Dang: doi "chon tap ket qua" thanh "dem so nguyen
+    cua tap ket qua"), theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    BIEU = [(r"(A \cap B) \cup (A \cap C)", lambda A, B, C: _k_phep(_k_phep(A, B, "giao"), _k_phep(A, C, "giao"), "hop")),
+            (r"A \cap B \cap C", lambda A, B, C: _k_phep(_k_phep(A, B, "giao"), C, "giao")),
+            (r"(A \cup B) \cap C", lambda A, B, C: _k_phep(_k_phep(A, B, "hop"), C, "giao")),
+            (r"(A \cap B) \setminus C", lambda A, B, C: _k_phep(_k_phep(A, B, "giao"), C, "hieu")),
+            (r"A \cap (B \cup C)", lambda A, B, C: _k_phep(A, _k_phep(B, C, "hop"), "giao")),
+            (r"(A \setminus B) \cup C", lambda A, B, C: _k_phep(_k_phep(A, B, "hieu"), C, "hop"))]
+    ng = lambda: random.random() < .5
+    cau = ""
+    so = 0
+    lan = 0
+    while so < socau and lan < 5000:
+        lan += 1
+        p = sorted(random.sample(range(-8, 9), 6))
+        A, B, C = [(p[0], ng(), p[3], ng())], [(p[1], ng(), p[4], ng())], [(p[2], ng(), p[5], ng())]
+        i = random.randrange(len(BIEU))
+        ten, f = BIEU[i]
+        kq = f(A, B, C)
+        ds = _b2_so_nguyen(kq) if kq else None
+        if not ds or len(ds) > 15:
+            continue
+        so += 1
+        dap = len(ds)
+        debai = (r"Cho ba tập hợp $A = %s$, $B = %s$ và $C = %s$. Tập hợp $%s$ có bao nhiêu số nguyên?"
+                 % (_k_tex(A), _k_tex(B), _k_tex(C), ten))
+        giai = (r"Biểu diễn trên trục số: $A \cap B = %s$, $A \cup B = %s$.\\ Do đó $%s = %s$.\\ Các số nguyên thuộc tập "
+                r"hợp này là $%s$, có $%d$ số."
+                % (_k_tex(_k_phep(A, B, "giao")), _k_tex(_k_phep(A, B, "hop")), ten, _k_tex(kq),
+                   "; ".join(map(str, ds)), dap))
+        ung = []
+        for j, (_, g) in enumerate(BIEU):
+            if j != i:
+                d2 = _b2_so_nguyen(g(A, B, C) or [])
+                if d2 is not None:
+                    ung.append(len(d2))
+        ung += [len(_b2_so_nguyen(_k_lat(kq, 0, 0)) or []), len(_b2_so_nguyen(_k_lat(kq, len(kq) - 1, 1)) or [])]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_VD021_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - biết $C_{\mathbb{R}}A$, $C_{\mathbb{R}}B$: tập $A \cap B$ ($A \cup B$) có bao nhiêu số nguyên - hai
+    bước: tìm lại $A$, $B$ rồi thực hiện phép toán (chỉ ra các phép cho tập bị chặn).
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD021_MC_C (cung Dang), theo bang duyet cua co Lan. Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    lan = 0
+    while so < socau and lan < 5000:
+        lan += 1
+        A, B = _b2_hai_khoang()
+        SA, SB = [A], [B]
+        CA, CB = _k_phep(SA, SA, "bu"), _k_phep(SB, SB, "bu")
+        cac = {r"A \cap B": _k_phep(SA, SB, "giao"), r"A \cup B": _k_phep(SA, SB, "hop")}
+        ten = random.choice(list(cac))
+        kq = cac[ten]
+        ds = _b2_so_nguyen(kq) if kq else None
+        if not ds or len(ds) > 25:
+            continue
+        so += 1
+        dap = len(ds)
+        debai = (r"Cho hai tập hợp $A$, $B$ thoả mãn $C_{\mathbb{R}}A = %s$ và $C_{\mathbb{R}}B = %s$. Tập hợp $%s$ có bao "
+                 r"nhiêu số nguyên?" % (_k_tex(CA), _k_tex(CB), ten))
+        giai = (r"$A = C_{\mathbb{R}}\left(C_{\mathbb{R}}A\right) = %s$, $B = C_{\mathbb{R}}\left(C_{\mathbb{R}}B\right) = %s$.\\ "
+                r"Biểu diễn trên trục số: $%s = %s$.\\ Các số nguyên thuộc tập hợp này là $%s$, có $%d$ số."
+                % (_k_tex(SA), _k_tex(SB), ten, _k_tex(kq), "; ".join(map(str, ds)), dap))
+        ung = []
+        for t_, S_ in cac.items():
+            d2 = _b2_so_nguyen(S_) if S_ else []
+            if t_ != ten and d2 is not None:
+                ung.append(len(d2))
+        ung += [len(_b2_so_nguyen(_k_lat(kq, 0, 0)) or []), len(_b2_so_nguyen(_k_lat(kq, len(kq) - 1, 1)) or [])]
+        cau += MC_SA_answer_const(debai, str(dap), [str(x) for x in _b2_nhieu_so(dap, ung)], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C1_B2_NB017_SA_I_01(socau, dang=2):
+    r"""Trả lời ngắn - bốn đẳng thức viết một tập con của $\mathbb{R}$ dưới dạng tính chất đặc trưng và dưới dạng khoảng,
+    đoạn, nửa khoảng: có bao nhiêu đẳng thức đúng (sai). Đẳng thức sai khi đổi đóng/mở một đầu mút.
+
+    CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_I (cung Dang), theo bang duyet cua co Lan ("Thieu: viet
+    them"). Co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    lan = 0
+    while so < socau and lan < 3000:
+        lan += 1
+        t = random.randint(1, 3)                                  # số đẳng thức đúng
+        ds, da = [], set()
+        for j in range(4):
+            a = random.randint(-9, 6)
+            b = a + random.randint(2, 9)
+            kieu = random.randint(0, 2)
+            if kieu == 0:
+                K = (a, random.random() < .5, b, random.random() < .5)
+            elif kieu == 1:
+                K = (-_VC, False, b, random.random() < .5)
+            else:
+                K = (a, random.random() < .5, _VC, False)
+            if K in da:
+                break
+            da.add(K)
+            ds.append(K)
+        if len(ds) < 4:
+            continue
+        dung_idx = set(random.sample(range(4), t))
+        hang = []
+        for j, K in enumerate(ds):
+            if j in dung_idx:
+                hang.append((K, K, True))
+            else:
+                cac = [S2[0] for S2 in (_k_lat([K], 0, 0), _k_lat([K], 0, 1)) if S2[0] != K]
+                hang.append((K, random.choice(cac), False))
+        so += 1
+        hoi_dung = random.choice([True, False])
+        dap = t if hoi_dung else 4 - t
+        debai = (r"Cho bốn đẳng thức sau:\\ "
+                 + r"\\ ".join("%s) $%s = %s$" % (chr(97 + j), _k_bdt(*K), _k_tex([V])) for j, (K, V, _) in enumerate(hang))
+                 + r"\\ Có bao nhiêu đẳng thức %s?" % _tu_dung_sai(hoi_dung))
+        giai = (r"Dấu ngoặc vuông: đầu mút được lấy (dấu $\le$, $\ge$); dấu ngoặc tròn: không lấy (dấu $<$, $>$).\\ "
+                + r"\\ ".join(r"%s) $%s = %s$ là đẳng thức %s%s." % (
+                    chr(97 + j), _k_bdt(*K), _k_tex([V]), "đúng" if d else "sai",
+                    "" if d else r" (đúng phải là $%s$)" % _k_tex([K]))
+                    for j, (K, V, d) in enumerate(hang))
+                + r"\\ Vậy có $%d$ đẳng thức %s." % (dap, _tu_dung_sai(hoi_dung)))
+        nhieu = [str(x) for x in range(0, 5) if x != dap]
+        cau += MC_SA_answer_const(debai, str(dap), nhieu, giai, 0, 0, dang)
+    return cau

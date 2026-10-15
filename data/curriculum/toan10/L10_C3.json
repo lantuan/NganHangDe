@@ -172,21 +172,21 @@
         "mo_ta": "Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba",
         "mapping_id": [
           "L10_C3_B6_TH032_MC_G",
-          "L10_C3_B6_TH032_SA_D"
+          "L10_C3_B6_TH032_SA_G"
         ]
       },
       {
         "mo_ta": "Biết hai cạnh và đường trung tuyến, tính cạnh còn lại / côsin, R, diện tích (giải tam giác, cùng câu dẫn với TF_T)",
         "mapping_id": [
           "L10_C3_B6_TH032_MC_N",
-          "L10_C3_B6_TH032_SA_J"
+          "L10_C3_B6_TH032_SA_N"
         ]
       },
       {
         "mo_ta": "Biết ba cạnh và đường phân giác trong, tính độ dài đường phân giác / diện tích tam giác chia bởi đường phân giác (giải tam giác, cùng câu dẫn với TF_T)",
         "mapping_id": [
           "L10_C3_B6_TH032_MC_O",
-          "L10_C3_B6_TH032_SA_K"
+          "L10_C3_B6_TH032_SA_O"
         ]
       }
     ],
@@ -222,7 +222,7 @@
         "mo_ta": "Biết hai cạnh và đường trung tuyến, tính cạnh còn lại / côsin, R, diện tích (giải tam giác, cùng câu dẫn với TF_T)",
         "mapping_id": [
           "L10_C3_B6_VD032_MC_F",
-          "L10_C3_B6_VD032_SA_E",
+          "L10_C3_B6_VD032_SA_F",
           "L10_C3_B6_VD032_TL_E"
         ]
       },
@@ -230,7 +230,7 @@
         "mo_ta": "Biết ba cạnh và đường phân giác trong, tính độ dài đường phân giác / diện tích tam giác chia bởi đường phân giác (giải tam giác, cùng câu dẫn với TF_T)",
         "mapping_id": [
           "L10_C3_B6_VD032_MC_G",
-          "L10_C3_B6_VD032_SA_F",
+          "L10_C3_B6_VD032_SA_G",
           "L10_C3_B6_VD032_TL_F"
         ]
       }

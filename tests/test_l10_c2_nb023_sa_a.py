@@ -33,7 +33,7 @@ def test_f_dang_ax_by_va_m_thuoc_mien_nghiem():
         orig = M.MC_SA_answer_text
         M.MC_SA_answer_text = lambda debai, dap, *a, **k: cap.append((debai, dap)) or ""
         try:
-            M.L10_C2_B3_NB023_SA_A_01(1)
+            M.L10_C2_B3_NB023_SA_B_01(1)
         finally:
             M.MC_SA_answer_text = orig
         debai, dap = cap[0]

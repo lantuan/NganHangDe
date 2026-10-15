@@ -1,9 +1,9 @@
 """Bai toan thuc tien gan voi duong Truong Son (co Lan 13/10/2026): kiem lai DOC LAP.
 
-5 boi canh la 5 bien the _01.._05 cua CUNG mot dang (MC_U / MC_V / SA_W / SA_X / TL_N).
+5 boi canh la 5 bien the _01.._05 cua CUNG mot dang (MC_U / MC_V / SA_U / SA_V / TL_N).
 Moi cau: doc so lieu trong de bai, tu tinh lai dap so bang cong thuc rieng (khong goi lai ham sinh) roi so voi
 dap so in ra (SA: \\shortans; MC: phuong an {\\True}; TL: hai y). Kiem them mapping (boi_canh chung "truong_son",
-muc_do_dang VDC cho MC_V / SA_X) va moi bien the dung 4 phuong an khac nhau.
+muc_do_dang VDC cho MC_V / SA_V) va moi bien the dung 4 phuong an khac nhau.
 """
 import importlib.util
 import json
@@ -93,7 +93,7 @@ def _mc(txt):
 
 @pytest.mark.parametrize("bien", [1, 2, 3, 4, 5])
 def test_sa_dap_so_khop_doc_lap(bien):
-    for ham, ph in (("SA_W", 0), ("SA_X", 1)):
+    for ham, ph in (("SA_U", 0), ("SA_V", 1)):
         f = getattr(M, "L10_C3_B6_VD036_%s_%02d" % (ham, bien))
         for sd in range(60):
             random.seed(sd)
@@ -137,7 +137,7 @@ def test_tl_hai_y_dap_so_khop(bien):
 
 def test_mapping_truong_son():
     rows = {r["id"]: r for r in json.load(open(GOC / "data" / "mapping" / "toan10" / "L10_C3.json", encoding="utf-8"))}
-    ids = ["L10_C3_B6_VD036_MC_U", "L10_C3_B6_VD036_MC_V", "L10_C3_B6_VD036_SA_W", "L10_C3_B6_VD036_SA_X", "L10_C3_B6_VD036_TL_N"]
+    ids = ["L10_C3_B6_VD036_MC_U", "L10_C3_B6_VD036_MC_V", "L10_C3_B6_VD036_SA_U", "L10_C3_B6_VD036_SA_V", "L10_C3_B6_VD036_TL_N"]
     assert len({rows[i]["Dang"] for i in ids}) == 1
     for i in ids:
         assert rows[i]["boi_canh"] == "truong_son"

@@ -28,13 +28,13 @@ def _nap():
 M = _nap()
 
 THEO_CHU_DE = [  # (hàm, sổ, số mệnh đề mỗi câu)
-    ("L10_C1_B1_TH014_MC_E_01", "c1_dl_tu_giac"), ("L10_C1_B1_TH014_SA_A_01", "c1_dl_tu_giac"),
-    ("L10_C1_B1_TH014_MC_H_01", "c1_dl_tam_giac"), ("L10_C1_B1_TH014_SA_D_01", "c1_dl_tam_giac"),
-    ("L10_C1_B1_TH014_MC_C_01", "c1_dl_chia_het"), ("L10_C1_B1_TH014_SA_E_01", "c1_dl_chia_het"),
-    ("L10_C1_B1_TH014_MC_I_01", "c1_dl_so_thuc"), ("L10_C1_B1_TH014_SA_F_01", "c1_dl_so_thuc"),
-    ("L10_C1_B1_TH014_MC_J_01", "c1_lt_chan_le"), ("L10_C1_B1_TH014_SA_B_01", "c1_lt_chan_le"),
-    ("L10_C1_B1_TH014_MC_K_01", "c1_lt_bat_dang_thuc"), ("L10_C1_B1_TH014_SA_G_01", "c1_lt_bat_dang_thuc"),
-    ("L10_C1_B1_TH014_MC_L_01", "c1_lt_phuong_trinh"), ("L10_C1_B1_TH014_SA_H_01", "c1_lt_phuong_trinh"),
+    ("L10_C1_B1_TH014_MC_E_01", "c1_dl_tu_giac"), ("L10_C1_B1_TH014_SA_E_01", "c1_dl_tu_giac"),
+    ("L10_C1_B1_TH014_MC_H_01", "c1_dl_tam_giac"), ("L10_C1_B1_TH014_SA_H_01", "c1_dl_tam_giac"),
+    ("L10_C1_B1_TH014_MC_C_01", "c1_dl_chia_het"), ("L10_C1_B1_TH014_SA_C_01", "c1_dl_chia_het"),
+    ("L10_C1_B1_TH014_MC_I_01", "c1_dl_so_thuc"), ("L10_C1_B1_TH014_SA_I_01", "c1_dl_so_thuc"),
+    ("L10_C1_B1_TH014_MC_J_01", "c1_lt_chan_le"), ("L10_C1_B1_TH014_SA_J_01", "c1_lt_chan_le"),
+    ("L10_C1_B1_TH014_MC_K_01", "c1_lt_bat_dang_thuc"), ("L10_C1_B1_TH014_SA_K_01", "c1_lt_bat_dang_thuc"),
+    ("L10_C1_B1_TH014_MC_L_01", "c1_lt_phuong_trinh"), ("L10_C1_B1_TH014_SA_L_01", "c1_lt_phuong_trinh"),
 ]
 
 
@@ -67,7 +67,7 @@ def test_mot_menh_de_va_bon_menh_de_dung_chung_so(seed):
     tong = sum(len(v) for v in M._KHO_DL.values())
     da = set()
     ham = ["L10_C1_B1_TH014_MC_D_01", "L10_C1_NB010_TH014_TL_A_01", "L10_C1_B1_TH014_MC_E_01",
-           "L10_C1_B1_TH014_SA_E_01", "L10_C1_B1_TH014_MC_D_02", "L10_C1_B1_TH014_MC_H_01"]
+           "L10_C1_B1_TH014_SA_C_01", "L10_C1_B1_TH014_MC_D_02", "L10_C1_B1_TH014_MC_H_01"]
     for k in range(6):
         getattr(M, ham[k])(1, 1)
         hien = {(t, i) for t, s in M._C1_XV.da_dung.items() if t.startswith("c1_dl_") for i in s}

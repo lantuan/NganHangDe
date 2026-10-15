@@ -13,6 +13,13 @@
     "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
+    "id": "L10_C1_B1_NB001_SA_B",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số câu không phải là mệnh đề trong một danh sách",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB001_MC_B (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B1_NB005_MC_A",
     "content": "Nhận biết được mệnh đề phủ định.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -34,27 +41,22 @@
     "id": "L10_C1_B1_NB007_MC_A",
     "content": "Nhận biết được mệnh đề kéo theo.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mệnh đề kéo theo toán"
+    "Dang": "Mệnh đề kéo theo (toán học và thực tế)",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan: gop NB007_MC_B (thuc te) vao MC_A thanh bien the _02 (A_01 toan, A_02 thuc te); khong can SA"
   },
   {
     "id": "L10_C1_B1_NB007_MC_C",
     "content": "Nhận biết được mệnh đề kéo theo.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đếm số mệnh đề không phải mệnh đề kéo theo (mệnh đề toán)",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+    "Dang": "Đếm số mệnh đề kéo theo hoặc không phải mệnh đề kéo theo (mệnh đề toán học và thực tế)",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan: gop NB007_MC_D (thuc te) vao MC_C thanh bien the _02; them NB007_SA_C (ban tra loi ngan: C_01 toan, C_02 thuc te)"
   },
   {
-    "id": "L10_C1_B1_NB007_MC_B",
+    "id": "L10_C1_B1_NB007_SA_C",
     "content": "Nhận biết được mệnh đề kéo theo.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mệnh đề kéo theo thực tế"
-  },
-  {
-    "id": "L10_C1_B1_NB007_MC_D",
-    "content": "Nhận biết được mệnh đề kéo theo.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đếm số mệnh đề không phải mệnh đề kéo theo (mệnh đề thực tế)",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số mệnh đề kéo theo hoặc không phải mệnh đề kéo theo (mệnh đề toán học và thực tế)",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan: ban tra loi ngan cua NB007_MC_C (cung kieu, cung chu cai, cung Dang)"
   },
   {
     "id": "L10_C1_B1_NB008_MC_A",
@@ -72,7 +74,8 @@
     "id": "L10_C1_B1_NB010_MC_A",
     "content": "Phát biểu được mệnh đề đảo.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Mệnh đề kéo theo toan"
+    "Dang": "Phát biểu mệnh đề đảo của mệnh đề kéo theo",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan: sua mo ta dang (truoc ghi nham \"Menh de keo theo toan\"), day la phat bieu menh de dao; khong can SA"
   },
   {
     "id": "L10_C1_B1_NB011_MC_A",
@@ -116,6 +119,13 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Đếm số mệnh đề sai trong một danh sách",
     "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+  },
+  {
+    "id": "L10_C1_B1_TH003_SA_B",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số mệnh đề sai trong một danh sách",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_B (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B1_TH003_TL_A",
@@ -166,7 +176,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tu giac"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_A",
+    "id": "L10_C1_B1_TH014_SA_E",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề kéo theo, tương đương về tứ giác: xét tính đúng sai",
@@ -180,7 +190,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; chi con _01 (bo _02 tron chu de 01/10/2026)"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_B",
+    "id": "L10_C1_B1_TH014_SA_J",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chẵn lẻ: xét tính đúng sai",
@@ -194,7 +204,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - dang moi TH014 theo co Lan (chi muc TH: truong hop don gian; menh de lay xoay vong, het moi lap lai); co Lan duyet lai; _01 cho san A, B, C dung/sai; _02 A, B, C la menh de cu the ve so"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_C",
+    "id": "L10_C1_B1_TH014_SA_G",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Biết A, B, C đúng hay sai: tính đúng sai của mệnh đề kéo theo, tương đương ghép từ A, B, C",
@@ -208,14 +218,14 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tam giac"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_D",
+    "id": "L10_C1_B1_TH014_SA_H",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề kéo theo, tương đương về tam giác: xét tính đúng sai",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de tam giac"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_E",
+    "id": "L10_C1_B1_TH014_SA_C",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề kéo theo, tương đương về chia hết, chẵn lẻ của số tự nhiên: xét tính đúng sai",
@@ -229,7 +239,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de so thuc"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_F",
+    "id": "L10_C1_B1_TH014_SA_I",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề kéo theo, tương đương về đẳng thức, bất đẳng thức, phương trình với số thực: xét tính đúng sai",
@@ -250,7 +260,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de bat dang thuc"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_G",
+    "id": "L10_C1_B1_TH014_SA_K",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về bất đẳng thức trên R: xét tính đúng sai",
@@ -264,7 +274,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - theo co Lan: mot cau chi hoi MOT chu de (don vi kien thuc), chu de khac la dang khac; menh de lay xoay vong; co Lan duyet lai; chu de phuong trinh"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_H",
+    "id": "L10_C1_B1_TH014_SA_L",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về nghiệm của phương trình trên tập số: xét tính đúng sai",
@@ -339,8 +349,8 @@
     "id": "L10_C1_B1_VD014_MC_B",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Đếm số mệnh đề đúng khi thay giá trị vào mệnh đề chứa biến",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
+    "Dang": "Đếm số mệnh đề đúng (chứa ∀, ∃, kéo theo; thay giá trị vào mệnh đề chứa biến) hoặc số n làm mệnh đề kéo theo sai",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do | 15/10/2026: cung dang MC_B/SA_B (bien the) theo y co Lan; co Lan duyet"
   },
   {
     "id": "L10_C1_B1_VD014_MC_C",
@@ -348,6 +358,13 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tính đúng sai của mệnh đề kéo theo, tương đương giữa các bất đẳng thức số",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu de on tap cuoi chuong 1 cua co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_C",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tính đúng sai của mệnh đề kéo theo, tương đương giữa các bất đẳng thức số",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD014_MC_C (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B1_VD014_SA_A",
@@ -358,10 +375,18 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - cau dem k theo nam thuc (bat phuong trinh bac hai co tham so) la muc VDC theo co Lan; danh dau muc_do_dang"
   },
   {
-    "id": "L10_C1_B2_NB017_MC_A",
+    "id": "L10_C1_B2_NB017_MC_G",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con"
+    "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con",
+    "ghi_chu": "15/10/2026: la MC_A cu (doi ten); dang tim tap con, chua co SA di cung; co Lan duyet"
+  },
+  {
+    "id": "L10_C1_B2_NB017_SA_G",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tập hợp cho ở dạng liệt kê, tìm tập con",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_G (cung Dang), theo bang duyet cua co Lan; 15/10/2026: SA dem so tap con (2^n, khac rong, dung k phan tu) cua tap liet ke; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_NB017_MC_D",
@@ -375,6 +400,13 @@
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "phân biệt thuộc/tập con"
+  },
+  {
+    "id": "L10_C1_B2_NB017_SA_B",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "phân biệt thuộc/tập con",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_B (cung Dang), theo bang duyet cua co Lan; 15/10/2026: dung lai noi dung MC_B (da la cau dem khang dinh dung/sai) voi dang=2; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_NB017_MC_F",
@@ -391,17 +423,31 @@
     "ghi_chu": "CLAUDE THEM 29/09/2026 - tach tu ID goc vi khac dang; co Lan duyet lai mo ta dang va muc do"
   },
   {
+    "id": "L10_C1_B2_NB017_SA_E",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phân biệt thuộc/tập con, tập hợp cho bằng kí hiệu chữ",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_E (cung Dang), theo bang duyet cua co Lan; 15/10/2026: dung lai noi dung MC_E (da la cau dem khang dinh dung/sai) voi dang=2; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B2_NB017_MC_C",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê"
   },
   {
-    "id": "L10_C1_B2_NB017_MC_G",
+    "id": "L10_C1_B2_NB017_SA_C",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tìm tập con ở tập đoạn/khoảng/liệt kê",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_C (cung Dang), theo bang duyet cua co Lan; 15/10/2026: SA dem so tap hop la tap con cua khoang/doan/nua khoang (Python so sanh dau mut); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_NB017_MC_A",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Liệt kê các phần tử của tập hợp cho bởi tính chất đặc trưng (và ngược lại; xét phần tử thuộc/không thuộc tập cho bởi tính chất)",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu giao an Bai 2 cua co Lan; _02 hoi nguoc (theo bai Sach bai tap), _03 hoi a thuoc A khong (theo co Lan); co Lan duyet lai"
+    "Dang": "Tập hợp cho bởi tính chất đặc trưng: liệt kê các phần tử, đếm số phần tử, tính tổng; xét phần tử thuộc/không thuộc tập",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - tu giao an Bai 2 cua co Lan; _02 hoi nguoc (theo bai Sach bai tap), _03 hoi a thuoc A khong (theo co Lan); co Lan duyet lai | 15/10/2026: cung dang MC_A/SA_A (bien the 01,02...) theo y co Lan; MC_A la MC_G cu, MC_A cu doi thanh MC_G; co Lan duyet"
   },
   {
     "id": "L10_C1_B2_NB017_MC_H",
@@ -411,6 +457,13 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu giao an Bai 2 cua co Lan; co Lan duyet lai"
   },
   {
+    "id": "L10_C1_B2_NB017_SA_H",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Nhận biết tập rỗng",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_H (cung Dang), theo bang duyet cua co Lan; 15/10/2026: SA dem so tap rong / khong phai tap rong trong bon tap (theo y co Lan); co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B2_NB017_MC_I",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -418,18 +471,32 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu de on tap cuoi chuong 1 cua co Lan; co Lan duyet lai"
   },
   {
+    "id": "L10_C1_B2_NB017_SA_I",
+    "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Viết tập con của R dưới dạng khoảng, đoạn, nửa khoảng (và ngược lại)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB017_MC_I (cung Dang): dem so dang thuc dung giua tinh chat dac trung va khoang/doan/nua khoang; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B2_NB017_SA_A",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tập hợp cho bởi tính chất đặc trưng: đếm số phần tử / tính tổng các phần tử",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, ban tra loi ngan cua NB017_MC_G (theo bai Sach bai tap, ha ve NB: phuong trinh tich 2-3 nhan tu bac nhat); co Lan duyet lai"
+    "Dang": "Tập hợp cho bởi tính chất đặc trưng: liệt kê các phần tử, đếm số phần tử, tính tổng; xét phần tử thuộc/không thuộc tập",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - dang moi, ban tra loi ngan cua NB017_MC_A (theo bai Sach bai tap, ha ve NB: phuong trinh tich 2-3 nhan tu bac nhat); co Lan duyet lai | 15/10/2026: cung dang MC_A/SA_A (bien the 01,02...) theo y co Lan; MC_A la MC_G cu, MC_A cu doi thanh MC_G; co Lan duyet"
   },
   {
-    "id": "L10_C1_B2_VD021_SA_B",
+    "id": "L10_C1_B2_VD021_SA_D",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên",
     "ghi_chu": "CLAUDE SUA 29/09/2026 - truoc la L10_C1_B2_NB017_SA_C; co Lan chot khong phai NB, chuyen sang VD021; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_VD021_MC_D",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm số nguyên m để khoảng chứa đúng k số nguyên",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban trac nghiem cua VD021_SA_D (SA_B cu doi chu thanh SA_D theo quy uoc chu cai la danh tinh cua dang); co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_TH018_MC_A",
@@ -442,6 +509,13 @@
     "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "phép toán tâp hợp dạng liệt kê"
+  },
+  {
+    "id": "L10_C1_B2_TH018_SA_B",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "phép toán tâp hợp dạng liệt kê",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH018_MC_B (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_TH018_TL_A",
@@ -462,13 +536,15 @@
     "id": "L10_C1_B2_TH021_MC_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phép toán tập hợp"
+    "Dang": "Phép toán trên khoảng, đoạn, nửa khoảng: phần bù, giao, hợp, hiệu (tìm tập kết quả hoặc đếm số nguyên thuộc kết quả)",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang"
   },
   {
     "id": "L10_C1_B2_VD020_MC_A",
     "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "tập hợp thực tế"
+    "Dang": "Đếm số phần tử tập hợp trong bài toán thực tế",
+    "ghi_chu": "CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang"
   },
   {
     "id": "L10_C1_B2_VD020_TL_A",
@@ -480,7 +556,8 @@
     "id": "L10_C1_B2_VD021_MC_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Phép toán tập hợp tham "
+    "Dang": "Phép toán tập hợp có tham số: tìm tham số để hợp, giao thoả điều kiện cho trước",
+    "ghi_chu": "15/10/2026: cung dang MC_A/SA_A (bien the) theo bang duyet cua co Lan; co Lan duyet"
   },
   {
     "id": "L10_C1_B2_VD021_MC_B",
@@ -490,10 +567,18 @@
     "ghi_chu": "CLAUDE THEM 30/09/2026 - tu de on tap cuoi chuong 1 cua co Lan; co Lan duyet lai"
   },
   {
+    "id": "L10_C1_B2_VD021_SA_B",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Phép toán kết hợp trên ba khoảng, đoạn, nửa khoảng",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD021_MC_B (cung Dang): dem so nguyen cua tap ket qua phep toan tren ba khoang; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B2_VD021_SA_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Tìm tham số để hợp, giao thoả điều kiện cho trước"
+    "Dang": "Phép toán tập hợp có tham số: tìm tham số để hợp, giao thoả điều kiện cho trước",
+    "ghi_chu": "15/10/2026: cung dang MC_A/SA_A (bien the) theo bang duyet cua co Lan; co Lan duyet"
   },
   {
     "id": "L10_C1_TF_A",
@@ -519,7 +604,7 @@
     "content": "Giải quyết được một số vấn đề thực tiễn liên quan đến đếm số phần tử của tập hợp và các phép toán trên tập hợp.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số phần tử tập hợp trong bài toán thực tế",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang"
   },
   {
     "id": "L10_C1_B2_VD021_TL_A",
@@ -532,8 +617,8 @@
     "id": "L10_C1_B1_VD014_SA_B",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Đếm số mệnh đề đúng (chứa ∀, ∃, kéo theo) hoặc số n làm mệnh đề kéo theo sai",
-    "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
+    "Dang": "Đếm số mệnh đề đúng (chứa ∀, ∃, kéo theo; thay giá trị vào mệnh đề chứa biến) hoặc số n làm mệnh đề kéo theo sai",
+    "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai | 15/10/2026: cung dang MC_B/SA_B (bien the) theo y co Lan; co Lan duyet"
   },
   {
     "id": "L10_C1_B1_VD014_MC_D",
@@ -541,6 +626,13 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Tham số để mệnh đề kéo theo chứa ∀ là mệnh đề đúng",
     "ghi_chu": "CLAUDE THEM 30/09/2026 - them dang VD cho bai 1 (chi co mot don vi VD014), co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B1_VD014_SA_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Tham số để mệnh đề kéo theo chứa ∀ là mệnh đề đúng",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD014_MC_D (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B1_VD014_TL_B",
@@ -563,7 +655,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai; chu de chia het (cung SA_I), menh de lay xoay vong"
   },
   {
-    "id": "L10_C1_B1_TH014_SA_I",
+    "id": "L10_C1_B1_TH014_SA_M",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Mệnh đề chứa kí hiệu với mọi, tồn tại về chia hết: xét tính đúng sai",
@@ -575,6 +667,13 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Số a = √m + k, b = √m − k: tính đúng sai của mệnh đề về số hữu tỉ, số tự nhiên",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 1 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B1_TH003_SA_C",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Số a = √m + k, b = √m − k: tính đúng sai của mệnh đề về số hữu tỉ, số tự nhiên",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_C (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_NB001_TH003_TL_A",
@@ -676,7 +775,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 dem tap con, _02 dem tap X; loi giai liet ke het tap con (khong dung to hop)"
   },
   {
-    "id": "L10_C1_B2_NB017_SA_B",
+    "id": "L10_C1_B2_NB017_SA_J",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số tập con của tập hợp nhỏ; đếm số tập X thoả A ⊂ X ⊂ B",
@@ -690,7 +789,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 chon cap bang nhau, _02 tim x, y (m) de bang nhau"
   },
   {
-    "id": "L10_C1_B2_NB017_SA_D",
+    "id": "L10_C1_B2_NB017_SA_K",
     "content": "Nhận biết được các khái niệm cơ bản về tập hợp (tập con, hai tập hợp bằng nhau, tập rỗng) và biết sử dụng các kí hiệu ⊂, ⊃, ∅.",
     "Loai": "Trả lời ngắn",
     "Dang": "Hai tập hợp bằng nhau: chọn cặp tập bằng nhau, tìm phần tử (tham số) để hai tập bằng nhau",
@@ -711,7 +810,7 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; _01 tap boi (giao = boi BCNN), _02 tap uoc"
   },
   {
-    "id": "L10_C1_B2_TH018_SA_A",
+    "id": "L10_C1_B2_TH018_SA_C",
     "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
     "Loai": "Trả lời ngắn",
     "Dang": "Phép toán trên tập bội số, tập ước",
@@ -725,11 +824,18 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; bang tabular; boi canh khong lap trong de"
   },
   {
+    "id": "L10_C1_B2_TH018_SA_D",
+    "content": "Thực hiện được các phép toán trên các tập hợp (hợp, giao, hiệu của hai tập hợp, phần bù của một tập con).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đọc bảng kết quả thực tế, xác định giao, hợp, hiệu của hai tập hợp",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH018_MC_D (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B2_TH021_SA_A",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Phép toán trên khoảng, đoạn, nửa khoảng: đếm số nguyên (số tự nhiên) thuộc kết quả",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai"
+    "Dang": "Phép toán trên khoảng, đoạn, nửa khoảng: phần bù, giao, hợp, hiệu (tìm tập kết quả hoặc đếm số nguyên thuộc kết quả)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang"
   },
   {
     "id": "L10_C1_B2_VD021_MC_C",
@@ -742,8 +848,22 @@
     "id": "L10_C1_B2_VD021_SA_C",
     "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
     "Loai": "Trả lời ngắn",
+    "Dang": "Biết phần bù của từng tập, tìm giao, hợp, phần bù của giao, hợp",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua VD021_MC_C (cung Dang): dem so nguyen cua A giao B, A hop B khi biet phan bu; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_VD021_SA_E",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trả lời ngắn",
     "Dang": "Tìm tham số để giao của đoạn và nửa khoảng có đúng một phần tử",
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tu tai lieu CĐ day them Toan 10 Bai 2 (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C1_B2_VD021_MC_E",
+    "content": "Xác định hợp, giao, hiệu, phần bù của các khoảng, đoạn, nửa khoảng trên trục số.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tìm tham số để giao của đoạn và nửa khoảng có đúng một phần tử",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban trac nghiem cua VD021_SA_E (SA_C cu doi chu thanh SA_E theo quy uoc chu cai la danh tinh cua dang); co Lan duyet lai"
   },
   {
     "id": "L10_C1_TF_H",
@@ -847,11 +967,25 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
   },
   {
+    "id": "L10_C1_B1_NB001_SA_C",
+    "content": "Nhận biết được các mệnh đề logic (mệnh đề).",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Với giá trị nào của x thì mệnh đề chứa biến (x so với một số: x > 3, x ≤ −2, x = 5, x ≠ 4) là mệnh đề đúng (sai)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB001_MC_C (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
+  },
+  {
     "id": "L10_C1_B1_TH003_MC_D",
     "content": "Xác định được tính đúng sai của các mệnh đề.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Với giá trị nào của x thì mệnh đề chứa biến (x², |x|, (x ± a)², x³ hoặc sin x, cos x, tan x của góc nhọn so với một số) là mệnh đề đúng (sai)",
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
+  },
+  {
+    "id": "L10_C1_B1_TH003_SA_D",
+    "content": "Xác định được tính đúng sai của các mệnh đề.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Với giá trị nào của x thì mệnh đề chứa biến (x², |x|, (x ± a)², x³ hoặc sin x, cos x, tan x của góc nhọn so với một số) là mệnh đề đúng (sai)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH003_MC_D (cung Dang), theo bang duyet cua co Lan; cung nhom bai voi MC cung chu; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B1_VD014_MC_E",
@@ -861,7 +995,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_C",
+    "id": "L10_C1_B1_VD014_SA_E",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Tập các giá trị x để mệnh đề chứa biến (phương trình bậc hai hoặc phương trình chứa dấu giá trị tuyệt đối, không tham số) là mệnh đề đúng",
@@ -876,7 +1010,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_D",
+    "id": "L10_C1_B1_VD014_SA_F",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |px + q| = mk + c có nghiệm, hai nghiệm phân biệt hoặc vô nghiệm",
@@ -892,7 +1026,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_E",
+    "id": "L10_C1_B1_VD014_SA_G",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình bậc hai x² + bx + k = 0 có nghiệm hoặc vô nghiệm (dùng ∆)",
@@ -908,7 +1042,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_F",
+    "id": "L10_C1_B1_VD014_SA_H",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình |x − a| = k − c có hai nghiệm dương phân biệt",
@@ -924,7 +1058,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_G",
+    "id": "L10_C1_B1_VD014_SA_I",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình kx² − 2ax + c = 0 có hai nghiệm phân biệt (chú ý k ≠ 0)",
@@ -940,7 +1074,7 @@
     "ghi_chu": "CLAUDE THEM 04/10/2026 - theo yeu cau co Lan (menh de chua bien 4 muc NB/TH/VD/VDC, tu cau dem k theo nam thuc); co Lan duyet lai muc do va don vi (dang VDC: ID mang VD014 vi Curriculum khong co VDC, muc VDC danh dau bang muc_do_dang)"
   },
   {
-    "id": "L10_C1_B1_VD014_SA_H",
+    "id": "L10_C1_B1_VD014_SA_J",
     "content": "Xác định được tính đúng sai của các mệnh đề phủ định, kéo theo, đảo, tương đương, mệnh đề chứa kí hiệu ∀, ∃.",
     "Loai": "Trả lời ngắn",
     "Dang": "Đếm số giá trị nguyên của tham số k (khoảng theo năm hiện tại) để phương trình x² − 2kx + c = 0 có nghiệm hoặc có hai nghiệm phân biệt (k² so với c)",
@@ -958,34 +1092,34 @@
     "id": "L10_C1_B2_VD019_MC_B",
     "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biểu đồ Ven ba tập hợp: chọn tập hợp ứng với phần gạch sọc (chỉ có A, chỉ có B, chỉ có C, giao của cả ba, hợp của cả ba, phần bù của hợp)",
+    "Dang": "Biểu đồ Ven ba tập hợp: phần ứng với chỉ có A, chỉ có B, chỉ có C, giao của cả ba, hợp của cả ba, giao của hai tập, phần bù của hợp",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VD cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD. CLAUDE THEM 04/10/2026; co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VD cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD. CLAUDE THEM 04/10/2026; co Lan duyet lai; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang (doi ID SA_A -> SA_B)"
   },
   {
     "id": "L10_C1_B2_VD019_MC_C",
     "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Biểu đồ Ven ba tập hợp: chọn tập hợp ứng với phần gạch sọc là phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
+    "Dang": "Biểu đồ Ven ba tập hợp: phần ứng với phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VDC cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD/VDC (muc_do_dang). CLAUDE THEM 04/10/2026; co Lan duyet lai",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VDC cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD/VDC (muc_do_dang). CLAUDE THEM 04/10/2026; co Lan duyet lai; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang (doi ID SA_B -> SA_C)",
     "muc_do_dang": "VDC"
-  },
-  {
-    "id": "L10_C1_B2_VD019_SA_A",
-    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Biểu đồ Ven ba tập hợp ghi số phần tử từng vùng: tính số phần tử của tập chỉ có A, giao của cả ba, hợp của cả ba, giao của hai tập, phần bù của hợp",
-    "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VD cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD. CLAUDE THEM 04/10/2026; co Lan duyet lai"
   },
   {
     "id": "L10_C1_B2_VD019_SA_B",
     "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Biểu đồ Ven ba tập hợp ghi số phần tử từng vùng: tính số phần tử của tập là phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
+    "Dang": "Biểu đồ Ven ba tập hợp: phần ứng với chỉ có A, chỉ có B, chỉ có C, giao của cả ba, hợp của cả ba, giao của hai tập, phần bù của hợp",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VDC cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD/VDC (muc_do_dang). CLAUDE THEM 04/10/2026; co Lan duyet lai",
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VD cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD. CLAUDE THEM 04/10/2026; co Lan duyet lai; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang (doi ID SA_A -> SA_B)"
+  },
+  {
+    "id": "L10_C1_B2_VD019_SA_C",
+    "content": "Sử dụng được biểu đồ Ven để biểu diễn các tập hợp: hợp, giao, hiệu, phần bù.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu đồ Ven ba tập hợp: phần ứng với phép toán kết hợp ((A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C)...)",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo: YCCD ve bieu do Ven (TH019) chi o muc TH; dang nay muc VDC cao hon YCCD, nen ghi chu de giao vien quyet dinh giu/bo (co Lan 04/10/2026). ID VD019 (cung so 019 voi TH019, doi muc o dau) de ma tran chon dung muc VD/VDC (muc_do_dang). CLAUDE THEM 04/10/2026; co Lan duyet lai; CLAUDE SUA 15/10/2026 theo bang duyet co Lan (Ghep): thong nhat mo ta Dang voi ban MC/SA cung dang (doi ID SA_B -> SA_C)",
     "muc_do_dang": "VDC"
   }
 ]

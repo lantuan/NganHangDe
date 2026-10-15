@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tap hop liet ke: cac phan tu cach nhau boi dau ";" (dau "," la dau
-thap phan trong SGK Viet Nam). Cau NB017_MC_A: phuong an la TAP HOP tran
+thap phan trong SGK Viet Nam). Cau NB017_MC_G: phuong an la TAP HOP tran
 nen cau hoi phai hoi "khong la tap con", khong hoi "khang dinh nao sai".
 """
 import pathlib
@@ -24,17 +24,17 @@ def _sinh(ten, seed):
     return getattr(m, ten)(2, 1)
 
 
-def test_nb017_mc_a_hoi_dung_y():
+def test_nb017_mc_g_hoi_dung_y():
     for sd in range(100):
-        out = _sinh("L10_C1_B2_NB017_MC_A_01", sd)
+        out = _sinh("L10_C1_B2_NB017_MC_G_01", sd)
         assert "khẳng định" not in out and "không đúng?" not in out
         assert "tập con của" in out
 
 
 def test_tap_hop_dung_dau_cham_phay():
-    for ten in ["L10_C1_B2_NB017_MC_A_01", "L10_C1_B2_NB017_MC_D_01",
+    for ten in ["L10_C1_B2_NB017_MC_G_01", "L10_C1_B2_NB017_MC_D_01",
                 "L10_C1_B2_TH018_MC_B_01", "L10_C1_B2_TH018_MC_B_02",
-                "L10_C1_B2_NB017_MC_G_01", "L10_C1_B2_NB017_MC_H_01",
+                "L10_C1_B2_NB017_MC_A_01", "L10_C1_B2_NB017_MC_H_01",
                 "L10_C1_B2_TH018_MC_B_03", "L10_C1_B2_TH018_MC_B_04"]:
         for sd in range(100):
             assert not PHAY.search(_sinh(ten, sd)), ten

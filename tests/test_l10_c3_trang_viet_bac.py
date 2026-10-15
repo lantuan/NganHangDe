@@ -22,7 +22,7 @@ M = importlib.util.module_from_spec(_spec)
 sys.modules["L10_C3_trang_test"] = M
 _spec.loader.exec_module(M)
 
-IDS = {"MC": "L10_C3_B6_VD036_MC_W", "SA": "L10_C3_B6_VD036_SA_Y", "TL": "L10_C3_B6_VD036_TL_O"}
+IDS = {"MC": "L10_C3_B6_VD036_MC_W", "SA": "L10_C3_B6_VD036_SA_W", "TL": "L10_C3_B6_VD036_TL_O"}
 
 
 def _lt(x):
@@ -139,7 +139,7 @@ def test_ca_hai_bien_the_xuat_hien_va_dan_dung_su_that():
         assert "Cảnh khuya" not in de and "Rằm tháng Giêng" not in de
         assert "\\begin{center}" not in de.split("\\begin{tikzpicture}")[0]      # khong co khoi tho (co Lan bo tho 13/10/2026)
     # de khong lo duong kinh that cua Mat Trang (dap so)
-    de = _de(M.L10_C3_B6_VD036_SA_Y_01(1))
+    de = _de(M.L10_C3_B6_VD036_SA_W_01(1))
     assert "3 474" not in de and "3474" not in de and "3\\,47" not in de
 
 

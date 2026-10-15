@@ -191,8 +191,17 @@ Test: `tests/test_chon_cau_khong_na_na.py`.
 5. Hai dạng khác loại câu nhưng **cùng mô tả "Dang"** trong Mapping của cùng
    một đơn vị (vd VD014_MC_A và VD014_SA_A đều là "Mệnh đề chưa biến", ra gần
    như cùng một bài toán) thì không lấy cả hai nếu còn dạng khác
-   (`_khoa_mo_ta` trong question_selector_service). Vì vậy khi viết dạng SA/TL
-   cho một đơn vị đã có MC, nên làm **bài toán khác** chứ không chép dạng MC.
+   (`_khoa_mo_ta` trong question_selector_service). Câu MC đã ra thì bộ chọn
+   tránh câu SA cùng "Dang" (và ngược lại); hết dạng khác mới lấy lại.
+
+   **Quy ước của cô Lan (14/10/2026): mỗi dạng của một ý (đơn vị kiến thức)
+   có CẢ bản MC và bản SA cùng kiểu bài toán, và CÙNG CHỮ CÁI**: `NB037_MC_A`
+   đi với `NB037_SA_A`, `MC_C` với `SA_C`... (trừ khi bản kia vô lý, không làm
+   được). Hai bản chép nguyên một dòng chữ "Dang" trong Mapping để bộ chọn nhận
+   ra là cùng dạng: chọn đơn vị 037 thì dạng A chỉ ra MỘT lần dù là MC hay SA;
+   hết dạng khác mới chọn lại. Dạng mới viết cả MC lẫn SA trong cùng lần nhận
+   bài. Các đơn vị cũ chưa đúng quy ước (chữ cái MC và SA lệch nhau) sẽ sắp lại
+   dần khi cô duyệt, vì ID đã phát hành chỉ đổi khi cô đồng ý (xem 04).
 
 6. **Ma trận cụ thể theo bài** (trang Ra đề giáo viên, 14/10/2026, xem 16_CHANGELOG.md):
    số câu "có sẵn" của mỗi ô (bài x MC/SA x NB/TH/VD; Đúng/Sai và Tự luận theo chương) là số

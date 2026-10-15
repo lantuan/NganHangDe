@@ -35,17 +35,17 @@ GOC = Path(__file__).resolve().parents[1]
 CHO_PHEP_NHIEU_HAM = {
     # Vang trang cua nguoi linh - bai tho Dong chi (co Lan 13/10/2026): _01 duong kinh Mat Trang, _02 cay co thu (cung dang tam giac: dinh li sin / tam giac can)
     "L10_C3_B6_VD036_MC_W",
-    "L10_C3_B6_VD036_SA_Y",
+    "L10_C3_B6_VD036_SA_W",
     "L10_C3_B6_VD036_TL_O",
     # Cong Troi + cong vien Le Thi Rieng (co Lan 13/10/2026): cung dang dien tich vung dat tu giac (Heron hai lan); _01 Cong Troi, _02 cong vien, _03 khu vuc ranh mo
     "L10_C3_B6_VD036_MC_J",
-    "L10_C3_B6_VD036_SA_L",
+    "L10_C3_B6_VD036_SA_J",
     "L10_C3_B6_VD036_TL_I",
     # bai toan Truong Son (co Lan 13/10/2026): 5 boi canh = 5 bien the cung dang (tram bom / ban do dich vi tri / phuong vi / ong vong / rung chay)
     "L10_C3_B6_VD036_MC_U",   # hoi nhu y a) VD cua 5 boi canh
     "L10_C3_B6_VD036_MC_V",   # hoi nhu y b) VDC cua 5 boi canh
-    "L10_C3_B6_VD036_SA_W",   # nhu MC_U (tra loi ngan)
-    "L10_C3_B6_VD036_SA_X",   # nhu MC_V (tra loi ngan)
+    "L10_C3_B6_VD036_SA_U",   # nhu MC_U (tra loi ngan)
+    "L10_C3_B6_VD036_SA_V",   # nhu MC_V (tra loi ngan)
     "L10_C3_B6_VD036_TL_N",   # tu luan a) VD b) VDC cua 5 boi canh
     "L10_C1_B1_NB010_MC_A",   # ca hai deu: phat bieu menh de dao
     "L10_C1_B1_NB015_MC_A",   # ca hai deu: dieu kien can va du
@@ -58,10 +58,15 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_TF_A",            # day so n / menh de voi moi x, x^2 + 2px + q > 0
     # menh de chua bien 4 muc (co Lan 04/10/2026):
     "L10_C1_B1_TH003_MC_D",   # chon x lam menh de dung/sai: x^2, |x|, ... / sin x, cos x, tan x
+    # ban tra loi ngan SA bo sung 15/10/2026 (co Lan): cung dang voi MC cung chu, cac ham chi khac cach sinh so/boi canh
+    "L10_C1_B1_TH003_SA_D",   # nhu TH003_MC_D: dem so x lam menh de dung/sai: x^2, |x|, ... / sin x, cos x, tan x
+    "L10_C1_B1_VD014_SA_D",   # nhu VD014_MC_D: dem so m de menh de keo theo chua forall dung (so thuc / chia het)
+    "L10_C1_B2_NB017_SA_H",   # nhu NB017_MC_H: dem so tap rong trong bon tap (tinh chat dac trung / mo ta bang loi)
+    "L10_C1_B2_TH018_SA_B",   # nhu TH018_MC_B: hoi so phan tu cua ket qua phep toan tap hop (liet ke / phan bu / xac dinh lai tap)
     "L10_C1_B1_VD014_MC_F",   # dem k: |px+q| = mk+c co nghiem / hai nghiem / vo nghiem
-    "L10_C1_B1_VD014_SA_D",   # nhu tren (tra loi ngan)
+    "L10_C1_B1_VD014_SA_F",   # nhu tren (tra loi ngan)
     "L10_C1_B1_VD014_MC_G",   # dem k: x^2 + bx + k = 0 co nghiem / vo nghiem (Delta)
-    "L10_C1_B1_VD014_SA_E",   # nhu tren (tra loi ngan)
+    "L10_C1_B1_VD014_SA_G",   # nhu tren (tra loi ngan)
     # tu giao an Bai 2 (Tap hop):
     "L10_C1_B2_TH018_MC_B",   # phep toan liet ke / M nhieu phan tu nhat, M con A va M con B
     "L10_C1_B2_VD021_SA_A",   # tham so de hop, giao thoa dieu kien / dem m de A giao B = A
@@ -137,7 +142,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_NB029_MC_H",   # dang thuc dung/sai cua mot goc / gia tri nao bang so cho truoc
     "L10_C3_B5_NB029_SA_B",   # biet goc tinh toa do / biet toa do tim goc
     "L10_C3_B5_TH030_MC_D",   # sin + cos -> sin.cos / sin.cos -> (sin +- cos)^2, sin^4 + cos^4
-    "L10_C3_B5_TH030_SA_M",   # sin.cos = p (thap phan) -> (sin+cos)^2 / (sin-cos)^2 / sin^4 + cos^4 (cung dang, doi dai luong hoi)
+    "L10_C3_B5_TH030_SA_F",   # sin.cos = p (thap phan) -> (sin+cos)^2 / (sin-cos)^2 / sin^4 + cos^4 (cung dang, doi dai luong hoi)
     "L10_C3_B5_TH030_SA_B",   # cos -> dien tich AOM / dien tich AOM -> cos
     "L10_C3_B5_TH031_MC_C",   # tich sin cos goc dac biet / goc le phai dung phu-bu
     "L10_C3_B5_TH031_SA_C",   # cho alpha + beta / trong tam giac
@@ -147,15 +152,15 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_TH031_MC_G",   # cho alpha tim 180 - alpha / cho 180 - alpha tim alpha
     "L10_C3_B5_TH031_MC_H",   # cho alpha tim 90 - alpha / nguoc lai
     "L10_C3_B5_TH031_MC_I",   # hinh goc bet / hinh goc vuong
-    "L10_C3_B5_TH031_SA_D",   # goc bu so thap phan: xuoi / nguoc
-    "L10_C3_B5_TH031_SA_E",   # goc phu so thap phan: xuoi / nguoc
-    "L10_C3_B5_TH031_SA_F",   # hinh goc bet / goc vuong, so thap phan
+    "L10_C3_B5_TH031_SA_G",   # goc bu so thap phan: xuoi / nguoc
+    "L10_C3_B5_TH031_SA_H",   # goc phu so thap phan: xuoi / nguoc
+    "L10_C3_B5_TH031_SA_I",   # hinh goc bet / goc vuong, so thap phan
     "L10_C3_TH031_TH033_TL_A",   # tam giac sin(A + B) -> R / tam giac vuong -> canh
     "L10_C3_TF_F",            # goc tu-nhon (dau) / so do goc (tinh gia tri)
     "L10_C1_B2_VD020_TL_A",   # it nhat mot / khong thuoc nao  -  biet so khong thuoc, tinh ca hai, chi A (kho boi canh)
     # VD cua bai 1 chuong 1 (chi co mot don vi VD014), 30/09/2026:
     "L10_C1_B1_VD014_SA_B",   # dem so menh de dung / dem n lam keo theo sai
-    "L10_C1_B2_NB017_MC_G",   # tinh chat -> liet ke / liet ke -> tinh chat / a thuoc A khong
+    "L10_C1_B2_NB017_MC_A",   # tinh chat -> liet ke / liet ke -> tinh chat / a thuoc A khong
     "L10_C1_B2_NB017_SA_A",   # dem so phan tu / tong cac phan tu / {f(k)} va phuong trinh tich bac hai
     "L10_C1_B2_NB017_MC_H",   # tap rong cho boi tinh chat / mo ta bang loi
     "L10_C1_B2_NB017_MC_J",   # dem tap con / dem tap X thoa A con X con B
@@ -173,7 +178,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH034_MC_F",   # hai canh + goc xen / ba canh
     "L10_C3_B6_VD036_SA_C",   # biet thoi gian tinh khoang cach / nguoc lai
     "L10_C3_B6_VD036_SA_D",   # hai dang / cay (AH, HB) / ang-ten tren noc nha
-    "L10_C3_B6_VD036_SA_E",   # quang duong con lai / dien tich tu giac
+    "L10_C3_B6_VD036_SA_X",   # quang duong con lai / dien tich tu giac
     "L10_C3_TF_G",            # cho doan len doc / cho do cao doc
     "L10_C3_TF_H",            # BC = CD, hai goc / goc A va bon canh
     # tu giao an Bai 6:
@@ -191,7 +196,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH033_TL_A",   # cho A, B / cho B, C (tu tinh A) roi dinh li sin
     "L10_C1_B1_TH014_MC_D",   # _01 menh de va menh de dao, _02 menh de tuong duong
     "L10_C1_B1_TH014_MC_G",   # _01 cho san dung/sai, _02 menh de cu the
-    "L10_C1_B1_TH014_SA_C",   # _01 cho san dung/sai, _02 menh de cu the
+    "L10_C1_B1_TH014_SA_G",   # _01 cho san dung/sai, _02 menh de cu the
     "L10_C1_B1_TH014_MC_C",   # chia het: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_E",   # tu giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_H",   # tam giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
@@ -201,7 +206,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH032_MC_F",   # cong thuc trung tuyen: chon dung / chon sai
     "L10_C3_B6_TH034_MC_G",   # cong thuc R, r, Heron: chon dung / chon sai
     "L10_C3_B6_TH035_MC_D",   # tam giac nho: trung tuyen / phan giac
-    "L10_C3_B6_TH035_SA_C",   # tam giac nho: trung tuyen / phan giac
+    "L10_C3_B6_TH035_SA_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B5_VD030_MC_A",   # luyen tap them: bieu thuc dong bac, _01 cho tan, _02 cho cot
     "L10_C3_B5_VD030_MC_B",   # luyen tap them: _01 tan +- cot -> tan^2 + cot^2, _02 hoi nguoc
     "L10_C3_B5_VD031_MC_A",   # luyen tap them: _01 tich tan ghep phu, _02 tong cos ghep bu
@@ -223,42 +228,42 @@ CHO_PHEP_NHIEU_HAM = {
     # MC/SA/TL giai tam giac chuong 3 (co Lan 10/10/2026): moi ID = mot cach cho, cac bien the _01.._03 khac cach cho/cach hoi (cos/sin/tan, ...)
     "L10_C3_B5_NB029_MC_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B5_TH031_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B5_TH031_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_SA_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B5_TH031_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B5_TH031_SA_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH031_SA_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B5_TH030_MC_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B5_TH030_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B5_TH030_MC_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B5_TH030_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B5_TH030_SA_I",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH032_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH032_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_MC_M",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH032_SA_I",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_M",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_TL_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_MC_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH032_SA_J",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH032_MC_O",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH032_SA_K",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH032_SA_O",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH033_MC_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH033_SA_E",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH033_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH033_MC_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH033_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH033_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH033_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_MC_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH034_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_K",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_MC_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH034_SA_G",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_L",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_MC_M",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH034_SA_H",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_M",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_TL_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_MC_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH034_SA_I",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH034_SA_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_MC_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_TL_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
@@ -266,39 +271,42 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH035_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_TL_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_MC_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH035_SA_E",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_D",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_C",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_D",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_D",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_E",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_MC_G",           # 2 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_VD032_SA_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_VD032_SA_G",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_VD032_TL_F",           # 2 bien the: cung dang, khac cach cho / cach hoi
     # Bai 5 (goc alpha): tu MOT gia tri luong giac tim MOT gia tri khac (co Lan 11/10/2026): moi ID = cho sin / cos / tan / cot, 3 bien the = 3 gia tri can tim
     "L10_C3_B5_TH030_MC_J",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_MC_K",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_MC_L",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_MC_M",           # 3 bien the: cung dang, khac cach hoi
-    "L10_C3_B5_TH030_SA_H",           # 3 bien the: cung dang, khac cach hoi
-    "L10_C3_B5_TH030_SA_I",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_SA_J",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_SA_K",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_L",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C3_B5_TH030_SA_M",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_TL_B",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_TL_C",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_TL_D",           # 3 bien the: cung dang, khac cach hoi
     "L10_C3_B5_TH030_TL_E",           # 3 bien the: cung dang, khac cach hoi
+    "L10_C1_B1_NB007_MC_A",           # 15/10/2026 co Lan: gop A (toan) va B (thuc te) thanh 2 bien the 01, 02
+    "L10_C1_B1_NB007_MC_C",           # 15/10/2026 co Lan: gop C (toan) va D (thuc te) thanh 2 bien the 01, 02
+    "L10_C1_B1_NB007_SA_C",           # 15/10/2026: ban tra loi ngan cua MC_C, cung 2 bien the
 }
 
 

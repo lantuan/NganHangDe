@@ -1,7 +1,7 @@
 """Cong vien Le Thi Rieng (co Lan 13/10/2026): kiem lai DOC LAP.
 
 Hai bien the _02 (cong vien, dap so ha) va _03 (khu vuc ranh mo ngau nhien, dap so m2) cua CUNG dang voi Cong Troi:
-cac ID MC_J / SA_L / TL_I. Moi cau: doc 5 so do trong de, tu tinh lai dien tich bang Heron (viet rieng, khong goi ham sinh),
+cac ID MC_J / SA_J / TL_I. Moi cau: doc 5 so do trong de, tu tinh lai dien tich bang Heron (viet rieng, khong goi ham sinh),
 so voi dap so in ra; dien tich phai sat so that (lech <= 3%); de KHONG lo dien tich cua chinh doi tuong duoc hoi;
 MC co 4 phuong an khac nhau; SA <= 4 ky tu; hinh ghi don vi m (Cong Troi _01 van ghi km).
 """
@@ -88,7 +88,7 @@ def _kiem(ten, S, chuoi):
         assert int(chuoi) == _lt(S), (S, chuoi)
 
 
-@pytest.mark.parametrize("bt,ham", [(2, "SA_L"), (3, "SA_L")])
+@pytest.mark.parametrize("bt,ham", [(2, "SA_J"), (3, "SA_J")])
 def test_sa_khop_doc_lap(bt, ham):
     f = getattr(M, "L10_C3_B6_VD036_%s_%02d" % (ham, bt))
     thay = set()
@@ -155,7 +155,7 @@ def test_hinh_don_vi():
 
 def test_mapping_cung_dang():
     rows = {r["id"]: r for r in json.load(open(GOC / "data" / "mapping" / "toan10" / "L10_C3.json", encoding="utf-8"))}
-    ids = ["L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_L", "L10_C3_B6_VD036_TL_I"]
+    ids = ["L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_J", "L10_C3_B6_VD036_TL_I"]
     dang = {rows[i]["Dang"] for i in ids}
     assert len(dang) == 1 and "Lê Thị Riêng" in dang.pop()
     assert all(rows[i]["boi_canh"] == "cong_troi" for i in ids)
@@ -164,6 +164,6 @@ def test_mapping_cung_dang():
 
 def test_dan_co_nguon_va_khong_loi_thoai():
     random.seed(0)
-    de = _de(M.L10_C3_B6_VD036_SA_L_03(1))
+    de = _de(M.L10_C3_B6_VD036_SA_J_03(1))
     for must in ("Tết Mậu Thân", "$731$", "$11/10/2026$", "$14/10/2026$", "giả định", "ông cha"):
         assert must in de, must

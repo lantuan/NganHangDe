@@ -1798,7 +1798,7 @@ def _bpt_tex(a, b, c):
 # BÀI 3 - bất phương trình bậc nhất hai ẩn
 # ---------------------------------------------------------------------
 
-def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
+def L10_C2_B3_NB023_SA_B_01(socau, dang=2):
     r"""Trả lời ngắn: tính giá trị $F\left(x; y\right) = ax + by$ (đúng DẠNG này, không có hằng số) tại một nghiệm nguyên $M$
     của bất phương trình $ax + by \;\square\; c$ (cùng $a$, $b$ với vế trái).
 
@@ -4909,3 +4909,107 @@ def L10_C2_B4_VD028_TL_F_01(socau, dong=1):
 def L10_C2_B4_VD028_TL_G_01(socau, dong=1):
     """Tự luận 2 ý có tham số: a) S theo m, b) cho S tìm m."""
     return _dt_tl_vdc(socau, dong)
+
+
+# =====================================================================
+# 15/10/2026 - BO SUNG SA / MC cho Chuong 2 (co Lan duyet cach lam: ghep cac dang
+# cung dang, dang con thieu thi viet bo sung). Cung CHU CAI = cung DANG.
+# =====================================================================
+
+def L10_C2_B3_NB023_MC_B_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với NB023_SA_B_01: tính $F\left(x; y\right) = ax + by$ tại một nghiệm nguyên $M$."""
+    return L10_C2_B3_NB023_SA_B_01(socau, dang)
+
+
+def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn: cho một bất phương trình bậc nhất hai ẩn và $5$ cặp số, ĐẾM số cặp số là nghiệm.
+    (cùng dạng với NB023_MC_A: kiểm tra một cặp số có phải nghiệm của bất phương trình không.)
+    Số cặp là nghiệm chọn trước trong $\{1; 2; 3; 4\}$; cặp nằm trên bờ có thể xuất hiện (khi đó dấu $\le, \ge$ hay $<, >$
+    quyết định có là nghiệm hay không)."""
+    thoa = {r"\le": lambda v, c: v <= c, r"\ge": lambda v, c: v >= c, "<": lambda v, c: v < c, ">": lambda v, c: v > c}
+    luoi = [(x0, y0) for x0 in range(-4, 5) for y0 in range(-4, 5)]
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 5000:
+        lan += 1
+        a, b = _rd.choice([-4, -3, -2, -1, 1, 2, 3, 4]), _rd.choice([-4, -3, -2, -1, 1, 2, 3, 4])
+        c = _rd.randint(-8, 8)
+        dau = _rd.choice(_DAU_BPT)
+        k = _rd.randint(1, 4)
+        nghiem = [p for p in luoi if thoa[dau](a * p[0] + b * p[1], c)]
+        khong = [p for p in luoi if not thoa[dau](a * p[0] + b * p[1], c)]
+        if len(nghiem) < k or len(khong) < 5 - k:
+            continue
+        diem = _rd.sample(nghiem, k) + _rd.sample(khong, 5 - k)
+        _rd.shuffle(diem)
+        v = (a, b, c, dau, tuple(diem))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for a, b, c, dau, diem in gt:
+        k = sum(1 for p in diem if thoa[dau](a * p[0] + b * p[1], c))
+        ds_diem = ", ".join(r"$\left(%d; %d\right)$" % p for p in diem)
+        debai = (r"Consider the inequality $%s$. Among the pairs of numbers %s, how many pairs are solutions of the given inequality?"
+                 % (_bpt_bac_nhat(a, b, c, dau), ds_diem))
+        dong = []
+        for p in diem:
+            v = a * p[0] + b * p[1]
+            dong.append(r"$\left(%d; %d\right)$: the left side equals $%d$, and $%d %s %d$ is %s"
+                        % (p[0], p[1], v, v, dau, c, "true" if thoa[dau](v, c) else "false"))
+        la_nghiem = ", ".join(r"$\left(%d; %d\right)$" % p for p in diem if thoa[dau](a * p[0] + b * p[1], c))
+        giai = (r"Substitute each pair of numbers into the left side of the inequality:\\ " + r"\\ ".join(dong)
+                + r".\\ The pairs that are solutions: %s. Hence the number of pairs that are solutions is $%d$." % (la_nghiem, k))
+        nhieu = [str(j) for j in range(0, 6) if j != k]
+        cauTN += MC_SA_answer_const(debai, str(k), nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn: miền nghiệm của hệ (hình chữ nhật cắt bởi một nửa mặt phẳng) là đa giác có bao nhiêu ĐỈNH (hoặc CẠNH).
+    (cùng dạng với TH027_MC_B: miền nghiệm của hệ là đa giác gì: tam giác, tứ giác, ngũ giác.)
+    Số đỉnh = số đỉnh hình chữ nhật thoả bất phương trình thứ năm + $2$ giao điểm; chọn trước đáp số $3$, $4$ hoặc $5$."""
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 20000:
+        lan += 1
+        dich = _rd.choice([3, 4, 5])
+        fx = _rd.randint(-4, 0)
+        gx = fx + _rd.randint(3, 7)
+        hx = _rd.randint(-4, 0)
+        kx = hx + _rd.randint(3, 7)
+        a, b = _rd.choice([-4, -3, -2, -1, 1, 2, 3, 4]), _rd.choice([-4, -3, -2, -1, 1, 2, 3, 4])
+        c = _rd.randint(-10, 10)
+        dau = _rd.choice([r"\le", r"\ge"])
+        gtri = [a * X + b * Y - c for X, Y in ((fx, kx), (fx, hx), (gx, hx), (gx, kx))]
+        if 0 in gtri or all(g < 0 for g in gtri) or all(g > 0 for g in gtri):
+            continue
+        trong = sum(1 for g in gtri if (g < 0 if dau == r"\le" else g > 0))
+        if trong + 2 != dich:
+            continue
+        v = (fx, gx, hx, kx, a, b, c, dau, _rd.choice(["vertices", "sides"]))
+        if v not in gt:
+            gt.append(v)
+
+    cauTN = ""
+    for fx, gx, hx, kx, a, b, c, dau, hoi in gt:
+        dinh = [("A", fx, kx), ("B", fx, hx), ("C", gx, hx), ("D", gx, kx)]
+        trong = [t for t, X, Y in dinh if ((a * X + b * Y - c) < 0 if dau == r"\le" else (a * X + b * Y - c) > 0)]
+        n = len(trong) + 2
+        he = (r"$\heva{& x \ge %d \\ & x \le %d \\ & y \ge %d \\ & y \le %d \\ & %s}$"
+              % (fx, gx, hx, kx, _bpt_bac_nhat(a, b, c, dau)))
+        debai = (r"Consider the system of inequalities %s. The solution region of the system is a polygon. How many %s does this polygon have?" % (he, hoi))
+        dong = []
+        for t, X, Y in dinh:
+            v = a * X + b * Y
+            dong.append(r"$%s\left(%d; %d\right)$: $%d %s %d$ %s" % (t, X, Y, v, dau, c, "true" if ((v - c) < 0 if dau == r"\le" else (v - c) > 0) else "false"))
+        giai = (r"The first four inequalities define the rectangle $ABCD$ with $A\left(%d; %d\right)$, $B\left(%d; %d\right)$, "
+                r"$C\left(%d; %d\right)$, $D\left(%d; %d\right)$.\\ "
+                r"Substitute the coordinates of each vertex into the fifth inequality:\\ " % (fx, kx, fx, hx, gx, hx, gx, kx)
+                + r"\\ ".join(dong)
+                + r".\\ The number of vertices of the rectangle that satisfy it is $%d$ (%s). The line $%s = %d$ meets two sides of the rectangle "
+                  r"at two points that are not vertices, so the solution region is the polygon formed by those $%d$ vertices and the two intersection points, "
+                  r"i.e. it has $%d$ vertices and $%d$ sides." % (len(trong), ", ".join(trong), _bt((a, "x"), (b, "y")), c, n, n, n))
+        nhieu = [str(j) for j in (3, 4, 5, 6, 7) if j != n]
+        cauTN += MC_SA_answer_const(debai, str(n), nhieu, giai, 0, 0, dang)
+    return cauTN

@@ -3166,9 +3166,46 @@ def L10_C4_B7_NB037_MC_B_01(socau, dang=1):
 
 
 def L10_C4_B7_NB037_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_A (cùng kiểu, cùng Dang): cho hình, xét bốn cặp vectơ có điểm
+    mút thuộc hình, hỏi có bao nhiêu cặp cùng hướng (hoặc ngược hướng). Quan hệ do Python tính từ toạ độ.
+
+    CLAUDE THEM 14/10/2026 theo quy uoc cua co Lan (MC_x va SA_x cung kieu, cung chu cai). Co Lan duyet.
+    """
+    cau = ""
+    for _ in range(socau):
+        H = _c4_chon_hinh("nb037_a")
+        pb = _c4_pb_huong(H)
+        cap = {}  # khoá = tập hai vectơ -> (u, w, cùng phương, cùng hướng)
+        for p in pb:
+            cap.setdefault(frozenset([p[2], p[3]]), (p[2], p[3], p[4], p[5]))
+        ds = list(cap.values())
+        hoi = random.choice(["cùng hướng", "ngược hướng"])
+        kt = (lambda c: c[3]) if hoi == "cùng hướng" else (lambda c: c[2] and not c[3])
+        cp = [c for c in ds if c[2]]
+        kcp = [c for c in ds if not c[2]]
+        for _lan in range(200):
+            # ba cặp cùng phương (dễ nhầm hướng) và một cặp không cùng phương; đáp số từ 1 đến 3
+            chon = random.sample(cp, 3) + random.sample(kcp, 1)
+            random.shuffle(chon)
+            if 1 <= sum(1 for c in chon if kt(c)) <= 3:
+                break
+        dap = sum(1 for c in chon if kt(c))
+        dong = r"\\ ".join(r"%d) $%s$ và $%s$" % (i + 1, _vt(*c[0]), _vt(*c[1])) for i, c in enumerate(chon))
+        de = H["mo"] + r" Cho bốn cặp vectơ: \\ " + dong + r"\\ Có bao nhiêu cặp vectơ %s?" % hoi
+        ly = []
+        for i, c in enumerate(chon):
+            mo_ta = ("cùng hướng" if c[3] else "ngược hướng") if c[2] else "không cùng phương (giá cắt nhau)"
+            ly.append(r"Cặp %d: $%s$ và $%s$ %s." % (i + 1, _vt(*c[0]), _vt(*c[1]), mo_ta))
+        ly = r"\\ ".join(ly) + r"\\ Vậy có $%d$ cặp vectơ %s." % (dap, hoi)
+        ung = [4 - dap, dap + 1, dap - 1, 3, 2]
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in _c4_nhieu_so(dap, ung)], ly, _c4_tikz(H), 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_B_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_B (cùng Dang).
 
-    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    CLAUDE THEM 01/10/2026. DOI ID 14/10/2026: NB037_SA_A -> NB037_SA_B (cung dang voi MC_B, cung chu cai); co Lan duyet.
     """
     cau = ""
     for _ in range(socau):
@@ -3210,10 +3247,10 @@ def L10_C4_B7_NB037_MC_C_01(socau, dang=1):
     return cau
 
 
-def L10_C4_B7_NB037_SA_B_01(socau, dang=2):
+def L10_C4_B7_NB037_SA_C_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_C (cùng Dang).
 
-    CLAUDE THEM 01/10/2026. Co Lan duyet lai.
+    CLAUDE THEM 01/10/2026. DOI ID 14/10/2026: NB037_SA_B -> NB037_SA_C (cung dang voi MC_C, cung chu cai); co Lan duyet.
     """
     cau = ""
     for _ in range(socau):
@@ -3275,6 +3312,33 @@ def L10_C4_B7_NB037_MC_D_01(socau, dang=1):
     cau = ""
     for _ in range(socau):
         cau += _c4_mc_kho(_C4_KN_NB037, "c4_kn_nb037", dang, "", "")
+    return cau
+
+
+def L10_C4_B7_NB037_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB037_MC_D (cùng kiểu, cùng Dang): cho bốn khẳng định về khái niệm vectơ,
+    giá, độ dài, cùng phương, cùng hướng, ngược hướng (lấy từ kho 19 khẳng định của MC_D); hỏi có bao nhiêu khẳng
+    định đúng. Kho lấy xoay vòng riêng.
+
+    CLAUDE THEM 14/10/2026 theo quy uoc cua co Lan (MC_x va SA_x cung kieu, cung chu cai). Co Lan duyet.
+    """
+    cau = ""
+    for _ in range(socau):
+        ten = "c4_kn_nb037_sa"
+        so_dung = random.choice([1, 2, 2, 3])
+        idx = _c4_uu_tien(ten, list(range(len(_C4_KN_NB037))))
+        d = [i for i in idx if _C4_KN_NB037[i][1]][:so_dung]
+        sai = [i for i in idx if not _C4_KN_NB037[i][1]][:4 - so_dung]
+        chon = d + sai
+        _c4_danh_dau(ten, chon)
+        random.shuffle(chon)
+        dap = so_dung
+        de = (r"Cho các khẳng định sau: \\ " + r"\\ ".join(r"%d) %s;" % (k + 1, _C4_KN_NB037[i][0]) for k, i in enumerate(chon))
+              + r"\\ Có bao nhiêu khẳng định đúng?")
+        ly = r"\\ ".join(r"Khẳng định %d %s vì %s." % (k + 1, "đúng" if _C4_KN_NB037[i][1] else "sai", _C4_KN_NB037[i][2])
+                           for k, i in enumerate(chon)) + r"\\ Vậy có $%d$ khẳng định đúng." % dap
+        ung = [4 - dap, dap + 1, dap - 1, 0, 4]
+        cau += MC_SA_answer_const(de, str(dap), [str(x) for x in _c4_nhieu_so(dap, ung)], ly, 0, 0, dang)
     return cau
 
 
@@ -3497,7 +3561,7 @@ def L10_C4_B7_NB038_MC_B_01(socau, dang=1):
     return cau
 
 
-def L10_C4_B7_NB038_SA_A_01(socau, dang=2):
+def L10_C4_B7_NB038_SA_B_01(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của NB038_MC_B (cùng Dang).
 
     CLAUDE THEM 01/10/2026. Co Lan duyet lai.

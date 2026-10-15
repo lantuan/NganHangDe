@@ -12,6 +12,13 @@
     "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không"
   },
   {
+    "id": "L10_C2_B3_NB023_SA_A",
+    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB023_MC_A (cung Dang): dem so cap so la nghiem trong 5 cap so; co Lan duyet lai"
+  },
+  {
     "id": "L10_C2_B3_NB025_MC_A",
     "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -67,7 +74,8 @@
     "id": "L10_C2_B4_VD028_SA_A",
     "content": "Vận dụng được kiến thức về bất phương trình, hệ bất phương trình bậc nhất hai ẩn vào giải quyết bài toán thực tiễn.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Giá trị lớn nhất của F trên miền nghiệm"
+    "Dang": "Tìm giá trị lớn nhất, nhỏ nhất của F = ax + by trên miền đa giác",
+    "ghi_chu": "15/10/2026 co Lan duyet: thong nhat Dang voi VD028_MC_A (cung dang: tim gia tri lon nhat/nho nhat cua F = ax + by tren mien da giac)"
   },
   {
     "id": "L10_C2_B4_VD028_TL_A",
@@ -104,11 +112,25 @@
     "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
   },
   {
-    "id": "L10_C2_B3_NB023_SA_A",
+    "id": "L10_C2_B4_TH027_SA_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Miền nghiệm của hệ là đa giác gì (tam giác, tứ giác, ngũ giác...)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH027_MC_B (cung Dang): mien nghiem la da giac co bao nhieu dinh (canh); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C2_B3_NB023_SA_B",
     "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
     "Loai": "Trả lời ngắn",
     "Dang": "Cho bất phương trình ax + by ≤ c (hoặc ≥, <, >) và một nghiệm nguyên M thuộc miền nghiệm: tính giá trị biểu thức F(x; y) = ax + by tại M",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta; 12/10/2026 co Lan: F chi co dang ax + by, M phai thuoc mien nghiem (chon ngau nhien nghiem nguyen)"
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta; 12/10/2026 co Lan: F chi co dang ax + by, M phai thuoc mien nghiem (chon ngau nhien nghiem nguyen); 15/10/2026: doi ten tu NB023_SA_A (dang khac MC_A) de chu A danh cho dang \"kiem tra cap so co phai nghiem\" cung voi MC_A"
+  },
+  {
+    "id": "L10_C2_B3_NB023_MC_B",
+    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cho bất phương trình ax + by ≤ c (hoặc ≥, <, >) và một nghiệm nguyên M thuộc miền nghiệm: tính giá trị biểu thức F(x; y) = ax + by tại M",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban trac nghiem cua NB023_SA_B (cung Dang): tinh F = ax + by tai nghiem nguyen M; co Lan duyet lai"
   },
   {
     "id": "L10_C2_B3_NB025_MC_B",

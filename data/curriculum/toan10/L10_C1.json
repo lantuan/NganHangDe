@@ -329,14 +329,14 @@
         "mapping_id": [
           "L10_C1_B2_VD019_MC_A",
           "L10_C1_B2_VD019_MC_B",
-          "L10_C1_B2_VD019_SA_A"
+          "L10_C1_B2_VD019_SA_B"
         ]
       },
       {
         "mo_ta": "Biểu đồ Ven ba tập hợp mức VDC: phép toán kết hợp như (A hợp B) giao C, (A hợp B) trừ C, A hợp (B giao C); ghi số phần tử từng vùng và tính n(...) (YCCĐ biểu đồ Ven TH019 chỉ ở mức TH)",
         "mapping_id": [
           "L10_C1_B2_VD019_MC_C",
-          "L10_C1_B2_VD019_SA_B"
+          "L10_C1_B2_VD019_SA_C"
         ]
       }
     ],

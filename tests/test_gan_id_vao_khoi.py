@@ -30,7 +30,7 @@ def _thu(gid, lop=10, chuong=3):
 
 
 def test_call_generator_ghi_dung_ten_ham():
-    for gid in ("L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_L", "L10_C3_B6_VD036_TL_I"):
+    for gid in ("L10_C3_B6_VD036_MC_J", "L10_C3_B6_VD036_SA_J", "L10_C3_B6_VD036_TL_I"):
         ten, khoi = _thu(gid)
         assert ten.startswith(gid + "_")
         assert re.search(r"\\begin\{ex\}%%\[" + re.escape(ten) + r"\]\n", khoi), khoi[:80]
@@ -43,6 +43,6 @@ def test_id_di_theo_sang_te_phan_tu_luan_bt():
 
 
 def test_web_van_cat_duoc_de_bai_khi_co_id():
-    ten, khoi = _thu("L10_C3_B6_VD036_SA_L")
+    ten, khoi = _thu("L10_C3_B6_VD036_SA_J")
     kq = trich_de_bai(khoi)
     assert "%%[" not in kq["de_bai"] and ten not in kq["de_bai"]

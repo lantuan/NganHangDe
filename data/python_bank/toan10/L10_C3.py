@@ -3611,7 +3611,7 @@ def L10_C3_B6_VD036_MC_K_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_M_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_K_01(socau, dang=2):
     r"""Đường chân trời (mức VD): biết $R = 6371\,\text{km}$ và $h$, tính khoảng cách $MT$
     từ người quan sát tới đường chân trời (định lí Pythagore trong tam giác $OTM$ vuông tại $T$).
 
@@ -3677,7 +3677,7 @@ def L10_C3_B6_VD036_MC_L_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_N_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_L_01(socau, dang=2):
     r"""Đường chân trời (mức VDC): biết $h$ và góc hạ $\theta$, tính bán kính $R$ của Trái Đất.
 
     $\theta$ được tính từ bán kính thật $6371\,\text{km}$ rồi làm tròn hai chữ số thập phân
@@ -6691,7 +6691,7 @@ def L10_C3_B6_TH032_MC_G_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH032_SA_D_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_G_01(socau, dang=2):
     r"""Trả lời ngắn - hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh
     thứ ba (đáp số nguyên).
 
@@ -6787,7 +6787,7 @@ def L10_C3_B6_TH033_MC_D_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH033_SA_C_01(socau, dang=2):
+def L10_C3_B6_TH033_SA_D_01(socau, dang=2):
     r"""Trả lời ngắn - hỏi ngược định lí sin: biết $BC$ và $R$, góc $A$ nhọn hoặc tù cho trước,
     tính số đo góc $A$ (độ).
 
@@ -6855,7 +6855,7 @@ def L10_C3_B6_TH035_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH035_SA_D_01(socau, dang=2):
+def L10_C3_B6_TH035_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - giải tam giác biết hai cạnh và một góc không xen giữa (định lí côsin ra
     phương trình bậc hai có nghiệm nguyên).
 
@@ -6969,7 +6969,7 @@ def L10_C3_B6_TH033_MC_E_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH033_SA_D_01(socau, dang=2):
+def L10_C3_B6_TH033_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - tỉ lệ sin cho tỉ lệ cạnh: biết hệ thức giữa $\sin A$, $\sin B$, $\sin C$
     và một cạnh, tính chu vi tam giác.
 
@@ -7142,7 +7142,7 @@ def L10_C3_B6_TH034_MC_J_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH034_SA_E_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_J_01(socau, dang=2):
     r"""Trả lời ngắn - diện tích hình bình hành, hình thoi theo hai cạnh và góc xen giữa.
 
     CLAUDE THEM 01/10/2026 - theo phan III tai lieu C3-B2. Co Lan duyet lai.
@@ -7283,7 +7283,7 @@ def L10_C3_B6_VD036_MC_O_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_P_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_N_01(socau, dang=2):
     r"""Trả lời ngắn - ngọn núi quan sát từ chân và nóc toà nhà (mức VD): tính $AC$ (m, hàng đơn vị).
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai.
@@ -7298,7 +7298,7 @@ def L10_C3_B6_VD036_SA_P_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_VD036_SA_Q_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_O_01(socau, dang=2):
     r"""Trả lời ngắn - ngọn núi quan sát từ chân và nóc toà nhà (mức VDC): chiều cao ngọn núi.
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai (muc_do_dang VDC).
@@ -7510,7 +7510,7 @@ def L10_C3_B6_VD036_MC_Q_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_R_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_P_01(socau, dang=2):
     r"""Trả lời ngắn - đường tròn qua ba điểm (mức VD): đĩa cổ - góc lớn nhất (độ), hoặc hồ nước - $BC$ (m).
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai.
@@ -7535,7 +7535,7 @@ def L10_C3_B6_VD036_SA_R_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_VD036_SA_S_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_Q_01(socau, dang=2):
     r"""Trả lời ngắn - đường tròn qua ba điểm (mức VDC): bán kính đĩa cổ (cm) hoặc đường kính hồ (m).
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai (muc_do_dang VDC).
@@ -7685,7 +7685,7 @@ def L10_C3_B6_VD036_MC_S_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_T_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_R_01(socau, dang=2):
     r"""Trả lời ngắn - cây bị gãy (mức VD): độ dài đoạn thân còn đứng $AC$.
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai.
@@ -7700,7 +7700,7 @@ def L10_C3_B6_VD036_SA_T_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_VD036_SA_U_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_S_01(socau, dang=2):
     r"""Trả lời ngắn - cây bị gãy (mức VDC): chiều cao cây trước khi gãy.
 
     CLAUDE THEM 01/10/2026 - theo tai lieu C3-B2. Co Lan duyet lai (muc_do_dang VDC).
@@ -7810,7 +7810,7 @@ def L10_C3_B6_VD036_MC_T_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_V_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_T_01(socau, dang=2):
     r"""Trả lời ngắn - cây cao nhìn từ một điểm trên cao (mức VDC): chiều cao cây.
 
     CLAUDE THEM 01/10/2026 - theo cau 64 tai lieu C3-B2. Co Lan duyet lai (muc_do_dang VDC).
@@ -10440,7 +10440,7 @@ def _bo_hai_ban(socau, dieu_kien):
     return gt
 
 
-def L10_C3_B6_VD036_SA_E_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_X_01(socau, dang=2):
     r"""Trả lời ngắn - hai bạn đi theo hai hướng tới cùng một đích: định lí
     côsin HAI LẦN (tính đường chéo, góc, rồi quãng đường còn lại) (có hình).
 
@@ -10471,7 +10471,7 @@ def L10_C3_B6_VD036_SA_E_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_VD036_SA_E_02(socau, dang=2):
+def L10_C3_B6_VD036_SA_X_02(socau, dang=2):
     r"""Trả lời ngắn - cùng hình vẽ của _01 nhưng hỏi DIỆN TÍCH tứ giác $PADB$
     (định lí côsin, tính góc, rồi hai công thức diện tích) (có hình).
 
@@ -11222,7 +11222,7 @@ def _nhieu_tp(dap):
                      buoc=lambda t: _tp(dap + Rational(t, 20)))
 
 
-def L10_C3_B5_TH031_SA_D_01(socau, dang=2):
+def L10_C3_B5_TH031_SA_G_01(socau, dang=2):
     r"""Trả lời ngắn - bản số thập phân của TH031_MC_G_01: biết $\cos\alpha = -0,35$
     (hoặc sin, tan, cot), tính giá trị lượng giác cùng tên của $180^{\circ} - \alpha$.
 
@@ -11245,7 +11245,7 @@ def L10_C3_B5_TH031_SA_D_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH031_SA_D_02(socau, dang=2):
+def L10_C3_B5_TH031_SA_G_02(socau, dang=2):
     r"""Trả lời ngắn - hỏi ngược: biết giá trị lượng giác của $180^{\circ} - \alpha$ (số
     thập phân), tính giá trị lượng giác cùng tên của $\alpha$.
 
@@ -11268,7 +11268,7 @@ def L10_C3_B5_TH031_SA_D_02(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH031_SA_E_01(socau, dang=2):
+def L10_C3_B5_TH031_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - bản số thập phân của TH031_MC_H_01: góc nhọn $\alpha$ có
     $\sin\alpha = 0,28$, tính $\cos\left(90^{\circ} - \alpha\right)$ (và các hàm khác).
 
@@ -11289,7 +11289,7 @@ def L10_C3_B5_TH031_SA_E_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH031_SA_E_02(socau, dang=2):
+def L10_C3_B5_TH031_SA_H_02(socau, dang=2):
     r"""Trả lời ngắn - hỏi ngược: biết giá trị lượng giác của $90^{\circ} - \alpha$
     ($\alpha$ nhọn, số thập phân), tính giá trị lượng giác của $\alpha$.
 
@@ -11311,7 +11311,7 @@ def L10_C3_B5_TH031_SA_E_02(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH031_SA_F_01(socau, dang=2):
+def L10_C3_B5_TH031_SA_I_01(socau, dang=2):
     r"""Trả lời ngắn có hình (như TH031_MC_I_01): góc bẹt $\widehat{AOB}$, tia $OC$;
     biết giá trị lượng giác (số thập phân) của $\alpha = \widehat{AOC}$, tính của
     $\beta = \widehat{BOC}$.
@@ -11336,7 +11336,7 @@ def L10_C3_B5_TH031_SA_F_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B5_TH031_SA_F_02(socau, dang=2):
+def L10_C3_B5_TH031_SA_I_02(socau, dang=2):
     r"""Trả lời ngắn có hình (như TH031_MC_I_02): góc vuông $\widehat{xOy}$, tia $Oz$
     nằm giữa; biết giá trị lượng giác của $\alpha = \widehat{xOz}$, tính của $\beta = \widehat{zOy}$.
 
@@ -11403,7 +11403,7 @@ def L10_C3_B5_TH031_MC_G_03(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH031_SA_D_03(socau, dang=2):
+def L10_C3_B5_TH031_SA_G_03(socau, dang=2):
     r"""Trả lời ngắn - biến thể trong tam giác của SA_D: biết giá trị lượng giác của
     $A + B$ (số thập phân), tính giá trị lượng giác cùng tên của $C$ (hoặc ngược lại).
 
@@ -11455,7 +11455,7 @@ def L10_C3_B5_TH031_MC_H_03(socau, dang=1):
     return cau
 
 
-def L10_C3_B5_TH031_SA_E_03(socau, dang=2):
+def L10_C3_B5_TH031_SA_H_03(socau, dang=2):
     r"""Trả lời ngắn - biến thể trong tam giác vuông của SA_E: tam giác $ABC$ vuông tại
     $A$ biết giá trị lượng giác (số thập phân) của $B$ hoặc $C$, tính của góc còn lại.
 
@@ -11715,7 +11715,7 @@ def L10_C3_B6_VD036_MC_E_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_G_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn - sườn đồi độ dốc $p\%$, cây mọc thẳng đứng: tính chiều cao của
     cây (làm tròn đến hàng đơn vị) - có hình.
 
@@ -11846,7 +11846,7 @@ def L10_C3_B6_VD036_MC_M_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_F_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_Y_01(socau, dang=2):
     r"""Trả lời ngắn - tàu chạy $d_1$ km về một phương rồi đổi sang hướng
     $X\,\theta^{\circ}\,Y$ chạy $d_2$ km: tính khoảng cách $AC$ (km, hàng đơn vị) - mức VD.
     Câu hỏi hướng (mức VDC) tách sang VD036_SA_O_01 (01/10/2026).
@@ -11864,7 +11864,7 @@ def L10_C3_B6_VD036_SA_F_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_VD036_SA_O_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_M_01(socau, dang=2):
     r"""Trả lời ngắn - tàu đổi hướng: tìm số đo $x$ trong hướng $X\,x^{\circ}\,Y$ từ $A$ tới $C$
     (côsin rồi sin) - mức VDC (muc_do_dang VDC ở mapping).
 
@@ -12005,7 +12005,7 @@ def L10_C3_B6_VD036_MC_F_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_H_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_F_01(socau, dang=2):
     r"""Trả lời ngắn - VẬN DỤNG CAO: khinh khí cầu nhìn từ hai điểm trên sườn đồi nghiêng;
     tính khoảng cách từ $P$ (hoặc $Q$) tới khinh khí cầu (có hình).
 
@@ -12238,7 +12238,7 @@ def L10_C3_B6_TH035_MC_D_02(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH035_SA_C_01(socau, dang=2):
+def L10_C3_B6_TH035_SA_D_01(socau, dang=2):
     r"""Trả lời ngắn - giải tam giác nhỏ với đường TRUNG TUYẾN (như TH035_MC_D_01).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
@@ -12250,7 +12250,7 @@ def L10_C3_B6_TH035_SA_C_01(socau, dang=2):
     return cau
 
 
-def L10_C3_B6_TH035_SA_C_02(socau, dang=2):
+def L10_C3_B6_TH035_SA_D_02(socau, dang=2):
     r"""Trả lời ngắn - giải tam giác nhỏ với đường PHÂN GIÁC (như TH035_MC_D_02).
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua TH035_SA_C. Co Lan duyet lai.
@@ -12315,7 +12315,7 @@ def L10_C3_B6_TH034_MC_H_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH034_SA_C_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - diện tích tam giác khi dữ kiện ứng đúng một công thức (như TH034_MC_H_01).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
@@ -12368,7 +12368,7 @@ def L10_C3_B6_TH034_MC_I_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_TH034_SA_D_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_I_01(socau, dang=2):
     r"""Trả lời ngắn - bán kính $r$ hoặc $R$ khi đã cho diện tích (như TH034_MC_I_01).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
@@ -12435,7 +12435,7 @@ def L10_C3_B6_VD036_MC_G_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_I_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_G_01(socau, dang=2):
     r"""Trả lời ngắn - VD: mảnh vườn tam giác biết ba cạnh, tính $r$, $R$ hoặc đường cao qua diện tích.
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Co Lan duyet lai.
@@ -12486,7 +12486,7 @@ def L10_C3_B6_VD036_MC_H_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_J_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_H_01(socau, dang=2):
     r"""Trả lời ngắn - VẬN DỤNG CAO (như VD036_MC_H_01).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan. Mapping danh dau VDC. Co Lan duyet lai.
@@ -12664,7 +12664,7 @@ def L10_C3_B6_VD036_MC_I_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_K_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_I_01(socau, dang=2):
     r"""Trả lời ngắn - VẬN DỤNG CAO: tháp trên đỉnh đồi, hai góc so với phương thẳng đứng; tính chiều cao
     ngọn đồi hoặc khoảng cách nằm ngang $AH$ (có hình).
 
@@ -12973,7 +12973,7 @@ def L10_C3_B6_VD036_MC_J_01(socau, dang=1):
     return cau
 
 
-def L10_C3_B6_VD036_SA_L_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_J_01(socau, dang=2):
     r"""Trả lời ngắn - ước lượng diện tích vùng đất tứ giác (Cổng Trời - xã Dân Hóa) bằng Heron hai lần.
 
     CLAUDE THEM 01/10/2026 - dang moi theo de giua ki I cua co Lan. Co Lan duyet lai.
@@ -13164,7 +13164,7 @@ def L10_C3_B6_VD036_MC_J_03(socau, dang=1):
     return _ltr_mc_sa(False, socau, 1)
 
 
-def L10_C3_B6_VD036_SA_L_02(socau, dang=2):
+def L10_C3_B6_VD036_SA_J_02(socau, dang=2):
     r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
@@ -13172,7 +13172,7 @@ def L10_C3_B6_VD036_SA_L_02(socau, dang=2):
     return _ltr_mc_sa(True, socau, 2)
 
 
-def L10_C3_B6_VD036_SA_L_03(socau, dang=2):
+def L10_C3_B6_VD036_SA_J_03(socau, dang=2):
     r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - khu vực rãnh mộ (ngẫu nhiên) (biến thể cùng dạng với Cổng Trời).
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
@@ -13614,70 +13614,70 @@ def L10_C3_B6_VD036_MC_V_05(socau, dang=1):
     """
     return _ts_mc_sa(5, "b", socau, 1)
 
-def L10_C3_B6_VD036_SA_W_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_U_01(socau, dang=2):
     r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VD, hỏi như ý a) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(1, "a", socau, 2)
 
-def L10_C3_B6_VD036_SA_W_02(socau, dang=2):
+def L10_C3_B6_VD036_SA_U_02(socau, dang=2):
     r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VD, hỏi như ý a) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(2, "a", socau, 2)
 
-def L10_C3_B6_VD036_SA_W_03(socau, dang=2):
+def L10_C3_B6_VD036_SA_U_03(socau, dang=2):
     r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VD, hỏi như ý a) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(3, "a", socau, 2)
 
-def L10_C3_B6_VD036_SA_W_04(socau, dang=2):
+def L10_C3_B6_VD036_SA_U_04(socau, dang=2):
     r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VD, hỏi như ý a) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(4, "a", socau, 2)
 
-def L10_C3_B6_VD036_SA_W_05(socau, dang=2):
+def L10_C3_B6_VD036_SA_U_05(socau, dang=2):
     r"""Trường Sơn - rừng cháy sau trận B-52 (mức VD, hỏi như ý a) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(5, "a", socau, 2)
 
-def L10_C3_B6_VD036_SA_X_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_V_01(socau, dang=2):
     r"""Trường Sơn - trạm bơm tiếp sức vượt đèo (mức VDC, hỏi như ý b) - biến thể 1/5 của dạng: trạm bơm tiếp sức vượt đèo.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(1, "b", socau, 2)
 
-def L10_C3_B6_VD036_SA_X_02(socau, dang=2):
+def L10_C3_B6_VD036_SA_V_02(socau, dang=2):
     r"""Trường Sơn - bản đồ cố ý dịch vị trí (mức VDC, hỏi như ý b) - biến thể 2/5 của dạng: bản đồ cố ý dịch vị trí.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(2, "b", socau, 2)
 
-def L10_C3_B6_VD036_SA_X_03(socau, dang=2):
+def L10_C3_B6_VD036_SA_V_03(socau, dang=2):
     r"""Trường Sơn - tổ khảo sát đi theo phương vị (mức VDC, hỏi như ý b) - biến thể 3/5 của dạng: tổ khảo sát đi theo phương vị.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(3, "b", socau, 2)
 
-def L10_C3_B6_VD036_SA_X_04(socau, dang=2):
+def L10_C3_B6_VD036_SA_V_04(socau, dang=2):
     r"""Trường Sơn - kéo ống vòng sau trận đánh phá (mức VDC, hỏi như ý b) - biến thể 4/5 của dạng: kéo ống vòng sau trận đánh phá.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
     """
     return _ts_mc_sa(4, "b", socau, 2)
 
-def L10_C3_B6_VD036_SA_X_05(socau, dang=2):
+def L10_C3_B6_VD036_SA_V_05(socau, dang=2):
     r"""Trường Sơn - rừng cháy sau trận B-52 (mức VDC, hỏi như ý b) - biến thể 5/5 của dạng: rừng cháy sau trận B-52.
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (bài toán thực tiễn gắn với đường Trường Sơn; số đo giả sử).
@@ -13941,7 +13941,7 @@ def L10_C3_B6_VD036_MC_J_04(socau, dang=1):
     return _pb_mc_sa(socau, 1)
 
 
-def L10_C3_B6_VD036_SA_L_04(socau, dang=2):
+def L10_C3_B6_VD036_SA_J_04(socau, dang=2):
     r"""Diện tích vùng đất tứ giác, Heron hai lần: Pác Bó - bốn trong năm địa danh (biến thể cùng dạng với Cổng Trời, Lê Thị Riêng).
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (Plus Code Google Maps cô gửi; khoảng cách haversine, độ dài làm tròn đến chục mét từ toạ độ thật, điểm trên suối dịch ≤30 m; đường chéo cho trước là AC hoặc BD; chỉ tính chiều dài, không tính góc).
@@ -14171,7 +14171,7 @@ def L10_C3_B6_VD036_MC_W_02(socau, dang=1):
     return _tr_mc_sa(2, socau, 1)
 
 
-def L10_C3_B6_VD036_SA_Y_01(socau, dang=2):
+def L10_C3_B6_VD036_SA_W_01(socau, dang=2):
     r"""Vầng trăng của người lính (Đồng chí) - tính đường kính Mặt Trăng từ khoảng cách và góc nhìn (tam giác cân).
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (số liệu Mặt Trăng thật, góc nhìn tính từ đường kính thật).
@@ -14179,7 +14179,7 @@ def L10_C3_B6_VD036_SA_Y_01(socau, dang=2):
     return _tr_mc_sa(1, socau, 2)
 
 
-def L10_C3_B6_VD036_SA_Y_02(socau, dang=2):
+def L10_C3_B6_VD036_SA_W_02(socau, dang=2):
     r"""Vầng trăng của người lính (Đồng chí) - tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi (định lí sin).
 
     CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo giả sử).
@@ -14870,7 +14870,7 @@ def _sa_sc_chuoi(x):
     return _so_thap_phan_gon(x, 4)
 
 
-def L10_C3_B5_TH030_SA_L_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_E_01(socau, dang=2):
     r"""Trả lời ngắn: biết $\sin\alpha + \cos\alpha$ (hoặc $\sin\alpha - \cos\alpha$) bằng một số thập phân,
     tính $\sin\alpha\cos\alpha$ (đáp số thập phân tối đa 4 kí tự)."""
     # a nằm trong [-1; căn 2] để góc tồn tại; chỉ lấy a cho đáp số gọn (<= 4 kí tự).
@@ -14958,17 +14958,17 @@ def _sa_tich_hoi(socau, dang, loai):
     return cau
 
 
-def L10_C3_B5_TH030_SA_M_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_F_01(socau, dang=2):
     r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $(\sin\alpha + \cos\alpha)^{2}$."""
     return _sa_tich_hoi(socau, dang, "tong")
 
 
-def L10_C3_B5_TH030_SA_M_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_F_02(socau, dang=2):
     r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $(\sin\alpha - \cos\alpha)^{2}$."""
     return _sa_tich_hoi(socau, dang, "hieu")
 
 
-def L10_C3_B5_TH030_SA_M_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_F_03(socau, dang=2):
     r"""Trả lời ngắn: biết $\sin\alpha\cos\alpha$, tính $\sin^{4}\alpha + \cos^{4}\alpha$."""
     return _sa_tich_hoi(socau, dang, "bon")
 
@@ -15863,17 +15863,17 @@ def L10_C3_B5_TH031_MC_K_03(socau, dang=1):
     return _ms_sinh("MC", "TH031", "A", 3, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_H_01(socau, dang=2):
+def L10_C3_B5_TH031_SA_K_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, A): biết $\cos A$ - Biết một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
     return _ms_sinh("SA", "TH031", "A", 1, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_H_02(socau, dang=2):
+def L10_C3_B5_TH031_SA_K_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, A): biết $\sin A$ và góc $A$ nhọn / tù - Biết một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
     return _ms_sinh("SA", "TH031", "A", 2, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_H_03(socau, dang=2):
+def L10_C3_B5_TH031_SA_K_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, A): biết $\tan A$ - Biết một giá trị lượng giác của góc A: tính sin(B + C), cos(B + C), sin(180° − A) nhờ quan hệ hai góc bù nhau"""
     return _ms_sinh("SA", "TH031", "A", 3, socau, dang)
 
@@ -15893,17 +15893,17 @@ def L10_C3_B5_TH031_MC_L_03(socau, dang=1):
     return _ms_sinh("MC", "TH031", "B", 3, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_I_01(socau, dang=2):
+def L10_C3_B5_TH031_SA_L_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$ và $\widehat B$ - Biết hai góc: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH031", "B", 1, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_I_02(socau, dang=2):
+def L10_C3_B5_TH031_SA_L_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat B$ và $\widehat C$ - Biết hai góc: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH031", "B", 2, socau, dang)
 
 
-def L10_C3_B5_TH031_SA_I_03(socau, dang=2):
+def L10_C3_B5_TH031_SA_L_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH031, B): biết $\widehat A$ và $\widehat C$ - Biết hai góc: tính sin, côsin của tổng hai góc (bù với góc thứ ba) bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH031", "B", 3, socau, dang)
 
@@ -15923,17 +15923,17 @@ def L10_C3_B5_TH030_MC_H_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "A", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_F_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_H_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, A): biết $\cos A$ - Biết một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
     return _ms_sinh("SA", "TH030", "A", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_F_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_H_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, A): biết $\sin A$ và góc $A$ nhọn / tù - Biết một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
     return _ms_sinh("SA", "TH030", "A", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_F_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_H_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, A): biết $\tan A$ - Biết một giá trị lượng giác của góc A: tính giá trị lượng giác còn lại (sin² + cos² = 1, tan = sin/cos)"""
     return _ms_sinh("SA", "TH030", "A", 3, socau, dang)
 
@@ -15953,17 +15953,17 @@ def L10_C3_B5_TH030_MC_I_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "B", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_G_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_I_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$ và $\widehat B$ - Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH030", "B", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_G_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_I_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat B$ và $\widehat C$ - Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH030", "B", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_G_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_I_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, B): biết $\widehat A$ và $\widehat C$ - Biết hai góc: tính sin, côsin của góc thứ ba bằng máy tính cầm tay"""
     return _ms_sinh("SA", "TH030", "B", 3, socau, dang)
 
@@ -15983,17 +15983,17 @@ def L10_C3_B5_TH030_MC_J_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "G", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_H_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_J_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cos\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "G", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_H_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_J_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\tan\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "G", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_H_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_J_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, G): biết $\sin\alpha$ và khoảng của $\alpha$, tìm $\cot\alpha$ - Biết sin của góc α và khoảng của α: tìm MỘT giá trị lượng giác khác (cos, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "G", 3, socau, dang)
 
@@ -16028,17 +16028,17 @@ def L10_C3_B5_TH030_MC_K_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "H", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_I_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_K_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\sin\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "H", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_I_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_K_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\tan\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "H", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_I_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_K_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, H): biết $\cos\alpha$, tìm $\cot\alpha$ - Biết cos của góc α: tìm MỘT giá trị lượng giác khác (sin, tan hoặc cot) bằng sin² + cos² = 1, tan = sin/cos"""
     return _ms_sinh("SA", "TH030", "H", 3, socau, dang)
 
@@ -16073,17 +16073,17 @@ def L10_C3_B5_TH030_MC_L_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "I", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_J_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_L_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cot\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
     return _ms_sinh("SA", "TH030", "I", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_J_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_L_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\cos\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
     return _ms_sinh("SA", "TH030", "I", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_J_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_L_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, I): biết $\tan\alpha$, tìm $\sin\alpha$ - Biết tan của góc α: tìm MỘT giá trị lượng giác khác (cot, cos hoặc sin) bằng tan.cot = 1, 1 + tan² = 1/cos²"""
     return _ms_sinh("SA", "TH030", "I", 3, socau, dang)
 
@@ -16118,17 +16118,17 @@ def L10_C3_B5_TH030_MC_M_03(socau, dang=1):
     return _ms_sinh("MC", "TH030", "J", 3, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_K_01(socau, dang=2):
+def L10_C3_B5_TH030_SA_M_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\tan\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
     return _ms_sinh("SA", "TH030", "J", 1, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_K_02(socau, dang=2):
+def L10_C3_B5_TH030_SA_M_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\sin\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
     return _ms_sinh("SA", "TH030", "J", 2, socau, dang)
 
 
-def L10_C3_B5_TH030_SA_K_03(socau, dang=2):
+def L10_C3_B5_TH030_SA_M_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH030, J): biết $\cot\alpha$, tìm $\cos\alpha$ - Biết cot của góc α: tìm MỘT giá trị lượng giác khác (tan, sin hoặc cos) bằng tan.cot = 1, 1 + cot² = 1/sin²"""
     return _ms_sinh("SA", "TH030", "J", 3, socau, dang)
 
@@ -16163,17 +16163,17 @@ def L10_C3_B6_TH032_MC_K_03(socau, dang=1):
     return _ms_sinh("MC", "TH032", "A", 3, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_G_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_K_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
     return _ms_sinh("SA", "TH032", "A", 1, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_G_02(socau, dang=2):
+def L10_C3_B6_TH032_SA_K_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
     return _ms_sinh("SA", "TH032", "A", 2, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_G_03(socau, dang=2):
+def L10_C3_B6_TH032_SA_K_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc)"""
     return _ms_sinh("SA", "TH032", "A", 3, socau, dang)
 
@@ -16208,17 +16208,17 @@ def L10_C3_B6_TH032_MC_L_03(socau, dang=1):
     return _ms_sinh("MC", "TH032", "C", 3, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_H_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_L_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
     return _ms_sinh("SA", "TH032", "C", 1, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_H_02(socau, dang=2):
+def L10_C3_B6_TH032_SA_L_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
     return _ms_sinh("SA", "TH032", "C", 2, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_H_03(socau, dang=2):
+def L10_C3_B6_TH032_SA_L_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính côsin của một góc bằng hệ quả của định lí côsin"""
     return _ms_sinh("SA", "TH032", "C", 3, socau, dang)
 
@@ -16248,12 +16248,12 @@ def L10_C3_B6_TH032_MC_M_02(socau, dang=1):
     return _ms_sinh("MC", "TH032", "D", 2, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_I_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_M_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
     return _ms_sinh("SA", "TH032", "D", 1, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_I_02(socau, dang=2):
+def L10_C3_B6_TH032_SA_M_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh còn lại bằng định lí côsin"""
     return _ms_sinh("SA", "TH032", "D", 2, socau, dang)
 
@@ -16278,12 +16278,12 @@ def L10_C3_B6_TH032_MC_N_02(socau, dang=1):
     return _ms_sinh("MC", "TH032", "E", 2, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_J_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_N_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
     return _ms_sinh("SA", "TH032", "E", 1, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_J_02(socau, dang=2):
+def L10_C3_B6_TH032_SA_N_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh còn lại bằng định lí côsin - luyện tập thêm"""
     return _ms_sinh("SA", "TH032", "E", 2, socau, dang)
 
@@ -16298,12 +16298,12 @@ def L10_C3_B6_TH032_MC_O_02(socau, dang=1):
     return _ms_sinh("MC", "TH032", "F", 2, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_K_01(socau, dang=2):
+def L10_C3_B6_TH032_SA_O_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
     return _ms_sinh("SA", "TH032", "F", 1, socau, dang)
 
 
-def L10_C3_B6_TH032_SA_K_02(socau, dang=2):
+def L10_C3_B6_TH032_SA_O_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính độ dài đường phân giác bằng định lí côsin - luyện tập thêm"""
     return _ms_sinh("SA", "TH032", "F", 2, socau, dang)
 
@@ -16323,17 +16323,17 @@ def L10_C3_B6_TH033_MC_F_03(socau, dang=1):
     return _ms_sinh("MC", "TH033", "B", 3, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_E_01(socau, dang=2):
+def L10_C3_B6_TH033_SA_F_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "B", 1, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_E_02(socau, dang=2):
+def L10_C3_B6_TH033_SA_F_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "B", 2, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_E_03(socau, dang=2):
+def L10_C3_B6_TH033_SA_F_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính hai cạnh còn lại bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "B", 3, socau, dang)
 
@@ -16368,17 +16368,17 @@ def L10_C3_B6_TH033_MC_G_03(socau, dang=1):
     return _ms_sinh("MC", "TH033", "C", 3, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_F_01(socau, dang=2):
+def L10_C3_B6_TH033_SA_G_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "C", 1, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_F_02(socau, dang=2):
+def L10_C3_B6_TH033_SA_G_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "C", 2, socau, dang)
 
 
-def L10_C3_B6_TH033_SA_F_03(socau, dang=2):
+def L10_C3_B6_TH033_SA_G_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH033, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: tính bán kính đường tròn ngoại tiếp bằng định lí sin"""
     return _ms_sinh("SA", "TH033", "C", 3, socau, dang)
 
@@ -16413,17 +16413,17 @@ def L10_C3_B6_TH034_MC_K_03(socau, dang=1):
     return _ms_sinh("MC", "TH034", "A", 3, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_F_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_K_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
     return _ms_sinh("SA", "TH034", "A", 1, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_F_02(socau, dang=2):
+def L10_C3_B6_TH034_SA_K_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
     return _ms_sinh("SA", "TH034", "A", 2, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_F_03(socau, dang=2):
+def L10_C3_B6_TH034_SA_K_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: tính diện tích tam giác (S = 1/2.b.c.sin A)"""
     return _ms_sinh("SA", "TH034", "A", 3, socau, dang)
 
@@ -16458,17 +16458,17 @@ def L10_C3_B6_TH034_MC_L_03(socau, dang=1):
     return _ms_sinh("MC", "TH034", "B", 3, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_G_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_L_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
     return _ms_sinh("SA", "TH034", "B", 1, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_G_02(socau, dang=2):
+def L10_C3_B6_TH034_SA_L_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
     return _ms_sinh("SA", "TH034", "B", 2, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_G_03(socau, dang=2):
+def L10_C3_B6_TH034_SA_L_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: tính diện tích tam giác"""
     return _ms_sinh("SA", "TH034", "B", 3, socau, dang)
 
@@ -16488,17 +16488,17 @@ def L10_C3_B6_TH034_MC_M_03(socau, dang=1):
     return _ms_sinh("MC", "TH034", "C", 3, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_H_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_M_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
     return _ms_sinh("SA", "TH034", "C", 1, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_H_02(socau, dang=2):
+def L10_C3_B6_TH034_SA_M_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
     return _ms_sinh("SA", "TH034", "C", 2, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_H_03(socau, dang=2):
+def L10_C3_B6_TH034_SA_M_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: nửa chu vi, công thức Heron, bán kính đường tròn nội tiếp, đường cao"""
     return _ms_sinh("SA", "TH034", "C", 3, socau, dang)
 
@@ -16528,12 +16528,12 @@ def L10_C3_B6_TH034_MC_N_02(socau, dang=1):
     return _ms_sinh("MC", "TH034", "D", 2, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_I_01(socau, dang=2):
+def L10_C3_B6_TH034_SA_N_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, D): biết $BC$ và đường cao $AH$ - Biết một cạnh và đường cao tương ứng: tính diện tích tam giác (S = 1/2.a.h_a)"""
     return _ms_sinh("SA", "TH034", "D", 1, socau, dang)
 
 
-def L10_C3_B6_TH034_SA_I_02(socau, dang=2):
+def L10_C3_B6_TH034_SA_N_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH034, D): biết $AB$ và đường cao $CK$ - Biết một cạnh và đường cao tương ứng: tính diện tích tam giác (S = 1/2.a.h_a)"""
     return _ms_sinh("SA", "TH034", "D", 2, socau, dang)
 
@@ -16643,17 +16643,17 @@ def L10_C3_B6_TH035_MC_F_03(socau, dang=1):
     return _ms_sinh("MC", "TH035", "C", 3, socau, dang)
 
 
-def L10_C3_B6_TH035_SA_E_01(socau, dang=2):
+def L10_C3_B6_TH035_SA_F_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $A$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
     return _ms_sinh("SA", "TH035", "C", 1, socau, dang)
 
 
-def L10_C3_B6_TH035_SA_E_02(socau, dang=2):
+def L10_C3_B6_TH035_SA_F_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $B$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
     return _ms_sinh("SA", "TH035", "C", 2, socau, dang)
 
 
-def L10_C3_B6_TH035_SA_E_03(socau, dang=2):
+def L10_C3_B6_TH035_SA_F_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (TH035, C): biết ba cạnh, hỏi theo đỉnh $C$ - Giải tam giác biết ba cạnh: số đo các góc (hệ quả của định lí côsin)"""
     return _ms_sinh("SA", "TH035", "C", 3, socau, dang)
 
@@ -16688,17 +16688,17 @@ def L10_C3_B6_VD032_MC_B_03(socau, dang=1):
     return _ms_sinh("MC", "VD032", "A", 3, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_A_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_B_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\cos A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
     return _ms_sinh("SA", "VD032", "A", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_A_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_B_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$, $\sin A$ và góc $A$ nhọn / tù - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
     return _ms_sinh("SA", "VD032", "A", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_A_03(socau, dang=2):
+def L10_C3_B6_VD032_SA_B_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, A): biết $AB$, $AC$ và $\tan A$ - Biết hai cạnh và một giá trị lượng giác của góc A: kết hợp định lí côsin với định lí sin, công thức diện tích (R, h_a)"""
     return _ms_sinh("SA", "VD032", "A", 3, socau, dang)
 
@@ -16733,17 +16733,17 @@ def L10_C3_B6_VD032_MC_C_03(socau, dang=1):
     return _ms_sinh("MC", "VD032", "B", 3, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_B_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_C_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat B$ và $BC$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
     return _ms_sinh("SA", "VD032", "B", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_B_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_C_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat B$, $\widehat C$ và $BC$ (cạnh kẹp giữa hai góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
     return _ms_sinh("SA", "VD032", "B", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_B_03(socau, dang=2):
+def L10_C3_B6_VD032_SA_C_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, B): biết $\widehat A$, $\widehat C$ và $AB$ (hai góc và cạnh đối của một góc) - Biết hai góc và một cạnh: kết hợp định lí sin với công thức diện tích (S, đường cao)"""
     return _ms_sinh("SA", "VD032", "B", 3, socau, dang)
 
@@ -16778,17 +16778,17 @@ def L10_C3_B6_VD032_MC_D_03(socau, dang=1):
     return _ms_sinh("MC", "VD032", "C", 3, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_C_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_D_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $A$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
     return _ms_sinh("SA", "VD032", "C", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_C_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_D_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $B$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
     return _ms_sinh("SA", "VD032", "C", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_C_03(socau, dang=2):
+def L10_C3_B6_VD032_SA_D_03(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, C): biết ba cạnh, hỏi theo đỉnh $C$ - Biết ba cạnh: kết hợp hệ quả định lí côsin, Heron, định lí sin (đường cao, r, R)"""
     return _ms_sinh("SA", "VD032", "C", 3, socau, dang)
 
@@ -16818,12 +16818,12 @@ def L10_C3_B6_VD032_MC_E_02(socau, dang=1):
     return _ms_sinh("MC", "VD032", "D", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_D_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_E_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, D): biết $BC$, $\cos B$ và đường cao $AH$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
     return _ms_sinh("SA", "VD032", "D", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_D_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_E_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, D): biết $AB$, $\cos B$ và đường cao $CK$ - Biết một cạnh, côsin góc B và một đường cao: tính cạnh rồi côsin góc còn lại hoặc R"""
     return _ms_sinh("SA", "VD032", "D", 2, socau, dang)
 
@@ -16848,12 +16848,12 @@ def L10_C3_B6_VD032_MC_F_02(socau, dang=1):
     return _ms_sinh("MC", "VD032", "E", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_E_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_F_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AB$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
     return _ms_sinh("SA", "VD032", "E", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_E_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_F_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, E): biết $BC$, $AC$ và trung tuyến $AM$ - Biết hai cạnh và đường trung tuyến: tính cạnh rồi côsin góc A, R hoặc diện tích - luyện tập thêm"""
     return _ms_sinh("SA", "VD032", "E", 2, socau, dang)
 
@@ -16878,12 +16878,12 @@ def L10_C3_B6_VD032_MC_G_02(socau, dang=1):
     return _ms_sinh("MC", "VD032", "F", 2, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_F_01(socau, dang=2):
+def L10_C3_B6_VD032_SA_G_01(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ABD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
     return _ms_sinh("SA", "VD032", "F", 1, socau, dang)
 
 
-def L10_C3_B6_VD032_SA_F_02(socau, dang=2):
+def L10_C3_B6_VD032_SA_G_02(socau, dang=2):
     r"""MC/SA/TL giải tam giác (VD032, F): biết ba cạnh và phân giác $AD$, tính qua tam giác $ACD$ - Biết ba cạnh và đường phân giác trong: tính BD hoặc DC rồi diện tích tam giác ABD hoặc ACD - luyện tập thêm"""
     return _ms_sinh("SA", "VD032", "F", 2, socau, dang)
 

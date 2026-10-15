@@ -23,9 +23,9 @@ sys.modules["L10_C1_menh_de_bon_muc"] = M
 _spec.loader.exec_module(M)
 
 HAM_MOI = [n for n in dir(M) if n.startswith("L10_C1_B1_") and any(
-    t in n for t in ("NB001_MC_C", "TH003_MC_D", "VD014_MC_E", "VD014_SA_C", "VD014_MC_F", "VD014_SA_D",
-                     "VD014_MC_G", "VD014_SA_E", "VD014_MC_H", "VD014_SA_F", "VD014_MC_I", "VD014_SA_G",
-                     "VD014_MC_J", "VD014_SA_H"))]
+    t in n for t in ("NB001_MC_C", "TH003_MC_D", "VD014_MC_E", "VD014_SA_E", "VD014_MC_F", "VD014_SA_F",
+                     "VD014_MC_G", "VD014_SA_G", "VD014_MC_H", "VD014_SA_H", "VD014_MC_I", "VD014_SA_I",
+                     "VD014_MC_J", "VD014_SA_J"))]
 
 
 def test_du_21_ham():
@@ -124,7 +124,7 @@ class _GiaLapDatetime:
         self.datetime = _DT
 
 
-HAM_K = [n for n in HAM_MOI if "VD014" in n and not re.search(r"_(MC_E|SA_C)_", n)]
+HAM_K = [n for n in HAM_MOI if "VD014" in n and not re.search(r"_(MC_E|SA_E)_", n)]
 
 
 @pytest.mark.parametrize("nam", [2026, 2029, 2035])
@@ -233,16 +233,16 @@ def _mapping():
 
 def test_mapping_co_du_dong_moi_va_danh_dau_vdc():
     mp = _mapping()
-    for i in ("NB001_MC_C", "TH003_MC_D", "VD014_MC_E", "VD014_SA_C"):
+    for i in ("NB001_MC_C", "TH003_MC_D", "VD014_MC_E", "VD014_SA_E"):
         assert "L10_C1_B1_" + i in mp
         assert "muc_do_dang" not in mp["L10_C1_B1_" + i]
-    for i in ("VD014_MC_A", "VD014_SA_A", "VD014_MC_F", "VD014_SA_D", "VD014_MC_G", "VD014_SA_E",
-              "VD014_MC_H", "VD014_SA_F", "VD014_MC_I", "VD014_SA_G", "VD014_MC_J", "VD014_SA_H"):
+    for i in ("VD014_MC_A", "VD014_SA_A", "VD014_MC_F", "VD014_SA_F", "VD014_MC_G", "VD014_SA_G",
+              "VD014_MC_H", "VD014_SA_H", "VD014_MC_I", "VD014_SA_I", "VD014_MC_J", "VD014_SA_J"):
         assert mp["L10_C1_B1_" + i]["muc_do_dang"] == "VDC", i
 
 
 def test_cap_mc_sa_cung_mo_ta_dang():
     """Cặp MC/SA cùng dạng có cùng chuỗi Dang (để một đề không ra cả hai)."""
     mp = _mapping()
-    for mc, sa in [("E", "C"), ("F", "D"), ("G", "E"), ("H", "F"), ("I", "G"), ("J", "H")]:
+    for mc, sa in [("E", "E"), ("F", "F"), ("G", "G"), ("H", "H"), ("I", "I"), ("J", "J")]:
         assert mp["L10_C1_B1_VD014_MC_" + mc]["Dang"] == mp["L10_C1_B1_VD014_SA_" + sa]["Dang"]
