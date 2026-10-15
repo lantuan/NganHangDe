@@ -126,26 +126,25 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C2_B4_VD028_SA_A",   # GTLN tu he / tu hinh / GTNN mien khong bi chan
     "L10_C2_B4_VD028_TL_A",   # cho san he / tu lap he (lai lon nhat) / chi phi nho nhat
     "L10_C3_B6_VD036_SA_A",   # vat can: dam lay / duong ham-ho-nha (cosin) / ben kia song (sin)
-    "L10_C3_B6_VD036_SA_B",   # dien tich manh dat: Heron / hai canh-goc xen giua / tu giac = 2 Heron
+    "L10_C3_B6_VD036_SA_Z",   # dien tich manh dat: Heron / hai canh-goc xen giua / tu giac = 2 Heron
     # tu giao an Bai 5 cua co Lan (29/09/2026):
     "L10_C3_B5_NB029_MC_A",   # mot gia tri goc dac biet / bieu thuc nhieu gia tri / tong-hieu hai gia tri co can
     "L10_C3_B5_NB029_MC_E",   # dau mot gia tri / dau tich-thuong hai gia tri (goc tu)
     "L10_C3_B5_NB029_MC_G",   # dau mot gia tri -> khoang / dau mot tich -> loai goc
     "L10_C3_B5_TH031_MC_A",   # hai goc bu nhau / trong tam giac (B + C = 180 - A)
-    "L10_C3_B5_TH031_SA_A",   # rut gon voi goc bu / tam giac biet hai goc
-    "L10_C3_B5_TH031_SA_B",   # he thuc co ban + goc bu / tong binh phuong goc phu nhau
+    "L10_C3_B5_TH031_SA_E",   # he thuc co ban + goc bu / tong binh phuong goc phu nhau
     "L10_C3_TF_A",            # alpha dac biet / sin alpha = bo ba Pythagore / sin hoac cos co can thuc
     # tu bai tap trac nghiem Bai 5 (30/09/2026):
     "L10_C3_B5_TH031_MC_B",   # M doi xung N qua Oy: toa do bang chu / so do goc xOM
     "L10_C3_TF_D",            # M cho bang toa do thap phan / cho bang so do goc (co hinh, dien tich MAN)
     # 10 dang moi Bai 5, _02 hoi theo cach khac cung don vi kien thuc (co Lan 30/09/2026):
     "L10_C3_B5_NB029_MC_H",   # dang thuc dung/sai cua mot goc / gia tri nao bang so cho truoc
-    "L10_C3_B5_NB029_SA_B",   # biet goc tinh toa do / biet toa do tim goc
+    "L10_C3_B5_NB029_SA_J",   # biet goc tinh toa do / biet toa do tim goc
     "L10_C3_B5_TH030_MC_D",   # sin + cos -> sin.cos / sin.cos -> (sin +- cos)^2, sin^4 + cos^4
-    "L10_C3_B5_TH030_SA_F",   # sin.cos = p (thap phan) -> (sin+cos)^2 / (sin-cos)^2 / sin^4 + cos^4 (cung dang, doi dai luong hoi)
-    "L10_C3_B5_TH030_SA_B",   # cos -> dien tich AOM / dien tich AOM -> cos
+    "L10_C3_B5_TH030_SA_D",   # 15/10/2026 gop SA_E, SA_F: _01 sin +- cos -> sin.cos / _02-_04 sin.cos -> (sin+cos)^2, (sin-cos)^2, sin^4 + cos^4 (cung dang MC_D)
+    "L10_C3_B5_TH030_SA_N",   # cos -> dien tich AOM / dien tich AOM -> cos
     "L10_C3_B5_TH031_MC_C",   # tich sin cos goc dac biet / goc le phai dung phu-bu
-    "L10_C3_B5_TH031_SA_C",   # cho alpha + beta / trong tam giac
+    "L10_C3_B5_TH031_SA_C",   # cho alpha + beta / trong tam giac; 15/10/2026 them _03, _04 (truoc la SA_A: rut gon goc bu / tam giac biet hai goc)
     "L10_C3_B5_TH031_MC_D",   # dang thuc giua hai goc dac biet / suy ra gia tri gan dung
     "L10_C3_B5_TH031_MC_E",   # chon cong thuc dung-sai / rut gon bieu thuc
     "L10_C3_B5_TH031_MC_F",   # biet so do goc / biet sin-cos phan so
@@ -184,7 +183,7 @@ CHO_PHEP_NHIEU_HAM = {
     # tu giao an Bai 6:
     "L10_C3_B6_TH032_MC_A",   # (da co 2) + cos A cho bang phan so
     "L10_C3_B6_TH033_MC_A",   # biet mot canh hai goc / noi tiep duong tron R, tinh canh goc thu ba
-    "L10_C3_B6_TH033_SA_A",   # R tu mot canh va goc doi / R cua tam giac vuong (bo Pythagore)
+    "L10_C3_B6_TH033_SA_B",   # R tu mot canh va goc doi / R cua tam giac vuong (bo Pythagore)
     "L10_C3_B6_TH034_TL_A",   # Heron roi r / Heron roi R va h_a
     "L10_C3_B6_TH035_MC_C",   # nhon-vuong-tu / vuong tai dinh nao
     "L10_C3_TF_B",            # goc dac biet / cos A phan so
@@ -265,10 +264,10 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B6_TH034_MC_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH034_SA_N",           # 2 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_MC_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH035_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_TL_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_MC_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
-    "L10_C3_B6_TH035_SA_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
+    "L10_C3_B6_TH035_SA_B",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_TL_A",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_MC_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
     "L10_C3_B6_TH035_SA_F",           # 3 bien the: cung dang, khac cach cho / cach hoi
@@ -307,6 +306,15 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_NB007_MC_A",           # 15/10/2026 co Lan: gop A (toan) va B (thuc te) thanh 2 bien the 01, 02
     "L10_C1_B1_NB007_MC_C",           # 15/10/2026 co Lan: gop C (toan) va D (thuc te) thanh 2 bien the 01, 02
     "L10_C1_B1_NB007_SA_C",           # 15/10/2026: ban tra loi ngan cua MC_C, cung 2 bien the
+    # ban MC/SA cung dang bo sung 15/10/2026 (co Lan: "ghep cac dang da thay giong, cung dang; cac dang thieu lam bo sung luon"):
+    "L10_C3_B5_NB029_MC_J",   # nhu SA_J: biet goc tinh toa do / biet toa do tim goc
+    "L10_C3_B5_TH030_MC_N",   # nhu SA_N: cos -> dien tich AOM / dien tich AOM -> cos
+    "L10_C3_B6_TH032_SA_D",   # nhu MC_D: he thuc canh -> goc: dang khai trien / dang tich
+    "L10_C3_B6_VD036_MC_Z",   # nhu SA_Z: dien tich manh dat Heron / hai canh-goc xen giua / tu giac = 2 Heron
+    "L10_C3_B6_VD036_MC_X",   # nhu SA_X: quang duong con lai / dien tich tu giac
+    "L10_C4_B11_NB057_SA_A",  # nhu MC_A_01, _02: tam giac deu / hinh vuong
+    "L10_C4_B11_TH057_SA_A",  # nhu MC_A: tam giac deu / hinh vuong
+    "L10_C4_B11_TH057_SA_B",  # nhu MC_B: tam giac deu / hinh vuong
 }
 
 

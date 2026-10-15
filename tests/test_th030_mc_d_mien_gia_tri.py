@@ -125,11 +125,12 @@ def _kiem_cau(de, hoi_dap):
             assert abs(g(al) - _so(dap)) < 1e-6, (de, hoi, dap, math.degrees(al), g(al))
 
 
-@pytest.mark.parametrize("ten", ["SA_E_01", "SA_F_01", "SA_F_02", "SA_F_03"])
+# 15/10/2026: SA_E_01 -> SA_D_01, SA_F_01..03 -> SA_D_02..04 (gop cung Dang voi MC_D; bang doi data/mapping/doi_id/L10_C3_20261015.json)
+@pytest.mark.parametrize("ten", ["SA_D_01", "SA_D_02", "SA_D_03", "SA_D_04"])
 def test_sa_dung_so_va_gon(ten):
     ham = getattr(M, "L10_C3_B5_TH030_" + ten)
-    hoi_cua = {"SA_E_01": None, "SA_F_01": "(\\sin\\alpha+\\cos\\alpha)^{2}", "SA_F_02": "(\\sin\\alpha-\\cos\\alpha)^{2}",
-               "SA_F_03": "\\sin^{4}\\alpha+\\cos^{4}\\alpha"}[ten]
+    hoi_cua = {"SA_D_01": None, "SA_D_02": "(\\sin\\alpha+\\cos\\alpha)^{2}", "SA_D_03": "(\\sin\\alpha-\\cos\\alpha)^{2}",
+               "SA_D_04": "\\sin^{4}\\alpha+\\cos^{4}\\alpha"}[ten]
     dem = 0
     for seed in range(120):
         random.seed(seed)

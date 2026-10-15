@@ -43,12 +43,12 @@ TF_TOT = EX % "De\n\\choiceTFt{\\True a}{b}{c}{d}\n"
 # ------------------------------------------------ tang khoa luc RA DE
 
 def test_tra_loi_ngan_mot_y_thi_cho_qua():
-    kiem_tra_dung_loai_cau("L10_C3_B6_TH034_SA_A", SA_MOT_Y)
+    kiem_tra_dung_loai_cau("L10_C3_B6_TH034_SA_D", SA_MOT_Y)
 
 
 def test_tra_loi_ngan_chia_y_thi_bi_chan():
     with pytest.raises(LoaiCauSaiError):
-        kiem_tra_dung_loai_cau("L10_C3_B6_TH034_SA_A", SA_NHIEU_Y)
+        kiem_tra_dung_loai_cau("L10_C3_B6_TH034_SA_D", SA_NHIEU_Y)
 
 
 def test_tu_luan_hai_y_thi_cho_qua():

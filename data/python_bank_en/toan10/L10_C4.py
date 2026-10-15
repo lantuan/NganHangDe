@@ -1143,7 +1143,7 @@ def L10_C4_B10_TH050_MC_A_01(socau, dang=1):
     return cauTN
 
 
-def L10_C4_B10_TH050_SA_A_01(socau):
+def L10_C4_B10_TH050_SA_B_01(socau, dang=2):
     """Toạ độ của điểm thoả điều kiện - đỉnh thứ tư của hình bình hành.
 
     CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
@@ -1187,7 +1187,7 @@ def L10_C4_B10_TH050_SA_A_01(socau):
                 % (_toado(xd, yd), xd))
         nhieu = _ba_nhieu4(xd, [xa + xb - xc, xb + xc - xa, -xd, xd + 1],
                            buoc=lambda t: xd + 2 * t)
-        cau += MC_SA_answer_const(debai, xd, nhieu, giai, 0, 0, 2)
+        cau += MC_SA_answer_const(debai, xd, nhieu, giai, 0, 0, dang)
     return cau
 
 
@@ -1830,7 +1830,9 @@ def _loi_giai_goc(TD, v1, v2, g, _sau=True):
             r"the angle formed, which is $%d^{\circ}$." % (v, v1[0], g))
 
 
-def _cau_goc_vecto(socau, dang, TD, hinh, ten_hinh, CAP, GOC):
+def _cau_goc_vecto(socau, dang, TD, hinh, ten_hinh, CAP, GOC, tra_loi_ngan=False):
+    """tra_loi_ngan=True (CLAUDE THEM 15/10/2026): ban tra loi ngan cung dang - hoi "bang bao nhieu do", dap so la so
+    nguyen (khong kem dau do); phan con lai (thu tu ngau nhien, loi giai) giu nguyen nhu ban trac nghiem."""
     ds = list(range(len(CAP)))
     random.shuffle(ds)
     cauTN = ""
@@ -1845,6 +1847,11 @@ def _cau_goc_vecto(socau, dang, TD, hinh, ten_hinh, CAP, GOC):
         debai = (r"Given %s as shown in the figure. The angle between the vectors $%s$ and $%s$ equals"
                  % (ten_hinh, _vt(*v1), _vt(*v2)))
         giai = _loi_giai_goc(TD, v1, v2, g)
+        if tra_loi_ngan:
+            debai = (r"Given %s as shown in the figure. What is the angle between the two vectors $%s$ and $%s$ in degrees?"
+                     % (ten_hinh, _vt(*v1), _vt(*v2)))
+            cauTN += MC_SA_answer_const(debai, str(g), [str(x) for x in (uu_tien + con)[:3]], giai, hinh, 0, dang)
+            continue
         cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, hinh, 0, dang)
     return cauTN
 
@@ -2595,7 +2602,7 @@ def L10_C4_TF_B_01(socau, socot=1):
 # CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
 # ---------------------------------------------------------------------
 
-def L10_C4_B10_VD054_SA_A_01(socau):
+def L10_C4_B10_VD054_SA_B_01(socau, dang=2):
     """Bài toán hình học bằng toạ độ - độ dài trung tuyến, đáp số nguyên.
 
     CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
@@ -2632,7 +2639,7 @@ def L10_C4_B10_VD054_SA_A_01(socau):
                 % (xa - xd, ya - yd, (xa - xd) ** 2 + (ya - yd) ** 2, kq))
         nhieu = _ba_nhieu4(kq, [r, kq * kq, kq + 1, abs(u) + abs(v)],
                            buoc=lambda t: kq + 3 * t)
-        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, 2)
+        cau += MC_SA_answer_const(debai, kq, nhieu, giai, 0, 0, dang)
     return cau
 
 
@@ -3948,3 +3955,734 @@ def _c4_tl_dap4(s):
         else:
             ra.append(phan)
     return "".join(ra)
+
+
+# =====================================================================
+# BỔ SUNG 15/10/2026 (cô Lan: "ghép các dạng đã thấy giống, cùng dạng; các dạng thiếu làm bổ sung luôn")
+# Bản TRẢ LỜI NGẮN (SA) / TRẮC NGHIỆM (MC) cùng chữ, cùng "Dang" với câu đã có.
+# MC "chọn khẳng định đúng" -> SA "có bao nhiêu khẳng định đúng (sai)". Chân trị của MỌI khẳng định do Python
+# TÍNH bằng toạ độ (điểm bất kì: thử ba bộ toạ độ ngẫu nhiên; có hình: toạ độ của hình), không gõ tay.
+# CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+# =====================================================================
+import re as _re5
+from fractions import Fraction as _Fr5
+
+
+class _Bt5:
+    # Biểu thức vectơ: tex (LaTeX), f (môi trường -> số phức: vectơ (x; y) viết thành x + yi), loai: 'don' (một
+    # vectơ), 'tich' (số nhân vectơ), 'tong' (tổng, hiệu).
+
+    def __init__(self, tex, f, loai="don"):
+        self.tex, self.f, self.loai = tex, f, loai
+
+
+def _b5_vt(X, Y):
+    return _Bt5(_vt(X, Y), lambda E: E[Y] - E[X])
+
+
+def _b5_tu(t):
+    return _Bt5(r"\overrightarrow{%s}" % t, lambda E: E[t])
+
+
+_B5_0 = _Bt5(r"\overrightarrow{0}", lambda E: 0)
+
+
+def _he5(k):
+    k = _Fr5(k)
+    if k == 1:
+        return ""
+    if k == -1:
+        return "-"
+    if k.denominator == 1:
+        return str(k.numerator)
+    return ("-" if k < 0 else "") + r"\dfrac{%d}{%d}" % (abs(k.numerator), k.denominator)
+
+
+def _b5_nhan(k, x, ktex=None):
+    """k.x; ktex: cách viết riêng của hệ số (vd \\left(2 + 3\\right))."""
+    gt = float(_Fr5(k))
+    vt = x.tex if x.loai == "don" else r"\left(%s\right)" % x.tex
+    return _Bt5((_he5(k) if ktex is None else ktex) + vt, lambda E: gt * x.f(E), "tich")
+
+
+def _b5_cong(*ds):
+    """Tổng; số hạng là tổng (hiệu) thì đặt trong ngoặc để giữ đúng cách nhóm (tính kết hợp)."""
+    def boc(d):
+        return r"\left(%s\right)" % d.tex if d.loai == "tong" else d.tex
+    tex = boc(ds[0])
+    for d in ds[1:]:
+        tex += (" - " + d.tex[1:]) if (d.loai != "tong" and d.tex.startswith("-")) else (" + " + boc(d))
+    return _Bt5(tex, lambda E: sum(d.f(E) for d in ds), "tong")
+
+
+def _b5_tru(x, y):
+    vt = r"\left(%s\right)" % y.tex if (y.loai == "tong" or y.tex.startswith("-")) else y.tex
+    return _Bt5(x.tex + " - " + vt, lambda E: x.f(E) - y.f(E), "tong")
+
+
+def _b5_bang(l, r, envs):
+    return all(abs(l.f(E) - r.f(E)) < 1e-9 for E in envs)
+
+
+def _b5_env_diem(ten, rang_buoc=None, so=3):
+    """Ba bộ toạ độ ngẫu nhiên cho các điểm 'bất kì'; rang_buoc(E) bổ sung điểm phụ thuộc (vd trung điểm)."""
+    ra = []
+    for _ in range(so):
+        E = {t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in ten}
+        if rang_buoc:
+            rang_buoc(E)
+        ra.append(E)
+    return ra
+
+
+def _b5_rut_diem(x, envs, uu_tien, ten_diem):
+    """Viết gọn một biểu thức vectơ (điểm): vectơ-không, một vectơ, hai lần hoặc nửa một vectơ có tên trong hình.
+    uu_tien: các cặp điểm ưu tiên (đã có trong khẳng định). Không gọn được thì giữ nguyên."""
+    if x.loai == "don":
+        return x.tex
+    if _b5_bang(x, _B5_0, envs):
+        return _B5_0.tex
+    cap = list(uu_tien) + [(U, V) for U in ten_diem for V in ten_diem if U != V and (U, V) not in uu_tien]
+    for k in ((1,) if x.loai == "tich" else (1, 2, _Fr5(1, 2))):
+        for U, V in cap:
+            w = _b5_nhan(k, _b5_vt(U, V)) if k != 1 else _b5_vt(U, V)
+            if _b5_bang(x, w, envs):
+                return w.tex
+    return x.tex
+
+
+def _b5_cap_trong(*ds):
+    """Các cặp điểm (điểm đầu, điểm cuối) xuất hiện trong các biểu thức (đọc từ LaTeX)."""
+    ra = []
+    for d in ds:
+        for m in _re5.finditer(r"\\overrightarrow\{([A-Z])([A-Z])\}", d.tex):
+            if (m.group(1), m.group(2)) not in ra:
+                ra.append((m.group(1), m.group(2)))
+    return ra
+
+
+def _b5_ly_so_sanh(l, r, gl, gr, bang):
+    """Lí do đúng / sai sau khi đã viết gọn hai vế (gl, gr là LaTeX dạng gọn; trùng tex gốc nghĩa là không gọn hơn)."""
+    if bang:
+        if gl != l.tex and gr != r.tex:
+            return r"both sides equal $%s$" % gl
+        if gl != l.tex:
+            return r"the left-hand side equals $%s$, which is exactly the right-hand side" % gl
+        if gr != r.tex:
+            return r"the right-hand side equals $%s$, which is exactly the left-hand side" % gr
+        return r"$%s$ and $%s$ have the same direction and the same length" % (l.tex, r.tex)
+    trai = (r"the left-hand side equals $%s$" % gl) if gl != l.tex else (r"the left-hand side is $%s$" % gl)
+    phai = (r"the right-hand side equals $%s$" % gr) if gr != r.tex else (r"the right-hand side is $%s$" % gr)
+    return trai + ", while " + phai + "; these two vectors are different"
+
+
+def _b5_ly_diem(l, r, envs, ten_diem):
+    """Lí do đúng / sai của khẳng định l = r (vectơ theo điểm): rút gọn hai vế rồi so sánh."""
+    uu = _b5_cap_trong(l, r)
+    gl, gr = _b5_rut_diem(l, envs, uu, ten_diem), _b5_rut_diem(r, envs, uu, ten_diem)
+    return _b5_ly_so_sanh(l, r, gl, gr, _b5_bang(l, r, envs))
+
+
+def _b5_to_hop(x, tu):
+    """Viết x thành tổ hợp a.u + b.v + ... của các vectơ tự do (x tuyến tính)."""
+    he = []
+    for t in tu:
+        E = {s: (1 if s == t else 0) for s in tu}
+        he.append(_Fr5(x.f(E).real).limit_denominator(100))
+    hang = [_b5_nhan(k, _b5_tu(t)) if k != 1 else _b5_tu(t) for k, t in zip(he, tu) if k != 0]
+    if not hang:
+        return _B5_0.tex
+    return _b5_cong(*hang).tex if len(hang) > 1 else hang[0].tex
+
+
+def _b5_ly_tu(l, r, envs, tu):
+    gl, gr = _b5_to_hop(l, tu), _b5_to_hop(r, tu)
+    return _b5_ly_so_sanh(l, r, gl, gr, _b5_bang(l, r, envs))
+
+
+def _c4s_chon_bon(dung_ds, sai_ds):
+    """Chọn bốn mục (số mục đúng t trong {1; 2; 3}); mục (tex, lí do) hoặc (tex, lí do, khoá): hai mục cùng khoá (vd
+    cùng vế trái) không cùng xuất hiện, để khẳng định này không làm lộ khẳng định kia."""
+    chuan = lambda ds: list({x[0]: (x[0], x[1], x[2] if len(x) > 2 else x[0]) for x in ds}.values())
+    dung_ds, sai_ds = chuan(dung_ds), chuan(sai_ds)
+    for _ in range(200):
+        t = random.choice([x for x in (1, 2, 3) if x <= len(dung_ds) and 4 - x <= len(sai_ds)])
+        random.shuffle(dung_ds)
+        random.shuffle(sai_ds)
+        khoa, ds = set(), []
+        for nguon, can, la_dung in ((dung_ds, t, True), (sai_ds, 4 - t, False)):
+            lay = 0
+            for x in nguon:
+                if lay < can and x[2] not in khoa:
+                    ds.append(((x[0], x[1]), la_dung))
+                    khoa.add(x[2])
+                    lay += 1
+        if len(ds) == 4:
+            random.shuffle(ds)
+            return ds
+    raise ValueError("khong du khang dinh khac khoa")
+
+
+def _c4s_dem(mo, dung_ds, sai_ds, dang, hinh=0, giai_mo=""):
+    r"""Câu ĐẾM: bốn khẳng định (đúng có lí do, sai có lí do) lấy từ dung_ds / sai_ds: [(tex có $...$, lí do)].
+    Số khẳng định đúng chọn trong {1; 2; 3}; hỏi số khẳng định đúng hoặc số khẳng định sai."""
+    ds = _c4s_chon_bon(dung_ds, sai_ds)
+    t = sum(1 for _, d in ds if d)
+    hoi_dung = random.random() < 0.6
+    dap = t if hoi_dung else 4 - t
+    tu = r"\textbf{true}" if hoi_dung else r"\textbf{false}"
+    debai = (mo + r" How many of the following statements are %s?\\ " % tu
+             + r"\\ ".join("%d. %s" % (i + 1, x[0]) for i, (x, _) in enumerate(ds)))
+    giai = giai_mo + r"\\ ".join(r"%d. %s is %s because %s." % (i + 1, x[0], "true" if d else "false", x[1])
+                                for i, (x, d) in enumerate(ds))
+    giai += r"\\ So $%d$ statements are %s." % (dap, tu)
+    nhieu = [str(x) for x in (4 - dap, dap + 1, dap - 1, 0, 4, 1, 2, 3) if x != dap and 0 <= x <= 4]
+    return MC_SA_answer_const(debai, str(dap), nhieu, giai, hinh, 0, dang)
+
+
+def _c4s_phan_loai(cap, envs, ten_diem):
+    """[(l, r)] -> (đúng, sai) dạng [(tex $l = r$, lí do)]."""
+    dung, sai = [], []
+    for l, r in cap:
+        tex = r"$%s = %s$" % (l.tex, r.tex)
+        (dung if _b5_bang(l, r, envs) else sai).append((tex, _b5_ly_diem(l, r, envs, ten_diem), l.tex))
+    return dung, sai
+
+
+_C4S_BO_DIEM = [("A", "B", "C", "D"), ("M", "N", "P", "Q"), ("D", "E", "F", "G"), ("I", "J", "K", "L"), ("X", "Y", "Z", "T")]
+
+
+# ---------------------------------------------------------------------
+# TH040_SA_A: quy tắc ba điểm (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B8_TH040_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH040_MC_A (cùng Dang): với bốn điểm bất kì, cho bốn đẳng thức về tổng
+    các vectơ (quy tắc ba điểm), hỏi có bao nhiêu đẳng thức đúng (sai). Chân trị tính bằng toạ độ ngẫu nhiên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, Z, T = random.sample(random.choice(_C4S_BO_DIEM), 4)
+        v = _b5_vt
+        cap = [(_b5_cong(v(X, Y), v(Y, Z)), v(X, Z)), (_b5_cong(v(Y, X), v(X, Z)), v(Y, Z)),
+               (_b5_cong(v(X, Y), v(Y, Z), v(Z, X)), _B5_0), (_b5_cong(v(X, Y), v(Y, Z), v(Z, T)), v(X, T)),
+               (_b5_cong(v(Z, X), v(X, Y)), v(Z, Y)), (_b5_cong(v(X, Y), v(Y, T), v(T, Z)), v(X, Z)),
+               (_b5_cong(v(X, Y), v(Y, Z)), v(Z, X)), (_b5_cong(v(Y, X), v(X, Z)), v(Z, Y)),
+               (_b5_cong(v(X, Y), v(Y, Z), v(Z, T)), v(T, X)), (_b5_cong(v(X, Y), v(Y, Z), v(Z, X)), v(X, Z)),
+               (_b5_cong(v(Z, X), v(X, Y)), v(Y, Z)), (_b5_cong(v(T, X), v(X, Y)), v(Y, T))]
+        envs = _b5_env_diem([X, Y, Z, T])
+        dung, sai = _c4s_phan_loai(cap, envs, [X, Y, Z, T])
+        mo = r"Given four arbitrary points $%s$, $%s$, $%s$, $%s$." % tuple(sorted([X, Y, Z, T]))
+        giai_mo = (r"Triangle rule: for any three points $%s$, $%s$, $%s$, $%s + %s = %s$.\\ "
+                   % (X, Y, Z, _vt(X, Y), _vt(Y, Z), _vt(X, Z)))
+        cau += _c4s_dem(mo, dung, sai, dang, 0, giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH040_SA_B: quy tắc hình bình hành, có hình (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B8_TH040_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH040_MC_B (cùng Dang): cho hình bình hành (hình chữ nhật, hình thoi, hình
+    vuông) có hình vẽ; bốn đẳng thức dạng $\overrightarrow{XY} + \overrightarrow{XZ} = \ldots$; hỏi có bao nhiêu đẳng
+    thức đúng (sai). Chân trị tính bằng toạ độ của hình.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H = _c4_chon_hinh("th040_sa_b", ["hbh", "hcn", "thoi", "vuong"])
+        A, B, C, D = H["da_giac"]
+        O = H["tam"]
+        v = _b5_vt
+        cap = []
+        for X, U, W, T in ((A, B, D, C), (B, C, A, D), (C, D, B, A), (D, A, C, B)):
+            l = _b5_cong(v(X, U), v(X, W))
+            cap += [(l, v(X, T)), (l, v(U, W)), (l, v(W, U)), (l, v(T, X)), (l, _b5_nhan(2, v(X, O))),
+                    (l, v(X, O)), (_b5_cong(v(X, U), v(X, T)), v(X, W))]
+        envs = [{k: complex(*p) for k, p in H["P"].items()}]
+        dung, sai = _c4s_phan_loai(cap, envs, list(H["P"]))
+        giai_mo = (r"Parallelogram rule: if $%s$ is a parallelogram then $%s + %s = %s$.\\ "
+                   % (A + B + C + D, _vt(A, B), _vt(A, D), _vt(A, C)))
+        cau += _c4s_dem(H["mo"], dung, sai, dang, _c4_tikz(H), giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH041_SA_A: hiệu hai vectơ, quy tắc trừ (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B8_TH041_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH041_MC_A (cùng Dang): với ba điểm bất kì, bốn đẳng thức về hiệu hai
+    vectơ (quy tắc trừ); hỏi có bao nhiêu đẳng thức đúng (sai). Chân trị tính bằng toạ độ ngẫu nhiên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, Z = random.sample(random.choice(_C4S_BO_DIEM), 3)
+        v = _b5_vt
+        cap = [(_b5_tru(v(X, Y), v(X, Z)), v(Z, Y)), (_b5_tru(v(X, Y), v(X, Z)), v(Y, Z)),
+               (_b5_tru(v(X, Y), v(Z, Y)), v(X, Z)), (_b5_tru(v(X, Y), v(Z, Y)), v(Z, X)),
+               (_b5_tru(v(X, Z), v(Y, Z)), v(X, Y)), (_b5_tru(v(X, Z), v(Y, Z)), v(Y, X)),
+               (_b5_tru(v(Y, X), v(Z, X)), v(Y, Z)), (_b5_tru(v(Y, X), v(Z, X)), v(Z, Y)),
+               (_b5_tru(v(X, Y), v(X, Z)), _b5_cong(v(Z, X), v(X, Y))),
+               (_b5_tru(v(X, Y), v(X, Z)), _b5_cong(v(X, Z), v(Y, X))),
+               (_b5_tru(v(Z, X), v(Z, Y)), v(Y, X)), (_b5_tru(v(Z, X), v(Z, Y)), v(X, Y))]
+        envs = _b5_env_diem([X, Y, Z])
+        dung, sai = _c4s_phan_loai(cap, envs, [X, Y, Z])
+        mo = r"Given three arbitrary points $%s$, $%s$, $%s$." % tuple(sorted([X, Y, Z]))
+        giai_mo = (r"Subtraction rule: for any three points $%s$, $%s$, $%s$, $%s - %s = %s$.\\ "
+                   % (X, Y, Z, _vt(X, Y), _vt(X, Z), _vt(Z, Y)))
+        cau += _c4s_dem(mo, dung, sai, dang, 0, giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH041_SA_B: vectơ đối trong hình bình hành / hình chữ nhật / hình thoi / hình vuông (có hình)
+# ---------------------------------------------------------------------
+def L10_C4_B8_TH041_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH041_MC_B (cùng Dang): hình có tâm $O$ (hai đường chéo cắt nhau tại $O$),
+    bốn khẳng định ``$\vec u + \vec w = \vec 0$'' hoặc ``$\vec u = -\vec w$''; hỏi có bao nhiêu khẳng định đúng (sai).
+    Các cặp đưa ra đều có cùng độ dài (dễ nhầm); chân trị tính bằng toạ độ của hình.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        H = _c4_chon_hinh("th041_sa_b", ["hbh", "hcn", "thoi", "vuong"])
+        A, B, C, D = H["da_giac"]
+        O = H["tam"]
+        E = {k: complex(*p) for k, p in H["P"].items()}
+        vts = [(A, B), (B, C), (C, D), (D, A), (B, A), (C, B), (D, C), (A, D)] + [(O, X) for X in (A, B, C, D)] + \
+              [(X, O) for X in (A, B, C, D)]
+        dung, sai = [], []
+        for i, u in enumerate(vts):
+            for w in vts[i + 1:]:
+                a, b = E[u[1]] - E[u[0]], E[w[1]] - E[w[0]]
+                if set(u) == set(w) or abs(abs(a) - abs(b)) > 1e-9:
+                    continue
+                if abs(a + b) < 1e-9:
+                    ly = r"$%s$ and $%s$ are opposite vectors (same length, opposite directions)" % (_vt(*u), _vt(*w))
+                elif abs(a - b) < 1e-9:
+                    ly = r"$%s$ and $%s$ have the same direction, so they are not opposite vectors" % (_vt(*u), _vt(*w))
+                else:
+                    ly = r"$%s$ and $%s$ are not parallel, so they are not opposite vectors" % (_vt(*u), _vt(*w))
+                tex = random.choice([r"$%s + %s = \overrightarrow{0}$" % (_vt(*u), _vt(*w)),
+                                     r"$%s = -%s$" % (_vt(*u), _vt(*w))])
+                (dung if abs(a + b) < 1e-9 else sai).append((tex, ly))
+        dung.append((r"$%s + %s + %s + %s = \overrightarrow{0}$" % tuple(_vt(O, X) for X in (A, B, C, D)),
+                     r"$%s + %s = \overrightarrow{0}$ and $%s + %s = \overrightarrow{0}$ ($%s$ is the midpoint of each diagonal)" % (_vt(O, A), _vt(O, C), _vt(O, B), _vt(O, D), O)))
+        giai_mo = (r"Two opposite vectors have the same length and opposite directions; $\vec u + \vec w = \overrightarrow{0}$ if and only if $\vec u = -\vec w$.\\ ")
+        cau += _c4s_dem(H["mo"], dung, sai, dang, _c4_tikz(H), giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH042_SA_A: tính chất của phép cộng vectơ (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B8_TH042_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH042_MC_A (cùng Dang): ba vectơ tuỳ ý, bốn đẳng thức (giao hoán, kết
+    hợp, cộng với vectơ-không, cộng với vectơ đối; các đẳng thức sai là lỗi dấu, nhầm vectơ-không); hỏi có bao nhiêu
+    đẳng thức đúng (sai). Chân trị tính bằng ba bộ vectơ ngẫu nhiên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        tu = random.choice([("a", "b", "c"), ("u", "v", "w"), ("x", "y", "z")])
+        a, b, c = (_b5_tu(t) for t in tu)
+        cap = [(_b5_cong(a, b), _b5_cong(b, a)), (_b5_cong(_b5_cong(a, b), c), _b5_cong(a, _b5_cong(b, c))),
+               (_b5_cong(a, _B5_0), a), (_b5_cong(_b5_cong(a, b), c), _b5_cong(_b5_cong(a, c), b)),
+               (_b5_tru(a, b), _b5_nhan(-1, _b5_tru(b, a))), (_b5_cong(a, _b5_tru(b, a)), b),
+               (_b5_cong(a, _b5_nhan(-1, a)), _B5_0),
+               (_b5_cong(a, b), _b5_tru(b, a)), (_b5_tru(a, b), _b5_tru(b, a)), (_b5_cong(a, _B5_0), _B5_0),
+               (_b5_cong(_b5_cong(a, b), c), _b5_cong(a, _b5_tru(b, c))), (_b5_tru(a, _b5_cong(b, c)), _b5_cong(_b5_tru(a, b), c)),
+               (_b5_cong(a, _b5_tru(b, a)), a), (_b5_tru(a, b), _b5_tru(a, _b5_nhan(-1, b)))]
+        envs = [{t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in tu} for _ in range(3)]
+        dung, sai = [], []
+        for l, r in cap:
+            (dung if _b5_bang(l, r, envs) else sai).append((r"$%s = %s$" % (l.tex, r.tex), _b5_ly_tu(l, r, envs, tu), l.tex))
+        mo = r"Given three arbitrary vectors $%s$, $%s$, $%s$." % tuple(r"\overrightarrow{%s}" % t for t in tu)
+        giai_mo = (r"Vector addition is commutative and associative; $\vec a + \overrightarrow{0} = \vec a$, $\vec a + \left(-\vec a\right) = \overrightarrow{0}$; group like vectors to simplify each side.\\ ")
+        cau += _c4s_dem(mo, dung, sai, dang, 0, giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH043_SA_A: độ dài của vectơ k.a
+# ---------------------------------------------------------------------
+def L10_C4_B9_TH043_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH043_MC_A (cùng Dang: tích của một số với một vectơ, độ dài
+    $\left|k\vec a\right| = \left|k\right|\cdot\left|\vec a\right|$): biết $\left|\vec a\right|$ tính độ dài $k\vec a$,
+    hoặc biết $\vec b = k\vec a$ và $\left|\vec b\right|$ tính $\left|\vec a\right|$.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    a, b = r"\overrightarrow{a}", r"\overrightarrow{b}"
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 500:
+        lan += 1
+        k = random.choice([-5, -4, -3, -2, 2, 3, 4, 5, _Fr5(1, 2), _Fr5(-1, 2), _Fr5(3, 2), _Fr5(-3, 2)])
+        m = random.randint(2, 12)
+        kieu = random.choice(["xuoi", "nguoc"])
+        if kieu == "nguoc" and (abs(k) * m).denominator != 1:
+            continue
+        if (k, m, kieu) not in gt:
+            gt.append((k, m, kieu))
+    cau = ""
+    for k, m, kieu in gt:
+        n = abs(k) * m
+        kt = _he5(k)
+        if kieu == "xuoi":
+            dap = n
+            debai = (r"Given a vector $%s$ with $\left|%s\right| = %d$. What is the length of the vector $%s%s$?"
+                     % (a, a, m, kt, a))
+            giai = (r"$\left|%s%s\right| = \left|%s\right|\cdot\left|%s\right| = %s\cdot %d = %s$."
+                    % (kt, a, kt, a, _xx4(float(abs(k)), 2), m, _xx4(float(n), 2)))
+            ung = [m, float(k) * m, n + m, abs(n - m), 2 * n]
+        else:
+            dap = _Fr5(m)
+            debai = (r"Given two vectors $%s$, $%s$ such that $%s = %s%s$ and $\left|%s\right| = %s$. Find $\left|%s\right|$."
+                     % (a, b, b, kt, a, b, _xx4(float(n), 2), a))
+            giai = (r"$\left|%s\right| = \left|%s\right|\cdot\left|%s\right| = %s\left|%s\right|$, so $\left|%s\right| = %s : %s = %d$."
+                    % (b, kt, a, _xx4(float(abs(k)), 2), a, a, _xx4(float(n), 2), _xx4(float(abs(k)), 2), m))
+            ung = [n, float(n) * float(abs(k)), m + 1, m - 1, 2 * m]
+        ds = _xx4(float(dap), 2)
+        nhieu = [_xx4(float(x), 2) for x in ung if _xx4(float(x), 2) != ds and float(x) > 0]
+        cau += MC_SA_answer_const(debai, ds, nhieu + ["%d" % (int(float(dap)) + j) for j in (1, 2, 3)], giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH044_SA_A: tính chất phép nhân số với vectơ (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B9_TH044_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH044_MC_A (cùng Dang): với hai số cụ thể $k$, $l$ và hai vectơ tuỳ ý,
+    bốn đẳng thức (phân phối với cộng vectơ, với cộng số, kết hợp; các đẳng thức sai bỏ sót hệ số, sai dấu, nhầm
+    cộng số thành nhân số); hỏi có bao nhiêu đẳng thức đúng (sai). Chân trị tính bằng ba bộ vectơ ngẫu nhiên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        k, l = random.sample([2, 3, 4, 5, -2, -3], 2)
+        while k + l == 0:
+            k, l = random.sample([2, 3, 4, 5, -2, -3], 2)
+        a, b = _b5_tu("a"), _b5_tu("b")
+        n = _b5_nhan
+        kl_tex = r"\left(%d %s %d\right)" % (k, "+" if l > 0 else "-", abs(l))
+        cap = [(n(k, _b5_cong(a, b)), _b5_cong(n(k, a), n(k, b))), (n(k, _b5_tru(a, b)), _b5_cong(n(k, a), n(-k, b))),
+               (n(k + l, a, kl_tex), _b5_cong(n(k, a), n(l, a))), (n(k, n(l, a)), n(k * l, a)),
+               (n(-k, _b5_tru(a, b)), _b5_cong(n(-k, a), n(k, b))),
+               (n(k, _b5_cong(a, b)), _b5_cong(n(k, a), b)), (n(k, _b5_tru(a, b)), _b5_cong(n(k, a), n(k, b))),
+               (n(k, _b5_tru(a, b)), _b5_tru(n(k, a), b)), (n(k, n(l, a)), n(k + l, a)),
+               (n(k + l, a, kl_tex), n(k * l, a)), (n(-k, _b5_tru(a, b)), _b5_tru(n(-k, a), n(k, b)))]
+        envs = [{t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in "ab"} for _ in range(3)]
+        dung, sai = [], []
+        for x, y in cap:
+            (dung if _b5_bang(x, y, envs) else sai).append((r"$%s = %s$" % (x.tex, y.tex), _b5_ly_tu(x, y, envs, "ab"), x.tex))
+        mo = r"Given two arbitrary vectors $\overrightarrow{a}$, $\overrightarrow{b}$."
+        giai_mo = (r"For two numbers $k$, $l$ and two vectors $\vec a$, $\vec b$: $k\left(\vec a + \vec b\right) = k\vec a + k\vec b$; $\left(k + l\right)\vec a = k\vec a + l\vec a$; $k\left(l\vec a\right) = \left(kl\right)\vec a$.\\ ")
+        cau += _c4s_dem(mo, dung, sai, dang, 0, giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH046_SA_A: ba điểm thẳng hàng - tìm k để AB = k.AC (toạ độ)
+# ---------------------------------------------------------------------
+def L10_C4_B9_TH046_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH046_MC_A (cùng Dang): cho toạ độ ba điểm thẳng hàng, tìm số $k$ sao
+    cho $\overrightarrow{AB} = k\overrightarrow{AC}$ (từ đó suy ra ba điểm thẳng hàng). $k$ nguyên hoặc nửa nguyên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    gt = []
+    lan = 0
+    while len(gt) < socau and lan < 2000:
+        lan += 1
+        k = random.choice([2, 3, -2, -3, 4, -1, _Fr5(1, 2), _Fr5(-1, 2), _Fr5(3, 2), _Fr5(-3, 2)])
+        xa, ya = random.randint(-5, 5), random.randint(-5, 5)
+        q = _Fr5(k).denominator
+        ux, uy = q * random.randint(-3, 3), q * random.randint(-3, 3)
+        if (ux, uy) == (0, 0):
+            continue
+        xc, yc = xa + ux, ya + uy
+        xb, yb = xa + int(k * ux), ya + int(k * uy)
+        if max(abs(xb), abs(yb), abs(xc), abs(yc)) > 12:
+            continue
+        w = (xa, ya, xb, yb, xc, yc)
+        if w not in gt:
+            gt.append(w)
+    cau = ""
+    for xa, ya, xb, yb, xc, yc in gt:
+        ab, ac = (xb - xa, yb - ya), (xc - xa, yc - ya)
+        k = _Fr5(ab[0], ac[0]) if ac[0] else _Fr5(ab[1], ac[1])
+        debai = (r"In the coordinate plane $Oxy$, given three points $A%s$, $B%s$, $C%s$. Find the real number $k$ such that $\overrightarrow{AB} = k\overrightarrow{AC}$." % (_toado(xa, ya), _toado(xb, yb), _toado(xc, yc)))
+        giai = (r"$\overrightarrow{AB} = %s$, $\overrightarrow{AC} = %s$. Since $%s = %s\cdot\left(%d\right)$ and $%s = %s\cdot\left(%d\right)$, $\overrightarrow{AB} = %s\overrightarrow{AC}$, i.e. $k = %s$ (the points $A$, $B$, $C$ are collinear)."
+                % (_toado(*ab), _toado(*ac), ab[0], _xx4(float(k), 2), ac[0], ab[1], _xx4(float(k), 2), ac[1],
+                   _he5(k) if k not in (1, -1) else str(k), _xx4(float(k), 2)))
+        dap = _xx4(float(k), 2)
+        ung = [_xx4(float(1 / k), 2), _xx4(-float(k), 2), _xx4(float(k) + 1, 2), _xx4(float(k) - 1, 2)]
+        cau += MC_SA_answer_const(debai, dap, ung, giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH047_SA_A: đẳng thức vectơ về trung điểm (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B9_TH047_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH047_MC_A (cùng Dang): $J$ là trung điểm của $XY$, $N$ là điểm bất kì;
+    bốn đẳng thức vectơ; hỏi có bao nhiêu đẳng thức đúng (sai). Chân trị tính bằng toạ độ ngẫu nhiên ($J$ là trung
+    điểm).
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        X, Y, J, N = random.choice([("A", "B", "I", "M"), ("M", "N", "I", "O"), ("X", "Y", "J", "N"), ("P", "Q", "K", "M"),
+                                    ("E", "F", "I", "S")])
+        v = _b5_vt
+        cap = [(_b5_cong(v(N, X), v(N, Y)), _b5_nhan(2, v(N, J))), (_b5_cong(v(J, X), v(J, Y)), _B5_0),
+               (v(X, J), v(J, Y)), (v(X, Y), _b5_nhan(2, v(X, J))), (v(X, Y), _b5_nhan(2, v(J, Y))),
+               (v(J, X), _b5_nhan(_Fr5(-1, 2), v(X, Y))),
+               (_b5_cong(v(N, X), v(N, Y)), v(N, J)), (_b5_cong(v(N, X), v(N, Y)), _b5_nhan(2, v(J, N))),
+               (v(J, X), v(J, Y)), (v(X, Y), _b5_nhan(2, v(J, X))), (_b5_cong(v(J, X), v(J, Y)), v(X, Y)),
+               (_b5_tru(v(N, X), v(N, Y)), _b5_nhan(2, v(N, J))), (v(J, X), _b5_nhan(_Fr5(1, 2), v(X, Y)))]
+
+        def rb(E):
+            E[J] = (E[X] + E[Y]) / 2
+        envs = _b5_env_diem([X, Y, N], rb)
+        dung, sai = _c4s_phan_loai(cap, envs, [X, Y, J, N])
+        mo = r"Let $%s$ be the midpoint of segment $%s$ and $%s$ an arbitrary point." % (J, X + Y, N)
+        giai_mo = (r"$%s$ is the midpoint of $%s$, so $%s + %s = \overrightarrow{0}$ and for every point $%s$: $%s + %s = 2%s$.\\ " % (J, X + Y, _vt(J, X), _vt(J, Y), N, _vt(N, X), _vt(N, Y), _vt(N, J)))
+        cau += _c4s_dem(mo, dung, sai, dang, 0, giai_mo)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB038_SA_A: vectơ bằng nhau trong hình (đếm đẳng thức đúng)
+# ---------------------------------------------------------------------
+def L10_C4_B7_NB038_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB038_MC_A (cùng Dang: nhận ra hai vectơ bằng nhau trong hình): bốn đẳng
+    thức $\overrightarrow{XY} = \overrightarrow{ZT}$ theo hình (kho hình xoay vòng như NB038_MC_A_02); hỏi có bao nhiêu
+    đẳng thức đúng (sai). Các đẳng thức sai là cặp dễ nhầm: cùng độ dài nhưng ngược hướng, cùng hướng nhưng khác độ
+    dài, cùng độ dài nhưng không cùng phương.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    so = 0
+    while so < socau:
+        H = _c4_chon_hinh("nb038_sa_a")
+        vts = _c4_tat_ca_vt(H)
+        do = lambda w: math.hypot(*_c4_v(H, *w))
+        dung, sai = [], []
+        for i, u in enumerate(vts):
+            for w in vts[i + 1:]:
+                if set(u) == set(w):
+                    continue
+                a, b = _c4_v(H, *u), _c4_v(H, *w)
+                cung_do = abs(do(u) - do(w)) < 1e-7
+                tex = r"$%s = %s$" % (_vt(*u), _vt(*w))
+                if _c4_bang(a, b):
+                    dung.append((tex, r"$%s$ and $%s$ have the same direction and the same length" % (_vt(*u), _vt(*w))))
+                elif cung_do and _c4_cp(a, b):
+                    sai.append((tex, r"$%s$ and $%s$ have opposite directions" % (_vt(*u), _vt(*w))))
+                elif _c4_ch(a, b):
+                    sai.append((tex, r"$%s$ and $%s$ have the same direction but different lengths" % (_vt(*u), _vt(*w))))
+                elif cung_do and not _c4_cp(a, b):
+                    sai.append((tex, r"$%s$ and $%s$ have the same length but are not parallel" % (_vt(*u), _vt(*w))))
+        if len(dung) < 3 or len(sai) < 3:
+            continue
+        so += 1
+        cau += _c4s_dem(H["mo"], dung, sai, dang, _c4_tikz(H),
+                        r"Two vectors are equal when they have the same direction and the same magnitude.\\ ")
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH059_SA_A: tính chất của tích vô hướng (đếm khẳng định đúng)
+# ---------------------------------------------------------------------
+def _c4s_tvh_kho(k):
+    """Kho khẳng định về tích vô hướng: (tex, hàm kiểm tra trên ba vectơ (số phức), lí do)."""
+    a, b, c = r"\overrightarrow{a}", r"\overrightarrow{b}", r"\overrightarrow{c}"
+    d = lambda u, v: (u.conjugate() * v).real
+    return [
+        (r"$%s\cdot %s = %s\cdot %s$" % (a, b, b, a), lambda A, B, C: (d(A, B), d(B, A)),
+         r"the dot product is commutative"),
+        (r"$%s\cdot\left(%s + %s\right) = %s\cdot %s + %s\cdot %s$" % (a, b, c, a, b, a, c),
+         lambda A, B, C: (d(A, B + C), d(A, B) + d(A, C)), r"the dot product is distributive over vector addition"),
+        (r"$%s\cdot\left(%s - %s\right) = %s\cdot %s - %s\cdot %s$" % (a, b, c, a, b, a, c),
+         lambda A, B, C: (d(A, B - C), d(A, B) - d(A, C)), r"the dot product is distributive over vector subtraction"),
+        (r"$\left(%d%s\right)\cdot %s = %d\left(%s\cdot %s\right)$" % (k, a, b, k, a, b),
+         lambda A, B, C: (d(k * A, B), k * d(A, B)), r"$\left(k\vec a\right)\cdot\vec b = k\left(\vec a\cdot\vec b\right)$"),
+        (r"$%s^{2} = \left|%s\right|^{2}$" % (a, a), lambda A, B, C: (d(A, A), abs(A) ** 2),
+         r"the scalar square of a vector equals the square of its length"),
+        (r"$\left(%s + %s\right)\cdot\left(%s - %s\right) = \left|%s\right|^{2} - \left|%s\right|^{2}$" % (a, b, a, b, a, b),
+         lambda A, B, C: (d(A + B, A - B), abs(A) ** 2 - abs(B) ** 2),
+         r"expanding the left-hand side gives $\vec a^{2} - \vec a\cdot\vec b + \vec b\cdot\vec a - \vec b^{2} = \left|\vec a\right|^{2} - \left|\vec b\right|^{2}$"),
+        (r"$%s\cdot %s = -%s\cdot %s$" % (a, b, b, a), lambda A, B, C: (d(A, B), -d(B, A)),
+         r"$\vec a\cdot\vec b = \vec b\cdot\vec a$, so the two sides are equal only when $\vec a\cdot\vec b = 0$"),
+        (r"$%s\cdot\left(%s - %s\right) = %s\cdot %s + %s\cdot %s$" % (a, b, c, a, b, a, c),
+         lambda A, B, C: (d(A, B - C), d(A, B) + d(A, C)), r"in fact $\vec a\cdot\left(\vec b - \vec c\right) = \vec a\cdot\vec b - \vec a\cdot\vec c$"),
+        (r"$\left(%d%s\right)\cdot\left(%d%s\right) = %d\left(%s\cdot %s\right)$" % (k, a, k, b, k, a, b),
+         lambda A, B, C: (d(k * A, k * B), k * d(A, B)), r"the left-hand side equals $%d\left(\vec a\cdot\vec b\right)$" % (k * k)),
+        (r"$%s^{2} = \left|%s\right|$" % (a, a), lambda A, B, C: (d(A, A), abs(A)),
+         r"$\vec a^{2} = \left|\vec a\right|^{2}$, not $\left|\vec a\right|$"),
+        (r"$\left(%s + %s\right)\cdot\left(%s - %s\right) = \left|%s\right|^{2} + \left|%s\right|^{2}$" % (a, b, a, b, a, b),
+         lambda A, B, C: (d(A + B, A - B), abs(A) ** 2 + abs(B) ** 2),
+         r"the left-hand side equals $\left|\vec a\right|^{2} - \left|\vec b\right|^{2}$"),
+        (r"$%s\cdot %s = \left|%s\right|\cdot\left|%s\right|$" % (a, b, a, b), lambda A, B, C: (d(A, B), abs(A) * abs(B)),
+         r"$\vec a\cdot\vec b = \left|\vec a\right|\cdot\left|\vec b\right|\cdot\cos\left(\vec a, \vec b\right)$, which equals $\left|\vec a\right|\cdot\left|\vec b\right|$ only when the two vectors have the same direction"),
+        (r"$\left(%s + %s\right)^{2} = \left|%s\right|^{2} + \left|%s\right|^{2}$" % (a, b, a, b),
+         lambda A, B, C: (d(A + B, A + B), abs(A) ** 2 + abs(B) ** 2),
+         r"$\left(\vec a + \vec b\right)^{2} = \left|\vec a\right|^{2} + 2\vec a\cdot\vec b + \left|\vec b\right|^{2}$"),
+    ]
+
+
+def L10_C4_B11_TH059_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH059_MC_A (cùng Dang: tính chất của tích vô hướng): bốn đẳng thức với ba
+    vectơ tuỳ ý; hỏi có bao nhiêu đẳng thức đúng (sai). Chân trị tính bằng ba bộ vectơ ngẫu nhiên.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    cau = ""
+    for _ in range(socau):
+        k = random.choice([2, 3, 4, 5, -2, -3])
+        envs = [tuple(complex(random.uniform(-9, 9), random.uniform(-9, 9)) for _ in range(3)) for _ in range(3)]
+        dung, sai = [], []
+        for tex, f, ly in _c4s_tvh_kho(k):
+            ok = all(abs(f(*E)[0] - f(*E)[1]) < 1e-7 for E in envs)
+            (dung if ok else sai).append((tex, ly))
+        mo = r"Given three arbitrary vectors $\overrightarrow{a}$, $\overrightarrow{b}$, $\overrightarrow{c}$."
+        cau += _c4s_dem(mo, dung, sai, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# NB049_SA_A, TH050_SA_A: toạ độ của vectơ
+# ---------------------------------------------------------------------
+def L10_C4_B10_NB049_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB049_MC_A (cùng Dang: nhận ra toạ độ của vectơ trong hệ trục): cho
+    $\vec u = x\vec i + y\vec j$ hỏi hoành độ (tung độ) của $\vec u$, hoặc cho $\vec u = \left(x; y\right)$ viết
+    $\vec u = m\vec i + n\vec j$ hỏi $m$ (hoặc $n$).
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    gt = []
+    while len(gt) < socau:
+        x, y = random.randint(-9, 9), random.randint(-9, 9)
+        if x == 0 and y == 0:
+            continue
+        w = (x, y, random.choice(["ij_hd", "ij_td", "td_m", "td_n"]))
+        if w not in gt:
+            gt.append(w)
+    cau = ""
+    for x, y, kieu in gt:
+        u = r"\overrightarrow{u}"
+        if kieu.startswith("ij"):
+            hoi = "x-coordinate" if kieu == "ij_hd" else "y-coordinate"
+            dap = x if kieu == "ij_hd" else y
+            debai = (r"In the coordinate plane $Oxy$ with unit vectors $\overrightarrow{i}$, $\overrightarrow{j}$, given the vector $%s = %s$. Find the \textbf{%s} of the vector $%s$." % (u, _bt_ij(x, y), hoi, u))
+            giai = r"$%s = %s$ so $%s = %s$, and the %s of $%s$ is $%d$." % (u, _bt_ij(x, y), u, _toado(x, y), hoi, u, dap)
+        else:
+            dap = x if kieu == "td_m" else y
+            debai = (r"In the coordinate plane $Oxy$ with unit vectors $\overrightarrow{i}$, $\overrightarrow{j}$, given the vector $%s = %s$. Suppose $%s = m\overrightarrow{i} + n\overrightarrow{j}$. Find $%s$."
+                     % (u, _toado(x, y), u, "m" if kieu == "td_m" else "n"))
+            giai = (r"$%s = %s$ means $%s = %s$, so $m = %d$, $n = %d$." % (u, _toado(x, y), u, _bt_ij(x, y), x, y))
+        ung = [y if dap == x else x, -dap, dap + 1, dap - 1, dap + 2, dap - 2]
+        cau += MC_SA_answer_const(debai, str(dap), [str(t) for t in ung], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B10_TH050_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH050_MC_A (cùng Dang: toạ độ vectơ $\overrightarrow{AB}$ từ toạ độ hai
+    điểm): hỏi hoành độ hoặc tung độ của $\overrightarrow{AB}$.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    gt = []
+    while len(gt) < socau:
+        w = tuple(random.randint(-6, 6) for _ in range(4)) + (random.choice(["x-coordinate", "y-coordinate"]),)
+        if w[:2] != w[2:4] and w not in gt:
+            gt.append(w)
+    cau = ""
+    for xa, ya, xb, yb, hoi in gt:
+        dx, dy = xb - xa, yb - ya
+        dap = dx if hoi == "x-coordinate" else dy
+        debai = (r"In the coordinate plane $Oxy$, given two points $A%s$ and $B%s$. Find the \textbf{%s} of the vector $\overrightarrow{AB}$." % (_toado(xa, ya), _toado(xb, yb), hoi))
+        giai = (r"$\overrightarrow{AB} = \left(x_B - x_A;\ y_B - y_A\right) = \left(%d - \left(%d\right);\ %d - \left(%d\right)\right) = %s$. So the %s of $\overrightarrow{AB}$ is $%d$." % (xb, xa, yb, ya, _toado(dx, dy), hoi, dap))
+        ung = [(xa - xb) if hoi == "x-coordinate" else (ya - yb), (xa + xb) if hoi == "x-coordinate" else (ya + yb),
+               dy if hoi == "x-coordinate" else dx, dap + 1, dap - 1, dap + 2]
+        cau += MC_SA_answer_const(debai, str(dap), [str(t) for t in ung], giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B10_TH050_MC_B_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với TH050_SA_B_01 (toạ độ đỉnh thứ tư của hình bình hành, hỏi hoành độ): gọi lại hàm SA
+    với dang=1.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    return L10_C4_B10_TH050_SA_B_01(socau, dang)
+
+
+def L10_C4_B10_VD054_MC_B_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với VD054_SA_B_01 (độ dài trung tuyến theo toạ độ): gọi lại hàm SA với dang=1.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    return L10_C4_B10_VD054_SA_B_01(socau, dang)
+
+
+# ---------------------------------------------------------------------
+# NB057_SA_A, TH057_SA_A, TH057_SA_B: góc giữa hai vectơ trên hình (đáp số là số đo độ)
+# ---------------------------------------------------------------------
+def L10_C4_B11_NB057_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB057_MC_A_01 (cùng cặp vectơ chung điểm đầu, tam giác đều).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "AC"), ("BA", "BC"), ("CA", "CB"), ("HB", "HC"),
+           ("HA", "HB"), ("HC", "HA"), ("BC", "BA"), ("AC", "AB")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG, tra_loi_ngan=True)
+
+
+def L10_C4_B11_NB057_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB057_MC_A_02 (chung điểm đầu, hình vuông).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "AD"), ("AB", "AC"), ("DA", "DB"), ("BA", "BD"),
+           ("CB", "CD"), ("OA", "OB"), ("OA", "OC"), ("CA", "CD")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV, tra_loi_ngan=True)
+
+
+def L10_C4_B11_TH057_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH057_MC_A_01 (không chung điểm đầu, tam giác đều).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "BC"), ("AB", "CA"), ("BC", "CA"), ("AH", "BC"),
+           ("AB", "HC"), ("HA", "BC"), ("BH", "CA"), ("AC", "HB")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG, tra_loi_ngan=True)
+
+
+def L10_C4_B11_TH057_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH057_MC_A_02 (không chung điểm đầu, hình vuông).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "CD"), ("AB", "DC"), ("AC", "BD"), ("AB", "CA"),
+           ("AD", "CB"), ("AB", "BD"), ("AO", "BC"), ("DO", "AB")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV, tra_loi_ngan=True)
+
+
+def L10_C4_B11_TH057_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH057_MC_B_01 (chung điểm cuối, tam giác đều).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "CB"), ("BA", "CA"), ("AC", "BC"), ("AH", "BH"),
+           ("BH", "CH"), ("AB", "HB"), ("HC", "AC"), ("CH", "AH")]
+    return _cau_goc_vecto(socau, dang, _TG_DEU, _hinh_tg_deu_H(), _TEN_TG, CAP, _GOC_TG, tra_loi_ngan=True)
+
+
+def L10_C4_B11_TH057_SA_B_02(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của TH057_MC_B_02 (chung điểm cuối, hình vuông).
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
+    CAP = [("AB", "CB"), ("AC", "BC"), ("AC", "DC"), ("BD", "AD"),
+           ("AB", "DB"), ("AO", "CO"), ("AO", "BO"), ("DC", "BC")]
+    return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV, tra_loi_ngan=True)

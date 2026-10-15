@@ -165,7 +165,8 @@
       {
         "mo_ta": "Nhận ra công thức độ dài đường trung tuyến",
         "mapping_id": [
-          "L10_C3_B6_TH032_MC_F"
+          "L10_C3_B6_TH032_MC_F",
+          "L10_C3_B6_TH032_SA_F"
         ]
       },
       {
@@ -215,7 +216,8 @@
       {
         "mo_ta": "Hình bình hành biết một cạnh và hai đường chéo, tính cạnh kề",
         "mapping_id": [
-          "L10_C3_B6_VD032_MC_A"
+          "L10_C3_B6_VD032_MC_A",
+          "L10_C3_B6_VD032_SA_A"
         ]
       },
       {
