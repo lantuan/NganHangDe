@@ -59,11 +59,11 @@ def _kiem_nhieu(dap, nhieu, mien):
     assert dap not in nhieu and len(set(nhieu)) == len(nhieu) and set(nhieu) <= {str(j) for j in mien}
 
 
-# ------------------------------------------------------------------ NB023_SA_A: dem cap so la nghiem
+# ------------------------------------------------------------------ TH024_SA_B (truoc 15/10/2026 la NB023_SA_A): dem cap so la nghiem
 def test_nb023_sa_a_dem_dung_so_cap_nghiem():
     thay = set()
     for seed in range(SO_LAN):
-        debai, dap, nhieu, giai = _bat(M.L10_C2_B3_NB023_SA_A_01, seed)
+        debai, dap, nhieu, giai = _bat(M.L10_C2_B3_TH024_SA_B_01, seed)
         m = re.search(r"Cho bất phương trình \$(.+?)\$\. Trong các cặp số (.+?), có bao nhiêu cặp số là nghiệm", debai)
         assert m, debai
         lhs, dau, c = _tach_bpt(m.group(1))
@@ -79,9 +79,9 @@ def test_nb023_sa_a_dem_dung_so_cap_nghiem():
 
 
 def test_nb023_sa_a_dinh_dang_tl_ngan_va_mc():
-    sa = M.L10_C2_B3_NB023_SA_A_01(2)
+    sa = M.L10_C2_B3_TH024_SA_B_01(2)
     assert sa.count(r"\shortans") == 2 and r"\choice" not in sa and r"\item" not in sa
-    mc = M.L10_C2_B3_NB023_SA_A_01(2, 1)
+    mc = M.L10_C2_B3_TH024_SA_B_01(2, 1)
     assert mc.count(r"\choice") == 2 and mc.count(r"\True") == 2
 
 
@@ -101,7 +101,7 @@ def test_nb023_mc_b_dap_an_la_gia_tri_f():
         assert _he_so(lhs) == (a, b) and THOA[dau](a * x0 + b * y0, c)
 
 
-# ------------------------------------------------------------------ TH027_SA_B: so dinh / canh cua mien nghiem
+# ------------------------------------------------------------------ TH027_SA_C (truoc 15/10/2026 la TH027_SA_B): so dinh / canh cua mien nghiem
 def _so_dinh_vet_can(fx, gx, hx, kx, a, b, c, dau):
     """Cac ung vien: 4 dinh hinh chu nhat + giao diem duong thang voi 4 canh; giu cac diem thoa du 5 bat phuong trinh."""
     ung = {(fx, hx), (fx, kx), (gx, hx), (gx, kx)}
@@ -121,7 +121,7 @@ def _so_dinh_vet_can(fx, gx, hx, kx, a, b, c, dau):
 def test_th027_sa_b_dem_dinh_canh_vet_can():
     thay = set()
     for seed in range(SO_LAN):
-        debai, dap, nhieu, giai = _bat(M.L10_C2_B4_TH027_SA_B_01, seed)
+        debai, dap, nhieu, giai = _bat(M.L10_C2_B4_TH027_SA_C_01, seed)
         m = re.search(r"\\heva\{& x \\ge (-?\d+) \\\\ & x \\le (-?\d+) \\\\ & y \\ge (-?\d+) \\\\ & y \\le (-?\d+) \\\\ & (.+?)\}\$\. "
                       r"Miền nghiệm của hệ là một đa giác\. Đa giác đó có bao nhiêu (đỉnh|cạnh)\?", debai)
         assert m, debai
@@ -146,7 +146,7 @@ def test_th027_vet_can_dung_tren_mau_biet():
     assert _so_dinh_vet_can(0, 3, 0, 3, 1, 1, 4, r"\ge") == 3      # x + y >= 4: tam giac (3,1),(3,3),(1,3)
 
 
-@pytest.mark.parametrize("ten", ["NB023_SA_A_01", "TH027_SA_B_01"])
+@pytest.mark.parametrize("ten", ["TH024_SA_B_01", "TH027_SA_C_01"])
 def test_sa_moi_khong_co_item_va_don_cau(ten):
     ham = [getattr(M, n) for n in dir(M) if n.endswith(ten)][0]
     for seed in range(30):

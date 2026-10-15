@@ -41,6 +41,28 @@
     "difficulty_rank": 1
   },
   {
+    "id": "L10_C2_B3_NB024",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "chuong_so": "2",
+    "bai": "Bất phương trình bậc nhất 2 ẩn",
+    "bai_so": "3",
+    "subsection": null,
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được điểm thuộc miền nghiệm của bất phương trình bậc nhất hai ẩn trên hình biểu diễn miền nghiệm.",
+    "examples": [],
+    "scope": "trên hình biểu diễn miền nghiệm",
+    "tags": [
+      "bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "mien_nghiem"
+    ],
+    "difficulty_rank": 1,
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan chot: cho HINH mien nghiem, hoi diem thuoc mien nghiem la muc NHAN BIET. Muc nay THAP hon YCCD TH024 cua Bo (Bieu dien duoc mien nghiem) nen khong ghi ngoai YCCD."
+  },
+  {
     "id": "L10_C2_B3_TH024",
     "lop": 10,
     "hoc_phan": "Đại số và Một số yếu tố giải tích",
@@ -122,6 +144,37 @@
       "mien_nghiem"
     ],
     "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C2_B4_VD027",
+    "lop": 10,
+    "hoc_phan": "Đại số và Một số yếu tố giải tích",
+    "chuong": "Bất phương trình và hệ bất phương trình bậc nhất hai ẩn",
+    "chuong_so": "2",
+    "bai": "Hệ bất phương trình bậc nhất hai ẩn",
+    "bai_so": "4",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Biểu diễn được",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "examples": [],
+    "scope": "trên mặt phẳng tọa độ",
+    "tags": [
+      "he_bat_phuong_trinh",
+      "bac_nhat_hai_an",
+      "mien_nghiem"
+    ],
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Cho hệ bất phương trình bậc nhất hai ẩn, xác định điểm thuộc miền nghiệm / đếm số điểm thuộc miền nghiệm",
+        "mapping_id": [
+          "L10_C2_B4_VD027_MC_B",
+          "L10_C2_B4_VD027_SA_B"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Cô Lan chốt 15/10/2026: cho HỆ bất phương trình, hỏi điểm thuộc miền nghiệm là mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho nội dung này (biểu diễn miền nghiệm của hệ) chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM, cao hơn yêu cầu cần đạt. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
     "id": "L10_C2_B4_VD028",

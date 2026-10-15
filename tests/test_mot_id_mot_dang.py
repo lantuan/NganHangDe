@@ -78,7 +78,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B2_VD020_MC_A",   # khong thuoc nao / tim tong so / it nhat mot / tim so thuoc ca hai (kho boi canh)
     # tu de on tap cuoi chuong 1:
     # tu bai tap trac nghiem Bai 3 chuong 2 (BPT bac nhat hai an):
-    "L10_C2_B3_NB023_MC_A",   # chon diem thuoc mien nghiem / cho diem, chon bat phuong trinh
+    "L10_C2_B3_TH024_MC_B",   # chon diem thuoc mien nghiem / cho diem, chon bat phuong trinh
     "L10_C2_B3_NB025_MC_A",   # tien - gio cong - khoi luong / protein, cuoc goi, lam them, thue xe
     "L10_C2_TF_A",            # ax + by <= c dem diem nguyen / diem tren bo / mien nghiem mo ta bang loi
     "L10_C2_B3_NB022_MC_A",   # ca hai deu: nhan biet bat phuong trinh bac nhat hai an

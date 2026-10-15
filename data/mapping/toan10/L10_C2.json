@@ -6,19 +6,6 @@
     "Dang": "Nhận ra bất phương trình bậc nhất hai ẩn trong các biểu thức cho trước"
   },
   {
-    "id": "L10_C2_B3_NB023_MC_A",
-    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không"
-  },
-  {
-    "id": "L10_C2_B3_NB023_SA_A",
-    "content": "Nhận biết được nghiệm và tập hợp nghiệm của bất phương trình bậc nhất hai ẩn.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Kiểm tra một cặp số có phải nghiệm của bất phương trình không",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB023_MC_A (cung Dang): dem so cap so la nghiem trong 5 cap so; co Lan duyet lai"
-  },
-  {
     "id": "L10_C2_B3_NB025_MC_A",
     "content": "Nhận biết ý nghĩa của bất phương trình bậc nhất hai ẩn thông qua các ví dụ thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -35,10 +22,38 @@
     "ghi_chu": "09/10/2026 sang loc cau thuc te chuong 2: them boi_canh"
   },
   {
+    "id": "L10_C2_B3_NB024_MC_B",
+    "content": "Nhận biết được điểm thuộc miền nghiệm của bất phương trình bậc nhất hai ẩn trên hình biểu diễn miền nghiệm.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc hình miền nghiệm của một bất phương trình (đề không cho bất phương trình): xác định điểm thuộc miền nghiệm (điểm trên bờ nét liền thì thuộc, nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan duyet ke hoach ID (diem thuoc mien nghiem; co Lan: dung hinh thi chi la NB); hoi diem nao thuoc mien nghiem; khac NB023 (NB023 cho san bat phuong trinh); co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C2_B3_NB024_SA_B",
+    "content": "Nhận biết được điểm thuộc miền nghiệm của bất phương trình bậc nhất hai ẩn trên hình biểu diễn miền nghiệm.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đọc hình miền nghiệm của một bất phương trình (đề không cho bất phương trình): xác định điểm thuộc miền nghiệm (điểm trên bờ nét liền thì thuộc, nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan duyet ke hoach ID (diem thuoc mien nghiem; co Lan: dung hinh thi chi la NB); ban tra loi ngan cua TH024_MC_B (cung Dang): dem so diem thuoc mien nghiem trong 5 diem; co Lan duyet lai noi dung"
+  },
+  {
     "id": "L10_C2_B3_TH024_MC_A",
     "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Chọn hình vẽ đúng của miền nghiệm"
+  },
+  {
+    "id": "L10_C2_B3_TH024_MC_B",
+    "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cho bất phương trình, kiểm tra một điểm (cặp số) có thuộc miền nghiệm (là nghiệm) của bất phương trình không",
+    "ghi_chu": "DOI ID 15/10/2026 (co Lan): L10_C2_B3_NB023_MC_A -> L10_C2_B3_TH024_MC_B; cho bat phuong trinh xet diem thuoc mien nghiem la muc TH, 023 danh cho tinh F(x;y)"
+  },
+  {
+    "id": "L10_C2_B3_TH024_SA_B",
+    "content": "Biểu diễn được miền nghiệm của bất phương trình bậc nhất hai ẩn trên mặt phẳng toạ độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cho bất phương trình, kiểm tra một điểm (cặp số) có thuộc miền nghiệm (là nghiệm) của bất phương trình không",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua NB023_MC_A (cung Dang): dem so cap so la nghiem trong 5 cap so; co Lan duyet lai; DOI ID 15/10/2026 (co Lan): L10_C2_B3_NB023_SA_A -> L10_C2_B3_TH024_SA_B; cho bat phuong trinh xet diem thuoc mien nghiem la muc TH, 023 danh cho tinh F(x;y)"
   },
   {
     "id": "L10_C2_B3_TH024_TL_A",
@@ -57,6 +72,20 @@
     "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Chọn hình vẽ đúng của miền nghiệm hệ"
+  },
+  {
+    "id": "L10_C2_B4_TH027_MC_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đọc hình miền nghiệm của hệ bất phương trình (đề không cho hệ): xác định điểm thuộc miền nghiệm (điểm trên bờ nét liền thì thuộc, nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan chot ID TH027_MC_B (hinh ve he, diem thuoc khong); hoi diem nao thuoc mien nghiem; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C2_B4_TH027_SA_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đọc hình miền nghiệm của hệ bất phương trình (đề không cho hệ): xác định điểm thuộc miền nghiệm (điểm trên bờ nét liền thì thuộc, nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - co Lan chot ID TH027_MC_B (hinh ve he, diem thuoc khong); ban tra loi ngan cua TH027_MC_B (cung Dang): dem so diem thuoc trong 5 diem; co Lan duyet lai noi dung"
   },
   {
     "id": "L10_C2_B4_TH027_TL_A",
@@ -105,18 +134,34 @@
     "Dang": "Câu dẫn là hệ bất phương trình bậc nhất 2 ẩn"
   },
   {
-    "id": "L10_C2_B4_TH027_MC_B",
+    "id": "L10_C2_B4_TH027_MC_C",
     "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Miền nghiệm của hệ là đa giác gì (tam giác, tứ giác, ngũ giác...)",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta"
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - co Lan kiem tra lai ID va mo ta; DOI ID 15/10/2026 (co Lan): chu B -> C de chu B danh cho dang diem thuoc mien nghiem"
   },
   {
-    "id": "L10_C2_B4_TH027_SA_B",
+    "id": "L10_C2_B4_TH027_SA_C",
     "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
     "Loai": "Trả lời ngắn",
     "Dang": "Miền nghiệm của hệ là đa giác gì (tam giác, tứ giác, ngũ giác...)",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH027_MC_B (cung Dang): mien nghiem la da giac co bao nhieu dinh (canh); co Lan duyet lai"
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH027_MC_B (cung Dang): mien nghiem la da giac co bao nhieu dinh (canh); co Lan duyet lai; DOI ID 15/10/2026 (co Lan): chu B -> C de chu B danh cho dang diem thuoc mien nghiem"
+  },
+  {
+    "id": "L10_C2_B4_VD027_MC_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cho hệ bất phương trình bậc nhất hai ẩn, kiểm tra điểm thuộc miền nghiệm (thay toạ độ vào tất cả các bất phương trình của hệ) - mức Vận dụng, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC VAN DUNG CAO HON YCCD TH027 CUA BO; CLAUDE THEM 15/10/2026 - co Lan duyet ke hoach ID (diem thuoc mien nghiem cua he; co Lan: he bat phuong trinh la VD); hoi diem nao thuoc mien nghiem cua he; nhieu uu tien diem sai dung mot bat phuong trinh; co Lan duyet lai noi dung",
+    "ngoai_yccd": true
+  },
+  {
+    "id": "L10_C2_B4_VD027_SA_B",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cho hệ bất phương trình bậc nhất hai ẩn, kiểm tra điểm thuộc miền nghiệm (thay toạ độ vào tất cả các bất phương trình của hệ) - mức Vận dụng, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC VAN DUNG CAO HON YCCD TH027 CUA BO; CLAUDE THEM 15/10/2026 - co Lan duyet ke hoach ID (diem thuoc mien nghiem cua he; co Lan: he bat phuong trinh la VD); ban tra loi ngan cua TH027_MC_C (cung Dang): dem so diem thuoc mien nghiem cua he trong 5 diem; co Lan duyet lai noi dung",
+    "ngoai_yccd": true
   },
   {
     "id": "L10_C2_B3_NB023_SA_B",

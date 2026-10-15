@@ -322,7 +322,7 @@ def L10_C2_B3_NB022_MC_A_02(socau, dang=1):
 
 # ---- Diem nao thuoc mien nghiem cua bat phuong trinh ----
 # (tên cũ của cô: K10_CheckDiemBPT_H)
-def L10_C2_B3_NB023_MC_A_01(socau, dang=1):
+def L10_C2_B3_TH024_MC_B_01(socau, dang=1):
     x = Symbol('x')
     y = Symbol('y')
 
@@ -1169,7 +1169,7 @@ def L10_C2_B4_TH027_MC_A_01(socau, dang=1):
 
 # ---- Mien nghiem cua he la da giac gi (tam giac, tu giac, ngu giac...) ----
 # (tên cũ của cô: K10_2_3_3_2_VD)
-def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
+def L10_C2_B4_TH027_MC_C_01(socau, dang=1):
     # CLAUDE SUA 07/10/2026 (co Lan duyet): ban cu chi cho dap an tam giac / ngu giac
     # (M, N luon nam tren hai canh KE NHAU nen khong bao gio ra tu giac).
     # Ban moi chon truoc dang da giac (tam / tu / ngu, moi dang 1/3):
@@ -2980,11 +2980,11 @@ def L10_C2_B3_NB022_MC_A_03(socau, dang=1):
     return cauTN
 
 
-def L10_C2_B3_NB023_MC_A_02(socau, dang=1):
+def L10_C2_B3_TH024_MC_B_02(socau, dang=1):
     r"""Cho một điểm $M(x_0; y_0)$, chọn bất phương trình nhận $M$ làm nghiệm
     (hoặc KHÔNG nhận $M$ làm nghiệm).
 
-    CLAUDE THEM 30/09/2026 - bien the 02 cua NB023_MC_A, theo cac cau "Diem
+    CLAUDE THEM 30/09/2026 - bien the 02 cua NB023_MC_A (15/10/2026 doi ten TH024_MC_B), theo cac cau "Diem
     A(-1; 3) thuoc mien nghiem cua bat phuong trinh nao", "Cap so (-1; 4) la
     nghiem cua bat phuong trinh" trong phan bai tap trac nghiem Bai 3.
     Co Lan duyet.
@@ -4921,9 +4921,9 @@ def L10_C2_B3_NB023_MC_B_01(socau, dang=1):
     return L10_C2_B3_NB023_SA_B_01(socau, dang)
 
 
-def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
+def L10_C2_B3_TH024_SA_B_01(socau, dang=2):
     r"""Trả lời ngắn: cho một bất phương trình bậc nhất hai ẩn và $5$ cặp số, ĐẾM số cặp số là nghiệm.
-    (cùng dạng với NB023_MC_A: kiểm tra một cặp số có phải nghiệm của bất phương trình không.)
+    (cùng dạng với TH024_MC_B: kiểm tra một cặp số có phải nghiệm của bất phương trình không; trước 15/10/2026 là NB023_SA_A.)
     Số cặp là nghiệm chọn trước trong $\{1; 2; 3; 4\}$; cặp nằm trên bờ có thể xuất hiện (khi đó dấu $\le, \ge$ hay $<, >$
     quyết định có là nghiệm hay không)."""
     thoa = {r"\le": lambda v, c: v <= c, r"\ge": lambda v, c: v >= c, "<": lambda v, c: v < c, ">": lambda v, c: v > c}
@@ -4965,9 +4965,9 @@ def L10_C2_B3_NB023_SA_A_01(socau, dang=2):
     return cauTN
 
 
-def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
+def L10_C2_B4_TH027_SA_C_01(socau, dang=2):
     r"""Trả lời ngắn: miền nghiệm của hệ (hình chữ nhật cắt bởi một nửa mặt phẳng) là đa giác có bao nhiêu ĐỈNH (hoặc CẠNH).
-    (cùng dạng với TH027_MC_B: miền nghiệm của hệ là đa giác gì: tam giác, tứ giác, ngũ giác.)
+    (cùng dạng với TH027_MC_C: miền nghiệm của hệ là đa giác gì: tam giác, tứ giác, ngũ giác; trước 15/10/2026 là chữ B.)
     Số đỉnh = số đỉnh hình chữ nhật thoả bất phương trình thứ năm + $2$ giao điểm; chọn trước đáp số $3$, $4$ hoặc $5$."""
     gt = []
     lan = 0
@@ -5012,4 +5012,420 @@ def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
                   r"i.e. it has $%d$ vertices and $%d$ sides." % (len(trong), ", ".join(trong), _bt((a, "x"), (b, "y")), c, n, n, n))
         nhieu = [str(j) for j in (3, 4, 5, 6, 7) if j != n]
         cauTN += MC_SA_answer_const(debai, str(n), nhieu, giai, 0, 0, dang)
+    return cauTN
+
+
+# =====================================================================
+# 15/10/2026 - DIEM THUOC MIEN NGHIEM (co Lan: "Bieu dien duoc mien nghiem thi chac bo vao diem thuoc mien nghiem
+# duoc day nhi"; muc do do co chot: "neu dung hinh thi diem thuoc mien nghiem chi la NB, cho bat pt thi la TH, con he
+# bat phuong trinh la VD"). Cung CHU B = dang "diem thuoc mien nghiem", doi muc do chi doi phan muc do cua ID:
+#   NB024_MC_B / SA_B: cho HINH mien nghiem cua MOT bat phuong trinh -> diem nao thuoc / co bao nhieu diem thuoc.
+#   TH024_MC_B / SA_B: cho BAT PHUONG TRINH -> (doi ten tu NB023_MC_A / SA_A, viet tu truoc, o phia tren tep).
+#   TH027_MC_B / SA_B: cho HINH mien nghiem cua HE -> diem nao thuoc / co bao nhieu diem thuoc.
+#   VD027_MC_B / SA_B: cho HE bat phuong trinh -> diem nao thuoc / co bao nhieu diem thuoc (luyen tap them: cao hon YCCD TH027).
+# Bo ve NET LIEN thi diem tren bo thuoc mien nghiem, NET DUT thi khong.
+# =====================================================================
+
+_C2D_THOA = {r"\le": lambda v, c: v <= c, r"\ge": lambda v, c: v >= c, "<": lambda v, c: v < c, ">": lambda v, c: v > c}
+
+
+def _c2d_diem(p, ten=""):
+    return r"%s\left(%d; %d\right)" % (ten, p[0], p[1])
+
+
+def _c2d_duong_hinh(ten="d"):
+    r"""Bờ $d$ (tên ten) và khung hình cho câu đọc hình miền nghiệm của MỘT bất phương trình.
+
+    Trả về (a, b, c, dau, khung, nhan, cau_d): bất phương trình $ax + by$ (dau) $c$ với $c \ne 0$ (gốc $O$ không nằm
+    trên bờ, dùng $O$ làm điểm thử), cau_d là câu lời giải viết phương trình của $d$ đọc từ hình."""
+    dau = _rd.choice(_DAU_BPT)
+    k = _rd.choice([1, -1])
+    if _rd.random() < 0.7:                                       # d cat hai truc tai (p; 0), (0; q)
+        p = _rd.choice([-4, -3, -2, -1, 1, 2, 3, 4])
+        q = _rd.choice([v for v in (-4, -3, -2, -1, 1, 2, 3, 4) if v != p])
+        g = math.gcd(abs(p), abs(q))
+        a, b, c = k * q // g, k * p // g, k * p * q // g
+        khung = (min(0, p) - 2, max(0, p) + 2, min(0, q) - 2, max(0, q) + 2)
+        nhan = [("x", p), ("y", q)]
+        cau_d = (r"The boundary $%s$ passes through the points $\left(%d; 0\right)$ and $\left(0; %d\right)$, so $%s\colon %s = %d$."
+                 % (ten, p, q, ten, _bt((a, "x"), (b, "y")), c))
+    else:                                                        # d song song voi mot truc toa do
+        m = _rd.choice([-3, -2, -1, 1, 2, 3])
+        if _rd.random() < 0.5:
+            a, b, c = k, 0, k * m
+            khung = (min(0, m) - 2, max(0, m) + 2, -3, 3)
+            nhan = [("x", m)]
+            cau_d = r"The boundary $%s$ is parallel to the axis $Oy$ and passes through the point $\left(%d; 0\right)$, so $%s\colon x = %d$." % (ten, m, ten, m)
+        else:
+            a, b, c = 0, k, k * m
+            khung = (-3, 3, min(0, m) - 2, max(0, m) + 2)
+            nhan = [("y", m)]
+            cau_d = r"The boundary $%s$ is parallel to the axis $Ox$ and passes through the point $\left(0; %d\right)$, so $%s\colon y = %d$." % (ten, m, ten, m)
+    return a, b, c, dau, khung, nhan, cau_d
+
+
+def _c2d_phan_loai(a, b, c, dau, khung):
+    """Các điểm nguyên bên trong khung (trừ gốc O): (trong, tren, ngoai) = nghiệm thật sự / trên bờ / phía bị gạch."""
+    x0, x1, y0, y1 = khung
+    trong, tren, ngoai = [], [], []
+    for X in range(x0 + 1, x1):
+        for Y in range(y0 + 1, y1):
+            if (X, Y) == (0, 0):
+                continue
+            v = a * X + b * Y
+            (tren if v == c else trong if _C2D_THOA[dau](v, c) else ngoai).append((X, Y))
+    return trong, tren, ngoai
+
+
+def _c2d_loi_giai_hinh(a, b, c, dau, cau_d, diem, ten=None):
+    """Lời giải chung: đọc bờ, nét, điểm thử O -> bất phương trình -> thay từng điểm."""
+    lien = dau in (r"\le", r"\ge")
+    o_dung = _C2D_THOA[dau](0, c)
+    bpt = _bpt_bac_nhat(a, b, c, dau)
+    dong = []
+    for i, p in enumerate(diem):
+        v = a * p[0] + b * p[1]
+        nhan = _c2d_diem(p, ten[i] if ten else "")
+        if v == c:
+            dong.append(r"$%s$ lies on the boundary $d$ (drawn as a %s line), so it is %sin the solution region"
+                        % (nhan, "solid" if lien else "dashed", "" if lien else "not "))
+        else:
+            dong.append(r"$%s$: $%d %s %d$ is %s, so it is %sin the solution region"
+                        % (nhan, v, dau, c, "true" if _C2D_THOA[dau](v, c) else "false",
+                           "" if _C2D_THOA[dau](v, c) else "not "))
+    return (cau_d + r" The boundary $d$ is drawn as a %s line, so %s the boundary $d$.\\ " % ("solid" if lien else "dashed",
+                                                             "the solution region includes" if lien else "the solution region does not include")
+            + r"The origin $O\left(0; 0\right)$ lies in the %s part, so the solution region is the half-plane with boundary $d$ that %s the point $O$. "
+              r"At $O$ we have $%s = 0$ and $0 %s %d$, so this is the solution region of the inequality $%s$.\\ "
+            % ("unshaded" if o_dung else "shaded", "contains" if o_dung else "does not contain",
+               _bt((a, "x"), (b, "y")), "<" if 0 < c else ">", c, bpt)
+            + r"Substitute the coordinates of each point into the left-hand side:\\ " + r"\\ ".join(dong) + ".")
+
+
+def L10_C2_B3_NB024_MC_B_01(socau, dang=1):
+    r"""Đọc HÌNH miền nghiệm của một bất phương trình bậc nhất hai ẩn (không cho bất phương trình): điểm nào thuộc
+    miền nghiệm. Nhiễu: điểm ở phần bị gạch, điểm trên bờ vẽ nét đứt.
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet ke hoach ID; co Lan duyet lai noi dung."""
+    cauTN = ""
+    lan = da = 0
+    while da < socau and lan < 2000:
+        lan += 1
+        a, b, c, dau, khung, nhan, cau_d = _c2d_duong_hinh()
+        trong, tren, ngoai = _c2d_phan_loai(a, b, c, dau, khung)
+        lien = dau in (r"\le", r"\ge")
+        if lien and tren and _rd.random() < 0.35:
+            dung = _rd.choice(tren)
+            sai = ngoai
+            if len(sai) < 3:
+                continue
+            sai = _rd.sample(sai, 3)
+        else:
+            if not trong:
+                continue
+            dung = _rd.choice(trong)
+            if not lien and tren and _rd.random() < 0.6:
+                if len(ngoai) < 2:
+                    continue
+                sai = [_rd.choice(tren)] + _rd.sample(ngoai, 2)
+            else:
+                if len(ngoai) < 3:
+                    continue
+                sai = _rd.sample(ngoai, 3)
+        hinh = _hinh_mien_nghiem(a, b, c, dau, khung, nhan)
+        debai = (r"The unshaded part in the figure (including the boundary if it is drawn as a solid line) is the solution region of a linear "
+                 r"inequality in two variables. Which of the following points lies in that solution region?")
+        diem = [dung] + sai
+        giai = _c2d_loi_giai_hinh(a, b, c, dau, cau_d, diem) + r"\\ Therefore, the answer is $%s$." % _c2d_diem(dung)
+        cauTN += MC_SA_answer_text(debai, "$%s$" % _c2d_diem(dung), ["$%s$" % _c2d_diem(p) for p in sai],
+                                   giai, hinh, 0, dang)
+        da += 1
+    return cauTN
+
+
+def L10_C2_B3_NB024_SA_B_01(socau, dang=2):
+    r"""Đọc HÌNH miền nghiệm của một bất phương trình bậc nhất hai ẩn: trong $5$ điểm, có bao nhiêu điểm thuộc miền
+    nghiệm. Số điểm thuộc chọn trước trong $\{1; 2; 3; 4\}$; thường có một điểm nằm trên bờ (nét liền thì thuộc,
+    nét đứt thì không).
+
+    CLAUDE THEM 15/10/2026 - cung dang voi NB024_MC_B; co Lan duyet lai."""
+    cauTN = ""
+    lan = da = 0
+    ten = ["A", "B", "C", "D", "E"]
+    while da < socau and lan < 2000:
+        lan += 1
+        a, b, c, dau, khung, nhan, cau_d = _c2d_duong_hinh()
+        trong, tren, ngoai = _c2d_phan_loai(a, b, c, dau, khung)
+        lien = dau in (r"\le", r"\ge")
+        k = _rd.randint(1, 4)
+        thuoc, khong = list(trong), list(ngoai)
+        diem = []
+        if tren and _rd.random() < 0.6:
+            p = _rd.choice(tren)
+            diem.append(p)
+        so_thuoc = k - (1 if diem and lien else 0)
+        so_khong = 5 - k - (1 if diem and not lien else 0)
+        if so_thuoc < 0 or so_khong < 0 or len(thuoc) < so_thuoc or len(khong) < so_khong:
+            continue
+        diem += _rd.sample(thuoc, so_thuoc) + _rd.sample(khong, so_khong)
+        _rd.shuffle(diem)
+        hinh = _hinh_mien_nghiem(a, b, c, dau, khung, nhan)
+        ds = ", ".join("$%s$" % _c2d_diem(p, t) for p, t in zip(diem, ten))
+        debai = (r"The unshaded part in the figure (including the boundary if it is drawn as a solid line) is the solution region of a linear "
+                 r"inequality in two variables. Among the points %s, how many lie in that solution region?" % ds)
+        co = [t for p, t in zip(diem, ten) if _C2D_THOA[dau](a * p[0] + b * p[1], c)]
+        giai = (_c2d_loi_giai_hinh(a, b, c, dau, cau_d, diem, ten)
+                + r"\\ The points in the solution region: $%s$. Therefore, there are $%d$ points." % (", ".join(co), len(co)))
+        cauTN += MC_SA_answer_const(debai, str(len(co)), [str(j) for j in range(0, 6) if j != len(co)],
+                                    giai, hinh, 0, dang)
+        da += 1
+    return cauTN
+
+
+def _c2d_sinh_he():
+    r"""Hệ $2$ hoặc $3$ bất phương trình bậc nhất hai ẩn, hệ số nhỏ, không có hai bờ song song hoặc trùng nhau.
+    Trả về (he, luoi) với he = [(a, b, c, dau)], luoi = các điểm nguyên trong $[-4; 4]^2$."""
+    n = _rd.choice([2, 2, 3])
+    he = []
+    while len(he) < n:
+        a, b = _rd.randint(-3, 3), _rd.randint(-3, 3)
+        if a == 0 and b == 0:
+            continue
+        c = _rd.randint(-6, 6)
+        if math.gcd(math.gcd(abs(a), abs(b)), abs(c)) != 1:
+            continue
+        if any(a * b2 - b * a2 == 0 for a2, b2, _c, _d in he):
+            continue
+        d = _rd.choice(_DAU_BPT)
+        if a <= 0 and b <= 0:                                    # tranh "-3x - 3y < -1": doi dau ca hai ve
+            a, b, c, d = -a, -b, -c, _dau_nguoc(d)
+        he.append((a, b, c, d))
+    luoi = [(X, Y) for X in range(-4, 5) for Y in range(-4, 5)]
+    return he, luoi
+
+
+def _c2d_thoa_he(he, p):
+    return [_C2D_THOA[d](a * p[0] + b * p[1], c) for a, b, c, d in he]
+
+
+def _c2d_he_tex(he):
+    return r"$\heva{%s}$" % r" \\ ".join("& " + _bpt_bac_nhat(*t) for t in he)
+
+
+def _c2d_loi_giai_he(he, diem, ten=None, mo_dau=None):
+    dong = []
+    for i, p in enumerate(diem):
+        nhan = _c2d_diem(p, ten[i] if ten else "")
+        phan = []
+        for (a, b, c, d), ok in zip(he, _c2d_thoa_he(he, p)):
+            phan.append(r"$%d %s %d$ %s" % (a * p[0] + b * p[1], d, c, "true" if ok else "false"))
+            if not ok:
+                break
+        tat = all(_c2d_thoa_he(he, p))
+        dong.append(r"$%s$: %s, so it is %sin the solution region" % (nhan, "; ".join(phan), "" if tat else "not "))
+    if mo_dau is None:
+        mo_dau = r"A point lies in the solution region of the system when its coordinates satisfy \textbf{all} the inequalities of the system. "
+    return mo_dau + r"Substitute the coordinates of each point into the left-hand sides of the inequalities (in order):\\ " + r"\\ ".join(dong) + "."
+
+
+def _c2d_chon_khong_thuoc(he, khong, so):
+    """Ưu tiên điểm sai ĐÚNG MỘT bất phương trình (khó loại hơn), lần lượt sai ở các bất phương trình khác nhau."""
+    sai_mot = {}
+    for p in khong:
+        t = _c2d_thoa_he(he, p)
+        if t.count(False) == 1:
+            sai_mot.setdefault(t.index(False), []).append(p)
+    chon = []
+    nhom = list(sai_mot)
+    _rd.shuffle(nhom)
+    while len(chon) < so and any(sai_mot[g] for g in nhom):
+        for g in nhom:
+            if len(chon) < so and sai_mot[g]:
+                p = sai_mot[g].pop(_rd.randrange(len(sai_mot[g])))
+                chon.append(p)
+    con = [p for p in khong if p not in chon]
+    if len(chon) < so:
+        if len(con) < so - len(chon):
+            return None
+        chon += _rd.sample(con, so - len(chon))
+    return chon
+
+
+def L10_C2_B4_VD027_MC_B_01(socau, dang=1):
+    r"""Cho hệ $2$ hoặc $3$ bất phương trình bậc nhất hai ẩn: điểm nào thuộc miền nghiệm của hệ. Nhiễu ưu tiên điểm
+    thoả mãn mọi bất phương trình trừ một.
+
+    CLAUDE THEM 15/10/2026 - muc VD theo co Lan (he bat phuong trinh); LUYEN TAP THEM vi cao hon YCCD TH027 cua Bo;
+    co Lan duyet lai noi dung."""
+    cauTN = ""
+    lan = da = 0
+    while da < socau and lan < 2000:
+        lan += 1
+        he, luoi = _c2d_sinh_he()
+        thuoc = [p for p in luoi if all(_c2d_thoa_he(he, p)) and p != (0, 0)]
+        khong = [p for p in luoi if not all(_c2d_thoa_he(he, p)) and p != (0, 0)]
+        if not thuoc:
+            continue
+        sai = _c2d_chon_khong_thuoc(he, khong, 3)
+        if not sai:
+            continue
+        dung = _rd.choice(thuoc)
+        debai = r"Which of the following points lies in the solution region of the system of inequalities %s?" % _c2d_he_tex(he)
+        giai = _c2d_loi_giai_he(he, [dung] + sai) + r"\\ Therefore, the answer is $%s$." % _c2d_diem(dung)
+        cauTN += MC_SA_answer_text(debai, "$%s$" % _c2d_diem(dung), ["$%s$" % _c2d_diem(p) for p in sai], giai, 0, 0, dang)
+        da += 1
+    return cauTN
+
+
+def L10_C2_B4_VD027_SA_B_01(socau, dang=2):
+    r"""Cho hệ $2$ hoặc $3$ bất phương trình bậc nhất hai ẩn và $5$ điểm: có bao nhiêu điểm thuộc miền nghiệm của hệ.
+    Số điểm thuộc chọn trước trong $\{1; 2; 3; 4\}$.
+
+    CLAUDE THEM 15/10/2026 - cung dang voi VD027_MC_B (luyen tap them); co Lan duyet lai."""
+    cauTN = ""
+    lan = da = 0
+    ten = ["A", "B", "C", "D", "E"]
+    while da < socau and lan < 2000:
+        lan += 1
+        he, luoi = _c2d_sinh_he()
+        thuoc = [p for p in luoi if all(_c2d_thoa_he(he, p))]
+        khong = [p for p in luoi if not all(_c2d_thoa_he(he, p))]
+        k = _rd.randint(1, 4)
+        if len(thuoc) < k:
+            continue
+        sai = _c2d_chon_khong_thuoc(he, khong, 5 - k)
+        if sai is None:
+            continue
+        diem = _rd.sample(thuoc, k) + sai
+        _rd.shuffle(diem)
+        ds = ", ".join("$%s$" % _c2d_diem(p, t) for p, t in zip(diem, ten))
+        debai = (r"Given the system of inequalities %s. Among the points %s, how many lie in the solution region of the system?"
+                 % (_c2d_he_tex(he), ds))
+        co = [t for p, t in zip(diem, ten) if all(_c2d_thoa_he(he, p))]
+        giai = (_c2d_loi_giai_he(he, diem, ten)
+                + r"\\ The points in the solution region: $%s$. Therefore, there are $%d$ points." % (", ".join(co), k))
+        cauTN += MC_SA_answer_const(debai, str(k), [str(j) for j in range(0, 6) if j != k], giai, 0, 0, dang)
+        da += 1
+    return cauTN
+
+
+def _hinh_mien_nghiem_he(he, khung, nhan_truc):
+    r"""TikZ miền nghiệm của HỆ: với từng bất phương trình, gạch bỏ phần không là nghiệm và vẽ bờ (nét liền nếu có
+    dấu bằng, nét đứt nếu không). Phần không bị gạch là miền nghiệm của hệ. Thứ tự: (gạch 1, bờ 1), (gạch 2, bờ 2)..."""
+    x0, x1, y0, y1 = khung
+    hcn = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    s = [r"\begin{tikzpicture}[scale=0.5,font=\footnotesize,line join=round,>=stealth]"]
+    for a, b, c, dau in he:
+        gach = _cat_nua_mat_phang(hcn, a, b, c, giu_lon_hon=dau not in (">", r"\ge"))
+        s.append(r"\fill[pattern=north east lines] " + " -- ".join(
+            "(%s,%s)" % (_so_tikz(p[0]), _so_tikz(p[1])) for p in gach) + " -- cycle;")
+        doan = _doan_trong_khung(a, b, c, khung)
+        s.append(r"\draw[%sthick] (%s,%s)--(%s,%s);" % ("" if dau in (r"\le", r"\ge") else "dashed,",
+                                                         _so_tikz(doan[0][0]), _so_tikz(doan[0][1]),
+                                                         _so_tikz(doan[1][0]), _so_tikz(doan[1][1])))
+    s.append(r"\draw[->] (%d,0)--(%s,0) node[below] {$x$};" % (x0, _so_tikz(x1 + 0.6)))
+    s.append(r"\draw[->] (0,%d)--(0,%s) node[left] {$y$};" % (y0, _so_tikz(y1 + 0.6)))
+    s.append(r"\node[below left,fill=white,inner sep=1pt] at (0,0) {$O$};")
+    for truc, v in sorted(set(nhan_truc)):
+        if truc == "x":
+            s.append(r"\draw (%d,0.12)--(%d,-0.12) node[below,fill=white,inner sep=1pt] {$%d$};" % (v, v, v))
+        else:
+            s.append(r"\draw (0.12,%d)--(-0.12,%d) node[left,fill=white,inner sep=1pt] {$%d$};" % (v, v, v))
+    s.append(r"\end{tikzpicture}")
+    return "\n".join(s)
+
+
+def _c2d_he_hinh():
+    """Hệ HAI bất phương trình đọc được từ hình: mỗi bờ cắt hai trục tại điểm nguyên hoặc song song một trục,
+    không song song nhau, không đi qua $O$. Trả về (he, khung, nhan, [cau_d1, cau_d2]) hoặc None."""
+    d1 = _c2d_duong_hinh("d_1")
+    d2 = _c2d_duong_hinh("d_2")
+    (a1, b1, c1, s1, k1, n1, t1), (a2, b2, c2, s2, k2, n2, t2) = d1, d2
+    if a1 * b2 - b1 * a2 == 0 or set(n1) & set(n2):          # hai bo khong song song, khong chung diem ghi tren truc
+        return None
+    khung = (min(k1[0], k2[0]), max(k1[1], k2[1]), min(k1[2], k2[2]), max(k1[3], k2[3]))
+    return [(a1, b1, c1, s1), (a2, b2, c2, s2)], khung, n1 + n2, [t1, t2]
+
+
+def _c2d_loi_giai_he_hinh(he, cau_d, diem, ten=None):
+    """Đọc từng bờ, nét, điểm thử O -> hệ; rồi thay toạ độ từng điểm."""
+    phan = []
+    for (a, b, c, dau), cd, t in zip(he, cau_d, ("d_1", "d_2")):
+        o_dung = _C2D_THOA[dau](0, c)
+        phan.append(cd + r" The boundary $%s$ is drawn as a %s line; the origin $O$ lies in the part %s by $%s$, and at $O$ we have $%s = 0$ and $0 %s %d$, "
+                         r"so the side of $%s$ that is not shaded is the solution region of $%s$."
+                    % (t, "solid" if dau in (r"\le", r"\ge") else "dashed", "unshaded" if o_dung else "shaded", t,
+                       _bt((a, "x"), (b, "y")), "<" if 0 < c else ">", c, t, _bpt_bac_nhat(a, b, c, dau)))
+    mo_dau = (r"\\ ".join(phan) + r"\\ Therefore, the unshaded part is the solution region of the system %s.\\ " % _c2d_he_tex(he))
+    return _c2d_loi_giai_he(he, diem, ten, mo_dau)
+
+
+def L10_C2_B4_TH027_MC_B_01(socau, dang=1):
+    r"""Đọc HÌNH miền nghiệm của một HỆ hai bất phương trình bậc nhất hai ẩn (không cho hệ): điểm nào thuộc miền
+    nghiệm. Nhiễu ưu tiên điểm chỉ vi phạm một bất phương trình (nằm ở phần bị gạch bởi một bờ, hoặc trên bờ nét đứt).
+
+    CLAUDE THEM 15/10/2026 - muc TH theo co Lan ("TH027_MC_B la dang hinh ve, diem thuoc khong"); co Lan duyet lai."""
+    cauTN = ""
+    lan = da = 0
+    while da < socau and lan < 2000:
+        lan += 1
+        g = _c2d_he_hinh()
+        if g is None:
+            continue
+        he, khung, nhan, cau_d = g
+        x0, x1, y0, y1 = khung
+        luoi = [(X, Y) for X in range(x0 + 1, x1) for Y in range(y0 + 1, y1) if (X, Y) != (0, 0)]
+        thuoc = [p for p in luoi if all(_c2d_thoa_he(he, p))]
+        khong = [p for p in luoi if not all(_c2d_thoa_he(he, p))]
+        if not thuoc:
+            continue
+        sai = _c2d_chon_khong_thuoc(he, khong, 3)
+        if not sai:
+            continue
+        dung = _rd.choice(thuoc)
+        hinh = _hinh_mien_nghiem_he(he, khung, nhan)
+        debai = (r"The unshaded part in the figure (including a boundary if it is drawn as a solid line) is the solution region of a system of linear "
+                 r"inequalities in two variables. Which of the following points lies in that solution region?")
+        giai = _c2d_loi_giai_he_hinh(he, cau_d, [dung] + sai) + r"\\ Therefore, the answer is $%s$." % _c2d_diem(dung)
+        cauTN += MC_SA_answer_text(debai, "$%s$" % _c2d_diem(dung), ["$%s$" % _c2d_diem(p) for p in sai],
+                                   giai, hinh, 0, dang)
+        da += 1
+    return cauTN
+
+
+def L10_C2_B4_TH027_SA_B_01(socau, dang=2):
+    r"""Đọc HÌNH miền nghiệm của một HỆ hai bất phương trình: trong $5$ điểm, có bao nhiêu điểm thuộc miền nghiệm.
+    Số điểm thuộc chọn trước trong $\{1; 2; 3; 4\}$.
+
+    CLAUDE THEM 15/10/2026 - cung dang voi TH027_MC_B; co Lan duyet lai."""
+    cauTN = ""
+    lan = da = 0
+    ten = ["A", "B", "C", "D", "E"]
+    while da < socau and lan < 2000:
+        lan += 1
+        g = _c2d_he_hinh()
+        if g is None:
+            continue
+        he, khung, nhan, cau_d = g
+        x0, x1, y0, y1 = khung
+        luoi = [(X, Y) for X in range(x0 + 1, x1) for Y in range(y0 + 1, y1) if (X, Y) != (0, 0)]
+        thuoc = [p for p in luoi if all(_c2d_thoa_he(he, p))]
+        khong = [p for p in luoi if not all(_c2d_thoa_he(he, p))]
+        k = _rd.randint(1, 4)
+        if len(thuoc) < k:
+            continue
+        sai = _c2d_chon_khong_thuoc(he, khong, 5 - k)
+        if sai is None:
+            continue
+        diem = _rd.sample(thuoc, k) + sai
+        _rd.shuffle(diem)
+        hinh = _hinh_mien_nghiem_he(he, khung, nhan)
+        ds = ", ".join("$%s$" % _c2d_diem(p, t) for p, t in zip(diem, ten))
+        debai = (r"The unshaded part in the figure (including a boundary if it is drawn as a solid line) is the solution region of a system of linear "
+                 r"inequalities in two variables. Among the points %s, how many lie in that solution region?" % ds)
+        co = [t for p, t in zip(diem, ten) if all(_c2d_thoa_he(he, p))]
+        giai = (_c2d_loi_giai_he_hinh(he, cau_d, diem, ten)
+                + r"\\ The points in the solution region: $%s$. Therefore, there are $%d$ points." % (", ".join(co), k))
+        cauTN += MC_SA_answer_const(debai, str(k), [str(j) for j in range(0, 6) if j != k], giai, hinh, 0, dang)
+        da += 1
     return cauTN
