@@ -101,6 +101,40 @@
     "difficulty_rank": 2
   },
   {
+    "id": "L10_C4_B7_VD039",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Các khái niệm mở đầu",
+    "bai_so": "7",
+    "subsection": null,
+    "MucDo": "VD",
+    "verb": "Biểu diễn được",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "examples": [
+      "Vận tốc",
+      "Lực"
+    ],
+    "scope": "các đại lượng thực tiễn",
+    "tags": [
+      "vecto",
+      "bieu_dien",
+      "vat_li"
+    ],
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Vật chuyển động đều theo hướng cho trước (dạng N α° E): tính khoảng cách và hướng của điểm xuất phát so với điểm đến (vectơ độ dời ngược hướng)",
+        "mapping_id": [
+          "L10_C4_B7_VD039_MC_A",
+          "L10_C4_B7_VD039_SA_A"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Cô Lan đưa câu mẫu 16/10/2026 (tàu trên biển Đông theo hướng N20°E) và xếp mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho nội dung này (biểu diễn đại lượng thực tiễn bằng vectơ) chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+  },
+  {
     "id": "L10_C4_B8_TH040",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",

@@ -5176,3 +5176,98 @@ def L10_C4_TF_C_01(socau, socot=1):
         cauTF += TF_baitoan_du(debai, kho, _c4_tikz(H), 0, socot)
         da += 1
     return cauTF
+
+
+# =====================================================================
+# 16/10/2026 - L10_C4_B7_VD039 (co Lan: "day la cau VD cua bai 7. Lam cho ca MC va SA"):
+# vat chuyen dong deu tu A theo huong (vd N20 do E) voi van toc v trong t gio den B -> AB = v.t va A o huong NGUOC lai so
+# voi B (N <-> S, E <-> W, giu nguyen goc). Muc VD cao hon YCCD TH039 cua Bo (bieu dien dai luong thuc tien bang vecto)
+# -> LUYEN TAP THEM. Boi canh: tau tren bien Dong, ca no tren ho, may bay (khong trung boi canh co san).
+# =====================================================================
+
+_VD039_PT = {
+    "tau_bien_dong": ("Trên biển Đông, một tàu chuyển động đều", "tàu", [15, 18, 20, 24, 25, 30]),
+    "ca_no_tren_ho": ("Trên một hồ nước rộng, một ca nô chuyển động đều", "ca nô", [20, 24, 30, 36, 40]),
+    "may_bay": ("Một máy bay bay thẳng đều", "máy bay", [600, 640, 720, 800, 840]),
+}
+
+
+def _vd039_huong(dau1, goc, dau2):
+    return r"$\mathrm{%s}%d^\circ\mathrm{%s}$" % (dau1, goc, dau2)
+
+
+def _vd039_so(x):
+    """Số km gọn: 48 -> '48', 22.5 -> '22{,}5'."""
+    return ("%d" % x) if abs(x - round(x)) < 1e-9 else ("%g" % x).replace(".", "{,}")
+
+
+def _vd039_sinh():
+    """Thời gian cho bằng giờ hoặc phút (đổi ra giờ); quãng đường là số nguyên hoặc thập phân một chữ số."""
+    while True:
+        bc = random.choice(list(_VD039_PT))
+        mo, ten, ds_v = _VD039_PT[bc]
+        v = random.choice(ds_v)
+        if random.random() < 0.5:
+            t_ph = random.choice([60, 120, 180] if bc != "may_bay" else [60, 120])
+        else:
+            t_ph = random.choice([30, 45, 90, 150] if bc != "may_bay" else [15, 30, 45, 90])
+        d = v * t_ph / 60
+        if abs(d * 10 - round(d * 10)) > 1e-9 or len(_vd039_so(d).replace("{,}", ",")) > 4:
+            continue
+        break
+    goc = random.choice(range(10, 85, 5))
+    d1, d2 = random.choice("NS"), random.choice("EW")
+    n1, n2 = {"N": "S", "S": "N"}[d1], {"E": "W", "W": "E"}[d2]
+    if t_ph % 60 == 0:
+        tg, doi = r"$%d$ giờ" % (t_ph // 60), ""
+        t_tex = "%d" % (t_ph // 60)
+    else:
+        tg = (r"$%d$ giờ $%d$ phút" % (t_ph // 60, t_ph % 60)) if t_ph > 60 else r"$%d$ phút" % t_ph
+        t_tex = _vd039_so(t_ph / 60)
+        doi = r"Đổi %s $= %s$ giờ. " % (tg, t_tex)
+    de = (r"%s từ vị trí $A$ theo hướng %s với vận tốc $%d$ km/h. Sau %s, %s đến được vị trí $B$."
+          % (mo, _vd039_huong(d1, goc, d2), v, tg, ten))
+    ve = (doi + r"Vectơ vận tốc có hướng %s và độ lớn $%d$ km/h, nên vectơ độ dời $\overrightarrow{AB}$ cùng hướng với "
+          r"vectơ vận tốc và có độ dài $AB = %d\cdot %s = %s$ (km).\\ "
+          r"Vectơ $\overrightarrow{BA}$ ngược hướng với $\overrightarrow{AB}$: đổi $\mathrm{%s}$ thành $\mathrm{%s}$, $\mathrm{%s}$ "
+          r"thành $\mathrm{%s}$, giữ nguyên góc $%d^\circ$. Vậy $A$ ở hướng %s so với $B$."
+          % (_vd039_huong(d1, goc, d2), v, v, t_tex, _vd039_so(d), d1, n1, d2, n2, goc, _vd039_huong(n1, goc, n2)))
+    return bc, de, d, (d1, goc, d2), (n1, goc, n2), v, t_ph, ve
+
+
+def L10_C4_B7_VD039_MC_A_01(socau, dang=1):
+    r"""Toán thực tế (VD): vật chuyển động đều từ $A$ theo hướng $\mathrm{N}\alpha^\circ\mathrm{E}$ (hoặc S, W) với vận tốc $v$
+    trong $t$ giờ đến $B$; hỏi $A$ cách $B$ bao nhiêu km và ở hướng nào so với $B$. Nhiễu: giữ nguyên hướng
+    $\overrightarrow{AB}$, đổi một chữ, lấy góc phụ, quãng đường sai ($v$, $v + t$).
+
+    CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau tren bien Dong N20 do E, 20 km/h, 2 gio); luyen tap them."""
+    cau = ""
+    for _ in range(socau):
+        bc, de, d, h, n, v, t, ve = _vd039_sinh()
+        de += r" Hỏi $A$ cách $B$ bao nhiêu kilômét và ở hướng nào so với $B$?"
+        p = lambda kc, hh: r"$%s$ km, hướng %s" % (_vd039_so(kc), _vd039_huong(*hh))
+        dung = p(d, n)
+        kc_sai = v                               # lay van toc lam quang duong
+        ung = [p(d, h), p(d, (n[0], n[1], h[2])), p(d, (n[0], 90 - n[1], n[2])) if n[1] != 45 else p(d, (h[0], n[1], n[2])),
+               p(kc_sai, n), p(2 * d, n)]
+        sai = []
+        for x in ung:
+            if x != dung and x not in sai:
+                sai.append(x)
+        cau += MC_SA_answer_text(de, dung, random.sample(sai[:4], 3), ve, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_VD039_SA_A_01(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng VD039_MC_A: hỏi $A$ cách $B$ bao nhiêu kilômét (thời gian có thể cho bằng phút, phải đổi
+    ra giờ). Không hỏi góc vì góc chép lại được từ đề.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        bc, de, d, h, n, v, t, ve = _vd039_sinh()
+        de += r" Hỏi $A$ cách $B$ bao nhiêu kilômét?"
+        dap = _vd039_so(d).replace("{,}", ",")
+        ung = [_vd039_so(x).replace("{,}", ",") for x in (v, 2 * d, d + v, d / 2)]
+        cau += MC_SA_answer_const(de, dap, [x for x in ung if x != dap] + ["1", "2", "3"], ve, 0, 0, dang)
+    return cau

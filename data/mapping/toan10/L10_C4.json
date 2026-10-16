@@ -199,6 +199,32 @@
     "Dang": "Biểu thị một đại lượng thực tiễn bằng vectơ"
   },
   {
+    "id": "L10_C4_B7_VD039_MC_A",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vật chuyển động đều theo hướng cho trước (dạng N α° E, thời gian giờ hoặc phút): tính khoảng cách AB và hướng của A so với B - luyện tập thêm",
+    "ngoai_yccd": true,
+    "boi_canh": [
+      "tau_bien_dong",
+      "ca_no_tren_ho",
+      "may_bay"
+    ],
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau tren bien Dong N20 do E, 20 km/h, 2 gio); hoi khoang cach va huong; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C4_B7_VD039_SA_A",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Vật chuyển động đều theo hướng cho trước (dạng N α° E, thời gian giờ hoặc phút): tính khoảng cách AB và hướng của A so với B - luyện tập thêm",
+    "ngoai_yccd": true,
+    "boi_canh": [
+      "tau_bien_dong",
+      "ca_no_tren_ho",
+      "may_bay"
+    ],
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau tren bien Dong N20 do E, 20 km/h, 2 gio); ban tra loi ngan cung Dang voi MC_A: chi hoi khoang cach (khong hoi goc vi chep lai duoc tu de); co Lan duyet lai noi dung"
+  },
+  {
     "id": "L10_C4_B8_TH040_MC_A",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

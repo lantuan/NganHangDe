@@ -634,5 +634,20 @@
  "r\" Do đó $\\left|%s\\right| = %s = %s%s$ (%s).\"": "r\" Hence $\\left|%s\\right| = %s = %s%s$ (%s).\"",
  "r\" Do đó $\\left|%s\\right| = %s$, %s $%s$ (%s).\"": "r\" Hence $\\left|%s\\right| = %s$, which is %s $%s$ (%s).\"",
  "\"khác\"": "\"different from\"",
- "\" Xét tính đúng sai của các khẳng định sau:\"": "\" Determine whether each of the following statements is true or false:\""
+ "\" Xét tính đúng sai của các khẳng định sau:\"": "\" Determine whether each of the following statements is true or false:\"",
+ "\"Trên biển Đông, một tàu chuyển động đều\"": "\"In the East Sea, a ship moves uniformly\"",
+ "\"tàu\"": "\"the ship\"",
+ "\"Trên một hồ nước rộng, một ca nô chuyển động đều\"": "\"On a large lake, a motorboat moves uniformly\"",
+ "\"ca nô\"": "\"the motorboat\"",
+ "\"Một máy bay bay thẳng đều\"": "\"An airplane flies uniformly in a straight line\"",
+ "\"máy bay\"": "\"the airplane\"",
+ "r\"$%d$ giờ\"": "r\"$%d$ hours\"",
+ "r\"$%d$ giờ $%d$ phút\"": "r\"$%d$ hours $%d$ minutes\"",
+ "r\"$%d$ phút\"": "r\"$%d$ minutes\"",
+ "r\"Đổi %s $= %s$ giờ. \"": "r\"Convert %s $= %s$ hours. \"",
+ "r\"%s từ vị trí $A$ theo hướng %s với vận tốc $%d$ km/h. Sau %s, %s đến được vị trí $B$.\"": "r\"%s from position $A$ in the direction %s at a speed of $%d$ km/h. After %s, %s reaches position $B$.\"",
+ "r\"Vectơ vận tốc có hướng %s và độ lớn $%d$ km/h, nên vectơ độ dời $\\overrightarrow{AB}$ cùng hướng với \"\n          r\"vectơ vận tốc và có độ dài $AB = %d\\cdot %s = %s$ (km).\\\\ \"\n          r\"Vectơ $\\overrightarrow{BA}$ ngược hướng với $\\overrightarrow{AB}$: đổi $\\mathrm{%s}$ thành $\\mathrm{%s}$, $\\mathrm{%s}$ \"\n          r\"thành $\\mathrm{%s}$, giữ nguyên góc $%d^\\circ$. Vậy $A$ ở hướng %s so với $B$.\"": "r\"The velocity vector has direction %s and magnitude $%d$ km/h, so the displacement vector $\\overrightarrow{AB}$ has the same direction as \"\n          r\"the velocity vector and length $AB = %d\\cdot %s = %s$ (km).\\\\ \"\n          r\"The vector $\\overrightarrow{BA}$ has the opposite direction to $\\overrightarrow{AB}$: change $\\mathrm{%s}$ to $\\mathrm{%s}$ and $\\mathrm{%s}$ \"\n          r\"to $\\mathrm{%s}$, keeping the angle $%d^\\circ$. So $A$ is in the direction %s from $B$.\"",
+ "r\" Hỏi $A$ cách $B$ bao nhiêu kilômét và ở hướng nào so với $B$?\"": "r\" How many kilometers is $A$ from $B$, and in which direction is it from $B$?\"",
+ "r\"$%s$ km, hướng %s\"": "r\"$%s$ km, direction %s\"",
+ "r\" Hỏi $A$ cách $B$ bao nhiêu kilômét?\"": "r\" How many kilometers is $A$ from $B$?\""
 }
