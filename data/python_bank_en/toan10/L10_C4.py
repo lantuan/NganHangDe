@@ -5265,3 +5265,150 @@ def L10_C4_B7_VD039_SA_A_01(socau, dang=2):
         ung = [_vd039_so(x).replace("{,}", ",") for x in (v, 2 * d, d + v, d / 2)]
         cau += MC_SA_answer_const(de, dap, [x for x in ung if x != dap] + ["1", "2", "3"], ve, 0, 0, dang)
     return cau
+
+
+# =====================================================================
+# 16/10/2026 - L10_C4_B7_VD039 chu B (co Lan: "ra bai ve ung dung nay, la bai VD. ra bai MC va SA thoi" - theo Vi du 4
+# SGK: luc day Archimedes F va trong luc P tac dong len vat A chim hoan toan trong chat long, ve tren luoi o vuong).
+# Vat chim hoan toan: |F| = d_long.V, |P| = d_vat.V -> d_vat / d_long = |P| / |F| (doc so o tren hinh).
+#   chim xuong / nam yen o day: |P| > |F|;  lo lung: |P| = |F|;  dang noi len: |P| < |F|.
+# LUYEN TAP THEM nhu VD039_A (YCCD cua Bo chi TH039).
+# =====================================================================
+
+_VD039B_TINH_HUONG = {
+    "chim": r"An object $A$ is dropped into a cup of liquid; it is completely submerged and rests at the bottom of the cup.",
+    "lo_lung": r"An object $A$ is dropped into a cup of liquid and stays suspended, completely submerged in the liquid.",
+    "noi": r"An object $A$ is completely submerged in a cup of liquid and is rising.",
+}
+
+
+def _vd039b_hinh(F, P, goc_F=90, chieu_P=-1, tinh_huong="chim", nhan=True, kich=None):
+    r"""TikZ cốc chất lỏng trên lưới ô vuông: điểm đặt $A$, vectơ $\overrightarrow{F}$ dài F ô theo góc goc_F (độ),
+    vectơ $\overrightarrow{P}$ dài P ô hướng xuống (chieu_P = -1) hoặc lên (+1)."""
+    xA = 3
+    duoi = (kich if kich else max(P if chieu_P < 0 else 0, F if goc_F > 180 else 0)) + 1   # cho mui ten huong xuong
+    yA = duoi + (0.5 if tinh_huong == "chim" else 1.5)
+    tren = yA + (kich if kich else max(F if goc_F < 180 else 0, P if chieu_P > 0 else 0)) + 1   # kich: cung khung cho moi phuong an
+    H = int(math.ceil(tren)) + 1
+    day = yA - 0.5 if tinh_huong == "chim" else duoi
+    mat = tren - 0.4
+    s = [r"\begin{tikzpicture}[scale=0.45,>=stealth]",
+         r"\draw[gray!50,very thin] (0,0) grid (6,%d);" % H,
+         r"\fill[cyan!10] (0.8,%s) -- (5.2,%s) -- (5.6,%s) -- (0.4,%s) -- cycle;" % (_toa(day), _toa(day), _toa(mat), _toa(mat)),
+         r"\draw[thick] (0.2,%s) -- (0.8,%s) -- (5.2,%s) -- (5.8,%s);" % (_toa(mat + 0.6), _toa(day), _toa(day), _toa(mat + 0.6)),
+         r"\draw[dashed,gray] (0.4,%s) -- (5.6,%s);" % (_toa(mat), _toa(mat)),
+         r"\fill[gray!55] (2,%s) rectangle (4,%s);" % (_toa(yA - 0.5), _toa(yA + 0.5)),
+         r"\node at (2.4,%s) {$A$};" % _toa(yA)]
+    gx, gy = math.cos(math.radians(goc_F)) * F, math.sin(math.radians(goc_F)) * F
+    s.append(r"\draw[->,thick] (%d,%s) -- (%s,%s);" % (xA, _toa(yA), _toa(xA + gx), _toa(yA + gy)))
+    s.append(r"\draw[->,thick,blue] (%d,%s) -- (%d,%s);" % (xA, _toa(yA), xA, _toa(yA + chieu_P * P)))
+    if nhan:
+        s.append(r"\node[left] at (%s,%s) {$\overrightarrow{F}$};" % (_toa(xA + gx / 2), _toa(yA + gy / 2 + 0.3)))
+        s.append(r"\node[right,blue] at (%d,%s) {$\overrightarrow{P}$};" % (xA, _toa(yA + chieu_P * P / 2)))
+    s.append(r"\fill[red] (%d,%s) circle (2.5pt);" % (xA, _toa(yA)))
+    s.append(r"\end{tikzpicture}")
+    return "\n".join(s)
+
+
+def _vd039b_ps(p, q):
+    from fractions import Fraction as _Fr
+    r = _Fr(p, q)
+    return ("%d" % r.numerator) if r.denominator == 1 else r"\dfrac{%d}{%d}" % (r.numerator, r.denominator)
+
+
+def _vd039b_so_lieu(can_sa):
+    while True:
+        F, P = random.randint(1, 6), random.randint(1, 6)
+        th = "chim" if P > F else ("lo_lung" if P == F else "noi")
+        if th == "lo_lung" and random.random() < 0.6:          # it lo lung hon
+            continue
+        if can_sa:
+            from fractions import Fraction as _Fr
+            r = _Fr(P, F)
+            if r.denominator not in (1, 2, 4, 5) or len(("%g" % float(r))) > 4:
+                continue
+        return F, P, th
+
+
+def L10_C4_B7_VD039_MC_B_01(socau, dang=1):
+    r"""Hình trên lưới ô vuông biểu diễn lực đẩy Archimedes $\overrightarrow{F}$ và trọng lực $\overrightarrow{P}$ tác động lên
+    vật $A$ chìm hoàn toàn (độ dài vectơ tỉ lệ với độ lớn lực): tìm tỉ số trọng lượng riêng của vật và của chất lỏng
+    ($d_A : d_\ell = \left|\overrightarrow{P}\right| : \left|\overrightarrow{F}\right|$). Theo Ví dụ 4 SGK.
+
+    CLAUDE THEM 16/10/2026 - co Lan gui mau; luyen tap them; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        F, P, th = _vd039b_so_lieu(False)
+        hoi_nguoc = random.random() < 0.4
+        de = (_VD039B_TINH_HUONG[th] + r" The figure shows the buoyant (Archimedes) force $\overrightarrow{F}$ and the weight "
+              r"$\overrightarrow{P}$ acting on the object $A$ (the length of each vector is proportional to the magnitude of the force). Let $d_A$, $d_\ell$ be "
+              r"the specific weights of the object $A$ and of the liquid. The ratio $\dfrac{%s}{%s}$ equals"
+              % (("d_\\ell", "d_A") if hoi_nguoc else ("d_A", "d_\\ell")))
+        tu, mau = (F, P) if hoi_nguoc else (P, F)
+        dap = "$%s$" % _vd039b_ps(tu, mau)
+        ung = ["$%s$" % _vd039b_ps(mau, tu), "$%s$" % _vd039b_ps(tu + mau, mau), "$%s$" % _vd039b_ps(abs(tu - mau) or 2, mau),
+               "$%s$" % _vd039b_ps(tu, tu + mau), "$%s$" % _vd039b_ps(tu + 1, mau),
+               "$2$", r"$\dfrac{1}{2}$", r"$\dfrac{3}{2}$", "$3$"]
+        sai = []
+        for x in ung:
+            if x != dap and x not in sai:
+                sai.append(x)
+        giai = (r"Since $A$ is completely submerged, the volume of liquid displaced equals the volume $V$ of the object: "
+                r"$\left|\overrightarrow{F}\right| = d_\ell V$, $\left|\overrightarrow{P}\right| = d_A V$.\\ "
+                r"In the figure, $\overrightarrow{F}$ is $%d$ squares long and $\overrightarrow{P}$ is $%d$ squares long, so "
+                r"$\dfrac{d_A}{d_\ell} = \dfrac{\left|\overrightarrow{P}\right|}{\left|\overrightarrow{F}\right|} = %s$"
+                % (F, P, _vd039b_ps(P, F)))
+        giai += (r", hence $\dfrac{d_\ell}{d_A} = %s$." % _vd039b_ps(F, P)) if hoi_nguoc else "."
+        cau += MC_SA_answer_text(de, dap, sai[:3], giai, _vd039b_hinh(F, P, tinh_huong=th), 0, dang)
+    return cau
+
+
+def L10_C4_B7_VD039_MC_B_02(socau, dang=1):
+    r"""Cho tình huống (vật chìm nằm yên ở đáy / lơ lửng / đang nổi lên), chọn hình biểu diễn đúng lực đẩy Archimedes
+    $\overrightarrow{F}$ và trọng lực $\overrightarrow{P}$ (Ví dụ 4 SGK hỏi ngược). Nhiễu: $\overrightarrow{F}$ xiên,
+    sai quan hệ độ dài, $\overrightarrow{F}$ cùng hướng $\overrightarrow{P}$.
+
+    CLAUDE THEM 16/10/2026 - co Lan gui mau; luyen tap them; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        th = random.choice(["chim", "chim", "lo_lung", "noi"])
+        a, b = sorted(random.sample(range(1, 5), 2))       # a < b
+        dung = {"chim": (a, b), "lo_lung": (b, b), "noi": (b, a)}[th]
+        sai_dai = [x for x in ((a, b), (b, b), (b, a)) if x != dung]
+        hinh = [_vd039b_hinh(*dung, tinh_huong=th, kich=b)]
+        hinh += [_vd039b_hinh(F, P, tinh_huong=th, kich=b) for F, P in sai_dai]
+        hinh.append(_vd039b_hinh(dung[0], dung[1], goc_F=random.choice([60, 120]), tinh_huong=th, kich=b))
+        de = (_VD039B_TINH_HUONG[th] + r" Which of the following figures correctly shows the buoyant (Archimedes) force $\overrightarrow{F}$ and the "
+              r"weight $\overrightarrow{P}$ acting on the object $A$ (the length of each vector is proportional to the magnitude of the force)?")
+        ly = {"chim": r"the object sinks to the bottom, so the weight is greater than the buoyant force: $\left|\overrightarrow{P}\right| > \left|\overrightarrow{F}\right|$",
+              "lo_lung": r"the object is suspended, so the two forces balance: $\left|\overrightarrow{P}\right| = \left|\overrightarrow{F}\right|$",
+              "noi": r"the object is rising, so the buoyant force is greater than the weight: $\left|\overrightarrow{F}\right| > \left|\overrightarrow{P}\right|$"}[th]
+        giai = (r"The weight $\overrightarrow{P}$ points vertically downward and the buoyant force $\overrightarrow{F}$ points vertically "
+                r"upward (the two vectors have opposite directions on the same vertical line); " + ly
+                + r". Only one figure satisfies both the directions and the relation between the lengths.")
+        cau += MC_SA_answer_text(de, hinh[0], random.sample(hinh[1:], 3), giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_VD039_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng VD039_MC_B: đọc hình, tính tỉ số $\dfrac{d_A}{d_\ell}$ (hoặc $\dfrac{d_\ell}{d_A}$), viết dạng
+    số thập phân.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        F, P, th = _vd039b_so_lieu(True)
+        nguoc = random.random() < 0.4 and (P / F) != 1 and len("%g" % (F / P)) <= 4 and (F * 1000 % P == 0)
+        de = (_VD039B_TINH_HUONG[th] + r" The figure shows the buoyant (Archimedes) force $\overrightarrow{F}$ and the weight "
+              r"$\overrightarrow{P}$ acting on the object $A$ (the length of each vector is proportional to the magnitude of the force). Let $d_A$, $d_\ell$ be "
+              r"the specific weights of the object $A$ and of the liquid. Compute the ratio $\dfrac{%s}{%s}$ (as a decimal)."
+              % ((r"d_\ell", "d_A") if nguoc else ("d_A", r"d_\ell")))
+        v = F / P if nguoc else P / F
+        dap = ("%g" % v).replace(".", ",")
+        giai = (r"Since $A$ is completely submerged, $\left|\overrightarrow{F}\right| = d_\ell V$, $\left|\overrightarrow{P}\right| = d_A V$ "
+                r"($V$ is the volume of the object). In the figure, $\overrightarrow{F}$ is $%d$ squares long and $\overrightarrow{P}$ is $%d$ squares long, so "
+                r"$\dfrac{%s}{%s} = \dfrac{%d}{%d} = %s$." % ((F, P) + ((r"d_\ell", "d_A", F, P) if nguoc else ("d_A", r"d_\ell", P, F)) + (dap,)))
+        ung = [("%g" % x).replace(".", ",") for x in (F / P, P + F, (P + F) / F, P / F + 1) if len("%g" % x) <= 4]
+        cau += MC_SA_answer_const(de, dap, [x for x in ung if x != dap] + ["1", "2", "0,5", "1,5", "3", "2,5"], giai,
+                                  _vd039b_hinh(F, P, tinh_huong=th), 0, dang)
+    return cau

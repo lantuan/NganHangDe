@@ -225,6 +225,24 @@
     "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau tren bien Dong N20 do E, 20 km/h, 2 gio); ban tra loi ngan cung Dang voi MC_A: chi hoi khoang cach (khong hoi goc vi chep lai duoc tu de); co Lan duyet lai noi dung"
   },
   {
+    "id": "L10_C4_B7_VD039_MC_B",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Lực đẩy Archimedes và trọng lực tác động lên vật chìm hoàn toàn, vẽ trên lưới ô vuông: đọc hình tính tỉ số trọng lượng riêng của vật và chất lỏng, hoặc chọn hình biểu diễn đúng theo tình huống (chìm, lơ lửng, nổi lên) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "boi_canh": "luc_day_archimedes",
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo Vi du 4 SGK co Lan gui (luc day Archimedes); _01 doc hinh tinh ti so d_A/d_l, _02 chon hinh dung theo tinh huong; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C4_B7_VD039_SA_B",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Lực đẩy Archimedes và trọng lực tác động lên vật chìm hoàn toàn, vẽ trên lưới ô vuông: đọc hình tính tỉ số trọng lượng riêng của vật và chất lỏng, hoặc chọn hình biểu diễn đúng theo tình huống (chìm, lơ lửng, nổi lên) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "boi_canh": "luc_day_archimedes",
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo Vi du 4 SGK co Lan gui (luc day Archimedes); ban tra loi ngan cung Dang voi MC_B: ti so trong luong rieng dang so thap phan; co Lan duyet lai noi dung"
+  },
+  {
     "id": "L10_C4_B8_TH040_MC_A",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
