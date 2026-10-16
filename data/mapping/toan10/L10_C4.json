@@ -286,17 +286,17 @@
     "id": "L10_C4_B8_VD040_MC_A",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn - luyện tập thêm",
+    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ (hình bình hành có tâm O; tam giác có trọng tâm G, trung điểm I): rút gọn bằng quy tắc ba điểm, vectơ bằng nhau, vectơ đối, quy tắc trừ, tính chất trọng tâm; _01 ra đường trung trực, _02 ra đường tròn - luyện tập thêm",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); chi MC va TL, khong co SA vi dap an khong phai so; co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); chi MC va TL, khong co SA vi dap an khong phai so; co Lan duyet lai; 16/10/2026 co Lan: dang A tach _01 duong trung truc, _02 duong tron, bieu thuc phuc tap hon (hinh binh hanh, tam giac co trong tam)"
   },
   {
     "id": "L10_C4_B8_VD040_TL_A",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Tự luận",
-    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn - luyện tập thêm",
+    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ (hình bình hành có tâm O; tam giác có trọng tâm G, trung điểm I): rút gọn bằng quy tắc ba điểm, vectơ bằng nhau, vectơ đối, quy tắc trừ, tính chất trọng tâm; _01 ra đường trung trực, _02 ra đường tròn - luyện tập thêm",
     "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); a) rut gon, b) tap hop diem; co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); a) rut gon, b) tap hop diem; co Lan duyet lai; 16/10/2026 co Lan: dang A tach _01 duong trung truc, _02 duong tron, bieu thuc phuc tap hon (hinh binh hanh, tam giac co trong tam)"
   },
   {
     "id": "L10_C4_B8_TH041_MC_A",

@@ -101,6 +101,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C4_B8_TH040_MC_B",   # quy tac hinh binh hanh: _01 co hinh, dinh A; _02 dinh ngau nhien, cung ve phai
     "L10_C4_B11_VD060_MC_A",  # tong hop luc: _01 goc 60 do so nguyen, _02 goc bat ki (lam tron hang phan muoi)
     "L10_C4_B11_VD060_SA_A",  # nhu tren (tra loi ngan)
+    "L10_C4_B8_VD040_MC_A",   # tap hop diem: _01 ra duong trung truc, _02 ra duong tron (co Lan 16/10/2026)
     "L10_C4_B7_NB038_MC_A",   # chon dang thuc vecto bang nhau dung (sai) theo hinh co dinh / theo kho hinh
     "L10_C5_B14_NB085_MC_A",  # khang dinh dung / khang dinh sai / tinh huong can thong ke
     "L10_C1_B1_VD014_MC_A",   # tham so k: voi moi x dung / ton tai x dung / voi moi x sai

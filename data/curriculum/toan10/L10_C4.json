@@ -186,7 +186,7 @@
     "difficulty_rank": 3,
     "dang_luyen_tap_them": [
       {
-        "mo_ta": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn",
+        "mo_ta": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ (hình bình hành có tâm O; tam giác có trọng tâm G, trung điểm I): rút gọn bằng quy tắc ba điểm, vectơ bằng nhau, vectơ đối, quy tắc trừ, tính chất trọng tâm; _01 ra đường trung trực, _02 ra đường tròn",
         "mapping_id": [
           "L10_C4_B8_VD040_MC_A",
           "L10_C4_B8_VD040_TL_A"

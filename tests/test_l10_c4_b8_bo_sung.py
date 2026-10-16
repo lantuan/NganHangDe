@@ -204,7 +204,7 @@ def test_python_tu_sinh_khong_de_chet():
                            ("L10_C4_B8_TH041_SA_C_01", 60), ("L10_C4_B11_VD060_MC_A_02", 100),
                            ("L10_C4_B11_VD060_SA_A_02", 100), ("L10_C4_B11_VD060_MC_B_01", 100),
                            ("L10_C4_B11_VD060_SA_B_01", 100), ("L10_C4_B11_VD060_MC_C_01", 100),
-                           ("L10_C4_B11_VD060_SA_C_01", 100), ("L10_C4_B8_VD040_MC_A_01", 60)):
+                           ("L10_C4_B11_VD060_SA_C_01", 100), ("L10_C4_B8_VD040_MC_A_01", 100), ("L10_C4_B8_VD040_MC_A_02", 100)):
         de = set()
         for s in range(150):
             random.seed(s)
@@ -327,24 +327,52 @@ def _quy_tich(mo_ta, P):
     return lambda t: A + (B - A) * t
 
 
-def test_vd040_tap_hop_diem_doc_lap():
-    kieu = set()
-    for s in range(300):
-        de, dap, nhieu, giai = _bat("L10_C4_B8_VD040_MC_A_01", s)
-        ten = re.search(r"Cho hình bình hành \$(\w{4})\$", de).group(1)
-        trai, phai = re.search(r"thoả mãn \$\\left\|(.+?)\\right\| = \\left\|(.+?)\\right\|\$ là", de).groups()
-        A, B, C, D = ten
-        P = {A: V(random.uniform(-5, 5), random.uniform(-5, 5)), B: V(random.uniform(-5, 5), random.uniform(-5, 5)),
-             D: V(random.uniform(-5, 5), random.uniform(-5, 5))}
+def _hinh_vd040(de):
+    """Toạ độ ngẫu nhiên của hình đọc từ câu dẫn: hình bình hành (tâm O) hoặc tam giác (trọng tâm G, trung điểm I)."""
+    r = lambda: V(random.uniform(-5, 5), random.uniform(-5, 5))
+    m = re.search(r"Cho hình bình hành \$(\w)(\w)(\w)(\w)\$", de)
+    if m:
+        A, B, C, D = m.groups()
+        P = {A: r(), B: r(), D: r()}
         P[C] = P[B] + P[D] - P[A]
-        dk = lambda M: abs(tinh(trai, P=dict(P, M=M))) - abs(tinh(phai, P=dict(P, M=M)))
+        if "hai đường chéo cắt nhau tại $O$" in de:
+            P["O"] = (P[A] + P[C]) / 2
+        return P
+    A, B, C = re.search(r"Cho tam giác \$(\w)(\w)(\w)\$", de).groups()
+    P = {A: r(), B: r(), C: r()}
+    if "trọng tâm $G$" in de:
+        P["G"] = (P[A] + P[B] + P[C]) / 3
+    m = re.search(r"\$I\$ là trung điểm của cạnh \$(\w)(\w)\$", de)
+    if m:
+        P["I"] = (P[m.group(1)] + P[m.group(2)]) / 2
+    return P
+
+
+@pytest.mark.parametrize("ten, loai", [("L10_C4_B8_VD040_MC_A_01", "đường trung trực của đoạn thẳng "),
+                                       ("L10_C4_B8_VD040_MC_A_02", "đường tròn tâm ")])
+def test_vd040_tap_hop_diem_doc_lap(ten, loai):
+    hinh, diem_phu = set(), set()
+    for s in range(300):
+        de, dap, nhieu, giai = _bat(ten, s)
+        assert dap.startswith(loai), (de, dap)
+        P = _hinh_vd040(de)
+        trai, phai = re.search(r"thoả mãn \$\\left\|(.+?)\\right\| = \\left\|(.+?)\\right\|\$ là", de).groups()
+        dung = set(re.findall(r"\\overrightarrow\{(\w)(\w)\}", trai + phai))
+        for t in {x for c in dung for x in c} - {"M"}:
+            assert t in P, ("điểm dùng mà câu dẫn không cho", de, t)
+        for t in set(P) - {x for c in dung for x in c} - set(re.findall(r"\$(\w)\$", dap)):
+            dinh = re.search(r"Cho (?:hình bình hành|tam giác) \$(\w+)\$", de).group(1)
+            assert t in dinh, ("câu dẫn có điểm phụ không dùng", de, t)
+        dk = lambda Mm: abs(tinh(trai, P=dict(P, M=Mm))) - abs(tinh(phai, P=dict(P, M=Mm)))
         f = _quy_tich(dap, P)
         assert all(abs(dk(f(t))) < 1e-7 for t in (-1.3, 0.2, 0.9, 2.5)), (de, dap)
         for x in nhieu:                                   # mỗi nhiễu có điểm không thoả điều kiện
             g = _quy_tich(x, P)
             assert any(abs(dk(g(t))) > 1e-6 for t in (-1.3, 0.2, 0.9, 2.5)), (de, x)
-        kieu.add(dap.split("$")[0])
-    assert kieu == {"đường trung trực của đoạn thẳng ", "đường tròn tâm "}
+        assert len(set([dap] + nhieu)) == 4
+        hinh.add(de.split("$")[0])
+        diem_phu |= set(P) & {"O", "G", "I"}
+    assert hinh == {"Cho hình bình hành ", "Cho tam giác "} and diem_phu == {"O", "G", "I"}
 
 
 def test_vd040_tl_hai_y():

@@ -6259,109 +6259,235 @@ def L10_C4_B11_VD060_SA_C_01(socau, dang=2):
 
 
 # ---------------------------------------------------------------------
-# B8_VD040 (LUYỆN TẬP THÊM, ngoài YCCĐ): tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành
-# (câu tự luận cô Lan gửi: |MB + CD| = |MC + DA| -> trung trực AB). MC (không có SA: đáp án không phải số) và TL.
+# B8_VD040 (LUYỆN TẬP THÊM, ngoài YCCĐ): tập hợp điểm M thoả một đẳng thức độ dài vectơ.
+# Cô Lan 16/10/2026: dạng A, _01 ra ĐƯỜNG TRUNG TRỰC (|MP| = |MQ|), _02 ra ĐƯỜNG TRÒN (|MP| = độ dài cố định).
+# Cách sinh: đi từ kết quả (MP, MQ, vectơ cố định ZW) rồi "che" bằng các phép biến đổi vectơ của Bài 8: tách theo
+# quy tắc ba điểm, thay bằng vectơ bằng nó (cạnh đối hình bình hành, trung điểm), vectơ đối, tính chất trọng tâm
+# (GB + GC = AG). Lời giải là các bước ngược lại. Hình: hình bình hành (có thể có tâm O), tam giác có trọng tâm G
+# và trung điểm I của một cạnh.
 # ---------------------------------------------------------------------
-def _b8_ban_sao(V, X, P):
-    """Cạnh hình bình hành V (theo thứ tự đỉnh): vectơ bằng vectơ XP nằm ở cạnh ĐỐI (X, P kề nhau)."""
-    i, j = V.index(X), V.index(P)
-    if (j - i) % 4 == 1:
-        return V[(i - 1) % 4], V[(i + 2) % 4]
-    return V[(i + 1) % 4], V[(i - 2) % 4]
+def _b8h_hinh():
+    """Hình cho câu tập hợp điểm: dict ten (tên đỉnh), diem (mọi điểm có tên), E (vài bộ toạ độ phức), mo(dung) (câu
+    dẫn theo các điểm phụ có dùng), kieu, ly_bang(u, w) (lí do hai vectơ bằng nhau)."""
+    if random.random() < 0.5:
+        ten = random.choice(["ABCD", "EFGH", "PQRS"])
+        A, B, C, D = ten
+        envs = []
+        for _ in range(3):
+            E = {t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in (A, B, D)}
+            E[C] = E[B] + E[D] - E[A]
+            E["O"] = (E[A] + E[C]) / 2
+            envs.append(E)
+        phu = {"O": r"hai đường chéo cắt nhau tại $O$"}
+        trung = {"O": [(A, C), (B, D)]}
+        return dict(kieu="hbh", ten=ten, dinh=list(ten), diem=list(ten) + ["O"], E=envs, phu=phu, trung=trung,
+                    mo=lambda dung: r"Cho hình bình hành $%s$%s." % (ten, (" có " + phu["O"]) if "O" in dung else ""))
+    ten = random.choice(["ABC", "DEF", "PQR"])
+    A, B, C = ten
+    _, Y, Z = random.sample(ten, 3) if False else (None,) + tuple(random.sample([B, C, A], 2))
+    envs = []
+    for _ in range(3):
+        E = {t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in ten}
+        E["G"] = (E[A] + E[B] + E[C]) / 3
+        E["I"] = (E[Y] + E[Z]) / 2
+        envs.append(E)
+    phu = {"G": r"trọng tâm $G$", "I": r"$I$ là trung điểm của cạnh $%s$" % "".join(sorted(Y + Z))}
+    trung = {"I": [(Y, Z)]}
+
+    def mo(dung):
+        k = [x for x in ("G", "I") if x in dung]
+        if not k:
+            return r"Cho tam giác $%s$." % ten
+        if k[0] == "G":
+            return r"Cho tam giác $%s$ có %s%s." % (ten, phu["G"], (", " + phu["I"]) if len(k) > 1 else "")
+        return r"Cho tam giác $%s$, %s." % (ten, phu["I"])
+    return dict(kieu="tg", ten=ten, dinh=list(ten), diem=list(ten) + ["G", "I"], E=envs, phu=phu, trung=trung, mo=mo)
 
 
-def _b8_hang_tu(V, X, P):
-    """Biểu thức MX + (vectơ bằng XP) hoặc MX - (vectơ bằng PX). -> (tex, lời giải rút gọn về MP)."""
-    if random.random() < 0.6:
-        R, S = _b8_ban_sao(V, X, P)
-        tex = r"%s + %s" % (_vt("M", X), _vt(R, S))
-        ly = r"$%s = %s$ nên $%s = %s + %s = %s$" % (_vt(R, S), _vt(X, P), tex, _vt("M", X), _vt(X, P), _vt("M", P))
-    else:
-        R, S = _b8_ban_sao(V, P, X)
-        tex = r"%s - %s" % (_vt("M", X), _vt(R, S))
-        ly = (r"$%s = %s$ nên $%s = %s + %s = %s + %s = %s$"
-              % (_vt(R, S), _vt(P, X), tex, _vt("M", X), _vt(S, R), _vt("M", X), _vt(X, P), _vt("M", P)))
-    return tex, ly
+def _b8h_v(H, U, V, k=0):
+    return H["E"][k][V] - H["E"][k][U]
 
 
-def _b8_tap_hop():
-    """-> (debai, dieu_kien_tex, dap (chuỗi), nhieu, giai_a (rút gọn), dap_a, giai_b, kieu)."""
-    ten = random.choice(["ABCD", "EFGH", "PQRS"])
-    V = list(ten)
-    ke = [(V[i], V[(i + k) % 4]) for i in range(4) for k in (1, 3)]
-    tt = lambda X, Y: r"đường trung trực của đoạn thẳng $%s$" % "".join(sorted((X, Y)))
-    if random.random() < 0.6:
+def _b8h_bang(H, u, w):
+    return all(abs(_b8h_v(H, *u, k) - _b8h_v(H, *w, k)) < 1e-9 for k in range(len(H["E"])))
+
+
+def _b8h_ly_bang(H, u, w):
+    """Lí do vectơ u = w (u, w là cặp điểm)."""
+    for c, ds in H["trung"].items():
+        if c in u + w:
+            for X, Y in ds:
+                if set(u + w) <= {c, X, Y}:
+                    return r"$%s$ là trung điểm của $%s$" % (c, X + Y)
+    return r"$%s$ là hình bình hành" % H["ten"]
+
+
+def _b8h_che(H, u):
+    """Che một vectơ u = (U, V) của hình. -> (danh sách hạng tử [(dấu, U, V)], câu giải thích ngược hoặc None)."""
+    U, V = u
+    lua = []
+    bang = [(X, Y) for X in H["diem"] for Y in H["diem"] if X != Y and (X, Y) != u and _b8h_bang(H, (X, Y), u)]
+    if bang:
+        lua.append("bang")
+    if H["kieu"] == "tg" and "G" in u and (set(u) - {"G"}) <= set(H["dinh"]):
+        lua += ["trong_tam", "trong_tam"]
+    lua.append("doi")
+    k = random.choice(lua)
+    if k == "bang":
+        w = random.choice(bang)
+        return [(1,) + w], r"$%s = %s$ (vì %s)" % (_vt(*w), _vt(U, V), _b8h_ly_bang(H, w, u))
+    if k == "doi":
+        return [(-1, V, U)], None
+    dinh = [t for t in H["dinh"] if t not in u]                    # hai đỉnh còn lại
+    if U == "G":                                                   # GA = BG + CG
+        hang = [(1, dinh[0], "G"), (1, dinh[1], "G")]
+    else:                                                          # AG = GB + GC
+        hang = [(1, "G", dinh[0]), (1, "G", dinh[1])]
+    return hang, (r"$%s + %s = %s$ (vì $G$ là trọng tâm nên $\overrightarrow{G%s} + \overrightarrow{G%s} + "
+                  r"\overrightarrow{G%s} = \overrightarrow{0}$)" % (_vt(*hang[0][1:]), _vt(*hang[1][1:]), _vt(U, V),
+                                                                   *H["dinh"]))
+
+
+def _b8h_tex(hang):
+    s = ""
+    for i, (d, U, V) in enumerate(hang):
+        s += ("" if i == 0 and d > 0 else (" - " if d < 0 else " + ")) + _vt(U, V)
+    return s.lstrip()
+
+
+def _b8h_bieu_thuc(H, dau, cuoi, co_M):
+    """Biểu thức che của vectơ dau -> cuoi (đi qua 1-2 điểm trung gian). co_M: dau là 'M' (hạng tử MX giữ nguyên).
+    -> (tex, các bước giải thích, tex dạng chuỗi ba điểm)."""
+    while True:
+        so_buoc = random.choice([1, 2]) if co_M else random.choice([2, 2, 3])
+        chuoi = [dau]
+        trung_gian = [p for p in H["diem"] if p not in (dau, cuoi)]
+        random.shuffle(trung_gian)
+        chuoi += trung_gian[:so_buoc - 1] + [cuoi] if not co_M else [trung_gian[0]] + trung_gian[1:so_buoc] + [cuoi]
+        hop = list(zip(chuoi, chuoi[1:]))
+        hang, buoc, so_che = [], [], 0
+        for i, u in enumerate(hop):
+            if co_M and i == 0:
+                hang.append((1,) + u)
+                continue
+            h, ly = _b8h_che(H, u) if random.random() < 0.85 else ([(1,) + u], None)
+            so_che += h != [(1,) + u]
+            hang += h
+            if ly:
+                buoc.append(ly)
+        if so_che >= 1 and len(hang) >= 3 - (0 if co_M else 1) and len(hang) <= 4 and any(h[0] > 0 for h in hang):
+            break
+    dau_hang = hang[:1] if co_M else []
+    con = hang[1:] if co_M else hang
+    random.shuffle(con)
+    hang = dau_hang + con
+    if not co_M and hang[0][0] < 0:
+        hang = sorted(hang, key=lambda h: h[0] < 0)
+    return _b8h_tex(hang), buoc, " + ".join(_vt(*u) for u in hop), hop
+
+
+def _b8h_giai(tex, buoc, chuoi, kq):
+    gi = r"$%s = %s = %s$." % (tex, chuoi, kq)
+    if buoc:
+        return r"Ta có " + "; ".join(buoc) + r". Do đó " + gi
+    return r"Viết vectơ đối thành dấu cộng rồi dùng quy tắc ba điểm: " + gi
+
+
+def _b8_tap_hop(kieu):
+    """kieu 'trung_truc' (dạng A_01) hoặc 'duong_tron' (A_02). -> (debai đầu, dk tex, dap, nhieu, giai_a, dap_a, giai_b)."""
+    H = _b8h_hinh()
+    tt = lambda X, Y: r"đường trung trực của đoạn thẳng $%s$" % "".join(sorted((X, Y))) if X != Y else None
+    tron = lambda T, r: r"đường tròn tâm $%s$, bán kính bằng $%s$" % (T, r)
+    diem = H["diem"]
+    if kieu == "trung_truc":
         while True:
-            (X1, P), (X2, Q) = random.sample(ke, 2)
-            if P != Q and X1 != X2:
+            P, Q = random.sample(diem, 2)
+            t1, b1, c1, h1 = _b8h_bieu_thuc(H, "M", P, True)
+            t2, b2, c2, h2 = _b8h_bieu_thuc(H, "M", Q, True)
+            X1, X2 = h1[0][1], h2[0][1]
+            if X1 != X2 and {X1, X2} != {P, Q} and t1 != t2 and (b1 or b2):
                 break
-        t1, l1 = _b8_hang_tu(V, X1, P)
-        t2, l2 = _b8_hang_tu(V, X2, Q)
         dk = r"\left|%s\right| = \left|%s\right|" % (t1, t2)
         dap = tt(P, Q)
-        ung = [tt(X1, X2) if {X1, X2} != {P, Q} else None, r"đường thẳng $%s$" % "".join(sorted((P, Q))),
-               r"đường tròn đường kính $%s$" % "".join(sorted((P, Q))),
-               tt(X1, Q) if {X1, Q} != {P, Q} else None, tt(P, X2) if {P, X2} != {P, Q} else None]
-        giai_a = l1 + r"; " + l2 + "."
+        ung = [tt(X1, X2), tt(P, X2) if X2 != Q else tt(X1, Q), r"đường thẳng $%s$" % "".join(sorted((P, Q))),
+               r"đường tròn đường kính $%s$" % "".join(sorted((P, Q)))]
+        giai_a = _b8h_giai(t1, b1, c1, _vt("M", P)) + r"\\ " + _b8h_giai(t2, b2, c2, _vt("M", Q))
         dap_a = r"%s = %s,\ %s = %s" % (t1, _vt("M", P), t2, _vt("M", Q))
         giai_b = (r"Điều kiện trở thành $\left|%s\right| = \left|%s\right|$, tức là $M%s = M%s$: $M$ cách đều hai điểm "
                   r"$%s$, $%s$. Vậy tập hợp các điểm $M$ là %s." % (_vt("M", P), _vt("M", Q), P, Q, P, Q, dap))
-        kieu = "trung_truc"
+        dung = set(t1 + t2)
     else:
-        X, P = random.choice(ke)
-        t1, l1 = _b8_hang_tu(V, X, P)
-        Y, Z = random.sample([v for v in V], 2)
-        doan = "".join(sorted((Y, Z)))
-        if random.random() < 0.5:
-            t2 = _vt(Y, Z)
-            l2 = r"$\left|%s\right| = %s$" % (t2, Y + Z)
-            dap_a = r"%s = %s" % (t1, _vt("M", P))
-        else:
-            t2 = r"%s - %s" % (_vt("M", Z), _vt("M", Y))
-            l2 = r"$%s = %s$ (quy tắc trừ) nên $\left|%s\right| = %s$" % (t2, _vt(Y, Z), t2, Y + Z)
-            dap_a = r"%s = %s,\ %s = %s" % (t1, _vt("M", P), t2, _vt(Y, Z))
+        while True:
+            P = random.choice(diem)
+            Z, W = random.sample(H["dinh"], 2)                    # bán kính là một cạnh / đường chéo của hình
+            t1, b1, c1, h1 = _b8h_bieu_thuc(H, "M", P, True)
+            X1 = h1[0][1]
+            if random.random() < 0.4:                              # |MW - MZ| = ZW (quy tắc trừ)
+                t2 = r"%s - %s" % (_vt("M", W), _vt("M", Z))
+                g2 = r"$%s = %s$ (quy tắc trừ)" % (t2, _vt(Z, W))
+                ban_kinh_sai = None
+            else:
+                t2, b2, c2, h2 = _b8h_bieu_thuc(H, Z, W, False)
+                g2 = _b8h_giai(t2, b2, c2, _vt(Z, W))[:-1]
+                ban_kinh_sai = "".join(h2[0])
+            if X1 != P and (b1 or (ban_kinh_sai and b2)):
+                break
+        r = "".join(sorted(Z + W))
         dk = r"\left|%s\right| = \left|%s\right|" % (t1, t2)
-        dap = r"đường tròn tâm $%s$, bán kính bằng $%s$" % (P, doan)
-        khac = [v for v in V if v not in (P, X)]
-        ung = [r"đường tròn tâm $%s$, bán kính bằng $%s$" % (X, doan), tt(P, X),
-               r"đường tròn đường kính $%s$" % doan,
-               r"đường tròn tâm $%s$, bán kính bằng $%s$" % (khac[0], doan)]
-        giai_a = l1 + r"; " + l2 + "."
+        dap = tron(P, r)
+        ung = [tron(X1, r), r"đường tròn đường kính $%s$" % r, tt(P, X1),
+               tron(P, ban_kinh_sai) if ban_kinh_sai and set(ban_kinh_sai) != set(r) else tron(P, r[0] + P)
+               if r[0] != P else None]
+        giai_a = _b8h_giai(t1, b1, c1, _vt("M", P)) + r"\\ " + g2 + r", nên $\left|%s\right| = %s$." % (t2, r)
+        dap_a = r"%s = %s,\ \left|%s\right| = %s" % (t1, _vt("M", P), t2, r)
         giai_b = (r"Điều kiện trở thành $M%s = %s$ ($%s$ là độ dài không đổi). Vậy tập hợp các điểm $M$ là %s."
-                  % (P, doan, doan, dap))
-        kieu = "duong_tron"
+                  % (P, r, r, dap))
+        dung = set(t1 + t2 + P)
     nhieu = []
     for x in ung:
         if x and x != dap and x not in nhieu:
             nhieu.append(x)
-    debai = r"Cho hình bình hành $%s$." % ten
-    return debai, dk, dap, nhieu, giai_a, dap_a, giai_b, kieu
+    return H["mo"](dung), dk, dap, nhieu, giai_a, dap_a, giai_b
 
 
-def L10_C4_B8_VD040_MC_A_01(socau, dang=1):
-    r"""Tập hợp điểm $M$ thoả một đẳng thức độ dài vectơ trong hình bình hành: thay vectơ bằng vectơ bằng nó (cạnh
-    đối), quy tắc ba điểm, quy tắc trừ để đưa về $MP = MQ$ (đường trung trực) hoặc $MP = $ độ dài không đổi (đường
-    tròn). LUYỆN TẬP THÊM (mức VD cao hơn YCCĐ TH040). Theo câu tự luận cô Lan gửi. Không có bản SA (đáp án không phải
-    số).
-
-    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; luyen tap them; co Lan duyet lai."""
+def _b8_vd040_mc(kieu, socau, dang):
     cau = ""
     for _ in range(socau):
-        debai, dk, dap, nhieu, ga, da, gb, kieu = _b8_tap_hop()
-        debai += r" Tập hợp các điểm $M$ thoả mãn $%s$ là" % dk
+        mo, dk, dap, nhieu, ga, da, gb = _b8_tap_hop(kieu)
+        debai = mo + r" Tập hợp các điểm $M$ thoả mãn $%s$ là" % dk
         cau += MC_SA_answer_text(debai, dap, nhieu[:3], ga + r"\\ " + gb, 0, 0, dang)
     return cau
 
 
+def L10_C4_B8_VD040_MC_A_01(socau, dang=1):
+    r"""Tập hợp điểm $M$ là ĐƯỜNG TRUNG TRỰC: điều kiện $\left|\ldots\right| = \left|\ldots\right|$ mỗi vế rút gọn về
+    $\overrightarrow{MP}$, $\overrightarrow{MQ}$ (quy tắc ba điểm, vectơ bằng nhau trong hình bình hành / trung điểm,
+    vectơ đối, tính chất trọng tâm). Hình bình hành (có thể có tâm $O$) hoặc tam giác có trọng tâm $G$, trung điểm $I$.
+    LUYỆN TẬP THÊM. Theo câu tự luận cô Lan gửi.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach (dang A: _01 trung truc, _02 duong tron); luyen tap them."""
+    return _b8_vd040_mc("trung_truc", socau, dang)
+
+
+def L10_C4_B8_VD040_MC_A_02(socau, dang=1):
+    r"""Tập hợp điểm $M$ là ĐƯỜNG TRÒN: vế chứa $M$ rút gọn về $\overrightarrow{MP}$, vế kia là độ dài không đổi (vectơ
+    của hình viết dưới dạng phức tạp hoặc $\overrightarrow{MW} - \overrightarrow{MZ}$) -> đường tròn tâm $P$, bán kính
+    $ZW$. Tâm, bán kính thay đổi (đỉnh, tâm $O$, trọng tâm $G$, trung điểm $I$).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach (dang A: _01 trung truc, _02 duong tron); luyen tap them."""
+    return _b8_vd040_mc("duong_tron", socau, dang)
+
+
 def L10_C4_B8_VD040_TL_A_01(socau, dong=1):
-    r"""Tự luận - cùng Dang với VD040_MC_A: a) rút gọn các vectơ trong điều kiện; b) tìm tập hợp điểm $M$.
+    r"""Tự luận - cùng Dang với VD040_MC_A: a) rút gọn các vectơ trong điều kiện; b) tìm tập hợp điểm $M$ (đường trung
+    trực hoặc đường tròn).
 
     CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; luyen tap them; co Lan duyet lai."""
     cau = ""
     for _ in range(socau):
-        debai, dk, dap, nhieu, ga, da, gb, kieu = _b8_tap_hop()
+        mo, dk, dap, nhieu, ga, da, gb = _b8_tap_hop(random.choice(["trung_truc", "duong_tron"]))
         hoi_a = r"Rút gọn các biểu thức vectơ trong đẳng thức $%s$." % dk
         hoi_b = r"Tìm tập hợp các điểm $M$ thoả mãn $%s$." % dk
         dap_b = r"\text{%s}" % dap.replace("$", "")
-        cau += TL_answer_text(debai, [(hoi_a, da, ga), (hoi_b, dap_b, gb)], 0, 0, dong)
+        cau += TL_answer_text(mo, [(hoi_a, da, ga), (hoi_b, dap_b, gb)], 0, 0, dong)
     return cau

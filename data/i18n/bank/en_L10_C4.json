@@ -765,5 +765,20 @@
  "r\"Cho hình bình hành $%s$.\"": "r\"Given a parallelogram $%s$.\"",
  "r\" Tập hợp các điểm $M$ thoả mãn $%s$ là\"": "r\" The set of points $M$ satisfying $%s$ is\"",
  "r\"Rút gọn các biểu thức vectơ trong đẳng thức $%s$.\"": "r\"Simplify the vector expressions in the equality $%s$.\"",
- "r\"Tìm tập hợp các điểm $M$ thoả mãn $%s$.\"": "r\"Find the set of points $M$ satisfying $%s$.\""
+ "r\"Tìm tập hợp các điểm $M$ thoả mãn $%s$.\"": "r\"Find the set of points $M$ satisfying $%s$.\"",
+ "r\"hai đường chéo cắt nhau tại $O$\"": "r\"whose two diagonals intersect at $O$\"",
+ "r\"Cho hình bình hành $%s$%s.\"": "r\"Given a parallelogram $%s$%s.\"",
+ "\" có \"": "\" with \"",
+ "r\"trọng tâm $G$\"": "r\"the centroid $G$\"",
+ "r\"$I$ là trung điểm của cạnh $%s$\"": "r\"$I$ is the midpoint of the side $%s$\"",
+ "r\"Cho tam giác $%s$.\"": "r\"Given a triangle $%s$.\"",
+ "r\"Cho tam giác $%s$ có %s%s.\"": "r\"Given a triangle $%s$ with %s%s.\"",
+ "r\"Cho tam giác $%s$, %s.\"": "r\"Given a triangle $%s$, %s.\"",
+ "r\"$%s = %s$ (vì %s)\"": "r\"$%s = %s$ (since %s)\"",
+ "r\"$%s + %s = %s$ (vì $G$ là trọng tâm nên $\\overrightarrow{G%s} + \\overrightarrow{G%s} + \"\n                  r\"\\overrightarrow{G%s} = \\overrightarrow{0}$)\"": "r\"$%s + %s = %s$ (since $G$ is the centroid, $\\overrightarrow{G%s} + \\overrightarrow{G%s} + \"\n                  r\"\\overrightarrow{G%s} = \\overrightarrow{0}$)\"",
+ "r\"Ta có \"": "r\"We have \"",
+ "r\". Do đó \"": "r\". Hence \"",
+ "r\"Viết vectơ đối thành dấu cộng rồi dùng quy tắc ba điểm: \"": "r\"Rewrite the subtracted vectors as opposite vectors and use the three-point rule: \"",
+ "r\"$%s = %s$ (quy tắc trừ)\"": "r\"$%s = %s$ (subtraction rule)\"",
+ "r\", nên $\\left|%s\\right| = %s$.\"": "r\", so $\\left|%s\\right| = %s$.\""
 }
