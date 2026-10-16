@@ -79,6 +79,34 @@
           "L10_C3_B5_VD030_MC_C",
           "L10_C3_B5_VD030_SA_C"
         ]
+      },
+      {
+        "mo_ta": "Biết tan hoặc cot, tính biểu thức thuần nhất bậc hai của sin, cos (chia tử và mẫu cho cos² hoặc sin²; không có mẫu thì viết 1 = sin² + cos²)",
+        "mapping_id": [
+          "L10_C3_B5_VD030_MC_D",
+          "L10_C3_B5_VD030_SA_D"
+        ]
+      },
+      {
+        "mo_ta": "Đưa về sin.cos: biết sin.cos, tan + cot hoặc tan, tính sin⁴ + cos⁴, sin⁶ + cos⁶, (sin³ + cos³)/(sin + cos)",
+        "mapping_id": [
+          "L10_C3_B5_VD030_MC_E",
+          "L10_C3_B5_VD030_SA_E"
+        ]
+      },
+      {
+        "mo_ta": "Biết sin ± cos (0° < α < 180°) hoặc tan + cot, tính sin ∓ cos (xét dấu nhờ sin > 0), sin³ ± cos³, sin⁴ + cos⁴",
+        "mapping_id": [
+          "L10_C3_B5_VD030_MC_F",
+          "L10_C3_B5_VD030_SA_F"
+        ]
+      },
+      {
+        "mo_ta": "Biểu thức không phụ thuộc α (tổ hợp sin⁴ + cos⁴, sin⁶ + cos⁶) hoặc biểu thức chứa căn (đưa biểu thức dưới căn về bình phương): tính giá trị",
+        "mapping_id": [
+          "L10_C3_B5_VD030_MC_G",
+          "L10_C3_B5_VD030_SA_G"
+        ]
       }
     ],
     "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."

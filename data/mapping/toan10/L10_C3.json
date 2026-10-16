@@ -661,6 +661,76 @@
     "ghi_chu": "LUYEN TAP THEM - khong co trong yeu cau can dat cua Bo (co Lan 01/10/2026: bai hay nhung YCCD khong co -> giu trong ngan hang, de sinh ra canh bao GV quyet dinh giu/bo). CLAUDE THEM 01/10/2026 theo tai lieu C3-B1; co Lan duyet lai. DOI ID 04/10/2026: C3_B5_TH030_SA_E -> C3_B5_VD030_SA_C (cung so don vi, doi muc o dau theo quy uoc co Lan); co Lan duyet"
   },
   {
+    "id": "L10_C3_B5_VD030_MC_D",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết tan hoặc cot, tính biểu thức thuần nhất bậc hai của sin, cos (chia tử và mẫu cho cos² hoặc sin²; không có mẫu thì viết 1 = sin² + cos²) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.3; co Lan duyet ke hoach ID (Bai 5 muc VD); ban trac nghiem; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_SA_D",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết tan hoặc cot, tính biểu thức thuần nhất bậc hai của sin, cos (chia tử và mẫu cho cos² hoặc sin²; không có mẫu thì viết 1 = sin² + cos²) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.3; co Lan duyet ke hoach ID (Bai 5 muc VD); ban tra loi ngan cung Dang voi MC_D; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_MC_E",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đưa về sin.cos: biết sin.cos, tan + cot hoặc tan, tính sin⁴ + cos⁴, sin⁶ + cos⁶, (sin³ + cos³)/(sin + cos) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.4*, 3.5; co Lan duyet ke hoach ID (Bai 5 muc VD); ban trac nghiem; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_SA_E",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đưa về sin.cos: biết sin.cos, tan + cot hoặc tan, tính sin⁴ + cos⁴, sin⁶ + cos⁶, (sin³ + cos³)/(sin + cos) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.4*, 3.5; co Lan duyet ke hoach ID (Bai 5 muc VD); ban tra loi ngan cung Dang voi MC_E; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_MC_F",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biết sin ± cos (0° < α < 180°) hoặc tan + cot, tính sin ∓ cos (xét dấu nhờ sin > 0), sin³ ± cos³, sin⁴ + cos⁴ - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.5; co Lan duyet ke hoach ID (Bai 5 muc VD); ban trac nghiem; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_SA_F",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biết sin ± cos (0° < α < 180°) hoặc tan + cot, tính sin ∓ cos (xét dấu nhờ sin > 0), sin³ ± cos³, sin⁴ + cos⁴ - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.5; co Lan duyet ke hoach ID (Bai 5 muc VD); ban tra loi ngan cung Dang voi MC_F; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_MC_G",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Biểu thức không phụ thuộc α (tổ hợp sin⁴ + cos⁴, sin⁶ + cos⁶) hoặc biểu thức chứa căn (đưa biểu thức dưới căn về bình phương): tính giá trị - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.5c*; co Lan duyet ke hoach ID (Bai 5 muc VD); ban trac nghiem; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C3_B5_VD030_SA_G",
+    "content": "Tính được giá trị lượng giác (đúng hoặc gần đúng) của một góc từ 0 độ đến 180 độ bằng máy tính cầm tay.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu thức không phụ thuộc α (tổ hợp sin⁴ + cos⁴, sin⁶ + cos⁶) hoặc biểu thức chứa căn (đưa biểu thức dưới căn về bình phương): tính giá trị - luyện tập thêm",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "ghi_chu": "LUYEN TAP THEM - YCCD cua Bo cho Bai 5 chi co NB/TH (co Lan: cu vuot la de vuot). CLAUDE THEM 16/10/2026 - phat trien SGK 3.5c*; co Lan duyet ke hoach ID (Bai 5 muc VD); ban tra loi ngan cung Dang voi MC_G; co Lan duyet lai noi dung"
+  },
+  {
     "id": "L10_C3_B5_TH031_MC_C",
     "content": "Giải thích được hệ thức liên hệ giữa giá trị lượng giác của các góc phụ nhau, bù nhau.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

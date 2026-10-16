@@ -17964,3 +17964,477 @@ def L10_C3_B6_NB034_SA_B_01(socau, dang=2):
         mo = (r"Given triangle $ABC$ with $BC = a$, $CA = b$, $AB = c$, area $S$, semi-perimeter $p$, altitude $h_a$ from $A$; $R$, $r$ are the circumradius and the inradius of the triangle.")
         cau += _c3s_dem(mo, dung, sai, dang)
     return cau
+
+
+# =====================================================================
+# 16/10/2026 - BAI 5 MUC VAN DUNG: VD030 D, E, F, G (co Lan duyet ke hoach ID; "de python tu sinh, khong duoc de de chet").
+# Phat trien tu SGK 3.3, 3.4*, 3.5. LUYEN TAP THEM (YCCD cua Bo cho Bai 5 chi co NB/TH; "cu vuot la de vuot").
+#   D (VD) : biet tan / cot, tinh bieu thuc thuan nhat BAC HAI (co mau bac hai, hoac khong mau: viet 1 = sin^2 + cos^2).
+#   E (VDC): dua ve k = sin.cos: biet sin.cos / tan + cot / tan -> sin^4 + cos^4, sin^6 + cos^6, (sin^3 + cos^3)/(sin + cos).
+#   F (VDC): biet sin +- cos (0 < alpha < 180) hoac tan + cot -> sin -+ cos (XET DAU), sin^3 +- cos^3, sin^4 + cos^4.
+#   G (VDC): bieu thuc khong phu thuoc alpha / bieu thuc chua can (bien doi ve binh phuong) -> tinh gia tri.
+# Moi so lieu ngau nhien; dap so tinh bang sympy; SA dap so toi da 4 ki tu (so thap phan huu han hoac lam tron).
+# =====================================================================
+
+_VD5_S2, _VD5_SC, _VD5_C2 = r"\sin^{2}\alpha", r"\sin\alpha\cos\alpha", r"\cos^{2}\alpha"
+_VD5_T = [Rational(1, 2), Rational(1, 3), Rational(2, 3), Rational(3, 2), Integer(2), Integer(3), Integer(4),
+          Integer(-2), Integer(-3), Rational(-1, 2), Rational(-1, 3), Rational(3, 4), Rational(-3, 4), Rational(4, 3)]
+
+
+def _vd5_da_thuc(hang):
+    """[(he so, bien), ...] -> '2\\sin^{2}\\alpha - \\sin\\alpha\\cos\\alpha + 3\\cos^{2}\\alpha' (bo he so 0)."""
+    s = ""
+    for k, x in hang:
+        if k == 0:
+            continue
+        k = Integer(k)
+        tri = abs(k)
+        he = "" if (tri == 1 and x) else _L(tri)
+        if not s:
+            s = ("-" if k < 0 else "") + he + x
+        else:
+            s += (" - " if k < 0 else " + ") + he + x
+    return s or "0"
+
+
+def _vd5_sa(v, toi_da=4):
+    """Đáp số trả lời ngắn: thập phân hữu hạn gọn; không được thì làm tròn hàng phần trăm. -> (chuỗi, có_làm_tròn)."""
+    s = _so_thap_phan_gon(v, toi_da)
+    if s is not None:
+        return s, False
+    x = float(v)
+    t = ("%.2f" % x).rstrip("0").rstrip(".").replace(".", DAU_THAP_PHAN)
+    return (t, True) if len(t) <= toi_da and abs(x) >= 0.1 else (None, True)
+
+
+# ---------------------------------------------------------------- D: thuan nhat bac hai
+def _vd5_sinh_D(cho_tan, can_sa):
+    while True:
+        t = random.choice(_VD5_T)
+        co_mau = random.random() < 0.6
+        a, b, c = [random.randint(-3, 3) for _ in range(3)]
+        if a == 0 or c == 0 or math.gcd(math.gcd(a, b), c) != 1:
+            continue
+        if co_mau:
+            d, e, f = [random.randint(-3, 3) for _ in range(3)]
+            if (d == 0 and f == 0) or (d, e, f) == (a, b, c) or [d, e, f] == [-a, -b, -c] \
+                    or math.gcd(math.gcd(d, e), f) != 1:
+                continue
+        else:
+            d, e, f = 1, 0, 1
+        u = t if cho_tan else 1 / t                                  # tan
+        tu = a * u ** 2 + b * u + c
+        mau = d * u ** 2 + e * u + f
+        if mau == 0 or tu == 0:
+            continue
+        P = tu / mau
+        if abs(P) == 1 or (can_sa and _so_thap_phan_gon(P, 4) is None):
+            continue
+        return t, co_mau, (a, b, c), (d, e, f), P
+
+
+def _vd5_de_giai_D(t, co_mau, abc, def_, P, cho_tan, tra_loi_ngan=False):
+    a, b, c = abc
+    d, e, f = def_
+    tu = _vd5_da_thuc([(a, _VD5_S2), (b, _VD5_SC), (c, _VD5_C2)])
+    ham = r"\tan" if cho_tan else r"\cot"
+    if co_mau:
+        mau = _vd5_da_thuc([(d, _VD5_S2), (e, _VD5_SC), (f, _VD5_C2)])
+        bt = r"P = \dfrac{%s}{%s}" % (tu, mau)
+    else:
+        bt = r"P = %s" % tu
+    if tra_loi_ngan:
+        de = r"Given an angle $\alpha$ such that $%s\alpha = %s$. Compute the value of the expression $%s$." % (ham, _L(t), bt)
+    else:
+        de = r"Given an angle $\alpha$ such that $%s\alpha = %s$. The value of the expression $%s$ is" % (ham, _L(t), bt)
+    x, chia, ham_x = (r"\tan\alpha", r"\cos^{2}\alpha", r"\tan") if cho_tan else (r"\cot\alpha", r"\sin^{2}\alpha", r"\cot")
+    if cho_tan:
+        pt = _vd5_da_thuc([(a, r"\tan^{2}\alpha"), (b, x), (c, "")])
+        pm = _vd5_da_thuc([(d, r"\tan^{2}\alpha"), (e, x), (f, "")])
+        tu_so, mau_so = a * t ** 2 + b * t + c, d * t ** 2 + e * t + f
+    else:
+        pt = _vd5_da_thuc([(a, ""), (b, x), (c, r"\cot^{2}\alpha")])
+        pm = _vd5_da_thuc([(d, ""), (e, x), (f, r"\cot^{2}\alpha")])
+        tu_so, mau_so = a + b * t + c * t ** 2, d + e * t + f * t ** 2
+    giai = r"Since $%s\alpha = %s$, we have $%s \ne 0$. " % (ham, _L(t), chia.replace("^{2}", ""))
+    if not co_mau:
+        giai += (r"Write $1 = \sin^{2}\alpha + \cos^{2}\alpha$: $P = \dfrac{%s}{\sin^{2}\alpha + \cos^{2}\alpha}$. " % tu)
+    pp, qq = int(Rational(t).p), int(Rational(t).q)                # t = pp/qq: nhan ca tu va mau voi qq^2 cho so nguyen
+    if cho_tan:
+        N, D = a * pp * pp + b * pp * qq + c * qq * qq, d * pp * pp + e * pp * qq + f * qq * qq
+    else:
+        N, D = a * qq * qq + b * pp * qq + c * pp * pp, d * qq * qq + e * pp * qq + f * pp * pp
+    if D < 0:
+        N, D = -N, -D
+    giua = "" if (N, D) == (int(Rational(N, D).p), int(Rational(N, D).q)) else r" = \dfrac{%d}{%d}" % (N, D)
+    giai += (r"Divide both the numerator and the denominator by $%s$:\\ $P = \dfrac{%s}{%s}%s = %s$."
+             % (chia, pt, pm, giua, _L(P)))
+    # nhieu: quen binh phuong / quen mau / doi dau / nghich dao
+    ds = []
+    u = t
+    if co_mau:
+        m2 = d * u + e * u + f if cho_tan else d + e * u + f * u
+        if m2 != 0:
+            ds.append((a * u + b * u + c) / m2 if cho_tan else (a + b * u + c * u) / m2)
+    else:
+        ds.append(tu_so)
+    ds += [-P, 1 / P, P + 1, P - 1]
+    return de, giai, ds
+
+
+def _vd5_D(socau, dang, cho_tan=None):
+    cau, gt = "", []
+    while len(gt) < socau:
+        ct = (random.random() < 0.5) if cho_tan is None else cho_tan
+        v = _vd5_sinh_D(ct, dang != 1)
+        if v[:4] in [g[0][:4] for g in gt]:
+            continue
+        gt.append((v, ct))
+    for (t, co_mau, abc, def_, P), ct in gt:
+        de, giai, ds = _vd5_de_giai_D(t, co_mau, abc, def_, P, ct, dang != 1)
+        if dang == 1:
+            dap = _L(P)
+            nh = _ba_nhieu(dap, [_L(x) for x in ds], buoc=lambda k: _L(P + 2 * k))
+        else:
+            dap = _so_thap_phan_gon(P, 4)
+            nh = [s for s in (_so_thap_phan_gon(x, 4) for x in ds) if s] + ["1", "2", "3"]
+        cau += MC_SA_answer_const(de, dap, nh, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_VD030_MC_D_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Biết $\tan\alpha$, tính biểu thức thuần nhất BẬC HAI của $\sin\alpha$, $\cos\alpha$
+    (có mẫu bậc hai: chia tử, mẫu cho $\cos^{2}\alpha$; không mẫu: viết $1 = \sin^{2}\alpha + \cos^{2}\alpha$).
+
+    CLAUDE THEM 16/10/2026 - phat trien SGK 3.3; co Lan duyet ke hoach ID; co Lan duyet lai noi dung."""
+    return _vd5_D(socau, dang, True)
+
+
+def L10_C3_B5_VD030_MC_D_02(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ). Như _01 nhưng cho $\cot\alpha$: chia tử, mẫu cho $\sin^{2}\alpha$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5_D(socau, dang, False)
+
+
+def L10_C3_B5_VD030_SA_D_01(socau, dang=2):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ) - trả lời ngắn cùng dạng VD030_MC_D: biết $\tan\alpha$ hoặc $\cot\alpha$, tính
+    biểu thức thuần nhất bậc hai. Đáp số thập phân hữu hạn.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5_D(socau, dang)
+
+
+# ---------------------------------------------------------------- E: dua ve k = sin.cos
+_VD5_K = [Rational(1, 3), Rational(1, 4), Rational(-1, 4), Rational(2, 5), Rational(-2, 5), Rational(1, 5),
+          Rational(-1, 5), Rational(-1, 3), Rational(3, 10), Rational(-3, 10), Rational(1, 8), Rational(3, 8),
+          Rational(-3, 8), Rational(2, 9), Rational(1, 6)]
+_VD5_DICH = {
+    "4": (r"\sin^{4}\alpha + \cos^{4}\alpha", lambda k: 1 - 2 * k ** 2,
+          r"\sin^{4}\alpha + \cos^{4}\alpha = \left(\sin^{2}\alpha + \cos^{2}\alpha\right)^{2} - 2\sin^{2}\alpha\cos^{2}\alpha = 1 - 2\left(\sin\alpha\cos\alpha\right)^{2}",
+          lambda k: [1 - k ** 2, 1 - 4 * k ** 2, 1 + 2 * k ** 2, 1 - 2 * k, 1 - 3 * k ** 2]),
+    "6": (r"\sin^{6}\alpha + \cos^{6}\alpha", lambda k: 1 - 3 * k ** 2,
+          r"\sin^{6}\alpha + \cos^{6}\alpha = \left(\sin^{2}\alpha + \cos^{2}\alpha\right)^{3} - 3\sin^{2}\alpha\cos^{2}\alpha\left(\sin^{2}\alpha + \cos^{2}\alpha\right) = 1 - 3\left(\sin\alpha\cos\alpha\right)^{2}",
+          lambda k: [1 - 2 * k ** 2, 1 - k ** 2, 1 + 3 * k ** 2, 1 - 3 * k, 1 - 6 * k ** 2]),
+    "3": (r"\dfrac{\sin^{3}\alpha + \cos^{3}\alpha}{\sin\alpha + \cos\alpha}", lambda k: 1 - k,
+          r"\dfrac{\sin^{3}\alpha + \cos^{3}\alpha}{\sin\alpha + \cos\alpha} = \sin^{2}\alpha - \sin\alpha\cos\alpha + \cos^{2}\alpha = 1 - \sin\alpha\cos\alpha",
+          lambda k: [1 + k, 1 - 2 * k, k, 1 - k ** 2, 2 - k]),
+}
+
+
+def _vd5_sinh_E(can_sa):
+    while True:
+        cach = random.choice(["k", "m", "t"])
+        if cach == "t":
+            t = random.choice(_VD5_T)
+            k = t / (1 + t ** 2)
+        else:
+            k = random.choice(_VD5_K)
+        if abs(k) > Rational(1, 2):
+            continue
+        hoi = random.choice(list(_VD5_DICH))
+        if hoi == "3" and k == Rational(-1, 2):
+            continue
+        G = _VD5_DICH[hoi][1](k)
+        if can_sa and _so_thap_phan_gon(G, 4) is None:
+            continue
+        return cach, (t if cach == "t" else (1 / k if cach == "m" else k)), k, hoi, G
+
+
+def _vd5_E(socau, dang):
+    cau, gt = "", []
+    while len(gt) < socau:
+        v = _vd5_sinh_E(dang != 1)
+        if v[:2] + v[3:4] in [g[:2] + g[3:4] for g in gt]:
+            continue
+        gt.append(v)
+    for cach, gia_tri, k, hoi, G in gt:
+        ten, ham, cong_thuc, nhieu = _VD5_DICH[hoi]
+        if cach == "k":
+            cho = r"\sin\alpha\cos\alpha = %s" % _L(gia_tri)
+            b1 = ""
+        elif cach == "m":
+            cho = r"\tan\alpha + \cot\alpha = %s" % _L(gia_tri)
+            b1 = (r"We have $\tan\alpha + \cot\alpha = \dfrac{\sin^{2}\alpha + \cos^{2}\alpha}{\sin\alpha\cos\alpha} = "
+                  r"\dfrac{1}{\sin\alpha\cos\alpha}$, so $\sin\alpha\cos\alpha = \dfrac{1}{%s} = %s$.\\ " % (_L(gia_tri), _L(k)))
+        else:
+            cho = r"\tan\alpha = %s" % _L(gia_tri)
+            b1 = (r"Since $\cos\alpha \ne 0$, divide the numerator and the denominator by $\cos^{2}\alpha$: $\sin\alpha\cos\alpha = "
+                  r"\dfrac{\sin\alpha\cos\alpha}{\sin^{2}\alpha + \cos^{2}\alpha} = \dfrac{\tan\alpha}{1 + \tan^{2}\alpha} = %s$.\\ "
+                  % _L(k))
+        dk = r" (with $\sin\alpha + \cos\alpha \ne 0$)" if hoi == "3" else ""
+        de = r"Given an angle $\alpha$ such that $%s$. The value of the expression $%s$%s is" % (cho, ten, dk)
+        giai = b1 + r"We have $%s$.\\ Hence the required value is $1 - %s = %s$." % (
+            cong_thuc, {"4": r"2\cdot\left(%s\right)^{2}", "6": r"3\cdot\left(%s\right)^{2}", "3": r"\left(%s\right)"}[hoi] % _L(k), _L(G))
+        if dang == 1:
+            dap = _L(G)
+            nh = _ba_nhieu(dap, [_L(x) for x in nhieu(k)], buoc=lambda j: _L(G + Rational(j, 10)))
+        else:
+            de = r"Given an angle $\alpha$ such that $%s$. Compute the value of the expression $%s$%s." % (cho, ten, dk)
+            dap = _so_thap_phan_gon(G, 4)
+            nh = [s for s in (_so_thap_phan_gon(x, 4) for x in nhieu(k)) if s] + ["0,5", "0,75", "0,25"]
+        cau += MC_SA_answer_const(de, dap, nh, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_VD030_MC_E_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC. Đưa về $k = \sin\alpha\cos\alpha$: biết $\sin\alpha\cos\alpha$, hoặc
+    $\tan\alpha + \cot\alpha$, hoặc $\tan\alpha$; tính $\sin^{4}\alpha + \cos^{4}\alpha$, $\sin^{6}\alpha + \cos^{6}\alpha$ hoặc
+    $\dfrac{\sin^{3}\alpha + \cos^{3}\alpha}{\sin\alpha + \cos\alpha}$.
+
+    CLAUDE THEM 16/10/2026 - phat trien SGK 3.4*, 3.5; co Lan duyet ke hoach ID; co Lan duyet lai noi dung."""
+    return _vd5_E(socau, dang)
+
+
+def L10_C3_B5_VD030_SA_E_01(socau, dang=2):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC - trả lời ngắn cùng dạng VD030_MC_E. Đáp số thập phân hữu hạn.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5_E(socau, dang)
+
+
+# ---------------------------------------------------------------- F: biet sin +- cos
+_VD5_BO_BA = [(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25), (20, 21, 29)]
+
+
+def _vd5_sinh_F(can_sa):
+    """Chọn (sin, cos) hữu tỉ hoặc chỉ cho p; trả về (cho_tex, giai, dap, nhieu, lam_tron)."""
+    while True:
+        kieu = random.choice(["cong", "tru", "m"])
+        if kieu == "m":                                            # tan + cot = m -> sin.cos = 1/m
+            m = random.choice([Integer(x) for x in (-5, -4, -3, -2, 3, 4, 5)] + [Rational(5, 2), Rational(-5, 2), Rational(10, 3)])
+            k = 1 / m
+            if k > 0:      # alpha nhon: sin + cos > 0
+                hoi_tex, G = r"\sin\alpha + \cos\alpha", sqrt(1 + 2 * k)
+                xet = (r"$\sin\alpha\cos\alpha = %s > 0$ and $\sin\alpha > 0$ (since $0^\circ < \alpha < 180^\circ$), so "
+                       r"$\cos\alpha > 0$; hence $\sin\alpha + \cos\alpha > 0$" % _L(k))
+                bp = r"\left(\sin\alpha + \cos\alpha\right)^{2} = 1 + 2\sin\alpha\cos\alpha = %s" % _L(1 + 2 * k)
+            else:          # alpha tu: sin - cos > 0
+                hoi_tex, G = r"\sin\alpha - \cos\alpha", sqrt(1 - 2 * k)
+                xet = (r"$\sin\alpha\cos\alpha = %s < 0$ and $\sin\alpha > 0$ (since $0^\circ < \alpha < 180^\circ$), so "
+                       r"$\cos\alpha < 0$; hence $\sin\alpha - \cos\alpha > 0$" % _L(k))
+                bp = r"\left(\sin\alpha - \cos\alpha\right)^{2} = 1 - 2\sin\alpha\cos\alpha = %s" % _L(1 - 2 * k)
+            cho = r"\tan\alpha + \cot\alpha = %s" % _L(m)
+            giai = (r"We have $\tan\alpha + \cot\alpha = \dfrac{1}{\sin\alpha\cos\alpha}$, so $\sin\alpha\cos\alpha = %s$.\\ "
+                    r"%s.\\ $%s$, hence $%s = %s$." % (_L(k), xet, bp, hoi_tex, _L(G)))
+            nhieu = [-G, sqrt(abs(1 - 2 * k)) if k > 0 else sqrt(1 + 2 * k) if 1 + 2 * k > 0 else G + 1, 1 + 2 * k, G ** 2 if G ** 2 != G else G + 1]
+        else:
+            if random.random() < 0.6:
+                a, b, c = random.choice(_VD5_BO_BA)
+                if random.random() < 0.5:
+                    a, b = b, a
+                s, co = Rational(a, c), Rational(b, c) * random.choice([1, -1])
+                p = s + co if kieu == "cong" else s - co
+            else:
+                p = random.choice([Rational(1, 2), Rational(1, 3), Rational(-1, 3), Rational(-1, 2), Rational(1, 4),
+                                   Rational(2, 3), Rational(-2, 3), Rational(3, 4), Rational(1, 5)])
+            if not (-1 < p < 1) or p == 0:
+                continue
+            k = (p ** 2 - 1) / 2 if kieu == "cong" else (1 - p ** 2) / 2
+            muc = random.choice(["dau", "lap_phuong", "bon"])
+            ky = "+" if kieu == "cong" else "-"
+            cho = r"\sin\alpha %s \cos\alpha = %s" % (ky, _L(p))
+            b1 = (r"Squaring both sides: $1 %s 2\sin\alpha\cos\alpha = %s$, so $\sin\alpha\cos\alpha = %s$.\\ "
+                  % (ky, _L(p ** 2), _L(k)))
+            if muc == "dau":
+                G = sqrt(1 - 2 * k) if kieu == "cong" else sqrt(1 + 2 * k)
+                hoi_tex = r"\sin\alpha - \cos\alpha" if kieu == "cong" else r"\sin\alpha + \cos\alpha"
+                if kieu == "cong":
+                    xet = (r"Since $\sin\alpha\cos\alpha < 0$ and $\sin\alpha > 0$, we get $\cos\alpha < 0$; hence "
+                           r"$\sin\alpha - \cos\alpha > 0$")
+                    bp = r"\left(\sin\alpha - \cos\alpha\right)^{2} = 1 - 2\sin\alpha\cos\alpha = %s" % _L(1 - 2 * k)
+                else:
+                    xet = (r"Since $\sin\alpha\cos\alpha > 0$ and $\sin\alpha > 0$, we get $\cos\alpha > 0$; hence "
+                           r"$\sin\alpha + \cos\alpha > 0$")
+                    bp = r"\left(\sin\alpha + \cos\alpha\right)^{2} = 1 + 2\sin\alpha\cos\alpha = %s" % _L(1 + 2 * k)
+                giai = b1 + r"%s.\\ $%s$, suy ra $%s = %s$." % (xet, bp, hoi_tex, _L(G))
+                nhieu = [-G, G ** 2, p, sqrt(2) - G if sqrt(2) - G > 0 else G + 1]
+            elif muc == "lap_phuong":
+                hoi_tex = r"\sin^{3}\alpha %s \cos^{3}\alpha" % ky
+                G = p * (1 - k) if kieu == "cong" else p * (1 + k)
+                giai = b1 + (r"$%s = \left(\sin\alpha %s \cos\alpha\right)\left(1 %s \sin\alpha\cos\alpha\right) = "
+                             r"%s\cdot\left(1 %s %s\right) = %s$."
+                             % (hoi_tex, ky, "-" if kieu == "cong" else "+", _L(p), "-" if kieu == "cong" else "+",
+                                _L(k) if k >= 0 else r"\left(%s\right)" % _L(k), _L(G)))
+                nhieu = [p * (1 + k) if kieu == "cong" else p * (1 - k), p ** 3, p * (1 - 2 * k), -G]
+            else:
+                hoi_tex = r"\sin^{4}\alpha + \cos^{4}\alpha"
+                G = 1 - 2 * k ** 2
+                giai = b1 + (r"$\sin^{4}\alpha + \cos^{4}\alpha = 1 - 2\left(\sin\alpha\cos\alpha\right)^{2} = 1 - 2\cdot%s = %s$."
+                             % (_L(k ** 2), _L(G)))
+                nhieu = [1 - k ** 2, 1 - 4 * k ** 2, 1 + 2 * k ** 2, p ** 4]
+        if G.is_Rational and G.q > 1000:                         # tranh phan so qua cong kenh
+            continue
+        de_mo = r"Given an angle $\alpha$ such that $0^\circ < \alpha < 180^\circ$ and $%s$." % cho
+        if can_sa:
+            dap, tron = _vd5_sa(G)
+            if dap is None:
+                continue
+        else:
+            dap, tron = _L(G), False
+        return de_mo, hoi_tex, giai, G, dap, nhieu, tron
+
+
+def _vd5_F(socau, dang):
+    cau, da = "", []
+    while len(da) < socau:
+        de_mo, hoi_tex, giai, G, dap, nhieu, tron = _vd5_sinh_F(dang != 1)
+        if (de_mo, hoi_tex) in da:
+            continue
+        da.append((de_mo, hoi_tex))
+        if dang == 1:
+            de = de_mo + r" The value of $%s$ is" % hoi_tex
+            nh = _ba_nhieu(dap, [_L(x) for x in nhieu if x != G], buoc=lambda j: _L(G + j))
+        else:
+            de = de_mo + r" Compute the value of $%s$%s." % (hoi_tex, " (round the result to two decimal places)" if tron else "")
+            nh = [s for s in (_vd5_sa(x)[0] for x in nhieu if x != G) if s] + ["1", "0,5", "2"]
+        cau += MC_SA_answer_const(de, dap, nh, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_VD030_MC_F_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC. Cho $0^\circ < \alpha < 180^\circ$ và $\sin\alpha \pm \cos\alpha$ (hoặc
+    $\tan\alpha + \cot\alpha$): tính $\sin\alpha \mp \cos\alpha$ (XÉT DẤU nhờ $\sin\alpha > 0$), $\sin^{3}\alpha \pm \cos^{3}\alpha$,
+    $\sin^{4}\alpha + \cos^{4}\alpha$.
+
+    CLAUDE THEM 16/10/2026 - phat trien SGK 3.5; co Lan duyet ke hoach ID; co Lan duyet lai noi dung."""
+    return _vd5_F(socau, dang)
+
+
+def L10_C3_B5_VD030_SA_F_01(socau, dang=2):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC - trả lời ngắn cùng dạng VD030_MC_F. Đáp số thập phân hữu hạn hoặc làm tròn
+    đến hàng phần trăm (đề ghi rõ).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5_F(socau, dang)
+
+
+# ---------------------------------------------------------------- G: khong phu thuoc alpha / chua can
+def _vd5_sinh_G():
+    kieu = random.choice(["khong_phu_thuoc", "khong_phu_thuoc", "can", "can", "can"])
+    if kieu == "khong_phu_thuoc":
+        k = random.choice([1, 2, 3, -1, -2])
+        d = random.randint(-3, 3)
+        dao = random.random() < 0.5                    # thu tu hai nhom
+        n4, n6 = 3 * k, -2 * k
+        G = Integer(k + d)
+        nhom4 = r"%s\left(\sin^{4}\alpha + \cos^{4}\alpha\right)" % (_L(n4) if abs(n4) != 1 else ("-" if n4 < 0 else ""))
+        nhom6 = r"%s\left(\sin^{6}\alpha + \cos^{6}\alpha\right)" % (_L(abs(n6)) if abs(n6) != 1 else "")
+        if dao:
+            bt = r"%s%s %s %s" % ("" if n6 > 0 else "-", nhom6, "+" if n4 > 0 else "-",
+                                  nhom4.lstrip("-") if n4 < 0 else nhom4)
+        else:
+            bt = r"%s %s %s" % (nhom4, "+" if n6 > 0 else "-", nhom6)
+        if d:
+            bt += r" %s %d" % ("+" if d > 0 else "-", abs(d))
+        de_bt = r"M = %s" % bt
+        giai = (r"Let $x = \sin^{2}\alpha\cos^{2}\alpha$. We have $\sin^{4}\alpha + \cos^{4}\alpha = 1 - 2x$ and "
+                r"$\sin^{6}\alpha + \cos^{6}\alpha = 1 - 3x$ (since $\sin^{2}\alpha + \cos^{2}\alpha = 1$). Therefore\\ "
+                r"$M = %d\left(1 - 2x\right) %s %d\left(1 - 3x\right)%s = %d %s %d%s = %s$ for every $\alpha$."
+                % (n4, "+" if n6 > 0 else "-", abs(n6), (" + %d" % d if d > 0 else " - %d" % -d) if d else "",
+                   n4, "+" if n6 > 0 else "-", abs(n6), ((" + %d" % d) if d > 0 else (" - %d" % -d)) if d else "", _L(G)))
+        nhieu = [G + 1, G - 1, Integer(d), Integer(n4 + n6 + d + 1), G + 2]
+        return de_bt, G, giai, nhieu
+    # chua can: hai can, moi can la binh phuong cua (Y^2 + r) hoac (r - Y^2)
+    X, Y = random.choice([(r"\sin", r"\cos"), (r"\cos", r"\sin")])
+    can, gt, giai_can = [], [], []
+    for X1, Y1 in ((X, Y), (Y, X)):
+        if random.random() < 0.55:                      # (Y^2 + r)^2 = X^4 + (2r + 2) Y^2 + r^2 - 1
+            r = random.choice([1, 2, 3])
+            p, q = 2 * r + 2, r * r - 1
+            ket = r"%s^{2}\alpha + %d" % (Y1, r)
+            gia = ("+", r)
+            bien_doi = (r"%s^{4}\alpha + %d%s^{2}\alpha%s = \left(1 - %s^{2}\alpha\right)^{2} + %d%s^{2}\alpha%s = "
+                        r"\left(%s^{2}\alpha + %d\right)^{2}" % (X1, p, Y1, (" + %d" % q) if q else "", Y1, p, Y1,
+                                                                  (" + %d" % q) if q else "", Y1, r))
+        else:                                           # (r - X^2)^2 = X^4 + 2r Y^2 + r^2 - 2r  (r >= 2)
+            r = random.choice([2, 3, 4])
+            p, q = 2 * r, r * r - 2 * r
+            ket = r"%d - %s^{2}\alpha" % (r, X1)
+            gia = ("-", r)
+            bien_doi = (r"%s^{4}\alpha + %d%s^{2}\alpha%s = %s^{4}\alpha + %d\left(1 - %s^{2}\alpha\right)%s = "
+                        r"\left(%d - %s^{2}\alpha\right)^{2}" % (X1, p, Y1, (" + %d" % q) if q else "", X1, p, X1,
+                                                                  (" + %d" % q) if q else "", r, X1))
+        can.append(r"\sqrt{%s^{4}\alpha + %d%s^{2}\alpha%s}" % (X1, p, Y1, (" + %d" % q) if q else ""))
+        gt.append((gia, X1, Y1))
+        giai_can.append(r"$%s$, so $%s = %s$" % (bien_doi, can[-1], ket))
+    # tong: (Y^2 + r) hoac (r - X^2) cua tung can
+    tong_r = sum(g[0][1] for g in gt)
+    # phan con lai chua alpha: + Y1^2 (kieu cong) hoac - X1^2 (kieu tru)
+    con = []
+    for (dau, r), X1, Y1 in gt:
+        con.append(("+", Y1) if dau == "+" else ("-", X1))
+    # X, Y la sin/cos: Y1 cua can 1 = Y, cua can 2 = X; X1 cua can 1 = X, cua can 2 = Y
+    cong = [h for d, h in con if d == "+"]
+    tru = [h for d, h in con if d == "-"]
+    if len(cong) == 2 or len(tru) == 2:
+        G = Integer(tong_r + (1 if len(cong) == 2 else -1))
+        ghep = (r"\sin^{2}\alpha + \cos^{2}\alpha = 1" if len(cong) == 2 else r"-\left(\sin^{2}\alpha + \cos^{2}\alpha\right) = -1")
+    elif cong[0] == tru[0]:
+        G = Integer(tong_r)
+        ghep = r"%s^{2}\alpha - %s^{2}\alpha = 0" % (cong[0], tru[0])
+    else:
+        return None                                     # con phu thuoc alpha -> bo
+    de_bt = r"M = %s + %s" % (can[0], can[1])
+    giai = (r"Use $\sin^{2}\alpha + \cos^{2}\alpha = 1$ to turn the expression under each square root into a perfect square, then use "
+            r"$\sqrt{A^{2}} = \left|A\right|$ (note that $0 \le \sin^{2}\alpha, \cos^{2}\alpha \le 1$):\\ "
+            + r";\\ ".join(giai_can) + r".\\ Adding up, the terms containing $\alpha$ cancel ($%s$), so $M = %s$ for every $\alpha$."
+            % (ghep, _L(G)))
+    nhieu = [G + 1, G - 1, Integer(tong_r + 2), G + 2, Integer(tong_r - 1)]
+    return de_bt, G, giai, nhieu
+
+
+def _vd5_G(socau, dang):
+    cau, da = "", []
+    while len(da) < socau:
+        g = _vd5_sinh_G()
+        if g is None or g[0] in da:
+            continue
+        de_bt, G, giai, nhieu = g
+        da.append(de_bt)
+        if dang == 1:
+            de = r"For every angle $\alpha$ $\left(0^\circ \le \alpha \le 180^\circ\right)$, the expression $%s$ always takes the value" % de_bt
+            dap = _L(G)
+            nh = _ba_nhieu(dap, [_L(x) for x in nhieu], buoc=lambda j: _L(G + 2 + j))
+        else:
+            de = (r"It is known that for every angle $\alpha$ $\left(0^\circ \le \alpha \le 180^\circ\right)$, the expression $%s$ always takes "
+                  r"the same value. Find that value." % de_bt)
+            dap = str(int(G))
+            nh = [str(int(x)) for x in nhieu if x != G]
+        cau += MC_SA_answer_const(de, dap, nh, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_VD030_MC_G_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC. Biểu thức không phụ thuộc $\alpha$ (tổ hợp $\sin^{4}\alpha + \cos^{4}\alpha$,
+    $\sin^{6}\alpha + \cos^{6}\alpha$) hoặc biểu thức chứa căn (đưa biểu thức dưới căn về bình phương): tính giá trị.
+
+    CLAUDE THEM 16/10/2026 - phat trien SGK 3.5c*; co Lan duyet ke hoach ID; co Lan duyet lai noi dung."""
+    return _vd5_G(socau, dang)
+
+
+def L10_C3_B5_VD030_SA_G_01(socau, dang=2):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VDC - trả lời ngắn cùng dạng VD030_MC_G. Đáp số nguyên.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5_G(socau, dang)
