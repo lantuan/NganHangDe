@@ -5412,3 +5412,597 @@ def L10_C4_B7_VD039_SA_B_01(socau, dang=2):
         cau += MC_SA_answer_const(de, dap, [x for x in ung if x != dap] + ["1", "2", "0,5", "1,5", "3", "2,5"], giai,
                                   _vd039b_hinh(F, P, tinh_huong=th), 0, dang)
     return cau
+
+
+# =====================================================================
+# BÀI 8 BỔ SUNG 16/10/2026 (cô Lan gửi câu mẫu, đã duyệt kế hoạch ID):
+#   TH040_MC_A_02, TH041_MC_A_02, TH040_MC_B_02 (biến thể "khẳng định nào đúng");
+#   TH040_MC_C, SA_C (độ dài vectơ tổng), TH041_MC_C, SA_C (độ dài vectơ hiệu) - dạng mới;
+#   B11_VD060_MC_A_02, SA_A_02 (hợp lực hai lực, góc bất kì).
+# Mọi chân trị kiểm bằng toạ độ (ngẫu nhiên hoặc chính xác bằng sympy), không viết tay.
+# =====================================================================
+import sympy as _sp8
+from decimal import Decimal as _Dec8, ROUND_HALF_UP as _HU8
+
+_B8_BO_DIEM = [("A", "B", "C"), ("M", "N", "P"), ("D", "E", "F"), ("I", "J", "K"), ("X", "Y", "Z"), ("O", "A", "B")]
+
+
+def _b8_ba_diem(loai):
+    r"""Câu ``khẳng định nào luôn đúng'' về $\overrightarrow{UV}$ phân tích qua điểm thứ ba $W$.
+    loai 'tong': đáp án là tổng theo quy tắc ba điểm; 'hieu': đáp án là hiệu hai vectơ chung điểm đầu (quy tắc trừ).
+    Nhiễu chỉ lấy các khẳng định SAI mà vế phải rút gọn được (về $\overrightarrow{VU}$, hai lần một vectơ, ...) để lời
+    giải chỉ rõ vì sao sai."""
+    ten = list(random.choice(_B8_BO_DIEM))
+    U, V, W = random.sample(ten, 3)
+    envs = _b5_env_diem(ten)
+    trai = _b5_vt(U, V)
+    vts = [(X, Y) for X in ten for Y in ten if X != Y and {X, Y} != {U, V}]
+    dung, sai = [], []
+    for a in vts:
+        for b in vts:
+            for phep in "+-":
+                if a == b or (phep == "+" and a == (b[1], b[0])):
+                    continue
+                x, y = _b5_vt(*a), _b5_vt(*b)
+                ve = _b5_cong(x, y) if phep == "+" else _b5_tru(x, y)
+                kd = (r"$%s = %s$" % (trai.tex, ve.tex), ve, a)
+                if not _b5_bang(trai, ve, envs):
+                    gon = _b5_rut_diem(ve, envs, _b5_cap_trong(ve), ten)
+                    if gon != ve.tex:
+                        sai.append(kd + (gon,))
+                elif loai == "tong" and phep == "+":
+                    dung.append(kd)
+                elif loai == "hieu" and phep == "-" and a[0] == b[0]:
+                    dung.append(kd)
+    dap = random.choice(dung)
+    random.shuffle(sai)
+    # hai nhiễu rút gọn về một vectơ (thường là vectơ đối $\overrightarrow{VU}$, viết dưới hai dạng khác nhau) và một
+    # nhiễu dạng hai lần một vectơ (trừ hai vectơ đối nhau)
+    mot = [x for x in sai if not x[3].startswith("2")]
+    hai = [x for x in sai if x[3].startswith("2")]
+    nhieu = mot[:2] + hai[:1]
+    for x in sai:
+        if len(nhieu) < 3 and x not in nhieu:
+            nhieu.append(x)
+    ve = dap[1]
+    a = dap[2]
+    if loai == "tong":
+        if a[0] == U:
+            ly = (r"By the three-point rule: $%s = %s$, which holds for \emph{every} position of $%s$, $%s$, $%s$."
+                  % (ve.tex, trai.tex, U, V, W))
+        else:
+            ly = (r"By the three-point rule: $%s + %s = %s$; vector addition is commutative, so $%s = %s$, "
+                  r"which holds for \emph{every} position of $%s$, $%s$, $%s$."
+                  % (_vt(U, W), _vt(W, V), trai.tex, ve.tex, trai.tex, U, V, W))
+    else:
+        ly = (r"By the subtraction rule (two vectors with the common initial point $%s$): $%s = %s$, which holds for \emph{every} position of "
+              r"$%s$, $%s$, $%s$." % (a[0], ve.tex, trai.tex, U, V, W))
+    ly += (r"\\ The other statements are false because: "
+           + "; ".join(r"$%s = %s \ne %s$" % (n[1].tex, n[3], trai.tex) for n in nhieu) + ".")
+    debai = (r"Given three distinct arbitrary points $%s$, $%s$, $%s$. Which of the following statements is always true?"
+             % tuple(sorted(ten)))
+    return debai, dap[0], [n[0] for n in nhieu], ly
+
+
+def L10_C4_B8_TH040_MC_A_02(socau, dang=1):
+    r"""Tổng hai vectơ theo quy tắc ba điểm: cho ba điểm phân biệt bất kì, chọn khẳng định luôn đúng
+    $\overrightarrow{UV} = \overrightarrow{UW} + \overrightarrow{WV}$ (nhiễu trộn tổng, hiệu, đổi chiều). Theo câu mẫu
+    cô Lan gửi. Chân trị kiểm bằng ba bộ toạ độ ngẫu nhiên.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai = _b8_ba_diem("tong")
+        cau += MC_SA_answer_text(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_TH041_MC_A_02(socau, dang=1):
+    r"""Hiệu hai vectơ, quy tắc trừ: cho ba điểm phân biệt bất kì, chọn khẳng định luôn đúng
+    $\overrightarrow{UV} = \overrightarrow{WV} - \overrightarrow{WU}$ (nhiễu trộn tổng, hiệu, đổi chiều). Theo câu mẫu
+    cô Lan gửi. Chân trị kiểm bằng ba bộ toạ độ ngẫu nhiên.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai = _b8_ba_diem("hieu")
+        cau += MC_SA_answer_text(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_TH040_MC_B_02(socau, dang=1):
+    r"""Tổng hai vectơ theo quy tắc hình bình hành tại một đỉnh ngẫu nhiên: các phương án cùng vế phải là vectơ
+    đường chéo $\overrightarrow{XT}$, khác vế trái (cạnh ở đỉnh khác, hai vectơ đối nhau, ra vectơ ngược hướng).
+    Theo câu mẫu cô Lan gửi. Chân trị kiểm bằng ba hình bình hành ngẫu nhiên.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        ten = list(random.choice(["ABCD", "MNPQ", "EFGH"]))
+        envs = []
+        for _k in range(3):
+            E = {t: complex(random.uniform(-9, 9), random.uniform(-9, 9)) for t in ten[:2] + ten[3:]}
+            E[ten[2]] = E[ten[1]] + E[ten[3]] - E[ten[0]]
+            envs.append(E)
+        k = random.randrange(4)
+        X, U, T, W = (ten[(k + i) % 4] for i in range(4))
+        phai = _b5_vt(X, T)
+        canh = [(ten[i], ten[(i + 1) % 4]) for i in range(4)]
+        canh += [(q, p) for p, q in canh]
+        dung = [r"$%s + %s = %s$" % (_vt(X, U), _vt(X, W), phai.tex), r"$%s + %s = %s$" % (_vt(X, W), _vt(X, U), phai.tex)]
+        dap = random.choice(dung)
+        nhom = {"nguoc": [], "khong": [], "cheo_khac": [], "khac": []}
+        for a in canh:
+            for b in canh:
+                if a == b or a == (b[1], b[0]):
+                    continue
+                l = _b5_cong(_b5_vt(*a), _b5_vt(*b))
+                if _b5_bang(l, phai, envs):
+                    continue
+                kd = (r"$%s = %s$" % (l.tex, phai.tex), l)
+                if _b5_bang(l, _b5_nhan(-1, phai), envs):
+                    nhom["nguoc"].append(kd)
+                elif _b5_bang(l, _B5_0, envs):
+                    nhom["khong"].append(kd)
+                elif any(_b5_bang(l, _b5_vt(p, q), envs) for p, q in ((U, W), (W, U))):
+                    nhom["cheo_khac"].append(kd)
+                else:
+                    nhom["khac"].append(kd)
+        nhieu = []
+        for g in ("nguoc", "khong", "cheo_khac", "khac"):
+            if nhom[g] and len(nhieu) < 3:
+                nhieu.append(random.choice(nhom[g]))
+        giai = (r"Apply the parallelogram rule at vertex $%s$: the two sides starting from $%s$ are $%s$, $%s$, and the diagonal "
+                r"starting from $%s$ is $%s$, so $%s + %s = %s$."
+                % (X, X, _vt(X, U), _vt(X, W), X, phai.tex, _vt(X, U), _vt(X, W), phai.tex))
+        giai += (r"\\ The other statements are false because: "
+                 + "; ".join(r"$%s = %s \ne %s$" % (l.tex, _b5_rut_diem(l, envs, _b5_cap_trong(l), ten), phai.tex)
+                             for _, l in nhieu) + ".")
+        debai = r"Given a parallelogram $%s$. Which of the following statements is true?" % "".join(ten)
+        cau += MC_SA_answer_text(debai, dap, [n[0] for n in nhieu], giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# TH040_C, TH041_C: độ dài vectơ tổng / hiệu trong hình (hình vuông, hình chữ nhật, hình thoi góc 60 độ, tam giác
+# đều, tam giác vuông). Toạ độ CHÍNH XÁC bằng sympy; MC theo cạnh a, SA cho số cụ thể.
+# ---------------------------------------------------------------------
+_A8 = _sp8.Symbol("a", positive=True)
+
+
+def _b8_tex(x):
+    """LaTeX gọn của một độ dài (có thể chứa a): a\\sqrt{2}, \\dfrac{a\\sqrt{3}}{2}, 2a, a + a\\sqrt{2}, ..."""
+    x = _sp8.expand(_sp8.radsimp(_sp8.nsimplify(x)))
+    if x == 0:
+        return "0"
+    phan = []
+    for t in sorted(_sp8.Add.make_args(x), key=lambda t: (float(t.subs(_A8, 1)) < 0, t.subs(_A8, 1).is_Rational is False,
+                                                          str(t))):
+        c, con = t.as_coeff_Mul()
+        c = _sp8.Rational(c)
+        bac = _sp8.degree(con, _A8) if con.has(_A8) else 0
+        can = _sp8.nsimplify(con.subs(_A8, 1))
+        than = ""
+        if abs(c.p) != 1 or (not bac and can == 1):
+            than = str(abs(c.p))
+        if bac:
+            than += "a" if bac == 1 else "a^%d" % bac
+        if can != 1:
+            than += r"\sqrt{%s}" % _sp8.nsimplify(can ** 2)
+        if c.q != 1:
+            than = r"\dfrac{%s}{%d}" % (than, c.q)
+        phan.append(("-" if c < 0 else "+", than))
+    s = ("-" if phan[0][0] == "-" else "") + phan[0][1]
+    for d, t in phan[1:]:
+        s += " %s %s" % (d, t)
+    return s
+
+
+def _b8_sa(v):
+    """Đáp số SA (<= 4 kí tự): số nguyên giữ nguyên; không thì làm tròn hàng phần trăm (< 10) hoặc hàng phần mười.
+    Làm tròn từ giá trị CHÍNH XÁC (sympy, 40 chữ số). -> (chuỗi, 'hàng phần trăm' / 'hàng phần mười' / None)."""
+    v = _sp8.nsimplify(v)
+    if v.is_Integer:
+        return str(int(v)), None
+    x = _Dec8(str(v.evalf(40)))
+    muc, q = ("nearest hundredth", "0.01") if x < 10 else ("nearest tenth", "0.1")
+    t = str(x.quantize(_Dec8(q), rounding=_HU8))
+    t = t.rstrip("0").rstrip(".").replace(".", DAU_THAP_PHAN)
+    return t, muc
+
+
+def _b8_ten_moi(da, so=2):
+    return [t for t in "MNPQTKHEFGIJ" if t not in da][:so]
+
+
+def _b8_hinh(kieu, so):
+    """Hình cho câu độ dài. so=False: theo cạnh a (MC); so=True: số cụ thể (SA).
+    Trả về dict: kieu, dinh (tên đỉnh), O (tên tâm hoặc None), P (toạ độ sympy), L ({frozenset: (độ dài, lí do)}),
+    mo(co_O) (câu dẫn)."""
+    r3 = _sp8.sqrt(3)
+    H = dict(kieu=kieu, O=None)
+    if kieu in ("vuong", "hcn", "thoi"):
+        ten = random.choice(["ABCD", "MNPQ", "EFGH"])
+        A, B, C, D = ten
+        if kieu == "vuong":
+            p = _A8 if not so else random.randint(2, 9)
+            q = p
+            P = {A: (0, 0), B: (p, 0), C: (p, p), D: (0, p)}
+            mo = r"Given a square $%s$ with side $%s$" % (ten, _b8_tex(p))
+        elif kieu == "hcn":
+            if not so:
+                p, q = random.choice([(_A8, 2 * _A8), (2 * _A8, _A8), (_A8, _A8 * r3), (_A8 * r3, _A8), (3 * _A8, 4 * _A8),
+                                      (4 * _A8, 3 * _A8)])
+            else:
+                p, q = random.choice([(3, 4), (4, 3), (6, 8), (8, 6), (5, 12)] + [tuple(random.sample(range(2, 10), 2))] * 3)
+            P = {A: (0, 0), B: (p, 0), C: (p, q), D: (0, q)}
+            mo = r"Given a rectangle $%s$ with $%s = %s$, $%s = %s$" % (ten, A + B, _b8_tex(p), A + D, _b8_tex(q))
+        else:
+            p = _A8 if not so else random.randint(2, 9)
+            q = p
+            P = {A: (0, 0), B: (p, 0), D: (p / _sp8.Integer(2), p * r3 / 2)}
+            P[C] = (P[B][0] + P[D][0], P[B][1] + P[D][1])
+            mo = r"Given a rhombus $%s$ with side $%s$ and $\widehat{%s} = 60^\circ$" % (ten, _b8_tex(p), B + A + D)
+        O = "O" if "O" not in ten else "I"
+        P[O] = ((P[A][0] + P[C][0]) / 2, (P[A][1] + P[C][1]) / 2)
+        H.update(dinh=list(ten), O=O, P=P,
+                 mo=lambda co_O, mo=mo, O=O: mo + ((r" whose two diagonals intersect at $%s$." % O) if co_O else "."))
+        L = {}
+        for X, Y, d in ((A, B, p), (B, C, q), (C, D, p), (D, A, q)):
+            L[frozenset((X, Y))] = (d, None)
+        if kieu in ("vuong", "hcn"):
+            cheo = _sp8.sqrt(p ** 2 + q ** 2)
+            for X, Y, Z in ((A, B, C), (B, C, D)):
+                L[frozenset((X, Z))] = (cheo, r"$%s = \sqrt{%s^2 + %s^2} = \sqrt{%s + %s} = %s$ (Pythagorean theorem in "
+                                               r"the triangle $%s$ right-angled at $%s$)"
+                                        % (X + Z, X + Y, Y + Z, _b8_tex(_sp8.expand(L[frozenset((X, Y))][0] ** 2)),
+                                           _b8_tex(_sp8.expand(L[frozenset((Y, Z))][0] ** 2)), _b8_tex(cheo), X + Y + Z, Y))
+            for X in ten:
+                L[frozenset((O, X))] = (cheo / 2, r"$%s$ is the midpoint of both diagonals, so $%s = \dfrac{1}{2}%s = %s$"
+                                        % (O, O + X, A + C if X in (A, C) else B + D, _b8_tex(cheo / 2)))
+        else:
+            L[frozenset((B, D))] = (p, r"the triangle $%s$ has $%s = %s$ and $\widehat{%s} = 60^\circ$, so it is equilateral, "
+                                       r"$%s = %s$" % (A + B + D, A + B, A + D, B + A + D, B + D, _b8_tex(p)))
+            L[frozenset((A, C))] = (p * r3, r"$%s$ is the midpoint of $%s$ and $%s$ is perpendicular to $%s$, so $%s = 2%s = "
+                                            r"2\sqrt{%s^2 - %s^2} = 2\sqrt{%s - %s} = %s$"
+                                    % (O, A + C, A + C, B + D, A + C, A + O, A + B, B + O, _b8_tex(p ** 2),
+                                       _b8_tex(p ** 2 / 4), _b8_tex(p * r3)))
+            for X in (B, D):
+                L[frozenset((O, X))] = (p / 2, r"$%s = \dfrac{1}{2}%s = %s$" % (O + X, B + D, _b8_tex(p / 2)))
+            for X in (A, C):
+                L[frozenset((O, X))] = (p * r3 / 2, r"$%s = \dfrac{1}{2}%s = %s$" % (O + X, A + C, _b8_tex(p * r3 / 2)))
+        H["L"] = L
+        return H
+    ten = random.choice(["ABC", "MNP", "DEF"])
+    A, B, C = ten
+    if kieu == "tg_deu":
+        p = _A8 if not so else random.randint(2, 9)
+        P = {B: (0, 0), C: (p, 0), A: (p / _sp8.Integer(2), p * r3 / 2)}
+        L = {frozenset(c): (p, None) for c in ((A, B), (B, C), (C, A))}
+        mo = r"Given an equilateral triangle $%s$ with side $%s$." % (ten, _b8_tex(p))
+    else:
+        if not so:
+            p, q = random.choice([(_A8, _A8 * r3), (_A8 * r3, _A8), (3 * _A8, 4 * _A8), (4 * _A8, 3 * _A8), (_A8, 2 * _A8),
+                                  (2 * _A8, _A8)])
+        else:
+            p, q = random.choice([(6, 8), (8, 6), (3, 4), (5, 12), (12, 5)] + [tuple(random.sample(range(2, 10), 2))] * 3)
+        P = {A: (0, 0), B: (p, 0), C: (0, q)}
+        bc = _sp8.sqrt(p ** 2 + q ** 2)
+        L = {frozenset((A, B)): (p, None), frozenset((A, C)): (q, None),
+             frozenset((B, C)): (bc, r"$%s = \sqrt{%s^2 + %s^2} = \sqrt{%s + %s} = %s$ (Pythagorean theorem)"
+                                 % (B + C, A + B, A + C, _b8_tex(_sp8.expand(p ** 2)), _b8_tex(_sp8.expand(q ** 2)),
+                                    _b8_tex(bc)))}
+        mo = r"Given a triangle $%s$ right-angled at $%s$ with $%s = %s$, $%s = %s$." % (ten, A, A + B, _b8_tex(p), A + C, _b8_tex(q))
+    H.update(dinh=list(ten), P=P, L=L, mo=lambda co_O, mo=mo: mo, canh=p)
+    return H
+
+
+def _b8_vec(H, X, Y):
+    """Vectơ XY bằng số thực (a = 1) - chỉ dùng để so sánh bằng nhau, nhanh hơn sympy."""
+    if "Pf" not in H:
+        H["Pf"] = {k: (float(_sp8.sympify(x).subs(_A8, 1)), float(_sp8.sympify(y).subs(_A8, 1)))
+                   for k, (x, y) in H["P"].items()}
+    return (H["Pf"][Y][0] - H["Pf"][X][0], H["Pf"][Y][1] - H["Pf"][X][1])
+
+
+def _b8_bang_v(u, v):
+    return abs(u[0] - v[0]) < 1e-9 and abs(u[1] - v[1]) < 1e-9
+
+
+def _b8_tim(H, v, diem):
+    """Điểm T trong 'diem' với vectơ (Q -> T) = w, v = (Q, w); trả về T hoặc None."""
+    Q, w = v
+    for T in diem:
+        if T != Q and _b8_bang_v(_b8_vec(H, Q, T), w):
+            return T
+    return None
+
+
+def _b8_bieu_thuc(H, phep):
+    """Liệt kê các biểu thức u + v (phep '+') hoặc u - v ('-') rút được về MỘT đoạn thẳng đã biết độ dài, kèm quy tắc.
+    Trả về [(u, v, (X, Y) kết quả, lí do biến đổi, nhóm quy tắc)]."""
+    diem = H["dinh"] + ([H["O"]] if H["O"] else [])
+    vts = [(X, Y) for X in diem for Y in diem if X != Y]
+    ra = []
+    for u in vts:
+        for v in vts:
+            if u == v or u == (v[1], v[0]):
+                continue
+            P_, Q = u
+            R, S = v
+            kq, ly, nhom = None, None, None
+            if phep == "+":
+                if Q == R and P_ != S:
+                    kq, nhom = (P_, S), "ba_diem"
+                    ly = r"$%s + %s = %s$ (three-point rule)" % (_vt(*u), _vt(*v), _vt(P_, S))
+                elif P_ == R:
+                    wv = _b8_vec(H, R, S)
+                    T = _b8_tim(H, (Q, wv), diem)
+                    if T and T != P_:
+                        kq, nhom = (P_, T), "hbh"
+                        ly = (r"$%s%s%s%s$ is a parallelogram, so $%s + %s = %s$ (parallelogram rule)"
+                              % (P_, Q, T, S, _vt(*u), _vt(*v), _vt(P_, T)))
+                if kq is None and Q != R and P_ != R:
+                    T = _b8_tim(H, (Q, _b8_vec(H, R, S)), diem)
+                    if T and T != P_:
+                        kq, nhom = (P_, T), "thay"
+                        ly = (r"$%s = %s$, so $%s + %s = %s + %s = %s$"
+                              % (_vt(*v), _vt(Q, T), _vt(*u), _vt(*v), _vt(*u), _vt(Q, T), _vt(P_, T)))
+            else:
+                if P_ == R and Q != S:
+                    kq, nhom = (S, Q), "tru"
+                    ly = r"$%s - %s = %s$ (subtraction rule)" % (_vt(*u), _vt(*v), _vt(S, Q))
+                elif Q == S and P_ != R:
+                    kq, nhom = (P_, R), "doi"
+                    ly = (r"$%s - %s = %s + %s = %s$ (opposite vector, three-point rule)"
+                          % (_vt(*u), _vt(*v), _vt(*u), _vt(S, R), _vt(P_, R)))
+                elif P_ != R:
+                    T = _b8_tim(H, (P_, _b8_vec(H, R, S)), diem)
+                    if T and T != Q:
+                        kq, nhom = (T, Q), "thay"
+                        ly = (r"$%s = %s$, so $%s - %s = %s - %s = %s$ (subtraction rule)"
+                              % (_vt(*v), _vt(P_, T), _vt(*u), _vt(*v), _vt(*u), _vt(P_, T), _vt(T, Q)))
+            if kq and frozenset(kq) in H["L"]:
+                ra.append((u, v, kq, ly, nhom))
+    # tam giác: tổng hai cạnh chung đỉnh (dựng hình bình hành ngoài hình)
+    if phep == "+" and H["kieu"] in ("tg_deu", "tg_vuong"):
+        A, B, C = H["dinh"]
+        goc = [A, B, C] if H["kieu"] == "tg_deu" else [A]
+        for X in goc:
+            Y, Z = [t for t in H["dinh"] if t != X]
+            if random.random() < 0.5:
+                Y, Z = Z, Y
+            M, T = _b8_ten_moi(H["dinh"])
+            if H["kieu"] == "tg_deu":
+                d = H["canh"] * _sp8.sqrt(3)
+                ly = (r"Let $%s$ be the midpoint of $%s$ and construct the parallelogram $%s%s%s%s$; then $%s + %s = %s$ (parallelogram "
+                      r"rule) and $%s$ is the midpoint of $%s$. An equilateral triangle with side $%s$ has median "
+                      r"$%s = %s$, so $%s = 2%s = %s$"
+                      % (M, Y + Z, X, Y, T, Z, _vt(X, Y), _vt(X, Z), _vt(X, T), M, X + T, _b8_tex(H["canh"]), X + M,
+                         _b8_tex(H["canh"] * _sp8.sqrt(3) / 2), X + T, X + M, _b8_tex(d)))
+            else:
+                d = H["L"][frozenset((B, C))][0]
+                ly = (r"Construct the rectangle $%s%s%s%s$; then $%s + %s = %s$ (parallelogram rule) and $%s = %s$ (the two "
+                      r"diagonals of a rectangle are equal). Moreover, %s"
+                      % (X, Y, T, Z, _vt(X, Y), _vt(X, Z), _vt(X, T), X + T, B + C, H["L"][frozenset((B, C))][1]))
+            ra.append(((X, Y), (X, Z), None, ly, ("tg", d)))
+    return ra
+
+
+def _b8_do_dai(phep, so):
+    """Một câu độ dài |u + v| hoặc |u - v|. -> (debai_than, bieu thuc tex, do dai dung, nhieu (do dai), giai)."""
+    kieu = _c4_uu_tien("b8_do_dai", ["vuong", "hcn", "thoi", "tg_deu", "tg_vuong"])[0]
+    _c4_danh_dau("b8_do_dai", [kieu])
+    H = _b8_hinh(kieu, so)
+    ds = _b8_bieu_thuc(H, phep)
+    nhom = {}
+    for x in ds:
+        k = x[4][0] if isinstance(x[4], tuple) else x[4]
+        nhom.setdefault(k, []).append(x)
+    # ưu tiên quy tắc hình bình hành / tam giác (như câu mẫu), rồi các quy tắc khác
+    uu = [g for g in nhom if g != "ba_diem"]
+    k = random.choice(uu if uu and random.random() < 0.8 else list(nhom))
+    # ưu tiên kết quả là đoạn phải tính (đường chéo, nửa đường chéo...) hơn là cạnh đã cho
+    kho = [x for x in nhom[k] if not x[2] or H["L"][frozenset(x[2])][1]]
+    u, v, kq, ly, nh = random.choice(kho if kho and random.random() < 0.7 else nhom[k])
+    if isinstance(nh, tuple):
+        d, ly_dd = nh[1], None
+    else:
+        d, ly_dd = H["L"][frozenset(kq)]
+    co_O = H["O"] is not None and H["O"] in u + v
+    bt = r"%s %s %s" % (_vt(*u), phep, _vt(*v))
+    giai = (ly if not kq else r"Note that %s" % ly) + "."
+    if ly_dd:
+        giai += r"\\ Moreover, %s." % ly_dd
+    giai += r"\\ Therefore $\left|%s\right| = %s$." % (bt, _b8_tex(d))
+    du, dv = H["L"][frozenset(u)][0], H["L"][frozenset(v)][0]
+    hieu_dd = du - dv if float(_sp8.sympify(du - dv).subs(_A8, 1)) >= 0 else dv - du
+    ung = [du + dv, hieu_dd, 2 * d, d / 2] + [x[0] for x in H["L"].values()] + \
+          [d * _sp8.sqrt(2), d * _sp8.sqrt(3), d * _sp8.sqrt(3) / 2, d * _sp8.sqrt(2) / 2, 3 * d]
+    so_f = lambda x: float(_sp8.sympify(x).subs(_A8, 1))
+    nhieu, da = [], [so_f(d)]
+    for i, x in enumerate(ung):
+        f = so_f(x)
+        if f > 1e-9 and all(abs(f - y) > 1e-9 for y in da):
+            x = _sp8.radsimp(_sp8.sympify(x))
+            if i < 2 or len(_sp8.Add.make_args(_sp8.expand(x))) == 1:     # |u| + |v|, |u| - |v| được hai số hạng
+                nhieu.append(x)
+                da.append(f)
+    return H["mo"](co_O), bt, d, nhieu, giai
+
+
+def _b8_mc_do_dai(phep, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        mo, bt, d, nhieu, giai = _b8_do_dai(phep, False)
+        debai = mo + r" The length of vector $%s$ equals" % bt
+        # nhiễu thứ nhất luôn là lỗi hay gặp |u| + |v| (nếu khác đáp số), hai nhiễu còn lại chọn ngẫu nhiên
+        chon = nhieu[:1] + random.sample(nhieu[1:], 2)
+        cau += MC_SA_answer_text(debai, "$%s$" % _b8_tex(d), ["$%s$" % _b8_tex(x) for x in chon], giai, 0, 0, dang)
+    return cau
+
+
+def _b8_sa_do_dai(phep, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        mo, bt, d, nhieu, giai = _b8_do_dai(phep, True)
+        dap, muc = _b8_sa(d)
+        debai = mo + r" Compute $\left|%s\right|$%s." % (bt, (r" (round the result to the %s)" % muc) if muc else "")
+        if muc:
+            giai += r" Hence $\left|%s\right| \approx %s$." % (bt, dap)
+        ung = [_b8_sa(x)[0] for x in nhieu]
+        cau += MC_SA_answer_const(debai, dap, [x for x in ung if x != dap] + [str(i) for i in range(1, 20)], giai, 0, 0,
+                                  dang)
+    return cau
+
+
+def L10_C4_B8_TH040_MC_C_01(socau, dang=1):
+    r"""Độ dài vectơ tổng trong hình (hình vuông, hình chữ nhật, hình thoi góc $60^\circ$, tam giác đều, tam giác vuông):
+    đưa tổng về một vectơ (quy tắc ba điểm, hình bình hành, thay vectơ bằng nhau) rồi tính độ dài theo $a$. Nhiễu:
+    $\left|\vec u\right| + \left|\vec v\right|$, hiệu hai độ dài, các đoạn khác trong hình. Theo câu mẫu cô Lan gửi.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8_mc_do_dai("+", socau, dang)
+
+
+def L10_C4_B8_TH040_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với TH040_MC_C: độ dài vectơ tổng trong hình với số đo cụ thể; đáp số nguyên hoặc làm
+    tròn (<= 4 kí tự).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8_sa_do_dai("+", socau, dang)
+
+
+def L10_C4_B8_TH041_MC_C_01(socau, dang=1):
+    r"""Độ dài vectơ hiệu trong hình (hình vuông, hình chữ nhật, hình thoi góc $60^\circ$, tam giác đều, tam giác vuông):
+    đưa hiệu về một vectơ (quy tắc trừ, vectơ đối, thay vectơ bằng nhau) rồi tính độ dài theo $a$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8_mc_do_dai("-", socau, dang)
+
+
+def L10_C4_B8_TH041_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với TH041_MC_C: độ dài vectơ hiệu trong hình với số đo cụ thể; đáp số nguyên hoặc làm
+    tròn (<= 4 kí tự).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8_sa_do_dai("-", socau, dang)
+
+
+# ---------------------------------------------------------------------
+# B11_VD060_A_02: hợp lực của hai lực với góc bất kì (0 độ đến 180 độ), hoặc lực thứ ba giữ vật cân bằng.
+# ---------------------------------------------------------------------
+_B8_COS = {30: (0, 1, 3), 45: (0, 1, 2), 60: (_Fr5(1, 2), 0, 1), 90: (0, 0, 1), 120: (_Fr5(-1, 2), 0, 1),
+           135: (0, -1, 2), 150: (0, -1, 3)}         # cos = r + s*sqrt(m)/2
+
+
+def _b8_luc_so(v):
+    """Độ lớn lực (sympy) -> (chuỗi, có làm tròn): số nguyên giữ nguyên, không thì làm tròn hàng phần mười."""
+    v = _sp8.nsimplify(v)
+    if v.is_Integer:
+        return str(int(v)), False
+    t = str(_Dec8(str(v.evalf(40))).quantize(_Dec8("0.1"), rounding=_HU8))
+    return t.rstrip("0").rstrip(".").replace(".", DAU_THAP_PHAN), True
+
+
+def _b8_luc_sinh():
+    can_bang = random.random() < 0.5
+    while True:
+        g = random.choice([0, 180, 90, 60, 120, 45, 135, 30, 150, 60, 120, 135])
+        p = random.randint(2, 40)
+        q = p if random.random() < 0.3 else random.randint(2, 40)
+        if can_bang and (g == 180 and p == q):
+            continue
+        if not can_bang and g == 0 and random.random() < 0.7:
+            continue
+        break
+    cos = _sp8.cos(_sp8.pi * g / 180)
+    R = _sp8.sqrt(_sp8.nsimplify(p * p + q * q + 2 * p * q * cos))
+    return can_bang, g, p, q, R
+
+
+def _b8_luc_cau(dang):
+    can_bang, g, p, q, R = _b8_luc_sinh()
+    F1, F2, F3 = (r"\overrightarrow{F_%d}" % i for i in (1, 2, 3))
+    do = lambda F: r"\left|%s\right|" % F
+    if p == q:
+        so = r"$%s = %s = %d\ \text{N}$" % (do(F1), do(F2), p)
+    else:
+        so = r"$%s = %d\ \text{N}$, $%s = %d\ \text{N}$" % (do(F1), p, do(F2), q)
+    if g == 0:
+        quan_he = r"the two forces $%s$, $%s$ are parallel and point in the same direction" % (F1, F2)
+    elif g == 180:
+        quan_he = r"the two forces $%s$, $%s$ are parallel and point in opposite directions" % (F1, F2)
+    else:
+        quan_he = r"the angle between the two vectors $%s$, $%s$ is $%d^\circ$" % (F1, F2, g)
+    dap, tron = _b8_luc_so(R)
+    lam_tron = r" (round the result to the nearest tenth)" if tron else ""
+    if can_bang:
+        debai = (r"An object is at rest under the action of three forces $%s$, $%s$, $%s$, where %s and %s. Find the magnitude of the force "
+                 r"$%s$%s." % (F1, F2, F3, so, quan_he, F3, lam_tron))
+        giai = (r"The object is at rest (in equilibrium), so $%s + %s + %s = \overrightarrow{0}$, hence $%s = -\left(%s + %s\right)$, "
+                r"and therefore $%s = \left|%s + %s\right|$.\\ " % (F1, F2, F3, F3, F1, F2, do(F3), F1, F2))
+        hoi = do(F3)
+    else:
+        debai = (r"Two forces $%s$, $%s$ act on the same object, where %s and %s. Find the magnitude of the resultant force "
+                 r"$%s + %s$%s." % (F1, F2, so, quan_he, F1, F2, lam_tron))
+        giai, hoi = "", r"\left|%s + %s\right|" % (F1, F2)
+    tong = r"\left|%s + %s\right|" % (F1, F2)
+    if g == 0:
+        giai += r"The two forces point in the same direction, so $%s = %d + %d = %d\ \text{N}$." % (tong, p, q, p + q)
+    elif g == 180:
+        giai += (r"The two forces point in opposite directions, so $%s = \left|%d - %d\right| = %d\ \text{N}$%s." % (tong, p, q, abs(p - q),
+                 r" (the two forces are opposite, the resultant force is $\overrightarrow{0}$)" if p == q else ""))
+    else:
+        R2 = _sp8.nsimplify(R ** 2)
+        giai += (r"Let $\overrightarrow{OA} = %s$, $\overrightarrow{OB} = %s$ and construct the parallelogram $OACB$; then "
+                 r"$%s + %s = \overrightarrow{OC}$ (parallelogram rule). The triangle $OAC$ has $OA = %d$, $AC = OB = %d$, "
+                 r"$\widehat{OAC} = 180^\circ - %d^\circ = %d^\circ$. By the law of cosines:\\ "
+                 r"$OC^2 = OA^2 + AC^2 - 2\cdot OA\cdot AC\cdot\cos\widehat{OAC} = %d^2 + %d^2 - 2\cdot %d\cdot %d\cdot\cos %d^\circ "
+                 r"= %s$.\\ " % (F1, F2, F1, F2, p, q, g, 180 - g, p, q, p, q, 180 - g, _b8_tex(R2)))
+        if tron:
+            giai += r"Hence $%s = OC = \sqrt{%s} \approx %s\ \text{N}$." % (tong, _b8_tex(R2), dap)
+        else:
+            giai += r"Hence $%s = OC = \sqrt{%s} = %s\ \text{N}$." % (tong, _b8_tex(R2), dap)
+    if can_bang:
+        giai += r"\\ Hence $%s %s %s\ \text{N}$." % (hoi, r"\approx" if tron else "=", dap)
+    cos = _sp8.cos(_sp8.pi * g / 180)
+    ung = [p + q, abs(p - q), _sp8.sqrt(_sp8.nsimplify(p * p + q * q - 2 * p * q * cos)), _sp8.sqrt(p * p + q * q)]
+    ds = []
+    for x in ung:
+        t = _b8_luc_so(x)[0]
+        if t != dap and t not in ds and (len(t) <= 4 or dang == 1):
+            ds.append(t)
+    return debai, dap, ds, giai
+
+
+def L10_C4_B11_VD060_MC_A_02(socau, dang=1):
+    r"""Tổng hợp lực: hai lực có góc bất kì ($0^\circ$, $30^\circ$, ..., $180^\circ$), hỏi độ lớn hợp lực hoặc lực thứ ba
+    giữ vật đứng yên (cân bằng). Quy tắc hình bình hành + định lí côsin; kết quả nguyên hoặc làm tròn hàng phần mười.
+    Nhiễu: cộng độ lớn, hiệu độ lớn, nhầm dấu côsin, bỏ góc. Theo câu mẫu cô Lan gửi (hai lực ngược chiều cùng độ
+    lớn; ba lực, $F_1 = F_2 = 25$ N, góc $135^\circ$).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, ds, giai = _b8_luc_cau(dang)
+        d = float(dap.replace(",", "."))
+        du = [_xx4(d + k, 1) for k in (1, -1, 2, -2, 3, 5) if d + k > 0]
+        nhieu = [r"$%s\ \text{N}$" % t for t in (ds + [x for x in du if x != dap and x not in ds])[:3]]
+        cau += MC_SA_answer_text(debai, r"$%s\ \text{N}$" % dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B11_VD060_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với VD060_MC_A: như VD060_MC_A_02, đáp số (đơn vị N) nguyên hoặc làm tròn hàng phần
+    mười, <= 4 kí tự.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, ds, giai = _b8_luc_cau(dang)
+        debai = debai[:-1] + r" (unit: N)."
+        d = float(dap.replace(",", "."))
+        du = [_xx4(d + k, 1) for k in (1, -1, 2, -2, 3, 5) if d + k > 0]
+        cau += MC_SA_answer_const(debai, dap, ds + du, giai, 0, 0, dang)
+    return cau

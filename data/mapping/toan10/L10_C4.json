@@ -269,6 +269,20 @@
     "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_B (cung chu, cung Dang); dem dang thuc dung/sai, quy tac hinh binh hanh, co hinh; co Lan duyet lai"
   },
   {
+    "id": "L10_C4_B8_TH040_MC_C",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Độ dài vectơ tổng trong hình (hình vuông, hình chữ nhật, hình thoi góc 60°, tam giác đều, tam giác vuông): đưa tổng về một vectơ (quy tắc ba điểm, quy tắc hình bình hành, thay vectơ bằng nhau) rồi tính độ dài",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); MC theo canh a; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_TH040_SA_C",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài vectơ tổng trong hình (hình vuông, hình chữ nhật, hình thoi góc 60°, tam giác đều, tam giác vuông): đưa tổng về một vectơ (quy tắc ba điểm, quy tắc hình bình hành, thay vectơ bằng nhau) rồi tính độ dài",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); ban tra loi ngan cung Dang voi MC_C: so do cu the, dap so nguyen hoac lam tron <= 4 ki tu; co Lan duyet lai"
+  },
+  {
     "id": "L10_C4_B8_TH041_MC_A",
     "content": "Thực hiện được các phép toán hiệu hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -294,6 +308,20 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Vectơ đối, tổng hai vectơ đối trong hình vuông",
     "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_B (cung chu, cung Dang); dem khang dinh dung/sai ve vecto doi, co hinh; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_TH041_MC_C",
+    "content": "Thực hiện được các phép toán hiệu hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Độ dài vectơ hiệu trong hình (hình vuông, hình chữ nhật, hình thoi góc 60°, tam giác đều, tam giác vuông): đưa hiệu về một vectơ (quy tắc trừ, vectơ đối, thay vectơ bằng nhau) rồi tính độ dài",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); MC theo canh a; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_TH041_SA_C",
+    "content": "Thực hiện được các phép toán hiệu hai vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Độ dài vectơ hiệu trong hình (hình vuông, hình chữ nhật, hình thoi góc 60°, tam giác đều, tam giác vuông): đưa hiệu về một vectơ (quy tắc trừ, vectơ đối, thay vectơ bằng nhau) rồi tính độ dài",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); ban tra loi ngan cung Dang voi MC_C: so do cu the, dap so nguyen hoac lam tron <= 4 ki tu; co Lan duyet lai"
   },
   {
     "id": "L10_C4_B8_TH042_MC_A",

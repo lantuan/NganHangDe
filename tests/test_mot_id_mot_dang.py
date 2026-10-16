@@ -95,6 +95,12 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C4_B7_NB037_SA_A",   # _01 dem cap trong hinh, _02 diem thang hang theo thu tu
     "L10_C4_B7_NB037_MC_E",   # _01 dien khuyet dinh nghia, _02 ki hieu / diem dau / diem cuoi / do dai
     "L10_C4_B7_VD039_MC_B",   # _01 doc hinh tinh ti so trong luong rieng, _02 chon hinh dung theo tinh huong
+    # Bai 8 bo sung theo cau mau co Lan (16/10/2026): _01 cu, _02 "khang dinh nao dung" - cung dang, cung quy tac
+    "L10_C4_B8_TH040_MC_A",   # quy tac ba diem: _01 XY + YZ = ?, _02 UV = UW + WV (nhieu tron tong/hieu)
+    "L10_C4_B8_TH041_MC_A",   # quy tac tru: _01 OX - OY = ?, _02 UV = WV - WU (nhieu tron tong/hieu)
+    "L10_C4_B8_TH040_MC_B",   # quy tac hinh binh hanh: _01 co hinh, dinh A; _02 dinh ngau nhien, cung ve phai
+    "L10_C4_B11_VD060_MC_A",  # tong hop luc: _01 goc 60 do so nguyen, _02 goc bat ki (lam tron hang phan muoi)
+    "L10_C4_B11_VD060_SA_A",  # nhu tren (tra loi ngan)
     "L10_C4_B7_NB038_MC_A",   # chon dang thuc vecto bang nhau dung (sai) theo hinh co dinh / theo kho hinh
     "L10_C5_B14_NB085_MC_A",  # khang dinh dung / khang dinh sai / tinh huong can thong ke
     "L10_C1_B1_VD014_MC_A",   # tham so k: voi moi x dung / ton tai x dung / voi moi x sai
