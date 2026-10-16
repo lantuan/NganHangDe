@@ -5764,6 +5764,37 @@ def _b8_bieu_thuc(H, phep):
                               % (_vt(*v), _vt(P_, T), _vt(*u), _vt(*v), _vt(*u), _vt(P_, T), _vt(T, Q)))
             if kq and frozenset(kq) in H["L"]:
                 ra.append((u, v, kq, ly, nhom))
+    # tứ giác: tổng / hiệu HAI ĐƯỜNG CHÉO (câu mẫu |AC - BD| = 2AB): tách mỗi đường chéo qua một đỉnh để hai vectơ đối
+    # nhau triệt tiêu, còn lại hai vectơ cạnh bằng nhau
+    if H["kieu"] in ("vuong", "hcn", "thoi"):
+        A, B, C, D = H["dinh"]
+        for d1 in ((A, C), (C, A)):
+            for d2 in ((B, D), (D, B)):
+                e2 = d2 if phep == "+" else (d2[1], d2[0])           # u - v = u + (-v)
+                xong = False
+                for Y in H["dinh"]:
+                    for Z in H["dinh"]:
+                        if xong or Y in d1 or Z in e2:
+                            continue
+                        if not _b8_bang_v(_b8_vec(H, Y, d1[1]), _b8_vec(H, e2[1], Z)):
+                            continue                              # Y d1[1] và Z e2[1] phải đối nhau
+                        w1, w2 = (d1[0], Y), (e2[0], Z)
+                        if not _b8_bang_v(_b8_vec(H, *w1), _b8_vec(H, *w2)):
+                            continue
+                        bt_goc = r"%s %s %s" % (_vt(*d1), phep, _vt(*d2))
+                        ly = r"We have $%s = " % bt_goc
+                        if phep == "-":
+                            ly += r"%s + %s = " % (_vt(*d1), _vt(*e2))
+                        ly += (r"\left(%s + %s\right) + \left(%s + %s\right) = %s + %s$ (since $%s + %s = \overrightarrow{0}$). "
+                               r"The two vectors $%s$, $%s$ are equal (opposite sides of a parallelogram), so "
+                               r"$\left|%s + %s\right| = 2%s$"
+                               % (_vt(d1[0], Y), _vt(Y, d1[1]), _vt(e2[0], Z), _vt(Z, e2[1]), _vt(*w1), _vt(*w2),
+                                  _vt(Y, d1[1]), _vt(Z, e2[1]), _vt(*w1), _vt(*w2), _vt(*w1), _vt(*w2),
+                                  w1[0] + w1[1]))
+                        dd, ly_dd = H["L"][frozenset(w1)]
+                        ly = (ly[:-1] + r" = %s$" % _b8_tex(2 * dd)) if ly_dd is None else (ly + r", where %s" % ly_dd)
+                        ra.append((d1, d2, None, ly, ("hai_cheo", 2 * dd)))
+                        xong = True
     # tam giác: tổng hai cạnh chung đỉnh (dựng hình bình hành ngoài hình)
     if phep == "+" and H["kieu"] in ("tg_deu", "tg_vuong"):
         A, B, C = H["dinh"]
@@ -6005,4 +6036,326 @@ def L10_C4_B11_VD060_SA_A_02(socau, dang=2):
         d = float(dap.replace(",", "."))
         du = [_xx4(d + k, 1) for k in (1, -1, 2, -2, 3, 5) if d + k > 0]
         cau += MC_SA_answer_const(debai, dap, ds + du, giai, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------------
+# B11_VD060_B (vận tốc thực = tổng hai vectơ vận tốc) và VD060_C (hợp lực trong bối cảnh thực tế). Bài toán thực tế
+# tách riêng chữ C với VD060_A (không thực tế) theo ý cô Lan 16/10/2026.
+# ---------------------------------------------------------------------
+_B8_MUC = {0: "nearest whole number", 1: "nearest tenth", 2: "nearest hundredth"}
+
+
+def _b8_tron(v, so_le):
+    """Làm tròn giá trị CHÍNH XÁC (sympy) đến so_le chữ số thập phân -> chuỗi dấu phẩy (bỏ 0 thừa)."""
+    v = _sp8.sympify(v)
+    if v.is_Rational and (v * 10 ** so_le).is_Integer:
+        t = str(_Dec8(str(_sp8.N(v, 40))).quantize(_Dec8(1).scaleb(-so_le), rounding=_HU8))
+    else:
+        t = str(_Dec8(str(v.evalf(40))).quantize(_Dec8(1).scaleb(-so_le), rounding=_HU8))
+    if "." in t:
+        t = t.rstrip("0").rstrip(".")
+    return t.replace(".", DAU_THAP_PHAN)
+
+
+def _b8_can_tron(v, so_le):
+    """True nếu giá trị chính xác v KHÔNG viết được đúng với so_le chữ số thập phân (phải làm tròn)."""
+    v = _sp8.sympify(v)
+    return not (v.is_Rational and (v * 10 ** so_le).is_Integer)
+
+
+def _b8_so(x):
+    """Số liệu trong đề (sympy Rational) -> chuỗi dấu phẩy."""
+    x = _sp8.sympify(x)
+    return str(x) if x.is_Integer else _xx4(float(x), 2)
+
+
+def _b8_tong_hai(p, q, g):
+    """Độ lớn tổng hai vectơ độ lớn p, q, góc g độ (chính xác, sympy)."""
+    return _sp8.sqrt(_sp8.sympify(p ** 2 + q ** 2 + 2 * p * q * _sp8.cos(_sp8.pi * g / 180)))
+
+
+def _b8_giai_tong(u, w, p, q, g, dv, dap, tron):
+    """Lời giải |u + w| với |u| = p, |w| = q, góc g: cùng hướng / vuông góc / định lí côsin."""
+    tong = r"\left|%s + %s\right|" % (u, w)
+    if g == 90:
+        gi = (r"Since $%s \perp %s$, the parallelogram constructed on these two vectors is a rectangle, so "
+              r"$%s = \sqrt{%s^2 + %s^2} = \sqrt{%s}" % (u, w, tong, _b8_so(p), _b8_so(q), _b8_so(p * p + q * q)))
+    else:
+        R2 = _sp8.sympify(p ** 2 + q ** 2 + 2 * p * q * _sp8.cos(_sp8.pi * g / 180))
+        gt = _b8_tex(R2) if R2.is_Rational or g in (30, 45, 60, 120, 135, 150) else r"\approx %s" % _b8_tron(R2, 2)
+        gi = (r"Let $\overrightarrow{OA} = %s$, $\overrightarrow{OB} = %s$ and construct the parallelogram $OACB$; then "
+              r"$%s + %s = \overrightarrow{OC}$ (parallelogram rule). The triangle $OAC$ has $OA = %s$, $AC = OB = %s$, "
+              r"$\widehat{OAC} = 180^\circ - %d^\circ = %d^\circ$. By the law of cosines:\\ "
+              r"$OC^2 = %s^2 + %s^2 - 2\cdot %s\cdot %s\cdot\cos %d^\circ %s%s$.\\ $%s = OC"
+              % (u, w, u, w, _b8_so(p), _b8_so(q), g, 180 - g, _b8_so(p), _b8_so(q), _b8_so(p), _b8_so(q), 180 - g,
+                 "" if gt.startswith(r"\approx") else "= ", gt, tong))
+    return gi + (r" \approx %s$ (%s)." % (dap, dv) if tron else r" = %s$ (%s)." % (dap, dv))
+
+
+def _b8_nhieu_tong(p, q, g, so_le, dap, them=()):
+    """Nhiễu: cộng độ lớn, hiệu độ lớn, nhầm dấu côsin, bỏ góc (định lí Pythagore), rồi số lân cận."""
+    cos = _sp8.cos(_sp8.pi * g / 180)
+    ung = [p + q, abs(p - q), _sp8.sqrt(_sp8.sympify(p * p + q * q - 2 * p * q * cos)), _sp8.sqrt(p * p + q * q)]
+    ung = [x * k for x in ung for k in ([1] + list(them))]
+    ds = []
+    for x in ung:
+        t = _b8_tron(x, so_le)
+        if t != dap and t not in ds and float(t.replace(",", ".")) > 0:
+            ds.append(t)
+    d = float(dap.replace(",", "."))
+    buoc = 10 ** (-so_le) * random.choice([1, 2, 3])
+    for k in (1, -1, 2, -2, 3, 5):
+        t = _b8_tron(_sp8.sympify(round(d + k * buoc, so_le)), so_le)
+        if t != dap and t not in ds and d + k * buoc > 0:
+            ds.append(t)
+    return ds
+
+
+def _b8_van_toc():
+    """Một câu vận tốc thực. -> (debai không có câu hỏi làm tròn, câu hỏi, đáp số, độ chính xác, nhiễu, lời giải)."""
+    bc = _c4_uu_tien("b8_van_toc", ["thuyen_qua_song", "nguoi_boi_qua_song", "flycam_gap_gio"])[0]
+    _c4_danh_dau("b8_van_toc", [bc])
+    v1, v2 = r"\overrightarrow{v_1}", r"\overrightarrow{v_2}"
+    hoi_qd = False
+    if bc == "thuyen_qua_song":
+        p, q = random.randint(10, 40), random.randint(2, 8)
+        g = random.choice([90, 90, 90, random.choice([60, 70, 75, 80, 100, 105, 110, 120])])
+        if g == 90:
+            huong = r"its bow always points perpendicular to the bank"
+        elif g < 90:
+            huong = r"its bow always points obliquely downstream, making an angle of $%d^\circ$ with the direction of the current" % g
+        else:
+            huong = r"its bow always points obliquely upstream, making an angle of $%d^\circ$ with the direction of the current" % g
+        de = (r"A motorboat crosses a straight section of a river; %s. The velocity of the boat relative to the water has magnitude $%d$ "
+              r"km/h, and the current flows parallel to the bank with speed $%d$ km/h." % (huong, p, q))
+        dv, so_le = "km/h", 1
+        hoi_qd = random.random() < 0.4
+        ten = r"the motorboat"
+    elif bc == "nguoi_boi_qua_song":
+        p = _sp8.Rational(random.choice([10, 12, 13, 14, 15, 16, 18, 20]), 10)
+        q = _sp8.Rational(random.choice([4, 5, 6, 7, 8, 9]), 10)
+        g = 90
+        de = (r"A person swims across a river, always swimming perpendicular to the bank with a velocity (relative to the "
+              r"water) of magnitude $%s$ m/s; the current flows parallel to the bank with speed $%s$ m/s." % (_b8_so(p), _b8_so(q)))
+        dv, so_le, ten = "m/s", 2, r"the swimmer"
+    else:
+        p, q = random.randint(8, 20), random.randint(2, 8)
+        g, gio = random.choice([(90, "the north"), (90, "the south"), (45, "the northeast"), (135, "the northwest"),
+                                (45, "the southeast"), (135, "the southwest")])
+        de = (r"A drone flies east with a velocity (relative to the air) of magnitude $%d$ m/s; the wind blows toward "
+              r"%s with speed $%d$ m/s." % (p, gio, q))
+        dv, so_le, ten = "m/s", 1, r"flycam"
+    R = _b8_tong_hai(p, q, g)
+    giai = (r"Let $%s$ be the own velocity and $%s$ the velocity of the %s; the actual velocity is $\vec v = %s + %s$, "
+            r"the angle between $%s$ and $%s$ is $%d^\circ$.\\ "
+            % (v1, v2, "current" if bc != "flycam_gap_gio" else "wind", v1, v2, v1, v2, g))
+    if hoi_qd:
+        t = random.choice([(15, _sp8.Rational(1, 4)), (20, _sp8.Rational(1, 3)), (30, _sp8.Rational(1, 2)),
+                           (45, _sp8.Rational(3, 4)), (90, _sp8.Rational(3, 2))])
+        hoi = r"Find the actual distance travelled by the motorboat after $%d$ minutes" % t[0]
+        dap = _b8_tron(R * t[1], 1)
+        giai += _b8_giai_tong(v1, v2, p, q, g, dv, _b8_tron(R, 3), _b8_can_tron(R, 3))
+        giai += (r"\\ The motorboat moves uniformly in a straight line with speed $\left|\vec v\right|$, so after $%d$ minutes $= %s$ hours it travels "
+                 r"$s = \left|\vec v\right|\cdot %s \approx %s$ (km)." % (t[0], _b8_tex(t[1]), _b8_tex(t[1]), dap))
+        giai = giai if _b8_can_tron(R * t[1], 1) else giai.replace(r"\approx %s$ (km)" % dap, r"= %s$ (km)" % dap)
+        nhieu = _b8_nhieu_tong(p * t[1], q * t[1], g, 1, dap)
+        return de, hoi, dap, 1, nhieu, giai, "km", _b8_can_tron(R * t[1], 1)
+    hoi = r"Find the actual speed of %s" % ten
+    dap = _b8_tron(R, so_le)
+    giai += _b8_giai_tong(v1, v2, p, q, g, dv, dap, _b8_can_tron(R, so_le))
+    return de, hoi, dap, so_le, _b8_nhieu_tong(p, q, g, so_le, dap), giai, dv, _b8_can_tron(R, so_le)
+
+
+def _b8_cau_thuc_te(sinh, dang, mc):
+    cau = ""
+    for _ in range(1):
+        de, hoi, dap, so_le, nhieu, giai, dv, tron = sinh()
+        lam_tron = (r"round the result to the %s" % _B8_MUC[so_le]) if tron else ""
+        if mc:
+            debai = de + " " + hoi + ((r" (%s)." % lam_tron) if tron else ".")
+            fm = lambda t: r"$%s$ %s" % (t, dv)
+            return MC_SA_answer_text(debai, fm(dap), [fm(t) for t in nhieu[:3]], giai, 0, 0, dang)
+        debai = de + " " + hoi + r" (unit: %s%s)." % (dv, ("; " + lam_tron) if tron else "")
+        return MC_SA_answer_const(debai, dap, nhieu, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B11_VD060_MC_B_01(socau, dang=1):
+    r"""Vận tốc thực = tổng hai vectơ vận tốc (bối cảnh thực tế ngẫu nhiên): ca nô qua sông (mũi vuông góc bờ hoặc chếch
+    xuôi/ngược dòng; có câu hỏi quãng đường sau t phút), người bơi qua sông, flycam gặp gió (Bắc/Nam, Đông Bắc...).
+    Quy tắc hình bình hành (hình chữ nhật khi vuông góc) + định lí côsin; làm tròn. Theo câu mẫu cô Lan gửi (tàu
+    $40$ km/h vuông góc dòng nước $5$ km/h).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return "".join(_b8_cau_thuc_te(_b8_van_toc, dang, True) for _ in range(socau))
+
+
+def L10_C4_B11_VD060_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với VD060_MC_B: vận tốc thực (hoặc quãng đường thực) khi tổng hợp hai vận tốc;
+    đáp số <= 4 kí tự.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return "".join(_b8_cau_thuc_te(_b8_van_toc, dang, False) for _ in range(socau))
+
+
+def _b8_luc_thuc_te():
+    bc = _c4_uu_tien("b8_luc_thuc_te", ["keo_thuyen", "tau_keo_sa_lan", "keo_kien_hang"])[0]
+    _c4_danh_dau("b8_luc_thuc_te", [bc])
+    F1, F2 = r"\overrightarrow{F_1}", r"\overrightarrow{F_2}"
+    g = random.choice([x for x in range(20, 141, 5) if x not in (90,)] + [random.randint(21, 139)])
+    deu = random.random() < 0.35
+    if bc == "keo_thuyen":
+        p, q, dv = random.randint(40, 150), random.randint(40, 150), "N"
+        de = (r"Two people standing on the bank pull a boat with two ropes, with forces $%s$, $%s$ of magnitudes "
+              r"$%d$ N and $%d$ N respectively; the angle between the two forces is $%d^\circ$." % (F1, F2, p, q, g))
+        can, vat = "the water resistance", "the boat"
+    elif bc == "tau_keo_sa_lan":
+        p, q, dv = random.randint(20, 90), random.randint(20, 90), "kN"
+        de = (r"Two tugboats pull a barge with two cables, with forces $%s$, $%s$ of magnitudes $%d$ kN and "
+              r"$%d$ kN respectively; the angle between the two cables is $%d^\circ$." % (F1, F2, p, q, g))
+        can, vat = "the water resistance", "the barge"
+    else:
+        p, q, dv = random.randint(50, 200), random.randint(50, 200), "N"
+        de = (r"Two workers pull a crate on a horizontal floor with two ropes, with forces $%s$, $%s$ (parallel "
+              r"to the floor) of magnitudes $%d$ N and $%d$ N respectively; the angle between the two forces is $%d^\circ$." % (F1, F2, p, q, g))
+        can, vat = "the friction force", "the crate"
+    R = _b8_tong_hai(p, q, g)
+    dap = _b8_tron(R, 0)
+    giai = _b8_giai_tong(F1, F2, p, q, g, dv, dap, _b8_can_tron(R, 0))
+    if deu:
+        de += (r" It is known that %s moves uniformly in a straight line in the direction of the resultant force and %s (opposite to the motion) balances "
+               r"the resultant of the two pulling forces." % (vat, can))
+        hoi = r"Find the magnitude of %s" % can
+        giai = (r"The object moves uniformly in a straight line, so %s $\overrightarrow{F_c}$ balances the resultant force: "
+                r"$\overrightarrow{F_c} = -\left(%s + %s\right)$, hence $\left|\overrightarrow{F_c}\right| = "
+                r"\left|%s + %s\right|$.\\ " % (can, F1, F2, F1, F2)) + giai
+    else:
+        hoi = r"Find the magnitude of the resultant of the two pulling forces acting on %s" % vat
+        giai = r"The resultant force is $\vec F = %s + %s$.\\ " % (F1, F2) + giai
+    return de, hoi, dap, 0, _b8_nhieu_tong(p, q, g, 0, dap), giai, dv, _b8_can_tron(R, 0)
+
+
+def L10_C4_B11_VD060_MC_C_01(socau, dang=1):
+    r"""Hợp lực trong bối cảnh thực tế ngẫu nhiên: hai người kéo thuyền, hai tàu kéo sà lan, hai công nhân kéo kiện hàng;
+    góc bất kì (dùng máy tính cầm tay); hỏi hợp lực hoặc lực cản/ma sát khi vật chuyển động thẳng đều; làm tròn hàng đơn
+    vị. Theo câu mẫu cô Lan gửi (kéo thuyền $55$ N, $60$ N, góc $50^\circ$). Tách riêng VD060_A (không thực tế).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return "".join(_b8_cau_thuc_te(_b8_luc_thuc_te, dang, True) for _ in range(socau))
+
+
+def L10_C4_B11_VD060_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với VD060_MC_C: hợp lực (hoặc lực cản) trong bối cảnh thực tế, làm tròn hàng đơn vị.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return "".join(_b8_cau_thuc_te(_b8_luc_thuc_te, dang, False) for _ in range(socau))
+
+
+# ---------------------------------------------------------------------
+# B8_VD040 (LUYỆN TẬP THÊM, ngoài YCCĐ): tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành
+# (câu tự luận cô Lan gửi: |MB + CD| = |MC + DA| -> trung trực AB). MC (không có SA: đáp án không phải số) và TL.
+# ---------------------------------------------------------------------
+def _b8_ban_sao(V, X, P):
+    """Cạnh hình bình hành V (theo thứ tự đỉnh): vectơ bằng vectơ XP nằm ở cạnh ĐỐI (X, P kề nhau)."""
+    i, j = V.index(X), V.index(P)
+    if (j - i) % 4 == 1:
+        return V[(i - 1) % 4], V[(i + 2) % 4]
+    return V[(i + 1) % 4], V[(i - 2) % 4]
+
+
+def _b8_hang_tu(V, X, P):
+    """Biểu thức MX + (vectơ bằng XP) hoặc MX - (vectơ bằng PX). -> (tex, lời giải rút gọn về MP)."""
+    if random.random() < 0.6:
+        R, S = _b8_ban_sao(V, X, P)
+        tex = r"%s + %s" % (_vt("M", X), _vt(R, S))
+        ly = r"$%s = %s$, so $%s = %s + %s = %s$" % (_vt(R, S), _vt(X, P), tex, _vt("M", X), _vt(X, P), _vt("M", P))
+    else:
+        R, S = _b8_ban_sao(V, P, X)
+        tex = r"%s - %s" % (_vt("M", X), _vt(R, S))
+        ly = (r"$%s = %s$, so $%s = %s + %s = %s + %s = %s$"
+              % (_vt(R, S), _vt(P, X), tex, _vt("M", X), _vt(S, R), _vt("M", X), _vt(X, P), _vt("M", P)))
+    return tex, ly
+
+
+def _b8_tap_hop():
+    """-> (debai, dieu_kien_tex, dap (chuỗi), nhieu, giai_a (rút gọn), dap_a, giai_b, kieu)."""
+    ten = random.choice(["ABCD", "EFGH", "PQRS"])
+    V = list(ten)
+    ke = [(V[i], V[(i + k) % 4]) for i in range(4) for k in (1, 3)]
+    tt = lambda X, Y: r"the perpendicular bisector of the segment $%s$" % "".join(sorted((X, Y)))
+    if random.random() < 0.6:
+        while True:
+            (X1, P), (X2, Q) = random.sample(ke, 2)
+            if P != Q and X1 != X2:
+                break
+        t1, l1 = _b8_hang_tu(V, X1, P)
+        t2, l2 = _b8_hang_tu(V, X2, Q)
+        dk = r"\left|%s\right| = \left|%s\right|" % (t1, t2)
+        dap = tt(P, Q)
+        ung = [tt(X1, X2) if {X1, X2} != {P, Q} else None, r"the line $%s$" % "".join(sorted((P, Q))),
+               r"the circle with diameter $%s$" % "".join(sorted((P, Q))),
+               tt(X1, Q) if {X1, Q} != {P, Q} else None, tt(P, X2) if {P, X2} != {P, Q} else None]
+        giai_a = l1 + r"; " + l2 + "."
+        dap_a = r"%s = %s,\ %s = %s" % (t1, _vt("M", P), t2, _vt("M", Q))
+        giai_b = (r"The condition becomes $\left|%s\right| = \left|%s\right|$, that is $M%s = M%s$: $M$ is equidistant from the two points "
+                  r"$%s$, $%s$. Hence the set of points $M$ is %s." % (_vt("M", P), _vt("M", Q), P, Q, P, Q, dap))
+        kieu = "trung_truc"
+    else:
+        X, P = random.choice(ke)
+        t1, l1 = _b8_hang_tu(V, X, P)
+        Y, Z = random.sample([v for v in V], 2)
+        doan = "".join(sorted((Y, Z)))
+        if random.random() < 0.5:
+            t2 = _vt(Y, Z)
+            l2 = r"$\left|%s\right| = %s$" % (t2, Y + Z)
+            dap_a = r"%s = %s" % (t1, _vt("M", P))
+        else:
+            t2 = r"%s - %s" % (_vt("M", Z), _vt("M", Y))
+            l2 = r"$%s = %s$ (subtraction rule), so $\left|%s\right| = %s$" % (t2, _vt(Y, Z), t2, Y + Z)
+            dap_a = r"%s = %s,\ %s = %s" % (t1, _vt("M", P), t2, _vt(Y, Z))
+        dk = r"\left|%s\right| = \left|%s\right|" % (t1, t2)
+        dap = r"the circle with center $%s$ and radius $%s$" % (P, doan)
+        khac = [v for v in V if v not in (P, X)]
+        ung = [r"the circle with center $%s$ and radius $%s$" % (X, doan), tt(P, X),
+               r"the circle with diameter $%s$" % doan,
+               r"the circle with center $%s$ and radius $%s$" % (khac[0], doan)]
+        giai_a = l1 + r"; " + l2 + "."
+        giai_b = (r"The condition becomes $M%s = %s$ ($%s$ is a fixed length). Hence the set of points $M$ is %s."
+                  % (P, doan, doan, dap))
+        kieu = "duong_tron"
+    nhieu = []
+    for x in ung:
+        if x and x != dap and x not in nhieu:
+            nhieu.append(x)
+    debai = r"Given a parallelogram $%s$." % ten
+    return debai, dk, dap, nhieu, giai_a, dap_a, giai_b, kieu
+
+
+def L10_C4_B8_VD040_MC_A_01(socau, dang=1):
+    r"""Tập hợp điểm $M$ thoả một đẳng thức độ dài vectơ trong hình bình hành: thay vectơ bằng vectơ bằng nó (cạnh
+    đối), quy tắc ba điểm, quy tắc trừ để đưa về $MP = MQ$ (đường trung trực) hoặc $MP = $ độ dài không đổi (đường
+    tròn). LUYỆN TẬP THÊM (mức VD cao hơn YCCĐ TH040). Theo câu tự luận cô Lan gửi. Không có bản SA (đáp án không phải
+    số).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; luyen tap them; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dk, dap, nhieu, ga, da, gb, kieu = _b8_tap_hop()
+        debai += r" The set of points $M$ satisfying $%s$ is" % dk
+        cau += MC_SA_answer_text(debai, dap, nhieu[:3], ga + r"\\ " + gb, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_VD040_TL_A_01(socau, dong=1):
+    r"""Tự luận - cùng Dang với VD040_MC_A: a) rút gọn các vectơ trong điều kiện; b) tìm tập hợp điểm $M$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; luyen tap them; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dk, dap, nhieu, ga, da, gb, kieu = _b8_tap_hop()
+        hoi_a = r"Simplify the vector expressions in the equality $%s$." % dk
+        hoi_b = r"Find the set of points $M$ satisfying $%s$." % dk
+        dap_b = r"\text{%s}" % dap.replace("$", "")
+        cau += TL_answer_text(debai, [(hoi_a, da, ga), (hoi_b, dap_b, gb)], 0, 0, dong)
     return cau

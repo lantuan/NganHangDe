@@ -164,6 +164,38 @@
     "difficulty_rank": 2
   },
   {
+    "id": "L10_C4_B8_VD040",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Tổng và hiệu của hai vectơ",
+    "bai_so": "8",
+    "subsection": "Tổng và hiệu của hai vectơ",
+    "MucDo": "VD",
+    "verb": "Vận dụng được",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "examples": [],
+    "scope": null,
+    "tags": [
+      "vecto",
+      "tong_hai_vecto",
+      "quy_tac_ba_diem",
+      "quy_tac_hinh_binh_hanh"
+    ],
+    "difficulty_rank": 3,
+    "dang_luyen_tap_them": [
+      {
+        "mo_ta": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn",
+        "mapping_id": [
+          "L10_C4_B8_VD040_MC_A",
+          "L10_C4_B8_VD040_TL_A"
+        ]
+      }
+    ],
+    "ghi_chu_luyen_tap_them": "Cô Lan đưa câu tự luận mẫu 16/10/2026 (hình bình hành, tìm M thoả |MB + CD| = |MC + DA|) và duyệt làm mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho phép toán tổng hai vectơ chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
+  },
+  {
     "id": "L10_C4_B8_TH041",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",

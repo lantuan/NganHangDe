@@ -202,7 +202,9 @@ def test_python_tu_sinh_khong_de_chet():
                            ("L10_C4_B8_TH040_MC_B_02", 30), ("L10_C4_B8_TH040_MC_C_01", 40),
                            ("L10_C4_B8_TH040_SA_C_01", 60), ("L10_C4_B8_TH041_MC_C_01", 40),
                            ("L10_C4_B8_TH041_SA_C_01", 60), ("L10_C4_B11_VD060_MC_A_02", 100),
-                           ("L10_C4_B11_VD060_SA_A_02", 100)):
+                           ("L10_C4_B11_VD060_SA_A_02", 100), ("L10_C4_B11_VD060_MC_B_01", 100),
+                           ("L10_C4_B11_VD060_SA_B_01", 100), ("L10_C4_B11_VD060_MC_C_01", 100),
+                           ("L10_C4_B11_VD060_SA_C_01", 100), ("L10_C4_B8_VD040_MC_A_01", 60)):
         de = set()
         for s in range(150):
             random.seed(s)
@@ -211,3 +213,150 @@ def test_python_tu_sinh_khong_de_chet():
             than = o.split(r"\loigiai")[0].replace(r"\True ", "")
             de.add((than.split(r"\choice")[0], frozenset(than.split("\n"))))   # de + tap phuong an (bo thu tu)
         assert len(de) >= toi_thieu, (ten, len(de))
+
+
+# ---------------------------------------------------------------- dot 2 (16/10/2026): VD060_B, VD060_C, VD040
+_LA_BAN = {"Đông": (1, 0), "Tây": (-1, 0), "Bắc": (0, 1), "Nam": (0, -1)}
+
+
+def _huong(ten):
+    """'Đông Bắc' -> vectơ đơn vị."""
+    x = y = 0
+    for t in ten.split():
+        x, y = x + _LA_BAN[t][0], y + _LA_BAN[t][1]
+    n = math.hypot(x, y)
+    return x / n, y / n
+
+
+def _kiem_lam_tron(de, dap, d):
+    muc = re.search(r"làm tròn kết quả đến (hàng đơn vị|hàng phần mười|hàng phần trăm)", de)
+    if muc:
+        sai_so = {"hàng đơn vị": 0.5, "hàng phần mười": 0.05, "hàng phần trăm": 0.005}[muc.group(1)]
+        assert abs(so(dap) - d) <= sai_so + 1e-9, (de, dap, d)
+        assert abs(d * (0.5 / sai_so) - round(d * (0.5 / sai_so))) > 1e-9, ("khong can lam tron", de, d)
+    else:
+        assert abs(so(dap) - d) < 1e-9, (de, dap, d)
+
+
+def _van_toc_tu_de(de):
+    m = re.search(r"Vận tốc riêng của ca nô \(so với dòng nước\) có độ lớn \$(\d+)\$ km/h, dòng nước chảy song song với bờ "
+                  r"với vận tốc \$(\d+)\$ km/h", de)
+    if m:
+        p, q = map(int, m.groups())
+        nuoc = (q, 0)                                     # dòng nước theo Ox, bờ song song Ox
+        if "vuông góc với bờ" in de:
+            g = 90
+        else:
+            g0 = int(re.search(r"một góc \$(\d+)\^\\circ\$", de).group(1))
+            g = g0
+            assert ("xuôi dòng" in de) == (g0 < 90)
+        v1 = (p * math.cos(math.radians(g)), p * math.sin(math.radians(g)))
+        v = math.hypot(v1[0] + nuoc[0], v1[1] + nuoc[1])
+        t = re.search(r"sau \$(\d+)\$ phút", de)
+        return ("thuyen_qua_song", v * int(t.group(1)) / 60 if t else v)
+    m = re.search(r"vận tốc riêng \(so với dòng nước\) có độ lớn \$([\d,]+)\$ m/s; dòng nước chảy song song với bờ với vận "
+                  r"tốc \$([\d,]+)\$ m/s", de)
+    if m:
+        p, q = so(m.group(1)), so(m.group(2))
+        assert "vuông góc với bờ" in de
+        return ("nguoi_boi_qua_song", math.hypot(p, q))
+    m = re.search(r"flycam bay theo hướng (\S+) với vận tốc riêng \(so với không khí\) có độ lớn \$(\d+)\$ m/s; gió thổi "
+                  r"theo hướng ([^$]+?) với vận tốc \$(\d+)\$ m/s", de)
+    assert m, de
+    a, b = _huong(m.group(1)), _huong(m.group(3))
+    p, q = int(m.group(2)), int(m.group(4))
+    return ("flycam_gap_gio", math.hypot(p * a[0] + q * b[0], p * a[1] + q * b[1]))
+
+
+@pytest.mark.parametrize("ten", ["L10_C4_B11_VD060_MC_B_01", "L10_C4_B11_VD060_SA_B_01"])
+def test_vd060_b_van_toc_doc_lap(ten):
+    thay = set()
+    for s in range(300):
+        de, dap, nhieu, giai = _bat(ten, s)
+        bc, d = _van_toc_tu_de(de)
+        thay.add(bc)
+        if "_MC_" in ten:
+            gia = lambda x: so(re.search(r"\$([\d,]+)\$", x).group(1))
+            _kiem_lam_tron(de, "%s" % gia(dap), d)
+            assert len(set([dap] + nhieu)) == 4 and all(abs(gia(x) - gia(dap)) > 1e-9 for x in nhieu)
+        else:
+            _kiem_lam_tron(de, dap, d)
+            assert len(dap) <= 4 and "(đơn vị:" in de
+    assert thay == {"thuyen_qua_song", "nguoi_boi_qua_song", "flycam_gap_gio"}
+
+
+@pytest.mark.parametrize("ten", ["L10_C4_B11_VD060_MC_C_01", "L10_C4_B11_VD060_SA_C_01"])
+def test_vd060_c_luc_thuc_te_doc_lap(ten):
+    thay, deu = set(), set()
+    for s in range(300):
+        de, dap, nhieu, giai = _bat(ten, s)
+        p, q, g = map(int, re.search(r"độ lớn lần lượt là \$(\d+)\$ k?N và \$(\d+)\$ k?N, góc giữa hai (?:lực|dây cáp) bằng "
+                                     r"\$(\d+)\^\\circ\$", de).groups())
+        F = V(p, 0) + V(q * math.cos(math.radians(g)), q * math.sin(math.radians(g)))
+        d = abs(F)                                        # lực cản (chuyển động đều) cũng bằng |F1 + F2|
+        if "_MC_" in ten:
+            gia = lambda x: so(re.search(r"\$([\d,]+)\$", x).group(1))
+            _kiem_lam_tron(de, "%s" % gia(dap), d)
+            assert len(set([dap] + nhieu)) == 4 and all(abs(gia(x) - gia(dap)) > 1e-9 for x in nhieu)
+        else:
+            _kiem_lam_tron(de, dap, d)
+            assert len(dap) <= 4
+        thay.add(re.search(r"con thuyền|sà lan|kiện hàng", de).group(0))
+        deu.add("chuyển động thẳng đều" in de)
+    assert len(thay) == 3 and deu == {True, False}
+
+
+def _quy_tich(mo_ta, P):
+    """Mô tả tập hợp -> hàm sinh một điểm trên tập hợp (tham số t)."""
+    m = re.fullmatch(r"đường trung trực của đoạn thẳng \$(\w)(\w)\$", mo_ta)
+    if m:
+        A, B = P[m.group(1)], P[m.group(2)]
+        I, u = (A + B) / 2, B - A
+        return lambda t: I + V(-u.y, u.x) * t
+    m = re.fullmatch(r"đường tròn tâm \$(\w)\$, bán kính bằng \$(\w)(\w)\$", mo_ta)
+    if m:
+        O, r = P[m.group(1)], abs(P[m.group(3)] - P[m.group(2)])
+        return lambda t: O + V(math.cos(t), math.sin(t)) * r
+    m = re.fullmatch(r"đường tròn đường kính \$(\w)(\w)\$", mo_ta)
+    if m:
+        A, B = P[m.group(1)], P[m.group(2)]
+        return lambda t: (A + B) / 2 + V(math.cos(t), math.sin(t)) * (abs(B - A) / 2)
+    m = re.fullmatch(r"đường thẳng \$(\w)(\w)\$", mo_ta)
+    assert m, mo_ta
+    A, B = P[m.group(1)], P[m.group(2)]
+    return lambda t: A + (B - A) * t
+
+
+def test_vd040_tap_hop_diem_doc_lap():
+    kieu = set()
+    for s in range(300):
+        de, dap, nhieu, giai = _bat("L10_C4_B8_VD040_MC_A_01", s)
+        ten = re.search(r"Cho hình bình hành \$(\w{4})\$", de).group(1)
+        trai, phai = re.search(r"thoả mãn \$\\left\|(.+?)\\right\| = \\left\|(.+?)\\right\|\$ là", de).groups()
+        A, B, C, D = ten
+        P = {A: V(random.uniform(-5, 5), random.uniform(-5, 5)), B: V(random.uniform(-5, 5), random.uniform(-5, 5)),
+             D: V(random.uniform(-5, 5), random.uniform(-5, 5))}
+        P[C] = P[B] + P[D] - P[A]
+        dk = lambda M: abs(tinh(trai, P=dict(P, M=M))) - abs(tinh(phai, P=dict(P, M=M)))
+        f = _quy_tich(dap, P)
+        assert all(abs(dk(f(t))) < 1e-7 for t in (-1.3, 0.2, 0.9, 2.5)), (de, dap)
+        for x in nhieu:                                   # mỗi nhiễu có điểm không thoả điều kiện
+            g = _quy_tich(x, P)
+            assert any(abs(dk(g(t))) > 1e-6 for t in (-1.3, 0.2, 0.9, 2.5)), (de, x)
+        kieu.add(dap.split("$")[0])
+    assert kieu == {"đường trung trực của đoạn thẳng ", "đường tròn tâm "}
+
+
+def test_vd040_tl_hai_y():
+    for s in range(100):
+        random.seed(s)
+        o = M.L10_C4_B8_VD040_TL_A_01(1)
+        assert o.count(r"\item") == 4 and r"\choice" not in o and r"\shortans" not in o
+
+
+def test_c_co_truong_hop_hai_duong_cheo():
+    thay = 0
+    for s in range(300):
+        de, dap, nhieu, giai = _bat("L10_C4_B8_TH041_SA_C_01", s)
+        thay += "hai cạnh đối của hình bình hành" in giai
+    assert thay >= 10

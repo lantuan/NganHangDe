@@ -283,6 +283,22 @@
     "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); ban tra loi ngan cung Dang voi MC_C: so do cu the, dap so nguyen hoac lam tron <= 4 ki tu; co Lan duyet lai"
   },
   {
+    "id": "L10_C4_B8_VD040_MC_A",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); chi MC va TL, khong co SA vi dap an khong phai so; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_VD040_TL_A",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Tự luận",
+    "Dang": "Tập hợp điểm M thoả một đẳng thức độ dài vectơ trong hình bình hành (thay vectơ bằng vectơ bằng nó, quy tắc ba điểm, quy tắc trừ): đường trung trực hoặc đường tròn - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); a) rut gon, b) tap hop diem; co Lan duyet lai"
+  },
+  {
     "id": "L10_C4_B8_TH041_MC_A",
     "content": "Thực hiện được các phép toán hiệu hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -642,6 +658,54 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Tổng hợp lực tác dụng lên vật bằng vectơ",
     "ghi_chu": "CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta; 15/10/2026 ghep cung Dang voi MC_A (cung dang, theo co Lan: ghep cac dang da thay giong)"
+  },
+  {
+    "id": "L10_C4_B11_VD060_MC_B",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Vận tốc thực tế là tổng hai vectơ vận tốc (vận tốc riêng và vận tốc dòng nước / gió) trong bối cảnh thực tế: tốc độ thực tế hoặc quãng đường thực tế, hai vận tốc vuông góc hoặc hợp góc bất kì, làm tròn",
+    "boi_canh": [
+      "thuyen_qua_song",
+      "nguoi_boi_qua_song",
+      "flycam_gap_gio"
+    ],
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau 40 km/h vuong goc dong nuoc 5 km/h); boi canh ngau nhien; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B11_VD060_SA_B",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Vận tốc thực tế là tổng hai vectơ vận tốc (vận tốc riêng và vận tốc dòng nước / gió) trong bối cảnh thực tế: tốc độ thực tế hoặc quãng đường thực tế, hai vận tốc vuông góc hoặc hợp góc bất kì, làm tròn",
+    "boi_canh": [
+      "thuyen_qua_song",
+      "nguoi_boi_qua_song",
+      "flycam_gap_gio"
+    ],
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tau 40 km/h vuong goc dong nuoc 5 km/h); ban tra loi ngan cung Dang voi MC_B, dap so <= 4 ki tu; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B11_VD060_MC_C",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hợp lực của hai lực trong bối cảnh thực tế (kéo thuyền, tàu kéo sà lan, kéo kiện hàng), góc bất kì: độ lớn hợp lực hoặc lực cản / ma sát khi vật chuyển động thẳng đều, làm tròn hàng đơn vị",
+    "boi_canh": [
+      "keo_thuyen",
+      "tau_keo_sa_lan",
+      "keo_kien_hang"
+    ],
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hai nguoi keo thuyen 55 N, 60 N, goc 50 do); tach rieng VD060_A (khong thuc te) theo y co Lan; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B11_VD060_SA_C",
+    "content": "Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hợp lực của hai lực trong bối cảnh thực tế (kéo thuyền, tàu kéo sà lan, kéo kiện hàng), góc bất kì: độ lớn hợp lực hoặc lực cản / ma sát khi vật chuyển động thẳng đều, làm tròn hàng đơn vị",
+    "boi_canh": [
+      "keo_thuyen",
+      "tau_keo_sa_lan",
+      "keo_kien_hang"
+    ],
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hai nguoi keo thuyen 55 N, 60 N, goc 50 do); ban tra loi ngan cung Dang voi MC_C, lam tron hang don vi; co Lan duyet lai"
   },
   {
     "id": "L10_C4_B11_VD061_MC_A",
