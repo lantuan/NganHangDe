@@ -4686,3 +4686,253 @@ def L10_C4_B11_TH057_SA_B_02(socau, dang=2):
     CAP = [("AB", "CB"), ("AC", "BC"), ("AC", "DC"), ("BD", "AD"),
            ("AB", "DB"), ("AO", "CO"), ("AO", "BO"), ("DC", "BC")]
     return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV, tra_loi_ngan=True)
+
+
+# =====================================================================
+# 16/10/2026 - BAI 7 BO SUNG theo cau mau co Lan gui (co Lan duyet ke hoach):
+#   NB037_MC_E_01/_02 (chi MC - ngoai le): dien khuyet dinh nghia / ki hieu, diem dau, diem cuoi cua vecto.
+#   NB037_MC_A_03, NB037_SA_A_02: ba, bon diem thang hang THEO THU TU -> cap vecto cung huong / nguoc huong.
+#   NB037_MC_F / SA_F: dem so diem D thoa mot dieu kien ve vecto (vo so / 0 / 1 / 2); SA chi dung truong hop huu han.
+# Moi de: ten diem, menh de, dieu kien chon ngau nhien.
+# =====================================================================
+
+_B7_TEN_DIEM = ["ABCD", "MNPQ", "EFGH", "IJKL", "ABCE", "DEFG", "MNPK", "XYZT"]
+
+
+def _b7_hai_ten():
+    return random.sample(list("ABCDEFGHIKMNPQ"), 2)
+
+
+# ---------------------------------------------------------------- E: dien khuyet dinh nghia, ki hieu
+def _b7_dinh_nghia():
+    """Kho mệnh đề điền khuyết; tên điểm ngẫu nhiên. Mỗi phần tử: (câu dẫn, đáp án, [nhiễu], lời giải)."""
+    X, Y, Z = random.sample(list("ABCDEFGHIKMNPQ"), 3)
+    xy, yx = _vt(X, Y), _vt(Y, X)
+    return [
+        (r"A vector is a line segment", "that has a direction",
+         ["that has a positive and a negative direction", "that has two endpoints", "of length $1$", "that is horizontal"],
+         "A vector is a directed line segment, that is, of its two endpoints it is specified which is the initial point and which is the terminal point."),
+        (r"The line of action of the vector $%s$ ($%s \ne %s$) is" % (xy, X, Y), r"the line $%s$" % (X + Y),
+         [r"the segment $%s$" % (X + Y), r"the length of the segment $%s$" % (X + Y), r"tia $%s$" % (X + Y), r"the point $%s$" % Y],
+         r"The line through the initial point and the terminal point of a vector is called its line of action; the line of action of $%s$ is the line $%s$." % (xy, X + Y)),
+        (r"The length of the vector $%s$ is" % xy, r"the length of the segment $%s$" % (X + Y),
+         [r"the line $%s$" % (X + Y), r"tia $%s$" % (Y + X), r"the vector $%s$" % yx, r"the number $1$"],
+         r"The length of a vector is the distance between its initial point and its terminal point: $\left|%s\right| = %s$." % (xy, X + Y)),
+        (r"Two vectors are called parallel (collinear) if", "their lines of action are parallel or coincide",
+         ["they have the same length", "their lines of action are perpendicular", "they have the same initial point", "their lines of action intersect"],
+         "By definition, two vectors are parallel if their lines of action are parallel or coincide."),
+        (r"If two vectors are parallel, then", "they have the same direction or opposite directions",
+         ["they always have the same direction", "they have the same length", "they are equal", "their lines of action always coincide"],
+         "If two vectors are parallel, they can only have the same direction or opposite directions."),
+        (r"If two vectors have the same direction, then", "they are parallel",
+         ["they are equal", "they have the same length", "their lines of action are perpendicular", "they have the same terminal point"],
+         "Two vectors with the same direction must first be parallel (their lines of action are parallel or coincide)."),
+        (r"The zero vector is the vector", "whose initial point and terminal point coincide",
+         ["of length $1$", "that has no line of action", "whose initial point is the origin", "that is not parallel to any vector"],
+         r"The vector whose initial point and terminal point coincide is called the zero vector, denoted $\overrightarrow{0}$."),
+        (r"Three distinct points $%s$, $%s$, $%s$ are collinear if and only if the vectors $%s$ and $%s$ are" % (X, Y, Z, xy, _vt(X, Z)),
+         "collinear",
+         ["same direction", "opposite direction", "of the same length", "are equal"],
+         r"$%s$, $%s$, $%s$ are collinear if and only if $%s$ and $%s$ have the same line of action, that is, they are parallel (with the same direction or opposite directions)."
+         % (X, Y, Z, xy, _vt(X, Z))),
+        (r"The two vectors $%s$ and $%s$" % (xy, yx), "have the same length and opposite directions",
+         ["are equal", "same direction", "have different lengths", "not collinear"],
+         r"$%s$ and $%s$ have the same line of action $%s$ and the same length $%s$ but opposite directions." % (xy, yx, X + Y, X + Y)),
+    ]
+
+
+def L10_C4_B7_NB037_MC_E_01(socau, dang=1):
+    r"""Điền khuyết định nghĩa: vectơ là đoạn thẳng có hướng; giá, độ dài, cùng phương, vectơ-không. Mệnh đề và ba
+    phương án nhiễu chọn ngẫu nhiên từ kho (theo câu mẫu cô Lan gửi 16/10/2026: "Véc-tơ là một đoạn thẳng ...").
+
+    CLAUDE THEM 16/10/2026 - chi co MC (ban SA dap so luon 1, vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for mo, dung, sai, ly in random.sample(_b7_dinh_nghia(), min(socau, 9)):
+        cau += MC_SA_answer_text(mo, dung, random.sample(sai, 3), ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_MC_E_02(socau, dang=1):
+    r"""Kí hiệu vectơ: vectơ có điểm đầu $X$, điểm cuối $Y$ kí hiệu thế nào; hoặc cho $\overrightarrow{XY}$, hỏi điểm đầu /
+    điểm cuối / độ dài kí hiệu thế nào. Tên điểm ngẫu nhiên (theo câu mẫu cô Lan gửi).
+
+    CLAUDE THEM 16/10/2026 - chi co MC; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        X, Y = _b7_hai_ten()
+        kieu = random.choice(["ki_hieu", "dau", "cuoi", "do_dai"])
+        if kieu == "ki_hieu":
+            de = r"The vector with initial point $%s$ and terminal point $%s$ is denoted by" % (X, Y)
+            dung = "$%s$" % _vt(X, Y)
+            sai = ["$%s$" % (X + Y), "$%s$" % _vt(Y, X), r"$\left|%s\right|$" % _vt(X, Y)]
+            ly = r"The vector with initial point $%s$ and terminal point $%s$ is denoted by $%s$." % (X, Y, _vt(X, Y))
+        elif kieu in ("dau", "cuoi"):
+            de = r"The %s point of the vector $%s$ is" % ("initial" if kieu == "dau" else "terminal", _vt(X, Y))
+            dung = "the point $%s$" % (X if kieu == "dau" else Y)
+            sai = ["the point $%s$" % (Y if kieu == "dau" else X), "the midpoint of the segment $%s$" % (X + Y),
+                   "the line $%s$" % (X + Y)]
+            ly = r"The vector $%s$ has initial point $%s$ and terminal point $%s$." % (_vt(X, Y), X, Y)
+        else:
+            de = r"The length of the vector $%s$ is denoted by" % _vt(X, Y)
+            dung = r"$\left|%s\right|$" % _vt(X, Y)
+            sai = ["$%s$" % _vt(X, Y), "$%s$" % _vt(Y, X), r"$-%s$" % _vt(X, Y)]
+            ly = r"The length of the vector $%s$ is denoted by $\left|%s\right|$, and $\left|%s\right| = %s$." % (
+                _vt(X, Y), _vt(X, Y), _vt(X, Y), X + Y)
+        cau += MC_SA_answer_text(de, dung, sai, ly, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------- A: diem thang hang theo thu tu
+def _b7_thang_hang():
+    """n điểm thẳng hàng theo thứ tự trên đường thẳng: trả về (tên các điểm, mô tả, danh sách cặp (u, w, cùng hướng))."""
+    n = random.choice([3, 3, 4])
+    ten = list(random.choice(_B7_TEN_DIEM))[:n]
+    if random.random() < 0.3:
+        ten = ten[::-1] if n == 3 else ten
+    vi_tri = {t: i for i, t in enumerate(ten)}
+    vts = [(p, q) for p in ten for q in ten if p != q]
+    cap = []
+    for i, u in enumerate(vts):
+        for w in vts[i + 1:]:
+            if set(u) == set(w):              # cung mot doan (AB va BA): qua de
+                continue
+            hu = vi_tri[u[1]] > vi_tri[u[0]]
+            hw = vi_tri[w[1]] > vi_tri[w[0]]
+            cap.append((u, w, hu == hw))
+    if n == 3:
+        mo = r"Given three points $%s$, $%s$, $%s$ that are collinear in that order (point $%s$ lies between $%s$ and $%s$)." % (
+            ten[0], ten[1], ten[2], ten[1], ten[0], ten[2])
+    else:
+        mo = r"Given four distinct points $%s$, $%s$, $%s$, $%s$ that are collinear in that order." % tuple(ten)
+    return ten, mo, cap
+
+
+def _b7_ly_cap(u, w, cung, ten):
+    huong = lambda v: "from $%s$ to $%s$" % v
+    return (r"$%s$ and $%s$ both lie on the line containing the points; $%s$ points %s and $%s$ points %s, so they have %s."
+            % (_vt(*u), _vt(*w), _vt(*u), huong(u), _vt(*w), huong(w), "same direction" if cung else "opposite direction"))
+
+
+def L10_C4_B7_NB037_MC_A_03(socau, dang=1):
+    r"""Ba hoặc bốn điểm thẳng hàng THEO THỨ TỰ (không hình vẽ): cặp vectơ nào cùng hướng (ngược hướng). Ba phương án
+    nhiễu là các cặp ngược (cùng) hướng - đều cùng phương nên phải xét hướng.
+
+    CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui; bien the cua NB037_MC_A (nhan ra cung phuong, cung huong); co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        ten, mo, cap = _b7_thang_hang()
+        hoi_cung = random.random() < 0.6
+        dung_ds = [c for c in cap if c[2] == hoi_cung]
+        sai_ds = [c for c in cap if c[2] != hoi_cung]
+        d = random.choice(dung_ds)
+        sai = random.sample(sai_ds, 3)
+        fmt = lambda c: r"$%s$ and $%s$" % (_vt(*c[0]), _vt(*c[1]))
+        de = mo + r" Which of the following pairs of vectors have %s?" % ("same direction" if hoi_cung else "opposite direction")
+        ly = r"All the vectors lie on the line containing the points, so they are parallel; compare directions: " + _b7_ly_cap(d[0], d[1], d[2], ten)
+        cau += MC_SA_answer_text(de, fmt(d), [fmt(c) for c in sai], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng NB037_MC_A_03: ba/bốn điểm thẳng hàng theo thứ tự, cho bốn cặp vectơ, đếm số cặp cùng
+    hướng (ngược hướng). Đáp số từ $1$ đến $3$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        ten, mo, cap = _b7_thang_hang()
+        hoi_cung = random.random() < 0.5
+        for _lan in range(200):
+            chon = random.sample(cap, 4)
+            k = sum(1 for c in chon if c[2] == hoi_cung)
+            if 1 <= k <= 3:
+                break
+        hoi = "same direction" if hoi_cung else "opposite direction"
+        dong = r"\\ ".join(r"%d) $%s$ and $%s$" % (i + 1, _vt(*c[0]), _vt(*c[1])) for i, c in enumerate(chon))
+        de = mo + r" Consider four pairs of vectors: \\ " + dong + r"\\ How many pairs of vectors have the %s?" % hoi
+        ly = (r"All the vectors are parallel (they lie on the line containing the points); we only compare directions:\\ "
+              + r"\\ ".join(r"Pair %d: %s" % (i + 1, "same direction" if c[2] else "opposite direction") for i, c in enumerate(chon))
+              + r".\\ Hence there are $%d$ pairs of vectors that have %s." % (k, hoi))
+        cau += MC_SA_answer_const(de, str(k), [str(x) for x in _c4_nhieu_so(k, [4 - k, k + 1, k - 1, 4, 0])], ly, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------- F: dem so diem D thoa dieu kien vecto
+def _b7_dieu_kien_D():
+    """(câu dẫn, số điểm D: 'vô số' hoặc số nguyên, lời giải). Câu dẫn chỉ nêu các điểm mà điều kiện dùng đến."""
+    A, B, C, D = random.choice(["ABCD", "MNPQ", "EFGH", "ABCM", "MNPK", "IJKL"])
+    ab, cd, ba = _vt(A, B), _vt(C, D), _vt(B, A)
+    k = random.choice([2, 3])
+    ds = [
+        # (dieu kien, so diem, loi giai, can C ngoai duong thang AB)
+        (r"$%s = %s$" % (ab, cd), 1,
+         r"$%s = %s$ if and only if $%s$ has the same direction as $%s$ and $%s = %s$: from $%s$ there is exactly one such point $%s$."
+         % (ab, cd, cd, ab, C + D, A + B, C, D), False),
+        (r"$%s = %s$" % (_vt(D, C), ab), 1,
+         r"$%s = %s$ means $%s = %s$, so $%s$ is the unique point such that the vector from $%s$ to $%s$ equals $%s$: there is exactly one point."
+         % (_vt(D, C), ab, cd, ba, D, C, D, ba), False),
+        (r"$\left|%s\right| = \left|%s\right|$" % (ab, cd), "infinitely many",
+         r"$\left|%s\right| = \left|%s\right| \Leftrightarrow %s = %s$: the points $%s$ form the circle with center $%s$ and radius $%s$, so there are infinitely many points."
+         % (ab, cd, C + D, A + B, D, C, A + B), False),
+        (r"$%s$ is parallel to $%s$ ($%s \ne %s$)" % (cd, ab, D, C), "infinitely many",
+         r"$%s$ is parallel to $%s$ when $%s$ lies on the line through $%s$ parallel to (or coinciding with) the line $%s$, other than $%s$: there are infinitely many points."
+         % (cd, ab, D, C, A + B, C), False),
+        (r"$%s$ is parallel to $%s$ and $\left|%s\right| = \left|%s\right|$" % (cd, ab, cd, ab), 2,
+         r"$%s$ lies on the line through $%s$ parallel to $%s$ and $%s = %s$: there are two points, symmetric about $%s$ (one gives $%s$ the same direction, the other gives $%s$ the opposite direction to $%s$)."
+         % (D, C, ab, C + D, A + B, C, cd, cd, ab), False),
+        (r"$%s$ is parallel to $%s$ and $\left|%s\right| = %d\left|%s\right|$" % (cd, ab, cd, k, ab), 2,
+         r"$%s$ lies on the line through $%s$ parallel to $%s$ and $%s = %d%s$: there are two points, symmetric about $%s$."
+         % (D, C, ab, C + D, k, A + B, C), False),
+        (r"$%s$ has the same direction as $%s$ and $\left|%s\right| = %d\left|%s\right|$" % (cd, ab, cd, k, ab), 1,
+         r"On the line through $%s$ parallel to $%s$, there is only one point $%s$ such that $%s$ has the same direction as $%s$ and $%s = %d%s$."
+         % (C, ab, D, cd, ab, C + D, k, A + B), False),
+        (r"$%s$ has the opposite direction to $%s$ and $\left|%s\right| = \left|%s\right|$" % (cd, ab, cd, ab), 1,
+         r"Then $%s = %s$: there is exactly one point $%s$." % (cd, ba, D), False),
+        (r"$%s$ is parallel to $%s$ and $%s$ lies on the line $%s$" % (cd, ab, D, A + B), 0,
+         r"If $%s$ is parallel to $%s$, then $%s$ lies on the line through $%s$ parallel to $%s$; this line does not meet the line $%s$ (since $%s$ is not on $%s$). So there is no such point."
+         % (cd, ab, D, C, A + B, A + B, C, A + B), True),
+        (r"$%s = %s$" % (_vt(D, A), _vt(D, B)), 0,
+         r"$%s = %s$ implies that $%s$ coincides with $%s$, contradicting $%s \ne %s$. So there is no such point." % (_vt(D, A), _vt(D, B), A, B, A, B), False),
+        (r"$%s = %s$" % (_vt(A, D), _vt(D, B)), 1,
+         r"$%s = %s$ if and only if $%s$ is the midpoint of the segment $%s$: there is exactly one point." % (_vt(A, D), _vt(D, B), D, A + B), False),
+        (r"$\left|%s\right| = \left|%s\right|$" % (_vt(D, A), _vt(D, B)), "infinitely many",
+         r"$%s = %s$: $%s$ lies on the perpendicular bisector of the segment $%s$, so there are infinitely many points." % (D + A, D + B, D, A + B), False),
+    ]
+    dk, so, ly, can_ngoai = random.choice(ds)
+    if can_ngoai:
+        mo = (r"Given two distinct points $%s$, $%s$ and a point $%s$ not on the line $%s$. How many points $%s$ satisfy %s?"
+              % (A, B, C, A + B, D, dk))
+    elif C in dk.replace(D, ""):
+        mo = r"Given two distinct points $%s$, $%s$ and a point $%s$. How many points $%s$ satisfy %s?" % (A, B, C, D, dk)
+    else:
+        mo = r"Given two distinct points $%s$, $%s$. How many points $%s$ satisfy %s?" % (A, B, D, dk)
+    return mo, so, ly
+
+
+def L10_C4_B7_NB037_MC_F_01(socau, dang=1):
+    r"""Đếm số điểm $D$ thoả một điều kiện về vectơ: bằng nhau, cùng độ dài (đường tròn, trung trực), cùng phương,
+    cùng phương và cùng độ dài, vectơ-không... Đáp án trong $\{$vô số; $0$; $1$; $2\}$. Theo câu mẫu cô Lan gửi
+    ($\left|\overrightarrow{AB}\right| = \left|\overrightarrow{CD}\right|$: vô số).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        mo, so, ly = _b7_dieu_kien_D()
+        tat_ca = ["Infinitely many", "$0$", "$1$", "$2$"]
+        dung = "Infinitely many" if so == "infinitely many" else "$%d$" % so
+        cau += MC_SA_answer_text(mo, dung, [x for x in tat_ca if x != dung], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_F_01(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng NB037_MC_F: chỉ dùng điều kiện có HỮU HẠN điểm $D$ ($0$, $1$ hoặc $2$).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        while True:
+            mo, so, ly = _b7_dieu_kien_D()
+            if so != "infinitely many":
+                break
+        cau += MC_SA_answer_const(mo, str(so), [str(x) for x in (0, 1, 2, 3, 4) if x != so], ly, 0, 0, dang)
+    return cau

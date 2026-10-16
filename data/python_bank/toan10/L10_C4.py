@@ -4692,3 +4692,253 @@ def L10_C4_B11_TH057_SA_B_02(socau, dang=2):
     CAP = [("AB", "CB"), ("AC", "BC"), ("AC", "DC"), ("BD", "AD"),
            ("AB", "DB"), ("AO", "CO"), ("AO", "BO"), ("DC", "BC")]
     return _cau_goc_vecto(socau, dang, _HV, _hinh_hv_O(), _TEN_HV, CAP, _GOC_HV, tra_loi_ngan=True)
+
+
+# =====================================================================
+# 16/10/2026 - BAI 7 BO SUNG theo cau mau co Lan gui (co Lan duyet ke hoach):
+#   NB037_MC_E_01/_02 (chi MC - ngoai le): dien khuyet dinh nghia / ki hieu, diem dau, diem cuoi cua vecto.
+#   NB037_MC_A_03, NB037_SA_A_02: ba, bon diem thang hang THEO THU TU -> cap vecto cung huong / nguoc huong.
+#   NB037_MC_F / SA_F: dem so diem D thoa mot dieu kien ve vecto (vo so / 0 / 1 / 2); SA chi dung truong hop huu han.
+# Moi de: ten diem, menh de, dieu kien chon ngau nhien.
+# =====================================================================
+
+_B7_TEN_DIEM = ["ABCD", "MNPQ", "EFGH", "IJKL", "ABCE", "DEFG", "MNPK", "XYZT"]
+
+
+def _b7_hai_ten():
+    return random.sample(list("ABCDEFGHIKMNPQ"), 2)
+
+
+# ---------------------------------------------------------------- E: dien khuyet dinh nghia, ki hieu
+def _b7_dinh_nghia():
+    """Kho mệnh đề điền khuyết; tên điểm ngẫu nhiên. Mỗi phần tử: (câu dẫn, đáp án, [nhiễu], lời giải)."""
+    X, Y, Z = random.sample(list("ABCDEFGHIKMNPQ"), 3)
+    xy, yx = _vt(X, Y), _vt(Y, X)
+    return [
+        (r"Vectơ là một đoạn thẳng", "có hướng",
+         ["có hướng dương và hướng âm", "có hai đầu mút", "có độ dài bằng $1$", "nằm ngang"],
+         "Vectơ là một đoạn thẳng có hướng, nghĩa là trong hai điểm mút đã chỉ rõ điểm nào là điểm đầu, điểm nào là điểm cuối."),
+        (r"Giá của vectơ $%s$ ($%s \ne %s$) là" % (xy, X, Y), r"đường thẳng $%s$" % (X + Y),
+         [r"đoạn thẳng $%s$" % (X + Y), r"độ dài đoạn thẳng $%s$" % (X + Y), r"tia $%s$" % (X + Y), r"điểm $%s$" % Y],
+         r"Đường thẳng đi qua điểm đầu và điểm cuối của một vectơ gọi là giá của vectơ đó; giá của $%s$ là đường thẳng $%s$." % (xy, X + Y)),
+        (r"Độ dài của vectơ $%s$ là" % xy, r"độ dài đoạn thẳng $%s$" % (X + Y),
+         [r"đường thẳng $%s$" % (X + Y), r"tia $%s$" % (Y + X), r"vectơ $%s$" % yx, r"số $1$"],
+         r"Độ dài của vectơ là khoảng cách giữa điểm đầu và điểm cuối: $\left|%s\right| = %s$." % (xy, X + Y)),
+        (r"Hai vectơ được gọi là cùng phương nếu", "giá của chúng song song hoặc trùng nhau",
+         ["chúng có cùng độ dài", "giá của chúng vuông góc với nhau", "chúng có chung điểm đầu", "giá của chúng cắt nhau"],
+         "Theo định nghĩa: hai vectơ cùng phương nếu giá của chúng song song hoặc trùng nhau."),
+        (r"Hai vectơ cùng phương thì", "chúng cùng hướng hoặc ngược hướng",
+         ["chúng luôn cùng hướng", "chúng có cùng độ dài", "chúng bằng nhau", "giá của chúng luôn trùng nhau"],
+         "Nếu hai vectơ cùng phương thì chúng chỉ có thể cùng hướng hoặc ngược hướng."),
+        (r"Hai vectơ cùng hướng thì", "chúng cùng phương",
+         ["chúng bằng nhau", "chúng có cùng độ dài", "giá của chúng vuông góc", "chúng có chung điểm cuối"],
+         "Hai vectơ cùng hướng trước hết phải cùng phương (giá song song hoặc trùng nhau)."),
+        (r"Vectơ-không là vectơ", "có điểm đầu và điểm cuối trùng nhau",
+         ["có độ dài bằng $1$", "không có giá", "có điểm đầu là gốc toạ độ", "không cùng phương với vectơ nào"],
+         r"Vectơ có điểm đầu và điểm cuối trùng nhau gọi là vectơ-không, kí hiệu $\overrightarrow{0}$."),
+        (r"Ba điểm phân biệt $%s$, $%s$, $%s$ thẳng hàng khi và chỉ khi hai vectơ $%s$ và $%s$" % (X, Y, Z, xy, _vt(X, Z)),
+         "cùng phương",
+         ["cùng hướng", "ngược hướng", "có cùng độ dài", "bằng nhau"],
+         r"$%s$, $%s$, $%s$ thẳng hàng khi và chỉ khi $%s$ và $%s$ có giá trùng nhau, tức là cùng phương (có thể cùng hướng hoặc ngược hướng)."
+         % (X, Y, Z, xy, _vt(X, Z))),
+        (r"Hai vectơ $%s$ và $%s$" % (xy, yx), "có cùng độ dài và ngược hướng",
+         ["bằng nhau", "cùng hướng", "có độ dài khác nhau", "không cùng phương"],
+         r"$%s$ và $%s$ có chung giá $%s$, cùng độ dài $%s$ nhưng hướng ngược nhau." % (xy, yx, X + Y, X + Y)),
+    ]
+
+
+def L10_C4_B7_NB037_MC_E_01(socau, dang=1):
+    r"""Điền khuyết định nghĩa: vectơ là đoạn thẳng có hướng; giá, độ dài, cùng phương, vectơ-không. Mệnh đề và ba
+    phương án nhiễu chọn ngẫu nhiên từ kho (theo câu mẫu cô Lan gửi 16/10/2026: "Véc-tơ là một đoạn thẳng ...").
+
+    CLAUDE THEM 16/10/2026 - chi co MC (ban SA dap so luon 1, vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for mo, dung, sai, ly in random.sample(_b7_dinh_nghia(), min(socau, 9)):
+        cau += MC_SA_answer_text(mo, dung, random.sample(sai, 3), ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_MC_E_02(socau, dang=1):
+    r"""Kí hiệu vectơ: vectơ có điểm đầu $X$, điểm cuối $Y$ kí hiệu thế nào; hoặc cho $\overrightarrow{XY}$, hỏi điểm đầu /
+    điểm cuối / độ dài kí hiệu thế nào. Tên điểm ngẫu nhiên (theo câu mẫu cô Lan gửi).
+
+    CLAUDE THEM 16/10/2026 - chi co MC; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        X, Y = _b7_hai_ten()
+        kieu = random.choice(["ki_hieu", "dau", "cuoi", "do_dai"])
+        if kieu == "ki_hieu":
+            de = r"Vectơ có điểm đầu $%s$ và điểm cuối $%s$ được kí hiệu là" % (X, Y)
+            dung = "$%s$" % _vt(X, Y)
+            sai = ["$%s$" % (X + Y), "$%s$" % _vt(Y, X), r"$\left|%s\right|$" % _vt(X, Y)]
+            ly = r"Vectơ có điểm đầu $%s$, điểm cuối $%s$ được kí hiệu là $%s$." % (X, Y, _vt(X, Y))
+        elif kieu in ("dau", "cuoi"):
+            de = r"Điểm %s của vectơ $%s$ là" % ("đầu" if kieu == "dau" else "cuối", _vt(X, Y))
+            dung = "điểm $%s$" % (X if kieu == "dau" else Y)
+            sai = ["điểm $%s$" % (Y if kieu == "dau" else X), "trung điểm của đoạn thẳng $%s$" % (X + Y),
+                   "đường thẳng $%s$" % (X + Y)]
+            ly = r"Vectơ $%s$ có điểm đầu là $%s$, điểm cuối là $%s$." % (_vt(X, Y), X, Y)
+        else:
+            de = r"Độ dài của vectơ $%s$ được kí hiệu là" % _vt(X, Y)
+            dung = r"$\left|%s\right|$" % _vt(X, Y)
+            sai = ["$%s$" % _vt(X, Y), "$%s$" % _vt(Y, X), r"$-%s$" % _vt(X, Y)]
+            ly = r"Độ dài của vectơ $%s$ kí hiệu là $\left|%s\right|$, và $\left|%s\right| = %s$." % (
+                _vt(X, Y), _vt(X, Y), _vt(X, Y), X + Y)
+        cau += MC_SA_answer_text(de, dung, sai, ly, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------- A: diem thang hang theo thu tu
+def _b7_thang_hang():
+    """n điểm thẳng hàng theo thứ tự trên đường thẳng: trả về (tên các điểm, mô tả, danh sách cặp (u, w, cùng hướng))."""
+    n = random.choice([3, 3, 4])
+    ten = list(random.choice(_B7_TEN_DIEM))[:n]
+    if random.random() < 0.3:
+        ten = ten[::-1] if n == 3 else ten
+    vi_tri = {t: i for i, t in enumerate(ten)}
+    vts = [(p, q) for p in ten for q in ten if p != q]
+    cap = []
+    for i, u in enumerate(vts):
+        for w in vts[i + 1:]:
+            if set(u) == set(w):              # cung mot doan (AB va BA): qua de
+                continue
+            hu = vi_tri[u[1]] > vi_tri[u[0]]
+            hw = vi_tri[w[1]] > vi_tri[w[0]]
+            cap.append((u, w, hu == hw))
+    if n == 3:
+        mo = r"Cho ba điểm $%s$, $%s$, $%s$ thẳng hàng theo thứ tự đó (điểm $%s$ nằm giữa $%s$ và $%s$)." % (
+            ten[0], ten[1], ten[2], ten[1], ten[0], ten[2])
+    else:
+        mo = r"Cho bốn điểm $%s$, $%s$, $%s$, $%s$ phân biệt, thẳng hàng theo thứ tự đó." % tuple(ten)
+    return ten, mo, cap
+
+
+def _b7_ly_cap(u, w, cung, ten):
+    huong = lambda v: "từ $%s$ đến $%s$" % v
+    return (r"$%s$ và $%s$ cùng nằm trên đường thẳng chứa các điểm, $%s$ có hướng %s, $%s$ có hướng %s nên chúng %s."
+            % (_vt(*u), _vt(*w), _vt(*u), huong(u), _vt(*w), huong(w), "cùng hướng" if cung else "ngược hướng"))
+
+
+def L10_C4_B7_NB037_MC_A_03(socau, dang=1):
+    r"""Ba hoặc bốn điểm thẳng hàng THEO THỨ TỰ (không hình vẽ): cặp vectơ nào cùng hướng (ngược hướng). Ba phương án
+    nhiễu là các cặp ngược (cùng) hướng - đều cùng phương nên phải xét hướng.
+
+    CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui; bien the cua NB037_MC_A (nhan ra cung phuong, cung huong); co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        ten, mo, cap = _b7_thang_hang()
+        hoi_cung = random.random() < 0.6
+        dung_ds = [c for c in cap if c[2] == hoi_cung]
+        sai_ds = [c for c in cap if c[2] != hoi_cung]
+        d = random.choice(dung_ds)
+        sai = random.sample(sai_ds, 3)
+        fmt = lambda c: r"$%s$ và $%s$" % (_vt(*c[0]), _vt(*c[1]))
+        de = mo + r" Cặp vectơ nào sau đây %s?" % ("cùng hướng" if hoi_cung else "ngược hướng")
+        ly = r"Các vectơ đều có giá là đường thẳng chứa các điểm nên cùng phương; xét hướng: " + _b7_ly_cap(d[0], d[1], d[2], ten)
+        cau += MC_SA_answer_text(de, fmt(d), [fmt(c) for c in sai], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_A_02(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng NB037_MC_A_03: ba/bốn điểm thẳng hàng theo thứ tự, cho bốn cặp vectơ, đếm số cặp cùng
+    hướng (ngược hướng). Đáp số từ $1$ đến $3$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        ten, mo, cap = _b7_thang_hang()
+        hoi_cung = random.random() < 0.5
+        for _lan in range(200):
+            chon = random.sample(cap, 4)
+            k = sum(1 for c in chon if c[2] == hoi_cung)
+            if 1 <= k <= 3:
+                break
+        hoi = "cùng hướng" if hoi_cung else "ngược hướng"
+        dong = r"\\ ".join(r"%d) $%s$ và $%s$" % (i + 1, _vt(*c[0]), _vt(*c[1])) for i, c in enumerate(chon))
+        de = mo + r" Cho bốn cặp vectơ: \\ " + dong + r"\\ Có bao nhiêu cặp vectơ %s?" % hoi
+        ly = (r"Các vectơ đều cùng phương (giá là đường thẳng chứa các điểm); chỉ cần so hướng:\\ "
+              + r"\\ ".join(r"Cặp %d: %s" % (i + 1, "cùng hướng" if c[2] else "ngược hướng") for i, c in enumerate(chon))
+              + r".\\ Vậy có $%d$ cặp vectơ %s." % (k, hoi))
+        cau += MC_SA_answer_const(de, str(k), [str(x) for x in _c4_nhieu_so(k, [4 - k, k + 1, k - 1, 4, 0])], ly, 0, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------- F: dem so diem D thoa dieu kien vecto
+def _b7_dieu_kien_D():
+    """(câu dẫn, số điểm D: 'vô số' hoặc số nguyên, lời giải). Câu dẫn chỉ nêu các điểm mà điều kiện dùng đến."""
+    A, B, C, D = random.choice(["ABCD", "MNPQ", "EFGH", "ABCM", "MNPK", "IJKL"])
+    ab, cd, ba = _vt(A, B), _vt(C, D), _vt(B, A)
+    k = random.choice([2, 3])
+    ds = [
+        # (dieu kien, so diem, loi giai, can C ngoai duong thang AB)
+        (r"$%s = %s$" % (ab, cd), 1,
+         r"$%s = %s$ khi và chỉ khi $%s$ cùng hướng với $%s$ và $%s = %s$: từ $%s$ chỉ có đúng một điểm $%s$ như vậy."
+         % (ab, cd, cd, ab, C + D, A + B, C, D), False),
+        (r"$%s = %s$" % (_vt(D, C), ab), 1,
+         r"$%s = %s$ thì $%s = %s$, tức $%s$ là điểm duy nhất sao cho vectơ từ $%s$ đến $%s$ bằng $%s$: có đúng một điểm."
+         % (_vt(D, C), ab, cd, ba, D, C, D, ba), False),
+        (r"$\left|%s\right| = \left|%s\right|$" % (ab, cd), "vô số",
+         r"$\left|%s\right| = \left|%s\right| \Leftrightarrow %s = %s$: tập hợp các điểm $%s$ là đường tròn tâm $%s$, bán kính $%s$, nên có vô số điểm."
+         % (ab, cd, C + D, A + B, D, C, A + B), False),
+        (r"$%s$ cùng phương với $%s$ ($%s \ne %s$)" % (cd, ab, D, C), "vô số",
+         r"$%s$ cùng phương với $%s$ khi $%s$ thuộc đường thẳng qua $%s$ song song (hoặc trùng) với đường thẳng $%s$, khác $%s$: có vô số điểm."
+         % (cd, ab, D, C, A + B, C), False),
+        (r"$%s$ cùng phương với $%s$ và $\left|%s\right| = \left|%s\right|$" % (cd, ab, cd, ab), 2,
+         r"$%s$ thuộc đường thẳng qua $%s$ cùng phương với $%s$ và $%s = %s$: có hai điểm, đối xứng nhau qua $%s$ (một điểm cho $%s$ cùng hướng, một điểm cho $%s$ ngược hướng với $%s$)."
+         % (D, C, ab, C + D, A + B, C, cd, cd, ab), False),
+        (r"$%s$ cùng phương với $%s$ và $\left|%s\right| = %d\left|%s\right|$" % (cd, ab, cd, k, ab), 2,
+         r"$%s$ thuộc đường thẳng qua $%s$ cùng phương với $%s$ và $%s = %d%s$: có hai điểm, đối xứng nhau qua $%s$."
+         % (D, C, ab, C + D, k, A + B, C), False),
+        (r"$%s$ cùng hướng với $%s$ và $\left|%s\right| = %d\left|%s\right|$" % (cd, ab, cd, k, ab), 1,
+         r"Trên đường thẳng qua $%s$ cùng phương với $%s$, chỉ có một điểm $%s$ để $%s$ cùng hướng với $%s$ và $%s = %d%s$."
+         % (C, ab, D, cd, ab, C + D, k, A + B), False),
+        (r"$%s$ ngược hướng với $%s$ và $\left|%s\right| = \left|%s\right|$" % (cd, ab, cd, ab), 1,
+         r"Khi đó $%s = %s$: chỉ có đúng một điểm $%s$." % (cd, ba, D), False),
+        (r"$%s$ cùng phương với $%s$ và $%s$ thuộc đường thẳng $%s$" % (cd, ab, D, A + B), 0,
+         r"$%s$ cùng phương với $%s$ thì $%s$ thuộc đường thẳng qua $%s$ song song với $%s$; đường thẳng này không cắt đường thẳng $%s$ (vì $%s$ không thuộc $%s$). Vậy không có điểm nào."
+         % (cd, ab, D, C, A + B, A + B, C, A + B), True),
+        (r"$%s = %s$" % (_vt(D, A), _vt(D, B)), 0,
+         r"$%s = %s$ thì $%s$ trùng $%s$, trái giả thiết $%s \ne %s$. Vậy không có điểm nào." % (_vt(D, A), _vt(D, B), A, B, A, B), False),
+        (r"$%s = %s$" % (_vt(A, D), _vt(D, B)), 1,
+         r"$%s = %s$ khi và chỉ khi $%s$ là trung điểm của đoạn thẳng $%s$: có đúng một điểm." % (_vt(A, D), _vt(D, B), D, A + B), False),
+        (r"$\left|%s\right| = \left|%s\right|$" % (_vt(D, A), _vt(D, B)), "vô số",
+         r"$%s = %s$: $%s$ thuộc đường trung trực của đoạn thẳng $%s$, có vô số điểm." % (D + A, D + B, D, A + B), False),
+    ]
+    dk, so, ly, can_ngoai = random.choice(ds)
+    if can_ngoai:
+        mo = (r"Cho hai điểm phân biệt $%s$, $%s$ và điểm $%s$ không thuộc đường thẳng $%s$. Có bao nhiêu điểm $%s$ thoả mãn %s?"
+              % (A, B, C, A + B, D, dk))
+    elif C in dk.replace(D, ""):
+        mo = r"Cho hai điểm phân biệt $%s$, $%s$ và điểm $%s$. Có bao nhiêu điểm $%s$ thoả mãn %s?" % (A, B, C, D, dk)
+    else:
+        mo = r"Cho hai điểm phân biệt $%s$, $%s$. Có bao nhiêu điểm $%s$ thoả mãn %s?" % (A, B, D, dk)
+    return mo, so, ly
+
+
+def L10_C4_B7_NB037_MC_F_01(socau, dang=1):
+    r"""Đếm số điểm $D$ thoả một điều kiện về vectơ: bằng nhau, cùng độ dài (đường tròn, trung trực), cùng phương,
+    cùng phương và cùng độ dài, vectơ-không... Đáp án trong $\{$vô số; $0$; $1$; $2\}$. Theo câu mẫu cô Lan gửi
+    ($\left|\overrightarrow{AB}\right| = \left|\overrightarrow{CD}\right|$: vô số).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        mo, so, ly = _b7_dieu_kien_D()
+        tat_ca = ["Vô số", "$0$", "$1$", "$2$"]
+        dung = "Vô số" if so == "vô số" else "$%d$" % so
+        cau += MC_SA_answer_text(mo, dung, [x for x in tat_ca if x != dung], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B7_NB037_SA_F_01(socau, dang=2):
+    r"""Trả lời ngắn cùng dạng NB037_MC_F: chỉ dùng điều kiện có HỮU HẠN điểm $D$ ($0$, $1$ hoặc $2$).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        while True:
+            mo, so, ly = _b7_dieu_kien_D()
+            if so != "vô số":
+                break
+        cau += MC_SA_answer_const(mo, str(so), [str(x) for x in (0, 1, 2, 3, 4) if x != so], ly, 0, 0, dang)
+    return cau

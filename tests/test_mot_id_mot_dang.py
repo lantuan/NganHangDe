@@ -91,7 +91,9 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C4_B11_NB057_MC_A",  # chung diem dau: tam giac deu / hinh vuong / cung-nguoc huong
     "L10_C4_B11_TH057_MC_A",  # khong chung diem dau: tam giac deu / hinh vuong
     "L10_C4_B11_TH057_MC_B",  # chung diem cuoi: tam giac deu / hinh vuong
-    "L10_C4_B7_NB037_MC_A",   # chon khang dinh cung phuong/cung huong theo hinh co dinh / theo kho hinh xoay vong
+    "L10_C4_B7_NB037_MC_A",   # chon khang dinh cung phuong/cung huong theo hinh co dinh / theo kho hinh xoay vong / _03 diem thang hang theo thu tu
+    "L10_C4_B7_NB037_SA_A",   # _01 dem cap trong hinh, _02 diem thang hang theo thu tu
+    "L10_C4_B7_NB037_MC_E",   # _01 dien khuyet dinh nghia, _02 ki hieu / diem dau / diem cuoi / do dai
     "L10_C4_B7_NB038_MC_A",   # chon dang thuc vecto bang nhau dung (sai) theo hinh co dinh / theo kho hinh
     "L10_C5_B14_NB085_MC_A",  # khang dinh dung / khang dinh sai / tinh huong can thong ke
     "L10_C1_B1_VD014_MC_A",   # tham so k: voi moi x dung / ton tai x dung / voi moi x sai

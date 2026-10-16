@@ -3,14 +3,15 @@
     "id": "L10_C4_B7_NB037_MC_A",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước"
+    "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước hoặc với các điểm thẳng hàng theo thứ tự cho trước",
+    "ghi_chu": "16/10/2026 CLAUDE THEM bien the _03: ba, bon diem thang hang theo thu tu (cau mau co Lan gui); co Lan duyet ke hoach"
   },
   {
     "id": "L10_C4_B7_NB037_SA_A",
     "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước",
-    "ghi_chu": "CLAUDE THEM 14/10/2026 theo quy uoc MC_x - SA_x cung kieu cung chu cai (ban tra loi ngan cua MC_A: dem so cap vecto cung huong/nguoc huong trong hinh); co Lan duyet"
+    "Dang": "Nhận ra hai vectơ cùng phương, cùng hướng trong hình cho trước hoặc với các điểm thẳng hàng theo thứ tự cho trước",
+    "ghi_chu": "CLAUDE THEM 14/10/2026 theo quy uoc MC_x - SA_x cung kieu cung chu cai (ban tra loi ngan cua MC_A: dem so cap vecto cung huong/nguoc huong trong hinh); co Lan duyet; 16/10/2026 CLAUDE THEM bien the _02: ba, bon diem thang hang theo thu tu (cau mau co Lan gui); co Lan duyet ke hoach"
   },
   {
     "id": "L10_C4_B7_NB037_MC_B",
@@ -53,6 +54,27 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Chọn khẳng định đúng (sai) về vectơ, giá, độ dài, cùng phương, cùng hướng, ngược hướng",
     "ghi_chu": "CLAUDE THEM 14/10/2026 theo quy uoc MC_x - SA_x cung kieu cung chu cai (ban tra loi ngan cua MC_D: dem so khang dinh dung trong 4 khang dinh); co Lan duyet"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_E",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Điền khuyết định nghĩa, kí hiệu vectơ: vectơ là đoạn thẳng có hướng; giá, độ dài, điểm đầu, điểm cuối, cùng phương, vectơ-không",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui; co Lan duyet ke hoach; _01 dien khuyet dinh nghia, _02 ki hieu / diem dau / diem cuoi / do dai; chi co MC (ban SA dap so luon 1 - vo ly, ghi ngoai le); co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C4_B7_NB037_MC_F",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Đếm số điểm D thoả mãn một điều kiện về vectơ (bằng nhau, cùng độ dài, cùng phương, cùng hướng, ngược hướng): vô số, 0, 1 hoặc 2 điểm",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui; co Lan duyet ke hoach; phuong an luon la Vo so, 0, 1, 2; co Lan duyet lai noi dung"
+  },
+  {
+    "id": "L10_C4_B7_NB037_SA_F",
+    "content": "Nhận biết được định nghĩa vectơ, độ dài vectơ, hai vectơ cùng phương, hai vectơ cùng hướng.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Đếm số điểm D thoả mãn một điều kiện về vectơ (bằng nhau, cùng độ dài, cùng phương, cùng hướng, ngược hướng): vô số, 0, 1 hoặc 2 điểm",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui; co Lan duyet ke hoach; ban tra loi ngan cua NB037_MC_F (cung Dang): chi dung dieu kien co huu han diem (0, 1, 2); co Lan duyet lai noi dung"
   },
   {
     "id": "L10_C4_B7_TH037_MC_A",
