@@ -51,7 +51,7 @@ def test_bo_chon_gan_co(monkeypatch):
     for _ in range(60):
         ds = q.select_questions(lop=10, blueprint=bp, cho_phep_thieu=True)
         for c in ds:
-            if c["generator_id"].startswith(tuple("L10_C3_B5_VD030_MC_" + x for x in "ABCDEFG")):   # D-G them 16/10/2026
+            if c["generator_id"].startswith(tuple("L10_C3_B5_VD030_MC_" + x for x in "ABCDEFGH")):   # D-H them 16/10/2026
                 assert c.get("ngoai_yccd") is True
                 thay = True
             else:

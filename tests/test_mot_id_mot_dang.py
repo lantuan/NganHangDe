@@ -208,6 +208,7 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C3_B5_VD030_MC_A",   # luyen tap them: bieu thuc dong bac, _01 cho tan, _02 cho cot
     "L10_C3_B5_VD030_MC_B",   # luyen tap them: _01 tan +- cot -> tan^2 + cot^2, _02 hoi nguoc
     "L10_C3_B5_VD030_MC_D",   # luyen tap them: thuan nhat bac hai, _01 cho tan, _02 cho cot
+    "L10_C3_B5_VD030_MC_H",   # luyen tap them: _01 cho cos (0 < a < 180), _02 cho sin + goc nhon/tu
     "L10_C3_B5_VD031_MC_A",   # luyen tap them: _01 tich tan ghep phu, _02 tong cos ghep bu
     "L10_C3_B6_TH033_MC_D",   # hoi nguoc dinh li sin: _01 biet a va R, _02 he thuc k.a.sinB = b.can n
     "L10_C3_B6_TH033_MC_E",   # ti le canh = ti le sin: _01 chu vi, _02 ti so duong cao

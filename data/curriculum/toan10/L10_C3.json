@@ -107,6 +107,13 @@
           "L10_C3_B5_VD030_MC_G",
           "L10_C3_B5_VD030_SA_G"
         ]
+      },
+      {
+        "mo_ta": "Biết cos (0° < α < 180°) hoặc sin (góc nhọn / tù): tìm sin, cos có xét dấu rồi tan, cot, tính biểu thức a.f + b.g (có tan hoặc cot)",
+        "mapping_id": [
+          "L10_C3_B5_VD030_MC_H",
+          "L10_C3_B5_VD030_SA_H"
+        ]
       }
     ],
     "ghi_chu_luyen_tap_them": "Các dạng trong dang_luyen_tap_them là LUYỆN TẬP THÊM, không có trong yêu cầu cần đạt của Bộ. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Bai 5 lop 10 muc VD (16/10/2026, co Lan duyet ke hoach ID): L10_C3_B5_VD030 D, E, F, G (luyen tap them).
+"""Bai 5 lop 10 muc VD (16/10/2026, co Lan duyet ke hoach ID): L10_C3_B5_VD030 D, E, F, G, H (luyen tap them).
 
 Dap so TINH LAI DOC LAP bang so thuc: doc dieu kien trong de, TIM GOC alpha bang quet so tren (0; 180) do (khong dung
 cong thuc cua ham sinh), roi tinh bieu thuc hoi bang math. Cau F (biet sin +- cos, tan + cot) kiem them: MOI goc thoa dieu
@@ -106,7 +106,8 @@ def _kiem_mc(dap, nhieu, dung):
 
 def _kiem_sa(de, dap, dung):
     if "làm tròn kết quả đến hàng phần trăm" in de:
-        assert abs(_so(dap) - round(dung, 2)) < 1e-9, (dap, dung)
+        # lam tron den hang phan tram: sai so <= 0,005 (bang 0,005 khi lam tron len o chu so 5)
+        assert abs(_so(dap) - dung) <= 0.005 + 1e-9 and abs(_so(dap) * 100 - round(_so(dap) * 100)) < 1e-9, (dap, dung)
     else:
         assert abs(_so(dap) - dung) < 1e-9, (dap, dung)
     assert len(dap) <= 4
@@ -179,7 +180,8 @@ def test_g_hang_so_doc_lap(ten):
 
 
 def test_dung_loai_cau_va_da_dang():
-    for ten in ["MC_D_01", "MC_D_02", "SA_D_01", "MC_E_01", "SA_E_01", "MC_F_01", "SA_F_01", "MC_G_01", "SA_G_01"]:
+    for ten in ["MC_D_01", "MC_D_02", "SA_D_01", "MC_E_01", "SA_E_01", "MC_F_01", "SA_F_01", "MC_G_01", "SA_G_01",
+                "MC_H_01", "MC_H_02", "SA_H_01"]:
         de_khac = set()
         for s in range(60):
             random.seed(s)
@@ -190,3 +192,26 @@ def test_dung_loai_cau_va_da_dang():
                 assert r"\shortans" in o and r"\choice" not in o
             de_khac.add(o.split(r"\choice")[0].split(r"\shortans")[0])
         assert len(de_khac) >= 30, (ten, len(de_khac))      # python tu sinh, khong phai de chet
+
+
+# ---------------------------------------------------------------- H (VD): biet cos (0 < a < 180) / sin + goc nhon, tu
+@pytest.mark.parametrize("ten", ["MC_H_01", "MC_H_02", "SA_H_01"])
+def test_h_dap_so_doc_lap(ten):
+    for s in range(SO_LAN // 2):
+        de, dap, nhieu, giai = _bat(ten, s)
+        m = re.search(r"là góc (tù|nhọn) thoả mãn \$\\sin\\alpha = (.+?)\$", de)
+        if m:
+            v = tinh(m.group(2))
+            goc = [a for a in _cac_goc(lambda x: _gia_tri(r"\sin\alpha", x) - v) if (a > 90) == (m.group(1) == "tù")]
+        else:
+            v = tinh(re.search(r"\$\\cos\\alpha = (.+?)\$", de).group(1))
+            assert r"0^\circ < \alpha < 180^\circ" in de
+            goc = _cac_goc(lambda x: _gia_tri(r"\cos\alpha", x) - v)
+        assert len(goc) == 1, (de, goc)                    # dieu kien xac dinh duy nhat goc
+        bt = re.search(r"biểu thức \$P = (.+?)\$", de).group(1)
+        assert r"\tan\alpha" in bt or r"\cot\alpha" in bt
+        dung = _gia_tri(bt, goc[0])
+        if ten.startswith("MC"):
+            _kiem_mc(dap, nhieu, dung)
+        else:
+            _kiem_sa(de, dap, dung)

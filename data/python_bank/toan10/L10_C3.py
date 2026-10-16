@@ -18036,9 +18036,10 @@ def _vd5_sa(v, toi_da=4):
     s = _so_thap_phan_gon(v, toi_da)
     if s is not None:
         return s, False
-    x = float(v)
-    t = ("%.2f" % x).rstrip("0").rstrip(".").replace(".", DAU_THAP_PHAN)
-    return (t, True) if len(t) <= toi_da and abs(x) >= 0.1 else (None, True)
+    from decimal import Decimal, ROUND_HALF_UP                     # lam tron tu gia tri CHINH XAC (0,595 -> 0,6)
+    x = Decimal(str(Integer(0) + v.evalf(40) if hasattr(v, "evalf") else v)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+    t = str(x).rstrip("0").rstrip(".").replace(".", DAU_THAP_PHAN)
+    return (t, True) if len(t) <= toi_da and abs(x) >= Decimal("0.1") else (None, True)
 
 
 # ---------------------------------------------------------------- D: thuan nhat bac hai
@@ -18472,3 +18473,119 @@ def L10_C3_B5_VD030_SA_G_01(socau, dang=2):
 
     CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
     return _vd5_G(socau, dang)
+
+
+# =====================================================================
+# 16/10/2026 - VD030_H (VD): biet MOT gia tri luong giac (cos voi 0 < alpha < 180, hoac sin voi goc nhon / tu) -> tinh
+# bieu thuc P = a.f + b.g cua cac gia tri luong giac khac (co tan hoac cot): phai tim sin / cos CO XET DAU roi tan, cot.
+# Co Lan dua mau (Vi du 2: cos = -1/3, a) tan, b) P = tan + 2cot) "chuyen thanh de MC, SA o muc do VD". Ngan hang da co
+# TH030_MC_K / SA_K (biet cos tim MOT gia tri: y a cua mau) nhung chua co cau tinh bieu thuc -> chu moi H (khac VD030_C:
+# C chi can sin^2, cos^2 nen khong xet dau). LUYEN TAP THEM nhu ca VD030 (YCCD Bai 5 cua Bo chi NB/TH).
+# =====================================================================
+
+_VD5H_TEN = {"sin": r"\sin\alpha", "cos": r"\cos\alpha", "tan": r"\tan\alpha", "cot": r"\cot\alpha"}
+
+
+def _vd5h_gia_tri(cho, v, tu):
+    """(sin, cos) chinh xac tu dieu kien: cho = 'cos' (0 < a < 180) hoac 'sin' voi tu = True (goc tu) / False (nhon)."""
+    if cho == "cos":
+        return sqrt(1 - v ** 2), v
+    co = sqrt(1 - v ** 2)
+    return v, (-co if tu else co)
+
+
+def _vd5h_sinh(cho, can_sa):
+    pyth = [(3, 4, 5), (4, 3, 5), (5, 12, 13), (12, 5, 13), (8, 15, 17), (15, 8, 17), (7, 24, 25), (24, 7, 25)]
+    while True:
+        if random.random() < 0.55:
+            a_, b_, c_ = random.choice(pyth)
+            v = Rational(a_, c_)
+        else:
+            v = random.choice([Rational(1, 3), Rational(2, 3), Rational(1, 4), Rational(3, 4), Rational(1, 5), Rational(2, 5),
+                               Rational(1, 2)])
+        tu = random.random() < 0.5
+        if cho == "cos" and random.random() < 0.5:
+            v = -v
+        s, c = _vd5h_gia_tri(cho, v, tu)
+        gt = {"sin": s, "cos": c, "tan": s / c, "cot": c / s}
+        con = [k for k in ("sin", "cos", "tan", "cot") if k != cho]
+        f, g = random.sample(con, 2)
+        if "tan" not in (f, g) and "cot" not in (f, g):
+            continue
+        a, b = random.choice([1, 2, 3, -1, -2]), random.choice([1, 2, 3, -1, -2, -3])
+        P = simplify(a * gt[f] + b * gt[g])
+        if P == 0:
+            continue
+        if can_sa:
+            dap, tron = _vd5_sa(P)
+            if dap is None:
+                continue
+        # nhieu: sai dau sin (cho cos) / sai dau cos (cho sin), doi tan <-> cot, -P
+        s2, c2 = (-s, c) if cho == "cos" else (s, -c)
+        sai = {"sin": s2, "cos": c2, "tan": s2 / c2, "cot": c2 / s2}
+        nhieu = [simplify(a * sai[f] + b * sai[g])]
+        doi = {"sin": "sin", "cos": "cos", "tan": "cot", "cot": "tan"}
+        nhieu.append(simplify(a * gt[doi[f]] + b * gt[doi[g]]))
+        nhieu += [-P, simplify(a * gt[f] - b * gt[g])]
+        return v, tu, (a, f), (b, g), gt, P, nhieu
+
+
+def _vd5h_cau(cho, socau, dang):
+    cau, da = "", []
+    while len(da) < socau:
+        v, tu, (a, f), (b, g), gt, P, nhieu = _vd5h_sinh(cho, dang != 1)
+        bt = _vd5_da_thuc([(a, _VD5H_TEN[f]), (b, _VD5H_TEN[g])])
+        if cho == "cos":
+            mo = r"Cho góc $\alpha$ thoả mãn $0^\circ < \alpha < 180^\circ$ và $\cos\alpha = %s$." % _L(v)
+            b1 = (r"Vì $0^\circ < \alpha < 180^\circ$ nên $\sin\alpha > 0$. Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra "
+                  r"$\sin\alpha = \sqrt{1 - \left(%s\right)^{2}} = %s$." % (_L(v), _L(gt["sin"])))
+        else:
+            mo = r"Cho $\alpha$ là góc %s thoả mãn $\sin\alpha = %s$." % ("tù" if tu else "nhọn", _L(v))
+            b1 = (r"Vì $\alpha$ là góc %s nên $\cos\alpha %s 0$. Từ $\sin^{2}\alpha + \cos^{2}\alpha = 1$ suy ra "
+                  r"$\cos\alpha = %s\sqrt{1 - \left(%s\right)^{2}} = %s$." % ("tù" if tu else "nhọn", "<" if tu else ">",
+                                                                          "-" if tu else "", _L(v), _L(gt["cos"])))
+        if (mo, bt) in da:
+            continue
+        da.append((mo, bt))
+        b2 = (r"Khi đó $\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = %s$, $\cot\alpha = \dfrac{1}{\tan\alpha} = %s$."
+              % (_L(gt["tan"]), _L(gt["cot"])))
+        def _hang(k, x, dau):
+            gt_x = _L(x) if x >= 0 else r"\left(%s\right)" % _L(x)
+            he = "" if abs(k) == 1 else r"%d\cdot" % abs(k)
+            return ("- " if k < 0 else ("+ " if dau else "")) + he + gt_x
+        thay = _hang(a, gt[f], False) + " " + _hang(b, gt[g], True)
+        giai = b1 + r"\\ " + b2 + r"\\ Vậy $P = %s = %s$." % (thay, _L(P))
+        if dang == 1:
+            de = mo + r" Giá trị của biểu thức $P = %s$ bằng" % bt
+            dap = _L(P)
+            nh = _ba_nhieu(dap, [_L(x) for x in nhieu if x != P], buoc=lambda j: _L(P + j))
+        else:
+            dap, tron = _vd5_sa(P)
+            de = mo + r" Tính giá trị của biểu thức $P = %s$%s." % (bt, " (làm tròn kết quả đến hàng phần trăm)" if tron else "")
+            nh = [s for s in (_vd5_sa(x)[0] for x in nhieu if x != P) if s] + ["0,5", "1", "2", "-1", "3", "-2"]
+        cau += MC_SA_answer_const(de, dap, nh, giai, 0, 0, dang)
+    return cau
+
+
+def L10_C3_B5_VD030_MC_H_01(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VD. Cho $0^\circ < \alpha < 180^\circ$ và $\cos\alpha$: tìm $\sin\alpha$ (dương), rồi
+    $\tan\alpha$, $\cot\alpha$, tính $P = a\cdot f + b\cdot g$ (có $\tan\alpha$ hoặc $\cot\alpha$). Phát triển ví dụ cô Lan đưa
+    ($\cos\alpha = -\dfrac{1}{3}$, $P = \tan\alpha + 2\cot\alpha$).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5h_cau("cos", socau, dang)
+
+
+def L10_C3_B5_VD030_MC_H_02(socau, dang=1):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VD. Như _01 nhưng cho $\sin\alpha$ và $\alpha$ nhọn hoặc tù: xét dấu $\cos\alpha$.
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5h_cau("sin", socau, dang)
+
+
+def L10_C3_B5_VD030_SA_H_01(socau, dang=2):
+    r"""LUYỆN TẬP THÊM (ngoài YCCĐ), VD - trả lời ngắn cùng dạng VD030_MC_H: cho $\cos\alpha$ ($0^\circ < \alpha < 180^\circ$)
+    hoặc $\sin\alpha$ (góc nhọn / tù), tính $P$. Đáp số thập phân gọn hoặc làm tròn hàng phần trăm (đề ghi rõ).
+
+    CLAUDE THEM 16/10/2026 - co Lan duyet lai."""
+    return _vd5h_cau(random.choice(["cos", "sin"]), socau, dang)
