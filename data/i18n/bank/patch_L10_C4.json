@@ -13,5 +13,10 @@
   "tim": "\\textbf{sai}",
   "thay": "\\textbf{false}",
   "tat_ca": true
+ },
+ {
+  "tim": "(\"True. \" if dung else \"Sai. \")",
+  "thay": "(\"True. \" if dung else \"False. \")",
+  "so_lan": 1
  }
 ]

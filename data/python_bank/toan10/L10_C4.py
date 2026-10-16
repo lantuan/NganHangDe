@@ -4942,3 +4942,237 @@ def L10_C4_B7_NB037_SA_F_01(socau, dang=2):
                 break
         cau += MC_SA_answer_const(mo, str(so), [str(x) for x in (0, 1, 2, 3, 4) if x != so], ly, 0, 0, dang)
     return cau
+
+
+# =====================================================================
+# 16/10/2026 - L10_C4_TF_C: DUNG/SAI theo cau mau co Lan gui (hinh binh hanh tam O; luc giac deu tam O canh a; tam giac
+# co ba trung diem). Bon y TANG DAN: a) NB vecto bang nhau, cung huong / nguoc huong (Bai 7); b) TH cung phuong, vecto doi,
+# ti so do dai (Bai 7); c) VD tong / hieu phai thay mot vecto bang vecto bang no roi dung quy tac ba diem (Bai 8);
+# d) VDC do dai cua tong / hieu (Bai 8). MOI y co kho >= 3 phat bieu dung, >= 3 phat bieu sai; chan tri do Python tinh tu
+# toa do hinh (chi dung quan he bat bien voi moi hinh binh hanh / tam giac: bang nhau, cung phuong, ti so do dai cung phuong).
+# CLAUDE THEM 16/10/2026 - co Lan gui mau; co Lan duyet lai.
+# =====================================================================
+
+def _tfc_vec(P, X, Y):
+    return (P[Y][0] - P[X][0], P[Y][1] - P[X][1])
+
+
+def _tfc_bang(u, w, e=1e-9):
+    return abs(u[0] - w[0]) < e and abs(u[1] - w[1]) < e
+
+
+def _tfc_cp(u, w):
+    return abs(u[0] * w[1] - u[1] * w[0]) < 1e-9
+
+
+def _tfc_dai(u):
+    return math.hypot(*u)
+
+
+def _tfc_k(k):
+    """Hệ số tỉ lệ hiển thị: 1 -> '', 2 -> '2', 1/2 -> '\\dfrac{1}{2}'."""
+    return {1: "", 2: "2", 0.5: r"\dfrac{1}{2}", 3: "3"}[k]
+
+
+def _tfc_hinh():
+    kieu = random.choice(["hbh", "luc_giac", "tg_trung_diem"])
+    H = _c4_hinh(kieu)
+    if kieu == "luc_giac":
+        doi = random.choice(["ABCDEF", "MNPQRS", "ABCDEF"])
+        tam = random.choice(["O", "O", "I"])
+        mp = dict(zip("ABCDEF", doi))
+        mp["O"] = tam
+        H["P"] = {mp[t]: v for t, v in H["P"].items()}
+        H["canh"] = [(mp[a], mp[b]) for a, b in H["canh"]]
+        H["tam"] = tam
+        H["mo"] = r"Cho lục giác đều $%s$ tâm $%s$, cạnh $a$ (xem hình vẽ)." % (doi, tam)
+        H["ly_do"] = r"lục giác đều cạnh $a$ ghép từ sáu tam giác đều cạnh $a$ chung đỉnh $%s$" % tam
+        H["ly_do_dai"] = (r"lục giác đều cạnh $a$: cạnh và đoạn nối tâm với đỉnh bằng $a$, đường chéo ngắn bằng $a\sqrt{3}$, "
+                          r"đường chéo qua tâm bằng $2a$")
+    elif kieu == "hbh":
+        H["mo"] = r"Cho hình bình hành $%s$ tâm $%s$ (xem hình vẽ)." % ("".join(H["da_giac"]), H["tam"])
+        H["ly_do"] = "các cạnh đối của hình bình hành song song và bằng nhau, tâm là trung điểm của hai đường chéo"
+    else:
+        H["ly_do"] = "tính chất trung điểm và đường trung bình của tam giác: đường trung bình song song và bằng nửa cạnh thứ ba"
+    return H
+
+
+def _tfc_y(H):
+    """Bốn kho phát biểu (a, b, c, d): mỗi phần tử (chuỗi \\choiceTFt, lời giải)."""
+    P = H["P"]
+    ten = list(P)
+    lg = H["kieu"] == "luc_giac"
+    vts = [(X, Y) for X in ten for Y in ten if X != Y]
+    V = {v: _tfc_vec(P, *v) for v in vts}
+    vt = lambda v: _vt(*v)
+    don_vi = 2.0                                   # canh luc giac ve dai 2 = a
+
+    def dong(phat, dung, ly):
+        """phat: phát biểu đã có $...$ (chữ ở ngoài $)."""
+        return (r"{\True %s}" % phat if dung else r"{%s}" % phat, ("Đúng. " if dung else "Sai. ") + ly)
+
+    # ---------------- a) NB: bang nhau, cung huong / nguoc huong (cac cap cung phuong, khac doan)
+    a = []
+    for i, u in enumerate(vts):
+        for w in vts[i + 1:]:
+            if set(u) == set(w) or not _tfc_cp(V[u], V[w]):
+                continue
+            bang = _tfc_bang(V[u], V[w])
+            cung = V[u][0] * V[w][0] + V[u][1] * V[w][1] > 0
+            cung_do_dai = abs(_tfc_dai(V[u]) - _tfc_dai(V[w])) < 1e-9
+            if bang:
+                a.append(dong(r"$%s = %s$" % (vt(u), vt(w)), True,
+                              r"$%s$ và $%s$ cùng hướng và cùng độ dài nên bằng nhau (%s)." % (vt(u), vt(w), H["ly_do"])))
+            elif cung_do_dai or cung:
+                a.append(dong(r"$%s = %s$" % (vt(u), vt(w)), False,
+                              r"$%s$ và $%s$ %s nên không bằng nhau." % (vt(u), vt(w), "ngược hướng" if not cung else "có độ dài khác nhau")))
+            if not set(u) & set(w):
+                hoi = random.choice(["cùng hướng", "ngược hướng"])
+                a.append(dong(r"$%s$ và $%s$ %s" % (vt(u), vt(w), hoi), cung == (hoi == "cùng hướng"),
+                              r"$%s$ và $%s$ cùng phương và %s (%s)." % (vt(u), vt(w), "cùng hướng" if cung else "ngược hướng", H["ly_do"])))
+
+    # ---------------- b) TH: cung phuong (khong tam thuong), vecto doi, ti so do dai
+    b = []
+    for i, u in enumerate(vts):
+        for w in vts[i + 1:]:
+            if set(u) & set(w):
+                continue
+            cp = _tfc_cp(V[u], V[w])
+            b.append(dong(r"$%s$ và $%s$ cùng phương" % (vt(u), vt(w)), cp,
+                          (r"Giá của $%s$ và $%s$ song song hoặc trùng nhau nên hai vectơ cùng phương." if cp else
+                           r"Giá của $%s$ và $%s$ cắt nhau nên hai vectơ không cùng phương.") % (vt(u), vt(w))))
+            if cp:
+                doi = _tfc_bang(V[u], (-V[w][0], -V[w][1]))
+                b.append(dong(r"$%s$ và $%s$ là hai vectơ đối nhau" % (vt(u), vt(w)), doi,
+                              (r"$%s$ và $%s$ ngược hướng, cùng độ dài nên là hai vectơ đối nhau (%s)." if doi else
+                               r"$%s$ và $%s$ không ngược hướng hoặc không cùng độ dài nên không phải hai vectơ đối nhau.")
+                              % ((vt(u), vt(w), H["ly_do"]) if doi else (vt(u), vt(w)))))
+                r = _tfc_dai(V[u]) / _tfc_dai(V[w])
+                for k in (0.5, 2):
+                    if abs(r - k) < 1e-9:
+                        b.append(dong(r"$\left|%s\right| = %s\left|%s\right|$" % (vt(u), _tfc_k(k), vt(w)), True,
+                                      r"$%s = %s%s$ (%s)." % ("".join(u), _tfc_k(k), "".join(w), H["ly_do"])))
+                        sai_k = 2 if k == 0.5 else 0.5
+                        b.append(dong(r"$\left|%s\right| = %s\left|%s\right|$" % (vt(u), _tfc_k(sai_k), vt(w)), False,
+                                      r"Thực ra $%s = %s%s$ (%s)." % ("".join(u), _tfc_k(k), "".join(w), H["ly_do"])))
+    if lg:
+        for u in vts:
+            d = _tfc_dai(V[u]) / don_vi
+            that = "a" if abs(d - 1) < 1e-9 else (r"a\sqrt{3}" if abs(d - math.sqrt(3)) < 1e-9 else "2a")
+            for c in ("a", r"a\sqrt{3}", "2a"):
+                b.append(dong(r"$\left|%s\right| = %s$" % (vt(u), c), c == that,
+                              r"$\left|%s\right| = %s = %s$ (%s)." % (vt(u), "".join(u), that, H["ly_do_dai"])))
+
+    # ---------------- c) VD: tong / hieu, phai thay mot vecto bang vecto bang no (khong phai quy tac 3 diem / hbh truc tiep)
+    def ten_vt(z):
+        if _tfc_dai(z) < 1e-9:
+            return r"\overrightarrow{0}"
+        for v in vts:
+            if _tfc_bang(V[v], z):
+                return vt(v)
+        return None
+
+    c, d_ = [], []
+    for u in vts:
+        for v in vts:
+            if u == v or set(u) == set(v):
+                continue
+            for phep in ("+", "-"):
+                if phep == "+" and (u[1] == v[0] or u[0] == v[0]):
+                    continue               # quy tac ba diem / hbh: qua de cho muc VD
+                if phep == "-" and u[0] == v[0]:
+                    continue               # quy tac hieu truc tiep
+                z = (V[u][0] + V[v][0], V[u][1] + V[v][1]) if phep == "+" else (V[u][0] - V[v][0], V[u][1] - V[v][1])
+                # vecto thay the bat dau tai diem cuoi cua u
+                can = V[v] if phep == "+" else (-V[v][0], -V[v][1])
+                thay = [x for x in vts if x[0] == u[1] and _tfc_bang(V[x], can)]
+                if not thay:
+                    continue
+                t = thay[0]
+                ket = ten_vt(z)
+                if ket is None:
+                    continue
+                cuoi = (u[0], t[1])
+                bt = r"%s %s %s" % (vt(u), phep, vt(v))
+                buoc = (r"Vì $%s %s %s$ nên $%s = %s + %s = %s$ (quy tắc ba điểm)."
+                        % (("-" + vt(v)) if phep == "-" else vt(v), "=", vt(t), bt, vt(u), vt(t),
+                           vt(cuoi) if cuoi[0] != cuoi[1] else r"\overrightarrow{0}"))
+                buoc_dung = buoc
+                if ket != (vt(cuoi) if cuoi[0] != cuoi[1] else r"\overrightarrow{0}"):
+                    buoc_dung += r" Mà $%s = %s$ (%s)." % (vt(cuoi), ket, H["ly_do"])
+                c.append(dong(r"$%s = %s$" % (bt, ket), True, buoc_dung))
+                # sai: nguoc chieu / doi phep tinh
+                sai_z = (-z[0], -z[1])
+                sai = ten_vt(sai_z) if _tfc_dai(z) > 1e-9 else None
+                if sai:
+                    c.append(dong(r"$%s = %s$" % (bt, sai), False, buoc + r" Không phải $%s$." % sai))
+                z2 = (V[u][0] - V[v][0], V[u][1] - V[v][1]) if phep == "+" else (V[u][0] + V[v][0], V[u][1] + V[v][1])
+                sai2 = ten_vt(z2)
+                if sai2 and not _tfc_bang(z2, z):
+                    c.append(dong(r"$%s = %s$" % (bt, sai2), False, buoc + r" Không phải $%s$." % sai2))
+                # ---------------- d) VDC: do dai cua tong / hieu
+                L = _tfc_dai(z)
+                if L < 1e-9:
+                    continue
+                if lg:
+                    dd = L / don_vi
+                    that = "a" if abs(dd - 1) < 1e-9 else (r"a\sqrt{3}" if abs(dd - math.sqrt(3)) < 1e-9 else
+                                                            ("2a" if abs(dd - 2) < 1e-9 else None))
+                    if that is None:
+                        continue
+                    for cc in ("a", r"a\sqrt{3}", "2a"):
+                        d_.append(dong(r"$\left|%s\right| = %s$" % (bt, cc), cc == that,
+                                       buoc + r" Do đó $\left|%s\right| = %s = %s$ (%s)." % (bt, "".join(cuoi), that, H["ly_do_dai"])))
+                else:
+                    for w in vts:
+                        if set(w) == set(cuoi) or not _tfc_cp(V[w], z):
+                            continue
+                        r = L / _tfc_dai(V[w])
+                        for k in (0.5, 2):
+                            if abs(r - k) < 1e-9:
+                                ly = buoc + r" Do đó $\left|%s\right| = %s = %s%s$ (%s)." % (bt, "".join(cuoi), _tfc_k(k), "".join(w), H["ly_do"])
+                                d_.append(dong(r"$\left|%s\right| = %s\left|%s\right|$" % (bt, _tfc_k(k), vt(w)), True, ly))
+                                d_.append(dong(r"$\left|%s\right| = %s\left|%s\right|$" % (bt, _tfc_k(2 if k == 0.5 else 0.5), vt(w)),
+                                               False, ly))
+                    # |u + v| = |w| voi w bang hoac doi z (khac ten): dung; voi w cung phuong khac do dai: sai
+                    for w in vts:
+                        if set(w) == set(cuoi) or not _tfc_cp(V[w], z):
+                            continue
+                        bang_dd = abs(_tfc_dai(V[w]) - L) < 1e-9
+                        ly = buoc + r" Do đó $\left|%s\right| = %s$, %s $%s$ (%s)." % (
+                            bt, "".join(cuoi), "bằng" if bang_dd else "khác", "".join(w), H["ly_do"])
+                        d_.append(dong(r"$\left|%s\right| = \left|%s\right|$" % (bt, vt(w)), bang_dd, ly))
+    return a, b, c, d_
+
+
+def _tfc_loc(ds, n=4):
+    """Giữ tối đa n đúng + n sai khác nhau, chọn ngẫu nhiên (đủ đa dạng mà lời giải gọn)."""
+    dung = list({t: (t, l) for t, l in ds if r"\True" in t}.values())
+    sai = list({t: (t, l) for t, l in ds if r"\True" not in t}.values())
+    random.shuffle(dung)
+    random.shuffle(sai)
+    return dung[:n] + sai[:n]
+
+
+def L10_C4_TF_C_01(socau, socot=1):
+    r"""Đúng/Sai theo câu mẫu cô Lan gửi: hình bình hành tâm $O$, lục giác đều tâm $O$ cạnh $a$, tam giác có ba trung điểm.
+    a) NB bằng nhau, cùng/ngược hướng; b) TH cùng phương, vectơ đối, tỉ số độ dài (độ dài theo $a$ với lục giác);
+    c) VD tổng, hiệu (thay một vectơ bằng vectơ bằng nó rồi dùng quy tắc ba điểm); d) VDC độ dài của tổng, hiệu.
+
+    CLAUDE THEM 16/10/2026 - co Lan gui mau; co Lan duyet lai."""
+    cauTF = ""
+    da = 0
+    while da < socau:
+        H = _tfc_hinh()
+        # Bon kho do _tfc_y tra ve, dung thu tu:
+        # a) NB  - hai vecto bang nhau, cung huong / nguoc huong (Bai 7)
+        # b) TH  - cung phuong, hai vecto doi nhau, ti so do dai / do dai theo a (Bai 7)
+        # c) VD  - tong, hieu: thay mot vecto bang vecto bang no roi dung quy tac ba diem (Bai 8)
+        # d) VDC - do dai cua tong, hieu (Bai 8)
+        kho = [_tfc_loc(y) for y in _tfc_y(H)]
+        if any(sum(1 for t, _ in y if r"\True" in t) < 3 or sum(1 for t, _ in y if r"\True" not in t) < 3 for y in kho):
+            continue
+        debai = H["mo"] + " Xét tính đúng sai của các khẳng định sau:"
+        cauTF += TF_baitoan_du(debai, kho, _c4_tikz(H), 0, socot)
+        da += 1
+    return cauTF

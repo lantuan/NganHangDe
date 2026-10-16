@@ -601,5 +601,12 @@
     "content": "Vectơ",
     "Loai": "Đúng sai",
     "Dang": "Vectơ trong mặt phẳng toạ độ; Tích vô hướng của hai vectơ"
+  },
+  {
+    "id": "L10_C4_TF_C",
+    "content": "Vectơ",
+    "Loai": "Đúng sai",
+    "Dang": "Các khái niệm mở đầu; Tổng và hiệu của hai vectơ - câu dẫn hình bình hành tâm O, lục giác đều tâm O cạnh a hoặc tam giác có ba trung điểm: a) bằng nhau, cùng/ngược hướng; b) cùng phương, vectơ đối, tỉ số độ dài; c) tổng, hiệu; d) độ dài tổng, hiệu",
+    "ghi_chu": "CLAUDE THEM 16/10/2026 - theo 3 cau mau Dung/Sai co Lan gui (hbh tam O, luc giac deu, tam giac trung diem); moi y >= 3 dung, >= 3 sai, chan tri tinh tu toa do hinh; y c, d lay Bai 8 de bon y tang dan NB, TH, VD, VDC; co Lan duyet lai"
   }
 ]
