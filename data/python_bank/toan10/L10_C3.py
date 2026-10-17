@@ -3123,48 +3123,53 @@ def L10_C3_B5_NB029_MC_E_01(socau, dang=1):
     r"""Xét dấu giá trị lượng giác khi đã biết khoảng của góc.
 
     CLAUDE THEM 28/09/2026 - co Lan kiem tra lai ID va mo ta.
+    SUA 17/10/2026 (co Lan): bốn phương án phải đủ bốn giá trị sin, cos, tan, cot - mỗi giá trị đúng MỘT phương án.
+    Trước đây nhiễu rút từ mọi khẳng định sai nên có lúc hai phương án cùng nói về $\tan\alpha$ ("$\tan\alpha < 0$"
+    và "$\tan\alpha > 0$"), học sinh chỉ cần chọn một trong hai.
 
-    Mỗi phương án là một khẳng định dạng "$\sin\alpha > 0$". Đáp án đúng
-    lấy từ bảng dấu, ba phương án nhiễu lấy từ các khẳng định SAI của
-    chính khoảng góc ấy - luôn có đúng 4 khẳng định sai nên không bao giờ
-    thiếu nhiễu, và không bao giờ có hai đáp án đúng.
+    Chỉ dùng góc tù: với góc nhọn cả bốn giá trị đều dương, nên khi mỗi giá trị chiếm một phương án thì đáp án là
+    phương án duy nhất có dấu khác ba phương án kia - học sinh nhìn dấu là chọn được, không cần hiểu bài.
+    Hỏi "đúng" hoặc "sai":
+    - hỏi đúng: đáp án là khẳng định đúng về một giá trị, ba nhiễu là khẳng định SAI về ba giá trị còn lại;
+    - hỏi sai: đáp án là khẳng định sai về một giá trị, ba nhiễu là khẳng định ĐÚNG về ba giá trị còn lại.
+    Với góc tù ($\sin\alpha > 0$; $\cos\alpha, \tan\alpha, \cot\alpha < 0$) không trường hợp nào để lộ đáp án
+    qua dấu: hoặc bốn phương án cùng dấu, hoặc hai phương án ">" và hai phương án "<".
     """
+    TEN = [r"\sin", r"\cos", r"\tan", r"\cot"]
+    bang = DAU_GTLG["tu"]
+
     def _viet(ten, dau):
         return r"$%s\alpha %s 0$" % (ten, ">" if dau > 0 else "<")
 
     gt = []
     while len(gt) < socau:
-        khoang = random.choice(["nhon", "tu"])
-        ten_dung = random.choice(list(DAU_GTLG[khoang].keys()))
-        v = (khoang, ten_dung)
-        if v not in gt:
+        v = (random.choice(TEN), random.choice(["dung", "sai"]))
+        if v not in gt or len(gt) >= 8:          # 8 cặp khác nhau; quá 8 câu thì cho lặp
             gt.append(v)
 
     cauTN = ""
-    for khoang, ten_dung in gt:
-        bang = DAU_GTLG[khoang]
-        dung = _viet(ten_dung, bang[ten_dung])
-        # mọi khẳng định SAI của khoảng này
-        sai = [_viet(ten, -dau) for ten, dau in bang.items()]
+    for ten_dap, hoi in gt:
+        con_lai = [t for t in TEN if t != ten_dap]
+        if hoi == "dung":
+            dung = _viet(ten_dap, bang[ten_dap])
+            nhieu = [_viet(t, -bang[t]) for t in con_lai]
+        else:
+            dung = _viet(ten_dap, -bang[ten_dap])
+            nhieu = [_viet(t, bang[t]) for t in con_lai]
 
         debai = (r"Cho góc $\alpha$ thoả mãn %s. Khẳng định nào sau đây "
-                 r"\textbf{đúng}?" % MO_TA_KHOANG[khoang])
+                 r"\textbf{%s}?" % (MO_TA_KHOANG["tu"], "đúng" if hoi == "dung" else "sai"))
 
-        dau_chu = "dương" if bang[ten_dung] > 0 else "âm"
-        if ten_dung == r"\sin":
-            cach = r"$\sin\alpha = y_M$"
-        elif ten_dung == r"\cos":
-            cach = r"$\cos\alpha = x_M$"
-        elif ten_dung == r"\tan":
-            cach = r"$\tan\alpha = \dfrac{y_M}{x_M}$"
+        giai = (LY_DO_KHOANG["tu"] + "\\\\\n"
+                + r"Do đó $\sin\alpha = y_M > 0$; $\cos\alpha = x_M < 0$; "
+                  r"$\tan\alpha = \dfrac{y_M}{x_M} < 0$; $\cot\alpha = \dfrac{x_M}{y_M} < 0$." + "\\\\\n")
+        if hoi == "dung":
+            giai += (r"Vậy khẳng định đúng là %s; ba khẳng định còn lại đều sai về dấu." % dung)
         else:
-            cach = r"$\cot\alpha = \dfrac{x_M}{y_M}$"
+            giai += (r"Vậy khẳng định sai là %s (vì %s); ba khẳng định còn lại đều đúng."
+                     % (dung, _viet(ten_dap, bang[ten_dap])))
 
-        giai = (LY_DO_KHOANG[khoang] + "\\\\\n"
-                + r"Mà %s nên $%s\alpha$ mang dấu %s, tức là %s."
-                % (cach, ten_dung, dau_chu, dung))
-
-        cauTN += MC_SA_answer_text(debai, dung, sai, giai, 0, 0, dang)
+        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
     return cauTN
 
 
