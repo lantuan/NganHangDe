@@ -179,6 +179,13 @@
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
   },
   {
+    "id": "L10_C4_B7_TH039_SA_B",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu diễn các lực bằng vectơ trên lưới ô vuông: cùng hướng, ngược hướng, bằng nhau",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_B (co Lan: o SA TH Bai 7 trong khi chon Chi theo YCCD); dem so cap luc cung huong / nguoc huong / bang nhau / cung phuong; co Lan duyet lai"
+  },
+  {
     "id": "L10_C4_B7_TH039_MC_C",
     "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -186,11 +193,25 @@
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
   },
   {
+    "id": "L10_C4_B7_TH039_SA_C",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Biểu diễn vận tốc theo hướng và độ lớn trên lưới ô vuông có la bàn",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_C (co Lan: o SA TH Bai 7 trong khi chon Chi theo YCCD); doc toc do theo huong cho truoc (ke ca huong cheo, lam tron); co Lan duyet lai"
+  },
+  {
     "id": "L10_C4_B7_TH039_MC_D",
     "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Vận tốc trong bối cảnh dòng sông, xe trên đường thẳng: cùng hướng, ngược hướng, độ lớn",
     "ghi_chu": "CLAUDE THEM 02/10/2026 - tu tai lieu CĐ day them Toan 10 Chuong 4 Bai 1 Khai niem vecto (file docx co Lan gui); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B7_TH039_SA_D",
+    "content": "Biểu diễn được một số đại lượng trong thực tiễn bằng vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Vận tốc trong bối cảnh dòng sông, xe trên đường thẳng: cùng hướng, ngược hướng, độ lớn",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_D (co Lan: o SA TH Bai 7 trong khi chon Chi theo YCCD); dem so khang dinh dung trong 4 khang dinh; co Lan duyet lai"
   },
   {
     "id": "L10_C4_B7_TH039_MC_A",

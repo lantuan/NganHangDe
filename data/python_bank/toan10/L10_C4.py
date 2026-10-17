@@ -6981,3 +6981,136 @@ def L10_C4_B8_VD040_SA_C_01(socau, dang=2):
         debai, dap, nhieu, giai, hinh = _b8_vd040c(False)
         cau += MC_SA_answer_const(debai, dap, nhieu, giai, hinh, 0, dang)
     return cau
+
+
+# =====================================================================
+# TH039 bản TRẢ LỜI NGẮN (cô Lan 17/10/2026: ô SA TH của Bài 7 trống khi chọn "Chỉ theo YCCĐ" vì TH039 chỉ có MC).
+# SA_B, SA_C, SA_D cùng Dang với MC_B, MC_C, MC_D; TH039_MC_A (chọn đại lượng là vectơ) chỉ MC.
+# =====================================================================
+def _c4_qh_luc(a, b):
+    if _c4_bang(a, b):
+        return "bằng nhau"
+    if _c4_ch(a, b):
+        return "cùng hướng"
+    if _c4_cp(a, b):
+        return "ngược hướng"
+    return "không cùng phương"
+
+
+def L10_C4_B7_TH039_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với TH039_MC_B: bốn lực $\overrightarrow{F_1}, \ldots, \overrightarrow{F_4}$ trên lưới ô
+    vuông; đếm số cặp lực cùng hướng / ngược hướng / bằng nhau / cùng phương. Python xét bằng toạ độ.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet; co Lan duyet lai."""
+    import itertools
+    cau = ""
+    so = 0
+    while so < socau:
+        hoi = random.choice(["cùng hướng", "ngược hướng", "bằng nhau", "cùng phương"])
+        goc = random.sample([(1, 0), (0, 1), (1, 1), (1, -1)], 2)
+        V = []
+        for _ in range(4):
+            g = random.choice(goc + [random.choice(list(_C4_HUONG))])
+            s = random.choice([1, -1])
+            k = random.randint(1, 3)
+            V.append((s * g[0] * k, s * g[1] * k))
+        cap = list(itertools.combinations(range(4), 2))
+        qh = {c: _c4_qh_luc(V[c[0]], V[c[1]]) for c in cap}
+        if hoi == "cùng hướng":
+            dem = [c for c in cap if qh[c] in ("cùng hướng", "bằng nhau")]
+        elif hoi == "cùng phương":
+            dem = [c for c in cap if qh[c] != "không cùng phương"]
+        else:
+            dem = [c for c in cap if qh[c] == hoi]
+        if not 1 <= len(dem) <= 4 or len(set(V)) < 3:
+            continue
+        try:
+            ds = _c4_dat_mui_ten(V)
+        except ValueError:
+            continue
+        so += 1
+        ten = [r"\overrightarrow{F_{%d}}" % (i + 1) for i in range(4)]
+        tx = lambda c: r"$%s$ và $%s$" % (ten[c[0]], ten[c[1]])
+        cau_hoi = {"cùng hướng": r"Có bao nhiêu cặp lực (không kể thứ tự) \textbf{cùng hướng}?",
+                   "ngược hướng": r"Có bao nhiêu cặp lực (không kể thứ tự) \textbf{ngược hướng}?",
+                   "bằng nhau": r"Có bao nhiêu cặp lực (không kể thứ tự) \textbf{bằng nhau}?",
+                   "cùng phương": r"Có bao nhiêu cặp lực (không kể thứ tự) \textbf{cùng phương}?"}[hoi]
+        ket = {"cùng hướng": r"\\ Vậy có $%d$ cặp lực cùng hướng (kể cả cặp bằng nhau).",
+               "ngược hướng": r"\\ Vậy có $%d$ cặp lực ngược hướng.",
+               "bằng nhau": r"\\ Vậy có $%d$ cặp lực bằng nhau.",
+               "cùng phương": r"\\ Vậy có $%d$ cặp lực cùng phương (cùng hướng hoặc ngược hướng)."}[hoi]
+        debai = (r"Các lực $%s$ tác dụng lên các vật được biểu diễn bằng các vectơ trên lưới ô vuông như hình vẽ. "
+                 % "$, $".join(ten)) + cau_hoi
+        giai = (r"Đọc hướng và độ dài các vectơ trên lưới, xét đủ $6$ cặp:\\ "
+                + r"\\ ".join(r"%s %s." % (tx(c), qh[c]) for c in cap) + ket % len(dem))
+        nhieu = [str(x) for x in (len(dem) + 1, len(dem) - 1, 6, 0, len(dem) + 2) if x != len(dem) and x >= 0]
+        cau += MC_SA_answer_const(debai, str(len(dem)), nhieu, giai, _c4_luoi(ds, ten), 0, dang)
+    return cau
+
+
+def L10_C4_B7_TH039_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với TH039_MC_C: bốn vectơ vận tốc trên lưới ô vuông có la bàn (mỗi cạnh ô ứng với
+    $10$ km/h); đọc tốc độ của vật đi theo một hướng cho trước (kể cả hướng đông bắc, tây nam... - đường chéo ô:
+    $10k\sqrt{2}$, làm tròn hàng đơn vị).
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet; co Lan duyet lai."""
+    cau = ""
+    so = 0
+    while so < socau:
+        huong = random.choice(list(_C4_HUONG))
+        cheo = huong[0] != 0 and huong[1] != 0
+        k = random.randint(1, 3) if cheo else random.randint(2, 4)
+        khac = [h for h in _C4_HUONG if h != huong]
+        V = [(huong[0] * k, huong[1] * k)]
+        for h in random.sample([(-huong[0], -huong[1])] + random.sample([x for x in khac if x != (-huong[0], -huong[1])], 3), 3):
+            kk = random.randint(1, 3) if h[0] and h[1] else random.randint(1, 4)
+            V.append((h[0] * kk, h[1] * kk))
+        thu_tu = list(range(4))
+        random.shuffle(thu_tu)
+        ten = [r"\overrightarrow{%s}" % c for c in "abcd"]
+        try:
+            ds = _c4_dat_mui_ten([V[i] for i in thu_tu], 10, 6)
+        except ValueError:
+            continue
+        so += 1
+        vi = ten[thu_tu.index(0)]
+        vat, vat_ngan = random.choice([("một chiếc thuyền", "chiếc thuyền"), ("một cơn bão", "cơn bão"),
+                                       ("một chiếc ô tô", "chiếc ô tô"), ("một đàn chim", "đàn chim"),
+                                       ("một chiếc máy bay", "chiếc máy bay")])
+        if cheo:
+            gt = 10 * k * math.sqrt(2)
+            dap = str(int(_Dec8(str(gt)).quantize(_Dec8(1), rounding=_HU8)))
+            ly = (r"Vectơ chỉ hướng %s là $%s$, là đường chéo của hình vuông cạnh $%d$ ô nên dài $%d\sqrt{2}$ cạnh ô. "
+                  r"Tốc độ là $%d\sqrt{2}\cdot 10 = %d\sqrt{2} \approx %s$ (km/h)." % (_C4_HUONG[huong], vi, k, k, k, 10 * k, dap))
+            lam = r" (làm tròn kết quả đến hàng đơn vị)"
+        else:
+            dap = str(10 * k)
+            ly = r"Vectơ chỉ hướng %s là $%s$, dài $%d$ cạnh ô nên tốc độ là $%d\cdot 10 = %s$ (km/h)." % (
+                _C4_HUONG[huong], vi, k, k, dap)
+            lam = ""
+        debai = (r"Trên lưới ô vuông (xem hình, phía trên là hướng bắc, bên phải là hướng đông), mỗi cạnh ô vuông ứng với "
+                 r"$10$ km/h. Một trong các vectơ trên hình biểu diễn vận tốc của %s đang di chuyển theo hướng %s. Tốc độ "
+                 r"của %s là bao nhiêu kilômét trên giờ%s?" % (vat, _C4_HUONG[huong], vat_ngan, lam))
+        nhieu = [str(10 * k), str(k), str(10 * (k + 1)), str(int(10 * k * 1.5)), str(10 * (k + 2)), str(10 * k + 5),
+                 str(20 * k)]
+        cau += MC_SA_answer_const(debai, dap, [x for x in nhieu if x != dap], ly, _c4_luoi(ds, ten, la_ban=True), 0, dang)
+    return cau
+
+
+def L10_C4_B7_TH039_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với TH039_MC_D: bối cảnh dòng sông (thuyền xuôi, ngược dòng) hoặc ba xe trên đường
+    thẳng; bốn khẳng định về cùng hướng, ngược hướng, bằng nhau, độ lớn; đếm số khẳng định đúng.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        mo, X = _c4_kho_song()
+        so_dung = random.choice([1, 2, 2, 3])
+        chon = random.sample([x for x in X if x[1]], so_dung) + random.sample([x for x in X if not x[1]], 4 - so_dung)
+        random.shuffle(chon)
+        de = (mo + r" Cho các khẳng định sau: \\ " + r"\\ ".join(r"%d) %s;" % (k + 1, x[0]) for k, x in enumerate(chon))
+              + r"\\ Có bao nhiêu khẳng định đúng?")
+        ly = r"\\ ".join(r"Khẳng định %d %s vì %s." % (k + 1, "đúng" if x[1] else "sai", x[2]) for k, x in enumerate(chon))
+        ly += r"\\ Vậy có $%d$ khẳng định đúng." % so_dung
+        cau += MC_SA_answer_const(de, str(so_dung), [str(x) for x in (0, 1, 2, 3, 4) if x != so_dung], ly, 0, 0, dang)
+    return cau
