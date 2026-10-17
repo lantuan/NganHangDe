@@ -6726,3 +6726,252 @@ def L10_C4_B8_NB041_SA_B_01(socau, dang=2):
 
     CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
     return _b8nb_sa_kd(_b8nb_kd_hieu, socau, dang)
+
+
+# =====================================================================
+# BÀI 8 - LUYỆN TẬP THÊM VD040 (cô Lan 17/10/2026, ảnh SGK): bài 4.9 (hai lực trên hình, góc 120 độ) là mức VẬN DỤNG
+# -> VD040_MC_B, SA_B; bài Vận dụng kéo pháo lên dốc nghiêng 30 độ là mức VẬN DỤNG CAO -> VD040_MC_C, SA_C
+# (Mapping "muc_do_dang": "VDC" - quy ước docs/04_ID_STANDARD.md). Cùng đơn vị luyện tập thêm L10_C4_B8_VD040.
+# =====================================================================
+def _b8_hinh_hai_luc(p, q, g, goc0):
+    """TikZ: hai vectơ lực chung gốc O, độ dài tỉ lệ độ lớn, cung góc g."""
+    s = 3.2 / max(p, q)
+    a1, a2 = goc0, goc0 + g
+    out = [r"\begin{tikzpicture}[>=stealth,thick,scale=0.85]"]
+    for a, d, ten in ((a1, p * s, r"\overrightarrow{F_1}"), (a2, q * s, r"\overrightarrow{F_2}")):
+        out.append(r"\draw[->] (0,0) -- (%s:%s);" % (_toa(a), _toa(d)))
+        out.append(r"\node at (%s:%s) {$%s$};" % (_toa(a), _toa(d + 0.55), ten))
+    r0 = min(0.7, 0.35 * min(p, q) * s)
+    out.append(r"\draw[thin] (%s:%s) arc (%s:%s:%s);" % (_toa(a1), _toa(r0), _toa(a1), _toa(a2), _toa(r0)))
+    out.append(r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa((a1 + a2) / 2), _toa(r0 + 0.5), g))
+    out.append(r"\fill (0,0) circle[radius=1.5pt] node[below]{\footnotesize $O$};")
+    out.append(r"\end{tikzpicture}")
+    return "\n".join(out)
+
+
+def _b8_vd040b(mc):
+    """Bài 4.9: hai lực trên hình. -> (debai, dap, nhieu, giai, hinh)."""
+    g = random.choice([60, 90, 120, 120]) if mc else random.choice([30, 45, 60, 90, 120, 135, 150])
+    while True:
+        p, q = random.randint(1, 8), random.randint(1, 8)
+        if p != q or random.random() < 0.2:
+            break
+    hoi = random.choice(["tong", "tong", "can_bang", "hieu"])
+    F1, F2, F3 = (r"\overrightarrow{F_%d}" % i for i in (1, 2, 3))
+    cos = _sp8.cos(_sp8.pi * g / 180)
+    dau = -1 if hoi == "hieu" else 1
+    R2 = _sp8.sympify(p * p + q * q + 2 * dau * p * q * cos)
+    R = _sp8.sqrt(R2)
+    mo = (r"The figure shows two forces $%s$, $%s$ acting on an object (placed at $O$); the angle between the two forces is "
+          r"$%d^\circ$, $\left|%s\right| = %d$ N, $\left|%s\right| = %d$ N." % (F1, F2, g, F1, p, F2, q))
+    if hoi == "tong":
+        cau_hoi = r"Find the magnitude of the resultant force $%s + %s$" % (F1, F2)
+    elif hoi == "can_bang":
+        cau_hoi = r"What magnitude must an additional force $%s$ have so that the object stays at rest" % F3
+    else:
+        cau_hoi = r"Find the magnitude of the vector $%s - %s$" % (F1, F2)
+    if hoi == "hieu":
+        giai = (r"Let $\overrightarrow{OA} = %s$, $\overrightarrow{OB} = %s$; then $%s - %s = \overrightarrow{OA} - "
+                r"\overrightarrow{OB} = \overrightarrow{BA}$ (subtraction rule). The triangle $OAB$ has $OA = %d$, $OB = %d$, "
+                r"$\widehat{AOB} = %d^\circ$. By the law of cosines:\\ $AB^2 = %d^2 + %d^2 - 2\cdot %d\cdot %d\cdot\cos %d^\circ = %s$."
+                % (F1, F2, F1, F2, p, q, g, p, q, p, q, g, _b8_tex(R2)))
+        tong = r"\left|%s - %s\right| = AB" % (F1, F2)
+    else:
+        giai = (r"Let $\overrightarrow{OA} = %s$, $\overrightarrow{OB} = %s$ and construct the parallelogram $OACB$; then "
+                r"$%s + %s = \overrightarrow{OC}$ (parallelogram rule). The triangle $OAC$ has $OA = %d$, $AC = OB = %d$, "
+                r"$\widehat{OAC} = 180^\circ - %d^\circ = %d^\circ$. By the law of cosines:\\ "
+                r"$OC^2 = %d^2 + %d^2 - 2\cdot %d\cdot %d\cdot\cos %d^\circ = %s$."
+                % (F1, F2, F1, F2, p, q, g, 180 - g, p, q, p, q, 180 - g, _b8_tex(R2)))
+        tong = r"\left|%s + %s\right| = OC" % (F1, F2)
+        if hoi == "can_bang":
+            giai = (r"The object is at rest when $%s + %s + %s = \overrightarrow{0}$, that is $%s = -\left(%s + %s\right)$, so "
+                    r"$\left|%s\right| = \left|%s + %s\right|$.\\ " % (F1, F2, F3, F3, F1, F2, F3, F1, F2)) + giai
+    hinh = _b8_hinh_hai_luc(p, q, g, random.choice([0, 0, 10, 20, -15]))
+    sai_dau = _sp8.sqrt(_sp8.sympify(p * p + q * q - 2 * dau * p * q * cos))
+    ung = [sai_dau, p + q, abs(p - q), _sp8.sqrt(p * p + q * q), R2] + [_sp8.sqrt(R2 + k) for k in (2, -2, 4, 1, 3) if R2 + k > 0]
+    cham = "?" if hoi == "can_bang" else "."
+    if mc:
+        dap = _b8_tex(R)
+        giai += r"\\ Hence the required magnitude is $%s = \sqrt{%s}%s$ N." % (tong, _b8_tex(R2),
+                                                                     "" if _b8_tex(R) == r"\sqrt{%s}" % _b8_tex(R2)
+                                                                     else " = " + _b8_tex(R))
+        nhieu = []
+        for x in ung:
+            x = _sp8.sympify(x)
+            if x > 0 and abs(float(x) - float(R)) > 1e-9 and all(abs(float(x) - float(y)) > 1e-9 for y in nhieu):
+                nhieu.append(x)
+        return mo + " " + cau_hoi + cham, r"$%s$ N" % dap, [r"$%s$ N" % _b8_tex(x) for x in nhieu[:3]], giai, hinh
+    dap, muc = _b8_sa(R)
+    giai += r"\\ Hence the required magnitude is $%s = \sqrt{%s} %s %s$ (N)." % (tong, _b8_tex(R2), r"\approx" if muc else "=", dap)
+    lam = (r" (unit: N; round the result to the %s)" % muc) if muc else r" (unit: N)"
+    nhieu = [_b8_sa(x)[0] for x in ung]
+    return mo + " " + cau_hoi + lam + cham, dap, [x for x in nhieu if x != dap] + ["1", "2", "3", "4"], giai, hinh
+
+
+def L10_C4_B8_VD040_MC_B_01(socau, dang=1):
+    r"""Hai lực $\overrightarrow{F_1}$, $\overrightarrow{F_2}$ biểu diễn trên hình (góc $60^\circ$, $90^\circ$, $120^\circ$):
+    độ lớn hợp lực, lực $\overrightarrow{F_3}$ để vật đứng yên, hoặc độ lớn $\overrightarrow{F_1} - \overrightarrow{F_2}$
+    (quy tắc trừ); đáp số dạng căn chính xác. Theo bài 4.9 SGK cô Lan gửi (mức VD). LUYỆN TẬP THÊM.
+
+    CLAUDE THEM 17/10/2026 - co Lan xep muc VD; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai, hinh = _b8_vd040b(True)
+        cau += MC_SA_answer_text(debai, dap, nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+def L10_C4_B8_VD040_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với VD040_MC_B: góc $30^\circ$ đến $150^\circ$, đáp số nguyên hoặc làm tròn (<= 4 kí tự).
+
+    CLAUDE THEM 17/10/2026 - co Lan xep muc VD; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai, hinh = _b8_vd040b(False)
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+# ---------------------------------------------------------------- C (VDC): kéo vật lên dốc nghiêng
+def _b8_hinh_doc(a):
+    """TikZ mặt dốc nghiêng góc a độ, vật tại O, trọng lực P, phản lực w, lực kéo F (như Hình 4.18 SGK)."""
+    r = math.radians(a)
+    L = 6.0
+    O = (3.6 * math.cos(r), 3.6 * math.sin(r))
+    u = (math.cos(r), math.sin(r))                       # dọc dốc, hướng lên
+    n = (-math.sin(r), math.cos(r))                      # pháp tuyến hướng lên
+    lp = 2.2
+    P = (O[0], O[1] - lp)
+    W = (O[0] + n[0] * lp * math.cos(r), O[1] + n[1] * lp * math.cos(r))
+    F = (O[0] + u[0] * lp * math.sin(r), O[1] + u[1] * lp * math.sin(r))
+    goc = [(O[0] - 0.45 * u[0], O[1] - 0.45 * u[1]), (O[0] + 0.45 * u[0], O[1] + 0.45 * u[1])]
+    goc += [(goc[1][0] + 0.4 * n[0], goc[1][1] + 0.4 * n[1]), (goc[0][0] + 0.4 * n[0], goc[0][1] + 0.4 * n[1])]
+    T = lambda p: "(%s,%s)" % (_toa(p[0]), _toa(p[1]))
+    out = [r"\begin{tikzpicture}[>=stealth,thick,scale=0.8]",
+           r"\draw (0,0) -- (%s,0);" % _toa(L * math.cos(r) + 0.5),
+           r"\draw (0,0) -- %s;" % T((L * math.cos(r), L * math.sin(r))),
+           r"\draw[fill=cyan!30] " + " -- ".join(T(p) for p in goc) + " -- cycle;",
+           r"\draw[->] %s -- %s node[right]{$\overrightarrow{P}$};" % (T(O), T(P)),
+           r"\draw[->] %s -- %s node[above left]{$\overrightarrow{w}$};" % (T(O), T(W)),
+           r"\draw[->,blue] %s -- %s node[above]{$\overrightarrow{F}$};" % (T(O), T(F)),
+           r"\fill %s circle[radius=1.5pt] node[below right]{\footnotesize $O$};" % T(O),
+           r"\draw[thin] (1,0) arc (0:%s:1) node[midway,right]{\footnotesize $%d^\circ$};" % (_toa(a), a),
+           r"\end{tikzpicture}"]
+    return "\n".join(out)
+
+
+def _b8_vd040c(mc):
+    """Kéo vật lên dốc nghiêng (VDC). -> (debai, dap, nhieu, giai, hinh)."""
+    bc = _c4_uu_tien("b8_vd040c", ["keo_phao_len_doc", "keo_xe_hang_len_doc", "toi_keo_go_len_doc"])[0]
+    _c4_danh_dau("b8_vd040c", [bc])
+    a = random.choice([10, 15, 20, 25, 30, 30, 35, 40, 45, random.randint(12, 44)])
+    r = _sp8.pi * a / 180
+    if bc == "keo_phao_len_doc":
+        P = random.randint(150, 260) * 100 + random.randint(0, 99)        # N
+        vat, nguoi = "the cannon", random.choice([80, 90, 100, 120, 150])
+        mo = (r"Soldiers pull a cannon of weight $%s$ N up a slope inclined at $%d^\circ$ to the horizontal "
+              r"(see the figure). Assume the cannon is subject to three forces: the weight $\overrightarrow{P}$, the normal force $\overrightarrow{w}$ of "
+              r"the slope (perpendicular to the slope) and the pulling force $\overrightarrow{F}$ (along the slope, toward the top of the slope); "
+              r"the cannon can be pulled when $\left|\overrightarrow{F}\right|$ is not less than the magnitude needed for "
+              r"$\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$."
+              % (_b8_ngan_cach(P), a))
+        hoi = random.choice(["nguoi", "nguoi", "luc_kn", "phan_luc_kn"])
+    elif bc == "keo_xe_hang_len_doc":
+        P = random.randint(30, 90) * 100                                     # N
+        vat, nguoi = "the cargo cart", random.choice([150, 180, 200, 250])
+        mo = (r"A group of workers pull a cargo cart of weight $%s$ N up a slope inclined at $%d^\circ$ to the "
+              r"horizontal (see the figure). Assume the cart is subject to three forces: the weight $\overrightarrow{P}$, the normal force "
+              r"$\overrightarrow{w}$ of the slope (perpendicular to the slope) and the pulling force $\overrightarrow{F}$ (along the "
+              r"slope, toward the top of the slope); the cart can be pulled when $\left|\overrightarrow{F}\right|$ is not less than the magnitude needed "
+              r"for $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$." % (_b8_ngan_cach(P), a))
+        hoi = random.choice(["nguoi", "nguoi", "luc_n", "phan_luc_n"])
+    else:
+        P = random.randint(20, 95) * 100
+        vat, nguoi = "the log", None
+        mo = (r"A winch pulls a log of weight $%s$ N up a slope inclined at $%d^\circ$ to the horizontal "
+              r"(see the figure). Assume the log is subject to three forces: the weight $\overrightarrow{P}$, the normal force $\overrightarrow{w}$ of the "
+              r"slope (perpendicular to the slope) and the pulling force $\overrightarrow{F}$ of the winch cable (along the slope, toward the top of the "
+              r"slope); the log moves uniformly, so $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = "
+              r"\overrightarrow{0}$." % (_b8_ngan_cach(P), a))
+        hoi = random.choice(["luc_n", "phan_luc_n"])
+    Fk = P * _sp8.sin(r)
+    Wk = P * _sp8.cos(r)
+    giai = (r"Let $\overrightarrow{OA} = \overrightarrow{P}$ (vertical, pointing down) and draw $\overrightarrow{AC} = "
+            r"\overrightarrow{w}$; then $\overrightarrow{P} + \overrightarrow{w} = \overrightarrow{OC}$ (three-point rule), "
+            r"$\overrightarrow{OC}$ lies along the slope, pointing down. The triangle $OAC$ right-angled at $C$ has $OA = %s$, "
+            r"$\widehat{OAC} = %d^\circ$ (its sides are perpendicular to the sides of the slope angle), so "
+            r"$OC = OA\sin %d^\circ$, $AC = OA\cos %d^\circ$.\\ "
+            r"From $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$ we get "
+            r"$\overrightarrow{F} = -\overrightarrow{OC}$, hence $\left|\overrightarrow{F}\right| = %s\sin %d^\circ "
+            r"\approx %s$ (N) and $\left|\overrightarrow{w}\right| = %s\cos %d^\circ \approx %s$ (N)."
+            % (_b8_ngan_cach(P), a, a, a, _b8_ngan_cach(P), a, _b8_tron(Fk, 1), _b8_ngan_cach(P), a, _b8_tron(Wk, 1)))
+    if hoi == "nguoi":
+        n = int(_sp8.ceiling(Fk / nguoi))
+        cau_hoi = (r"If each person pulls with a force of $%d$ N, at least how many people are needed to pull %s up the slope"
+                   % (nguoi, vat))
+        giai += (r"\\ We need $k$ people with $%d k \ge %s$, that is $k \ge %s$. Hence at least $%d$ people are needed."
+                 % (nguoi, _b8_tron(Fk, 1), _b8_tron(Fk / nguoi, 2), n))
+        dap = str(n)
+        ung = [int(_sp8.ceiling(Wk / nguoi)), n - 1, int(_sp8.ceiling(P / nguoi)), int(_sp8.ceiling(P * _sp8.tan(r) / nguoi)),
+               n + 1, int(_sp8.ceiling(Fk / nguoi / 2))]
+        nhieu = [str(x) for x in ung]
+        don_vi, lam = "people", ""
+    else:
+        kn = hoi.endswith("kn")
+        v = (Fk if hoi.startswith("luc") else Wk) / (1000 if kn else 1)
+        so_le = 1 if kn else 0
+        dap = _b8_tron(v, so_le)
+        doi = (Wk if hoi.startswith("luc") else Fk) / (1000 if kn else 1)
+        ung = [doi, _sp8.sympify(P) / (1000 if kn else 1), v * 2, P * _sp8.tan(r) / (1000 if kn else 1), v / 2]
+        nhieu = [_b8_tron(x, so_le) for x in ung]
+        don_vi = "kN" if kn else "N"
+        if hoi.startswith("luc"):
+            cau_hoi = r"Find the minimum magnitude of the pulling force $\overrightarrow{F}$"
+        else:
+            cau_hoi = r"Find the magnitude of the normal force $\overrightarrow{w}$ of the slope"
+        if kn:
+            giai += r"\\ In kilonewtons: $%s$ kN." % dap
+        lam = r"round the result to the %s" % _B8_MUC[so_le]
+    hinh = _b8_hinh_doc(a)
+    nhieu = [x for x in dict.fromkeys(nhieu) if x != dap and float(x.replace(",", ".")) > 0]
+    if mc:
+        fm = lambda t: r"$%s$ %s" % (t, don_vi)
+        return (mo + " " + cau_hoi + ((r" (%s)" % lam) if lam else "") + ("?" if hoi == "nguoi" else "."), fm(dap),
+                [fm(t) for t in nhieu[:3]],
+                giai, hinh)
+    if don_vi == "people":
+        de = mo + " " + cau_hoi + "?"
+    else:
+        de = mo + " " + cau_hoi + r" (unit: %s; %s)." % (don_vi, lam)
+    return de, dap, nhieu + [str(i) for i in range(1, 10)], giai, hinh
+
+
+def _b8_ngan_cach(n):
+    """Số nguyên >= 10000 viết có dấu cách nghìn như SGK: 22\\,148."""
+    s = str(int(n))
+    return s if len(s) <= 4 else s[:-3] + r"\," + s[-3:]
+
+
+def L10_C4_B8_VD040_MC_C_01(socau, dang=1):
+    r"""VẬN DỤNG CAO: kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời) - ba lực
+    $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$: số người tối thiểu, lực kéo tối
+    thiểu hoặc phản lực mặt dốc ($\left|\overrightarrow{P}\right|\sin\alpha$, $\left|\overrightarrow{P}\right|\cos\alpha$).
+    Theo bài Vận dụng SGK (kéo pháo $22\,148$ N lên dốc $30^\circ$) cô Lan gửi. LUYỆN TẬP THÊM.
+
+    CLAUDE THEM 17/10/2026 - co Lan xep muc VDC (Mapping muc_do_dang VDC); co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai, hinh = _b8_vd040c(True)
+        cau += MC_SA_answer_text(debai, dap, nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+def L10_C4_B8_VD040_SA_C_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với VD040_MC_C (VẬN DỤNG CAO): số người tối thiểu / lực kéo / phản lực, <= 4 kí tự.
+
+    CLAUDE THEM 17/10/2026 - co Lan xep muc VDC; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        debai, dap, nhieu, giai, hinh = _b8_vd040c(False)
+        cau += MC_SA_answer_const(debai, dap, nhieu, giai, hinh, 0, dang)
+    return cau

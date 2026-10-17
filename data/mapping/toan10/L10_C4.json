@@ -320,6 +320,50 @@
     "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); a) rut gon, b) tap hop diem; co Lan duyet lai; 16/10/2026 co Lan: dang A tach _01 duong trung truc, _02 duong tron, bieu thuc phuc tap hon (hinh binh hanh, tam giac co trong tam)"
   },
   {
+    "id": "L10_C4_B8_VD040_MC_B",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Hai lực biểu diễn trên hình (góc giữa hai lực, độ lớn mỗi lực): độ lớn hợp lực, lực thứ ba giữ vật đứng yên hoặc độ lớn hiệu hai lực (quy tắc hình bình hành, quy tắc trừ, định lí côsin) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - theo bai 4.9 SGK co Lan gui (co Lan xep muc VD); dap so dang can chinh xac; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_VD040_SA_B",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Hai lực biểu diễn trên hình (góc giữa hai lực, độ lớn mỗi lực): độ lớn hợp lực, lực thứ ba giữ vật đứng yên hoặc độ lớn hiệu hai lực (quy tắc hình bình hành, quy tắc trừ, định lí côsin) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_B (lam tron <= 4 ki tu); co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_VD040_MC_C",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời): ba lực F + P + w = 0, tính số người tối thiểu, lực kéo tối thiểu hoặc phản lực mặt dốc - luyện tập thêm, vận dụng cao",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "boi_canh": [
+      "keo_phao_len_doc",
+      "keo_xe_hang_len_doc",
+      "toi_keo_go_len_doc"
+    ],
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - theo bai Van dung SGK (keo phao 22148 N len doc 30 do) co Lan gui, co Lan xep muc VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_VD040_SA_C",
+    "content": "Thực hiện được các phép toán tổng hai vectơ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời): ba lực F + P + w = 0, tính số người tối thiểu, lực kéo tối thiểu hoặc phản lực mặt dốc - luyện tập thêm, vận dụng cao",
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "boi_canh": [
+      "keo_phao_len_doc",
+      "keo_xe_hang_len_doc",
+      "toi_keo_go_len_doc"
+    ],
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_C (VDC); co Lan duyet lai"
+  },
+  {
     "id": "L10_C4_B8_NB041_MC_A",
     "content": "Nhận biết được vectơ đối, hiệu hai vectơ, quy tắc trừ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
