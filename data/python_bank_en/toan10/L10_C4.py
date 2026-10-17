@@ -6485,3 +6485,244 @@ def L10_C4_B8_VD040_TL_A_01(socau, dong=1):
         dap_b = r"\text{%s}" % dap.replace("$", "")
         cau += TL_answer_text(mo, [(hoi_a, da, ga), (hoi_b, dap_b, gb)], 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# BÀI 8 MỨC NHẬN BIẾT (cô Lan 17/10/2026: "NB tổng hiệu bài 8 chưa có - nhận biết các khái niệm tổng hiệu vectơ cơ
+# bản"; cô duyệt kế hoạch ID). Đơn vị NB040, NB041, NB042 DƯỚI YCCĐ TH của Bộ (không phải ngoài YCCĐ).
+#   NB040_MC_A, NB041_MC_A, NB042_MC_A: điền khuyết / gọi tên quy tắc, tính chất (chỉ MC: bản SA vô lý);
+#   NB040_MC_B + SA_B, NB041_MC_B + SA_B: chọn / đếm khẳng định đúng về khái niệm.
+# Tên điểm, tên vectơ ngẫu nhiên mỗi lần sinh.
+# =====================================================================
+_B8NB_TEN = list("ABCDEFHIKNPQ")
+_B8NB_TU = [("a", "b", "c"), ("u", "v", "w"), ("x", "y", "z")]
+
+
+def _b8nb_ten():
+    X, Y, Z, T = random.sample(_B8NB_TEN, 4)
+    a, b, c = (r"\overrightarrow{%s}" % t for t in random.choice(_B8NB_TU))
+    return X, Y, Z, T, a, b, c
+
+
+_B8NB_QT = ["the three-point rule", "the parallelogram rule", "the subtraction rule", "the commutative property of vector addition"]
+
+
+def _b8nb_dien_tong():
+    """Kho điền khuyết về tổng hai vectơ. -> [(câu dẫn, đáp án, [nhiễu], lời giải)]."""
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"Given two vectors $%s$, $%s$. Take an arbitrary point $%s$ and draw $%s = %s$ and $%s = %s$. Then the vector $%s + %s$ is"
+         % (a, b, X, v(X, Y), a, v(Y, Z), b, a, b), "$%s$" % v(X, Z), ["$%s$" % v(Z, X), "$%s$" % v(Y, X), "$%s$" % v(Z, Y)],
+         r"By the definition of the sum of two vectors: draw $%s = %s$, $%s = %s$, then $%s + %s = %s$." % (v(X, Y), a, v(Y, Z), b, a, b,
+                                                                                    v(X, Z))),
+        (r"For any three points $%s$, $%s$, $%s$, the equality $%s + %s = %s$ is called" % (X, Y, Z, v(X, Y), v(Y, Z), v(X, Z)),
+         _B8NB_QT[0], _B8NB_QT[1:], r"The equality $%s + %s = %s$ is the three-point rule." % (v(X, Y), v(Y, Z), v(X, Z))),
+        (r"Given a parallelogram $%s$. The equality $%s + %s = %s$ is called" % (X + Y + Z + T, v(X, Y), v(X, T), v(X, Z)),
+         _B8NB_QT[1], [_B8NB_QT[0], _B8NB_QT[2], _B8NB_QT[3]],
+         r"For the parallelogram $%s$: $%s + %s = %s$ is the parallelogram rule." % (X + Y + Z + T, v(X, Y), v(X, T), v(X, Z))),
+        (r"Given a parallelogram $%s$. By the parallelogram rule, $%s + %s$ equals" % (X + Y + Z + T, v(X, Y), v(X, T)),
+         "$%s$" % v(X, Z), ["$%s$" % v(Y, T), "$%s$" % v(T, Y), "$%s$" % v(Z, X)],
+         r"Parallelogram rule: the sum of the two side vectors starting from vertex $%s$ is the diagonal vector starting from $%s$: "
+         r"$%s + %s = %s$." % (X, X, v(X, Y), v(X, T), v(X, Z))),
+        (r"By the three-point rule, for any three points $%s$, $%s$, $%s$, $%s + %s$ equals" % (X, Y, Z, v(X, Y), v(Y, Z)),
+         "$%s$" % v(X, Z), ["$%s$" % v(Z, X), "$%s$" % v(Y, Y), "$%s$" % v(X, Y)],
+         r"Three-point rule: $%s + %s = %s$." % (v(X, Y), v(Y, Z), v(X, Z))),
+        (r"For every vector $%s$, the sum $%s + \overrightarrow{0}$ equals" % (a, a), "$%s$" % a,
+         [r"$\overrightarrow{0}$", "$-%s$" % a, "$%s + %s$" % (a, a)],
+         r"Adding the zero vector to any vector gives that vector: $%s + \overrightarrow{0} = %s$." % (a, a)),
+        (r"For any point $%s$, the vector $%s$ is" % (X, v(X, X)), r"the zero vector",
+         [r"the opposite vector of $%s$" % v(X, Y), r"the vector of length $1$", r"not a vector"],
+         r"A vector whose initial and terminal points coincide is the zero vector: $%s = \overrightarrow{0}$." % v(X, X)),
+    ]
+
+
+def _b8nb_dien_hieu():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"The opposite vector of the vector $%s$ is" % v(X, Y), "$%s$" % v(Y, X),
+         ["$%s$" % v(X, Y), r"$\overrightarrow{0}$", "$-%s$" % v(Y, X)],
+         r"The opposite vector of $%s$ is the vector with the same length and opposite direction, that is $%s$: $-%s = %s$." % (v(X, Y), v(Y, X), v(X, Y),
+                                                                                        v(Y, X))),
+        (r"The opposite vector of the zero vector is", "the zero vector",
+         ["does not exist", r"every vector different from $\overrightarrow{0}$", r"the vector of length $1$"],
+         r"The opposite vector of $\overrightarrow{0}$ is $\overrightarrow{0}$."),
+        (r"Two opposite vectors are two vectors that", "have the same length and opposite directions",
+         ["have the same length and the same direction", "opposite direction", "of the same length"],
+         r"The opposite vector of $\vec a$ is the vector with the same length as and opposite direction to $\vec a$."),
+        (r"Given two vectors $%s$, $%s$. The difference $%s - %s$ is" % (a, b, a, b), r"$%s + \left(-%s\right)$" % (a, b),
+         [r"$%s + \left(-%s\right)$" % (b, a), r"$-%s - %s$" % (a, b), r"$%s + %s$" % (a, b)],
+         r"By definition: $%s - %s = %s + \left(-%s\right)$ (add the opposite vector of $%s$)." % (a, b, a, b, b)),
+        (r"For any three points $%s$, $%s$, $%s$, the equality $%s - %s = %s$ is called" % (Z, X, Y, v(Z, Y), v(Z, X), v(X, Y)),
+         _B8NB_QT[2], [_B8NB_QT[0], _B8NB_QT[1], _B8NB_QT[3]],
+         r"Two vectors with the common initial point $%s$: $%s - %s = %s$ is the subtraction rule." % (Z, v(Z, Y), v(Z, X), v(X, Y))),
+        (r"For every vector $%s$, the sum $%s + \left(-%s\right)$ equals" % (a, a, a), r"$\overrightarrow{0}$",
+         ["$%s$" % a, "$-%s$" % a, "$%s + %s$" % (a, a)],
+         r"The sum of a vector and its opposite vector is the zero vector: $%s + \left(-%s\right) = \overrightarrow{0}$." % (a, a)),
+        (r"If $%s + %s = \overrightarrow{0}$, then" % (a, b), r"$%s$ is the opposite vector of $%s$" % (b, a),
+         [r"$%s = %s$" % (a, b), r"$%s$ and $%s$ have the same direction" % (a, b), r"$%s = \overrightarrow{0}$" % a],
+         r"$%s + %s = \overrightarrow{0}$ if and only if $%s = -%s$, that is $%s$ is the opposite vector of $%s$." % (a, b, b, a, b, a)),
+    ]
+
+
+def _b8nb_dien_tinh_chat():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    TEN = ["the commutative property", "the associative property", "the zero-vector property", "the three-point rule"]
+    dang_thuc = [r"$%s + %s = %s + %s$" % (a, b, b, a),
+                 r"$\left(%s + %s\right) + %s = %s + \left(%s + %s\right)$" % (a, b, c, a, b, c),
+                 r"$%s + \overrightarrow{0} = \overrightarrow{0} + %s = %s$" % (a, a, a)]
+    ra = []
+    for i in range(3):
+        ra.append((r"For any vectors $%s$, $%s$, $%s$, the equality %s expresses" % (a, b, c, dang_thuc[i]),
+                   TEN[i] + " of vector addition" if i < 2 else TEN[i],
+                   [t + (" of vector addition" if j < 2 else "") for j, t in enumerate(TEN) if j != i],
+                   r"%s is %s." % (dang_thuc[i], TEN[i] + (" of vector addition" if i < 2 else ""))))
+        sai = [dang_thuc[j] for j in range(3) if j != i] + [
+            [r"$%s + %s = %s - %s$" % (a, b, b, a), r"$\left(%s + %s\right) + %s = %s + \left(%s - %s\right)$" % (a, b, c, a, b, c),
+             r"$%s + \overrightarrow{0} = \overrightarrow{0}$" % a][i]]
+        ra.append((r"For any vectors $%s$, $%s$, $%s$, %s of vector addition is written as"
+                   % (a, b, c, TEN[i] if i < 2 else "the zero-vector property"), dang_thuc[i], sai,
+                   r"%s is %s." % (dang_thuc[i], TEN[i] + (" of vector addition" if i < 2 else ""))))
+    return ra
+
+
+def _b8nb_mc_dien(kho, ten_kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        i = _c4_uu_tien(ten_kho, list(range(len(ds))))[0]
+        _c4_danh_dau(ten_kho, [i])
+        mo, dung, sai, ly = ds[i]
+        cau += MC_SA_answer_text(mo, dung, random.sample(sai, 3), ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_NB040_MC_A_01(socau, dang=1):
+    r"""Nhận biết tổng hai vectơ: điền khuyết định nghĩa tổng, quy tắc ba điểm, quy tắc hình bình hành, cộng với
+    vectơ-không; gọi tên quy tắc từ đẳng thức. Tên điểm, tên vectơ ngẫu nhiên; kho xoay vòng.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_tong, "b8nb_dien_tong", socau, dang)
+
+
+def L10_C4_B8_NB041_MC_A_01(socau, dang=1):
+    r"""Nhận biết vectơ đối, hiệu hai vectơ: vectơ đối của $\overrightarrow{XY}$, của vectơ-không, định nghĩa hai vectơ
+    đối nhau, định nghĩa hiệu, gọi tên quy tắc trừ, $\vec a + (-\vec a)$. Tên điểm, tên vectơ ngẫu nhiên.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_hieu, "b8nb_dien_hieu", socau, dang)
+
+
+def L10_C4_B8_NB042_MC_A_01(socau, dang=1):
+    r"""Nhận biết tính chất của phép cộng vectơ: cho đẳng thức, gọi tên tính chất (giao hoán, kết hợp, vectơ-không);
+    hoặc cho tên tính chất, chọn đẳng thức đúng. Tên vectơ ngẫu nhiên.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_tinh_chat, "b8nb_dien_tinh_chat", socau, dang)
+
+
+# ---------------------------------------------------------------- B: khẳng định đúng / sai về khái niệm
+def _b8nb_kd_tong():
+    """[(phát biểu (có $...$), đúng?, lí do)] về tổng hai vectơ."""
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    h = X + Y + Z + T
+    return [
+        (r"For any three points $%s$, $%s$, $%s$, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(Y, Z), v(X, Z)), True, "that is the three-point rule"),
+        (r"If $%s$ is a parallelogram, then $%s + %s = %s$" % (h, v(X, Y), v(X, T), v(X, Z)), True, "that is the parallelogram rule"),
+        (r"For every vector $%s$, $%s + \overrightarrow{0} = %s$" % (a, a, a), True, "adding the zero vector does not change a vector"),
+        (r"For all vectors $%s$, $%s$: $%s + %s = %s + %s$" % (a, b, a, b, b, a), True, "vector addition is commutative"),
+        (r"The sum of two vectors is a vector", True, "by definition, the sum of two vectors is a vector"),
+        (r"For any two points $%s$, $%s$, $%s + %s = \overrightarrow{0}$" % (X, Y, v(X, Y), v(Y, X)), True,
+         r"by the three-point rule $%s + %s = %s = \overrightarrow{0}$" % (v(X, Y), v(Y, X), v(X, X))),
+        (r"For any three points $%s$, $%s$, $%s$, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(Y, Z), v(Z, X)), False,
+         r"by the three-point rule $%s + %s = %s$, not $%s$" % (v(X, Y), v(Y, Z), v(X, Z), v(Z, X))),
+        (r"For any three points $%s$, $%s$, $%s$, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(X, Z), v(Y, Z)), False,
+         "the three-point rule needs the terminal point of the first vector to coincide with the initial point of the second"),
+        (r"If $%s$ is a parallelogram, then $%s + %s = %s$" % (h, v(X, Y), v(X, T), v(Y, T)), False,
+         r"by the parallelogram rule $%s + %s = %s$" % (v(X, Y), v(X, T), v(X, Z))),
+        (r"For every vector $%s$, $%s + \overrightarrow{0} = \overrightarrow{0}$" % (a, a), False,
+         r"$%s + \overrightarrow{0} = %s$" % (a, a)),
+        (r"For all vectors $%s$, $%s$: $\left|%s + %s\right| = \left|%s\right| + \left|%s\right|$" % (a, b, a, b, a, b), False,
+         "it holds only when the two vectors have the same direction (or one of them is the zero vector)"),
+        (r"The sum of two vectors is a number", False, "the sum of two vectors is a vector"),
+    ]
+
+
+def _b8nb_kd_hieu():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"The opposite vector of $%s$ is $%s$" % (v(X, Y), v(Y, X)), True, "these two vectors have the same length and opposite directions"),
+        (r"The opposite vector of the zero vector is the zero vector", True, r"$-\overrightarrow{0} = \overrightarrow{0}$"),
+        (r"For all vectors $%s$, $%s$: $%s - %s = %s + \left(-%s\right)$" % (a, b, a, b, a, b), True, "that is the definition of the difference of two vectors"),
+        (r"For any three points $%s$, $%s$, $%s$, $%s - %s = %s$" % (Z, X, Y, v(Z, Y), v(Z, X), v(X, Y)), True, "that is the subtraction rule"),
+        (r"Two opposite vectors have the same length", True, "the opposite vector has the same length as and the opposite direction to the given vector"),
+        (r"For every vector $%s$, $%s + \left(-%s\right) = \overrightarrow{0}$" % (a, a, a), True, "the sum of a vector and its opposite vector is the zero vector"),
+        (r"The opposite vector of $%s$ is $%s$" % (v(X, Y), v(X, Y)), False, r"the opposite vector of $%s$ is $%s$" % (v(X, Y), v(Y, X))),
+        (r"Two opposite vectors have the same direction", False, "two opposite vectors have opposite directions"),
+        (r"For all vectors $%s$, $%s$: $%s - %s = %s - %s$" % (a, b, a, b, b, a), False,
+         r"$%s - %s$ and $%s - %s$ are opposite vectors" % (a, b, b, a)),
+        (r"For any three points $%s$, $%s$, $%s$, $%s - %s = %s$" % (Z, X, Y, v(Z, Y), v(Z, X), v(Y, X)), False,
+         r"by the subtraction rule $%s - %s = %s$" % (v(Z, Y), v(Z, X), v(X, Y))),
+        (r"The zero vector has no opposite vector", False, "the opposite vector of the zero vector is the zero vector"),
+        (r"Two vectors with the same length are opposite", False, "they must also have opposite directions"),
+    ]
+
+
+def _b8nb_mc_kd(kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        hoi = random.random() < 0.55
+        d = random.choice([x for x in ds if x[1] == hoi])
+        s = random.sample([x for x in ds if x[1] != hoi], 3)
+        debai = r"Which of the following statements is %s?" % (r"\textbf{true}" if hoi else r"\textbf{false}")
+        giai = r"\\ ".join(r"``%s'' is a %s statement because %s." % (x[0], "true" if x[1] else "false", x[2]) for x in [d] + s)
+        cau += MC_SA_answer_text(debai, d[0], [x[0] for x in s], giai, 0, 0, dang)
+    return cau
+
+
+def _b8nb_sa_kd(kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        so_dung = random.choice([1, 2, 2, 3])
+        chon = random.sample([x for x in ds if x[1]], so_dung) + random.sample([x for x in ds if not x[1]], 4 - so_dung)
+        random.shuffle(chon)
+        de = (r"Consider the following statements: \\ " + r"\\ ".join(r"%d) %s;" % (k + 1, x[0]) for k, x in enumerate(chon))
+              + r"\\ How many of these statements are true?")
+        ly = r"\\ ".join(r"Statement %d is %s because %s." % (k + 1, "true" if x[1] else "false", x[2]) for k, x in enumerate(chon))
+        ly += r"\\ So there are $%d$ true statements." % so_dung
+        cau += MC_SA_answer_const(de, str(so_dung), [str(x) for x in (0, 1, 2, 3, 4) if x != so_dung], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_NB040_MC_B_01(socau, dang=1):
+    r"""Chọn khẳng định đúng (sai) về khái niệm tổng hai vectơ: quy tắc ba điểm, quy tắc hình bình hành, cộng với
+    vectơ-không, giao hoán (kho 12 khẳng định, tên điểm/vectơ ngẫu nhiên).
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_kd(_b8nb_kd_tong, socau, dang)
+
+
+def L10_C4_B8_NB040_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với NB040_MC_B: bốn khẳng định về tổng hai vectơ, đếm số khẳng định đúng.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_sa_kd(_b8nb_kd_tong, socau, dang)
+
+
+def L10_C4_B8_NB041_MC_B_01(socau, dang=1):
+    r"""Chọn khẳng định đúng (sai) về vectơ đối, hiệu hai vectơ, quy tắc trừ (kho 12 khẳng định, tên ngẫu nhiên).
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_kd(_b8nb_kd_hieu, socau, dang)
+
+
+def L10_C4_B8_NB041_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với NB041_MC_B: bốn khẳng định về vectơ đối, hiệu, đếm số khẳng định đúng.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_sa_kd(_b8nb_kd_hieu, socau, dang)

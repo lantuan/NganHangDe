@@ -243,6 +243,27 @@
     "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH039 cua Bo. CLAUDE THEM 16/10/2026 - theo Vi du 4 SGK co Lan gui (luc day Archimedes); ban tra loi ngan cung Dang voi MC_B: ti so trong luong rieng dang so thap phan; co Lan duyet lai noi dung"
   },
   {
+    "id": "L10_C4_B8_NB040_MC_A",
+    "content": "Nhận biết được tổng hai vectơ, quy tắc ba điểm, quy tắc hình bình hành.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Điền khuyết, gọi tên quy tắc: định nghĩa tổng hai vectơ, quy tắc ba điểm, quy tắc hình bình hành, cộng với vectơ-không",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach; chi MC (ban SA vo ly)"
+  },
+  {
+    "id": "L10_C4_B8_NB040_MC_B",
+    "content": "Nhận biết được tổng hai vectơ, quy tắc ba điểm, quy tắc hình bình hành.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn (đếm) khẳng định đúng, sai về khái niệm tổng hai vectơ: quy tắc ba điểm, quy tắc hình bình hành, vectơ-không, giao hoán",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach"
+  },
+  {
+    "id": "L10_C4_B8_NB040_SA_B",
+    "content": "Nhận biết được tổng hai vectơ, quy tắc ba điểm, quy tắc hình bình hành.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chọn (đếm) khẳng định đúng, sai về khái niệm tổng hai vectơ: quy tắc ba điểm, quy tắc hình bình hành, vectơ-không, giao hoán",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach; ban tra loi ngan cung Dang voi MC_B: dem so khang dinh dung"
+  },
+  {
     "id": "L10_C4_B8_TH040_MC_A",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -299,6 +320,27 @@
     "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (tu luan hinh binh hanh |MB + CD| = |MC + DA|); a) rut gon, b) tap hop diem; co Lan duyet lai; 16/10/2026 co Lan: dang A tach _01 duong trung truc, _02 duong tron, bieu thuc phuc tap hon (hinh binh hanh, tam giac co trong tam)"
   },
   {
+    "id": "L10_C4_B8_NB041_MC_A",
+    "content": "Nhận biết được vectơ đối, hiệu hai vectơ, quy tắc trừ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Điền khuyết, gọi tên quy tắc: vectơ đối, hai vectơ đối nhau, định nghĩa hiệu, quy tắc trừ",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach; chi MC (ban SA vo ly)"
+  },
+  {
+    "id": "L10_C4_B8_NB041_MC_B",
+    "content": "Nhận biết được vectơ đối, hiệu hai vectơ, quy tắc trừ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn (đếm) khẳng định đúng, sai về vectơ đối, hiệu hai vectơ, quy tắc trừ",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach"
+  },
+  {
+    "id": "L10_C4_B8_NB041_SA_B",
+    "content": "Nhận biết được vectơ đối, hiệu hai vectơ, quy tắc trừ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chọn (đếm) khẳng định đúng, sai về vectơ đối, hiệu hai vectơ, quy tắc trừ",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach; ban tra loi ngan cung Dang voi MC_B: dem so khang dinh dung"
+  },
+  {
     "id": "L10_C4_B8_TH041_MC_A",
     "content": "Thực hiện được các phép toán hiệu hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
@@ -338,6 +380,13 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Độ dài vectơ hiệu trong hình (hình vuông, hình chữ nhật, hình thoi góc 60°, tam giác đều, tam giác vuông): đưa hiệu về một vectơ (quy tắc trừ, vectơ đối, thay vectơ bằng nhau) rồi tính độ dài",
     "ghi_chu": "CLAUDE THEM 16/10/2026 - theo cau mau co Lan gui (hinh vuong |AB + AD| = a can 2; tam giac vuong AB = 6, AC = 8); ban tra loi ngan cung Dang voi MC_C: so do cu the, dap so nguyen hoac lam tron <= 4 ki tu; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_B8_NB042_MC_A",
+    "content": "Nhận biết được các tính chất của phép cộng vectơ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Gọi tên tính chất của phép cộng vectơ (giao hoán, kết hợp, vectơ-không) hoặc chọn đẳng thức thể hiện tính chất",
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach; chi MC (ban SA vo ly)"
   },
   {
     "id": "L10_C4_B8_TH042_MC_A",

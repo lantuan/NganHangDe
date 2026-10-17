@@ -60,12 +60,13 @@ def test_kiem_tra_bao_dung_o_lech():
     assert MTB.kiem_tra_ma_tran_bai({"tong": {"NB": 0, "TH": 0, "VD": 0}, "tf": {}, "tl": {}, "o": {}}, 10, pv)
     ngoai = {**MT, "o": {**MT["o"], "L10_C1_B1": {"trac_nghiem": {}}}}
     assert any("không nằm trong phạm vi" in x for x in MTB.kiem_tra_ma_tran_bai(ngoai, 10, pv))
-    # Bài 8 (Chương 4) chưa có hàm MC mức NB trong ngân hàng Python -> chặn, nêu rõ ô
-    # (15/10/2026: B6 Chương 3 nay đã có NB032-NB034 - luyện tập thêm, nên ví dụ chuyển sang L10_C4_B8)
+    # Bài 9 (Chương 4) chưa có hàm MC mức NB trong ngân hàng Python -> chặn, nêu rõ ô
+    # (15/10/2026: B6 Chương 3 nay đã có NB032-NB034 - luyện tập thêm, nên ví dụ chuyển sang L10_C4_B8;
+    #  17/10/2026: B8 nay đã có NB040-NB042, ví dụ chuyển sang L10_C4_B9)
     mt = {"tong": {"NB": 1, "TH": 0, "VD": 0}, "tf": {}, "tl": {},
-          "o": {"L10_C4_B8": {"trac_nghiem": {"NB": 1}}}}
-    loi = MTB.kiem_tra_ma_tran_bai(mt, 10, ["L10_C4_B8"])
-    assert loi and "L10_C4_B8" in loi[0] and "chưa có hàm" in loi[0]
+          "o": {"L10_C4_B9": {"trac_nghiem": {"NB": 1}}}}
+    loi = MTB.kiem_tra_ma_tran_bai(mt, 10, ["L10_C4_B9"])
+    assert loi and "L10_C4_B9" in loi[0] and "chưa có hàm" in loi[0]
 
 
 def test_dem_theo_ham_python_khong_theo_dong_mapping():

@@ -142,6 +142,29 @@
     "ghi_chu_luyen_tap_them": "Cô Lan đưa câu mẫu 16/10/2026 (tàu trên biển Đông theo hướng N20°E) và xếp mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho nội dung này (biểu diễn đại lượng thực tiễn bằng vectơ) chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
+    "id": "L10_C4_B8_NB040",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Tổng và hiệu của hai vectơ",
+    "bai_so": "8",
+    "subsection": "Tổng và hiệu của hai vectơ",
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được tổng hai vectơ, quy tắc ba điểm, quy tắc hình bình hành.",
+    "examples": [],
+    "scope": "định nghĩa tổng, quy tắc ba điểm, quy tắc hình bình hành, cộng với vectơ-không",
+    "tags": [
+      "vecto",
+      "tong_hai_vecto",
+      "quy_tac_ba_diem",
+      "quy_tac_hinh_binh_hanh"
+    ],
+    "difficulty_rank": 1,
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach"
+  },
+  {
     "id": "L10_C4_B8_TH040",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
@@ -196,6 +219,27 @@
     "ghi_chu_luyen_tap_them": "Cô Lan đưa câu tự luận mẫu 16/10/2026 (hình bình hành, tìm M thoả |MB + CD| = |MC + DA|) và duyệt làm mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho phép toán tổng hai vectơ chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ."
   },
   {
+    "id": "L10_C4_B8_NB041",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Tổng và hiệu của hai vectơ",
+    "bai_so": "8",
+    "subsection": "Tổng và hiệu của hai vectơ",
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được vectơ đối, hiệu hai vectơ, quy tắc trừ.",
+    "examples": [],
+    "scope": "vectơ đối, định nghĩa hiệu, quy tắc trừ",
+    "tags": [
+      "vecto",
+      "hieu_hai_vecto"
+    ],
+    "difficulty_rank": 1,
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach"
+  },
+  {
     "id": "L10_C4_B8_TH041",
     "lop": 10,
     "hoc_phan": "Hình học và Đo lường",
@@ -214,6 +258,27 @@
       "hieu_hai_vecto"
     ],
     "difficulty_rank": 2
+  },
+  {
+    "id": "L10_C4_B8_NB042",
+    "lop": 10,
+    "hoc_phan": "Hình học và Đo lường",
+    "chuong": "Vectơ",
+    "chuong_so": "4",
+    "bai": "Tổng và hiệu của hai vectơ",
+    "bai_so": "8",
+    "subsection": "Tổng và hiệu của hai vectơ",
+    "MucDo": "NB",
+    "verb": "Nhận biết được",
+    "content": "Nhận biết được các tính chất của phép cộng vectơ.",
+    "examples": [],
+    "scope": "giao hoán, kết hợp, tính chất của vectơ-không",
+    "tags": [
+      "vecto",
+      "tinh_chat_phep_cong"
+    ],
+    "difficulty_rank": 1,
+    "ghi_chu": "CLAUDE THEM 17/10/2026 - co Lan: muc NB khai niem tong, hieu vecto (duoi YCCD TH cua Bo, khong phai ngoai YCCD); co Lan duyet ke hoach"
   },
   {
     "id": "L10_C4_B8_TH042",

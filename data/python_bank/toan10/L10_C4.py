@@ -6491,3 +6491,244 @@ def L10_C4_B8_VD040_TL_A_01(socau, dong=1):
         dap_b = r"\text{%s}" % dap.replace("$", "")
         cau += TL_answer_text(mo, [(hoi_a, da, ga), (hoi_b, dap_b, gb)], 0, 0, dong)
     return cau
+
+
+# =====================================================================
+# BÀI 8 MỨC NHẬN BIẾT (cô Lan 17/10/2026: "NB tổng hiệu bài 8 chưa có - nhận biết các khái niệm tổng hiệu vectơ cơ
+# bản"; cô duyệt kế hoạch ID). Đơn vị NB040, NB041, NB042 DƯỚI YCCĐ TH của Bộ (không phải ngoài YCCĐ).
+#   NB040_MC_A, NB041_MC_A, NB042_MC_A: điền khuyết / gọi tên quy tắc, tính chất (chỉ MC: bản SA vô lý);
+#   NB040_MC_B + SA_B, NB041_MC_B + SA_B: chọn / đếm khẳng định đúng về khái niệm.
+# Tên điểm, tên vectơ ngẫu nhiên mỗi lần sinh.
+# =====================================================================
+_B8NB_TEN = list("ABCDEFHIKNPQ")
+_B8NB_TU = [("a", "b", "c"), ("u", "v", "w"), ("x", "y", "z")]
+
+
+def _b8nb_ten():
+    X, Y, Z, T = random.sample(_B8NB_TEN, 4)
+    a, b, c = (r"\overrightarrow{%s}" % t for t in random.choice(_B8NB_TU))
+    return X, Y, Z, T, a, b, c
+
+
+_B8NB_QT = ["quy tắc ba điểm", "quy tắc hình bình hành", "quy tắc trừ", "tính chất giao hoán của phép cộng vectơ"]
+
+
+def _b8nb_dien_tong():
+    """Kho điền khuyết về tổng hai vectơ. -> [(câu dẫn, đáp án, [nhiễu], lời giải)]."""
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"Cho hai vectơ $%s$, $%s$. Lấy một điểm $%s$ tuỳ ý, vẽ $%s = %s$ và $%s = %s$. Khi đó vectơ $%s + %s$ là"
+         % (a, b, X, v(X, Y), a, v(Y, Z), b, a, b), "$%s$" % v(X, Z), ["$%s$" % v(Z, X), "$%s$" % v(Y, X), "$%s$" % v(Z, Y)],
+         r"Theo định nghĩa tổng hai vectơ: vẽ $%s = %s$, $%s = %s$ thì $%s + %s = %s$." % (v(X, Y), a, v(Y, Z), b, a, b,
+                                                                                    v(X, Z))),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, đẳng thức $%s + %s = %s$ được gọi là" % (X, Y, Z, v(X, Y), v(Y, Z), v(X, Z)),
+         _B8NB_QT[0], _B8NB_QT[1:], r"Đẳng thức $%s + %s = %s$ là quy tắc ba điểm." % (v(X, Y), v(Y, Z), v(X, Z))),
+        (r"Cho hình bình hành $%s$. Đẳng thức $%s + %s = %s$ được gọi là" % (X + Y + Z + T, v(X, Y), v(X, T), v(X, Z)),
+         _B8NB_QT[1], [_B8NB_QT[0], _B8NB_QT[2], _B8NB_QT[3]],
+         r"Với hình bình hành $%s$: $%s + %s = %s$ là quy tắc hình bình hành." % (X + Y + Z + T, v(X, Y), v(X, T), v(X, Z))),
+        (r"Cho hình bình hành $%s$. Theo quy tắc hình bình hành, $%s + %s$ bằng" % (X + Y + Z + T, v(X, Y), v(X, T)),
+         "$%s$" % v(X, Z), ["$%s$" % v(Y, T), "$%s$" % v(T, Y), "$%s$" % v(Z, X)],
+         r"Quy tắc hình bình hành: tổng hai vectơ cạnh xuất phát từ đỉnh $%s$ là vectơ đường chéo xuất phát từ $%s$: "
+         r"$%s + %s = %s$." % (X, X, v(X, Y), v(X, T), v(X, Z))),
+        (r"Theo quy tắc ba điểm, với ba điểm $%s$, $%s$, $%s$ bất kì, $%s + %s$ bằng" % (X, Y, Z, v(X, Y), v(Y, Z)),
+         "$%s$" % v(X, Z), ["$%s$" % v(Z, X), "$%s$" % v(Y, Y), "$%s$" % v(X, Y)],
+         r"Quy tắc ba điểm: $%s + %s = %s$." % (v(X, Y), v(Y, Z), v(X, Z))),
+        (r"Với mọi vectơ $%s$, tổng $%s + \overrightarrow{0}$ bằng" % (a, a), "$%s$" % a,
+         [r"$\overrightarrow{0}$", "$-%s$" % a, "$%s + %s$" % (a, a)],
+         r"Vectơ-không cộng với vectơ nào cũng bằng chính vectơ đó: $%s + \overrightarrow{0} = %s$." % (a, a)),
+        (r"Với điểm $%s$ bất kì, vectơ $%s$ là" % (X, v(X, X)), r"vectơ-không",
+         [r"vectơ đối của $%s$" % v(X, Y), r"vectơ có độ dài bằng $1$", r"không phải là vectơ"],
+         r"Vectơ có điểm đầu và điểm cuối trùng nhau là vectơ-không: $%s = \overrightarrow{0}$." % v(X, X)),
+    ]
+
+
+def _b8nb_dien_hieu():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"Vectơ đối của vectơ $%s$ là" % v(X, Y), "$%s$" % v(Y, X),
+         ["$%s$" % v(X, Y), r"$\overrightarrow{0}$", "$-%s$" % v(Y, X)],
+         r"Vectơ đối của $%s$ là vectơ cùng độ dài, ngược hướng, tức là $%s$: $-%s = %s$." % (v(X, Y), v(Y, X), v(X, Y),
+                                                                                        v(Y, X))),
+        (r"Vectơ đối của vectơ-không là", "vectơ-không",
+         ["không tồn tại", r"mọi vectơ khác $\overrightarrow{0}$", r"vectơ có độ dài bằng $1$"],
+         r"Vectơ đối của $\overrightarrow{0}$ là $\overrightarrow{0}$."),
+        (r"Hai vectơ đối nhau là hai vectơ", "có cùng độ dài và ngược hướng",
+         ["có cùng độ dài và cùng hướng", "ngược hướng", "có cùng độ dài"],
+         r"Vectơ đối của $\vec a$ là vectơ cùng độ dài và ngược hướng với $\vec a$."),
+        (r"Cho hai vectơ $%s$, $%s$. Hiệu $%s - %s$ là" % (a, b, a, b), r"$%s + \left(-%s\right)$" % (a, b),
+         [r"$%s + \left(-%s\right)$" % (b, a), r"$-%s - %s$" % (a, b), r"$%s + %s$" % (a, b)],
+         r"Theo định nghĩa: $%s - %s = %s + \left(-%s\right)$ (cộng với vectơ đối của $%s$)." % (a, b, a, b, b)),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, đẳng thức $%s - %s = %s$ được gọi là" % (Z, X, Y, v(Z, Y), v(Z, X), v(X, Y)),
+         _B8NB_QT[2], [_B8NB_QT[0], _B8NB_QT[1], _B8NB_QT[3]],
+         r"Hai vectơ chung điểm đầu $%s$: $%s - %s = %s$ là quy tắc trừ." % (Z, v(Z, Y), v(Z, X), v(X, Y))),
+        (r"Với mọi vectơ $%s$, tổng $%s + \left(-%s\right)$ bằng" % (a, a, a), r"$\overrightarrow{0}$",
+         ["$%s$" % a, "$-%s$" % a, "$%s + %s$" % (a, a)],
+         r"Tổng của một vectơ với vectơ đối của nó bằng vectơ-không: $%s + \left(-%s\right) = \overrightarrow{0}$." % (a, a)),
+        (r"Nếu $%s + %s = \overrightarrow{0}$ thì" % (a, b), r"$%s$ là vectơ đối của $%s$" % (b, a),
+         [r"$%s = %s$" % (a, b), r"$%s$ và $%s$ cùng hướng" % (a, b), r"$%s = \overrightarrow{0}$" % a],
+         r"$%s + %s = \overrightarrow{0}$ khi và chỉ khi $%s = -%s$, tức $%s$ là vectơ đối của $%s$." % (a, b, b, a, b, a)),
+    ]
+
+
+def _b8nb_dien_tinh_chat():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    TEN = ["tính chất giao hoán", "tính chất kết hợp", "tính chất của vectơ-không", "quy tắc ba điểm"]
+    dang_thuc = [r"$%s + %s = %s + %s$" % (a, b, b, a),
+                 r"$\left(%s + %s\right) + %s = %s + \left(%s + %s\right)$" % (a, b, c, a, b, c),
+                 r"$%s + \overrightarrow{0} = \overrightarrow{0} + %s = %s$" % (a, a, a)]
+    ra = []
+    for i in range(3):
+        ra.append((r"Với các vectơ $%s$, $%s$, $%s$ bất kì, đẳng thức %s thể hiện" % (a, b, c, dang_thuc[i]),
+                   TEN[i] + " của phép cộng vectơ" if i < 2 else TEN[i],
+                   [t + (" của phép cộng vectơ" if j < 2 else "") for j, t in enumerate(TEN) if j != i],
+                   r"%s là %s." % (dang_thuc[i], TEN[i] + (" của phép cộng vectơ" if i < 2 else ""))))
+        sai = [dang_thuc[j] for j in range(3) if j != i] + [
+            [r"$%s + %s = %s - %s$" % (a, b, b, a), r"$\left(%s + %s\right) + %s = %s + \left(%s - %s\right)$" % (a, b, c, a, b, c),
+             r"$%s + \overrightarrow{0} = \overrightarrow{0}$" % a][i]]
+        ra.append((r"Với các vectơ $%s$, $%s$, $%s$ bất kì, %s của phép cộng vectơ được viết là"
+                   % (a, b, c, TEN[i] if i < 2 else "tính chất cộng với vectơ-không"), dang_thuc[i], sai,
+                   r"%s là %s." % (dang_thuc[i], TEN[i] + (" của phép cộng vectơ" if i < 2 else ""))))
+    return ra
+
+
+def _b8nb_mc_dien(kho, ten_kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        i = _c4_uu_tien(ten_kho, list(range(len(ds))))[0]
+        _c4_danh_dau(ten_kho, [i])
+        mo, dung, sai, ly = ds[i]
+        cau += MC_SA_answer_text(mo, dung, random.sample(sai, 3), ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_NB040_MC_A_01(socau, dang=1):
+    r"""Nhận biết tổng hai vectơ: điền khuyết định nghĩa tổng, quy tắc ba điểm, quy tắc hình bình hành, cộng với
+    vectơ-không; gọi tên quy tắc từ đẳng thức. Tên điểm, tên vectơ ngẫu nhiên; kho xoay vòng.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_tong, "b8nb_dien_tong", socau, dang)
+
+
+def L10_C4_B8_NB041_MC_A_01(socau, dang=1):
+    r"""Nhận biết vectơ đối, hiệu hai vectơ: vectơ đối của $\overrightarrow{XY}$, của vectơ-không, định nghĩa hai vectơ
+    đối nhau, định nghĩa hiệu, gọi tên quy tắc trừ, $\vec a + (-\vec a)$. Tên điểm, tên vectơ ngẫu nhiên.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_hieu, "b8nb_dien_hieu", socau, dang)
+
+
+def L10_C4_B8_NB042_MC_A_01(socau, dang=1):
+    r"""Nhận biết tính chất của phép cộng vectơ: cho đẳng thức, gọi tên tính chất (giao hoán, kết hợp, vectơ-không);
+    hoặc cho tên tính chất, chọn đẳng thức đúng. Tên vectơ ngẫu nhiên.
+
+    CLAUDE THEM 17/10/2026 - chi MC (ban SA vo ly); co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_dien(_b8nb_dien_tinh_chat, "b8nb_dien_tinh_chat", socau, dang)
+
+
+# ---------------------------------------------------------------- B: khẳng định đúng / sai về khái niệm
+def _b8nb_kd_tong():
+    """[(phát biểu (có $...$), đúng?, lí do)] về tổng hai vectơ."""
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    h = X + Y + Z + T
+    return [
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(Y, Z), v(X, Z)), True, "đó là quy tắc ba điểm"),
+        (r"Nếu $%s$ là hình bình hành thì $%s + %s = %s$" % (h, v(X, Y), v(X, T), v(X, Z)), True, "đó là quy tắc hình bình hành"),
+        (r"Với mọi vectơ $%s$, $%s + \overrightarrow{0} = %s$" % (a, a, a), True, "cộng với vectơ-không không làm thay đổi vectơ"),
+        (r"Với mọi vectơ $%s$, $%s$: $%s + %s = %s + %s$" % (a, b, a, b, b, a), True, "phép cộng vectơ có tính chất giao hoán"),
+        (r"Tổng của hai vectơ là một vectơ", True, "theo định nghĩa, tổng hai vectơ là một vectơ"),
+        (r"Với hai điểm $%s$, $%s$ bất kì, $%s + %s = \overrightarrow{0}$" % (X, Y, v(X, Y), v(Y, X)), True,
+         r"theo quy tắc ba điểm $%s + %s = %s = \overrightarrow{0}$" % (v(X, Y), v(Y, X), v(X, X))),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(Y, Z), v(Z, X)), False,
+         r"theo quy tắc ba điểm $%s + %s = %s$, không phải $%s$" % (v(X, Y), v(Y, Z), v(X, Z), v(Z, X))),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, $%s + %s = %s$" % (X, Y, Z, v(X, Y), v(X, Z), v(Y, Z)), False,
+         "quy tắc ba điểm cần điểm cuối của vectơ thứ nhất trùng điểm đầu của vectơ thứ hai"),
+        (r"Nếu $%s$ là hình bình hành thì $%s + %s = %s$" % (h, v(X, Y), v(X, T), v(Y, T)), False,
+         r"theo quy tắc hình bình hành $%s + %s = %s$" % (v(X, Y), v(X, T), v(X, Z))),
+        (r"Với mọi vectơ $%s$, $%s + \overrightarrow{0} = \overrightarrow{0}$" % (a, a), False,
+         r"$%s + \overrightarrow{0} = %s$" % (a, a)),
+        (r"Với mọi vectơ $%s$, $%s$: $\left|%s + %s\right| = \left|%s\right| + \left|%s\right|$" % (a, b, a, b, a, b), False,
+         "chỉ đúng khi hai vectơ cùng hướng (hoặc có một vectơ là vectơ-không)"),
+        (r"Tổng của hai vectơ là một số", False, "tổng của hai vectơ là một vectơ"),
+    ]
+
+
+def _b8nb_kd_hieu():
+    X, Y, Z, T, a, b, c = _b8nb_ten()
+    v = _vt
+    return [
+        (r"Vectơ đối của $%s$ là $%s$" % (v(X, Y), v(Y, X)), True, "hai vectơ này cùng độ dài, ngược hướng"),
+        (r"Vectơ đối của vectơ-không là vectơ-không", True, r"$-\overrightarrow{0} = \overrightarrow{0}$"),
+        (r"Với mọi vectơ $%s$, $%s$: $%s - %s = %s + \left(-%s\right)$" % (a, b, a, b, a, b), True, "đó là định nghĩa hiệu hai vectơ"),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, $%s - %s = %s$" % (Z, X, Y, v(Z, Y), v(Z, X), v(X, Y)), True, "đó là quy tắc trừ"),
+        (r"Hai vectơ đối nhau thì có cùng độ dài", True, "vectơ đối cùng độ dài, ngược hướng với vectơ đã cho"),
+        (r"Với mọi vectơ $%s$, $%s + \left(-%s\right) = \overrightarrow{0}$" % (a, a, a), True, "tổng của một vectơ với vectơ đối của nó bằng vectơ-không"),
+        (r"Vectơ đối của $%s$ là $%s$" % (v(X, Y), v(X, Y)), False, r"vectơ đối của $%s$ là $%s$" % (v(X, Y), v(Y, X))),
+        (r"Hai vectơ đối nhau thì cùng hướng", False, "hai vectơ đối nhau ngược hướng"),
+        (r"Với mọi vectơ $%s$, $%s$: $%s - %s = %s - %s$" % (a, b, a, b, b, a), False,
+         r"$%s - %s$ và $%s - %s$ là hai vectơ đối nhau" % (a, b, b, a)),
+        (r"Với ba điểm $%s$, $%s$, $%s$ bất kì, $%s - %s = %s$" % (Z, X, Y, v(Z, Y), v(Z, X), v(Y, X)), False,
+         r"theo quy tắc trừ $%s - %s = %s$" % (v(Z, Y), v(Z, X), v(X, Y))),
+        (r"Vectơ-không không có vectơ đối", False, "vectơ đối của vectơ-không là vectơ-không"),
+        (r"Hai vectơ có cùng độ dài thì đối nhau", False, "còn phải ngược hướng"),
+    ]
+
+
+def _b8nb_mc_kd(kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        hoi = random.random() < 0.55
+        d = random.choice([x for x in ds if x[1] == hoi])
+        s = random.sample([x for x in ds if x[1] != hoi], 3)
+        debai = r"Khẳng định nào sau đây %s?" % (r"\textbf{đúng}" if hoi else r"\textbf{sai}")
+        giai = r"\\ ".join(r"``%s'' là khẳng định %s vì %s." % (x[0], "đúng" if x[1] else "sai", x[2]) for x in [d] + s)
+        cau += MC_SA_answer_text(debai, d[0], [x[0] for x in s], giai, 0, 0, dang)
+    return cau
+
+
+def _b8nb_sa_kd(kho, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        ds = kho()
+        so_dung = random.choice([1, 2, 2, 3])
+        chon = random.sample([x for x in ds if x[1]], so_dung) + random.sample([x for x in ds if not x[1]], 4 - so_dung)
+        random.shuffle(chon)
+        de = (r"Cho các khẳng định sau: \\ " + r"\\ ".join(r"%d) %s;" % (k + 1, x[0]) for k, x in enumerate(chon))
+              + r"\\ Có bao nhiêu khẳng định đúng?")
+        ly = r"\\ ".join(r"Khẳng định %d %s vì %s." % (k + 1, "đúng" if x[1] else "sai", x[2]) for k, x in enumerate(chon))
+        ly += r"\\ Vậy có $%d$ khẳng định đúng." % so_dung
+        cau += MC_SA_answer_const(de, str(so_dung), [str(x) for x in (0, 1, 2, 3, 4) if x != so_dung], ly, 0, 0, dang)
+    return cau
+
+
+def L10_C4_B8_NB040_MC_B_01(socau, dang=1):
+    r"""Chọn khẳng định đúng (sai) về khái niệm tổng hai vectơ: quy tắc ba điểm, quy tắc hình bình hành, cộng với
+    vectơ-không, giao hoán (kho 12 khẳng định, tên điểm/vectơ ngẫu nhiên).
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_kd(_b8nb_kd_tong, socau, dang)
+
+
+def L10_C4_B8_NB040_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với NB040_MC_B: bốn khẳng định về tổng hai vectơ, đếm số khẳng định đúng.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_sa_kd(_b8nb_kd_tong, socau, dang)
+
+
+def L10_C4_B8_NB041_MC_B_01(socau, dang=1):
+    r"""Chọn khẳng định đúng (sai) về vectơ đối, hiệu hai vectơ, quy tắc trừ (kho 12 khẳng định, tên ngẫu nhiên).
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_mc_kd(_b8nb_kd_hieu, socau, dang)
+
+
+def L10_C4_B8_NB041_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - cùng Dang với NB041_MC_B: bốn khẳng định về vectơ đối, hiệu, đếm số khẳng định đúng.
+
+    CLAUDE THEM 17/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _b8nb_sa_kd(_b8nb_kd_hieu, socau, dang)
