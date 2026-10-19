@@ -148,6 +148,20 @@
     "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cua TH027_MC_B (cung Dang): mien nghiem la da giac co bao nhieu dinh (canh); co Lan duyet lai; DOI ID 15/10/2026 (co Lan): chu B -> C de chu B danh cho dang diem thuoc mien nghiem"
   },
   {
+    "id": "L10_C2_B4_TH027_MC_D",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Cho hệ bất phương trình và hình miền nghiệm trên lưới ô vuông: đếm số nghiệm nguyên (bờ nét liền thì điểm trên bờ là nghiệm, bờ nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 19/10/2026 - co Lan: ve hinh co o ly de hoc sinh nhin ra, bo sung vao ngan hang, muc thong hieu; them bo net dut (diem tren bo khong lay) de danh lua hoc sinh"
+  },
+  {
+    "id": "L10_C2_B4_TH027_SA_D",
+    "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Cho hệ bất phương trình và hình miền nghiệm trên lưới ô vuông: đếm số nghiệm nguyên (bờ nét liền thì điểm trên bờ là nghiệm, bờ nét đứt thì không)",
+    "ghi_chu": "CLAUDE THEM 19/10/2026 - co Lan: ve hinh co o ly de hoc sinh nhin ra, bo sung vao ngan hang, muc thong hieu; them bo net dut (diem tren bo khong lay) de danh lua hoc sinh"
+  },
+  {
     "id": "L10_C2_B4_VD027_MC_B",
     "content": "Biểu diễn được miền nghiệm của hệ bất phương trình bậc nhất hai ẩn trên mặt phẳng tọa độ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",

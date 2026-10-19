@@ -5593,3 +5593,242 @@ def L10_C2_B3_VD025_MC_A_01(socau, dang=1):
 
     CLAUDE THEM 15/10/2026 - co Lan duyet lai."""
     return L10_C2_B3_VD025_SA_A_01(socau, dang)
+
+
+# =====================================================================
+# 19/10/2026 - DEM NGHIEM NGUYEN NHO HINH CO LUOI O VUONG (co Lan: "Ve cho toi hinh co ca o ly de HS nhin ra duoc. Bo sung
+# vao ngan hang de luon. Muc do thong hieu." va "cho bien khong lay nua, de danh lua hoc sinh"). Dang moi TH027_MC_D / SA_D:
+# cho he ba bat phuong trinh (mien nghiem nam trong mot tam giac) va HINH mien nghiem tren luoi o vuong (phan bi gach la
+# phan bi loai); hoi so nghiem nguyen (x; y). Bo co dau bang (\le, \ge) ve NET LIEN - diem nut luoi tren bo la nghiem;
+# bo dau < hoac > ve NET DUT - diem tren bo KHONG la nghiem (bay: hoc sinh dem ca diem tren net dut).
+# =====================================================================
+_C2G_DAU = {"le": r"\le", "ge": r"\ge", "lt": "<", "gt": ">"}
+
+
+def _c2g_thoa(t, X, Y, dong=False):
+    """dong=True: xét bao đóng (coi < như \\le) - dùng để tìm đỉnh, vẽ hình."""
+    a, b, c, dau = t
+    v = a * X + b * Y
+    if dau in ("le", "lt"):
+        return v <= c if (dau == "le" or dong) else v < c
+    return v >= c if (dau == "ge" or dong) else v > c
+
+
+def _c2g_dinh(he):
+    """Đỉnh của tam giác bao miền nghiệm theo thứ tự vòng, toạ độ Fraction."""
+    P = []
+    for i in range(len(he)):
+        for j in range(i + 1, len(he)):
+            a1, b1, c1, _ = he[i]
+            a2, b2, c2, _ = he[j]
+            D = a1 * b2 - a2 * b1
+            if D == 0:
+                continue
+            X, Y = Fraction(c1 * b2 - c2 * b1, D), Fraction(a1 * c2 - a2 * c1, D)
+            if all(_c2g_thoa(t, X, Y, True) for t in he) and (X, Y) not in P:
+                P.append((X, Y))
+    cx = sum(p[0] for p in P) / len(P)
+    cy = sum(p[1] for p in P) / len(P)
+    P.sort(key=lambda p: math.atan2(float(p[1] - cy), float(p[0] - cx)))
+    return P
+
+
+def _c2g_nguyen(he, dong=False):
+    """Nghiệm nguyên (dong=True: kể cả điểm trên bờ nét đứt - đáp số khi học sinh mắc bẫy)."""
+    P = _c2g_dinh(he)
+    return [(X, Y) for X in range(math.floor(min(p[0] for p in P)), math.ceil(max(p[0] for p in P)) + 1)
+            for Y in range(math.floor(min(p[1] for p in P)), math.ceil(max(p[1] for p in P)) + 1)
+            if all(_c2g_thoa(t, X, Y, dong) for t in he)]
+
+
+def _c2g_so(v):
+    return ("%.4f" % float(v)).rstrip("0").rstrip(".")
+
+
+def _c2g_hinh(he, ti_le=1.0):
+    r"""Hình miền nghiệm trên lưới ô vuông: phần bị gạch là phần bị loại, miền nghiệm để trắng; bờ nét liền / nét đứt."""
+    P = _c2g_dinh(he)
+    X0 = min(0, math.floor(min(p[0] for p in P))) - 1
+    X1 = max(0, math.ceil(max(p[0] for p in P))) + 1
+    Y0 = min(0, math.floor(min(p[1] for p in P))) - 1
+    Y1 = max(0, math.ceil(max(p[1] for p in P))) + 1
+    da_giac = " -- ".join("(%s,%s)" % (_c2g_so(x_), _c2g_so(y_)) for x_, y_ in P) + " -- cycle"
+    duong = ""
+    for a, b, c, dau in he:
+        if b == 0:
+            doan = "(%s,%d) -- (%s,%d)" % (_c2g_so(Fraction(c, a)), Y0, _c2g_so(Fraction(c, a)), Y1)
+        else:
+            doan = "(%d,%s) -- (%d,%s)" % (X0 - 1, _c2g_so(Fraction(c - a * (X0 - 1), b)), X1 + 1,
+                                           _c2g_so(Fraction(c - a * (X1 + 1), b)))
+        if dau in ("le", "ge"):
+            duong += "\\draw[thick] %s;\n" % doan
+        else:                                                    # nét đứt: lót trắng để vẫn thấy đứt khi trùng trục toạ độ
+            duong += "\\draw[white,line width=2pt] %s;\n\\draw[thick,dashed] %s;\n" % (doan, doan)
+    nx = ",".join(str(i) for i in range(X0 + 1, X1) if i != 0)
+    ny = ",".join(str(i) for i in range(Y0 + 1, Y1) if i != 0)
+    return ("\\begin{tikzpicture}[scale=%s,>=stealth,font=\\footnotesize]\n" % ti_le
+            + "\\draw[gray!45,very thin] (%d,%d) grid (%d,%d);\n" % (X0, Y0, X1, Y1)
+            + "\\begin{scope}\n\\clip (%d,%d) rectangle (%d,%d);\n" % (X0, Y0, X1, Y1)
+            + "\\fill[pattern=north east lines,pattern color=gray!80,even odd rule] (%d,%d) rectangle (%d,%d) %s;\n"
+            % (X0, Y0, X1, Y1, da_giac)
+            + "\\end{scope}\n"
+            + "\\draw[->] (%s,0) -- (%s,0) node[below]{$x$};\n" % (X0 - 0.3, X1 + 0.5)
+            + "\\draw[->] (0,%s) -- (0,%s) node[left]{$y$};\n" % (Y0 - 0.3, Y1 + 0.5)
+            + "\\begin{scope}\n\\clip (%d,%d) rectangle (%d,%d);\n" % (X0, Y0, X1, Y1) + duong + "\\end{scope}\n"
+            + "\\node[below left,fill=white,inner sep=1pt] at (0,0) {$O$};\n"
+            + ("\\foreach \\i in {%s} \\node[below,fill=white,inner sep=1pt] at (\\i,0) {$\\i$};\n" % nx if nx else "")
+            + ("\\foreach \\i in {%s} \\node[left,fill=white,inner sep=1pt] at (0,\\i) {$\\i$};\n" % ny if ny else "")
+            + "\\end{tikzpicture}")
+
+
+def _c2g_ps(v):
+    v = Fraction(v)
+    if v.denominator == 1:
+        return "%d" % v.numerator
+    return ("-" if v < 0 else "") + r"\dfrac{%d}{%d}" % (abs(v.numerator), v.denominator)
+
+
+def _c2g_bpt(a, b, c, dau):
+    def hang(h, bien, dau_tien):
+        if h == 0:
+            return ""
+        s = ("" if h > 0 else "-") if dau_tien else (" + " if h > 0 else " - ")
+        return s + ("" if abs(h) == 1 else str(abs(h))) + bien
+    return r"%s %s %d" % ((hang(a, "x", True) + hang(b, "y", a == 0)).strip(), _C2G_DAU[dau], c)
+
+
+def _c2g_giai(he, tex_he):
+    D = _c2g_nguyen(he)
+    P = _c2g_dinh(he)
+    xa, xb = min(p[0] for p in P), max(p[0] for p in P)
+    xs = list(range(math.ceil(xa), math.floor(xb) + 1))
+    dong = []
+    for X in xs:
+        hong = [t for t in he if t[1] == 0 and not _c2g_thoa(t, X, 0)]   # bờ thẳng đứng nét đứt loại cả cột
+        if hong:
+            dong.append(r"$x = %d$ không thoả $%s$ (bờ nét đứt) nên bị loại" % (X, _c2g_bpt(*hong[0])))
+            continue
+        lo = hi = None                                           # (giá trị, nghiêm ngặt?)
+        for a, b, c, dau in he:
+            if b == 0:
+                continue
+            gh, ngat = Fraction(c - a * X, b), dau in ("lt", "gt")
+            if (dau in ("le", "lt")) == (b > 0):
+                if hi is None or gh < hi[0] or (gh == hi[0] and ngat):
+                    hi = (gh, ngat)
+            elif lo is None or gh > lo[0] or (gh == lo[0] and ngat):
+                lo = (gh, ngat)
+        khoang = r"$%s %s y %s %s$" % (_c2g_ps(lo[0]), "<" if lo[1] else r"\le", "<" if hi[1] else r"\le", _c2g_ps(hi[0]))
+        Ys = [p[1] for p in D if p[0] == X]
+        if not Ys:
+            dong.append(r"$x = %d$: %s, không có giá trị nguyên nào của $y$" % (X, khoang))
+        else:
+            dong.append(r"$x = %d$: %s nên $y \in \left\{%s\right\}$, được $%d$ nghiệm"
+                        % (X, khoang, "; ".join(map(str, Ys)), len(Ys)))
+    dinh = ", ".join(r"$\left(%s; %s\right)$" % (_c2g_ps(p[0]), _c2g_ps(p[1])) for p in P)
+    ngat = [t for t in he if t[3] in ("lt", "gt")]
+    if ngat:
+        bo = (r"Bờ ứng với bất phương trình có dấu bằng ($\le$, $\ge$) vẽ nét liền: điểm trên bờ đó là nghiệm; bờ ứng với "
+              r"bất phương trình %s (dấu $<$ hoặc $>$) vẽ nét đứt: điểm trên bờ đó \textbf{không} là nghiệm."
+              % ", ".join("$%s$" % _c2g_bpt(*t) for t in ngat))
+        bay = len(_c2g_nguyen(he, True)) - len(D)
+        cuoi = (r" (Nếu đếm cả $%d$ điểm nằm trên bờ nét đứt thì sai thành $%d$.)" % (bay, len(D) + bay)) if bay else ""
+    else:
+        bo = r"Các bất phương trình đều có dấu bằng nên bờ vẽ nét liền: điểm trên bờ cũng là nghiệm."
+        cuoi = ""
+    return (r"Miền nghiệm của hệ %s là phần không bị gạch. %s Nghiệm nguyên của hệ là các điểm nút lưới thuộc miền "
+            r"nghiệm.\\ Miền nghiệm nằm trong tam giác có các đỉnh %s nên hoành độ của mọi điểm trong miền thuộc đoạn "
+            r"$\left[%s; %s\right]$, suy ra $x \in \left\{%s\right\}$. Xét từng giá trị của $x$:\\ "
+            % (tex_he, bo, dinh, _c2g_ps(xa), _c2g_ps(xb), "; ".join(map(str, xs)))
+            + r"\\ ".join(dong)
+            + r".\\ Vậy hệ có $%d$ nghiệm nguyên: %s." % (len(D), ", ".join(r"$\left(%d; %d\right)$" % p for p in D))
+            + cuoi)
+
+
+def _c2g_he():
+    """Ba đường thẳng hệ số nhỏ tạo thành tam giác (đỉnh trong [-2; 6]); dấu chọn để tam giác là miền nghiệm. Khoảng
+    60% số câu có bờ nét đứt (dấu < hoặc >) đi qua ít nhất một điểm nút lưới của tam giác (bẫy). Không có điểm nút nào
+    nằm SÁT bờ mà không nằm trên bờ (dễ nhìn nhầm); có từ 3 đến 12 nghiệm nguyên."""
+    kho = [(1, 0, 0), (0, 1, 0)] + [(a, b, c) for a in range(-3, 4) for b in range(-3, 4) for c in range(-6, 13)
+                                    if (a, b) != (0, 0) and math.gcd(math.gcd(abs(a), abs(b)), abs(c)) == 1]
+    co_bay = _rd.random() < 0.6
+    while True:
+        L = _rd.sample(kho, 3)
+        if _rd.random() < 0.6:                                   # hay gặp trong SGK: một bờ là trục toạ độ
+            L[0] = _rd.choice([(1, 0, 0), (0, 1, 0)])
+        if any(a1 * b2 == a2 * b1 for i, (a1, b1, _c1) in enumerate(L) for (a2, b2, _c2) in L[i + 1:]):
+            continue
+        V = []
+        for i in range(3):
+            for j in range(i + 1, 3):
+                (a1, b1, c1), (a2, b2, c2) = L[i], L[j]
+                D = a1 * b2 - a2 * b1
+                V.append((Fraction(c1 * b2 - c2 * b1, D), Fraction(a1 * c2 - a2 * c1, D)))
+        if not all(-2 <= v[0] <= 6 and -2 <= v[1] <= 6 for v in V):
+            continue
+        dien_tich = abs((V[1][0] - V[0][0]) * (V[2][1] - V[0][1]) - (V[2][0] - V[0][0]) * (V[1][1] - V[0][1])) / 2
+        if dien_tich < 3:
+            continue
+        cx, cy = sum(v[0] for v in V) / 3, sum(v[1] for v in V) / 3
+        he = []
+        for k, (a, b, c) in enumerate(L):
+            dau = "le" if a * cx + b * cy - c < 0 else "ge"
+            if a < 0 or (a == 0 and b < 0):                      # hệ số đầu dương cho dễ đọc
+                a, b, c, dau = -a, -b, -c, ("ge" if dau == "le" else "le")
+            if co_bay and (k == 0 or _rd.random() < 0.3):        # bờ nét đứt
+                dau = {"le": "lt", "ge": "gt"}[dau]
+            he.append((a, b, c, dau))
+        n, n_bay = len(_c2g_nguyen(he)), len(_c2g_nguyen(he, True))
+        if not 3 <= n <= 12 or (co_bay and n_bay == n):
+            continue
+        sat = False
+        for X in range(-3, 8):
+            for Y in range(-3, 8):
+                for a, b, c, _d in he:
+                    kc = abs(a * X + b * Y - c) / math.hypot(a, b)
+                    if 0 < kc < 0.15:
+                        sat = True
+        if not sat:
+            return he
+
+
+def _c2g_cau(dang):
+    he = _c2g_he()
+    tex_he = r"\heva{%s}" % r" \\ ".join("& " + _c2g_bpt(*t) for t in he)
+    D = _c2g_nguyen(he)
+    n = len(D)
+    bay = len(_c2g_nguyen(he, True))                              # đếm cả điểm trên bờ nét đứt
+    trong = sum(1 for X, Y in D if all(a * X + b * Y != c for a, b, c, d in he))
+    debai = (r"Cho hệ bất phương trình $%s$ có miền nghiệm là phần không bị gạch bỏ trong hình (mỗi ô vuông có cạnh $1$ "
+             r"đơn vị). Hỏi hệ có bao nhiêu nghiệm nguyên $\left(x; y\right)$?" % tex_he)
+    nhieu = []
+    for w in [bay, trong, n + 1, n - 1, n + 2, n - 2, n + 3]:
+        if w > 0 and w != n and w not in nhieu:
+            nhieu.append(w)
+    return debai, n, nhieu[:4], _c2g_giai(he, "$%s$" % tex_he), _c2g_hinh(he)
+
+
+def L10_C2_B4_TH027_SA_D_01(socau, dang=2):
+    r"""Trả lời ngắn: hệ ba bất phương trình bậc nhất hai ẩn (miền nghiệm nằm trong một tam giác) kèm HÌNH miền nghiệm trên
+    lưới ô vuông (phần bị gạch là phần bị loại; bờ nét liền thuộc miền, bờ nét đứt không thuộc); đếm số nghiệm nguyên.
+    Lời giải xét từng giá trị nguyên của $x$.
+
+    CLAUDE THEM 19/10/2026 - co Lan: "ve hinh co ca o ly de HS nhin ra duoc, bo sung vao ngan hang, muc do thong hieu";
+    "cho bien khong lay nua, de danh lua hoc sinh" (bo net dut)."""
+    cau = ""
+    for _ in range(socau):
+        debai, n, nhieu, giai, hinh = _c2g_cau(dang)
+        cau += MC_SA_answer_const(debai, str(n), [str(w) for w in nhieu], giai, hinh, 0, dang)
+    return cau
+
+
+def L10_C2_B4_TH027_MC_D_01(socau, dang=1):
+    r"""Trắc nghiệm cùng dạng với TH027_SA_D_01 (đếm nghiệm nguyên nhờ hình có lưới ô vuông). Nhiễu: đếm cả điểm trên bờ
+    nét đứt, chỉ đếm điểm nằm hẳn bên trong (quên điểm trên bờ nét liền), lệch $1$, $2$.
+
+    CLAUDE THEM 19/10/2026 - co Lan."""
+    cau = ""
+    for _ in range(socau):
+        debai, n, nhieu, giai, hinh = _c2g_cau(dang)
+        cau += MC_SA_answer_text(debai, "$%d$" % n, ["$%d$" % w for w in nhieu], giai, hinh, 0, dang)
+    return cau
