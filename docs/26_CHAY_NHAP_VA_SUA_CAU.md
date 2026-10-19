@@ -142,6 +142,25 @@ Lưu ý: câu **trả lời ngắn** trong đề chỉ lấy mức VD/VDC
 (`data/config/exam_rules.json`) - dòng SA mức NB/TH không bao giờ được
 rút vào đề.
 
+### 4c. Câu chưa dùng được, muốn để dành xem lại → đưa vào lưu trữ
+
+Ví dụ thật (20/10/2026): bài đo bán kính Trái Đất (`L10_C3_B6_VD036_TL_E`,
+`MC_K`, `SA_K`, `MC_L`, `SA_L`) chỉ dùng tam giác vuông, không dùng hệ
+thức lượng trong tam giác thường.
+
+1. **Chuyển hàm** (cùng các hàm phụ chỉ nó dùng) từ
+   `data/python_bank/toan<lớp>/L<lớp>_C<chương>.py` sang
+   `data/luu_tru/L<lớp>_C<chương>_luu_tru.py`. Thư mục `data/luu_tru/` nằm
+   ngoài `python_bank` nên web, bộ ráp đề và test **không đọc** - câu không
+   bao giờ ra đề. Đầu tệp ghi lí do và cách đưa trở lại.
+2. **Chuyển dòng mapping** sang `data/luu_tru/L<lớp>_C<chương>_mapping_luu_tru.json`
+   (thêm trường `"luu_tru"` ghi ngày, lí do).
+3. **Bản tiếng Anh** (chương đã dịch): chạy lại `dich_ngan_hang.py dich`;
+   các mục từ điển không còn dùng chuyển sang
+   `data/luu_tru/en_L<lớp>_C<chương>_luu_tru.json`.
+4. Xem thử câu trong lưu trữ: `python3 data/luu_tru/L10_C3_luu_tru.py`.
+5. Đưa trở lại: làm ngược ba bước trên rồi chạy toàn bộ test (bước 5).
+
 ---
 
 ## Bước 5. Kiểm tra rồi đẩy lên web
