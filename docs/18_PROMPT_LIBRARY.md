@@ -236,7 +236,7 @@ Test giữ lại: `tests/test_ngau_nhien_khong_qua_ai.py`.
   "ĐÂY LÀ BẢN CHÍNH THỨC" (ngày chép, node, webhook, ai gọi). Riêng prompt dựng trong Python
   (như `CHV_GiaSu`) thì ghi chỗ đặt ở bảng trên, không chép ra tệp riêng.
 
-## Hai chỗ lệch giữa prompt và mã nguồn (ghi lại, CHƯA sửa)
+## Hai chỗ lệch giữa prompt và mã nguồn (ĐÃ SỬA cùng ngày — xem mục kế tiếp)
 
 Không liên quan đến tính ngẫu nhiên, nhưng thấy khi đối chiếu:
 
@@ -250,3 +250,36 @@ Không liên quan đến tính ngẫu nhiên, nhưng thấy khi đối chiếu:
 2. **`CHV_Grader` — tên khoá điểm.** Mục QUY TẮC CHẤM viết `diem: số thực, làm tròn 0.25`, còn
    schema đầu ra và Python dùng `dung_sai_hoac_diem`. Hiện vẫn chạy vì mô hình theo schema; lần
    tới sửa prompt thì đổi chữ `diem` cho khớp.
+
+---
+
+# Cập nhật 21/10/2026 (lần 2) — Đồng nhất các trường giữa prompt n8n và Python
+
+Cô Lan: "đồng nhất các trường với nhau, không để mâu thuẫn xảy ra". Nguyên tắc chốt:
+**trường nào Python tự biết thì Python đặt; từ AI chỉ lấy đúng phần AI đọc / chấm được, và
+Python luôn chuẩn hoá phần đó.** Như vậy prompt có lệch chữ nào cũng không làm sai điểm, sai đề.
+Mỗi chỗ đều có test đọc thẳng tệp prompt trong `data/prompts/` — sửa prompt mà Python chưa theo
+thì test báo.
+
+## Bảng đối chiếu
+
+| AI | Trường | Prompt | Python | Trước | Nay |
+|---|---|---|---|---|---|
+| `DocPhieuTraLoi` | Phần III (trả lời ngắn) | ví dụ `"-12.5"` | đáp án ngân hàng `$-5,5$` | so nguyên chuỗi → thập phân đúng bị chấm sai | `chuan_hoa_dap_an_ngan` (chung với chấm trên web): bỏ `$`, `.` = `,`, `{,}` = `,`, `−` = `-`. Prompt đổi ví dụ thành `"-12,5"` |
+| `DocPhieuTraLoi` | Phần II (`"D"`/`"S"`) | đọc từng ý | — | đọc xong bỏ đó, câu Đ/S luôn "cần chấm tay" | chấm theo số ý đúng, đúng cách tính của `/grade` (`diem_cau_tf`) |
+| `DocPhieuTraLoi`, `CHV_Grader` | vỏ JSON | "chỉ JSON" | — | n8n trả `{"output": "..."}` hay có ```` ``` ```` là hỏng | `_boc_json` bóc được; JSON hỏng thật thì báo lỗi rõ |
+| `CHV_Grader` | điểm | `diem:` trong QUY TẮC, `dung_sai_hoac_diem` trong schema | đọc `dung_sai_hoac_diem` | hai tên | prompt thống nhất `dung_sai_hoac_diem`; Python nhận cả `diem`, ép về số, chặn `[0; diem_toi_da]`, làm tròn 0,25; không đọc được → `loi_cham` (không cộng bừa) |
+| `CHV_Grader` | `loai_cau`, `diem_toi_da`, `chuong`, `bai` | AI tự ghi (`"tu_luan"`) | `"TL"`, thang điểm `diem_service` | lấy nguyên của AI → AI ghi sai `diem_toi_da` là lệch tổng điểm | Python tự đặt cả bốn; prompt ghi `"TL"` cho khớp |
+| `GenerateExam_RequestParser` | `ki_thi` | 9 slug, có `hoc_ky_1`, `hoc_ky_2` | chỉ nhận `giua_ky_1/2`, `cuoi_ky_1/2` | đề "học kỳ" hỏng (`KI_THI_KHONG_HOP_LE`) | `exam_scope_service.KI_THI_BI_DANH`: `hoc_ky_x` = `cuoi_ky_x`; kỳ thi lạ báo lỗi nói rõ phải chọn giữa kỳ hay cuối kỳ |
+| `GenerateExam_RequestParser` | `pham_vi_chuong` | được trả `"chua_xac_dinh"` | đổi `chuong_x` sang số | lỗi 500 (`ValueError`) | lỗi 400 "Chưa rõ chương nào..." |
+
+Test: `tests/test_cham_anh_dong_nhat.py`, `tests/test_dong_nhat_request_parser.py`.
+
+## Việc cô Lan làm trên n8n (chỉ sửa đúng các dòng này)
+
+- Node `DocPhieuTraLoi`, dòng cuối mục ĐỊNH DẠNG JSON: `(vd "75", "-12.5")` → `(vd "75", "-12,5")`.
+- Node `CHV_Grader`, mục QUY TẮC CHẤM: `- diem: số thực, làm tròn 0.25.` →
+  `- dung_sai_hoac_diem: số thực, làm tròn 0.25.`; trong schema: `"loai_cau": "tu_luan",` →
+  `"loai_cau": "TL",`.
+
+Chưa dán thì vẫn chấm đúng (Python đã tự chuẩn hoá) — dán để chữ trên n8n khớp bản ghi.

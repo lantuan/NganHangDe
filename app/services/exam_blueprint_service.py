@@ -616,12 +616,20 @@ def build_blueprint(
     if loai_he_so == "HeSo1":
         if not pham_vi_chuong:
             raise BlueprintError("Thiếu pham_vi_chuong cho HeSo1")
-        scope = load_scope_heso1(lop, pham_vi_chuong)
+        # GenerateExam_RequestParser trả "chua_xac_dinh" khi không rõ chương: trước 21/10/2026 câu dưới
+        # đổi sang số bị ValueError (lỗi 500 khó hiểu); nay báo rõ.
+        if not re.fullmatch(r"(chuong_)?\d+", str(pham_vi_chuong).strip()):
+            raise BlueprintError("Chưa rõ chương nào (pham_vi_chuong = '%s'). Đề kiểm tra thường xuyên ra "
+                                 "theo một chương, ví dụ: chương 2." % pham_vi_chuong)
+        scope = load_scope_heso1(lop, str(pham_vi_chuong).strip())
         pham_vi_bai = scope["pham_vi_bai"]
     elif loai_he_so == "HeSo2_HeSo3":
         if not ki_thi:
             raise BlueprintError("Thiếu ki_thi cho HeSo2_HeSo3")
         scope = load_scope_heso23(lop, ki_thi)
+        if scope.get("error") == "KI_THI_KHONG_HOP_LE":
+            raise BlueprintError("KI_THI_KHONG_HOP_LE: '%s' - đề hệ số 2, 3 cần nói rõ giữa kỳ hay cuối kỳ "
+                                 "(giua_ky_1, cuoi_ky_1, giua_ky_2, cuoi_ky_2; hoc_ky_1/2 = cuối kỳ)." % ki_thi)
         if "error" in scope:
             raise BlueprintError(scope["error"])
         pham_vi_bai = scope["pham_vi_bai"]

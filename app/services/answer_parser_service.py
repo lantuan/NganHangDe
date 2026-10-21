@@ -359,10 +359,17 @@ def chuan_hoa_dap_an_ngan(text: str | None) -> str:
     dung (trich tu latex_block) va dap an hoc sinh go tay: bo khoang
     trang dau/cuoi, bo dau $ (ky hieu cong thuc LaTeX), bo hoa/thuong,
     bo het khoang trang o giua.
+
+    SUA 21/10/2026 (co Lan: "dong nhat cac truong, khong de mau thuan"): dau
+    thap phan coi CHAM va PHAY nhu nhau (ngan hang viet "$-5,5$", phieu tra loi
+    cua Bo co cot dau phay, mo hinh doc phieu / hoc sinh go tay co the ra "-5.5");
+    "{,}" (dau phay trong LaTeX) cung la phay; dau tru Unicode "−" la "-".
+    Dung chung cho cham tren web (/grade) va cham bang anh phieu (grade_photo_service).
     """
     if not text:
         return ""
-    return text.strip().strip("$").replace(" ", "").lower()
+    t = str(text).strip().strip("$").replace(" ", "").lower()
+    return t.replace("{,}", ",").replace(".", ",").replace("−", "-")
 
 
 def chuan_hoa_dap_an_tf(gia_tri) -> bool | None:

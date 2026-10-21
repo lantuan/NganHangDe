@@ -14,6 +14,22 @@ KI_THI_MAP = {
     "cuoi_ky_2": (2, "CK2_EXAM", "GK2_EXAM"),
 }
 
+# Tên khác của cùng kỳ thi. GenerateExam_RequestParser (data/prompts/GenerateExam_RequestParser.md, mục
+# SLUG KỲ THI) được phép trả "hoc_ky_1" / "hoc_ky_2" - đề "học kỳ" chính là đề cuối kỳ. Trước 21/10/2026
+# máy chủ không nhận hai tên này nên đề hỏng (KI_THI_KHONG_HOP_LE). Đồng nhất tại đây, không sửa prompt.
+KI_THI_BI_DANH = {
+    "hoc_ky_1": "cuoi_ky_1",
+    "hoc_ky_2": "cuoi_ky_2",
+}
+
+
+def chuan_hoa_ki_thi(ki_thi: str | None) -> str | None:
+    """"hoc_ky_1" -> "cuoi_ky_1"...; giữ nguyên tên đã chuẩn hoặc tên lạ (để báo lỗi rõ ở chỗ gọi)."""
+    if not ki_thi:
+        return ki_thi
+    k = str(ki_thi).strip().lower()
+    return KI_THI_BI_DANH.get(k, k)
+
 
 _TIET_KHOANG = re.compile(r"^(\d+)\s*[-–]\s*(\d+)$")
 
@@ -112,6 +128,7 @@ def load_scope_heso23(lop: int, ki_thi: str) -> dict:
         + phần còn lại (sau mốc phụ đến mốc chính)         -> 70%
     - Nếu là giữa kỳ (không có mốc phụ): không chia tỷ lệ.
     """
+    ki_thi = chuan_hoa_ki_thi(ki_thi)
     info = KI_THI_MAP.get(ki_thi)
     if not info:
         return {"error": "KI_THI_KHONG_HOP_LE"}
@@ -187,7 +204,7 @@ def load_exam_scope(lop: int, ki_thi: str, pham_vi_chuong: str | None = None) ->
             }
         return load_scope_heso1(lop, pham_vi_chuong)
 
-    if ki_thi in KI_THI_MAP:
+    if chuan_hoa_ki_thi(ki_thi) in KI_THI_MAP:
         return load_scope_heso23(lop, ki_thi)
 
     return {

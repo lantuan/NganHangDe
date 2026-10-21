@@ -12,22 +12,77 @@ cau TF duoc luu dung loai_cau="TF" kem dap_an_dung {a,b,c,d} day du.
 2.27 - tu do generator luon sinh \\choiceTFt, dung dinh dang parser doc
 duoc.)
 
-Cau TF trong nhanh cham bang ANH van tra ve trang_thai="can_cham_tay",
-nhung LY DO gio khac: chua viet phan so khop ket qua DocPhieuTraLoi doc
-tu phieu voi dap_an_dung cua cau TF. Ca nhanh cham bang anh dang tam
-dung (xem thong bao "dang xay dung" o app/templates/chat/lam_bai.html).
-Nhanh lam bai truc tiep tren web (POST /api/exam/grade) cham TF binh
-thuong, khong lien quan.
+CAP NHAT 21/10/2026 - DONG NHAT CAC TRUONG giua prompt n8n va Python (co
+Lan: "dong nhat cac truong voi nhau, khong de mau thuan xay ra"; ban ghi
+prompt: data/prompts/DocPhieuTraLoi.md, data/prompts/CHV_Grader.md):
+- MOI truong ket qua do PYTHON dat (loai_cau MC/TF/SA/TL, diem_toi_da,
+  chuong, bai, question_id). Tu AI chi lay dung phan no "doc" duoc: o hoc
+  sinh to (DocPhieuTraLoi) va so diem + nhan xet (CHV_Grader). AI ghi
+  "tu_luan" hay "TL", diem_toi_da dung hay sai deu khong anh huong.
+- Diem CHV_Grader: doc khoa dung_sai_hoac_diem (chap nhan ca "diem"), ep
+  ve so, chan trong [0; diem_toi_da], lam tron 0,25. Khong doc duoc ->
+  None + trang_thai "loi_cham" (khong cong bua).
+- Tra loi ngan: so bang chuan_hoa_dap_an_ngan (chung voi /grade): bo $,
+  coi dau cham va dau phay thap phan nhu nhau.
+- Cau Dung/Sai: nay CHAM luon tu phieu ("D"/"S" -> chuan_hoa_dap_an_tf),
+  cung cach tinh diem theo so y dung nhu /grade (diem_service.diem_cau_tf).
+- n8n tra JSON boc trong {"output": "..."} (mac dinh cua AI Agent) hay
+  co ``` cung doc duoc (_boc_json).
+Ca nhanh cham bang anh van dang tam dung tren giao dien (xem thong bao
+"dang xay dung" o app/templates/chat/lam_bai.html).
 """
+import json
+import re
+
 import httpx
 
 from app.core.config import N8N_WEBHOOK_DOC_PHIEU, N8N_WEBHOOK_CHAM_TU_LUAN
 from app.services.mapping_service import trich_chuong_bai
 from app.services import diem_service
+from app.services.answer_parser_service import chuan_hoa_dap_an_ngan, chuan_hoa_dap_an_tf
 
 
 class GradePhotoError(Exception):
     pass
+
+
+def _boc_json(du_lieu):
+    """Lay phan JSON that tu cau tra loi cua n8n. Node AI Agent thuong tra
+    {"output": "<chuoi JSON>"} (co khi boc trong mang mot phan tu, co khi
+    kem ```json ... ```). Da la dict/list "that" thi giu nguyen."""
+    for _ in range(3):
+        if isinstance(du_lieu, list) and len(du_lieu) == 1 and isinstance(du_lieu[0], dict) \
+                and set(du_lieu[0]) & {"output", "text", "message", "answer"}:
+            du_lieu = du_lieu[0]
+        if isinstance(du_lieu, dict):
+            for khoa in ("output", "text", "message", "answer"):
+                if khoa in du_lieu and len(du_lieu) <= 2:
+                    du_lieu = du_lieu[khoa]
+                    break
+            else:
+                return du_lieu
+        if isinstance(du_lieu, str):
+            chu = re.sub(r"^\s*```(?:json)?\s*|\s*```\s*$", "", du_lieu.strip())
+            try:
+                du_lieu = json.loads(chu)
+            except ValueError:
+                raise GradePhotoError("AI tra ve khong phai JSON hop le: " + chu[:120])
+        elif not isinstance(du_lieu, dict):
+            return du_lieu
+    return du_lieu
+
+
+def _diem_tu_luan(kq: dict, diem_toi_da: float):
+    """Diem CHV_Grader cham -> so trong [0; diem_toi_da], lam tron 0,25. None neu khong doc duoc."""
+    gia_tri = kq.get("dung_sai_hoac_diem", kq.get("diem"))
+    if isinstance(gia_tri, bool) or gia_tri is None:
+        return None
+    try:
+        so = float(str(gia_tri).replace(",", ".").strip())
+    except ValueError:
+        return None
+    so = min(max(so, 0.0), float(diem_toi_da or 0))
+    return round(so * 4) / 4
 
 
 def _goi_webhook(url: str | None, payload: dict, ten_buoc: str) -> dict:
@@ -75,11 +130,13 @@ def cham_bai_bang_anh(
     # ---- Nhanh 1: Phieu tra loi (MC/TF/SA) qua DocPhieuTraLoi ----
     if anh_phieu_base64 and (mc_list or tf_list or sa_list):
         so_luong = {"mc": len(mc_list), "tf": len(tf_list), "sa": len(sa_list)}
-        doc_phieu = _goi_webhook(
+        doc_phieu = _boc_json(_goi_webhook(
             N8N_WEBHOOK_DOC_PHIEU,
             {"anh_base64": anh_phieu_base64, "so_luong": so_luong},
             "doc-phieu-tra-loi",
-        )
+        ))
+        if not isinstance(doc_phieu, dict):
+            raise GradePhotoError("DocPhieuTraLoi khong tra ve dang {mc, tf, sa}.")
 
         for vi_tri, cau in enumerate(mc_list, start=1):
             generator_id = cau.get("generator_id")
@@ -87,7 +144,7 @@ def cham_bai_bang_anh(
             dap_an_doc = (doc_phieu.get("mc") or {}).get(str(vi_tri))
             dung = bool(
                 dap_an_doc
-                and (dap_an_doc or "").strip().upper() == (cau.get("dap_an_dung") or "").strip().upper()
+                and str(dap_an_doc).strip().upper() == (cau.get("dap_an_dung") or "").strip().upper()
             )
             ket_qua_theo_stt[cau["so_thu_tu"]] = {
                 "question_id": generator_id,
@@ -108,9 +165,9 @@ def cham_bai_bang_anh(
             chuong, bai_so = trich_chuong_bai(generator_id)
             dap_an_doc = (doc_phieu.get("sa") or {}).get(str(vi_tri))
             dung = bool(
-                dap_an_doc
-                and (dap_an_doc or "").strip().replace(" ", "").lower()
-                == (cau.get("dap_an_dung") or "").strip().replace(" ", "").lower()
+                dap_an_doc is not None
+                and chuan_hoa_dap_an_ngan(str(dap_an_doc))
+                and chuan_hoa_dap_an_ngan(str(dap_an_doc)) == chuan_hoa_dap_an_ngan(cau.get("dap_an_dung"))
             )
             ket_qua_theo_stt[cau["so_thu_tu"]] = {
                 "question_id": generator_id,
@@ -130,23 +187,43 @@ def cham_bai_bang_anh(
             generator_id = cau.get("generator_id")
             chuong, bai_so = trich_chuong_bai(generator_id)
             dap_an_doc = (doc_phieu.get("tf") or {}).get(str(vi_tri))
-            ket_qua_theo_stt[cau["so_thu_tu"]] = {
+            dap_an_doc = dap_an_doc if isinstance(dap_an_doc, dict) else {}
+            dap_an_dung_tf = cau.get("dap_an_dung")
+            kq_tf = {
                 "question_id": generator_id,
                 "loai_cau": "TF",
-                "dung_sai_hoac_diem": None,
                 "diem_toi_da": diem_tf,
                 "diem_moi_y": thang["theo_phan"]["TF"]["diem_moi_y"],
-                "nhan_xet": (
-                    "Cau Dung/Sai: da doc duoc bai lam nhung chua tu cham dung/sai "
-                    "(answer_parser_service chua ho tro trich dap an dung TF). Can cham tay."
-                ),
+                "nhan_xet": "",
                 "chuong": chuong,
                 "bai": bai_so,
                 "tags": [],
                 "so_thu_tu": cau["so_thu_tu"],
-                "trang_thai": "can_cham_tay",
                 "dap_an_hoc_sinh": dap_an_doc,
+                "dap_an_dung": dap_an_dung_tf,
             }
+            if not isinstance(dap_an_dung_tf, dict) or not dap_an_dung_tf:
+                kq_tf.update({
+                    "dung_sai_hoac_diem": None,
+                    "nhan_xet": "Cau Dung/Sai chua co dap an dung trong tep dap an cua de. Can cham tay.",
+                    "trang_thai": "can_cham_tay",
+                })
+            else:
+                # Cung cach cham voi POST /api/exam/grade: diem theo so y dung.
+                chi_tiet_tung_y, so_y_dung = {}, 0
+                for y in ("a", "b", "c", "d"):
+                    hs = chuan_hoa_dap_an_tf(dap_an_doc.get(y))
+                    dung_y = hs is not None and hs == dap_an_dung_tf.get(y)
+                    chi_tiet_tung_y[y] = dung_y
+                    so_y_dung += 1 if dung_y else 0
+                _goc, diem_dat_duoc = diem_service.diem_cau_tf(thang, so_y_dung)
+                kq_tf.update({
+                    "dung_sai_hoac_diem": so_y_dung == 4,
+                    "diem_dat_duoc": diem_dat_duoc,
+                    "so_y_dung": so_y_dung,
+                    "chi_tiet_tung_y": chi_tiet_tung_y,
+                })
+            ket_qua_theo_stt[cau["so_thu_tu"]] = kq_tf
 
     # ---- Nhanh 2: Bai lam tu luan qua CHV_Grader ----
     if anh_tuluan_base64 and tl_list:
@@ -162,16 +239,40 @@ def cham_bai_bang_anh(
                 "chuong": chuong,
             })
 
-        cham_tu_luan = _goi_webhook(
+        cham_tu_luan = _boc_json(_goi_webhook(
             N8N_WEBHOOK_CHAM_TU_LUAN,
             {"anh_base64": anh_tuluan_base64, "danh_sach_cau": danh_sach_cau_tl},
             "cham-tu-luan",
-        )
-        ket_qua_theo_generator_id = {kq.get("question_id"): kq for kq in cham_tu_luan}
+        ))
+        if isinstance(cham_tu_luan, dict):
+            cham_tu_luan = [cham_tu_luan]
+        if not isinstance(cham_tu_luan, list):
+            raise GradePhotoError("CHV_Grader khong tra ve mang ket qua.")
+        ket_qua_theo_generator_id = {
+            kq.get("question_id"): kq for kq in cham_tu_luan if isinstance(kq, dict)
+        }
+        thong_tin_tl = {c["question_id"]: c for c in danh_sach_cau_tl}
         for cau in tl_list:
             generator_id = cau.get("generator_id")
-            kq = ket_qua_theo_generator_id.get(generator_id)
-            if kq is None:
+            kq_ai = ket_qua_theo_generator_id.get(generator_id)
+            if kq_ai is not None:
+                # Moi truong do Python dat; tu AI chi lay diem + nhan xet.
+                tt = thong_tin_tl[generator_id]
+                diem = _diem_tu_luan(kq_ai, tt["diem_toi_da"])
+                kq = {
+                    "question_id": generator_id,
+                    "loai_cau": "TL",
+                    "dung_sai_hoac_diem": diem,
+                    "diem_toi_da": tt["diem_toi_da"],
+                    "nhan_xet": str(kq_ai.get("nhan_xet") or ""),
+                    "chuong": tt["chuong"],
+                    "bai": tt["bai"],
+                    "tags": kq_ai.get("tags") if isinstance(kq_ai.get("tags"), list) else [],
+                }
+                if diem is None:
+                    kq["trang_thai"] = "loi_cham"
+                    kq["nhan_xet"] = ("CHV_Grader tra ve diem khong doc duoc. " + kq["nhan_xet"]).strip()
+            else:
                 chuong, bai_so = trich_chuong_bai(generator_id)
                 kq = {
                     "question_id": generator_id,
@@ -217,7 +318,9 @@ def cham_bai_bang_anh(
         if gia_tri is None:
             continue
         tong_diem_toi_da_da_cham += kq.get("diem_toi_da") or 0
-        if isinstance(gia_tri, bool):
+        if kq.get("loai_cau") == "TF" and isinstance(kq.get("diem_dat_duoc"), (int, float)):
+            tong_diem_dat += kq["diem_dat_duoc"]
+        elif isinstance(gia_tri, bool):
             tong_diem_dat += (kq.get("diem_toi_da") or 0) if gia_tri else 0
         else:
             tong_diem_dat += float(gia_tri)
@@ -233,8 +336,8 @@ def cham_bai_bang_anh(
         "diem_toi_da_tong": thang["diem_toi_da_tong"],
         "ghi_chu": (
             "Diem cong don tren thang 10 (MC 3d - TF 2d - SA 2d - TL 3d), "
-            "chi tinh cac cau da cham duoc. Cau TF luon can cham tay "
-            "(xem ghi chu dau file)."
+            "chi tinh cac cau da cham duoc. Cau TF tinh theo so y dung "
+            "nhu cham tren web."
         ),
         "chi_tiet": chi_tiet,
     }
