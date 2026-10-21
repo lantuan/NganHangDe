@@ -84,7 +84,7 @@ def test_b_hai_luc_tren_hinh(ten):
 # ---------------------------------------------------------------- C (VDC)
 @pytest.mark.parametrize("ten", ["MC_C_01", "SA_C_01"])
 def test_c_keo_len_doc(ten):
-    bc, hoi_thay = set(), set()
+    bc, hoi_thay, goc_thay = set(), set(), {}
     for s in range(300):
         de, dap, nhieu, giai, hinh = _bat(ten, s)
         Pm, a = re.search(r"trọng lượng \$([\d\\,]+)\$ N lên (?:một con|một mặt) dốc nghiêng \$(\d+)\^\\circ\$", de).groups()
@@ -113,8 +113,14 @@ def test_c_keo_len_doc(ten):
             assert len(set([dap] + nhieu)) == 4 and dap not in nhieu
         else:
             assert len(dap) <= 4, dap
-        bc.add(re.search(r"khẩu pháo|xe chở hàng|khúc gỗ", de).group(0))
+        vat = re.search(r"khẩu pháo|xe chở hàng|khúc gỗ", de).group(0)
+        bc.add(vat)
+        # góc nghiêng hợp lí theo bối cảnh (cô Lan 21/10/2026): xe người kéo 8-15, pháo 15-30, tời kéo gỗ 10-30 độ
+        lo, hi = {"xe chở hàng": (8, 15), "khẩu pháo": (15, 30), "khúc gỗ": (10, 30)}[vat]
+        assert lo <= a <= hi, (vat, a)
+        goc_thay.setdefault(vat, set()).add(a)
     assert bc == {"khẩu pháo", "xe chở hàng", "khúc gỗ"} and hoi_thay == {"nguoi", "luc", "phan_luc"}
+    assert all(len(g) >= 4 for g in goc_thay.values()), goc_thay       # góc vẫn đổi ngẫu nhiên trong khoảng
 
 
 def test_mapping_vdc_va_luyen_tap_them():

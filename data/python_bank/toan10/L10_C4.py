@@ -6843,13 +6843,15 @@ def _b8_hinh_doc(a):
     """TikZ mặt dốc nghiêng góc a độ, vật tại O, trọng lực P, phản lực w, lực kéo F (như Hình 4.18 SGK)."""
     r = math.radians(a)
     L = 6.0
-    O = (3.6 * math.cos(r), 3.6 * math.sin(r))
+    # dốc thoải (dưới 20 độ): đẩy vật lên cao hơn trên dốc để nhãn góc đặt xa đỉnh góc mà không chạm trọng lực P
+    O = ((4.3 if a < 20 else 3.6) * math.cos(r), (4.3 if a < 20 else 3.6) * math.sin(r))
     u = (math.cos(r), math.sin(r))                       # dọc dốc, hướng lên
     n = (-math.sin(r), math.cos(r))                      # pháp tuyến hướng lên
     lp = 2.2
     P = (O[0], O[1] - lp)
     W = (O[0] + n[0] * lp * math.cos(r), O[1] + n[1] * lp * math.cos(r))
-    F = (O[0] + u[0] * lp * math.sin(r), O[1] + u[1] * lp * math.sin(r))
+    lf = max(lp * math.sin(r), 1.0)                      # dốc thoải: F theo tỉ lệ sẽ nằm lọt dưới vật, nên tối thiểu 1
+    F = (O[0] + u[0] * lf, O[1] + u[1] * lf)
     goc = [(O[0] - 0.45 * u[0], O[1] - 0.45 * u[1]), (O[0] + 0.45 * u[0], O[1] + 0.45 * u[1])]
     goc += [(goc[1][0] + 0.4 * n[0], goc[1][1] + 0.4 * n[1]), (goc[0][0] + 0.4 * n[0], goc[0][1] + 0.4 * n[1])]
     T = lambda p: "(%s,%s)" % (_toa(p[0]), _toa(p[1]))
@@ -6861,16 +6863,26 @@ def _b8_hinh_doc(a):
            r"\draw[->] %s -- %s node[above left]{$\overrightarrow{w}$};" % (T(O), T(W)),
            r"\draw[->,blue] %s -- %s node[above]{$\overrightarrow{F}$};" % (T(O), T(F)),
            r"\fill %s circle[radius=1.5pt] node[below right]{\footnotesize $O$};" % T(O),
-           r"\draw[thin] (1,0) arc (0:%s:1) node[midway,right]{\footnotesize $%d^\circ$};" % (_toa(a), a),
+           r"\draw[thin] (1,0) arc (0:%s:1);" % _toa(a),
+           # nhãn góc: dốc càng thoải đặt càng xa đỉnh (khe giữa hai cạnh đủ rộng cho chữ)
+           r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa(a / 2), _toa(min(2.9, max(1.45, 0.5 / math.tan(r)))), a),
            r"\end{tikzpicture}"]
     return "\n".join(out)
+
+
+_B8_DOC_NGHIENG = {"keo_xe_hang_len_doc": (8, 15), "keo_phao_len_doc": (15, 30), "toi_keo_go_len_doc": (10, 30)}
 
 
 def _b8_vd040c(mc):
     """Kéo vật lên dốc nghiêng (VDC). -> (debai, dap, nhieu, giai, hinh)."""
     bc = _c4_uu_tien("b8_vd040c", ["keo_phao_len_doc", "keo_xe_hang_len_doc", "toi_keo_go_len_doc"])[0]
     _c4_danh_dau("b8_vd040c", [bc])
-    a = random.choice([10, 15, 20, 25, 30, 30, 35, 40, 45, random.randint(12, 44)])
+    # Góc nghiêng KHOÁ theo thực tế từng bối cảnh (cô Lan 21/10/2026: "độ nghiêng không hợp lý ... khoá độ dốc cho hợp
+    # lý"; trước đây rút 10-45 độ cho mọi bối cảnh, ra cả "xe chở hàng lên dốc 40 độ"). Mốc: đường ô tô miền núi theo
+    # TCVN 4054 dốc dọc chỉ khoảng 10 % (~6 độ); con phố dốc nhất thế giới khoảng 35 % (~19 độ). Người kéo xe chở hàng
+    # trên dốc 8-15 độ là đã rất dốc; kéo pháo qua đường núi 15-30 độ (bài SGK dùng 30 độ); tời kéo gỗ trên sườn /
+    # máng 10-30 độ. Dưới 8 độ lực kéo quá nhỏ, mũi tên F trên hình gần như không thấy.
+    a = random.randint(*_B8_DOC_NGHIENG[bc])
     r = _sp8.pi * a / 180
     if bc == "keo_phao_len_doc":
         P = random.randint(150, 260) * 100 + random.randint(0, 99)        # N
