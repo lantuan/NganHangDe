@@ -2590,5 +2590,15 @@
  "r\"%s) $%s = %s$ là đẳng thức %s%s.\"": "r\"%s) $%s = %s$ is a %s equality%s.\"",
  "r\" (đúng phải là $%s$)\"": "r\" (the correct form is $%s$)\"",
  "r\"\\\\ Vậy có $%d$ đẳng thức %s.\"": "r\"\\\\ Therefore, $%d$ of the equalities are %s.\"",
- "r\"%s) %s %s vì %s.\"": "r\"%s) %s %s because %s.\""
+ "r\"%s) %s %s vì %s.\"": "r\"%s) %s %s because %s.\"",
+ "r\"$%s = 0 \\Leftrightarrow x = %d$ hoặc $x = m$, nên $B = \\left\\{%d; m\\right\\}$\"": "r\"$%s = 0 \\Leftrightarrow x = %d$ or $x = m$, so $B = \\left\\{%d; m\\right\\}$\"",
+ "r\"$x(x - m) = 0 \\Leftrightarrow x = 0$ hoặc $x = m$, nên $B = \\left\\{0; m\\right\\}$\"": "r\"$x(x - m) = 0 \\Leftrightarrow x = 0$ or $x = m$, so $B = \\left\\{0; m\\right\\}$\"",
+ "r\". Do đó $%d \\in B$ và $m \\in B$ với mọi $m$.\"": "r\". Hence $%d \\in B$ and $m \\in B$ for every $m$.\"",
+ "r\"$%d \\in B$ và $m \\in B$\"": "r\"$%d \\in B$ and $m \\in B$\"",
+ "r\". Nếu $m = %d$ thì $B = \\left\\{%d\\right\\}$ có $1$ phần tử; \"\n                r\"nếu $m \\ne %d$ thì $B$ có $2$ phần tử.\"": "r\". If $m = %d$ then $B = \\left\\{%d\\right\\}$ has $1$ element; \"\n                r\"if $m \\ne %d$ then $B$ has $2$ elements.\"",
+ "r\"Khi $m = %d$, tập hợp $B$ có đúng $1$ phần tử\"": "r\"When $m = %d$, the set $B$ has exactly $1$ element\"",
+ "r\"Khi $m = %d$, tập hợp $B$ có đúng $2$ phần tử\"": "r\"When $m = %d$, the set $B$ has exactly $2$ elements\"",
+ "r\"Tập hợp $B$ có đúng $1$ phần tử khi và chỉ khi $m = %d$\"": "r\"The set $B$ has exactly $1$ element if and only if $m = %d$\"",
+ "r\"Với mọi giá trị của $m$, tập hợp $B$ luôn có đúng $2$ phần tử\"": "r\"For every value of $m$, the set $B$ always has exactly $2$ elements\"",
+ "r\"$%s$, nên $x %s %d$ là ước của $%d$: $x %s %d \\in \\left\\{%s\\right\\}$, do đó $A = %s$ \"\n                r\"($%d$ phần tử). %s. Vì $%d \\in A$ nên $B \\subset A \\Leftrightarrow m \\in A$: có $%d$ số nguyên $m$.\"": "r\"$%s$, so $x %s %d$ is a divisor of $%d$: $x %s %d \\in \\left\\{%s\\right\\}$, hence $A = %s$ \"\n                r\"($%d$ elements). %s. Since $%d \\in A$, we have $B \\subset A \\Leftrightarrow m \\in A$: there are $%d$ integers $m$.\""
 }

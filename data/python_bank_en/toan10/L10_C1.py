@@ -8379,12 +8379,18 @@ def L10_C1_B2_VD021_SA_A_02(socau, dang=2):
 
 
 def L10_C1_TF_B_02(socau, socot=1):
-    r"""Đúng/Sai - tập $A = \{x \in \mathbb{Z} \mid \frac{x + k}{x - c} \in \mathbb{Z}\}$:
-    phần tử, liệt kê, số tập con, tham số để $B \subset A$.
+    r"""Đúng/Sai - tập $A = \{x \in \mathbb{Z} \mid \frac{x + k}{x - c} \in \mathbb{Z}\}$ và
+    $B = \{x \in \mathbb{R} \mid (x - m)(x - r) = 0\}$:
+    a) (NB) phần tử của $A$; b) (TH) phần tử của $B$; c) (VD) số phần tử của $B$ theo $m$;
+    d) (VDC) số nguyên $m$ để $B \subset A$.
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C1_TF_B, theo cac bai "A = {x
     thuoc Z | (2x + 3)/(x - 1) thuoc Z}, B = {x | x^2 - (m + 2)x + 2m = 0},
     tim m nguyen de B con A" trong giao an Bai 2. Co Lan duyet.
+    SUA 22/10/2026 (co Lan): y b) cu (phan tu / liet ke A) qua giong y a) -> nay hoi
+    PHAN TU CUA B (r thuoc B, m thuoc B...). Y c) cu (so tap con 2^N) qua kho -> nay
+    hoi SO PHAN TU CUA B (1 phan tu khi m = r, 2 phan tu khi m khac r). Phan tim A
+    chuyen sang loi giai y d).
     """
     cauTF = ""
     for _ in range(socau):
@@ -8394,50 +8400,60 @@ def L10_C1_TF_B_02(socau, socot=1):
         uoc = [u for u in range(1, d + 1) if d % u == 0]
         A = sorted([c + u for u in uoc] + [c - u for u in uoc])
         N = len(A)
-        r = random.choice(A)
+        r = random.choice(A)                                   # nghiệm cố định của B (r thuộc A)
+        v = random.choice([i for i in range(-6, 7) if i != r])  # một giá trị m cụ thể khác r
         tu = r"x %s %d" % ("+" if k > 0 else "-", abs(k)) if k else "x"
         mau = r"x %s %d" % ("-" if c > 0 else "+", abs(c))
-        debai = (r"Given the set $A = \left\{x \in \mathbb{Z} \mathrel{\Big|} \dfrac{%s}{%s} \in \mathbb{Z}\right\}$ and $B = \left\{x \in \mathbb{R} \mid %s = 0\right\}$, where $m$ is a parameter. Determine whether each of the following statements is true or false:"
-                 % (tu, mau, (r"(x - m)(x %s %d)" % ("-" if r > 0 else "+", abs(r))) if r else r"x(x - m)"))
+        pt_B = (r"(x - m)(x %s %d)" % ("-" if r > 0 else "+", abs(r))) if r else r"x(x - m)"
+        debai = (r"Given the set $A = \left\{x \in \mathbb{Z} \mathrel{\Big|} \dfrac{%s}{%s} \in \mathbb{Z}\right\}$ and $B = \left\{x \in \mathbb{R} \mid %s = 0\right\}$, where $m$ is a parameter. Determine whether each of the following statements is true or false:" % (tu, mau, pt_B))
         tach = r"\dfrac{%s}{%s} = 1 + \dfrac{%d}{%s}" % (tu, mau, d, mau)
-        # a) NB
+        # Giải phương trình của B: dùng chung cho b), c), d)
+        giai_B = (r"$%s = 0 \Leftrightarrow x = %d$ or $x = m$, so $B = \left\{%d; m\right\}$"
+                  % (pt_B, r, r) if r else
+                  r"$x(x - m) = 0 \Leftrightarrow x = 0$ or $x = m$, so $B = \left\{0; m\right\}$")
+
+        # a) NB - phần tử của A (giữ nguyên)
         y1 = [(r"{\True $%d \in A$}" % (c + 1),
                r"True. For $x = %d$: $\dfrac{%d}{1} = %d \in \mathbb{Z}$." % (c + 1, c + 1 + k, c + 1 + k)),
               (r"{$%d \in A$}" % c, r"False. For $x = %d$ the denominator equals $0$, so the expression is undefined." % c)]
-        # b) TH
-        ly_b = (r"$%s$, so $x %s %d$ is a divisor of $%d$: $x %s %d \in \left\{%s\right\}$, hence $A = %s$."
-                % (tach, "-" if c > 0 else "+", abs(c), d, "-" if c > 0 else "+", abs(c),
-                   "; ".join(str(v) for v in sorted([-u for u in uoc] + uoc)), _tap(A)))
-        y2 = [(r"{\True $A = %s$}" % _tap(A), r"True. " + ly_b),
-              (r"{$A = %s$}" % _tap([c + u for u in uoc]), r"False (the negative divisors are missing). " + ly_b)]
-        # c) VD
-        y3 = [(r"{\True The set $A$ has exactly $%d$ subsets}" % (2 ** N),
-               r"True. $A$ has $%d$ elements, so it has $2^{%d} = %d$ subsets." % (N, N, 2 ** N)),
-              (r"{The set $A$ has exactly $%d$ subsets}" % (2 ** N - 1),
-               r"False. $A$ has $%d$ elements, so it has $2^{%d} = %d$ subsets (including $\varnothing$ and $A$)." % (N, N, 2 ** N))]
-        # d) VDC
-        ly_d = (r"$B = \left\{%d; m\right\}$ (or $B = \left\{%d\right\}$ when $m = %d$). Since $%d \in A$, we have $B \subset A \Leftrightarrow m \in A$: there are $%d$ integers $m$." % (r, r, r, r, N))
-        y4 = [(r"{\True There are exactly $%d$ integers $m$ for which $B \subset A$}" % N, r"True. " + ly_d),
-              (r"{There are exactly $%d$ integers $m$ for which $B \subset A$}" % (N - 1),
-               r"False (the case $m = %d$ is missed). " % r + ly_d)]
-        # Bổ sung 01/10/2026: mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai (cô Lan)
         ly_a2 = r"$x \in A \Leftrightarrow x %s %d$ is a divisor of $%d$ (integer divisors: $%s$)." % (
-            "-" if c > 0 else "+", abs(c), d, "; ".join(str(v) for v in sorted([-u for u in uoc] + uoc)))
+            "-" if c > 0 else "+", abs(c), d, "; ".join(str(v_) for v_ in sorted([-u for u in uoc] + uoc)))
         ngoai = [c + w for w in range(2, d) if d % w] + [c - w for w in range(2, d) if d % w]
         _tf_them(y1, [(r"$%d \in A$" % (c + u), ly_a2) for u in random.sample(uoc, min(2, len(uoc)))]
                  + [(r"$%d \in A$" % (c - u), ly_a2) for u in random.sample(uoc, 1)] + [(r"$%d \notin A$" % c, ly_a2)],
-                 [(r"$%d \in A$" % v, ly_a2) for v in random.sample(ngoai, min(2, len(ngoai)))]
+                 [(r"$%d \in A$" % v_, ly_a2) for v_ in random.sample(ngoai, min(2, len(ngoai)))]
                  + [(r"$%d \notin A$" % (c - 1), ly_a2), (r"$%d \notin A$" % (c + d), ly_a2)])
-        _tf_them(y2, [(r"The set $A$ has exactly $%d$ elements" % N, ly_b), (r"$%d \in A$ and $%d \in A$" % (c + d, c - d), ly_b),
-                      (r"The sum of the elements of $A$ equals $%d$" % sum(A), ly_b)],
-                 [(r"The set $A$ has exactly $%d$ elements" % (N // 2), ly_b), (r"$A = %s$" % _tap(A + [c]), ly_b),
-                  (r"The sum of the elements of $A$ equals $%d$" % (sum(A) + c), ly_b)])
-        ly_c2 = r"$A$ has $%d$ elements, so it has $2^{%d} = %d$ subsets (including $\varnothing$ and $A$)." % (N, N, 2 ** N)
-        _tf_them(y3, [(r"The set $A$ has exactly $%d$ subsets other than $\varnothing$" % (2 ** N - 1), ly_c2),
-                      (r"The set $A$ has exactly $%d$ subsets consisting of a single element" % N, ly_c2)],
-                 [(r"The set $A$ has exactly $%d$ subsets" % (2 ** (N - 1)), ly_c2),
-                  (r"The set $A$ has exactly $%d$ subsets other than $\varnothing$" % (2 ** N), ly_c2),
-                  (r"The set $A$ has exactly $%d$ subsets" % (N * N), ly_c2)])
+
+        # b) TH - phần tử của B = {r; m}: giải phương trình rồi xét (đúng/sai với MỌI m)
+        ly_b = giai_B + r". Hence $%d \in B$ and $m \in B$ for every $m$." % r
+        y2 = _phat_bieu(
+            [(r"$%d \in B$" % r, ly_b),
+             (r"$m \in B$", ly_b),
+             (r"$%d \in B$ and $m \in B$" % r, ly_b)],
+            [(r"$%d \notin B$" % r, ly_b),
+             (r"$m \notin B$", ly_b),
+             (r"$B = \varnothing$", ly_b)])
+
+        # c) VD - số phần tử của B phụ thuộc m, dùng kết quả B = {r; m} của ý b) (phát biểu luôn kèm điều kiện của m)
+        ly_c = (giai_B + r". If $m = %d$ then $B = \left\{%d\right\}$ has $1$ element; "
+                r"if $m \ne %d$ then $B$ has $2$ elements." % (r, r, r))
+        y3 = _phat_bieu(
+            [(r"When $m = %d$, the set $B$ has exactly $1$ element" % r, ly_c),
+             (r"When $m = %d$, the set $B$ has exactly $2$ elements" % v, ly_c),
+             (r"The set $B$ has exactly $1$ element if and only if $m = %d$" % r, ly_c)],
+            [(r"When $m = %d$, the set $B$ has exactly $2$ elements" % r, ly_c),
+             (r"When $m = %d$, the set $B$ has exactly $1$ element" % v, ly_c),
+             (r"For every value of $m$, the set $B$ always has exactly $2$ elements", ly_c)])
+
+        # d) VDC - số nguyên m để B ⊂ A (lời giải nay gồm cả bước tìm A)
+        ly_d = (r"$%s$, so $x %s %d$ is a divisor of $%d$: $x %s %d \in \left\{%s\right\}$, hence $A = %s$ "
+                r"($%d$ elements). %s. Since $%d \in A$, we have $B \subset A \Leftrightarrow m \in A$: there are $%d$ integers $m$."
+                % (tach, "-" if c > 0 else "+", abs(c), d, "-" if c > 0 else "+", abs(c),
+                   "; ".join(str(v_) for v_ in sorted([-u for u in uoc] + uoc)), _tap(A), N,
+                   giai_B[0].upper() + giai_B[1:] if not giai_B.startswith("$") else giai_B, r, N))
+        y4 = [(r"{\True There are exactly $%d$ integers $m$ for which $B \subset A$}" % N, r"True. " + ly_d),
+              (r"{There are exactly $%d$ integers $m$ for which $B \subset A$}" % (N - 1),
+               r"False (the case $m = %d$ is missed). " % r + ly_d)]
         d4, s4 = _tf_dem(r"%s $%d$ integers $m$ for which $B \subset A$", N, ly_d, [N - 1, N + 1, N // 2])
         _tf_them(y4, d4, s4)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)

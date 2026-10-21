@@ -8499,12 +8499,18 @@ def L10_C1_B2_VD021_SA_A_02(socau, dang=2):
 
 
 def L10_C1_TF_B_02(socau, socot=1):
-    r"""Đúng/Sai - tập $A = \{x \in \mathbb{Z} \mid \frac{x + k}{x - c} \in \mathbb{Z}\}$:
-    phần tử, liệt kê, số tập con, tham số để $B \subset A$.
+    r"""Đúng/Sai - tập $A = \{x \in \mathbb{Z} \mid \frac{x + k}{x - c} \in \mathbb{Z}\}$ và
+    $B = \{x \in \mathbb{R} \mid (x - m)(x - r) = 0\}$:
+    a) (NB) phần tử của $A$; b) (TH) phần tử của $B$; c) (VD) số phần tử của $B$ theo $m$;
+    d) (VDC) số nguyên $m$ để $B \subset A$.
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua L10_C1_TF_B, theo cac bai "A = {x
     thuoc Z | (2x + 3)/(x - 1) thuoc Z}, B = {x | x^2 - (m + 2)x + 2m = 0},
     tim m nguyen de B con A" trong giao an Bai 2. Co Lan duyet.
+    SUA 22/10/2026 (co Lan): y b) cu (phan tu / liet ke A) qua giong y a) -> nay hoi
+    PHAN TU CUA B (r thuoc B, m thuoc B...). Y c) cu (so tap con 2^N) qua kho -> nay
+    hoi SO PHAN TU CUA B (1 phan tu khi m = r, 2 phan tu khi m khac r). Phan tim A
+    chuyen sang loi giai y d).
     """
     cauTF = ""
     for _ in range(socau):
@@ -8514,53 +8520,62 @@ def L10_C1_TF_B_02(socau, socot=1):
         uoc = [u for u in range(1, d + 1) if d % u == 0]
         A = sorted([c + u for u in uoc] + [c - u for u in uoc])
         N = len(A)
-        r = random.choice(A)
+        r = random.choice(A)                                   # nghiệm cố định của B (r thuộc A)
+        v = random.choice([i for i in range(-6, 7) if i != r])  # một giá trị m cụ thể khác r
         tu = r"x %s %d" % ("+" if k > 0 else "-", abs(k)) if k else "x"
         mau = r"x %s %d" % ("-" if c > 0 else "+", abs(c))
+        pt_B = (r"(x - m)(x %s %d)" % ("-" if r > 0 else "+", abs(r))) if r else r"x(x - m)"
         debai = (r"Cho tập hợp $A = \left\{x \in \mathbb{Z} \mathrel{\Big|} \dfrac{%s}{%s} \in \mathbb{Z}\right\}$ và "
                  r"$B = \left\{x \in \mathbb{R} \mid %s = 0\right\}$ với $m$ là tham số. Xét tính đúng sai "
-                 r"của các khẳng định sau:"
-                 % (tu, mau, (r"(x - m)(x %s %d)" % ("-" if r > 0 else "+", abs(r))) if r else r"x(x - m)"))
+                 r"của các khẳng định sau:" % (tu, mau, pt_B))
         tach = r"\dfrac{%s}{%s} = 1 + \dfrac{%d}{%s}" % (tu, mau, d, mau)
-        # a) NB
+        # Giải phương trình của B: dùng chung cho b), c), d)
+        giai_B = (r"$%s = 0 \Leftrightarrow x = %d$ hoặc $x = m$, nên $B = \left\{%d; m\right\}$"
+                  % (pt_B, r, r) if r else
+                  r"$x(x - m) = 0 \Leftrightarrow x = 0$ hoặc $x = m$, nên $B = \left\{0; m\right\}$")
+
+        # a) NB - phần tử của A (giữ nguyên)
         y1 = [(r"{\True $%d \in A$}" % (c + 1),
                r"Đúng. Với $x = %d$: $\dfrac{%d}{1} = %d \in \mathbb{Z}$." % (c + 1, c + 1 + k, c + 1 + k)),
               (r"{$%d \in A$}" % c, r"Sai. Với $x = %d$ mẫu bằng $0$, biểu thức không xác định." % c)]
-        # b) TH
-        ly_b = (r"$%s$, nên $x %s %d$ là ước của $%d$: $x %s %d \in \left\{%s\right\}$, do đó $A = %s$."
-                % (tach, "-" if c > 0 else "+", abs(c), d, "-" if c > 0 else "+", abs(c),
-                   "; ".join(str(v) for v in sorted([-u for u in uoc] + uoc)), _tap(A)))
-        y2 = [(r"{\True $A = %s$}" % _tap(A), r"Đúng. " + ly_b),
-              (r"{$A = %s$}" % _tap([c + u for u in uoc]), r"Sai (thiếu các ước âm). " + ly_b)]
-        # c) VD
-        y3 = [(r"{\True Tập hợp $A$ có đúng $%d$ tập con}" % (2 ** N),
-               r"Đúng. $A$ có $%d$ phần tử nên có $2^{%d} = %d$ tập con." % (N, N, 2 ** N)),
-              (r"{Tập hợp $A$ có đúng $%d$ tập con}" % (2 ** N - 1),
-               r"Sai. $A$ có $%d$ phần tử nên có $2^{%d} = %d$ tập con (kể cả $\varnothing$ và $A$)." % (N, N, 2 ** N))]
-        # d) VDC
-        ly_d = (r"$B = \left\{%d; m\right\}$ (hoặc $B = \left\{%d\right\}$ khi $m = %d$). Vì $%d \in A$ nên "
-                r"$B \subset A \Leftrightarrow m \in A$: có $%d$ số nguyên $m$." % (r, r, r, r, N))
-        y4 = [(r"{\True Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % N, r"Đúng. " + ly_d),
-              (r"{Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % (N - 1),
-               r"Sai (bỏ sót trường hợp $m = %d$). " % r + ly_d)]
-        # Bổ sung 01/10/2026: mỗi ý nhiều phát biểu đúng, nhiều phát biểu sai (cô Lan)
         ly_a2 = r"$x \in A \Leftrightarrow x %s %d$ là ước của $%d$ (ước nguyên: $%s$)." % (
-            "-" if c > 0 else "+", abs(c), d, "; ".join(str(v) for v in sorted([-u for u in uoc] + uoc)))
+            "-" if c > 0 else "+", abs(c), d, "; ".join(str(v_) for v_ in sorted([-u for u in uoc] + uoc)))
         ngoai = [c + w for w in range(2, d) if d % w] + [c - w for w in range(2, d) if d % w]
         _tf_them(y1, [(r"$%d \in A$" % (c + u), ly_a2) for u in random.sample(uoc, min(2, len(uoc)))]
                  + [(r"$%d \in A$" % (c - u), ly_a2) for u in random.sample(uoc, 1)] + [(r"$%d \notin A$" % c, ly_a2)],
-                 [(r"$%d \in A$" % v, ly_a2) for v in random.sample(ngoai, min(2, len(ngoai)))]
+                 [(r"$%d \in A$" % v_, ly_a2) for v_ in random.sample(ngoai, min(2, len(ngoai)))]
                  + [(r"$%d \notin A$" % (c - 1), ly_a2), (r"$%d \notin A$" % (c + d), ly_a2)])
-        _tf_them(y2, [(r"Tập hợp $A$ có đúng $%d$ phần tử" % N, ly_b), (r"$%d \in A$ và $%d \in A$" % (c + d, c - d), ly_b),
-                      (r"Tổng các phần tử của $A$ bằng $%d$" % sum(A), ly_b)],
-                 [(r"Tập hợp $A$ có đúng $%d$ phần tử" % (N // 2), ly_b), (r"$A = %s$" % _tap(A + [c]), ly_b),
-                  (r"Tổng các phần tử của $A$ bằng $%d$" % (sum(A) + c), ly_b)])
-        ly_c2 = r"$A$ có $%d$ phần tử nên có $2^{%d} = %d$ tập con (kể cả $\varnothing$ và $A$)." % (N, N, 2 ** N)
-        _tf_them(y3, [(r"Tập hợp $A$ có đúng $%d$ tập con khác $\varnothing$" % (2 ** N - 1), ly_c2),
-                      (r"Tập hợp $A$ có đúng $%d$ tập con chỉ gồm một phần tử" % N, ly_c2)],
-                 [(r"Tập hợp $A$ có đúng $%d$ tập con" % (2 ** (N - 1)), ly_c2),
-                  (r"Tập hợp $A$ có đúng $%d$ tập con khác $\varnothing$" % (2 ** N), ly_c2),
-                  (r"Tập hợp $A$ có đúng $%d$ tập con" % (N * N), ly_c2)])
+
+        # b) TH - phần tử của B = {r; m}: giải phương trình rồi xét (đúng/sai với MỌI m)
+        ly_b = giai_B + r". Do đó $%d \in B$ và $m \in B$ với mọi $m$." % r
+        y2 = _phat_bieu(
+            [(r"$%d \in B$" % r, ly_b),
+             (r"$m \in B$", ly_b),
+             (r"$%d \in B$ và $m \in B$" % r, ly_b)],
+            [(r"$%d \notin B$" % r, ly_b),
+             (r"$m \notin B$", ly_b),
+             (r"$B = \varnothing$", ly_b)])
+
+        # c) VD - số phần tử của B phụ thuộc m, dùng kết quả B = {r; m} của ý b) (phát biểu luôn kèm điều kiện của m)
+        ly_c = (giai_B + r". Nếu $m = %d$ thì $B = \left\{%d\right\}$ có $1$ phần tử; "
+                r"nếu $m \ne %d$ thì $B$ có $2$ phần tử." % (r, r, r))
+        y3 = _phat_bieu(
+            [(r"Khi $m = %d$, tập hợp $B$ có đúng $1$ phần tử" % r, ly_c),
+             (r"Khi $m = %d$, tập hợp $B$ có đúng $2$ phần tử" % v, ly_c),
+             (r"Tập hợp $B$ có đúng $1$ phần tử khi và chỉ khi $m = %d$" % r, ly_c)],
+            [(r"Khi $m = %d$, tập hợp $B$ có đúng $2$ phần tử" % r, ly_c),
+             (r"Khi $m = %d$, tập hợp $B$ có đúng $1$ phần tử" % v, ly_c),
+             (r"Với mọi giá trị của $m$, tập hợp $B$ luôn có đúng $2$ phần tử", ly_c)])
+
+        # d) VDC - số nguyên m để B ⊂ A (lời giải nay gồm cả bước tìm A)
+        ly_d = (r"$%s$, nên $x %s %d$ là ước của $%d$: $x %s %d \in \left\{%s\right\}$, do đó $A = %s$ "
+                r"($%d$ phần tử). %s. Vì $%d \in A$ nên $B \subset A \Leftrightarrow m \in A$: có $%d$ số nguyên $m$."
+                % (tach, "-" if c > 0 else "+", abs(c), d, "-" if c > 0 else "+", abs(c),
+                   "; ".join(str(v_) for v_ in sorted([-u for u in uoc] + uoc)), _tap(A), N,
+                   giai_B[0].upper() + giai_B[1:] if not giai_B.startswith("$") else giai_B, r, N))
+        y4 = [(r"{\True Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % N, r"Đúng. " + ly_d),
+              (r"{Có đúng $%d$ số nguyên $m$ để $B \subset A$}" % (N - 1),
+               r"Sai (bỏ sót trường hợp $m = %d$). " % r + ly_d)]
         d4, s4 = _tf_dem(r"%s $%d$ số nguyên $m$ để $B \subset A$", N, ly_d, [N - 1, N + 1, N // 2])
         _tf_them(y4, d4, s4)
         cauTF += TF_baitoan_du(debai, [y1, y2, y3, y4], 0, 0, socot)
