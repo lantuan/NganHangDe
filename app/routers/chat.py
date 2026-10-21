@@ -338,6 +338,7 @@ async def chat_post(
     message: str = Form(...),
     conversation_id: str = Form(...),
     kem_tieng_anh: str | None = Form(default=None),
+    chi_yccd: str | None = Form(default=None),
 ):
     user = get_current_user(request)
     if user is None:
@@ -353,6 +354,10 @@ async def chat_post(
     # Ô tick "Kèm bản tiếng Anh": n8n tự gọi /generate-pdf-auto nên không nhận được ô tick này; ghi lại theo
     # hội thoại để /generate-pdf-auto tra lại (n8n không phải sửa gì). Không tick -> chỉ sinh bản Việt.
     tuy_chon_de_service.dat_kem_tieng_anh(conversation_id, kem_tieng_anh == "1")
+    # Nút "Đúng chương trình" (chi_yccd=1) / "Nâng cao thêm" (0): ghi theo hội thoại như trên. Lời gọi cũ không gửi
+    # trường này thì không ghi gì (giữ như trước: có cả dạng luyện tập thêm).
+    if chi_yccd in ("0", "1"):
+        tuy_chon_de_service.dat_chi_yccd(conversation_id, chi_yccd == "1")
 
     print("========== CHAT ==========")
     print(f"[{vai_tro}] {message}")

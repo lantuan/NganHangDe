@@ -294,6 +294,10 @@ class GenerateExamAutoRequest(BaseModel):
     # đáp án). Không tick -> chỉ có bản Việt (đỡ tốn công). None = lời gọi không nói (n8n): tra lựa chọn đã ghi
     # theo conversation_id (xem tuy_chon_de_service).
     kem_tieng_anh: bool | None = None
+    # Nút "Đúng chương trình" (True: chỉ dạng theo YCCĐ của Bộ) / "Nâng cao thêm" (False: có cả dạng luyện tập
+    # thêm) ở khung chat (cô Lan 21/10/2026). None = lời gọi không nói (n8n): tra lựa chọn đã ghi theo
+    # conversation_id; không có ghi nhận thì False như trước.
+    chi_yccd: bool | None = None
 
 
 @router.get("/pham-vi-tieng-anh")
@@ -340,6 +344,9 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             print(f"VAI TRO: ep role=teacher cho user {payload.user_id} "
                   f"(n8n gui '{payload.role}')")
 
+    chi_yccd_that = (payload.chi_yccd if payload.chi_yccd is not None
+                     else tuy_chon_de_service.lay_chi_yccd(payload.conversation_id))
+
     try:
         result = generate_exam_pdf_auto(
             lop=payload.lop,
@@ -354,6 +361,7 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             # Chỉ sinh bản Anh song sinh (cùng ID, cùng seed) khi người dùng tick "Kèm bản tiếng Anh".
             dapan_tieng_anh=(payload.kem_tieng_anh if payload.kem_tieng_anh is not None
                              else tuy_chon_de_service.lay_kem_tieng_anh(payload.conversation_id)),
+            chi_yccd=chi_yccd_that,
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -382,6 +390,8 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
                 # Cau "luyen tap them, ngoai YCCD" (docs/04 Ngoai le 4) de
                 # trang De da tao / chat bao cho giao vien.
                 "canh_bao_ngoai_yccd": result.get("canh_bao_ngoai_yccd") or [],
+                # "Đúng chương trình" / "Nâng cao thêm": "Làm đề khác" giữ đúng lựa chọn của đề gốc.
+                "chi_yccd": bool(chi_yccd_that),
             },
         )
         if de_id:
@@ -474,6 +484,8 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
             cho_phep_thieu=bool(blueprint.get("cho_phep_thieu", True)),
             dapan_tieng_anh=(payload.kem_tieng_anh if payload.kem_tieng_anh is not None
                              else _de_co_ban_tieng_anh(de_cu)),
+            # Đề gốc "Đúng chương trình" thì đề mới cũng vậy (đề cũ chưa lưu trường này: như trước).
+            chi_yccd=bool(blueprint.get("chi_yccd")),
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))

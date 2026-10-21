@@ -387,6 +387,12 @@
         }
 
         .form-nhom { margin-bottom: 12px; }
+        /* Nut "Dung chuong trinh" / "Nang cao them" (co Lan 21/10/2026) */
+        .muc-luyen { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: .9rem; color: #334155; }
+        .muc-luyen button { width: auto; border: 1px solid #cbd5e1; border-radius: 999px; padding: 4px 12px;
+            background: #fff; color: #334155; font-weight: 600; font-size: .85rem; cursor: pointer; }
+        .muc-luyen button.chon { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+        .muc-luyen-goi-y { font-size: .8rem; color: #64748b; margin: 2px 0 6px; max-width: 46rem; }
 
         .form-nhom label {
             display: block;
@@ -697,6 +703,7 @@
                              phai go lai "cau 3 cua de vua nay" - bam nut thi may
                              chu BIET CHAC de nao, cau nao. -->
                         <div class="px-4 py-2 border-t text-sm text-slate-600" id="hang-tick-anh">
+                            <div id="muc-luyen-chinh"></div>
                             <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh (đề có cả Việt và Anh, tải về là .zip; không tick thì chỉ có bản tiếng Việt)</label><div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>
                         </div>
                         <div id="hang-nut-gui" class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
@@ -1174,6 +1181,7 @@ ${html}
                         cho_phep_thieu: true,
                         dinh_dang: "pdf",
                         kem_tieng_anh: kemAnh(),
+                        chi_yccd: chiYccd(),
                         user_id: CURRENT_USER_ID || null,
                         conversation_id: conversationId,
                     }),
@@ -1307,6 +1315,7 @@ ${html}
                 `<label>Ghi chú thêm (không bắt buộc)</label>` +
                 `<textarea id="${idForm}-ghichu" placeholder="Ví dụ: 40% nhận biết, 30% thông hiểu..."></textarea>` +
                 `</div>` +
+                `<div class="form-nhom">${htmlMucLuyen()}</div>` +
                 `<div class="form-nhom">${htmlTickKemAnh()}</div>` +
                 `<button type="button" class="btn-submit-form" onclick="submitFormTaoDe('${idForm}')">🚀 Tạo đề</button>` +
                 `</div>`
@@ -1393,7 +1402,7 @@ ${html}
                             cho_phep_thieu: true,
                             dinh_dang: "pdf",
                             kem_tieng_anh: kemAnh(),
-                        kem_tieng_anh: kemAnh(),
+                            chi_yccd: chiYccd(),
                             user_id: CURRENT_USER_ID || null,
                             conversation_id: conversationId,
                         }),
@@ -1594,6 +1603,37 @@ ${html}
                 `Kèm bản tiếng Anh (đề có cả Việt và Anh)</label>` +
                 '<div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>';
         }
+        // ===== NUT "DUNG CHUONG TRINH" / "NANG CAO THEM" (co Lan 21/10/2026) =====
+        // Dung chuong trinh: chi cac dang bai theo yeu cau can dat (YCCD) cua Bo - gui chi_yccd=true.
+        // Nang cao them: co ca dang luyen tap mo rong ngoai YCCD - chi_yccd=false (nhu truoc day).
+        // Giong lua chon "Chi theo YCCD" cua giao vien o /gv/ra-de, nhung noi bang loi hoc sinh hieu duoc.
+        // Nho trong localStorage; tin nhan gui /chat kem lua chon de de tao qua n8n cung theo dung nut nay.
+        const GOI_Y_MUC = {
+            chuan: "Đúng chương trình: chỉ ra các dạng bài đúng yêu cầu của Bộ Giáo dục - đủ để học tốt trên lớp.",
+            nang_cao: "Nâng cao thêm: có thêm các dạng bài mở rộng (ngoài yêu cầu của Bộ) để luyện vượt.",
+        };
+        function mucLuyen() {
+            try { return localStorage.getItem("chv_muc_luyen") === "nang_cao" ? "nang_cao" : "chuan"; } catch (e) { return "chuan"; }
+        }
+        function chiYccd() { return mucLuyen() === "chuan"; }
+        function datMucLuyen(muc) {
+            try { localStorage.setItem("chv_muc_luyen", muc); } catch (e) { /* bo qua */ }
+            document.querySelectorAll(".muc-luyen button").forEach(function (b) {
+                b.classList.toggle("chon", b.dataset.muc === muc);
+                b.setAttribute("aria-pressed", b.dataset.muc === muc ? "true" : "false");
+            });
+            document.querySelectorAll(".muc-luyen-goi-y").forEach(function (g) { g.textContent = GOI_Y_MUC[muc]; });
+        }
+        function htmlMucLuyen() {
+            const m = mucLuyen();
+            const nut = function (muc, chu) {
+                return `<button type="button" data-muc="${muc}" class="${m === muc ? "chon" : ""}" aria-pressed="${m === muc}" ` +
+                    `onclick="datMucLuyen('${muc}')">${chu}</button>`;
+            };
+            return `<div class="muc-luyen"><span>Mức luyện tập:</span>${nut("chuan", "📘 Đúng chương trình")}` +
+                `${nut("nang_cao", "🚀 Nâng cao thêm")}</div><div class="muc-luyen-goi-y">${GOI_Y_MUC[m]}</div>`;
+        }
+
         // File tai ve la PDF hay .zip do may chu quyet dinh (Content-Disposition), nen link KHONG gan
         // download="ten.pdf" (se doi ten .zip thanh .pdf). Chi link blob (khong qua may chu) moi can.
         function attrTai(url, filename) {
@@ -1616,6 +1656,7 @@ ${html}
                 formData.append("message", text);
                 formData.append("conversation_id", conversationId);
                 formData.append("kem_tieng_anh", kemAnh() ? "1" : "0");
+                formData.append("chi_yccd", chiYccd() ? "1" : "0");
 
                 const response = await fetch("/chat", {
                     method: "POST",
@@ -1650,6 +1691,7 @@ ${html}
                         addAIMessage(
                             `<div class="xac-nhan-de" id="${idHoi}">` +
                             `<p>${marked.parseInline(data.data.tra_loi || data.message || "")}</p>` +
+                            `<div>${htmlMucLuyen()}</div>` +
                             `<p>${htmlTickKemAnh()}</p>` +
                             `<button class="btn-dong-y" onclick="xacNhanTaoDe('${idHoi}','${deXuatEncoded}')">✅ Đồng ý, tạo đề</button>` +
                             `<button class="btn-doi-y" onclick="doiYeuCauDe('${idHoi}')">✏️ Để mình nói cụ thể hơn</button>` +
@@ -1741,6 +1783,8 @@ ${html}
         // Focus khi mở trang
         window.onload = function () {
             datKemAnh(kemAnh());      // dong bo o tick "Kem ban tieng Anh" voi lua chon da nho
+            const mlc = document.getElementById("muc-luyen-chinh");
+            if (mlc) mlc.innerHTML = htmlMucLuyen();     // nut "Dung chuong trinh" / "Nang cao them"
             textarea.focus();
             taiDanhSachLichSu();
             if (_cidTuUrl) {

@@ -229,10 +229,18 @@ Input chung (generate-pdf-auto):
   "cau_truc_tu_hoc_sinh": null,
   "socau_ma_de": null,
   "cho_phep_thieu": false,
-  "dinh_dang": "pdf"
+  "dinh_dang": "pdf",
+  "kem_tieng_anh": null,
+  "chi_yccd": null
 }
 
 Output: file PDF/TEX/ZIP (theo `dinh_dang`).
+
+`chi_yccd` (thêm 21/10/2026): `true` = "📘 Đúng chương trình" (chỉ các dạng theo YCCĐ của Bộ), `false` =
+"🚀 Nâng cao thêm" (có cả dạng luyện tập thêm). `null` (n8n không gửi) = tra lựa chọn đã ghi theo
+`conversation_id` (`/chat` nhận trường form `chi_yccd` = "1" | "0" và ghi lại, `tuy_chon_de_service`);
+không có ghi nhận thì `false` như trước. Lưu vào `blueprint.chi_yccd` của đề để `/api/exam/lam-de-khac` giữ
+đúng lựa chọn.
 
 ## Exam — thủ công / debug (không qua Curriculum)
 
