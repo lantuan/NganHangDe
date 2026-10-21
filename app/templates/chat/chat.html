@@ -393,6 +393,12 @@
             background: #fff; color: #334155; font-weight: 600; font-size: .85rem; cursor: pointer; }
         .muc-luyen button.chon { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
         .muc-luyen-goi-y { font-size: .8rem; color: #64748b; margin: 2px 0 6px; max-width: 46rem; }
+        /* O tick "Kem ban tieng Anh" trong form / khung xac nhan: o tick nam CUNG DONG voi chu (truoc day
+           .form-nhom label la khoi rieng va input rong 100% nen o tick dung mot dong, chu xuong dong duoi) */
+        .form-nhom label.tick-kem-anh, .xac-nhan-de label.tick-kem-anh {
+            display: flex; align-items: flex-start; gap: 8px; font-weight: 600; }
+        .form-nhom label.tick-kem-anh input, .xac-nhan-de label.tick-kem-anh input {
+            width: auto; flex: none; margin-top: 3px; }
 
         .form-nhom label {
             display: block;
@@ -1785,6 +1791,15 @@ ${html}
             datKemAnh(kemAnh());      // dong bo o tick "Kem ban tieng Anh" voi lua chon da nho
             const mlc = document.getElementById("muc-luyen-chinh");
             if (mlc) mlc.innerHTML = htmlMucLuyen();     // nut "Dung chuong trinh" / "Nang cao them"
+            // Co Lan 22/10/2026: form "Tao de moi" / khung xac nhan o tren DA CO nut muc luyen tap va o tick tieng
+            // Anh (kem luu y) thi bo hang lua chon o khung nhap phia duoi, khong hien hai lan. Form tao xong (hoac
+            // bam "Dong y") thi cac nut trong khung chat mat di -> hang phia duoi hien lai.
+            const capNhatHangTuyChon = function () {
+                const hang = document.getElementById("hang-tick-anh");
+                if (hang) hang.style.display = messages.querySelector(".muc-luyen, .chk-kem-anh") ? "none" : "";
+            };
+            new MutationObserver(capNhatHangTuyChon).observe(messages, { childList: true, subtree: true });
+            capNhatHangTuyChon();
             textarea.focus();
             taiDanhSachLichSu();
             if (_cidTuUrl) {

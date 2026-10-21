@@ -96,3 +96,12 @@ def test_trang_chat_co_nut_va_gui_lua_chon():
     assert 'formData.append("chi_yccd", chiYccd() ? "1" : "0")' in html
     # nút có ở form tạo đề nhanh và ở khung xác nhận cấu trúc
     assert html.count("${htmlMucLuyen()}") == 2
+
+
+def test_khung_nhap_khong_lap_lai_lua_chon_khi_form_da_co():
+    """Cô Lan 22/10/2026: form "Tạo đề mới" / khung xác nhận ở trên đã có nút mức luyện tập và ô tiếng Anh thì hàng lựa
+    chọn ở khung nhập phía dưới phải ẩn; ô tick tiếng Anh trong form nằm cùng dòng với chữ."""
+    html = (GOC / "app/templates/chat/chat.html").read_text(encoding="utf-8")
+    assert 'messages.querySelector(".muc-luyen, .chk-kem-anh") ? "none" : ""' in html
+    assert "new MutationObserver(capNhatHangTuyChon).observe(messages" in html
+    assert ".form-nhom label.tick-kem-anh input" in html
