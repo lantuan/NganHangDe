@@ -104,6 +104,8 @@
             background-color: #f8f9fb;
             color: #191c1e;
         }
+        /* Khong bao gio cho trang rong hon man hinh dien thoai (21/10/2026). clip khong pha header sticky. */
+        html, body { overflow-x: hidden; overflow-x: clip; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -163,22 +165,25 @@
 </head>
 <body class="flex flex-col min-h-screen">
 <!-- Header (Shared Component: TopNavBar) -->
-<header class="fixed top-0 w-full z-50 bg-surface/80 glass-header border-b border-outline-variant/30">
-<div class="max-w-[1200px] mx-auto px-margin-desktop flex justify-between items-center h-20">
+{# 21/10/2026 (co Lan: "tran man hinh tren dien thoai"): header STICKY (khong con fixed + pt-20) va cho XUONG DONG
+   (flex-wrap) - man hinh hep hoac nguoi dung phong to chu thi nut Dang ky / Dang nhap xuong hang duoi thay vi lot ra
+   ngoai mep phai; le hai ben 16px tren dien thoai. #}
+<header class="sticky top-0 w-full z-50 bg-surface/80 glass-header border-b border-outline-variant/30">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop flex flex-wrap justify-between items-center gap-x-3 gap-y-2 py-2 md:py-0 md:h-20">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
-<h1 class="font-display-lg text-headline-md text-primary tracking-tight">Ngân Hàng Đề AI</h1>
+<h1 class="font-display-lg text-xl sm:text-headline-md text-primary tracking-tight whitespace-nowrap">Ngân Hàng Đề AI</h1>
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary" href="/">Trang chủ</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#gioi-thieu">Giới thiệu</a>
 </nav>
-<div class="flex items-center gap-2 sm:gap-3">
+<div class="flex flex-wrap items-center gap-2 sm:gap-3">
 {% if da_dang_nhap %}
 <span class="hidden md:inline font-body-md text-body-md text-on-surface-variant">Xin chào, {{ user_display_name }}</span>
 <button
     onclick="window.location.href='/chat'"
-    class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
+    class="px-3 sm:px-6 py-1.5 sm:py-2 whitespace-nowrap bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Vào Chat
 </button>
 {% else %}
@@ -192,24 +197,24 @@
    nhin buon cuoi qua, xanh het di"). #}
 <button
     onclick="window.location.href='/register'"
-    class="px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
+    class="px-3 sm:px-6 py-1.5 sm:py-2 whitespace-nowrap bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Đăng ký
 </button>
 <button
     onclick="window.location.href='/login'"
-    class="px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
+    class="px-3 sm:px-6 py-1.5 sm:py-2 whitespace-nowrap bg-primary text-on-primary rounded-lg font-label-md btn-shadow active:scale-95 duration-150">
     Đăng nhập
 </button>
 {% endif %}
 </div>
 </div>
 </header>
-<main class="flex-grow pt-20">
+<main class="flex-grow">
 <!-- Hero Section -->
-<section class="relative overflow-hidden pt-20 pb-32">
-<div class="max-w-[1200px] mx-auto px-margin-desktop relative z-10 text-center">
+<section class="relative overflow-hidden pt-10 pb-16 md:pt-20 md:pb-32">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
 <span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-bold mb-6">Đề chuẩn chương trình · AI dẫn đường</span>
-<h2 class="font-display-lg text-display-lg text-on-surface mb-6 max-w-3xl mx-auto">
+<h2 class="font-display-lg text-[34px] leading-tight sm:text-display-lg text-on-surface mb-6 max-w-3xl mx-auto">
                     Ngân Hàng Đề AI
                 </h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
@@ -247,7 +252,7 @@
 </section>
 <!-- Section: Giới thiệu chung -->
 <section id="gioi-thieu" class="py-24 bg-surface-container-low scroll-mt-20">
-<div class="max-w-[1200px] mx-auto px-margin-desktop">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 <div class="lg:col-span-7">
 <span class="inline-block px-4 py-1.5 bg-primary-fixed text-on-primary-fixed rounded-full text-label-md font-bold mb-6">Giới thiệu</span>
@@ -296,7 +301,7 @@
 </div>
 </div>
 <div class="lg:col-span-5">
-<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-8">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 sm:p-8">
 <h4 class="font-headline-md text-headline-md mb-4">Dành cho ai?</h4>
 <ul class="space-y-4">
 <li class="flex items-start gap-3">
@@ -319,7 +324,7 @@
 </section>
 <!-- Section: Quy trình học tập -->
 <section class="py-24 bg-surface">
-<div class="max-w-[1200px] mx-auto px-margin-desktop">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="text-center mb-16">
 <h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Quy trình học tập</h3>
 <p class="text-on-surface-variant">5 bước đơn giản để thành thạo kiến thức</p>
@@ -360,7 +365,7 @@
 </section>
 <!-- Section: Liên hệ -->
 <section id="lien-he" class="py-24 bg-primary text-on-primary scroll-mt-20">
-<div class="max-w-[1200px] mx-auto px-margin-desktop">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 <div>
 <h3 class="font-headline-lg text-headline-lg mb-6">Kết nối với chúng tôi</h3>
@@ -388,15 +393,15 @@
 <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
 <span class="material-symbols-outlined">mail</span>
 </div>
-<div>
+<div class="min-w-0">
 <p class="text-label-md opacity-70">Email</p>
-<p class="font-body-md font-bold text-xl">nganhangdetoanchv@gmail.com</p>
+<p class="font-body-md font-bold text-base sm:text-xl break-all">nganhangdetoanchv@gmail.com</p>
 </div>
 </a>
 </div>
 </div>
 <div class="relative">
-<div class="bg-white/10 p-8 rounded-3xl backdrop-blur-lg border border-white/20">
+<div class="bg-white/10 p-5 sm:p-8 rounded-3xl backdrop-blur-lg border border-white/20">
 <img class="w-full rounded-2xl shadow-2xl" data-alt="A premium high-resolution 3D illustration of a floating tablet displaying complex mathematical equations and glowing geometric patterns. The aesthetic is clean and modern, using a light blue and white color palette with soft depth-of-field effects. The mood is futuristic, academic, and highly professional, reflecting an AI-powered education environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG3LUHMXfijNznlQ_q0yCwddWsZs3gjy3vhQSg8Frls0UN0nudI8UCOcnHwPwO-k_vMfJV5CfvU5aNdr6ifAZkSWqYze2ia1GEfFp9pAwuSE3BNnPP837Kxy1P-WZ1Ryud7ePw6LY_z61inPpYVSf1Ad6Fpy0sdkGC587c1SEpYNc8T8eTErcQrzRYloR2MshvHF9twHl1GK6bqr4vgZcBiaF7bYXAihE5F7icPlAV70VuEobjfcgieoyilT0TXDJn3oBfp7veTgE"/>
 </div>
 </div>
@@ -406,7 +411,7 @@
 </main>
 <!-- Footer (Shared Component: Footer) -->
 <footer class="bg-surface-container-lowest border-t border-outline-variant/20">
-<div class="max-w-[1200px] mx-auto px-margin-desktop py-12">
+<div class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
 <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
 <div class="flex flex-col items-center md:items-start gap-2">
 <span class="font-headline-md text-headline-md text-on-surface">Ngân Hàng Đề AI</span>
