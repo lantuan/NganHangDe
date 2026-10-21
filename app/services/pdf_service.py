@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 EXPORTS_DIR = BASE_DIR / "data" / "exports"
 EXPORTS_DIR_EN = BASE_DIR / "data" / "exports_en"   # PDF của đề tiếng Anh
 CONFIG_DIR = BASE_DIR / "data" / "config"
+HINH_ANH_DIR = BASE_DIR / "data" / "hinh_anh"   # ảnh chụp làm nền cho hình TikZ (data/python_bank/hinh_anh.py)
 
 
 class PdfCompileError(Exception):
@@ -17,10 +18,12 @@ def _texinputs_env() -> dict:
     Them data/config (noi chua ex_test.sty, latex_template.tex) vao duong
     tim kiem cua pdflatex, de khong phu thuoc thu muc lam viec hien tai
     (working directory) luc goi subprocess.
+    Them ca data/hinh_anh (21/10/2026): lenh includegraphics{ten.jpg} trong hinh TikZ
+    cua cau co anh chup (bản đồ, sơ đồ) tim thay anh o day.
     """
     env = os.environ.copy()
     sep = ":" if os.name != "nt" else ";"
-    env["TEXINPUTS"] = f"{CONFIG_DIR}{os.sep}{sep}{env.get('TEXINPUTS', '')}"
+    env["TEXINPUTS"] = f"{CONFIG_DIR}{os.sep}{sep}{HINH_ANH_DIR}{os.sep}{sep}{env.get('TEXINPUTS', '')}"
     return env
 
 

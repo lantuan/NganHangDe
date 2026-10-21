@@ -33,7 +33,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_tf,
     loi_giai_cho_web,
 )
-from app.services.hinh_ve_service import duong_dan_anh
+from app.services.hinh_ve_service import duong_dan_anh, anh_trong
 # Ten 4 phan lay tu gia_su_service de CHI CO MOT nguon - PDF, trang lam
 # bai va bang chon cau cua gia su luon goi ten phan giong nhau.
 from app.services.gia_su_service import TEN_PHAN, TEN_PHAN_EN
@@ -644,6 +644,18 @@ def tai_loigiai_tieng_anh_endpoint(de_id: str, request: Request):
     return FileResponse(path=str(pdf), filename="solutions_en_%s.pdf" % de_id[:8], media_type="application/pdf")
 
 
+def _anh_kem_tex(*cac_tex: Path) -> list:
+    """Anh chup (data/hinh_anh) ma cac tep .tex chen bang includegraphics - tai .tex ve phai kem anh thi moi dich duoc.
+    Tra [(duong_dan, ten_trong_zip)], moi anh mot lan, dat CUNG THU MUC voi .tex trong .zip."""
+    ra, da = [], set()
+    for tex in cac_tex:
+        for p in anh_trong(tex.read_text(encoding="utf-8")):
+            if p.name not in da:
+                da.add(p.name)
+                ra.append((p, p.name))
+    return ra
+
+
 @router.get("/tai-tex-en/{de_id}")
 def tai_tex_tieng_anh_endpoint(de_id: str, request: Request):
     chan = yeu_cau_giao_vien(request)
@@ -654,6 +666,9 @@ def tai_tex_tieng_anh_endpoint(de_id: str, request: Request):
     if tex_en is None or not tex_en.exists():
         raise HTTPException(
             404, "De nay khong co ban tieng Anh (.tex) hoac file .tex da bi don (cron xoa sau 1 ngay).")
+    anh = _anh_kem_tex(tex_en)
+    if anh:   # de co cau dung anh chup: .zip gom .tex va anh (21/10/2026)
+        return _zip_cac_tep([(tex_en, "exam_en_%s.tex" % de_id[:8])] + anh, "tex_en_%s" % de_id[:8])
     return FileResponse(path=str(tex_en), filename="exam_en_%s.tex" % de_id[:8], media_type="application/x-tex")
 
 
@@ -692,8 +707,13 @@ def tai_tex_endpoint(de_id: str, request: Request, ngon_ngu: str | None = None):
         # Tick "kem tieng Anh": .zip co CA HAI tep .tex (Viet va Anh), cung de, cung so lieu.
         return _zip_cac_tep(
             [(Path(duong_dan), "de_%s_TiengViet.tex" % de_id[:8]),
-             (duong_tex_en(duong_dan), "de_%s_English.tex" % de_id[:8])],
+             (duong_tex_en(duong_dan), "de_%s_English.tex" % de_id[:8])]
+            + _anh_kem_tex(Path(duong_dan), duong_tex_en(duong_dan)),
             "tex_%s" % de_id[:8])
+
+    anh = _anh_kem_tex(Path(duong_dan))
+    if anh:   # de co cau dung anh chup (data/hinh_anh): .zip gom .tex va tep anh, giai nen la dich duoc ngay
+        return _zip_cac_tep([(Path(duong_dan), "de_%s.tex" % de_id[:8])] + anh, "tex_%s" % de_id[:8])
 
     # MOT tep duy nhat. De sinh cho giao vien la ban LOI GIAI; muon ban de
     # thi doi [loigiai] thanh [dethi] o dong \usepackage{ex_test}. Hai ban

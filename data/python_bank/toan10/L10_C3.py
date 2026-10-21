@@ -12923,6 +12923,101 @@ def L10_C3_B6_VD036_TL_I_03(socau, dong=1):
 
 
 # =====================================================================================================
+# 21/10/2026 - CÂU ĐẦU TIÊN CÓ ẢNH CHỤP THẬT (cô Lan duyệt cách làm ảnh nền: data/python_bank/hinh_anh.py, ảnh trong
+# data/hinh_anh/). Bản đồ vệ tinh khu vực tìm kiếm rãnh mộ ở công viên Lê Thị Riêng (phần bên trái tấm sơ đồ cô Lan gửi,
+# ltr_ban_do.jpg): khu vực tìm kiếm mở rộng là lục giác lồi MNPQRS (đường viền trắng), bản đồ ghi khoảng 5 800 m^2 - dòng
+# này bị CHE trên hình vì là đáp số. Từ một đỉnh kẻ ba đường chéo chia lục giác thành bốn tam giác, Heron bốn lần.
+# Số đo: đo trên ảnh, quy theo tỉ lệ diện tích 5 800 m^2, làm tròn đến mét, mỗi đề lệch ngẫu nhiên một chút (GIẢ ĐỊNH, ghi
+# rõ trong đề); tổng diện tích lệch số trên bản đồ không quá 2,5%. Đỉnh kẻ đường chéo đổi ngẫu nhiên.
+# =====================================================================================================
+_LTR_ANH = "ltr_ban_do.jpg"
+# toạ độ điểm ảnh các đỉnh lục giác trên ltr_ban_do.jpg (1000 x 1080), vị trí ghi tên đỉnh
+_LTR_LUC_GIAC = [("M", (570, 492), "above"), ("N", (689, 523), "right"), ("P", (661, 749), "right"),
+                 ("Q", (593, 786), "below"), ("R", (480, 755), "below left"), ("S", (463, 570), "left")]
+
+
+def _ltr_luc_giac_so_do():
+    """(đỉnh kẻ đường chéo i0, {cặp đỉnh: độ dài m}, [4 tam giác (tên, a, b, c, S)], tổng S)."""
+    P = [p for _t, p, _v in _LTR_LUC_GIAC]
+    S_px = 0.5 * abs(sum(P[i][0] * P[(i + 1) % 6][1] - P[(i + 1) % 6][0] * P[i][1] for i in range(6)))
+    ten = [t for t, _p, _v in _LTR_LUC_GIAC]
+    while True:
+        k = math.sqrt(5800 / S_px) * random.uniform(0.98, 1.02)
+        i0 = random.randrange(6)
+        cap = [(i0 + j) % 6 for j in range(6)]
+        do = {}
+        for i in range(6):                                       # sáu cạnh
+            a, b = i, (i + 1) % 6
+            do[(a, b)] = max(1, round(math.dist(P[a], P[b]) * k + random.choice([-1, 0, 0, 1])))
+        for j in (2, 3, 4):                                      # ba đường chéo từ đỉnh i0
+            a, b = i0, cap[j]
+            do[(a, b)] = round(math.dist(P[a], P[b]) * k + random.choice([-1, 0, 0, 1]))
+        dd = lambda a, b: do.get((a, b), do.get((b, a)))
+        tg, tong, hong = [], 0, False
+        for j in (1, 2, 3, 4):
+            u, v = cap[j], cap[j + 1]
+            x, y, z = dd(i0, u), dd(u, v), dd(v, i0)
+            if not (x + y > z + 1 and y + z > x + 1 and z + x > y + 1):
+                hong = True
+                break
+            S = _heron_f(x, y, z)
+            tg.append((ten[i0] + ten[u] + ten[v], x, y, z, S))
+            tong += S
+        if hong or abs(tong - 5800) > 0.025 * 5800 or not all(_xa_bien(t[4]) for t in tg) or not _xa_bien(tong):
+            continue
+        if sum(_lt(t[4]) for t in tg) != _lt(tong):           # cộng các số đã làm tròn ra đúng đáp số
+            continue
+        return i0, {(ten[a] + ten[b]): v for (a, b), v in do.items()}, tg, tong
+
+
+def _ltr_hinh_anh(i0):
+    from hinh_anh import anh_nen
+    P = [p for _t, p, _v in _LTR_LUC_GIAC]
+    cheo = " ".join("(%d,%d) -- (%d,%d)" % (P[i0] + P[(i0 + j) % 6]) for j in (2, 3, 4))
+    ve = ("\\fill[white] (318,348) rectangle (475,378);\n"                         # che dòng "Diện tích: khoảng 5.800m2"
+          + "\\node[anchor=west, inner sep=1pt] at (322,363) {\\tiny\\bfseries %s};\n" % r"- Diện tích: ?"
+          + "\\draw[white, very thick, dashed] %s;\n" % cheo
+          + "".join("\\fill[white] (%d,%d) circle[radius=4] node[%s, fill=white, inner sep=1.2pt, text=black, "
+                    "font=\\small\\bfseries] {$%s$};\n" % (p[0], p[1], vt, t) for t, p, vt in _LTR_LUC_GIAC))
+    return anh_nen(_LTR_ANH, 14, ve)
+
+
+def L10_C3_B6_VD036_TL_P_01(socau, dong=1):
+    r"""Tự luận có ẢNH CHỤP bản đồ thật: diện tích khu vực tìm kiếm mở rộng (lục giác lồi $MNPQRS$) ở công viên Lê Thị Riêng.
+    a) (VD) diện tích một tam giác (Heron); b) (VDC) tự chia lục giác thành bốn tam giác bằng ba đường chéo từ một đỉnh,
+    Heron bốn lần, cộng lại (so với khoảng $5\,800\ \text{m}^{2}$ ghi trên bản đồ - con số này bị che trên hình).
+
+    CLAUDE THEM 21/10/2026 - co Lan: "de cong vien dua ca phan ban do ben trai vao, tim dien tich dua vao dien tich tim
+    kiem mo rong"; co chon dung anh chup that, chia 4 tam giac, tu luan."""
+    cau = ""
+    for _ in range(socau):
+        i0, do, tg, tong = _ltr_luc_giac_so_do()
+        dinh = _LTR_LUC_GIAC[i0][0]
+        canh = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[:6])
+        cheo = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[6:])
+        debai = ((_LTR_DAN % _LTR_SO_SANH_KV) + "\\\\\n"
+                 + r"Bản đồ dưới đây cho thấy ba khu vực $1$ (A), $2$ (B), $3$ (C) nghi có rãnh mộ tập thể và khu vực tìm "
+                   r"kiếm mở rộng là lục giác lồi $MNPQRS$ (đường viền trắng). Ước lượng từ bản đồ (các số đo là giả định, "
+                   r"làm tròn đến mét): %s và các đường chéo %s." % (canh, cheo)
+                 + "\n\\begin{center}\n" + _ltr_hinh_anh(i0) + "\n\\end{center}\n")
+        a = random.choice(tg)
+        ten_lg = "MNPQRS"
+        ds = [(r"Tính diện tích tam giác $%s$ (đơn vị $\text{m}^{2}$, làm tròn đến hàng đơn vị)." % a[0],
+               r"S_{%s} \approx %d\,\text{m}^{2}" % (a[0], _lt(a[4])),
+               _giai_heron_m(a[0], a[1], a[2], a[3], a[4])),
+              (r"Tính diện tích khu vực tìm kiếm mở rộng $%s$ (đơn vị $\text{m}^{2}$, làm tròn đến hàng đơn vị)." % ten_lg,
+               r"S \approx %d\,\text{m}^{2}" % _lt(tong),
+               r"Ba đường chéo xuất phát từ đỉnh $%s$ chia lục giác lồi $%s$ thành bốn tam giác %s không chồng lên nhau, "
+               r"nên diện tích lục giác bằng tổng diện tích bốn tam giác.\\ " % (dinh, ten_lg, ", ".join("$%s$" % t[0] for t in tg))
+               + r"\\ ".join(_giai_heron_m(t[0], t[1], t[2], t[3], t[4]) for t in tg)
+               + r"\\ Vậy $S_{%s} \approx %s = %d\,\left(\text{m}^{2}\right)$, xấp xỉ con số khoảng $5\,800\ \text{m}^{2}$ ghi "
+                 r"trên bản đồ của khu vực tìm kiếm mở rộng." % (ten_lg, " + ".join(str(_lt(t[4])) for t in tg),
+                                                             sum(_lt(t[4]) for t in tg)))]
+        cau += TL_answer_text(debai, ds, 0, 0, dong)
+    return cau
+
+
+# =====================================================================================================
 # BÀI TOÁN THỰC TIỄN GẮN VỚI ĐƯỜNG TRƯỜNG SƠN (cô Lan 13/10/2026)
 # Năm bối cảnh là NĂM BIẾN THỂ _01.._05 của CÙNG một dạng (cùng ID): chọn ID đó thì mỗi đề chỉ ra MỘT bối cảnh.
 #   _01 trạm bơm tiếp sức vượt đèo (tam giác vuông)          _02 bản đồ cố ý dịch vị trí >= 10 km (côsin, sin)

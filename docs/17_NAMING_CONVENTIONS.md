@@ -350,6 +350,9 @@ parabola_01.png
 
 graph_circle.png
 
+Ảnh chụp thật dùng làm nền cho hình TikZ trong câu hỏi đặt ở data/hinh_anh/
+(ví dụ ltr_ban_do.jpg) - xem docs/26 mục 4d.
+
 ---
 
 # Upload

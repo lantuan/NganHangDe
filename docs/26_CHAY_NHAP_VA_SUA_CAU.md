@@ -142,6 +142,26 @@ Lưu ý: câu **trả lời ngắn** trong đề chỉ lấy mức VD/VDC
 (`data/config/exam_rules.json`) - dòng SA mức NB/TH không bao giờ được
 rút vào đề.
 
+### 4d. Câu có ẢNH CHỤP thật (bản đồ, sơ đồ, ảnh vệ tinh) - chốt 21/10/2026
+
+Ví dụ thật: `L10_C3_B6_VD036_TL_P_01` (bản đồ khu vực tìm kiếm rãnh mộ ở công viên Lê Thị Riêng).
+
+1. **Ảnh** đặt trong `data/hinh_anh/`, tên snake_case (docs/17), ví dụ `ltr_ban_do.jpg`; rộng khoảng 1000 điểm ảnh,
+   dưới 300 KB (test chặn trên 400 KB, rộng trên 1200). Chỉ dùng ảnh có nguồn rõ ràng. Cô gửi ảnh vào cuộc trò chuyện
+   hoặc chép vào thư mục này; Claude cắt, thu nhỏ.
+2. **Hình trong câu hỏi** vẫn là một đoạn TikZ: ảnh làm nền, vẽ chồng lên bằng TOẠ ĐỘ ĐIỂM ẢNH (gốc góc trên bên trái,
+   y đi xuống), dùng hàm `anh_nen` trong `data/python_bank/hinh_anh.py`:
+   ```python
+   from hinh_anh import anh_nen
+   hinh = anh_nen("ltr_ban_do.jpg", 14, r"\draw[white, dashed] (570,492) -- (661,749);")
+   ```
+   Số liệu trên ảnh mà là đáp số thì che bằng chữ nhật trắng (`\fill[white] ... rectangle ...`).
+3. Vì ảnh nằm trong TikZ nên **PDF, web, Word** đều hiện như hình TikZ khác: `pdf_service`, `hinh_ve_service` (hình
+   cho web, Word) và `scripts/nhap.py` thêm `data/hinh_anh` vào `TEXINPUTS`; mã băm hình gồm cả nội dung tệp ảnh
+   (thay ảnh giữ tên vẫn dịch lại). Giáo viên tải `.tex` thì nhận `.zip` gồm `.tex` và các ảnh.
+4. Chữ in sẵn trong ảnh không dịch sang tiếng Anh; chỉ chữ vẽ chồng và đề bài được dịch.
+5. Kiểm tra: `tests/test_hinh_anh.py`.
+
 ### 4c. Câu chưa dùng được, muốn để dành xem lại → đưa vào lưu trữ
 
 Ví dụ thật (20/10/2026): bài đo bán kính Trái Đất (`L10_C3_B6_VD036_TL_E`,

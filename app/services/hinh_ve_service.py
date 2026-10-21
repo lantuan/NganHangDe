@@ -105,9 +105,29 @@ def tuong_thich_tikz(tikz: str) -> str:
     return re.sub(r"\\clip\s*\[([^\]]*)\]", lambda m: r"\path[clip,%s]" % m.group(1), tikz)
 
 
+HINH_ANH_DIR = BASE_DIR / "data" / "hinh_anh"   # anh chup lam nen (data/python_bank/hinh_anh.py)
+
+
+def anh_trong(tikz: str) -> list[Path]:
+    r"""Cac tep anh chup (trong data/hinh_anh) ma doan TikZ chen bang \includegraphics."""
+    ra = []
+    for ten in re.findall(r"\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}", tikz):
+        p = HINH_ANH_DIR / ten.strip()
+        if p.exists() and p not in ra:
+            ra.append(p)
+    return ra
+
+
 def ma_hinh(tikz: str) -> str:
-    """Ma bam cua mot hinh, tinh tu chinh doan TikZ."""
-    return hashlib.sha1((PHIEN_BAN + "\n" + tikz).encode("utf-8")).hexdigest()[:20]
+    """Ma bam cua mot hinh, tinh tu chinh doan TikZ.
+
+    Hinh co anh chup: bam them NOI DUNG tep anh, de thay anh (giu ten) thi web
+    va Word cung dich lai chu khong dung anh cu trong data/hinh_cache.
+    """
+    h = hashlib.sha1((PHIEN_BAN + "\n" + tikz).encode("utf-8"))
+    for p in anh_trong(tikz):
+        h.update(p.read_bytes())
+    return h.hexdigest()[:20]
 
 
 def duong_dan_anh(ma: str) -> Path | None:
@@ -140,9 +160,10 @@ def dich_hinh(tikz: str, chi_png: bool = False) -> Path:
     import os
     # ex_test.sty nam trong repo chu khong nam trong TeX Live; noi them vao
     # TEXINPUTS san co (neu may da dat) chu khong de len no.
+    # data/hinh_anh: anh chup lam nen cho hinh TikZ (\includegraphics).
     moi_truong = dict(os.environ,
-                      TEXINPUTS="%s:%s" % (BASE_DIR / "data" / "config",
-                                           os.environ.get("TEXINPUTS", "")))
+                      TEXINPUTS="%s:%s:%s" % (BASE_DIR / "data" / "config", HINH_ANH_DIR,
+                                              os.environ.get("TEXINPUTS", "")))
     with tempfile.TemporaryDirectory() as thu_muc:
         tm = Path(thu_muc)
         pdf = None

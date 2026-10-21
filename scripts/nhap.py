@@ -56,7 +56,8 @@ def _dat_seed(seed):
 def _bien_dich(tex: Path) -> bool:
     """pdflatex 2 lan (giong app/services/pdf_service.py). In loi neu co."""
     env = os.environ.copy()
-    env["TEXINPUTS"] = f"{CONFIG}{os.sep}:{env.get('TEXINPUTS', '')}"
+    # data/hinh_anh: anh chup lam nen cho hinh TikZ (giong pdf_service)
+    env["TEXINPUTS"] = f"{CONFIG}{os.sep}:{GOC / 'data' / 'hinh_anh'}{os.sep}:{env.get('TEXINPUTS', '')}"
     kq = None
     for _ in range(2):
         try:

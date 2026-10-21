@@ -1376,6 +1376,14 @@
     "boi_canh": "cong_troi"
   },
   {
+    "id": "L10_C3_B6_VD036_TL_P",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Ước lượng diện tích khu vực tìm kiếm mở rộng ở công viên Lê Thị Riêng trên ẢNH BẢN ĐỒ THẬT: lục giác lồi chia bởi ba đường chéo từ một đỉnh thành bốn tam giác biết ba cạnh (Heron bốn lần)",
+    "ghi_chu": "CLAUDE THEM 21/10/2026 - cau dau tien co anh chup that (data/hinh_anh/ltr_ban_do.jpg, ham anh_nen trong data/python_bank/hinh_anh.py); co Lan chon anh that, chia 4 tam giac, tu luan; so do canh gia dinh, tong dien tich sat 5 800 m2 ghi tren ban do (dong nay bi che tren hinh)",
+    "boi_canh": "cong_troi"
+  },
+  {
     "id": "L10_C3_B6_VD036_MC_N",
     "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
