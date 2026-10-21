@@ -6834,20 +6834,28 @@ def L10_C4_B8_VD040_SA_B_01(socau, dang=2):
 
 # ---------------------------------------------------------------- C (VDC): kéo vật lên dốc nghiêng
 def _b8_hinh_doc(a):
-    """TikZ mặt dốc nghiêng góc a độ, vật tại O, trọng lực P, phản lực w, lực kéo F (như Hình 4.18 SGK)."""
+    """TikZ mặt dốc nghiêng góc a độ, vật (hình chữ nhật) có TÂM O, trọng lực P, phản lực w, lực kéo F đặt tại O
+    (như Hình 4.18 SGK). Sửa 21/10/2026 (cô Lan): "toạ độ điểm O phải là tâm của hình chữ nhật" - trước đây O là
+    trung điểm cạnh đáy (chỗ vật chạm mặt dốc)."""
     r = math.radians(a)
     L = 6.0
     # dốc thoải (dưới 20 độ): đẩy vật lên cao hơn trên dốc để nhãn góc đặt xa đỉnh góc mà không chạm trọng lực P
-    O = ((4.3 if a < 20 else 3.6) * math.cos(r), (4.3 if a < 20 else 3.6) * math.sin(r))
     u = (math.cos(r), math.sin(r))                       # dọc dốc, hướng lên
     n = (-math.sin(r), math.cos(r))                      # pháp tuyến hướng lên
-    lp = 2.2
+    rong, cao = 0.9, 0.5                                 # vật: dài 0.9 dọc dốc, cao 0.5
+    d = 4.3 if a < 20 else 3.6
+    S0 = (d * math.cos(r), d * math.sin(r))              # trung điểm cạnh đáy (chỗ vật chạm mặt dốc)
+    O = (S0[0] + n[0] * cao / 2, S0[1] + n[1] * cao / 2)  # TÂM hình chữ nhật: điểm đặt ba lực
+    # độ dài vẽ trọng lực: ngọn mũi tên P xuống hẳn dưới mặt đất (không để chữ P đè lên đường nằm ngang);
+    # w, F vẽ theo cùng tỉ lệ lp nên tam giác lực vẫn đúng hình dạng
+    lp = max(2.2, O[1] + 0.55)
     P = (O[0], O[1] - lp)
     W = (O[0] + n[0] * lp * math.cos(r), O[1] + n[1] * lp * math.cos(r))
-    lf = max(lp * math.sin(r), 1.0)                      # dốc thoải: F theo tỉ lệ sẽ nằm lọt dưới vật, nên tối thiểu 1
+    lf = max(lp * math.sin(r), 1.0)                      # dốc thoải: F theo tỉ lệ sẽ nằm lọt trong vật, nên tối thiểu 1
     F = (O[0] + u[0] * lf, O[1] + u[1] * lf)
-    goc = [(O[0] - 0.45 * u[0], O[1] - 0.45 * u[1]), (O[0] + 0.45 * u[0], O[1] + 0.45 * u[1])]
-    goc += [(goc[1][0] + 0.4 * n[0], goc[1][1] + 0.4 * n[1]), (goc[0][0] + 0.4 * n[0], goc[0][1] + 0.4 * n[1])]
+    goc = [(O[0] + i * rong / 2 * u[0] + j * cao / 2 * n[0], O[1] + i * rong / 2 * u[1] + j * cao / 2 * n[1])
+           for i, j in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+    nhan_O = (O[0] - 0.24 * u[0], O[1] - 0.24 * u[1])    # chữ O trong vật, bên trái tâm (không đè ba mũi tên)
     T = lambda p: "(%s,%s)" % (_toa(p[0]), _toa(p[1]))
     out = [r"\begin{tikzpicture}[>=stealth,thick,scale=0.8]",
            r"\draw (0,0) -- (%s,0);" % _toa(L * math.cos(r) + 0.5),
@@ -6856,7 +6864,8 @@ def _b8_hinh_doc(a):
            r"\draw[->] %s -- %s node[right]{$\overrightarrow{P}$};" % (T(O), T(P)),
            r"\draw[->] %s -- %s node[above left]{$\overrightarrow{w}$};" % (T(O), T(W)),
            r"\draw[->,blue] %s -- %s node[above]{$\overrightarrow{F}$};" % (T(O), T(F)),
-           r"\fill %s circle[radius=1.5pt] node[below right]{\footnotesize $O$};" % T(O),
+           r"\fill %s circle[radius=1.5pt];" % T(O),
+           r"\node at %s {\scriptsize $O$};" % T(nhan_O),
            r"\draw[thin] (1,0) arc (0:%s:1);" % _toa(a),
            # nhãn góc: dốc càng thoải đặt càng xa đỉnh (khe giữa hai cạnh đủ rộng cho chữ)
            r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa(a / 2), _toa(min(2.9, max(1.45, 0.5 / math.tan(r)))), a),
