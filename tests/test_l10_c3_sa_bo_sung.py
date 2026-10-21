@@ -104,7 +104,7 @@ TAT_CA_SA = ["B5_NB029_SA_A_01", "B5_NB029_SA_C_01", "B5_NB029_SA_D_01", "B5_NB0
              "B5_TH031_SA_D_01", "B5_TH031_SA_F_01", "B6_TH032_SA_D_01", "B6_TH032_SA_D_02", "B6_NB032_SA_A_01",
              "B6_NB032_SA_B_01", "B6_NB033_SA_A_01", "B6_TH034_SA_B_01", "B6_TH034_SA_C_01", "B6_TH034_SA_F_01",
              "B6_NB034_SA_A_01", "B6_TH035_SA_C_01", "B6_VD032_SA_A_01", "B6_VD036_SA_B_01",
-             "B6_TH033_SA_C_01", "B6_NB034_SA_B_01"]
+             "B6_TH033_SA_C_01"]   # NB034_SA_B_01 dua vao luu tru 22/10/2026 (co Lan)
 
 
 @pytest.mark.parametrize("ten", TAT_CA_SA)
@@ -393,24 +393,4 @@ def test_th033_sa_c_ti_so():
         assert so(dap) == round(math.dist((1, 0), C) / math.dist((0, 0), C), 2)
 
 
-def test_nb034_sa_b_cong_thuc_va_du_kien():
-    for s in range(SO_LAN):
-        debai, dap, _, _ = _bat("B6_NB034_SA_B_01", s)
-
-        def tri(m):
-            dk, ct = re.match(r"Biết (.+) thì \$(.+)\$$", m).groups()
-            biet = set()
-            if "ba cạnh" in dk:
-                biet |= set("abcp")                              # biet ba canh thi biet nua chu vi
-            for ten, k in (("cạnh $a$", "a"), ("$b$", "b"), ("$c$", "c"), ("nửa chu vi $p$", "p"), ("bán kính $R$", "R"),
-                           ("bán kính $r$", "r"), ("góc $A$", "A"), ("góc $C$", "C"), ("$h_a$", "ha"), ("$a$, $b$", "ab")):
-                if ten in dk:
-                    biet |= set(k) if k != "ha" else {"ha"}
-            l, r = ct.split(" = ")
-            sach = r.replace("h_a", "")
-            for lenh in ("\\sin", "\\cos", "\\sqrt", "\\dfrac", "\\left", "\\right", "\\cdot"):
-                sach = sach.replace(lenh, "")
-            can = set(re.findall(r"[abcpRrAC]", sach)) | ({"ha"} if "h_a" in r else set())
-            dung_ct = _dung_tren_tam_giac("$" + ct + "$")
-            return dung_ct and can <= biet
-        _dem_kiem(debai, dap, tri)
+# test_nb034_sa_b_cong_thuc_va_du_kien: bo 22/10/2026 - NB034_SA_B dua vao luu tru (data/luu_tru/L10_C3_luu_tru.py).

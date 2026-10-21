@@ -79,22 +79,6 @@
     "ghi_chu": "15/10/2026 ghep cung Dang voi MC_B (cung dang, theo co Lan: ghep cac dang da thay giong)"
   },
   {
-    "id": "L10_C3_B6_NB034_MC_B",
-    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
-    "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
-    "ngoai_yccd": true,
-    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); "
-  },
-  {
-    "id": "L10_C3_B6_NB034_SA_B",
-    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
-    "Loai": "Trả lời ngắn",
-    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
-    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi NB034_MC_B: dem khang dinh 'biet du kien X thi S = cong thuc' dung/sai; co Lan duyet lai",
-    "ngoai_yccd": true
-  },
-  {
     "id": "L10_C3_B6_TH034_SA_D",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trả lời ngắn",

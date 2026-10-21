@@ -72,5 +72,23 @@
     "ghi_chu": "CLAUDE THEM 13/10/2026 - theo y co Lan (bai tho Dong chi cua Chinh Huu - chien tranh khoc liet nhung nguoi linh Cu Ho van yeu doi, yeu thien nhien; thay hai bai Canh khuya/Ram thang Gieng vi khong tim ra bai); so lieu Mat Trang that (NASA: 384 400 km, can diem 363 300, vien diem 405 500, duong kinh khoang 3 474-3 476 km), goc nhin tinh tu duong kinh that; Dong chi viet dau nam 1948 sau chien dich Viet Bac thu dong 1947 (hoatieu.vn, luatminhkhue.vn); khong chep loi tho (co Lan dan vao _TR_THO); 2 bien the _01 (duong kinh Mat Trang), _02 (cay co thu, so do gia su); dung lai chu cai cu cua Pac Bo da go (W, Y, O); co Lan duyet lai",
     "boi_canh": "trang_dong_chi",
     "luu_tru": "21/10/2026 - co Lan: bai tho Dong chi thay khong hay, de nhap, sau nay chinh li lay lai"
+  },
+  {
+    "id": "L10_C3_B6_NB034_MC_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
+    "ngoai_yccd": true,
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); ",
+    "luu_tru": "22/10/2026 - co Lan: 'Biet du kien thi S = ...' vo ly (cho tam giac thi moi yeu to da biet); hoi thang cong thuc dung/sai la NB034_MC_A, SA_A"
+  },
+  {
+    "id": "L10_C3_B6_NB034_SA_B",
+    "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Chọn công thức tính diện tích tam giác phù hợp với dữ kiện - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi NB034_MC_B: dem khang dinh 'biet du kien X thi S = cong thuc' dung/sai; co Lan duyet lai",
+    "ngoai_yccd": true,
+    "luu_tru": "22/10/2026 - co Lan: 'Biet du kien thi S = ...' vo ly (cho tam giac thi moi yeu to da biet); hoi thang cong thuc dung/sai la NB034_MC_A, SA_A"
   }
 ]

@@ -22,6 +22,15 @@ Ba dòng Mapping và 19 mục từ điển tiếng Anh cũng nằm ở hai tệp
 data/luu_tru/kiem_L10_C3_trang_dong_chi.py (chạy riêng bằng pytest). Khi đưa lại: thêm lại ba ID vào
 CHO_PHEP_NHIEU_HAM trong tests/test_mot_id_mot_dang.py (một ID có hai hàm _01, _02).
 
+Rút ngày 22/10/2026 theo yêu cầu cô Lan (câu "Biết ba cạnh a, b, c thì S = 1/2 ab sinC" bị chấm sai): "câu này vô lý,
+cho tam giác ABC thì góc C đã biết, câu hỏi không rõ ràng. Bỏ chỗ biết đi, từ câu dẫn hỏi công thức đúng sai luôn".
+Hỏi thẳng công thức đúng/sai chính là NB034_MC_A / NB034_SA_A nên cô chọn bỏ cả dạng B ("chọn công thức phù hợp với
+dữ kiện"), 2 hàm:
+    L10_C3_B6_NB034_MC_B_01   chọn công thức diện tích "phù hợp với dữ kiện" (bốn phương án đều là công thức đúng)
+    L10_C3_B6_NB034_SA_B_01   đếm khẳng định "Biết <dữ kiện> thì S = ..." (kèm _C3S_DU_KIEN, _C3S_CT_S, _c3s_ct_dung)
+Hai dòng Mapping và các mục từ điển tiếng Anh ở hai tệp JSON trên. Test cũ của SA_B (test_nb034_sa_b_cong_thuc_va_du_kien
+trong tests/test_l10_c3_sa_bo_sung.py) xem trong lịch sử git.
+
 Xem thử (đứng ở thư mục gốc dự án):  python3 data/luu_tru/L10_C3_luu_tru.py
 Đưa trở lại ngân hàng: chép các hàm (và hàm phụ) về data/python_bank/toan10/L10_C3.py, chép các dòng Mapping về
 data/mapping/toan10/L10_C3.json, chép các mục từ điển về data/i18n/bank/en_L10_C3.json, chạy lại
@@ -35,7 +44,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python_bank"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python_bank" / "toan10"))
 from math_type import *  # noqa: E402,F401,F403
-from L10_C3 import _ba_nhieu, _lt, _so, _x1, _xa_bien  # noqa: E402  (hàm phụ dùng chung, vẫn còn trong L10_C3.py)
+from L10_C3 import _ba_nhieu, _c3s_dem, _c3s_dung, _lt, _so, _x1, _xa_bien  # noqa: E402  (hàm phụ dùng chung, vẫn còn trong L10_C3.py)
 
 
 # hàm phụ chép từ L10_C3.py
@@ -583,11 +592,121 @@ def L10_C3_B6_VD036_TL_O_02(socau, dong=1):
     """
     return _tr_tl(2, socau, dong)
 
+# Rút ngày 22/10/2026 - cô Lan: dạng NB034_B ("Biết <dữ kiện> thì S = ...") vô lý, xem đầu tệp.
+def L10_C3_B6_NB034_MC_B_01(socau, dang=1):
+    """Chọn công thức tính diện tích tam giác phù hợp với dữ kiện cho trước."""
+    BO = [
+        ("biết hai cạnh $b$, $c$ và góc $A$ xen giữa",
+         r"$S = \dfrac{1}{2}bc\sin A$"),
+        ("biết ba cạnh $a$, $b$, $c$",
+         r"$S = \sqrt{p(p-a)(p-b)(p-c)}$"),
+        ("biết ba cạnh $a$, $b$, $c$ và bán kính $R$ của đường tròn ngoại tiếp",
+         r"$S = \dfrac{abc}{4R}$"),
+        ("biết ba cạnh $a$, $b$, $c$ và bán kính $r$ của đường tròn nội tiếp",
+         r"$S = pr$"),
+        ("biết cạnh $a$ và đường cao $h_a$ ứng với cạnh đó",
+         r"$S = \dfrac{1}{2}a h_a$"),
+    ]
+    gt = []
+    while len(gt) < socau:
+        i = random.randrange(len(BO))
+        if i in gt:
+            continue
+        gt.append(i)
+
+    cauTN = ''
+    for i in gt:
+        du_kien, ct = BO[i]
+        ds = [x[1] for j, x in enumerate(BO) if j != i]
+        random.shuffle(ds)
+        debai = (r"Tam giác $ABC$ có diện tích $S$, nửa chu vi $p$. "
+                 r"Khi %s, công thức tính diện tích tam giác là" % du_kien)
+        giai = r"Với dữ kiện %s, ta dùng công thức %s." % (du_kien, ct)
+        cauTN += MC_SA_answer_text(debai, ct, ds[:3], giai, 0, 0, dang)
+    return cauTN
+
+
+# Dữ kiện (mô tả, các đại lượng biết) và công thức (tex, đại lượng dùng, hàm thử số, đúng?) cho NB034_SA_B.
+_C3S_DU_KIEN = [
+    (r"ba cạnh $a$, $b$, $c$", {"a", "b", "c", "p"}),
+    (r"ba cạnh $a$, $b$, $c$ và bán kính $R$ của đường tròn ngoại tiếp", {"a", "b", "c", "p", "R"}),
+    (r"nửa chu vi $p$ và bán kính $r$ của đường tròn nội tiếp", {"p", "r"}),
+    (r"hai cạnh $b$, $c$ và góc $A$", {"b", "c", "A"}),
+    (r"hai cạnh $a$, $b$ và góc $C$", {"a", "b", "C"}),
+    (r"cạnh $a$ và đường cao $h_a$", {"a", "ha"}),
+]
+_C3S_CT_S = [
+    (r"S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}", {"p", "a", "b", "c"}),
+    (r"S = \dfrac{abc}{4R}", {"a", "b", "c", "R"}),
+    (r"S = pr", {"p", "r"}),
+    (r"S = \dfrac{1}{2}bc\sin A", {"b", "c", "A"}),
+    (r"S = \dfrac{1}{2}ab\sin C", {"a", "b", "C"}),
+    (r"S = \dfrac{1}{2}a\cdot h_a", {"a", "ha"}),
+    (r"S = \dfrac{abc}{2R}", {"a", "b", "c", "R"}),
+    (r"S = 2pr", {"p", "r"}),
+    (r"S = \dfrac{1}{2}bc\cos A", {"b", "c", "A"}),
+    (r"S = \dfrac{1}{2}ab\sin A", {"a", "b", "A"}),
+    (r"S = a\cdot h_a", {"a", "ha"}),
+    (r"S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}", {"p", "a", "b", "c"}),
+]
+
+
+def _c3s_ct_dung(tex):
+    """Công thức diện tích tex có đúng với mọi tam giác không (thử số)."""
+    f = {
+        r"S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}":
+            lambda T: math.sqrt(T["p"] * (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"])),
+        r"S = \dfrac{abc}{4R}": lambda T: T["a"] * T["b"] * T["c"] / (4 * T["R"]),
+        r"S = pr": lambda T: T["p"] * T["r"],
+        r"S = \dfrac{1}{2}bc\sin A": lambda T: 0.5 * T["b"] * T["c"] * math.sin(T["A"]),
+        r"S = \dfrac{1}{2}ab\sin C": lambda T: 0.5 * T["a"] * T["b"] * math.sin(T["C"]),
+        r"S = \dfrac{1}{2}a\cdot h_a": lambda T: 0.5 * T["a"] * T["ha"],
+        r"S = \dfrac{abc}{2R}": lambda T: T["a"] * T["b"] * T["c"] / (2 * T["R"]),
+        r"S = 2pr": lambda T: 2 * T["p"] * T["r"],
+        r"S = \dfrac{1}{2}bc\cos A": lambda T: 0.5 * T["b"] * T["c"] * math.cos(T["A"]),
+        r"S = \dfrac{1}{2}ab\sin A": lambda T: 0.5 * T["a"] * T["b"] * math.sin(T["A"]),
+        r"S = a\cdot h_a": lambda T: T["a"] * T["ha"],
+        r"S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}":
+            lambda T: math.sqrt(T["p"] * (T["p"] + T["a"]) * (T["p"] + T["b"]) * (T["p"] + T["c"])),
+    }[tex]
+    return _c3s_dung(lambda T: (T["S"], f(T)))
+
+
+def L10_C3_B6_NB034_SA_B_01(socau, dang=2):
+    r"""Trả lời ngắn - bản trả lời ngắn của NB034_MC_B (cùng Dang: chọn công thức diện tích phù hợp với dữ kiện):
+    bốn khẳng định ``Biết <dữ kiện> thì $S = \ldots$''; khẳng định đúng khi công thức đúng VÀ chỉ dùng các đại lượng
+    đã biết (biết ba cạnh thì biết nửa chu vi $p$). Đếm số khẳng định đúng (sai). Mức Nhận biết - LUYỆN TẬP THÊM
+    (ngoài YCCĐ).
+
+    CLAUDE THEM 15/10/2026 - co Lan duyet lai.
+    """
+    ten_dai = {"a": "$a$", "b": "$b$", "c": "$c$", "p": "$p$", "R": "$R$", "r": "$r$", "A": "góc $A$", "C": "góc $C$",
+               "ha": "$h_a$"}
+    cau = ""
+    for _ in range(socau):
+        dung, sai = [], []
+        for mo_dk, biet in _C3S_DU_KIEN:
+            for tex, dung_dl in _C3S_CT_S:
+                ok_ct = _c3s_ct_dung(tex)
+                thieu = sorted(dung_dl - biet)
+                kd = r"Biết %s thì $%s$" % (mo_dk, tex)
+                if ok_ct and not thieu:
+                    dung.append((kd, r"đây là công thức diện tích và chỉ dùng các đại lượng đã biết", tex))
+                elif ok_ct:
+                    sai.append((kd, r"công thức đúng nhưng cần thêm %s chưa biết" % ", ".join(ten_dai[x] for x in thieu), tex))
+                elif not thieu or random.random() < 0.3:
+                    sai.append((kd, r"công thức $%s$ sai" % tex, tex))
+        mo = (r"Cho tam giác $ABC$ có $BC = a$, $CA = b$, $AB = c$, diện tích $S$, nửa chu vi $p$, đường cao $h_a$ kẻ từ $A$; "
+              r"$R$, $r$ lần lượt là bán kính đường tròn ngoại tiếp, nội tiếp tam giác.")
+        cau += _c3s_dem(mo, dung, sai, dang)
+    return cau
+
 if __name__ == "__main__":
     random.seed(1)
     for ten in ("L10_C3_B6_VD036_TL_E_01", "L10_C3_B6_VD036_MC_K_01", "L10_C3_B6_VD036_SA_K_01",
                 "L10_C3_B6_VD036_MC_L_01", "L10_C3_B6_VD036_SA_L_01",
                 "L10_C3_B6_VD036_MC_W_01", "L10_C3_B6_VD036_MC_W_02", "L10_C3_B6_VD036_SA_W_01",
-                "L10_C3_B6_VD036_SA_W_02", "L10_C3_B6_VD036_TL_O_01", "L10_C3_B6_VD036_TL_O_02"):
+                "L10_C3_B6_VD036_SA_W_02", "L10_C3_B6_VD036_TL_O_01", "L10_C3_B6_VD036_TL_O_02",
+                "L10_C3_B6_NB034_MC_B_01", "L10_C3_B6_NB034_SA_B_01"):
         print("%% ====", ten)
         print(globals()[ten](1))

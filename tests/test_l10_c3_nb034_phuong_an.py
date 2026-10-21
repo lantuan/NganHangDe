@@ -80,6 +80,27 @@ def test_khac_het_hoac_giong_het(ham, hoi_dung):
     assert kieu == {1, 4}
 
 
-def test_mc_b_chi_con_mot_ham():
-    ham = [n for n in dir(M) if n.startswith("L10_C3_B6_NB034_MC_B_")]
-    assert ham == ["L10_C3_B6_NB034_MC_B_01"]
+def test_dang_b_da_dua_vao_luu_tru():
+    # 22/10/2026 (co Lan): "Biet <du kien> thi S = ..." vo ly - ca NB034_MC_B va NB034_SA_B vao data/luu_tru
+    assert not [n for n in dir(M) if n.startswith(("L10_C3_B6_NB034_MC_B_", "L10_C3_B6_NB034_SA_B_"))]
+    assert "Biết" not in M.L10_C3_B6_NB034_SA_A_01(3)
+
+
+def test_sa_a_khac_het_hoac_giong_het():
+    import re
+    kieu, dap_thay = set(), set()
+    for s in range(300):
+        random.seed(s)
+        o = M.L10_C3_B6_NB034_SA_A_01(1)
+        de = o.split("\\shortans")[0]
+        ct = re.findall(r"\\\\ \d\. (\$.+?\$)(?=\\\\|\n|$)", de)
+        assert len(ct) == 4 and len(set(ct)) == 4, de
+        ho = [HO_CUA[x][0] for x in ct]
+        assert len(set(ho)) in (1, 4), (ho, de)                 # khác hết hoặc giống hết
+        kieu.add(len(set(ho)))
+        dung = sum(HO_CUA[x][1] == "dung" for x in ct)
+        assert 1 <= dung <= 3
+        dap = int(re.search(r"\\shortans\{ \$(\d)\$\}", o).group(1))
+        assert dap == (dung if "\\textbf{đúng}" in de else 4 - dung), de
+        dap_thay.add(dap)
+    assert kieu == {1, 4} and dap_thay == {1, 2, 3}
