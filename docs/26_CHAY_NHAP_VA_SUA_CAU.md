@@ -167,6 +167,13 @@ Ví dụ thật: `L10_C3_B6_VD036_TL_P_01` (bản đồ khu vực tìm kiếm r�
 Ví dụ thật (20/10/2026): bài đo bán kính Trái Đất (`L10_C3_B6_VD036_TL_E`,
 `MC_K`, `SA_K`, `MC_L`, `SA_L`) chỉ dùng tam giác vuông, không dùng hệ
 thức lượng trong tam giác thường.
+Ví dụ thứ hai (21/10/2026): dạng "Vầng trăng của người lính" - bài thơ
+Đồng chí (`L10_C3_B6_VD036_MC_W`, `SA_W`, `TL_O`, mỗi ID hai hàm `_01`, `_02`),
+cô Lan thấy chưa hay, để nháp chỉnh lí sau. Dạng có test riêng thì chuyển
+test theo: `data/luu_tru/kiem_<...>.py` (tên không bắt đầu bằng `test_`,
+nằm ngoài `tests/` nên bộ test chung không chạy; chạy riêng bằng
+`python3 -m pytest data/luu_tru/kiem_L10_C3_trang_dong_chi.py`). ID có nhiều
+hàm thì bỏ khỏi `CHO_PHEP_NHIEU_HAM` (`tests/test_mot_id_mot_dang.py`).
 
 1. **Chuyển hàm** (cùng các hàm phụ chỉ nó dùng) từ
    `data/python_bank/toan<lớp>/L<lớp>_C<chương>.py` sang

@@ -1,4 +1,9 @@
-"""Vang trang cua nguoi linh - bai tho Dong chi cua Chinh Huu (co Lan 13/10/2026): kiem lai DOC LAP.
+"""LUU TRU 21/10/2026 (co Lan: bai tho Dong chi thay khong hay, de nhap, chinh li lay lai sau). Test doc lap cua dang
+nay, chuyen tu tests/test_l10_c3_trang_viet_bac.py; ten khong bat dau bang test_ va nam ngoai tests/ nen bo test chung
+KHONG chay. Chay rieng:  python3 -m pytest data/luu_tru/kiem_L10_C3_trang_dong_chi.py
+Dua dang tro lai ngan hang thi chuyen tep ve tests/ (doi lai duong dan L10_C3.py va Mapping).
+
+Vang trang cua nguoi linh - bai tho Dong chi cua Chinh Huu (co Lan 13/10/2026): kiem lai DOC LAP.
 
 _01: duong kinh Mat Trang tu khoang cach d va goc nhin theta (tam giac can; kiem bang dinh li cosin, KHONG dung cong thuc 2d.sin(theta/2) cua ham sinh).
      Du lieu thuc: d trong khoang can diem 363 300 - vien diem 405 500 km, duong kinh thu duoc gan 3 474-3 476 km (NASA).
@@ -14,10 +19,10 @@ from pathlib import Path
 
 import pytest
 
-GOC = Path(__file__).resolve().parent.parent
+GOC = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(GOC / "data" / "python_bank"))
 sys.path.insert(0, str(GOC))
-_spec = importlib.util.spec_from_file_location("L10_C3_trang_test", GOC / "data" / "python_bank" / "toan10" / "L10_C3.py")
+_spec = importlib.util.spec_from_file_location("L10_C3_trang_test", GOC / "data" / "luu_tru" / "L10_C3_luu_tru.py")
 M = importlib.util.module_from_spec(_spec)
 sys.modules["L10_C3_trang_test"] = M
 _spec.loader.exec_module(M)
@@ -152,7 +157,7 @@ def test_khong_co_khoi_tho_va_hinh_chi_ghi_ten_diem():
 
 
 def test_mapping_mot_dang_mot_boi_canh():
-    rows = {r["id"]: r for r in json.load(open(GOC / "data" / "mapping" / "toan10" / "L10_C3.json", encoding="utf-8"))}
+    rows = {r["id"]: r for r in json.load(open(GOC / "data" / "luu_tru" / "L10_C3_mapping_luu_tru.json", encoding="utf-8"))}
     dang = {rows[i]["Dang"] for i in IDS.values()}
     assert len(dang) == 1
     assert all(rows[i]["boi_canh"] == "trang_dong_chi" for i in IDS.values())

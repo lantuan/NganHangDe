@@ -45,5 +45,32 @@
     "ghi_chu": "CLAUDE THEM 01/10/2026 - tach bai ban kinh Trai Dat thanh MC/SA muc VDC: biet h, goc ha, tinh R; cung mo ta Dang voi TL_E; co Lan duyet lai",
     "boi_canh": "trai_dat",
     "luu_tru": "20/10/2026 - co Lan: chi dung tam giac vuong, khong dung he thuc luong trong tam giac thuong; xem lai sau"
+  },
+  {
+    "id": "L10_C3_B6_VD036_MC_W",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trắc nghiệm nhiều lựa chọn",
+    "Dang": "Bài toán thực tiễn gắn với bài thơ \"Đồng chí\" của Chính Hữu (vầng trăng của người lính Cụ Hồ): tính đường kính Mặt Trăng từ khoảng cách Trái Đất - Mặt Trăng và góc nhìn (tam giác cân, số liệu thật); tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi dốc (định lí sin, số đo giả sử)",
+    "ghi_chu": "CLAUDE THEM 13/10/2026 - theo y co Lan (bai tho Dong chi cua Chinh Huu - chien tranh khoc liet nhung nguoi linh Cu Ho van yeu doi, yeu thien nhien; thay hai bai Canh khuya/Ram thang Gieng vi khong tim ra bai); so lieu Mat Trang that (NASA: 384 400 km, can diem 363 300, vien diem 405 500, duong kinh khoang 3 474-3 476 km), goc nhin tinh tu duong kinh that; Dong chi viet dau nam 1948 sau chien dich Viet Bac thu dong 1947 (hoatieu.vn, luatminhkhue.vn); khong chep loi tho (co Lan dan vao _TR_THO); 2 bien the _01 (duong kinh Mat Trang), _02 (cay co thu, so do gia su); dung lai chu cai cu cua Pac Bo da go (W, Y, O); co Lan duyet lai",
+    "boi_canh": "trang_dong_chi",
+    "luu_tru": "21/10/2026 - co Lan: bai tho Dong chi thay khong hay, de nhap, sau nay chinh li lay lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_SA_W",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Trả lời ngắn",
+    "Dang": "Bài toán thực tiễn gắn với bài thơ \"Đồng chí\" của Chính Hữu (vầng trăng của người lính Cụ Hồ): tính đường kính Mặt Trăng từ khoảng cách Trái Đất - Mặt Trăng và góc nhìn (tam giác cân, số liệu thật); tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi dốc (định lí sin, số đo giả sử)",
+    "ghi_chu": "CLAUDE THEM 13/10/2026 - theo y co Lan (bai tho Dong chi cua Chinh Huu - chien tranh khoc liet nhung nguoi linh Cu Ho van yeu doi, yeu thien nhien; thay hai bai Canh khuya/Ram thang Gieng vi khong tim ra bai); so lieu Mat Trang that (NASA: 384 400 km, can diem 363 300, vien diem 405 500, duong kinh khoang 3 474-3 476 km), goc nhin tinh tu duong kinh that; Dong chi viet dau nam 1948 sau chien dich Viet Bac thu dong 1947 (hoatieu.vn, luatminhkhue.vn); khong chep loi tho (co Lan dan vao _TR_THO); 2 bien the _01 (duong kinh Mat Trang), _02 (cay co thu, so do gia su); dung lai chu cai cu cua Pac Bo da go (W, Y, O); co Lan duyet lai",
+    "boi_canh": "trang_dong_chi",
+    "luu_tru": "21/10/2026 - co Lan: bai tho Dong chi thay khong hay, de nhap, sau nay chinh li lay lai"
+  },
+  {
+    "id": "L10_C3_B6_VD036_TL_O",
+    "content": "Vận dụng được các hệ thức lượng trong tam giác để giải một số bài toán có nội dung thực tiễn.",
+    "Loai": "Tự luận",
+    "Dang": "Bài toán thực tiễn gắn với bài thơ \"Đồng chí\" của Chính Hữu (vầng trăng của người lính Cụ Hồ): tính đường kính Mặt Trăng từ khoảng cách Trái Đất - Mặt Trăng và góc nhìn (tam giác cân, số liệu thật); tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi dốc (định lí sin, số đo giả sử)",
+    "ghi_chu": "CLAUDE THEM 13/10/2026 - theo y co Lan (bai tho Dong chi cua Chinh Huu - chien tranh khoc liet nhung nguoi linh Cu Ho van yeu doi, yeu thien nhien; thay hai bai Canh khuya/Ram thang Gieng vi khong tim ra bai); so lieu Mat Trang that (NASA: 384 400 km, can diem 363 300, vien diem 405 500, duong kinh khoang 3 474-3 476 km), goc nhin tinh tu duong kinh that; Dong chi viet dau nam 1948 sau chien dich Viet Bac thu dong 1947 (hoatieu.vn, luatminhkhue.vn); khong chep loi tho (co Lan dan vao _TR_THO); 2 bien the _01 (duong kinh Mat Trang), _02 (cay co thu, so do gia su); dung lai chu cai cu cua Pac Bo da go (W, Y, O); co Lan duyet lai",
+    "boi_canh": "trang_dong_chi",
+    "luu_tru": "21/10/2026 - co Lan: bai tho Dong chi thay khong hay, de nhap, sau nay chinh li lay lai"
   }
 ]

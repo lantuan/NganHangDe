@@ -14,6 +14,14 @@ Gồm 5 dạng (cùng Dang "Đo bán kính Trái Đất bằng góc hạ tới �
 Năm dòng Mapping cũ nằm ở data/luu_tru/L10_C3_mapping_luu_tru.json; 24 mục từ điển tiếng Anh ở
 data/luu_tru/en_L10_C3_luu_tru.json.
 
+Rút ngày 21/10/2026 theo yêu cầu cô Lan ("bài thơ Đồng chí tôi thấy không hay, chuyển vào nháp, sau này tôi chỉnh lí
+lấy lại sau"): dạng "Vầng trăng của người lính" (bối cảnh trang_dong_chi), 6 hàm, 3 ID:
+    L10_C3_B6_VD036_MC_W_01, _02  /  L10_C3_B6_VD036_SA_W_01, _02  /  L10_C3_B6_VD036_TL_O_01, _02
+    (_01 đường kính Mặt Trăng - tam giác cân; _02 cây cổ thụ trên sườn đồi - định lí sin)
+Ba dòng Mapping và 19 mục từ điển tiếng Anh cũng nằm ở hai tệp JSON trên. Test độc lập của dạng:
+data/luu_tru/kiem_L10_C3_trang_dong_chi.py (chạy riêng bằng pytest). Khi đưa lại: thêm lại ba ID vào
+CHO_PHEP_NHIEU_HAM trong tests/test_mot_id_mot_dang.py (một ID có hai hàm _01, _02).
+
 Xem thử (đứng ở thư mục gốc dự án):  python3 data/luu_tru/L10_C3_luu_tru.py
 Đưa trở lại ngân hàng: chép các hàm (và hàm phụ) về data/python_bank/toan10/L10_C3.py, chép các dòng Mapping về
 data/mapping/toan10/L10_C3.json, chép các mục từ điển về data/i18n/bank/en_L10_C3.json, chạy lại
@@ -27,7 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python_bank"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "python_bank" / "toan10"))
 from math_type import *  # noqa: E402,F401,F403
-from L10_C3 import _ba_nhieu, _lt  # noqa: E402  (hàm phụ dùng chung, vẫn còn trong L10_C3.py)
+from L10_C3 import _ba_nhieu, _lt, _so, _x1, _xa_bien  # noqa: E402  (hàm phụ dùng chung, vẫn còn trong L10_C3.py)
 
 
 # hàm phụ chép từ L10_C3.py
@@ -329,9 +337,257 @@ def L10_C3_B6_VD036_SA_L_01(socau, dang=2):
     return cau
 
 
+# Rút ngày 21/10/2026 - cô Lan: "bài thơ Đồng chí tôi thấy không hay, chuyển vào nháp, sau này tôi chỉnh lí lấy lại sau".
+# =====================================================================================================
+# "ĐỒNG CHÍ" (CHÍNH HỮU) - VẦNG TRĂNG CỦA NGƯỜI LÍNH CỤ HỒ (cô Lan 13/10/2026; thay hai bài Cảnh khuya, Rằm tháng Giêng)
+# MỘT DẠNG MỚI (các ID MC_W, SA_Y, TL_O của bài 6, các chữ cái đã gỡ khỏi Pác Bó), HAI BIẾN THỂ:
+#   _01: tính ĐƯỜNG KÍNH MẶT TRĂNG từ khoảng cách Trái Đất - Mặt Trăng và góc nhìn (tam giác cân, nửa góc, sin)
+#   _02: tính CHIỀU CAO CÂY CỔ THỤ từ bóng trăng đổ trên sườn đồi dốc (định lí sin, số đo GIẢ SỬ)
+# Số liệu thật (đã kiểm chứng, nguồn: bảng số liệu Mặt Trăng của NASA qua sites.uni.edu và space.fm): khoảng cách trung bình Trái Đất -
+# Mặt Trăng 384 400 km, cận điểm 363 300 km, viễn điểm 405 500 km, đường kính Mặt Trăng khoảng 3 474 - 3 476 km. Góc nhìn trong đề được
+# TÍNH từ các số liệu đó (2.asin(đường kính/2d), làm tròn 0,01 độ) nên đúng thực tế; đề KHÔNG nêu đường kính thật (đó là đáp số).
+# Phần dẫn chỉ nêu điều đã kiểm chứng (hoatieu.vn, luatminhkhue.vn): bài thơ Đồng chí của Chính Hữu viết đầu năm 1948, sau chiến dịch
+# Việt Bắc thu đông 1947, ca ngợi tình đồng đội của người lính kháng chiến chống Pháp; ý "chiến tranh khốc liệt mà người lính vẫn yêu đời,
+# yêu thiên nhiên" theo yêu cầu cô Lan. KHÔNG chép lời thơ (cô Lan bỏ phần thơ cho đề ngắn lại). Bối cảnh chung
+# "trang_dong_chi" (mỗi đề tối đa một câu).
+# =====================================================================================================
+
+_TR_DAN = (r"Bài thơ \textit{Đồng chí} của nhà thơ Chính Hữu được viết vào đầu năm $1948$, sau chiến dịch Việt Bắc thu đông $1947$, ca ngợi "
+           r"tình đồng đội của những người lính trong kháng chiến chống thực dân Pháp."
+           +
+           r" Chiến tranh vô cùng khốc liệt: đêm rừng giá lạnh, thiếu thốn, hiểm nguy rình rập; vậy mà người chiến sĩ Cụ Hồ vẫn yêu đời, yêu "
+           r"thiên nhiên, vẫn thấy vầng trăng đẹp như đang treo ngay đầu mũi súng của mình. Vầng trăng ấy cách chúng ta rất xa, nhưng bằng toán "
+           r"học ta vẫn đo được nó. ")
+
+
+def _tr_ng(n):
+    """Số nguyên viết kiểu SGK, ngăn cách hàng nghìn bằng khoảng cách hẹp: 384400 -> 384\\,400."""
+    return "{:,}".format(int(n)).replace(",", r"\,")
+
+
+def _tr_d_th(d):
+    """Góc nhìn (độ, làm tròn 0,01) của Mặt Trăng (đường kính thật 3 476 km) khi cách Trái Đất d km."""
+    return round(math.degrees(2 * math.asin(1738.0 / d)), 2)
+
+
+def _tr_bo1():
+    """(d, theta, D): D = 2.d.sin(theta/2) tính từ số đo đã cho; D làm tròn đến hàng chục không sát ranh giới."""
+    while True:
+        d = random.randrange(363300, 405501, 100)
+        th = _tr_d_th(d)
+        D = 2 * d * math.sin(math.radians(th) / 2)
+        if _xa_bien(D / 10):
+            return d, th, D
+
+
+def _tr_hinh1(d, th):
+    """Sơ đồ tam giác cân EAB (hình KHÔNG đúng tỉ lệ: góc thật chỉ khoảng nửa độ)."""
+    s = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s += "\\draw[fill=yellow!25] (5.0,0) circle (1.0);\n"
+    s += "\\draw[very thick] (0,0) -- (5.0,1.0) -- (5.0,-1.0) -- cycle;\n"
+    s += "\\fill (0,0) circle (0.06) node[left] {$E$};\n"
+    s += "\\fill (5.0,1.0) circle (0.06) node[above right] {$A$};\n"
+    s += "\\fill (5.0,-1.0) circle (0.06) node[below right] {$B$};\n"
+    s += "\\node[font=\\scriptsize] at (2.3,0.95) {$%s$ km};\n" % _tr_ng(d)
+    s += "\\node[font=\\scriptsize] at (2.3,-0.95) {$%s$ km};\n" % _tr_ng(d)
+    s += "\\draw (1.1,0.22) arc (11.3:-11.3:1.12);\n"
+    s += "\\node[font=\\scriptsize] at (1.55,0) {$%s^{\\circ}$};\n" % _x1(th, 2)
+    s += "\\node[font=\\scriptsize] at (5.0,-1.55) {Mặt Trăng};\n"
+    s += "\\node[font=\\scriptsize,gray] at (2.5,-1.9) {(hình không đúng tỉ lệ)};\n"
+    return s + "\\end{tikzpicture}"
+
+
+def _tr_cau1():
+    d, th, D = _tr_bo1()
+    chuc = _lt(D / 10) * 10
+    intro = (_TR_DAN + r"Mặt Trăng cách Trái Đất khoảng $%s$ km (khoảng cách này thay đổi trong mỗi tháng, từ khoảng $363\,300$ km đến "
+             r"khoảng $405\,500$ km). Từ Trái Đất, đường kính của Mặt Trăng được nhìn dưới góc khoảng $%s^{\circ}$ (số liệu làm tròn). "
+             r"Coi Mặt Trăng là hình tròn; gọi $E$ là vị trí người quan sát, $AB$ là một đường kính của Mặt Trăng thì $EAB$ là tam giác "
+             r"cân tại $E$ với $EA = EB = %s$ km và $\widehat{AEB} = %s^{\circ}$ (xem hình vẽ)."
+             % (_tr_ng(d), _x1(th, 2), _tr_ng(d), _x1(th, 2)))
+    giai = (r"Gọi $H$ là trung điểm của $AB$. Vì tam giác $EAB$ cân tại $E$ nên $EH$ vừa là trung tuyến vừa là đường cao và đường phân giác, "
+            r"suy ra $EH \perp AB$ và $\widehat{AEH} = \dfrac{\widehat{AEB}}{2} = %s^{\circ}$. Trong tam giác vuông $AEH$: "
+            r"$AH = EA \cdot \sin\widehat{AEH}$, nên $AB = 2AH = 2 \cdot EA \cdot \sin\dfrac{\widehat{AEB}}{2} = 2 \cdot %s \cdot \sin %s^{\circ} "
+            r"\approx %s$ (km). Vậy đường kính Mặt Trăng khoảng $%s$ km."
+            % (_xx(th / 2, 3), _tr_ng(d), _xx(th / 2, 3), _xx(D, 1), _tr_ng(chuc)))
+    return dict(intro=intro, hinh=_tr_hinh1(d, th), d=d, th=th, D=D, chuc=chuc, giai=giai)
+
+
+def _tr_bo2():
+    """(alpha, beta, s, h, BC): cây thẳng đứng cao h = AB trên sườn dốc nghiêng beta; bóng AC = s trên sườn; ánh trăng hợp ngang alpha."""
+    while True:
+        al, be, s = random.randint(35, 60), random.randint(8, 20), random.randint(8, 20)
+        h = s * math.sin(math.radians(al + be)) / math.cos(math.radians(al))
+        bc = s * math.cos(math.radians(be)) / math.cos(math.radians(al))
+        if 7 <= h <= 32 and _xa_bien(h, 1) and _xa_bien(bc, 1):
+            return al, be, s, h, bc
+
+
+def _tr_hinh2(al, be, s, h):
+    """Tam giác ABC: A gốc cây, B ngọn cây (AB thẳng đứng), C đầu bóng trên sườn dốc (AC = s, nghiêng be so với phương ngang)."""
+    k = 4.0 / max(s * math.cos(math.radians(be)), h)
+    A = (0.0, 0.0)
+    C = (s * math.cos(math.radians(be)) * k, s * math.sin(math.radians(be)) * k)
+    B = (0.0, h * k)
+    r = min(0.8, 0.4 * C[0])
+    s_ = "\\begin{tikzpicture}[scale=1,font=\\footnotesize,line join=round]\n"
+    s_ += "\\draw[gray] (-1.2,0) -- (%.2f,0);\n" % (C[0] + 0.2)
+    s_ += "\\draw[very thick] (%.2f,%.2f) -- (%.2f,%.2f) -- (%.2f,%.2f) -- cycle;\n" % (A + B + C)
+    s_ += "\\draw[gray,dashed] (%.2f,%.2f) -- (%.2f,%.2f);\n" % (C[0], C[1], max(C[0] - 1.4, 0.15), C[1])
+    for t, p, v in (("A", A, "below left"), ("B", B, "above"), ("C", C, "right")):
+        s_ += "\\fill (%.2f,%.2f) circle (0.06) node[%s] {$%s$};\n" % (p + (v, t))
+    s_ += "\\draw (%.2f,0) arc (0:%d:%.2f);\n" % (r, be, r)
+    s_ += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d^{\\circ}$};\n" % (
+        (r + 0.45) * math.cos(math.radians(be / 2)), (r + 0.45) * math.sin(math.radians(be / 2)), be)
+    s_ += "\\draw (%.2f,%.2f) arc (%d:180:%.2f);\n" % (C[0] + r * math.cos(math.radians(180 - al)), C[1] + r * math.sin(math.radians(180 - al)), 180 - al, r)
+    s_ += "\\node[font=\\scriptsize] at (%.2f,%.2f) {$%d^{\\circ}$};\n" % (
+        C[0] + (r + 0.4) * math.cos(math.radians(180 - al / 2)), C[1] + (r + 0.4) * math.sin(math.radians(180 - al / 2)), al)
+    s_ += "\\node[font=\\scriptsize,rotate=%d,above] at (%.2f,%.2f) {$%d$ m};\n" % (be, 0.42 * C[0], 0.42 * C[1], s)   # nhãn độ dài ở PHÍA TRÊN cạnh AC để không đè lên nhãn góc ở A
+    # nhãn "ánh trăng" song song với tia BC, lệch ra phía ngoài tam giác (không đè lên tia)
+    dx, dy = C[0] - B[0], C[1] - B[1]
+    L = math.hypot(dx, dy)
+    s_ += "\\node[font=\\scriptsize,gray,rotate=%d] at (%.2f,%.2f) {ánh trăng};\n" % (
+        -al, (B[0] + C[0]) / 2 - 0.3 * dy / L, (B[1] + C[1]) / 2 + 0.3 * dx / L)
+    return s_ + "\\end{tikzpicture}"
+
+
+def _tr_cau2():
+    al, be, s, h, bc = _tr_bo2()
+    intro = (_TR_DAN + r"Một đêm trăng sáng trên một sườn đồi trong rừng, một cây cổ thụ mọc thẳng đứng. Sườn đồi nghiêng $%d^{\circ}$ so với "
+             r"mặt phẳng nằm ngang, ánh trăng chiếu xuống hợp với mặt phẳng nằm ngang một góc $%d^{\circ}$ và bóng của cây đổ lên phía sườn dốc, "
+             r"dài $%d$ m (đo dọc theo sườn đồi). Gọi $A$ là gốc cây, $B$ là ngọn cây, $C$ là đầu bóng của ngọn cây (các số đo là giả sử, "
+             r"xem hình vẽ)." % (be, al, s))
+    giai_h = (r"Trong tam giác $ABC$: $AB$ thẳng đứng, $AC$ nằm trên sườn dốc nghiêng $%d^{\circ}$ so với phương ngang nên $\widehat{BAC} = 90^{\circ} - %d^{\circ} = %d^{\circ}$. "
+              r"Tia sáng $BC$ hợp với phương ngang góc $%d^{\circ}$ còn sườn dốc $CA$ hợp với phương ngang góc $%d^{\circ}$ (hai bên của phương ngang) nên "
+              r"$\widehat{ACB} = %d^{\circ} + %d^{\circ} = %d^{\circ}$, suy ra $\widehat{ABC} = 180^{\circ} - %d^{\circ} - %d^{\circ} = %d^{\circ}$. "
+              r"Theo định lí sin: $\dfrac{AB}{\sin\widehat{ACB}} = \dfrac{AC}{\sin\widehat{ABC}}$, nên $AB = \dfrac{AC \cdot \sin\widehat{ACB}}{\sin\widehat{ABC}} "
+              r"= \dfrac{%d \cdot \sin %d^{\circ}}{\sin %d^{\circ}} \approx %s$ (m)."
+              % (be, be, 90 - be, al, be, al, be, al + be, 90 - be, al + be, 90 - al, s, al + be, 90 - al, _x1(h, 1)))
+    giai_bc = (r"Theo định lí sin trong tam giác $ABC$: $\dfrac{BC}{\sin\widehat{BAC}} = \dfrac{AC}{\sin\widehat{ABC}}$ với $\widehat{BAC} = %d^{\circ}$, "
+               r"$\widehat{ABC} = %d^{\circ}$, nên $BC = \dfrac{%d \cdot \sin %d^{\circ}}{\sin %d^{\circ}} \approx %s$ (m)."
+               % (90 - be, 90 - al, s, 90 - be, 90 - al, _x1(bc, 1)))
+    return dict(intro=intro, hinh=_tr_hinh2(al, be, s, h), al=al, be=be, s=s, h=h, bc=bc, giai_h=giai_h, giai_bc=giai_bc)
+
+
+def _tr_mc_sa(bt, socau, dang):
+    cau = ""
+    so = 0
+    while so < socau:
+        if bt == 1:
+            c = _tr_cau1()
+            dap = str(c["chuc"])
+            if dang == 2 and len(dap) > 4:
+                continue
+            hoi = r"đường kính của Mặt Trăng (đơn vị km, làm tròn đến hàng chục)"
+            sai = [str(_lt(c["D"] / 2 / 10) * 10), str(_lt(c["D"] * 2 / 10) * 10), str(_lt(c["D"] / 10) * 10 + 40)]
+            buoc = lambda t: str(c["chuc"] + 30 * t)
+            giai = c["giai"]
+        else:
+            c = _tr_cau2()
+            dap = _x1(c["h"], 1) if dang == 1 else _so(c["h"], 1)
+            if dang == 2 and len(dap) > 4:
+                continue
+            hoi = r"chiều cao của cây cổ thụ, tức độ dài $AB$ (đơn vị mét, làm tròn đến hàng phần mười)"
+            mau = _x1 if dang == 1 else _so
+            sai = [mau(c["s"] * math.tan(math.radians(c["al"])), 1), mau(c["s"] * math.sin(math.radians(c["al"] + c["be"])), 1),
+                   mau(c["bc"], 1)]
+            buoc = lambda t: mau(c["h"] + 1.3 * t, 1)
+            giai = c["giai_h"]
+        so += 1
+        if dang == 1:
+            debai = c["intro"] + r" " + hoi[0].upper() + hoi[1:] + r" là"
+            nh = _ba_nhieu(dap, [x for x in sai if x != "0"], buoc=buoc)
+        else:
+            debai = c["intro"] + r" Tính " + hoi + r"."
+            nh = [buoc(d) for d in (1, -1, 2)]
+        cau += MC_SA_answer_const(debai, dap, nh, giai, c["hinh"], 0, dang)
+    return cau
+
+
+def _tr_tl(bt, socau, dong):
+    cau = ""
+    for _ in range(socau):
+        if bt == 1:
+            c = _tr_cau1()
+            # ý b): khi Mặt Trăng ở khoảng cách khác thì nhìn dưới góc bao nhiêu (dùng đường kính làm tròn ở ý a)
+            while True:
+                d2 = random.randrange(363300, 405501, 100)
+                if abs(d2 - c["d"]) < 15000:
+                    continue
+                th2 = 2 * math.degrees(math.asin(c["chuc"] / (2.0 * d2)))
+                th2_ex = 2 * math.degrees(math.asin(c["D"] / (2.0 * d2)))
+                if _xa_bien(th2, 2) and _lt(th2 * 100) == _lt(th2_ex * 100):
+                    break
+            ds = [(r"Tính đường kính của Mặt Trăng (đơn vị km, làm tròn đến hàng chục).",
+                   r"AB \approx %s\,\text{km}" % _tr_ng(c["chuc"]), c["giai"]),
+                  (r"Khi Mặt Trăng ở cách Trái Đất $%s$ km, đường kính của Mặt Trăng (lấy kết quả câu trước) được nhìn dưới góc bao nhiêu độ "
+                   r"(làm tròn đến hàng phần trăm)?" % _tr_ng(d2),
+                   r"\widehat{AEB} \approx %s^{\circ}" % _x1(th2, 2),
+                   r"Tam giác $EAB$ cân tại $E$ với $EA = EB = %s$ km, $AB \approx %s$ km nên $\sin\dfrac{\widehat{AEB}}{2} = \dfrac{AB}{2 \cdot EA} "
+                   r"= \dfrac{%s}{2 \cdot %s} \approx %s$, suy ra $\dfrac{\widehat{AEB}}{2} \approx %s^{\circ}$ và $\widehat{AEB} \approx %s^{\circ}$."
+                   % (_tr_ng(d2), _tr_ng(c["chuc"]), _tr_ng(c["chuc"]), _tr_ng(d2), _xx(c["chuc"] / (2.0 * d2), 6), _xx(th2 / 2, 3), _x1(th2, 2)))]
+        else:
+            c = _tr_cau2()
+            ds = [(r"Tính chiều cao của cây cổ thụ, tức độ dài $AB$ (đơn vị mét, làm tròn đến hàng phần mười).",
+                   r"AB \approx %s\,\text{m}" % _x1(c["h"], 1), c["giai_h"]),
+                  (r"Tính khoảng cách từ ngọn cây đến đầu bóng, tức độ dài $BC$ (đơn vị mét, làm tròn đến hàng phần mười).",
+                   r"BC \approx %s\,\text{m}" % _x1(c["bc"], 1), c["giai_bc"])]
+        cau += TL_answer_text(c["intro"], ds, c["hinh"], 0, dong)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_W_01(socau, dang=1):
+    r"""Vầng trăng của người lính (Đồng chí) - tính đường kính Mặt Trăng từ khoảng cách và góc nhìn (tam giác cân).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số liệu Mặt Trăng thật, góc nhìn tính từ đường kính thật).
+    """
+    return _tr_mc_sa(1, socau, 1)
+
+
+def L10_C3_B6_VD036_MC_W_02(socau, dang=1):
+    r"""Vầng trăng của người lính (Đồng chí) - tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi (định lí sin).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo giả sử).
+    """
+    return _tr_mc_sa(2, socau, 1)
+
+
+def L10_C3_B6_VD036_SA_W_01(socau, dang=2):
+    r"""Vầng trăng của người lính (Đồng chí) - tính đường kính Mặt Trăng từ khoảng cách và góc nhìn (tam giác cân).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số liệu Mặt Trăng thật, góc nhìn tính từ đường kính thật).
+    """
+    return _tr_mc_sa(1, socau, 2)
+
+
+def L10_C3_B6_VD036_SA_W_02(socau, dang=2):
+    r"""Vầng trăng của người lính (Đồng chí) - tính chiều cao cây cổ thụ từ bóng trăng trên sườn đồi (định lí sin).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo giả sử).
+    """
+    return _tr_mc_sa(2, socau, 2)
+
+
+def L10_C3_B6_VD036_TL_O_01(socau, dong=1):
+    r"""Vầng trăng của người lính (Đồng chí) - tự luận: a) đường kính Mặt Trăng, b) góc nhìn khi Mặt Trăng ở khoảng cách khác.
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số liệu Mặt Trăng thật, góc nhìn tính từ đường kính thật).
+    """
+    return _tr_tl(1, socau, dong)
+
+
+def L10_C3_B6_VD036_TL_O_02(socau, dong=1):
+    r"""Vầng trăng của người lính (Đồng chí) - tự luận: a) chiều cao cây cổ thụ AB, b) khoảng cách từ ngọn cây đến đầu bóng BC (định lí sin).
+
+    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo giả sử).
+    """
+    return _tr_tl(2, socau, dong)
+
 if __name__ == "__main__":
     random.seed(1)
     for ten in ("L10_C3_B6_VD036_TL_E_01", "L10_C3_B6_VD036_MC_K_01", "L10_C3_B6_VD036_SA_K_01",
-                "L10_C3_B6_VD036_MC_L_01", "L10_C3_B6_VD036_SA_L_01"):
+                "L10_C3_B6_VD036_MC_L_01", "L10_C3_B6_VD036_SA_L_01",
+                "L10_C3_B6_VD036_MC_W_01", "L10_C3_B6_VD036_MC_W_02", "L10_C3_B6_VD036_SA_W_01",
+                "L10_C3_B6_VD036_SA_W_02", "L10_C3_B6_VD036_TL_O_01", "L10_C3_B6_VD036_TL_O_02"):
         print("%% ====", ten)
         print(globals()[ten](1))
