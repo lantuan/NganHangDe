@@ -4549,46 +4549,6 @@ def L10_C3_B6_TH033_TL_A_02(socau, dong=1):
     return cauTN
 
 
-def L10_C3_B6_NB034_MC_B_02(socau, dang=1):
-    r"""Chọn công thức diện tích ĐÚNG (hoặc SAI) trong bốn công thức.
-
-    CLAUDE THEM 29/09/2026 - bien the 02 cua TH034_MC_A, theo cac cau nhan
-    dang cong thuc trong phan trac nghiem giao an Bai 6. Co Lan duyet.
-    """
-    DUNG = [r"$S = \dfrac{1}{2}ab\sin C$", r"$S = \dfrac{1}{2}bc\sin A$", r"$S = \dfrac{1}{2}ca\sin B$",
-            r"$S = \dfrac{abc}{4R}$", r"$S = pr$", r"$S = \sqrt{p(p-a)(p-b)(p-c)}$",
-            r"$S = \dfrac{1}{2}a\cdot h_a$", r"$S = \dfrac{1}{2}b\cdot h_b$"]
-    SAI = [(r"$S = \dfrac{1}{2}ab\sin A$", r"the angle in the formula must be the angle INCLUDED between sides $a$ and $b$, that is, angle $C$"),
-           (r"$S = \dfrac{1}{2}bc\cos A$", r"it must be $\sin A$, not $\cos A$"),
-           (r"$S = \dfrac{abc}{2R}$", r"the correct formula is $\dfrac{abc}{4R}$"),
-           (r"$S = \dfrac{abc}{R}$", r"the correct formula is $\dfrac{abc}{4R}$"),
-           (r"$S = 2pr$", r"$p$ is HALF the perimeter, so $S = pr$"),
-           (r"$S = \sqrt{p(p+a)(p+b)(p+c)}$", r"Heron's formula is $\sqrt{p(p-a)(p-b)(p-c)}$"),
-           (r"$S = a\cdot h_a$", r"the factor $\dfrac{1}{2}$ is missing"),
-           (r"$S = \dfrac{1}{2}ab\sin B$", r"the angle included between sides $a$ and $b$ is angle $C$")]
-    cauTN = ""
-    for _ in range(socau):
-        hoi_sai = random.choice([True, False])
-        if hoi_sai:
-            sai, ly_do = random.choice(SAI)
-            dung, nhieu = sai, random.sample(DUNG, 3)
-            debai = (r"Given triangle $ABC$ with $BC = a$, $CA = b$, $AB = c$, area $S$, semiperimeter $p$, "
-                     r"and circumradius and inradius $R$ and $r$, respectively. Which of the following "
-                     r"formulas is \textbf{false}?")
-            giai = r"Formula %s is false because %s. The other three formulas are all true." % (sai, ly_do)
-        else:
-            dung = random.choice(DUNG)
-            ba = random.sample(SAI, 3)
-            nhieu = [x[0] for x in ba]
-            debai = (r"Given triangle $ABC$ with $BC = a$, $CA = b$, $AB = c$, area $S$, semiperimeter $p$, "
-                     r"and circumradius and inradius $R$ and $r$, respectively. Which of the following "
-                     r"formulas is true?")
-            giai = (r"%s is a true formula. The other formulas are false: " % dung
-                    + "; ".join(r"%s: %s" % x for x in ba) + ".")
-        cauTN += MC_SA_answer_text(debai, dung, nhieu, giai, 0, 0, dang)
-    return cauTN
-
-
 def L10_C3_TF_E_03(socau, socot=1):
     r"""Đúng/Sai - biết hai cạnh và góc xen giữa: diện tích, đường cao, cạnh
     thứ ba, bán kính ngoại tiếp.
@@ -11774,7 +11734,7 @@ def L10_C3_B6_VD036_TL_G_01(socau, dong=1):
 # =====================================================================
 # BÀI 6 - CÔNG THỨC DIỆN TÍCH, BÁN KÍNH, TRUNG TUYẾN, PHÂN GIÁC (cô Lan 30/09/2026)
 #   TH032_MC_F   công thức độ dài đường trung tuyến (lí thuyết)
-#   TH034_MC_G   công thức diện tích theo R, r, Heron; công thức R, r (lí thuyết)
+#   TH034_MC_G   công thức diện tích theo R, r, Heron; công thức R, r (lí thuyết) - nay NB034_MC_A, gộp cả 1/2 ab sinC, h_a (21/10/2026)
 #   TH035_MC_D / SA_C   giải tam giác nhỏ: trung tuyến AM (_01), phân giác AD (_02)
 #   TH034_MC_H / SA_C   diện tích khi dữ kiện ứng đúng một công thức (h, R, r, Heron)
 #   TH034_MC_I / SA_D   bán kính R, r "nhìn là thấy": đã cho sẵn diện tích
@@ -11851,29 +11811,108 @@ def L10_C3_B6_NB032_MC_B_02(socau, dang=1):
     return cau
 
 
-_CT_BAN_KINH_DUNG = [r"$S = \dfrac{abc}{4R}$", r"$S = pr$", r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$",
-                     r"$R = \dfrac{abc}{4S}$", r"$r = \dfrac{S}{p}$", r"$S = \dfrac{1}{2}a\cdot h_a$"]
-_CT_BAN_KINH_SAI = [r"$S = \dfrac{abc}{2R}$", r"$S = 2pr$", r"$S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}$",
-                    r"$R = \dfrac{4S}{abc}$", r"$r = \dfrac{p}{S}$", r"$S = a\cdot h_a$", r"$S = \dfrac{abc}{4r}$",
-                    r"$S = \left(p - a\right)\left(p - b\right)\left(p - c\right)$"]
-_CAC_KI_HIEU = (r"Triangle $ABC$ has $BC = a$, $CA = b$, $AB = c$, area $S$, semiperimeter $p$, and altitude "
-                r"$h_a$ from $A$; $R$ and $r$ are the circumradius and the inradius of the triangle, respectively.")
+# Công thức diện tích / bán kính theo TỪNG ĐƠN VỊ KIẾN THỨC (họ công thức) - dùng cho NB034_MC_A (cô Lan 21/10/2026).
+# Luật phương án (cô Lan): "đã khác thì khác hết, đã giống là giống hết, hỏi một đơn vị kiến thức duy nhất":
+#   - KIỂU "KHÁC HẾT": bốn phương án thuộc bốn họ KHÁC NHAU (không bao giờ có cặp đúng - sai của cùng một công thức,
+#     vd. S = 1/2 a.h_a cạnh S = a.h_a, nhìn là đoán được đáp án);
+#   - KIỂU "GIỐNG HẾT": cả bốn phương án cùng MỘT họ (cùng một công thức, chỉ khác cách viết / chỗ sai).
+# Mỗi công thức kèm hàm thử số (vế trái, vế phải) trên tam giác thật - test kiểm công thức đúng / sai bằng số.
+_C3_HO_CT = {
+    "sin": dict(
+        ten=r"the area formula in terms of two sides and the included angle",
+        tom=r"$S = \dfrac{1}{2}ab\sin C = \dfrac{1}{2}bc\sin A = \dfrac{1}{2}ca\sin B$ (the angle is the one included between the two sides)",
+        dung=[(r"$S = \dfrac{1}{2}ab\sin C$", lambda T: (T["S"], T["a"] * T["b"] * math.sin(T["C"]) / 2)),
+              (r"$S = \dfrac{1}{2}bc\sin A$", lambda T: (T["S"], T["b"] * T["c"] * math.sin(T["A"]) / 2)),
+              (r"$S = \dfrac{1}{2}ca\sin B$", lambda T: (T["S"], T["c"] * T["a"] * math.sin(T["B"]) / 2))],
+        sai=[(r"$S = \dfrac{1}{2}ab\sin A$", lambda T: (T["S"], T["a"] * T["b"] * math.sin(T["A"]) / 2)),
+             (r"$S = \dfrac{1}{2}bc\cos A$", lambda T: (T["S"], T["b"] * T["c"] * math.cos(T["A"]) / 2)),
+             (r"$S = ab\sin C$", lambda T: (T["S"], T["a"] * T["b"] * math.sin(T["C"]))),
+             (r"$S = \dfrac{1}{2}ca\sin A$", lambda T: (T["S"], T["c"] * T["a"] * math.sin(T["A"]) / 2))]),
+    "h": dict(
+        ten=r"the area formula in terms of a side and an altitude",
+        tom=r"$S = \dfrac{1}{2}a\cdot h_a = \dfrac{1}{2}b\cdot h_b = \dfrac{1}{2}c\cdot h_c$ (the altitude must correspond to THAT side)",
+        dung=[(r"$S = \dfrac{1}{2}a\cdot h_a$", lambda T: (T["S"], T["a"] * T["ha"] / 2)),
+              (r"$S = \dfrac{1}{2}b\cdot h_b$", lambda T: (T["S"], T["b"] * T["hb"] / 2)),
+              (r"$S = \dfrac{1}{2}c\cdot h_c$", lambda T: (T["S"], T["c"] * T["hc"] / 2))],
+        sai=[(r"$S = a\cdot h_a$", lambda T: (T["S"], T["a"] * T["ha"])),
+             (r"$S = \dfrac{1}{2}a\cdot h_b$", lambda T: (T["S"], T["a"] * T["hb"] / 2)),
+             (r"$S = \dfrac{1}{2}b\cdot h_c$", lambda T: (T["S"], T["b"] * T["hc"] / 2)),
+             (r"$S = 2c\cdot h_c$", lambda T: (T["S"], 2 * T["c"] * T["hc"]))]),
+    "R": dict(
+        ten=r"the formula relating the area and the circumradius",
+        tom=r"$S = \dfrac{abc}{4R}$, that is, $R = \dfrac{abc}{4S}$",
+        dung=[(r"$S = \dfrac{abc}{4R}$", lambda T: (T["S"], T["a"] * T["b"] * T["c"] / (4 * T["R"]))),
+              (r"$R = \dfrac{abc}{4S}$", lambda T: (T["R"], T["a"] * T["b"] * T["c"] / (4 * T["S"]))),
+              (r"$abc = 4R\cdot S$", lambda T: (T["a"] * T["b"] * T["c"], 4 * T["R"] * T["S"]))],
+        sai=[(r"$S = \dfrac{abc}{2R}$", lambda T: (T["S"], T["a"] * T["b"] * T["c"] / (2 * T["R"]))),
+             (r"$S = \dfrac{abc}{R}$", lambda T: (T["S"], T["a"] * T["b"] * T["c"] / T["R"])),
+             (r"$R = \dfrac{4S}{abc}$", lambda T: (T["R"], 4 * T["S"] / (T["a"] * T["b"] * T["c"]))),
+             (r"$S = \dfrac{4R}{abc}$", lambda T: (T["S"], 4 * T["R"] / (T["a"] * T["b"] * T["c"])))]),
+    "r": dict(
+        ten=r"the formula relating the area and the inradius",
+        tom=r"$S = pr$ ($p$ is the SEMI-perimeter), that is, $r = \dfrac{S}{p}$",
+        dung=[(r"$S = pr$", lambda T: (T["S"], T["p"] * T["r"])),
+              (r"$r = \dfrac{S}{p}$", lambda T: (T["r"], T["S"] / T["p"])),
+              (r"$S = \dfrac{1}{2}\left(a + b + c\right)r$", lambda T: (T["S"], (T["a"] + T["b"] + T["c"]) * T["r"] / 2))],
+        sai=[(r"$S = 2pr$", lambda T: (T["S"], 2 * T["p"] * T["r"])),
+             (r"$r = \dfrac{p}{S}$", lambda T: (T["r"], T["p"] / T["S"])),
+             (r"$r = \dfrac{2S}{p}$", lambda T: (T["r"], 2 * T["S"] / T["p"])),
+             (r"$S = \left(a + b + c\right)r$", lambda T: (T["S"], (T["a"] + T["b"] + T["c"]) * T["r"]))]),
+    "heron": dict(
+        ten=r"Heron's formula",
+        tom=r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$ where $p = \dfrac{a + b + c}{2}$",
+        dung=[(r"$S = \sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$",
+               lambda T: (T["S"], math.sqrt(T["p"] * (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"])))),
+              (r"$S^{2} = p\left(p - a\right)\left(p - b\right)\left(p - c\right)$",
+               lambda T: (T["S"] ** 2, T["p"] * (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"]))),
+              (r"$16S^{2} = \left(a + b + c\right)\left(b + c - a\right)\left(c + a - b\right)\left(a + b - c\right)$",
+               lambda T: (16 * T["S"] ** 2, (T["a"] + T["b"] + T["c"]) * (T["b"] + T["c"] - T["a"])
+                          * (T["c"] + T["a"] - T["b"]) * (T["a"] + T["b"] - T["c"])))],
+        sai=[(r"$S = \sqrt{p\left(p + a\right)\left(p + b\right)\left(p + c\right)}$",
+              lambda T: (T["S"], math.sqrt(T["p"] * (T["p"] + T["a"]) * (T["p"] + T["b"]) * (T["p"] + T["c"])))),
+             (r"$S = \sqrt{\left(p - a\right)\left(p - b\right)\left(p - c\right)}$",
+              lambda T: (T["S"], math.sqrt((T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"])))),
+             (r"$S = p\left(p - a\right)\left(p - b\right)\left(p - c\right)$",
+              lambda T: (T["S"], T["p"] * (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"]))),
+             (r"$S^{2} = \left(p - a\right)\left(p - b\right)\left(p - c\right)$",
+              lambda T: (T["S"] ** 2, (T["p"] - T["a"]) * (T["p"] - T["b"]) * (T["p"] - T["c"])))]),
+}
+_CAC_KI_HIEU = (r"Given triangle $ABC$ with $BC = a$, $CA = b$, $AB = c$, area $S$ and semi-perimeter $p$; $h_a$, $h_b$, $h_c$ are "
+                r"the lengths of the altitudes from $A$, $B$, $C$ respectively; $R$, $r$ are the circumradius and the inradius of the triangle.")
+
+
+def _c3_nb034_phuong_an(hoi_dung):
+    """(đáp án, 3 nhiễu, lời giải). hoi_dung=True: một công thức đúng, ba sai; False: một sai, ba đúng.
+    Một nửa số câu kiểu "khác hết" (bốn họ khác nhau), một nửa kiểu "giống hết" (cùng một họ)."""
+    ho_dap, loai_nhieu = ("dung", "sai") if hoi_dung else ("sai", "dung")
+    if random.random() < 0.5:                                   # GIỐNG HẾT: cùng một đơn vị kiến thức
+        k = random.choice(list(_C3_HO_CT))
+        ho = _C3_HO_CT[k]
+        dap = random.choice(ho[ho_dap])[0]
+        nhieu = [t for t, _f in random.sample(ho[loai_nhieu], 3)]
+        giai = (r"All four options are about %s: %s. " % (ho["ten"], ho["tom"])
+                + (r"Hence the correct formula is %s." % dap if hoi_dung else r"Hence the incorrect formula is %s." % dap))
+    else:                                                       # KHÁC HẾT: bốn đơn vị kiến thức khác nhau
+        k0, *ks = random.sample(list(_C3_HO_CT), 4)
+        dap = random.choice(_C3_HO_CT[k0][ho_dap])[0]
+        nhieu = [random.choice(_C3_HO_CT[k][loai_nhieu])[0] for k in ks]
+        giai = (r"The correct formulas: " + "; ".join(_C3_HO_CT[k]["tom"] for k in [k0] + ks) + ". "
+                + (r"Hence the correct formula is %s." % dap if hoi_dung else r"Hence the incorrect formula is %s." % dap))
+    return dap, nhieu, giai
 
 
 def L10_C3_B6_NB034_MC_A_01(socau, dang=1):
-    r"""Lí thuyết - chọn công thức ĐÚNG về diện tích và bán kính ($S = \dfrac{abc}{4R}$,
-    $S = pr$, Heron, $R = \dfrac{abc}{4S}$, $r = \dfrac{S}{p}$).
+    r"""Lí thuyết - chọn công thức ĐÚNG về diện tích và bán kính ($\dfrac{1}{2}ab\sin C$, $\dfrac{1}{2}a\cdot h_a$,
+    $\dfrac{abc}{4R}$, $pr$, Heron, $R$, $r$).
 
     CLAUDE THEM 30/09/2026 - dang moi theo co Lan ("hoi cac cong thuc"). Co Lan duyet lai.
+    SUA 21/10/2026 (co Lan): phuong an "khac thi khac het, giong thi giong het" (xem _C3_HO_CT); gop ca
+    cong thuc 1/2 ab sinC cua NB034_MC_B_02 cu vao day (cung hoi cong thuc dien tich dung/sai).
     """
     cau = ""
     for _ in range(socau):
-        dung = random.choice(_CT_BAN_KINH_DUNG)
-        debai = _CAC_KI_HIEU + " Which of the following formulas is correct?"
-        giai = (r"The formulas: $S = \dfrac{1}{2}a\cdot h_a = \dfrac{abc}{4R} = pr = "
-                r"\sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$, which give $R = \dfrac{abc}{4S}$, "
-                r"$r = \dfrac{S}{p}$. Hence the correct formula is %s." % dung)
-        cau += MC_SA_answer_text(debai, dung, random.sample(_CT_BAN_KINH_SAI, 3), giai, 0, 0, dang)
+        dap, nhieu, giai = _c3_nb034_phuong_an(True)
+        cau += MC_SA_answer_text(_CAC_KI_HIEU + " Which of the following formulas is correct?", dap, nhieu, giai, 0, 0, dang)
     return cau
 
 
@@ -11881,15 +11920,12 @@ def L10_C3_B6_NB034_MC_A_02(socau, dang=1):
     r"""Lí thuyết - cách hỏi khác của _01: chọn công thức SAI (ba phương án đúng).
 
     CLAUDE THEM 30/09/2026 - bien the 02 cua TH034_MC_G. Co Lan duyet lai.
+    SUA 21/10/2026 (co Lan): nhu _01 - "khac het" hoac "giong het"; thay NB034_MC_B_02 cu (da bo).
     """
     cau = ""
     for _ in range(socau):
-        sai = random.choice(_CT_BAN_KINH_SAI)
-        debai = _CAC_KI_HIEU + r" Which of the following formulas is \textbf{incorrect}?"
-        giai = (r"The correct formulas: $S = \dfrac{1}{2}a\cdot h_a = \dfrac{abc}{4R} = pr = "
-                r"\sqrt{p\left(p - a\right)\left(p - b\right)\left(p - c\right)}$, $R = \dfrac{abc}{4S}$, "
-                r"$r = \dfrac{S}{p}$. Hence the incorrect formula is %s." % sai)
-        cau += MC_SA_answer_text(debai, sai, random.sample(_CT_BAN_KINH_DUNG, 3), giai, 0, 0, dang)
+        dap, nhieu, giai = _c3_nb034_phuong_an(False)
+        cau += MC_SA_answer_text(_CAC_KI_HIEU + r" Which of the following formulas is \textbf{incorrect}?", dap, nhieu, giai, 0, 0, dang)
     return cau
 
 

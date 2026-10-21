@@ -1166,15 +1166,15 @@
     "id": "L10_C3_B6_NB034_MC_A",
     "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
-    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai",
+    "Dang": "Nhận ra công thức diện tích (theo hai cạnh và góc xen giữa, cạnh và đường cao, R, r, Heron) và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
+    "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 30/09/2026 - dang moi theo co Lan (cong thuc dien tich, ban kinh, trung tuyen, phan giac); co Lan duyet lai; 21/10/2026 co Lan: gop NB034_MC_B_02 cu vao day, phuong an khac het hoac giong het (mot don vi kien thuc)",
     "ngoai_yccd": true
   },
   {
     "id": "L10_C3_B6_NB034_SA_A",
     "content": "Nhận biết được các hệ thức lượng cơ bản trong tam giác: các công thức tính diện tích tam giác.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Nhận ra công thức diện tích theo R, r, Heron và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
+    "Dang": "Nhận ra công thức diện tích (theo hai cạnh và góc xen giữa, cạnh và đường cao, R, r, Heron) và công thức tính R, r - mức Nhận biết, ngoài YCCĐ",
     "ghi_chu": "LUYEN TAP THEM - MUC NHAN BIET CUA BAI 6 KHONG CO TRONG YCCD CUA BO (Bo chi co Thong hieu 032-035); co Lan yeu cau them NB 15/10/2026, chuyen tu TH xuong NB (bang doi data/mapping/doi_id/L10_C3_20261015_b.json); CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_G (cung chu, cung Dang); dem cong thuc dung/sai; co Lan duyet lai",
     "ngoai_yccd": true
   },

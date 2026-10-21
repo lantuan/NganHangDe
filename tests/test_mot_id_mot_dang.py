@@ -205,10 +205,9 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C1_B1_TH014_MC_E",   # tu giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_H",   # tam giac: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
     "L10_C1_B1_TH014_MC_I",   # so thuc: _01 keo theo/tuong duong, _02 menh de dao dung, _03 menh de nao la dinh li
-    "L10_C3_B6_NB034_MC_B",   # chon cong thuc theo du kien / cong thuc nao dung-sai
     "L10_C3_TF_C",            # tau hai chang: van toc-thoi gian / quang duong + huong la ban
     "L10_C3_B6_NB032_MC_B",   # cong thuc trung tuyen: chon dung / chon sai
-    "L10_C3_B6_NB034_MC_A",   # cong thuc R, r, Heron: chon dung / chon sai
+    "L10_C3_B6_NB034_MC_A",   # cong thuc dien tich, R, r: chon dung / chon sai (21/10/2026 gop NB034_MC_B_02 cu)
     "L10_C3_B6_TH035_MC_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B6_TH035_SA_D",   # tam giac nho: trung tuyen / phan giac
     "L10_C3_B5_VD030_MC_A",   # luyen tap them: bieu thuc dong bac, _01 cho tan, _02 cho cot
