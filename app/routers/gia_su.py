@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from app.core.deps import get_current_user
 from app.services.i18n_service import lay_ngon_ngu
-from app.services import gia_su_service
+from app.services import gia_su_service, history_service
 from app.services.gia_su_service import GiaSuError
 
 router = APIRouter(prefix="/api/giasu", tags=["GiaSu"])
@@ -33,6 +33,10 @@ class HoiRequest(BaseModel):
     # Vai luot hoi truoc do cua CHINH cau nay, de hoc sinh hoi tiep duoc
     # ("em van chua hieu buoc 2"). Dang [{"vai": "hs"|"ai", "noi": "..."}].
     lich_su: list[dict] | None = None
+    # Hội thoại chat đang mở (cô Lan 22/10/2026: đổi Việt/Anh -> tải lại trang -> mất phần hỏi lại câu): có thì
+    # lưu cả câu hỏi lẫn câu trả lời vào chat_history (loai_phan_hoi "gia_su") để mở lại hội thoại vẫn còn.
+    conversation_id: str | None = None
+    cau_hien_thi: str | None = None
 
 
 @router.get("/luot")
@@ -85,9 +89,28 @@ def hoi_endpoint(request: Request, payload: HoiRequest):
         # Kem luon loi giai chuan neu lay duoc - het luot/AI hong thi hoc
         # sinh van con cai de doc.
         du_phong = _loi_giai_du_phong(payload.de_id, payload.so_thu_tu, user.id, lay_ngon_ngu(request))
-        return {"success": False, "message": str(e), "data": du_phong}
+        kq = {"success": False, "message": str(e), "data": du_phong}
+        _luu_vao_hoi_thoai(user.id, payload, kq)
+        return kq
 
-    return {"success": True, "message": "", "data": ket_qua}
+    kq = {"success": True, "message": "", "data": ket_qua}
+    _luu_vao_hoi_thoai(user.id, payload, kq)
+    return kq
+
+
+def _luu_vao_hoi_thoai(user_id: str, payload: "HoiRequest", kq: dict) -> None:
+    """Ghi câu hỏi + câu trả lời của gia sư vào chat_history (khi gọi từ khung chat, có conversation_id). Câu trả
+    lời lưu NGUYÊN gói JSON {success, message, data} để chat.html vẽ lại y hệt lúc vừa hỏi (htmlTraLoiGiaSu)."""
+    if not payload.conversation_id:
+        return
+    import json
+    try:
+        history_service.luu_tin_nhan(user_id=user_id, conversation_id=payload.conversation_id, role="user",
+                                     noi_dung=payload.cau_hien_thi or payload.cau_hoi)
+        history_service.luu_tin_nhan(user_id=user_id, conversation_id=payload.conversation_id, role="assistant",
+                                     noi_dung=json.dumps(kq, ensure_ascii=False), loai_phan_hoi="gia_su")
+    except Exception as e:                    # lưu lịch sử hỏng không được làm hỏng câu trả lời
+        print("LOI LUU GIA SU VAO CHAT_HISTORY:", e)
 
 
 def _loi_giai_du_phong(de_id: str, so_thu_tu: int, user_id: str, lang: str = "vi") -> dict | None:

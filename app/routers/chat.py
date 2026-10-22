@@ -10,6 +10,7 @@ from starlette.concurrency import run_in_threadpool
 import requests
 
 from app.core.deps import get_current_user
+from app.services.i18n_service import lay_ngon_ngu
 from app.core.lop_config import DANH_SACH_LOP
 from app.services import history_service, profile_service, tuy_chon_de_service
 from app.services import gia_su_service
@@ -51,6 +52,17 @@ CAU_DAN_LOIGIAI = [
 ]
 
 _TU_KHOA_LOIGIAI = ("lời giải", "loi giai", "đáp án", "dap an", "giải")
+
+
+def _la_tep_loi_giai_de_gan_nhat(noi_dung: bytes, conversation_id: str) -> bool:
+    """Tệp n8n vừa trả có phải chính tệp LỜI GIẢI (PDF) của đề gần nhất trong hội thoại không (so từng byte).
+    Lỗi gì cũng coi là không (chỉ dùng để chọn câu chào cho đúng)."""
+    try:
+        de = history_service.lay_de_gan_nhat(conversation_id) or {}
+        p = Path((de.get("files") or {}).get("loigiai") or "")
+        return bool(noi_dung) and p.is_file() and p.stat().st_size == len(noi_dung) and p.read_bytes() == noi_dung
+    except Exception:
+        return False
 
 
 def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:
@@ -320,6 +332,7 @@ async def dang_classroom_endpoint(request: Request, payload: DangClassroomReques
         raise HTTPException(401, "Ban chua dang nhap hoac phien da het han.")
 
     ho_so = supabase_service.lay_lop_hoc_sinh(user.id) or {}
+    la_gv = profile_service.la_giao_vien(user.id)
     ket_qua = classroom_service.dang_ket_qua_len_classroom(
         de_id=payload.de_id,
         student_email=user.email,
@@ -329,7 +342,12 @@ async def dang_classroom_endpoint(request: Request, payload: DangClassroomReques
         diem_so=payload.diem_so,
         diem_toi_da=payload.diem_toi_da,
     )
-    return ket_qua
+    # Cô Lan 22/10/2026 "ra đáp án chưa đẩy lên được class": trước đây lí do thất bại chỉ ghi console trình duyệt.
+    # Nay ghi log máy chủ, và trả kèm la_giao_vien để trang làm bài HIỆN lí do cho giáo viên (học sinh vẫn chỉ thấy
+    # câu nhẹ nhàng). Tài khoản giáo viên không phải học sinh trong lớp Classroom nên không giao bài riêng được.
+    if not ket_qua.get("success"):
+        print("DANG CLASSROOM THAT BAI:", user.email, ho_so.get("khoi"), ho_so.get("lop"), ket_qua.get("message"))
+    return {**ket_qua, "la_giao_vien": bool(la_gv)}
 
 
 @router.post("/chat")
@@ -382,7 +400,12 @@ async def chat_post(
     if (gia_su_service.la_y_dinh_hoi_bai(message)
             and await run_in_threadpool(
                 gia_su_service.co_de_da_nop_bai, user.id, conversation_id)):
+        # Trang đang ở tiếng Anh thì trả cả câu tiếng Anh (trước đây bộ dịch theo cụm từ dịch nửa câu, ra
+        # "Bạn muốn ask about the lesson trong đề vừa làm correct không?" - cô Lan 22/10/2026).
         loi_nhan = (
+            "Do you want to ask about the exam you just took? Click a question you do not understand below, "
+            "and the AI teacher will explain it right away."
+            if lay_ngon_ngu(request) == "en" else
             "Bạn muốn hỏi bài trong đề vừa làm đúng không? Bấm vào câu nào "
             "chưa hiểu bên dưới, thầy/cô AI giảng lại ngay nhé."
         )
@@ -452,7 +475,15 @@ async def chat_post(
         file_url = f"/static/downloads/{filename}"
 
         de_id_de_hoi = None
-        if _la_yeu_cau_loi_giai(message):
+        # Cô Lan 22/10/2026: "có lúc xuất đề ra cả lời giải" - CHV_Fun hiểu nhầm yêu cầu tạo đề thành "tải lời
+        # giải" thì n8n trả về LỜI GIẢI của đề gần nhất, mà trước đây máy chủ vẫn chào "Xong đề rồi đó!" và hiện nút
+        # "Làm bài trực tiếp". Nay so nội dung tệp với tệp lời giải của đề gần nhất: trùng thì nói rõ đây là lời giải.
+        tep_la_loi_giai = _la_tep_loi_giai_de_gan_nhat(r.content, conversation_id)
+        if tep_la_loi_giai and not _la_yeu_cau_loi_giai(message):
+            cau_dan = ("Đây là LỜI GIẢI của đề gần nhất (mình đã hiểu yêu cầu của bạn là xin lời giải). "
+                       "Nếu bạn muốn một đề mới, bấm 📝 Tạo đề mới nhé.")
+            print("CANH BAO CHAT: n8n tra LOI GIAI cho tin nhan khong xin loi giai:", message[:200])
+        elif tep_la_loi_giai or _la_yeu_cau_loi_giai(message):
             cau_dan = random.choice(CAU_DAN_LOIGIAI)
         else:
             cau_dan = random.choice(CAU_DAN_DE)

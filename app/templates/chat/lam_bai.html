@@ -1003,6 +1003,16 @@ async function dangKetQuaLenClassroom(ketQua) {
             // Cau chi tiet tu may chu (vd "Khong lam moi duoc access token") la
             // thong tin ky thuat cho giao vien -> chi ghi console, KHONG hien cho hoc sinh.
             console.warn("Dang Classroom that bai:", data && (data.message || data.detail));
+            // Co Lan 22/10/2026: giao vien can biet VI SAO chua dang duoc -> may chu tra la_giao_vien, hien li do.
+            if (data && data.la_giao_vien) {
+                hienTrangThaiClassroom(
+                    '📤 Chưa đăng lên Classroom:' + ' ' + (data.message || data.detail || 'không rõ lí do') + '.' +
+                    '<br><span style="font-size:13px;">' +
+                    'Cô/thầy đang dùng tài khoản giáo viên: Classroom chỉ giao bài riêng cho tài khoản học sinh có trong lớp.' +
+                    ' ' + 'Muốn thử việc đẩy điểm lên lớp, hãy làm bài bằng một tài khoản học sinh.' + '</span>'
+                );
+                return;
+            }
             hienTrangThaiClassroom(
                 '📤 Chưa đăng được lên Classroom lần này (thầy/cô cần kiểm tra lại kết nối Classroom của lớp).' +
                 '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>'

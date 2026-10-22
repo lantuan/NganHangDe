@@ -731,7 +731,7 @@
                     </form>
 
                     <!-- Bang chon cau cua de gan nhat, hien khi bam "Hoi lai de cu" -->
-                    <div id="bang-hoi-de-cu" style="display:none;" class="mt-3"></div>
+                    <!-- Bang chon cau "Hoi lai de cu" nay tao dong trong khung chat (layBangHoiDeCu) -->
 
                 </div>
             </footer>
@@ -804,15 +804,29 @@
             if (bang) { bang.style.display = "none"; }
         }
 
-        async function moBangHoiDeCu(luonMo) {
-            const bang = document.getElementById("bang-hoi-de-cu");
-            if (!bang) return;
-            // Bam nut lan 2 thi dong lai. Nhung khi may chu goi (luonMo)
-            // thi phai MO, khong duoc dong mat.
-            if (!luonMo && bang.style.display !== "none") { dongBangHoiDeCu(); return; }
+        // Co Lan 22/10/2026: "an Hoi lai de cu, ko ra o hoi truc tiep cau do" - bang chon cau truoc day nam DUOI o
+        // nhap (chan trang), o man hinh laptop bi day ra ngoai khung nhin. Nay dua bang vao CUOI khung chat nhu mot
+        // tin nhan va cuon toi. Khung chat bi xoa (mo hoi thoai khac) thi tao lai phan tu.
+        function layBangHoiDeCu() {
+            let bang = document.getElementById("bang-hoi-de-cu");
+            if (!bang) {
+                bang = document.createElement("div");
+                bang.id = "bang-hoi-de-cu";
+                bang.style.display = "none";
+            }
+            bang.className = "mt-3 mb-6";
+            if (bang.parentNode !== messages || bang !== messages.lastElementChild) messages.appendChild(bang);
+            return bang;
+        }
 
+        async function moBangHoiDeCu(luonMo) {
+            const cu = document.getElementById("bang-hoi-de-cu");
+            // Bam nut lan 2 khi bang dang mo O CUOI khung chat thi dong lai; may chu goi (luonMo) thi luon mo.
+            if (!luonMo && cu && cu.style.display !== "none" && cu === messages.lastElementChild) { dongBangHoiDeCu(); return; }
+            const bang = layBangHoiDeCu();
             bang.style.display = "block";
             bang.innerHTML = '<div class="khung">Đang tìm đề gần nhất...</div>';
+            bang.scrollIntoView({ behavior: "smooth", block: "end" });
             try {
                 const res = await fetch("/api/giasu/de-gan-nhat?conversation_id=" +
                     encodeURIComponent(conversationId));
@@ -871,13 +885,59 @@
                 'style="background:#fff;">Đóng</button></div>';
             html += "</div>";
             bang.innerHTML = html;
+            bang.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+
+        // Ve cau tra loi cua gia su (dung chung: luc vua hoi va luc mo lai hoi thoai - tin nhan loai "gia_su")
+        function htmlTraLoiGiaSu(data) {
+            const d = data.data || {};
+            let html = "";
+            if (!data.success) {
+                html += "<p>" + (data.message || "Chưa hỏi được, bạn thử lại nhé.") + "</p>";
+            } else if (d.tra_loi) {
+                // Cau tra loi cua AI la MARKDOWN - phai qua marked, khong
+                // thi hien ra chu tho **dam** va khong xuong dong.
+                html += renderMarkdownAI(d.tra_loi);
+            } else if (d.che_do === "khong_ai") {
+                html += "<p>Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn bên dưới nhé.</p>";
+            }
+            // LOP KHOA 2: loi giai chuan do Python sinh LUON hien canh
+            // cau tra loi cua AI. Lech la thay ngay.
+            if (d.de_bai_python || d.dap_an_python || d.loi_giai_python) {
+                html += '<div style="margin-top:10px;padding:12px 14px;background:#f0fdf4;' +
+                    'border:1px solid #bbf7d0;border-radius:12px;">';
+                html += '<div style="font-weight:700;color:#15803d;font-size:13px;' +
+                    'text-transform:uppercase;margin-bottom:6px;">Lời giải chuẩn của thầy/cô</div>';
+                // DE BAI truoc, roi dap an, roi loi giai - dung thu tu
+                // trong tep .tex cua co. Khong co de bai thi hoc sinh doc
+                // loi giai ma khong biet dang giai cai gi.
+                if (d.de_bai_python) {
+                    html += '<div style="background:#fff;border:1px solid #d1fae5;' +
+                        'border-radius:10px;padding:10px 12px;margin-bottom:10px;">' +
+                        '<strong style="display:block;font-size:12px;text-transform:uppercase;' +
+                        'letter-spacing:.3px;color:#64748b;margin-bottom:4px;">Đề bài</strong>' +
+                        '<div>' + renderXuongDong(String(d.de_bai_python)) + '</div></div>';
+                }
+                if (d.dap_an_python) {
+                    html += "<div><strong>Đáp án:</strong> " +
+                        renderXuongDong(String(d.dap_an_python)) + "</div>";
+                }
+                if (d.loi_giai_python) {
+                    html += '<div style="margin-top:6px;">' +
+                        renderXuongDong(String(d.loi_giai_python)) + "</div>";
+                }
+                html += "</div>";
+            }
+            return html;
         }
 
         async function hoiCauTrongDeCu(soThuTu) {
             if (!DE_CU) return;
             dongBangHoiDeCu();
 
-            addUserMessage("Giảng lại giúp mình câu " + soThuTu + " của đề vừa rồi");
+            const cauHien = "Giảng lại giúp mình câu " + soThuTu + " của đề vừa rồi";
+            ganCidVaoUrl(conversationId);
+            addUserMessage(cauHien);
             addTyping();   // addAIMessage() khong tra ve element nen khong tu go duoc
 
             try {
@@ -887,51 +947,16 @@
                     body: JSON.stringify({
                         de_id: DE_CU.de_id,
                         so_thu_tu: soThuTu,
-                        cau_hoi: "Giảng lại câu " + soThuTu + " cho em, em chưa hiểu."
+                        cau_hoi: "Giảng lại câu " + soThuTu + " cho em, em chưa hiểu.",
+                        // May chu luu ca cau hoi lan cau tra loi vao lich su hoi thoai (doi Viet/Anh, tai lai trang
+                        // van con - co Lan 22/10/2026)
+                        conversation_id: conversationId,
+                        cau_hien_thi: cauHien
                     })
                 });
                 const data = await res.json();
                 removeTyping();
-
-                const d = data.data || {};
-                let html = "";
-                if (!data.success) {
-                    html += "<p>" + (data.message || "Chưa hỏi được, bạn thử lại nhé.") + "</p>";
-                } else if (d.tra_loi) {
-                    // Cau tra loi cua AI la MARKDOWN - phai qua marked, khong
-                    // thi hien ra chu tho **dam** va khong xuong dong.
-                    html += renderMarkdownAI(d.tra_loi);
-                } else if (d.che_do === "khong_ai") {
-                    html += "<p>Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn bên dưới nhé.</p>";
-                }
-                // LOP KHOA 2: loi giai chuan do Python sinh LUON hien canh
-                // cau tra loi cua AI. Lech la thay ngay.
-                if (d.de_bai_python || d.dap_an_python || d.loi_giai_python) {
-                    html += '<div style="margin-top:10px;padding:12px 14px;background:#f0fdf4;' +
-                        'border:1px solid #bbf7d0;border-radius:12px;">';
-                    html += '<div style="font-weight:700;color:#15803d;font-size:13px;' +
-                        'text-transform:uppercase;margin-bottom:6px;">Lời giải chuẩn của thầy/cô</div>';
-                    // DE BAI truoc, roi dap an, roi loi giai - dung thu tu
-                    // trong tep .tex cua co. Khong co de bai thi hoc sinh doc
-                    // loi giai ma khong biet dang giai cai gi.
-                    if (d.de_bai_python) {
-                        html += '<div style="background:#fff;border:1px solid #d1fae5;' +
-                            'border-radius:10px;padding:10px 12px;margin-bottom:10px;">' +
-                            '<strong style="display:block;font-size:12px;text-transform:uppercase;' +
-                            'letter-spacing:.3px;color:#64748b;margin-bottom:4px;">Đề bài</strong>' +
-                            '<div>' + renderXuongDong(String(d.de_bai_python)) + '</div></div>';
-                    }
-                    if (d.dap_an_python) {
-                        html += "<div><strong>Đáp án:</strong> " +
-                            renderXuongDong(String(d.dap_an_python)) + "</div>";
-                    }
-                    if (d.loi_giai_python) {
-                        html += '<div style="margin-top:6px;">' +
-                            renderXuongDong(String(d.loi_giai_python)) + "</div>";
-                    }
-                    html += "</div>";
-                }
-                addAIMessage(html);
+                addAIMessage(htmlTraLoiGiaSu(data));
             } catch (e) {
                 removeTyping();
                 addAIMessage("<p>Lỗi kết nối, bạn thử lại sau nhé.</p>");
@@ -1243,6 +1268,7 @@ ${html}
                     htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi;
 
                 try {
+                    ganCidVaoUrl(conversationId);
                     await fetch("/api/chat/luu-de-truc-tiep", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -1462,6 +1488,7 @@ ${html}
                         htmlCanhBaoNgoaiYCCD(canhBaoLT) + htmlHoi + `</div>`;
 
                     try {
+                        ganCidVaoUrl(conversationId);
                         await fetch("/api/chat/luu-de-truc-tiep", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -1524,6 +1551,7 @@ ${html}
                 const data = await res.json();
                 if (!data.success) return;
                 conversationId = cid;
+                ganCidVaoUrl(cid);
                 messages.innerHTML = "";
                 let coFileOCuoi = false;
                 data.data.forEach(function (msg, idx) {
@@ -1542,6 +1570,10 @@ ${html}
                         // 16_CHANGELOG Version 2.28 (khac phuc mat nut khi
                         // quay lai chat tu /lam-bai qua ?cid=).
                         coFileOCuoi = idx === data.data.length - 1;
+                    } else if (msg.loai_phan_hoi === "gia_su") {
+                        let goi = null;
+                        try { goi = JSON.parse(msg.noi_dung || "null"); } catch (e) { goi = null; }
+                        addAIMessage(goi ? htmlTraLoiGiaSu(goi) : renderMarkdownAI(msg.noi_dung || ""));
                     } else if (msg.loai_phan_hoi === "error") {
                         addAIMessageLoi("Lỗi: " + (msg.noi_dung || "Có lỗi xảy ra."));
                     } else {
@@ -1653,7 +1685,18 @@ ${html}
         }
 
         // ===== GỬI TIN NHẮN LÊN /chat =====
+        // Ghi ma hoi thoai len thanh dia chi (?cid=...): bam Tieng Viet / English (tai lai trang) hay F5 thi mo lai
+        // DUNG hoi thoai nay (co Lan 22/10/2026: doi ngon ngu thi mat het cuoc chat). Chat moi thi xoa di.
+        function ganCidVaoUrl(cid) {
+            try {
+                const u = new URL(location.href);
+                if (cid) u.searchParams.set("cid", cid); else u.searchParams.delete("cid");
+                history.replaceState(null, "", u.toString());
+            } catch (e) { /* bo qua */ }
+        }
+
         async function sendMessage(text) {
+            ganCidVaoUrl(conversationId);
             addUserMessage(text);
             addTyping();
 
@@ -1761,7 +1804,11 @@ ${html}
         });
 
         // Enter để gửi, Shift+Enter để xuống dòng
+        // Co Lan 22/10/2026: go tieng Viet bang bo go (Telex/VNI) roi bam Enter khi chu cuoi CHUA ghep xong thi tin nhan
+        // gui di thieu chu, chu do ("quả") rot lai trong o chat. Dang ghep chu (isComposing / keyCode 229) thi Enter
+        // chi de bo go chot chu, khong gui.
         textarea.addEventListener("keydown", function (e) {
+            if (e.isComposing || e.keyCode === 229) return;
             if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 form.requestSubmit();
@@ -1771,6 +1818,7 @@ ${html}
         // ===== CHAT MỚI =====
         function newChat() {
             conversationId = crypto.randomUUID();
+            ganCidVaoUrl(null);
             messages.innerHTML = "";
             hienChaoMoDau();
             textarea.focus();

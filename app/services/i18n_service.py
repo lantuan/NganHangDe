@@ -106,8 +106,22 @@ def dich_json(obj, ngon_ngu: str, khoa: str | None = None):
     if isinstance(obj, list):
         return [dich_json(v, ngon_ngu, khoa) for v in obj]
     if isinstance(obj, str) and khoa in KHOA_JSON_DICH:
-        return "\n".join(dich_html(dong, ngon_ngu) for dong in obj.split("\n"))
+        return "\n".join(_dich_tron_ven(dong, ngon_ngu) for dong in obj.split("\n"))
     return obj
+
+
+def _dich_tron_ven(html: str, ngon_ngu: str) -> str:
+    """Như dich_html nhưng KHÔNG dịch nửa vời: đoạn nào dịch xong vẫn còn chữ Việt (từ điển chỉ khớp vài cụm) thì giữ
+    nguyên tiếng Việt. Dùng cho thông báo / câu trả lời của AI trong JSON (cô Lan 22/10/2026: trang tiếng Anh, hỏi
+    bằng tiếng Việt thì câu trả lời ra "Bạn muốn ask about the lesson trong đề vừa làm correct không?")."""
+    if ngon_ngu == "vi" or not tu_dien(ngon_ngu):
+        return html
+
+    def mot_doan(m):
+        goc = m.group(0)
+        dich = dich_doan(goc, ngon_ngu)
+        return goc if dich != goc and CO_DAU.search(dich) else dich
+    return DOAN.sub(mot_doan, html)
 
 
 def lay_ngon_ngu(request) -> str:
