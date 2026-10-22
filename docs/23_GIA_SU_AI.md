@@ -403,6 +403,10 @@ tài liệu của cô (`0D1-CD2.tex`: "Tập rỗng: là tập hợp không ch�
    gọn "📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại" ngay dưới câu trả lời — học sinh biết chỗ cần học
    lại, và thấy ngay nếu AI nói lệch tài liệu. Chưa cấu hình n8n (chế độ không AI) vẫn hiện đoạn tài liệu.
 
+**Chỉ tìm trong các chương ĐÃ HỌC** (cô Lan chốt 22/10/2026, sau khi câu Chương 6 hỏi "tập rỗng" kéo cả đoạn
+"Tổ hợp" của Chương 8): chương 1 đến chương của câu đang hỏi. Không chỉ đúng một chương, vì khái niệm của chương
+trước (tập rỗng — Chương 1) vẫn dùng ở chương sau.
+
 Giới hạn hiện tại: chỉ lớp 10 (lớp 11, 12 chưa có ánh xạ tệp lí thuyết); câu hỏi gõ bằng tiếng Anh không khớp từ
 khoá tiếng Việt nên chỉ được nạp mục lí thuyết của chính bài khi hỏi tiếp. Test `tests/test_gia_su_muc_b.py`.
 

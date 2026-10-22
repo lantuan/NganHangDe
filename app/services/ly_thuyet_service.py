@@ -12,7 +12,8 @@ dung kien thuc rieng cua no. Khong goi them mo hinh nao, khong vecto: tra bang a
 Cach lay:
   1. Moi tep .tex: cat dung muc li thuyet (\\subsection TOM TAT LY THUYET / LY THUYET CAN NHO / KIEN THUC CAN NHO,
      den \\subsection ke tiep), bo hinh TikZ va lenh trinh bay, chia theo \\subsubsection thanh cac "khoi" dong.
-  2. Tim theo tu khoa cua cau hoc sinh hoi trong MOI bai cung lop (khai niem nhu tap rong dung o moi chuong), uu
+  2. Tim theo tu khoa cua cau hoc sinh hoi trong cac bai cung lop thuoc CAC CHUONG DA HOC (chuong 1 den chuong cua
+     cau dang hoi - khai niem nhu tap rong o chuong 1 dung o moi chuong sau; chuong chua hoc thi khong lay), uu
      tien bai cua chinh cau dang hoi. Cum hai tu ("tap rong") nang diem hon tu don; tu nao cang hiem cang nang diem.
   3. Tra ve toi da vai doan ngan (dong trung + vai dong quanh), kem ten bai / ten muc de chi cho hoc sinh hoc lai.
   4. Khong trung tu khoa nao ma hoc sinh dang hoi TIEP (da nghe giang roi van chua hieu): tra muc li thuyet cua
@@ -195,6 +196,12 @@ def cac_khoi_cua_tep(ten_tep: str) -> tuple:
     return tuple((ten, tuple(lam_sach(noi).split("\n"))) for ten, noi in khoi if lam_sach(noi).strip())
 
 
+def _so_chuong(ma: str | None) -> int:
+    """Số chương trong mã bài / ID câu ("L10_C6_B18..." -> 6). Không đọc được -> 0 (không tìm gì)."""
+    m = re.match(r"^L\d+_C(\d+)", ma or "")
+    return int(m.group(1)) if m else 0
+
+
 def _bai_cua_cau(question_id: str | None) -> tuple[str | None, list[str]]:
     """(lop "L10", [ma bai cua cau]) tu ID cau. Cau ra theo chuong (TF, ID khong co _B) -> moi bai cua chuong."""
     m = re.match(r"^(L\d+)_C(\d+)(?:_B(\d+))?", question_id or "")
@@ -251,7 +258,10 @@ def tim_doan(question_id: str | None, cau_hoi: str, dang_hoi_tiep: bool = False)
     lop, bai_cua_cau = _bai_cua_cau(question_id)
     if not lop:
         return []
-    kho = _kho_dong(lop)
+    # Cô Lan 22/10/2026: hỏi "tập rỗng" ở câu Chương 6 thì kéo cả đoạn "Tổ hợp" (Chương 8, chưa học). Chỉ tìm trong
+    # các chương ĐÃ HỌC: Chương 1 đến chương của câu đang hỏi (chương đánh số theo PPCT nên nhỏ hơn là đã học).
+    chuong = _so_chuong(question_id)
+    kho = tuple(m for m in _kho_dong(lop) if _so_chuong(m[0]) <= chuong)
     cum = _cac_cum(cau_hoi or "")
     ket_qua: list[dict] = []
     if kho and cum:

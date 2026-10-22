@@ -129,3 +129,20 @@ def test_giao_dien_hien_doan_tai_lieu():
     assert "veLyThuyet(soThuTu, d.ly_thuyet);" in lam
     for html in (chat, lam):
         assert "function htmlLyThuyet(ds)" in html and 'replace(/&/g, "&amp;")' in html
+
+
+# ---------------------------------------------------------------- chỉ chương đã học (cô Lan 22/10/2026)
+def test_chi_tim_trong_cac_chuong_da_hoc():
+    """Ảnh cô Lan: hỏi "tập rỗng là tập gì" ở câu Chương 6 ra thêm đoạn "Tổ hợp" (Chương 8, chưa học)."""
+    doan = L.tim_doan(PT_CAN, "tập rỗng là tập gì", True)
+    assert doan and doan[0]["ma_bai"] == "L10_C1_B2"                        # Chương 1 đã học: vẫn có định nghĩa
+    assert all(L._so_chuong(d["ma_bai"]) <= 6 for d in doan), doan
+    assert not any("Tổ hợp" in d["muc"] for d in doan)
+
+
+@pytest.mark.parametrize("qid, cau", [("L10_C1_B2_NB001_MC_A", "tổ hợp chập k là gì"),
+                                      ("L10_C3_B5_NB001_MC_A", "vectơ pháp tuyến là gì"),
+                                      ("L10_C1_TF_B_02", "định lý sin là gì")])
+def test_khong_lay_chuong_chua_hoc(qid, cau):
+    chuong = L._so_chuong(qid)
+    assert all(L._so_chuong(d["ma_bai"]) <= chuong for d in L.tim_doan(qid, cau, True))

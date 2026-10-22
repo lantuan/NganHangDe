@@ -10565,3 +10565,7 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Giao diện (khung chat và trang kết quả): dưới câu trả lời có khung thu gọn "📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại" (bài, mục, đoạn trích) - học sinh biết chỗ học lại, cô thấy ngay nếu AI nói lệch tài liệu.
 - Kiểm: "tập rỗng là tập gì" ở câu L10_C6_B18 ra đoạn "Tập rỗng: là tập hợp không chứa phần tử nào" (bài Tập hợp); "định lý sin", "tổ hợp chập k", "vectơ pháp tuyến", "tập con", "vì sao phải thử lại nghiệm" ra đúng bài, đúng mục. Chụp khung chat bằng Chromium (máy chủ chạy tại chỗ, giả lập câu trả lời của n8n). Test `tests/test_gia_su_muc_b.py` (47); test toàn bộ đạt (trừ các test đã biết). Chưa thử với mô hình thật trên n8n.
 - Giới hạn: chỉ lớp 10 (lớp 11, 12 chưa ánh xạ tệp lí thuyết); câu hỏi gõ tiếng Anh không khớp từ khoá tiếng Việt.
+
+## 2026-10-22 - Gia sư AI Mức B: chỉ tìm tài liệu trong các chương đã học
+- Cô Lan (ảnh): câu Chương 6 (phương trình chứa căn), hỏi "tập rỗng là tập gì" thì ngoài đoạn định nghĩa tập rỗng (Chương 1) còn kéo thêm đoạn "Tổ hợp" (Chương 8, chưa học) - "chạy ra kiến thức khác". Cô chọn: chỉ tìm trong các chương ĐÃ HỌC (Chương 1 đến chương của câu đang hỏi), không chỉ đúng một chương vì định nghĩa tập rỗng nằm ở Chương 1.
+- `ly_thuyet_service.tim_doan`: lọc kho tài liệu theo số chương (`_so_chuong`) trước khi tính điểm. Câu Chương 6 hỏi "tập rỗng" nay chỉ còn đoạn bài Tập hợp. Test `test_gia_su_muc_b.py` thêm 4 trường hợp (không lấy chương chưa học).
