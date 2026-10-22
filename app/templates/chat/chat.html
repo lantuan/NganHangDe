@@ -393,6 +393,9 @@
             background: #fff; color: #334155; font-weight: 600; font-size: .85rem; cursor: pointer; }
         .muc-luyen button.chon { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
         .muc-luyen-goi-y { font-size: .8rem; color: #64748b; margin: 2px 0 6px; max-width: 46rem; }
+        /* Dien thoai: khung nhap gon lai (co Lan 22/10/2026) - an dong giai thich duoi hai nut muc luyen tap o khung
+           nhap (van hien trong form "Tao de moi"); y nghia hai nut van xem duoc khi giu ngon tay (title). */
+        @media (max-width: 640px) { #muc-luyen-chinh .muc-luyen-goi-y { display: none; } }
         /* O tick "Kem ban tieng Anh" trong form / khung xac nhan: o tick nam CUNG DONG voi chu (truoc day
            .form-nhom label la khoi rieng va input rong 100% nen o tick dung mot dong, chu xuong dong duoi) */
         .form-nhom label.tick-kem-anh, .xac-nhan-de label.tick-kem-anh {
@@ -710,7 +713,7 @@
                              chu BIET CHAC de nao, cau nao. -->
                         <div class="px-4 py-2 border-t text-sm text-slate-600" id="hang-tick-anh">
                             <div id="muc-luyen-chinh"></div>
-                            <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh (đề có cả Việt và Anh, tải về là .zip; không tick thì chỉ có bản tiếng Việt)</label><div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>
+                            <label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" onchange="datKemAnh(this.checked)"> Kèm bản tiếng Anh</label><div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>
                         </div>
                         <div id="hang-nut-gui" class="flex items-center justify-between gap-3 border-t px-4 py-3 flex-wrap">
                             <div id="nhom-nut-phu" class="flex items-center gap-2 flex-wrap">
@@ -1638,7 +1641,7 @@ ${html}
         function htmlTickKemAnh() {
             return `<label class="tick-kem-anh"><input type="checkbox" class="chk-kem-anh" ` +
                 `${kemAnh() ? "checked" : ""} onchange="datKemAnh(this.checked)"> ` +
-                `Kèm bản tiếng Anh (đề có cả Việt và Anh)</label>` +
+                `Kèm bản tiếng Anh</label>` +
                 '<div class="luu-y-pham-vi-anh" data-pham-vi-anh style="font-size:.82rem;color:#b45309;margin:2px 0 6px;max-width:46rem"></div>';
         }
         // ===== NUT "DUNG CHUONG TRINH" / "NANG CAO THEM" (co Lan 21/10/2026) =====
@@ -1666,6 +1669,7 @@ ${html}
             const m = mucLuyen();
             const nut = function (muc, chu) {
                 return `<button type="button" data-muc="${muc}" class="${m === muc ? "chon" : ""}" aria-pressed="${m === muc}" ` +
+                    `title="${GOI_Y_MUC[muc]}" ` +
                     `onclick="datMucLuyen('${muc}')">${chu}</button>`;
             };
             return `<div class="muc-luyen"><span>Mức luyện tập:</span>${nut("chuan", "📘 Đúng chương trình")}` +

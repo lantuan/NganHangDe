@@ -160,13 +160,12 @@ def luu_y_pham_vi_tieng_anh(ngon_ngu: str = "vi") -> str:
         if not co:
             return "Note: the English version is not available yet for any chapter."
         ds = "; ".join("Grade %d: Chapter%s %s" % (lop, "s" if len(c) > 1 else "", _dai_chuong(c)) for lop, c in co.items())
-        return ("Note: the English version currently covers only %s. Questions from other chapters "
-                "are not available in English yet (the Vietnamese exam is always created)." % ds)
+        return "Note: the English version currently covers only %s." % ds
     if not co:
         return "Lưu ý: hiện chưa có chương nào có bản tiếng Anh."
     ds = "; ".join("Lớp %d: Chương %s" % (lop, _dai_chuong(c)) for lop, c in co.items())
-    return ("Lưu ý: bản tiếng Anh hiện mới có đến %s. Các chương khác chưa có tiếng Anh "
-            "(bản tiếng Việt của đề vẫn được tạo đầy đủ)." % ds)
+    # Cô Lan 22/10/2026: rút gọn (trên điện thoại câu dài chiếm chỗ, khung "Hỏi lại đề cũ" chật chội); chỉ giữ phạm vi.
+    return "Lưu ý: bản tiếng Anh hiện mới có đến %s." % ds
 
 
 NUT_CHUYEN = """
