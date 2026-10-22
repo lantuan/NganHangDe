@@ -321,6 +321,17 @@
         .hoi-lam-bai { margin-top: 4px; }
         .hoi-lam-bai p { margin: 0 0 .5em; }
 
+        /* O hoi tiep ngay duoi cau tra loi cua gia su (giong trang ket qua lam_bai.html) */
+        .hoi-tiep { margin-top: 12px; padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; }
+        .hoi-tiep-tieu-de { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .hoi-tiep-nhap { display: flex; gap: 8px; }
+        .hoi-tiep-nhap input { flex: 1; min-width: 0; padding: 9px 12px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 12px; }
+        .hoi-tiep-nhap button { padding: 9px 16px; font-weight: 600; color: #fff; background: #2563eb; border: none; border-radius: 12px; cursor: pointer; }
+        .hoi-tiep-nhap button:disabled, .hoi-tiep-nhap input:disabled { opacity: .6; cursor: not-allowed; }
+        .hoi-tiep-bong { margin: 8px 0; line-height: 1.6; }
+        .hoi-tiep-bong.hs { background: #e0f2fe; padding: 8px 12px; border-radius: 12px; margin-left: 32px; }
+        .hoi-tiep-bong.ai { background: #fff; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 12px; }
+
         .btn-co,
         .btn-khong,
         .btn-bat-dau {
@@ -858,7 +869,9 @@
                     "Làm bài rồi nộp thì mới hỏi lại từng câu được nhé — " +
                     "tự nghĩ trước thì lúc nghe giảng mới vào đầu.</div>";
             } else {
-                html += '<div class="ghi-chu">Bấm vào câu nào chưa hiểu, thầy/cô AI giảng lại ngay.';
+                html += '<div class="ghi-chu">' + (CAU_HOI_CHO
+                    ? "Câu hỏi của bạn là về câu nào? Bấm vào câu đó, thầy/cô AI trả lời ngay."
+                    : "Bấm vào câu nào chưa hiểu, thầy/cô AI giảng lại ngay.");
                 if (DE_CU.luot) {
                     html += " Hôm nay còn " + DE_CU.luot.con_lai + "/" + DE_CU.luot.gioi_han + " lượt.";
                 }
@@ -892,7 +905,7 @@
         }
 
         // Ve cau tra loi cua gia su (dung chung: luc vua hoi va luc mo lai hoi thoai - tin nhan loai "gia_su")
-        function htmlTraLoiGiaSu(data) {
+        function htmlTraLoiGiaSu(data, hoi, cauHoiDau) {
             const d = data.data || {};
             let html = "";
             if (!data.success) {
@@ -931,14 +944,115 @@
                 }
                 html += "</div>";
             }
+            // Co Lan 22/10/2026: "trong o tra loi van chua co o chat de hoi ngay noi dung bai nay" - them o nhap ngay duoi.
+            html += htmlHoiTiep(hoi || data.hoi, cauHoiDau, d.tra_loi);
             return html;
+        }
+
+        // ===== HOI TIEP NGAY DUOI CAU TRA LOI CUA GIA SU (co Lan 22/10/2026) =====
+        // Giong trang ket qua (lam_bai.html): moi cau tra loi co o nhap rieng de hoi tiep DUNG cau do, gui kem vai luot
+        // truoc (lich_su) de thay/co AI biet em dang hoi tiep dieu gi. May chu van luu ca cau hoi lan cau tra loi vao
+        // lich su hoi thoai (conversation_id).
+        const HOI_TIEP = {};   // id khung -> {de_id, so_thu_tu, nhan, lich_su: [{vai, noi}]}
+        function htmlHoiTiep(hoi, cauHoiDau, traLoiDau) {
+            if (!hoi || !hoi.de_id || !hoi.so_thu_tu) return "";
+            const id = "hoi-tiep-" + Date.now() + "-" + Math.floor(Math.random() * 1e6);
+            const lichSu = [];
+            if (cauHoiDau) lichSu.push({ vai: "hs", noi: cauHoiDau });
+            if (traLoiDau) lichSu.push({ vai: "ai", noi: traLoiDau });
+            HOI_TIEP[id] = { de_id: hoi.de_id, so_thu_tu: hoi.so_thu_tu, nhan: hoi.nhan || "", lich_su: lichSu };
+            return `<div class="hoi-tiep" id="${id}">` +
+                `<div class="hoi-tiep-tieu-de">💬 Còn chỗ nào chưa hiểu ở câu này thì hỏi tiếp ngay ở đây.</div>` +
+                `<div class="hoi-tiep-ds"></div>` +
+                `<div class="hoi-tiep-nhap"><input type="text" maxlength="500" placeholder="Ví dụ: vì sao bước 2 lại ra như vậy?" ` +
+                `onkeydown="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229){event.preventDefault();guiHoiTiep('${id}');}">` +
+                `<button type="button" onclick="guiHoiTiep('${id}')">Gửi</button></div></div>`;
+        }
+
+        async function guiHoiTiep(id) {
+            const khung = document.getElementById(id);
+            const tt = HOI_TIEP[id];
+            if (!khung || !tt) return;
+            const o = khung.querySelector(".hoi-tiep-nhap input");
+            const nut = khung.querySelector(".hoi-tiep-nhap button");
+            const cauHoi = (o.value || "").trim();
+            if (!cauHoi) return;
+            o.value = "";
+            o.disabled = true;
+            nut.disabled = true;
+            const ds = khung.querySelector(".hoi-tiep-ds");
+            const bongHs = document.createElement("div");
+            bongHs.className = "hoi-tiep-bong hs";
+            bongHs.textContent = cauHoi;
+            ds.appendChild(bongHs);
+            const bongAi = document.createElement("div");
+            bongAi.className = "hoi-tiep-bong ai";
+            bongAi.textContent = "Thầy/cô đang xem lại câu này...";
+            ds.appendChild(bongAi);
+            ganCidVaoUrl(conversationId);
+            try {
+                const res = await fetch("/api/giasu/hoi", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        de_id: tt.de_id,
+                        so_thu_tu: tt.so_thu_tu,
+                        cau_hoi: cauHoi,
+                        lich_su: tt.lich_su.slice(-6),
+                        conversation_id: conversationId,
+                        cau_hien_thi: (tt.nhan ? tt.nhan + ": " : "") + cauHoi,
+                        nhan_cau: tt.nhan || null
+                    })
+                });
+                const data = await res.json();
+                const d = data.data || {};
+                if (data.success && d.tra_loi) {
+                    bongAi.innerHTML = renderMarkdownAI(d.tra_loi);
+                    tt.lich_su.push({ vai: "hs", noi: cauHoi }, { vai: "ai", noi: d.tra_loi });
+                } else if (data.success && d.che_do === "khong_ai") {
+                    bongAi.textContent = "Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn ở trên nhé.";
+                } else {
+                    bongAi.textContent = data.message || "Chưa hỏi được, bạn thử lại nhé.";
+                }
+            } catch (e) {
+                bongAi.textContent = "Lỗi kết nối, bạn thử lại sau nhé.";
+            } finally {
+                o.disabled = false;
+                nut.disabled = false;
+                o.focus();
+                if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([bongAi]);
+                bongAi.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+        }
+
+        // Cau hoc sinh vua go trong chat (vd "cau 3 sao ra 5 vay?") khi may chu mo bang chon cau: bam cau nao thi gui
+        // CHINH cau nay cho thay/co AI thay vi cau mac dinh "Giang lai cau ...". Khong doan so cau (gia_su_service).
+        let CAU_HOI_CHO = null;
+
+        // "Phần I câu 3" thay vi so thu tu lien mach (13) - giong so tren de va trang lam bai.
+        function nhanCauDeCu(soThuTu) {
+            // ten phan do may chu tra theo ngon ngu trang: "PHẦN I. Trắc nghiệm..." / "PART I. Multiple choice"
+            for (const phan of (DE_CU && DE_CU.cac_phan) || []) {
+                for (const cau of phan.cau || []) {
+                    if (cau.so_thu_tu === soThuTu) {
+                        const tenPhan = String(phan.ten || "").split(".")[0];
+                        const tuCau = tenPhan.indexOf("PART") === 0 ? " question " : " câu ";
+                        return tenPhan + tuCau + (cau.so_trong_phan || cau.so_thu_tu);
+                    }
+                }
+            }
+            return "#" + soThuTu;
         }
 
         async function hoiCauTrongDeCu(soThuTu) {
             if (!DE_CU) return;
             dongBangHoiDeCu();
 
-            const cauHien = "Giảng lại giúp mình câu " + soThuTu + " của đề vừa rồi";
+            const nhan = nhanCauDeCu(soThuTu);
+            const cauGo = CAU_HOI_CHO;
+            CAU_HOI_CHO = null;
+            const cauHoiGui = cauGo || ("Giảng lại " + nhan + " cho em, em chưa hiểu.");
+            const cauHien = cauGo ? nhan + ": " + cauGo : "Giảng lại giúp mình " + nhan + " của đề vừa rồi";
             ganCidVaoUrl(conversationId);
             addUserMessage(cauHien);
             addTyping();   // addAIMessage() khong tra ve element nen khong tu go duoc
@@ -950,7 +1064,8 @@
                     body: JSON.stringify({
                         de_id: DE_CU.de_id,
                         so_thu_tu: soThuTu,
-                        cau_hoi: "Giảng lại câu " + soThuTu + " cho em, em chưa hiểu.",
+                        cau_hoi: cauHoiGui,
+                        nhan_cau: nhan,
                         // May chu luu ca cau hoi lan cau tra loi vao lich su hoi thoai (doi Viet/Anh, tai lai trang
                         // van con - co Lan 22/10/2026)
                         conversation_id: conversationId,
@@ -959,7 +1074,7 @@
                 });
                 const data = await res.json();
                 removeTyping();
-                addAIMessage(htmlTraLoiGiaSu(data));
+                addAIMessage(htmlTraLoiGiaSu(data, { de_id: DE_CU.de_id, so_thu_tu: soThuTu, nhan: nhan }, cauHoiGui));
             } catch (e) {
                 removeTyping();
                 addAIMessage("<p>Lỗi kết nối, bạn thử lại sau nhé.</p>");
@@ -1146,7 +1261,7 @@ ${html}
                     `<p><a href="/lam-bai/${deId}?cid=${encodeURIComponent(conversationId)}" class="btn-bat-dau">🚀 Bắt đầu làm bài</a></p>`;
             } else {
                 const yKhong = Y_KHONG_LAM_BAI[Math.floor(Math.random() * Y_KHONG_LAM_BAI.length)];
-                box.innerHTML = `<p>${yKhong}</p>`;
+                box.innerHTML = `<p>${yKhong}</p>` + htmlNutLoiGiai("/api/exam/tai-de/" + deId);
             }
         }
 
@@ -1231,15 +1346,16 @@ ${html}
                         (chiTietLoi ? "<p><button class=\"btn-doi-y\" onclick=\"doiYeuCauDe('" + idHoi + "')\">✏️ Nhắn lại yêu cầu khác</button></p>" : "");
                     return;
                 }
-                const filename = "de_thi.pdf";
+                let filename = "de_thi.pdf";
 
                 let htmlHoi = "";
                 let deId = null;
                 let canhBaoLT = [];
+                let thongTinDe = null;
                 try {
                     const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
                     const dataDe = await deGanNhat.json();
-                    if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; }
+                    if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; thongTinDe = dataDe; }
                 } catch (e) { /* bo qua, khong co nut lam bai truc tiep neu loi */ }
 
                 // Dung URL on dinh /api/exam/tai-de/{de_id} khi da co deId
@@ -1248,7 +1364,7 @@ ${html}
                 // reload) neu vi ly do gi do khong lay duoc deId.
                 let url;
                 if (deId) {
-                    url = "/api/exam/tai-de/" + deId;
+                    url = (thongTinDe && thongTinDe.url_tai) || ("/api/exam/tai-de/" + deId);
                 } else {
                     const blob = await res.blob();
                     url = URL.createObjectURL(blob);
@@ -1264,7 +1380,8 @@ ${html}
                         `</div>`;
                 }
 
-                const aiCaption = "Đã tạo đề xong.";
+                if (thongTinDe && thongTinDe.co_ban_tieng_anh) filename = "de_thi.zip";
+                const aiCaption = "Đã tạo đề xong. " + dongTuyChonDe(thongTinDe);
                 box.innerHTML =
                     `<p>${aiCaption}</p>` +
                     `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
@@ -1453,22 +1570,23 @@ ${html}
                             "<button type=\"button\" class=\"btn-submit-form\" onclick=\"moFormTaoDe()\">🔁 Mở lại form, thử lần nữa</button>";
                         return;
                     }
-                    const filename = "de_thi.pdf";
+                    let filename = "de_thi.pdf";
 
                     let htmlHoi = "";
                     let deId = null;
                     let canhBaoLT = [];
+                    let thongTinDe = null;
                     try {
                         const deGanNhat = await fetch("/api/exam/de-gan-nhat?conversation_id=" + encodeURIComponent(conversationId));
                         const dataDe = await deGanNhat.json();
-                        if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; }
+                        if (dataDe.success) { deId = dataDe.de_id; canhBaoLT = dataDe.canh_bao_ngoai_yccd || []; thongTinDe = dataDe; }
                     } catch (e) { /* bo qua */ }
 
                     // URL on dinh (song lai duoc sau reload) khi co deId,
                     // fall back ve blob chi khi khong lay duoc deId.
                     let url;
                     if (deId) {
-                        url = "/api/exam/tai-de/" + deId;
+                        url = (thongTinDe && thongTinDe.url_tai) || ("/api/exam/tai-de/" + deId);
                     } else {
                         const blob = await res.blob();
                         url = URL.createObjectURL(blob);
@@ -1484,7 +1602,8 @@ ${html}
                             `</div>`;
                     }
 
-                    const aiCaption = "Đã tạo đề xong.";
+                    if (thongTinDe && thongTinDe.co_ban_tieng_anh) filename = "de_thi.zip";
+                    const aiCaption = "Đã tạo đề xong. " + dongTuyChonDe(thongTinDe);
                     formEl.outerHTML =
                         `<div><p>${aiCaption}</p>` +
                         `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">📄 Tải file: ${filename}</a></p>` +
@@ -1678,14 +1797,32 @@ ${html}
 
         // File tai ve la PDF hay .zip do may chu quyet dinh (Content-Disposition), nen link KHONG gan
         // download="ten.pdf" (se doi ten .zip thanh .pdf). Chi link blob (khong qua may chu) moi can.
+        // Cau ngan bao de vua tao theo muc nao, co ban Anh khong (giong dong_tuy_chon_da_ap_dung o chat.py) - co Lan
+        // 22/10/2026 nghi nut "Dung chuong trinh" va o tieng Anh khong co tac dung, nay ghi ro ngay duoi de.
+        function dongTuyChonDe(tt) {
+            if (!tt) return "";
+            let cau = tt.chi_yccd ? "Mức: 📘 Đúng chương trình." : "Mức: 🚀 Nâng cao thêm.";
+            if (tt.co_ban_tieng_anh) cau += " Có kèm bản tiếng Anh: tải về là tệp .zip gồm cả bản Việt và bản Anh.";
+            else if (kemAnh()) cau += " Chương này chưa có bản tiếng Anh nên chỉ có bản Việt.";
+            return cau;
+        }
+
         function attrTai(url, filename) {
             return (url && url.indexOf("blob:") === 0) ? `download="${filename}"` : "";
         }
 
+        // Co Lan 22/10/2026: "ra de chuong 2, cung co luon loi giai" - KHONG dua lien ket loi giai ngay luc vua tao de.
+        // Chon "lam tren giay" (hoac mo lai hoi thoai cu) thi chi co NUT nay; lam xong tu bam moi hien lien ket. Lam
+        // tren web thi trang ket qua da co loi giai tung cau sau khi nop bai.
         function htmlNutLoiGiai(url) {
             const deId = layDeIdTuUrl(url);
             if (!deId) return "";
-            return `<p><a href="/api/exam/tai-loigiai/${deId}" target="_blank" rel="noopener">📄 Lời giải của đề này</a></p>`;
+            return `<p class="nut-xem-loi-giai"><button type="button" class="btn-khong" ` +
+                `onclick="hienLoiGiai(this,'${deId}')">📖 Mình làm xong rồi, xem lời giải</button></p>`;
+        }
+        function hienLoiGiai(nut, deId) {
+            nut.parentNode.innerHTML =
+                `<a href="/api/exam/tai-loigiai/${deId}" target="_blank" rel="noopener">📄 Lời giải của đề này</a>`;
         }
 
         // ===== GỬI TIN NHẮN LÊN /chat =====
@@ -1731,6 +1868,7 @@ ${html}
                         // nay da co de da nop bai. Khong doan so cau - mo
                         // bang PHAN I/II/III/IV de chinh em ay bam dung cau.
                         addAIMessage(`<p>${data.data.tra_loi || data.message || ""}</p>`);
+                        CAU_HOI_CHO = data.data.cau_hoi_goc || null;
                         moBangHoiDeCu(true);
                     } else if (data.data && data.data.type === "xac_nhan_de" && !data.data.lop) {
                         // Chua xac dinh duoc lop (GenerateExam_RequestParser
@@ -1768,7 +1906,6 @@ ${html}
                             `<p>${data.message || "Đã tạo đề xong."}</p>` +
                             `<p><a href="${url}" ${attrTai(url, filename)} target="_blank" rel="noopener">` +
                             `📄 Tải file: ${filename}</a></p>` +
-                            htmlNutLoiGiai(url) +
                             htmlHoi
                         );
                     } else if (data.reply) {

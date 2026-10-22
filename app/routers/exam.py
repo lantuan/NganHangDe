@@ -540,7 +540,20 @@ def de_gan_nhat_endpoint(conversation_id: str):
     canh_bao = []
     if de.get("role") == "teacher":
         canh_bao = (de.get("blueprint") or {}).get("canh_bao_ngoai_yccd") or []
-    return {"success": True, "de_id": de["id"], "canh_bao_ngoai_yccd": canh_bao}
+    return {"success": True, "de_id": de["id"], "canh_bao_ngoai_yccd": canh_bao, **thong_tin_tai_de(de)}
+
+
+def thong_tin_tai_de(de: dict) -> dict:
+    """Liên kết tải đề vừa tạo trong khung chat + hai lựa chọn đã áp dụng (cô Lan 22/10/2026: tick "Kèm bản tiếng
+    Anh" mà tải về chỉ có bản Việt - trước đây chat đưa thẳng tệp PDF tiếng Việt n8n trả về; nút "Đúng chương trình"
+    có tác dụng không thì không thấy được). Đề có bản Anh song sinh -> ép ?ngon_ngu=ca-hai (.zip Việt + Anh) cho cả
+    học sinh lẫn giáo viên, vì chính họ vừa tick ô đó."""
+    co_anh = _de_co_ban_tieng_anh(de)
+    return {
+        "url_tai": "/api/exam/tai-de/%s%s" % (de["id"], "?ngon_ngu=ca-hai" if co_anh else ""),
+        "co_ban_tieng_anh": co_anh,
+        "chi_yccd": bool((de.get("blueprint") or {}).get("chi_yccd")),
+    }
 
 
 # ======================================================

@@ -317,6 +317,40 @@ def la_y_dinh_hoi_bai(message: str) -> bool:
     return bool(_MAU_HOI_BAI.search(van_ban))
 
 
+# Cô Lan 22/10/2026: "hỏi về toán nhưng không biết toán" - câu hỏi toán gõ thẳng vào chat (vd "câu 3 sao ra 5?",
+# "chứng minh chỗ này thế nào") rơi xuống CHV_Fun, mà CHV_Fun chỉ lo tạo đề nên từ chối. Nhận rộng hơn
+# la_y_dinh_hoi_bai: nhắc số câu/bài, hoặc từ ngữ toán học, nhưng KHÔNG cướp yêu cầu tạo đề / xin lời giải (n8n).
+_TU_HOI_TOAN = (
+    r"\bc[aâ]u\s*\d+|\bb[aà]i\s*\d+|ch[uứ]ng minh|b[aằ]ng bao nhi[eê]u|b[aằ]ng m[aấ]y|c[oô]ng th[uứ]c"
+    r"|[dđ][iị]nh l[ií]|nghi[eệ]m|ph[uư][oơ]ng tr[iì]nh|v[eé]c ?t[oơ]|\b(sin|cos|tan|cot)\b|v[iì] sao|sao (l[aạ]i )?ra"
+    r"|l[aà]m (th[eế] n[aà]o|sao)|t[ií]nh (nh[uư] th[eế] n[aà]o|sao|ki[eể]u g[iì])|ra k[eế]t qu[aả]"
+)
+_TU_KHONG_PHAI_HOI_TOAN = (
+    r"t[aạ]o [dđ][eề]|ra [dđ][eề]|l[aà]m [dđ][eề] kh[aá]c|cho (t[oô]i|em|m[iì]nh|tui|t[oớ])( m[oộ]t| 1)? (b[oộ] )?[dđ][eề]"
+    r"|[dđ][eề] (l[oớ]p|ki[eể]m tra|gi[uữ]a|cu[oố]i|h[oọ]c k|thi|m[oớ]i)|ki[eể]m tra (mi[eệ]ng|15|th[uư][oờ]ng)"
+    r"|gi[uữ]a k[yỳ]|cu[oố]i k[yỳ]"
+)
+# "cho tôi lời giải" / "đáp án đâu" là xin TỆP lời giải (n8n) - trừ khi câu đã rõ là nhờ giảng ("giảng lại câu 2,
+# lời giải khó hiểu quá").
+_TU_XIN_LOI_GIAI = r"l[oờ]i gi[aả]i|[dđ][aá]p [aá]n"
+_MAU_HOI_TOAN = re.compile(_TU_HOI_TOAN, re.IGNORECASE)
+_MAU_KHONG_PHAI_HOI_TOAN = re.compile(_TU_KHONG_PHAI_HOI_TOAN, re.IGNORECASE)
+_MAU_XIN_LOI_GIAI = re.compile(_TU_XIN_LOI_GIAI, re.IGNORECASE)
+
+
+def la_cau_hoi_toan(message: str) -> bool:
+    """True khi tin nhắn là câu hỏi về bài/toán (rộng hơn la_y_dinh_hoi_bai), không phải yêu cầu tạo đề, xin lời
+    giải hay hỏi cách dùng web. Vẫn KHÔNG đoán số câu: chat.py chỉ mở bảng chọn câu."""
+    if not message or not message.strip():
+        return False
+    van_ban = message.strip()
+    if _MAU_LOAI_TRU.search(van_ban) or _MAU_KHONG_PHAI_HOI_TOAN.search(van_ban):
+        return False
+    if la_y_dinh_hoi_bai(van_ban):
+        return True
+    return not _MAU_XIN_LOI_GIAI.search(van_ban) and bool(_MAU_HOI_TOAN.search(van_ban))
+
+
 def co_de_da_nop_bai(user_id: str, conversation_id: str) -> bool:
     """Hoi thoai nay da co de VA hoc sinh da nop bai chua. Nuot moi loi:
     khong chac thi tra False de di duong cu (CHV_Fun), khong chan nham."""

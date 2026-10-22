@@ -529,6 +529,7 @@ def test_chat_mo_bang_gia_su_va_KHONG_goi_n8n(client, monkeypatch):
     monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
     monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
     monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: True)
+    monkeypatch.setattr(C.history_service, "lay_de_gan_nhat", lambda cid: {"id": "d1"})
     monkeypatch.setattr(C, "_goi_n8n", lambda *a, **kw: da_goi_n8n.append(a))
 
     r = client.post("/chat", data={
@@ -542,8 +543,9 @@ def test_chat_mo_bang_gia_su_va_KHONG_goi_n8n(client, monkeypatch):
     assert da_goi_n8n == []          # tiet kiem tron mot luot goi mo hinh
 
 
-def test_chat_van_goi_n8n_khi_hoi_thoai_chua_co_de(client, monkeypatch):
-    """Chua lam de nao ma go 'khong hieu bai 1' -> van de CHV_Fun tra loi."""
+def test_chat_huong_dan_hoi_bai_khi_hoi_thoai_chua_co_de(client, monkeypatch):
+    """Chua lam de nao ma go 'khong hieu bai 1': truoc day de CHV_Fun tra loi (va bi tu choi - "hoi ve toan nhung
+    khong biet toan", co Lan 22/10/2026). Nay may chu tu noi cach hoi bai, KHONG goi n8n."""
     from app.routers import chat as C
 
     da_goi_n8n = []
@@ -551,6 +553,7 @@ def test_chat_van_goi_n8n_khi_hoi_thoai_chua_co_de(client, monkeypatch):
     monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
     monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
     monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: False)
+    monkeypatch.setattr(C.history_service, "lay_de_gan_nhat", lambda cid: None)
 
     class _PhanHoiGia:
         status_code = 200
@@ -570,7 +573,8 @@ def test_chat_van_goi_n8n_khi_hoi_thoai_chua_co_de(client, monkeypatch):
         "conversation_id": "c1",
     })
     assert r.status_code == 200
-    assert len(da_goi_n8n) == 1
+    assert da_goi_n8n == []
+    assert r.json()["data"]["type"] == "huong_dan_hoi_bai"
 
 
 def test_chat_tao_de_van_di_duong_n8n(client, monkeypatch):

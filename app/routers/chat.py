@@ -65,6 +65,24 @@ def _la_tep_loi_giai_de_gan_nhat(noi_dung: bytes, conversation_id: str) -> bool:
         return False
 
 
+def dong_tuy_chon_da_ap_dung(thong_tin: dict, da_tick_anh: bool, lang: str = "vi") -> str:
+    """Một câu ngắn: đề vừa tạo theo mức nào, có bản Anh không (thong_tin = exam.thong_tin_tai_de)."""
+    en = lang == "en"
+    if thong_tin.get("chi_yccd"):
+        muc = "Level: 📘 Standard curriculum." if en else "Mức: 📘 Đúng chương trình."
+    else:
+        muc = "Level: 🚀 Extra challenge." if en else "Mức: 🚀 Nâng cao thêm."
+    if thong_tin.get("co_ban_tieng_anh"):
+        anh = (" English version included: the download is a .zip with both the Vietnamese and English files."
+               if en else " Có kèm bản tiếng Anh: tải về là tệp .zip gồm cả bản Việt và bản Anh.")
+    elif da_tick_anh:
+        anh = (" This chapter has no English version yet, so only the Vietnamese file is available."
+               if en else " Chương này chưa có bản tiếng Anh nên chỉ có bản Việt.")
+    else:
+        anh = ""
+    return muc + anh
+
+
 def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:
     """Doan (khong can chinh xac tuyet doi, chi de chon dung bo cau vui
     nhon hien ra) xem tin nhan hoc sinh vua gui co phai xin loi giai hay
@@ -397,18 +415,45 @@ async def chat_post(
     # May chu thi biet chac, nen chan ngay o day: khong goi n8n, khong ton
     # mot luot goi mo hinh nao. CO Y KHONG DOAN SO CAU - chi mo bang chon
     # cau de chinh em ay chi dung cau minh can (xem gia_su_service).
-    if (gia_su_service.la_y_dinh_hoi_bai(message)
-            and await run_in_threadpool(
-                gia_su_service.co_de_da_nop_bai, user.id, conversation_id)):
+    # Cô Lan 22/10/2026 ("hỏi về toán nhưng không biết toán"): nhận RỘNG hơn (la_cau_hoi_toan: nhắc số câu, từ ngữ
+    # toán học...) và không bắt buộc đã nộp bài mới chặn - hội thoại có đề thì mở bảng chọn câu (bảng tự nhắc "chưa nộp
+    # bài" nếu chưa làm); chưa có đề thì nói rõ phần hỏi bài hoạt động thế nào, KHÔNG đẩy xuống CHV_Fun để bị từ chối.
+    # Câu học sinh vừa gõ đi kèm (cau_hoi_goc): bấm câu nào thì gửi chính câu đó cho thầy/cô AI.
+    if gia_su_service.la_cau_hoi_toan(message):
+        en = lay_ngon_ngu(request) == "en"
+        de_gan = await run_in_threadpool(history_service.lay_de_gan_nhat, conversation_id)
+        if de_gan is None:
+            loi_nhan = (
+                "The AI teacher explains questions from an exam you have taken, using the official worked solution "
+                "from the question bank (it does not solve new problems on its own, to avoid wrong explanations). "
+                "Create an exam, take it on the web and submit, then click the question you want to ask "
+                "about. Every answer has its own box for follow-up questions."
+                if en else
+                "Thầy/cô AI giảng bài theo đề bạn đã làm, dựa trên lời giải chuẩn của ngân hàng đề (không tự giải "
+                "bài mới để tránh giảng sai). Bạn tạo đề, làm bài trên web và nộp, rồi bấm vào câu muốn hỏi. "
+                "Mỗi câu trả lời đều có ô để hỏi tiếp ngay bên dưới."
+            )
+            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id,
+                                         role="assistant", noi_dung=loi_nhan)
+            return {"success": True, "message": loi_nhan, "data": {"type": "huong_dan_hoi_bai"}}
+        da_nop = await run_in_threadpool(gia_su_service.co_de_da_nop_bai, user.id, conversation_id)
         # Trang đang ở tiếng Anh thì trả cả câu tiếng Anh (trước đây bộ dịch theo cụm từ dịch nửa câu, ra
         # "Bạn muốn ask about the lesson trong đề vừa làm correct không?" - cô Lan 22/10/2026).
-        loi_nhan = (
-            "Do you want to ask about the exam you just took? Click a question you do not understand below, "
-            "and the AI teacher will explain it right away."
-            if lay_ngon_ngu(request) == "en" else
-            "Bạn muốn hỏi bài trong đề vừa làm đúng không? Bấm vào câu nào "
-            "chưa hiểu bên dưới, thầy/cô AI giảng lại ngay nhé."
-        )
+        if da_nop:
+            loi_nhan = (
+                "Which question of the exam you just took is this about? Click it below, "
+                "and the AI teacher will answer right away."
+                if en else
+                "Bạn hỏi về câu nào trong đề vừa làm? Bấm vào câu đó bên dưới, "
+                "thầy/cô AI trả lời ngay nhé."
+            )
+        else:
+            loi_nhan = (
+                "You have not submitted the latest exam yet. Take it on the web and submit, then click the "
+                "question you want to ask about below."
+                if en else
+                "Bạn chưa nộp bài đề gần nhất. Làm bài trên web và nộp, rồi bấm vào câu muốn hỏi ở bảng bên dưới nhé."
+            )
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=loi_nhan,
@@ -416,7 +461,7 @@ async def chat_post(
         return {
             "success": True,
             "message": loi_nhan,
-            "data": {"type": "mo_bang_gia_su", "tra_loi": loi_nhan},
+            "data": {"type": "mo_bang_gia_su", "tra_loi": loi_nhan, "cau_hoi_goc": message},
         }
 
     r = None
@@ -495,12 +540,17 @@ async def chat_post(
             if de_vua_sinh and de_vua_sinh.get("id"):
                 de_id_de_hoi = de_vua_sinh["id"]
 
-        # Gan them de_id vao URL (?de=...) de khi tai lai lich su chat,
-        # Frontend van biet tin nhan nay thuoc de nao ma hien nut "Loi
-        # giai" rieng cho dung de do. May chu file bo qua query string
-        # nen link tai file van chay y nhu cu.
+        # Cô Lan 22/10/2026: "chọn có tiếng Anh nhưng chỉ xuất ra tiếng Việt". n8n chỉ chuyển lại tệp PDF TIẾNG VIỆT
+        # của /generate-pdf-auto, dù máy chủ đã sinh bản Anh song sinh. Nay đề có de_id thì đưa liên kết ổn định
+        # /api/exam/tai-de/<id> (có bản Anh -> ?ngon_ngu=ca-hai, tải về .zip Việt + Anh) giống form tạo đề nhanh, và
+        # ghi rõ hai lựa chọn đã áp dụng (mức luyện tập, tiếng Anh) để người dùng thấy nút có tác dụng.
         if de_id_de_hoi:
-            file_url = f"{file_url}?de={de_id_de_hoi}"
+            from app.routers.exam import thong_tin_tai_de
+            thong_tin = thong_tin_tai_de(de_vua_sinh)
+            file_url = thong_tin["url_tai"]
+            filename = "de_thi.zip" if thong_tin["co_ban_tieng_anh"] else "de_thi.pdf"
+            cau_dan = cau_dan + " " + dong_tuy_chon_da_ap_dung(
+                thong_tin, tuy_chon_de_service.lay_kem_tieng_anh(conversation_id), lay_ngon_ngu(request))
 
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,

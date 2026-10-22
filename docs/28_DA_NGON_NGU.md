@@ -46,6 +46,7 @@ parallel (collinear) / same direction / opposite direction.
 - Chat AI: một trạng thái chung `kemAnh()` (localStorage `chv_kem_anh`), các ô `.chk-kem-anh` đồng bộ nhau. Form nhanh và thẻ xác nhận gửi `kem_tieng_anh` thẳng vào `/api/exam/generate-pdf-auto`.
 - Chat tự do đi qua n8n: n8n tự gọi `/generate-pdf-auto` nên không nhận được ô tick. `/chat` nhận field `kem_tieng_anh` và ghi vào `app/services/tuy_chon_de_service.py` (tệp `data/temp/kem_tieng_anh_hoi_thoai.json`, theo conversation_id, hết hạn 6 giờ); `/generate-pdf-auto` đọc lại khi lời gọi không nói rõ (`kem_tieng_anh=None`). n8n không phải sửa gì.
 - Tải về: đề của HỌC SINH có bản Anh thì `/tai-de`, `/tai-loigiai` mặc định trả `.zip` có `*_TiengViet.pdf` và `*_English.pdf` (dù trang ở ngôn ngữ nào); không có bản Anh thì PDF Việt thường. Link tải không gắn `download="…pdf"` (để tên `.zip` đúng); chỉ link blob mới gắn. `?ngon_ngu=vi|en|ca-hai` ép một thứ tiếng.
+- Chat AI (22/10/2026): đề vừa tạo trong chat (cả đường n8n, form tạo đề nhanh, khung xác nhận) có bản Anh thì liên kết tải là `/api/exam/tai-de/<id>?ngon_ngu=ca-hai` cho cả học sinh lẫn giáo viên (`exam.thong_tin_tai_de`); trước đây đường n8n đưa thẳng PDF tiếng Việt nên tick mà không có bản Anh.
 - Làm bài trực tiếp luôn theo ngôn ngữ trang; đề không có bản Anh thì hiện tiếng Việt kèm chú thích vàng (`thong_bao_ban_anh`), `/quiz` trả thêm `co_ban_tieng_anh`.
 - Test: test_tick_kem_tieng_anh_luc_tao_de_quyet_dinh_co_ban_anh_hay_khong, test_tai_de_hoc_sinh_da_tick_anh_ra_zip_mac_dinh.
 

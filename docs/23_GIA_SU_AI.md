@@ -273,6 +273,31 @@ của `CHV_Fun`, không được cướp. Và nếu hội thoại chưa có đ�
 `co_de_da_nop_bai` **nuốt mọi lỗi**: Supabase hỏng thì trả `False` để đi
 đường cũ, không bao giờ chặn nhầm vì một lỗi đọc dữ liệu.
 
+### Cập nhật 22/10/2026 — nhận rộng câu hỏi toán, ô hỏi tiếp
+
+Cô Lan báo "hỏi về toán nhưng không biết toán": câu như "câu 3 sao ra 5 vậy",
+"cos 60 bằng bao nhiêu" không khớp `la_y_dinh_hoi_bai`, rơi xuống `CHV_Fun` và
+bị từ chối. Luồng mới (thay sơ đồ ở trên):
+
+```
+POST /chat
+   ├─ gia_su_service.la_cau_hoi_toan(message)  ── regex: la_y_dinh_hoi_bai, hoặc nhắc
+   │     │                                         "câu N"/"bài N", từ ngữ toán học; loại
+   │     │                                         tạo đề, kì thi, xin lời giải, cách dùng web
+   │     └─ False ─────────────────────────────► n8n như cũ
+   ├─ hội thoại chưa có đề ──► máy chủ trả lời cách hỏi bài ("huong_dan_hoi_bai"), KHÔNG gọi n8n
+   └─ có đề ──► {"type": "mo_bang_gia_su", "cau_hoi_goc": message}
+                 └─ bảng chọn câu (chưa nộp bài thì bảng nhắc nộp); bấm câu nào thì
+                    gửi CHÍNH câu học sinh đã gõ cho /api/giasu/hoi
+```
+
+Vẫn không đoán số câu. Mỗi câu trả lời trong chat có **ô hỏi tiếp** riêng
+(`htmlHoiTiep` / `guiHoiTiep` trong `chat.html`, gửi `lich_su` 6 lượt gần nhất),
+như trang kết quả. Gói trả lời lưu trong `chat_history` có thêm `hoi`
+(`de_id`, `so_thu_tu`, `nhan` kiểu "PHẦN I câu 2") để mở lại hội thoại vẫn hỏi
+tiếp được đúng câu. Không có phần AI tự giải một bài toán bất kì: lớp khoá 1
+(giảng theo lời giải chuẩn Python) giữ nguyên.
+
 ---
 
 ## 8. Mức B — tài liệu lí thuyết đã có, bảng ánh xạ đã xong (19/09/2026)

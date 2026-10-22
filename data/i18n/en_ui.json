@@ -684,5 +684,17 @@
  "không rõ lí do": "reason unknown",
  "Cô/thầy đang dùng tài khoản giáo viên: Classroom chỉ giao bài riêng cho tài khoản học sinh có trong lớp.": "You are using a teacher account: Classroom only assigns individual work to student accounts in the class.",
  "Muốn thử việc đẩy điểm lên lớp, hãy làm bài bằng một tài khoản học sinh.": "To test posting scores to the class, take the exam with a student account.",
- "Kèm bản tiếng Anh": "Include the English version"
+ "Kèm bản tiếng Anh": "Include the English version",
+ "Chương này chưa có bản tiếng Anh nên chỉ có bản Việt.": "This chapter has no English version yet, so only the Vietnamese file is available.",
+ "Câu hỏi của bạn là về câu nào? Bấm vào câu đó, thầy/cô AI trả lời ngay.": "Which question is yours about? Click it and the AI teacher will answer right away.",
+ "Có kèm bản tiếng Anh: tải về là tệp .zip gồm cả bản Việt và bản Anh.": "English version included: the download is a .zip with both the Vietnamese and English files.",
+ "Giảng lại": "Explain",
+ "Giảng lại giúp mình": "Please explain",
+ "Mức: 📘 Đúng chương trình.": "Level: 📘 Standard curriculum.",
+ "Mức: 🚀 Nâng cao thêm.": "Level: 🚀 Extra challenge.",
+ "Phần trò chuyện chưa được bật, bạn đọc lời giải chuẩn ở trên nhé.": "Chat is not enabled yet, please read the official solution above.",
+ "Thầy/cô đang xem lại câu này...": "The teacher is looking at this question...",
+ "Ví dụ: vì sao bước 2 lại ra như vậy?": "Example: why does step 2 give this result?",
+ "💬 Còn chỗ nào chưa hiểu ở câu này thì hỏi tiếp ngay ở đây.": "💬 Still unsure about this question? Ask a follow-up right here.",
+ "📖 Mình làm xong rồi, xem lời giải": "📖 I am done, show the solutions"
 }

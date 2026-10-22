@@ -37,6 +37,8 @@ class HoiRequest(BaseModel):
     # lưu cả câu hỏi lẫn câu trả lời vào chat_history (loai_phan_hoi "gia_su") để mở lại hội thoại vẫn còn.
     conversation_id: str | None = None
     cau_hien_thi: str | None = None
+    # "Phần I câu 3" - nhãn câu như trên đề, để mở lại hội thoại vẫn vẽ được ô hỏi tiếp đúng câu.
+    nhan_cau: str | None = None
 
 
 @router.get("/luot")
@@ -107,8 +109,10 @@ def _luu_vao_hoi_thoai(user_id: str, payload: "HoiRequest", kq: dict) -> None:
     try:
         history_service.luu_tin_nhan(user_id=user_id, conversation_id=payload.conversation_id, role="user",
                                      noi_dung=payload.cau_hien_thi or payload.cau_hoi)
+        # "hoi": câu nào của đề nào - chat.html vẽ lại ô "hỏi tiếp" ngay dưới câu trả lời (cô Lan 22/10/2026).
+        goi = dict(kq, hoi={"de_id": payload.de_id, "so_thu_tu": payload.so_thu_tu, "nhan": payload.nhan_cau})
         history_service.luu_tin_nhan(user_id=user_id, conversation_id=payload.conversation_id, role="assistant",
-                                     noi_dung=json.dumps(kq, ensure_ascii=False), loai_phan_hoi="gia_su")
+                                     noi_dung=json.dumps(goi, ensure_ascii=False), loai_phan_hoi="gia_su")
     except Exception as e:                    # lưu lịch sử hỏng không được làm hỏng câu trả lời
         print("LOI LUU GIA SU VAO CHAT_HISTORY:", e)
 

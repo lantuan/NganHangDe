@@ -53,7 +53,7 @@ def test_trang_chat():
     assert "if (e.isComposing || e.keyCode === 229) return;" in html          # bộ gõ tiếng Việt
     assert "function layBangHoiDeCu()" in html and "messages.appendChild(bang)" in html
     assert 'id="bang-hoi-de-cu" style="display:none;" class="mt-3"' not in html  # không còn dưới ô nhập
-    assert 'msg.loai_phan_hoi === "gia_su"' in html and "function htmlTraLoiGiaSu(data)" in html
+    assert 'msg.loai_phan_hoi === "gia_su"' in html and "function htmlTraLoiGiaSu(data, hoi, cauHoiDau)" in html
     assert "conversation_id: conversationId," in html and "function ganCidVaoUrl(cid)" in html
     assert html.count("ganCidVaoUrl(conversationId);") >= 4
 
@@ -70,7 +70,8 @@ def test_cau_mo_bang_gia_su_theo_ngon_ngu(monkeypatch):
     monkeypatch.setattr(C, "get_current_user", lambda request: U)
     monkeypatch.setattr(C.profile_service, "lay_vai_tro", lambda uid: "hoc_sinh")
     monkeypatch.setattr(C.history_service, "luu_tin_nhan", lambda **kw: None)
-    monkeypatch.setattr(C.gia_su_service, "la_y_dinh_hoi_bai", lambda m: True)
+    monkeypatch.setattr(C.gia_su_service, "la_cau_hoi_toan", lambda m: True)
+    monkeypatch.setattr(C.history_service, "lay_de_gan_nhat", lambda cid: {"id": "d1"})
     monkeypatch.setattr(C.gia_su_service, "co_de_da_nop_bai", lambda uid, cid: True)
     c = TestClient(app)
     en = c.post("/chat", data={"message": "tại sao Q là câu kết quả", "conversation_id": "h1"},
@@ -78,7 +79,7 @@ def test_cau_mo_bang_gia_su_theo_ngon_ngu(monkeypatch):
     vi = c.post("/chat", data={"message": "tại sao Q là câu kết quả", "conversation_id": "h1"},
                 cookies={"lang": "vi"}).json()
     assert en["data"]["type"] == "mo_bang_gia_su" and not I.CO_DAU.search(en["message"]), en
-    assert vi["message"].startswith("Bạn muốn hỏi bài")
+    assert vi["message"].startswith("Bạn hỏi về câu nào")
 
 
 # ---------------------------------------------------------------- 5
