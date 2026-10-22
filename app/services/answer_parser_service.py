@@ -353,6 +353,18 @@ def loi_giai_cho_web(loi_giai: str | None, lang: str = "vi") -> str | None:
                   "(Figure: see the PDF version)" if lang == "en" else "(Hình vẽ: xem bản PDF)", t, flags=re.S)
 
 
+def de_bai_cho_web(de_bai: str | None) -> str:
+    r"""De bai dua len TRANG LAM BAI (cô Lan 22/10/2026, câu có ảnh bản đồ thật L10_C3_B6_VD036_MC_J_02): hinh TikZ
+    nam NGAY TRONG de bai (khong boc \immini, vd \begin{center}<hinh>\end{center} giua phan dan va cau hoi) da duoc
+    dich ra anh rieng (truong "hinh") - bo ma TikZ khoi chu de khong in ra nguyen van, bo luon khoi center rong con
+    lai. PDF va Word van dung de bai nguyen ban."""
+    if not de_bai:
+        return de_bai or ""
+    t = re.sub(r"\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}", "", de_bai, flags=re.S)
+    t = re.sub(r"\\begin\{center\}\s*\\end\{center\}", "", t)
+    return re.sub(r"\n{3,}", "\n\n", t).strip()
+
+
 def chuan_hoa_dap_an_ngan(text: str | None) -> str:
     """
     Chuan hoa 1 chuoi dap an ngan (SA) de so sanh linh hoat giua dap an

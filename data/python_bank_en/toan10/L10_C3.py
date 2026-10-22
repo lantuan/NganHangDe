@@ -12773,124 +12773,13 @@ _LTR_DAN = (r"Le Thi Rieng Cultural Park (Ho Chi Minh City) lies on part of the 
             r"$731$ sets of remains had been found, and it is estimated that more than $900$ martyrs still lie here. %s In such a small plot of land, so many "
             r"outstanding sons and daughters of the nation fell; they lay here for nearly sixty years until $14/10/2026$ (day/month/year), when the city held a "
             r"visiting ceremony, a memorial service and a burial. That is the price of peace, so that each of us may be more grateful for the sacrifice of our forefathers. ")
-_LTR_SO_SANH_CV = r"The three zones suspected of containing mass-grave trenches that have been delimited have a total area of only about $2\,500\ \text{m}^{2}$."
 _LTR_SO_SANH_KV = r"The whole park covers about $7.5$ hectares, and the zones suspected of containing mass-grave trenches are only a very small part of it."
-
-# (tên khu vực, diện tích thật m^2, bước làm tròn số đo cạnh m)
-_LTR_KHU_VUC = [("Zone $1$", 800, 1), ("Zone $2$", 1200, 1), ("Zone $3$", 500, 1),
-                ("the expanded search zone", 5800, 5)]
-
-
-def _ltr_bo(S0, buoc, ha):
-    """(BC, CD, BD, AB, AD, S_BCD, S_ABD): số đo GIẢ ĐỊNH (bội của `buoc` m), tứ giác ABCD lồi, diện tích sát S0 (lệch <= 3%)."""
-    L = math.sqrt(S0)
-    q = lambda x: int(round(x / buoc)) * buoc
-    while True:
-        BC, CD, AB, AD = (q(L * random.uniform(0.7, 1.3)) for _ in range(4))
-        BD = q(L * random.uniform(1.0, 1.7))
-        if min(BC, CD, AB, AD, BD) <= 0:
-            continue
-        if not (BC + CD > BD + buoc and AB + AD > BD + buoc and abs(BC - CD) < BD - buoc and abs(AB - AD) < BD - buoc):
-            continue
-        goc = [_goc_tam_giac(x, y, z) for (u, v, w) in ((BC, CD, BD), (AB, AD, BD)) for x, y, z in ((u, v, w), (v, w, u), (w, u, v))]
-        if min(goc) < 15:
-            continue
-        gB = _goc_tam_giac(CD, BC, BD) + _goc_tam_giac(AD, AB, BD)
-        gD = _goc_tam_giac(BC, CD, BD) + _goc_tam_giac(AB, AD, BD)
-        if gB >= 170 or gD >= 170:
-            continue
-        S1, S2 = _heron_f(BC, CD, BD), _heron_f(AB, AD, BD)
-        if abs(S1 + S2 - S0) > 0.03 * S0:
-            continue
-        if not (_xa_bien(S1) and _xa_bien(S2) and (_xa_bien((S1 + S2) / 1e4, 1) if ha else _xa_bien(S1 + S2))):
-            continue
-        return BC, CD, BD, AB, AD, S1, S2
-
 
 def _giai_heron_m(ten, a, b, c, S):
     p = (a + b + c) / 2
     return (r"Triangle $%s$ has semiperimeter $p = \dfrac{%d + %d + %d}{2} = %s$ (m), so "
             r"$S_{%s} = \sqrt{%s\cdot %s\cdot %s\cdot %s} \approx %d\,\left(\text{m}^{2}\right)$."
             % (ten, a, b, c, _xx(p, 1), ten, _xx(p, 1), _xx(p - a, 1), _xx(p - b, 1), _xx(p - c, 1), _lt(S)))
-
-
-def _ltr_cau(cv):
-    """Một bộ dữ liệu: cv = True -> công viên (đáp số ha); False -> một khu vực ngẫu nhiên (đáp số m^2)."""
-    if cv:
-        ten, S0, buoc = "Le Thi Rieng Park", 75000, 10
-        mo = (_LTR_DAN % _LTR_SO_SANH_CV) + r"The area of the whole park is estimated by approximating the park"
-    else:
-        ten, S0, buoc = random.choice(_LTR_KHU_VUC)
-        mo = (_LTR_DAN % _LTR_SO_SANH_KV) + r"We approximate %s" % ten
-    BC, CD, BD, AB, AD, S1, S2 = _ltr_bo(S0, buoc, cv)
-    S = S1 + S2
-    f = (lambda x: _x1(x / 1e4, 1)) if cv else (lambda x: str(_lt(x)))
-    dv = r"\,\text{ha}" if cv else r"\,\text{m}^{2}"
-    intro = (mo + r" by the convex quadrilateral $ABCD$ (the measurements are hypothetical) with $AB = %d$ m, $BC = %d$ m, $CD = %d$ m, $DA = %d$ m and "
-             r"diagonal $BD = %d$ m (see figure)." % (AB, BC, CD, AD, BD))
-    giai = _giai_heron_m("BCD", BC, CD, BD, S1) + "\\\\\n" + _giai_heron_m("ABD", AB, AD, BD, S2) + "\\\\\n"
-    duoi = ""
-    if cv:
-        duoi += (r"The area is approximately $S_{BCD} + S_{ABD} \approx %d\,\text{m}^{2} \approx %s$ ha (since $1\ \text{ha} = 10\,000\ \text{m}^{2}$)."
-                 % (_lt(S), f(S)))
-    else:
-        duoi += r"Hence the area is about $S_{BCD} + S_{ABD} \approx %d\,\text{m}^{2}$." % _lt(S)
-    giai += duoi
-    donvi = r"in hectares, rounded to the nearest tenth" if cv else r"in $\text{m}^{2}$, rounded to the nearest whole number"
-    return dict(ten=ten, cv=cv, dv=dv, f=f, intro=intro, giai=giai, duoi=duoi, donvi=donvi, S=S, S1=S1, S2=S2, BC=BC, CD=CD, BD=BD,
-                AB=AB, AD=AD, hinh=_hinh_cong_troi(BC, CD, BD, AB, AD, "m"))
-
-
-def _ltr_mc_sa(cv, socau, dang):
-    cau = ""
-    so = 0
-    while so < socau:
-        c = _ltr_cau(cv)
-        dap = c["f"](c["S"])
-        if dang == 2 and len(dap) > 4:
-            continue
-        so += 1
-        if dang == 1:
-            debai = c["intro"] + r" The area of %s (%s) is" % (c["ten"], c["donvi"])
-            sai = [c["f"](c["S1"]), c["f"](c["S2"]), str(_lt(c["S"])) if cv else c["f"](2 * c["S"])]
-            nh = _ba_nhieu(dap, sai, buoc=lambda t: _x1(c["S"] / 1e4 + 0.1 * t, 1) if cv else str(_lt(c["S"]) + 5 * t))
-        else:
-            debai = c["intro"] + r" Find the area of %s (%s)." % (c["ten"], c["donvi"])
-            nh = [_x1(c["S"] / 1e4 + 0.1 * d, 1) if cv else str(_lt(c["S"]) + d) for d in (1, -1, 2)]
-        cau += MC_SA_answer_const(debai, dap, nh, c["giai"], c["hinh"], 0, dang)
-    return cau
-
-
-def L10_C3_B6_VD036_MC_J_02(socau, dang=1):
-    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_mc_sa(True, socau, 1)
-
-
-def L10_C3_B6_VD036_MC_J_03(socau, dang=1):
-    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - khu vực rãnh mộ (ngẫu nhiên) (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_mc_sa(False, socau, 1)
-
-
-def L10_C3_B6_VD036_SA_J_02(socau, dang=2):
-    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_mc_sa(True, socau, 2)
-
-
-def L10_C3_B6_VD036_SA_J_03(socau, dang=2):
-    r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - khu vực rãnh mộ (ngẫu nhiên) (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_mc_sa(False, socau, 2)
 
 
 # =====================================================================================================
@@ -12954,6 +12843,64 @@ def _ltr_hinh_anh(i0):
     return anh_nen(_LTR_ANH, 14, ve)
 
 
+def _ltr_anh_de_bai(i0, do):
+    """Phần dẫn + số đo + ảnh bản đồ thật (dùng chung cho TL_I_02, MC_J_02, SA_J_02)."""
+    canh = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[:6])
+    cheo = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[6:])
+    return ((_LTR_DAN % _LTR_SO_SANH_KV) + "\\\\\n"
+            + r"The map below shows the three zones $1$ (A), $2$ (B), $3$ (C) suspected to contain mass graves and the expanded search zone, the convex hexagon $MNPQRS$ (white outline). Estimated from the map (the measurements are assumed, rounded to the nearest meter): %s and the diagonals %s." % (canh, cheo)
+            + "\n\\begin{center}\n" + _ltr_hinh_anh(i0) + "\n\\end{center}\n")
+
+
+def _ltr_anh_giai_tong(i0, tg):
+    """Lời giải diện tích cả lục giác: bốn tam giác, Heron bốn lần, cộng các số đã làm tròn."""
+    dinh = _LTR_LUC_GIAC[i0][0]
+    ten_lg = "MNPQRS"
+    return (r"The three diagonals from vertex $%s$ divide the convex hexagon $%s$ into four non-overlapping triangles %s, so the area of the hexagon is the sum of the areas of the four triangles.\\ " % (dinh, ten_lg, ", ".join("$%s$" % t[0] for t in tg))
+            + r"\\ ".join(_giai_heron_m(t[0], t[1], t[2], t[3], t[4]) for t in tg)
+            + r"\\ So $S_{%s} \approx %s = %d\,\left(\text{m}^{2}\right)$, close to the figure of about $5\,800\ \text{m}^{2}$ given on the map for the expanded search zone." % (ten_lg, " + ".join(str(_lt(t[4])) for t in tg),
+                                                          sum(_lt(t[4]) for t in tg)))
+
+
+def _ltr_anh_mc_sa(socau, dang):
+    """Trắc nghiệm (dang 1) / trả lời ngắn (dang 2): diện tích khu vực tìm kiếm mở rộng trên ảnh bản đồ thật (VDC, Heron
+    bốn lần). Nhiễu MC: quên một tam giác (lớn nhất / nhỏ nhất), cộng trùng một tam giác."""
+    cau = ""
+    for _ in range(socau):
+        i0, do, tg, tong = _ltr_luc_giac_so_do()
+        dap_so = _lt(tong)
+        dap = str(dap_so)
+        r_tg = [_lt(t[4]) for t in tg]
+        if dang == 1:
+            debai = _ltr_anh_de_bai(i0, do) + (r"The area of the expanded search zone $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number) is" % "MNPQRS")
+            nh = _ba_nhieu(dap, [str(dap_so - max(r_tg)), str(dap_so - min(r_tg)), str(dap_so + min(r_tg))],
+                           buoc=lambda k: str(dap_so + 37 * k))
+        else:
+            debai = _ltr_anh_de_bai(i0, do) + (r"Find the area of the expanded search zone $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number)." % "MNPQRS")
+            nh = [str(dap_so + d) for d in (1, -1, 2)]
+        cau += MC_SA_answer_const(debai, dap, nh, _ltr_anh_giai_tong(i0, tg), 0, 0, dang)
+    return cau
+
+
+def L10_C3_B6_VD036_MC_J_02(socau, dang=1):
+    r"""Diện tích vùng đất, Heron: Công viên Lê Thị Riêng trên ẢNH CHỤP bản đồ thật - lục giác khu vực tìm kiếm mở rộng
+    chia bốn tam giác (biến thể cùng dạng với Cổng Trời, Pác Bó).
+
+    CLAUDE THEM 22/10/2026 - co Lan: "MC_J van khong ra duoc map cua Le Thi Rieng" - thay hai bien the ve TikZ _02
+    (cong vien), _03 (khu vuc ranh mo) bang cau tren anh that nhu TL_I_02.
+    """
+    return _ltr_anh_mc_sa(socau, 1)
+
+
+def L10_C3_B6_VD036_SA_J_02(socau, dang=2):
+    r"""Diện tích vùng đất, Heron: Công viên Lê Thị Riêng trên ẢNH CHỤP bản đồ thật - lục giác khu vực tìm kiếm mở rộng
+    chia bốn tam giác (biến thể cùng dạng với Cổng Trời, Pác Bó).
+
+    CLAUDE THEM 22/10/2026 - theo co Lan (nhu MC_J_02): thay hai bien the ve TikZ _02, _03 bang cau tren anh that.
+    """
+    return _ltr_anh_mc_sa(socau, 2)
+
+
 def L10_C3_B6_VD036_TL_I_02(socau, dong=1):
     r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích vùng đất - Công viên Lê Thị Riêng trên ẢNH CHỤP bản đồ
     thật (biến thể cùng dạng với Cổng Trời, Pác Bó): khu vực tìm kiếm mở rộng là lục giác lồi $MNPQRS$.
@@ -12967,23 +12914,14 @@ def L10_C3_B6_VD036_TL_I_02(socau, dong=1):
     cau = ""
     for _ in range(socau):
         i0, do, tg, tong = _ltr_luc_giac_so_do()
-        dinh = _LTR_LUC_GIAC[i0][0]
-        canh = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[:6])
-        cheo = ", ".join("$%s = %d$ m" % (t, v) for t, v in list(do.items())[6:])
-        debai = ((_LTR_DAN % _LTR_SO_SANH_KV) + "\\\\\n"
-                 + r"The map below shows the three zones $1$ (A), $2$ (B), $3$ (C) suspected to contain mass graves and the expanded search zone, the convex hexagon $MNPQRS$ (white outline). Estimated from the map (the measurements are assumed, rounded to the nearest meter): %s and the diagonals %s." % (canh, cheo)
-                 + "\n\\begin{center}\n" + _ltr_hinh_anh(i0) + "\n\\end{center}\n")
+        debai = _ltr_anh_de_bai(i0, do)
         a = random.choice(tg)
-        ten_lg = "MNPQRS"
         ds = [(r"Find the area of triangle $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number)." % a[0],
                r"S_{%s} \approx %d\,\text{m}^{2}" % (a[0], _lt(a[4])),
                _giai_heron_m(a[0], a[1], a[2], a[3], a[4])),
-              (r"Find the area of the expanded search zone $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number)." % ten_lg,
+              (r"Find the area of the expanded search zone $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number)." % "MNPQRS",
                r"S \approx %d\,\text{m}^{2}" % _lt(tong),
-               r"The three diagonals from vertex $%s$ divide the convex hexagon $%s$ into four non-overlapping triangles %s, so the area of the hexagon is the sum of the areas of the four triangles.\\ " % (dinh, ten_lg, ", ".join("$%s$" % t[0] for t in tg))
-               + r"\\ ".join(_giai_heron_m(t[0], t[1], t[2], t[3], t[4]) for t in tg)
-               + r"\\ So $S_{%s} \approx %s = %d\,\left(\text{m}^{2}\right)$, close to the figure of about $5\,800\ \text{m}^{2}$ given on the map for the expanded search zone." % (ten_lg, " + ".join(str(_lt(t[4])) for t in tg),
-                                                             sum(_lt(t[4]) for t in tg)))]
+               _ltr_anh_giai_tong(i0, tg))]
         cau += TL_answer_text(debai, ds, 0, 0, dong)
     return cau
 

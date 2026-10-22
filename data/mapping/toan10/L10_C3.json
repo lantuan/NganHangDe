@@ -1339,7 +1339,7 @@
     "Loai": "Trắc nghiệm nhiều lựa chọn",
     "Dang": "Ước lượng diện tích vùng đất thực tế (xã Dân Hóa - Cổng Trời; công viên Lê Thị Riêng hoặc khu vực rãnh mộ, tự luận trên ảnh chụp bản đồ thật; Pác Bó) bằng cách chia thành các tam giác biết ba cạnh (Heron)",
     "muc_do_dang": "VDC",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai; 13/10/2026 them bien the _02 (cong vien Le Thi Rieng, dap so ha) va _03 (khu vuc ranh mo ngau nhien, dap so m2) - cung dang, so do canh gia dinh sat dien tich that; 01/10/2026 danh dau VDC (Heron hai lan = y b VDC cua TL_I); 13/10/2026 them bien the _04 (Pac Bo, bon trong nam dia danh, dap so ha; chi tinh chieu dai, khong tinh goc - 5 ID rieng MC_W/MC_X/SA_Y/SA_Z/TL_O da go)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai; 13/10/2026 them bien the _02 (cong vien Le Thi Rieng, dap so ha) va _03 (khu vuc ranh mo ngau nhien, dap so m2) - cung dang, so do canh gia dinh sat dien tich that; 01/10/2026 danh dau VDC (Heron hai lan = y b VDC cua TL_I); 13/10/2026 them bien the _04 (Pac Bo, bon trong nam dia danh, dap so ha; chi tinh chieu dai, khong tinh goc - 5 ID rieng MC_W/MC_X/SA_Y/SA_Z/TL_O da go); 22/10/2026 co Lan (\"MC_J van khong ra duoc map cua Le Thi Rieng\"): bien the Le Thi Rieng = cau tren ANH CHUP ban do that (_02: dien tich luc giac khu vuc tim kiem mo rong, Heron bon lan) nhu TL_I_02; bo _02 cong vien va _03 khu vuc ve TikZ; con _01 Cong Troi, _02 anh that, _04 Pac Bo",
     "boi_canh": "cong_troi"
   },
   {
@@ -1348,7 +1348,7 @@
     "Loai": "Trả lời ngắn",
     "Dang": "Ước lượng diện tích vùng đất thực tế (xã Dân Hóa - Cổng Trời; công viên Lê Thị Riêng hoặc khu vực rãnh mộ, tự luận trên ảnh chụp bản đồ thật; Pác Bó) bằng cách chia thành các tam giác biết ba cạnh (Heron)",
     "muc_do_dang": "VDC",
-    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai; 13/10/2026 them bien the _02 (cong vien Le Thi Rieng, dap so ha) va _03 (khu vuc ranh mo ngau nhien, dap so m2) - cung dang, so do canh gia dinh sat dien tich that; 01/10/2026 danh dau VDC (Heron hai lan = y b VDC cua TL_I); 13/10/2026 them bien the _04 (Pac Bo, bon trong nam dia danh, dap so ha; chi tinh chieu dai, khong tinh goc - 5 ID rieng MC_W/MC_X/SA_Y/SA_Z/TL_O da go)",
+    "ghi_chu": "CLAUDE THEM 01/10/2026 - theo de giua ki I 2025-2026 co Lan gui (Phan II cau 2 - Cong Troi, xa Dan Hoa); cung mo ta o MC/SA/TL; co Lan duyet lai; 13/10/2026 them bien the _02 (cong vien Le Thi Rieng, dap so ha) va _03 (khu vuc ranh mo ngau nhien, dap so m2) - cung dang, so do canh gia dinh sat dien tich that; 01/10/2026 danh dau VDC (Heron hai lan = y b VDC cua TL_I); 13/10/2026 them bien the _04 (Pac Bo, bon trong nam dia danh, dap so ha; chi tinh chieu dai, khong tinh goc - 5 ID rieng MC_W/MC_X/SA_Y/SA_Z/TL_O da go); 22/10/2026 co Lan (\"MC_J van khong ra duoc map cua Le Thi Rieng\"): bien the Le Thi Rieng = cau tren ANH CHUP ban do that (_02: dien tich luc giac khu vuc tim kiem mo rong, Heron bon lan) nhu TL_I_02; bo _02 cong vien va _03 khu vuc ve TikZ; con _01 Cong Troi, _02 anh that, _04 Pac Bo",
     "boi_canh": "cong_troi"
   },
   {

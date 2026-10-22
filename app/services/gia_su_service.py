@@ -155,7 +155,8 @@ def lay_ngu_canh_cau(de_id: str, so_thu_tu: int, user_id: str | None = None, lan
                     f"Question {so_thu_tu} has no model solution in the bank yet, so it cannot be "
                     "reviewed here. Please ask your teacher directly."))
             return {
-                "de_bai": _lam_sach_latex(_mo_ta_de_bai(cau)),
+                # Hinh TikZ trong de bai (vd anh ban do that) -> "(Hình vẽ: xem bản PDF)", khong dua ma TikZ cho AI.
+                "de_bai": _lam_sach_latex(loi_giai_cho_web(_mo_ta_de_bai(cau), lang)),
                 "dap_an": _lam_sach_latex(_mo_ta_dap_an(cau, lang)),
                 "loi_giai": _lam_sach_latex(loi_giai_cho_web(loi_giai, lang)),
                 "question_id": cau.get("generator_id") or cau.get("question_id"),

@@ -27,6 +27,7 @@ from app.core.deps import yeu_cau_giao_vien
 from app.services import history_service, profile_service, tuy_chon_de_service
 from app.services import diem_service
 from app.services.answer_parser_service import (
+    de_bai_cho_web,
     trich_dap_an,
     AnswerParseError,
     chuan_hoa_dap_an_ngan,
@@ -1291,7 +1292,8 @@ def xem_de_lam_bai_endpoint(request: Request, de_id: str):
             "ma_phan": ma_phan,
             "ten_phan": TEN_PHAN_EN[ma_phan] if ngon_ngu == "en" else TEN_PHAN[ma_phan],
             "so_trong_phan": dem_trong_phan[ma_phan],
-            "de_bai": cau.get("de_bai") or "",
+            # Hinh TikZ nam ngay trong de bai da co anh rieng (truong "hinh") - bo ma TikZ khoi chu.
+            "de_bai": de_bai_cho_web(cau.get("de_bai")),
             "co_hinh_ve": bool(cau.get("co_hinh_ve")),
             # Duong dan anh hinh ve (neu da dich duoc). Con co_hinh_ve giu
             # lai de Frontend biet cau NAY CO hinh nhung chua dich duoc.
