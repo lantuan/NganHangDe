@@ -75,3 +75,6 @@ Claude outputs/
 nhap/
 data/exports_en/
 data/temp_en/
+
+# Tep .patch tam (Claude chep vao goc repo de git am) - khong dua len GitHub
+/*.patch
