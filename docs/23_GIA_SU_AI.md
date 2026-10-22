@@ -356,7 +356,7 @@ và chỉ nạp khi học sinh bấm *"Em vẫn chưa hiểu"*, không nạp ở
 Riêng `L10_C4_B8` (gộp 3 tệp) vượt trần → cắt tiếp theo `\subsubsection`,
 giữ các tiểu mục khớp từ khoá của câu hỏi.
 
-## 8b. Mức B — phần còn lại chưa làm
+## 8b. Mức B — phần còn lại chưa làm (ĐÃ LÀM 22/10/2026, xem 8d)
 
 Mức B là bước tiếp theo: học sinh đọc lời giảng mà **vẫn** chưa hiểu → chỉ đúng chỗ
 trong tài liệu lí thuyết `.tex` của cô để em học lại.
@@ -372,6 +372,39 @@ hình nào (xem `docs/20_TIM_KIEM_VECTO.md`: kết luận là **chưa cần làm
 Việc còn thiếu để làm Mức B: **một tệp `.tex` mẫu của tài liệu lí thuyết** để xem cấu
 trúc hiện tại (đánh mục bằng `\section`? `\subsection`? có nhãn `\label` chưa?). Có tệp
 mẫu rồi mới chốt được cách đánh dấu sao cho cô ít phải sửa tay nhất.
+
+## 8d. Mức B — đã làm (22/10/2026)
+
+Cô Lan gửi ảnh: câu giải phương trình chứa căn, học sinh hỏi tiếp *"tập rỗng là tập gì"* thì bị từ chối "nằm ngoài
+phần thầy/cô đã chuẩn bị" — đúng quy tắc 2 của Mức A (chỉ đề + đáp án + lời giải mẫu), nhưng khái niệm đó CÓ trong
+tài liệu của cô (`0D1-CD2.tex`: "Tập rỗng: là tập hợp không chứa phần tử nào, kí hiệu $\varnothing$").
+
+**`app/services/ly_thuyet_service.py`** — không gọi thêm mô hình, không vectơ (đúng hướng đã chốt ở 8b):
+
+1. Mỗi tệp `.tex` của lớp: cắt đúng mục lí thuyết (`\subsection{TÓM TẮT LÝ THUYẾT}` / `LÝ THUYẾT CẦN NHỚ` /
+   `KIẾN THỨC CẦN NHỚ` đến `\subsection` kế), chia theo `\subsubsection`. Đủ 28/28 tệp lớp 10.
+2. `lam_sach`: bỏ hình TikZ, khung, cỡ chữ, khoảng cách; `\heva` → `cases`, `\hoac` → `\left[\begin{aligned}`,
+   `\R` → `\mathbb{R}`; bỏ `{ }` sót NGOÀI công thức; công thức nhiều dòng nối thành một dòng (cắt đoạn không làm
+   vỡ `$...$`). Test kiểm từng dòng của 28 tệp.
+3. `tim_doan(question_id, cau_hoi, dang_hoi_tiep)`: tách câu hỏi thành từ và cụm hai từ (bỏ từ đệm "là, gì, tại
+   sao..."), gộp cách viết ("véc-tơ"/"vectơ", "định lí"/"định lý"); điểm mỗi dòng = tổng trọng số (từ càng hiếm càng
+   nặng, cụm hai từ ×2, tên mục tính nửa điểm), bài của chính câu đang hỏi ×1,5. Dòng ở BÀI KHÁC chỉ lấy khi trùng
+   CỤM ("tập rỗng", "định lý sin"); trùng một từ lẻ ("thử" → phép thử) thì không. Giữ dòng đạt ≥ nửa điểm cao nhất;
+   tối đa 3 đoạn, khoảng 2 600 kí tự (≈ 700 token). Không trùng gì mà học sinh đang hỏi TIẾP ("em vẫn chưa hiểu") →
+   mục lí thuyết của chính bài đó (tối đa 3 500 kí tự). Câu chung chung lần đầu ("Giảng lại câu...") → không nạp gì
+   (Mức A như cũ, không tốn thêm).
+4. `gia_su_service.dung_lenh(..., ly_thuyet)`: có đoạn tài liệu thì `muc = "B"`, quy tắc 2–3 đổi thành: khái niệm,
+   định nghĩa, kí hiệu, công thức, phương pháp mà lời giải mẫu không giải thích thì giải thích theo ĐÚNG tài liệu
+   (dẫn nguyên văn định nghĩa); chỉ từ chối khi CẢ lời giải mẫu LẪN tài liệu đều không nói tới; không dùng kiến
+   thức ngoài hai nguồn đó; kết bằng "Em xem lại: bài …, mục …". Quy tắc 1 (không tự tính) giữ nguyên. Không có
+   đoạn tài liệu thì câu lệnh Mức A giữ NGUYÊN VĂN (test so từng chữ). Bản tiếng Anh: tài liệu vẫn tiếng Việt, lệnh
+   bảo dịch trung thành.
+5. Lớp khoá 2 của Mức B: API trả `ly_thuyet` (bài, mục, đoạn trích); `chat.html` và `lam_bai.html` hiện khung thu
+   gọn "📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại" ngay dưới câu trả lời — học sinh biết chỗ cần học
+   lại, và thấy ngay nếu AI nói lệch tài liệu. Chưa cấu hình n8n (chế độ không AI) vẫn hiện đoạn tài liệu.
+
+Giới hạn hiện tại: chỉ lớp 10 (lớp 11, 12 chưa có ánh xạ tệp lí thuyết); câu hỏi gõ bằng tiếng Anh không khớp từ
+khoá tiếng Việt nên chỉ được nạp mục lí thuyết của chính bài khi hỏi tiếp. Test `tests/test_gia_su_muc_b.py`.
 
 ## 8c. Nút "Kiểm tra kết nối n8n" (24/09/2026)
 

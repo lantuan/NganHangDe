@@ -493,10 +493,8 @@ QUY TẮC BẮT BUỘC - vi phạm bất kì điều nào là hỏng nhiệm v�
 1. KHÔNG TỰ TÍNH TOÁN. Đáp án đúng và lời giải mẫu đã được cho sẵn bên dưới.
    Việc của bạn là DIỄN ĐẠT LẠI lời giải đó cho dễ hiểu, không phải giải lại.
 2. KHÔNG ĐƯỢC đưa ra con số, kết quả trung gian hay kết luận nào KHÁC với
-   lời giải mẫu. Nếu lời giải mẫu không nói tới điều học sinh hỏi, hãy trả lời
-   đúng câu này: "{cau_tu_choi}"
-3. CHỈ nói về đúng câu hỏi này. Không nhắc câu khác, không mở rộng sang kiến
-   thức ngoài đề, không gợi ý tài liệu bên ngoài.
+   lời giải mẫu. {qt2}
+3. {qt3}
 4. Xưng "thầy/cô", gọi học sinh là "em". Tiếng Việt, ngắn gọn, thân thiện.
 5. Trình bày công thức bằng LaTeX trong dấu $...$ như lời giải mẫu.
 6. Nếu học sinh hỏi chuyện ngoài Toán hoặc ngoài câu này, trả lời đúng câu ở
@@ -508,9 +506,9 @@ QUY TẮC BẮT BUỘC - vi phạm bất kì điều nào là hỏng nhiệm v�
 ĐÁP ÁN ĐÚNG (do chương trình Python sinh đề tính sẵn - đây là đáp án duy nhất đúng):
 {dap_an}
 
-LỜI GIẢI MẪU (nguồn duy nhất bạn được dùng):
+LỜI GIẢI MẪU ({nguon_loi_giai}):
 {loi_giai}
-"""
+{ly_thuyet}"""
 
 LENH_HE_THONG_EN = """You are a math teaching assistant for a high school class, reviewing ONE specific
 question with a student who has just finished the exam.
@@ -518,10 +516,8 @@ question with a student who has just finished the exam.
 MANDATORY RULES - breaking any one of them means failing the task:
 1. DO NOT DO ANY CALCULATION YOURSELF. The correct answer and the model solution are given below.
    Your job is to RE-EXPLAIN that solution so it is easy to understand, not to solve the problem again.
-2. NEVER give any number, intermediate result or conclusion that DIFFERS from the model solution. If the
-   model solution does not cover what the student asks, reply with exactly this sentence: "{cau_tu_choi}"
-3. Talk ONLY about this question. Do not mention other questions, do not go beyond the exam material, and
-   do not point to outside resources.
+2. NEVER give any number, intermediate result or conclusion that DIFFERS from the model solution. {qt2}
+3. {qt3}
 4. Refer to yourself as "your teacher" and address the student as "you". Reply in ENGLISH (US math
    terminology), short and friendly.
 5. Write formulas in LaTeX inside $...$ as in the model solution.
@@ -534,9 +530,45 @@ QUESTION (verbatim):
 CORRECT ANSWER (computed by the Python generator - this is the only correct answer):
 {dap_an}
 
-MODEL SOLUTION (the only source you may use):
+MODEL SOLUTION ({nguon_loi_giai}):
 {loi_giai}
-"""
+{ly_thuyet}"""
+
+# Quy tac 2, 3 va nguon duoc dung: MUC A (chi loi giai mau) giu NGUYEN VAN nhu truoc; MUC B (co doan tai lieu li
+# thuyet cua co, ly_thuyet_service) noi them dung mot nguon: giai thich khai niem / dinh nghia / ki hieu / cong thuc
+# theo DUNG tai lieu do (co Lan 22/10/2026: hoi "tap rong la tap gi" bi tu choi). Van cam tu tinh, cam so khac loi
+# giai mau, cam kien thuc ngoai tai lieu.
+_QUY_TAC = {
+    ("vi", "A"): dict(
+        qt2='Nếu lời giải mẫu không nói tới điều học sinh hỏi, hãy trả lời\n   đúng câu này: "{cau_tu_choi}"',
+        qt3="CHỈ nói về đúng câu hỏi này. Không nhắc câu khác, không mở rộng sang kiến\n"
+            "   thức ngoài đề, không gợi ý tài liệu bên ngoài.",
+        nguon_loi_giai="nguồn duy nhất bạn được dùng"),
+    ("vi", "B"): dict(
+        qt2="Học sinh hỏi khái niệm, định nghĩa, kí hiệu, công thức hay phương pháp mà lời giải\n"
+            "   mẫu không giải thích thì giải thích theo ĐÚNG TÀI LIỆU LÍ THUYẾT CỦA THẦY/CÔ ở cuối (dẫn lại\n"
+            "   nguyên văn định nghĩa trong tài liệu), rồi nối về câu đang hỏi nếu được. Chỉ khi CẢ lời giải mẫu\n"
+            '   LẪN tài liệu lí thuyết đều không nói tới điều học sinh hỏi, mới trả lời đúng câu này: "{cau_tu_choi}"',
+        qt3="CHỈ nói về câu hỏi này và các khái niệm nó dùng tới. Không nhắc câu khác, không dùng kiến\n"
+            "   thức ngoài lời giải mẫu và tài liệu lí thuyết, không gợi ý tài liệu bên ngoài. Có dùng tài liệu\n"
+            '   lí thuyết thì kết thúc bằng một dòng: "Em xem lại: bài <tên bài>, mục <tên mục>."',
+        nguon_loi_giai="nguồn chính"),
+    ("en", "A"): dict(
+        qt2='If the\n   model solution does not cover what the student asks, reply with exactly this sentence: "{cau_tu_choi}"',
+        qt3="Talk ONLY about this question. Do not mention other questions, do not go beyond the exam material, and\n"
+            "   do not point to outside resources.",
+        nguon_loi_giai="the only source you may use"),
+    ("en", "B"): dict(
+        qt2="If the student asks about a concept, definition, symbol, formula or method that the model solution\n"
+            "   does not explain, explain it EXACTLY as in YOUR TEACHER'S THEORY NOTES at the end (they are in\n"
+            "   Vietnamese: translate faithfully into English, quoting the definition), then link it back to this\n"
+            "   question if possible. Only when NEITHER the model solution NOR the theory notes cover what the student\n"
+            '   asks, reply with exactly this sentence: "{cau_tu_choi}"',
+        qt3="Talk ONLY about this question and the concepts it uses. Do not mention other questions, do not use\n"
+            "   knowledge beyond the model solution and the theory notes, and do not point to outside resources. If you\n"
+            '   used the theory notes, end with one line: "Review: lesson <lesson name>, section <section name>."',
+        nguon_loi_giai="main source"),
+}
 
 LENH_KHI_MAT_DE_BAI_EN = (
     "(The original question text is no longer stored. NEVER guess the question; only re-explain "
@@ -549,19 +581,32 @@ LENH_KHI_MAT_DE_BAI = (
 )
 
 
-def dung_lenh(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = None, lang: str = "vi") -> dict:
+def dung_lenh(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = None, lang: str = "vi",
+              ly_thuyet: list[dict] | None = None) -> dict:
     """Dung payload gui sang n8n. Tach rieng ra 1 ham de test duoc ma
     khong can mang, va de doc lai duoc chinh xac cai gi da gui di."""
     en = lang == "en"
+    muc = "B" if ly_thuyet else "A"
+    cau_tu_choi = CAU_TU_CHOI_EN if en else CAU_TU_CHOI
+    quy_tac = {k: v.format(cau_tu_choi=cau_tu_choi) if k == "qt2" else v
+               for k, v in _QUY_TAC[("en" if en else "vi", muc)].items()}
+    khoi_ly_thuyet = ""
+    if ly_thuyet:
+        from app.services.ly_thuyet_service import thanh_van_ban_lenh
+        khoi_ly_thuyet = ("\nYOUR TEACHER'S THEORY NOTES (only the relevant excerpts; you may also use these):\n"
+                          if en else
+                          "\nTÀI LIỆU LÍ THUYẾT CỦA THẦY/CÔ (chỉ trích đoạn liên quan; được dùng thêm nguồn này):\n"
+                          ) + thanh_van_ban_lenh(ly_thuyet) + "\n"
     de_bai = ngu_canh.get("de_bai") or (LENH_KHI_MAT_DE_BAI_EN if en else LENH_KHI_MAT_DE_BAI)
     he_thong = (LENH_HE_THONG_EN if en else LENH_HE_THONG).format(
-        cau_tu_choi=CAU_TU_CHOI_EN if en else CAU_TU_CHOI,
         de_bai=de_bai,
         dap_an=ngu_canh.get("dap_an") or ("(none)" if en else "(không có)"),
         loi_giai=ngu_canh.get("loi_giai") or "",
+        ly_thuyet=khoi_ly_thuyet,
+        **quy_tac,
     )
     return {
-        "muc": "A",
+        "muc": muc,
         "lenh_he_thong": he_thong,
         "cau_hoi": cau_hoi,
         "lich_su": lich_su or [],
@@ -704,6 +749,16 @@ def _goi_mo_hinh(payload: dict) -> str:
 # 6. HAM CHINH
 # ======================================================
 
+def tim_ly_thuyet(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = None) -> list[dict]:
+    """Muc B (docs/23 muc 8d): doan tai lieu li thuyet cua co cho cau hoi nay. Loi gi cung tra [] (Muc A van chay)."""
+    try:
+        from app.services.ly_thuyet_service import tim_doan
+        return tim_doan(ngu_canh.get("question_id"), cau_hoi, dang_hoi_tiep=bool(lich_su))
+    except Exception as e:                                           # noqa: BLE001
+        print("LOI TIM LY THUYET cho gia su:", e)
+        return []
+
+
 def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
         lich_su: list[dict] | None = None, lang: str = "vi") -> dict:
     """
@@ -749,6 +804,9 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
             f"You have used all {luot['gioi_han']} questions for today. "
             "Read the model solution below; you get new ones tomorrow."))
 
+    # --- MUC B: doan tai lieu li thuyet cua co lien quan toi cau hoi (khong goi them mo hinh nao) ---
+    ly_thuyet = tim_ly_thuyet(ngu_canh, cau_hoi, lich_su)
+
     # --- Che do khong AI: chua cau hinh webhook -> van tra loi giai chuan ---
     if not N8N_WEBHOOK_GIA_SU:
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "chua_cau_hinh")
@@ -760,9 +818,10 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
             "loi_giai_python": ngu_canh["loi_giai"],
             "luot": luot,
             "trang_thai": "chua_cau_hinh",
+            "ly_thuyet": ly_thuyet,
         }
 
-    payload = dung_lenh(ngu_canh, cau_hoi, lich_su, lang)
+    payload = dung_lenh(ngu_canh, cau_hoi, lich_su, lang, ly_thuyet)
     try:
         tra_loi = _goi_mo_hinh(payload)
     except httpx.HTTPError as e:
@@ -790,6 +849,9 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
         "loi_giai_python": ngu_canh["loi_giai"],
         "luot": lay_luot(user_id),
         "trang_thai": trang_thai,
+        # Lop khoa 2 cua Muc B: doan tai lieu da dua cho AI hien ngay ben duoi (ten bai, ten muc) - hoc sinh biet
+        # cho can hoc lai, va thay ngay neu AI noi lech tai lieu.
+        "ly_thuyet": ly_thuyet,
     }
 
 

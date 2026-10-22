@@ -241,6 +241,11 @@
 
         /* Lop khoa 2: dap an + loi giai do Python sinh, LUON hien canh cau
            tra loi cua AI. Neu AI noi lech, hoc sinh thay ngay. */
+        /* Muc B gia su: doan tai lieu li thuyet cua thay/co da dua cho AI (cho can hoc lai) */
+        details.ly-thuyet { margin-top: 10px; padding: 8px 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; }
+        details.ly-thuyet summary { cursor: pointer; font-weight: 600; color: #1d4ed8; font-size: 14px; }
+        .ly-thuyet-doan { margin-top: 8px; padding: 8px 10px; background: #fff; border-radius: 10px; line-height: 1.6; overflow-x: auto; }
+        .ly-thuyet-nguon { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 4px; }
         .dap-an-chuan {
             margin-top: 10px; padding: 12px 14px;
             background: #f0fdf4; border: 1px solid #bbf7d0;
@@ -704,6 +709,33 @@ function veLoiGiaiChuan(soThuTu, duLieu) {
     GIA_SU_DA_VE_LOI_GIAI[soThuTu] = true;
 }
 
+// ===== GIA SU MUC B (co Lan 22/10/2026): doan tai lieu li thuyet cua thay/co ma AI duoc dung them =====
+// Hien ngay duoi cau tra loi (thu gon, bam de mo): hoc sinh biet bai nao, muc nao can hoc lai, va thay ngay neu AI
+// noi lech tai lieu. Noi dung la chu + cong thuc $...$ (da lam sach o ly_thuyet_service) - thoat HTML roi de MathJax ve.
+function thoatHtmlLyThuyet(s) {
+    return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function htmlLyThuyet(ds) {
+    if (!ds || !ds.length) return "";
+    let html = '<details class="ly-thuyet"><summary>📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại</summary>';
+    ds.forEach(function (d) {
+        html += '<div class="ly-thuyet-doan"><div class="ly-thuyet-nguon">' + thoatHtmlLyThuyet(d.ten_bai) +
+            ' · ' + thoatHtmlLyThuyet(d.muc) + '</div><div>' +
+            thoatHtmlLyThuyet(d.noi_dung).replace(/\n/g, "<br>") + '</div></div>';
+    });
+    return html + '</details>';
+}
+
+function veLyThuyet(soThuTu, ds) {
+    const hoiThoai = document.getElementById('gia-su-hoi-thoai-' + soThuTu);
+    const html = htmlLyThuyet(ds);
+    if (!hoiThoai || !html) return;
+    const khoi = document.createElement('div');
+    khoi.innerHTML = html;
+    hoiThoai.appendChild(khoi);
+    if (window.MathJax) { MathJax.typesetPromise([khoi]); }
+}
+
 async function guiCauHoiGiaSu(soThuTu) {
     const o = document.getElementById('gia-su-nhap-' + soThuTu);
     const nut = document.getElementById('gia-su-gui-' + soThuTu);
@@ -746,6 +778,7 @@ async function guiCauHoiGiaSu(soThuTu) {
             }
             // LOP KHOA 2: luon ve loi giai chuan canh cau tra loi cua AI.
             veLoiGiaiChuan(soThuTu, d);
+            veLyThuyet(soThuTu, d.ly_thuyet);
             const nhanLuot = document.getElementById('gia-su-luot-' + soThuTu);
             if (nhanLuot && d.luot) {
                 nhanLuot.textContent = 'Hôm nay em còn ' + d.luot.con_lai + '/' + d.luot.gioi_han + ' lượt hỏi.';
