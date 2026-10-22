@@ -16,6 +16,7 @@ from app.services import history_service, profile_service, tuy_chon_de_service
 from app.services import gia_su_service
 from app.services import supabase_service
 from app.services import classroom_service
+from app.services import yeu_cau_de_service
 
 router = APIRouter()
 
@@ -81,6 +82,19 @@ def dong_tuy_chon_da_ap_dung(thong_tin: dict, da_tick_anh: bool, lang: str = "vi
     else:
         anh = ""
     return muc + anh
+
+
+def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str) -> dict | None:
+    """n8n hỏng (JSON rỗng/hỏng, không kết nối, phản hồi lạ) mà tin nhắn là yêu cầu tạo đề rõ ràng (lớp + kỳ thi, hoặc
+    lớp + chương): máy chủ tự đọc rồi trả khung xác nhận như RequestParser (cô Lan 22/10/2026: "Lớp 10, thi giữa kỳ 1"
+    báo "AI chưa xử lý được"). Không đọc được -> None (nơi gọi báo lỗi như cũ). Xem app/services/yeu_cau_de_service.py."""
+    de_xuat = yeu_cau_de_service.doc_yeu_cau_de(message, lay_ngon_ngu(request))
+    if not de_xuat:
+        return None
+    print("CHAT: n8n hong, may chu tu doc yeu cau tao de ->", de_xuat["lop"], de_xuat["ki_thi"], de_xuat["pham_vi_chuong"])
+    history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
+                                 noi_dung=de_xuat["tra_loi"], loai_phan_hoi="text")
+    return {"success": True, "message": de_xuat["tra_loi"], "data": de_xuat}
 
 
 def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:
@@ -479,6 +493,9 @@ async def chat_post(
             print(f"LOI CHAT: khong ket noi duoc n8n (lan {lan_thu + 1}/2) ->", e)
 
     if r is None:
+        du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+        if du_phong:
+            return du_phong
         loi = "Không kết nối được với AI sau 2 lần thử, vui lòng thử lại."
         history_service.luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
@@ -496,6 +513,14 @@ async def chat_post(
             ket_qua = r.json()
         except ValueError:
             print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
+            ket_qua = None
+        # n8n hỏng (JSON rỗng/hỏng) mà tin nhắn là yêu cầu tạo đề rõ ràng (lớp + kỳ thi, hoặc lớp + chương): máy chủ tự
+        # đọc rồi hiện khung xác nhận như RequestParser (cô Lan 22/10/2026: "Lớp 10, thi giữa kỳ 1" báo "AI chưa xử lý
+        # được"). Xem app/services/yeu_cau_de_service.py.
+        if not isinstance(ket_qua, dict) or not ket_qua:
+            du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+            if du_phong:
+                return du_phong
             ket_qua = {
                 "success": False,
                 "message": "AI chưa xử lý được yêu cầu này. Vui lòng thử lại với yêu cầu tạo đề cụ thể (lớp/chương/số câu...). Nếu bạn đang muốn hỏi bài: hãy làm một đề rồi bấm \"Hỏi thầy/cô AI về câu này\" ở câu chưa hiểu.",
@@ -572,6 +597,9 @@ async def chat_post(
     # Truong hop la khac (n8n loi, tra HTML/text...) - khong de 500 lang le
     print("LOI CHAT: content-type khong xac dinh ->", content_type)
     print(r.text[:1000])
+    du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+    if du_phong:
+        return du_phong
     loi = "Không hiểu phản hồi từ n8n."
     history_service.luu_tin_nhan(
         user_id=user.id, conversation_id=conversation_id,
