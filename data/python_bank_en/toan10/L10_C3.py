@@ -12762,6 +12762,9 @@ def L10_C3_B6_VD036_TL_I_01(socau, dong=1):
 # và công viên (sơ đồ hiện trạng ghi khoảng 75 000 m^2; báo ghi khoảng 8 ha), Tết Mậu Thân 1968, quy tập từ 6/7/2026, 731 bộ hài cốt
 # đến 11/10/2026, ước tính hơn 900 liệt sĩ, lễ viếng - truy điệu - an táng 14/10/2026. SỐ ĐO CÁC CẠNH là GIẢ ĐỊNH (nói rõ trong đề),
 # chọn ngẫu nhiên sao cho diện tích tứ giác sát số thật (lệch tối đa 3%). Đề KHÔNG nêu diện tích của chính đối tượng được hỏi.
+# 22/10/2026 (cô Lan): TỰ LUẬN TL_I không còn hai biến thể vẽ TikZ _02, _03 nữa - TL_I_02 là câu trên ẢNH CHỤP bản đồ thật
+# (lục giác khu vực tìm kiếm mở rộng, Heron bốn lần; xem khối "CÂU ĐẦU TIÊN CÓ ẢNH CHỤP THẬT" bên dưới). MC_J, SA_J _02/_03
+# giữ như trên.
 # =====================================================================================================
 
 _LTR_DAN = (r"Le Thi Rieng Cultural Park (Ho Chi Minh City) lies on part of the former Do Thanh Cemetery. According to "
@@ -12858,23 +12861,6 @@ def _ltr_mc_sa(cv, socau, dang):
     return cau
 
 
-def _ltr_tl(cv, socau, dong):
-    cau = ""
-    for _ in range(socau):
-        c = _ltr_cau(cv)
-        if random.random() < 0.5:
-            tg, ba, Sa, tg2, ba2, Sb = "BCD", (c["BC"], c["CD"], c["BD"]), c["S1"], "ABD", (c["AB"], c["AD"], c["BD"]), c["S2"]
-        else:
-            tg, ba, Sa, tg2, ba2, Sb = "ABD", (c["AB"], c["AD"], c["BD"]), c["S2"], "BCD", (c["BC"], c["CD"], c["BD"]), c["S1"]
-        ds = [(r"Find the area of triangle $%s$ (in $\text{m}^{2}$, rounded to the nearest whole number)." % tg,
-               r"S_{%s} \approx %d\,\text{m}^{2}" % (tg, _lt(Sa)), _giai_heron_m(tg, *ba, Sa)),
-              (r"Find the area of %s (%s)." % (c["ten"], c["donvi"]),
-               r"S \approx %s%s" % (c["f"](c["S"]), c["dv"]),
-               _giai_heron_m(tg2, *ba2, Sb) + "\\\\\n" + c["duoi"])]
-        cau += TL_answer_text(c["intro"], ds, c["hinh"], 0, dong)
-    return cau
-
-
 def L10_C3_B6_VD036_MC_J_02(socau, dang=1):
     r"""Diện tích vùng đất tứ giác, Heron hai lần: Công viên Lê Thị Riêng - công viên (biến thể cùng dạng với Cổng Trời).
 
@@ -12907,23 +12893,8 @@ def L10_C3_B6_VD036_SA_J_03(socau, dang=2):
     return _ltr_mc_sa(False, socau, 2)
 
 
-def L10_C3_B6_VD036_TL_I_02(socau, dong=1):
-    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích công viên - Công viên Lê Thị Riêng (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_tl(True, socau, dong)
-
-
-def L10_C3_B6_VD036_TL_I_03(socau, dong=1):
-    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích khu vực rãnh mộ (ngẫu nhiên) - Công viên Lê Thị Riêng (biến thể cùng dạng với Cổng Trời).
-
-    CLAUDE THEM 13/10/2026 - theo ý cô Lan (số đo cạnh giả định, diện tích sát số thật).
-    """
-    return _ltr_tl(False, socau, dong)
-
-
 # =====================================================================================================
+# 22/10/2026: cô Lan chọn để câu ảnh thật này THAY hình TikZ của Lê Thị Riêng trong TL_I (nay là TL_I_02; ID TL_P bỏ).
 # 21/10/2026 - CÂU ĐẦU TIÊN CÓ ẢNH CHỤP THẬT (cô Lan duyệt cách làm ảnh nền: data/python_bank/hinh_anh.py, ảnh trong
 # data/hinh_anh/). Bản đồ vệ tinh khu vực tìm kiếm rãnh mộ ở công viên Lê Thị Riêng (phần bên trái tấm sơ đồ cô Lan gửi,
 # ltr_ban_do.jpg): khu vực tìm kiếm mở rộng là lục giác lồi MNPQRS (đường viền trắng), bản đồ ghi khoảng 5 800 m^2 - dòng
@@ -12983,13 +12954,16 @@ def _ltr_hinh_anh(i0):
     return anh_nen(_LTR_ANH, 14, ve)
 
 
-def L10_C3_B6_VD036_TL_P_01(socau, dong=1):
-    r"""Tự luận có ẢNH CHỤP bản đồ thật: diện tích khu vực tìm kiếm mở rộng (lục giác lồi $MNPQRS$) ở công viên Lê Thị Riêng.
+def L10_C3_B6_VD036_TL_I_02(socau, dong=1):
+    r"""Tự luận: a) (VD) diện tích một tam giác, b) (VDC) diện tích vùng đất - Công viên Lê Thị Riêng trên ẢNH CHỤP bản đồ
+    thật (biến thể cùng dạng với Cổng Trời, Pác Bó): khu vực tìm kiếm mở rộng là lục giác lồi $MNPQRS$.
     a) (VD) diện tích một tam giác (Heron); b) (VDC) tự chia lục giác thành bốn tam giác bằng ba đường chéo từ một đỉnh,
     Heron bốn lần, cộng lại (so với khoảng $5\,800\ \text{m}^{2}$ ghi trên bản đồ - con số này bị che trên hình).
 
     CLAUDE THEM 21/10/2026 - co Lan: "de cong vien dua ca phan ban do ben trai vao, tim dien tich dua vao dien tich tim
-    kiem mo rong"; co chon dung anh chup that, chia 4 tam giac, tu luan."""
+    kiem mo rong"; co chon dung anh chup that, chia 4 tam giac, tu luan. 22/10/2026 co Lan: anh that THAY hinh TikZ cua
+    cac bien the Le Thi Rieng trong TL_I (truoc la ID rieng TL_P_01; TL_I_02 cong vien va TL_I_03 khu vuc ranh mo ve
+    TikZ da bo). TL_I con _01 Cong Troi, _02 (ham nay), _04 Pac Bo."""
     cau = ""
     for _ in range(socau):
         i0, do, tg, tong = _ltr_luc_giac_so_do()

@@ -144,7 +144,7 @@ rút vào đề.
 
 ### 4d. Câu có ẢNH CHỤP thật (bản đồ, sơ đồ, ảnh vệ tinh) - chốt 21/10/2026
 
-Ví dụ thật: `L10_C3_B6_VD036_TL_P_01` (bản đồ khu vực tìm kiếm rãnh mộ ở công viên Lê Thị Riêng).
+Ví dụ thật: `L10_C3_B6_VD036_TL_I_02` (bản đồ khu vực tìm kiếm rãnh mộ ở công viên Lê Thị Riêng; trước 22/10/2026 là ID riêng `TL_P_01`, cô Lan chọn để ảnh thật thay hình TikZ của biến thể Lê Thị Riêng trong `TL_I`).
 
 1. **Ảnh** đặt trong `data/hinh_anh/`, tên snake_case (docs/17), ví dụ `ltr_ban_do.jpg`; rộng khoảng 1000 điểm ảnh,
    dưới 300 KB (test chặn trên 400 KB, rộng trên 1200). Chỉ dùng ảnh có nguồn rõ ràng. Cô gửi ảnh vào cuộc trò chuyện

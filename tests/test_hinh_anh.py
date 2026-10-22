@@ -3,7 +3,7 @@ r"""Ảnh chụp thật làm nền cho hình TikZ (cô Lan duyệt 21/10/2026): 
 
 Kiểm: đọc kích thước ảnh; hình TikZ có ảnh; mọi nơi dịch LaTeX (PDF đề, hình cho web/Word, chạy nháp) tìm thấy ảnh;
 mã băm hình đổi khi đổi ảnh; tải .tex kèm ảnh; mọi \includegraphics trong ngân hàng trỏ tới ảnh có thật, nhẹ;
-câu đầu tiên dùng ảnh L10_C3_B6_VD036_TL_P (tính lại Heron độc lập từ số đo trong đề, đường chéo vẽ khớp đề).
+câu đầu tiên dùng ảnh L10_C3_B6_VD036_TL_I_02 (trước 22/10/2026 là ID riêng TL_P; tính lại Heron độc lập từ số đo trong đề, đường chéo vẽ khớp đề).
 """
 import importlib.util
 import math
@@ -96,7 +96,7 @@ def test_moi_anh_trong_ngan_hang_co_that_va_nhe():
         assert re.fullmatch(r"[a-z0-9_]+\.(jpg|png)", ten), ten                   # snake_case (docs/17)
 
 
-# ---------------------------------------------------------------- L10_C3_B6_VD036_TL_P_01
+# ---------------------------------------------------------------- L10_C3_B6_VD036_TL_I_02
 _spec = importlib.util.spec_from_file_location("L10_C3_tlp", GOC / "data" / "python_bank" / "toan10" / "L10_C3.py")
 C3 = importlib.util.module_from_spec(_spec)
 sys.modules["L10_C3_tlp"] = C3
@@ -109,11 +109,11 @@ def _heron(a, b, c):
     return math.sqrt(p * (p - a) * (p - b) * (p - c))
 
 
-def test_tl_p_tinh_lai_doc_lap():
+def test_tl_i_02_anh_that_tinh_lai_doc_lap():
     dinh_thay = set()
     for s in range(200):
         random.seed(s)
-        o = C3.L10_C3_B6_VD036_TL_P_01(1)
+        o = C3.L10_C3_B6_VD036_TL_I_02(1)
         de = o.split(r"\loigiai")[0]
         do = {t: int(v) for t, v in re.findall(r"\$([MNPQRS]{2}) = (\d+)\$ m", de)}
         assert len(do) == 9, de

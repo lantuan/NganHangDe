@@ -120,26 +120,21 @@ def test_mc_dung_va_bon_phuong_an_khac_nhau(bt):
         _vi_du(txt, ten)
 
 
-@pytest.mark.parametrize("bt", [2, 3])
-def test_tl_hai_y(bt):
-    f = getattr(M, "L10_C3_B6_VD036_TL_I_%02d" % bt)
-    for sd in range(150):
+def test_tl_le_thi_rieng_la_cau_anh_that():
+    """Co Lan 22/10/2026: "khong thay bai cong vien Le Thi Rieng TL_I co anh thuc te, van chi co anh ve TikZ". Bien the
+    Le Thi Rieng cua tu luan TL_I nay la cau tren ANH CHUP ban do that (TL_I_02; truoc la ID rieng TL_P_01), bo hai bien
+    the ve TikZ cu. So do, Heron bon lan kiem doc lap o tests/test_hinh_anh.py."""
+    ten = sorted(n for n in dir(M) if n.startswith("L10_C3_B6_VD036_TL_I_"))
+    assert ten == ["L10_C3_B6_VD036_TL_I_01", "L10_C3_B6_VD036_TL_I_02", "L10_C3_B6_VD036_TL_I_04"]
+    assert not [n for n in dir(M) if n.startswith("L10_C3_B6_VD036_TL_P")]
+    for sd in range(20):
         random.seed(sd)
-        txt = f(1)
-        de = _de(txt)
-        ten = [k for k in THAT if re.search(r"Tính diện tích của " + re.escape(k), de)][0]
-        ab, bc, cd, da, bd = (int(re.search(k + r" = (\d+)\$ m", de).group(1)) for k in ("AB", "BC", "CD", "DA", "BD"))
-        S1, S2 = _heron(bc, cd, bd), _heron(ab, da, bd)
-        ys = re.findall(r"\\SA\[4\]\{\$([^$]*)\$\}", txt)
-        assert len(ys) == 2
-        so = [re.search(r"approx ([\d,]+)", y).group(1) for y in ys]
-        tg = re.search(r"Tính diện tích tam giác \$(\w+)\$", de).group(1)
-        assert int(so[0]) == _lt(S1 if tg == "BCD" else S2)
-        _kiem(ten, S1 + S2, so[1])
-        _vi_du(txt, ten)
-        # loi giai y b) chi tinh tam giac CON LAI roi cong (khong lap lai tam giac y a))
-        b = txt.split("\\loigiai")[1].split("\\item")[2]
-        assert b.count("nửa chu vi") == 1 and ("Tam giác $%s$" % ("ABD" if tg == "BCD" else "BCD")) in b
+        txt = M.L10_C3_B6_VD036_TL_I_02(1)
+        assert "ltr_ban_do.jpg" in txt and "Lê Thị Riêng" in _de(txt)
+        assert len(re.findall(r"\\SA\[4\]", txt)) == 2                   # hai y a) VD, b) VDC
+    for f in (M.L10_C3_B6_VD036_TL_I_01, M.L10_C3_B6_VD036_TL_I_04):
+        random.seed(0)
+        assert "Lê Thị Riêng" not in f(1)
 
 
 def test_hinh_don_vi():

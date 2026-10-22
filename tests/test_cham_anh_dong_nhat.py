@@ -24,7 +24,7 @@ GOC = Path(__file__).resolve().parent.parent
 ID_MC = "L10_C3_B5_NB029_MC_A_01"
 ID_TF = "L10_C3_TF_A_01"
 ID_SA = "L10_C3_B5_NB029_SA_A_01"
-ID_TL = "L10_C3_B6_VD036_TL_P_01"
+ID_TL = "L10_C3_B6_VD036_TL_I_02"
 
 DE = [
     {"so_thu_tu": 1, "loai_cau": "MC", "generator_id": ID_MC, "dap_an_dung": "B"},
