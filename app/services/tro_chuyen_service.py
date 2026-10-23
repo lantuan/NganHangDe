@@ -53,6 +53,7 @@ QUY TẮC BẮT BUỘC:
 1. CHỈ trả lời bằng nội dung trong TÀI LIỆU LÍ THUYẾT CỦA THẦY/CÔ bên dưới. Dẫn lại đúng định nghĩa, công thức,
    tính chất như trong tài liệu (có thể diễn đạt lại cho dễ hiểu, thêm một ví dụ ngắn ĐÃ CÓ trong tài liệu).
 2. KHÔNG dùng kiến thức ngoài tài liệu, KHÔNG tự tính toán ra số mới, KHÔNG giải bài toán cụ thể người dùng đưa ra.
+   Chỉ dùng câu trong tài liệu nói ĐÚNG điều được hỏi; bỏ qua câu liên quan xa (không kéo kiến thức bài khác vào).
 3. Tài liệu không nói tới điều được hỏi thì trả lời đúng ý: "Phần này chưa có trong tài liệu lí thuyết của thầy/cô"
    rồi gợi ý tạo đề luyện tập hoặc hỏi trực tiếp thầy/cô trên lớp.
 4. Ngắn gọn (dưới 120 chữ), thân thiện. {xung_ho} Công thức viết LaTeX trong $...$.
@@ -68,12 +69,15 @@ question.
 
 MANDATORY RULES:
 1. Answer ONLY from YOUR TEACHER'S THEORY NOTES below (they are in Vietnamese: translate faithfully into English, quoting
-   the definition, formula or property as written).
+   the definition, formula or property as written). The WHOLE reply is in ENGLISH, even if the question is in
+   Vietnamese.
 2. Do NOT use knowledge outside the notes, do NOT compute new numbers, do NOT solve a specific problem.
+   Use only the sentences that answer EXACTLY what was asked; skip loosely related ones (no other lessons).
 3. If the notes do not cover the question, say "This is not in your teacher's theory notes yet" and suggest creating a
    practice exam or asking the teacher in class.
 4. Short (under 120 words), friendly. {xung_ho} Write formulas in LaTeX inside $...$.
-5. End with one line: "Review: lesson <lesson name>, section <section name>." (from the notes you used).
+5. End with one line: "Review: lesson <lesson name>, section <section name>." (from the notes you used, names
+   translated into English).
 6. Plain text, NOT JSON.
 
 YOUR TEACHER'S THEORY NOTES:
@@ -137,8 +141,8 @@ def tra_loi_kien_thuc(message: str, lop: int | None, lang: str = "vi", vai_tro: 
     lenh = (LENH_KIEN_THUC_EN if en else LENH_KIEN_THUC).format(xung_ho=_xung_ho(vai_tro, en),
                                                                  ly_thuyet=thanh_van_ban_lenh(doan))
     try:
-        tra_loi = gia_su_service._goi_mo_hinh({"muc": "kien_thuc", "lenh_he_thong": lenh, "cau_hoi": message,
-                                               "lich_su": []})
+        tra_loi = gia_su_service.goi_mo_hinh_theo_ngon_ngu({"muc": "kien_thuc", "lenh_he_thong": lenh,
+                                                            "cau_hoi": message, "lich_su": []}, lang)
     except Exception as e:                                           # noqa: BLE001
         print("LOI TRA LOI KIEN THUC:", e)
         return None
@@ -156,8 +160,8 @@ def tro_chuyen(message: str, lich_su: list[tuple[str, str]] | None = None, lang:
     lenh = (LENH_TRO_CHUYEN_EN if en else LENH_TRO_CHUYEN).format(xung_ho=_xung_ho(vai_tro, en), lich_su=ls,
                                                                    chuong=pham_vi_service.chuong_cho_lenh(lop))
     try:
-        return gia_su_service._goi_mo_hinh({"muc": "tro_chuyen", "lenh_he_thong": lenh, "cau_hoi": message,
-                                            "lich_su": []}) or None
+        return gia_su_service.goi_mo_hinh_theo_ngon_ngu({"muc": "tro_chuyen", "lenh_he_thong": lenh,
+                                                         "cau_hoi": message, "lich_su": []}, lang) or None
     except Exception as e:                                           # noqa: BLE001
         print("LOI TRO CHUYEN:", e)
         return None

@@ -87,11 +87,17 @@ def _tu(van_ban: str) -> list[str]:
     return re.findall(r"\\[a-z]+|[0-9a-zà-ỹđ]+", van_ban)
 
 
+# Thuat ngu co mot am tiet nam trong _TU_DUNG ("đề" vi "đề bài", "cách" vi "cách tính"...): giu nguyen cum, neu khong
+# "mệnh đề là gì" chi con "mệnh" (gap khap tai lieu, diem thap) -> bao nham "chua co trong tai lieu" (co Lan 23/10/2026).
+_CUM_GIU = {"mệnh đề", "khoảng cách", "tính chất", "phần tử", "phần bù", "bằng nhau", "chủ đề", "giải tích"}
+
+
 def _cac_cum(van_ban: str) -> list[str]:
-    """Tu don co nghia + cum hai tu lien nhau (ca hai deu co nghia) cua cau hoi."""
+    """Tu don co nghia + cum hai tu lien nhau (ca hai deu co nghia, hoac la thuat ngu trong _CUM_GIU) cua cau hoi."""
     tu = _tu(van_ban)
     don = [t for t in tu if t not in _TU_DUNG and len(t) > 1]
-    cum = [a + " " + b for a, b in zip(tu, tu[1:]) if a not in _TU_DUNG and b not in _TU_DUNG]
+    cum = [a + " " + b for a, b in zip(tu, tu[1:])
+           if (a not in _TU_DUNG and b not in _TU_DUNG) or (a + " " + b) in _CUM_GIU]
     return list(dict.fromkeys(cum + don))
 
 
@@ -276,6 +282,11 @@ def tim_doan_tu_do(lop: int | None, cau_hoi: str) -> list[dict]:
     return _tim_trong_kho(_kho_dong(lop_ma), [], cau_hoi, tu_do=True)
 
 
+def _thu_tu_bai(ma_bai: str) -> tuple:
+    m = re.match(r"L\d+_C(\d+)_B(\d+)", ma_bai or "")
+    return (int(m.group(1)), int(m.group(2))) if m else (99, 99)
+
+
 def _tim_trong_kho(kho: tuple, bai_cua_cau: list, cau_hoi: str, tu_do: bool = False) -> list[dict]:
     cum = _cac_cum(cau_hoi or "")
     ket_qua: list[dict] = []
@@ -300,12 +311,20 @@ def _tim_trong_kho(kho: tuple, bai_cua_cau: list, cau_hoi: str, tu_do: bool = Fa
                 continue
             if cung_bai:
                 s *= 1.5                                              # uu tien bai cua chinh cau dang hoi
+            if tu_do and any(" " in c for c in trong_so if _trung(c, tieu[k])):
+                s *= 1.5                                              # ten muc chua dung thuat ngu duoc hoi
             if s >= DIEM_TOI_THIEU:
                 diem.append((s, k))
-        diem.sort(key=lambda x: (-x[0], x[1]))
+        diem.sort(key=lambda x: (-x[0], _thu_tu_bai(kho[x[1]][0]), x[1]))
         if diem:
             nguong = diem[0][0] * 0.5
             diem = [x for x in diem if x[0] >= nguong]
+            if tu_do:
+                # Hoi kien thuc tu do: chi lay MOT bai - bai co diem cao nhat (bang diem thi bai hoc truoc, noi khai
+                # niem duoc dinh nghia). Co Lan 23/10/2026: "dang giai thich ve tap rong, tai sao lai loi kien thuc
+                # to hop vao" (bai To hop co cau "to hop chap 0 la tap rong" nen trung diem voi bai Tap hop).
+                bai_dau = kho[diem[0][1]][0]
+                diem = [x for x in diem if kho[x[1]][0] == bai_dau]
         da_lay, tong = [], 0
         for _s, k in diem:
             m = kho[k]

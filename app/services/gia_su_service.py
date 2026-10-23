@@ -746,6 +746,36 @@ def _goi_mo_hinh(payload: dict) -> str:
     return str(du_lieu).strip()
 
 
+# Trang ở English mà học sinh gõ tiếng Việt (tài liệu lí thuyết cũng tiếng Việt): mô hình nhỏ hay trả lời theo ngôn
+# ngữ của câu hỏi, bỏ qua lệnh "Reply in ENGLISH" trong phần hệ thống (cô Lan 23/10/2026: "chuyển sang tiếng Anh thì chat
+# trả lời, giải thích không phải tiếng Anh"). Nên: nhắc thêm ngay trong câu hỏi; trả về vẫn đa phần tiếng Việt thì gọi
+# lại MỘT lần với lời nhắc mạnh hơn (chỉ tốn thêm khi mô hình trả sai ngôn ngữ).
+NHAC_TIENG_ANH = ("\n\n[Reply in ENGLISH only, even though this question and the notes may be in Vietnamese. Translate "
+                  "Vietnamese terms and lesson names into English.]")
+_CHU_VIET = re.compile("[ăâđêôơưàảãáạằẳẵắặầẩẫấậèẻẽéẹềểễếệìỉĩíịòỏõóọồổỗốộờởỡớợùủũúụừửữứựỳỷỹýỵ]", re.IGNORECASE)
+
+
+def la_tieng_viet(van_ban: str) -> bool:
+    """Đa phần là tiếng Việt (> 8% chữ cái có dấu): câu tiếng Anh trích một tên bài tiếng Việt vẫn coi là tiếng Anh."""
+    chu = [c for c in (van_ban or "") if c.isalpha()]
+    return bool(chu) and len(_CHU_VIET.findall(van_ban)) > 0.08 * len(chu)
+
+
+def goi_mo_hinh_theo_ngon_ngu(payload: dict, lang: str = "vi") -> str:
+    if lang != "en":
+        return _goi_mo_hinh(payload)
+    p = dict(payload, cau_hoi=(payload.get("cau_hoi") or "") + NHAC_TIENG_ANH)
+    tra_loi = _goi_mo_hinh(p)
+    if tra_loi and la_tieng_viet(tra_loi):
+        print("GIA SU: mo hinh tra loi tieng Viet tren trang English -> goi lai mot lan")
+        p["lenh_he_thong"] = ("IMPORTANT: The student reads ENGLISH. Your whole reply MUST be in English.\n\n"
+                              + (p.get("lenh_he_thong") or ""))
+        lan_hai = _goi_mo_hinh(p)
+        if lan_hai and not la_tieng_viet(lan_hai):
+            return lan_hai
+    return tra_loi
+
+
 # ======================================================
 # 6. HAM CHINH
 # ======================================================
@@ -824,7 +854,7 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
 
     payload = dung_lenh(ngu_canh, cau_hoi, lich_su, lang, ly_thuyet)
     try:
-        tra_loi = _goi_mo_hinh(payload)
+        tra_loi = goi_mo_hinh_theo_ngon_ngu(payload, lang)
     except httpx.HTTPError as e:
         print("LOI GOI WEBHOOK gia su:", e)
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "loi")

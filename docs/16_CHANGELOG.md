@@ -10624,3 +10624,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `tro_chuyen_service.LENH_TRO_CHUYEN` / `_EN`: thêm PHẠM VI kèm danh sách chương lớp của học sinh, cấm rủ đề ngoài danh sách, cấm tự tính kể cả 7 x 7, không hỏi lại số câu / chủ đề.
 - `data/prompts/CHV_Fun.md` v2.8: mục PHẠM VI, Rule 6 thêm nhờ tính phép tính, Rule 7 chỉ gợi ý đề trong phạm vi; bản dán `nhap/CHV_Fun_dan_vao_n8n.txt`. Sổ tay docs/18 thêm mục.
 - Test `tests/test_pham_vi_chat.py`.
+
+## 2026-10-23 - Trang English: AI trả lời bằng tiếng Anh; hỏi kiến thức chỉ lấy đúng một bài
+- Cô Lan (ảnh, trang English): gõ "mệnh đề rỗng là gì" thì AI trả lời tiếng Việt ("Chào bạn! Dựa trên lý thuyết...") và kéo cả kiến thức tổ hợp vào; trước đó "mệnh đề là gì" báo "chưa có trong tài liệu".
+- Tiếng Anh: mô hình nhỏ trả lời theo ngôn ngữ câu hỏi, bỏ qua lệnh "Reply in ENGLISH" trong phần hệ thống. `gia_su_service.goi_mo_hinh_theo_ngon_ngu`: trang English thì gắn lời nhắc "[Reply in ENGLISH only...]" vào cuối câu hỏi; câu trả lời vẫn đa phần tiếng Việt (`la_tieng_viet`: > 8% chữ có dấu) thì gọi lại MỘT lần với lời nhắc mạnh hơn ở đầu phần hệ thống. Dùng cho thầy/cô AI giảng câu, hỏi kiến thức, trò chuyện dự phòng. Trang tiếng Việt không đổi.
+- Tìm tài liệu (`ly_thuyet_service`): "mệnh đề" bị cắt còn "mệnh" (vì "đề" nằm trong danh sách từ đệm do "đề bài") nên không tìm được bài Mệnh đề; thêm `_CUM_GIU` (mệnh đề, khoảng cách, tính chất, phần tử, phần bù, bằng nhau...). Hỏi kiến thức tự do: chỉ lấy đoạn của MỘT bài (điểm cao nhất; bằng điểm thì bài học trước, nơi khái niệm được định nghĩa), tên mục chứa đúng thuật ngữ được cộng điểm - "tập rỗng" không còn kéo bài Tổ hợp ("tổ hợp chập 0 là tập rỗng"). Lệnh hỏi kiến thức thêm: chỉ dùng câu nói đúng điều được hỏi.
+- Test `tests/test_pham_vi_chat.py` thêm 8 trường hợp.
+

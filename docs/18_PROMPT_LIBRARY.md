@@ -348,3 +348,12 @@ hàng đề GV đưa - đơn vị kiến thức Toán THPT lớp 10-12.**
 
 Việc cô Lan làm trên n8n: dán lại ô System Message của node `CHV_Fun` bằng `nhap/CHV_Fun_dan_vao_n8n.txt` (bản v2.8).
 Chưa dán thì phần chặn ở máy chủ vẫn chạy; chỉ câu trò chuyện do CHV_Fun trả lời là chưa có quy tắc PHẠM VI.
+
+### Bổ sung 23/10/2026 — trang English, hỏi kiến thức
+
+- Trang English: mọi lệnh gọi qua webhook gia sư (`CHV_GiaSu`) đi qua `gia_su_service.goi_mo_hinh_theo_ngon_ngu` - gắn
+  "[Reply in ENGLISH only, even though this question and the notes may be in Vietnamese...]" vào cuối `cau_hoi`; trả về
+  vẫn tiếng Việt thì gọi lại một lần, thêm "IMPORTANT: The student reads ENGLISH..." ở đầu `lenh_he_thong`.
+- `LENH_KIEN_THUC` / `_EN` thêm: chỉ dùng câu trong tài liệu nói ĐÚNG điều được hỏi, không kéo kiến thức bài khác vào;
+  bản Anh: cả câu trả lời bằng tiếng Anh, tên bài / mục dịch sang tiếng Anh.
+

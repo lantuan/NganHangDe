@@ -103,3 +103,34 @@ def test_kien_thuc_ngoai_tai_lieu_khong_day(chat_gia, monkeypatch):
     monkeypatch.setattr(GS, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
     kq = _gui("xyzabc là gì")
     assert kq["data"]["type"] == "ngoai_tai_lieu" and "chưa có trong tài liệu lí thuyết" in kq["message"]
+
+
+# ---------------------------------------------------------------- 23/10/2026 (chiều): trang English, tìm tài liệu
+def test_trang_tieng_anh_tra_loi_tieng_anh(monkeypatch):
+    """Cô Lan: "chuyển sang tiếng Anh thì chat trả lời, giải thích không phải tiếng Anh"."""
+    goi = []
+    tra = iter(["Chào bạn! Tập rỗng là tập hợp không chứa phần tử nào.", "The empty set has no elements."])
+    monkeypatch.setattr(GS, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
+    monkeypatch.setattr(GS, "_goi_mo_hinh", lambda p: goi.append(p) or next(tra))
+    kq = T.tra_loi_kien_thuc("tập rỗng là gì", 10, "en")
+    assert kq["tra_loi"] == "The empty set has no elements." and len(goi) == 2       # trả tiếng Việt -> gọi lại 1 lần
+    assert goi[0]["cau_hoi"].startswith("tập rỗng là gì") and "Reply in ENGLISH" in goi[0]["cau_hoi"]
+    assert goi[1]["lenh_he_thong"].startswith("IMPORTANT")
+    goi.clear()
+    monkeypatch.setattr(GS, "_goi_mo_hinh", lambda p: goi.append(p) or "Tập rỗng là gì nhỉ")
+    assert T.tra_loi_kien_thuc("tập rỗng là gì", 10, "vi") and goi[0]["cau_hoi"] == "tập rỗng là gì"
+
+
+def test_la_tieng_viet():
+    assert GS.la_tieng_viet("Tập rỗng là tập hợp không chứa phần tử nào.")
+    assert not GS.la_tieng_viet("The empty set has no elements. Review: lesson Bài 2. Tập hợp, section Empty set.")
+
+
+@pytest.mark.parametrize("cau, bai", [("tập rỗng là gì", "L10_C1_B2"), ("mệnh đề là gì", "L10_C1_B1"),
+                                      ("mệnh đề phủ định là gì", "L10_C1_B1"), ("khoảng cách là gì", "L10_C7_B19"),
+                                      ("tập con là gì", "L10_C1_B2")])
+def test_hoi_kien_thuc_chi_lay_mot_bai(cau, bai):
+    """"đang giải thích về tập rỗng, tại sao lại lôi kiến thức tổ hợp vào"; "mệnh đề là gì" từng báo chưa có tài liệu."""
+    from app.services.ly_thuyet_service import tim_doan_tu_do
+    r = tim_doan_tu_do(10, cau)
+    assert r and {d["ma_bai"] for d in r} == {bai}
