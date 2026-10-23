@@ -524,6 +524,23 @@ def _tao_coursework_material(access_token: str, course_id: str, title: str,
     return None
 
 
+def _hoc_sinh_chua_vao_lop(access_token: str, course_id: str, email: str) -> bool:
+    """True khi Google trả 404 cho học sinh này trong lớp (chưa tham gia). Lỗi khác / không chắc -> False (cứ thử
+    đăng như cũ)."""
+    try:
+        res = requests.get(f"{CLASSROOM_API_BASE}/courses/{course_id}/students/{email}",
+                           headers={"Authorization": f"Bearer {access_token}"}, timeout=20)
+        return res.status_code == 404
+    except Exception as e:                                           # noqa: BLE001
+        print("LOI KIEM HOC SINH TRONG LOP CLASSROOM:", e)
+        return False
+
+
+def _link_tham_gia(course_id, ma_dang_ky: str) -> str:
+    slug = base64.urlsafe_b64encode(str(course_id).encode()).decode().rstrip("=")
+    return f"https://classroom.google.com/c/{slug}?cjc={ma_dang_ky}"
+
+
 def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: str,
                                 diem_html: str, diem_so, diem_toi_da=None) -> dict:
     """
@@ -577,6 +594,21 @@ def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: s
                                                  "thu hồi (invalid_grant): giáo viên cần bấm Kết nối Google Classroom "
                                                  "lại." % (khoi, lop)}
         return {"success": False, "message": "Không làm mới được access token Google (%s)." % (chi_tiet or type(e).__name__)}
+
+    # Cô Lan 23/10/2026: "có khi nào vì các HS đó đều chỉ đăng kí lớp [trên web] nhưng không vào bằng link tham gia
+    # lớp. Hiện tại trong lớp trên Class vẫn chưa có bạn đó". Đúng vậy: Classroom tạo bằng Gmail cá nhân không cho
+    # web tự thêm học sinh (403), em phải tự bấm link tham gia; chưa vào lớp thì Google không cho giao bài riêng cho
+    # em. Kiểm trước, nói rõ và đưa link tham gia để em vào lớp rồi bấm đăng lại.
+    if _hoc_sinh_chua_vao_lop(access_token, course_id, student_email):
+        link = None
+        try:
+            ma = lay_enrollment_code(access_token, course_id)
+            link = _link_tham_gia(course_id, ma) if ma else None
+        except Exception as e:                                       # noqa: BLE001
+            print("LOI LAY LINK THAM GIA (dang Classroom):", e)
+        return {"success": False, "chua_vao_lop": True, "link_tham_gia": link,
+                "message": "Tài khoản %s chưa tham gia lớp %s-%s trên Google Classroom (mới đăng kí lớp trên web)."
+                           % (student_email, khoi, lop)}
 
     file_ids = []
     ma_de_ngan = str(de_id)[:8]
@@ -679,8 +711,7 @@ def tao_link_gia_nhap_lop(khoi: str, lop: str) -> dict:
             "message": "Không lấy được mã đăng ký của lớp trên Classroom.",
         }
 
-    slug = base64.urlsafe_b64encode(str(course_id).encode()).decode().rstrip("=")
-    link = f"https://classroom.google.com/c/{slug}?cjc={ma_dang_ky}"
+    link = _link_tham_gia(course_id, ma_dang_ky)
 
     return {
         "success": True, "link_tham_gia": link, "ma_dang_ky": ma_dang_ky,

@@ -10652,3 +10652,9 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `chat.py` `/api/chat/dang-classroom`: hàm async trước đây gọi thẳng Google (Drive, Classroom, mỗi lần tới vài chục giây) nên cả lớp nộp bài cùng lúc thì cả máy chủ đứng chờ; nay chạy trong threadpool.
 - Test `tests/test_dang_classroom_23_10.py`.
 
+## 2026-10-23 - Đăng Classroom: học sinh chưa tham gia lớp trên Classroom -> đưa link tham gia + nút đăng lại
+- Cô Lan: "có khi nào vì các HS đó đều chỉ đăng kí lớp nhưng không vào bằng link tham gia lớp. Hiện tại trong lớp trên Class vẫn chưa có bạn đó". Đúng: lớp Classroom tạo bằng Gmail cá nhân không cho web tự thêm học sinh (`courses.students.create` trả 403 - xem `tao_link_gia_nhap_lop`), học sinh phải tự bấm link tham gia; chưa vào lớp thì Google không cho giao bài riêng (`individualStudentsOptions`) nên đăng kết quả thất bại.
+- `classroom_service.dang_ket_qua_len_classroom`: trước khi tải tệp, hỏi Google em này có trong lớp chưa (`GET courses/{id}/students/{email}`); 404 -> trả `chua_vao_lop` + `link_tham_gia` (link có mã tham gia lớp, `_link_tham_gia`), không tải tệp lên Drive vô ích.
+- `lam_bai.html`: "Em chưa tham gia lớp trên Google Classroom..." + link "👉 Bấm vào đây để tham gia lớp" + nút "🔁 Tham gia xong, đăng lại lên Classroom" (đăng lại kết quả vừa chấm, không phải làm lại bài). Bản Anh trong `en_ui.json`.
+- Test `tests/test_dang_classroom_23_10.py` thêm trường hợp.
+

@@ -1014,6 +1014,8 @@ function hienTrangThaiClassroom(noiDung) {
     o.style.display = 'block';
 }
 
+let KET_QUA_CHO_DANG_LAI = null;
+
 function escapeHtmlCls(t) {
     return String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 }
@@ -1047,6 +1049,25 @@ async function dangKetQuaLenClassroom(ketQua) {
                     '<br><span style="font-size:13px;">' +
                     'Cô/thầy đang dùng tài khoản giáo viên: Classroom chỉ giao bài riêng cho tài khoản học sinh có trong lớp.' +
                     ' ' + 'Muốn thử việc đẩy điểm lên lớp, hãy làm bài bằng một tài khoản học sinh.' + '</span>'
+                );
+                return;
+            }
+            // Cô Lan 23/10/2026: em mới đăng kí lớp trên web, CHƯA bấm link tham gia lớp trên Classroom -> Google không
+            // cho giao bài riêng. Đưa link tham gia + nút đăng lại (không cần làm lại bài).
+            if (data && data.chua_vao_lop) {
+                KET_QUA_CHO_DANG_LAI = ketQua;
+                hienTrangThaiClassroom(
+                    '📤 Em chưa tham gia lớp trên Google Classroom nên chưa đăng được điểm lên lớp.' +
+                    '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>' +
+                    (data.link_tham_gia
+                        ? '<br><a href="' + escapeHtmlCls(data.link_tham_gia) + '" target="_blank" rel="noopener" ' +
+                          'style="display:inline-block;margin-top:8px;font-weight:600;">' +
+                          '👉 Bấm vào đây để tham gia lớp (đăng nhập đúng tài khoản Google của em, bấm Tham gia)' + '</a>'
+                        : '') +
+                    '<br><button type="button" onclick="dangKetQuaLenClassroom(KET_QUA_CHO_DANG_LAI)" ' +
+                    'style="margin-top:8px;padding:6px 14px;border-radius:8px;border:1px solid #2563eb;' +
+                    'background:#eff6ff;color:#1d4ed8;cursor:pointer;">' +
+                    '🔁 Tham gia xong, đăng lại lên Classroom' + '</button>'
                 );
                 return;
             }

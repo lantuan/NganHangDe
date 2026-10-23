@@ -35,6 +35,7 @@ def _chuan_bi(monkeypatch, tmp_path, files):
         def execute(self):
             return None
     monkeypatch.setattr(CS.supabase, "table", lambda *_a: _Bang())
+    monkeypatch.setattr(CS.requests, "get", lambda url, **k: _Res(200, {"enrollmentCode": "abc123"}))
 
 
 def _goi():
@@ -86,3 +87,27 @@ def test_trang_lam_bai_hien_li_do_va_endpoint_khong_chan():
     assert "'Lí do:'" in html and "escapeHtmlCls(liDo)" in html
     chat = (goc / "app/routers/chat.py").read_text(encoding="utf-8")
     assert "run_in_threadpool(\n        classroom_service.dang_ket_qua_len_classroom" in chat
+
+
+def test_chua_tham_gia_lop_dua_link(monkeypatch, tmp_path):
+    """Cô Lan: "có khi nào vì các HS đó đều chỉ đăng kí lớp nhưng không vào bằng link tham gia lớp"."""
+    _chuan_bi(monkeypatch, tmp_path, {})
+
+    def _get(url, **k):
+        if "/students/" in url:
+            return _Res(404, {"error": {"status": "NOT_FOUND"}})
+        return _Res(200, {"enrollmentCode": "abc123"})
+    monkeypatch.setattr(CS.requests, "get", _get)
+    dang = []
+
+    def _post(url, **k):
+        if "token" in url:
+            return _Res(200, {"access_token": "at"})
+        dang.append(url)
+        return _Res(200, {"id": "cw"})
+    monkeypatch.setattr(CS.requests, "post", _post)
+    kq = _goi()
+    assert not kq["success"] and kq["chua_vao_lop"] and kq["link_tham_gia"].endswith("?cjc=abc123")
+    assert dang == [] and "chưa tham gia lớp 10-C9" in kq["message"]
+    html = (Path(__file__).resolve().parent.parent / "app/templates/chat/lam_bai.html").read_text(encoding="utf-8")
+    assert "data.chua_vao_lop" in html and "dangKetQuaLenClassroom(KET_QUA_CHO_DANG_LAI)" in html

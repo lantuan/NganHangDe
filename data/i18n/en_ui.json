@@ -704,5 +704,8 @@
  "Giữa kỳ 2 (hệ số 2)": "Midterm 2 (weight 2)",
  "Cuối kỳ 2 (hệ số 3)": "Final exam 2 (weight 3)",
  "Vận dụng": "Apply",
- "Lí do:": "Reason:"
+ "Lí do:": "Reason:",
+ "📤 Em chưa tham gia lớp trên Google Classroom nên chưa đăng được điểm lên lớp.": "📤 You have not joined the class on Google Classroom yet, so your score could not be posted to the class.",
+ "👉 Bấm vào đây để tham gia lớp (đăng nhập đúng tài khoản Google của em, bấm Tham gia)": "👉 Click here to join the class (sign in with your own Google account, then click Join)",
+ "🔁 Tham gia xong, đăng lại lên Classroom": "🔁 Joined - post to Classroom again"
 }
