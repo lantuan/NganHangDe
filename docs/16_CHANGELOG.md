@@ -10599,3 +10599,7 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
   - `tro_chuyen`: khi CHV_Fun (n8n) hỏng mà tin nhắn không phải yêu cầu tạo đề / hỏi cách dùng -> trả lời trò chuyện tự nhiên (kèm 4 tin nhắn gần nhất làm ngữ cảnh); chuyện ngoài Toán thì đáp vui một câu rồi hướng về tạo đề / ôn Toán; không giải bài, không bịa tính năng. CHV_Fun chạy được thì vẫn do CHV_Fun trả lời như cũ.
 - `ly_thuyet_service`: tách phần chấm điểm thành `_tim_trong_kho`; `tim_doan_tu_do` (mọi bài ngang nhau, trùng một từ hiếm như "tan", "trung vị" cũng lấy); bỏ "sai", "đúng" khỏi danh sách từ đệm (để "phương sai" tìm được).
 - `chat.py`: `_du_phong_tao_de` chạy trong threadpool (có gọi mạng). Test `tests/test_tro_chuyen.py`.
+
+## 2026-10-23 - Prompt CHV_Fun v2.7: trò chuyện tự nhiên, khớp tính năng mới, chỉ dán phần lệnh
+- `data/prompts/CHV_Fun.md`: Rule 7 thành "TRÒ CHUYỆN / NGOÀI PHẠM VI" (trò chuyện như người bạn, chuyện ngoài Toán đáp vui một câu rồi hướng về tạo đề / ôn Toán); bỏ "Không trả lời như chatbot"; NHIỆM VỤ + Rule 6 nói rõ câu hỏi kiến thức do máy chủ trả lời theo tài liệu lí thuyết, câu nào vẫn tới CHV_Fun là tài liệu chưa có; Rule 5 thêm hỏi kiến thức, nút mức luyện tập, ô hỏi tiếp, nút xem lời giải. JSON và tên `task` giữ nguyên nên Switch, Code in JavaScript không phải sửa.
+- Ô System Message trên n8n đang chứa cả phần ghi chú đầu/cuối tệp `.md` (khoảng 15 KB): bản dán mới chỉ phần lệnh (khoảng 12,5 KB) - đỡ token mỗi lượt dù thêm nội dung. Cô dán lại vào node CHV_Fun.
