@@ -18,7 +18,7 @@ from app.services import gia_su_service
 from app.services import supabase_service
 from app.services import classroom_service
 from app.services import yeu_cau_de_service
-from app.services import tro_chuyen_service
+from app.services import pham_vi_service, tro_chuyen_service
 
 router = APIRouter()
 
@@ -121,7 +121,8 @@ def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str,
         return {"success": True, "message": huong_dan, "data": {"type": "huong_dan"}}
     # Còn lại (trò chuyện, chuyện ngoài lề): trả lời tự nhiên qua webhook gia sư (cô Lan 23/10/2026: "tôi cần chat được
     # bình thường như chatbox bình thường khác"), thay vì câu báo lỗi.
-    tra_loi = tro_chuyen_service.tro_chuyen(message, _lich_su_gan(user_id, conversation_id), lang, vai_tro)
+    tra_loi = tro_chuyen_service.tro_chuyen(message, _lich_su_gan(user_id, conversation_id), lang, vai_tro,
+                                            lop_trong_ho_so(user_id))
     if tra_loi:
         print("CHAT: n8n hong, tra loi tro chuyen qua webhook gia su")
         history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
@@ -513,6 +514,23 @@ async def chat_post(
     # Cô Lan 23/10/2026: hỏi KIẾN THỨC Toán ("tập rỗng là gì", "phương sai là gì", "định lý sin") -> AI trả lời CHỈ
     # theo tài liệu lí thuyết có sẵn của cô (tro_chuyen_service.tra_loi_kien_thuc, qua webhook gia sư; không thấy đoạn
     # tài liệu nào thì đi tiếp đường cũ). Lưu như gói gia sư để mở lại hội thoại vẫn có khung tài liệu.
+    # Cô Lan 23/10/2026 (chat tự tính "7 x 7 = 49" rồi rủ "tạo đề ôn bảng cửu chương", học sinh đồng ý thì AI cứ hỏi
+    # lại mãi mà không làm được): chốt PHẠM VI - đề chỉ theo ngân hàng đề của thầy/cô (Toán THPT lớp 10-12), kiến thức
+    # chỉ theo tài liệu lí thuyết thầy/cô đưa. Máy chủ trả lời soạn sẵn (không gọi mô hình, không tính lượt):
+    #   - ngoài phạm vi (bảng cửu chương, lớp 1-9, môn khác, nhờ tính "7x7=?") -> nói rõ + danh sách chương đang có;
+    #   - muốn đề mà chưa nói chương / kỳ thi / chủ đề ("vâng, tạo cho tôi", "miễn tôi rèn luyện được") -> danh sách
+    #     chương + cách gõ. Xem app/services/pham_vi_service.py.
+    ly_do = pham_vi_service.ngoai_pham_vi(message)
+    if ly_do or pham_vi_service.muon_de_chung_chung(message):
+        lop_hs = await run_in_threadpool(lop_trong_ho_so, user.id)
+        loi_nhan = (pham_vi_service.tra_loi_ngoai_pham_vi(ly_do, lop_hs, lay_ngon_ngu(request)) if ly_do else
+                    pham_vi_service.tra_loi_chon_chuong(message, lop_hs, lay_ngon_ngu(request)))
+        print("CHAT: pham vi ->", ly_do or "chua noi chuong")
+        history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+                                     noi_dung=loi_nhan, loai_phan_hoi="text")
+        return {"success": True, "message": loi_nhan,
+                "data": {"type": "ngoai_pham_vi" if ly_do else "chon_chuong", "ly_do": ly_do}}
+
     if tro_chuyen_service.la_cau_hoi_kien_thuc(message):
         het = await run_in_threadpool(_het_luot, request, user.id, vai_tro, conversation_id)
         if het:
@@ -529,6 +547,13 @@ async def chat_post(
                                          noi_dung=_json.dumps(goi, ensure_ascii=False), loai_phan_hoi="gia_su")
             return {"success": True, "message": kt["tra_loi"],
                     "data": {"type": "kien_thuc", "tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"]}}
+        # Tài liệu lí thuyết của thầy/cô không có phần này -> nói rõ, KHÔNG để mô hình tự dạy ngoài tài liệu
+        if not await run_in_threadpool(tro_chuyen_service.co_tai_lieu, message, lop_trong_ho_so(user.id)):
+            loi_nhan = (tro_chuyen_service.KHONG_CO_TAI_LIEU_EN if lay_ngon_ngu(request) == "en"
+                        else tro_chuyen_service.KHONG_CO_TAI_LIEU)
+            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+                                         noi_dung=loi_nhan, loai_phan_hoi="text")
+            return {"success": True, "message": loi_nhan, "data": {"type": "ngoai_tai_lieu"}}
 
     if gia_su_service.la_cau_hoi_toan(message):
         en = lay_ngon_ngu(request) == "en"

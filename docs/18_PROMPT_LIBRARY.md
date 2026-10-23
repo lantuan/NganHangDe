@@ -331,3 +331,20 @@ phải sửa gì: System Message vẫn là `{{ $json.body.lenh_he_thong }}`.
 
 Sửa xong bấm **Save**. Chưa làm thì web vẫn chạy (máy chủ tự xử lí khi n8n hỏng), nhưng câu trò chuyện sẽ do AI dự
 phòng trả lời thay vì CHV_Fun.
+
+# Cập nhật 23/10/2026 (chiều) — CHV_Fun v2.8: chốt PHẠM VI
+
+Cô Lan (ảnh): chat tự tính "7 x 7 bằng 49", rủ "tạo vài đề ôn bảng cửu chương"; học sinh đồng ý ("vâng. tạo cho tôi",
+"bảng cửu chương mà", "mấy cũng được. miễn tôi rèn luyện được") thì AI hỏi lại số câu, phép nhân mấy đến mấy... mãi mà
+không làm được. Cô chốt: **kiến thức ngoài tài liệu lí thuyết GV (người tạo) đưa thì AI không dạy; đề phải theo ngân
+hàng đề GV đưa - đơn vị kiến thức Toán THPT lớp 10-12.**
+
+| Chỗ | Sửa |
+|---|---|
+| Máy chủ, trước n8n (`app/services/pham_vi_service.py`, gọi ở `chat.py`) | Câu soạn sẵn, không gọi mô hình, không tính lượt: (1) ngoài phạm vi - bảng cửu chương, lớp 1-9 / tiểu học / THCS, môn khác, nhờ tính "7x7=?" -> nói rõ không làm được + danh sách chương lớp của học sinh; (2) muốn đề mà chưa nói chương / kỳ thi / chủ đề -> danh sách chương + cách gõ ("đề chương 3", "lớp 10 giữa kỳ 1"). Danh sách chương lấy từ `data/ppct/`, chỉ chương đã có tệp ngân hàng. Câu có chương, kỳ thi hay tên chủ đề ("đề hàm số bậc hai") vẫn đi n8n như cũ. |
+| Hỏi kiến thức (`chat.py`) | Tài liệu lí thuyết không có đoạn nào -> câu soạn sẵn "Phần này chưa có trong tài liệu lí thuyết của thầy/cô..." thay vì để CHV_Fun tự trả lời. |
+| Trò chuyện dự phòng (`LENH_TRO_CHUYEN` / `_EN`) | Thêm mục PHẠM VI kèm danh sách chương của lớp học sinh; không rủ đề ngoài danh sách; không tự tính (kể cả 7 x 7); không hỏi lại số câu / chủ đề, mà bảo gõ "đề chương <số>". |
+| `CHV_Fun` v2.8 (`data/prompts/CHV_Fun.md`) | Mục PHẠM VI mới; Rule 6 thêm "nhờ tính một phép tính"; Rule 7 chỉ gợi ý đề trong phạm vi. JSON, tên `task` giữ nguyên. |
+
+Việc cô Lan làm trên n8n: dán lại ô System Message của node `CHV_Fun` bằng `nhap/CHV_Fun_dan_vao_n8n.txt` (bản v2.8).
+Chưa dán thì phần chặn ở máy chủ vẫn chạy; chỉ câu trò chuyện do CHV_Fun trả lời là chưa có quy tắc PHẠM VI.

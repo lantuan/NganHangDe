@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import re
 
-from app.services import gia_su_service
+from app.services import gia_su_service, pham_vi_service
 from app.services.ly_thuyet_service import tim_doan_tu_do, thanh_van_ban_lenh
 
 # Hỏi kiến thức: "là gì", "định nghĩa", "công thức", "tính chất"... (không phải yêu cầu tạo đề, không nhắc câu nào của đề)
@@ -85,8 +85,13 @@ thầy/cô AI giảng lại câu trong đề đã làm, có bản tiếng Anh ch
 Trò chuyện TỰ NHIÊN như một người bạn: chào hỏi, đùa nhẹ, động viên học tập đều được. {xung_ho}
 - Chuyện ngoài Toán / ngoài trang (giải trí, đời tư, chính trị, bài môn khác...): đáp vui MỘT câu, KHÔNG đi sâu, rồi khéo
   léo hướng về việc tạo đề luyện tập hoặc ôn Toán.
-- KHÔNG giải bài toán, KHÔNG tự tính toán, KHÔNG bịa tính năng. Muốn học kiến thức thì gợi ý hỏi kiểu "tập rỗng là gì";
-  muốn được giảng bài thì làm đề, nộp bài rồi bấm "💬 Hỏi thầy/cô AI về câu này".
+- KHÔNG giải bài toán, KHÔNG tự tính toán (kể cả phép tính dễ như 7 x 7), KHÔNG bịa tính năng. Muốn học kiến thức
+  thì gợi ý hỏi kiểu "tập rỗng là gì" (chỉ trả lời theo tài liệu lí thuyết của thầy/cô); muốn được giảng bài thì làm
+  đề, nộp bài rồi bấm "💬 Hỏi thầy/cô AI về câu này".
+- PHẠM VI (thầy/cô tạo trang này chốt): đề CHỈ lấy từ ngân hàng đề của thầy/cô, gồm các chương: {chuong}.
+  TUYỆT ĐỐI KHÔNG rủ / hứa tạo đề hay dạy nội dung ngoài danh sách đó (bảng cửu chương, Toán tiểu học, THCS, môn
+  khác...). Muốn rủ luyện tập thì nêu đúng một chương trong danh sách và bảo gõ "đề chương <số>" hoặc bấm "📝 Tạo đề
+  mới". KHÔNG hỏi người dùng số câu, chủ đề, phép tính... (bạn không tự tạo đề được).
 - Ngắn (2-4 câu), có thể dùng 1-2 emoji. Trả lời văn bản thường, KHÔNG JSON.
 {lich_su}"""
 
@@ -95,9 +100,30 @@ them on the web with automatic grading, the AI teacher explains questions of exa
 Chapters 1-4). Chat NATURALLY like a friend: greetings, light jokes, encouragement are fine. {xung_ho} Reply in ENGLISH.
 - Topics outside math / the website: reply playfully in ONE sentence, do not go deeper, then gently steer back to creating
   a practice exam or studying math.
-- Do NOT solve problems, do NOT compute, do NOT invent features.
+- Do NOT solve problems, do NOT compute (not even 7 x 7), do NOT invent features.
+- SCOPE (set by the teacher who runs this site): exams come ONLY from the teacher's question bank, chapters: {chuong}
+  (Vietnamese names; translate them). NEVER offer or promise exams or lessons outside that list (multiplication table,
+  primary or middle school math, other subjects...). To suggest practice, name one chapter from the list and tell the
+  user to type "chapter <number> test" or click "📝 Create a new exam". Do NOT ask for number of questions or topics (you
+  cannot create exams yourself).
 - Short (2-4 sentences), 1-2 emoji at most. Plain text, NOT JSON.
 {lich_su}"""
+
+
+def co_tai_lieu(message: str, lop: int | None) -> bool:
+    """Tài liệu lí thuyết của thầy/cô có đoạn nào nói tới câu hỏi này không."""
+    try:
+        return bool(tim_doan_tu_do(lop, message))
+    except Exception:                                                # noqa: BLE001
+        return True                                                  # không chắc thì để đường cũ lo
+
+
+KHONG_CO_TAI_LIEU = ("Phần này chưa có trong tài liệu lí thuyết của thầy/cô, nên mình không giảng được (mình chỉ dạy "
+                     "theo tài liệu thầy/cô đưa, thuộc Toán THPT lớp 10-12). Bạn hỏi trực tiếp thầy/cô trên lớp, "
+                     "hoặc tạo một đề luyện tập theo chương nhé.")
+KHONG_CO_TAI_LIEU_EN = ("This is not in your teacher's theory notes yet, so I cannot teach it (I only teach from the "
+                        "notes your teacher provides, high school math grades 10-12). Ask your teacher in class, or "
+                        "create a practice exam by chapter.")
 
 
 def tra_loi_kien_thuc(message: str, lop: int | None, lang: str = "vi", vai_tro: str | None = None) -> dict | None:
@@ -120,14 +146,15 @@ def tra_loi_kien_thuc(message: str, lop: int | None, lang: str = "vi", vai_tro: 
 
 
 def tro_chuyen(message: str, lich_su: list[tuple[str, str]] | None = None, lang: str = "vi",
-               vai_tro: str | None = None) -> str | None:
+               vai_tro: str | None = None, lop: int | None = None) -> str | None:
     """Câu trả lời trò chuyện (khi CHV_Fun hỏng). lich_su: vài cặp (vai, nội dung) gần nhất. Lỗi -> None."""
     if not gia_su_service.N8N_WEBHOOK_GIA_SU or not (message or "").strip():
         return None
     en = lang == "en"
     dong = ["%s: %s" % ("Người dùng" if v == "user" else "Trợ lý", (n or "")[:200]) for v, n in (lich_su or [])[-4:]]
     ls = ("\nMấy tin nhắn trước (để hiểu ngữ cảnh, không cần nhắc lại):\n" + "\n".join(dong)) if dong else ""
-    lenh = (LENH_TRO_CHUYEN_EN if en else LENH_TRO_CHUYEN).format(xung_ho=_xung_ho(vai_tro, en), lich_su=ls)
+    lenh = (LENH_TRO_CHUYEN_EN if en else LENH_TRO_CHUYEN).format(xung_ho=_xung_ho(vai_tro, en), lich_su=ls,
+                                                                   chuong=pham_vi_service.chuong_cho_lenh(lop))
     try:
         return gia_su_service._goi_mo_hinh({"muc": "tro_chuyen", "lenh_he_thong": lenh, "cau_hoi": message,
                                             "lich_su": []}) or None
