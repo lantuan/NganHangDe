@@ -441,9 +441,12 @@ async def dang_classroom_endpoint(request: Request, payload: DangClassroomReques
     if user is None:
         raise HTTPException(401, "Ban chua dang nhap hoac phien da het han.")
 
-    ho_so = supabase_service.lay_lop_hoc_sinh(user.id) or {}
-    la_gv = profile_service.la_giao_vien(user.id)
-    ket_qua = classroom_service.dang_ket_qua_len_classroom(
+    ho_so = await run_in_threadpool(lambda: supabase_service.lay_lop_hoc_sinh(user.id) or {})
+    la_gv = await run_in_threadpool(profile_service.la_giao_vien, user.id)
+    # Gọi Google (Drive, Classroom) mất vài chục giây: chạy trong threadpool, KHÔNG chặn cả máy chủ (trước đây hàm
+    # async gọi thẳng requests -> cả lớp nộp bài cùng lúc thì web đứng chờ từng lần đăng - cô Lan 23/10/2026).
+    ket_qua = await run_in_threadpool(
+        classroom_service.dang_ket_qua_len_classroom,
         de_id=payload.de_id,
         student_email=user.email,
         khoi=ho_so.get("khoi"),

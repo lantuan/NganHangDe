@@ -1014,6 +1014,10 @@ function hienTrangThaiClassroom(noiDung) {
     o.style.display = 'block';
 }
 
+function escapeHtmlCls(t) {
+    return String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+}
+
 async function dangKetQuaLenClassroom(ketQua) {
     hienTrangThaiClassroom('⏳ Đang đăng đề, bài giải và điểm lên Classroom...');
     try {
@@ -1046,9 +1050,13 @@ async function dangKetQuaLenClassroom(ketQua) {
                 );
                 return;
             }
+            // Cô Lan 23/10/2026 ("vẫn không tải được lên Classroom, cần kiểm tra lại"): ghi kèm LÍ DO máy chủ trả về
+            // (chữ nhỏ) để thầy/cô nhìn màn hình học sinh là biết sửa ở đâu.
+            const liDo = (data && (data.message || data.detail)) ? String(data.message || data.detail) : '';
             hienTrangThaiClassroom(
                 '📤 Chưa đăng được lên Classroom lần này (thầy/cô cần kiểm tra lại kết nối Classroom của lớp).' +
-                '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>'
+                '<br><span style="font-size:13px;">Điểm của em vẫn được lưu bình thường, không ảnh hưởng gì.</span>' +
+                (liDo ? '<br><span style="font-size:12px;color:#94a3b8;">' + 'Lí do:' + ' ' + escapeHtmlCls(liDo) + '</span>' : '')
             );
         }
     } catch (e) {

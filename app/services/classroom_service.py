@@ -482,7 +482,7 @@ def _tai_len_drive(access_token: str, duong_dan_file: str, ten_file: str):
 
 
 def _tao_coursework_material(access_token: str, course_id: str, title: str,
-                              description: str, file_ids: list[str], student_email: str):
+                              description: str, file_ids: list[str], student_email: str, loi: dict | None = None):
     """Tao 1 courseWorkMaterial (dang 'tai lieu', khong phai bai tap co
     han nop) tren dung course_id, CHI giao rieng cho 1 hoc sinh
     (individualStudentsOptions) - cac ban khac trong lop khong thay bai
@@ -498,6 +498,8 @@ def _tao_coursework_material(access_token: str, course_id: str, title: str,
         "assigneeMode": "INDIVIDUAL_STUDENTS",
         "individualStudentsOptions": {"studentIds": [student_email]},
     }
+    if not file_ids:
+        body.pop("materials")
     try:
         res = requests.post(
             f"{CLASSROOM_API_BASE}/courses/{course_id}/courseWorkMaterials",
@@ -508,8 +510,17 @@ def _tao_coursework_material(access_token: str, course_id: str, title: str,
         if res.status_code in (200, 201):
             return res.json().get("id")
         print("LOI TAO COURSEWORK MATERIAL:", res.status_code, res.text[:300])
+        try:
+            ct = res.json().get("error", {})
+            if loi is not None:
+                loi["ma"] = "%s %s" % (res.status_code, ct.get("status") or ct.get("message") or "")
+        except Exception:                                    # noqa: BLE001
+            if loi is not None:
+                loi["ma"] = str(res.status_code)
     except Exception as e:
         print("LOI TAO COURSEWORK MATERIAL (exception):", e)
+        if loi is not None:
+            loi["ma"] = type(e).__name__
     return None
 
 
@@ -538,25 +549,42 @@ def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: s
     files = de.get("files", {}) or {}
     duong_dan_de = files.get("de")
     duong_dan_loigiai = files.get("loigiai")
-    if not duong_dan_de or not Path(duong_dan_de).exists():
-        return {"success": False, "message": "Không tìm thấy file đề để đăng lên Classroom."}
+    if duong_dan_de and not Path(duong_dan_de).exists():
+        # Đề học sinh tạo để làm trên web: PDF biên dịch ở nền (23/10/2026) - cả lớp cùng tạo thì có thể chưa tới
+        # lượt khi em nộp bài. Biên dịch / chờ xong ngay bây giờ; vẫn không có thì vẫn đăng ĐIỂM (không kèm tệp).
+        from app.services.exam_assembler_service import bien_dich_pdf_de_hoc_sinh
+        try:
+            bien_dich_pdf_de_hoc_sinh(files.get("tex"))
+        except Exception as e:                                       # noqa: BLE001
+            print("LOI BIEN DICH PDF DE (dang Classroom):", e)
 
     refresh_token = lay_refresh_token_theo_lop(khoi, lop)
     if not refresh_token:
-        return {"success": False, "message": "Chưa kết nối Classroom (vào /gv/classroom/connect)."}
+        return {"success": False, "message": "Lớp %s-%s chưa có giáo viên kết nối Classroom (giáo viên vào Khu giáo "
+                                             "viên, bấm Kết nối Google Classroom)." % (khoi, lop)}
 
     try:
         access_token = lam_moi_access_token(refresh_token)
     except Exception as e:
         print("LOI LAM MOI ACCESS TOKEN (dang Classroom):", e)
-        return {"success": False, "message": "Không làm mới được access token."}
+        chi_tiet = ""
+        try:
+            chi_tiet = e.response.json().get("error", "")                       # vd "invalid_grant"
+        except Exception:                                                        # noqa: BLE001
+            pass
+        if chi_tiet == "invalid_grant":
+            return {"success": False, "message": "Kết nối Google Classroom của giáo viên lớp %s-%s đã hết hạn hoặc bị "
+                                                 "thu hồi (invalid_grant): giáo viên cần bấm Kết nối Google Classroom "
+                                                 "lại." % (khoi, lop)}
+        return {"success": False, "message": "Không làm mới được access token Google (%s)." % (chi_tiet or type(e).__name__)}
 
     file_ids = []
     ma_de_ngan = str(de_id)[:8]
 
-    fid_de = _tai_len_drive(access_token, duong_dan_de, f"De_{ma_de_ngan}.pdf")
-    if fid_de:
-        file_ids.append(fid_de)
+    if duong_dan_de and Path(duong_dan_de).exists():
+        fid_de = _tai_len_drive(access_token, duong_dan_de, f"De_{ma_de_ngan}.pdf")
+        if fid_de:
+            file_ids.append(fid_de)
 
     if duong_dan_loigiai and Path(duong_dan_loigiai).exists():
         fid_lg = _tai_len_drive(access_token, duong_dan_loigiai, f"BaiGiai_{ma_de_ngan}.pdf")
@@ -564,17 +592,26 @@ def dang_ket_qua_len_classroom(de_id: str, student_email: str, khoi: str, lop: s
             file_ids.append(fid_lg)
 
     if not file_ids:
-        return {"success": False, "message": "Không tải được file lên Drive."}
+        # Không có / không tải được tệp: vẫn đăng điểm (mô tả bài đăng), đừng bỏ cả lần đăng
+        print("DANG CLASSROOM: khong co tep dinh kem, chi dang diem:", de_id)
 
     thoi_gian = datetime.now(timezone.utc).astimezone().strftime("%d/%m/%Y %H:%M")
     tieu_de = f"{thoi_gian} - Đề, bài giải, điểm"
     mo_ta = f"Điểm: {diem_so}/{diem_toi_da or 10}\n\n{_html_sang_text(diem_html)}"
 
+    loi_cw: dict = {}
     coursework_id = _tao_coursework_material(
-        access_token, course_id, tieu_de, mo_ta, file_ids, student_email,
+        access_token, course_id, tieu_de, mo_ta, file_ids, student_email, loi_cw,
     )
     if not coursework_id:
-        return {"success": False, "message": "Không tạo được bài đăng trên Classroom."}
+        ma = loi_cw.get("ma", "")
+        goi_y = ""
+        if "PERMISSION_DENIED" in ma or "403" in ma:
+            goi_y = (" - Google từ chối: tài khoản %s có thể chưa là học sinh trong lớp Classroom %s-%s, hoặc giáo "
+                     "viên kết nối chưa là giáo viên của lớp đó" % (student_email, khoi, lop))
+        elif "NOT_FOUND" in ma or "404" in ma:
+            goi_y = " - không thấy lớp Classroom (mã lớp %s-%s trong lop_config sai?)" % (khoi, lop)
+        return {"success": False, "message": "Không tạo được bài đăng trên Classroom (%s)%s." % (ma or "?", goi_y)}
 
     try:
         supabase.table("classroom_coursework").insert({
