@@ -6748,8 +6748,16 @@ def _b8_hinh_hai_luc(p, q, g, goc0):
         out.append(r"\draw[->] (0,0) -- (%s:%s);" % (_toa(a), _toa(d)))
         out.append(r"\node at (%s:%s) {$%s$};" % (_toa(a), _toa(d + 0.55), ten))
     r0 = min(0.7, 0.35 * min(p, q) * s)
-    out.append(r"\draw[thin] (%s:%s) arc (%s:%s:%s);" % (_toa(a1), _toa(r0), _toa(a1), _toa(a2), _toa(r0)))
-    out.append(r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa((a1 + a2) / 2), _toa(r0 + 0.5), g))
+    if g == 90:
+        # Góc vuông: kí hiệu ô vuông nhỏ ở O, không vẽ cung + "90°" (cô Lan 23/10/2026: "góc vuông vẽ sai kí hiệu")
+        k = min(0.35, max(0.22, 0.6 * r0))
+        u = (k * math.cos(math.radians(a1)), k * math.sin(math.radians(a1)))
+        v = (k * math.cos(math.radians(a2)), k * math.sin(math.radians(a2)))
+        out.append(r"\draw[thin] (%s,%s) -- (%s,%s) -- (%s,%s);" % (
+            _toa(u[0]), _toa(u[1]), _toa(u[0] + v[0]), _toa(u[1] + v[1]), _toa(v[0]), _toa(v[1])))
+    else:
+        out.append(r"\draw[thin] (%s:%s) arc (%s:%s:%s);" % (_toa(a1), _toa(r0), _toa(a1), _toa(a2), _toa(r0)))
+        out.append(r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa((a1 + a2) / 2), _toa(r0 + 0.5), g))
     out.append(r"\fill (0,0) circle[radius=1.5pt] node[below]{\footnotesize $O$};")
     out.append(r"\end{tikzpicture}")
     return "\n".join(out)

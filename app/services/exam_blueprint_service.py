@@ -16,7 +16,7 @@ import random
 import re
 from collections import Counter
 
-from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23
+from app.services.exam_scope_service import load_scope_heso1, load_scope_heso23, chuan_hoa_ki_thi, KI_THI_MAP
 from app.services.exam_rules_service import resolve_cau_truc_de, ExamRulesError
 from app.services.curriculum_service import load_curriculum_for_scope, CurriculumError
 from app.services.question_selector_service import select_questions, SelectorError
@@ -623,6 +623,21 @@ def build_blueprint(
                                  "theo một chương, ví dụ: chương 2." % pham_vi_chuong)
         scope = load_scope_heso1(lop, str(pham_vi_chuong).strip())
         pham_vi_bai = scope["pham_vi_bai"]
+        # Đề theo chương nhưng kèm kỳ thi ("ôn thi giữa kỳ 1 chương 4"): chỉ lấy các bài của chương mà kỳ thi đó
+        # đã học tới (cô Lan 23/10/2026: "tại sao bài diện tích [Bài 10] lại ra trong đề thi giữa kỳ. Giữa kì chỉ
+        # tới bài 8 mà"). Không kèm kỳ thi / "kiem_tra_thuong_xuyen" -> cả chương như cũ.
+        if chuan_hoa_ki_thi(ki_thi) in KI_THI_MAP:
+            ky = load_scope_heso23(lop, ki_thi)
+            trong_ky = set(ky.get("pham_vi_bai") or [])
+            if trong_ky:
+                con = [b for b in pham_vi_bai if b in trong_ky]
+                if not con:
+                    ten_ky = {"giua_ky_1": "giữa kỳ 1", "cuoi_ky_1": "cuối kỳ 1", "giua_ky_2": "giữa kỳ 2",
+                              "cuoi_ky_2": "cuối kỳ 2"}.get(chuan_hoa_ki_thi(ki_thi), str(ki_thi))
+                    raise BlueprintError("Chương này chưa có trong phạm vi %s (theo phân phối chương trình)."
+                                         % ten_ky)
+                scope = dict(scope, pham_vi_bai=con)
+                pham_vi_bai = con
     elif loai_he_so == "HeSo2_HeSo3":
         if not ki_thi:
             raise BlueprintError("Thiếu ki_thi cho HeSo2_HeSo3")

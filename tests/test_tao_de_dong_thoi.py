@@ -115,3 +115,40 @@ def test_endpoint_tra_de_id_ngay_roi_dich_nen(monkeypatch, tmp_path):
 def test_giao_dien_gui_bien_dich_sau():
     html = (Path(__file__).resolve().parent.parent / "app/templates/chat/chat.html").read_text(encoding="utf-8")
     assert html.count("bien_dich_sau: true") == 2
+
+
+# ---------------------------------------------------------------- 23/10/2026: đề giữa kỳ ra câu Bài 10
+def _bai(ds):
+    import re
+    ra = set()
+    for d in ds:
+        m = re.match(r"L10_C\d+_B\d+", d.get("generator_id") or "")
+        if m:
+            ra.add(m.group(0))
+    return ra
+
+
+def test_de_chuong_kem_ky_thi_chi_lay_bai_trong_ky():
+    """Cô Lan: "tại sao bài diện tích lại ra trong đề thi giữa kỳ. Giữa kì chỉ tới bài 8 mà"."""
+    from app.services.exam_blueprint_service import build_blueprint, BlueprintError
+    from app.services.question_selector_service import select_questions
+    gap = set()
+    for _ in range(15):
+        bp = build_blueprint(lop=10, loai_he_so="HeSo1", ki_thi="giua_ky_1", pham_vi_chuong="chuong_4")
+        gap |= _bai(select_questions(lop=10, blueprint=bp, cho_phep_thieu=True))
+    assert gap and gap <= {"L10_C4_B7", "L10_C4_B8"}
+    with pytest.raises(BlueprintError, match="giữa kỳ 1"):
+        build_blueprint(lop=10, loai_he_so="HeSo1", ki_thi="giua_ky_1", pham_vi_chuong="chuong_5")
+
+
+def test_hinh_hai_luc_goc_vuong_ki_hieu_o_vuong():
+    import importlib.util
+    import sys
+    goc = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(goc / "data" / "python_bank"))
+    sp = importlib.util.spec_from_file_location("L10_C4_hinh_test", goc / "data/python_bank/toan10/L10_C4.py")
+    m = importlib.util.module_from_spec(sp)
+    sp.loader.exec_module(m)
+    vuong = m._b8_hinh_hai_luc(1, 3, 90, -15)
+    assert "arc" not in vuong and "90^\\circ" not in vuong and vuong.count("--") == 4   # 2 mũi tên + ô vuông
+    assert "arc" in m._b8_hinh_hai_luc(3, 5, 120, 0)
