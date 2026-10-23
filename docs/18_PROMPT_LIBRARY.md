@@ -283,3 +283,51 @@ Test: `tests/test_cham_anh_dong_nhat.py`, `tests/test_dong_nhat_request_parser.p
   `"loai_cau": "TL",`.
 
 Chưa dán thì vẫn chấm đúng (Python đã tự chuẩn hoá) — dán để chữ trên n8n khớp bản ghi.
+
+---
+
+# Cập nhật 23/10/2026 — CHV_Fun v2.7 + ba prompt mới chạy qua webhook gia sư
+
+Cô Lan: "tôi cần chat được bình thường như chatbox bình thường khác. Chỉ là các nội dung bên ngoài thì không giải
+quyết mà hướng người dùng về tạo đề và nội dung toán. Nếu hỏi về kiến thức toán thì AI có thể đọc ngay phần lý thuyết
+có sẵn để trả lời, chỉ trả lời trong đó."
+
+## Bảng prompt sau ngày 23/10/2026
+
+| Prompt | Chạy ở node / webhook | Bản ghi | Dùng khi |
+|---|---|---|---|
+| `CHV_Fun` **v2.7** | `CHV_Fun`, `/webhook/chat` | `data/prompts/CHV_Fun.md` | Mọi tin nhắn chat chưa được máy chủ tự xử lí |
+| Gia sư **Mức A** | `CHV_GiaSu`, `/webhook/gia-su` | `LENH_HE_THONG` / `_EN` + `_QUY_TAC[(lang, "A")]` trong `app/services/gia_su_service.py` | Giảng lại một câu trong đề đã làm, chỉ theo lời giải mẫu |
+| Gia sư **Mức B** | `CHV_GiaSu`, `/webhook/gia-su` | cùng tệp, `_QUY_TAC[(lang, "B")]` + khối "TÀI LIỆU LÍ THUYẾT CỦA THẦY/CÔ" | Hỏi tiếp về khái niệm mà lời giải mẫu không giải thích (đoạn tài liệu lấy từ `ly_thuyet_service.tim_doan`, chỉ các chương đã học) |
+| **Hỏi kiến thức** | `CHV_GiaSu`, `/webhook/gia-su` (`muc = "kien_thuc"`) | `LENH_KIEN_THUC` / `_EN` trong `app/services/tro_chuyen_service.py` | Câu hỏi kiến thức gõ thẳng trong chat ("tập rỗng là gì") - chỉ trả lời theo đoạn tài liệu `tim_doan_tu_do` tìm được; không có đoạn nào thì không gọi mô hình |
+| **Trò chuyện dự phòng** | `CHV_GiaSu`, `/webhook/gia-su` (`muc = "tro_chuyen"`) | `LENH_TRO_CHUYEN` / `_EN` trong `app/services/tro_chuyen_service.py` | CHV_Fun hỏng (n8n trả rỗng/hỏng) mà tin nhắn không phải yêu cầu tạo đề / hỏi cách dùng |
+
+Ba prompt của gia sư / hỏi kiến thức / trò chuyện dự phòng nằm TRONG MÃ NGUỒN (Python dựng `lenh_he_thong`), có test
+(`tests/test_gia_su.py`, `tests/test_gia_su_muc_b.py`, `tests/test_tro_chuyen.py`). Node `CHV_GiaSu` trên n8n không
+phải sửa gì: System Message vẫn là `{{ $json.body.lenh_he_thong }}`.
+
+## CHV_Fun v2.7 — đã sửa gì (chi tiết ở cuối `data/prompts/CHV_Fun.md`)
+
+- Rule 7 thành **TRÒ CHUYỆN / NGOÀI PHẠM VI**: trò chuyện như người bạn (2-4 câu), chuyện ngoài Toán đáp vui một câu
+  rồi hướng về tạo đề / ôn Toán. Bỏ "Không trả lời như chatbot".
+- NHIỆM VỤ + Rule 6: câu hỏi kiến thức do máy chủ trả lời theo tài liệu trước khi tới CHV_Fun; câu nào vẫn tới là tài
+  liệu chưa có -> nói rõ, gợi ý hỏi thầy/cô hoặc tạo đề.
+- Rule 5 thêm tính năng thật: hỏi kiến thức, nút Đúng chương trình / Nâng cao thêm, ô hỏi tiếp, nút xem lời giải.
+- JSON và tên `task` giữ nguyên -> `Switch`, `Code in JavaScript` không phải sửa.
+
+## Việc cô Lan làm trên n8n
+
+1. Node `CHV_Fun` → ô **System Message**: xoá hết, dán **chỉ phần lệnh** (từ "Bạn là CHV_Fun." đến hết mục QUY TẮC
+   trong `data/prompts/CHV_Fun.md`; bản chép sẵn: `nhap/CHV_Fun_dan_vao_n8n.txt`). Trước đây ô này chứa cả phần ghi
+   chú đầu/cuối tệp (khoảng 15 KB) - tốn token mỗi lượt và có đoạn `{{ ... }}` bị tính như biểu thức.
+2. Node `Edit Fields` (mode JSON): thay `{{ JSON.parse($json.output) }}` bằng biểu thức đọc JSON chịu lỗi (bỏ đoạn
+   `<think>...</think>`, bỏ ```json, lấy từ dấu `{` đầu đến `}` cuối; vẫn hỏng thì coi chữ mô hình viết là câu trả
+   lời `task = "help"` thay vì làm hỏng cả luồng):
+   ```
+   {{ (() => { const s = String($json.output ?? '').replace(/<think>[\s\S]*?<\/think>/gi, '').replace(/```(json)?/gi, ''); const a = s.indexOf('{'), b = s.lastIndexOf('}'); for (const t of [s.slice(a, b + 1), s.slice(a, b + 1).replace(/\r?\n/g, ' ')]) { try { return JSON.parse(t); } catch (e) {} } return { task: 'help', message: $('Webhook').item.json.body.message, tra_loi: s.trim() || 'Mình chưa hiểu ý bạn, bạn nói rõ hơn giúp mình nhé!' }; })() }}
+   ```
+3. (Nên) Node `CHV_Fun` → bật **Enable Fallback Model**, nối thêm một OpenRouter Chat Model khác (vd
+   `google/gemini-2.0-flash-001`) phòng khi mô hình chính (qwen/qwen3-8b) hết lượt / bị gỡ.
+
+Sửa xong bấm **Save**. Chưa làm thì web vẫn chạy (máy chủ tự xử lí khi n8n hỏng), nhưng câu trò chuyện sẽ do AI dự
+phòng trả lời thay vì CHV_Fun.
