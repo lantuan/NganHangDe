@@ -18,7 +18,7 @@ templates = Jinja2Templates(directory="app/templates")
 # ======================================================
 
 @router.get("/login", response_class=HTMLResponse)
-async def login_page(request: Request):
+def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/login.html",
@@ -33,7 +33,7 @@ async def login_page(request: Request):
 # ======================================================
 
 @router.get("/register", response_class=HTMLResponse)
-async def register_page(request: Request):
+def register_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/register.html",
@@ -45,7 +45,7 @@ async def register_page(request: Request):
 # ======================================================
 
 @router.get("/register/student", response_class=HTMLResponse)
-async def register_student_page(request: Request):
+def register_student_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/register_student.html",
@@ -82,7 +82,7 @@ def _trang_login_loi(request: Request, email: str, thong_bao: str):
 
 
 @router.post("/login")
-async def login(
+def login(
     request: Request,
     email: str = Form(...),
     password: str = Form(...),
@@ -173,7 +173,7 @@ async def login(
 # ======================================================
 
 @router.get("/logout")
-async def logout():
+def logout():
     response = RedirectResponse(
         "/login",
         status_code=303,
@@ -189,7 +189,7 @@ async def logout():
 # ======================================================
 
 @router.get("/forgot-password", response_class=HTMLResponse)
-async def forgot_password_page(request: Request):
+def forgot_password_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/forgot_password.html",
@@ -201,7 +201,7 @@ async def forgot_password_page(request: Request):
 
 
 @router.get("/reset-password", response_class=HTMLResponse)
-async def reset_password_page(request: Request):
+def reset_password_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/reset_password.html",
@@ -217,7 +217,7 @@ async def reset_password_page(request: Request):
 # ======================================================
 
 @router.get("/auth/callback", response_class=HTMLResponse)
-async def auth_callback_page(request: Request):
+def auth_callback_page(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="auth/callback.html",
@@ -233,7 +233,7 @@ class SetSessionRequest(BaseModel):
 
 
 @router.post("/auth/set-session")
-async def set_session(payload: SetSessionRequest):
+def set_session(payload: SetSessionRequest):
     try:
         user_result = supabase.auth.get_user(payload.access_token)
     except Exception as e:
@@ -273,7 +273,7 @@ async def set_session(payload: SetSessionRequest):
 # ======================================================
 
 @router.post("/register/student")
-async def register_student(
+def register_student(
     request: Request,
     fullname: str = Form(...),
     email: str = Form(...),
@@ -328,7 +328,7 @@ async def register_student(
 # ======================================================
 
 @router.get("/register/teacher", response_class=HTMLResponse)
-async def register_teacher_page(request: Request):
+def register_teacher_page(request: Request):
 
     return templates.TemplateResponse(
         request=request,
@@ -341,7 +341,7 @@ async def register_teacher_page(request: Request):
 
 
 @router.post("/register/teacher")
-async def register_teacher(
+def register_teacher(
     request: Request,
     fullname: str = Form(...),
     email: str = Form(...),
@@ -418,7 +418,7 @@ async def register_teacher(
 # ======================================================
 
 @router.get("/chon-vai-tro", response_class=HTMLResponse)
-async def chon_vai_tro_page(request: Request):
+def chon_vai_tro_page(request: Request):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -437,7 +437,7 @@ async def chon_vai_tro_page(request: Request):
 
 
 @router.post("/chon-vai-tro")
-async def chon_vai_tro(request: Request, vai_tro: str = Form(...)):
+def chon_vai_tro(request: Request, vai_tro: str = Form(...)):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -482,7 +482,7 @@ async def chon_vai_tro(request: Request, vai_tro: str = Form(...)):
 # ======================================================
 
 @router.get("/toi-la-giao-vien", response_class=HTMLResponse)
-async def toi_la_giao_vien_page(request: Request):
+def toi_la_giao_vien_page(request: Request):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -499,7 +499,7 @@ async def toi_la_giao_vien_page(request: Request):
 
 
 @router.post("/toi-la-giao-vien")
-async def toi_la_giao_vien(request: Request, ma_moi: str = Form(...)):
+def toi_la_giao_vien(request: Request, ma_moi: str = Form(...)):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -531,7 +531,7 @@ async def toi_la_giao_vien(request: Request, ma_moi: str = Form(...)):
 
 
 @router.get("/teacher-coming-soon", response_class=HTMLResponse)
-async def teacher_coming_soon(request: Request):
+def teacher_coming_soon(request: Request):
     """Duong dan cu - giu lai de link cu khong chet, chuyen sang trang that."""
     return RedirectResponse("/register/teacher", status_code=303)
 

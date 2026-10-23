@@ -146,3 +146,29 @@ async def lam_moi_cookie_phien(request: Request, call_next):
         )
 
     return response
+
+# ======================================================
+# NÉN GZIP (cô Lan 24/10/2026: "tôi muốn tốc độ của web nhanh hơn ... sửa sao cho an toàn").
+# Trang chat (~105 KB), trang làm bài (~59 KB), JSON trả lời trước đây gửi nguyên; nén còn khoảng 1/4 -> tải nhanh hơn rõ
+# trên mạng chậm. KHÔNG nén các đường trả TỆP (PDF, Word, .tex, .zip, ảnh hình vẽ): tệp đã nén sẵn / nén lại chỉ tốn
+# CPU, và để n8n nhận tệp như cũ. Trình duyệt / n8n không gửi "Accept-Encoding: gzip" thì vẫn nhận bản không nén.
+# ======================================================
+from starlette.middleware.gzip import GZipMiddleware  # noqa: E402
+
+_KHONG_NEN = ("/api/exam/tai", "/api/exam/generate-pdf", "/api/exam/export-loigiai", "/api/exam/hinh",
+              "/static/downloads")
+
+
+class _NenGzip:
+    def __init__(self, app):
+        self.app = app
+        self.gzip = GZipMiddleware(app, minimum_size=1000, compresslevel=5)
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http" and not str(scope.get("path", "")).startswith(_KHONG_NEN):
+            await self.gzip(scope, receive, send)
+            return
+        await self.app(scope, receive, send)
+
+
+app.add_middleware(_NenGzip)

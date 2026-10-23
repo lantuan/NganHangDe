@@ -21,7 +21,7 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 @router.get("/gv/classroom/connect")
-async def classroom_connect(request: Request):
+def classroom_connect(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -30,7 +30,7 @@ async def classroom_connect(request: Request):
 
 
 @router.get("/gv/classroom/callback", response_class=HTMLResponse)
-async def classroom_callback(request: Request, code: str = None, error: str = None):
+def classroom_callback(request: Request, code: str = None, error: str = None):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -68,7 +68,7 @@ async def classroom_callback(request: Request, code: str = None, error: str = No
 
 
 @router.get("/gv/classroom/sync")
-async def classroom_sync(request: Request):
+def classroom_sync(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -83,7 +83,7 @@ async def classroom_sync(request: Request):
 
 
 @router.get("/gv/classroom/debug-roster")
-async def classroom_debug_roster(request: Request):
+def classroom_debug_roster(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -101,7 +101,7 @@ async def classroom_debug_roster(request: Request):
 # ======================================================
 
 @router.get("/gv/thong-ke", response_class=HTMLResponse)
-async def thong_ke_nang_luc_page(request: Request):
+def thong_ke_nang_luc_page(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -114,7 +114,7 @@ async def thong_ke_nang_luc_page(request: Request):
 
 
 @router.get("/gv/thong-ke/data")
-async def thong_ke_nang_luc_data(request: Request, khoi: str | None = None, lop: str | None = None):
+def thong_ke_nang_luc_data(request: Request, khoi: str | None = None, lop: str | None = None):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:

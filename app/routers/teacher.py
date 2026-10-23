@@ -62,7 +62,7 @@ KI_THI_HIEN_THI = [
 
 
 @router.get("/gv", response_class=HTMLResponse)
-async def khu_lam_viec(request: Request):
+def khu_lam_viec(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -85,7 +85,7 @@ async def khu_lam_viec(request: Request):
 
 
 @router.get("/gv/ra-de", response_class=HTMLResponse)
-async def ra_de_form(request: Request, loi: str | None = None):
+def ra_de_form(request: Request, loi: str | None = None):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -242,7 +242,7 @@ async def ra_de_submit(
 
 
 @router.get("/gv/de-da-tao", response_class=HTMLResponse)
-async def de_da_tao(request: Request):
+def de_da_tao(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -280,7 +280,7 @@ async def xoa_de_da_tao(request: Request):
 
 
 @router.get("/gv/lop", response_class=HTMLResponse)
-async def danh_sach_lop(request: Request):
+def danh_sach_lop(request: Request):
     user = get_current_user(request)
     chan = yeu_cau_giao_vien(request, user)
     if chan is not None:
@@ -308,7 +308,7 @@ async def danh_sach_lop(request: Request):
 
 
 @router.get("/gv/lop/ma")
-async def lay_ma_lop(request: Request, khoi: str, lop: str):
+def lay_ma_lop(request: Request, khoi: str, lop: str):
     """
     Lay MA LOP (enrollment code) + link tham gia cua mot lop tren Google
     Classroom, de giao vien phat cho hoc sinh - dung cai ma hoc sinh se

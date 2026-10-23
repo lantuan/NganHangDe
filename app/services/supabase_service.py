@@ -62,12 +62,20 @@ def get_user():
     return supabase.auth.get_user()
 
 
+from app.core.bo_nho_tam import BoNhoTam
+
+_LOP = BoNhoTam(300)            # user_id -> {"khoi", "lop"} (5 phút), xem app/core/bo_nho_tam.py
+
+
 def lay_lop_hoc_sinh(user_id: str):
     """
     Doc khoi/lop hoc sinh da tu chon o trang /chon-lop, tu bang
     public.profiles. Tra ve dict {"khoi":..., "lop":...} hoac None neu
     chua chon / co loi (khong lam crash luong /chat).
     """
+    co, lop = _LOP.lay(user_id)
+    if co:
+        return dict(lop)
     try:
         ket_qua = (
             supabase_admin.table("profiles")
@@ -76,6 +84,8 @@ def lay_lop_hoc_sinh(user_id: str):
             .single()
             .execute()
         )
+        if ket_qua.data and ket_qua.data.get("khoi") and ket_qua.data.get("lop"):
+            _LOP.dat(user_id, dict(ket_qua.data))          # nhớ 5 phút khi đã chọn lớp; đổi lớp thì xoá ngay
         return ket_qua.data
     except Exception as e:
         print("LOI DOC PROFILE (lay_lop_hoc_sinh):", e)
@@ -86,6 +96,7 @@ def cap_nhat_lop_hoc_sinh(user_id: str, khoi: str, lop: str):
     """
     Ghi khoi/lop hoc sinh tu chon vao public.profiles.
     """
+    _LOP.xoa(user_id)
     return (
         supabase_admin.table("profiles")
         .update({"khoi": khoi, "lop": lop})

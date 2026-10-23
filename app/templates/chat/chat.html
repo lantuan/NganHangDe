@@ -15,12 +15,11 @@
     <!-- Material Icon -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-    <!-- Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-    <!-- Highlight -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/github.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/highlight.min.js"></script>
+    <!-- Markdown. Ghi rõ phiên bản (24/10/2026): đường "npm/marked/marked.min.js" không ghi phiên bản luôn lấy bản mới
+         nhất, mà từ marked 16 trở đi KHÔNG còn tệp marked.min.js (đã kiểm gói npm marked 18.1.1) -> có thể tải hỏng;
+         bản 15.0.12 còn tệp này, cùng hàm marked.parse / marked.parseInline. Ghi phiên bản thì trình duyệt nhớ lâu.
+         Bỏ highlight.js: trang không dùng (không có lệnh hljs nào). -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
 
     <!-- MathJax -->
     {% raw %}
@@ -958,6 +957,11 @@
         // ===== GIA SU MUC B (co Lan 22/10/2026): doan tai lieu li thuyet cua thay/co ma AI duoc dung them =====
         // Hien ngay duoi cau tra loi (thu gon, bam de mo): hoc sinh biet bai nao, muc nao can hoc lai, va thay ngay neu AI
         // noi lech tai lieu. Noi dung la chu + cong thuc $...$ (da lam sach o ly_thuyet_service) - thoat HTML roi de MathJax ve.
+        // marked chưa tải được (mạng chậm, CDN lỗi) thì vẫn hiện chữ thường, KHÔNG làm hỏng khung xác nhận tạo đề.
+        function mdMotDong(s) {
+            if (window.marked && window.marked.parseInline) return window.marked.parseInline(s);
+            return thoatHtmlLyThuyet(s);
+        }
         function thoatHtmlLyThuyet(s) {
             return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
@@ -1917,7 +1921,7 @@ ${html}
                         const deXuatEncoded = encodeURIComponent(JSON.stringify(data.data));
                         addAIMessage(
                             `<div class="xac-nhan-de" id="${idHoi}">` +
-                            `<p>${marked.parseInline(data.data.tra_loi || data.message || "")}</p>` +
+                            `<p>${mdMotDong(data.data.tra_loi || data.message || "")}</p>` +
                             `<div>${htmlMucLuyen()}</div>` +
                             `<p>${htmlTickKemAnh()}</p>` +
                             `<button class="btn-dong-y" onclick="xacNhanTaoDe('${idHoi}','${deXuatEncoded}')">✅ Đồng ý, tạo đề</button>` +

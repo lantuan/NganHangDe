@@ -1,5 +1,8 @@
 from fastapi import Request
+from app.core.bo_nho_tam import BoNhoTam
 from app.core.supabase import supabase
+
+_PHIEN = BoNhoTam(120)          # token đăng nhập -> user (2 phút)
 
 
 def _thu_lam_moi_phien(refresh_token: str):
@@ -35,8 +38,15 @@ def get_current_user(request: Request):
     """
     token = request.cookies.get("sb_access_token")
     if token:
+        # Nhớ 2 phút kết quả xác thực THÀNH CÔNG của token này (app/core/bo_nho_tam.py) - không phải gọi Supabase ở mọi
+        # yêu cầu. Đăng xuất thì cookie bị xoá nên token không còn được gửi lên.
+        co, user = _PHIEN.lay(token)
+        if co:
+            return user
         try:
             result = supabase.auth.get_user(token)
+            if result and result.user:
+                _PHIEN.dat(token, result.user)
             return result.user
         except Exception:
             pass  # access_token het han/khong hop le - thu lam moi ben duoi

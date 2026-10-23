@@ -197,7 +197,7 @@ _EXT_THEO_CONTENT_TYPE = {
 
 
 @router.get("/chat", response_class=HTMLResponse)
-async def chat(request: Request):
+def chat(request: Request):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -252,7 +252,7 @@ async def chat(request: Request):
 
 
 @router.get("/chon-lop", response_class=HTMLResponse)
-async def chon_lop_page(request: Request):
+def chon_lop_page(request: Request):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -274,7 +274,7 @@ async def chon_lop_page(request: Request):
 
 
 @router.post("/chon-lop")
-async def chon_lop_submit(request: Request, lop_full: str = Form(...)):
+def chon_lop_submit(request: Request, lop_full: str = Form(...)):
     user = get_current_user(request)
     if user is None:
         return RedirectResponse("/login", status_code=303)
@@ -310,7 +310,7 @@ async def chon_lop_submit(request: Request, lop_full: str = Form(...)):
 
 
 @router.get("/lam-bai/{de_id}", response_class=HTMLResponse)
-async def lam_bai_page(request: Request, de_id: str):
+def lam_bai_page(request: Request, de_id: str):
     """Trang lam bai truc tiep (MC/TF/SA) - JS trong template tu goi
     GET /api/exam/quiz/{de_id} de lay cau hoi (an dap an) va POST
     /api/exam/grade de nop bai + cham diem. Khong tu doc de_id o day,
@@ -340,7 +340,7 @@ async def lam_bai_page(request: Request, de_id: str):
 
 
 @router.get("/api/chat/history")
-async def lay_lich_su_chat(request: Request):
+def lay_lich_su_chat(request: Request):
     user = get_current_user(request)
     if user is None:
         raise HTTPException(401, "Chua dang nhap")
@@ -349,7 +349,7 @@ async def lay_lich_su_chat(request: Request):
 
 
 @router.get("/api/chat/history/{conversation_id}")
-async def lay_tin_nhan(request: Request, conversation_id: str):
+def lay_tin_nhan(request: Request, conversation_id: str):
     user = get_current_user(request)
     if user is None:
         raise HTTPException(401, "Chua dang nhap")
@@ -395,7 +395,7 @@ class LuuDeTrucTiepRequest(BaseModel):
 
 
 @router.post("/api/chat/luu-de-truc-tiep")
-async def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequest):
+def luu_de_truc_tiep_endpoint(request: Request, payload: LuuDeTrucTiepRequest):
     """Luu lai 1 cap tin nhan user/assistant vao chat_history cho cac luong
     tao de KHONG di qua CHV_Fun/n8n (nut "Dong y tao de" o luong xac nhan
     cau truc, va form "Tao de nhanh") - vi cac luong nay goi thang
@@ -463,6 +463,11 @@ async def dang_classroom_endpoint(request: Request, payload: DangClassroomReques
     return {**ket_qua, "la_giao_vien": bool(la_gv)}
 
 
+async def _luu_tin_nhan(**kw):
+    """Lưu tin nhắn (gọi Supabase qua mạng) trong threadpool: không để cả máy chủ đứng chờ (cô Lan 24/10/2026)."""
+    return await run_in_threadpool(lambda: history_service.luu_tin_nhan(**kw))
+
+
 @router.post("/chat")
 async def chat_post(
     request: Request,
@@ -471,7 +476,7 @@ async def chat_post(
     kem_tieng_anh: str | None = Form(default=None),
     chi_yccd: str | None = Form(default=None),
 ):
-    user = get_current_user(request)
+    user = await run_in_threadpool(get_current_user, request)
     if user is None:
         return {
             "success": False,
@@ -480,7 +485,7 @@ async def chat_post(
             "need_login": True,
         }
 
-    vai_tro = profile_service.lay_vai_tro(user.id)
+    vai_tro = await run_in_threadpool(profile_service.lay_vai_tro, user.id)
 
     # Ô tick "Kèm bản tiếng Anh": n8n tự gọi /generate-pdf-auto nên không nhận được ô tick này; ghi lại theo
     # hội thoại để /generate-pdf-auto tra lại (n8n không phải sửa gì). Không tick -> chỉ sinh bản Việt.
@@ -494,7 +499,7 @@ async def chat_post(
     print(f"[{vai_tro}] {message}")
     print("==========================")
 
-    history_service.luu_tin_nhan(
+    await _luu_tin_nhan(
         user_id=user.id,
         conversation_id=conversation_id,
         role="user",
@@ -529,7 +534,7 @@ async def chat_post(
         loi_nhan = (pham_vi_service.tra_loi_ngoai_pham_vi(ly_do, lop_hs, lay_ngon_ngu(request)) if ly_do else
                     pham_vi_service.tra_loi_chon_chuong(message, lop_hs, lay_ngon_ngu(request)))
         print("CHAT: pham vi ->", ly_do or "chua noi chuong")
-        history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+        await _luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
                                      noi_dung=loi_nhan, loai_phan_hoi="text")
         return {"success": True, "message": loi_nhan,
                 "data": {"type": "ngoai_pham_vi" if ly_do else "chon_chuong", "ly_do": ly_do}}
@@ -546,7 +551,7 @@ async def chat_post(
             import json as _json
             goi = {"success": True, "message": "", "data": {"tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"],
                                                             "che_do": "kien_thuc"}}
-            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+            await _luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
                                          noi_dung=_json.dumps(goi, ensure_ascii=False), loai_phan_hoi="gia_su")
             return {"success": True, "message": kt["tra_loi"],
                     "data": {"type": "kien_thuc", "tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"]}}
@@ -554,7 +559,7 @@ async def chat_post(
         if not await run_in_threadpool(tro_chuyen_service.co_tai_lieu, message, lop_trong_ho_so(user.id)):
             loi_nhan = (tro_chuyen_service.KHONG_CO_TAI_LIEU_EN if lay_ngon_ngu(request) == "en"
                         else tro_chuyen_service.KHONG_CO_TAI_LIEU)
-            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+            await _luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
                                          noi_dung=loi_nhan, loai_phan_hoi="text")
             return {"success": True, "message": loi_nhan, "data": {"type": "ngoai_tai_lieu"}}
 
@@ -572,7 +577,7 @@ async def chat_post(
                 "bài mới để tránh giảng sai). Bạn tạo đề, làm bài trên web và nộp, rồi bấm vào câu muốn hỏi. "
                 "Mỗi câu trả lời đều có ô để hỏi tiếp ngay bên dưới."
             )
-            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id,
+            await _luu_tin_nhan(user_id=user.id, conversation_id=conversation_id,
                                          role="assistant", noi_dung=loi_nhan)
             return {"success": True, "message": loi_nhan, "data": {"type": "huong_dan_hoi_bai"}}
         da_nop = await run_in_threadpool(gia_su_service.co_de_da_nop_bai, user.id, conversation_id)
@@ -593,7 +598,7 @@ async def chat_post(
                 if en else
                 "Bạn chưa nộp bài đề gần nhất. Làm bài trên web và nộp, rồi bấm vào câu muốn hỏi ở bảng bên dưới nhé."
             )
-        history_service.luu_tin_nhan(
+        await _luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=loi_nhan,
         )
@@ -627,7 +632,7 @@ async def chat_post(
         if du_phong:
             return du_phong
         loi = "Không kết nối được với AI sau 2 lần thử, vui lòng thử lại."
-        history_service.luu_tin_nhan(
+        await _luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=loi, loai_phan_hoi="error",
         )
@@ -659,7 +664,7 @@ async def chat_post(
                 "data": None,
             }
 
-        history_service.luu_tin_nhan(
+        await _luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant",
             noi_dung=ket_qua.get("message") or ket_qua.get("reply"),
@@ -681,7 +686,7 @@ async def chat_post(
         # Cô Lan 22/10/2026: "có lúc xuất đề ra cả lời giải" - CHV_Fun hiểu nhầm yêu cầu tạo đề thành "tải lời
         # giải" thì n8n trả về LỜI GIẢI của đề gần nhất, mà trước đây máy chủ vẫn chào "Xong đề rồi đó!" và hiện nút
         # "Làm bài trực tiếp". Nay so nội dung tệp với tệp lời giải của đề gần nhất: trùng thì nói rõ đây là lời giải.
-        tep_la_loi_giai = _la_tep_loi_giai_de_gan_nhat(r.content, conversation_id)
+        tep_la_loi_giai = await run_in_threadpool(_la_tep_loi_giai_de_gan_nhat, r.content, conversation_id)
         if tep_la_loi_giai and not _la_yeu_cau_loi_giai(message):
             cau_dan = ("Đây là LỜI GIẢI của đề gần nhất (mình đã hiểu yêu cầu của bạn là xin lời giải). "
                        "Nếu bạn muốn một đề mới, bấm 📝 Tạo đề mới nhé.")
@@ -694,7 +699,7 @@ async def chat_post(
             # o chat.html bang JS) cho DE, khong hoi cho loi giai. Neu
             # chua tim thay de_id (VD Supabase loi) thi bo qua, nut se
             # khong hien ra - khong chan viec tra PDF cho hoc sinh.
-            de_vua_sinh = history_service.lay_de_gan_nhat(conversation_id)
+            de_vua_sinh = await run_in_threadpool(history_service.lay_de_gan_nhat, conversation_id)
             if de_vua_sinh and de_vua_sinh.get("id"):
                 de_id_de_hoi = de_vua_sinh["id"]
 
@@ -710,7 +715,7 @@ async def chat_post(
             cau_dan = cau_dan + " " + dong_tuy_chon_da_ap_dung(
                 thong_tin, tuy_chon_de_service.lay_kem_tieng_anh(conversation_id), lay_ngon_ngu(request))
 
-        history_service.luu_tin_nhan(
+        await _luu_tin_nhan(
             user_id=user.id, conversation_id=conversation_id,
             role="assistant", noi_dung=cau_dan,
             loai_phan_hoi="file", duong_dan_file=file_url,
@@ -734,7 +739,7 @@ async def chat_post(
     if du_phong:
         return du_phong
     loi = "Không hiểu phản hồi từ n8n."
-    history_service.luu_tin_nhan(
+    await _luu_tin_nhan(
         user_id=user.id, conversation_id=conversation_id,
         role="assistant", noi_dung=loi, loai_phan_hoi="error",
     )

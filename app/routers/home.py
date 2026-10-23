@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 @router.get("/", response_class=HTMLResponse)
-async def home(request: Request):
+def home(request: Request):
     # Trang chu truoc day khong biet nguoi dung da dang nhap hay chua
     # (khong doc cookie), nen luon hien nut "Dang nhap" du phien van
     # con hop le - gay cam giac "bi dang xuat" khi bam ve trang chu.

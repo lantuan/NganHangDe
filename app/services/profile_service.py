@@ -13,6 +13,9 @@ khong vao duoc /gv/*. Ham lay_vai_tro() phan biet ro 2 truong hop:
 """
 
 from app.core.supabase import supabase_admin as supabase
+from app.core.bo_nho_tam import BoNhoTam
+
+_VAI_TRO = BoNhoTam(300)        # user_id -> vai_tro (5 phút), xem app/core/bo_nho_tam.py
 
 VAI_TRO_MAC_DINH = "hoc_sinh"
 # Tai khoan vua tao, CHUA tra loi cau hoi "ban la hoc sinh hay giao vien".
@@ -28,6 +31,9 @@ def lay_vai_tro(user_id: str) -> str:
     """Tra ve vai_tro cua 1 tai khoan. Xem docstring dau file ve loi."""
     if not user_id:
         return VAI_TRO_MAC_DINH
+    co, vt = _VAI_TRO.lay(user_id)
+    if co:
+        return vt
     try:
         ket_qua = (
             supabase.table("profiles")
@@ -43,7 +49,9 @@ def lay_vai_tro(user_id: str) -> str:
 
     if not ket_qua.data:
         return VAI_TRO_MAC_DINH
-    return ket_qua.data.get("vai_tro") or VAI_TRO_MAC_DINH
+    vt = ket_qua.data.get("vai_tro") or VAI_TRO_MAC_DINH
+    _VAI_TRO.dat(user_id, vt)              # nhớ 5 phút (chỉ khi đọc được); đổi vai trò thì dat_vai_tro xoá ngay
+    return vt
 
 
 def la_giao_vien(user_id: str) -> bool:
@@ -58,6 +66,7 @@ def dat_vai_tro(user_id: str, vai_tro: str) -> bool:
     """
     if vai_tro not in ("chua_chon", "hoc_sinh", "giao_vien", "quan_tri"):
         raise ValueError(f"vai_tro khong hop le: {vai_tro}")
+    _VAI_TRO.xoa(user_id)
     try:
         supabase.table("profiles").update({"vai_tro": vai_tro}).eq("id", user_id).execute()
         return True
