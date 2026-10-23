@@ -1887,7 +1887,10 @@ ${html}
                 }
 
                 if (data.success) {
-                    if (data.data && data.data.type === "mo_bang_gia_su") {
+                    if (data.data && data.data.type === "kien_thuc") {
+                        // Hoi kien thuc: AI tra loi chi theo tai lieu li thuyet cua thay/co (co khung tai lieu da dung)
+                        addAIMessage(htmlTraLoiGiaSu({ success: true, data: { tra_loi: data.data.tra_loi, ly_thuyet: data.data.ly_thuyet } }));
+                    } else if (data.data && data.data.type === "mo_bang_gia_su") {
                         // May chu nhan ra hoc sinh dang hoi bai VA hoi thoai
                         // nay da co de da nop bai. Khong doan so cau - mo
                         // bang PHAN I/II/III/IV de chinh em ay bam dung cau.

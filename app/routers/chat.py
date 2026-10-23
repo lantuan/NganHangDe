@@ -18,6 +18,7 @@ from app.services import gia_su_service
 from app.services import supabase_service
 from app.services import classroom_service
 from app.services import yeu_cau_de_service
+from app.services import tro_chuyen_service
 
 router = APIRouter()
 
@@ -96,7 +97,8 @@ def lop_trong_ho_so(user_id: str) -> int | None:
         return None
 
 
-def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str) -> dict | None:
+def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str,
+                     vai_tro: str | None = None) -> dict | None:
     """n8n hỏng (JSON rỗng/hỏng, không kết nối, phản hồi lạ): máy chủ tự trả lời những gì đọc chắc được, thay vì "AI chưa
     xử lý được" (cô Lan 22-23/10/2026):
       - yêu cầu tạo đề rõ ràng (kỳ thi hoặc chương; lớp lấy trong tin nhắn, không có thì lấy hồ sơ; "phần tự luận",
@@ -117,7 +119,26 @@ def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str) 
         history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
                                      noi_dung=huong_dan, loai_phan_hoi="text")
         return {"success": True, "message": huong_dan, "data": {"type": "huong_dan"}}
+    # Còn lại (trò chuyện, chuyện ngoài lề): trả lời tự nhiên qua webhook gia sư (cô Lan 23/10/2026: "tôi cần chat được
+    # bình thường như chatbox bình thường khác"), thay vì câu báo lỗi.
+    tra_loi = tro_chuyen_service.tro_chuyen(message, _lich_su_gan(user_id, conversation_id), lang, vai_tro)
+    if tra_loi:
+        print("CHAT: n8n hong, tra loi tro chuyen qua webhook gia su")
+        history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
+                                     noi_dung=tra_loi, loai_phan_hoi="text")
+        return {"success": True, "message": tra_loi, "data": {"type": "tro_chuyen"}}
     return None
+
+
+def _lich_su_gan(user_id: str, conversation_id: str) -> list[tuple[str, str]]:
+    """Vài tin nhắn gần nhất (bỏ tin nhắn vừa gửi - đã lưu trước khi gọi n8n) để trả lời trò chuyện có ngữ cảnh."""
+    try:
+        ds = history_service.lay_tin_nhan_hoi_thoai(user_id, conversation_id) or []
+    except Exception:
+        return []
+    ra = [(m.get("role"), "[giảng bài]" if m.get("loai_phan_hoi") == "gia_su" else (m.get("noi_dung") or ""))
+          for m in ds[:-1]]
+    return ra[-4:]
 
 
 def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:
@@ -456,6 +477,22 @@ async def chat_post(
     # toán học...) và không bắt buộc đã nộp bài mới chặn - hội thoại có đề thì mở bảng chọn câu (bảng tự nhắc "chưa nộp
     # bài" nếu chưa làm); chưa có đề thì nói rõ phần hỏi bài hoạt động thế nào, KHÔNG đẩy xuống CHV_Fun để bị từ chối.
     # Câu học sinh vừa gõ đi kèm (cau_hoi_goc): bấm câu nào thì gửi chính câu đó cho thầy/cô AI.
+    # Cô Lan 23/10/2026: hỏi KIẾN THỨC Toán ("tập rỗng là gì", "phương sai là gì", "định lý sin") -> AI trả lời CHỈ
+    # theo tài liệu lí thuyết có sẵn của cô (tro_chuyen_service.tra_loi_kien_thuc, qua webhook gia sư; không thấy đoạn
+    # tài liệu nào thì đi tiếp đường cũ). Lưu như gói gia sư để mở lại hội thoại vẫn có khung tài liệu.
+    if tro_chuyen_service.la_cau_hoi_kien_thuc(message):
+        kt = await run_in_threadpool(
+            lambda: tro_chuyen_service.tra_loi_kien_thuc(message, lop_trong_ho_so(user.id), lay_ngon_ngu(request),
+                                                         vai_tro))
+        if kt:
+            import json as _json
+            goi = {"success": True, "message": "", "data": {"tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"],
+                                                            "che_do": "kien_thuc"}}
+            history_service.luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+                                         noi_dung=_json.dumps(goi, ensure_ascii=False), loai_phan_hoi="gia_su")
+            return {"success": True, "message": kt["tra_loi"],
+                    "data": {"type": "kien_thuc", "tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"]}}
+
     if gia_su_service.la_cau_hoi_toan(message):
         en = lay_ngon_ngu(request) == "en"
         de_gan = await run_in_threadpool(history_service.lay_de_gan_nhat, conversation_id)
@@ -516,7 +553,7 @@ async def chat_post(
             print(f"LOI CHAT: khong ket noi duoc n8n (lan {lan_thu + 1}/2) ->", e)
 
     if r is None:
-        du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+        du_phong = await run_in_threadpool(_du_phong_tao_de, request, message, user.id, conversation_id, vai_tro)
         if du_phong:
             return du_phong
         loi = "Không kết nối được với AI sau 2 lần thử, vui lòng thử lại."
@@ -541,7 +578,7 @@ async def chat_post(
         # đọc rồi hiện khung xác nhận như RequestParser (cô Lan 22/10/2026: "Lớp 10, thi giữa kỳ 1" báo "AI chưa xử lý
         # được"). Xem app/services/yeu_cau_de_service.py.
         if not isinstance(ket_qua, dict) or not ket_qua:
-            du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+            du_phong = await run_in_threadpool(_du_phong_tao_de, request, message, user.id, conversation_id, vai_tro)
             if du_phong:
                 return du_phong
             ket_qua = {
@@ -620,7 +657,7 @@ async def chat_post(
     # Truong hop la khac (n8n loi, tra HTML/text...) - khong de 500 lang le
     print("LOI CHAT: content-type khong xac dinh ->", content_type)
     print(r.text[:1000])
-    du_phong = _du_phong_tao_de(request, message, user.id, conversation_id)
+    du_phong = await run_in_threadpool(_du_phong_tao_de, request, message, user.id, conversation_id, vai_tro)
     if du_phong:
         return du_phong
     loi = "Không hiểu phản hồi từ n8n."

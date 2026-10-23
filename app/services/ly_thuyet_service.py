@@ -66,7 +66,7 @@ DIEM_TOI_THIEU = 3.0     # duoi nguong nay coi nhu khong trung (chi trung tu pho
 _TU_DUNG = set("""
 là gì sao tại vì thế nào em anh chị mình tôi tớ chưa hiểu cho của có không ko được này đó ở và thì mà với bước
 câu làm ra như vậy nhỉ ạ à hả hỏi giải thích lại một các những khi nếu ta bằng nên cái chỗ phần đây kia sự theo
-trong từ đến để về hay hoặc sẽ đã đang rồi nữa thầy cô thêm giúp nói rõ cách tính ý nghĩa nghĩa sai đúng tại
+trong từ đến để về hay hoặc sẽ đã đang rồi nữa thầy cô thêm giúp nói rõ cách tính ý nghĩa nghĩa tại
 bao nhiêu mấy kiểu chi vẫn còn đâu luôn ơi nha nhé đi xem biết dùng phải cần muốn thấy hiểu giảng lời đề bài
 vừa phần i ii iii iv
 what is the a an of why how does do mean meaning in to and or this that it please explain part question
@@ -262,6 +262,21 @@ def tim_doan(question_id: str | None, cau_hoi: str, dang_hoi_tiep: bool = False)
     # các chương ĐÃ HỌC: Chương 1 đến chương của câu đang hỏi (chương đánh số theo PPCT nên nhỏ hơn là đã học).
     chuong = _so_chuong(question_id)
     kho = tuple(m for m in _kho_dong(lop) if _so_chuong(m[0]) <= chuong)
+    ket_qua = _tim_trong_kho(kho, bai_cua_cau, cau_hoi)
+    if not ket_qua and dang_hoi_tiep:
+        ket_qua = ca_muc_cua_bai(bai_cua_cau[:1])
+    return ket_qua
+
+
+def tim_doan_tu_do(lop: int | None, cau_hoi: str) -> list[dict]:
+    """Câu hỏi KIẾN THỨC gõ thẳng trong khung chat, không gắn với câu nào của đề (cô Lan 23/10/2026: "nếu hỏi về kiến
+    thức toán thì AI có thể đọc ngay phần lý thuyết có sẵn để trả lời, chỉ trả lời trong đó"). Tìm trong mọi bài của
+    lớp (theo hồ sơ; không có thì lớp 10); mọi bài ngang nhau nên trùng một từ hiếm ("tan", "trung vị") cũng lấy."""
+    lop_ma = "L%d" % (lop if lop in (10, 11, 12) else 10)
+    return _tim_trong_kho(_kho_dong(lop_ma), [], cau_hoi, tu_do=True)
+
+
+def _tim_trong_kho(kho: tuple, bai_cua_cau: list, cau_hoi: str, tu_do: bool = False) -> list[dict]:
     cum = _cac_cum(cau_hoi or "")
     ket_qua: list[dict] = []
     if kho and cum:
@@ -281,7 +296,7 @@ def tim_doan(question_id: str | None, cau_hoi: str, dang_hoi_tiep: bool = False)
             if not s:
                 continue
             cung_bai = kho[k][0] in bai_cua_cau
-            if not cung_bai and not any(" " in c or c.startswith("\\") for c in o_than + o_tieu):
+            if not tu_do and not cung_bai and not any(" " in c or c.startswith("\\") for c in o_than + o_tieu):
                 continue
             if cung_bai:
                 s *= 1.5                                              # uu tien bai cua chinh cau dang hoi
@@ -306,8 +321,6 @@ def tim_doan(question_id: str | None, cau_hoi: str, dang_hoi_tiep: bool = False)
             ket_qua.append({"ma_bai": m[0], "ten_bai": m[1], "tep": m[2], "muc": m[3], "noi_dung": noi})
             if len(ket_qua) >= TOI_DA_DOAN:
                 break
-    if not ket_qua and dang_hoi_tiep:
-        ket_qua = ca_muc_cua_bai(bai_cua_cau[:1])
     return ket_qua
 
 
