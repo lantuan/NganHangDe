@@ -48,6 +48,8 @@ Version: 1.0
 
 28_DA_NGON_NGU.md  (so tay: web va de Viet/Anh; nut ngon ngu; dich ngan hang sang tieng Anh bang scripts/dich_ngan_hang.py; kiem tuong duong Viet/Anh; trang lam bai va gia su AI bang tieng Anh)
 
+30_HUONG_DAN_SU_DUNG.md  (huong dan su dung web cho giao vien va hoc sinh; anh minh hoa o docs/hinh_huong_dan/)
+
 ---
 
 Quy tắc:
