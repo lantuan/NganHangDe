@@ -707,5 +707,12 @@
  "Lí do:": "Reason:",
  "📤 Em chưa tham gia lớp trên Google Classroom nên chưa đăng được điểm lên lớp.": "📤 You have not joined the class on Google Classroom yet, so your score could not be posted to the class.",
  "👉 Bấm vào đây để tham gia lớp (đăng nhập đúng tài khoản Google của em, bấm Tham gia)": "👉 Click here to join the class (sign in with your own Google account, then click Join)",
- "🔁 Tham gia xong, đăng lại lên Classroom": "🔁 Joined - post to Classroom again"
+ "🔁 Tham gia xong, đăng lại lên Classroom": "🔁 Joined - post to Classroom again",
+ "📎 Web chưa hiện được hình của câu này nên câu này": "📎 The website could not display the figure of this question, so this question is",
+ "không tính điểm": "not scored",
+ "(em không bị trừ điểm). Em": "(you lose no points). Please",
+ "mở file PDF đề": "open the exam PDF",
+ "để xem hình và làm thử, chỗ nào chưa biết thì bấm nút hỏi thầy/cô AI bên dưới, thầy/cô sẽ cho em xem đề,": "to see the figure and try it; for anything you do not understand, tap the AI teacher button below to see the question,",
+ "đáp án và lời giải.": "the answer and the solution.",
+ "📎 Không tính điểm — web chưa hiện được hình của câu này.": "📎 Not scored — the website could not display the figure of this question."
 }

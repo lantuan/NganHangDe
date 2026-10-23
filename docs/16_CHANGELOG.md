@@ -10681,3 +10681,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `exam_assembler_service._sinh_cac_ma_de`: đưa CHÍNH `ban_ghi` vào hàng chờ dịch hình (áp dụng cả bản Việt và bản Anh).
 - Đề đã tạo trong lúc lỗi: `routers/exam._bu_anh_tu_kho` - tệp đáp án vẫn giữ mã TikZ (`hinh_tikz`, `hinh_phuong_an_tikz`, `hinh_phat_bieu_tikz`), tính lại mã băm và lấy ảnh đã có trong kho (không dịch lại) -> đề cũ hiện lại hình, không cần tạo lại.
 - Test `tests/test_dap_an_co_anh_hinh.py` (bỏ bản sửa thì test hỏng).
+
+## 2026-10-24 - Câu chưa hiện được hình: không tính điểm, vẫn hỏi được thầy/cô AI
+- Cô Lan (ảnh): cũng đề đó, bảng kết quả mất câu MC 1 và câu Đúng/Sai (hai câu có hình), điểm 0/7 mà điểm tối đa vẫn tính cả hai câu - học sinh mất điểm oan, cũng không có nút hỏi thầy/cô AI cho hai câu đó. Cô muốn: không mất điểm oan VÀ học sinh vẫn hỏi lại được phần mình không biết.
+- `lam_bai.html` `thuThapBaiLam`: câu có hình mà web chưa hiện được (không có ảnh) KHÔNG còn bị bỏ qua; gửi `{so_thu_tu, cau_tra_loi: null, chua_hien_hinh: true}`.
+- `exam.py /grade`: `CauTraLoiHocSinh.chua_hien_hinh`; máy chủ kiểm lại bằng `_cau_chua_hien_hinh` (câu thật có hình VÀ không có ảnh nào, kể cả ảnh lấy lại từ kho) - không tin cờ của trình duyệt. Câu đó: dòng kết quả `trang_thai: "chua_hien_hinh"`, `diem_toi_da: 0`, điểm của câu bị trừ khỏi `diem_toi_da_tu_dong` / `diem_toi_da_tong` (không cộng, không trừ). Câu khác giữ nguyên trọng số.
+- Trang kết quả: câu đó ghi "không tính điểm (em không bị trừ điểm)", có liên kết mở file PDF đề để xem hình, và nút "Hỏi thầy/cô AI về câu này" (gia sư đọc đề + phương án + lời giải từ tệp đáp án như mọi câu). Bản tóm tắt lưu vào chat ghi "Không tính điểm — web chưa hiện được hình". Bản Anh: thêm 7 mục `en_ui.json`.
+- Test `tests/test_dap_an_co_anh_hinh.py` thêm 2 trường hợp (không tính điểm; cờ giả bị bỏ qua).

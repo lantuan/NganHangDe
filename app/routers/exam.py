@@ -1052,6 +1052,18 @@ class CauTraLoiHocSinh(BaseModel):
     # MC/SA: string dap an. TF: dict 4 y {"a":bool,"b":bool,"c":bool,"d":bool}
     # (thieu y nao thi coi nhu y do sai/chua tra loi).
     cau_tra_loi: str | dict | None = None
+    # Trang lam bai danh dau cau co hinh ma web CHUA hien duoc hinh (hoc sinh khong thay de day du, khong co o
+    # chon dap an). Cau do KHONG tinh diem (khong cong, khong tru) - xem _cau_chua_hien_hinh (co Lan 24/10/2026).
+    chua_hien_hinh: bool = False
+
+
+def _cau_chua_hien_hinh(cau: dict) -> bool:
+    """Kiem lai o MAY CHU: cau nay that su co hinh ma khong co anh nao de hien (khong tin co cua trinh duyet,
+    de hoc sinh khong tu danh dau cau kho de khoi bi tinh diem)."""
+    if not cau.get("co_hinh_ve"):
+        return False
+    cau = _bu_anh_tu_kho(dict(cau))
+    return not (cau.get("hinh") or cau.get("hinh_phuong_an") or cau.get("hinh_phat_bieu"))
 
 
 class ChamBaiRequest(BaseModel):
@@ -1105,6 +1117,7 @@ def grade_endpoint(request: Request, payload: ChamBaiRequest):
     # Cong don bang so THUC chua lam tron, chi lam tron o buoc cuoi cung
     # (tranh lech kieu 3 cau SA x 0.67 = 2.01 diem).
     tong_diem_tu_dong = 0.0
+    diem_bo_ra = 0.0          # diem cua cac cau chua hien duoc hinh - khong tinh vao diem toi da
 
     for bl in payload.bai_lam:
         cau = dap_an_theo_stt.get(bl.so_thu_tu)
@@ -1126,6 +1139,25 @@ def grade_endpoint(request: Request, payload: ChamBaiRequest):
         loai_cau = cau.get("loai_cau")
         generator_id = cau.get("generator_id")
         chuong, bai_so = trich_chuong_bai(generator_id)
+
+        if bl.chua_hien_hinh and loai_cau in ("MC", "SA", "TF") and _cau_chua_hien_hinh(cau):
+            # Hoc sinh khong lam duoc vi web chua hien hinh: khong cham, bot diem cua cau nay khoi diem toi da,
+            # van tra ve mot dong de trang ket qua hien cau nay + nut hoi thay/co AI (gia su doc de tu tep dap an).
+            diem_bo_ra += diem_service.diem_toi_da_cua_cau_goc(thang, loai_cau)
+            chi_tiet.append({
+                "question_id": generator_id,
+                "loai_cau": loai_cau,
+                "dung_sai_hoac_diem": None,
+                "diem_toi_da": 0,
+                "nhan_xet": "Web chưa hiện được hình của câu này nên không tính điểm.",
+                "chuong": chuong,
+                "bai": bai_so,
+                "tags": [],
+                "so_thu_tu": bl.so_thu_tu,
+                "trang_thai": "chua_hien_hinh",
+                "dap_an_dung": cau.get("dap_an_dung"),
+            })
+            continue
 
         if loai_cau == "MC":
             dung = (bl.cau_tra_loi or "").strip().upper() == (
@@ -1240,6 +1272,10 @@ def grade_endpoint(request: Request, payload: ChamBaiRequest):
 
     lam_tron = thang.get("lam_tron", 2)
     diem_tam_tinh = round(tong_diem_tu_dong, lam_tron) if tong_so_cau else 0.0
+    if diem_bo_ra:
+        thang = dict(thang)
+        thang["diem_toi_da_tu_dong"] = round(thang["diem_toi_da_tu_dong"] - diem_bo_ra, lam_tron)
+        thang["diem_toi_da_tong"] = round(thang["diem_toi_da_tong"] - diem_bo_ra, lam_tron)
 
     if payload.user_id:
         history_service.luu_ket_qua_cham_bai(

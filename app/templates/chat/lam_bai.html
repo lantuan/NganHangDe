@@ -603,7 +603,14 @@ function thuThapBaiLam() {
     const baiLam = [];
     DANH_SACH_CAU.forEach(function (cau) {
         const chuaHienDuocHinh = cau.co_hinh_ve && !(cau.hinh && cau.hinh.length) && !coAnhTrongO(cau);
-        if (chuaHienDuocHinh || cau.loai_cau === 'TL') return;
+        if (cau.loai_cau === 'TL') return;
+        // Cau co hinh ma web chua hien duoc: VAN gui len, kem co chua_hien_hinh -> may chu khong tinh diem cau nay
+        // (khong tru diem oan) nhung van tra ve dong ket qua co nut hoi thay/co AI (co Lan 24/10/2026).
+        // Truoc day bo qua han -> cau bien mat khoi bang ket qua ma diem toi da van tinh ca cau do.
+        if (chuaHienDuocHinh) {
+            baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: null, chua_hien_hinh: true });
+            return;
+        }
         if (cau.loai_cau === 'MC') {
             const checked = document.querySelector('input[name="cau_' + cau.so_thu_tu + '"]:checked');
             baiLam.push({ so_thu_tu: cau.so_thu_tu, cau_tra_loi: checked ? checked.value : '' });
@@ -822,7 +829,12 @@ function veKetQua(ketQua) {
         }
         html += '<div class="cau-hoi">';
         html += '<div class="cau-hoi-so">Câu ' + soHienThi(goc || cau) + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + '</div>';
-        if (cau.loai_cau === 'TF') {
+        if (cau.trang_thai === 'chua_hien_hinh') {
+            html += '<div class="ghi-chu-tl">📎 Web chưa hiện được hình của câu này nên câu này <strong>không tính điểm</strong> ' +
+                '(em không bị trừ điểm). Em <a href="/api/exam/tai-de/' + DE_ID + '" target="_blank" rel="noopener">mở file PDF đề</a> ' +
+                'để xem hình và làm thử, chỗ nào chưa biết thì bấm nút hỏi thầy/cô AI bên dưới, thầy/cô sẽ cho em xem đề, ' +
+                'đáp án và lời giải.</div>';
+        } else if (cau.loai_cau === 'TF') {
             const lop = cau.so_y_dung === 4 ? 'dung' : 'sai';
             html += '<div class="' + lop + '">Đúng ' + cau.so_y_dung + '/4 ý — ' + cau.diem_dat_duoc +
                 '/' + (cau.diem_toi_da || 0) + ' điểm' +
@@ -950,7 +962,9 @@ function xayHtmlTomTatKetQua(ketQua) {
     html += '<div style="display:flex;flex-direction:column;gap:4px;margin-top:4px;font-size:14px;">';
     (ketQua.chi_tiet || []).forEach(function (cau) {
         let dong = '<strong>Câu ' + soHienThi(timCau(cau.so_thu_tu) || cau) + (cau.loai_cau ? ' (' + cau.loai_cau + ')' : '') + ':</strong> ';
-        if (cau.loai_cau === 'TF') {
+        if (cau.trang_thai === 'chua_hien_hinh') {
+            dong += '📎 Không tính điểm — web chưa hiện được hình của câu này.';
+        } else if (cau.loai_cau === 'TF') {
             dong += (cau.so_y_dung === 4 ? '✅' : '⚠️') +
                 ' đúng ' + cau.so_y_dung + '/4 ý (' + cau.diem_dat_duoc + ' điểm)';
             if (cau.chi_tiet_tung_y && typeof cau.chi_tiet_tung_y === 'object') {
