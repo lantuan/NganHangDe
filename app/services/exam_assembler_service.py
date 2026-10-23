@@ -33,7 +33,7 @@ from app.services.hinh_ve_service import dich_hinh_trong_khoi
 from app.services.mapping_service import tim_dang_ngoai_yccd
 from app.services.generator_service import (
     call_generator, GeneratorNotFoundError, LoaiCauSaiError, CauHongError,
-    chup_trang_thai_xoay, khoi_phuc_trang_thai_xoay, dat_hat_giong,
+    chup_trang_thai_xoay, khoi_phuc_trang_thai_xoay, dat_hat_giong, KHOA_SINH,
 )
 import secrets
 import threading
@@ -44,7 +44,7 @@ from app.services.latex_service import (
     build_latex_document, save_tex_file, tinh_ma_de, TEMP_DIR, TEMP_DIR_EN,
 )
 from app.services.answer_parser_service import trich_dap_an, AnswerParseError
-from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
+from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR, EXPORTS_DIR_EN
 class AssembleError(Exception):
     pass
 
@@ -270,8 +270,16 @@ def _sinh_pdf_tu_danh_sach(
     lang: str = "vi",
     seed: int | None = None,
     chi_dap_an: bool = False,
+    trang_thai_xoay=None,
+    bien_dich_ngay: bool = True,
+    nhan_xoay_dau: dict | None = None,
 ) -> dict:
     """
+    trang_thai_xoay: (bản Anh song sinh) trạng thái xoay vòng ngữ cảnh lúc bản Việt BẮT ĐẦU sinh - bản Anh sinh từ
+    đúng trạng thái đó rồi trả lại trạng thái hiện tại. nhan_xoay_dau (dict): nhận ["xoay"] = trạng thái lúc bắt
+    đầu sinh (để sinh bản Anh song sinh).
+    bien_dich_ngay=False (học sinh làm trên web): KHÔNG chờ biên dịch PDF đề - ghi .tex + đáp án rồi trả về ngay,
+    "pdf_path" là chỗ PDF SẼ nằm (biên dịch ở nền / khi bấm tải, xem bien_dich_pdf_de_hoc_sinh).
     chi_dap_an=True: chỉ sinh câu hỏi + tệp đáp án json (không ghép LaTeX, không biên dịch PDF) - dùng cho
     trang làm bài trực tuyến bằng tiếng Anh của học sinh.
     lang="en": sinh bản TIẾNG ANH (ngân hàng data/python_bank_en, khung ex_test_en, tệp vào data/temp_en
@@ -299,13 +307,63 @@ def _sinh_pdf_tu_danh_sach(
 
     cac_khoi_ma_de = []
     danh_sach_dap_an: list[dict] = []
+    cho_dich_hinh: list[dict] = []          # đáp án có hình TikZ: dịch ảnh SAU khi nhả khoá sinh câu
+
+    # KHOÁ SINH CÂU (cô Lan 23/10/2026, 36 máy tạo đề cùng lúc): hạt giống random / numpy và bộ nhớ xoay vòng
+    # ngữ cảnh là CHUNG cho cả tiến trình. Hai em sinh đề cùng lúc thì các lần rút số ngẫu nhiên đan xen nhau: đề
+    # không còn tái tạo được từ seed, bản Anh song sinh lệch số liệu với bản Việt. Phần sinh câu (Python thuần,
+    # nhanh) chạy trong khoá, lần lượt từng đề; phần chậm (dịch hình, biên dịch PDF) chạy ngoài khoá.
+    with KHOA_SINH:
+        xoay_hien_tai = None
+        if nhan_xoay_dau is not None:
+            nhan_xoay_dau["xoay"] = chup_trang_thai_xoay()
+        if trang_thai_xoay is not None:
+            xoay_hien_tai = chup_trang_thai_xoay()
+            khoi_phuc_trang_thai_xoay(trang_thai_xoay)
+        try:
+            so_cau_thieu, canh_bao_ngoai_yccd = _sinh_cac_ma_de(
+                lop, role, danh_sach_id, so_ma_de, cho_phep_thieu, lang, seed, tieu_de_an_toan,
+                cac_khoi_ma_de, danh_sach_dap_an, cho_dich_hinh)
+        finally:
+            if xoay_hien_tai is not None:
+                khoi_phuc_trang_thai_xoay(xoay_hien_tai)
+
+    for dap_an in cho_dich_hinh:
+        _dich_hinh_cua_dap_an(dap_an)
+
+    return _ghep_va_bien_dich(lop, role, danh_sach_id, so_cau_thieu, canh_bao_ngoai_yccd, tieu_de_an_toan,
+                              cac_khoi_ma_de, danh_sach_dap_an, lang, seed, chi_dap_an, bien_dich_ngay)
+
+
+def _dich_hinh_cua_dap_an(dap_an: dict) -> None:
+    """Dịch hình vẽ ra ảnh NGAY LÚC SINH ĐỀ (để trang làm bài của học sinh không phải chờ). Hình hỏng thì bỏ qua,
+    câu vẫn ra bình thường."""
+    try:
+        if dap_an.get("hinh_tikz"):
+            dap_an["hinh"] = dich_hinh_trong_khoi("\n".join(dap_an["hinh_tikz"]))
+        # Hình nằm TRONG phương án / ý (câu "hình nào biểu diễn...")
+        for khoa_tikz, khoa_ma in (("hinh_phuong_an_tikz", "hinh_phuong_an"),
+                                   ("hinh_phat_bieu_tikz", "hinh_phat_bieu")):
+            if dap_an.get(khoa_tikz):
+                ma_theo_o = {}
+                for nhan_o, tikz_o in dap_an[khoa_tikz].items():
+                    ds_ma = dich_hinh_trong_khoi(tikz_o)
+                    if ds_ma:
+                        ma_theo_o[nhan_o] = ds_ma[0]
+                dap_an[khoa_ma] = ma_theo_o
+    except Exception as e:                                   # noqa: BLE001
+        print("LOI DICH HINH DAP AN:", e)
+
+
+def _sinh_cac_ma_de(lop, role, danh_sach_id, so_ma_de, cho_phep_thieu, lang, seed, tieu_de_an_toan,
+                    cac_khoi_ma_de, danh_sach_dap_an, cho_dich_hinh):
+    """Sinh câu cho mọi mã đề (gọi trong KHOA_SINH). Trả (so_cau_thieu, canh_bao_ngoai_yccd)."""
     so_cau_thieu = 0
     # Câu thuộc dạng "luyện tập thêm, ngoài YCCĐ" (cô Lan 01/10/2026): vẫn vào
     # đề nhưng báo cho giáo viên (trang Đề đã tạo + dòng chú thích % trong .tex
     # bản giáo viên) để họ quyết định giữ hay làm đề khác. Ghi theo mã đề đầu.
     canh_bao_ngoai_yccd: list[dict] = []
     so_la_ma = {ma: la for ma, la, _ in CAC_PHAN_DE}
-
     for chi_so in range(so_ma_de):
         ma_de = tinh_ma_de(lop, chi_so + 1)
         # Mỗi mã đề một hạt giống riêng, suy ra từ seed chung: bản Anh dùng lại đúng dãy này.
@@ -355,22 +413,8 @@ def _sinh_pdf_tu_danh_sach(
                         })
                 try:
                     dap_an = trich_dap_an(ket_qua["latex_block"])
-                    # Dich hinh ve ra anh NGAY LUC SINH DE (may dang chay
-                    # LaTeX san roi), de trang lam bai cua hoc sinh khong
-                    # phai cho. Hinh hong thi bo qua, cau van ra binh thuong.
-                    if dap_an.get("hinh_tikz"):
-                        dap_an["hinh"] = dich_hinh_trong_khoi(
-                            "\n".join(dap_an["hinh_tikz"]))
-                    # Hinh nam TRONG phuong an / y (cau "hinh nao bieu dien...")
-                    for khoa_tikz, khoa_ma in (("hinh_phuong_an_tikz", "hinh_phuong_an"),
-                                               ("hinh_phat_bieu_tikz", "hinh_phat_bieu")):
-                        if dap_an.get(khoa_tikz):
-                            ma_theo_o = {}
-                            for nhan_o, tikz_o in dap_an[khoa_tikz].items():
-                                ds_ma = dich_hinh_trong_khoi(tikz_o)
-                                if ds_ma:
-                                    ma_theo_o[nhan_o] = ds_ma[0]
-                            dap_an[khoa_ma] = ma_theo_o
+                    if any(dap_an.get(k) for k in ("hinh_tikz", "hinh_phuong_an_tikz", "hinh_phat_bieu_tikz")):
+                        cho_dich_hinh.append(dap_an)        # dịch ảnh sau, ngoài khoá sinh câu
                 except AnswerParseError as e:
                     dap_an = {
                         "loai_cau": None,
@@ -426,7 +470,11 @@ def _sinh_pdf_tu_danh_sach(
         cac_khoi_ma_de.append(_khung_mot_ma_de(
             tieu_de_an_toan, lop, role, ma_de, _ghep_4_phan(theo_phan, lang), lang,
         ))
+    return so_cau_thieu, canh_bao_ngoai_yccd
 
+
+def _ghep_va_bien_dich(lop, role, danh_sach_id, so_cau_thieu, canh_bao_ngoai_yccd, tieu_de_an_toan,
+                       cac_khoi_ma_de, danh_sach_dap_an, lang, seed, chi_dap_an, bien_dich_ngay):
     # Moi ma de mot trang moi.
     noi_dung = "\n\\newpage\n\n".join(cac_khoi_ma_de)
     filename = f"exam_{uuid.uuid4().hex[:8]}"
@@ -499,12 +547,18 @@ def _sinh_pdf_tu_danh_sach(
         tieu_de_an_toan, noi_dung, lop=lop, role=role, ex_test_option="dethi", lang=lang,
     )
     tex_path = save_tex_file(latex_content, filename, lang)
-    try:
-        pdf_path = _bien_dich(tex_path, lang)
-    except PdfCompileError as e:
-        raise AssembleError(str(e))
+    cho_bien_dich = not bien_dich_ngay and lang == "vi"
+    if cho_bien_dich:
+        # Làm trên web không cần PDF: trả về ngay, PDF biên dịch ở nền (cô Lan 23/10/2026: 36 máy cùng tạo đề)
+        pdf_path = duong_pdf_de(tex_path)
+    else:
+        try:
+            pdf_path = _bien_dich(tex_path, lang)
+        except PdfCompileError as e:
+            raise AssembleError(str(e))
 
     return {
+        "cho_bien_dich": cho_bien_dich,
         "so_cau_da_sinh": len(danh_sach_id) - so_cau_thieu,
         "so_cau_thieu": so_cau_thieu,
         "danh_sach_generator_id": [d.get("generator_id") for d in danh_sach_id],
@@ -524,6 +578,34 @@ def duong_tex_en(tex_vi) -> Path:
 
 _KHOA_BIEN_DICH_EN: dict = {}
 _KHOA_CHUNG = threading.Lock()
+
+
+def duong_pdf_de(tex_vi) -> Path:
+    """Chỗ PDF đề tiếng Việt của tệp .tex (compile_pdf ghi data/exports/<tên .tex>.pdf)."""
+    return EXPORTS_DIR / (Path(tex_vi).stem + ".pdf")
+
+
+def bien_dich_pdf_de_hoc_sinh(tex_vi) -> Path | None:
+    """PDF đề (tiếng Việt) của đề học sinh tạo để làm trên web: đã có thì trả ngay; chưa có thì biên dịch từ .tex
+    (luồng nền ngay sau khi tạo, hoặc lúc bấm tải). Khoá theo tệp: bấm tải đúng lúc luồng nền đang biên dịch thì
+    chờ rồi lấy kết quả, không biên dịch hai lần. Không có .tex / biên dịch lỗi -> None."""
+    if not tex_vi:
+        return None
+    pdf = duong_pdf_de(tex_vi)
+    if pdf.exists():
+        return pdf
+    if not Path(tex_vi).exists():
+        return None
+    with _KHOA_CHUNG:
+        khoa = _KHOA_BIEN_DICH_EN.setdefault("vi:" + pdf.stem, threading.Lock())
+    with khoa:
+        if pdf.exists():
+            return pdf
+        try:
+            return compile_pdf(Path(tex_vi))
+        except PdfCompileError as e:
+            print("LOI BIEN DICH PDF DE HOC SINH:", e)
+            return None
 
 
 def bien_dich_pdf_tieng_anh(tex_vi, ban: str):
@@ -576,22 +658,22 @@ def duong_dapan_en(dapan_vi) -> Path:
 
 
 def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
-                        kem_tieng_anh, tieu_de_en=None, chi_dap_an_en=False) -> dict:
+                        kem_tieng_anh, tieu_de_en=None, chi_dap_an_en=False, bien_dich_ngay=True) -> dict:
     """Sinh đề tiếng Việt; nếu kem_tieng_anh thì sinh THÊM đề tiếng Anh tương ứng (cùng câu, cùng biến
     thể, cùng số liệu) vào thư mục tiếng Anh riêng. Bản Anh lỗi (vd chương chưa dịch) KHÔNG làm hỏng đề
     Việt: lỗi được ghi trong kết quả["tieng_anh_loi"]."""
     seed = secrets.randbelow(2 ** 31)
-    trang_thai_dau = chup_trang_thai_xoay() if kem_tieng_anh else None
+    nhan = {} if kem_tieng_anh else None
     kq = _sinh_pdf_tu_danh_sach(lop, tieu_de, role, danh_sach_id, socau_ma_de,
-                                cho_phep_thieu=cho_phep_thieu, lang="vi", seed=seed)
+                                cho_phep_thieu=cho_phep_thieu, lang="vi", seed=seed,
+                                bien_dich_ngay=bien_dich_ngay, nhan_xoay_dau=nhan)
     if not kem_tieng_anh:
         return kq
-    trang_thai_sau = chup_trang_thai_xoay()
-    khoi_phuc_trang_thai_xoay(trang_thai_dau)      # bản Anh bắt đầu từ ĐÚNG trạng thái của bản Việt
     try:
         kq["tieng_anh"] = _sinh_pdf_tu_danh_sach(
             lop, tieu_de_en or tieu_de, role, danh_sach_id, socau_ma_de,
             cho_phep_thieu=True, lang="en", seed=seed,
+            trang_thai_xoay=nhan["xoay"],               # bản Anh bắt đầu từ ĐÚNG trạng thái của bản Việt
             # Bản Anh KHÔNG biên dịch PDF lúc tạo (mỗi PDF mất 30-60 giây, hai bản Việt + hai bản Anh làm
             # người dùng chờ rất lâu, có lúc nginx cắt kết nối): chỉ ghi .tex + đáp án. PDF Anh được biên dịch
             # ở nền ngay sau khi tạo (giáo viên) hoặc khi bấm tải lần đầu, xem bien_dich_pdf_tieng_anh.
@@ -607,8 +689,6 @@ def _sinh_kem_tieng_anh(lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_
                 shutil.copyfile(kq["tieng_anh"]["tex_path"], duong_tex_en(kq["tex_path"]))
     except Exception as e:                           # noqa: BLE001
         kq["tieng_anh_loi"] = "%s: %s" % (type(e).__name__, e)
-    finally:
-        khoi_phuc_trang_thai_xoay(trang_thai_sau)    # sau cùng như thể chỉ sinh bản Việt
     return kq
 
 
@@ -640,8 +720,10 @@ def generate_exam_pdf_auto(
     dapan_tieng_anh: bool = False,
     ma_tran_bai: dict | None = None,
     chi_yccd: bool = False,
+    bien_dich_ngay: bool = True,
 ) -> dict:
     """
+    bien_dich_ngay=False: (học sinh làm trên web) không chờ biên dịch PDF đề, xem _sinh_pdf_tu_danh_sach.
     ma_tran_bai: ma trận cụ thể theo bài do giáo viên đặt (ma_tran_bai_service.py); None = như cũ.
     chi_yccd=True: giáo viên chọn ra đề chỉ theo YCCĐ của Bộ, không lấy dạng luyện tập thêm (cô Lan 15/10/2026).
     dapan_tieng_anh=True: (đề trực tuyến của học sinh) sinh thêm đáp án tiếng Anh cùng câu, cùng số liệu
@@ -652,27 +734,30 @@ def generate_exam_pdf_auto(
     CN_BuildBlueprint -> CN_QuestionSelector (theo curriculum_id) ->
     CN_CallPythonGenerator -> CN_ExamAssembler -> PDF.
     """
-    try:
-        blueprint = build_blueprint(
-            lop=lop,
-            loai_he_so=loai_he_so,
-            ki_thi=ki_thi,
-            pham_vi_chuong=pham_vi_chuong,
-            cau_truc_tu_hoc_sinh=cau_truc_tu_hoc_sinh,
-            ma_tran_bai=ma_tran_bai,
-            chi_yccd=chi_yccd,
-        )
-    except BlueprintError as e:
-        raise AssembleError(f"Lỗi xây Blueprint: {e}")
     from app.services.question_selector_service import select_questions
-    try:
-        danh_sach_id = select_questions(lop=lop, blueprint=blueprint, cho_phep_thieu=cho_phep_thieu)
-    except SelectorError as e:
-        raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
+    # Xây blueprint + chọn câu cũng rút số ngẫu nhiên từ random chung: giữ KHOA_SINH để không chen vào giữa dãy
+    # số của một đề đang sinh ở luồng khác (phần nhanh, chỉ là Python).
+    with KHOA_SINH:
+        try:
+            blueprint = build_blueprint(
+                lop=lop,
+                loai_he_so=loai_he_so,
+                ki_thi=ki_thi,
+                pham_vi_chuong=pham_vi_chuong,
+                cau_truc_tu_hoc_sinh=cau_truc_tu_hoc_sinh,
+                ma_tran_bai=ma_tran_bai,
+                chi_yccd=chi_yccd,
+            )
+        except BlueprintError as e:
+            raise AssembleError(f"Lỗi xây Blueprint: {e}")
+        try:
+            danh_sach_id = select_questions(lop=lop, blueprint=blueprint, cho_phep_thieu=cho_phep_thieu)
+        except SelectorError as e:
+            raise AssembleError(f"Lỗi chọn câu hỏi: {e}")
     ket_qua = _sinh_kem_tieng_anh(
         lop, tieu_de, role, danh_sach_id, socau_ma_de, cho_phep_thieu,
         kem_tieng_anh or dapan_tieng_anh, tieu_de_en,
-        chi_dap_an_en=dapan_tieng_anh and not kem_tieng_anh,
+        chi_dap_an_en=dapan_tieng_anh and not kem_tieng_anh, bien_dich_ngay=bien_dich_ngay,
     )
     if dapan_tieng_anh and not kem_tieng_anh:
         ket_qua.pop("tieng_anh", None)              # chỉ có đáp án, không có PDF tiếng Anh

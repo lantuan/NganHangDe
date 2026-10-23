@@ -1,5 +1,7 @@
 import os
 import subprocess
+import threading
+from contextlib import contextmanager
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -11,6 +13,27 @@ HINH_ANH_DIR = BASE_DIR / "data" / "hinh_anh"   # ảnh chụp làm nền cho h�
 
 class PdfCompileError(Exception):
     pass
+
+
+# ======================================================
+# HANG CHO BIEN DICH (co Lan 23/10/2026: "36 may vao mot luc, web khong the tao de dong loat")
+# Moi lan dich LaTeX an tron mot nhan CPU trong nhieu giay. VPS 2 nhan ma 36 em cung bam tao de thi 36 tien
+# trinh pdflatex/xelatex tranh nhau 2 nhan: ban nao cung cham gap ~18 lan, vuot gioi han 60 giay -> bi cat,
+# ca lop deu bao loi. Nay XEP HANG: moi luc chi dich toi da SO_BIEN_DICH_CUNG_LUC ban (mac dinh = so nhan CPU),
+# ban khac cho den luot - cham hon chut nhung ban nao cung xong. Dung chung cho PDF de/loi giai va anh hinh ve.
+# ======================================================
+try:
+    SO_BIEN_DICH_CUNG_LUC = max(1, int(os.environ.get("SO_BIEN_DICH_CUNG_LUC") or (os.cpu_count() or 1)))
+except ValueError:
+    SO_BIEN_DICH_CUNG_LUC = max(1, os.cpu_count() or 1)
+_HANG_BIEN_DICH = threading.BoundedSemaphore(SO_BIEN_DICH_CUNG_LUC)
+
+
+@contextmanager
+def luot_bien_dich():
+    """Giu mot cho trong hang bien dich LaTeX trong khoi with."""
+    with _HANG_BIEN_DICH:
+        yield
 
 
 def _texinputs_env() -> dict:
@@ -36,6 +59,22 @@ def compile_pdf(tex_path: Path, lang: str = "vi") -> Path:
     exports_dir.mkdir(parents=True, exist_ok=True)
     env = _texinputs_env()
 
+    result = None
+    with luot_bien_dich():
+        result = _chay_hai_lan(tex_path, exports_dir, env)
+
+    pdf_path = exports_dir / f"{tex_path.stem}.pdf"
+
+    if not pdf_path.exists():
+        log = result.stdout[-3000:] if result else "(khong chay duoc pdflatex)"
+        raise PdfCompileError(
+            f"Bien dich PDF that bai.\n--- LOG PDFLATEX ---\n{log}"
+        )
+
+    return pdf_path
+
+
+def _chay_hai_lan(tex_path: Path, exports_dir: Path, env: dict):
     result = None
     for _ in range(2):
         try:
@@ -63,13 +102,4 @@ def compile_pdf(tex_path: Path, lang: str = "vi") -> Path:
                 "Bien dich PDF qua thoi gian cho phep (60s) - co the do LaTeX "
                 "bi treo (thieu package, loi cu phap gay vong lap...)."
             )
-
-    pdf_path = exports_dir / f"{tex_path.stem}.pdf"
-
-    if not pdf_path.exists():
-        log = result.stdout[-3000:] if result else "(khong chay duoc pdflatex)"
-        raise PdfCompileError(
-            f"Bien dich PDF that bai.\n--- LOG PDFLATEX ---\n{log}"
-        )
-
-    return pdf_path
+    return result

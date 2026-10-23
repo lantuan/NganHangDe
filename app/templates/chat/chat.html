@@ -1357,6 +1357,8 @@ ${html}
                         chi_yccd: chiYccd(),
                         user_id: CURRENT_USER_ID || null,
                         conversation_id: conversationId,
+                        // Không chờ biên dịch PDF: có đề làm trên web ngay, PDF dịch ở nền (36 máy cùng tạo đề)
+                        bien_dich_sau: true,
                     }),
                 });
                 if (!res.ok) {
@@ -1387,6 +1389,9 @@ ${html}
                 // back ve blob (tai duoc ngay lan nay, nhung mat sau khi
                 // reload) neu vi ly do gi do khong lay duoc deId.
                 let url;
+                const traJson = (res.headers.get("content-type") || "").includes("application/json");
+                const duLieuTao = traJson ? await res.json().catch(() => null) : null;
+                if (!deId && duLieuTao && duLieuTao.de_id) deId = duLieuTao.de_id;
                 if (deId) {
                     url = (thongTinDe && thongTinDe.url_tai) || ("/api/exam/tai-de/" + deId);
                 } else {
@@ -1581,6 +1586,7 @@ ${html}
                             chi_yccd: chiYccd(),
                             user_id: CURRENT_USER_ID || null,
                             conversation_id: conversationId,
+                            bien_dich_sau: true,
                         }),
                     });
                     if (!res.ok) {
@@ -1609,6 +1615,9 @@ ${html}
                     // URL on dinh (song lai duoc sau reload) khi co deId,
                     // fall back ve blob chi khi khong lay duoc deId.
                     let url;
+                    const traJson = (res.headers.get("content-type") || "").includes("application/json");
+                    const duLieuTao = traJson ? await res.json().catch(() => null) : null;
+                    if (!deId && duLieuTao && duLieuTao.de_id) deId = duLieuTao.de_id;
                     if (deId) {
                         url = (thongTinDe && thongTinDe.url_tai) || ("/api/exam/tai-de/" + deId);
                     } else {

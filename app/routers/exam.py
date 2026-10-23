@@ -42,7 +42,8 @@ from app.services.mapping_service import trich_chuong_bai, load_mapping, dem_dan
 from app.services.grade_photo_service import cham_bai_bang_anh, GradePhotoError
 from app.services.latex_service import save_tex_file
 from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_EN
-from app.services.exam_assembler_service import duong_dapan_en, duong_tex_en, bien_dich_pdf_tieng_anh
+from app.services.exam_assembler_service import (duong_dapan_en, duong_tex_en, bien_dich_pdf_tieng_anh,
+                                                 bien_dich_pdf_de_hoc_sinh)
 from app.services.i18n_service import lay_ngon_ngu, luu_y_pham_vi_tieng_anh, chuong_co_ban_tieng_anh
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
@@ -299,6 +300,16 @@ class GenerateExamAutoRequest(BaseModel):
     # thêm) ở khung chat (cô Lan 21/10/2026). None = lời gọi không nói (n8n): tra lựa chọn đã ghi theo
     # conversation_id; không có ghi nhận thì False như trước.
     chi_yccd: bool | None = None
+    # Khung chat web (nút Tạo đề mới / Đồng ý, tạo đề) gửi True: học sinh làm trên web không phải chờ biên dịch
+    # PDF - máy chủ trả JSON {de_id} ngay, PDF biên dịch ở nền / khi bấm tải (cô Lan 23/10/2026: 36 máy cùng tạo
+    # đề). n8n không gửi trường này -> như cũ (chờ PDF, trả tệp). Giáo viên luôn chờ PDF như cũ.
+    bien_dich_sau: bool = False
+
+
+def _bien_dich_nen_de_hoc_sinh(tex_path) -> None:
+    import threading
+    threading.Thread(target=bien_dich_pdf_de_hoc_sinh, args=(tex_path,), daemon=True,
+                     name="bien_dich_de_hs").start()
 
 
 @router.get("/pham-vi-tieng-anh")
@@ -347,6 +358,8 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
 
     chi_yccd_that = (payload.chi_yccd if payload.chi_yccd is not None
                      else tuy_chon_de_service.lay_chi_yccd(payload.conversation_id))
+    bien_dich_sau = (payload.bien_dich_sau and role_that == "student" and payload.dinh_dang == "pdf"
+                     and bool(payload.user_id and payload.conversation_id))
 
     try:
         result = generate_exam_pdf_auto(
@@ -363,10 +376,12 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
             dapan_tieng_anh=(payload.kem_tieng_anh if payload.kem_tieng_anh is not None
                              else tuy_chon_de_service.lay_kem_tieng_anh(payload.conversation_id)),
             chi_yccd=chi_yccd_that,
+            bien_dich_ngay=not bien_dich_sau,
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
 
+    de_id = None
     if payload.user_id and payload.conversation_id:
         de_id = history_service.luu_de_da_sinh(
             user_id=payload.user_id,
@@ -402,6 +417,16 @@ def generate_exam_pdf_auto_endpoint(payload: GenerateExamAutoRequest):
                 history_service.luu_file_de(de_id, "loigiai", result["pdf_loigiai_path"])
             if result.get("dap_an_json_path"):
                 history_service.luu_file_de(de_id, "dapan_json", result["dap_an_json_path"])
+    if result.get("cho_bien_dich"):
+        _bien_dich_nen_de_hoc_sinh(result["tex_path"])
+        if de_id:
+            return {"success": True, "de_id": de_id, "dang_bien_dich_pdf": True,
+                    "so_cau_da_sinh": result.get("so_cau_da_sinh")}
+        # Không lưu được đề (Supabase lỗi): vẫn đưa PDF như cũ để học sinh có đề
+        pdf = bien_dich_pdf_de_hoc_sinh(result["tex_path"])
+        if pdf is None:
+            raise HTTPException(500, "Lỗi biên dịch PDF đề.")
+        result["pdf_path"] = str(pdf)
     # Switch_OutputFormat: cùng 1 lần sinh đề (result) -> trả về đúng định
     # dạng người dùng chọn. Không sinh lại đề mới, nên PDF và TEX luôn khớp
     # nhau (cùng bộ câu hỏi/biến thể đã chọn ở generate_exam_pdf_auto).
@@ -487,6 +512,8 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
                              else _de_co_ban_tieng_anh(de_cu)),
             # Đề gốc "Đúng chương trình" thì đề mới cũng vậy (đề cũ chưa lưu trường này: như trước).
             chi_yccd=bool(blueprint.get("chi_yccd")),
+            # Học sinh làm đề khác trên web: không chờ PDF (biên dịch ở nền), xem bien_dich_sau ở trên
+            bien_dich_ngay=(de_cu.get("role") or "student") != "student",
         )
     except AssembleError as e:
         raise HTTPException(400, detail=str(e))
@@ -513,6 +540,8 @@ def lam_de_khac_endpoint(payload: LamDeKhacRequest):
         history_service.luu_file_de(de_id_moi, "loigiai", result["pdf_loigiai_path"])
     if result.get("dap_an_json_path"):
         history_service.luu_file_de(de_id_moi, "dapan_json", result["dap_an_json_path"])
+    if result.get("cho_bien_dich"):
+        _bien_dich_nen_de_hoc_sinh(result["tex_path"])
 
     return {
         "success": True,
@@ -572,6 +601,11 @@ def _pdf_en_tu_tex(de: dict, ban: str) -> Path | None:
 
 def _pdf_vi_de(de: dict) -> Path:
     duong_dan = de.get("files", {}).get("de")
+    if duong_dan and not Path(duong_dan).exists():
+        # Đề học sinh tạo để làm trên web: PDF biên dịch ở nền, có thể chưa xong -> biên dịch / chờ xong rồi đưa
+        pdf = bien_dich_pdf_de_hoc_sinh((de.get("files") or {}).get("tex"))
+        if pdf is not None and Path(pdf) == Path(duong_dan):
+            return pdf
     if not duong_dan or not Path(duong_dan).exists():
         raise HTTPException(404, "File de khong con ton tai (co the da bi xoa sau 10 ngay).")
     return Path(duong_dan)

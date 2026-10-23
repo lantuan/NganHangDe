@@ -1,6 +1,7 @@
 import importlib.util
 import inspect
 import random
+import threading
 import re
 import sys
 from pathlib import Path
@@ -44,6 +45,12 @@ def khoi_phuc_trang_thai_xoay(anh) -> None:
     mod = sys.modules.get("_ngan_hang_xoay_vong")
     if mod is not None:
         mod.da_dung = copy.deepcopy(anh)
+
+
+# Khoá sinh câu (cô Lan 23/10/2026, 36 máy tạo đề cùng lúc): random / numpy / bộ nhớ xoay vòng là chung cho cả
+# tiến trình, nên mỗi lúc chỉ MỘT luồng được sinh câu (exam_assembler_service giữ khoá suốt phần sinh câu của một
+# đề; call_generator tự giữ khi được gọi lẻ). RLock: luồng đang giữ gọi lồng vẫn được.
+KHOA_SINH = threading.RLock()
 
 
 def dat_hat_giong(seed: int) -> None:
@@ -218,7 +225,7 @@ def kiem_tra_dung_loai_cau(generator_id: str, latex_block: str) -> None:
                     % (generator_id, i))
 
 
-def call_generator(
+def _call_generator_trong_khoa(
     generator_id: str,
     lop: int,
     chuong_so: int,
@@ -279,6 +286,15 @@ def call_generator(
             "chuong_so": chuong_so,
         },
     }
+
+def call_generator(generator_id: str, lop: int, chuong_so: int, role: str, socau_yeu_cau: int | None = None,
+                   socot: int | None = None, dong: int | None = None, used_variants: dict | None = None,
+                   lang: str = "vi") -> dict:
+    """Sinh một câu (xem _call_generator_trong_khoa), giữ KHOA_SINH."""
+    with KHOA_SINH:
+        return _call_generator_trong_khoa(generator_id, lop, chuong_so, role, socau_yeu_cau, socot, dong,
+                                          used_variants, lang)
+
 
 def resolve_variant(generator_id: str, lop: int, chuong_so: int, lang: str = "vi") -> str:
     """

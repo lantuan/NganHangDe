@@ -22,6 +22,7 @@ import shutil
 import subprocess
 import tempfile
 from pathlib import Path
+from app.services.pdf_service import luot_bien_dich
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 TEMPLATE = BASE_DIR / "data" / "config" / "latex_template.tex"
@@ -164,7 +165,7 @@ def dich_hinh(tikz: str, chi_png: bool = False) -> Path:
     moi_truong = dict(os.environ,
                       TEXINPUTS="%s:%s:%s" % (BASE_DIR / "data" / "config", HINH_ANH_DIR,
                                               os.environ.get("TEXINPUTS", "")))
-    with tempfile.TemporaryDirectory() as thu_muc:
+    with luot_bien_dich(), tempfile.TemporaryDirectory() as thu_muc:   # xep hang voi cac lan dich PDF
         tm = Path(thu_muc)
         pdf = None
         cac_loi = []
