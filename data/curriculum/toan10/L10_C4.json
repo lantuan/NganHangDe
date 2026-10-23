@@ -229,6 +229,20 @@
           "L10_C4_B8_VD040_SA_C",
           "L10_C4_VD040_VD060_TL_A"
         ]
+      },
+      {
+        "mo_ta": "Kéo pháo ở Điện Biên Phủ (1954) bằng hai nhóm dây trên mặt dốc, đối xứng qua phương dốc, hợp nhau một góc: lực cần kéo |P|sin a, hợp lực hai lực bằng nhau (hình thoi, định lí côsin), tổng số người tối thiểu",
+        "mapping_id": [
+          "L10_C4_B8_VD040_MC_D",
+          "L10_C4_B8_VD040_SA_D"
+        ]
+      },
+      {
+        "mo_ta": "Kéo pháo ở Điện Biên Phủ (1954) khi đổi đường dốc (mở rộng cua, hạ bớt độ dốc): đường thoải hơn cần ít hơn bao nhiêu người, hoặc với số người cho trước thì dốc lớn nhất bao nhiêu độ (sin a <= kf/P, máy tính cầm tay)",
+        "mapping_id": [
+          "L10_C4_B8_VD040_MC_E",
+          "L10_C4_B8_VD040_SA_E"
+        ]
       }
     ],
     "ghi_chu_luyen_tap_them": "Cô Lan đưa câu tự luận mẫu 16/10/2026 (hình bình hành, tìm M thoả |MB + CD| = |MC + DA|) và duyệt làm mức VẬN DỤNG. Yêu cầu cần đạt của Bộ cho phép toán tổng hai vectơ chỉ ở mức Thông hiểu, nên đây là LUYỆN TẬP THÊM. Mapping ghi \"ngoai_yccd\": true; khi vào đề, hệ thống cảnh báo để giáo viên quyết định giữ hay bỏ. 17/10/2026: thêm bài 4.9 SGK (hai lực trên hình, mức VD) và bài Vận dụng kéo pháo lên dốc (mức VDC) theo cô Lan."

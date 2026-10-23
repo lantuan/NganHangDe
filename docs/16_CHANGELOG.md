@@ -10665,3 +10665,13 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Bộ chọn câu (`question_selector_service`): câu Đúng/Sai trước đây chọn theo cả chương, nên đề giữa kỳ 1 lớp 10 (chương 4 tới Bài 8) vẫn có thể ra `L10_C4_TF_B` (toạ độ, tích vô hướng - Bài 10, 11). Nay `_bai_cua_tf` đọc tên bài trong "Dang" (theo data/ppct), bỏ câu nhắc bài ngoài phạm vi đề; không còn câu nào thì giữ như cũ.
 - Test `tests/test_l10_c4_dien_bien_phu.py` (tính lại đáp số độc lập từ số liệu trong đề; góc dốc trong khoảng có nguồn; Mapping; TF giữa kỳ).
 
+## 2026-10-24 - Kéo pháo Điện Biên Phủ: bỏ câu Đúng/Sai, thêm ba dạng (hai nhóm dây, đổi đường dốc, công khi hạ pháo)
+- Cô Lan: "quên vụ TF chỉ có chương. Bỏ ý TF. Bạn làm các bài dạng khác đi" - chọn cả ba dạng em đề xuất; "nhớ kiểm tra xem có vượt kiến thức sách giáo khoa và sách bài tập Kết nối tri thức 10 không".
+- Bỏ `L10_C4_TF_D_01` (hàm, dòng Mapping). Bộ lọc Đúng/Sai theo phạm vi bài (mục 23/10) giữ nguyên.
+- Thêm (đều VDC, MC và SA cùng chữ, cùng bối cảnh `keo_phao_dien_bien_phu` nên một đề chỉ một câu kéo pháo):
+  - `L10_C4_B8_VD040_MC_D/SA_D` - hai nhóm dây: hai dây trên mặt dốc đối xứng qua phương dốc, hợp nhau góc θ (giả sử); |F| cần = |P|sin α, hợp lực hai lực bằng nhau bằng quy tắc hình bình hành (hình thoi) + định lí côsin, cos(180° − θ) = −cos θ; tổng số người tối thiểu. Câu dẫn: Báo Lào Cai - "80 đến 100 người đứng thành 4 hàng dây phía trước kết hợp với tời quay tay".
+  - `L10_C4_B8_VD040_MC_E/SA_E` - đổi đường dốc: đường mới thoải hơn cần ít hơn bao nhiêu người; hoặc với k người (giả sử) thì góc dốc lớn nhất bao nhiêu độ (sin α ≤ kf/P, dùng máy tính cầm tay tìm góc - Bài 5); câu dẫn: Thương hiệu & Công luận - "mở rộng thêm cua cho đoạn đường kéo, hạ bớt độ dốc". Câu này không kèm hình (hình sẽ lộ góc).
+  - `L10_C4_B11_VD060_MC_D/SA_D` - công khi hạ pháo xuống Dốc Bảy Tời (350 m): công của trọng lực P·d = |P|·d·cos(90° − α) > 0, hoặc của lực ghìm F·d = −|F|·d (góc 180°), đơn vị MJ. Trong YCCĐ VD060 (vectơ trong Vật lí; SGK Bài 11 có công A = F·d) nên không ghi ngoài YCCĐ.
+- Kiểm kiến thức: chỉ dùng quy tắc ba điểm, hình bình hành (Bài 8), giá trị lượng giác góc bù và máy tính cầm tay (Bài 5), định lí côsin, định lí sin (Bài 6), tích vô hướng và công (Bài 11); không dùng phép chiếu lực, ma sát, mômen. Phần "dây kéo xiên" (_03, tự luận) dùng định lí sin và sin(90° + β) = cos β (góc bù).
+- Mapping + Curriculum (dạng luyện tập thêm của VD040). Bản Anh dịch xong (chưa dịch 0, lỗi 0); `kiem_tuong_duong.py L10_C4 3` lệch 0; `kiem_id_mc_sa.py L10_C4` lệch 0. Test `tests/test_l10_c4_dien_bien_phu.py` tính lại đáp số độc lập cho cả ba dạng mới.
+

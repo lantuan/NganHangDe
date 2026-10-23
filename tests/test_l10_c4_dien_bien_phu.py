@@ -1,5 +1,6 @@
 """Kéo pháo ở Điện Biên Phủ (cô Lan 23/10/2026, duyệt kế hoạch): MC_C/SA_C _02 (bổ sung người), _03 (dây kéo xiên -
-định lí sin), _04 (kéo pháo ra, ghìm bằng dây), TL L10_C4_VD040_VD060_TL_A, TF L10_C4_TF_D. Kiểm ĐỘC LẬP: đọc số liệu
+định lí sin), _04 (kéo pháo ra, ghìm bằng dây), TL L10_C4_VD040_VD060_TL_A; 24/10/2026 (bỏ TF_D) thêm hai nhóm dây (VD040_D), đổi đường dốc (VD040_E), công khi
+hạ pháo (B11_VD060_D). Kiểm ĐỘC LẬP: đọc số liệu
 trong đề, tự tính lại đáp số; góc dốc trong khoảng có nguồn (kéo lên 30-50 độ, ghìm xuống tới 60 độ); thông tin thật chỉ
 ở câu dẫn; Mapping cùng bối cảnh."""
 import importlib.util
@@ -103,17 +104,17 @@ def test_tu_luan_so_nguoi_va_cong():
         assert "Dốc Bảy Tời" in de and "$7$ tời" in de and d == 350
 
 
-def test_dung_sai_moi_y_du_dung_sai():
-    for sd in range(40):
-        random.seed(sd)
-        t = M.L10_C4_TF_D_01(1)
-        assert t.count("\\True") >= 1 and "Điện Biên Phủ" in t
-
-
 def test_mapping_cung_boi_canh():
     rows = {r["id"]: r for r in json.load(open(GOC / "data/mapping/toan10/L10_C4.json", encoding="utf-8"))}
-    for i in ("L10_C4_B8_VD040_MC_C", "L10_C4_B8_VD040_SA_C", "L10_C4_VD040_VD060_TL_A", "L10_C4_TF_D"):
+    for i in ("L10_C4_B8_VD040_MC_C", "L10_C4_B8_VD040_SA_C", "L10_C4_VD040_VD060_TL_A", "L10_C4_B8_VD040_MC_D",
+              "L10_C4_B8_VD040_SA_D", "L10_C4_B8_VD040_MC_E", "L10_C4_B8_VD040_SA_E"):
         assert "keo_phao_dien_bien_phu" in rows[i]["boi_canh"] and rows[i]["ngoai_yccd"]
+    for i in ("L10_C4_B11_VD060_MC_D", "L10_C4_B11_VD060_SA_D"):         # công: trong YCCĐ VD060
+        assert "keo_phao_dien_bien_phu" in rows[i]["boi_canh"] and not rows[i].get("ngoai_yccd")
+    assert "L10_C4_TF_D" not in rows                                         # cô Lan 24/10/2026: bỏ câu Đúng/Sai
+    for x in ("D", "E"):
+        assert rows["L10_C4_B8_VD040_MC_" + x]["Dang"] == rows["L10_C4_B8_VD040_SA_" + x]["Dang"]
+    assert rows["L10_C4_B11_VD060_MC_D"]["Dang"] == rows["L10_C4_B11_VD060_SA_D"]["Dang"]
     assert rows["L10_C4_B8_VD040_MC_C"]["Dang"] == rows["L10_C4_B8_VD040_SA_C"]["Dang"]
     assert [y["curriculum_id"] for y in rows["L10_C4_VD040_VD060_TL_A"]["cac_y"]] == ["L10_C4_B8_VD040", "L10_C4_B11_VD060"]
 
@@ -126,4 +127,63 @@ def test_dung_sai_ngoai_pham_vi_bai_khong_vao_de_giua_ky():
     bp = {"pham_vi_bai": ["L10_C4_B7", "L10_C4_B8"], "dung_sai": [{"chuong_so": 4, "so_cau": 1}],
           "trac_nghiem": [], "tra_loi_ngan": [], "tu_luan": []}
     gap = {select_questions(10, bp)[0]["generator_id"] for _ in range(40)}
-    assert gap and gap <= {"L10_C4_TF_C", "L10_C4_TF_D"}
+    assert gap == {"L10_C4_TF_C"}
+
+
+def test_hai_nhom_day():
+    for sd in range(80):
+        random.seed(sd)
+        for f, dap in ((M.L10_C4_B8_VD040_MC_D_01, _dap_mc), (M.L10_C4_B8_VD040_SA_D_01, _dap_sa)):
+            t = f(1)
+            de = _de(t)
+            P, a = _doc(de)
+            th = int(re.search(r"hợp với nhau một góc \$(\d+)\^\\circ\$", de).group(1))
+            fn = int(re.search(r"lực \$(\d+)\$ N theo phương dây", de).group(1))
+            # hợp lực hai lực bằng nhau F1 hợp nhau góc th: 2 F1 cos(th/2)
+            k = math.ceil(P * math.sin(math.radians(a)) / (2 * fn * math.cos(math.radians(th / 2))) - 1e-9)
+            assert int(dap(t)) == 2 * k, (sd, de)
+
+
+def test_doi_duong_doc():
+    gap = set()
+    for sd in range(120):
+        random.seed(sd)
+        for f, dap in ((M.L10_C4_B8_VD040_MC_E_01, _dap_mc), (M.L10_C4_B8_VD040_SA_E_01, _dap_sa)):
+            t = f(1)
+            de = _de(t)
+            P = _so(re.search(r"trọng lượng \$([\d\\,]+)\$ N", de).group(1))
+            fn = int(re.search(r"một lực \$(\d+)\$ N", de).group(1))
+            assert "mở rộng thêm cua" in de and "hạ bớt độ dốc" in de
+            g = re.search(r"cũ dốc \$(\d+)\^\\circ\$, đoạn đường mới dốc \$(\d+)\^\\circ\$", de)
+            d = dap(t).replace("^\\circ", "")
+            if g:
+                gap.add("it_hon")
+                n = [math.ceil(P * math.sin(math.radians(int(x))) / fn - 1e-9) for x in g.groups()]
+                assert int(d) == n[0] - n[1]
+            else:
+                gap.add("goc_max")
+                k = int(re.search(r"chỉ có \$(\d+)\$ người", de).group(1))
+                assert int(d) == math.floor(math.degrees(math.asin(k * fn / P)))
+                assert "\\begin{tikzpicture}" not in de                    # không có hình lộ đáp số
+    assert gap == {"it_hon", "goc_max"}
+
+
+def test_cong_khi_ha_phao():
+    gap = set()
+    for sd in range(120):
+        random.seed(sd)
+        for f, dap in ((M.L10_C4_B11_VD060_MC_D_01, None), (M.L10_C4_B11_VD060_SA_D_01, _dap_sa)):
+            t = f(1)
+            de = _de(t)
+            P, _ = (_so(re.search(r"trọng lượng \$([\d\\,]+)\$ N", de).group(1)), 0)
+            a = int(re.search(r"nghiêng \$(\d+)\^\\circ\$", de).group(1))
+            A = P * 350 * math.sin(math.radians(a)) / 1e6
+            v = _so(dap(t)) if dap else _so(re.search(r"\{\\True \$([^$]*)\$ MJ", t).group(1))
+            if "của trọng lực" in de:
+                gap.add("P")
+                assert abs(v - A) <= 0.05 + 1e-9
+            else:
+                gap.add("F")
+                assert abs(v + A) <= 0.05 + 1e-9
+            assert "Dốc Bảy Tời" in de and 30 <= a <= 60
+    assert gap == {"P", "F"}
