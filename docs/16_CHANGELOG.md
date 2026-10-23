@@ -10675,3 +10675,9 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Kiểm kiến thức: chỉ dùng quy tắc ba điểm, hình bình hành (Bài 8), giá trị lượng giác góc bù và máy tính cầm tay (Bài 5), định lí côsin, định lí sin (Bài 6), tích vô hướng và công (Bài 11); không dùng phép chiếu lực, ma sát, mômen. Phần "dây kéo xiên" (_03, tự luận) dùng định lí sin và sin(90° + β) = cos β (góc bù).
 - Mapping + Curriculum (dạng luyện tập thêm của VD040). Bản Anh dịch xong (chưa dịch 0, lỗi 0); `kiem_tuong_duong.py L10_C4 3` lệch 0; `kiem_id_mc_sa.py L10_C4` lệch 0. Test `tests/test_l10_c4_dien_bien_phu.py` tính lại đáp số độc lập cho cả ba dạng mới.
 
+## 2026-10-24 - Sửa lỗi: mọi câu có hình vẽ không hiện trên trang làm bài (lỗi từ bản 23/10)
+- Cô Lan (ảnh): cả bài kiểm tra không câu nào hiện hình, chỉ báo "Câu này có hình vẽ, web chưa hiển thị được — xem trong file PDF đề nhé!" và mất luôn các phương án A-D; trước đó vẫn hiện đủ.
+- Nguyên nhân: bản "khoá sinh câu" 23/10 dời bước dịch hình ra sau khoá, nhưng đưa vào hàng chờ `cho_dich_hinh` dict `dap_an`, trong khi tệp đáp án ghi `ban_ghi = {..., **dap_an}` là một dict KHÁC. Ảnh vẫn được dịch vào `data/hinh_cache` nhưng tệp `*_dapan.json` không có trường `hinh` -> `lam_bai.html` coi là chưa có ảnh. Ngân hàng đề (Việt và Anh) không sai gì.
+- `exam_assembler_service._sinh_cac_ma_de`: đưa CHÍNH `ban_ghi` vào hàng chờ dịch hình (áp dụng cả bản Việt và bản Anh).
+- Đề đã tạo trong lúc lỗi: `routers/exam._bu_anh_tu_kho` - tệp đáp án vẫn giữ mã TikZ (`hinh_tikz`, `hinh_phuong_an_tikz`, `hinh_phat_bieu_tikz`), tính lại mã băm và lấy ảnh đã có trong kho (không dịch lại) -> đề cũ hiện lại hình, không cần tạo lại.
+- Test `tests/test_dap_an_co_anh_hinh.py` (bỏ bản sửa thì test hỏng).

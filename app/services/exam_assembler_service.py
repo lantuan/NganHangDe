@@ -413,8 +413,6 @@ def _sinh_cac_ma_de(lop, role, danh_sach_id, so_ma_de, cho_phep_thieu, lang, see
                         })
                 try:
                     dap_an = trich_dap_an(ket_qua["latex_block"])
-                    if any(dap_an.get(k) for k in ("hinh_tikz", "hinh_phuong_an_tikz", "hinh_phat_bieu_tikz")):
-                        cho_dich_hinh.append(dap_an)        # dịch ảnh sau, ngoài khoá sinh câu
                 except AnswerParseError as e:
                     dap_an = {
                         "loai_cau": None,
@@ -430,6 +428,12 @@ def _sinh_cac_ma_de(lop, role, danh_sach_id, so_ma_de, cho_phep_thieu, lang, see
                 if so_ma_de > 1:
                     ban_ghi["ma_de"] = ma_de
                 danh_sach_dap_an.append(ban_ghi)
+                # Dịch ảnh sau, ngoài khoá sinh câu. PHẢI đưa CHÍNH ban_ghi (bản được ghi ra tệp đáp án) vào hàng
+                # chờ, không đưa dap_an: ban_ghi = {**dap_an} là một dict KHÁC, ghi "hinh" vào dap_an thì tệp
+                # đáp án không có ảnh -> web báo "câu này có hình vẽ, web chưa hiển thị được" cho MỌI câu có
+                # hình (lỗi 23/10/2026, cô Lan phát hiện 24/10/2026).
+                if any(ban_ghi.get(k) for k in ("hinh_tikz", "hinh_phuong_an_tikz", "hinh_phat_bieu_tikz")):
+                    cho_dich_hinh.append(ban_ghi)
 
             except CauHongError as e:
                 # Hàm có thật nhưng sinh ra câu KHÔNG ĐÚNG LOẠI mà tên nó hứa

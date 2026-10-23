@@ -34,7 +34,7 @@ from app.services.answer_parser_service import (
     chuan_hoa_dap_an_tf,
     loi_giai_cho_web,
 )
-from app.services.hinh_ve_service import duong_dan_anh, anh_trong
+from app.services.hinh_ve_service import duong_dan_anh, anh_trong, ma_hinh, tim_tikz
 # Ten 4 phan lay tu gia_su_service de CHI CO MOT nguon - PDF, trang lam
 # bai va bang chon cau cua gia su luon goi ten phan giong nhau.
 from app.services.gia_su_service import TEN_PHAN, TEN_PHAN_EN
@@ -45,6 +45,29 @@ from app.services.pdf_service import compile_pdf, PdfCompileError, EXPORTS_DIR_E
 from app.services.exam_assembler_service import (duong_dapan_en, duong_tex_en, bien_dich_pdf_tieng_anh,
                                                  bien_dich_pdf_de_hoc_sinh)
 from app.services.i18n_service import lay_ngon_ngu, luu_y_pham_vi_tieng_anh, chuong_co_ban_tieng_anh
+
+
+def _bu_anh_tu_kho(cau: dict) -> dict:
+    """Đề tạo từ 23/10/2026 đến khi sửa lỗi 24/10/2026: ảnh hình vẽ ĐÃ dịch vào data/hinh_cache nhưng tệp đáp án
+    thiếu trường "hinh" (xem exam_assembler_service, chỗ cho_dich_hinh). Tệp đáp án vẫn giữ mã TikZ (hinh_tikz...),
+    nên tính lại mã băm và lấy ảnh có sẵn trong kho - không dịch lại, không chậm trang. Đề đúng thì để nguyên."""
+    if not cau.get("hinh") and cau.get("hinh_tikz"):
+        ds = [ma_hinh(t) for t in tim_tikz("\n".join(cau["hinh_tikz"]))]
+        ds = [m for m in ds if duong_dan_anh(m)]
+        if ds:
+            cau["hinh"] = ds
+    for khoa_tikz, khoa_ma in (("hinh_phuong_an_tikz", "hinh_phuong_an"),
+                               ("hinh_phat_bieu_tikz", "hinh_phat_bieu")):
+        if not cau.get(khoa_ma) and cau.get(khoa_tikz):
+            theo_o = {}
+            for nhan, tikz_o in cau[khoa_tikz].items():
+                ds = tim_tikz(tikz_o)
+                if ds and duong_dan_anh(ma_hinh(ds[0])):
+                    theo_o[nhan] = ma_hinh(ds[0])
+            if theo_o:
+                cau[khoa_ma] = theo_o
+    return cau
+
 
 router = APIRouter(prefix="/api/exam", tags=["Exam"])
 
@@ -1337,7 +1360,7 @@ def xem_de_lam_bai_endpoint(request: Request, de_id: str):
             # Trinh duyet goi "/hinh/..." -> 404, tren trang lam bai chi
             # thay o vuong dau hoi (icon anh hong). Cau co hinh ma mat hinh
             # la doi luon muc do cua cau.
-            "hinh": ["/api/exam/hinh/%s" % m for m in (cau.get("hinh") or [])],
+            "hinh": ["/api/exam/hinh/%s" % m for m in (_bu_anh_tu_kho(cau).get("hinh") or [])],
         }
         if loai_cau == "MC":
             muc["phuong_an"] = cau.get("phuong_an") or {}
