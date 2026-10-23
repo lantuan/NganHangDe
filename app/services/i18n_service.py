@@ -44,6 +44,19 @@ def tu_dien(ngon_ngu: str) -> dict:
 
 
 @lru_cache(maxsize=4)
+def ten_bai_dich(ngon_ngu: str) -> dict:
+    """Tên bài học Việt -> Anh (data/i18n/ten_bai_<ngôn ngữ>.json), CHỈ khớp nguyên tên, dùng cho khoá JSON "ten_bai"
+    (bảng ma trận theo bài ở /gv/ra-de, khung tài liệu lí thuyết của gia sư). Tệp này cố ý KHÔNG mang tiền tố en_ nên
+    không gộp vào từ điển chung: tên bài ngắn ("Hàm số", "Dãy số", "Khoảng cách") mà gộp vào thì bị dịch nửa vời trong
+    các đoạn văn khác (cô Lan 23/10/2026: trang tiếng Anh tên chương đã dịch mà tên bài vẫn tiếng Việt)."""
+    tep = THU_MUC / ("ten_bai_%s.json" % ngon_ngu)
+    try:
+        return json.loads(tep.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+@lru_cache(maxsize=4)
 def _khoa_theo_do_dai(ngon_ngu: str) -> tuple:
     return tuple(sorted(tu_dien(ngon_ngu), key=len, reverse=True))
 
@@ -105,6 +118,8 @@ def dich_json(obj, ngon_ngu: str, khoa: str | None = None):
         return {k: dich_json(v, ngon_ngu, k) for k, v in obj.items()}
     if isinstance(obj, list):
         return [dich_json(v, ngon_ngu, khoa) for v in obj]
+    if isinstance(obj, str) and khoa == "ten_bai" and ngon_ngu != "vi":
+        return ten_bai_dich(ngon_ngu).get(obj.strip(), obj)
     if isinstance(obj, str) and khoa in KHOA_JSON_DICH:
         return "\n".join(_dich_tron_ven(dong, ngon_ngu) for dong in obj.split("\n"))
     return obj

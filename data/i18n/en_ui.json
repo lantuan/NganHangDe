@@ -697,5 +697,11 @@
  "Ví dụ: vì sao bước 2 lại ra như vậy?": "Example: why does step 2 give this result?",
  "💬 Còn chỗ nào chưa hiểu ở câu này thì hỏi tiếp ngay ở đây.": "💬 Still unsure about this question? Ask a follow-up right here.",
  "📖 Mình làm xong rồi, xem lời giải": "📖 I am done, show the solutions",
- "📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại": "📚 Theory notes your teacher used - what to review (in Vietnamese)"
+ "📚 Tài liệu lí thuyết thầy/cô đã dùng - chỗ cần học lại": "📚 Theory notes your teacher used - what to review (in Vietnamese)",
+ "Kiểm tra thường xuyên (hệ số 1) — theo chương": "Regular test (weight 1) — by chapter",
+ "Giữa kỳ 1 (hệ số 2)": "Midterm 1 (weight 2)",
+ "Cuối kỳ 1 (hệ số 3)": "Final exam 1 (weight 3)",
+ "Giữa kỳ 2 (hệ số 2)": "Midterm 2 (weight 2)",
+ "Cuối kỳ 2 (hệ số 3)": "Final exam 2 (weight 3)",
+ "Vận dụng": "Apply"
 }
