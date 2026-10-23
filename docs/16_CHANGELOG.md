@@ -10603,3 +10603,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 ## 2026-10-23 - Prompt CHV_Fun v2.7: trò chuyện tự nhiên, khớp tính năng mới, chỉ dán phần lệnh
 - `data/prompts/CHV_Fun.md`: Rule 7 thành "TRÒ CHUYỆN / NGOÀI PHẠM VI" (trò chuyện như người bạn, chuyện ngoài Toán đáp vui một câu rồi hướng về tạo đề / ôn Toán); bỏ "Không trả lời như chatbot"; NHIỆM VỤ + Rule 6 nói rõ câu hỏi kiến thức do máy chủ trả lời theo tài liệu lí thuyết, câu nào vẫn tới CHV_Fun là tài liệu chưa có; Rule 5 thêm hỏi kiến thức, nút mức luyện tập, ô hỏi tiếp, nút xem lời giải. JSON và tên `task` giữ nguyên nên Switch, Code in JavaScript không phải sửa.
 - Ô System Message trên n8n đang chứa cả phần ghi chú đầu/cuối tệp `.md` (khoảng 15 KB): bản dán mới chỉ phần lệnh (khoảng 12,5 KB) - đỡ token mỗi lượt dù thêm nội dung. Cô dán lại vào node CHV_Fun.
+
+## 2026-10-23 - 30 lượt hỏi AI mỗi ngày, tính chung thầy/cô AI và khung chat
+- Cô Lan: "giới hạn lại số lần hỏi luôn. mỗi ngày hỏi 30 lượt cả đề và chatbox ngoài".
+- Dùng chung bảng `gia_su_luot` (đã có cho thầy/cô AI): mặc định `GIA_SU_LUOT_MOI_NGAY` = 30 (trước 20). Trên VPS nếu `.env` đang ghi `GIA_SU_LUOT_MOI_NGAY=20` thì phải sửa thành 30 (hoặc xoá dòng). Giáo viên nâng riêng cho một em ở `/gv/gia-su` như cũ.
+- `chat.py`: mọi tin nhắn phải gọi mô hình (gửi n8n, hỏi kiến thức theo tài liệu, trò chuyện dự phòng) kiểm lượt TRƯỚC khi gọi (`_het_luot`) và trừ 1 lượt SAU khi mô hình đã trả lời (`_tru_luot`; n8n hỏng / mất kết nối không mất lượt). Hết lượt: câu báo thân thiện (Việt / Anh), không gọi mô hình; vẫn tạo đề bằng nút "📝 Tạo đề mới" / "Đồng ý, tạo đề" và làm bài bình thường (không tính lượt). Câu máy chủ tự xử lí (mở bảng chọn câu, hướng dẫn soạn sẵn, khung xác nhận dự phòng) không tính lượt.
+- Giáo viên / quản trị không giới hạn ở cả khung chat và thầy/cô AI (`gia_su_service.hoi(..., mien_luot=True)`).
+- Test `tests/test_luot_hoi_chung.py`; test toàn bộ đạt (trừ các test đã biết).

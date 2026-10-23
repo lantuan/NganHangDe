@@ -126,8 +126,41 @@ def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str,
         print("CHAT: n8n hong, tra loi tro chuyen qua webhook gia su")
         history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
                                      noi_dung=tra_loi, loai_phan_hoi="text")
+        _tru_luot(user_id, vai_tro)
         return {"success": True, "message": tra_loi, "data": {"type": "tro_chuyen"}}
     return None
+
+
+def _mien_luot(vai_tro: str | None) -> bool:
+    """Giáo viên / quản trị không giới hạn lượt hỏi AI."""
+    return vai_tro in profile_service.VAI_TRO_GIAO_VIEN
+
+
+def _het_luot(request, user_id: str, vai_tro: str | None, conversation_id: str) -> dict | None:
+    """Học sinh hết lượt hỏi AI hôm nay (cô Lan 23/10/2026: "mỗi ngày hỏi 30 lượt cả đề và chatbox ngoài" - tính CHUNG
+    với thầy/cô AI, bảng gia_su_luot) -> câu báo (không gọi mô hình). Còn lượt / giáo viên -> None."""
+    if _mien_luot(vai_tro):
+        return None
+    luot = gia_su_service.lay_luot(user_id)
+    if luot["con_lai"] > 0:
+        return None
+    if lay_ngon_ngu(request) == "en":
+        loi = ("You have used all %d AI questions for today 😅 (shared between this chat and asking the AI teacher about "
+               "exam questions). You can still create exams with **📝 Create a new exam** and take them as usual - "
+               "that does not use any questions. See you tomorrow!" % luot["gioi_han"])
+    else:
+        loi = ("Hôm nay bạn đã dùng hết %d lượt hỏi AI rồi 😅 (tính chung cả khung chat và hỏi thầy/cô AI về câu "
+               "trong đề). Bạn vẫn tạo đề bằng nút **📝 Tạo đề mới** và làm bài bình thường - phần đó không tính lượt. "
+               "Mai mình gặp lại nha!" % luot["gioi_han"])
+    history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant", noi_dung=loi,
+                                 loai_phan_hoi="text")
+    return {"success": True, "message": loi, "data": {"type": "het_luot", "luot": luot}}
+
+
+def _tru_luot(user_id: str, vai_tro: str | None) -> None:
+    """Trừ 1 lượt SAU khi mô hình đã trả lời (lỗi mạng / n8n hỏng không mất lượt). Giáo viên không trừ."""
+    if not _mien_luot(vai_tro):
+        gia_su_service.tru_luot(user_id)
 
 
 def _lich_su_gan(user_id: str, conversation_id: str) -> list[tuple[str, str]]:
@@ -481,10 +514,14 @@ async def chat_post(
     # theo tài liệu lí thuyết có sẵn của cô (tro_chuyen_service.tra_loi_kien_thuc, qua webhook gia sư; không thấy đoạn
     # tài liệu nào thì đi tiếp đường cũ). Lưu như gói gia sư để mở lại hội thoại vẫn có khung tài liệu.
     if tro_chuyen_service.la_cau_hoi_kien_thuc(message):
+        het = await run_in_threadpool(_het_luot, request, user.id, vai_tro, conversation_id)
+        if het:
+            return het
         kt = await run_in_threadpool(
             lambda: tro_chuyen_service.tra_loi_kien_thuc(message, lop_trong_ho_so(user.id), lay_ngon_ngu(request),
                                                          vai_tro))
         if kt:
+            await run_in_threadpool(_tru_luot, user.id, vai_tro)
             import json as _json
             goi = {"success": True, "message": "", "data": {"tra_loi": kt["tra_loi"], "ly_thuyet": kt["ly_thuyet"],
                                                             "che_do": "kien_thuc"}}
@@ -538,6 +575,11 @@ async def chat_post(
             "data": {"type": "mo_bang_gia_su", "tra_loi": loi_nhan, "cau_hoi_goc": message},
         }
 
+    # Hết lượt hỏi AI hôm nay -> không gọi n8n (các câu máy chủ tự xử lí ở trên vẫn chạy, không tính lượt)
+    het = await run_in_threadpool(_het_luot, request, user.id, vai_tro, conversation_id)
+    if het:
+        return het
+
     r = None
     loi_cuoi = None
     for lan_thu in range(2):
@@ -571,6 +613,8 @@ async def chat_post(
     if content_type == "application/json":
         try:
             ket_qua = r.json()
+            if isinstance(ket_qua, dict) and ket_qua:
+                await run_in_threadpool(_tru_luot, user.id, vai_tro)       # mô hình đã trả lời -> tính 1 lượt
         except ValueError:
             print("LOI CHAT: n8n tra ve JSON rong/khong hop le. Body:", repr(r.text[:500]))
             ket_qua = None
@@ -598,6 +642,7 @@ async def chat_post(
     # n8n tra file nhi phan (PDF/TEX/ZIP tu /api/exam/generate-pdf-auto
     # hoac /api/exam/export-loigiai)
     if content_type in _EXT_THEO_CONTENT_TYPE:
+        await run_in_threadpool(_tru_luot, user.id, vai_tro)               # tạo đề / lời giải qua n8n -> 1 lượt
         ext = _EXT_THEO_CONTENT_TYPE[content_type]
         filename = f"{uuid.uuid4().hex[:10]}.{ext}"
         file_path = DOWNLOAD_DIR / filename

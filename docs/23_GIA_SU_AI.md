@@ -161,7 +161,7 @@ Thêm 2 dòng (dán URL thật của webhook vừa tạo ở bước 2):
 
 ```
 N8N_WEBHOOK_GIA_SU=https://fqrpl.n8npanel.com/webhook/giasu
-GIA_SU_LUOT_MOI_NGAY=20
+GIA_SU_LUOT_MOI_NGAY=30
 ```
 
 Rồi:
@@ -176,7 +176,7 @@ bao giờ vỡ trang học sinh.
 
 ## 7. Hạn mức lượt hỏi
 
-- Mặc định **20 lượt/em/ngày** (`GIA_SU_LUOT_MOI_NGAY` trong `.env`).
+- Mặc định **30 lượt/em/ngày** (`GIA_SU_LUOT_MOI_NGAY` trong `.env`), tính CHUNG thầy/cô AI và khung chat (từ 23/10/2026); giáo viên không giới hạn.
 - Ngày chốt theo **giờ Việt Nam**, không theo UTC — nếu theo UTC thì từ 7h sáng
   đã bị tính sang ngày hôm sau và học sinh mất lượt giữa buổi học.
 - **Chỉ trừ lượt khi đã có câu trả lời.** Mất mạng, n8n hỏng, hết dữ liệu — đều

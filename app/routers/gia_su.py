@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from app.core.deps import get_current_user
 from app.services.i18n_service import lay_ngon_ngu
-from app.services import gia_su_service, history_service
+from app.services import gia_su_service, history_service, profile_service
 from app.services.gia_su_service import GiaSuError
 
 router = APIRouter(prefix="/api/giasu", tags=["GiaSu"])
@@ -84,6 +84,8 @@ def hoi_endpoint(request: Request, payload: HoiRequest):
             cau_hoi=payload.cau_hoi,
             lich_su=payload.lich_su,
             lang=lay_ngon_ngu(request),
+            # Giáo viên không giới hạn lượt (lượt 30/ngày tính chung với khung chat - chỉ cho học sinh)
+            mien_luot=profile_service.la_giao_vien(user.id),
         )
     except GiaSuError as e:
         # Loi "hien duoc cho hoc sinh doc": tra 200 kem success=False de

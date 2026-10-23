@@ -293,7 +293,7 @@ def test_user_id_lay_tu_phien_chu_khong_lay_tu_body(client, monkeypatch):
     da_nhan = {}
     monkeypatch.setattr(R, "get_current_user", lambda request: _UserGia())
 
-    def _hoi(user_id, de_id, so_thu_tu, cau_hoi, lich_su=None, lang="vi"):
+    def _hoi(user_id, de_id, so_thu_tu, cau_hoi, lich_su=None, lang="vi", mien_luot=False):
         da_nhan["user_id"] = user_id
         return {"tra_loi": "ok", "che_do": "ai", "dap_an_python": "B",
                 "loi_giai_python": "...", "luot": {}, "trang_thai": "ok"}

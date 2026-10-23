@@ -45,7 +45,9 @@ def _so_nguyen_moi_truong(ten: str, mac_dinh: int) -> int:
         return mac_dinh
 
 
-GIA_SU_LUOT_MOI_NGAY = _so_nguyen_moi_truong("GIA_SU_LUOT_MOI_NGAY", 20)
+# Số lượt hỏi AI mỗi ngày của MỘT học sinh, tính CHUNG cho thầy/cô AI (hỏi câu trong đề) và khung chat (mọi tin nhắn phải
+# gọi mô hình) - cô Lan 23/10/2026: "mỗi ngày hỏi 30 lượt cả đề và chatbox ngoài". Giáo viên không giới hạn.
+GIA_SU_LUOT_MOI_NGAY = _so_nguyen_moi_truong("GIA_SU_LUOT_MOI_NGAY", 30)
 
 # Do dai toi da cau hoi hoc sinh go (chan spam/day lenh dai vao mo hinh).
 GIA_SU_DO_DAI_CAU_HOI = _so_nguyen_moi_truong("GIA_SU_DO_DAI_CAU_HOI", 500)

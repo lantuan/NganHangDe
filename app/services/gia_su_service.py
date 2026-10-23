@@ -761,7 +761,7 @@ def tim_ly_thuyet(ngu_canh: dict, cau_hoi: str, lich_su: list[dict] | None = Non
 
 
 def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
-        lich_su: list[dict] | None = None, lang: str = "vi") -> dict:
+        lich_su: list[dict] | None = None, lang: str = "vi", mien_luot: bool = False) -> dict:
     """
     Tra ve dict san de tra thang cho Frontend:
       {tra_loi, dap_an_python, loi_giai_python, che_do, luot, trang_thai}
@@ -796,7 +796,7 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
             "with you. Thinking it through yourself first makes the explanation stick."))
 
     luot = lay_luot(user_id)
-    if luot["con_lai"] <= 0:
+    if luot["con_lai"] <= 0 and not mien_luot:          # giáo viên (mien_luot) không giới hạn
         ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, None, "het_luot")
         raise GiaSuError(_t(
             lang,
@@ -838,7 +838,8 @@ def hoi(user_id: str, de_id: str, so_thu_tu: int, cau_hoi: str,
         raise GiaSuError(_t(lang, "Chưa nhận được câu trả lời, em thử lại giúp thầy/cô nhé.",
                             "No answer was received. Please try again."))
 
-    tru_luot(user_id)
+    if not mien_luot:
+        tru_luot(user_id)
     trang_thai = "ngoai_pham_vi" if (CAU_TU_CHOI[:30] in tra_loi or CAU_TU_CHOI_EN[:30] in tra_loi) else "ok"
     ghi_nhat_ki(user_id, de_id, so_thu_tu, ngu_canh, cau_hoi, tra_loi, trang_thai)
 
