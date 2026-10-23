@@ -81,3 +81,34 @@ def test_khong_doc_duoc_thi_bao_loi_nhu_cu(monkeypatch, chat_gia):
     monkeypatch.setattr(C, "_goi_n8n", lambda *a, **k: _JsonHong())
     kq = _gui("làm cái gì đó")
     assert kq["success"] is False and "AI chưa xử lý được" in kq["message"]
+
+
+# ---------------------------------------------------------------- 23/10/2026
+def test_khong_noi_lop_thi_lay_lop_trong_ho_so_va_chi_tu_luan():
+    """Cô Lan: "tôi cần đề chuyện tập thêm chương 3, phần tự luận" (không nói lớp; hồ sơ Khối 10)."""
+    cau = "tôi cần đề chuyện tập thêm chương 3, phần tự luận"
+    assert doc_yeu_cau_de(cau) is None                                       # không hồ sơ: không đoán lớp
+    d = doc_yeu_cau_de(cau, "vi", 10)
+    assert (d["lop"], d["pham_vi_chuong"]) == (10, "chuong_3")
+    assert d["cau_truc_tong_quat"] == {"trac_nghiem": 0, "dung_sai_cau_lon": 0, "tra_loi_ngan": 0, "tu_luan": 3}
+
+
+def test_so_cau_tung_loai():
+    d = doc_yeu_cau_de("đề chương 2 lớp 10, 5 câu tự luận, 10 câu trắc nghiệm")
+    assert d["cau_truc_tong_quat"] == {"trac_nghiem": 10, "dung_sai_cau_lon": 1, "tra_loi_ngan": 2, "tu_luan": 5}
+
+
+def test_hoi_cach_dung_khi_n8n_hong(monkeypatch, chat_gia):
+    monkeypatch.setattr(C, "_goi_n8n", lambda *a, **k: _JsonHong())
+    monkeypatch.setattr(C.supabase_service, "lay_lop_hoc_sinh", lambda uid: {"khoi": "10", "lop": "C9"})
+    kq = _gui("tôi không biết cách tạo đề")
+    assert kq["success"] and kq["data"]["type"] == "huong_dan" and "Tạo đề mới" in kq["message"]
+    kq = _gui("tôi cần đề chuyện tập thêm chương 3, phần tự luận")
+    assert kq["data"]["type"] == "xac_nhan_de" and kq["data"]["cau_truc_tong_quat"]["tu_luan"] == 3
+
+
+def test_giao_dien_gui_ca_so_0():
+    from pathlib import Path
+    html = (Path(__file__).resolve().parent.parent / "app/templates/chat/chat.html").read_text(encoding="utf-8")
+    assert 'if (typeof ct[loai] === "number" && ct[loai] >= 0) cauTrucTuHocSinh[loai] = { so_luong: ct[loai] };' in html
+    assert "if (ct.trac_nghiem) cauTrucTuHocSinh" not in html

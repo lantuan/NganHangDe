@@ -1,5 +1,6 @@
 from pathlib import Path
 import random
+import re
 import uuid
 
 from fastapi import APIRouter, Request, Form, HTTPException
@@ -84,17 +85,39 @@ def dong_tuy_chon_da_ap_dung(thong_tin: dict, da_tick_anh: bool, lang: str = "vi
     return muc + anh
 
 
-def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str) -> dict | None:
-    """n8n hỏng (JSON rỗng/hỏng, không kết nối, phản hồi lạ) mà tin nhắn là yêu cầu tạo đề rõ ràng (lớp + kỳ thi, hoặc
-    lớp + chương): máy chủ tự đọc rồi trả khung xác nhận như RequestParser (cô Lan 22/10/2026: "Lớp 10, thi giữa kỳ 1"
-    báo "AI chưa xử lý được"). Không đọc được -> None (nơi gọi báo lỗi như cũ). Xem app/services/yeu_cau_de_service.py."""
-    de_xuat = yeu_cau_de_service.doc_yeu_cau_de(message, lay_ngon_ngu(request))
-    if not de_xuat:
+def lop_trong_ho_so(user_id: str) -> int | None:
+    """Khối 10/11/12 học sinh đã chọn (profiles.khoi). Giáo viên / chưa chọn / lỗi -> None."""
+    try:
+        khoi = (supabase_service.lay_lop_hoc_sinh(user_id) or {}).get("khoi")
+        m = re.search(r"\d+", str(khoi or ""))
+        so = int(m.group(0)) if m else None
+        return so if so in (10, 11, 12) else None
+    except Exception:
         return None
-    print("CHAT: n8n hong, may chu tu doc yeu cau tao de ->", de_xuat["lop"], de_xuat["ki_thi"], de_xuat["pham_vi_chuong"])
-    history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
-                                 noi_dung=de_xuat["tra_loi"], loai_phan_hoi="text")
-    return {"success": True, "message": de_xuat["tra_loi"], "data": de_xuat}
+
+
+def _du_phong_tao_de(request, message: str, user_id: str, conversation_id: str) -> dict | None:
+    """n8n hỏng (JSON rỗng/hỏng, không kết nối, phản hồi lạ): máy chủ tự trả lời những gì đọc chắc được, thay vì "AI chưa
+    xử lý được" (cô Lan 22-23/10/2026):
+      - yêu cầu tạo đề rõ ràng (kỳ thi hoặc chương; lớp lấy trong tin nhắn, không có thì lấy hồ sơ; "phần tự luận",
+        "5 câu trắc nghiệm"...) -> khung xác nhận như RequestParser;
+      - hỏi cách dùng ("tôi không biết cách tạo đề") -> hướng dẫn soạn sẵn.
+    Không đọc được -> None (nơi gọi báo lỗi như cũ). Xem app/services/yeu_cau_de_service.py."""
+    lang = lay_ngon_ngu(request)
+    de_xuat = yeu_cau_de_service.doc_yeu_cau_de(message, lang, lop_trong_ho_so(user_id))
+    if de_xuat:
+        print("CHAT: n8n hong, may chu tu doc yeu cau tao de ->", de_xuat["lop"], de_xuat["ki_thi"],
+              de_xuat["pham_vi_chuong"], de_xuat["cau_truc_tong_quat"])
+        history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
+                                     noi_dung=de_xuat["tra_loi"], loai_phan_hoi="text")
+        return {"success": True, "message": de_xuat["tra_loi"], "data": de_xuat}
+    huong_dan = yeu_cau_de_service.tra_loi_cach_dung(message, lang)
+    if huong_dan:
+        print("CHAT: n8n hong, may chu tra loi huong dan su dung")
+        history_service.luu_tin_nhan(user_id=user_id, conversation_id=conversation_id, role="assistant",
+                                     noi_dung=huong_dan, loai_phan_hoi="text")
+        return {"success": True, "message": huong_dan, "data": {"type": "huong_dan"}}
+    return None
 
 
 def _la_yeu_cau_loi_giai(noi_dung_tin_nhan: str) -> bool:

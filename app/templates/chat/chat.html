@@ -1315,10 +1315,11 @@ ${html}
 
             const ct = deXuat.cau_truc_tong_quat || {};
             const cauTrucTuHocSinh = {};
-            if (ct.trac_nghiem) cauTrucTuHocSinh.trac_nghiem = { so_luong: ct.trac_nghiem };
-            if (ct.dung_sai_cau_lon) cauTrucTuHocSinh.dung_sai_cau_lon = { so_luong: ct.dung_sai_cau_lon };
-            if (ct.tra_loi_ngan) cauTrucTuHocSinh.tra_loi_ngan = { so_luong: ct.tra_loi_ngan };
-            if (ct.tu_luan) cauTrucTuHocSinh.tu_luan = { so_luong: ct.tu_luan };
+            // So 0 cung phai gui di (cô Lan 23/10/2026: "phần tự luận" = 0 trắc nghiệm, 0 đúng/sai, 0 trả lời ngắn). Truoc
+            // day `if (ct.trac_nghiem)` bo qua so 0 -> may chu lay so mac dinh -> de "chi tu luan" van co trac nghiem.
+            ["trac_nghiem", "dung_sai_cau_lon", "tra_loi_ngan", "tu_luan"].forEach(function (loai) {
+                if (typeof ct[loai] === "number" && ct[loai] >= 0) cauTrucTuHocSinh[loai] = { so_luong: ct[loai] };
+            });
             // Ty le muc do hoc sinh/giao vien da noi ("100% NB va TH") PHAI di tiep xuong
             // may chu (co Lan 03/10/2026) - truoc day bi bo, de ra theo bang mac dinh
             // (SA, TL mac dinh toan VD/VDC). Chi MC, SA, TL; Dung/Sai giu nguyen cau truc.
