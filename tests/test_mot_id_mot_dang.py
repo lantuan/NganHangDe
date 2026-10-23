@@ -93,6 +93,8 @@ CHO_PHEP_NHIEU_HAM = {
     "L10_C4_B7_NB037_MC_E",   # _01 dien khuyet dinh nghia, _02 ki hieu / diem dau / diem cuoi / do dai
     "L10_C4_B7_VD039_MC_B",   # _01 doc hinh tinh ti so trong luong rieng, _02 chon hinh dung theo tinh huong
     # Bai 8 bo sung theo cau mau co Lan (16/10/2026): _01 cu, _02 "khang dinh nao dung" - cung dang, cung quy tac
+    "L10_C4_B8_VD040_MC_C",   # _01 keo vat len doc (phao/xe hang/go), _02-_04 keo phao Dien Bien Phu: bo sung nguoi, day xien, keo phao ra
+    "L10_C4_B8_VD040_SA_C",   # nhu MC_C
     "L10_C4_B8_TH040_MC_A",   # quy tac ba diem: _01 XY + YZ = ?, _02 UV = UW + WV (nhieu tron tong/hieu)
     "L10_C4_B8_TH041_MC_A",   # quy tac tru: _01 OX - OY = ?, _02 UV = WV - WU (nhieu tron tong/hieu)
     "L10_C4_B8_TH040_MC_B",   # quy tac hinh binh hanh: _01 co hinh, dinh A; _02 dinh ngau nhien, cung ve phai

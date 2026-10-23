@@ -360,29 +360,55 @@
     "id": "L10_C4_B8_VD040_MC_C",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời): ba lực F + P + w = 0, tính số người tối thiểu, lực kéo tối thiểu hoặc phản lực mặt dốc - luyện tập thêm, vận dụng cao",
+    "Dang": "Kéo hoặc ghìm vật trên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời; kéo pháo ở Điện Biên Phủ 1954: kéo pháo vào, dây kéo xiên, kéo pháo ra ghìm bằng dây): ba lực F + P + w = 0, tính số người tối thiểu hoặc phải bổ sung, lực kéo, phản lực mặt dốc, số sợi dây ghìm - luyện tập thêm, vận dụng cao",
     "ngoai_yccd": true,
     "muc_do_dang": "VDC",
     "boi_canh": [
       "keo_phao_len_doc",
       "keo_xe_hang_len_doc",
-      "toi_keo_go_len_doc"
+      "toi_keo_go_len_doc",
+      "keo_phao_dien_bien_phu"
     ],
-    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - theo bai Van dung SGK (keo phao 22148 N len doc 30 do) co Lan gui, co Lan xep muc VDC; co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - theo bai Van dung SGK (keo phao 22148 N len doc 30 do) co Lan gui, co Lan xep muc VDC; co Lan duyet lai | 23/10/2026: them bien the _02, _03, _04 keo phao Dien Bien Phu (thong tin that o cau dan, co nguon trong L10_C4.py) - co Lan duyet ke hoach"
   },
   {
     "id": "L10_C4_B8_VD040_SA_C",
     "content": "Thực hiện được các phép toán tổng hai vectơ.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời): ba lực F + P + w = 0, tính số người tối thiểu, lực kéo tối thiểu hoặc phản lực mặt dốc - luyện tập thêm, vận dụng cao",
+    "Dang": "Kéo hoặc ghìm vật trên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời; kéo pháo ở Điện Biên Phủ 1954: kéo pháo vào, dây kéo xiên, kéo pháo ra ghìm bằng dây): ba lực F + P + w = 0, tính số người tối thiểu hoặc phải bổ sung, lực kéo, phản lực mặt dốc, số sợi dây ghìm - luyện tập thêm, vận dụng cao",
     "ngoai_yccd": true,
     "muc_do_dang": "VDC",
     "boi_canh": [
       "keo_phao_len_doc",
       "keo_xe_hang_len_doc",
-      "toi_keo_go_len_doc"
+      "toi_keo_go_len_doc",
+      "keo_phao_dien_bien_phu"
     ],
-    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_C (VDC); co Lan duyet lai"
+    "ghi_chu": "LUYEN TAP THEM - muc VD cao hon YCCD TH040 cua Bo. CLAUDE THEM 17/10/2026 - ban tra loi ngan cung Dang voi MC_C (VDC); co Lan duyet lai | 23/10/2026: them bien the _02, _03, _04 keo phao Dien Bien Phu (thong tin that o cau dan, co nguon trong L10_C4.py) - co Lan duyet ke hoach"
+  },
+  {
+    "id": "L10_C4_VD040_VD060_TL_A",
+    "content": "Thực hiện được các phép toán tổng hai vectơ. | Sử dụng được vectơ và các phép toán trên vectơ để giải thích một số hiện tượng có liên quan đến Vật lí và Hoá học.",
+    "Loai": "Tự luận",
+    "Dang": "Kéo pháo lên Dốc Bảy Tời ở Điện Biên Phủ (1954): số người tối thiểu khi dây song song mặt dốc (a) và công của lực kéo khi dây kéo xiên, A = F.d (b) - luyện tập thêm, vận dụng cao",
+    "cac_y": [
+      {
+        "y": "a",
+        "curriculum_id": "L10_C4_B8_VD040",
+        "muc_do": "VD"
+      },
+      {
+        "y": "b",
+        "curriculum_id": "L10_C4_B11_VD060",
+        "muc_do": "VD"
+      }
+    ],
+    "ngoai_yccd": true,
+    "muc_do_dang": "VDC",
+    "boi_canh": [
+      "keo_phao_dien_bien_phu"
+    ],
+    "ghi_chu": "LUYEN TAP THEM - muc VDC. CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach (keo phao Dien Bien Phu, ca 4 the); tu luan hai y hai don vi; co Lan duyet lai"
   },
   {
     "id": "L10_C4_B8_NB041_MC_A",
@@ -858,5 +884,16 @@
     "Loai": "Đúng sai",
     "Dang": "Các khái niệm mở đầu; Tổng và hiệu của hai vectơ - câu dẫn hình bình hành tâm O, lục giác đều tâm O cạnh a hoặc tam giác có ba trung điểm: a) bằng nhau, cùng/ngược hướng; b) cùng phương, vectơ đối, tỉ số độ dài; c) tổng, hiệu; d) độ dài tổng, hiệu",
     "ghi_chu": "CLAUDE THEM 16/10/2026 - theo 3 cau mau Dung/Sai co Lan gui (hbh tam O, luc giac deu, tam giac trung diem); moi y >= 3 dung, >= 3 sai, chan tri tinh tu toa do hinh; y c, d lay Bai 8 de bon y tang dan NB, TH, VD, VDC; co Lan duyet lai"
+  },
+  {
+    "id": "L10_C4_TF_D",
+    "content": "Vectơ",
+    "Loai": "Đúng sai",
+    "Dang": "Tổng và hiệu của hai vectơ - bài toán thực tế kéo pháo lên dốc ở Điện Biên Phủ (1954): phương, hướng ba lực, F = -(P + w), độ lớn lực kéo và phản lực, số người tối thiểu, dây kéo xiên (định lí sin) - luyện tập thêm",
+    "ngoai_yccd": true,
+    "boi_canh": [
+      "keo_phao_dien_bien_phu"
+    ],
+    "ghi_chu": "LUYEN TAP THEM. CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach (keo phao Dien Bien Phu); y a NB, b TH, c VD, d VDC; co Lan duyet lai"
   }
 ]

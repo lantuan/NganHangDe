@@ -6841,7 +6841,7 @@ def L10_C4_B8_VD040_SA_B_01(socau, dang=2):
 
 
 # ---------------------------------------------------------------- C (VDC): kéo vật lên dốc nghiêng
-def _b8_hinh_doc(a):
+def _b8_hinh_doc(a, beta=0, ten_F=r"\overrightarrow{F}"):
     """TikZ mặt dốc nghiêng góc a độ, vật (hình chữ nhật) có TÂM O, trọng lực P, phản lực w, lực kéo F đặt tại O
     (như Hình 4.18 SGK). Sửa 21/10/2026 (cô Lan): "toạ độ điểm O phải là tâm của hình chữ nhật" - trước đây O là
     trung điểm cạnh đáy (chỗ vật chạm mặt dốc)."""
@@ -6860,7 +6860,10 @@ def _b8_hinh_doc(a):
     P = (O[0], O[1] - lp)
     W = (O[0] + n[0] * lp * math.cos(r), O[1] + n[1] * lp * math.cos(r))
     lf = max(lp * math.sin(r), 1.0)                      # dốc thoải: F theo tỉ lệ sẽ nằm lọt trong vật, nên tối thiểu 1
-    F = (O[0] + u[0] * lf, O[1] + u[1] * lf)
+    # dây kéo XIÊN góc beta so với mặt dốc (Điện Biên Phủ, 23/10/2026): F quay thêm beta về phía trên mặt dốc
+    rb = math.radians(beta)
+    uf = (math.cos(r + rb), math.sin(r + rb))
+    F = (O[0] + uf[0] * lf, O[1] + uf[1] * lf)
     goc = [(O[0] + i * rong / 2 * u[0] + j * cao / 2 * n[0], O[1] + i * rong / 2 * u[1] + j * cao / 2 * n[1])
            for i, j in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
     nhan_O = (O[0] - 0.24 * u[0], O[1] - 0.24 * u[1])    # chữ O trong vật, bên trái tâm (không đè ba mũi tên)
@@ -6871,13 +6874,22 @@ def _b8_hinh_doc(a):
            r"\draw[fill=cyan!30] " + " -- ".join(T(p) for p in goc) + " -- cycle;",
            r"\draw[->] %s -- %s node[right]{$\overrightarrow{P}$};" % (T(O), T(P)),
            r"\draw[->] %s -- %s node[above left]{$\overrightarrow{w}$};" % (T(O), T(W)),
-           r"\draw[->,blue] %s -- %s node[above]{$\overrightarrow{F}$};" % (T(O), T(F)),
+           r"\draw[->,blue] %s -- %s node[above]{$%s$};" % (T(O), T(F), ten_F),
            r"\fill %s circle[radius=1.5pt];" % T(O),
            r"\node at %s {\scriptsize $O$};" % T(nhan_O),
            r"\draw[thin] (1,0) arc (0:%s:1);" % _toa(a),
            # nhãn góc: dốc càng thoải đặt càng xa đỉnh (khe giữa hai cạnh đủ rộng cho chữ)
            r"\node at (%s:%s) {\footnotesize $%d^\circ$};" % (_toa(a / 2), _toa(min(2.9, max(1.45, 0.5 / math.tan(r)))), a),
            r"\end{tikzpicture}"]
+    if beta:
+        # đường dóng theo mặt dốc từ O (nét đứt) + cung góc beta giữa mặt dốc và dây kéo
+        D = (O[0] + u[0] * (lf + 0.3), O[1] + u[1] * (lf + 0.3))
+        rc = 0.75 * lf
+        out[-1:-1] = [r"\draw[dashed,thin] %s -- %s;" % (T(O), T(D)),
+                      r"\draw[thin] %s arc (%s:%s:%s);" % (T((O[0] + u[0] * rc, O[1] + u[1] * rc)), _toa(a), _toa(a + beta),
+                                                            _toa(rc)),
+                      r"\node at %s {\scriptsize $%d^\circ$};" % (
+                          T((O[0] + (rc + 0.35) * math.cos(r + rb / 2), O[1] + (rc + 0.35) * math.sin(r + rb / 2))), beta)]
     return "\n".join(out)
 
 
@@ -7003,6 +7015,294 @@ def L10_C4_B8_VD040_SA_C_01(socau, dang=2):
     for _ in range(socau):
         debai, dap, nhieu, giai, hinh = _b8_vd040c(False)
         cau += MC_SA_answer_const(debai, dap, nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+# =====================================================================
+# KÉO PHÁO Ở ĐIỆN BIÊN PHỦ (cô Lan 23/10/2026, duyệt kế hoạch): "trận Điện Biên Phủ, bộ đội ta không chỉ kéo lên mà còn
+# kéo pháo xuống. Ra bài này với mức độ VDC, ở cả 4 thể trắc nghiệm, tự luận... nếu có thông tin thật thì càng tốt, không
+# thì giả sử". Cùng MỘT bối cảnh "keo_phao_dien_bien_phu" (một đề chỉ ra một câu): MC_C/SA_C _02 (kéo vào, bổ sung người),
+# _03 (dây kéo xiên - định lí sin), _04 (kéo pháo ra, ghìm pháo xuống dốc bằng dây); TL L10_C4_VD040_VD060_TL_A (số
+# người + công của lực kéo); TF L10_C4_TF_D. LUYỆN TẬP THÊM (ngoài YCCĐ), mức VDC.
+# THÔNG TIN THẬT (chỉ ở câu dẫn, đều có nguồn):
+#   - Báo Nhân Dân, Thiếu tướng Đỗ Quốc Ân "Pháo binh trong chiến dịch Điện Biên Phủ": "kéo một khẩu pháo 105 ly nặng gần
+#     hai tấn, vượt qua núi cao, vực sâu (có những đoạn đường có độ dốc 40° - 50°) phải dùng cả trăm người kết hợp với
+#     tời quay"; "Ngày 5-2-1954, nhiệm vụ kéo pháo ra ... đã hoàn thành".
+#   - Báo Nhân Dân, hồi ức Chính ủy Đại đoàn 351 Phạm Ngọc Mậu: "tạm chia cứ mỗi khẩu 30 người (20 bộ binh và 10 pháo
+#     thủ)"; "Dốc Bảy Tời ... nay lại từ từ nhả dây dòng pháo xuống".
+#   - Thương hiệu & Công luận "Voi trong chiến dịch Điện Biên Phủ": "Có dốc, độ dài lên tới 7 tời (mỗi tời dài 50 m)";
+#     "ghìm cỗ pháo nặng 2,5 tấn, lao xuống dốc 50 - 60 độ".
+#   - Báo Tiền Phong: đêm 1/2/1954, kéo pháo cao xạ ra, xuống dốc Chuối thì dây tời đứt; Khẩu đội trưởng Tô Vĩnh Diện
+#     hy sinh cứu pháo.
+# Góc dốc theo nguồn: kéo lên 30° (SGK) đến 50° (Nhân Dân), ghìm xuống tới 60° (TH&CL). Trọng lượng: nguồn ghi từ "gần
+# hai tấn" đến 2,5 tấn -> khối lượng 2 000 - 2 500 kg, g = 9,8. Lực kéo mỗi người, sức chịu của dây, góc dây: GIẢ SỬ.
+# =====================================================================
+
+_DBP_MO_VAO = (r"During the Dien Bien Phu campaign (1954), our soldiers hauled guns by hand into position over high mountains and deep ravines; some stretches of road had slopes of $40^\circ$ to $50^\circ$, and at first each gun was assigned $30$ people to haul it.")
+_DBP_MO_RA = (r"During the Dien Bien Phu campaign (1954), after switching to the motto ``fight steadily, advance steadily'', our soldiers hauled the guns back out of their positions, at times holding a gun back as it went down slopes of $50^\circ$ to $60^\circ$; on the night of $1/2/1954$, while hauling a gun down Chuoi slope, the winch rope snapped, and gun commander To Vinh Dien gave his life to save the gun.")
+_DBP_BA_LUC = (r"Assume the gun is acted on by three forces: its weight $\overrightarrow{P}$, the normal force $\overrightarrow{w}$ of the slope (perpendicular to the slope) and the force $\overrightarrow{F}$ of the")
+
+
+def _dbp_khoi_luong():
+    """Khối lượng (kg) và trọng lượng (N, g = 9,8, làm tròn) của khẩu pháo."""
+    m = random.randint(200, 250) * 10
+    return m, int(_Dec8(str(m * 9.8)).quantize(_Dec8(1), rounding=_HU8))
+
+
+def _dbp_so(n):
+    return _b8_ngan_cach(n)
+
+
+def _dbp_giai_tam_giac(P, a, Fk_tex):
+    """Lời giải chung: dây song song mặt dốc -> |F| = |P| sin a (tam giác lực vuông)."""
+    return (r"Let $\overrightarrow{OA} = \overrightarrow{P}$ (vertical, pointing down) and construct $\overrightarrow{AC} = \overrightarrow{w}$; then $\overrightarrow{P} + \overrightarrow{w} = \overrightarrow{OC}$ lies along the slope. From $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$ we get $\overrightarrow{F} = -\overrightarrow{OC}$. Triangle $OAC$ is right-angled at $C$ and $\widehat{OAC} = %d^\circ$ (an angle whose sides are perpendicular to those of the slope angle), so $\left|\overrightarrow{F}\right| = OC = %s\sin %d^\circ \approx %s$ (N)." % (a, _dbp_so(P), a, Fk_tex))
+
+
+def _dbp_02(mc):
+    """Kéo pháo vào, dây song song mặt dốc: phải bổ sung tối thiểu bao nhiêu người so với 30 người ban đầu."""
+    a = random.choice([30, 35, 40, 45, 50])
+    m, P = _dbp_khoi_luong()
+    f = random.choice([80, 100, 120])
+    r = _sp8.pi * a / 180
+    Fk = P * _sp8.sin(r)
+    n = int(_sp8.ceiling(Fk / f))
+    them = n - 30
+    de = (_DBP_MO_VAO + " " + r"Consider a 105 mm howitzer of mass $%s$ kg (weight $%s$ N) hauled steadily up a slope inclined at $%d^\circ$ to the horizontal (see the figure). " % (_dbp_so(m), _dbp_so(P), a)
+          + _DBP_BA_LUC + r" hauling rope (parallel to the slope, pointing up the slope), with $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$. Suppose each person can pull with a force of $%d$ N. Compared with the initial $30$ people, at least how many more people are needed to haul the gun" % f)
+    giai = (_dbp_giai_tam_giac(P, a, _b8_tron(Fk, 1)) +
+            r"\\ We need $k$ people with $%d k \ge %s$, i.e. $k \ge %s$, so at least $%d$ people are needed. Hence at least $%d - 30 = %d$ more people are needed." % (f, _b8_tron(Fk, 1), _b8_tron(Fk / f, 2), n, n, them))
+    ung = [int(_sp8.ceiling(P * _sp8.cos(r) / f)) - 30, n, them - 1, int(_sp8.ceiling(P / f)) - 30,
+           int(_sp8.ceiling(P * _sp8.tan(r) / f)) - 30, them + 1]
+    return de + "?", str(them), [str(x) for x in ung if x > 0], giai, _b8_hinh_doc(a), "people"
+
+
+def _dbp_03(mc):
+    """Kéo pháo vào, dây kéo XIÊN góc beta so với mặt dốc: số người tối thiểu (định lí sin trong tam giác lực)."""
+    while True:
+        a = random.choice([30, 35, 40, 45, 50])
+        b = random.choice([10, 15, 20, 25, 30])
+        if a + b <= 70:
+            break
+    m, P = _dbp_khoi_luong()
+    f = random.choice([80, 100, 120])
+    r, rb = _sp8.pi * a / 180, _sp8.pi * b / 180
+    Fk = P * _sp8.sin(r) / _sp8.cos(rb)
+    n = int(_sp8.ceiling(Fk / f))
+    de = (_DBP_MO_VAO + " " + r"Consider a 105 mm howitzer of weight $%s$ N hauled steadily up a slope inclined at $%d^\circ$ to the horizontal; suppose the hauling rope runs upward and makes an angle of $%d^\circ$ with the slope (see the figure). " % (_dbp_so(P), a, b)
+          + _DBP_BA_LUC + r" hauling rope, with $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$. Suppose each person can pull with a force of $%d$ N along the rope. At least how many people are needed to haul the gun" % f)
+    giai = (r"Let $\overrightarrow{OA} = \overrightarrow{P}$, $\overrightarrow{AC} = \overrightarrow{w}$, $\overrightarrow{CO} = \overrightarrow{F}$ (the three forces add up to $\overrightarrow{0}$, so they form triangle $OAC$). $\widehat{OAC} = %d^\circ$ (the angle between the vertical and the direction perpendicular to the slope); $\overrightarrow{w}$ is perpendicular to the slope and the rope makes an angle of $%d^\circ$ with the slope, so $\widehat{ACO} = 90^\circ + %d^\circ = %d^\circ$.\\ By the law of sines: $\dfrac{OC}{\sin\widehat{OAC}} = \dfrac{OA}{\sin\widehat{ACO}}$, hence $\left|\overrightarrow{F}\right| = \dfrac{%s\sin %d^\circ}{\sin %d^\circ} = \dfrac{%s\sin %d^\circ}{\cos %d^\circ} \approx %s$ (N) (since $\sin %d^\circ = \sin %d^\circ = \cos %d^\circ$, supplementary angles).\\ We need $k$ people with $%d k \ge %s$, i.e. $k \ge %s$. So at least $%d$ people are needed."
+            % (a, b, b, 90 + b, _dbp_so(P), a, 90 + b, _dbp_so(P), a, b, _b8_tron(Fk, 1), 90 + b, 90 - b, b, f,
+               _b8_tron(Fk, 1), _b8_tron(Fk / f, 2), n))
+    sai = [P * _sp8.sin(r), P * _sp8.sin(r) * _sp8.cos(rb), P * _sp8.sin(r + rb), P * _sp8.cos(r) / _sp8.cos(rb)]
+    ung = [int(_sp8.ceiling(x / f)) for x in sai] + [n + 1, n - 1]
+    return de + "?", str(n), [str(x) for x in ung if x > 0], giai, _b8_hinh_doc(a, b), "people"
+
+
+def _dbp_04(mc):
+    """Kéo pháo ra: ghìm pháo xuống dốc đều bằng các sợi dây song song mặt dốc. Hỏi số sợi dây tối thiểu, hoặc lực căng
+    mỗi sợi còn lại khi một sợi bị đứt."""
+    a = random.choice([30, 35, 40, 45, 50, 55, 60])
+    m, P = _dbp_khoi_luong()
+    T0 = random.choice([3000, 4000, 5000, 6000])
+    r = _sp8.pi * a / 180
+    Fk = P * _sp8.sin(r)
+    k_min = int(_sp8.ceiling(Fk / T0))
+    hoi = random.choice(["so_day", "dut_day"]) if k_min >= 2 else "so_day"
+    mo = (_DBP_MO_RA + " " + r"Consider a gun of weight $%s$ N lowered steadily down a slope inclined at $%d^\circ$ to the horizontal (see the figure). " % (_dbp_so(P), a)
+          + _DBP_BA_LUC + r" holding ropes (several ropes parallel to the slope, pointing up the slope, sharing the force equally), with $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$.")
+    giai = _dbp_giai_tam_giac(P, a, _b8_tron(Fk, 1))
+    hinh = _b8_hinh_doc(a)
+    if hoi == "so_day":
+        de = mo + (r" Suppose each rope can bear a maximum tension of $%s$ N. At least how many ropes are needed to hold the gun?" % _dbp_so(T0))
+        giai += (r"\\ With $k$ ropes, each rope bears $\dfrac{%s}{k}$ (N). We need $\dfrac{%s}{k} \le %s$, i.e. $k \ge %s$. So at least $%d$ ropes are needed." % (_b8_tron(Fk, 1), _b8_tron(Fk, 1), _dbp_so(T0), _b8_tron(Fk / T0, 2), k_min))
+        ung = [int(_sp8.ceiling(P * _sp8.cos(r) / T0)), k_min + 1, k_min - 1, int(_sp8.ceiling(P / T0)),
+               int(_sp8.ceiling(P * _sp8.tan(r) / T0))]
+        return de, str(k_min), [str(x) for x in ung if x > 0], giai, hinh, "ropes"
+    k = k_min + random.choice([1, 2])
+    T = Fk / (k - 1)
+    de = mo + (r" Suppose the gun is held by $%d$ ropes and one of them snaps. To keep the gun from sliding down, what tension, in newtons, must each remaining rope bear (round the result to the nearest whole number)?" % k)
+    dap = _b8_tron(T, 0)
+    giai += (r"\\ When one rope snaps, the remaining $%d$ ropes share the force $\left|\overrightarrow{F}\right|$ equally, so each bears $\dfrac{%s}{%d} \approx %s$ (N)." % (k - 1, _b8_tron(Fk, 1), k - 1, dap))
+    ung = [_b8_tron(Fk / k, 0), _b8_tron(P * _sp8.cos(r) / (k - 1), 0), _b8_tron(P / (k - 1), 0), _b8_tron(Fk / (k - 2), 0)
+           if k > 2 else _b8_tron(Fk, 0)]
+    return de, dap, ung, giai, hinh, "N"
+
+
+_DBP_BIEN = {"02": _dbp_02, "03": _dbp_03, "04": _dbp_04}
+
+
+def _dbp_mc(bien, socau, dang):
+    cau = ""
+    for _ in range(socau):
+        de, dap, nhieu, giai, hinh, dv = _DBP_BIEN[bien](True)
+        fm = lambda t: r"$%s$ %s" % (t, dv)
+        if dap.isdigit():                       # đủ ba nhiễu dương, gần đáp số
+            nhieu = nhieu + [str(int(dap) + k) for k in (2, 3, -2, 4) if int(dap) + k > 0]
+        nhieu = [x for x in dict.fromkeys(nhieu) if x != dap]
+        cau += MC_SA_answer_text(de, fm(dap), [fm(t) for t in nhieu], giai, hinh, 0, dang)
+    return cau
+
+
+def _dbp_sa(bien, socau, dang):
+    cau = ""
+    so = 0
+    while so < socau:
+        de, dap, nhieu, giai, hinh, dv = _DBP_BIEN[bien](False)
+        if len(dap) > 4:
+            continue
+        so += 1
+        nhieu = [x for x in dict.fromkeys(nhieu) if x != dap] + [str(i) for i in range(1, 10)]
+        cau += MC_SA_answer_const(de, dap, nhieu, giai, hinh, 0, dang)
+    return cau
+
+
+def L10_C4_B8_VD040_MC_C_02(socau, dang=1):
+    r"""VDC - Điện Biên Phủ 1954, kéo pháo VÀO: dây song song mặt dốc ($30^\circ$ - $50^\circ$), phải bổ sung tối thiểu
+    bao nhiêu người so với $30$ người ban đầu. Thông tin thật ở câu dẫn (Báo Nhân Dân). LUYỆN TẬP THÊM.
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_mc("02", socau, dang)
+
+
+def L10_C4_B8_VD040_SA_C_02(socau, dang=2):
+    r"""Trả lời ngắn - như VD040_MC_C_02 (số người phải bổ sung).
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_sa("02", socau, dang)
+
+
+def L10_C4_B8_VD040_MC_C_03(socau, dang=1):
+    r"""VDC - Điện Biên Phủ, kéo pháo VÀO, dây kéo XIÊN góc $\beta$ so với mặt dốc: tam giác lực không vuông, định lí sin
+    $\left|\overrightarrow{F}\right| = \left|\overrightarrow{P}\right|\sin\alpha / \cos\beta$; số người tối thiểu.
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_mc("03", socau, dang)
+
+
+def L10_C4_B8_VD040_SA_C_03(socau, dang=2):
+    r"""Trả lời ngắn - như VD040_MC_C_03 (dây kéo xiên, số người tối thiểu).
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_sa("03", socau, dang)
+
+
+def L10_C4_B8_VD040_MC_C_04(socau, dang=1):
+    r"""VDC - Điện Biên Phủ, kéo pháo RA: ghìm pháo xuống dốc ($30^\circ$ - $60^\circ$) bằng các sợi dây song song mặt dốc;
+    số sợi dây tối thiểu, hoặc lực căng mỗi sợi còn lại khi một sợi đứt. Câu dẫn nhắc anh hùng Tô Vĩnh Diện (Báo Tiền
+    Phong). LUYỆN TẬP THÊM.
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_mc("04", socau, dang)
+
+
+def L10_C4_B8_VD040_SA_C_04(socau, dang=2):
+    r"""Trả lời ngắn - như VD040_MC_C_04 (kéo pháo ra, ghìm pháo bằng dây).
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    return _dbp_sa("04", socau, dang)
+
+
+def L10_C4_VD040_VD060_TL_A_01(socau, dong=1):
+    r"""Tự luận hai đơn vị (VDC) - Điện Biên Phủ, kéo pháo lên Dốc Bảy Tời (dài $7$ tời, mỗi tời $50$ m):
+    a) (VD040) dây song song mặt dốc: số người tối thiểu; b) (VD060) dây xiên góc $\beta$: công của lực kéo trên cả đoạn
+    dốc $A = \left|\overrightarrow{F}\right|\cdot d\cdot\cos\beta$ (tích vô hướng) - không phụ thuộc $\beta$.
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    for _ in range(socau):
+        a = random.choice([30, 35, 40, 45, 50])
+        b = random.choice([10, 15, 20, 25, 30])
+        m, P = _dbp_khoi_luong()
+        f = random.choice([80, 100, 120])
+        d = 350
+        r, rb = _sp8.pi * a / 180, _sp8.pi * b / 180
+        Fk = P * _sp8.sin(r)
+        n = int(_sp8.ceiling(Fk / f))
+        F2 = Fk / _sp8.cos(rb)
+        A = F2 * d * _sp8.cos(rb) / 1000                          # kJ
+        de = (r"During the Dien Bien Phu campaign (1954), our soldiers hauled guns by hand over long slopes such as Bay Toi slope (as long as $7$ winch lengths, each $50$ m). Consider a 105 mm howitzer of weight $%s$ N hauled steadily up a stretch of slope $%d$ m long, inclined at $%d^\circ$ to the horizontal (assumed). " % (_dbp_so(P), d, a)
+              + _DBP_BA_LUC + r" hauling rope, with $\overrightarrow{F} + \overrightarrow{P} + \overrightarrow{w} = \overrightarrow{0}$.")
+        hoi_a = (r"Suppose the rope is parallel to the slope and each person can pull with a force of $%d$ N. At least how many people are needed to haul the gun?" % f)
+        giai_a = (_dbp_giai_tam_giac(P, a, _b8_tron(Fk, 1)) +
+                  r"\\ We need $k$ people with $%d k \ge %s$, that is $k \ge %s$. Hence at least $%d$ people are needed."
+                  % (f, _b8_tron(Fk, 1), _b8_tron(Fk / f, 2), n))
+        hoi_b = (r"Suppose the rope runs upward, making an angle of $%d^\circ$ with the slope. Compute the work done by the hauling force $\overrightarrow{F}$ in hauling the gun along the whole stretch of slope (unit: kJ, round the result to the nearest whole number)."
+                 % b)
+        giai_b = (r"The three forces form triangle $OAC$ ($\overrightarrow{OA} = \overrightarrow{P}$, $\overrightarrow{AC} = \overrightarrow{w}$, $\overrightarrow{CO} = \overrightarrow{F}$) with $\widehat{OAC} = %d^\circ$, $\widehat{ACO} = 90^\circ + %d^\circ$. By the law of sines, $\left|\overrightarrow{F}\right| = \dfrac{%s\sin %d^\circ}{\sin\left(90^\circ + %d^\circ\right)} = \dfrac{%s\sin %d^\circ}{\cos %d^\circ} \approx %s$ (N) (supplementary angles: $\sin\left(90^\circ + %d^\circ\right) = \sin\left(90^\circ - %d^\circ\right) = \cos %d^\circ$).\\ The displacement vector $\overrightarrow{d}$ runs along the slope, $\left|\overrightarrow{d}\right| = %d$ m, and the angle between $\overrightarrow{F}$ and $\overrightarrow{d}$ is $%d^\circ$, so the work is $A = \overrightarrow{F}\cdot\overrightarrow{d} = \left|\overrightarrow{F}\right|\cdot %d\cdot\cos %d^\circ = %s\sin %d^\circ\cdot %d \approx %s$ (J) $\approx %s$ kJ.\\ (Remark: the work does not depend on the angle $%d^\circ$ of the rope.)"
+                  % (a, b, _dbp_so(P), a, b, _dbp_so(P), a, b, _b8_tron(F2, 1), b, b, b, d, b, d, b, _dbp_so(P), a, d,
+                     _b8_tron(A * 1000, 0), _b8_tron(A, 0), b))
+        ds = [(hoi_a, r"%d" % n, giai_a), (hoi_b, r"A \approx %s" % _b8_tron(A, 0), giai_b)]
+        cau += TL_answer_text(de, ds, _b8_hinh_doc(a, b), 0, dong)
+    return cau
+
+
+def L10_C4_TF_D_01(socau, socot=1):
+    r"""Đúng/Sai (VDC ở ý d) - Điện Biên Phủ, kéo pháo lên dốc: a) NB phương, hướng của ba lực; b) TH
+    $\overrightarrow{F} = -\left(\overrightarrow{P} + \overrightarrow{w}\right)$; c) VD độ lớn $\left|\overrightarrow{F}\right|$,
+    $\left|\overrightarrow{w}\right|$; d) VDC số người tối thiểu, dây kéo xiên (định lí sin). Mỗi ý >= 3 đúng, >= 3 sai.
+
+    CLAUDE THEM 23/10/2026 - co Lan duyet ke hoach; co Lan duyet lai."""
+    cau = ""
+    F_, P_, w_, O_ = r"\overrightarrow{F}", r"\overrightarrow{P}", r"\overrightarrow{w}", r"\overrightarrow{0}"
+    for _ in range(socau):
+        a = random.choice([30, 35, 40, 45, 50])
+        b = random.choice([15, 20, 25, 30])
+        m, P = _dbp_khoi_luong()
+        f = random.choice([80, 100, 120])
+        r, rb = _sp8.pi * a / 180, _sp8.pi * b / 180
+        Fk, Wk = P * _sp8.sin(r), P * _sp8.cos(r)
+        n = int(_sp8.ceiling(Fk / f))
+        n2 = int(_sp8.ceiling(Fk / _sp8.cos(rb) / f))
+        Wb = P * _sp8.cos(r + rb) / _sp8.cos(rb)
+        de = (_DBP_MO_VAO + " " + r"Consider a 105 mm howitzer of weight $%s$ N hauled steadily up a slope inclined at $%d^\circ$ to the horizontal (see the figure). " % (_dbp_so(P), a) + _DBP_BA_LUC +
+              r" hauling rope (parallel to the slope, pointing up the slope), with $%s + %s + %s = %s$. Determine whether each of the following statements is true or false:" % (F_, P_, w_, O_))
+        T = lambda t: r"{\True %s}" % t
+        S = lambda t: r"{%s}" % t
+        # a) NB - phương, hướng của ba lực
+        y_a = [(T(r"$%s$ is vertical, pointing down" % P_), r"True. The weight always points vertically down."),
+               (T(r"$%s$ is perpendicular to the slope" % w_), r"True. The normal force is perpendicular to the slope."),
+               (T(r"$%s$ is parallel to the slope, pointing up the slope" % F_), r"True. The hauling rope is parallel to the slope."),
+               (T(r"$%s$ and $%s$ are perpendicular" % (F_, w_)), r"True. $%s$ runs along the slope, $%s$ is perpendicular to the slope." % (F_, w_)),
+               (S(r"$%s$ is vertical, pointing up" % w_), r"False. $%s$ is perpendicular to the slope, not vertical." % w_),
+               (S(r"$%s$ has the same direction as $%s$" % (F_, P_)), r"False. $%s$ points up the slope, $%s$ points vertically down." % (F_, P_)),
+               (S(r"$%s$ is perpendicular to the slope" % P_), r"False. $%s$ is vertical and makes an angle of $%d^\circ$ with the direction perpendicular to the slope." % (P_, a)),
+               (S(r"$%s$ is parallel to $%s$" % (F_, w_)), r"False. These two forces are perpendicular.")]
+        # b) TH - một bước: F = -(P + w)
+        y_b = [(T(r"$%s = -\left(%s + %s\right)$" % (F_, P_, w_)), r"True. From $%s + %s + %s = %s$." % (F_, P_, w_, O_)),
+               (T(r"$%s + %s$ is the opposite vector of $%s$" % (P_, w_, F_)), r"True. The sum of the three vectors is $%s$." % O_),
+               (T(r"$\left|%s + %s\right| = \left|%s\right|$" % (P_, w_, F_)), r"True. Two opposite vectors have the same length."),
+               (T(r"$%s + %s = -%s$" % (F_, w_, P_)), r"True. Move $%s$ to the right-hand side." % P_),
+               (S(r"$%s = %s + %s$" % (F_, P_, w_)), r"Sai. $%s = -\left(%s + %s\right)$." % (F_, P_, w_)),
+               (S(r"$\left|%s\right| = \left|%s\right| + \left|%s\right|$" % (F_, P_, w_)),
+                r"False. The length of a sum is not the sum of the lengths; here $\left|%s\right| = \left|%s + %s\right|$." % (F_, P_, w_)),
+               (S(r"$%s + %s = %s$" % (F_, P_, w_)), r"Sai. $%s + %s = -%s$." % (F_, P_, w_)),
+               (S(r"$%s + %s = %s$" % (P_, w_, O_)), r"Sai. $%s + %s = -%s \ne %s$." % (P_, w_, F_, O_))]
+        # c) VD - độ lớn lực kéo, phản lực (tam giác lực vuông)
+        Ft, Wt = _b8_tron(Fk, 1), _b8_tron(Wk, 1)
+        giai_c = _dbp_giai_tam_giac(P, a, Ft) + r" Similarly $\left|%s\right| = AC = %s\cos %d^\circ \approx %s$ (N)." % (
+            w_, _dbp_so(P), a, Wt)
+        y_c = [(T(r"$\left|%s\right| \approx %s$ N (rounded to one decimal place)" % (F_, Ft)), "True. " + giai_c),
+               (T(r"$\left|%s\right| \approx %s$ N (rounded to one decimal place)" % (w_, Wt)), "True. " + giai_c),
+               (T(r"$\left|%s\right|^2 + \left|%s\right|^2 = \left|%s\right|^2$" % (F_, w_, P_)),
+                r"True. The force triangle $OAC$ is right-angled at $C$ (Pythagorean theorem)."),
+               (S(r"$\left|%s\right| \approx %s$ N (rounded to one decimal place)" % (F_, Wt)), "Sai. " + giai_c),
+               (S(r"$\left|%s\right| \approx %s$ N (rounded to one decimal place)" % (w_, Ft)), "Sai. " + giai_c),
+               (S(r"$\left|%s\right| \approx %s$ N (rounded to one decimal place)" % (F_, _b8_tron(P * _sp8.tan(r), 1))),
+                "Sai. " + giai_c)]
+        # d) VDC - số người tối thiểu; dây kéo xiên (định lí sin)
+        giai_d = (r"Rope parallel to the slope: we need $k$ people with $%d k \ge %s$, so at least $%d$ people. If the rope makes an angle of $%d^\circ$ with the slope: in the force triangle $OAC$, $\widehat{OAC} = %d^\circ$, $\widehat{ACO} = %d^\circ$, and by the law of sines $\left|%s\right| = \dfrac{%s\sin %d^\circ}{\cos %d^\circ} \approx %s$ (N), so at least $%d$ people are needed; and $\widehat{AOC} = %d^\circ$, so $\left|%s\right| = \dfrac{%s\sin %d^\circ}{\cos %d^\circ} \approx %s$ (N)."
+                  % (f, Ft, n, b, a, 90 + b, F_, _dbp_so(P), a, b, _b8_tron(Fk / _sp8.cos(rb), 1), n2, 90 - a - b, w_,
+                     _dbp_so(P), 90 - a - b, b, _b8_tron(Wb, 1)))
+        y_d = [(T(r"If each person can pull $%d$ N, at least $%d$ people are needed" % (f, n)), "True. " + giai_d),
+               (T(r"If each person can pull $%d$ N and the rope makes an angle of $%d^\circ$ with the slope, at least $%d$ people are needed"
+                  % (f, b, n2)), "True. " + giai_d),
+               (T(r"When the rope makes an angle of $%d^\circ$ with the slope, the normal force of the slope has a magnitude of about $%s$ N (rounded to one decimal place)" % (b, _b8_tron(Wb, 1))), "True. " + giai_d),
+               (S(r"If each person can pull $%d$ N, $%d$ people are enough" % (f, n - 1)), "Sai. " + giai_d),
+               (S(r"When the rope makes an angle of $%d^\circ$ with the slope, fewer people are needed than when the rope is parallel to the slope" % b),
+                "Sai. " + giai_d),
+               (S(r"When the rope makes an angle of $%d^\circ$ with the slope, the normal force of the slope is the same as when the rope is parallel to the slope"
+                  % b), "Sai. " + giai_d)]
+        cau += TF_baitoan_du(de, [y_a, y_b, y_c, y_d], _b8_hinh_doc(a), 0, socot)
     return cau
 
 

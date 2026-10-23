@@ -30,7 +30,10 @@ def test_dong_ngoai_yccd_co_ghi_chu_va_nam_trong_curriculum():
                 continue
             co += 1
             assert r.get("ghi_chu", "").startswith("LUYEN TAP THEM"), r["id"]
-            cid = "_".join(r["id"].split("_")[:4])
+            if "_TF_" in r["id"]:
+                continue                     # Đúng/Sai không qua Curriculum (Ngoại lệ 1, doc 04)
+            # Tự luận hai đơn vị (L10_C4_VD040_VD060_TL_A): ghi ở đơn vị của ý a)
+            cid = r["cac_y"][0]["curriculum_id"] if r.get("cac_y") else "_".join(r["id"].split("_")[:4])
             assert cid in theo_id, r["id"]
             ds = [g for d in theo_id[cid].get("dang_luyen_tap_them", []) for g in d["mapping_id"]]
             assert r["id"] in ds, r["id"]

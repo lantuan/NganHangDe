@@ -137,7 +137,9 @@ def test_mapping_vdc_va_luyen_tap_them():
             if not r["id"].startswith("L10_C4_B8_VD040_"):
                 b = r.get("boi_canh")
                 khac.update(b if isinstance(b, list) else [b] if b else [])
-    assert not khac & set(m["L10_C4_B8_VD040_MC_C"]["boi_canh"])
+    # "keo_phao_dien_bien_phu" (23/10/2026) CỐ Ý dùng chung cho cả họ kéo pháo Điện Biên Phủ (MC_C/SA_C _02-_04, tự luận
+    # L10_C4_VD040_VD060_TL_A, Đúng/Sai L10_C4_TF_D) để một đề chỉ ra một câu kéo pháo.
+    assert not (khac - {"keo_phao_dien_bien_phu"}) & set(m["L10_C4_B8_VD040_MC_C"]["boi_canh"])
 
 
 def test_python_tu_sinh():

@@ -223,10 +223,11 @@
         ]
       },
       {
-        "mo_ta": "Kéo vật lên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời): ba lực F + P + w = 0, tính số người tối thiểu, lực kéo tối thiểu hoặc phản lực mặt dốc (vận dụng cao)",
+        "mo_ta": "Kéo hoặc ghìm vật trên dốc nghiêng (khẩu pháo, xe chở hàng, khúc gỗ kéo bằng tời; kéo pháo ở Điện Biên Phủ 1954: kéo vào, dây kéo xiên, kéo ra ghìm bằng dây): ba lực F + P + w = 0, số người tối thiểu, lực kéo, phản lực, số sợi dây ghìm (vận dụng cao); tự luận kèm công của lực kéo (Bài 11)",
         "mapping_id": [
           "L10_C4_B8_VD040_MC_C",
-          "L10_C4_B8_VD040_SA_C"
+          "L10_C4_B8_VD040_SA_C",
+          "L10_C4_VD040_VD060_TL_A"
         ]
       }
     ],

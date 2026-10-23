@@ -348,6 +348,31 @@ def _muc_placeholder(chuong_so: int, loai_cau: str, muc_do, curriculum_id: str |
     }
 
 
+def _ten_bai_chuong(lop: int, chuong_so) -> list[tuple[str, str]]:
+    """[(mã bài L10_C4_B8, tên bài thường)] của một chương (data/ppct)."""
+    try:
+        from app.services.exam_scope_service import _load_ppct
+        return [("L%d_C%d_B%d" % (lop, int(b["chuong_so"]), int(b["bai_so"])), " ".join(str(b.get("bai", "")).lower().split()))
+                for b in _load_ppct(lop) if int(b["chuong_so"]) == int(chuong_so)]
+    except Exception:
+        return []
+
+
+def _bai_cua_tf(lop: int, chuong_so, row: dict) -> set:
+    """Các bài mà "Dang" của câu Đúng/Sai nhắc tới (theo tên bài, có thể bị cắt cụt), ví dụ
+    "Vectơ trong mặt phẳng toạ độ; Tích vô hướng của hai vectơ" -> {L10_C4_B10, L10_C4_B11}."""
+    ra = set()
+    for doan in str(row.get("Dang", "")).split(";"):
+        d = " ".join(doan.lower().split())
+        if len(d) < 6:
+            continue
+        for ma, ten in _ten_bai_chuong(lop, chuong_so):
+            k = min(len(ten), 25)
+            if ten and (d.startswith(ten[:k]) or (len(d) < k and ten.startswith(d))):
+                ra.add(ma)
+    return ra
+
+
 # ============================================================
 # CHẾ ĐỘ CHÍNH THỨC — theo Blueprint (curriculum_id)
 # ============================================================
@@ -394,6 +419,14 @@ def select_questions(lop: int, blueprint: dict, cho_phep_thieu: bool = True) -> 
             m for m in _mapping_chuong(chuong_so)
             if phan_loai_cau(m) == "dung_sai_cau_lon"
         ]
+        # Câu Đúng/Sai không qua Curriculum nên trước đây chọn theo CẢ chương, kể cả bài chưa nằm trong phạm vi đề
+        # (đề giữa kỳ 1 lớp 10 - chương 4 tới Bài 8 - vẫn có thể ra L10_C4_TF_B "Vectơ trong mặt phẳng toạ độ; Tích vô
+        # hướng", cô Lan 23/10/2026). Nay bỏ các câu mà "Dang" nhắc tới tên bài ngoài phạm vi; không còn câu nào thì giữ
+        # như cũ. Câu không nhắc tên bài nào (bài toán thực tế...) vẫn được chọn.
+        pham_vi = set(blueprint.get("pham_vi_bai") or [])
+        if pham_vi:
+            trong = [m for m in candidates if _bai_cua_tf(lop, chuong_so, m) <= pham_vi]
+            candidates = trong or candidates
         if not candidates:
             ma = f"L{lop}_C{chuong_so}_TF_A"
             ghi_chu = f"Chưa khai câu Đúng/Sai cho chương {chuong_so} trong Mapping."
