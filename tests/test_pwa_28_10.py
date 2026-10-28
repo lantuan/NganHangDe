@@ -75,3 +75,18 @@ def test_trang_lam_bai_tu_luu_va_cho_mang_nop():
     assert html.index("khoiPhucBaiLam();") > html.index("main.innerHTML = html;")
     assert "DA_CHAM_XONG = true;\n        xoaNhapBaiLam();" in html
     assert "window.addEventListener('online'" in html and "navigator.onLine === false" in html
+
+
+def test_nut_quay_lai_trong_ung_dung():
+    """Cô Lan: "tôi cần nút quay ngược, vì đâu phải ai cũng biết vuốt chuột máy tính là được" - ứng dụng đã cài
+    mở toàn màn hình, không có nút lùi của trình duyệt. Nút nằm cùng cụm Tiếng Việt | English, chỉ hiện khi chạy
+    như ứng dụng (đã thử Chromium: trình duyệt thường ẩn; ứng dụng hiện, bấm thì về trang trước)."""
+    from app.services import i18n_service as I
+    vi = I.chen_nut_chuyen("<body></body>", "vi")
+    en = I.chen_nut_chuyen("<body></body>", "en")
+    assert 'id="chv-lui"' in vi and "&larr; Quay lại" in vi and "&larr; Back" in en
+    assert 'id="chv-lui" title="Quay lại" style="display:none;' in vi            # mặc định ẩn
+    assert "(display-mode: standalone)" in vi and "history.back()" in vi
+    assert "querySelectorAll('a[data-lang]')" in vi                             # nút lùi không đổi ngôn ngữ
+    r = TestClient(M.app).get("/login")
+    assert 'id="chv-lui"' in r.text

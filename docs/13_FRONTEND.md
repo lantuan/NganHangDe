@@ -208,3 +208,4 @@ học sinh, phân tích học tập (CHV_Analyzer), nút "Luyện tập ngay".
 - `app/static/sw.js`: chỉ GET; HTML lấy mạng trước; chỉ lưu trang làm bài, dữ liệu đề, ảnh hình vẽ, tệp tĩnh, thư viện CDN có phiên bản, font. Sửa sw.js thì tăng `PHIEN_BAN`.
 - Tắt khẩn cấp: `TAT_PWA=1` trong `.env` -> `/sw.js` tự gỡ trên máy đã cài.
 - `lam_bai.html`: `luuNhapBaiLam` / `khoiPhucBaiLam` / `xoaNhapBaiLam` (localStorage, theo đề + tài khoản), `choMangRoiNop` (mất mạng lúc nộp -> chờ sự kiện `online` rồi tự nộp).
+- Nút "← Quay lại" (`#chv-lui`, trong cụm nút Việt/Anh của `i18n_service.NUT_CHUYEN`): chỉ hiện khi chạy như ứng dụng đã cài.

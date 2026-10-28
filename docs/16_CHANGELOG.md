@@ -10709,3 +10709,8 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Kiểm: chạy thử Chromium (Playwright) với uvicorn thật: service worker đăng kí và điều khiển trang; máy chủ sập -> hiện trang báo mất kết nối; chọn đáp án rồi tải lại -> khôi phục đủ; mất mạng bấm nộp -> chờ, có mạng -> gửi đúng bài làm. Test `tests/test_pwa_28_10.py`.
 - Giới hạn: lần đầu phải có mạng để mở đề (máy mới lưu được); chấm điểm vẫn ở máy chủ nên mất mạng thì CHƯA có điểm ngay, chỉ là không mất bài. Chat / tạo đề vẫn cần mạng.
 
+## 2026-10-28 - Nút "← Quay lại" trong ứng dụng đã cài
+- Cô Lan: "tôi cần nút quay ngược, vì đâu phải ai cũng biết vuốt chuột máy tính là được". Ứng dụng đã cài (PWA) mở toàn màn hình nên không có nút lùi của trình duyệt.
+- `i18n_service.NUT_CHUYEN`: thêm nút `#chv-lui` "← Quay lại" / "← Back" ở đầu cụm Tiếng Việt | English (cụm này đã tự tránh che tài khoản, menu ở mọi trang). Chỉ hiện khi chạy như ứng dụng (`display-mode: standalone` / `fullscreen`, iPhone `navigator.standalone`); trong trình duyệt thường vẫn ẩn, web y như cũ. Bấm: có trang trước thì lùi (`history.back()`), mở thẳng một trang thì về `/chat`; vừa mở app ở `/chat` thì không hiện. Bấm nút này không đổi ngôn ngữ (chỉ gắn sự kiện cho `a[data-lang]`).
+- Kiểm: Chromium (Playwright) giả chế độ ứng dụng: /login -> /register hiện nút, bấm về /login; trình duyệt thường không hiện. Test thêm trong `tests/test_pwa_28_10.py`.
+

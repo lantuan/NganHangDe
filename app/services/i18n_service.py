@@ -187,13 +187,25 @@ NUT_CHUYEN = """
 <div id="chv-lang" style="position:fixed;top:8px;right:12px;z-index:2147483000;display:flex;gap:0;
 border:1px solid rgba(0,0,0,.25);border-radius:999px;overflow:hidden;font:600 12px/1 system-ui,sans-serif;
 background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.2)" role="group" aria-label="Language">
+<a href="#" id="chv-lui" title="%(lui)s" style="display:none;padding:6px 10px;text-decoration:none;color:#334155;background:#fff;border-right:1px solid rgba(0,0,0,.2)">&larr; %(lui)s</a>
 <a href="#" data-lang="vi" style="padding:6px 10px;text-decoration:none;color:%(cvi)s;background:%(bvi)s">Tiếng Việt</a>
 <a href="#" data-lang="en" style="padding:6px 10px;text-decoration:none;color:%(cen)s;background:%(ben)s">English</a>
 </div>
 <script>
 (function () {
   var nut = document.getElementById('chv-lang');
-  nut.querySelectorAll('a').forEach(function (a) {
+  // Nut QUAY LAI (co Lan 28/10/2026): ung dung da cai (PWA) mo toan man hinh, KHONG co nut lui cua trinh duyet.
+  // Chi hien khi chay nhu ung dung; trong trinh duyet thuong da co nut lui san nen an di (web y nhu cu).
+  var lui = document.getElementById('chv-lui');
+  var laApp = (window.matchMedia && (matchMedia('(display-mode: standalone)').matches ||
+               matchMedia('(display-mode: fullscreen)').matches)) || window.navigator.standalone === true;
+  var trangDau = history.length <= 1 && location.pathname === '/chat';     // vua mo app: khong co gi de lui
+  if (laApp && !trangDau) lui.style.display = '';
+  lui.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (history.length > 1) history.back(); else location.href = '/chat';  // mo thang mot trang: ve Chat AI
+  });
+  nut.querySelectorAll('a[data-lang]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       document.cookie = 'lang=' + a.dataset.lang + '; path=/; max-age=31536000; SameSite=Lax';
@@ -249,6 +261,7 @@ def chen_nut_chuyen(html: str, ngon_ngu: str) -> str:
     sel, ns = ("#fff", "#1a56db"), ("#1a56db", "#fff")
     cvi, bvi = sel if ngon_ngu == "vi" else ns
     cen, ben = sel if ngon_ngu == "en" else ns
-    nut = NUT_CHUYEN % {"cvi": cvi, "bvi": bvi, "cen": cen, "ben": ben}
+    nut = NUT_CHUYEN % {"cvi": cvi, "bvi": bvi, "cen": cen, "ben": ben,
+                        "lui": "Back" if ngon_ngu == "en" else "Quay lại"}
     html = html.replace("</body>", nut + "</body>", 1)
     return re.sub(r'<html([^>]*?)\blang="[^"]*"', r'<html\1lang="%s"' % ngon_ngu, html, count=1)
