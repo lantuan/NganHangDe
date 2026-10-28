@@ -714,5 +714,8 @@
  "mở file PDF đề": "open the exam PDF",
  "để xem hình và làm thử, chỗ nào chưa biết thì bấm nút hỏi thầy/cô AI bên dưới, thầy/cô sẽ cho em xem đề,": "to see the figure and try it; for anything you do not understand, tap the AI teacher button below to see the question,",
  "đáp án và lời giải.": "the answer and the solution.",
- "📎 Không tính điểm — web chưa hiện được hình của câu này.": "📎 Not scored — the website could not display the figure of this question."
+ "📎 Không tính điểm — web chưa hiện được hình của câu này.": "📎 Not scored — the website could not display the figure of this question.",
+ "Đang chờ có mạng để nộp...": "Waiting for the connection to submit...",
+ "💾 Đã khôi phục bài em đang làm dở (lưu trong máy).": "💾 Your unfinished work has been restored (saved on this device).",
+ "📶 Mất mạng: bài làm đã lưu trong máy, có mạng lại sẽ tự nộp. Em đừng đóng trang này.": "📶 No connection: your answers are saved on this device and will be submitted automatically when you are back online. Please keep this page open."
 }

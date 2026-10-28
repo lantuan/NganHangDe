@@ -585,9 +585,64 @@ function veTrangLamBai() {
         }
     }
 
+    html += '<div id="trang-thai-luu" style="font-size:13px;color:#64748b;margin:8px 0;"></div>';
     html += '<button class="nut-nop" id="nut-nop" onclick="nopBai()">Nộp bài</button>';
     main.innerHTML = html;
-    if (window.MathJax) { MathJax.typesetPromise([main]); }
+    khoiPhucBaiLam();
+    main.addEventListener('change', luuNhapBaiLam);
+    main.addEventListener('input', luuNhapBaiLam);
+    if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([main]); }   // mất mạng chưa tải được MathJax: vẫn hiện đề
+}
+
+// ===== TỰ LƯU BÀI LÀM TRONG MÁY (cô Lan 28/10/2026, PWA) =====
+// Mỗi lần chọn / gõ đáp án là lưu ngay vào máy (localStorage, theo đề + tài khoản): lỡ tắt trình duyệt, rớt mạng, tải
+// lại trang thì mở lại vẫn còn bài đang làm. Nộp bài thành công thì xoá. Lỗi lưu (trình duyệt chặn) thì bỏ qua.
+const KHOA_LUU_BAI = 'bai_lam_' + DE_ID + '_' + USER_ID;
+
+function luuNhapBaiLam() {
+    try { localStorage.setItem(KHOA_LUU_BAI, JSON.stringify({ luc: Date.now(), bai_lam: thuThapBaiLam() })); } catch (e) { }
+}
+
+function xoaNhapBaiLam() {
+    try { localStorage.removeItem(KHOA_LUU_BAI); } catch (e) { }
+}
+
+function khoiPhucBaiLam() {
+    let nhap = null;
+    try { nhap = JSON.parse(localStorage.getItem(KHOA_LUU_BAI) || 'null'); } catch (e) { nhap = null; }
+    if (!nhap || !Array.isArray(nhap.bai_lam)) return;
+    let co = false;
+    nhap.bai_lam.forEach(function (c) {
+        if (c.cau_tra_loi === null || c.cau_tra_loi === '' || c.cau_tra_loi === undefined) return;
+        if (typeof c.cau_tra_loi === 'string') {
+            const o = document.getElementById('cau_' + c.so_thu_tu);
+            if (o && o.tagName === 'INPUT' && o.type !== 'radio') { o.value = c.cau_tra_loi; co = true; return; }
+            document.querySelectorAll('input[name="cau_' + c.so_thu_tu + '"]').forEach(function (r) {
+                if (r.value === c.cau_tra_loi) { r.checked = true; co = true; }
+            });
+        } else if (typeof c.cau_tra_loi === 'object') {
+            Object.keys(c.cau_tra_loi).forEach(function (y) {
+                const v = c.cau_tra_loi[y];
+                if (v === null) return;
+                document.querySelectorAll('input[name="cau_' + c.so_thu_tu + '_' + y + '"]').forEach(function (r) {
+                    if (r.value === String(v)) { r.checked = true; co = true; }
+                });
+            });
+        }
+    });
+    const o = document.getElementById('trang-thai-luu');
+    if (co && o) o.textContent = '💾 Đã khôi phục bài em đang làm dở (lưu trong máy).';
+}
+
+// Mất mạng lúc nộp: bài đã lưu trong máy, có mạng lại thì TỰ NỘP (một lần), không phải làm lại.
+let DA_CHAM_XONG = false;
+function choMangRoiNop() {
+    luuNhapBaiLam();
+    const nutNop = document.getElementById('nut-nop');
+    if (nutNop) { nutNop.disabled = true; nutNop.textContent = 'Đang chờ có mạng để nộp...'; }
+    const o = document.getElementById('trang-thai-luu');
+    if (o) o.textContent = '📶 Mất mạng: bài làm đã lưu trong máy, có mạng lại sẽ tự nộp. Em đừng đóng trang này.';
+    window.addEventListener('online', function () { setTimeout(nopBai, 1500); }, { once: true });
 }
 
 function docFileBase64(file) {
@@ -884,7 +939,7 @@ function veKetQua(ketQua) {
     html += '<div id="loi-de-khac" class="ghi-chu-tl" style="display:none;margin-top:10px;"></div>';
 
     main.innerHTML = html;
-    if (window.MathJax) { MathJax.typesetPromise([main]); }
+    if (window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([main]); }   // mất mạng chưa tải được MathJax: vẫn hiện đề
 }
 
 // Sinh 1 de MOI cung cau truc voi de vua lam roi chuyen thang sang
@@ -1124,6 +1179,8 @@ async function nopBai() {
             nutNop.textContent = 'Nộp bài';
             return;
         }
+        DA_CHAM_XONG = true;
+        xoaNhapBaiLam();
 
         let ketQua = data.data;
 
@@ -1159,6 +1216,12 @@ async function nopBai() {
         luuKetQuaVaoChat(ketQua);
         dangKetQuaLenClassroom(ketQua);
     } catch (e) {
+        if (!DA_CHAM_XONG && navigator.onLine === false) {   // mất mạng thật: chờ có mạng rồi tự nộp
+            choMangRoiNop();
+            return;
+        }
+        if (DA_CHAM_XONG) { console.error(e); return; }      // đã chấm xong, lỗi khi vẽ kết quả: không nộp lại
+        luuNhapBaiLam();
         alert('Lỗi kết nối, thử lại nhé.');
         nutNop.disabled = false;
         nutNop.textContent = 'Nộp bài';

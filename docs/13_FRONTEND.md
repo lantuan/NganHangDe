@@ -199,3 +199,12 @@ cấu hình. Các trang cũ giữ nguyên, không đụng tới.
 
 VẪN CHƯA CÓ: màn hình tự gán lớp cho giáo viên (hiện làm bằng SQL), dashboard
 học sinh, phân tích học tập (CHV_Analyzer), nút "Luyện tập ngay".
+
+---
+
+# Cập nhật 2026-10-28 — PWA (cài web như ứng dụng)
+
+- Mọi trang HTML được `app/main.py::_chen_pwa` chèn `<link rel="manifest">`, `theme-color`, `apple-touch-icon` và đoạn đăng kí `/sw.js`. Không sửa từng template.
+- `app/static/sw.js`: chỉ GET; HTML lấy mạng trước; chỉ lưu trang làm bài, dữ liệu đề, ảnh hình vẽ, tệp tĩnh, thư viện CDN có phiên bản, font. Sửa sw.js thì tăng `PHIEN_BAN`.
+- Tắt khẩn cấp: `TAT_PWA=1` trong `.env` -> `/sw.js` tự gỡ trên máy đã cài.
+- `lam_bai.html`: `luuNhapBaiLam` / `khoiPhucBaiLam` / `xoaNhapBaiLam` (localStorage, theo đề + tài khoản), `choMangRoiNop` (mất mạng lúc nộp -> chờ sự kiện `online` rồi tự nộp).

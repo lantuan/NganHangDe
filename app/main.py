@@ -61,6 +61,47 @@ app.include_router(teacher.router)
 app.include_router(gia_su.router)
 
 
+# ======================================================
+# PWA - CÀI WEB NHƯ ỨNG DỤNG (cô Lan 28/10/2026): mọi trang HTML được chèn liên kết manifest + đăng kí service worker
+# (app/static/sw.js, phục vụ ở /sw.js để phạm vi là cả trang). Service worker chỉ xử lí GET, trang HTML lấy mạng trước,
+# nên có mạng là web chạy y như cũ; mất mạng thì trang làm bài + đề đã mở vẫn mở lại được.
+# CÔNG TẮC AN TOÀN: đặt TAT_PWA=1 trong .env (rồi khởi động lại) -> không chèn đăng kí nữa và /sw.js trả về bản TỰ GỠ
+# (xoá bộ nhớ, huỷ đăng kí) trên mọi máy đã cài.
+# ======================================================
+import os as _os  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+from fastapi.responses import Response as _Response  # noqa: E402
+
+_PWA_TAT = _os.environ.get("TAT_PWA", "").strip() in ("1", "true", "yes")
+_CHEN_PWA = (
+    '<link rel="manifest" href="/static/manifest.webmanifest">'
+    '<meta name="theme-color" content="#2563eb">'
+    '<link rel="apple-touch-icon" href="/static/icons/icon-192.png">'
+    '<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){'
+    'navigator.serviceWorker.register("/sw.js").catch(function(){});});}</script>'
+)
+_SW_TU_GO = (
+    "self.addEventListener('install',function(){self.skipWaiting();});"
+    "self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ds){"
+    "return Promise.all(ds.map(function(k){return caches.delete(k);}));}).then(function(){"
+    "return self.registration.unregister();}));});"
+)
+
+
+def _chen_pwa(html: str) -> str:
+    if _PWA_TAT or 'rel="manifest"' in html:
+        return html
+    i = html.find("</head>")
+    return html if i == -1 else html[:i] + _CHEN_PWA + html[i:]
+
+
+@app.get("/sw.js", include_in_schema=False)
+def service_worker():
+    noi_dung = _SW_TU_GO if _PWA_TAT else (_Path(__file__).parent / "static" / "sw.js").read_text(encoding="utf-8")
+    return _Response(noi_dung, media_type="application/javascript",
+                     headers={"Cache-Control": "no-cache", "Service-Worker-Allowed": "/"})
+
+
 @app.middleware("http")
 async def ngon_ngu_viet_anh(request: Request, call_next):
     """
@@ -86,7 +127,7 @@ async def ngon_ngu_viet_anh(request: Request, call_next):
     try:
         text = body.decode("utf-8")
         if la_html:
-            text = i18n.chen_nut_chuyen(i18n.dich_html(text, ngon_ngu), ngon_ngu)
+            text = _chen_pwa(i18n.chen_nut_chuyen(i18n.dich_html(text, ngon_ngu), ngon_ngu))
         else:
             import json as _json
             text = _json.dumps(i18n.dich_json(_json.loads(text), ngon_ngu), ensure_ascii=False)
