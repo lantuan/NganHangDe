@@ -10734,3 +10734,8 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Bản đúng của đề cô gửi (để cô xem/đưa vào ngân hàng nếu duyệt): `L10_C3_B6_TH032_MC_D_03` / `SA_D_03` - biến thể _03 của dạng D (hệ quả định lí côsin), cho tỉ lệ ba cạnh, cạnh lớn nhất đặt ngẫu nhiên ở a/b/c, góc 120° hoặc 90°; chạy `scripts/thu_dang_gui.py` ĐẠT. Chưa đưa vào ngân hàng.
 - Test thêm trong `tests/test_gui_dang_28_10.py`.
 
+## 2026-10-28 - Thêm L10_C3_B6_TH032_MC_D_03 / SA_D_03 (tỉ lệ ba cạnh → góc lớn nhất)
+- Cô Lan duyệt bản đúng của bài gửi thử qua Gem ("a : b : c = 3 : 5 : 7. Số đo góc lớn nhất") và bảo đưa vào ngân hàng.
+- Biến thể _03 của dạng D (TH032, hệ quả định lí côsin): cho tỉ lệ ba cạnh, cạnh lớn nhất đặt ngẫu nhiên ở a/b/c (học sinh tự nhận ra góc lớn nhất), góc lớn nhất 120° (bộ z² = x² + y² + xy: 3-5-7, 7-8-13, 5-16-19, 11-24-31, 7-33-37) hoặc 90° (bộ Pythagore). MC: nhiễu 150°, 135°, 90°/120°, 60°; SA: đáp số 120 hoặc 90 (độ).
+- Mapping MC_D, SA_D: Dang thành "Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)". Bản Anh: 3 mục `en_L10_C3.json`, dịch lại `python_bank_en/toan10/L10_C3.py`. Danh mục Gem `danh_muc_ID_lop10.md` cập nhật.
+

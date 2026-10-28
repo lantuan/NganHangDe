@@ -271,15 +271,15 @@
     "id": "L10_C3_B6_TH032_MC_D",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trắc nghiệm nhiều lựa chọn",
-    "Dang": "Từ hệ thức giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)",
-    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 6 (ha muc tu cau bien doi he thuc); co Lan duyet lai"
+    "Dang": "Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)",
+    "ghi_chu": "CLAUDE THEM 29/09/2026 - tu giao an Bai 6 (ha muc tu cau bien doi he thuc); co Lan duyet lai | 28/10/2026 them bien the _03: cho ti le ba canh a : b : c, tinh goc lon nhat (co Lan duyet)"
   },
   {
     "id": "L10_C3_B6_TH032_SA_D",
     "content": "Giải thích được các hệ thức lượng cơ bản trong tam giác: định lí côsin.",
     "Loai": "Trả lời ngắn",
-    "Dang": "Từ hệ thức giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)",
-    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_D (cung chu, cung Dang); so do goc (do) tu he thuc giua cac canh; co Lan duyet lai"
+    "Dang": "Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)",
+    "ghi_chu": "CLAUDE THEM 15/10/2026 - ban tra loi ngan cung dang voi MC_D (cung chu, cung Dang); so do goc (do) tu he thuc giua cac canh; co Lan duyet lai | 28/10/2026 them bien the _03: cho ti le ba canh a : b : c, tinh goc lon nhat (co Lan duyet)"
   },
   {
     "id": "L10_C3_B6_TH032_SA_B",

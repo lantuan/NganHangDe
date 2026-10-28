@@ -370,7 +370,7 @@ Tự sinh bằng scripts/xuat_tai_lieu_gem.py từ data/curriculum + data/mappin
     - `L10_C3_B6_TH032_MC_A` [Trắc nghiệm nhiều lựa chọn] Tính cạnh còn lại bằng định lí côsin - biến thể: _01, _02, _03
     - `L10_C3_B6_TH032_MC_B` [Trắc nghiệm nhiều lựa chọn] Biết ba cạnh, tính côsin của một góc (định lí côsin dùng ngược) - biến thể: _01, _02, _03
     - `L10_C3_B6_TH032_MC_C` [Trắc nghiệm nhiều lựa chọn] Tính độ dài đường trung tuyến khi biết ba cạnh - luyện tập thêm - biến thể: _01 (ngoài YCCĐ)
-    - `L10_C3_B6_TH032_MC_D` [Trắc nghiệm nhiều lựa chọn] Từ hệ thức giữa các cạnh, tính số đo một góc (hệ quả định lí côsin) - biến thể: _01, _02
+    - `L10_C3_B6_TH032_MC_D` [Trắc nghiệm nhiều lựa chọn] Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin) - biến thể: _01, _02, _03
     - `L10_C3_B6_TH032_MC_G` [Trắc nghiệm nhiều lựa chọn] Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba - luyện tập thêm - biến thể: _01 (ngoài YCCĐ)
     - `L10_C3_B6_TH032_MC_I` [Trắc nghiệm nhiều lựa chọn] Định lí côsin trong hình bình hành: biết hai cạnh và góc, tính đường chéo - biến thể: _01
     - `L10_C3_B6_TH032_MC_K` [Trắc nghiệm nhiều lựa chọn] Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc) - biến thể: _01, _02, _03
@@ -381,7 +381,7 @@ Tự sinh bằng scripts/xuat_tai_lieu_gem.py từ data/curriculum + data/mappin
     - `L10_C3_B6_TH032_SA_A` [Trả lời ngắn] Tính cạnh còn lại bằng định lí côsin - biến thể: _01
     - `L10_C3_B6_TH032_SA_B` [Trả lời ngắn] Biết ba cạnh, tính côsin của một góc (định lí côsin dùng ngược) - biến thể: _01
     - `L10_C3_B6_TH032_SA_C` [Trả lời ngắn] Tính độ dài đường trung tuyến khi biết ba cạnh - luyện tập thêm - biến thể: _01 (ngoài YCCĐ)
-    - `L10_C3_B6_TH032_SA_D` [Trả lời ngắn] Từ hệ thức giữa các cạnh, tính số đo một góc (hệ quả định lí côsin) - biến thể: _01, _02
+    - `L10_C3_B6_TH032_SA_D` [Trả lời ngắn] Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin) - biến thể: _01, _02, _03
     - `L10_C3_B6_TH032_SA_G` [Trả lời ngắn] Hỏi ngược công thức trung tuyến: biết hai cạnh và trung tuyến, tính cạnh thứ ba - luyện tập thêm - biến thể: _01 (ngoài YCCĐ)
     - `L10_C3_B6_TH032_SA_I` [Trả lời ngắn] Định lí côsin trong hình bình hành: biết hai cạnh và góc, tính đường chéo - biến thể: _01
     - `L10_C3_B6_TH032_SA_K` [Trả lời ngắn] Biết hai cạnh và một giá trị lượng giác của góc A: tính cạnh thứ ba bằng định lí côsin (tự luận: rồi tính côsin một góc) - biến thể: _01, _02, _03

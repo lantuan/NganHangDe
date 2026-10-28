@@ -4486,6 +4486,51 @@ def L10_C3_B6_TH032_MC_D_02(socau, dang=1):
     return _cau_he_thuc_goc(socau, dang, dang_nhan_tu=True)
 
 
+def L10_C3_B6_TH032_MC_D_03(socau, dang=1):
+    r"""Biết tỉ lệ ba cạnh a : b : c, tính số đo góc lớn nhất (hệ quả định lí côsin).
+    Biến thể _03 của dạng D: cho tỉ lệ ba cạnh thay vì hệ thức giữa các cạnh; cạnh lớn nhất đặt ngẫu nhiên ở a, b
+    hoặc c để học sinh phải tự nhận ra góc lớn nhất là góc đối diện cạnh lớn nhất.
+    Cô Lan 28/10/2026 (bài gửi thử qua Gem Soạn dạng, đề "a : b : c = 3 : 5 : 7, số đo góc lớn nhất")."""
+    # (x, y, z) với z lớn nhất: z^2 = x^2 + y^2 + xy -> góc lớn nhất 120 độ; z^2 = x^2 + y^2 -> 90 độ
+    BO_120 = [(3, 5, 7), (7, 8, 13), (5, 16, 19), (11, 24, 31), (7, 33, 37)]
+    BO_90 = [(3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25)]
+    da_co = []
+    while len(da_co) < socau:
+        goc = random.choice([120, 120, 90])
+        x, y, z = random.choice(BO_120 if goc == 120 else BO_90)
+        vi_tri = random.randrange(3)                   # cạnh lớn nhất là a, b hay c
+        nho = [x, y] if random.random() < 0.5 else [y, x]
+        canh = nho[:vi_tri] + [z] + nho[vi_tri:]
+        if (goc, tuple(canh)) not in da_co:
+            da_co.append((goc, tuple(canh)))
+    cau = ""
+    for goc, (a, b, c) in da_co:
+        ten = ["a", "b", "c"]
+        dinh = ["A", "B", "C"]
+        i = [a, b, c].index(max(a, b, c))
+        k1, k2 = [j for j in range(3) if j != i]
+        p, q, r = (a, b, c)[k1], (a, b, c)[k2], (a, b, c)[i]
+        tu = p * p + q * q - r * r
+        cos_txt = r"-\dfrac{1}{2}" if goc == 120 else "0"
+        if dang == 1:
+            debai = (r"Tam giác $ABC$ có ba cạnh tỉ lệ $a : b : c = %d : %d : %d$. Số đo góc lớn nhất của tam giác bằng"
+                     % (a, b, c))
+        else:
+            debai = (r"Tam giác $ABC$ có ba cạnh tỉ lệ $a : b : c = %d : %d : %d$. Số đo góc lớn nhất của tam giác "
+                     r"bằng bao nhiêu độ?" % (a, b, c))
+        giai = (r"Đặt $a = %dk$, $b = %dk$, $c = %dk$ $(k > 0)$. Cạnh $%s$ lớn nhất nên góc $%s$ lớn nhất.\\ "
+                r"$\cos %s = \dfrac{%s^{2} + %s^{2} - %s^{2}}{2%s%s} = \dfrac{%d k^{2} + %d k^{2} - %d k^{2}}{%d k^{2}} "
+                r"= %s$. Vậy $\widehat{%s} = %d^{\circ}$."
+                % (a, b, c, ten[i], dinh[i], dinh[i], ten[k1], ten[k2], ten[i], ten[k1], ten[k2],
+                   p * p, q * q, r * r, 2 * p * q, cos_txt, dinh[i], goc))
+        if dang == 1:
+            nhieu = [r"%d^{\circ}" % g for g in (150, 135, 90, 60, 120) if g != goc]
+            cau += MC_SA_answer_const(debai, r"%d^{\circ}" % goc, nhieu, giai, 0, 0, dang)
+        else:
+            cau += MC_SA_answer_const(debai, "%d" % goc, ["0", "1", "2"], giai, 0, 0, dang)
+    return cau
+
+
 def L10_C3_B6_TH033_TL_A_02(socau, dong=1):
     r"""Tự luận: biết một cạnh và HAI GÓC KỀ cạnh đó (góc $A$ phải tự tính),
     dùng định lí sin tính một cạnh khác và bán kính $R$.
@@ -16953,6 +16998,11 @@ def L10_C3_B6_TH032_SA_D_02(socau, dang=2):
     r"""Trả lời ngắn - bản trả lời ngắn của TH032_MC_D_02 (hệ thức dạng tích). CLAUDE THEM 15/10/2026 - co Lan duyet
     lai."""
     return _cau_he_thuc_goc(socau, dang, dang_nhan_tu=True, tra_loi_ngan=True)
+
+
+def L10_C3_B6_TH032_SA_D_03(socau, dang=2):
+    r"""Trả lời ngắn của MC_D_03: biết tỉ lệ ba cạnh, tính số đo (độ) góc lớn nhất. Cô Lan 28/10/2026."""
+    return L10_C3_B6_TH032_MC_D_03(socau, dang)
 
 
 _C3S_DINH = {"A": ("a", "b", "c"), "B": ("b", "c", "a"), "C": ("c", "a", "b")}   # góc: (cạnh đối, hai cạnh kề)
