@@ -22,6 +22,7 @@ import random
 from fractions import Fraction
 
 from math_type import *
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -2463,6 +2464,7 @@ def L10_C7_B21_VD117_SA_A_01(socau):
     return cau
 
 
+@sa_bon_ki_tu
 def L10_C7_B22_VD123_SA_A_01(socau):
     r"""Bài toán thực tiễn về elip - trả lời ngắn (đáp số THẬP PHÂN HỮU HẠN).
 

@@ -38,6 +38,7 @@ import random
 from fractions import Fraction
 
 from math_type import *          # noqa: F401,F403
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -644,6 +645,7 @@ def L11_C1_B2_TH010_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C1_B2_TH010_SA_A_01(socau):
     r"""Tính giá trị biểu thức bằng công thức cộng - trả lời ngắn.
 
@@ -741,6 +743,7 @@ def L11_C1_B2_TH011_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C1_B2_TH011_SA_A_01(socau):
     r"""Tính giá trị biểu thức bằng công thức góc nhân đôi - trả lời ngắn.
 
@@ -773,20 +776,22 @@ def L11_C1_B2_TH011_SA_A_01(socau):
             thay = (r"1 - 2\cdot\left(%s\right)^{2}"
                     % _ps1(sin_a, h))
         assert (P * 100).denominator == 1
-        dapso = _xx(P)
-        debai = (r"Cho $\sin\alpha = %s$ và $%s$. Tính $\%s 2\alpha$."
+        # Đáp số tối đa 4 kí tự (cô Lan 28/10/2026): -0,96 có 5 kí tự nên hỏi T = 25.sin 2a (hoặc 25.cos 2a), số
+        # nguyên; vẫn phải xét dấu theo khoảng của góc.
+        T = int(P * 25)
+        dapso = str(T)
+        debai = (r"Cho $\sin\alpha = %s$ và $%s$. Tính $T = 25\%s 2\alpha$."
                  % (_ps1(sin_a, h), mo_ta, ham))
         giai = (r"Vì $%s$ nên $\cos\alpha = %s$."
                 % (mo_ta, _ps1(cos_a, h)) +
                 "\\\\\n"
                 r"Công thức nhân đôi: $%s$." % ct +
                 "\\\\\n"
-                r"$\%s 2\alpha = %s = %s = %s$."
-                % (ham, thay, _ps1(P.numerator, P.denominator), dapso))
+                r"$\%s 2\alpha = %s = %s$, nên $T = 25\cdot\left(%s\right) = %s$."
+                % (ham, thay, _ps1(P.numerator, P.denominator), _ps1(P.numerator, P.denominator), dapso))
         nhieu = _ba_nhieu1(dapso,
-                           [_xx(-P), _xx(Fraction(sin_a, h)),
-                            _xx(Fraction(cos_a, h))],
-                           buoc=lambda t: _xx(float(P) + t / 100.0))
+                           [str(-T), str(5 * sin_a), str(5 * cos_a)],
+                           buoc=lambda t: str(T + t + 1))
         cau += MC_SA_answer_const(debai, dapso, nhieu, giai, 0, 0, 2)
     return cau
 

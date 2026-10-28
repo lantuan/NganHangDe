@@ -17,6 +17,7 @@ from num2words import num2words
 from sympy import Symbol, expand, latex
 
 from math_type import *
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 from DefChung import calculate_coefficient, calculate_permutations
 
 
@@ -545,6 +546,7 @@ def L10_C8_B24_TH134_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L10_C8_B24_TH134_SA_A_01(socau):
     """Giá trị của biểu thức chứa hoán vị, chỉnh hợp, tổ hợp.
 
@@ -875,6 +877,7 @@ def L10_C8_B25_TH139_SA_A_01(socau):
     return _he_so_mot_nhi_thuc(socau, 4)
 
 
+@sa_bon_ki_tu
 def L10_C8_B25_TH140_SA_A_01(socau):
     """Hệ số trong khai triển với n = 5.
 

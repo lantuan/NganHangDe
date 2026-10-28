@@ -37,6 +37,7 @@ import math
 import random
 
 from math_type import *          # noqa: F401,F403
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -450,6 +451,7 @@ def L11_C3_B9_TH041_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C3_B9_TH041_SA_A_01(socau):
     r"""Số trung bình - trả lời ngắn.
 
@@ -467,11 +469,11 @@ def L11_C3_B9_TH041_SA_A_01(socau):
         debai = (_cau_dan(mo_ta, don_vi, bien, tanso) +
                  "\\\\\n"
                  r"Tính số trung bình của mẫu số liệu ghép nhóm trên "
-                 r"(làm tròn đến hàng phần trăm).")
-        nhieu = _ba_nhieu11(_xx(tb), [_xx(tb + 1), _xx(tb - 1), _xx(tb + 2)],
-                            buoc=lambda t: _xx(tb + t + 2))
-        cau += MC_SA_answer_const(debai, _xx(tb), nhieu,
-                                  _giai_trung_binh(bien, tanso),
+                 r"(làm tròn đến hàng phần mười).")
+        nhieu = _ba_nhieu11(_xx(tb, 1), [_xx(tb + 1, 1), _xx(tb - 1, 1), _xx(tb + 2, 1)],
+                            buoc=lambda t: _xx(tb + t + 2, 1))
+        cau += MC_SA_answer_const(debai, _xx(tb, 1), nhieu,
+                                  _giai_trung_binh(bien, tanso) + r" Làm tròn đến hàng phần mười ta được $%s$." % _xx(tb, 1),
                                   _hinh_bang(bien, tanso), 0, 2)
     return cau
 
@@ -512,6 +514,7 @@ def L11_C3_B9_TH042_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C3_B9_TH042_SA_A_01(socau):
     r"""Trung vị - trả lời ngắn.
 
@@ -529,11 +532,11 @@ def L11_C3_B9_TH042_SA_A_01(socau):
         debai = (_cau_dan(mo_ta, don_vi, bien, tanso) +
                  "\\\\\n"
                  r"Tính trung vị của mẫu số liệu ghép nhóm trên "
-                 r"(làm tròn đến hàng phần trăm).")
-        nhieu = _ba_nhieu11(_xx(me), [_xx(me + 1), _xx(me - 1), _xx(me + 2)],
-                            buoc=lambda t: _xx(me + t + 2))
-        cau += MC_SA_answer_const(debai, _xx(me), nhieu,
-                                  _giai_phan_vi(bien, tanso, 2),
+                 r"(làm tròn đến hàng phần mười).")
+        nhieu = _ba_nhieu11(_xx(me, 1), [_xx(me + 1, 1), _xx(me - 1, 1), _xx(me + 2, 1)],
+                            buoc=lambda t: _xx(me + t + 2, 1))
+        cau += MC_SA_answer_const(debai, _xx(me, 1), nhieu,
+                                  _giai_phan_vi(bien, tanso, 2) + r" Làm tròn đến hàng phần mười ta được $%s$." % _xx(me, 1),
                                   _hinh_bang(bien, tanso), 0, 2)
     return cau
 
@@ -580,6 +583,7 @@ def L11_C3_B9_TH043_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C3_B9_TH043_SA_A_01(socau):
     r"""Tứ phân vị - trả lời ngắn.
 
@@ -597,12 +601,12 @@ def L11_C3_B9_TH043_SA_A_01(socau):
         debai = (_cau_dan(mo_ta, don_vi, bien, tanso) +
                  "\\\\\n"
                  r"Tính tứ phân vị thứ %s của mẫu số liệu ghép nhóm trên "
-                 r"(làm tròn đến hàng phần trăm)."
+                 r"(làm tròn đến hàng phần mười)."
                  % ("nhất" if k == 1 else "ba"))
-        nhieu = _ba_nhieu11(_xx(q), [_xx(q + 1), _xx(q - 1), _xx(q + 2)],
-                            buoc=lambda t: _xx(q + t + 2))
-        cau += MC_SA_answer_const(debai, _xx(q), nhieu,
-                                  _giai_phan_vi(bien, tanso, k),
+        nhieu = _ba_nhieu11(_xx(q, 1), [_xx(q + 1, 1), _xx(q - 1, 1), _xx(q + 2, 1)],
+                            buoc=lambda t: _xx(q + t + 2, 1))
+        cau += MC_SA_answer_const(debai, _xx(q, 1), nhieu,
+                                  _giai_phan_vi(bien, tanso, k) + r" Làm tròn đến hàng phần mười ta được $%s$." % _xx(q, 1),
                                   _hinh_bang(bien, tanso), 0, 2)
     return cau
 
@@ -643,6 +647,7 @@ def L11_C3_B9_TH044_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C3_B9_TH044_SA_A_01(socau):
     r"""Mốt - trả lời ngắn.
 
@@ -660,11 +665,11 @@ def L11_C3_B9_TH044_SA_A_01(socau):
         debai = (_cau_dan(mo_ta, don_vi, bien, tanso) +
                  "\\\\\n"
                  r"Tính mốt của mẫu số liệu ghép nhóm trên "
-                 r"(làm tròn đến hàng phần trăm).")
-        nhieu = _ba_nhieu11(_xx(mo), [_xx(mo + 1), _xx(mo - 1), _xx(mo + 2)],
-                            buoc=lambda t: _xx(mo + t + 2))
-        cau += MC_SA_answer_const(debai, _xx(mo), nhieu,
-                                  _giai_mot(bien, tanso),
+                 r"(làm tròn đến hàng phần mười).")
+        nhieu = _ba_nhieu11(_xx(mo, 1), [_xx(mo + 1, 1), _xx(mo - 1, 1), _xx(mo + 2, 1)],
+                            buoc=lambda t: _xx(mo + t + 2, 1))
+        cau += MC_SA_answer_const(debai, _xx(mo, 1), nhieu,
+                                  _giai_mot(bien, tanso) + r" Làm tròn đến hàng phần mười ta được $%s$." % _xx(mo, 1),
                                   _hinh_bang(bien, tanso), 0, 2)
     return cau
 
@@ -1026,6 +1031,7 @@ def L11_C3_TF_B_01(socau, socot=1):
     return cauTF
 
 
+@sa_bon_ki_tu
 def L11_C3_B9_VD046_SA_A_01(socau):
     r"""Chênh lệch số trung bình của hai mẫu ghép nhóm - trả lời ngắn.
 

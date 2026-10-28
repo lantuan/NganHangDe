@@ -24,6 +24,7 @@ from sympy import Symbol, latex
 from sympy.abc import x, y, z, a, b
 
 from math_type import *
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 import DefChung as dc
 
 
@@ -4494,6 +4495,7 @@ def L10_C2_B4_VD028_MC_G_03(socau, dang=1):
     """Tình huống 3 (VDC): số lượng loại thứ hai ở phương án tối ưu."""
     return _kb_toi_uu(_kb3_sinh, socau, dang, "y", False)
 
+@sa_bon_ki_tu
 def L10_C2_B4_VD028_SA_G_01(socau, dang=2):
     """Tình huống 3 (VDC): giá trị tối ưu."""
     return _kb_toi_uu(_kb3_sinh, socau, dang, "gt", True)

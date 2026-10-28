@@ -26,6 +26,7 @@ import math
 import random
 
 from math_type import *          # noqa: F401,F403
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 from DefChung import ngoac       # so am lam co so luy thua phai co ngoac
 
 DAU_THAP_PHAN = ","
@@ -752,6 +753,7 @@ def L11_C2_B7_TH038_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C2_B7_TH038_SA_A_01(socau):
     r"""Số hạng tổng quát của cấp số nhân - trả lời ngắn.
 
@@ -830,6 +832,7 @@ def L11_C2_B7_VD039_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C2_B7_VD039_SA_A_01(socau):
     r"""Tổng n số hạng đầu của cấp số nhân - trả lời ngắn.
 

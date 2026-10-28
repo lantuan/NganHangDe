@@ -10739,3 +10739,11 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Biến thể _03 của dạng D (TH032, hệ quả định lí côsin): cho tỉ lệ ba cạnh, cạnh lớn nhất đặt ngẫu nhiên ở a/b/c (học sinh tự nhận ra góc lớn nhất), góc lớn nhất 120° (bộ z² = x² + y² + xy: 3-5-7, 7-8-13, 5-16-19, 11-24-31, 7-33-37) hoặc 90° (bộ Pythagore). MC: nhiễu 150°, 135°, 90°/120°, 60°; SA: đáp số 120 hoặc 90 (độ).
 - Mapping MC_D, SA_D: Dang thành "Từ hệ thức hoặc tỉ lệ giữa các cạnh, tính số đo một góc (hệ quả định lí côsin)". Bản Anh: 3 mục `en_L10_C3.json`, dịch lại `python_bank_en/toan10/L10_C3.py`. Danh mục Gem `danh_muc_ID_lop10.md` cập nhật.
 
+## 2026-10-28 - Trả lời ngắn: mọi đáp số tối đa 4 kí tự
+- Cô Lan: "vẫn áp dụng 4 kí tự, chỉnh sửa lại hết cho tôi". Khảo sát 200 bộ số mỗi hàm SA của cả ngân hàng: 90 hàm có lúc ra đáp số 5 kí tự trở lên (L10_C3: 70; L10_C2, C5, C6, C7, C8; L11_C1, C2, C3, C4, C6), ví dụ -0,96; 21,79; 1083,2; 10300.
+- `data/python_bank/sa_bon_ki_tu.py` (mới, dùng chung, không sửa math_type): `@sa_bon_ki_tu` bọc hàm SA, gọi hàm gốc từng câu và chỉ giữ câu có đáp số vừa 4 ô (không sửa toán, không sửa câu dẫn); không ra nổi thì báo `DapSoQuaDaiError` (kế thừa CauHongError: bộ ráp đề báo thiếu, không vỡ đề). Bọc 90 hàm trên.
+- L10_C3 bộ sinh chung `_ms_chon_n` (≈ 60 hàm SA): đáp số gần đúng dài quá thì làm tròn ít chữ số hơn (câu dẫn "làm tròn đến hàng phần mười / hàng đơn vị" và lời giải đổi theo); giá trị chính xác dài quá thì chọn bộ số khác.
+- Đổi hàng làm tròn cho vừa 4 ô: L10_C3_B6_VD036_SA_B_01, TH035_SA_A_01, TH033_SA_A_01 (phần trăm -> phần mười); L11_C3_B9_TH041..TH044_SA_A_01 (phần trăm -> phần mười, lời giải thêm câu làm tròn); L11_C6_B18_VD088_SA_A_01 (tiền lãi kép, triệu đồng: phần trăm -> hàng đơn vị). L10_C5_B12_TH066_SA_A_01: số đo và sai số chỉ có phần thập phân 0 hoặc 0,5. L11_C1_B2_TH011_SA_A_01: hỏi $T = 25\sin 2\alpha$ / $25\cos 2\alpha$ (số nguyên, vẫn phải xét dấu) thay cho $\sin 2\alpha$ (−0,96 có 5 kí tự). Bản Anh: 3 mục `en_L10_C3.json`, dịch lại L10_C2, L10_C3.
+- Còn ít bản khác nhau do chính bộ số (bộ Pythagore thập phân): L10_C3_B5_NB029_SA_B/C, TH031_SA_F, L11_C1_B2_TH010 - không đổi.
+- Test `tests/test_sa_bon_ki_tu_28_10.py` chạy MỌI hàm SA (Việt + Anh), 12 bộ số mỗi hàm.
+

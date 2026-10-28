@@ -29,6 +29,7 @@ import math
 import random
 
 from math_type import *
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -324,6 +325,7 @@ def L10_C5_B12_TH066_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L10_C5_B12_TH066_SA_A_01(socau):
     r"""Số gần đúng với độ chính xác cho trước - trả lời ngắn.
 
@@ -331,8 +333,9 @@ def L10_C5_B12_TH066_SA_A_01(socau):
     """
     gt = []
     while len(gt) < socau:
-        a = random.randint(20, 99) + random.choice([0.0, 0.5, 0.25, 0.75])
-        d = random.choice([0.25, 0.5, 1.0, 2.0])
+        # đáp số tối đa 4 kí tự (cô Lan 28/10/2026): a, d chỉ có phần thập phân 0 hoặc 0,5
+        a = random.randint(20, 99) + random.choice([0.0, 0.5])
+        d = random.choice([0.5, 1.0, 1.5, 2.0])
         v = (a, d)
         if v not in gt:
             gt.append(v)
@@ -510,6 +513,7 @@ def L10_C5_B12_TH069_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L10_C5_B12_TH069_SA_A_01(socau):
     r"""Số quy tròn - trả lời ngắn.
 
@@ -796,6 +800,7 @@ def L10_C5_B13_TH072_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L10_C5_B13_TH072_SA_A_01(socau):
     r"""Số trung bình của mẫu - trả lời ngắn.
 
@@ -1778,6 +1783,7 @@ def L10_C5_B14_TH081_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L10_C5_B14_TH081_SA_A_01(socau):
     r"""Phương sai của mẫu - trả lời ngắn.
 

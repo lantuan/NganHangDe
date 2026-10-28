@@ -379,7 +379,7 @@ def test_vd036_sa_b_dam_lay():
         # A(0;0), C(b;0); B la giao cua hai tia tu A (goc A) va tu C (goc C, phia tren)
         ua, uc = (math.cos(A), math.sin(A)), (-math.cos(C), math.sin(C))
         t = (b * uc[1]) / (ua[0] * uc[1] - ua[1] * uc[0])
-        assert so(dap) == round(t, 2)
+        assert so(dap) == round(t, 1) and "hàng phần mười" in debai   # 28/10/2026: đáp số tối đa 4 kí tự
 
 
 def test_th033_sa_c_ti_so():

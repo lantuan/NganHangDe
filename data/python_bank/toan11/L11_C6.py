@@ -36,6 +36,7 @@ import random
 from fractions import Fraction
 
 from math_type import *          # noqa: F401,F403
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -402,6 +403,7 @@ def L11_C6_B18_VD088_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C6_B18_VD088_SA_A_01(socau):
     r"""Giá trị biểu thức luỹ thừa (máy tính cầm tay) - trả lời ngắn.
 
@@ -417,11 +419,11 @@ def L11_C6_B18_VD088_SA_A_01(socau):
     for P, r, n in gt:
         he = (1 + r) ** n
         A = P * he
-        dapso = _xx(float(A), 2)
+        dapso = _xx(float(A), 0)
         debai = (r"Một người gửi tiết kiệm $%d$ triệu đồng theo thể thức "
                  r"lãi kép với lãi suất $%s$ một năm. Tính số tiền cả vốn "
                  r"lẫn lãi người đó nhận được sau $%d$ năm (đơn vị: triệu "
-                 r"đồng, làm tròn đến hàng phần trăm)."
+                 r"đồng, làm tròn đến hàng đơn vị)."
                  % (P, _pt_lai(r), n))
         giai = (r"Công thức lãi kép: $A = P\left(1 + r\right)^{n}$." +
                 "\\\\\n"
@@ -431,12 +433,12 @@ def L11_C6_B18_VD088_SA_A_01(socau):
                 r"Bấm máy tính: $%s^{%d} = %s$."
                 % (_xx(float(1 + r), 4), n, _xx(float(he), 8)) +
                 "\\\\\n"
-                r"$A = %d\cdot %s = %s$ (triệu đồng)."
+                r"$A = %d\cdot %s \approx %s$ (triệu đồng)."
                 % (P, _xx(float(he), 8), dapso))
         nhieu = _ba_nhieu6(dapso,
-                           [str(P), _xx(float(P * (1 + r * n)), 2),
-                            _xx(float(A) * 2, 2)],
-                           buoc=lambda t: _xx(float(A) + t, 2))
+                           [str(P), _xx(float(P * (1 + r * n)), 0),
+                            _xx(float(A) * 2, 0)],
+                           buoc=lambda t: _xx(float(A) + t, 0))
         cau += MC_SA_answer_const(debai, dapso, nhieu, giai, 0, 0, 2)
     return cau
 

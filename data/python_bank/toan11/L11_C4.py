@@ -37,6 +37,7 @@ import random
 from fractions import Fraction
 
 from math_type import *          # noqa: F401,F403
+from sa_bon_ki_tu import sa_bon_ki_tu  # trả lời ngắn: đáp số tối đa 4 kí tự (cô Lan 28/10/2026)
 
 DAU_THAP_PHAN = ","
 
@@ -1668,6 +1669,7 @@ def L11_C4_B13_VD067_MC_A_01(socau, dang=1):
     return cauTN
 
 
+@sa_bon_ki_tu
 def L11_C4_B13_VD067_SA_A_01(socau):
     r"""Độ dài trong thiết diện song song với đáy - trả lời ngắn.
 
