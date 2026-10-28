@@ -34,7 +34,7 @@ Sau mỗi đợt thêm dạng vào ngân hàng, chạy `python3 scripts/xuat_tai
 - Giáo viên: mục **Gửi dạng** (`/gv/gui-dang`) trên thanh điều hướng khu giáo viên. Dán PHIẾU + CODE, bấm **Gửi duyệt**.
   Web chỉ đọc cú pháp (ast), lấy tên hàm theo ID, báo chỗ đáng ngờ (`open(`, `os.`…) cho người duyệt; KHÔNG chạy code.
   Bảng cuối trang hiện trạng thái (Chờ duyệt / Đã duyệt / Trả lại) và lời nhắn. Mỗi giáo viên tối đa 30 bài/ngày.
-- Người duyệt (email trong `EMAIL_DUYET_DANG`, mặc định maihalan2605@gmail.com): **Duyệt dạng** (`/gv/duyet-dang`):
+- Người duyệt (email trong `EMAIL_DUYET_DANG`, mặc định nganhangdetoanchv@gmail.com - tài khoản liên hệ của web, phải đăng kí vai trò GIÁO VIÊN): **Duyệt dạng** (`/gv/duyet-dang`):
   lọc theo trạng thái, xem phiếu/đề gốc/code, **Tải .py** từng bài hoặc **Tải tất cả bài chờ duyệt (.zip)**,
   ghi lời nhắn rồi bấm **Đã duyệt** / **Trả lại** / **Đưa về chờ**.
 - Bài gửi lưu trên VPS ở `data/gui_dang/<mã>.json` (không đẩy lên GitHub).

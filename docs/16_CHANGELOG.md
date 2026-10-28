@@ -10721,3 +10721,5 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `scripts/thu_dang_gui.py`: chạy thử tệp tải về trên máy cô (30 bộ số, đúng loại câu, tham số thứ hai, SA ≤ 4 kí tự, Đúng/Sai ≥ 3 đúng/≥ 3 sai mỗi ý + bốn mốc, cảnh báo "đề chết"), ghi bản nháp .tex/.pdf vào `nhap/gui_dang/`.
 - Test `tests/test_gui_dang_28_10.py`.
 
+- Sửa cùng ngày (cô Lan): người duyệt mặc định là tài khoản liên hệ của web `nganhangdetoanchv@gmail.com` (không phải tài khoản cá nhân). Tài khoản này phải đăng kí vai trò giáo viên mới vào được /gv/duyet-dang. Đổi bằng `EMAIL_DUYET_DANG`.
+

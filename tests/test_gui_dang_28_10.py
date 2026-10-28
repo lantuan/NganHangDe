@@ -121,6 +121,13 @@ def test_khong_chay_code_tren_may_chu(kho, monkeypatch):
     assert not da_chay.exists() and "open(" in b["canh_bao"]
 
 
+def test_nguoi_duyet_mac_dinh_la_tai_khoan_lien_he():
+    """Cô Lan: "tôi muốn là tài khoản nganhangdetoanchv, đây là tài khoản liên hệ của web"."""
+    if "EMAIL_DUYET_DANG" not in __import__("os").environ:
+        assert G.NGUOI_DUYET == {"nganhangdetoanchv@gmail.com"}
+    assert G.la_nguoi_duyet(" NganHangDeToanCHV@gmail.com ") or "EMAIL_DUYET_DANG" in __import__("os").environ
+
+
 def test_menu_co_gui_dang():
     html = (GOC / "app/templates/teacher/_base_gv.html").read_text(encoding="utf-8")
     assert '<a href="/gv/gui-dang"' in html

@@ -24,7 +24,7 @@ GOC = Path(__file__).resolve().parent.parent.parent
 THU_MUC = GOC / "data" / "gui_dang"
 
 # Tài khoản được duyệt: biến môi trường EMAIL_DUYET_DANG (nhiều email cách nhau dấu phẩy).
-NGUOI_DUYET = {e.strip().lower() for e in os.environ.get("EMAIL_DUYET_DANG", "maihalan2605@gmail.com").split(",")
+NGUOI_DUYET = {e.strip().lower() for e in os.environ.get("EMAIL_DUYET_DANG", "nganhangdetoanchv@gmail.com").split(",")
                if e.strip()}
 
 # Đường liên kết Gem "Soạn dạng" cô chia sẻ (đặt GEM_SOAN_DANG_URL trong .env); trống thì trang không hiện nút.
