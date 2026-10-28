@@ -79,3 +79,6 @@ data/temp_en/
 # Tep .patch tam (Claude chep vao goc repo de git am) - khong dua len GitHub
 /*.patch
 skkn/
+
+# Bai giao vien gui dang (luu tren VPS, khong day len GitHub) - 28/10/2026
+data/gui_dang/

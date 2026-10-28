@@ -1,0 +1,54 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Duyệt dạng{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Duyệt dạng giáo viên gửi</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">
+Tải code về máy, chạy thử bằng <span class="font-mono">python3 scripts/thu_dang_gui.py nhap/gui_dang/&lt;mã&gt;.py</span>,
+đưa vào ngân hàng như mọi lần rồi bấm Đã duyệt; chưa đạt thì ghi lời nhắn và bấm Trả lại. Web không chạy code này.
+</p>
+
+<div class="flex flex-wrap items-center gap-stack-md mb-stack-lg font-label-md text-label-md">
+{% for k, ten in [("cho_duyet", "Chờ duyệt"), ("da_duyet", "Đã duyệt"), ("tra_lai", "Trả lại"), ("tat_ca", "Tất cả")] %}
+<a href="/gv/duyet-dang?trang_thai={{ k }}"
+   class="px-stack-md py-stack-sm rounded-full border border-primary-container {% if loc == k %}bg-primary-container text-white{% else %}text-primary-container{% endif %}">{{ ten }}</a>
+{% endfor %}
+<a href="/gv/duyet-dang/tai-cho-duyet.zip" class="text-primary-container font-semibold">⬇ Tải tất cả bài chờ duyệt (.zip)</a>
+</div>
+
+{% for b in ds %}
+<div id="{{ b.ma }}" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg mb-stack-lg">
+<div class="flex flex-wrap justify-between gap-stack-sm mb-stack-sm">
+<div class="font-label-md text-label-md">
+<span class="font-mono">{{ b.ma }}</span> · {{ b.luc_gui }} · {{ b.gv_email }}
+</div>
+<div class="font-label-md text-label-md">{{ trang_thai_ten.get(b.trang_thai, b.trang_thai) }}{% if b.nguoi_duyet %} · {{ b.luc_duyet }}{% endif %}</div>
+</div>
+<div class="font-mono mb-stack-sm" style="font-size:13px;">{% for t in b.ten_ham %}{{ t }}<br/>{% endfor %}</div>
+{% if b.canh_bao %}
+<div class="mb-stack-sm rounded-lg p-stack-sm" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:13px;">
+⚠️ Đọc kĩ trước khi chạy: {{ b.canh_bao | join("; ") }}
+</div>
+{% endif %}
+{% if b.phieu %}<pre class="mb-stack-sm p-stack-sm rounded-lg bg-surface-container-low" style="font-size:12px;white-space:pre-wrap;">{{ b.phieu }}</pre>{% endif %}
+{% if b.de_goc %}<div class="mb-stack-sm font-body-md text-body-md" style="white-space:pre-wrap;"><strong>Đề gốc:</strong> {{ b.de_goc }}</div>{% endif %}
+<details class="mb-stack-md">
+<summary class="cursor-pointer text-primary-container font-label-md text-label-md">Xem code ({{ b.code.count("\n") }} dòng)</summary>
+<pre class="mt-stack-sm p-stack-sm rounded-lg bg-surface-container-low overflow-x-auto" style="font-size:12px;">{{ b.code }}</pre>
+</details>
+<div class="flex flex-wrap items-start gap-stack-md">
+<a href="/gv/duyet-dang/{{ b.ma }}.py" class="px-stack-md py-stack-sm rounded-full border border-primary-container text-primary-container font-label-md text-label-md">⬇ Tải .py</a>
+<form method="post" action="/gv/duyet-dang/{{ b.ma }}" class="flex flex-wrap items-start gap-stack-sm grow">
+<textarea name="loi_nhan" rows="2" placeholder="Lời nhắn cho giáo viên (khi trả lại)"
+          class="grow p-stack-sm border border-outline-variant rounded-lg" style="min-width:220px;">{{ b.loi_nhan }}</textarea>
+<button name="trang_thai" value="da_duyet" class="px-stack-md py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">Đã duyệt</button>
+<button name="trang_thai" value="tra_lai" class="px-stack-md py-stack-sm rounded-full font-label-md text-label-md" style="background:#fee2e2;color:#991b1b;">Trả lại</button>
+<button name="trang_thai" value="cho_duyet" class="px-stack-md py-stack-sm rounded-full border border-outline-variant font-label-md text-label-md">Đưa về chờ</button>
+</form>
+</div>
+</div>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">Không có bài nào.</p>
+{% endfor %}
+
+{% endblock %}

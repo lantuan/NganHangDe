@@ -1,0 +1,85 @@
+{% extends "teacher/_base_gv.html" %}
+{% block title %}Gửi dạng{% endblock %}
+{% block content %}
+
+<h1 class="font-headline-lg text-headline-lg mb-stack-sm">Gửi dạng toán vào ngân hàng chung</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg">
+Thầy/cô đưa bài toán cho <strong>Gem Soạn dạng</strong> (Gemini), Gem trả về <strong>PHIẾU GỬI DUYỆT</strong> và
+<strong>code Python</strong>. Chép cả hai vào ô dưới rồi bấm Gửi. Bài gửi nằm ở hàng chờ; quản trị chạy thử, duyệt
+rồi mới đưa vào ngân hàng chung. Trạng thái và lời nhắn hiện ở bảng cuối trang.
+</p>
+
+{% if gem_url %}
+<p class="mb-stack-lg">
+<a href="{{ gem_url }}" target="_blank" rel="noopener"
+   class="inline-block px-stack-lg py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">Mở Gem Soạn dạng</a>
+</p>
+{% endif %}
+
+{% if la_nguoi_duyet %}
+<p class="mb-stack-lg font-body-md text-body-md">
+<a class="text-primary-container font-semibold" href="/gv/duyet-dang">Trang duyệt dạng →</a>
+<span class="text-on-surface-variant">({{ so_cho_duyet }} bài chờ duyệt)</span>
+</p>
+{% endif %}
+
+{% if da_gui %}
+<div class="mb-stack-lg rounded-xl p-stack-md" style="background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;">
+✅ Đã gửi bài <span class="font-mono">{{ da_gui }}</span>. Bài đang chờ duyệt.
+</div>
+{% endif %}
+{% if loi %}
+<div class="mb-stack-lg rounded-xl p-stack-md" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b;">
+❌ {{ loi }}
+</div>
+{% endif %}
+
+<form method="post" action="/gv/gui-dang"
+      class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-lg mb-stack-lg flex flex-col gap-stack-md">
+<label class="font-label-md text-label-md">1. Phiếu gửi duyệt (Gem trả về)
+<textarea name="phieu" rows="8" class="mt-stack-sm w-full p-stack-md border border-outline-variant rounded-lg font-mono"
+          style="font-size:13px;" placeholder="PHIẾU GỬI DUYỆT&#10;- Hàm: ...&#10;- Đơn vị kiến thức: ...">{{ nhap.phieu or "" }}</textarea>
+</label>
+<label class="font-label-md text-label-md">2. Code Python (bắt buộc)
+<textarea name="code" rows="16" required spellcheck="false"
+          class="mt-stack-sm w-full p-stack-md border border-outline-variant rounded-lg font-mono"
+          style="font-size:13px;white-space:pre;" placeholder="def L10_C3_B6_TH032_MC_H_01(socau, dang=1):&#10;    ...">{{ nhap.code or "" }}</textarea>
+</label>
+<label class="font-label-md text-label-md">3. Đề gốc của thầy/cô (không bắt buộc)
+<textarea name="de_goc" rows="4" class="mt-stack-sm w-full p-stack-md border border-outline-variant rounded-lg">{{ nhap.de_goc or "" }}</textarea>
+</label>
+<div>
+<button type="submit" class="px-stack-lg py-stack-sm bg-primary-container text-white rounded-full font-label-md text-label-md">Gửi duyệt</button>
+<span class="ml-stack-md font-body-md text-body-md text-on-surface-variant">Web chỉ kiểm tra cú pháp, không chạy code.</span>
+</div>
+</form>
+
+<h2 class="font-headline-md text-headline-md mb-stack-md">Bài thầy/cô đã gửi</h2>
+{% if bai_cua_toi %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md align-top">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-stack-md">Lúc gửi</th>
+<th class="p-stack-md">Hàm</th>
+<th class="p-stack-md">Trạng thái</th>
+<th class="p-stack-md">Lời nhắn của người duyệt</th>
+</tr>
+</thead>
+<tbody>
+{% for b in bai_cua_toi %}
+<tr class="border-t border-outline-variant align-top">
+<td class="p-stack-md whitespace-nowrap text-on-surface-variant">{{ b.luc_gui }}</td>
+<td class="p-stack-md font-mono" style="font-size:12px;">{% for t in b.ten_ham %}{{ t }}<br/>{% endfor %}</td>
+<td class="p-stack-md whitespace-nowrap">{{ trang_thai_ten.get(b.trang_thai, b.trang_thai) }}</td>
+<td class="p-stack-md" style="max-width:420px;white-space:pre-wrap;">{{ b.loi_nhan or "—" }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">Thầy/cô chưa gửi bài nào.</p>
+{% endif %}
+
+{% endblock %}

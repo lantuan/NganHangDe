@@ -400,3 +400,115 @@ def kiem_tra_gia_su(request: Request):
     if chan is not None:
         return chan
     return {"success": True, "message": "", "data": gia_su_service.tu_kiem_tra()}
+
+
+# ======================================================
+# GỬI DẠNG / DUYỆT DẠNG (cô Lan 28/10/2026) - xem app/services/gui_dang_service.py, docs/gem_soan_dang/.
+# Giáo viên dán PHIẾU + CODE do Gem "Soạn dạng" viết; cô Lan tải về máy chạy thử, đưa vào ngân hàng như
+# mọi lần rồi bấm Đã duyệt / Trả lại. Máy chủ KHÔNG chạy code gửi lên.
+# ======================================================
+from fastapi.responses import Response  # noqa: E402
+from app.services import gui_dang_service  # noqa: E402
+
+
+def _trang_gui_dang(request, user, loi=None, nhap=None, da_gui=None):
+    email = getattr(user, "email", None)
+    return templates.TemplateResponse(
+        request=request,
+        name="teacher/gui_dang.html",
+        context={
+            **_ngu_canh_chung(user),
+            "bai_cua_toi": gui_dang_service.danh_sach(gv_id=user.id),
+            "trang_thai_ten": gui_dang_service.TRANG_THAI,
+            "loi": loi, "nhap": nhap or {}, "da_gui": da_gui, "gem_url": gui_dang_service.GEM_URL,
+            "la_nguoi_duyet": gui_dang_service.la_nguoi_duyet(email),
+            "so_cho_duyet": (len(gui_dang_service.danh_sach(trang_thai="cho_duyet"))
+                             if gui_dang_service.la_nguoi_duyet(email) else 0),
+        },
+    )
+
+
+@router.get("/gv/gui-dang")
+def trang_gui_dang(request: Request, da_gui: str | None = None):
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+    return _trang_gui_dang(request, user, da_gui=da_gui)
+
+
+@router.post("/gv/gui-dang")
+def gui_dang(request: Request, phieu: str = Form(""), code: str = Form(""), de_goc: str = Form("")):
+    user = get_current_user(request)
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+    try:
+        b = gui_dang_service.gui(user.id, getattr(user, "email", "") or "", phieu, code, de_goc)
+    except gui_dang_service.GuiDangError as e:
+        return _trang_gui_dang(request, user, loi=str(e), nhap={"phieu": phieu, "code": code, "de_goc": de_goc})
+    return RedirectResponse("/gv/gui-dang?da_gui=" + quote(b["ma"]), status_code=303)
+
+
+def _chan_nguoi_duyet(request, user):
+    chan = yeu_cau_giao_vien(request, user)
+    if chan is not None:
+        return chan
+    if not gui_dang_service.la_nguoi_duyet(getattr(user, "email", None)):
+        return RedirectResponse("/gv/gui-dang", status_code=303)
+    return None
+
+
+@router.get("/gv/duyet-dang")
+def trang_duyet_dang(request: Request, trang_thai: str = "cho_duyet"):
+    user = get_current_user(request)
+    chan = _chan_nguoi_duyet(request, user)
+    if chan is not None:
+        return chan
+    loc = trang_thai if trang_thai in gui_dang_service.TRANG_THAI else None
+    return templates.TemplateResponse(
+        request=request,
+        name="teacher/duyet_dang.html",
+        context={
+            **_ngu_canh_chung(user),
+            "ds": gui_dang_service.danh_sach(trang_thai=loc),
+            "loc": loc or "tat_ca",
+            "trang_thai_ten": gui_dang_service.TRANG_THAI,
+        },
+    )
+
+
+@router.get("/gv/duyet-dang/tai-cho-duyet.zip")
+def tai_tat_ca_cho_duyet(request: Request):
+    user = get_current_user(request)
+    chan = _chan_nguoi_duyet(request, user)
+    if chan is not None:
+        return chan
+    return Response(gui_dang_service.zip_cho_duyet(), media_type="application/zip",
+                    headers={"Content-Disposition": 'attachment; filename="gui_dang_cho_duyet.zip"'})
+
+
+@router.get("/gv/duyet-dang/{ma}.py")
+def tai_mot_bai(request: Request, ma: str):
+    user = get_current_user(request)
+    chan = _chan_nguoi_duyet(request, user)
+    if chan is not None:
+        return chan
+    b = gui_dang_service.lay(ma)
+    if b is None:
+        return RedirectResponse("/gv/duyet-dang", status_code=303)
+    return Response(gui_dang_service.tep_python(b).encode("utf-8"), media_type="text/x-python; charset=utf-8",
+                    headers={"Content-Disposition": 'attachment; filename="%s.py"' % b["ma"]})
+
+
+@router.post("/gv/duyet-dang/{ma}")
+def dat_trang_thai_bai(request: Request, ma: str, trang_thai: str = Form(...), loi_nhan: str = Form("")):
+    user = get_current_user(request)
+    chan = _chan_nguoi_duyet(request, user)
+    if chan is not None:
+        return chan
+    try:
+        gui_dang_service.dat_trang_thai(ma, trang_thai, loi_nhan, getattr(user, "email", "") or "")
+    except gui_dang_service.GuiDangError:
+        pass
+    return RedirectResponse("/gv/duyet-dang#" + quote(ma), status_code=303)
