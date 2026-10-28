@@ -10697,3 +10697,15 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Kiểm: toàn bộ test đạt; chạy thử uvicorn thật với 80 yêu cầu đồng thời (40 luồng) - 80/80 trả 200 có gzip, chậm nhất 0,65 s. Test `tests/test_toc_do_24_10.py`.
 - CHƯA làm (để sau ngày nộp, cần thử kĩ): chạy 2 tiến trình uvicorn; bỏ bớt một lượt AI trong n8n; HTTP/2 và phục vụ tệp tĩnh bằng nginx; MathJax tải muộn.
 
+## 2026-10-24 - n8n: mọi node Chat Model dùng google/gemini-2.5-flash
+- Cô Lan đổi trên n8n: tất cả node Chat Model (CHV_Fun, GenerateExam_RequestParser, DocPhieuTraLoi, CHV_Grader, CHV_GiaSu) sang `google/gemini-2.5-flash` qua OpenRouter. Trước đó CHV_Fun dùng `qwen/qwen3-8b`, dự phòng `google/gemini-2.0-flash-001`.
+- Không sửa mã Python, không sửa câu lệnh. Chỉ cập nhật sổ tay: `docs/06_N8N_WORKFLOW.md` (mục mới "Mô hình đang dùng", dòng node `OpenRouter Chat Model`), `docs/18_PROMPT_LIBRARY.md` (ghi chú mô hình ở mục CHV_Fun).
+## 2026-10-28 - Cài web như ứng dụng (PWA), tự lưu bài làm, mất mạng vẫn nộp được
+- Cô Lan: "tôi có thể tạo app để giảm sự phụ thuộc vào mạng không" rồi chốt "PWA trước, chatbox sau". Không đổi luồng n8n, không đổi API, không đổi cấu hình VPS.
+- `app/static/manifest.webmanifest`, `app/static/icons/icon-192.png`, `icon-512.png`, `app/static/offline.html` (trang báo mất kết nối, hai thứ tiếng). Điện thoại / máy tính bấm "Thêm vào màn hình chính" / "Cài đặt ứng dụng" là có biểu tượng "Đề AI", mở toàn màn hình vào `/chat`.
+- `app/static/sw.js` (phục vụ ở `/sw.js` để phạm vi là cả trang, `Cache-Control: no-cache`): CHỈ xử lí GET. Trang HTML lấy mạng trước (có mạng là luôn bản mới nhất), chỉ lưu trang `/lam-bai/...`; dữ liệu đề `/api/exam/quiz/` lấy mạng trước, có lưu; ảnh hình vẽ `/api/exam/hinh/` và thư viện CDN có ghi phiên bản lấy bộ nhớ trước; tệp tĩnh, font Google dùng bộ nhớ rồi cập nhật ngầm. Không lưu `/api/*` khác, tệp tải về, phản hồi lỗi / chuyển hướng. Đổi `PHIEN_BAN` là xoá bộ nhớ cũ.
+- `app/main.py`: `_chen_pwa` chèn manifest + đăng kí service worker vào mọi trang HTML (trong middleware ngôn ngữ). CÔNG TẮC AN TOÀN: `TAT_PWA=1` trong `.env` rồi khởi động lại -> không chèn nữa và `/sw.js` trả bản tự gỡ (xoá bộ nhớ, huỷ đăng kí) trên mọi máy đã cài.
+- `lam_bai.html`: tự lưu bài đang làm vào máy (`localStorage`, khoá `bai_lam_<de_id>_<user_id>`) mỗi lần chọn / gõ; tải lại trang thì khôi phục (MC, Đúng/Sai, trả lời ngắn) và báo "Đã khôi phục"; nộp thành công thì xoá. Mất mạng lúc nộp: không báo lỗi bắt làm lại mà giữ bài, hiện "Mất mạng... có mạng lại sẽ tự nộp", có mạng thì tự nộp một lần. MathJax chưa tải được (mất mạng) vẫn hiện đề. Bản Anh: thêm 3 mục `en_ui.json`.
+- Kiểm: chạy thử Chromium (Playwright) với uvicorn thật: service worker đăng kí và điều khiển trang; máy chủ sập -> hiện trang báo mất kết nối; chọn đáp án rồi tải lại -> khôi phục đủ; mất mạng bấm nộp -> chờ, có mạng -> gửi đúng bài làm. Test `tests/test_pwa_28_10.py`.
+- Giới hạn: lần đầu phải có mạng để mở đề (máy mới lưu được); chấm điểm vẫn ở máy chủ nên mất mạng thì CHƯA có điểm ngay, chỉ là không mất bài. Chat / tạo đề vẫn cần mạng.
+

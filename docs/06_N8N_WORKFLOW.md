@@ -349,6 +349,22 @@ việc của chúng đã được Python xác định rõ từ trước, không 
 
 ---
 
+## Mô hình đang dùng (cập nhật 24/10/2026)
+
+Cô Lan đổi **tất cả** node Chat Model trên n8n sang `google/gemini-2.5-flash` (qua OpenRouter, dùng chung credential có sẵn). Trước đó mô hình chính của `CHV_Fun` là `qwen/qwen3-8b`, dự phòng `google/gemini-2.0-flash-001`.
+
+| Node Chat Model | Gắn vào | Mô hình |
+|---|---|---|
+| `OpenRouter Chat Model` | `CHV_Fun` (Nhánh 1) | `google/gemini-2.5-flash` |
+| Chat Model + ModelFallback | `GenerateExam_RequestParser` (Nhánh 1) | `google/gemini-2.5-flash` |
+| `OpenRouter Chat Model2` | `DocPhieuTraLoi` (Nhánh 2) | `google/gemini-2.5-flash` |
+| `OpenRouter Chat Model4` | `CHV_Grader` (Nhánh 3) | `google/gemini-2.5-flash` |
+| `OpenRouter Chat Model` (dùng chung) | `CHV_GiaSu` (Nhánh 4) | `google/gemini-2.5-flash` |
+
+Đổi mô hình KHÔNG phải sửa mã Python: câu lệnh vẫn dựng ở Python, n8n chỉ gọi mô hình. Lần sau đổi mô hình thì sửa bảng này và ghi vào `docs/16_CHANGELOG.md`.
+
+---
+
 ## Nhánh 1 — `/webhook/chat` (luồng Chat AI)
 
 ```
@@ -361,7 +377,7 @@ Webhook ──► CHV_Fun ──► Edit Fields ──► Switch ──┬─►
 |---|---|---|---|---|
 | `Webhook` | Webhook POST | `{message, user_id, conversation_id, vai_tro}` | nguyên văn body | Cửa vào luồng chat. `vai_tro` (thêm v2.55) chỉ để AI **xưng hô** cho đúng — việc quyết định xuất lời giải hay không do máy chủ tra `profiles.vai_tro`, không tin trường này |
 | `CHV_Fun` | AI Agent | tin nhắn học sinh/giáo viên | `{task: "...", ...}` | Phân loại ý định. Có Chat Model + Memory + Tool |
-| `OpenRouter Chat Model` | Model | — | — | Mô hình cho `CHV_Fun` |
+| `OpenRouter Chat Model` | Model | — | — | Mô hình cho `CHV_Fun`: `google/gemini-2.5-flash` (từ 24/10/2026) |
 | `Edit Fields` (raw) | Set | đầu ra `CHV_Fun` | JSON phẳng | Dọn đầu ra AI thành trường phẳng để `Switch` đọc được |
 | `Switch` (mode: Rules) | Switch | `task` | 1 trong N nhánh | Chia việc theo `task`. **Còn 4 rule cũ chưa dọn** (`analyze_result`, `study_advice`, `history`, `general_chat`) — không khớp `task` nào `CHV_Fun` thực trả, không nối đi đâu |
 

@@ -326,8 +326,10 @@ phải sửa gì: System Message vẫn là `{{ $json.body.lenh_he_thong }}`.
    ```
    {{ (() => { const s = String($json.output ?? '').replace(/<think>[\s\S]*?<\/think>/gi, '').replace(/```(json)?/gi, ''); const a = s.indexOf('{'), b = s.lastIndexOf('}'); for (const t of [s.slice(a, b + 1), s.slice(a, b + 1).replace(/\r?\n/g, ' ')]) { try { return JSON.parse(t); } catch (e) {} } return { task: 'help', message: $('Webhook').item.json.body.message, tra_loi: s.trim() || 'Mình chưa hiểu ý bạn, bạn nói rõ hơn giúp mình nhé!' }; })() }}
    ```
-3. (Nên) Node `CHV_Fun` → bật **Enable Fallback Model**, nối thêm một OpenRouter Chat Model khác (vd
-   `google/gemini-2.0-flash-001`) phòng khi mô hình chính (qwen/qwen3-8b) hết lượt / bị gỡ.
+3. (Nên) Node `CHV_Fun` → bật **Enable Fallback Model**, nối thêm một OpenRouter Chat Model khác phòng khi mô hình
+   chính hết lượt / bị gỡ. **Cập nhật 24/10/2026:** mọi node Chat Model đã đổi sang `google/gemini-2.5-flash`
+   (trước đó mô hình chính là qwen/qwen3-8b, dự phòng google/gemini-2.0-flash-001) — bảng đầy đủ ở
+   `docs/06_N8N_WORKFLOW.md`, mục "Mô hình đang dùng".
 
 Sửa xong bấm **Save**. Chưa làm thì web vẫn chạy (máy chủ tự xử lí khi n8n hỏng), nhưng câu trò chuyện sẽ do AI dự
 phòng trả lời thay vì CHV_Fun.
