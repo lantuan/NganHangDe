@@ -33,7 +33,8 @@ def test_kiem_code():
     k = G.kiem_code(CODE)
     assert k["ten_ham"] == ["L10_C3_B6_TH032_MC_X_01", "L10_C3_B6_TH032_SA_X_01", "L10_C3_TF_X_01",
                             "L10_C3_TH031_TH032_TL_X_01"] and not k["canh_bao"]
-    xau = G.kiem_code("import os\nos.system('x')\ndef L10_C1_B1_NB001_MC_Z_01(socau, dang=1):\n    open('a')\n")
+    xau = G.kiem_code("os.system('x')\ndef L10_C1_B1_NB001_MC_Z_01(socau, dang=1):\n    import os\n    open('a')\n"
+                      "    return '' * socau\n")
     assert "open(" in xau["canh_bao"] and "os." in xau["canh_bao"]
     assert any("ngoài hàm" in c for c in xau["canh_bao"])
 
@@ -116,7 +117,7 @@ def test_trang_va_quyen(kho, monkeypatch):
 def test_khong_chay_code_tren_may_chu(kho, monkeypatch):
     """Code có lệnh chạy ngoài hàm vẫn chỉ được ĐỌC, không bao giờ chạy."""
     da_chay = GOC / "nhap" / "_khong_duoc_tao.txt"
-    code = "open(%r, 'w').write('x')\ndef L10_C1_B1_NB001_MC_Z_01(socau, dang=1):\n    return ''\n" % str(da_chay)
+    code = "open(%r, 'w').write('x')\ndef L10_C1_B1_NB001_MC_Z_01(socau, dang=1):\n    return '' * socau\n" % str(da_chay)
     b = G.gui("gv1", "gv1@x", "", code)
     assert not da_chay.exists() and "open(" in b["canh_bao"]
 
@@ -132,3 +133,36 @@ def test_menu_co_gui_dang():
     html = (GOC / "app/templates/teacher/_base_gv.html").read_text(encoding="utf-8")
     assert '<a href="/gv/gui-dang"' in html
     assert "data/gui_dang/" in (GOC / ".gitignore").read_text(encoding="utf-8")
+
+
+GEM_SAI = """import random
+from math_type import MC_SA_answer_const, MC_SA_answer_text
+
+def L10_C2_B2_MC_A_01():
+    cases = [((3, 5, 7), 120, ["120°", "150°", "90°", "135°"]), ((2, 3, 4), 120, ["120°", "135°", "150°", "60°"])]
+    p = random.choice(cases)
+    return MC_SA_answer_const(question="x", options=p[2], correct_index=0, solution="y")
+
+def L10_C2_B2_SA_A_01():
+    return MC_SA_answer_text(question="x", answer="120", solution="y")
+"""
+
+
+def test_bat_loi_chuan_ngay_luc_gui():
+    """Cô Lan 28/10/2026: code Gem xuất cho đề "a : b : c = 3 : 5 : 7, góc lớn nhất" sai chuẩn (ID không có đơn vị kiến
+    thức, không có socau, gọi MC_SA_answer_const bằng tham số không tồn tại, import math_type) - phải bị chặn ngay
+    lúc giáo viên gửi, kèm lỗi để chép lại cho Gem."""
+    with pytest.raises(G.GuiDangError) as e:
+        G.kiem_code(GEM_SAI)
+    t = str(e.value)
+    for y in ("L10_C2_B2_MC_A_01 sai chuẩn ID", "def L10_C2_B2_MC_A_01(socau, dang=1)", "def L10_C2_B2_SA_A_01(socau, dang=2)",
+              "MC_SA_answer_const(debai, dapso, dsnhieu, giai, 0, 0, dang)", "Bỏ dòng import math_type",
+              "import random BÊN TRONG"):
+        assert y in t, y
+    with pytest.raises(G.GuiDangError, match="ĐÃ CÓ"):                       # trùng tên hàm đang có trong ngân hàng
+        G.kiem_code("def L10_C3_B6_TH032_MC_D_01(socau, dang=1):\n    return '' * socau")
+    with pytest.raises(G.GuiDangError, match="TH099 không có"):              # đơn vị kiến thức bịa
+        G.kiem_code("def L10_C3_B6_TH099_MC_A_01(socau, dang=1):\n    return '' * socau")
+    with pytest.raises(G.GuiDangError, match="vòng lặp theo socau"):
+        G.kiem_code("def L10_C3_B6_TH032_SA_D_09(socau, dang=2):\n    return ''")
+    assert G.kiem_code("def L10_C3_TH031_TH032_TL_Q_01(socau, dong=1):\n    return '' * socau")["ten_ham"]

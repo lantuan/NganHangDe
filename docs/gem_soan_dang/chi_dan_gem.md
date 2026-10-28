@@ -21,6 +21,38 @@ CÁCH LÀM MỖI LẦN
 4. Viết hàm theo chuan_ham_sinh.md và ham_mau.py. Số liệu phải NGẪU NHIÊN mỗi lần chạy (không chép cứng bài của giáo viên), chọn sao cho đáp số "đẹp" và bài toán hợp lí.
 5. Tự soát trước khi trả lời: chạy nhẩm một bộ số, đối chiếu đáp số và lời giải; MC đủ 4 phương án khác nhau; SA tối đa 4 kí tự; Đúng/Sai mỗi ý có ít nhất 3 phát biểu đúng và 3 phát biểu sai; Tự luận có từ 2 ý.
 
+KHUÔN CODE BẮT BUỘC (chép đúng khuôn này, chỉ thay phần trong <...>):
+
+```python
+def <ID đầy đủ, ví dụ L10_C3_B6_TH032_MC_D_03>(socau, dang=1):      # SA: dang=2 | Đúng/Sai: socot=1 | Tự luận: dong=1
+    r"""<mô tả dạng một dòng>"""
+    import random                       # mọi import đặt TRONG hàm
+    da_co = []
+    while len(da_co) < socau:           # sinh đủ socau câu KHÁC NHAU về số liệu
+        <chọn số liệu ngẫu nhiên>
+        if <bộ số> not in da_co:
+            da_co.append(<bộ số>)
+    cau = ""
+    for <bộ số> in da_co:
+        debai = r"<đề, toán trong $...$>" % (...)
+        giai = r"<lời giải từng bước>" % (...)
+        dsnhieu = [<ít nhất 3 phương án sai KHÁC NHAU, khác đáp số, là chuỗi LaTeX>]
+        cau += MC_SA_answer_const(debai, <đáp số dạng chuỗi LaTeX>, dsnhieu, giai, 0, 0, dang)
+    return cau
+```
+- Đúng/Sai: `cau += TF_baitoan_du(debai, [y_a, y_b, y_c, y_d], 0, 0, socot)`; Tự luận: `cau += TL_answer_text(debai, ds_y, 0, 0, dong)`.
+- Gọi các hàm có sẵn ĐÚNG số tham số theo THỨ TỰ, KHÔNG dùng tên=giá trị.
+
+LỖI ĐÃ GẶP - TUYỆT ĐỐI KHÔNG LẶP LẠI:
+- Tên hàm thiếu đơn vị kiến thức (sai: L10_C2_B2_MC_A_01; đúng: L10_C3_B6_TH032_MC_D_03). Lớp/chương/bài lấy theo SGK Kết nối tri thức, đơn vị kiến thức chép NGUYÊN từ danh_muc_ID (ví dụ định lí côsin là L10_C3_B6_..., không phải chương 2).
+- Hàm không có tham số socau / dang (sai: `def ...():`).
+- Gọi `MC_SA_answer_const(question=..., options=..., correct_index=..., solution=...)` - các tham số đó KHÔNG tồn tại.
+- `from math_type import ...` hoặc `import` ở đầu tệp.
+- Chép cứng vài bộ số mà không tự kiểm: mỗi bộ số phải tính lại ra đúng đáp số (ví dụ tỉ lệ 2 : 3 : 4 KHÔNG cho góc 120°).
+- Viết đáp số thập phân thay cho giá trị đúng (sai: cos C = -0.5; đúng: $-\dfrac{1}{2}$), dùng "\\n" trong chuỗi.
+
+Trước khi viết, tìm trong danh_muc_ID dòng đơn vị kiến thức và các dạng gần nhất, ghi rõ vào phiếu. Không tìm thấy tệp danh mục thì nói ngay cho giáo viên biết (Gem thiếu tài liệu), không tự bịa ID.
+
 TRẢ LỜI ĐÚNG KHUÔN SAU (không thêm phần khác ngoài một dòng nhận xét ngắn nếu cần):
 
 PHIẾU GỬI DUYỆT
