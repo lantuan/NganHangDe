@@ -43,6 +43,12 @@ def lay_vai_tro(user_id: str) -> str:
             .execute()
         )
     except Exception as e:
+        # Tai khoan KHONG CO dong profiles (dang ki truoc khi co trigger handle_new_user - docs/12_DATABASE.md):
+        # .single() bao PGRST116. Truoc day roi vao 'chua_cau_hinh' -> bi hien trang Chon lop, chon xong ghi
+        # vao 0 dong -> /chat lai day ve /chon-lop mai, bam "Toi la giao vien" cung khong ghi duoc gi
+        # (co Lan 28/10/2026, tai khoan nganhangdetoanchv). Nay: tao dong profiles roi hoi chon vai tro.
+        if _khong_co_dong(e) and tao_ho_so_thieu(user_id):
+            return VAI_TRO_CHUA_CHON
         # Thuong la: column profiles.vai_tro does not exist -> chua chay SQL.
         print("LOI DOC vai_tro (da chay SQL them cot chua?):", e)
         return VAI_TRO_CHUA_CAU_HINH
@@ -52,6 +58,29 @@ def lay_vai_tro(user_id: str) -> str:
     vt = ket_qua.data.get("vai_tro") or VAI_TRO_MAC_DINH
     _VAI_TRO.dat(user_id, vt)              # nhớ 5 phút (chỉ khi đọc được); đổi vai trò thì dat_vai_tro xoá ngay
     return vt
+
+
+def _khong_co_dong(e) -> bool:
+    """Loi .single() khi KHONG co dong nao (PostgREST PGRST116 / '0 rows')."""
+    t = "%s %s" % (getattr(e, "code", "") or "", e)
+    return "PGRST116" in t or "0 rows" in t
+
+
+def tao_ho_so_thieu(user_id: str) -> bool:
+    """Tao dong profiles cho tai khoan con thieu (giong trigger handle_new_user: id, email, ho_ten; vai_tro de mac
+    dinh cot = 'chua_chon' -> nguoi dung duoc hoi lai la hoc sinh hay giao vien). Khong ghi de dong da co."""
+    try:
+        u = supabase.auth.admin.get_user_by_id(user_id).user
+        md = getattr(u, "user_metadata", None) or {}
+        email = getattr(u, "email", None)
+        ten = md.get("fullname") or md.get("full_name") or md.get("name") or email
+        supabase.table("profiles").upsert({"id": user_id, "email": email, "ho_ten": ten},
+                                          on_conflict="id", ignore_duplicates=True).execute()
+        print("DA TAO DONG profiles CON THIEU cho", email)
+        return True
+    except Exception as e:
+        print("LOI TAO DONG profiles CON THIEU (%s):" % user_id, e)
+        return False
 
 
 def la_giao_vien(user_id: str) -> bool:

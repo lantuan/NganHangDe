@@ -10723,3 +10723,7 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 
 - Sửa cùng ngày (cô Lan): người duyệt mặc định là tài khoản liên hệ của web `nganhangdetoanchv@gmail.com` (không phải tài khoản cá nhân). Tài khoản này phải đăng kí vai trò giáo viên mới vào được /gv/duyet-dang. Đổi bằng `EMAIL_DUYET_DANG`.
 
+## 2026-10-28 - Tài khoản thiếu dòng profiles không còn kẹt ở trang Chọn lớp
+- Cô Lan: "cứ vào bằng tài khoản nganhangdetoanchv là bị thế này, chọn lớp không được, không làm gì được hết; các tài khoản khác bình thường". Nguyên nhân: tài khoản đăng kí trước khi có trigger `handle_new_user` không có dòng `profiles` (docs/12_DATABASE.md). `lay_vai_tro` gặp lỗi PGRST116 (0 dòng) -> trả 'chua_cau_hinh' -> hiện trang Chọn lớp; chọn lớp / "Tôi là giáo viên" đều ghi vào 0 dòng -> /chat lại đẩy về /chon-lop, lặp mãi.
+- `profile_service.lay_vai_tro`: gặp đúng lỗi 0 dòng thì `tao_ho_so_thieu` (đọc email, tên từ auth bằng khoá service role, `upsert(..., on_conflict="id", ignore_duplicates=True)` - không ghi đè dòng đã có), trả 'chua_chon' -> người dùng được hỏi Học sinh / Giáo viên như tài khoản mới. Lỗi khác giữ nguyên 'chua_cau_hinh'. Test `tests/test_ho_so_thieu_28_10.py`.
+
