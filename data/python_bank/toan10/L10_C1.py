@@ -3894,6 +3894,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM A
+        # a) NB - nhận biết tính đúng sai của mệnh đề đơn giản về số tự nhiên (không âm, dương...)
         # =====================================================
 
         list_A = [
@@ -3959,6 +3960,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM B
+        # b) TH - một bước lập luận: tích hai số tự nhiên liên tiếp luôn chẵn
         # =====================================================
 
         if huong_tich == 1:
@@ -4231,6 +4233,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM C
+        # c) VD - xét mệnh đề có lượng từ tồn tại / với mọi: phải tìm ví dụ hoặc phản ví dụ
         # =====================================================
 
         # Sửa 01/10/2026 (Claude, cô Lan duyệt lại): bản cũ có hai phát biểu sai toán học
@@ -4260,6 +4263,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM D
+        # d) VDC - chia hết của n^3 - n: phải tự phân tích thành tích ba số liên tiếp, xét cả lượng từ
         # =====================================================
 
         list_D = [
@@ -6962,7 +6966,7 @@ def L10_C1_TF_B_01(socau, socot):
         giai_thich_sai_so_nghiem_D = f"Sai. Vì ngoài các giá trị nguyên không âm thỏa mãn, bài toán luôn có vô số giá trị nguyên âm $m < 0$ khiến cho tập $C = \\varnothing $, mà tập rỗng là tập con của mọi tập hợp nên tổng số giá trị nguyên của $m$ phải là vô số."
 
         ds_abcd = (
-            # ==================== Ý A: KHẢO SÁT VỀ MỆNH ĐỀ TOÁN HỌC ====================
+            # a) NB - nhận ra phát biểu nào là mệnh đề toán học
             [
                 (f"""{{\\True Phát biểu ``Tập $A$ có {hieu_cuoi_dau_A_sai} phần tử'' là một mệnh đề toán học}}""",
                  f"""Đúng. Khẳng định trên mang tính chất đúng sai rõ ràng (cụ thể đây là một mệnh đề toán học mang giá trị sai vì tập số thực $A$ có vô số phần tử)."""),
@@ -6995,7 +6999,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""Sai. Do nó là một khẳng định toán học mang tính đúng sai rõ ràng.""")
             ],
 
-            # ==================== Ý B: CÁC PHÉP TOÁN TOÁN HỌC THUẦN TÚY ====================
+            # b) TH - một phép toán giao / hiệu trên hai tập đã cho
             [
                 (f"""{{\\True $A \\cap B = \\{{ {b2} \\}}$}}""",
                  f"""Đúng. Phần tử ${b1} < {left_A}$ nên ${b1} \\notin A$. Phần tử ${b2}$ nằm trong khoảng $({left_A}; {right_A}]$ nên ${b2} \\in A$. Do đó giao của hai tập hợp chỉ gồm phần tử ${b2}$."""),
@@ -7031,7 +7035,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""Sai. Do tập hợp $A$ chứa phần tử ${b2} \\in B$ nên khi lấy hiệu $A \\setminus B$, tập hợp $A$ bị mất đi phần tử đó.""")
             ],
 
-            # ==================== Ý C: KHẢO SÁT CHỈ DỰA VÀO SỐ LƯỢNG PHẦN TỬ ====================
+            # c) VD - giải phương trình theo tham số m để đếm phần tử của tập C
             [
                 (f"""{{\\True Với $m = {m_duong}$ tập hợp $C$ có đúng $1$ phần tử}}""",
                  f"""Đúng. Với $m = {m_duong}$, phương trình có hai nghiệm, trong đó có một nghiệm âm (loại) và một nghiệm dương (thỏa mãn). Do điều kiện $x \\in \\mathbb{{N}}$ nên tập hợp $C$ có đúng $1$ phần tử."""),
@@ -7052,7 +7056,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""Sai. Khi $m = 0$, phương trình vẫn cho một nghiệm tự nhiên thỏa mãn điều kiện, do đó tập $C$ không phải là tập rỗng.""")
             ],
 
-            # ==================== Ý D: XÈT TẬP CON ĐA PHÉP TOÁN (MỚI) ====================
+            # d) VDC - nhiều bước: phép toán trên A, B rồi điều kiện tập con theo tham số m
             [
                 # --- Các phương án ĐÚNG (Có dấu \True) ---
                 (f"""{{\\True Có vô số giá trị nguyên của tham số $m$ để $C \\subset ({chuoi_phep_toan})$}}""",

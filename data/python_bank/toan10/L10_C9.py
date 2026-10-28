@@ -566,541 +566,399 @@ def L10_C9_B27_TH154_SA_A_01(socau):
 # ##############################################
 
 
+# =====================================================================
+# CÂU ĐÚNG/SAI CHƯƠNG 9 - VIẾT LẠI 28/10/2026 (cô Lan: "cần, bổ sung luôn cho tôi")
+# ---------------------------------------------------------------------
+# Bản cũ (cô nhập 28/09/2026 từ LopXChuong9.py) giữ nguyên bối cảnh nhưng: bốn ý chưa xếp bậc NB -> TH -> VD -> VDC,
+# mỗi ý chỉ 1 phát biểu đúng + 1 sai (có ý chỉ có phát biểu đúng), vài lời giải chỉ ghi "Đúng." / "Sai.", và một
+# lỗi mẫu số trong lời giải (bài lọ dung dịch). Bản cũ lưu ở data/luu_tru/L10_C9_luu_tru.py.
+# Bản mới: cùng ID, cùng bối cảnh; mỗi ý >= 3 phát biểu đúng, >= 3 phát biểu sai (sai theo các lỗi khác nhau), lời
+# giải đủ; xác suất tính bằng phân số chính xác (Fraction) theo định nghĩa cổ điển (Bài 26, 27 SGK KNTT 10).
+# =====================================================================
+from fractions import Fraction as _Fr9
+
+
+def _tf9_ps(x):
+    """Phân số tối giản dạng LaTeX (không có $)."""
+    x = _Fr9(x)
+    if x.denominator == 1:
+        return "%d" % x.numerator
+    return r"\dfrac{%d}{%d}" % (x.numerator, x.denominator)
+
+
+def _tf9_C(n, k):
+    return math.comb(n, k) if 0 <= k <= n else 0
+
+
+class _Tf9Lai(Exception):
+    """Bộ số này không tạo đủ phát biểu sai khác phát biểu đúng - chọn bộ số khác."""
+
+
+def _tf9_y(dung, sai):
+    """Một ý: dung/sai là danh sách (phát biểu, lời giải). Cần >= 3 mỗi loại, phát biểu không trùng nhau."""
+    da, d2, s2 = set(), [], []
+    for ds, ra in ((dung, d2), (sai, s2)):
+        for p, g in ds:
+            if p not in da:
+                da.add(p)
+                ra.append((p, g))
+    if len(d2) < 3 or len(s2) < 3:
+        raise _Tf9Lai()
+    return ([(r"{\True %s}" % p, "Đúng. " + g) for p, g in d2] +
+            [(r"{%s}" % p, "Sai. " + g) for p, g in s2])
+
+
+def _tf9_xs(mo_ta, dung, sai_ds, ly):
+    """Phát biểu "Xác suất để <mo_ta> bằng X": một phát biểu đúng + các phát biểu sai có giá trị KHÁC giá trị đúng."""
+    mau = r"Xác suất để %s bằng $%s$"
+    d = [(mau % (mo_ta, _tf9_ps(dung)), ly)]
+    s = [(mau % (mo_ta, _tf9_ps(x)), ly) for x in dict.fromkeys(_Fr9(v) for v in sai_ds)
+         if x != _Fr9(dung) and 0 <= x <= 1]
+    return d, s
+
+
+def _tf9_gop(*cap):
+    d, s = [], []
+    for a, b in cap:
+        d += a
+        s += b
+    return d, s
+
+
 # ---- Gieo dong thoi hai con xuc xac ----
 # (tên cũ của cô: K10_9_DS_1_VD)
-def L10_C9_TF_A_01(socau,socot):
-	gt=[]
-	dem=len(gt)
-	while dem<socau:
-		tong = np.randint(6,10)
-		chan_le = np.choice(['chẵn', 'lẻ'])
-		giong_khac = np.choice(['giống', 'khác'])
-
-		v = [tong, chan_le, giong_khac]
-		if v not in gt:
-			gt.append(v)
-			dem+=1
-
-	cauTF = ''
-	for v in gt:
-		tong, chan_le, giong_khac = v[0], v[1], v[2]
-
-		def probability_of_sum(target_sum):
-			# Khởi tạo số lần xuất hiện của mỗi kết quả từ việc tung hai con xúc xắc
-			dice_counts = {i: 0 for i in range(2, 13)}
-
-			# Tính số lần xuất hiện của mỗi tổng có thể có
-			for dice1 in range(1, 7):
-				for dice2 in range(1, 7):
-					dice_counts[dice1 + dice2] += 1
-
-			# Tính xác suất của tổng có thể có
-			total_outcomes = 6 * 6  # Tổng số kết quả có thể từ hai con xúc xắc
-			probability = round(dice_counts[target_sum] / total_outcomes, 2)
-			probability_str = str(probability).replace('.', ',')
-
-			return probability_str
-
-		def probability_sum_less_than(k):
-			# Khởi tạo biến đếm cho số cặp có tổng nhỏ hơn 6
-			count = 0
-
-			# Đếm số cặp có tổng nhỏ hơn k
-			for dice1 in range(1, 7):
-				for dice2 in range(1, 7):
-					if dice1 + dice2 < k:
-						count += 1
-
-			# Tính xác suất
-			total_outcomes = 6 * 6  # Tổng số kết quả có thể từ hai con xúc xắc
-			probability = round(count / total_outcomes, 2)
-			probability_str = str(probability).replace('.', ',')
-
-			return probability_str
-
-		debai = f"""Gieo đồng thời hai con xúc xắc cân đối."""
-
-		if chan_le == 'le':
-			ds_chan_le = (
-				   [
-					   (f'''{{\\True Xác suất để tích số chấm trên hai con xúc xắc là một số lẻ là $\\dfrac{{1}}{{4}}$ }}''',
-						f'''Đúng. Để tích là một số lẻ thì số chấm trên hai con xúc xắc đều ra số lẻ. Nên số trường hợp là $3 \\times 3 = 9$. Nên xác suất bằng $\\dfrac{{9}}{{36}} = \\dfrac{{1}}{{4}}.'''),
-					   (f'''{{Xác suất để tích số chấm trên hai con xúc xắc là một số lẻ là $\\dfrac{{1}}{{2}}$ }}''',
-					   f'''Sai. Để tích là một số lẻ thì số chấm trên hai con xúc xắc đều ra số lẻ. Nên số trường hợp là $3 \\times 3 = 9$. Nên xác suất bằng $\\dfrac{{9}}{{36}} = \\dfrac{{1}}{{4}}.'''),
-				   ])
-		else:
-			ds_chan_le = (
-				[
-					(f'''{{\\True Xác suất để tích số chấm trên hai con xúc xắc là một số chẵn là $\\dfrac{{3}}{{4}}$ }}''',
-					f'''Đúng. Để tích là một số lẻ thì số chấm trên hai con xúc xắc đều ra số lẻ, ta được số trường hợp là $3 \\times 3 = 9$. Nên xác suất để có tất cả là số lẻ bằng $\\dfrac{{9}}{{36}} = \\dfrac{{1}}{{4}}$. Do đó tích số chẵn là $\\dfrac{{3}}{{4}}$.'''),
-					(f'''{{Xác suất để tích số chấm trên hai con xúc xắc là một số chẵn là $\\dfrac{{1}}{{2}}$ }}''',
-					 f'''Sai. Để tích là một số lẻ thì số chấm trên hai con xúc xắc đều ra số lẻ, ta được số trường hợp là $3 \\times 3 = 9$. Nên xác suất để có tất cả là số lẻ bằng $\\dfrac{{9}}{{36}} = \\dfrac{{1}}{{4}}$. Do đó tích số chẵn là $\\dfrac{{3}}{{4}}$.'''),
-				])
-
-		if giong_khac == 'giống':
-			ds_giong_khac = ([
-					   (f'''{{\\True Xác suất để được cả hai con xúc xắc xuất hiện số chấm giống nhau là $\\dfrac{{1}}{{6}}$ }}''',
-						f'''Đúng.'''),
-					   (f'''{{Xác suất để được cả hai con xúc xắc xuất hiện số chấm giống nhau là $\\dfrac{{5}}{{6}}$ }}''',
-					   f'''Sai.'''),
-				   ])
-		else:
-			ds_giong_khac = ([
-					   (f'''{{\\True Xác suất để được cả hai con xúc xắc xuất hiện số chấm khác nhau là $\\dfrac{{5}}{{6}}$ }}''',
-						f'''Đúng.'''),
-					   (f'''{{Xác suất để được cả hai con xúc xắc xuất hiện số chấm khác nhau là $\\dfrac{{1}}{{6}}$ }}''',
-					   f'''Sai.'''),
-				   ])
-		ds1 = ([
-				  (f'''{{\\True Xác suất để tổng số chấm trên hai con xúc sắc bằng ${tong}$ là ${probability_of_sum(tong)}$}}''',
-					f'''Đúng. Xác suất là ${probability_of_sum(tong)}$.'''),
-				   (f'''{{Xác suất để tổng số chấm trên hai con xúc sắc bằng ${tong}$ là ${probability_of_sum(tong+1)}$}}''',
-				   f'''Sai. xắc xuất là ${probability_of_sum(tong)}$.'''),
-			   ])
-		ds2 = ([
-				   (
-				   f'''{{\\True Xác suất để tổng số chấm trên hai con xúc sắc nhỏ hơn ${tong}$ là ${probability_sum_less_than(tong)}$}}''',
-				   f'''Đúng. Xác suất là ${probability_sum_less_than(tong)}$.'''),
-				   (
-				   f'''{{Xác suất để tổng số chấm trên hai con xúc sắc nhỏ hơn ${tong}$ là ${probability_sum_less_than(tong + 1)}$}}''',
-				   f'''Sai. xắc xuất là ${probability_sum_less_than(tong)}$.'''),
-			   ])
-
-		ds_abcd = ds_chan_le , ds_giong_khac , ds1, ds2
-
-		# Câu này không có hình vẽ nên chỉ cần gọi 1 hàm dưới đây để sinh code tex
-		cauTF+=TF_baitoan_du(debai,ds_abcd,0,0,socot)#Đồ thị phần nào không có thì nhập 0, nếu có thì nhập tên đồ thị vào đúng vị trí của nó
-	return cauTF
-# ###==== Cách dùng: socau=4 và socot=0
-# print(K10_9_DS_1_VD(16,0)) # câu này đang mới tối đa đưuoc 16 đề chọn.
-# ##############################################
+def L10_C9_TF_A_01(socau, socot=1):
+    """Đúng/Sai - gieo đồng thời hai con xúc xắc cân đối."""
+    cau, da_co, lan = "", set(), 0
+    while len(da_co) < socau:
+        lan += 1
+        if lan > 500:
+            raise RuntimeError("L10_C9_TF_A_01: không sinh đủ %d câu khác nhau" % socau)
+        k = random.choice([5, 6, 8, 9, 10])          # tổng cần xét
+        m = random.randint(1, 6)                     # mặt chấm cần xét
+        t = random.choice([4, 5, 6, 8, 9])           # tổng "nhỏ hơn t"
+        if (k, m, t) in da_co:
+            continue
+        dem = {s: 6 - abs(s - 7) for s in range(2, 13)}
+        try:
+            debai = r"Gieo đồng thời hai con xúc xắc cân đối và đồng chất. Xét tính đúng sai của các khẳng định sau:"
+            # a) NB - nhận biết khái niệm: biến cố không thể, chắc chắn, biến cố đối, tính chất của xác suất
+            y_a = _tf9_y(
+                [(r"Biến cố ``Tổng số chấm bằng $13$'' là biến cố không thể",
+                  r"Tổng số chấm lớn nhất là $6 + 6 = 12$ nên biến cố không bao giờ xảy ra."),
+                 (r"Biến cố ``Tổng số chấm không vượt quá $12$'' là biến cố chắc chắn",
+                  r"Tổng số chấm luôn thuộc $\{2; 3; \ldots; 12\}$ nên biến cố luôn xảy ra."),
+                 (r"Biến cố ``Tổng số chấm là số chẵn'' và biến cố ``Tổng số chấm là số lẻ'' là hai biến cố đối nhau",
+                  r"Mỗi kết quả có tổng hoặc chẵn hoặc lẻ, không thể cả hai."),
+                 (r"Với mọi biến cố $A$ của phép thử thì $0 \le P(A) \le 1$",
+                  r"Đây là tính chất cơ bản của xác suất.")],
+                [(r"Biến cố ``Tổng số chấm bằng $13$'' là biến cố chắc chắn",
+                  r"Tổng số chấm lớn nhất là $12$ nên đây là biến cố không thể."),
+                 (r"Biến cố ``Tổng số chấm lớn hơn $1$'' là biến cố không thể",
+                  r"Tổng số chấm nhỏ nhất là $2 > 1$ nên đây là biến cố chắc chắn."),
+                 (r"Biến cố ``Tổng số chấm bằng $7$'' và biến cố ``Tổng số chấm bằng $8$'' là hai biến cố đối nhau",
+                  r"Hai biến cố này không cùng xảy ra nhưng có kết quả (ví dụ tổng bằng $2$) không thuộc biến cố "
+                  r"nào, nên chúng không phải hai biến cố đối nhau."),
+                 (r"Nếu $\overline{A}$ là biến cố đối của $A$ thì $P(\overline{A}) = P(A) - 1$",
+                  r"Đúng phải là $P(\overline{A}) = 1 - P(A)$.")])
+            # b) TH - một bước: đếm không gian mẫu, đếm kết quả thuận lợi đơn giản
+            ly_om = r"Mỗi con có $6$ kết quả nên $n(\Omega) = 6\cdot 6 = 36$."
+            y_b = _tf9_y(
+                [(r"Không gian mẫu có $36$ phần tử", ly_om),
+                 (r"Biến cố ``Hai mặt xuất hiện có số chấm bằng nhau'' có $6$ kết quả thuận lợi",
+                  r"Các kết quả là $(1;1), (2;2), \ldots, (6;6)$."),
+                 (r"Xác suất để con xúc xắc thứ nhất xuất hiện mặt $%d$ chấm bằng $\dfrac{1}{6}$" % m,
+                  r"Có $6$ kết quả $(%d; j)$ với $j = 1, \ldots, 6$ nên xác suất bằng $\dfrac{6}{36} = \dfrac{1}{6}$." % m)],
+                [(r"Không gian mẫu có $12$ phần tử", ly_om),
+                 (r"Không gian mẫu có $21$ phần tử", ly_om + r" Hai con xúc xắc là khác nhau nên $(1;2)$ và $(2;1)$ là hai kết quả khác nhau."),
+                 (r"Biến cố ``Hai mặt xuất hiện có số chấm bằng nhau'' có $12$ kết quả thuận lợi",
+                  r"Chỉ có $6$ kết quả $(1;1), (2;2), \ldots, (6;6)$."),
+                 (r"Xác suất để con xúc xắc thứ nhất xuất hiện mặt $%d$ chấm bằng $\dfrac{1}{36}$" % m,
+                  r"Có $6$ kết quả $(%d; j)$ nên xác suất bằng $\dfrac{6}{36} = \dfrac{1}{6}$." % m)])
+            # c) VD - đếm kết quả thuận lợi của biến cố về tổng, tích rồi tính xác suất
+            ly_k = (r"Tổng bằng $%d$ có $%d$ kết quả thuận lợi nên xác suất bằng $\dfrac{%d}{36} = %s$."
+                    % (k, dem[k], dem[k], _tf9_ps(_Fr9(dem[k], 36))))
+            ly_le = (r"Tích lẻ khi cả hai mặt đều lẻ: $3\cdot 3 = 9$ kết quả, xác suất $\dfrac{9}{36} = \dfrac{1}{4}$; "
+                     r"tích chẵn có xác suất $1 - \dfrac{1}{4} = \dfrac{3}{4}$.")
+            y_c = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"tổng số chấm bằng $%d$" % k, _Fr9(dem[k], 36),
+                        [_Fr9(dem.get(k + 1, 0), 36), _Fr9(dem[k], 21), _Fr9(1, 11)], ly_k),
+                _tf9_xs(r"tích số chấm là một số lẻ", _Fr9(1, 4), [_Fr9(1, 2), _Fr9(3, 4)], ly_le),
+                _tf9_xs(r"tích số chấm là một số chẵn", _Fr9(3, 4), [_Fr9(1, 2), _Fr9(1, 4)], ly_le)))
+            # d) VDC - nhiều bước: cộng nhiều trường hợp, dùng biến cố đối
+            nho = sum(dem[s] for s in range(2, t))
+            ly_t = (r"Tổng nhỏ hơn $%d$ gồm các tổng $2, \ldots, %d$ với $%s = %d$ kết quả, xác suất $%s$."
+                    % (t, t - 1, " + ".join(str(dem[s]) for s in range(2, t)), nho, _tf9_ps(_Fr9(nho, 36))))
+            ly_m = (r"Biến cố đối ``không con nào xuất hiện mặt $%d$ chấm'' có $5\cdot 5 = 25$ kết quả, nên xác suất "
+                    r"cần tìm bằng $1 - \dfrac{25}{36} = \dfrac{11}{36}$." % m)
+            ly_3 = (r"Tổng chia hết cho $3$ là $3, 6, 9, 12$ với $2 + 5 + 4 + 1 = 12$ kết quả, xác suất "
+                    r"$\dfrac{12}{36} = \dfrac{1}{3}$.")
+            y_d = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"tổng số chấm nhỏ hơn $%d$" % t, _Fr9(nho, 36),
+                        [_Fr9(nho + dem[t], 36), _Fr9(t - 2, 36)], ly_t),
+                _tf9_xs(r"có ít nhất một con xúc xắc xuất hiện mặt $%d$ chấm" % m, _Fr9(11, 36),
+                        [_Fr9(1, 3), _Fr9(1, 6), _Fr9(25, 36)], ly_m),
+                _tf9_xs(r"tổng số chấm chia hết cho $3$", _Fr9(1, 3), [_Fr9(1, 4), _Fr9(11, 36)], ly_3)))
+        except _Tf9Lai:
+            continue
+        da_co.add((k, m, t))
+        cau += TF_baitoan_du(debai, [y_a, y_b, y_c, y_d], 0, 0, socot)
+    return cau
 
 
-# ---- Day nhi phan 10 bit ----
+# ---- Day nhi phan n bit ----
 # (tên cũ của cô: K10_9_DS_2_VD)
-def L10_C9_TF_B_01(socau,socot):
-	gt=[]
-	dem=len(gt)
-	while dem<socau:
-		so_chon_1 = np.randint(300,500)
-		so_chon_2 = np.randint(3,8)
-		so_chon_2_chu = num2words(so_chon_2, lang='vi')
-		khong_mot = np.choice([0, 1])
-		saiso_2 = np.choice([-2,-1,1,2])
-		so_chon_3 = np.randint(2,7)
-		while so_chon_3 == so_chon_2:
-			so_chon_3 = np.randint(2, 7)
-		so_chon_3_chu = num2words(so_chon_3, lang='vi')
+def L10_C9_TF_B_01(socau, socot=1):
+    """Đúng/Sai - chọn ngẫu nhiên một dãy nhị phân n bit."""
+    cau, da_co, lan = "", set(), 0
+    while len(da_co) < socau:
+        lan += 1
+        if lan > 500:
+            raise RuntimeError("L10_C9_TF_B_01: không sinh đủ %d câu khác nhau" % socau)
+        n = random.choice([6, 8, 10])
+        k = random.randint(2, n - 2)                 # "đúng k chữ số 1"
+        j = random.randint(2, n - 2)                 # "j chữ số 1 đứng liền nhau"
+        if (n, k, j) in da_co:
+            continue
+        N = 2 ** n
+        try:
+            debai = (r"Dãy $\left(x_1, x_2, \ldots, x_{%d}\right)$, trong đó mỗi $x_i$ $(i = 1, 2, \ldots, %d)$ chỉ nhận "
+                     r"giá trị $0$ hoặc $1$, được gọi là dãy nhị phân $%d$ bit. Chọn ngẫu nhiên một dãy nhị phân $%d$ bit. "
+                     r"Xét tính đúng sai của các khẳng định sau:" % (n, n, n, n))
+            # a) NB - nhận biết biến cố không thể, chắc chắn, biến cố đối
+            y_a = _tf9_y(
+                [(r"Biến cố ``Dãy có đúng $%d$ chữ số $1$'' là biến cố không thể" % (n + 1),
+                  r"Dãy chỉ có $%d$ chữ số nên không thể có $%d$ chữ số $1$." % (n, n + 1)),
+                 (r"Biến cố ``Dãy có không quá $%d$ chữ số $1$'' là biến cố chắc chắn" % n,
+                  r"Dãy có $%d$ chữ số nên số chữ số $1$ luôn không quá $%d$." % (n, n)),
+                 (r"Biến cố ``Dãy có ít nhất một chữ số $0$'' là biến cố đối của biến cố ``Dãy gồm toàn chữ số $1$''",
+                  r"Một dãy hoặc gồm toàn chữ số $1$, hoặc có ít nhất một chữ số $0$, không thể cả hai.")],
+                [(r"Biến cố ``Dãy có đúng $%d$ chữ số $1$'' là biến cố chắc chắn" % (n + 1),
+                  r"Dãy chỉ có $%d$ chữ số nên đây là biến cố không thể." % n),
+                 (r"Biến cố ``Dãy có không quá $%d$ chữ số $1$'' là biến cố không thể" % n,
+                  r"Biến cố này luôn xảy ra, là biến cố chắc chắn."),
+                 (r"Biến cố ``Dãy có ít nhất một chữ số $0$'' là biến cố đối của biến cố ``Dãy có ít nhất một chữ số $1$''",
+                  r"Hai biến cố này cùng xảy ra với dãy $1\,0\,0\ldots 0$; biến cố đối của ``có ít nhất một chữ số $0$'' "
+                  r"là ``gồm toàn chữ số $1$''.")])
+            # b) TH - một bước: quy tắc nhân đếm số dãy
+            ly_N = r"Mỗi vị trí có $2$ cách chọn nên có $2^{%d} = %d$ dãy." % (n, N)
+            y_b = _tf9_y(
+                [(r"Có $%d$ dãy nhị phân $%d$ bit" % (N, n), ly_N),
+                 (r"Có đúng $1$ dãy gồm toàn chữ số $0$", r"Đó là dãy $0\,0\ldots 0$."),
+                 (r"Có $%d$ dãy có $x_1 = 1$" % (N // 2), r"$x_1 = 1$, mỗi vị trí còn lại có $2$ cách nên có $2^{%d} = %d$ dãy."
+                  % (n - 1, N // 2))],
+                [(r"Có $%d$ dãy nhị phân $%d$ bit" % (2 * n, n), ly_N),
+                 (r"Có $%d$ dãy nhị phân $%d$ bit" % (n * n, n), ly_N),
+                 (r"Có $%d$ dãy có $x_1 = 1$" % (n - 1),
+                  r"$x_1 = 1$, mỗi vị trí còn lại có $2$ cách nên có $2^{%d} = %d$ dãy." % (n - 1, N // 2))])
+            # c) VD - xác suất theo định nghĩa cổ điển, đếm bằng tổ hợp
+            ck = _tf9_C(n, k)
+            ly_k = (r"Chọn $%d$ vị trí trong $%d$ vị trí để đặt chữ số $1$: $C_{%d}^{%d} = %d$ dãy, xác suất "
+                    r"$\dfrac{%d}{%d} = %s$." % (k, n, n, k, ck, ck, N, _tf9_ps(_Fr9(ck, N))))
+            ly_dx = (r"Chọn tuỳ ý $x_1, \ldots, x_{%d}$, các chữ số còn lại xác định theo đối xứng: $2^{%d}$ dãy, xác suất "
+                     r"$%s$." % (n // 2, n // 2, _tf9_ps(_Fr9(2 ** (n // 2), N))))
+            ly_dc = r"Chọn tuỳ ý $x_1, \ldots, x_{%d}$ rồi lấy $x_{%d} = x_1$: $2^{%d}$ dãy, xác suất $\dfrac{1}{2}$." % (n - 1, n, n - 1)
+            y_c = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"dãy có đúng $%d$ chữ số $1$" % k, _Fr9(ck, N),
+                        [_Fr9(math.perm(n, k), N), _Fr9(_tf9_C(n, k - 1), N), _Fr9(k, n)], ly_k),
+                _tf9_xs(r"đọc dãy từ trái sang phải hay từ phải sang trái đều như nhau", _Fr9(2 ** (n // 2), N),
+                        [_Fr9(1, N), _Fr9(1, 2), _Fr9(n // 2, N)], ly_dx),
+                _tf9_xs(r"$x_1 = x_{%d}$" % n, _Fr9(1, 2), [_Fr9(1, 4), _Fr9(2, N)], ly_dc)))
+            # d) VDC - đếm có điều kiện (liền nhau, không kề nhau), biến cố đối
+            ly_j = (r"$%d$ chữ số $1$ đứng liền nhau tạo một khối, khối đó bắt đầu ở một trong $%d - %d + 1 = %d$ vị trí, "
+                    r"xác suất $%s$." % (j, n, j, n - j + 1, _tf9_ps(_Fr9(n - j + 1, N))))
+            kk = _tf9_C(n - 1, 2)
+            ly_kk = (r"Có $C_{%d}^{2} = %d$ cách chọn hai vị trí cho hai chữ số $1$, trong đó $%d$ cách hai vị trí kề nhau, "
+                     r"còn $%d$ cách, xác suất $%s$." % (n, _tf9_C(n, 2), n - 1, kk, _tf9_ps(_Fr9(kk, N))))
+            ly_1 = r"Biến cố đối là ``dãy gồm toàn chữ số $0$'' (một dãy), nên xác suất bằng $1 - \dfrac{1}{%d} = %s$." % (
+                N, _tf9_ps(_Fr9(N - 1, N)))
+            y_d = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"dãy có đúng $%d$ chữ số $1$ và các chữ số $1$ đứng liền nhau" % j, _Fr9(n - j + 1, N),
+                        [_Fr9(n - j, N), _Fr9(_tf9_C(n, j), N), _Fr9(n, N)], ly_j),
+                _tf9_xs(r"dãy có đúng hai chữ số $1$ và hai chữ số $1$ này không đứng cạnh nhau", _Fr9(kk, N),
+                        [_Fr9(_tf9_C(n, 2), N), _Fr9(n - 1, N)], ly_kk),
+                _tf9_xs(r"dãy có ít nhất một chữ số $1$", _Fr9(N - 1, N), [_Fr9(1, N), _Fr9(1, 2)], ly_1)))
+        except _Tf9Lai:
+            continue
+        da_co.add((n, k, j))
+        cau += TF_baitoan_du(debai, [y_a, y_b, y_c, y_d], 0, 0, socot)
+    return cau
 
-		v = [so_chon_1, so_chon_2, so_chon_2_chu, khong_mot, saiso_2, so_chon_3, so_chon_3_chu]
-		if v not in gt:
-			gt.append(v)
-			dem+=1
 
-	cauTF = ''
-	for v in gt:
-		so_chon_1, so_chon_2, so_chon_2_chu, khong_mot, saiso_2, so_chon_3, so_chon_3_chu = v[0], v[1], v[2], v[3], v[4], v[5], v[6]
+def _tf9_banh_xe(socau, socot, k_lan):
+    """Quay bánh xe k_lan lần (mỗi lần mũi tên dừng ngẫu nhiên ở một trong n vị trí như nhau, các lần độc lập)."""
+    cau, da_co, lan = "", set(), 0
+    CHU = {2: "hai", 3: "ba"}
+    while len(da_co) < socau:
+        lan += 1
+        if lan > 500:
+            raise RuntimeError("bánh xe: không sinh đủ %d câu khác nhau" % socau)
+        n = random.choice([6, 8, 10, 12])
+        m = random.randint(2, n - 2)
+        if (n, m) in da_co:
+            continue
+        k, t = k_lan, n - m
+        Om = n ** k
+        try:
+            debai = (r"Mũi tên của bánh xe trong một trò chơi có thể dừng lại ở một trong $%d$ vị trí với khả năng như "
+                     r"nhau; trong đó $%d$ vị trí được cộng điểm, $%d$ vị trí bị trừ điểm. Một người chơi quay bánh xe "
+                     r"%s lần. Xét tính đúng sai của các khẳng định sau:" % (n, m, t, CHU[k]))
+            # a) NB - nhận biết phép thử ngẫu nhiên, biến cố đối, tính chất xác suất
+            y_a = _tf9_y(
+                [(r"Việc quay bánh xe %s lần là một phép thử ngẫu nhiên" % CHU[k],
+                  r"Không biết trước mũi tên sẽ dừng ở đâu."),
+                 (r"Biến cố ``Cả %s lần đều được cộng điểm'' và biến cố ``Có ít nhất một lần bị trừ điểm'' là hai biến cố "
+                  r"đối nhau" % CHU[k], r"Mỗi kết quả thuộc đúng một trong hai biến cố đó."),
+                 (r"Nếu $A$ là một biến cố thì $P(\overline{A}) = 1 - P(A)$", r"Đây là công thức xác suất của biến cố đối.")],
+                [(r"Việc quay bánh xe %s lần không phải là phép thử ngẫu nhiên vì đã biết bánh xe có $%d$ vị trí"
+                  % (CHU[k], n), r"Biết các kết quả có thể nhưng không biết trước kết quả nào xảy ra."),
+                 (r"Biến cố ``Cả %s lần đều được cộng điểm'' và biến cố ``Cả %s lần đều bị trừ điểm'' là hai biến cố đối "
+                  r"nhau" % (CHU[k], CHU[k]), r"Còn các kết quả vừa có lần cộng vừa có lần trừ không thuộc biến cố nào."),
+                 (r"Nếu $A$ là một biến cố thì $P(\overline{A}) = P(A) - 1$", r"Đúng phải là $P(\overline{A}) = 1 - P(A)$.")])
+            # b) TH - một bước: quy tắc nhân đếm không gian mẫu và kết quả thuận lợi
+            ly_om = r"Mỗi lần quay có $%d$ kết quả nên $n(\Omega) = %d^{%d} = %d$." % (n, n, k, Om)
+            ly_c = r"Mỗi lần quay có $%d$ vị trí cộng điểm nên có $%d^{%d} = %d$ kết quả." % (m, m, k, m ** k)
+            y_b = _tf9_y(
+                [(r"Không gian mẫu có $%d$ phần tử" % Om, ly_om),
+                 (r"Biến cố ``Cả %s lần đều được cộng điểm'' có $%d$ kết quả thuận lợi" % (CHU[k], m ** k), ly_c),
+                 (r"Xác suất để lần quay đầu tiên được cộng điểm bằng $%s$" % _tf9_ps(_Fr9(m, n)),
+                  r"Lần đầu có $%d$ vị trí cộng điểm trong $%d$ vị trí." % (m, n))],
+                [x for x in [(r"Không gian mẫu có $%d$ phần tử" % (k * n), ly_om),
+                             (r"Không gian mẫu có $%d$ phần tử" % math.perm(n, k), ly_om + r" Các lần quay có thể dừng ở cùng một vị trí."),
+                             (r"Biến cố ``Cả %s lần đều được cộng điểm'' có $%d$ kết quả thuận lợi" % (CHU[k], k * m), ly_c),
+                             (r"Xác suất để lần quay đầu tiên được cộng điểm bằng $%s$" % _tf9_ps(_Fr9(m, Om)),
+                              r"Lần đầu có $%d$ vị trí cộng điểm trong $%d$ vị trí, xác suất $%s$." % (m, n, _tf9_ps(_Fr9(m, n))))]
+                 if not (r"$%d$ phần tử" % Om in x[0]) and not (r"$%d$ kết quả thuận lợi" % m ** k in x[0])])
+            # c) VD - xác suất các biến cố "đều cộng", "đều trừ", "các vị trí đôi một khác nhau"
+            ly_cc = r"$P = \dfrac{%d^{%d}}{%d^{%d}} = %s$." % (m, k, n, k, _tf9_ps(_Fr9(m ** k, Om)))
+            ly_tt = r"$P = \dfrac{%d^{%d}}{%d^{%d}} = %s$." % (t, k, n, k, _tf9_ps(_Fr9(t ** k, Om)))
+            kn = math.perm(n, k)
+            ly_kn = (r"Số kết quả các lần dừng ở các vị trí đôi một khác nhau là $A_{%d}^{%d} = %d$, nên "
+                     r"$P = \dfrac{%d}{%d} = %s$." % (n, k, kn, kn, Om, _tf9_ps(_Fr9(kn, Om))))
+            y_c = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"cả %s lần đều được cộng điểm" % CHU[k], _Fr9(m ** k, Om), [_Fr9(m, n), _Fr9(k * m, Om)], ly_cc),
+                _tf9_xs(r"cả %s lần đều bị trừ điểm" % CHU[k], _Fr9(t ** k, Om), [_Fr9(t, n), _Fr9(k * t, Om)], ly_tt),
+                _tf9_xs(r"%s lần quay dừng ở %s vị trí đôi một khác nhau" % (CHU[k], CHU[k]), _Fr9(kn, Om),
+                        [_Fr9(_tf9_C(n, k), Om), _Fr9(1, n)], ly_kn)))
+            # d) VDC - nhiều bước: biến cố đối, đếm theo vị trí của lần trừ điểm
+            ly_it = (r"Biến cố đối là ``cả %s lần đều được cộng điểm'' nên $P = 1 - %s = %s$."
+                     % (CHU[k], _tf9_ps(_Fr9(m ** k, Om)), _tf9_ps(1 - _Fr9(m ** k, Om))))
+            mot = k * m ** (k - 1) * t
+            ly_mot = (r"Chọn lần bị trừ điểm: $%d$ cách; lần đó có $%d$ vị trí, %s có $%d$ vị trí cộng điểm: "
+                      r"$%d\cdot %d\cdot %d^{%d} = %d$ kết quả, $P = %s$."
+                      % (k, t, "lần còn lại" if k == 2 else "mỗi lần trong hai lần còn lại", m, k, t, m, k - 1, mot,
+                         _tf9_ps(_Fr9(mot, Om))))
+            cung = m ** k + t ** k
+            ly_cung = (r"Cùng loại là ``đều cộng'' hoặc ``đều trừ'': $%d^{%d} + %d^{%d} = %d$ kết quả, $P = %s$."
+                       % (m, k, t, k, cung, _tf9_ps(_Fr9(cung, Om))))
+            y_d = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"có ít nhất một lần bị trừ điểm", 1 - _Fr9(m ** k, Om),
+                        [_Fr9(t ** k, Om), _Fr9(t, n), 1 - _Fr9(m, n)], ly_it),
+                _tf9_xs(r"có đúng một lần bị trừ điểm", _Fr9(mot, Om),
+                        [_Fr9(m ** (k - 1) * t, Om), _Fr9(t, n), _Fr9(k * t, Om)], ly_mot),
+                _tf9_xs(r"các lần quay đều cùng một loại (cùng được cộng điểm hoặc cùng bị trừ điểm)", _Fr9(cung, Om),
+                        [_Fr9(m ** k, Om), _Fr9(cung, 2 * Om), _Fr9(2, n)], ly_cung)))
+        except _Tf9Lai:
+            continue
+        da_co.add((n, m))
+        cau += TF_baitoan_du(debai, [y_a, y_b, y_c, y_d], 0, 0, socot)
+    return cau
 
-		def binomial_coefficient(n, k):
-				# Hàm này tính tổ hợp chập n lấy k.
-				# Haram n: Số nguyên không âm
-				# param k: Số nguyên không âm
-				# return: Giá trị tổ hợp chập n lấy k
-			return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))  # Sử dụng math.factorial()
 
-		debai = f"""Dãy ($x_1, x_2, \\ldots, x_{{10}}$) trong đó mỗi kí tự $x_i$ ($i = 1, 2, \\ldots, 10$) chỉ nhận giá trị $0$ hoặc $1$ được gọi là dãy nhị phân $10$ bit."""
-
-		ds_abcd = ([
-				   (f'''{{\\True Có $1024$ dãy nhị phân $10$ bit }}''',
-					f'''Đúng. Mỗi kí tự $x_i$ ($i = 1, 2, \\ldots, 10$) có hai cách chọn $0$ hoặc $1$. Suy ra có $2^{{10}}$ dãy nhị phân $10$ bit.'''),
-				   (f'''{{Có $512$ dãy nhị phân $10$ bit }}''',
-					f'''Sai. Mỗi kí tự $x_i$ ($i = 1, 2, \\ldots, 10$) có hai cách chọn $0$ hoặc $1$. Suy ra có $2^{{10}}$ dãy nhị phân $10$ bit.'''),
-			   ],
-			   [
-				   (f'''{{\\True Chọn bất kì một số trong dãy nhị phân $10$ bit, xác suất để số đó khi đổi sang hệ thập phân nhỏ hơn ${so_chon_1}$ là ${str(round(so_chon_1/1024,5)).replace('.', ',')}$ }}''',
-					f'''Đúng. '''),
-				   (f'''{{Chọn bất kì một số trong dãy nhị phân $10$ bit, xác suất để số đó khi đổi sang hệ thập phân nhỏ hơn ${so_chon_1}$ là ${str(round((so_chon_1+1)/1024,5)).replace('.', ',')}$ }}''',
-					f'''Sai. Chọn bất kì một số trong dãy nhị phân $10$ bit, xác suất để số đó khi đổi sang hệ thập phân nhỏ hơn ${so_chon_1}$ là ${str(round(so_chon_1/1024,5)).replace('.', ',')}$. '''),
-			   ],
-				[
-				   (f'''{{\\True Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_2_chu} số ${khong_mot}$ là ${str(round((binomial_coefficient(10,so_chon_2))/1024,5)).replace('.', ',')}$ }}''',
-					f'''Đúng. Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_2_chu} số ${khong_mot}$ là $\\dfrac{{C_{{10}}^{so_chon_2} }}{{1024}} = {str(round((binomial_coefficient(10,so_chon_2))/1024,5)).replace('.', ',')}$. '''),
-				   (f'''{{Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_2_chu} số ${khong_mot}$ là ${str(round((binomial_coefficient(10,so_chon_2 + saiso_2))/1024,5)).replace('.', ',')}$ }}''',
-					f'''Sai. Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_2_chu} số ${khong_mot}$ là $\\dfrac{{C_{{10}}^{so_chon_2} }}{{1024}} = {str(round((binomial_coefficient(10,so_chon_2))/1024,5)).replace('.', ',')}$ . '''),
-			   ],
-			   [
-				   (f'''{{\\True Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_3_chu} số ${khong_mot}$, và các số ${khong_mot}$ này luôn đứng gần nhau là ${str(round((10-so_chon_3+1)/1024,5)).replace('.', ',')}$ }}''',
-					f'''Đúng. Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_3_chu} số ${khong_mot}$, và các số ${khong_mot}$ này luôn đứng gần nhau là $\\dfrac{{10 - {so_chon_3} + 1 }}{{1024}} = {str(round((10-so_chon_3+1)/1024,5)).replace('.', ',')}$. '''),
-				   (f'''{{Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_3_chu} số ${khong_mot}$, và các số ${khong_mot}$ này luôn đứng gần nhau là ${str(round((10-so_chon_3)/1024,5)).replace('.', ',')}$ }}''',
-					f'''Sai. Xác suất để chọn được một số trong dãy nhị phân $10$ bit có đúng {so_chon_3_chu} số ${khong_mot}$, và các số ${khong_mot}$ này luôn đứng gần nhau là $\\dfrac{{10 - {so_chon_3} + 1 }}{{1024}} = {str(round((10-so_chon_3+1)/1024,5)).replace('.', ',')}$ . '''),
-			   ])
-
-		# Câu này không có hình vẽ nên chỉ cần gọi 1 hàm dưới đây để sinh code tex
-		cauTF+=TF_baitoan_du(debai,ds_abcd,0,0,socot)#Đồ thị phần nào không có thì nhập 0, nếu có thì nhập tên đồ thị vào đúng vị trí của nó
-	return cauTF
-# ###==== Cách dùng: socau=4 và socot=0
-# print(K10_9_DS_2_VD(16,0))
-# ##############################################
-
-
-# ---- Chiec non ki dieu (van dung cao) ----
+# ---- Quay banh xe ba lan (van dung cao) ----
 # (tên cũ của cô: K10_9_DS_3_VDC)
-def L10_C9_TF_C_01(socau,socot): #### không gian mẫu đang bị sai, chưa xét trường hợp mất lượt ở các lần quay nhỏ hơn k
-	gt=[]
-	dem=len(gt)
-	while dem<socau:
-		def calculate_permutations(n, k):
-			"""
-			Tính số chỉnh hợp chập k của n phần tử.
-
-			Args:
-				n (int): Số phần tử trong tập hợp.
-				k (int): Kích thước của các chỉnh hợp.
-
-			Returns:
-				int: Số chỉnh hợp chập k của n phần tử.
-			"""
-			# Tính số chỉnh hợp chập k
-			permutations = math.factorial(n) // math.factorial(n - k)
-			return permutations
-
-		def simplify_fraction(numerator, denominator):
-			# Hàm rút gọn phân số
-			common_divisor = math.gcd(numerator, denominator)
-			return numerator // common_divisor, denominator // common_divisor
-
-		k = np.randint(3,5)
-		k_chu = num2words(k, lang='vi')
-		vitri_cong = np.choice([k + 1, k])
-		vitri_cong_chu = num2words(vitri_cong, lang='vi')
-		vitri_tru = np.choice([k + 1, k])
-		vitri = vitri_cong + vitri_tru + 2
-		vitri_chu = num2words(vitri, lang='vi')
+def L10_C9_TF_C_01(socau, socot=1):
+    """Đúng/Sai - quay bánh xe ba lần (vận dụng cao). Các ý viết trong _tf9_banh_xe (dùng chung với TF_D)."""
+    # a) NB - phép thử ngẫu nhiên, biến cố đối, P(A đối) = 1 - P(A)
+    # b) TH - đếm không gian mẫu n^3 và số kết quả thuận lợi bằng quy tắc nhân
+    # c) VD - xác suất "đều cộng", "đều trừ", "ba vị trí đôi một khác nhau"
+    # d) VDC - "ít nhất một lần trừ" (biến cố đối), "đúng một lần trừ", "cùng một loại"
+    return _tf9_banh_xe(socau, socot, 3)
 
 
-		v = [k, k_chu, vitri_cong, vitri_cong_chu, vitri_tru, vitri, vitri_chu]
-		if v not in gt:
-			gt.append(v)
-			dem+=1
-
-	cauTF = ''
-	for v in gt:
-		k, k_chu, vitri_cong, vitri_cong_chu, vitri_tru, vitri, vitri_chu = v[0], v[1], v[2], v[3], v[4], v[5], v[6]
-
-		khonggianmau = vitri ** k
-		congdiem = vitri_cong ** k
-		trudiem = vitri_tru ** k
-
-		#phương án nhiễu của congdiem và trudiem
-		nhieu_congdiem = calculate_permutations(vitri_cong, k)
-		nhieu_trudiem = calculate_permutations(vitri_tru, k)
-
-		P_congdiem_tu, P_congdiem_mau = simplify_fraction(congdiem, khonggianmau)
-		P_trudiem_tu, P_trudiem_mau = simplify_fraction(trudiem, khonggianmau)
-
-		# xác suất nhiễu
-		P_nhieu_congdiem_tu, P_nhieu_congdiem_mau = simplify_fraction(nhieu_congdiem, khonggianmau)
-		P_nhieu_trudiem_tu, P_nhieu_trudiem_mau = simplify_fraction(nhieu_trudiem, khonggianmau)
-
-		khacnhau = calculate_permutations(vitri - 1, k - 1) * (vitri - (k - 1))
-		nhieu_khacnhau = calculate_permutations(vitri, k)
-
-		P_khacnhau_tu, P_khacnhau_mau = simplify_fraction(khacnhau, khonggianmau)
-		P_nhieu_khacnhau_tu, P_nhieu_khacnhau_mau = simplify_fraction(nhieu_khacnhau, khonggianmau)# xác suất nhiễu
-
-		debai = f"""Mũi tên của bánh xe trong trò chơi ``Chiếc nón kì diệu'' có thể dừng lại ở một trong {vitri_chu} vị trí. Người chơi được quay {k_chu} lần.
-		Trong {vitri_chu} vị trí thì có một vị trí là mất lượt chơi (người chơi dừng tất cả lượt quay còn lại), một vị trí là thêm lượt chơi (người chơi được tăng thêm một lần quay), 
-		{vitri_cong_chu} vị trí người chơi được cộng điểm với những điểm số khác nhau, còn lại là vị trí người chơi bị trừ điểm với những điểm số khác nhau."""
-
-		ds_abcd = ([
-				   (f'''{{\\True Số phần tử của không gian mẫu của phép thử là ${khonggianmau}$}}''',
-					f'''Đúng. Số phần tử của không gian mẫu là ${khonggianmau}$.'''),
-				   (f'''{{\\True Số phần tử của không gian mẫu của phép thử là ${khonggianmau}$}}''',
-					f'''Đúng. Số phần tử của không gian mẫu là ${khonggianmau}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$}}''',
-				   f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {vitri_cong} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {P_nhieu_congdiem_tu} }} {{ {P_nhieu_congdiem_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {vitri_cong} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$}}''',
-				   f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {vitri_tru} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {P_nhieu_trudiem_tu} }} {{ {P_nhieu_trudiem_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {vitri_tru} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$}}''',
-					f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ A_{{ {vitri - 1} }}^{k - 1} \\cdot {vitri - (k - 1)} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ {P_nhieu_khacnhau_tu} }} {{ {P_nhieu_khacnhau_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ A_{{{vitri - 1}}} ^ {k - 1} \\cdot {vitri - (k - 1)} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$.'''),
-				])
-
-		# Câu này không có hình vẽ nên chỉ cần gọi 1 hàm dưới đây để sinh code tex
-		cauTF+=TF_baitoan_du(debai,ds_abcd,0,0,socot)#Đồ thị phần nào không có thì nhập 0, nếu có thì nhập tên đồ thị vào đúng vị trí của nó
-	return cauTF
-# ###==== Cách dùng: socau=4 và socot=0
-# print(K10_9_DS_3_VDC(8,0))
-# ##############################################
-
-
-# ---- Chiec non ki dieu ----
+# ---- Quay banh xe hai lan ----
 # (tên cũ của cô: K10_9_DS_4_VD)
-def L10_C9_TF_D_01(socau,socot): #### không gian mẫu đang bị sai, chưa xét trường hợp mất lượt ở các lần quay nhỏ hơn k
-	gt=[]
-	dem=len(gt)
-	while dem<socau:
-		k = np.randint(3,6)
-		k_chu = num2words(k, lang='vi')
-		vitri_cong = np.choice([k + 2, k + 1, k])
-		vitri_cong_chu = num2words(vitri_cong, lang='vi')
-		vitri_tru = np.choice([k+2, k + 1, k])
-		vitri = vitri_cong + vitri_tru
-		vitri_chu = num2words(vitri, lang='vi')
-
-		v = [k, k_chu, vitri_cong, vitri_cong_chu, vitri_tru, vitri, vitri_chu]
-		if v not in gt:
-			gt.append(v)
-			dem+=1
-
-	cauTF = ''
-	for v in gt:
-		k, k_chu, vitri_cong, vitri_cong_chu, vitri_tru, vitri, vitri_chu = v[0], v[1], v[2], v[3], v[4], v[5], v[6]
-
-		def calculate_permutations(n, k):
-			"""
-			Tính số chỉnh hợp chập k của n phần tử.
-
-			Args:
-				n (int): Số phần tử trong tập hợp.
-				k (int): Kích thước của các chỉnh hợp.
-
-			Returns:
-				int: Số chỉnh hợp chập k của n phần tử.
-			"""
-			# Tính số chỉnh hợp chập k
-			permutations = math.factorial(n) // math.factorial(n - k)
-			return permutations
-
-		def simplify_fraction(numerator, denominator):
-			# Hàm rút gọn phân số
-			common_divisor = math.gcd(numerator, denominator)
-			return numerator // common_divisor, denominator // common_divisor
-
-		def binomial_coefficient(n, k):
-				# Hàm này tính tổ hợp chập n lấy k.
-				# Haram n: Số nguyên không âm
-				# param k: Số nguyên không âm
-				# return: Giá trị tổ hợp chập n lấy k
-			return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))  # Sử dụng math.factorial()
-
-		khonggianmau = vitri ** k
-		congdiem = vitri_cong ** k
-		trudiem = vitri_tru ** k
-
-		#phương án nhiễu của congdiem và trudiem
-		nhieu_congdiem = calculate_permutations(vitri_cong, k)
-		nhieu_trudiem = calculate_permutations(vitri_tru, k)
-
-		P_congdiem_tu, P_congdiem_mau = simplify_fraction(congdiem, khonggianmau)
-		P_trudiem_tu, P_trudiem_mau = simplify_fraction(trudiem, khonggianmau)
-
-		# xác suất nhiễu
-		P_nhieu_congdiem_tu, P_nhieu_congdiem_mau = simplify_fraction(nhieu_congdiem, khonggianmau)
-		P_nhieu_trudiem_tu, P_nhieu_trudiem_mau = simplify_fraction(nhieu_trudiem, khonggianmau)
-
-		khacnhau = calculate_permutations(vitri, k)
-		nhieu_khacnhau = binomial_coefficient(vitri, k)
-
-		P_khacnhau_tu, P_khacnhau_mau = simplify_fraction(khacnhau, khonggianmau)
-		P_nhieu_khacnhau_tu, P_nhieu_khacnhau_mau = simplify_fraction(nhieu_khacnhau, khonggianmau)# xác suất nhiễu
-
-		debai = f"""Mũi tên của bánh xe trong trò chơi ``Chiếc nón kì diệu'' có thể dừng lại ở một trong {vitri_chu} vị trí. Người chơi được quay {k_chu} lần.
-		Trong {vitri_chu} vị trí thì có {vitri_cong_chu} vị trí người chơi được cộng điểm với những điểm số khác nhau, còn lại là vị trí người chơi bị trừ điểm với những điểm số khác nhau."""
-
-		ds_abcd = ([
-				   (f'''{{\\True Số phần tử của không gian mẫu của phép thử là ${khonggianmau}$}}''',
-					f'''Đúng. Số phần tử của không gian mẫu là ${khonggianmau}$.'''),
-				   (f'''{{\\True Số phần tử của không gian mẫu của phép thử là ${khonggianmau}$}}''',
-					f'''Đúng. Số phần tử của không gian mẫu là ${khonggianmau}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$}}''',
-				   f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {vitri_cong} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {P_nhieu_congdiem_tu} }} {{ {P_nhieu_congdiem_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí cộng điểm là $\\dfrac{{ {vitri_cong} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_congdiem_tu} }} {{ {P_congdiem_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$}}''',
-				   f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {vitri_tru} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {P_nhieu_trudiem_tu} }} {{ {P_nhieu_trudiem_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí đều là vị trí trừ điểm là $\\dfrac{{ {vitri_tru} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_trudiem_tu} }} {{ {P_trudiem_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$}}''',
-					f'''Đúng. Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ A_{{ {vitri} }}^{k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$.'''),
-				   (f'''{{Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ {P_nhieu_khacnhau_tu} }} {{ {P_nhieu_khacnhau_mau} }}$}}''',
-				   f'''Sai. Xác suất để mũi tên dừng lại ở {k_chu} vị trí khác nhau là $\\dfrac{{ A_{{{vitri}}} ^ {k} }} {{ {vitri}^{k} }} = \\dfrac{{ {P_khacnhau_tu} }} {{ {P_khacnhau_mau} }}$.'''),
-				])
-
-		# Câu này không có hình vẽ nên chỉ cần gọi 1 hàm dưới đây để sinh code tex
-		cauTF+=TF_baitoan_du(debai,ds_abcd,0,0,socot)#Đồ thị phần nào không có thì nhập 0, nếu có thì nhập tên đồ thị vào đúng vị trí của nó
-	return cauTF
-# ###==== Cách dùng: socau=4 và socot=0
-# print(K10_9_DS_4_VD(8,0))
-# ##############################################
+def L10_C9_TF_D_01(socau, socot=1):
+    """Đúng/Sai - quay bánh xe hai lần."""
+    # a) NB - phép thử ngẫu nhiên, biến cố đối, P(A đối) = 1 - P(A)
+    # b) TH - đếm không gian mẫu n^2 và số kết quả thuận lợi bằng quy tắc nhân
+    # c) VD - xác suất "đều cộng", "đều trừ", "hai vị trí khác nhau"
+    # d) VDC - "ít nhất một lần trừ" (biến cố đối), "đúng một lần trừ", "cùng một loại"
+    return _tf9_banh_xe(socau, socot, 2)
 
 
 # ---- Cac lo dung dich axit / bazo ----
-# (tên cũ của cô: K10_9_DS_5_VD)
-def L10_C9_TF_E_01(socau,socot):
-	gt=[]
-	dem=len(gt)
-	while dem<socau:
-		axit = np.randint(4,10)
-		axit_chu = num2words(axit, lang='vi')
-		bazo = np.randint(4,10)
-		while bazo == axit:
-			bazo = np.randint(4,10)
-		bazo_chu = num2words(bazo, lang='vi')
-		trungtinh = np.randint(4,10)
-		while (trungtinh == bazo) or (trungtinh == axit):
-			trungtinh = np.randint(4,10)
-		trungtinh_chu = num2words(trungtinh, lang='vi')
-
-		v = [axit, axit_chu, bazo, bazo_chu, trungtinh, trungtinh_chu]
-		if v not in gt:
-			gt.append(v)
-			dem+=1
-
-	cauTF = ''
-	for v in gt:
-		axit, axit_chu, bazo, bazo_chu, trungtinh, trungtinh_chu = v[0], v[1], v[2], v[3], v[4], v[5]
-
-		def calculate_permutations(n, k):
-			"""
-			Tính số chỉnh hợp chập k của n phần tử.
-
-			Args:
-				n (int): Số phần tử trong tập hợp.
-				k (int): Kích thước của các chỉnh hợp.
-
-			Returns:
-				int: Số chỉnh hợp chập k của n phần tử.
-			"""
-			# Tính số chỉnh hợp chập k
-			permutations = math.factorial(n) // math.factorial(n - k)
-			return permutations
-
-		def simplify_fraction(numerator, denominator):
-			# Hàm rút gọn phân số
-			common_divisor = math.gcd(numerator, denominator)
-			return numerator // common_divisor, denominator // common_divisor
-
-		def binomial_coefficient(n, k):
-				# Hàm này tính tổ hợp chập n lấy k.
-				# Haram n: Số nguyên không âm
-				# param k: Số nguyên không âm
-				# return: Giá trị tổ hợp chập n lấy k
-			return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))  # Sử dụng math.factorial()
-
-		### có thứ tự, nhưng gì kết quả sẽ ra bằng không thứ tự nên làm công thức không thứ tự để ít trường hợp lại
-		n = axit + bazo + trungtinh
-		khonggianmau = binomial_coefficient(n,2)
-
-		dodo = binomial_coefficient(axit,2)
-		xanhxanh = binomial_coefficient(bazo,2)
-		khongkhong = binomial_coefficient(trungtinh,2)
-		cungmau = dodo + xanhxanh + khongkhong
-		khacmau = khonggianmau - cungmau
-
-		xanh = xanhxanh + bazo * trungtinh + bazo * axit
-		xanh_nhieu1 = khonggianmau - dodo
-		xanh_nhieu2 = khonggianmau - dodo - khongkhong
-
-		do = dodo + axit * trungtinh + axit * bazo
-		do_nhieu1 = khonggianmau - xanhxanh
-		do_nhieu2 = khonggianmau - xanhxanh - khongkhong
-
-		khong = khongkhong + trungtinh * axit + trungtinh * bazo
-		khong_nhieu1 = khonggianmau - dodo - xanhxanh
-
-		P_dodo_tu, P_dodo_mau = simplify_fraction(dodo, khonggianmau)
-		P_xanhxanh_tu, P_xanhxanh_mau = simplify_fraction(xanhxanh, khonggianmau)
-		P_khongkhong_tu, P_khongkhong_mau = simplify_fraction(khongkhong, khonggianmau)
-		P_khongkhong_nhieu_tu, P_khongkhong_nhieu_mau = simplify_fraction(xanhxanh + dodo, khonggianmau)
-		P_cungmau_tu, P_cungmau_mau = simplify_fraction(cungmau, khonggianmau)
-		P_khacmau_tu, P_khacmau_mau = simplify_fraction(khacmau, khonggianmau)
-
-		P_xanh_tu, P_xanh_mau = simplify_fraction(xanh, khonggianmau)
-		P_xanh_nhieu1_tu, P_xanh_nhieu1_mau = simplify_fraction(xanh_nhieu1, khonggianmau)
-		P_xanh_nhieu2_tu, P_xanh_nhieu2_mau = simplify_fraction(xanh_nhieu2, khonggianmau)
-
-		P_do_tu, P_do_mau = simplify_fraction(do, khonggianmau)
-		P_do_nhieu1_tu, P_do_nhieu1_mau = simplify_fraction(do_nhieu1, khonggianmau)
-		P_do_nhieu2_tu, P_do_nhieu2_mau = simplify_fraction(do_nhieu2, khonggianmau)
-
-		P_khong_tu, P_khong_mau = simplify_fraction(khong, khonggianmau)
-		P_khong_nhieu1_tu, P_khong_nhieu1_mau = simplify_fraction(do_nhieu1, khonggianmau)
-
-		debai = f"""Có các lọ thủy tinh chứa các dung dịch khác nhau ở bên trong. Trong đó có {axit_chu} lọ chứa dung dịch có tính axit, 
-{bazo_chu} lọ chứa dung dịch có tính bazo và {trungtinh_chu} lọ chứa dung dịch trung tính. Nhúng hai mảnh giấy quỳ tím vào hai lọ bất kì khác nhau."""
-
-		ds_abcd = ([(f'''{{\\True Không gian mẫu của phép thử là tập hợp tất cả các kết quả có thể xảy ra khi thự hiện phép thử}}''',
-				   f'''Đúng.'''),
-				   (f'''{{Phép thử ngẫu nhiên (gọi tắt là phép thử) là một thí nghiệm hay một hành động mà kết quả của nó có thể biết được trước khi phép thử được thực hiện}}''',
-				   f'''Sai. Phép thử ngẫu nhiên (gọi tắt là phép thử) là một thí nghiệm hay một hành động mà kết quả của nó KHÔNG thể biết được trước khi phép thử được thực hiện.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím không đổi màu là $\\dfrac{{ {P_khongkhong_tu} }} {{ {P_khongkhong_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím không đổi màu là $\\dfrac{{ C_{trungtinh}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_khongkhong_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím không đổi màu là $\\dfrac{{ {P_khongkhong_nhieu_tu} }} {{ {P_khongkhong_nhieu_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím không đổi màu là $\\dfrac{{ C_{trungtinh}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_khongkhong_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím đổi màu đỏ là $\\dfrac{{ {P_dodo_tu} }} {{ {P_dodo_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím đổi màu đỏ là $\\dfrac{{ C_{axit}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_dodo_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím đổi màu đỏ là $\\dfrac{{ {P_xanhxanh_tu} }} {{ {P_xanhxanh_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím đổi màu đỏ là $\\dfrac{{ C_{axit}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_dodo_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím đổi màu xanh là $\\dfrac{{ {P_xanhxanh_tu} }} {{ {P_xanhxanh_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím đổi màu xanh là $\\dfrac{{ C_{bazo}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_xanhxanh_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím đổi màu xanh là $\\dfrac{{ {P_dodo_tu} }} {{ {P_dodo_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím đổi màu xanh là $\\dfrac{{ C_{bazo}^2 }} {{ C_{n}^2 }} = \\dfrac{{ {P_xanhxanh_tu} }} {{ {P_khongkhong_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím khác màu nhau là $\\dfrac{{ {P_khacmau_tu} }} {{ {P_khacmau_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím khác màu nhau là $\\dfrac{{ {P_khacmau_tu} }} {{ {P_khacmau_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím khác màu nhau là $\\dfrac{{ {P_cungmau_tu} }} {{ {P_cungmau_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím khác màu nhau là $\\dfrac{{ {P_khacmau_tu} }} {{ {P_khacmau_mau} }}$.'''),
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím cùng màu nhau là $\\dfrac{{ {P_cungmau_tu} }} {{ {P_cungmau_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím cùng màu nhau là $\\dfrac{{ {P_cungmau_tu} }} {{ {P_cungmau_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím cùng màu nhau là $\\dfrac{{ {P_khacmau_tu} }} {{ {P_khacmau_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím cùng màu nhau là $\\dfrac{{ {P_cungmau_tu} }} {{ {P_cungmau_mau} }}$.'''),
-				],
-				[
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_tu} }} {{ {P_do_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_tu} }} {{ {P_do_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_nhieu1_tu} }} {{ {P_do_nhieu1_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_tu} }} {{ {P_do_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_nhieu2_tu} }} {{ {P_do_nhieu2_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu đỏ là $\\dfrac{{ {P_do_tu} }} {{ {P_do_mau} }}$.'''),
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_tu} }} {{ {P_xanh_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_tu} }} {{ {P_xanh_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_nhieu1_tu} }} {{ {P_xanh_nhieu1_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_tu} }} {{ {P_xanh_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_nhieu2_tu} }} {{ {P_xanh_nhieu2_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy màu xanh là $\\dfrac{{ {P_xanh_tu} }} {{ {P_xanh_mau} }}$.'''),
-				   (f'''{{\\True Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy không đổi màu là $\\dfrac{{ {P_khong_tu} }} {{ {P_khong_mau} }}$}}''',
-				   f'''Đúng. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy không đổi màu là $\\dfrac{{ {P_khong_tu} }} {{ {P_khong_mau} }}$.'''),
-				   (f'''{{Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy không đổi màu là $\\dfrac{{ {P_khong_nhieu1_tu} }} {{ {P_khong_nhieu1_mau} }}$}}''',
-				   f'''Sai. Xác suất để hai mảnh giấy quỳ tím có ít nhất một mảnh giấy không đổi màu là $\\dfrac{{ {P_khong_tu} }} {{ {P_khong_mau} }}$.'''),
-				])
-
-		# Câu này không có hình vẽ nên chỉ cần gọi 1 hàm dưới đây để sinh code tex
-		cauTF+=TF_baitoan_du(debai,ds_abcd,0,0,socot)#Đồ thị phần nào không có thì nhập 0, nếu có thì nhập tên đồ thị vào đúng vị trí của nó
-	return cauTF
-# ###==== Cách dùng: socau=4 và socot=0
-
-# ##############################################
+def L10_C9_TF_E_01(socau, socot=1):
+    """Đúng/Sai - chọn hai lọ dung dịch, nhúng giấy quỳ tím."""
+    cau, da_co, lan = "", set(), 0
+    while len(da_co) < socau:
+        lan += 1
+        if lan > 500:
+            raise RuntimeError("L10_C9_TF_E_01: không sinh đủ %d câu khác nhau" % socau)
+        a, b, c = random.sample(range(3, 10), 3)
+        if (a, b, c) in da_co:
+            continue
+        N = a + b + c
+        Om = _tf9_C(N, 2)
+        try:
+            debai = (r"Có $%d$ lọ dung dịch có tính axit, $%d$ lọ dung dịch có tính bazơ và $%d$ lọ dung dịch trung tính. "
+                     r"Chọn ngẫu nhiên đồng thời hai lọ rồi nhúng vào mỗi lọ một mảnh giấy quỳ tím (giấy quỳ tím hoá đỏ "
+                     r"trong dung dịch axit, hoá xanh trong dung dịch bazơ, không đổi màu trong dung dịch trung tính). "
+                     r"Xét tính đúng sai của các khẳng định sau:" % (a, b, c))
+            # a) NB - nhận biết phép thử, không gian mẫu, biến cố chắc chắn / không thể
+            y_a = _tf9_y(
+                [(r"Không gian mẫu của phép thử là tập hợp tất cả các kết quả có thể xảy ra của phép thử",
+                  r"Đó là định nghĩa không gian mẫu."),
+                 (r"Phép thử ngẫu nhiên là phép thử mà ta không biết trước được kết quả của nó",
+                  r"Đó là định nghĩa phép thử ngẫu nhiên."),
+                 (r"Xác suất của biến cố chắc chắn bằng $1$", r"Đó là tính chất cơ bản của xác suất.")],
+                [(r"Phép thử ngẫu nhiên là phép thử mà ta biết trước được kết quả của nó",
+                  r"Phép thử ngẫu nhiên là phép thử mà ta KHÔNG biết trước được kết quả."),
+                 (r"Xác suất của biến cố không thể bằng $1$", r"Xác suất của biến cố không thể bằng $0$."),
+                 (r"Biến cố ``Cả hai mảnh giấy quỳ đều hoá đỏ'' là biến cố chắc chắn",
+                  r"Có thể chọn được lọ không phải axit, nên biến cố không phải lúc nào cũng xảy ra.")])
+            # b) TH - một bước: đếm bằng tổ hợp chập 2
+            ly_om = r"Chọn $2$ lọ trong $%d$ lọ: $n(\Omega) = C_{%d}^{2} = %d$." % (N, N, Om)
+            y_b = _tf9_y(
+                [(r"Không gian mẫu có $%d$ phần tử" % Om, ly_om),
+                 (r"Biến cố ``Cả hai mảnh giấy quỳ đều hoá đỏ'' có $%d$ kết quả thuận lợi" % _tf9_C(a, 2),
+                  r"Chọn $2$ lọ trong $%d$ lọ axit: $C_{%d}^{2} = %d$." % (a, a, _tf9_C(a, 2))),
+                 (r"Biến cố ``Cả hai mảnh giấy quỳ đều không đổi màu'' có $%d$ kết quả thuận lợi" % _tf9_C(c, 2),
+                  r"Chọn $2$ lọ trong $%d$ lọ trung tính: $C_{%d}^{2} = %d$." % (c, c, _tf9_C(c, 2)))],
+                [(r"Không gian mẫu có $%d$ phần tử" % (N * N), ly_om),
+                 (r"Không gian mẫu có $%d$ phần tử" % (2 * N), ly_om),
+                 (r"Biến cố ``Cả hai mảnh giấy quỳ đều hoá đỏ'' có $%d$ kết quả thuận lợi" % (a * a),
+                  r"Chọn $2$ lọ khác nhau trong $%d$ lọ axit: $C_{%d}^{2} = %d$." % (a, a, _tf9_C(a, 2))),
+                 (r"Biến cố ``Cả hai mảnh giấy quỳ đều không đổi màu'' có $%d$ kết quả thuận lợi" % (2 * c),
+                  r"Chọn $2$ lọ trong $%d$ lọ trung tính: $C_{%d}^{2} = %d$." % (c, c, _tf9_C(c, 2)))])
+            # c) VD - xác suất theo định nghĩa cổ điển
+            dd, xx, kk = _tf9_C(a, 2), _tf9_C(b, 2), _tf9_C(c, 2)
+            ly = lambda so, ten: r"%s: $P = \dfrac{%d}{%d} = %s$." % (ten, so, Om, _tf9_ps(_Fr9(so, Om)))
+            y_c = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"cả hai mảnh giấy quỳ đều hoá đỏ", _Fr9(dd, Om), [_Fr9(xx, Om), _Fr9(a, N), _Fr9(dd, N * N)],
+                        ly(dd, r"Có $C_{%d}^{2} = %d$ cách chọn hai lọ axit" % (a, dd))),
+                _tf9_xs(r"cả hai mảnh giấy quỳ đều hoá xanh", _Fr9(xx, Om), [_Fr9(dd, Om), _Fr9(b, N), _Fr9(xx, N * N)],
+                        ly(xx, r"Có $C_{%d}^{2} = %d$ cách chọn hai lọ bazơ" % (b, xx))),
+                _tf9_xs(r"hai mảnh giấy quỳ có cùng màu", _Fr9(dd + xx + kk, Om), [_Fr9(dd + xx, Om), _Fr9(3, N)],
+                        ly(dd + xx + kk, r"Cùng màu khi hai lọ cùng loại: $%d + %d + %d = %d$ cách" % (dd, xx, kk, dd + xx + kk)))))
+            # d) VDC - nhiều bước: biến cố đối, đếm hai loại khác nhau
+            kd = _tf9_C(N - a, 2)
+            ly_it = (r"Biến cố đối ``không mảnh nào hoá đỏ'' (hai lọ đều không phải axit) có $C_{%d}^{2} = %d$ kết quả, "
+                     r"nên $P = 1 - \dfrac{%d}{%d} = %s$." % (N - a, kd, kd, Om, _tf9_ps(1 - _Fr9(kd, Om))))
+            ly_kh = (r"Biến cố đối là ``hai mảnh cùng màu'' có $%d$ kết quả, nên $P = 1 - \dfrac{%d}{%d} = %s$."
+                     % (dd + xx + kk, dd + xx + kk, Om, _tf9_ps(1 - _Fr9(dd + xx + kk, Om))))
+            ly_dx = r"Chọn một lọ axit và một lọ bazơ: $%d\cdot %d = %d$ cách, $P = %s$." % (a, b, a * b, _tf9_ps(_Fr9(a * b, Om)))
+            y_d = _tf9_y(*_tf9_gop(
+                _tf9_xs(r"có ít nhất một mảnh giấy quỳ hoá đỏ", 1 - _Fr9(kd, Om), [_Fr9(dd, Om), _Fr9(kd, Om), _Fr9(a, N)], ly_it),
+                _tf9_xs(r"hai mảnh giấy quỳ có màu khác nhau", 1 - _Fr9(dd + xx + kk, Om),
+                        [_Fr9(a * b, Om), _Fr9(dd + xx + kk, Om)], ly_kh),
+                _tf9_xs(r"một mảnh hoá đỏ và một mảnh hoá xanh", _Fr9(a * b, Om), [_Fr9(2 * a * b, Om), _Fr9(a * b, N * N),
+                                                                                 _Fr9(a + b, Om)], ly_dx)))
+        except _Tf9Lai:
+            continue
+        da_co.add((a, b, c))
+        cau += TF_baitoan_du(debai, [y_a, y_b, y_c, y_d], 0, 0, socot)
+    return cau
 
 
 # =====================================================================

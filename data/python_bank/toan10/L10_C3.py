@@ -2000,7 +2000,7 @@ def L10_C3_TF_C_01(socau, socot):
         Hướng từ $A$ đến $C$ là ${Huong_AC_str}$
         """
 
-        # a) Độ dài AB hoặc BC
+        # a) NB - độ dài AB hoặc BC: quãng đường = vận tốc x thời gian
         ds_a = [
             (f"{{\\True Độ dài đoạn $AB$ là ${c}$ km}}", f"Độ dài $AB = {c}$ km. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
             (f"{{Độ dài đoạn $AB$ là ${a}$ km}}",
@@ -2010,7 +2010,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"Độ dài $BC = {a}$ km $\\ne {b}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
-        # b) Góc ABC
+        # b) TH - góc ABC: một bước từ hai hướng đi
         ds_b = [
             (f"{{\\True Góc $\\widehat{{ABC}}$ bằng ${goc_B_dung}^\\circ$}}",
              f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ$. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
@@ -2020,7 +2020,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"Góc $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc1_f}^\\circ$. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
-        # CÂU C: Khoảng cách từ A đến C
+        # c) VD - khoảng cách AC: định lí côsin
         ds_c = [
             (f"{{\\True Khoảng cách từ $A$ đến $C$ xấp xỉ ${b}$ km}}",
              f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),
@@ -2030,7 +2030,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"Áp dụng Định lí Cosin, $AC = b \\approx {b}$ km $\\ne {c}$ km. Phát biểu \\textbf{{Sai}}. {giai_chung}"),
         ]
 
-        # CÂU D: Hướng đi từ A đến C
+        # d) VDC - hướng đi từ A đến C: tính góc A rồi đổi sang hướng
         ds_d = [
             (f"{{\\True Muốn đi thẳng từ $A$ đến $C$ thì đi theo hướng ${Huong_AC_str}$}}",
              f"Hướng $AC$ là ${Huong_AC_str}$. Phát biểu \\textbf{{Đúng}}. {giai_chung}"),

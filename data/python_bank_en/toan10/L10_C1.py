@@ -3842,6 +3842,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM A
+        # a) NB - nhận biết tính đúng sai của mệnh đề đơn giản về số tự nhiên (không âm, dương...)
         # =====================================================
 
         list_A = [
@@ -3907,6 +3908,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM B
+        # b) TH - một bước lập luận: tích hai số tự nhiên liên tiếp luôn chẵn
         # =====================================================
 
         if huong_tich == 1:
@@ -4177,6 +4179,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM C
+        # c) VD - xét mệnh đề có lượng từ tồn tại / với mọi: phải tìm ví dụ hoặc phản ví dụ
         # =====================================================
 
         # Sửa 01/10/2026 (Claude, cô Lan duyệt lại): bản cũ có hai phát biểu sai toán học
@@ -4206,6 +4209,7 @@ def L10_C1_TF_A_01(socau, socot=1):
 
         # =====================================================
         # NHÓM D
+        # d) VDC - chia hết của n^3 - n: phải tự phân tích thành tích ba số liên tiếp, xét cả lượng từ
         # =====================================================
 
         list_D = [
@@ -6902,7 +6906,7 @@ def L10_C1_TF_B_01(socau, socot):
         giai_thich_sai_so_nghiem_D = f"False. Besides the nonnegative integer values that work, there are always infinitely many negative integers $m < 0$ for which $C = \\varnothing $, and the empty set is a subset of every set, so the total number of integer values of $m$ must be infinite."
 
         ds_abcd = (
-            # ==================== Ý A: KHẢO SÁT VỀ MỆNH ĐỀ TOÁN HỌC ====================
+            # a) NB - nhận ra phát biểu nào là mệnh đề toán học
             [
                 (f"""{{\\True The statement ``The set $A$ has {hieu_cuoi_dau_A_sai} elements'' is a mathematical statement}}""",
                  f"""True. The sentence above has a clearly defined truth value (specifically, it is a mathematical statement whose value is false, because the set $A$ of real numbers has infinitely many elements)."""),
@@ -6935,7 +6939,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""False. It is a mathematical assertion with a clearly defined truth value.""")
             ],
 
-            # ==================== Ý B: CÁC PHÉP TOÁN TOÁN HỌC THUẦN TÚY ====================
+            # b) TH - một phép toán giao / hiệu trên hai tập đã cho
             [
                 (f"""{{\\True $A \\cap B = \\{{ {b2} \\}}$}}""",
                  f"""True. Since ${b1} < {left_A}$, we have ${b1} \\notin A$. The element ${b2}$ lies in the interval $({left_A}; {right_A}]$, so ${b2} \\in A$. Hence the intersection of the two sets consists only of the element ${b2}$."""),
@@ -6971,7 +6975,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""False. Since the set $A$ contains the element ${b2} \\in B$, taking the difference $A \\setminus B$ removes that element from $A$.""")
             ],
 
-            # ==================== Ý C: KHẢO SÁT CHỈ DỰA VÀO SỐ LƯỢNG PHẦN TỬ ====================
+            # c) VD - giải phương trình theo tham số m để đếm phần tử của tập C
             [
                 (f"""{{\\True For $m = {m_duong}$ the set $C$ has exactly $1$ element}}""",
                  f"""True. For $m = {m_duong}$, the equation has two solutions, one negative (rejected) and one positive (accepted). Because of the condition $x \\in \\mathbb{{N}}$, the set $C$ has exactly $1$ element."""),
@@ -6992,7 +6996,7 @@ def L10_C1_TF_B_01(socau, socot):
                  f"""False. When $m = 0$, the equation still gives a natural number solution that satisfies the condition, so the set $C$ is not the empty set.""")
             ],
 
-            # ==================== Ý D: XÈT TẬP CON ĐA PHÉP TOÁN (MỚI) ====================
+            # d) VDC - nhiều bước: phép toán trên A, B rồi điều kiện tập con theo tham số m
             [
                 # --- Các phương án ĐÚNG (Có dấu \True) ---
                 (f"""{{\\True There are infinitely many integer values of the parameter $m$ such that $C \\subset ({chuoi_phep_toan})$}}""",

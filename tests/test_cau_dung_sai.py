@@ -50,19 +50,9 @@ def _ham_TF():
 # Ham co san tu truoc, CHUA xep bon y theo bac do kho. Khong phai loi sai
 # toan - chi la chua dung quy uoc moi. Sua xong thi xoa khoi day, bai test
 # se tu doi hoi lai.
-CHUA_XEP_BAC = {
-    "L10_C1_TF_A_01",   # bon y deu rut tu cung mot kho menh de, khong phan bac
-    "L10_C1_TF_B_01",
-    # Chuong 9 nhap tu tep LopXChuong9.py cua co Lan 28/09/2026. Noi dung
-    # toan dung, nhung bon y chua xep theo bac NB -> TH -> VD -> VDC.
-    "L10_C9_TF_A_01",
-    "L10_C9_TF_B_01",
-    "L10_C9_TF_C_01",
-    "L10_C9_TF_D_01",
-    "L10_C9_TF_E_01",
-    # Chuong 3, ham co Lan tu viet (bai toan tau chay), nhap 28/09/2026.
-    "L10_C3_TF_C_01",
-}
+CHUA_XEP_BAC = set()
+# 28/10/2026 (cô Lan: "cần, bổ sung luôn cho tôi"): đã xếp xong - L10_C1_TF_A_01, TF_B_01, L10_C3_TF_C_01 vốn đã
+# tăng dần, chỉ thiếu mốc ghi chú; L10_C9_TF_A..E_01 viết lại (bản cũ ở data/luu_tru/L10_C9_luu_tru.py).
 
 
 @pytest.mark.parametrize("ten,ham", _ham_TF(), ids=lambda x: x if isinstance(x, str) else "")

@@ -2000,7 +2000,7 @@ def L10_C3_TF_C_01(socau, socot):
         The direction from $A$ to $C$ is ${Huong_AC_str}$
         """
 
-        # a) Độ dài AB hoặc BC
+        # a) NB - độ dài AB hoặc BC: quãng đường = vận tốc x thời gian
         ds_a = [
             (f"{{\\True The length of segment $AB$ is ${c}$ km}}", f"The length $AB = {c}$ km. The statement is \\textbf{{true}}. {giai_chung}"),
             (f"{{The length of segment $AB$ is ${a}$ km}}",
@@ -2010,7 +2010,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"The length $BC = {a}$ km $\\ne {b}$ km. The statement is \\textbf{{false}}. {giai_chung}"),
         ]
 
-        # b) Góc ABC
+        # b) TH - góc ABC: một bước từ hai hướng đi
         ds_b = [
             (f"{{\\True Angle $\\widehat{{ABC}}$ equals ${goc_B_dung}^\\circ$}}",
              f"Angle $\\widehat{{ABC}} = {goc_B_dung}^\\circ$. The statement is \\textbf{{true}}. {giai_chung}"),
@@ -2020,7 +2020,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"Angle $\\widehat{{ABC}} = {goc_B_dung}^\\circ \\ne {goc1_f}^\\circ$. The statement is \\textbf{{false}}. {giai_chung}"),
         ]
 
-        # CÂU C: Khoảng cách từ A đến C
+        # c) VD - khoảng cách AC: định lí côsin
         ds_c = [
             (f"{{\\True The distance from $A$ to $C$ is approximately ${b}$ km}}",
              f"By the law of cosines, $AC = b \\approx {b}$ km. The statement is \\textbf{{true}}. {giai_chung}"),
@@ -2030,7 +2030,7 @@ def L10_C3_TF_C_01(socau, socot):
              f"By the law of cosines, $AC = b \\approx {b}$ km $\\ne {c}$ km. The statement is \\textbf{{false}}. {giai_chung}"),
         ]
 
-        # CÂU D: Hướng đi từ A đến C
+        # d) VDC - hướng đi từ A đến C: tính góc A rồi đổi sang hướng
         ds_d = [
             (f"{{\\True To go straight from $A$ to $C$, one should head in the direction ${Huong_AC_str}$}}",
              f"The direction of $AC$ is ${Huong_AC_str}$. The statement is \\textbf{{true}}. {giai_chung}"),

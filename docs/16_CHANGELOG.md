@@ -10747,3 +10747,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - Còn ít bản khác nhau do chính bộ số (bộ Pythagore thập phân): L10_C3_B5_NB029_SA_B/C, TH031_SA_F, L11_C1_B2_TH010 - không đổi.
 - Test `tests/test_sa_bon_ki_tu_28_10.py` chạy MỌI hàm SA (Việt + Anh), 12 bộ số mỗi hàm.
 
+## 2026-10-28 - Câu Đúng/Sai: đủ bốn mốc độ khó cho mọi hàm; viết lại năm câu chương 9 lớp 10
+- Cô Lan: "cần, bổ sung luôn cho tôi" (8 hàm Đúng/Sai còn nằm trong danh sách chờ `CHUA_XEP_BAC` của `tests/test_cau_dung_sai.py`).
+- L10_C1_TF_A_01, L10_C1_TF_B_01, L10_C3_TF_C_01: bốn ý vốn đã tăng dần (C1_TF_A: số tự nhiên không âm -> tích hai số liên tiếp chẵn -> lượng từ tồn tại/với mọi -> 6 | n³ − n; C1_TF_B: nhận ra mệnh đề -> giao/hiệu -> tham số m -> tập con nhiều phép toán; C3_TF_C: quãng đường -> góc ABC -> định lí côsin -> hướng đi), chỉ thêm mốc `# a) NB ... # d) VDC`. Bản Anh L10_C1, L10_C3 dịch lại (chỉ đổi chú thích).
+- L10_C9_TF_A..E_01 viết lại (cùng ID, cùng bối cảnh: hai con xúc xắc, dãy nhị phân, quay bánh xe ba lần / hai lần, lọ dung dịch và giấy quỳ): bốn ý NB (khái niệm: biến cố không thể, chắc chắn, biến cố đối, tính chất xác suất) -> TH (một bước đếm) -> VD (định nghĩa cổ điển) -> VDC (biến cố đối, đếm có điều kiện); mỗi ý ≥ 3 phát biểu đúng, ≥ 3 sai, đủ lời giải, phân số chính xác. Bản cũ có ý chỉ 1 đúng + 1 sai, ý chỉ có phát biểu đúng, lời giải "Đúng."/"Sai." trống, TF_E ghi sai mẫu số trong lời giải; đã lưu ở `data/luu_tru/L10_C9_luu_tru.py`. Mapping TF_A, TF_B: sửa mô tả dạng bị cắt cụt.
+- `CHUA_XEP_BAC` nay rỗng: mọi hàm Đúng/Sai đều phải có đủ bốn mốc theo thứ tự. Test mới `tests/test_l10_c9_tf_28_10.py` (≥ 3 đúng/≥ 3 sai mỗi ý; liệt kê không gian mẫu kiểm từng phát biểu xác suất).
+- CHƯA làm (chờ cô quyết): 32 hàm Đúng/Sai khác (L10_C4..C8, L11_C1..C9, L12_C2, C6 - mỗi chương TF_A, TF_B) mỗi ý mới có 1 phát biểu đúng + 1 phát biểu sai, chưa đạt quy ước "mỗi ý ≥ 3 đúng, ≥ 3 sai" (01/10/2026).
+
