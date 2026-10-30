@@ -10762,3 +10762,10 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `tro_chuyen_service.LENH_TRO_CHUYEN` / `_EN`: tách rõ "đề tiếng Việt có lớp 10, 11, 12" với "bản dịch tiếng Anh mới có Lớp 10 Chương 1-4"; thêm quy tắc: người dùng nói lớp nào thì dùng chương của lớp đó, KHÔNG BAO GIỜ nói trang chỉ hỗ trợ một lớp.
 - Không sửa n8n, không sửa `chat.py`. Test thêm trong `tests/test_pham_vi_chat.py` (sửa kiểm cũ "Lớp 11 không có trong lệnh" thành "đủ ba lớp, lớp hồ sơ đứng đầu").
 
+## 2026-10-30 - Chat: xin học lý thuyết -> hướng về làm đề rồi hỏi câu
+- Cô Lan (ảnh): "tôi muốn hỏi về lý thuyết lớp 11" -> AI: "việc hỏi đáp lý thuyết thì hiện tại em chưa thể thực hiện chi tiết được. Các kiến thức này được máy chủ tổng hợp...". Cô chốt: "đây là web ngân hàng đề, nên nếu muốn học lý thuyết phải làm đề thì AI mới giảng lý thuyết của đúng đề đó".
+- `pham_vi_service.muon_hoc_ly_thuyet` (mới): có "lý thuyết", "kiến thức", "dạy / giảng (cho) tôi / em", "học bài", "theory", "teach me", "lesson"; KHÔNG nhắc "đề", "kiểm tra", "luyện", "câu / bài <số>", exam / test / quiz / practice. `tra_loi_hoc_ly_thuyet`: câu soạn sẵn "Đây là web ngân hàng đề nên lý thuyết được giảng theo đúng đề bạn làm: tạo đề, làm bài, nộp, bấm "💬 Hỏi thầy/cô AI về câu này"; thầy/cô AI giảng lời giải và lý thuyết dùng trong đúng câu đó" + danh sách chương của lớp (trong tin nhắn, không có thì hồ sơ). Việt / Anh.
+- `chat.py`: chặn ngay đầu khối phạm vi (trước n8n, không gọi mô hình, không tính lượt), `data.type = "hoc_ly_thuyet"`. Câu hỏi khái niệm cụ thể ("tập rỗng là gì", `la_cau_hoi_kien_thuc`) vẫn đi `tra_loi_kien_thuc` như cũ.
+- `tro_chuyen_service.LENH_TRO_CHUYEN` / `_EN`: bỏ gợi ý "hỏi kiểu tập rỗng là gì"; thêm quy tắc muốn học lý thuyết thì hướng về làm đề -> nộp -> bấm hỏi câu, KHÔNG nói "chưa hỏi đáp lý thuyết được".
+- Test thêm trong `tests/test_pham_vi_chat.py`.
+

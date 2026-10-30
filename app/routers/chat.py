@@ -529,6 +529,17 @@ async def chat_post(
     #   - muốn đề mà chưa nói chương / kỳ thi / chủ đề ("vâng, tạo cho tôi", "miễn tôi rèn luyện được") -> danh sách
     #     chương + cách gõ. Xem app/services/pham_vi_service.py.
     ly_do = pham_vi_service.ngoai_pham_vi(message)
+    # Cô Lan 30/10/2026: muốn học lý thuyết chung chung ("tôi muốn hỏi về lý thuyết lớp 11") -> web ngân hàng đề: làm
+    # đề, nộp, bấm hỏi câu -> thầy/cô AI giảng lý thuyết đúng câu đó. Câu hỏi khái niệm cụ thể ("tập rỗng là gì") vẫn
+    # đi tra_loi_kien_thuc bên dưới.
+    if (not ly_do and pham_vi_service.muon_hoc_ly_thuyet(message)
+            and not tro_chuyen_service.la_cau_hoi_kien_thuc(message)):
+        lop_hs = await run_in_threadpool(lop_trong_ho_so, user.id)
+        loi_nhan = pham_vi_service.tra_loi_hoc_ly_thuyet(message, lop_hs, lay_ngon_ngu(request))
+        print("CHAT: muon hoc ly thuyet -> huong dan lam de roi hoi cau")
+        await _luu_tin_nhan(user_id=user.id, conversation_id=conversation_id, role="assistant",
+                                     noi_dung=loi_nhan, loai_phan_hoi="text")
+        return {"success": True, "message": loi_nhan, "data": {"type": "hoc_ly_thuyet"}}
     if ly_do or pham_vi_service.muon_de_chung_chung(message):
         lop_hs = await run_in_threadpool(lop_trong_ho_so, user.id)
         loi_nhan = (pham_vi_service.tra_loi_ngoai_pham_vi(ly_do, lop_hs, lay_ngon_ngu(request)) if ly_do else

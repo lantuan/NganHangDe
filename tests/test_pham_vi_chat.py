@@ -132,6 +132,29 @@ def test_chat_lop_11_ma_khong_goi_ai(chat_gia):
     assert "Lớp 10 thôi" not in kq["message"]
 
 
+# ---------------------------------------------------------------- 30/10/2026: học lý thuyết = làm đề rồi hỏi câu
+@pytest.mark.parametrize("cau", ["tôi muốn hỏi về lý thuyết lớp 11", "dạy em kiến thức chương 2", "giảng cho tôi lý thuyết",
+                                 "em muốn ôn lý thuyết", "teach me the theory of grade 11"])
+def test_muon_hoc_ly_thuyet(cau):
+    assert P.muon_hoc_ly_thuyet(cau)
+
+
+@pytest.mark.parametrize("cau", ["tạo đề lý thuyết chương 1", "giảng lại lý thuyết câu 3", "tôi muốn kiểm tra kiến thức chương 1",
+                                 "luyện tập lý thuyết lớp 11", "lớp 11 mà", "xin chào", "cho tôi lời giải"])
+def test_khong_phai_hoc_ly_thuyet_chung(cau):
+    assert not P.muon_hoc_ly_thuyet(cau)
+
+
+def test_chat_hoi_ly_thuyet_huong_ve_lam_de(chat_gia):
+    """Ảnh cô Lan 30/10/2026: "tôi muốn hỏi về lý thuyết lớp 11" -> AI nói "chưa hỏi đáp lý thuyết được". Đúng: web ngân
+    hàng đề - làm đề, nộp, bấm hỏi câu; thầy/cô AI giảng lý thuyết đúng câu đó. Không gọi AI."""
+    kq = _gui("tôi muốn hỏi về lý thuyết lớp 11")
+    assert kq["data"]["type"] == "hoc_ly_thuyet"
+    assert "Hỏi thầy/cô AI về câu này" in kq["message"] and "Ngân hàng đề lớp 11" in kq["message"]
+    en = P.tra_loi_hoc_ly_thuyet("teach me the theory of grade 11", 10, "en")
+    assert "Ask the AI teacher about this question" in en and "Grade 11" in en and not I.CO_DAU.search(en)
+
+
 def test_kien_thuc_ngoai_tai_lieu_khong_day(chat_gia, monkeypatch):
     monkeypatch.setattr(GS, "N8N_WEBHOOK_GIA_SU", "https://vi-du/webhook")
     kq = _gui("xyzabc là gì")

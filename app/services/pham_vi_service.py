@@ -21,6 +21,11 @@ câu này lọt xuống n8n -> trò chuyện dự phòng chỉ được đưa da
   - tin nhắn CHỈ nêu lớp ("lớp 11", "lớp 11 mà", "còn khối 12 thì sao", "grade 11") -> coi như muon_de_chung_chung,
     trả danh sách chương của đúng lớp đó (chi_noi_lop);
   - chuong_cho_lenh luôn đưa đủ lớp 10, 11, 12 (lớp trong hồ sơ đứng đầu, chỉ là mặc định, không phải giới hạn).
+
+Cô Lan 30/10/2026 (ảnh): "tôi muốn hỏi về lý thuyết lớp 11" -> AI trả lời "việc hỏi đáp lý thuyết thì hiện tại em chưa
+thể thực hiện...". Cô chốt: đây là web NGÂN HÀNG ĐỀ - muốn học lý thuyết thì làm đề, nộp bài, bấm "💬 Hỏi thầy/cô AI về
+câu này"; thầy/cô AI giảng lý thuyết của ĐÚNG câu đó. -> muon_hoc_ly_thuyet + tra_loi_hoc_ly_thuyet (câu soạn sẵn,
+không gọi mô hình, không tính lượt).
 """
 from __future__ import annotations
 
@@ -157,6 +162,22 @@ def muon_de_chung_chung(message: str) -> bool:
     return bool(t) and bool(_MUON_DE.search(t)) and not _DA_RO.search(t) and not _co_chu_de(t)
 
 
+# Muốn học / hỏi lý thuyết chung chung ("tôi muốn hỏi về lý thuyết lớp 11", "dạy em kiến thức chương 2", "teach me
+# theory"). Câu hỏi khái niệm cụ thể ("tập rỗng là gì") do chat.py loại ra trước (tro_chuyen_service.la_cau_hoi_kien_thuc).
+_LY_THUYET = re.compile(r"l[yý]\s*thuy[eế]t|ki[eế]n\s*th[uứ]c|\btheory\b|\bconcepts?\b"
+                        r"|(?:d[aạ]y|gi[aả]ng)\s*(?:l[aạ]i\s*)?(?:cho\s*)?(?:t[oô]i|em|m[iì]nh|ch[uú]ng)"
+                        r"|h[oọ]c\s*b[aà]i|\bteach\s*me\b|\blessons?\b", re.IGNORECASE)
+# Nhắc đề / câu cụ thể -> để luồng hỏi bài (bảng chọn câu) lo; nhắc "đề" -> là yêu cầu tạo đề
+_GAN_DE = re.compile(r"(?<![a-zà-ỹ])[dđ][eề]\b|ki[eể]m\s*tra|luy[eệ]n|\bpractice\b|\b(?:c[aâ]u|b[aà]i)\s*\d|\bquestion\s*\d|\bexam\b|\btest\b|\bquiz\b",
+                     re.IGNORECASE)
+
+
+def muon_hoc_ly_thuyet(message: str) -> bool:
+    """Muốn học / hỏi lý thuyết chung (không nhắc đề, không nhắc câu số mấy)."""
+    t = (message or "").strip()
+    return bool(t) and bool(_LY_THUYET.search(t)) and not _GAN_DE.search(t)
+
+
 # ---------------------------------------------------------------- câu trả lời soạn sẵn
 def _ds_chuong_van_ban(lop: int | None, lang: str) -> str:
     en = lang == "en"
@@ -209,6 +230,21 @@ def tra_loi_chon_chuong(message: str, lop_ho_so: int | None, lang: str = "vi") -
     m = _LOP_THPT.search(message or "")
     lop = int(m.group(1)) if m else lop_ho_so
     mo = "Okay! Pick a chapter for your exam." if lang == "en" else "Được luôn! Bạn chọn chương để mình tạo đề nhé."
+    return mo + "\n\n" + _ds_chuong_van_ban(lop, lang)
+
+
+def tra_loi_hoc_ly_thuyet(message: str, lop_ho_so: int | None, lang: str = "vi") -> str:
+    """Web ngân hàng đề: học lý thuyết qua đề - làm đề, nộp, bấm hỏi câu -> thầy/cô AI giảng lý thuyết đúng câu đó."""
+    m = _LOP_THPT.search(message or "")
+    lop = int(m.group(1)) if m else lop_ho_so
+    if lang == "en":
+        mo = ("This is a question bank website, so theory is taught through the exams you take: create an exam, take it "
+              "on the web and submit, then click **\"💬 Ask the AI teacher about this question\"** on any question. "
+              "The AI teacher explains that question's solution and the theory it uses (from your teacher's notes).")
+    else:
+        mo = ("Đây là web ngân hàng đề nên lý thuyết được giảng theo đúng đề bạn làm: bạn tạo đề, làm bài trên web và "
+              "nộp, rồi bấm **\"💬 Hỏi thầy/cô AI về câu này\"** ở câu muốn hỏi. Thầy/cô AI sẽ giảng lời giải và phần lý "
+              "thuyết dùng trong đúng câu đó (theo tài liệu của thầy/cô).")
     return mo + "\n\n" + _ds_chuong_van_ban(lop, lang)
 
 
