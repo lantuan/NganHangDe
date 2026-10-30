@@ -10754,3 +10754,11 @@ Cô Lan góp ý: câu "cho sin A = 24/25, góc A nhọn, hỏi dấu của sin A
 - `CHUA_XEP_BAC` nay rỗng: mọi hàm Đúng/Sai đều phải có đủ bốn mốc theo thứ tự. Test mới `tests/test_l10_c9_tf_28_10.py` (≥ 3 đúng/≥ 3 sai mỗi ý; liệt kê không gian mẫu kiểm từng phát biểu xác suất).
 - CHƯA làm (chờ cô quyết): 32 hàm Đúng/Sai khác (L10_C4..C8, L11_C1..C9, L12_C2, C6 - mỗi chương TF_A, TF_B) mỗi ý mới có 1 phát biểu đúng + 1 phát biểu sai, chưa đạt quy ước "mỗi ý ≥ 3 đúng, ≥ 3 sai" (01/10/2026).
 
+## 2026-10-30 - Chat: "lớp 11 mà" không còn bị trả lời "chỉ hỗ trợ Lớp 10"
+- Cô Lan (ảnh): tài khoản hồ sơ "Khối 10 - C9" xin đề chưa nói chương -> máy chủ liệt kê 9 chương lớp 10 (đúng, lớp lấy từ hồ sơ). Gõ tiếp "lớp 11 mà" -> bot: "Hiện tại em chỉ hỗ trợ đề Toán Lớp 10 thôi ạ", trong khi ngân hàng có lớp 11 (C1-C9), lớp 12 (C2, C6).
+- Nguyên nhân: "lớp 11 mà" không có chữ "tạo / đề / luyện tập" nên `pham_vi_service.muon_de_chung_chung` không bắt -> xuống n8n -> CHV_Fun không đọc được -> `_du_phong_tao_de` -> `tro_chuyen_service.tro_chuyen(..., lop=hồ sơ)`; `chuong_cho_lenh(10)` CHỈ đưa danh sách chương LỚP 10 vào lệnh (kèm "TUYỆT ĐỐI KHÔNG rủ đề ngoài danh sách" và "có bản tiếng Anh cho Lớp 10 Chương 1-4") nên mô hình kết luận trang chỉ có lớp 10.
+- `pham_vi_service.chi_noi_lop` (mới): tin nhắn ngắn CHỈ nêu một lớp THPT ("lớp 11", "lớp 11 mà", "khối 12 ạ", "còn lớp 12 thì sao", "toán 11 nhé", "grade 11") -> số lớp; `muon_de_chung_chung` trả True cho các câu này -> máy chủ trả ngay danh sách chương của ĐÚNG lớp đó (`tra_loi_chon_chuong` đọc lớp trong tin nhắn trước hồ sơ). Không gọi mô hình, không tính lượt. Câu kể "tôi học lớp 10", câu có chương / kỳ thi / chủ đề ("lớp 11 giữa kỳ 1") vẫn như cũ.
+- `pham_vi_service.chuong_cho_lenh`: luôn đưa đủ lớp 10, 11, 12 (chỉ lớp đã có tệp ngân hàng), lớp trong hồ sơ đứng đầu - hồ sơ chỉ là mặc định, không phải giới hạn.
+- `tro_chuyen_service.LENH_TRO_CHUYEN` / `_EN`: tách rõ "đề tiếng Việt có lớp 10, 11, 12" với "bản dịch tiếng Anh mới có Lớp 10 Chương 1-4"; thêm quy tắc: người dùng nói lớp nào thì dùng chương của lớp đó, KHÔNG BAO GIỜ nói trang chỉ hỗ trợ một lớp.
+- Không sửa n8n, không sửa `chat.py`. Test thêm trong `tests/test_pham_vi_chat.py` (sửa kiểm cũ "Lớp 11 không có trong lệnh" thành "đủ ba lớp, lớp hồ sơ đứng đầu").
+

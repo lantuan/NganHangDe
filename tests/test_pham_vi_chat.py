@@ -61,7 +61,33 @@ def test_lenh_tro_chuyen_khoa_pham_vi(monkeypatch):
     T.tro_chuyen("chào", lop=10)
     lenh = goi[0]["lenh_he_thong"]
     assert "Chương 4. Vectơ" in lenh and "bảng cửu chương" in lenh and "kể cả phép tính dễ" in lenh
-    assert "Lớp 11" not in lenh
+    # 30/10/2026: luôn đủ ba lớp (trước chỉ lớp hồ sơ -> mô hình nói "chỉ hỗ trợ Lớp 10"), lớp hồ sơ đứng đầu
+    assert lenh.index("Lớp 10: Chương 1") < lenh.index("Lớp 11: Chương 1") < lenh.index("Lớp 12: Chương 2")
+    assert "KHÔNG BAO GIỜ nói trang chỉ hỗ trợ một lớp" in lenh
+
+
+def test_chuong_cho_lenh_lop_ho_so_dung_dau():
+    ch = P.chuong_cho_lenh(11)
+    assert ch.startswith("Lớp 11: ") and "Lớp 10: " in ch and "Lớp 12: " in ch
+    assert P.chuong_cho_lenh(None).startswith("Lớp 10: ")
+
+
+# ---------------------------------------------------------------- 30/10/2026: "lớp 11 mà"
+@pytest.mark.parametrize("cau, lop", [("lớp 11 mà", 11), ("Lớp 11", 11), ("khối 12 ạ", 12), ("còn lớp 12 thì sao", 12),
+                                      ("toán 11 nhé", 11), ("grade 11", 11), ("what about grade 12?", 12)])
+def test_chi_noi_lop(cau, lop):
+    assert P.chi_noi_lop(cau) == lop and P.muon_de_chung_chung(cau)
+
+
+@pytest.mark.parametrize("cau", ["tôi học lớp 10", "lớp 10 chương 2", "Lớp 10, thi giữa kỳ 1", "lớp 11 giữa kỳ 1",
+                                 "xin chào", "lớp 9 mà", "đề lớp 11 hàm số lượng giác"])
+def test_khong_phai_chi_noi_lop(cau):
+    assert P.chi_noi_lop(cau) is None
+
+
+def test_chi_noi_lop_tra_dung_lop_khong_lay_ho_so():
+    vi = P.tra_loi_chon_chuong("lớp 11 mà", 10)
+    assert "Ngân hàng đề lớp 11" in vi and "lớp 11 giữa kỳ 1" in vi and "Ngân hàng đề lớp 10" not in vi
 
 
 class _U:
@@ -97,6 +123,13 @@ def test_chat_tra_loi_ngay_khong_goi_ai(chat_gia, cau, loai):
     kq = _gui(cau)
     assert kq["success"] and kq["data"]["type"] == loai and "Ngân hàng đề lớp 10" in kq["message"]
     assert chat_gia[-1]["noi_dung"] == kq["message"]
+
+
+def test_chat_lop_11_ma_khong_goi_ai(chat_gia):
+    """Ảnh cô Lan 30/10/2026: hồ sơ Khối 10, gõ "lớp 11 mà" -> danh sách chương lớp 11, không xuống n8n."""
+    kq = _gui("lớp 11 mà")
+    assert kq["data"]["type"] == "chon_chuong" and "Ngân hàng đề lớp 11" in kq["message"]
+    assert "Lớp 10 thôi" not in kq["message"]
 
 
 def test_kien_thuc_ngoai_tai_lieu_khong_day(chat_gia, monkeypatch):

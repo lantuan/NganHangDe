@@ -14,6 +14,13 @@ Máy chủ tự trả lời bằng câu soạn sẵn (không gọi mô hình, kh
   2. muon_de_chung_chung: muốn tạo đề nhưng không nói chương / kỳ thi / chủ đề nào ("vâng, tạo cho tôi", "mấy cũng
      được, miễn tôi rèn luyện được", "tạo đề lớp 10") -> danh sách chương của lớp + cách gõ, thay vì để AI hỏi vòng.
 Yêu cầu có chương, kỳ thi hoặc tên chủ đề ("đề hàm số bậc hai") vẫn đi n8n như cũ.
+
+Cô Lan 30/10/2026 (ảnh): tài khoản hồ sơ "Khối 10" xin đề -> được danh sách chương lớp 10; gõ tiếp "lớp 11 mà" thì
+câu này lọt xuống n8n -> trò chuyện dự phòng chỉ được đưa danh sách chương LỚP 10 -> mô hình trả lời "em chỉ hỗ trợ
+đề Toán Lớp 10 thôi", trong khi ngân hàng có lớp 11 (C1-C9), lớp 12 (C2, C6). Sửa:
+  - tin nhắn CHỈ nêu lớp ("lớp 11", "lớp 11 mà", "còn khối 12 thì sao", "grade 11") -> coi như muon_de_chung_chung,
+    trả danh sách chương của đúng lớp đó (chi_noi_lop);
+  - chuong_cho_lenh luôn đưa đủ lớp 10, 11, 12 (lớp trong hồ sơ đứng đầu, chỉ là mặc định, không phải giới hạn).
 """
 from __future__ import annotations
 
@@ -125,9 +132,28 @@ def ngoai_pham_vi(message: str) -> str | None:
     return None
 
 
-def muon_de_chung_chung(message: str) -> bool:
-    """Muốn tạo đề / luyện tập mà chưa nói chương, kỳ thi hay chủ đề nào."""
+# Từ đệm đi kèm khi chỉ nêu lớp: "lớp 11 mà", "còn lớp 12 thì sao", "khối 11 ạ", "what about grade 11"
+# (không có "học", "đang" để câu kể "tôi đang học lớp 10" vẫn là trò chuyện)
+_TU_DEM = frozenset(
+    "ma a chu nhe nha nhi ne di thoi con the thi sao vay em toi minh la o do day co oi phai chi cua cho voi"
+    " what about and then how please i m in ok okay".split())
+
+
+def chi_noi_lop(message: str) -> int | None:
+    """Tin nhắn chỉ nêu một lớp THPT ("lớp 11 mà", "khối 12 ạ", "grade 11") -> số lớp; còn lại -> None."""
     t = (message or "").strip()
+    m = _LOP_THPT.search(t)
+    if not m or len(t) > 40:
+        return None
+    con_lai = re.findall(r"[a-z0-9]+", _bo_dau(t[:m.start()] + " " + t[m.end():]))
+    return int(m.group(1)) if len(con_lai) <= 4 and all(w in _TU_DEM for w in con_lai) else None
+
+
+def muon_de_chung_chung(message: str) -> bool:
+    """Muốn tạo đề / luyện tập mà chưa nói chương, kỳ thi hay chủ đề nào; hoặc chỉ nêu lớp ("lớp 11 mà")."""
+    t = (message or "").strip()
+    if chi_noi_lop(t):
+        return True
     return bool(t) and bool(_MUON_DE.search(t)) and not _DA_RO.search(t) and not _co_chu_de(t)
 
 
@@ -186,7 +212,10 @@ def tra_loi_chon_chuong(message: str, lop_ho_so: int | None, lang: str = "vi") -
     return mo + "\n\n" + _ds_chuong_van_ban(lop, lang)
 
 
-# Gợi ý chương cho lệnh trò chuyện (tro_chuyen_service): mô hình chỉ được rủ tạo đề trong các chương này
+# Gợi ý chương cho lệnh trò chuyện (tro_chuyen_service): mô hình chỉ được rủ tạo đề trong các chương này.
+# Luôn đủ lớp 10, 11, 12 (cô Lan 30/10/2026: trước chỉ đưa lớp trong hồ sơ -> mô hình nói "chỉ hỗ trợ Lớp 10");
+# lớp trong hồ sơ đứng đầu.
 def chuong_cho_lenh(lop: int | None) -> str:
-    lops = (lop,) if lop in (10, 11, 12) else (10, 11, 12)
-    return "; ".join("Lớp %d: %s" % (l, ", ".join("Chương %d. %s" % ct for ct in danh_sach_chuong(l))) for l in lops)
+    lops = ((lop,) if lop in (10, 11, 12) else ()) + tuple(l for l in (10, 11, 12) if l != lop)
+    return "; ".join("Lớp %d: %s" % (l, ", ".join("Chương %d. %s" % ct for ct in danh_sach_chuong(l)))
+                     for l in lops if danh_sach_chuong(l))
